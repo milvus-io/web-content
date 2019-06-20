@@ -1,2 +1,2 @@
 # docs
-Milvus documents. 
+Documents of Milvus distributed high-performance vector database system.
