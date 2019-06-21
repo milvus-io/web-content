@@ -76,4 +76,5 @@ $ python3 example.py
 ```shell
 Query result is correct.
 ```
+如果你看到以上查询结果提示信息，恭喜你！这意味着你已经成功完成了在Milvus上的第一次向量相似度查询。
 ## 
