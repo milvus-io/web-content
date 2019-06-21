@@ -8,7 +8,7 @@ In this guide, we will walk you through installing Milvus Docker as well as runn
 
 1. As Milvus Docker is now supported only on Linux systems, make sure your Linux distribution is one of the following:
 
-| Linux operation system | Version          |
+| Linux operation system | Supported versions          |
 | :--------------------- | :--------------- |
 | CentOS                 | 7.5 and higher   |
 | Ubuntu LTS             | 16.04 and higher |
