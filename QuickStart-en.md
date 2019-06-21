@@ -44,7 +44,7 @@ To confirm that Milvus Docker is running and returns search results, follow thes
 
 1. Make sure [Python3](https://www.python.org/downloads/ ) is already installed. 
 
-2. Install Milvus Python SDK。了解[Milvus Python SDK 用户指南
+2. Install Milvus Python SDK. Learn more about [Milvus Python SDK User Manuals]
 
 ```
 # Python Example
