@@ -51,46 +51,34 @@ $ docker logs <milvus container id>
 
 #### Running Python example codes
 
-To confirm that Milvus Docker is running and returns search results, follow these procedures to run some Python example codes:
+Now, let's run a Python example program. You will need to create a vector data table, insert 10 vector data items, and then run a vector approximate matching.
 
 1. Make sure [Python3](https://www.python.org/downloads/ ) is already installed. 
 
-2. Install Milvus Python SDK. Learn more about [Milvus Python SDK user guide]( https://pypi.org/project/pymilvus/).
+2. Install Milvus Python SDK。
 
-```
-# Python Example
-from milvus import Milvus, Prepare, IndexType, Status
-import random
-
-milvus = Milvus()
-table_name = 'table_'+str(random.randint(0,100))
-
-# Connect
-milvus.connect(host='localhost', port='33001')
-
-# Create table
-milvus.create_table(Prepare.table_schema(table_name, dimension=256, index_type=IndexType.IDMAP))
-
-# Add 20 256-dim-vectors to table
-vectors = Prepare.records([[random.random()for _ in range(256)] for _ in range(20)])
-milvus.add_vectors(table_name=table_name, records=vectors)
-
-# Get table row count
-_, result = milvus.get_table_row_count(table_name=table_name)
-print('Table {}, row counts: {}'.format(table_name, result))
+```shell
+# Install Milvus Python SDK
+$ pip install pymilvus
 ```
 
-3. Run Python example codes
+To learn more about Milvus Python SDK, go to [Milvus Python SDK Playbook](https://pypi.org/project/pymilvus)。
 
+3. Download Python example code：https://github.com/milvus-io/pymilvus/blob/master/examples/example.py
+
+4. Run Python example code。
+
+```shell
+# Run Milvus Python example
+$ python3 example.py
 ```
-# Run Milvus python example
-$ python3 milvus_examples.py
-Table table_14, row counts: 20
+
+5. Confirm the program is running succesfully.
+
+```shell
+Query result is correct.
 ```
+If you see the above message, congratulations! You have succesfully installed Milvus, and are well on your way to start your search with Milvus.
 
-When you see the table of 20 rows, congratulations, Milvus is running normally now.
-
-
-
-#### 
+##
 
