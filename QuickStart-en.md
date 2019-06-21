@@ -51,22 +51,22 @@ $ docker logs <milvus container id>
 
 #### Running Python example program
 
-Now, let's run a Python example program. You will need to create a vector data table, insert 10 vector data items, and then run a vector approximate matching.
+Now, let's run a Python example program. You will need to create a vector data table, insert 10 vectors, and then run a vector similarity search.
 
 1. Make sure [Python3](https://www.python.org/downloads/ ) is already installed. 
 
-2. Install Milvus Python SDK。
+2. Install Milvus Python SDK.
 
 ```shell
 # Install Milvus Python SDK
 $ pip install pymilvus
 ```
 
-Note: To learn more about Milvus Python SDK, go to [Milvus Python SDK Playbook](https://pypi.org/project/pymilvus)。
+Note: To learn more about Milvus Python SDK, go to [Milvus Python SDK Playbook](https://pypi.org/project/pymilvus).
 
 3. Download Python example code：https://github.com/milvus-io/pymilvus/blob/master/examples/example.py
 
-4. Run the example code。
+4. Run the example code.
 
 ```shell
 # Run Milvus Python example
