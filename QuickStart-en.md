@@ -15,7 +15,7 @@ In this guide, we will walk you through installing Milvus Docker as well as runn
 
 2. Make sure these software packages are installed so that Milvus can be run on Docker:
 
-- [CUDA 9.0 and higher]( https://docs.nvidia.com/cuda/)
+- [CUDA 9.0 and higher]( https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html)
 - [Docker CE]( https://docs.docker.com/install/)
 - [NVIDIA-Docker2](https://github.com/NVIDIA/nvidia-docker)
 
