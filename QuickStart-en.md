@@ -49,7 +49,7 @@ $ docker ps -a
 $ docker logs <milvus container id>
 ```
 
-#### Running Python example codes
+#### Running Python example program
 
 Now, let's run a Python example program. You will need to create a vector data table, insert 10 vector data items, and then run a vector approximate matching.
 
@@ -62,11 +62,11 @@ Now, let's run a Python example program. You will need to create a vector data t
 $ pip install pymilvus
 ```
 
-To learn more about Milvus Python SDK, go to [Milvus Python SDK Playbook](https://pypi.org/project/pymilvus)。
+Note: To learn more about Milvus Python SDK, go to [Milvus Python SDK Playbook](https://pypi.org/project/pymilvus)。
 
 3. Download Python example code：https://github.com/milvus-io/pymilvus/blob/master/examples/example.py
 
-4. Run Python example code。
+4. Run the example code。
 
 ```shell
 # Run Milvus Python example
@@ -78,7 +78,8 @@ $ python3 example.py
 ```shell
 Query result is correct.
 ```
-If you see the above message, congratulations! You have succesfully installed Milvus, and are well on your way to start your search with Milvus.
+
+If you see the above query result message, congratulations! You have succesfully installed Milvus, and are well on your way to start your search with Milvus.
 
 ##
 
