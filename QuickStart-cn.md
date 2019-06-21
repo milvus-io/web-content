@@ -12,7 +12,7 @@
 | CentOS                   | 7.5及以上   |
 | Ubuntu LTS               | 16.04及以上 |
 
-2. 请确保您已经安装以下软件包，以便Milvus Docker版能正常运行：
+2. 请确保你已经安装以下软件包，以便Milvus Docker版能正常运行：
 
 - [CUDA 9.0及以上](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html)
 - [Docker CE](https://docs.docker.com/install/)
@@ -35,7 +35,7 @@ $ docker pull milvusdb/milvus:latest
 $ nvidia-docker run --runtime=nvidia -p 33001:33001 -v /home/$USER/milvus:/tmp milvus/milvus:latest
 ```
 
-3. 获得Milvus container id
+3. 获得Milvus container id。
 
 ```shell
 # Get Milvus container id
@@ -51,7 +51,7 @@ $ docker logs <milvus container id>
 
 ## 运行Python示例代码
 
-接下来，让我们来运行一个Python程序示例。您将创建一个向量数据表，向其中插入10条向量，然后运行一条向量相似度查询。
+接下来，让我们来运行一个Python程序示例。你将创建一个向量数据表，向其中插入10条向量，然后运行一条向量相似度查询。
 
 1. 请确保系统已经安装了[Python3](https://www.python.org/downloads/)。
 2. 安装Milvus Python SDK。
@@ -63,7 +63,7 @@ $ pip install pymilvus
 
 如果需要进一步了解Milvus Python SDK，请阅读[Milvus Python SDK 用户指南](https://pypi.org/project/pymilvus)。
 
-3. 下载Python示例代码：https://github.com/milvus-io/pymilvus/blob/master/examples/example.py。
+3. 下载Python示例代码：https://github.com/milvus-io/pymilvus/blob/master/examples/example.py
 4. 运行示例。
 
 ```shell
