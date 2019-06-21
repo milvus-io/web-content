@@ -22,18 +22,31 @@ In this guide, we will walk you through installing Milvus Docker as well as runn
 #### Installing Milvus Docker
 
 1. Download Milvus Docker image.
+
+```shell
+# Download Milvus Docker image
+$ docker pull milvusdb/milvus:latest
+```
+
 2. Start Milvus server.
 
-```
+```shell
 # Start Milvus
-$ nvidia-docker run --runtime=nvidia -p 33001:33001 -v /home/$USER/milvus:/tmp milvus/ubuntu16.04:0.3.0
+$ nvidia-docker run --runtime=nvidia -p 33001:33001 -v /home/$USER/milvus:/tmp milvus/milvus:latest
 ```
 
-3. Confirm that Milvus is up and running.
+3. Get Milvus container id.
 
+```shell
+# Get Milvus container id
+$ docker ps -a
 ```
-# Check Milvus log export
-docker logs <Milvus container id>
+
+4. Confirm Milvus running status.
+
+```shell
+# Make sure Milvus is up and running
+$ docker logs <milvus container id>
 ```
 
 #### Running Python example codes
