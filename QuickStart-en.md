@@ -64,7 +64,7 @@ $ pip install pymilvus
 
    Note: To learn more about Milvus Python SDK, go to [Milvus Python SDK Playbook](https://pypi.org/project/pymilvus).
 
-3. Download Python example code：https://github.com/milvus-io/pymilvus/blob/master/examples/example.py
+3. Download Python example code at https://github.com/milvus-io/pymilvus/blob/master/examples/example.py.
 
 4. Run the example code.
 
@@ -73,7 +73,7 @@ $ pip install pymilvus
 $ python3 example.py
 ```
 
-5. Confirm the program is running succesfully.
+5. Confirm the program is running correctly.
 
 ```shell
 Query result is correct.
