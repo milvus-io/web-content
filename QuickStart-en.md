@@ -1,71 +1,50 @@
-## Milvus - Quick Start Guide
+##  Milvus Docker - Quick Start Guide
 
 
 
-This guide is intended to provide you with a quick overview of working with Milvus in Linux systems. (Any assumptions here?)
+In this guide, we will walk you through installing Milvus Docker as well as running some Python example code in Milvus. If you want to learn more about how to use Milvus Docker, please visit Milvus Docker User Manuals.
 
-#### Overview
+#### Installation prerequisites
 
-In this guide, we will walk you through installing Milvus and its Python SDK, enabling Milvus and test running it in your environment.
+1. As Milvus Docker is now supported only on Linux systems, make sure your Linux distribution is one of the following:
 
-#### Installing Milvus
+| Linux operation system | Version          |
+| :--------------------- | :--------------- |
+| CentOS                 | 7.5 and higher   |
+| Ubuntu LTS             | 16.04 and higher |
 
-So far, Milvus supports  the following Linux distributions:
+2. Make sure these software packages are installed so that Milvus can be run on Docker:
 
-| Linux operation system   | Version          |
-| :----------------------- | :--------------- |
-| Red Hat Enterprise Linux | 7.5 and higher   |
-| CentOS                   | 7.5 and higher   |
-| Ubuntu LTS               | 16.04 and higher |
+- [CUDA 9.0 and higher]( https://docs.nvidia.com/cuda/)
+- [Docker CE]( https://docs.docker.com/install/)
+- [NVIDIA-Docker2](https://github.com/NVIDIA/nvidia-docker)
 
-Before installing Milvus, you need to install the following software packages: 
+#### Installing Milvus Docker
 
-- CUDA 9.0 and higher
-- Docker CE
-- NVIDIA-Docker2
-
-For CUDA installing procedures, please refer to https://docs.nvidia.com/cuda/
-
-For how to install Docker CE, go to https://docs.docker.com/install/
-
-And for NVIDIA-Docker2 installing methods, simply visit https://github.com/NVIDIA/nvidia-docker
-
-
-
-#### Installing Milvus Python SDK
-
-```
-# Install Milvus Python SDK
-$ pip install pymilvus
-```
-
-For Milvus Python SDK user manuals, visit https://pypi.org/project/pymilvus/
-
-
-
-#### Enabling Milvus
-
-After you have downloaded Milvus Docker image, you can start Milvus Server and receive client requests via Port 33001, through the following command. 
+1. Download Milvus Docker image.
+2. Start Milvus server.
 
 ```
 # Start Milvus
 $ nvidia-docker run --runtime=nvidia -p 33001:33001 -v /home/$USER/milvus:/tmp milvus/ubuntu16.04:0.3.0
 ```
 
-To check Milvus running status and logs, use this: 
+3. Confirm that Milvus is up and running.
 
 ```
 # Check Milvus log export
 docker logs <Milvus container id>
 ```
 
+Learn more about [Milvus Python SDK user manuals]( https://pypi.org/project/pymilvus/).
 
+#### Running Python example codes
 
-#### Running Example
+To confirm that Milvus Docker is running and returns search results, follow these procedures to run some Python example codes:
 
-1. Make sure Python3 is already installed. If not, go to https://www.python.org/downloads/ to install it.
+1. Make sure [Python3](https://www.python.org/downloads/ ) is already installed. 
 
-2. Save the following code to the file "milvus_examples.py".
+2. Install Milvus Python SDK。了解[Milvus Python SDK 用户指南
 
 ```
 # Python Example
@@ -90,7 +69,7 @@ _, result = milvus.get_table_row_count(table_name=table_name)
 print('Table {}, row counts: {}'.format(table_name, result))
 ```
 
-3. Run below command under the same file.
+3. Run Python example codes
 
 ```
 # Run Milvus python example
@@ -98,8 +77,9 @@ $ python3 milvus_examples.py
 Table table_14, row counts: 20
 ```
 
-When you see the table of 20 rows, congratulations! Milvus is running normally now.
+When you see the table of 20 rows, congratulations, Milvus is running normally now.
 
 
 
 #### 
+
