@@ -4,7 +4,7 @@
 
 In this guide, we will walk you through installing Milvus Docker as well as running some Python example codes. If you want to learn more about how to use Milvus Docker, please visit Milvus Docker User Manuals.
 
-#### Installation prerequisites
+#### Prerequisites
 
 1. As Milvus Docker is now supported only on Linux systems, make sure your Linux distribution is one of the following:
 
