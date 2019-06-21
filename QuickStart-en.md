@@ -36,8 +36,6 @@ $ nvidia-docker run --runtime=nvidia -p 33001:33001 -v /home/$USER/milvus:/tmp m
 docker logs <Milvus container id>
 ```
 
-Learn more about [Milvus Python SDK user manuals]( https://pypi.org/project/pymilvus/).
-
 #### Running Python example codes
 
 To confirm that Milvus Docker is running and returns search results, follow these procedures to run some Python example codes:
