@@ -79,7 +79,6 @@ $ python3 example.py
 Query result is correct.
 ```
 
-If you see the above query result message, congratulations! You have succesfully installed Milvus, and are well on your way to start your search with Milvus.
-
+If you see the above query result message, congratulations! You have successfully completed your first vector similarity search with Milvus.
 ##
 
