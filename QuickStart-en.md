@@ -2,7 +2,7 @@
 
 
 
-In this guide, we will walk you through installing Milvus Docker as well as running some Python example codes. If you want to learn more about how to use Milvus Docker, please visit Milvus Docker User Manuals.
+In this guide, we will walk you through installing Milvus Docker as well as running some Python example codes. If you want to learn more about how to use Milvus Docker, please visit [Milvus Docker User Guide](https://github.com/milvus-io/docs/blob/master/UserGuide.md).
 
 #### Prerequisites
 
@@ -42,7 +42,7 @@ To confirm that Milvus Docker is running and returns search results, follow thes
 
 1. Make sure [Python3](https://www.python.org/downloads/ ) is already installed. 
 
-2. Install Milvus Python SDK. Learn more about [Milvus Python SDK user manuals]( https://pypi.org/project/pymilvus/).
+2. Install Milvus Python SDK. Learn more about [Milvus Python SDK user guide]( https://pypi.org/project/pymilvus/).
 
 ```
 # Python Example
