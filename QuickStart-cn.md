@@ -29,7 +29,7 @@
 #### 安装Milvus Python SDK
 
 ```
-# 安装 Milvus Python SDK
+# Install Milvus Python SDK
 $ pip install pymilvus
 ```
 
@@ -42,14 +42,14 @@ Milvus Python SDK的使用手册，请访问：https://pypi.org/project/pymilvus
 下载Milvus的Docker镜像后，您可以通过下面命令启动Milvus Server，并且在端口33001端口接受客户端请求：
 
 ```
-# 启动 Milvus
+# Start Milvus
 $ nvidia-docker run --runtime=nvidia -p 33001:33001 -v /home/$USER/milvus:/tmp milvus/ubuntu16.04:0.3.0
 ```
 
 检查 Milvus 运行状态和运行日志：
 
 ```
-# 查看 Milvus 的日志输出
+# Check Milvus log export
 docker logs <Milvus container id>
 ```
 
@@ -87,7 +87,7 @@ print('Table {}, row counts: {}'.format(table_name, result))
 最后，在相同的目录下运行下面的命令。
 
 ```
-# 运行 Milvus python example
+# Run Milvus python example
 $ python3 milvus_examples.py
 Table table_14, row counts: 20
 ```
