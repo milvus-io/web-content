@@ -2,7 +2,7 @@
 
 # Milvus快速入门
 
-该指南主要包含Milvus Docker版的快速安装，以及相关Python示例代码的运行。如果想进一步了解Milvus的使用，请访问Milvus用户手册。
+该指南主要包含Milvus Docker版的快速安装，以及相关Python示例代码的运行。如果想进一步了解Milvus的使用，请访问[Milvus用户指南](https://github.com/milvus-io/docs/blob/master/UserGuide.md)。
 
 ## 安装前提
 1. Milvus Docker版目前仅在Linux系统上运行，请确保你的Linux系统符合以下版本：
@@ -61,7 +61,7 @@ $ docker logs <milvus container id>
 $ pip install pymilvus
 ```
 
-如果需要进一步了解Milvus Python SDK，请阅读[Milvus Python SDK 用户指南](https://pypi.org/project/pymilvus)。
+如果需要进一步了解Milvus Python SDK，请阅读[Milvus Python SDK使用手册](https://pypi.org/project/pymilvus)。
 
 3. 下载Python示例代码：https://github.com/milvus-io/pymilvus/blob/master/examples/example.py
 4. 运行示例。
