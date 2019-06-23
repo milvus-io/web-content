@@ -32,7 +32,7 @@ $ docker pull milvusdb/milvus:latest
 
 ```shell
 # Start Milvus
-$ nvidia-docker run --runtime=nvidia -p 19530:19530 -v /home/$USER/milvus:/tmp milvus/milvus:latest
+$ nvidia-docker run -td --runtime=nvidia -p 19530:19530 -v /home/$USER/milvus:/tmp milvus/milvus:latest
 ```
 
 3. 获得Milvus container id。
