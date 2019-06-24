@@ -137,34 +137,34 @@ Milvus 提供了基于Prometheus监控和Grafana的展示平台，可以对数�
 
 ## Milvus配置
 
-目前Milvus的单机版配置共分成三部分。
+在成功安装Milvus后，请进入Milvus Docker镜像文件进行相关配置。目前Milvus的Docker版配置包含以下几种：
 
 ### Milvus服务配置
 
-server_config: 
+点击server_config文件，并配置以下参数：
 
 - address: 目前Milvus server监听的ip地址。
 - port: 目前Milvus server监听的端口号。
-- transfer_protocol：Milvus client与server通信的协议，可以是：binary, compact和json。
-- server_mode: 目前支持simple：单线程和thread_pool：线程池，两种模式。
-- gpu_index: 目前使用的GPU
+- transfer_protocol：Milvus client与server通信的协议，可以是binary, compact或json。
+- server_mode: 目前支持simple（单线程）和thread_pool（线程池）两种模式。
+- gpu_index: 目前使用的GPU。
 
 ### Milvus数据库配置
 
-db_config: 
+点击db_config文件，并配置以下参数：
 
 - db_path: Milvus数据库文件存储的路径。
 - db_backend_url: 使用RESTFul API接口访问数据库的ip地址。
-- db_flush_interval: 插入数据持久化的时间间隔
+- db_flush_interval: 插入数据持久化的时间间隔。
 
 ### Milvus监控参数配置
 
-metric_config: 
+点击metric_config文件，并配置以下参数：
 
-- startup: 是否启动监控：on或off。
-- collector: 连接的监控系统：目前支持prometheus。
-- prometheus_config: promethus监控相关配置。
-  - collect_type: prometheus的监控获取方式：支持pull或者push方式。
+- startup: 选择是否启动监控，on（启动）或off（不启动）。
+- collector: 连接的监控系统，目前支持prometheus。
+- prometheus_config（promethus监控相关配置）：
+  - collect_type: prometheus的监控获取方式，支持pull或push方式。
   - port: 访问prometheus的端口号。
   - push_gateway_ip_address: push gateway的ip地址，push方式有效。
   - push_gateway_port: push gateway的端口号，push方式有效。
