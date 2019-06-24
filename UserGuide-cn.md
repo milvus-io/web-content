@@ -195,6 +195,47 @@ Grafana是一个开源的指标分析及可视化系统。我们使用Grafana来
 2. 配置Prometheus。
 
    1) 打开prometheus根目录下的prometheus.yml配置文件，并将alerting, rule_files和scrape_configs更新如下：
+   
+   ```yaml
+   # my global config
+   global:
+     scrape_interval:     15s # Set the scrape interval to every 1 seconds. Default is every 1 minute.
+     evaluation_interval: 15s # Evaluate rules every 15 seconds. The default is every 1 minute.
+     # scrape_timeout is set to the global default (10s).
+
+   # Alertmanager configuration
+   alerting:
+     alertmanagers:
+     - static_configs:
+       - targets: ['localhost:9093']
+
+   # Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
+   rule_files:
+      - "serverdown.yml" # add alerting rules
+
+   # A scrape configuration containing exactly one endpoint to scrape:
+   # Here it's Prometheus itself.
+   scrape_configs:
+     # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
+     - job_name: 'prometheus'
+
+       # metrics_path defaults to '/metrics'
+       # scheme defaults to 'http'.
+
+       static_configs:
+       - targets: ['localhost:9090']
+  
+  	# scrape metrics of server
+     - job_name: 'milvus_server'
+       scrape_interval: 1s
+       static_configs:
+       - targets: ['localhost:8080']
+    
+  	   # under development
+     - job_name: 'pushgateway'
+       static_configs:
+       - targets: ['localhost:9091']
+   ```
 
 ```yaml
 # my global config
@@ -237,7 +278,7 @@ scrape_configs:
     - targets: ['localhost:9091']
 ```
 
-​       2) 在prometheus根目录下创建serverdown.yml文件，内容如下：
+2) 在prometheus根目录下创建serverdown.yml文件，内容如下：
 
 ```yaml
 groups:
