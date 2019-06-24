@@ -113,7 +113,7 @@ Milvus 提供了基于Prometheus监控和Grafana的展示平台，可以对数�
 
 - 软件包安装要求
 
-
+请确保你已经安装以下软件包，以便Milvus Docker版能正常运行：
 
 - [CUDA 9.0及以上](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html)
 - [Docker CE](https://docs.docker.com/install/)
@@ -122,31 +122,7 @@ Milvus 提供了基于Prometheus监控和Grafana的展示平台，可以对数�
 
 ### Milvus安装
 
-首先请先通过Zilliz官方网站，申请使用Milvus，然后客服人员会向您提供Milvus的Docker Image，拿到Docker Image后，将其下载到安装机器内，然后运行下面的命令导入Milvus容器：
-
-下载Milvus的Docker镜像后，您可以通过下面命令启动Milvus Server，并且在端口33001端口接受客户端请求：
-
-```
-# Startup Milvus
-$ nvidia-docker run --runtime=nvidia -p 33001:33001 -v /home/$USER/milvus:/tmp milvus/ubuntu16.04:0.3.0
-```
-
-检查 Milvus 运行状态和运行日志：
-
-```
-# Show Milvus Log
-docker logs <Milvus container id>
-```
-
-#### Milvus Python SDK的安装
-
-```
-# 安装 Milvus Python SDK
-$ pip install pymilvus
-```
-
-Milvus Python SDK的使用手册，请访问：https://pypi.org/project/pymilvus/
-
+关于Milvus具体安装步骤及试运行，请参照 [Milvus Quick Start](https://github.com/milvus-io/docs/edit/master/QuickStart-cn.md)。
 
 
 ## Milvus配置
