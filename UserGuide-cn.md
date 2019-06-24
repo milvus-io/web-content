@@ -196,7 +196,7 @@ Grafana是一个开源的指标分析及可视化系统。我们使用Grafana来
 
    1. 打开prometheus根目录下的prometheus.yml配置文件，并将alerting, rule_files和scrape_configs更新如下：
 
-> ```yaml
+```yaml
 # my global config
 global:
   scrape_interval:     15s # Set the scrape interval to every 1 seconds. Default is every 1 minute.
@@ -239,7 +239,7 @@ scrape_configs:
 
    2. 在prometheus根目录下创建serverdown.yml文件，内容如下：
 
-> ```yaml
+```yaml
 groups:
 - name: milvus
   rules:
