@@ -281,15 +281,15 @@ receivers:
 
 4. 配置Grafana
 
-   1. 登录grafana网页，选择prometheus作为我们的data source type。默认情况下是：http://localhost:9090，将ACCESS设置成Browser。详细操作步骤如下：
+   1. 登录Grafana网页，在data source type选项框选择Prometheus。
 
 ![image-20190620191640605](./img/datasource.png)
 
-   2. 将HTTP中的URL设置成prometheus的服务器地址，将ACCESS设置成Browser，点击Save & Test。
+   2. 在HTTP区域，将URL设置成Prometheus的服务器地址http://localhost:9090, 将ACCESS设置成Browser，点击Save & Test。
 
 ![image-20190620191702697](./img/settings.png)
 
-   3. 点击左上角的New dashboard设置控制面板。
+   3. 点击页面左上角的New dashboard。
 
 ![image-20190620191721734](./img/dashboard.png)
 
@@ -297,11 +297,11 @@ receivers:
 
 ![image-20190620191747161](./img/importdashboard.png)
 
-   5. 下载json配置文件，并将其导入系统。json配置文件下载：
+   5. 下载json配置文件，并将其导入系统。
 
 ![image-20190620191802408](./img/importjson.png)
 
-成功之后，将会展示出我们提供的监控面板
+成功之后，将会出现我们提供的监控面板：
 
 ![image-20190620191818161](./img/result.png)
 
