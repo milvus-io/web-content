@@ -183,16 +183,18 @@ Grafana是一个开源的指标分析及可视化系统。我们使用Grafana来
 
 ![image-20190620134549612](./img/prometheus.png)
 
-### 使用Prometheus和Grafana监控Milvus
+### 如何使用Prometheus和Grafana监控Milvus
 
 1. 安装Prometheus和Grafana。
 
 - [安装Prometheus Server](https://github.com/prometheus/prometheus#install)
-- [安装Grafana]([http://docs.grafana.org)
+
+- [安装Grafana](http://docs.grafana.org)
+
 
 2. 配置Prometheus
 
-首先，需要更新prometheus根目录下的prometheus.yml配置文件。在alerting, rule_files和scrape_configs三部分需要更新，如下。
+   1. 需要更新prometheus根目录下的prometheus.yml配置文件。在alerting, rule_files和scrape_configs三部分需要更新，如下。
 
 ```yaml
 # my global config
