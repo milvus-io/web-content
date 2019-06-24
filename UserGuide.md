@@ -143,20 +143,11 @@ Milvus 提供了基于Prometheus监控和Grafana的展示平台，可以对数�
 
 点击server_config文件，并配置以下参数：
 
-- address
-   目前Milvus server监听的ip地址。
-  
-- port
-
-   目前Milvus server监听的端口号。
-  
-- transfer_protocol
-
-   Milvus client与server通信的协议，可以是binary, compact或json。
-   
-- server_mode
-  目前支持simple（单线程）和thread_pool（线程池）两种模式。
-- gpu_index: 目前使用的GPU。
+- address：目前Milvus server监听的ip地址。 
+- port：目前Milvus server监听的端口号。
+- transfer_protocol：Milvus client与server通信的协议，可以是binary, compact或json。 
+- server_mode：目前支持simple（单线程）和thread_pool（线程池）两种模式。 
+- gpu_index：目前使用的GPU。
 
 ### Milvus数据库配置
 
@@ -184,22 +175,22 @@ Milvus 提供了基于Prometheus监控和Grafana的展示平台，可以对数�
 
 ### 概述
 
-Milvus的监控系统是基于开源监控框架Prometheus搭建的。目前，Milvus server收集数据后，利用pull模式把所有数据导入Prometheus。然后，我们就通过Grafana展示所有监控指标，同时一旦发生告警Prometheus会将告警信息可以推送给AlertManager，后通过E-Mail或者WeChat将通知用户用户。告警系统架构如下：
+Milvus的监控系统是基于开源监控框架Prometheus搭建的。目前，Milvus server收集数据后，利用pull模式把所有数据导入Prometheus，然后通过Grafana展示所有监控指标。一旦发生告警，Prometheus会将告警信息可以推送给AlertManager，并通过Email或者WeChat通知用户。告警系统架构如下：
 
 ![Monitoring](./img/Monitoring.png)
 
-Grafana是一个开源的指标分析及可视化系统。我们使用 Grafana 来展示 Milvus 的各项系统指标，如下图：
+Grafana是一个开源的指标分析及可视化系统。我们使用Grafana来展示Milvus的各项系统指标，如下图：
 
 ![image-20190620134549612](./img/prometheus.png)
 
 ### 使用Prometheus和Grafana监控Milvus
 
-监控系统的安装：
+1. 安装Prometheus和Grafana。
 
-- Prometheus Server 参考：https://github.com/prometheus/prometheus#install
-- Grafana 参考：[http://docs.grafana.org]
+- [安装Prometheus Server](https://github.com/prometheus/prometheus#install)
+- [安装Grafana]([http://docs.grafana.org)
 
-#### Prometheus配置
+2. 配置Prometheus
 
 首先，需要更新prometheus根目录下的prometheus.yml配置文件。在alerting, rule_files和scrape_configs三部分需要更新，如下。
 
@@ -257,7 +248,7 @@ groups:
         serverity: page
 ```
 
-#### Alerting配置
+3. 配置Alerting
 
 首先，需要在alertmanager根目录文件夹下创建 milvus.yml 文件，内容如下
 
@@ -286,9 +277,9 @@ receivers:
 ./alertmanager --config.file=milvus.yml
 ```
 
-#### Grafana配置
+4. 配置Grafana
 
-首先启动grafana服务器，登录grafana网页，选择prometheus作为我们的data source type，然后把HTTP下的URL设置成prometheus服务器的URL，默认情况下是：http://localhost:9090，将ACCESS设置成Browser。详细操作步骤如下：
+1. 首先启动grafana服务器，登录grafana网页，选择prometheus作为我们的data source type，然后把HTTP下的URL设置成prometheus服务器的URL，默认情况下是：http://localhost:9090，将ACCESS设置成Browser。详细操作步骤如下：
 
 首先我们先选择prometheus作为我们的data source type。
 
