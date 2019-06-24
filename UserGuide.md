@@ -144,13 +144,19 @@ Milvus 提供了基于Prometheus监控和Grafana的展示平台，可以对数�
 点击server_config文件，并配置以下参数：
 
 - address
-  目前Milvus server监听的ip地址。
+
+   目前Milvus server监听的ip地址。
   
 - port
-  目前Milvus server监听的端口号。
+
+   目前Milvus server监听的端口号。
   
-- transfer_protocol：Milvus client与server通信的协议，可以是binary, compact或json。
-- server_mode: 目前支持simple（单线程）和thread_pool（线程池）两种模式。
+- transfer_protocol
+
+   Milvus client与server通信的协议，可以是binary, compact或json。
+   
+- server_mode
+  目前支持simple（单线程）和thread_pool（线程池）两种模式。
 - gpu_index: 目前使用的GPU。
 
 ### Milvus数据库配置
