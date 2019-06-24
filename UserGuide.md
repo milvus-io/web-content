@@ -18,7 +18,7 @@
 Milvus 是Zilliz公司为应对AI应用大规模落地，且当前工业界并没有一款成熟向量检索系统，而研制的面向海量特征向量检索的数据库系统。Milvus 旨在帮助用户实现非结构化数据的近似检索和分析，其实现原理是通过AI算法提取非结构化数据的特征，然后利用特征向量唯一标识该非结构化数据，然后用向量间的距离衡量非结构化数据之间的相似度。
 
 
-### 主要特性
+### 产品特性
 
 Milvus产品特性主要包含以下：
 
@@ -66,30 +66,22 @@ Milvus提供基于Prometheus的监控和Grafana的可视化展示。
 Milvus系统由四部分组成：
 
 - Milvus Server
-- Storage Cluster
-- Meta Management
-- Milvus Monitoring
-
-#### Milvus Cluster
-
 负责接收客户端发送的请求。收到请求后，Load Balancer负责把请求发送到负载较小的Milvus Proxy，然后Milvus Proxy会根据查询向量表的元数据，分发任务到不同的Milvus Core做计算。当所有的Milvus Core都计算结束后，Mivlus Proxy负责合并所有的结算结果，然后返回给客户端。
 
-#### Storage Cluster
-
+- Storage Cluster
 负责提供强一致和高可靠的数据存储，目前该集群是基于MinIO对象存储搭建的。
 
-#### Meta Management
-
+- Meta Management
 负责提供Milvus集群和存储集群的元数据管理，目前是基于MySQL实现的。
 
-#### Milvus Monitoring
-
+- Milvus Monitoring
 Milvus 使用开源时序数据库 Prometheus 作为监控和性能指标信息存储方案，使用 Grafana 作为可视化组件进行展示。
+
 
 
 ## Milvus安装
 
-##### Milvus单机版的软硬件要求
+### Milvus Docker版安装前提条件
 
 Milvus是一款面向向量检索的数据库系统，可以很好的运行和部署在x86架构的服务器环境和主流的虚拟化环境下，也支持目前主流的网络硬件设备。操作系统方面，Milvus支持目前主流的Linux操作系统环境。
 
@@ -115,7 +107,7 @@ Milvus是一款面向向量检索的数据库系统，可以很好的运行和�
 
 Milvus 提供了基于Prometheus监控和Grafana的展示平台，可以对数据库的各项指标进行可视化展示，兼容目前主流的Web浏览器如：微软IE、Google Chrome、Mozilla Firefox和Safari等。
 
-##### Milvus单机版的部署
+### Milvus单机版的部署
 
 在安装Milvus之前，首先请确保您的机器上已经安装了：
 
@@ -129,7 +121,7 @@ Milvus 提供了基于Prometheus监控和Grafana的展示平台，可以对数�
 
 对于NVIDIA-Docker2的安装方法和步骤，请移步：https://github.com/NVIDIA/nvidia-docker
 
-
+### Milvus安装
 
 首先请先通过Zilliz官方网站，申请使用Milvus，然后客服人员会向您提供Milvus的Docker Image，拿到Docker Image后，将其下载到安装机器内，然后运行下面的命令导入Milvus容器：
 
@@ -194,7 +186,7 @@ metric_config:
   
   
 
-## Milvus监控配置
+## Milvus监控
 
 ### 概述
 
@@ -213,7 +205,7 @@ Grafana是一个开源的指标分析及可视化系统。我们使用 Grafana �
 - Prometheus Server 参考：https://github.com/prometheus/prometheus#install
 - Grafana 参考：[http://docs.grafana.org]
 
-##### Prometheus配置
+#### Prometheus配置
 
 首先，需要更新prometheus根目录下的prometheus.yml配置文件。在alerting, rule_files和scrape_configs三部分需要更新，如下。
 
@@ -271,8 +263,7 @@ groups:
         serverity: page
 ```
 
-
-##### Alerting 配置
+#### Alerting 配置
 
 首先，需要在alertmanager根目录文件夹下创建 milvus.yml 文件，内容如下
 
@@ -301,9 +292,7 @@ receivers:
 ./alertmanager --config.file=milvus.yml
 ```
 
-
-
-##### Grafana 配置
+#### Grafana 配置
 
 首先启动grafana服务器，登录grafana网页，选择prometheus作为我们的data source type，然后把HTTP下的URL设置成prometheus服务器的URL，默认情况下是：http://localhost:9090，将ACCESS设置成Browser。详细操作步骤如下：
 
@@ -338,13 +327,6 @@ receivers:
 ![image-20190620191818161](./img/result.png)
 
 
-## API手册
-
-### Python API Guide
-
-请访问：https://pypi.org/project/pymilvus/
-
-
 
 ## 常见问题
 
@@ -368,13 +350,13 @@ Milvus集群具备高可用性，其存储和计算等集群均容许部分组�
 
 向量存入Milvus后，Milvus会给对应向量一个ID，用户需要自己将该向量ID和其对应的其他属性存入另外一个数据库系统。查询的时候，用户提供需要查询的向量，Milvus会返回和用户提供向量最匹配的数个向量的ID以及匹配度。
 
-* 如何选择向量索引的类型？
+- 如何选择向量索引的类型？
 
 依据用户的需求，如果用户需求精确匹配，那么请选择L2Flat类型索引。精确匹配，可以为用户提供100%精确匹配的向量，但是由于计算量巨大，性能影响也很大。如果用户不追求100%精确匹配，可以选择IVFFlat类型索引，支持大数据量的高精度匹配。
 
 - Milvus是否支持边插入边查询的能力？
 
-支持
+支持。
 
 
 
