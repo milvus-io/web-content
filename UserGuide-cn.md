@@ -192,9 +192,9 @@ Grafana是一个开源的指标分析及可视化系统。我们使用Grafana来
    - [安装Grafana](http://docs.grafana.org)
 
 
-2. 配置Prometheus
+2. 配置Prometheus。
 
-   1. 打开prometheus根目录下的prometheus.yml配置文件，并将alerting, rule_files和scrape_configs更新如下：
+   1) 打开prometheus根目录下的prometheus.yml配置文件，并将alerting, rule_files和scrape_configs更新如下：
 
 ```yaml
 # my global config
@@ -237,7 +237,7 @@ scrape_configs:
     - targets: ['localhost:9091']
 ```
 
-   1. 在prometheus根目录下创建serverdown.yml文件，内容如下：
+​       2) 在prometheus根目录下创建serverdown.yml文件，内容如下：
 
 ```yaml
 groups:
@@ -250,9 +250,9 @@ groups:
         serverity: page
 ```
 
-3. 配置Alerting
+3. 配置alertmanager
 
-   1. 在alertmanager根目录下创建 milvus.yml文件，内容如下：
+​       1) 在alertmanager根目录下创建 milvus.yml文件，内容如下：
 
 ```
 global:
@@ -273,7 +273,7 @@ receivers:
     - to: '××××@××.com'             # receiver mail address
 ```
 
-   2. 指定--config.file=milvus.yml以启动alertmanager，如下：
+​       2) 指定--config.file=milvus.yml以启动alertmanager，如下：
 
 ```
 ./alertmanager --config.file=milvus.yml
@@ -281,29 +281,29 @@ receivers:
 
 4. 配置Grafana
 
-   1. 打开terminal，执行以下命令
+   1) 打开terminal，执行以下命令
    
    ```
    $ docker run -i -p 3000:3000 grafana/grafana
    ```
    
-   2. 登录Grafana网页(localhost:3000)，在data source type选项框选择Prometheus。
+   2) 登录Grafana网页(localhost:3000)，在data source type选项框选择Prometheus。
 
 ![image-20190620191640605](./img/datasource.png)
 
-   2. 在HTTP区域，将URL设置成Prometheus的服务器地址http://localhost:9090, 将ACCESS设置成Browser，点击Save & Test。
+​       3) 在HTTP区域，将URL设置成Prometheus的服务器地址http://localhost:9090, 将ACCESS设置成Browser，点击Save & Test。
 
 ![image-20190620191702697](./img/settings.png)
 
-   3. 点击页面左上角的New dashboard。
+​       4) 点击页面左上角的New dashboard。
 
 ![image-20190620191721734](./img/dashboard.png)
 
-   4. 点击右侧的Import dashboard。
+​       5) 点击右侧的Import dashboard。
 
 ![image-20190620191747161](./img/importdashboard.png)
 
-   5. 下载json配置文件，并将其导入系统。
+​       6) 下载json配置文件，并将其导入系统。
 
 ![image-20190620191802408](./img/importjson.png)
 
