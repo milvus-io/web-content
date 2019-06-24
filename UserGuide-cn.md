@@ -132,7 +132,7 @@ Milvus 提供了基于Prometheus监控和Grafana的展示平台，可以对数�
 
 ### Milvus安装
 
-关于Milvus具体安装步骤及试运行，请参照 [Milvus Quick Start](https://github.com/milvus-io/docs/edit/master/QuickStart-cn.md)。
+关于Milvus具体安装步骤，请参照 [Milvus Quick Start](https://github.com/milvus-io/docs/edit/master/QuickStart-cn.md)。
 
 
 ## Milvus配置
