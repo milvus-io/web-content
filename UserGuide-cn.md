@@ -281,7 +281,13 @@ receivers:
 
 4. 配置Grafana
 
-   1. 登录Grafana网页，在data source type选项框选择Prometheus。
+   1. 打开terminal，执行以下命令
+   
+   ```
+   $ docker run -i -p 3000:3000 grafana/grafana
+   ```
+   
+   2. 登录Grafana网页(localhost:3000)，在data source type选项框选择Prometheus。
 
 ![image-20190620191640605](./img/datasource.png)
 
