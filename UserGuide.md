@@ -144,7 +144,6 @@ Milvus 提供了基于Prometheus监控和Grafana的展示平台，可以对数�
 点击server_config文件，并配置以下参数：
 
 - address
-
    目前Milvus server监听的ip地址。
   
 - port
