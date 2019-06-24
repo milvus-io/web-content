@@ -66,15 +66,19 @@ Milvus提供基于Prometheus的监控和Grafana的可视化展示。
 Milvus系统由四部分组成：
 
 - Milvus Server
+
 负责接收客户端发送的请求。收到请求后，Load Balancer负责把请求发送到负载较小的Milvus Proxy，然后Milvus Proxy会根据查询向量表的元数据，分发任务到不同的Milvus Core做计算。当所有的Milvus Core都计算结束后，Mivlus Proxy负责合并所有的结算结果，然后返回给客户端。
 
 - Storage Cluster
+
 负责提供强一致和高可靠的数据存储，目前该集群是基于MinIO对象存储搭建的。
 
 - Meta Management
+
 负责提供Milvus集群和存储集群的元数据管理，目前是基于MySQL实现的。
 
 - Milvus Monitoring
+
 Milvus 使用开源时序数据库 Prometheus 作为监控和性能指标信息存储方案，使用 Grafana 作为可视化组件进行展示。
 
 
@@ -139,7 +143,7 @@ $ nvidia-docker run --runtime=nvidia -p 33001:33001 -v /home/$USER/milvus:/tmp m
 docker logs <Milvus container id>
 ```
 
-##### Milvus Python SDK的安装
+#### Milvus Python SDK的安装
 
 ```
 # 安装 Milvus Python SDK
