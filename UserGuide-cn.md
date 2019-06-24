@@ -237,7 +237,7 @@ scrape_configs:
     - targets: ['localhost:9091']
 ```
 
-   2. 在prometheus根目录下创建serverdown.yml文件，内容如下：
+   1. 在prometheus根目录下创建serverdown.yml文件，内容如下：
 
 ```yaml
 groups:
