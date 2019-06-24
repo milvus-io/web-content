@@ -34,39 +34,39 @@ Milvus产品特性主要包含以下：
 
 - 高速智能向量检索 
 
-  Milvus可以使用CPU/GPU异构计算引擎，提供高准确度的百亿向量检索，检索结果的秒级响应。
+  使用CPU/GPU异构计算引擎，提供高准确度的百亿向量检索，检索结果的秒级响应。
 
-- 提供水平线性弹性扩展
+- 水平线性弹性扩展
 
-Milvus可随着业务增长而伸缩，只需要通过增加更多的机器来满足业务增长需要。
+  可随着业务增长而伸缩，只需要通过增加更多的机器来满足业务增长需要。
 
 - 高可用
 
-Milvus内部计算、存储和元数据集群，均允许部分实例失效，而不影响整个集群的可用性。　
+  内部计算、存储和元数据集群，均允许部分实例失效，而不影响整个集群的可用性。　
 
 - 支持实时插入
 
-和很多面向向量检索的算法要求不同，Milvus支持对于特征向量的实时插入，支持边插入数据边查询数据。
+  与很多面向向量检索的算法要求不同，Milvus支持对于特征向量的实时插入，支持边插入数据边查询数据。
 
 - 高易用性
 
-Milvus提供了基于C++/Python的客户端SDK。对于其他类型的语言，Milvus支持通过RESTful和RPC的访问方法。
+  提供了基于C++/Python的客户端SDK。对于其他类型的语言，Milvus支持通过RESTful和RPC的访问方法。
 
 - 易部署
 
-Milvus是为云而设计的数据库，支持公有云、私有云和混合云，使部署、配置和维护变得十分简单。
+  云数据库，支持公有云、私有云和混合云，使部署、配置和维护变得十分简单。
 
 - AI模型全支持
 
-Milvus支持目前所有AI训练框架所训练的模型所产生的特征向量，涵盖图片、视频、文本、语音等等方面。
+  支持目前所有AI训练框架所训练的模型所产生的特征向量，涵盖图片、视频、文本、语音等等方面。
 
 - 跨平台
 
-Milvus可以运行在Linux和Windows平台上，支持x86/ARM/PowerPC等架构，为边缘计算应用提供基础支撑。
+  可以运行在Linux和Windows平台上，支持x86/ARM/PowerPC等架构，为边缘计算应用提供基础支撑。
 
 - 可视化监控
 
-Milvus提供基于Prometheus的监控和Grafana的可视化展示。
+  提供基于Prometheus的监控和Grafana的可视化展示。
 
 
 ### 系统架构
@@ -101,7 +101,7 @@ Milvus是一款面向向量检索的数据库系统，可以很好的运行和�
 
 - Linux操作系统版本要求
 
-| Linux 操作系统平台       | 版本        |
+| Linux 操作系统平台       | 支持版本        |
 | :----------------------- | :---------- |
 | Red Hat Enterprise Linux | 7.5及以上   |
 | CentOS                   | 7.5及以上   |
@@ -175,7 +175,7 @@ metric_config:
 
 ### 概述
 
-Milvus的监控系统是基于开源监控框架Prometheus搭建的。目前，Milvus server收集数据后，利用的pull模式把所有数据导入Prometheus。然后，我们就通过Grafana展示所有监控指标了，同时一旦发生告警Prometheus会将告警信息可以推送给AlertManager，后通过E-Mail或者WeChat将通知用户用户。告警系统架构如下：
+Milvus的监控系统是基于开源监控框架Prometheus搭建的。目前，Milvus server收集数据后，利用pull模式把所有数据导入Prometheus。然后，我们就通过Grafana展示所有监控指标，同时一旦发生告警Prometheus会将告警信息可以推送给AlertManager，后通过E-Mail或者WeChat将通知用户用户。告警系统架构如下：
 
 ![Monitoring](./img/Monitoring.png)
 
@@ -248,7 +248,7 @@ groups:
         serverity: page
 ```
 
-#### Alerting 配置
+#### Alerting配置
 
 首先，需要在alertmanager根目录文件夹下创建 milvus.yml 文件，内容如下
 
@@ -277,7 +277,7 @@ receivers:
 ./alertmanager --config.file=milvus.yml
 ```
 
-#### Grafana 配置
+#### Grafana配置
 
 首先启动grafana服务器，登录grafana网页，选择prometheus作为我们的data source type，然后把HTTP下的URL设置成prometheus服务器的URL，默认情况下是：http://localhost:9090，将ACCESS设置成Browser。详细操作步骤如下：
 
@@ -317,37 +317,37 @@ receivers:
 
 - Milvus是什么？
 
-Milvus是一款面向向量检索的数据库系统，可以很好的运行和部署在x86架构的服务器环境和主流的虚拟化环境下，也支持目前主流的网络硬件设备。操作系统方面，Milvus支持目前主流的Linux操作系统环境。
+  Milvus是一款面向向量检索的数据库系统，可以很好的运行和部署在x86架构的服务器环境和主流的虚拟化环境下，也支持目前主流的网络硬件设备。操作系统方面，Milvus支持目前主流的Linux操作系统环境。
 
 - Milvus能够使用的接口有哪些？
 
-目前Milvus提供Python和C++的SDK接口，同时还支持所有基于Thrift的通信方式。
+  目前Milvus提供Python和C++的SDK接口，同时还支持所有基于Thrift的通信方式。
 
 - Milvus的易用性如何？
 
-Milvus的使用相当简单。可以把Milvus当作普通的数据库系统，参考前文提供的样例程序和https://pypi.org/project/pymilvus/，就可以使用了。
+  Milvus的使用非常简单。可以把Milvus当作普通的数据库系统，具体参考前文提供的样例程序和https://pypi.org/project/pymilvus/ 。
 
 - Milvus具备高可用特性吗？
 
-Milvus集群具备高可用性，其存储和计算等集群均容许部分组件失效，而不影响整个集群的使用
+  Milvus集群具备高可用性，其存储和计算等集群均容许部分组件失效，而不影响整个集群的使用。
 
 - 向量存入Milvus后，如何检索？
 
-向量存入Milvus后，Milvus会给对应向量一个ID，用户需要自己将该向量ID和其对应的其他属性存入另外一个数据库系统。查询的时候，用户提供需要查询的向量，Milvus会返回和用户提供向量最匹配的数个向量的ID以及匹配度。
+  向量存入Milvus后，Milvus会给对应向量一个ID，用户需要自己将该向量ID和其对应的其他属性存入另外一个数据库系统。查询的时候，用户提供需要查询的向量，Milvus会返回和用户提供向量最匹配的数个向量的ID以及匹配度。
 
 - 如何选择向量索引的类型？
 
-依据用户的需求，如果用户需求精确匹配，那么请选择L2Flat类型索引。精确匹配，可以为用户提供100%精确匹配的向量，但是由于计算量巨大，性能影响也很大。如果用户不追求100%精确匹配，可以选择IVFFlat类型索引，支持大数据量的高精度匹配。
+  依据用户的需求，如果用户需求精确匹配，那么请选择L2Flat类型索引。精确匹配，可以为用户提供100%精确匹配的向量，但是由于计算量巨大，性能影响也很大。如果用户不追求100%精确匹配，可以选择IVFFlat类型索引，支持大数据量的高精度匹配。
 
 - Milvus是否支持边插入边查询的能力？
 
-支持。
+  支持。
 
 
 
 ## 技术支持
 
-- 有任何问题和建议，请联系邮箱：support@zilliz.com
+- 如果你有任何问题和建议，请联系邮箱：support@zilliz.com
 
 - 对于有企业合作的用户，请拨打客服电话：400 …..
 
