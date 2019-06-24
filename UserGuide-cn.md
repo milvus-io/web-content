@@ -287,26 +287,26 @@ Grafana是一个开源的指标分析及可视化系统。我们使用Grafana来
    2) 登录Grafana网页(localhost:3000)，在data source type选项框选择Prometheus。
    
    ![image-20190620191640605](./img/datasource.png)
+   
+   3) 在HTTP区域，将URL设置成Prometheus的服务器地址http://localhost:9090, 将ACCESS设置成Browser，点击Save & Test。
+   
+   ![image-20190620191702697](./img/settings.png)
+   
+   4) 点击页面左上角的New dashboard。
+   
+   ![image-20190620191721734](./img/dashboard.png)
+   
+   5) 点击右侧的Import dashboard。
+   
+   ![image-20190620191747161](./img/importdashboard.png)
+   
+   6) 下载json配置文件，并将其导入系统。
+   
+   ![image-20190620191802408](./img/importjson.png)
 
-​       3) 在HTTP区域，将URL设置成Prometheus的服务器地址http://localhost:9090, 将ACCESS设置成Browser，点击Save & Test。
-
-![image-20190620191702697](./img/settings.png)
-
-​       4) 点击页面左上角的New dashboard。
-
-![image-20190620191721734](./img/dashboard.png)
-
-​       5) 点击右侧的Import dashboard。
-
-![image-20190620191747161](./img/importdashboard.png)
-
-​       6) 下载json配置文件，并将其导入系统。
-
-![image-20190620191802408](./img/importjson.png)
-
-成功之后，将会出现我们提供的监控面板：
-
-![image-20190620191818161](./img/result.png)
+   成功之后，将会出现我们提供的监控面板：
+   
+   ![image-20190620191818161](./img/result.png)
 
 
 
