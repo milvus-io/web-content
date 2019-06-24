@@ -238,47 +238,43 @@ Grafana是一个开源的指标分析及可视化系统。我们使用Grafana来
    ```
    2) 在prometheus根目录下创建serverdown.yml文件，内容如下：
 
-2) 在prometheus根目录下创建serverdown.yml文件，内容如下：
-
-```yaml
-groups:
-- name: milvus
-  rules:
-    - alert: MilvusServerDown
-      expr: up{job="milvus_server"}
-      for: 1s
-      labels:
-        serverity: page
-```
+   ```yaml
+   groups:
+   - name: milvus
+     rules:
+       - alert: MilvusServerDown
+         expr: up{job="milvus_server"}
+         for: 1s
+         labels:
+           serverity: page
+   ```
 
 3. 配置alertmanager
+   1) 在alertmanager根目录下创建 milvus.yml文件，内容如下：
 
-​       1) 在alertmanager根目录下创建 milvus.yml文件，内容如下：
+   ```
+   global:
+     resolve_timeout: 1m
+     smtp_smarthost: 'smtp.163.com:25' # smtp server config
+     smtp_from: '×××@163.com'          # sender mail account
+     smtp_auth_username: '×××@163.com' # sender mail account
+     smtp_auth_password: '××××××××'    # sender mail password
+     smtp_hello: '163.com'             # sender mail suffix
+     smtp_require_tls: false
+   route:
+     group_by: ['alertname']
+     receiver: default
 
-```
-global:
-  resolve_timeout: 1m
-  smtp_smarthost: 'smtp.163.com:25' # smtp server config
-  smtp_from: '×××@163.com'          # sender mail account
-  smtp_auth_username: '×××@163.com' # sender mail account
-  smtp_auth_password: '××××××××'    # sender mail password
-  smtp_hello: '163.com'             # sender mail suffix
-  smtp_require_tls: false
-route:
-  group_by: ['alertname']
-  receiver: default
+   receivers:
+     - name: 'default'
+       email_configs:
+       - to: '××××@××.com'             # receiver mail address
+   ```
+   2) 指定--config.file=milvus.yml以启动alertmanager，如下：
 
-receivers:
-  - name: 'default'
-    email_configs:
-    - to: '××××@××.com'             # receiver mail address
-```
-
-​       2) 指定--config.file=milvus.yml以启动alertmanager，如下：
-
-```
-./alertmanager --config.file=milvus.yml
-```
+   ```
+   ./alertmanager --config.file=milvus.yml
+   ```
 
 4. 配置Grafana
 
@@ -289,8 +285,8 @@ receivers:
    ```
    
    2) 登录Grafana网页(localhost:3000)，在data source type选项框选择Prometheus。
-
-![image-20190620191640605](./img/datasource.png)
+   
+   ![image-20190620191640605](./img/datasource.png)
 
 ​       3) 在HTTP区域，将URL设置成Prometheus的服务器地址http://localhost:9090, 将ACCESS设置成Browser，点击Save & Test。
 
