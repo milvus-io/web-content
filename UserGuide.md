@@ -111,19 +111,14 @@ Milvus是一款面向向量检索的数据库系统，可以很好的运行和�
 
 Milvus 提供了基于Prometheus监控和Grafana的展示平台，可以对数据库的各项指标进行可视化展示，兼容目前主流的Web浏览器如：微软IE、Google Chrome、Mozilla Firefox和Safari等。
 
-### Milvus单机版的部署
+- 软件包安装要求
 
-在安装Milvus之前，首先请确保您的机器上已经安装了：
 
-- CUDA 9.0及以上
-- Docker CE
-- NVIDIA-Docker2
 
-对于CUDA的安装方法和步骤，请移步：https://docs.nvidia.com/cuda/
+- [CUDA 9.0及以上](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html)
+- [Docker CE](https://docs.docker.com/install/)
+- [NVIDIA-Docker2](https://github.com/NVIDIA/nvidia-docker)
 
-对于Docker CE的安装方法和步骤，请移步：https://docs.docker.com/install/
-
-对于NVIDIA-Docker2的安装方法和步骤，请移步：https://github.com/NVIDIA/nvidia-docker
 
 ### Milvus安装
 
