@@ -1,67 +1,24 @@
-### 关于Milvus
+# Milvus用户指南
 
+## Milvus简介
 
+### 几个核心概念
 
-#### 主要概念
-
-##### 特征向量
+#### 特征向量
 
 现实世界的事物，复杂而多元，通常是很难使用少数几个简单数能精确描述的。因此，我们会使用特征向量来描述一个事物，特征向量就是现实事物的数学抽象。现在的人工智能技术核心能力，就是利用各种计算机算法对现实世界的原始数据进行特征提取，特征处理和特征选择，最终形成准确描述该事物的特征向量。
 
-
-
-##### 特征向量检索数据库
+#### 特征向量检索数据库
 
 随着机器学习或者深度学习技术越来越成熟，应用越来越广泛，随之而产生的特征向量数据也会越来越庞大。传统的数据库系统和大数据系统，由于其内建数据类型里并不包括特征向量类型。如果打算使用传统的数据库系统进行特征向量检索，要么自定义特征向量类型以及针对该类型数据的自定义函数；要么就只能按照一维一列的方式把高维向量存入数据库系统，由于大多数数据库系统对于表列数的支持都是有限的，因此使用这种方法通常无法支持高维特征向量。此外，传统的数据库和大数据系统里，除了没有针对该数据类型的存储方式、计算方法，也没有针对该类型的索引方式以及数据的管理方式，由此可见使用传统的数据库和大数据系统进行特征向量的存储和检索，都是不合适的。提供一个面向海量特征向量检索的数据库系统，已经是市场对于数据库厂商提出的新需求。
 
 
-
-##### Milvus
+### Milvus是什么
 
 Milvus 是Zilliz公司为应对AI应用大规模落地，且当前工业界并没有一款成熟向量检索系统，而研制的面向海量特征向量检索的数据库系统。Milvus 旨在帮助用户实现非结构化数据的近似检索和分析，其实现原理是通过AI算法提取非结构化数据的特征，然后利用特征向量唯一标识该非结构化数据，然后用向量间的距离衡量非结构化数据之间的相似度。
 
 
-
-#### 系统架构
-
-![MilvusArch](img/MilvusArch.png)
-
-
-
-Milvus系统由四部分组成：
-
-- Milvus Server
-- Storage Cluster
-- Meta Management
-- Milvus Monitoring
-
-
-
-#### Milvus Cluster
-
-负责接收客户端发送的请求。收到请求后，Load Balancer负责把请求发送到负载较小的Milvus Proxy，然后Milvus Proxy会根据查询向量表的元数据，分发任务到不同的Milvus Core做计算。当所有的Milvus Core都计算结束后，Mivlus Proxy负责合并所有的结算结果，然后返回给客户端。
-
-
-
-#### Storage Cluster
-
-负责提供强一致和高可靠的数据存储，目前该集群是基于MinIO对象存储搭建的。
-
-
-
-#### Meta Management
-
-负责提供Milvus集群和存储集群的元数据管理，目前是基于MySQL实现的。
-
-
-
-#### Milvus Monitoring
-
-Milvus 使用开源时序数据库 Prometheus 作为监控和性能指标信息存储方案，使用 Grafana 作为可视化组件进行展示。
-
-
-
-#### 主要特性
+### 主要特性
 
 Milvus产品特性主要包含以下：
 
@@ -102,12 +59,35 @@ Milvus可以运行在Linux和Windows平台上，支持x86/ARM/PowerPC等架构�
 Milvus提供基于Prometheus的监控和Grafana的可视化展示。
 
 
+### 系统架构
+
+![MilvusArch](img/MilvusArch.png)
+
+Milvus系统由四部分组成：
+
+- Milvus Server
+- Storage Cluster
+- Meta Management
+- Milvus Monitoring
+
+#### Milvus Cluster
+
+负责接收客户端发送的请求。收到请求后，Load Balancer负责把请求发送到负载较小的Milvus Proxy，然后Milvus Proxy会根据查询向量表的元数据，分发任务到不同的Milvus Core做计算。当所有的Milvus Core都计算结束后，Mivlus Proxy负责合并所有的结算结果，然后返回给客户端。
+
+#### Storage Cluster
+
+负责提供强一致和高可靠的数据存储，目前该集群是基于MinIO对象存储搭建的。
+
+#### Meta Management
+
+负责提供Milvus集群和存储集群的元数据管理，目前是基于MySQL实现的。
+
+#### Milvus Monitoring
+
+Milvus 使用开源时序数据库 Prometheus 作为监控和性能指标信息存储方案，使用 Grafana 作为可视化组件进行展示。
 
 
-
-### 操作手册
-
-####部署
+## Milvus安装
 
 ##### Milvus单机版的软硬件要求
 
@@ -167,11 +147,7 @@ $ nvidia-docker run --runtime=nvidia -p 33001:33001 -v /home/$USER/milvus:/tmp m
 docker logs <Milvus container id>
 ```
 
-
-
 ##### Milvus Python SDK的安装
-
-##### 
 
 ```
 # 安装 Milvus Python SDK
@@ -182,11 +158,11 @@ Milvus Python SDK的使用手册，请访问：https://pypi.org/project/pymilvus
 
 
 
-#### 配置
+## Milvus配置
 
 目前Milvus的单机版配置共分成三部分。
 
-##### Milvus服务配置
+### Milvus服务配置
 
 server_config: 
 
@@ -196,7 +172,7 @@ server_config:
 - server_mode: 目前支持simple：单线程和thread_pool：线程池，两种模式。
 - gpu_index: 目前使用的GPU
 
-##### Milvus数据库配置
+### Milvus数据库配置
 
 db_config: 
 
@@ -204,7 +180,7 @@ db_config:
 - db_backend_url: 使用RESTFul API接口访问数据库的ip地址。
 - db_flush_interval: 插入数据持久化的时间间隔
 
-##### Milvus监控参数配置
+### Milvus监控参数配置
 
 metric_config: 
 
@@ -215,10 +191,12 @@ metric_config:
   - port: 访问prometheus的端口号。
   - push_gateway_ip_address: push gateway的ip地址，push方式有效。
   - push_gateway_port: push gateway的端口号，push方式有效。
+  
+  
 
-#### 监控
+## Milvus监控配置
 
-##### 概述
+### 概述
 
 Milvus的监控系统是基于开源监控框架Prometheus搭建的。目前，Milvus server收集数据后，利用的pull模式把所有数据导入Prometheus。然后，我们就通过Grafana展示所有监控指标了，同时一旦发生告警Prometheus会将告警信息可以推送给AlertManager，后通过E-Mail或者WeChat将通知用户用户。告警系统架构如下：
 
@@ -228,14 +206,12 @@ Grafana是一个开源的指标分析及可视化系统。我们使用 Grafana �
 
 ![image-20190620134549612](./img/prometheus.png)
 
-##### 使用Prometheus和Grafana监控Milvus
+### 使用Prometheus和Grafana监控Milvus
 
 监控系统的安装：
 
 - Prometheus Server 参考：https://github.com/prometheus/prometheus#install
 - Grafana 参考：[http://docs.grafana.org]
-
-
 
 ##### Prometheus配置
 
@@ -362,18 +338,15 @@ receivers:
 ![image-20190620191818161](./img/result.png)
 
 
+## API手册
 
-
-
-#### API手册
-
-##### Python API Guide
+### Python API Guide
 
 请访问：https://pypi.org/project/pymilvus/
 
 
 
-#### 常见问题
+## 常见问题
 
 - Milvus是什么？
 
@@ -405,7 +378,7 @@ Milvus集群具备高可用性，其存储和计算等集群均容许部分组�
 
 
 
-#### 技术支持
+## 技术支持
 
 - 有任何问题和建议，请联系邮箱：support@zilliz.com
 
