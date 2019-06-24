@@ -309,8 +309,12 @@ Grafana是一个开源的指标分析及可视化系统。我们使用Grafana来
    ![image-20190620191818161](./img/result.png)
 
 
+## 如何使用Milvus
 
-恭喜你！你已经完成了Milvus的所有安装配置，现在可以使用Milvus试运行一条向量相似度查询了。
+Milvus提供基于C++/Python的客户端SDK。对于其他类型的语言，Milvus支持通过RESTful和RPC的访问方法。以基于Python的客户端为例，你可以参照Milvus Python SDK输入特征向量数据，并进行特征向量搜索。例如：
+
+
+恭喜你！你已经完成了Milvus的所有安装配置，并成功使用Milvus试运行了一条向量相似度查询。
 
 
 ## 常见问题
