@@ -29,7 +29,7 @@ Milvus是Zilliz公司针对AI应用大规模落地，当前工业界并没有一
 
 ### 如何使用Milvus
 
-关于Milvus的具体使用说明，请参考Milvus用户指南。
+关于Milvus的具体使用说明，请参考[Milvus用户指南](https://github.com/milvus-io/docs/blob/release-edits/zh-CN/UserGuide.md)。
 
 
 
@@ -64,7 +64,11 @@ Milvus是Zilliz公司针对AI应用大规模落地，当前工业界并没有一
 #### 可视化监控
 提供基于Prometheus的监控和Grafana的可视化展示。
   
-## 安全可靠
+### 安全可靠
+
+
+
+## 产品架构
 
 
 ## 应用场景
