@@ -35,12 +35,12 @@ Milvus是Zilliz公司针对AI应用大规模落地，当前工业界并没有一
 
 ### 如何使用Milvus
 
-关于Milvus的具体使用说明，请参考[Milvus用户指南](https://github.com/milvus-io/docs/blob/release-edits/zh-CN/UserGuide.md)。
+你可以通过以下方式，使用并管理Milvus，进行系统安装设置，数据库创建，数据库监控等：
 
-- 数据库监控中心
+- Milvus用户指南
 - SKD
 - API
-
+- 数据库监控中心
 
 ## 产品优势
 
