@@ -10,7 +10,7 @@ sidebar_label: Milvus用户指南
 
 Milvus是一款智能向量检索数据库系统，支持大批量高维向量的秒级响应。该指南主要介绍了Milvus的安装配置和使用，以及Milvus监控系统的创建。
 
-该指南主要针对Milvus Docker版管理员和普通用户，读者一般需要有Python/C++等基本编程知识。
+Milvus指南主要针对Milvus Docker版管理员和普通用户，读者一般需要有Python/C++等基本编程知识。
 
 ## 新手入门
 
@@ -122,15 +122,12 @@ Milvus提供基于C++/Python的客户端SDK。以Python为例，你可以参照[
 
 该监控系统的主要工作流程：
 
-Milvus server收集数据 > 利用pull模式把所有数据导入Prometheus > 通过Grafana展示所有监控指标。
+Milvus server收集数据 > 利用pull模式把所有数据导入Prometheus > 通过Grafana展示各项监控指标。
 
 一旦发生告警，Prometheus会将告警信息可以推送给AlertManager，并通过Email或者WeChat通知用户。告警系统架构如下：
 
 ![Monitoring](assets/Monitoring.png)
 
-Grafana是一个开源的指标分析及可视化系统。我们使用Grafana来展示Milvus的各项系统指标，如下图：
-
-![image-20190620134549612](assets/prometheus.png)
 
 ### 如何使用Prometheus和Grafana监控Milvus
 
@@ -142,122 +139,122 @@ Grafana是一个开源的指标分析及可视化系统。我们使用Grafana来
 
 2. 配置Prometheus。
 
-   1) 打开prometheus根目录下的prometheus.yml配置文件，并对alerting, rule_files和scrape_configs文件做如下跟新：
+   1）打开prometheus根目录下的prometheus.yml配置文件，并对alerting, rule_files和scrape_configs文件做如下跟新：
    
-   ```yaml
-   # my global config
-   global:
-     scrape_interval:     15s # Set the scrape interval to every 1 seconds. Default is every 1 minute.
-     evaluation_interval: 15s # Evaluate rules every 15 seconds. The default is every 1 minute.
-     # scrape_timeout is set to the global default (10s).
+      ```yaml
+      # my global config
+      global:
+        scrape_interval:     15s # Set the scrape interval to every 1 seconds. Default is every 1 minute.
+        evaluation_interval: 15s # Evaluate rules every 15 seconds. The default is every 1 minute.
+        # scrape_timeout is set to the global default (10s).
 
-   # Alertmanager configuration
-   alerting:
-     alertmanagers:
-     - static_configs:
-       - targets: ['localhost:9093']
+      # Alertmanager configuration
+      alerting:
+        alertmanagers:
+        - static_configs:
+          - targets: ['localhost:9093']
 
-   # Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
-   rule_files:
-      - "serverdown.yml" # add alerting rules
+      # Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
+      rule_files:
+         - "serverdown.yml" # add alerting rules
 
-   # A scrape configuration containing exactly one endpoint to scrape:
-   # Here it's Prometheus itself.
-   scrape_configs:
-     # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
-     - job_name: 'prometheus'
+      # A scrape configuration containing exactly one endpoint to scrape:
+      # Here it's Prometheus itself.
+      scrape_configs:
+        # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
+        - job_name: 'prometheus'
 
-       # metrics_path defaults to '/metrics'
-       # scheme defaults to 'http'.
+          # metrics_path defaults to '/metrics'
+          # scheme defaults to 'http'.
 
-       static_configs:
-       - targets: ['localhost:9090']
+          static_configs:
+          - targets: ['localhost:9090']
   
-  	# scrape metrics of server
-     - job_name: 'milvus_server'
-       scrape_interval: 1s
-       static_configs:
-       - targets: ['localhost:8080']
+  	   # scrape metrics of server
+        - job_name: 'milvus_server'
+          scrape_interval: 1s
+          static_configs:
+          - targets: ['localhost:8080']
     
-  	   # under development
-     - job_name: 'pushgateway'
-       static_configs:
-       - targets: ['localhost:9091']
-   ```
+  	      # under development
+        - job_name: 'pushgateway'
+          static_configs:
+          - targets: ['localhost:9091']
+      ```
    
-   2) 在prometheus根目录下创建serverdown.yml文件，内容如下：
+   2）在prometheus根目录下创建serverdown.yml文件，内容如下：
 
-   ```yaml
-   groups:
-   - name: milvus
-     rules:
-       - alert: MilvusServerDown
-         expr: up{job="milvus_server"}
-         for: 1s
-         labels:
-           serverity: page
-   ```
+      ```yaml
+      groups:
+      - name: milvus
+        rules:
+          - alert: MilvusServerDown
+            expr: up{job="milvus_server"}
+            for: 1s
+            labels:
+              serverity: page
+      ```
 
 3. 配置alertmanager
 
-   1) 在alertmanager根目录下创建 milvus.yml文件，内容如下：
+   1）在alertmanager根目录下创建milvus.yml文件，内容如下：
 
-   ```
-   global:
-     resolve_timeout: 1m
-     smtp_smarthost: 'smtp.163.com:25' # smtp server config
-     smtp_from: '×××@163.com'          # sender mail account
-     smtp_auth_username: '×××@163.com' # sender mail account
-     smtp_auth_password: '××××××××'    # sender mail password
-     smtp_hello: '163.com'             # sender mail suffix
-     smtp_require_tls: false
-   route:
-     group_by: ['alertname']
-     receiver: default
+      ```
+      global:
+        resolve_timeout: 1m
+        smtp_smarthost: 'smtp.163.com:25' # smtp server config
+        smtp_from: '×××@163.com'          # sender mail account
+        smtp_auth_username: '×××@163.com' # sender mail account
+        smtp_auth_password: '××××××××'    # sender mail password
+        smtp_hello: '163.com'             # sender mail suffix
+        smtp_require_tls: false
+      route:
+        group_by: ['alertname']
+        receiver: default
 
-   receivers:
-     - name: 'default'
-       email_configs:
-       - to: '××××@××.com'             # receiver mail address
-   ```
+      receivers:
+        - name: 'default'
+          email_configs:
+          - to: '××××@××.com'             # receiver mail address
+      ```
    
-   2) 指定--config.file=milvus.yml以启动alertmanager，如下：
+   2）指定--config.file=milvus.yml以启动alertmanager，如下：
 
-   ```
-   ./alertmanager --config.file=milvus.yml
-   ```
+      ```
+      ./alertmanager --config.file=milvus.yml
+      ```
 
 4. 配置Grafana
 
-   1) 打开terminal，执行以下命令
+   1）打开terminal，执行以下命令
    
-   ```
-   $ docker run -i -p 3000:3000 grafana/grafana
-   ```
+      ```
+      $ docker run -i -p 3000:3000 grafana/grafana
+      ```
    
-   2) 登录Grafana网页(localhost:3000)，在data source type选项框选择Prometheus。
+   2）登录Grafana网页(localhost:3000)，在data source type选项框选择Prometheus。
    
-   ![image-20190620191640605](assets/datasource.png)
+      ![image-20190620191640605](assets/datasource.png)
    
-   3) 在HTTP区域，将URL设置成Prometheus的服务器地址http://localhost:9090, 将ACCESS设置成Browser，点击Save & Test。
+   3）在HTTP区域，将URL设置成Prometheus的服务器地址http://localhost:9090, 将ACCESS设置成Browser，点击Save & Test。
    
-   ![image-20190620191702697](assets/settings.png)
+      ![image-20190620191702697](assets/settings.png)
    
-   4) 点击页面左上角的New dashboard。
+   4）点击页面左上角的New dashboard。
    
-   ![image-20190620191721734](assets/dashboard.png)
+      ![image-20190620191721734](assets/dashboard.png)
    
-   5) 点击右侧的Import dashboard。
+   5）点击右侧的Import dashboard。
    
-   ![image-20190620191747161](assets/importdashboard.png)
+      ![image-20190620191747161](assets/importdashboard.png)
    
-   6) 下载json配置文件，并将其导入系统。
+   6）下载json配置文件，并将其导入系统。
    
-   ![image-20190620191802408](assets/importjson.png)
+      ![image-20190620191802408](assets/importjson.png)
 
    成功之后，将会出现我们提供的监控面板：
    
-   ![image-20190620191818161](assets/result.png)
+   ![image-20190620134549612](assets/prometheus.png)
 
 
 
