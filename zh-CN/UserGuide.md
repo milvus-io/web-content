@@ -10,37 +10,39 @@ sidebar_label: Milvus用户指南
 
 ### 确定系统要求
 
-Milvus是一款智能向量检索数据库系统，能很好的运行和部署在x86架构的服务器环境和通用虚拟化环境下，也支持主流的网络硬件设备。操作系统方面，Milvus目前支持Linux操作系统环境。在安装并运行Milvus前，你需要先确定系统及软硬件环境是否符合以下要求：
+Milvus是一款智能向量检索数据库系统，能很好的运行和部署在x86架构的服务器环境和通用虚拟化环境下，也支持主流的网络硬件设备。操作系统方面，Milvus目前支持Linux操作系统环境。
+
+在安装并运行Milvus前，你需要先确定系统及软硬件环境是否符合以下要求：
 
 - Linux操作系统版本要求
 
-| Linux 操作系统平台       | 支持版本        |
-| :----------------------- | :---------- |
-| Red Hat Enterprise Linux | 7.5及以上   |
-| CentOS                   | 7.5及以上   |
-| Ubuntu LTS               | 16.04及以上 |
+  | Linux 操作系统平台       | 支持版本        |
+  | :----------------------- | :---------- |
+  | Red Hat Enterprise Linux | 7.5及以上   |
+  | CentOS                   | 7.5及以上   |
+  | Ubuntu LTS               | 16.04及以上 |
 
 - 硬件配置要求
 
-| 硬件名称 |   要求         |
-| -------- | ---------------- |
-| CPU      | 16核+            |
-| GPU      | Pascal系列及以上 |
-| 内存     | 256GB及以上      |
-| 硬盘类型 | SSD或者NVMe      |
-| 网络     | 万兆网卡         |
+  | 硬件名称 |   要求         |
+  | -------- | ---------------- |
+  | CPU      | 16核+            |
+  | GPU      | Pascal系列及以上 |
+  | 内存     | 256GB及以上      |
+  | 硬盘类型 | SSD或者NVMe      |
+  | 网络     | 万兆网卡         |
 
 - 客户端浏览器要求
 
-Milvus 提供了基于Prometheus监控和Grafana的展示平台，可以对数据库的各项指标进行可视化展示，兼容目前主流的Web浏览器如：微软IE、Google Chrome、Mozilla Firefox和Safari等。
+  Milvus 提供了基于Prometheus监控和Grafana的展示平台，可以对数据库的各项指标进行可视化展示，兼容目前主流的Web浏览器如：微软IE、Google Chrome、Mozilla Firefox和Safari等。
 
 - 软件包安装要求
 
-请确保你已经安装以下软件包，以便Milvus Docker版能正常运行：
+  请确保你已经安装以下软件包，以便Milvus Docker版能正常运行：
 
-- [CUDA 9.0及以上](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html)
-- [Docker CE](https://docs.docker.com/install/)
-- [NVIDIA-Docker2](https://github.com/NVIDIA/nvidia-docker)
+  - [CUDA 9.0及以上](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html)
+  - [Docker CE](https://docs.docker.com/install/)
+  - [NVIDIA-Docker2](https://github.com/NVIDIA/nvidia-docker)
 
 
 ### 安装Milvus
