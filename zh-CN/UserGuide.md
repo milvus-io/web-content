@@ -113,10 +113,7 @@ Milvus提供基于C++/Python的客户端SDK。以Python为例，你可以参照[
                                
 ## 创建Milvus监控系统
 
-如果你想跟踪数据库系统运行表现，你可以选择为Milvus创建监控系统。你可以自行搭建，也可以直接使用我们提供的基于开源监控框架Prometheus的Milvus监控系统。 
-
-该监控系统的主要工作流程：
-
+如果你想跟踪数据库系统运行表现，你可以选择为Milvus创建监控系统。你可以自行搭建，也可以直接使用我们提供的基于开源监控框架Prometheus的Milvus监控系统。其主要工作流程如下：
 Milvus server收集数据 > 利用pull模式把所有数据导入Prometheus > 通过Grafana展示各项监控指标。
 
 一旦发生告警，Prometheus会将告警信息可以推送给AlertManager，并通过Email或者WeChat通知用户。告警系统架构如下：
