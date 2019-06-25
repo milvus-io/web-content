@@ -16,7 +16,21 @@ sidebar_label: Milvus快速入门
    | CentOS                   | 7.5及以上   |
    | Ubuntu LTS               | 16.04及以上 |
 
-2. 请确保你已经安装以下软件包，以便Milvus Docker版能正常运行：
+2. 硬件配置要求：
+
+  | 硬件名称 |   要求         |
+  | -------- | ---------------- |
+  | CPU      | 16核+            |
+  | GPU      | Pascal系列及以上 |
+  | 内存     | 256GB及以上      |
+  | 硬盘类型 | SSD或者NVMe      |
+  | 网络     | 万兆网卡         |
+
+3. 客户端浏览器要求：
+
+   Milvus提供了基于Prometheus监控和Grafana的展示平台，可以对数据库的各项指标进行可视化展示，兼容目前主流的Web浏览器如：微软IE、Google Chrome、Mozilla Firefox和Safari等。
+  
+4. 请确保你已经安装以下软件包，以便Milvus Docker版能正常运行：
 
    - [CUDA 9.0及以上](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html)
    - [Docker CE](https://docs.docker.com/install/)
