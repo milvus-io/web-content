@@ -24,7 +24,6 @@
 Milvus是Zilliz公司针对AI应用大规模落地，当前工业界并没有一款成熟向量检索系统，而研制的面向海量特征向量检索的数据库系统，旨在帮助用户实现非结构化数据的近似检索和分析。其实现原理是通过AI算法提取非结构化数据的特征，然后利用特征向量唯一标识该非结构化数据，最后用向量间的距离衡量非结构化数据之间的相似度。
 
 
-
 ## 产品优势
 
 ### 高性能
@@ -59,40 +58,16 @@ Milvus是Zilliz公司针对AI应用大规模落地，当前工业界并没有一
 提供基于Prometheus的监控和Grafana的可视化展示。
   
 ### 安全可靠
-
+- xxxxx
+- xxxxx
 
 ## 技术优势
-
-
-
-## 产品架构
-
-![MilvusArch](assets/MilvusArch.png)
-
-Milvus系统由四部分组成：
-
-- Milvus Server
-
-  负责接收客户端发送的请求。收到请求后，Load Balancer负责把请求发送到负载较小的Milvus Proxy。Milvus Proxy会根据查询向量表的元数据，分发任务到不同的Milvus Core做计算。当所有的Milvus Core都计算结束后，Mivlus Proxy负责合并所有的结算结果，并返回给客户端。
-
-- Storage Cluster
-
-  负责提供强一致和高可靠的数据存储，目前该集群是基于MinIO对象存储搭建的。
-
-- Meta Management
-
-  负责提供Milvus集群和存储集群的元数据管理，目前是基于MySQL实现的。
-
-- Milvus Monitoring
-
-  Milvus使用开源时序数据库Prometheus作为监控和性能指标信息存储方案，使用Grafana作为可视化组件进行展示。
+- xxxxx
+- xxxxx
+- xxxxx
 
 
 ## 应用场景
-
-
-
-
 
 
 
