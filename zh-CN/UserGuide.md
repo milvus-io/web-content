@@ -9,16 +9,19 @@ sidebar_label: Milvus用户指南
 ## 前言
 
 ### 概述
+Milvus是一种稳定可靠、可弹性伸缩的向量数据库系统，支持大批量高维向量的秒级响应。基于阿里云分布式文件系统和SSD盘高性能存储，RDS支持MySQL、SQL Server、PostgreSQL、PPAS（高度兼容 Oracle）和MariaDB引擎，并且提供了容灾、备份、恢复、监控、迁移等方面的全套解决方案，彻底解决数据库运维的烦恼。关于RDS的优势与价值，请参见产品优势。
 
+该指南向您介绍如何对Milvus进行设置，帮助您深入了解Milvus的特性和功能。
+
+如果您需要获取人工帮助，可以拨打技术支持电话400...或者给我们发邮件support@zilliz.com。
+
+有关Milvus更多介绍信息，请查看[向量数据库简介]()。
 
 ### 声明
 
 
 ### 通用描述说明
 
-Milvus是一款分布式向量检索数据库系统，支持大批量高维向量的秒级响应。该指南主要介绍了Milvus的安装配置和使用，以及Milvus监控系统的创建。
-
-Milvus指南主要针对Milvus Docker版管理员和普通用户，读者一般需要有Python/C++等基本编程知识。
 
 
 ## [快速入门](https://github.com/milvus-io/docs/blob/dev/zh-CN/QuickStart.md)
