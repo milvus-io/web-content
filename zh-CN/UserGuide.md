@@ -47,7 +47,8 @@ Milvus是一款智能向量检索数据库系统，能很好的运行和部署�
 
 ### 安装Milvus
 
-关于Milvus具体安装步骤，请参照 [Milvus Quick Start](https://github.com/milvus-io/docs/edit/master/QuickStart-cn.md)。
+请按照以下步骤安装Milvus Docker版：
+1. 
 
 
 ### 配置Milvus
