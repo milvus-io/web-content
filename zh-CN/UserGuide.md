@@ -62,37 +62,38 @@ Milvus能很好的运行和部署在x86架构的服务器环境和通用虚拟�
    $ docker pull milvusdb/milvus:latest
    ```
 
-2. 下载Milvus配置文件模板。
+2. 下载Milvus设置文件模板。
 
-3. 进入Milvus配置文件，并对相关参数进行修改。
+3. 进入Milvus设置文件，并对相关参数进行修改。
 
-   1）点击server_config文件，配置Milvus服务
+   1）点击server_config文件，设置Milvus服务参数。
    
-     | 参数            | 参数描述            | 参数值  |
-     |----------------|--------------------------|---------|
-     | address        | Milvus server监听的ip地址 |
-                                                                                                                  
-      - address：目前Milvus server监听的ip地址。 
-      - port：目前Milvus server监听的端口号。
-      - transfer_protocol：Milvus client与server通信的协议，可以是binary, compact或json。 
-      - server_mode：目前支持simple（单线程）和thread_pool（线程池）两种模式。 
-      - gpu_index：目前使用的GPU。
-     
-   2）点击db_config文件，配置Milvus数据库
+     | 参数            | 参数描述                          | 参数值      |
+     |----------------|-----------------------------------|------------|
+     | address        | Milvus server监听的ip地址          |            |
+     | port           | Milvus server监听的端口号          |            |
+     | transfer_protocol | Milvus client与server通信的协议 | binary/compact/json |
+     | server_mode    | server支持的模式                   | simple（单线程）/thread_pool（线程池）|
+     | gpu_index      | 目前使用的GPU                      |               |
+                                                                                                                     
+   2）点击db_config文件，设置Milvus数据库参数。
    
-      - db_path: Milvus数据库文件存储的路径。
-      - db_backend_url: 使用RESTFul API接口访问数据库的ip地址。
-      - db_flush_interval: 插入数据持久化的时间间隔。
+     | 参数               | 参数描述                            | 参数值    |
+     |-------------------|-------------------------------------|----------|
+     | db_path           | Milvus数据库文件存储的路径            |    ？    |
+     | db_backend_url    | 使用RESTFul API接口访问数据库的ip地址 |    ？    |
+     | db_flush_interval | 插入数据持久化的时间间隔              |    ？    |
 
-   3）点击metric_config文件，配置Milvus监控
+   3）点击metric_config文件，设置Milvus监控参数。
    
-      - startup: 选择是否启动监控，on（启动）或off（不启动）。
-      - collector: 连接的监控系统，目前支持prometheus。
-      - prometheus_config（promethus监控相关配置）：
-       - collect_type: prometheus的监控获取方式，支持pull或push方式。
-       - port: 访问prometheus的端口号。
-       - push_gateway_ip_address: push gateway的ip地址，push方式有效。
-       - push_gateway_port: push gateway的端口号，push方式有效。
+     | 参数               | 参数描述                            | 参数值    |
+     |-------------------|-------------------------------------|----------|
+     | startup           | 选择是否启动监控             | on（启动）/ off（不启动) |
+     | collector         | 连接的监控系统               | Prometheus             |
+     | collect_type      | Prometheus的监控获取方式     |   pull / push          |
+     | port              | 访问Prometheus的端口号       | on（启动）/ off（不启动）|
+     | push_gateway_ip_address | push gateway的ip地址   | push                   |
+     | push_gateway_port       | push gateway的端口号   |   push                 |
        
 4. 启动Milvus server。
 
