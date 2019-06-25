@@ -1,5 +1,5 @@
 ---
-id: ReleaseNote-cn
+id: ReleaseNote
 title: Release Note
 sidebar_label: Milvus Docker版本发布说明
 ---

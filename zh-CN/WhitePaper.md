@@ -1,5 +1,5 @@
 ---
-id: WhitePaper-cn
+id: WhitePaper
 title: Milvus白皮书
 sidebar_label: Milvus白皮书
 ---

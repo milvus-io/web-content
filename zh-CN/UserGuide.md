@@ -1,5 +1,5 @@
 ---
-id: UserGuide-cn
+id: UserGuide
 title: Milvus用户指南
 sidebar_label: Milvus用户指南
 ---

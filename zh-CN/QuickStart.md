@@ -1,5 +1,5 @@
 ---
-id: QuickStart-cn
+id: QuickStart
 title: QuickStart
 sidebar_label: Milvus快速入门
 ---
