@@ -12,7 +12,7 @@ Milvus是一款智能向量检索数据库系统，支持大批量高维向量�
 
 Milvus指南主要针对Milvus Docker版管理员和普通用户，读者一般需要有Python/C++等基本编程知识。
 
-## 新手入门
+## 快速入门
 
 ### 确定系统要求
 
@@ -51,7 +51,7 @@ Milvus能很好的运行和部署在x86架构的服务器环境和通用虚拟�
   - [NVIDIA-Docker2](https://github.com/NVIDIA/nvidia-docker)
 
 
-### 安装Milvus
+## 设置Milvus
 
 请按照以下步骤安装Milvus Docker版：
 
@@ -94,14 +94,6 @@ Milvus能很好的运行和部署在x86架构的服务器环境和通用虚拟�
      | port              | 访问Prometheus的端口号       | on（启动）/ off（不启动）|
      | push_gateway_ip_address | push gateway的ip地址   | push                   |
      | push_gateway_port       | push gateway的端口号   |   push                 |
-       
-4. 启动Milvus server。
-
-   ```shell
-   # Start Milvus
-   $ nvidia-docker run -td --runtime=nvidia -p 19530:19530 -v /home/$USER/milvus:/tmp milvus/milvus:latest
-   ```
-  
   
   
 ## 创建数据库
@@ -124,7 +116,7 @@ Milvus提供基于C++/Python的客户端SDK。以Python为例，你可以参照[
  
  
                                
-## 创建Milvus监控中心
+## Milvus监控
 
 如果你想跟踪数据库系统运行表现，你可以选择为Milvus创建监控中心。你可以自行搭建，也可以直接使用我们提供的基于开源监控框架Prometheus的Milvus监控中心。其主要工作流程如下：
 
@@ -135,7 +127,7 @@ Milvus server收集数据 > 利用pull模式把所有数据导入Prometheus > �
 ![Monitoring](assets/Monitoring.png)
 
 
-### 如何使用Prometheus和Grafana监控Milvus
+### 安装设置Milvus监控
 
 1. 安装Prometheus和Grafana。
 
@@ -263,9 +255,10 @@ Milvus server收集数据 > 利用pull模式把所有数据导入Prometheus > �
    ![image-20190620134549612](assets/prometheus.png)
 
 
+## 如何使用Milvus监控
+
 
 ## 障碍排查
-
 
 
 ## 常见问题
