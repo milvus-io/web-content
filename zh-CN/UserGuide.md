@@ -48,6 +48,7 @@ Milvus是一款智能向量检索数据库系统，能很好的运行和部署�
 ### 安装Milvus
 
 请按照以下步骤安装Milvus Docker版：
+
 1. 下载Milvus Docker镜像文件。
 
    ```shell
@@ -58,6 +59,7 @@ Milvus是一款智能向量检索数据库系统，能很好的运行和部署�
 2. 下载Milvus配置文件模板。
 
 3. 进入Milvus配置文件，并对相关参数进行修改。
+
    1）Milvus服务配置
    
       点击server_config文件，并设置以下参数：                                                                                                             
@@ -93,37 +95,24 @@ Milvus是一款智能向量检索数据库系统，能很好的运行和部署�
    # Start Milvus
    $ nvidia-docker run -td --runtime=nvidia -p 19530:19530 -v /home/$USER/milvus:/tmp milvus/milvus:latest
    ```
-
-
-### 配置Milvus
-
-
-
-2. 配置Milvus数据库
-
-   点击db_config文件，并配置以下参数：
-
-   - db_path: Milvus数据库文件存储的路径。
-   - db_backend_url: 使用RESTFul API接口访问数据库的ip地址。
-   - db_flush_interval: 插入数据持久化的时间间隔。
-
-3. 配置Milvus监控参数
-
-   点击metric_config文件，并配置以下参数：
-
-   - startup: 选择是否启动监控，on（启动）或off（不启动）。
-   - collector: 连接的监控系统，目前支持prometheus。
-   - prometheus_config（promethus监控相关配置）：
-     - collect_type: prometheus的监控获取方式，支持pull或push方式。
-     - port: 访问prometheus的端口号。
-     - push_gateway_ip_address: push gateway的ip地址，push方式有效。
-     - push_gateway_port: push gateway的端口号，push方式有效。
   
   
+  
+## 导入向量数据
 
+Milvus提供基于C++/Python的客户端SDK。以Python为例，你可以参照Milvus Python SDK导入特征向量数据，并进行特征向量搜索。
+
+> Note: 对于其他类型的语言，Milvus支持通过RESTful和RPC的访问方法。
+
+
+
+## 使用Milvus进行搜索
+
+恭喜你！你已经完成了Milvus的所有安装配置，并成功使用Milvus试运行了一条向量相似度查询。
+ 
+ 
+                               
 ## 创建Milvus监控系统
-
-### 概述
 
 Milvus的监控系统是基于开源监控框架Prometheus搭建的。目前，Milvus server收集数据后，利用pull模式把所有数据导入Prometheus，然后通过Grafana展示所有监控指标。一旦发生告警，Prometheus会将告警信息可以推送给AlertManager，并通过Email或者WeChat通知用户。告警系统架构如下：
 
@@ -140,7 +129,6 @@ Grafana是一个开源的指标分析及可视化系统。我们使用Grafana来
    - [安装Prometheus Server](https://github.com/prometheus/prometheus#install)
 
    - [安装Grafana](http://docs.grafana.org)
-
 
 2. 配置Prometheus。
 
@@ -186,6 +174,7 @@ Grafana是一个开源的指标分析及可视化系统。我们使用Grafana来
        static_configs:
        - targets: ['localhost:9091']
    ```
+   
    2) 在prometheus根目录下创建serverdown.yml文件，内容如下：
 
    ```yaml
@@ -200,6 +189,7 @@ Grafana是一个开源的指标分析及可视化系统。我们使用Grafana来
    ```
 
 3. 配置alertmanager
+
    1) 在alertmanager根目录下创建 milvus.yml文件，内容如下：
 
    ```
@@ -220,6 +210,7 @@ Grafana是一个开源的指标分析及可视化系统。我们使用Grafana来
        email_configs:
        - to: '××××@××.com'             # receiver mail address
    ```
+   
    2) 指定--config.file=milvus.yml以启动alertmanager，如下：
 
    ```
@@ -259,21 +250,6 @@ Grafana是一个开源的指标分析及可视化系统。我们使用Grafana来
    ![image-20190620191818161](assets/result.png)
 
 
-## 导入向量数据
-
-Milvus提供基于C++/Python的客户端SDK。对于其他类型的语言，Milvus支持通过RESTful和RPC的访问方法。以基于Python的客户端为例，你可以参照Milvus Python SDK输入特征向量数据，并进行特征向量搜索。例如：
-
-
-
-## 使用Milvus进行搜索
-
-恭喜你！你已经完成了Milvus的所有安装配置，并成功使用Milvus试运行了一条向量相似度查询。
-
-
-
-## 障碍排查
-
-
 
 ## 常见问题
 
@@ -309,7 +285,7 @@ Milvus提供基于C++/Python的客户端SDK。对于其他类型的语言，Milv
 
 ## 技术支持
 
-- 如果你有任何问题和建议，请联系邮箱：support@zilliz.com
+- 如果你有任何问题和建议，请联系邮箱：support@zilliz.com。
 
-- 对于有企业合作的用户，请拨打客服电话：400 …..
+- 对于企业合作用户，请拨打客服电话：400 …。
 
