@@ -1,6 +1,6 @@
 ---
-id: QuickStart
-title: QuickStart
+id: QuickStart-en
+title: Milvus Quick Start
 sidebar_label: Milvus Quick Start
 ---
 
