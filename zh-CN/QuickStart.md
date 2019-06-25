@@ -1,4 +1,8 @@
-
+---
+id: QuickStart
+title: QuickStart
+sidebar_label: Milvus快速入门
+---
 
 # Milvus快速入门
 
@@ -7,47 +11,47 @@
 ## 安装前提
 1. Milvus Docker版目前仅在Linux系统上运行，请确保你的Linux系统符合以下版本：
 
-| Linux 操作系统平台       | 版本        |
-| :----------------------- | :---------- |
-| CentOS                   | 7.5及以上   |
-| Ubuntu LTS               | 16.04及以上 |
+   | Linux 操作系统平台       | 版本        |
+   | :----------------------- | :---------- |
+   | CentOS                   | 7.5及以上   |
+   | Ubuntu LTS               | 16.04及以上 |
 
 2. 请确保你已经安装以下软件包，以便Milvus Docker版能正常运行：
 
-- [CUDA 9.0及以上](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html)
-- [Docker CE](https://docs.docker.com/install/)
-- [NVIDIA-Docker2](https://github.com/NVIDIA/nvidia-docker)
+   - [CUDA 9.0及以上](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html)
+   - [Docker CE](https://docs.docker.com/install/)
+   - [NVIDIA-Docker2](https://github.com/NVIDIA/nvidia-docker)
 
 
 ## 安装Milvus Docker版
 
 1. 下载Milvus Docker镜像文件。
 
-```shell
-# Download Milvus Docker image
-$ docker pull milvusdb/milvus:latest
-```
+   ```shell
+   # Download Milvus Docker image
+   $ docker pull milvusdb/milvus:latest
+   ```
 
 2. 启动Milvus server。
 
-```shell
-# Start Milvus
-$ nvidia-docker run -td --runtime=nvidia -p 19530:19530 -v /home/$USER/milvus:/tmp milvus/milvus:latest
-```
+   ```shell
+   # Start Milvus
+   $ nvidia-docker run -td --runtime=nvidia -p 19530:19530 -v /home/$USER/milvus:/tmp milvus/milvus:latest
+   ```
 
 3. 获得Milvus container id。
 
-```shell
-# Get Milvus container id
-$ docker ps -a
-```
+   ```shell
+   # Get Milvus container id
+   $ docker ps -a
+   ```
 
 4. 确认Milvus运行状态。
 
-```shell
-# Make sure Milvus is up and running
-$ docker logs <milvus container id>
-```
+   ```shell
+   # Make sure Milvus is up and running
+   $ docker logs <milvus container id>
+   ```
 
 ## 运行Python示例代码
 
@@ -56,25 +60,25 @@ $ docker logs <milvus container id>
 1. 请确保系统已经安装了[Python3](https://www.python.org/downloads/)。
 2. 安装Milvus Python SDK。
 
-```shell
-# Install Milvus Python SDK
-$ pip install pymilvus
-```
+   ```shell
+   # Install Milvus Python SDK
+   $ pip install pymilvus
+   ```
 
-如果需要进一步了解Milvus Python SDK，请阅读[Milvus Python SDK使用手册](https://pypi.org/project/pymilvus)。
+   如果需要进一步了解Milvus Python SDK，请阅读[Milvus Python SDK使用手册](https://pypi.org/project/pymilvus)。
 
 3. 下载Python示例代码：https://github.com/milvus-io/pymilvus/blob/master/examples/example.py
 4. 运行示例。
 
-```shell
-# Run Milvus Python example
-$ python3 example.py
-```
+   ```shell
+   # Run Milvus Python example
+   $ python3 example.py
+   ```
 
 5. 确认程序正确运行。
 
-```shell
-Query result is correct.
-```
+   ```shell
+   Query result is correct.
+   ```
 如果你看到以上查询结果提示信息，恭喜你！这意味着你已经成功完成了在Milvus上的第一次向量相似度查询。
-## 
+
