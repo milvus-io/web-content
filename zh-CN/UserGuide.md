@@ -48,7 +48,32 @@ Milvus是一款智能向量检索数据库系统，能很好的运行和部署�
 ### 安装Milvus
 
 请按照以下步骤安装Milvus Docker版：
-1. 
+1. 下载Milvus Docker镜像文件。
+
+   ```shell
+   # Download Milvus Docker image
+   $ docker pull milvusdb/milvus:latest
+   ```
+
+2. 下载Milvus配置文件模板。
+
+3. 进入Milvus配置文件，并对相关参数进行修改。
+   - 点击server_config文件，并设置以下参数：                                                                                                             
+     - address：目前Milvus server监听的ip地址。 
+     - port：目前Milvus server监听的端口号。
+     - transfer_protocol：Milvus client与server通信的协议，可以是binary, compact或json。 
+     - server_mode：目前支持simple（单线程）和thread_pool（线程池）两种模式。 
+     - gpu_index：目前使用的GPU。
+     
+   - 点击db_config文件，并设置以下参数：
+   - 点击metric_config文件，并设置以下参数：
+
+4. 启动Milvus server。
+
+   ```shell
+   # Start Milvus
+   $ nvidia-docker run -td --runtime=nvidia -p 19530:19530 -v /home/$USER/milvus:/tmp milvus/milvus:latest
+   ```
 
 
 ### 配置Milvus
