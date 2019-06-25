@@ -93,9 +93,9 @@ Milvus系统由四部分组成：
 
 
 
-## Milvus安装
+## 新手入门
 
-### Milvus Docker版安装前提条件
+### 确定系统要求
 
 Milvus是一款面向向量检索的数据库系统，可以很好的运行和部署在x86架构的服务器环境和主流的虚拟化环境下，也支持目前主流的网络硬件设备。操作系统方面，Milvus支持目前主流的Linux操作系统环境。
 
@@ -130,16 +130,16 @@ Milvus 提供了基于Prometheus监控和Grafana的展示平台，可以对数�
 - [NVIDIA-Docker2](https://github.com/NVIDIA/nvidia-docker)
 
 
-### Milvus安装
+### 安装Milvus
 
 关于Milvus具体安装步骤，请参照 [Milvus Quick Start](https://github.com/milvus-io/docs/edit/master/QuickStart-cn.md)。
 
 
-## Milvus配置
+### 配置Milvus
 
 在成功安装Milvus后，请进入Milvus Docker镜像文件进行相关配置。目前Milvus的Docker版配置包含以下几种：
 
-### Milvus服务配置
+#### 配置Milvus服务
 
 点击server_config文件，并配置以下参数：
 
@@ -149,7 +149,7 @@ Milvus 提供了基于Prometheus监控和Grafana的展示平台，可以对数�
 - server_mode：目前支持simple（单线程）和thread_pool（线程池）两种模式。 
 - gpu_index：目前使用的GPU。
 
-### Milvus数据库配置
+#### 配置Milvus数据库
 
 点击db_config文件，并配置以下参数：
 
@@ -157,7 +157,7 @@ Milvus 提供了基于Prometheus监控和Grafana的展示平台，可以对数�
 - db_backend_url: 使用RESTFul API接口访问数据库的ip地址。
 - db_flush_interval: 插入数据持久化的时间间隔。
 
-### Milvus监控参数配置
+#### 配置Milvus监控参数
 
 点击metric_config文件，并配置以下参数：
 
@@ -171,7 +171,7 @@ Milvus 提供了基于Prometheus监控和Grafana的展示平台，可以对数�
   
   
 
-## Milvus监控
+## 创建Milvus监控系统
 
 ### 概述
 
@@ -309,12 +309,20 @@ Grafana是一个开源的指标分析及可视化系统。我们使用Grafana来
    ![image-20190620191818161](./img/result.png)
 
 
-## 如何使用Milvus
+## 导入向量数据
 
 Milvus提供基于C++/Python的客户端SDK。对于其他类型的语言，Milvus支持通过RESTful和RPC的访问方法。以基于Python的客户端为例，你可以参照Milvus Python SDK输入特征向量数据，并进行特征向量搜索。例如：
 
 
+
+## 使用Milvus进行搜索
+
 恭喜你！你已经完成了Milvus的所有安装配置，并成功使用Milvus试运行了一条向量相似度查询。
+
+
+
+## 障碍排查
+
 
 
 ## 常见问题
