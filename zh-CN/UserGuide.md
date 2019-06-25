@@ -27,7 +27,8 @@ Milvus是一种稳定可靠、可弹性伸缩的向量数据库系统，支持�
 ### 通用描述说明
 
 
-## [快速入门](https://github.com/milvus-io/docs/blob/dev/zh-CN/QuickStart.md)
+## 快速入门
+关于Milvus的安装和试运行，请访问：[Milvus快速入门](https://github.com/milvus-io/docs/blob/dev/zh-CN/QuickStart.md)
 
 
 ## 设置Milvus
