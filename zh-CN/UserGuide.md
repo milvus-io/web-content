@@ -8,11 +8,21 @@ sidebar_label: Milvus用户指南
 
 ## 前言
 
-Milvus是一款智能向量检索数据库系统，支持大批量高维向量的秒级响应。该指南主要介绍了Milvus的安装配置和使用，以及Milvus监控系统的创建。
+### 概述
+
+
+### 声明
+
+
+### 通用描述说明
+
+Milvus是一款分布式向量检索数据库系统，支持大批量高维向量的秒级响应。该指南主要介绍了Milvus的安装配置和使用，以及Milvus监控系统的创建。
 
 Milvus指南主要针对Milvus Docker版管理员和普通用户，读者一般需要有Python/C++等基本编程知识。
 
-## 快速入门
+
+## [快速入门](https://github.com/milvus-io/docs/blob/dev/zh-CN/QuickStart.md)
+
 
 ### 确定系统要求
 
