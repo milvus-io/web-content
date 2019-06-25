@@ -118,7 +118,13 @@ Milvus提供基于C++/Python的客户端SDK。以Python为例，你可以参照[
                                
 ## 创建Milvus监控系统
 
-Milvus的监控系统是基于开源监控框架Prometheus搭建的。目前，Milvus server收集数据后，利用pull模式把所有数据导入Prometheus，然后通过Grafana展示所有监控指标。一旦发生告警，Prometheus会将告警信息可以推送给AlertManager，并通过Email或者WeChat通知用户。告警系统架构如下：
+如果你想跟踪数据库系统运行表现，你可以选择为Milvus创建监控系统。你可以自行搭建，也可以直接使用我们提供的基于开源监控框架Prometheus的Milvus监控系统。 
+
+该监控系统的主要工作流程：
+
+Milvus server收集数据 > 利用pull模式把所有数据导入Prometheus > 通过Grafana展示所有监控指标。
+
+一旦发生告警，Prometheus会将告警信息可以推送给AlertManager，并通过Email或者WeChat通知用户。告警系统架构如下：
 
 ![Monitoring](assets/Monitoring.png)
 
@@ -136,7 +142,7 @@ Grafana是一个开源的指标分析及可视化系统。我们使用Grafana来
 
 2. 配置Prometheus。
 
-   1) 打开prometheus根目录下的prometheus.yml配置文件，并将alerting, rule_files和scrape_configs更新如下：
+   1) 打开prometheus根目录下的prometheus.yml配置文件，并对alerting, rule_files和scrape_configs文件做如下跟新：
    
    ```yaml
    # my global config
