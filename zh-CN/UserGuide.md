@@ -106,15 +106,13 @@ Milvus能很好的运行和部署在x86架构的服务器环境和通用虚拟�
   
 ## 导入向量数据
 
-Milvus提供基于C++/Python的客户端SDK。以Python为例，你可以参照Milvus Python SDK导入特征向量数据，并进行特征向量搜索。
+Milvus提供基于C++/Python的客户端SDK。以Python为例，你可以参照[Milvus Python SDK](https://pypi.org/project/pymilvus)导入特征向量数据，并进行特征向量搜索。
 
 > Note: 对于其他类型的语言，Milvus支持通过RESTful和RPC的访问方法。
 
 
 
 ## 使用Milvus进行搜索
-
-恭喜你！你已经完成了Milvus的所有安装配置，并成功使用Milvus试运行了一条向量相似度查询。
  
  
                                
