@@ -1,3 +1,9 @@
+---
+id: UserGuide
+title: Milvus用户指南
+sidebar_label: Milvus用户指南
+---
+
 # Milvus用户指南
 
 ## Milvus简介
@@ -61,7 +67,7 @@ Milvus提供基于Prometheus的监控和Grafana的可视化展示。
 
 ### 系统架构
 
-![MilvusArch](img/MilvusArch.png)
+![MilvusArch](assets/MilvusArch.png)
 
 Milvus系统由四部分组成：
 
@@ -167,11 +173,11 @@ metric_config:
 
 Milvus的监控系统是基于开源监控框架Prometheus搭建的。目前，Milvus server收集数据后，利用的pull模式把所有数据导入Prometheus。然后，我们就通过Grafana展示所有监控指标了，同时一旦发生告警Prometheus会将告警信息可以推送给AlertManager，后通过E-Mail或者WeChat将通知用户用户。告警系统架构如下：
 
-![Monitoring](./img/Monitoring.png)
+![Monitoring](assets/Monitoring.png)
 
 Grafana是一个开源的指标分析及可视化系统。我们使用 Grafana 来展示 Milvus 的各项系统指标，如下图：
 
-![image-20190620134549612](./img/prometheus.png)
+![image-20190620134549612](assets/prometheus.png)
 
 ### 使用Prometheus和Grafana监控Milvus
 
@@ -273,33 +279,33 @@ receivers:
 
 首先我们先选择prometheus作为我们的data source type。
 
-![image-20190620191640605](./img/datasource.png)
+![image-20190620191640605](assets/datasource.png)
 
 然后将HTTP中的URL设置成prometheus的服务器地址，将ACCESS设置成Browser，点击Save & Test。
 
-![image-20190620191702697](./img/settings.png)
+![image-20190620191702697](assets/settings.png)
 
 
 
 下一步我们需要设置面板，点击左上角的 New dashboard。
 
-![image-20190620191721734](./img/dashboard.png)
+![image-20190620191721734](assets/dashboard.png)
 
 
 
 点击右侧的Import dashboard。
 
-![image-20190620191747161](./img/importdashboard.png)
+![image-20190620191747161](assets/importdashboard.png)
 
 最后一步，将json配置文件导入系统。json配置文件下载：
 
-![image-20190620191802408](./img/importjson.png)
+![image-20190620191802408](assets/importjson.png)
 
 
 
 成功之后，将会展示出我们提供的监控面板
 
-![image-20190620191818161](./img/result.png)
+![image-20190620191818161](assets/result.png)
 
 
 

@@ -1,3 +1,9 @@
+---
+id: Changelog
+title: Changelog
+sidebar_label: Milvus Changelog
+---
+
 # Changelog
 
 Please mark all change in change log and use the ticket from JIRA.
