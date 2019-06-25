@@ -12,6 +12,10 @@ Milvus是Zilliz公司针对AI应用大规模落地，当前工业界并没有一
 
 ### 相关概念
 
+#### 向量检索技术
+
+##### 
+
 #### 特征向量
 
 现实世界的事物，复杂而多元，通常是很难使用少数几个简单数能精确描述的。因此，我们会使用特征向量来精确描述一个事物，特征向量就是现实事物的数学抽象。现在的人工智能技术核心能力，就是利用各种计算机算法对现实世界的原始数据进行特征提取，特征处理和特征选择，最终形成准确描述该事物的特征向量。
@@ -49,6 +53,7 @@ Milvus是Zilliz公司针对AI应用大规模落地，当前工业界并没有一
 与很多面向向量检索的算法要求不同，Milvus支持对于特征向量的实时插入，支持边插入数据边查询数据。
   
 ### 简单易用
+
 #### 高易用性
 提供了基于C++/Python的客户端SDK。对于其他类型的语言，Milvus支持通过RESTful和RPC的访问方法。
 
@@ -69,6 +74,27 @@ Milvus是Zilliz公司针对AI应用大规模落地，当前工业界并没有一
 
 
 ## 产品架构
+
+![MilvusArch](assets/MilvusArch.png)
+
+Milvus系统由四部分组成：
+
+- Milvus Server
+
+  负责接收客户端发送的请求。收到请求后，Load Balancer负责把请求发送到负载较小的Milvus Proxy。Milvus Proxy会根据查询向量表的元数据，分发任务到不同的Milvus Core做计算。当所有的Milvus Core都计算结束后，Mivlus Proxy负责合并所有的结算结果，并返回给客户端。
+
+- Storage Cluster
+
+  负责提供强一致和高可靠的数据存储，目前该集群是基于MinIO对象存储搭建的。
+
+- Meta Management
+
+  负责提供Milvus集群和存储集群的元数据管理，目前是基于MySQL实现的。
+
+- Milvus Monitoring
+
+  Milvus使用开源时序数据库Prometheus作为监控和性能指标信息存储方案，使用Grafana作为可视化组件进行展示。
+
 
 
 ## 应用场景
