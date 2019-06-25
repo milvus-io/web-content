@@ -6,11 +6,17 @@ sidebar_label: Milvus用户指南
 
 # Milvus用户指南
 
+## 前言
+
+Milvus是一款智能向量检索数据库系统，支持大批量高维向量的秒级响应。该指南主要介绍了Milvus的安装配置和使用，以及Milvus监控系统的创建。
+
+该指南主要针对Milvus Docker版管理员和普通用户，读者一般需要有Python/C++等基本编程知识。
+
 ## 新手入门
 
 ### 确定系统要求
 
-Milvus是一款智能向量检索数据库系统，能很好的运行和部署在x86架构的服务器环境和通用虚拟化环境下，也支持主流的网络硬件设备。操作系统方面，Milvus目前支持Linux操作系统环境。
+Milvus能很好的运行和部署在x86架构的服务器环境和通用虚拟化环境下，也支持主流的网络硬件设备。操作系统方面，Milvus目前支持Linux操作系统环境。
 
 在安装并运行Milvus前，你需要先确定系统及软硬件环境是否符合以下要求：
 
@@ -34,7 +40,7 @@ Milvus是一款智能向量检索数据库系统，能很好的运行和部署�
 
 - 客户端浏览器要求
 
-  Milvus 提供了基于Prometheus监控和Grafana的展示平台，可以对数据库的各项指标进行可视化展示，兼容目前主流的Web浏览器如：微软IE、Google Chrome、Mozilla Firefox和Safari等。
+  Milvus提供了基于Prometheus监控和Grafana的展示平台，可以对数据库的各项指标进行可视化展示，兼容目前主流的Web浏览器如：微软IE、Google Chrome、Mozilla Firefox和Safari等。
 
 - 软件包安装要求
 
