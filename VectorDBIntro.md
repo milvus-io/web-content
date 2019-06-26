@@ -8,7 +8,8 @@ A vector is a series of numbers. It is like a matrix with only one row but multi
 A feature vector is a vector that contains information describing an object's important characteristics. An example of a feature vector you might be familiar with is RGB (red-green-blue) color descriptions. A color can be described by how much red, blue, and green there is in it. A feature vector for this would be color = [R, G, B].
 
 ### Why feature vector
-Compared to traditional scalar type of data, feature vectors 
+A scalar, data type used in traditional relational databases, describes only one property of an object. However, with the booming of machine learning and artificial intelligence, the need to process data with more than one dimention is growing fast. And this is where feature vectors come along. Compared to traditional scalar type of data, a feature vector describes an object from multiple dimentions. 
+
 In machine learning, feature vectors are used to represent numeric or symbolic characteristics, called features, of an object in a mathematical, easily analyzable way. They are important for many different areas of machine learning and pattern processing. Machine learning algorithms typically require a numerical representation of objects in order for the algorithms to do processing and statistical analysis.
 
 ### Use cases
@@ -25,13 +26,12 @@ Feature vectors are mainly used in these specific areas:
 - Spam-fighting initiatives
   Features are abundant. They can be IP location, text structure, frequency of certain words, or certain email headers.
 
-Feature vectors are used in classification problems, artificial neural networks, and k-nearest neighbors algorithms in machine learning.
 
 ## Traditional Database
 
 
 ## Vector indexing
 
-## Characteristic Vector Database
+## Feature Vector Database
 
 ## Milvus Database
