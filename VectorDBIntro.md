@@ -17,13 +17,16 @@ Feature vectors are used widely in machine learning because of the effectiveness
 
 Feature vectors are mainly used in these specific areas:
 
-- Image processing, 
+- Image processing
+
   Features can be gradient magnitude, color, grayscale intensity, edges, areas, and more. Feature vectors are particularly popular for analyses in image processing because of the convenient way attributes about an image, like the examples listed, can be compared numerically once put into feature vectors.
 
 - Speech recognition
+
   Features can be sound lengths, noise level, noise ratios, and more.
 
 - Spam-fighting initiatives
+
   Features are abundant. They can be IP location, text structure, frequency of certain words, or certain email headers.
 
 
