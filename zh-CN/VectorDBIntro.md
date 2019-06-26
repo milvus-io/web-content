@@ -80,7 +80,7 @@ Milvus是Zilliz公司针对AI应用大规模落地，当前工业界并没有一
 
 |                   |Milvus    |  FAISS  |   SPTAG   |
 |--------------------|----------|---------|-----------|
-| CPU/GPU异构计算能力 | Yes      |  Yes    |    No     |
+| CPU/GPU异构计算能力 |:heavy_check_mark:  |:heavy_check_mark: |:heavy_multiplication_x: |
 | 量化索引           |   Yes     |  Yes    |    No     |
 | 哈希索引           |   Yes     |  Yes    |    No     |
 | 图索引             |  Yes      |  No     |   Yes    |
