@@ -78,11 +78,10 @@ Milvus是一种稳定可靠、可弹性伸缩的特征向量数据库系统，�
 
 ### 通用描述说明
 
-| 描述      |    说明      |
-|-----------|----------------|
-| 
-
-
+| 描述       |    说明                                 |
+|-----------|-----------------------------------------|
+| Consolas  | Consolas字体文字表示段落中出现的代码或命令 |
+| 注意      | 注意是对某一个操作或解释的补充说明          |
 
 
 ## 快速入门
@@ -90,25 +89,19 @@ Milvus是一种稳定可靠、可弹性伸缩的特征向量数据库系统，�
 
 
 ## Milvus数据库管理
-
 ### Milvus目录结构
+
+
 ### 设置Milvus
 #### 设置Milvus服务
-#### 设置Milvus日志
 
-### Milvus监控
-#### 监控概述
-#### 监控指标
-#### 监控安装设置
+请按照以下步骤设置Milvus服务：
 
-
-请按照以下步骤设置Milvus Docker版：
-
-1. 下载Milvus设置文件模板。
+1. 下载Milvus服务设置文件模板。
 
 Temp/Milvus数据结构 @老莫
 
-2. 进入Milvus设置文件，并对相关参数进行修改。
+2. 进入Milvus文件模板，并对相关参数进行修改。
 
    1）点击server_config文件，设置Milvus服务参数。
    
@@ -139,32 +132,14 @@ Temp/Milvus数据结构 @老莫
      | push_gateway_ip_address | push gateway的ip地址   | push                   |
      | push_gateway_port       | push gateway的端口号   |   push                 |
   
-  3. 将修改好的文件放到
-  
-  Note：以下操作都是在Python交互环境下进行的。
-## 创建数据库
+3. 将修改好的文件替换掉temp/Milvus/conf/Milvus config路径下的文件。
+4. 重启Milvus server。
 
 
+#### 设置Milvus日志
 
-## 导入向量数据
-
-
-
-## 用Milvus进行搜索
-
-
-
-## 删除数据库 （跟新Python SDK)@Jin Hai
-
-Milvus提供基于C++/Python的客户端SDK。以Python为例，你可以参照[Milvus Python SDK](https://pypi.org/project/pymilvus)和[使用示例](https://github.com/milvus-io/pymilvus/blob/master/examples/example.py)导入特征向量数据，并进行特征向量搜索。
-
-> Note: 对于其他类型的语言，Milvus支持通过RESTful和RPC的访问方法。
- 
- 
-                               
-## Milvus监控
-
-## 监控概述
+### Milvus监控
+#### 监控概述
 如果你想跟踪数据库系统运行表现，你可以选择为Milvus创建监控中心。你可以自行搭建，也可以直接使用我们提供的基于开源监控框架Prometheus的Milvus监控中心。其主要工作流程如下：
 
 Milvus server收集数据 > 利用pull模式把所有数据导入Prometheus > 通过Grafana展示各项监控指标。
@@ -173,8 +148,10 @@ Milvus server收集数据 > 利用pull模式把所有数据导入Prometheus > �
 
 ![Monitoring](assets/Monitoring.png)
 
+#### 监控指标
 
-### 安装设置Milvus监控
+
+#### 监控安装设置
 
 1. 安装Prometheus和Grafana。
 
@@ -302,8 +279,23 @@ Milvus server收集数据 > 利用pull模式把所有数据导入Prometheus > �
    ![image-20190620134549612](assets/prometheus.png)
 
 
-### 如何使用Milvus监控
+## 创建数据库
+> 注意：以下操作都是在Python交互环境下进行的。对于其他类型的语言，Milvus支持通过RESTful和RPC的访问方法。
+                            
 
+## 导入向量数据
+
+
+
+## 用Milvus进行搜索
+
+
+
+## 删除数据库 （跟新Python SDK)@Jin Hai
+
+Milvus提供基于C++/Python的客户端SDK。以Python为例，你可以参照[Milvus Python SDK](https://pypi.org/project/pymilvus)和[使用示例](https://github.com/milvus-io/pymilvus/blob/master/examples/example.py)导入特征向量数据，并进行特征向量搜索。
+
+                               
 
 ## 应用场景
 
@@ -311,9 +303,4 @@ Milvus server收集数据 > 利用pull模式把所有数据导入Prometheus > �
 ## 障碍排查
 
 
-## 技术支持
-
-- 如果你有任何问题和建议，请联系邮箱：support@zilliz.com。
-
-- 对于企业合作用户，请拨打客服电话：400 …。
 
