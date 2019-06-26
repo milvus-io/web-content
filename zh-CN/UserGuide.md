@@ -232,6 +232,9 @@ Milvus server收集数据 > 利用pull模式把所有数据导入Prometheus > �
 ### 如何使用Milvus监控
 
 
+## 应用场景
+
+
 ## 障碍排查
 
 
