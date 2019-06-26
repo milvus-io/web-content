@@ -50,7 +50,7 @@ sidebar_label: Milvus快速入门
 
    ```shell
    # Start Milvus
-   $ nvidia-docker run -td --runtime=nvidia -p 19530:19530 -v /home/$USER/milvus:/tmp milvus/milvus:latest
+   $ nvidia-docker run -td --runtime=nvidia -p 19530:19530 -v /home/$USER/milvus:/opt/milvus milvusdb/milvus:latest
    ```
 
 3. 获得Milvus container id。
