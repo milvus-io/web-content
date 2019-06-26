@@ -62,7 +62,7 @@ Milvus数据库管理
 ## 前言
 
 ### 概述
-Milvus是一种稳定可靠、可弹性伸缩的特征向量数据库系统，支持大批量高维向量的秒级响应。基于分布式文件系统和高性能存储，RDS支持MySQL、SQL Server、PostgreSQL、PPAS（高度兼容 Oracle）和MariaDB引擎，并且提供了容灾、备份、恢复、监控、迁移等方面的全套解决方案，彻底解决数据库运维的烦恼。关于Milvus的优势与价值，请参见[产品优势](https://github.com/milvus-io/docs/blob/dev/zh-CN/MilvusHighlights)。
+Milvus是一种稳定可靠、可弹性伸缩的特征向量数据库系统，支持大批量高维向量的秒级响应。关于Milvus的优势与价值，请参见[产品优势](https://github.com/milvus-io/docs/blob/dev/zh-CN/MilvusHighlights)。
 
 本文档向您介绍如何对Milvus进行设置和管理，帮助您深入了解Milvus的特性和功能。
 
@@ -375,6 +375,9 @@ Milvus做特征向量检索时典型应用架构如下：
 
 - **基础设施**：Milvus实现向量数据的存储，MySQL实现结构化数据存储，Minio实现非结构化数据(人脸图片)存储。
 
+#### 示例
+
+
 
 
 ### 案例 2 - 基于Milvus的非标车搜索
@@ -431,7 +434,7 @@ Milvus做特征向量检索时典型应用架构如下：
   - Minio 实现商品图片的存储。
   - MySQL 实现用户画像信息存储。
   
-#### 示例
+
 
 
 
