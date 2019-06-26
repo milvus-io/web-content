@@ -78,7 +78,10 @@ Milvus是Zilliz公司针对AI应用大规模落地，当前工业界并没有一
 
 与当前工业界其它向量检索工具相比，Milvus具有以下性能优势：
 
-| Milvus    |  FAISS   |   SPTAG   |
+|                   |Milvus    |  FAISS  |   SPTAG   |
+|-------------------|----------|---------|-----------|
+|CPU/GPU异构计算能力 | Yes      |  Yes    |    No     |
+|量化索引           |   Yes     |  Yes    |    No     |
 
 
 
