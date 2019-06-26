@@ -27,11 +27,17 @@ Feature vectors are mainly used in these specific areas:
   Features are abundant. They can be IP location, text structure, frequency of certain words, or certain email headers.
 
 
-## Traditional Database
+## Traditional database & feature vector indexing
+Traditional relational database are designed to organize alphanumeric data into interrelated collections. However, this technology is not well suited to the management of multimedia information. The feature vector data type, vector storing and indexing methods, the large size of media objects are entirely foreign to traditional databases. 
+
+Although some traditional database now provide plug-ins tailored for feature vector indexing, for example  these toos are far from good enough. 
 
 
-## Vector indexing
+## Vector indexing methods
 
-## Feature Vector Database
 
-## Milvus Database
+## Feature vector database
+
+
+
+## Milvus database
