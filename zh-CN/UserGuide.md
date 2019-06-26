@@ -24,18 +24,36 @@ Milvus是一种稳定可靠、可弹性伸缩的向量数据库系统，支持�
 ### 声明
 本文档内容仅作为指导使用，文档中的所有内容不构成任何明示或暗示的担保。
 
+### 基本概念 @Jin Hai
+
+
 ### 通用描述说明
+
+
 
 
 ## 快速入门
 关于Milvus的安装和试运行，请访问：[Milvus快速入门](https://github.com/milvus-io/docs/blob/dev/zh-CN/QuickStart.md)
 
 
-## 设置Milvus
+## Milvus数据库管理
+
+### Milvus目录结构
+### 设置Milvus
+#### 设置Milvus服务
+#### 设置Milvus日志
+
+### Milvus监控
+#### 监控概述
+#### 监控指标
+#### 监控安装设置
+
 
 请按照以下步骤设置Milvus Docker版：
 
 1. 下载Milvus设置文件模板。
+
+Temp/Milvus数据结构 @老莫
 
 2. 进入Milvus设置文件，并对相关参数进行修改。
 
@@ -68,7 +86,9 @@ Milvus是一种稳定可靠、可弹性伸缩的向量数据库系统，支持�
      | push_gateway_ip_address | push gateway的ip地址   | push                   |
      | push_gateway_port       | push gateway的端口号   |   push                 |
   
+  3. 将修改好的文件放到
   
+  Note：以下操作都是在Python交互环境下进行的。
 ## 创建数据库
 
 
@@ -81,7 +101,7 @@ Milvus是一种稳定可靠、可弹性伸缩的向量数据库系统，支持�
 
 
 
-## 删除数据库
+## 删除数据库 （跟新Python SDK)@Jin Hai
 
 Milvus提供基于C++/Python的客户端SDK。以Python为例，你可以参照[Milvus Python SDK](https://pypi.org/project/pymilvus)和[使用示例](https://github.com/milvus-io/pymilvus/blob/master/examples/example.py)导入特征向量数据，并进行特征向量搜索。
 
