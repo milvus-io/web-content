@@ -78,18 +78,18 @@ Milvus是Zilliz公司针对AI应用大规模落地，当前工业界并没有一
 
 与当前工业界其它向量检索工具相比，Milvus具有以下性能优势：
 
-|                   |Milvus    |  FAISS  |   SPTAG   |
-|--------------------|----------|---------|-----------|
-| CPU/GPU异构计算能力 |:heavy_check_mark:  |:heavy_check_mark: |:heavy_multiplication_x: |
-| 量化索引           |   Yes     |  Yes    |    No     |
-| 哈希索引           |   Yes     |  Yes    |    No     |
-| 图索引             |  Yes      |  No     |   Yes    |
-| 高可用设计         |   Yes     |  No      |    No    |
-| 分布式架构         |   Yes     |   No     |    No    |
-| 易用标准化用户接口  |    Yes    |   No     |    No    |
-| 图形化监控工具      |    Yes    |   No     |    No    |
-| 企业级用户支持      |    Yes    |   No     |    No    |
-| 灵活的商业模式      |    Yes    |   No     |   No     |
+|                    |Milvus                 |  FAISS               |   SPTAG   |
+|--------------------|-----------------------|----------------------|-----------|
+| CPU/GPU异构计算能力 |:heavy_check_mark:     | :heavy_check_mark:    |:x: |
+| 量化索引           | :heavy_check_mark:     | :heavy_check_mark:   |    :x:    |
+| 哈希索引           | :heavy_check_mark:     | :heavy_check_mark:   |    :x:    |
+| 图索引             | :heavy_check_mark:     | :x:                  |   :heavy_check_mark:|
+| 高可用设计         | :heavy_check_mark:     |  :x:                 |    :x:    |
+| 分布式架构         | :heavy_check_mark:     |  :x:                 |   :x:     |
+| 易用标准化用户接口  | :heavy_check_mark:     |  :x:                 |   :x:     |
+| 图形化监控工具      | :heavy_check_mark:    |   :x:                 |    :x:   |
+| 企业级用户支持      | :heavy_check_mark:    |   :x:                 |    :x:   |
+| 灵活的商业模式      | :heavy_check_mark:    |   :x:                 |  :x:     |
  
 
 
