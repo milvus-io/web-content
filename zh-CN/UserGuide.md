@@ -369,15 +369,22 @@ Milvus server收集数据 > 利用pull模式把所有数据导入Prometheus > �
    
    ```
 ### 创建数据表格结构
+我们以创建Table test01为例，向您展示如何创建一张数据表。以下是数据表格相关参数，在创建表格时可以根据实际需求选择：
 
-1. 准备数据表格参数
-   输入您要创建的数据库的相关参数（param）。
+|  参数  |  描述  |  类型   |  参考值   |
+| ------------| --------------| --------| ---------|
+| table_name  | name of the table to create| string | 'some_table_name' |
+| dimension | dimension of the vectors stored in the table| integer | 0 < dimension <= 10000, typically =128, 256 or 518 
+| index_type |There are 3 types: `FLAT`,`IVFLAT` and `INVALID`. IndexType is default to `INVALID`, which means user should self-set other types rather than using default one. `FLAT` means vectors are processed in CPU and searching operation is flat. `IVFLAT` means vectors are processed in GPU and index will be built, and searching operation will be faster. But if there's no GPU and index_type is set to `IVFLAT`, an error will occur. |IndexType|IndexType.FLAT, IndexType.IVFLAT, IndexType.INVALIDE(default)|
+
+1. 准备数据表格参数。
+  
    ```
    # Prepare param
    $ param = {'table_name'='test01', 'dimension'=256, 'index_type'=IndexType.FLAT, 'store_raw_vector'=False}
    ```
    
-2. 创建表格
+2. 创建表格Table test01。
 
    ```
    # Create a table
@@ -385,7 +392,7 @@ Milvus server收集数据 > 利用pull模式把所有数据导入Prometheus > �
    $ Status(message='Table test01 created!', code=0)
    ```
    
-3. 检查确认已创建数据库的信息
+3. 检查确认已创建数据库的信息。
    ```
    # Confirm table info.
    $ status, table = milvus.describe_table('test01')
@@ -393,13 +400,47 @@ Milvus server收集数据 > 利用pull模式把所有数据导入Prometheus > �
    $ print(table)
    ```                        
 
+
 ## 导入向量数据
-成功创建数据库后，您可以批量导入向量数据。当然，进行此操作的前提是您已经有了多维的向量数据。现在，你可以向
+成功创建数据表格后，您可以向表格批量导入向量数据。当然，进行此操作的前提是您已经有了多维的向量数据。导入数据前，请先了解数据导入相关参数：
+
+|参数|描述|类型|参考值|
+|---------|-----------|----|-----|
+|table_name| Name of the table to importing vectors| string| 'some_table_name'|
+|records| A list of vectors being added into the table, each vector's `dimension` should be identical to table's `dimension`. Each vector should be a list of float. |2-dimension list|[[0.1, 0.2, ...], ...]
+
+紧接着上面的例子，以下展示如何向Table test01导入20条256维的向量数据：
+import random
+>>> from pprint import pprint
+
+>>> dim = 256  # Dimension of the vector
+
+# Initialize 20 vectors of 256-dimension
+>>> fake_vectors = [[random.random() for _ in range(dim)] for _ in range(20)]
+
+
+
+>>> status, ids = milvus.add_vectors(table_name='test01', records=vectors)
+>>> print(status)
+Status(code=0, message='Success')
+>>> pprint(ids) # List of ids returned
+23455321135511233
+12245748929023489
+...
+
 
 
 ## 用Milvus进行搜索
+现在，您已经在创建好的表格里成功导入了向量数据，您可以用Milvus搜索你需要的数据了。在此，你不仅可以批量搜索多个数据，还可以指定搜索范围。具体请阅读执行数据搜索相关参数：
 
+|参数|描述|类型|参考值|
+|---------|-----------|----|-----|
+|table_name|Name of the table to search vectors|string|'some_table_name'|
+|top_k| How many similar vectors will be searched back| integer | 0 < top_k <= 10000|
+|query_records| A list of vectors to search for similarity, each vector's `dimension` should be identical to table's `dimension`. Each vectors should be a list of float.| 2-dimension list | [[0.1, 0.2, ...], ...] |
+|query_ranges(Optional)|A group of date ranges, default as `None`. if set, only vectors added between specified date ranges will be searched. If not set, will search the entire table. Date should be 'yyyy-mm-dd' format. [('2019-01-01', '2019-01-03')] will search vectors added between [2019.1.1, 2019.1.3),  |list[tuple]|[('2019-01-01', '2019-01-02'), ...]|
 
+注意：目前搜索范围仅支持日期范围，为左闭右开模式。比如您将范围定为[2019.1.1, 2019.1.3)，则搜索日期包含2019.1.1，但不包含2019.1.3.
 
 ## 删除数据库 
 
