@@ -39,6 +39,9 @@ Some may argue and request call our attention to some vector indexing plug-ins b
 ## Vector indexing methods
 Feature vectors are good for analysis because there are many techniques for comparing feature vectors. One simple way to compare the feature vectors of two objects is to take the Euclidean distance.
 
+
+
+
 ## Feature vector database
 We have agreed that feature vectors are the basic elements to precisely represent multimedia objects. But are there any ideal database that allows the efficient storing and indexing of feature vectors? Let's start by looking at some competent tools of feature vector indexing available in the market:
 
@@ -83,11 +86,11 @@ Milvus is a distributed feature vector indexing database management system which
 |                    |Milvus                 |  FAISS               |   SPTAG   |
 |--------------------|-----------------------|----------------------|-----------|
 | CPU/GPU异构计算能力 |:heavy_check_mark:     | :heavy_check_mark:    |:x: |
-| 量化索引           | :heavy_check_mark:     | :heavy_check_mark:   |    :x:    |
-| 哈希索引           | :heavy_check_mark:     | :heavy_check_mark:   |    :x:    |
-| 图索引             | :heavy_check_mark:     | :x:                  |   :heavy_check_mark:|
-| 高可用设计         | :heavy_check_mark:     |  :x:                 |    :x:    |
-| 分布式架构         | :heavy_check_mark:     |  :x:                 |   :x:     |
+| Quantization index            | :heavy_check_mark:     | :heavy_check_mark:   |    :x:    |
+| Hash index                    | :heavy_check_mark:     | :heavy_check_mark:   |    :x:    |
+| Image index                   | :heavy_check_mark:     | :x:                  |   :heavy_check_mark:|
+| High availability             | :heavy_check_mark:     |  :x:                 |    :x:    |
+| Distributed architecture      | :heavy_check_mark:     |  :x:                 |   :x:     |
 | 易用标准化用户接口  | :heavy_check_mark:     |  :x:                 |   :x:     |
 | GUI monitoring dashboard      | :heavy_check_mark:    |   :x:                 |    :x:   |
 | Enterprise user support       | :heavy_check_mark:    |   :x:                 |    :x:   |
