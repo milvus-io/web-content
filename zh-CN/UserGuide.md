@@ -373,9 +373,10 @@ Milvus server收集数据 > 利用pull模式把所有数据导入Prometheus > �
 
 |  参数  |  描述  |  类型   |  参考值   |
 | ------------| --------------| --------| ---------|
-| table_name  | name of the table to create| string | 'some_table_name' |
-| dimension | dimension of the vectors stored in the table| integer | 0 < dimension <= 10000, typically =128, 256 or 518 
-| index_type |There are 3 types: `FLAT`,`IVFLAT` and `INVALID`. IndexType is default to `INVALID`, which means user should self-set other types rather than using default one. `FLAT` means vectors are processed in CPU and searching operation is flat. `IVFLAT` means vectors are processed in GPU and index will be built, and searching operation will be faster. But if there's no GPU and index_type is set to `IVFLAT`, an error will occur. |IndexType|IndexType.FLAT, IndexType.IVFLAT, IndexType.INVALIDE(default)|
+| table_name  | 要创建的table名| string | 'table名' |
+| dimension   | 表格中向量的维度 | integer | 0 < dimension <= 10000, 通常设置为128、256或518维 
+| index_type  |有3种类型的检索类型: 1. `FLAT` - 向量运行在CPU上运行；2. `INVALID` - 向量运行在GPU上，搜索速度更快；3. 'INVALID' - 默认的检索类型，需改成FLAT或INVALID。|IndexType|FLAT / IVFLAT / INVALIDE(default)|
+注意：如果没有GPU，将index_type设置成`IVFLAT`，系统将报错。
 
 1. 准备数据表格参数。
   
