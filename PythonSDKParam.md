@@ -24,10 +24,18 @@ add_vectors(table_name, records)
 
 |Parameter|Description|Type|Value|
 |---------|-----------|----|-----|
-|table_name| Name of the table to importing data| string| 'some_table_name'|
-|records| A list of vectors, each vector's `dimension` should be identical to table's `dimension` being inserted. Each vector should be a list of float. |2-dimension list|[[0.1, 0.2, ...], ...]
+|table_name| Name of the table to importing vectors| string| 'some_table_name'|
+|records| A list of vectors being added into the table, each vector's `dimension` should be identical to table's `dimension`. Each vector should be a list of float. |2-dimension list|[[0.1, 0.2, ...], ...]
 
 
 3. Searching with Milvus
 
+search_vectors(table_name, top_k, query_records, query_ranges)
+
+|Parameter|Description|Type|Value|
+|---------|-----------|----|-----|
+|table_name|Name of the table to search vectors|string|'some_table_name'|
+|top_k| How many similar vectors will be searched back| integer | 10|
+|query_records| A list of vectors to search for similarity, each vector's `dimension` should be identical to table's `dimension`. Each vectors should be a list of float.| 2-dimension list | [[0.1, 0.2, ...], ...] |
+|query_ranges|A group of date ranges, default as `None`. if set, only vectors added between specified date ranges will be searched. Date should be 'yyyy-mm-dd' format|list[tuple]|[('2019-01-01', '2019-01-02'), ...]|
 4. Deleting a database
