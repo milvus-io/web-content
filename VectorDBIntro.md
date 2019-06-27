@@ -80,6 +80,18 @@ So is there such an ideal vector indexing database system available for use? Yes
 ## Milvus database
 Milvus is a distributed feature vector indexing database management system which provides high quality similarity search and analysis of feature vectors and irrelational data. By extracting object features and taking the Euclidean distance between two feature vectors, the similarity of two objects is compared. Here is an comparison of Milvus with FAISS and SPTAG:
 
+|                    |Milvus                 |  FAISS               |   SPTAG   |
+|--------------------|-----------------------|----------------------|-----------|
+| CPU/GPU异构计算能力 |:heavy_check_mark:     | :heavy_check_mark:    |:x: |
+| 量化索引           | :heavy_check_mark:     | :heavy_check_mark:   |    :x:    |
+| 哈希索引           | :heavy_check_mark:     | :heavy_check_mark:   |    :x:    |
+| 图索引             | :heavy_check_mark:     | :x:                  |   :heavy_check_mark:|
+| 高可用设计         | :heavy_check_mark:     |  :x:                 |    :x:    |
+| 分布式架构         | :heavy_check_mark:     |  :x:                 |   :x:     |
+| 易用标准化用户接口  | :heavy_check_mark:     |  :x:                 |   :x:     |
+| GUI monitoring dashboard      | :heavy_check_mark:    |   :x:                 |    :x:   |
+| Enterprise user support       | :heavy_check_mark:    |   :x:                 |    :x:   |
+| Flexible business mode        | :heavy_check_mark:    |   :x:                 |  :x:     |
 
 
 
