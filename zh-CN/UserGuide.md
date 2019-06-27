@@ -355,41 +355,46 @@ Milvus server收集数据 > 利用pull模式把所有数据导入Prometheus > �
 
 1. 你已经导入了pymilvus。
 
-```python
-from milvus import Milvus, Prepare, IndexType, Status
+   ```python
+   # Import pymilvus
+   $ from milvus import Milvus, Prepare, IndexType, Status
 
-```
+   ```
 2. 你已经将Milvus连接到了本地server。
 
    ```
-   milvus = Milvus()
-   status = milvus.connect(host='SERVER-HOST', port='SERVER-PORT')
+   # Connect Milvus to server
+   $ milvus = Milvus()
+   $ status = milvus.connect(host='SERVER-HOST', port='SERVER-PORT')
    
    ```
-### 创建数据库
+### 创建数据表格结构
 
-1. 准备数据库参数
+1. 准备数据表格参数
    输入您要创建的数据库的相关参数（param）。
    ```
-   param = {'table_name'='test01', 'dimension'=256, 'index_type'=IndexType.FLAT, 'store_raw_vector'=False}
+   # Prepare param
+   $ param = {'table_name'='test01', 'dimension'=256, 'index_type'=IndexType.FLAT, 'store_raw_vector'=False}
    ```
    
-2. 创建数据库
+2. 创建表格
 
    ```
-   milvus.create_table(param)
-   Status(message='Table test01 created!', code=0)
+   # Create a table
+   $ milvus.create_table(param)
+   $ Status(message='Table test01 created!', code=0)
    ```
    
 3. 检查确认已创建数据库的信息
    ```
-   status, table = milvus.describe_table('test01')
-   print(status)
-   print(table)
+   # Confirm table info.
+   $ status, table = milvus.describe_table('test01')
+   $ print(status)
+   $ print(table)
    ```                        
 
 ## 导入向量数据
-成功创建数据库后，您可以批量导入向量数据。当然，进行此操作的前提是您已经有了多维的向量数据。
+成功创建数据库后，您可以批量导入向量数据。当然，进行此操作的前提是您已经有了多维的向量数据。现在，你可以向
 
 
 ## 用Milvus进行搜索
