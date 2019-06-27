@@ -7,12 +7,11 @@
 特征向量是包含事物重要特征的向量。大家比较熟知的一个特征向量是RGB (red-green-blue)色彩。每种颜色都可以通过对红(R)、绿(G)、蓝(B)三个颜色的变化来得到。这样一个特征向量可以描述为：颜色 = [红，绿，蓝]。
 
 ### 为什么要用特征向量
-随着现代计算机和机器学习技术的飞速发展，越来越多的多媒体数据被存储、分析和运用在安防侦察、医疗、教育和在线信息服务等领域。多媒体数据通常有多维度的特征，比如一张人脸图片，无法简单的用单维度的字母数字或字符串来描述。而特征向量则可以以数的形式，多维度、高效准确地描述多媒体内容。刚才提到的人脸图片分析，数百维的特征向量可以做到对图片精准描述。
-Advances in modern computer and machine learning technologies have led to huge archieves of multimedia data in diverse application areas such as security, medicine, education and online information services. A multimedia object cannot be simply described by alphanumeric data, the basic data type in traditional databases, as they have generally multiple dimentions of properties.
+随着现代计算机和机器学习技术的飞速发展，越来越多的多媒体数据被存储、分析和运用在安防侦察、医疗、教育和在线信息服务等领域。多媒体数据通常有多维度的特征，比如一张人脸图片，无法简单的用单维度的字母数字或字符串来描述。
 
-Instead, feature vectors describe an object from a multidimentional, easily analyzable way, and are suitable to represent numeric or symbolic characteristics of multimedia content.
+而特征向量则可以以数的形式，多维度、高效准确地描述多媒体内容。刚才提到的人脸图片分析，数百维的特征向量可以做到对图片精准描述。
 
-They are important for many different areas of machine learning and pattern processing. Machine learning algorithms typically require a numerical representation of objects in order for the algorithms to do processing and statistical analysis.
+特征向量在机器学习和模型处理的各个领域都起到重要作用。机器学习算法They are important for many different areas of machine learning and pattern processing. Machine learning algorithms typically require a numerical representation of objects in order for the algorithms to do processing and statistical analysis.
 
 ### 应用领域
 As already mentioned, feature vectors, with its effectiveness and practicality of representing objects in a numerical way to help with may kinds of analyses, are used widely in machine learning. 
