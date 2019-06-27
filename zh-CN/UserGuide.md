@@ -350,60 +350,43 @@ Milvus server收集数据 > 利用pull模式把所有数据导入Prometheus > �
 ## 创建数据库
 > 注意：以下操作都是在Python交互环境下进行的。对于其他类型的语言，Milvus支持通过RESTful和RPC的访问方法。
 
-在创建数据库之前，请确保你已经安装并导入pymilvus。
+### 前提条件
+如果你已经完成了Milvus的安装和所有相关设置，你就可以在Milvus上创建属于自己的数据库了。在用Python创建数据库之前，请确保你已经完成了以下操作：
 
-Download
-Pymilvus only supports python >= 3.4, is fully tested under 3.4, 3.5, 3.6.
+1. 你已经导入了pymilvus。
 
-Python 3.7 can work, but not fully tested yet.
-
-Pymilvus can be downloaded using pip. If no use, try pip3
-
-$ pip install pymilvus
-Upgrade to newest version
-
-$ pip install --upgrade pymilvus
+```python
 from milvus import Milvus, Prepare, IndexType, Status
 
-您可以通过Python命令在Milvus上创建数据库。
+```
+2. 你已经将Milvus连接到了本地server。
 
-1. 创建数据库准备
-   打开Python代码编辑器，输入您要创建的数据库的相关参数（param）。
    ```
    milvus = Milvus()
+   status = milvus.connect(host='SERVER-HOST', port='SERVER-PORT')
+   
+   ```
+### 创建数据库
 
-   milvus.connect(host='SERVER-HOST', port='SERVER-PORT')
-   Status(code=0, message="Success")
+1. 准备数据库参数
+   输入您要创建的数据库的相关参数（param）。
+   ```
+   param = {'table_name'='test01', 'dimension'=256, 'index_type'=IndexType.FLAT, 'store_raw_vector'=False}
    ```
    
 2. 创建数据库
 
+   ```
+   milvus.create_table(param)
+   Status(message='Table test01 created!', code=0)
+   ```
+   
 3. 检查确认已创建数据库的信息
-   Initial a Milvus instance and connect to the sever
-
->>> milvus = Milvus()
-
->>> milvus.connect(host='SERVER-HOST', port='SERVER-PORT')
-Status(code=0, message="Success")
-Once successfully connected, you can get the version of server
-
->>> milvus.server_version()
-(Status(code=0, message='Success'), 0.3.0)  # this is example version, the real version may vary
-Add a new table
-
-First set param
-
->>> param = {'table_name'='test01', 'dimension'=256, 'index_type'=IndexType.FLAT, 'store_raw_vector'=False}
-Then create table
-
->>> milvus.create_table(param)
-Status(message='Table test01 created!', code=0)
-Describe the table we just created
-
->>> milvus.describe_table('test01')
-(Status(code=0, message='Success!'), TableSchema(table_name='test01',dimension=256, index_type=1, store_raw_vector=False))
-
-                            
+   ```
+   status, table = milvus.describe_table('test01')
+   print(status)
+   print(table)
+   ```                        
 
 ## 导入向量数据
 成功创建数据库后，您可以批量导入向量数据。当然，进行此操作的前提是您已经有了多维的向量数据。
