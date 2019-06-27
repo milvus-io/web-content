@@ -16,22 +16,33 @@ Leagal Disclaimer
    - 声明
    - 基本概念
    - 通用描述说明
+   
 快速入门
+
 Milvus数据库管理
+
    - Milvus目录结构
    - 设置Milvus
      - 设置Milvus服务
      - 设置Milvus日志
+     
    - Milvus监控
-     - 监控概述
+     - 监控告警概述
      - 监控指标
      - 监控安装设置
+     - 设置监控频率
+     - 设置告警规则
+     
 创建数据库
+
 导入数据
+
 使用Milvus进行搜索
+
 删除数据库
+
 应用场景
-容灾
+
 障碍排查
 
 
@@ -41,22 +52,33 @@ Milvus数据库管理
    - 声明
    - 基本概念
    - 通用描述说明
+   
 快速入门
+
 设置Milvus
    - Milvus目录介绍
    - 设置Milvus服务
+   
 创建数据库
+
 导入数据
+
 使用Milvus进行搜索
+
 删除数据库
-监控与报警
+
+监控与告警警
    - 监控概述
    - 监控指标
    - 监控安装设置
+   - 设置监控频率
+   - 设置告警规则
+   
 日志管理
    - 设置Milvus日志
+   
 应用场景
-容灾
+
 障碍排查
 
 
@@ -75,8 +97,9 @@ Milvus是一种稳定可靠、可弹性伸缩的特征向量数据库系统，�
 ### 声明
 本文档内容仅作为指导使用，文档中的所有内容不构成任何明示或暗示的担保。
 
-### 基本概念 @Jin Hai
+### 基本概念 
 - 分布式数据库
+
 - Milvus文件目录
 
 
@@ -94,54 +117,63 @@ Milvus是一种稳定可靠、可弹性伸缩的特征向量数据库系统，�
 
 
 ## Milvus数据库管理
-### Milvus文件目录结构
+### Milvus文件
+成功启动Milvus server后，你可以在home/$USER/milvus的路径下看到Milvus的文件夹。其中包含以下文件：
+
+- milvus/db（数据库存储）
+- milvus/logs（日志存储）
+- milvus/conf（设置文件）
+    - server_config.yaml（服务设置文件）
+    - log_config.conf（日志设置文件）
+- milvus/test（测试脚本）
 
 
 ### 设置Milvus
-从Milvus文件目录可以看出，Milvus设置包含服务设置和日志设置两方面。Milvus服务设置涉及服务，数据库和监控等方面，（为什么重要？）
+Milvus设置文件包含服务设置和日志设置两方面。Milvus服务设置涉及服务，数据库和监控等方面，（为什么重要？）
 
 #### 设置Milvus服务
 
 请按照以下步骤设置Milvus服务：
 
-1. 下载Milvus服务设置文件模板。
+1. 根据路径home/$USER/milvus/conf，打开Milvus服务设置文件server_config.yaml。
 
-2. 进入Milvus文件模板，并对相关参数进行修改。
+2. 对文件中的相关参数进行修改。
 
-   1）点击server_config文件，设置Milvus服务参数。
+   1）点击server_config文件，设置服务参数。
    
-     | 参数            | 参数描述                          | 参数值      |
-     |----------------|-----------------------------------|------------|
-     | address        | Milvus server监听的ip地址          |            |
-     | port           | Milvus server监听的端口号          |            |
-     | transfer_protocol | Milvus client与server通信的协议 | binary/compact/json |
-     | server_mode    | server支持的模式                   | simple（单线程）/thread_pool（线程池）|
-     | gpu_index      | 目前使用的GPU                      |               |
+     | 参数            | 参数描述                          | 参考值            |
+     |----------------|-----------------------------------|-------------------|
+     | address        | Milvus server监听的ip地址          | 0.0.0.0           |
+     | port           | Milvus server监听的端口号，默认值为19530 | 1025 ~ 65534 |            
+     | gpu_index      | 目前使用的GPU，默认值为0。          | 0 ~ GPU数量-1                |
+     | mode           | Milvus部署类型                    | single（单机）/ cluster（多机）|            
                                                                                                                      
-   2）点击db_config文件，设置Milvus数据库参数。
+   2）点击db_config文件，设置数据库参数。
    
-     | 参数               | 参数描述                            | 参数值    |
+     | 参数               | 参数描述                            | 参考值    |
      |-------------------|-------------------------------------|----------|
      | db_path           | Milvus数据库文件存储的路径            |    ？    |
-     | db_backend_url    | 使用RESTFul API接口访问数据库的ip地址 |    ？    |
-     | db_flush_interval | 插入数据持久化的时间间隔              |    ？    |
+     | db_backend_url    | 元数据库uri                          | http://127.0.0.1  |
+     | index_building_threshold | index building触发阈值        |  1024（MB）  |
 
-   3）点击metric_config文件，设置Milvus监控参数。
+   3）点击metric_config文件，设置监控参数。
    
-     | 参数               | 参数描述                            | 参数值    |
+     | 参数               | 参数描述                            | 参考值    |
      |-------------------|-------------------------------------|----------|
-     | startup           | 选择是否启动监控             | on（启动）/ off（不启动) |
+     | is_startup        | 选择是否启动监控             | on（启动）/ off（不启动) |
      | collector         | 连接的监控系统               | Prometheus             |
      | collect_type      | Prometheus的监控获取方式     |   pull / push          |
-     | port              | 访问Prometheus的端口号       | on（启动）/ off（不启动）|
-     | push_gateway_ip_address | push gateway的ip地址   | push                   |
-     | push_gateway_port       | push gateway的端口号   |   push                 |
-  
-3. 将修改好的文件替换掉temp/Milvus/conf/Milvus config路径下的文件。
-4. 重启Milvus server。
+     | port              | 访问Prometheus的端口号       | 8080                   |
+     | push_gateway_ip_address | push gateway的ip地址   | 127.0.0.1             |
+     | push_gateway_port       | push gateway的端口号   |  9091                 |
 
+   4）点击cache_config文件，设置相关参数。
+   
+     |  参数             | 参数描述                            | 参考值    |
+     |-------------------|-------------------------------------|----------|
+     | cpu_cache_capacity |用于cache的内存量，默认值为16GB       |  0 ~ 机器内存总量 |
 
-#### 设置Milvus日志
+3. 重启Milvus Docker。
  
 
 ### Milvus监控告警
@@ -283,55 +315,31 @@ Milvus server收集数据 > 利用pull模式把所有数据导入Prometheus > �
    
    ![image-20190620134549612](assets/prometheus.png)
 
+
 #### 监控指标
 在Milvus监控系统的GUI控制板上，你可以查看监控数据库的各项指标，实时了解数据库运行表现。
 
 以下是控制板上可以查看的监控项：
 
-|    监控项      |      说明                          |
-|---------------|------------------------------------|
-| 查询密度       |  过去一分钟内查询的条数              |
-| 并发连接数     |  连接到milvus服务器上的客户端数量    |
-| 运行时间       |   milvus服务器健康运行的时间         |
-| GPU_X_使用率   |   第X个GPU的使用百分比              |
-| GPU_X_使用量   |    第X个GPU内存的使用量             |
-| 缓存使用率     |    缓存的使用百分比                  |
-| CPU使用率      |          CPU使用百分比              |
-| 内存使用率     |        内存使用百分比                |
-| 向量查询响应时间统计图  |    向量查询的返回时长统计图   |
-| 向量插入吞吐量  |         每秒钟插入数据总量           |
-| 插入向量所需时间统计图 |   向量插入到完成的时长统计图   |
-| 向量查询吞吐量  |        每秒钟查询向量的数量          |
-| 查询吞吐量      |         每秒查询的数量              |
-| 不同索引查询时间 |  对于不用类型的索引，查询返回结果时长 |
-| 查询响应时间     |      查询的返回时长                 |
-| 数据文件总量     |       所有插入向量的总数据量         |
-| 网络IO          |    每秒钟网络上传和下载的速度         |
-|  磁盘写速度     |   每秒钟内存数据写入磁盘的总量         | 
-
-磁盘读速度：每秒钟磁盘数据写入内存的总量
-
-磁盘读数据大小统计图：从磁盘写入内存数据大小的统计图
-
-磁盘读所需时间统计图：从磁盘写入内存时间的统计图
-
-访问meta所需时间统计图：访问meta数据时长统计图
-
-meta访问次数：访问meta数据的总次数zongliang
-
-搜索index/raw数据所需时间统计图：对于有索引与无索引数据的搜索时间统计图
-
-搜索raw/index数据总量：搜索有索引与无索引的文件总量
-
-搜索raw/index数据大小：搜索有索引与无索引的文件大小
-
-memory table合并所需时间统计图：内存表合并时间的统计图
-
-建立索引所需时间统计图：生数据建立索引所需时间的统计图
-
-cache访问次数：访问缓存的总次数
-
-插入向量总数量：插入向量的总量
+|    监控项       |      说明                        |
+|----------------|----------------------------------|
+| 系统指标        |                                  |
+| GPU利用率       |    实例GPU的利用率                |
+| 显存使用量      |    实例显存的使用量                |
+| CPU利用率       |    CPU使用百分率                  |
+| 内存使用量      |     内存使用量                     |
+| 网络IO          |    每秒钟网口的读写速度            |
+| 磁盘读写速度     |    磁盘写入速度                   | 
+| Milvus指标      |                                  |
+| 数据插入速度     |         每秒钟插入数据总量        |
+| 数据文件总量     |       Milvus所存数据文件总量      |
+| 数据总量        |Milvus所存数据总量                 |
+| 每分钟查询率    |  每分钟完成的查询数量              |
+| 查询响应时间     |      查询的返回时长               |
+| 向量检索时间统计  |    单条向量查询的时长统计         |
+| 连接数          |  当前连接到Milvus服务器的客户端数量 |
+| 运行时长        |   Milvus服务器正常运行的分钟数      |
+| 缓存利用率       |    已用缓存占比                   |
 
 #### 设置监控频率
 
@@ -342,16 +350,43 @@ cache访问次数：访问缓存的总次数
 ## 创建数据库
 > 注意：以下操作都是在Python交互环境下进行的。对于其他类型的语言，Milvus支持通过RESTful和RPC的访问方法。
 
-您可以通过Python命令在Milvus上创建数据库。
+### 前提条件
+如果你已经完成了Milvus的安装和所有相关设置，你就可以在Milvus上创建属于自己的数据库了。在用Python创建数据库之前，请确保你已经完成了以下操作：
 
-1. 创建数据库准备
-   打开Python代码编辑器，输入您要创建的数据库的相关参数（param）。
+1. 你已经导入了pymilvus。
+
+```python
+from milvus import Milvus, Prepare, IndexType, Status
+
+```
+2. 你已经将Milvus连接到了本地server。
+
+   ```
+   milvus = Milvus()
+   status = milvus.connect(host='SERVER-HOST', port='SERVER-PORT')
+   
+   ```
+### 创建数据库
+
+1. 准备数据库参数
+   输入您要创建的数据库的相关参数（param）。
+   ```
+   param = {'table_name'='test01', 'dimension'=256, 'index_type'=IndexType.FLAT, 'store_raw_vector'=False}
+   ```
    
 2. 创建数据库
 
-3. 检查确认已创建数据库的信息
+   ```
+   milvus.create_table(param)
+   Status(message='Table test01 created!', code=0)
+   ```
    
-                            
+3. 检查确认已创建数据库的信息
+   ```
+   status, table = milvus.describe_table('test01')
+   print(status)
+   print(table)
+   ```                        
 
 ## 导入向量数据
 成功创建数据库后，您可以批量导入向量数据。当然，进行此操作的前提是您已经有了多维的向量数据。
@@ -361,7 +396,7 @@ cache访问次数：访问缓存的总次数
 
 
 
-## 删除数据库 （跟新Python SDK)@Jin Hai
+## 删除数据库 
 
 Milvus提供基于C++/Python的客户端SDK。以Python为例，你可以参照[Milvus Python SDK](https://pypi.org/project/pymilvus)和[使用示例](https://github.com/milvus-io/pymilvus/blob/master/examples/example.py)导入特征向量数据，并进行特征向量搜索。
 
@@ -448,40 +483,7 @@ Milvus做特征向量检索时典型应用架构如下：
 
 
 
-
-### 案例 2 - 基于Milvus的非标车搜索
-
-#### 需求
-
-- 非标车轨迹实时查询
-
-摄像头拍到嫌疑非标车后，提取其特征到实时插入的非标车图片库中搜索，对于找到的所有相关车辆在地图上展示其轨迹。
-
-#### 系统实现架构图
-
-![VehicleSearch](/Users/zilliz/Documents/VehicleSearch.png)
-
-
-
-- **非标车图片获取设备**：摄像头拍到非标车图片后，把图片发到特征向量提取设备。
-
-- **特征提取服务**：收到摄像头发过来的非标车图片后，利用深度学习系统训练的模型，转换为256维车辆特征向量后送入实时非标车特征库存储。
-
-- **应用层**：
-
-  - 非标车轨迹再现：收到人脸的特征向量后，会发往特征向量库比对，如果发现匹配度较高，则发出告警。
-
-- **数据层**：
-
-  - 实时非标车特征库
-
-    向量库，3亿级，每天插入1000W，存储30天。对于查询精度要求高，查询速度要求快，查询的QPS要求达到100每秒，不允许批量查询。
-
-- **基础设施**：Milvus实现向量数据的存储，Minio实现非结构化数据(车辆图片)存储。
-
-
-
-### 案例 3 - 基于Milvus的商品推荐系统
+### 案例 2 - 基于Milvus的商品推荐系统
 
 #### 需求：
 
@@ -503,12 +505,10 @@ Milvus做特征向量检索时典型应用架构如下：
   - Minio 实现商品图片的存储。
   - MySQL 实现用户画像信息存储。
   
-  
-  
-## 容灾
 
 
 ## 障碍排查
-
+- 连接服务器失败怎么办？
+  请通过docker logs显示的日志，确认连接的服务器是否启动，连接的服务器地址、端口是否正确。
 
 

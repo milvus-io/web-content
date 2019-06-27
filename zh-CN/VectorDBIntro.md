@@ -9,9 +9,7 @@
 ### 为什么要用特征向量
 随着现代计算机和机器学习技术的飞速发展，越来越多的多媒体数据被存储、分析和运用在安防侦察、医疗、教育和在线信息服务等领域。多媒体数据通常有多维度的特征，比如一张人脸图片，无法简单的用单维度的字母数字或字符串来描述。
 
-而特征向量则可以以数的形式，多维度、高效准确地描述多媒体内容。刚才提到的人脸图片分析，数百维的特征向量可以做到对图片精准描述。
-
-特征向量在机器学习和模型处理的各个领域都起到重要作用。机器学习算法They are important for many different areas of machine learning and pattern processing. Machine learning algorithms typically require a numerical representation of objects in order for the algorithms to do processing and statistical analysis.
+而特征向量则可以以数的形式，多维度、高效准确地描述多媒体内容。刚才提到的人脸图片分析，数百维的特征向量可以做到对图片精准描述。它在机器学习和模型处理的各个领域都起到重要作用。
 
 ### 应用领域
 As already mentioned, feature vectors, with its effectiveness and practicality of representing objects in a numerical way to help with may kinds of analyses, are used widely in machine learning. 
@@ -53,7 +51,7 @@ Designed by Facebook AI, and written in C++, FAISS (Facebook AI Similarity Searc
 | Distributed, multi-GPU    | Only a algorithm library            |
 | Customizable algorithms   | High entrance standards for users   |                       
 
-FAISS 是 Facebook AI 研究团队开源的针对聚类和相似性搜索库。FAISS 是用 C++ 编写的，带有 Python / numpy 的完整封装。FAISS大量利用了：
+FAISS是Facebook AI 研究团队开源的针对聚类和相似性搜索库。FAISS 是用 C++ 编写的，带有 Python / numpy 的完整封装。FAISS大量利用了：
 
 - 多线程以充分利用多核性能并在多路 GPU 上进行并行搜索。
 - BLAS 算法库通过 matrix/matrix 乘法进行高效、精确的距离计算。没有 BLAS，高效的强力执行很难达到最优状态。 BLAS/LAPACK 是唯一一个 Faiss 必须的前提软件。
@@ -82,22 +80,6 @@ So is there such an ideal vector indexing database system available for use? Yes
 ## Milvus数据库
 Milvus is a distributed feature vector indexing database management system which provides high quality similarity search and analysis of feature vectors and irrelational data. By extracting object features and taking the Euclidean distance between two feature vectors, the similarity of two objects is compared. Here is an comparison of Milvus with FAISS and SPTAG:
 
-## 特征向量
-在现实世界中，对于复杂而多元的事物，我们是很难使用简单的数据类型进行描述的。例如：我们很难用几个简单的数字来精确的描述一张人脸，因为人脸由43块肌肉构成，想要精确的描述一张人脸，通常需要一百维的向量进行描述。所以，对于复杂的事物，我们通常会使用特征向量类型来进行表示。同时，特征向量的维度越高，一般也就能够更精确的描述这个事物的特征。
-
-AI、机器学习、深度学习等近年来热门的技术，其核心的能力就是利用各种计算机算法对现实世界的原始数据进行特征提取，特征处理和特征选择，最终形成准确描述该事物的特征向量。
-
-随着近年来计算机技术的不断进步，特别是以NVIDIA的GPU为代表的新一代异构众核高性能计算芯片的诞生，使得深度学习技术的应用得到了长足的进步。但是无论是目前基于卷积神经网络(CNN)的深度学习系统，还是当前火热的基于循环神经网络(RNN)的深度学习系统，其训练出来的模型在用于实际预测的时候，都是将输入的事物以高维特征向量的形式输出的。下面将列举一些具体的机器学习或者深度学习的应用场景：
-
-- 在人脸识别的领域，2018年3月来自中国的DeepInsight团队的使用InsightFace人脸识别库的深度学习技术，训练出来的模型，取得了MegaFace人脸识别比赛的第一名，其产生的人脸特征向量为512维，识别率超过98%。
-
-- 在自然语言处理领域，Google的word2vector算法可以算是基石算法，其原理就是把自然语言中的字和词转化为300维的词向量。然后再利用词向量在向量空间上的位置，就可以度量出词与词的关系。
-
-- 在语音识别领域，无论是前几年最热门的基于RNN/LTSM方案，还是现在基于注意力模型的方案，首先需要解决的就是对语音提取其特征向量，然后才能展开后续分析。
-
-由上面的这些例子，我们发现特征向量，特别是高维特征向量在当前和未来的AI领域，都扮演着表达世界万事万物基础数据类型的角色。
-
-因此，在海量的特征向量中能够精确而高效地进行检索，也就越来越成为AI技术大规模应用的必要条件，同时也是对传统数据库系统的一个挑战。
 
 ## 传统数据库
 那么传统数据库系统和大数据系统，在向量相似性检索领域的表现会怎么样呢？
