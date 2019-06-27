@@ -8,18 +8,18 @@ A vector is a series of numbers. It is like a matrix with only one row but multi
 A feature vector is a vector that contains information describing an object's important characteristics. An example of a feature vector you might be familiar with is RGB (red-green-blue) color descriptions. A color can be described by how much red, blue, and green there is in it. A feature vector for this would be color = [R, G, B].
 
 ### Why feature vector
-A scalar, data type used in traditional relational databases, describes only one property of an object. However, with the booming of machine learning and artificial intelligence, the need to process data with more than one dimention is growing fast. And this is where feature vectors come along. Compared to traditional scalar type of data, a feature vector describes an object from multiple dimentions. 
+Advances in modern computer and machine learning technologies have led to huge archieves of multimedia data in diverse application areas such as security, medicine, education and online information services. A multimedia object cannot be simply described by alphanumeric data, the basic data type in traditional databases, as they have generally multiple dimentions of properties.
 
-In machine learning, feature vectors are used to represent numeric or symbolic characteristics, called features, of an object in a mathematical, easily analyzable way. They are important for many different areas of machine learning and pattern processing. Machine learning algorithms typically require a numerical representation of objects in order for the algorithms to do processing and statistical analysis.
+Instead, feature vectors describe an object from a multidimentional, easily analyzable way, and are suitable to represent numeric or symbolic characteristics of multimedia content.
+
+They are important for many different areas of machine learning and pattern processing. Machine learning algorithms typically require a numerical representation of objects in order for the algorithms to do processing and statistical analysis.
 
 ### Use cases
-Feature vectors are used widely in machine learning because of the effectiveness and practicality of representing objects in a numerical way to help with many kinds of analyses. They are good for analysis because there are many techniques for comparing feature vectors. One simple way to compare the feature vectors of two objects is to take the Euclidean distance.
-
-Feature vectors are mainly used in these specific areas:
+As already mentioned, feature vectors, with its effectiveness and practicality of representing objects in a numerical way to help with may kinds of analyses, are used widely in machine learning. 
 
 - Image processing
 
-  Features can be gradient magnitude, color, grayscale intensity, edges, areas, and more. Feature vectors are particularly popular for analyses in image processing because of the convenient way attributes about an image, like the examples listed, can be compared numerically once put into feature vectors.
+  Features can be gradient magnitude, color, grayscale intensity, edges, areas, and more. Feature vectors are particularly popular for analyses in image processing because of the convenient way attributes about an image, like the RGB color example listed, can be compared numerically once put into feature vectors.
 
 - Speech recognition
 
@@ -31,13 +31,13 @@ Feature vectors are mainly used in these specific areas:
 
 
 ## Traditional database & feature vector indexing
-Traditional relational database are designed to organize alphanumeric data into interrelated collections. However, this technology is not well suited to the management of multimedia information. The feature vector data type, vector storing and indexing methods, the large size of media objects are entirely foreign to traditional databases. 
+Traditional relational database are designed to organize alphanumeric data into interrelated collections. However, this technology is not well suited to the management of multimedia information. The feature vector data, vector storing and indexing methods, the large size of media objects are entirely foreign to traditional databases. 
 
-Although some traditional database now provide plug-ins tailored for feature vector indexing, for example  these toos are far from good enough. 
+Some may argue and request call our attention to some vector indexing plug-ins by traditional databases, such as imgsmlr and word2vector by PostgreSQL. However, as the enhancement are only made based on Hash search and one-dimention alphanumeirc data, the performance of these plug-ins are far from satisfying, and can barely meet the needs of huge high-dimentional vector indexing. 
 
 
 ## Vector indexing methods
-
+Feature vectors are good for analysis because there are many techniques for comparing feature vectors. One simple way to compare the feature vectors of two objects is to take the Euclidean distance.
 
 ## Feature vector database
 
