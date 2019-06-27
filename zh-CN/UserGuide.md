@@ -168,16 +168,12 @@ Milvus设置文件包含服务设置和日志设置两方面。Milvus服务设�
      | push_gateway_port       | push gateway的端口号   |  9091                 |
 
    4）点击cache_config文件，设置相关参数。
+   
      |  参数             | 参数描述                            | 参考值    |
      |-------------------|-------------------------------------|----------|
      | cpu_cache_capacity |用于cache的内存量，默认值为16GB       |  0 ~ 机器内存总量 |
-    
-   注意：license_config文件不需要修改。
 
-3. 重启Milvus server。
-
-
-#### 设置Milvus日志
+3. 重启Milvus Docker。
  
 
 ### Milvus监控告警
@@ -319,6 +315,7 @@ Milvus server收集数据 > 利用pull模式把所有数据导入Prometheus > �
    
    ![image-20190620134549612](assets/prometheus.png)
 
+
 #### 监控指标
 在Milvus监控系统的GUI控制板上，你可以查看监控数据库的各项指标，实时了解数据库运行表现。
 
@@ -326,7 +323,12 @@ Milvus server收集数据 > 利用pull模式把所有数据导入Prometheus > �
 
 |    监控项      |      说明                          |
 |---------------|------------------------------------|
-| 查询密度       |  过去一分钟内查询的条数              |
+| 系统指标
+| Milvus指标
+| 
+
+
+| QPS           |  一分钟内查询数              |
 | 并发连接数     |  连接到milvus服务器上的客户端数量    |
 | 运行时间       |   milvus服务器健康运行的时间         |
 | GPU_X_使用率   |   第X个GPU的使用百分比              |
@@ -397,7 +399,7 @@ cache访问次数：访问缓存的总次数
 
 
 
-## 删除数据库 （跟新Python SDK)@Jin Hai
+## 删除数据库 
 
 Milvus提供基于C++/Python的客户端SDK。以Python为例，你可以参照[Milvus Python SDK](https://pypi.org/project/pymilvus)和[使用示例](https://github.com/milvus-io/pymilvus/blob/master/examples/example.py)导入特征向量数据，并进行特征向量搜索。
 
