@@ -410,20 +410,13 @@ Milvus server收集数据 > 利用pull模式把所有数据导入Prometheus > �
 |records| A list of vectors being added into the table, each vector's `dimension` should be identical to table's `dimension`. Each vector should be a list of float. |2-dimension list|[[0.1, 0.2, ...], ...]
 
 紧接着上面的例子，以下展示如何向Table test01导入20条256维的向量数据：
-import random
->>> from pprint import pprint
+# Import vectors
+$ status, ids = milvus.add_vectors(table_name='test01', records=vectors)
+$ print(status)
+$ Status(code=0, message='Success')
+$ pprint(ids) 
 
->>> dim = 256  # Dimension of the vector
-
-# Initialize 20 vectors of 256-dimension
->>> fake_vectors = [[random.random() for _ in range(dim)] for _ in range(20)]
-
-
-
->>> status, ids = milvus.add_vectors(table_name='test01', records=vectors)
->>> print(status)
-Status(code=0, message='Success')
->>> pprint(ids) # List of ids returned
+# List of ids returned
 23455321135511233
 12245748929023489
 ...
