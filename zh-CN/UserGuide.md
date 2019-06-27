@@ -350,16 +350,46 @@ Milvus server收集数据 > 利用pull模式把所有数据导入Prometheus > �
 ## 创建数据库
 > 注意：以下操作都是在Python交互环境下进行的。对于其他类型的语言，Milvus支持通过RESTful和RPC的访问方法。
 
+在创建数据库之前，请先将Milvus连接到宿主机：
+
 您可以通过Python命令在Milvus上创建数据库。
 
 1. 创建数据库准备
    打开Python代码编辑器，输入您要创建的数据库的相关参数（param）。
-   
+   ```
+   milvus = Milvus()
+
+   milvus.connect(host='SERVER-HOST', port='SERVER-PORT')
+   Status(code=0, message="Success")
+   ```
    
 2. 创建数据库
 
 3. 检查确认已创建数据库的信息
-   
+   Initial a Milvus instance and connect to the sever
+
+>>> milvus = Milvus()
+
+>>> milvus.connect(host='SERVER-HOST', port='SERVER-PORT')
+Status(code=0, message="Success")
+Once successfully connected, you can get the version of server
+
+>>> milvus.server_version()
+(Status(code=0, message='Success'), 0.3.0)  # this is example version, the real version may vary
+Add a new table
+
+First set param
+
+>>> param = {'table_name'='test01', 'dimension'=256, 'index_type'=IndexType.FLAT, 'store_raw_vector'=False}
+Then create table
+
+>>> milvus.create_table(param)
+Status(message='Table test01 created!', code=0)
+Describe the table we just created
+
+>>> milvus.describe_table('test01')
+(Status(code=0, message='Success!'), TableSchema(table_name='test01',dimension=256, index_type=1, store_raw_vector=False))
+
                             
 
 ## 导入向量数据
