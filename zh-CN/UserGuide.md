@@ -350,7 +350,20 @@ Milvus server收集数据 > 利用pull模式把所有数据导入Prometheus > �
 ## 创建数据库
 > 注意：以下操作都是在Python交互环境下进行的。对于其他类型的语言，Milvus支持通过RESTful和RPC的访问方法。
 
-在创建数据库之前，请先将Milvus连接到宿主机：
+在创建数据库之前，请确保你已经安装并导入pymilvus。
+
+Download
+Pymilvus only supports python >= 3.4, is fully tested under 3.4, 3.5, 3.6.
+
+Python 3.7 can work, but not fully tested yet.
+
+Pymilvus can be downloaded using pip. If no use, try pip3
+
+$ pip install pymilvus
+Upgrade to newest version
+
+$ pip install --upgrade pymilvus
+from milvus import Milvus, Prepare, IndexType, Status
 
 您可以通过Python命令在Milvus上创建数据库。
 
