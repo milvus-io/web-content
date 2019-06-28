@@ -12,15 +12,15 @@
 而特征向量则可以以数的形式，多维度、高效准确地描述多媒体内容。刚才提到的人脸图片分析，数百维的特征向量可以做到对图片精准描述。它在机器学习和模型处理的各个领域都起到重要作用。
 
 ### 应用领域
-As already mentioned, feature vectors, with its effectiveness and practicality of representing objects in a numerical way to help with may kinds of analyses, are used widely in machine learning. 
+特征向量，因其能以数字的方式，高效准确地描述事物，目前被广泛运用于机器学习的各种数据分析。
 
-- Image processing
+- 图片识别
 
   Features can be gradient magnitude, color, grayscale intensity, edges, areas, and more. Feature vectors are particularly popular for analyses in image processing because of the convenient way attributes about an image, like the RGB color example listed, can be compared numerically once put into feature vectors.
 
-- Speech recognition
+- 自然语言处理
 
-  Features can be sound lengths, noise level, noise ratios, and more.
+  特征向量可以是音长，噪音等级，信噪比。
 
 - Spam-fighting initiatives
 
