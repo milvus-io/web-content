@@ -323,14 +323,14 @@ Milvus server收集数据 > 利用pull模式把所有数据导入Prometheus > �
 
 |    监控项       |      说明                        |
 |----------------|----------------------------------|
-| 系统指标        |                                  |
+| **系统指标**    |                                  |
 | GPU利用率       |    实例GPU的利用率                |
 | 显存使用量      |    实例显存的使用量                |
 | CPU利用率       |    CPU使用百分率                  |
 | 内存使用量      |     内存使用量                     |
 | 网络IO          |    每秒钟网口的读写速度            |
 | 磁盘读写速度     |    磁盘写入速度                   | 
-| Milvus指标      |                                  |
+| **Milvus指标**  |                                  |
 | 数据插入速度     |         每秒钟插入数据总量        |
 | 数据文件总量     |       Milvus所存数据文件总量      |
 | 数据总量        |Milvus所存数据总量                 |
@@ -376,30 +376,32 @@ Milvus server收集数据 > 利用pull模式把所有数据导入Prometheus > �
 | table_name  | 要创建的table名| string | 'table名' |
 | dimension   | 表格中向量的维度 | integer | 0 < dimension <= 10000, 通常设置为128、256或518维 
 | index_type  |有3种类型的检索类型: 1. `FLAT` - 向量运行在CPU上运行；2. `INVALID` - 向量运行在GPU上，搜索速度更快；3. 'INVALID' - 默认的检索类型，需改成FLAT或INVALID。|IndexType|FLAT / IVFLAT / INVALIDE(default)|
+
 注意：如果没有GPU，将index_type设置成`IVFLAT`，系统将报错。
 
 1. 准备数据表格参数。
   
    ```
    # Prepare param
-   $ param = {'table_name'='test01', 'dimension'=256, 'index_type'=IndexType.FLAT, 'store_raw_vector'=False}
+   $ param = {'table_name'='01', 'dimension'=256, 'index_type'=IndexType.FLAT, 'store_raw_vector'=False}
    ```
    
-2. 创建表格Table test01。
+2. 创建表格01。
 
    ```
    # Create a table
    $ milvus.create_table(param)
-   $ Status(message='Table test01 created!', code=0)
+   $ Status(message='Table 01 created!', code=0)
    ```
    
 3. 检查确认已创建数据库的信息。
    ```
    # Confirm table info.
-   $ status, table = milvus.describe_table('test01')
+   $ status, table = milvus.describe_table('01')
    $ print(status)
    $ print(table)
    ```                        
+
 
 
 ## 导入向量数据
@@ -407,12 +409,14 @@ Milvus server收集数据 > 利用pull模式把所有数据导入Prometheus > �
 
 |参数|描述|类型|参考值|
 |---------|-----------|----|-----|
-|table_name| Name of the table to importing vectors| string| 'some_table_name'|
-|records| A list of vectors being added into the table, each vector's `dimension` should be identical to table's `dimension`. Each vector should be a list of float. |2-dimension list|[[0.1, 0.2, ...], ...]
+|table_name| 要创建的table名| string| 'table名'|
+|records| 需要导入table的一组向量，每条向量是一组浮点，其维度必须和所创建表格的维度一样大。|2-dimension list|[[0.1, 0.2, ...], ...]
 
-紧接着上面的例子，以下展示如何向Table test01导入20条256维的向量数据：
+紧接着上面的例子，以下展示如何向Table 01导入20条256维的向量数据：
+
+```
 # Import vectors
-$ status, ids = milvus.add_vectors(table_name='test01', records=vectors)
+$ status, ids = milvus.add_vectors(table_name='01', records=vectors)
 $ print(status)
 $ Status(code=0, message='Success')
 $ pprint(ids) 
@@ -421,6 +425,7 @@ $ pprint(ids)
 23455321135511233
 12245748929023489
 ...
+```
 
 
 
@@ -429,14 +434,39 @@ $ pprint(ids)
 
 |参数|描述|类型|参考值|
 |---------|-----------|----|-----|
-|table_name|Name of the table to search vectors|string|'some_table_name'|
-|top_k| How many similar vectors will be searched back| integer | 0 < top_k <= 10000|
-|query_records| A list of vectors to search for similarity, each vector's `dimension` should be identical to table's `dimension`. Each vectors should be a list of float.| 2-dimension list | [[0.1, 0.2, ...], ...] |
-|query_ranges(Optional)|A group of date ranges, default as `None`. if set, only vectors added between specified date ranges will be searched. If not set, will search the entire table. Date should be 'yyyy-mm-dd' format. [('2019-01-01', '2019-01-03')] will search vectors added between [2019.1.1, 2019.1.3),  |list[tuple]|[('2019-01-01', '2019-01-02'), ...]|
+|table_name|要创建的table名|string|'table名'|
+|top_k| 与所搜索向量相似度最高的k个向量| integer | 0 < top_k <= 10000|
+|query_records| 一组需要搜索的向量，每条向量是一组浮点，其维度必须和所创建表格的维度一样大。| 2-dimension list | [[0.1, 0.2, ...], ...] |
+|query_ranges（可选）| 向量搜索的范围，比如你可以只搜索某一段日期内的向量。如果不设置，默认值是'None'（即'无范围'），表示全局搜索。|list[tuple]|[('2019-01-01', '2019-01-02'), ...]|
 
-注意：目前搜索范围仅支持日期范围，为左闭右开模式。比如您将范围定为[2019.1.1, 2019.1.3)，则搜索日期包含2019.1.1，但不包含2019.1.3.
+注意：目前搜索范围仅支持日期范围，格式为'yyyy-mm-dd'，为左闭右开模式。比如您将范围定为[2019.1.1, 2019.1.3)，则搜索日期包含2019.1.1，但不包含2019.1.3.
 
-## 删除数据库 
+假设您需要搜索5条256维的向量，你可以：
+1. 定义您要搜索的5条向量数据。
+
+   ```
+   # Create 5 vectors of 256-dimension
+   $ q_records = [[random.random() for _ in range(dim)] for _ in range(5)]
+   ```
+   
+2. 搜索这5条向量。
+
+   ```
+   # Search 5 vectors
+   $ status, results = milvus.search_vectors(table_name='test01', query_records=q_records, top_k=10)
+   $ print(status)
+   $ pprint(results) # Searched top_k vectors
+   ```
+ 
+
+
+## 删除表格
+你可以根据需要，删除数据库中已创建的表格。仍然以表格01为例，若要删除表格01，你可以：
+
+```
+# Delete table
+$ milvus.delete_table(table_name='01')
+```
 
 Milvus提供基于C++/Python的客户端SDK。以Python为例，你可以参照[Milvus Python SDK](https://pypi.org/project/pymilvus)和[使用示例](https://github.com/milvus-io/pymilvus/blob/master/examples/example.py)导入特征向量数据，并进行特征向量搜索。
 
