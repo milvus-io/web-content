@@ -147,15 +147,15 @@ Milvus是一种稳定可靠、可弹性伸缩的特征向量数据库系统，�
 
    ```python
    # Import pymilvus
-   $ from milvus import Milvus, Prepare, IndexType, Status
+   from milvus import Milvus, Prepare, IndexType, Status
 
    ```
 2. 你已经将Milvus连接到了本地server。
 
    ```
    # Connect Milvus to server
-   $ milvus = Milvus()
-   $ status = milvus.connect(host='SERVER-HOST', port='SERVER-PORT')
+   milvus = Milvus()
+   status = milvus.connect(host='SERVER-HOST', port='SERVER-PORT')
    
    ```
 ### 创建数据表格结构
@@ -163,33 +163,36 @@ Milvus是一种稳定可靠、可弹性伸缩的特征向量数据库系统，�
 
 |  参数  |  描述  |  类型   |  参考值   |
 | ------------| --------------| --------| ---------|
-| table_name  | 要创建的table名| string | 'table名' |
-| dimension   | 表格中向量的维度 | integer | 0 < dimension <= 10000, 通常设置为128、256或518维 
-| index_type  |有3种类型的检索类型: 1. `FLAT` - 向量运行在CPU上运行；2. `INVALID` - 向量运行在GPU上，搜索速度更快；3. 'INVALID' - 默认的检索类型，需改成FLAT或INVALID。|IndexType|FLAT / IVFLAT / INVALIDE(default)|
+| table_name  | 要创建的table名| 字符串（是否支持中文） | 'table名' |
+| dimension   | 表格中向量的维度 | 整数 | 0 < dimension <= 10000, 通常设置为128、256或518维 
+| index_type  |有3种类型的检索类型: 1. `FLAT` - 数据运行在CPU上运行（@Jin Hai)；2. `INVALID` - 向量运行在GPU上，搜索速度更快；3. 'INVALID' - 默认的检索类型，需改成FLAT或INVALID。|IndexType|FLAT / IVFLAT / INVALID(default)|
 
 > 注意：如果没有GPU，将index_type设置成`IVFLAT`，系统将报错。
 
-1. 准备数据表格参数。
+1. 准备数据表格参数，比如：
   
    ```
    # Prepare param
-   $ param = {'table_name'='01', 'dimension'=256, 'index_type'=IndexType.FLAT, 'store_raw_vector'=False}
+   param = {'table_name'='test01', 'dimension'=256, 'index_type'=IndexType.FLAT}
    ```
    
-2. 创建表格01。
+2. 创建表格test01。
 
    ```
    # Create a table
-   $ milvus.create_table(param)
-   $ Status(message='Table 01 created!', code=0)
+   status = milvus.create_table(param)
+   print(status)
+   Status(message='Table test01 created!', code=0)
    ```
    
 3. 检查确认已创建数据库的信息。
    ```
    # Confirm table info.
-   $ status, table = milvus.describe_table('01')
-   $ print(status)
-   $ print(table)
+   status, table = milvus.describe_table('01')
+   print(status)
+   Status(message='Describe table successfully!')
+   print(table)
+   
    ```                        
 
 
