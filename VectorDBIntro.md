@@ -1,3 +1,9 @@
+---
+id: VectorDBIntro
+title: Vector DB Introducation
+sidebar_label: Vector Database Introducation
+---
+
 # Introduction of Characteristic Vector Database
 
 ## Feature vector
