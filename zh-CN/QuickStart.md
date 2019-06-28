@@ -1,6 +1,6 @@
 ---
 id: QuickStart
-title: QuickStart
+title: Milvus Quick Start
 sidebar_label: Milvus快速入门
 ---
 
