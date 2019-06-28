@@ -86,17 +86,18 @@ Milvus is a distributed feature vector indexing database management system which
 
 |                    |Milvus                 |  FAISS               |   SPTAG   |
 |--------------------|-----------------------|----------------------|-----------|
-| CPU/GPU异构计算能力 |:heavy_check_mark:     | :heavy_check_mark:    |:x: |
+| CPU/GPU heterogeneous computing capability |:heavy_check_mark:     | :heavy_check_mark:    |:x: |
 | Quantization index            | :heavy_check_mark:     | :heavy_check_mark:   |    :x:    |
 | Hash index                    | :heavy_check_mark:     | :heavy_check_mark:   |    :x:    |
-| Image index                   | :heavy_check_mark:     | :x:                  |   :heavy_check_mark:|
-| High availability             | :heavy_check_mark:     |  :x:                 |    :x:    |
+| Graph index                   | :heavy_check_mark:     | :x:                  |   :heavy_check_mark:|
 | Distributed architecture      | :heavy_check_mark:     |  :x:                 |   :x:     |
-| 易用标准化用户接口  | :heavy_check_mark:     |  :x:                 |   :x:     |
+| High availability             | :heavy_check_mark:     |  :x:                 |    :x:    |
+| Easy-to-use user interface    | :heavy_check_mark:     |  :x:                 |   :x:     |
 | GUI monitoring dashboard      | :heavy_check_mark:    |   :x:                 |    :x:   |
+| Simple deployment             | :heavy_check_mark:    |   :x:                 |  :x:     |
+| C++/Python SDK                | :heavy_check_mark:    |   :heavy_check_mark:  |  :heavy_check_mark:     |
+| RESTful API                   | :heavy_check_mark:    |   :x:                 |    :x:    |
 | Enterprise user support       | :heavy_check_mark:    |   :x:                 |    :x:   |
-| Flexible business mode        | :heavy_check_mark:    |   :x:                 |  :x:     |
-
 
 
 
