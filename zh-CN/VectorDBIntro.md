@@ -27,68 +27,12 @@ As already mentioned, feature vectors, with its effectiveness and practicality o
   Features are abundant. They can be IP location, text structure, frequency of certain words, or certain email headers.
 
 
-## 传统数据库与特征向量索引
-Traditional relational database are designed to organize alphanumeric data into interrelated collections. However, this technology is not well suited to the management of multimedia information. The feature vector data, vector storing and indexing methods, the large size of media objects are entirely foreign to traditional databases. 
+## 传统数据库与特征向量检索
+传统关系型数据库针对字母数字类数据而设计，把不同数据整理归纳为相互关联的集合。但是，由于这类数据库的内建数据并不包括特征向量类型，自然也就没有针对向量的管理和索引方式，而且对于表列数的支持是有限的，所以传统数据库无法支持海量、高维特征向量的存储和搜索。
 
-Some may argue and request call our attention to some vector indexing plug-ins by traditional databases, such as imgsmlr by PostgreSQL and word2vector by Google. However, as the optimizations are only made based on hash-based search and one-dimention alphanumeirc data, the performance of these plug-ins are far from satisfying, and can barely meet the needs of huge high-dimentional vector indexing. 
-
-
-## 向量索引方法
-Feature vectors are good for analysis because there are many techniques for comparing feature vectors. One simple way to compare the feature vectors of two objects is to take the Euclidean distance.
+当然，现在一些传统数据库系统也提供了针对特征向量检索的插件：例如，PostgreSQL的以图搜图插件imgsmlr，和Google的自然语言处理插件word2vector。但是由于这些插件的优化主要基于哈希搜索和一维离散数据搜索，并没有针对高维向量搜索，这些插件虽然能用，但功能不够强大，效率也很低。
 
 
-
-
-## 特征向量数据库
-We have agreed that feature vectors are the basic elements to precisely represent multimedia objects. But are there any ideal database that allows the efficient storing and indexing of feature vectors? Let's start by looking at some competent tools of feature vector indexing available in the market:
-
-### FAISS
-
-Designed by Facebook AI, and written in C++, FAISS (Facebook AI Similarity Search) is a library that allows developers to quickly search for embeddings of multimedia documents that are similar to each other. 
-
-|  Pros                     |      Cons                           |
-|---------------------------| ------------------------------------|
-| Distributed, multi-GPU    | Only a algorithm library            |
-| Customizable algorithms   | High entrance standards for users   |                       
-
-FAISS是Facebook AI 研究团队开源的针对聚类和相似性搜索库。FAISS 是用 C++ 编写的，带有 Python / numpy 的完整封装。FAISS大量利用了：
-
-- 多线程以充分利用多核性能并在多路 GPU 上进行并行搜索。
-- BLAS 算法库通过 matrix/matrix 乘法进行高效、精确的距离计算。没有 BLAS，高效的强力执行很难达到最优状态。 BLAS/LAPACK 是唯一一个 Faiss 必须的前提软件。
-- 机器 SIMD 矢量化和 popcount 被用于加速孤立矢量的距离计算。
-
-FAISS包含了多种向量检索算法，提供不同精度，查询速度和存储空间占用率。它还包含用于评估和参数调整的支持代码。 FAISS的出现也打破了过去向量检索库的一个限制：只能提供某个方面的优化。FAISS允许开发人员，在建立索引的速度、查询速度、内存使用量和查询精度等多个方面做取舍。
-
-FAISS虽然有上述的种种优点，但是依然只是一个算法库；虽然提供了多种算法和参数以供调优，但是对于开发人员而言，想用好FAISS依然有很高的门槛。
-
-### SPTAG
-
-SPTAG, open sourced in May, 2019 by Microsoft, is a distributed approximate nearest neighborhood search (ANN) library which provides a high quality vector index build, search and distributed online serving toolkits for large scale vector search scenario.
-
-| Pros                        |    Cons                   |
-|-----------------------------| --------------------------|
-| 
-
-
-SPTAG是由Microsoft于2019年5月发布的，基于最近邻搜索的向量检索算法。开发人员称该算法：允许用户充分利用学习模型在以毫秒为单位时间内智能搜索数十亿条向量。该算法在查询速度、查询精确度以及内存占用上也都有非常好的表现。和NSG类似，SPTAG建图的过程非常漫长，所以在需要大量插入新向量的同时进行查询的场景下，SPTAG也并不合适。
-
-Although FAISS and SPTAG allow developers to build vector index and search, they are still libraries, not full-winged, ready-to-use vector indexing database system. 
-
-So is there such an ideal vector indexing database system available for use? Yes.
-
-
-## Milvus数据库
-Milvus is a distributed feature vector indexing database management system which provides high quality similarity search and analysis of feature vectors and irrelational data. By extracting object features and taking the Euclidean distance between two feature vectors, the similarity of two objects is compared. Here is an comparison of Milvus with FAISS and SPTAG:
-
-
-## 传统数据库
-那么传统数据库系统和大数据系统，在向量相似性检索领域的表现会怎么样呢？
-
-随着机器学习或者深度学习技术越来越成熟，应用越来越广泛，随之而产生的特征向量数据也会越来越庞大。传统的数据库系统和大数据系统，由于其内建数据类型里并不包括特征向量类型。如果打算使用传统的数据库系统进行特征向量检索，要么自定义特征向量类型以及针对该类型数据的自定义函数；要么就只能按照一维一列的方式把高维向量存入数据库系统。由于大多数数据库系统对于表列数的支持都是有限的，因此使用这种方法通常无法支持高维特征向量。
-
-此外，传统的数据库和大数据系统里，除了没有针对该数据类型的存储方式、计算方法，也没有针对该类型的索引方式以及数据的管理方式，由此可见使用传统的数据库和大数据系统进行特征向量的存储和检索，都是不合适的。
-
-当然，现在一些传统数据库系统也提供了针对特征向量检索的插件：例如，PostgreSQL的以图搜图插件imgsmlr和自然语言处理的插件word2vector，但是由于传统数据库系统，本身是针对基于哈希搜索或者基于一维离散数据搜索而优化的，并没有针对高维向量搜索进行优化，所以这些插件虽然能用，但是功能也不强大，效率也很低，并不能满足海量高维向量的搜索。
 
 ## 向量检索算法
 通常来说，面向向量的相似性检索的方法分成：精确检索和近似检索两类。而精确检索的本质就是线性查找：
@@ -103,17 +47,22 @@ Milvus is a distributed feature vector indexing database management system which
 
 - 基于树的搜索算法
 
-基于树的搜索算法是一个以树为数据结构的近似最近邻搜索算法。其核心是不断用选取的两个质心的法平面对空间进行分割，最终将每一个区分的子空间里面的样本数据限制在K以内。对于待插入的样本Xi，从根节点依次使用法向量跟Xi做内积运算，从而判断使用法平面的哪一边（左子树or右子树）。对于查询向量Qi，采用同样的方式（在树结构上体现为从根节点向叶子节点递归遍历），即可定位到跟Qi在同一个子空间或者邻近的子空间的样本，这些样本即为Qi近邻。实际应用中还可以通过建立多棵树的方式，提高查询的准确率。
+  基于树的搜索方法通常根据向量的分布特征采用一系列的超平面将高维向量空间划分为多个子空间，并采用树型结构维护空间划分的层次关系。树中的每一个非叶子节点对应于一个子空间和一组超平面。超平面将该节点的子空间进一步划分为更小的子空间，每一个子空间与该节点的一个孩子节点相对应。由此，树中的根节点对应的是完整的向量空间，除根节点之外的每一个节点均对应于其父节点空间被划分后得到的一个子空间。而每个叶子节点对应于一个不可再分的子空间。依据上述规则，对于向量集合中的各个向量都可以找到树中的一个叶子节点与之对应。在向量搜索的过程中，可通过树型结构快速的搜索到若干个距离目标向量较近的叶子节点。通过依次计算目标向量与上述叶子节点所对应各向量的距离即可近似得到与目标向量最相似的向量。
+采用基于树的搜索方法可以快速的定位到与目标向量最为相似的若干个叶子节点，从而有效的避免了目标向量与其他大量字节的中向量的依次比对，从而提高搜索效率。然而，随着向量维度的提高，计算用于划分空间的超平面的开销将显著增大，从而影响树型结构的构建效率。此外，如果目标向量与某一超平面距离较近，该方法的搜索结果可能会丢失大量的与目标相似的向量，从而影响查询的准确度。
 
 - 基于哈希的空间划分法
 
-基于哈希的空间划分法是利用哈希函数对把需要搜索的特征空间，划分称为多个子空间。然后把带插入的向量根据前面的哈希函数，聚类到不同的子空间中，一般来说相同子空间内向量的空间距离相对更接近。然后把这些向量分别记录在每个子空间的倒排列表中。对于查询向量的来说，首先也是用哈希函数找到和这个向量最近的一个或多个子空间。然后再根据子空间中心点到该向量的距离，由近及远，计算其倒排列表中所有向量与查询向量的距离。最后根据距离，选出距离最近的k个向量作为返回结果。
+  基于哈希的搜索方法采用一组局部敏感哈希函数对向量集合进行划分。通过采用局部敏感哈希函数可以对每一个向量计算出一个与之相对应的哈希值。对于距离较接近的向量，其哈希值也较为接近。该方法将各局部敏感哈希函数的值域划分为若干个区间，从而每个向量相应于特定的局部敏感哈希函数，均有一个区间与之对应。该方法通过哈希值的区间对向量进行划分，若两向量对于任一哈希函数其哈希值所在的区间均相同，则这两个向量属于同一分类。在搜索时，通过相同的局部敏感哈希函数和区间划分方法可以计算得到目标向量所属分类。然后可依次计算该分类以及该分类的邻近分类中所有向量与目标向量的距离获取距离最小的向量。
+基于哈希的方法，通过计算目标向量所在分类以及邻近的分类可以有效的排除掉大量与目标向量相似度较低的向量，减少了向量相似度的计算次数。但是，该方法通常只能对向量空间进行均匀划分，而实际应用中向量在空间中的分布通常是不均匀的，从而导致各个分类中向量的数量相差巨大，并进一步影响搜索的效率和准确度。
 
 - 向量量化的编码算法
 
-向量量化方法的本质也是聚类，它的方法是这样的：在训练阶段，针对训练样本集合，会将其样本维度d进行切分。假设切分为n个子空间，每个子空间的维度就是d/n。然后再在每个子空间中，对子向量进行聚类，如此每个子空间都可以获得一个编码集。这样训练样本的每个子段，都可以用子空间聚类中心来近似，对应的编码也就是类中心的ID了。通过这样的编码方式，训练样本就可以用很短的编码进行表示，从而达到量化的目的。对于待编码的数据，使用相同的切分方案，完成所有编码。如此，在查询向量到来的时候，原先全样本的距离计算，就可以转化为子空间聚类中心的距离计算，从而大大简化了向量检索的时间。此外，由于该算法对特征向量进行编码后的信息较短，其额外的空间占用率也并不高。但是，该算法的精度与子空间划分的大小和编码长度有的关系。目前，该类算法的查询性能优秀，但是精度较其他算法要低。
+  基于向量量化的方法通常采用聚类的方式对向量集合中的向量进行划分。该方法通过k-means等聚类方法将向量集合划分为多个聚类，并记录各个聚类的中心点的坐标。在向量搜索时，首先依次比对目标向量与各个聚类中心的距离，选择出与目标向量最为接近的若干个聚类中心。接下来获取这些聚类中心所对应聚类中的所有向量，依次计算各向量与目标向量的距离，选择出距离最为接近的若干个向量。
+该方法采用聚类的方法将数据集合划分，从而在搜索过程中排除掉与目标向量相似度较低的向量。然而，该方法在高维向量的搜索中容易遗漏部分潜在的与目标向量距离较近的向量，从而难以达到较高的准确度。
 
-除了上面提到的三类算法，近年来基于邻近图的最近邻搜索算法，在向量检索领域开始突破。邻近图算法的核心思想也是聚类，通过把距离最近的向量，用图连接的方式连接起来。这样当我们在查询的时候，就可以利用"邻居的邻居也可能是邻居"的原理，找到最相似的向量。
+- 基于图的搜索方法
+  与以上方法不同，基于图的搜索方法通常不对向量空间进行划分。该方法预先计算向量集合中各向量间的相似度，并以图的形式维护向量之间的相似关系。具体而言，在图中每个向量是一个节点，距离较近的节点之间通过边相互连接。在搜索时，从一个或者多个起始节点出发进行探索。每次探索一个节点时，计算该节点的所有邻居节点与目标向量的相似度，并基于当前探索的结果，选择与目标向量最为相似且未被探索的节点作为下一次需要探索的节点并开始下一次探索。以上过程在无法找到新的探索节点时结束，并将探索过程中所有被访问的节点中与目标向量最为相似的节点作为搜索结果。
+基于图的方法通常有较高的搜索效率和准确度，但是构建搜索图的过程中需要进行大量的向量距离计算，从而导致极大的计算开销。除此之外，在需要向向量集合中增加新的向量时，通常需要对搜索图进行重新构建，从而严重的影响了向量的插入效率。
 
 ## 特征向量数据库
 既然特征向量检索是未来人工智能技术大规模应用的必要条件，那市场上目前关于特征向量检索有哪些具体实现呢？
@@ -135,6 +84,8 @@ FAISS虽然有上述的种种优点，但是依然只是一个算法库；虽然
 SPTAG是由Microsoft于2019年5月发布的，基于最近邻搜索的向量检索算法。开发人员称该算法：允许用户充分利用学习模型在以毫秒为单位时间内智能搜索数十亿条向量。该算法在查询速度、查询精确度以及内存占用上也都有非常好的表现。和NSG类似，SPTAG建图的过程非常漫长，所以在需要大量插入新向量的同时进行查询的场景下，SPTAG也并不合适。
 
 综上所述，当前工业界针对向量检索的实现中，并没有一个能擅长所有场景的万能算法。同时现有的实现也都还只是算法库，而并非一个系统。随着AI应用的大规模落地，提供一个面向海量特征向量检索的数据库系统，已经是市场对于数据库厂商提出的新需求。
+
+
 
 ## Milvus特征向量数据库
 
