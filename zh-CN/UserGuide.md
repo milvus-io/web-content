@@ -188,7 +188,7 @@ Milvus是一种稳定可靠、可弹性伸缩的特征向量数据库系统，�
 3. 检查确认已创建表格的信息。
    ```
    # Confirm table info.
-   >>> status, table = milvus.describe_table('01')
+   >>> status, table = milvus.describe_table('test01')
    >>> status
    Status(message='Describe table successfully!')
    >>> table
@@ -209,7 +209,7 @@ Milvus是一种稳定可靠、可弹性伸缩的特征向量数据库系统，�
 
 ```
 # Import vectors
->>> status, ids = milvus.add_vectors(table_name='01', records=vectors)
+>>> status, ids = milvus.add_vectors(table_name='test01', records=vectors)
 >>> status
 Status(code=0, message='Success')
 >>> ids  # 20 ids returned
@@ -256,6 +256,8 @@ Status(message='Delete table successfully!', code=0)
 ## 查询表格
 
 ### 查询表格名字
+通过以下操作，你可以查询Milvus数据库中所有表格的名字：
+
 ```python
 >>> status, tables = milvus.show_tables()
 >>> status
@@ -264,25 +266,26 @@ Status(message='Show tables successfully!', code=0)
 ['test01', 'others', ...]
 ```
 ### 查询表格信息
+你可以按此方式查询数据库中某张表格的信息：
+
 ```python
->>> status, table = milvus.describe_table('01')
+>>> status, table = milvus.describe_table('test01')
 >>> status
 Status(message='Describe table successfully!')
 >>> table
 TableSchema(table_name='test01',dimension=256, index_type=1, store_raw_vector=False)
 ```
 ### 查询表格是否存在
+请按照以下方式查询某张表格是否存在：
 
 ```python
 >>> milvus.has_table(table_name='test01')
 True
 ```
-注意：如果查询的表格已经不存在，则返回值为False。
-你可以查询到所有已创建表格的名字，以及各张表格的相关信息：
+> 注意：如果查询的表格已经不存在，则以上代码中返回值为False。
 
 
-
-Milvus提供基于C++/Python的客户端SDK。以Python为例，你可以参照[Milvus Python SDK](https://pypi.org/project/pymilvus)和[使用示例](https://github.com/milvus-io/pymilvus/blob/master/examples/example.py)导入特征向量数据，并进行特征向量搜索。
+> 注意：若要了解更多Milvus操作，你可以参照[Milvus Python SDK](https://pypi.org/project/pymilvus)和[使用示例](https://github.com/milvus-io/pymilvus/blob/master/examples/example.py)。
 
 
 
