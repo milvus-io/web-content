@@ -22,9 +22,9 @@
 
   特征向量可以是音长，噪音等级，信噪比。
 
-- Spam-fighting initiatives
+- 垃圾邮件识别
 
-  Features are abundant. They can be IP location, text structure, frequency of certain words, or certain email headers.
+  特征向量可以是IP地址，文字结构，某个词出现的频率或是特定邮件标题。
 
 
 ## 传统数据库与特征向量检索
