@@ -19,42 +19,6 @@ Leagal Disclaimer
    
 快速入门
 
-Milvus数据库管理
-
-   - Milvus目录结构
-   - 设置Milvus
-     - 设置Milvus服务
-     - 设置Milvus日志
-     
-   - Milvus监控
-     - 监控告警概述
-     - 监控指标
-     - 监控安装设置
-     - 设置监控频率
-     - 设置告警规则
-     
-创建数据库
-
-导入数据
-
-使用Milvus进行搜索
-
-删除数据库
-
-应用场景
-
-障碍排查
-
-
-
-前言
-   - 概述
-   - 声明
-   - 基本概念
-   - 通用描述说明
-   
-快速入门
-
 设置Milvus
    - Milvus目录介绍
    - 设置Milvus服务
@@ -67,7 +31,7 @@ Milvus数据库管理
 
 删除数据库
 
-监控与告警警
+监控与告警
    - 监控概述
    - 监控指标
    - 监控安装设置
@@ -75,7 +39,6 @@ Milvus数据库管理
    - 设置告警规则
    
 日志管理
-   - 设置Milvus日志
    
 应用场景
 
@@ -116,8 +79,9 @@ Milvus是一种稳定可靠、可弹性伸缩的特征向量数据库系统，�
 关于Milvus的安装和试运行，请访问：[Milvus快速入门](https://github.com/milvus-io/docs/blob/dev/zh-CN/QuickStart.md)
 
 
-## Milvus数据库管理
-### Milvus文件
+## 设置Milvus
+
+### Milvus文件介绍
 成功启动Milvus server后，你可以在home/$USER/milvus的路径下看到Milvus的文件夹。其中包含以下文件：
 
 - milvus/db（数据库存储）
@@ -127,11 +91,7 @@ Milvus是一种稳定可靠、可弹性伸缩的特征向量数据库系统，�
     - log_config.conf（日志设置文件）
 - milvus/test（测试脚本）
 
-
-### 设置Milvus
-Milvus设置文件包含服务设置和日志设置两方面。Milvus服务设置涉及服务，数据库和监控等方面，（为什么重要？）
-
-#### 设置Milvus服务
+### 设置Milvus服务
 
 请按照以下步骤设置Milvus服务：
 
@@ -174,10 +134,133 @@ Milvus设置文件包含服务设置和日志设置两方面。Milvus服务设�
      | cpu_cache_capacity |用于cache的内存量，默认值为16GB       |  0 ~ 机器内存总量 |
 
 3. 重启Milvus Docker。
+
+
+
+## 创建数据库
+> 注意：以下操作都是在Python交互环境下进行的。对于其他类型的语言，Milvus支持通过RESTful和RPC的访问方法。
+
+### 前提条件
+如果你已经完成了Milvus的安装和所有相关设置，你就可以在Milvus上创建属于自己的数据库了。在用Python创建数据库之前，请确保你已经完成了以下操作：
+
+1. 你已经导入了pymilvus。
+
+   ```python
+   # Import pymilvus
+   $ from milvus import Milvus, Prepare, IndexType, Status
+
+   ```
+2. 你已经将Milvus连接到了本地server。
+
+   ```
+   # Connect Milvus to server
+   $ milvus = Milvus()
+   $ status = milvus.connect(host='SERVER-HOST', port='SERVER-PORT')
+   
+   ```
+### 创建数据表格结构
+我们以创建Table test01为例，向您展示如何创建一张数据表。以下是数据表格相关参数，在创建表格时可以根据实际需求选择：
+
+|  参数  |  描述  |  类型   |  参考值   |
+| ------------| --------------| --------| ---------|
+| table_name  | 要创建的table名| string | 'table名' |
+| dimension   | 表格中向量的维度 | integer | 0 < dimension <= 10000, 通常设置为128、256或518维 
+| index_type  |有3种类型的检索类型: 1. `FLAT` - 向量运行在CPU上运行；2. `INVALID` - 向量运行在GPU上，搜索速度更快；3. 'INVALID' - 默认的检索类型，需改成FLAT或INVALID。|IndexType|FLAT / IVFLAT / INVALIDE(default)|
+
+注意：如果没有GPU，将index_type设置成`IVFLAT`，系统将报错。
+
+1. 准备数据表格参数。
+  
+   ```
+   # Prepare param
+   $ param = {'table_name'='01', 'dimension'=256, 'index_type'=IndexType.FLAT, 'store_raw_vector'=False}
+   ```
+   
+2. 创建表格01。
+
+   ```
+   # Create a table
+   $ milvus.create_table(param)
+   $ Status(message='Table 01 created!', code=0)
+   ```
+   
+3. 检查确认已创建数据库的信息。
+   ```
+   # Confirm table info.
+   $ status, table = milvus.describe_table('01')
+   $ print(status)
+   $ print(table)
+   ```                        
+
+
+## 导入向量数据
+成功创建数据表格后，您可以向表格批量导入向量数据。当然，进行此操作的前提是您已经有了多维的向量数据。导入数据前，请先了解数据导入相关参数：
+
+|参数|描述|类型|参考值|
+|---------|-----------|----|-----|
+|table_name| 要创建的table名| string| 'table名'|
+|records| 需要导入table的一组向量，每条向量是一组浮点，其维度必须和所创建表格的维度一样大。|2-dimension list|[[0.1, 0.2, ...], ...]
+
+紧接着上面的例子，以下展示如何向Table 01导入20条256维的向量数据：
+
+```
+# Import vectors
+$ status, ids = milvus.add_vectors(table_name='01', records=vectors)
+$ print(status)
+$ Status(code=0, message='Success')
+$ pprint(ids) 
+
+# List of ids returned
+23455321135511233
+12245748929023489
+...
+```
+
+
+## 用Milvus进行搜索
+现在，您已经在创建好的表格里成功导入了向量数据，您可以用Milvus搜索你需要的数据了。在此，你不仅可以批量搜索多个数据，还可以指定搜索范围。具体请阅读执行数据搜索相关参数：
+
+|参数|描述|类型|参考值|
+|---------|-----------|----|-----|
+|table_name|要创建的table名|string|'table名'|
+|top_k| 与所搜索向量相似度最高的k个向量| integer | 0 < top_k <= 10000|
+|query_records| 一组需要搜索的向量，每条向量是一组浮点，其维度必须和所创建表格的维度一样大。| 2-dimension list | [[0.1, 0.2, ...], ...] |
+|query_ranges（可选）| 向量搜索的范围，比如你可以只搜索某一段日期内的向量。如果不设置，默认值是'None'（即'无范围'），表示全局搜索。|list[tuple]|[('2019-01-01', '2019-01-02'), ...]|
+
+注意：目前搜索范围仅支持日期范围，格式为'yyyy-mm-dd'，为左闭右开模式。比如您将范围定为[2019.1.1, 2019.1.3)，则搜索日期包含2019.1.1，但不包含2019.1.3.
+
+假设您需要搜索5条256维的向量，你可以：
+1. 定义您要搜索的5条向量数据。
+
+   ```
+   # Create 5 vectors of 256-dimension
+   $ q_records = [[random.random() for _ in range(dim)] for _ in range(5)]
+   ```
+   
+2. 搜索这5条向量。
+
+   ```
+   # Search 5 vectors
+   $ status, results = milvus.search_vectors(table_name='test01', query_records=q_records, top_k=10)
+   $ print(status)
+   $ pprint(results) # Searched top_k vectors
+   ```
  
 
-### Milvus监控告警
-#### 监控告警概述
+## 删除表格
+你可以根据需要，删除数据库中已创建的表格。仍然以表格01为例，若要删除表格01，你可以：
+
+```
+# Delete table
+$ milvus.delete_table(table_name='01')
+```
+
+Milvus提供基于C++/Python的客户端SDK。以Python为例，你可以参照[Milvus Python SDK](https://pypi.org/project/pymilvus)和[使用示例](https://github.com/milvus-io/pymilvus/blob/master/examples/example.py)导入特征向量数据，并进行特征向量搜索。
+
+
+
+## 监控与告警
+### 监控告警概述
 如果你想跟踪数据库系统运行表现，你可以选择为Milvus创建监控中心。你可以自行搭建，也可以直接使用我们提供的基于开源监控框架Prometheus的Milvus监控中心。其主要工作流程如下：
 
 Milvus server收集数据 > 利用pull模式把所有数据导入Prometheus > 通过Grafana展示各项监控指标。
@@ -188,7 +271,7 @@ Milvus server收集数据 > 利用pull模式把所有数据导入Prometheus > �
 
 
 
-#### 监控安装设置
+### 监控安装设置
 
 1. 安装Prometheus和Grafana。
 
@@ -316,7 +399,7 @@ Milvus server收集数据 > 利用pull模式把所有数据导入Prometheus > �
    ![image-20190620134549612](assets/prometheus.png)
 
 
-#### 监控指标
+### 监控指标
 在Milvus监控系统的GUI控制板上，你可以查看监控数据库的各项指标，实时了解数据库运行表现。
 
 以下是控制板上可以查看的监控项：
@@ -341,136 +424,15 @@ Milvus server收集数据 > 利用pull模式把所有数据导入Prometheus > �
 | 运行时长        |   Milvus服务器正常运行的分钟数      |
 | 缓存利用率       |    已用缓存占比                   |
 
-#### 设置监控频率
+### 设置监控频率
 
 
-#### 设置告警规则
+### 设置告警规则
 
 
-## 创建数据库
-> 注意：以下操作都是在Python交互环境下进行的。对于其他类型的语言，Milvus支持通过RESTful和RPC的访问方法。
-
-### 前提条件
-如果你已经完成了Milvus的安装和所有相关设置，你就可以在Milvus上创建属于自己的数据库了。在用Python创建数据库之前，请确保你已经完成了以下操作：
-
-1. 你已经导入了pymilvus。
-
-   ```python
-   # Import pymilvus
-   $ from milvus import Milvus, Prepare, IndexType, Status
-
-   ```
-2. 你已经将Milvus连接到了本地server。
-
-   ```
-   # Connect Milvus to server
-   $ milvus = Milvus()
-   $ status = milvus.connect(host='SERVER-HOST', port='SERVER-PORT')
-   
-   ```
-### 创建数据表格结构
-我们以创建Table test01为例，向您展示如何创建一张数据表。以下是数据表格相关参数，在创建表格时可以根据实际需求选择：
-
-|  参数  |  描述  |  类型   |  参考值   |
-| ------------| --------------| --------| ---------|
-| table_name  | 要创建的table名| string | 'table名' |
-| dimension   | 表格中向量的维度 | integer | 0 < dimension <= 10000, 通常设置为128、256或518维 
-| index_type  |有3种类型的检索类型: 1. `FLAT` - 向量运行在CPU上运行；2. `INVALID` - 向量运行在GPU上，搜索速度更快；3. 'INVALID' - 默认的检索类型，需改成FLAT或INVALID。|IndexType|FLAT / IVFLAT / INVALIDE(default)|
-
-注意：如果没有GPU，将index_type设置成`IVFLAT`，系统将报错。
-
-1. 准备数据表格参数。
-  
-   ```
-   # Prepare param
-   $ param = {'table_name'='01', 'dimension'=256, 'index_type'=IndexType.FLAT, 'store_raw_vector'=False}
-   ```
-   
-2. 创建表格01。
-
-   ```
-   # Create a table
-   $ milvus.create_table(param)
-   $ Status(message='Table 01 created!', code=0)
-   ```
-   
-3. 检查确认已创建数据库的信息。
-   ```
-   # Confirm table info.
-   $ status, table = milvus.describe_table('01')
-   $ print(status)
-   $ print(table)
-   ```                        
+## 日志管理
 
 
-
-## 导入向量数据
-成功创建数据表格后，您可以向表格批量导入向量数据。当然，进行此操作的前提是您已经有了多维的向量数据。导入数据前，请先了解数据导入相关参数：
-
-|参数|描述|类型|参考值|
-|---------|-----------|----|-----|
-|table_name| 要创建的table名| string| 'table名'|
-|records| 需要导入table的一组向量，每条向量是一组浮点，其维度必须和所创建表格的维度一样大。|2-dimension list|[[0.1, 0.2, ...], ...]
-
-紧接着上面的例子，以下展示如何向Table 01导入20条256维的向量数据：
-
-```
-# Import vectors
-$ status, ids = milvus.add_vectors(table_name='01', records=vectors)
-$ print(status)
-$ Status(code=0, message='Success')
-$ pprint(ids) 
-
-# List of ids returned
-23455321135511233
-12245748929023489
-...
-```
-
-
-
-## 用Milvus进行搜索
-现在，您已经在创建好的表格里成功导入了向量数据，您可以用Milvus搜索你需要的数据了。在此，你不仅可以批量搜索多个数据，还可以指定搜索范围。具体请阅读执行数据搜索相关参数：
-
-|参数|描述|类型|参考值|
-|---------|-----------|----|-----|
-|table_name|要创建的table名|string|'table名'|
-|top_k| 与所搜索向量相似度最高的k个向量| integer | 0 < top_k <= 10000|
-|query_records| 一组需要搜索的向量，每条向量是一组浮点，其维度必须和所创建表格的维度一样大。| 2-dimension list | [[0.1, 0.2, ...], ...] |
-|query_ranges（可选）| 向量搜索的范围，比如你可以只搜索某一段日期内的向量。如果不设置，默认值是'None'（即'无范围'），表示全局搜索。|list[tuple]|[('2019-01-01', '2019-01-02'), ...]|
-
-注意：目前搜索范围仅支持日期范围，格式为'yyyy-mm-dd'，为左闭右开模式。比如您将范围定为[2019.1.1, 2019.1.3)，则搜索日期包含2019.1.1，但不包含2019.1.3.
-
-假设您需要搜索5条256维的向量，你可以：
-1. 定义您要搜索的5条向量数据。
-
-   ```
-   # Create 5 vectors of 256-dimension
-   $ q_records = [[random.random() for _ in range(dim)] for _ in range(5)]
-   ```
-   
-2. 搜索这5条向量。
-
-   ```
-   # Search 5 vectors
-   $ status, results = milvus.search_vectors(table_name='test01', query_records=q_records, top_k=10)
-   $ print(status)
-   $ pprint(results) # Searched top_k vectors
-   ```
- 
-
-
-## 删除表格
-你可以根据需要，删除数据库中已创建的表格。仍然以表格01为例，若要删除表格01，你可以：
-
-```
-# Delete table
-$ milvus.delete_table(table_name='01')
-```
-
-Milvus提供基于C++/Python的客户端SDK。以Python为例，你可以参照[Milvus Python SDK](https://pypi.org/project/pymilvus)和[使用示例](https://github.com/milvus-io/pymilvus/blob/master/examples/example.py)导入特征向量数据，并进行特征向量搜索。
-
-                               
 
 ## 应用场景
 ### 典型应用场景
@@ -490,7 +452,6 @@ Milvus提供基于C++/Python的客户端SDK。以Python为例，你可以参照[
 
 - 文件去重，通过文件指纹去除重复文件。
 
-  
 
 ### 典型架构
 Milvus做特征向量检索时典型应用架构如下：
