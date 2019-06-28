@@ -1,7 +1,7 @@
 ---
 id: UserGuide
-title: Milvus用户指南
-sidebar_label: Milvus用户指南
+title: Milvus User Guide
+sidebar_label: Milvus User Guide
 ---
 
 # Milvus用户指南
