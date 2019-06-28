@@ -240,6 +240,10 @@ Status(code=0, message='Success')
    >>> status
    Status(message='Search vectors successfully!', code=0)
    >>> results # Searched top_k vectors
+   [[QueryResult(id=1561709418638204004, score=62.554189514479866), ..., ],
+   [QueryResult(id=1561709418638204018, score=59.801433231755965), ..., ],
+   ...
+   ]
    ```
  
 
