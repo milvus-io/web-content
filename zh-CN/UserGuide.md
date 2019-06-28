@@ -147,16 +147,17 @@ Milvus是一种稳定可靠、可弹性伸缩的特征向量数据库系统，�
 
    ```python
    # Import pymilvus
-   from milvus import Milvus, Prepare, IndexType, Status
+   >>> from milvus import Milvus, Prepare, IndexType, Status
 
    ```
 2. 你已经将Milvus连接到了本地server。
 
    ```
    # Connect Milvus to server
-   milvus = Milvus()
-   status = milvus.connect(host='SERVER-HOST', port='SERVER-PORT')
-   
+   >>> milvus = Milvus()
+   >>> milvus.connect(host='SERVER-HOST', port='SERVER-PORT')
+   Status(message='connected!', code=0)
+
    ```
 ### 创建数据表格结构
 我们以创建Table test01为例，向您展示如何创建一张数据表。以下是数据表格相关参数，在创建表格时可以根据实际需求选择：
@@ -173,25 +174,25 @@ Milvus是一种稳定可靠、可弹性伸缩的特征向量数据库系统，�
   
    ```
    # Prepare param
-   param = {'table_name'='test01', 'dimension'=256, 'index_type'=IndexType.FLAT}
+   >>> param = {'table_name'='test01', 'dimension'=256, 'index_type'=IndexType.FLAT}
    ```
    
 2. 创建表格test01。
 
    ```
    # Create a table
-   status = milvus.create_table(param)
-   print(status)
+   >>> milvus.create_table(param)
    Status(message='Table test01 created!', code=0)
    ```
    
-3. 检查确认已创建数据库的信息。
+3. 检查确认已创建表格的信息。
    ```
    # Confirm table info.
-   status, table = milvus.describe_table('01')
-   print(status)
+   >>> status, table = milvus.describe_table('01')
+   >>> status
    Status(message='Describe table successfully!')
-   print(table)
+   >>> table
+   TableSchema(table_name='test01',dimension=256, index_type=1, store_raw_vector=False)
    
    ```                        
 
@@ -201,22 +202,21 @@ Milvus是一种稳定可靠、可弹性伸缩的特征向量数据库系统，�
 
 |参数|描述|类型|参考值|
 |---------|-----------|----|-----|
-|table_name| 要创建的table名| string| 'table名'|
-|records| 需要导入table的一组向量，每条向量是一组浮点，其维度必须和所创建表格的维度一样大。|2-dimension list|[[0.1, 0.2, ...], ...]
+|table_name| 要创建的table名| 字符串| 'table名'|
+|records| 需要导入table的一组向量，每条向量的数值需为浮点类型（小数），其维度必须和所创建表格的维度一致。|二维数组|[[0.1, 0.2, ...], ...]
 
-紧接着上面的例子，以下展示如何向Table 01导入20条256维的向量数据：
+紧接着上面的例子，以下展示如何向Table 01导入20条256维的向量数据（在下面的代码中用vectors表示）：
 
 ```
 # Import vectors
-$ status, ids = milvus.add_vectors(table_name='01', records=vectors)
-$ print(status)
-$ Status(code=0, message='Success')
-$ pprint(ids) 
-
-# List of ids returned
+>>> status, ids = milvus.add_vectors(table_name='01', records=vectors)
+>>> status
+Status(code=0, message='Success')
+>>> ids  # 20 ids returned
 23455321135511233
 12245748929023489
 ...
+
 ```
 
 
@@ -225,38 +225,62 @@ $ pprint(ids)
 
 |参数|描述|类型|参考值|
 |---------|-----------|----|-----|
-|table_name|要创建的table名|string|'table名'|
-|top_k| 与所搜索向量相似度最高的k个向量| integer | 0 < top_k <= 10000|
-|query_records| 一组需要搜索的向量，每条向量是一组浮点，其维度必须和所创建表格的维度一样大。| 2-dimension list | [[0.1, 0.2, ...], ...] |
+|table_name|要创建的table名|字符串|'table名'|
+|top_k| 与所搜索向量相似度最高的k个向量| 整数 | 0 < top_k <= 10000|
+|query_records| 一组需要搜索的向量，每条向量数值需为浮点类型（小数），其维度必须和所创建表格的维度一致。|二维数组 | [[0.1, 0.2, ...], ...] |
 |query_ranges（可选）| 向量搜索的范围，比如你可以只搜索某一段日期内的向量。如果不设置，默认值是'None'（即'无范围'），表示全局搜索。|list[tuple]|[('2019-01-01', '2019-01-02'), ...]|
 
 > 注意：目前搜索范围仅支持日期范围，格式为'yyyy-mm-dd'，为左闭右开模式。比如您将范围定为[2019.1.1, 2019.1.3)，则搜索日期包含2019.1.1，但不包含2019.1.3.
 
-假设您需要搜索5条256维的向量，你可以：
-1. 定义您要搜索的5条向量数据。
-
-   ```
-   # Create 5 vectors of 256-dimension
-   $ q_records = [[random.random() for _ in range(dim)] for _ in range(5)]
-   ```
-   
-2. 搜索这5条向量。
+假设您要针对5条256维的向量（在下面代码中用q_records表示），搜索与每条向量相似度最高的前10组结果，你可以：
 
    ```
    # Search 5 vectors
-   $ status, results = milvus.search_vectors(table_name='test01', query_records=q_records, top_k=10)
-   $ print(status)
-   $ pprint(results) # Searched top_k vectors
+   >>> status, results = milvus.search_vectors(table_name='test01', query_records=q_records, top_k=10)
+   >>> status
+   Status(message='Search vectors successfully!', code=0)
+   >>> results # Searched top_k vectors
    ```
  
 
 ## 删除表格
-你可以根据需要，删除数据库中已创建的表格。仍然以表格01为例，若要删除表格01，你可以：
+你可以根据需要，删除数据库中已创建的表格。仍然以表格test01为例，若要删除表格test01，你可以：
 
 ```
 # Delete table
-$ milvus.delete_table(table_name='01')
+>>> milvus.delete_table(table_name='test01')
+Status(message='Delete table successfully!', code=0)
 ```
+
+
+## 查询表格
+
+### 查询表格名字
+```python
+>>> status, tables = milvus.show_tables()
+>>> status
+Status(message='Show tables successfully!', code=0)
+>>> tables
+['test01', 'others', ...]
+```
+### 查询表格信息
+```python
+>>> status, table = milvus.describe_table('01')
+>>> status
+Status(message='Describe table successfully!')
+>>> table
+TableSchema(table_name='test01',dimension=256, index_type=1, store_raw_vector=False)
+```
+### 查询表格是否存在
+
+```python
+>>> milvus.has_table(table_name='test01')
+True
+```
+注意：如果查询的表格已经不存在，则返回值为False。
+你可以查询到所有已创建表格的名字，以及各张表格的相关信息：
+
+
 
 Milvus提供基于C++/Python的客户端SDK。以Python为例，你可以参照[Milvus Python SDK](https://pypi.org/project/pymilvus)和[使用示例](https://github.com/milvus-io/pymilvus/blob/master/examples/example.py)导入特征向量数据，并进行特征向量搜索。
 
