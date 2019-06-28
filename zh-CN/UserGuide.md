@@ -135,6 +135,9 @@ Milvus是一种稳定可靠、可弹性伸缩的特征向量数据库系统，�
 
 3. 重启Milvus Docker。
 
+   ```
+   $ docker restart <container id>
+   ```
 
 
 ## 创建数据库
@@ -164,20 +167,20 @@ Milvus是一种稳定可靠、可弹性伸缩的特征向量数据库系统，�
 
 |  参数  |  描述  |  类型   |  参考值   |
 | ------------| --------------| --------| ---------|
-| table_name  | 要创建的table名| 字符串（是否支持中文） | 'table名' |
+| table_name  | 要创建的table名字（由数字、字母和下划线构成）| 字符串 | 'table名字' |
 | dimension   | 表格中向量的维度 | 整数 | 0 < dimension <= 10000, 通常设置为128、256或518维 
-| index_type  |有3种类型的检索类型: 1. `FLAT` - 数据运行在CPU上运行（@Jin Hai)；2. `INVALID` - 向量运行在GPU上，搜索速度更快；3. 'INVALID' - 默认的检索类型，需改成FLAT或INVALID。|IndexType|FLAT / IVFLAT / INVALID(default)|
+| index_type  |有3种类型的检索类型: 1. `FLAT` - 精确向量索引类型；2. `INVALID` - 基于K-means的向量索引，精度有损失，但搜索速度更快；|IndexType|FLAT / IVFLAT / INVALID(default)|
 
 > 注意：如果没有GPU，将index_type设置成`IVFLAT`，系统将报错。
 
-1. 准备数据表格参数，比如：
+1. 准备数据表的参数，比如：
   
    ```
    # Prepare param
    >>> param = {'table_name'='test01', 'dimension'=256, 'index_type'=IndexType.FLAT}
    ```
    
-2. 创建表格test01。
+2. 创建表test01。
 
    ```
    # Create a table
@@ -216,7 +219,6 @@ Status(code=0, message='Success')
 23455321135511233
 12245748929023489
 ...
-
 ```
 
 
@@ -269,6 +271,7 @@ Status(message='Show tables successfully!', code=0)
 >>> tables
 ['test01', 'others', ...]
 ```
+
 ### 查询表格信息
 你可以按此方式查询数据库中某张表格的信息：
 
@@ -279,6 +282,7 @@ Status(message='Describe table successfully!')
 >>> table
 TableSchema(table_name='test01',dimension=256, index_type=1, store_raw_vector=False)
 ```
+
 ### 查询表格是否存在
 请按照以下方式查询某张表格是否存在：
 
@@ -371,36 +375,7 @@ Milvus server收集数据 > 利用pull模式把所有数据导入Prometheus > �
               serverity: page
       ```
 
-3. 设置alertmanager
-
-   1）在alertmanager根目录下创建milvus.yml文件，内容如下：
-
-      ```
-      global:
-        resolve_timeout: 1m
-        smtp_smarthost: 'smtp.163.com:25' # smtp server config
-        smtp_from: '×××@163.com'          # sender mail account
-        smtp_auth_username: '×××@163.com' # sender mail account
-        smtp_auth_password: '××××××××'    # sender mail password
-        smtp_hello: '163.com'             # sender mail suffix
-        smtp_require_tls: false
-      route:
-        group_by: ['alertname']
-        receiver: default
-
-      receivers:
-        - name: 'default'
-          email_configs:
-          - to: '××××@××.com'             # receiver mail address
-      ```
-   
-   2）指定--config.file=milvus.yml以启动alertmanager，如下：
-
-      ```
-      ./alertmanager --config.file=milvus.yml
-      ```
-
-4. 设置Grafana
+3. 设置Grafana
 
    1）打开terminal，执行以下命令
    
@@ -459,13 +434,39 @@ Milvus server收集数据 > 利用pull模式把所有数据导入Prometheus > �
 | 缓存利用率       |    已用缓存占比                   |
 
 ### 设置监控频率
-目前，Milvus监控支持以下几种监控频率设置：
-- 1次/秒（默认）
-- 
+目前，Milvus监控默认的监控频率为：1次/秒，你也可以[更改监控设置](https://prometheus.io/docs/prometheus/latest/configuration/configuration/)。
+
 
 ### 设置告警规则
-我们默认的规则是，当服务器无法正常工作时，会发邮件通知用户：
-https://prometheus.io/docs/alerting/configuration/#configuration-file
+你可以为Milvus设置告警规则，比如：当服务器无法正常工作时，会立即发邮件通知相关用户。你可以按照以下操作进行：
+
+   1）在Alertmanager根目录下创建milvus.yml文件，内容如下：
+
+      ```
+      global:
+        resolve_timeout: 1m
+        smtp_smarthost: 'smtp.163.com:25' # smtp server config
+        smtp_from: '×××@163.com'          # sender mail account
+        smtp_auth_username: '×××@163.com' # sender mail account
+        smtp_auth_password: '××××××××'    # sender mail password
+        smtp_hello: '163.com'             # sender mail suffix
+        smtp_require_tls: false
+      route:
+        group_by: ['alertname']
+        receiver: default
+
+      receivers:
+        - name: 'default'
+          email_configs:
+          - to: '××××@××.com'             # receiver mail address
+      ```
+   
+   2）指定--config.file=milvus.yml以启动Alertmanager，如下：
+
+      ```
+      ./alertmanager --config.file=milvus.yml
+      ```
+提示：如果你想自定义告警设置，请参考[告警设置](https://prometheus.io/docs/alerting/configuration/#configuration-file)
 
 
 ## 日志管理
@@ -551,9 +552,6 @@ Milvus做特征向量检索时典型应用架构如下：
     结构化数据库，以MySQL存储，存储以个人ID号为主键的个人信息。
 
 - **基础设施**：Milvus实现向量数据的存储，MySQL实现结构化数据存储，Minio实现非结构化数据(人脸图片)存储。
-
-#### 示例
-
 
 
 ### 案例 2 - 基于Milvus的商品推荐系统
