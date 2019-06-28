@@ -459,9 +459,13 @@ Milvus server收集数据 > 利用pull模式把所有数据导入Prometheus > �
 | 缓存利用率       |    已用缓存占比                   |
 
 ### 设置监控频率
-
+目前，Milvus监控支持以下几种监控频率设置：
+- 1次/秒（默认）
+- 
 
 ### 设置告警规则
+我们默认的规则是，当服务器无法正常工作时，会发邮件通知用户：
+https://prometheus.io/docs/alerting/configuration/#configuration-file
 
 
 ## 日志管理
