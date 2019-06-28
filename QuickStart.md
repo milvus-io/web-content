@@ -6,7 +6,7 @@ sidebar_label: Milvus Quick Start
 
 #  Milvus Quick Start
 
-In this guide, we will walk you through installing Milvus Docker as well as running some Python example codes. If you want to learn more about how to use Milvus, visit [Milvus Docker User Guide](https://github.com/milvus-io/docs/blob/master/UserGuide.md).
+In this guide, we will walk you through installing Milvus Docker as well as running some Python example codes. If you want to learn more about how to use Milvus, visit [Milvus Docker User Guide](./UserGuide.md).
 
 ## Prerequisites
 
