@@ -1,7 +1,7 @@
 ---
 id: ReleaseNote
 title: Release Note
-sidebar_label: Milvus Docker版本发布说明
+sidebar_label: Milvus Release Notes 
 ---
 
 # Milvus Release Notes
