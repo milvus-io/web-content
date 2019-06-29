@@ -9,53 +9,54 @@ sidebar_label: Milvus User Guide
 ## Preface
 
 ### Overview
-Milvus is a full-winged, reliable feature vector database that 是一种稳定可靠、可弹性伸缩的特征向量数据库系统，支持大批量高维向量的秒级响应。关于Milvus的优势与价值，请参见[Product Advantages](https://github.com/milvus-io/docs/blob/dev/zh-CN/MilvusHighlights)。
+Milvus is a full-winged, reliable feature vector database that supports indexing large scale high-dimension vectors in seconds. About Milvus benefits and values, please visit [Product Benefits](https://github.com/milvus-io/docs/blob/dev/zh-CN/MilvusHighlights).
 
-本文档向您介绍如何对Milvus进行设置和管理，帮助您深入了解Milvus的特性和功能。
+This guide introduces configuring and managing Milvus, helping you get a deeper understanding of Milvus charateristics and features.
 
-如果您需要获取人工帮助，可以拨打技术支持电话400...或者给我们发邮件support@zilliz.com。
+If you need customer support, you may call us at 400...or contact us by email: support@zilliz.com.
 
-若要了解更多Milvus背景信息，请查看[特征向量数据库简介](https://github.com/milvus-io/docs/blob/dev/zh-CN/MilvusIntro.md)。
+For more detailed knowledge about Milvus and feature vector database, go to [Feature Vector Database Introduction](https://github.com/milvus-io/docs/blob/dev/zh-CN/MilvusIntro.md).
 
 ### Statement
-本文档内容仅作为指导使用，文档中的所有内容不构成任何明示或暗示的担保。
+The documentation is for reference only. All content in the documentation doesn't constitue as any explicite or implicite guarantee.
 
 ### Key concepts
-- 分布式数据库
+- Feature vector database
 
-- Milvus文件目录
+- Milvus file
 
 
 ### Conventions used in this guide
 
-| 描述       |    说明                                 |
+| Convention       |    Description                                |
 |-----------|-----------------------------------------|
-| 粗体      | 粗体字代表标题，和需要特别强调的内容文字    |
-| Consolas  | Consolas字体文字表示段落中出现的代码或命令 |
-| 注意      | 注意是对某一个操作或解释的补充说明          |
+| bold      | Bold type indicates headlines, or content that needs to be emphasized.    |
+| italic    | Italic type indicates file paths, UI stings, or placeholder variables for which you supply particular values. |
+| Consolas  | Consolas type indicates code examples within a paragraph |
+| Note      | Note is a supplimentary explanation to an action or a logic.          |
 
 
 ## Quick start
-For how to install Milvus and run an example program, you may read: [Milvus Quick Start](https://github.com/milvus-io/docs/blob/dev/zh-CN/QuickStart.md)
+For how to install Milvus and run an example program, you may read: [Milvus Quick Start](https://github.com/milvus-io/docs/blob/dev/zh-CN/QuickStart.md).
 
 
 ## Configuring Milvus
 
-### Milvus文件介绍
-成功启动Milvus server后，你可以在home/$USER/milvus的路径下看到Milvus的文件夹。其中包含以下文件：
+### Milvus file introduction
+After you have successfully started Milvus server, you can see a Milvus file under the path *home/$USER/milvus*, which contains the following child files:
 
-- milvus/db（数据库存储）
-- milvus/logs（日志存储）
-- milvus/conf（设置文件）
-    - server_config.yaml（服务设置文件）
-    - log_config.conf（日志设置文件）
-- milvus/test（测试脚本）
+- milvus/db (database storage)
+- milvus/logs (log storage)
+- milvus/conf (configuration file)
+    - server_config.yaml (service configuration file)
+    - log_config.conf (log configuration file)
+- milvus/test (test scripts)
 
-### 设置Milvus服务
+### Configuring Milvus service
 
-请按照以下步骤设置Milvus服务：
+Follow these procedures to configure Milvus service:
 
-1. 根据路径home/$USER/milvus/conf，打开Milvus服务设置文件server_config.yaml。
+1. Follow the path *home/$USER/milvus/conf*, and open Milvus service configuration file server_config.yaml.
 
 2. 对文件中的相关参数进行修改。
 
