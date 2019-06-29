@@ -10,7 +10,7 @@ sidebar_label: Vector Database Introducation
 ### 什么是特征向量
 向量是具有一定大小和方向的量，可以简单理解为一串数的集合，就像一行多列（或一列多行）的矩形，比如：[2,0,1,9,0,6,3,0]。每一行代表一个数据项，每一列代表一个该数据项的各个属性。
 
-特征向量是包含事物重要特征的向量。大家比较熟知的一个特征向量是RGB (red-green-blue)色彩。每种颜色都可以通过对红(R)、绿(G)、蓝(B)三个颜色的变化来得到。这样一个特征向量可以描述为：颜色 = [红，绿，蓝]。
+特征向量是包含事物重要特征的向量。大家比较熟知的一个特征向量是RGB (红-绿-蓝)色彩。每种颜色都可以通过对红(R)、绿(G)、蓝(B)三个颜色的变化来得到。这样一个特征向量可以描述为：颜色 = [红，绿，蓝]。
 
 ### 为什么要用特征向量
 随着现代计算机和机器学习技术的飞速发展，越来越多的多媒体数据被存储、分析和运用在安防侦察、医疗、教育和在线信息服务等领域。多媒体数据通常有多维度的特征，比如一张人脸图片，无法简单的用单维度的字母数字或字符串来描述。
@@ -22,15 +22,15 @@ sidebar_label: Vector Database Introducation
 
 - 图片识别
 
-  Features can be gradient magnitude, color, grayscale intensity, edges, areas, and more. Feature vectors are particularly popular for analyses in image processing because of the convenient way attributes about an image, like the RGB color example listed, can be compared numerically once put into feature vectors.
-
+  向量特征可以是梯度幅值、颜色、灰度强度、边缘、区域等。一旦用特征向量表示图片的特征，就像上面提到的RGB颜色，这些特征便可以方便地被比较分析，就像比较数字一样。也正是由于特征向量有这个特点，它们被广泛地运用在图片分析识别领域。
+  
 - 自然语言处理
 
-  特征向量可以是音长，噪音等级，信噪比。
+  向量特征可以是音长、噪音等级、信噪比。
 
 - 垃圾邮件识别
 
-  特征向量可以是IP地址，文字结构，某个词出现的频率或是特定邮件标题。
+  向量特征可以是IP地址、文字结构、某个词出现的频率或是特定邮件标题。
 
 
 ## 传统数据库与特征向量检索
@@ -98,6 +98,7 @@ SPTAG是由Microsoft于2019年5月发布的，基于最近邻搜索的向量检�
 Milvus是Zilliz公司针对AI应用大规模落地，当前工业界并没有一款成熟向量检索系统，而研制的面向海量特征向量检索的数据库系统，旨在帮助用户实现非结构化数据的近似检索和分析。其实现原理是通过AI算法提取非结构化数据的特征，然后利用特征向量唯一标识该非结构化数据，最后用向量间的距离衡量非结构化数据之间的相似度。
 
 与当前工业界其它向量检索工具相比，Milvus具有以下性能优势：
+
 |                    |Milvus                 |  FAISS               |   SPTAG   |
 |--------------------|-----------------------|----------------------|-----------|
 | CPU/GPU异构计算能力 |:heavy_check_mark:     | :heavy_check_mark:    |:x: |
@@ -115,5 +116,3 @@ Milvus是Zilliz公司针对AI应用大规模落地，当前工业界并没有一
 
 
  
-
-
