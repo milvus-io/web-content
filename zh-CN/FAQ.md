@@ -1,3 +1,9 @@
+---
+id: FAQ
+title: FAQ
+sidebar_label: 常见问题
+---
+
 # 常见问题
 
 ### Milvus是什么？
