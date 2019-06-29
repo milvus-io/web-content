@@ -58,9 +58,7 @@ Designed by Facebook AI, and written in C++, FAISS (Facebook AI Similarity Searc
 |  Pros                     |      Cons                           |
 |---------------------------| ------------------------------------|
 | Distributed, multi-GPU    | Only a algorithm library            |
-| Customizable algorithms   | High entrance standards for users   |                       
-
-FAISS 是 Facebook AI 研究团队开源的针对聚类和相似性搜索库。FAISS 是用 C++ 编写的，带有 Python / numpy 的完整封装。FAISS大量利用了：
+| Customizable algorithms   | Users need much expertise knowledge to be able to add customizations of algorithms and parameters  |                       
 
 - 多线程以充分利用多核性能并在多路 GPU 上进行并行搜索。
 - BLAS 算法库通过 matrix/matrix 乘法进行高效、精确的距离计算。没有 BLAS，高效的强力执行很难达到最优状态。 BLAS/LAPACK 是唯一一个 Faiss 必须的前提软件。
@@ -68,7 +66,6 @@ FAISS 是 Facebook AI 研究团队开源的针对聚类和相似性搜索库。F
 
 FAISS包含了多种向量检索算法，提供不同精度，查询速度和存储空间占用率。它还包含用于评估和参数调整的支持代码。 FAISS的出现也打破了过去向量检索库的一个限制：只能提供某个方面的优化。FAISS允许开发人员，在建立索引的速度、查询速度、内存使用量和查询精度等多个方面做取舍。
 
-FAISS虽然有上述的种种优点，但是依然只是一个算法库；虽然提供了多种算法和参数以供调优，但是对于开发人员而言，想用好FAISS依然有很高的门槛。
 
 ### SPTAG
 
