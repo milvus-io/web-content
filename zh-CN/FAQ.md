@@ -1,7 +1,7 @@
 ---
 id: FAQ
 title: FAQ
-sidebar_label: 常见问题
+sidebar_label: FAQ
 ---
 
 # 常见问题
