@@ -1,3 +1,9 @@
+---
+id: VectorDBIntro
+title: Vector DB Introducation
+sidebar_label: Vector Database Introducation
+---
+
 # 特征向量数据库简介
 ## 特征向量
 
