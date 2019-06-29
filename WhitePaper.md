@@ -1,7 +1,7 @@
 ---
 id: WhitePaper
-title: Milvus白皮书
-sidebar_label: Milvus白皮书
+title: Milvus White Paper
+sidebar_label: Milvus White Paper
 ---
 
 # Milvus White Paper
