@@ -11,13 +11,9 @@ We have agreed that feature vectors are the basic elements to precisely represen
 
 ### FAISS
 
-Designed by Facebook AI, and written in C++, FAISS (Facebook AI Similarity Search) is a library that allows developers to quickly search for embeddings of multimedia documents that are similar to each other. 
+Designed by Facebook AI, and written in C++, FAISS (Facebook AI Similarity Search) is a library for efficient similarity search and clustering of dense vectors.
 
-|  Pros                     |      Cons                           |
-|---------------------------| ------------------------------------|
-| Distributed, multi-GPU computing    | Only a algorithm library            |
-| Customization supported in indexing speed, search speed, CPU usage and search precision | Users need much expertise knowledge to be able to add customizations of algorithms and parameters  |                       
-
+FAISS provides various customization options about indexing speed, search speed, CPU usage and search precision. Howevery, it is only but an algorithm library. In addition, users need much expertise knowledge to be able to add customizations of algorithms and parameters.       
 
 
 ### SPTAG
