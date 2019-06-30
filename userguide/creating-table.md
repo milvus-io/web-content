@@ -6,10 +6,9 @@ sidebar_label: Creating a table
 
 # Creating a table
 
-## Creating a table 
 > Note：All the following actions are executed in Python. For other languages, Milvus supports RESTful and RPC.
 
-### Prerequisites
+## Prerequisites
 When you have finished the installation and basic configuration of Milvus, you may go on and create a table to insert data into. Before that, ensure you have：
 
 1. Imported pymilvus.
@@ -28,16 +27,16 @@ When you have finished the installation and basic configuration of Milvus, you m
    Status(message='connected!', code=0)
 
    ```
-### Creating a table
+## Creating a table
 This section shows you how to create a table in Milvus. To make it easier to understand, all task procedures are based on an example of  Table test01 creation. Here are all related parameters. You can set parameter values to your needs.
 
 |  Parameter  |  Description  |  Type   |  Reference value   |
 | ------------| --------------| --------| ---------|
 | table_name  | Name of the table you want to create (table name is made of numbers, letters and _)| String | 'table name' |
 | dimension   | Vector dimensions | Integer | 0 < dimension <= 10000, usually set to 128, 256 or 518
-| index_type  |2 types of indexing methods: 1. `FLAT` - 精确向量索引类型；2. `INVALID` - 基于K-means的向量索引，精度有损失，但搜索速度更快；|IndexType|FLAT / IVFLAT / INVALID(default)|
+| index_type  |2 types of indexing methods: 1. 'FLAT' - Precise vector indexing; 2. 'IVFLAT' - K-means based vector indexing. Search precision may be lower, but with faster speed；|IndexType|FLAT / IVFLAT|
 
-> 注意：如果没有GPU，将index_type设置成`IVFLAT`，系统将报错。
+> Note: You cannot set index_type to 'IVFLAT' when there is no GPU.
 
 1. Prepare table parameters.
   
