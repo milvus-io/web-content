@@ -20,9 +20,7 @@ FAISS provides various customization options about indexing speed, search speed,
 
 SPTAG, open sourced in May, 2019 by Microsoft, is a distributed approximate nearest neighborhood search (ANN) library which provides a high quality vector index build, search and distributed online serving toolkits for large scale vector search scenario.
 
-| Pros                        |    Cons                   |
-|-----------------------------| --------------------------|
-| High search speed & search precision  |  Subject to limitaions of graph-based search (graph construction takes a long time, especially when new vectors are to be added| 
+SPTAG has excellent performance in search speed and search precision. However, it is still subject to common limitaions of graph-based search - graph construction takes a long time, especially when new vectors are to be added.
 
 Although FAISS and SPTAG allow developers to build vector index and search, they are still libraries, not full-winged, ready-to-use vector indexing database system. 
 
