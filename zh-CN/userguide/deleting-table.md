@@ -4,9 +4,9 @@ title: Deleting A Table
 sidebar_label: Deleting A Table
 ---
 
-# 删除表格
+# 删除表
 
-你可以根据需要，删除数据库中已创建的表格。仍然以表格test01为例，若要删除表格test01，你可以：
+你可以根据需要，删除数据库中已创建的表。仍然以表test01为例，若要删除表test01，你可以：
 
 ```
 # Delete table
