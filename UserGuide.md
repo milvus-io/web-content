@@ -370,22 +370,22 @@ On the GUI dashboard of Milvus monitoring system, you can check these monitoring
 |    Monitoring item       |      Description                       |
 |----------------|----------------------------------|
 | **System parameters**    |                                  |
-| GPU utilization ratio      |    实例GPU的利用率                |
-| GPU usage      |    实例显存的使用量                |
-| CPU utilization ratio       |    CPU使用百分率                  |
-| CPU usage      |     内存使用量                     |
-| Internet IO          |    每秒钟网口的读写速度            |
-| Disk read & write speed     |    磁盘写入速度                   | 
+| GPU utilization ratio      |    Ratio of used GPU to total GPU             |
+| GPU usage      |    real-time used GPU                  |
+| CPU utilization ratio       |     Ratio of used CPU to total CPU                   |
+| CPU usage      |     real-time used CPU                    |
+| Internet IO          |    Internet IO read/write speed (per second)          |
+| Disk read & write speed     |    Disk read & write speed                   | 
 | **Milvus parameters**  |                                  |
-| Data inserting speed     |         每秒钟插入数据总量        |
-| Data file total number     |       Milvus所存数据文件总量      |
-| Data size       |Milvus所存数据总量                 |
-| QPM (Query per minute)    |  每分钟完成的查询数量              |
-| Search response time     |      查询的返回时长               |
-| Vector indexing time  |    单条向量查询的时长统计         |
-| Connected client number          |  当前连接到Milvus服务器的客户端数量 |
-| Running time        |   Milvus服务器正常运行的分钟数      |
-| Cache utilization ratio  |    已用缓存占比                   |
+| Data inserting speed     |         Total amount of data inserted per seconds     |
+| Data file total number     |       Total number of files in Milvus      |
+| Data size       | Total amount of data stored in Milvus                 |
+| QPM (Query per minute)    |  Number of queries completed in every minute          |
+| Search response time     |      Response time of a search               |
+| Vector indexing time  |    Indexing time of a single vector         |
+| Connected client number          |  Number of clients currently connected to Milvus  |
+| Running time        |   Normal running time of Milvus server (in minutes)    |
+| Cache utilization ratio  |    Ratio of used cache to total cache                   |
 
 ### Configuring monitoring frequency
 The default Milvus monitoring frequency is 1 time/second. If you want to change it, you may read [Monitoring configuration](https://prometheus.io/docs/prometheus/latest/configuration/configuration/).
@@ -480,13 +480,13 @@ For those face images that have no match in the library, they will be saved in t
 
 - **Application**：
 
-  - 黑名单告警：收到人脸的特征向量后，会发往特征向量库比对，如果发现匹配度较高，则发出告警。
-  - 以人脸查人员信息：可以通过人脸在人员信息库中，检索人员ID，找到后再去MySQL中把对应人员的所有信息展示出来。
-  - 人员轨迹再现：用户可以使用人脸查找人员信息，然后把与他相关的历史轨迹展示出来。
+  - Black list alarm: If a human face within the sensitive group library is found, an alarm is sent.
+  - Face recognition search: Search for personal information file based on face ID. 
+  - Track pursuit replay: By searching a human face image, the history track pursuit of the person will be displayed.
 
 - **Libraries**：
 
-  - Sentive group library
+  - Sensitive group library
 
     - Vector library with million datasets 
     - High requirements on search precision and speed (QPS >= 1000) 
