@@ -223,7 +223,7 @@ Status(message='Delete table successfully!', code=0)
 ## Searching a table
 
 ### Searching table name
-通过以下操作，你可以查询Milvus数据库中所有表格的名字：
+You can search all table names by this: 
 
 ```python
 >>> status, tables = milvus.show_tables()
@@ -234,7 +234,7 @@ Status(message='Show tables successfully!', code=0)
 ```
 
 ### Searching table information
-你可以按此方式查询数据库中某张表格的信息：
+Follow this to search the information of a particular table:
 
 ```python
 >>> status, table = milvus.describe_table('test01')
@@ -244,17 +244,17 @@ Status(message='Describe table successfully!')
 TableSchema(table_name='test01',dimension=256, index_type=1, store_raw_vector=False)
 ```
 
-### 查询表格是否存在
-请按照以下方式查询某张表格是否存在：
+### Checking if a table exists
+To check if a table exists in Milvus, simply do this:
 
 ```python
 >>> milvus.has_table(table_name='test01')
 True
 ```
-> 注意：如果查询的表格已经不存在，则以上代码中返回值为False。
+> Note: If the table you searched is no longer available, *False* will be returned instead of *True*.
 
 
-> 注意：若要了解更多Milvus操作，你可以参照[Milvus Python SDK](https://pypi.org/project/pymilvus)和[使用示例](https://github.com/milvus-io/pymilvus/blob/master/examples/example.py)。
+> Note: If you want to learn more detailed operations in Milvus, you may read [Milvus Python SDK](https://pypi.org/project/pymilvus) and [Examples](https://github.com/milvus-io/pymilvus/blob/master/examples/example.py)。
 
 
 
