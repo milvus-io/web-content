@@ -51,7 +51,7 @@ A linear search or sequential search is a method for finding an element within a
 
 Linear search is relatively easier to use as it requires no additonal building of index structures or storage spaces. For example, you can use parallel computation libraries such as MKL for Intel processors and cuBLAS for NVIDIA GPUs. However, this methods is more suited to similarity search for vectors of small and medium scales, because for linear search, the amount of time it takes to run an algorithm becomes longer as the number and dimension of vectors get larger. 
 
-> Information: O(Time complexity)= N(Vector scale)D(Vector dimension)
+> Information: O (Time complexity)= N (Vector scale) * D (Vector dimension)
 
 
 ### Similarity search
