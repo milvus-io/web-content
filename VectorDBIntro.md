@@ -67,15 +67,15 @@ The following indexing algorithms are mainly used in current similarity search:
   Each non-leaf nopde in the tree corresponds to a subspace and a list of hyperplane, which furhter partitions the subspace to smaller subspaces. Each subspace corresponds to a child node. Thus, the tree root represents the whole vector space, and contains a group of parent nodes, while each child node represents a subspace of its parent node. Each leaf node represents a smallest unit of subspace that can no longer be divided. According to this structure, each vector can be represented by a leaf node in the tree. 
   
   In real cases of similarity search, the most simiar/close vectors are searched by locating several leaf nodes whose distances are nearest to target node. 
+  
+  Tree-based search is efficient for its ability to quickly locating most simiar leaf nodes, much time is saved of comparing to large number of vectors with low similarity. However, tree structure construction of high-dimensional vectors takes much time. And if the target vector is too close to a particular hyperplane, the search preciseness might be lowered for possible loss of similar vectors in other hyperlanes.
  
-  | Pros  |  Cons   |
-  |-------|---------|
-  | High effecient search. By quickly locating most simiar leaf nodes, much time is saved of comparing to large number of vectors with low similarity. |  1. Tree structure construction of high-dimensional vectors takes much time; 2. If target vector is too close to a particular hyperplane, the search preciseness might be lowered for possible loss of similar vectors in other hyperlanes.|
+ 
 
 - **Hash-based**
    locality-sensitive hashing (LSH) is an algorithmic technique that hashes similar vectors into the same "buckets" with high probability. Since similar items end up in the same buckets, this technique can be used for data clustering and nearest neighbor search. 
   
-   This method is efficient because it substantially reduced the computing times as the computation is done only in the "buckets" with highly similar vectors. However, one limitation is that only该方法通常只能对向量空间进行均匀划分，而实际应用中向量在空间中的分布通常是不均匀(ununiform/skew)的，从而导致各个分类中向量的数量相差巨大，并进一步影响搜索的效率和准确度。
+   This method is efficient because it substantially reduced the computing times as the computation is done only in the "buckets" with highly similar vectors. However, one limitation is that according to this method, each "bucket" contains the same number of vectors, while in real-life situations, vectors distributions are ununiform/skew, thus affecting the search efficiency and precision.
 
 - **Vector quantization** 
   Vector quantization (VQ) is a classical quantization technique from signal processing that allows the modeling of probability density functions by the distribution of prototype vectors. It works by dividing a large set of points (vectors) into groups having approximately the same number of points closest to them. Each group is represented by its centroid point, as in k-means and some other clustering algorithms.
@@ -99,20 +99,13 @@ We have agreed that feature vectors are the basic elements to precisely represen
 
 Designed by Facebook AI, and written in C++, FAISS (Facebook AI Similarity Search) is a library that allows developers to quickly search for embeddings of multimedia documents that are similar to each other. 
 
-|  Pros                     |      Cons                           |
-|---------------------------| ------------------------------------|
-| Distributed, multi-GPU computing    | Only a algorithm library            |
-| Customization supported in indexing speed, search speed, CPU usage and search precision | Users need much expertise knowledge to be able to add customizations of algorithms and parameters  |                       
-
-
+FAISS provides various customization options about indexing speed, search speed, CPU usage and search precision. Howevery, it is only but an algorithm library. In addition, users need much expertise knowledge to be able to add customizations of algorithms and parameters               
 
 ### SPTAG
 
 SPTAG, open sourced in May, 2019 by Microsoft, is a distributed approximate nearest neighborhood search (ANN) library which provides a high quality vector index build, search and distributed online serving toolkits for large scale vector search scenario.
 
-| Pros                        |    Cons                   |
-|-----------------------------| --------------------------|
-| High search speed & search precision  |  Subject to limitaions of graph-based search (graph construction takes a long time, especially when new vectors are to be added| 
+SPTAG has excellent performance in search speed and search precision. However, it is still subject to common limitaions of graph-based search - graph construction takes a long time, especially when new vectors are to be added.
 
 Although FAISS and SPTAG allow developers to build vector index and search, they are still libraries, not full-winged, ready-to-use vector indexing database system. 
 
