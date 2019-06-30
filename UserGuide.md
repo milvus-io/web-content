@@ -447,91 +447,77 @@ Milvus database can be used to build intelligent systems in most AI appication s
 - Dupicate cleaner by file fingerprint
 
 
-### 典型架构
-Milvus做特征向量检索时典型应用架构如下：
+### Applicatation architecture
+The application architecture of Milvus as a feature vector database is as follows:
 
 ![MilvusTypicalUsage](/Users/zilliz/Documents/MilvusTypicalUsage.png)
 
-非结构化数据(图像/视频/文字/音频等）首先通过特征提取模型产生特征向量，然后存入Milvus数据库系统。查询的时候，待查询的非结构化数据，也需要通过特征提取模型，提取特征向量。然后用该向量到Milvus中已存入的向量集里，查询匹配度最高的向量集合。最后，使用返回的向量ID，找到对应非结构化数据，结合上层应用，实现对应功能。
+Irrelational data (images/videos/texts/audios) are transformed to feature vectors by feature extraction models, and saved to Milvus database. When you input a target vector, it is saved  to the current vector collection, and the search begins, until the most similar vectors are matched, and their IDs returned. 
 
-### 案例 1 - 基于Milvus的人脸搜索
+### Scenario - Milvus human face search
 
-#### 需求
+#### Requirements
 
-- 敏感人群告警
+- Sensitive group alarm
 
-敏感人群库中保存的是敏感人群的人脸特征，摄像头提取的人脸都要与敏感人群库中的人脸进行对比。一旦通过对于发现了敏感人群库中的在逃人员，系统需要给出告警。
+Sensitive group library contains human face features of sensitive group. All human faces captured by the camera are to be compared to those in the library. Once a similar face is matched, an alarm is sent to the system. 
 
-- 一人一档
+- One person one file
 
-摄像头提取的人脸都会与证照库中的人脸特征进行对比，通过人脸找到关联的证件ID，进而找到个人的所有信息。
+A human face captured by camera will be compared to those in the library to find the corresponding file containing all the information of the person.
 
-- 人像检索
+- Face image indexing
 
-对于无法在证照库中找到的人脸，则会将其保存在历史人像库中，保存时长为3个月，以备后续案件侦破时查询轨迹使用。
+For those face images that have no match in the library, they will be saved in the history library for several months, as reference for future case tracking. 
 
-#### 系统实现架构图：
+#### System application architecture:
 
 ![FacialSearch](/Users/zilliz/Documents/FacialSearch.png)
 
-- **人脸获取设备**：摄像头拍到人脸图片后，把图片发到特征向量提取设备。
+- **Face capture device**: When human face images are captured by the camera, they are sent to feature vector collection devices.
 
-- **特征提取服务**：收到摄像头发过来的人脸图片后，利用深度学习系统训练的模型，转换为512维人脸特征向量。
+- **Feature extraction service**: The human face imgaes are futhered transformed and represented by 512-dimensional feature vectors by deep learing models.
 
-- **应用层**：
+- **Application**：
 
   - 黑名单告警：收到人脸的特征向量后，会发往特征向量库比对，如果发现匹配度较高，则发出告警。
   - 以人脸查人员信息：可以通过人脸在人员信息库中，检索人员ID，找到后再去MySQL中把对应人员的所有信息展示出来。
   - 人员轨迹再现：用户可以使用人脸查找人员信息，然后把与他相关的历史轨迹展示出来。
 
-- **数据层**：
+- **Libraries**：
 
-  - 敏感人群库
+  - Sentive group library
 
-    向量库，百万级，数据基本无更新。对于查询精度要求高，查询速度要求快，查询的QPS要求达到1000每秒，允许批量查询。
+    - Vector library with million datasets 
+    - High requirements on search precision and speed (QPS >= 1000) 
+    - Batch search supported 
+    
+  - Human face library
 
-  - 人员库
+    - Vector library with billions of human face feature vectors
+    - High indexing speed with a QPS of 1000
+    - Batch search supported
 
-    向量库，保存10亿条人脸特征数据，数据会有少量更新。每个摄像头拍到的人脸都需要与人员库中的人脸进行查询对比，查询率要求达到1000 QPS，允许批量查询。
+  - History library
 
-  - 历史库
+    - Vector library with 0.2 billion new human face data
+    - Keeps 90 days' face vectors (about 18 billion)
+    - Batch search supported 
+    
+  - Information library
 
-    向量库，每天产生2亿人脸数据，需要保存3个月（90天）的人脸向量数据即180亿向量数据。人脸检索时，到历史库中通过人脸特征检索人脸轨迹，允许批量查询。
+    - Relational database with MySQL storage
+    - Mainly keeps ID-based personal information files
 
-  - 人员信息库
-
-    结构化数据库，以MySQL存储，存储以个人ID号为主键的个人信息。
-
-- **基础设施**：Milvus实现向量数据的存储，MySQL实现结构化数据存储，Minio实现非结构化数据(人脸图片)存储。
-
-
-### 案例 2 - 基于Milvus的商品推荐系统
-
-#### 需求：
-
-- 基于用户画像推荐广告商品
-
-#### 系统架构图
-
-![Recommendation](/Users/zilliz/Documents/Recommendation.png)
-
-- **用户画像提取**：根据过往用户浏览新闻的内容，提取其关键词，然后利用关键词产生用户画像。
-- **商品特征提取**：根据商品信息，提取关键词，然后产生商品的特征向量。
-- **应用层**：
-  - 商品推荐：收到用户画像对应的特征向量后，会发到商品特征库对比，将匹配度最高的10个商品，返回。
-- **数据层**：
-  - 商品特征库： 向量库，1亿级，每天更新100W。对于查询精度要求不高，但是要求查询速度快，且QPS要求达到1000每秒，允许批量查询。
-  - 用户信息库：结构化数据库，10亿级，记录用户画像关键词，用户画像改变就需要更新。
-- **基础设施**：
-  - Milvus 实现向量数据的存储和检索。
-  - Minio 实现商品图片的存储。
-  - MySQL 实现用户画像信息存储。
+- **Basic architecture**: 
+  - Milvus for vector storage
+  - MySQL for relational data storage
+  - Minio for irrelational data storage
   
 
 
-## 障碍排查
-- 连接服务器失败怎么办？
-  请通过docker logs显示的日志，确认连接的服务器是否启动，连接的服务器地址、端口是否正确。
-
+## Troubleshooting
+- What if connecting to server failed?
+  If connection to server failed, you can check the logs in Docker logs, and confirm that connected server is started, or server address and port are correct.
 
 
