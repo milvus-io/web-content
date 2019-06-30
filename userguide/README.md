@@ -11,5 +11,6 @@
 - [Monitoring and Alarm](monitoring-and-alarm.md)
 - [Application Scenarios](application-scenario.md)
 - [Trouble Shooting](trouble-shooting.md)
+- [Support](support.md)
 
 
