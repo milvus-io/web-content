@@ -115,5 +115,3 @@ Milvus是Zilliz公司针对AI应用大规模落地，当前工业界并没有一
 | RESTful API                   | :heavy_check_mark:    |   :x:                 |    :x:    |
 | 企业级用户支持      | :heavy_check_mark:    |   :x:                 |    :x:   |
 
-
- 

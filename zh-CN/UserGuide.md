@@ -6,46 +6,6 @@ sidebar_label: Milvus User Guide
 
 # Milvus用户指南
 
-Copyright © 2016~2019 ZILLIZ™. All rights reserved.
-
-Leagal Disclaimer
-
-
-前言
-   - 概述
-   - 声明
-   - 基本概念
-   - 通用描述说明
-   
-快速入门
-
-设置Milvus
-   - Milvus目录介绍
-   - 设置Milvus服务
-   
-创建数据库
-
-导入数据
-
-使用Milvus进行搜索
-
-删除数据库
-
-监控与告警
-   - 监控概述
-   - 监控指标
-   - 监控安装设置
-   - 设置监控频率
-   - 设置告警规则
-   
-日志管理
-   
-应用场景
-
-障碍排查
-
-
-
 ## 前言
 
 ### 概述
