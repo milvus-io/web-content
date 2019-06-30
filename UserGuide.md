@@ -62,59 +62,59 @@ Follow these procedures to configure Milvus service:
 
    1) Click file *server_config*, and configure service parameters.
    
-     | Parameters            | Description                          | Reference values            |
+     | Parameter            | Description                          | Reference value           |
      |----------------|-----------------------------------|-------------------|
-     | address        | Milvus server监听的ip地址          | 0.0.0.0           |
-     | port           | Milvus server监听的端口号，默认值为19530 | 1025 ~ 65534 |            
-     | gpu_index      | 目前使用的GPU，默认值为0。          | 0 ~ GPU数量-1                |
-     | mode           | Milvus部署类型                    | single（单机）/ cluster（多机）|            
+     | address        | The IP address that Milvus server monitors      | 0.0.0.0           |
+     | port           | The port that Milvus server monitors, default is 19530 | 1025 ~ 65534 |            
+     | gpu_index      | Current GPU, default is 0          | 0 ~ GPU number ~1                |
+     | mode           | Milvus deployment method                    | single / cluster |            
                                                                                                                      
-   2）点击db_config文件，设置数据库参数。
+   2）Click file *db_config*, and configure database parameters.
    
-     | 参数               | 参数描述                            | 参考值    |
+     | Parameter               | Description                            | Reference value    |
      |-------------------|-------------------------------------|----------|
-     | db_path           | Milvus数据库文件存储的路径            |    ？    |
-     | db_backend_url    | 元数据库uri                          | http://127.0.0.1  |
-     | index_building_threshold | index building触发阈值        |  1024（MB）  |
+     | db_path           | Directory of Milvus database files            |    ？    |
+     | db_backend_url    | Meta database URI                         | http://127.0.0.1  |
+     | index_building_threshold | index building trigger value       |  1024（MB）  |
 
-   3）点击metric_config文件，设置监控参数。
+   3）Click file *metric_config*, and configure monitor parameters.
    
-     | 参数               | 参数描述                            | 参考值    |
+     |Parameter               |  Description                             | Reference value     |
      |-------------------|-------------------------------------|----------|
-     | is_startup        | 选择是否启动监控             | on（启动）/ off（不启动) |
-     | collector         | 连接的监控系统               | Prometheus             |
-     | collect_type      | Prometheus的监控获取方式     |   pull / push          |
-     | port              | 访问Prometheus的端口号       | 8080                   |
-     | push_gateway_ip_address | push gateway的ip地址   | 127.0.0.1             |
-     | push_gateway_port       | push gateway的端口号   |  9091                 |
+     | is_startup        | Select if or not to turn on the monitoring system          | on / off |
+     | collector         | Connected monitoring system               | Prometheus             |
+     | collect_type      | Data collecting type of Prometheus     |   pull / push          |
+     | port              | Port to visit Prometheus       | 8080                   |
+     | push_gateway_ip_address | IP address of push gateway   | 127.0.0.1             |
+     | push_gateway_port       | Port of push gateway   |  9091                 |
 
-   4）点击cache_config文件，设置相关参数。
+   4）Click file *cache_config*, and configure the parameter.
    
-     |  参数             | 参数描述                            | 参考值    |
+     |  Parameter                | Description                             | Reference value     |
      |-------------------|-------------------------------------|----------|
      | cpu_cache_capacity |用于cache的内存量，默认值为16GB       |  0 ~ 机器内存总量 |
 
-3. 重启Milvus Docker。
+3. Restart Milvus Docker.
 
    ```
    $ docker restart <container id>
    ```
 
 
-## 创建数据库
-> 注意：以下操作都是在Python交互环境下进行的。对于其他类型的语言，Milvus支持通过RESTful和RPC的访问方法。
+## Creating a table 
+> Note：All the following actions are executed in Python. For other languages, Milvus supports RESTful and RPC.
 
-### 前提条件
-如果你已经完成了Milvus的安装和所有相关设置，你就可以在Milvus上创建属于自己的数据库了。在用Python创建数据库之前，请确保你已经完成了以下操作：
+### Prerequisites
+When you have finished the installation and basic configuration of Milvus, you may go on and create a table to insert data into. Before that, ensure you have：
 
-1. 你已经导入了pymilvus。
+1. Imported pymilvus.
 
    ```python
    # Import pymilvus
    >>> from milvus import Milvus, Prepare, IndexType, Status
 
    ```
-2. 你已经将Milvus连接到了本地server。
+2. Connected Milvus to your local server.
 
    ```
    # Connect Milvus to server
@@ -123,25 +123,25 @@ Follow these procedures to configure Milvus service:
    Status(message='connected!', code=0)
 
    ```
-### 创建数据表格结构
-我们以创建Table test01为例，向您展示如何创建一张数据表。以下是数据表格相关参数，在创建表格时可以根据实际需求选择：
+### Creating a table
+This section shows you how to create a table in Milvus. To make it easier to understand, all task procedures are based on an example of  Table test01 creation. Here are all related parameters. You can set parameter values to your needs.
 
-|  参数  |  描述  |  类型   |  参考值   |
+|  Parameter  |  Description  |  Type   |  Reference value   |
 | ------------| --------------| --------| ---------|
-| table_name  | 要创建的table名字（由数字、字母和下划线构成）| 字符串 | 'table名字' |
-| dimension   | 表格中向量的维度 | 整数 | 0 < dimension <= 10000, 通常设置为128、256或518维 
-| index_type  |有3种类型的检索类型: 1. `FLAT` - 精确向量索引类型；2. `INVALID` - 基于K-means的向量索引，精度有损失，但搜索速度更快；|IndexType|FLAT / IVFLAT / INVALID(default)|
+| table_name  | Name of the table you want to create (table name is made of numbers, letters and _)| String | 'table name' |
+| dimension   | Vector dimensions | Integer | 0 < dimension <= 10000, usually set to 128, 256 or 518
+| index_type  |2 types of indexing methods: 1. `FLAT` - 精确向量索引类型；2. `INVALID` - 基于K-means的向量索引，精度有损失，但搜索速度更快；|IndexType|FLAT / IVFLAT / INVALID(default)|
 
 > 注意：如果没有GPU，将index_type设置成`IVFLAT`，系统将报错。
 
-1. 准备数据表的参数，比如：
+1. Prepare table parameters.
   
    ```
    # Prepare param
    >>> param = {'table_name'='test01', 'dimension'=256, 'index_type'=IndexType.FLAT}
    ```
    
-2. 创建表test01。
+2. Create Table test01.
 
    ```
    # Create a table
@@ -149,7 +149,7 @@ Follow these procedures to configure Milvus service:
    Status(message='Table test01 created!', code=0)
    ```
    
-3. 检查确认已创建表格的信息。
+3. Confirm the information of the table just created.
    ```
    # Confirm table info.
    >>> status, table = milvus.describe_table('test01')
@@ -161,15 +161,15 @@ Follow these procedures to configure Milvus service:
    ```                        
 
 
-## 导入向量数据
-成功创建数据表格后，您可以向表格批量导入向量数据。当然，进行此操作的前提是您已经有了多维的向量数据。导入数据前，请先了解数据导入相关参数：
+## Inporting vectors
+When you have successfully tables in Milvus, you can start inserting data into the table. Of course, one prerequisite of this step is that you already have proper multi-dimensional vectors. Before importing vectors to the table, get familiar with the related parameters:
 
-|参数|描述|类型|参考值|
+|Parameter|Description|Type|Reference value|
 |---------|-----------|----|-----|
-|table_name| 要创建的table名| 字符串| 'table名'|
-|records| 需要导入table的一组向量，每条向量的数值需为浮点类型（小数），其维度必须和所创建表格的维度一致。|二维数组|[[0.1, 0.2, ...], ...]
+|table_name| Name of the table you want to create (table name is made of numbers, letters and _)| String| 'table name'|
+|records| A list of vectors to insert into the table. Vector value should be a float (decimal), with the same dimension as that of the table |2-dimension type|[[0.1, 0.2, ...], ...]
 
-紧接着上面的例子，以下展示如何向Table 01导入20条256维的向量数据（在下面的代码中用vectors表示）：
+Following the above mentioned example, below content demonstrates how to insert 20 256-dimensional vectors(represented by "records" in the code) into Table test01:
 
 ```
 # Import vectors
@@ -183,19 +183,19 @@ Status(code=0, message='Success')
 ```
 
 
-## 用Milvus进行搜索
-现在，您已经在创建好的表格里成功导入了向量数据，您可以用Milvus搜索你需要的数据了。在此，你不仅可以批量搜索多个数据，还可以指定搜索范围。具体请阅读执行数据搜索相关参数：
+## Searching with Milvus
+Now, you have inserted vectors into Table test01, you can start searching with Milvus. In addition, you are allowed not only to search multiple data sets, and also to search within a specific range. Before the search, familiarize yourself with seach related parameters:
 
-|参数|描述|类型|参考值|
+|Parameter|Description|Type|Reference value|
 |---------|-----------|----|-----|
-|table_name|要创建的table名|字符串|'table名'|
-|top_k| 与所搜索向量相似度最高的k个向量| 整数 | 0 < top_k <= 10000|
-|query_records| 一组需要搜索的向量，每条向量数值需为浮点类型（小数），其维度必须和所创建表格的维度一致。|二维数组 | [[0.1, 0.2, ...], ...] |
-|query_ranges（可选）| 向量搜索的范围，比如你可以只搜索某一段日期内的向量。如果不设置，默认值是'None'（即'无范围'），表示全局搜索。|list[tuple]|[('2019-01-01', '2019-01-02'), ...]|
+|table_name|Name of the table you want to create (table name is made of numbers, letters and _)|String|'table name'|
+|top_k| Top k most similar results of target vector| Integer | 0 < top_k <= 10000|
+|query_records| A list of vectors to insert into the table. Vector value should be a float (decimal), with the same dimension as that of the table |2-dimension type | [[0.1, 0.2, ...], ...] |
+|query_ranges (optional)| Search range, for example you can search within a specific date range. The default value is 'None' (no range), meaning to search the entire database|list[tuple]|[('2019-01-01', '2019-01-02'), ...]|
 
-> 注意：目前搜索范围仅支持日期范围，格式为'yyyy-mm-dd'，为左闭右闭模式。比如您将范围定为[2019.1.1, 2019.1.3)，则搜索日期包含2019.1.1和2019.1.3.
+> Note: Currently, only date range is supported in query_ranges. The date format is 'yyyy-mm-dd'. The date range [2019.1.1, 2019.1.3) contains 2019.1.1 and 2019.1.3.
 
-假设您要针对5条256维的向量（在下面代码中用q_records表示），搜索与每条向量相似度最高的前10组结果，你可以：
+Suppose you want to search the top 10 most similar vectors of 5 256-dimensional vectors (represented by "query_records" in below codes), you may: 
 
    ```
    # Search 5 vectors
@@ -210,8 +210,8 @@ Status(code=0, message='Success')
    ```
  
 
-## 删除表格
-你可以根据需要，删除数据库中已创建的表格。仍然以表格test01为例，若要删除表格test01，你可以：
+## Deleting a table
+You may delete a table in Milvus when necessary. For example, to delete Table test01, you only need to: 
 
 ```
 # Delete table
@@ -220,9 +220,9 @@ Status(message='Delete table successfully!', code=0)
 ```
 
 
-## 查询表格
+## Searching a table
 
-### 查询表格名字
+### Searching table name
 通过以下操作，你可以查询Milvus数据库中所有表格的名字：
 
 ```python
@@ -233,7 +233,7 @@ Status(message='Show tables successfully!', code=0)
 ['test01', 'others', ...]
 ```
 
-### 查询表格信息
+### Searching table information
 你可以按此方式查询数据库中某张表格的信息：
 
 ```python
