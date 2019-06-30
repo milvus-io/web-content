@@ -92,7 +92,7 @@ Follow these procedures to configure Milvus service:
    
      |  Parameter                | Description                             | Reference value     |
      |-------------------|-------------------------------------|----------|
-     | cpu_cache_capacity |用于cache的内存量，默认值为16GB       |  0 ~ 机器内存总量 |
+     | cpu_cache_capacity | CPU used for cache. Default valus is 16GB       |  0 ~ Total CPU |
 
 3. Restart Milvus Docker.
 
@@ -350,7 +350,7 @@ Milvus server collects data > Collected data is imported to Prometheus > Monitor
    4) On the top left corner of the page, click *New dashboard*.
       ![image-20190620191721734](assets/dashboard.png)
    
-   5）Click *Import dashboard* in the right box.
+   5) Click *Import dashboard* in the right box.
    
       ![image-20190620191747161](assets/importdashboard.png)
    
