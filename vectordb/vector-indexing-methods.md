@@ -39,7 +39,7 @@ The following indexing algorithms are mainly used in current similarity search:
 - **Hash-based**
    locality-sensitive hashing (LSH) is an algorithmic technique that hashes similar vectors into the same "buckets" with high probability. Since similar items end up in the same buckets, this technique can be used for data clustering and nearest neighbor search. 
   
-   This method is efficient because it substantially reduced the computing times as the computation is done only in the "buckets" with highly similar vectors. However, one limitation is that only该方法通常只能对向量空间进行均匀划分，而实际应用中向量在空间中的分布通常是不均匀(ununiform/skew)的，从而导致各个分类中向量的数量相差巨大，并进一步影响搜索的效率和准确度。
+   This method is efficient because it substantially reduced the computing times as the computation is done only in the "buckets" with highly similar vectors. However, one limitation is that according to this method, each "bucket" contains the same number of vectors, while in real-life situations, vectors distributions are ununiform/skew, thus affecting the search efficiency and precision.
 
 - **Vector quantization** 
   Vector quantization (VQ) is a classical quantization technique from signal processing that allows the modeling of probability density functions by the distribution of prototype vectors. It works by dividing a large set of points (vectors) into groups having approximately the same number of points closest to them. Each group is represented by its centroid point, as in k-means and some other clustering algorithms.
