@@ -6,9 +6,7 @@ sidebar_label: Search A Table
 
 # Search A Table
 
-## Searching a table
-
-### Searching table name
+## Searching table name
 You can search all table names by this: 
 
 ```python
@@ -19,7 +17,7 @@ Status(message='Show tables successfully!', code=0)
 ['test01', 'others', ...]
 ```
 
-### Searching table information
+## Searching table information
 Follow this to search the information of a particular table:
 
 ```python
@@ -30,7 +28,7 @@ Status(message='Describe table successfully!')
 TableSchema(table_name='test01',dimension=256, index_type=1, store_raw_vector=False)
 ```
 
-### Checking if a table exists
+## Checking if a table exists
 To check if a table exists in Milvus, simply do this:
 
 ```python
