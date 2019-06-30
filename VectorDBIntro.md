@@ -71,11 +71,9 @@ The following indexing algorithms are mainly used in current similarity search:
   | Pros  |  Cons   |
   |-------|---------|
   | High effecient search. By quickly locating most simiar leaf nodes, much time is saved of comparing to large number of vectors with low similarity. |  1. Tree structure construction takes much more time as the dimension of vectors get higher; 2. If target vector is too close to a particular hyperplane, the search preciseness might be lowered for possible loss of similar vectors in other hyperlanes.|
-  
-采用基于树的搜索方法可以快速的定位到与目标向量最为相似的若干个叶子节点，从而有效的避免了目标向量与其他大量相似度较低向量的依次比对，从而提高搜索效率。然而，随着向量维度的提高，计算用于划分空间的超平面的开销将显著增大，从而影响树型结构的构建效率。此外，如果目标向量与某一超平面距离较近，该方法的搜索结果可能会丢失大量的与目标相似的向量，从而影响查询的准确度。
 
 - **Hash-based space partition**
-
+  Hash-based search divides vectors into collections based on their hash values computed by locality-sensitive hash (LSH). For similar vectors, their hash values are close too. As this method divides LSH domain into several intervals, each vector has a corresponding interval. In search cases, by comparing hash values and intervals, the target vector can be categoried and similar vectors can be 
   基于哈希(Hash)的搜索方法采用一组局部敏感哈希(Locality-Sensitive Hash, LSH)函数对向量集合进行划分。通过采用局部敏感哈希函数可以对每一个向量计算出一个与之相对应的哈希值(hash value)。对于距离较接近的向量，其哈希值也较为接近。该方法将各局部敏感哈希函数的值域(domain)划分为若干个区间(interval)，从而每个向量相应于特定的局部敏感哈希函数，均有一个区间与之对应。该方法通过哈希值的区间对向量进行划分，若两向量对于任一哈希函数其哈希值所在的区间均相同，则这两个向量属于同一分类。在搜索时，通过相同的局部敏感哈希函数和区间划分方法可以计算得到目标向量所属分类。然后可依次计算该分类以及该分类的邻近分类中所有向量与目标向量的距离获取距离最小的向量。
 基于哈希的方法，通过计算目标向量所在分类以及邻近的分类可以有效的排除掉大量与目标向量相似度较低的向量，减少了向量相似度的计算次数。但是，该方法通常只能对向量空间进行均匀划分，而实际应用中向量在空间中的分布通常是不均匀(ununiform/skew)的，从而导致各个分类中向量的数量相差巨大，并进一步影响搜索的效率和准确度。
 
