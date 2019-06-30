@@ -24,8 +24,8 @@ Yes, Milvus high availability characteristic ensures an agreed level of performa
 
 ### How does the search works in Milvus, after the vecters are imported?
 
-All vectors stored in Milvus will be given an ID. Users need to import vector ID and other features into another database system.
-向量存入Milvus后，Milvus会给对应向量一个ID，用户需要自己将该向量ID和其对应的其他属性存入另外一个数据库系统。查询的时候，用户提供需要查询的向量，Milvus会返回和用户提供向量最匹配的数个向量的ID以及匹配度。
+All vectors stored in Milvus will be given an ID. Users need to import vector ID and other features into another database system. When users search a vector, Milvus will return several IDs of vectors most similar to the target vector.
+
 
 ### How to choose vector indexing type?
 
