@@ -8,9 +8,7 @@ sidebar_label: Preface
 
 
 ## 概述
-Milvus是一种稳定可靠、可弹性伸缩的特征向量数据库系统，支持大批量高维向量的秒级响应。关于Milvus的优势与价值，请参见[产品优势](https://github.com/milvus-io/docs/blob/dev/zh-CN/MilvusHighlights)。
-
-本文档向您介绍如何对Milvus进行设置和管理，帮助您深入了解Milvus的特性和功能。
+Milvus是一种稳定可靠、可弹性伸缩的特征向量数据库系统，支持大批量高维向量的秒级响应。本文档向您介绍如何对Milvus进行设置和管理，帮助您深入了解Milvus的特性和功能。
 
 如果您需要获取人工帮助，请邮件联系我们：support@zilliz.com。
 
