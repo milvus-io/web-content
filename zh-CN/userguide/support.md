@@ -6,4 +6,4 @@ sidebar_label: Support
 
 # 支持与帮助
 
-If you need any customer support, please contact us by email: support@zilliz.com.
+如果您需要任何支持与帮助，请邮件联系我们：support@zilliz.com。
