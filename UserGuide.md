@@ -13,7 +13,7 @@ Milvus is a full-winged, reliable feature vector database that supports indexing
 
 This guide introduces configuring and managing Milvus, helping you get a deeper understanding of Milvus charateristics and features.
 
-If you need customer support, you may call us at 400...or contact us by email: support@zilliz.com.
+If you need customer support, you may contact us by email: support@zilliz.com.
 
 For more detailed knowledge about Milvus and feature vector database, go to [Feature Vector Database Introduction](https://github.com/milvus-io/docs/blob/dev/zh-CN/MilvusIntro.md).
 
@@ -31,7 +31,7 @@ The documentation is for reference only. All content in the documentation doesn'
 | Convention       |    Description                                |
 |-----------|-----------------------------------------|
 | bold      | Bold type indicates headlines, or content that needs to be emphasized.    |
-| italic    | Italic type indicates file paths, UI stings, or placeholder variables for which you supply particular values. |
+| italic    | Italic type indicates file paths, file names, UI strings, or placeholder variables for which you supply particular values. |
 | Consolas  | Consolas type indicates code examples within a paragraph |
 | Note      | Note is a supplimentary explanation to an action or a logic.          |
 
@@ -56,13 +56,13 @@ After you have successfully started Milvus server, you can see a Milvus file und
 
 Follow these procedures to configure Milvus service:
 
-1. Follow the path *home/$USER/milvus/conf*, and open Milvus service configuration file server_config.yaml.
+1. Follow the path *home/$USER/milvus/conf*, and open Milvus service configuration file *server_config.yaml*.
 
-2. 对文件中的相关参数进行修改。
+2. Modify the parameters in the file.
 
-   1）点击server_config文件，设置服务参数。
+   1) Click file *server_config*, and configure service parameters.
    
-     | 参数            | 参数描述                          | 参考值            |
+     | Parameters            | Description                          | Reference values            |
      |----------------|-----------------------------------|-------------------|
      | address        | Milvus server监听的ip地址          | 0.0.0.0           |
      | port           | Milvus server监听的端口号，默认值为19530 | 1025 ~ 65534 |            
