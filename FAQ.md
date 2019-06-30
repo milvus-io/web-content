@@ -29,7 +29,16 @@ All vectors stored in Milvus will be given an ID. Users need to import vector ID
 
 ### How to choose vector indexing type?
 
-依据用户的需求，如果用户需求精确匹配，那么请选择L2Flat类型索引。精确匹配，可以为用户提供100%精确匹配的向量，但是由于计算量巨大，性能影响也很大。如果用户不追求100%精确匹配，可以选择IVFFlat类型索引，支持大数据量的高精度匹配。
+In Milvus, users can choose from the following 2 index types:
+
+- Flat
+
+  Provides 100% precise matching of vectors. However, as the computation is huge, search speed might be affected. 
+  
+- IVFFlat
+
+  K-means based search which supports large scale vector matching.
+
 
 ### Does Milvus support searching while inserting?
 
