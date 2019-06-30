@@ -32,9 +32,7 @@ The following indexing algorithms are mainly used in current similarity search:
   
   In real cases of similarity search, the most simiar/close vectors are searched by locating several leaf nodes whose distances are nearest to target node. 
  
-  | Pros  |  Cons   |
-  |-------|---------|
-  | High effecient search. By quickly locating most simiar leaf nodes, much time is saved of comparing to large number of vectors with low similarity. |  1. Tree structure construction of high-dimensional vectors takes much time; 2. If target vector is too close to a particular hyperplane, the search preciseness might be lowered for possible loss of similar vectors in other hyperlanes.|
+ Tree-based search is efficient for its ability to quickly locating most simiar leaf nodes, much time is saved of comparing to large number of vectors with low similarity. However, tree structure construction of high-dimensional vectors takes much time. And if the target vector is too close to a particular hyperplane, the search preciseness might be lowered for possible loss of similar vectors in other hyperlanes.
 
 - **Hash-based**
    locality-sensitive hashing (LSH) is an algorithmic technique that hashes similar vectors into the same "buckets" with high probability. Since similar items end up in the same buckets, this technique can be used for data clustering and nearest neighbor search. 
