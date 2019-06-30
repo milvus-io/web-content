@@ -5,7 +5,7 @@ sidebar_label: Milvus Release Notes
 ---
 
 # Milvus Release Notes
-## 版本 0.3.0
+## Version 0.3.0
 发布日期：2019-06-30
 
 ### 主要功能
