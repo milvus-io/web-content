@@ -264,11 +264,6 @@ A database monitoring system helps you track database performace and corresponds
 
 Milvus server collects data > Collected data is imported to Prometheus > Monitoring items are displayed in Grafana-supported dashboard
 
-一旦发生告警，Prometheus会将告警信息可以推送给AlertManager，并通过Email或者WeChat通知用户。告警系统架构如下：
-
-![Monitoring](assets/Monitoring.png)
-
-
 
 ### Installing and configuring monitor
 
@@ -369,38 +364,41 @@ Milvus server collects data > Collected data is imported to Prometheus > Monitor
 
 
 ### Monitoring items
-在Milvus监控系统的GUI控制板上，你可以查看监控数据库的各项指标，实时了解数据库运行表现。
+On the GUI dashboard of Milvus monitoring system, you can check these monitoring items to track real time performace of your database.
 
-以下是控制板上可以查看的监控项：
 
-|    监控项       |      说明                        |
+|    Monitoring item       |      Description                       |
 |----------------|----------------------------------|
-| **系统指标**    |                                  |
-| GPU利用率       |    实例GPU的利用率                |
-| 显存使用量      |    实例显存的使用量                |
-| CPU利用率       |    CPU使用百分率                  |
-| 内存使用量      |     内存使用量                     |
-| 网络IO          |    每秒钟网口的读写速度            |
-| 磁盘读写速度     |    磁盘写入速度                   | 
-| **Milvus指标**  |                                  |
-| 数据插入速度     |         每秒钟插入数据总量        |
-| 数据文件总量     |       Milvus所存数据文件总量      |
-| 数据总量        |Milvus所存数据总量                 |
-| 每分钟查询率    |  每分钟完成的查询数量              |
-| 查询响应时间     |      查询的返回时长               |
-| 向量检索时间统计  |    单条向量查询的时长统计         |
-| 连接数          |  当前连接到Milvus服务器的客户端数量 |
-| 运行时长        |   Milvus服务器正常运行的分钟数      |
-| 缓存利用率       |    已用缓存占比                   |
+| **System parameters**    |                                  |
+| GPU utilization ratio      |    实例GPU的利用率                |
+| GPU usage      |    实例显存的使用量                |
+| CPU utilization ratio       |    CPU使用百分率                  |
+| CPU usage      |     内存使用量                     |
+| Internet IO          |    每秒钟网口的读写速度            |
+| Disk read & write speed     |    磁盘写入速度                   | 
+| **Milvus parameters**  |                                  |
+| Data inserting speed     |         每秒钟插入数据总量        |
+| Data file total number     |       Milvus所存数据文件总量      |
+| Data size       |Milvus所存数据总量                 |
+| QPM (Query per minute)    |  每分钟完成的查询数量              |
+| Search response time     |      查询的返回时长               |
+| Vector indexing time  |    单条向量查询的时长统计         |
+| Connected client number          |  当前连接到Milvus服务器的客户端数量 |
+| Running time        |   Milvus服务器正常运行的分钟数      |
+| Cache utilization ratio  |    已用缓存占比                   |
 
-### 设置监控频率
-目前，Milvus监控默认的监控频率为：1次/秒，你也可以[更改监控设置](https://prometheus.io/docs/prometheus/latest/configuration/configuration/)。
+### Configuring monitoring frequency
+The default Milvus monitoring frequency is 1 time/second. If you want to change it, you may read [Monitoring configuration](https://prometheus.io/docs/prometheus/latest/configuration/configuration/).
 
 
-### 设置告警规则
-你可以为Milvus设置告警规则，比如：当服务器无法正常工作时，会立即发邮件通知相关用户。你可以按照以下操作进行：
+### Configuring alarm rules
+The Milvus alarm system works on Alertmanager, which receives alarm messages from Prometheus once abnormalities occur. The alarm architecture looks like this: 
 
-   1）在Alertmanager根目录下创建milvus.yml文件，内容如下：
+![Monitoring](assets/Monitoring.png)
+
+You can set various rules for Milvus alarm. An example might be when the server is down, an email will be sent instantly to a specified user. You may proceed as follows:
+
+   1) Create a file *milvus.yml* under Alertmanager root path.
 
       ```
       global:
@@ -421,39 +419,32 @@ Milvus server collects data > Collected data is imported to Prometheus > Monitor
           - to: '××××@××.com'             # receiver mail address
       ```
    
-   2）指定--config.file=milvus.yml以启动Alertmanager，如下：
+   2) Start Alertmanager by setting --config.file to *milvus.yml*.
 
       ```
       ./alertmanager --config.file=milvus.yml
       ```
-提示：如果你想自定义告警设置，请参考[告警设置](https://prometheus.io/docs/alerting/configuration/#configuration-file)
-
-
-## 日志管理
-### 日志类型
-
-
-### 设置日志
+> Note: To learn more about configuration of alarm rules, go to [Alarm Configration](https://prometheus.io/docs/alerting/configuration/#configuration-file).
 
 
 
-## 应用场景
-### 典型应用场景
+## Application scenarios
+### Typical use cases
 
-在目前大部分的AI应用场景下，都可以使用Milvus来搭建智能应用系统：
+Milvus database can be used to build intelligent systems in most AI appication scenarios:
 
-- 图片识别
-  以图搜图，通过图片检索图片。具体应用例如：人脸检索，人体检索，和车辆检索，以及商品图片检索，人脸支付等
+- Image search
+  Reverse image search. Detailed application such as image indexing of human face, cars & products, and face recognitiona payment, etc.
 
-- 视频处理
-  针对视频信息的实时人脸检索和轨迹跟踪
+- Video processing
+  Real-time human face indexing and track pursuit. 
 
-- 自然语言处理
-  基于语义的文本检索和推荐，通过文本检索近似文本。
+- Natural language analysis
+  Semantics-based text indexing/suggestion, and text similarity search. 
 
-- 声纹匹配，音频检索。
+- Voiceprint recognition and audio indexing 
 
-- 文件去重，通过文件指纹去除重复文件。
+- Dupicate cleaner by file fingerprint
 
 
 ### 典型架构
