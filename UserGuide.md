@@ -270,17 +270,17 @@ Milvus server collects data > Collected data is imported to Prometheus > Monitor
 
 
 
-### 监控安装设置
+### Installing and configuring monitor
 
-1. 安装Prometheus和Grafana。
+1. Install Prometheus and Grafana.
 
-   - [安装Prometheus Server](https://github.com/prometheus/prometheus#install)
+   - [Installing Prometheus Server](https://github.com/prometheus/prometheus#install)
 
-   - [安装Grafana](http://docs.grafana.org)
+   - [Installing Grafana](http://docs.grafana.org)
 
-2. 设置Prometheus。
+2. Make certain configurations in Prometheus.
 
-   1）打开prometheus根目录下的prometheus.yml设置文件，并对alerting, rule_files和scrape_configs文件做如下跟新：
+   1) Open configuration file *prometheus.yml* under Prometheus root path, and update file *alerting*, *rule_files* and *scrape_configs* as follows:
    
       ```yaml
       # my global config
@@ -323,7 +323,7 @@ Milvus server collects data > Collected data is imported to Prometheus > Monitor
           - targets: ['localhost:9091']
       ```
    
-   2）在prometheus根目录下创建serverdown.yml文件，内容如下：
+   2) Create a file *serverdown.yml* under Prometheus root path, with these rules: 
 
       ```yaml
       groups:
@@ -336,40 +336,39 @@ Milvus server collects data > Collected data is imported to Prometheus > Monitor
               serverity: page
       ```
 
-3. 设置Grafana
+3. Configuring Grafana
 
-   1）打开terminal，执行以下命令
+   1) Open the terminal and run this command: 
    
       ```
       $ docker run -i -p 3000:3000 grafana/grafana
       ```
    
-   2）登录Grafana网页(localhost:3000)，在data source type选项框选择Prometheus。
+   2) Log in to Grafana website (localhost:3000), and in *data source type*, choose *Prometheus*.
    
       ![image-20190620191640605](assets/datasource.png)
    
-   3）在HTTP区域，将URL设置成Prometheus的服务器地址http://localhost:9090, 将ACCESS设置成Browser，点击Save & Test。
+   3) Change URL to Prometheus server address http://localhost:9090, and in *ACCESS*, choose *Browser*. Then click *Save & Test*.
    
       ![image-20190620191702697](assets/settings.png)
    
-   4）点击页面左上角的New dashboard。
-   
+   4) On the top left corner of the page, click *New dashboard*.
       ![image-20190620191721734](assets/dashboard.png)
    
-   5）点击右侧的Import dashboard。
+   5）Click *Import dashboard* in the right box.
    
       ![image-20190620191747161](assets/importdashboard.png)
    
-   6）下载json配置文件，并将其导入系统。
+   6) Download json configuration file, and import it into the system.
    
       ![image-20190620191802408](assets/importjson.png)
 
-   成功之后，将会出现我们提供的监控面板：
+   When it succeeded, the monitor dashboard will be displayed.
    
    ![image-20190620134549612](assets/prometheus.png)
 
 
-### 监控指标
+### Monitoring items
 在Milvus监控系统的GUI控制板上，你可以查看监控数据库的各项指标，实时了解数据库运行表现。
 
 以下是控制板上可以查看的监控项：
