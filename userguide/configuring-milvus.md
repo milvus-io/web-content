@@ -6,9 +6,8 @@ sidebar_label: Configuring Milvus
 
 # Configuring Milvus
 
-## Configuring Milvus
 
-### Milvus file introduction
+## Milvus file introduction
 After you have successfully started Milvus server, you can see a Milvus file under the path *home/$USER/milvus*, which contains the following child files:
 
 - *milvus/db* (database storage)
@@ -18,7 +17,7 @@ After you have successfully started Milvus server, you can see a Milvus file und
     - *log_config.conf* (log configuration file)
 - *milvus/test* (test scripts)
 
-### Configuring Milvus service
+## Configuring Milvus service
 
 Follow these procedures to configure Milvus service:
 
