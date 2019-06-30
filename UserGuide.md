@@ -450,7 +450,7 @@ Milvus database can be used to build intelligent systems in most AI appication s
 ### Applicatation architecture
 The application architecture of Milvus as a feature vector database is as follows:
 
-![MilvusTypicalUsage](/Users/zilliz/Documents/MilvusTypicalUsage.png)
+![MilvusTypicalUsage](assets/MilvusTypicalUsage.png)
 
 Irrelational data (images/videos/texts/audios) are transformed to feature vectors by feature extraction models, and saved to Milvus database. When you input a target vector, it is saved  to the current vector collection, and the search begins, until the most similar vectors are matched, and their IDs returned. 
 
@@ -472,7 +472,7 @@ For those face images that have no match in the library, they will be saved in t
 
 #### System application architecture:
 
-![FacialSearch](/Users/zilliz/Documents/FacialSearch.png)
+![FacialSearch](assets/FacialSearch.png)
 
 - **Face capture device**: When human face images are captured by the camera, they are sent to feature vector collection devices.
 
