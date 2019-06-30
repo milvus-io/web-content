@@ -1,5 +1,5 @@
 ---
-id: VectorDBIntro
+id: vectordb
 title: Vector DB Introducation
 sidebar_label: Vector Database Introducation
 ---
