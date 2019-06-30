@@ -42,6 +42,8 @@ sidebar_label: Configuring Milvus
      | db_path           | Milvus数据库文件存储的路径            |    ？    |
      | db_backend_url    | 元数据库uri                          | http://127.0.0.1  |
      | index_building_threshold | index building触发阈值        |  1024（MB）  |
+     | archive_disk_threshold: 512 | Archive action triggered if storage size exceed this value. (unit: GB)| >0 |
+     | archive_days_threshold: 30 | Files older than x days will be archived. (unit: day)|  >0 |
 
    3）点击metric_config文件，设置监控参数。
    
