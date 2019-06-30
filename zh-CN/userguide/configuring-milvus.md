@@ -6,9 +6,7 @@ sidebar_label: Configuring Milvus
 
 # 设置Milvus
 
-## 设置Milvus
-
-### Milvus文件介绍
+## Milvus文件介绍
 成功启动Milvus server后，你可以在home/$USER/milvus的路径下看到Milvus的文件夹。其中包含以下文件：
 
 - milvus/db（数据库存储）
@@ -18,7 +16,7 @@ sidebar_label: Configuring Milvus
     - log_config.conf（日志设置文件）
 - milvus/test（测试脚本）
 
-### 设置Milvus服务
+## 设置Milvus服务
 
 请按照以下步骤设置Milvus服务：
 
