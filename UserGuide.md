@@ -36,7 +36,7 @@ The documentation is for reference only. All content in the documentation doesn'
 | Note      | Note is a supplimentary explanation to an action or a logic.          |
 
 
-## Quick start
+## Getting started with Milvus
 For how to install Milvus and run an example program, you may read: [Milvus Quick Start](https://github.com/milvus-io/docs/blob/dev/zh-CN/QuickStart.md).
 
 
