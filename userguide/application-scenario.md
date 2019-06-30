@@ -6,8 +6,7 @@ sidebar_label: Application scenarios
 
 # Application scenarios
 
-## Application scenarios
-### Typical use cases
+## Typical use cases
 
 Milvus database can be used to build intelligent systems in most AI appication scenarios:
 
@@ -25,16 +24,16 @@ Milvus database can be used to build intelligent systems in most AI appication s
 - Dupicate cleaner by file fingerprint
 
 
-### Applicatation architecture
+## Applicatation architecture
 The application architecture of Milvus as a feature vector database is as follows:
 
 ![MilvusTypicalUsage](assets/MilvusTypicalUsage.png)
 
 Irrelational data (images/videos/texts/audios) are transformed to feature vectors by feature extraction models, and saved to Milvus database. When you input a target vector, it is saved  to the current vector collection, and the search begins, until the most similar vectors are matched, and their IDs returned. 
 
-### Scenario - Milvus human face search
+## Scenario - Milvus human face search
 
-#### Requirements
+### Requirements
 
 - Sensitive group alarm
 
@@ -48,7 +47,7 @@ A human face captured by camera will be compared to those in the library to find
 
 For those face images that have no match in the library, they will be saved in the history library for several months, as reference for future case tracking. 
 
-#### System application architecture:
+### System application architecture:
 
 ![FacialSearch](assets/FacialSearch.png)
 
