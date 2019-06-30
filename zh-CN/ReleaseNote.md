@@ -4,7 +4,7 @@ title: Release Note
 sidebar_label: Milvus Release Notes
 ---
 
-# Milvus Docker版本发布说明
+# Milvus版本发布说明
 ## 版本 0.3.0
 发布日期：2019-06-30
 
