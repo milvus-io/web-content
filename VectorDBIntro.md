@@ -57,11 +57,11 @@ Linear search is relatively easier to use as it requires no additonal building o
 ### Similarity search
 Similarity search is a mechanism for comparing spaces of objects where the only available comparator is the similarity between any pair of objects. This is becoming increasingly important in an age of large multimedia information where the objects do not possess any natural order, for example large collections of images, sounds and other sophisticated digital objects.
 
-In contrast to linear seach, similarity search generally relies on metric space, which allows the construction of efficient index structures in order to achieve scalability. By employing a range of mechanisms such as clustering, dimension reduction or coding, this search methods generally has a much smaller time complexity compared to linear search. 
+In contrast to linear seach, similarity search generally relies on metric space, which allows the construction of efficient index structures in order to achieve scalability. By employing a range of mechanisms such as clustering, dimensionality reduction or coding, this search methods generally has a much smaller time complexity compared to linear search. 
 
 The following indexing algorithms are mainly used in current similarity search:
 
-- **Tree-based search**
+- **Tree-based**
   Tree-based similarity search divides high-dimension spaces into multiple subspaces, by employing a range of hyperplane constructed based on vector distribution. It got its name because it uses tree structure to maintain the space hierarchy. 
   
   Each non-leaf nopde in the tree corresponds to a subspace and a list of hyperplane, which furhter partitions the subspace to smaller subspaces. Each subspace corresponds to a child node. Thus, the tree root represents the whole vector space, and contains a group of parent nodes, while each child node represents a subspace of its parent node. Each leaf node represents a smallest unit of subspace that can no longer be divided. According to this structure, each vector can be represented by a leaf node in the tree. 
@@ -70,23 +70,25 @@ The following indexing algorithms are mainly used in current similarity search:
  
   | Pros  |  Cons   |
   |-------|---------|
-  | High effecient search. By quickly locating most simiar leaf nodes, much time is saved of comparing to large number of vectors with low similarity. |  1. Tree structure construction takes much more time as the dimension of vectors get higher; 2. If target vector is too close to a particular hyperplane, the search preciseness might be lowered for possible loss of similar vectors in other hyperlanes.|
+  | High effecient search. By quickly locating most simiar leaf nodes, much time is saved of comparing to large number of vectors with low similarity. |  1. Tree structure construction of high-dimensional vectors takes much time; 2. If target vector is too close to a particular hyperplane, the search preciseness might be lowered for possible loss of similar vectors in other hyperlanes.|
 
-- **Hash-based space partition**
-  Hash-based search divides vectors into collections based on their hash values computed by locality-sensitive hash (LSH). For similar vectors, their hash values are close too. As this method divides LSH domain into several intervals, each vector has a corresponding interval. In search cases, by comparing hash values and intervals, the target vector can be categoried and similar vectors can be 
-  基于哈希(Hash)的搜索方法采用一组局部敏感哈希(Locality-Sensitive Hash, LSH)函数对向量集合进行划分。通过采用局部敏感哈希函数可以对每一个向量计算出一个与之相对应的哈希值(hash value)。对于距离较接近的向量，其哈希值也较为接近。该方法将各局部敏感哈希函数的值域(domain)划分为若干个区间(interval)，从而每个向量相应于特定的局部敏感哈希函数，均有一个区间与之对应。该方法通过哈希值的区间对向量进行划分，若两向量对于任一哈希函数其哈希值所在的区间均相同，则这两个向量属于同一分类。在搜索时，通过相同的局部敏感哈希函数和区间划分方法可以计算得到目标向量所属分类。然后可依次计算该分类以及该分类的邻近分类中所有向量与目标向量的距离获取距离最小的向量。
-基于哈希的方法，通过计算目标向量所在分类以及邻近的分类可以有效的排除掉大量与目标向量相似度较低的向量，减少了向量相似度的计算次数。但是，该方法通常只能对向量空间进行均匀划分，而实际应用中向量在空间中的分布通常是不均匀(ununiform/skew)的，从而导致各个分类中向量的数量相差巨大，并进一步影响搜索的效率和准确度。
+- **Hash-based**
+   locality-sensitive hashing (LSH) is an algorithmic technique that hashes similar vectors into the same "buckets" with high probability. Since similar items end up in the same buckets, this technique can be used for data clustering and nearest neighbor search. 
+  
+   This method is efficient because it substantially reduced the computing times as the computation is done only in the "buckets" with highly similar vectors. However, one limitation is that only该方法通常只能对向量空间进行均匀划分，而实际应用中向量在空间中的分布通常是不均匀(ununiform/skew)的，从而导致各个分类中向量的数量相差巨大，并进一步影响搜索的效率和准确度。
 
-- **Vector quantization** 向量量化的编码算法
+- **Vector quantization** 
+  Vector quantization (VQ) is a classical quantization technique from signal processing that allows the modeling of probability density functions by the distribution of prototype vectors. It works by dividing a large set of points (vectors) into groups having approximately the same number of points closest to them. Each group is represented by its centroid point, as in k-means and some other clustering algorithms.
+  
+  The density matching property of vector quantization is powerful, especially for identifying the density of large and high-dimensional data. 
 
-  基于向量量化的方法通常采用聚类(clustering)的方式对向量集合中的向量进行划分。该方法通过k-means等聚类方法将向量集合划分为多个聚类(cluster)，并记录各个聚类的中心点(center point/centroid)的坐标。在向量搜索时，首先依次比对目标向量与各个聚类中心的距离，选择出与目标向量最为接近的若干个聚类中心。接下来获取这些聚类中心所对应聚类中的所有向量，依次计算各向量与目标向量的距离，选择出距离最为接近的若干个向量。
-该方法采用聚类的方法将数据集合划分，从而在搜索过程中排除掉与目标向量相似度较低的向量。然而，该方法在高维向量的搜索中容易遗漏部分潜在的与目标向量距离较近的向量，从而难以达到较高的准确度。
 
+- **Graph-based** 
+Different from the above-mentioned search methods, graph-based search makes no partition of vector spaces. The graph relates the data items in the store to a collection of nodes and edges, the edges representing the relationships between the nodes. Graph-based method holds the relationships between data as a priority. 
 
-- **Graph-based search** 基于图的搜索方法
+It works by searching a node and all its neighbor nodes, checking their similarity with the target vector, to find most similar nodes and check again, until a group of closest match is identified.
 
-  与以上方法不同，基于图(Graph)的搜索方法通常不对向量空间进行划分。该方法预先计算向量集合中各向量间的相似度，并以图的形式维护向量之间的相似关系。具体而言，在图中每个向量是一个节点(node)，距离较近的节点之间通过边(edge)相互连接。在搜索时，从一个或者多个起始节点出发进行探索。每次探索一个节点时，计算该节点的所有邻居节点(neighbor)与目标向量的相似度，并基于当前探索的结果，选择与目标向量最为相似且未被探索的节点作为下一次需要探索的节点并开始下一次探索。以上过程在无法找到新的探索节点时结束，并将探索过程中所有被访问的节点中与目标向量最为相似的节点作为搜索结果。
-基于图的方法通常有较高的搜索效率和准确度，但是构建搜索图的过程中需要进行大量的向量距离计算，从而导致极大的计算开销。除此之外，在需要向向量集合中增加新的向量时，通常需要对搜索图进行重新构建，从而严重的影响了向量的插入效率。
+Graph-based method is usually efficient and precise in the similary search. However, if new vectors are to be added to vector space, the graph construction needs to be restructured, and this large computation of vector distances requires much time.
 
 
 
@@ -99,14 +101,9 @@ Designed by Facebook AI, and written in C++, FAISS (Facebook AI Similarity Searc
 
 |  Pros                     |      Cons                           |
 |---------------------------| ------------------------------------|
-| Distributed, multi-GPU    | Only a algorithm library            |
-| Customizable algorithms   | Users need much expertise knowledge to be able to add customizations of algorithms and parameters  |                       
+| Distributed, multi-GPU computing    | Only a algorithm library            |
+| Customization supported in indexing speed, search speed, CPU usage and search precision | Users need much expertise knowledge to be able to add customizations of algorithms and parameters  |                       
 
-- 多线程以充分利用多核性能并在多路 GPU 上进行并行搜索。
-- BLAS 算法库通过 matrix/matrix 乘法进行高效、精确的距离计算。没有 BLAS，高效的强力执行很难达到最优状态。 BLAS/LAPACK 是唯一一个 Faiss 必须的前提软件。
-- 机器 SIMD 矢量化和 popcount 被用于加速孤立矢量的距离计算。
-
-FAISS包含了多种向量检索算法，提供不同精度，查询速度和存储空间占用率。它还包含用于评估和参数调整的支持代码。 FAISS的出现也打破了过去向量检索库的一个限制：只能提供某个方面的优化。FAISS允许开发人员，在建立索引的速度、查询速度、内存使用量和查询精度等多个方面做取舍。
 
 
 ### SPTAG
@@ -115,10 +112,7 @@ SPTAG, open sourced in May, 2019 by Microsoft, is a distributed approximate near
 
 | Pros                        |    Cons                   |
 |-----------------------------| --------------------------|
-| 
-
-
-SPTAG是由Microsoft于2019年5月发布的，基于最近邻搜索的向量检索算法。开发人员称该算法：允许用户充分利用学习模型在以毫秒为单位时间内智能搜索数十亿条向量。该算法在查询速度、查询精确度以及内存占用上也都有非常好的表现。和NSG类似，SPTAG建图的过程非常漫长，所以在需要大量插入新向量的同时进行查询的场景下，SPTAG也并不合适。
+| High search speed & search precision  |  Subject to limitaions of graph-based search (graph construction takes a long time, especially when new vectors are to be added| 
 
 Although FAISS and SPTAG allow developers to build vector index and search, they are still libraries, not full-winged, ready-to-use vector indexing database system. 
 
