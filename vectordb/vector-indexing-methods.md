@@ -6,10 +6,9 @@ sidebar_label: Vector indexing methods
 
 # Vector indexing methods
 
-## Vector indexing methods
 Feature vectors are good for analysis because there are many techniques for comparing feature vectors. To summarize, these techniques can be categorized into 2 main kinds: linear search and similarity search.
 
-### Linear search
+## Linear search
 
 A linear search or sequential search is a method for finding an element within a list. It sequentially checks each element of the list until a match is found or the whole list has been searched. In vector search, the general method is to compare the Euclidean distance.
 
@@ -18,7 +17,7 @@ Linear search is relatively easier to use as it requires no additonal building o
 > Information: O (Time complexity)= N (Vector scale) * D (Vector dimension)
 
 
-### Similarity search
+## Similarity search
 Similarity search is a mechanism for comparing spaces of objects where the only available comparator is the similarity between any pair of objects. This is becoming increasingly important in an age of large multimedia information where the objects do not possess any natural order, for example large collections of images, sounds and other sophisticated digital objects.
 
 In contrast to linear seach, similarity search generally relies on metric space, which allows the construction of efficient index structures in order to achieve scalability. By employing a range of mechanisms such as clustering, dimensionality reduction or coding, this search methods generally has a much smaller time complexity compared to linear search. 
