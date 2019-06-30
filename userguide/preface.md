@@ -1,5 +1,5 @@
 ---
-id: Preface
+id: preface
 title: Preface
 sidebar_label: Preface
 ---
