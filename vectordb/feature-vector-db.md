@@ -6,17 +6,16 @@ sidebar_label: Feature vector database
 
 # Feature vector database
 
-## Feature vector database
 We have agreed that feature vectors are the basic elements to precisely represent multimedia objects. But are there any ideal database that allows the efficient storing and indexing of feature vectors? Let's start by looking at some competent tools of feature vector indexing available in the market:
 
-### FAISS
+## FAISS
 
 Designed by Facebook AI, and written in C++, FAISS (Facebook AI Similarity Search) is a library for efficient similarity search and clustering of dense vectors.
 
 FAISS provides various customization options about indexing speed, search speed, CPU usage and search precision. Howevery, it is only but an algorithm library. In addition, users need much expertise knowledge to be able to add customizations of algorithms and parameters.       
 
 
-### SPTAG
+## SPTAG
 
 SPTAG, open sourced in May, 2019 by Microsoft, is a distributed approximate nearest neighborhood search (ANN) library which provides a high quality vector index build, search and distributed online serving toolkits for large scale vector search scenario.
 
