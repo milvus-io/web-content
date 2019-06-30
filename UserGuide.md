@@ -45,12 +45,12 @@ For how to install Milvus and run an example program, you may read: [Milvus Quic
 ### Milvus file introduction
 After you have successfully started Milvus server, you can see a Milvus file under the path *home/$USER/milvus*, which contains the following child files:
 
-- milvus/db (database storage)
-- milvus/logs (log storage)
-- milvus/conf (configuration file)
-    - server_config.yaml (service configuration file)
-    - log_config.conf (log configuration file)
-- milvus/test (test scripts)
+- *milvus/db* (database storage)
+- *milvus/logs* (log storage)
+- *milvus/conf* (configuration file)
+    - *server_config.yaml* (service configuration file)
+    - *log_config.conf* (log configuration file)
+- *milvus/test* (test scripts)
 
 ### Configuring Milvus service
 
