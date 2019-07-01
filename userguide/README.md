@@ -1,4 +1,4 @@
-# Introduction
+# Milvus User Guide
 
 - [Preface](preface.md)
 - [Getting Started with Milvus](getting-started.md)
