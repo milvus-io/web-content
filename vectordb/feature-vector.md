@@ -16,14 +16,14 @@ Advances in modern computer and machine learning technologies have led to huge a
 
 Instead, feature vectors describe an object from a multidimentional, easily analyzable way, and are suitable to represent numeric or symbolic characteristics of multimedia content. In the human face image example, feature vector of hundreds of dimensions is used to precisely describe a face.
 
-They are important for many different areas of machine learning and pattern processing. Machine learning algorithms typically require a numerical representation of objects in order for the algorithms to do processing and statistical analysis.
+Feature vectors are important for many different areas of machine learning and pattern processing. Machine learning algorithms typically require a numerical representation of objects in order for the algorithms to do processing and statistical analysis.
 
 ## Use cases
 As already mentioned, feature vectors, with its effectiveness and practicality of representing objects in a numerical way to help with may kinds of analyses, are used widely in machine learning. 
 
 - Image processing
 
-  Features can be gradient magnitude, color, grayscale intensity, edges, areas, and more. Feature vectors are particularly popular for analyses in image processing because of the convenient way attributes about an image, like the RGB color example listed, can be compared numerically once put into feature vectors.
+  Features can be gradient magnitude, color, grayscale intensity, edges, areas, and more. Feature vectors are particularly popular for analysis in image processing because of the convenient way attributes about an image, like the RGB color example mentioned above, can be compared numerically once put into feature vectors.
 
 - Speech recognition
 
