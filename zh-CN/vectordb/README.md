@@ -1,4 +1,4 @@
-# Vector Database Introduction
+# 向量数据库简介
 
 - [Feature vector](feature-vector.md)
 - [Traditional database & feature vector indexing](traditional-db.md)
