@@ -7,7 +7,7 @@ sidebar_label: Milvus database
 # Milvus database
 
 
-Milvus is a distributed feature vector indexing database management system which provides high quality similarity search and analysis of feature vectors and irrelational data. By extracting object features and taking the Euclidean distance between two feature vectors, the similarity of two objects is compared. Here is an comparison of Milvus with FAISS and SPTAG:
+Milvus is a distributed feature vector indexing database management system which provides high quality similarity search and analysis of feature vectors and unstructured data. By extracting object features and taking the Euclidean distance between two feature vectors, the similarity of two objects is compared. Here is an comparison of Milvus with FAISS and SPTAG:
 
 |                    |Milvus                 |  FAISS               |   SPTAG   |
 |--------------------|-----------------------|----------------------|-----------|
