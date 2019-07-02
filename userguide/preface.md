@@ -21,6 +21,6 @@ The documentation is for reference only. All content in the documentation doesn'
 | Convention       |    Description                                |
 |-----------|-----------------------------------------|
 | bold      | Bold type indicates headlines, or content that needs to be emphasized.    |
-| italic    | Italic type indicates file paths, file names, UI strings, or placeholder variables for which you supply particular values. |
+| italic    | Italic type indicates file paths, file names, User Interface texts, or placeholder variables for which you supply particular values. |
 | Consolas  | Consolas type indicates code examples within a paragraph |
 | Note      | Note is a supplementary explanation to an action or a logic.          |
