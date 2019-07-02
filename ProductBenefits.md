@@ -8,7 +8,7 @@ sidebar_label: Product benefits
 
 ## Fast GPU-accelerated search engine
 
-Milvus is designed for the largest scale of vector search and analysis. 
+Milvus is designed for the largest scale of vector search and analysis. Its architechture retrieves data from GPU-accelerated computation. The disaggregated storage and compute architecture allows you to 
 
 ## Seemless integration with AI models
 
