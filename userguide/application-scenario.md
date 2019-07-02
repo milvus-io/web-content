@@ -8,11 +8,11 @@ sidebar_label: Application scenarios
 
 ## Typical scenarios
 
-Milvus database can be used to build intelligent systems in most AI appication scenarios:
+Milvus database can be used to build intelligent systems in most AI application scenarios:
 
 - Image search
 
-  Reverse image search. Detailed application such as image indexing of human face, cars & products, and face recognitiona payment, etc.
+  Reverse image search. Detailed application such as image indexing of human face, cars & products, and face recognition payment, etc.
 
 - Video processing
 
@@ -32,7 +32,7 @@ The application architecture of Milvus as a feature vector database is as follow
 
 ![MilvusTypicalUsage](assets/MilvusTypicalUsage_en.png)
 
-Irrelational data (images/videos/texts/audios) are transformed to feature vectors by feature extraction models, and saved to Milvus database. When you input a target vector, it is saved  to the current vector collection, and the search begins, until the most similar vectors are matched, and their IDs returned. 
+Unstructured data (images/videos/texts/audios) are transformed to feature vectors by feature extraction models, and saved to Milvus database. When you input a target vector, it is saved  to the current vector collection, and the search begins, until the most similar vectors are matched, and their IDs returned. 
 
 ### Scenario - Milvus human face search
 
@@ -56,20 +56,20 @@ For those face images that have no match in the library, they will be saved in t
 
 - **Face capture device**: When human face images are captured by the camera, they are sent to feature vector collection devices.
 
-- **Feature extraction service**: The human face imgaes are futhered transformed and represented by 512-dimensional feature vectors by deep learing models.
+- **Feature extraction service**: The human face images are further transformed and represented by 512-dimensional feature vectors by deep learning models.
 
 - **Application**：
 
   - Black list alarm: If a human face within the sensitive group library is found, an alarm is sent.
   - Face recognition search: Search for personal information file based on face ID. 
-  - Track pursuit replay: By searching a human face image, the history track pursuit of the person will be displayed.
+  - Track reproduction: By searching a human face image, the history track of the person will be reproduced.
 
 - **Libraries**：
 
   - Sensitive group library
 
     - Vector library with million datasets 
-    - High requirements on search precision and speed (QPS >= 1000) 
+    - Great search precision and high indexing speed (QPS >= 1000) 
     - Batch search supported 
     
   - Human face library
@@ -92,5 +92,5 @@ For those face images that have no match in the library, they will be saved in t
 - **Basic architecture**: 
   - Milvus for vector storage
   - MySQL for relational data storage
-  - Minio for irrelational data storage
+  - Minio for unstructured data storage
 
