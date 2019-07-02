@@ -6,7 +6,7 @@ sidebar_label: Creating a table
 
 # Creating a table
 
-> Note：All the following actions are executed in Python. For other languages, Milvus supports RESTful and RPC.
+> Note: All the following actions are executed in Python. For other languages, Milvus supports RESTful and RPC.
 
 ## Prerequisites
 When you have finished the installation and basic configuration of Milvus, you may go on and create a table to insert data into. Before that, ensure you have：
