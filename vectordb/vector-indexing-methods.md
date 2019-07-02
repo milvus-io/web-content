@@ -12,7 +12,7 @@ Feature vectors are good for analysis because there are many techniques for comp
 
 A linear search or sequential search is a method for finding an element within a list. It sequentially checks each element of the list until a match is found or the whole list has been searched. In vector search, the general method is to compare the Euclidean distance.
 
-Linear search is relatively easier to use as it requires no additonal building of index structures or storage spaces. For example, you can use parallel computation libraries such as MKL for Intel processors and cuBLAS for NVIDIA GPUs. However, this methods is more suited to similarity search for vectors of small and medium scales, because for linear search, the amount of time it takes to run an algorithm becomes longer as the number and dimension of vectors get larger. 
+Linear search is relatively easier to use as it requires no additional building of index structures or storage spaces. For example, you can use parallel computation libraries such as MKL for Intel processors and cuBLAS for NVIDIA GPUs. However, this methods is more suited to similarity search for vectors of small and medium scales, because for linear search, the amount of time it takes to run an algorithm becomes longer as the number and dimension of vectors get larger. 
 
 > Information: O (Time complexity)= N (Vector scale) * D (Vector dimension)
 
@@ -20,7 +20,7 @@ Linear search is relatively easier to use as it requires no additonal building o
 ## Similarity search
 Similarity search is a mechanism for comparing spaces of objects where the only available comparator is the similarity between any pair of objects. This is becoming increasingly important in an age of large multimedia information where the objects do not possess any natural order, for example large collections of images, sounds and other sophisticated digital objects.
 
-In contrast to linear seach, similarity search generally relies on metric space, which allows the construction of efficient index structures in order to achieve scalability. By employing a range of mechanisms such as clustering, dimensionality reduction or coding, this search methods generally has a much smaller time complexity compared to linear search. 
+In contrast to linear search, similarity search generally relies on metric space, which allows the construction of efficient index structures in order to achieve scalability. By employing a range of mechanisms such as clustering, dimensionality reduction or coding, this search methods generally has a much smaller time complexity compared to linear search. 
 
 The following indexing algorithms are mainly used in current similarity search:
 
@@ -28,17 +28,17 @@ The following indexing algorithms are mainly used in current similarity search:
 
   Tree-based similarity search divides high-dimension spaces into multiple subspaces, by employing a range of hyperplane constructed based on vector distribution. It got its name because it uses tree structure to maintain the space hierarchy. 
   
-  Each non-leaf nopde in the tree corresponds to a subspace and a list of hyperplane, which furhter partitions the subspace to smaller subspaces. Each subspace corresponds to a child node. Thus, the tree root represents the whole vector space, and contains a group of parent nodes, while each child node represents a subspace of its parent node. Each leaf node represents a smallest unit of subspace that can no longer be divided. According to this structure, each vector can be represented by a leaf node in the tree. 
+  Each non-leaf node in the tree corresponds to a subspace and a list of hyperplane, which further partitions the subspace to smaller subspaces. Each subspace corresponds to a child node. Thus, the tree root represents the whole vector space, and contains a group of parent nodes, while each child node represents a subspace of its parent node. Each leaf node represents a smallest unit of subspace that can no longer be divided. According to this structure, each vector can be represented by a leaf node in the tree. 
   
-  In real cases of similarity search, the most simiar/close vectors are searched by locating several leaf nodes whose distances are nearest to target node. 
+  In real cases of similarity search, the most similar/close vectors are searched by locating several leaf nodes whose distances are nearest to target node. 
  
- Tree-based search is efficient for its ability to quickly locating most simiar leaf nodes, much time is saved of comparing to large number of vectors with low similarity. However, tree structure construction of high-dimensional vectors takes much time. And if the target vector is too close to a particular hyperplane, the search preciseness might be lowered for possible loss of similar vectors in other hyperlanes.
+ Tree-based search is efficient for its ability to quickly locating most similar leaf nodes, much time is saved of comparing to large number of vectors with low similarity. However, tree structure construction of high-dimensional vectors takes much time. And if the target vector is too close to a particular hyperplane, the search preciseness might be lowered for possible loss of similar vectors in other hyperplanes.
 
 - **Hash-based**
 
    locality-sensitive hashing (LSH) is an algorithmic technique that hashes similar vectors into the same "buckets" with high probability. Since similar items end up in the same buckets, this technique can be used for data clustering and nearest neighbor search. 
   
-   This method is efficient because it substantially reduced the computing times as the computation is done only in the "buckets" with highly similar vectors. However, one limitation is that according to this method, each "bucket" contains the same number of vectors, while in real-life situations, vectors distributions are ununiform/skew, thus affecting the search efficiency and precision.
+   This method is efficient because it substantially reduced the computing times as the computation is done only in the "buckets" with highly similar vectors. However, one limitation is that according to this method, each "bucket" contains the same number of vectors, while in real-life situations, vectors distributions are skew, thus affecting the search efficiency and precision.
 
 - **Vector quantization** 
 
@@ -53,5 +53,5 @@ Different from the above-mentioned search methods, graph-based search makes no p
 
 It works by searching a node and all its neighbor nodes, checking their similarity with the target vector, to find most similar nodes and check again, until a group of closest match is identified.
 
-Graph-based method is usually efficient and precise in the similary search. However, if new vectors are to be added to vector space, the graph construction needs to be restructured, and this large computation of vector distances requires much time.
+Graph-based method is usually efficient and precise in the similarity search. However, if new vectors are to be added to vector space, the graph construction needs to be restructured, and this large computation of vector distances requires much time.
 
