@@ -6,7 +6,7 @@ sidebar_label: Application scenarios
 
 # Application scenarios
 
-## Typical use cases
+## Typical s
 
 Milvus database can be used to build intelligent systems in most AI appication scenarios:
 
