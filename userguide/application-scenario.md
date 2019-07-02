@@ -11,12 +11,15 @@ sidebar_label: Application scenarios
 Milvus database can be used to build intelligent systems in most AI appication scenarios:
 
 - Image search
+
   Reverse image search. Detailed application such as image indexing of human face, cars & products, and face recognitiona payment, etc.
 
 - Video processing
+
   Real-time human face indexing and track pursuit. 
 
 - Natural language analysis
+
   Semantics-based text indexing/suggestion, and text similarity search. 
 
 - Voiceprint recognition and audio indexing 
