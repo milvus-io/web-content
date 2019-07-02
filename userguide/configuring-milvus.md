@@ -59,7 +59,7 @@ Follow these procedures to configure Milvus service:
    
      |  Parameter                | Description                             | Reference value     |
      |-------------------|-------------------------------------|----------|
-     | cpu_cache_capacity | CPU used for cache. Default valus is 16GB       |  0 ~ Total CPU |
+     | cpu_cache_capacity | Memory used for cache in CPU. Default value is 16 GB       |  0 ~ Total memory size |
 
 3. Restart Milvus Docker.
 
