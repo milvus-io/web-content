@@ -4,7 +4,7 @@ title: Search A Table
 sidebar_label: Search A Table
 ---
 
-# Search a Table
+# Searching a Table
 
 ## Searching table name
 You can search all table names by this: 
