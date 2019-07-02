@@ -95,6 +95,7 @@ Milvus server collects data > Collected data is imported to Prometheus > Monitor
       ![image-20190620191702697](assets/settings.png)
    
    4) On the top left corner of the page, click *New dashboard*.
+
       ![image-20190620191721734](assets/dashboard.png)
    
    5) Click *Import dashboard* in the right box.
