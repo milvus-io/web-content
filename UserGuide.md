@@ -480,7 +480,7 @@ Categorize the face images according to the frequency it is indexed. The face im
 
 #### System application architecture:
 
-![FaceSearch](assets/FaceSearch_en.png)
+![FaceSearch](assets/FaceSearch_cn.png)
 
 - **Face capture device**: When human face images are captured by the camera, they are sent to feature vector collection devices.
 
