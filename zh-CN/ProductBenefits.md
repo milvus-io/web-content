@@ -1,4 +1,3 @@
-
 ---
 id: product-benefits
 title: Product benefits
