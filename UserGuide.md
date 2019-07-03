@@ -468,15 +468,15 @@ VIP group library contains human face features of VIP clients. All human faces c
 
 - One person one file
 
-A human face captured by camera will be compared to those in the library to find the corresponding file containing all the information of the person.
+A human face captured by the camera will be compared to those in the library to find the corresponding file containing all the information of the person.
 
 - Potential new customers
 
 For those face images that have no match in the library, they will be automatically added to the human face library.
 
-- Customer relation management
+- Customer relationship management
 
-Categorize the face images according to the frequency it is indexed. The face images with the lower indexing frequency might be the target customers with whom to improve customer relations. 
+Categorize the face images according to the frequency it is indexed. The face images with the lower indexing frequency might be the target customers with whom to improve customer relationship. 
 
 #### System application architecture:
 
@@ -484,13 +484,13 @@ Categorize the face images according to the frequency it is indexed. The face im
 
 - **Face capture device**: When human face images are captured by the camera, they are sent to feature vector collection devices.
 
-- **Feature extraction service**: The human face images are further transformed and represented by 512-dimensional feature vectors by deep learning models.
+- **Feature extraction service**: The human face images are further transformed and represented by 512-dimensional feature vectors by machine learning models.
 
 - **Application**：
 
   - VIP client notification: If a human face within the VIP group library is found, an notification is sent to the system.
   - Personal file search: Search for personal information file based on face ID. 
-  - Face categorization: Move certain face images to a special library.
+  - Face categorization: Move certain face images to a special library for customer relationship management
 
 
 - **Data libraries**：
