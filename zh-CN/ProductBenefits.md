@@ -1,8 +1,3 @@
----
-id: product-benefits
-title: Product benefits
-sidebar_label: Product benefits
----
 
 ---
 id: product-benefits
@@ -15,22 +10,20 @@ sidebar_label: Product benefits
 
 ## GPU加速搜索系统
 
-Milvus针对大规模向量数据索引而设计。CPU/GPU异核计算让您的数据处理速度提高1000倍以上。 
+Milvus针对大规模向量数据索引而设计。CPU/GPU异核计算让您的数据处理速度提高1000倍以上。
 
-拥有分布式数据存储和计算架构，您可以轻松The data is stored and computed on a distributed architecture. This lets you scale data sizes up and down without redesigning the system. 
+我们“加载即可用”的技术意味着每张GPU每小时可以处理3TB向量数据。
 
 
 ## 智能索引，数据弹性伸缩
 
-With a “Decide Your Own Algorithm” approach, you can embed machine learning and advanced algorithms into Milvus without the headache of complex data engineering or migrating data between disparate systems. 
+有了“用户自定义算法”，您可以轻松在Milvus上使用顶尖的机器学习相关算法技术，不用担心复杂数据在不同系统间的转换和迁移。Milvus基于量化索引，基于树的索引和图索引等算法，提供了更加优化的算法功能，您可以根据业务需要自由选择。
 
-Milvus is built on optimized indexing algorithm based on quantization indexing, tree-based and graph indexing methods. 
+拥有分布式数据存储和计算架构，您可以轻松对数据进行弹性伸缩管理。
 
 
 ## 简单好用
 
-With Milvus, you can focus on your feature vectors, rather than managing the systems. Data is ready for indexing immediately, with superior ad-hoc performance.
+使用Milvus，你只需关注向量数据，而不用操心系统管理。向量检索前数据无需特殊处理。
 
-Installation is a breeze, and can be performed in a few minutes. Our Load-and-Go technology means Milvus can load up to 3TB/hour/GPU out-of-the-box.
-
-The performance of system can be easily tracked on Prometheus-based GUI monitor dashboard. 
+安装简单，几分钟便可轻松搞定。基于Prometheus的图形化监控仪表盘表现可以实时跟踪系统表现。 
