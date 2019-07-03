@@ -454,7 +454,7 @@ Milvus database can be used to build intelligent systems in most AI application 
 ## Application architecture
 The application architecture of Milvus as a feature vector database is as follows:
 
-![MilvusTypicalUsage](assets/MilvusTypicalUsage_en.png)
+![MilvusTypicalApplication](assets/MilvusTypicalApplication_en.png)
 
 Unstructured data (images/videos/texts/audios) are transformed to feature vectors by feature extraction models, and saved to Milvus database. When you input a target vector, it is saved  to the current vector collection, and the search begins, until the most similar vectors are matched, and their IDs returned. 
 
