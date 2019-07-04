@@ -1,10 +1,10 @@
 ---
 id: importing-vectors
-title: Importing Vectors
-sidebar_label: Importing Vectors
+title: Importing vectors
+sidebar_label: Importing vectors
 ---
 
-# Importing Vectors
+# Importing vectors
 
 When you have successfully created tables in Milvus, you can start inserting data into the table. Of course, one prerequisite of this step is that you already have proper multi-dimensional vectors. Before importing vectors to the table, get familiar with the related parameters:
 
