@@ -32,7 +32,7 @@ The following indexing algorithms are mainly used in current similarity search:
   
   In real cases of similarity search, the most similar/close vectors are searched by locating several leaf nodes whose distances are nearest to target node. 
  
- Tree-based search is efficient for its ability to quickly locating most similar leaf nodes, much time is saved of comparing to large number of vectors with low similarity. However, tree structure construction of high-dimensional vectors takes much time. And if the target vector is too close to a particular hyperplane, the search preciseness might be lowered for possible loss of similar vectors in other hyperplanes.
+  Tree-based search is efficient for its ability to quickly locating most similar leaf nodes, much time is saved of comparing to large number of vectors with low similarity. However, tree structure construction of high-dimensional vectors takes much time. And if the target vector is too close to a particular hyperplane, the search preciseness might be lowered for possible loss of similar vectors in other hyperplanes.
 
 - **Hash-based**
 
@@ -49,9 +49,9 @@ The following indexing algorithms are mainly used in current similarity search:
 
 - **Graph-based** 
 
-Different from the above-mentioned search methods, graph-based search makes no partition of vector spaces. The graph relates the data items in the store to a collection of nodes and edges, the edges representing the relationships between the nodes. Graph-based method holds the relationships between data as a priority. 
+  Different from the above-mentioned search methods, graph-based search makes no partition of vector spaces. The graph relates the data items in the store to a collection of nodes and edges, the edges representing the relationships between the nodes. Graph-based method holds the relationships between data as a priority. 
 
-It works by searching a node and all its neighbor nodes, checking their similarity with the target vector, to find most similar nodes and check again, until a group of closest match is identified.
+  It works by searching a node and all its neighbor nodes, checking their similarity with the target vector, to find most similar nodes and check again, until a group of closest match is identified.
 
-Graph-based method is usually efficient and precise in the similarity search. However, if new vectors are to be added to vector space, the graph construction needs to be restructured, and this large computation of vector distances requires much time.
+  Graph-based method is usually efficient and precise in the similarity search. However, if new vectors are to be added to vector space, the graph construction needs to be restructured, and this large computation of vector distances requires much time.
 
