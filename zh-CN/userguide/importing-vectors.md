@@ -1,7 +1,7 @@
 ---
 id: importing-vectors
-title: Importing Vectors
-sidebar_label: Importing Vectors
+title: Importing vectors
+sidebar_label: Importing vectors
 ---
 
 # 导入向量数据
