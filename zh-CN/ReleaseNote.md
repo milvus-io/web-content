@@ -1,20 +1,19 @@
 ---
 id: ReleaseNote
 title: Release Note
-sidebar_label: Milvus Docker版本发布说明
+sidebar_label: Milvus Release Notes
 ---
 
-# Milvus Docker版本发布说明
+# Milvus版本发布说明
 ## 版本 0.3.0
 发布日期：2019-06-30
 
-### 主要功能
+### 新增功能
 
 - 增加基于Celery的水平扩展方案
 - 增加了基于MinIO的存储分离方案
 - 增加了删除Table的功能
 - 支持ARM64架构
-- 新加入SPTAG索引查询
 
 ### 主要改进
 
@@ -27,7 +26,7 @@ sidebar_label: Milvus Docker版本发布说明
 ## 版本 0.2.1
 发布日期：2019-06-14
 
-### 主要功能
+### 新增功能
 
 增加了数据加载和计算的流水线
 
@@ -38,7 +37,7 @@ sidebar_label: Milvus Docker版本发布说明
 ## 版本 0.2.0
 发布日期：2019-05-31
 
-### 主要功能
+### 新增功能
 
 - 添加基于C++和Python的SDK
 - 增加基于Prometheus的监控指标

@@ -1,45 +1,48 @@
 ---
 id: ReleaseNote
 title: Release Note
-sidebar_label: Milvus Docker版本发布说明
+sidebar_label: Milvus Release Notes 
 ---
 
 # Milvus Release Notes
-## 版本 0.3.0
-发布日期：2019-06-30
+## Version 0.3.0
+Release date: 2019-06-30
 
-### 主要功能
+### Features
 
-- 增加基于Celery的水平扩展方案
-- 增加了基于MinIO的存储分离方案
-- 增加了删除Table的功能
-- 支持ARM64架构
+- Distributed architecture based on Celery
+- MinIO based storage separation solution
+- You can now delete a table
+- ARM64 architecture is now supported
 
-### 主要改进
+### Improvements
 
-- 更新了C++和Python的SDK
-- 增加了获得Table行数的接口
-- 增加了查询匹配度作为返回结果
-- 改善了查询的性能
-- 新增了更多的监控指标
+- File lifecycle management
+- More interface on C++/Python SDK
+- Lots of update on Milvus configure
+- Mem table serialization and SSTable consolidation strategy improved
+- Improved the Meta management implementation
+- 90%+ unit test code coverage
+- CMake makefile refactoring
+- Improved the time range query
 
-## 版本 0.2.1
-发布日期：2019-06-14
+## Version 0.2.1
+Release date: 2019-06-14
 
-### 主要功能
+### Features
 
-增加了数据加载和计算的流水线
+Added data loading and computation pipeline
 
-### 主要改进
+### Improvements
 
-支持基于时间范围的查询
+You can now search data within a specific date range.
 
-## 版本 0.2.0
-发布日期：2019-05-31
+## Version 0.2.0
+Release date: 2019-05-31
 
-### 主要功能
+### Features
 
-- 添加基于C++和Python的SDK
-- 增加基于Prometheus的监控指标
-- 增加基于Inverted File Index的向量索引
-- 实现单节点的Milvus
+- Added C++/Python SDK
+- Added monitoring items on Prometheus-based monitoring dashboard
+- Added vector indexing built on Inverted File
+- Single node Milvus realized

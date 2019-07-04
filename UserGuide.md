@@ -6,366 +6,527 @@ sidebar_label: Milvus User Guide
 
 # Milvus User Guide
 
-## Milvus Introduction
+## Preface
 
-### Why we build Milvus
+### Overview
+Milvus is a full-winged, reliable feature vector database that supports indexing large scale high-dimension vectors in seconds. About Milvus benefits and values, please visit [Product Benefits](https://github.com/milvus-io/docs/blob/dev/zh-CN/MilvusHighlights).
 
-在回答为什么创建Milvus这个问题之前，有必要对几个核心概念进行必要解释：
+This guide introduces configuring and managing Milvus, helping you get a deeper understanding of Milvus charateristics and features.
 
-#### Characteristic vector
+If you need customer support, you may contact us by email: support@zilliz.com.
 
-现实世界的事物，复杂而多元，通常是很难使用少数几个简单数能精确描述的。因此，我们会使用特征向量来精确描述一个事物，特征向量就是现实事物的数学抽象。现在的人工智能技术核心能力，就是利用各种计算机算法对现实世界的原始数据进行特征提取，特征处理和特征选择，最终形成准确描述该事物的特征向量。
+For more detailed knowledge about Milvus and feature vector database, go to [Feature Vector Database Introduction](https://github.com/milvus-io/docs/blob/dev/zh-CN/MilvusIntro.md).
 
-#### Characteristic vector indexing database
+### Statement
+The documentation is for reference only. All content in the documentation doesn't constitue as any explicite or implicite guarantee.
 
-随着机器学习和深度学习技术越来越成熟，应用越来越广泛，随之而产生的特征向量数据也会越来越庞大，但目前看来，传统的数据库系统和大数据系统并不能满足海量特征向量检索的要求。原因有以下几方面：
+### Key concepts
+- Feature vector database
 
-1. 传统的数据库系统和大数据系统，其内建数据类型里并不包括特征向量类型。
-
-   如果打算使用传统的数据库系统进行特征向量检索，要么自定义特征向量类型，以及针对该类型数据的自定义函数；要么就只能按照一维一列的方式把高维向量存入数据库系统。由于大多数数据库系统对于表列数的支持都是有限的，使用这种方法通常无法支持高维特征向量。
-
-2. 传统的数据库和大数据系统里，除了没有针对该数据类型的存储方式、计算方法，也没有针对该类型的索引方式和数据的管理方式。
-
-综上所述，使用传统的数据库和大数据系统进行特征向量的存储和检索，都是不合适的。提供一个面向海量特征向量检索的数据库系统，已经是市场对于数据库厂商提出的新需求。这也是Milvus应运而生的主要原因。
+- Milvus file
 
 
-### What is Milvus
+### Conventions used in this guide
 
-Milvus是Zilliz公司针对AI应用大规模落地，当前工业界并没有一款成熟向量检索系统，而研制的面向海量特征向量检索的数据库系统，旨在帮助用户实现非结构化数据的近似检索和分析。其实现原理是通过AI算法提取非结构化数据的特征，然后利用特征向量唯一标识该非结构化数据，最后用向量间的距离衡量非结构化数据之间的相似度。
-
-
-### Highlight features
-
-Milvus产品特性主要包含以下：
-
-- 高速智能向量检索 
-
-  使用CPU/GPU异构计算引擎，提供高准确度的百亿向量检索，检索结果的秒级响应。
-
-- 水平线性弹性扩展
-
-  可随着业务增长而伸缩，只需要通过增加更多的机器来满足业务增长需要。
-
-- 高可用
-
-  内部计算、存储和元数据集群，均允许部分实例失效，而不影响整个集群的可用性。　
-
-- 支持实时插入
-
-  与很多面向向量检索的算法要求不同，Milvus支持对于特征向量的实时插入，支持边插入数据边查询数据。
-
-- 高易用性
-
-  提供了基于C++/Python的客户端SDK。对于其他类型的语言，Milvus支持通过RESTful和RPC的访问方法。
-
-- 易部署
-
-  云数据库，支持公有云、私有云和混合云，使部署、配置和维护变得十分简单。
-
-- AI模型全支持
-
-  支持目前所有AI训练框架所训练的模型所产生的特征向量，涵盖图片、视频、文本、语音等等方面。
-
-- 跨平台
-
-  可以运行在Linux和Windows平台上，支持x86/ARM/PowerPC等架构，为边缘计算应用提供基础支撑。
-
-- 可视化监控
-
-  提供基于Prometheus的监控和Grafana的可视化展示。
+| Convention       |    Description                                |
+|-----------|-----------------------------------------|
+| bold      | Bold type indicates headlines, or content that needs to be emphasized.    |
+| italic    | Italic type indicates file paths, file names, UI strings, or placeholder variables for which you supply particular values. |
+| Consolas  | Consolas type indicates code examples within a paragraph |
+| Note      | Note is a supplimentary explanation to an action or a logic.          |
 
 
-### System architecture
-
-![MilvusArch](assets/MilvusArch.png)
-
-Milvus系统由四部分组成：
-
-- Milvus Server
-
-  负责接收客户端发送的请求。收到请求后，Load Balancer负责把请求发送到负载较小的Milvus Proxy。Milvus Proxy会根据查询向量表的元数据，分发任务到不同的Milvus Core做计算。当所有的Milvus Core都计算结束后，Mivlus Proxy负责合并所有的结算结果，并返回给客户端。
-
-- Storage Cluster
-
-  负责提供强一致和高可靠的数据存储，目前该集群是基于MinIO对象存储搭建的。
-
-- Meta Management
-
-  负责提供Milvus集群和存储集群的元数据管理，目前是基于MySQL实现的。
-
-- Milvus Monitoring
-
-  Milvus使用开源时序数据库Prometheus作为监控和性能指标信息存储方案，使用Grafana作为可视化组件进行展示。
-
-
-
-## Milvus Installation
-
-### Milvus Docker installing prerequisites
-
-Milvus是一款面向向量检索的数据库系统，可以很好的运行和部署在x86架构的服务器环境和主流的虚拟化环境下，也支持目前主流的网络硬件设备。操作系统方面，Milvus支持目前主流的Linux操作系统环境。
-
-- Linux操作系统版本要求
-
-| Linux 操作系统平台       | 支持版本        |
-| :----------------------- | :---------- |
-| Red Hat Enterprise Linux | 7.5及以上   |
-| CentOS                   | 7.5及以上   |
-| Ubuntu LTS               | 16.04及以上 |
-
-- 典型硬件配置要求
-
-| 硬件名称 | 硬件要求         |
-| -------- | ---------------- |
-| CPU      | 16核+            |
-| GPU      | Pascal系列及以上 |
-| 内存     | 256GB及以上      |
-| 硬盘类型 | SSD或者NVMe      |
-| 网络     | 万兆网卡         |
-
-- 客户端浏览器要求
-
-Milvus 提供了基于Prometheus监控和Grafana的展示平台，可以对数据库的各项指标进行可视化展示，兼容目前主流的Web浏览器如：微软IE、Google Chrome、Mozilla Firefox和Safari等。
-
-- 软件包安装要求
-
-请确保你已经安装以下软件包，以便Milvus Docker版能正常运行：
-
-- [CUDA 9.0及以上](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html)
-- [Docker CE](https://docs.docker.com/install/)
-- [NVIDIA-Docker2](https://github.com/NVIDIA/nvidia-docker)
-
-
-### Installing Milvus
-
-关于Milvus具体安装步骤及试运行，请参照 [Milvus Quick Start](https://github.com/milvus-io/docs/edit/master/QuickStart-cn.md)。
+## Getting started with Milvus
+For how to install Milvus and run an example program, you may read: [Milvus Quick Start](https://github.com/milvus-io/docs/blob/dev/zh-CN/QuickStart.md).
 
 
 ## Configuring Milvus
 
-在成功安装Milvus后，请进入Milvus Docker镜像文件进行相关配置。目前Milvus的Docker版配置包含以下几种：
+### Milvus file introduction
+After you have successfully started Milvus server, you can see a Milvus file under the path *home/$USER/milvus*, which contains the following child files:
 
-### Milvus服务配置
+- *milvus/db* (database storage)
+- *milvus/logs* (log storage)
+- *milvus/conf* (configuration file)
+    - *server_config.yaml* (service configuration file)
+    - *log_config.conf* (log configuration file)
+- *milvus/test* (test scripts)
 
-点击server_config文件，并配置以下参数：
+### Configuring Milvus service
 
-- address：目前Milvus server监听的ip地址。 
-- port：目前Milvus server监听的端口号。
-- transfer_protocol：Milvus client与server通信的协议，可以是binary, compact或json。 
-- server_mode：目前支持simple（单线程）和thread_pool（线程池）两种模式。 
-- gpu_index：目前使用的GPU。
+Follow these procedures to configure Milvus service:
 
-### Milvus数据库配置
+1. Follow the path *home/$USER/milvus/conf*, and open Milvus service configuration file *server_config.yaml*.
 
-点击db_config文件，并配置以下参数：
+2. Modify the parameters in the file.
 
-- db_path: Milvus数据库文件存储的路径。
-- db_backend_url: 使用RESTFul API接口访问数据库的ip地址。
-- db_flush_interval: 插入数据持久化的时间间隔。
+   1) Click file *server_config*, and configure service parameters.
+   
+     | Parameter            | Description                          | Reference value           |
+     |----------------|-----------------------------------|-------------------|
+     | address        | The IP address that Milvus server monitors      | 0.0.0.0           |
+     | port           | The port that Milvus server monitors, default is 19530 | 1025 ~ 65534 |            
+     | gpu_index      | Current GPU, default is 0          | 0 ~ GPU number ~1                |
+     | mode           | Milvus deployment method                    | single / cluster |            
+                                                                                                                     
+   2）Click file *db_config*, and configure database parameters.
+   
+     | Parameter               | Description                            | Reference value    |
+     |-------------------|-------------------------------------|----------|
+     | db_path           | Directory of Milvus database files            |    ？    |
+     | db_backend_url    | Meta database URI                         | http://127.0.0.1  |
+     | index_building_threshold | index building trigger value       |  1024（MB）  |
 
-### Milvus监控参数配置
+   3）Click file *metric_config*, and configure monitor parameters.
+   
+     |Parameter               |  Description                             | Reference value     |
+     |-------------------|-------------------------------------|----------|
+     | is_startup        | Select if or not to turn on the monitoring system          | on / off |
+     | collector         | Connected monitoring system               | Prometheus             |
+     | collect_type      | Data collecting type of Prometheus     |   pull / push          |
+     | port              | Port to visit Prometheus       | 8080                   |
+     | push_gateway_ip_address | IP address of push gateway   | 127.0.0.1             |
+     | push_gateway_port       | Port of push gateway   |  9091                 |
 
-点击metric_config文件，并配置以下参数：
+   4）Click file *cache_config*, and configure the parameter.
+   
+     |  Parameter                | Description                             | Reference value     |
+     |-------------------|-------------------------------------|----------|
+     | cpu_cache_capacity | CPU used for cache. Default valus is 16GB       |  0 ~ Total CPU |
 
-- startup: 选择是否启动监控，on（启动）或off（不启动）。
-- collector: 连接的监控系统，目前支持prometheus。
-- prometheus_config（promethus监控相关配置）：
-  - collect_type: prometheus的监控获取方式，支持pull或push方式。
-  - port: 访问prometheus的端口号。
-  - push_gateway_ip_address: push gateway的ip地址，push方式有效。
-  - push_gateway_port: push gateway的端口号，push方式有效。
+3. Restart Milvus Docker.
+
+   ```
+   $ docker restart <container id>
+   ```
+
+
+## Creating a table 
+> Note：All the following actions are executed in Python. For other languages, Milvus supports RESTful and RPC.
+
+### Prerequisites
+When you have finished the installation and basic configuration of Milvus, you may go on and create a table to insert data into. Before that, ensure you have：
+
+1. Imported pymilvus.
+
+   ```python
+   # Import pymilvus
+   >>> from milvus import Milvus, Prepare, IndexType, Status
+
+   ```
+2. Connected Milvus to your local server.
+
+   ```
+   # Connect Milvus to server
+   >>> milvus = Milvus()
+   >>> milvus.connect(host='SERVER-HOST', port='SERVER-PORT')
+   Status(message='connected!', code=0)
+
+   ```
+### Creating a table
+This section shows you how to create a table in Milvus. To make it easier to understand, all task procedures are based on an example of  Table test01 creation. Here are all related parameters. You can set parameter values to your needs.
+
+|  Parameter  |  Description  |  Type   |  Reference value   |
+| ------------| --------------| --------| ---------|
+| table_name  | Name of the table you want to create (table name is made of numbers, letters and _)| String | 'table name' |
+| dimension   | Vector dimensions | Integer | 0 < dimension <= 10000, usually set to 128, 256 or 518
+| index_type  |2 types of indexing methods: 1. `FLAT` - 精确向量索引类型；2. `INVALID` - 基于K-means的向量索引，精度有损失，但搜索速度更快；|IndexType|FLAT / IVFLAT / INVALID(default)|
+
+> 注意：如果没有GPU，将index_type设置成`IVFLAT`，系统将报错。
+
+1. Prepare table parameters.
   
+   ```
+   # Prepare param
+   >>> param = {'table_name'='test01', 'dimension'=256, 'index_type'=IndexType.FLAT}
+   ```
+   
+2. Create Table test01.
+
+   ```
+   # Create a table
+   >>> milvus.create_table(param)
+   Status(message='Table test01 created!', code=0)
+   ```
+   
+3. Confirm the information of the table just created.
+   ```
+   # Confirm table info.
+   >>> status, table = milvus.describe_table('test01')
+   >>> status
+   Status(message='Describe table successfully!')
+   >>> table
+   TableSchema(table_name='test01',dimension=256, index_type=1, store_raw_vector=False)
+   
+   ```                        
+
+
+## Inporting vectors
+When you have successfully tables in Milvus, you can start inserting data into the table. Of course, one prerequisite of this step is that you already have proper multi-dimensional vectors. Before importing vectors to the table, get familiar with the related parameters:
+
+|Parameter|Description|Type|Reference value|
+|---------|-----------|----|-----|
+|table_name| Name of the table you want to create (table name is made of numbers, letters and _)| String| 'table name'|
+|records| A list of vectors to insert into the table. Vector value should be a float (decimal), with the same dimension as that of the table |2-dimension type|[[0.1, 0.2, ...], ...]
+
+Following the above mentioned example, below content demonstrates how to insert 20 256-dimensional vectors(represented by "records" in the code) into Table test01:
+
+```
+# Import vectors
+>>> status, ids = milvus.add_vectors(table_name='test01', records=vectors)
+>>> status
+Status(code=0, message='Success')
+>>> ids  # 20 ids returned
+23455321135511233
+12245748929023489
+...
+```
+
+
+## Searching with Milvus
+Now, you have inserted vectors into Table test01, you can start searching with Milvus. In addition, you are allowed not only to search multiple data sets, and also to search within a specific range. Before the search, familiarize yourself with seach related parameters:
+
+|Parameter|Description|Type|Reference value|
+|---------|-----------|----|-----|
+|table_name|Name of the table you want to create (table name is made of numbers, letters and _)|String|'table name'|
+|top_k| Top k most similar results of target vector| Integer | 0 < top_k <= 10000|
+|query_records| A list of vectors to insert into the table. Vector value should be a float (decimal), with the same dimension as that of the table |2-dimension type | [[0.1, 0.2, ...], ...] |
+|query_ranges (optional)| Search range, for example you can search within a specific date range. The default value is 'None' (no range), meaning to search the entire database|list[tuple]|[('2019-01-01', '2019-01-02'), ...]|
+
+> Note: Currently, only date range is supported in query_ranges. The date format is 'yyyy-mm-dd'. The date range [2019.1.1, 2019.1.3) contains 2019.1.1 and 2019.1.3.
+
+Suppose you want to search the top 10 most similar vectors of 5 256-dimensional vectors (represented by "query_records" in below codes), you may: 
+
+   ```
+   # Search 5 vectors
+   >>> status, results = milvus.search_vectors(table_name='test01', query_records=q_records, top_k=10)
+   >>> status
+   Status(message='Search vectors successfully!', code=0)
+   >>> results # Searched top_k vectors
+   [[QueryResult(id=1561709418638204004, score=62.554189514479866), ..., ],
+   [QueryResult(id=1561709418638204018, score=59.801433231755965), ..., ],
+   ...
+   ]
+   ```
+ 
+
+## Deleting a table
+You may delete a table in Milvus when necessary. For example, to delete Table test01, you only need to: 
+
+```
+# Delete table
+>>> milvus.delete_table(table_name='test01')
+Status(message='Delete table successfully!', code=0)
+```
+
+
+## Searching a table
+
+### Searching table name
+You can search all table names by this: 
+
+```python
+>>> status, tables = milvus.show_tables()
+>>> status
+Status(message='Show tables successfully!', code=0)
+>>> tables
+['test01', 'others', ...]
+```
+
+### Searching table information
+Follow this to search the information of a particular table:
+
+```python
+>>> status, table = milvus.describe_table('test01')
+>>> status
+Status(message='Describe table successfully!')
+>>> table
+TableSchema(table_name='test01',dimension=256, index_type=1, store_raw_vector=False)
+```
+
+### Checking if a table exists
+To check if a table exists in Milvus, simply do this:
+
+```python
+>>> milvus.has_table(table_name='test01')
+True
+```
+> Note: If the table you searched is no longer available, *False* will be returned instead of *True*.
+
+
+> Note: If you want to learn more detailed operations in Milvus, you may read [Milvus Python SDK](https://pypi.org/project/pymilvus) and [Examples](https://github.com/milvus-io/pymilvus/blob/master/examples/example.py)。
+
+
+
+## Monitoring and Alarm
+### Monitoring introduction
+A database monitoring system helps you track database performace and corresponds to unexpected emergency issues. With Milvus, you can use the monitoring system build on [Prometheus](https://prometheus.io/) and [Grafana](https://grafana.com/). Here is how the Milvus monitor works:
+
+Milvus server collects data > Collected data is imported to Prometheus > Monitoring items are displayed in Grafana-supported dashboard
+
+
+### Installing and configuring monitor
+
+1. Install Prometheus and Grafana.
+
+   - [Installing Prometheus Server](https://github.com/prometheus/prometheus#install)
+
+   - [Installing Grafana](http://docs.grafana.org)
+
+2. Make certain configurations in Prometheus.
+
+   1) Open configuration file *prometheus.yml* under Prometheus root path, and update file *alerting*, *rule_files* and *scrape_configs* as follows:
+   
+      ```yaml
+      # my global config
+      global:
+        scrape_interval:     15s # Set the scrape interval to every 1 seconds. Default is every 1 minute.
+        evaluation_interval: 15s # Evaluate rules every 15 seconds. The default is every 1 minute.
+        # scrape_timeout is set to the global default (10s).
+
+      # Alertmanager configuration
+      alerting:
+        alertmanagers:
+        - static_configs:
+          - targets: ['localhost:9093']
+
+      # Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
+      rule_files:
+         - "serverdown.yml" # add alerting rules
+
+      # A scrape configuration containing exactly one endpoint to scrape:
+      # Here it's Prometheus itself.
+      scrape_configs:
+        # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
+        - job_name: 'prometheus'
+
+          # metrics_path defaults to '/metrics'
+          # scheme defaults to 'http'.
+
+          static_configs:
+          - targets: ['localhost:9090']
   
+  	   # scrape metrics of server
+        - job_name: 'milvus_server'
+          scrape_interval: 1s
+          static_configs:
+          - targets: ['localhost:8080']
+    
+  	      # under development
+        - job_name: 'pushgateway'
+          static_configs:
+          - targets: ['localhost:9091']
+      ```
+   
+   2) Create a file *serverdown.yml* under Prometheus root path, with these rules: 
 
-## Milvus Monitoring
+      ```yaml
+      groups:
+      - name: milvus
+        rules:
+          - alert: MilvusServerDown
+            expr: up{job="milvus_server"}
+            for: 1s
+            labels:
+              serverity: page
+      ```
 
-### Summary
+3. Configuring Grafana
 
-Milvus的监控系统是基于开源监控框架Prometheus搭建的。目前，Milvus server收集数据后，利用pull模式把所有数据导入Prometheus，然后通过Grafana展示所有监控指标。一旦发生告警，Prometheus会将告警信息可以推送给AlertManager，并通过Email或者WeChat通知用户。告警系统架构如下：
+   1) Open the terminal and run this command: 
+   
+      ```
+      $ docker run -i -p 3000:3000 grafana/grafana
+      ```
+   
+   2) Log in to Grafana website (localhost:3000), and in *data source type*, choose *Prometheus*.
+   
+      ![image-20190620191640605](assets/datasource.png)
+   
+   3) Change URL to Prometheus server address http://localhost:9090, and in *ACCESS*, choose *Browser*. Then click *Save & Test*.
+   
+      ![image-20190620191702697](assets/settings.png)
+   
+   4) On the top left corner of the page, click *New dashboard*.
+      ![image-20190620191721734](assets/dashboard.png)
+   
+   5) Click *Import dashboard* in the right box.
+   
+      ![image-20190620191747161](assets/importdashboard.png)
+   
+   6) Download json configuration file, and import it into the system.
+   
+      ![image-20190620191802408](assets/importjson.png)
+
+   When it succeeded, the monitor dashboard will be displayed.
+   
+   ![image-20190620134549612](assets/prometheus.png)
+
+
+### Monitoring items
+On the GUI dashboard of Milvus monitoring system, you can check these monitoring items to track real time performace of your database.
+
+
+|    Monitoring item       |      Description                       |
+|----------------|----------------------------------|
+| **System parameters**    |                                  |
+| GPU utilization ratio      |    Ratio of used GPU to total GPU             |
+| GPU usage      |    real-time used GPU                  |
+| CPU utilization ratio       |     Ratio of used CPU to total CPU                   |
+| CPU usage      |     real-time used CPU                    |
+| Internet IO          |    Internet IO read/write speed (per second)          |
+| Disk read & write speed     |    Disk read & write speed                   | 
+| **Milvus parameters**  |                                  |
+| Data inserting speed     |         Total amount of data inserted per seconds     |
+| Data file total number     |       Total number of files in Milvus      |
+| Data size       | Total amount of data stored in Milvus                 |
+| QPM (Query per minute)    |  Number of queries completed in every minute          |
+| Search response time     |      Response time of a search               |
+| Vector indexing time  |    Indexing time of a single vector         |
+| Connected client number          |  Number of clients currently connected to Milvus  |
+| Running time        |   Normal running time of Milvus server (in minutes)    |
+| Cache utilization ratio  |    Ratio of used cache to total cache                   |
+
+### Configuring monitoring frequency
+The default Milvus monitoring frequency is 1 time/second. If you want to change it, you may read [Monitoring configuration](https://prometheus.io/docs/prometheus/latest/configuration/configuration/).
+
+
+### Configuring alarm rules
+The Milvus alarm system works on Alertmanager, which receives alarm messages from Prometheus once abnormalities occur. The alarm architecture looks like this: 
 
 ![Monitoring](assets/Monitoring.png)
 
-Grafana是一个开源的指标分析及可视化系统。我们使用Grafana来展示Milvus的各项系统指标，如下图：
+You can set various rules for Milvus alarm. An example might be when the server is down, an email will be sent instantly to a specified user. You may proceed as follows:
 
-![image-20190620134549612](assets/prometheus.png)
+   1) Create a file *milvus.yml* under Alertmanager root path.
 
-### How to use Prometheus and Grafana to monitor Milvus
+      ```
+      global:
+        resolve_timeout: 1m
+        smtp_smarthost: 'smtp.163.com:25' # smtp server config
+        smtp_from: '×××@163.com'          # sender mail account
+        smtp_auth_username: '×××@163.com' # sender mail account
+        smtp_auth_password: '××××××××'    # sender mail password
+        smtp_hello: '163.com'             # sender mail suffix
+        smtp_require_tls: false
+      route:
+        group_by: ['alertname']
+        receiver: default
 
-1. Installing Prometheus and Grafana。
+      receivers:
+        - name: 'default'
+          email_configs:
+          - to: '××××@××.com'             # receiver mail address
+      ```
+   
+   2) Start Alertmanager by setting --config.file to *milvus.yml*.
 
-   - [安装Prometheus Server](https://github.com/prometheus/prometheus#install)
+      ```
+      ./alertmanager --config.file=milvus.yml
+      ```
+> Note: To learn more about configuration of alarm rules, go to [Alarm Configration](https://prometheus.io/docs/alerting/configuration/#configuration-file).
 
-   - [安装Grafana](http://docs.grafana.org)
 
 
-2. Configuring Prometheus
+# Application scenarios
 
-   1. 打开prometheus根目录下的prometheus.yml配置文件，并将alerting, rule_files和scrape_configs更新如下：
+## Typical scenarios
 
-```yaml
-# my global config
-global:
-  scrape_interval:     15s # Set the scrape interval to every 1 seconds. Default is every 1 minute.
-  evaluation_interval: 15s # Evaluate rules every 15 seconds. The default is every 1 minute.
-  # scrape_timeout is set to the global default (10s).
+Milvus database can be used to build intelligent systems in most AI application scenarios:
 
-# Alertmanager configuration
-alerting:
-  alertmanagers:
-  - static_configs:
-    - targets: ['localhost:9093']
+- Image search
 
-# Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
-rule_files:
-   - "serverdown.yml" # add alerting rules
+  Reverse image search. Detailed application such as image indexing of human face and products, as well as face recognition payment, etc.
 
-# A scrape configuration containing exactly one endpoint to scrape:
-# Here it's Prometheus itself.
-scrape_configs:
-  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
-  - job_name: 'prometheus'
+- Video processing
 
-    # metrics_path defaults to '/metrics'
-    # scheme defaults to 'http'.
+  Real-time human face indexing and trajectory tracking. 
 
-    static_configs:
-    - targets: ['localhost:9090']
-  
-  	# scrape metrics of server
-  - job_name: 'milvus_server'
-    scrape_interval: 1s
-    static_configs:
-    - targets: ['localhost:8080']
+- Natural language analysis
+
+  Semantics-based text indexing/suggestion, and text similarity search. 
+
+- Voiceprint recognition and audio indexing 
+
+- Duplicate cleaner by file fingerprint
+
+
+## Application architecture
+The application architecture of Milvus as a feature vector database is as follows:
+
+![MilvusTypicalApplication](assets/MilvusTypicalApplication_en.png)
+
+Unstructured data (images/videos/texts/audios) are transformed to feature vectors by feature extraction models, and saved to Milvus database. When you input a target vector, it is saved  to the current vector collection, and the search begins, until the most similar vectors are matched, and their IDs returned. 
+
+### Use Case - Human face search
+
+#### User requirements
+
+- VIP client notification
+
+VIP group library contains human face features of VIP clients. All human faces captured by the camera are to be compared to those in the library. Once a similar face is matched, an notification is sent to the system. 
+
+- One person one file
+
+A human face captured by the camera will be compared to those in the library to find the corresponding file containing all the information of the person.
+
+- Potential new customers
+
+For those face images that have no match in the library, they will be automatically added to the human face library.
+
+- Customer relationship management
+
+Categorize the face images according to the frequency it is indexed. The face images with the lower indexing frequency might be the target customers with whom to improve customer relationship. 
+
+#### System application architecture:
+
+![FaceSearch](assets/FaceSearch_en.png)
+
+- **Face capture device**: When human face images are captured by the camera, they are sent to feature vector collection devices.
+
+- **Feature extraction service**: The human face images are further transformed and represented by 512-dimensional feature vectors by machine learning models.
+
+- **Application**：
+
+  - VIP client notification: If a human face within the VIP group library is found, an notification is sent to the system.
+  - Personal file search: Search for personal information file based on face ID. 
+  - Face categorization: Move certain face images to a special library for customer relationship management
+
+
+- **Data libraries**：
+
+  - VIP group library
+
+    - Vector library with million datasets 
+    - Great search precision and high indexing speed (QPS >= 1000) 
+    - Batch search supported 
     
-	# under development
-  - job_name: 'pushgateway'
-    static_configs:
-    - targets: ['localhost:9091']
-```
+  - Human face library
 
-   2. 在prometheus根目录下创建serverdown.yml文件，内容如下：
+    - Vector library with billions of human face feature vectors
+    - High indexing speed with a QPS of 1000
+    - Batch search supported
 
-```yaml
-groups:
-- name: milvus
-  rules:
-    - alert: MilvusServerDown
-      expr: up{job="milvus_server"}
-      for: 1s
-      labels:
-        serverity: page
-```
+  - Special library
 
-3. Configuring Alerting
+    - Vector library with 0.2 billion new human face data
+    - Keeps 90 days' face vectors (about 18 billion)
+    - Batch search supported 
+    
+  - Information library
 
-   1. 在alertmanager根目录下创建 milvus.yml文件，内容如下：
+    - Relational database with MySQL storage
+    - Mainly keeps ID-based personal information files
 
-```
-global:
-  resolve_timeout: 1m
-  smtp_smarthost: 'smtp.163.com:25' # smtp server config
-  smtp_from: '×××@163.com'          # sender mail account
-  smtp_auth_username: '×××@163.com' # sender mail account
-  smtp_auth_password: '××××××××'    # sender mail password
-  smtp_hello: '163.com'             # sender mail suffix
-  smtp_require_tls: false
-route:
-  group_by: ['alertname']
-  receiver: default
-
-receivers:
-  - name: 'default'
-    email_configs:
-    - to: '××××@××.com'             # receiver mail address
-```
-
-   2. 指定--config.file=milvus.yml以启动alertmanager，如下：
-
-```
-./alertmanager --config.file=milvus.yml
-```
-
-4. Configuring Grafana
-
-   1. 登录Grafana网页，在data source type选项框选择Prometheus。
-
-![image-20190620191640605](assets/datasource.png)
-
-   2. 在HTTP区域，将URL设置成Prometheus的服务器地址http://localhost:9090, 将ACCESS设置成Browser，点击Save & Test。
-
-![image-20190620191702697](assets/settings.png)
-
-   3. 点击页面左上角的New dashboard。
-
-![image-20190620191721734](assets/dashboard.png)
-
-   4. 点击右侧的Import dashboard。
-
-![image-20190620191747161](assets/importdashboard.png)
-
-   5. 下载json配置文件，并将其导入系统。
-
-![image-20190620191802408](assets/importjson.png)
-
-成功之后，将会出现我们提供的监控面板：
-
-![image-20190620191818161](assets/result.png)
+- **Basic architecture**: 
+  - Milvus for vector storage
+  - MySQL for relational data storage
+  - Minio for unstructured data storage
+  
 
 
+## Troubleshooting
+- What if connecting to server failed?
+  If connection to server failed, you can check the logs in Docker logs, and confirm that connected server is started, or server address and port are correct.
 
-恭喜你！你已经完成了Milvus的所有安装配置，现在可以使用Milvus试运行一条向量相似度查询了。
-
-
-## FAQ
-
-- Milvus是什么？
-
-  Milvus是一款面向向量检索的数据库系统，可以很好的运行和部署在x86架构的服务器环境和主流的虚拟化环境下，也支持目前主流的网络硬件设备。操作系统方面，Milvus支持目前主流的Linux操作系统环境。
-
-- Milvus能够使用的接口有哪些？
-
-  目前Milvus提供Python和C++的SDK接口，同时还支持所有基于Thrift的通信方式。
-
-- Milvus的易用性如何？
-
-  Milvus的使用非常简单。可以把Milvus当作普通的数据库系统，具体参考前文提供的样例程序和https://pypi.org/project/pymilvus/ 。
-
-- Milvus具备高可用特性吗？
-
-  Milvus集群具备高可用性，其存储和计算等集群均容许部分组件失效，而不影响整个集群的使用。
-
-- 向量存入Milvus后，如何检索？
-
-  向量存入Milvus后，Milvus会给对应向量一个ID，用户需要自己将该向量ID和其对应的其他属性存入另外一个数据库系统。查询的时候，用户提供需要查询的向量，Milvus会返回和用户提供向量最匹配的数个向量的ID以及匹配度。
-
-- 如何选择向量索引的类型？
-
-  依据用户的需求，如果用户需求精确匹配，那么请选择L2Flat类型索引。精确匹配，可以为用户提供100%精确匹配的向量，但是由于计算量巨大，性能影响也很大。如果用户不追求100%精确匹配，可以选择IVFFlat类型索引，支持大数据量的高精度匹配。
-
-- Milvus是否支持边插入边查询的能力？
-
-  支持。
-
-
-
-## Support
-
-- 如果你有任何问题和建议，请联系邮箱：support@zilliz.com
-
-- 对于有企业合作的用户，请拨打客服电话：400 …..
-
-
-
-## 路线图
-
-- 支持存储结构化数据和非结构化数据，也支持针对结构化和非结构化数据的混合查询。
-
-- 提供基于Java的SDK
-- 提供基于图形化和命令行管理工具
-- 提供云端的PaaS部署
-- 支持强一致性存储
-- 提供对于事务的支持
-- 提供给定向量ID的检索
-- 提供更多种索引类型的支持
-- 使用基于ETCD集群的元数据管理
 

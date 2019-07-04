@@ -6,7 +6,7 @@ sidebar_label: Milvus Quick Start
 
 #  Milvus Quick Start
 
-In this guide, we will walk you through installing Milvus Docker as well as running some Python example codes. If you want to learn more about how to use Milvus, visit [Milvus Docker User Guide](https://github.com/milvus-io/docs/blob/master/UserGuide.md).
+In this guide, we will walk you through installing Milvus Docker as well as running some Python example codes. If you want to learn more about how to use Milvus, visit [Milvus Docker User Guide](./UserGuide.md).
 
 ## Prerequisites
 
@@ -36,7 +36,7 @@ In this guide, we will walk you through installing Milvus Docker as well as runn
 
    ```shell
    # Start Milvus
-   $ nvidia-docker run --runtime=nvidia -p 19530:19530 -v /home/$USER/milvus:/tmp milvus/milvus:latest
+   $ nvidia-docker run -td --runtime=nvidia -p 19530:19530 -v /home/$USER/milvus:/opt/milvus milvusdb/milvus:latest
    ```
 
 3. Get Milvus container id.
