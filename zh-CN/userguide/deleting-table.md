@@ -1,7 +1,7 @@
 ---
 id: deleting-table
-title: Deleting A Table
-sidebar_label: Deleting A Table
+title: Deleting a table
+sidebar_label: Deleting a table
 ---
 
 # 删除表
