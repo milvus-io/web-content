@@ -1,7 +1,7 @@
 ---
 id: searching-with-milvus
-title: Searching With Milvus
-sidebar_label: Searching With Milvus
+title: Searching with Milvus
+sidebar_label: Searching with Milvus
 ---
 
 # Searching with Milvus
