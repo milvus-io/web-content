@@ -1,10 +1,10 @@
 ---
 id: monitoring-and-alarm
-title: Monitoring and Alarm
-sidebar_label: Monitoring and Alarm
+title: Monitoring and alarm
+sidebar_label: Monitoring and alarm
 ---
 
-# Monitoring and Alarm
+# Monitoring and alarm
 
 ## Monitoring introduction
 A database monitoring system helps you track database performance and corresponds to unexpected emergency issues. With Milvus, you can use the monitoring system build on [Prometheus](https://prometheus.io/) and [Grafana](https://grafana.com/). Here is how the Milvus monitor works:
