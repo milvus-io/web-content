@@ -25,7 +25,7 @@ Follow these procedures to configure Milvus service:
 
 2. Modify the parameters in the file.
 
-   1) Click file *server_config*, and configure service parameters.
+   1）Click file *server_config*, and configure service parameters.
    
      | Parameter            | Description                          | Reference value           |
      |----------------|-----------------------------------|-------------------|
