@@ -33,7 +33,7 @@ sidebar_label: Creating a table
 |  参数  |  描述  |  类型   |  参考值   |
 | ------------| --------------| --------| ---------|
 | table_name  | 要创建的表字（由数字、字母和下划线构成）| 字符串 | '表名' |
-| dimension   | 表格中向量的维度 | 整数 | 0 < dimension <= 10000, 通常设置为128、256或518维 
+| dimension   | 表格中向量的维度 | 整数 | 0 < dimension <= 16384, 通常设置为128、256或518维 
 | index_type  |有2种类型的检索类型: 1. `FLAT` - 精确向量索引类型；2. `IVFLAT` - 基于K-means的向量索引 |IndexType|FLAT / IVFLAT |
 
 > 注意：如果没有GPU，将index_type设置成`IVFLAT`，系统将报错。
