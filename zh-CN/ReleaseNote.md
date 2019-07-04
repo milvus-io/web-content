@@ -14,7 +14,6 @@ sidebar_label: Milvus Release Notes
 - 增加了基于MinIO的存储分离方案
 - 增加了删除Table的功能
 - 支持ARM64架构
-- 新加入SPTAG索引查询
 
 ### 主要改进
 
