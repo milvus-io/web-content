@@ -63,7 +63,7 @@ Now, let's run a Python example program. You will need to create a vector data t
 
    ```shell
    # Install Milvus Python SDK
-   $ pip install pymilvus
+   $ pip install pymilvus==0.1.13
    ```
 
    > Note: To learn more about Milvus Python SDK, go to [Milvus Python SDK Playbook](https://pypi.org/project/pymilvus).
