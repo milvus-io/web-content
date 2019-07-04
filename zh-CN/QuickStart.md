@@ -76,7 +76,7 @@ sidebar_label: Milvus Quick Start
 
    ```shell
    # Install Milvus Python SDK
-   $ pip install pymilvus
+   $ pip install pymilvus==0.1.13
    ```
 
    如果需要进一步了解Milvus Python SDK，请阅读[Milvus Python SDK使用手册](https://pypi.org/project/pymilvus)。
