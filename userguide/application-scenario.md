@@ -66,7 +66,7 @@ Categorize the face images according to the frequency it is indexed. The face im
 
   - VIP client notification: If a human face within the VIP group library is found, an notification is sent to the system.
   - Personal file search: Search for personal information file based on face ID. 
-  - Face categorization: Move certain face images to a special library for customer relationship management
+  - Face categorization: Move certain face images to a special library for customer relationship management.
 
 
 - **Data libraries**
