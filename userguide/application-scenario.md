@@ -97,4 +97,4 @@ Categorize the face images according to the frequency it is indexed. The face im
 - **Basic architecture**
   - Milvus for vector storage
   - MySQL for relational data storage
-  - Minio for unstructured data storage
+  - MinIO for unstructured data storage
