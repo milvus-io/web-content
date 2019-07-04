@@ -1,10 +1,10 @@
 ---
 id: searching-table
-title: Search A Table
-sidebar_label: Search A Table
+title: Search a table
+sidebar_label: Search a table
 ---
 
-# Searching a Table
+# Searching a table
 
 ## Searching table name
 You can search all table names by this: 
