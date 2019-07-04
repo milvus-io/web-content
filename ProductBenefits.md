@@ -1,7 +1,7 @@
 ---
 id: product-benefits
-title: Product benefits
-sidebar_label: Product benefits
+title: Product Benefits
+sidebar_label: Product Benefits
 ---
 
 # Product Benefits
