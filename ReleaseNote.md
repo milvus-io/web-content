@@ -14,7 +14,6 @@ Release date: 2019-06-30
 - MinIO based storage separation solution
 - You can now delete a table
 - ARM64 architecture is now supported
-- Added SPTAG indexing 
 
 ### Improvements
 
