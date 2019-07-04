@@ -1,7 +1,7 @@
 ---
 id: searching-with-milvus
-title: Searching With Milvus
-sidebar_label: Searching With Milvus
+title: Searching with Milvus
+sidebar_label: Searching with Milvus
 ---
 
 # 用Milvus进行搜索
