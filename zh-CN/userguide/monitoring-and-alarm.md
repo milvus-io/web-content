@@ -1,7 +1,7 @@
 ---
 id: monitoring-and-alarm
-title: Monitoring and Alarm
-sidebar_label: Monitoring and Alarm
+title: Monitoring and alarm
+sidebar_label: Monitoring and alarm
 ---
 
 # 监控与告警
