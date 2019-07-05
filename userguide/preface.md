@@ -7,7 +7,7 @@ sidebar_label: Preface
 # Preface
 
 ## Overview
-Milvus is a full-winged, reliable feature vector database that supports indexing large scale high-dimension vectors in seconds. This guide introduces configuring and managing Milvus, helping you get a deeper understanding of Milvus characteristics and features.
+Milvus is a fast and reliable feature vector database that supports indexing large scale high-dimension vectors in seconds. This guide introduces configuring and managing Milvus, helping you get a deeper understanding of Milvus characteristics and features.
 
 If you need customer support, you may contact us by email: support@zilliz.com.
 
