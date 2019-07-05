@@ -18,6 +18,8 @@ This software and related documentation are provided under a license agreement c
 
 The information contained here is subject to change without notice and is not warranted to be error-free. If you find any errors, please report them to us in writing.
 
+This documentation is for reference only, and nothing in the documentation constitutes any express or implied warranty.
+
 
 ## Conventions used in this guide
 
