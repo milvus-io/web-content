@@ -11,7 +11,7 @@ Milvus is a fast and reliable feature vector database that supports indexing lar
 
 If you need customer support, you may contact us by email: support@zilliz.com.
 
-For more detailed knowledge about Milvus and feature vector database, go to [Feature Vector Database Introduction](https://github.com/milvus-io/docs/blob/dev/zh-CN/MilvusIntro.md).
+For more detailed knowledge about Milvus and feature vector database, go to [Feature Vector Database Introduction](docs/VectorDB/feature-vector-db.md).
 
 ## Statement
 This software and related documentation are provided under a license agreement containing restrictions on use and disclosure and are protected by intellectual property laws. Except as expressly permitted in your license agreement or allowed by law, you may not use, copy, reproduce, translate, broadcast, modify, license, transmit, distribute, exhibit, perform, publish, or display any part, in any form, or by any means. Reverse engineering, disassembly, or decompilation of this software, unless required by law for interoperability, is prohibited.
