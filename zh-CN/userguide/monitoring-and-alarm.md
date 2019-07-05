@@ -27,7 +27,7 @@ Milvus server收集数据 > 利用pull模式把所有数据导入Prometheus > �
 
 2. 设置Prometheus。
 
-   1）打开prometheus根目录下的prometheus.yml设置文件，并对alerting, rule_files和scrape_configs文件做如下跟新：
+   1）打开prometheus根目录下的prometheus.yml设置文件，并对alerting, rule_files和scrape_configs做如下更新：
    
       ```yaml
       # my global config
