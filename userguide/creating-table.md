@@ -42,7 +42,7 @@ This section shows you how to create a table in Milvus. To make it easier to und
   
    ```
    # Prepare param
-   >>> param = {'table_name'='test01', 'dimension'=256, 'index_type'=IndexType.FLAT}
+   >>> param = {'table_name':'test01', 'dimension':256, 'index_type':IndexType.FLAT}
    ```
    
 2. Create Table test01.

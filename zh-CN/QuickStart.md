@@ -6,7 +6,7 @@ sidebar_label: Milvus Quick Start
 
 # Milvus快速入门
 
-该指南主要包含Milvus Docker版的快速安装，以及相关Python示例代码的运行。如果想进一步了解Milvus的使用，请访问[Milvus用户指南](https://github.com/milvus-io/docs/blob/master/UserGuide.md)。
+该指南主要包含Milvus Docker版的快速安装，以及相关Python示例代码的运行。如果想进一步了解Milvus的使用，请访问[Milvus用户指南](../userguide/preface.md)。
 
 ## 安装前提
 1. Milvus Docker版目前仅在Linux系统上运行，请确保你的Linux系统符合以下版本：
@@ -76,7 +76,7 @@ sidebar_label: Milvus Quick Start
 
    ```shell
    # Install Milvus Python SDK
-   $ pip install pymilvus
+   $ pip install pymilvus==0.1.13
    ```
 
    如果需要进一步了解Milvus Python SDK，请阅读[Milvus Python SDK使用手册](https://pypi.org/project/pymilvus)。

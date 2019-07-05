@@ -42,7 +42,7 @@ sidebar_label: Creating a table
   
    ```
    # Prepare param
-   >>> param = {'table_name'='test01', 'dimension'=256, 'index_type'=IndexType.FLAT}
+   >>> param = {'table_name':'test01', 'dimension':256, 'index_type':IndexType.FLAT}
    ```
    
 2. 创建表test01。

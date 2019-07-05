@@ -7,24 +7,24 @@ sidebar_label: Configuring Milvus
 # 设置Milvus
 
 ## Milvus文件介绍
-成功启动Milvus server后，你可以在home/$USER/milvus的路径下看到Milvus的文件夹。其中包含以下文件：
+成功启动Milvus server后，你可以在*home/$USER/milvus*的路径下看到Milvus的文件夹。其中包含以下文件：
 
-- milvus/db（数据库存储）
-- milvus/logs（日志存储）
-- milvus/conf（设置文件）
-    - server_config.yaml（服务设置文件）
-    - log_config.conf（日志设置文件）
-- milvus/test（测试脚本）
+- *milvus/db*（数据库存储）
+- *milvus/logs*（日志存储）
+- *milvus/conf*（设置文件）
+    - *server_config.yaml*（服务设置文件）
+    - *log_config.conf*（日志设置文件）
+- *milvus/test*（测试脚本）
 
 ## 设置Milvus服务
 
 请按照以下步骤设置Milvus服务：
 
-1. 根据路径home/$USER/milvus/conf，打开Milvus服务设置文件server_config.yaml。
+1. 根据路径*home/$USER/milvus/conf*，打开Milvus服务设置文件*server_config.yaml*。
 
 2. 对文件中的相关参数进行修改。
 
-   1）点击server_config文件，设置服务参数。
+   1）点击*server_config*文件，设置服务参数。
    
      | 参数            | 参数描述                          | 参考值            |
      |----------------|-----------------------------------|-------------------|
@@ -33,7 +33,7 @@ sidebar_label: Configuring Milvus
      | gpu_index      | 目前使用的GPU，默认值为0。          | 0 ~ GPU数量-1                |
      | mode           | Milvus部署类型                    | single（单机）/ cluster（多机）|            
                                                                                                                      
-   2）点击db_config文件，设置数据库参数。
+   2）点击*db_config*文件，设置数据库参数。
    
      | 参数               | 参数描述                            | 参考值    |
      |-------------------|-------------------------------------|----------|
@@ -43,7 +43,7 @@ sidebar_label: Configuring Milvus
      | archive_disk_threshold: 512 | 归档触发条件：存储大小。一旦超过存储大小（单位：GB），触发归档操作| >0 |
      | archive_days_threshold: 30 | 归档触发条件：存储大小。一旦超过存储大小（单位：天），触发归档操作|  >0 |
 
-   3）点击metric_config文件，设置监控参数。
+   3）点击*metric_config*文件，设置监控参数。
    
      | 参数               | 参数描述                            | 参考值    |
      |-------------------|-------------------------------------|----------|
@@ -54,7 +54,7 @@ sidebar_label: Configuring Milvus
      | push_gateway_ip_address | push gateway的ip地址   | 127.0.0.1             |
      | push_gateway_port       | push gateway的端口号   |  9091                 |
 
-   4）点击cache_config文件，设置相关参数。
+   4）点击*cache_config*文件，设置相关参数。
    
      |  参数             | 参数描述                            | 参考值    |
      |-------------------|-------------------------------------|----------|

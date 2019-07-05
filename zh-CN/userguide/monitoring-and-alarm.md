@@ -27,7 +27,7 @@ Milvus server收集数据 > 利用pull模式把所有数据导入Prometheus > �
 
 2. 设置Prometheus。
 
-   1）打开prometheus根目录下的prometheus.yml设置文件，并对alerting, rule_files和scrape_configs文件做如下跟新：
+   1）打开Prometheus根目录下的*prometheus.yml*设置文件，并对alerting, rule_files和scrape_configs做如下更新：
    
       ```yaml
       # my global config
@@ -70,7 +70,7 @@ Milvus server收集数据 > 利用pull模式把所有数据导入Prometheus > �
           - targets: ['localhost:9091']
       ```
    
-   2）在prometheus根目录下创建serverdown.yml文件，内容如下：
+   2）在Prometheus根目录下创建*serverdown.yml*文件，内容如下：
 
       ```yaml
       groups:
@@ -91,19 +91,19 @@ Milvus server收集数据 > 利用pull模式把所有数据导入Prometheus > �
       $ docker run -i -p 3000:3000 grafana/grafana
       ```
    
-   2）登录Grafana网页(localhost:3000)，在data source type选项框选择Prometheus。
+   2）登录Grafana网页(localhost:3000)，在*data source type*选项框选择*Prometheus*。
    
       ![image-20190620191640605](assets/datasource.png)
    
-   3）在HTTP区域，将URL设置成Prometheus的服务器地址http://localhost:9090, 将ACCESS设置成Browser，点击Save & Test。
+   3）在HTTP区域，将URL设置成Prometheus的服务器地址http://localhost:9090, 将*ACCESS*设置成*Browser*，点击*Save & Test*。
    
       ![image-20190620191702697](assets/settings.png)
    
-   4）点击页面左上角的New dashboard。
+   4）点击页面左上角的*New dashboard*。
    
       ![image-20190620191721734](assets/dashboard.png)
    
-   5）点击右侧的Import dashboard。
+   5）点击右侧的*Import dashboard*。
    
       ![image-20190620191747161](assets/importdashboard.png)
    
@@ -148,7 +148,7 @@ Milvus server收集数据 > 利用pull模式把所有数据导入Prometheus > �
 ## 设置告警规则
 你可以为Milvus设置告警规则，比如：当服务器无法正常工作时，会立即发邮件通知相关用户。你可以按照以下操作进行：
 
-   1）在Alertmanager根目录下创建milvus.yml文件，内容如下：
+   1）在Alertmanager根目录下创建*milvus.yml*文件，内容如下：
 
       ```
       global:
@@ -169,7 +169,7 @@ Milvus server收集数据 > 利用pull模式把所有数据导入Prometheus > �
           - to: '××××@××.com'             # receiver mail address
       ```
    
-   2）指定--config.file=milvus.yml以启动Alertmanager，如下：
+   2）启动Alertmanager。
 
       ```
       ./alertmanager --config.file=milvus.yml
