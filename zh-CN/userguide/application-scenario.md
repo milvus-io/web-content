@@ -108,7 +108,7 @@ Milvus做特征向量检索时典型应用架构如下：
 
 以个性化广告内容推荐为例，Milvus实现架构如下：
 
-![Recommendation](assets/Recommendation.png)
+![Recommendation](assets/Recommendation_cn.png)
 
 具体实现步骤为：
 
