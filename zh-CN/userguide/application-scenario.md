@@ -26,7 +26,7 @@ sidebar_label: Application scenarios
 - 文件去重，通过文件指纹去除重复文件。
 
 
-### 典型架构
+## 典型架构
 Milvus做特征向量检索时典型应用架构如下：
 
 ![MilvusTypicalApplication](assets/MilvusTypicalApplication_cn.png)
