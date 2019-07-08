@@ -554,55 +554,56 @@ Take personalized advertising content recommendation as an example, the applicat
 
 ### Background
 
-Online sellers need to prepare product images and tagging product categories to help buyers better learn the product. However, as the product为了让，需要拍摄商品照片、标注商品类别和属性。随着商品类别的增长，将积累大量的图片素材。如果这些图片素材没有被很好地管理和利用，则经常会出现找不到之前已经准备好的素材，需要重新拍摄的情况。
+Online sellers need to prepare product images and tagging product categories to help buyers better learn the product. As product categories grow, there will be a large sum of product images to be managed. If these product images are not well managed and utilized, it is often the case that you can't find the previously prepared image and need to retake it. 
 
 ### User requirements
 
-管理图片素材。根据关键词，对相似图片进行多模搜索。比如，搜索与目标图片最相似，且最近畅销度最高的所有商品图片。
+Manage product images, and carry out multimodal similarity search based on key words, for example, find out the most similar images of the most popular products.
 
-### 实现方案
+### Application solution
 
-Milvus主要通过以下步骤实现商品属性提取与多模搜索：
+Milvus helps you realize product feature extraction and multimodal search mainly by the following procedures: 
 
-1. 将商品图片转化为向量。
+1. Convert product images to vectors.
 
-2. 连同其它商品数据如价格、上市日期、卖出件数等结构化数据一并存入Milvus。
+2. Load these vectors, together with other structured data such as product prices, publish date, sold quantity into Milvus.
 
-3. 启动多模检索，并指定搜索范围为“卖出件数最多的商品”。
+3. Begin multimodal search, specifying the query range as "among the top 10 products that sold the most".
 
-4. 在最畅销商品图片中中搜索出相似度最高的图片。
+4. Find out the most similar images that belong to the top 10 products.
 
 
-## 案例 4 - 视频去重
+## Use case 4 - Video deduplication
 
-### 背景
+### background
 
-如今，在线商品交易已经成为人们购物的日常，在诸如淘宝、咸鱼等商品交易平台上，卖家可以通过商品视频来更全面直观地向顾客展示商品。但与此同时也出现了一些视频拷贝、抄袭等不好的现象。其中一种解决方案时通过向量检索视频相似性，进而判断视频是否重复。
+Today, online shopping and product trading has becoming a daily routine. On commodity trading platforms such as Taobao and Xianyu, sellers can display products to customers more fully and intuitively through product videos. Meanwhile, product video copying and plagiarism have also appeared. One solution to find a duplicate video is by vector similarity search.
 
-以二手商品交易平台闲鱼为例，根据其当前商品规模及业务发展的预估，闲鱼向量检索系统需支持检索亿级别平均时长为20秒，每秒向量维度是1024维的视频。
+Taking Xianyu, the second-hand commodity trading platform as an example. According to its current product size and business development trend, the vector index system needs to support billions of videos with an average length of 20 seconds, and 1024-dimensional vector per second.
 
-### 用户需求：
+### User requirements
 
-去除重复视频
+Recognize and remove duplicate videos
 
-### 实现方案
+### Application solution
 
-视频去重本质是高维向量检索，Milvus主要通过以下步骤实现：
+The core of video deduplication is high-dimensional vector index. Milvus helps you realize this function through these steps:
 
-1. 视频向量化
+1. Video vectorization视频向量化
 
-   将视频数据按照一定的算法转换为向量，转换算法决定了向量表达原始视频数据的准确性。
+   Convert video data to vectors according to certain algorithm. The converting algorithm determines how precisely the original video is represented by vectors. 
 
-2. 计算向量距离
+2. Vector distance computate
 
-   将视频转化为向量之后，计算视频的相似性就相当于计算向量的相似性。可以通过计算夹角余弦、欧式距离和向量内积等方式计算向量间的距离。
+   When the video is represented by vectors, the similarity of videos can be measured by similarity of vectors. The distance between vectors can be calculated by calculating the angle cosine, Euclidean distance and vector inner product.
 
-3. 向量检索
+3. Vector index
 
-   通过基于树的算法，哈希算法，矢量量化等，对向量进行检索，找出与目标向量（目标视频）相似度最高的向量。
+   Search the most similar vector by various vector indexing methods such as tree-based, hash-based and vector quantization, etc. 
 
 ## Troubleshooting
 - What if connecting to server failed?
+
   If connection to server failed, you can check the logs in Docker logs, and confirm that connected server is started, or server address and port are correct.
 
 
