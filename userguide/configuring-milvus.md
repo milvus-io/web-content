@@ -15,7 +15,6 @@ After you have successfully started Milvus server, you can see a Milvus file und
 - *milvus/conf* (configuration file)
     - *server_config.yaml* (service configuration file)
     - *log_config.conf* (log configuration file)
-- *milvus/test* (test scripts)
 
 ## Configuring Milvus service
 
@@ -39,11 +38,13 @@ Follow these procedures to configure Milvus service:
      | Parameter               | Description                            | Reference value    |
      |-------------------|-------------------------------------|----------|
      | db_path           | Directory of Milvus database files            |    ~/milvus/data    |
-     | db_backend_url    | Meta database URI                         | http://127.0.0.1  |
+     | db_backend_uri    | Meta database URI                         |sqlite://:@:/ |
      | index_building_threshold | index building trigger value       |  1024（MB）  |
      | archive_disk_threshold: 512 | Archive action triggered if storage size exceed this value. (unit: GB)| >0 |
      | archive_days_threshold: 30 | Files older than x days will be archived. (unit: day)|  >0  |
-
+     
+   > Note: db_backend_uri format is: dialect://username:password@host:port/database. ('dialect' can be either 'mysql' or 'sqlite', depending on whether you use MySQL or SQLite for the metadata storage.)
+   
    3）Click file *metric_config*, and configure monitor parameters.
    
      |Parameter               |  Description                             | Reference value     |
