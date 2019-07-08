@@ -99,15 +99,15 @@ Categorize the face images according to the frequency it is indexed. The face im
   - MySQL for relational data storage
   - MinIO for unstructured data storage
 
-## Use case 2 - Personalized recommenndation
+## Use case 2 - Personalized recommendation
 
 ### Background
 
-Nowadays, if you shop or view pages online, you will be familiar with such words as "You may also like" or "Related products". In fact, many tech companies have embedded recommendation algorithms into their mobile apps. Some examples are the Toutiao news, NetEase news, Pingduoduo and WeChat, etc. With Milvus vector analysis platform, you can implement your own personalized recommendation system.
+Nowadays, if you shop or view pages online, you will be familiar with such words as "You may also like" or "Related products". In fact, many tech companies have embedded recommendation algorithms into their mobile Apps. Some examples are the Toutiao news, NetEase news, Pingduoduo and WeChat, etc. With Milvus vector analysis platform, you can implement your own personalized recommendation system.
 
 ### User requirements
 
-Recommend personalized content based on user personas.
+Recommend personalized content based on user persona.
 
 ### Application
 
@@ -116,7 +116,7 @@ Take personalized advertising content recommendation as an example, the applicat
 ![Recommendation](assets/Recommendation_en.png)
 
 
-1. Create user personas by data analysis and key feature extraction
+1. Create user persona by data analysis and key feature extraction
 
    By analyzing user history data and extracting key features, the user persona can be built. For example: The user history data contains news content about tennis, Wimbledon Championships, sports and Tennis Masters. So we can conclude from these key words that the user is a tennis fan. 
 
@@ -169,7 +169,7 @@ The core of video deduplication is high-dimensional vector index. Milvus helps y
 
    Convert video data to vectors according to certain algorithm. The converting algorithm determines how precisely the original video is represented by vectors. 
 
-2. Vector distance computate
+2. Vector distance compute
 
    When the video is represented by vectors, the similarity of videos can be measured by similarity of vectors. The distance between vectors can be calculated by calculating the angle cosine, Euclidean distance and vector inner product.
 
