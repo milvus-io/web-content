@@ -32,7 +32,7 @@ This section shows you how to create a table in Milvus. To make it easier to und
 
 |  Parameter  |  Description  |  Type   |  Reference value   |
 | ------------| --------------| --------| ---------|
-| table_name  | Name of the table you want to create (table name is made of numbers, letters and _)| String | 'table name' |
+| table_name  | Name of the table you want to create (Table name can only be _, number and letter. The first character must be _ or letter, not a number. The entire length can not exceed 255 characters)| String | 'table name' |
 | dimension   | Vector dimensions | Integer | 0 < dimension <= 16384, usually set to 128, 256 or 518
 | index_type  |2 types of indexing methods: 1. 'FLAT' - Precise vector indexing; 2. 'IVFLAT' - K-means based vector indexing. Search precision may be lower, but with faster speed；|IndexType|FLAT / IVFLAT|
 
