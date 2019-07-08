@@ -1,5 +1,0 @@
-# Data storage
-
-Whenever new vector data is loaded into Milvus, they are automatically saved in 2 places: local disk and MinIO private cloud.
-
-MinIO data storage infrastructure is compatible with Amazon S3. You can unify their data infrastructure - from file to block, all appearing as objects accessible via the Amazon S3 API without the requirement for migration.
