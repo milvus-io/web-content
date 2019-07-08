@@ -589,7 +589,7 @@ Recognize and remove duplicate videos
 
 The core of video deduplication is high-dimensional vector index. Milvus helps you realize this function through these steps:
 
-1. Video vectorization视频向量化
+1. Video vectorization
 
    Convert video data to vectors according to certain algorithm. The converting algorithm determines how precisely the original video is represented by vectors. 
 
