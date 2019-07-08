@@ -14,7 +14,6 @@ sidebar_label: Configuring Milvus
 - *milvus/conf*（设置文件）
     - *server_config.yaml*（服务设置文件）
     - *log_config.conf*（日志设置文件）
-- *milvus/test*（测试脚本）
 
 ## 设置Milvus服务
 
@@ -38,11 +37,13 @@ sidebar_label: Configuring Milvus
      | 参数               | 参数描述                            | 参考值    |
      |-------------------|-------------------------------------|----------|
      | db_path           | Milvus数据库文件存储的路径            |     ~/milvus/data     |
-     | db_backend_url    | 元数据库URI                          | http://127.0.0.1  |
+     | db_backend_url    | 元数据库URI                          | sqlite://:@:/  |
      | index_building_threshold | index building触发阈值        |  1024（MB）  |
      | archive_disk_threshold: 512 | 归档触发条件：存储大小。一旦超过存储大小（单位：GB），触发归档操作| >0 |
      | archive_days_threshold: 30 | 归档触发条件：存储大小。一旦超过存储大小（单位：天），触发归档操作|  >0 |
 
+   > 注意：db_backend_uri格式为：dialect://username:password@host:port/database。(其中'dialect'可以是'mysql'或'sqlite'，取决于你是用了MySQL 还是SQLite作为元数据库)
+   
    3）点击*metric_config*文件，设置监控参数。
    
      | 参数               | 参数描述                            | 参考值    |
@@ -59,7 +60,13 @@ sidebar_label: Configuring Milvus
      |  参数             | 参数描述                            | 参考值    |
      |-------------------|-------------------------------------|----------|
      | cpu_cache_capacity |用于cache的内存量，默认值为16GB       |  0 ~ 机器内存总量 |
-
+     
+   5）点击*engine_config*文件，设置相关参数。
+   
+     |  参数             | 参数描述                            | 参考值    |
+     |-------------------|-------------------------------------|----------|
+     | nprobe            |设置搜索精度，数值越大，精度越高       |  0 ~ 10 |
+     
 3. 重启Milvus Docker。
 
    ```
