@@ -1,3 +1,9 @@
+---
+id: data-storage
+title: Data storage
+sidebar_label: Data storage
+---
+
 # Data storage
 
 Whenever new vector data is loaded into Milvus, they are automatically stored in 2 places: local hard drive and [MinIO private cloud](https://min.io/product/multi-cloud-gateway#multi-cloud-gateway). 
