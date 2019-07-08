@@ -14,6 +14,7 @@ Keeping a copy of the data in the cloud ensures the completeness and accessibili
 ## Metadata storage
 
 In Milvus, metadata refers to data that provides information about vector data. Depending on how your database is deployed, metadata can be stored in the following databases.
+
 | Database  |  Milvus deployment  |
 |-----------|---------------------|
 | SQLite 3  | Single server       |
