@@ -554,7 +554,7 @@ Take personalized advertising content recommendation as an example, the applicat
 
 ### Background
 
-电商卖家在准备新商品资料时，需要拍摄商品照片、标注商品类别和属性。随着商品类别的增长，将积累大量的图片素材。如果这些图片素材没有被很好地管理和利用，则经常会出现找不到之前已经准备好的素材，需要重新拍摄的情况。
+Online sellers need to prepare product images and tagging product categories to help buyers better learn the product. However, as the product为了让，需要拍摄商品照片、标注商品类别和属性。随着商品类别的增长，将积累大量的图片素材。如果这些图片素材没有被很好地管理和利用，则经常会出现找不到之前已经准备好的素材，需要重新拍摄的情况。
 
 ### User requirements
 
