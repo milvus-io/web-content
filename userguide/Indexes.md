@@ -9,15 +9,18 @@ There are different types of indexes that can be created for different purposes.
 | Milvus-IVFPQ | Rather than partitioning the whole vector space, it only searches the regions of interest, that can be fast located by vector clustering.  |  
 
 ## KDT
-A k-d tree-based (k-dimensional tree) index that 
+A k-d tree-based (k-dimensional tree) index that divides a high-dimension vector space into multiple subspaces. 
 ### Highlights
-
 
 ## NSG
+Navigation spreading graph advantageous in search accuracy in very high-dimensional data
 
 ### Highlights
+
+- Suitable for single vector search.
 
 
 ## IVFPQ
+Rather than partitioning the whole vector space, it only searches the regions of interest, that can be fast located by vector clustering. 
 
 ### Highlights
