@@ -458,7 +458,7 @@ The application architecture of Milvus as a feature vector database is as follow
 
 Unstructured data (images/videos/texts/audios) are transformed to feature vectors by feature extraction models, and saved to Milvus database. When you input a target vector, it is saved  to the current vector collection, and the search begins, until the most similar vectors are matched, and their IDs returned. 
 
-### Use Case - Human face search
+### Use Case 1 - Human face search
 
 #### User requirements
 
@@ -523,7 +523,83 @@ Categorize the face images according to the frequency it is indexed. The face im
   - MySQL for relational data storage
   - Minio for unstructured data storage
   
+## Use case 2 - Personalized recommenndation
 
+### Background
+
+Nowadays, if you shop or view pages online, you will be familiar with such words as "You may also like" or "Related products". In fact, many tech companies have embedded recommendation algorithms into their mobile apps. Some examples are the Toutiao news, NetEase news, Pingduoduo and WeChat, etc. With Milvus vector analysis platform, you can implement your own personalized recommendation system.
+
+### User requirements
+
+Recommend personalized content based on user personas.
+
+### Application solution
+
+Take personalized advertising content recommendation as an example, the application architecture is:
+
+![Recommendation](assets/Recommendation_cn.png)
+
+
+1. Create user personas by data analysis and key feature extraction
+
+   By analyzing user history data and extracting key features, the user persona can be built. For example: The user history data contains news content about tennis, Wimbledon Championships, sports and Tennis Masters. So we can conclude from these key words that the user is a tennis fan. 
+
+2. Convert user key words to vectors, load them to Milvus, and extract user feature vectors.
+
+3. Based on feature vectors and logistic regression model, recommend content to users.
+
+   Milvus can search and filter out the top 100 ads that the user might be interested in and has not yet viewed. Then, extract the key words and click-through rate of the top 100 ads. Finally locate and recommend the ad content to the user based on logistic regression model (which arises from user history data).
+  
+## Use case 3 - Product feature extraction and multimodal search 
+
+### Background
+
+电商卖家在准备新商品资料时，需要拍摄商品照片、标注商品类别和属性。随着商品类别的增长，将积累大量的图片素材。如果这些图片素材没有被很好地管理和利用，则经常会出现找不到之前已经准备好的素材，需要重新拍摄的情况。
+
+### User requirements
+
+管理图片素材。根据关键词，对相似图片进行多模搜索。比如，搜索与目标图片最相似，且最近畅销度最高的所有商品图片。
+
+### 实现方案
+
+Milvus主要通过以下步骤实现商品属性提取与多模搜索：
+
+1. 将商品图片转化为向量。
+
+2. 连同其它商品数据如价格、上市日期、卖出件数等结构化数据一并存入Milvus。
+
+3. 启动多模检索，并指定搜索范围为“卖出件数最多的商品”。
+
+4. 在最畅销商品图片中中搜索出相似度最高的图片。
+
+
+## 案例 4 - 视频去重
+
+### 背景
+
+如今，在线商品交易已经成为人们购物的日常，在诸如淘宝、咸鱼等商品交易平台上，卖家可以通过商品视频来更全面直观地向顾客展示商品。但与此同时也出现了一些视频拷贝、抄袭等不好的现象。其中一种解决方案时通过向量检索视频相似性，进而判断视频是否重复。
+
+以二手商品交易平台闲鱼为例，根据其当前商品规模及业务发展的预估，闲鱼向量检索系统需支持检索亿级别平均时长为20秒，每秒向量维度是1024维的视频。
+
+### 用户需求：
+
+去除重复视频
+
+### 实现方案
+
+视频去重本质是高维向量检索，Milvus主要通过以下步骤实现：
+
+1. 视频向量化
+
+   将视频数据按照一定的算法转换为向量，转换算法决定了向量表达原始视频数据的准确性。
+
+2. 计算向量距离
+
+   将视频转化为向量之后，计算视频的相似性就相当于计算向量的相似性。可以通过计算夹角余弦、欧式距离和向量内积等方式计算向量间的距离。
+
+3. 向量检索
+
+   通过基于树的算法，哈希算法，矢量量化等，对向量进行检索，找出与目标向量（目标视频）相似度最高的向量。
 
 ## Troubleshooting
 - What if connecting to server failed?
