@@ -66,7 +66,7 @@ Follow these procedures to configure Milvus service:
    
      |  Parameter            | Description                             | Reference value      |
      |-------------------|-------------------------------------|----------|
-     | nprobe            |Set the search precision. The greater the value, the more precise the result.  |  0 ~ 10 |
+     | nprobe            |Set the search precision. The greater the value, the more precise the result, yet the slower the search speed. |  1 ~ 16384 |
      
 3. Restart Milvus Docker.
 
