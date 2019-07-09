@@ -45,6 +45,8 @@ sidebar_label: Creating a table
    >>> param = {'table_name':'test01', 'dimension':256, 'index_type':IndexType.FLAT}
    ```
    
+   > 注意：表名是Milvus里面表的唯一标识符，请确保没有重复的表名存在。
+   
 2. 创建表test01。
 
    ```
