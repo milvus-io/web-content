@@ -45,6 +45,8 @@ This section shows you how to create a table in Milvus. To make it easier to und
    >>> param = {'table_name':'test01', 'dimension':256, 'index_type':IndexType.FLAT}
    ```
    
+   > Note: Table name is the unique identifier of a table in Milvus. So make sure there are no duplicated names.
+   
 2. Create Table test01.
 
    ```
