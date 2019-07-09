@@ -34,7 +34,7 @@ sidebar_label: Creating a table
 | ------------| --------------| --------| ---------|
 | table_name  | 要创建的表名（只能是 _， 数字和字母组成，首个字符必须是_或者字母，不可以是数字。长度不可以超过255字符）| 字符串 | '表名' |
 | dimension   | 表格中向量的维度 | 整数 | 0 < dimension <= 16384, 通常设置为128、256或518维 
-| index_type  |目前支持5种类型的检索类型: 1. 'FLAT' - 精确向量索引类型；2. 'IVFLAT' - 基于K-means的向量索引；3. 'IVFPQ' - 基于K-means的向量索引，通过乘积量化能大幅减少数据计算量。速度比'IVFLAT'更快； 4. 'KDT' - 基于K-dimensional tree的向量索引； 5. 'NSG' - 基于Navigating Spreading-out Graph的向量索引。通过减少图的平均超出程度缩短搜索路径和降低检索量等方式，实现针对亿级向量的高效索引。|IndexType|FLAT / IVFLAT　/ IVFPQ / KDT / NSG |
+| index_type  |目前支持5种类型的检索类型: 1. 'FLAT' - 精确向量索引类型；2. 'IVFLAT' - 基于K-means的向量索引。|IndexType|FLAT / IVFLAT |
 
 1. 准备数据表的参数，比如：
   
