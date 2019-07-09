@@ -36,7 +36,6 @@ This section shows you how to create a table in Milvus. To make it easier to und
 | dimension   | Vector dimensions | Integer | 0 < dimension <= 16384 (Usually set to 128, 256 or 518)
 | index_type  |5 types of indexing methods: 1. 'FLAT' - Precise vector indexing; 2. 'IVFLAT' - K-means based vector indexing. Search precision may be lower, but with faster speed; 3. 'IVFPQ' - K-means based vector indexing that significantly reduces data computing by product quantization, thus with a index speed much faster than 'IVFLAT'; 4. 'KDT' - K-dimensional tree based vector indexing; 5. 'NSG' - Navigation spreading graph based vector indexing that is especially suitable for single vector index.  |IndexType|FLAT / IVFLAT / IVFPQ / KDT / NSG|
 
-> Note: You cannot set index_type to 'IVFLAT' when there is no GPU.
 
 1. Prepare table parameters.
   
