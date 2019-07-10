@@ -39,10 +39,10 @@ Follow these procedures to configure Milvus service:
      |-------------------|-------------------------------------|----------|
      | db_path           | Directory of Milvus database files            |    ~/milvus/data    |
      | db_backend_uri    | Meta database URI                         |sqlite://:@:/ |
-     | index_building_threshold | index building trigger value       |  1024（MB）  |
-     | archive_disk_threshold | Archive action triggered if storage size exceed this value. Default value is 512 (unit: GB).| >0 |
-     | archive_days_threshold | Files older than x days will be archived. Default value is 30 (unit: day).|  >0  |
-     | maximum_memory    | Default value is 4 (unit: GB). The sum of maximum_memory and cpu_cache_capacity (in *cache_config* file) should be less than total memory| 1 ~ Total memory|
+     | index_building_threshold | index building trigger value       |  1024 (MB)  |
+     | archive_disk_threshold | Archive action triggered if storage size exceed this value. Default value is 512 (GB).| >0 |
+     | archive_days_threshold | Files older than x days will be archived. Default value is 30 (Day).|  >0  |
+     | maximum_memory    | Default value is 4 (GB). The sum of maximum_memory and cpu_cache_capacity (in *cache_config* file) should be less than total memory| 1 ~ Total memory size|
                                
      
    > Note: db_backend_uri format is: dialect://username:password@host:port/database. ('dialect' can be either 'mysql' or 'sqlite', depending on whether you use MySQL or SQLite for the metadata storage.)
@@ -62,7 +62,7 @@ Follow these procedures to configure Milvus service:
    
      |  Parameter                | Description                             | Reference value     |
      |-------------------|-------------------------------------|----------|
-     | cpu_cache_capacity | Memory used for cache in CPU. Default value is 16 GB       |  0 ~ Total memory size |
+     | cpu_cache_capacity | Memory used for cache in CPU. Default value is 16 (GB)       |  0 ~ Total memory size |
 
    5) Click file *engine_config*, and configure the parameter.
    
