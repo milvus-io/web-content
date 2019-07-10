@@ -55,7 +55,7 @@ sidebar_label: Creating a table
    
 3. 检查确认已创建表的信息。
    ```
-   # Confirm table info.
+   # Verify table info.
    >>> status, table = milvus.describe_table('test01')
    >>> status
    Status(message='Describe table successfully!')
