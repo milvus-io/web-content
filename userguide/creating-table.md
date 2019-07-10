@@ -54,9 +54,9 @@ This section shows you how to create a table in Milvus. To make it easier to und
    Status(message='Table test01 created!', code=0)
    ```
    
-3. Confirm the information of the table just created.
+3. Verify details of the newly created table.
    ```
-   # Confirm table info.
+   # Verify table info.
    >>> status, table = milvus.describe_table('test01')
    >>> status
    Status(message='Describe table successfully!')
