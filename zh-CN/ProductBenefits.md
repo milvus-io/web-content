@@ -11,8 +11,6 @@ sidebar_label: Product Benefits
 
 Milvus针对大规模向量数据索引而设计。CPU/GPU异核计算让您的数据处理速度提高1000倍以上。
 
-我们“加载即可用”的技术意味着每张GPU每小时可以处理3TB向量数据。
-
 
 ## 智能索引，数据弹性伸缩
 
