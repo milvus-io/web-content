@@ -11,8 +11,6 @@ sidebar_label: Product Benefits
 
 Milvus is designed for the largest scale of vector index. CPU/GPU heterogeneous computing architecture allows you to process data at a speed 1000 times faster. 
 
-Our Load-and-Go technology means Milvus can load up to 3TB/hour/GPU out-of-the-box.
-
 
 ## Smart index, with high scalability
 
