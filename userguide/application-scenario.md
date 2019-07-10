@@ -103,7 +103,7 @@ Categorize the face images according to the frequency it is indexed. The face im
 
 ### Background
 
-Nowadays, if you shop or view pages online, you will be familiar with such words as "You may also like" or "Related products". In fact, many tech companies have embedded recommendation algorithms into their mobile Apps. Some examples are the Toutiao news, NetEase news, Pingduoduo and WeChat, etc. With Milvus vector analysis platform, you can implement your own personalized recommendation system.
+Nowadays, when you shop or view pages online, you will often see such words as "You may also like" or "Related products". In fact, many tech companies have embedded recommendation algorithms into their mobile Apps. Some examples are the Toutiao news, NetEase news, Pingduoduo and WeChat, etc. With Milvus vector analysis platform, you can implement your own personalized recommendation system.
 
 ### User requirements
 
@@ -118,27 +118,29 @@ Take personalized advertising content recommendation as an example, the applicat
 
 1. Create user persona by data analysis and key feature extraction
 
-   By analyzing user history data and extracting key features, the user persona can be built. For example: The user history data contains news content about tennis, Wimbledon Championships, sports and Tennis Masters. So we can conclude from these key words that the user is a tennis fan. 
+   By analyzing user history data and extracting key features, the user persona can be built. For example: The user history data contains news content about tennis, Wimbledon Championships, sports and Tennis Masters. So we can conclude from these keywords that the user is a tennis fan. 
 
-2. Convert user key words to vectors, load them to Milvus, and extract user feature vectors.
+2. Convert user keywords to vectors, load them to Milvus, and extract user feature vectors.
 
-3. Based on feature vectors and logistic regression model, recommend content to users.
+3. Recommend content to users based on feature vectors and logistic regression model.
 
-   Milvus can search and filter out the top 100 ads that the user might be interested in and has not yet viewed. Then, extract the key words and click-through rate of the top 100 ads. Finally locate and recommend the ad content to the user based on logistic regression model (which arises from user history data).
+   1) Search and filter out the top 100 ads that the user might be interested in and has not yet viewed.
+   2) Extract the keywords and click-through rate of the top 100 ads. 
+   3) Locate and recommend the ads content to the user based on logistic regression model (which arises from user history data).
   
 ## Use case 3 - Product feature extraction and multimodal search 
 
 ### Background
 
-Online sellers need to prepare product images and tagging product categories to help buyers better learn the product. As product categories grow, there will be a large sum of product images to be managed. If these product images are not well managed and utilized, it is often the case that you can't find the previously prepared image and need to retake it. 
+Online sellers need to prepare product images and tag product categories to help buyers better learn the product. As product categories grow, there will be a large sum of product images to be managed. If these product images are not well organized and utilized, it is often the case that you can't find the previously prepared image and need to retake it. 
 
 ### User requirements
 
-Manage product images, and carry out multimodal similarity search based on key words, for example, find out the most similar images of the most popular products.
+Manage product images, and run multimodal similarity search based on keywords, for example, find out the most similar images of the most popular products.
 
 ### Application 
 
-Milvus helps you realize product feature extraction and multimodal search mainly by the following procedures: 
+Milvus helps you realize product feature extraction and multimodal search by the following procedures: 
 
 1. Convert product images to vectors.
 
@@ -163,7 +165,7 @@ Recognize and remove duplicate videos
 
 ### Application
 
-The core of video deduplication is high-dimensional vector index. Milvus helps you realize this function through these steps:
+The core of video deduplication is high-dimensional vector index. Milvus helps you recognize duplicate videos through these steps:
 
 1. Video vectorization
 
