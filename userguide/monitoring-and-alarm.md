@@ -102,7 +102,7 @@ Milvus server collects data > Collected data is imported to Prometheus > Monitor
    
       ![image-20190620191747161](assets/importdashboard.png)
    
-   6) Download json configuration file, and import it into the system.
+   6) Download [json configuration file](assets/dashboard.json), and import it into the system.
    
       ![image-20190620191802408](assets/importjson.png)
 

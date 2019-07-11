@@ -1,6 +1,6 @@
 Please provide the params of these tasks，using the table format below:
 
-## 1. Creating a database
+## 1. Creating database
 
 create_table(param) 
 

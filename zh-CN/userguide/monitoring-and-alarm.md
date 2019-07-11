@@ -107,7 +107,7 @@ Milvus server收集数据 > 利用pull模式把所有数据导入Prometheus > �
    
       ![image-20190620191747161](assets/importdashboard.png)
    
-   6）下载json配置文件，并将其导入系统。
+   6）下载[json配置文件](assets/dashboard.json)，并将其导入系统。
    
       ![image-20190620191802408](assets/importjson.png)
 

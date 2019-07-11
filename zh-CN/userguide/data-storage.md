@@ -1,0 +1,19 @@
+---
+id: data-storage
+title: Data storage
+sidebar_label: Data storage
+---
+# 数据存储
+
+每次新导入Milvus的向量数据都会自动存储在2个地方：您本地的磁盘和[MinIO私有云](https://min.io/product/multi-cloud-gateway#multi-cloud-gateway). 
+
+将数据备份在云端可以保证数据检索时数据时完整且可以方便获取的。
+
+## 元数据存储
+
+Milvus中的元数据提供关于向量数据的各种信息，比如有几张表、每张表存储在何处等。根据你是使用单机部署还是分布式部署，你可以选择以下数据库存储元数据。
+
+| 数据库     |  Milvus部署方式 |
+|-----------|----------------|
+| SQLite 3  | 单机部署       |
+| MySQL     | 分布式部署     |

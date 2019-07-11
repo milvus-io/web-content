@@ -32,11 +32,9 @@ sidebar_label: Creating a table
 
 |  参数  |  描述  |  类型   |  参考值   |
 | ------------| --------------| --------| ---------|
-| table_name  | 要创建的表字（由数字、字母和下划线构成）| 字符串 | '表名' |
+| table_name  | 要创建的表名（只能是 _， 数字和字母组成，首个字符必须是_或者字母，不可以是数字。长度不可以超过255字符）| 字符串 | '表名' |
 | dimension   | 表格中向量的维度 | 整数 | 0 < dimension <= 16384, 通常设置为128、256或518维 
-| index_type  |有2种类型的检索类型: 1. `FLAT` - 精确向量索引类型；2. `IVFLAT` - 基于K-means的向量索引 |IndexType|FLAT / IVFLAT |
-
-> 注意：如果没有GPU，将index_type设置成`IVFLAT`，系统将报错。
+| index_type  |目前支持5种类型的检索类型: 1. 'FLAT' - 精确向量索引类型；2. 'IVFLAT' - 基于K-means的向量索引。|IndexType|FLAT / IVFLAT |
 
 1. 准备数据表的参数，比如：
   
@@ -44,6 +42,8 @@ sidebar_label: Creating a table
    # Prepare param
    >>> param = {'table_name':'test01', 'dimension':256, 'index_type':IndexType.FLAT}
    ```
+   
+   > 注意：表名是Milvus里面表的唯一标识符，请确保没有重复的表名存在。
    
 2. 创建表test01。
 
@@ -55,7 +55,7 @@ sidebar_label: Creating a table
    
 3. 检查确认已创建表的信息。
    ```
-   # Confirm table info.
+   # Verify table info.
    >>> status, table = milvus.describe_table('test01')
    >>> status
    Status(message='Describe table successfully!')
