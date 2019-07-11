@@ -36,25 +36,20 @@ Unstructured data (images/videos/texts/audios) are transformed to feature vector
 
 ## Use case 1 - Human face search
 
+### Background
+As the competition of commercial banks is becoming increasingly fierce, the competition for customer resources has been transformed from product-oriented to service-oriented. More and more banks will compete for enhanced customer experience through personalized services. When a customer comes into the store, it can be quickly determined whether the customer is an existing customer through face recognition, and the customer's personal file, containing such information as the name, age, product transactions, trading records, business habits can be instantly obtained so that the bank staff can provide personalized services.
+
 ### User requirements
 
-- VIP client notification
+- VIP customer notification
 
-VIP group library contains human face features of VIP clients. All human faces captured by the camera are to be compared to those in the library. Once a similar face is matched, an notification is sent to the system. 
+VIP customer library contains human face features of VIP customers. All human faces captured by the camera are to be compared to those in the library. Once a similar face is matched, an notification is sent to the system. 
 
-- One person one file
+- One customer one file
 
-A human face captured by the camera will be compared to those in the library to find the corresponding file containing all the information of the person.
+A human face captured by the camera will be compared to those in the library to find the corresponding file containing all the information of the customer.
 
-- Potential new customers
-
-For those face images that have no match in the library, they will be automatically added to the human face library.
-
-- Customer relationship management
-
-Categorize the face images according to the frequency it is indexed. The face images with the lower indexing frequency might be the target customers with whom to improve customer relationship. 
-
-### System application architecture
+### Application
 
 ![FaceSearch](assets/FaceSearch_en.png)
 
@@ -66,28 +61,20 @@ Categorize the face images according to the frequency it is indexed. The face im
 
   - VIP client notification: If a human face within the VIP group library is found, an notification is sent to the system.
   - Personal file search: Search for personal information file based on face ID. 
-  - Face categorization: Move certain face images to a special library for customer relationship management.
-
 
 - **Data libraries**
 
-  - VIP group library
+  - VIP customer library
 
     - Vector library with million datasets 
     - Great search precision and high indexing speed (QPS >= 1000) 
     - Batch search supported 
     
-  - Human face library
+  - Ordinary customer library
 
     - Vector library with billions of human face feature vectors
     - High indexing speed with a QPS of 1000
     - Batch search supported
-
-  - Special library
-
-    - Vector library with 0.2 billion new human face data
-    - Keeps 90 days' face vectors (about 18 billion)
-    - Batch search supported 
     
   - Information library
 
