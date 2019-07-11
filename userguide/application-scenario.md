@@ -37,7 +37,9 @@ Unstructured data (images/videos/texts/audios) are transformed to feature vector
 ## Use case 1 - Human face search
 
 ### Background
-As the competition of commercial banks is becoming increasingly fierce, the competition for customer resources has been transformed from product-oriented to service-oriented. More and more banks will compete for enhanced customer experience through personalized services. When a customer comes into the store, it can be quickly determined whether the customer is an existing customer through face recognition, and the customer's personal file, containing such information as the name, age, product transactions, trading records, business habits can be instantly obtained so that the bank staff can provide personalized services.
+As the competition of commercial banks is becoming increasingly fierce, the competition for customer resources has been transformed from product-oriented to service-oriented. More and more banks will compete for enhanced customer experience through personalized services. 
+
+Human face search can help recognize a customer and find his/her personal file. When a customer comes into the store, it can be quickly determined whether the customer is an existing customer through face recognition, and the customer's personal file, containing such information as the name, age, product transactions, trading records, business habits can be instantly obtained so that the bank staff can provide personalized services.
 
 ### User requirements
 
@@ -60,7 +62,7 @@ A human face captured by the camera will be compared to those in the library to 
 - **Application**
 
   - VIP client notification: If a human face within the VIP group library is found, an notification is sent to the system.
-  - Personal file search: Search for personal information file based on face ID. 
+  - Customer file search: Search for customer's personal file based on face ID. 
 
 - **Data libraries**
 
