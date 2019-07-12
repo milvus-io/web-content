@@ -8,7 +8,7 @@ sidebar_label: FAQ
 
 ### What is Milvus?
 
-Milvus is a feature vector database. It can be easily employed in x86 architecture server and virtual environment. It currently supports Linux operation system. 
+Milvus is a feature vector indexing database. It can be easily employed in x86 architecture server and virtual environment. It currently supports Linux operation system. 
     
 ### Are there any SDKs for Milvus?
 
@@ -20,16 +20,16 @@ Yes, Milvus is design for easy understanding and usage. You can treat Milvus as 
 
 ### Does Milvus has high availability?
 
-Yes, Milvus high availability characteristic ensures an agreed level of performance even if some of the sotrage or computing components failed. 
+Yes, Milvus is designed to be highly available. Milvus cluster especially ensures an agreed level of performance even if some of the storage or computing components fail. 
 
-### How does the search works in Milvus, after the vecters are imported?
+### How does the search works in Milvus?
 
-All vectors stored in Milvus will be given an ID. Users need to import vector ID and other features into another database system. When users search a vector, Milvus will return several IDs of vectors most similar to the target vector.
+All vectors stored in Milvus will be given an ID. When you search a vector, Milvus will return several IDs of vectors most similar to the target vector.
 
 
 ### How to choose vector indexing type?
 
-In Milvus, users can choose from the following 2 index types:
+In Milvus, you can choose from the following index types:
 
 - Flat
 
@@ -43,3 +43,7 @@ In Milvus, users can choose from the following 2 index types:
 ### Does Milvus support searching while inserting?
 
 Absolutely. 
+
+### Where is the data stored?
+
+Vector data can be stored either in your local disk or MinIO cloud. For more details about storage, read [Data storage](../userguide/data_storage.md).
