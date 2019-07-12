@@ -142,7 +142,7 @@ Milvus helps you realize product feature extraction and multimodal search by the
 
 ## Use case 4 - Video deduplication
 
-### background
+### Background
 
 Today, online shopping and product trading has becoming a daily routine. On commodity trading platforms such as Taobao and Xianyu, sellers can display products to customers more fully and intuitively through product videos. Meanwhile, product video copying and plagiarism have also appeared. One solution to find a duplicate video is by vector similarity search.
 
