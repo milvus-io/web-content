@@ -81,7 +81,7 @@ sidebar_label: Milvus Quick Start
 
    如果需要进一步了解Milvus Python SDK，请阅读[Milvus Python SDK使用手册](https://pypi.org/project/pymilvus)。
 
-3. 下载Python示例代码：https://github.com/milvus-io/pymilvus/blob/master/examples/example.py
+3. 下载Python示例代码：https://github.com/milvus-io/pymilvus/blob/branch-0.3.0/examples/example.py
 4. 运行示例。
 
    ```shell
