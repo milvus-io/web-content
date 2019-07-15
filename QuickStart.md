@@ -29,14 +29,14 @@ In this guide, we will walk you through installing Milvus Docker as well as runn
 
    ```shell
    # Download Milvus Docker image
-   $ docker pull milvusdb/milvus:latest
+   $ docker pull milvusdb/milvus:0.3.0
    ```
 
 2. Start Milvus server.
 
    ```shell
    # Start Milvus
-   $ nvidia-docker run -td --runtime=nvidia -p 19530:19530 -v /home/$USER/milvus/db:/opt/milvus/db milvusdb/milvus:latest
+   $ nvidia-docker run -td --runtime=nvidia -p 19530:19530 -v /home/$USER/milvus/db:/opt/milvus/db milvusdb/milvus:0.3.0
    ```
 
 3. Get Milvus container id.

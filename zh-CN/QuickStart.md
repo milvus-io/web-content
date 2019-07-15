@@ -43,14 +43,14 @@ sidebar_label: Milvus Quick Start
 
    ```shell
    # Download Milvus Docker image
-   $ docker pull milvusdb/milvus:latest
+   $ docker pull milvusdb/milvus:0.3.0
    ```
 
 2. 启动Milvus server。
 
    ```shell
    # Start Milvus
-   $ nvidia-docker run -td --runtime=nvidia -p 19530:19530 -v /home/$USER/milvus/db:/opt/milvus/db milvusdb/milvus:latest
+   $ nvidia-docker run -td --runtime=nvidia -p 19530:19530 -v /home/$USER/milvus/db:/opt/milvus/db milvusdb/milvus:0.3.0
    ```
 
 3. 获得Milvus container id。
