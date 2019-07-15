@@ -34,6 +34,3 @@ sidebar_label: FAQ
 
   支持。
 
-### 数据存储在哪里？
-
-向量数据可以存储在您的本地磁盘，或是MinIO云上。若要了解更多，请阅览[数据存储](../userguide/data_storage.md).
