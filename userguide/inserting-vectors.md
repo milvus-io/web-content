@@ -1,12 +1,12 @@
 ---
-id: incerting-vectors
-title: Incerting vectors
-sidebar_label: Incerting vectors
+id: inserting-vectors
+title: Inserting vectors
+sidebar_label: Inserting vectors
 ---
 
-# Incerting vectors
+# Inserting vectors
 
-When you have successfully created tables in Milvus, you can start inserting data into the table. Of course, one prerequisite of this step is that you already have proper multi-dimensional vectors. Before importing vectors to the table, get familiar with the related parameters:
+When you have successfully created tables in Milvus, you can start inserting data into the table. Of course, one prerequisite of this step is that you already have proper multi-dimensional vectors. Before inserting vectors to the table, get familiar with the related parameters:
 
 |Parameter|Description|Type|Reference value|
 |---------|-----------|----|-----|
@@ -16,7 +16,7 @@ When you have successfully created tables in Milvus, you can start inserting dat
 Following the above mentioned example, below content demonstrates how to insert 20 256-dimensional vectors(represented by "records" in the code) into Table test01:
 
 ```
-# Incert vectors
+# Insert vectors
 >>> status, ids = milvus.add_vectors(table_name='test01', records=vectors)
 >>> status
 Status(code=0, message='Success')
