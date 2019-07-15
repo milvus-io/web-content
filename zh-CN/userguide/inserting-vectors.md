@@ -1,7 +1,7 @@
 ---
-id: incerting-vectors
-title: Incerting vectors
-sidebar_label: Incerting vectors
+id: inserting-vectors
+title: Inserting vectors
+sidebar_label: Inserting vectors
 ---
 
 # 插入向量数据
@@ -16,7 +16,7 @@ sidebar_label: Incerting vectors
 紧接着上面的例子，以下展示如何向Table 01插入20条256维的向量数据（在下面的代码中用vectors表示）：
 
 ```
-# Incert vectors
+# Insert vectors
 >>> status, ids = milvus.add_vectors(table_name='test01', records=vectors)
 >>> status
 Status(code=0, message='Success')
