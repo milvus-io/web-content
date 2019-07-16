@@ -9,7 +9,7 @@ sidebar_label: Monitoring and alarm
 ## Monitoring introduction
 A database monitoring system helps you track database performance and corresponds to unexpected emergency issues. With Milvus, you can use the monitoring system build on [Prometheus](https://prometheus.io/) and [Grafana](https://grafana.com/). Here is how the Milvus monitor works:
 
-Milvus server collects data > Collected data is imported to Prometheus > Monitoring items are displayed in Grafana-supported dashboard
+Milvus server collects data -> Collected data is imported to Prometheus -> Monitoring items are displayed in Grafana-supported dashboard
 
 
 ## Installing and configuring monitor
