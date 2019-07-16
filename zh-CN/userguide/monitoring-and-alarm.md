@@ -11,7 +11,7 @@ sidebar_label: Monitoring and alarm
 
 Milvus server收集数据 -> 利用pull模式把所有数据导入Prometheus -> 通过Grafana展示各项监控指标。
 
-一旦发生告警，Prometheus会将告警信息可以推送给AlertManager，并通过Email或者WeChat通知用户。告警系统架构如下：
+一旦发生系统故障，Prometheus会将告警信息可以推送给AlertManager，并通过Email或者WeChat通知用户。告警系统架构如下：
 
 ![Monitoring](assets/Monitoring.png)
 
