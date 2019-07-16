@@ -152,10 +152,10 @@ You can set various rules for Milvus alarm. An example might be when the server 
       global:
         resolve_timeout: 1m
         smtp_smarthost: 'smtp.163.com:25' # smtp server config
-        smtp_from: '×××@163.com'          # sender mail account
-        smtp_auth_username: '×××@163.com' # sender mail account
-        smtp_auth_password: '××××××××'    # sender mail password
-        smtp_hello: '163.com'             # sender mail suffix
+        smtp_from: '×××@163.com'          # sender email account
+        smtp_auth_username: '×××@163.com' # sender email account
+        smtp_auth_password: '××××××××'    # sender email password
+        smtp_hello: '163.com'             # sender email suffix
         smtp_require_tls: false
       route:
         group_by: ['alertname']
@@ -164,7 +164,7 @@ You can set various rules for Milvus alarm. An example might be when the server 
       receivers:
         - name: 'default'
           email_configs:
-          - to: '××××@××.com'             # receiver mail address
+          - to: '××××@××.com'             # receiver email address
       ```
    
    2) Start Alertmanager by setting --config.file to *milvus.yml*.
