@@ -154,10 +154,10 @@ Milvus server收集数据 -> 利用pull模式把所有数据导入Prometheus -> 
       global:
         resolve_timeout: 1m
         smtp_smarthost: 'smtp.163.com:25' # smtp server config
-        smtp_from: '×××@163.com'          # sender mail account
-        smtp_auth_username: '×××@163.com' # sender mail account
-        smtp_auth_password: '××××××××'    # sender mail password
-        smtp_hello: '163.com'             # sender mail suffix
+        smtp_from: '×××@163.com'          # sender email account
+        smtp_auth_username: '×××@163.com' # sender email account
+        smtp_auth_password: '××××××××'    # sender email password
+        smtp_hello: '163.com'             # sender email suffix
         smtp_require_tls: false
       route:
         group_by: ['alertname']
@@ -166,7 +166,7 @@ Milvus server收集数据 -> 利用pull模式把所有数据导入Prometheus -> 
       receivers:
         - name: 'default'
           email_configs:
-          - to: '××××@××.com'             # receiver mail address
+          - to: '××××@××.com'             # receiver email address
       ```
    
    2）启动Alertmanager。
