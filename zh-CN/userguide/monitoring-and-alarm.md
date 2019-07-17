@@ -17,13 +17,9 @@ Milvus server收集数据 -> 利用pull模式把所有数据导入Prometheus -> 
 
 
 
-## 监控安装设置
+## 启用监控功能
 
-1. 安装Prometheus和Grafana。
-
-   - [安装Prometheus Server](https://github.com/prometheus/prometheus#install)
-
-   - [安装Grafana](http://docs.grafana.org)
+1. [安装Prometheus](https://prometheus.io/download/#prometheus)。
 
 2. 设置Prometheus。
 
@@ -82,28 +78,35 @@ Milvus server收集数据 -> 利用pull模式把所有数据导入Prometheus -> 
             labels:
               serverity: page
       ```
+      > 提示：你可以为Milvus设置各种告警规则，以上示例代码中例子为：当服务器无法正常工作时，会立即发邮件通知相关用户。
 
-3. 设置Grafana
+   3）启动Prometheus。
+      ```
+      $ ./prometheus
+      ```
 
-   1）打开terminal，执行以下命令
+3. 安装Grafana，另开一个terminal并运行以下命令：
    
       ```
       $ docker run -i -p 3000:3000 grafana/grafana
       ```
+4. 设置Grafana
    
-   2）登录Grafana网页(localhost:3000)，在*data source type*选项框选择*Prometheus*。
+   1）登录Grafana网页(localhost:3000)，在左侧导航栏，点击Configuration图标，并选择*Data Sources*。
+   
+   2) 在*Data Sources*页面，选项框内选择*Prometheus*。
    
       ![image-20190620191640605](assets/datasource.png)
    
-   3）在HTTP区域，将URL设置成Prometheus的服务器地址http://localhost:9090, 将*ACCESS*设置成*Browser*，点击*Save & Test*。
+   3）在*Settings*页面的HTTP区域，将*URL*设置成Prometheus的服务器地址*http://localhost:9090*, 将*ACCESS*设置成*Browser*，点击*Save & Test*。
    
       ![image-20190620191702697](assets/settings.png)
    
-   4）点击页面左上角的*New dashboard*。
+   4）在左侧导航栏，点击Create图标并选择*Dashboard*。然后点击页面左上角的*New dashboard*。
    
       ![image-20190620191721734](assets/dashboard.png)
    
-   5）点击右侧的*Import dashboard*。
+   5）点击页面右侧的*Import dashboard*。
    
       ![image-20190620191747161](assets/importdashboard.png)
    
@@ -145,10 +148,16 @@ Milvus server收集数据 -> 利用pull模式把所有数据导入Prometheus -> 
 目前，Milvus监控默认的监控频率为：1次/秒，你也可以[更改监控设置](https://prometheus.io/docs/prometheus/latest/configuration/configuration/)。
 
 
-## 设置告警规则
-你可以为Milvus设置告警规则，比如：当服务器无法正常工作时，会立即发邮件通知相关用户。你可以按照以下操作进行：
+## 启用告警功能
+Milvus告警系统基于Alertmanager创建。异常发生时，Prometheus会向Alertmanager发送告警消息，Alertmanager再通过邮件给客户发送通知。告警系统架构如下：
 
-   1）在Alertmanager根目录下创建*milvus.yml*文件，内容如下：
+![Monitoring](assets/Monitoring.png)
+
+若要启动告警功能，请按照以下操作进行：
+
+   1）[安装Alertmanager](prometheus.io/download/#alertmanager)。
+
+   2）在Alertmanager根目录下创建*milvus.yml*文件，内容如下：
 
       ```
       global:
@@ -168,11 +177,12 @@ Milvus server收集数据 -> 利用pull模式把所有数据导入Prometheus -> 
           email_configs:
           - to: '××××@××.com'             # receiver email address
       ```
-   
+    > 提示：若要获取*smtp_auth_password*，请登录您的邮箱，并在*设置*页面启用*SMTP*服务。然后，您可以在*客户端授权密码*页面设置相应密码。
+
    2）启动Alertmanager。
 
       ```
       ./alertmanager --config.file=milvus.yml
       ```
-提示：如果你想自定义告警设置，请参考[告警设置](https://prometheus.io/docs/alerting/configuration/#configuration-file)
+> 提示：如果你想自定义告警设置，请参考[告警设置](https://prometheus.io/docs/alerting/configuration/#configuration-file)
 

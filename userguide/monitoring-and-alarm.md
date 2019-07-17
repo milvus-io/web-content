@@ -14,15 +14,11 @@ Milvus server collects data -> Collected data is imported to Prometheus -> Monit
 
 ## Installing and configuring monitor
 
-1. Install Prometheus and Grafana.
-
-   - [Installing Prometheus Server](https://github.com/prometheus/prometheus#install)
-
-   - [Installing Grafana](http://docs.grafana.org)
+1. [Install Prometheus](https://prometheus.io/download/#prometheus).
 
 2. Make certain configurations in Prometheus.
 
-   1) Open configuration file *prometheus.yml* under Prometheus root path, and update file *alerting*, *rule_files* and *scrape_configs* as follows:
+   1) Under Prometheus root directory, open configuration file *prometheus.yml*, and update file *alerting*, *rule_files* and *scrape_configs* as follows:
    
       ```yaml
       # my global config
@@ -65,7 +61,7 @@ Milvus server collects data -> Collected data is imported to Prometheus -> Monit
           - targets: ['localhost:9091']
       ```
    
-   2) Create a file *serverdown.yml* under Prometheus root path, with these rules: 
+   2) Create a file *serverdown.yml* under Prometheus root directory, with these rules: 
 
       ```yaml
       groups:
@@ -77,24 +73,31 @@ Milvus server collects data -> Collected data is imported to Prometheus -> Monit
             labels:
               serverity: page
       ```
+      > Note: You can set various rules for Milvus alarm. The example in the above code is: when the server is down, an email will be sent instantly to a specified user. 
 
-3. Configuring Grafana
+   3) Start Prometheus service.
+      ```
+      $ ./prometheus --config.file=prometheus.yml
+      ```
 
-   1) Open the terminal and run this command: 
+3. Install Grafana by running this command in a seperate terminal.
    
       ```
       $ docker run -i -p 3000:3000 grafana/grafana
       ```
-   
-   2) Log in to Grafana website (localhost:3000), and in *data source type*, choose *Prometheus*.
+4. Make configurations in Grafana.
+
+   1) Log in to Grafana website (localhost:3000), and click the Configuration icon on the left menu, then choose *Data Sources*.
+
+   2) On *Data Sources* tab, choose *Prometheus* as the data source type.
    
       ![image-20190620191640605](assets/datasource.png)
    
-   3) Change URL to Prometheus server address http://localhost:9090, and in *ACCESS*, choose *Browser*. Then click *Save & Test*.
+   3) On *Settings* tab, in *URL* field, enter the Prometheus server address http://localhost:9090; and in *ACCESS*, choose *Browser*. Then click *Save & Test*.
    
       ![image-20190620191702697](assets/settings.png)
    
-   4) On the top left corner of the page, click *New dashboard*.
+   4) On the left menu bar, click the Create icon and choose *Dashboard*. On the top left corner of the page, click *New dashboard*.
 
       ![image-20190620191721734](assets/dashboard.png)
    
@@ -139,14 +142,16 @@ On the GUI dashboard of Milvus monitoring system, you can check these monitoring
 The default Milvus monitoring frequency is 1 time/second. If you want to change it, you may read [Monitoring configuration](https://prometheus.io/docs/prometheus/latest/configuration/configuration/).
 
 
-## Configuring alarm rules
+## Enabling alarm
 The Milvus alarm system works on Alertmanager, which receives alarm messages from Prometheus once abnormalities occur. The alarm architecture looks like this: 
 
 ![Monitoring](assets/Monitoring.png)
 
-You can set various rules for Milvus alarm. An example might be when the server is down, an email will be sent instantly to a specified user. You may proceed as follows:
+To enable alarm in Milvus, proceed as follows:
 
-   1) Create a file *milvus.yml* under Alertmanager root path.
+   1) [Install Alertmanager](https://prometheus.io/download/#alertmanager).
+
+   2) Create a file *milvus.yml* under Alertmanager root directory, and add the following content to it.
 
       ```
       global:
@@ -154,7 +159,7 @@ You can set various rules for Milvus alarm. An example might be when the server 
         smtp_smarthost: 'smtp.163.com:25' # smtp server config
         smtp_from: '×××@163.com'          # sender email account
         smtp_auth_username: '×××@163.com' # sender email account
-        smtp_auth_password: '××××××××'    # sender email password
+        smtp_auth_password: '××××××××'    # smtp authorization password
         smtp_hello: '163.com'             # sender email suffix
         smtp_require_tls: false
       route:
@@ -166,8 +171,9 @@ You can set various rules for Milvus alarm. An example might be when the server 
           email_configs:
           - to: '××××@××.com'             # receiver email address
       ```
-   
-   2) Start Alertmanager by setting --config.file to *milvus.yml*.
+   > Note: To get *smtp_auth_password*, log in to your email and enable *SMTP* services in the *Settings* page. Then you can set the password in the SMTP auth password page.
+
+   2) Start Alertmanager.
 
       ```
       ./alertmanager --config.file=milvus.yml

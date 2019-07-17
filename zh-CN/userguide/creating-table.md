@@ -27,6 +27,8 @@ sidebar_label: Creating a table
    Status(message='connected!', code=0)
 
    ```
+   > 提示：在上述示例代码中，*host*和*port*用的都是默认值。它们应该与您在*设置Milvus*章节中*server_config*文件中的*address*和*port*一致。
+   
 ## 创建表
 我们以创建Table test01为例，向您展示如何创建一张数据表。以下是数据表相关参数，在创建表时可以根据实际需求选择：
 

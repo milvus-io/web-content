@@ -23,10 +23,12 @@ When you have finished the installation and basic configuration of Milvus, you m
    ```
    # Connect Milvus to server
    >>> milvus = Milvus()
-   >>> milvus.connect(host='SERVER-HOST', port='SERVER-PORT')
+   >>> milvus.connect(host='0.0.0.0', port='19530')
    Status(message='connected!', code=0)
 
    ```
+   > Note: In the above code, default values are used for *host* and *port* parameters. They shoud be the value of the *address* and *port* you set in *server_config* file in *Configuring Milvus*.
+   
 ## Creating a table
 This section shows you how to create a table in Milvus. To make it easier to understand, all task procedures are based on an example of  Table test01 creation. Here are all related parameters. You can set parameter values to your needs.
 
