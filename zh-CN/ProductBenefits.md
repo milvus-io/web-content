@@ -9,7 +9,7 @@ sidebar_label: Product Benefits
 
 ## GPU加速搜索系统
 
-Milvus针对大规模向量数据索引而设计。CPU/GPU异核计算让您的数据处理速度提高1000倍以上。
+Milvus针对大规模向量数据索引而设计。CPU/GPU异构众核计算让您的数据处理速度提高1000倍以上。
 
 
 ## 智能索引，数据弹性伸缩
