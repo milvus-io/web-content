@@ -9,9 +9,9 @@ sidebar_label: Monitoring and alarm
 ## 监控告警概述
 如果你想跟踪数据库系统运行表现，你可以选择为Milvus创建监控中心。你可以自行搭建，也可以直接使用我们提供的基于开源监控框架Prometheus的Milvus监控中心。其主要工作流程如下：
 
-Milvus server收集数据 -> 利用pull模式把所有数据导入Prometheus -> 通过Grafana展示各项监控指标。
+Milvus server收集数据 -> 利用pull模式把所有数据导入Prometheus -> 通过Grafana仪表盘展示各项监控指标。
 
-一旦发生系统故障，Prometheus会将告警信息可以推送给AlertManager，并通过Email或者WeChat通知用户。告警系统架构如下：
+一旦发生系统故障，Prometheus会将告警信息可以推送给AlertManager，并通过邮件通知用户。告警系统架构如下：
 
 ![Monitoring](assets/Monitoring.png)
 
@@ -114,15 +114,15 @@ Milvus server收集数据 -> 利用pull模式把所有数据导入Prometheus -> 
    
       ![image-20190620191802408](assets/importjson.png)
 
-   成功之后，将会出现我们提供的监控面板：
+   成功之后，将会出现我们提供的监控仪表盘：
    
    ![image-20190620134549612](assets/prometheus.png)
 
 
 ## 监控指标
-在Milvus监控系统的GUI控制板上，你可以查看监控数据库的各项指标，实时了解数据库运行表现。
+在Milvus监控系统的GUI仪表盘上，你可以查看监控数据库的各项指标，实时了解数据库运行表现。
 
-以下是控制板上可以查看的监控项：
+以下是仪表盘上可以查看的监控项：
 
 |    监控项       |      说明                        |
 |----------------|----------------------------------|
@@ -179,7 +179,7 @@ Milvus告警系统基于Alertmanager创建。异常发生时，Prometheus会向A
       ```
     > 提示：若要获取*smtp_auth_password*，请登录您的邮箱，并在*设置*页面启用*SMTP*服务。然后，您可以在*客户端授权密码*页面设置相应密码。
 
-   2）启动Alertmanager。
+   3）启动Alertmanager。
 
       ```
       ./alertmanager --config.file=milvus.yml
