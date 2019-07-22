@@ -36,17 +36,19 @@ In this guide, we will walk you through installing Milvus Docker as well as runn
 
    ```shell
    # Start Milvus
-   $ nvidia-docker run -td --runtime=nvidia -p 19530:19530 -v /home/$USER/milvus/db:/opt/milvus/db milvusdb/milvus:0.3.0
-   ```
+   $ nvidia-docker run -td --runtime=nvidia -p 19530:19530 -p8080:8080 -v /home/$USER/milvus/db:/opt/milvus/db -v /home/$USER/milvus/conf:/opt/milvus/conf -v /home/$USER/milvus/logs:/opt/milvus/logs milvusdb/milvus:0.3.0
 
-3. Get Milvus container id.
+   ```
+3. Download Milvus configuration files, including [server config](https://github.com/milvus-io/docs/blob/branch-0.3.0/assets/server_config.yaml) and [log config](https://github.com/milvus-io/docs/blob/branch-0.3.0/assets/log_config.conf), and add them to */home/$USER/milvus*.
+
+4. Get Milvus container id.
 
    ```shell
    # Get Milvus container id
    $ docker ps -a
    ```
 
-4. Confirm Milvus running status.
+5. Confirm Milvus running status.
 
    ```shell
    # Make sure Milvus is up and running
@@ -57,7 +59,7 @@ In this guide, we will walk you through installing Milvus Docker as well as runn
 
 Now, let's run a Python example program. You will need to create a vector data table, insert 10 vectors, and then run a vector similarity search.
 
-1. Make sure [Python3](https://www.python.org/downloads/ ) is already installed. 
+1. Make sure [Python 3.4](https://www.python.org/downloads/) or higher is already installed and in use.
 
 2. Install Milvus Python SDK.
 
@@ -66,9 +68,10 @@ Now, let's run a Python example program. You will need to create a vector data t
    $ pip install pymilvus==0.1.13
    ```
 
-   > Note: To learn more about Milvus Python SDK, go to [Milvus Python SDK Playbook](https://pypi.org/project/pymilvus).
+   > Note: To learn more about Milvus Python SDK, go to [Milvus Python SDK Playbook](https://pypi.org/project/pymilvus). 
+   > Caution: Depending on the Milvus version you use, you may not need to upgrade Pymilvus to the latest version unless required to.
 
-3. Download Python example code at https://github.com/milvus-io/pymilvus/blob/branch-0.3.0/examples/example.py.
+3. Create a new file *example.py*, and add [Python example code](https://github.com/milvus-io/pymilvus/blob/branch-0.3.0/examples/example.py) to it.
 
 4. Run the example code.
 

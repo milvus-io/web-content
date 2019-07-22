@@ -9,21 +9,17 @@ sidebar_label: Monitoring and alarm
 ## 监控告警概述
 如果你想跟踪数据库系统运行表现，你可以选择为Milvus创建监控中心。你可以自行搭建，也可以直接使用我们提供的基于开源监控框架Prometheus的Milvus监控中心。其主要工作流程如下：
 
-Milvus server收集数据 > 利用pull模式把所有数据导入Prometheus > 通过Grafana展示各项监控指标。
+Milvus server收集数据 -> 利用pull模式把所有数据导入Prometheus -> 通过Grafana仪表盘展示各项监控指标。
 
-一旦发生告警，Prometheus会将告警信息可以推送给AlertManager，并通过Email或者WeChat通知用户。告警系统架构如下：
+一旦发生系统故障，Prometheus会将告警信息可以推送给AlertManager，并通过邮件通知用户。告警系统架构如下：
 
 ![Monitoring](assets/Monitoring.png)
 
 
 
-## 监控安装设置
+## 启用监控功能
 
-1. 安装Prometheus和Grafana。
-
-   - [安装Prometheus Server](https://github.com/prometheus/prometheus#install)
-
-   - [安装Grafana](http://docs.grafana.org)
+1. [安装Prometheus](https://prometheus.io/download/#prometheus)。
 
 2. 设置Prometheus。
 
@@ -82,28 +78,35 @@ Milvus server收集数据 > 利用pull模式把所有数据导入Prometheus > �
             labels:
               serverity: page
       ```
+      > 提示：你可以为Milvus设置各种告警规则，以上示例代码中例子为：当服务器无法正常工作时，会立即发邮件通知相关用户。
 
-3. 设置Grafana
+   3）启动Prometheus。
+      ```
+      $ ./prometheus
+      ```
 
-   1）打开terminal，执行以下命令
+3. 安装Grafana，另开一个terminal并运行以下命令：
    
       ```
       $ docker run -i -p 3000:3000 grafana/grafana
       ```
+4. 设置Grafana
    
-   2）登录Grafana网页(localhost:3000)，在*data source type*选项框选择*Prometheus*。
+   1）登录Grafana网页(localhost:3000)，在左侧导航栏，点击Configuration图标，并选择*Data Sources*。
+   
+   2) 在*Data Sources*页面，选项框内选择*Prometheus*。
    
       ![image-20190620191640605](assets/datasource.png)
    
-   3）在HTTP区域，将URL设置成Prometheus的服务器地址http://localhost:9090, 将*ACCESS*设置成*Browser*，点击*Save & Test*。
+   3）在*Settings*页面的HTTP区域，将*URL*设置成Prometheus的服务器地址*http://localhost:9090*, 将*ACCESS*设置成*Browser*，点击*Save & Test*。
    
       ![image-20190620191702697](assets/settings.png)
    
-   4）点击页面左上角的*New dashboard*。
+   4）在左侧导航栏，点击Create图标并选择*Dashboard*。然后点击页面左上角的*New dashboard*。
    
       ![image-20190620191721734](assets/dashboard.png)
    
-   5）点击右侧的*Import dashboard*。
+   5）点击页面右侧的*Import dashboard*。
    
       ![image-20190620191747161](assets/importdashboard.png)
    
@@ -111,15 +114,15 @@ Milvus server收集数据 > 利用pull模式把所有数据导入Prometheus > �
    
       ![image-20190620191802408](assets/importjson.png)
 
-   成功之后，将会出现我们提供的监控面板：
+   成功之后，将会出现我们提供的监控仪表盘：
    
    ![image-20190620134549612](assets/prometheus.png)
 
 
 ## 监控指标
-在Milvus监控系统的GUI控制板上，你可以查看监控数据库的各项指标，实时了解数据库运行表现。
+在Milvus监控系统的GUI仪表盘上，你可以查看监控数据库的各项指标，实时了解数据库运行表现。
 
-以下是控制板上可以查看的监控项：
+以下是仪表盘上可以查看的监控项：
 
 |    监控项       |      说明                        |
 |----------------|----------------------------------|
@@ -145,19 +148,25 @@ Milvus server收集数据 > 利用pull模式把所有数据导入Prometheus > �
 目前，Milvus监控默认的监控频率为：1次/秒，你也可以[更改监控设置](https://prometheus.io/docs/prometheus/latest/configuration/configuration/)。
 
 
-## 设置告警规则
-你可以为Milvus设置告警规则，比如：当服务器无法正常工作时，会立即发邮件通知相关用户。你可以按照以下操作进行：
+## 启用告警功能
+Milvus告警系统基于Alertmanager创建。异常发生时，Prometheus会向Alertmanager发送告警消息，Alertmanager再通过邮件给客户发送通知。告警系统架构如下：
 
-   1）在Alertmanager根目录下创建*milvus.yml*文件，内容如下：
+![Monitoring](assets/Monitoring.png)
+
+若要启动告警功能，请按照以下操作进行：
+
+   1）[安装Alertmanager](prometheus.io/download/#alertmanager)。
+
+   2）在Alertmanager根目录下创建*milvus.yml*文件，内容如下：
 
       ```
       global:
         resolve_timeout: 1m
         smtp_smarthost: 'smtp.163.com:25' # smtp server config
-        smtp_from: '×××@163.com'          # sender mail account
-        smtp_auth_username: '×××@163.com' # sender mail account
-        smtp_auth_password: '××××××××'    # sender mail password
-        smtp_hello: '163.com'             # sender mail suffix
+        smtp_from: '×××@163.com'          # sender email account
+        smtp_auth_username: '×××@163.com' # sender email account
+        smtp_auth_password: '××××××××'    # sender email password
+        smtp_hello: '163.com'             # sender email suffix
         smtp_require_tls: false
       route:
         group_by: ['alertname']
@@ -166,13 +175,14 @@ Milvus server收集数据 > 利用pull模式把所有数据导入Prometheus > �
       receivers:
         - name: 'default'
           email_configs:
-          - to: '××××@××.com'             # receiver mail address
+          - to: '××××@××.com'             # receiver email address
       ```
-   
-   2）启动Alertmanager。
+    > 提示：若要获取*smtp_auth_password*，请登录您的邮箱，并在*设置*页面启用*SMTP*服务。然后，您可以在*客户端授权密码*页面设置相应密码。
+
+   3）启动Alertmanager。
 
       ```
       ./alertmanager --config.file=milvus.yml
       ```
-提示：如果你想自定义告警设置，请参考[告警设置](https://prometheus.io/docs/alerting/configuration/#configuration-file)
+> 提示：如果你想自定义告警设置，请参考[告警设置](https://prometheus.io/docs/alerting/configuration/#configuration-file)
 

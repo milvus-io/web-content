@@ -50,17 +50,19 @@ sidebar_label: Milvus Quick Start
 
    ```shell
    # Start Milvus
-   $ nvidia-docker run -td --runtime=nvidia -p 19530:19530 -v /home/$USER/milvus/db:/opt/milvus/db milvusdb/milvus:0.3.0
+   $ nvidia-docker run -td --runtime=nvidia -p 19530:19530 -p8080:8080 -v /home/$USER/milvus/db:/opt/milvus/db -v /home/$USER/milvus/conf:/opt/milvus/conf -v /home/$USER/milvus/logs:/opt/milvus/logs milvusdb/milvus:0.3.0
    ```
+   
+3. 下载Milvus设置文件，包含[server config](https://github.com/milvus-io/docs/blob/branch-0.3.0/assets/server_config.yaml)和[log config](https://github.com/milvus-io/docs/blob/branch-0.3.0/assets/log_config.conf)，并将它们加到*/home/$USER/milvus*路径下。
 
-3. 获得Milvus container id。
+4. 获得Milvus container id。
 
    ```shell
    # Get Milvus container id
    $ docker ps -a
    ```
 
-4. 确认Milvus运行状态。
+5. 确认Milvus运行状态。
 
    ```shell
    # Make sure Milvus is up and running
@@ -79,10 +81,11 @@ sidebar_label: Milvus Quick Start
    $ pip install pymilvus==0.1.13
    ```
 
-   如果需要进一步了解Milvus Python SDK，请阅读[Milvus Python SDK使用手册](https://pypi.org/project/pymilvus)。
+   > 提示：如果需要进一步了解Milvus Python SDK，请阅读[Milvus Python SDK使用手册](https://pypi.org/project/pymilvus)。
+   > 注意：取决于您所使用的Milvus版本，你不一定要将Pymilvus升级到最新版本。
 
-3. 下载Python示例代码：https://github.com/milvus-io/pymilvus/blob/branch-0.3.0/examples/example.py
-4. 运行示例。
+3. 创建*example.py*文件，并向文件中加入[Python示例代码](https://github.com/milvus-io/pymilvus/blob/branch-0.3.0/examples/example.py)。
+4. 运行示例代码。
 
    ```shell
    # Run Milvus Python example
