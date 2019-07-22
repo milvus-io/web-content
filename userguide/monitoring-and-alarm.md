@@ -11,6 +11,8 @@ A database monitoring system helps you track database performance and correspond
 
 Milvus server collects data -> Collected data is imported to Prometheus -> Monitoring items are displayed in Grafana-supported dashboard
 
+> Attention: To enable monitoring and alarm function in Milvus, make sure the parameter *is_startup* is *on* in file *metric_config* under the directory *home/$USER/milvus/conf/server_config.yaml*.
+
 
 ## Installing and configuring monitor
 
@@ -48,19 +50,20 @@ Milvus server collects data -> Collected data is imported to Prometheus -> Monit
 
           static_configs:
           - targets: ['localhost:9090']
-  
+      ```
+
   	   # scrape metrics of server
         - job_name: 'milvus_server'
           scrape_interval: 1s
           static_configs:
           - targets: ['localhost:8080']
-    
+
   	      # under development
         - job_name: 'pushgateway'
           static_configs:
           - targets: ['localhost:9091']
       ```
-   
+
    2) Create a file *serverdown.yml* under Prometheus root directory, with these rules: 
 
       ```yaml
@@ -126,7 +129,7 @@ On the GUI dashboard of Milvus monitoring system, you can check these monitoring
 | CPU utilization ratio       |     Ratio of used CPU to total CPU                   |
 | CPU usage      |     real-time used CPU                    |
 | Internet IO          |    Internet IO read/write speed (per second)          |
-| Disk read & write speed     |    Disk read & write speed                   | 
+| Disk read & write speed     |    Disk read & write speed                   |
 | **Milvus parameters**  |                                  |
 | Data inserting speed     |         Total amount of data inserted per seconds     |
 | Data file total number     |       Total number of files in Milvus      |
@@ -165,7 +168,7 @@ To enable alarm in Milvus, proceed as follows:
       route:
         group_by: ['alertname']
         receiver: default
-
+    
       receivers:
         - name: 'default'
           email_configs:
