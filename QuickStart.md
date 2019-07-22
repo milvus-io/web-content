@@ -32,23 +32,34 @@ In this guide, we will walk you through installing Milvus Docker as well as runn
    $ docker pull milvusdb/milvus:0.3.0
    ```
 
-2. Start Milvus server.
+2. Create Milvus file.
+
+   ```shell
+   # Create Milvus file
+   $ mkdir /home/$USER/milvus
+   $ cd /home/$USER/milvus
+   $ mkdir conf
+   $ cd conf
+   ```
+
+3. Download Milvus configuration files, including [server config](https://github.com/milvus-io/docs/blob/branch-0.3.0/assets/server_config.yaml) and [log config](https://github.com/milvus-io/docs/blob/branch-0.3.0/assets/log_config.conf), and add them to the newly created Milvus file at */home/$USER/milvus*.
+
+4. Start Milvus server.
 
    ```shell
    # Start Milvus
-   $ nvidia-docker run -td --runtime=nvidia -p 19530:19530 -p8080:8080 -v /home/$USER/milvus/db:/opt/milvus/db -v /home/$USER/milvus/conf:/opt/milvus/conf -v /home/$USER/milvus/logs:/opt/milvus/logs milvusdb/milvus:0.3.0
+   $ nvidia-docker run -td --runtime=nvidia -p 19530:19530 -p 8080:8080 -v /home/$USER/milvus/db:/opt/milvus/db -v /home/$USER/milvus/conf:/opt/conf -v /home/$USER/milvus/logs:/opt/milvus/logs milvusdb/milvus:0.3.0
 
    ```
-3. Download Milvus configuration files, including [server config](https://github.com/milvus-io/docs/blob/branch-0.3.0/assets/server_config.yaml) and [log config](https://github.com/milvus-io/docs/blob/branch-0.3.0/assets/log_config.conf), and add them to */home/$USER/milvus*.
 
-4. Get Milvus container id.
+5. Get Milvus container id.
 
    ```shell
    # Get Milvus container id
    $ docker ps -a
    ```
 
-5. Confirm Milvus running status.
+6. Confirm Milvus running status.
 
    ```shell
    # Make sure Milvus is up and running
