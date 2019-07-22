@@ -56,7 +56,7 @@ sidebar_label: Milvus Quick Start
    $ cd conf
    ```
 
-3. 下载Milvus设置文件，包含[server config](https://github.com/milvus-io/docs/blob/branch-0.3.0/assets/server_config.yaml)和[log config](https://github.com/milvus-io/docs/blob/branch-0.3.0/assets/log_config.conf)，并将它们加到位于*/home/$USER/milvus*路径下的新创建的Milvus文件中。
+3. 下载Milvus设置文件，包含[server config](https://github.com/milvus-io/docs/blob/branch-0.3.0/assets/server_config.yaml)和[log config](https://github.com/milvus-io/docs/blob/branch-0.3.0/assets/log_config.conf)，并将它们加到位于*/home/$USER/milvus* 路径下的新创建的Milvus文件中。
 
 4. 启动Milvus server。
 
