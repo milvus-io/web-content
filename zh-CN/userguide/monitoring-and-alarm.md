@@ -4,18 +4,14 @@ title: Monitoring and alarm
 sidebar_label: Monitoring and alarm
 ---
 
-# 监控与告警
+# 监控与报警
 
-## 监控告警概述
+## 监控报警概述
 如果你想跟踪数据库系统运行表现，你可以选择为Milvus创建监控中心。你可以自行搭建，也可以直接使用我们提供的基于开源监控框架Prometheus的Milvus监控中心。其主要工作流程如下：
 
 Milvus server收集数据 -> 利用pull模式把所有数据导入Prometheus -> 通过Grafana仪表盘展示各项监控指标。
 
-一旦发生系统故障，Prometheus会将告警信息可以推送给AlertManager，并通过邮件通知用户。告警系统架构如下：
-
-![Monitoring](assets/Monitoring.png)
-
-
+> 注意：若要启用监控与报警功能，请确保*home/$USER/milvus/conf/server_config.yaml*路径下*metric_config*文件中的参数*is_startup*设置为*on*。
 
 ## 启用监控功能
 
@@ -53,19 +49,19 @@ Milvus server收集数据 -> 利用pull模式把所有数据导入Prometheus -> 
 
           static_configs:
           - targets: ['localhost:9090']
-  
-  	   # scrape metrics of server
+
+  	     # scrape metrics of server
         - job_name: 'milvus_server'
           scrape_interval: 1s
           static_configs:
           - targets: ['localhost:8080']
-    
-  	      # under development
+
+  	     # under development
         - job_name: 'pushgateway'
           static_configs:
           - targets: ['localhost:9091']
       ```
-   
+
    2）在Prometheus根目录下创建*serverdown.yml*文件，内容如下：
 
       ```yaml
@@ -104,7 +100,7 @@ Milvus server收集数据 -> 利用pull模式把所有数据导入Prometheus -> 
    
    4）在左侧导航栏，点击Create图标并选择*Dashboard*。然后点击页面左上角的*New dashboard*。
    
-      ![image-20190620191721734](assets/dashboard.png)
+      ![image-20190620191721734](assets/newdashboard.png)
    
    5）点击页面右侧的*Import dashboard*。
    
@@ -132,7 +128,7 @@ Milvus server收集数据 -> 利用pull模式把所有数据导入Prometheus -> 
 | CPU利用率       |    CPU使用百分率                  |
 | 内存使用量      |     内存使用量                     |
 | 网络IO          |    每秒钟网口的读写速度            |
-| 磁盘读写速度     |    磁盘写入速度                   | 
+| 磁盘读写速度     |    磁盘写入速度                   |
 | **Milvus指标**  |                                  |
 | 数据插入速度     |         每秒钟插入数据总量        |
 | 数据文件总量     |       Milvus所存数据文件总量      |
@@ -148,12 +144,12 @@ Milvus server收集数据 -> 利用pull模式把所有数据导入Prometheus -> 
 目前，Milvus监控默认的监控频率为：1次/秒，你也可以[更改监控设置](https://prometheus.io/docs/prometheus/latest/configuration/configuration/)。
 
 
-## 启用告警功能
-Milvus告警系统基于Alertmanager创建。异常发生时，Prometheus会向Alertmanager发送告警消息，Alertmanager再通过邮件给客户发送通知。告警系统架构如下：
+## 启用报警功能
+Milvus报警系统基于Alertmanager创建。异常发生时，Prometheus会向Alertmanager发送报警消息，Alertmanager再通过邮件给客户发送通知。报警系统架构如下：
 
 ![Monitoring](assets/Monitoring.png)
 
-若要启动告警功能，请按照以下操作进行：
+若要启动报警功能，请按照以下操作进行：
 
    1）[安装Alertmanager](prometheus.io/download/#alertmanager)。
 
@@ -171,7 +167,7 @@ Milvus告警系统基于Alertmanager创建。异常发生时，Prometheus会向A
       route:
         group_by: ['alertname']
         receiver: default
-
+    
       receivers:
         - name: 'default'
           email_configs:
@@ -184,5 +180,5 @@ Milvus告警系统基于Alertmanager创建。异常发生时，Prometheus会向A
       ```
       ./alertmanager --config.file=milvus.yml
       ```
-> 提示：如果你想自定义告警设置，请参考[告警设置](https://prometheus.io/docs/alerting/configuration/#configuration-file)
+> 提示：如果你想自定义报警设置，请参考[报警设置](https://prometheus.io/docs/alerting/configuration/#configuration-file)
 

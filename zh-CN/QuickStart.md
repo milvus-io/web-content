@@ -6,7 +6,7 @@ sidebar_label: Milvus Quick Start
 
 # Milvus快速入门
 
-该指南主要包含Milvus Docker版的快速安装，以及相关Python示例代码的运行。如果想进一步了解Milvus的使用，请访问[Milvus用户指南](../userguide/preface.md)。
+该指南主要包含Milvus Docker版的快速安装，以及相关Python示例代码的运行。如果想进一步了解Milvus的使用，请访问[Milvus用户指南](/zh-CN/userguide/preface.md)。
 
 ## 安装前提
 1. Milvus Docker版目前仅在Linux系统上运行，请确保你的Linux系统符合以下版本：
@@ -46,23 +46,33 @@ sidebar_label: Milvus Quick Start
    $ docker pull milvusdb/milvus:0.3.0
    ```
 
-2. 启动Milvus server。
+2. 创建Milvus文件。
+
+   ```shell
+   # Create Milvus file
+   $ mkdir /home/$USER/milvus
+   $ cd /home/$USER/milvus
+   $ mkdir conf
+   $ cd conf
+   ```
+
+3. 下载Milvus设置文件，包含[server config](https://github.com/milvus-io/docs/blob/branch-0.3.0/assets/server_config.yaml)和[log config](https://github.com/milvus-io/docs/blob/branch-0.3.0/assets/log_config.conf)，并将它们加到新创建的Milvus文件中。
+
+4. 启动Milvus server。
 
    ```shell
    # Start Milvus
-   $ nvidia-docker run -td --runtime=nvidia -p 19530:19530 -p8080:8080 -v /home/$USER/milvus/db:/opt/milvus/db -v /home/$USER/milvus/conf:/opt/milvus/conf -v /home/$USER/milvus/logs:/opt/milvus/logs milvusdb/milvus:0.3.0
+   $ nvidia-docker run -td --runtime=nvidia -p 19530:19530 -p 8080:8080 -v /home/$USER/milvus/db:/opt/milvus/db -v /home/$USER/milvus/conf:/opt/conf -v /home/$USER/milvus/logs:/opt/milvus/logs milvusdb/milvus:0.3.0
    ```
-   
-3. 下载Milvus设置文件，包含[server config](https://github.com/milvus-io/docs/blob/branch-0.3.0/assets/server_config.yaml)和[log config](https://github.com/milvus-io/docs/blob/branch-0.3.0/assets/log_config.conf)，并将它们加到*/home/$USER/milvus*路径下。
 
-4. 获得Milvus container id。
+5. 获得Milvus container id。
 
    ```shell
    # Get Milvus container id
    $ docker ps -a
    ```
 
-5. 确认Milvus运行状态。
+6. 确认Milvus运行状态。
 
    ```shell
    # Make sure Milvus is up and running
