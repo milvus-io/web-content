@@ -50,15 +50,14 @@ Milvus server collects data -> Collected data is imported to Prometheus -> Monit
 
           static_configs:
           - targets: ['localhost:9090']
-      ```
 
-  	   # scrape metrics of server
+  	     # scrape metrics of server
         - job_name: 'milvus_server'
           scrape_interval: 1s
           static_configs:
           - targets: ['localhost:8080']
 
-  	      # under development
+  	     # under development
         - job_name: 'pushgateway'
           static_configs:
           - targets: ['localhost:9091']
