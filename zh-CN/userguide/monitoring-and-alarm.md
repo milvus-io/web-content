@@ -100,7 +100,7 @@ Milvus server收集数据 -> 利用pull模式把所有数据导入Prometheus -> 
    
    4）在左侧导航栏，点击Create图标并选择*Dashboard*。然后点击页面左上角的*New dashboard*。
    
-      ![image-20190620191721734](assets/dashboard.png)
+      ![image-20190620191721734](assets/newdashboard.png)
    
    5）点击页面右侧的*Import dashboard*。
    
