@@ -102,7 +102,7 @@ Milvus server collects data -> Collected data is imported to Prometheus -> Monit
    
    4) On the left menu bar, click the Create icon and choose *Dashboard*. On the top left corner of the page, click *New dashboard*.
 
-      ![image-20190620191721734](assets/dashboard.png)
+      ![image-20190620191721734](assets/newdashboard.png)
    
    5) Click *Import dashboard* in the right box.
    
