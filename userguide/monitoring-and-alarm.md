@@ -123,15 +123,15 @@ On the GUI dashboard of Milvus monitoring system, you can check these monitoring
 |    Monitoring item       |      Description                       |
 |----------------|----------------------------------|
 | **System parameters**    |                                  |
-| GPU utilization ratio      |    Ratio of used GPU to total GPU             |
-| GPU usage      |    real-time used GPU                  |
-| CPU utilization ratio       |     Ratio of used CPU to total CPU                   |
-| CPU usage      |     real-time used CPU                    |
+| GPU utilization rate      |    Rate of GPU utilization             |
+| Video memory usage      |   Video memory (in GB) currently used by Milvus                  |
+| CPU utilization rate       |     Rate of CPU utilization                 |
+| Memory usage      |     Memory (in GB) currently used by Milvus                   |
 | Internet IO          |    Internet IO read/write speed (per second)          |
 | Disk read & write speed     |    Disk read & write speed                   |
 | **Milvus parameters**  |                                  |
-| Data inserting speed     |         Total amount of data inserted per seconds     |
-| Data file total number     |       Total number of files in Milvus      |
+| Data inserting speed     |         Total amount of data inserted per second     |
+| Data file total     |       Total number of files in Milvus      |
 | Data size       | Total amount of data stored in Milvus                 |
 | QPM (Query per minute)    |  Number of queries completed in every minute          |
 | Search response time     |      Response time of a search               |
