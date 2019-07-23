@@ -130,15 +130,15 @@ On the GUI dashboard of Milvus monitoring system, you can check these monitoring
 | Internet IO          |    Internet IO read/write speed (per second)          |
 | Disk read & write speed     |    Disk read & write speed                   |
 | **Milvus parameters**  |                                  |
-| Data inserting speed     |         Total amount of data inserted per second     |
-| Data file total     |       Total number of files in Milvus      |
+| Insert per Second     |       Number of vectors that are inserted in a second.    |
+| File total     |       Number of files in Milvus      |
 | Data size       | Total amount of data stored in Milvus                 |
 | QPM (Query per minute)    |  Number of queries completed in every minute          |
-| Search response time     |      Response time of a search               |
-| Vector indexing time  |    Indexing time of a single vector         |
+| Query response time     | This value is computed across all queries by taking the sum of seconds divided by the count of queries |
+| Query time per vector  |   Time to query a single vector       |
 | Connected client number          |  Number of clients currently connected to Milvus  |
-| Running time        |   Normal running time of Milvus server (in minutes)    |
-| Cache utilization ratio  |    Ratio of used cache to total cache                   |
+| Run time        |   Milvus server uptime (in mins)    |
+| Cache utilization rate  |    Rate of cache utilization                  |
 
 ## Configuring monitoring frequency
 The default Milvus monitoring frequency is 1 time/second. If you want to change it, you may read [Monitoring configuration](https://prometheus.io/docs/prometheus/latest/configuration/configuration/).
