@@ -136,7 +136,7 @@ On the GUI dashboard of Milvus monitoring system, you can check these monitoring
 | QPM (Query per minute)    |  Number of queries completed in every minute          |
 | Query response time     | This value is computed across all queries by taking the sum of seconds divided by the count of queries |
 | Query time per vector  |   Time to query a single vector       |
-| Connected client number          |  Number of clients currently connected to Milvus  |
+| Connections         |  Number of connections established with the database at any point during the selected time period. A connection is a session established between a database client and a server.   |
 | Run time        |   Milvus server uptime (in mins)    |
 | Cache utilization rate  |    Rate of cache utilization                  |
 
