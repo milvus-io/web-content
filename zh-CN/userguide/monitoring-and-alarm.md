@@ -173,12 +173,14 @@ Milvus报警系统基于Alertmanager创建。异常发生时，Prometheus会向A
           email_configs:
           - to: '××××@××.com'             # receiver email address
       ```
-    > 提示：若要获取*smtp_auth_password*，请登录您的邮箱，并在*设置*页面启用*SMTP*服务。然后，您可以在*客户端授权密码*页面设置相应密码。
+      
+      > 提示：若要获取*smtp_auth_password*，请登录您的邮箱，并在*设置*页面启用*SMTP*服务。然后，您可以在*客户端授权密码*页面设置相应密码。
 
    3）启动Alertmanager。
 
       ```
       ./alertmanager --config.file=milvus.yml
       ```
+      
 > 提示：如果你想自定义报警设置，请参考[报警设置](https://prometheus.io/docs/alerting/configuration/#configuration-file)
 
