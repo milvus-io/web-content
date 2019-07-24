@@ -154,7 +154,6 @@ Milvus报警系统基于Alertmanager创建。异常发生时，Prometheus会向A
    1）[安装Alertmanager](prometheus.io/download/#alertmanager)。
 
    2）在Alertmanager根目录下创建*milvus.yml*文件，内容如下：
-
       ```
       global:
         resolve_timeout: 1m
@@ -177,7 +176,6 @@ Milvus报警系统基于Alertmanager创建。异常发生时，Prometheus会向A
       > 提示：若要获取*smtp_auth_password*，请登录您的邮箱，并在*设置*页面启用*SMTP*服务。然后，您可以在*客户端授权密码*页面设置相应密码。
 
    3）启动Alertmanager。
-
       ```
       ./alertmanager --config.file=milvus.yml
       ```
