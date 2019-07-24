@@ -42,7 +42,7 @@ sidebar_label: Configuring Milvus
      | archive_disk_threshold | 归档触发阈值：存储大小，默认值为512（GB）。一旦超过存储大小，触发归档操作| >0 |
      | archive_days_threshold | 归档触发阈值：存储天数，默认值为30（天）。一旦超过存储天数，触发归档操作|  >0 |
 
-   > 注意：db_backend_url格式为：dialect://username:password@host:port/database。(其中'dialect'可以是'mysql'或'sqlite'，取决于你是用了MySQL 还是SQLite作为元数据库)
+   > 提示：db_backend_url格式为：dialect://username:password@host:port/database。(其中'dialect'可以是'mysql'或'sqlite'，取决于你是用了MySQL 还是SQLite作为元数据库)
    
    3）点击*metric_config*文件，设置监控参数。
    
