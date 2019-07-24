@@ -123,22 +123,22 @@ On the GUI dashboard of Milvus monitoring system, you can check these monitoring
 |    Monitoring item       |      Description                       |
 |----------------|----------------------------------|
 | **System parameters**    |                                  |
-| GPU utilization rate      |    Rate of GPU utilization             |
+| GPU utilization     |   Rate of GPU utilization          |
 | Video memory usage      |   Video memory (in GB) currently used by Milvus                  |
-| CPU utilization rate       |     Rate of CPU utilization                 |
+| CPU utilization      |     Divide the time that the server is busy by the total elapsed time                 |
 | Memory usage      |     Memory (in GB) currently used by Milvus                   |
 | Internet IO          |    Internet IO read/write speed (per second)          |
 | Disk read & write speed     |    Disk read & write speed                   |
 | **Milvus parameters**  |                                  |
-| Insert per Second     |       Number of vectors that are inserted in a second.    |
-| File total     |       Number of files in Milvus      |
+| Insert per Second     |     Number of vectors that are inserted in a second.    |
+| File total     |       Current number of files in Milvus      |
 | Data size       | Total amount of data stored in Milvus                 |
 | QPM (Query per minute)    |  Number of queries completed in every minute          |
 | Query response time     | This value is computed across all queries by taking the sum of seconds divided by the count of queries |
 | Query time per vector  |   Time to query a single vector       |
 | Connections         |  Number of connections established with the database at any point during the selected time period. A connection is a session established between a database client and a server.   |
-| Run time        |   Milvus server uptime (in mins)    |
-| Cache utilization rate  |    Rate of cache utilization                  |
+| Uptime        |   Measures the time (in minutes) Milvus server has been working and available   |
+| Cache utilization  |    Rate of cache utilization                  |
 
 ## Configuring monitoring frequency
 The default Milvus monitoring frequency is 1 time/second. If you want to change it, you may read [Monitoring configuration](https://prometheus.io/docs/prometheus/latest/configuration/configuration/).
