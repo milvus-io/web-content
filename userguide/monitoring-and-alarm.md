@@ -11,7 +11,7 @@ A database monitoring system helps you track database performance and correspond
 
 Milvus server collects data -> Collected data is imported to Prometheus -> Monitoring items are displayed in Grafana-supported dashboard
 
-> Attention: To enable monitoring and alarm function in Milvus, make sure the parameter *is_startup* is *on* in file *metric_config* under the directory *home/$USER/milvus/conf/server_config.yaml*.
+> Caution: To enable monitoring and alarm function in Milvus, make sure the parameter *is_startup* is *on* in file *metric_config* under the directory *home/$USER/milvus/conf/server_config.yaml*.
 
 
 ## Installing and configuring monitor
