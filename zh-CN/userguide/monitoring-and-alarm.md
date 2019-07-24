@@ -151,30 +151,30 @@ Milvus报警系统基于Alertmanager创建。异常发生时，Prometheus会向A
 
 若要启动报警功能，请按照以下操作进行：
 
-   1）[安装Alertmanager](prometheus.io/download/#alertmanager)。
+    1）[安装Alertmanager](prometheus.io/download/#alertmanager)。
 
-   2）在Alertmanager根目录下创建*milvus.yml*文件，内容如下：
+    2）在Alertmanager根目录下创建*milvus.yml*文件，内容如下：
    
-      ```yaml
-      global:
-        resolve_timeout: 1m
-        smtp_smarthost: 'smtp.163.com:25' # smtp server config
-        smtp_from: '×××@163.com'          # sender email account
-        smtp_auth_username: '×××@163.com' # sender email account
-        smtp_auth_password: '××××××××'    # sender email password
-        smtp_hello: '163.com'             # sender email suffix
-        smtp_require_tls: false
-      route:
-        group_by: ['alertname']
-        receiver: default
+       ```yaml
+       global:
+         resolve_timeout: 1m
+         smtp_smarthost: 'smtp.163.com:25' # smtp server config
+         smtp_from: '×××@163.com'          # sender email account
+         smtp_auth_username: '×××@163.com' # sender email account
+         smtp_auth_password: '××××××××'    # sender email password
+         smtp_hello: '163.com'             # sender email suffix
+         smtp_require_tls: false
+       route:
+         group_by: ['alertname']
+         receiver: default
     
-      receivers:
-        - name: 'default'
-          email_configs:
-          - to: '××××@××.com'             # receiver email address
-      ```
+       receivers:
+         - name: 'default'
+           email_configs:
+           - to: '××××@××.com'             # receiver email address
+       ```
       
-      > 提示：若要获取*smtp_auth_password*，请登录您的邮箱，并在*设置*页面启用*SMTP*服务。然后，您可以在*客户端授权密码*页面设置相应密码。
+       > 提示：若要获取*smtp_auth_password*，请登录您的邮箱，并在*设置*页面启用*SMTP*服务。然后，您可以在*客户端授权密码*页面设置相应密码。
 
    3）启动Alertmanager。
    
