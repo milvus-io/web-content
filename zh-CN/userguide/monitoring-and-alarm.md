@@ -94,7 +94,7 @@ Milvus server收集数据 -> 利用pull模式把所有数据导入Prometheus -> 
    
       ![image-20190620191640605](assets/datasource.png)
    
-   3）在*Settings*页面的HTTP区域，将*URL*设置成Prometheus的服务器地址*http://localhost:9090*, 将*ACCESS*设置成*Browser*，点击*Save & Test*。
+   3）在*Settings*页面，将*Prometheus*设置为*默认*。在HTTP区域，将*URL*设置成Prometheus的服务器地址*http://localhost:9090*, 将*ACCESS*设置成*Browser*，点击*Save & Test*。
    
       ![image-20190620191702697](assets/settings.png)
    
