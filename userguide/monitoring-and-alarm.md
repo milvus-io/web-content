@@ -173,7 +173,8 @@ To enable alarm in Milvus, proceed as follows:
           email_configs:
           - to: '××××@××.com'             # receiver email address
       ```
-   > Note: To get *smtp_auth_password*, log in to your email and enable *SMTP* services in the *Settings* page. Then you can set the password in the SMTP auth password page.
+      
+      > Note: To get *smtp_auth_password*, log in to your email and enable *SMTP* services in the *Settings* page. Then you can set the password in the SMTP auth password page.
 
    2) Start Alertmanager.
 
