@@ -95,7 +95,7 @@ Milvus server collects data -> Collected data is imported to Prometheus -> Monit
    
       ![image-20190620191640605](assets/datasource.png)
    
-   3) On *Settings* tab, in *URL* field, enter the Prometheus server address http://localhost:9090; and in *ACCESS*, choose *Browser*. Then click *Save & Test*.
+   3) On *Settings* tab, set *Prometheus* as default. In *URL* field, enter the Prometheus server address http://localhost:9090; and in *ACCESS*, choose *Browser*. Then click *Save & Test*.
    
       ![image-20190620191702697](assets/settings.png)
    
@@ -123,22 +123,22 @@ On the GUI dashboard of Milvus monitoring system, you can check these monitoring
 |    Monitoring item       |      Description                       |
 |----------------|----------------------------------|
 | **System parameters**    |                                  |
-| GPU utilization ratio      |    Ratio of used GPU to total GPU             |
-| GPU usage      |    real-time used GPU                  |
-| CPU utilization ratio       |     Ratio of used CPU to total CPU                   |
-| CPU usage      |     real-time used CPU                    |
+| GPU utilization     |   Rate of GPU utilization          |
+| Video memory usage      |   Video memory (in GB) currently used by Milvus                  |
+| CPU utilization      |     Divide the time that the server is busy by the total elapsed time                 |
+| Memory usage      |     Memory (in GB) currently used by Milvus                   |
 | Internet IO          |    Internet IO read/write speed (per second)          |
 | Disk read & write speed     |    Disk read & write speed                   |
 | **Milvus parameters**  |                                  |
-| Data inserting speed     |         Total amount of data inserted per seconds     |
-| Data file total number     |       Total number of files in Milvus      |
+| Insert per Second     |     Number of vectors that are inserted in a second.    |
+| File total     |       Current number of files in Milvus      |
 | Data size       | Total amount of data stored in Milvus                 |
 | QPM (Query per minute)    |  Number of queries completed in every minute          |
-| Search response time     |      Response time of a search               |
-| Vector indexing time  |    Indexing time of a single vector         |
-| Connected client number          |  Number of clients currently connected to Milvus  |
-| Running time        |   Normal running time of Milvus server (in minutes)    |
-| Cache utilization ratio  |    Ratio of used cache to total cache                   |
+| Query response time     | This value is computed across all queries by taking the sum of seconds divided by the count of queries |
+| Query time per vector  |   Time to query a single vector       |
+| Connections         |  Number of connections established with the database at any point during the selected time period. A connection is a session established between a database client and a server.   |
+| Uptime        |   Measures the time (in minutes) Milvus server has been working and available   |
+| Cache utilization  |    Rate of cache utilization                  |
 
 ## Configuring monitoring frequency
 The default Milvus monitoring frequency is 1 time/second. If you want to change it, you may read [Monitoring configuration](https://prometheus.io/docs/prometheus/latest/configuration/configuration/).
@@ -173,7 +173,8 @@ To enable alarm in Milvus, proceed as follows:
           email_configs:
           - to: '××××@××.com'             # receiver email address
       ```
-   > Note: To get *smtp_auth_password*, log in to your email and enable *SMTP* services in the *Settings* page. Then you can set the password in the SMTP auth password page.
+      
+      > Note: To get *smtp_auth_password*, log in to your email and enable *SMTP* services in the *Settings* page. Then you can set the password in the SMTP auth password page.
 
    2) Start Alertmanager.
 

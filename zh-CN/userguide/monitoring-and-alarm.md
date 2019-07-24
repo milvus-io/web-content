@@ -90,11 +90,11 @@ Milvus server收集数据 -> 利用pull模式把所有数据导入Prometheus -> 
    
    1）登录Grafana网页(localhost:3000)，在左侧导航栏，点击Configuration图标，并选择*Data Sources*。
    
-   2) 在*Data Sources*页面，选项框内选择*Prometheus*。
+   2）在*Data Sources*页面，选项框内选择*Prometheus*。
    
       ![image-20190620191640605](assets/datasource.png)
    
-   3）在*Settings*页面的HTTP区域，将*URL*设置成Prometheus的服务器地址*http://localhost:9090*, 将*ACCESS*设置成*Browser*，点击*Save & Test*。
+   3）在*Settings*页面，将*Prometheus*设置为默认。在HTTP区域，将*URL*设置成Prometheus的服务器地址*http://localhost:9090*, 将*ACCESS*设置成*Browser*，点击*Save & Test*。
    
       ![image-20190620191702697](assets/settings.png)
    
@@ -123,16 +123,16 @@ Milvus server收集数据 -> 利用pull模式把所有数据导入Prometheus -> 
 |    监控项       |      说明                        |
 |----------------|----------------------------------|
 | **系统指标**    |                                  |
-| GPU利用率       |    实例GPU的利用率                |
+| GPU利用率       |    实例的GPU利用率                |
 | 显存使用量      |    实例显存的使用量                |
-| CPU利用率       |    CPU使用百分率                  |
+| CPU利用率       |    实例的CPU利用率=服务器任务执行时间/服务器总运行时间  |
 | 内存使用量      |     内存使用量                     |
 | 网络IO          |    每秒钟网口的读写速度            |
 | 磁盘读写速度     |    磁盘写入速度                   |
 | **Milvus指标**  |                                  |
 | 数据插入速度     |         每秒钟插入数据总量        |
 | 数据文件总量     |       Milvus所存数据文件总量      |
-| 数据总量        |Milvus所存数据总量                 |
+| 数据总量        |   Milvus所存数据总量               |
 | 每分钟查询率    |  每分钟完成的查询数量              |
 | 查询响应时间     |      查询的返回时长               |
 | 向量检索时间统计  |    单条向量查询的时长统计         |
@@ -151,34 +151,36 @@ Milvus报警系统基于Alertmanager创建。异常发生时，Prometheus会向A
 
 若要启动报警功能，请按照以下操作进行：
 
-   1）[安装Alertmanager](prometheus.io/download/#alertmanager)。
+1. [安装Alertmanager](prometheus.io/download/#alertmanager)。
 
-   2）在Alertmanager根目录下创建*milvus.yml*文件，内容如下：
-
-      ```
-      global:
-        resolve_timeout: 1m
-        smtp_smarthost: 'smtp.163.com:25' # smtp server config
-        smtp_from: '×××@163.com'          # sender email account
-        smtp_auth_username: '×××@163.com' # sender email account
-        smtp_auth_password: '××××××××'    # sender email password
-        smtp_hello: '163.com'             # sender email suffix
-        smtp_require_tls: false
-      route:
-        group_by: ['alertname']
-        receiver: default
+2. 在Alertmanager根目录下创建*milvus.yml*文件，内容如下：
+   
+   ```yaml
+   global:
+     resolve_timeout: 1m
+     smtp_smarthost: 'smtp.163.com:25' # smtp server config
+     smtp_from: '×××@163.com'          # sender email account
+     smtp_auth_username: '×××@163.com' # sender email account
+     smtp_auth_password: '××××××××'    # sender email password
+     smtp_hello: '163.com'             # sender email suffix
+     smtp_require_tls: false
+   route:
+     group_by: ['alertname']
+     receiver: default
     
-      receivers:
-        - name: 'default'
-          email_configs:
-          - to: '××××@××.com'             # receiver email address
-      ```
-    > 提示：若要获取*smtp_auth_password*，请登录您的邮箱，并在*设置*页面启用*SMTP*服务。然后，您可以在*客户端授权密码*页面设置相应密码。
+   receivers:
+     - name: 'default'
+       email_configs:
+       - to: '××××@××.com'             # receiver email address
+   ```
+      
+   > 提示：若要获取*smtp_auth_password*，请登录您的邮箱，并在*设置*页面启用*SMTP*服务。然后，您可以在*客户端授权密码*页面设置相应密码。
 
-   3）启动Alertmanager。
-
-      ```
-      ./alertmanager --config.file=milvus.yml
-      ```
+3. 启动Alertmanager。
+   
+   ```
+   ./alertmanager --config.file=milvus.yml
+   ```
+      
 > 提示：如果你想自定义报警设置，请参考[报警设置](https://prometheus.io/docs/alerting/configuration/#configuration-file)
 
