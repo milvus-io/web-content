@@ -94,7 +94,7 @@ Milvus server收集数据 -> 利用pull模式把所有数据导入Prometheus -> 
    
       ![image-20190620191640605](assets/datasource.png)
    
-   3）在*Settings*页面的HTTP区域，将*URL*设置成Prometheus的服务器地址*http://localhost:9090*, 将*ACCESS*设置成*Browser*，点击*Save & Test*。
+   3）在*Settings*页面，将*Prometheus*设置为默认。在HTTP区域，将*URL*设置成Prometheus的服务器地址*http://localhost:9090*, 将*ACCESS*设置成*Browser*，点击*Save & Test*。
    
       ![image-20190620191702697](assets/settings.png)
    
@@ -123,16 +123,16 @@ Milvus server收集数据 -> 利用pull模式把所有数据导入Prometheus -> 
 |    监控项       |      说明                        |
 |----------------|----------------------------------|
 | **系统指标**    |                                  |
-| GPU利用率       |    实例GPU的利用率                |
+| GPU利用率       |    实例的GPU利用率                |
 | 显存使用量      |    实例显存的使用量                |
-| CPU利用率       |    CPU使用百分率                  |
+| CPU利用率       |    实例的CPU利用率=服务器任务执行时间/服务器总运行时间  |
 | 内存使用量      |     内存使用量                     |
 | 网络IO          |    每秒钟网口的读写速度            |
 | 磁盘读写速度     |    磁盘写入速度                   |
 | **Milvus指标**  |                                  |
 | 数据插入速度     |         每秒钟插入数据总量        |
 | 数据文件总量     |       Milvus所存数据文件总量      |
-| 数据总量        |Milvus所存数据总量                 |
+| 数据总量        |   Milvus所存数据总量               |
 | 每分钟查询率    |  每分钟完成的查询数量              |
 | 查询响应时间     |      查询的返回时长               |
 | 向量检索时间统计  |    单条向量查询的时长统计         |

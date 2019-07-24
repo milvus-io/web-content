@@ -95,7 +95,7 @@ Milvus server collects data -> Collected data is imported to Prometheus -> Monit
    
       ![image-20190620191640605](assets/datasource.png)
    
-   3) On *Settings* tab, in *URL* field, enter the Prometheus server address http://localhost:9090; and in *ACCESS*, choose *Browser*. Then click *Save & Test*.
+   3) On *Settings* tab, set *Prometheus* as default. In *URL* field, enter the Prometheus server address http://localhost:9090; and in *ACCESS*, choose *Browser*. Then click *Save & Test*.
    
       ![image-20190620191702697](assets/settings.png)
    
