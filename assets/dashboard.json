@@ -24,7 +24,7 @@
       "cacheTimeout": null,
       "dashLength": 10,
       "dashes": false,
-      "description": "条/分钟",
+      "description": "bar/minute",
       "fill": 0,
       "gridPos": {
         "h": 6,
@@ -67,7 +67,7 @@
       "timeFrom": "1h",
       "timeRegions": [],
       "timeShift": null,
-      "title": "每分钟查询率",
+      "title": "queries/minute",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -177,7 +177,7 @@
       "thresholds": "",
       "timeFrom": "1m",
       "timeShift": null,
-      "title": "并发连接数",
+      "title": "Concurrent Connections",
       "transparent": true,
       "type": "singlestat",
       "valueFontSize": "80%",
@@ -264,7 +264,7 @@
       "thresholds": "",
       "timeFrom": "1m",
       "timeShift": null,
-      "title": "运行时长",
+      "title": "Run Time",
       "transparent": true,
       "type": "singlestat",
       "valueFontSize": "100%",
@@ -328,7 +328,7 @@
       ],
       "timeFrom": "1m",
       "timeShift": null,
-      "title": "GPU_0_利用率",
+      "title": "GPU_0_usage_rate",
       "transparent": true,
       "type": "gauge"
     },
@@ -382,7 +382,7 @@
       ],
       "timeFrom": "1m",
       "timeShift": null,
-      "title": "GPU_1_利用率",
+      "title": "GPU_1_usage_rate",
       "transparent": true,
       "type": "gauge"
     },
@@ -436,7 +436,7 @@
       ],
       "timeFrom": "1m",
       "timeShift": null,
-      "title": "GPU_2_利用率",
+      "title": "GPU_2_usage_rate",
       "transparent": true,
       "type": "gauge"
     },
@@ -490,7 +490,7 @@
       ],
       "timeFrom": "1m",
       "timeShift": null,
-      "title": "GPU_3_利用率",
+      "title": "GPU_3_usage_rate",
       "transparent": true,
       "type": "gauge"
     },
@@ -544,7 +544,7 @@
       ],
       "timeFrom": "1m",
       "timeShift": null,
-      "title": "GPU_4_利用率",
+      "title": "GPU_4_usage_rate",
       "transparent": true,
       "type": "gauge"
     },
@@ -598,7 +598,7 @@
       ],
       "timeFrom": "1m",
       "timeShift": null,
-      "title": "GPU_5_利用率",
+      "title": "GPU_5_usage_rate",
       "transparent": true,
       "type": "gauge"
     },
@@ -653,7 +653,7 @@
       ],
       "timeFrom": "1m",
       "timeShift": null,
-      "title": "GPU_0显存使用量",
+      "title": "GPU_0_memory_usage",
       "transparent": true,
       "type": "gauge"
     },
@@ -708,7 +708,7 @@
       ],
       "timeFrom": "1m",
       "timeShift": null,
-      "title": "GPU_1显存使用量",
+      "title": "GPU_1_memory_usage",
       "transparent": true,
       "type": "gauge"
     },
@@ -763,7 +763,7 @@
       ],
       "timeFrom": "1m",
       "timeShift": null,
-      "title": "GPU_2显存使用量",
+      "title": "GPU_2_memory_usage",
       "transparent": true,
       "type": "gauge"
     },
@@ -818,7 +818,7 @@
       ],
       "timeFrom": "1m",
       "timeShift": null,
-      "title": "GPU_3显存使用量",
+      "title": "GPU_3_memory_usage",
       "transparent": true,
       "type": "gauge"
     },
@@ -873,7 +873,7 @@
       ],
       "timeFrom": "1m",
       "timeShift": null,
-      "title": "GPU_4显存使用量",
+      "title": "GPU_4_memory_usage",
       "transparent": true,
       "type": "gauge"
     },
@@ -928,7 +928,7 @@
       ],
       "timeFrom": "1m",
       "timeShift": null,
-      "title": "GPU_5显存使用量",
+      "title": "GPU_5_memory_usage",
       "transparent": true,
       "type": "gauge"
     },
@@ -979,7 +979,7 @@
       ],
       "timeFrom": "1m",
       "timeShift": null,
-      "title": "缓存利用率",
+      "title": "cache_usage_rate",
       "transparent": true,
       "type": "gauge"
     },
@@ -1030,7 +1030,7 @@
       ],
       "timeFrom": "1m",
       "timeShift": null,
-      "title": "CPU利用率",
+      "title": "CPU_usage_rate",
       "transparent": true,
       "type": "gauge"
     },
@@ -1081,7 +1081,7 @@
       "timeFrom": "1m",
       "timeRegions": [],
       "timeShift": null,
-      "title": "内存利用率",
+      "title": "memory_usage_rate",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -1165,7 +1165,7 @@
       "timeFrom": "1m",
       "timeRegions": [],
       "timeShift": null,
-      "title": "查询响应时间",
+      "title": "query_response_time",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -1250,7 +1250,7 @@
       "timeFrom": "1m",
       "timeRegions": [],
       "timeShift": null,
-      "title": "数据文件总量",
+      "title": "total_data_files",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -1334,7 +1334,7 @@
       "timeFrom": "1m",
       "timeRegions": [],
       "timeShift": null,
-      "title": "网络IO",
+      "title": "Network IO",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -1419,7 +1419,7 @@
       "timeFrom": "1m",
       "timeRegions": [],
       "timeShift": null,
-      "title": "磁盘写速度",
+      "title": "disk write speed",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -1503,7 +1503,7 @@
       "timeFrom": "1m",
       "timeRegions": [],
       "timeShift": null,
-      "title": "磁盘读速度",
+      "title": "disk read speed",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -1587,7 +1587,7 @@
       "timeFrom": "1m",
       "timeRegions": [],
       "timeShift": null,
-      "title": "数据插入速度",
+      "title": "data insert speed",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -1671,7 +1671,7 @@
       "timeFrom": "1m",
       "timeRegions": [],
       "timeShift": null,
-      "title": "数据总量",
+      "title": "total data",
       "tooltip": {
         "shared": true,
         "sort": 0,

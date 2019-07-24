@@ -4,7 +4,7 @@
 - [Getting Started with Milvus](getting-started.md)
 - [Configuring Milvus](configuring-milvus.md)
 - [Creating a Table](creating-table.md)
-- [Importing Vectors](importing-vectors.md)
+- [Inserting Vectors](inserting-vectors.md)
 - [Searching a Table](searching-table.md)
 - [Deleting a Table](deleting-table.md)
 - [Searching with Milvus](searching-with-milvus.md)

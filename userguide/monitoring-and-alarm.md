@@ -11,6 +11,8 @@ A database monitoring system helps you track database performance and correspond
 
 Milvus server collects data -> Collected data is imported to Prometheus -> Monitoring items are displayed in Grafana-supported dashboard
 
+> Attention: To enable monitoring and alarm function in Milvus, make sure the parameter *is_startup* is *on* in file *metric_config* under the directory *home/$USER/milvus/conf/server_config.yaml*.
+
 
 ## Installing and configuring monitor
 
@@ -48,19 +50,19 @@ Milvus server collects data -> Collected data is imported to Prometheus -> Monit
 
           static_configs:
           - targets: ['localhost:9090']
-  
-  	   # scrape metrics of server
+
+  	     # scrape metrics of server
         - job_name: 'milvus_server'
           scrape_interval: 1s
           static_configs:
           - targets: ['localhost:8080']
-    
-  	      # under development
+
+  	     # under development
         - job_name: 'pushgateway'
           static_configs:
           - targets: ['localhost:9091']
       ```
-   
+
    2) Create a file *serverdown.yml* under Prometheus root directory, with these rules: 
 
       ```yaml
@@ -99,7 +101,7 @@ Milvus server collects data -> Collected data is imported to Prometheus -> Monit
    
    4) On the left menu bar, click the Create icon and choose *Dashboard*. On the top left corner of the page, click *New dashboard*.
 
-      ![image-20190620191721734](assets/dashboard.png)
+      ![image-20190620191721734](assets/newdashboard.png)
    
    5) Click *Import dashboard* in the right box.
    
@@ -121,22 +123,22 @@ On the GUI dashboard of Milvus monitoring system, you can check these monitoring
 |    Monitoring item       |      Description                       |
 |----------------|----------------------------------|
 | **System parameters**    |                                  |
-| GPU utilization ratio      |    Ratio of used GPU to total GPU             |
-| GPU usage      |    real-time used GPU                  |
-| CPU utilization ratio       |     Ratio of used CPU to total CPU                   |
-| CPU usage      |     real-time used CPU                    |
+| GPU utilization     |   Rate of GPU utilization          |
+| Video memory usage      |   Video memory (in GB) currently used by Milvus                  |
+| CPU utilization      |     Divide the time that the server is busy by the total elapsed time                 |
+| Memory usage      |     Memory (in GB) currently used by Milvus                   |
 | Internet IO          |    Internet IO read/write speed (per second)          |
-| Disk read & write speed     |    Disk read & write speed                   | 
+| Disk read & write speed     |    Disk read & write speed                   |
 | **Milvus parameters**  |                                  |
-| Data inserting speed     |         Total amount of data inserted per seconds     |
-| Data file total number     |       Total number of files in Milvus      |
+| Insert per Second     |     Number of vectors that are inserted in a second.    |
+| File total     |       Current number of files in Milvus      |
 | Data size       | Total amount of data stored in Milvus                 |
 | QPM (Query per minute)    |  Number of queries completed in every minute          |
-| Search response time     |      Response time of a search               |
-| Vector indexing time  |    Indexing time of a single vector         |
-| Connected client number          |  Number of clients currently connected to Milvus  |
-| Running time        |   Normal running time of Milvus server (in minutes)    |
-| Cache utilization ratio  |    Ratio of used cache to total cache                   |
+| Query response time     | This value is computed across all queries by taking the sum of seconds divided by the count of queries |
+| Query time per vector  |   Time to query a single vector       |
+| Connections         |  Number of connections established with the database at any point during the selected time period. A connection is a session established between a database client and a server.   |
+| Uptime        |   Measures the time (in minutes) Milvus server has been working and available   |
+| Cache utilization  |    Rate of cache utilization                  |
 
 ## Configuring monitoring frequency
 The default Milvus monitoring frequency is 1 time/second. If you want to change it, you may read [Monitoring configuration](https://prometheus.io/docs/prometheus/latest/configuration/configuration/).
@@ -165,13 +167,14 @@ To enable alarm in Milvus, proceed as follows:
       route:
         group_by: ['alertname']
         receiver: default
-
+    
       receivers:
         - name: 'default'
           email_configs:
           - to: '××××@××.com'             # receiver email address
       ```
-   > Note: To get *smtp_auth_password*, log in to your email and enable *SMTP* services in the *Settings* page. Then you can set the password in the SMTP auth password page.
+      
+      > Note: To get *smtp_auth_password*, log in to your email and enable *SMTP* services in the *Settings* page. Then you can set the password in the SMTP auth password page.
 
    2) Start Alertmanager.
 
