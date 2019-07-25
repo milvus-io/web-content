@@ -12,19 +12,19 @@ Milvus database can be used to build intelligent systems in most AI application 
 
 - Image search
 
-  Reverse image search. Detailed application such as image indexing of human face, cars & products, and face recognition payment, etc.
+  Query by image content. Content-based image retrieval such as bio-identification, object detection and recognition, and payment authentication powered by facial identification, etc.
 
 - Video processing
 
-  Real-time human face indexing and track pursuit. 
+  Real-time object detection and tracing. 
 
 - Natural language analysis
 
-  Semantics-based text indexing/suggestion, and text similarity search. 
+  Semantics-based text analysis/suggestion, and text similarity search. 
 
-- Voiceprint recognition and audio indexing 
+- Voiceprint recognition and audio search
 
-- Duplicate cleaner by file fingerprint
+- Remove duplicated files by file fingerprint
 
 
 ## Application architecture
