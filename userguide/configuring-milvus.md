@@ -43,7 +43,7 @@ Follow these procedures to configure Milvus service:
      | archive_disk_threshold | Archive action triggered if storage size exceed this value. Default value is 512 (GB).| >0 |
      | archive_days_threshold | Files older than x days will be archived. Default value is 30 (Day).|  >0  |
      
-     > Note: db_backend_url format is: dialect://username:password@host:port/database. ('dialect' can be either 'mysql' or 'sqlite', depending on whether you use MySQL or SQLite for the metadata storage.)
+   > Note: db_backend_url format is: dialect://username:password@host:port/database. ('dialect' can be either 'mysql' or 'sqlite', depending on whether you use MySQL or SQLite for the metadata storage.)
                                  
    3）Click file *metric_config*, and configure monitor parameters.
    
