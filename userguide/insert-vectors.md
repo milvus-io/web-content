@@ -1,10 +1,10 @@
 ---
-id: inserting-vectors
-title: Inserting vectors
-sidebar_label: Inserting vectors
+id: insert-vectors
+title: Insert vectors
+sidebar_label: Insert vectors
 ---
 
-# Inserting vectors
+# Insert vectors
 
 After you have successfully created tables in Milvus, you can insert data into the table. Below is the list of necessary parameters for inserting vectors:
 
