@@ -1,7 +1,7 @@
 ---
-id: creating-table
-title: Creating a table
-sidebar_label: Creating a table
+id: create-table
+title: Create a table
+sidebar_label: Create a table
 ---
 
 # 创建表
