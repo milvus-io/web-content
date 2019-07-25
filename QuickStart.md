@@ -32,7 +32,7 @@ In this guide, we will walk you through installing Milvus Docker as well as runn
    $ docker pull milvusdb/milvus:0.3.0
    ```
 
-2. Create Milvus file.
+2. Create Milvus file, and add server_cofig and log_config to it.
 
    ```shell
    # Create Milvus file
@@ -45,7 +45,7 @@ In this guide, we will walk you through installing Milvus Docker as well as runn
    
    ```
 
-4. Start Milvus server.
+3. Start Milvus server.
 
    ```shell
    # Start Milvus
@@ -53,14 +53,14 @@ In this guide, we will walk you through installing Milvus Docker as well as runn
 
    ```
 
-5. Get Milvus container id.
+4. Get Milvus container id.
 
    ```shell
    # Get Milvus container id
    $ docker ps -a
    ```
 
-6. Confirm Milvus running status.
+5. Confirm Milvus running status.
 
    ```shell
    # Make sure Milvus is up and running
