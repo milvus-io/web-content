@@ -37,7 +37,7 @@ Follow these procedures to configure Milvus service:
    
      | Parameter               | Description                            | Reference value    |
      |-------------------|-------------------------------------|----------|
-     | db_path           | Directory of Milvus database files            |    ~/milvus/data    |
+     | db_path           | Directory of Milvus database files            |    /opt/data   |
      | db_backend_url    | Meta database URL                         |sqlite://:@:/ |
      | index_building_threshold | index building trigger value       |  1024 (MB)  |
      | archive_disk_threshold | Archive action triggered if storage size exceed this value. Default value is 512 (GB).| >0 |
