@@ -24,7 +24,7 @@ Follow these procedures to configure Milvus service:
 
 2. Modify the parameters in the file.
 
-   1）Click file *server_config*, and configure service parameters.
+   1）In *server_config* section, set service parameters.
    
      | Parameter            | Description                          | Reference value           |
      |----------------|-----------------------------------|-------------------|
@@ -33,7 +33,7 @@ Follow these procedures to configure Milvus service:
      | gpu_index      | Current GPU, default is 0          | 0 ~ GPU number ~1                |
      | mode           | Milvus deployment method                    | single / cluster |            
                                                                                                                      
-   2）Click file *db_config*, and configure database parameters.
+   2）In *db_config* section, set database parameters.
    
      | Parameter               | Description                            | Reference value    |
      |-------------------|-------------------------------------|----------|
@@ -45,7 +45,7 @@ Follow these procedures to configure Milvus service:
      
    > Note: db_backend_url format is: dialect://username:password@host:port/database. ('dialect' can be either 'mysql' or 'sqlite', depending on whether you use MySQL or SQLite for the metadata storage.)
                                  
-   3）Click file *metric_config*, and configure monitor parameters.
+   3）In *metric_config* section, set monitor parameters.
    
      |Parameter               |  Description                             | Reference value     |
      |-------------------|-------------------------------------|----------|
@@ -56,7 +56,7 @@ Follow these procedures to configure Milvus service:
      | push_gateway_ip_address | IP address of push gateway   | 127.0.0.1             |
      | push_gateway_port       | Port of push gateway   |  9091                 |
 
-   4）Click file *cache_config*, and configure the parameter.
+   4）In *cache_config* section, set the parameter.
    
      |  Parameter                | Description                             | Reference value     |
      |-------------------|-------------------------------------|----------|
