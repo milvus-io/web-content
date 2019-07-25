@@ -1,12 +1,12 @@
 ---
-id: configuring-milvus
-title: Configuring Milvus
-sidebar_label: Configuring Milvus
+id: configure-milvus
+title: Configure Milvus
+sidebar_label: Configure Milvus
 ---
 
 # 设置Milvus
 
-## Milvus文件介绍
+## Milvus文件结构
 成功启动Milvus server后，你可以在*home/$USER/milvus*的路径下看到Milvus的文件夹。其中包含以下文件：
 
 - *milvus/db*（数据库存储）
