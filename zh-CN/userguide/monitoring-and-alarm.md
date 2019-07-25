@@ -153,7 +153,7 @@ Milvus报警系统基于Alertmanager创建。异常发生时，Prometheus会向A
 
 若要启动报警功能，请按照以下操作进行：
 
-1. [安装Alertmanager](prometheus.io/download/#alertmanager)。
+1. [安装Alertmanager](https://prometheus.io/download/#alertmanager)。
 
 2. 在Alertmanager根目录下创建*milvus.yml*文件，内容如下：
    
