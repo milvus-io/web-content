@@ -1,10 +1,10 @@
 ---
-id: monitoring-and-alarm
-title: Monitoring and alarm
-sidebar_label: Monitoring and alarm
+id: monitoring-and-alert
+title: Monitoring and alert
+sidebar_label: Monitoring and alert
 ---
 
-# Monitoring and alarm
+# Monitoring and alert
 
 ## Monitoring introduction
 A database monitoring system helps you track database performance and corresponds to unexpected emergency issues. With Milvus, you can use the monitoring system based on [Prometheus](https://prometheus.io/) and [Grafana](https://grafana.com/). Here is how the Milvus monitor works:
@@ -146,7 +146,7 @@ On the GUI dashboard of Milvus monitoring system, you can check these monitoring
 The default Milvus monitoring frequency is 1 time/second. If you want to change it, you may read [Monitoring configuration](https://prometheus.io/docs/prometheus/latest/configuration/configuration/).
 
 
-## Enabling alert
+## Enable alert function
 The Milvus alert system works on Alertmanager, which receives alert messages from Prometheus once an exception occurs. The alert architecture looks like this: 
 
 ![Monitoring](assets/Monitoring.png)
