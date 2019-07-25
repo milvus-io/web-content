@@ -36,7 +36,7 @@ sidebar_label: Configuring Milvus
    
      | 参数               | 参数描述                            | 参考值    |
      |-------------------|-------------------------------------|----------|
-     | db_path           | Milvus数据库文件存储的路径            |     ~/milvus/data     |
+     | db_path           | Milvus数据库文件存储的路径            |    /opt/data     |
      | db_backend_url    | 元数据库URL                          | sqlite://:@:/  |
      | index_building_threshold | index building触发阈值        |  1024（MB）  |
      | archive_disk_threshold | 归档触发阈值：存储大小，默认值为512（GB）。一旦超过存储大小，触发归档操作| >0 |
