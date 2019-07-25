@@ -183,5 +183,5 @@ To enable alert in Milvus, proceed as follows:
       ```
       $ ./alertmanager --config.file=milvus.yml
       ```
-> Note: To learn more about configuration of alert rules, go to [Alert Configration](https://prometheus.io/docs/alerting/configuration/#configuration-file).
+> Note: To learn more about configuration of alert rules, go to [Alert Configuration](https://prometheus.io/docs/alerting/configuration/#configuration-file).
 
