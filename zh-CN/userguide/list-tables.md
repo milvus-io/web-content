@@ -1,7 +1,7 @@
 ---
-id: searching-table
-title: Searching a table
-sidebar_label: Searching a table
+id: list-table
+title: List a table
+sidebar_label: List a table
 ---
 
 # 查询表
