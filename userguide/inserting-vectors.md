@@ -6,14 +6,14 @@ sidebar_label: Inserting vectors
 
 # Inserting vectors
 
-When you have successfully created tables in Milvus, you can start inserting data into the table. Of course, one prerequisite of this step is that you already have proper multi-dimensional vectors. Before inserting vectors to the table, get familiar with the related parameters:
+After you have successfully created tables in Milvus, you can insert data into the table. Below is the list of necessary parameters for inserting vectors:
 
 |Parameter|Description|Type|Reference value|
 |---------|-----------|----|-----|
 |table_name| Name of the table you want to create (table name is made of numbers, letters and _)| String| 'table name'|
-|records| A list of vectors to insert into the table. Vector value should be a float (decimal), with the same dimension as that of the table |2-dimension type|[[0.1, 0.2, ...], ...]
+|records| A list of vectors to insert into the table. Vector value should be a float (decimal), with the same dimension as that of the table |2-dimension list|[[0.1, 0.2, ...], ...]
 
-Following the above mentioned example, below content demonstrates how to insert 20 256-dimensional vectors(represented by "records" in the code) into Table test01:
+Following the previous example, below content demonstrates how to insert 20 256-dimensional vectors (represented by "records" in the code) into Table test01:
 
 ```
 # Insert vectors
