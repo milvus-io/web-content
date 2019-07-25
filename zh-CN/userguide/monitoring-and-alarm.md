@@ -90,6 +90,8 @@ Milvus server收集数据 -> 利用pull模式把所有数据导入Prometheus -> 
    
    1）登录Grafana网页(localhost:3000)，在左侧导航栏，点击Configuration图标，并选择*Data Sources*。
    
+   > 提示：若您是首次登录Grafana，请使用默认用户名（admin）和密码（admin）登录。
+   
    2）在*Data Sources*页面，选项框内选择*Prometheus*。
    
       ![image-20190620191640605](assets/datasource.png)
