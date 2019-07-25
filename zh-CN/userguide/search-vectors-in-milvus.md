@@ -1,7 +1,7 @@
 ---
-id: searching-with-milvus
-title: Searching with Milvus
-sidebar_label: Searching with Milvus
+id: search-vectors-in-milvus
+title: Search vectors in Milvus
+sidebar_label: Search vectors in Milvus
 ---
 
 # 用Milvus进行搜索
