@@ -32,7 +32,7 @@ In this guide, we will walk you through installing Milvus Docker as well as runn
    $ docker pull milvusdb/milvus:0.3.0
    ```
 
-2. Create Milvus file.
+2. Create Milvus file, and add server_cofig and log_config to it.
 
    ```shell
    # Create Milvus file
@@ -40,11 +40,12 @@ In this guide, we will walk you through installing Milvus Docker as well as runn
    $ cd /home/$USER/milvus
    $ mkdir conf
    $ cd conf
+   $ wget https://github.com/milvus-io/docs/blob/branch-0.3.0/assets/server_config.yaml
+   $ wget https://github.com/milvus-io/docs/blob/branch-0.3.0/assets/log_config.conf
+   
    ```
 
-3. Download Milvus configuration files, including [server config](https://github.com/milvus-io/docs/blob/branch-0.3.0/assets/server_config.yaml) and [log config](https://github.com/milvus-io/docs/blob/branch-0.3.0/assets/log_config.conf), and add them to the newly created Milvus file at */home/$USER/milvus*.
-
-4. Start Milvus server.
+3. Start Milvus server.
 
    ```shell
    # Start Milvus
@@ -52,14 +53,14 @@ In this guide, we will walk you through installing Milvus Docker as well as runn
 
    ```
 
-5. Get Milvus container id.
+4. Get Milvus container id.
 
    ```shell
    # Get Milvus container id
    $ docker ps -a
    ```
 
-6. Confirm Milvus running status.
+5. Confirm Milvus running status.
 
    ```shell
    # Make sure Milvus is up and running
@@ -80,6 +81,7 @@ Now, let's run a Python example program. You will need to create a vector data t
    ```
 
    > Note: To learn more about Milvus Python SDK, go to [Milvus Python SDK Playbook](https://pypi.org/project/pymilvus). 
+   
    > Caution: Depending on the Milvus version you use, you may not need to upgrade Pymilvus to the latest version unless required to.
 
 3. Create a new file *example.py*, and add [Python example code](https://github.com/milvus-io/pymilvus/blob/branch-0.3.0/examples/example.py) to it.

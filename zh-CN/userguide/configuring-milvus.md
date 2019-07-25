@@ -23,7 +23,7 @@ sidebar_label: Configuring Milvus
 
 2. 对文件中的相关参数进行修改。
 
-   1）点击*server_config*文件，设置服务参数。
+   1）在*server_config*区域，设置服务参数。
    
      | 参数            | 参数描述                          | 参考值            |
      |----------------|-----------------------------------|-------------------|
@@ -32,19 +32,19 @@ sidebar_label: Configuring Milvus
      | gpu_index      | 目前使用的GPU，默认值为0          | 0 ~ GPU数量-1                |
      | mode           | Milvus部署类型                    | single（单机）/ cluster（多机）|            
                                                                                                                      
-   2）点击*db_config*文件，设置数据库参数。
+   2）在*db_config*区域，设置数据库参数。
    
      | 参数               | 参数描述                            | 参考值    |
      |-------------------|-------------------------------------|----------|
-     | db_path           | Milvus数据库文件存储的路径            |     ~/milvus/data     |
+     | db_path           | Milvus数据库文件存储的路径            |    /opt/data     |
      | db_backend_url    | 元数据库URL                          | sqlite://:@:/  |
      | index_building_threshold | index building触发阈值        |  1024（MB）  |
      | archive_disk_threshold | 归档触发阈值：存储大小，默认值为512（GB）。一旦超过存储大小，触发归档操作| >0 |
      | archive_days_threshold | 归档触发阈值：存储天数，默认值为30（天）。一旦超过存储天数，触发归档操作|  >0 |
-
-   > 注意：db_backend_url格式为：dialect://username:password@host:port/database。(其中'dialect'可以是'mysql'或'sqlite'，取决于你是用了MySQL 还是SQLite作为元数据库)
+     
+   > 提示：db_backend_url格式为：dialect://username:password@host:port/database。(其中'dialect'可以是'mysql'或'sqlite'，取决于你是用了MySQL 还是SQLite作为元数据库)
    
-   3）点击*metric_config*文件，设置监控参数。
+   3）在*metric_config*区域，设置监控参数。
    
      | 参数               | 参数描述                            | 参考值    |
      |-------------------|-------------------------------------|----------|
@@ -55,7 +55,7 @@ sidebar_label: Configuring Milvus
      | push_gateway_ip_address | push gateway的ip地址   | 127.0.0.1             |
      | push_gateway_port       | push gateway的端口号   |  9091                 |
 
-   4）点击*cache_config*文件，设置相关参数。
+   4）在*cache_config*区域，设置相关参数。
    
      |  参数             | 参数描述                            | 参考值    |
      |-------------------|-------------------------------------|----------|
