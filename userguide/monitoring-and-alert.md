@@ -137,7 +137,7 @@ On the GUI dashboard of Milvus monitoring system, you can check these monitoring
 | Data size       | Total amount of data stored in Milvus                 |
 | QPM (Query per minute)    |  Number of queries completed in every minute          |
 | Query elapsed time     | System wide metric. It is the total query elapsed time divided by total number of queries  |
-| Query elapsed time per vector  |   Time to query a single vector       |
+| Query elapsed time per vector  |   It is the query elapsed time divided by number of vectors.       |
 | Connections         |  Number of connections established with the database during the selected time period. (A connection is a session established between a database client and a server.)   |
 | Uptime        |   The time (in minutes) Milvus server has been working and available   |
 | Cache utilization  |    Cache utilization ratio (%)                  |
