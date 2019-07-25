@@ -1,10 +1,10 @@
 ---
-id: searching-table
-title: Searching a table
-sidebar_label: Searching a table
+id: list-tables
+title: List tables
+sidebar_label: List tables
 ---
 
-# Searching a table
+# List tables
 
 ## List all the available tables
 You can list all table names as follows: 
