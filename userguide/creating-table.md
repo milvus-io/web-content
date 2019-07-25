@@ -1,10 +1,10 @@
 ---
-id: creating-table
-title: Creating a table
-sidebar_label: Creating a table
+id: create-table
+title: Create a table
+sidebar_label: Create a table
 ---
 
-# Creating a table
+# Create a table
 
 > Note: All the following actions are executed in Python. For other languages, Milvus supports RESTful and RPC.
 
@@ -29,7 +29,7 @@ After you have completed the installation and basic configuration of Milvus, you
    ```
    > Note: In the above code, default values are used for *host* and *port* parameters. They shoud be the value of the *address* and *port* you set in *server_config* file in *Configuring Milvus*.
    
-## Creating a table
+## Create a table
 This section describes how to create a table in Milvus. Assume we would create a table named test01. Below is a list of table parameters. You should choose parameter values according to your requirements.
 
 |  Parameter  |  Description  |  Type   |  Reference value   |
