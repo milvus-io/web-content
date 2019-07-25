@@ -1,10 +1,10 @@
 ---
-id: searching-with-milvus
-title: Searching with Milvus
-sidebar_label: Searching with Milvus
+id: search-vectors-in-milvus
+title: Search vectors in Milvus
+sidebar_label: Search vectors in Milvus
 ---
 
-# Searching with Milvus
+# Search vectors in Milvus
 
 Now, you have inserted vectors into Table test01, you can start searching with Milvus. In addition, you are allowed not only to search multiple data sets, and also to search within a specific range. Below is the list of searching parameters:
 
