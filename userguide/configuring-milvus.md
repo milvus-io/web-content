@@ -1,10 +1,10 @@
 ---
-id: configuring-milvus
-title: Configuring Milvus
-sidebar_label: Configuring Milvus
+id: configure-milvus
+title: Configure Milvus
+sidebar_label: Configure Milvus
 ---
 
-# Initiate Milvus server
+# Configure Milvus
 
 
 ## Milvus file structure
