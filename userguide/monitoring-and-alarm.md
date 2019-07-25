@@ -7,20 +7,20 @@ sidebar_label: Monitoring and alarm
 # Monitoring and alarm
 
 ## Monitoring introduction
-A database monitoring system helps you track database performance and corresponds to unexpected emergency issues. With Milvus, you can use the monitoring system build on [Prometheus](https://prometheus.io/) and [Grafana](https://grafana.com/). Here is how the Milvus monitor works:
+A database monitoring system helps you track database performance and corresponds to unexpected emergency issues. With Milvus, you can use the monitoring system based on [Prometheus](https://prometheus.io/) and [Grafana](https://grafana.com/). Here is how the Milvus monitor works:
 
-Milvus server collects data -> Collected data is imported to Prometheus -> Monitoring items are displayed in Grafana-supported dashboard
+Milvus server collects data -> Collected data are imported to Prometheus -> Monitoring items are displayed in Grafana-supported dashboard
 
-> Caution: To enable monitoring and alarm function in Milvus, make sure the parameter *is_startup* is *on* in file *metric_config* under the directory *home/$USER/milvus/conf/server_config.yaml*.
+> Caution: To enable monitoring and alert function in Milvus, make sure the parameter *is_startup* is *on* in section *metric_config* under the directory *home/$USER/milvus/conf/server_config.yaml*.
 
 
-## Installing and configuring monitor
+## Install and configure the monitor
 
 1. [Install Prometheus](https://prometheus.io/download/#prometheus).
 
-2. Make certain configurations in Prometheus.
+2. Make below configuration in Prometheus.
 
-   1) Under Prometheus root directory, open configuration file *prometheus.yml*, and update file *alerting*, *rule_files* and *scrape_configs* as follows:
+   1) Under Prometheus root directory, open configuration file *prometheus.yml*, and update section *alerting*, *rule_files* and *scrape_configs* as follows:
    
       ```yaml
       # my global config
@@ -63,7 +63,7 @@ Milvus server collects data -> Collected data is imported to Prometheus -> Monit
           - targets: ['localhost:9091']
       ```
 
-   2) Create a file *serverdown.yml* under Prometheus root directory, with these rules: 
+   2) Create file *serverdown.yml* under Prometheus root directory, with these rules: 
 
       ```yaml
       groups:
@@ -87,9 +87,9 @@ Milvus server collects data -> Collected data is imported to Prometheus -> Monit
       ```
       $ docker run -i -p 3000:3000 grafana/grafana
       ```
-4. Make configurations in Grafana.
+4. Make below configuration in Grafana.
 
-   1) Log in to Grafana website (localhost:3000), and click the Configuration icon on the left menu, then choose *Data Sources*.
+   1) Log in to Grafana web portal (localhost:3000), and click the Configuration button on the left menu, then choose *Data Sources*.
   
    > Note: If you are logging in to Grafana for the first time, please use default username (admin) and password (admin).
 
@@ -101,7 +101,7 @@ Milvus server collects data -> Collected data is imported to Prometheus -> Monit
    
       ![image-20190620191702697](assets/settings.png)
    
-   4) On the left menu bar, click the Create icon and choose *Dashboard*. On the top left corner of the page, click *New dashboard*.
+   4) On the left side bar, click the Create button and choose *Dashboard*. On the top left corner of the page, click *New dashboard*.
 
       ![image-20190620191721734](assets/newdashboard.png)
    
@@ -113,49 +113,49 @@ Milvus server collects data -> Collected data is imported to Prometheus -> Monit
    
       ![image-20190620191802408](assets/importjson.png)
 
-   When it succeeded, the monitor dashboard will be displayed.
+   When it is done, the monitor dashboard should be displayed.
    
    ![image-20190620134549612](assets/prometheus.png)
 
 
-## Monitoring items
-On the GUI dashboard of Milvus monitoring system, you can check these monitoring items to track real time performance of your database.
+## Monitor metrics
+On the GUI dashboard of Milvus monitoring system, you can check these monitoring metrics to track real time performance of Milvus database.
 
 
-|    Monitoring item       |      Description                       |
+|    Monitoring metric       |      Description                       |
 |----------------|----------------------------------|
-| **System parameters**    |                                  |
-| GPU utilization     |   Rate of GPU utilization          |
-| Video memory usage      |   Video memory (in GB) currently used by Milvus                  |
+| **System metrics**    |                                  |
+| GPU utilization     |  GPU utilization ratio (%)        |
+| Video memory usage      |   Video memory (in GB) currently consumed by Milvus                  |
 | CPU utilization      |     Divide the time that the server is busy by the total elapsed time                 |
-| Memory usage      |     Memory (in GB) currently used by Milvus                   |
-| Internet IO          |    Internet IO read/write speed (per second)          |
+| Memory usage      |     Memory (in GB) currently consumed by Milvus                   |
+| Network IO          |    Network IO read/write speed (per second)          |
 | Disk read & write speed     |    Disk read & write speed                   |
-| **Milvus parameters**  |                                  |
+| **Milvus metrics**  |                                  |
 | Insert per Second     |     Number of vectors that are inserted in a second.    |
-| File total     |       Current number of files in Milvus      |
+| Total file    |       Current number of files in Milvus      |
 | Data size       | Total amount of data stored in Milvus                 |
 | QPM (Query per minute)    |  Number of queries completed in every minute          |
-| Query response time     | This value is computed across all queries by taking the sum of seconds divided by the count of queries |
+| Average query response time     | System wide metric. It is the total query elapsed time divided by total number of queries  |
 | Query time per vector  |   Time to query a single vector       |
-| Connections         |  Number of connections established with the database at any point during the selected time period. A connection is a session established between a database client and a server.   |
-| Uptime        |   Measures the time (in minutes) Milvus server has been working and available   |
-| Cache utilization  |    Rate of cache utilization                  |
+| Connections         |  Number of connections established with the database during the selected time period. (A connection is a session established between a database client and a server.)   |
+| Uptime        |   The time (in minutes) Milvus server has been working and available   |
+| Cache utilization  |    Cache utilization ratio (%)                  |
 
-## Configuring monitoring frequency
+## Configure monitoring frequency
 The default Milvus monitoring frequency is 1 time/second. If you want to change it, you may read [Monitoring configuration](https://prometheus.io/docs/prometheus/latest/configuration/configuration/).
 
 
-## Enabling alarm
-The Milvus alarm system works on Alertmanager, which receives alarm messages from Prometheus once abnormalities occur. The alarm architecture looks like this: 
+## Enabling alert
+The Milvus alert system works on Alertmanager, which receives alert messages from Prometheus once an exception occurs. The alert architecture looks like this: 
 
 ![Monitoring](assets/Monitoring.png)
 
-To enable alarm in Milvus, proceed as follows:
+To enable alert in Milvus, proceed as follows:
 
    1) [Install Alertmanager](https://prometheus.io/download/#alertmanager).
 
-   2) Create a file *milvus.yml* under Alertmanager root directory, and add the following content to it.
+   2) Create file *milvus.yml* under Alertmanager root directory, and add the following content to it.
 
       ```
       global:
@@ -181,7 +181,7 @@ To enable alarm in Milvus, proceed as follows:
    2) Start Alertmanager.
 
       ```
-      ./alertmanager --config.file=milvus.yml
+      $ ./alertmanager --config.file=milvus.yml
       ```
-> Note: To learn more about configuration of alarm rules, go to [Alarm Configration](https://prometheus.io/docs/alerting/configuration/#configuration-file).
+> Note: To learn more about configuration of alert rules, go to [Alert Configration](https://prometheus.io/docs/alerting/configuration/#configuration-file).
 
