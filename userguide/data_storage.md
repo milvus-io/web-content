@@ -19,4 +19,4 @@ In Milvus, metadata refers to data that provides information about vector data. 
 | Database | Milvus deployment           |
 | -------- | --------------------------- |
 | SQLite 3 | Single server               |
-| MySQL    | Distributed cluster servers |
+| MySQL    | Distributed cluster         |
