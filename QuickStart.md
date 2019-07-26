@@ -40,8 +40,8 @@ In this guide, we will walk you through installing Milvus Docker as well as runn
    $ cd /home/$USER/milvus
    $ mkdir conf
    $ cd conf
-   $ wget https://github.com/milvus-io/docs/blob/branch-0.3.0/assets/server_config.yaml
-   $ wget https://github.com/milvus-io/docs/blob/branch-0.3.0/assets/log_config.conf
+   $ wget https://raw.githubusercontent.com/milvus-io/docs/branch-0.3.0/assets/server_config.yaml
+   $ wget https://raw.githubusercontent.com/milvus-io/docs/branch-0.3.0/assets/log_config.conf
    
    ```
 
