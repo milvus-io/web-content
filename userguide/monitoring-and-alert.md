@@ -136,7 +136,7 @@ On the GUI dashboard of Milvus monitoring system, you can check these monitoring
 | Total file    |       Current number of files in Milvus      |
 | Data size       | Total amount of data stored in Milvus                 |
 | QPM (Query per minute)    |  Number of queries completed in every minute          |
-| Query elapsed time     | System wide metric. It is the total query elapsed time divided by total number of queries  |
+| Query service level     | System wide metric. Query service level = n_queries_completed_within_threshold1 / n_queries (Generally, you can set threshold1, threshold2 and threshold3 to track the query service level.) |
 | Query elapsed time per vector  |   It is the query elapsed time divided by number of vectors.       |
 | Connections         |  Number of connections established with the database during the selected time period. (A connection is a session established between a database client and a server.)   |
 | Uptime        |   The time (in minutes) Milvus server has been working and available   |
