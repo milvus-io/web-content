@@ -8,39 +8,39 @@ sidebar_label: FAQ
 
 ### What is Milvus?
 
-Milvus is a feature vector indexing database. It can be easily employed in x86 architecture server and virtual environment. It currently supports Linux operation system. 
+Milvus is a GPU-accelerated feature vector search engine, provides extraordinary performance for similiarity serach over massive feature vectors. It can be easily deployed on both bare metal and cloud plantforms with Linux operating systems. 
     
-### Are there any SDKs for Milvus?
+### How to use Milvus?
 
- Yes, Milvus provides Python and C++ SDK. It also supports all Thrift communication type.
+Milvus provides Python and C++ SDK, also supports all Thrift communication types.
 
-### Is Milvus easy to use?
+### How easy to use Milvus?
 
-Yes, Milvus is design for easy understanding and usage. You can treat Milvus as an ordinary database system. For detailed example programs, please read https://pypi.org/project/pymilvus/.
+Milvus can be easily deployed throught pulling docker images and simple pip install for SDKs. It is designed to be "easy to use". To start your first vector search program, please go to https://milvus.io/docs/en/QuickStart/.
 
-### Does Milvus has high availability?
+### Is Milvus high available?
 
-Yes, Milvus is designed to be highly available. Milvus cluster especially ensures an agreed level of performance even if some of the storage or computing components fail. 
+Milvus is designed to be used in mission critical systems with high SLAs. Milvus cluster ensures continuous service capability in case of any single ponit of failurs. 
 
-### How does the search works in Milvus?
+### How does Milvus work?
 
-All vectors stored in Milvus will be given an ID. When you search a vector, Milvus will return several IDs of vectors most similar to the target vector.
+All vectors will be indexed and stored in Milvus, each of them will be assigned with an ID. When vectors are searched, Milvus will return IDs of vectors that are most similar to the given vectors.
 
 
-### How to choose vector indexing type?
+### Which index types are supported?
 
-In Milvus, you can choose from the following index types:
+Currently Milvus supports:
 
 - Flat
 
-  Provides 100% precise matching of vectors. However, as the computation is huge, search speed might be affected. 
+  Provides 100% accuracy for recalls. However, performance might be downgraded due to large computation. 
   
 - IVFFlat
 
-  K-means based search which supports large scale vector matching.
+  K-means based similarity search which is banlanced between accuracy and performance. 
 
 
-### Does Milvus support searching while inserting?
+### Does Milvus support simultaneous searching and importing?
 
 Absolutely. 
 
