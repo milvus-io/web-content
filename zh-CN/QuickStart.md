@@ -9,7 +9,7 @@ sidebar_label: Milvus Quick Start
 该指南主要包含Milvus Docker版的快速安装，以及相关Python示例代码的运行。如果想进一步了解Milvus的使用，请访问[Milvus用户指南](/zh-CN/userguide/preface.md)。
 
 ## 安装前提
-1. Milvus Docker版目前仅在Linux系统上运行，请确保你的Linux系统符合以下版本：
+1. Milvus Docker版目前仅在Linux系统上运行，请确保您的Linux系统符合以下版本：
 
    | Linux 操作系统平台       | 版本        |
    | :----------------------- | :---------- |
@@ -30,7 +30,7 @@ sidebar_label: Milvus Quick Start
 
    Milvus提供了基于Prometheus监控和Grafana的展示平台，可以对数据库的各项指标进行可视化展示，兼容目前主流的Web浏览器如：微软IE、Google Chrome、Mozilla Firefox和Safari等。
   
-4. 请确保你已经安装以下软件包，以便Milvus Docker版能正常运行：
+4. 请确保您已经安装以下软件包，以便Milvus Docker版能正常运行：
 
    - [CUDA 9.0及以上](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html)
    - [Docker CE](https://docs.docker.com/install/)
@@ -81,7 +81,7 @@ sidebar_label: Milvus Quick Start
 
 ## 运行Python示例代码
 
-接下来，让我们来运行一个Python程序示例。你将创建一个向量数据表，向其中插入10条向量，然后运行一条向量相似度查询。
+接下来，让我们来运行一个Python程序示例。您将创建一个向量数据表，向其中插入10条向量，然后运行一条向量相似度查询。
 
 1. 请确保系统已经安装了[Python3](https://www.python.org/downloads/)。
 2. 安装Milvus Python SDK。
@@ -93,7 +93,7 @@ sidebar_label: Milvus Quick Start
 
    > 提示：如果需要进一步了解Milvus Python SDK，请阅读[Milvus Python SDK使用手册](https://pypi.org/project/pymilvus)。
    
-   > 注意：取决于您所使用的Milvus版本，你不一定要将Pymilvus升级到最新版本。
+   > 注意：是否需要将Pymilvus升级至最新版本取决于您当前所使用的Milvus版本。
 
 3. 创建*example.py*文件，并向文件中加入[Python示例代码](https://github.com/milvus-io/pymilvus/blob/branch-0.3.0/examples/example.py)。
 4. 运行示例代码。
@@ -108,5 +108,5 @@ sidebar_label: Milvus Quick Start
    ```shell
    Query result is correct.
    ```
-如果你看到以上查询结果提示信息，恭喜你！这意味着你已经成功完成了在Milvus上的第一次向量相似度查询。
+如果您看到以上查询结果提示信息，恭喜您！这意味着您已经成功完成了在Milvus上的第一次向量相似度查询。
 
