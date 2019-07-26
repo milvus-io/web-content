@@ -130,13 +130,13 @@ On the GUI dashboard of Milvus monitoring system, you can check these monitoring
 | CPU utilization      |     Divide the time that the server is busy by the total elapsed time                 |
 | Memory usage      |     Memory (in GB) currently consumed by Milvus                   |
 | Network IO          |    Network IO read/write speed (per second)          |
-| Disk read & write speed     |    Disk read & write speed                   |
+| Disk read & write speed     |    Disk read & write speed (GB/s)                   |
 | **Milvus metrics**  |                                  |
 | Insert per Second     |     Number of vectors that are inserted in a second.    |
 | Total file    |       Current number of files in Milvus      |
 | Data size       | Total amount of data stored in Milvus                 |
 | QPM (Query per minute)    |  Number of queries completed in every minute          |
-| Query service level     | System wide metric. Query service level = n_queries_completed_within_threshold1 / n_queries (Generally, you can set threshold1, threshold2 and threshold3 to track the query service level.) |
+| Query service level     | System wide metric. Query service level (%) = n_queries_completed_within_threshold1 / n_queries (Generally, you can set 3 time periods - threshold1, threshold2 and threshold3, to track the query service level.) |
 | Query elapsed time per vector  |   It is the query elapsed time divided by number of vectors.       |
 | Connections         |  Number of connections established with the database during the selected time period. (A connection is a session established between a database client and a server.)   |
 | Uptime        |   The time (in minutes) Milvus server has been working and available   |
