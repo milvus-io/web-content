@@ -80,9 +80,9 @@ Now, let's run a Python example program. You will need to create a vector data t
    $ pip install pymilvus==0.1.13
    ```
 
-   > Note: To learn more about Milvus Python SDK, go to [Milvus Python SDK Playbook](https://pypi.org/project/pymilvus). 
+   > Note: To learn more about Milvus Python SDK, go to [Milvus Python SDK Playbook](https://pypi.org/project/pymilvus/0.1.13/). 
    
-   > Caution: Depending on the Milvus version you currently use, you may not need to upgrade Pymilvus to the latest version unless required to.
+   > Caution: Please do not upgrade Pymilvus to the latest version unless required to.
 
 3. Create a new file *example.py*, and add [Python example code](https://github.com/milvus-io/pymilvus/blob/branch-0.3.0/examples/example.py) to it.
 
