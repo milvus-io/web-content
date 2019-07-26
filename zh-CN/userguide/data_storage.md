@@ -1,3 +1,11 @@
+---
+id: data-storage
+title: Data Storage
+sidebar_label: Data Storage
+---
+
+# 数据存储
+
 ## 向量数据存储
 
 每次新导入Milvus的向量数据都会自动存储在2个地方：您本地的磁盘和[MinIO私有云](https://min.io/product/multi-cloud-gateway#multi-cloud-gateway). 
