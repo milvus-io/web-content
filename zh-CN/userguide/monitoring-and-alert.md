@@ -1,7 +1,7 @@
 ---
-id: monitoring-and-alarm
-title: Monitoring and alarm
-sidebar_label: Monitoring and alarm
+id: monitoring-and-alert
+title: Monitoring and alert
+sidebar_label: Monitoring and alert
 ---
 
 # 监控与报警
@@ -136,8 +136,8 @@ Milvus server收集数据 -> 利用pull模式把所有数据导入Prometheus -> 
 | 数据文件总量     |       Milvus所存数据文件总量      |
 | 数据总量        |   Milvus所存数据总量               |
 | 每分钟查询率    |  每分钟完成的查询数量              |
-| 查询响应时间     |      查询的返回时长               |
-| 向量检索时间统计  |    单条向量查询的时长统计         |
+| 查询服务级别     |      查询服务级别 = 一定时间阈值内的查询数量/总查询数量              |
+| 单条向量查询时间  |    单条向量查询时间 = 查询使用时间/向量数量         |
 | 连接数          |  当前连接到Milvus服务器的客户端数量 |
 | 运行时长        |   Milvus服务器正常运行的分钟数      |
 | 缓存利用率       |    已用缓存占比                   |

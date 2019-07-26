@@ -1,7 +1,7 @@
 ---
-id: getting-started
-title: Getting started with Milvus
-sidebar_label: Getting started with Milvus
+id: get-started
+title: Getstarted with Milvus
+sidebar_label: Get started with Milvus
 ---
 
 #  快速入门

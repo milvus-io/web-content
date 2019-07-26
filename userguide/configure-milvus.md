@@ -1,13 +1,13 @@
 ---
-id: configuring-milvus
-title: Configuring Milvus
-sidebar_label: Configuring Milvus
+id: configure-milvus
+title: Configure Milvus
+sidebar_label: Configure Milvus
 ---
 
-# Configuring Milvus
+# Configure Milvus
 
 
-## Milvus file introduction
+## Milvus file structure
 After you have successfully started Milvus server, you can see a Milvus file under the path *home/$USER/milvus*, which contains the following child files:
 
 - *milvus/db* (database storage)
@@ -16,15 +16,15 @@ After you have successfully started Milvus server, you can see a Milvus file und
     - *server_config.yaml* (service configuration file)
     - *log_config.conf* (log configuration file)
 
-## Configuring Milvus service
+## Set up Milvus service
 
 Follow these procedures to configure Milvus service:
 
-1. Follow the path *home/$USER/milvus/conf*, and open Milvus service configuration file *server_config.yaml*.
+1. In the directory *home/$USER/milvus/conf*, open Milvus service configuration file *server_config.yaml*.
 
 2. Modify the parameters in the file.
 
-   1）In *server_config* section, set service parameters.
+   1）In section *server_config*, edit service parameters.
    
      | Parameter            | Description                          | Reference value           |
      |----------------|-----------------------------------|-------------------|
@@ -33,7 +33,7 @@ Follow these procedures to configure Milvus service:
      | gpu_index      | Current GPU, default is 0          | 0 ~ GPU number ~1                |
      | mode           | Milvus deployment method                    | single / cluster |            
                                                                                                                      
-   2）In *db_config* section, set database parameters.
+   2）In section *db_config*, edit database parameters.
    
      | Parameter               | Description                            | Reference value    |
      |-------------------|-------------------------------------|----------|
@@ -45,7 +45,7 @@ Follow these procedures to configure Milvus service:
      
    > Note: db_backend_url format is: dialect://username:password@host:port/database. ('dialect' can be either 'mysql' or 'sqlite', depending on whether you use MySQL or SQLite for the metadata storage.)
                                  
-   3）In *metric_config* section, set monitor parameters.
+   3）In section *metric_config*, edit monitor parameters.
    
      |Parameter               |  Description                             | Reference value     |
      |-------------------|-------------------------------------|----------|
@@ -56,7 +56,7 @@ Follow these procedures to configure Milvus service:
      | push_gateway_ip_address | IP address of push gateway   | 127.0.0.1             |
      | push_gateway_port       | Port of push gateway   |  9091                 |
 
-   4）In *cache_config* section, set the parameter.
+   4）In section *cache_config*, edit below parameter.
    
      |  Parameter                | Description                             | Reference value     |
      |-------------------|-------------------------------------|----------|

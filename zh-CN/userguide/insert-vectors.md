@@ -1,7 +1,7 @@
 ---
-id: inserting-vectors
-title: Inserting vectors
-sidebar_label: Inserting vectors
+id: insert-vectors
+title: Insert vectors
+sidebar_label: Insert vectors
 ---
 
 # 插入向量数据

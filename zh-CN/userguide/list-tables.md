@@ -1,12 +1,12 @@
 ---
-id: searching-table
-title: Searching a table
-sidebar_label: Searching a table
+id: list-table
+title: List a table
+sidebar_label: List a table
 ---
 
 # 查询表
 
-## 查询表名
+## 查询现有表
 通过以下操作，你可以查询Milvus数据库中所有表的名字：
 
 ```python
@@ -17,8 +17,8 @@ Status(message='Show tables successfully!', code=0)
 ['test01', 'others', ...]
 ```
 
-## 查询表的信息
-你可以按此方式查询数据库中某张表的信息：
+## 查询表的元数据
+你可以按此方式查询数据库中某张表的元数据：
 
 ```python
 >>> status, table = milvus.describe_table('test01')
@@ -35,6 +35,6 @@ TableSchema(table_name='test01',dimension=256, index_type=1, store_raw_vector=Fa
 >>> milvus.has_table(table_name='test01')
 True
 ```
-> 提示：如果查询的表已经不存在，则以上代码中返回值为False。
+> 提示：如果查询的表不存在，则以上代码中返回值为False。
 
 > 提示：若要了解更多Milvus操作，你可以参照[Milvus Python SDK](https://pypi.org/project/pymilvus)和[使用示例](https://github.com/milvus-io/pymilvus/blob/branch-0.3.0/examples/example.py)。

@@ -1,27 +1,27 @@
 ---
-id: creating-table
-title: Creating a table
-sidebar_label: Creating a table
+id: create-table
+title: Create a table
+sidebar_label: Create a table
 ---
 
-# Creating a table
+# Create a table
 
 > Note: All the following actions are executed in Python. For other languages, Milvus supports RESTful and RPC.
 
 ## Prerequisites
-When you have finished the installation and basic configuration of Milvus, you may go on and create a table to insert data into. Before that, ensure you have：
+After you have completed the installation and basic configuration of Milvus, you can create a table and insert data into it. Before that, you need to connect to Milvus server：
 
-1. Imported pymilvus.
+1. Import pymilvus.
 
    ```python
    # Import pymilvus
    >>> from milvus import Milvus, Prepare, IndexType, Status
 
    ```
-2. Connected Milvus to your local server.
+2. Connect to Milvus on your local server.
 
    ```
-   # Connect Milvus to server
+   # Connect to Milvus server
    >>> milvus = Milvus()
    >>> milvus.connect(host='0.0.0.0', port='19530')
    Status(message='connected!', code=0)
@@ -29,14 +29,14 @@ When you have finished the installation and basic configuration of Milvus, you m
    ```
    > Note: In the above code, default values are used for *host* and *port* parameters. They shoud be the value of the *address* and *port* you set in *server_config* file in *Configuring Milvus*.
    
-## Creating a table
-This section shows you how to create a table in Milvus. To make it easier to understand, all task procedures are based on an example of  Table test01 creation. Here are all related parameters. You can set parameter values to your needs.
+## Create a table
+This section describes how to create a table in Milvus. Assume we would create a table named test01. Below is a list of table parameters. You should choose parameter values according to your requirements.
 
 |  Parameter  |  Description  |  Type   |  Reference value   |
 | ------------| --------------| --------| ---------|
-| table_name  | Name of the table you want to create (Table name can only be _, number and letter. The first character must be _ or letter, not a number. The entire length can not exceed 255 characters)| String | 'table name' |
+| table_name  | Name of the table you want to create (Table name can only be '_', number and letter. The first character must be '_' or a letter, not a number. The entire length can not exceed 255 characters)| String | 'table name' |
 | dimension   | Vector dimensions | Integer | 0 < dimension <= 16384 (Usually set to 128, 256 or 512)
-| index_type  |5 types of indexing methods: 1. 'FLAT' - Precise vector indexing; 2. 'IVFLAT' - K-means based vector indexing. Search precision may be lower, but with faster speed.  |IndexType|FLAT / IVFLAT|
+| index_type  |2 types of indexing methods: 1. 'FLAT' - Precise vector indexing; 2. 'IVFLAT' - K-means based vector indexing. Search precision may be lower, but with faster speed.  |IndexType|FLAT / IVFLAT|
 
 
 1. Prepare table parameters.
