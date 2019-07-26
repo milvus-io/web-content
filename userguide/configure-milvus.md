@@ -63,7 +63,7 @@ Follow these procedures to configure Milvus service:
      |-------------------|-------------------------------------|----------|
      | cpu_cache_capacity | Memory used for cache in CPU. Default value is 16 (GB)       |  0 ~ Total memory size |
 
-   5）Click file *engine_config*, and configure the parameter.
+   5）In section *engine_config*, edit below parameter.
 
      |  Parameter            | Description                             | Reference value      |
      |-------------------|-------------------------------------|----------|
