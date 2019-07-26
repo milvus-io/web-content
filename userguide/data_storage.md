@@ -4,7 +4,7 @@ title: Data Storage
 sidebar_label: Data Storage
 ---
 
-# Data Storage
+# Data storage
 
 ## Vector data storage
 
