@@ -54,8 +54,8 @@ sidebar_label: Milvus Quick Start
    $ cd /home/$USER/milvus
    $ mkdir conf
    $ cd conf
-   $ wget https://github.com/milvus-io/docs/blob/branch-0.3.0/assets/server_config.yaml
-   $ wget https://github.com/milvus-io/docs/blob/branch-0.3.0/assets/log_config.conf
+   $ wget https://raw.githubusercontent.com/milvus-io/docs/branch-0.3.0/assets/server_config.yaml
+   $ wget https://raw.githubusercontent.com/milvus-io/docs/branch-0.3.0/assets/log_config.conf
    ```
 
 3. 启动Milvus server。
