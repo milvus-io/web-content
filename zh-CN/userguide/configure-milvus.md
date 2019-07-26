@@ -41,6 +41,7 @@ sidebar_label: Configure Milvus
      | index_building_threshold | index building触发阈值        |  1024（MB）  |
      | archive_disk_threshold | 归档触发阈值：存储大小，默认值为512（GB）。一旦超过存储大小，触发归档操作| >0 |
      | archive_days_threshold | 归档触发阈值：存储天数，默认值为30（天）。一旦超过存储天数，触发归档操作|  >0 |
+     | maximum_memory    | 用于buffer的内存量，默认值为4（GB）。maximum_memory和cpu_cache_capacity（*cache_config*文件中）之和不能超过内存总量| 1 ~ 内存总量|
      
    > 提示：db_backend_url格式为：dialect://username:password@host:port/database。(其中'dialect'可以是'mysql'或'sqlite'，取决于你是用了MySQL 还是SQLite作为元数据库)
    
@@ -55,12 +56,18 @@ sidebar_label: Configure Milvus
      | push_gateway_ip_address | push gateway的ip地址   | 127.0.0.1             |
      | push_gateway_port       | push gateway的端口号   |  9091                 |
 
-   4）在*cache_config*区域，设置相关参数。
+   4）在*cache_config*区域，设置下列参数。
    
      |  参数             | 参数描述                            | 参考值    |
      |-------------------|-------------------------------------|----------|
      | cpu_cache_capacity |用于缓存的内存量，默认值为16（GB）     |  0 ~ 内存总量 |
      
+   5）在*engine_config*区域，设置下列参数。
+
+     |  参数             | 参数描述                            | 参考值    |
+     |-------------------|-------------------------------------|----------|
+     | nprobe            |查询所涉及的向量类的个数。nprobe影响查询精度。数值越大，精度越高，但查询速度更慢    |  1 ~ 16384 |
+
 3. 重启Milvus Docker。
 
    ```

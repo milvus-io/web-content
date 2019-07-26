@@ -42,6 +42,7 @@ Follow these procedures to configure Milvus service:
      | index_building_threshold | index building trigger value       |  1024 (MB)  |
      | archive_disk_threshold | Archive action triggered if storage size exceed this value. Default value is 512 (GB).| >0 |
      | archive_days_threshold | Files older than x days will be archived. Default value is 30 (Day).|  >0  |
+     | maximum_memory    | Default value is 4 (GB). The sum of maximum_memory and cpu_cache_capacity (in *cache_config* file) should be less than total memory| 1 ~ Total memory|
      
    > Note: db_backend_url format is: dialect://username:password@host:port/database. ('dialect' can be either 'mysql' or 'sqlite', depending on whether you use MySQL or SQLite for the metadata storage.)
                                  
@@ -62,6 +63,11 @@ Follow these procedures to configure Milvus service:
      |-------------------|-------------------------------------|----------|
      | cpu_cache_capacity | Memory used for cache in CPU. Default value is 16 (GB)       |  0 ~ Total memory size |
 
+   5）In section *engine_config*, edit below parameter.
+
+     |  Parameter            | Description                             | Reference value      |
+     |-------------------|-------------------------------------|----------|
+     | nprobe            |Number of queried vector buckets. nprobe affects search precision. The greater the value, the more precise the result, yet the slower the search speed. |  1 ~ 16384 |
      
 3. Restart Milvus Docker.
 
