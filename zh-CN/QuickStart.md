@@ -93,7 +93,7 @@ sidebar_label: Milvus Quick Start
 
    > 提示：如果需要进一步了解Milvus Python SDK，请阅读[Milvus Python SDK使用手册](https://pypi.org/project/pymilvus)。
    
-   > 注意：取决于您当前所使用的Milvus版本，您不一定要将Pymilvus升级至最新版本。
+   > 注意：是否需要将Pymilvus升级至最新版本取决于您当前所使用的Milvus版本。
 
 3. 创建*example.py*文件，并向文件中加入[Python示例代码](https://github.com/milvus-io/pymilvus/blob/branch-0.3.0/examples/example.py)。
 4. 运行示例代码。
