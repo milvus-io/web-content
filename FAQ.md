@@ -44,3 +44,7 @@ In Milvus, you can choose from the following index types:
 
 Absolutely. 
 
+### Where is the data stored?
+
+Vector data is stored either in your local disk or MinIO cloud. For more details about storage, read [Data storage](../userguide/data_storage.md).
+
