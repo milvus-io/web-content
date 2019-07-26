@@ -56,13 +56,13 @@ sidebar_label: Configure Milvus
      | push_gateway_ip_address | push gateway的ip地址   | 127.0.0.1             |
      | push_gateway_port       | push gateway的端口号   |  9091                 |
 
-   4）在*cache_config*区域，设置相关参数。
+   4）在*cache_config*区域，设置下列参数。
    
      |  参数             | 参数描述                            | 参考值    |
      |-------------------|-------------------------------------|----------|
      | cpu_cache_capacity |用于缓存的内存量，默认值为16（GB）     |  0 ~ 内存总量 |
      
-   5）在*engine_config*区域，设置相关参数。
+   5）在*engine_config*区域，设置下列参数。
 
      |  参数             | 参数描述                            | 参考值    |
      |-------------------|-------------------------------------|----------|
