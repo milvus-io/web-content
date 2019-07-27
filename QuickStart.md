@@ -6,18 +6,18 @@ sidebar_label: Milvus Quick Start
 
 #  Milvus Quick Start
 
-In this guide, we will walk you through installing Milvus Docker as well as running some Python example codes. If you want to learn more about how to use Milvus, visit [Milvus Docker User Guide](./userguide/preface.md).
+In this guide, we will walk you through installing Milvus and your very first vector search Python codes with Milvus. To learn more about how to use Milvus, please visit [Milvus Docker User Guide](./userguide/preface.md).
 
 ## Prerequisites
 
-1. As Milvus Docker is now supported only on Linux systems, make sure your Linux distribution is one of the following:
+1. Milvus installation is currently supported on Linux systems, make sure one of the following Linux distributions is used:
 
    | Linux operation system | Supported versions          |
    | :--------------------- | :--------------- |
    | CentOS                 | 7.5 and higher   |
    | Ubuntu LTS             | 16.04 and higher |
 
-2. Make sure these software packages are installed so that Milvus can be run on Docker:
+2. Make sure following software packages are installed so that Milvus can deployed through Docker:
 
    - [CUDA 9.0 and higher]( https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html)
    - [Docker CE]( https://docs.docker.com/install/)
@@ -99,6 +99,6 @@ Now, let's run a Python example program. You will need to create a vector data t
    Query result is correct.
    ```
 
-If you see the above query result message, congratulations! You have successfully completed your first vector similarity search with Milvus.
+If you see the above message, congratulations! You have successfully completed your first vector similarity search with Milvus.
 
 
