@@ -37,12 +37,14 @@ Follow these procedures to configure Milvus service:
 
      | Parameter               | Description                            | Reference value    |
      |-------------------|-------------------------------------|----------|
-     | db_path           | Directory of Milvus database files            |    /opt/data   |
+     | db_path           | Directory of Milvus data storage           |    /opt/data   |
+     | db_slave_path     | Secondary directory of data storage        |               |
+     | parallel_reduce   | Select if to use multi-threads to reduce topk result | True / False |
      | db_backend_url    | Meta database URL                         |sqlite://:@:/ |
      | index_building_threshold | index building trigger value       |  1024 (MB)  |
      | archive_disk_threshold | Archive action triggered if storage size exceed this value. Default value is 512 (GB).| >0 |
      | archive_days_threshold | Files older than x days will be archived. Default value is 30 (Day).|  >0  |
-     | maximum_memory    | Default value is 4 (GB). The sum of maximum_memory and cpu_cache_capacity (in *cache_config* file) should be less than total memory| 1 ~ Total memory|
+     | insert_buffer_size    | Maximum insert buffer size allowed. Default value is 4 (GB). The sum of insert_buffer_size and cpu_cache_capacity (in *cache_config* file) should be less than total memory| 1 ~ Total memory|
 
    > Note: db_backend_url format is: dialect://username:password@host:port/database. ('dialect' can be either 'mysql' or 'sqlite', depending on whether you use MySQL or SQLite for the metadata storage.)
 
