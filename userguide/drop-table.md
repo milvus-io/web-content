@@ -1,7 +1,7 @@
 ---
-id: deleting-table
-title: Deleting a table
-sidebar_label: Deleting a table
+id: drop-table
+title: Drop a table
+sidebar_label: Drop a table
 ---
 
 # Drop a table
