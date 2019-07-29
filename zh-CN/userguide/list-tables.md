@@ -1,7 +1,7 @@
 ---
-id: list-table
-title: List a table
-sidebar_label: List a table
+id: list-tables
+title: List tables
+sidebar_label: List tables
 ---
 
 # 查询表
