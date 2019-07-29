@@ -7,10 +7,10 @@ sidebar_label: Drop a table
 # Drop a table
 
 
-You may delete a table in Milvus when necessary. For example, to delete Table test01, you only need to: 
+You may drop a table in Milvus when necessary. For example, to drop Table test01, you only need to:
 
 ```
-# Delete table
+# Drop table
 >>> milvus.delete_table(table_name='test01')
 Status(message='Delete table successfully!', code=0)
 ```
