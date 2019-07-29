@@ -1,10 +1,10 @@
 ---
 id: drop-table
-title: Drop a table
-sidebar_label: Drop a table
+title: Drop table
+sidebar_label: Drop table
 ---
 
-# Drop a table
+# Drop table
 
 
 You may drop a table in Milvus when necessary. For example, to drop Table test01, you only need to:
