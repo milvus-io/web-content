@@ -6,7 +6,7 @@ sidebar_label: Search vectors in Milvus
 
 # Search vectors in Milvus
 
-Now, you have inserted vectors into Table test01, you can start searching with Milvus. In addition, you are allowed not only to search multiple data sets, and also to search within a specific range. Below is the list of searching parameters:
+Now, you have inserted vectors into Table test01, you can start searching with Milvus. In addition, you are not only able to search multiple input vectors in one batch, but also able to search within a specific date range. Below is the list of searching parameters:
 
 |Parameter|Description|Type|Reference value|
 |---------|-----------|----|-----|
@@ -17,7 +17,7 @@ Now, you have inserted vectors into Table test01, you can start searching with M
 
 > Note: Currently, only date range is supported in query_ranges. The date format is 'yyyy-mm-dd'. The date range [2019.1.1, 2019.1.5] contains 2019.1.1 and 2019.1.5.
 
-Suppose you want to search the top 10 most similar vectors of 5 256-dimensional vectors (represented by "query_records" in below codes), you may: 
+Suppose you want to search the top 10 most similar vectors of 5 256-dimensional vectors (represented by "query_records" in below codes), you may:
 
    ```
    # Search 5 vectors
@@ -30,4 +30,3 @@ Suppose you want to search the top 10 most similar vectors of 5 256-dimensional 
    ...
    ]
    ```
- 
