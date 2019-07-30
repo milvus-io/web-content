@@ -1,10 +1,10 @@
 ---
 id: create-table
-title: Create a table
-sidebar_label: Create a table
+title: Create table
+sidebar_label: Create table
 ---
 
-# Create a table
+# Create table
 
 > Note: All the following actions are executed in Python. For other languages, Milvus supports RESTful and RPC.
 
@@ -28,7 +28,7 @@ After you have completed the installation and basic configuration of Milvus, you
 
    ```
    > Note: In the above code, default values are used for *host* and *port* parameters. They shoud be the value of the *address* and *port* you set in *server_config* file in *Configuring Milvus*.
-   
+
 ## Create a table
 This section describes how to create a table in Milvus. Assume we would create a table named test01. Below is a list of table parameters. You should choose parameter values according to your requirements.
 
@@ -40,14 +40,14 @@ This section describes how to create a table in Milvus. Assume we would create a
 
 
 1. Prepare table parameters.
-  
+
    ```
    # Prepare param
    >>> param = {'table_name':'test01', 'dimension':256, 'index_type':IndexType.FLAT}
    ```
-   
+
    > Caution: Table name is the unique identifier of a table in Milvus. So make sure there are no duplicated names.
-   
+
 2. Create Table test01.
 
    ```
@@ -55,7 +55,7 @@ This section describes how to create a table in Milvus. Assume we would create a
    >>> milvus.create_table(param)
    Status(message='Table test01 created!', code=0)
    ```
-   
+
 3. Verify details of the newly created table.
    ```
    # Verify table info.
@@ -64,6 +64,5 @@ This section describes how to create a table in Milvus. Assume we would create a
    Status(message='Describe table successfully!')
    >>> table
    TableSchema(table_name='test01',dimension=256, index_type=1, store_raw_vector=False)
-   
-   ```                        
 
+   ```                        

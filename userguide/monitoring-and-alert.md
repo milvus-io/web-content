@@ -7,11 +7,11 @@ sidebar_label: Monitoring and alert
 # Monitoring and alert
 
 ## Monitoring introduction
-A database monitoring system helps you track database performance and corresponds to unexpected emergency issues. With Milvus, you can use the monitoring system based on [Prometheus](https://prometheus.io/) and [Grafana](https://grafana.com/). Here is how the Milvus monitor works:
+A database monitoring system helps you track database performance and corresponds to unexpected emergency issues. With Milvus, you can use the monitoring system based on [Prometheus](https://prometheus.io/) and [Grafana](https://grafana.com/). Here is how these monitors work for Milvus:
 
 Milvus server collects data -> Collected data are imported to Prometheus -> Monitoring items are displayed in Grafana-supported dashboard
 
-> Caution: To enable monitoring and alert function in Milvus, make sure the parameter *is_startup* is *on* in section *metric_config* under the directory *home/$USER/milvus/conf/server_config.yaml*.
+> Note: To enable monitoring and alert function in Milvus, make sure the parameter *is_startup* is *on* in section *metric_config* under the directory *home/$USER/milvus/conf/server_config.yaml*.
 
 
 ## Install and configure the monitor
@@ -21,7 +21,7 @@ Milvus server collects data -> Collected data are imported to Prometheus -> Moni
 2. Make below configuration in Prometheus.
 
    1) Under Prometheus root directory, open configuration file *prometheus.yml*, and update section *alerting*, *rule_files* and *scrape_configs* as follows:
-   
+
       ```yaml
       # my global config
       global:
@@ -63,7 +63,7 @@ Milvus server collects data -> Collected data are imported to Prometheus -> Moni
           - targets: ['localhost:9091']
       ```
 
-   2) Create file *serverdown.yml* under Prometheus root directory, with these rules: 
+   2) Create file *serverdown.yml* under Prometheus root directory, with these rules:
 
       ```yaml
       groups:
@@ -75,7 +75,7 @@ Milvus server collects data -> Collected data are imported to Prometheus -> Moni
             labels:
               serverity: page
       ```
-      > Note: You can set various rules for Milvus alarm. The example in the above code is: when the server is down, an email will be sent instantly to a specified user. 
+      > Note: You can set various rules for Milvus alarm. The example in the above code is: when the server is down, an email will be sent instantly to a specified user.
 
    3) Start Prometheus service.
       ```
@@ -83,38 +83,38 @@ Milvus server collects data -> Collected data are imported to Prometheus -> Moni
       ```
 
 3. Install Grafana by running this command in a seperate terminal.
-   
+
       ```
       $ docker run -i -p 3000:3000 grafana/grafana
       ```
 4. Make below configuration in Grafana.
 
    1) Log in to Grafana web portal (localhost:3000), and click the Configuration button on the left menu, then choose *Data Sources*.
-  
+
    > Note: If you are logging in to Grafana for the first time, please use default username (admin) and password (admin).
 
    2) On *Data Sources* tab, choose *Prometheus* as the data source type.
-   
+
       ![image-20190620191640605](assets/datasource.png)
-   
+
    3) On *Settings* tab, set *Prometheus* as default. In *URL* field, enter the Prometheus server address http://localhost:9090; and in *ACCESS*, choose *Browser*. Then click *Save & Test*.
-   
+
       ![image-20190620191702697](assets/settings.png)
-   
+
    4) On the left side bar, click the Create button and choose *Dashboard*. On the top left corner of the page, click *New dashboard*.
 
       ![image-20190620191721734](assets/newdashboard.png)
-   
+
    5) Click *Import dashboard* in the right box.
-   
+
       ![image-20190620191747161](assets/importdashboard.png)
-   
+
    6) Download [json configuration file](assets/dashboard.json), and import it into the system.
-   
+
       ![image-20190620191802408](assets/importjson.png)
 
    When it is done, the monitor dashboard should be displayed.
-   
+
    ![image-20190620134549612](assets/prometheus.png)
 
 
@@ -126,7 +126,7 @@ On the GUI dashboard of Milvus monitoring system, you can check these monitoring
 |----------------|----------------------------------|
 | **System metrics**    |                                  |
 | GPU utilization     |  GPU utilization ratio (%)        |
-| Video memory usage      |   Video memory (in GB) currently consumed by Milvus                  |
+| GPU memory usage      |   GPU memory (in GB) currently consumed by Milvus                  |
 | CPU utilization      |     Divide the time that the server is busy by the total elapsed time                 |
 | Memory usage      |     Memory (in GB) currently consumed by Milvus                   |
 | Network IO          |    Network IO read/write speed (per second)          |
@@ -147,7 +147,7 @@ The default Milvus monitoring frequency is 1 time/second. If you want to change 
 
 
 ## Enable alert function
-The Milvus alert system works on Alertmanager, which receives alert messages from Prometheus once an exception occurs. The alert architecture looks like this: 
+The Milvus alert system works on Alertmanager, which receives alert messages from Prometheus once an exception occurs. The alert architecture looks like this:
 
 ![Monitoring](assets/Monitoring.png)
 
@@ -169,19 +169,18 @@ To enable alert in Milvus, proceed as follows:
       route:
         group_by: ['alertname']
         receiver: default
-    
+
       receivers:
         - name: 'default'
           email_configs:
           - to: '××××@××.com'             # receiver email address
       ```
-      
+
       > Note: To get *smtp_auth_password*, log in to your email and enable *SMTP* services in the *Settings* page. Then you can set the password in the SMTP auth password page.
 
-   2) Start Alertmanager.
+   3) Start Alertmanager.
 
       ```
       $ ./alertmanager --config.file=milvus.yml
       ```
 > Note: To learn more about configuration of alert rules, go to [Alert Configuration](https://prometheus.io/docs/alerting/configuration/#configuration-file).
-
