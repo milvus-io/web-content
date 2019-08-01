@@ -1,5 +1,5 @@
 ---
-id: deleting-table
+id: drop-table
 title: Drop table
 sidebar_label: Drop table
 ---
