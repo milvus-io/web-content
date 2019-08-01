@@ -35,9 +35,8 @@ sidebar_label: Create a table
 |  参数  |  描述  |  类型   |  参考值   |
 | ------------| --------------| --------| ---------|
 | table_name  | 要创建的表名（只能是‘_’，数字和字母组成。首个字符必须是‘_’或者字母，不可以是数字。长度不可以超过255字符）| 字符串 | '表名' |
-| dimension   | 表格中向量的维度 | 整数 | 0 < dimension <= 16384, 通常设置为128、256或512维 
-| index_type  |目前支持2种索引类型: 1. 'FLAT' - 精确向量索引类型；2. 'IVFLAT' - 基于K-means的向量索引。|IndexType|FLAT / IVFLAT |
-
+| dimension | 表格中向量的维度 | 整数 | 0 < dimension <= 16384, 通常设置为128、256或512维 |
+| index_type | 目前支持3种索引类型: 1. 'FLAT' - 精确向量索引；2. 'IVFLAT' - 基于K-means的向量索引；3. ’IVFSQ‘ - 运用scalar quantization的向量索引，能大幅缩小向量体积（大概缩减3/4），从而能有效提高向量吞吐量。 | IndexType | FLAT / IVFLAT / IVFSQ |
 1. 准备数据表的参数，比如：
   
    ```
@@ -64,4 +63,4 @@ sidebar_label: Create a table
    >>> table
    TableSchema(table_name='test01',dimension=256, index_type=1, store_raw_vector=False)
    
-   ```                        
+   ```
