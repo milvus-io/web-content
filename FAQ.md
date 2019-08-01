@@ -8,7 +8,7 @@ sidebar_label: FAQ
 
 ### What is Milvus?
 
-Milvus is a GPU-accelerated feature vector search engine, provides extraordinary performance for similiarity serach over massive feature vectors. It can be easily deployed on both bare metal and cloud plantforms with Linux operating systems. 
+Milvus is a GPU-accelerated feature vector search engine, provides extraordinary performance for similiarity search over massive feature vectors. It can be easily deployed on both bare metal and cloud plantforms with Linux operating systems. 
     
 ### How to use Milvus?
 
@@ -24,7 +24,7 @@ Milvus is designed to be used in mission critical systems with high SLAs. Milvus
 
 ### How does Milvus work?
 
-All vectors will be indexed and stored in Milvus, each of them will be assigned with an ID. When vectors are searched, Milvus will return IDs of vectors that are most similar to the given vectors.
+All vectors will be indexed and stored in Milvus, each of them will be assigned with an ID. When vectors are searched, Milvus will return IDs of vectors that are most similar to the given ones.
 
 
 ### Which index types are supported?
@@ -33,7 +33,7 @@ Currently Milvus supports:
 
 - Flat
 
-  Provides 100% accuracy for recalls. However, performance might be downgraded due to large computation. 
+  Provides 100% accuracy for recalls. However, performance might be downgraded due to huge computation effort. 
   
 - IVFFlat
 
@@ -43,4 +43,8 @@ Currently Milvus supports:
 ### Does Milvus support simultaneous searching and importing?
 
 Absolutely. 
+
+### Where is the data stored?
+
+Vector data is stored either in your local disk or MinIO cloud. For more details about storage, read [Data storage](userguide/data_storage.md).
 

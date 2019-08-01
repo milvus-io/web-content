@@ -8,9 +8,8 @@
 - [List Tables](list-tables.md)
 - [Drop Table](drop-table.md)
 - [Search Vectors in Milvus](search-vectors-in-milvus.md)
+- [Data Storage](data_storage.md)
 - [Monitoring and Alert](monitoring-and-alert.md)
 - [Application Scenarios](application-scenario.md)
 - [Trouble Shooting](trouble-shooting.md)
 - [Support](support.md)
-
-
