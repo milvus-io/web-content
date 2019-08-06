@@ -39,13 +39,13 @@ sidebar_label: Configure Milvus
    | db_path           | Milvus数据库文件存储的路径            |    /opt/data     |
    | db_slave_path | 当数据量很大，db_path中的磁盘空间无法容下时，您可以添加多个二级数据存储文件路径（以分号隔开）。由于向量数据将在db_path和db_slave_path路径下的文件中均匀分布，请确保这些文件可用的存量差不多。 |  |
    | parallel_reduce | 选择是否使用多线程来运行向量查询。如果使用，将大大减少总的查询时间。如果批量被查询的向量数量很大，建议开启该功能。 | True / False |
-   | db_backend_url    | 元数据库URL                          | sqlite://:@:/  |
+   | db_backend_url    | 元数据库URL。Milvus支持2种数据库用于存储元数据：SQLite（适合单机部署）和MySQL（适合分布式部署）。 | sqlite://:@:/  |
    | index_building_threshold | index building触发阈值        |  1024（MB）  |
    | archive_disk_threshold | 归档触发阈值：存储大小，默认值为512（GB）。一旦超过存储大小，触发归档操作。 | >0 |
    | archive_days_threshold | 归档触发阈值：存储天数，默认值为30（天）。一旦超过存储天数，触发归档操作。 |  >0 |
    | insert_buffer_size | 用于buffer的最大内存量，默认值为4（GB）。insert_buffer_size 和cpu_cache_capacity（*cache_config*文件中）之和不能超过内存总量。 | 1 ~ 内存总量|
 
-   > 提示：db_backend_url格式为：dialect://username:password@host:port/database。(其中'dialect'可以是'mysql'或'sqlite'，取决于你是用了MySQL 还是SQLite作为元数据库)
+   > 提示：db_backend_url的格式为：dialect://username:password@host:port/database。(其中'dialect'可以是'mysql'或'sqlite'，取决于你是用了MySQL 还是SQLite作为元数据库)
 
    3）在*metric_config*区域，设置监控参数。
 
