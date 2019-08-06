@@ -17,3 +17,4 @@ Follow this command to build index for the table:
 >>> milvus.build_index(table_name='test01')
 Status(code='0', message='OK!')
 ```
+

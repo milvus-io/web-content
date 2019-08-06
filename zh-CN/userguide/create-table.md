@@ -9,16 +9,16 @@ sidebar_label: Create a table
 > 注意：以下操作都是在Python交互环境下进行的。对于其他类型的语言，Milvus支持通过RESTful和RPC的访问方法。
 
 ## 前提条件
-如果你已经完成了Milvus的安装和所有相关设置，你就可以在Milvus上创建数据表了。在用Python创建表之前，请确保以下操作已完成：
+如果您已经完成了Milvus的安装和所有相关设置，您就可以在Milvus上创建数据表了。在用Python创建表之前，请确保以下操作已完成：
 
-1. 你已经导入了pymilvus。
+1. 您已经导入了pymilvus。
 
    ```python
    # Import pymilvus
    >>> from milvus import Milvus, Prepare, IndexType, Status
 
    ```
-2. 你已经将Milvus连接到了本地server。
+2. 您已经将Milvus连接到了本地server。
 
    ```
    # Connect Milvus to server

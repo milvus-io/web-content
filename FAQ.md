@@ -30,11 +30,11 @@ All vectors will be indexed and stored in Milvus, each of them will be assigned 
 
 Currently Milvus supports:
 
-- FLAT
+- Flat
 
   Provides 100% accuracy for recalls. However, performance might be downgraded due to huge computation effort. 
 
-- IVFLAT
+- IVFFlat
 
   K-means based similarity search which is balanced between accuracy and performance.
 

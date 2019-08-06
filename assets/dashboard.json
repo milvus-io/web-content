@@ -286,11 +286,75 @@
       "valueName": "current"
     },
     {
+      "gridPos": {
+        "h": 5,
+        "w": 4,
+        "x": 16,
+        "y": 4
+      },
+      "id": 100,
+      "links": [],
+      "options": {
+        "fieldOptions": {
+          "calcs": [
+            "last"
+          ],
+          "defaults": {
+            "min": 0,
+            "unit": "percent"
+          },
+          "mappings": [],
+          "override": {},
+          "thresholds": [
+            {
+              "color": "green",
+              "index": 0,
+              "value": null
+            },
+            {
+              "color": "#6ED0E0",
+              "index": 1,
+              "value": 200
+            },
+            {
+              "color": "red",
+              "index": 2,
+              "value": 500
+            },
+            {
+              "color": "#EAB839",
+              "index": 3,
+              "value": 800
+            }
+          ],
+          "values": false
+        },
+        "orientation": "auto",
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
+      },
+      "pluginVersion": "6.2.5",
+      "targets": [
+        {
+          "expr": "CPU_usage_percent{CPU=\"avg\",instance=\"localhost:8080\",job=\"milvus_server\"}",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "ratio",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "milvus CPU utilization ratio",
+      "transparent": true,
+      "type": "gauge"
+    },
+    {
       "description": "Cache utilization ratio(%)",
       "gridPos": {
         "h": 5,
-        "w": 6,
-        "x": 17,
+        "w": 4,
+        "x": 20,
         "y": 4
       },
       "id": 46,
@@ -349,7 +413,7 @@
       "description": "Memory (in GB) currently consumed by Milvus",
       "fill": 1,
       "gridPos": {
-        "h": 9,
+        "h": 10,
         "w": 16,
         "x": 0,
         "y": 9
@@ -430,14 +494,16 @@
       }
     },
     {
-      "description": "Divide the time that the server is busy by the total elapsed time",
+      "cacheTimeout": null,
+      "description": "GPU utilization(MB)",
       "gridPos": {
-        "h": 9,
+        "h": 7,
         "w": 8,
         "x": 16,
         "y": 9
       },
-      "id": 98,
+      "hideTimeOverride": true,
+      "id": 68,
       "links": [],
       "options": {
         "displayMode": "gradient",
@@ -446,139 +512,218 @@
             "last"
           ],
           "defaults": {
-            "decimals": 1,
-            "max": 100,
+            "decimals": null,
+            "max": "6000",
             "min": 0,
-            "title": "",
-            "unit": "percent"
+            "unit": "decmbytes"
           },
           "mappings": [],
           "override": {},
           "thresholds": [
             {
-              "color": "green",
+              "color": "semi-dark-blue",
               "index": 0,
               "value": null
             },
             {
-              "color": "light-yellow",
+              "color": "semi-dark-orange",
               "index": 1,
-              "value": 20
+              "value": 2000
             },
             {
-              "color": "light-red",
+              "color": "light-purple",
               "index": 2,
-              "value": 40
+              "value": 4000
             },
             {
-              "color": "dark-red",
+              "color": "red",
               "index": 3,
-              "value": 80
+              "value": 5000
             }
           ],
           "values": false
         },
         "orientation": "horizontal"
       },
-      "repeat": null,
+      "pluginVersion": "6.2.5",
       "targets": [
         {
-          "expr": "CPU_usage_percent{CPU=\"0\",instance=\"localhost:8080\",job=\"milvus_server\"}",
+          "expr": "GPU_memory_usage_total{DeviceNum=\"0\",instance=\"localhost:8080\",job=\"milvus_server\"}",
           "format": "time_series",
-          "instant": false,
+          "instant": true,
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "1",
+          "legendFormat": "0",
           "refId": "A"
         },
         {
-          "expr": "CPU_usage_percent{CPU=\"1\",instance=\"localhost:8080\",job=\"milvus_server\"}",
+          "expr": "GPU_memory_usage_total{DeviceNum=\"1\",instance=\"localhost:8080\",job=\"milvus_server\"}",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "2",
+          "legendFormat": "1",
           "refId": "B"
         },
         {
-          "expr": "CPU_usage_percent{CPU=\"2\",instance=\"localhost:8080\",job=\"milvus_server\"}",
+          "expr": "GPU_memory_usage_total{DeviceNum=\"2\",instance=\"localhost:8080\",job=\"milvus_server\"}",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "3",
+          "legendFormat": "2",
           "refId": "C"
         },
         {
-          "expr": "CPU_usage_percent{CPU=\"3\",instance=\"localhost:8080\",job=\"milvus_server\"}",
+          "expr": "GPU_memory_usage_total{DeviceNum=\"3\",instance=\"localhost:8080\",job=\"milvus_server\"}",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "4",
+          "legendFormat": "3",
           "refId": "D"
         },
         {
-          "expr": "CPU_usage_percent{CPU=\"4\",instance=\"localhost:8080\",job=\"milvus_server\"}",
+          "expr": "GPU_memory_usage_total{DeviceNum=\"4\",instance=\"localhost:8080\",job=\"milvus_server\"}",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "5",
+          "legendFormat": "4",
           "refId": "E"
         },
         {
-          "expr": "CPU_usage_percent{CPU=\"5\",instance=\"localhost:8080\",job=\"milvus_server\"}",
+          "expr": "GPU_memory_usage_total{DeviceNum=\"5\",instance=\"localhost:8080\",job=\"milvus_server\"}",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "6",
+          "legendFormat": "5",
           "refId": "F"
         },
         {
-          "expr": "CPU_usage_percent{CPU=\"6\",instance=\"localhost:8080\",job=\"milvus_server\"}",
+          "expr": "GPU_memory_usage_total{DeviceNum=\"6\",instance=\"localhost:8080\",job=\"milvus_server\"}",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "7",
+          "legendFormat": "6",
           "refId": "G"
         },
         {
-          "expr": "CPU_usage_percent{CPU=\"7\",instance=\"localhost:8080\",job=\"milvus_server\"}",
+          "expr": "GPU_memory_usage_total{DeviceNum=\"7\",instance=\"localhost:8080\",job=\"milvus_server\"}",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "8",
+          "legendFormat": "7",
           "refId": "H"
-        },
-        {
-          "expr": "CPU_usage_percent{CPU=\"8\",instance=\"localhost:8080\",job=\"milvus_server\"}",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "9",
-          "refId": "I"
-        },
-        {
-          "expr": "CPU_usage_percent{CPU=\"9\",instance=\"localhost:8080\",job=\"milvus_server\"}",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "10",
-          "refId": "J"
-        },
-        {
-          "expr": "CPU_usage_percent{CPU=\"10\",instance=\"localhost:8080\",job=\"milvus_server\"}",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "11",
-          "refId": "K"
-        },
-        {
-          "expr": "CPU_usage_percent{CPU=\"11\",instance=\"localhost:8080\",job=\"milvus_server\"}",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "12",
-          "refId": "L"
-        },
-        {
-          "expr": "CPU_usage_percent{CPU=\"12\",instance=\"localhost:8080\",job=\"milvus_server\"}",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "13",
-          "refId": "M"
         }
       ],
-      "timeFrom": null,
+      "timeFrom": "1m",
       "timeShift": null,
-      "title": "CPU utilization ratio",
+      "title": "GPU utilization",
+      "transparent": true,
+      "type": "bargauge"
+    },
+    {
+      "cacheTimeout": null,
+      "description": "GPU utilization rate(%)",
+      "gridPos": {
+        "h": 7,
+        "w": 8,
+        "x": 16,
+        "y": 16
+      },
+      "hideTimeOverride": true,
+      "id": 66,
+      "links": [],
+      "options": {
+        "displayMode": "gradient",
+        "fieldOptions": {
+          "calcs": [
+            "last"
+          ],
+          "defaults": {
+            "decimals": null,
+            "max": 100,
+            "min": 0,
+            "unit": "percent"
+          },
+          "mappings": [],
+          "override": {},
+          "thresholds": [
+            {
+              "color": "light-blue",
+              "index": 0,
+              "value": null
+            },
+            {
+              "color": "semi-dark-orange",
+              "index": 1,
+              "value": 80
+            },
+            {
+              "color": "semi-dark-red",
+              "index": 2,
+              "value": 90
+            }
+          ],
+          "values": false
+        },
+        "orientation": "horizontal"
+      },
+      "pluginVersion": "6.2.5",
+      "repeat": null,
+      "targets": [
+        {
+          "expr": "Gpu_usage_percent{DeviceNum=\"0\",instance=\"localhost:8080\",job=\"milvus_server\"}",
+          "format": "time_series",
+          "instant": false,
+          "intervalFactor": 1,
+          "legendFormat": "0",
+          "refId": "A"
+        },
+        {
+          "expr": "Gpu_usage_percent{DeviceNum=\"1\",instance=\"localhost:8080\",job=\"milvus_server\"}",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "1",
+          "refId": "B"
+        },
+        {
+          "expr": "Gpu_usage_percent{DeviceNum=\"2\",instance=\"localhost:8080\",job=\"milvus_server\"}",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "2",
+          "refId": "C"
+        },
+        {
+          "expr": "Gpu_usage_percent{DeviceNum=\"3\",instance=\"localhost:8080\",job=\"milvus_server\"}",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "3",
+          "refId": "D"
+        },
+        {
+          "expr": "Gpu_usage_percent{DeviceNum=\"4\",instance=\"localhost:8080\",job=\"milvus_server\"}",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "4",
+          "refId": "E"
+        },
+        {
+          "expr": "Gpu_usage_percent{DeviceNum=\"5\",instance=\"localhost:8080\",job=\"milvus_server\"}",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "5",
+          "refId": "F"
+        },
+        {
+          "expr": "Gpu_usage_percent{DeviceNum=\"6\",instance=\"localhost:8080\",job=\"milvus_server\"}",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "6",
+          "refId": "G"
+        },
+        {
+          "expr": "Gpu_usage_percent{DeviceNum=\"7\",instance=\"localhost:8080\",job=\"milvus_server\"}",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "7",
+          "refId": "H"
+        }
+      ],
+      "timeFrom": "1m",
+      "timeShift": null,
+      "title": "GPU utilization ratio",
+      "transparent": true,
       "type": "bargauge"
     },
     {
@@ -589,10 +734,10 @@
       "description": "System wide metric. It is the total query elapsed time divided by total number of queries",
       "fill": 1,
       "gridPos": {
-        "h": 8,
+        "h": 10,
         "w": 16,
         "x": 0,
-        "y": 18
+        "y": 19
       },
       "id": 44,
       "interval": "1s",
@@ -669,138 +814,113 @@
       }
     },
     {
-      "cacheTimeout": null,
-      "description": "GPU utilization(MB)",
       "gridPos": {
-        "h": 4,
-        "w": 8,
+        "h": 6,
+        "w": 4,
         "x": 16,
-        "y": 18
+        "y": 23
       },
-      "hideTimeOverride": true,
-      "id": 68,
+      "id": 102,
       "links": [],
       "options": {
-        "displayMode": "gradient",
         "fieldOptions": {
           "calcs": [
             "last"
           ],
           "defaults": {
-            "decimals": null,
-            "max": "6000",
+            "max": 100,
             "min": 0,
-            "unit": "decmbytes"
+            "unit": "degree"
           },
           "mappings": [],
           "override": {},
           "thresholds": [
             {
-              "color": "semi-dark-blue",
+              "color": "green",
               "index": 0,
               "value": null
             },
             {
-              "color": "semi-dark-orange",
-              "index": 1,
-              "value": 2000
-            },
-            {
-              "color": "light-purple",
-              "index": 2,
-              "value": 4000
-            },
-            {
               "color": "red",
-              "index": 3,
-              "value": 5000
+              "index": 1,
+              "value": 80
             }
           ],
           "values": false
         },
-        "orientation": "horizontal"
+        "orientation": "auto",
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
       },
       "pluginVersion": "6.2.5",
       "targets": [
         {
-          "expr": "GPU_memory_usage_total",
+          "expr": "GPU_temperature",
           "format": "time_series",
-          "instant": true,
-          "interval": "",
           "intervalFactor": 1,
           "legendFormat": "",
           "refId": "A"
         }
       ],
-      "timeFrom": "1m",
+      "timeFrom": null,
       "timeShift": null,
-      "title": "GPU utilization",
+      "title": "GPU temperature",
       "transparent": true,
-      "type": "bargauge"
+      "type": "gauge"
     },
     {
-      "cacheTimeout": null,
-      "description": "GPU utilization rate(%)",
       "gridPos": {
-        "h": 4,
-        "w": 8,
-        "x": 16,
-        "y": 22
+        "h": 6,
+        "w": 4,
+        "x": 20,
+        "y": 23
       },
-      "hideTimeOverride": true,
-      "id": 66,
+      "id": 104,
       "links": [],
       "options": {
-        "displayMode": "gradient",
         "fieldOptions": {
           "calcs": [
             "last"
           ],
           "defaults": {
-            "decimals": null,
             "max": 100,
             "min": 0,
-            "unit": "percent"
+            "unit": "degree"
           },
           "mappings": [],
           "override": {},
           "thresholds": [
             {
-              "color": "light-blue",
+              "color": "green",
               "index": 0,
               "value": null
             },
             {
-              "color": "semi-dark-orange",
+              "color": "red",
               "index": 1,
               "value": 80
-            },
-            {
-              "color": "semi-dark-red",
-              "index": 2,
-              "value": 90
             }
           ],
           "values": false
         },
-        "orientation": "horizontal"
+        "orientation": "auto",
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
       },
       "pluginVersion": "6.2.5",
-      "repeat": null,
       "targets": [
         {
-          "expr": "Gpu_usage_percent",
+          "expr": "CPU_temperature",
           "format": "time_series",
-          "instant": false,
           "intervalFactor": 1,
           "refId": "A"
         }
       ],
-      "timeFrom": "1m",
+      "timeFrom": null,
       "timeShift": null,
-      "title": "GPU utilization ratio",
+      "title": "CPU temperature",
       "transparent": true,
-      "type": "bargauge"
+      "type": "gauge"
     },
     {
       "aliasColors": {},
@@ -813,7 +933,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 26
+        "y": 29
       },
       "id": 50,
       "interval": "1s",
@@ -899,7 +1019,7 @@
         "h": 9,
         "w": 24,
         "x": 0,
-        "y": 34
+        "y": 37
       },
       "id": 92,
       "interval": "1s",
@@ -985,7 +1105,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 43
+        "y": 46
       },
       "id": 42,
       "interval": "1s",
@@ -1072,7 +1192,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 43
+        "y": 46
       },
       "id": 38,
       "interval": "1s",
@@ -1158,7 +1278,7 @@
         "h": 11,
         "w": 12,
         "x": 0,
-        "y": 51
+        "y": 54
       },
       "id": 94,
       "interval": "1s",
@@ -1244,7 +1364,7 @@
         "h": 11,
         "w": 12,
         "x": 12,
-        "y": 51
+        "y": 54
       },
       "id": 2,
       "interval": "1s",
@@ -1328,7 +1448,7 @@
     "list": []
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-5m",
     "to": "now"
   },
   "timepicker": {
@@ -1359,5 +1479,6 @@
   "timezone": "",
   "title": "dashboardqwww",
   "uid": "B4pw8fNWz",
-  "version": 5
+  "version": 6
 }
+
