@@ -25,8 +25,8 @@ sidebar_label: Search vectors in Milvus
    >>> status
    Status(message='Search vectors successfully!', code=0)
    >>> results # Searched top_k vectors
-   [[QueryResult(id=1561709418638204004, score=62.554189514479866), ..., ],
-   [QueryResult(id=1561709418638204018, score=59.801433231755965), ..., ],
+   [[QueryResult(id=1561709418638204004, distance=62.554189514479866), ..., ],
+   [QueryResult(id=1561709418638204018, distance=59.801433231755965), ..., ],
    ...
    ]
    ```

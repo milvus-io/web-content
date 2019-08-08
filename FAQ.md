@@ -45,7 +45,7 @@ Currently Milvus supports:
 
 ### Does Milvus support simultaneous inserting and searching?
 
-Absolutely. 
+Absolutely. You can simultaneously insert and search data in Milvus. If you want this function, you are recommended to set the parameter "insert_cache_immediately" to 'True' in section *cache_config* at *home/$USER/milvus/conf/server_config.yaml*.
 
 ### Where are the data stored?
 

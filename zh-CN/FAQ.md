@@ -44,7 +44,7 @@ sidebar_label: FAQ
 
 ### Milvus是否支持边插入边查询的能力？
 
-  支持。
+  支持。如果您想在Milvus里边插入向量边查询，建议在 *home/$USER/milvus/conf/server_config.yaml* 下的 *cache_config*区域，将参数"insert_cache_immediately"设置为'True'。
 
 ### 数据存储在哪里？
 
