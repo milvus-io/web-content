@@ -35,9 +35,8 @@ This section describes how to create a table in Milvus. Assume we would create a
 |  Parameter  |  Description  |  Type   |  Reference value   |
 | ------------| --------------| --------| ---------|
 | table_name  | Name of the table you want to create (Table name can only be '_', number and letter. The first character must be '_' or a letter, not a number. The entire length can not exceed 255 characters)| String | 'table name' |
-| dimension   | Vector dimensions | Integer | 0 < dimension <= 16384 (Usually set to 128, 256 or 512)
-| index_type  |2 types of indexing methods: 1. 'FLAT' - Precise vector indexing; 2. 'IVFLAT' - K-means based vector indexing. Search precision may be lower, but with faster speed.  |IndexType|FLAT / IVFLAT |
-
+| dimension | Vector dimensions | Integer | 0 < dimension <= 16384 (Usually set to 128, 256 or 512) |
+| index_type | 3 types of indexing methods: 1. 'FLAT' - Provides 100% accuracy for recalls. However, performance might be downgraded due to huge computation effort; 2. 'IVFLAT' - K-means based similarity search which is balanced between accuracy and performance; 3. ‘IVFSQ' - Adopts a scalar quantization strategy that significantly reduces the size of a vector (by about 3/4), thus improving the overall throughput of vector processing. | IndexType | FLAT / IVFLAT / IVFSQ |
 
 1. Prepare table parameters.
 
@@ -65,4 +64,4 @@ This section describes how to create a table in Milvus. Assume we would create a
    >>> table
    TableSchema(table_name='test01',dimension=256, index_type=1, store_raw_vector=False)
 
-   ```                        
+   ```

@@ -81,8 +81,6 @@ Now, let's run a Python example program. You will need to create a vector data t
    ```
 
    > Note: To learn more about Milvus Python SDK, go to [Milvus Python SDK Playbook](https://pypi.org/project/pymilvus). 
-   
-   > Caution: Please do not upgrade pymilvus to version higher than 0.1.13 with the current Milvus version.
 
 3. Create a new file *example.py*, and add [Python example code](https://github.com/milvus-io/pymilvus/blob/branch-0.3.1/examples/AdvancedExample.py) to it.
 
