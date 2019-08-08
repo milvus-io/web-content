@@ -29,7 +29,7 @@ sidebar_label: Configure Milvus
    |----------------|-----------------------------------|-------------------|
    | address        | Milvus server监听的ip地址          | 0.0.0.0           |
    | port           | Milvus server监听的端口号，默认值为19530 | 1025 ~ 65534 |
-   | gpu_index      | 目前使用的GPU，默认值为0          | 0 ~ GPU数量-1                |
+   | gpu_index      | 在有多张GPU的情况下，您可以指定使用哪张GPU来运行Milvus。目前仅支持指定一张GPU。默认值为0。 | 0 ~ GPU数量-1                |
    | mode           | Milvus部署类型                    | single（单机）/ cluster（多机）|
 
    2）在*db_config*区域，设置数据库参数。

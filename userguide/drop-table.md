@@ -7,7 +7,7 @@ sidebar_label: Drop table
 # Drop table
 
 
-If a table is not used any more, you may drop it in Milvus. For example, to drop Table test01, you only need to:
+Tables can dropped in Milvus, for example, to drop Table test01, use the following command:
 
 ```
 # Drop table
