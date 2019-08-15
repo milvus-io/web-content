@@ -1,10 +1,10 @@
 ---
 id: traditional-db
-title: Traditional database
-sidebar_label: Traditional database
+title: Traditional Database
+sidebar_label: Traditional Database
 ---
 
-# Traditional database
+# Traditional Database
 
 Traditional relational databases are designed to organize alphanumeric data into interrelated collections. However, this technology is not well suited to the management of multimedia information. The feature vector data, vector storage and indexing methods, the large size of media objects are entirely foreign to traditional databases. 
 
