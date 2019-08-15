@@ -1,7 +1,7 @@
 ---
 id: traditional-db
-title: Traditional database
-sidebar_label: Traditional database
+title: Traditional Database
+sidebar_label: Traditional Database
 ---
 
 # 传统数据库与特征向量检索
