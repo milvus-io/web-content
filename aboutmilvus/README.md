@@ -1,9 +1,9 @@
-# Vector Database Introduction
+# About Milvus
 
-- [Milvus Overview](overview.md)
-- [Feature vector](feature-vector.md)
-- [Traditional database & feature vector indexing](traditional-db.md)
-- [Vector indexing methods](vector-indexing-methods.md)
-- [Feature vector database](feature-vector-db.md)
+- [Milvus Overview](milvus-overview.md)
+- [Feature Vector](feature-vector.md)
+- [Traditional Database](traditional-db.md)
+- [Vector Indexing Methods](vector-indexing-methods.md)
+- [Feature Fector Database](feature-vector-db.md)
 
 
