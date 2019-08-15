@@ -6,46 +6,46 @@ sidebar_label: Monitoring Metrics
 
 ---
 
-# Monitoring Metrics
+# 监控指标
 
-## Metrics Overview
+## 监控指标概述
 
-The Milvus dashboard provides details about your application and database configuration. It helps you optimize Milvus performance by monitoring the following areas: 
+Milvus图形化仪表盘提供系统表现和数据库配置的具体信息，通过下列指标，帮助优化Milvus性能：
 
-| Area             | Description                                                |
+| 指标类型             | 描述                                                |
 | ---------------- | ---------------------------------------------------------- |
-| Overview Metrics | Important metrics about Milvus performance.                |
-| Hardware Metrics | Metrics about CPU/GPU usage, network traffic.              |
-| Storage Metrics  | Metrics about data size, storage capacity and total files. |
+| 性能指标 | 关于Milvus性能表现的重要指标。                |
+| 硬件指标 | 关于CPU/GPU使用、网络连接及读写速度等的指标。             |
+| 存储指标  | 关于数据大小、存储能力和文件数量等的指标。 |
 
-## Overview Metrics
+## 性能指标
 
-| Metric                        | Description                                                  |
+| 指标                        | 描述                                                 |
 | ----------------------------- | ------------------------------------------------------------ |
-| Insert per Second             | Number of vectors that are inserted in a second.             |
-| QPM (Query per minute)        | Number of queries completed in every minute.                 |
-| Query Elapsed Time per Vector | It is the query elapsed time divided by number of vectors.   |
-| Query Service Level           | System wide metric. Query service level (%) = n_queries_completed_within_threshold1 / n_queries (Generally, you can set 3 time periods - threshold1, threshold2 and threshold3, to track the query service level). |
-| Uptime                        | The time (in minutes) Milvus server has been working and available. |
+| 数据插入速度            | 每秒钟插入数据总量。          |
+| 每分钟查询率       | 每分钟完成的查询数量。            |
+| 单条向量查询时间| 单条向量查询时间 = 查询使用时间/向量数量   |
+| 查询服务级别       | 查询服务级别（%） = 一定时间阈值内的查询数量/总查询数量（一般建议设置3个阈值） |
+| 运行时长                     | Milvus服务器连续正常运行的时长（分钟）|
 
-## Hardware Metrics
+## 硬件指标
 
-| Metric            | Description                                                  |
+| 指标            | 描述                                                  |
 | ----------------- | ------------------------------------------------------------ |
-| GPU Utilization   | GPU utilization ratio (%).                                   |
-| GPU Memory Usage  | GPU memory (in GB) currently consumed by Milvus.             |
-| CPU Utilization   | Divide the time that the server is busy by the total elapsed time. |
-| Memory Usage      | Memory (in GB) currently consumed by Milvus.                 |
-| Cache Utilization | Cache utilization ratio (%).                                 |
-| Network IO        | Network IO read/write speed (per second).                    |
-| Disk Read Speed   | Disk read speed (GB/s)                                       |
-| Disk Write Speed  | Disk write speed (GB/s)                                      |
-| Connections       | Number of connections established with the database during the selected time period. (A connection is a session established between a database client and a server.) |
+| GPU利用率  | 实例的GPU利用率（%）。                                 |
+| 显存使用量  | Milvus当前使用的显存总量（GB）。             |
+| CPU利用率   | 实例的CPU利用率=服务器任务执行时间/服务器总运行时间 |
+| 内存使用量      | Milvus当前使用的内存总量（GB）。              |
+| 缓存利用率 | 已用缓存占比。                              |
+| 网络IO       | 每秒钟网口的读写速度。                  |
+| 磁盘读取速度   | 磁盘读取速度（GB/s）                                       |
+| 磁盘写入速度  | 磁盘写入速度 (GB/s)                                      |
+| 连接数       | 当前连接到Milvus服务器的客户端数量 |
 
-## Storage Metrics
+## 存储指标
 
-| Metric     | Description                            |
+| 指标     | 描述                            |
 | ---------- | -------------------------------------- |
-| Data Size  | Total amount of data stored in Milvus. |
-| Total File | Current number of files in Milvus.     |
+| 数据总量  | Milvus所存数据总量。|
+| 数据文件总量 | Milvus所存数据文件总量。     |
 
