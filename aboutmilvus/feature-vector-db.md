@@ -1,10 +1,10 @@
 ---
 id: feature-vector-db
-title: Feature vector database
-sidebar_label: Feature vector database
+title: Feature Vector Database
+sidebar_label: Feature Vector Database
 ---
 
-# Feature vector database
+# Feature Vector Database
 
 We have agreed that feature vectors are the basic elements to precisely represent multimedia objects. But are there any ideal database that allows the efficient storing and indexing of feature vectors? Let's start by looking at some competent tools of feature vector indexing available in the market:
 
