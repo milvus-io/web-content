@@ -1,10 +1,10 @@
 ---
 id: vector-indexing-methods
-title: Vector indexing methods
-sidebar_label: Vector indexing methods
+title: Vector Indexing Methods
+sidebar_label: Vector Indexing Methods
 ---
 
-# Vector indexing methods
+# Vector Indexing Methods
 
 Feature vectors are good for analysis because there are many techniques for comparing feature vectors. To summarize, these techniques can be categorized into 2 main kinds: linear search and similarity search.
 
