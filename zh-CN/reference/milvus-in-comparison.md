@@ -4,24 +4,24 @@ title: Milvus in Comparison
 sidebar_label: Milvus in Comparison
 ---
 
-# Milvus in Comparison
+# 与FAISS和SPTAG对比
 
-Milvus is a distributed feature vector indexing database management system which provides state-of-the-art similarity search and analysis of feature vectors and unstructured data. 
+Milvus是Zilliz公司针对AI应用大规模落地，当前工业界并没有一款成熟向量检索系统，而研制的面向海量特征向量检索的数据库系统，旨在帮助用户实现非结构化数据的近似检索和分析。
 
-Here is a comparison of Milvus with FAISS and SPTAG:
+与当前工业界其它向量检索工具相比，Milvus具有以下性能优势：
 
 |                                            | Milvus | FAISS | SPTAG |
 | ------------------------------------------ | ------ | ----- | ----- |
-| CPU/GPU heterogeneous computing capability | ✔️      | ✔️     | ❌     |
-| Quantization index                         | ✔️      | ✔️     | ❌     |
-| Hash index                                 | ✔️      | ✔️     | ❌     |
-| Graph index                                | ✔️      | ❌     | ✔️     |
-| Distributed architecture                   | ✔️      | ❌     | ❌     |
-| High availability                          | ✔️      | ❌     | ❌     |
-| Easy-to-use user interface                 | ✔️      | ❌     | ❌     |
-| GUI monitoring dashboard                   | ✔️      | ❌     | ❌     |
-| Simple deployment                          | ✔️      | ❌     | ❌     |
+| CPU/GPU异构计算能力 | ✔️      | ✔️     | ❌     |
+| 量化索引                        | ✔️      | ✔️     | ❌     |
+| 哈希索引                                | ✔️      | ✔️     | ❌     |
+| 图索引                               | ✔️      | ❌     | ✔️     |
+| 分布式架构                  | ✔️      | ❌     | ❌     |
+| 高可用设计                         | ✔️      | ❌     | ❌     |
+| 易用用户接口                | ✔️      | ❌     | ❌     |
+| 图形化监控工具                   | ✔️      | ❌     | ❌     |
+| 易部署                         | ✔️      | ❌     | ❌     |
 | C++/Python SDK                             | ✔️      | ✔️     | ✔️     |
 | RESTful API                                | ✔️      | ❌     | ❌     |
-| Enterprise user support                    | ✔️      | ❌     | ❌     |
+| 企业级用户支持                  | ✔️      | ❌     | ❌     |
 
