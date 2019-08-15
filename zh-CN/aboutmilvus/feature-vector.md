@@ -1,7 +1,7 @@
 ---
 id: feature-vector
-title: Feature vector
-sidebar_label: Feature vector
+title: Feature Vector
+sidebar_label: Feature Vector
 ---
 
 # 特征向量
