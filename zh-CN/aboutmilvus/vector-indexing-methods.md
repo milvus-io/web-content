@@ -1,7 +1,7 @@
 ---
 id: vector-indexing-methods
-title: Vector indexing methods
-sidebar_label: Vector indexing methods
+title: Vector Indexing Methods
+sidebar_label: Vector Indexing Methods
 ---
 
 # 向量检索算法
