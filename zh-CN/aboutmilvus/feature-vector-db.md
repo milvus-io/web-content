@@ -1,7 +1,7 @@
 ---
 id: feature-vector-db
-title: Feature vector database
-sidebar_label: Feature vector database
+title: Feature Vector Database
+sidebar_label: Feature Vector Database
 ---
 
 # 特征向量数据库
