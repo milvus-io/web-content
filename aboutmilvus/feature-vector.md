@@ -1,10 +1,10 @@
 ---
 id: feature-vector
-title: Feature vector
-sidebar_label: Feature vector
+title: Feature Vector
+sidebar_label: Feature Vector
 ---
 
-# Feature vector
+# Feature Vector
 
 ## What is a feature vector
 A vector is a series of numbers. It is like a matrix with only one row but multiple columns (or only one column but multiple rows), for example [2,0,1,9,0,6,3,0].
