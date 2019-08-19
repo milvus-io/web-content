@@ -142,7 +142,7 @@ Milvus server收集数据 -> 利用pull模式把所有数据导入Prometheus -> 
 | Query service level     |      查询服务级别 = 一定时间阈值内的查询数量/总查询数量              |
 | Query elapsed time per vector  |    单条向量查询时间 = 查询使用时间/向量数量         |
 | Connections          |  当前连接到Milvus服务器的客户端数量 |
-| Uptime        |   Milvus服务器正常运行的分钟数      |
+| Uptime        |   Milvus服务器正常运行的时长（分钟）      |
 | Cache utilization      |    已用缓存占比                   |
 
 ## 设置监控频率
