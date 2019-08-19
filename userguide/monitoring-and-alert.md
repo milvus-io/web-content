@@ -132,7 +132,8 @@ On the GUI dashboard of Milvus monitoring system, you can check these monitoring
 | Memory usage      |     Memory (in GB) currently consumed by Milvus                   |
 | CPU temperature    | Temperature of CPU |
 | Network IO          |    Network IO read/write speed (per second)          |
-| Disk read & write speed     |    Disk read & write speed (GB/s)                   |
+| Disk read speed     |    Disk read speed (GB/s)                   |
+| Disk write speed            |    Disk write speed (GB/s)          |
 | **Milvus metrics**  |                                  |
 | Insert per Second     |     Number of vectors that are inserted in a second.    |
 | Total file    |       Current number of files in Milvus      |
