@@ -7,7 +7,7 @@ sidebar_label: List tables
 # 查询表
 
 ## 查询现有表
-通过以下操作，你可以查询Milvus数据库中所有表的名字：
+通过以下操作，您可以查询Milvus数据库中所有表的名字：
 
 ```python
 >>> status, tables = milvus.show_tables()
@@ -18,7 +18,7 @@ Status(message='Show tables successfully!', code=0)
 ```
 
 ## 查询表的元数据
-你可以按此方式查询数据库中某张表的元数据：
+您可以按此方式查询数据库中某张表的元数据：
 
 ```python
 >>> status, table = milvus.describe_table('test01')
