@@ -126,8 +126,8 @@ On the GUI dashboard of Milvus monitoring system, you can check these monitoring
 |----------------|----------------------------------|
 | **System metrics**    |                                  |
 | GPU utilization     |  GPU utilization ratio (%)        |
-| GPU memory usage      |   GPU memory (in GB) currently consumed by Milvus                  |
 | GPU temperature      |  Temperature of GPU. If multiple GPUs are in service, the temperature of each GPU is displyed.  |
+| GPU memory usage      |   GPU memory (in GB) currently consumed by Milvus                  |
 | CPU utilization      |     Divide the time that the server is busy by the total elapsed time                 |
 | Memory usage      |     Memory (in GB) currently consumed by Milvus                   |
 | CPU temperature    | Temperature of CPU |
