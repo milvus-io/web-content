@@ -28,6 +28,7 @@
       "dashes": false,
       "description": "Number of queries completed in every minute",
       "fill": 0,
+      "fillGradient": 0,
       "gridPos": {
         "h": 9,
         "w": 16,
@@ -49,7 +50,9 @@
       "linewidth": 0,
       "links": [],
       "nullPointMode": "null",
-      "options": {},
+      "options": {
+        "dataLinks": []
+      },
       "percentage": false,
       "pointradius": 2,
       "points": true,
@@ -176,6 +179,7 @@
         {
           "expr": "connection_number",
           "format": "time_series",
+          "instant": true,
           "intervalFactor": 1,
           "refId": "A"
         }
@@ -300,44 +304,42 @@
             "last"
           ],
           "defaults": {
+            "mappings": [],
+            "max": 100,
             "min": 0,
+            "thresholds": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#6ED0E0",
+                "value": 200
+              },
+              {
+                "color": "red",
+                "value": 500
+              },
+              {
+                "color": "#EAB839",
+                "value": 800
+              }
+            ],
             "unit": "percent"
           },
-          "mappings": [],
           "override": {},
-          "thresholds": [
-            {
-              "color": "green",
-              "index": 0,
-              "value": null
-            },
-            {
-              "color": "#6ED0E0",
-              "index": 1,
-              "value": 200
-            },
-            {
-              "color": "red",
-              "index": 2,
-              "value": 500
-            },
-            {
-              "color": "#EAB839",
-              "index": 3,
-              "value": 800
-            }
-          ],
           "values": false
         },
         "orientation": "auto",
         "showThresholdLabels": false,
         "showThresholdMarkers": true
       },
-      "pluginVersion": "6.2.5",
+      "pluginVersion": "6.3.2",
       "targets": [
         {
-          "expr": "CPU_usage_percent{CPU=\"avg\",instance=\"localhost:8080\",job=\"milvus_server\"}",
+          "expr": "CPU_usage_percent{CPU=\"avg\"}",
           "format": "time_series",
+          "instant": true,
           "intervalFactor": 1,
           "legendFormat": "ratio",
           "refId": "A"
@@ -366,35 +368,34 @@
           ],
           "defaults": {
             "decimals": null,
+            "mappings": [],
             "max": 100,
             "min": 0,
-            "unit": "none"
+            "thresholds": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ],
+            "unit": "percent"
           },
-          "mappings": [],
           "override": {},
-          "thresholds": [
-            {
-              "color": "green",
-              "index": 0,
-              "value": null
-            },
-            {
-              "color": "red",
-              "index": 1,
-              "value": 80
-            }
-          ],
           "values": false
         },
         "orientation": "auto",
         "showThresholdLabels": false,
         "showThresholdMarkers": true
       },
-      "pluginVersion": "6.2.5",
+      "pluginVersion": "6.3.2",
       "targets": [
         {
           "expr": "cache_usage_bytes",
           "format": "time_series",
+          "instant": true,
           "intervalFactor": 1,
           "refId": "A"
         }
@@ -412,6 +413,7 @@
       "dashes": false,
       "description": "Memory (in GB) currently consumed by Milvus",
       "fill": 1,
+      "fillGradient": 0,
       "gridPos": {
         "h": 10,
         "w": 16,
@@ -433,7 +435,9 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
-      "options": {},
+      "options": {
+        "dataLinks": []
+      },
       "percentage": false,
       "pointradius": 2,
       "points": false,
@@ -513,42 +517,38 @@
           ],
           "defaults": {
             "decimals": null,
+            "mappings": [],
             "max": "6000",
             "min": 0,
+            "thresholds": [
+              {
+                "color": "semi-dark-blue",
+                "value": null
+              },
+              {
+                "color": "semi-dark-orange",
+                "value": 2000
+              },
+              {
+                "color": "light-purple",
+                "value": 4000
+              },
+              {
+                "color": "red",
+                "value": 5000
+              }
+            ],
             "unit": "decmbytes"
           },
-          "mappings": [],
           "override": {},
-          "thresholds": [
-            {
-              "color": "semi-dark-blue",
-              "index": 0,
-              "value": null
-            },
-            {
-              "color": "semi-dark-orange",
-              "index": 1,
-              "value": 2000
-            },
-            {
-              "color": "light-purple",
-              "index": 2,
-              "value": 4000
-            },
-            {
-              "color": "red",
-              "index": 3,
-              "value": 5000
-            }
-          ],
           "values": false
         },
         "orientation": "horizontal"
       },
-      "pluginVersion": "6.2.5",
+      "pluginVersion": "6.3.2",
       "targets": [
         {
-          "expr": "GPU_memory_usage_total{DeviceNum=\"0\",instance=\"localhost:8080\",job=\"milvus_server\"}",
+          "expr": "GPU_memory_usage_total{DeviceNum=\"0\"}",
           "format": "time_series",
           "instant": true,
           "interval": "",
@@ -557,49 +557,55 @@
           "refId": "A"
         },
         {
-          "expr": "GPU_memory_usage_total{DeviceNum=\"1\",instance=\"localhost:8080\",job=\"milvus_server\"}",
+          "expr": "GPU_memory_usage_total{DeviceNum=\"1\"}",
           "format": "time_series",
+          "instant": true,
           "intervalFactor": 1,
           "legendFormat": "1",
           "refId": "B"
         },
         {
-          "expr": "GPU_memory_usage_total{DeviceNum=\"2\",instance=\"localhost:8080\",job=\"milvus_server\"}",
+          "expr": "GPU_memory_usage_total{DeviceNum=\"2\"}",
           "format": "time_series",
+          "instant": true,
           "intervalFactor": 1,
           "legendFormat": "2",
           "refId": "C"
         },
         {
-          "expr": "GPU_memory_usage_total{DeviceNum=\"3\",instance=\"localhost:8080\",job=\"milvus_server\"}",
+          "expr": "GPU_memory_usage_total{DeviceNum=\"3\"}",
           "format": "time_series",
+          "instant": true,
           "intervalFactor": 1,
           "legendFormat": "3",
           "refId": "D"
         },
         {
-          "expr": "GPU_memory_usage_total{DeviceNum=\"4\",instance=\"localhost:8080\",job=\"milvus_server\"}",
+          "expr": "GPU_memory_usage_total{DeviceNum=\"4\"}",
           "format": "time_series",
+          "instant": true,
           "intervalFactor": 1,
           "legendFormat": "4",
           "refId": "E"
         },
         {
-          "expr": "GPU_memory_usage_total{DeviceNum=\"5\",instance=\"localhost:8080\",job=\"milvus_server\"}",
+          "expr": "GPU_memory_usage_total{DeviceNum=\"5\"}",
           "format": "time_series",
+          "instant": true,
           "intervalFactor": 1,
           "legendFormat": "5",
           "refId": "F"
         },
         {
-          "expr": "GPU_memory_usage_total{DeviceNum=\"6\",instance=\"localhost:8080\",job=\"milvus_server\"}",
+          "expr": "GPU_memory_usage_total{DeviceNum=\"6\"}",
           "format": "time_series",
+          "instant": true,
           "intervalFactor": 1,
           "legendFormat": "6",
           "refId": "G"
         },
         {
-          "expr": "GPU_memory_usage_total{DeviceNum=\"7\",instance=\"localhost:8080\",job=\"milvus_server\"}",
+          "expr": "GPU_memory_usage_total{DeviceNum=\"7\"}",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "7",
@@ -632,89 +638,93 @@
           ],
           "defaults": {
             "decimals": null,
+            "mappings": [],
             "max": 100,
             "min": 0,
+            "thresholds": [
+              {
+                "color": "light-blue",
+                "value": null
+              },
+              {
+                "color": "semi-dark-orange",
+                "value": 80
+              },
+              {
+                "color": "semi-dark-red",
+                "value": 90
+              }
+            ],
             "unit": "percent"
           },
-          "mappings": [],
           "override": {},
-          "thresholds": [
-            {
-              "color": "light-blue",
-              "index": 0,
-              "value": null
-            },
-            {
-              "color": "semi-dark-orange",
-              "index": 1,
-              "value": 80
-            },
-            {
-              "color": "semi-dark-red",
-              "index": 2,
-              "value": 90
-            }
-          ],
           "values": false
         },
         "orientation": "horizontal"
       },
-      "pluginVersion": "6.2.5",
+      "pluginVersion": "6.3.2",
       "repeat": null,
       "targets": [
         {
-          "expr": "Gpu_usage_percent{DeviceNum=\"0\",instance=\"localhost:8080\",job=\"milvus_server\"}",
+          "expr": "Gpu_usage_percent{DeviceNum=\"0\"}",
           "format": "time_series",
-          "instant": false,
+          "instant": true,
           "intervalFactor": 1,
           "legendFormat": "0",
           "refId": "A"
         },
         {
-          "expr": "Gpu_usage_percent{DeviceNum=\"1\",instance=\"localhost:8080\",job=\"milvus_server\"}",
+          "expr": "Gpu_usage_percent{DeviceNum=\"1\"}",
           "format": "time_series",
+          "instant": true,
           "intervalFactor": 1,
           "legendFormat": "1",
           "refId": "B"
         },
         {
-          "expr": "Gpu_usage_percent{DeviceNum=\"2\",instance=\"localhost:8080\",job=\"milvus_server\"}",
+          "expr": "Gpu_usage_percent{DeviceNum=\"2\"}",
           "format": "time_series",
+          "instant": true,
           "intervalFactor": 1,
           "legendFormat": "2",
           "refId": "C"
         },
         {
-          "expr": "Gpu_usage_percent{DeviceNum=\"3\",instance=\"localhost:8080\",job=\"milvus_server\"}",
+          "expr": "Gpu_usage_percent{DeviceNum=\"3\"}",
           "format": "time_series",
+          "instant": true,
           "intervalFactor": 1,
           "legendFormat": "3",
           "refId": "D"
         },
         {
-          "expr": "Gpu_usage_percent{DeviceNum=\"4\",instance=\"localhost:8080\",job=\"milvus_server\"}",
+          "expr": "Gpu_usage_percent{DeviceNum=\"4\"}",
           "format": "time_series",
+          "instant": true,
           "intervalFactor": 1,
           "legendFormat": "4",
           "refId": "E"
         },
         {
-          "expr": "Gpu_usage_percent{DeviceNum=\"5\",instance=\"localhost:8080\",job=\"milvus_server\"}",
+          "expr": "Gpu_usage_percent{DeviceNum=\"5\"}",
           "format": "time_series",
+          "instant": true,
           "intervalFactor": 1,
           "legendFormat": "5",
           "refId": "F"
         },
         {
-          "expr": "Gpu_usage_percent{DeviceNum=\"6\",instance=\"localhost:8080\",job=\"milvus_server\"}",
+          "expr": "Gpu_usage_percent{DeviceNum=\"6\"}",
           "format": "time_series",
+          "instant": true,
           "intervalFactor": 1,
           "legendFormat": "6",
           "refId": "G"
         },
         {
-          "expr": "Gpu_usage_percent{DeviceNum=\"7\",instance=\"localhost:8080\",job=\"milvus_server\"}",
+          "expr": "Gpu_usage_percent{DeviceNum=\"7\"}",
           "format": "time_series",
+          "instant": true,
           "intervalFactor": 1,
           "legendFormat": "7",
           "refId": "H"
@@ -733,6 +743,7 @@
       "dashes": false,
       "description": "System wide metric. It is the total query elapsed time divided by total number of queries",
       "fill": 1,
+      "fillGradient": 0,
       "gridPos": {
         "h": 10,
         "w": 16,
@@ -754,7 +765,9 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
-      "options": {},
+      "options": {
+        "dataLinks": []
+      },
       "percentage": false,
       "pointradius": 2,
       "points": false,
@@ -828,35 +841,34 @@
             "last"
           ],
           "defaults": {
+            "mappings": [],
             "max": 100,
             "min": 0,
+            "thresholds": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ],
             "unit": "degree"
           },
-          "mappings": [],
           "override": {},
-          "thresholds": [
-            {
-              "color": "green",
-              "index": 0,
-              "value": null
-            },
-            {
-              "color": "red",
-              "index": 1,
-              "value": 80
-            }
-          ],
           "values": false
         },
         "orientation": "auto",
         "showThresholdLabels": false,
         "showThresholdMarkers": true
       },
-      "pluginVersion": "6.2.5",
+      "pluginVersion": "6.3.2",
       "targets": [
         {
           "expr": "GPU_temperature",
           "format": "time_series",
+          "instant": true,
           "intervalFactor": 1,
           "legendFormat": "",
           "refId": "A"
@@ -883,35 +895,34 @@
             "last"
           ],
           "defaults": {
+            "mappings": [],
             "max": 100,
             "min": 0,
+            "thresholds": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ],
             "unit": "degree"
           },
-          "mappings": [],
           "override": {},
-          "thresholds": [
-            {
-              "color": "green",
-              "index": 0,
-              "value": null
-            },
-            {
-              "color": "red",
-              "index": 1,
-              "value": 80
-            }
-          ],
           "values": false
         },
         "orientation": "auto",
         "showThresholdLabels": false,
         "showThresholdMarkers": true
       },
-      "pluginVersion": "6.2.5",
+      "pluginVersion": "6.3.2",
       "targets": [
         {
           "expr": "CPU_temperature",
           "format": "time_series",
+          "instant": true,
           "intervalFactor": 1,
           "refId": "A"
         }
@@ -929,6 +940,7 @@
       "dashes": false,
       "description": "Current number of files in Milvus",
       "fill": 1,
+      "fillGradient": 0,
       "gridPos": {
         "h": 8,
         "w": 24,
@@ -950,7 +962,9 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
-      "options": {},
+      "options": {
+        "dataLinks": []
+      },
       "percentage": false,
       "pointradius": 2,
       "points": false,
@@ -1015,6 +1029,7 @@
       "dashes": false,
       "description": "Network IO read/write speed (per second)",
       "fill": 1,
+      "fillGradient": 0,
       "gridPos": {
         "h": 9,
         "w": 24,
@@ -1036,7 +1051,9 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
-      "options": {},
+      "options": {
+        "dataLinks": []
+      },
       "percentage": false,
       "pointradius": 2,
       "points": false,
@@ -1101,6 +1118,7 @@
       "dashes": false,
       "description": "Disk write speed",
       "fill": 1,
+      "fillGradient": 0,
       "gridPos": {
         "h": 8,
         "w": 12,
@@ -1122,7 +1140,9 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
-      "options": {},
+      "options": {
+        "dataLinks": []
+      },
       "percentage": false,
       "pluginVersion": "6.1.6",
       "pointradius": 2,
@@ -1188,6 +1208,7 @@
       "dashes": false,
       "description": "Disk read speed",
       "fill": 1,
+      "fillGradient": 0,
       "gridPos": {
         "h": 8,
         "w": 12,
@@ -1209,7 +1230,9 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
-      "options": {},
+      "options": {
+        "dataLinks": []
+      },
       "percentage": false,
       "pointradius": 2,
       "points": false,
@@ -1274,6 +1297,7 @@
       "dashes": false,
       "description": "Number of vectors that are inserted in a second.",
       "fill": 1,
+      "fillGradient": 0,
       "gridPos": {
         "h": 11,
         "w": 12,
@@ -1295,7 +1319,9 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
-      "options": {},
+      "options": {
+        "dataLinks": []
+      },
       "percentage": false,
       "pointradius": 2,
       "points": false,
@@ -1360,6 +1386,7 @@
       "dashes": false,
       "description": "Total amount of data stored in Milvus",
       "fill": 1,
+      "fillGradient": 0,
       "gridPos": {
         "h": 11,
         "w": 12,
@@ -1381,7 +1408,9 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
-      "options": {},
+      "options": {
+        "dataLinks": []
+      },
       "percentage": false,
       "pointradius": 2,
       "points": false,
@@ -1441,7 +1470,7 @@
     }
   ],
   "refresh": "5s",
-  "schemaVersion": 18,
+  "schemaVersion": 19,
   "style": "dark",
   "tags": [],
   "templating": {
@@ -1477,8 +1506,7 @@
     ]
   },
   "timezone": "",
-  "title": "dashboardqwww",
+  "title": "dashboard",
   "uid": "B4pw8fNWz",
-  "version": 6
+  "version": 7
 }
-
