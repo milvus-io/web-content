@@ -126,11 +126,14 @@ On the GUI dashboard of Milvus monitoring system, you can check these monitoring
 |----------------|----------------------------------|
 | **System metrics**    |                                  |
 | GPU utilization     |  GPU utilization ratio (%)        |
+| GPU temperature      |  Temperature of GPU. If multiple GPUs are in service, the temperature of each GPU is displyed.  |
 | GPU memory usage      |   GPU memory (in GB) currently consumed by Milvus                  |
 | CPU utilization      |     Divide the time that the server is busy by the total elapsed time                 |
+| CPU temperature    | Temperature of CPU |
 | Memory usage      |     Memory (in GB) currently consumed by Milvus                   |
 | Network IO          |    Network IO read/write speed (per second)          |
-| Disk read & write speed     |    Disk read & write speed (GB/s)                   |
+| Disk read speed     |    Disk read speed (GB/s)                   |
+| Disk write speed            |    Disk write speed (GB/s)          |
 | **Milvus metrics**  |                                  |
 | Insert per Second     |     Number of vectors that are inserted in a second.    |
 | Total file    |       Current number of files in Milvus      |

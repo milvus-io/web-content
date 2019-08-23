@@ -125,22 +125,25 @@ Milvus server收集数据 -> 利用pull模式把所有数据导入Prometheus -> 
 |    监控项       |      说明                        |
 |----------------|----------------------------------|
 | **系统指标**    |                                  |
-| GPU利用率       |    实例的GPU利用率                |
-| 显存使用量      |    实例显存的使用量                |
-| CPU利用率       |    实例的CPU利用率=服务器任务执行时间/服务器总运行时间  |
-| 内存使用量      |     内存使用量                     |
-| 网络IO          |    每秒钟网口的读写速度            |
-| 磁盘读写速度     |    磁盘写入速度                   |
+| GPU utilization |    实例的GPU利用率                |
+| GPU temperature         |   GPU的温度，如果使用多张GPU，则每张GPU的温度会分别显示 |
+| GPU memory usage    |    实例显存的使用量                |
+| CPU utilization      |    实例的CPU利用率=服务器任务执行时间/服务器总运行时间  |
+| CPU temperature        |  CPU的温度                        |
+| Memory usage      |     内存使用量                     |
+| Network IO          |    每秒钟网口的读写速度            |
+| Disk read speed    |    磁盘读取速度（GB/s）                   |
+| Disk write speed   |    磁盘写入速度（GB/s）
 | **Milvus指标**  |                                  |
-| 数据插入速度     |         每秒钟插入数据总量        |
-| 数据文件总量     |       Milvus所存数据文件总量      |
-| 数据总量        |   Milvus所存数据总量               |
-| 每分钟查询率    |  每分钟完成的查询数量              |
-| 查询服务级别     |      查询服务级别 = 一定时间阈值内的查询数量/总查询数量              |
-| 单条向量查询时间  |    单条向量查询时间 = 查询使用时间/向量数量         |
-| 连接数          |  当前连接到Milvus服务器的客户端数量 |
-| 运行时长        |   Milvus服务器正常运行的分钟数      |
-| 缓存利用率       |    已用缓存占比                   |
+| Insert per Second     |         每秒钟插入数据总量        |
+| Total file     |       Milvus所存数据文件总量      |
+| Data size       |   Milvus所存数据总量               |
+| QPM (Query per minute)    |  每分钟完成的查询数量              |
+| Query service level     |      查询服务级别 = 一定时间阈值内的查询数量/总查询数量              |
+| Query elapsed time per vector  |    单条向量查询时间 = 查询使用时间/向量数量         |
+| Connections          |  当前连接到Milvus服务器的客户端数量 |
+| Uptime        |   Milvus服务器正常运行的时长（分钟）      |
+| Cache utilization      |    已用缓存占比                   |
 
 ## 设置监控频率
 目前，Milvus监控默认的监控频率为：1次/秒，你也可以[更改监控设置](https://prometheus.io/docs/prometheus/latest/configuration/configuration/)。
