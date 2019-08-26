@@ -29,7 +29,7 @@ In this guide, we will walk you through installing Milvus and your very first ve
 
    ```shell
    # Download Milvus Docker image
-   $ docker pull milvusdb/milvus:0.3.1
+   $ docker pull milvusdb/milvus:latest
    ```
 
 2. Create Milvus file, and add server_cofig and log_config to it.
