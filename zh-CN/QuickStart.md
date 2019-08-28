@@ -43,7 +43,7 @@ sidebar_label: Milvus Quick Start
 
    ```shell
    # Download Milvus Docker image
-   $ docker pull milvusdb/milvus:0.3.1
+   $ docker pull milvusdb/milvus:latest
    ```
 
 2. 创建Milvus文件，并添加server_config和log_config。
