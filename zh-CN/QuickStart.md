@@ -32,7 +32,7 @@ sidebar_label: Milvus Quick Start
   
 4. 请确保您已经安装以下软件包，以便Milvus Docker版能正常运行：
 
-   - [CUDA 9.0及以上](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html)
+   - [CUDA 10.1及以上](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html)
    - [Docker CE](https://docs.docker.com/install/)
    - [NVIDIA-Docker2](https://github.com/NVIDIA/nvidia-docker)
 
@@ -62,7 +62,7 @@ sidebar_label: Milvus Quick Start
 
    ```shell
    # Start Milvus
-   $ nvidia-docker run -td --runtime=nvidia -p 19530:19530 -p 8080:8080 -v /home/$USER/milvus/db:/opt/milvus/db -v /home/$USER/milvus/conf:/opt/milvus -v /home/$USER/milvus/logs:/opt/milvus/logs milvusdb/milvus:0.3.1
+   $ nvidia-docker run -td --runtime=nvidia -p 19530:19530 -p 8080:8080 -v /home/$USER/milvus/db:/opt/milvus/db -v /home/$USER/milvus/conf:/opt/milvus/conf -v /home/$USER/milvus/logs:/opt/milvus/logs milvusdb/milvus:latest
    ```
 
 4. 获得Milvus container id。
