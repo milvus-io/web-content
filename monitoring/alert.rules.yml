@@ -1,7 +1,7 @@
 ```
 groups:
 
-- name: rules/alert.rules
+- name: alert.rules
   rules:
   # Alert for server down
   - alert: MilvusServerDown
