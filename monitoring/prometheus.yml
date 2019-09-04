@@ -8,7 +8,7 @@ global:
   evaluation_interval: 15s
   
 rule_files:
-- "rules/alerts.rules.yml"
+- "alerts.rules.yml"
 
 # Alertmanager configuration
 alerting:
