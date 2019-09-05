@@ -17,6 +17,12 @@ sidebar_label: Configure Milvus
 
 ## 设置Milvus服务
 
+> 注意：如果修改了配置文件，您必须重启 Milvus 服务来启用新的更改。
+>
+> ```
+> $ docker restart <container id>
+> ```
+
 请按照以下步骤设置Milvus服务：
 
 1. 根据路径*home/$USER/milvus/conf*，打开Milvus服务设置文件*server_config.yaml*。
@@ -75,8 +81,4 @@ sidebar_label: Configure Milvus
    | metric_type |计算向量距离的方式。你可以选择用欧式距离（L2）或是内积（IP）的方法来计算。 | L2 / IP |
    | use_blas_threshold |设置触发使用OpenBLAS或Intel MKL计算库的阈值，默认值为20 | >=0 |
 
-3. 重启Milvus Docker。
 
-   ```
-   $ docker restart <container id>
-   ```
