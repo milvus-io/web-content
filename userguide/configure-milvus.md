@@ -18,6 +18,11 @@ After you have successfully started Milvus server, you can see a Milvus file und
 
 ## Set up Milvus service
 
+> Note: If you have edited these configurations, you must restart Milvus server to apply your changes.  
+```
+$ docker restart <container id>
+```
+
 Follow these procedures to configure Milvus service:
 
 1. In the directory *home/$USER/milvus/conf*, open Milvus service configuration file *server_config.yaml*.
@@ -76,8 +81,3 @@ Follow these procedures to configure Milvus service:
    | metric_type |The method vector distances are compared. You can compare vectors either by Euclidean distance (L2) or inner product (IP). | L2 / IP |
    | use_blas_threshold |Set the value that triggers the usage of OpenBLAS or Intel MKL libraries. Default value is 20. | >=0 |
 
-3. Restart Milvus Docker.
-
-   ```
-   $ docker restart <container id>
-   ```
