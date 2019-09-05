@@ -1,4 +1,3 @@
-```
 groups:
 
 - name: alert.rules
@@ -23,5 +22,4 @@ groups:
     for: 1s
     labels:
       serverity: page
-```
 
