@@ -19,9 +19,9 @@ After you have successfully started Milvus server, you can see a Milvus file und
 ## Set up Milvus service
 
 > Note: If you have edited these configurations, you must restart Milvus server to apply your changes.  
-   ```
-   $ docker restart <container id>
-   ```
+> ```
+> $ docker restart <container id>
+> ```
 
 Follow these procedures to configure Milvus service:
 
