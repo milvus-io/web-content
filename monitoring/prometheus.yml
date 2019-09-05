@@ -1,4 +1,3 @@
-```
 # Prometheus configuration for Milvus
 # Requires prometheus 2.X
 # Run with:
@@ -34,7 +33,7 @@ scrape_configs:
   - job_name: 'pushgateway'
     static_configs:
     - targets: ['localhost:9091']
-```
+
 
 
 
