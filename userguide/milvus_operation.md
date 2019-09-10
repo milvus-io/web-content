@@ -1,8 +1,14 @@
-#### Learn Milvus Operations
+---
+id: milvus_operation
+title: Learn Milvus Operations
+sidebar_label: Learn Milvus Operations
+---
+
+# Learn Milvus Operations
 
 This page walks you through some of the most essential Milvus operations using **Python** SDK.
 
-##### Before trying out these operations
+## Before trying out these operations
 
 Please use pymilvus, the built-in Python client, to try out these operations. If you want, you can also use other languages such as C++, RESTful API, etc.
 
@@ -26,7 +32,7 @@ Just type **python** at your console, hit `Enter`, and you should enter Pythonâ€
 
    > Note: In the above code, default values are used for *host* and *port* parameters. Feel free to change them to the IP address and port of the Milvus server. 
 
-##### Create a table
+## Create a table
 
 Assume we would create a table named test01. Read below parameters carefully and set values according to your requirements.
 
@@ -65,7 +71,7 @@ To create a table, use `milvus.create_table` followed by parameters that include
    TableSchema(table_name='test01',dimension=256, index_file_size=1024, metric_type=<MetricType: L2>)
    ```
 
-##### List tables
+## List tables
 
 To see all active tables in the database, use `milvus.show_tables`:
 
@@ -98,7 +104,7 @@ True
 
 > Note: If you want to learn more detailed operations in Milvus, you may read [Milvus Python SDK](https://pypi.org/project/pymilvus) and [Examples](https://github.com/milvus-io/pymilvus/blob/branch-0.3.0/examples/example.py)ã€‚
 
-##### Insert vectors into a table
+## Insert vectors into a table
 
 Below is the list of parameters for inserting vectors into a table:
 
@@ -122,7 +128,7 @@ Status(code=0, message='Success')
 ...
 ```
 
-##### Create index
+## Create index
 
 Below is the list of parameters for creating index for a table:
 
@@ -165,7 +171,7 @@ To drop an index, use below command:
 Status(code=0, message='Success')
 ```
 
-##### Search vectors in a table
+## Search vectors in a table
 
 Below is the list of parameters for searching vectors in a table:
 
@@ -216,7 +222,7 @@ Status(message='Search vectors successfully!', code=0)
 ]
 ```
 
-##### Delete vectors by range
+## Delete vectors by range
 
 To delete vectors you no longer need, use `client.delete_vectors_by_range` followed by the table name and the date range:
 
@@ -227,7 +233,7 @@ To delete vectors you no longer need, use `client.delete_vectors_by_range` follo
 Status(message='Delete vectors successfully!', code=0)
 ```
 
-##### Drop a table
+## Drop a table
 
 When you no longer need a table, use `milvus.delete_table` followed by the table name to remove the table and all its data:
 
@@ -238,7 +244,7 @@ When you no longer need a table, use `milvus.delete_table` followed by the table
 Status(message='Delete table successfully!', code=0)
 ```
 
-##### What's next?
+## What's next?
 
-- Explore all [Python Statements]
 - [Try Milvus Boot Camp] to learn more about solutions
+- [Troubleshoot API Operations]
