@@ -181,7 +181,7 @@ In Configure Prometheus, you have already downloaded the starter alerting rules 
 
 5. Point your browser to `http://<hostname of machine running alertmanager>:9093`, where you can use the Alertmanager UI to define rules for [muting alerts](https://prometheus.io/docs/alerting/alertmanager/#silences).
 
-###### Related links
+## Related links
 
 [Monitoring Metrics]
 
