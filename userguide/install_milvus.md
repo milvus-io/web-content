@@ -1,6 +1,14 @@
-See [Releases] for what's new in the latest release. To upgrade to this release from an older version, see [Upgrade Milvus].
+---
+id: install_milvus
+title: Install Milvus
+sidebar_label: Install Milvus
+---
 
-# Before the install
+# Install Milvus 
+
+See [Releases] for what's new in the latest release. 
+
+## Before the install
 
 1. Make sure your Linux distribution is one of the following:
 
@@ -13,7 +21,7 @@ See [Releases] for what's new in the latest release. To upgrade to this release 
    - [CUDA 10.1 or higher](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html)
    - [NVIDIA driver & Docker 19.03 or higher](https://github.com/NVIDIA/nvidia-docker)
 
-##### Use Docker
+## Use Docker
 
 1. Install [Docker for Linux](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/). Please carefully check that you meet all prerequisites.
 
@@ -61,17 +69,15 @@ See [Releases] for what's new in the latest release. To upgrade to this release 
    $ docker logs <milvus container id>
    ```
 
-##### What's next？
+## What's next？
 
 - If you're just getting started with Milvus:
 
   - [Try and Example Program]
-  
   - [Learn more about Milvus Operations]
   - [Try Milvus Boot Camp] 
   
 - If you're ready to run Milvus in production:
 
   - [Deploy single-server Milvus] or [Use an orchestration system like Kubernetes]
-
   - Build a [Monitoring and Alerting system] to check real-time application performance
