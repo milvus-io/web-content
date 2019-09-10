@@ -1,5 +1,5 @@
 ---
-id: milvus-in-comparison
+id: comparison
 title: Milvus in Comparison
 sidebar_label: Milvus in Comparison
 ---
