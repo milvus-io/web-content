@@ -22,9 +22,7 @@ After you have successfully started Milvus server, you can see a Milvus file und
 
 ## Configurations
 
-Many configurations below are intended for tuning Milvus internals. Before changing these settings, it is recommended to read the following performance optimization pages:
-
-- Optimize data storage
+Many configurations below are intended for tuning Milvus internals. Before changing these settings, think twice or discuss with Milvus team.
 
 > Note: If you have edited these configurations, you must restart Milvus server to apply your changes.  
 >
