@@ -28,13 +28,13 @@ Milvus uses Prometheus, an open-source time series database, to store and monito
 
 Below graph shows how Prometheus works in Milvus:
 
-![1566787732972](../assets\prometheus.png)
+![1566787732972](../monitoring\prometheus.png)
 
 - Grafana
 
   Grafana is an open-source platform for time series analytics. It is used in Milvus to visualize various performance metrics:
 
-  ![prometheus.png](https://github.com/jielinxu/docs/blob/branch-0.3.1/assets/prometheus.png?raw=true)
+  ![prometheus.png](../assets/dashboard.png)
 
 ### Events to alert on
 
@@ -83,7 +83,7 @@ Milvus generates detailed time series metrics. This page shows you how to pull t
 
 ### Configure Prometheus
 
-1. Go to the Prometheus root directory, and download starter [Prometheus configuration file] for Milvus.
+1. Go to the Prometheus root directory, and download starter [Prometheus configuration file](../monitoring/prometheus.yml) for Milvus.
 
    ```shell
    $ wget https://raw.githubusercontent.com/milvus-io/docs/branch-0.4.0/monitoring/prometheus.yml \ -O prometheus.yml
@@ -101,7 +101,7 @@ Milvus generates detailed time series metrics. This page shows you how to pull t
    | ------------------- | ------------------------------------------------------------ |
    | Distributed cluster | Expand the `targets` field to include `localhost: <http-port>` for each additional node in the cluster. |
 
-3. Download starter [alerting rules] for Milvus to the Prometheus root directory.
+3. Download starter [alerting rules](../monitoring/alert.rules.yml) for Milvus to the Prometheus root directory.
 
    ```shell
    cd prometheus
@@ -140,7 +140,7 @@ Milvus generates detailed time series metrics. This page shows you how to pull t
    | URL     | `http://<hostname of machine running prometheus>:9090` |
    | Access  | Browser                                                |
 
-5. Download the starter [Grafana dashboard] for Milvus:
+5. Download the starter [Grafana dashboard](../monitoring/dashboard.json) for Milvus:
 
    ```
    $ wget https://raw.githubusercontent.com/milvus-io/docs/branch-0.4.0/monitoring/dashboard.json
@@ -148,7 +148,7 @@ Milvus generates detailed time series metrics. This page shows you how to pull t
 
 6. [Add the dashboard to Grafana](http://docs.grafana.org/reference/export_import/#importing-a-dashboard). 
 
-   ![image-20190620191802408](https://www.milvus.io/docs/assets/importjson.png)
+   ![image-20190620191802408](../assets/importjson.png)
 
 ### Send notifications with Alertmanager
 
@@ -183,5 +183,5 @@ In Configure Prometheus, you have already downloaded the starter alerting rules 
 
 ## Related links
 
-[Monitoring Metrics]
+[Monitoring Metrics](../reference/monitoring_metrics.md)
 
