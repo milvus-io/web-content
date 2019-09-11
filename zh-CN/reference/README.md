@@ -1,5 +1,5 @@
 # 参考手册
 
-- [Milvus in Comparison](milvus-in-comparison.md)
-- [Configuration](milvus-config.md)
-- [Monitoring Metrics](monitoring-metrics.md)
+- [Milvus in Comparison](comparison.md)
+- [Milvus Configuration](milvus_config.md)
+- [Monitoring Metrics](monitoring_metrics.md)
