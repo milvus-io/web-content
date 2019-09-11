@@ -23,13 +23,6 @@ Milvus是一款稳定可靠、可弹性伸缩的特征向量数据库系统，�
 
 
 ## 通用描述说明
-| Convention       |    Description                                |
-|-----------|-----------------------------------------|
-| code font    | Code font indicates filenames and paths, parameter names and values, method and funtion names. |
-| bold      | Bold type indicates headlines, user interface texts, or content that needs to be emphasized.    |
-| code block  | Code block indicates code examples within a paragraph. |
-| Note      | Note indicates a helpful hint, sometimes a tip, to help you work more efficiently.          |
-| Caution   | Caution brings up an issue that you'd better pay attention to. It points to a possible development that might result in a failure or a problem. |
 
 | 描述       |    说明                                 |
 |-----------|-----------------------------------------|
