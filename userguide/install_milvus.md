@@ -6,7 +6,7 @@ sidebar_label: Install Milvus
 
 # Install Milvus 
 
-See [Releases] for what's new in the latest release. 
+See [Releases](Releases) for what's new in the latest release. 
 
 ## Before the install
 
@@ -73,11 +73,12 @@ See [Releases] for what's new in the latest release.
 
 - If you're just getting started with Milvus:
 
-  - [Try and Example Program]
-  - [Learn more about Milvus Operations]
-  - [Try Milvus Boot Camp] 
+  - [Try an Example Program](example_code.md)
+  - [Learn more about Milvus Operations](milvus_operation.md)
+  - [Try Milvus Bootcamp](bootcamp.md)
   
 - If you're ready to run Milvus in production:
 
-  - [Deploy single-server Milvus] or [Use an orchestration system like Kubernetes]
-  - Build a [Monitoring and Alerting system] to check real-time application performance
+  - Build a [Monitoring and Alerting system](monitor.md) to check real-time application performance
+  - [Import vectors into Milvus](import_data.md)
+  - Tune Milvus performance through [configuration](milvus_config.md)
