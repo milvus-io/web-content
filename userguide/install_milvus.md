@@ -6,7 +6,7 @@ sidebar_label: Install Milvus
 
 # Install Milvus 
 
-See [Releases](Releases) for what's new in the latest release. 
+See [here](Releases/v0.4.0.md) for what's new in the latest release. 
 
 ## Before the install
 
