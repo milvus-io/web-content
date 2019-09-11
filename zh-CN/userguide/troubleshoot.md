@@ -176,4 +176,4 @@ sidebar_label: Troubleshoot
 | `ERROR: invalid db_backend_url: xxx`                         | `server_config.yaml` 或 `db_config.db_backend_url` 里URL设置无效。URL 的格式为**sqlite://:@:/**  或 **mysql://root:123456@127.0.0.1:3306/milvus**。 |
 
 ## 相关阅读
-[了解 Milvus 操作](milvus_operations.md)
+[了解 Milvus 操作](milvus_operation.md)
