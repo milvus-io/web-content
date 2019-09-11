@@ -66,5 +66,5 @@ For more insight, see [Milvus in Comparison](reference/comparison.md).
 If you still have questions that are not covered in this list, you can take the following steps to find an answer:
 
 - Join our [Milvus Community Forum] to ask questions, find answers, and help other users.
-- Check the list of [Operational FAQ] to get answers to frequently asked questions about operating Milvus.
+- Check the list of [Operational FAQ](operational_faq.md) to get answers to frequently asked questions about operating Milvus.
 
