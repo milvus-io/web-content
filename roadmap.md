@@ -8,11 +8,11 @@ sidebar_label: Milvus Roadmap
 
 ## Search Engine
 
-- Support INT8 vector
+- Support INT8 vectors
 
 - Support hybrid index search
 
-- Smart Index selection
+- Smart index selection
 
 - Support attributes filtering and vector searching 
 
@@ -22,9 +22,9 @@ sidebar_label: Milvus Roadmap
 
 - Support OnDisk index
 
-- Support delete
+- Support vector deletion
 
-- Support update
+- Support vector update
 
 - Rebuild index
 
