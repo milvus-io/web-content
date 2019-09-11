@@ -6,7 +6,7 @@ sidebar_label: Operational FAQ
 
 ### Operational FAQ
 
-#### Why is my multiprocessing program failed?
+#### Why did my multiprocessing program failed?
 
 In order to successfully run multiprocessing in Milvus, make sure the following conditions are met:
 
