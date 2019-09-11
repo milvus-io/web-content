@@ -8,7 +8,7 @@ sidebar_label: Monitoring and Alerting
 
 ## 概述
 
-尽管Milvus [高可用]，对生产系统进行积极全面的性能监控，以及给需要调查干预的突发情况创建报警规则以触发用户通知，仍然非常重要。
+尽管 Milvus 高可用，对生产系统进行积极全面的性能监控，以及给需要调查干预的突发情况创建报警规则以触发用户通知，仍然非常重要。
 
 该页面主要解释Milvus的监控系统和需要创建报警机制的突发情况。
 
@@ -28,13 +28,13 @@ Milvus 使用开源时序数据库 Prometheus 作为监控和性能指标存储�
 
 其工作流程如下图所示:
 
-![1566787785125](C:\Users\jieli\AppData\Roaming\Typora\typora-user-images\1566787785125.png)
+![1566787785125](../monitoring/prometheus.png)
 
 - Grafana
 
-  Grafana 是一个开源的时序数据分析及可视化平台。Milvlus 使用 Grafana 来展示各项性能指标：
+  Grafana 是一个开源的时序数据分析及可视化平台。Milvus 使用 Grafana 来展示各项性能指标：
 
-  ![prometheus.png](https://github.com/jielinxu/docs/blob/branch-0.3.1/assets/prometheus.png?raw=true)
+  ![prometheus.png](../assets/newdashboard.png)
 
 ### 需要报警的事件
 
@@ -45,7 +45,7 @@ Milvus 使用开源时序数据库 Prometheus 作为监控和性能指标存储�
 **服务器挂掉**
 
 - 报警规则：当 Milvus 服务器挂掉时发送报警信息。
-- 如何判断：当 Milvus 服务器挂掉时，监控仪表盘上各个指标会显示 *No Data*。
+- 如何判断：当 Milvus 服务器挂掉时，监控仪表盘上各个指标会显示 **No Data**。
 
 **CPU/GPU 温度过高**
 
@@ -59,7 +59,7 @@ Milvus 会生成详细的关于系统运行状态的时序 metrics。该页面�
 ### 前提条件
 
 - 请确保您已经启动了 Milvus 服务。
-- 请确保您已经在 [部署方案](monitoring in Single Server Deployment) 中启用了监控功能。
+- 请确保您已经启用了监控功能。
 
 ### 安装 Prometheus
 
@@ -82,7 +82,7 @@ Milvus 会生成详细的关于系统运行状态的时序 metrics。该页面�
 
 ### 设置 Prometheus
 
-1. 下载 Milvus [Prometheus 配置文件] 。
+1. 下载 Milvus [Prometheus 配置文件](../monitoring/prometheus.yml) 。
 
    ```shell
    $ wget https://raw.github/milvus-io/docs/master/monitoring/prometheus.yml \ -O prometheus.yml
@@ -100,7 +100,7 @@ Milvus 会生成详细的关于系统运行状态的时序 metrics。该页面�
    | ---------- | ------------------------------------------------------------ |
    | 分布式集群 | 在 `job_name = 'milvus_server'` 下的 `targets` 字段，为集群中的每个节点分布添加相应的 `localhost: <http-port>` 。 |
 
-3. 下载 Milvus [报警规则文件] 到 Prometheus 根目录。
+3. 下载 Milvus [报警规则文件](../monitoring/alert.rules.yml) 到 Prometheus 根目录。
 
    ```shell
    cd prometheus
@@ -128,7 +128,7 @@ Milvus 会生成详细的关于系统运行状态的时序 metrics。该页面�
 
 3. [添加 Prometheus 作为 datasource](http://docs.grafana.org/datasources/prometheus/).
 
-   ![image-20190620191640605](https://www.milvus.io/docs/assets/datasource.png)
+ 
 
 4. 在 datasource 页面，做如下设置：
 
@@ -139,10 +139,10 @@ Milvus 会生成详细的关于系统运行状态的时序 metrics。该页面�
    | URL     | `http://<hostname of machine running prometheus>:9090` |
    | Access  | Browser                                                |
 
-5. 下载 [Grafana 配置文件](dashboard.json) :
+5. 下载 [Grafana 配置文件](../monitoring/dashboard.json) :
 
    ```
-   $ wget https://raw.githubusercontent.com/cockroachdb/cockroach/
+   $ wget https://raw.githubusercontent.com/milvus-io/docs/master/monitoring/dashboard.json
    ```
 
 6. [将配置文件导入 Grafana](http://docs.grafana.org/reference/export_import/#importing-a-dashboard).
