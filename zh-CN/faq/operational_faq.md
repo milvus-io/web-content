@@ -4,16 +4,18 @@ title: Operational FAQ
 sidebar_label: Operational FAQ
 ---
 
-# Operational FAQ
+# 操作 FAQ
 
-### Why is my multiprocessing program failed?
+### 为什么我启用多进程程序失败了？
 
-In order to successfully run multiprocessing in Milvus, make sure the following conditions are met:
+当前Milvus在运行过程中，能够实现多进程操作，但在实现时需满足一定条件：
 
-- No client is built in the main process
-- Clients are created in each child process
+- 程序执行时主进程中无client
+- 每个子进程分别创建client进行操作
 
-Below is a good example, to enable multiprocessing of vector insertion and search in a table named `TABLE_NAME`, with `vector_1` already in it. Note that in such execution, the search scope does not include the vectors that are being inserted simultaneously.
+以下为正确程序的示例（部分细节如import multiprocessing as mp需自行修改）。
+
+当表名为TABLE_NAME，且已插入vector_1的表存在时，直接在主程序中直接调用该函数，两个 insert 进程和一个 search 进程同时执行，且能获得正确结果。其中需注意的是，search 的结果与当前正在 insert 的向量无关。
 
 ```shell
 def test_add_vector_search_multiprocessing():
@@ -58,7 +60,9 @@ def test_add_vector_search_multiprocessing():
         p.join()
 ```
 
-If a client already exists in the main process, enabling multiprocessing will lead to client hang and timeout. Below is a bad example to avoid, in which the `connect` is the client built in the main process.
+而若主进程中已存在 client（如利用 client 进行建表及插入），再进行多进程的操作，则会造成 client hang，最终导致 timeout。产生该结果的错误程序示例如下所示。
+
+其中 `connect` 即为主进程所起 client，程序将会持续执行，直至 timeout。
 
 ```shell
 def test_add_vector_search_multiprocessing(self, connect, table):
@@ -96,6 +100,7 @@ def test_add_vector_search_multiprocessing(self, connect, table):
         p.join()
 ```
 
-### Related links
+### 相关阅读
 
-[Product FAQ](product_faq.md)
+[产品 FAQ](product_faq.md)
+
