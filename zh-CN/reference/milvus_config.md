@@ -1,0 +1,107 @@
+---
+id: milvus_config
+title: Milvus Configuration
+sidebar_label: Milvus Configuration
+---
+
+# Milvus 配置
+
+## 配置概述
+
+以下配置说明同时适用于单机部署和分布式集群部署，包括是否需要启用监控功能，以及启用一些高级功能以进行性能调优。
+
+### Milvus 文件结构
+
+成功启动 Milvus 服务后，你可以在 `home/$USER/milvus` 的路径下看到 Milvus 的文件夹。其中包含以下文件：
+
+- `milvus/db`（数据库存储）
+- `milvus/logs`（日志存储）
+- `milvus/conf`（设置文件）
+  - `server_config.yaml`（服务设置）
+  - `log_config.conf`（日志设置）
+
+## 配置
+
+下文提到的许多配置都是给 Milvus 内部性能调优设计的，在编辑设置之前，请阅读以下性能优化文章：
+
+- 优化数据存储
+
+> 注意：如果修改了配置文件，您必须重启 Milvus 服务来启用新的更改。
+>
+> ```
+> $ docker restart <container id>
+> ```
+
+进入路径 `home/$USER/milvus/conf`，打开Milvus服务设置文件 `server_config.yaml` 。
+
+### `server_config` 区域
+
+| 参数        | 说明                                                         | 类型    | 默认值    |
+| ----------- | ------------------------------------------------------------ | ------- | --------- |
+| `address`   | Milvus server监听的IP地址。                                  | string  | `0.0.0.0` |
+| `port`      | Milvus server监听的端口号。                                  | integer | `19530`   |
+| `gpu_index` | 在有多张GPU的情况下，您可以指定使用哪张GPU来运行Milvus。目前仅支持指定一张GPU。 | integer | `0`       |
+| `mode`      | Milvus部署类型。选择 `single` 或 `cluster` 。                | boolean | `single`  |
+
+### `db_config` 区域
+
+| 参数                     | 说明                                                         | 类型    | 默认值          |
+| ------------------------ | ------------------------------------------------------------ | ------- | --------------- |
+| `db_path`                | 导入 Milvus 的数据文件存储的首选路径。                       | path    | `/opt/data`     |
+| `db_slave_path`          | 导入 Milvus 的数据文件存储的二级路径，可以填多个，两个路径中间以分号隔开。当数据量很大，`db_path` 指定的磁盘空间不够用时，可以设置此参数。<br/>`db_path` 和 `db_slave_path` 平均分配导入的数据。每个路径下的数据大小 = 数据总大小 / 路径数量。请确保这些路径下文件可用的存量差不多且够用。 | path    | ` `             |
+| `parallel_reduce`        | 设置为 `true` 以使用多线程来运行向量查询。如果使用，将大大减少总的查询时间。 <br/>如果批量需要查询的向量数量很大，建议开启该功能。 | boolean | `false`         |
+| `db_backend_url`         | 元数据存储的 URL 。使用 SQLite（单机部署） 或 MySQL（分布式集群部署）来存储元数据。 <br/>`db_backend_url` 的格式为：`dialect://username:password@host:port/database`。（ `dialect` 可以是 `mysql` 或 `sqlite`，取决于你是用了MySQL 还是SQLite数据库。） | path    | `sqlite://:@:/` |
+| `archive_disk_threshold` | 归档触发阈值：存储大小。数据文件大小一旦超过存储大小，触发归档操作。 | integer | `512` (GB)      |
+| `archive_days_threshold` | 归档触发阈值：存储天数。一旦超过存储天数，触发归档操作。     | integer | `30` (day)      |
+| `insert_buffer_size`     | 用于buffer的最大内存量。`insert_buffer_size` 和`cpu_cache_capacity`（`cache_config` 区域）之和不能超过内存总量。 | integer | `4` (GB)        |
+
+### `metric_config` 区域
+
+| 参数                      | 说明                           | 类型    | 默认值       |
+| ------------------------- | ------------------------------ | ------- | ------------ |
+| `is_startup`              | 设置为 `true` 以启动监控功能。 | boolean | `true`       |
+| `collector`               | 连接的监控系统。               | string  | `Prometheus` |
+| `port`                    | 访问 Prometheus 的端口号。     | Integer | `8080`       |
+| `push_gateway_ip_address` | push gateway的 IP 地址。       | string  | `127.0.0.1`  |
+| `push_gateway_port`       | push gateway的端口号。         | integer | `9091`       |
+
+### `cache_config` 区域
+
+| 参数                       | 说明                                                         | 类型    | 默认值    |
+| -------------------------- | ------------------------------------------------------------ | ------- | --------- |
+| `cpu_cache_capacity`       | 用于缓存的内存量，最大值不能超过内存总量。                   | integer | `16` (GB) |
+| `cache_free_percent`       | 当 CPU 缓存已满，会自动清除过往数据。通过这条参数您可以设置剩余在 CPU 缓存中的数据量。<br/>比如，该参数的默认值（0.85）表示 CPU 缓存中85%的数据不用被清除。取值范围为0 -1。 | float   | `0.85`    |
+| `insert_cache_immediately` | 设置为 `true` ，则新插入的数据会自动加载到缓存以备搜索。<br/>如果想要实现数据即插即搜索，建议启用该功能。 | boolean | `false`   |
+| `gpu_cache_capacity`       | 用于缓存的显存量，最大值不能超过显存总量。                   | integer | `5`(GB)   |
+| `gpu_cache_free_percent`   | 当 GPU 缓存已满，会自动清除过往数据。通过这条参数您可以设置剩余在 GPU 缓存中的数据量。<br/>比如，该参数的默认值（0.85）表示 GPU 缓存中85%的数据不用被清除。取值范围为0 -1。 | float   | `0.85`    |
+| `gpu_ids`                  | Milvus 用到的 GPU 的设备 ID。如果用到多张 GPU, 请列出所有 ID。 | integer | `0`       |
+
+### `engine_config` 区域
+
+| 参数                 | 说明                                                         | 类型    | 默认值 |
+| -------------------- | ------------------------------------------------------------ | ------- | ------ |
+| `use_blas_threshold` | Milvus 性能调优参数。此参数必须与 `nq` 比较以确定是否触发使用OpenBLAS或Intel MKL计算库的阈值。<br/>如果 `nq` > `use_blas_threshold` ，则 Milvus 性能稳定且搜索速度尚可。如果 `nq` < `use_blas_threshold` ，搜索速度明显提升但 Milvus 稳定性稍弱。取值范围为 >= 0. | integer | `20`   |
+
+### `resource_config` 区域
+
+请在该区域定义 Milvus 中 resource 的使用情况，和各 resource 之间的关系。
+
+首先，请为 Milvus 用到的磁盘、CPU 和 GPU 等设置下列参数。
+
+| 参数               | 说明                                                         | 类型    | 默认值     |
+| ------------------ | ------------------------------------------------------------ | ------- | ---------- |
+| `resource_name`    | Milvus 所用的 resource 的名字。常用 resource 有 `SSD` ，`cpu` 和 `gpu` 。 <br/>如果使用多张 CPU 或 GPU，则请用不同的名字分别列出。如： `gpu0`，`gpu1` 等。 |         |            |
+| `type`             | Milvus 所用的 resource 的类型。如 ：`DISK`，`CPU` 或 `GPU` 等。 |         |            |
+| `device_id`        | 所定义的 resource 的设备 id。                                | integer | `0`        |
+| `enable_executor`  | 设置为 `true` ，则所定义的 resource 可以用来做 Milvus 的计算。 | boolean |            |
+| `gpu_resource_num` | 所定义 GPU 里包含的 GPU resources 个数。一个GPU resource 至少包含 `pinned_memory` 和 `temp_memory` 。 | integer | `2`        |
+| `pinned_memory`    | CPU 或 GPU 里用于数据传输的缓存空间。                        | integer | `300` (MB) |
+| `temp_memory`      | CPU 或 GPU 里用于数据计算的缓存空间。                        | integer | `300` (MB) |
+
+接下来，请定义各 resources 之间的连接关系。 
+
+| 参数              | 说明                                                         | 类型 | 默认值 |
+| ----------------- | ------------------------------------------------------------ | ---- | ------ |
+| `connection_name` | 各 resource 之间连接方式的名字。常用连接方式有 `io`，`pcie` 等。<br/>如果 CPU 和 GPU 之间存在多个连接，请用不同名字列出，如：`pcie0`，`pcie1` 等。 |      |        |
+| `speed`           | 所定义的连接的带宽。 (MB/s)                                  |      |        |
+| `endpoint`        | 所定义连接的终端，请使用如下格式表示：`ssda===cpu` 或`cpu===gpu0` 等。 |      |        |
