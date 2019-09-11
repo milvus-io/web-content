@@ -176,5 +176,5 @@ Once the `milvus_bootcamp.py` has finished running, you will see the results in 
 
 ## Related links
 
-- [Milvus Configuration]
-- [Milvus Bootcamp](https://github.com/milvus-io/bootcamp)
+- [Milvus Configuration](../reference/milvus_config.md)
+- [Milvus Bootcamp](bootcamp.md)
