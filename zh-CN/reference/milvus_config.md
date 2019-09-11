@@ -40,8 +40,8 @@ sidebar_label: Milvus Configuration
 | ----------- | ------------------------------------------------------------ | ------- | --------- |
 | `address`   | Milvus server监听的IP地址。                                  | string  | `0.0.0.0` |
 | `port`      | Milvus server监听的端口号。                                  | integer | `19530`   |
-| `gpu_index` | 在有多张GPU的情况下，您可以指定使用哪张GPU来运行Milvus。目前仅支持指定一张GPU。 | integer | `0`       |
 | `mode`      | Milvus部署类型。选择 `single` 或 `cluster` 。                | boolean | `single`  |
+| `time_zone` | 使用 UTC-x 或 UTC+x 来指定时区。比如，您可以使用 `UTC+8` 来代表中国标准时间。 | Timezone | `UTC+8`   |
 
 ### `db_config` 区域
 
@@ -54,6 +54,7 @@ sidebar_label: Milvus Configuration
 | `archive_disk_threshold` | 归档触发阈值：存储大小。数据文件大小一旦超过存储大小，触发归档操作。 | integer | `512` (GB)      |
 | `archive_days_threshold` | 归档触发阈值：存储天数。一旦超过存储天数，触发归档操作。     | integer | `30` (day)      |
 | `insert_buffer_size`     | 用于buffer的最大内存量。`insert_buffer_size` 和`cpu_cache_capacity`（`cache_config` 区域）之和不能超过内存总量。 | integer | `4` (GB)        |
+| `build_index_gpu`        | 在有多张 GPU 的情况下，您可以指定使用哪张 GPU 来创建索引。目前仅支持指定一张 GPU。 | integer | `0`             |
 
 ### `metric_config` 区域
 
@@ -74,7 +75,6 @@ sidebar_label: Milvus Configuration
 | `insert_cache_immediately` | 设置为 `true` ，则新插入的数据会自动加载到缓存以备搜索。<br/>如果想要实现数据即插即搜索，建议启用该功能。 | boolean | `false`   |
 | `gpu_cache_capacity`       | 用于缓存的显存量，最大值不能超过显存总量。                   | integer | `5`(GB)   |
 | `gpu_cache_free_percent`   | 当 GPU 缓存已满，会自动清除过往数据。通过这条参数您可以设置剩余在 GPU 缓存中的数据量。<br/>比如，该参数的默认值（0.85）表示 GPU 缓存中85%的数据不用被清除。取值范围为0 -1。 | float   | `0.85`    |
-| `gpu_ids`                  | Milvus 用到的 GPU 的设备 ID。如果用到多张 GPU, 请列出所有 ID。 | integer | `0`       |
 
 ### `engine_config` 区域
 
