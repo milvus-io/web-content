@@ -38,5 +38,8 @@ Follow the following steps to import vector data into Milvus through Python scri
 3. Through `numpy.array.tolist`, convert the `numpy.array` to a 2-dimensional list (in the form of [[],[]...[]]).
 4. [Import the vectors (2-dimensional list) into Milvus](Insert vectors into a table). **A list of vector ids** will be returned instantly.
 
-## Related Links
-[Data Storage](reference/data_store.md)
+## Related links
+
+- [Insert Vectors into a Table](milvus_operation.md)
+- [Data Normalization](https://github.com/milvus-io/bootcamp/blob/master/EN_docs/data_preparation/data_normalization.md)
+- [Data Storage](reference/data_store.md)
