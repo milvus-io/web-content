@@ -1,7 +1,7 @@
 ---
-id: trouble-shooting
-title: Troubleshooting
-sidebar_label: Troubleshooting
+id: troubleshoot
+title: Troubleshoot
+sidebar_label: Troubleshoot
 ---
 
 # 障碍排查
