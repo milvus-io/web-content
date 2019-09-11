@@ -4,70 +4,67 @@ title: Product FAQ
 sidebar_label: Product FAQ
 ---
 
-# 产品 FAQ
+### What is Milvus?
 
-### Milvus是什么？
+Milvus is a GPU-accelerated feature vector search engine that provides extraordinary performance for similarity search over massive feature vectors. It can be easily deployed on both bare metal and cloud platforms with Linux operating systems.
 
-Milvus 是一款面向向量检索的数据库系统，可以很好的运行和部署在 x86 架构的服务器环境和主流的虚拟化环境下，也支持目前主流的网络硬件设备。操作系统方面，Milvus 支持目前主流的 Linux 操作系统环境。
+### When is Milvus a good choice?
 
-### Milvus 适合什么时候使用 ？
+Milvus is best suited for applications that require reliable vector similarity search, and millisecond response times, regardless of scale. It is built to automatically replicate, rebalance, and recover with minimal configuration and operational overhead. 
 
-如果您想要可靠的海量向量相似性检索，以及亿级数据搜索的毫秒级响应，那 Milvus 将是您不二的选择。Milvus 一键安装、配置简易、运行可靠，保证数据准确性的同时，提供超高速的搜索响应。
+Milvus returns single-row reads in 0.6ms or less and single-row writes in 0.03ms or less, and supports a variety of machine learning models for optimizing query performance. It is also suitable for hybrid search for structured and unstructured data.
 
-Milvus 单行读取速度约 0.6 毫秒，单行写入速度在 0.03 毫秒左右。高效兼容各类机器学习模型和算法，优化了查询性能。而且提供结构化和非结构化数据的混合查询方案。
+### How to use Milvus?
 
-### 如何使用 Milvus？
+Milvus provides Python and C++ SDK. It also supports all Thrift communication types.
 
-目前 Milvus 提供 Python 和 C++ 的 SDK 接口，同时还支持所有基于 Thrift 的通信方式。
+### How easy is it to use Milvus?
 
-### Milvus 的易用性如何？
+Milvus can be easily installed through pulling docker images and simple pip install for SDKs. It is designed to be "easy to use". For more details, see [Install Milvus](userguide/install_milvus.md).
 
-Milvus 安装简单，仅需下载相关 docker 镜像文件。易用性强，通过Python等SKD接口即可完成向量插入、检索等操作。若要了解更多，请看 [安装 Milvus](userguide/install_milvus.md).
+To start your first vector search program, please go to [Milvus example code](userguide/example_code.md).
 
-想要开启您的第一次向量搜索？请阅读 [运行示例程序](userguide/example_code.md).
+### Is Milvus highly available?
 
-### Milvus 具备高可用特性吗？
+Milvus is designed to be used in mission critical systems with high SLAs. Milvus cluster ensures continuous service capability in case of any single point of failure.
 
-Milvus 集群具备高可用性，其存储和计算等集群均容许部分组件失效，而不影响整个集群的使用。
+### How does Milvus work?
 
-### 向量存入Milvus后，如何检索？
+All vectors will be indexed and stored in Milvus, each of them will be assigned with an ID. When vectors are searched, Milvus will return IDs of vectors that are most similar to the given ones.
 
-向量存入 Milvus 后，Milvus 会给对应向量一个ID，用户需要自己将该向量ID和其对应的其他属性存入另外一个数据库系统。查询的时候，用户提供需要查询的向量，Milvus 会返回和用户提供向量最匹配的数个向量的ID以及匹配度。
+### Which index types are supported?
 
-### 如何选择向量索引的类型？
-
-依据用户的需求，您可以选择以下索引类型：
+Currently Milvus supports:
 
 - `Flat`
 
-  如果需求精确匹配，那么请选择 `Flat` 类型索引。精确匹配，可以为用户提供100%精确匹配的向量，但是由于计算量巨大，性能影响也很大。
+  Provides 100% accuracy for recalls. However, performance might be downgraded due to huge computation effort.
 
 - `IVFFlat`
 
-  如果不追求100%精确匹配，可以选择 `IVFFlat` 类型索引，支持大数据量的高精度匹配。
+  K-means based similarity search which is balanced between accuracy and performance.
 
 - `IVF_SQ8`
 
-  运用 scalar quantization 的向量索引，能大幅缩小向量体积（大概缩减3/4），从而能有效提高向量吞吐量。
+  Adopts a scalar quantization strategy that significantly reduces the size of a vector (by about 3/4). It improves the overall throughput of vector processing.
 
-### Milvus 是否支持 “边插入边查询” ？
+### Does Milvus support simultaneous inserting and searching?
 
-支持。如果您想在Milvus里边插入向量边查询，建议在 `home/$USER/milvus/conf/server_config.yaml` 下的 `cache_config` 区域，将参数 `insert_cache_immediately` 设置为 `True`。
+Absolutely. You can simultaneously insert and search data in Milvus. If you want this function, you are recommended to set the parameter `insert_cache_immediately` to `true` in section `cache_config` at `home/$USER/milvus/conf/server_config.yaml`.
 
-### 数据存储在哪里？
+### Where are the data stored?
 
-向量数据可以存储在您的本地磁盘，或是MinIO云上。若要了解更多，请阅览[数据存储](https://www.milvus.io/docs/zh-CN/userguide/data-storage)。
+Vector data are stored either in your local disk or MinIO cloud. For more details about storage, read [Milvus data storage](reference/data_store.md).
 
-### Milvus 与 FAISS 和 SPTAG 对比如何?
+### How does Milvus compare to FAISS and SPTAG?
 
-尽管这些都支持海量向量的相似度检索，Milvus 是其中唯一成熟易用的向量检索数据库系统，具备高可用、弹性扩展等特性。
+While all of these supports large-scale vector similarity search, Milvus is the only one that is a mature and easy-to-use vector indexing database system that scales easily, rebalances and repairs itself automatically.
 
-想要了解更多性能对比，请看 [与 FAISS 和 SPTAG 对比](comparison.md)。
+For more insight, see [Milvus in Comparison](reference/comparison.md). 
 
-### 仍有问题没有得到解答？
+### Have questions that were not answered?
+If you still have questions that are not covered in this list, you can take the following steps to find an answer:
 
-如果您仍有其它问题，您可以：
-
-- 加入 [Milvus 社区]，提问、闲逛、和其它用户交流
-- 阅读 [操作 FAQ](faq/operational_faq.md)，了解关于 Milvus 操作的常见问题 
+- Join our [Milvus Community Forum] to ask questions, find answers, and help other users.
+- Check the list of [Operational FAQ] to get answers to frequently asked questions about operating Milvus.
 
