@@ -28,7 +28,7 @@ Milvus uses Prometheus, an open-source time series database, to store and monito
 
 Below graph shows how Prometheus works in Milvus:
 
-![1566787732972](C:\Users\jieli\AppData\Roaming\Typora\typora-user-images\1566787732972.png)
+![1566787732972](../assets\prometheus.png)
 
 - Grafana
 
@@ -60,7 +60,7 @@ Milvus generates detailed time series metrics. This page shows you how to pull t
 
 - Make sure you have already started a Milvus server.
 
-- Make sure you have enabled the monitoring function in your [deployment](monitoring in Single Server Deployment). 
+- Make sure you have enabled the monitoring function. 
 
 ### Install Prometheus
 
@@ -129,7 +129,7 @@ Milvus generates detailed time series metrics. This page shows you how to pull t
 
 3. [Add Prometheus as a datasource](http://docs.grafana.org/datasources/prometheus/).
 
-   ![image-20190620191640605](https://www.milvus.io/docs/assets/datasource.png)
+   ![image-20190620191640605](../assets/datasource.png)
    
 4. Configure the datasource as follows:
 
