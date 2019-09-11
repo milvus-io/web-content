@@ -85,7 +85,7 @@ Milvus 会生成详细的关于系统运行状态的时序 metrics。该页面�
 1. 下载 Milvus [Prometheus 配置文件](../monitoring/prometheus.yml) 。
 
    ```shell
-   $ wget https://raw.github/milvus-io/docs/master/monitoring/prometheus.yml \ -O prometheus.yml
+   $ wget https://raw.githubusercontent.com/milvus-io/docs/branch-0.4.0/monitoring/prometheus.yml \ -O prometheus.yml
    ```
 
    配置文件中的基本设置是：每15秒去收集一次 Milvus 生成的metrics。 
@@ -107,7 +107,7 @@ Milvus 会生成详细的关于系统运行状态的时序 metrics。该页面�
    ```
 
    ```shell
-   wget -P rules https://raw.github/milvus-io/docs/master/monitoring/rules/alerts.rules.yml
+   wget -P rules https://raw.githubusercontent.com/milvus-io/docs/branch-0.4.0/monitoring/alerts.rules.yml
    ```
 
 ### 启动 Prometheus
@@ -128,8 +128,6 @@ Milvus 会生成详细的关于系统运行状态的时序 metrics。该页面�
 
 3. [添加 Prometheus 作为 datasource](http://docs.grafana.org/datasources/prometheus/).
 
- 
-
 4. 在 datasource 页面，做如下设置：
 
    | Field   | Definition                                             |
@@ -142,7 +140,7 @@ Milvus 会生成详细的关于系统运行状态的时序 metrics。该页面�
 5. 下载 [Grafana 配置文件](../monitoring/dashboard.json) :
 
    ```
-   $ wget https://raw.githubusercontent.com/milvus-io/docs/master/monitoring/dashboard.json
+   $ wget https://raw.githubusercontent.com/milvus-io/docs/branch-0.4.0/monitoring/dashboard.json
    ```
 
 6. [将配置文件导入 Grafana](http://docs.grafana.org/reference/export_import/#importing-a-dashboard).
@@ -170,7 +168,7 @@ Milvus 会生成详细的关于系统运行状态的时序 metrics。该页面�
 
 > 建议：您可以提取 Alertmanager binary 并添加到 `PATH` ，以便在任意 Shell 上都能快速启动 Alertmanager。
 
-3. 创建 [Alertmanager 配置文件] 来指定接受报警通知的邮箱/微信账户，并将配置文件添加到 Alertmanager 根目录下。
+3. 创建 [Alertmanager 配置文件](https://prometheus.io/docs/alerting/configuration/) 来指定接受报警通知的邮箱/微信账户，并将配置文件添加到 Alertmanager 根目录下。
 
 4. 启动 Alertmanager 服务， `--config.file` 指向配置文件：
 
