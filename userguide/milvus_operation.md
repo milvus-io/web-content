@@ -30,7 +30,7 @@ Just type **python** at your console, hit `Enter`, and you should enter Pythonâ€
    Status(message='connected!', code=0)
    ```
 
-   > Note: In the above code, default values are used for *host* and *port* parameters. Feel free to change them to the IP address and port of the Milvus server. 
+   > Note: In the above code, default values are used for `host` and `port` parameters. Feel free to change them to the IP address and port you set for Milvus server. 
 
 ## Create a table
 
@@ -100,7 +100,7 @@ To verity if a table exists in Milvus, use this command:
 True
 ```
 
-> Note: If the table you verified is not available, *False* will be returned instead of *True*.
+> Note: If the table you verified is not available, `False` will be returned instead of `True`.
 
 > Note: If you want to learn more detailed operations in Milvus, you may read [Milvus Python SDK](https://pypi.org/project/pymilvus) and [Examples](https://github.com/milvus-io/pymilvus/blob/branch-0.3.0/examples/example.py)ã€‚
 
@@ -113,7 +113,7 @@ Below is the list of parameters for inserting vectors into a table:
 | `table_name` | The name of the table to create, which must be unique within its database. <br/>Begin a table name with a letter or an underscore (_) . Subsequent characters can be letters, underscores, numbers (0-9). The entire length can not exceed 255 characters. | String              | 'table name'           |
 | `records`    | The list of vectors to insert into the table. Each vector value must be a **Float** data type, with the same dimension as that defined for the table. | 2-dimensional  list | [[0.1, 0.2, ...], ...] |
 
-To insert a batch of vectors (represented by "records" in the code) into a table, use `milvus.add_vectors` followed by the table name and a comma-separated list of vectors. 
+To insert a batch of vectors (represented by `records` in the code) into a table, use `milvus.add_vectors` followed by the table name and a comma-separated list of vectors. 
 
 When succeeded, a group of vector ids will be returned. 
 
@@ -189,7 +189,7 @@ To search a batch of vectors, use `milvus.search_vectors` followed by the table 
 
 > Note: A target vector refers to the vector that is the target of the search. A mapping vector is a search result that is proven to be similar to the target vector. 
 
-Suppose you want to search the top 5 most similar vectors of three 256-dimensional vectors (represented by "query_records" in below codes), you may:
+Suppose you want to search the top 5 most similar vectors of three 256-dimensional vectors (represented by `query_records` in below codes), you may:
 
 ```python
 # Search 3 vectors
@@ -246,5 +246,5 @@ Status(message='Delete table successfully!', code=0)
 
 ## What's next?
 
-- [Try Milvus Boot Camp] to learn more about solutions
-- [Troubleshoot API Operations]
+- [Try Milvus Bootcamp](bootcamp.md) to learn more about solutions
+- [Troubleshoot API Operations](troubleshoot.md)
