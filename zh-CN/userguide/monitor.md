@@ -182,4 +182,4 @@ Milvus 会生成详细的关于系统运行状态的时序 metrics。该页面�
 
 ## 相关阅读
 
-[监控指标]
+[监控指标](monitoring_metrics.md)
