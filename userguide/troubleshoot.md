@@ -156,4 +156,4 @@ To solve this issue, make sure that the vector dimension you set is equal to the
 | `ERROR: invalid db_backend_url: xxx`                         | Invalid URL has been set in `server_config.yaml` or `db_config.db_backend_url` . The right format is **sqlite://:@:/**  or **mysql://root:123456@127.0.0.1:3306/milvus** |
 
 ## Related links
-[Milvus Operations](milvus_operations.md)
+[Milvus Operations](milvus_operation.md)
