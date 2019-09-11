@@ -38,9 +38,8 @@ In the directory `home/$USER/milvus/conf`, open Milvus service configuration fil
 | ----------- | ------------------------------------------------------------ | ------- | --------- |
 | `address`   | IP address that Milvus server monitors.                      | string  | `0.0.0.0` |
 | `port`      | Port that Milvus server monitors.                            | integer | `19530`   |
-| `gpu_index` | Defines which GPU will be used for Milvus, in case of multiple GPUs. Currently, you can only designate one GPU. | integer | `0`       |
 | `mode`      | Milvus deployment type. Select either `single` or `cluster`. | boolean | `single`  |
-
+| `time_zone` | Use the UTC-x or UTC+x to specify a time zone. For example, use `UTC+8` for China Standard Time. | Timezone | `UTC+8` |  
 ### Section `db_config`
 
 | Parameter                | Description                                                  | Type    | Default         |
@@ -52,6 +51,7 @@ In the directory `home/$USER/milvus/conf`, open Milvus service configuration fil
 | `archive_disk_threshold` | Minimum data storage size beyond which archive action is triggered. | integer | `0` (GB)        |
 | `archive_days_threshold` | Maximum number of days files are kept. Files older than the specified days will be archived. | integer | `0` (day)       |
 | `insert_buffer_size`     | Maximum buffer size allowed for data insertion. The sum of `insert_buffer_size` and `cpu_cache_capacity` (in "Section `cache_config`" ) should be < total memory. | integer | `4` (GB)        |
+| `build_index_gpu`        | If multiple GPU are used in Milvus, define which GPU is used for index building. Currently, you can only assign one GPU card for this function. | integer | `0 `            |
 
 ### Section `metric_config`
 
@@ -72,7 +72,6 @@ In the directory `home/$USER/milvus/conf`, open Milvus service configuration fil
 | `insert_cache_immediately` | If set to `true` , the inserted data will be loaded into the cache immediately for hot query. <br/>If you want simultaneous inserting and searching of vector, it is recommended to enable this function. | boolean | `false`   |
 | `gpu_cache_capacity`       | Memory used for cache in GPU. The maximum value should not exceed total GPU memory. | integer | `5` (GB)  |
 | `gpu_cache_free_percent`   | The percentage of data that can be kept in the GPU memory when the cache is full (when data size reaches `gpu_cache_capacity`). <br/>For example, the default value indicates that 85% of data stored in the GPU cache doesn't need to be erased. The value should be 0 -1. | float   | `0.85`    |
-| `gpu_ids`                  | Device ID for the GPU used for Milvus. If multiple GPUs are used, please list all their IDs respectively. | integer | `0`       |
 
 ### Section `engine_config`
 
