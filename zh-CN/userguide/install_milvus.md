@@ -5,7 +5,7 @@ sidebar_label: Install Milvus
 ---
 # 安装 Milvus
 
-点击 [版本发布] 了解最新版本的功能。若要更新到最新版本，请访问 [升级 Milvus]。
+点击 [版本发布](../Releases) 了解最新版本的功能。
 
 ## 安装前提
 
@@ -72,10 +72,10 @@ sidebar_label: Install Milvus
 
 - 如果您刚开始了解 Milvus：
 
-  - [了解更多 Milvus 操作]
-  - [体验 Milvus Boot Camp] 
+  - [了解更多 Milvus 操作](milvus_operations.md)
+  - [体验 Milvus Bootcamp](https://github.com/milvus-io/bootcamp)
 
 - 如果您已准备好在生产环境中部署 Milvus：
 
-  - 创建 [监控与报警系统] 实时查看系统表现
-  - [设置 Milvus 参数]
+  - 创建 [监控与报警系统](monitor.md) 实时查看系统表现
+  - [设置 Milvus 参数](../reference/milvus_config.md)
