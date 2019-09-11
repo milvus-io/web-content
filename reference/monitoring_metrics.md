@@ -28,7 +28,7 @@ The Milvus dashboard provides details about your application and database config
 | **Query Service Level**   | A system wide metric. Query service level (%) = n_queries_completed_within_threshold1 / n_queries <br/>Generally, it is recommended to set 3 time periods - threshold1, threshold2 and threshold3, to track the query service level. |
 | **Uptime**                | How long Milvus has been running. (Minutes)                  |
 
-#### Hardware Metrics
+## Hardware Metrics
 
 | Metric                | Description                                                  |
 | --------------------- | ------------------------------------------------------------ |
@@ -41,9 +41,13 @@ The Milvus dashboard provides details about your application and database config
 | **Disk Read Speed**   | Disk read speed (GB/s).                                      |
 | **Disk Write Speed**  | Disk write speed (GB/s).                                     |
 
-#### Storage Metrics
+## Storage Metrics
 
 | Metric         | Description                                      |
 | -------------- | ------------------------------------------------ |
 | **Data Size**  | Total amount of data stored in Milvus.           |
 | **Total File** | Number of data files currently stored in Milvus. |
+
+## Related links
+[Monitoring and Alerting](monitor.md)
+
