@@ -1,7 +1,7 @@
 ---
-id: install_milvus
-title: Install Milvus
-sidebar_label: Install Milvus
+id: import_data
+title: Import Data
+sidebar_label: Import Data
 ---
 # Import Data
 
