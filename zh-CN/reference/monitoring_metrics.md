@@ -46,3 +46,5 @@ Milvus 面板提供系统和数据库设置的具体信息。通过监控以下�
 | **Data Size**  | Milvus所存数据总量（GB）。 |
 | **Total File** | Milvus所存数据文件总个数。 |
 
+## 相关阅读
+[监控与报警](monitor.md)
