@@ -1,5 +1,5 @@
 ---
-id: feature-vector-db
+id: vector_db
 title: Feature Vector Database
 sidebar_label: Feature Vector Database
 ---
