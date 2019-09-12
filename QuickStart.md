@@ -23,7 +23,7 @@ In this guide, we will walk you through installing Milvus and your very first ve
    - [Docker CE]( https://docs.docker.com/install/)
    - [NVIDIA driver & Docker 19.03 or higher](https://github.com/NVIDIA/nvidia-docker)
 
-## Installing Milvus Docker
+## Install Milvus Docker
 
 1. Download Milvus Docker image.
 
@@ -67,7 +67,7 @@ In this guide, we will walk you through installing Milvus and your very first ve
    $ docker logs <milvus container id>
    ```
 
-## Running Python example program
+## Run a Python example program
 
 Now, let's run a Python example program. You will need to create a vector data table, insert 10 vectors, and then run a vector similarity search.
 
