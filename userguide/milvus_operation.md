@@ -251,5 +251,5 @@ Status(message='Delete table successfully!', code=0)
 
 ## What's next?
 
-- [Try Milvus Bootcamp](bootcamp.md) to learn more about solutions
+- [Try Milvus Bootcamp](https://github.com/milvus-io/bootcamp) to learn more about solutions
 - [Troubleshoot API Operations](troubleshoot.md)
