@@ -6,7 +6,7 @@ sidebar_label: Milvus Configuration
 
 # Milvus Configuration
 
-## Configuration Overview
+## Configuration overview
 
 The configurations apply to both single server Milvus and all nodes of a distributed Milvus cluster, for example, from whether or not to turn on the monitoring function to more advanced options for performance tuning.
 
@@ -70,8 +70,7 @@ In the directory `home/$USER/milvus/conf`, open Milvus service configuration fil
 | `cpu_cache_capacity`       | Memory used for cache in CPU. The maximum value should not exceed total memory. | integer | `16` (GB) |
 | `cache_free_percent`       | The percentage of data that can be kept in the CPU memory when the cache is full (when data size reaches `cpu_cache_capacity`). <br/>For example, the default value indicates that 85% of data stored in the CPU cache doesn't need to be erased. The value should be 0 -1. | float   | `0.85`    |
 | `insert_cache_immediately` | If set to `true` , the inserted data will be loaded into the cache immediately for hot query. <br/>If you want simultaneous inserting and searching of vector, it is recommended to enable this function. | boolean | `false`   |
-| `gpu_cache_capacity`       | Memory used for cache in GPU. The maximum value should not exceed total GPU memory. | integer | `5` (GB)  |
-| `gpu_cache_free_percent`   | The percentage of data that can be kept in the GPU memory when the cache is full (when data size reaches `gpu_cache_capacity`). <br/>For example, the default value indicates that 85% of data stored in the GPU cache doesn't need to be erased. The value should be 0 -1. | float   | `0.85`    |
+
 
 ### Section `engine_config`
 
