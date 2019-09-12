@@ -44,7 +44,7 @@ sidebar_label: Milvus Quick Start
 
    ```shell
    # Download Milvus Docker image
-   $ docker pull milvusdb/milvus:0.4.0
+   $ docker pull milvusdb/milvus:latest
    ```
 
 2. 创建 Milvus 文件，并添加 `server_config.yaml` 和 `log_config.conf`。
@@ -63,7 +63,7 @@ sidebar_label: Milvus Quick Start
 
    ```shell
    # Start Milvus
-   $ nvidia-docker run -td --runtime=nvidia -e "TZ=Asia/Shanghai" -p 19530:19530 -p 8080:8080 -v /home/$USER/milvus/db:/opt/milvus/db -v /home/$USER/milvus/conf:/opt/conf -v /home/$USER/milvus/logs:/opt/milvus/logs milvusdb/milvus:0.4.0
+   $ nvidia-docker run -td --runtime=nvidia -e "TZ=Asia/Shanghai" -p 19530:19530 -p 8080:8080 -v /home/$USER/milvus/db:/opt/milvus/db -v /home/$USER/milvus/conf:/opt/conf -v /home/$USER/milvus/logs:/opt/milvus/logs milvusdb/milvus:latest
    ```
 
 4. 获得 Milvus container id。
