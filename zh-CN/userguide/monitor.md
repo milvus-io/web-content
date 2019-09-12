@@ -85,7 +85,7 @@ Milvus 会生成详细的关于系统运行状态的时序 metrics。该页面�
 1. 下载 Milvus [Prometheus 配置文件](assets/monitoring/prometheus.yml) 。
 
    ```shell
-   $ wget https://raw.githubusercontent.com/milvus-io/docs/branch-0.4.0/assets/monitoring/prometheus.yml \ -O prometheus.yml
+   $ wget https://raw.githubusercontent.com/milvus-io/docs/master/assets/monitoring/prometheus.yml \ -O prometheus.yml
    ```
 
    配置文件中的基本设置是：每15秒去收集一次 Milvus 生成的metrics。 
@@ -107,7 +107,7 @@ Milvus 会生成详细的关于系统运行状态的时序 metrics。该页面�
    ```
 
    ```shell
-   wget -P rules https://raw.githubusercontent.com/milvus-io/docs/branch-0.4.0/assets/monitoring/alerts.rules.yml
+   wget -P rules https://raw.githubusercontent.com/milvus-io/docs/master/assets/monitoring/alerts.rules.yml
    ```
 
 ### 启动 Prometheus
@@ -140,7 +140,7 @@ Milvus 会生成详细的关于系统运行状态的时序 metrics。该页面�
 5. 下载 [Grafana 配置文件](assets/monitoring/dashboard.json) :
 
    ```
-   $ wget https://raw.githubusercontent.com/milvus-io/docs/branch-0.4.0/assets/monitoring/dashboard.json
+   $ wget https://raw.githubusercontent.com/milvus-io/docs/master/assets/monitoring/dashboard.json
    ```
 
 6. [将配置文件导入 Grafana](http://docs.grafana.org/reference/export_import/#importing-a-dashboard).
