@@ -1,5 +1,5 @@
 ---
-id: feature-vector
+id: vector
 title: Feature Vector
 sidebar_label: Feature Vector
 ---
