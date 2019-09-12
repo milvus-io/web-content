@@ -38,12 +38,8 @@ Milvus, designed by ZILLIZ, is a distributed feature vector indexing database ma
 
   Installation is a breeze, and can be performed in a few minutes. The performance of system can be tracked real-time on Prometheus-based GUI monitor dashboard.
 
-## Deployment types
-
-Milvus supports single-server deployment and distributed deployment. You can choose the suitable deployment type according to your business scenarios and needs.
-
-- Use Docker for single-server deployment
-- Use Kubernetes for cluster deployment
+## Overall architecture
+![Milvus architecture](../assets/milvus_arch.png)
 
 ## What's next
 
