@@ -31,3 +31,8 @@ Now, let's run a Python example program. Assume you want to create a table, inse
 5. Confirm the program is running correctly.
 
 Congratulations! You have successfully completed your first vector similarity search with Milvus.
+
+## What's next?
+
+- Learn [essential operations](milvus_operation.md) you can do with Milvus
+- [Try Milvus Bootcamp](https://github.com/jielinxu/docs/blob/branch-0.4.0/userguide/bootcamp.md) to learn more about solutions
