@@ -68,6 +68,6 @@ Milvus 集群具备高可用性，其存储和计算等集群均容许部分组�
 
 如果您仍有其它问题，您可以：
 
-- 加入 [Milvus 社区]，提问、闲逛、和其它用户交流
+- 在 GitHub 上访问 [Milvus-io](https://github.com/milvus-io)，提问、闲逛、和其它用户交流
 - 阅读 [操作 FAQ](faq/operational_faq.md)，了解关于 Milvus 操作的常见问题 
 
