@@ -1,5 +1,5 @@
 ---
-id: milvus-overview
+id: overview
 title: Milvus Overview
 sidebar_label: Milvus Overview
 ---
@@ -38,16 +38,12 @@ Milvus是ZILLIZ公司设计的分布式特征向量检索数据库，旨在帮�
 
   安装简单，几分钟便可轻松搞定。基于Prometheus的图形化监控仪表盘可以实时跟踪系统表现。
 
-## 部署方式
+## 整体架构
 
-Milvus支持本地单机部署和分布式集群部署。您可以根据实际场景或需求，选择相应的方式来部署Milvus： 
-
-- 使用Docker实现单机部署
-- 使用Kubernetes实现集群部署
+！[Milvus 架构](../assets/milvus_arch.png)
 
 ## 接下来您可以：
 
 - 了解[向量数据库]的产生背景和发展现状
-- 了解Milvus如何工作以其[整体架构]
-- 通过[Milvus 快速入门]尝试第一次向量查询
-- 几分钟轻易搞定[Milvus 安装]
+- 通过 [Milvus 快速入门](../QuickStart.md) 尝试第一次向量查询
+- 几分钟轻易搞定 [Milvus 安装](../userguide/install_milvus.md)
