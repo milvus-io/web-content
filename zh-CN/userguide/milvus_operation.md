@@ -100,7 +100,7 @@ True
 
 > 注意：如果查询的表不存在，则以上代码中返回值为False。
 
-> 注意：若要了解更多Milvus操作，你可以参照[Milvus Python SDK](https://pypi.org/project/pymilvus)和[使用示例](https://github.com/milvus-io/pymilvus/blob/branch-0.3.0/examples/example.py)。
+> 注意：若要了解更多Milvus操作，你可以参照[Milvus Python SDK](https://pypi.org/project/pymilvus)和[使用示例](https://github.com/milvus-io/pymilvus/blob/branch-0.4.0/examples/example.py)。
 
 ## 将向量插入表
 
