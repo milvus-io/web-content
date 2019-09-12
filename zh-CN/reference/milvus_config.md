@@ -73,8 +73,6 @@ sidebar_label: Milvus Configuration
 | `cpu_cache_capacity`       | 用于缓存的内存量，最大值不能超过内存总量。                   | integer | `16` (GB) |
 | `cache_free_percent`       | 当 CPU 缓存已满，会自动清除过往数据。通过这条参数您可以设置剩余在 CPU 缓存中的数据量。<br/>比如，该参数的默认值（0.85）表示 CPU 缓存中85%的数据不用被清除。取值范围为0 -1。 | float   | `0.85`    |
 | `insert_cache_immediately` | 设置为 `true` ，则新插入的数据会自动加载到缓存以备搜索。<br/>如果想要实现数据即插即搜索，建议启用该功能。 | boolean | `false`   |
-| `gpu_cache_capacity`       | 用于缓存的显存量，最大值不能超过显存总量。                   | integer | `5`(GB)   |
-| `gpu_cache_free_percent`   | 当 GPU 缓存已满，会自动清除过往数据。通过这条参数您可以设置剩余在 GPU 缓存中的数据量。<br/>比如，该参数的默认值（0.85）表示 GPU 缓存中85%的数据不用被清除。取值范围为0 -1。 | float   | `0.85`    |
 
 ### `engine_config` 区域
 
