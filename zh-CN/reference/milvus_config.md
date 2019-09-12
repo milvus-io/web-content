@@ -82,10 +82,10 @@ sidebar_label: Milvus Configuration
 
 ### `resource_config` 区域
 
-请在该区域定义 Milvus 里用于搜索的 resource，支持的 resource 类型有cpu、gpu。注意如果指定 gpu，需要指名其设备 id，设备 id 从0开始。cpu 和 gpu 不可以同时选择。
+请在该区域定义 Milvus 里用于搜索的 resource，支持的 resource 类型有 `cpu`、`gpu`。注意如果指定 `gpu`，需要指名其设备 id，设备 id 从0开始。`cpu` 和 `gpu` 不可以同时选择。
 
 | 参数               | 说明                                                         | 类型    | 默认值     |
 | ------------------ | ------------------------------------------------------------ | ------- | ---------- |
 | `mode`             | Resource 配置的类型，目前只有 `simple` 类型。 |   ResourceMode      |     `simple`       |
-| `resources`        | 定义 Milvus 里用于搜索的 resource 类型。如：`cpu`, `gpu0`等   | ResourceType        |                 |
+| `resources`        | 定义 Milvus 里用于搜索的 resource 类型。如：`cpu`, `gpu0`等   | ResourceType        |     `gpu0`            |
 
