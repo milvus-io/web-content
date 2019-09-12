@@ -4,6 +4,8 @@ title: Product FAQ
 sidebar_label: Product FAQ
 ---
 
+# Product FAQ
+
 ### What is Milvus?
 
 Milvus is a GPU-accelerated feature vector search engine that provides extraordinary performance for similarity search over massive feature vectors. It can be easily deployed on both bare metal and cloud platforms with Linux operating systems.
