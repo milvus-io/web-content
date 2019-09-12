@@ -8,7 +8,7 @@ sidebar_label: Monitoring and Alerting
 
 ## Overview
 
-Despite Milvus's high availability, it is critical to actively monitor the overall performance of a system running in production, and to create alerting rules that promptly send notifications when there are events that require investigation or intervention. 
+Although Milvus is highly available, it is critical to actively monitor the overall performance of a system running in production, and to create alerting rules that promptly send notifications when there are events that require investigation or intervention. 
 
 This page explains available monitoring solution and critical events and metrics to alert on.
 
