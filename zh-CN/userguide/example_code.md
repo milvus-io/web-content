@@ -13,12 +13,12 @@ sidebar_label: Try an Example Program
 
    ```shell
    # Install Milvus Python SDK
-   $ pip install pymilvus==0.1.24
+   $ pip install pymilvus==0.2.0
    ```
 
    > 提示：如果需要进一步了解Milvus Python SDK，请阅读[Milvus Python SDK使用手册](https://pypi.org/project/pymilvus)。
    
-3. 创建*example.py*文件，并向文件中加入[Python示例代码](https://github.com/milvus-io/pymilvus/blob/branch-0.3.1/examples/AdvancedExample.py)。
+3. 创建*example.py*文件，并向文件中加入[Python示例代码](https://github.com/milvus-io/pymilvus/blob/branch-0.4.0/examples/AdvancedExample.py)。
 
 4. 运行示例代码。
 
