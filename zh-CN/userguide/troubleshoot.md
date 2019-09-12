@@ -12,7 +12,7 @@ sidebar_label: Troubleshoot
 
 1. 如果是 Milvus 操作方面的问题，请查看 **故障诊断 API 行为**。
 2. 如果是启动 Milvus 服务时遇到问题，请参考 **服务器启动故障**。
-3. 对于您无法自己解决的问题，您可以联系 Milvus 团队，邮件请发至 support@zilliz.com。
+3. 对于您无法自己解决的问题，请直接发邮件至 support@zilliz.com，Milvus 团队将会第一时间回复您。
 
 ## 故障诊断 API 行为
 
