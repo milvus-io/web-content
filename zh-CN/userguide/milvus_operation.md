@@ -28,11 +28,11 @@ sidebar_label: Learn Milvus Operations
    Status(message='connected!', code=0)
    ```
 
-   > 注意：在以上代码中，参数 *host* 和 *port* 用的都是默认值。请根据需要将其更换成 Milvus server 的IP地址和端口。
+   > 注意：在以上代码中，参数 `host` 和 `port` 用的都是默认值。请根据需要将其更换成 Milvus server 的 IP 地址和端口。
 
 ## 创建表
 
-我们以创建表 test01为例，向您展示如何创建一张数据表。以下是数据表相关参数，在创建表时可以根据实际需求选择：
+我们以创建表 test01 为例，向您展示如何创建一张数据表。以下是数据表相关参数，在创建表时可以根据实际需求选择：
 
 | 参数              | 描述                                                         | 类型       | 参考值                                                  |
 | ----------------- | ------------------------------------------------------------ | ---------- | ------------------------------------------------------- |
@@ -98,9 +98,9 @@ TableSchema(table_name='test01',dimension=256, index_file_size=1024, metric_type
 True
 ```
 
-> 注意：如果查询的表不存在，则以上代码中返回值为False。
+> 注意：如果查询的表不存在，则以上代码中返回值为 `False`。
 
-> 注意：若要了解更多Milvus操作，你可以参照[Milvus Python SDK](https://pypi.org/project/pymilvus)和[使用示例](https://github.com/milvus-io/pymilvus/blob/branch-0.4.0/examples/example.py)。
+> 注意：若要了解更多 Milvus 操作，你可以参照 [Milvus Python SDK](https://pypi.org/project/pymilvus)和 [使用示例](https://github.com/milvus-io/pymilvus/blob/branch-0.4.0/examples/example.py)。
 
 ## 将向量插入表
 
