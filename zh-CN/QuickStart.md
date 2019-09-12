@@ -14,7 +14,7 @@ sidebar_label: Milvus Quick Start
    | Linux 操作系统平台       | 版本        |
    | :----------------------- | :---------- |
    | CentOS                   | 7.5及以上   |
-   | Ubuntu LTS               | 18.04及以上 |
+   | Ubuntu LTS               | 16.04及以上 |
 
 2. 硬件配置要求：
 
@@ -30,11 +30,12 @@ sidebar_label: Milvus Quick Start
 
    Milvus 提供了基于 Prometheus 监控和 Grafana 的展示平台，可以对数据库的各项指标进行可视化展示，兼容目前主流的 Web 浏览器如：微软 IE、Google Chrome、Mozilla Firefox 和 Safari 等。
   
-4. 请确保您已经安装以下软件包，以便 Milvus 能正常运行：
+4. 请确保您已经安装以下软件包：
 
-   - [CUDA 10.1及以上](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html)
-   - [Docker CE](https://docs.docker.com/install/)
-   - [NVIDIA driver & Docker 19.03及以上](https://github.com/NVIDIA/nvidia-docker)
+   - [NVIDIA driver 418 及以上](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html)
+   - [Docker 19.03 及以上](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/)
+   
+   > 注意：如果您已安装更老版本的 Docker (< 19.03)，建议安装 [nvidia-docker2](https://github.com/NVIDIA/nvidia-docker/wiki/Installation-(version-2.0))。如果你已安装 nvidia-docker2，您也可以将 Docker 升级到最新版本 (>= 19.03)。
 
 
 ## 安装 Milvus
