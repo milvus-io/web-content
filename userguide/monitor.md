@@ -86,7 +86,7 @@ Milvus generates detailed time series metrics. This page shows you how to pull t
 1. Go to the Prometheus root directory, and download starter [Prometheus configuration file](assets/monitoring/prometheus.yml) for Milvus.
 
    ```shell
-   $ wget https://raw.githubusercontent.com/milvus-io/docs/branch-0.4.0/monitoring/prometheus.yml \ -O prometheus.yml
+   $ wget https://raw.githubusercontent.com/milvus-io/docs/branch-0.4.0/assets/monitoring/prometheus.yml \ -O prometheus.yml
    ```
 
    When you examine the configuration file, you'll see that it is set up to scrape the metrics of a single-server Milvus every 15 seconds:
@@ -108,7 +108,7 @@ Milvus generates detailed time series metrics. This page shows you how to pull t
    ```
 
    ```shell
-   wget -P rules https://raw.githubusercontent.com/milvus-io/docs/branch-0.4.0/monitoring/alerts.rules.yml
+   wget -P rules https://raw.githubusercontent.com/milvus-io/docs/branch-0.4.0/assets/monitoring/alerts.rules.yml
    ```
 
 ### Start Prometheus
@@ -141,7 +141,7 @@ Milvus generates detailed time series metrics. This page shows you how to pull t
 5. Download the starter [Grafana dashboard](assets/monitoring/dashboard.json) for Milvus:
 
    ```
-   $ wget https://raw.githubusercontent.com/milvus-io/docs/branch-0.4.0/monitoring/dashboard.json
+   $ wget https://raw.githubusercontent.com/milvus-io/docs/branch-0.4.0/assets/monitoring/dashboard.json
    ```
 
 6. [Add the dashboard to Grafana](http://docs.grafana.org/reference/export_import/#importing-a-dashboard). 
