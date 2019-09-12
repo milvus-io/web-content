@@ -15,7 +15,7 @@ See [here](../Releases) for what's new in the latest release.
 | Linux operation system | Supported versions |
 | :--------------------- | :----------------- |
 | CentOS                 | 7.5 and higher     |
-| Ubuntu LTS             | 18.04 and higher   |
+| Ubuntu LTS             | 16.04 and higher   |
 
 2. Make sure the following software packages are installed:
    - [CUDA 10.1 or higher](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html)
