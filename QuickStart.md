@@ -6,7 +6,7 @@ sidebar_label: Milvus Quick Start
 
 #  Milvus Quick Start
 
-In this guide, we will walk you through installing Milvus and your very first vector search Python codes with it. To learn more about how to use Milvus, please visit [Milvus Docker User Guide](./userguide/preface.md).
+In this guide, we will walk you through installing Milvus and your very first vector search Python codes with it. To learn more about how to use Milvus, please visit our [userguide](./userguide/preface.md).
 
 ## Prerequisites
 
@@ -15,13 +15,13 @@ In this guide, we will walk you through installing Milvus and your very first ve
    | Linux operation system | Supported versions          |
    | :--------------------- | :--------------- |
    | CentOS                 | 7.5 and higher   |
-   | Ubuntu LTS             | 16.04 and higher |
+   | Ubuntu LTS             | 18.04 and higher |
 
 2. Make sure following software packages are installed so that Milvus can deployed through Docker:
 
-   - [CUDA 9.0 and higher]( https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html)
+   - [CUDA 10.1 or higher](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html)
    - [Docker CE]( https://docs.docker.com/install/)
-   - [NVIDIA-Docker2](https://github.com/NVIDIA/nvidia-docker)
+   - [NVIDIA driver & Docker 19.03 or higher](https://github.com/NVIDIA/nvidia-docker)
 
 ## Installing Milvus Docker
 
@@ -29,7 +29,7 @@ In this guide, we will walk you through installing Milvus and your very first ve
 
    ```shell
    # Download Milvus Docker image
-   $ docker pull milvusdb/milvus:0.3.1
+   $ docker pull milvusdb/milvus:0.4.0
    ```
 
 2. Create Milvus file, and add server_cofig and log_config to it.
@@ -40,8 +40,8 @@ In this guide, we will walk you through installing Milvus and your very first ve
    $ cd /home/$USER/milvus
    $ mkdir conf
    $ cd conf
-   $ wget https://raw.githubusercontent.com/milvus-io/docs/branch-0.3.1/assets/server_config.yaml
-   $ wget https://raw.githubusercontent.com/milvus-io/docs/branch-0.3.1/assets/log_config.conf
+   $ wget https://raw.githubusercontent.com/milvus-io/docs/branch-0.4.0/assets/server_config.yaml
+   $ wget https://raw.githubusercontent.com/milvus-io/docs/branch-0.4.0/assets/log_config.conf
    
    ```
 
@@ -49,7 +49,7 @@ In this guide, we will walk you through installing Milvus and your very first ve
 
    ```shell
    # Start Milvus
-   $ nvidia-docker run -td --runtime=nvidia -p 19530:19530 -p 8080:8080 -v /home/$USER/milvus/db:/opt/milvus/db -v /home/$USER/milvus/conf:/opt/conf -v /home/$USER/milvus/logs:/opt/milvus/logs milvusdb/milvus:0.3.1
+   $ nvidia-docker run -td --runtime=nvidia -p 19530:19530 -p 8080:8080 -v /home/$USER/milvus/db:/opt/milvus/db -v /home/$USER/milvus/conf:/opt/conf -v /home/$USER/milvus/logs:/opt/milvus/logs milvusdb/milvus:0.4.0
 
    ```
 
@@ -77,12 +77,12 @@ Now, let's run a Python example program. You will need to create a vector data t
 
    ```shell
    # Install Milvus Python SDK
-   $ pip install pymilvus==0.1.24
+   $ pip install pymilvus==0.2.0
    ```
 
    > Note: To learn more about Milvus Python SDK, go to [Milvus Python SDK Playbook](https://pypi.org/project/pymilvus). 
 
-3. Create a new file *example.py*, and add [Python example code](https://github.com/milvus-io/pymilvus/blob/branch-0.3.1/examples/AdvancedExample.py) to it.
+3. Create a new file `example.py`, and add [Python example code](https://github.com/milvus-io/pymilvus/blob/branch-0.4.0/examples/AdvancedExample.py) to it.
 
 4. Run the example code.
 
@@ -96,3 +96,7 @@ Now, let's run a Python example program. You will need to create a vector data t
 
 Congratulations! You have successfully completed your first vector similarity search with Milvus.
 
+## What's next?
+
+- Learn [essential operations](userguide/milvus_operation.md) you can do with Milvus
+- [Try Milvus bootcamp](https://github.com/milvus-io/bootcamp) to learn more about solutions
