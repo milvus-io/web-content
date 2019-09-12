@@ -123,7 +123,11 @@ Milvus generates detailed time series metrics. This page shows you how to pull t
 
 ### Visualize metrics in Grafana
 
-1. [Install and start Grafana for your OS](https://grafana.com/grafana/download).
+1. Use the following command to install and start Grafana for your OS:
+
+   ```
+   $ docker run -i -p 3000:3000 grafana/grafana
+   ```
 
 2. Point your browser to `http://<hostname of machine running grafana>:3000` and log into the Grafana UI with the default username/password, `admin/admin`, or create your own account.
 

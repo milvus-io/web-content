@@ -122,7 +122,11 @@ Milvus 会生成详细的关于系统运行状态的时序 metrics。该页面�
 
 ### 使用 Grafana 实现 metrics 可视化展示
 
-1. [安装并启动 Grafana](https://grafana.com/grafana/download).
+1. 使用以下命令安装并运行 Grafana：
+
+   ```
+   $ docker run -i -p 3000:3000 grafana/grafana
+   ```
 
 2. 将浏览器指向 `http://<hostname of machine running grafana>:3000` ，使用默认的用户名/密码，`admin/admin`，登录 Grafana 用户交互页面。您也可以在此创建新的 Grafana 账号。
 
