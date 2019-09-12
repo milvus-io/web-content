@@ -89,17 +89,6 @@ sidebar_label: Milvus Configuration
 | 参数               | 说明                                                         | 类型    | 默认值     |
 | ------------------ | ------------------------------------------------------------ | ------- | ---------- |
 | `resource_name`    | Milvus 所用的 resource 的名字。常用 resource 有 `SSD` ，`cpu` 和 `gpu` 。 <br/>如果使用多张 CPU 或 GPU，则请用不同的名字分别列出。如： `gpu0`，`gpu1` 等。 |         |            |
-| `type`             | Milvus 所用的 resource 的类型。如 ：`DISK`，`CPU` 或 `GPU` 等。 |         |            |
+| `mode`             | Milvus 所用的 resource 的类型。如 ：`DISK`，`CPU` 或 `GPU` 等。 |         |            |
 | `device_id`        | 所定义的 resource 的设备 id。                                | integer | `0`        |
-| `enable_executor`  | 设置为 `true` ，则所定义的 resource 可以用来做 Milvus 的计算。 | boolean |            |
-| `gpu_resource_num` | 所定义 GPU 里包含的 GPU resources 个数。一个GPU resource 至少包含 `pinned_memory` 和 `temp_memory` 。 | integer | `2`        |
-| `pinned_memory`    | CPU 或 GPU 里用于数据传输的缓存空间。                        | integer | `300` (MB) |
-| `temp_memory`      | CPU 或 GPU 里用于数据计算的缓存空间。                        | integer | `300` (MB) |
 
-接下来，请定义各 resources 之间的连接关系。 
-
-| 参数              | 说明                                                         | 类型 | 默认值 |
-| ----------------- | ------------------------------------------------------------ | ---- | ------ |
-| `connection_name` | 各 resource 之间连接方式的名字。常用连接方式有 `io`，`pcie` 等。<br/>如果 CPU 和 GPU 之间存在多个连接，请用不同名字列出，如：`pcie0`，`pcie1` 等。 |      |        |
-| `speed`           | 所定义的连接的带宽。 (MB/s)                                  |      |        |
-| `endpoint`        | 所定义连接的终端，请使用如下格式表示：`ssda===cpu` 或`cpu===gpu0` 等。 |      |        |
