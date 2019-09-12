@@ -176,4 +176,5 @@ $ python3 milvus_bootcamp.py --table=ann_100m_sq8 -s
 
 ## 相关阅读
 
-[Milvus 配置]
+- [Milvus 配置](../reference/milvus_config.md)
+- [体验 Milvus 在线训练营](https://github.com/milvus-io/bootcamp)
