@@ -25,8 +25,8 @@ This documentation is for reference only, and nothing in the documentation const
 
 | Convention       |    Description                                |
 |-----------|-----------------------------------------|
-| bold      | Bold type indicates headlines, or content that needs to be emphasized.    |
-| italic    | Italic type indicates file paths, file names, User Interface texts, or placeholder variables for which you supply particular values. |
-| Consolas  | Consolas type indicates code examples within a paragraph. |
+| code font    | Code font indicates filenames and paths, parameter names and values, method and function names. |
+| bold      | Bold type indicates headlines, user interface texts, or content that needs to be emphasized.    |
+| code block  | Code block indicates code examples within a paragraph. |
 | Note      | Note indicates a helpful hint, sometimes a tip, to help you work more efficiently.          |
 | Caution   | Caution brings up an issue that you'd better pay attention to. It points to a possible development that might result in a failure or a problem. |
