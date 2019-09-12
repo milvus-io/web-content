@@ -17,14 +17,12 @@ sidebar_label: Install Milvus
 | Ubuntu LTS         | 16.04 and higher |
 
 2. 请确保您已经安装以下软件包：
-   - [CUDA 10.1及以上](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html)
-   - [NVIDIA-Docker2](https://github.com/NVIDIA/nvidia-docker)
+   - [Nvidia driver 418 及以上](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html)
+   - [Docker 19.03](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/)
 
 ## 使用 Docker
 
-1. 安装 [Docker for Linux](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/)。请仔细检查以确保您已经满足 Docker 安装的前提条件。
-
-2. 确认后台已经运行 Docker daemon：
+1. 确认后台已经运行 Docker daemon：
 
    ```
    docker version
@@ -34,13 +32,13 @@ sidebar_label: Install Milvus
 
    > 提示：在 Linux 上，Docker 需要带 sudo。
 
-3. 拉取 Milvus 0.4.0版本的镜像：
+2. 拉取 Milvus 0.4.0版本的镜像：
 
    ```
    sudo docker pull milvusdb/milvus:0.4.0
    ```
 
-4. 下载 Milvus 源文件。
+3. 下载 Milvus 源文件。
 
    ```shell
    # Create Milvus file
@@ -52,14 +50,14 @@ sidebar_label: Install Milvus
    $ wget https://raw.githubusercontent.com/milvus-io/docs/branch-0.4.0/assets/log_config.conf
    ```
 
-5. 启动 Milvus server。
+4. 启动 Milvus server。
 
    ```shell
    # Start Milvus
    $ nvidia-docker run -td --runtime=nvidia -p 19530:19530 -p 8080:8080 -v /home/$USER/milvus/db:/opt/milvus/db -v /home/$USER/milvus/conf:/opt/milvus -v /home/$USER/milvus/logs:/opt/milvus/logs milvusdb/milvus:0.3.0
    ```
 
-6. 确认 Milvus 运行状态。
+5. 确认 Milvus 运行状态。
 
    ```shell
    # Get Milvus container id
