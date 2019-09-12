@@ -23,5 +23,4 @@ SPTAG has excellent performance in search speed and search precision. However, i
 
 Although FAISS and SPTAG allow developers to build vector index and search, they are still just libraries. They are not mature, ready-to-use vector indexing database system. 
 
-So is there such an ideal vector indexing database system available for use? Yes.
 
