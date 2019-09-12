@@ -16,20 +16,24 @@ sidebar_label: Learn Milvus Operations
 
    ```python
    # Import pymilvus
-   >>> from milvus import Milvus, Prepare, IndexType, Status
+   >>> from milvus import Milvus, IndexType, MetricType, Status
    ```
 
-2. 将 Milvus 连接到您本地服务器。
+2. 请用下列任一方式，将 Milvus 连接到您本地服务器。
 
    ```
    # Connect to Milvus server
    >>> milvus = Milvus()
-   >>> milvus.connect(host='0.0.0.0', port='19530')
+   >>> milvus.connect(host='localhost', port='19530')
    Status(message='connected!', code=0)
    ```
 
    > 注意：在以上代码中，参数 `host` 和 `port` 用的都是默认值。请根据需要将其更换成 Milvus server 的 IP 地址和端口。
 
+   ```python
+   >>> milvus.connect(uri='tcp://localhost:19530')
+   Status(message='connected!', code=0)
+   ```
 ## 创建表
 
 我们以创建表 test01 为例，向您展示如何创建一张数据表。以下是数据表相关参数，在创建表时可以根据实际需求选择：
@@ -146,7 +150,7 @@ Status(code=0, message='Success')
 | `index_type` | 用于查询表的索引方式。请在下列类型中选择一种： <br/>1. `FLAT` - 提供100%的精确检索。但由于计算量巨大，搜索速度可能受影响；<br/>2. `IVFLAT` - 基于 K-means 的检索方式，搜索精度和速度都不错；<br/>3. `IVFSQ` - 运用scalar quantization的向量索引，能大幅缩小向量体积（大概缩减到原来的1/4），从而能有效提高向量吞吐量。 | IndexType | `FLAT` / `IVFLAT` / `IVF_SQ8` |
 | `nlist`      | 每个文件中的向量类的个数，默认值为16384。                    | Integer   | 1 - 16384                     |
 
-请使用 `client.create_index` 来创建索引，后面跟表名、索引方式和 nlist。
+请使用 `milvus.create_index` 来创建索引，后面跟表名、索引方式和 nlist。
 
 1. 准备索引参数。
 
@@ -159,16 +163,16 @@ Status(code=0, message='Success')
 
    ```python
    # Create index
-   >>> client.create_index('test01', index_param)
+   >>> milvus.create_index('test01', index_param)
    >>> status
    Status(code=0, message='Build index successfully!')
    ```
 
-请使用 `client.describe_index` 来显示索引信息，后面跟表名：
+请使用 `milvus.describe_index` 来显示索引信息，后面跟表名：
 
 ```python
 # Show index info
->>> client.describe_index('test01')
+>>> milvus.describe_index('test01')
 >>> status
 Status(code=0, message='Success'), IndexParam(table_name='test01', index_type=<IndexType: IVFLAT>, nlist=16384)
 ```
@@ -176,7 +180,7 @@ Status(code=0, message='Success'), IndexParam(table_name='test01', index_type=<I
 若要删除索引，请使用下列命令：
 
 ```python
->>> client.drop_index('test01')
+>>> milvus.drop_index('test01')
 >>> status
 Status(code=0, message='Success')
 ```
@@ -236,11 +240,11 @@ Status(message='Search vectors successfully!', code=0)
 
 ## 删除向量
 
-若您不再需要某些向量，请使用 `client.delete_vectors_by_range` 将它们删除，后面跟表名和日期范围。
+若您不再需要某些向量，请使用 `milvus.delete_vectors_by_range` 将它们删除，后面跟表名和日期范围。
 
 ```python
 # Delete vectors
->>> client.delete_vectors_by_range('test01', '2019-06-01', '2020-01-01')
+>>> milvus.delete_vectors_by_range('test01', '2019-06-01', '2020-01-01')
 >>> status
 Status(message='Delete vectors successfully!', code=0)
 ```
