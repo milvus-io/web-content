@@ -20,8 +20,8 @@ See [here](../Releases) for what's new in the latest release.
 2. Make sure the following software packages are installed:
    - [NVIDIA driver 418 or higher](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html)
    - [Docker 19.03 or higher](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/)
-   > Note: If you are running an old version of docker (< 19.03), it is recommended to install [nvidia-docker2](https://github.com/NVIDIA/nvidia-docker/wiki/Installation-(version-2.0)) package.<br/>
-   > If you already have the old package installed (nvidia-docker2), updating to the latest Docker version (>= 19.03) will still work.  
+   > Note: - If you are running an old version of docker (< 19.03), it is recommended to install [nvidia-docker2](https://github.com/NVIDIA/nvidia-docker/wiki/Installation-(version-2.0)) package.<br/>
+   >       - If you already have the old package installed (nvidia-docker2), updating to the latest Docker version (>= 19.03) will still work.  
 
 ## Use Docker
 
