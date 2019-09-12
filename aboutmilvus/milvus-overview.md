@@ -47,7 +47,6 @@ Milvus supports single-server deployment and distributed deployment. You can cho
 
 ## What's next
 
-- Explore more concepts of [vector database]
-- Find out the [Overall Architecture] of Milvus
-- Get a quick glimpse of [Milvus Quick Start]
-- [Install Milvus] and start to explore around
+- Explore more concepts of [vectors](feature, [vector search] and [vector database]
+- Get a quick glimpse of [Milvus Quick Start](../QuickStart.md)
+- [Install Milvus](../userguide/install_milvus.md) and start to explore around
