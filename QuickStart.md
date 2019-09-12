@@ -15,13 +15,14 @@ In this guide, we will walk you through installing Milvus and your very first ve
    | Linux operation system | Supported versions          |
    | :--------------------- | :--------------- |
    | CentOS                 | 7.5 and higher   |
-   | Ubuntu LTS             | 18.04 and higher |
-
+   | Ubuntu LTS             | 16.04 and higher |
+  
 2. Make sure following software packages are installed so that Milvus can deployed through Docker:
 
-   - [CUDA 10.1 or higher](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html)
-   - [Docker CE]( https://docs.docker.com/install/)
-   - [NVIDIA driver & Docker 19.03 or higher](https://github.com/NVIDIA/nvidia-docker)
+   - [NVIDIA driver 418 or higher](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html)
+   - [Docker 19.03 or higher](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/)
+   
+   > Note: If you are running an old version of docker (< 19.03), it is recommended to install [nvidia-docker2](https://github.com/NVIDIA/nvidia-docker/wiki/Installation-(version-2.0)) package. If you already have the old package installed (nvidia-docker2), updating to the latest Docker version (>= 19.03) will still work. 
 
 ## Install Milvus Docker
 
