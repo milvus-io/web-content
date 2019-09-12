@@ -107,7 +107,7 @@ sidebar_label: Milvus Quick Start
 
    恭喜您！您已经成功完成了在 Milvus 上的第一次向量相似度查询。
    
-## 接下来您可以：
+## 接下来您可以
 
 - 了解更多 Milvus [基础操作](milvus_operation.md) 
 - [体验 Milvus 在线训练营](https://github.com/jielinxu/docs/blob/branch-0.4.0/userguide/bootcamp.md)，发现更多解决方案
