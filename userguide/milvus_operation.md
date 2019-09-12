@@ -102,7 +102,7 @@ True
 
 > Note: If the table you verified is not available, `False` will be returned instead of `True`.
 
-> Note: If you want to learn more detailed operations in Milvus, you may read [Milvus Python SDK](https://pypi.org/project/pymilvus) and [Examples](https://github.com/milvus-io/pymilvus/blob/branch-0.3.0/examples/example.py)。
+> Note: If you want to learn more detailed operations in Milvus, you may read [Milvus Python SDK](https://pypi.org/project/pymilvus) and [Examples](https://github.com/milvus-io/pymilvus/blob/branch-0.4.0/examples/example.py)。
 
 ## Insert vectors into a table
 
