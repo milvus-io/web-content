@@ -42,4 +42,4 @@ Follow the following steps to import vector data into Milvus through Python scri
 
 - [Insert Vectors into a Table](milvus_operation.md)
 - [Data Normalization](https://github.com/milvus-io/bootcamp/blob/master/EN_docs/data_preparation/data_normalization.md)
-- [Data Storage](reference/data_store.md)
+- [Data Storage](../reference/data_store.md)
