@@ -56,13 +56,13 @@ Absolutely. You can simultaneously insert and search data in Milvus. If you want
 
 ### Where are the data stored?
 
-Vector data are stored either in your local disk or MinIO cloud. For more details about storage, read [Milvus data storage](reference/data_store.md).
+Vector data are stored either in your local disk or MinIO cloud. For more details about storage, read [Milvus data storage](../reference/data_store.md).
 
 ### How does Milvus compare to FAISS and SPTAG?
 
 While all of these supports large-scale vector similarity search, Milvus is the only one that is a mature and easy-to-use vector indexing database system that scales easily, rebalances and repairs itself automatically.
 
-For more insight, see [Milvus in Comparison](reference/comparison.md). 
+For more insight, see [Milvus in Comparison](../reference/comparison.md). 
 
 ### Have questions that were not answered?
 If you still have questions that are not covered in this list, you can take the following steps to find an answer:

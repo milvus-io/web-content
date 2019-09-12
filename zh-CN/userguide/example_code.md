@@ -34,4 +34,4 @@ sidebar_label: Try an Example Program
 ## 接下来您可以
 
 - 了解更多 Milvus [基础操作](milvus_operation.md)
-- [体验 Milvus 在线训练营](https://github.com/jielinxu/docs/blob/branch-0.4.0/userguide/bootcamp.md)，发现更多解决方案
+- [体验 Milvus 在线训练营](https://github.com/milvus-io/bootcamp)，发现更多解决方案

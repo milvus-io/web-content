@@ -18,19 +18,24 @@ Just type **python** at your console, hit `Enter`, and you should enter Pythonâ€
 
    ```python
    # Import pymilvus
-   >>> from milvus import Milvus, Prepare, IndexType, Status
+   >>> from milvus import Milvus, IndexType, MetricType, Status
    ```
 
-2. Connect to Milvus on your local server.
+2. Connect to Milvus on your local server, following either of the below methods:
 
    ```python
    # Connect to Milvus server
    >>> milvus = Milvus()
-   >>> milvus.connect(host='0.0.0.0', port='19530')
+   >>> milvus.connect(host='localhost', port='19530')
    Status(message='connected!', code=0)
    ```
 
    > Note: In the above code, default values are used for `host` and `port` parameters. Feel free to change them to the IP address and port you set for Milvus server. 
+   
+   ```python
+   >>> milvus.connect(uri='tcp://localhost:19530')
+   Status(message='connected!', code=0)
+   ```
 
 ## Create a table
 
@@ -137,7 +142,7 @@ Below is the list of parameters for creating index for a table:
 | `index_type` | The type of indexing method to query the table. Select one out of these types: <br/>1. `FLAT` - Provides 100% accuracy for recalls. However, performance might be downgraded due to huge computation effort; <br/>2. `IVFLAT` - K-means based similarity search which is balanced between accuracy and performance; <br/>3. `IVF_SQ8` - Vector indexing that adopts a scalar quantization strategy that significantly reduces the size of a vector (by about 3/4), thus improving the overall throughput of vector processing. | IndexType | `FLAT` / `IVFLAT` / `IVF_SQ8` |
 | `nlist`      | Number of vector buckets in a file. Default value is 16384.  | Integer   | 1 - 16384                     |
 
-To create an index for the table, use `client.create_index` followed by parameters that include the table name, index type, and nlist.
+To create an index for the table, use `milvus.create_index` followed by parameters that include the table name, index type, and nlist.
 
 1. Prepare index parameters.
 
@@ -150,15 +155,15 @@ To create an index for the table, use `client.create_index` followed by paramete
 
    ```python
    # Create index
-   >>> client.create_index('test01', index_param)
+   >>> milvus.create_index('test01', index_param)
    Status(code=0, message='Build index successfully!')
    ```
 
-To show index information of a table, use `client.describe_index` followed by the table name:
+To show index information of a table, use `milvus.describe_index` followed by the table name:
 
 ```python
 # Show index info
->>> client.describe_index('test01')
+>>> milvus.describe_index('test01')
 >>> status
 Status(code=0, message='Success'), IndexParam(table_name='test01', index_type=<IndexType: IVFLAT>, nlist=16384)
 ```
@@ -166,7 +171,7 @@ Status(code=0, message='Success'), IndexParam(table_name='test01', index_type=<I
 To drop an index, use below command:
 
 ```python
->>> client.drop_index('test01')
+>>> milvus.drop_index('test01')
 >>> status
 Status(code=0, message='Success')
 ```
@@ -224,11 +229,11 @@ Status(message='Search vectors successfully!', code=0)
 
 ## Delete vectors by range
 
-To delete vectors you no longer need, use `client.delete_vectors_by_range` followed by the table name and the date range:
+To delete vectors you no longer need, use `milvus.delete_vectors_by_range` followed by the table name and the date range:
 
 ```python
 # Delete vectors
->>> client.delete_vectors_by_range('test01', '2019-06-01', '2020-01-01')
+>>> milvus.delete_vectors_by_range('test01', '2019-06-01', '2020-01-01')
 >>> status
 Status(message='Delete vectors successfully!', code=0)
 ```
@@ -246,5 +251,5 @@ Status(message='Delete table successfully!', code=0)
 
 ## What's next?
 
-- [Try Milvus Bootcamp](bootcamp.md) to learn more about solutions
+- [Try Milvus Bootcamp](https://github.com/milvus-io/bootcamp) to learn more about solutions
 - [Troubleshoot API Operations](troubleshoot.md)

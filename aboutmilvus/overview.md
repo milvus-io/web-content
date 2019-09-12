@@ -39,7 +39,7 @@ Milvus, designed by ZILLIZ, is a distributed feature vector indexing database ma
   Installation is a breeze, and can be performed in a few minutes. The performance of system can be tracked real-time on Prometheus-based GUI monitor dashboard.
 
 ## Overall architecture
-![Milvus architecture](../assets/milvus_arch.png)
+![Milvus architecture](assets/milvus_arch.png)
 
 ## What's next
 

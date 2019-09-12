@@ -35,4 +35,4 @@ Congratulations! You have successfully completed your first vector similarity se
 ## What's next?
 
 - Learn [essential operations](milvus_operation.md) you can do with Milvus
-- [Try Milvus bootcamp](https://github.com/jielinxu/docs/blob/branch-0.4.0/userguide/bootcamp.md) to learn more about solutions
+- [Try Milvus bootcamp](https://github.com/milvus-io/bootcamp) to learn more about solutions

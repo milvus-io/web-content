@@ -28,13 +28,13 @@ Milvus uses Prometheus, an open-source time series database, to store and monito
 
 Below graph shows how Prometheus works in Milvus:
 
-![prometheus](../monitoring/prometheus.png)
+![prometheus](assets/monitoring/monitoring.png)
 
 - Grafana
 
   Grafana is an open-source platform for time series analytics. It is used in Milvus to visualize various performance metrics:
 
-  ![dashboard](../assets/dashboard.png)
+  ![dashboard](assets/prometheus.png)
 
 ### Events to alert on
 
@@ -83,10 +83,10 @@ Milvus generates detailed time series metrics. This page shows you how to pull t
 
 ### Configure Prometheus
 
-1. Go to the Prometheus root directory, and download starter [Prometheus configuration file](../monitoring/prometheus.yml) for Milvus.
+1. Go to the Prometheus root directory, and download starter [Prometheus configuration file](assets/monitoring/prometheus.yml) for Milvus.
 
    ```shell
-   $ wget https://raw.githubusercontent.com/milvus-io/docs/branch-0.4.0/monitoring/prometheus.yml \ -O prometheus.yml
+   $ wget https://raw.githubusercontent.com/milvus-io/docs/branch-0.4.0/assets/monitoring/prometheus.yml \ -O prometheus.yml
    ```
 
    When you examine the configuration file, you'll see that it is set up to scrape the metrics of a single-server Milvus every 15 seconds:
@@ -101,14 +101,14 @@ Milvus generates detailed time series metrics. This page shows you how to pull t
    | ------------------- | ------------------------------------------------------------ |
    | Distributed cluster | Expand the `targets` field to include `localhost: <http-port>` for each additional node in the cluster. |
 
-3. Download starter [alerting rules](../monitoring/alert.rules.yml) for Milvus to the Prometheus root directory.
+3. Download starter [alerting rules](assets/monitoring/alert.rules.yml) for Milvus to the Prometheus root directory.
 
    ```shell
    cd prometheus
    ```
 
    ```shell
-   wget -P rules https://raw.githubusercontent.com/milvus-io/docs/branch-0.4.0/monitoring/alerts.rules.yml
+   wget -P rules https://raw.githubusercontent.com/milvus-io/docs/branch-0.4.0/assets/monitoring/alerts.rules.yml
    ```
 
 ### Start Prometheus
@@ -138,15 +138,15 @@ Milvus generates detailed time series metrics. This page shows you how to pull t
    | URL     | `http://<hostname of machine running prometheus>:9090` |
    | Access  | Browser                                                |
 
-5. Download the starter [Grafana dashboard](../monitoring/dashboard.json) for Milvus:
+5. Download the starter [Grafana dashboard](assets/monitoring/dashboard.json) for Milvus:
 
    ```
-   $ wget https://raw.githubusercontent.com/milvus-io/docs/branch-0.4.0/monitoring/dashboard.json
+   $ wget https://raw.githubusercontent.com/milvus-io/docs/branch-0.4.0/assets/monitoring/dashboard.json
    ```
 
 6. [Add the dashboard to Grafana](http://docs.grafana.org/reference/export_import/#importing-a-dashboard). 
 
-   ![image-20190620191802408](../assets/importjson.png)
+   ![image-20190620191802408](assets/importjson.png)
 
 ### Send notifications with Alertmanager
 
