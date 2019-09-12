@@ -1,0 +1,39 @@
+# Prometheus configuration for Milvus
+# Requires prometheus 2.X
+# Run with:
+# $ prometheus -config.file = prometheus.yml
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+  
+rule_files:
+- "alerts.rules.yml"
+
+# Alertmanager configuration
+alerting:
+  alertmanagers:
+  - static_configs:
+    - targets: ['localhost:9093']
+    
+scrape_configs:
+  - job_name: 'prometheus'
+    # metrics_path: '/metrics'
+    # scheme: 'http'
+
+    static_configs:
+    - targets: ['localhost:9090']
+
+   # scrape metrics of server
+  - job_name: 'milvus_server'
+    scrape_interval: 1s
+    static_configs:
+    - targets: ['localhost:8080']
+
+   # under development
+  - job_name: 'pushgateway'
+    static_configs:
+    - targets: ['localhost:9091']
+
+
+
+
