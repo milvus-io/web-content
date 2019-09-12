@@ -1,5 +1,5 @@
 ---
-id: vector-indexing-methods
+id: index_method
 title: Vector Indexing Methods
 sidebar_label: Vector Indexing Methods
 ---
