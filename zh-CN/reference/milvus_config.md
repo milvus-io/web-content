@@ -49,7 +49,6 @@ sidebar_label: Milvus Configuration
 | ------------------------ | ------------------------------------------------------------ | ------- | --------------- |
 | `db_path`                | 导入 Milvus 的数据文件存储的首选路径。                       | path    | `/opt/data`     |
 | `db_slave_path`          | 导入 Milvus 的数据文件存储的二级路径，可以填多个，两个路径中间以分号隔开。当数据量很大，`db_path` 指定的磁盘空间不够用时，可以设置此参数。<br/>`db_path` 和 `db_slave_path` 平均分配导入的数据。每个路径下的数据大小 = 数据总大小 / 路径数量。请确保这些路径下文件可用的存量差不多且够用。 | path    | ` `             |
-| `parallel_reduce`        | 设置为 `true` 以使用多线程来运行向量查询。如果使用，将大大减少总的查询时间。 <br/>如果批量需要查询的向量数量很大，建议开启该功能。 | boolean | `false`         |
 | `db_backend_url`         | 元数据存储的 URL 。使用 SQLite（单机部署） 或 MySQL（分布式集群部署）来存储元数据。 <br/>`db_backend_url` 的格式为：`dialect://username:password@host:port/database`。（ `dialect` 可以是 `mysql` 或 `sqlite`，取决于你是用了MySQL 还是SQLite数据库。） | path    | `sqlite://:@:/` |
 | `archive_disk_threshold` | 归档触发阈值：存储大小。数据文件大小一旦超过存储大小，触发归档操作。 | integer | `512` (GB)      |
 | `archive_days_threshold` | 归档触发阈值：存储天数。一旦超过存储天数，触发归档操作。     | integer | `30` (day)      |
