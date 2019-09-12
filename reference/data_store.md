@@ -22,4 +22,4 @@ In Milvus, metadata refers to data that provides information about vector data. 
 | MySQL    | Distributed cluster         |
 
 ## Related links
-[Import Data](userguide/import_data.md)
+[Import Data](../userguide/import_data.md)
