@@ -1,5 +1,5 @@
 ---
-id: data_storage
+id: data_store
 title: Data Storage
 sidebar_label: Data Storage
 ---
