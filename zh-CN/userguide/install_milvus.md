@@ -18,8 +18,8 @@ sidebar_label: Install Milvus
 
 2. 请确保您已经安装以下软件包：
 
-   - [NVIDIA driver 418 or higher](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html)
-   - [Docker 19.03 or higher](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/)
+   - [NVIDIA driver 418 及以上](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html)
+   - [Docker 19.03 及以上](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/)
    
    > 注意：如果您已安装更老版本的 Docker (< 19.03)，建议安装 [nvidia-docker2](https://github.com/NVIDIA/nvidia-docker/wiki/Installation-(version-2.0))。如果你已安装 nvidia-docker2，您也可以将 Docker 升级到最新版本 (>= 19.03)。
    
