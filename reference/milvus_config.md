@@ -80,24 +80,10 @@ In the directory `home/$USER/milvus/conf`, open Milvus service configuration fil
 
 ### Section `resource_config`
 
-Define in this section the resources used in Milvus, as well as the connection relationships of these resources. 
+Define in this section the resources used for search in Milvus. You can assign either `cpu` or `gpu` as the resource. For `gpu` resource type, device id must be specified, e.g. `gpu0`/`gpu1`.  
 
-First, set the following parameters for the Disk, CPU and GPU resources for Milvus.
-
-| Parameter          | Description                                                  | Type    | Default    |
+|   Parameter             | Description                                                         | Type    | Default     |
 | ------------------ | ------------------------------------------------------------ | ------- | ---------- |
-| `resource_name`    | The name of the resource for Milvus. Common resources can be `SSD`, `cpu` and `gpu`. <br/> If multiple CPUs or GPUs are used, please use distinguishing names such as `gpu0`, `gpu1`, etc. |         |            |
-| `type`             | Type of resource for Milvus. The value can be `DISK`, `CPU` or `GPU`. |         |            |
-| `device_id`        | The device id of the defined resource.                       | integer | `0`        |
-| `enable_executor`  | If set to `true`, the defined resource is allowed for computation for Milvus. | boolean |            |
-| `gpu_resource_num` | Number of GPU resources in the defined GPU. A GPU resource contains at least  `pinned_memory` and`temp_memory` . | integer | `2`        |
-| `pinned_memory`    | The buffer memory in CPU or GPU that is reserved for data transmission. | integer | `300` (MB) |
-| `temp_memory`      | The buffer memory in CPU or GPU that is reserved for data computation. | integer | `300` (MB) |
+| `mode`             | Resource configuration type. Currently, there is only a `simple` type. |   ResourceMode      |     `simple`       |
+| `resources`        | Define the resource type used for search in Milvus, eg: `cpu` or `gpu0`   | ResourceType        |                 |
 
-Then, define the connections of the specified resources.
-
-| Parameter         | Description                                                  | Type | Default |
-| ----------------- | ------------------------------------------------------------ | ---- | ------- |
-| `connection_name` | The name of the connections of resources. Common connection names can be `io` , `pcie` . <br/>If multiple connections are built between CPU and GPU, please use distinguishing names such as `pcie0`, `pcie1`, etc. |      |         |
-| `speed`           | Bandwidth of the defined connection. (MB/s)                  |      |         |
-| `endpoint`        | Endpoints of the defined connection. Use such format as `ssda===cpu` , or `cpu===gpu0` , etc. |      |         |
