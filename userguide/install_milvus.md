@@ -23,9 +23,7 @@ See [here](../Releases) for what's new in the latest release.
 
 ## Use Docker
 
-1. Install [Docker for Linux](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/). Please carefully check that you meet all prerequisites.
-
-2. Confirm that the Docker daemon is running in the background: 
+1. Confirm that the Docker daemon is running in the background: 
 
    ```
    docker version
@@ -35,13 +33,13 @@ See [here](../Releases) for what's new in the latest release.
 
    > Note: On Linux, Docker needs sudo privileges.
 
-3. Pull the image for the v0.4.0 release of Milvus:
+2. Pull the image for the v0.4.0 release of Milvus:
 
    ```
    sudo docker pull milvusdb/milvus:0.4.0
    ```
 
-4. Download Milvus source file.
+3. Download Milvus source file.
 
    ```shell
    # Create Milvus file
@@ -53,14 +51,14 @@ See [here](../Releases) for what's new in the latest release.
    $ wget https://raw.githubusercontent.com/milvus-io/docs/branch-0.4.0/assets/log_config.conf
    ```
 
-5. Start Milvus server.
+4. Start Milvus server.
 
    ```shell
    # Start Milvus
    $ nvidia-docker run -td --runtime=nvidia -p 19530:19530 -p 8080:8080 -v /home/$USER/milvus/db:/opt/milvus/db -v /home/$USER/milvus/conf:/opt/milvus -v /home/$USER/milvus/logs:/opt/milvus/logs milvusdb/milvus:0.4.0
    ```
 
-6. Confirm Milvus running status.
+5. Confirm Milvus running status.
 
    ```shell
    # Get Milvus container id
