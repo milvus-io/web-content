@@ -28,13 +28,13 @@ Milvus 使用开源时序数据库 Prometheus 作为监控和性能指标存储�
 
 其工作流程如下图所示:
 
-![1566787785125](../monitoring/prometheus.png)
+![1566787785125](assets/monitoring/prometheus.png)
 
 - Grafana
 
   Grafana 是一个开源的时序数据分析及可视化平台。Milvus 使用 Grafana 来展示各项性能指标：
 
-  ![prometheus.png](../assets/newdashboard.png)
+  ![prometheus.png](assets/newdashboard.png)
 
 ### 需要报警的事件
 
@@ -82,7 +82,7 @@ Milvus 会生成详细的关于系统运行状态的时序 metrics。该页面�
 
 ### 设置 Prometheus
 
-1. 下载 Milvus [Prometheus 配置文件](../monitoring/prometheus.yml) 。
+1. 下载 Milvus [Prometheus 配置文件](assets/monitoring/prometheus.yml) 。
 
    ```shell
    $ wget https://raw.githubusercontent.com/milvus-io/docs/branch-0.4.0/monitoring/prometheus.yml \ -O prometheus.yml
@@ -100,7 +100,7 @@ Milvus 会生成详细的关于系统运行状态的时序 metrics。该页面�
    | ---------- | ------------------------------------------------------------ |
    | 分布式集群 | 在 `job_name = 'milvus_server'` 下的 `targets` 字段，为集群中的每个节点分布添加相应的 `localhost: <http-port>` 。 |
 
-3. 下载 Milvus [报警规则文件](../monitoring/alert.rules.yml) 到 Prometheus 根目录。
+3. 下载 Milvus [报警规则文件](assets/monitoring/alert.rules.yml) 到 Prometheus 根目录。
 
    ```shell
    cd prometheus
@@ -137,7 +137,7 @@ Milvus 会生成详细的关于系统运行状态的时序 metrics。该页面�
    | URL     | `http://<hostname of machine running prometheus>:9090` |
    | Access  | Browser                                                |
 
-5. 下载 [Grafana 配置文件](../monitoring/dashboard.json) :
+5. 下载 [Grafana 配置文件](assets/monitoring/dashboard.json) :
 
    ```
    $ wget https://raw.githubusercontent.com/milvus-io/docs/branch-0.4.0/monitoring/dashboard.json
@@ -180,4 +180,4 @@ Milvus 会生成详细的关于系统运行状态的时序 metrics。该页面�
 
 ## 相关阅读
 
-[监控指标](monitoring_metrics.md)
+[监控指标](../reference/monitoring_metrics.md)
