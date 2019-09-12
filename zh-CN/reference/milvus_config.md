@@ -82,13 +82,10 @@ sidebar_label: Milvus Configuration
 
 ### `resource_config` 区域
 
-请在该区域定义 Milvus 中 resource 的使用情况，和各 resource 之间的关系。
-
-首先，请为 Milvus 用到的磁盘、CPU 和 GPU 等设置下列参数。
+请在该区域定义 Milvus 里用于搜索的 resource，支持的 resource 类型有cpu、gpu。注意如果指定 gpu，需要指名其设备 id，设备 id 从0开始。cpu 和 gpu 不可以同时选择。
 
 | 参数               | 说明                                                         | 类型    | 默认值     |
 | ------------------ | ------------------------------------------------------------ | ------- | ---------- |
-| `resource_name`    | Milvus 所用的 resource 的名字。常用 resource 有 `SSD` ，`cpu` 和 `gpu` 。 <br/>如果使用多张 CPU 或 GPU，则请用不同的名字分别列出。如： `gpu0`，`gpu1` 等。 |         |            |
-| `mode`             | Milvus 所用的 resource 的类型。如 ：`DISK`，`CPU` 或 `GPU` 等。 |         |            |
-| `device_id`        | 所定义的 resource 的设备 id。                                | integer | `0`        |
+| `mode`             | Resource 配置的类型，目前只有 `simple` 类型。 |   ResourceMode      |     `simple`       |
+| `resources`        | 定义 Milvus 里用于搜索的 resource 类型。如：`cpu`, `gpu0`等   | ResourceType        |                 |
 
