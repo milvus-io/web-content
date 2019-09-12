@@ -25,7 +25,7 @@ This documentation is for reference only, and nothing in the documentation const
 
 | Convention       |    Description                                |
 |-----------|-----------------------------------------|
-| code font    | Code font indicates filenames and paths, parameter names and values, method and funtion names. |
+| code font    | Code font indicates filenames and paths, parameter names and values, method and function names. |
 | bold      | Bold type indicates headlines, user interface texts, or content that needs to be emphasized.    |
 | code block  | Code block indicates code examples within a paragraph. |
 | Note      | Note indicates a helpful hint, sometimes a tip, to help you work more efficiently.          |
