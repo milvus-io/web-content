@@ -4,9 +4,9 @@ title: Operational FAQ
 sidebar_label: Operational FAQ
 ---
 
-### Operational FAQ
+# Operational FAQ
 
-#### Why did my multiprocessing program failed?
+### Why did my multiprocessing program failed?
 
 In order to successfully run multiprocessing in Milvus, make sure the following conditions are met:
 
@@ -96,7 +96,7 @@ def test_add_vector_search_multiprocessing(self, connect, table):
         p.join()
 ```
 
-#### Related links
+### Related links
 
 [Product FAQ](product_faq.md)
 
