@@ -32,7 +32,7 @@ sidebar_label: Install Milvus
 
    > 提示：在 Linux 上，Docker 需要带 sudo。
 
-2. 拉取 Milvus 0.4.0版本的镜像：
+2. 拉取 Milvus 0.4.0 版本的镜像：
 
    ```
    sudo docker pull milvusdb/milvus:0.4.0
