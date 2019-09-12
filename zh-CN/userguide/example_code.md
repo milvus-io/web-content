@@ -30,3 +30,8 @@ sidebar_label: Try an Example Program
 5. 确认程序正确运行。
 
    恭喜您！您已经成功完成了在Milvus上的第一次向量相似度查询。
+
+## 接下来您可以：
+
+- 了解更多 Milvus [基础操作](milvus_operation.md)
+- [体验 Milvus 在线训练营](https://github.com/jielinxu/docs/blob/branch-0.4.0/userguide/bootcamp.md)，了解更多解决方案
