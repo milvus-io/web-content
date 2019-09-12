@@ -20,6 +20,8 @@ If you run into issues with Milvus, there are a few initial steps you can always
 
 | Topic       | Message                                                      |
 | ----------- | ------------------------------------------------------------ |
+| General     | `Invalid table name: xxx`                                    |
+| General     | `Table xxx not exist`                                        |
 | CreateTable | `Invalid table dimension: xxx`                               |
 | CreateTable | `Invalid index file size: xxx`                               |
 | CreateTable | `Invalid index metric type: xxx`                             |
@@ -35,6 +37,24 @@ If you run into issues with Milvus, there are a few initial steps you can always
 | Search      | `Invalid nprobe: xxx`                                        |
 | Search      | `Query record float array is empty`                          |
 | Search      | `Invalid query record dimension: xxx vs. table dimension: xxx` |
+
+### General
+
+`Invalid table name: xxx`
+
+This message indicates that table name is illegal.
+
+To solve this issue, edit the table name and make sure it follows below rules:
+
+- Begins with a letter or an underscore (_) . 
+- Subsequent characters can be letters, underscores, numbers (0-9). 
+- The entire length is < 255 characters.
+
+`Table xxx not exist`
+
+This message indicates that the table does not exist.
+
+To solve this issue, use `milvus.has_table` followed by the table name to verify if the table exists. Or you can check if the table name you entered is correct.
 
 ### CreateTable
 
