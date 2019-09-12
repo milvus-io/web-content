@@ -81,7 +81,7 @@ $ python3 milvus_bootcamp.py --table=ann_1m_sq8 -s
 
 ### Step 4: Analyze the results
 
-Once the `milvus_bootcamp.py` has finished running, you will see the results in the file `xxx_results.csv` ('xxx' represents the execution time) in `performance_results`. Below is a partial display of the results:
+Once the `milvus_bootcamp.py` has finished running, you will see the results in the file `xxx_results.csv` (`xxx` represents the execution time) in `performance_results`. Below is a partial display of the results:
 
 [![1m_per_10_20](https://github.com/jielinxu/bootcamp/raw/master/EN_docs/labs/pic/1m_per_10_20.png)](https://github.com/jielinxu/bootcamp/blob/master/EN_docs/labs/pic/1m_per_10_20.png)
 
@@ -177,4 +177,4 @@ Once the `milvus_bootcamp.py` has finished running, you will see the results in 
 ## Related links
 
 - [Milvus Configuration](../reference/milvus_config.md)
-- [Milvus Bootcamp](https://github.com/milvus-io/bootcamp)
+- [Try Milvus Bootcamp](https://github.com/milvus-io/bootcamp)
