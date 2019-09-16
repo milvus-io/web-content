@@ -38,7 +38,7 @@ sidebar_label: Install Milvus
 2. 拉取 Milvus 0.4.0 版本的镜像：
 
    ```
-   sudo docker pull milvusdb/milvus:0.4.0
+   sudo docker pull milvusdb/milvus:latest
    ```
 
 3. 下载 Milvus 源文件。
@@ -49,8 +49,8 @@ sidebar_label: Install Milvus
    $ cd /home/$USER/milvus
    $ mkdir conf
    $ cd conf
-   $ wget https://raw.githubusercontent.com/milvus-io/docs/branch-0.4.0/assets/server_config.yaml
-   $ wget https://raw.githubusercontent.com/milvus-io/docs/branch-0.4.0/assets/log_config.conf
+   $ wget https://raw.githubusercontent.com/milvus-io/docs/master/assets/server_config.yaml
+   $ wget https://raw.githubusercontent.com/milvus-io/docs/master/assets/log_config.conf
    ```
 
 4. 启动 Milvus server。
