@@ -103,10 +103,6 @@ Milvus 会生成详细的关于系统运行状态的时序 metrics。该页面�
 3. 下载 Milvus [报警规则文件](assets/monitoring/alert.rules.yml) 到 Prometheus 根目录。
 
    ```shell
-   cd prometheus
-   ```
-
-   ```shell
    wget -P rules https://raw.githubusercontent.com/milvus-io/docs/master/assets/monitoring/alerts.rules.yml
    ```
 
