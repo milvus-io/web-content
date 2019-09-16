@@ -41,8 +41,8 @@ In this guide, we will walk you through installing Milvus and your very first ve
    $ cd /home/$USER/milvus
    $ mkdir conf
    $ cd conf
-   $ wget https://raw.githubusercontent.com/milvus-io/docs/branch-0.4.0/assets/server_config.yaml
-   $ wget https://raw.githubusercontent.com/milvus-io/docs/branch-0.4.0/assets/log_config.conf
+   $ wget https://raw.githubusercontent.com/milvus-io/docs/master/assets/server_config.yaml
+   $ wget https://raw.githubusercontent.com/milvus-io/docs/master/assets/log_config.conf
    
    ```
 
