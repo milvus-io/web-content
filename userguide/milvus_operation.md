@@ -138,7 +138,7 @@ You can also provide user-defined vector ids:
 ```python
 >>> vector_ids = [id for id in range(20)]
 >>> status, ids = milvus.add_vectors(table_name='test01', records=vectors, ids=vector_ids)
->>> pprint(ids)
+>>> print(ids)
 [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
 ```
 
@@ -214,7 +214,7 @@ Suppose you want to search the top 5 most similar vectors of three 256-dimension
 >>> status
 Status(message='Search vectors successfully!', code=0)
 >>> results # Searched top_k vectors
->>> pprint(results) # Searched top_k vectors
+>>> print(results) # Searched top_k vectors
 [
 [QueryResult(id=0, distance=34.85963439941406)],
 [QueryResult(id=0, distance=36.73900604248047)],
