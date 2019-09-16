@@ -39,7 +39,7 @@ See [here](../Releases/v0.4.0.md) for what's new in the latest release.
 2. Pull the image for the v0.4.0 release of Milvus:
 
    ```
-   sudo docker pull milvusdb/milvus:0.4.0
+   sudo docker pull milvusdb/milvus:latest
    ```
 
 3. Download Milvus source file.
