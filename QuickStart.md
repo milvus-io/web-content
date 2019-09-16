@@ -6,7 +6,7 @@ sidebar_label: Milvus Quick Start
 
 #  Milvus Quick Start
 
-In this guide, we will walk you through installing Milvus and your very first vector search Python codes with it. To learn more about how to use Milvus, please visit our [userguide](./userguide/preface.md).
+In this guide, we will walk you through installing Milvus and running your very first vector search using Python codes. To learn more about how to use Milvus, please visit our [userguide](./userguide/preface.md).
 
 ## Prerequisites
 
