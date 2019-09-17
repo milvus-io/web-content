@@ -133,6 +133,18 @@ Status(code=0, message='Success')
 ...
 ```
 
+You can also provide user-defined vector ids:
+
+```python
+>>> vector_ids = [id for id in range(20)]
+>>> status, ids = milvus.add_vectors(table_name='test01', records=vectors, ids=vector_ids)
+>>> print(ids)
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+```
+
+
+##### Create index
+
 ## Create index
 
 Below is the list of parameters for creating index for a table:
@@ -186,7 +198,7 @@ Below is the list of parameters for searching vectors in a table:
 | `query_records`           | The list of query vectors to be searched in the table. Each vector value must be a float data type, with the same dimension as that defined for the table. | 2-dimensional list                    | [[0.1, 0.2, ...], ...]              |
 | `top_k`                   | The top k most similar results of each target vector.        | Integer                               | 0 < top_k <= 1000                   |
 | `nprobe`                  | Number of queried vector buckets. <br/>`nprobe` affects search precision. The greater the value, the more precise the result, yet the slower the search speed. | Integer                               | 1 - 16384                           |
-| `query_ranges` (optional) | An optional, comma-separated list that defines the condition by which the search is filtered. <br/>For example you can search within a specific date range. The default value 'None' (no range, meaning to search the entire database) is used if you leave this parameter out. | List (Suggest to use Tuple data type) | [('2019-01-01', '2019-01-02'), ...] |
+| `query_ranges` (optional) | An optional, comma-separated list that defines the condition by which the search is filtered. <br/>For example you can search within a specific date range. The default value `None` (no range, meaning to search the entire database) is used if you leave this parameter out. | List (Suggest to use Tuple data type) | [('2019-01-01', '2019-01-02'), ...] |
 
 > Note: Currently, only date range is supported in `query_ranges`. The date format is 'yyyy-mm-dd'. The date range [2019.1.1, 2019.1.5] contains 2019.1.1 and 2019.1.5.
 
@@ -202,7 +214,7 @@ Suppose you want to search the top 5 most similar vectors of three 256-dimension
 >>> status
 Status(message='Search vectors successfully!', code=0)
 >>> results # Searched top_k vectors
->>> pprint(results) # Searched top_k vectors
+>>> print(results) # Searched top_k vectors
 [
 [QueryResult(id=0, distance=34.85963439941406)],
 [QueryResult(id=0, distance=36.73900604248047)],

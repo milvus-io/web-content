@@ -5,7 +5,7 @@ server_config:
   time_zone: UTC+8       # Use the UTC-x or UTC+x to specify a time zone, e.g. UTC+8 for China Standard Time
 
 db_config:
-  db_path: /tmp/milvus             # milvus data storage path
+  db_path: /opt/milvus             # milvus data storage path
   db_slave_path:                   # secondry data storage path, split by semicolon
  
   # URI format: dialect://username:password@host:port/database
