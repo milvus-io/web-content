@@ -16,21 +16,7 @@ sidebar_label: Milvus Quick Start
    | CentOS                   | 7.5及以上   |
    | Ubuntu LTS               | 16.04及以上 |
 
-2. 硬件配置要求：
-
-   | 硬件名称 |   要求         |
-   | -------- | ---------------- |
-   | CPU      | 16核+            |
-   | GPU      | Pascal 系列及以上 |
-   | 内存     | 256GB及以上      |
-   | 硬盘类型 | SSD 或者 NVMe      |
-   | 网络     | 万兆网卡         |
-
-3. 客户端浏览器要求：
-
-   Milvus 提供了基于 Prometheus 监控和 Grafana 的展示平台，可以对数据库的各项指标进行可视化展示，兼容目前主流的 Web 浏览器如：微软 IE、Google Chrome、Mozilla Firefox 和 Safari 等。
-  
-4. 请确保您已经安装以下软件包：
+2. 请确保您已经安装以下软件包：
 
    - [NVIDIA driver 418 及以上](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html)
    - [Docker 19.03 及以上](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/)
