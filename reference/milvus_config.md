@@ -84,5 +84,5 @@ Define in this section the resources used for search in Milvus. You can assign e
 |   Parameter        | Description                                                            | Type             | Default    |
 | ------------------ | ---------------------------------------------------------------------- | ---------------- | ---------- |
 | `mode`             | Resource configuration type. Currently, there is only a `simple` type. |   ResourceMode   |  `simple`  |
-| `resources`        | Define the resource type used for search in Milvus, eg: `cpu` or `gpu0`| ResourceType     |            |
+| `resources`        | Define the resource type used for search in Milvus, e.g. `cpu` or `gpu0`| ResourceType    |            |
 
