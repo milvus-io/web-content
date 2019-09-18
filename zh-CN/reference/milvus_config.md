@@ -22,9 +22,7 @@ sidebar_label: Milvus Configuration
 
 ## 配置
 
-下文提到的许多配置都是给 Milvus 内部性能调优设计的，在编辑设置之前，请阅读以下性能优化文章：
-
-- 优化数据存储
+下文提到的许多配置都是给 Milvus 内部性能调优设计的，在编辑设置之前，请仔细考虑。若有任何疑问，欢迎邮件联系 Milvus 团队，邮箱地址：[support@zilliz.com](mailto:support@zilliz.com)。
 
 > 注意：如果修改了配置文件，您必须重启 Milvus 服务来启用新的更改。
 >
