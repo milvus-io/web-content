@@ -22,9 +22,7 @@ sidebar_label: Milvus Configuration
 
 ## 配置
 
-下文提到的许多配置都是给 Milvus 内部性能调优设计的，在编辑设置之前，请阅读以下性能优化文章：
-
-- 优化数据存储
+下文提到的许多配置都是给 Milvus 内部性能调优设计的，在编辑设置之前，请仔细考虑。若有任何疑问，欢迎邮件联系 Milvus 团队，邮箱地址：[support@zilliz.com](mailto:support@zilliz.com)。
 
 > 注意：如果修改了配置文件，您必须重启 Milvus 服务来启用新的更改。
 >
@@ -38,7 +36,7 @@ sidebar_label: Milvus Configuration
 
 | 参数        | 说明                                                         | 类型    | 默认值    |
 | ----------- | ------------------------------------------------------------ | ------- | --------- |
-| `address`   | Milvus server监听的IP地址。                                  | string  | `0.0.0.0` |
+| `address`   | Milvus server监听的IP地址。                                  | string  | `0.0.0.0`  |
 | `port`      | Milvus server监听的端口号。                                  | integer | `19530`   |
 | `mode`      | Milvus部署类型。选择 `single` 或 `cluster` 。                | boolean | `single`  |
 | `time_zone` | 使用 UTC-x 或 UTC+x 来指定时区。比如，您可以使用 `UTC+8` 来代表中国标准时间。 | Timezone | `UTC+8`   |
@@ -60,7 +58,7 @@ sidebar_label: Milvus Configuration
 | 参数                      | 说明                           | 类型    | 默认值       |
 | ------------------------- | ------------------------------ | ------- | ------------ |
 | `is_startup`              | 设置为 `true` 以启动监控功能。 | boolean | `true`       |
-| `collector`               | 连接的监控系统。               | string  | `Prometheus` |
+| `collector`               | 连接的监控系统。               | string  | `Prometheus`  |
 | `port`                    | 访问 Prometheus 的端口号。     | Integer | `8080`       |
 | `push_gateway_ip_address` | push gateway的 IP 地址。       | string  | `127.0.0.1`  |
 | `push_gateway_port`       | push gateway的端口号。         | integer | `9091`       |
@@ -71,13 +69,13 @@ sidebar_label: Milvus Configuration
 | -------------------------- | ------------------------------------------------------------ | ------- | --------- |
 | `cpu_cache_capacity`       | 用于缓存的内存量，最大值不能超过内存总量。                   | integer | `16` (GB) |
 | `cache_free_percent`       | 当 CPU 缓存已满，会自动清除过往数据。通过这条参数您可以设置剩余在 CPU 缓存中的数据量。<br/>比如，该参数的默认值（0.85）表示 CPU 缓存中85%的数据不用被清除。取值范围为0 -1。 | float   | `0.85`    |
-| `insert_cache_immediately` | 设置为 `true` ，则新插入的数据会自动加载到缓存以备搜索。<br/>如果想要实现数据即插即搜索，建议启用该功能。 | boolean | `false`   |
+| `insert_cache_immediately` | 设置为 `true` ，则新插入的数据会自动加载到缓存以备搜索。<br/>如果想要实现数据即插即搜索，建议启用该功能。 | boolean | `false`  |
 
 ### `engine_config` 区域
 
 | 参数                 | 说明                                                         | 类型    | 默认值 |
 | -------------------- | ------------------------------------------------------------ | ------- | ------ |
-| `use_blas_threshold` | Milvus 性能调优参数。此参数必须与 `nq` 比较以确定是否触发使用OpenBLAS或Intel MKL计算库的阈值。<br/>如果 `nq` > `use_blas_threshold` ，则 Milvus 性能稳定且搜索速度尚可。如果 `nq` < `use_blas_threshold` ，搜索速度明显提升但 Milvus 稳定性稍弱。取值范围为 >= 0. | integer | `20`   |
+| `use_blas_threshold` | Milvus 性能调优参数。此参数必须与 `nq` 比较以确定是否触发使用OpenBLAS或Intel MKL计算库的阈值。<br/>如果 `nq` > `use_blas_threshold` ，则搜索响应时间无波动，且搜索速度尚可。如果 `nq` < `use_blas_threshold` ，搜索速度明显提升，但搜索响应时间有波动。取值范围为 >= 0. | integer | `20`  |
 
 ### `resource_config` 区域
 
@@ -85,6 +83,6 @@ sidebar_label: Milvus Configuration
 
 | 参数               | 说明                                                         | 类型    | 默认值     |
 | ------------------ | ------------------------------------------------------------ | ------- | ---------- |
-| `mode`             | Resource 配置的类型，目前只有 `simple` 类型。 |   ResourceMode      |     `simple`       |
+| `mode`             | Resource 配置的类型，目前只有 `simple` 类型。 |   ResourceMode      |     `simple`     |
 | `resources`        | 定义 Milvus 里用于搜索的 resource 类型。如：`cpu`, `gpu0`等   | ResourceType        |     `gpu0`            |
 

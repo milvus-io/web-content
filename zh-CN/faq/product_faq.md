@@ -22,7 +22,7 @@ Milvus 单行读取速度约 0.6 毫秒，单行写入速度在 0.03 毫秒左�
 
 ### Milvus 的易用性如何？
 
-Milvus 安装简单，仅需下载相关 docker 镜像文件。易用性强，通过Python等SKD接口即可完成向量插入、检索等操作。若要了解更多，请看 [安装 Milvus](userguide/install_milvus.md).
+Milvus 安装简单，仅需下载相关 docker 镜像文件。易用性强，通过 Python 等 SDK 接口即可完成向量插入、检索等操作。若要了解更多，请看 [安装 Milvus](userguide/install_milvus.md).
 
 想要开启您的第一次向量搜索？请阅读 [运行示例程序](userguide/example_code.md).
 

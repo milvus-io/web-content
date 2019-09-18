@@ -22,7 +22,7 @@ After you have successfully started Milvus server, you can see a Milvus file und
 
 ## Configurations
 
-Many configurations below are intended for tuning Milvus internals. Before changing these settings, think twice or discuss with Milvus team.
+Many configurations below are intended for tuning Milvus internals. Before changing these settings, think twice or discuss with Milvus team via [support@zilliz.com](mailto:support@zilliz.com).
 
 > Note: If you have edited these configurations, you must restart Milvus server to apply your changes.  
 >
@@ -34,19 +34,19 @@ In the directory `home/$USER/milvus/conf`, open Milvus service configuration fil
 
 ### Section `server_config`
 
-| Parameter   | Description                                                  | Type    | Default   |
-| ----------- | ------------------------------------------------------------ | ------- | --------- |
-| `address`   | IP address that Milvus server monitors.                      | string  | `0.0.0.0` |
-| `port`      | Port that Milvus server monitors.                            | integer | `19530`   |
-| `mode`      | Milvus deployment type. Select either `single` or `cluster`. | boolean | `single`  |
-| `time_zone` | Use the UTC-x or UTC+x to specify a time zone. For example, use `UTC+8` for China Standard Time. | Timezone | `UTC+8` |  
+| Parameter   | Description                                                  | Type    | Default    |
+| ----------- | ------------------------------------------------------------ | ------- | ---------- |
+| `address`   | IP address that Milvus server monitors.                      | string  | `0.0.0.0`  |
+| `port`      | Port that Milvus server monitors.                            | integer | `19530`    |
+| `mode`      | Milvus deployment type. Select either `single` or `cluster`. | boolean | `single`   |
+| `time_zone` | Use the UTC-x or UTC+x to specify a time zone. For example, use `UTC+8` for China Standard Time. | Timezone | `UTC+8`  |  
 ### Section `db_config`
-
+        
 | Parameter                | Description                                                  | Type    | Default         |
 | ------------------------ | ------------------------------------------------------------ | ------- | --------------- |
-| `db_path`                | Primary directory for the data files you want to import.     | path    | `/opt/data`     |
-| `db_slave_path`          | A semicolon-separated list of secondary directories for the data files imported into Milvus.  Set this parameter when the data size is too much to fit in the primary directory set in `db_path`. <br/>Each file, whether in `db_path` or `db_slave_path`, is assigned an equal part of the imported data.  Data Size per Directory = Total Data Size / Number of Directories. So make sure the available storage space in these files are enough. | path    | ` `             |
-| `db_backend_url`         | URL for metadata storage. Use SQLite (for single server Milvus) or MySQL (for distributed cluster) to store the metadata. <br/>The format of db_backend_url is: `dialect://username:password@host:port/database`. (`dialect` can be either `mysql` or `sqlite`, depending on which database you use. | path    | `sqlite://:@:/` |
+| `db_path`                | Primary directory for the data files you want to import.     | path    | `/opt/data`    |
+| `db_slave_path`          | A semicolon-separated list of secondary directories for the data files imported into Milvus.  Set this parameter when the data size is too much to fit in the primary directory set in `db_path`. <br/>Each file, whether in `db_path` or `db_slave_path`, is assigned an equal part of the imported data.  Data Size per Directory = Total Data Size / Number of Directories. So make sure the available storage space in these files are enough. | path    |            |
+| `db_backend_url`         | URL for metadata storage. Use SQLite (for single server Milvus) or MySQL (for distributed cluster) to store the metadata. <br/>The format of db_backend_url is: `dialect://username:password@host:port/database`. (`dialect` can be either `mysql` or `sqlite`, depending on which database you use. | path    | `sqlite://:@:/`       |
 | `archive_disk_threshold` | Minimum data storage size beyond which archive action is triggered. | integer | `0` (GB)        |
 | `archive_days_threshold` | Maximum number of days files are kept. Files older than the specified days will be archived. | integer | `0` (day)       |
 | `insert_buffer_size`     | Maximum buffer size allowed for data insertion. The sum of `insert_buffer_size` and `cpu_cache_capacity` (in "Section `cache_config`" ) should be < total memory. | integer | `4` (GB)        |
@@ -75,14 +75,14 @@ In the directory `home/$USER/milvus/conf`, open Milvus service configuration fil
 
 | Parameter            | Description                                                  | Type    | Default |
 | -------------------- | ------------------------------------------------------------ | ------- | ------- |
-| `use_blas_threshold` | A Milvus performance tuning parameter. The threshold value must be compared with `nq` to decide if the usage of OpenBLAS or Intel MKL libraries will be triggered. <br/>If `nq` > `use_blas_threshold` , the performance is stable with relatively slower search speed. If `nq` < `use_blas_threshold` , the search speed will be enhanced, however with reduced stability. The value should be >= 0. | integer | `20`    |
+| `use_blas_threshold` | A Milvus performance tuning parameter. The threshold value must be compared with `nq` to decide if the usage of OpenBLAS or Intel MKL libraries will be triggered. <br/>If `nq` > `use_blas_threshold` , the search response times do not fluctuate, but the search speed is relatively slow. If `nq` < `use_blas_threshold` , the search speed will be enhanced, however with slight fluctuation of search response times. The value should be >= 0. | integer | `20`   |
 
 ### Section `resource_config`
 
 Define in this section the resources used for search in Milvus. You can assign either `cpu` or `gpu` as the resource. For `gpu` resource type, device id must be specified, e.g. `gpu0`/`gpu1`.  
 
-|   Parameter             | Description                                                         | Type    | Default     |
-| ------------------ | ------------------------------------------------------------ | ------- | ---------- |
-| `mode`             | Resource configuration type. Currently, there is only a `simple` type. |   ResourceMode      |     `simple`       |
-| `resources`        | Define the resource type used for search in Milvus, eg: `cpu` or `gpu0`   | ResourceType        |                 |
+|   Parameter        | Description                                                            | Type             | Default    |
+| ------------------ | ---------------------------------------------------------------------- | ---------------- | ---------- |
+| `mode`             | Resource configuration type. Currently, there is only a `simple` type. |   ResourceMode   |  `simple`  |
+| `resources`        | Define the resource type used for search in Milvus, e.g. `cpu` or `gpu0`| ResourceType    |            |
 
