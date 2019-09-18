@@ -203,8 +203,6 @@ Status(code=0, message='Success')
 
 > 注意：一个目标向量是指要在数据库中搜索的向量。一个匹配向量代表搜索出的与目标向量相似的向量。
 
-Suppose you want to search the top 5 most similar vectors of three 256-dimensional vectors (represented by "query_records" in below codes), you may:
-
 假设您要针对3条256维的目标向量（在下面代码中用q_records表示），搜索与每条目标向量相似度最高的前5条匹配向量，您可以：
 
 ```python
