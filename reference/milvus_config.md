@@ -75,7 +75,7 @@ In the directory `home/$USER/milvus/conf`, open Milvus service configuration fil
 
 | Parameter            | Description                                                  | Type    | Default |
 | -------------------- | ------------------------------------------------------------ | ------- | ------- |
-| `use_blas_threshold` | A Milvus performance tuning parameter. The threshold value must be compared with `nq` to decide if the usage of OpenBLAS or Intel MKL libraries will be triggered. <br/>If `nq` > `use_blas_threshold` , the performance is stable with relatively slower search speed. If `nq` < `use_blas_threshold` , the search speed will be enhanced, however with reduced stability. The value should be >= 0. | integer | `20`   |
+| `use_blas_threshold` | A Milvus performance tuning parameter. The threshold value must be compared with `nq` to decide if the usage of OpenBLAS or Intel MKL libraries will be triggered. <br/>If `nq` > `use_blas_threshold` , the search response times do not fluctuate, but the search speed is relatively slow. If `nq` < `use_blas_threshold` , the search speed will be enhanced, however with slight fluctuation of search response times. The value should be >= 0. | integer | `20`   |
 
 ### Section `resource_config`
 
