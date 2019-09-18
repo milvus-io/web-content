@@ -75,7 +75,7 @@ sidebar_label: Milvus Configuration
 
 | 参数                 | 说明                                                         | 类型    | 默认值 |
 | -------------------- | ------------------------------------------------------------ | ------- | ------ |
-| `use_blas_threshold` | Milvus 性能调优参数。此参数必须与 `nq` 比较以确定是否触发使用OpenBLAS或Intel MKL计算库的阈值。<br/>如果 `nq` > `use_blas_threshold` ，则 Milvus 性能稳定且搜索速度尚可。如果 `nq` < `use_blas_threshold` ，搜索速度明显提升但 Milvus 稳定性稍弱。取值范围为 >= 0. | integer | `20`  |
+| `use_blas_threshold` | Milvus 性能调优参数。此参数必须与 `nq` 比较以确定是否触发使用OpenBLAS或Intel MKL计算库的阈值。<br/>如果 `nq` > `use_blas_threshold` ，则数据响应时间无波动，且搜索速度尚可。如果 `nq` < `use_blas_threshold` ，搜索速度明显提升，但数据响应时间有波动。取值范围为 >= 0. | integer | `20`  |
 
 ### `resource_config` 区域
 
