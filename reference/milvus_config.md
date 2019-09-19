@@ -79,10 +79,25 @@ In the directory `home/$USER/milvus/conf`, open Milvus service configuration fil
 
 ### Section `resource_config`
 
-Define in this section the resources used for search in Milvus. You can assign either `cpu` or `gpu` as the resource. For `gpu` resource type, device id must be specified, e.g. `gpu0`/`gpu1`.  
+In Milvus, as the **index building** and **search computation** are separate processes, the resource usage conforms to the following general rules:
+
+- Index building process can only be done in `gpu`. Use `build_index_gpu` in Section `db_config` to define the `gpu` used for this process.
+- Search computation can be executed in either `cpu` or `gpu`. If you choose `gpu` for this process, you can assign multiple GPUs. 
+- The `gpu` used for index building can also be used for search computation. 
 
 |   Parameter        | Description                                                            | Type             | Default    |
 | ------------------ | ---------------------------------------------------------------------- | ---------------- | ---------- |
 | `mode`             | Resource configuration type. Currently, there is only a `simple` type. |   ResourceMode   |  `simple`  |
 | `resources`        | Define the resource type used for search in Milvus, e.g. `cpu` or `gpu0`| ResourceType    |            |
+
+Define in this section the resources **used for search** in Milvus. 
+
+You can assign either `cpu` or `gpu` as the resource. They are mutually exclusive. If you choose `gpu` resource type, list all the GPUs you want to be used, and specify their corresponding device ids. For example:
+
+```
+- gpu0
+- gpu1
+- gpu2
+```
+
 

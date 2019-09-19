@@ -79,10 +79,23 @@ sidebar_label: Milvus Configuration
 
 ### `resource_config` 区域
 
-请在该区域定义 Milvus 里用于搜索的 resource，支持的 resource 类型有 `cpu`、`gpu`。注意如果指定 `gpu`，需要指名其设备 id，设备 id 从0开始。`cpu` 和 `gpu` 不可以同时选择。
+在 Milvus 里，由于**创建索引**和**搜索**是两个独立分开的过程，resource 的利用遵循以下基本原则：
+
+- 创建索引过程只能在 `gpu` 里进行。请使用区域 `db_config` 里的 `build_index_gpu` 参数来指定用于该过程的 `gpu` 。
+- 搜索计算过程可以在 `cpu` 或 `gpu` 里进行，两种类型不能同时选择。如果选择用 `gpu` 来进行搜索，您可以指定多张 GPU 来进行该过程。
+- 用于创建索引的 `gpu` 同时也能指定用于搜索过程。
 
 | 参数               | 说明                                                         | 类型    | 默认值     |
 | ------------------ | ------------------------------------------------------------ | ------- | ---------- |
 | `mode`             | Resource 配置的类型，目前只有 `simple` 类型。 |   ResourceMode      |     `simple`     |
 | `resources`        | 定义 Milvus 里用于搜索的 resource 类型。如：`cpu`, `gpu0`等   | ResourceType        |     `gpu0`            |
+
+请在该区域定义 Milvus 里用于搜索的 resource，支持的 resource 类型有 `cpu`、`gpu`， 不可以同时选择。注意如果指定 `gpu`，请列出所有您想指定的 GPU，并指名它们的设备 id 号，设备 id 从0开始。比如：
+
+```
+- gpu0
+- gpu1
+- gpu2
+```
+
 
