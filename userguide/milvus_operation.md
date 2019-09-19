@@ -142,9 +142,6 @@ You can also provide user-defined vector ids:
 [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
 ```
 
-
-##### Create index
-
 ## Create index
 
 Below is the list of parameters for creating index for a table:

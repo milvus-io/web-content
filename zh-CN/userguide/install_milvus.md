@@ -23,6 +23,8 @@ sidebar_label: Install Milvus
    
    > 注意：如果您已安装更老版本的 Docker (< 19.03)，建议安装 [nvidia-docker2](https://github.com/NVIDIA/nvidia-docker/wiki/Installation-(version-2.0))。如果你已安装 nvidia-docker2，您也可以将 Docker 升级到最新版本 (>= 19.03)。
    
+   > 注意：您无需单独安装 CUDA 环境，它已经包含在 Milvus Docker 容器里。
+   
 ## 使用 Docker
 
 1. 确认后台已经运行 Docker daemon：
