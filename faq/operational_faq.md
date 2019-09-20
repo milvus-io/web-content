@@ -6,9 +6,9 @@ sidebar_label: Operational FAQ
 
 # Operational FAQ
 
-### Why did my multiprocessing program failed?
+### Why did my multiprocessing program failed? 
 
-In order to successfully run multiprocessing in Milvus, make sure the following conditions are met:
+In order to successfully run multiprocessing in Milvus, make sure the following conditions are met: :clap:
 
 - No client is built in the main process
 - Clients are created in each child process
