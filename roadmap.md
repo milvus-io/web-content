@@ -40,7 +40,7 @@ sidebar_label: Milvus Roadmap
 
 - [ ] CLI / GUI
 
-- [ ] Support more monitoring tool
+- [ ] Support more monitoring tools
 
 - [ ] Log monitor
 
