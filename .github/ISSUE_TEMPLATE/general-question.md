@@ -1,5 +1,5 @@
 ---
-name: General question
+name: "\U0001F914 General question"
 about: Any question that isn't answered in the docs
 title: "[QUESTION]"
 labels: ''
