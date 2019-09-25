@@ -16,4 +16,4 @@ Before submitting your question, make sure you have:
 - Searched the [GitHub issues](https://github.com/milvus-io/docs/issues).
 - Read the [documentation](https://github.com/milvus-io/docs)
 
-"Describe your question"
+"What is your question?"
