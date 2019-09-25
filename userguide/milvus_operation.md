@@ -111,6 +111,8 @@ True
 
 ## Insert vectors into a table
 
+> Note: In the production scenario, it is recommended to use the `milvus.create_index` before inserting vectors into the table. This triggers the simultaneous vector inserting and index building process, which takes much less time. However, in doing so, you need to create the same index again after the vector insertion process is completed, in case there are any data file that does not meet the `index_file_size` (which means index will not be automatically built for this data file).
+
 Below is the list of parameters for inserting vectors into a table:
 
 | Parameter    | Description                                                  | Type                | Reference value        |
@@ -142,10 +144,7 @@ You can also provide user-defined vector ids:
 [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
 ```
 
-
-##### Create index
-
-## Create index
+## Create an index
 
 Below is the list of parameters for creating index for a table:
 
