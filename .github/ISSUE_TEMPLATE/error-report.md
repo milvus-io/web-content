@@ -1,5 +1,5 @@
 ---
-name: Error report
+name: "\U0001F41B Error report"
 about: Typos, grammatical errors, terminology misuse, ambiguity, etc.
 title: "[ERROR]"
 labels: ''
