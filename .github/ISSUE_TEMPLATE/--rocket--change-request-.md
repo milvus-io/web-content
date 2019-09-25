@@ -1,5 +1,5 @@
 ---
-name: '":rocket: Change request"'
+name: ":rocket: Change request"
 about: Want to add something new? Suggest an idea for this Doc
 title: "[Suggestion]"
 labels: ''
