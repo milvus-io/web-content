@@ -1,5 +1,5 @@
 ---
-name: '"\U0001F41B Change request"'
+name: ":bug: Change request"
 about: Want to add something new? Suggest an idea for this Doc
 title: "[Suggestion]"
 labels: ''
