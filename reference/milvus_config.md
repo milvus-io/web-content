@@ -37,7 +37,7 @@ In the directory `home/$USER/milvus/conf`, open Milvus service configuration fil
 | Parameter   | Description                                                  | Type    | Default    |
 | ----------- | ------------------------------------------------------------ | ------- | ---------- |
 | `address`   | IP address that Milvus server monitors.                      | String | `0.0.0.0`  |
-| `port`      | Port that Milvus server monitors. Port range: 1025 ~ 65534. | Integer | `19530`    |
+| `port`      | Port that Milvus server monitors. Port range: 1025 - 65534. | Integer | `19530`    |
 | `deploy_mode` | Milvus deployment type. Options are `single` , `cluster_readonly` and `cluster_writable`. | DeployMode | `single`   |
 | `time_zone` | Use the UTC-x or UTC+x to specify a time zone. For example, use `UTC+8` for China Standard Time. | Timezone | `UTC+8`  |
 ### Section `db_config`
