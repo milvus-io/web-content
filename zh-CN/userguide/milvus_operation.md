@@ -139,7 +139,16 @@ Status(code=0, message='Success')
 [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
 ```
 
+若要查询某张表中一共插入了几条向量（表的总行数），请使用 `milvus.get_table_row_count`，后面跟要查询的表名。
 
+```python
+# Show number of vectors
+>>> status, num = milvus.get_table_row_count('test01')
+>>> status
+Status(code=0, message='Success')
+>>> num
+20
+```
 
 ## 创建索引
 
