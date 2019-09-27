@@ -7,6 +7,7 @@ sidebar_label: Learn Milvus Operations
 # Learn Milvus Operations
 
 This page walks you through some of the most essential Milvus operations using **Python** SDK.
+To learn the complete operations in Milvus, please read [Milvus Python SDK](https://pypi.org/project/pymilvus) and [Examples](https://github.com/milvus-io/pymilvus/blob/branch-0.4.0/examples/example.py)。
 
 ## Before trying out these operations
 
@@ -107,7 +108,6 @@ True
 
 > Note: If the table you verified is not available, `False` will be returned instead of `True`.
 
-> Note: If you want to learn more detailed operations in Milvus, you may read [Milvus Python SDK](https://pypi.org/project/pymilvus) and [Examples](https://github.com/milvus-io/pymilvus/blob/branch-0.4.0/examples/example.py)。
 
 ## Insert vectors into a table
 
@@ -142,6 +142,17 @@ You can also provide user-defined vector ids:
 >>> status, ids = milvus.add_vectors(table_name='test01', records=vectors, ids=vector_ids)
 >>> print(ids)
 [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+```
+
+To show the number of vectors inserted into a table (all of the rows from a table), use `milvus.get_table_row_count` followed by the table name.
+
+```python
+# Show number of vectors
+>>> status, num = milvus.get_table_row_count('test01')
+>>> status
+Status(code=0, message='Success')
+>>> num
+20
 ```
 
 ## Create an index
@@ -195,15 +206,13 @@ Below is the list of parameters for searching vectors in a table:
 | ------------------------- | ------------------------------------------------------------ | ------------------------------------- | ----------------------------------- |
 | `table_name`              | The name of the table to create, which must be unique within its database. <br/>Begin a table name with a letter or an underscore (_) . Subsequent characters can be letters, underscores, numbers (0-9). The entire length can not exceed 255 characters. | String                                | 'table name'                        |
 | `query_records`           | The list of query vectors to be searched in the table. Each vector value must be a float data type, with the same dimension as that defined for the table. | 2-dimensional list                    | [[0.1, 0.2, ...], ...]              |
-| `top_k`                   | The top k most similar results of each target vector.        | Integer                               | 0 < top_k <= 1000                   |
+| `top_k`                   | The top k most similar results of each query vector.        | Integer                               | 0 < top_k <= 1000                   |
 | `nprobe`                  | Number of queried vector buckets. <br/>`nprobe` affects search precision. The greater the value, the more precise the result, yet the slower the search speed. | Integer                               | 1 - 16384                           |
 | `query_ranges` (optional) | An optional, comma-separated list that defines the condition by which the search is filtered. <br/>For example you can search within a specific date range. The default value `None` (no range, meaning to search the entire database) is used if you leave this parameter out. | List (Suggest to use Tuple data type) | [('2019-01-01', '2019-01-02'), ...] |
 
 > Note: Currently, only date range is supported in `query_ranges`. The date format is 'yyyy-mm-dd'. The date range [2019.1.1, 2019.1.5] contains 2019.1.1 and 2019.1.5.
 
-To search a batch of vectors, use `milvus.search_vectors` followed by the table from which to retrieve the data, the target vectors to be searched, and the number of mapping vectors that will be returned for each target vector.
-
-> Note: A target vector refers to the vector that is the target of the search. A mapping vector is a search result that is proven to be similar to the target vector. 
+To search a batch of vectors, use `milvus.search_vectors` followed by the table from which to retrieve the data, the query vectors, and the number of vectors that will be returned for each query vector.
 
 Suppose you want to search the top 5 most similar vectors of three 256-dimensional vectors (represented by `query_records` in below codes), you may:
 
