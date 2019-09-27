@@ -144,6 +144,17 @@ You can also provide user-defined vector ids:
 [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
 ```
 
+To show the number of vectors inserted into a table (all of the rows from a table), use `milvus.get_table_row_count` followed by the table name.
+
+```python
+# Show number of vectors
+>>> status, num = milvus.get_table_row_count('test01')
+>>> status
+Status(code=0, message='Success')
+>>> num
+20
+```
+
 ## Create an index
 
 Below is the list of parameters for creating index for a table:
