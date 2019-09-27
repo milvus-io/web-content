@@ -36,46 +36,42 @@ In the directory `home/$USER/milvus/conf`, open Milvus service configuration fil
 
 | Parameter   | Description                                                  | Type    | Default    |
 | ----------- | ------------------------------------------------------------ | ------- | ---------- |
-| `address`   | IP address that Milvus server monitors.                      | string  | `0.0.0.0`  |
-| `port`      | Port that Milvus server monitors.                            | integer | `19530`    |
-| `mode`      | Milvus deployment type. Select either `single` or `cluster`. | boolean | `single`   |
+| `address`   | IP address that Milvus server monitors.                      | String | `0.0.0.0`  |
+| `port`      | Port that Milvus server monitors. Port range: 1025 ~ 65534. | Integer | `19530`    |
+| `deploy_mode` | Milvus deployment type. Options are `single` , `cluster_readonly` and `cluster_writable`. | DeployMode | `single`   |
 | `time_zone` | Use the UTC-x or UTC+x to specify a time zone. For example, use `UTC+8` for China Standard Time. | Timezone | `UTC+8`  |
 ### Section `db_config`
 
 | Parameter                | Description                                                  | Type    | Default         |
 | ------------------------ | ------------------------------------------------------------ | ------- | --------------- |
-| `db_path`                | Primary directory for the data files you want to import.     | path    | `/opt/data`    |
-| `db_slave_path`          | A semicolon-separated list of secondary directories for the data files imported into Milvus.  Set this parameter when the data size is too much to fit in the primary directory set in `db_path`. <br/>Each file, whether in `db_path` or `db_slave_path`, is assigned an equal part of the imported data.  Data Size per Directory = Total Data Size / Number of Directories. So make sure the available storage space in these files are enough. | path    |            |
-| `db_backend_url`         | URL for metadata storage. Use SQLite (for single server Milvus) or MySQL (for distributed cluster) to store the metadata. <br/>The format of db_backend_url is: `dialect://username:password@host:port/database`. (`dialect` can be either `mysql` or `sqlite`, depending on which database you use. | path    | `sqlite://:@:/`       |
-| `archive_disk_threshold` | Minimum data storage size beyond which archive action is triggered. | integer | `0` (GB)        |
-| `archive_days_threshold` | Maximum number of days files are kept. Files older than the specified days will be archived. | integer | `0` (day)       |
-| `insert_buffer_size`     | Maximum buffer size allowed for data insertion. The sum of `insert_buffer_size` and `cpu_cache_capacity` (in "Section `cache_config`" ) should be < total memory. | integer | `4` (GB)        |
-| `build_index_gpu`        | If multiple GPU are used in Milvus, define which GPU is used for index building. Currently, you can only assign one GPU card for this function. | integer | `0 `            |
+| `primary_path`         | Primary directory used for both the vector data files you want to import, and the metadata. | Path   | `/opt/data`    |
+| `secondary_path` | A semicolon-separated list of secondary directories used only for the vector data files imported into Milvus. Set this parameter when the data size is too much to fit in the primary directory set in `db_path`. <br/>Each file, whether in `primary_path` or `secondary_path`, is assigned an equal part of the imported data.  Data Size per Directory = Total Data Size / Number of Directories. So make sure the available storage space in these files are enough. | Path   |            |
+| `backend_url`         | URL for metadata storage. Use SQLite (for single server Milvus) or MySQL (for distributed cluster) to store the metadata. <br/>The format of db_backend_url is: `dialect://username:password@host:port/database`. (`dialect` can be either `mysql` or `sqlite`, depending on which database you use. | Path   | `sqlite://:@:/`       |
+| `insert_buffer_size`     | Maximum buffer size allowed for data insertion. The sum of `insert_buffer_size` and `cpu_cache_capacity` (in "Section `cache_config`" ) should be < total memory. | Integer | `4` (GB)        |
+| `build_index_gpu`        | The device id of GPU used for building index. <br/>If multiple GPU are used in Milvus, define which GPU is used for index building. Currently, you can only assign one GPU for this function. | Integer | `0 `            |
 
 ### Section `metric_config`
 
-| Parameter                 | Description                                      | Type    | Default      |
-| ------------------------- | ------------------------------------------------ | ------- | ------------ |
-| `is_startup`              | Set to `true` to enable the monitoring function. | boolean | `true`       |
-| `collector`               | Connected monitoring system to collect metrics.  | string  | `Prometheus` |
-| `port`                    | Port to visit Prometheus.                        | integer | `8080`       |
-| `push_gateway_ip_address` | IP address of Prometheus push gateway.           | string  | `127.0.0.1`  |
-| `push_gateway_port`       | Port of Prometheus push gateway.                 | integer | `9091`       |
+| Parameter        | Description                                      | Type    | Default      |
+| ---------------- | ------------------------------------------------ | ------- | ------------ |
+| `enable_monitor` | Set to `true` to enable the monitoring function. | Boolean | `true`       |
+| `collector`      | Connected monitoring system to collect metrics.  | String  | `Prometheus` |
+| `port`           | Port to visit Prometheus.                        | Integer | `8080`       |
 
 ### Section `cache_config`
 
-| Parameter                  | Description                                                  | Type    | Default   |
-| -------------------------- | ------------------------------------------------------------ | ------- | --------- |
-| `cpu_cache_capacity`       | Memory used for cache in CPU. The maximum value should not exceed total memory. | integer | `16` (GB) |
-| `cache_free_percent`       | The percentage of data that can be kept in the CPU memory when the cache is full (when data size reaches `cpu_cache_capacity`). <br/>For example, the default value indicates that 85% of data stored in the CPU cache doesn't need to be erased. The value should be 0 -1. | float   | `0.85`    |
-| `insert_cache_immediately` | If set to `true` , the inserted data will be loaded into the cache immediately for hot query. <br/>If you want simultaneous inserting and searching of vector, it is recommended to enable this function. | boolean | `false`   |
+| Parameter             | Description                                                  | Type    | Default   |
+| --------------------- | ------------------------------------------------------------ | ------- | --------- |
+| `cpu_cache_capacity`  | Memory used for cache in CPU. The maximum value should not exceed total memory. | Integer | `16` (GB) |
+| `cpu_cache_threshold` | The percentage of data that can be kept in the CPU memory when the cache usage exceeds `cpu_cache_capacity`. <br/>For example, the default value indicates that 85% of data stored in the CPU cache doesn't need to be erased. The value should be 0 - 1. | Float   | `0.85`    |
+| `cache_insert_data`   | If set to `true` , the inserted data will be loaded into the cache immediately for hot query. <br/>If you want simultaneous inserting and searching of vector, it is recommended to enable this function. | Boolean | `false`   |
 
 
 ### Section `engine_config`
 
 | Parameter            | Description                                                  | Type    | Default |
 | -------------------- | ------------------------------------------------------------ | ------- | ------- |
-| `use_blas_threshold` | A Milvus performance tuning parameter. The threshold value must be compared with `nq` to decide if the usage of OpenBLAS or Intel MKL libraries will be triggered. <br/>If `nq` > `use_blas_threshold` , the search response times do not fluctuate, but the search speed is relatively slow. If `nq` < `use_blas_threshold` , the search speed will be enhanced, however with slight fluctuation of search response times. The value should be >= 0. | integer | `20`   |
+| `use_blas_threshold` | A Milvus performance tuning parameter. The threshold value must be compared with `nq` to decide if the usage of OpenBLAS library will be triggered. <br/>If `nq` >= `use_blas_threshold` , OpenBLAS will be used. The search response times do not fluctuate, but the search speed is relatively slow. <br/>If `nq` < `use_blas_threshold` , SSE will be used. The search speed will be enhanced, however with slight fluctuation of search response times. The value should be >= 0. | Integer | `20`   |
 
 ### Section `resource_config`
 
@@ -85,10 +81,9 @@ In Milvus, as the **index building** and **search computation** are separate pro
 - Search computation can be executed in either `cpu` or `gpu`. If you choose `gpu` for this process, you can assign multiple GPUs. 
 - The `gpu` used for index building can also be used for search computation. 
 
-| Parameter   | Description                                                  | Type         | Default  |
-| ----------- | ------------------------------------------------------------ | ------------ | -------- |
-| `mode`      | Resource configuration type. Currently, there is only a `simple` type. | ResourceMode | `simple` |
-| `resources` | Define the resource type used for search in Milvus, e.g. `cpu` or `gpu0` | ResourceType | `gpu0`   |
+| Parameter       | Description                                                  | Type         | Default |
+| --------------- | ------------------------------------------------------------ | ------------ | ------- |
+| `resource_pool` | Define the resource type used for search in Milvus, e.g. `cpu` or `gpu0` | ResourceType | `gpu0`  |
 
 Define in this section the resources **used for search** in Milvus. 
 
