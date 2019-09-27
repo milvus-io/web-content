@@ -6,7 +6,7 @@ sidebar_label: Learn Milvus Operations
 
 # 了解 Milvus 操作
 
-该页面将向你展示如何使用 Python 接口运行 Milvus 基本操作。
+该页面将向您展示如何使用 Python 接口运行 Milvus 基本操作。若要了解更多 Milvus 操作，你可以参照 [Milvus Python SDK](https://pypi.org/project/pymilvus)和 [使用示例](https://github.com/milvus-io/pymilvus/blob/branch-0.4.0/examples/example.py)。
 
 ## 运行操作前的准备
 
@@ -104,8 +104,6 @@ True
 
 > 注意：如果查询的表不存在，则以上代码中返回值为 `False`。
 
-> 注意：若要了解更多 Milvus 操作，你可以参照 [Milvus Python SDK](https://pypi.org/project/pymilvus)和 [使用示例](https://github.com/milvus-io/pymilvus/blob/branch-0.4.0/examples/example.py)。
-
 ## 将向量插入表
 
 > 注意：在实际生产环境中，在插入向量之前，建议先使用 `milvus.create_index` 为表创建索引，如此将极大减少向量插入和创建索引的总时间。如果选择这么做，在向量插入结束后，相同的索引需要手动再创建一次，因为可能存在大小不满足 `index_file_size` 的数据文件（这意味着系统不会为这个文件自动创建索引）。
@@ -141,7 +139,16 @@ Status(code=0, message='Success')
 [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
 ```
 
+若要查询某张表中一共插入了几条向量（表的总行数），请使用 `milvus.get_table_row_count`，后面跟要查询的表名。
 
+```python
+# Show number of vectors
+>>> status, num = milvus.get_table_row_count('test01')
+>>> status
+Status(code=0, message='Success')
+>>> num
+20
+```
 
 ## 创建索引
 
@@ -202,8 +209,6 @@ Status(code=0, message='Success')
 > 注意：目前搜索范围仅支持日期范围，格式为'yyyy-mm-dd'，为左闭右闭模式。比如您将范围定为[2019.1.1, 2019.1.5]，则搜索范围为2019.1.1到2019.1.5，并且包含2019.1.1和2019.1.5。
 
 请使用 `milvus.search_vectors` 来搜索向量，后面跟要搜索的表的名字，要搜索的目标向量，以及您期望返回的与每个目标向量最相似的匹配向量个数。
-
-> 注意：一个目标向量是指要在数据库中搜索的向量。一个匹配向量代表搜索出的与目标向量相似的向量。
 
 假设您要针对3条256维的目标向量（在下面代码中用q_records表示），搜索与每条目标向量相似度最高的前5条匹配向量，您可以：
 
