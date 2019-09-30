@@ -5,7 +5,7 @@ sidebar_label: Install Milvus
 ---
 # 安装 Milvus
 
-点击 [版本发布](../Releases/v0.4.0.md) 了解最新版本的功能。
+点击 [版本发布](../release/v0.4.0.md) 了解最新版本的功能。
 
 ## 安装前提
 

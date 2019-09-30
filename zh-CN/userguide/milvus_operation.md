@@ -269,3 +269,4 @@ Status(message='Delete table successfully!', code=0)
 
 - [体验 Milvus 在线训练营](https://github.com/milvus-io/bootcamp) 了解更多解决方案
 - [故障诊断 API 行为](troubleshoot.md)
+
