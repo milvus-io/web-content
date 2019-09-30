@@ -11,10 +11,10 @@ sidebar_label: Install Milvus
 
 1. 请确保您的 Linux 系统符合以下版本：
 
-| Linux 操作系统平台 | 版本             |
-| :----------------- | :--------------- |
-| CentOS             | 7.5 and higher   |
-| Ubuntu LTS         | 16.04 and higher |
+   | Linux 操作系统平台 | 版本             |
+   | :----------------- | :--------------- |
+   | CentOS             | 7.5 and higher   |
+   | Ubuntu LTS         | 16.04 and higher |
 
 2. 请确保您已经安装以下软件包：
 
