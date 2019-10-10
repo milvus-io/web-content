@@ -14,7 +14,7 @@ sidebar_label: Install Milvus
 | Linux 操作系统平台 | 版本             |
 | :----------------- | :--------------- |
 | CentOS             | 7.5 and higher   |
-| Ubuntu LTS         | 16.04 and higher |
+| Ubuntu LTS         | 18.04 and higher |
 
 2. 请确保您已经安装以下软件包：
 
@@ -37,7 +37,7 @@ sidebar_label: Install Milvus
 
    > 提示：在 Linux 上，Docker 需要带 sudo。
 
-2. 拉取 Milvus 0.4.0 版本的镜像：
+2. 拉取 Milvus 0.5.0 版本的镜像：
 
    ```
    sudo docker pull milvusdb/milvus:latest
