@@ -9,7 +9,8 @@ sidebar_label: Milvus Changelog
 ## [v0.5.0] 2019-10-15
 
 ### Improvements
-- \#77 Add a new index type NSG; Update Milvus configuration file
+- \#77 Add a new index type NSG; Update some parameter names in Milvus configuration file
+- \#78 Add a new parameter `preload_table` in Milvus config file
 
 
 
