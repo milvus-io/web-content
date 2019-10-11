@@ -6,7 +6,7 @@ sidebar_label: Install Milvus
 
 # Install Milvus 
 
-See [here](../Releases/v0.4.0.md) for what's new in the latest release. 
+See [here](../release/v0.4.0.md) for what's new in the latest release. 
 
 ## Before the install
 
@@ -15,7 +15,7 @@ See [here](../Releases/v0.4.0.md) for what's new in the latest release.
 | Linux operation system | Supported versions |
 | :--------------------- | :----------------- |
 | CentOS                 | 7.5 and higher     |
-| Ubuntu LTS             | 16.04 and higher   |
+| Ubuntu LTS             | 18.04 and higher   |
 
 2. Make sure the following software packages are installed:
 
@@ -38,7 +38,7 @@ See [here](../Releases/v0.4.0.md) for what's new in the latest release.
 
    > Note: On Linux, Docker needs sudo privileges.
 
-2. Pull the image for the v0.4.0 release of Milvus:
+2. Pull the image for the v0.5.0 release of Milvus:
 
    ```
    sudo docker pull milvusdb/milvus:latest

@@ -4,15 +4,12 @@ title: Changelog
 sidebar_label: Milvus Changelog
 ---
 
-# Changelog
+# Milvus Docs Changelog
 
-Please mark all change in change log and use the ticket from JIRA.
+## [v0.5.0] 2019-10-15
 
-# Milvus Docs 0.3.0 (TBD)
+### Improvements
+- \#77 Add a new index type NSG; Update Milvus configuration file
 
-## Bug
 
-## Task
 
-\#1 Add QuickStart Chapter
-\#2 Add User Guide
