@@ -19,10 +19,13 @@ See [here](../release/v0.4.0.md) for what's new in the latest release.
 
 2. Make sure the following software packages are installed:
 
-   - [NVIDIA driver 418 or higher](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html)
+   - NVIDIA driver 418 or higher
+   
+     To install NVIDIA driver 418 or higher, on your desktop, go to **Software & Updates** -> **Additional Drivers**, and select a NVIDIA driver version you want to install. Then click **Apply Changes**. 
+   
    - [Docker 19.03 or higher](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/)
    
-   > Note: If you are running an old version of docker (< 19.03), it is recommended to install [nvidia-docker2](https://github.com/NVIDIA/nvidia-docker/wiki/Installation-(version-2.0)) package. If you already have the old package installed (nvidia-docker2), updating to the latest Docker version (>= 19.03) will still work.  
+   - [nvidia-docker2](https://github.com/NVIDIA/nvidia-docker/wiki/Installation-(version-2.0)) 
    
    > Note: You don't have to install CUDA seperately, as it is included in Milvus Docker container.
 
@@ -66,9 +69,16 @@ See [here](../release/v0.4.0.md) for what's new in the latest release.
 5. Confirm Milvus running status.
 
    ```shell
+   # Confirm Milvus status
+   $ docker ps
+   ```
+   
+   If Milvus server is not successfully started, you can check the error logs by the following command. 
+   
+   ```shell
    # Get Milvus container id
    $ docker ps -a
-   # Make sure Milvus is up and running
+   # Check docker logs
    $ docker logs <milvus container id>
    ```
 

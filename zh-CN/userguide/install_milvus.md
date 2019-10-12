@@ -18,10 +18,13 @@ sidebar_label: Install Milvus
 
 2. 请确保您已经安装以下软件包：
 
-   - [NVIDIA driver 418 及以上](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html)
+   - NVIDIA driver 418 及以上
+   
+     若要安装 NVIDIA driver 418 或更高版本，在电脑桌面，进入 **Software & Updates** -> **Additional Drivers**，选择需要安装的 NVIDIA driver 版本，然后点击 **Apply Changes**。
+   
    - [Docker 19.03 及以上](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/)
    
-   > 注意：如果您已安装更老版本的 Docker (< 19.03)，建议安装 [nvidia-docker2](https://github.com/NVIDIA/nvidia-docker/wiki/Installation-(version-2.0))。如果你已安装 nvidia-docker2，您也可以将 Docker 升级到最新版本 (>= 19.03)。
+   - [nvidia-docker2](https://github.com/NVIDIA/nvidia-docker/wiki/Installation-(version-2.0))
    
    > 注意：您无需单独安装 CUDA 环境，它已经包含在 Milvus Docker 容器里。
    
@@ -65,9 +68,16 @@ sidebar_label: Install Milvus
 5. 确认 Milvus 运行状态。
 
    ```shell
+   # Confirm Milvus status
+   $ docker ps
+   ```
+   
+   如果 Milvus 服务没有正常启动，您可以执行以下命令查询错误日志。
+   
+   ```shell
    # Get Milvus container id
    $ docker ps -a
-   # Make sure Milvus is up and running
+   # Check docker logs
    $ docker logs <milvus container id>
    ```
 
