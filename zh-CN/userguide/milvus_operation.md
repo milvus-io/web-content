@@ -6,11 +6,11 @@ sidebar_label: Learn Milvus Operations
 
 # 了解 Milvus 操作
 
-该页面将向您展示如何使用 Python 接口运行 Milvus 基本操作。若要了解更多 Milvus 操作，你可以参照 [Milvus Python SDK](https://pypi.org/project/pymilvus)和 [使用示例](https://github.com/milvus-io/pymilvus/blob/branch-0.4.0/examples/example.py)。
+该页面将向您展示如何使用 [Python SDK](https://pypi.org/project/pymilvus) 运行 Milvus 基本操作。您也可以使用其它语言如 [Java](https://milvus-io.github.io/milvus-sdk-java/javadoc/index.html), C++ 等来进行这些操作。
 
 ## 运行操作前的准备
 
-请使用 Milvus 自带的 Python 客户端 - pymilvus 运行下列操作。您也可以使用其它语言如C++，RESTful API等来进行这些操作。
+请使用 Milvus 自带的 Python 客户端 - pymilvus 运行下列操作。
 
 1. 导入 pymilvus.
 
@@ -106,7 +106,7 @@ True
 
 ## 将向量插入表
 
-> 注意：在实际生产环境中，在插入向量之前，建议先使用 `milvus.create_index` 为表创建索引，如此将极大减少向量插入和创建索引的总时间。如果选择这么做，在向量插入结束后，相同的索引需要手动再创建一次，因为可能存在大小不满足 `index_file_size` 的数据文件（这意味着系统不会为这个文件自动创建索引）。
+> 注意：在实际生产环境中，在插入向量之前，建议先使用 `milvus.create_index` 以便系统自动增量创建索引。需要注意的是，在向量插入结束后，相同的索引需要手动再创建一次（因为可能存在大小不满足 `index_file_size` 的数据文件，系统不会为该文件自动创建索引）。
 
 以下是向量插入的参数列表：
 

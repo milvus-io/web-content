@@ -6,12 +6,12 @@ sidebar_label: Learn Milvus Operations
 
 # Learn Milvus Operations
 
-This page walks you through some of the most essential Milvus operations using **Python** SDK.
-To learn the complete operations in Milvus, please read [Milvus Python SDK](https://pypi.org/project/pymilvus) and [Examples](https://github.com/milvus-io/pymilvus/blob/branch-0.4.0/examples/example.py)。
+This page walks you through some of the most essential Milvus operations using [**Python** SDK](https://pypi.org/project/pymilvus).
+You can also use other languages such as [Java](https://milvus-io.github.io/milvus-sdk-java/javadoc/index.html), C++, etc.
 
 ## Before trying out these operations
 
-Please use pymilvus, the built-in Python client, to try out these operations. If you want, you can also use other languages such as C++, RESTful API, etc.
+Please use pymilvus, the built-in Python client, to try out these operations. 
 
 Just type **python** at your console, hit `Enter`, and you should enter Python’s Interpreter.
 
@@ -111,7 +111,7 @@ True
 
 ## Insert vectors into a table
 
-> Note: In the production scenario, it is recommended to use the `milvus.create_index` before inserting vectors into the table. This triggers the simultaneous vector inserting and index building process, which takes much less time. However, in doing so, you need to create the same index again after the vector insertion process is completed, in case there are any data file that does not meet the `index_file_size` (which means index will not be automatically built for this data file).
+> Note: In the production scenario, it is recommended to use the `milvus.create_index` before inserting vectors into the table. Index will be automatically built as vectors are being imported.  However, in doing so, you need to create the same index again after the vector insertion process is completed, in case there are any data file that does not meet the `index_file_size` (which means index will not be automatically built for this data file).
 
 Below is the list of parameters for inserting vectors into a table:
 
