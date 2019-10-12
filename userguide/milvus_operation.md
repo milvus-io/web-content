@@ -6,12 +6,12 @@ sidebar_label: Learn Milvus Operations
 
 # Learn Milvus Operations
 
-This page walks you through some of the most essential Milvus operations using **Python** SDK.
-To learn the complete operations in Milvus, please read [Milvus Python SDK](https://pypi.org/project/pymilvus) and [Examples](https://github.com/milvus-io/pymilvus/blob/branch-0.4.0/examples/example.py)。
+This page walks you through some of the most essential Milvus operations using [**Python** SDK](https://pypi.org/project/pymilvus).
+You can also use other languages such as [Java](https://milvus-io.github.io/milvus-sdk-java/javadoc/index.html), C++, etc.
 
 ## Before trying out these operations
 
-Please use pymilvus, the built-in Python client, to try out these operations. If you want, you can also use other languages such as C++, RESTful API, etc.
+Please use pymilvus, the built-in Python client, to try out these operations. 
 
 Just type **python** at your console, hit `Enter`, and you should enter Python’s Interpreter.
 

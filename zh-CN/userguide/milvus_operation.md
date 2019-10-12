@@ -6,11 +6,11 @@ sidebar_label: Learn Milvus Operations
 
 # 了解 Milvus 操作
 
-该页面将向您展示如何使用 Python 接口运行 Milvus 基本操作。若要了解更多 Milvus 操作，你可以参照 [Milvus Python SDK](https://pypi.org/project/pymilvus)和 [使用示例](https://github.com/milvus-io/pymilvus/blob/branch-0.4.0/examples/example.py)。
+该页面将向您展示如何使用 [Python SDK](https://pypi.org/project/pymilvus) 运行 Milvus 基本操作。您也可以使用其它语言如 [Java](https://milvus-io.github.io/milvus-sdk-java/javadoc/index.html), C++ 等来进行这些操作。
 
 ## 运行操作前的准备
 
-请使用 Milvus 自带的 Python 客户端 - pymilvus 运行下列操作。您也可以使用其它语言如C++，RESTful API等来进行这些操作。
+请使用 Milvus 自带的 Python 客户端 - pymilvus 运行下列操作。
 
 1. 导入 pymilvus.
 
