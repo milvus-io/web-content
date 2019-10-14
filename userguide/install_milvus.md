@@ -10,7 +10,14 @@ See [here](../release/v0.4.0.md) for what's new in the latest release.
 
 ## Before the install
 
-1. Make sure your Linux distribution is [Ubuntu LTS 18.04](https://tutorials.ubuntu.com/tutorial/tutorial-install-ubuntu-desktop#0) or higher. 
+1. Make sure your Linux distribution is one of the following:
+
+   | Linux operation system | Supported versions |
+   | :--------------------- | :----------------- |
+   | CentOS                 | 7.5 and higher     |
+   | Ubuntu LTS             | 18.04 and higher   |
+   
+   If you haven't installed Ubuntu before, refer to this tutorial of [how to install Ubuntu LTS 18.04](https://tutorials.ubuntu.com/tutorial/tutorial-install-ubuntu-desktop#0).
 
 2. Make sure the following software packages are installed:
 
