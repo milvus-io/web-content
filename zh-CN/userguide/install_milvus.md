@@ -9,18 +9,13 @@ sidebar_label: Install Milvus
 
 ## 安装前提
 
-1. 请确保您的 Linux 系统符合以下版本：
-
-| Linux 操作系统平台 | 版本             |
-| :----------------- | :--------------- |
-| CentOS             | 7.5 and higher   |
-| Ubuntu LTS         | 18.04 and higher |
+1. 请确保您安装了 Linux 系统，版本是 [Ubuntu LTS 18.04](https://www.linuxtechi.com/ubuntu-18-04-lts-desktop-installation-guide-screenshots/) 或以上。
 
 2. 请确保您已经安装以下软件包：
 
    - NVIDIA driver 418 及以上
    
-     若要安装 NVIDIA driver 418 或更高版本，在电脑桌面，进入 **Software & Updates** -> **Additional Drivers**，选择需要安装的 NVIDIA driver 版本，然后点击 **Apply Changes**。
+     若要安装 NVIDIA driver 418，在电脑桌面，进入 **Software & Updates** -> **Additional Drivers**。选择 **Using NVIDIA driver metapackage from nvidia-driver-418 **，然后点击 **Apply Changes**。
    
    - [Docker 19.03 及以上](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/)
    

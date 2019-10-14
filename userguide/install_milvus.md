@@ -10,18 +10,13 @@ See [here](../release/v0.4.0.md) for what's new in the latest release.
 
 ## Before the install
 
-1. Make sure your Linux distribution is one of the following:
-
-| Linux operation system | Supported versions |
-| :--------------------- | :----------------- |
-| CentOS                 | 7.5 and higher     |
-| Ubuntu LTS             | 18.04 and higher   |
+1. Make sure your Linux distribution is [Ubuntu LTS 18.04](https://www.linuxtechi.com/ubuntu-18-04-lts-desktop-installation-guide-screenshots/) or higher. 
 
 2. Make sure the following software packages are installed:
 
    - NVIDIA driver 418 or higher
    
-     To install NVIDIA driver 418 or higher, on your desktop, go to **Software & Updates** -> **Additional Drivers**, and select a NVIDIA driver version you want to install. Then click **Apply Changes**. 
+     To install NVIDIA driver 418, on your desktop, launch **Software & Updates** utility, and go to **Additional Drivers** tab. Select **Using NVIDIA driver metapackage from nvidia-driver-418 **, and click **Apply Changes**. 
    
    - [Docker 19.03 or higher](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/)
    
