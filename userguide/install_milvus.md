@@ -10,7 +10,7 @@ See [here](../release/v0.4.0.md) for what's new in the latest release.
 
 ## Before the install
 
-1. Make sure your Linux distribution is [Ubuntu LTS 18.04](https://www.linuxtechi.com/ubuntu-18-04-lts-desktop-installation-guide-screenshots/) or higher. 
+1. Make sure your Linux distribution is [Ubuntu LTS 18.04](https://tutorials.ubuntu.com/tutorial/tutorial-install-ubuntu-desktop#0) or higher. 
 
 2. Make sure the following software packages are installed:
 

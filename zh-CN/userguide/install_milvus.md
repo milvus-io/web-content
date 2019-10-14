@@ -9,7 +9,7 @@ sidebar_label: Install Milvus
 
 ## 安装前提
 
-1. 请确保您安装了 Linux 系统，版本是 [Ubuntu LTS 18.04](https://www.linuxtechi.com/ubuntu-18-04-lts-desktop-installation-guide-screenshots/) 或以上。
+1. 请确保您安装了 Linux 系统，版本是 [Ubuntu LTS 18.04](https://tutorials.ubuntu.com/tutorial/tutorial-install-ubuntu-desktop#0) 或以上。
 
 2. 请确保您已经安装以下软件包：
 
