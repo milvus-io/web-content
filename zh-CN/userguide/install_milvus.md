@@ -16,7 +16,7 @@ sidebar_label: Install Milvus
    | CentOS             | 7.5 and higher   |
    | Ubuntu LTS         | 18.04 and higher |
    
-   如果您从未安装过 Ubuntu 系统，请参考 [如何安装Ubuntu LTS 18.04](https://tutorials.ubuntu.com/tutorial/tutorial-install-ubuntu-desktop#0)。
+   如果您从未安装过 Ubuntu 系统，请参考 [如何安装 Ubuntu LTS 18.04](https://tutorials.ubuntu.com/tutorial/tutorial-install-ubuntu-desktop#0)。
    
 2. 请确保您已经安装以下软件包：
 
