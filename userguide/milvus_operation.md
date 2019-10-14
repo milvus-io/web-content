@@ -1,4 +1,5 @@
 ---
+
 id: milvus_operation
 title: Learn Milvus Operations
 sidebar_label: Learn Milvus Operations
@@ -97,6 +98,17 @@ To show the metadata of a particular table:
 Status(message='Describe table successfully!')
 >>> table
 TableSchema(table_name='test01',dimension=256, index_file_size=1024, metric_type=<MetricType: L2>)
+```
+
+To show all the rows of a table, use `milvus.get_table_row_count` followed by the table name:
+
+```python 
+# Show table rows
+>>> status, num = milvus.get_table_row_count('test01')
+>>> status
+Status(code=0, message='Success')
+>>> num
+20
 ```
 
 To verity if a table exists in Milvus, use this command:
