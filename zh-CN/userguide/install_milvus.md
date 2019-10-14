@@ -16,13 +16,11 @@ sidebar_label: Install Milvus
    | CentOS             | 7.5 and higher   |
    | Ubuntu LTS         | 18.04 and higher |
    
-   如果您从未安装过 Ubuntu 系统，请参考 [如何安装 Ubuntu LTS 18.04](https://tutorials.ubuntu.com/tutorial/tutorial-install-ubuntu-desktop#0)。
-   
 2. 请确保您已经安装以下软件包：
 
    - NVIDIA driver 418 及以上
    
-     若要安装 NVIDIA driver 418，在电脑桌面，进入 **Software & Updates** -> **Additional Drivers**。选择 **Using NVIDIA driver metapackage from nvidia-driver-418 **，然后点击 **Apply Changes**。
+     若要安装 NVIDIA driver 418，在电脑桌面，进入 **Software & Updates** -> **Additional Drivers**。选择 **Using NVIDIA driver metapackage from nvidia-driver-418**，然后点击 **Apply Changes**。
    
    - [Docker 19.03 及以上](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/)
    
