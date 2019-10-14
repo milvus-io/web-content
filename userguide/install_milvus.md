@@ -16,14 +16,12 @@ See [here](../release/v0.4.0.md) for what's new in the latest release.
    | :--------------------- | :----------------- |
    | CentOS                 | 7.5 and higher     |
    | Ubuntu LTS             | 18.04 and higher   |
-   
-   If you haven't installed Ubuntu before, refer to this tutorial of [how to install Ubuntu LTS 18.04](https://tutorials.ubuntu.com/tutorial/tutorial-install-ubuntu-desktop#0).
 
 2. Make sure the following software packages are installed:
 
    - NVIDIA driver 418 or higher
    
-     To install NVIDIA driver 418, on your desktop, launch **Software & Updates** utility, and go to **Additional Drivers** tab. Select **Using NVIDIA driver metapackage from nvidia-driver-418 **, and click **Apply Changes**. 
+     To install NVIDIA driver 418, on your desktop, launch **Software & Updates** utility, and go to **Additional Drivers** tab. Select **Using NVIDIA driver metapackage from nvidia-driver-418**, and click **Apply Changes**. 
    
    - [Docker 19.03 or higher](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/)
    
