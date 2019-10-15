@@ -100,6 +100,14 @@ def test_add_vector_search_multiprocessing(self, connect, table):
         p.join()
 ```
 
+### 为什么搜索 top K 的向量，结果不到 K 条向量？
+
+在 Milvus 支持的索引类型中，`IVFLAT` 和 `IVF_SQ8` 是基于 k-means 空间划分的分桶搜索算法。空间被分为 `nlist` 个桶，导入的向量被分配存储在基于 `nlist` 划分的文件结构中。搜索发生时，只搜索最近似的 `nprobe` 个文件。
+
+如果 `nlist` 和 K 比较大，而 `nprobe` 又足够小时，有可能出现 `nprobe` 文件中的所有向量总数小于 K。当你搜索 top K 向量时，就会出现搜索结果小于 K 条向量的情况。
+
+想要避免这种情况，您可以尝试将 `nprobe` 设置为更大值，或是把 `nlist` 和 K 设置小一点。
+
 ### 相关阅读
 
 [产品 FAQ](product_faq.md)
