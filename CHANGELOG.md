@@ -13,6 +13,7 @@ sidebar_label: Milvus Changelog
 - \#78 Add a new parameter `preload_table` in Milvus config file
 - \#79 Add Java SDK doc
 - \#83 Add table row count SDK
+- \#85 Add a description about "why search results are fewer than K in top K search" in Operational FAQ 
 
 
 
