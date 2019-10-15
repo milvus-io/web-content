@@ -15,7 +15,7 @@ In order to successfully run multiprocessing in Milvus, make sure the following 
 
 Below is a good example, to enable multiprocessing of vector insertion and search in a table named `TABLE_NAME`, with `vector_1` already in it. Note that in such execution, the search scope does not include the vectors that are being inserted simultaneously.
 
-```shell
+```python
 def test_add_vector_search_multiprocessing():
     '''
 	target: test add vectors, and search it with multiprocessing
@@ -60,7 +60,7 @@ def test_add_vector_search_multiprocessing():
 
 If a client already exists in the main process, enabling multiprocessing will lead to client hang and timeout. Below is a bad example to avoid, in which the `connect` is the client built in the main process.
 
-```shell
+```python
 def test_add_vector_search_multiprocessing(self, connect, table):
     '''
 	target: test add vectors, and search it with multiprocessing
@@ -95,6 +95,14 @@ def test_add_vector_search_multiprocessing(self, connect, table):
     for p in processes:
         p.join()
 ```
+
+### Why are the search results fewer than K when I try to search the top K vectors?
+
+In all the indexing types that Milvus supports, `IVFLAT` and `IVF_SQ8` are cell-probe methods that employ a partitioning technique called k-means. The feature space is partitioned into `nlist` cells, and vectors are assigned  to one of these cells (to the centroid closest to the query), and stored in an inverted file structure formed of `nlist` inverted lists. When query occurs, only a set of `nprobe` inverted lists are selected.
+
+If the `nlist` and K is relatively large, and `nprobe` is small enough, it happens that the vectors in `nprobe` lists are even fewer than K. Thus, when you search the top K vectors, the results would be fewer than K.
+
+In order to avoid this situation, you can try setting a larger `nprobe`, or smaller `nlist` and K.
 
 ### Related links
 
