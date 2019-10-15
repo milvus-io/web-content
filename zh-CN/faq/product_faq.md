@@ -49,6 +49,10 @@ Milvus 集群具备高可用性，其存储和计算等集群均容许部分组�
 - `IVF_SQ8`
 
   运用 scalar quantization 的向量索引，能大幅缩小向量体积（大概缩减3/4），从而能有效提高向量吞吐量。
+
+- `IVF_SQ8H`
+
+  `IVF_SQ8` 的增强版。支持 CPU 和 GPU 的混合查询，能极大提高搜索性能。若要使用该索引方式，请确保已同时选择了 `cpu` 和 `gpu` 用于 Milvus 搜索。具体配置请参考 [Milvus 配置](../reference/milvus_config.md) 里的 `resource_config` 区域。
   
 - `NSG`
 
