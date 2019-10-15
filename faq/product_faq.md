@@ -49,6 +49,12 @@ Currently Milvus supports the following index methods:
 - `IVF_SQ8`
 
   Adopts a scalar quantization strategy that significantly reduces the size of a vector (by about 3/4). It improves the overall throughput of vector processing.
+
+- `IVF_SQ8H`
+
+  An enhanced index algorithm of `IVF_SQ8`. It supports hybrid computation on both CPU and GPU, which significantly improves the search performance. 
+  
+  To use this index type, make sure both `cpu` and `gpu` are added as resources for usage in the [Milvus configuration file](../reference/milvus_config.md). 
   
 - `NSG`
 

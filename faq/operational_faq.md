@@ -102,7 +102,7 @@ In all the indexing types that Milvus supports, `IVFLAT` and `IVF_SQ8` are cell-
 
 If the `nlist` and K is relatively large, and `nprobe` is small enough, it happens that the vectors in `nprobe` lists are even fewer than K. Thus, when you search the top K vectors, the results would be fewer than K.
 
-In order to avoid this situation, you can try setting a larger `nprobe`, or smaller `nlist` and K.
+In order to avoid this situation, you can try increasing the value of `nprobe`, or smaller `nlist` and K.
 
 ### Related links
 
