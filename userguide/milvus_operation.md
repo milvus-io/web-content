@@ -230,7 +230,7 @@ Suppose you want to search the top 2 most similar vectors of three 256-dimension
 
 ```python
 # Search 3 vectors
->>> status, results = milvus.search_vectors(table_name='test01', query_records=q_records, top_k=5, nprobe=16)
+>>> status, results = milvus.search_vectors(table_name='test01', query_records=q_records, top_k=2, nprobe=16)
 >>> status
 Status(message='Search vectors successfully!', code=0)
 >>> results # Searched top_k vectors
@@ -250,7 +250,7 @@ To filter the results, add a `query_ranges` clause identifying the date range to
 
 ```python
 # Search 3 vectors
->>> status, results = milvus.search_vectors(table_name='test01', query_records=q_records, top_k=5, query_ranges=[('2019-06-01', '2019-06-05')] )
+>>> status, results = milvus.search_vectors(table_name='test01', query_records=q_records, top_k=2, query_ranges=[('2019-06-01', '2019-06-05')] )
 >>> status
 Status(message='Search vectors successfully!', code=0)
 >>> results # Searched top_k vectors
