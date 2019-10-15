@@ -40,7 +40,7 @@ Milvus 是 ZILLIZ 公司设计的分布式特征向量检索数据库，旨在�
 
 ## 整体架构
 
-![Milvus 架构](assets/milvus_arch.jpg)
+![Milvus 架构](assets/milvus_arch.png)
 
 ## 接下来您可以
 
