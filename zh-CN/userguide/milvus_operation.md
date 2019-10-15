@@ -221,21 +221,23 @@ Status(code=0, message='Success')
 
 请使用 `milvus.search_vectors` 来搜索向量，后面跟要搜索的表的名字，要搜索的目标向量，以及您期望返回的与每个目标向量最相似的匹配向量个数。
 
-假设您要针对3条256维的目标向量（在下面代码中用q_records表示），搜索与每条目标向量相似度最高的前5条匹配向量，您可以：
+假设您要针对3条256维的目标向量（在下面代码中用q_records表示），搜索与每条目标向量相似度最高的前2条匹配向量，您可以：
 
 ```python
 # Search 3 vectors
->>> status, results = milvus.search_vectors(table_name='test01', query_records=q_records, top_k=5, nprobe=16)
+>>> status, results = milvus.search_vectors(table_name='test01', query_records=q_records, top_k=2, nprobe=16)
 >>> status
 Status(message='Search vectors successfully!', code=0)
 >>> results # Searched top_k vectors
 >>> print(results) # Searched top_k vectors
 [
-[QueryResult(id=0, distance=34.85963439941406)],
-[QueryResult(id=0, distance=36.73900604248047)],
-[QueryResult(id=0, distance=34.35655975341797)],
-[QueryResult(id=18, distance=36.19701385498047)],
-[QueryResult(id=5, distance=39.11549758911133)]
+[(id:15, distance:2.855304718017578),
+ (id:16, distance:3.040700674057007)],
+[(id:11, distance:3.673950433731079),
+ (id:15, distance:4.183730602264404)],
+      ........
+[(id:6, distance:4.065953254699707),
+ (id:1, distance:4.149323463439941)]
 ]
 ```
 
@@ -243,13 +245,15 @@ Status(message='Search vectors successfully!', code=0)
 
 ```python
 # Search 3 vectors
->>> status, results = milvus.search_vectors(table_name='test01', query_records=q_records, top_k=5, query_ranges=[('2019-06-01', '2019-06-05')] )
+>>> status, results = milvus.search_vectors(table_name='test01', query_records=q_records, top_k=2, query_ranges=[('2019-06-01', '2019-06-05')] )
 >>> status
 Status(message='Search vectors successfully!', code=0)
 >>> results # Searched top_k vectors
-[[QueryResult(id=0, distance=34.85963439941406)],
-[QueryResult(id=0, distance=36.73900604248047)],
-[QueryResult(id=0, distance=34.35655975341797)],
+[
+[(id:15, distance:2.855304718017578),
+ (id:16, distance:3.040700674057007)],
+[(id:11, distance:3.673950433731079),
+ (id:15, distance:4.183730602264404)],
 ...
 ]
 ```

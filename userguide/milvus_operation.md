@@ -226,21 +226,23 @@ Below is the list of parameters for searching vectors in a table:
 
 To search a batch of vectors, use `milvus.search_vectors` followed by the table from which to retrieve the data, the query vectors, and the number of vectors that will be returned for each query vector.
 
-Suppose you want to search the top 5 most similar vectors of three 256-dimensional vectors (represented by `query_records` in below codes), you may:
+Suppose you want to search the top 2 most similar vectors of three 256-dimensional vectors (represented by `query_records` in below codes), you may:
 
 ```python
 # Search 3 vectors
->>> status, results = milvus.search_vectors(table_name='test01', query_records=q_records, top_k=5, nprobe=16)
+>>> status, results = milvus.search_vectors(table_name='test01', query_records=q_records, top_k=2, nprobe=16)
 >>> status
 Status(message='Search vectors successfully!', code=0)
 >>> results # Searched top_k vectors
 >>> print(results) # Searched top_k vectors
 [
-[QueryResult(id=0, distance=34.85963439941406)],
-[QueryResult(id=0, distance=36.73900604248047)],
-[QueryResult(id=0, distance=34.35655975341797)],
-[QueryResult(id=18, distance=36.19701385498047)],
-[QueryResult(id=5, distance=39.11549758911133)]
+[(id:15, distance:2.855304718017578),
+ (id:16, distance:3.040700674057007)],
+[(id:11, distance:3.673950433731079),
+ (id:15, distance:4.183730602264404)],
+      ........
+[(id:6, distance:4.065953254699707),
+ (id:1, distance:4.149323463439941)]
 ]
 ```
 
@@ -248,13 +250,15 @@ To filter the results, add a `query_ranges` clause identifying the date range to
 
 ```python
 # Search 3 vectors
->>> status, results = milvus.search_vectors(table_name='test01', query_records=q_records, top_k=5, query_ranges=[('2019-06-01', '2019-06-05')] )
+>>> status, results = milvus.search_vectors(table_name='test01', query_records=q_records, top_k=2, query_ranges=[('2019-06-01', '2019-06-05')] )
 >>> status
 Status(message='Search vectors successfully!', code=0)
 >>> results # Searched top_k vectors
-[[QueryResult(id=0, distance=34.85963439941406)],
-[QueryResult(id=0, distance=36.73900604248047)],
-[QueryResult(id=0, distance=34.35655975341797)],
+[
+[(id:15, distance:2.855304718017578),
+ (id:16, distance:3.040700674057007)],
+[(id:11, distance:3.673950433731079),
+ (id:15, distance:4.183730602264404)],
 ...
 ]
 ```
