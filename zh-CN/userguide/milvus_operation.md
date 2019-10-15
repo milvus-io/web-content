@@ -95,6 +95,17 @@ Status(message='Describe table successfully!')
 TableSchema(table_name='test01',dimension=256, index_file_size=1024, metric_type=<MetricType: L2>)
 ```
 
+若要显示表的行数， 使用 `milvus.get_table_row_count`，后面跟表名：
+
+```python
+# Show table rows
+>>> status, num = milvus.get_table_row_count('test01')
+>>> status
+Status(code=0, message='Success')
+>>> num
+20
+```
+
 请用下列命令确认某张表是否存在：
 
 ```python
