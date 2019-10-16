@@ -4,7 +4,7 @@ This repository contains the Milvus documentation for [milvus.io](https://www.mi
 
 To contribute, read the [contributing guide](CONTRIBUTING.md).
 
-To file an issue, you can use the tracker in [this repository](https://github.com/milvus-io/docs/issues/new/choose) or in the [milvus-io/milvus]([https://github.com/milvus-io/milvus/issues/new?assignees=&labels=&template=documentation-request.md&title=%5BDOC%5D](https://github.com/milvus-io/milvus/issues/new?assignees=&labels=&template=documentation-request.md&title=[DOC])) repo.
+To file an issue, you can use the tracker in [this repository](https://github.com/milvus-io/docs/issues/new/choose) or in the [milvus-io/milvus](https://github.com/milvus-io/milvus/issues/new?assignees=&labels=&template=documentation-request.md&title=[DOC]) repo.
 
 To send a pull request, please fork this repository first.
 
