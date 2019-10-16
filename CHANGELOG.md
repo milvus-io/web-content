@@ -15,5 +15,5 @@ sidebar_label: Milvus Changelog
 - \#83 Add table row count SDK.
 - \#85 Add a description about "why search results are fewer than K in top K search" in Operational FAQ.
 - \#87 Add a new index type `IVF_SQ8H` in Learn Milvus Operations.
-
+- \#90 Add parameter `gpu_cache_capacity` and `gpu_cache_threshold` in Milvus config file.
 
