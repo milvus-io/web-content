@@ -65,6 +65,8 @@ In the directory `home/$USER/milvus/conf`, open Milvus service configuration fil
 | --------------------- | ------------------------------------------------------------ | ------- | --------- |
 | `cpu_cache_capacity`  | Memory used for cache in CPU. The maximum value should not exceed total memory. | Integer | `16` (GB) |
 | `cpu_cache_threshold` | The percentage of data that can be kept in the CPU memory when the cache usage exceeds `cpu_cache_capacity`. <br/>For example, the default value indicates that 85% of data stored in the CPU cache doesn't need to be erased. The value should be 0 - 1. | Float   | `0.85`    |
+| `gpu_cache_capacity`  | Memory used for cache in GPU. The maximum value should not exceed total memory. | Integer | `4` (GB)  |
+| `gpu_cache_threshold` | The percentage of data that can be kept in the GPU memory when the cache usage exceeds `gpu_cache_capacity`. <br/>For example, the default value indicates that 85% of data stored in the GPU cache doesn't need to be erased. The value should be 0 - 1. | Float   | `0.85`    |
 | `cache_insert_data`   | If set to `true` , the inserted data will be loaded into the cache immediately for hot query. <br/>If you want simultaneous inserting and searching of vector, it is recommended to enable this function. | Boolean | `false`   |
 
 
