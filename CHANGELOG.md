@@ -16,5 +16,5 @@ sidebar_label: Milvus Changelog
 - \#85 Add a description about "why search results are fewer than K in top K search" in Operational FAQ.
 - \#87 Add a new index type `IVF_SQ8H` in Learn Milvus Operations.
 - \#90 Add parameter `gpu_cache_capacity` and `gpu_cache_threshold` in Milvus config file.
-- \#93 Update README
+- \#93 Update README and create CONTRIBUTING.md.
 
