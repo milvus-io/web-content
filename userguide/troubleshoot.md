@@ -149,7 +149,7 @@ This message indicates that the search parameter nprobe is illegal.
 
 To solve this issue, check that the nprobe is within the range of 1 ~ index nlist.
 
-`Row record array data is empty`
+`Query record float array is empty`
 
 This message indicates that the searched vectors have empty values.
 
