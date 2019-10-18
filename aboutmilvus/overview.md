@@ -8,35 +8,37 @@ sidebar_label: Milvus Overview
 
 ## What is Milvus
 
-Milvus, designed by ZILLIZ, is a distributed feature vector indexing database management system which provides state-of-the-art similarity search and analysis of feature vectors and unstructured data. 
+Milvus is a distributed feature vector search engine which provides state-of-the-art similarity search and analysis of feature vectors. 
 
 ## Key features
 
 - GPU-accelerated search engine
 
-  Milvus is designed for the largest scale of vector index. CPU/GPU heterogeneous computing architecture allows you to process data at a speed 1000 times faster.
+Milvus uses CPU/GPU heterogeneous computing architecture to process feature vectors and are orders of magnitudes faster than traditional databases.
 
 - Intelligent index
 
-  With a “Decide Your Own Algorithm” approach, you can embed machine learning and advanced algorithms into Milvus without the headache of complex data engineering or migrating data between disparate systems. Milvus is built on optimized indexing algorithm based on quantization indexing, tree-based and graph indexing methods.
+Milvus is based on quantization indexing, tree-based indexing, and graph indexing algorithms. You can easily deploy machine learning algorithms to Milvus without migrating data across systems. 
 
 - Strong scalability
 
-  The data is stored and computed on a distributed architecture. This lets you scale data sizes up and down without redesigning the system.
+Milvus separates calculation from storage, which enables you to scale the data size without redesigning the system.
 
-- High availability
+- High robustness
 
-  The distributed cluster architecture provides continued service when some of the system components fail.
+The distributed architecture allows Milvus to keep functioning when part of the components fails.
 
 - High compatibility
 
-  Milvus is compatible with major AI/ML models and programming languages.
+Milvus is compatible with mainstream machine learning models and programming languages.
 
-- Exceptional ease of use
+- Ease of use
 
-  With Milvus, you can focus on your feature vectors, rather than managing the systems. Data is ready for indexing immediately, with superior ad-hoc performance.
+Milvus is easy to install and enables you to exclusively focus on feature vectors. You can directly use Milvus to process feature vectors without any extra processing.
 
-  Installation is a breeze, and can be performed in a few minutes. The performance of system can be tracked real-time on Prometheus-based GUI monitor dashboard.
+- Visualized Performance Monitoring
+
+You can track system performance on Prometheus-based GUI monitor dashboard.
 
 ## Overall architecture
 ![Milvus architecture](assets/milvus_arch.png)
