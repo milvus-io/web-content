@@ -8,7 +8,7 @@ sidebar_label: Milvus Overview
 
 ## What is Milvus
 
-Milvus is a distributed feature vector search engine which provides state-of-the-art similarity search and analysis of feature vectors. 
+Milvus is a distributed feature vector search engine which provides state-of-the-art similarity search and analysis for billion-scale feature vectors. 
 
 ## Key features
 
@@ -16,17 +16,21 @@ Milvus is a distributed feature vector search engine which provides state-of-the
 
 Milvus uses CPU/GPU heterogeneous computing architecture to process feature vectors and are orders of magnitudes faster than traditional databases.
 
-- Intelligent index
+- Various indexes
 
-Milvus is based on quantization indexing, tree-based indexing, and graph indexing algorithms. You can easily deploy machine learning algorithms to Milvus without migrating data across systems. 
+Milvus supports quantization indexing, tree-based indexing, and graph indexing algorithms.
 
-- Strong scalability
+- Intelligent Scheduling
 
-Milvus separates computation from storage, which enables you to scale the data size without redesigning the system.
+Milvus optimizes the search computation and index building according to your data size and available resources.
 
-- High robustness
+- Horizontal scalability
 
-The distributed architecture allows Milvus to keep functioning when part of the components fails.
+Milvus expands computation and storage by adding nodes during runtime, which allows you to scale the data size without redesigning the system.
+
+- High availibility
+
+The distributed cluster architecture provides continued service when some of the system components fail.
 
 - High compatibility
 
@@ -34,7 +38,7 @@ Milvus is compatible with mainstream machine learning models and programming lan
 
 - Ease of use
 
-Milvus is easy to install and enables you to exclusively focus on feature vectors. You can directly use Milvus to process feature vectors without any extra pre-processing.
+Milvus is easy to install and enables you to exclusively focus on feature vectors. You can directly use Milvus to process feature vectors without pre-processing.
 
 - Visualized Performance Monitoring
 
