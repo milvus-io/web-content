@@ -22,7 +22,7 @@ Milvus is based on quantization indexing, tree-based indexing, and graph indexin
 
 - Strong scalability
 
-Milvus separates calculation from storage, which enables you to scale the data size without redesigning the system.
+Milvus separates computation from storage, which enables you to scale the data size without redesigning the system.
 
 - High robustness
 
@@ -34,7 +34,7 @@ Milvus is compatible with mainstream machine learning models and programming lan
 
 - Ease of use
 
-Milvus is easy to install and enables you to exclusively focus on feature vectors. You can directly use Milvus to process feature vectors without any extra processing.
+Milvus is easy to install and enables you to exclusively focus on feature vectors. You can directly use Milvus to process feature vectors without any extra pre-processing.
 
 - Visualized Performance Monitoring
 
