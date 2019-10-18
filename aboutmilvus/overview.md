@@ -14,35 +14,35 @@ Milvus is a distributed feature vector search engine which provides state-of-the
 
 - GPU-accelerated search engine
 
-Milvus uses CPU/GPU heterogeneous computing architecture to process feature vectors and are orders of magnitudes faster than traditional databases.
+  Milvus uses CPU/GPU heterogeneous computing architecture to process feature vectors and are orders of magnitudes faster than traditional databases.
 
 - Various indexes
 
-Milvus supports quantization indexing, tree-based indexing, and graph indexing algorithms.
+  Milvus supports quantization indexing, tree-based indexing, and graph indexing algorithms.
 
-- Intelligent Scheduling
+- Intelligent scheduling
 
-Milvus optimizes the search computation and index building according to your data size and available resources.
+  Milvus optimizes the search computation and index building according to your data size and available resources.
 
 - Horizontal scalability
 
-Milvus expands computation and storage by adding nodes during runtime, which allows you to scale the data size without redesigning the system.
+  Milvus expands computation and storage by adding nodes during runtime, which allows you to scale the data size without redesigning the system.
 
 - High availibility
 
-The distributed cluster architecture provides continued service when some of the system components fail.
+  The distributed cluster architecture provides continued service when some of the system components fail.
 
 - High compatibility
 
-Milvus is compatible with mainstream machine learning models and programming languages.
+  Milvus is compatible with mainstream machine learning models and programming languages.
 
 - Ease of use
 
-Milvus is easy to install and enables you to exclusively focus on feature vectors. You can directly use Milvus to process feature vectors without pre-processing.
+  Milvus is easy to install and enables you to exclusively focus on feature vectors. You can directly use Milvus to process feature vectors without pre-processing.
 
-- Visualized Performance Monitoring
+- Visualized performance monitoring
 
-You can track system performance on Prometheus-based GUI monitor dashboard.
+  You can track system performance on Prometheus-based GUI monitor dashboard.
 
 ## Overall architecture
 ![Milvus architecture](assets/milvus_arch.png)
