@@ -49,7 +49,6 @@ sidebar_label: Milvus Configuration
 | `secondary_path`     | 导入 Milvus 的数据文件存储的二级路径，可以填多个，两个路径中间以分号隔开。当数据量很大，`primary_path` 指定的磁盘空间不够用时，可以设置此参数。<br/>`primary_path` 和 `secondary_path` 平均分配导入的数据。每个路径下的数据大小 = 数据总大小 / 路径数量。请确保这些路径下文件可用的存量差不多且够用。 | Path        | ` `             |
 | `backend_url`        | 元数据存储的 URL 。使用 SQLite（单机部署） 或 MySQL（分布式集群部署）来存储元数据。 <br/>`db_backend_url` 的格式为：`dialect://username:password@host:port/database`。（ `dialect` 可以是 `mysql` 或 `sqlite`，取决于你是用了MySQL 还是SQLite数据库。） | Path        | `sqlite://:@:/` |
 | `insert_buffer_size` | 用于buffer的最大内存量。`insert_buffer_size` 和`cpu_cache_capacity`（`cache_config` 区域）之和不能超过内存总量。 | Integer     | `4` (GB)        |
-| `build_index_gpu`    | 用于创建索引的 GPU 的设备号。<br/>在有多张 GPU 的情况下，您可以指定使用哪张 GPU 来创建索引。目前仅支持指定一张 GPU。 | Integer     | `0`             |
 | `preload_table`      | 定义在 Milvus 服务再次启动后，是否将之前已经导入并保存在磁盘的表预加载到内存。支持全部表格或者部分表格的预加载。 <br/>若要加载所有表格，使用 `*` ；若要加载部分表格，列出所有需要加载的表名，以逗号隔开。如果无需加载表格，请将该值留空 （ ` ` ）。 | PreloadType | ` `             |
 
 ### `metric_config` 区域
@@ -81,14 +80,15 @@ sidebar_label: Milvus Configuration
 在 Milvus 里，由于**创建索引**和**搜索**是两个独立分开的过程，resource 的利用遵循以下基本原则：
 
 - 创建索引过程只能在 `gpu` 里进行。请使用区域 `db_config` 里的 `build_index_gpu` 参数来指定用于该过程的 `gpu` 。
-- 搜索计算过程可以只在 `cpu` ，或只在 `gpu` ，或同时在`cpu` 和 `gpu` 里进行。如果搜索 resource 包含 `gpu`，您可以指定多张 GPU 来进行该过程。
+- 搜索计算过程可以同时在`cpu` 和 `gpu` 里进行。如果搜索 resource 包含 `gpu`，您可以指定多张 GPU 来进行该过程。
 - 用于创建索引的 `gpu` 同时也能指定用于搜索过程。
 
 | 参数               | 说明                                                         | 类型    | 默认值     |
 | ------------------ | ------------------------------------------------------------ | ------- | ---------- |
-| `resources_pool` | 定义 Milvus 里用于搜索的 resource 类型。如：`cpu`, `gpu0`等   | ResourceType        |     `gpu0`           ||||
+| `search_resources` | 定义 Milvus 里用于搜索的 resource 类型。如：`cpu`, `gpu0`等   | ResourceType        |     `gpu0`           |
+| index_build_device | 定义 Milvus 里用户创建索引的 resource 类型。目前仅支持 `gpu` 类型。 | ResourceType | `gpu0` |
 
-请在该区域定义 Milvus 里用于搜索的 resource，支持的 resource 类型有：a) 仅 `cpu`; b) 仅 `gpu`；c) `cpu` 和 `gpu` 。注意如果 resource 包含 `gpu`，请列出所有您想指定的 GPU，并指名它们的设备 id 号，设备 id 从0开始。比如：
+请在该区域定义 Milvus 里用于搜索和创建索引的 resource。注意如果 resource 包含 `gpu`，请列出所有您想指定的 GPU，并指名它们的设备 id 号，设备 id 从0开始。比如：
 
 ```
 - gpu0
