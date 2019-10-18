@@ -23,13 +23,13 @@ Feature vectors, with its effectiveness and practicality of numerically represen
 
 - Image processing
 
-Features can be gradient magnitudes, colors, grayscale intensities, edges, areas, etc. Feature vectors are particularly popular in image processing because it is easy to define numeric attributes for images.
+  Features can be gradient magnitudes, colors, grayscale intensities, edges, areas, etc. Feature vectors are particularly popular in image processing because it is easy to define numeric attributes for images.
 
 - Speech recognition
 
-Features can be sound lengths, noise levels, noise ratios, etc.
+  Features can be sound lengths, noise levels, noise ratios, etc.
 
 - Spam filtering
 
-Features can be IP addresses, text structures, frequencies of certain words, certain email headers, etc.
+  Features can be IP addresses, text structures, frequencies of certain words, certain email headers, etc.
 
