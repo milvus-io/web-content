@@ -8,14 +8,23 @@ sidebar_label: Install Milvus
 
 See [here](../Releases/v0.4.0.md) for what's new in the latest release. 
 
+## Hardware requirements
+
+| Component | Recommended configuration             |
+| --------- | ------------------------------------- |
+| CPU       | Intel CPU Haswell or higher           |
+| GPU       | NVIDIA Pascal series or higher        |
+| Memory    | 8 GB or more (depends on data volume) |
+| Storage   | SATA 3.0 SSD or higher                |
+
 ## Before the install
 
 1. Make sure your Linux distribution is one of the following:
 
    | Linux operating system | Supported versions |
    | :--------------------- | :----------------- |
-   | CentOS                 | 7.5 and higher     |
-   | Ubuntu LTS             | 16.04 and higher   |
+   | CentOS                 | 7.5 or higher      |
+   | Ubuntu LTS             | 16.04 or higher    |
 
 2. Make sure the following software packages are installed:
 
