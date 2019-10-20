@@ -48,7 +48,6 @@ In the directory `home/$USER/milvus/conf`, open Milvus service configuration fil
 | `secondary_path` | A semicolon-separated list of secondary directories used only for the vector data files imported into Milvus. Set this parameter when the data size is too much to fit in the `primary_path`. <br/>Each file, whether in `primary_path` or `secondary_path`, is assigned an equal part of the imported data.  Data Size per Directory = Total Data Size / Number of Directories. So make sure the available storage space in these files are enough. | Path   |            |
 | `backend_url`         | URL for metadata storage. Use SQLite (for single server Milvus) or MySQL (for distributed cluster) to store the metadata. <br/>The format of db_backend_url is: `dialect://username:password@host:port/database`. (`dialect` can be either `mysql` or `sqlite`, depending on which database you use. | Path   | `sqlite://:@:/`       |
 | `insert_buffer_size`     | Maximum buffer size allowed for data insertion. The sum of `insert_buffer_size` and `cpu_cache_capacity` (in "Section `cache_config`" ) should be < total memory. | Integer | `4` (GB)        |
-| `build_index_gpu`        | The device id of GPU used for building index. <br/>If multiple GPU are used in Milvus, define which GPU is used for index building. Currently, you can only assign one GPU for this function. | Integer | `0 `            |
 | `preload_table` | Define if to preload tables into memory after Milvus server restart. Tables can be selected for fully or partially preloading.<br/>To preload all the existing tables, use `*` ; To preload some tables, list the specific table names, separated by comma. If you choose not to preload any table, keep it empty ( ` ` ). | PreloadType | ` ` |
 
 ### Section `metric_config`
@@ -81,16 +80,17 @@ In the directory `home/$USER/milvus/conf`, open Milvus service configuration fil
 In Milvus, as the **index building** and **search computation** are separate processes, the resource usage conforms to the following general rules:
 
 - Index building process can only be done in `gpu`. Use `build_index_gpu` to define the `gpu` used for this process.
-- Search computation can be executed in `cpu` , `gpu` or both. If you include `gpu` , you can assign multiple GPUs. 
+- Search computation can be executed in both `cpu` and `gpu` . You are allowed to assign multiple GPUs. 
 - The `gpu` used for index building can also be used for search computation. 
 
-| Parameter       | Description                                                  | Type         | Default |
-| --------------- | ------------------------------------------------------------ | ------------ | ------- |
-| `resource_pool` | Define the resource type used for search in Milvus, e.g. `cpu` or `gpu0` | ResourceType | `gpu0`  |
+| Parameter            | Description                                                  | Type         | Default |
+| -------------------- | ------------------------------------------------------------ | ------------ | ------- |
+| `search_resources`   | Define the `gpu` resource used for search in Milvus. You can assign multiple GPUs. | ResourceType | `gpu0`  |
+| `index_build_device` | Define the resource type used for index building in Milvus. You can only assign `gpu`. | ResourceType | `gpu0`  |
 
-Define in this section the resources **used for search** in Milvus. 
+Define in this section the resources used for search computation and index building in Milvus. 
 
-You can assign `cpu` , `gpu` or both `cpu` and `gpu` as the resource. If you include `gpu` resource type, list all the GPUs you want to be used, and specify their corresponding device ids. For example:
+For `gpu` resource type, list all the GPUs you want to be used, and specify their corresponding device ids. For example:
 
 ```
 - gpu0
