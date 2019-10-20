@@ -8,14 +8,23 @@ sidebar_label: Install Milvus
 
 See [here](../Releases/v0.4.0.md) for what's new in the latest release. 
 
+## Hardware requirements
+
+| Component | Recommended configuration             |
+| --------- | ------------------------------------- |
+| CPU       | Intel CPU Haswell or higher           |
+| GPU       | NVIDIA Pascal series or higher        |
+| Memory    | 8 GB or more (depends on data volume) |
+| Storage   | SATA 3.0 SSD or higher                |
+
 ## Before the install
 
 1. Make sure your Linux distribution is one of the following:
 
-| Linux operation system | Supported versions |
-| :--------------------- | :----------------- |
-| CentOS                 | 7.5 and higher     |
-| Ubuntu LTS             | 16.04 and higher   |
+   | Linux operating system | Supported versions |
+   | :--------------------- | :----------------- |
+   | CentOS                 | 7.5 or higher      |
+   | Ubuntu LTS             | 16.04 or higher    |
 
 2. Make sure the following software packages are installed:
 
@@ -24,7 +33,7 @@ See [here](../Releases/v0.4.0.md) for what's new in the latest release.
    
    > Note: If you are running an old version of docker (< 19.03), it is recommended to install [nvidia-docker2](https://github.com/NVIDIA/nvidia-docker/wiki/Installation-(version-2.0)) package. If you already have the old package installed (nvidia-docker2), updating to the latest Docker version (>= 19.03) will still work.  
    
-   > Note: You don't have to install CUDA seperately, as it is included in Milvus Docker container.
+   > Note: You don't have to install CUDA separately, as it is included in Milvus Docker container.
 
 ## Use Docker
 
@@ -41,7 +50,7 @@ See [here](../Releases/v0.4.0.md) for what's new in the latest release.
 2. Pull the image for the v0.4.0 release of Milvus:
 
    ```
-   sudo docker pull milvusdb/milvus:latest
+   docker pull milvusdb/milvus:latest
    ```
 
 3. Download Milvus source file.
