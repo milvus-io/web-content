@@ -1,11 +1,13 @@
 ---
 id: traditional_db
-title: Traditional Database
-sidebar_label: Traditional Database
+title: Feature Vector Indexing in Traditional Relational Databases
+sidebar_label: Feature Vector Indexing in Traditional Relational Databases
 ---
 
-# Traditional Database
+# Feature Vector Indexing in Traditional Relational Databases
 
-Traditional relational databases are designed to organize alphanumeric data into interrelated collections. However, this technology is not well suited to the management of multimedia information. The feature vector data, vector storage and indexing methods, the large size of media objects are entirely foreign to traditional databases. 
+Traditional relational databases are designed to organize alphanumeric data items into interrelated collections. They do not support massive-scale, high-dimensional feature vectors because of the following reasons:
+- Feature vectors are not part of the built-in data type. Thus, methods for managing and indexing feature vectors are not available. 
+- The supported number of table columns is limited.
 
-Some may argue that there are now some vector indexing plug-ins provided by traditional databases, such as imgsmlr by PostgreSQL and word2vector by Google. However, as the optimizations are only made based on hash-based search and one-dimension alphanumeric data, the performance of these plug-ins are far from satisfying, and can barely meet the needs of large scale high-dimensional vector indexing. 
+Currently, some vector indexing plugins are provided for traditional relational databases, such as imgsmlr, a plugin to search similar images, by PostgreSQL and word2vector, a plugin to calculate word vectors, by Google. However, because these plugins perform optimization based on algorithms such as hash search and one-dimensional discrete data search, their performance is relatively poor for high-dimensional vector search.
