@@ -7,15 +7,24 @@ sidebar_label: Install Milvus
 
 点击 [版本发布](../release/v0.4.0.md) 了解最新版本的功能。
 
+## 硬件要求
+
+| 组件 | 建议配置                          |
+| ---- | --------------------------------- |
+| CPU  | Intel CPU Haswell 及以上          |
+| GPU  | NVIDIA Pascal series 及以上       |
+| 内存 | 8 GB + （取决于具体向量数据规模） |
+| 存储 | SATA 3.0 SSD 及以上               |
+
 ## 安装前提
 
 1. 请确保您的 Linux 系统符合以下版本：
 
-   | Linux 操作系统平台 | 版本             |
-   | :----------------- | :--------------- |
-   | CentOS             | 7.5 and higher   |
-   | Ubuntu LTS         | 18.04 and higher |
-   
+| Linux 操作系统平台 | 版本             |
+| :----------------- | :--------------- |
+| CentOS             | 7.5 and higher   |
+| Ubuntu LTS         | 18.04 and higher |
+
 2. 请确保您已经安装以下软件包：
 
    - NVIDIA driver 418 及以上
