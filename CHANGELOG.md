@@ -18,4 +18,5 @@ sidebar_label: Milvus Changelog
 - \#90 Add parameter `gpu_cache_capacity` and `gpu_cache_threshold` in Milvus config file.
 - \#93 Update README and create CONTRIBUTING.md.
 - \#100 Update Milvus config file to remove doc about GPU-only search 
+- \#107 Remove "Delete vectors by range" in Milvus operations
 
