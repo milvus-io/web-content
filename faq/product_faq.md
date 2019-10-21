@@ -22,9 +22,9 @@ Milvus provides Python and C++ SDK. It also supports all Thrift communication ty
 
 ### How easy is it to use Milvus?
 
-Milvus can be easily installed through pulling docker images and simple pip install for SDKs. It is designed to be "easy to use". For more details, see [Install Milvus](userguide/install_milvus.md).
+Milvus can be easily installed through pulling docker images and simple pip install for SDKs. It is designed to be "easy to use". For more details, see [Install Milvus](../userguide/install_milvus.md).
 
-To start your first vector search program, please go to [Milvus example code](userguide/example_code.md).
+To start your first vector search program, please go to [Milvus example code](../userguide/example_code.md).
 
 ### Is Milvus highly available?
 
