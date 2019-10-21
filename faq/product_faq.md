@@ -22,9 +22,9 @@ Milvus provides Python and C++ SDK. It also supports all Thrift communication ty
 
 ### How easy is it to use Milvus?
 
-Milvus can be easily installed through pulling docker images and simple pip install for SDKs. It is designed to be "easy to use". For more details, see [Install Milvus](userguide/install_milvus.md).
+Milvus can be easily installed through pulling docker images and simple pip install for SDKs. It is designed to be "easy to use". For more details, see [Install Milvus](../userguide/install_milvus.md).
 
-To start your first vector search program, please go to [Milvus example code](userguide/example_code.md).
+To start your first vector search program, please go to [Milvus example code](../userguide/example_code.md).
 
 ### Is Milvus highly available?
 
@@ -36,7 +36,7 @@ All vectors will be indexed and stored in Milvus, each of them will be assigned 
 
 ### Which index types are supported?
 
-Currently Milvus supports:
+Currently Milvus supports the following index methods:
 
 - `Flat`
 
@@ -49,6 +49,18 @@ Currently Milvus supports:
 - `IVF_SQ8`
 
   Adopts a scalar quantization strategy that significantly reduces the size of a vector (by about 3/4). It improves the overall throughput of vector processing.
+
+- `IVF_SQ8H`
+
+  An enhanced index algorithm of `IVF_SQ8`. It supports hybrid computation on both CPU and GPU, which significantly improves the search performance. 
+  
+  To use this index type, make sure both `cpu` and `gpu` are added as resources for usage in the [Milvus configuration file](../reference/milvus_config.md). 
+  
+- `NSG`
+
+  NSG (Navigating Spreading-out Graph) is a graph-base search algorithm that a) lowers the average out-degree of the graph for fast traversal; b) shortens the search path; c) reduces the index size; d) lowers the indexing complexity. 
+
+  Extensive tests show that NSG can achieve very high search performance at high precision, and needs much less memory. Compared to non-graph-based algorithms, it is faster to achieve the same search precision.  
 
 ### Does Milvus support simultaneous inserting and searching?
 

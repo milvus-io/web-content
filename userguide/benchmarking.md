@@ -31,7 +31,7 @@ Create a file named `milvlus_sift1m`. Then download the following data and scrip
 - [One million base vectors](https://pan.baidu.com/s/1nVIIxO8MnOle339iYs2dUw)
 - [10,000 query vectors](https://pan.baidu.com/s/1mBRM1cJZ6QWehDuddOYl4A)
 - [Search ground truth](https://pan.baidu.com/s/1-95nJvW3vx2Cq9wqBWOFaA)
-- [Test scripts](https://github.com/jielinxu/bootcamp/blob/master/bootcamp/scripts)
+- [Test scripts](https://github.com/milvus-io/bootcamp/blob/master/scripts)
 
 ### Milvus settings
 
@@ -115,7 +115,7 @@ Create a file named `milvlus_sift100m`. Then download the following data and scr
 
 - [Search ground truth](https://pan.baidu.com/s/15dPvxxrfslairyUEBJgk-g)
 
-- [Test scripts](https://github.com/jielinxu/bootcamp/blob/master/bootcamp/scripts)
+- [Test scripts](https://github.com/milvus-io/bootcamp/blob/master/scripts)
 
 ### Milvus settings
 

@@ -6,7 +6,7 @@ sidebar_label: Install Milvus
 
 # Install Milvus 
 
-See [here](../Releases/v0.4.0.md) for what's new in the latest release. 
+See [here](../release/v0.4.0.md) for what's new in the latest release. 
 
 ## Hardware requirements
 
@@ -21,17 +21,20 @@ See [here](../Releases/v0.4.0.md) for what's new in the latest release.
 
 1. Make sure your Linux distribution is one of the following:
 
-   | Linux operating system | Supported versions |
+   | Linux operation system | Supported versions |
    | :--------------------- | :----------------- |
-   | CentOS                 | 7.5 or higher      |
-   | Ubuntu LTS             | 16.04 or higher    |
+   | CentOS                 | 7.5 and higher     |
+   | Ubuntu LTS             | 18.04 and higher   |
 
 2. Make sure the following software packages are installed:
 
-   - [NVIDIA driver 418 or higher](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html)
+   - NVIDIA driver 418 or higher
+   
+     To install NVIDIA driver 418, on your desktop, launch **Software & Updates** utility, and go to **Additional Drivers** tab. Select **Using NVIDIA driver metapackage from nvidia-driver-418**, and click **Apply Changes**. 
+   
    - [Docker 19.03 or higher](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/)
    
-   > Note: If you are running an old version of docker (< 19.03), it is recommended to install [nvidia-docker2](https://github.com/NVIDIA/nvidia-docker/wiki/Installation-(version-2.0)) package. If you already have the old package installed (nvidia-docker2), updating to the latest Docker version (>= 19.03) will still work.  
+   - [nvidia-docker2](https://github.com/NVIDIA/nvidia-docker/wiki/Installation-(version-2.0)) 
    
    > Note: You don't have to install CUDA separately, as it is included in Milvus Docker container.
 
@@ -47,7 +50,7 @@ See [here](../Releases/v0.4.0.md) for what's new in the latest release.
 
    > Note: On Linux, Docker needs sudo privileges.
 
-2. Pull the image for the v0.4.0 release of Milvus:
+2. Pull the image for the v0.5.0 release of Milvus:
 
    ```
    docker pull milvusdb/milvus:latest
@@ -75,9 +78,16 @@ See [here](../Releases/v0.4.0.md) for what's new in the latest release.
 5. Confirm Milvus running status.
 
    ```shell
+   # Confirm Milvus status
+   $ docker ps
+   ```
+   
+   If Milvus server is not successfully started, you can check the error logs by the following command. 
+   
+   ```shell
    # Get Milvus container id
    $ docker ps -a
-   # Make sure Milvus is up and running
+   # Check docker logs
    $ docker logs <milvus container id>
    ```
 
@@ -94,3 +104,4 @@ See [here](../Releases/v0.4.0.md) for what's new in the latest release.
   - Build a [Monitoring and Alerting system](monitor.md) to check real-time application performance
   - [Import vectors into Milvus](import_data.md)
   - Tune Milvus performance through [configuration](../reference/milvus_config.md)
+
