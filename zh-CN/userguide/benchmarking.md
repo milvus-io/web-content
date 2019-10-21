@@ -31,7 +31,7 @@ sidebar_label: Performance Benchmarking
 - [1百万测试向量数据集](https://pan.baidu.com/s/1nVIIxO8MnOle339iYs2dUw)
 - [1万条查询向量](https://pan.baidu.com/s/1mBRM1cJZ6QWehDuddOYl4A)
 - [搜索结果对照](https://pan.baidu.com/s/1-95nJvW3vx2Cq9wqBWOFaA)
-- [测试脚本](https://github.com/jielinxu/bootcamp/blob/master/bootcamp/scripts)
+- [测试脚本](https://github.com/milvus-io/bootcamp/blob/master/scripts)
 
 ### Milvus 参数配置
 
@@ -107,15 +107,15 @@ $ python3 milvus_bootcamp.py --table=ann_1m_sq8 -s
 
 创建名为 `milvlus_sift100m` 的文件夹，然后下载以下数据集和测试脚本到该文件夹。
 
-- [100 million base vectors](https://pan.baidu.com/s/1N5jGKHYTGchye3qR31aNnA)
+- [1亿测试向量数据集](https://pan.baidu.com/s/1N5jGKHYTGchye3qR31aNnA)
 
   将数据文件都解压到 `milvus_sift100M/bvecs_data/` 文件夹下。解压完成后 `milvus_sift100M/bvecs_data/` 文件夹里将会有 1,000 个 npy 文件，每个 npy 文件中存放 10 万条向量数据，共 1 亿条。
 
-- [10,000 query vectors](https://pan.baidu.com/s/1l9_lDItU2dPBPIYZ7oV0NQ)
+- [1万条查询向量](https://pan.baidu.com/s/1l9_lDItU2dPBPIYZ7oV0NQ)
 
-- [Search ground truth](https://pan.baidu.com/s/15dPvxxrfslairyUEBJgk-g)
+- [搜索结果对照](https://pan.baidu.com/s/15dPvxxrfslairyUEBJgk-g)
 
-- [Test scripts](https://github.com/jielinxu/bootcamp/blob/master/bootcamp/scripts)
+- [测试脚本](https://github.com/milvus-io/bootcamp/blob/master/scripts)
 
 ### Milvus 参数配置
 

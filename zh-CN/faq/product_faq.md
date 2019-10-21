@@ -22,9 +22,9 @@ Milvus 单行读取速度约 0.6 毫秒，单行写入速度在 0.03 毫秒左�
 
 ### Milvus 的易用性如何？
 
-Milvus 安装简单，仅需下载相关 docker 镜像文件。易用性强，通过 Python 等 SDK 接口即可完成向量插入、检索等操作。若要了解更多，请看 [安装 Milvus](userguide/install_milvus.md).
+Milvus 安装简单，仅需下载相关 docker 镜像文件。易用性强，通过 Python 等 SDK 接口即可完成向量插入、检索等操作。若要了解更多，请看 [安装 Milvus](../userguide/install_milvus.md).
 
-想要开启您的第一次向量搜索？请阅读 [运行示例程序](userguide/example_code.md).
+想要开启您的第一次向量搜索？请阅读 [运行示例程序](../userguide/example_code.md).
 
 ### Milvus 具备高可用特性吗？
 
@@ -68,18 +68,18 @@ Milvus 集群具备高可用性，其存储和计算等集群均容许部分组�
 
 ### 数据存储在哪里？
 
-向量数据可以存储在您的本地磁盘，或是MinIO云上。若要了解更多，请阅览[数据存储](https://www.milvus.io/docs/zh-CN/userguide/data-storage)。
+向量数据可以存储在您的本地磁盘，或是MinIO云上。若要了解更多，请阅览 [数据存储](../reference/data_store.md)。
 
 ### Milvus 与 FAISS 和 SPTAG 对比如何?
 
 尽管这些都支持海量向量的相似度检索，Milvus 是其中唯一成熟易用的向量检索数据库系统，具备高可用、弹性扩展等特性。
 
-想要了解更多性能对比，请看 [与 FAISS 和 SPTAG 对比](comparison.md)。
+想要了解更多性能对比，请看 [与 FAISS 和 SPTAG 对比](../reference/comparison.md)。
 
 ### 仍有问题没有得到解答？
 
 如果您仍有其它问题，您可以：
 
 - 在 GitHub 上访问 [Milvus-io](https://github.com/milvus-io)，提问、闲逛、和其它用户交流
-- 阅读 [操作 FAQ](faq/operational_faq.md)，了解关于 Milvus 操作的常见问题 
+- 阅读 [操作 FAQ](operational_faq.md)，了解关于 Milvus 操作的常见问题 
 
