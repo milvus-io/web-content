@@ -1,10 +1,10 @@
 ---
 id: traditional_db
 title: Feature Vector Indexing in Traditional Relational Databases
-sidebar_label: Feature Vector Indexing in Traditional Relational Databases
+sidebar_label: Traditional Database
 ---
 
-# Feature Vector Indexing in Traditional Relational Databases
+# Traditional Database
 
 Traditional relational databases are designed to organize alphanumeric data items into interrelated collections. They do not support massive-scale, high-dimensional feature vectors because of the following reasons:
 - Feature vectors are not part of the built-in data type. Thus, methods for managing and indexing feature vectors are not available. 
