@@ -147,7 +147,7 @@ sidebar_label: Troubleshoot
 
 若要解决该问题，请检查  nprobe 设置在  1 ~ nlist 之间。
 
-`Row record array data is empty`
+`Query record float array is empty`
 
 该报错信息表示要搜索的向量值为空。 
 

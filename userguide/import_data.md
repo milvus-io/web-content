@@ -29,14 +29,14 @@ Follow the following steps to import vector data into Milvus through Python scri
 
 1. Read the NPY file through `numpy.load` , and generate `numpy.array` data structure.
 2. Through `numpy.array.tolist`, convert the `numpy.array` to a 2-dimensional list (in the form of [[],[]...[]]).
-3. [Import the vectors (2-dimensional list) into Milvus](Insert vectors into a table). **A list of vector ids** will be returned instantly.
+3. [Import the vectors (2-dimensional list) into Milvus](milvus_operation.md#insert-vectors-into-a-table). **A list of vector ids** will be returned instantly.
 
 ### Import CSV files
 
 1. Read the CSV file through `pandas.read_csv`, and generate `pandas.DataFrame` data structure.
 2. Through `numpy.array`, convert `pandas.DataFrame` to `numpy.array` data structure.
 3. Through `numpy.array.tolist`, convert the `numpy.array` to a 2-dimensional list (in the form of [[],[]...[]]).
-4. [Import the vectors (2-dimensional list) into Milvus](Insert vectors into a table). **A list of vector ids** will be returned instantly.
+4. [Import the vectors (2-dimensional list) into Milvus](milvus_operation.md#insert-vectors-into-a-table). **A list of vector ids** will be returned instantly.
 
 ## Related links
 
