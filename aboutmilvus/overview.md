@@ -8,15 +8,15 @@ sidebar_label: Milvus Overview
 
 ## What is Milvus
 
-Milvus is a distributed feature vector search engine which provides state-of-the-art similarity search and analysis for billion-scale feature vectors. 
+Milvus is the state-of-the-art similarity search engine for massive unstructured data AKA feature vectors. 
 
 ## Key features
 
-- GPU-accelerated search engine
+- Heterogeneous architecture
 
-  Milvus uses CPU/GPU heterogeneous computing architecture to process feature vectors and are orders of magnitudes faster than traditional databases.
+  Designed with heterogeneous computing architecture for best performance and cost efficiency.
 
-- Various indexes
+- indexes
 
   Milvus supports quantization indexing, tree-based indexing, and graph indexing algorithms.
 
