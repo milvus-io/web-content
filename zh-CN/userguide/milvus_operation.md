@@ -258,17 +258,6 @@ Status(message='Search vectors successfully!', code=0)
 ]
 ```
 
-## 删除向量
-
-若您不再需要某些向量，请使用 `milvus.delete_vectors_by_range` 将它们删除，后面跟表名和日期范围。
-
-```python
-# Delete vectors
->>> milvus.delete_vectors_by_range('test01', '2019-06-01', '2020-01-01')
->>> status
-Status(message='Delete vectors successfully!', code=0)
-```
-
 ## 删除表
 
 若您不再需要某张表，请使用 `milvus.delete_table` 将该表及其数据删除：
