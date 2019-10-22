@@ -44,6 +44,7 @@ Milvus is an open source similarity search engine for massive feature vectors. D
 
   You can track system performance on Prometheus-based GUI monitor dashboards.
 
+
 ## Overall architecture
 ![Milvus architecture](assets/milvus_arch.png)
 
