@@ -10,8 +10,8 @@ sidebar_label: Troubleshoot
 
 如果您在使用 Milvus 时遇到问题，您可以通过以下步骤排查障碍：
 
-1. 如果是 Milvus 操作方面的问题，请查看 **故障诊断 API 行为**。
-2. 如果是启动 Milvus 服务时遇到问题，请参考 **服务器启动故障**。
+1. 如果是 Milvus 操作方面的问题，请查看 [故障诊断 API 行为](#故障诊断-API-行为)。
+2. 如果是启动 Milvus 服务时遇到问题，请参考 [服务器启动故障](#服务器启动故障)。
 3. 对于您无法自己解决的问题，请直接发邮件至 support@zilliz.com。
 
 ## 故障诊断 API 行为
@@ -147,7 +147,7 @@ sidebar_label: Troubleshoot
 
 若要解决该问题，请检查  nprobe 设置在  1 ~ nlist 之间。
 
-`Row record array data is empty`
+`Query record float array is empty`
 
 该报错信息表示要搜索的向量值为空。 
 

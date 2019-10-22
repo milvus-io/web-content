@@ -22,9 +22,9 @@ Milvus 单行读取速度约 0.6 毫秒，单行写入速度在 0.03 毫秒左�
 
 ### Milvus 的易用性如何？
 
-Milvus 安装简单，仅需下载相关 docker 镜像文件。易用性强，通过 Python 等 SDK 接口即可完成向量插入、检索等操作。若要了解更多，请看 [安装 Milvus](userguide/install_milvus.md).
+Milvus 安装简单，仅需下载相关 docker 镜像文件。易用性强，通过 Python 等 SDK 接口即可完成向量插入、检索等操作。若要了解更多，请看 [安装 Milvus](../userguide/install_milvus.md).
 
-想要开启您的第一次向量搜索？请阅读 [运行示例程序](userguide/example_code.md).
+想要开启您的第一次向量搜索？请阅读 [运行示例程序](../userguide/example_code.md).
 
 ### Milvus 具备高可用特性吗？
 
@@ -50,24 +50,36 @@ Milvus 集群具备高可用性，其存储和计算等集群均容许部分组�
 
   运用 scalar quantization 的向量索引，能大幅缩小向量体积（大概缩减3/4），从而能有效提高向量吞吐量。
 
+- `IVF_SQ8H`
+
+  `IVF_SQ8` 的增强版。支持 CPU 和 GPU 的混合查询，能极大提高搜索性能。若要使用该索引方式，请确保已同时选择了 `cpu` 和 `gpu` 用于 Milvus 搜索。具体配置请参考 [Milvus 配置](../reference/milvus_config.md) 里的 `resource_config` 区域。
+  
+- `NSG`
+
+  NSG (Navigating Spreading-out Graph) 是一种基于图的索引算法，它可以 a) 降低图的平均出度；b) 缩短搜索路径；c) 缩减索引大小；d) 降低索引复杂度。
+
+  大量测试显示 NSG 响应快、搜索精度高，而且需要占用的内存更小。相比非基于图的索引算法，在相同精度的条件下，搜索速度更快。
+
+ 
+
 ### Milvus 是否支持 “边插入边查询” ？
 
 支持。如果您想在Milvus里边插入向量边查询，建议在 `home/$USER/milvus/conf/server_config.yaml` 下的 `cache_config` 区域，将参数 `insert_cache_immediately` 设置为 `True`。
 
 ### 数据存储在哪里？
 
-向量数据可以存储在您的本地磁盘，或是MinIO云上。若要了解更多，请阅览[数据存储](https://www.milvus.io/docs/zh-CN/userguide/data-storage)。
+向量数据可以存储在您的本地磁盘，或是MinIO云上。若要了解更多，请阅览 [数据存储](../reference/data_store.md)。
 
 ### Milvus 与 FAISS 和 SPTAG 对比如何?
 
 尽管这些都支持海量向量的相似度检索，Milvus 是其中唯一成熟易用的向量检索数据库系统，具备高可用、弹性扩展等特性。
 
-想要了解更多性能对比，请看 [与 FAISS 和 SPTAG 对比](comparison.md)。
+想要了解更多性能对比，请看 [与 FAISS 和 SPTAG 对比](../reference/comparison.md)。
 
 ### 仍有问题没有得到解答？
 
 如果您仍有其它问题，您可以：
 
 - 在 GitHub 上访问 [Milvus-io](https://github.com/milvus-io)，提问、闲逛、和其它用户交流
-- 阅读 [操作 FAQ](faq/operational_faq.md)，了解关于 Milvus 操作的常见问题 
+- 阅读 [操作 FAQ](operational_faq.md)，了解关于 Milvus 操作的常见问题 
 

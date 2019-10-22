@@ -1,4 +1,5 @@
 ---
+
 id: milvus_operation
 title: Learn Milvus Operations
 sidebar_label: Learn Milvus Operations
@@ -6,12 +7,12 @@ sidebar_label: Learn Milvus Operations
 
 # Learn Milvus Operations
 
-This page walks you through some of the most essential Milvus operations using **Python** SDK.
-To learn the complete operations in Milvus, please read [Milvus Python SDK](https://pypi.org/project/pymilvus) and [Examples](https://github.com/milvus-io/pymilvus/blob/branch-0.4.0/examples/example.py)。
+This page walks you through some of the most essential Milvus operations using [**Python** SDK](https://pypi.org/project/pymilvus).
+You can also use other languages such as [Java](https://milvus-io.github.io/milvus-sdk-java/javadoc/index.html), C++, etc.
 
 ## Before trying out these operations
 
-Please use pymilvus, the built-in Python client, to try out these operations. If you want, you can also use other languages such as C++, RESTful API, etc.
+Please use pymilvus, the built-in Python client, to try out these operations. 
 
 Just type **python** at your console, hit `Enter`, and you should enter Python’s Interpreter.
 
@@ -99,6 +100,17 @@ Status(message='Describe table successfully!')
 TableSchema(table_name='test01',dimension=256, index_file_size=1024, metric_type=<MetricType: L2>)
 ```
 
+To show all the rows of a table, use `milvus.get_table_row_count` followed by the table name:
+
+```python 
+# Show table rows
+>>> status, num = milvus.get_table_row_count('test01')
+>>> status
+Status(code=0, message='Success')
+>>> num
+20
+```
+
 To verity if a table exists in Milvus, use this command:
 
 ```python
@@ -111,7 +123,7 @@ True
 
 ## Insert vectors into a table
 
-> Note: In the production scenario, it is recommended to use the `milvus.create_index` before inserting vectors into the table. This triggers the simultaneous vector inserting and index building process, which takes much less time. However, in doing so, you need to create the same index again after the vector insertion process is completed, in case there are any data file that does not meet the `index_file_size` (which means index will not be automatically built for this data file).
+> Note: In the production scenario, it is recommended to use the `milvus.create_index` before inserting vectors into the table. Index will be automatically built as vectors are being imported.  However, in doing so, you need to create the same index again after the vector insertion process is completed, in case there are any data file that does not meet the `index_file_size` (which means index will not be automatically built for this data file).
 
 Below is the list of parameters for inserting vectors into a table:
 
@@ -159,10 +171,10 @@ Status(code=0, message='Success')
 
 Below is the list of parameters for creating index for a table:
 
-| Parameter    | Description                                                  | Type      | Reference value               |
-| ------------ | ------------------------------------------------------------ | --------- | ----------------------------- |
-| `index_type` | The type of indexing method to query the table. Select one out of these types: <br/>1. `FLAT` - Provides 100% accuracy for recalls. However, performance might be downgraded due to huge computation effort; <br/>2. `IVFLAT` - K-means based similarity search which is balanced between accuracy and performance; <br/>3. `IVF_SQ8` - Vector indexing that adopts a scalar quantization strategy that significantly reduces the size of a vector (by about 3/4), thus improving the overall throughput of vector processing. | IndexType | `FLAT` / `IVFLAT` / `IVF_SQ8` |
-| `nlist`      | Number of vector buckets in a file. Default value is 16384.  | Integer   | 1 - 16384                     |
+| Parameter    | Description                                                  | Type      | Reference value                                    |
+| ------------ | ------------------------------------------------------------ | --------- | -------------------------------------------------- |
+| `index_type` | The type of indexing method to query the table. Select one out of these types: <br/>1. `FLAT` - Provides 100% accuracy for recalls. However, performance might be downgraded due to huge computation effort; <br/>2. `IVFLAT` - K-means based similarity search which is balanced between accuracy and performance; <br/>3. `IVF_SQ8` - Vector indexing that adopts a scalar quantization strategy that significantly reduces the size of a vector (by about 3/4), thus improving the overall throughput of vector processing; <br/>4. `IVF_SQ8H` - An enhanced index algorithm of `IVF_SQ8`. It supports hybrid computation on both CPU and GPU, which significantly improves the search performance.<br/>To use this index type, make sure both `cpu` and `gpu` are added as resources for search usage in the [Milvus configuration file](../reference/milvus_config.md).<br/>5. `NSG` - NSG (Navigating Spreading-out Graph) is a graph-base search algorithm that a) lowers the average out-degree of the graph for fast traversal; b) shortens the search path; c) reduces the index size; d) lowers the indexing complexity.<br/>Extensive tests show that NSG can achieve very high search performance at high precision, and needs much less memory. Compared to non-graph-based algorithms, it is faster to achieve the same search precision. | IndexType | `FLAT` / `IVFLAT` / `IVF_SQ8` / `IVF_SQ8H` / `NSG` |
+| `nlist`      | Number of vector buckets in a file. Default value is 16384.  | Integer   | 1 - 16384                                          |
 
 To create an index for the table, use `milvus.create_index` followed by parameters that include the table name, index type, and nlist.
 
@@ -214,21 +226,23 @@ Below is the list of parameters for searching vectors in a table:
 
 To search a batch of vectors, use `milvus.search_vectors` followed by the table from which to retrieve the data, the query vectors, and the number of vectors that will be returned for each query vector.
 
-Suppose you want to search the top 5 most similar vectors of three 256-dimensional vectors (represented by `query_records` in below codes), you may:
+Suppose you want to search the top 2 most similar vectors of three 256-dimensional vectors (represented by `query_records` in below codes), you may:
 
 ```python
 # Search 3 vectors
->>> status, results = milvus.search_vectors(table_name='test01', query_records=q_records, top_k=5, nprobe=16)
+>>> status, results = milvus.search_vectors(table_name='test01', query_records=q_records, top_k=2, nprobe=16)
 >>> status
 Status(message='Search vectors successfully!', code=0)
 >>> results # Searched top_k vectors
 >>> print(results) # Searched top_k vectors
 [
-[QueryResult(id=0, distance=34.85963439941406)],
-[QueryResult(id=0, distance=36.73900604248047)],
-[QueryResult(id=0, distance=34.35655975341797)],
-[QueryResult(id=18, distance=36.19701385498047)],
-[QueryResult(id=5, distance=39.11549758911133)]
+[(id:15, distance:2.855304718017578),
+ (id:16, distance:3.040700674057007)],
+[(id:11, distance:3.673950433731079),
+ (id:15, distance:4.183730602264404)],
+      ........
+[(id:6, distance:4.065953254699707),
+ (id:1, distance:4.149323463439941)]
 ]
 ```
 
@@ -236,26 +250,17 @@ To filter the results, add a `query_ranges` clause identifying the date range to
 
 ```python
 # Search 3 vectors
->>> status, results = milvus.search_vectors(table_name='test01', query_records=q_records, top_k=5, query_ranges=[('2019-06-01', '2019-06-05')] )
+>>> status, results = milvus.search_vectors(table_name='test01', query_records=q_records, top_k=2, query_ranges=[('2019-06-01', '2019-06-05')] )
 >>> status
 Status(message='Search vectors successfully!', code=0)
 >>> results # Searched top_k vectors
-[[QueryResult(id=0, distance=34.85963439941406)],
-[QueryResult(id=0, distance=36.73900604248047)],
-[QueryResult(id=0, distance=34.35655975341797)],
+[
+[(id:15, distance:2.855304718017578),
+ (id:16, distance:3.040700674057007)],
+[(id:11, distance:3.673950433731079),
+ (id:15, distance:4.183730602264404)],
 ...
 ]
-```
-
-## Delete vectors by range
-
-To delete vectors you no longer need, use `milvus.delete_vectors_by_range` followed by the table name and the date range:
-
-```python
-# Delete vectors
->>> milvus.delete_vectors_by_range('test01', '2019-06-01', '2020-01-01')
->>> status
-Status(message='Delete vectors successfully!', code=0)
 ```
 
 ## Drop a table

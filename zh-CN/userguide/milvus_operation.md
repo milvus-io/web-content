@@ -6,11 +6,11 @@ sidebar_label: Learn Milvus Operations
 
 # 了解 Milvus 操作
 
-该页面将向您展示如何使用 Python 接口运行 Milvus 基本操作。若要了解更多 Milvus 操作，你可以参照 [Milvus Python SDK](https://pypi.org/project/pymilvus)和 [使用示例](https://github.com/milvus-io/pymilvus/blob/branch-0.4.0/examples/example.py)。
+该页面将向您展示如何使用 [Python SDK](https://pypi.org/project/pymilvus) 运行 Milvus 基本操作。您也可以使用其它语言如 [Java](https://milvus-io.github.io/milvus-sdk-java/javadoc/index.html), C++ 等来进行这些操作。
 
 ## 运行操作前的准备
 
-请使用 Milvus 自带的 Python 客户端 - pymilvus 运行下列操作。您也可以使用其它语言如C++，RESTful API等来进行这些操作。
+请使用 Milvus 自带的 Python 客户端 - pymilvus 运行下列操作。
 
 1. 导入 pymilvus.
 
@@ -95,6 +95,17 @@ Status(message='Describe table successfully!')
 TableSchema(table_name='test01',dimension=256, index_file_size=1024, metric_type=<MetricType: L2>)
 ```
 
+若要显示表的行数， 使用 `milvus.get_table_row_count`，后面跟表名：
+
+```python
+# Show table rows
+>>> status, num = milvus.get_table_row_count('test01')
+>>> status
+Status(code=0, message='Success')
+>>> num
+20
+```
+
 请用下列命令确认某张表是否存在：
 
 ```python
@@ -106,7 +117,7 @@ True
 
 ## 将向量插入表
 
-> 注意：在实际生产环境中，在插入向量之前，建议先使用 `milvus.create_index` 为表创建索引，如此将极大减少向量插入和创建索引的总时间。如果选择这么做，在向量插入结束后，相同的索引需要手动再创建一次，因为可能存在大小不满足 `index_file_size` 的数据文件（这意味着系统不会为这个文件自动创建索引）。
+> 注意：在实际生产环境中，在插入向量之前，建议先使用 `milvus.create_index` 以便系统自动增量创建索引。需要注意的是，在向量插入结束后，相同的索引需要手动再创建一次（因为可能存在大小不满足 `index_file_size` 的数据文件，系统不会为该文件自动创建索引）。
 
 以下是向量插入的参数列表：
 
@@ -154,10 +165,10 @@ Status(code=0, message='Success')
 
 以下是创建索引的参数列表：
 
-| 参数         | 说明                                                         | 类型      | 参考值                        |
-| ------------ | ------------------------------------------------------------ | --------- | ----------------------------- |
-| `index_type` | 用于查询表的索引方式。请在下列类型中选择一种： <br/>1. `FLAT` - 提供100%的精确检索。但由于计算量巨大，搜索速度可能受影响；<br/>2. `IVFLAT` - 基于 K-means 的检索方式，搜索精度和速度都不错；<br/>3. `IVFSQ` - 运用scalar quantization的向量索引，能大幅缩小向量体积（大概缩减到原来的1/4），从而能有效提高向量吞吐量。 | IndexType | `FLAT` / `IVFLAT` / `IVF_SQ8` |
-| `nlist`      | 每个文件中的向量类的个数，默认值为 `16384`。                    | Integer   | 1 - 16384                     |
+| 参数         | 说明                                                         | 类型      | 参考值                                             |
+| ------------ | ------------------------------------------------------------ | --------- | -------------------------------------------------- |
+| `index_type` | 用于查询表的索引方式。请在下列类型中选择一种： <br/>1. `FLAT` - 提供100%的精确检索。但由于计算量巨大，搜索速度可能受影响；<br/>2. `IVFLAT` - 基于 K-means 的检索方式，搜索精度和速度都不错；<br/>3. `IVFSQ8` - 运用scalar quantization的向量索引，能大幅缩小向量体积（大概缩减到原来的1/4），从而能有效提高向量吞吐量。<br/>4. `IVF_SQ8H` -  `IVF_SQ8` 的增强版。支持 CPU 和 GPU 的混合查询，能极大提高搜索性能。<br/>若要使用该索引方式，请确保已同时选择了 `cpu` 和 `gpu` 用于 Milvus 搜索。具体配置请参考 [Milvus 配置](../reference/milvus_config.md) 里的 `resource_config` 区域。<br/>5. `NSG` - NSG (Navigating Spreading-out Graph) 是一种基于图的索引算法，它可以 a) 降低图的平均出度；b) 缩短搜索路径；c) 缩减索引大小；d) 降低索引复杂度。<br/>大量测试显示 NSG 响应快、搜索精度高，而且需要占用的内存更小。相比非基于图的索引算法，在相同精度的条件下，搜索速度更快。 | IndexType | `FLAT` / `IVFLAT` / `IVF_SQ8` / `IVF_SQ8H` / `NSG` |
+| `nlist`      | 每个文件中的向量类的个数，默认值为 `16384`。                 | Integer   | 1 - 16384                                          |
 
 请使用 `milvus.create_index` 来创建索引，后面跟表名、索引方式和 nlist。
 
@@ -210,21 +221,23 @@ Status(code=0, message='Success')
 
 请使用 `milvus.search_vectors` 来搜索向量，后面跟要搜索的表的名字，要搜索的目标向量，以及您期望返回的与每个目标向量最相似的匹配向量个数。
 
-假设您要针对3条256维的目标向量（在下面代码中用q_records表示），搜索与每条目标向量相似度最高的前5条匹配向量，您可以：
+假设您要针对3条256维的目标向量（在下面代码中用q_records表示），搜索与每条目标向量相似度最高的前2条匹配向量，您可以：
 
 ```python
 # Search 3 vectors
->>> status, results = milvus.search_vectors(table_name='test01', query_records=q_records, top_k=5, nprobe=16)
+>>> status, results = milvus.search_vectors(table_name='test01', query_records=q_records, top_k=2, nprobe=16)
 >>> status
 Status(message='Search vectors successfully!', code=0)
 >>> results # Searched top_k vectors
 >>> print(results) # Searched top_k vectors
 [
-[QueryResult(id=0, distance=34.85963439941406)],
-[QueryResult(id=0, distance=36.73900604248047)],
-[QueryResult(id=0, distance=34.35655975341797)],
-[QueryResult(id=18, distance=36.19701385498047)],
-[QueryResult(id=5, distance=39.11549758911133)]
+[(id:15, distance:2.855304718017578),
+ (id:16, distance:3.040700674057007)],
+[(id:11, distance:3.673950433731079),
+ (id:15, distance:4.183730602264404)],
+      ........
+[(id:6, distance:4.065953254699707),
+ (id:1, distance:4.149323463439941)]
 ]
 ```
 
@@ -232,26 +245,17 @@ Status(message='Search vectors successfully!', code=0)
 
 ```python
 # Search 3 vectors
->>> status, results = milvus.search_vectors(table_name='test01', query_records=q_records, top_k=5, query_ranges=[('2019-06-01', '2019-06-05')] )
+>>> status, results = milvus.search_vectors(table_name='test01', query_records=q_records, top_k=2, query_ranges=[('2019-06-01', '2019-06-05')] )
 >>> status
 Status(message='Search vectors successfully!', code=0)
 >>> results # Searched top_k vectors
-[[QueryResult(id=0, distance=34.85963439941406)],
-[QueryResult(id=0, distance=36.73900604248047)],
-[QueryResult(id=0, distance=34.35655975341797)],
+[
+[(id:15, distance:2.855304718017578),
+ (id:16, distance:3.040700674057007)],
+[(id:11, distance:3.673950433731079),
+ (id:15, distance:4.183730602264404)],
 ...
 ]
-```
-
-## 删除向量
-
-若您不再需要某些向量，请使用 `milvus.delete_vectors_by_range` 将它们删除，后面跟表名和日期范围。
-
-```python
-# Delete vectors
->>> milvus.delete_vectors_by_range('test01', '2019-06-01', '2020-01-01')
->>> status
-Status(message='Delete vectors successfully!', code=0)
 ```
 
 ## 删除表
@@ -269,3 +273,4 @@ Status(message='Delete table successfully!', code=0)
 
 - [体验 Milvus 在线训练营](https://github.com/milvus-io/bootcamp) 了解更多解决方案
 - [故障诊断 API 行为](troubleshoot.md)
+

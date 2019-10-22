@@ -10,8 +10,8 @@ sidebar_label: Troubleshoot
 
 If you run into issues with Milvus, there are a few initial steps you can always take:
 
-1. If you come across the error in Milvus operations, go to **Troubleshoot API behaviors** below.
-2. If the error pops out when you start Milvus server, check below list of **Server Errors** for a solution.
+1. If you come across the error in Milvus operations, go to [Troubleshoot API behaviors](#troubleshoot-api-behaviors).
+2. If the error pops out when you start Milvus server, check below list of [Server Errors](#server-errors) for a solution.
 4. If you cannot resolve the issue easily yourself, you can:
    - Reach out for support from Milvus team by support@zilliz.com.
    - [File an Issue] and describe in detail the problem.
@@ -149,7 +149,7 @@ This message indicates that the search parameter nprobe is illegal.
 
 To solve this issue, check that the nprobe is within the range of 1 ~ index nlist.
 
-`Row record array data is empty`
+`Query record float array is empty`
 
 This message indicates that the searched vectors have empty values.
 

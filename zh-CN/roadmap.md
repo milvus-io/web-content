@@ -8,52 +8,52 @@ sidebar_label: Milvus Roadmap
 
 ## Search Engine
 
-- [ ] Support INT8 vectors
+- Support INT8 vectors
 
-- [ ] Support hybrid index search
+- Support hybrid index search
 
-- [ ] Smart index selection
+- Smart index selection
 
-- [ ] Support attributes filtering and vector searching 
+- Support attributes filtering and vector searching 
 
 ## Storage
 
-- [ ] WAL
+- WAL
 
-- [ ] Support OnDisk index
+- Support OnDisk index
 
-- [ ] Support vector deletion
+- Support vector deletion
 
-- [ ] Support vector update
+- Support vector update
 
-- [ ] Rebuild index
+- Rebuild index
 
-- [ ] Support replica
+- Support replica
 
 ## Optimization
 
-- [ ] Auto parameter tuning
+- Auto parameter tuning
 
-- [ ] Dynamic resource allocation
+- Dynamic resource allocation
 
 ## Utilization
 
-- [ ] CLI / GUI
+- CLI / GUI
 
-- [ ] Support more monitoring tools
+- Support more monitoring tools
 
-- [ ] Log monitor
+- Log monitor
 
 ## Platform
 
-- [ ] Support Windows
+- Support Windows
 
-- [ ] Support PowerPC architecture
+- Support PowerPC architecture
 
 ## Interface
 
-- [ ] Java SDK
+- Java SDK
 
-- [ ] Go SDK
+- Go SDK
 
-- [ ] Support multiple users
+- Support multiple users
