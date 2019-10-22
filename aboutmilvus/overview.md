@@ -16,33 +16,29 @@ Milvus is the state-of-the-art similarity search engine for massive unstructured
 
   Designed with heterogeneous computing architecture for best performance and cost efficiency.
 
-- indexes
+- Intelligent indexes
 
-  Milvus supports quantization indexing, tree-based indexing, and graph indexing algorithms.
-
-- Intelligent scheduling
-
-  Milvus optimizes the search computation and index building according to your data size and available resources.
-
+  Quantization index, tree-based index and graph-based index are supported and optimized for different application senarios.
+  
 - Horizontal scalability
 
-  Milvus expands computation and storage by adding nodes during runtime, which allows you to scale the data size without redesigning the system.
+  Milvus supports online/offline expansion to scale both storage and computation resources with one single command.
 
 - High availibility
 
-  The distributed cluster architecture provides continued service when some of the system components fail.
-
+  Integraded with K8S framework, all single-point-of-failures could be eliminated.
+  
 - High compatibility
 
-  Milvus is compatible with mainstream machine learning models and programming languages.
+  Milvus is compatible with almost all deep learning models and major programming languages.
 
 - Ease of use
 
-  Milvus is easy to install and enables you to exclusively focus on feature vectors. You can directly use Milvus to process feature vectors without pre-processing.
+  Milvus can be installed in a few minutes and you can become vector search expert in 30 mins. Check out our bootcamp.
 
-- Visualized performance monitoring
+- Graphic monitor tool
 
-  You can track system performance on Prometheus-based GUI monitor dashboard.
+  Prometheus-based GUI monitor is integraded for system monitoring.
 
 ## Overall architecture
 ![Milvus architecture](assets/milvus_arch.png)
