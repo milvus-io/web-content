@@ -1,6 +1,6 @@
 ---
 id: traditional_db
-title: Feature Vector Indexing in Traditional Relational Databases
+title: Traditional Database
 sidebar_label: Traditional Database
 ---
 
