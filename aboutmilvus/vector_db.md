@@ -1,6 +1,6 @@
 ---
 id: vector_db
-title: Existing Feature Vector Search Libraries
+title: Feature Vector Search Libraries
 sidebar_label: Feature Vector Search Libraries
 ---
 
