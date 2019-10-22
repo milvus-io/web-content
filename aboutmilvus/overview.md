@@ -8,41 +8,41 @@ sidebar_label: Milvus Overview
 
 ## What is Milvus
 
-Milvus is a distributed feature vector search engine which provides state-of-the-art similarity search and analysis for billion-scale feature vectors. 
+Milvus is an open source similarity search engine for massive feature vectors. Designed with heterogeneous computing architecture for the best cost efficiency. Searches over billion-scale vectors take only milliseconds with minimum computing resources.
 
 ## Key features
 
-- GPU-accelerated search engine
+- Heterogeneous computing
 
-  Milvus uses CPU/GPU heterogeneous computing architecture to process feature vectors and are orders of magnitudes faster than traditional databases.
+  Milvus is designed with heterogeneous computing architecture for the best performance and cost efficiency. 
 
-- Various indexes
+- Multiple indexes
 
-  Milvus supports quantization indexing, tree-based indexing, and graph indexing algorithms.
+  Milvus supports a variety of indexing types that employs quantization, tree-based, and graph indexing techniques. 
 
-- Intelligent scheduling
+- Intelligent resource management
 
-  Milvus optimizes the search computation and index building according to your data size and available resources.
+  Milvus automatically adapts search computation and index building processes based on your datasets and available resources.
 
 - Horizontal scalability
 
-  Milvus expands computation and storage by adding nodes during runtime, which allows you to scale the data size without redesigning the system.
+  Milvus supports online / offline expansion to scale both storage and computation resources with simple commands.
 
-- High availibility
+- High availability
 
-  The distributed cluster architecture provides continued service when some of the system components fail.
+  Milvus is integrated with Kubernetes framework so that all single point of failures could be avoided.
 
 - High compatibility
 
-  Milvus is compatible with mainstream machine learning models and programming languages.
+  Milvus is compatible with almost all deep learning models and major programming languages such as Python, Java and C++, etc.
 
 - Ease of use
 
-  Milvus is easy to install and enables you to exclusively focus on feature vectors. You can directly use Milvus to process feature vectors without pre-processing.
+  Milvus can be easily installed in a few steps and enables you to exclusively focus on feature vectors. 
 
-- Visualized performance monitoring
+- Visualized monitor
 
-  You can track system performance on Prometheus-based GUI monitor dashboard.
+  You can track system performance on Prometheus-based GUI monitor dashboards.
 
 ## Overall architecture
 ![Milvus architecture](assets/milvus_arch.png)
