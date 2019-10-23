@@ -8,21 +8,21 @@ sidebar_label: Performance Benchmarking
 
 该页面向您展示如何针对Milvus进行性能测试，评估指标为总查询时间（`total_time`）和单条向量查询时间（`avg_time`）。下文展示的测试针对以下数据集进行：
 
-- 1百万条512维向量（总大小：GB） 
-- 1亿条512维向量（总大小：GB）
+- 1百万条512维向量（总大小：约2GB）
+- 1亿条512维向量（总大小：约200GB）
 
 ## 百万向量检索
 
-### 硬件要求
+### 环境要求
 
-| Component  | Minimum Config                  |
+| 组件  | 最低配置                 |
 | ---------- | ------------------------------- |
-| OS         | Ubuntu LTS 18.04                |
+| 操作系统         | Ubuntu LTS 18.04                |
 | CPU        | Intel Core i5-8250U             |
 | GPU        | Nvidia GeForce MX150, 2GB GDDR5 |
-| GPU Driver | CUDA 10.1, Driver 418.74        |
-| Memory     | 8 GB DDR4                       |
-| Storage    | NVMe SSD 256 GB                 |
+| GPU 驱动软件 | CUDA 10.1, Driver 418.74        |
+| 内存    | 8 GB DDR4                       |
+| 硬盘    | NVMe SSD 256 GB                 |
 
 ### 相关数据集
 
@@ -92,16 +92,16 @@ $ python3 milvus_bootcamp.py --table=ann_1m_sq8 -s
 
 ## 亿级向量检索
 
-### 硬件要求
+### 环境要求
 
-| Component  | Minimum Config                     |
+| 组件  | 最低配置                   |
 | ---------- | ---------------------------------- |
-| OS         | Ubuntu LTS 18.04                   |
+| 操作系统         | Ubuntu LTS 18.04                   |
 | CPU        | Intel Core i7-7700K                |
 | GPU        | Nvidia GeForce GTX 1050, 4GB GDDR5 |
-| GPU Driver | CUDA 10.1, Driver 418.74           |
-| Memory     | 16 GB DDR4 ( 2400 Mhz ) x 2        |
-| Storage    | SATA 3.0 SSD 256 GB                |
+| GPU 驱动软件 | CUDA 10.1, Driver 418.74           |
+| 内存     | 16 GB DDR4 ( 2400 MHz ) x 2        |
+| 硬盘    | SATA 3.0 SSD 256 GB                |
 
 ### 相关数据集
 
@@ -147,7 +147,7 @@ $ nvidia-docker run -td --runtime=nvidia -p 19530:19530 -p 8080:8080 -v /home/$U
 
 进入 `milvus_sift100m` 目录，运行如下脚本：
 
-```
+```shell
 $ python3 milvus_bootcamp.py --table=ann_100m_sq8 --index=ivfsq8 -t
 ```
 
@@ -159,7 +159,7 @@ $ python3 milvus_bootcamp.py --table=ann_100m_sq8 --index=ivfsq8 -t
 
 为评估 Milvus 的查询性能，进入 `milvus_sift100m` 目录，运行如下脚本：
 
-```
+```shell
 $ python3 milvus_bootcamp.py --table=ann_100m_sq8 -s
 ```
 

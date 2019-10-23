@@ -7,14 +7,12 @@ sidebar_label: Learn Milvus Operations
 
 # Learn Milvus Operations
 
-This page walks you through some of the most essential Milvus operations using [**Python** SDK](https://pypi.org/project/pymilvus).
+This page walks you through some basic Milvus operations using the [**Python** SDK](https://pypi.org/project/pymilvus).
 You can also use other languages such as [Java](https://milvus-io.github.io/milvus-sdk-java/javadoc/index.html), C++, etc.
 
 ## Before trying out these operations
 
-Please use pymilvus, the built-in Python client, to try out these operations. 
-
-Just type **python** at your console, hit `Enter`, and you should enter Pythonâ€™s Interpreter.
+Please use pymilvus, the built-in Python client, to try out these operations.
 
 1. Import pymilvus.
 
@@ -23,7 +21,7 @@ Just type **python** at your console, hit `Enter`, and you should enter Pythonâ€
    >>> from milvus import Milvus, IndexType, MetricType, Status
    ```
 
-2. Connect to Milvus on your local server, following either of the below methods:
+2. Connect to Milvus on your local server by using one of the following methods:
 
    ```python
    # Connect to Milvus server
@@ -32,7 +30,7 @@ Just type **python** at your console, hit `Enter`, and you should enter Pythonâ€
    Status(message='connected!', code=0)
    ```
 
-   > Note: In the above code, default values are used for `host` and `port` parameters. Feel free to change them to the IP address and port you set for Milvus server. 
+   > Note: In the above code, default values are used for `host` and `port` parameters. Feel free to change them to the IP address and port you set for Milvus server.
    
    ```python
    >>> milvus.connect(uri='tcp://localhost:19530')
@@ -102,7 +100,7 @@ TableSchema(table_name='test01',dimension=256, index_file_size=1024, metric_type
 
 To show all the rows of a table, use `milvus.get_table_row_count` followed by the table name:
 
-```python 
+```python
 # Show table rows
 >>> status, num = milvus.get_table_row_count('test01')
 >>> status
@@ -118,23 +116,23 @@ To verity if a table exists in Milvus, use this command:
 True
 ```
 
-> Note: If the table you verified is not available, `False` will be returned instead of `True`.
+> Note: If the table you verified is not available, the terminal returns `False`.
 
 
 ## Insert vectors into a table
 
-> Note: In the production scenario, it is recommended to use the `milvus.create_index` before inserting vectors into the table. Index will be automatically built as vectors are being imported.  However, in doing so, you need to create the same index again after the vector insertion process is completed, in case there are any data file that does not meet the `index_file_size` (which means index will not be automatically built for this data file).
+> Note: In the production scenario, it is recommended to use the `milvus.create_index` before inserting vectors into the table. Index will be automatically built when vectors are being imported.  However, you need to create the same index again after the vector insertion process is completed because some data files may not meet the `index_file_size` and index will not be automatically built for these data files.
 
 Below is the list of parameters for inserting vectors into a table:
 
 | Parameter    | Description                                                  | Type                | Reference value        |
 | ------------ | ------------------------------------------------------------ | ------------------- | ---------------------- |
-| `table_name` | The name of the table to create, which must be unique within its database. <br/>Begin a table name with a letter or an underscore (_) . Subsequent characters can be letters, underscores, numbers (0-9). The entire length can not exceed 255 characters. | String              | 'table name'           |
-| `records`    | The list of vectors to insert into the table. Each vector value must be a **Float** data type, with the same dimension as that defined for the table. | 2-dimensional  list | [[0.1, 0.2, ...], ...] |
+| `table_name` | The name of the table to create, which must be unique within its database. <br/>Table name can only contain numbers, letters, and underscores. The first character of a table name must be an underscore or letter. The length of a table name must be less than 255 characters.  | String              | 'table name'           |
+| `records`    | The list of vectors to insert into the table. Each vector value must be **Float** data type and has the same dimension as the table. | 2-dimensional list | [[0.1, 0.2, ...], ...] |
 
 To insert a batch of vectors (represented by `records` in the code) into a table, use `milvus.add_vectors` followed by the table name and a comma-separated list of vectors. 
 
-When succeeded, a group of vector ids will be returned. 
+When succeeded, a group of vector ids will be returned.
 
 ```python
 # Insert vectors
@@ -173,7 +171,7 @@ Below is the list of parameters for creating index for a table:
 
 | Parameter    | Description                                                  | Type      | Reference value                                    |
 | ------------ | ------------------------------------------------------------ | --------- | -------------------------------------------------- |
-| `index_type` | The type of indexing method to query the table. Select one out of these types: <br/>1. `FLAT` - Provides 100% accuracy for recalls. However, performance might be downgraded due to huge computation effort; <br/>2. `IVFLAT` - K-means based similarity search which is balanced between accuracy and performance; <br/>3. `IVF_SQ8` - Vector indexing that adopts a scalar quantization strategy that significantly reduces the size of a vector (by about 3/4), thus improving the overall throughput of vector processing; <br/>4. `IVF_SQ8H` - An enhanced index algorithm of `IVF_SQ8`. It supports hybrid computation on both CPU and GPU, which significantly improves the search performance.<br/>To use this index type, make sure both `cpu` and `gpu` are added as resources for search usage in the [Milvus configuration file](../reference/milvus_config.md).<br/>5. `NSG` - NSG (Navigating Spreading-out Graph) is a graph-base search algorithm that a) lowers the average out-degree of the graph for fast traversal; b) shortens the search path; c) reduces the index size; d) lowers the indexing complexity.<br/>Extensive tests show that NSG can achieve very high search performance at high precision, and needs much less memory. Compared to non-graph-based algorithms, it is faster to achieve the same search precision. | IndexType | `FLAT` / `IVFLAT` / `IVF_SQ8` / `IVF_SQ8H` / `NSG` |
+| `index_type` | The type of indexing method to query the table. Select one out of these types: <ul><li>`FLAT` - Provides 100% accuracy for recalls. However, performance might be downgraded due to huge computation effort</li><li>`IVFLAT` - K-means based similarity search which is balanced between accuracy and performance</li><li>`IVF_SQ8` - Vector indexing that adopts a scalar quantization strategy that significantly reduces the size of a vector (by about 3/4), thus improving the overall throughput of vector processing</li><li>`IVF_SQ8H` - An enhanced index algorithm of `IVF_SQ8`. It supports hybrid computation on both CPU and GPU, which significantly improves the search performance.<br/>To use this index type, make sure both `cpu` and `gpu` are added as resources for search usage in the [Milvus configuration file](../reference/milvus_config.md).</li><li>`NSG` - NSG (Navigating Spreading-out Graph) is a graph-base search algorithm that a) lowers the average out-degree of the graph for fast traversal; b) shortens the search path; c) reduces the index size; d) lowers the indexing complexity.<br/>Extensive tests show that NSG can achieve very high search performance at high precision, and needs much less memory. Compared to non-graph-based algorithms, it is faster to achieve the same search precision.</li></ul> | IndexType | `FLAT` / `IVFLAT` / `IVF_SQ8` / `IVF_SQ8H` / `NSG` |
 | `nlist`      | Number of vector buckets in a file. Default value is 16384.  | Integer   | 1 - 16384                                          |
 
 To create an index for the table, use `milvus.create_index` followed by parameters that include the table name, index type, and nlist.
@@ -216,11 +214,11 @@ Below is the list of parameters for searching vectors in a table:
 
 | Parameter                 | Description                                                  | Type                                  | Reference value                     |
 | ------------------------- | ------------------------------------------------------------ | ------------------------------------- | ----------------------------------- |
-| `table_name`              | The name of the table to create, which must be unique within its database. <br/>Begin a table name with a letter or an underscore (_) . Subsequent characters can be letters, underscores, numbers (0-9). The entire length can not exceed 255 characters. | String                                | 'table name'                        |
-| `query_records`           | The list of query vectors to be searched in the table. Each vector value must be a float data type, with the same dimension as that defined for the table. | 2-dimensional list                    | [[0.1, 0.2, ...], ...]              |
+| `table_name`              | The name of the table to create, which must be unique within its database. <br/>BTable name can only contain numbers, letters, and underscores. The first character of a table name must be an underscore or letter. The length of a table name must be less than 255 characters. | String                                | 'table name'                        |
+| `query_records`           | The list of query vectors to be searched in the table. Each vector value must be float data type, with the same dimension as that defined for the table. | 2-dimensional list                    | [[0.1, 0.2, ...], ...]              |
 | `top_k`                   | The top k most similar results of each query vector.        | Integer                               | 0 < top_k <= 1000                   |
 | `nprobe`                  | Number of queried vector buckets. <br/>`nprobe` affects search precision. The greater the value, the more precise the result, yet the slower the search speed. | Integer                               | 1 - 16384                           |
-| `query_ranges` (optional) | An optional, comma-separated list that defines the condition by which the search is filtered. <br/>For example you can search within a specific date range. The default value `None` (no range, meaning to search the entire database) is used if you leave this parameter out. | List (Suggest to use Tuple data type) | [('2019-01-01', '2019-01-02'), ...] |
+| `query_ranges` (optional) | An optional, comma-separated list that defines the condition by which the search is filtered. <br/>For example, you can search within a specific date range. The default value `None` (no range, meaning to search the entire database) is used if you leave this parameter out. | List (Suggest to use tuple data type) | [('2019-01-01', '2019-01-02'), ...] |
 
 > Note: Currently, only date range is supported in `query_ranges`. The date format is 'yyyy-mm-dd'. The date range [2019.1.1, 2019.1.5] contains 2019.1.1 and 2019.1.5.
 
@@ -274,7 +272,7 @@ When you no longer need a table, use `milvus.delete_table` followed by the table
 Status(message='Delete table successfully!', code=0)
 ```
 
-## What's next?
+## What's next
 
-- [Try Milvus Bootcamp](https://github.com/milvus-io/bootcamp) to learn more about solutions
-- [Troubleshoot API Operations](troubleshoot.md)
+- [Try Milvus bootcamp](https://github.com/milvus-io/bootcamp) to learn about more solutions
+- [Troubleshoot API operations](troubleshoot.md)

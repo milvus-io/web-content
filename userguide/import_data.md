@@ -5,15 +5,15 @@ sidebar_label: Import Data
 ---
 # Import Data
 
-Milvus supports importing data from various data formats, as long as the data can be transformed into vectors of 2-dimension arrays. 
+Milvus supports importing data from various data formats, as long as the data can be transformed into vectors of 2-dimensional arrays.
 
-This page shows how to migrate data to Milvus as well as data storage in Milvus.
+This topic introduces data migration and storage in Milvus.
 
 ## Prepare data files
 
-Although Milvus supports various data formats, however, when it comes to repeated reading of the same data from a local disk storage, it is recommended to use the NPY file format, with each file containing <= 100,000 vectors. 
+Although Milvus supports various data formats, when it comes to repeated reading of the same data from a local disk storage, it is recommended to use the NPY file format, with each file containing less than or equal to 100,000 vectors.
 
-The NPY file format makes incredibly fast reading speed enhancement and storage optimization over reading from CSV files. Take for example the storage of single-precision 512-dimensional vectors: storing 100,000 million such vectors in CSV file takes about 800 MB, while in NPY file, it takes < 400 MB.
+The NPY file format makes incredibly fast reading speed enhancement and storage optimization over reading from CSV files. Take for example the storage of single-precision 512-dimensional vectors: storing 100,000 million such vectors in CSV file takes about 800 MB, while in NPY file, it takes less than 400 MB.
 
 If you have only the CSV files, follow below steps to convert them into binary files in NPY format:
 

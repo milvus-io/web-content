@@ -8,44 +8,44 @@ sidebar_label: Monitoring and Alerting
 
 ## Overview
 
-Although Milvus is highly available, it is critical to actively monitor the overall performance of a system running in production, and to create alerting rules that promptly send notifications when there are events that require investigation or intervention. 
+Although Milvus is highly available, it is critical to actively monitor the overall performance of a system running in production, and to create alerting rules that promptly send notifications when there are events that require investigation or intervention.
 
-This page explains available monitoring solution and critical events and metrics to alert on.
+This page explains available monitoring solutions and critical events and metrics to alert on.
 
 ### Monitoring solution
 
-Milvus uses Prometheus, an open-source time series database, to store and monitor its metrics, and it uses Grafana for flexible data visualizations.
+Milvus uses Prometheus, an open source time series database, to store and monitor its metrics, and it uses Grafana for flexible data visualizations.
 
 - Prometheus
 
-  Prometheus is system monitoring and alerting toolkit with a multi-dimensional data model and a flexible query language. 
+  Prometheus is a system monitoring and alerting toolkit with a multi-dimensional data model and a flexible query language.
 
   The Prometheus ecosystem consists of multiple components, of which the following are used in Milvus:
 
-  - Prometheus Server which scrapes and stores time series data.
+  - Prometheus server which scrapes and stores time series data.
   - Client libraries for instrumenting application metrics.
   - Alertmanager for alert handling.
 
-Below graph shows how Prometheus works in Milvus:
+The following graph shows how Prometheus works in Milvus:
 
-![prometheus](assets/monitoring/monitoring.png)
+![prometheus](../assets/monitoring/monitoring.png)
 
 - Grafana
 
-  Grafana is an open-source platform for time series analytics. It is used in Milvus to visualize various performance metrics:
+  Grafana is an open source platform for time-series analytics and used in Milvus to visualize various performance metrics:
 
-  ![dashboard](assets/prometheus.png)
+  ![dashboard](../assets/prometheus.png)
 
-### Events to alert on
+### Events to create alert rules
 
-Active monitoring helps you identify problems early, but it is also essential to create alerting rules that promptly send notifications when there are events that require investigation or intervention. 
+Active monitoring helps you identify problems early, but it is also essential to create alerting rules that promptly send notifications when there are events that require investigation or intervention.
 
-This section includes the most important events to create alerting rules for.
+This section includes the most important events for which you must create alerting rules.
 
 **Server is down**
 
-- Rule: Send an alert when the Milvus server is down. 
-- How to detect: If the Milvus server is down, there will be **No Data** displayed on the monitoring dashboard.
+- Rule: Send an alert when the Milvus server is down.
+- How to detect: If the Milvus server is down, **No Data** will be displayed on the monitoring dashboard.
 
 **CPU/GPU temperature is too high**
 
@@ -58,9 +58,7 @@ Milvus generates detailed time series metrics. This page shows you how to pull t
 
 ### Before you begin
 
-- Make sure you have already started a Milvus server.
-
-- Make sure you have enabled the monitoring function. 
+- Make sure you have already started a Milvus server and enabled the monitoring function.
 
 ### Install Prometheus
 
@@ -83,7 +81,7 @@ Milvus generates detailed time series metrics. This page shows you how to pull t
 
 ### Configure Prometheus
 
-1. Go to the Prometheus root directory, and download starter [Prometheus configuration file](assets/monitoring/prometheus.yml) for Milvus.
+1. Go to the Prometheus root directory, and download starter [Prometheus configuration file](../assets/monitoring/prometheus.yml) for Milvus.
 
    ```shell
    $ wget https://raw.githubusercontent.com/milvus-io/docs/master/assets/monitoring/prometheus.yml \ -O prometheus.yml
@@ -101,7 +99,7 @@ Milvus generates detailed time series metrics. This page shows you how to pull t
    | ------------------- | ------------------------------------------------------------ |
    | Distributed cluster | Expand the `targets` field to include `localhost: <http-port>` for each additional node in the cluster. |
 
-3. Download starter [alerting rules](assets/monitoring/alert.rules.yml) for Milvus to the Prometheus root directory.
+3. Download starter [alerting rules](../assets/monitoring/alert.rules.yml) for Milvus to the Prometheus root directory.
 
    ```shell
    wget -P rules https://raw.githubusercontent.com/milvus-io/docs/master/assets/monitoring/alerts.rules.yml
@@ -111,7 +109,7 @@ Milvus generates detailed time series metrics. This page shows you how to pull t
 
 1. Start the Prometheus server, with the `--config.file` flag pointing to the configuration file:
 
-   ``` shell
+   ```shell
    $ ./prometheus --config.file=prometheus.yml
    ```
 
@@ -121,15 +119,15 @@ Milvus generates detailed time series metrics. This page shows you how to pull t
 
 1. Use the following command to install and start Grafana for your OS:
 
-   ```
+   ```shell
    $ docker run -i -p 3000:3000 grafana/grafana
    ```
 
 2. Point your browser to `http://<hostname of machine running grafana>:3000` and log into the Grafana UI with the default username/password, `admin/admin`, or create your own account.
 
-3. [Add Prometheus as a datasource](http://docs.grafana.org/datasources/prometheus/).
+3. [Add Prometheus as a data source](http://docs.grafana.org/datasources/prometheus/).
    
-4. Configure the datasource as follows:
+4. Configure the data source as follows:
 
    | Field   | Definition                                             |
    | :------ | :----------------------------------------------------- |
@@ -138,15 +136,15 @@ Milvus generates detailed time series metrics. This page shows you how to pull t
    | URL     | `http://<hostname of machine running prometheus>:9090` |
    | Access  | Browser                                                |
 
-5. Download the starter [Grafana dashboard](assets/monitoring/dashboard.json) for Milvus:
+5. Download the starter [Grafana dashboard](../assets/monitoring/dashboard.json) for Milvus:
 
-   ```
+   ```shell
    $ wget https://raw.githubusercontent.com/milvus-io/docs/master/assets/monitoring/dashboard.json
    ```
 
-6. [Add the dashboard to Grafana](http://docs.grafana.org/reference/export_import/#importing-a-dashboard). 
+6. [Add the dashboard to Grafana](http://docs.grafana.org/reference/export_import/#importing-a-dashboard).
 
-   ![image-20190620191802408](assets/importjson.png)
+   ![image-20190620191802408](../assets/importjson.png)
 
 ### Send notifications with Alertmanager
 
@@ -182,4 +180,3 @@ In Configure Prometheus, you have already downloaded the starter alerting rules 
 ## Related links
 
 [Monitoring Metrics](../reference/monitoring_metrics.md)
-
