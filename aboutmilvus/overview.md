@@ -8,37 +8,42 @@ sidebar_label: Milvus Overview
 
 ## What is Milvus
 
-Milvus is the state-of-the-art similarity search engine for massive unstructured data AKA feature vectors. 
+Milvus is an open source similarity search engine for massive feature vectors. Designed with heterogeneous computing architecture for the best cost efficiency. Searches over billion-scale vectors take only milliseconds with minimum computing resources.
 
 ## Key features
 
-- Heterogeneous architecture
+- Heterogeneous computing
 
-  Designed with heterogeneous computing architecture for best performance and cost efficiency.
+  Milvus is designed with heterogeneous computing architecture for the best performance and cost efficiency. 
 
-- Intelligent indexes
+- Multiple indexes
 
-  Quantization index, tree-based index and graph-based index are supported and optimized for different application senarios.
-  
+  Milvus supports a variety of indexing types that employs quantization, tree-based, and graph indexing techniques. 
+
+- Intelligent resource management
+
+  Milvus automatically adapts search computation and index building processes based on your datasets and available resources.
+
 - Horizontal scalability
 
-  Milvus supports online/offline expansion to scale both storage and computation resources with one single command.
+  Milvus supports online / offline expansion to scale both storage and computation resources with simple commands.
 
-- High availibility
+- High availability
 
-  Integraded with K8S framework, all single-point-of-failures could be eliminated.
-  
+  Milvus is integrated with Kubernetes framework so that all single point of failures could be avoided.
+
 - High compatibility
 
-  Milvus is compatible with almost all deep learning models and major programming languages.
+  Milvus is compatible with almost all deep learning models and major programming languages such as Python, Java and C++, etc.
 
 - Ease of use
 
-  Milvus can be installed in a few minutes and you can become vector search expert in 30 mins. Check out our bootcamp.
+  Milvus can be easily installed in a few steps and enables you to exclusively focus on feature vectors. 
 
-- Graphic monitor tool
+- Visualized monitor
 
-  Prometheus-based GUI monitor is integraded for system monitoring.
+  You can track system performance on Prometheus-based GUI monitor dashboards.
+
 
 ## Overall architecture
 ![Milvus architecture](assets/milvus_arch.png)
