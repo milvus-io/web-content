@@ -9,8 +9,6 @@ sidebar_label: Preface
 ## Overview
 Milvus is a feature vector search engine that supports searching massive-scale high-dimensional vectors in milliseconds. Use this guide to learn how to install, set up,and use Milvus.
 
-If you need technical support, you may contact us by email: support@zilliz.com.
-
 To learn the advantages of Milvus over other feature vector search tools, please refer to [Milvus in Comparison](../reference/comparison.md).
 
 ## Statement

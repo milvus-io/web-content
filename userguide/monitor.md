@@ -10,8 +10,6 @@ sidebar_label: Monitoring and Alerting
 
 Although Milvus is highly available, it is critical to actively monitor the overall performance of a system running in production, and to create alerting rules that promptly send notifications when there are events that require investigation or intervention.
 
-This page explains available monitoring solutions and critical events and metrics to alert on.
-
 ### Monitoring solution
 
 Milvus uses Prometheus, an open source time series database, to store and monitor its metrics, and it uses Grafana for flexible data visualizations.
