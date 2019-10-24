@@ -6,14 +6,15 @@ sidebar_label: Operational FAQ
 
 # Operational FAQ
 
-### Why did my multiprocessing program failed? 
+### Why did my multiprocessing program fail? 
 
-In order to successfully run multiprocessing in Milvus, make sure the following conditions are met: 
+In order to successfully run multiprocessing in Milvus, make sure the following conditions are met:
 
-- No client is built in the main process
+- No client is created in the main process
 - Clients are created in each child process
 
-Below is a good example, to enable multiprocessing of vector insertion and search in a table named `TABLE_NAME`, with `vector_1` already in it. Note that in such execution, the search scope does not include the vectors that are being inserted simultaneously.
+The following example shows a correct way to implement multiprocessing.  When there is a table named `TABLE_NAME` which already includes `vector_1`, you can invoke this function in the main process to run two insert processes and one search process concurrently to get the correct result. It should be noted that the search result is irrelevant to the vectors that are being inserted.
+
 
 ```python
 def test_add_vector_search_multiprocessing():
@@ -58,7 +59,7 @@ def test_add_vector_search_multiprocessing():
         p.join()
 ```
 
-If a client already exists in the main process, enabling multiprocessing will lead to client hang and timeout. Below is a bad example to avoid, in which the `connect` is the client built in the main process.
+If a client already exists in the main process, enabling multiprocessing will cause the client to hang, which eventually lead to timeout. The following function is a bad example, in which the `connect` is the client built in the main process.
 
 ```python
 def test_add_vector_search_multiprocessing(self, connect, table):
@@ -98,7 +99,7 @@ def test_add_vector_search_multiprocessing(self, connect, table):
 
 ### Why are the search results fewer than K when I try to search the top K vectors?
 
-In all the indexing types that Milvus supports, `IVFLAT` and `IVF_SQ8` are cell-probe methods that employ a partitioning technique called k-means. The feature space is partitioned into `nlist` cells, and vectors are assigned  to one of these cells (to the centroid closest to the query), and stored in an inverted file structure formed of `nlist` inverted lists. When query occurs, only a set of `nprobe` inverted lists are selected.
+In all the indexing types that Milvus supports, `IVFLAT` and `IVF_SQ8` are cell-probe methods that employ a partitioning technique called k-means. The feature space is partitioned into `nlist` cells, and vectors are assigned to one of these cells (to the centroid closest to the query), and stored in an inverted file structure formed of `nlist` inverted lists. When query occurs, only a set of `nprobe` inverted lists are selected.
 
 If the `nlist` and K is relatively large, and `nprobe` is small enough, it happens that the vectors in `nprobe` lists are even fewer than K. Thus, when you search the top K vectors, the results would be fewer than K.
 
@@ -107,5 +108,3 @@ In order to avoid this situation, you can try increasing the value of `nprobe`, 
 ### Related links
 
 [Product FAQ](product_faq.md)
-
-

@@ -8,7 +8,9 @@ sidebar_label: Preface
 
 
 ## 概述
-Milvus 是一款特征向量检索引擎，支持大批量高维向量的毫秒级响应。本文档向您介绍如何对Milvus进行安装、设置与使用。
+本文档向您介绍如何对Milvus进行安装、设置与使用。
+
+如果您需要获取任何帮助，欢迎在 GitHub 上 [创建 issue](https://github.com/milvus-io/milvus/issues/new/choose ) 或 [加入我们的 Slack 社区](https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk) 参与讨论。
 
 若要了解 Milvus 的产品优势，请参考 [与其他向量检索工具对比](../reference/comparison.md)。
 

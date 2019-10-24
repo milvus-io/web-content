@@ -4,9 +4,7 @@ title: Milvus in Comparison
 sidebar_label: Milvus in Comparison
 ---
 
-# 与FAISS和SPTAG对比
-
-Milvus 是 ZILLIZ 公司针对 AI 应用大规模落地，当前工业界并没有一款成熟向量检索系统，而研制的面向海量特征向量检索的数据库系统，旨在帮助用户实现非结构化数据的近似检索和分析。
+# 与其它向量检索工具对比
 
 与当前工业界其它向量检索工具相比，Milvus 具有以下性能优势：
 

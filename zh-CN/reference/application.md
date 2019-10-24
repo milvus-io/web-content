@@ -27,6 +27,7 @@ sidebar_label: Application Scenarios
 
 
 ## 典型架构
+
 Milvus做特征向量检索时典型应用架构如下：
 
 ![MilvusTypicalApplication](assets/MilvusTypicalApplication_cn.png)
