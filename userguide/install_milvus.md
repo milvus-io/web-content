@@ -21,10 +21,10 @@ See [here](../release/v0.4.0.md) for what's new in the latest release.
 
 1. Make sure your Linux distribution is one of the following:
 
-   | Linux operation system | Supported versions |
-   | :--------------------- | :----------------- |
-   | CentOS                 | 7.5 and higher     |
-   | Ubuntu LTS             | 18.04 and higher   |
+| Linux operation system | Supported versions |
+| :--------------------- | :----------------- |
+| CentOS                 | 7.5 and higher     |
+| Ubuntu LTS             | 18.04 and higher   |
 
 2. Make sure the following software packages are installed:
 

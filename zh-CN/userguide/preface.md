@@ -10,7 +10,7 @@ sidebar_label: Preface
 ## 概述
 Milvus 是一款稳定可靠、可弹性伸缩的特征向量数据库系统，支持大批量高维向量的秒级响应。本文档向您介绍如何对Milvus进行设置和管理，帮助您深入了解Milvus的特性和功能。
 
-如果您需要获取人工帮助，请邮件联系我们：support@zilliz.com。
+如果您需要获取任何帮助，欢迎在 GitHub 上 [创建 issue](https://github.com/milvus-io/milvus/issues/new/choose ) 或 [加入我们的 Slack 社区](https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk) 参与讨论。
 
 若要了解更多 Milvus 背景信息，请查看 [特征向量数据库简介](../aboutmilvus/vector_db.md)。
 

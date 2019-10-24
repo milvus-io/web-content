@@ -22,7 +22,7 @@ sidebar_label: Milvus Configuration
 
 ## 配置
 
-下文提到的许多配置都是给 Milvus 内部性能调优设计的，在编辑设置之前，请仔细考虑。若有任何疑问，欢迎邮件联系 Milvus 团队，邮箱地址：[support@zilliz.com](mailto:support@zilliz.com)。
+下文提到的许多配置都是给 Milvus 内部性能调优设计的，在编辑设置之前，请仔细考虑。若有任何疑问，欢迎在 GitHub 上给我们 [创建issue](https://github.com/milvus-io/milvus/issues/new/choose) 或是 [加入 Slack 社区讨论](https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk)。
 
 > 注意：如果修改了配置文件，您必须重启 Milvus 服务来启用新的更改。
 >
@@ -86,7 +86,7 @@ sidebar_label: Milvus Configuration
 | 参数               | 说明                                                         | 类型    | 默认值     |
 | ------------------ | ------------------------------------------------------------ | ------- | ---------- |
 | `search_resources` | 定义 Milvus 里用于搜索的 resource 类型。如：`cpu`, `gpu0`等   | ResourceType        |     `gpu0`           |
-| index_build_device | 定义 Milvus 里用户创建索引的 resource 类型。目前仅支持 `gpu` 类型。 | ResourceType | `gpu0` |
+| `index_build_device` | 定义 Milvus 里用户创建索引的 resource 类型。目前仅支持 `gpu` 类型。 | ResourceType | `gpu0` |
 
 请在该区域定义 Milvus 里用于搜索和创建索引的 resource。注意如果 resource 包含 `gpu`，请列出所有您想指定的 GPU，并指名它们的设备 id 号，设备 id 从0开始。比如：
 

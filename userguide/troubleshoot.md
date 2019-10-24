@@ -13,8 +13,8 @@ If you run into issues with Milvus, there are a few initial steps you can always
 1. If you come across the error in Milvus operations, go to [Troubleshoot API behaviors](#troubleshoot-api-behaviors).
 2. If the error pops out when you start Milvus server, check below list of [Server Errors](#server-errors) for a solution.
 4. If you cannot resolve the issue easily yourself, you can:
-   - Reach out for support from Milvus team by support@zilliz.com.
-   - [File an Issue] and describe in detail the problem.
+   - [Join our Slack channel](https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk) and reach out for support from Milvus team.
+   - [File an Issue](https://github.com/milvus-io/milvus/issues/new/choose) on GitHub and describe the problem in detail.
 
 ## Troubleshoot API Behaviors
 

@@ -263,17 +263,6 @@ Status(message='Search vectors successfully!', code=0)
 ]
 ```
 
-## Delete vectors by range
-
-To delete vectors you no longer need, use `milvus.delete_vectors_by_range` followed by the table name and the date range:
-
-```python
-# Delete vectors
->>> milvus.delete_vectors_by_range('test01', '2019-06-01', '2020-01-01')
->>> status
-Status(message='Delete vectors successfully!', code=0)
-```
-
 ## Drop a table
 
 When you no longer need a table, use `milvus.delete_table` followed by the table name to remove the table and all its data:
