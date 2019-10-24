@@ -9,7 +9,7 @@ sidebar_label: Preface
 ## Overview
 Milvus is an efficient and reliable feature vector database that supports searching large scale high-dimension vectors in seconds. This guide introduces how to set up and administrate Milvus, helping you get a deeper understanding of Milvus features and functions.
 
-If you need technical support, you may contact us by email: support@zilliz.com.
+If you need any support, you may [file an issue](https://github.com/milvus-io/milvus/issues/new/choose) on GitHub or [join our Slack community](https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk).
 
 For more detailed information about Milvus and feature vector database, please refer to [Feature Vector Database Introduction](../aboutmilvus/vector_db.md).
 
