@@ -8,9 +8,7 @@ sidebar_label: Monitoring and Alerting
 
 ## 概述
 
-尽管 Milvus 高可用，对生产系统进行积极全面的性能监控，以及给需要调查干预的突发情况创建报警规则以触发用户通知，仍然非常重要。
-
-该页面主要解释 Milvus 的监控系统和需要创建报警机制的突发情况。
+尽管 Milvus 可用性高，我们仍然需要对生产系统进行积极全面的性能监控，以及给需要调查干预的突发情况创建报警规则以触发用户通知。
 
 ### 监控系统
 
@@ -28,13 +26,13 @@ Milvus 使用开源时序数据库 Prometheus 作为监控和性能指标存储�
 
 其工作流程如下图所示:
 
-![1566787785125](assets/monitoring/monitoring.png)
+![1566787785125](../../assets/monitoring/monitoring.png)
 
 - Grafana
 
   Grafana 是一个开源的时序数据分析及可视化平台。Milvus 使用 Grafana 来展示各项性能指标：
 
-  ![prometheus.png](assets/prometheus.png)
+  ![prometheus.png](../../assets/prometheus.png)
 
 ### 需要报警的事件
 
@@ -82,7 +80,7 @@ Milvus 会生成详细的关于系统运行状态的时序 metrics。该页面�
 
 ### 设置 Prometheus
 
-1. 下载 Milvus [Prometheus 配置文件](assets/monitoring/prometheus.yml) 。
+1. 下载 Milvus [Prometheus 配置文件](../assets/monitoring/prometheus.yml) 。
 
    ```shell
    $ wget https://raw.githubusercontent.com/milvus-io/docs/master/assets/monitoring/prometheus.yml \ -O prometheus.yml
@@ -126,9 +124,9 @@ Milvus 会生成详细的关于系统运行状态的时序 metrics。该页面�
 
 2. 将浏览器指向 `http://<hostname of machine running grafana>:3000` ，使用默认的用户名/密码，`admin/admin`，登录 Grafana 用户交互页面。您也可以在此创建新的 Grafana 账号。
 
-3. [添加 Prometheus 作为 datasource](http://docs.grafana.org/datasources/prometheus/).
+3. [添加 Prometheus 作为 data source](http://docs.grafana.org/datasources/prometheus/).
 
-4. 在 datasource 页面，做如下设置：
+4. 对 data source 做如下设置：
 
    | Field   | Definition                                             |
    | :------ | :----------------------------------------------------- |
@@ -139,7 +137,7 @@ Milvus 会生成详细的关于系统运行状态的时序 metrics。该页面�
 
 5. 下载 [Grafana 配置文件](assets/monitoring/dashboard.json) :
 
-   ```
+   ```shell
    $ wget https://raw.githubusercontent.com/milvus-io/docs/master/assets/monitoring/dashboard.json
    ```
 

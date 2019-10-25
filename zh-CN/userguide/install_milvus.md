@@ -5,43 +5,41 @@ sidebar_label: Install Milvus
 ---
 # 安装 Milvus
 
-点击 [版本发布](../release/v0.4.0.md) 了解最新版本的功能。
-
-## 硬件要求
-
-| 组件 | 建议配置                          |
-| ---- | --------------------------------- |
-| CPU  | Intel CPU Haswell 及以上          |
-| GPU  | NVIDIA Pascal series 及以上       |
-| 内存 | 8 GB + （取决于具体向量数据规模） |
-| 存储 | SATA 3.0 SSD 及以上               |
+点击 [版本发布](../release/v0.5.0.md) 了解最新版本的功能。
 
 ## 安装前提
 
-1. 请确保您的 Linux 系统符合以下版本：
+### 硬件要求
 
-| Linux 操作系统平台 | 版本             |
-| :----------------- | :--------------- |
-| CentOS             | 7.5 and higher   |
-| Ubuntu LTS         | 18.04 and higher |
+| 组件 | 建议配置                          |
+| ---- | --------------------------------- |
+| CPU  | Intel CPU Haswell 或以上          |
+| GPU  | NVIDIA Pascal series 或以上       |
+| 内存 | 8 GB 或以上 （取决于具体向量数据规模） |
+| 硬盘 | SATA 3.0 SSD 或以上               |
 
-2. 请确保您已经安装以下软件包：
+### 系统要求
 
-   - NVIDIA driver 418 及以上
+ | 操作系统 | 版本             |
+ | ----------------- | --------------- |
+ | CentOS             | 7.5 或以上   |
+ | Ubuntu LTS         | 18.04 或以上|
+
+### 软件要求
+
+ | 软件 | 版本             |
+ | ----------------- | --------------- |
+ | NVIDIA driver            | 418 或以上   |
+ | [Docker](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/)        | 19.03 或以上|
+ |  [nvidia-docker](https://github.com/NVIDIA/nvidia-docker/wiki/Installation-(version-2.0))          | 2.0     |
    
-     若要安装 NVIDIA driver 418，在电脑桌面，进入 **Software & Updates** -> **Additional Drivers**。选择 **Using NVIDIA driver metapackage from nvidia-driver-418**，然后点击 **Apply Changes**。
-   
-   - [Docker 19.03 及以上](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/)
-   
-   - [nvidia-docker2](https://github.com/NVIDIA/nvidia-docker/wiki/Installation-(version-2.0))
-   
-   > 注意：您无需单独安装 CUDA 环境，它已经包含在 Milvus Docker 容器里。
+若要安装 NVIDIA driver 418，在电脑桌面，进入 **Software & Updates** -> **Additional Drivers**。选择 **Using NVIDIA driver metapackage from nvidia-driver-418**，然后点击 **Apply Changes**。您无需单独安装 CUDA 环境，因为它已经包含在 Milvus Docker 容器里。
    
 ## 使用 Docker
 
 1. 确认后台已经运行 Docker daemon：
 
-   ```
+   ```shell
    docker version
    ```
 
@@ -49,9 +47,9 @@ sidebar_label: Install Milvus
 
    > 提示：在 Linux 上，Docker 需要带 sudo。
 
-2. 拉取 Milvus 0.5.0 版本的镜像：
+2. 拉取 Milvus 最新版本的镜像：
 
-   ```
+   ```shell
    sudo docker pull milvusdb/milvus:latest
    ```
 

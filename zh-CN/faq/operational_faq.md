@@ -8,14 +8,12 @@ sidebar_label: Operational FAQ
 
 ### 为什么我启用多进程程序失败了？
 
-当前 Milvus 在运行过程中，能够实现多进程操作，但在实现时需满足一定条件：
+Milvus 在运行过程中，能够实现多进程操作，但在实现时需满足一定条件：
 
-- 程序执行时主进程中无 client
+- 程序执行时主进程中没有创建 client
 - 每个子进程分别创建 client 进行操作
 
-以下为正确程序的示例（部分细节如 import multiprocessing as mp 需自行修改）。
-
-当表名为 TABLE_NAME，且已插入 vector_1 的表存在时，直接在主程序中直接调用该函数，两个 insert 进程和一个 search 进程同时执行，且能获得正确结果。其中需注意的是，search 的结果与当前正在 insert 的向量无关。
+以下为正确实现多进程的示例。当表名为 TABLE_NAME，且已插入 vector_1 的表存在时，直接在主程序中直接调用该函数，两个 insert 进程和一个 search 进程同时执行，且能获得正确结果。其中需注意的是，search 的结果与当前正在 insert 的向量无关。
 
 ```shell
 def test_add_vector_search_multiprocessing():
@@ -60,7 +58,7 @@ def test_add_vector_search_multiprocessing():
         p.join()
 ```
 
-而若主进程中已存在 client（如利用 client 进行建表及插入），再进行多进程的操作，则会造成 client hang，最终导致 timeout。产生该结果的错误程序示例如下所示。
+而若主进程中已存在 client（如利用 client 进行建表及插入），再进行多进程的操作，则会造成 client 假死机，最终导致超时。产生该结果的错误程序示例如下所示。
 
 其中 `connect` 即为主进程所起 client，程序将会持续执行，直至 timeout。
 
@@ -111,4 +109,3 @@ def test_add_vector_search_multiprocessing(self, connect, table):
 ### 相关阅读
 
 [产品 FAQ](product_faq.md)
-

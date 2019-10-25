@@ -22,7 +22,9 @@ Milvus provides [Python](https://pypi.org/project/pymilvus/), [Java](https://mil
 
 ### How easy is it to use Milvus?
 
+
 Milvus can be easily installed through pulling docker images and simple pip install for SDKs. For more details, see [Install Milvus](../userguide/install_milvus.md).
+
 
 To start your first vector search program, please go to [Milvus example code](../userguide/example_code.md).
 
@@ -34,9 +36,9 @@ Milvus is designed to be used in mission critical systems with high SLAs. Milvus
 
 When vectors are imported into Milvus, they will be stored and indexed. Each vector is assigned a unique ID. User-defined vector IDs are also supported. When vector are searched, IDs of the most similar vectors will be returned.
 
-### Which index types are supported?
+### Which index methods are supported?
 
-Milvus supports the following indexes:
+Currently, Milvus supports the following index methods:
 
 - `Flat`
 
@@ -61,6 +63,7 @@ Milvus supports the following indexes:
   NSG (Navigating Spreading-out Graph) is a graph-base search algorithm that a) lowers the average out-degree of the graph for fast traversal; b) shortens the search path; c) reduces the index size; d) lowers the indexing complexity. 
 
   Extensive tests show that NSG can achieve very high search performance at high precision, and needs much less memory. Compared to non-graph-based algorithms, it is faster to achieve the same search precision.  
+ 
 
 ### Does Milvus support simultaneous inserting and searching?
 

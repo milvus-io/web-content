@@ -6,8 +6,6 @@ sidebar_label: Milvus in Comparison
 
 # Milvus in Comparison
 
-Milvus is a distributed feature vector indexing database management system which provides state-of-the-art similarity search and analysis of feature vectors and unstructured data. 
-
 Here is a comparison of Milvus with FAISS and SPTAG:
 
 |                                            | Milvus | FAISS | SPTAG |
