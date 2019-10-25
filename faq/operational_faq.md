@@ -15,7 +15,6 @@ In order to successfully run multiprocessing in Milvus, make sure the following 
 
 The following example shows a correct way to implement multiprocessing.  When there is a table named `TABLE_NAME` which already includes `vector_1`, you can invoke this function in the main process to run two insert processes and one search process concurrently to get the correct result. It should be noted that the search result is irrelevant to the vectors that are being inserted.
 
-
 ```python
 def test_add_vector_search_multiprocessing():
     '''

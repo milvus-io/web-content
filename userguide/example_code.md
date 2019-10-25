@@ -8,6 +8,7 @@ sidebar_label: Try an Example Program
 
 Now, let's run a Python example program. Use this example program to create a table, insert 10 vectors, and then run a vector similarity search.
 
+
 1. Make sure [Python 3.5](https://www.python.org/downloads/) is installed.
 
 2. Install Milvus Python SDK.

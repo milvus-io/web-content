@@ -10,9 +10,9 @@ sidebar_label: Troubleshoot
 
 如果您在使用 Milvus 时遇到问题，您可以通过以下步骤排查障碍：
 
-1. 如果是 Milvus 客户端操作方面的问题，请查看错误信息并采取相应措施。
-2. 如果是 Milvus 服务端操作方面的问题，请参考 [服务器启动故障](#服务器启动故障)。
-3. 对于您无法自己解决的问题，您可以：
+- 如果是 Milvus 客户端操作方面的问题，请查看错误信息并采取相应措施。
+- 如果是 Milvus 服务端操作方面的问题，请参考 [服务器启动故障](#服务器启动故障)。
+- 对于您无法自己解决的问题，您可以：
    - [加入我们的 Slack 社区](https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk)，提问并与 Milvus 团队及其它社区成员交流讨论。
    - 在 GitHub 上 [创建 issue](https://github.com/milvus-io/milvus/issues/new/choose)，详细描述您的问题。
 

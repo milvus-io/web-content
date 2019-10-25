@@ -8,6 +8,7 @@ sidebar_label: Learn Milvus Operations
 # Learn Milvus Operations
 
 This page walks you through some basic Milvus operations using the [**Python** SDK](https://pypi.org/project/pymilvus).
+
 You can also use other languages such as [Java](https://milvus-io.github.io/milvus-sdk-java/javadoc/index.html), C++, etc.
 
 ## Before trying out these operations
@@ -100,6 +101,7 @@ TableSchema(table_name='test01',dimension=256, index_file_size=1024, metric_type
 
 To show all the rows of a table, use `milvus.get_table_row_count` followed by the table name:
 
+
 ```python
 # Show table rows
 >>> status, num = milvus.get_table_row_count('test01')
@@ -120,6 +122,7 @@ True
 
 
 ## Insert vectors into a table
+
 
 > Note: In the production scenario, it is recommended to use the `milvus.create_index` before inserting vectors into the table. Index will be automatically built when vectors are being imported.  However, you need to create the same index again after the vector insertion process is completed because some data files may not meet the `index_file_size` and index will not be automatically built for these data files.
 
@@ -171,6 +174,7 @@ Below is the list of parameters for creating index for a table:
 
 | Parameter    | Description                                                  | Type      | Reference value                                    |
 | ------------ | ------------------------------------------------------------ | --------- | -------------------------------------------------- |
+
 | `index_type` | The type of indexing method to query the table. Select one out of these types: <ul><li>`FLAT` - Provides 100% accuracy for recalls. However, performance might be downgraded due to huge computation effort</li><li>`IVFLAT` - K-means based similarity search which is balanced between accuracy and performance</li><li>`IVF_SQ8` - Vector indexing that adopts a scalar quantization strategy that significantly reduces the size of a vector (by about 3/4), thus improving the overall throughput of vector processing</li><li>`IVF_SQ8H` - An enhanced index algorithm of `IVF_SQ8`. It supports hybrid computation on both CPU and GPU, which significantly improves the search performance.<br/>To use this index type, make sure both `cpu` and `gpu` are added as resources for search usage in the [Milvus configuration file](../reference/milvus_config.md).</li><li>`NSG` - NSG (Navigating Spreading-out Graph) is a graph-base search algorithm that a) lowers the average out-degree of the graph for fast traversal; b) shortens the search path; c) reduces the index size; d) lowers the indexing complexity.<br/>Extensive tests show that NSG can achieve very high search performance at high precision, and needs much less memory. Compared to non-graph-based algorithms, it is faster to achieve the same search precision.</li></ul> | IndexType | `FLAT` / `IVFLAT` / `IVF_SQ8` / `IVF_SQ8H` / `NSG` |
 | `nlist`      | Number of vector buckets in a file. Default value is 16384.  | Integer   | 1 - 16384                                          |
 

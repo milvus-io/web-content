@@ -14,4 +14,5 @@ The Milvus documentation is written in [Markdown](https://commonmark.org/help/),
 
 ### License
 
-[Apache License 2.0](LICENSE.md)
+[Apache License 2.0](LICENSE)
+
