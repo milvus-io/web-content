@@ -12,7 +12,7 @@ Milvus can be used to build intelligent systems in most AI application scenarios
 
 - Image search
 
-  Query by image content，including Content-based image retrieval such as bio-identification, object detection and recognition, and payment authentication powered by facial identification, etc.
+  Query by image content，including content-based image retrieval such as bio-identification, object detection and recognition, and payment authentication powered by facial identification, etc.
 
 - Video processing
 
@@ -20,7 +20,7 @@ Milvus can be used to build intelligent systems in most AI application scenarios
 
 - Natural language analysis
 
-  Semantics-based text analysis/suggestion, and text similarity search.
+  Semantics-based text analysis and suggestion, and text similarity search.
 
 - Voiceprint recognition and audio search
 
