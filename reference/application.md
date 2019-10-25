@@ -38,7 +38,7 @@ Unstructured data (images/videos/texts/audios) are transformed to feature vector
 
 ### Background
 
-As the competition of commercial banks is becoming increasingly fierce, the competition for customer resources has been transformed from product-oriented to service-oriented. More and more banks will compete for enhanced customer experience through personalized services.
+The competition for customer resources among commercial banks has changed from product-oriented to service-oriented. More and more banks tend to compete for enhanced customer experience through personalized services.
 
 Human face search can help recognize a customer and find his/her personal file. When a customer comes into a store it can be quickly determined whether the customer is an existing customer through face recognition, and the customer's personal file, including such information as name, age, product transactions, trading records, business habits, can be instantly obtained so that the bank staff can provide personalized services.
 
@@ -92,7 +92,7 @@ A human face captured by the camera will be compared to those in the library to 
 
 ### Background
 
-Nowadays, when you shop or view pages online, you will often see such words as "You may also like" or "Related products". In fact, many tech companies have embedded recommendation algorithms into their mobile Apps. Some examples are the Toutiao news, NetEase news, Pinduoduo, and WeChat, etc. With Milvus, you can implement your own personalized recommendation system.
+Nowadays, when you shop or view pages online, you will often see such words as "You may also like" or "Related products". In fact, many tech companies have embedded recommendation algorithms into their mobile Apps. Some examples include the Toutiao news, NetEase news, Pinduoduo, and WeChat, etc. With Milvus, you can implement your own personalized recommendation system.
 
 ### User requirements
 
@@ -145,7 +145,7 @@ Milvus helps you realize product feature extraction and multimodal search by the
 
 Today, online shopping and product trading has becoming a daily routine. On commodity trading platforms such as Taobao and Xianyu, sellers can display products to customers more fully and intuitively through product videos. Meanwhile, product video copying and plagiarism have also appeared. One solution to find a duplicate video is by vector similarity search.
 
-Taking Xianyu, the second-hand commodity trading platform as an example. According to its current product size and business development trend, the vector index system needs to support billions of videos with an average length of 20 seconds, and a 1024-dimensional vector per second.
+Take Xianyu, the second-hand commodity trading platform as an example. According to its current product size and business development trend, the vector index system needs to support billions of videos with an average length of 20 seconds, and a 1024-dimensional vector per second.
 
 ### User requirements
 
