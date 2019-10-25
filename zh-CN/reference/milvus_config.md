@@ -85,8 +85,7 @@ sidebar_label: Milvus Configuration
 
 | 参数               | 说明                                                         | 类型    | 默认值     |
 | ------------------ | ------------------------------------------------------------ | ------- | ---------- |
-| `search_resources` | 定义 Milvus 里用于搜索的 resource 类型。如：`cpu`, `gpu0`等   | ResourceType        |     `gpu0`           |
-
+| `search_resources` | 定义 Milvus 里用于搜索的 resource 类型。如：`cpu`, `gpu0`等   | ResourceType        |     `gpu0` |          
 | `index_build_device` | 定义 Milvus 里用户创建索引的 resource 类型。目前仅支持 `gpu` 类型。 | ResourceType | `gpu0` |
 
 
