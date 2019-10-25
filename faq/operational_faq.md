@@ -13,7 +13,7 @@ In order to successfully run multiprocessing in Milvus, make sure the following 
 - No client is created in the main process
 - Clients are created in each child process
 
-The following example shows a correct way to implement multiprocessing.  When there is a table named `TABLE_NAME` which already includes `vector_1`, you can invoke this function in the main process to run two insert processes and one search process concurrently to get the correct result. It should be noted that the search result is irrelevant to the vectors that are being inserted.
+The following example shows a correct way to implement multiprocessing. When there is a table named `TABLE_NAME` which already includes `vector_1`, you can invoke this function in the main process to run two insert processes and one search process concurrently to get the correct result. It should be noted that the search result is irrelevant to the vectors that are being inserted.
 
 ```python
 def test_add_vector_search_multiprocessing():
@@ -58,7 +58,7 @@ def test_add_vector_search_multiprocessing():
         p.join()
 ```
 
-If a client already exists in the main process, enabling multiprocessing will cause the client to hang, which eventually lead to timeout. The following function is a bad example, in which the `connect` is the client built in the main process.
+If a client already exists in the main process, enabling multiprocessing will cause the client to hang, which will eventually lead to timeout. The following function is a bad example, in which the `connect` is the client built in the main process.
 
 ```python
 def test_add_vector_search_multiprocessing(self, connect, table):
