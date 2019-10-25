@@ -79,7 +79,7 @@ For more insight, see [Milvus in Comparison](../reference/comparison.md).
 ### Have questions that were not answered?
 If you still have questions that are not covered in this list, you can take the following steps to find an answer:
 
-- Visit our [Milvus-io](https://github.com/milvus-io) on GitHub to ask questions, share ideas, and help other users.
+- Visit our [Milvus](https://github.com/milvus-io/milvus/issues) on GitHub to ask questions, share ideas, and help other users.
 - Check the list of [Operational FAQ](operational_faq.md) to get answers to frequently asked questions about operating Milvus.
 - Join our [Slack community](https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk) to discuss and communicate with other users.
 
