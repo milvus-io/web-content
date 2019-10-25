@@ -11,7 +11,7 @@ Milvus supports importing data from various data formats, as long as the data ca
 
 Although Milvus supports various data formats, when it comes to repeated reading of the same data from a local disk storage, it is recommended to use the NPY file format with each NPY file containing less than or equal to 100,000 vectors.
 
-The NPY file format supports faster reading speed and less storage space over than CSV files. For example, a CSV file with 100,000 million 512-dimensional vectors takes more than 800 MB, while an NPY file takes less than 400 MB.
+The NPY file format supports faster reading speed and less storage space than CSV files. For example, a CSV file with 100,000 million 512-dimensional vectors takes more than 800 MB, while an NPY file takes less than 400 MB.
 
 If you have only the CSV files, follow below steps to convert them into binary files in NPY format:
 
