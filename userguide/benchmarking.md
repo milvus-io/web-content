@@ -19,7 +19,7 @@ This page walks you through the performance benchmarking on Milvus by measuring 
 | ---------- | ------------------------------- |
 | Operating system        | Ubuntu LTS 18.04                |
 | CPU        | Intel Core i5-8250U             |
-| GPU        | Nvidia GeForce MX150, 2GB GDDR5 |
+| GPU        | NVIDIA GeForce MX150, 2GB GDDR5 |
 | GPU Driver | CUDA 10.1, Driver 418.74        |
 | RAM        | 8 GB DDR4                       |
 | Hard drive | NVMe SSD 256 GB                 |
@@ -97,14 +97,14 @@ Once the `milvus_bootcamp.py` has finished running, you will see the results in 
 
 | Component  | Minimum configuration                    |
 | ---------- | ---------------------------------- |
-| OS         | Ubuntu LTS 18.04                   |
+| Operating system         | Ubuntu LTS 18.04                   |
 | CPU        | Intel Core i7-7700K                |
-| GPU        | Nvidia GeForce GTX 1050, 4GB GDDR5 |
+| GPU        | NVIDIA GeForce GTX 1050, 4GB GDDR5 |
 | GPU Driver | CUDA 10.1, Driver 418.74           |
-| Memory     | 16 GB DDR4 ( 2400 Mhz ) x 2        |
-| Storage    | SATA 3.0 SSD 256 GB                |
+| RAM     | 16 GB DDR4 ( 2400 MHz ) x 2        |
+| Hard drive   | SATA 3.0 SSD 256 GB                |
 
-### Data sets
+### Datasets
 
 Create a file named `milvlus_sift100m`, download the following data and scripts, and save them to the file.
 
