@@ -27,7 +27,7 @@ This page walks you through the performance benchmarking on Milvus by measuring 
 
 ### Data sets
 
-Create a file named `milvlus_sift1m`, download the following data and scripts, and save them to the file.
+Create a folder named `milvlus_sift1m`, download the following data and scripts, and save them to the folder.
 
 - [One million base vectors](https://pan.baidu.com/s/1nVIIxO8MnOle339iYs2dUw)
 - [10,000 query vectors](https://pan.baidu.com/s/1mBRM1cJZ6QWehDuddOYl4A)
@@ -106,7 +106,7 @@ Once the `milvus_bootcamp.py` has finished running, you will see the results in 
 
 ### Datasets
 
-Create a file named `milvlus_sift100m`, download the following data and scripts, and save them to the file.
+Create a folder named `milvlus_sift100m`, download the following data and scripts, and save them to the folder.
 
 - [100 million base vectors](https://pan.baidu.com/s/1N5jGKHYTGchye3qR31aNnA)
 
