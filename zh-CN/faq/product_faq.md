@@ -24,6 +24,7 @@ Milvus 提供 [Python](https://pypi.org/project/pymilvus/), [Java](https://milvu
 
 Milvus 安装简单，仅需下载相关 docker 镜像文件。易用性强，通过 Python，Java 等 API 接口即可完成向量插入、检索等操作。若要了解更多，请看 [安装 Milvus](../userguide/install_milvus.md).
 
+
 想要开启您的第一次向量搜索？请阅读 [运行示例程序](../userguide/example_code.md).
 
 ### Milvus 具备高可用特性吗？
@@ -68,7 +69,9 @@ Milvus 集群具备高可用性，其存储和计算等集群均容许部分组�
 
 ### 数据存储在哪里？
 
+
 向量数据导入 Mivus 后，将自动存储在您的本地磁盘。元数据可以存储在 MySQL 或 SQLite 3 上。若要了解更多，请阅览 [数据存储](../reference/data_store.md)。
+
 
 ### Milvus 与 FAISS 和 SPTAG 对比如何?
 
