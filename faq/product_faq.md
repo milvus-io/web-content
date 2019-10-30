@@ -65,6 +65,7 @@ Currently, Milvus supports the following index methods:
   Extensive tests show that NSG can achieve very high search performance at high precision, and needs much less memory. Compared to non-graph-based algorithms, it is faster to achieve the same search precision.  
   
 - `IVF_PQ`
+
   Indexing method built based on product quantization. The input vectors are split into distinct sub-vectors which are then quantized separately. Vector size can be reduced to 1/8 or 1/16 of the original size. If you choose this index, note that there is an inevitable trade-off between memory and search accuracy.
  
 
