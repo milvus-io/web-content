@@ -30,7 +30,7 @@ Milvus can be used to build intelligent systems in most AI application scenarios
 
 The application architecture of Milvus as a feature vector search engine is as follows:
 
-![MilvusTypicalApplication](../assets/MilvusTypicalApplication_en.png)
+![MilvusApplication](../assets/application_arcg.png)
 
 Unstructured data (images/videos/texts/audios) are transformed to feature vectors by feature extraction models, and saved to Milvus database. When you input a target vector, it is saved  to the current vector collection, and the search begins, until the most similar vectors are matched, and their IDs returned.
 
@@ -54,7 +54,7 @@ A human face captured by the camera will be compared to those in the library to 
 
 ### Application
 
-![FaceSearch](../assets/FaceSearch_en.png)
+![FaceSearch](../assets/face_search.png)
 
 - **Face capture device**: When human face images are captured by the camera, they are sent to feature vector collection devices.
 
@@ -102,7 +102,7 @@ Recommend personalized content based on user persona.
 
 Take personalized advertising content recommendation as an example, the application architecture is:
 
-![Recommendation](../assets/Recommendation_en.png)
+![Recommendation](../assets/ads_recommend.png)
 
 1. Create user persona by data analysis and key feature extraction
 
