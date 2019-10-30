@@ -6,6 +6,12 @@ sidebar_label: Milvus Changelog
 
 # Milvus Docs Changelog
 
+## [v0.5.1] 2019-11-01
+
+### Improvements
+- \#129 Update some parameter descriptions in the `server_config.yaml` file for Milvus configuration.
+
+
 ## [v0.5.0] 2019-10-15
 
 ### Improvements
