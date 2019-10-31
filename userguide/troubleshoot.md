@@ -11,6 +11,7 @@ sidebar_label: Troubleshoot
 This page describes the common issues you may run into with Milvus. The issues fall into the following categories:
 
 - Server startup issue
+
   Issues that occur at the startup of Milvus server, and that generally lead to server startup failures. You can check the corresponding error messages by below command:
   
   ```
@@ -18,9 +19,11 @@ This page describes the common issues you may run into with Milvus. The issues f
   ```
 
 - Server operational issue
-  Issues that occur during the server operation. Issues of this type may or may not cause server down. Error messages are recorded in `/home/$USER/milvus/logs`.
+
+  Issues that occur during the server operation. Issues of this type may or may not cause server down. Error messages are recorded in `/home/$USER/<milvus>/logs`.
 
 - API issue
+
   Issues that occur during the operation with Milvus through APIs. Corresponding error messages will be returned real time to the client side.
 
 If you cannot resolve the issue easily yourself, you can:
