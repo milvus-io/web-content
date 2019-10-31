@@ -10,6 +10,7 @@ sidebar_label: Milvus Changelog
 
 ### Improvements
 - \#129 Update some parameter descriptions in the `server_config.yaml` file for Milvus configuration.
+- \#132 Add a new index type `IVF_PQ` in Learn Milvus Operations and Product FAQ.
 
 
 ## [v0.5.0] 2019-10-15
