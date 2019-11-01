@@ -12,7 +12,7 @@ Milvus database can be used to build intelligent systems in most AI application 
 
 - Image search
 
-  Query by image content. Content-based image retrieval such as bio-identification, object detection and recognition, and payment authentication powered by facial identification, etc.
+  Query by image content. Content-based image retrieval such as bio-identification, object detection and recognition, etc.
 
 - Video processing
 
