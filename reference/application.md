@@ -34,61 +34,7 @@ The application architecture of Milvus as a feature vector database is as follow
 
 Unstructured data (images/videos/texts/audios) are transformed to feature vectors by feature extraction models, and saved to Milvus database. When you input a target vector, it is saved  to the current vector collection, and the search begins, until the most similar vectors are matched, and their IDs returned. 
 
-## Use case 1 - Human face search
-
-### Background
-As the competition of commercial banks is becoming increasingly fierce, the competition for customer resources has been transformed from product-oriented to service-oriented. More and more banks will compete for enhanced customer experience through personalized services. 
-
-Human face search can help recognize a customer and find his/her personal file. When a customer comes into the store, it can be quickly determined whether the customer is an existing customer through face recognition, and the customer's personal file, containing such information as the name, age, product transactions, trading records, business habits can be instantly obtained so that the bank staff can provide personalized services.
-
-### User requirements
-
-- VIP customer notification
-
-VIP customer library contains human face features of VIP customers. All human faces captured by the camera are to be compared to those in the library. Once a similar face is matched, an notification is sent to the system. 
-
-- One customer one file
-
-A human face captured by the camera will be compared to those in the library to find the corresponding file containing all the information of the customer.
-
-### Application
-
-![FaceSearch](assets/FaceSearch_en.png)
-
-- **Face capture device**: When human face images are captured by the camera, they are sent to feature vector collection devices.
-
-- **Feature extraction service**: The human face images are further transformed and represented by 512-dimensional feature vectors by machine learning models.
-
-- **Application**
-
-  - VIP client notification: If a human face within the VIP group library is found, an notification is sent to the system.
-  - Customer file search: Search for customer's personal file based on face ID. 
-
-- **Data libraries**
-
-  - VIP customer library
-
-    - Vector library with million datasets 
-    - Great search precision and high indexing speed (QPS >= 1000) 
-    - Batch search supported 
-    
-  - Ordinary customer library
-
-    - Vector library with billions of human face feature vectors
-    - High indexing speed with a QPS of 1000
-    - Batch search supported
-    
-  - Information library
-
-    - Relational database with MySQL storage
-    - Mainly keeps ID-based personal information files
-
-- **Basic architecture**
-  - Milvus for vector storage
-  - MySQL for relational data storage
-  - MinIO for unstructured data storage
-
-## Use case 2 - Personalized recommendation
+## Use case 1 - Personalized recommendation
 
 ### Background
 
@@ -117,7 +63,7 @@ Take personalized advertising content recommendation as an example, the applicat
    2) Extract the keywords and click-through rate of the top 100 ads. 
    3) Locate and recommend the ads content to the user based on logistic regression model (which arises from user history data).
   
-## Use case 3 - Product feature extraction and multimodal search 
+## Use case 2 - Product feature extraction and multimodal search 
 
 ### Background
 
@@ -140,7 +86,7 @@ Milvus helps you realize product feature extraction and multimodal search by the
 4. Find out the most similar images that belong to the top 10 products.
 
 
-## Use case 4 - Video deduplication
+## Use case 3 - Video deduplication
 
 ### Background
 
