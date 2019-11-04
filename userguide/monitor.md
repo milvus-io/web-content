@@ -100,7 +100,7 @@ Milvus generates detailed time series metrics. This page shows you how to pull t
 3. Download starter [alerting rules](../assets/monitoring/alert.rules.yml) for Milvus to the Prometheus root directory.
 
    ```shell
-   wget -P rules https://raw.githubusercontent.com/milvus-io/docs/master/assets/monitoring/alerts.rules.yml
+   wget -P rules https://raw.githubusercontent.com/milvus-io/docs/master/assets/monitoring/alert.rules.yml
    ```
 
 ### Start Prometheus

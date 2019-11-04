@@ -61,8 +61,6 @@ Milvus 集群具备高可用性，其存储和计算等集群均容许部分组�
 
   大量测试显示 NSG 响应快、搜索精度高，而且需要占用的内存更小。相比非基于图的索引算法，在相同精度的条件下，搜索速度更快。
 
- 
-
 ### Milvus 是否支持 “边插入边查询” ？
 
 支持。如果您想在Milvus里边插入向量边查询，建议在 `home/$USER/milvus/conf/server_config.yaml` 下的 `cache_config` 区域，将参数 `cache_insert_data` 设置为 `True`。

@@ -62,8 +62,7 @@ Currently, Milvus supports the following index methods:
 
   NSG (Navigating Spreading-out Graph) is a graph-base search algorithm that a) lowers the average out-degree of the graph for fast traversal; b) shortens the search path; c) reduces the index size; d) lowers the indexing complexity. 
 
-  Extensive tests show that NSG can achieve very high search performance at high precision, and needs much less memory. Compared to non-graph-based algorithms, it is faster to achieve the same search precision.  
- 
+  Extensive tests show that NSG can achieve very high search performance at high precision, and needs much less memory. Compared to non-graph-based algorithms, it is faster to achieve the same search precision.   
 
 ### Does Milvus support simultaneous inserting and searching?
 

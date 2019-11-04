@@ -10,6 +10,7 @@ sidebar_label: Milvus Changelog
 
 ### Improvements
 - \#129 Update some parameter descriptions in the `server_config.yaml` file for Milvus configuration.
+- \#132 a) Add a new index type `IVF_PQ` in Learn Milvus Operations and Product FAQ; b) Add a new parameter `gpu_search_threshold` in Milvus Configuration; c) Update Troubleshoot.
 
 
 ## [v0.5.0] 2019-10-15
