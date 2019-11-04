@@ -80,23 +80,23 @@ In the directory `home/$USER/milvus/conf`, open Milvus service configuration fil
 
 In Milvus, as the **index building** and **search computation** are separate processes, the resource usage conforms to the following general rules:
 
-- Index building process can only be done in `gpu`. Use `build_index_gpu` to define the `gpu` used for this process.
-- Search computation can be executed in both `cpu` and `gpu` . You are allowed to assign multiple GPUs. 
+- Index building process can only be done on `gpu`. Use `index_build_device` to define the `gpu` used for this process.
+- Search computation can be executed on both `cpu` and `gpu` . You are allowed to assign multiple GPUs. 
 - The `gpu` used for index building can also be used for search computation. 
 
 | Parameter            | Description                                                  | Type         | Default |
 | -------------------- | ------------------------------------------------------------ | ------------ | ------- |
-| `search_resources`   | Define the `gpu` resource used for search in Milvus. You can assign multiple GPUs. | ResourceType | `gpu0`  |
-| `index_build_device` | Define the resource type used for index building in Milvus. You can only assign `gpu`. | ResourceType | `gpu0`  |
+| `search_resources`   | Define the resources used for search computation in Milvus. Currently, you must assign at least one CPU and one GPU. | ResourceType | ` `  |
+| `index_build_device` | Define the resource type used for index building in Milvus. Currently, you can only assign `gpu` here. | ResourceType | `gpu0`  |
 
 Define in this section the resources used for search computation and index building in Milvus. 
 
-For `gpu` resource type, list all the GPUs you want to be used, and specify their corresponding device ids. For example:
+To define `gpu` as the resource, list all the GPUs you want to be used, and specify their corresponding device ids. For example:
 
 ```
 - gpu0
 - gpu1
 - gpu2
 ```
-
+> Note: The GPU-only mode (search computation and index building are both done on GPU) is available for test now. The mode proves to be much more efficient when the `nq` or `nprobe` is extremely large. To use this mode, make sure only GPUs are defined in `search_resources` and `index_build_device`. 
 
