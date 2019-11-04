@@ -6,43 +6,42 @@ sidebar_label: Install Milvus
 
 # Install Milvus 
 
-See [here](../release/v0.4.0.md) for what's new in the latest release. 
+See [here](../release/v0.5.0.md) for what's new in the latest release.
 
-## Hardware requirements
+## Prerequisites
+
+### Hardware requirements
 
 | Component | Recommended configuration             |
 | --------- | ------------------------------------- |
 | CPU       | Intel CPU Haswell or higher           |
 | GPU       | NVIDIA Pascal series or higher        |
-| Memory    | 8 GB or more (depends on data volume) |
-| Storage   | SATA 3.0 SSD or higher                |
+| RAM    | 8 GB or more (depends on data volume) |
+| Hard drive   | SATA 3.0 SSD or higher                |
 
-## Before the install
+### System requirements
 
-1. Make sure your Linux distribution is one of the following:
+ | Operating system | Supported versions |
+ | :--------------------- | :----------------- |
+ | CentOS                 | 7.5 or higher     |
+ | Ubuntu LTS             | 18.04 or higher   |
 
-| Linux operation system | Supported versions |
-| :--------------------- | :----------------- |
-| CentOS                 | 7.5 and higher     |
-| Ubuntu LTS             | 18.04 and higher   |
+### Software requirements
 
-2. Make sure the following software packages are installed:
+ | Software | Supported versions |
+ | :--------------------- | :----------------- |
+ | NVIDIA driver          | 418 or higher     |
+ | [Docker](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/)            |  19.03 or higher   |
+ | [nvidia-docker](https://github.com/NVIDIA/nvidia-docker/wiki/Installation-(version-2.0)) |  2.0   |
 
-   - NVIDIA driver 418 or higher
-   
-     To install NVIDIA driver 418, on your desktop, launch **Software & Updates** utility, and go to **Additional Drivers** tab. Select **Using NVIDIA driver metapackage from nvidia-driver-418**, and click **Apply Changes**. 
-   
-   - [Docker 19.03 or higher](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/)
-   
-   - [nvidia-docker2](https://github.com/NVIDIA/nvidia-docker/wiki/Installation-(version-2.0)) 
-   
-   > Note: You don't have to install CUDA separately, as it is included in Milvus Docker container.
+     
+   > Note: To install NVIDIA driver 418, on your desktop, launch **Software & Updates** utility, and go to **Additional Drivers** tab. Select **Using NVIDIA driver metapackage from nvidia-driver-418**, and click **Apply Changes**. You don't have to install CUDA separately, as it is included in Milvus Docker container.
 
 ## Use Docker
 
-1. Confirm that the Docker daemon is running in the background: 
+1. Confirm that the Docker daemon is running in the background:
 
-   ```
+   ```shell
    docker version
    ```
 
@@ -50,9 +49,9 @@ See [here](../release/v0.4.0.md) for what's new in the latest release.
 
    > Note: On Linux, Docker needs sudo privileges.
 
-2. Pull the image for the v0.5.0 release of Milvus:
+2. Pull the image for the latest release of Milvus:
 
-   ```
+   ```shell
    docker pull milvusdb/milvus:latest
    ```
 
@@ -81,8 +80,9 @@ See [here](../release/v0.4.0.md) for what's new in the latest release.
    # Confirm Milvus status
    $ docker ps
    ```
-   
-   If Milvus server is not successfully started, you can check the error logs by the following command. 
+
+   If Milvus server is not successfully started, you can check the error logs by the following command.
+
    
    ```shell
    # Get Milvus container id
@@ -91,17 +91,16 @@ See [here](../release/v0.4.0.md) for what's new in the latest release.
    $ docker logs <milvus container id>
    ```
 
-## What's next？
+## What's next
 
 - If you're just getting started with Milvus:
 
-  - [Try an Example Program](example_code.md)
-  - [Learn more about Milvus Operations](milvus_operation.md)
+  - [Try an example program](example_code.md)
+  - [Learn more about Milvus operations](milvus_operation.md)
   - [Try Milvus Bootcamp](https://github.com/milvus-io/bootcamp)
   
 - If you're ready to run Milvus in production:
 
-  - Build a [Monitoring and Alerting system](monitor.md) to check real-time application performance
+  - Build a [monitoring and alerting system](monitor.md) to check real-time application performance
   - [Import vectors into Milvus](import_data.md)
   - Tune Milvus performance through [configuration](../reference/milvus_config.md)
-

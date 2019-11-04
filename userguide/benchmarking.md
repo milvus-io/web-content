@@ -6,27 +6,28 @@ sidebar_label: Performance Benchmarking
 
 # Performance Benchmarking
 
-This page walks you through the performance benchmarking on Milvus. It measures Total Query Time (`total_time`) and Query Time per Vector (`avg_time`) on two datasets:
+This page walks you through the performance benchmarking on Milvus by measuring Total Query Time (`total_time`) and Query Time per Vector (`avg_time`) on two datasets:
 
-- 1 million vectors of 512 dimension (a total data size of  GB)
-- 100 million vectors of 512 dimension (a total data size of  GB)
+- 1 million vectors of 512 dimension (approximately 2 GB)
+- 100 million vectors of 512 dimension (approximately 200 GB)
 
 ## Benchmark 1 million vectors
 
-### Hardware requirements
+### Prerequisites
 
-| Component  | Minimum Config                  |
+| Component  | Minimum configuration                  |
 | ---------- | ------------------------------- |
-| OS         | Ubuntu LTS 18.04                |
+| Operating system        | Ubuntu LTS 18.04                |
 | CPU        | Intel Core i5-8250U             |
-| GPU        | Nvidia GeForce MX150, 2GB GDDR5 |
+| GPU        | NVIDIA GeForce MX150, 2GB GDDR5 |
 | GPU Driver | CUDA 10.1, Driver 418.74        |
-| Memory     | 8 GB DDR4                       |
-| Storage    | NVMe SSD 256 GB                 |
+| RAM        | 8 GB DDR4                       |
+| Hard drive | NVMe SSD 256 GB                 |
 
-### Data sets 
 
-Create a file named `milvlus_sift1m`. Then download the following data and scripts, and save them to the file.
+### Data sets
+
+Create a folder named `milvlus_sift1m`, download the following data and scripts, and save them to the folder.
 
 - [One million base vectors](https://pan.baidu.com/s/1nVIIxO8MnOle339iYs2dUw)
 - [10,000 query vectors](https://pan.baidu.com/s/1mBRM1cJZ6QWehDuddOYl4A)
@@ -35,7 +36,7 @@ Create a file named `milvlus_sift1m`. Then download the following data and scrip
 
 ### Milvus settings
 
-Configuration file: `/home/$USER/milvus/conf/server_config.yaml`
+Use the file in `/home/$USER/milvus/conf/server_config.yaml` to configure Milvus settings.
 
 | Parameter                  | Recommended value |
 | -------------------------- | ----------------- |
@@ -44,7 +45,7 @@ Configuration file: `/home/$USER/milvus/conf/server_config.yaml`
 | `use_blas_threshold`       | 801               |
 | `nprobe`                   | 32                |
 
-After the parameter configuration, restart Milvus Docker apply them.
+After configuring the Milvus settings, restart Milvus Docker to implement the changes.
 
 ```shell
 $ docker restart <container id>
@@ -63,7 +64,7 @@ Before the data import, make sure the files `bvecs_data` and `milvus_bootcamp.py
 
 Go to `milvus_sift1m`, and run the following command:
 
-```
+```shell
 $ python3 milvus_bootcamp.py --table=ann_1m_sq8 --index=ivfsq8 -t
 ```
 
@@ -75,7 +76,7 @@ You will see vectors inserted into a table named `ann_1m_sq8`, with the index_ty
 
 To benchmark search performance, go to directory `milvus_sift1m`, and run the following script:
 
-```
+```shell
 $ python3 milvus_bootcamp.py --table=ann_1m_sq8 -s
 ```
 
@@ -87,25 +88,25 @@ Once the `milvus_bootcamp.py` has finished running, you will see the results in 
 
 - `nq` - the number of query vectors
 - `topk` - the top k most similar vectors for the query vectors
-- `total_time` - the total query elapsed time (in seconds)
-- `avg_time` - the average time to query one vector (in seconds)
+- `total_time` - the total query elapsed time in seconds
+- `avg_time` - the average time to query one vector in seconds
 
 ## Benchmark 100 million vectors
 
-### Hardware requirements
+### Prerequisites
 
-| Component  | Minimum Config                     |
+| Component  | Minimum configuration                    |
 | ---------- | ---------------------------------- |
-| OS         | Ubuntu LTS 18.04                   |
+| Operating system         | Ubuntu LTS 18.04                   |
 | CPU        | Intel Core i7-7700K                |
-| GPU        | Nvidia GeForce GTX 1050, 4GB GDDR5 |
+| GPU        | NVIDIA GeForce GTX 1050, 4GB GDDR5 |
 | GPU Driver | CUDA 10.1, Driver 418.74           |
-| Memory     | 16 GB DDR4 ( 2400 Mhz ) x 2        |
-| Storage    | SATA 3.0 SSD 256 GB                |
+| RAM     | 16 GB DDR4 ( 2400 MHz ) x 2        |
+| Hard drive   | SATA 3.0 SSD 256 GB                |
 
-### Data sets
+### Datasets
 
-Create a file named `milvlus_sift100m`. Then download the following data and scripts, and save them to the file.
+Create a folder named `milvlus_sift100m`, download the following data and scripts, and save them to the folder.
 
 - [100 million base vectors](https://pan.baidu.com/s/1N5jGKHYTGchye3qR31aNnA)
 
@@ -147,7 +148,7 @@ Before the data import, make sure the files `bvecs_data` and `milvus_bootcamp.py
 
 Go to `milvus_sift100m`, and run the following command:
 
-```
+```shell
 $ python3 milvus_bootcamp.py --table=ann_100m_sq8 --index=ivfsq8 -t
 ```
 
@@ -159,7 +160,7 @@ You will see vectors inserted into a table named `ann_100m_sq8`, with the index_
 
 To benchmark search performance, go to directory `milvus_sift100m`, and run the following script:
 
-```
+```shell
 $ python3 milvus_bootcamp.py --table=ann_100m_sq8 -s
 ```
 
@@ -171,8 +172,8 @@ Once the `milvus_bootcamp.py` has finished running, you will see the results in 
 
 - `nq` - the number of query vectors
 - `topk` - the top k most similar vectors for the query vectors
-- `total_time` - the total query elapsed time (in seconds)
-- `avg_time` - the average time to query one vector (in seconds)
+- `total_time` - the total query elapsed time in seconds
+- `avg_time` - the average time to query one vector in seconds
 
 ## Related links
 

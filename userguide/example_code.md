@@ -6,9 +6,10 @@ sidebar_label: Try an Example Program
 
 # Try an Example Program
 
-Now, let's run a Python example program. Assume you want to create a table, insert 10 vectors, and then run a vector similarity search.
+Now, let's run a Python example program. Use this example program to create a table, insert 10 vectors, and then run a vector similarity search.
 
-1. Make sure [Python 3.5](https://www.python.org/downloads/) or higher is already installed and in use.
+
+1. Make sure [Python 3.5](https://www.python.org/downloads/) is installed.
 
 2. Install Milvus Python SDK.
 
@@ -17,9 +18,9 @@ Now, let's run a Python example program. Assume you want to create a table, inse
    $ pip install pymilvus==0.2.3
    ```
 
-   > Note: To learn more about Milvus Python SDK, go to [Milvus Python SDK Playbook](https://pypi.org/project/pymilvus). 
+   > Note: To learn more about Milvus Python SDK, go to [Milvus Python SDK Playbook](https://pypi.org/project/pymilvus).
 
-3. Create a new file `example.py`, and add [Python example code](https://github.com/milvus-io/pymilvus/blob/master/examples/AdvancedExample.py) to it.
+3. Create a new file `example.py`, and copy [Python example code](https://github.com/milvus-io/pymilvus/blob/master/examples/advanced_example.py) to the file.
 
 4. Run the example code.
 
@@ -32,7 +33,7 @@ Now, let's run a Python example program. Assume you want to create a table, inse
 
 Congratulations! You have successfully completed your first vector similarity search with Milvus.
 
-## What's next?
+## What's next
 
-- Learn [essential operations](milvus_operation.md) you can do with Milvus
-- [Try Milvus bootcamp](https://github.com/milvus-io/bootcamp) to learn more about solutions
+- Learn [basic operations](milvus_operation.md) in Milvus
+- [Try Milvus bootcamp](https://github.com/milvus-io/bootcamp) to check more solutions
