@@ -11,6 +11,7 @@ sidebar_label: Milvus Changelog
 ### Improvements
 - \#129 Update some parameter descriptions in the `server_config.yaml` file for Milvus configuration.
 - \#132 a) Add a new parameter `gpu_search_threshold` in Milvus Configuration; b) Update Troubleshoot.
+- \#136 Add release note for v0.5.1.
 
 
 
