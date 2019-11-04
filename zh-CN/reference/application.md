@@ -30,7 +30,7 @@ sidebar_label: Application Scenarios
 
 Milvus做特征向量检索时典型应用架构如下：
 
-![MilvusTypicalApplication](../../assets/MilvusTypicalApplication_cn.png)
+![MilvusApplication](../../assets/application_arch_cn.png)
 
 非结构化数据（图像/视频/文字/音频等）首先通过特征提取模型产生特征向量，然后存入Milvus数据库系统。查询的时候，待查询的非结构化数据，也需要通过特征提取模型，提取特征向量。然后用该向量到Milvus中已存入的向量集里，查询匹配度最高的向量集合。最后，使用返回的向量ID，找到对应非结构化数据，结合上层应用，实现对应功能。
 
@@ -52,7 +52,7 @@ Milvus做特征向量检索时典型应用架构如下：
 
 ### 实现方案
 
-![FaceSearch](../../assets/FaceSearch_cn.png)
+![FaceSearch](../../assets/face_search_cn.png)
 
 - **人脸获取设备**：摄像头拍到人脸图片后，把图片发到特征向量提取设备。
 
@@ -98,7 +98,7 @@ Milvus做特征向量检索时典型应用架构如下：
 
 以个性化广告内容推荐为例，Milvus 实现架构如下：
 
-![Recommendation](../../assets/Recommendation_cn.png)
+![Recommendation](../../assets/ads_recommend_cn.png)
 
 具体实现步骤为：
 
