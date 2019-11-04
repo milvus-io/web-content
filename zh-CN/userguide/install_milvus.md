@@ -33,7 +33,7 @@ sidebar_label: Install Milvus
  | [Docker](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/)        | 19.03 或以上|
  |  [nvidia-docker](https://github.com/NVIDIA/nvidia-docker/wiki/Installation-(version-2.0))          | 2.0     |
    
-若要安装 NVIDIA driver 418，在电脑桌面，进入 **Software & Updates** -> **Additional Drivers**。选择 **Using NVIDIA driver metapackage from nvidia-driver-418**，然后点击 **Apply Changes**。您无需单独安装 CUDA 环境，因为它已经包含在 Milvus Docker 容器里。
+> 若要安装 NVIDIA driver 418，在电脑桌面，进入 **Software & Updates** -> **Additional Drivers**。选择 **Using NVIDIA driver metapackage from nvidia-driver-418**，然后点击 **Apply Changes**。您无需单独安装 CUDA 环境，因为它已经包含在 Milvus Docker 容器里。
    
 ## 使用 Docker
 
