@@ -80,23 +80,23 @@ sidebar_label: Milvus Configuration
 
 在 Milvus 里，由于**创建索引**和**搜索**是两个独立分开的过程，resource 的利用遵循以下基本原则：
 
-- 创建索引过程只能在 `gpu` 里进行。请使用区域 `db_config` 里的 `build_index_gpu` 参数来指定用于该过程的 `gpu` 。
+- 创建索引过程只能在 `gpu` 里进行。请使用区域 `db_config` 里的 `index_build_device` 参数来指定用于该过程的 `gpu` 。
 - 搜索计算过程可以同时在`cpu` 和 `gpu` 里进行。如果搜索 resource 包含 `gpu`，您可以指定多张 GPU 来进行该过程。
 - 用于创建索引的 `gpu` 同时也能指定用于搜索过程。
 
 | 参数               | 说明                                                         | 类型    | 默认值     |
 | ------------------ | ------------------------------------------------------------ | ------- | ---------- |
-| `search_resources` | 定义 Milvus 里用于搜索的 resource 类型。如：`cpu`, `gpu0`等   | ResourceType        |     `gpu0` |          
+| `search_resources` | 定义 Milvus 里用于搜索的 resource 类型。目前，您必须指定至少一个 `cpu` 和一个 `gpu`。  | ResourceType        |   ` ` |          
 | `index_build_device` | 定义 Milvus 里用户创建索引的 resource 类型。目前仅支持 `gpu` 类型。 | ResourceType | `gpu0` |
 
-请在该区域定义 Milvus 里用于搜索和创建索引的 resource。注意如果 resource 包含 `gpu`，请列出所有您想指定的 GPU，并指明它们的设备 id 号，设备 id 从0开始。比如：
+请在该区域定义 Milvus 里用于搜索和创建索引的 resource。
 
-
+注意如果 resource 包含 `gpu`，请列出所有您想指定的 GPU，并指明它们的设备 id 号，设备 id 从0开始。比如：
 
 ```
 - gpu0
 - gpu1
 - gpu2
 ```
-
+> 注意：目前 Milvus 支持纯 GPU 模式（搜索计算和创建索引过程都在GPU上进行），欢迎测试。该模式在 `nq` 或 `nprobe` 很大的情况下性能更优。若要使用纯 GPU 模式，请确保 `search_resources` 和 `index_build_device` 里只定义了 `gpu` 作为 resource 类型。
 
