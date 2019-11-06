@@ -45,7 +45,7 @@ sidebar_label: Install Milvus
 
    如果没有看到相关服务器，请启动 **Docker** daemon.
 
-   > 提示：在 Linux 上，Docker 需要带 sudo。
+   > 提示：在 Linux 上，Docker 需要带 sudo。如果您有 root 权限，可以不加 sudo。
 
 2. 拉取 Milvus 最新版本的镜像：
 
