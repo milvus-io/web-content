@@ -26,13 +26,13 @@ Milvus uses Prometheus, an open source time series database, to store and monito
 
 The following graph shows how Prometheus works in Milvus:
 
-![prometheus](../assets/monitoring/monitoring.png)
+![prometheus](https://github.com/milvus-io/docs/blob/master/assets/monitoring/monitoring.png)
 
 - Grafana
 
   Grafana is an open source platform for time-series analytics and used in Milvus to visualize various performance metrics:
 
-  ![dashboard](../assets/prometheus.png)
+  ![dashboard](https://github.com/milvus-io/docs/blob/master/assets/prometheus.png)
 
 ### Events to create alert rules
 
@@ -141,8 +141,6 @@ Milvus generates detailed time series metrics. This page shows you how to pull t
    ```
 
 6. [Add the dashboard to Grafana](http://docs.grafana.org/reference/export_import/#importing-a-dashboard).
-
-   ![image-20190620191802408](../assets/importjson.png)
 
 ### Send notifications with Alertmanager
 

@@ -7,7 +7,7 @@ sidebar_label: Try an Example Program
 
 接下来，让我们来运行一个 Python 示例程序。您将创建一个向量数据表，向其中插入10条向量，然后运行向量相似度查询。
 
-1. 请确保系统已经安装了 [Python 3.5](https://www.python.org/downloads/)。
+1. 请确保系统已经安装了 [Python 3.5](https://www.python.org/downloads/) 和 [pip](https://pip.pypa.io/en/stable/installing/)。
 
 2. 安装 Milvus Python SDK。
 

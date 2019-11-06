@@ -6,7 +6,7 @@ sidebar_label: Install Milvus
 
 # Install Milvus 
 
-See [here](../release/v0.5.0.md) for what's new in the latest release.
+See [here](../release/v0.5.1.md) for what's new in the latest release.
 
 ## Prerequisites
 
@@ -32,8 +32,6 @@ See [here](../release/v0.5.0.md) for what's new in the latest release.
  | :--------------------- | :----------------- |
  | NVIDIA driver          | 418 or higher     |
  | [Docker](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/)            |  19.03 or higher   |
- | [nvidia-docker](https://github.com/NVIDIA/nvidia-docker/wiki/Installation-(version-2.0)) |  2.0   |
-
      
    > Note: To install NVIDIA driver 418, on your desktop, launch **Software & Updates** utility, and go to **Additional Drivers** tab. Select **Using NVIDIA driver metapackage from nvidia-driver-418**, and click **Apply Changes**. You don't have to install CUDA separately, as it is included in Milvus Docker container.
 
@@ -42,12 +40,12 @@ See [here](../release/v0.5.0.md) for what's new in the latest release.
 1. Confirm that the Docker daemon is running in the background:
 
    ```shell
-   docker version
+   docker info
    ```
 
    If you do not see the server listed, start the **Docker** daemon.
 
-   > Note: On Linux, Docker needs sudo privileges.
+   > Note: On Linux, Docker needs sudo privileges. If you want to use Docker without sudo, you need to have root privileges.
 
 2. Pull the image for the latest release of Milvus:
 
@@ -59,21 +57,21 @@ See [here](../release/v0.5.0.md) for what's new in the latest release.
 
    ```shell
    # Create Milvus file
-   $ mkdir /home/$USER/milvus
-   $ cd /home/$USER/milvus
-   $ mkdir conf
-   $ cd conf
+   $ mkdir -p /home/<$USER>/milvus/conf
+   $ cd home/<$USER>/milvus/conf
    $ wget https://raw.githubusercontent.com/milvus-io/docs/master/assets/server_config.yaml
    $ wget https://raw.githubusercontent.com/milvus-io/docs/master/assets/log_config.conf
    ```
 
 4. Start Milvus server.
 
+   Use `--name <milvus container name>` to assign your Milvus container a customized name, and `-e "TZ=Asia/Shanghai"` to configure the timezone. You can change `Asia/Shanghai` to your local time when necessary.
+
    ```shell
    # Start Milvus
-   $ nvidia-docker run -td --runtime=nvidia -e "TZ=Asia/Shanghai" -p 19530:19530 -p 8080:8080 -v /home/$USER/milvus/db:/opt/milvus/db -v /home/$USER/milvus/conf:/opt/milvus/conf -v /home/$USER/milvus/logs:/opt/milvus/logs milvusdb/milvus:latest
+   $ docker run -td --gpus all --name milvus -e "TZ=Asia/Shanghai" -p 19530:19530 -p 8080:8080 -v /home/<$USER>/milvus/db:/opt/milvus/db -v /home/<$USER>/milvus/conf:/opt/milvus/conf -v /home/<$USER>/milvus/logs:/opt/milvus/logs milvusdb/milvus:latest
    ```
-
+   
 5. Confirm Milvus running status.
 
    ```shell
@@ -82,13 +80,10 @@ See [here](../release/v0.5.0.md) for what's new in the latest release.
    ```
 
    If Milvus server is not successfully started, you can check the error logs by the following command.
-
    
    ```shell
-   # Get Milvus container id
-   $ docker ps -a
    # Check docker logs
-   $ docker logs <milvus container id>
+   $ docker logs <milvus container name>
    ```
 
 ## What's next
