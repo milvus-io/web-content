@@ -128,9 +128,16 @@ True
 | `table_name` | 要创建的表的名字，由于是表的唯一标识符，在数据库中必须唯一、不重复。<br/>表名由字母，下划线 `_` 和数字（0-9）组成。首个字符必须是字母或下划线 `_`，不能为数字。总长度不可以超过255个字符。 | String              | 'table name'           |
 | `records`    | 要插入表的一组向量。每条向量必须为**浮点**数据类型，其维度必须和表中定义的维度一致。 | 2-dimensional  list | [[0.1, 0.2, ...], ...] |
 
-若要批量插入一组向量（在下面代码中以`records`表示），请使用 `milvus.add_vectors` ，后面跟表名和一组以逗号隔开的向量。
+若要批量插入一组向量（在下面代码中以`records`表示），请使用 `milvus.add_vectors` ，后面跟表名和一组以逗号隔开的向量。如果没有可用的待插入向量，您也可以通过以下命令随机生成一组向量。此处假设需要自动生成20条256维的向量。
 
-成功后，将返回一组向量id。
+```python
+>>> import random
+
+# Generate 20 vectors of 256 dimension
+>>> vectors = [[random.random() for _ in range(dim)] for _ in range(20)]
+```
+
+然后插入这组向量，成功后，将返回一组向量id。
 
 ```python
 # Insert vectors

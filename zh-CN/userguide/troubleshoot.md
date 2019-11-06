@@ -15,7 +15,7 @@ sidebar_label: Troubleshoot
   服务器启动时发生的故障，通常会导致服务器无法正常启动。您可以通过以下命令来查看相关错误信息：
   
   ```
-  $ docker ps <milvus container id>
+  $ docker logs <milvus container id>
   ```
 
 - 服务器运行问题

@@ -15,7 +15,7 @@ This page describes the common issues you may run into with Milvus. The issues f
   Issues that occur at the startup of Milvus server, and that generally lead to server startup failures. You can check the corresponding error messages by below command:
   
   ```
-  $ docker ps <milvus container id>
+  $ docker logs <milvus container id>
   ```
 
 - Server operational issue

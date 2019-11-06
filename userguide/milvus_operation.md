@@ -135,7 +135,15 @@ Below is the list of parameters for inserting vectors into a table:
 
 To insert a batch of vectors (represented by `records` in the code) into a table, use `milvus.add_vectors` followed by the table name and a comma-separated list of vectors. 
 
-When succeeded, a group of vector ids will be returned.
+If you don't have vectors available at hand, you can also use the randomly-generated vectors by below command. Assume we would generate 20 vectors of 256 dimension.
+
+```python
+>>> import random
+# Generate 20 vectors of 256 dimension
+>>> vectors = [[random.random() for _ in range(dim)] for _ in range(20)]
+```
+
+Then insert the list of vectors. When succeeded, a group of vector ids will be returned.
 
 ```python
 # Insert vectors
