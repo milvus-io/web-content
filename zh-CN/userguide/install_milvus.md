@@ -64,11 +64,11 @@ sidebar_label: Install Milvus
 
 4. 启动 Milvus server。
 
-   若要给 Milvus container 一个自定义的名字，请使用 `--name <milvus container name>` 。若要设置时区，请使用 `-e "TZ=Asia/Shanghai"` 。请按需要将 `Asia/Shanghai` 换成您的当地时间。
+  若要设置时区，请使用 `-e "TZ=Asia/Shanghai"` ，并将 `Asia/Shanghai` 换成您的当地时间。
 
    ```shell
    # Start Milvus
-   $ docker run -td --gpus all --name milvus -e "TZ=Asia/Shanghai" -p 19530:19530 -p 8080:8080 -v /home/<$USER>/milvus/db:/opt/milvus/db -v /home/<$USER>/milvus/conf:/opt/milvus/conf -v /home/<$USER>/milvus/logs:/opt/milvus/logs milvusdb/milvus:latest
+   $ docker run -td --gpus all -e "TZ=Asia/Shanghai" -p 19530:19530 -p 8080:8080 -v /home/<$USER>/milvus/db:/opt/milvus/db -v /home/<$USER>/milvus/conf:/opt/milvus/conf -v /home/<$USER>/milvus/logs:/opt/milvus/logs milvusdb/milvus:latest
    ```
 
 5. 确认 Milvus 运行状态。
@@ -81,8 +81,10 @@ sidebar_label: Install Milvus
    如果 Milvus 服务没有正常启动，您可以执行以下命令查询错误日志。
    
    ```shell
+   # Get id of the container running Milvus
+   $ docker ps -a
    # Check docker logs
-   $ docker logs <milvus container name>
+   $ docker logs <milvus container id>
    ```
 
 ## 接下来您可以
