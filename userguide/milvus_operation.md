@@ -133,12 +133,13 @@ Below is the list of parameters for inserting vectors into a table:
 | `table_name` | The name of the table to create, which must be unique within its database. <br/>Table name can only contain numbers, letters, and underscores. The first character of a table name must be an underscore or letter. The length of a table name must be less than 255 characters.  | String              | 'table name'           |
 | `records`    | The list of vectors to insert into the table. Each vector value must be **Float** data type and has the same dimension as the table. | 2-dimensional list | [[0.1, 0.2, ...], ...] |
 
-To insert a batch of vectors (represented by `records` in the code) into a table, use `milvus.add_vectors` followed by the table name and a comma-separated list of vectors. If you don't have vectors available at hand, you can also use the randomly-generated vectors by below command:
+To insert a batch of vectors (represented by `records` in the code) into a table, use `milvus.add_vectors` followed by the table name and a comma-separated list of vectors. 
+
+If you don't have vectors available at hand, you can also use the randomly-generated vectors by below command. Assume we would generate 20 vectors of 256 dimension.
 
 ```python
 >>> import random
-
-# Generate 20 vectors of 256-dimension
+# Generate 20 vectors of 256 dimension
 >>> vectors = [[random.random() for _ in range(dim)] for _ in range(20)]
 ```
 
