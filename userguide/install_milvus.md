@@ -65,11 +65,11 @@ See [here](../release/v0.5.1.md) for what's new in the latest release.
 
 4. Start Milvus server.
 
-   Use `--name <milvus container name>` to assign your Milvus container a customized name, and `-e "TZ=Asia/Shanghai"` to configure the timezone. You can change `Asia/Shanghai` to your local time when necessary.
+   To configure your timezone, use `-e "TZ=Asia/Shanghai"` , and change `Asia/Shanghai` to your local timezone.
 
    ```shell
    # Start Milvus
-   $ docker run -td --gpus all --name milvus -e "TZ=Asia/Shanghai" -p 19530:19530 -p 8080:8080 -v /home/<$USER>/milvus/db:/opt/milvus/db -v /home/<$USER>/milvus/conf:/opt/milvus/conf -v /home/<$USER>/milvus/logs:/opt/milvus/logs milvusdb/milvus:latest
+   $ docker run -td --gpus all -e "TZ=Asia/Shanghai" -p 19530:19530 -p 8080:8080 -v /home/<$USER>/milvus/db:/opt/milvus/db -v /home/<$USER>/milvus/conf:/opt/milvus/conf -v /home/<$USER>/milvus/logs:/opt/milvus/logs milvusdb/milvus:latest
    ```
    
 5. Confirm Milvus running status.
@@ -82,8 +82,10 @@ See [here](../release/v0.5.1.md) for what's new in the latest release.
    If Milvus server is not successfully started, you can check the error logs by the following command.
    
    ```shell
+   # Get id of the container running Milvus
+   $ docker ps -a
    # Check docker logs
-   $ docker logs <milvus container name>
+   $ docker logs <milvus container id>
    ```
 
 ## What's next
