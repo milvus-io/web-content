@@ -47,7 +47,7 @@ See [here](../release/v0.5.0.md) for what's new in the latest release.
 
    If you do not see the server listed, start the **Docker** daemon.
 
-   > Note: On Linux, Docker needs sudo privileges. If you want to use docker without sudo, you need to have root privileges.
+   > Note: On Linux, Docker needs sudo privileges. If you want to use Docker without sudo, you need to have root privileges.
 
 2. Pull the image for the latest release of Milvus:
 
