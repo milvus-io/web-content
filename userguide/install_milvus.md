@@ -82,7 +82,7 @@ See [here](../release/v0.5.1.md) for what's new in the latest release.
    If Milvus server is not successfully started, you can check the error logs by the following command.
    
    ```shell
-   # Get the id of the container running Milvus
+   # Get id of the container running Milvus
    $ docker ps -a
    # Check docker logs
    $ docker logs <milvus container id>
