@@ -32,8 +32,6 @@ See [here](../release/v0.5.0.md) for what's new in the latest release.
  | :--------------------- | :----------------- |
  | NVIDIA driver          | 418 or higher     |
  | [Docker](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/)            |  19.03 or higher   |
- | [nvidia-docker](https://github.com/NVIDIA/nvidia-docker/wiki/Installation-(version-2.0)) |  2.0   |
-
      
    > Note: To install NVIDIA driver 418, on your desktop, launch **Software & Updates** utility, and go to **Additional Drivers** tab. Select **Using NVIDIA driver metapackage from nvidia-driver-418**, and click **Apply Changes**. You don't have to install CUDA separately, as it is included in Milvus Docker container.
 
@@ -59,8 +57,8 @@ See [here](../release/v0.5.0.md) for what's new in the latest release.
 
    ```shell
    # Create Milvus file
-   $ mkdir -p /home/$USER/milvus/conf
-   $ cd conf
+   $ mkdir -p /home/<$USER>/milvus/conf
+   $ cd home/<$USER>/milvus/conf
    $ wget https://raw.githubusercontent.com/milvus-io/docs/master/assets/server_config.yaml
    $ wget https://raw.githubusercontent.com/milvus-io/docs/master/assets/log_config.conf
    ```
