@@ -142,8 +142,6 @@ Milvus generates detailed time series metrics. This page shows you how to pull t
 
 6. [Add the dashboard to Grafana](http://docs.grafana.org/reference/export_import/#importing-a-dashboard).
 
-   ![image-20190620191802408](../assets/importjson.png)
-
 ### Send notifications with Alertmanager
 
 In Configure Prometheus, you have already downloaded the starter alerting rules for Milvus. Now, download, configure and start Alertmanager.
