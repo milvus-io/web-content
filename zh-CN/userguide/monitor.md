@@ -143,8 +143,6 @@ Milvus 会生成详细的关于系统运行状态的时序 metrics。该页面�
 
 6. [将配置文件导入 Grafana](http://docs.grafana.org/reference/export_import/#importing-a-dashboard).
 
-   ![image-20190620191802408](https://www.milvus.io/docs/assets/importjson.png)
-
 ### 使用 Alertmanager 发送通知
 
 在 Prometheus 配置，您已经下载了 Milvus 的报警规则文件。现在，您只需要下载、配置并启动 Alertmanager。
