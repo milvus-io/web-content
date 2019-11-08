@@ -46,7 +46,7 @@ Milvus 是一款开源的、针对海量特征向量的相似性搜索引擎。�
 
 ## 整体架构
 
-![Milvus 架构](https://github.com/milvus-io/docs/blob/master/assets/milvus_arch.png)
+![Milvus 架构](https://raw.githubusercontent.com/milvus-io/docs/master/assets/milvus_arch.png)
 
 ## 接下来您可以
 
