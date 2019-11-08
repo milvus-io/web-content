@@ -176,7 +176,7 @@ Status(code=0, message='Success')
 
 | 参数         | 说明                                                         | 类型      | 参考值                                             |
 | ------------ | ------------------------------------------------------------ | --------- | -------------------------------------------------- |
-| `index_type` | 用于查询表的索引方式。请在下列类型中选择一种： <ul><li> `FLAT` - 提供100%的精确检索。但由于计算量巨大，搜索速度可能受影响；</li><li>`IVFLAT` - 基于 K-means 的检索方式，搜索精度和速度都不错；</li><li>`IVFSQ8` - 运用scalar quantization的向量索引，能大幅缩小向量体积（大概缩减到原来的1/4），从而能有效提高向量吞吐量。</li><li>`IVF_SQ8H` -  `IVF_SQ8` 的增强版。支持 CPU 和 GPU 的混合查询，能极大提高搜索性能。<br/>若要使用该索引方式，请确保已同时选择了 `cpu` 和 `gpu` 用于 Milvus 搜索。具体配置请参考 [Milvus 配置](../reference/milvus_config.md) 里的 `resource_config` 区域。</li><li>`NSG` - NSG (Navigating Spreading-out Graph) 是一种基于图的索引算法，它可以 a) 降低图的平均出度；b) 缩短搜索路径；c) 缩减索引大小；d) 降低索引复杂度。<br/>大量测试显示 NSG 响应快、搜索精度高，而且需要占用的内存更小。相比非基于图的索引算法，在相同精度的条件下，搜索速度更快。</li></ul> | IndexType | `FLAT` / `IVFLAT` / `IVF_SQ8` / `IVF_SQ8H` / `NSG` |
+| `index_type` | 用于查询表的索引方式。请在下列类型中选择一种： <ul><li> `FLAT` - 提供100%的精确检索。但由于计算量巨大，搜索速度可能受影响；</li><li>`IVFLAT` - 基于 K-means 的检索方式，搜索精度和速度都不错；</li><li>`IVFSQ8` - 运用scalar quantization的向量索引，能大幅缩小向量体积（大概缩减到原来的1/4），从而能有效提高向量吞吐量。</li><li>`IVF_SQ8H` -  `IVF_SQ8` 的增强版。支持 CPU 和 GPU 的混合查询，能极大提高搜索性能。<br/>若要使用该索引方式，请确保已同时选择了 `cpu` 和 `gpu` 用于 Milvus 搜索。具体配置请参考 [Milvus 配置](../reference/milvus_config.md) 里的 `resource_config` 区域。</li></ul> | IndexType | `FLAT` / `IVFLAT` / `IVF_SQ8` / `IVF_SQ8H` |
 | `nlist`      | 每个文件中的向量类的个数，默认值为 `16384`。                 | Integer   | 大于 1 且小于 16384                                          |
 
 

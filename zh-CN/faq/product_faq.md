@@ -54,12 +54,6 @@ Milvus 集群具备高可用性，其存储和计算等集群均容许部分组�
 - `IVF_SQ8H`
 
   `IVF_SQ8` 的增强版。支持 CPU 和 GPU 的混合查询，能极大提高搜索性能。若要使用该索引方式，请确保已同时选择了 `cpu` 和 `gpu` 用于 Milvus 搜索。具体配置请参考 [Milvus 配置](../reference/milvus_config.md) 里的 `resource_config` 区域。
-  
-- `NSG`
-
-  NSG (Navigating Spreading-out Graph) 是一种基于图的索引算法，它可以 a) 降低图的平均出度；b) 缩短搜索路径；c) 缩减索引大小；d) 降低索引复杂度。
-
-  大量测试显示 NSG 响应快、搜索精度高，而且需要占用的内存更小。相比非基于图的索引算法，在相同精度的条件下，搜索速度更快。
 
 ### Milvus 是否支持 “边插入边查询” ？
 
