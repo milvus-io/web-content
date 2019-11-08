@@ -46,7 +46,7 @@ Milvus is an open source similarity search engine for massive feature vectors. D
 
 
 ## Overall architecture
-![Milvus architecture](https://github.com/milvus-io/docs/blob/master/assets/milvus_arch.png)
+![Milvus architecture](https://raw.githubusercontent.com/milvus-io/docs/master/assets/milvus_arch.png)
 
 ## What's next
 
