@@ -26,13 +26,13 @@ Milvus 使用开源时序数据库 Prometheus 作为监控和性能指标存储�
 
 其工作流程如下图所示:
 
-![1566787785125](https://github.com/milvus-io/docs/blob/master/assets/monitoring/monitoring.png)
+![1566787785125](https://raw.githubusercontent.com/milvus-io/docs/master/assets/monitoring/monitoring.png)
 
 - Grafana
 
   Grafana 是一个开源的时序数据分析及可视化平台。Milvus 使用 Grafana 来展示各项性能指标：
 
-  ![prometheus.png](https://github.com/milvus-io/docs/blob/master/assets/prometheus.png)
+  ![prometheus.png](https://raw.githubusercontent.com/milvus-io/docs/master/assets/prometheus.png)
 
 ### 需要报警的事件
 
