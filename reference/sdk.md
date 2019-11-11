@@ -8,8 +8,10 @@ sidebar_label: SDK
 
 Milvus supports the following types of SDK:
 
-- [Java SDK](https://milvus-io.github.io/milvus-sdk-java/javadoc/index.html)
+- [Java SDK](https://github.com/milvus-io/milvus-sdk-java)
 
-- [Python SDK](https://pypi.org/project/pymilvus/)
+- [Python SDK](https://github.com/milvus-io/pymilvus)
+
+- [C++ SDK](https://github.com/milvus-io/milvus/tree/master/core/src/sdk)
 
 
