@@ -5,7 +5,7 @@ server_config:
   mode: single                     # milvus deployment type: single, cluster
 
 db_config:
-  db_path: /tmp/milvus             # milvus data storage path
+  db_path: /opt/milvus             # milvus data storage path
   db_salve_path:                   # secondry data storage path, split by semicolon
   parallel_reduce: false           # use multi-threads to reduce topk result
 
