@@ -6,6 +6,12 @@ sidebar_label: Milvus Changelog
 
 # Milvus Docs Changelog
 
+## [v0.5.3] 2019-11-14
+
+### Improvements
+- \#155 Add the `nprobe` argument which is missing in search result filter command in Learn Milvus Operations topic.
+- \#157 Add release note for v0.5.3.
+
 ## [v0.5.1] 2019-11-04
 
 ### Improvements
