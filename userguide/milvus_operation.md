@@ -7,7 +7,7 @@ sidebar_label: Learn Milvus Operations
 
 # Learn Milvus Operations
 
-This page walks you through some basic Milvus operations using the [**Python** SDK](https://pypi.org/project/pymilvus).
+This page walks you through some basic Milvus operations using the [**Python** SDK](https://milvus-io.github.io/milvus-sdk-python/pythondoc/index.html).
 
 You can also use other languages such as [Java](https://milvus-io.github.io/milvus-sdk-java/javadoc/index.html), C++, etc.
 
