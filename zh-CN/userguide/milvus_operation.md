@@ -6,7 +6,7 @@ sidebar_label: Learn Milvus Operations
 
 # 了解 Milvus 操作
 
-该页面将向您展示如何使用 [Python SDK](https://pypi.org/project/pymilvus) 运行 Milvus 基本操作。您也可以使用其它语言如 [Java](https://milvus-io.github.io/milvus-sdk-java/javadoc/index.html), C++ 等来进行这些操作。
+该页面将向您展示如何使用 [Python SDK](https://github.com/milvus-io/pymilvus) 运行 Milvus 基本操作。您也可以使用其它语言如 [Java](https://github.com/milvus-io/milvus-sdk-java), [C++](https://github.com/milvus-io/milvus/tree/master/core/src/sdk) 等来进行这些操作。
 
 ## 运行操作前的准备
 
@@ -255,7 +255,7 @@ Status(message='Search vectors successfully!', code=0)
 
 ```python
 # Search 3 vectors
->>> status, results = milvus.search_vectors(table_name='test01', query_records=q_records, top_k=2, query_ranges=[('2019-06-01', '2019-06-05')] )
+>>> status, results = milvus.search_vectors(table_name='test01', query_records=q_records, top_k=2, nprobe=16, query_ranges=[('2019-06-01', '2019-06-05')] )
 >>> status
 Status(message='Search vectors successfully!', code=0)
 >>> results # Searched top_k vectors
