@@ -15,10 +15,10 @@ Now, let's run a Python example program. Use this example program to create a ta
 
    ```shell
    # Install Milvus Python SDK
-   $ pip install pymilvus==0.2.3
+   $ pip install pymilvus==0.2.5
    ```
 
-   > Note: To learn more about Milvus Python SDK, go to [Milvus Python SDK Playbook](https://pypi.org/project/pymilvus).
+   > Note: To learn more about Milvus Python SDK, go to [Milvus Python SDK Playbook](https://milvus-io.github.io/milvus-sdk-python/pythondoc/status.html).
 
 3. Create a new file `example.py`, and copy [Python example code](https://github.com/milvus-io/pymilvus/blob/master/examples/example.py) to the file.
 
