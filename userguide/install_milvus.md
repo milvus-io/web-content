@@ -30,8 +30,9 @@ See [here](../release/v0.5.1.md) for what's new in the latest release.
 
  | Software | Supported versions |
  | :--------------------- | :----------------- |
- | NVIDIA driver          | 418 or higher     |
+ | [NVIDIA driver](https://github.com/NVIDIA/nvidia-docker/wiki/Frequently-Asked-Questions#how-do-i-install-the-nvidia-driver)            | 418 or higher     |
  | [Docker](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/)            |  19.03 or higher   |
+ | [NVIDIA Container Toolkit](https://github.com/NVIDIA/nvidia-docker#ubuntu-16041804-debian-jessiestretchbuster) | Version for Ubuntu 18.04  |
      
    > Note: To install NVIDIA driver 418, on your desktop, launch **Software & Updates** utility, and go to **Additional Drivers** tab. Select **Using NVIDIA driver metapackage from nvidia-driver-418**, and click **Apply Changes**. You don't have to install CUDA separately, as it is included in Milvus Docker container.
 

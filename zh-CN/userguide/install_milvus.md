@@ -29,9 +29,9 @@ sidebar_label: Install Milvus
 
  | 软件 | 版本             |
  | ----------------- | --------------- |
- | NVIDIA driver            | 418 或以上   |
+ | [NVIDIA driver](https://github.com/NVIDIA/nvidia-docker/wiki/Frequently-Asked-Questions#how-do-i-install-the-nvidia-driver)            | 418 或以上   |
  | [Docker](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/)        | 19.03 或以上|
-   
+ | [NVIDIA Container Toolkit](https://github.com/NVIDIA/nvidia-docker#ubuntu-16041804-debian-jessiestretchbuster) | Ubuntu 18.04 适用版本|
 > 若要安装 NVIDIA driver 418，在电脑桌面，进入 **Software & Updates** -> **Additional Drivers**。选择 **Using NVIDIA driver metapackage from nvidia-driver-418**，然后点击 **Apply Changes**。您无需单独安装 CUDA 环境，因为它已经包含在 Milvus Docker 容器里。
    
 ## 使用 Docker
@@ -64,7 +64,7 @@ sidebar_label: Install Milvus
 
 4. 启动 Milvus server。
 
-  若要设置时区，请使用 `-e "TZ=Asia/Shanghai"` ，并将 `Asia/Shanghai` 换成您的当地时间。
+   若要设置时区，请使用 `-e "TZ=Asia/Shanghai"` ，并将 `Asia/Shanghai` 换成您的当地时间。
 
    ```shell
    # Start Milvus
