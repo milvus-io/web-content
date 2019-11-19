@@ -64,7 +64,7 @@ sidebar_label: Install Milvus
 
 4. 启动 Milvus server。
 
-  若要设置时区，请使用 `-e "TZ=Asia/Shanghai"` ，并将 `Asia/Shanghai` 换成您的当地时间。
+   若要设置时区，请使用 `-e "TZ=Asia/Shanghai"` ，并将 `Asia/Shanghai` 换成您的当地时间。
 
    ```shell
    # Start Milvus
