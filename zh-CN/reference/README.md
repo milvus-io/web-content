@@ -4,5 +4,5 @@
 - [Milvus Configuration](milvus_config.md)
 - [Monitoring Metrics](monitoring_metrics.md)
 - [SDK](sdk.md)
-- [Data Storage](data_store.md)
+- [Data Management](data_manage.md)
 - [Application Scenarios](application.md)
