@@ -60,13 +60,11 @@ In the directory `home/$USER/milvus/conf`, open Milvus service configuration fil
 
 ### Section `cache_config`
 
-| Parameter             | Description                                                  | Type    | Default   |
-| --------------------- | ------------------------------------------------------------ | ------- | --------- |
-| `cpu_cache_capacity`  | The size of the CPU memory for caching data for faster query. The sum of `cpu_cache_capacity` and `insert_buffer_size` (in "Section `db_config`) must be less than total CPU memory size. | Integer | `16` (GB) |
-| `cpu_cache_threshold` | The percentage of data that can be kept in the CPU memory when the CPU cache is full.<br/>For example, the default value indicates that 85% of data stored in the CPU cache doesn't need to be discarded. The value should be 0 - 1. | Float   | `0.85`    |
-| `gpu_cache_capacity`  | The size of the GPU memory for caching data for faster query. The size must be less than the total GPU memory size. | Integer | `4` (GB)  |
-| `gpu_cache_threshold` | The percentage of data that can be kept in the GPU memory when the GPU cache is full. <br/>For example, the default value indicates that 85% of data stored in the GPU cache doesn't need to be discarded. The value should be 0 - 1. | Float   | `0.85`    |
-| `cache_insert_data`   | If set to `true` , the inserted data will be loaded into the cache immediately for hot query. <br/>If you want simultaneous inserting and searching of vector, it is recommended to enable this function. | Boolean | `false`   |
+| Parameter            | Description                                                  | Type    | Default   |
+| -------------------- | ------------------------------------------------------------ | ------- | --------- |
+| `cpu_cache_capacity` | The size of the CPU memory for caching data for faster query. The sum of `cpu_cache_capacity` and `insert_buffer_size` (in "Section `db_config`) must be less than total CPU memory size. | Integer | `16` (GB) |
+| `gpu_cache_capacity` | The size of the GPU memory for caching data for faster query. The size must be less than the total GPU memory size. | Integer | `4` (GB)  |
+| `cache_insert_data`  | If set to `true` , the inserted data will be loaded into the cache immediately for hot query. <br/>If you want simultaneous inserting and searching of vector, it is recommended to enable this function. | Boolean | `false`   |
 
 
 ### Section `engine_config`
@@ -76,27 +74,18 @@ In the directory `home/$USER/milvus/conf`, open Milvus service configuration fil
 | `use_blas_threshold` | A Milvus performance tuning parameter. The threshold value must be compared with `nq` to decide if the usage of OpenBLAS library will be triggered. <br/>If `nq` >= `use_blas_threshold` , OpenBLAS will be used. The search response times do not fluctuate, but the search speed is relatively slow. <br/>If `nq` < `use_blas_threshold` , SSE will be used. The search speed will be enhanced, however with slight fluctuation of search response times. The value should be >= 0. | Integer | `20`   |
 | `gpu_search_threshold` | A Milvus performance tuning parameter. The threshold value must be compared with `nq` to decide if the search computation will be executed on GPUs only.<br/>If `nq` >= `gpu_search_threshold` , the search computation will be executed on GPUs only.<br/>If `nq` < `gpu_search_threshold` , the search computation will be executed on both CPUs and GPUs. | Interger | `1000` |
 
-### Section `resource_config`
+### Section `gpu_resource_config`
 
-In Milvus, as the **index building** and **search computation** are separate processes, the resource usage conforms to the following general rules:
+Decide in this section whether to enable GPU support/usage in Milvus. GPU support, which uses both CPU and GPUs for optimized resource utilization, is by default enabled to achieve accelerated search performance on very large datasets. 
 
-- Index building process can only be done on `gpu`. Use `index_build_device` to define the `gpu` used for this process.
-- Search computation can be executed on both `cpu` and `gpu` . You are allowed to assign multiple GPUs. 
-- The `gpu` used for index building can also be used for search computation. 
+To switch to CPU-only mode, just set `enable` to `false`. 
+
+> Note: In Milvus, the **index building** and **search computation** are separate processes, which can be executed on `cpu`, or `gpu` or both. You are allowed to assign multiple GPUs to run both processes.
 
 | Parameter            | Description                                                  | Type         | Default |
 | -------------------- | ------------------------------------------------------------ | ------------ | ------- |
-| `search_resources`   | Define the resources used for search computation in Milvus. Currently, you must assign at least one CPU and one GPU. | ResourceType | ` `  |
-| `index_build_device` | Define the resource type used for index building in Milvus. Currently, you can only assign `gpu` here. | ResourceType | `gpu0`  |
-
-Define in this section the resources used for search computation and index building in Milvus. 
-
-To define `gpu` as the resource, list all the GPUs you want to be used, and specify their corresponding device ids. For example:
-
-```
-- gpu0
-- gpu1
-- gpu2
-```
-> Note: The GPU-only mode (search computation and index building are both done on GPU) is available for test now. The mode proves to be much more efficient when the `nq` or `nprobe` is extremely large. To use this mode, make sure only GPUs are defined in `search_resources` and `index_build_device`. 
+| `enable` | Decide if to enable GPU usage in Milvus. | Boolean | `true` |
+| `cache_capacity` | The size of the GPU memory for caching data for faster query. The size must be less than the total GPU memory size. | Integer | `4` (GB) |
+| `search_resources` | Define the GPU devices used for search computation in Milvus. Must be in format: `gpux`. | ResourceType | `gpu0` |
+| `build_index_resources` | Define the GPU devices used for index building in Milvus. Must be in format: `gpux`. | ResourceType | `gpu0`  |
 

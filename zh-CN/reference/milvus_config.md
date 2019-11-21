@@ -63,10 +63,7 @@ sidebar_label: Milvus Configuration
 
 | 参数                       | 说明                                                         | 类型    | 默认值    |
 | -------------------------- | ------------------------------------------------------------ | ------- | --------- |
-| `cpu_cache_capacity`       | 指定内存中用于驻留搜索数据的缓存空间，`cpu_cache_capacity` 和 `insert_buffer_size`（`db_config` 区域）之和不能超过内存总量。 | Integer | `16` (GB) |
-| `cpu_cache_threshold` | 当 CPU 缓存已满，会自动清除过往数据。通过这条参数您可以设置剩余在 CPU 缓存中的数据量。<br/>比如，该参数的默认值（0.85）表示 CPU 缓存中85%的数据不用被清除。取值范围为0 -1。 | Float  | `0.85`    |
-| `gpu_cache_capacity` | 指定显存中用于驻留搜索数据的缓存空间，该值不能超过显存总量。 | Integer | `4` (GB) |
-| `gpu_cache_threshold` | 当 GPU 缓存已满，会自动清除过往数据。通过这条参数您可以设置剩余在 GPU 缓存中的数据量。<br/>比如，该参数的默认值（0.85）表示 GPU 缓存中85%的数据不用被清除。取值范围为0 -1。 | Float | `0.85` |
+| `cpu_cache_capacity`       | 内存中用于驻留搜索数据的缓存空间，`cpu_cache_capacity` 和 `insert_buffer_size`（`db_config` 区域）之和不能超过内存总量。 | Integer | `16` (GB) |
 | `cache_insert_data` | 设置为 `true` ，则新插入的数据会自动加载到缓存以备搜索。<br/>如果想要实现数据即插即搜索，建议启用该功能。 | Boolean | `false`  |
 
 ### `engine_config` 区域
@@ -76,27 +73,18 @@ sidebar_label: Milvus Configuration
 | `use_blas_threshold` | Milvus 性能调优参数。此参数必须与 `nq` 比较以确定是否触发使用 OpenBLAS 计算库的阈值。<br/>如果 `nq` >= `use_blas_threshold` ，则使用 OpenBLAS，搜索响应时间无波动，且搜索速度尚可。如果 `nq` < `use_blas_threshold` ，搜索速度明显提升，但搜索响应时间有波动。取值范围为 >= 0. | Integer | `20`  |
 | `gpu_search_threshold` | Milvus 性能调优参数。此参数必须与 `nq` 比较以确定搜索计算是否只在 GPU 上进行。<br/>如果 `nq` >= `gpu_search_threshold` ，则搜索计算只在 GPU 上进行。如果 `nq` < `gpu_search_threshold` ，则搜索计算将在 CPU 和 GPU 上协同进行。| Integer | `1000` |
 
-### `resource_config` 区域
+### `gpu_resource_config` 区域
 
-在 Milvus 里，由于**创建索引**和**搜索**是两个独立分开的过程，resource 的利用遵循以下基本原则：
+在该区域选择是否在 Milvus 里启用 GPU 用于搜索和索引创建。系统默认同时使用 CPU 和 GPU 来达到资源的最优利用，在特别大的数据集里做搜索时性能更佳。
 
-- 创建索引过程只能在 `gpu` 里进行。请使用区域 `db_config` 里的 `index_build_device` 参数来指定用于该过程的 `gpu` 。
-- 搜索计算过程可以同时在`cpu` 和 `gpu` 里进行。如果搜索 resource 包含 `gpu`，您可以指定多张 GPU 来进行该过程。
-- 用于创建索引的 `gpu` 同时也能指定用于搜索过程。
+若要切换到 CPU-only 模式，只要将 `enable` 设置为 `false`。
+
+> 注意：在 Milvus 里，**创建索引**和**搜索**是两个独立分开的过程，可以只在 `cpu`，或同时在 `cpu` 和 `gpu` 里进行。您可以指定多张 GPU 来进行该过程。
 
 | 参数               | 说明                                                         | 类型    | 默认值     |
 | ------------------ | ------------------------------------------------------------ | ------- | ---------- |
-| `search_resources` | 定义 Milvus 里用于搜索的 resource 类型。目前，您必须指定至少一个 `cpu` 和一个 `gpu`。  | ResourceType        |   ` ` |          
-| `index_build_device` | 定义 Milvus 里用户创建索引的 resource 类型。目前仅支持 `gpu` 类型。 | ResourceType | `gpu0` |
-
-请在该区域定义 Milvus 里用于搜索和创建索引的 resource。
-
-注意如果 resource 包含 `gpu`，请列出所有您想指定的 GPU，并指明它们的设备 id 号，设备 id 从0开始。比如：
-
-```
-- gpu0
-- gpu1
-- gpu2
-```
-> 注意：目前 Milvus 支持纯 GPU 模式（搜索计算和创建索引过程都在GPU上进行），欢迎测试。该模式在 `nq` 或 `nprobe` 很大的情况下性能更优。若要使用纯 GPU 模式，请确保 `search_resources` 和 `index_build_device` 里只定义了 `gpu` 作为 resource 类型。
+| `enable` | 选择是否在 Milvus 里启用 GPU 用于搜索和索引创建。 | Boolean | `true` |
+| `cache_capacity` | 显存中用于驻留搜索数据的缓存空间，该值不能超过显存总量。 | Integer | `4` (GB) |
+| `search_resources` | 定义 Milvus 里用于搜索的 GPU 资源。格式为：`gpux`。 | ResourceType        | ` gpu0` |
+| `build_index_resources` | 定义 Milvus 里用户创建索引的 GPU 资源。格式为：`gpux`。 | ResourceType | `gpu0` |
 
