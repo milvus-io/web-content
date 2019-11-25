@@ -28,20 +28,20 @@ sidebar_label: Operational FAQ
 
 ## 为什么有时候小的数据集查询时间反而更长？
 
-如果数据文件的大小小于配置文件里 `index_building_threshold` 参数的值，Milvus 则不会为此数据文件构建索引。因此，小的数据集有可能查询时间会更长。关于更多信息，请参考 [Milvus 配置](https://milvus.io/docs/zh-CN/reference/milvus_config/)。
+如果数据文件的大小小于配置文件里 `index_building_threshold` 参数的值，Milvus 则不会为此数据文件构建索引。因此，小的数据集有可能查询时间会更长。关于更多信息，请参考 [Milvus 配置](../reference/milvus_config.md)。
 
 > 注意：在 0.5.0 版本之前，`index_building_threshold` 被命名为 `index_file_size`。
 
 ## 为什么我的 Milvus 的性能一直不理想？
 
-原因可能有多种，但建议您检查配置文件中的 `cpu_cache_capacity` 参数以确认是否所有的数据都加载到了内存中。如果没有，Milvus 就达不到最好的性能。关于更多信息，请参考 [Milvus 配置](https://milvus.io/docs/zh-CN/reference/milvus_config/)。
+原因可能有多种，但建议您检查配置文件中的 `cpu_cache_capacity` 参数以确认是否所有的数据都加载到了内存中。如果没有，Milvus 就达不到最好的性能。关于更多信息，请参考 [Milvus 配置](../reference/milvus_config.md)。
 
 如果您的参数设置没有问题，请检查有没有其他应用在大量占用内存。
 
 ## 为什么我的 Milvus 查询准确率一直不理想？
 
 在调用 SDK 进行向量搜索时，请检查调用函数中 `nprobe` 参数的值。值越大，结果越精确，但耗时也越久。关于更多信息，请参考 [了解 Milvus 操作
-](https://milvus.io/docs/zh-CN/userguide/milvus_operation/)。
+](../userguide/milvus_operation.md/)。
 
 ## 为什么我更新过的设置没有生效？
 
