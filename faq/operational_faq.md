@@ -31,19 +31,19 @@ Even if the data is a 2-dim array, this error can still occur if the data type i
 
 ## Why sometimes it takes much longer for queries with smaller datasets?
 
-If the size of a data file is smaller than the value of the `index_building_threshold` parameter in the config file, Milvus will not build indexes for the data file. Thus, it is possible that smaller datasets may need more time for queries. Refer to [Milvus Configuration](https://milvus.io/docs/en/reference/milvus_config) for more information.
+If the size of a data file is smaller than the value of the `index_building_threshold` parameter in the config file, Milvus will not build indexes for the data file. Thus, it is possible that smaller datasets may need more time for queries. Refer to [Milvus Configuration](../reference/milvus_config.md) for more information.
 
 > Note: `index_building_threshold` was named as `index_file_size` before the 0.6.0 release.
 
 ## Why is my Milvus constantly having bad performance?
 
-The reasons may vary, but it is recommended that you check the `cpu_cache_capacity` parameter in the config file to see if all data can be successfully loaded to the memory. Milvus cannot have the best performance before all data is loaded to the memory. Refer to [Milvus Configuration](https://milvus.io/docs/en/reference/milvus_config) for more information.
+The reasons may vary, but it is recommended that you check the `cpu_cache_capacity` parameter in the config file to see if all data can be successfully loaded to the memory. Milvus cannot have the best performance before all data is loaded to the memory. Refer to [Milvus Configuration](../reference/milvus_config.md) for more information.
 
 If your parameter settings look correct, check whether other running applications have high memory usage.
 
 ## Why is my Milvus constantly having low accuracy?
 
-Check the value of the `nprobe` parameter in the functions when you use an SDK to search vectors in a table. The greater the value, the more precise the result, yet the slower the search speed. Refer to [Learn Milvus Operation](https://milvus.io/docs/en/userguide/milvus_operation) for more information.
+Check the value of the `nprobe` parameter in the functions when you use an SDK to search vectors in a table. The greater the value, the more precise the result, yet the slower the search speed. Refer to [Learn Milvus Operation](../userguide/milvus_operation.md) for more information.
 
 ## Why are my new configurations not working?
 
