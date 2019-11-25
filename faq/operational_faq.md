@@ -49,6 +49,10 @@ Check the value of the `nprobe` parameter in the functions when you use an SDK t
 
 You need to restart Milvus docker every time you change the configuration file.
 
+```bash
+$ docker restart <container id>
+```
+
 ## Why is my Python SDK constantly having errors?
 
 Check whether your pymilvus is supported by the installed Milvus. Refer to [https://pypi.org/project/pymilvus](https://pypi.org/project/pymilvus) for a detailed list of supported pymilvus versions.
