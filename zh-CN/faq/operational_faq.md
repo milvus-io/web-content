@@ -8,7 +8,7 @@ sidebar_label: Operational FAQ
 
 ## 为什么我从源码编译 Milvus 失败了？
 
-原因可能有多种，但最可能的是环境因素，比如版本不匹配或者依赖关系缺失等。参考 [从源码安装 Milvus](https://github.com/milvus-io/milvus/blob/master/install.md) 获取详细信息。
+原因可能有多种，但最可能的是环境因素，比如版本不匹配或者依赖关系缺失等。请参考 [从源码安装 Milvus](https://github.com/milvus-io/milvus/blob/master/install.md) 获取详细信息。
 
 建议您使用带有 Milvus 编译环境的 docker 镜像进行源码编译。关于详细流程请参考 [在 Docker 容器中编译运行 Milvus](https://milvus.io/blog/2019/11/25/docker-compilation/)。
 
