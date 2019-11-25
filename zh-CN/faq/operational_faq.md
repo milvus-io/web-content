@@ -6,7 +6,61 @@ sidebar_label: Operational FAQ
 
 # 操作 FAQ
 
-### 为什么我启用多进程程序失败了？
+## 为什么我从源码编译 Milvus 失败了？
+
+原因可能有多种，但最可能的是环境因素，比如版本不匹配或者依赖关系缺失等。参考 [从源码安装 Milvus](https://github.com/milvus-io/milvus/blob/master/install.md) 获取详细信息。
+
+建议您使用带有 Milvus 编译环境的 docker 镜像进行源码编译。关于详细流程请参考 [在 Docker 容器中编译运行 Milvus](https://milvus.io/blog/2019/11/25/docker-compilation/)。
+
+## 为什么欧氏距离和内积在计算向量相似度时的结果不一致？
+
+如果欧氏距离和内积返回不一致的结果，您可能需要检查数据是否已经归一化。如果没有，请先对数据进行归一化。
+
+理论上可以证明，对于未归一化的数据，欧氏距离和内积的结果是不一致的。关于详细推导过程可参考 [数据归一化](https://github.com/milvus-io/bootcamp/blob/master/docs/data_preparation/data_normalization.md)。
+
+## 为什么在导入数据时 Milvus 显示 "no space left on device" 的错误？
+
+您可能没有为导入数据预留足够的磁盘空间。例如，为1亿单精度向量构建 FLAT 或 IVFLAT 索引，需要预留约 200 GB 空间。对于 IVF_SQ8 索引，需要预留约 50 GB。
+
+## 为什么数据是二维数组时， Milvus 依然返回 "Vectors should be 2-dim array" 的错误？
+
+尽管数据是二维数组，如果数据类型是整形而非浮点型时，这个错误仍然会出现。原因是 Milvus 仅支持浮点数据类型。
+
+## 为什么有时候小的数据集查询时间反而更长？
+
+如果数据文件的大小小于配置文件里 `index_building_threshold` 参数的值，Milvus 则不会为此数据文件构建索引。因此，小的数据集有可能查询时间会更长。关于更多信息，请参考 [Milvus 配置](https://milvus.io/docs/zh-CN/reference/milvus_config/)。
+
+> 注意：在 0.5.0 版本之前，`index_building_threshold` 被命名为 `index_file_size`。
+
+## 为什么我的 Milvus 的性能一直不理想？
+
+原因可能有多种，但建议您检查配置文件中的 `cpu_cache_capacity` 参数以确认是否所有的数据都加载到了内存中。如果没有，Milvus 就达不到最好的性能。关于更多信息，请参考 [Milvus 配置](https://milvus.io/docs/zh-CN/reference/milvus_config/)。
+
+如果您的参数设置没有问题，请检查有没有其他应用在大量占用内存。
+
+## 为什么我的 Milvus 查询准确率一直不理想？
+
+在调用 SDK 进行向量搜索时，请检查调用函数中 `nprobe` 参数的值。值越大，结果越精确，但耗时也越久。关于更多信息，请参考 [了解 Milvus 操作
+](https://milvus.io/docs/zh-CN/userguide/milvus_operation/)。
+
+## 为什么我更新过的设置没有生效？
+
+每次更新配置文件之后必须重启 Milvus docker 才能让改动生效。
+
+## 为什么我的 Python SDK 一直报错？
+
+检查 Milvus 是否支持已安装的 pymilvus 版本。要获取详细的 Milvus 和 pymilvus 的版本对应信息，参考 
+[https://pypi.org/project/pymilvus](https://pypi.org/project/pymilvus)。
+
+## 如何得知我的 Milvus 已经成功启动？
+
+使用以下命令检查 Milvus 的运行状态：
+
+```bash
+$ docker logs <container ID>
+```
+
+## 为什么我启用多进程程序失败了？
 
 Milvus 在运行过程中，能够实现多进程操作，但在实现时需满足一定条件：
 
@@ -98,7 +152,7 @@ def test_add_vector_search_multiprocessing(self, connect, table):
         p.join()
 ```
 
-### 为什么搜索 top K 的向量，结果不到 K 条向量？
+## 为什么搜索 top K 的向量，结果不到 K 条向量？
 
 在 Milvus 支持的索引类型中，`IVFLAT` 和 `IVF_SQ8` 是基于 k-means 空间划分的分桶搜索算法。空间被分为 `nlist` 个桶，导入的向量被分配存储在基于 `nlist` 划分的文件结构中。搜索发生时，只搜索最近似的 `nprobe` 个文件。
 
