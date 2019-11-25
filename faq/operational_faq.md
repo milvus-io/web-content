@@ -11,7 +11,7 @@ sidebar_label: Operational FAQ
 
 Although the reasons may vary, the most possible cause could be environmental issues, such as incompatible versions, missing dependencies, etc. Refer to [Install Milvus from Source Code](https://github.com/milvus-io/milvus/blob/master/install.md) for more information.
 
-It is recommended that you use the docker images with the Milvus compilation environment. Refer to [Operational FAQ](https://milvus.io/docs/en/faq/operational_faq/) to learn how to compile Milvus with the docker images.
+It is recommended that you use the docker images with the Milvus compilation environment. Refer to [How to build Milvus from source in the Docker container?](#how-to-build-milvus-from-source-in-the-docker-container?) to learn how to compile Milvus with the docker images.
 
 
 ## Why do Euclidean distance and inner product have inconsistent results in computing vector similarity?
