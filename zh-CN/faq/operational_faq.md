@@ -47,6 +47,10 @@ sidebar_label: Operational FAQ
 
 每次更新配置文件之后必须重启 Milvus docker 才能让改动生效。
 
+```bash
+$ docker restart <container id>
+```
+
 ## 为什么我的 Python SDK 一直报错？
 
 检查 Milvus 是否支持已安装的 pymilvus 版本。要获取详细的 Milvus 和 pymilvus 的版本对应信息，参考 
