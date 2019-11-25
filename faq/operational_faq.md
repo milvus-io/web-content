@@ -6,7 +6,63 @@ sidebar_label: Operational FAQ
 
 # Operational FAQ
 
-### Why did my multiprocessing program fail? 
+
+## Why do I fail to compile Milvus from source?
+
+Although the reasons may vary, the most possible cause could be environmental issues, such as incompatible versions, missing dependencies, etc. Refer to [Install Milvus from Source Code](https://github.com/milvus-io/milvus/blob/master/install.md) for more information.
+
+It is recommended that you use the docker images with the Milvus compilation environment. Refer to [Operational FAQ](https://milvus.io/docs/en/faq/operational_faq/) to learn how to compile Milvus with the docker images.
+
+
+## Why do Euclidean distance and inner product have inconsistent results in computing vector similarity?
+
+If Euclidean distance and inner product have inconsistent results, you need to check whether the data has been normalized. If not, please normalize your data before computing vector similarity.
+
+It can be theoretically proved that Euclidean distance will not be consistent with inner product for data without normalization. For detailed analysis, please refer to [data normalization](https://github.com/milvus-io/bootcamp/blob/master/EN_docs/data_preparation/data_normalization.md).
+
+
+## Why does Milvus display "no space left on device" when I import data to Milvus?
+
+You probably did not leave enough disk space for the data to import. For example, to build FLAT or IVFLAT index for 100 million single-precision vectors, the space needed for importing data is about 200 GB. For IVF_SQ8 index, the space is about 50 GB.
+
+## Why does this error "Vectors should be 2-dim array" still occur when the data is a 2-dimensional array?
+
+Even if the data is a 2-dim array, this error can still occur if the data type is integer instead of float. Milvus only support the float data type.
+
+## Why sometimes it takes much longer for queries with smaller datasets?
+
+If the size of a data file is smaller than the value of the `index_building_threshold` parameter in the config file, Milvus will not build indexes for the data file. Thus, it is possible that smaller datasets may need more time for queries. Refer to [Milvus Configuration](https://milvus.io/docs/en/reference/milvus_config) for more information.
+
+> Note: `index_building_threshold` was named as `index_file_size` before the 0.6.0 release.
+
+## Why is my Milvus constantly having bad performance?
+
+The reasons may vary, but it is recommended that you check the `cpu_cache_capacity` parameter in the config file to see if all data can be successfully loaded to the memory. Milvus cannot have the best performance before all data is loaded to the memory. Refer to [Milvus Configuration](https://milvus.io/docs/en/reference/milvus_config) for more information.
+
+If your parameter settings look correct, check whether other running applications have high memory usage.
+
+## Why is my Milvus constantly having low accuracy?
+
+Check the value of the `nprobe` parameter in the functions when you use an SDK to search vectors in a table. The greater the value, the more precise the result, yet the slower the search speed. Refer to [Learn Milvus Operation](https://milvus.io/docs/en/userguide/milvus_operation) for more information.
+
+## Why are my new configurations not working?
+
+You need to restart Milvus docker every time you change the configuration file.
+
+## Why is my Python SDK constantly having errors?
+
+Check whether your pymilvus is supported by the installed Milvus. Refer to [https://pypi.org/project/pymilvus](https://pypi.org/project/pymilvus) for a detailed list of supported pymilvus versions.
+
+## How do I know whether Milvus is successfully started?
+
+Use the following command to check the running status of Milvus:
+
+```bash
+$ docker logs <container ID>
+```
+
+
+## Why does my multiprocessing program fail? 
 
 In order to successfully run multiprocessing in Milvus, make sure the following conditions are met:
 
@@ -96,7 +152,7 @@ def test_add_vector_search_multiprocessing(self, connect, table):
         p.join()
 ```
 
-### Why are the search results fewer than K when I try to search the top K vectors?
+## Why are the search results fewer than K when I try to search the top K vectors?
 
 In all the indexing types that Milvus supports, `IVFLAT` and `IVF_SQ8` are cell-probe methods that employ a partitioning technique called k-means. The feature space is partitioned into `nlist` cells, and vectors are assigned to one of these cells (to the centroid closest to the query), and stored in an inverted file structure formed of `nlist` inverted lists. When query occurs, only a set of `nprobe` inverted lists are selected.
 
@@ -104,6 +160,6 @@ If the `nlist` and K is relatively large, and `nprobe` is small enough, it happe
 
 In order to avoid this situation, you can try increasing the value of `nprobe`, or smaller `nlist` and K.
 
-### Related links
+## Related links
 
 [Product FAQ](product_faq.md)
