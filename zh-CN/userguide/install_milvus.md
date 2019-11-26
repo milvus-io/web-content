@@ -52,7 +52,7 @@ sidebar_label: Install Milvus
    sudo docker pull milvusdb/milvus:latest
    ```
 
-3. 下载 Milvus 源文件。
+3. 下载 Milvus 配置文件。
 
    ```shell
    # Create Milvus file
