@@ -6,8 +6,6 @@ sidebar_label: Install Milvus
 
 # Install Milvus 
 
-See [here](../release/v0.5.1.md) for what's new in the latest release.
-
 ## Prerequisites
 
 ### Hardware requirements
