@@ -54,7 +54,7 @@ See [here](../release/v0.5.1.md) for what's new in the latest release.
    docker pull milvusdb/milvus:latest
    ```
 
-3. Download Milvus source file.
+3. Download Milvus configuration files.
 
    ```shell
    # Create Milvus file
