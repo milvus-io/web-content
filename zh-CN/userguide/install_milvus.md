@@ -5,8 +5,6 @@ sidebar_label: Install Milvus
 ---
 # 安装 Milvus
 
-点击 [版本发布](../release/v0.5.1.md) 了解最新版本的功能。
-
 ## 安装前提
 
 ### 硬件要求

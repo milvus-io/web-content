@@ -11,7 +11,7 @@ sidebar_label: Operational FAQ
 
 Although the reasons may vary, the most possible cause could be environmental issues, such as incompatible versions, missing dependencies, etc. Refer to [Install Milvus from Source Code](https://github.com/milvus-io/milvus/blob/master/install.md) for more information.
 
-It is recommended that you use the docker images with the Milvus compilation environment. Refer to [How to build Milvus from source in the Docker container?](#how-to-build-milvus-from-source-in-the-docker-container?) to learn how to compile Milvus with the docker images.
+It is recommended that you use the docker images with the Milvus compilation environment. Refer to [How to build Milvus from source in the Docker container?](#how-to-build-milvus-from-source-in-the-docker-container) to learn how to compile Milvus with the docker images.
 
 
 ## Why do Euclidean distance and inner product have inconsistent results in computing vector similarity?
@@ -163,6 +163,133 @@ In all the indexing types that Milvus supports, `IVFLAT` and `IVF_SQ8` are cell-
 If the `nlist` and K is relatively large, and `nprobe` is small enough, it happens that the vectors in `nprobe` lists are even fewer than K. Thus, when you search the top K vectors, the results would be fewer than K.
 
 In order to avoid this situation, you can try increasing the value of `nprobe`, or smaller `nlist` and K.
+
+## How to build Milvus from source in the Docker container?
+
+As Milvus is mainly developed under the Ubuntu environment, the recommended compilation environment is Ubuntu 18.04 or higher. If your developing environment is not Ubuntu 18.04, you can also build Milvus from source code in the docker container. We provide two docker images that provide the build environment needed for the Milvus CPU-only and GPU supported versions.
+
+Use these two docker images to compile Milvus as follows:
+
+**Step 1 Pull the image**
+
+Docker image of CPU-only build environment:
+
+```bash
+$ Docker pull milvusdb/milvus-cpu-build-env:v0.6.0-ubuntu18.04
+```
+
+Docker image of GPU build environment:
+
+```bash
+$ Docker pull milvusdb/milvus-gpu-build-env:v0.6.0-ubuntu18.04
+```
+
+![docker_image](https://raw.githubusercontent.com/milvus-io/www.milvus.io/master/website/blog/assets/docker_compile/docker_image.png)
+
+> Note: If you want to the docker image of GPU build environment, you must [install nvidia-docker] (https://github.com/NVIDIA/nvidia-docker/) first.
+
+**Step 2 Start the container**
+
+Start a CPU-only container:
+
+```bash
+$ Docker run -it -p 19530:19530 -d milvusdb/milvus-cpu-build-env:v0.6.0-ubuntu18.04
+```
+
+Start a GPU container:
+
+```bash
+$ Docker run --runtime=nvidia -it -p 19530:19530 -d milvusdb/milvus-gpu-build-env:v0.6.0-ubuntu18.04
+```
+
+![docker_run](https://raw.githubusercontent.com/milvus-io/www.milvus.io/master/website/blog/assets/docker_compile/docker_run_gpu.png)
+
+When the new container is created, the container id (such as the `d4adxxxxx` above) will be created and automatically displayed.
+
+To enter this container:
+
+```bash
+$ Docker exec -it [container_id] bash
+```
+
+Replace `container_id` with `d4adxxxxx` in the previous command.
+
+![docker_exec](https://raw.githubusercontent.com/milvus-io/www.milvus.io/master/website/blog/assets/docker_compile/docker_exec.png)
+
+**Step 3 Download Milvus source code and compile it in the container**
+
+First enter a directory where you can write code, such as the home directory:
+
+```bash
+$ cd /home
+```
+
+Download the source code of the current version 0.6.0:
+
+```bash
+$ wget https://github.com/milvus-io/milvus/archive/0.6.0.zip
+```
+
+Update apt-get and install a decompression tool:
+
+```bash
+$ Apt-get update
+$ Apt-get install unzip
+```
+
+Unzip the source package:
+
+```bash
+$ Unzip ./0.6.0.zip
+```
+
+The source code is extracted into a folder called `milvus-0.6.0`. To enter its core directory:
+
+```bash
+$ cd ./milvus-0.6.0/core
+```
+
+If you are using a CPU image, compile it like this:
+
+```bash
+$ ./build.sh -t Release
+```
+
+If you are using a GPU image, you need to add a `-g` parameter:
+
+```bash
+$ ./build.sh -g -t Release
+```
+
+The parameter `-t Release` means to compile the Release version. If you want to debug, you can also compile the Debug version.
+
+When it is done, start the compiled Milvus server:
+
+```bash
+$ ./start_server.sh
+```
+
+![server_start](https://raw.githubusercontent.com/milvus-io/www.milvus.io/master/website/blog/assets/docker_compile/server_start.png)
+
+This `start_server.sh` specifies `server_config.yaml` and `log_config.conf` in the `core/conf` directory to start Milvus as a configuration.
+
+The Milvus data storage path is specified by the `primary_path` parameter in the `server_config.yaml` file. The default path is `tmp/milvus`.
+
+If you want to view Milvus log files, go to directory `/tmp/milvus/logs`.
+
+**Step 4 Connect to Milvus using Python**
+
+Before writing the script, make sure pymilvus is installed:
+
+```bash
+$ pip3 install pymilvus==0.2.5
+```
+
+> Note: There is a table listing compatible Milvus and pymilvus versions in pymilvus README file.
+
+If the Python environment is fine, you can start writing your test script, for example, a script in PyCharm to create a table in Milvus. When the execution is completed, you can see the success message returned:
+
+![connect_py](https://raw.githubusercontent.com/milvus-io/www.milvus.io/master/website/blog/assets/docker_compile/connect_py.png)
 
 ## Related links
 
