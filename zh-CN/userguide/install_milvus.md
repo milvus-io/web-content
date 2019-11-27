@@ -7,6 +7,13 @@ sidebar_label: Install Milvus
 
 ## 安装前提
 
+### 系统要求
+
+| 操作系统   | 版本         |
+| ---------- | ------------ |
+| CentOS     | 7.5 或以上   |
+| Ubuntu LTS | 18.04 或以上 |
+
 ### 硬件要求
 
 | 组件 | 建议配置                          |
@@ -16,74 +23,96 @@ sidebar_label: Install Milvus
 | 内存 | 8 GB 或以上 （取决于具体向量数据规模） |
 | 硬盘 | SATA 3.0 SSD 或以上               |
 
-### 系统要求
-
- | 操作系统 | 版本             |
- | ----------------- | --------------- |
- | CentOS             | 7.5 或以上   |
- | Ubuntu LTS         | 18.04 或以上|
-
-### 软件要求
-
- | 软件 | 版本             |
- | ----------------- | --------------- |
- | [NVIDIA driver](https://github.com/NVIDIA/nvidia-docker/wiki/Frequently-Asked-Questions#how-do-i-install-the-nvidia-driver)            | 418 或以上   |
- | [Docker](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/)        | 19.03 或以上|
- | [NVIDIA Container Toolkit](https://github.com/NVIDIA/nvidia-docker#ubuntu-16041804-debian-jessiestretchbuster) | Ubuntu 18.04 适用版本|
-> 若要安装 NVIDIA driver 418，在电脑桌面，进入 **Software & Updates** -> **Additional Drivers**。选择 **Using NVIDIA driver metapackage from nvidia-driver-418**，然后点击 **Apply Changes**。您无需单独安装 CUDA 环境，因为它已经包含在 Milvus Docker 容器里。
-   
 ## 使用 Docker
 
-1. 确认后台已经运行 Docker daemon：
+Docker 是下载启动 Milvus 最简单且推荐的方法。仅支持 CPU 和支持 GPU 的 Milvus 镜像都经过了系统测试。 
 
-   ```shell
-   docker info
-   ```
+### Milvus Docker 要求
 
-   如果没有看到相关服务器，请启动 **Docker** daemon.
+- 在您的宿主机上[安装 Docker](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/) 19.03或更高版本。
+- 若要启用 GPU支持，[安装 NVIDIA Docker](https://github.com/NVIDIA/nvidia-docker).
 
-   > 提示：在 Linux 上，Docker 需要带 sudo。如果您有 root 权限，可以不加 sudo。
+> 注意：在安装 NVIDIA Docker之前，请确保您已安装 NVIDIA driver 418或以上。如若还未安装，您可以在电脑桌面，进入 **Software & Updates** -> **Additional Drivers**。选择 **Using NVIDIA driver metapackage from nvidia-driver-418**，然后点击 **Apply Changes**。您无需单独安装 CUDA 环境，因为它已经包含在 Milvus Docker 容器里。
 
-2. 拉取 Milvus 最新版本的镜像：
+### 第一步 确认 Docker 状态
 
-   ```shell
-   sudo docker pull milvusdb/milvus:latest
-   ```
+确认后台已经运行 Docker daemon：
 
-3. 下载 Milvus 配置文件。
+```shell
+docker info
+```
 
-   ```shell
-   # Create Milvus file
-   $ mkdir -p /home/$USER/milvus/conf
-   $ cd home/$USER/milvus/conf
-   $ wget https://raw.githubusercontent.com/milvus-io/docs/master/assets/server_config.yaml
-   $ wget https://raw.githubusercontent.com/milvus-io/docs/master/assets/log_config.conf
-   ```
+如果没有看到相关服务器，请启动 **Docker** daemon.
 
-4. 启动 Milvus server。
+> 提示：在 Linux 上，Docker 命令前面需加 `sudo`。若要在没有 `sudo` 情况下运行 Dockers 命令，请创建 `docker` 组并添加用户。更多详情，请参阅 [Linux 安装后步骤](https://docs.docker.com/install/linux/linux-postinstall/)。
 
-   若要设置时区，请使用 `-e "TZ=Asia/Shanghai"` ，并将 `Asia/Shanghai` 换成您的当地时间。
+### 第二步 拉取 Milvus Docker 镜像
 
-   ```shell
-   # Start Milvus
-   $ docker run -td --gpus all -e "TZ=Asia/Shanghai" -p 19530:19530 -p 8080:8080 -v /home/$USER/milvus/db:/var/lib/milvus/db -v /home/$USER/milvus/conf:/var/lib/milvus/conf -v /home/$USER/milvus/logs:/var/lib/milvus/logs milvusdb/milvus:latest
-   ```
+若要拉取仅支持 CPU 的镜像：
 
-5. 确认 Milvus 运行状态。
+```shell
+docker pull milvusdb:milvus-cpu:latest
+```
 
-   ```shell
-   # Confirm Milvus status
-   $ docker ps
-   ```
-   
-   如果 Milvus 服务没有正常启动，您可以执行以下命令查询错误日志。
-   
-   ```shell
-   # Get id of the container running Milvus
-   $ docker ps -a
-   # Check docker logs
-   $ docker logs <milvus container id>
-   ```
+若要拉取支持 CPU 的镜像：
+
+```
+sudo docker pull milvusdb/milvus:latest
+```
+
+### 第三步 下载 Milvus 配置文件
+
+下载仅支持 CPU 的配置文件：
+
+```shell
+# Download Milvus config file
+$ mkdir -p /home/$USER/milvus/conf
+$ cd home/$USER/milvus/conf
+$ wget https://raw.githubusercontent.com/milvus-io/docs/master/assets/server_config_cpu.yaml
+$ wget https://raw.githubusercontent.com/milvus-io/docs/master/assets/log_config.conf
+```
+
+下载支持 GPU 的配置文件：
+
+```shell
+# Download Milvus config file
+$ mkdir -p /home/$USER/milvus/conf
+$ cd home/$USER/milvus/conf
+$ wget https://raw.githubusercontent.com/milvus-io/docs/master/assets/server_config_gpu.yaml
+$ wget https://raw.githubusercontent.com/milvus-io/docs/master/assets/log_config.conf
+```
+
+### 第四步 启动 Milvus Docker 容器
+
+启动仅支持 CPU 的 Docker 容器：
+
+```shell
+# Start Milvus
+$ docker run -td --milvus_cpu -e "TZ=Asia/Shanghai" -p 19530:19530 -p 8080:8080 -v /home/$USER/milvus/db:/var/lib/milvus/db -v /home/$USER/milvus/conf:/var/lib/milvus/conf -v /home/$USER/milvus/logs:/var/lib/milvus/logs milvusdb/milvus:latest
+```
+
+启动支持 GPU 的 Docker 容器：
+
+```shell
+# Start Milvus
+$ docker run -td --gpus all -e "TZ=Asia/Shanghai" -p 19530:19530 -p 8080:8080 -v /home/$USER/milvus/db:/var/lib/milvus/db -v /home/$USER/milvus/conf:/var/lib/milvus/conf -v /home/$USER/milvus/logs:/var/lib/milvus/logs milvusdb/milvus:latest
+```
+
+若要设置时区，请使用 `-e "TZ=Asia/Shanghai"` ，并将 `Asia/Shanghai` 换成您的当地时间。最后，通过确认 Milvus 运行状态。
+
+```shell
+# Confirm Milvus status
+$ docker ps
+```
+
+如果 Milvus 服务没有正常启动，您可以执行以下命令查询错误日志。
+
+```shell
+# Get id of the container running Milvus
+$ docker ps -a
+# Check docker logs
+$ docker logs <milvus container id>
+```
 
 ## 接下来您可以
 
