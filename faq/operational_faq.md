@@ -282,7 +282,7 @@ If you want to view Milvus log files, go to directory `/tmp/milvus/logs`.
 Before writing the script, make sure pymilvus is installed:
 
 ```bash
-pip3 install pymilvus==0.2.5
+$ pip3 install pymilvus==0.2.5
 ```
 
 > Note: There is a table listing compatible Milvus and pymilvus versions in pymilvus README file.
