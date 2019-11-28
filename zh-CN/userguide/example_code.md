@@ -19,8 +19,12 @@ sidebar_label: Try an Example Program
    > 提示：如果需要进一步了解 Milvus Python SDK，请阅读 [Milvus Python SDK 使用手册](https://milvus-io.github.io/milvus-sdk-python/pythondoc/status.html)。
    
 
-3. 创建 `example.py` 文件，并向文件中加入 [Python 示例代码](https://github.com/milvus-io/pymilvus/blob/master/examples/example.py)。
-
+3. 下载 Python 示例代码。
+   
+   ```shell
+   # Download Python example
+   $ wget https://raw.githubusercontent.com/milvus-io/pymilvus/master/examples/example.py
+   ```
 
 4. 运行示例代码。
 
