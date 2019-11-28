@@ -31,6 +31,10 @@ sidebar_label: Try an Example Program
 
 5. 确认程序正确运行。
 
+   ```shell
+   Query result is correct.
+   ```
+
    恭喜您！您已经成功完成了在 Milvus 上的第一次向量相似度查询。
 
 ## 接下来您可以
