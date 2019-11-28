@@ -31,6 +31,10 @@ Now, let's run a Python example program. Use this example program to create a ta
 
 5. Confirm the program is running correctly.
 
+   ```shell
+   Query result is correct.
+   ```
+
 Congratulations! You have successfully completed your first vector similarity search with Milvus.
 
 ## What's next
