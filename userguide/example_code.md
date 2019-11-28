@@ -20,7 +20,12 @@ Now, let's run a Python example program. Use this example program to create a ta
 
    > Note: To learn more about Milvus Python SDK, go to [Milvus Python SDK Playbook](https://milvus-io.github.io/milvus-sdk-python/pythondoc/status.html).
 
-3. Create a new file `example.py`, and copy [Python example code](https://github.com/milvus-io/pymilvus/blob/master/examples/example.py) to the file.
+3. Download Python example code.
+
+   ```shell
+   # Download Python example
+   $ wget https://raw.githubusercontent.com/milvus-io/pymilvus/master/examples/example.py
+   ```
 
 4. Run the example code.
 
