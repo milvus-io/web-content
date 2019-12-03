@@ -23,7 +23,7 @@ sidebar_label: Install Milvus
 | 内存 | 8 GB 或以上 （取决于具体向量数据规模） |
 | 硬盘 | SATA 3.0 SSD 或以上               |
 
-## 使用 Docker
+## 使用 Docker 安装
 
 Docker 是下载启动 Milvus 最简单且推荐的方法。仅支持 CPU 和支持 GPU 的 Milvus 镜像都经过了系统测试。 
 
@@ -113,6 +113,10 @@ $ docker ps -a
 # Check docker logs
 $ docker logs <milvus container id>
 ```
+
+## 从源代码编译
+
+[从源代码编译 Milvus](https://github.com/milvus-io/milvus/blob/master/install.md) 并将其安装在 Ubuntu 上。尽管这些说明可能适用于其它系统，但我们仅针对 Ubuntu 18.04版本进行了测试。
 
 ## 接下来您可以
 
