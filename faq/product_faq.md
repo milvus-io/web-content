@@ -58,10 +58,6 @@ Currently, Milvus supports the following index methods:
   
   To use this index, make sure both `cpu` and `gpu` are added as resources in the [Milvus configuration file](../reference/milvus_config.md). 
 
-- `IVF_PQ` 
-
-  Indexing method built based on product quantization. The input vectors are split into distinct sub-vectors which are then quantized separately. Vector size can be reduced to 1/8 or 1/16 of the original size. If you choose this index, note that there is an inevitable trade-off between memory and search accuracy.
-
 ### Does Milvus support simultaneous inserting and searching?
 
 Absolutely. You can simultaneously insert and search data in Milvus. If you want this function, it is recommended to set the parameter `cache_insert_data` to `true` in section `cache_config` at `home/$USER/milvus/conf/server_config.yaml`.
