@@ -22,6 +22,10 @@ Currently, Milvus supports only the following operations for vectors:
 
 > Although Milvus does not support directly deleting vectors, you can drop a table for vector deletion.
 
+## Should I specify vector IDs or use auto-generated vector IDs?
+
+Both ways work. However, you must either specify IDs for all vectors or use auto-generated IDs for all vectors in one table.
+
 ## Why do Euclidean distance and inner product have inconsistent results in computing vector similarity?
 
 If Euclidean distance and inner product have inconsistent results, you need to check whether the data has been normalized. If not, please normalize your data before computing vector similarity.
