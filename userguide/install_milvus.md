@@ -23,7 +23,7 @@ sidebar_label: Install Milvus
 | RAM        | 8 GB or more (depends on data volume) |
 | Hard drive | SATA 3.0 SSD or higher                |
 
-## Use Docker
+## Install using Docker
 
 Docker is the easiest and recommended way to install and run Milvus. Docker images are tested for both CPU-only or GPU-enabled Milvus.
 
@@ -56,7 +56,7 @@ docker pull milvusdb:milvus-cpu:latest
 
 To pull the GPU-enabled image:
 
-```
+```shell
 docker pull milvusdb/milvus:latest
 ```
 
