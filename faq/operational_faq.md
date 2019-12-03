@@ -20,7 +20,7 @@ Currently, Milvus supports only the following operations for vectors:
 - Insert
 - Query
 
-> Although you cannot use Milvus to delete vectors, you can drop a table to delete all vectors in a table.
+> Although Milvus does not support directly deleting vectors, you can drop a table for vector deletion.
 
 ## Why do Euclidean distance and inner product have inconsistent results in computing vector similarity?
 
