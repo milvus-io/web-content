@@ -55,11 +55,6 @@ Milvus 集群具备高可用性，其存储和计算等集群均容许部分组�
 
   `IVF_SQ8` 的增强版。支持 CPU 和 GPU 的混合查询，能极大提高搜索性能。若要使用该索引方式，请确保已同时选择了 `cpu` 和 `gpu` 用于 Milvus 搜索。具体配置请参考 [Milvus 配置](../reference/milvus_config.md) 里的 `resource_config` 区域。
 
-
-- `IVF_PQ` 
-
-  基于乘积量化的索引类型，意思是将原来的向量空间分解为若干个低维向量空间的笛卡尔积，然后对分解得到的低维向量空间分别做量化。向量大小可以缩减至原来大小的1/8甚至1/16。该索引方式适用于低内存环境下的大规模向量搜索，但搜索精度会有损失，需注意权衡。
-
 ### Milvus 是否支持 “边插入边查询” ？
 
 支持。如果您想在Milvus里边插入向量边查询，建议在 `home/$USER/milvus/conf/server_config.yaml` 下的 `cache_config` 区域，将参数 `cache_insert_data` 设置为 `True`。
