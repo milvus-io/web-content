@@ -22,7 +22,7 @@ sidebar_label: Operational FAQ
 
 您可能没有为导入数据预留足够的磁盘空间。例如，为1亿单精度向量构建 `FLAT` 或 `IVFLAT` 索引，需要预留约 200 GB 空间。对于 `IVF_SQ8` 索引，需要预留约 50 GB。
 
-## 为什么数据是二维数组时， Milvus 依然返回 "Vectors should be 2-dim array" 的错误？
+## 为什么数据是二维数组时， Milvus Python SDK 依然返回 "Vectors should be 2-dim array" 的错误？
 
 尽管数据是二维数组，如果数据类型是整形而非浮点型时，这个错误仍然会出现。原因是 Milvus 仅支持浮点数据类型。
 
