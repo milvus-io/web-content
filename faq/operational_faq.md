@@ -25,7 +25,7 @@ It can be theoretically proved that Euclidean distance will not be consistent wi
 
 You probably did not leave enough disk space for the data to import. For example, to build `FLAT` or `IVFLAT` index for 100 million single-precision vectors, the space needed for importing data is about 200 GB. For `IVF_SQ8` index, the space is about 50 GB.
 
-## Why does this error "Vectors should be 2-dim array" still occur when the data is a 2-dimensional array?
+## Why does this error "Vectors should be 2-dim array" still occur in the Python SDK when the data is a 2-dimensional array?
 
 Even if the data is a 2-dim array, this error can still occur if the data type is integer instead of float. Milvus only support the float data type.
 
