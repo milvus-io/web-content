@@ -8,9 +8,19 @@ sidebar_label: Operational FAQ
 
 ## 为什么我从源码编译 Milvus 失败了？
 
-原因可能有多种，但最可能的是环境因素，比如版本不匹配或者依赖关系缺失等。请参考 [从源码安装 Milvus](https://github.com/milvus-io/milvus/blob/master/install.md) 获取详细信息。
+原因可能有多种，但最可能的是环境因素，比如版本不匹配或者依赖关系缺失等。请参考 [从源码安装 Milvus](https://github.com/milvus-io/milvus/blob/0.6.0/install.md) 获取详细信息。
 
 建议您使用带有 Milvus 编译环境的 docker 镜像进行源码编译。关于详细流程请参考 [在 Docker 容器中编译运行 Milvus](https://milvus.io/blog/2019/11/25/docker-compilation/)。
+
+## Milvus 支持对向量的插入、删除、更改和查询操作吗？
+
+目前，Milvus 仅支持以下针对向量的操作：
+
+- 插入向量
+- 查询向量
+
+> 虽然 Milvus 不支持直接删除向量，您可以通过删除表的方式对向量进行删除。
+
 
 ## 为什么欧氏距离和内积在计算向量相似度时的结果不一致？
 
