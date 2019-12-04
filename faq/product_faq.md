@@ -72,6 +72,10 @@ While all of these supports large-scale vector similarity search, Milvus is the 
 
 For more insight, see [Milvus in Comparison](../reference/comparison.md). 
 
+## Is Milvus an end-to-end product?
+
+Not yet. Milvus accepts vectors as input and returns vectors through queries. You cannot use Milvus to extract features from unstructured data.
+
 ### Have questions that were not answered?
 If you still have questions that are not covered in this list, you can take the following steps to find an answer:
 
