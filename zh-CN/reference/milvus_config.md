@@ -45,7 +45,7 @@ sidebar_label: Milvus Configuration
 
 | 参数                 | 说明                                                         | 类型        | 默认值          |
 | -------------------- | ------------------------------------------------------------ | ----------- | --------------- |
-| `primary_path`       | 导入 Milvus 的数据文件和元数据存储的首选路径。               | Path        | `/opt/data`     |
+| `primary_path`       | 导入 Milvus 的数据文件和元数据存储的首选路径。               | Path        | `/opt/milvus`     |
 | `secondary_path`     | 导入 Milvus 的数据文件存储的二级路径，可以填多个，两个路径中间以分号隔开。当数据量很大，`primary_path` 指定的磁盘空间不够用时，可以设置此参数。<br/>`primary_path` 和 `secondary_path` 平均分配导入的数据。每个路径下的数据大小 = 数据总大小 / 路径数量。请确保这些路径下文件可用的存量差不多且够用。 | Path        | ` `             |
 | `backend_url`        | 元数据存储的 URL 。使用 SQLite（单机部署） 或 MySQL（分布式集群部署）来存储元数据。 <br/>`db_backend_url` 的格式为：`dialect://username:password@host:port/database`。（ `dialect` 可以是 `mysql` 或 `sqlite`，取决于你是用了MySQL 还是SQLite数据库。） | Path        | `sqlite://:@:/` |
 | `insert_buffer_size` | 用于 buffer 的最大内存量。`insert_buffer_size` 和`cpu_cache_capacity`（`cache_config` 区域）之和不能超过内存总量。 | Integer     | `4` (GB)        |
