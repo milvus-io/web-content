@@ -123,7 +123,7 @@ Milvus generates detailed time series metrics. This page shows you how to pull t
 
 2. Point your browser to `http://<hostname of machine running grafana>:3000` and log into the Grafana UI with the default username/password, `admin/admin`, or create your own account.
 
-3. [Add Prometheus as a data source](http://docs.grafana.org/datasources/prometheus/).
+3. [Add Prometheus as a data source](https://grafana.com/docs/grafana/latest/features/datasources/prometheus/).
    
 4. Configure the data source as follows:
 
