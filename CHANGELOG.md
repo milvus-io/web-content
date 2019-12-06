@@ -11,7 +11,7 @@ sidebar_label: Milvus Changelog
 ### Improvements
 - \#169, #177, #183 and #184 Update Product FAQ and Operational FAQ topics.
 - \#174 Update Install Milvus and Milvus Configuration topics.
-        Add Table Partition, Data Management and Contribute topics.
+        Add Index Types, Table Partition, Data Management and Contribute topics.
         Update server_config.yaml.
         
 ## [v0.5.3] 2019-11-14
