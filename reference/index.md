@@ -6,7 +6,14 @@ sidebar_label: Index Types
 
 # Index Types
 
-Milvus supports the multiple types of indexes to suit various scenarios. The page introduces the description and main parameters that affects query performance or recall rate when using these indexes. The compatibility of the index with CPU or GPU supported Milvus is also demonstrated.
+Milvus supports multiple types of indexes to suit various scenarios. The page introduces the description and main parameters that affects query performance or recall rate when using these indexes. The compatibility of the index with CPU or GPU supported Milvus is also demonstrated.
+
+Some concepts used in this page are explained as follows:
+
+- nq: number of queried vectors.
+- `nlist`: total number of buckets generated. The feature space is partitioned into `nlist` buckets. 
+- `nprobe`: number of buckets to search at query.
+- `gpu_search_threshold`: The threshold value must be compared with nq to decide if the search computation will be executed on GPUs only. If nq >= `gpu_search_threshold`, the search computation will be executed on GPUs only. If nq < `gpu_search_threshold`, the search computation will be executed on both CPUs and GPUs.
 
 | Type                                       | Class name | Description                                                  | Affecting parameters                          | CPU-only Milvus    | GPU-enabled Milvus |
 | ------------------------------------------ | ---------- | ------------------------------------------------------------ | --------------------------------------------- | ------------------ | ------------------ |
