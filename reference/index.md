@@ -6,7 +6,7 @@ sidebar_label: Index Types
 
 # Index Types
 
-Milvus supports the following types of index:
+Milvus supports the multiple types of indexes to suit various scenarios. The page introduces the description and main parameters that affects query performance or recall rate when using these indexes. The compatibility of the index with CPU or GPU supported Milvus is also demonstrated.
 
 | Type                                       | Class name | Description                                                  | Affecting parameters                          | CPU-only Milvus    | GPU-enabled Milvus |
 | ------------------------------------------ | ---------- | ------------------------------------------------------------ | --------------------------------------------- | ------------------ | ------------------ |
