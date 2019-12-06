@@ -46,7 +46,7 @@ Assume we would create a table named test01. Read below parameters carefully and
 | ----------------------- | ------------------------------------------------------------ | ---------- | --------------------------------- |
 | `table_name`            | The name of the table to create, which must be unique within its database. <br/>Begin a table name with a letter or an underscore (_) . Subsequent characters can be letters, underscores, numbers (0-9). The entire length can not exceed 255 characters. | String     | 'table name'                      |
 | `dimension`             | The dimension of the vectors that are to be inserted into the created table. | Integer    | （0, 16384]                       |
-| `index_build_threshold` | Minimum value that triggers index building for raw data files. Index creation is controlled by the size of raw data files specified in this parameter, with a default of 1024 MB. Data files with smaller sizes will not have indexes built. | Integer    | [0 MB, 4096 MB]                   |
+| `index_file_size` | Threshold value that triggers index building for raw data files. Index creation is controlled by the size of raw data files specified in this parameter, with a default of 1024 MB. Data files with smaller sizes will not have indexes built. | Integer    | [0 MB, 4096 MB]                   |
 | `metric_type`           | The method vector distances are compared in Milvus. Available options are: Euclidean distance (L2) and inner product (IP). Default value is `MetricType.L2`. | MetricType | `MetricType.L2` / `MetricType.IP` |
 
 To create a table, use `milvus.create_table` followed by parameters that include the table name, vector dimension, and the index type:
