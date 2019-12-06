@@ -22,15 +22,17 @@ Milvus provides [Python](https://pypi.org/project/pymilvus/), [Java](https://mil
 
 ### How easy is it to use Milvus?
 
-
 Milvus can be easily installed through pulling docker images and simple pip install for SDKs. For more details, see [Install Milvus](../userguide/install_milvus.md).
-
 
 To start your first vector search program, please go to [Milvus example code](../userguide/example_code.md).
 
 ### Is Milvus highly available?
 
 Milvus is designed to be used in mission critical systems with high SLAs. Milvus cluster ensures continuous service capability in case of any single point of failure.
+
+### Can Milvus handle 10-billion or 100-billion datasets?
+
+Milvus provides Mishards, a sharding middleware for Milvus, to establish an orchestrated cluster, which can process 10-billion or 100-billion datasets. However, Mishards is still in the experimental phase and is not recommended for production. Refer to [Mishards Readme](https://github.com/milvus-io/milvus/blob/0.6.0/shards/README.md) for more information.
 
 ### How does Milvus work?
 
@@ -64,7 +66,7 @@ Absolutely. You can simultaneously insert and search data in Milvus. If you want
 
 ### Where are the data stored?
 
-Vectors that have been imported into Milvus are stored in your local disk. Metadata can be stored either in MySQL or SQLite 3. For more details about storage, read [Milvus data storage](../reference/data_store.md).
+Vectors that have been imported into Milvus are stored in your local disk. Metadata can be stored either in MySQL or SQLite 3. 
 
 ### How does Milvus compare to FAISS and SPTAG?
 
