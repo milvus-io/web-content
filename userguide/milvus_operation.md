@@ -182,7 +182,7 @@ Below is the list of parameters for creating index for a table:
 
 | Parameter    | Description                                                  | Type      | Reference value                                              |
 | ------------ | ------------------------------------------------------------ | --------- | ------------------------------------------------------------ |
-| `index_type` | The type of indexing method to query the table. Select one out of these types: <ul><li>`FLAT` - Provides 100% accuracy for recalls. However, performance might be downgraded due to huge computation effort</li><li>`IVFLAT` - K-means based similarity search which is balanced between accuracy and performance</li><li>`IVF_SQ8` - Vector indexing that adopts a scalar quantization strategy that significantly reduces the size of a vector (by about 3/4), thus improving the overall throughput of vector processing</li><li>`IVF_SQ8H` - An enhanced index algorithm of `IVF_SQ8`. It supports hybrid computation on both CPU and GPU, which significantly improves the search performance.<br/>To use this index type, make sure GPU support is enabled in section `gpu_resource_config` of [Milvus configuration file](../reference/milvus_config.md).</li></ul> | IndexType | `FLAT` / `IVFLAT` / `IVF_SQ8` / `IVF_SQ8H` |
+| `index_type` | The type of indexing method to query the table. Please refer to [Index Types](../reference/index.md) for detailed introduction of supported indexes. | IndexType | `FLAT` / `IVFLAT` / `IVF_SQ8` / `IVF_SQ8H` |
 | `nlist`      | Number of vector buckets in a file. Default value is 16384.  | Integer   | [1, 16384]   |
 
 To create an index for the table, use `milvus.create_index` followed by parameters that include the table name, index type, and nlist.
