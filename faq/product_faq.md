@@ -22,15 +22,17 @@ Milvus provides [Python](https://pypi.org/project/pymilvus/), [Java](https://mil
 
 ### How easy is it to use Milvus?
 
-
 Milvus can be easily installed through pulling docker images and simple pip install for SDKs. For more details, see [Install Milvus](../userguide/install_milvus.md).
-
 
 To start your first vector search program, please go to [Milvus example code](../userguide/example_code.md).
 
 ### Is Milvus highly available?
 
 Milvus is designed to be used in mission critical systems with high SLAs. Milvus cluster ensures continuous service capability in case of any single point of failure.
+
+### Can Milvus handle datasets with 10-billion or 100-billion scale?
+
+Milvus provides Mishards, a sharding middleware for Milvus, to establish an orchestrated cluster, which can process datasets with 10-billion or 100-billion scale. However, Mishards is still in the experimental phase and is not recommended for production. Refer to [Mishards Readme](https://github.com/milvus-io/milvus/blob/0.6.0/shards/README.md) for more information.
 
 ### How does Milvus work?
 
