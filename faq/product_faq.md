@@ -22,15 +22,17 @@ Milvus provides [Python](https://pypi.org/project/pymilvus/), [Java](https://mil
 
 ### How easy is it to use Milvus?
 
-
 Milvus can be easily installed through pulling docker images and simple pip install for SDKs. For more details, see [Install Milvus](../userguide/install_milvus.md).
-
 
 To start your first vector search program, please go to [Milvus example code](../userguide/example_code.md).
 
 ### Is Milvus highly available?
 
 Milvus is designed to be used in mission critical systems with high SLAs. Milvus cluster ensures continuous service capability in case of any single point of failure.
+
+### Can Milvus handle datasets with 10-billion or 100-billion scale?
+
+Milvus provides Mishards, a sharding middleware for Milvus, to establish an orchestrated cluster, which can process datasets with 10-billion or 100-billion scale. However, Mishards is still in the experimental phase and is not recommended for production. Refer to [Mishards Readme](https://github.com/milvus-io/milvus/blob/0.6.0/shards/README.md) for more information.
 
 ### How does Milvus work?
 
@@ -64,13 +66,17 @@ Absolutely. You can simultaneously insert and search data in Milvus. If you want
 
 ### Where are the data stored?
 
-Vectors that have been imported into Milvus are stored in your local disk. Metadata can be stored either in MySQL or SQLite 3. For more details about storage, read [Milvus data storage](../reference/data_store.md).
+Vectors that have been imported into Milvus are stored in your local disk. Metadata can be stored either in MySQL or SQLite 3.
 
 ### How does Milvus compare to FAISS and SPTAG?
 
 While all of these supports large-scale vector similarity search, Milvus is the only one that is a high-performance and easy-to-use vector search engine that scales easily.
 
 For more insight, see [Milvus in Comparison](../reference/comparison.md). 
+
+## Is Milvus an end-to-end product?
+
+Not yet. Milvus accepts vectors as input and returns vectors through queries. You cannot use Milvus to extract features from unstructured data.
 
 ### Have questions that were not answered?
 If you still have questions that are not covered in this list, you can take the following steps to find an answer:
