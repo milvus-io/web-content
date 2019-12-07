@@ -66,7 +66,7 @@ Absolutely. You can simultaneously insert and search data in Milvus. If you want
 
 ### Where are the data stored?
 
-Vectors that have been imported into Milvus are stored in your local disk. Metadata can be stored either in MySQL or SQLite 3. 
+Vectors that have been imported into Milvus are stored in your local disk. Metadata can be stored either in MySQL or SQLite 3.
 
 ### How does Milvus compare to FAISS and SPTAG?
 

@@ -65,8 +65,7 @@ Milvus 提供了集群分片中间件 Mishards，可以实现集群分片部署�
 
 ### 数据存储在哪里？
 
-向量数据导入 Milvus 后，将自动存储在您的本地磁盘。元数据可以存储在 MySQL 或 SQLite 3 上。
-
+向量数据导入 Mivus 后，将自动存储在您的本地磁盘。元数据可以存储在 MySQL 或 SQLite 3 上。
 
 ### Milvus 与 FAISS 和 SPTAG 对比如何?
 
