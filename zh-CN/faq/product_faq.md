@@ -62,7 +62,7 @@ Milvus 集群具备高可用性，其存储和计算等集群均容许部分组�
 ### 数据存储在哪里？
 
 
-向量数据导入 Mivus 后，将自动存储在您的本地磁盘。元数据可以存储在 MySQL 或 SQLite 3 上。若要了解更多，请阅览 [数据存储](../reference/data_store.md)。
+向量数据导入 Mivus 后，将自动存储在您的本地磁盘。元数据可以存储在 MySQL 或 SQLite 3 上。
 
 
 ### Milvus 与 FAISS 和 SPTAG 对比如何?
