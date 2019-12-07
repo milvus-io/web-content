@@ -23,3 +23,9 @@ Milvus 支持多种索引类型。本页面主要介绍这些索引类型的定�
 | 倒排+标准量化索引混合模式 | `IVFSQ8H`  | 基于 `IVFSQ8` 做了深层优化，但需要 CPU 和 GPU 都在的情况下才能使用。不同于 `IVFSQ8`，`IVFSQ8H` 使用基于 GPU 的 coarse quantizer，能极大减少标准量化时间，提高查询速度。 | nq, `nprobe`, `gpu_search_threshold`, `nlist` | ❌                    | ✔️               |
 
 若要为您的使用场景选择合适的索引，请参阅 [如何选择索引类型](https://www.milvus.io/blog/2019/12/03/select-index)。
+
+## 已知问题
+
+### `IVFSQ8H`
+
+使用 `IVFSQ8H` 索引时，向量插入和检索不能同时进行。
