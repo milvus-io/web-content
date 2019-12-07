@@ -5,6 +5,10 @@ sidebar_label: Install Milvus
 ---
 # 安装 Milvus
 
+Milvus在纯 CPU 或 GPU 环境下都可以运行。若要在纯 CPU 环境下使用 Milvus，请安装仅支持 CPU 的 Milvus。否则，建议安装支持 GPU 的 Milvus 以获取针对海量数据的更优的查询性能。
+
+Milvus 中的向量搜索包含但不限于这两个独立的部分：创建索引过程和搜索计算过程。在支持 GPU 的 Milvus中，这两个过程可以同时进行，提高查询效率，特别适合动态增加的数据。而在仅支持 CPU 的 Milvus 中，搜索计算必须在创建索引结束后才能进行，所以更适合静态数据。
+
 ## 安装前提
 
 ### 系统要求
