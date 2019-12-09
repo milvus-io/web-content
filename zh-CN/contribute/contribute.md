@@ -8,7 +8,7 @@ sidebar_label: Contribute
 
 ## 贡献代码
 
-我们热烈欢迎并非常感谢大家对 Milvus 项目([Milvus/pymilvus/milvus-sdk-java/docs/bootcamp](https://github.com/milvus-io)) 的贡献！若要了解更详细的贡献流程，请参阅我们的[贡献者指南]。
+我们热烈欢迎并非常感谢大家对 Milvus 项目([Milvus/pymilvus/milvus-sdk-java/docs/bootcamp](https://github.com/milvus-io)) 的贡献！若要了解更详细的贡献流程，请参阅我们的[贡献者指南](https://github.com/milvus-io/milvus/blob/master/CONTRIBUTING.md)。
 
 想要给 Milvus 贡献代码，请按照以下步骤进行：
 
