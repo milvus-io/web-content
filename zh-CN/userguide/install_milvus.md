@@ -23,9 +23,10 @@ Milvus 中的向量搜索包含但不限于这两个独立的部分：创建索�
 | 组件 | 建议配置                          |
 | ---- | --------------------------------- |
 | CPU  | Intel CPU Haswell 或以上          |
-| GPU  | NVIDIA Pascal series 或以上       |
 | 内存 | 8 GB 或以上 （取决于具体向量数据规模） |
 | 硬盘 | SATA 3.0 SSD 或以上               |
+
+> 注意：对于支持 GPU 的 Milvus，您还需要确保 GPU 版本是 NVIDIA Pascal 或以上。
 
 ## 使用 Docker 安装
 
@@ -34,7 +35,7 @@ Docker 是下载启动 Milvus 最简单且推荐的方法。仅支持 CPU 和支
 ### Milvus Docker 要求
 
 - 在您的宿主机上[安装 Docker](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/) 19.03或更高版本。
-- 若要启用 GPU支持，[安装 NVIDIA Docker](https://github.com/NVIDIA/nvidia-docker).
+- 若要启用 GPU 支持，[安装 NVIDIA Docker](https://github.com/NVIDIA/nvidia-docker).
 
 > 注意：在安装 NVIDIA Docker之前，请确保您已安装 NVIDIA driver 418或以上。如若还未安装，您可以在电脑桌面，进入 **Software & Updates** -> **Additional Drivers**。选择 **Using NVIDIA driver metapackage from nvidia-driver-418**，然后点击 **Apply Changes**。您无需单独安装 CUDA 环境，因为它已经包含在 Milvus Docker 容器里。
 
