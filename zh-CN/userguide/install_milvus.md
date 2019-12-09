@@ -58,7 +58,7 @@ docker info
 docker pull milvusdb:milvus-cpu:latest
 ```
 
-若要拉取支持 CPU 的镜像：
+若要拉取支持 GPU 的镜像：
 
 ```
 sudo docker pull milvusdb/milvus:latest
