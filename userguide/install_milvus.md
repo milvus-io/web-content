@@ -28,6 +28,8 @@ In Milvus, the vector search includes 2 separate processes: index building and s
 | RAM        | 8 GB or more (depends on data volume) |
 | Hard drive | SATA 3.0 SSD or higher                |
 
+> Note: For GPU-enabled Milvus, you also need to make sure that the GPU version is NVIDIA Pascal or higher.
+
 ## Install using Docker
 
 Docker is the easiest and recommended way to install and run Milvus. Docker images are tested for both CPU-only or GPU-enabled Milvus.
@@ -56,7 +58,7 @@ If you do not see the server listed, start the **Docker** daemon.
 To pull the CPU-only image:
 
 ```shell
-docker pull milvusdb:milvus-cpu:latest
+docker pull milvusdb/milvus:cpu-latest
 ```
 
 To pull the GPU-enabled image:
