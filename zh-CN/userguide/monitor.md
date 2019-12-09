@@ -124,7 +124,7 @@ Milvus 会生成详细的关于系统运行状态的时序 metrics。该页面�
 
 2. 将浏览器指向 `http://<hostname of machine running grafana>:3000` ，使用默认的用户名/密码，`admin/admin`，登录 Grafana 用户交互页面。您也可以在此创建新的 Grafana 账号。
 
-3. [添加 Prometheus 作为 data source](http://docs.grafana.org/datasources/prometheus/).
+3. [添加 Prometheus 作为 data source](https://grafana.com/docs/grafana/latest/features/datasources/prometheus/).
 
 4. 对 data source 做如下设置：
 

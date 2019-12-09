@@ -29,7 +29,11 @@ Milvus 安装简单，仅需下载相关 docker 镜像文件。易用性强，�
 
 ### Milvus 具备高可用特性吗？
 
-Milvus 集群具备高可用性，其存储和计算等集群均容许部分组件失效，而不影响整个集群的使用。
+Milvus 集群具备高可用性，其存储和计算等集群均容许部分组件失效，而不影响整个集群的使用。若要了解更多，请看 [Milvus 高可用方案](https://github.com/milvus-io/bootcamp/tree/0.5.3/solutions/Milvus_HA)。
+
+### Milvus 可以处理百亿或千亿级数据吗？
+
+Milvus 提供了集群分片中间件 Mishards，可以实现集群分片部署，满足百亿或者千亿级数据的处理需求。Mishards 还处于试验阶段，不推荐部署到生产环境。详细信息请参考 [Mishards Readme](https://github.com/milvus-io/milvus/blob/0.6.0/shards/README_CN.md)。
 
 ### 向量存入 Milvus 后，如何检索？
 
@@ -61,15 +65,17 @@ Milvus 集群具备高可用性，其存储和计算等集群均容许部分组�
 
 ### 数据存储在哪里？
 
-
 向量数据导入 Mivus 后，将自动存储在您的本地磁盘。元数据可以存储在 MySQL 或 SQLite 3 上。
-
 
 ### Milvus 与 FAISS 和 SPTAG 对比如何?
 
 尽管这些都支持海量向量的相似度检索，Milvus 是其中唯一高性能、易用性强的向量检索数据库系统，具备高可用、弹性扩展等特性。
 
 想要了解更多性能对比，请看 [与 FAISS 和 SPTAG 对比](../reference/comparison.md)。
+
+### Milvus 是一款端到端产品吗？
+
+暂时还不是。Milvus 只能接受向量作为输入并通过查询输出向量。您无法使用 Milvus 从非结构化数据中提取向量。
 
 ### 仍有问题没有得到解答？
 
