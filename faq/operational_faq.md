@@ -20,7 +20,7 @@ Milvus supports only the following operations for vectors:
 - Insert
 - Query
 
-> Although Milvus does not support directly deleting vectors, you can drop a table for vector deletion.
+> Note: Although Milvus does not support directly deleting vectors, you can drop a table for vector deletion.
 
 ## Should I specify vector IDs or use auto-generated vector IDs?
 
