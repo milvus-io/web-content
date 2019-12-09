@@ -14,7 +14,7 @@ To contribute to Milvus, please follow below steps to proceed:
 
 1. Browse the existing issues and find the one that you want to resolve, or create a new issue describing your ideas and proposed changes. 
 
-   If you are a first time contributor, we recommend that you start by tackling one of the [issues with the `good first issues` label]([https://github.com/milvus-io/milvus/labels/good%20first%20issue](https://github.com/milvus-io/milvus/labels/good first issue)). 
+   If you are a first time contributor, we recommend that you start by tackling one of the [issues with the `good first issues` label](https://github.com/milvus-io/milvus/labels/good%20first%20issue). 
 
 2. Repository owners will reply to your issues promptly.
 

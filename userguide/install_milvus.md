@@ -6,6 +6,11 @@ sidebar_label: Install Milvus
 
 # Install Milvus 
 
+Milvus runs on machines with or without GPU. To use Milvus on machines without a GPU, install CPU-only Milvus. Otherwise, it is recommended to use GPU-enabled Milvus to achieve better search performance for larger queries. 
+
+In Milvus, the vector search includes 2 separate processes: index building and search computation. For GPU-enabled Milvus, these two processes can run concurrently, which faciliate more efficient query, especially for incremental data. While for CPU-only Milvus, search computation can only be executed after index building is completed, which makes it more suitable for static data.
+
+
 ## Prerequisites
 
 #### System requirements
