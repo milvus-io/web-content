@@ -105,7 +105,7 @@ To start GPU-enabled container:
 $ docker run -td --name gpus all -e "TZ=Asia/Shanghai" -p 19530:19530 -p 8080:8080 -v /home/$USER/milvus/db:/var/lib/milvus/db -v /home/$USER/milvus/conf:/var/lib/milvus/conf -v /home/$USER/milvus/logs:/var/lib/milvus/logs milvusdb/milvus:latest
 ```
 
-To configure your timezone, use `-e "TZ=Asia/Shanghai"` , and change `Asia/Shanghai` to your local timezone. Finally confirm Milvus running status by the following command:
+To configure your timezone, use `-e "TZ=Asia/Shanghai"` , and change `Asia/Shanghai` to your local [timezone](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones). Finally confirm Milvus running status by the following command:
 
 ```shell
 # Confirm Milvus status

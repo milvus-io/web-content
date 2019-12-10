@@ -61,8 +61,9 @@ $ docker pull milvusdb/milvus:cpu-latest
 
 若要拉取支持 GPU 的镜像：
 
-```
+```shell
 $ docker pull milvusdb/milvus:latest
+
 ```
 
 ### 第三步 下载 Milvus 配置文件
@@ -103,7 +104,7 @@ $ docker run -td --name milvus_cpu -e "TZ=Asia/Shanghai" -p 19530:19530 -p 8080:
 $ docker run -td --name gpus all -e "TZ=Asia/Shanghai" -p 19530:19530 -p 8080:8080 -v /home/$USER/milvus/db:/var/lib/milvus/db -v /home/$USER/milvus/conf:/var/lib/milvus/conf -v /home/$USER/milvus/logs:/var/lib/milvus/logs milvusdb/milvus:latest
 ```
 
-若要设置时区，请使用 `-e "TZ=Asia/Shanghai"` ，并将 `Asia/Shanghai` 换成您的本地[时区](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)。最后，通过确认 Milvus 运行状态。
+若要设置时区，请使用 `-e "TZ=Asia/Shanghai"` ，并将 `Asia/Shanghai` 换成您本地的[时区](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)。最后，通过确认 Milvus 运行状态。
 
 ```shell
 # Confirm Milvus status
