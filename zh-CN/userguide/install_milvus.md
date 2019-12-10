@@ -44,7 +44,7 @@ Docker 是下载启动 Milvus 最简单且推荐的方法。仅支持 CPU 和支
 确认后台已经运行 Docker daemon：
 
 ```shell
-docker info
+$ docker info
 ```
 
 如果没有看到相关服务器，请启动 **Docker** daemon.
@@ -56,13 +56,13 @@ docker info
 若要拉取仅支持 CPU 的镜像：
 
 ```shell
-docker pull milvusdb/milvus:cpu-latest
+$ docker pull milvusdb/milvus:cpu-latest
 ```
 
 若要拉取支持 GPU 的镜像：
 
 ```
-sudo docker pull milvusdb/milvus:latest
+$ docker pull milvusdb/milvus:latest
 ```
 
 ### 第三步 下载 Milvus 配置文件
@@ -93,17 +93,17 @@ $ wget https://raw.githubusercontent.com/milvus-io/docs/master/assets/log_config
 
 ```shell
 # Start Milvus
-$ docker run -td --milvus_cpu -e "TZ=Asia/Shanghai" -p 19530:19530 -p 8080:8080 -v /home/$USER/milvus/db:/var/lib/milvus/db -v /home/$USER/milvus/conf:/var/lib/milvus/conf -v /home/$USER/milvus/logs:/var/lib/milvus/logs milvusdb/milvus:latest
+$ docker run -td --name milvus_cpu -e "TZ=Asia/Shanghai" -p 19530:19530 -p 8080:8080 -v /home/$USER/milvus/db:/var/lib/milvus/db -v /home/$USER/milvus/conf:/var/lib/milvus/conf -v /home/$USER/milvus/logs:/var/lib/milvus/logs milvusdb/milvus:latest
 ```
 
 启动支持 GPU 的 Docker 容器：
 
 ```shell
 # Start Milvus
-$ docker run -td --gpus all -e "TZ=Asia/Shanghai" -p 19530:19530 -p 8080:8080 -v /home/$USER/milvus/db:/var/lib/milvus/db -v /home/$USER/milvus/conf:/var/lib/milvus/conf -v /home/$USER/milvus/logs:/var/lib/milvus/logs milvusdb/milvus:latest
+$ docker run -td --name gpus all -e "TZ=Asia/Shanghai" -p 19530:19530 -p 8080:8080 -v /home/$USER/milvus/db:/var/lib/milvus/db -v /home/$USER/milvus/conf:/var/lib/milvus/conf -v /home/$USER/milvus/logs:/var/lib/milvus/logs milvusdb/milvus:latest
 ```
 
-若要设置时区，请使用 `-e "TZ=Asia/Shanghai"` ，并将 `Asia/Shanghai` 换成您的当地时间。最后，通过确认 Milvus 运行状态。
+若要设置时区，请使用 `-e "TZ=Asia/Shanghai"` ，并将 `Asia/Shanghai` 换成您的本地[时区](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)。最后，通过确认 Milvus 运行状态。
 
 ```shell
 # Confirm Milvus status
