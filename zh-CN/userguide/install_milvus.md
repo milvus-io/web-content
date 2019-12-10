@@ -63,6 +63,7 @@ $ docker pull milvusdb/milvus:cpu-latest
 
 ```shell
 $ docker pull milvusdb/milvus:latest
+
 ```
 
 ### 第三步 下载 Milvus 配置文件
