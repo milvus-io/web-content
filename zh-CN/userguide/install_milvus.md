@@ -5,9 +5,9 @@ sidebar_label: Install Milvus
 ---
 # 安装 Milvus
 
-Milvus在纯 CPU 或 GPU 环境下都可以运行。若要在纯 CPU 环境下使用 Milvus，请安装仅支持 CPU 的 Milvus。否则，建议安装支持 GPU 的 Milvus 以获取针对海量数据的更优的查询性能。
+Milvus 在 CPU 或 GPU 环境下都可以运行。若要在 CPU 环境下使用 Milvus，请安装仅需 CPU 的 Milvus。否则，建议安装支持 GPU 的 Milvus 以获取针对海量数据的更优的查询性能。
 
-Milvus 中的向量搜索包含但不限于这两个独立的部分：创建索引过程和搜索计算过程。在支持 GPU 的 Milvus中，这两个过程可以同时进行，提高查询效率，特别适合动态增加的数据。而在仅支持 CPU 的 Milvus 中，搜索计算必须在创建索引结束后才能进行，所以更适合静态数据。
+Milvus 中的向量搜索包含但不限于这两个独立的部分：创建索引过程和搜索计算过程。在支持 GPU 的 Milvus中，这两个过程可以同时进行，提高查询效率，特别适合动态增加的数据。而在仅需 CPU 的 Milvus 中，搜索计算必须在创建索引结束后才能进行，所以更适合静态数据。
 
 ## 安装前提
 
@@ -30,7 +30,7 @@ Milvus 中的向量搜索包含但不限于这两个独立的部分：创建索�
 
 ## 使用 Docker 安装
 
-Docker 是下载启动 Milvus 最简单且推荐的方法。仅支持 CPU 和支持 GPU 的 Milvus 镜像都经过了系统测试。 
+Docker 是下载启动 Milvus 最简单且推荐的方法。仅需 CPU 和支持 GPU 的 Milvus 镜像都经过了系统测试。 
 
 ### Milvus Docker 要求
 
@@ -53,7 +53,7 @@ $ docker info
 
 ### 第二步 拉取 Milvus Docker 镜像
 
-若要拉取仅支持 CPU 的镜像：
+若要拉取仅需 CPU 的镜像：
 
 ```shell
 $ docker pull milvusdb/milvus:cpu-latest
@@ -68,7 +68,7 @@ $ docker pull milvusdb/milvus:latest
 
 ### 第三步 下载 Milvus 配置文件
 
-下载仅支持 CPU 的配置文件：
+下载仅需 CPU 的配置文件：
 
 ```shell
 # Download Milvus config file
@@ -90,7 +90,7 @@ $ wget https://raw.githubusercontent.com/milvus-io/docs/master/assets/log_config
 
 ### 第四步 启动 Milvus Docker 容器
 
-启动仅支持 CPU 的 Docker 容器：
+启动仅需 CPU 的 Docker 容器：
 
 ```shell
 # Start Milvus
@@ -134,6 +134,5 @@ $ docker logs <milvus container id>
 
 - 如果您已准备好在生产环境中部署 Milvus：
 
-  - [向 Milvus 导入数据](import_data.md)
   - 创建 [监控与报警系统](monitor.md) 实时查看系统表现
   - [设置 Milvus 参数](../reference/milvus_config.md)
