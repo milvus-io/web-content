@@ -44,7 +44,7 @@ sidebar_label: Operational FAQ
 
 如果数据文件的大小小于配置文件里 `index_file_size` 参数的值，Milvus 则不会为此数据文件构建索引。因此，小的数据集有可能查询时间会更长。关于更多信息，请参考 [Milvus 配置](../reference/milvus_config.md)。
 
-> 注意：在 0.4.0 版本之前，`index_file_size` 被命名为 `index_build_threshold`。
+> 注意：在 0.4.0 版本之前，`index_file_size` 被命名为 `index_building_threshold`。
 
 ## 为什么我的 Milvus 的性能一直不理想？
 
