@@ -15,7 +15,7 @@ Now, let's run a Python example program. Use this example program to create a ta
 
    ```shell
    # Install Milvus Python SDK
-   $ pip install pymilvus==0.2.5
+   $ pip install pymilvus==0.2.6
    ```
 
    > Note: To learn more about Milvus Python SDK, go to [Milvus Python SDK Playbook](https://milvus-io.github.io/milvus-sdk-python/pythondoc/status.html).

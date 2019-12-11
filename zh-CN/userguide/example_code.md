@@ -13,7 +13,7 @@ sidebar_label: Try an Example Program
 
    ```shell
    # Install Milvus Python SDK
-   $ pip install pymilvus==0.2.5
+   $ pip install pymilvus==0.2.6
    ```
 
    > 提示：如果需要进一步了解 Milvus Python SDK，请阅读 [Milvus Python SDK 使用手册](https://milvus-io.github.io/milvus-sdk-python/pythondoc/status.html)。
