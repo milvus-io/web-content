@@ -30,7 +30,7 @@ Milvus 中的向量搜索包含但不限于这两个独立的部分：创建索�
 
 ## 使用 Docker 安装
 
-Docker 是下载启动 Milvus 最简单且推荐的方法。仅需 CPU 和支持 GPU 的 Milvus 镜像都经过了系统测试。 
+使用 Docker 启动 Milvus 是最简单且推荐的方法。仅需 CPU 和支持 GPU 的 Milvus 镜像都经过了系统测试。 
 
 ### Milvus Docker 要求
 
@@ -41,17 +41,17 @@ Docker 是下载启动 Milvus 最简单且推荐的方法。仅需 CPU 和支持
 
 ### 第一步 确认 Docker 状态
 
-确认后台已经运行 Docker daemon：
+确认 Docker daemon 正在运行：
 
 ```shell
 $ docker info
 ```
 
-如果没有看到相关服务器，请启动 **Docker** daemon.
+如果无法正常打印 Docker 相关信息，请启动 **Docker** daemon.
 
-> 提示：在 Linux 上，Docker 命令前面需加 `sudo`。若要在没有 `sudo` 情况下运行 Dockers 命令，请创建 `docker` 组并添加用户。更多详情，请参阅 [Linux 安装后步骤](https://docs.docker.com/install/linux/linux-postinstall/)。
+> 提示：在 Linux 上，Docker 命令前面需加 `sudo`。若要在没有 `sudo` 情况下运行 Docker 命令，请创建 `docker` 组并添加用户。更多详情，请参阅 [Linux 安装后步骤](https://docs.docker.com/install/linux/linux-postinstall/)。
 
-### 第二步 拉取 Milvus Docker 镜像
+### 第二步 拉取 Milvus 镜像
 
 若要拉取仅需 CPU 的镜像：
 
@@ -94,17 +94,17 @@ $ wget https://raw.githubusercontent.com/milvus-io/docs/master/assets/log_config
 
 ```shell
 # Start Milvus
-$ docker run -td --name milvus_cpu -e "TZ=Asia/Shanghai" -p 19530:19530 -p 8080:8080 -v /home/$USER/milvus/db:/var/lib/milvus/db -v /home/$USER/milvus/conf:/var/lib/milvus/conf -v /home/$USER/milvus/logs:/var/lib/milvus/logs milvusdb/milvus:cpu-latest
+$ docker run -d --name milvus_cpu -e "TZ=Asia/Shanghai" -p 19530:19530 -p 8080:8080 -v /home/$USER/milvus/db:/var/lib/milvus/db -v /home/$USER/milvus/conf:/var/lib/milvus/conf -v /home/$USER/milvus/logs:/var/lib/milvus/logs milvusdb/milvus:cpu-latest
 ```
 
 启动支持 GPU 的 Docker 容器：
 
 ```shell
 # Start Milvus
-$ docker run -td --name milvus_gpu gpus all -e "TZ=Asia/Shanghai" -p 19530:19530 -p 8080:8080 -v /home/$USER/milvus/db:/var/lib/milvus/db -v /home/$USER/milvus/conf:/var/lib/milvus/conf -v /home/$USER/milvus/logs:/var/lib/milvus/logs milvusdb/milvus:latest
+$ docker run -d --name milvus_gpu gpus all -e "TZ=Asia/Shanghai" -p 19530:19530 -p 8080:8080 -v /home/$USER/milvus/db:/var/lib/milvus/db -v /home/$USER/milvus/conf:/var/lib/milvus/conf -v /home/$USER/milvus/logs:/var/lib/milvus/logs milvusdb/milvus:latest
 ```
 
-若要设置时区，请使用 `-e "TZ=Asia/Shanghai"` ，并将 `Asia/Shanghai` 换成您本地的[时区](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)。最后，通过确认 Milvus 运行状态。
+若要设置时区，请使用 `-e "TZ=Asia/Shanghai"` ，并将 `Asia/Shanghai` 换成您本地的[时区](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)。最后，确认 Milvus 运行状态。
 
 ```shell
 # Confirm Milvus status
