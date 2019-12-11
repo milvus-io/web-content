@@ -6,8 +6,6 @@
 - [Learn Milvus Operations](milvus_operation.md)
 - [Try Bootcamp](bootcamp.md)
 - [Monitoring and Alerting](monitor.md)
-- [Performance Benchmarking](benchmarking.md)
-- [Import Data](import_data.md)
 - [Troubleshoot](troubleshoot.md)
 
 
