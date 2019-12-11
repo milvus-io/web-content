@@ -94,7 +94,7 @@ $ wget https://raw.githubusercontent.com/milvus-io/docs/master/assets/log_config
 
 ```shell
 # Start Milvus
-$ docker run -td --name milvus_cpu -e "TZ=Asia/Shanghai" -p 19530:19530 -p 8080:8080 -v /home/$USER/milvus/db:/var/lib/milvus/db -v /home/$USER/milvus/conf:/var/lib/milvus/conf -v /home/$USER/milvus/logs:/var/lib/milvus/logs milvusdb/milvus:latest
+$ docker run -td --name milvus_cpu -e "TZ=Asia/Shanghai" -p 19530:19530 -p 8080:8080 -v /home/$USER/milvus/db:/var/lib/milvus/db -v /home/$USER/milvus/conf:/var/lib/milvus/conf -v /home/$USER/milvus/logs:/var/lib/milvus/logs milvusdb/milvus:cpu-latest
 ```
 
 启动支持 GPU 的 Docker 容器：
