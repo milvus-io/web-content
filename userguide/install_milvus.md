@@ -136,5 +136,4 @@ $ docker logs <milvus container id>
 - If you're ready to run Milvus in production:
 
   - Build a [monitoring and alerting system](monitor.md) to check real-time application performance
-  - [Import vectors into Milvus](import_data.md)
   - Tune Milvus performance through [configuration](../reference/milvus_config.md)
