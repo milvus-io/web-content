@@ -46,7 +46,7 @@ Docker is the easiest and recommended way to install and run Milvus. Docker imag
 Confirm that the Docker daemon is running in the background:
 
 ```shell
-docker info
+$ docker info
 ```
 
 If you do not see the server listed, start the **Docker** daemon.
@@ -58,13 +58,13 @@ If you do not see the server listed, start the **Docker** daemon.
 To pull the CPU-only image:
 
 ```shell
-docker pull milvusdb/milvus:cpu-latest
+$ docker pull milvusdb/milvus:cpu-latest
 ```
 
 To pull the GPU-enabled image:
 
 ```shell
-docker pull milvusdb/milvus:latest
+$ docker pull milvusdb/milvus:latest
 ```
 
 ### Step 3 Download Milvus Configuration files
@@ -95,7 +95,7 @@ To start CPU-only container:
 
 ```shell
 # Start Milvus
-$ docker run -td --name milvus_cpu -e "TZ=Asia/Shanghai" -p 19530:19530 -p 8080:8080 -v /home/$USER/milvus/db:/var/lib/milvus/db -v /home/$USER/milvus/conf:/var/lib/milvus/conf -v /home/$USER/milvus/logs:/var/lib/milvus/logs milvusdb/milvus:latest
+$ docker run -td --name milvus_cpu -e "TZ=Asia/Shanghai" -p 19530:19530 -p 8080:8080 -v /home/$USER/milvus/db:/var/lib/milvus/db -v /home/$USER/milvus/conf:/var/lib/milvus/conf -v /home/$USER/milvus/logs:/var/lib/milvus/logs milvusdb/milvus:cpu-latest
 ```
 
 To start GPU-enabled container:
