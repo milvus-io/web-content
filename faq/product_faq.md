@@ -18,7 +18,7 @@ Milvus returns single-row reads in 0.6 ms or less and single-row writes in appro
 
 ### How to use Milvus?
 
-Milvus provides [Python](https://pypi.org/project/pymilvus/), [Java](https://milvus-io.github.io/milvus-sdk-java/javadoc/io/milvus/client/package-summary.html) and C++ SDKs. It also supports all Thrift communication types. 
+Milvus provides [Python](https://pypi.org/project/pymilvus/), [Java](https://milvus-io.github.io/milvus-sdk-java/javadoc/io/milvus/client/package-summary.html) and C++ SDKs. It also supports all gRPC communication types. 
 
 ### How easy is it to use Milvus?
 
