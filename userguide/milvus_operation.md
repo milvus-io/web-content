@@ -46,7 +46,7 @@ Assume we would create a table named test01. Read below parameters carefully and
 | ----------------------- | ------------------------------------------------------------ | ---------- | --------------------------------- |
 | `table_name`            | The name of the table to create, which must be unique within its database. <br/>Begin a table name with a letter or an underscore (_) . Subsequent characters can be letters, underscores, numbers (0-9). The entire length can not exceed 255 characters. | String     | 'table name'                      |
 | `dimension`             | The dimension of the vectors that are to be inserted into the created table. | Integer    | （0, 16384]                       |
-| `index_file_size` | Threshold value that triggers index building for raw data files. Index creation is controlled by the size of raw data files specified in this parameter, with a default of 1024 MB. Data files with smaller sizes will not have indexes built. | Integer    | [0 MB, 4096 MB]                   |
+| `index_file_size` | Threshold value that triggers index building for raw data files. Index creation is controlled by the size of raw data files specified in this parameter, with a default of 1024 MB. Data files with smaller sizes will not have indexes built. | Integer    | (0 MB, 4096 MB]                   |
 | `metric_type`           | The method vector distances are compared in Milvus. Available options are: Euclidean distance (L2) and inner product (IP). Default value is `MetricType.L2`. | MetricType | `MetricType.L2` / `MetricType.IP` |
 
 To create a table, use `milvus.create_table` followed by parameters that include the table name, vector dimension, and the index type:
@@ -183,7 +183,7 @@ Below is the list of parameters for creating index for a table:
 | Parameter    | Description                                                  | Type      | Reference value                                              |
 | ------------ | ------------------------------------------------------------ | --------- | ------------------------------------------------------------ |
 | `index_type` | The type of indexing method to query the table. Please refer to [Index Types](../reference/index.md) for detailed introduction of supported indexes. | IndexType | `FLAT` / `IVFLAT` / `IVF_SQ8` / `IVF_SQ8H` |
-| `nlist`      | Number of vector buckets in a file. Default value is 16384.  | Integer   | [1, 16384]   |
+| `nlist`      | Number of vector buckets in a file. Default value is 16384.  | Integer   | > 0   |
 
 To create an index for the table, use `milvus.create_index` followed by parameters that include the table name, index type, and nlist.
 
@@ -228,7 +228,7 @@ Below is the list of parameters for searching vectors in a table:
 | `table_name`              | The name of the table to create, which must be unique within its database. <br/>Table name can only contain numbers, letters, and underscores. The first character of a table name must be an underscore or letter. The length of a table name must be less than 255 characters. | String                                | 'table name'                        |
 | `query_records`           | The list of query vectors to be searched in the table. Each vector value must be float data type, with the same dimension as that defined for the table. | 2-dimensional list                    | [[0.1, 0.2, ...], ...]              |
 | `top_k`                   | The top k most similar results of each query vector.         | Integer                               | (0, 2048]                           |
-| `nprobe`                  | Number of queried vector buckets. <br/>`nprobe` affects search precision. The greater the value, the more precise the result, yet the slower the search speed. | Integer                               | [1, 16384]                          |
+| `nprobe`                  | Number of queried vector buckets. <br/>`nprobe` affects search precision. The greater the value, the more precise the result, yet the slower the search speed. | Integer                               | [1, `nlist`]                          |
 | `query_ranges` (optional) | An optional, comma-separated list that defines the condition by which the search is filtered. <br/>For example, you can search within a specific date range. The default value `None` (no range, meaning to search the entire database) is used if you leave this parameter out. | List (Suggest to use tuple data type) | [('2019-01-01', '2019-01-02'), ...] |
 
 > Note: Currently, only date range is supported in `query_ranges`. The date format is 'yyyy-mm-dd'. The date range [2019.1.1, 2019.1.5] contains 2019.1.1 and 2019.1.5.
