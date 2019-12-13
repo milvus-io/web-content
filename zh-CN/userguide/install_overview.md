@@ -1,32 +1,13 @@
 ---
-id: install_milvus
-title: Install Milvus
-sidebar_label: Install Milvus
+id: install_overview
+title: Installation Overview
+sidebar_label: Installation Overview
 ---
-# 安装 Milvus
+# 安装概述
 
 Milvus 在 CPU 或 GPU 环境下都可以运行。若要在 CPU 环境下使用 Milvus，请安装仅需 CPU 的 Milvus。否则，建议安装支持 GPU 的 Milvus 以获取针对海量数据的更优的查询性能。
 
 Milvus 中的向量搜索包含但不限于这两个独立的部分：创建索引过程和搜索计算过程。在支持 GPU 的 Milvus中，这两个过程可以同时进行，提高查询效率，特别适合动态增加的数据。而在仅需 CPU 的 Milvus 中，搜索计算必须在创建索引结束后才能进行，所以更适合静态数据。
-
-## 安装前提
-
-### 系统要求
-
-| 操作系统   | 版本         |
-| ---------- | ------------ |
-| CentOS     | 7.5 或以上   |
-| Ubuntu LTS | 18.04 或以上 |
-
-### 硬件要求
-
-| 组件 | 建议配置                          |
-| ---- | --------------------------------- |
-| CPU  | Intel CPU Haswell 或以上          |
-| 内存 | 8 GB 或以上 （取决于具体向量数据规模） |
-| 硬盘 | SATA 3.0 SSD 或以上               |
-
-> 注意：对于支持 GPU 的 Milvus，您还需要确保 GPU 版本是 NVIDIA Pascal 或以上。
 
 ## 使用 Docker 安装
 
