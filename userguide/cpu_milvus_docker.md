@@ -44,7 +44,7 @@ If you do not see the server listed, start the **Docker** daemon.
 
 #### Step 2 Pull Milvus images
 
-To pull the CPU-only image:
+Pull the CPU-only image:
 
 ```shell
 $ docker pull milvusdb/milvus:cpu-latest
