@@ -96,3 +96,7 @@ $ docker logs <milvus container id>
 
   - Build a [monitoring and alerting system](monitor.md) to check real-time application performance
   - Tune Milvus performance through [configuration](../reference/milvus_config.md)
+  
+- If you want to use GPU-accelerated Milvus for search in large datasets:
+  
+  - [Install GPU-enabled Milvus](gpu_milvus_docker.md)
