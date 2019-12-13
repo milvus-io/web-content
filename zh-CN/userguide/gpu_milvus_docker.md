@@ -4,9 +4,7 @@ title: Install GPU-enabled Milvus on Docker
 sidebar_label: Install GPU-enabled Milvus on Docker
 ---
 
-# Install GPU-enabled Milvus on Docker
-
-# Docker 安装 GPU Milvus
+# 安装支持 GPU 的 Milvus
 
 ## 安装前提
 
@@ -98,3 +96,7 @@ $ docker logs <milvus container id>
 
   - 创建 [监控与报警系统](monitor.md) 实时查看系统表现
   - [设置 Milvus 参数](../reference/milvus_config.md)
+  
+- 如果您想在仅有 CPU 的环境下使用 Milvus：
+
+  - [安装仅需 CPU 的 Milvus](cpu_milvus_docker.md)
