@@ -4,7 +4,7 @@ title: Install CPU-only Milvus on Docker
 sidebar_label: Install CPU-only Milvus on Docker
 ---
 
-# Install CPU-only Milvus on Docker
+# 安装仅需 CPU 的 Milvus
 
 ## 安装前提
 
