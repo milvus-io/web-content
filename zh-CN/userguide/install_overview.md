@@ -32,8 +32,8 @@ Milvus 中的向量搜索包含但不限于这两个独立的部分：创建索�
 
 使用 Docker 启动 Milvus 是最简单且推荐的方法。
 
-- [Install CPU-only Milvus on Docker](cpu_milvus_docker.md)
-- [Install GPU-enabled Milvus on Docker](gpu_milvus_docker.md)
+- [安装仅需 CPU 的 Milvus](cpu_milvus_docker.md)
+- [安装支持 GPU 的 Milvus](gpu_milvus_docker.md)
 
 ## 从源代码编译
 
