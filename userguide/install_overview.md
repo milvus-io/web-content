@@ -14,8 +14,8 @@ In Milvus, the vector search includes 2 separate processes: index building and s
 
 Docker is the easiest and recommended way to install and run Milvus. 
 
-- Install CPU-only Milvus on Docker
-- Install GPU-enabled Milvus on Docker
+- [Install CPU-only Milvus on Docker](cpu_milvus_docker.md)
+- [Install GPU-enabled Milvus on Docker](gpu_milvus_docker.md)
 
 ## Build from Source
 
