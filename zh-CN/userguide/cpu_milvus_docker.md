@@ -92,3 +92,7 @@ $ docker logs <milvus container id>
 
   - 创建 [监控与报警系统](monitor.md) 实时查看系统表现
   - [设置 Milvus 参数](../reference/milvus_config.md)
+  
+- 如果您想使用针对大数据集搜索的 GPU 加速版 Milvus：
+
+  - [安装支持 GPU 的 Milvus](gpu_milvus_docker.md)
