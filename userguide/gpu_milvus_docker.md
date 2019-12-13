@@ -59,6 +59,15 @@ $ docker run -d --name milvus_gpu --gpus all -e "TZ=Asia/Shanghai" -p 19530:1953
 
 > Note: To configure your timezone, use `-e "TZ=Asia/Shanghai"` , and change `Asia/Shanghai` to your local [timezone](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones). 
 
+The `docker run` options used in the above command are defined as follows:
+
+- `-d`: run container in background and print container ID
+- `--name`: assign a name to the container
+- `--gpus`: GPU devices to add to the container (‘all’ to pass all GPUs)
+- `-e`: set environment variables
+- `-p`: publish a container’s port(s) to the host
+- `-v`: bind mount a volume
+
 Finally confirm Milvus running status by the following command:
 
 ```shell

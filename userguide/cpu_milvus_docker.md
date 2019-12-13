@@ -28,7 +28,9 @@ sidebar_label: Install CPU-only Milvus on Docker
 
 [Install Docker](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/) 19.03 or higher on your local host machine.
 
-## Step 1 Confirm Docker status
+## Install Milvus on Ubuntu/CentOS
+
+#### Step 1 Confirm Docker status
 
 Confirm that the Docker daemon is running in the background:
 
@@ -40,7 +42,7 @@ If you do not see the server listed, start the **Docker** daemon.
 
 > Note: On Linux, Docker needs sudo privileges. To run Docker command without `sudo`, create the `docker` group and add your user. For details, see the [post-installation steps for Linux](https://docs.docker.com/install/linux/linux-postinstall/).
 
-## Step 2 Pull Milvus images
+#### Step 2 Pull Milvus images
 
 To pull the CPU-only image:
 
@@ -48,7 +50,7 @@ To pull the CPU-only image:
 $ docker pull milvusdb/milvus:cpu-latest
 ```
 
-## Step 3 Start Docker container
+#### Step 3 Start Docker container
 
 ```shell
 # Start Milvus
@@ -56,6 +58,15 @@ $ docker run -d --name milvus_cpu -e "TZ=Asia/Shanghai" -p 19530:19530 -p 8080:8
 ```
 
 > Note: To configure your timezone, use `-e "TZ=Asia/Shanghai"` , and change `Asia/Shanghai` to your local [timezone](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones). 
+
+The `docker run` options used in the above command are defined as follows:
+
+- `-d`: Run container in background and print container ID
+- `--name`: Assign a name to the container
+- `--gpus`: GPU devices to add to the container (‘all’ to pass all GPUs)
+- `-e`: Set environment variables
+- `-p`: Publish a container’s port(s) to the host
+- `-v`: Bind mount a volume
 
 Finally confirm Milvus running status by the following command:
 
