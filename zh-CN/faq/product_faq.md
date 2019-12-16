@@ -18,7 +18,7 @@ Milvus 单行读取速度约 0.6 毫秒，单行写入速度在 0.03 毫秒左�
 
 ### 如何使用 Milvus？
 
-Milvus 提供 [Python](https://pypi.org/project/pymilvus/), [Java](https://milvus-io.github.io/milvus-sdk-java/javadoc/io/milvus/client/package-summary.html) and C++ SDK。同时还支持所有基于 Thrift 的通信方式。
+Milvus 提供 [Python](https://pypi.org/project/pymilvus/), [Java](https://milvus-io.github.io/milvus-sdk-java/javadoc/io/milvus/client/package-summary.html) and C++ SDK。同时还支持所有基于 gRPC 的通信方式。
 
 ### Milvus 的易用性如何？
 

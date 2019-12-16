@@ -1,0 +1,98 @@
+---
+id: cpu_milvus
+title: Install CPU-only Milvus on Docker
+sidebar_label: Install CPU-only Milvus on Docker
+---
+
+# 安装仅需 CPU 的 Milvus
+
+## 安装前提
+
+### 系统要求
+
+| 操作系统   | 版本         |
+| ---------- | ------------ |
+| CentOS     | 7.5 或以上   |
+| Ubuntu LTS | 18.04 或以上 |
+
+### 硬件要求
+
+| 组件 | 建议配置                               |
+| ---- | -------------------------------------- |
+| CPU  | Intel CPU Haswell 或以上               |
+| 内存 | 8 GB 或以上 （取决于具体向量数据规模） |
+| 硬盘 | SATA 3.0 SSD 或以上                    |
+
+#### Milvus Docker 要求
+
+在您的宿主机上[安装 Docker](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/) 19.03或更高版本。
+
+## 第一步 确认 Docker 状态
+
+确认 Docker daemon 正在运行：
+
+```shell
+$ docker info
+```
+
+如果无法正常打印 Docker 相关信息，请启动 **Docker** daemon.
+
+> 提示：在 Linux 上，Docker 命令前面需加 `sudo`。若要在没有 `sudo` 情况下运行 Docker 命令，请创建 `docker` 组并添加用户。更多详情，请参阅 [Linux 安装后步骤](https://docs.docker.com/install/linux/linux-postinstall/)。
+
+## 第二步 拉取 Milvus 镜像
+
+拉取仅需 CPU 的镜像：
+
+```shell
+$ docker pull milvusdb/milvus:cpu-latest
+```
+
+## 第三步 启动 Milvus Docker 容器
+
+```shell
+# Start Milvus
+$ docker run -d --name milvus_cpu -e "TZ=Asia/Shanghai" -p 19530:19530 -p 8080:8080 -v /home/$USER/milvus/db:/var/lib/milvus/db -v /home/$USER/milvus/logs:/var/lib/milvus/logs milvusdb/milvus:cpu-latest
+```
+
+> 注意：若要设置时区，请使用 `-e "TZ=Asia/Shanghai"` ，并将 `Asia/Shanghai` 换成您本地的[时区](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)。最后，确认 Milvus 运行状态。
+
+上述命令中用到的 `docker run` 参数定义如下：
+
+- `-d`: 运行 container 到后台并打印 container id。
+- `--name`: 为 container 分配一个名字。
+- `-e`: 设置环境变量。
+- `-p`: 暴露 container 端口到 host。
+- `-v`: 绑定挂在卷。
+
+最后，确认 Milvus 运行状态：
+
+```shell
+# Confirm Milvus status
+$ docker ps
+```
+
+如果 Milvus 服务没有正常启动，您可以执行以下命令查询错误日志。
+
+```shell
+# Get id of the container running Milvus
+$ docker ps -a
+# Check docker logs
+$ docker logs <milvus container id>
+```
+
+## 接下来您可以
+
+- 如果您刚开始了解 Milvus：
+
+  - [运行示例程序](example_code.md)
+  - [了解更多 Milvus 操作](milvus_operation.md)
+  - [体验 Milvus 在线训练营](https://github.com/milvus-io/bootcamp)
+
+- 如果您已准备好在生产环境中部署 Milvus：
+
+  - 创建 [监控与报警系统](monitor.md) 实时查看系统表现
+  - [设置 Milvus 参数](../reference/milvus_config.md)
+  
+- 如果您想使用针对大数据集搜索的 GPU 加速版 Milvus：
+
+  - [安装支持 GPU 的 Milvus](gpu_milvus_docker.md)
