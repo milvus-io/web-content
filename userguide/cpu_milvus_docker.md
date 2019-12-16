@@ -40,7 +40,7 @@ If you do not see the server listed, start the **Docker** daemon.
 
 > Note: On Linux, Docker needs sudo privileges. To run Docker command without `sudo`, create the `docker` group and add your user. For details, see the [post-installation steps for Linux](https://docs.docker.com/install/linux/linux-postinstall/).
 
-## Step 2 Pull Milvus images
+## Step 2 Pull Docker image
 
 Pull the CPU-only image:
 
@@ -48,11 +48,21 @@ Pull the CPU-only image:
 $ docker pull milvusdb/milvus:cpu-latest
 ```
 
-## Step 3 Start Docker container
+## Step 3 Download configuration files
+
+```shell
+# Create Milvus file
+$ mkdir -p /home/$USER/milvus/conf
+$ cd home/$USER/milvus/conf
+$ wget https://raw.githubusercontent.com/milvus-io/docs/master/assets/server_config.yaml
+$ wget https://raw.githubusercontent.com/milvus-io/docs/master/assets/config/log_config.conf
+```
+
+## Step 4 Start Docker container
 
 ```shell
 # Start Milvus
-$ docker run -d --name milvus_cpu -e "TZ=Asia/Shanghai" -p 19530:19530 -p 8080:8080 -v /home/$USER/milvus/db:/var/lib/milvus/db -v /home/$USER/milvus/logs:/var/lib/milvus/logs milvusdb/milvus:cpu-latest
+$ docker run -d --name milvus_cpu -e "TZ=Asia/Shanghai" -p 19530:19530 -p 8080:8080 -v /home/$USER/milvus/db:/var/lib/milvus/db -v /home/$USER/milvus/conf:/var/lib/milvus/conf -v /home/$USER/milvus/logs:/var/lib/milvus/logs milvusdb/milvus:cpu-latest
 ```
 
 > Note: To configure your timezone, use `-e "TZ=Asia/Shanghai"` , and change `Asia/Shanghai` to your local [timezone](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones). 
