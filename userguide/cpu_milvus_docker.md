@@ -1,10 +1,10 @@
 ---
 id: cpu_milvus
-title: Install CPU-only Milvus on Docker
-sidebar_label: Install CPU-only Milvus on Docker
+title: Install CPU-only Milvus
+sidebar_label: Install CPU-only Milvus
 ---
 
-# Install CPU-only Milvus on Docker
+# Install CPU-only Milvus
 
 ## Prerequisites
 
