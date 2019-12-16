@@ -49,8 +49,17 @@ $ docker info
 ```shell
 $ docker pull milvusdb/milvus:latest
 ```
+## 第三步 下载配置文件
 
-## 第三步 启动 Milvus Docker 容器
+```
+# Create Milvus file
+$ mkdir -p /home/$USER/milvus/conf
+$ cd home/$USER/milvus/conf
+$ wget https://raw.githubusercontent.com/milvus-io/docs/master/assets/config/server_config.yaml
+$ wget https://raw.githubusercontent.com/milvus-io/docs/master/assets/config/log_config.conf
+```
+
+## 第四步 启动 Milvus Docker 容器
 
 ```shell
 # Start Milvus
