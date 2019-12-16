@@ -1,10 +1,10 @@
 ---
 id: install_milvus
-title: Installation overview
-sidebar_label: Installation overview
+title: Installation Overview
+sidebar_label: Installation Overview
 ---
 
-# Installation overview
+# Installation Overview
 
 Milvus runs on machines with or without GPU. To use Milvus on machines without a GPU, install CPU-only Milvus. Otherwise, it is recommended to use GPU-enabled Milvus to achieve better search performance for larger queries. 
 
