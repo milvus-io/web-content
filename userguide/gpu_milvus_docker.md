@@ -1,10 +1,10 @@
 ---
 id: gpu_milvus
-title: Install GPU-enabled Milvus on Docker
-sidebar_label: Install GPU-enabled Milvus on Docker
+title: Install GPU-enabled Milvus
+sidebar_label: Install GPU-enabled Milvus
 ---
 
-# Install GPU-enabled Milvus on Docker
+# Install GPU-enabled Milvus
 
 ## Prerequisites
 
