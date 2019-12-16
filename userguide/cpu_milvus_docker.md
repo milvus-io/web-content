@@ -28,9 +28,7 @@ sidebar_label: Install CPU-only Milvus
 
 [Install Docker](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/) 19.03 or higher on your local host machine.
 
-## Install Milvus on Ubuntu/CentOS
-
-#### Step 1 Confirm Docker status
+## Step 1 Confirm Docker status
 
 Confirm that the Docker daemon is running in the background:
 
@@ -42,7 +40,7 @@ If you do not see the server listed, start the **Docker** daemon.
 
 > Note: On Linux, Docker needs sudo privileges. To run Docker command without `sudo`, create the `docker` group and add your user. For details, see the [post-installation steps for Linux](https://docs.docker.com/install/linux/linux-postinstall/).
 
-#### Step 2 Pull Milvus images
+## Step 2 Pull Milvus images
 
 Pull the CPU-only image:
 
@@ -50,7 +48,7 @@ Pull the CPU-only image:
 $ docker pull milvusdb/milvus:cpu-latest
 ```
 
-#### Step 3 Start Docker container
+## Step 3 Start Docker container
 
 ```shell
 # Start Milvus
