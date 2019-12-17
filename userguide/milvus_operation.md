@@ -111,7 +111,7 @@ Status(code=0, message='Success')
 20
 ```
 
-To verity if a table exists in Milvus, use this command:
+To verify if a table exists in Milvus, use this command:
 
 ```python
 >>> milvus.has_table(table_name='test01')
