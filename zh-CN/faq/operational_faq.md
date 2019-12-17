@@ -42,9 +42,9 @@ sidebar_label: Operational FAQ
 
 ## 为什么有时候小的数据集查询时间反而更长？
 
-如果数据文件的大小小于配置文件里 `index_build_threshold` 参数的值，Milvus 则不会为此数据文件构建索引。因此，小的数据集有可能查询时间会更长。关于更多信息，请参考 [Milvus 配置](../reference/milvus_config.md)。
+如果数据文件的大小小于配置文件里 `index_file_size` 参数的值，Milvus 则不会为此数据文件构建索引。因此，小的数据集有可能查询时间会更长。关于更多信息，请参考 [Milvus 配置](../reference/milvus_config.md)。
 
-> 注意：在 0.5.0 版本之前，`index_build_threshold` 被命名为 `index_file_size`。
+> 注意：在 0.4.0 版本之前，`index_file_size` 被命名为 `index_building_threshold`。
 
 ## 为什么我的 Milvus 的性能一直不理想？
 
@@ -181,6 +181,16 @@ def test_add_vector_search_multiprocessing(self, connect, table):
 如果 `nlist` 和 K 比较大，而 `nprobe` 又足够小时，有可能出现 `nprobe` 文件中的所有向量总数小于 K。当你搜索 top K 向量时，就会出现搜索结果小于 K 条向量的情况。
 
 想要避免这种情况，您可以尝试将 `nprobe` 设置为更大值，或是把 `nlist` 和 K 设置小一点。
+
+## 如果在安装 Milvus 时，从 dockerhub 拉取镜像总是失败怎么办？
+
+某些地区的用户可能无法快速访问 dockerhub。如果拉取镜像失败，您可以从本地的镜像源拉取镜像。比如中国镜像源的网址为 `registry.docker-cn.com`。您可以在 `/etc.docker/daemon.json` 文件的 `registry-mirrors` 组添加 `"https://registry.docker-cn.com"`命令，这样就可以默认从中国镜像源拉取镜像了。 
+
+```
+{
+  "registry-mirrors": ["https://registry.docker-cn.com"]
+}
+```
 
 ### 相关阅读
 

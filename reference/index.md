@@ -28,6 +28,6 @@ To choose an appropriate index for your application scenarios, please read [How 
 
 ### `IVFSQ8H`
 
-Vector inserting and querying can not be executed concurrently.
+When using `IVFSQ8H` index, the concurrent execution of index building and querying on the GPU may lead to server down. 
 
 

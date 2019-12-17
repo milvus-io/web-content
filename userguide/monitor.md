@@ -12,7 +12,7 @@ Although Milvus is highly available, it is critical to actively monitor the over
 
 ### Monitoring solution
 
-Milvus uses Prometheus, an open source time series database, to store and monitor its metrics, and it uses Grafana for flexible data visualizations.
+Milvus uses Prometheus to store and monitor its metrics, and it uses Grafana for flexible data visualizations.
 
 - Prometheus
 
@@ -79,7 +79,7 @@ Milvus generates detailed time series metrics. This page shows you how to pull t
 
 ### Configure Prometheus
 
-1. Go to the Prometheus root directory, and download starter [Prometheus configuration file](../assets/monitoring/prometheus.yml) for Milvus.
+1. Go to the Prometheus root directory, and download starter [Prometheus configuration file](https://github.com/milvus-io/docs/blob/master/assets/monitoring/prometheus.yml) for Milvus.
 
    ```shell
    $ wget https://raw.githubusercontent.com/milvus-io/docs/master/assets/monitoring/prometheus.yml \ -O prometheus.yml
@@ -97,7 +97,7 @@ Milvus generates detailed time series metrics. This page shows you how to pull t
    | ------------------- | ------------------------------------------------------------ |
    | Distributed cluster | Expand the `targets` field to include `localhost: <http-port>` for each additional node in the cluster. |
 
-3. Download starter [alerting rules](../assets/monitoring/alert.rules.yml) for Milvus to the Prometheus root directory.
+3. Download starter [alerting rules](https://github.com/milvus-io/docs/blob/master/assets/monitoring/alert.rules.yml) for Milvus to the Prometheus root directory.
 
    ```shell
    wget -P rules https://raw.githubusercontent.com/milvus-io/docs/master/assets/monitoring/alert.rules.yml
@@ -134,7 +134,7 @@ Milvus generates detailed time series metrics. This page shows you how to pull t
    | URL     | `http://<hostname of machine running prometheus>:9090` |
    | Access  | Browser                                                |
 
-5. Download the starter [Grafana dashboard](../assets/monitoring/dashboard.json) for Milvus:
+5. Download the starter [Grafana dashboard](https://github.com/milvus-io/docs/blob/master/assets/monitoring/dashboard.json) for Milvus:
 
    ```shell
    $ wget https://raw.githubusercontent.com/milvus-io/docs/master/assets/monitoring/dashboard.json

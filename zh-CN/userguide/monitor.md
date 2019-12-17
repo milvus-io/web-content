@@ -12,7 +12,7 @@ sidebar_label: Monitoring and Alerting
 
 ### 监控系统
 
-Milvus 使用开源时序数据库 Prometheus 作为监控和性能指标存储方案，使用 Grafana 作为可视化组建进行数据展示。
+Milvus 使用 Prometheus 作为监控和性能指标存储方案，使用 Grafana 作为可视化组建进行数据展示。
 
 - Prometheus
 
@@ -80,7 +80,7 @@ Milvus 会生成详细的关于系统运行状态的时序 metrics。该页面�
 
 ### 设置 Prometheus
 
-1. 下载 Milvus [Prometheus 配置文件](../assets/monitoring/prometheus.yml) 。
+1. 下载 Milvus [Prometheus 配置文件](https://github.com/milvus-io/docs/blob/master/assets/monitoring/prometheus.yml) 。
 
    ```shell
    $ wget https://raw.githubusercontent.com/milvus-io/docs/master/assets/monitoring/prometheus.yml \ -O prometheus.yml
@@ -98,7 +98,7 @@ Milvus 会生成详细的关于系统运行状态的时序 metrics。该页面�
    | ---------- | ------------------------------------------------------------ |
    | 分布式集群 | 在 `job_name = 'milvus_server'` 下的 `targets` 字段，为集群中的每个节点分布添加相应的 `localhost: <http-port>` 。 |
 
-3. 下载 Milvus [报警规则文件](assets/monitoring/alert.rules.yml) 到 Prometheus 根目录。
+3. 下载 Milvus [报警规则文件](https://github.com/milvus-io/docs/blob/master/assets/monitoring/alert.rules.yml) 到 Prometheus 根目录。
 
    ```shell
    wget -P rules https://raw.githubusercontent.com/milvus-io/docs/master/assets/monitoring/alert.rules.yml
@@ -135,7 +135,7 @@ Milvus 会生成详细的关于系统运行状态的时序 metrics。该页面�
    | URL     | `http://<hostname of machine running prometheus>:9090` |
    | Access  | Browser                                                |
 
-5. 下载 [Grafana 配置文件](assets/monitoring/dashboard.json) :
+5. 下载 [Grafana 配置文件](https://github.com/milvus-io/docs/blob/master/assets/monitoring/dashboard.json) :
 
    ```shell
    $ wget https://raw.githubusercontent.com/milvus-io/docs/master/assets/monitoring/dashboard.json
