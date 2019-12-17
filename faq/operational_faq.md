@@ -78,6 +78,10 @@ Use the following command to check the running status of Milvus:
 $ docker logs <container ID>
 ```
 
+## Why there are a lot of -1s in my search result?
+
+When the number of vectors in the dataset is less than `topk`, Milvus automatically adds -1s to the search result to ensure that the search result contains `topk` elements.
+
 
 ## Why does my multiprocessing program fail? 
 
