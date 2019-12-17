@@ -95,7 +95,7 @@
       "order": 2
     },
     {
-      "id": "cpu_milvus.md",
+      "id": "cpu_milvus_docker.md",
       "title": "Install CPU-only Milvus",
       "lang": "en",
       "label1": "Guides",
@@ -105,7 +105,7 @@
       "isMenu": 
     },
     {
-      "id": "gpu_milvus.md",
+      "id": "gpu_milvus_docker.md",
       "title": "Install GPU-enabled Milvus",
       "lang": "en",
       "label1": "Guides",
