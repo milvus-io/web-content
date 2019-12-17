@@ -19,7 +19,7 @@ sidebar_label: Table Partitioning
 假设您要创建标签 ”2019-12-12“。要基于标签创建分区表，请使用`create_partition`，后跟表名，分区表名和标签。
 
 ```python
-create_partition(table_name ="my_table", partition_name ="partition_1", partition_tag ="2019-11-11")
+create_partition(table_name="my_table", partition_name="partition_1", partition_tag="2019-11-11")
 ```
 
 `partition_name`是分区表的名称，分区表的名称必须遵循 Milvus 中的表名的命名约定，而 `partition_tag` 则完全是用户自定义的。当查询分区时，它们可以互换使用。
@@ -27,19 +27,19 @@ create_partition(table_name ="my_table", partition_name ="partition_1", partitio
 创建分区表后，可以通过以下命令将向量插入到指定分区：
 
 ```python
-insert(table_name ="my_table", records = vec_list, ids = vec_ids, partition_tag ="2019-12-12")
+insert(table_name="my_table", records=vectors, ids=vector_ids, partition_tag ="2019-12-12")
 ```
 
 若要删除某个分区，请使用 `drop_partition`，后跟表名和标签。
 
 ```python
-drop_partition(table_name ="my_table", partition_tag ="2019-12-12")
+drop_partition(table_name="my_table", partition_tag="2019-12-12")
 ```
 
 若要查询指定分区，请添加 `partition_tags` 参数。
 
 ```python
-search(table_name ="my_table", query_records = vec_nq, top_k = k, nprobe = p, partition_tags =["2019-12-12"])
+search(table_name="my_table", query_records=q_records, top_k=2, nprobe=16, partition_tags=["2019-12-12"])
 ```
 
 ## 相关链接
