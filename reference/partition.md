@@ -36,10 +36,10 @@ To delete a partition, use `delete_partition` followed by the table name and the
 delete_partion(table_name="my_table", partition_tag="2019-12-12");
 ```
 
-To query against a specified partition, add the `partition_tag` parameter.
+To query against a specified partition, add the `partition_tags` parameter.
 
 ```shell
-search_vectors(table_name="my_table", query_records=vec_nq, top_k=k, nprobe=p, partition_tags="2019-12-12");
+search_vectors(table_name="my_table", query_records=vec_nq, top_k=k, nprobe=p, partition_tags=["2019-12-12"]);
 ```
 
 ## Related links
