@@ -27,7 +27,7 @@ create_partition(table_name="my_table", partition_name="partition_1", partition_
 When the partitioned tables are created, you can insert vectors to a specified partition by the following command: 
 
 ```python
-add_vector(table_name="my_table", records=vec_list, ids=vec_ids, partition_tag="2019-12-12")
+add_vector(table_name="my_table", records=vectors, ids=vector_ids, partition_tag="2019-12-12")
 ```
 
 To delete a partition, use `delete_partition` followed by the table name and the tag.
@@ -39,7 +39,7 @@ delete_partion(table_name="my_table", partition_tag="2019-12-12")
 To query against a specified partition, add the `partition_tags` parameter.
 
 ```python
-search_vectors(table_name="my_table", query_records=vec_nq, top_k=k, nprobe=p, partition_tags=["2019-12-12"])
+search_vectors(table_name="my_table", query_records=q_records, top_k=2, nprobe=16, partition_tags=["2019-12-12"])
 ```
 
 ## Related links
