@@ -18,28 +18,28 @@ The table is partitioned by `partition_tag` that defines key values of a column 
 
 Assume you want to create a tag named “2019-12-12”. To create tag partitioned tables, use `create_partition` followed by the table name, partition name and the tag.
 
-```shell
-create_partition(table_name="my_table", partition_name="partition_1", partition_tag="2019-12-12");
+```python
+create_partition(table_name="my_table", partition_name="partition_1", partition_tag="2019-12-12")
 ```
 
 `partition_name` is the name of the partitioned table which must follow the table naming conventions in Milvus while `partition_tag` is user-defined type. When querying against a partition, they can be used interchangeablely.
 
 When the partitioned tables are created, you can insert vectors to a specified partition by the following command: 
 
-```shell
-add_vector(table_name="my_table", records=vec_list, ids=vec_ids, partition_tag="2019-12-12");
+```python
+add_vector(table_name="my_table", records=vec_list, ids=vec_ids, partition_tag="2019-12-12")
 ```
 
 To delete a partition, use `delete_partition` followed by the table name and the tag.
 
-```shell
-delete_partion(table_name="my_table", partition_tag="2019-12-12");
+```python
+delete_partion(table_name="my_table", partition_tag="2019-12-12")
 ```
 
 To query against a specified partition, add the `partition_tags` parameter.
 
-```shell
-search_vectors(table_name="my_table", query_records=vec_nq, top_k=k, nprobe=p, partition_tags=["2019-12-12"]);
+```python
+search_vectors(table_name="my_table", query_records=vec_nq, top_k=k, nprobe=p, partition_tags=["2019-12-12"])
 ```
 
 ## Related links
