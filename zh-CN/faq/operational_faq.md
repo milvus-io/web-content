@@ -77,9 +77,9 @@ $ docker restart <container id>
 $ docker logs <container ID>
 ```
 
-## 为什么我的检索结果中出现大量 -1？
+## 为什么我的检索结果中出现大量 `-1`？
 
-当数据集中的向量数目少于 `topk` 时，Milvus 会自动向结果中添加 “-1” 以保证检索结果的数量等于 `topk`。
+当数据集中的向量数目少于 `topk` 时，Milvus 会自动向结果中添加 `-1` 以保证检索结果的数量等于 `topk`。
 
 ## 为什么我的 Milvus 在启动时返回 “Illegal instruction”？
 
