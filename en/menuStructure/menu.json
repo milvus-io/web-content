@@ -1,7 +1,7 @@
 {
   "menuList": [
   {
-      "id": "About Milvus",
+      "id": "about_milvus",
       "title": "About Milvus",
       "lang": "en",
       "label1": "",
@@ -14,49 +14,49 @@
       "id": "overview.md",
       "title": "Milvus Overview",
       "lang": "en",
-      "label1": "About Milvus",
+      "label1": "about_milvus",
       "label2": null,
       "label3": null,
-      "order": 0,
+      "order": 0
     },
   {
       "id": "vector.md",
       "title": "Feature Vector",
       "lang": "en",
-      "label1": "About Milvus",
+      "label1": "about_milvus",
       "label2": null,
       "label3": null,
-      "order": 0,
+      "order": 0
     },
   {
       "id": "traditional_db.md",
       "title": "Traditional Database",
       "lang": "en",
-      "label1": "About Milvus",
+      "label1": "about_milvus",
       "label2": null,
       "label3": null,
-      "order": 0,
+      "order": 0
     },
   {
       "id": "index_method.md",
       "title": "Vector Search Methods",
       "lang": "en",
-      "label1": "About Milvus",
+      "label1": "about_milvus",
       "label2": null,
       "label3": null,
-      "order": 0,
+      "order": 0
     },
   {
       "id": "vector_db.md",
       "title": "Other Feature Vector Search Tools",
       "lang": "en",
-      "label1": "About Milvus",
+      "label1": "about_milvus",
       "label2": null,
       "label3": null,
-      "order": 0,
+      "order": 0
     },
   {
-      "id": "",
+      "id": "guides",
       "title": "Guides",
       "lang": "en",
       "label1": "",
@@ -66,21 +66,21 @@
       "isMenu": true
     },
   {
-      "id": "",
+      "id": "get_started",
       "title": "Get Started",
       "lang": "en",
-      "label1": "",
+      "label1": "guides",
       "label2": null,
       "label3": null,
       "order": 0,
       "isMenu": true
     },
     {
-      "id": "",
+      "id": "install_milvus",
       "title": "Install Milvus",
       "lang": "en",
-      "label1": "Guides",
-      "label2": "Get Started",
+      "label1": "guides",
+      "label2": "get_started",
       "label3": null,
       "order": 1,
       "isMenu": true
@@ -89,45 +89,43 @@
       "id": "install_milvus.md",
       "title": "Installation Overview",
       "lang": "en",
-      "label1": "Guides",
-      "label2": "Get Started",
-      "label3": "Install Milvus",
+      "label1": "guides",
+      "label2": "get_started",
+      "label3": "install_milvus",
       "order": 2
     },
     {
       "id": "cpu_milvus_docker.md",
       "title": "Install CPU-only Milvus",
       "lang": "en",
-      "label1": "Guides",
-      "label2": "Get Started",
-      "label3": "Install Milvus",
-      "order": 0,
-      "isMenu": 
+      "label1": "guides",
+      "label2": "get_started",
+      "label3": "install_milvus",
+      "order": 0
     },
     {
       "id": "gpu_milvus_docker.md",
       "title": "Install GPU-enabled Milvus",
       "lang": "en",
-      "label1": "Guides",
-      "label2": "Get Started",
-      "label3": "Install Milvus",
+      "label1": "guides",
+      "label2": "get_started",
+      "label3": "install_milvus",
       "order": 0
     },
     {
       "id": "example_code.md",
       "title": "Try an Example Program",
       "lang": "en",
-      "label1": "Guides",
-      "label2": "Get Started",
+      "label1": "guides",
+      "label2": "get_started",
       "label3": "",
-      "order": 1,
-      "isMenu": 
+      "order": 1
     },
     {
       "id": "milvus_operation.md",
       "title": "Learn Milvus Operations",
       "lang": "en",
-      "label1": "Guides",
+      "label1": "guides",
       "label2": "",
       "label3": "",
       "order": 1
@@ -136,7 +134,7 @@
       "id": "monitor.md",
       "title": "Monitoring and Alerting",
       "lang": "en",
-      "label1": "Guides",
+      "label1": "guides",
       "label2": "",
       "label3": "",
       "order": 2
@@ -145,14 +143,14 @@
       "id": "troubleshoot.md",
       "title": "Troubleshoot",
       "lang": "en",
-      "label1": "Guides",
+      "label1": "guides",
       "label2": "",
       "label3": "",
       "order": 3
     },
     
     {
-      "id": "",
+      "id": "reference",
       "title": "Reference",
       "lang": "en",
       "label1": "",
@@ -165,7 +163,7 @@
       "id": "milvus_config.md",
       "title": "Configuration",
       "lang": "en",
-      "label1": "Reference",
+      "label1": "reference",
       "label2": "",
       "label3": "",
       "order": 4
@@ -174,7 +172,7 @@
       "id": "index.md",
       "title": "Index Types",
       "lang": "en",
-      "label1": "Reference",
+      "label1": "reference",
       "label2": "",
       "label3": "",
       "order": 5
@@ -183,7 +181,7 @@
       "id": "data_manage.md",
       "title": "Data Management",
       "lang": "en",
-      "label1": "Reference",
+      "label1": "reference",
       "label2": "",
       "label3": "",
       "order": 6
@@ -192,7 +190,7 @@
       "id": "partition",
       "title": "Table Partitioning",
       "lang": "en",
-      "label1": "Reference",
+      "label1": "reference",
       "label2": "",
       "label3": "",
       "order": 7
@@ -201,7 +199,7 @@
       "id": "monitoring_metrics.md",
       "title": "Monitoring Metrics",
       "lang": "en",
-      "label1": "Reference",
+      "label1": "reference",
       "label2": "",
       "label3": "",
       "order": 8
@@ -210,21 +208,21 @@
       "id": "sdk",
       "title": "SDK",
       "lang": "en",
-      "label1": "Reference",
+      "label1": "reference",
       "label2": null,
       "label3": null,
-      "order": 1,
+      "order": 1
     },
     {
       "id": "application.md",
       "title": "Application Scenarios",
       "lang": "en",
-      "label1": "Reference",
+      "label1": "reference",
       "label2": "",
       "order": 0
     },
     {
-      "id": "",
+      "id": "faq",
       "title": "FAQ",
       "lang": "en",
       "label1": "",
@@ -236,7 +234,7 @@
       "id": "product_faq.md",
       "title": "Product FAQ",
       "lang": "en",
-      "label1": "FAQ",
+      "label1": "faq",
       "label2": "",
       "label3": "",
       "order": 2
@@ -245,7 +243,7 @@
       "id": "operational_faq.md",
       "title": "Operational FAQ",
       "lang": "en",
-      "label1": "FAQ",
+      "label1": "faq",
       "label2": "",
       "order": 3
     },
@@ -276,10 +274,10 @@
       "label1": "",
       "label2": "",
       "label3": null,
-      "order": 0,
+      "order": 0
     },
     {
-      "id": "",
+      "id": "releases",
       "title": "Release Notes",
       "lang": "en",
       "label1": "",
@@ -292,7 +290,7 @@
       "id": "v0.6.0.md",
       "title": "v0.6.0",
       "lang": "en",
-      "label1": "Release Notes",
+      "label1": "releases",
       "label2": "",
       "label3": null,
       "order": 0
