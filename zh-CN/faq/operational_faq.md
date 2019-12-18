@@ -67,8 +67,7 @@ $ docker restart <container id>
 
 ## 为什么我的 Python SDK 一直报错？
 
-检查 Milvus 是否支持已安装的 pymilvus 版本。要获取详细的 Milvus 和 pymilvus 的版本对应信息，参考 
-[https://pypi.org/project/pymilvus](https://pypi.org/project/pymilvus)。
+检查 Milvus 是否支持已安装的 pymilvus 版本。要获取详细的 Milvus 和 pymilvus 的版本对应信息，参考 [https://pypi.org/project/pymilvus](https://pypi.org/project/pymilvus)。
 
 ## 如何得知我的 Milvus 已经成功启动？
 
@@ -77,6 +76,14 @@ $ docker restart <container id>
 ```bash
 $ docker logs <container ID>
 ```
+
+## 为什么我的检索结果中出现大量 `-1`？
+
+当数据集中的向量数目少于 `topk` 时，Milvus 会自动向结果中添加 `-1` 以保证检索结果的数量等于 `topk`。
+
+## 为什么我的 Milvus 在启动时返回 “Illegal instruction”？
+
+如果您的 CPU 不支持 avx2 指令集，则 Milvus 无法正常启动。您可以通过 `cat /proc/cpuinfo` 查看 CPU 支持的指令集。
 
 ## 为什么我启用多进程程序失败了？
 
@@ -87,7 +94,7 @@ Milvus 在运行过程中，能够实现多进程操作，但在实现时需满�
 
 以下为正确实现多进程的示例。当表名为 TABLE_NAME，且已插入 vector_1 的表存在时，直接在主程序中直接调用该函数，两个 insert 进程和一个 search 进程同时执行，且能获得正确结果。其中需注意的是，search 的结果与当前正在 insert 的向量无关。
 
-```shell
+```python
 def test_add_vector_search_multiprocessing():
     '''
 	target: test add vectors, and search it with multiprocessing
