@@ -78,6 +78,13 @@ Use the following command to check the running status of Milvus:
 $ docker logs <container ID>
 ```
 
+## Why there are a lot of `-1`s in my search result?
+
+When the number of vectors in the dataset is less than `topk`, Milvus automatically adds `-1`s to the search result to ensure that the search result contains `topk` elements.
+
+## Why does my Milvus return "Illegal instruction" during startup? 
+
+If your CPU does not support the avx2 instruction set, Milvus cannot run properly. You can use `cat /proc/cpuinfo` to check supported instruction sets.
 
 ## Why does my multiprocessing program fail? 
 
