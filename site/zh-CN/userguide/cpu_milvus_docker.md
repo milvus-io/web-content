@@ -72,7 +72,7 @@ $ docker run -d --name milvus_cpu -e "TZ=Asia/Shanghai" -p 19530:19530 -p 8080:8
 - `--name`: 为 container 分配一个名字。
 - `-e`: 设置环境变量。
 - `-p`: 暴露 container 端口到 host。
-- `-v`: 绑定挂在卷。
+- `-v`: 绑定挂载卷。
 
 最后，确认 Milvus 运行状态：
 

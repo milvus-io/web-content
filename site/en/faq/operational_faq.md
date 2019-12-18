@@ -7,13 +7,13 @@ sidebar_label: Operational FAQ
 # Operational FAQ
 
 
-## Why do I fail to compile Milvus from source?
+#### Why do I fail to compile Milvus from source?
 
 Although the reasons may vary, the most possible cause could be environmental issues, such as incompatible versions, missing dependencies, etc. Refer to [Install Milvus from Source Code](https://github.com/milvus-io/milvus/blob/0.6.0/install.md) for more information.
 
 It is recommended that you use the docker images with the Milvus compilation environment. Refer to [How to build Milvus from source in the Docker container?](#how-to-build-milvus-from-source-in-the-docker-container) to learn how to compile Milvus with the docker images.
 
-## Does Milvus support insert, delete, update, and query operations for vectors?
+#### Does Milvus support insert, delete, update, and query operations for vectors?
 
 Milvus supports only the following operations for vectors:
 
@@ -22,43 +22,43 @@ Milvus supports only the following operations for vectors:
 
 > Note: Although Milvus does not support directly deleting vectors, you can drop a table for vector deletion.
 
-## Should I specify vector IDs or use auto-generated vector IDs?
+#### Should I specify vector IDs or use auto-generated vector IDs?
 
 Both ways work. However, you must either specify IDs for all vectors or use auto-generated IDs for all vectors in one table.
 
 
-## Why do Euclidean distance and inner product have inconsistent results in computing vector similarity?
+#### Why do Euclidean distance and inner product have inconsistent results in computing vector similarity?
 
 If Euclidean distance and inner product have inconsistent results, you need to check whether the data has been normalized. If not, please normalize your data before computing vector similarity.
 
 It can be theoretically proved that Euclidean distance will not be consistent with inner product for data without normalization. For detailed analysis, please refer to [data normalization](https://github.com/milvus-io/bootcamp/blob/master/EN_docs/data_preparation/data_normalization.md).
 
 
-## Why does Milvus display "no space left on device" when I import data to Milvus?
+#### Why does Milvus display "no space left on device" when I import data to Milvus?
 
 You probably did not leave enough disk space for the data to import. For example, to build `FLAT` or `IVFLAT` index for 100 million single-precision vectors, the space needed for importing data is about 200 GB. For `IVF_SQ8` index, the space is about 50 GB.
 
-## Why does this error "Vectors should be 2-dim array" still occur in the Python SDK when the data is a 2-dimensional array?
+#### Why does this error "Vectors should be 2-dim array" still occur in the Python SDK when the data is a 2-dimensional array?
 
 Even if the data is a 2-dim array, this error can still occur if the data type is integer instead of float. Milvus only support the float data type.
 
-## Why sometimes it takes much longer for queries with smaller datasets?
+#### Why sometimes it takes much longer for queries with smaller datasets?
 
 If the size of a data file is smaller than the value of the `index_file_size` parameter in the config file, Milvus will not build indexes for the data file. Thus, it is possible that smaller datasets may need more time for queries. Refer to [Milvus Configuration](../reference/milvus_config.md) for more information.
 
 > Note: `index_file_size` was named as `index_building_threshold` before the 0.4.0 release.
 
-## Why is my Milvus constantly having bad performance?
+#### Why is my Milvus constantly having bad performance?
 
 The reasons may vary, but it is recommended that you check the `cpu_cache_capacity` parameter in the config file to see if all data can be successfully loaded to the memory. Milvus cannot have the best performance before all data is loaded to the memory. Refer to [Milvus Configuration](../reference/milvus_config.md) for more information.
 
 If your parameter settings look correct, check whether other running applications have high memory usage.
 
-## Why is my Milvus constantly having low accuracy?
+#### Why is my Milvus constantly having low accuracy?
 
 Check the value of the `nprobe` parameter in the functions when you use an SDK to search vectors in a table. The greater the value, the more precise the result, yet the slower the search speed. Refer to [Learn Milvus Operation](../userguide/milvus_operation.md) for more information.
 
-## Why are my new configurations not working?
+#### Why are my new configurations not working?
 
 You need to restart Milvus docker every time you change the configuration file.
 
@@ -66,11 +66,11 @@ You need to restart Milvus docker every time you change the configuration file.
 $ docker restart <container id>
 ```
 
-## Why is my Python SDK constantly having errors?
+#### Why is my Python SDK constantly having errors?
 
 Check whether your pymilvus is supported by the installed Milvus. Refer to [https://pypi.org/project/pymilvus](https://pypi.org/project/pymilvus) for a detailed list of supported pymilvus versions.
 
-## How do I know whether Milvus is successfully started?
+#### How do I know whether Milvus is successfully started?
 
 Use the following command to check the running status of Milvus:
 
@@ -78,8 +78,15 @@ Use the following command to check the running status of Milvus:
 $ docker logs <container ID>
 ```
 
+#### Why there are a lot of `-1`s in my search result?
 
-## Why does my multiprocessing program fail? 
+When the number of vectors in the dataset is less than `topk`, Milvus automatically adds `-1`s to the search result to ensure that the search result contains `topk` elements.
+
+#### Why does my Milvus return "Illegal instruction" during startup? 
+
+If your CPU does not support the avx2 instruction set, Milvus cannot run properly. You can use `cat /proc/cpuinfo` to check supported instruction sets.
+
+#### Why does my multiprocessing program fail? 
 
 In order to successfully run multiprocessing in Milvus, make sure the following conditions are met:
 
@@ -169,7 +176,7 @@ def test_add_vector_search_multiprocessing(self, connect, table):
         p.join()
 ```
 
-## Why are the search results fewer than K when I try to search the top K vectors?
+#### Why are the search results fewer than K when I try to search the top K vectors?
 
 In all the indexing types that Milvus supports, `IVFLAT` and `IVF_SQ8` are cell-probe methods that employ a partitioning technique called k-means. The feature space is partitioned into `nlist` cells, and vectors are assigned to one of these cells (to the centroid closest to the query), and stored in an inverted file structure formed of `nlist` inverted lists. When query occurs, only a set of `nprobe` inverted lists are selected.
 
@@ -177,13 +184,13 @@ If the `nlist` and K is relatively large, and `nprobe` is small enough, it happe
 
 In order to avoid this situation, you can try increasing the value of `nprobe`, or smaller `nlist` and K.
 
-## How to build Milvus from source in the Docker container?
+#### How to build Milvus from source in the Docker container?
 
 As Milvus is mainly developed under the Ubuntu environment, the recommended compilation environment is Ubuntu 18.04 or higher. If your developing environment is not Ubuntu 18.04, you can also build Milvus from source code in the docker container. We provide two docker images that provide the build environment needed for the Milvus CPU-only and GPU supported versions.
 
 To build Milvus from source in the Docker container, please refer to [Compile Milvus on Docker](https://github.com/milvus-io/milvus/blob/master/install.md#compile-milvus-on-docker).
 
-## What if I failed to pull docker images from dockerhub when installing Milvus?
+#### What if I failed to pull docker images from dockerhub when installing Milvus?
 
 Users in some countries may have limited access to dockerhub. In this case, you can pull images from the local registry mirror. For example, the URL of the registry mirror for China is `registry.docker-cn.com`. You can add `"https://registry.docker-cn.com"` to the `registry-mirrors` array in `/etc.docker/daemon.json` to pull from the China registry mirror by default.
 
