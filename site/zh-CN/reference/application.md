@@ -1,5 +1,5 @@
 ---
-id: application
+id: application.md
 title: Application Scenarios
 sidebar_label: Application Scenarios
 ---

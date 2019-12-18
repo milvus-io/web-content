@@ -1,5 +1,5 @@
 ---
-id: product_faq
+id: product_faq.md
 title: Product FAQ
 sidebar_label: Product FAQ
 ---

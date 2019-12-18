@@ -1,5 +1,5 @@
 ---
-id: sdk
+id: sdk.md
 title: SDK
 sidebar_label: SDK
 ---

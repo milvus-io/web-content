@@ -1,5 +1,5 @@
 ---
-id: index
+id: index.md
 title: Index Types
 sidebar_label: Index Types
 ---

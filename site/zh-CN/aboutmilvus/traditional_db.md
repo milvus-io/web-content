@@ -1,5 +1,5 @@
 ---
-id: traditional_db
+id: traditional_db.md
 title: Traditional Database
 sidebar_label: Traditional Database
 ---

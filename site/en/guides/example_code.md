@@ -1,5 +1,5 @@
 ---
-id: example_code
+id: example_code.md
 title: Try an Example Program
 sidebar_label: Try an Example Program
 ---

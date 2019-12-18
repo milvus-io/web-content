@@ -1,5 +1,5 @@
 ---
-id: gpu_milvus
+id: gpu_milvus_docker.md
 title: Install GPU-enabled Milvus
 sidebar_label: Install GPU-enabled Milvus
 ---

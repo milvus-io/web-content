@@ -1,5 +1,5 @@
 ---
-id: vector_db
+id: vector_db.md
 title: Other Feature Vector Search Tools
 sidebar_label: Other Feature Vector Search Tools
 ---

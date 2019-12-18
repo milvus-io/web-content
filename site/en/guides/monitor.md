@@ -1,5 +1,5 @@
 ---
-id: monitor
+id: monitor.md
 title: Monitoring and Alerting
 sidebar_label: Monitoring and Alerting
 ---

@@ -1,5 +1,5 @@
 ---
-id: cpu_milvus
+id: cpu_milvus_docker.md
 title: Install CPU-only Milvus
 sidebar_label: Install CPU-only Milvus
 ---

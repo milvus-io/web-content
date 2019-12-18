@@ -1,5 +1,5 @@
 ---
-id: install_milvus
+id: install_milvus.md
 title: Installation Overview
 sidebar_label: Installation Overview
 ---

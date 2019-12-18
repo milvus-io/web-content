@@ -1,5 +1,5 @@
 ---
-id: application
+id: application.md
 title: Application Scenarios
 sidebar_label: Application Scenarios
 ---
@@ -61,7 +61,7 @@ Take personalized advertising content recommendation as an example, the applicat
    1) Search and filter out the top 100 ads that the user might be interested in and has not yet viewed.
    2) Extract the keywords and click-through rate of the top 100 ads.
    3) Locate and recommend the ads content to the user based on logistic regression model (which arises from user history data).
-  
+
 ## Use case 2 - Product feature extraction and multimodal search
 
 ### Background

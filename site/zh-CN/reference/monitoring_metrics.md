@@ -1,5 +1,5 @@
 ---
-id: monitoring_metrics
+id: monitoring_metrics.md
 title: Monitoring Metrics
 sidebar_label: Monitoring Metrics
 ---

@@ -1,5 +1,5 @@
 ---
-id: overview
+id: overview.md
 title: Milvus Overview
 sidebar_label: Milvus Overview
 ---

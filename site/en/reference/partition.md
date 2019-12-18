@@ -1,5 +1,5 @@
 ---
-id: partition
+id: partition.md
 title: Table Partitioning
 sidebar_label: Table Partitioning
 ---

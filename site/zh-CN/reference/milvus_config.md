@@ -1,5 +1,5 @@
 ---
-id: milvus_config
+id: milvus_config.md
 title: Milvus Configuration
 sidebar_label: Milvus Configuration
 ---
