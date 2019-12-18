@@ -26,7 +26,7 @@
       "label1": "about_milvus",
       "label2": null,
       "label3": null,
-      "order": 0
+      "order": 1
     },
   {
       "id": "traditional_db.md",
@@ -35,7 +35,7 @@
       "label1": "about_milvus",
       "label2": null,
       "label3": null,
-      "order": 0
+      "order": 2
     },
   {
       "id": "index_method.md",
@@ -44,7 +44,7 @@
       "label1": "about_milvus",
       "label2": null,
       "label3": null,
-      "order": 0
+      "order": 3
     },
   {
       "id": "vector_db.md",
@@ -53,7 +53,7 @@
       "label1": "about_milvus",
       "label2": null,
       "label3": null,
-      "order": 0
+      "order": 4
     },
   {
       "id": "guides",
@@ -62,7 +62,7 @@
       "label1": "",
       "label2": null,
       "label3": null,
-      "order": 0,
+      "order": 1,
       "isMenu": true
     },
   {
@@ -82,7 +82,7 @@
       "label1": "guides",
       "label2": "get_started",
       "label3": null,
-      "order": 1,
+      "order": 0,
       "isMenu": true
     },
     {
@@ -92,7 +92,7 @@
       "label1": "guides",
       "label2": "get_started",
       "label3": "install_milvus",
-      "order": 2
+      "order": 0
     },
     {
       "id": "cpu_milvus_docker.md",
@@ -101,7 +101,7 @@
       "label1": "guides",
       "label2": "get_started",
       "label3": "install_milvus",
-      "order": 0
+      "order": 1
     },
     {
       "id": "gpu_milvus_docker.md",
@@ -110,7 +110,7 @@
       "label1": "guides",
       "label2": "get_started",
       "label3": "install_milvus",
-      "order": 0
+      "order": 2
     },
     {
       "id": "example_code.md",
@@ -156,7 +156,7 @@
       "label1": "",
       "label2": "",
       "label3": "",
-      "order": 4,
+      "order": 2,
       "isMenu": true
     },
     {
@@ -166,7 +166,7 @@
       "label1": "reference",
       "label2": "",
       "label3": "",
-      "order": 4
+      "order": 0
     },
     {
       "id": "index.md",
@@ -175,7 +175,7 @@
       "label1": "reference",
       "label2": "",
       "label3": "",
-      "order": 5
+      "order": 1
     },
     {
       "id": "data_manage.md",
@@ -184,7 +184,7 @@
       "label1": "reference",
       "label2": "",
       "label3": "",
-      "order": 6
+      "order": 2
     },
     {
       "id": "partition",
@@ -193,7 +193,7 @@
       "label1": "reference",
       "label2": "",
       "label3": "",
-      "order": 7
+      "order": 3
     },
     {
       "id": "monitoring_metrics.md",
@@ -202,7 +202,7 @@
       "label1": "reference",
       "label2": "",
       "label3": "",
-      "order": 8
+      "order": 4
     },
     {
       "id": "sdk",
@@ -211,7 +211,7 @@
       "label1": "reference",
       "label2": null,
       "label3": null,
-      "order": 1
+      "order": 5
     },
     {
       "id": "application.md",
@@ -219,7 +219,7 @@
       "lang": "en",
       "label1": "reference",
       "label2": "",
-      "order": 0
+      "order": 6
     },
     {
       "id": "faq",
@@ -227,7 +227,7 @@
       "lang": "en",
       "label1": "",
       "label2": "",
-      "order": 1,
+      "order": 3,
       "isMenu": true
     },
     {
@@ -237,7 +237,7 @@
       "label1": "faq",
       "label2": "",
       "label3": "",
-      "order": 2
+      "order": 0
     },
     {
       "id": "operational_faq.md",
@@ -245,7 +245,7 @@
       "lang": "en",
       "label1": "faq",
       "label2": "",
-      "order": 3
+      "order": 1
     },
     {
       "id": "",
@@ -254,7 +254,7 @@
       "label1": "",
       "label2": null,
       "label3": null,
-      "order": 3,
+      "order": 4,
       "outLink": "https://github.com/milvus-io/bootcamp"
     },
     {
@@ -264,7 +264,7 @@
       "label1": "",
       "label2": "",
       "label3": null,
-      "order": 0
+      "order": 5
     },
     {
       "id": "releases",
@@ -273,7 +273,7 @@
       "label1": "",
       "label2": "",
       "label3": null,
-      "order": 0,
+      "order": 6,
       "isMenu": true
     },
     {
