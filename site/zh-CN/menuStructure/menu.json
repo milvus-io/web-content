@@ -258,16 +258,6 @@
       "outLink": "https://github.com/milvus-io/bootcamp"
     },
     {
-      "id": "roadmap.md",
-      "title": "路线图",
-      "lang": "en",
-      "label1": "",
-      "label2": null,
-      "label3": null,
-      "order": 4,
-      "isMenu": true
-    },
-    {
       "id": "contribute.md",
       "title": "贡献",
       "lang": "en",
