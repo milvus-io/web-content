@@ -160,13 +160,22 @@
       "isMenu": true
     },
     {
+      "id": "comparison.md",
+      "title": "Milvus in Comparison",
+      "lang": "en",
+      "label1": "reference",
+      "label2": "",
+      "label3": "",
+      "order": 0
+    },
+    {
       "id": "milvus_config.md",
       "title": "Configuration",
       "lang": "en",
       "label1": "reference",
       "label2": "",
       "label3": "",
-      "order": 0
+      "order": 1
     },
     {
       "id": "index.md",
@@ -175,7 +184,7 @@
       "label1": "reference",
       "label2": "",
       "label3": "",
-      "order": 1
+      "order": 2
     },
     {
       "id": "data_manage.md",
@@ -184,7 +193,7 @@
       "label1": "reference",
       "label2": "",
       "label3": "",
-      "order": 2
+      "order": 3
     },
     {
       "id": "partition.md",
@@ -193,7 +202,7 @@
       "label1": "reference",
       "label2": "",
       "label3": "",
-      "order": 3
+      "order": 4
     },
     {
       "id": "monitoring_metrics.md",
@@ -202,7 +211,7 @@
       "label1": "reference",
       "label2": "",
       "label3": "",
-      "order": 4
+      "order": 5
     },
     {
       "id": "sdk.md",
@@ -211,7 +220,7 @@
       "label1": "reference",
       "label2": null,
       "label3": null,
-      "order": 5
+      "order": 6
     },
     {
       "id": "application.md",
@@ -219,7 +228,7 @@
       "lang": "en",
       "label1": "reference",
       "label2": "",
-      "order": 6
+      "order": 7
     },
     {
       "id": "faq",

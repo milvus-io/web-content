@@ -51,4 +51,5 @@ Milvus is an open source similarity search engine for massive feature vectors. D
 ## What's next
 
 - Explore more concepts of [vectors](vector.md), [vector search](index_method.md) and [vector database](vector_db.md)
-- [Install Milvus](../userguide/install_milvus.md) and start to explore around
+- [Install Milvus](../guides/install_milvus.md) and start to explore around
+

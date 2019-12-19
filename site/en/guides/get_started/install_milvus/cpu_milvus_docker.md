@@ -1,10 +1,10 @@
 ---
-id: gpu_milvus_docker.md
-title: Install GPU-enabled Milvus
-sidebar_label: Install GPU-enabled Milvus
+id: cpu_milvus_docker.md
+title: Install CPU-only Milvus
+sidebar_label: Install CPU-only Milvus
 ---
 
-# Install GPU-enabled Milvus
+# Install CPU-only Milvus
 
 ## Prerequisites
 
@@ -14,21 +14,19 @@ sidebar_label: Install GPU-enabled Milvus
 | :--------------- | :----------------- |
 | CentOS           | 7.5 or higher      |
 | Ubuntu LTS       | 18.04 or higher    |
+| Windows          | Windows 10         |
 
 #### Hardware requirements
 
 | Component  | Recommended configuration             |
 | ---------- | ------------------------------------- |
 | CPU        | Intel CPU Haswell or higher           |
-| GPU        | NVIDIA Pascal or higher               |
 | RAM        | 8 GB or more (depends on data volume) |
 | Hard drive | SATA 3.0 SSD or higher                |
 
 #### Milvus Docker requirements
 
-- [Install Docker](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/) 19.03 or higher on your local host machine.
-- Install NVIDIA driver 418 or higher.
-- [Install NVIDIA Docker support](https://github.com/NVIDIA/nvidia-docker)
+[Install Docker](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/) 19.03 or higher on your local host machine.
 
 ## Step 1 Confirm Docker status
 
@@ -42,12 +40,12 @@ If you do not see the server listed, start the **Docker** daemon.
 
 > Note: On Linux, Docker needs sudo privileges. To run Docker command without `sudo`, create the `docker` group and add your user. For details, see the [post-installation steps for Linux](https://docs.docker.com/install/linux/linux-postinstall/).
 
-## Step 2 Pull Milvus image
+## Step 2 Pull Docker image
 
-Pull the GPU-enabled image:
+Pull the CPU-only image:
 
 ```shell
-$ docker pull milvusdb/milvus:latest
+$ docker pull milvusdb/milvus:cpu-latest
 ```
 
 ## Step 3 Download configuration files
@@ -56,7 +54,7 @@ $ docker pull milvusdb/milvus:latest
 # Create Milvus file
 $ mkdir -p /home/$USER/milvus/conf
 $ cd home/$USER/milvus/conf
-$ wget https://raw.githubusercontent.com/milvus-io/docs/master/assets/config/server_config.yaml
+$ wget https://raw.githubusercontent.com/milvus-io/docs/master/assets/server_config.yaml
 $ wget https://raw.githubusercontent.com/milvus-io/docs/master/assets/config/log_config.conf
 ```
 
@@ -64,19 +62,19 @@ $ wget https://raw.githubusercontent.com/milvus-io/docs/master/assets/config/log
 
 ```shell
 # Start Milvus
-$ docker run -d --name milvus_gpu --gpus all -e "TZ=Asia/Shanghai" -p 19530:19530 -p 8080:8080 -v /home/$USER/milvus/db:/var/lib/milvus/db -v /home/$USER/milvus/conf:/var/lib/milvus/conf -v /home/$USER/milvus/logs:/var/lib/milvus/logs milvusdb/milvus:latest
+$ docker run -d --name milvus_cpu -e "TZ=Asia/Shanghai" -p 19530:19530 -p 8080:8080 -v /home/$USER/milvus/db:/var/lib/milvus/db -v /home/$USER/milvus/conf:/var/lib/milvus/conf -v /home/$USER/milvus/logs:/var/lib/milvus/logs milvusdb/milvus:cpu-latest
 ```
 
 > Note: To configure your timezone, use `-e "TZ=Asia/Shanghai"` , and change `Asia/Shanghai` to your local [timezone](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones). 
 
 The `docker run` options used in the above command are defined as follows:
 
-- `-d`: run container in background and print container ID
-- `--name`: assign a name to the container
+- `-d`: Run container in background and print container ID
+- `--name`: Assign a name to the container
 - `--gpus`: GPU devices to add to the container (‘all’ to pass all GPUs)
-- `-e`: set environment variables
-- `-p`: publish a container’s port(s) to the host
-- `-v`: bind mount a volume
+- `-e`: Set environment variables
+- `-p`: Publish a container’s port(s) to the host
+- `-v`: Bind mount a volume
 
 Finally confirm Milvus running status by the following command:
 
@@ -98,15 +96,15 @@ $ docker logs <milvus container id>
 
 - If you're just getting started with Milvus:
 
-  - [Try an example program](example_code.md)
-  - [Learn more about Milvus operations](milvus_operation.md)
+  - [Try an example program](../example_code.md)
+  - [Learn more about Milvus operations](../../milvus_operation.md)
   - [Try Milvus Bootcamp](https://github.com/milvus-io/bootcamp)
   
 - If you're ready to run Milvus in production:
 
-  - Build a [monitoring and alerting system](monitor.md) to check real-time application performance
-  - Tune Milvus performance through [configuration](../reference/milvus_config.md)
+  - Build a [monitoring and alerting system](../../monitor.md) to check real-time application performance
+  - Tune Milvus performance through [configuration](../../../reference/milvus_config.md)
   
-- If you want to run Milvus on machines without GPU:
+- If you want to use GPU-accelerated Milvus for search in large datasets:
   
-  - [Install CPU-only Milvus](cpu_milvus_docker.md)
+  - [Install GPU-enabled Milvus](gpu_milvus_docker.md)
