@@ -75,7 +75,7 @@ $ docker run -d --name milvus_gpu --gpus all -e "TZ=Asia/Shanghai" -p 19530:1953
 - `--gpus`: 指定可用的 GPU。如未填写任何值，则所有GPU都可用。
 - `-e`: 设置环境变量。
 - `-p`: 暴露 container 端口到 host。
-- `-v`: 绑定挂在卷。
+- `-v`: 绑定挂载卷。
 
 最后，确认 Milvus 运行状态：
 
