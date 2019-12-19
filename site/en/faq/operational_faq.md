@@ -56,7 +56,7 @@ If your parameter settings look correct, check whether other running application
 
 #### Why is my Milvus constantly having low accuracy?
 
-Check the value of the `nprobe` parameter in the functions when you use an SDK to search vectors in a table. The greater the value, the more precise the result, yet the slower the search speed. Refer to [Learn Milvus Operation](../userguide/milvus_operation.md) for more information.
+Check the value of the `nprobe` parameter in the functions when you use an SDK to search vectors in a table. The greater the value, the more precise the result, yet the slower the search speed. Refer to [Learn Milvus Operation](../guides/milvus_operation.md) for more information.
 
 #### Why are my new configurations not working?
 

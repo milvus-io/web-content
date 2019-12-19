@@ -49,5 +49,5 @@ The Milvus dashboard provides details about your application and database config
 | **Total File** | Number of data files currently stored in Milvus. |
 
 ## Related links
-[Monitoring and Alerting](../userguide/monitor.md)
+[Monitoring and Alerting](../guides/monitor.md)
 

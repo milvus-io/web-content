@@ -96,14 +96,14 @@ $ docker logs <milvus container id>
 
 - If you're just getting started with Milvus:
 
-  - [Try an example program](example_code.md)
-  - [Learn more about Milvus operations](milvus_operation.md)
+  - [Try an example program](../example_code.md)
+  - [Learn more about Milvus operations](../../milvus_operation.md)
   - [Try Milvus Bootcamp](https://github.com/milvus-io/bootcamp)
   
 - If you're ready to run Milvus in production:
 
-  - Build a [monitoring and alerting system](monitor.md) to check real-time application performance
-  - Tune Milvus performance through [configuration](../reference/milvus_config.md)
+  - Build a [monitoring and alerting system](../../monitor.md) to check real-time application performance
+  - Tune Milvus performance through [configuration](../../../reference/milvus_config.md)
   
 - If you want to use GPU-accelerated Milvus for search in large datasets:
   

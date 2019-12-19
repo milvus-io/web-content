@@ -94,14 +94,14 @@ $ docker logs <milvus container id>
 
 - 如果您刚开始了解 Milvus：
 
-  - [运行示例程序](example_code.md)
-  - [了解更多 Milvus 操作](milvus_operation.md)
+  - [运行示例程序](../example_code.md)
+  - [了解更多 Milvus 操作](../../milvus_operation.md)
   - [体验 Milvus 在线训练营](https://github.com/milvus-io/bootcamp)
 
 - 如果您已准备好在生产环境中部署 Milvus：
 
-  - 创建 [监控与报警系统](monitor.md) 实时查看系统表现
-  - [设置 Milvus 参数](../reference/milvus_config.md)
+  - 创建 [监控与报警系统](../../monitor.md) 实时查看系统表现
+  - [设置 Milvus 参数](../../../reference/milvus_config.md)
   
 - 如果您想使用针对大数据集搜索的 GPU 加速版 Milvus：
 
