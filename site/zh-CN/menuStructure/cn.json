@@ -223,7 +223,7 @@
     },
     {
       "id": "faq",
-      "title": "FAQ",
+      "title": "常见问题",
       "lang": "en",
       "label1": "",
       "label2": "",
@@ -232,7 +232,7 @@
     },
     {
       "id": "product_faq.md",
-      "title": "产品 FAQ",
+      "title": "产品常见问题",
       "lang": "en",
       "label1": "faq",
       "label2": "",
@@ -241,7 +241,7 @@
     },
     {
       "id": "operational_faq.md",
-      "title": "操作 FAQ",
+      "title": "操作常见问题",
       "lang": "en",
       "label1": "faq",
       "label2": "",
