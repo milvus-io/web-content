@@ -6,7 +6,7 @@ sidebar_label: Learn Milvus Operations
 
 # 了解 Milvus 操作
 
-该页面将向您展示如何使用 [Python SDK](https://github.com/milvus-io/pymilvus) 运行 Milvus 基本操作。您也可以使用其它语言如 [Java](https://github.com/milvus-io/milvus-sdk-java), [C++](https://github.com/milvus-io/milvus/tree/master/core/src/sdk) 等来进行这些操作。
+该页面将向您展示如何使用 [Python SDK](https://github.com/milvus-io/pymilvus) 运行 Milvus 基本操作。您也可以使用其它语言如 [Java](https://github.com/milvus-io/milvus-sdk-java), [C++](https://github.com/milvus-io/milvus/tree/master/sdk) 等来进行这些操作。
 
 ## 运行操作前的准备
 
@@ -111,9 +111,12 @@ Status(code=0, message='Success')
 请用下列命令确认某张表是否存在：
 
 ```python
->>> milvus.has_table(table_name='test01')
-True
-```
+>>> status, exists = milvus.has_table('test')
+>>> status     
+Status(code=0, message='Success')
+>>> exists
+True	
+```	
 
 > 注意：如果查询的表不存在，则以上代码中返回值为 `False`。
 
