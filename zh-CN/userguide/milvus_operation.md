@@ -111,7 +111,10 @@ Status(code=0, message='Success')
 请用下列命令确认某张表是否存在：
 
 ```python
->>> milvus.has_table(table_name='test01')
+>>> status, exists = client.has_table('test')
+>>> status     
+Status(code=0, message='Success')
+>>> exists
 True
 ```
 
