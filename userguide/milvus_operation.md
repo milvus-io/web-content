@@ -9,7 +9,7 @@ sidebar_label: Learn Milvus Operations
 
 This page walks you through some basic Milvus operations using the [**Python** SDK](https://github.com/milvus-io/pymilvus).
 
-You can also use other languages such as [Java](https://github.com/milvus-io/milvus-sdk-java), [C++](https://github.com/milvus-io/milvus/tree/master/core/src/sdk), etc.
+You can also use other languages such as [Java](https://github.com/milvus-io/milvus-sdk-java), [C++](https://github.com/milvus-io/milvus/tree/master/sdk), etc.
 
 ## Before trying out these operations
 
@@ -114,7 +114,10 @@ Status(code=0, message='Success')
 To verify if a table exists in Milvus, use this command:
 
 ```python
->>> milvus.has_table(table_name='test01')
+>>> status, exists = milvus.has_table('test')
+>>> status     
+Status(code=0, message='Success')
+>>> exists
 True
 ```
 
