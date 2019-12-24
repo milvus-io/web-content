@@ -1,14 +1,13 @@
-# Milvus用户手册
+# Milvus 用户手册
 
-- [Preface](preface.md)
-- [Installation Overview](install_milvus.md)
-- [Install CPU-only Milvus](cpu_milvus_docker.md)
-- [Install GPU-enabled Milvus](gpu_milvus_docker.md)
-- [Try an Example Program](example_code.md)
-- [Learn Milvus Operations](milvus_operation.md)
-- [Try Bootcamp](bootcamp.md)
-- [Monitoring and Alerting](monitor.md)
-- [Troubleshoot](troubleshoot.md)
-
+- 快速入门
+  - 安装 Milvus
+    - [安装概述](install_milvus.md)
+    - [安装 CPU 版 Milvus](cpu_milvus_docker.md)
+    - [安装 GPU 版 Milvus](gpu_milvus_docker.md)
+  - [运行示例程序](example_code.md)
+- [了解 Milvus 操作](milvus_operation.md)
+- [监控与报警](monitor.md)
+- [故障诊断](troubleshoot.md)
 
 
