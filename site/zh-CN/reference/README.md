@@ -1,10 +1,10 @@
 # 参考手册
 
-- [Milvus in Comparison](comparison.md)
-- [Milvus Configuration](milvus_config.md)
-- [Monitoring Metrics](monitoring_metrics.md)
+- [对比 FAISS 和 SPTAG](comparison.md)
+- [Configuration](milvus_config.md)
 - [Index Types](index.md)
-- [Table Partitioning](partition.md)
-- [SDK](sdk.md)
 - [Data Management](data_manage.md)
+- [Table Partitioning](partition.md)
+- [Monitoring Metrics](monitoring_metrics.md)
+- [SDK](sdk.md)
 - [Application Scenarios](application.md)
