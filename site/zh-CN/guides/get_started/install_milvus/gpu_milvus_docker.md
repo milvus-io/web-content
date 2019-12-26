@@ -63,17 +63,20 @@ $ wget https://raw.githubusercontent.com/milvus-io/docs/master/assets/config/log
 
 ```shell
 # Start Milvus
-$ docker run -d --name milvus_gpu --gpus all -e "TZ=Asia/Shanghai" -p 19530:19530 -p 8080:8080 -v /home/$USER/milvus/db:/var/lib/milvus/db -v /home/$USER/milvus/conf:/var/lib/milvus/conf -v /home/$USER/milvus/logs:/var/lib/milvus/logs milvusdb/milvus:latest
+$ docker run -d --name milvus_gpu --gpus all \
+-p 19530:19530 \
+-p 8080:8080 \
+-v /home/$USER/milvus/db:/var/lib/milvus/db \
+-v /home/$USER/milvus/conf:/var/lib/milvus/conf \
+-v /home/$USER/milvus/logs:/var/lib/milvus/logs \
+milvusdb/milvus:latest
 ```
-
-> 注意：若要设置时区，请使用 `-e "TZ=Asia/Shanghai"` ，并将 `Asia/Shanghai` 换成您本地的[时区](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)。最后，确认 Milvus 运行状态。
 
 上述命令中用到的 `docker run` 参数定义如下：
 
 - `-d`: 运行 container 到后台并打印 container id。
 - `--name`: 为 container 分配一个名字。
 - `--gpus`: 指定可用的 GPU。如未填写任何值，则所有GPU都可用。
-- `-e`: 设置环境变量。
 - `-p`: 暴露 container 端口到 host。
 - `-v`: 绑定挂载卷。
 
