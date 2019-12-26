@@ -62,7 +62,8 @@ $ wget https://raw.githubusercontent.com/milvus-io/docs/master/assets/config/log
 ```shell
 # Start Milvus
 $ docker run -d --name milvus_cpu \
--p 19530:19530 -p 8080:8080 \
+-p 19530:19530 \
+-p 8080:8080 \
 -v /home/$USER/milvus/db:/var/lib/milvus/db \
 -v /home/$USER/milvus/conf:/var/lib/milvus/conf \
 -v /home/$USER/milvus/logs:/var/lib/milvus/logs \
