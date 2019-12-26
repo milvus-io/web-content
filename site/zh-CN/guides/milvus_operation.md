@@ -116,7 +116,7 @@ Status(code=0, message='Success')
 Status(code=0, message='Success')
 >>> exists
 True	
-```	
+```
 
 > 注意：如果查询的表不存在，则以上代码中返回值为 `False`。
 
@@ -228,7 +228,6 @@ Status(code=0, message='Success')
 | `query_records`           | 要搜索的一组目标向量。每条向量必须为**浮点**数据类型，其维度必须和表中定义的维度一致。 | 2-dimensional list                    | [[0.1, 0.2, ...], ...]              |
 | `top_k`                   | 与要搜索的目标向量相似度最高的k个向量。                      | Integer                               | (0, 2048]     |
 | `nprobe`                  | 查询所涉及的向量类的个数。`nprobe` 影响查询精度。数值越大，精度越高，但查询速度更慢。 | Integer                               | [1, `nlist`]              |
-| `query_ranges` (optional) | 可选择设置的，以逗号隔开的一列值，定义搜索结果的过滤条件。 <br/>比如你可以搜索某一段日期内的向量。如果不设置，则用默认值 `None`（即'无范围'，表示全局搜索）。 | List (建议使用元组数据类型) | [('2019-01-01', '2019-01-02'), ...] |
 
 > 注意：目前搜索范围仅支持日期范围，格式为'yyyy-mm-dd'，为左闭右闭模式。比如您将范围定为 [2019.1.1, 2019.1.5]，则搜索范围为 2019.1.1 到2019.1.5，并且包含2019.1.1和2019.1.5。
 
@@ -251,23 +250,6 @@ Status(message='Search vectors successfully!', code=0)
       ........
 [(id:6, distance:4.065953254699707),
  (id:1, distance:4.149323463439941)]
-]
-```
-
-若要过滤搜索结果，请使用 `query_ranges` 定义过滤条件。
-
-```python
-# Search 3 vectors
->>> status, results = milvus.search_vectors(table_name='test01', query_records=q_records, top_k=2, nprobe=16, query_ranges=[('2019-06-01', '2019-06-05')] )
->>> status
-Status(message='Search vectors successfully!', code=0)
->>> results # Searched top_k vectors
-[
-[(id:15, distance:2.855304718017578),
- (id:16, distance:3.040700674057007)],
-[(id:11, distance:3.673950433731079),
- (id:15, distance:4.183730602264404)],
-...
 ]
 ```
 
