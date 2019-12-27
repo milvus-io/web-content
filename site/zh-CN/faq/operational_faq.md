@@ -85,6 +85,14 @@ $ docker logs <container ID>
 
 如果您的 CPU 不支持 avx2 指令集，则 Milvus 无法正常启动。您可以通过 `cat /proc/cpuinfo` 查看 CPU 支持的指令集。
 
+#### 为什么在 Mac OS 上运行 Milvus 时显示 cpu_cache_capacity 太大？
+
+您需要检查 MacOS 为 docker engine 分配的内存值。如果分配的内存值小于或等于 `cpu_cache_capacity`，尽管您的主机内存可能足够，但 Milvus 仍然无法正常运行。
+
+#### 为什么我的日志文件时间与系统时间不一致？
+
+Docker 镜像内部的日志文件默认使用 UTC 时区。如果您宿主机的时区不是 UTC 时区，就会出现日志文件时间与系统时间不一致的情况。建议您查看宿主机上挂载的日志文件，这样可以保证宿主机上的日志文件和系统时间是一致的。
+
 #### 为什么我启用多进程程序失败了？
 
 Milvus 在运行过程中，能够实现多进程操作，但在实现时需满足一定条件：

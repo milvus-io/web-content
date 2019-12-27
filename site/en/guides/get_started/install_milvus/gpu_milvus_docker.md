@@ -64,17 +64,21 @@ $ wget https://raw.githubusercontent.com/milvus-io/docs/master/assets/config/log
 
 ```shell
 # Start Milvus
-$ docker run -d --name milvus_gpu --gpus all -e "TZ=Asia/Shanghai" -p 19530:19530 -p 8080:8080 -v /home/$USER/milvus/db:/var/lib/milvus/db -v /home/$USER/milvus/conf:/var/lib/milvus/conf -v /home/$USER/milvus/logs:/var/lib/milvus/logs milvusdb/milvus:latest
+$ docker run -d --name milvus_gpu --gpus all \
+-p 19530:19530 \
+-p 8080:8080 \
+-v /home/$USER/milvus/db:/var/lib/milvus/db \
+-v /home/$USER/milvus/conf:/var/lib/milvus/conf \
+-v /home/$USER/milvus/logs:/var/lib/milvus/logs \
+milvusdb/milvus:latest
 ```
 
-> Note: To configure your timezone, use `-e "TZ=Asia/Shanghai"` , and change `Asia/Shanghai` to your local [timezone](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones). 
 
 The `docker run` options used in the above command are defined as follows:
 
 - `-d`: run container in background and print container ID
 - `--name`: assign a name to the container
 - `--gpus`: GPU devices to add to the container (‘all’ to pass all GPUs)
-- `-e`: set environment variables
 - `-p`: publish a container’s port(s) to the host
 - `-v`: bind mount a volume
 

@@ -22,6 +22,7 @@ Some concepts used in this page are explained as follows:
 | IVF and scalar quantizer                   | `IVFSQ8`   | <p style="width: 360px">Adopts a scalar quantizer to significantly reduce the size of a vector (by about 3/4). Compared to `FLAT` and `IVFFLAT`, query speed is much faster and requires less disk and CPU/GPU memory.</p> | nq, `nprobe`, `nlist`                         | ✔️               | ✔️                  |
 | IVFSQ8 hybrid search on both CPU and GPU   | `IVFSQ8H`  | <p style="width: 360px">Optimized version of `IVFSQ8` that requires both CPU and GPU to work. Different from `IVFSQ8`,  `IVFSQ8H` uses a GPU-based coarse quantizer that greatly reduces the quantization time.</p> | nq, `nprobe`, `gpu_search_threshold`, `nlist` | ❌               | ✔️                  |
 
+
 To choose an appropriate index for your application scenarios, please read [How to select an index in Milvus](https://medium.com/@milvusio/how-to-choose-an-index-in-milvus-4f3d15259212).
 
 ## Known issues
