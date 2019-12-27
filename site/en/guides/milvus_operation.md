@@ -114,12 +114,12 @@ Status(code=0, message='Success')
 To verify if a table exists in Milvus, use this command:
 
 ```python
->>> status, exists = milvus.has_table('test')
+>>> status, exists = milvus.has_table('test01')
 >>> status     
 Status(code=0, message='Success')
 >>> exists
 True	
-```	
+```
 
 > Note: If the table you verified is not available, the terminal returns `False`.
 
@@ -232,7 +232,6 @@ Below is the list of parameters for searching vectors in a table:
 | `query_records`           | The list of query vectors to be searched in the table. Each vector value must be float data type, with the same dimension as that defined for the table. | 2-dimensional list                    | [[0.1, 0.2, ...], ...]              |
 | `top_k`                   | The top k most similar results of each query vector.         | Integer                               | (0, 2048]                           |
 | `nprobe`                  | Number of queried vector buckets. <br/>`nprobe` affects search precision. The greater the value, the more precise the result, yet the slower the search speed. | Integer                               | [1, `nlist`]                          |
-| `query_ranges` (optional) | An optional, comma-separated list that defines the condition by which the search is filtered. <br/>For example, you can search within a specific date range. The default value `None` (no range, meaning to search the entire database) is used if you leave this parameter out. | List (Suggest to use tuple data type) | [('2019-01-01', '2019-01-02'), ...] |
 
 > Note: Currently, only date range is supported in `query_ranges`. The date format is 'yyyy-mm-dd'. The date range [2019.1.1, 2019.1.5] contains 2019.1.1 and 2019.1.5.
 
@@ -255,23 +254,6 @@ Status(message='Search vectors successfully!', code=0)
       ........
 [(id:6, distance:4.065953254699707),
  (id:1, distance:4.149323463439941)]
-]
-```
-
-To filter the results, add a `query_ranges` clause identifying the date range to filter by. 
-
-```python
-# Search 3 vectors
->>> status, results = milvus.search_vectors(table_name='test01', query_records=q_records, top_k=2, nprobe=16, query_ranges=[('2019-06-01', '2019-06-05')] )
->>> status
-Status(message='Search vectors successfully!', code=0)
->>> results # Searched top_k vectors
-[
-[(id:15, distance:2.855304718017578),
- (id:16, distance:3.040700674057007)],
-[(id:11, distance:3.673950433731079),
- (id:15, distance:4.183730602264404)],
-...
 ]
 ```
 

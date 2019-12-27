@@ -12,6 +12,6 @@ Milvus supports the following types of SDK:
 
 - [Python SDK](https://github.com/milvus-io/pymilvus)
 
-- [C++ SDK](https://github.com/milvus-io/milvus/tree/master/core/src/sdk)
+- [C++ SDK](https://github.com/milvus-io/milvus/tree/master/sdk)
 
 
