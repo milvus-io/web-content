@@ -63,6 +63,7 @@ $ wget https://raw.githubusercontent.com/milvus-io/docs/blob/v0.6.0/assets/confi
 
 ```shell
 # Start Milvus
+<<<<<<< HEAD:site/zh-CN/guides/get_started/install_milvus/gpu_milvus_docker.md
 $ docker run -d --name milvus_gpu --gpus all \
 -p 19530:19530 \
 -p 8080:8080 \

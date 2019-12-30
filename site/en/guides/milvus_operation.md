@@ -114,6 +114,7 @@ Status(code=0, message='Success')
 To verify if a table exists in Milvus, use this command:
 
 ```python
+<<<<<<< HEAD:site/en/guides/milvus_operation.md
 >>> status, exists = milvus.has_table('test01')
 >>> status     
 Status(code=0, message='Success')
