@@ -44,7 +44,7 @@ $ docker info
 拉取仅需 CPU 的镜像：
 
 ```shell
-$ docker pull milvusdb/milvus:cpu-latest
+$ docker pull milvusdb/milvus:0.6.0-cpu-d120719-2b40dd
 ```
 
 ## 第三步 下载配置文件
@@ -53,8 +53,8 @@ $ docker pull milvusdb/milvus:cpu-latest
 # Create Milvus file
 $ mkdir -p /home/$USER/milvus/conf
 $ cd home/$USER/milvus/conf
-$ wget https://raw.githubusercontent.com/milvus-io/docs/master/assets/server_config.yaml
-$ wget https://raw.githubusercontent.com/milvus-io/docs/master/assets/config/log_config.conf
+$ wget https://raw.githubusercontent.com/milvus-io/docs/blob/v0.6.0/assets/server_config.yaml
+$ wget https://raw.githubusercontent.com/milvus-io/docs/blob/v0.6.0/assets/config/log_config.conf
 ```
 
 ## 第四步 启动 Milvus Docker 容器
@@ -67,7 +67,7 @@ $ docker run -d --name milvus_cpu \
 -v /home/$USER/milvus/db:/var/lib/milvus/db \
 -v /home/$USER/milvus/conf:/var/lib/milvus/conf \
 -v /home/$USER/milvus/logs:/var/lib/milvus/logs \
-milvusdb/milvus:cpu-latest
+milvusdb/milvus:0.6.0-cpu-d120719-2b40dd
 ```
 
 上述命令中用到的 `docker run` 参数定义如下：

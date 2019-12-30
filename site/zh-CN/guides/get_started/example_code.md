@@ -22,7 +22,7 @@ sidebar_label: Try an Example Program
    
    ```shell
    # Download Python example
-   $ wget https://raw.githubusercontent.com/milvus-io/pymilvus/master/examples/example.py
+   $ wget https://raw.githubusercontent.com/milvus-io/pymilvus/blob/0.6.0/examples/example.py
    ```
 
 4. 运行示例代码。

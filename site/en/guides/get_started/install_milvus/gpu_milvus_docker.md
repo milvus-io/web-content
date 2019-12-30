@@ -47,7 +47,7 @@ If you do not see the server listed, start the **Docker** daemon.
 Pull the GPU-enabled image:
 
 ```shell
-$ docker pull milvusdb/milvus:latest
+$ docker pull milvusdb/milvus:0.6.0-gpu-d120719-2b40dd
 ```
 
 ## Step 3 Download configuration files
@@ -56,8 +56,8 @@ $ docker pull milvusdb/milvus:latest
 # Create Milvus file
 $ mkdir -p /home/$USER/milvus/conf
 $ cd home/$USER/milvus/conf
-$ wget https://raw.githubusercontent.com/milvus-io/docs/master/assets/config/server_config.yaml
-$ wget https://raw.githubusercontent.com/milvus-io/docs/master/assets/config/log_config.conf
+$ wget https://raw.githubusercontent.com/milvus-io/docs/blob/v0.6.0/assets/config/server_config.yaml
+$ wget https://raw.githubusercontent.com/milvus-io/docs/blob/v0.6.0/assets/config/log_config.conf
 ```
 
 ## Step 4 Start Docker container
@@ -70,7 +70,7 @@ $ docker run -d --name milvus_gpu --gpus all \
 -v /home/$USER/milvus/db:/var/lib/milvus/db \
 -v /home/$USER/milvus/conf:/var/lib/milvus/conf \
 -v /home/$USER/milvus/logs:/var/lib/milvus/logs \
-milvusdb/milvus:latest
+milvusdb/milvus:0.6.0-gpu-d120719-2b40dd
 ```
 
 
