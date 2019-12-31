@@ -31,7 +31,7 @@ Both ways work. However, you must either specify IDs for all vectors or use auto
 
 If Euclidean distance and inner product have inconsistent results, you need to check whether the data has been normalized. If not, please normalize your data before computing vector similarity.
 
-It can be theoretically proved that Euclidean distance will not be consistent with inner product for data without normalization. For detailed analysis, please refer to [data normalization](https://github.com/milvus-io/bootcamp/blob/master/EN_docs/data_preparation/data_normalization.md).
+It can be theoretically proved that Euclidean distance will not be consistent with inner product for data without normalization. For detailed analysis, please refer to [data normalization](https://github.com/milvus-io/bootcamp/blob/0.6.0/EN_getting_started/data_preparation/data_normalization.md).
 
 
 #### Why does Milvus display "no space left on device" when I import data to Milvus?
@@ -44,19 +44,19 @@ Even if the data is a 2-dim array, this error can still occur if the data type i
 
 #### Why sometimes it takes much longer for queries with smaller datasets?
 
-If the size of a data file is smaller than the value of the `index_file_size` parameter in the config file, Milvus will not build indexes for the data file. Thus, it is possible that smaller datasets may need more time for queries. Refer to [Milvus Configuration](../reference/milvus_config.md) for more information.
+If the size of a data file is smaller than the value of the `index_file_size` parameter in the config file, Milvus will not build indexes for the data file. Thus, it is possible that smaller datasets may need more time for queries. Refer to [Milvus Configuration](https://milvus.io/docs/v0.6.0/reference/milvus_config.md) for more information.
 
 > Note: `index_file_size` was named as `index_building_threshold` before the 0.4.0 release.
 
 #### Why is my Milvus constantly having bad performance?
 
-The reasons may vary, but it is recommended that you check the `cpu_cache_capacity` parameter in the config file to see if all data can be successfully loaded to the memory. Milvus cannot have the best performance before all data is loaded to the memory. Refer to [Milvus Configuration](../reference/milvus_config.md) for more information.
+The reasons may vary, but it is recommended that you check the `cpu_cache_capacity` parameter in the config file to see if all data can be successfully loaded to the memory. Milvus cannot have the best performance before all data is loaded to the memory. Refer to [Milvus Configuration](https://milvus.io/docs/v0.6.0/reference/milvus_config.md) for more information.
 
 If your parameter settings look correct, check whether other running applications have high memory usage.
 
 #### Why is my Milvus constantly having low accuracy?
 
-Check the value of the `nprobe` parameter in the functions when you use an SDK to search vectors in a table. The greater the value, the more precise the result, yet the slower the search speed. Refer to [Learn Milvus Operation](../guides/milvus_operation.md) for more information.
+Check the value of the `nprobe` parameter in the functions when you use an SDK to search vectors in a table. The greater the value, the more precise the result, yet the slower the search speed. Refer to [Learn Milvus Operation](https://milvus.io/docs/v0.6.0/guides/milvus_operation.md) for more information.
 
 #### Why are my new configurations not working?
 
@@ -196,7 +196,7 @@ In order to avoid this situation, you can try increasing the value of `nprobe`, 
 
 As Milvus is mainly developed under the Ubuntu environment, the recommended compilation environment is Ubuntu 18.04 or higher. If your developing environment is not Ubuntu 18.04, you can also build Milvus from source code in the docker container. We provide two docker images that provide the build environment needed for the Milvus CPU-only and GPU supported versions.
 
-To build Milvus from source in the Docker container, please refer to [Compile Milvus on Docker](https://github.com/milvus-io/milvus/blob/master/install.md#compile-milvus-on-docker).
+To build Milvus from source in the Docker container, please refer to [Compile Milvus on Docker](https://github.com/milvus-io/milvus/blob/0.6.0/install.md#compile-milvus-on-docker).
 
 #### What if I failed to pull docker images from dockerhub when installing Milvus?
 
