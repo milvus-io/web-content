@@ -34,14 +34,19 @@ sidebar_label: Milvus Configuration
 
 ### `server_config` 区域
 
+<div class="table-wrapper" markdown="block">
+
 | 参数        | 说明                                                         | 类型    | 默认值    |
 | ----------- | ------------------------------------------------------------ | ------- | --------- |
 | `address`   | Milvus server监听的IP地址。                                  | String | `0.0.0.0`  |
 | `port`      | Milvus server监听的端口号，范围：1025 - 65534。               | Integer | `19530`   |
 | `deploy_mode` | Milvus部署类型。选择 `single` ，`cluster_readonly` 或 `cluster_writable`。 | Boolean | `single`  |
 | `time_zone` | 使用 UTC-x 或 UTC+x 来指定时区。比如，您可以使用 `UTC+8` 来代表中国标准时间。 | Timezone | `UTC+8`   |
+</div>
 
 ### `db_config` 区域
+
+<div class="table-wrapper" markdown="block">
 
 | 参数                 | 说明                                                         | 类型        | 默认值          |
 | -------------------- | ------------------------------------------------------------ | ----------- | --------------- |
@@ -50,28 +55,38 @@ sidebar_label: Milvus Configuration
 | `backend_url`        | 元数据存储的 URL 。使用 SQLite（单机部署） 或 MySQL（分布式集群部署）来存储元数据。 <br/>`db_backend_url` 的格式为：`dialect://username:password@host:port/database`。（ `dialect` 可以是 `mysql` 或 `sqlite`，取决于你是用了MySQL 还是SQLite数据库。） | Path        | `sqlite://:@:/` |
 | `insert_buffer_size` | 用于 buffer 的最大内存量。`insert_buffer_size` 和`cpu_cache_capacity`（`cache_config` 区域）之和不能超过内存总量。 | Integer     | `4` (GB)        |
 | `preload_table`      | 定义在 Milvus 服务再次启动后，是否将之前已经导入并保存在磁盘的表预加载到内存。支持全部表格或者部分表格的预加载。 <br/>若要加载所有表格，使用 `*` ；若要加载部分表格，列出所有需要加载的表名，以逗号隔开。如果无需加载表格，请将该值留空 （ ` ` ）。 | PreloadType | ` `             |
+</div>
 
 ### `metric_config` 区域
+
+<div class="table-wrapper" markdown="block">
 
 | 参数                      | 说明                           | 类型    | 默认值       |
 | ------------------------- | ------------------------------ | ------- | ------------ |
 | `enable_monitor` | 设置为 `true` 以启动监控功能。 | Boolean | `true`       |
 | `collector`               | 连接的监控系统。               | String | `Prometheus`  |
 | `port`                    | 访问 Prometheus 的端口号。     | Integer | `8080`       |
+</div>
 
 ### `cache_config` 区域
+
+<div class="table-wrapper" markdown="block">
 
 | 参数                       | 说明                                                         | 类型    | 默认值    |
 | -------------------------- | ------------------------------------------------------------ | ------- | --------- |
 | `cpu_cache_capacity`       | 内存中用于驻留搜索数据的缓存空间，`cpu_cache_capacity` 和 `insert_buffer_size`（`db_config` 区域）之和不能超过内存总量。 | Integer | `16` (GB) |
 | `cache_insert_data` | 设置为 `true` ，则新插入的数据会自动加载到缓存以备搜索。<br/>如果想要实现数据即插即搜索，建议启用该功能。 | Boolean | `false`  |
+</div>
 
 ### `engine_config` 区域
+
+<div class="table-wrapper" markdown="block">
 
 | 参数                 | 说明                                                         | 类型    | 默认值 |
 | -------------------- | ------------------------------------------------------------ | ------- | ------ |
 | `use_blas_threshold` | Milvus 性能调优参数。此参数必须与 `nq` 比较以确定是否触发使用 OpenBLAS 计算库的阈值。<br/>如果 `nq` >= `use_blas_threshold` ，则使用 OpenBLAS，搜索响应时间无波动，且搜索速度尚可。如果 `nq` < `use_blas_threshold` ，搜索速度明显提升，但搜索响应时间有波动。取值范围为 >= 0. | Integer | `20`  |
 | `gpu_search_threshold` | Milvus 性能调优参数。此参数必须与 `nq` 比较以确定搜索计算是否只在 GPU 上进行。<br/>如果 `nq` >= `gpu_search_threshold` ，则搜索计算只在 GPU 上进行。如果 `nq` < `gpu_search_threshold` ，则搜索计算将在 CPU 和 GPU 上协同进行。| Integer | `1000` |
+</div>
 
 ### `gpu_resource_config` 区域
 
@@ -81,10 +96,12 @@ sidebar_label: Milvus Configuration
 
 > 注意：在 Milvus 里，**创建索引**和**搜索**是两个独立分开的过程，可以只在 `cpu`，或同时在 `cpu` 和 `gpu` 里进行。您可以指定多张 GPU 来进行该过程。
 
+<div class="table-wrapper" markdown="block">
+
 | 参数               | 说明                                                         | 类型    | 默认值     |
 | ------------------ | ------------------------------------------------------------ | ------- | ---------- |
 | `enable` | 选择是否在 Milvus 里启用 GPU 用于搜索和索引创建。 | Boolean | `true` |
 | `cache_capacity` | 显存中用于驻留搜索数据的缓存空间，该值不能超过显存总量。 | Integer | `4` (GB) |
 | `search_resources` | 定义 Milvus 里用于搜索的 GPU 资源。格式为：`gpux`。 | ResourceType        | ` gpu0` |
 | `build_index_resources` | 定义 Milvus 里用户创建索引的 GPU 资源。格式为：`gpux`。 | ResourceType | `gpu0` |
-
+</div>
