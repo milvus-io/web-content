@@ -8,7 +8,7 @@ If there's anything you'd like to change in the docs, you can click the **Edit**
 
 The articles in Milvus Blog are generated from [this markdown sources](https://github.com/milvus-io/community/tree/master/blog). 
 
-If you want to write an article intended for the Blog, please [open an issue in the website repository](https://github.com/milvus-io/community/issues/new). In most cases, you might want to share your article on your own blog or other writing medium instead. It's worth asking, though, in case we find your article is a good fit for the Blog.
+If you want to write an article intended for the Blog, please [open an issue in the community repository](https://github.com/milvus-io/community/issues/new). In most cases, you might want to share your article on your own blog or other writing medium instead. It's worth asking, though, in case we find your article is a good fit for the Blog.
 
 ### Contributing to SDK reference
 
