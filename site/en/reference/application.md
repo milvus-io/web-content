@@ -36,15 +36,15 @@ Unstructured data (images/videos/texts/audios) are transformed to feature vector
 
 ## Use case 1 - Personalized recommendation
 
-### Background
+#### Background
 
 Nowadays, when you shop or view pages online, you will often see such words as "You may also like" or "Related products". In fact, many tech companies have embedded recommendation algorithms into their mobile Apps. Some examples include the Toutiao news, NetEase news, Pinduoduo, and WeChat, etc. With Milvus, you can implement your own personalized recommendation system.
 
-### User requirements
+#### User requirements
 
 Recommend personalized content based on user persona.
 
-### Application
+#### Application
 
 Take personalized advertising content recommendation as an example, the application architecture is:
 
@@ -64,15 +64,15 @@ Take personalized advertising content recommendation as an example, the applicat
 
 ## Use case 2 - Product feature extraction and multimodal search
 
-### Background
+#### Background
 
 Online sellers need to prepare product images and tag product categories to help buyers better learn the product. As product categories grow, there will be a large sum of product images to be managed. If these product images are not well organized and utilized, it is often the case that you can't find the previously prepared image and need to retake it. 
 
-### User requirements
+#### User requirements
 
 Manage product images, and run multimodal similarity search based on keywords, for example, find out the most similar images of the most popular products.
 
-### Application 
+#### Application 
 
 Milvus helps you realize product feature extraction and multimodal search by the following procedures: 
 
@@ -87,17 +87,17 @@ Milvus helps you realize product feature extraction and multimodal search by the
 
 ## Use case 3 - Video deduplication
 
-### Background
+#### Background
 
 Today, online shopping and product trading has becoming a daily routine. On commodity trading platforms such as Taobao and Xianyu, sellers can display products to customers more fully and intuitively through product videos. Meanwhile, product video copying and plagiarism have also appeared. One solution to find a duplicate video is by vector similarity search.
 
 Take Xianyu, the second-hand commodity trading platform as an example. According to its current product size and business development trend, the vector index system needs to support billions of videos with an average length of 20 seconds, and a 1024-dimensional vector per second.
 
-### User requirements
+#### User requirements
 
 Recognize and remove duplicate videos
 
-### Application
+#### Application
 
 The core of video deduplication is high-dimensional vector index. Milvus helps you recognize duplicate videos through these steps:
 
