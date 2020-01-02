@@ -4,9 +4,7 @@ title: Index Types
 sidebar_label: Index Types
 ---
 
-# 索引类型 
-
-# 选择索引类型
+# Milvus 索引类型
 
 Milvus 支持多种索引类型。本页面主要介绍这些索引类型的定义，和影响搜索速度和召回率的主要参数，以及这些索引类型是否可以用在仅支持 CPU 和支持 GPU 的 Milvus 中。
 
