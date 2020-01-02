@@ -131,13 +131,40 @@
       "order": 1
     },
     {
+      "id": "metric.md",
+      "title": "选择距离计算方式",
+      "lang": "en",
+      "label1": "guides",
+      "label2": "",
+      "label3": "",
+      "order": 2
+    },
+    {
+      "id": "index.md",
+      "title": "选择索引类型",
+      "lang": "en",
+      "label1": "guides",
+      "label2": "",
+      "label3": "",
+      "order": 3
+    },
+    {
+      "id": "partition.md",
+      "title": "表分区",
+      "lang": "en",
+      "label1": "guides",
+      "label2": "",
+      "label3": "",
+      "order": 4
+    },
+    {
       "id": "monitor.md",
       "title": "监控与报警",
       "lang": "en",
       "label1": "guides",
       "label2": "",
       "label3": "",
-      "order": 2
+      "order": 5
     },
     {
       "id": "troubleshoot.md",
@@ -146,7 +173,7 @@
       "label1": "guides",
       "label2": "",
       "label3": "",
-      "order": 3
+      "order": 6
     },
     
     {
@@ -178,31 +205,13 @@
       "order": 1
     },
     {
-      "id": "index.md",
-      "title": "索引类型",
-      "lang": "en",
-      "label1": "reference",
-      "label2": "",
-      "label3": "",
-      "order": 2
-    },
-    {
       "id": "data_manage.md",
       "title": "数据管理",
       "lang": "en",
       "label1": "reference",
       "label2": "",
       "label3": "",
-      "order": 3
-    },
-    {
-      "id": "partition.md",
-      "title": "分区表",
-      "lang": "en",
-      "label1": "reference",
-      "label2": "",
-      "label3": "",
-      "order": 4
+      "order": 2
     },
     {
       "id": "monitoring_metrics.md",
@@ -211,7 +220,7 @@
       "label1": "reference",
       "label2": "",
       "label3": "",
-      "order": 5
+      "order": 3
     },
     {
       "id": "sdk.md",
@@ -220,7 +229,7 @@
       "label1": "reference",
       "label2": null,
       "label3": null,
-      "order": 6
+      "order": 4
     },
     {
       "id": "application.md",
@@ -228,7 +237,7 @@
       "lang": "en",
       "label1": "reference",
       "label2": "",
-      "order": 7
+      "order": 5
     },
     {
       "id": "faq",
