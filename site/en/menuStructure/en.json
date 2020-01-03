@@ -132,7 +132,7 @@
     },
     {
       "id": "metric.md",
-      "title": "Metric Types",
+      "title": "Choosing a Distance Metric",
       "lang": "en",
       "label1": "guides",
       "label2": "",
@@ -141,7 +141,7 @@
     },
     {
       "id": "index.md",
-      "title": "Index Types",
+      "title": "Milvus Indexes",
       "lang": "en",
       "label1": "guides",
       "label2": "",
