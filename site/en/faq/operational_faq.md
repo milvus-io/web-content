@@ -86,7 +86,7 @@ When the number of vectors in the dataset is less than `topk`, Milvus automatica
 
 If your CPU does not support the avx2 instruction set, Milvus cannot run properly. You can use `cat /proc/cpuinfo` to check supported instruction sets.
 
-#### Why is cpu_cache_capacity always too large for MacOS?
+#### Why is cpu\_cache\_capacity always too large for MacOS?
 
 You need to check the memory allocated to the docker engine in MacOS. If the allocated memory is not greater than `cpu_cache_capacity`, Milvus cannot start even if the memory of your host is sufficient.
 
