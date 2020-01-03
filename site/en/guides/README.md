@@ -8,7 +8,7 @@
   - [Try an Example Program](get_started/example_code.md)
 - [Learn Milvus Operations](milvus_operation.md)
 - [Selecting Metrics](metric.md)
-- [Selecting Indexes](index.md)
+- [Milvus Indexes](index.md)
 - [Table Partitioning](partition.md)
 - [Monitoring and Alerting](monitor.md)
 - [Troubleshoot](troubleshoot.md)

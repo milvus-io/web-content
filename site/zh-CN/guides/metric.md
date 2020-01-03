@@ -6,5 +6,3 @@ sidebar_label: Metric Types
 
 # 距离计算方式
 
-# 距离计算方式
-

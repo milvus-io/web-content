@@ -4,5 +4,5 @@ title: Metric Types
 sidebar_label: Metric Types
 ---
 
-# Selecting Metrics
+# Distance Metrics
 
