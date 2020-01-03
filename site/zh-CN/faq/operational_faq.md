@@ -85,7 +85,7 @@ $ docker logs <container ID>
 
 如果您的 CPU 不支持 avx2 指令集，则 Milvus 无法正常启动。您可以通过 `cat /proc/cpuinfo` 查看 CPU 支持的指令集。
 
-#### 为什么在 Mac OS 上运行 Milvus 时显示 cpu_cache_capacity 太大？
+#### 为什么在 Mac OS 上运行 Milvus 时显示 cpu\_cache\_capacity 太大？
 
 您需要检查 MacOS 为 docker engine 分配的内存值。如果分配的内存值小于或等于 `cpu_cache_capacity`，尽管您的主机内存可能足够，但 Milvus 仍然无法正常运行。
 
