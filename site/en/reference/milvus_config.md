@@ -53,7 +53,7 @@ In the directory `home/$USER/milvus/conf`, open Milvus service configuration fil
 | `primary_path`         | Primary directory used for both the vector data files you want to import, and the metadata. | Path   | `/var/lib/milvus`    |
 | `secondary_path` | A semicolon-separated list of secondary directories used only for the vector data files imported into Milvus. Set this parameter when the data size is too much to fit in the `primary_path`. <br/>Each file, whether in `primary_path` or `secondary_path`, is assigned an equal part of the imported data.  Data Size per Directory = Total Data Size / Number of Directories. So make sure the available storage space in these files are enough. | Path   |            |
 | `backend_url`         | URL for metadata storage. Use SQLite (for single server Milvus) or MySQL (for distributed cluster) to store the metadata. <br/>The format of db_backend_url is: `dialect://username:password@host:port/database`. (`dialect` can be either `mysql` or `sqlite`, depending on which database you use. | Path   | `sqlite://:@:/`       |
-| `insert_buffer_size`     | Maximum buffer size allowed for data insertion. The sum of `insert_buffer_size` and `cpu_cache_capacity` (in "Section `cache_config`" ) should be < total memory. | Integer | `4` (GB)        |
+| `insert_buffer_size`     | Maximum buffer size allowed for data insertion. The sum of `insert_buffer_size` and `cpu_cache_capacity` (in "Section `cache_config`" ) should be < total memory. | Integer | `1` (GB)        |
 | `preload_table` | Define if to preload tables into memory after Milvus server restart. Tables can be selected for fully or partially preloading.<br/>To preload all the existing tables, use `*` ; To preload some tables, list the specific table names, separated by comma. If you choose not to preload any table, keep it empty ( ` ` ). | PreloadType | ` ` |
 </div>
 
@@ -74,7 +74,7 @@ In the directory `home/$USER/milvus/conf`, open Milvus service configuration fil
 
 | Parameter            | Description                                                  | Type    | Default   |
 | -------------------- | ------------------------------------------------------------ | ------- | --------- |
-| `cpu_cache_capacity` | The size of the CPU memory for caching data for faster query. The sum of `cpu_cache_capacity` and `insert_buffer_size` (in "Section `db_config`) must be less than total CPU memory size. | Integer | `16` (GB) |
+| `cpu_cache_capacity` | The size of the CPU memory for caching data for faster query. The sum of `cpu_cache_capacity` and `insert_buffer_size` (in "Section `db_config`) must be less than total CPU memory size. | Integer | `4` (GB) |
 | `cache_insert_data`  | If set to `true` , the inserted data will be loaded into the cache immediately for hot query. <br/>If you want simultaneous inserting and searching of vector, it is recommended to enable this function. | Boolean | `false`   |
 </div>
 
@@ -101,7 +101,7 @@ To switch to CPU-only mode, just set `enable` to `false`.
 | Parameter            | Description                                                  | Type         | Default |
 | -------------------- | ------------------------------------------------------------ | ------------ | ------- |
 | `enable` | Decide if to enable GPU usage in Milvus. | Boolean | `true` |
-| `cache_capacity` | The size of the GPU memory for caching data for faster query. The size must be less than the total GPU memory size. | Integer | `4` (GB) |
+| `cache_capacity` | The size of the GPU memory for caching data for faster query. The size must be less than the total GPU memory size. | Integer | `1` (GB) |
 | `search_resources` | Define the GPU devices used for search computation in Milvus. Must be in format: `gpux`. | ResourceType | `gpu0` |
 | `build_index_resources` | Define the GPU devices used for index building in Milvus. Must be in format: `gpux`. | ResourceType | `gpu0`  |
 </div>
