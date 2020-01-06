@@ -26,13 +26,13 @@ Milvus 使用 Prometheus 作为监控和性能指标存储方案，使用 Grafan
 
 其工作流程如下图所示:
 
-![1566787785125](https://raw.githubusercontent.com/milvus-io/docs/master/assets/monitoring/monitoring.png)
+![1566787785125](https://raw.githubusercontent.com/milvus-io/docs/v0.7.0/assets/monitoring/monitoring.png)
 
 - Grafana
 
   Grafana 是一个开源的时序数据分析及可视化平台。Milvus 使用 Grafana 来展示各项性能指标：
 
-  ![prometheus.png](https://raw.githubusercontent.com/milvus-io/docs/master/assets/prometheus.png)
+  ![prometheus.png](https://raw.githubusercontent.com/milvus-io/docs/v0.7.0/assets/prometheus.png)
 
 ### 需要报警的事件
 
@@ -80,10 +80,10 @@ Milvus 会生成详细的关于系统运行状态的时序 metrics。该页面�
 
 ### 设置 Prometheus
 
-1. 下载 Milvus [Prometheus 配置文件](https://github.com/milvus-io/docs/blob/master/assets/monitoring/prometheus.yml) 。
+1. 下载 Milvus [Prometheus 配置文件](https://github.com/milvus-io/docs/blob/v0.7.0/assets/monitoring/prometheus.yml) 。
 
    ```shell
-   $ wget https://raw.githubusercontent.com/milvus-io/docs/master/assets/monitoring/prometheus.yml \ -O prometheus.yml
+   $ wget https://raw.githubusercontent.com/milvus-io/docs/v0.7.0/assets/monitoring/prometheus.yml \ -O prometheus.yml
    ```
 
    配置文件中的基本设置是：每15秒去收集一次 Milvus 生成的metrics。 
@@ -98,10 +98,10 @@ Milvus 会生成详细的关于系统运行状态的时序 metrics。该页面�
    | ---------- | ------------------------------------------------------------ |
    | 分布式集群 | 在 `job_name = 'milvus_server'` 下的 `targets` 字段，为集群中的每个节点分布添加相应的 `localhost: <http-port>` 。 |
 
-3. 下载 Milvus [报警规则文件](https://github.com/milvus-io/docs/blob/master/assets/monitoring/alert.rules.yml) 到 Prometheus 根目录。
+3. 下载 Milvus [报警规则文件](https://github.com/milvus-io/docs/blob/v0.7.0/assets/monitoring/alert.rules.yml) 到 Prometheus 根目录。
 
    ```shell
-   wget -P rules https://raw.githubusercontent.com/milvus-io/docs/master/assets/monitoring/alert.rules.yml
+   wget -P rules https://raw.githubusercontent.com/milvus-io/docs/v0.7.0/assets/monitoring/alert.rules.yml
    ```
 
 ### 启动 Prometheus
@@ -135,10 +135,10 @@ Milvus 会生成详细的关于系统运行状态的时序 metrics。该页面�
    | URL     | `http://<hostname of machine running prometheus>:9090` |
    | Access  | Browser                                                |
 
-5. 下载 [Grafana 配置文件](https://github.com/milvus-io/docs/blob/master/assets/monitoring/dashboard.json) :
+5. 下载 [Grafana 配置文件](https://github.com/milvus-io/docs/blob/v0.7.0/assets/monitoring/dashboard.json) :
 
    ```shell
-   $ wget https://raw.githubusercontent.com/milvus-io/docs/master/assets/monitoring/dashboard.json
+   $ wget https://raw.githubusercontent.com/milvus-io/docs/v0.7.0/assets/monitoring/dashboard.json
    ```
 
 6. [将配置文件导入 Grafana](http://docs.grafana.org/reference/export_import/#importing-a-dashboard).
