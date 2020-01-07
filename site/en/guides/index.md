@@ -86,10 +86,4 @@ Compared to `NSG` which searches query vectors one by one, `RNSG` supports concu
 
 To choose an appropriate index for your application scenarios, please read [How to select an index in Milvus](https://medium.com/@milvusio/how-to-choose-an-index-in-milvus-4f3d15259212).
 
-## Known issues
-
-#### `IVF_SQ8H`
-
-When using `IVF_SQ8H` index, the concurrent execution of index building and querying on the GPU may lead to server down. 
-
 
