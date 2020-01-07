@@ -34,12 +34,12 @@ The following concepts are provided to help you better understand Milvus index t
 
 | Type                                               | Class name | Affecting parameters                          | CPU-only Milvus  | GPU-enabled Milvus |
 | -------------------------------------------------- | ---------- | --------------------------------------------- | ---------------- | ------------------ |
-| Exact search                                       | `FLAT`     | nq                                            | ✔️               | ✔️                  |
-| Inverted file with exact post-verification         | `IVFLAT`   | nq, `nprobe`, `gpu_search_threshold`          | ✔️               | ✔️                  |
-| IVF and scalar quantizer                           | `IVF_SQ8`  | nq, `nprobe`, `nlist`, `gpu_search_threshold`  | ✔️               | ✔️                  |
-| IVFSQ8 hybrid search on both CPU and GPU           | `IVF_SQ8H` | nq, `nprobe`, `nlist`, `gpu_search_threshold` | ❌               | ✔️                  |
-| Inverted file with product quantization refinement | `IVF_PQ`   | nq, `nprobe`, `nlist`                         | ✔️               | ❌                  |
-| Refined Navigating Spreading-out Graph             | `RNSG`     | nq                                            | ✔️               | ✔️                  |
+| Exact search                                       | `FLAT`     | `top_k`, nq                                   | ✔️               | ✔️                  |
+| Inverted file with exact post-verification         | `IVFLAT`   | `top_k`, nq, `nprobe`, `gpu_search_threshold` | ✔️               | ✔️                  |
+| IVF and scalar quantizer                           | `IVF_SQ8`  | `top_k`, nq, `nprobe`, `nlist`, `gpu_search_threshold`  | ✔️               | ✔️                  |
+| IVFSQ8 hybrid search on both CPU and GPU           | `IVF_SQ8H` | `top_k`, nq, `nprobe`, `nlist`, `gpu_search_threshold`  | ❌               | ✔️                  |
+| Inverted file with product quantization refinement | `IVF_PQ`   | `top_k`, nq, `nprobe`, `nlist`                          | ✔️               | ❌                  |
+| Refined Navigating Spreading-out Graph             | `RNSG`     | `top_k`, nq                                             | ✔️               | ✔️                  |
 </div>
 
 To choose an appropriate index for your application scenarios, please read [How to select an index in Milvus](https://medium.com/@milvusio/how-to-choose-an-index-in-milvus-4f3d15259212).
