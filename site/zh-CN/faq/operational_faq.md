@@ -100,7 +100,7 @@ Milvus 在运行过程中，能够实现多进程操作，但在实现时需满�
 - 程序执行时主进程中没有创建 client
 - 每个子进程分别创建 client 进行操作
 
-以下为正确实现多进程的示例。当表名为 TABLE_NAME，且已插入 `vector_1` 的表存在时，直接在主程序中直接调用该函数，两个 insert 进程和一个 search 进程同时执行，且能获得正确结果。其中需注意的是，search 的结果与当前正在 insert 的向量无关。
+以下为正确实现多进程的示例。当表名为 `TABLE_NAME`，且已插入 `vector_1` 的表存在时，直接在主程序中直接调用该函数，两个 insert 进程和一个 search 进程同时执行，且能获得正确结果。其中需注意的是，search 的结果与当前正在 insert 的向量无关。
 
 ```python
 def test_add_vector_search_multiprocessing():

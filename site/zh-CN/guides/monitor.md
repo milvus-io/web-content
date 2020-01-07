@@ -18,11 +18,12 @@ Milvus 使用 Prometheus 作为监控和性能指标存储方案，使用 Grafan
 
   Prometheus 是一个拥有多维度数据模型、灵活的查询语句的监控报警系统。
 
-  Prometheus 提供多个组件供用户使用。目前，Milvus使用了以下组件：
+  Prometheus 提供多个组件供用户使用。目前，Milvus 使用了以下组件：
 
   - Prometheus Server：用于收集和存储时间序列数据。
   - Client 代码库：用于定制程序中需要的 metric。
   - Alertmanager：用于实现报警机制。
+  - Pushgateway：使生命周期短、批量的 metric 能够被 Prometheus 提取。这些 metric 本身是难以及时提取的。
 
 其工作流程如下图所示:
 
@@ -40,10 +41,10 @@ Milvus 使用 Prometheus 作为监控和性能指标存储方案，使用 Grafan
 
 以下主要介绍需要创建报警规则的事件。
 
-**服务器挂掉**
+**服务器宕机**
 
-- 报警规则：当 Milvus 服务器挂掉时发送报警信息。
-- 如何判断：当 Milvus 服务器挂掉时，监控仪表盘上各个指标会显示 **No Data**。
+- 报警规则：当 Milvus 服务器宕机时发送报警信息。
+- 如何判断：当 Milvus 服务器宕机时，监控仪表盘上各个指标会显示 **No Data**。
 
 **CPU/GPU 温度过高**
 
@@ -57,7 +58,7 @@ Milvus 会生成详细的关于系统运行状态的时序 metrics。该页面�
 ### 前提条件
 
 - 请确保您已经启动了 Milvus 服务。
-- 请确保您已经启用了监控功能。
+- 请确保您已经启用了 Milvus 的监控功能。
 
 ### 安装 Prometheus
 
@@ -69,14 +70,7 @@ Milvus 会生成详细的关于系统运行状态的时序 metrics。该页面�
    $ prometheus --version
    ```
 
-   ```shell
-   prometheus, version 2.11.1 (branch: HEAD, revision: e5b22494857deca4b806f74f6e3a6ee30c251763)
-     build user:       root@d94406f2bb6f
-     build date:       20190710-13:51:17
-     go version:       go1.12.7
-   ```
-
-> 建议：您可以提取 Prometheus binary 并添加到 `PATH` ，以便在任意 Shell 上都能快速启动 Prometheus。
+   > 建议：您可以提取 Prometheus binary 并添加到 `PATH` ，以便在任意 Shell 上都能快速启动 Prometheus。
 
 ### 设置 Prometheus
 
@@ -86,17 +80,9 @@ Milvus 会生成详细的关于系统运行状态的时序 metrics。该页面�
    $ wget https://raw.githubusercontent.com/milvus-io/docs/v0.7.0/assets/monitoring/prometheus.yml \ -O prometheus.yml
    ```
 
-   配置文件中的基本设置是：每15秒去收集一次 Milvus 生成的metrics。 
+2. 根据您的需求编辑配置文件。参考 [https://prometheus.io/docs/prometheus/latest/configuration/configuration/](https://prometheus.io/docs/prometheus/latest/configuration/configuration/) 了解更多关于 Prometheus 配置文件的信息。
 
-   - `scrape_interval: 15s` 定义收集 metrics 的时间间隔。
-   - `metrics_path: '/metrics'` 定义生成时序 metrics 的 Milvus 端口。
-   - `targets: ['localhost:9090']` 定义 需要收集 metrics 的 Milvus 的主机名和端口。
-
-2. 根据您的具体场景需求编辑配置文件：
-
-   | 场景       | 配置文件更改                                                 |
-   | ---------- | ------------------------------------------------------------ |
-   | 分布式集群 | 在 `job_name = 'milvus_server'` 下的 `targets` 字段，为集群中的每个节点分布添加相应的 `localhost: <http-port>` 。 |
+   > 注意：如果您使用了分布式集群，则需要在 `job_name = 'milvus_server'` 下的 `targets` 字段，为集群中的每个节点分布添加相应的 `localhost: <http-port>` 。
 
 3. 下载 Milvus [报警规则文件](https://github.com/milvus-io/docs/blob/v0.7.0/assets/monitoring/alert.rules.yml) 到 Prometheus 根目录。
 
@@ -113,6 +99,10 @@ Milvus 会生成详细的关于系统运行状态的时序 metrics。该页面�
    ```
 
 2. 将浏览器指向 `http://<hostname of machine running prometheus>:9090` ，进入 Prometheus 用户交互页面。
+
+### 安装并启动 Pushgateway
+
+参考 [https://github.com/prometheus/pushgateway](https://github.com/prometheus/pushgateway) 了解如何下载和启动 Pushgateway。
 
 ### 使用 Grafana 实现 metrics 可视化展示
 
@@ -155,14 +145,7 @@ Milvus 会生成详细的关于系统运行状态的时序 metrics。该页面�
    $ alertmanager --version
    ```
 
-   ```shell
-   alertmanager, version 0.18.0 (branch: HEAD, revision: 1ace0f76b7101cccc149d7298022df36039858ca)
-     build user:       root@868685ed3ed0
-     build date:       20190708-14:31:49
-     go version:       go1.12.6
-   ```
-
-> 建议：您可以提取 Alertmanager binary 并添加到 `PATH` ，以便在任意 Shell 上都能快速启动 Alertmanager。
+   > 建议：您可以提取 Alertmanager binary 并添加到 `PATH` ，以便在任意 Shell 上都能快速启动 Alertmanager。
 
 3. 创建 [Alertmanager 配置文件](https://prometheus.io/docs/alerting/configuration/) 来指定接受报警通知的邮箱/微信账户，并将配置文件添加到 Alertmanager 根目录下。
 
