@@ -32,14 +32,14 @@ The following concepts are provided to help you better understand Milvus index t
 
 <div class="table-wrapper" markdown="block">
 
-| Type                                               | Class name | Affecting parameters                          | CPU-only Milvus | GPU-enabled Milvus |
-| -------------------------------------------------- | ---------- | --------------------------------------------- | --------------- | ------------------ |
+| Type                                               | Class name | Affecting parameters                          | CPU-only Milvus  | GPU-enabled Milvus |
+| -------------------------------------------------- | ---------- | --------------------------------------------- | ---------------- | ------------------ |
 | Exact search                                       | `FLAT`     | nq                                            | ✔️               | ✔️                  |
-| Inverted file with exact post-verification         | `IVFLAT`   | nq, `nprobe`                                  | ✔️               | ✔️                  |
-| IVF and scalar quantizer                           | `IVF_SQ8`  | nq, `nprobe`, `nlist`                         | ✔️               | ✔️                  |
-| IVFSQ8 hybrid search on both CPU and GPU           | `IVF_SQ8H` | nq, `nprobe`, `gpu_search_threshold`, `nlist` | ❌               | ✔️                  |
-| Inverted file with product quantization refinement | `IVF_PQ`   | nq, `nprobe`, `nlist`                         | ✔️               | ✔️                  |
-| Refined Navigating Spreading-out Graph             | `RNSG`     | nq, `nprobe`, `nlist`                         | ✔️               | ✔️                  |
+| Inverted file with exact post-verification         | `IVFLAT`   | nq, `nprobe`, `gpu_search_threshold`          | ✔️               | ✔️                  |
+| IVF and scalar quantizer                           | `IVF_SQ8`  | nq, `nprobe`, `nlist`, `gpu_search_threshold`  | ✔️               | ✔️                  |
+| IVFSQ8 hybrid search on both CPU and GPU           | `IVF_SQ8H` | nq, `nprobe`, `nlist`, `gpu_search_threshold` | ❌               | ✔️                  |
+| Inverted file with product quantization refinement | `IVF_PQ`   | nq, `nprobe`, `nlist`                         | ✔️               | ❌                  |
+| Refined Navigating Spreading-out Graph             | `RNSG`     | nq                                            | ✔️               | ✔️                  |
 </div>
 
 To choose an appropriate index for your application scenarios, please read [How to select an index in Milvus](https://medium.com/@milvusio/how-to-choose-an-index-in-milvus-4f3d15259212).
