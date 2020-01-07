@@ -10,7 +10,7 @@ sidebar_label: Operational FAQ
 
 原因可能有多种，但最可能的是环境因素，比如版本不匹配或者依赖关系缺失等。请参考 [从源码安装 Milvus](https://github.com/milvus-io/milvus/blob/0.6.0/install.md) 获取详细信息。
 
-建议您使用带有 Milvus 编译环境的 docker 镜像进行源码编译。关于详细流程请参考 [在 Docker 容器中编译运行 Milvus](https://milvus.io/blog/2019/11/25/docker-compilation/)。
+建议您使用带有 Milvus 编译环境的 docker 镜像进行源码编译。关于详细流程请参考 [在 Docker 容器中编译运行 Milvus](https://www.milvus.io/cn/blogs/2019-11-25-docker-compilation.md)。
 
 #### Milvus 支持对向量的插入、删除、更改和查询操作吗？
 
@@ -85,9 +85,9 @@ $ docker logs <container ID>
 
 如果您的 CPU 不支持 avx2 指令集，则 Milvus 无法正常启动。您可以通过 `cat /proc/cpuinfo` 查看 CPU 支持的指令集。
 
-#### 为什么在 Mac OS 上运行 Milvus 时显示 cpu\_cache\_capacity 太大？
+#### 为什么在 Mac OS 或者 Windows 上运行 Milvus 时显示 `cpu_cache_capacity` 太大？
 
-您需要检查 MacOS 为 docker engine 分配的内存值。如果分配的内存值小于或等于 `cpu_cache_capacity`，尽管您的主机内存可能足够，但 Milvus 仍然无法正常运行。
+您需要检查 MacOS 或者 Windows 为 docker engine 分配的内存值。如果分配的内存值小于或等于 `cpu_cache_capacity`，尽管您的主机内存可能足够，但 Milvus 仍然无法正常运行。
 
 #### 为什么我的日志文件时间与系统时间不一致？
 
@@ -100,7 +100,7 @@ Milvus 在运行过程中，能够实现多进程操作，但在实现时需满�
 - 程序执行时主进程中没有创建 client
 - 每个子进程分别创建 client 进行操作
 
-以下为正确实现多进程的示例。当表名为 TABLE_NAME，且已插入 vector_1 的表存在时，直接在主程序中直接调用该函数，两个 insert 进程和一个 search 进程同时执行，且能获得正确结果。其中需注意的是，search 的结果与当前正在 insert 的向量无关。
+以下为正确实现多进程的示例。当表名为 `TABLE_NAME`，且已插入 `vector_1` 的表存在时，直接在主程序中直接调用该函数，两个 insert 进程和一个 search 进程同时执行，且能获得正确结果。其中需注意的是，search 的结果与当前正在 insert 的向量无关。
 
 ```python
 def test_add_vector_search_multiprocessing():
