@@ -83,10 +83,10 @@ Milvus generates detailed time series metrics. This page shows you how to pull t
 
    > Note: If you use distributed cluster, you must expand the `targets` field to include `localhost: <http-port>` for each additional node in the cluster.
 
-3. Download starter [alerting rules](https://github.com/milvus-io/docs/blob/v0.7.0/assets/monitoring/alert.rules.yml) for Milvus to the Prometheus root directory.
+3. Download starter [alerting rules](https://github.com/milvus-io/docs/blob/v0.7.0/assets/monitoring/alert_rules.yml) for Milvus to the Prometheus root directory.
 
    ```shell
-   wget -P rules https://raw.githubusercontent.com/milvus-io/docs/v0.7.0/assets/monitoring/alert.rules.yml
+   wget -P rules https://raw.githubusercontent.com/milvus-io/docs/v0.7.0/assets/monitoring/alert_rules.yml
    ```
 
 ### Start Prometheus

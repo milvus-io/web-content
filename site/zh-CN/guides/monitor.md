@@ -84,10 +84,10 @@ Milvus 会生成详细的关于系统运行状态的时序 metrics。该页面�
 
    > 注意：如果您使用了分布式集群，则需要在 `job_name = 'milvus_server'` 下的 `targets` 字段，为集群中的每个节点分布添加相应的 `localhost: <http-port>` 。
 
-3. 下载 Milvus [报警规则文件](https://github.com/milvus-io/docs/blob/v0.7.0/assets/monitoring/alert.rules.yml) 到 Prometheus 根目录。
+3. 下载 Milvus [报警规则文件](https://github.com/milvus-io/docs/blob/v0.7.0/assets/monitoring/alert_rules.yml) 到 Prometheus 根目录。
 
    ```shell
-   wget -P rules https://raw.githubusercontent.com/milvus-io/docs/v0.7.0/assets/monitoring/alert.rules.yml
+   wget -P rules https://raw.githubusercontent.com/milvus-io/docs/v0.7.0/assets/monitoring/alert_rules.yml
    ```
 
 ### 启动 Prometheus
