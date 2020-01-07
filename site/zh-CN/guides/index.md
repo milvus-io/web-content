@@ -21,14 +21,14 @@ Milvus 支持多种索引类型。本页面主要介绍这些索引类型的定�
 
 <div class="table-wrapper" markdown="block">
 
-| 类型                      | Class name | 主要影响参数                                  | 仅支持 CPU 的 Milvus | 支持GPU的Milvus |
+| 类型                      | Class name | 性能影响参数                                  | 仅支持 CPU 的 Milvus | 支持GPU的Milvus |
 | ------------------------- | ---------- | --------------------------------------------- | -------------------- | --------------- |
-| 精确搜索                  | `FLAT`     | nq                                            | ✔️                    | ✔️               |
-| 倒排索引                  | `IVFLAT`   | nq, `nprobe`                                  | ✔️                    | ✔️               |
-| 倒排+标准量化索引         | `IVF_SQ8`  | nq, `nprobe`, `nlist`                         | ✔️                    | ✔️               |
-| 倒排+标准量化索引混合模式 | `IVF_SQ8H` | nq, `nprobe`, `nlist`, `gpu_search_threshold` | ❌                    | ✔️               |
-| 倒排+乘积量化索引         | `IVF_PQ`   | nq, `nprobe`, `nlist`                         | ✔️                    | ✔️               |
-| NSG加强版                 | `RNSG`     | nq, `nprobe`, `nlist`                         | ✔️                    | ✔️               |
+| 精确搜索                  | `FLAT`     | `top_k`, nq                                    | ✔️                    | ✔️               |
+| 倒排索引                  | `IVFLAT`   | `top_k`, nq, `nprobe`, `gpu_search_threshold`          | ✔️            | ✔️               |
+| 倒排+标准量化索引         | `IVF_SQ8`  | `top_k`, nq, `nprobe`, `nlist`, `gpu_search_threshold`  | ✔️            | ✔️               |
+| 倒排+标准量化索引混合模式 | `IVF_SQ8H` | `top_k`, nq, `nprobe`, `nlist`, `gpu_search_threshold`  | ❌             | ✔️               |
+| 倒排+乘积量化索引         | `IVF_PQ`   | `top_k`, nq, `nprobe`, `nlist`                         | ✔️             | ❌               |
+| NSG 加强版                 | `RNSG`     | `top_k`, nq                                           | ✔️            | ✔️               |
 </div>
 
 ## Milvus 索引
