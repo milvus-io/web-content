@@ -19,7 +19,7 @@ Docker is the easiest and recommended way to install and run Milvus.
 
 ## Build from Source
 
-[Build Milvus from source](https://github.com/milvus-io/milvus/blob/master/install.md) and install it on Ubuntu Linux. While the instructions might work for other systems, it is only tested and supported for Ubuntu 18.04 or higher. 
+[Build Milvus from source](https://github.com/milvus-io/milvus/blob/master/INSTALL.md) and install it on Ubuntu Linux. While the instructions might work for other systems, it is only tested and supported for Ubuntu 18.04 or higher. 
 
 ## What's next
 
