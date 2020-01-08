@@ -53,7 +53,7 @@ $ docker pull milvusdb/milvus:0.6.0-cpu-d120719-2b40dd
 ```shell
 # Create Milvus file
 $ mkdir -p /home/$USER/milvus/conf
-$ cd home/$USER/milvus/conf
+$ cd /home/$USER/milvus/conf
 $ wget https://raw.githubusercontent.com/milvus-io/docs/blob/v0.6.0/assets/server_config.yaml
 $ wget https://raw.githubusercontent.com/milvus-io/docs/blob/v0.6.0/assets/config/log_config.conf
 ```

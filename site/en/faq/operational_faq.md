@@ -86,13 +86,13 @@ When the number of vectors in the dataset is less than `topk`, Milvus automatica
 
 If your CPU does not support the avx2 instruction set, Milvus cannot run properly. You can use `cat /proc/cpuinfo` to check supported instruction sets.
 
-#### Why is cpu_cache_capacity always too large for MacOS?
+#### Why is `cpu_cache_capacity` always too large for MacOS or Windows?
 
-You need to check the memory allocated to the docker engine in MacOS. If the allocated memory is not greater than `cpu_cache_capacity`, Milvus cannot start even if the memory of your host is sufficient.
+You need to check the memory allocated to the docker engine in MacOS or Windows. If the allocated memory is not greater than `cpu_cache_capacity`, Milvus cannot start even if the memory of your host is sufficient.
 
 #### Why is the time in my log files different from the system time?
 
-The log files in the docker container use UTC timnezone by default. If the timezone of your host is not UTC, the time might be different between the docker container and the host. It is recommended that you check the log files mapped to your host so that the timezone is consistent.
+The log files in the docker container use UTC timezone by default. If the timezone of your host is not UTC, the time might be different between the docker container and the host. It is recommended that you check the log files mapped to your host so that the timezone is consistent.
 
 #### Why does my multiprocessing program fail? 
 
