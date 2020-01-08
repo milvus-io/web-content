@@ -18,7 +18,7 @@ Milvus 中的向量搜索包含但不限于这两个独立的部分：创建索�
 
 ## 从源代码编译
 
-[从源代码编译 Milvus](https://github.com/milvus-io/milvus/blob/master/INSTALL.md) 并将其安装在 Ubuntu 上。尽管这些说明可能适用于其它系统，但我们仅针对 Ubuntu 18.04版本进行了测试。
+[从源代码编译 Milvus](https://github.com/milvus-io/milvus/blob/0.6.0/install.md) 并将其安装在 Ubuntu 上。尽管这些说明可能适用于其它系统，但我们仅针对 Ubuntu 18.04版本进行了测试。
 
 ## 接下来您可以
 
