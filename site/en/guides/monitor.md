@@ -23,16 +23,17 @@ Milvus uses Prometheus to store and monitor its metrics, and it uses Grafana for
   - Prometheus server which scrapes and stores time series data.
   - Client libraries for instrumenting application metrics.
   - Alertmanager for alert handling.
+  - Pushgateway to allow short-lived, batch metrics, which may not be scraped in time, to be exposed to Prometheus.
 
 The following graph shows how Prometheus works in Milvus:
 
-![prometheus](https://raw.githubusercontent.com/milvus-io/docs/master/assets/monitoring/monitoring.png)
+![prometheus](https://raw.githubusercontent.com/milvus-io/docs/v0.7.0/assets/monitoring/monitoring.png)
 
 - Grafana
 
   Grafana is an open source platform for time-series analytics and used in Milvus to visualize various performance metrics:
 
-  ![dashboard](https://raw.githubusercontent.com/milvus-io/docs/master/assets/prometheus.png)
+  ![dashboard](https://raw.githubusercontent.com/milvus-io/docs/v0.7.0/assets/prometheus.png)
 
 ### Events to create alert rules
 
@@ -67,40 +68,25 @@ Milvus generates detailed time series metrics. This page shows you how to pull t
    ```shell
    $ ./prometheus --version
    ```
+   > Tip: You can extract the Prometheus binary and add it to your `PATH`. This makes it easy to start Prometheus from any Shell.
 
-   ```shell
-   prometheus, version 2.11.1 (branch: HEAD, revision: e5b22494857deca4b806f74f6e3a6ee30c251763)
-     build user:       root@d94406f2bb6f
-     build date:       20190710-13:51:17
-     go version:       go1.12.7
-   ```
-
-> Tip: You can extract the Prometheus binary and add it to your `PATH`. This makes it easy to start Prometheus from any Shell.
 
 ### Configure Prometheus
 
-1. Go to the Prometheus root directory, and download starter [Prometheus configuration file](https://github.com/milvus-io/docs/blob/master/assets/monitoring/prometheus.yml) for Milvus.
+1. Go to the Prometheus root directory, and download starter [Prometheus configuration file](https://github.com/milvus-io/docs/blob/v0.7.0/assets/monitoring/prometheus.yml) for Milvus.
 
    ```shell
-   $ wget https://raw.githubusercontent.com/milvus-io/docs/master/assets/monitoring/prometheus.yml \ -O prometheus.yml
+   $ wget https://raw.githubusercontent.com/milvus-io/docs/v0.7.0/assets/monitoring/prometheus.yml \ -O prometheus.yml
    ```
 
-   When you examine the configuration file, you'll see that it is set up to scrape the metrics of a single-server Milvus every 15 seconds:
+2. Configure the file to suit your requirements. Refer to [https://prometheus.io/docs/prometheus/latest/configuration/configuration/](https://prometheus.io/docs/prometheus/latest/configuration/configuration/) to learn more about the configuration file for Prometheus.
 
-   - `scrape_interval: 15s` defines the scrape interval.
-   - `metrics_path: '/metrics'` defines the Milvus endpoint for scraping time series metrics.
-   - `targets: ['localhost:9090']` specifies the hostname and port of the single-server Milvus to collect metrics on.
+   > Note: If you use distributed cluster, you must expand the `targets` field to include `localhost: <http-port>` for each additional node in the cluster.
 
-2. Configure the file to suit your deployment scenario:
-
-   | Scenario            | Config Change                                                |
-   | ------------------- | ------------------------------------------------------------ |
-   | Distributed cluster | Expand the `targets` field to include `localhost: <http-port>` for each additional node in the cluster. |
-
-3. Download starter [alerting rules](https://github.com/milvus-io/docs/blob/master/assets/monitoring/alert.rules.yml) for Milvus to the Prometheus root directory.
+3. Download starter [alerting rules](https://github.com/milvus-io/docs/blob/v0.7.0/assets/monitoring/alert_rules.yml) for Milvus to the Prometheus root directory.
 
    ```shell
-   wget -P rules https://raw.githubusercontent.com/milvus-io/docs/master/assets/monitoring/alert.rules.yml
+   wget -P rules https://raw.githubusercontent.com/milvus-io/docs/v0.7.0/assets/monitoring/alert_rules.yml
    ```
 
 ### Start Prometheus
@@ -112,6 +98,10 @@ Milvus generates detailed time series metrics. This page shows you how to pull t
    ```
 
 2. Point your browser to `http://<hostname of machine running prometheus>:9090`, where you can use the Prometheus UI to query, aggregate, and graph Milvus time series metrics.
+
+### Install and start Pushgateway
+
+Refer to [https://github.com/prometheus/pushgateway](https://github.com/prometheus/pushgateway) to learn how to install and start Pushgateway.
 
 ### Visualize metrics in Grafana
 
@@ -134,10 +124,10 @@ Milvus generates detailed time series metrics. This page shows you how to pull t
    | URL     | `http://<hostname of machine running prometheus>:9090` |
    | Access  | Browser                                                |
 
-5. Download the starter [Grafana dashboard](https://github.com/milvus-io/docs/blob/master/assets/monitoring/dashboard.json) for Milvus:
+5. Download the starter [Grafana dashboard](https://github.com/milvus-io/docs/blob/v0.7.0/assets/monitoring/dashboard.json) for Milvus:
 
    ```shell
-   $ wget https://raw.githubusercontent.com/milvus-io/docs/master/assets/monitoring/dashboard.json
+   $ wget https://raw.githubusercontent.com/milvus-io/docs/v0.7.0/assets/monitoring/dashboard.json
    ```
 
 6. [Add the dashboard to Grafana](http://docs.grafana.org/reference/export_import/#importing-a-dashboard).
@@ -154,14 +144,7 @@ In Configure Prometheus, you have already downloaded the starter alerting rules 
    $ alertmanager --version
    ```
 
-   ```shell
-   alertmanager, version 0.18.0 (branch: HEAD, revision: 1ace0f76b7101cccc149d7298022df36039858ca)
-     build user:       root@868685ed3ed0
-     build date:       20190708-14:31:49
-     go version:       go1.12.6
-   ```
-
-> Tip: You can extract the binary and add it to your `PATH`. This makes it easy to start Alertmanager from any shell.
+   > Tip: You can extract the binary and add it to your `PATH`. This makes it easy to start Alertmanager from any shell.
 
 3. Create the [Alertmanager configuration file](https://prometheus.io/docs/alerting/configuration/) to specify the desired receivers for notifications, and add it to Alertmanager root directory.
 

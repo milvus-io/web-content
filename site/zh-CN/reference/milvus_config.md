@@ -26,7 +26,7 @@ sidebar_label: Milvus Configuration
 
 > 注意：如果修改了配置文件，您必须重启 Milvus 服务来启用新的更改。
 >
-> ```
+> ```shell
 > $ docker restart <container id>
 > ```
 
@@ -63,8 +63,9 @@ sidebar_label: Milvus Configuration
 
 | 参数                      | 说明                           | 类型    | 默认值       |
 | ------------------------- | ------------------------------ | ------- | ------------ |
-| `enable_monitor` | 设置为 `true` 以启动监控功能。 | Boolean | `true`       |
+| `enable_monitor` | 设置为 `true` 以启动监控功能。 | Boolean | `false`       |
 | `collector`               | 连接的监控系统。               | String | `Prometheus`  |
+|  `address`                | Pushgateway 的 IP 地址。       |   IP     |   127.0.0.1    |
 | `port`                    | 访问 Prometheus 的端口号。     | Integer | `8080`       |
 </div>
 

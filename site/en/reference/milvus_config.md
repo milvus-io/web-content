@@ -63,8 +63,9 @@ In the directory `home/$USER/milvus/conf`, open Milvus service configuration fil
 
 | Parameter        | Description                                      | Type    | Default      |
 | ---------------- | ------------------------------------------------ | ------- | ------------ |
-| `enable_monitor` | Set to `true` to enable the monitoring function. | Boolean | `true`       |
+| `enable_monitor` | Set to `true` to enable the monitoring function. | Boolean | `false`       |
 | `collector`      | Connected monitoring system to collect metrics.  | String  | `Prometheus` |
+|  `address`        | IP address of the Pushgateway.      |   IP     |   127.0.0.1    |
 | `port`           | Port to visit Prometheus.                        | Integer | `8080`       |
 </div>
 
