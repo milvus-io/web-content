@@ -12,6 +12,8 @@ Milvus supports multiple types of indexes to suit various scenarios. The page in
 
 The following concepts are provided to help you better understand Milvus index types and what parameters affect their performance.
 
+- `top_k`: top k vectors with the highest similarity compared to the query vectors.
+
 - nq: number of queried vectors.
 
 - `nlist`: total number of buckets generated. The feature space is partitioned into `nlist` buckets. 
