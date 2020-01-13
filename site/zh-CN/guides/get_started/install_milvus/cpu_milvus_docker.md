@@ -10,10 +10,11 @@ sidebar_label: Install CPU-only Milvus on Docker
 
 #### 系统要求
 
-| 操作系统   | 版本         |
-| ---------- | ------------ |
-| CentOS     | 7.5 或以上   |
-| Ubuntu LTS | 18.04 或以上 |
+| 操作系统   | 版本                                                         |
+| ---------- | ------------------------------------------------------------ |
+| CentOS     | 7.5 或以上                                                   |
+| Ubuntu LTS | 18.04 或以上                                                 |
+| Windows    | Windows 10 64-bit：Pro，Enterprise，或 Education版（Build 15063 或以上） |
 
 #### 硬件要求
 
@@ -25,9 +26,12 @@ sidebar_label: Install CPU-only Milvus on Docker
 
 #### Milvus Docker 要求
 
-在您的宿主机上[安装 Docker](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/) 19.03或更高版本。
+- 如果使用 Ubuntu 或 CentOS 安装 Milvus，请在您的宿主机上 [安装 Docker](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/) 19.03或更高版本。
+- 如果在 Windows 上安装 Milvus，请安装 [Docker Desktop](https://docs.docker.com/docker-for-windows/install/)，并进入 **Settings -> Advanced** 调整相关配置。请确保‘可用内存’大于您在 `server_config` 文件中设置的`insert_buffer_size` 和 `cpu_cache_capacity` 之和。
 
-## 第一步 确认 Docker 状态
+## 在 Ubuntu/CentOS 上安装 Milvus
+
+### 第一步 确认 Docker 状态
 
 确认 Docker daemon 正在运行：
 
@@ -39,7 +43,7 @@ $ docker info
 
 > 提示：在 Linux 上，Docker 命令前面需加 `sudo`。若要在没有 `sudo` 情况下运行 Docker 命令，请创建 `docker` 组并添加用户。更多详情，请参阅 [Linux 安装后步骤](https://docs.docker.com/install/linux/linux-postinstall/)。
 
-## 第二步 拉取 Milvus 镜像
+### 第二步 拉取 Milvus 镜像
 
 拉取仅需 CPU 的镜像：
 
@@ -47,7 +51,7 @@ $ docker info
 $ docker pull milvusdb/milvus:0.6.0-cpu-d120719-2b40dd
 ```
 
-## 第三步 下载配置文件
+### 第三步 下载配置文件
 
 ```
 # Create Milvus file
@@ -57,7 +61,7 @@ $ wget https://raw.githubusercontent.com/milvus-io/docs/blob/v0.6.0/assets/serve
 $ wget https://raw.githubusercontent.com/milvus-io/docs/blob/v0.6.0/assets/config/log_config.conf
 ```
 
-## 第四步 启动 Milvus Docker 容器
+### 第四步 启动 Milvus Docker 容器
 
 ```shell
 # Start Milvus
@@ -92,6 +96,12 @@ $ docker ps -a
 # Check docker logs
 $ docker logs <milvus container id>
 ```
+
+## 在 Windows 上安装 Milvus
+
+在 Windows 上安装 Milvus 的步骤和在 Ubuntu/CentOS 上几乎一样，只不过 **第三步 下载配置文件** 略有不同。
+
+不同于使用 `wget` 来获取配置文件，使用 Windows 安装时，建议在 `/home/$USER/milvus` 路径下，或其它合适的位置创建 `db`，`conf` 和 `logs` 三个文件夹，然后分别复制 [server config 文件](https://github.com/milvus-io/milvus/blob/0.7.0/core/conf/demo/server_config.yaml) 和 [log config 文件](https://github.com/milvus-io/milvus/blob/0.7.0/core/conf/demo/log_config.conf)的内容到您在  `/home/$USER/milvus/conf` 路径下创建的`server_config.yaml` 和 `log_config.conf` 文件中。
 
 ## 接下来您可以
 
