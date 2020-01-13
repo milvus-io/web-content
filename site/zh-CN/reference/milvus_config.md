@@ -10,7 +10,7 @@ sidebar_label: Milvus Configuration
 
 以下配置说明主要包括是否需要启用监控功能，以及启用一些高级功能以进行性能调优。
 
-### Milvus 文件结构
+#### Milvus 文件结构
 
 成功启动 Milvus 服务后，你可以在 `home/$USER/milvus` 的路径下看到 Milvus 的文件夹。其中包含以下文件：
 
@@ -32,7 +32,7 @@ sidebar_label: Milvus Configuration
 
 进入路径 `home/$USER/milvus/conf`，打开Milvus服务设置文件 `server_config.yaml` 。
 
-### `server_config` 区域
+#### `server_config` 区域
 
 <div class="table-wrapper" markdown="block">
 
@@ -44,7 +44,7 @@ sidebar_label: Milvus Configuration
 | `time_zone` | 使用 UTC-x 或 UTC+x 来指定时区。比如，您可以使用 `UTC+8` 来代表中国标准时间。 | Timezone | `UTC+8`   |
 </div>
 
-### `db_config` 区域
+#### `db_config` 区域
 
 <div class="table-wrapper" markdown="block">
 
@@ -57,7 +57,7 @@ sidebar_label: Milvus Configuration
 | `preload_table`      | 定义在 Milvus 服务再次启动后，是否将之前已经导入并保存在磁盘的表预加载到内存。支持全部表格或者部分表格的预加载。 <br/>若要加载所有表格，使用 `*` ；若要加载部分表格，列出所有需要加载的表名，以逗号隔开。如果无需加载表格，请将该值留空 （ ` ` ）。 | PreloadType | ` `             |
 </div>
 
-### `metric_config` 区域
+#### `metric_config` 区域
 
 <div class="table-wrapper" markdown="block">
 
@@ -69,7 +69,7 @@ sidebar_label: Milvus Configuration
 | `port`                    | 访问 Prometheus 的端口号。     | Integer | `8080`       |
 </div>
 
-### `cache_config` 区域
+#### `cache_config` 区域
 
 <div class="table-wrapper" markdown="block">
 
@@ -79,7 +79,7 @@ sidebar_label: Milvus Configuration
 | `cache_insert_data` | 设置为 `true` ，则新插入的数据会自动加载到缓存以备搜索。<br/>如果想要实现数据即插即搜索，建议启用该功能。 | Boolean | `false`  |
 </div>
 
-### `engine_config` 区域
+#### `engine_config` 区域
 
 <div class="table-wrapper" markdown="block">
 
@@ -89,7 +89,7 @@ sidebar_label: Milvus Configuration
 | `gpu_search_threshold` | Milvus 性能调优参数。此参数必须与 `nq` 比较以确定搜索计算是否只在 GPU 上进行。<br/>如果 `nq` >= `gpu_search_threshold` ，则搜索计算只在 GPU 上进行。如果 `nq` < `gpu_search_threshold` ，则搜索计算将在 CPU 和 GPU 上协同进行。| Integer | `1000` |
 </div>
 
-### `gpu_resource_config` 区域
+#### `gpu_resource_config` 区域
 
 在该区域选择是否在 Milvus 里启用 GPU 用于搜索和索引创建。系统默认同时使用 CPU 和 GPU 来达到资源的最优利用，在特别大的数据集里做搜索时性能更佳。
 

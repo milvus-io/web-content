@@ -7,6 +7,9 @@
     - [安装 GPU 版 Milvus](get_started/install_milvus/gpu_milvus_docker.md)
   - [运行示例程序](get_started/example_code.md)
 - [了解 Milvus 操作](milvus_operation.md)
+- [选择距离计算方式](metric.md)
+- [索引类型](index.md)
+- [表分区](partition.md)
 - [监控与报警](monitor.md)
 - [故障诊断](troubleshoot.md)
 

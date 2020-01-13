@@ -44,5 +44,5 @@ search_vectors(table_name="my_table", query_records=q_records, top_k=2, nprobe=1
 
 ## Related links
 
-[Learn Milvus Operations](../guides/milvus_operation.md)
+[Learn Milvus Operations](milvus_operation.md)
 

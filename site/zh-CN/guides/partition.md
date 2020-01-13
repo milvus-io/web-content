@@ -44,4 +44,5 @@ search(table_name="my_table", query_records=q_records, top_k=2, nprobe=16, parti
 
 ## 相关链接
 
-[了解 Milvus 操作](../guides/milvus_operation.md)
+[了解 Milvus 操作](milvus_operation.md)
+

@@ -131,13 +131,40 @@
       "order": 1
     },
     {
+      "id": "metric.md",
+      "title": "Choosing a Distance Metric",
+      "lang": "en",
+      "label1": "guides",
+      "label2": "",
+      "label3": "",
+      "order": 2
+    },
+    {
+      "id": "index.md",
+      "title": "Milvus Indexes",
+      "lang": "en",
+      "label1": "guides",
+      "label2": "",
+      "label3": "",
+      "order": 3
+    },
+    {
+      "id": "partition.md",
+      "title": "Table Partitioning",
+      "lang": "en",
+      "label1": "guides",
+      "label2": "",
+      "label3": "",
+      "order": 4
+    },
+    {
       "id": "monitor.md",
       "title": "Monitoring and Alerting",
       "lang": "en",
       "label1": "guides",
       "label2": "",
       "label3": "",
-      "order": 2
+      "order": 5
     },
     {
       "id": "troubleshoot.md",
@@ -146,7 +173,7 @@
       "label1": "guides",
       "label2": "",
       "label3": "",
-      "order": 3
+      "order": 6
     },
     
     {
@@ -178,31 +205,13 @@
       "order": 1
     },
     {
-      "id": "index.md",
-      "title": "Index Types",
-      "lang": "en",
-      "label1": "reference",
-      "label2": "",
-      "label3": "",
-      "order": 2
-    },
-    {
       "id": "data_manage.md",
       "title": "Data Management",
       "lang": "en",
       "label1": "reference",
       "label2": "",
       "label3": "",
-      "order": 3
-    },
-    {
-      "id": "partition.md",
-      "title": "Table Partitioning",
-      "lang": "en",
-      "label1": "reference",
-      "label2": "",
-      "label3": "",
-      "order": 4
+      "order": 2
     },
     {
       "id": "monitoring_metrics.md",
@@ -211,7 +220,7 @@
       "label1": "reference",
       "label2": "",
       "label3": "",
-      "order": 5
+      "order": 3
     },
     {
       "id": "sdk.md",
@@ -220,7 +229,7 @@
       "label1": "reference",
       "label2": null,
       "label3": null,
-      "order": 6
+      "order": 4
     },
     {
       "id": "application.md",
@@ -228,7 +237,7 @@
       "lang": "en",
       "label1": "reference",
       "label2": "",
-      "order": 7
+      "order": 5
     },
     {
       "id": "faq",

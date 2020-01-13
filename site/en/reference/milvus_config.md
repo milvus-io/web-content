@@ -10,7 +10,7 @@ sidebar_label: Milvus Configuration
 
 The configurations apply to both single server Milvus and all nodes of a distributed Milvus cluster, for example, from whether or not to turn on the monitoring function to more advanced options for performance tuning.
 
-### Milvus file structure
+#### Milvus file structure
 
 After you have successfully started Milvus server, you can see a Milvus file under the path `home/$USER/milvus`, which contains the following child files:
 
@@ -32,7 +32,7 @@ Many configurations below are intended for tuning Milvus internals. Before chang
 
 In the directory `home/$USER/milvus/conf`, open Milvus service configuration file `server_config.yaml`.
 
-### Section `server_config`
+#### Section `server_config`
 
 <div class="table-wrapper" markdown="block">
 
@@ -44,7 +44,7 @@ In the directory `home/$USER/milvus/conf`, open Milvus service configuration fil
 | `time_zone` | Use the UTC-x or UTC+x to specify a time zone. For example, use `UTC+8` for China Standard Time. | Timezone | `UTC+8`  |
 </div>
 
-### Section `db_config`
+#### Section `db_config`
 
 <div class="table-wrapper" markdown="block">
 
@@ -57,7 +57,7 @@ In the directory `home/$USER/milvus/conf`, open Milvus service configuration fil
 | `preload_table` | Define if to preload tables into memory after Milvus server restart. Tables can be selected for fully or partially preloading.<br/>To preload all the existing tables, use `*` ; To preload some tables, list the specific table names, separated by comma. If you choose not to preload any table, keep it empty ( ` ` ). | PreloadType | ` ` |
 </div>
 
-### Section `metric_config`
+#### Section `metric_config`
 
 <div class="table-wrapper" markdown="block">
 
@@ -69,7 +69,7 @@ In the directory `home/$USER/milvus/conf`, open Milvus service configuration fil
 | `port`           | Port to visit Prometheus.                        | Integer | `8080`       |
 </div>
 
-### Section `cache_config`
+#### Section `cache_config`
 
 <div class="table-wrapper" markdown="block">
 
@@ -79,17 +79,17 @@ In the directory `home/$USER/milvus/conf`, open Milvus service configuration fil
 | `cache_insert_data`  | If set to `true` , the inserted data will be loaded into the cache immediately for hot query. <br/>If you want simultaneous inserting and searching of vector, it is recommended to enable this function. | Boolean | `false`   |
 </div>
 
-### Section `engine_config`
+#### Section `engine_config`
 
 <div class="table-wrapper" markdown="block">
 
 | Parameter            | Description                                                  | Type    | Default |
 | -------------------- | ------------------------------------------------------------ | ------- | ------- |
 | `use_blas_threshold` | A Milvus performance tuning parameter. The threshold value must be compared with `nq` to decide if the usage of OpenBLAS library will be triggered. <br/>If `nq` >= `use_blas_threshold` , OpenBLAS will be used. The search response times do not fluctuate, but the search speed is relatively slow. <br/>If `nq` < `use_blas_threshold` , SSE will be used. The search speed will be enhanced, however with slight fluctuation of search response times. The value should be >= 0. | Integer | `20`   |
-| `gpu_search_threshold` | A Milvus performance tuning parameter. The threshold value must be compared with `nq` to decide if the search computation will be executed on GPUs only.<br/>If `nq` >= `gpu_search_threshold` , the search computation will be executed on GPUs only.<br/>If `nq` < `gpu_search_threshold` , the search computation will be executed on both CPUs and GPUs. | Interger | `1000` |
+| `gpu_search_threshold` | A Milvus performance tuning parameter. The threshold value must be compared with `nq` to decide if the search computation will be executed on GPUs only.<br/>If `nq` >= `gpu_search_threshold` , the search computation will be executed on GPUs only.<br/>If `nq` < `gpu_search_threshold` , the search computation will be executed on both CPUs and GPUs. | Integer | `1000` |
 </div>
 
-### Section `gpu_resource_config`
+#### Section `gpu_resource_config`
 
 Decide in this section whether to enable GPU support/usage in Milvus. GPU support, which uses both CPU and GPUs for optimized resource utilization, is by default enabled to achieve accelerated search performance on very large datasets. 
 
