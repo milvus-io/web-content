@@ -57,8 +57,8 @@ $ docker pull milvusdb/milvus:0.6.0-cpu-d120719-2b40dd
 # Create Milvus file
 $ mkdir -p /home/$USER/milvus/conf
 $ cd home/$USER/milvus/conf
-$ wget https://raw.githubusercontent.com/milvus-io/docs/blob/v0.6.0/assets/server_config.yaml
-$ wget https://raw.githubusercontent.com/milvus-io/docs/blob/v0.6.0/assets/config/log_config.conf
+$ wget https://raw.githubusercontent.com/milvus-io/docs/v0.6.0/assets/server_config.yaml
+$ wget https://raw.githubusercontent.com/milvus-io/docs/v0.6.0/assets/config/log_config.conf
 ```
 
 > 注意：万一您遇到无法通过 `wget` 命令正常下载配置文件的情况，您也可以在 `/home/$USER/milvus/conf` 路径下创建 `server_config.yaml` 和 `log_config.conf` 文件，然后复制粘贴 [server config 文件](https://github.com/milvus-io/milvus/blob/0.7.0/core/conf/demo/server_config.yaml) 和 [log config 文件](https://github.com/milvus-io/milvus/blob/0.7.0/core/conf/demo/log_config.conf)的内容。
