@@ -14,7 +14,7 @@ sidebar_label: Install CPU-only Milvus on Docker
 | ---------- | ------------------------------------------------------------ |
 | CentOS     | 7.5 或以上                                                   |
 | Ubuntu LTS | 18.04 或以上                                                 |
-| Windows    | Windows 10 64-bit：Pro，Enterprise，或 Education版（Build 15063 或以上） |
+| Windows    | Windows 10 64-bit：Pro，Enterprise，或 Education 版（Build 15063 或以上） |
 
 #### 硬件要求
 
