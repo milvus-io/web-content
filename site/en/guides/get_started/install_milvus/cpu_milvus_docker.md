@@ -102,7 +102,7 @@ $ docker logs <milvus container id>
 
 ## Install Milvus on Windows
 
-The procedures of installing Milvus on Windows is similar to the steps on Ubuntu/CentOS, except **Step 3 Download configuration files**.
+The procedures of installing Milvus on Windows are similar to the steps on Ubuntu/CentOS, except for **Step 3 Download configuration files**.
 
 Instead of using `wget` to obtain the files, it is suggested to create `db`, `conf` and `logs` files under `/home/$USER/milvus`, or some other place you find appropriate, and copy the the content from [server config file](https://github.com/milvus-io/milvus/blob/0.7.0/core/conf/demo/server_config.yaml) and [log config file](https://github.com/milvus-io/milvus/blob/0.7.0/core/conf/demo/log_config.conf) to `server_config.yaml` and `log_config.conf` you created under `/home/$USER/milvus/conf`.
 
