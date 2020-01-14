@@ -24,7 +24,7 @@ Now, let's run a Python example program. Use this example program to create a ta
 
    ```shell
    # Download Python example
-   $ wget https://raw.githubusercontent.com/milvus-io/pymilvus/blob/0.6.0/examples/example.py
+   $ wget https://raw.githubusercontent.com/milvus-io/pymilvus/0.6.0/examples/example.py
    ```
 
 4. Run the example code.
