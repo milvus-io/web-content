@@ -2,13 +2,13 @@
 
 Thank you for your interest in contributing to Milvus documentation! :tada:
 
-If there's anything you'd like to change in the docs, you can click the **Edit** button located on the upper right of most pages in the [website](https://www.milvus.io/docs/en/userguide/install_milvus/), and then [file an issue](https://github.com/milvus-io/docs/issues/new/choose) in the Milvus docs repository. 
+If there's anything you'd like to change in the docs, you can click the **Edit** button located on the upper right of most pages in the [website](https://www.milvus.io/docs/guides/get_started/install_milvus/install_milvus.md), and then [file an issue](https://github.com/milvus-io/docs/issues/new/choose) in the Milvus docs repository. 
 
 ### Contributing to the Blog
 
 The articles in Milvus Blog are generated from [this markdown sources](https://github.com/milvus-io/www.milvus.io/tree/master/website/blog). 
 
-If you want to write an article intended for the Blog, please [open an issue in the website repository](https://github.com/milvus-io/www.milvus.io/issues/new). In most cases, you might want to share your article on your own blog or other writing medium instead. It's worth asking, though, in case we find your article is a good fit for the Blog.
+If you want to write an article intended for the Blog, please [open an issue in the website repository](https://github.com/milvus-io/community/tree/master/blog). In most cases, you might want to share your article on your own blog or other writing medium instead. It's worth asking, though, in case we find your article is a good fit for the Blog.
 
 ### Contributing to SDK reference
 
