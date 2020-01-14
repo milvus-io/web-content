@@ -54,9 +54,9 @@ $ docker pull milvusdb/milvus:0.6.0-gpu-d120719-2b40dd
 ```
 # Create Milvus file
 $ mkdir -p /home/$USER/milvus/conf
-$ cd home/$USER/milvus/conf
-$ wget https://raw.githubusercontent.com/milvus-io/docs/blob/v0.6.0/assets/config/server_config.yaml
-$ wget https://raw.githubusercontent.com/milvus-io/docs/blob/v0.6.0/assets/config/log_config.conf
+$ cd /home/$USER/milvus/conf
+$ wget https://raw.githubusercontent.com/milvus-io/docs/v0.6.0/assets/config/server_config.yaml
+$ wget https://raw.githubusercontent.com/milvus-io/docs/v0.6.0/assets/config/log_config.conf
 ```
 
 > 注意：万一您遇到无法通过 `wget` 命令正常下载配置文件的情况，您也可以在 `/home/$USER/milvus/conf` 路径下创建 `server_config.yaml` 和 `log_config.conf` 文件，然后复制粘贴 [server config 文件](https://github.com/milvus-io/docs/blob/v0.6.0/assets/config/server_config.yaml) 和 [log config 文件](https://github.com/milvus-io/docs/blob/v0.6.0/assets/config/log_config.conf)的内容。
@@ -65,6 +65,7 @@ $ wget https://raw.githubusercontent.com/milvus-io/docs/blob/v0.6.0/assets/confi
 
 ```shell
 # Start Milvus
+<<<<<<< HEAD:site/zh-CN/guides/get_started/install_milvus/gpu_milvus_docker.md
 $ docker run -d --name milvus_gpu --gpus all \
 -p 19530:19530 \
 -p 8080:8080 \
