@@ -10,11 +10,11 @@ sidebar_label: Install CPU-only Milvus
 
 #### System requirements
 
-| Operating system | Supported versions |
-| :--------------- | :----------------- |
-| CentOS           | 7.5 or higher      |
-| Ubuntu LTS       | 18.04 or higher    |
-| Windows          | Windows 10         |
+| Operating system | Supported versions                                           |
+| :--------------- | :----------------------------------------------------------- |
+| CentOS           | 7.5 or higher                                                |
+| Ubuntu LTS       | 18.04 or higher                                              |
+| Windows          | Windows 10 64-bit: Pro, Enterprise, or Education (Build 15063 or later) |
 
 #### Hardware requirements
 
@@ -26,9 +26,12 @@ sidebar_label: Install CPU-only Milvus
 
 #### Milvus Docker requirements
 
-[Install Docker](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/) 19.03 or higher on your local host machine.
+- If you're using Ubuntu or CentOS, [Install Docker](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/) 19.03 or higher on your local host machine.
+- If you're installing Milvus on Windows, install [Docker Desktop](https://docs.docker.com/docker-for-windows/install/), and make certain configurations in **Settings -> Advanced**. Make sure the Memory available to Docker Engine exceeds the sum of `insert_buffer_size` and `cpu_cache_capacity` you set in `server_config` file.
 
-## Step 1 Confirm Docker status
+## Install Milvus on Ubuntu/CentOS
+
+### Step 1 Confirm Docker status
 
 Confirm that the Docker daemon is running in the background:
 
@@ -40,7 +43,7 @@ If you do not see the server listed, start the **Docker** daemon.
 
 > Note: On Linux, Docker needs sudo privileges. To run Docker command without `sudo`, create the `docker` group and add your user. For details, see the [post-installation steps for Linux](https://docs.docker.com/install/linux/linux-postinstall/).
 
-## Step 2 Pull Docker image
+### Step 2 Pull Docker image
 
 Pull the CPU-only image:
 
@@ -48,17 +51,19 @@ Pull the CPU-only image:
 $ docker pull milvusdb/milvus:0.6.0-cpu-d120719-2b40dd
 ```
 
-## Step 3 Download configuration files
+### Step 3 Download configuration files
 
 ```shell
 # Create Milvus file
 $ mkdir -p /home/$USER/milvus/conf
 $ cd home/$USER/milvus/conf
-$ wget https://raw.githubusercontent.com/milvus-io/docs/blob/v0.6.0/assets/server_config.yaml
-$ wget https://raw.githubusercontent.com/milvus-io/docs/blob/v0.6.0/assets/config/log_config.conf
+$ wget https://raw.githubusercontent.com/milvus-io/docs/v0.6.0/assets/server_config.yaml
+$ wget https://raw.githubusercontent.com/milvus-io/docs/v0.6.0/assets/config/log_config.conf
 ```
 
-## Step 4 Start Docker container
+> Note: In case you encounter problems downloading configuration files using `wget` command, you can also create the `server_config.yaml` and `log_config.conf` files under `/home/$USER/milvus/conf`, then copy and paste the content from [server config file](https://github.com/milvus-io/milvus/blob/0.7.0/core/conf/demo/server_config.yaml) and [log config file](https://github.com/milvus-io/milvus/blob/0.7.0/core/conf/demo/log_config.conf).
+
+### Step 4 Start Docker container
 
 ```shell
 # Start Milvus
@@ -93,6 +98,25 @@ If Milvus server is not successfully started, you can check the error logs by th
 $ docker ps -a
 # Check docker logs
 $ docker logs <milvus container id>
+```
+
+## Install Milvus on Windows
+
+The procedures of installing Milvus on Windows are similar to the steps on Ubuntu/CentOS, except for **Step 3 and Step 4**.
+
+For Step 3, instead of using `wget` to obtain the files, it is suggested to create a `milvus` file containing `db`, `conf` and `logs` files in a location you find appropriate, for example on the C drive, and copy the the content from [server config file](https://github.com/milvus-io/milvus/blob/0.7.0/core/conf/demo/server_config.yaml) and [log config file](https://github.com/milvus-io/milvus/blob/0.7.0/core/conf/demo/log_config.conf) to `server_config.yaml` and `log_config.conf` you created under `C:\milvus\conf`.
+
+For Step 4, start the docker by mapping Milvus files to the right path:
+
+```shell
+# Start Milvus
+$ docker run -d --name milvus_cpu \
+-p 19530:19530 \
+-p 8080:8080 \
+-v C:\milvus\db:/var/lib/milvus/db \
+-v C:\milvus\conf:/var/lib/milvus/conf \
+-v C:\milvus\logs:/var/lib/milvus/logs \
+milvusdb/milvus:0.6.0-cpu-d120719-2b40dd
 ```
 
 ## What's next

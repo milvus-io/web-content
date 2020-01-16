@@ -56,8 +56,8 @@ $ docker pull milvusdb/milvus:0.6.0-gpu-d120719-2b40dd
 # Create Milvus file
 $ mkdir -p /home/$USER/milvus/conf
 $ cd home/$USER/milvus/conf
-$ wget https://raw.githubusercontent.com/milvus-io/docs/blob/v0.6.0/assets/config/server_config.yaml
-$ wget https://raw.githubusercontent.com/milvus-io/docs/blob/v0.6.0/assets/config/log_config.conf
+$ wget https://raw.githubusercontent.com/milvus-io/docs/v0.6.0/assets/config/server_config.yaml
+$ wget https://raw.githubusercontent.com/milvus-io/docs/v0.6.0/assets/config/log_config.conf
 ```
 
 ## Step 4 Start Docker container
