@@ -20,19 +20,27 @@ After you have successfully started Milvus server, you can see a Milvus file und
   - `server_config.yaml` (service configuration)
   - `log_config.conf` (log configuration)
 
-## Configurations
+## Updating configurations 
+
+### Editing the configuration file
+
+You can directly edit the configuration file. You must restart Milvus every time a configuration file is updated.
+
+```shell
+$ docker restart <container id>
+```
+
+### Updating configurations during runtime
+
+You can use SDKs or the RESTful API to update some of the parameters in `server_config.yaml`. There is no need to restart Milvus. Refer to [SDK Reference](sdk.md) for more information.
+
+## Configuration parameters
 
 Many configurations below are intended for tuning Milvus internals. Before changing these settings, welcome to consult Milvus team on [GitHub issues](https://github.com/milvus-io/milvus/issues/new/choose) or [our Slack channel](https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk).
 
-> Note: If you have edited these configurations, you must restart Milvus server to apply your changes.  
->
-> ```shell
-> $ docker restart <container id>
-> ```
-
 In the directory `home/$USER/milvus/conf`, open Milvus service configuration file `server_config.yaml`.
 
-#### Section `server_config`
+### Section `server_config`
 
 <div class="table-wrapper" markdown="block">
 
@@ -44,7 +52,7 @@ In the directory `home/$USER/milvus/conf`, open Milvus service configuration fil
 | `time_zone` | Use the UTC-x or UTC+x to specify a time zone. For example, use `UTC+8` for China Standard Time. | Timezone | `UTC+8`  |
 </div>
 
-#### Section `db_config`
+### Section `db_config`
 
 <div class="table-wrapper" markdown="block">
 
@@ -57,7 +65,7 @@ In the directory `home/$USER/milvus/conf`, open Milvus service configuration fil
 | `preload_table` | Define if to preload tables into memory after Milvus server restart. Tables can be selected for fully or partially preloading.<br/>To preload all the existing tables, use `*` ; To preload some tables, list the specific table names, separated by comma. If you choose not to preload any table, keep it empty ( ` ` ). | PreloadType | ` ` |
 </div>
 
-#### Section `metric_config`
+### Section `metric_config`
 
 <div class="table-wrapper" markdown="block">
 
@@ -69,7 +77,7 @@ In the directory `home/$USER/milvus/conf`, open Milvus service configuration fil
 | `port`           | Port to visit Prometheus.                        | Integer | `8080`       |
 </div>
 
-#### Section `cache_config`
+### Section `cache_config`
 
 <div class="table-wrapper" markdown="block">
 
@@ -79,7 +87,7 @@ In the directory `home/$USER/milvus/conf`, open Milvus service configuration fil
 | `cache_insert_data`  | If set to `true` , the inserted data will be loaded into the cache immediately for hot query. <br/>If you want simultaneous inserting and searching of vector, it is recommended to enable this function. | Boolean | `false`   |
 </div>
 
-#### Section `engine_config`
+### Section `engine_config`
 
 <div class="table-wrapper" markdown="block">
 
@@ -89,7 +97,7 @@ In the directory `home/$USER/milvus/conf`, open Milvus service configuration fil
 | `gpu_search_threshold` | A Milvus performance tuning parameter. The threshold value must be compared with `nq` to decide if the search computation will be executed on GPUs only.<br/>If `nq` >= `gpu_search_threshold` , the search computation will be executed on GPUs only.<br/>If `nq` < `gpu_search_threshold` , the search computation will be executed on both CPUs and GPUs. | Integer | `1000` |
 </div>
 
-#### Section `gpu_resource_config`
+### Section `gpu_resource_config`
 
 Decide in this section whether to enable GPU support/usage in Milvus. GPU support, which uses both CPU and GPUs for optimized resource utilization, is by default enabled to achieve accelerated search performance on very large datasets. 
 
