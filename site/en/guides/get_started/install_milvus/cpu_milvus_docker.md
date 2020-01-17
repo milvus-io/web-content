@@ -123,7 +123,17 @@ milvusdb/milvus:0.6.0-cpu-d120719-2b40dd
 
 ## Install Milvus on MacOS
 
-The procedures of installing Milvus on Windows are similar to the steps on Ubuntu/CentOS, except for **Step 4**.
+The procedures of installing Milvus on Windows are similar to the steps on Ubuntu/CentOS, except for **Step 3 and Step 4**.
+
+For Step 3, the path has some minor differences:
+
+```shell
+# Create Milvus file
+$ mkdir -p /Users/$USER/milvus/conf
+$ cd /Users/$USER/milvus/conf
+$ wget https://raw.githubusercontent.com/milvus-io/docs/v0.6.0/assets/server_config.yaml
+$ wget https://raw.githubusercontent.com/milvus-io/docs/v0.6.0/assets/config/log_config.conf
+```
 
 For Step 4, start the docker by mapping Milvus files to the right path:
 

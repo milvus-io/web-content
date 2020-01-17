@@ -55,7 +55,7 @@ $ docker pull milvusdb/milvus:0.6.0-cpu-d120719-2b40dd
 
 ### 第三步 下载配置文件
 
-```
+```shell
 # Create Milvus file
 $ mkdir -p /home/$USER/milvus/conf
 $ cd home/$USER/milvus/conf
@@ -122,7 +122,17 @@ milvusdb/milvus:0.6.0-cpu-d120719-2b40dd
 
 ## 在 MacOS 上安装 Milvus
 
-在 Windows 上安装 Milvus 的步骤和在 Ubuntu/CentOS 上几乎一样，只不过 **第四步** 略有不同。
+在 Windows 上安装 Milvus 的步骤和在 Ubuntu/CentOS 上几乎一样，只不过 **第三步** 和 **第四步** 略有不同。
+
+第三步，安装路径有细微差别：
+
+```shell
+# Create Milvus file
+$ mkdir -p /Users/$USER/milvus/conf
+$ cd /Users/$USER/milvus/conf
+$ wget https://raw.githubusercontent.com/milvus-io/docs/v0.6.0/assets/server_config.yaml
+$ wget https://raw.githubusercontent.com/milvus-io/docs/v0.6.0/assets/config/log_config.conf
+```
 
 第四步，启动 Docker 容器，将 Milvus 文件映射到您本地的文件路径：
 
