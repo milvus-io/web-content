@@ -15,6 +15,7 @@ sidebar_label: Install CPU-only Milvus on Docker
 | CentOS     | 7.5 或以上                                                   |
 | Ubuntu LTS | 18.04 或以上                                                 |
 | Windows    | Windows 10 64-bit：Pro，Enterprise，或 Education 版（Build 15063 或以上） |
+| MacOS      | 10.13 或以上         |
 
 #### 硬件要求
 
@@ -28,6 +29,7 @@ sidebar_label: Install CPU-only Milvus on Docker
 
 - 如果使用 Ubuntu 或 CentOS 安装 Milvus，请在您的宿主机上 [安装 Docker](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/) 19.03或更高版本。
 - 如果在 Windows 上安装 Milvus，请安装 [Docker Desktop](https://docs.docker.com/docker-for-windows/install/)，并进入 **Settings -> Advanced** 调整相关配置。请确保‘可用内存’大于您在 `server_config` 文件中设置的`insert_buffer_size` 和 `cpu_cache_capacity` 之和。
+- 如果在 MacOS 上安装 Milvus，请安装[Docker Desktop for Mac](https://docs.docker.com/docker-for-mac/install/)，并进入 **Preferences -> Advanced** 调整相关配置。请确保‘可用内存’大于您在 `server_config` 文件中设置的`insert_buffer_size` 和 `cpu_cache_capacity` 之和。
 
 ## 在 Ubuntu/CentOS 上安装 Milvus
 
@@ -53,7 +55,7 @@ $ docker pull milvusdb/milvus:0.6.0-cpu-d120719-2b40dd
 
 ### 第三步 下载配置文件
 
-```
+```shell
 # Create Milvus file
 $ mkdir -p /home/$USER/milvus/conf
 $ cd home/$USER/milvus/conf
@@ -107,7 +109,7 @@ $ docker logs <milvus container id>
 
 第四步，启动 Docker 容器，将 Milvus 文件映射到您本地的文件路径：
 
-```
+```shell
 # Start Milvus
 $ docker run -d --name milvus_cpu \
 -p 19530:19530 \
@@ -115,6 +117,33 @@ $ docker run -d --name milvus_cpu \
 -v C:\milvus\db:/var/lib/milvus/db \
 -v C:\milvus\conf:/var/lib/milvus/conf \
 -v C:\milvus\logs:/var/lib/milvus/logs \
+milvusdb/milvus:0.6.0-cpu-d120719-2b40dd
+```
+
+## 在 MacOS 上安装 Milvus
+
+在 Windows 上安装 Milvus 的步骤和在 Ubuntu/CentOS 上几乎一样，只不过 **第三步** 和 **第四步** 略有不同。
+
+第三步，安装路径有细微差别：
+
+```shell
+# Create Milvus file
+$ mkdir -p /Users/$USER/milvus/conf
+$ cd /Users/$USER/milvus/conf
+$ wget https://raw.githubusercontent.com/milvus-io/docs/v0.6.0/assets/server_config.yaml
+$ wget https://raw.githubusercontent.com/milvus-io/docs/v0.6.0/assets/config/log_config.conf
+```
+
+第四步，启动 Docker 容器，将 Milvus 文件映射到您本地的文件路径：
+
+```shell
+# Start Milvus
+$ docker run -d --name milvus_cpu \
+-p 19530:19530 \
+-p 8080:8080 \
+-v /Users/$USER/milvus/db:/var/lib/milvus/db \
+-v /Users/$USER/milvus/conf:/var/lib/milvus/conf \
+-v /Users/$USER/milvus/logs:/var/lib/milvus/logs \
 milvusdb/milvus:0.6.0-cpu-d120719-2b40dd
 ```
 
