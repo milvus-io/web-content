@@ -20,15 +20,23 @@ sidebar_label: Milvus Configuration
   - `server_config.yaml`（服务设置）
   - `log_config.conf`（日志设置）
 
-## 配置
+## 配置修改 
 
-下文提到的许多配置都是给 Milvus 内部性能调优设计的，在编辑设置之前，请仔细考虑。若有任何疑问，欢迎在 GitHub 上给我们 [创建issue](https://github.com/milvus-io/milvus/issues/new/choose) 或是 [加入 Slack 社区讨论](https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk)。
+### 编辑配置文件
 
-> 注意：如果修改了配置文件，您必须重启 Milvus 服务来启用新的更改。
->
-> ```shell
-> $ docker restart <container id>
-> ```
+您可以直接编辑配置文件对配置进行修改。如果修改了配置文件，您必须重启 Milvus 服务来启用新的更改。
+
+```shell
+$ docker restart <container id>
+```
+
+### 运行时修改
+
+您可以使用 SDK 或者 RESTful API 对 `server_config.yaml` 的部分配置进行运行时修改。修改后无需重启 Milvus 即可启用新的更改。详情请参考 [SDK 参考](sdk.md)。
+
+## 参数说明
+
+下文提到的许多配置都是给 Milvus 内部性能调优设计的，在编辑设置之前，请仔细考虑。若有任何疑问，欢迎在 GitHub 上给我们 [创建 issue](https://github.com/milvus-io/milvus/issues/new/choose) 或是 [加入 Slack 社区讨论](https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk)。
 
 进入路径 `home/$USER/milvus/conf`，打开Milvus服务设置文件 `server_config.yaml` 。
 
