@@ -36,13 +36,13 @@ You can use SDKs or the RESTful API to update some of the parameters in `server_
 
 You can update the following parameters during runtime.
  
- - `cache_config`
+ - section `cache_config` 
     - `cpu_cache_capacity`
     - `cache_insert_data`
- - `engine_config`
+ - section `engine_config` 
     - `use_blas_threshold`
     - `gpu_search_threshold`
- - `gpu_resource_config`
+ - section `gpu_resource_config` 
     - `enable`
     - `cache_capacity`
     - `search_resources`
