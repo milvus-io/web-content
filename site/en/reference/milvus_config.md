@@ -42,7 +42,7 @@ You can update the following parameters during runtime.
  - `engine_config`
     - `use_blas_threshold`
     - `gpu_search_threshold`
- - `gpu_resource_threshold`
+ - `gpu_resource_config`
     - `enable`
     - `cache_capacity`
     - `search_resources`
