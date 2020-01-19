@@ -34,6 +34,20 @@ $ docker restart <container id>
 
 You can use SDKs or the RESTful API to update some of the parameters in `server_config.yaml`. There is no need to restart Milvus. Refer to [SDK Reference](sdk.md) for more information.
 
+You can update the following parameters during runtime.
+ 
+ - section `cache_config` 
+    - `cpu_cache_capacity`
+    - `cache_insert_data`
+ - section `engine_config` 
+    - `use_blas_threshold`
+    - `gpu_search_threshold`
+ - section `gpu_resource_config` 
+    - `enable`
+    - `cache_capacity`
+    - `search_resources`
+    - `build_index_resources`
+
 ## Configuration parameters
 
 Many configurations below are intended for tuning Milvus internals. Before changing these settings, welcome to consult Milvus team on [GitHub issues](https://github.com/milvus-io/milvus/issues/new/choose) or [our Slack channel](https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk).

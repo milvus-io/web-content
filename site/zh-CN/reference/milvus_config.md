@@ -34,6 +34,20 @@ $ docker restart <container id>
 
 您可以使用 SDK 或者 RESTful API 对 `server_config.yaml` 的部分配置进行运行时修改。修改后无需重启 Milvus 即可启用新的更改。详情请参考 [SDK 参考](sdk.md)。
 
+您可以对以下参数进行运行时修改：
+ 
+ - `cache_config` 区域
+    - `cpu_cache_capacity`
+    - `cache_insert_data`
+ - `engine_config` 区域
+    - `use_blas_threshold`
+    - `gpu_search_threshold`
+ - `gpu_resource_config` 区域
+    - `enable`
+    - `cache_capacity`
+    - `search_resources`
+    - `build_index_resources`
+
 ## 参数说明
 
 下文提到的许多配置都是给 Milvus 内部性能调优设计的，在编辑设置之前，请仔细考虑。若有任何疑问，欢迎在 GitHub 上给我们 [创建 issue](https://github.com/milvus-io/milvus/issues/new/choose) 或是 [加入 Slack 社区讨论](https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk)。
