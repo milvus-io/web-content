@@ -36,13 +36,13 @@ $ docker restart <container id>
 
 您可以对以下参数进行运行时修改：
  
- - `cache_config`
+ - `cache_config` 区域
     - `cpu_cache_capacity`
     - `cache_insert_data`
- - `engine_config`
+ - `engine_config` 区域
     - `use_blas_threshold`
     - `gpu_search_threshold`
- - `gpu_resource_config`
+ - `gpu_resource_config` 区域
     - `enable`
     - `cache_capacity`
     - `search_resources`
