@@ -19,6 +19,6 @@ Here is a comparison of Milvus with FAISS and SPTAG:
 | Easy-to-use user interface                 | ✔️      | ❌     | ❌     |
 | GUI monitoring dashboard                   | ✔️      | ❌     | ❌     |
 | Simple deployment                          | ✔️      | ❌     | ❌     |
-| C++/Python/Java SDK                        | ✔️      | ✔️     | ✔️     |
+| C++/Java/Python/Go SDK                     | ✔️      | ✔️     | ✔️     |
 | RESTful API                                | ✔️      | ❌     | ❌     |
 | Enterprise user support                    | ✔️      | ❌     | ❌     |
