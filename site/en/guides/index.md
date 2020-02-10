@@ -34,7 +34,7 @@ The following concepts are provided to help you better understand Milvus index t
 
 <div class="table-wrapper" markdown="block">
 
-| Type                                               | Class name | Affecting parameters                          | CPU-only Milvus  | GPU-enabled Milvus |
+| Type                                               | Class name | Parameters affecting performance | CPU-only Milvus  | GPU-enabled Milvus |
 | -------------------------------------------------- | ---------- | --------------------------------------------- | ---------------- | ------------------ |
 | Exact search                                       | `FLAT`     | `top_k`, nq                                   | ✔️               | ✔️                  |
 | Inverted file with exact post-verification         | `IVFLAT`   | `top_k`, nq, `nprobe`, `gpu_search_threshold` | ✔️               | ✔️                  |
