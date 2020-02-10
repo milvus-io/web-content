@@ -87,9 +87,9 @@ Compared to `NSG` which searches query vectors one by one, `RNSG` supports concu
 
 ### `HNSW`
 
-`HNSW` is built based on hierarchical navigable small world graphs, which is a graph-based structure that incrementally builds a multi layer structure and separates links by distance scales. Logarithmic scaling complexity makes it quite efficient for high-dimensional data.
+`HNSW` index is built based on hierarchical navigable small world graphs, which is a graph-based structure that incrementally builds a multi-layer structure and separates links by characteristc distance scales. Logarithmic scaling complexity makes it quite efficient for high-dimensional data.
 
-Compared with `RNSG`, `HNSW` has better memory and time efficiency. `HNSW` also supports incremental indexing, which is missing in `RNSG`. However, memory requirement of `HNSW` is greater than `RNSG`.  
+Compared with `RNSG`, `HNSW` has better memory and time efficiency. `HNSW` also supports incremental indexing, which is missing in `RNSG`. However, because the graphs need to be loaded to memory, `HNSW` requires more memory than `RNSG`.
 
 ## Choosing an index
 
