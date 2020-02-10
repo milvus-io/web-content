@@ -49,7 +49,7 @@ In Milvus, the Tanimoto coefficient is only applicable for a binary variable, an
 
 The Tanimoto distance ranges from 0 to +infinity.
 
-![tanimoto distance](tanomoto_dis_bin.png)
+![tanimoto distance](../../../assets/tanomoto_dis_bin.png)
 
 ### Jaccard distance
 
