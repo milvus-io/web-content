@@ -40,25 +40,7 @@ When vectors are imported into Milvus, they will be stored and indexed. Each vec
 
 #### Which index methods are supported?
 
-Currently, Milvus supports the following index methods:
-
-- `Flat`
-
-  Provides 100% accuracy for recalls. However, performance might be downgraded due to huge computation effort.
-
-- `IVFFlat`
-
-  K-means based similarity search which is balanced between accuracy and performance.
-
-- `IVF_SQ8`
-
-  Adopts a scalar quantization strategy that significantly reduces vector size (by about 3/4). It improves the overall throughput of vector processing.
-
-- `IVF_SQ8H`
-
-  An enhanced indexing algorithm of `IVF_SQ8`. It supports heterogeneous computation on both CPU and GPU, which significantly improves the search performance. 
-  
-  To use this index, make sure both `cpu` and `gpu` are added as resources in the [Milvus configuration file](../reference/milvus_config.md). 
+Please refer to [Index Types](../guides/index.md) for supported index methods.
 
 #### Does Milvus support simultaneous inserting and searching?
 

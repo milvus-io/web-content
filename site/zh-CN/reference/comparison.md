@@ -19,6 +19,6 @@ sidebar_label: Milvus in Comparison
 | 易用用户接口        | ✔️      | ❌     | ❌     |
 | 图形化监控工具      | ✔️      | ❌     | ❌     |
 | 易部署              | ✔️      | ❌     | ❌     |
-| C++/Python SDK      | ✔️      | ✔️     | ✔️     |
+| C++/Java/Python/Go SDK      | ✔️      | ✔️     | ✔️     |
 | RESTful API         | ✔️      | ❌     | ❌     |
 | 企业级用户支持      | ✔️      | ❌     | ❌     |
