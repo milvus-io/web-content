@@ -30,6 +30,7 @@ Milvus 支持多种索引类型。本页面主要介绍这些索引类型的定�
 | 倒排+标准量化索引混合模式 | `IVF_SQ8H` | `top_k`, nq, `nprobe`, `nlist`, `gpu_search_threshold`  | ❌             | ✔️               |
 | 倒排+乘积量化索引         | `IVF_PQ`   | `top_k`, nq, `nprobe`, `nlist`                         | ✔️             | ❌               |
 | NSG 加强版                 | `RNSG`     | `top_k`, nq                                           | ✔️            | ✔️               |
+| HNSW | `HNSW`     | `top_k`, nq   | ✔️               | ✔️                  |
 </div>
 
 ## Milvus 索引
@@ -67,6 +68,12 @@ Milvus 支持多种索引类型。本页面主要介绍这些索引类型的定�
 `RNSG` 是 Milvus 自研的一种索引方式，基于 `NSG` 索引做了各种优化。`NSG` 是一种基于图的索引算法，它可以 a) 降低图的平均出度；b) 缩短搜索路径；c) 缩减索引大小；d) 降低索引复杂度。
 
 不同于 `NSG` 单个搜索的方式，`RNSG` 支持多个目标向量的并发搜索。
+
+### `HNSW`
+
+`HNSW` 索引基于 HNSW 构建。HNSW (Hierarchical Small World Graph) 是一种基于图的索引算法，可以增量建立多层结构并且将边根据特征距离半径进行分层。由于计算复杂度是对数，HNSW 对于高维数据非常高效。
+
+与 `RNSG` 相比， `HNSW` 的运行效率和内存使用效率更高。`HNSW` 支持增量建立索引，而 `RNSG` 则不支持。但是，因为图需要加载到内存中，`HNSW` 的内存需求要大于 `RNSG`。
 
 ## 如何选择索引
 
