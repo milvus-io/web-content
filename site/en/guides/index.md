@@ -42,6 +42,7 @@ The following concepts are provided to help you better understand Milvus index t
 | IVFSQ8 hybrid search on both CPU and GPU           | `IVF_SQ8H` | `top_k`, nq, `nprobe`, `nlist`, `gpu_search_threshold`  | ❌               | ✔️                  |
 | Inverted file with product quantization refinement | `IVF_PQ`   | `top_k`, nq, `nprobe`, `nlist`                          | ✔️               | ❌                  |
 | Refined Navigating Spreading-out Graph             | `RNSG`     | `top_k`, nq                                             | ✔️               | ✔️                  |
+| Hierarchical Navigable Small World Graphs             | `HNSW`     | `top_k`, nq                                             | ✔️               | ✔️                  |
 </div>
 
 To choose an appropriate index for your application scenarios, please read [How to select an index in Milvus](https://medium.com/@milvusio/how-to-choose-an-index-in-milvus-4f3d15259212).
@@ -80,9 +81,15 @@ Only 1, 2, 3, 4, 6, 8, 10, 12, 16, 20, 24, 28, 32 dimensions per sub-quantizer a
 
 ### `RNSG`
 
-`RNSG` is a self-developed index that makes various optimizations based on `NSG` index. `NSG`  is a graph-base search algorithm that a) lowers the average out-degree of the graph for fast traversal; b) shortens the search path; c) reduces the index size; d) lowers the indexing complexity.
+`RNSG` is a self-developed index that makes various optimizations based on `NSG` index. `NSG`  is a graph-based search algorithm that a) lowers the average out-degree of the graph for fast traversal; b) shortens the search path; c) reduces the index size; d) lowers the indexing complexity.
 
 Compared to `NSG` which searches query vectors one by one, `RNSG` supports concurrent searches of multiple query vectors.
+
+### `HNSW`
+
+`HNSW` is built based on hierarchical navigable small world graphs, which is a graph-based structure that incrementally builds a multi layer structure and separates links by distance scales. Logarithmic scaling complexity makes it quite efficient for high-dimensional data.
+
+Compared with `RNSG`, `HNSW` has better memory and time efficiency. `HNSW` also supports incremental indexing, which is missing in `RNSG`. However, memory requirement of `HNSW` is greater than `RNSG`.  
 
 ## Choosing an index
 
