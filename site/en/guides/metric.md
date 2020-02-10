@@ -21,7 +21,9 @@ Essentially, Euclidean distance measures the length of a segment that connects 2
 
 The formula for Euclidean distance is as follows:
 
-![euclidean formula]
+![euclidean](../../assets/euclidean_metric.png)
+
+where **a** = (a1, a2,..., an) and **b** = (b1, b2,..., bn) are two points in n-dimensional Euclidean space 
 
 It's the most commonly used distance metric, and is very useful when the data is continuous.
 
@@ -31,33 +33,33 @@ Cosine/Inner product measures the cosine of the angle between 2 vectors, and ret
 
 So the formula for the cosine/IP is:
 
-![cosine formula]
+![ip](../../assets/ip_metric.png)
 
-where A and B are vectors, ∥ A∥ and ∥ B∥ are the norm of A and B, and cosθ is the cosine of the angle between A and B.
+where A and B are vectors, `||A||` and `||B||` are the norm of A and B, and cosθ is the cosine of the angle between A and B.
 
 Cosine/IP is more useful if you are more interested in measuring the orientation but not the magnitude of the vectors.
 
-### Tanimoto
+### Tanimoto distance
 
 The Tanimoto coefficient between two points, **a** and **b**, with **k** dimensions is calculated as:
 
 ![tanimoto coefficient]
 
-The Tanimoto similarity is only applicable for a binary variable, and for binary variables the Tanimoto coefficient ranges from 0 to +1 (where +1 is the highest similarity).
+In Milvus, the Tanimoto coefficient is only applicable for a binary variable, and for binary variables the Tanimoto coefficient ranges from 0 to +1 (where +1 is the highest similarity).
 
 The Tanimoto distance ranges from 0 to +infinity.
 
 ![tanimoto distance]
 
-### Jaccard
+### Jaccard distance
 
 Jaccard distance measures the dissimilarity between data sets, and is obtained by subtracting the Jaccard similarity coefficient from 1. 
 
-Jaccard similarity coefficient measures the similarity between two sample sets, and is defined as the cardinality of the intersection of the defined sets divided by the cardinality of the union of them. It can only be applied to finite sample sets.
+Jaccard coefficient measures the similarity between two sample sets, and is defined as the cardinality of the intersection of the defined sets divided by the cardinality of the union of them. It can only be applied to finite sample sets.
 
-Jaccard similarity = |A ∩ B| / |A ∪ B|
+Jaccard coefficient = |A ∩ B| / |A ∪ B|
 
-### Hamming
+### Hamming distance
 
 Hamming distance measures binary data strings. The distance between two strings of equal length is the number of bit positions at which the bits are different. 
 
