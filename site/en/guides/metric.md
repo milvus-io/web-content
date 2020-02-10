@@ -21,7 +21,7 @@ Essentially, Euclidean distance measures the length of a segment that connects 2
 
 The formula for Euclidean distance is as follows:
 
-![euclidean](../../assets/euclidean_metric.png)
+![euclidean](../../../assets/euclidean_metric.png)
 
 where **a** = (a1, a2,..., an) and **b** = (b1, b2,..., bn) are two points in n-dimensional Euclidean space 
 
@@ -33,7 +33,7 @@ Cosine/Inner product measures the cosine of the angle between 2 vectors, and ret
 
 So the formula for the cosine/IP is:
 
-![ip](../../assets/ip_metric.png)
+![ip](../../../assets/ip_metric.png)
 
 where A and B are vectors, `||A||` and `||B||` are the norm of A and B, and cosθ is the cosine of the angle between A and B.
 
