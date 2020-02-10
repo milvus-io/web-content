@@ -41,23 +41,25 @@ Cosine/IP is more useful if you are more interested in measuring the orientation
 
 ### Tanimoto distance
 
-The Tanimoto coefficient between two points, **a** and **b**, with **k** dimensions is calculated as:
+For binary variables, the Tanimoto coefficient is equivalent to Jaccard distance:
 
-![tanimoto coefficient]
+(|A ∪ B| - |A ∩ B|) / |A ∩ B|
 
 In Milvus, the Tanimoto coefficient is only applicable for a binary variable, and for binary variables the Tanimoto coefficient ranges from 0 to +1 (where +1 is the highest similarity).
 
 The Tanimoto distance ranges from 0 to +infinity.
 
-![tanimoto distance]
+![tanimoto distance](tanomoto_dis_bin.png)
 
 ### Jaccard distance
 
-Jaccard distance measures the dissimilarity between data sets, and is obtained by subtracting the Jaccard similarity coefficient from 1. 
+Jaccard distance measures the dissimilarity between data sets, and is obtained by subtracting the Jaccard similarity coefficient from 1. For binary variables, Jaccard distance is equivalent to Tanimoto coefficient. 
+
+Jaccard coefficient = |A ∩ B| / |A ∪ B|
 
 Jaccard coefficient measures the similarity between two sample sets, and is defined as the cardinality of the intersection of the defined sets divided by the cardinality of the union of them. It can only be applied to finite sample sets.
 
-Jaccard coefficient = |A ∩ B| / |A ∪ B|
+Jaccard distance = 1 - Jaccard coefficient = (|A ∪ B| - |A ∩ B|) / |A ∩ B|
 
 ### Hamming distance
 
