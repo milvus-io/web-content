@@ -63,9 +63,7 @@ Milvus 基于不同的距离计算方式比较向量间的距离。选择合适�
 
 ### 汉明距离
 
-汉明距离计算二进制字符串之间的距离。两个等长字符串之间的汉明距离定义为将其中一个变为另外一个所需要作的最小替换次数。
-
-Hamming distance measures binary data strings. The distance between two strings of equal length is the number of bit positions at which the bits are different. 
+汉明距离计算二进制字符串之间的距离。两个等长字符串之间的汉明距离定义为将其中一个变为另外一个所需要作的最小替换次数。 
 
 比如，假设有两条字符串 1101 1001 和 1001 1101。比较时，如果字符相同用 0 表示，如果字符不同则用 1 表示。
 
