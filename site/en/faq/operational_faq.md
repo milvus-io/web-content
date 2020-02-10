@@ -208,11 +208,9 @@ Users in some countries may have limited access to dockerhub. In this case, you 
 }
 ```
 
+#### How often should I build indexes when inserting data?
 
-
-
-
-
+You should always avoid buiding indexes too frequently when inserting data. Otherwise, a lot of small index files will be generated and performance will be negatively affected.
 
 
 ## Related links
