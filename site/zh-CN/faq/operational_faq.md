@@ -203,6 +203,10 @@ def test_add_vector_search_multiprocessing(self, connect, table):
 }
 ```
 
+#### 在插入数据时我应该多久构建一次索引？
+
+您应该避免频繁构建索引，因为这样会导致大量小索引文件的生成，从而影响检索效率。
+
 #### 相关阅读
 
 [产品 FAQ](product_faq.md)
