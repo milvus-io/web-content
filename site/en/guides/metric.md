@@ -13,7 +13,7 @@ Below table shows how these widely used distance metrics fit with various input 
 | Input Data | Distance Metrics              | Index Types                                            |
 | ---------- | ----------------------------- | ------------------------------------------------------ |
 | Float      | L2 and IP                     | `FLAT`, `IVFLAT`, `IVFSQ8`, `IVFSQ8H`, `IVFPQ`, `RNSG` |
-| Binary     | Tanimoto, Jaccard and Hamming | `FLAT`, `IVFLAT`                                       |
+| Binary     | Jaccard, Tanimoto, and Hamming | `FLAT`, `IVFLAT`                                       |
 
 ### Euclidean distance (L2)
 
@@ -39,27 +39,29 @@ where A and B are vectors, `||A||` and `||B||` are the norm of A and B, and cos�
 
 Cosine/IP is more useful if you are more interested in measuring the orientation but not the magnitude of the vectors.
 
-### Tanimoto distance
-
-For binary variables, the Tanimoto coefficient is equivalent to Jaccard distance:
-
-(|A ∪ B| - |A ∩ B|) / |A ∩ B|
-
-In Milvus, the Tanimoto coefficient is only applicable for a binary variable, and for binary variables the Tanimoto coefficient ranges from 0 to +1 (where +1 is the highest similarity).
-
-The Tanimoto distance ranges from 0 to +infinity.
-
-![tanimoto distance](../../../assets/tanomoto_dis_bin.png)
-
 ### Jaccard distance
 
 Jaccard distance measures the dissimilarity between data sets, and is obtained by subtracting the Jaccard similarity coefficient from 1. For binary variables, Jaccard distance is equivalent to Tanimoto coefficient. 
 
-Jaccard coefficient = |A ∩ B| / |A ∪ B|
+[!Jaccard similarity coefficient](../../../assets/jaccard_coeff.png)
 
-Jaccard coefficient measures the similarity between two sample sets, and is defined as the cardinality of the intersection of the defined sets divided by the cardinality of the union of them. It can only be applied to finite sample sets.
+Jaccard similarity coefficient measures the similarity between two sample sets, and is defined as the cardinality of the intersection of the defined sets divided by the cardinality of the union of them. It can only be applied to finite sample sets.
 
-Jaccard distance = 1 - Jaccard coefficient = (|A ∪ B| - |A ∩ B|) / |A ∩ B|
+[!Jaccard distance](../../../assets/jaccard_dist.png)
+
+### Tanimoto distance
+
+For binary variables, the Tanimoto coefficient is equivalent to Jaccard distance:
+
+[!tanimoto coefficient](../../../assets/tanimoto_coeff.png)
+
+In Milvus, the Tanimoto coefficient is only applicable for a binary variable, and for binary variables the Tanimoto coefficient ranges from 0 to +1 (where +1 is the highest similarity).
+
+For binary variables, the formula of Tanimoto distance is:
+
+[!tanimoto distance](../../../assets/tanimoto_dist.png)
+
+The value ranges from 0 to +infinity.
 
 ### Hamming distance
 
