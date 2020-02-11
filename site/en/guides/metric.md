@@ -43,23 +43,23 @@ Cosine/IP is more useful if you are more interested in measuring the orientation
 
 Jaccard distance measures the dissimilarity between data sets, and is obtained by subtracting the Jaccard similarity coefficient from 1. For binary variables, Jaccard distance is equivalent to Tanimoto coefficient. 
 
-[!Jaccard similarity coefficient](../../../assets/jaccard_coeff.png)
+![Jaccard similarity coefficient](../../../assets/jaccard_coeff.png)
 
 Jaccard similarity coefficient measures the similarity between two sample sets, and is defined as the cardinality of the intersection of the defined sets divided by the cardinality of the union of them. It can only be applied to finite sample sets.
 
-[!Jaccard distance](../../../assets/jaccard_dist.png)
+![Jaccard distance](../../../assets/jaccard_dist.png)
 
 ### Tanimoto distance
 
 For binary variables, the Tanimoto coefficient is equivalent to Jaccard distance:
 
-[!tanimoto coefficient](../../../assets/tanimoto_coeff.png)
+![tanimoto coefficient](../../../assets/tanimoto_coeff.png)
 
 In Milvus, the Tanimoto coefficient is only applicable for a binary variable, and for binary variables the Tanimoto coefficient ranges from 0 to +1 (where +1 is the highest similarity).
 
 For binary variables, the formula of Tanimoto distance is:
 
-[!tanimoto distance](../../../assets/tanimoto_dist.png)
+![tanimoto distance](../../../assets/tanimoto_dist.png)
 
 The value ranges from 0 to +infinity.
 
