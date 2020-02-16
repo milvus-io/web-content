@@ -6,6 +6,41 @@ sidebar_label: Operational FAQ
 
 # Operational FAQ
 
+<!-- TOC -->
+
+- [What if I failed to pull docker images from dockerhub when installing Milvus?](#what-if-i-failed-to-pull-docker-images-from-dockerhub-when-installing-milvus)
+- [Why do I fail to compile Milvus from source?](#why-do-i-fail-to-compile-milvus-from-source)
+- [Does Milvus support insert, delete, update, and query operations for vectors?](#does-milvus-support-insert-delete-update-and-query-operations-for-vectors)
+- [Should I specify vector IDs or use auto-generated vector IDs?](#should-i-specify-vector-ids-or-use-auto-generated-vector-ids)
+- [Why do Euclidean distance and inner product have inconsistent results in computing vector similarity?](#why-do-euclidean-distance-and-inner-product-have-inconsistent-results-in-computing-vector-similarity)
+- [Why does Milvus display "no space left on device" when I import data to Milvus?](#why-does-milvus-display-no-space-left-on-device-when-i-import-data-to-milvus)
+- [Why does this error "Vectors should be 2-dim array" still occur in the Python SDK when the data is a 2-dimensional array?](#why-does-this-error-vectors-should-be-2-dim-array-still-occur-in-the-python-sdk-when-the-data-is-a-2-dimensional-array)
+- [Why sometimes it takes much longer for queries with smaller datasets?](#why-sometimes-it-takes-much-longer-for-queries-with-smaller-datasets)
+- [Why is my Milvus constantly having bad performance?](#why-is-my-milvus-constantly-having-bad-performance)
+- [Why is my Milvus constantly having low accuracy?](#why-is-my-milvus-constantly-having-low-accuracy)
+- [Why are my new configurations not working?](#why-are-my-new-configurations-not-working)
+- [Why is my Python SDK constantly having errors?](#why-is-my-python-sdk-constantly-having-errors)
+- [How do I know whether Milvus is successfully started?](#how-do-i-know-whether-milvus-is-successfully-started)
+- [Why there are a lot of `-1`s in my search result?](#why-there-are-a-lot-of--1s-in-my-search-result)
+- [Why does my Milvus return "Illegal instruction" during startup?](#why-does-my-milvus-return-illegal-instruction-during-startup)
+- [Why is `cpu_cache_capacity` always too large for MacOS or Windows?](#why-is-cpu_cache_capacity-always-too-large-for-macos-or-windows)
+- [Why is the time in my log files different from the system time?](#why-is-the-time-in-my-log-files-different-from-the-system-time)
+- [Why does my multiprocessing program fail?](#why-does-my-multiprocessing-program-fail)
+- [Why are the search results fewer than K when I try to search the top K vectors?](#why-are-the-search-results-fewer-than-k-when-i-try-to-search-the-top-k-vectors)
+- [How to build Milvus from source in the Docker container?](#how-to-build-milvus-from-source-in-the-docker-container)
+- [Related links](#related-links)
+
+<!-- /TOC -->
+
+#### What if I failed to pull docker images from dockerhub when installing Milvus?
+
+Users in some countries may have limited access to dockerhub. In this case, you can pull images from the local registry mirror. For example, the URL of the registry mirror for China is `registry.docker-cn.com`. You can add `"https://registry.docker-cn.com"` to the `registry-mirrors` array in `/etc/docker/daemon.json` to pull from the China registry mirror by default.
+
+```
+{
+  "registry-mirrors": ["https://registry.docker-cn.com"]
+}
+```
 
 #### Why do I fail to compile Milvus from source?
 
@@ -197,21 +232,6 @@ In order to avoid this situation, you can try increasing the value of `nprobe`, 
 As Milvus is mainly developed under the Ubuntu environment, the recommended compilation environment is Ubuntu 18.04 or higher. If your developing environment is not Ubuntu 18.04, you can also build Milvus from source code in the docker container. We provide two docker images that provide the build environment needed for the Milvus CPU-only and GPU supported versions.
 
 To build Milvus from source in the Docker container, please refer to [Compile Milvus on Docker](https://github.com/milvus-io/milvus/blob/0.6.0/install.md#compile-milvus-on-docker).
-
-#### What if I failed to pull docker images from dockerhub when installing Milvus?
-
-Users in some countries may have limited access to dockerhub. In this case, you can pull images from the local registry mirror. For example, the URL of the registry mirror for China is `registry.docker-cn.com`. You can add `"https://registry.docker-cn.com"` to the `registry-mirrors` array in `/etc/docker/daemon.json` to pull from the China registry mirror by default.
-
-```
-{
-  "registry-mirrors": ["https://registry.docker-cn.com"]
-}
-```
-
-
-
-
-
 
 
 
