@@ -8,10 +8,10 @@ sidebar_label: Operational FAQ
 
 <!-- TOC -->
 
-- [What if I failed to pull docker images from dockerhub when installing Milvus?](#What-if-i-failed-to-pull-docker-images-from-dockerhub-when-installing-Milvus)
-- [Why do I fail to compile Milvus from source?](#Why-do-i-fail-to-compile-Milvus-from-source)
+- [What if I failed to pull docker images from dockerhub when installing Milvus?](#What-if-I-failed-to-pull-docker-images-from-dockerhub-when-installing-Milvus)
+- [Why do I fail to compile Milvus from source?](#Why-do-I-fail-to-compile-Milvus-from-source)
 - [Does Milvus support insert, delete, update, and query operations for vectors?](#Does-Milvus-support-insert-delete-update-and-query-operations-for-vectors)
-- [Should I specify vector IDs or use auto-generated vector IDs?](#Should-i-specify-vector-IDs-or-use-auto-generated-vector-IDs)
+- [Should I specify vector IDs or use auto-generated vector IDs?](#Should-I-specify-vector-IDs-or-use-auto-generated-vector-IDs)
 - [Why do Euclidean distance and inner product have inconsistent results in computing vector similarity?](#Why-do-Euclidean-distance-and-inner-product-have-inconsistent-results-in-computing-vector-similarity)
 - [Why does Milvus display "no space left on device" when I import data to Milvus?](#why-does-Milvus-display-no-space-left-on-device-when-i-import-data-to-Milvus)
 - [Why does this error "Vectors should be 2-dim array" still occur in the Python SDK when the data is a 2-dimensional array?](#Why-does-this-error-Vectors-should-be-2-dim-array-still-occur-in-the-Python-SDK-when-the-data-is-a-2-dimensional-array)
