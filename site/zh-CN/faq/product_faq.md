@@ -18,7 +18,7 @@ sidebar_label: Product FAQ
 - [如何选择向量索引的类型？](#如何选择向量索引的类型？)
 - [Milvus 是否支持 “边插入边查询” ？](#Milvus-是否支持-边插入边查询-？)
 - [数据存储在哪里？](#数据存储在哪里？)
-- [Milvus 与 FAISS 和 SPTAG 对比如何?](#Milvus-与-FAISS-和-SPTAG-对比如何？)
+- [Milvus 与 FAISS 和 SPTAG 对比如何？](#Milvus-与-FAISS-和-SPTAG-对比如何？)
 - [Milvus 是一款端到端产品吗？](#Milvus-是一款端到端产品吗？)
 - [仍有问题没有得到解答？](#仍有问题没有得到解答？)
 
@@ -85,7 +85,7 @@ Milvus 提供了集群分片中间件 Mishards，可以实现集群分片部署�
 
 向量数据导入 Mivus 后，将自动存储在您的本地磁盘。元数据可以存储在 MySQL 或 SQLite 3 上。
 
-#### Milvus 与 FAISS 和 SPTAG 对比如何?
+#### Milvus 与 FAISS 和 SPTAG 对比如何？
 
 尽管这些都支持海量向量的相似度检索，Milvus 是其中唯一高性能、易用性强的向量检索数据库系统，具备高可用、弹性扩展等特性。
 
