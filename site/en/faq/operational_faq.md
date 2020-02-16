@@ -200,7 +200,7 @@ To build Milvus from source in the Docker container, please refer to [Compile Mi
 
 #### What if I failed to pull docker images from dockerhub when installing Milvus?
 
-Users in some countries may have limited access to dockerhub. In this case, you can pull images from the local registry mirror. For example, the URL of the registry mirror for China is `registry.docker-cn.com`. You can add `"https://registry.docker-cn.com"` to the `registry-mirrors` array in `/etc.docker/daemon.json` to pull from the China registry mirror by default.
+Users in some countries may have limited access to dockerhub. In this case, you can pull images from the local registry mirror. For example, the URL of the registry mirror for China is `registry.docker-cn.com`. You can add `"https://registry.docker-cn.com"` to the `registry-mirrors` array in `/etc/docker/daemon.json` to pull from the China registry mirror by default.
 
 ```
 {
