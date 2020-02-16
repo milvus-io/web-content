@@ -195,7 +195,7 @@ def test_add_vector_search_multiprocessing(self, connect, table):
 
 #### 如果在安装 Milvus 时，从 dockerhub 拉取镜像总是失败怎么办？
 
-某些地区的用户可能无法快速访问 dockerhub。如果拉取镜像失败，您可以从本地的镜像源拉取镜像。比如中国镜像源的网址为 `registry.docker-cn.com`。您可以在 `/etc.docker/daemon.json` 文件的 `registry-mirrors` 组添加 `"https://registry.docker-cn.com"`命令，这样就可以默认从中国镜像源拉取镜像了。 
+某些地区的用户可能无法快速访问 dockerhub。如果拉取镜像失败，您可以从本地的镜像源拉取镜像。比如中国镜像源的网址为 `registry.docker-cn.com`。您可以在 `/etc/docker/daemon.json` 文件的 `registry-mirrors` 组添加 `"https://registry.docker-cn.com"`命令，这样就可以默认从中国镜像源拉取镜像了。 
 
 ```
 {
