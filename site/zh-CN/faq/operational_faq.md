@@ -4,13 +4,49 @@ title: Operational FAQ
 sidebar_label: Operational FAQ
 ---
 
-# 操作 FAQ
+# 操作常见问题
+
+<!-- TOC -->
+
+- [如果在安装 Milvus 时，从 dockerhub 拉取镜像总是失败怎么办？](#如果在安装-Milvus-时，从-dockerhub-拉取镜像总是失败怎么办？)
+- [为什么我从源码编译 Milvus 失败了？](#为什么我从源码编译-Milvus-失败了？)
+- [Milvus 支持对向量的插入、删除、更改和查询操作吗？](#Milvus-支持对向量的插入、删除、更改和查询操作吗？)
+- [我应该自己指定向量 ID 还是由 Milvus 自动生成向量 ID？](#我应该自己指定向量-ID-还是由-Milvus-自动生成向量-ID？)
+- [为什么欧氏距离和内积在计算向量相似度时的结果不一致？](#为什么欧氏距离和内积在计算向量相似度时的结果不一致？)
+- [为什么在导入数据时 Milvus 显示 "no space left on device" 的错误？](#为什么在导入数据时-Milvus-显示-no-space-left-on-device-的错误？)
+- [为什么数据是二维数组时， Milvus Python SDK 依然返回 "Vectors should be 2-dim array" 的错误？](#为什么数据是二维数组时，-Milvus-Python-SDK-依然返回-Vectors-should-be-2-dim-array-的错误？)
+- [为什么有时候小的数据集查询时间反而更长？](#为什么有时候小的数据集查询时间反而更长？)
+- [为什么我的 Milvus 的性能一直不理想？](#为什么我的-Milvus-的性能一直不理想？)
+- [为什么我的 Milvus 查询准确率一直不理想？](#为什么我的-Milvus-查询准确率一直不理想？)
+- [为什么我更新过的设置没有生效？](#为什么我更新过的设置没有生效？)
+- [为什么我的 Python SDK 一直报错？](#为什么我的-Python-SDK-一直报错？)
+- [如何得知我的 Milvus 已经成功启动？](#如何得知我的-Milvus-已经成功启动？)
+- [为什么我的检索结果中出现大量 `-1`？](#为什么我的检索结果中出现大量--1？)
+- [为什么我的 Milvus 在启动时返回 “Illegal instruction”？](#为什么我的-Milvus-在启动时返回-Illegal-instruction？)
+- [为什么在 Mac OS 或者 Windows 上运行 Milvus 时显示 `cpu_cache_capacity` 太大？](#为什么在-Mac-OS-或者-windows-上运行-milvus-时显示-cpu_cache_capacity-太大？)
+- [为什么我的日志文件时间与系统时间不一致？](#为什么我的日志文件时间与系统时间不一致？)
+- [为什么我启用多进程程序失败了？](#为什么我启用多进程程序失败了？)
+- [为什么搜索 top K 的向量，结果不到 K 条向量？](#为什么搜索-top-K-的向量，结果不到-K-条向量？)
+- [在插入数据时我应该多久构建一次索引？](#在插入数据时我应该多久构建一次索引？)
+- [相关阅读](#相关阅读)
+
+<!-- /TOC -->
+
+#### 如果在安装 Milvus 时，从 dockerhub 拉取镜像总是失败怎么办？
+
+某些地区的用户可能无法快速访问 dockerhub。如果拉取镜像失败，您可以从本地的镜像源拉取镜像。比如中国镜像源的网址为 `registry.docker-cn.com`。您可以在 `/etc/docker/daemon.json` 文件的 `registry-mirrors` 组添加 `"https://registry.docker-cn.com"`命令，这样就可以默认从中国镜像源拉取镜像了。 
+
+```
+{
+  "registry-mirrors": ["https://registry.docker-cn.com"]
+}
+```
 
 #### 为什么我从源码编译 Milvus 失败了？
 
-原因可能有多种，但最可能的是环境因素，比如版本不匹配或者依赖关系缺失等。请参考 [从源码安装 Milvus](https://github.com/milvus-io/milvus/blob/0.6.0/install.md) 获取详细信息。
+原因可能有多种，但最可能的是环境因素，比如版本不匹配或者依赖关系缺失等。请参考 [从源码安装 Milvus](https://github.com/milvus-io/milvus/blob/master/install.md) 获取详细信息。
 
-建议您使用带有 Milvus 编译环境的 docker 镜像进行源码编译。关于详细流程请参考 [在 Docker 容器中编译运行 Milvus](https://milvus.io/blog/2019/11/25/docker-compilation/)。
+建议您使用带有 Milvus 编译环境的 docker 镜像进行源码编译。关于详细流程请参考 [在 Docker 容器中编译运行 Milvus](https://www.milvus.io/cn/blogs/2019-11-25-docker-compilation.md)。
 
 #### Milvus 支持对向量的插入、删除、更改和查询操作吗？
 
@@ -30,7 +66,7 @@ sidebar_label: Operational FAQ
 
 如果欧氏距离和内积返回不一致的结果，您可能需要检查数据是否已经归一化。如果没有，请先对数据进行归一化。
 
-理论上可以证明，对于未归一化的数据，欧氏距离和内积的结果是不一致的。关于详细推导过程可参考 [数据归一化](https://github.com/milvus-io/bootcamp/blob/0.6.0/getting_started/data_preparation/data_normalization.md)。
+理论上可以证明，对于未归一化的数据，欧氏距离和内积的结果是不一致的。关于详细推导过程可参考 [数据归一化](https://github.com/milvus-io/bootcamp/blob/master/getting_started/data_preparation/data_normalization.md)。
 
 #### 为什么在导入数据时 Milvus 显示 "no space left on device" 的错误？
 
@@ -42,7 +78,7 @@ sidebar_label: Operational FAQ
 
 #### 为什么有时候小的数据集查询时间反而更长？
 
-如果数据文件的大小小于配置文件里 `index_file_size` 参数的值，Milvus 则不会为此数据文件构建索引。因此，小的数据集有可能查询时间会更长。关于更多信息，请参考 [Milvus 配置](https://milvus.io/cn/docs/v0.6.0/reference/milvus_config.md)。
+如果数据文件的大小小于配置文件里 `index_file_size` 参数的值，Milvus 则不会为此数据文件构建索引。因此，小的数据集有可能查询时间会更长。关于更多信息，请参考 [Milvus 配置](https://milvus.io/cn/docs/v0.7.0/reference/milvus_config.md)。
 
 > 注意：在 0.4.0 版本之前，`index_file_size` 被命名为 `index_building_threshold`。
 
@@ -55,7 +91,7 @@ sidebar_label: Operational FAQ
 #### 为什么我的 Milvus 查询准确率一直不理想？
 
 在调用 SDK 进行向量搜索时，请检查调用函数中 `nprobe` 参数的值。值越大，结果越精确，但耗时也越久。关于更多信息，请参考 [了解 Milvus 操作
-](https://milvus.io/cn/docs/v0.6.0/guides/milvus_operation.md)。
+](https://milvus.io/cn/docs/v0.7.0/guides/milvus_operation.md)。
 
 #### 为什么我更新过的设置没有生效？
 
@@ -85,9 +121,9 @@ $ docker logs <container ID>
 
 如果您的 CPU 不支持 avx2 指令集，则 Milvus 无法正常启动。您可以通过 `cat /proc/cpuinfo` 查看 CPU 支持的指令集。
 
-#### 为什么在 Mac OS 或 Windows 上运行 Milvus 时显示 `cpu_cache_capacity` 太大？
+#### 为什么在 Mac OS 或者 Windows 上运行 Milvus 时显示 `cpu_cache_capacity` 太大？
 
-您需要检查 MacOS 或 Windows 为 docker engine 分配的内存值。如果分配的内存值小于或等于 `cpu_cache_capacity`，尽管您的主机内存可能足够，但 Milvus 仍然无法正常运行。
+您需要检查 MacOS 或者 Windows 为 docker engine 分配的内存值。如果分配的内存值小于或等于 `cpu_cache_capacity`，尽管您的主机内存可能足够，但 Milvus 仍然无法正常运行。
 
 #### 为什么我的日志文件时间与系统时间不一致？
 
@@ -193,20 +229,10 @@ def test_add_vector_search_multiprocessing(self, connect, table):
 
 想要避免这种情况，您可以尝试将 `nprobe` 设置为更大值，或是把 `nlist` 和 K 设置小一点。
 
-#### 如果在安装 Milvus 时，从 dockerhub 拉取镜像总是失败怎么办？
-
-某些地区的用户可能无法快速访问 dockerhub。如果拉取镜像失败，您可以从本地的镜像源拉取镜像。比如中国镜像源的网址为 `registry.docker-cn.com`。您可以在 `/etc.docker/daemon.json` 文件的 `registry-mirrors` 组添加 `"https://registry.docker-cn.com"`命令，这样就可以默认从中国镜像源拉取镜像了。 
-
-```
-{
-  "registry-mirrors": ["https://registry.docker-cn.com"]
-}
-```
-
 #### 在插入数据时我应该多久构建一次索引？
 
 您应该避免频繁构建索引，因为这样会导致大量小索引文件的生成，从而影响检索效率。
 
 #### 相关阅读
 
-[产品 FAQ](product_faq.md)
+[产品常见问题](product_faq.md)
