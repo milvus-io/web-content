@@ -23,7 +23,7 @@ sidebar_label: Operational FAQ
 - [如何得知我的 Milvus 已经成功启动？](#如何得知我的-milvus-已经成功启动)
 - [为什么我的检索结果中出现大量 `-1`？](#为什么我的检索结果中出现大量--1)
 - [为什么我的 Milvus 在启动时返回 “Illegal instruction”？](#为什么我的-milvus-在启动时返回-illegal-instruction)
-- [为什么在 Mac OS 或者 Windows 上运行 Milvus 时显示 `cpucachecapacity` 太大？](#为什么在-mac-os-或者-windows-上运行-milvus-时显示-cpucachecapacity-太大)
+- [为什么在 Mac OS 或者 Windows 上运行 Milvus 时显示 `cpu_cache_capacity` 太大？](#为什么在-mac-os-或者-windows-上运行-milvus-时显示-cpu_cache_capacity-太大)
 - [为什么我的日志文件时间与系统时间不一致？](#为什么我的日志文件时间与系统时间不一致)
 - [为什么我启用多进程程序失败了？](#为什么我启用多进程程序失败了)
 - [为什么搜索 top K 的向量，结果不到 K 条向量？](#为什么搜索-top-k-的向量结果不到-k-条向量)
