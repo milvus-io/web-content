@@ -6,6 +6,24 @@ sidebar_label: Product FAQ
 
 # Product FAQ
 
+<!-- TOC -->
+
+- [What is Milvus?](#What-is-Milvus)
+- [When is Milvus a good choice?](#When-is-Milvus-a-good-choice)
+- [How to use Milvus?](#How-to-use-Milvus)
+- [How easy is it to use Milvus?](#How-easy-is-it-to-use-Milvus)
+- [Is Milvus highly available?](#Is-Milvus-highly-available)
+- [Can Milvus handle datasets with 10-billion or 100-billion scale?](#Can-Milvus-handle-datasets-with-10-billion-or-100-billion-scale)
+- [How does Milvus work?](#How-does-Milvus-work)
+- [Which index methods are supported?](#Which-index-methods-are-supported)
+- [Does Milvus support simultaneous inserting and searching?](#Does-Milvus-support-simultaneous-inserting-and-searching)
+- [Where are the data stored?](#Where-are-the-data-stored)
+- [How does Milvus compare to FAISS and SPTAG?](#How-does-milvus-compare-to-FAISS-and-SPTAG)
+- [Is Milvus an end-to-end product?](#Is-milvus-an-end-to-end-product)
+- [Have questions that were not answered?](#Have-questions-that-were-not-answered)
+
+<!-- /TOC -->
+
 #### What is Milvus?
 
 Milvus is an open source similarity search engine for massive feature vectors. It is built with heterogeneous computing architecture for the best performance and cost efficiency. Searches over billion-scale vectors take only milliseconds with minimum computing resources. It can be easily deployed on both bare metal and cloud platforms with Linux operating systems.

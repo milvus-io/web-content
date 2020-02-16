@@ -4,7 +4,42 @@ title: Operational FAQ
 sidebar_label: Operational FAQ
 ---
 
-# 操作 FAQ
+# 操作常见问题
+
+<!-- TOC -->
+
+- [如果在安装 Milvus 时，从 dockerhub 拉取镜像总是失败怎么办？](#如果在安装-Milvus-时从-dockerhub-拉取镜像总是失败怎么办)
+- [为什么我从源码编译 Milvus 失败了？](#为什么我从源码编译-Milvus-失败了)
+- [Milvus 支持对向量的插入、删除、更改和查询操作吗？](#Milvus-支持对向量的插入删除更改和查询操作吗)
+- [我应该自己指定向量 ID 还是由 Milvus 自动生成向量 ID？](#我应该自己指定向量-id-还是由-Milvus-自动生成向量-id)
+- [为什么欧氏距离和内积在计算向量相似度时的结果不一致？](#为什么欧氏距离和内积在计算向量相似度时的结果不一致)
+- [为什么在导入数据时 Milvus 显示 "no space left on device" 的错误？](#为什么在导入数据时-Milvus-显示-no-space-left-on-device-的错误)
+- [为什么数据是二维数组时， Milvus Python SDK 依然返回 "Vectors should be 2-dim array" 的错误？](#为什么数据是二维数组时-Milvus-Python-SDK-依然返回-Vectors-should-be-2-dim-array-的错误)
+- [为什么有时候小的数据集查询时间反而更长？](#为什么有时候小的数据集查询时间反而更长)
+- [为什么我的 Milvus 的性能一直不理想？](#为什么我的-Milvus-的性能一直不理想)
+- [为什么我的 Milvus 查询准确率一直不理想？](#为什么我的-Milvus-查询准确率一直不理想)
+- [为什么我更新过的设置没有生效？](#为什么我更新过的设置没有生效)
+- [为什么我的 Python SDK 一直报错？](#为什么我的-Python-SDK-一直报错)
+- [如何得知我的 Milvus 已经成功启动？](#如何得知我的-Milvus-已经成功启动)
+- [为什么我的检索结果中出现大量 `-1`？](#为什么我的检索结果中出现大量--1)
+- [为什么我的 Milvus 在启动时返回 “Illegal instruction”？](#为什么我的-Milvus-在启动时返回-Illegal-instruction)
+- [为什么在 Mac OS 或者 Windows 上运行 Milvus 时显示 `cpu_cache_capacity` 太大？](#为什么在-Mac-OS-或者-windows-上运行-milvus-时显示-cpu_cache_capacity-太大)
+- [为什么我的日志文件时间与系统时间不一致？](#为什么我的日志文件时间与系统时间不一致)
+- [为什么我启用多进程程序失败了？](#为什么我启用多进程程序失败了)
+- [为什么搜索 top K 的向量，结果不到 K 条向量？](#为什么搜索-top-K-的向量结果不到-K-条向量)
+- [相关阅读](#相关阅读)
+
+<!-- /TOC -->
+
+#### 如果在安装 Milvus 时，从 dockerhub 拉取镜像总是失败怎么办？
+
+某些地区的用户可能无法快速访问 dockerhub。如果拉取镜像失败，您可以从本地的镜像源拉取镜像。比如中国镜像源的网址为 `registry.docker-cn.com`。您可以在 `/etc/docker/daemon.json` 文件的 `registry-mirrors` 组添加 `"https://registry.docker-cn.com"`命令，这样就可以默认从中国镜像源拉取镜像了。 
+
+```
+{
+  "registry-mirrors": ["https://registry.docker-cn.com"]
+}
+```
 
 #### 为什么我从源码编译 Milvus 失败了？
 
@@ -193,16 +228,7 @@ def test_add_vector_search_multiprocessing(self, connect, table):
 
 想要避免这种情况，您可以尝试将 `nprobe` 设置为更大值，或是把 `nlist` 和 K 设置小一点。
 
-#### 如果在安装 Milvus 时，从 dockerhub 拉取镜像总是失败怎么办？
-
-某些地区的用户可能无法快速访问 dockerhub。如果拉取镜像失败，您可以从本地的镜像源拉取镜像。比如中国镜像源的网址为 `registry.docker-cn.com`。您可以在 `/etc.docker/daemon.json` 文件的 `registry-mirrors` 组添加 `"https://registry.docker-cn.com"`命令，这样就可以默认从中国镜像源拉取镜像了。 
-
-```
-{
-  "registry-mirrors": ["https://registry.docker-cn.com"]
-}
-```
 
 #### 相关阅读
 
-[产品 FAQ](product_faq.md)
+[产品常见问题](product_faq.md)
