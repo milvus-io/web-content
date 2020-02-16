@@ -50,12 +50,9 @@ sidebar_label: Operational FAQ
 
 #### Milvus 支持对向量的插入、删除、更改和查询操作吗？
 
-目前，Milvus 仅支持以下针对向量的操作：
+是的。关于详细信息请参考[了解 Milvus 操作](../guides/milvus_operation.md)。
 
-- 插入向量
-- 查询向量
-
-> 注意：虽然 Milvus 不支持直接删除向量，您可以通过删除表的方式对向量进行删除。
+> 注意：在 0.7.0 之前，Milvus 仅支持插入向量和查询向量。
 
 #### 我应该自己指定向量 ID 还是由 Milvus 自动生成向量 ID？
 
