@@ -8,19 +8,19 @@ sidebar_label: Product FAQ
 
 <!-- TOC -->
 
-- [What is Milvus?](#what-is-milvus)
-- [When is Milvus a good choice?](#when-is-milvus-a-good-choice)
-- [How to use Milvus?](#how-to-use-milvus)
-- [How easy is it to use Milvus?](#how-easy-is-it-to-use-milvus)
-- [Is Milvus highly available?](#is-milvus-highly-available)
-- [Can Milvus handle datasets with 10-billion or 100-billion scale?](#can-milvus-handle-datasets-with-10-billion-or-100-billion-scale)
-- [How does Milvus work?](#how-does-milvus-work)
-- [Which index methods are supported?](#which-index-methods-are-supported)
-- [Does Milvus support simultaneous inserting and searching?](#does-milvus-support-simultaneous-inserting-and-searching)
-- [Where are the data stored?](#where-are-the-data-stored)
-- [How does Milvus compare to FAISS and SPTAG?](#how-does-milvus-compare-to-faiss-and-sptag)
-- [Is Milvus an end-to-end product?](#is-milvus-an-end-to-end-product)
-- [Have questions that were not answered?](#have-questions-that-were-not-answered)
+- [What is Milvus?](#What-is-Milvus)
+- [When is Milvus a good choice?](#When-is-Milvus-a-good-choice)
+- [How to use Milvus?](#How-to-use-Milvus)
+- [How easy is it to use Milvus?](#How-easy-is-it-to-use-Milvus)
+- [Is Milvus highly available?](#Is-Milvus-highly-available)
+- [Can Milvus handle datasets with 10-billion or 100-billion scale?](#Can-Milvus-handle-datasets-with-10-billion-or-100-billion-scale)
+- [How does Milvus work?](#How-does-Milvus-work)
+- [Which index methods are supported?](#Which-index-methods-are-supported)
+- [Does Milvus support simultaneous inserting and searching?](#Does-Milvus-support-simultaneous-inserting-and-searching)
+- [Where are the data stored?](#Where-are-the-data-stored)
+- [How does Milvus compare to FAISS and SPTAG?](#How-does-milvus-compare-to-FAISS-and-SPTAG)
+- [Is Milvus an end-to-end product?](#Is-milvus-an-end-to-end-product)
+- [Have questions that were not answered?](#Have-questions-that-were-not-answered)
 
 <!-- /TOC -->
 
