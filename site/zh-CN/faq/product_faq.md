@@ -4,7 +4,25 @@ title: Product FAQ
 sidebar_label: Product FAQ
 ---
 
-# 产品 FAQ
+# 产品常见问题
+
+<!-- TOC -->
+
+- [Milvus 是什么？](#milvus-是什么)
+- [Milvus 适合什么时候使用 ？](#milvus-适合什么时候使用-)
+- [如何使用 Milvus？](#如何使用-milvus)
+- [Milvus 的易用性如何？](#milvus-的易用性如何)
+- [Milvus 具备高可用特性吗？](#milvus-具备高可用特性吗)
+- [Milvus 可以处理百亿或千亿级数据吗？](#milvus-可以处理百亿或千亿级数据吗)
+- [向量存入 Milvus 后，如何检索？](#向量存入-milvus-后如何检索)
+- [如何选择向量索引的类型？](#如何选择向量索引的类型)
+- [Milvus 是否支持 “边插入边查询” ？](#milvus-是否支持-边插入边查询-)
+- [数据存储在哪里？](#数据存储在哪里)
+- [Milvus 与 FAISS 和 SPTAG 对比如何?](#milvus-与-faiss-和-sptag-对比如何)
+- [Milvus 是一款端到端产品吗？](#milvus-是一款端到端产品吗)
+- [仍有问题没有得到解答？](#仍有问题没有得到解答)
+
+<!-- /TOC -->
 
 #### Milvus 是什么？
 
@@ -82,6 +100,6 @@ Milvus 提供了集群分片中间件 Mishards，可以实现集群分片部署�
 如果您仍有其它问题，您可以：
 
 - 在 GitHub 上访问 [Milvus](https://github.com/milvus-io/milvus/issues) , 提问，分享交流，帮助其它用户 
-- 阅读 [操作 FAQ](operational_faq.md)，了解关于 Milvus 操作的常见问题 
+- 阅读 [操作常见问题](operational_faq.md)，了解关于 Milvus 操作的常见问题 
 - 加入我们的 [Slack 社区](https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk) ，与其它用户讨论交流
 
