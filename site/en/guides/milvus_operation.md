@@ -9,7 +9,7 @@ sidebar_label: Learn Milvus Operations
 
 This page walks you through some basic Milvus operations using the [**Python** SDK](https://github.com/milvus-io/pymilvus).
 
-You can also use other languages such as [Java](https://github.com/milvus-io/milvus-sdk-java), [C++](https://github.com/milvus-io/milvus/tree/master/sdk), etc.
+You can also use other clients, including [Java SDK](https://github.com/milvus-io/milvus-sdk-java), [C++ SDK](https://github.com/milvus-io/milvus/tree/master/sdk), [Go SDK](https://github.com/milvus-io/milvus-sdk-go), and [RESTful API](https://github.com/milvus-io/milvus/tree/master/core/src/server/web_impl).
 
 ## Before trying out these operations
 

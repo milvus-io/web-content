@@ -149,15 +149,6 @@
       "order": 3
     },
     {
-      "id": "partition.md",
-      "title": "Table Partitioning",
-      "lang": "en",
-      "label1": "guides",
-      "label2": "",
-      "label3": "",
-      "order": 4
-    },
-    {
       "id": "monitor.md",
       "title": "Monitoring and Alerting",
       "lang": "en",
