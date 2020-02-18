@@ -53,6 +53,8 @@ $ docker info
 $ docker pull milvusdb/milvus:0.6.0-cpu-d120719-2b40dd
 ```
 
+> 注意：如果您在拉取镜像时速度过慢或一直失败，请参考[操作常见问题](../../../faq/operational_faq.md)中提供的解决办法。
+
 ### 第三步 下载配置文件
 
 ```shell
