@@ -49,7 +49,7 @@ Pull the GPU-enabled image:
 ```shell
 $ docker pull milvusdb/milvus:0.6.0-gpu-d120719-2b40dd
 ```
-> Note: If the pulling speed is too slow or constantly fails, refer to [Operational FAQ](../../../faq/operational_faq.md) for possible solutions.
+> Note: If the pulling speed is too slow or the pulling process constantly fails, refer to [Operational FAQ](../../../faq/operational_faq.md) for possible solutions.
 
 ## Step 3 Download configuration files
 
@@ -82,7 +82,7 @@ The `docker run` options used in the above command are defined as follows:
 - `--name`: assign a name to the container
 - `--gpus`: GPU devices to add to the container (‘all’ to pass all GPUs)
 - `-p`: publish a container’s port(s) to the host
-- `-v`: bind mount a volume
+- `-v`: mounts a directory into the container
 
 Finally confirm Milvus running status by the following command:
 
