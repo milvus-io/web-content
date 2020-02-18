@@ -85,7 +85,7 @@ milvusdb/milvus:0.6.0-cpu-d120719-2b40dd
 - `-d`: 运行 container 到后台并打印 container id。
 - `--name`: 为 container 分配一个名字。
 - `-p`: 暴露 container 端口到 host。
-- `-v`: 绑定挂载卷。
+- `-v`: 将路径挂载至 container。
 
 最后，确认 Milvus 运行状态：
 
