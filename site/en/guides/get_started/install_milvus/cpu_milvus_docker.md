@@ -53,6 +53,8 @@ Pull the CPU-only image:
 $ docker pull milvusdb/milvus:0.6.0-cpu-d120719-2b40dd
 ```
 
+> Note: If the pulling speed is too slow or the pulling process constantly fails, refer to [Operational FAQ](../../../faq/operational_faq.md) for possible solutions.
+
 ### Step 3 Download configuration files
 
 ```shell
@@ -84,7 +86,7 @@ The `docker run` options used in the above command are defined as follows:
 - `--name`: Assign a name to the container
 - `--gpus`: GPU devices to add to the container (‘all’ to pass all GPUs)
 - `-p`: Publish a container’s port(s) to the host
-- `-v`: Bind mount a volume
+- `-v`: Mounts the directory into the container
 
 Finally confirm Milvus running status by the following command:
 
