@@ -49,7 +49,7 @@ Pull the GPU-enabled image:
 ```shell
 $ docker pull milvusdb/milvus:0.6.0-gpu-d120719-2b40dd
 ```
-> Note: If the pulling speed is too slow or constantly fails, refer to [Operation FAQ](../../../faq/operational_faq.md) for possible solutions.
+> Note: If the pulling speed is too slow or constantly fails, refer to [Operational FAQ](../../../faq/operational_faq.md) for possible solutions.
 
 ## Step 3 Download configuration files
 
