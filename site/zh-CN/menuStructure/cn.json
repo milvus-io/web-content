@@ -149,15 +149,6 @@
       "order": 3
     },
     {
-      "id": "partition.md",
-      "title": "表分区",
-      "lang": "en",
-      "label1": "guides",
-      "label2": "",
-      "label3": "",
-      "order": 4
-    },
-    {
       "id": "monitor.md",
       "title": "监控与报警",
       "lang": "en",
