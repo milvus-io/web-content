@@ -18,7 +18,7 @@ Now, let's run a Python example program. Use this example program to create a ta
    $ pip3 install pymilvus==0.2.6
    ```
 
-   > Note: To learn more about Milvus Python SDK, go to [Milvus Python SDK Playbook](https://milvus-io.github.io/milvus-sdk-python/pythondoc/status.html).
+   > Note: To learn more about Milvus Python SDK, go to [Milvus Python SDK Readme](https://github.com/milvus-io/pymilvus/blob/master/README.md).
 
 3. Download Python example code.
 
@@ -26,7 +26,9 @@ Now, let's run a Python example program. Use this example program to create a ta
    # Download Python example
    $ wget https://raw.githubusercontent.com/milvus-io/pymilvus/blob/0.6.0/examples/example.py
    ```
-
+   
+    > Note: If you cannot use `wget` to download the example code, you can also create `example.py` and copy the [example code](https://github.com/milvus-io/pymilvus/blob/0.6.0/examples/example.py).
+    
 4. Run the example code.
 
    ```shell
