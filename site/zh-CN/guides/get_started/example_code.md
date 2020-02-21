@@ -24,7 +24,7 @@ sidebar_label: Try an Example Program
    # Download Python example
    $ wget https://raw.githubusercontent.com/milvus-io/pymilvus/blob/0.6.0/examples/example.py
    ```
-   > 注意：万一您遇到无法通过 `wget` 命令正常下载配置文件的情况，您也可以创建 `example.py` 文件并复制粘贴[示例代码](https://github.com/milvus-io/pymilvus/blob/0.6.0/examples/example.py)的内容。
+   > 注意：万一您遇到无法通过 `wget` 命令正常下载示例代码的情况，您也可以创建 `example.py` 文件并复制粘贴[示例代码](https://github.com/milvus-io/pymilvus/blob/0.6.0/examples/example.py)的内容。
 
 4. 运行示例代码。
 
