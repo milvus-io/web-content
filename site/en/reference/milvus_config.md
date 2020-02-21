@@ -123,8 +123,8 @@ To switch to CPU-only mode, just set `enable` to `false`.
 | -------------------- | ------------------------------------------------------------ | ------------ | ------- |
 | `enable` | Whether to enable GPU usage in Milvus. | Boolean | `true` |
 | `cache_capacity` | Size of the GPU memory for caching data for faster query. The size must be less than the total GPU memory size. | Integer | `4` (GB) |
-| `search_resources` | GPU devices used for search computation in Milvus. Must be in format: `gpux`, where `x` is the number of the GPU, such as `gpu0`. You can use multiple GPUs for search computation. | ResourceType | `gpu0` |
-| `build_index_resources` | GPU devices used for index building in Milvus. Must be in format: `gpux`, where `x` is the number of the GPU, such as `gpu0`. You can use multiple GPUs for search computation. | ResourceType | `gpu0` |
+| `search_resources` | GPU devices used for search computation in Milvus. Must be in format: `gpux`, where `x` is the GPU number, such as `gpu0`. You can use multiple GPUs for search computation. | ResourceType | `gpu0` |
+| `build_index_resources` | GPU devices used for index building in Milvus. Must be in format: `gpux`, where `x` is the GPU number, such as `gpu0`. You can use multiple GPUs for search computation. | ResourceType | `gpu0` |
 </div>
 
 > Note: In Milvus, index building and search computation are separate processes, which can be executed on `cpu`, `gpu`, or both. You can assign multiple GPUs to index building and search computation by adding GPUs under `search_resources` or `build_index_resources`. The following YAML code shows an example:
