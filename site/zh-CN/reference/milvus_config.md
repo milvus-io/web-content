@@ -113,11 +113,9 @@ $ docker restart <container id>
 
 #### `gpu_resource_config` 区域
 
-在该区域选择是否在 Milvus 里启用 GPU 用于搜索和索引创建。系统默认同时使用 CPU 和 GPU 来达到资源的最优利用，在特别大的数据集里做搜索时性能更佳。
+在该区域选择是否在 Milvus 里启用 GPU 用于搜索和索引创建。同时使用 CPU 和 GPU 可以达到资源的最优利用，在特别大的数据集里做搜索时性能更佳。
 
 若要切换到 CPU-only 模式，只要将 `enable` 设置为 `false`。
-
-> 注意：在 Milvus 里，**创建索引**和**搜索**是两个独立分开的过程，可以只在 `cpu`，或同时在 `cpu` 和 `gpu` 里进行。您可以指定多张 GPU 来进行该过程。
 
 <div class="table-wrapper" markdown="block">
 
@@ -125,6 +123,17 @@ $ docker restart <container id>
 | ------------------ | ------------------------------------------------------------ | ------- | ---------- |
 | `enable` | 选择是否在 Milvus 里启用 GPU 用于搜索和索引创建。 | Boolean | `true` |
 | `cache_capacity` | 显存中用于驻留搜索数据的缓存空间，该值不能超过显存总量。 | Integer | `4` (GB) |
-| `search_resources` | 定义 Milvus 里用于搜索的 GPU 资源。格式为：`gpux`。 | ResourceType        | ` gpu0` |
-| `build_index_resources` | 定义 Milvus 里用户创建索引的 GPU 资源。格式为：`gpux`。 | ResourceType | `gpu0` |
+| `search_resources` | 定义 Milvus 里用于搜索的 GPU 资源。格式为：`gpux`，其中 `x` 是 GPU 的序号，例如 `gpu0`。 | ResourceType        | ` gpu0` |
+| `build_index_resources` | 定义 Milvus 里用户创建索引的 GPU 资源。格式为：`gpux`，其中 `x` 是 GPU 的序号，例如 `gpu0`。 | ResourceType | `gpu0` |
 </div>
+
+> 注意：在 Milvus 里，创建索引和搜索是两个独立分开的过程，可以只在 `cpu`，或同时在 `cpu` 和 `gpu` 里进行。通过将 GPU 添加至 `search_resources` 或者 `build_index_resources` 下方，您可以指定多张 GPU 来进行创建索引或搜索。 请参考下面的 YAML 示例代码：
+
+  ```yaml
+    search_resources:
+      - gpu0
+      - gpu1
+    build_index_resources:
+      - gpu0
+      - gpu1
+  ```
