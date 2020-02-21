@@ -107,17 +107,15 @@ In the directory `home/$USER/milvus/conf`, open Milvus service configuration fil
 
 | Parameter            | Description                                                  | Type    | Default |
 | -------------------- | ------------------------------------------------------------ | ------- | ------- |
-| `use_blas_threshold` | A Milvus performance tuning parameter. The threshold value must be compared with `nq` to decide if the usage of OpenBLAS library will be triggered. <br/>If `nq` >= `use_blas_threshold` , OpenBLAS will be used. The search response times do not fluctuate, but the search speed is relatively slow. <br/>If `nq` < `use_blas_threshold` , SSE will be used. The search speed will be enhanced, however with slight fluctuation of search response times. The value should be >= 0. | Integer | `20`   |
+| `use_blas_threshold` | A Milvus performance tuning parameter. The threshold value must be compared with `nq` to decide whether the usage of OpenBLAS library will be triggered. <br/>If `nq` >= `use_blas_threshold` , OpenBLAS will be used. The search response times do not fluctuate, but the search speed is relatively slow. <br/>If `nq` < `use_blas_threshold` , SSE will be used. The search speed will be enhanced, however with slight fluctuation of search response times. The value should be >= 0. | Integer | `20`   |
 | `gpu_search_threshold` | A Milvus performance tuning parameter. The threshold value must be compared with `nq` to decide if the search computation will be executed on GPUs only.<br/>If `nq` >= `gpu_search_threshold` , the search computation will be executed on GPUs only.<br/>If `nq` < `gpu_search_threshold` , the search computation will be executed on both CPUs and GPUs. | Integer | `1000` |
 </div>
 
 ### Section `gpu_resource_config`
 
-Decide in this section whether to enable GPU support/usage in Milvus. GPU support, which uses both CPU and GPUs for optimized resource utilization, is by default enabled to achieve accelerated search performance on very large datasets. 
+Decide in this section whether to enable GPU support/usage in Milvus. GPU support, which uses both CPU and GPUs for optimized resource utilization, can achieve accelerated search performance on very large datasets. 
 
 To switch to CPU-only mode, just set `enable` to `false`. 
-
-> Note: In Milvus, the **index building** and **search computation** are separate processes, which can be executed on `cpu`, or `gpu` or both. You are allowed to assign multiple GPUs to run both processes.
 
 <div class="table-wrapper" markdown="block">
 
@@ -129,10 +127,15 @@ To switch to CPU-only mode, just set `enable` to `false`.
 | `build_index_resources` | GPU devices used for index building in Milvus. Must be in format: `gpux`, where `x` is the number of the GPU, such as `gpu0`. You can use multiple GPUs for search computation. | ResourceType | `gpu0` |
 </div>
 
-> Note: Both search computation and index building support multiple GPUs. Use the following format to add multiple GPUs:
+> Note: In Milvus, index building and search computation are separate processes, which can be executed on `cpu`, `gpu`, or both. You can assign multiple GPUs to index building and search computation by adding GPUs under `search_resources` or `build_index_resources`. The following YAML code shows an example:
 
   ```yaml
-  - gpu0
-  - gpu1
+    search_resources:
+      - gpu0
+      - gpu1
+    build_index_resources:
+      - gpu0
+      - gpu1
   ```
+
 
