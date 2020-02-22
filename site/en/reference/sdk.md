@@ -1,15 +1,17 @@
 ---
 id: sdk.md
-title: SDK
-sidebar_label: SDK
+title: Supported Clients
+sidebar_label: Supported Clients
 ---
 
-# SDK Reference
+# Supported Clients
 
-Milvus supports the following types of SDKs and APIs:
+Milvus supports the following clients:
 
-- [Java SDK](https://github.com/milvus-io/milvus-sdk-java)
-- [Python SDK](https://github.com/milvus-io/pymilvus)
-- [C++ SDK](https://github.com/milvus-io/milvus/tree/master/sdk)
-- [Go SDK](https://github.com/milvus-io/milvus-sdk-go)
-- [RESTful API](https://github.com/milvus-io/milvus/tree/master/core/src/server/web_impl)
+- [Java](https://github.com/milvus-io/milvus-sdk-java)
+- [Python](https://github.com/milvus-io/pymilvus)
+- [C++](https://github.com/milvus-io/milvus/tree/master/sdk)
+- [Go](https://github.com/milvus-io/milvus-sdk-go)
+- [RESTful](https://github.com/milvus-io/milvus/tree/master/core/src/server/web_impl)
+
+You can use the corresponding SDK/API to create Milvus clients.
