@@ -33,6 +33,15 @@ sidebar_label: Operational FAQ
 
 <!-- /TOC -->
 
+#### What if I failed to pull docker images from dockerhub when installing Milvus?
+
+Users in some countries may have limited access to dockerhub. In this case, you can pull images from the local registry mirror. For example, the URL of the registry mirror for China is `registry.docker-cn.com`. You can add `"https://registry.docker-cn.com"` to the `registry-mirrors` array in `/etc.docker/daemon.json` to pull from the China registry mirror by default.
+
+```
+{
+  "registry-mirrors": ["https://registry.docker-cn.com"]
+}
+```
 
 #### Why do I fail to compile Milvus from source?
 
@@ -224,16 +233,6 @@ In order to avoid this situation, you can try increasing the value of `nprobe`, 
 As Milvus is mainly developed under the Ubuntu environment, the recommended compilation environment is Ubuntu 18.04 or higher. If your developing environment is not Ubuntu 18.04, you can also build Milvus from source code in the docker container. We provide two docker images that provide the build environment needed for the Milvus CPU-only and GPU supported versions.
 
 To build Milvus from source in the Docker container, please refer to [Compile Milvus on Docker](https://github.com/milvus-io/milvus/blob/0.6.0/install.md#compile-milvus-on-docker).
-
-#### What if I failed to pull docker images from dockerhub when installing Milvus?
-
-Users in some countries may have limited access to dockerhub. In this case, you can pull images from the local registry mirror. For example, the URL of the registry mirror for China is `registry.docker-cn.com`. You can add `"https://registry.docker-cn.com"` to the `registry-mirrors` array in `/etc.docker/daemon.json` to pull from the China registry mirror by default.
-
-```
-{
-  "registry-mirrors": ["https://registry.docker-cn.com"]
-}
-```
 
 #### How often should I build indexes when inserting data?
 
