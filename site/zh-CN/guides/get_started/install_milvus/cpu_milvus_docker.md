@@ -113,12 +113,12 @@ $ docker logs <milvus container id>
 
 ```shell
 # Start Milvus
-$ docker run -d --name milvus_cpu \
--p 19530:19530 \
--p 8080:8080 \
--v C:\milvus\db:/var/lib/milvus/db \
--v C:\milvus\conf:/var/lib/milvus/conf \
--v C:\milvus\logs:/var/lib/milvus/logs \
+$ docker run -d --name milvus_cpu ^
+-p 19530:19530 ^
+-p 8080:8080 ^
+-v C:\milvus\db:/var/lib/milvus/db ^
+-v C:\milvus\conf:/var/lib/milvus/conf ^
+-v C:\milvus\logs:/var/lib/milvus/logs ^
 milvusdb/milvus:0.6.0-cpu-d120719-2b40dd
 ```
 
