@@ -72,11 +72,24 @@ In the directory `home/$USER/milvus/conf`, open Milvus service configuration fil
 
 | Parameter                | Description                                                  | Type    | Default         |
 | ------------------------ | ------------------------------------------------------------ | ------- | --------------- |
+| `backend_url`         | URL for metadata storage. Use SQLite (for single server Milvus) or MySQL (for distributed cluster) to store the metadata. <br/>The format of db_backend_url is: `dialect://username:password@host:port/database`. (`dialect` can be either `mysql` or `sqlite`, depending on which database you use. | Path   | `sqlite://:@:/`       |
+| `preload_table` | Define if to preload tables into memory after Milvus server restart. Tables can be selected for fully or partially preloading.<br/>To preload all the existing tables, use `*` ; To preload some tables, list the specific table names, separated by comma. If you choose not to preload any table, keep it empty ( ` ` ). | PreloadType | ` ` |
+</div>
+
+### Section `storage_config`
+
+<div class="table-wrapper" markdown="block">
+
+| Parameter                | Description                                                  | Type    | Default         |
+| ------------------------ | ------------------------------------------------------------ | ------- | --------------- |
 | `primary_path`         | Primary directory used for both the vector data files you want to import, and the metadata. | Path   | `/var/lib/milvus`    |
 | `secondary_path` | A semicolon-separated list of secondary directories used only for the vector data files imported into Milvus. Set this parameter when the data size is too much to fit in the `primary_path`. <br/>Each file, whether in `primary_path` or `secondary_path`, is assigned an equal part of the imported data.  Data Size per Directory = Total Data Size / Number of Directories. So make sure the available storage space in these files are enough. | Path   |            |
-| `backend_url`         | URL for metadata storage. Use SQLite (for single server Milvus) or MySQL (for distributed cluster) to store the metadata. <br/>The format of db_backend_url is: `dialect://username:password@host:port/database`. (`dialect` can be either `mysql` or `sqlite`, depending on which database you use. | Path   | `sqlite://:@:/`       |
-| `insert_buffer_size`     | Maximum buffer size allowed for data insertion. The sum of `insert_buffer_size` and `cpu_cache_capacity` (in "Section `cache_config`" ) should be < total memory. | Integer | `4` (GB)        |
-| `preload_table` | Define if to preload tables into memory after Milvus server restart. Tables can be selected for fully or partially preloading.<br/>To preload all the existing tables, use `*` ; To preload some tables, list the specific table names, separated by comma. If you choose not to preload any table, keep it empty ( ` ` ). | PreloadType | ` ` |
+|`s3_enable`| Enable Simple Storage Service or not.                      | Boolean    | false           |
+| `s3_address`          | Simple Storage Service (S3) IP address.                         | IP         | 127.0.0.1       |
+| `s3_port`              | S3 port. Port range must be in (1024, 65535).      | Integer    | 9000            |
+| `s3_access_key`        | S3 access key.                  | String     | minioadmin      |
+| `s3_secret_key`        | S3 secret key.                    | String     | minioadmin      |
+| `s3_bucket`           | S3 bucket name.                     | String     | milvus-bucket   |
 </div>
 
 ### Section `metric_config`
@@ -87,7 +100,7 @@ In the directory `home/$USER/milvus/conf`, open Milvus service configuration fil
 | ---------------- | ------------------------------------------------ | ------- | ------------ |
 | `enable_monitor` | Set to `true` to enable the monitoring function. | Boolean | `false`       |
 | `collector`      | Connected monitoring system to collect metrics.  | String  | `Prometheus` |
-|  `address`        | IP address of the Pushgateway.      |   IP     |   127.0.0.1    |
+| `address`        | IP address of the Pushgateway.      |   IP     |   127.0.0.1    |
 | `port`           | Port to visit Prometheus.                        | Integer | `8080`       |
 </div>
 
@@ -98,6 +111,7 @@ In the directory `home/$USER/milvus/conf`, open Milvus service configuration fil
 | Parameter            | Description                                                  | Type    | Default   |
 | -------------------- | ------------------------------------------------------------ | ------- | --------- |
 | `cpu_cache_capacity` | The size of the CPU memory for caching data for faster query. The sum of `cpu_cache_capacity` and `insert_buffer_size` (in "Section `db_config`) must be less than total CPU memory size. | Integer | `16` (GB) |
+| `insert_buffer_size`     | Maximum buffer size allowed for data insertion. The sum of `insert_buffer_size` and `cpu_cache_capacity` (in "Section `cache_config`" ) should be < total memory. | Integer | `4` (GB)        |
 | `cache_insert_data`  | If set to `true` , the inserted data will be loaded into the cache immediately for hot query. <br/>If you want simultaneous inserting and searching of vector, it is recommended to enable this function. | Boolean | `false`   |
 </div>
 
@@ -113,7 +127,7 @@ In the directory `home/$USER/milvus/conf`, open Milvus service configuration fil
 
 ### Section `gpu_resource_config`
 
-Decide in this section whether to enable GPU support/usage in Milvus. GPU support, which uses both CPU and GPUs for optimized resource utilization, can achieve accelerated search performance on very large datasets. 
+This section determines whether to enable GPU support/usage in Milvus. GPU support, which uses both CPU and GPUs for optimized resource utilization, can achieve accelerated search performance on very large datasets. 
 
 To switch to CPU-only mode, just set `enable` to `false`. 
 
@@ -138,4 +152,11 @@ To switch to CPU-only mode, just set `enable` to `false`.
       - gpu1
   ```
 
+### Section `tracing_config`
 
+<div class="table-wrapper" markdown="block">
+
+| Parameter            | Description                                                  | Type         | Default |
+| -------------------- | ------------------------------------------------------------ | ------------ | ------- |
+| `json_config_path` | Absolute path for tracing config file. Milvus creates an no-op tracer if the value is empty. | Path | N/A  |
+</div>
