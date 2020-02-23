@@ -32,7 +32,7 @@ $ docker restart <container id>
 
 ### 运行时修改
 
-您可以使用 SDK 或者 RESTful API 对 `server_config.yaml` 的部分配置进行运行时修改。修改后无需重启 Milvus 即可启用新的更改。详情请参考 [SDK 参考](sdk.md)。
+您可以使用 SDK 或者 RESTful API 对 `server_config.yaml` 的部分配置进行运行时修改。修改后无需重启 Milvus 即可启用新的更改。详情请参考 [客户端参考](sdk.md)。
 
 您可以对以下参数进行运行时修改：
  
