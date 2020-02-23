@@ -158,5 +158,5 @@ To switch to CPU-only mode, just set `enable` to `false`.
 
 | Parameter            | Description                                                  | Type         | Default |
 | -------------------- | ------------------------------------------------------------ | ------------ | ------- |
-| `json_config_path` | Absolute path for tracing config file. Milvus creates an no-op tracer if the value is empty. | Path | N/A  |
+| `json_config_path` | Absolute path for tracing config file. Milvus creates a no-op tracer if the value is empty. | Path | N/A  |
 </div>
