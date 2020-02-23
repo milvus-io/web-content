@@ -32,7 +32,7 @@ $ docker restart <container id>
 
 ### 运行时修改
 
-您可以使用 SDK 或者 RESTful API 对 `server_config.yaml` 的部分配置进行运行时修改。修改后无需重启 Milvus 即可启用新的更改。详情请参考 [SDK 参考](sdk.md)。
+您可以使用 SDK 或者 RESTful API 对 `server_config.yaml` 的部分配置进行运行时修改。修改后无需重启 Milvus 即可启用新的更改。详情请参考 [客户端参考](sdk.md)。
 
 您可以对以下参数进行运行时修改：
  
@@ -60,9 +60,9 @@ $ docker restart <container id>
 
 | 参数        | 说明                                                         | 类型    | 默认值    |
 | ----------- | ------------------------------------------------------------ | ------- | --------- |
-| `address`   | Milvus server监听的IP地址。                                  | String | `0.0.0.0`  |
-| `port`      | Milvus server监听的端口号，范围：1025 - 65534。               | Integer | `19530`   |
-| `deploy_mode` | Milvus部署类型。选择 `single` ，`cluster_readonly` 或 `cluster_writable`。 | Boolean | `single`  |
+| `address`   | Milvus server 监听的 IP 地址。                                  | String | `0.0.0.0`  |
+| `port`      | Milvus server 监听的端口号，范围：1025 - 65534。               | Integer | `19530`   |
+| `deploy_mode` | Milvus 部署类型。选择 `single` ，`cluster_readonly` 或 `cluster_writable`。 | Boolean | `single`  |
 | `time_zone` | 使用 UTC-x 或 UTC+x 来指定时区。比如，您可以使用 `UTC+8` 来代表中国标准时间。 | Timezone | `UTC+8`   |
 </div>
 
@@ -72,12 +72,27 @@ $ docker restart <container id>
 
 | 参数                 | 说明                                                         | 类型        | 默认值          |
 | -------------------- | ------------------------------------------------------------ | ----------- | --------------- |
+| `backend_url`        | 元数据存储的 URL 。使用 SQLite（单机部署） 或 MySQL（分布式集群部署）来存储元数据。 <br/>`db_backend_url` 的格式为：`dialect://username:password@host:port/database`。（ `dialect` 可以是 `mysql` 或 `sqlite`，取决于你是用了 MySQL 还是 SQLite 数据库。） | Path        | `sqlite://:@:/` |
+| `preload_table`      | 定义在 Milvus 服务再次启动后，是否将之前已经导入并保存在磁盘的表预加载到内存。支持全部表格或者部分表格的预加载。 <br/>若要加载所有表格，使用 `*` ；若要加载部分表格，列出所有需要加载的表名，以逗号隔开。如果无需加载表格，请将该值留空 （ ` ` ）。 | PreloadType | ` `             |
+</div>
+
+#### `storage_config` 区域
+
+<div class="table-wrapper" markdown="block">
+
+| 参数                 | 说明                                                         | 类型        | 默认值          |
+| -------------------- | ------------------------------------------------------------ | ----------- | --------------- |
 | `primary_path`       | 导入 Milvus 的数据文件和元数据存储的首选路径。               | Path        | `/var/lib/milvus`     |
 | `secondary_path`     | 导入 Milvus 的数据文件存储的二级路径，可以填多个，两个路径中间以分号隔开。当数据量很大，`primary_path` 指定的磁盘空间不够用时，可以设置此参数。<br/>`primary_path` 和 `secondary_path` 平均分配导入的数据。每个路径下的数据大小 = 数据总大小 / 路径数量。请确保这些路径下文件可用的存量差不多且够用。 | Path        | ` `             |
 | `backend_url`        | 元数据存储的 URL 。使用 SQLite（单机部署） 或 MySQL（分布式集群部署）来存储元数据。 <br/>`db_backend_url` 的格式为：`dialect://username:password@host:port/database`。（ `dialect` 可以是 `mysql` 或 `sqlite`，取决于你是用了MySQL 还是SQLite数据库。） | Path        | `sqlite://:@:/` |
-| `insert_buffer_size` | 用于 buffer 的最大内存量。`insert_buffer_size` 和`cpu_cache_capacity`（`cache_config` 区域）之和不能超过内存总量。 | Integer     | `4` (GB)        |
-| `preload_table`      | 定义在 Milvus 服务再次启动后，是否将之前已经导入并保存在磁盘的表预加载到内存。支持全部表格或者部分表格的预加载。 <br/>若要加载所有表格，使用 `*` ；若要加载部分表格，列出所有需要加载的表名，以逗号隔开。如果无需加载表格，请将该值留空 （ ` ` ）。 | PreloadType | ` `             |
+|`s3_enable`| 是否使用 Simple Storage Service (S3) 进行数据存储。                      | Boolean    | false           |
+| `s3_address`          | S3 存储的 IP 地址。                        | IP         | `127.0.0.1`       |
+| `s3_port`              | S3 端口。 端口必须在 (1024, 65535) 范围内。      | Integer    | `9000`            |
+| `s3_access_key`        | S3 访问秘钥 (access key)。                  | String     | `minioadmin`      |
+| `s3_secret_key`        | S3 秘密秘钥 (secret key)。                    | String     | `minioadmin`      |
+| `s3_bucket`           | S3 存储桶的名称。                    | String     | `milvus-bucket`   |
 </div>
+
 
 #### `metric_config` 区域
 
@@ -98,6 +113,7 @@ $ docker restart <container id>
 | 参数                       | 说明                                                         | 类型    | 默认值    |
 | -------------------------- | ------------------------------------------------------------ | ------- | --------- |
 | `cpu_cache_capacity`       | 内存中用于驻留搜索数据的缓存空间，`cpu_cache_capacity` 和 `insert_buffer_size`（`db_config` 区域）之和不能超过内存总量。 | Integer | `16` (GB) |
+| `insert_buffer_size` | 用于 buffer 的最大内存量。`insert_buffer_size` 和`cpu_cache_capacity`（`cache_config` 区域）之和不能超过内存总量。 | Integer     | `4` (GB)        |
 | `cache_insert_data` | 设置为 `true` ，则新插入的数据会自动加载到缓存以备搜索。<br/>如果想要实现数据即插即搜索，建议启用该功能。 | Boolean | `false`  |
 </div>
 
@@ -137,3 +153,11 @@ $ docker restart <container id>
       - gpu0
       - gpu1
   ```
+### `tracing_config` 区域
+
+<div class="table-wrapper" markdown="block">
+
+| 参数               | 说明                                                         | 类型    | 默认值     |
+| -------------------- | ------------------------------------------------------------ | ------------ | ------- |
+| `json_config_path` | 追踪系统配置文件的绝对路径。如果该值为空，则 Milvus 会创建一个空的追踪系统。  | Path | ` `  |
+</div>

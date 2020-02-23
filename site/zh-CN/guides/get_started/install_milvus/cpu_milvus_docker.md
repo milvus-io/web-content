@@ -109,7 +109,7 @@ $ docker logs <milvus container id>
 
 在第三步中，不同于使用 `wget` 来获取配置文件，使用 Windows 安装时，建议在 C 盘，或其它合适的位置创建 `milvus` 文件夹，下面包含 `db`，`conf` 和 `logs` 三个子文件夹，然后分别复制 [server config 文件](https://github.com/milvus-io/milvus/blob/0.7.0/core/conf/demo/server_config.yaml) 和 [log config 文件](https://github.com/milvus-io/milvus/blob/0.7.0/core/conf/demo/log_config.conf)的内容到您在 `C:\milvus\conf` 路径下创建的`server_config.yaml` 和 `log_config.conf` 文件中。
 
-第四步，启动 Docker 容器，将 Milvus 文件映射到您本地的文件路径：
+第四步，启动 Docker 容器，将 Milvus 文件映射到您本地的文件路径。下面的命令是在命令提示符中运行的：
 
 ```shell
 # Start Milvus
