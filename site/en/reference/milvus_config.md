@@ -83,7 +83,7 @@ In the directory `home/$USER/milvus/conf`, open Milvus service configuration fil
 | Parameter                | Description                                                  | Type    | Default         |
 | ------------------------ | ------------------------------------------------------------ | ------- | --------------- |
 | `primary_path`         | Primary directory used for both the vector data files you want to import, and the metadata. | Path   | `/var/lib/milvus`    |
-| `secondary_path` | A semicolon-separated list of secondary directories used only for the vector data files imported into Milvus. Set this parameter when the data size is too much to fit in the `primary_path`. <br/>Each file, whether in `primary_path` or `secondary_path`, is assigned an equal part of the imported data.  Data Size per Directory = Total Data Size / Number of Directories. So make sure the available storage space in these files are enough. | Path   |     N/A       |
+| `secondary_path` | A semicolon-separated list of secondary directories used only for the vector data files imported into Milvus. Set this parameter when the data size is too much to fit in the `primary_path`. <br/>Each file, whether in `primary_path` or `secondary_path`, is assigned an equal part of the imported data.  Data Size per Directory = Total Data Size / Number of Directories. So make sure the available storage space in these files are enough. | Path   |     ` `       |
 |`s3_enable`| Whether to enable Simple Storage Service.                      | Boolean    | false           |
 | `s3_address`          | Simple Storage Service (S3) IP address.                         | IP         | `127.0.0.1`       |
 | `s3_port`              | S3 port. Port range must be in (1024, 65535).      | Integer    | `9000`            |
@@ -158,5 +158,5 @@ To switch to CPU-only mode, just set `enable` to `false`.
 
 | Parameter            | Description                                                  | Type         | Default |
 | -------------------- | ------------------------------------------------------------ | ------------ | ------- |
-| `json_config_path` | Absolute path for tracing config file. Milvus creates a no-op tracer if the value is empty. | Path | N/A  |
+| `json_config_path` | Absolute path for tracing config file. Milvus creates a no-op tracer if the value is empty. | Path | ` `  |
 </div>
