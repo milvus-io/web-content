@@ -32,7 +32,7 @@ $ docker restart <container id>
 
 ### Updating configurations during runtime
 
-You can use SDKs or the RESTful API to update some of the parameters in `server_config.yaml`. There is no need to restart Milvus. Refer to [SDK Reference](sdk.md) for more information.
+You can use SDKs or the RESTful API to update some of the parameters in `server_config.yaml`. There is no need to restart Milvus. Refer to [Client Reference](sdk.md) for more information.
 
 You can update the following parameters during runtime.
  
