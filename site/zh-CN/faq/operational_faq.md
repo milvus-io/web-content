@@ -230,6 +230,16 @@ def test_add_vector_search_multiprocessing(self, connect, table):
 
 您应该避免频繁构建索引，因为这样会导致大量小索引文件的生成，从而影响检索效率。
 
+#### Milvus 中的数据是如何存储的？
+
+在 Milvus 中，元数据储存在数据库中，而搜索数据储存在文件中。关于更多信息请参考以下文章：
+
+- [Milvus 数据管理系列（一）：数据管理策略](https://milvus.io/cn/blogs/2019-11-08-data-management.md)
+- [Milvus 数据管理系列（二）：数据文件清理机制的改进](https://www.milvus.io/cn/blogs/2019-12-18-datafile-cleanup.md)
+- [Milvus 数据管理系列（三）：元数据管理](https://milvus.io/cn/blogs/2019-12-24-view-metadata.md)
+- [Milvus 数据管理系列（四）：元数据管理 - 元数据表的字段](https://milvus.io/cn/blogs/2019-12-27-meta-table.md)
+- [Milvus 数据管理系列（五）：如何通过元数据管理数据文件](https://milvus.io/cn/blogs/2020-01-09-milvus-meta.md)
+
 #### 相关阅读
 
 [产品常见问题](product_faq.md)
