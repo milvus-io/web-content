@@ -37,7 +37,7 @@ sidebar_label: Operational FAQ
 
 Users in some countries may have limited access to dockerhub. In this case, you can pull images from the local registry mirror. For example, the URL of the registry mirror for China is `registry.docker-cn.com`. You can add `"https://registry.docker-cn.com"` to the `registry-mirrors` array in `/etc.docker/daemon.json` to pull from the China registry mirror by default.
 
-```
+```json
 {
   "registry-mirrors": ["https://registry.docker-cn.com"]
 }
@@ -236,8 +236,17 @@ To build Milvus from source in the Docker container, please refer to [Compile Mi
 
 #### How often should I build indexes when inserting data?
 
-You should always avoid buiding indexes too frequently when inserting data. Otherwise, a lot of small index files will be generated and performance will be negatively affected.
+You should always avoid building indexes too frequently when inserting data. Otherwise, a lot of small index files will be generated and performance will be negatively affected.
 
+#### How is data stored in Milvus?
+
+In Milvus, metadata is stored in the database, while search data is stored as files. For detailed information, refer to the following blogs:
+
+- [Managing Data in Massive-Scale Vector Search Engine: How data management is done in Milvus](https://medium.com/@milvusio/managing-data-in-massive-scale-vector-search-engine-db2e8941ce2f)
+- [Improvements of the Data File Cleanup Mechanism](https://github.com/milvus-io/community/blob/master/blog/en/2019-12-18-datafile-cleanup.md)
+- [Milvus Metadata Management (1): How to View Metadata](https://medium.com/@milvusio/milvus-metadata-management-1-6b9e05c06fb0)
+- [Milvus Metadata Management (2): Fields in the Metadata Table](https://medium.com/@milvusio/milvus-metadata-management-2-fields-in-the-metadata-table-3bf0d296ca6d)
+- [Milvus Metadata Management (3): How to Manage Data Files with Metadata](https://medium.com/@milvusio/milvus-metadata-management-3-e65b14137f58)
 
 ## Related links
 
