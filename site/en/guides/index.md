@@ -45,8 +45,6 @@ The following concepts are provided to help you better understand Milvus index t
 | Hierarchical Navigable Small World Graphs             | `HNSW`     | `top_k`, nq                                             | ✔️               | ✔️                  |
 </div>
 
-To choose an appropriate index for your application scenarios, please read [How to select an index in Milvus](https://medium.com/@milvusio/how-to-choose-an-index-in-milvus-4f3d15259212).
-
 ## Milvus Indexes
 
 ### `FLAT`
