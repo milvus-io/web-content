@@ -8,16 +8,6 @@ sidebar_label: Index Types
 
 Milvus 支持多种索引类型。本页面主要介绍这些索引类型的定义，和影响搜索速度和召回率的主要参数，以及这些索引类型是否可以用在仅支持 CPU 和支持 GPU 的 Milvus 中。
 
-## 基本概念
-
-本页面用到的一些概念解释如下，主要帮助您更好地理解 Milvus 索引类型以及影响其性能的主要参数。
-
-- `top_k`：与目标向量最相似的 k 条向量，在搜索时定义。
-- nq：查询的目标向量数量，在搜索时定义。
-- `nlist`: 聚类时总的分桶数，在创建索引时定义。特征空间被聚类为 `nlist` 个桶。
-- `nprobe`: 查询时需要搜索的分桶数目，在搜索时定义。
-- `gpu_search_threshold`: Milvus 性能调优参数。此参数必须与 nq 比较以确定搜索计算是否只在 GPU 上进行。如果 nq >= `gpu_search_threshold`，则搜索计算只在 GPU 上进行。如果 nq < `gpu_search_threshold`，则搜索计算将在 CPU 和 GPU 上协同进行。
-
 ## 索引概览
 
 <div class="table-wrapper" markdown="block">
@@ -33,7 +23,15 @@ Milvus 支持多种索引类型。本页面主要介绍这些索引类型的定�
 | HNSW | `HNSW`     | `top_k`, nq   | ✔️               | ✔️                  |✔️    | ❌     |
 </div>
 
-## Milvus 索引
+性能影响参数的详细解释如下：
+
+- `top_k`：与目标向量最相似的 k 条向量，在搜索时定义。
+- nq：查询的目标向量数量，在搜索时定义。
+- `nlist`: 聚类时总的分桶数，在创建索引时定义。特征空间被聚类为 `nlist` 个桶。
+- `nprobe`: 查询时需要搜索的分桶数目，在搜索时定义。
+- `gpu_search_threshold`: Milvus 性能调优参数。此参数必须与 nq 比较以确定搜索计算是否只在 GPU 上进行。如果 nq >= `gpu_search_threshold`，则搜索计算只在 GPU 上进行。如果 nq < `gpu_search_threshold`，则搜索计算将在 CPU 和 GPU 上协同进行。
+
+## 索引详解
 
 ### `FLAT`
 
@@ -79,4 +77,5 @@ Milvus 支持多种索引类型。本页面主要介绍这些索引类型的定�
 
 若要为您的使用场景选择合适的索引，请参阅 [如何选择索引类型](https://milvus.io/cn/blogs/2019-12-03-select-index.md)。
 
+关于索引和向量距离计算方法的选择，请访问 [距离计算方式](metric.md)。
 
