@@ -13,7 +13,7 @@ sidebar_label: Operational FAQ
 - [Does Milvus support insert, delete, update, and query operations for vectors?](#Does-Milvus-support-insert,-delete,-update,-and-query-operations-for-vectors)
 - [Should I specify vector IDs or use auto-generated vector IDs?](#Should-I-specify-vector-IDs-or-use-auto-generated-vector-IDs)
 - [Why do Euclidean distance and inner product have inconsistent results in computing vector similarity?](#Why-do-Euclidean-distance-and-inner-product-have-inconsistent-results-in-computing-vector-similarity)
-- [Why does Milvus display "no space left on device" when I import data to Milvus?](#why-does-Milvus-display-no-space-left-on-device-when-i-import-data-to-Milvus)
+- [Why does Milvus display "no space left on device" when I import data to Milvus?](#why-does-Milvus-display-no-space-left-on-device-when-I-import-data-to-Milvus)
 - [Why does this error "Vectors should be 2-dim array" still occur in the Python SDK when the data is a 2-dimensional array?](#Why-does-this-error-Vectors-should-be-2-dim-array-still-occur-in-the-Python-SDK-when-the-data-is-a-2-dimensional-array)
 - [Why sometimes it takes much longer for queries with smaller datasets?](#Why-sometimes-it-takes-much-longer-for-queries-with-smaller-datasets)
 - [Why is my Milvus constantly having bad performance?](#Why-is-my-Milvus-constantly-having-bad-performance)
@@ -24,10 +24,10 @@ sidebar_label: Operational FAQ
 - [Why there are a lot of `-1`s in my search result?](#Why-there-are-a-lot-of--1s-in-my-search-result)
 - [Why does my Milvus return "Illegal instruction" during startup?](#Why-does-my-Milvus-return-Illegal-instruction-during-startup)
 - [Why is `cpu_cache_capacity` always too large for MacOS or Windows?](#Why-is-cpu_cache_capacity-always-too-large-for-MacOS-or-Windows)
-- [Why is the time in my log files different from the system time?](#Why-is-the-time-in-my-log-files-different-from-the-system-time?)
+- [Why is the time in my log files different from the system time?](#Why-is-the-time-in-my-log-files-different-from-the-system-time)
 - [Why does my multiprocessing program fail?](#Why-does-my-multiprocessing-program-fail)
-- [Why are the search results fewer than K when I try to search the top K vectors?](#Why-are-the-search-results-fewer-than-K-when-i-try-to-search-the-top-K-vectors)
-- [How to build Milvus from source in the Docker container?](#How-to-build-Milvus-from-source-in-the-Docker-container?)
+- [Why are the search results fewer than K when I try to search the top K vectors?](#Why-are-the-search-results-fewer-than-K-when-I-try-to-search-the-top-K-vectors)
+- [How to build Milvus from source in the Docker container?](#How-to-build-Milvus-from-source-in-the-Docker-container)
 - [Related links](#Related-links)
 
 <!-- /TOC -->
