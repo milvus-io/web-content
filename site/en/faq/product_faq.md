@@ -18,7 +18,7 @@ sidebar_label: Product FAQ
 - [Which index methods are supported?](#Which-index-methods-are-supported)
 - [Does Milvus support simultaneous inserting and searching?](#Does-Milvus-support-simultaneous-inserting-and-searching)
 - [Where are the data stored?](#Where-are-the-data-stored)
-- [How does Milvus compare to FAISS and SPTAG?](#How-does-milvus-compare-to-FAISS-and-SPTAG)
+- [How does Milvus compare to FAISS and SPTAG?](#How-does-Milvus-compare-to-FAISS-and-SPTAG)
 - [Is Milvus an end-to-end product?](#Is-Milvus-an-end-to-end-product)
 - [Have questions that were not answered?](#Have-questions-that-were-not-answered)
 
