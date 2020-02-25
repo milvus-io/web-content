@@ -65,7 +65,7 @@ Vector size can be reduced to 1/16 or 1/32 of the original size. If you choose t
 
 Only 1, 2, 3, 4, 6, 8, 10, 12, 16, 20, 24, 28, 32 dimensions per sub-quantizer are currently supported. The supported sub-quantizer number are 1, 2, 3, 4, 8, 12, 16, 20, 24, 28, 32, 40, 48, 56, 64, 96.
 
-`IVF_PQ` is probably is most suitable index for large-scale, high-dimensional vector search.
+`IVF_PQ` is probably the most suitable index for large-scale, high-dimensional vector search.
 
 ### `RNSG`
 
