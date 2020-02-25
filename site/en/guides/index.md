@@ -8,9 +8,22 @@ sidebar_label: Index Types
 
 Milvus supports multiple types of indexes to suit various scenarios. The page introduces the description and main parameters that affects query performance or recall rate when using these indexes. The compatibility of the index with CPU or GPU supported Milvus is also demonstrated.
 
-## Basic concepts
+## Index Overview
 
-The following concepts are provided to help you better understand Milvus index types and what parameters affect their performance.
+<div class="table-wrapper" markdown="block">
+
+| Type                                               | Name | Parameters affecting performance | CPU-only Milvus  | GPU-enabled Milvus | Float vector support |  Binary vector support |
+| -------------------------------------------------- | ---------- | --------------------------------------------- | ---------------- | ------------------ | ------ | -----| 
+| Exact search                                       | `FLAT`     | `top_k`, nq                                   | ✔️               | ✔️                  | ✔️               | ✔️                  |
+| Inverted file with exact post-verification         | `IVFLAT`   | `top_k`, nq, `nprobe`, `gpu_search_threshold` | ✔️               | ✔️                  | ✔️               | ✔️                  |
+| IVF and scalar quantizer                           | `IVF_SQ8`  | `top_k`, nq, `nprobe`, `nlist`, `gpu_search_threshold`  | ✔️               | ✔️                  | ✔️               | ❌                  |
+| IVFSQ8 hybrid search on both CPU and GPU           | `IVF_SQ8H` | `top_k`, nq, `nprobe`, `nlist`, `gpu_search_threshold`  | ❌               | ✔️                  | ✔️               | ❌                  |
+| Inverted file with product quantization refinement | `IVF_PQ`   | `top_k`, nq, `nprobe`, `nlist`                          | ✔️               | ❌                  | ✔️               | ❌                  |
+| Refined Navigating Spreading-out Graph             | `RNSG`     | `top_k`, nq                                             | ✔️               | ✔️                  | ✔️               | ❌                  |
+| Hierarchical Navigable Small World Graphs             | `HNSW`     | `top_k`, nq                                             | ✔️               | ✔️                  | ✔️               | ❌                  |
+</div>
+
+Parameters that affect performance are explained in the following list in detail:
 
 - `top_k`: top k vectors with the highest similarity compared to the query vectors.
 
@@ -21,29 +34,6 @@ The following concepts are provided to help you better understand Milvus index t
 - `nprobe`: number of buckets to search at query.
 
 - `gpu_search_threshold`: The threshold value must be compared with nq to decide if the search computation will be executed on GPUs only. If nq >= `gpu_search_threshold`, the search computation will be executed on GPUs only. If nq < `gpu_search_threshold`, the search computation will be executed on both CPUs and GPUs.
-
-- vector encodings
-
-  The available vector encodings in Milvus are as follows: (from least to strongest compression)
-
-  - No compression at all (`FLAT` and `IVFLAT`)
-  - 8-bit float encoding: the vectors are quantized to 8-bit floats, which may cause some loss of precision. (`IVF_SQ8` and `IVF_SQ8H`)
-  - PQ encoding: vectors are split into sub-vectors that are each quantized to 8 bits. (`IVF_PQ`)
-
-## Index Overview
-
-<div class="table-wrapper" markdown="block">
-
-| Type                                               | Class name | Parameters affecting performance | CPU-only Milvus  | GPU-enabled Milvus |
-| -------------------------------------------------- | ---------- | --------------------------------------------- | ---------------- | ------------------ |
-| Exact search                                       | `FLAT`     | `top_k`, nq                                   | ✔️               | ✔️                  |
-| Inverted file with exact post-verification         | `IVFLAT`   | `top_k`, nq, `nprobe`, `gpu_search_threshold` | ✔️               | ✔️                  |
-| IVF and scalar quantizer                           | `IVF_SQ8`  | `top_k`, nq, `nprobe`, `nlist`, `gpu_search_threshold`  | ✔️               | ✔️                  |
-| IVFSQ8 hybrid search on both CPU and GPU           | `IVF_SQ8H` | `top_k`, nq, `nprobe`, `nlist`, `gpu_search_threshold`  | ❌               | ✔️                  |
-| Inverted file with product quantization refinement | `IVF_PQ`   | `top_k`, nq, `nprobe`, `nlist`                          | ✔️               | ❌                  |
-| Refined Navigating Spreading-out Graph             | `RNSG`     | `top_k`, nq                                             | ✔️               | ✔️                  |
-| Hierarchical Navigable Small World Graphs             | `HNSW`     | `top_k`, nq                                             | ✔️               | ✔️                  |
-</div>
 
 ## Milvus Indexes
 
@@ -91,6 +81,6 @@ Compared with `RNSG`, `HNSW` has better memory and time efficiency. `HNSW` also 
 
 ## Choosing an index
 
-To choose an appropriate index for your application scenarios, please read [How to select an index in Milvus](https://medium.com/@milvusio/how-to-choose-an-index-in-milvus-4f3d15259212).
+To learn how to choose an appropriate index for your application scenarios, please read [How to Select an Index in Milvus](https://medium.com/@milvusio/how-to-choose-an-index-in-milvus-4f3d15259212).
 
-
+To learn how to choose an appropriate index for a metric, refer to [Distance Metrics](metric.md).
