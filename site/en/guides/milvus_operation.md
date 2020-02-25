@@ -133,8 +133,10 @@ Status(message='Delete table successfully!', code=0)
 
 ### Create a partition
 
+You can split tables into partitions by partition tags for improved search performance. Each partition is also a table.
+
 ```python
->>> milvus.create_partition('test01', 'partition01', 'tag01')
+>>> milvus.create_partition('test01', 'tag01')
 Status(code=0, message='OK')
 ```
 
@@ -165,7 +167,6 @@ milvus.show_partitions(table_name='test01')
 ### Create an index
 
 > Note: In production, it is recommended to create indexes before inserting vectors into the table. Index is automatically built when vectors are being imported. However, you need to create the same index again after the vector insertion process is completed because some data files may not meet the `index_file_size` and index will not be automatically built for these data files.
-
 
 1. Prepare index parameters.
 
