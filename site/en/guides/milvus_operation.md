@@ -71,7 +71,7 @@ The following table shows parameters for `create_table()`:
 
 | Parameter               | Description                                                  | Type       | Reference value                  |
 | ----------------------- | ------------------------------------------------------------ | ---------- | --------------------------------- | 
-| `table_name`            | The name of the table to create, which must be unique within its database. <br/>Begin a table name with a letter or an underscore (_) . Subsequent characters can be letters, underscores, numbers (0-9). The entire length can not exceed 255 characters. This parameter is required. | String | `table_name` |                   
+| `table_name`            | The name of the table to create, which must be unique within its database. <br/>Begin a table name with a letter or an underscore `_` . Subsequent characters can be letters, underscores, numbers (0-9). The entire length can not exceed 255 characters. This parameter is required. | String | `table_name` |                   
 | `dimension`             | The dimension of the vectors that are to be inserted into the created table. This parameter is required. | Integer    | （0, 16384]  |     
 | `index_file_size` | Threshold value that triggers index building for raw data files. Index creation is controlled by the size of raw data files specified in this parameter. Data files with smaller sizes will not have indexes built. The default value is 2014 MB. | Integer    | (0, 4096 ] MB                  |
 | `metric_type`           | The method that is used to evaluate vector similarity. The default value is `MetricType.L2`. | MetricType | `MetricType.L2`, `MetricType.IP`, `MetricType.TANIMOTO`,  `MetricType.HAMMING`, or  `MetricType.JACCARD`|
@@ -286,7 +286,6 @@ The following table shows parameters for `search_vectors()`:
 | `top_k`                   | The top k most similar results of each query vector.         | Integer                               | (0, 2048]                           |
 | `nprobe`                  | Number of queried vector buckets. <br/>`nprobe` affects search precision. The greater the value, the more precise the result, yet the slower the search speed. | Integer                               | [1, `nlist`]                          |
 
-> Note: Currently, only date range is supported in `query_ranges`. The date format is `yyyy-mm-dd`. The date range [2019.1.1, 2019.1.5] contains 2019.1.1 and 2019.1.5.
 
 ## Disconnect from Milvus server
 
