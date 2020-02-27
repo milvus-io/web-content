@@ -36,13 +36,13 @@ You can use SDKs or the RESTful API to update some of the parameters in `server_
 
 You can update the following parameters during runtime.
  
- - section `cache_config` 
+ - section `cache_config`
     - `cpu_cache_capacity`
     - `cache_insert_data`
- - section `engine_config` 
+ - section `engine_config`
     - `use_blas_threshold`
     - `gpu_search_threshold`
- - section `gpu_resource_config` 
+ - section `gpu_resource_config`
     - `enable`
     - `cache_capacity`
     - `search_resources`
@@ -61,7 +61,7 @@ In the directory `home/$USER/milvus/conf`, open Milvus service configuration fil
 | Parameter   | Description                                                  | Type    | Default    |
 | ----------- | ------------------------------------------------------------ | ------- | ---------- |
 | `address`   | IP address that Milvus server monitors.                      | String | `0.0.0.0`  |
-| `port`      | Port that Milvus server monitors. Port range: 1025 - 65534. | Integer | `19530`    |
+| `port`      | Port that Milvus server monitors. Port range: [1025, 65534]. | Integer | `19530`    |
 | `deploy_mode` | Milvus deployment type. Options are `single` , `cluster_readonly` and `cluster_writable`. | DeployMode | `single`   |
 | `time_zone` | Use the UTC-x or UTC+x to specify a time zone. For example, use `UTC+8` for China Standard Time. | Timezone | `UTC+8`  |
 </div>
@@ -73,7 +73,8 @@ In the directory `home/$USER/milvus/conf`, open Milvus service configuration fil
 | Parameter                | Description                                                  | Type    | Default         |
 | ------------------------ | ------------------------------------------------------------ | ------- | --------------- |
 | `backend_url`         | URL for metadata storage. Use SQLite (for single server Milvus) or MySQL (for distributed cluster) to store the metadata. <br/>The format of db_backend_url is: `dialect://username:password@host:port/database`. (`dialect` can be either `mysql` or `sqlite`, depending on which database you use. | Path   | `sqlite://:@:/`       |
-| `preload_table` | Define if to preload tables into memory after Milvus server restart. Tables can be selected for fully or partially preloading.<br/>To preload all the existing tables, use `*` ; To preload some tables, list the specific table names, separated by comma. If you choose not to preload any table, keep it empty ( ` ` ). | PreloadType | ` ` |
+| `preload_table` | Determines how to preload tables into memory after Milvus server restarts. Tables can be selected for fully or partially preloading.<br/>To preload all the existing tables, use `*` ; To preload some tables, list the specific table names, separated by comma. If you choose not to preload any table, keep it empty ( ` ` ). | PreloadType | ` ` |
+| `auto_flush_interval` | The interval, in milliseconds, at which Milvus automatically flushes data to disk.  | Integer |  1000   |
 </div>
 
 ### Section `storage_config`
@@ -159,4 +160,16 @@ To switch to CPU-only mode, just set `enable` to `false`.
 | Parameter            | Description                                                  | Type         | Default |
 | -------------------- | ------------------------------------------------------------ | ------------ | ------- |
 | `json_config_path` | Absolute path for tracing config file. Milvus creates a no-op tracer if the value is empty. | Path | ` `  |
+</div>
+
+### Section `wal_config`
+
+<div class="table-wrapper" markdown="block">
+
+| Parameter            | Description                                                  | Type         | Default |
+| -------------------- | ------------------------------------------------------------ | ------------ | ------- |
+|  `enable`               |   Whether to enable write-ahead logging (WAL).      |    Boolean          |   true      |
+|  `recovery_error_ignore` |  Whether to ignore logs with errors that happens during WAL recovery. If true, when Milvus restarts for recovery and there are errors in WAL log files, log files with errors are ignored. If false, Milvus does not restart when there are errors in WAL log files.   |   Boolean           |   true      |
+|  `buffer_size`          |  Sum total of the read buffer and the write buffer in MBs. `buffer_size` must be in range [64, 4096] (MB) . If the value you specified is out of range, Milvus automatically uses the boundary value closest to the specified value. It is recommended you set `buffer_size` to a value greater than the inserted data size of a single insert operation for better performance.              |    Integer          |   256      |
+|  `wal_path`             |  Location of WAL log files.                                                            |    String          |    ` `     |
 </div>
