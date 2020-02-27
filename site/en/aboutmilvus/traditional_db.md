@@ -7,6 +7,7 @@ sidebar_label: Traditional Database
 # Traditional Database
 
 Traditional relational databases are designed to organize alphanumeric data items into interrelated collections. They do not support massive-scale, high-dimensional feature vectors because of the following reasons:
+
 - Feature vectors are not part of the built-in data type. Thus, methods for managing and indexing feature vectors are not available. 
 - The supported number of table columns is limited.
 
