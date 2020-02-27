@@ -52,7 +52,7 @@ $ docker restart <container id>
 
 下文提到的许多配置都是给 Milvus 内部性能调优设计的，在编辑设置之前，请仔细考虑。若有任何疑问，欢迎在 GitHub 上给我们 [创建 issue](https://github.com/milvus-io/milvus/issues/new/choose) 或是 [加入 Slack 社区讨论](https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk)。
 
-进入路径 `home/$USER/milvus/conf`，打开Milvus服务设置文件 `server_config.yaml` 。
+进入路径 `home/$USER/milvus/conf`，打开 Milvus 服务设置文件 `server_config.yaml` 。
 
 #### `server_config` 区域
 
@@ -170,8 +170,8 @@ $ docker restart <container id>
 
 | 参数               | 说明                                                         | 类型    | 默认值     |
 | -------------------- | ------------------------------------------------------------ | ------------ | ------- |
-|  `enable`               |   是否开启预写式日志（write-ahead logging，WAL）。     |    Boolean          |   true      |
-|  `recovery_error_ignore` |  在通过 WAL 执行恢复操作时，是否忽略出现错误的日志。如果设为 true，当 Milvus 重启恢复时，如果有日志出现错误，则 Milvus 会忽略出现错误的日志。如果设为 false，如果 WAL 日志中存在错误，则 Milvus 不会重启恢复。 |   Boolean           |   true      |
+|  `enable`               |   是否开启预写式日志（write-ahead logging，WAL）。如果开启，Milvus 会将所有数据变化预先写入日志文件，之后才会执行数据操作。WAL 可以保证 Milvus 操作的原子性和持久性。  |    Boolean          |   true      |
+|  `recovery_error_ignore` |  在通过 WAL 执行恢复操作时，是否忽略出现错误的日志。如果设为 true，当 Milvus 重启恢复时，如果有日志出现错误，则 Milvus 会忽略出现错误的日志。如果设为 false，如果 WAL 日志中存在错误，则 Milvus 不会执行恢复操作。 |   Boolean           |   true      |
 |  `buffer_size`          |   读取缓冲区和写入缓冲区的总大小，单位为 MB。`buffer_size` 的值必须在 [64, 4096] 范围内。如果您设的值超出范围，Milvus 自动使用与所设的值最接近的边界值。建议 `buffer_size` 的值要大于单次插入的数据量，以获取更好的性能。         |    Integer          |   256      |
 |  `wal_path`             |  预写式日志文件路径。                                                           |    String          |    ` `     |
 </div>
