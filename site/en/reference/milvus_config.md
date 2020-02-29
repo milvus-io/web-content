@@ -128,9 +128,9 @@ In the directory `home/$USER/milvus/conf`, open Milvus service configuration fil
 
 ### Section `gpu_resource_config`
 
-This section determines whether to enable GPU support/usage in Milvus. GPU support, which uses both CPU and GPUs for optimized resource utilization, can achieve accelerated search performance on very large datasets. 
+This section determines whether to enable GPU support/usage in Milvus. GPU support, which uses both CPU and GPUs for optimized resource utilization, can achieve accelerated search performance on very large datasets.
 
-To switch to CPU-only mode, just set `enable` to `false`. 
+To switch to CPU-only mode, just set `enable` to `false`.
 
 <div class="table-wrapper" markdown="block">
 
