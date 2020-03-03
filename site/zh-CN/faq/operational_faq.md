@@ -28,6 +28,8 @@ sidebar_label: Operational FAQ
 - [为什么我启用多进程程序失败了？](#为什么我启用多进程程序失败了？)
 - [为什么搜索 top K 的向量，结果不到 K 条向量？](#为什么搜索-top-K-的向量，结果不到-K-条向量？)
 - [在插入数据时我应该多久构建一次索引？](#在插入数据时我应该多久构建一次索引？)
+- [Milvus 中的数据是如何存储的？](Milvus-中的数据是如何存储的？)
+- [如何确认 Milvus 是否支持我的 CPU？](如何确认-Milvus-是否支持我的-CPU？)
 - [相关阅读](#相关阅读)
 
 <!-- /TOC -->
@@ -239,6 +241,16 @@ def test_add_vector_search_multiprocessing(self, connect, table):
 - [Milvus 数据管理系列（三）：元数据管理](https://milvus.io/cn/blogs/2019-12-24-view-metadata.md)
 - [Milvus 数据管理系列（四）：元数据管理 - 元数据表的字段](https://milvus.io/cn/blogs/2019-12-27-meta-table.md)
 - [Milvus 数据管理系列（五）：如何通过元数据管理数据文件](https://milvus.io/cn/blogs/2020-01-09-milvus-meta.md)
+
+#### 如何确认 Milvus 是否支持我的 CPU？
+
+目前，Milvus 支持以下指令集：
+
+- SSE4
+- AVX2
+- AVX512
+
+因此，只要您的 CPU 支持以上任意一种指令集，Milvus 就支持您的 CPU。
 
 #### 相关阅读
 
