@@ -10,18 +10,6 @@ sidebar_label: Learn Milvus Operations
 
 您也可以使用其它客户端，例如 [Java](https://github.com/milvus-io/milvus-sdk-java), [C++](https://github.com/milvus-io/milvus/tree/master/sdk), [Go](https://github.com/milvus-io/milvus-sdk-go), 或 [RESTful](https://github.com/milvus-io/milvus/tree/master/core/src/server/web_impl).
 
-Milvus 客户端的基本操作流程如下：
-
-1. 连接 Milvus 服务端。
-2. 创建/删除表。
-3. 在表中创建/删除分区。
-4. 在表中创建/删除索引。
-5. 在表/分区中插入/删除向量。
-6. 将数据从内存落盘。
-7. 合并多个数据段。
-8. 在表/分区中搜索向量。
-9. 与 Milvus 服务端断开连接。
-
 ## 连接 Milvus 服务端
 
 1. 导入 pymilvus。
@@ -153,7 +141,7 @@ Milvus 客户端的基本操作流程如下：
 >>> milvus.delete_by_id(table_name='test01', ids)
 ```
 
-## 将表中的数据从内存落盘
+## 将表中的数据落盘
 
 当您在进行有关数据更改的操作时，您可以将表中的数据从内存落盘以避免数据丢失。Milvus 也支持自动落盘。自动落盘会在固定的时间周期将所有现存表的数据落盘。您可以通过 [Milvus 服务端配置文件]((../reference/milvus_config.md))来设置自动落盘的时间间隔。
 

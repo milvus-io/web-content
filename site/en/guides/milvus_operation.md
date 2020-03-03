@@ -10,17 +10,6 @@ This page walks you through some basic Milvus operations using the [Python clien
 
 You can also use other clients, including [Java](https://github.com/milvus-io/milvus-sdk-java), [C++](https://github.com/milvus-io/milvus/tree/master/sdk), [Go](https://github.com/milvus-io/milvus-sdk-go), and [RESTful](https://github.com/milvus-io/milvus/tree/master/core/src/server/web_impl).
 
-The basic workflow for the Milvus client is described below:
-
-1. Connect to the Milvus server.
-2. Create/drop tables.
-3. Create/drop partitions in tables.
-4. Create/drop indexes for tables.
-5. Insert/delete vectors in tables/partitions.
-6. Flush data from memory to disk.
-7. Compact multiple segments into a single segment.
-8. Search vectors in tables/partitions.
-9. Disconnect from the Milvus server.
 
 ## Connect to the Milvus server
 
@@ -166,7 +155,7 @@ You can delete these vectors by:
 >>> milvus.delete_by_id(table_name='test01', ids)
 ```
 
-## Flush data from memory to disk
+## Flush data in one or multiple tables to disk
 
 When performing operations related to data changes, you can flush the data from memory to disk to avoid possible data loss. Milvus also supports automatic flushing, which runs at a fixed interval to flush the data in all tables to disk. You can use the [Milvus server configuration file](../reference/milvus_config.md) to set the interval.
 
@@ -174,9 +163,9 @@ When performing operations related to data changes, you can flush the data from 
 >>> milvus.flush(table_name_array=['test01'])
 ```
 
-## Compact segments
+## Compact all segments in a table
 
-You can compact segments in a table. Milvus creates segments by merging inserted vector data. A table may contain multiple segments.
+You can compact all segments in a table. Milvus creates segments by merging inserted vector data. A table may contain multiple segments.
 
 ```python
 >>> milvus.compact(table_name='test01', timeout='1')
