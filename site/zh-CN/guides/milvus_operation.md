@@ -6,7 +6,7 @@ sidebar_label: Learn Milvus Operations
 
 # 了解 Milvus 操作
 
-该页面将向您展示如何使用 [Python SDK](https://github.com/milvus-io/pymilvus) 运行 Milvus 基本操作。
+该页面将向您展示如何使用 [Python SDK](https://github.com/milvus-io/pymilvus) 运行 Milvus 基本操作。关于详细的 API 参考信息，请参考 [Python API 文档](https://github.com/milvus-io/pymilvus)。
 
 您也可以使用其它客户端，例如 [Java](https://github.com/milvus-io/milvus-sdk-java), [C++](https://github.com/milvus-io/milvus/tree/master/sdk), [Go](https://github.com/milvus-io/milvus-sdk-go), 或 [RESTful](https://github.com/milvus-io/milvus/tree/master/core/src/server/web_impl).
 
@@ -19,7 +19,7 @@ sidebar_label: Learn Milvus Operations
    >>> from milvus import Milvus, IndexType, MetricType, Status
    ```
 
-2.  使用以下任意一种方法连接 Milvus 服务端：
+2. 使用以下任意一种方法连接 Milvus 服务端：
 
    ```python
    # Connect to Milvus server
@@ -143,7 +143,7 @@ sidebar_label: Learn Milvus Operations
 
 ## 将表中的数据落盘
 
-当您在进行有关数据更改的操作时，您可以将表中的数据从内存落盘以避免数据丢失。Milvus 也支持自动落盘。自动落盘会在固定的时间周期将所有现存表的数据落盘。您可以通过 [Milvus 服务端配置文件]((../reference/milvus_config.md))来设置自动落盘的时间间隔。
+当您在进行有关数据更改的操作时，您可以将表中的数据从内存落盘以避免数据丢失。Milvus 也支持自动落盘。自动落盘会在固定的时间周期将所有现存表的数据落盘。您可以通过 [Milvus 服务端配置文件](../reference/milvus_config.md)来设置自动落盘的时间间隔。
 
 ```python
 >>> milvus.flush(table_name_array=['test01'])
@@ -163,20 +163,7 @@ sidebar_label: Learn Milvus Operations
 
 ```python
 # Search 3 vectors
->>> status, results = milvus.search_vectors(table_name='test01', query_records=q_records, top_k=2, nprobe=16)
->>> status
-Status(message='Search vectors successfully!', code=0)
->>> results # Searched top_k vectors
->>> print(results) # Searched top_k vectors
-[
-[(id:15, distance:2.855304718017578),
- (id:16, distance:3.040700674057007)],
-[(id:11, distance:3.673950433731079),
- (id:15, distance:4.183730602264404)],
-      ........
-[(id:6, distance:4.065953254699707),
- (id:1, distance:4.149323463439941)]
-]
+>>> milvus.search_vectors(table_name='test01', query_records=q_records, top_k=2, nprobe=16)
 ```
 
 ### 在分区中搜索向量
@@ -191,7 +178,6 @@ Status(message='Search vectors successfully!', code=0)
 
 ```python
 >>> milvus.disconnect()
-Status(code=0, message='Disconnect successfully')
 ```
 
 ## 接下来您可以

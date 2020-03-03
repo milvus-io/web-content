@@ -6,7 +6,7 @@ sidebar_label: Learn Milvus Operations
 
 # Learn Milvus Operations
 
-This page walks you through some basic Milvus operations using the [Python client](https://github.com/milvus-io/pymilvus).
+This page walks you through some basic Milvus operations using the [Python client](https://github.com/milvus-io/pymilvus). Refer to [Python API documentation](https://github.com/milvus-io/pymilvus) for detailed information.
 
 You can also use other clients, including [Java](https://github.com/milvus-io/milvus-sdk-java), [C++](https://github.com/milvus-io/milvus/tree/master/sdk), [Go](https://github.com/milvus-io/milvus-sdk-go), and [RESTful](https://github.com/milvus-io/milvus/tree/master/core/src/server/web_impl).
 
@@ -177,20 +177,7 @@ You can compact all segments in a table. Milvus creates segments by merging inse
 
 ```python
 # Search 3 vectors
->>> status, results = milvus.search_vectors(table_name='test01', query_records=q_records, top_k=2, nprobe=16)
->>> status
-Status(message='Search vectors successfully!', code=0)
->>> results # Searched top_k vectors
->>> print(results) # Searched top_k vectors
-[
-[(id:15, distance:2.855304718017578),
- (id:16, distance:3.040700674057007)],
-[(id:11, distance:3.673950433731079),
- (id:15, distance:4.183730602264404)],
-      ........
-[(id:6, distance:4.065953254699707),
- (id:1, distance:4.149323463439941)]
-]
+>>> milvus.search_vectors(table_name='test01', query_records=q_records, top_k=2, nprobe=16)
 ```
 
 ### Search vectors in a partition
@@ -205,7 +192,6 @@ Status(message='Search vectors successfully!', code=0)
 
 ```python
 >>> milvus.disconnect()
-Status(code=0, message='Disconnect successfully')
 ```
 
 ## What's next
