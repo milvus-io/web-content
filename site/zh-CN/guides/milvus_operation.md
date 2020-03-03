@@ -69,6 +69,12 @@ sidebar_label: Learn Milvus Operations
 >>> milvus.create_partition('test01', 'tag01')
 ```
 
+### 删除分区
+
+```python
+>>> milvus.drop_partition(table_name='test01', partition_tag='tag01')
+```
+
 ## 在表中创建/删除索引
 
 ### 创建索引
@@ -162,13 +168,16 @@ sidebar_label: Learn Milvus Operations
 ### 在表中搜索向量
 
 ```python
-# Search 3 vectors
+# create 5 vectors of 32-dimension
+>>> q_records = [[random.random() for _ in range(dim)] for _ in range(5)]
 >>> milvus.search_vectors(table_name='test01', query_records=q_records, top_k=2, nprobe=16)
 ```
 
 ### 在分区中搜索向量
 
 ```python
+# create 5 vectors of 32-dimension
+>>> q_records = [[random.random() for _ in range(dim)] for _ in range(5)]
 >>> milvus.search(table_name='test01', query_records=q_records, top_k=1, nprobe=8, partition_tags=['tag01'])
 ```
 

@@ -176,13 +176,17 @@ You can compact all segments in a table. Milvus creates segments by merging inse
 ### Search vectors in a table
 
 ```python
-# Search 3 vectors
+# create 5 vectors of 32-dimension
+>>> q_records = [[random.random() for _ in range(dim)] for _ in range(5)]
+# search vectors
 >>> milvus.search_vectors(table_name='test01', query_records=q_records, top_k=2, nprobe=16)
 ```
 
 ### Search vectors in a partition
 
 ```python
+# create 5 vectors of 32-dimension
+>>> q_records = [[random.random() for _ in range(dim)] for _ in range(5)]
 >>> milvus.search(table_name='test01', query_records=q_records, top_k=1, nprobe=8, partition_tags=['tag01'])
 ```
 
