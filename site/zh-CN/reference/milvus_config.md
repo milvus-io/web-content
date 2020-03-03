@@ -32,12 +32,13 @@ $ docker restart <container id>
 
 ### 运行时修改
 
-您可以使用 SDK 或者 RESTful API 对 `server_config.yaml` 的部分配置进行运行时修改。修改后无需重启 Milvus 即可启用新的更改。详情请参考 [客户端参考](sdk.md)。
+您可以使用 Milvus 客户端 对 `server_config.yaml` 的配置进行运行时修改。修改后无需重启 Milvus 即可启用新的更改。详情请参考 [客户端参考](sdk.md)。
 
-您可以对以下参数进行运行时修改：
+对以下参数的运行时修改是立即生效的：
  
  - `cache_config` 区域
     - `cpu_cache_capacity`
+    - `insert_buffer_size`
     - `cache_insert_data`
  - `engine_config` 区域
     - `use_blas_threshold`
@@ -48,13 +49,15 @@ $ docker restart <container id>
     - `search_resources`
     - `build_index_resources`
 
+对于其它参数，您必须重新启动 Milvus 才能使改动生效。
+
 ## 参数说明
 
 下文提到的许多配置都是给 Milvus 内部性能调优设计的，在编辑设置之前，请仔细考虑。若有任何疑问，欢迎在 GitHub 上给我们 [创建 issue](https://github.com/milvus-io/milvus/issues/new/choose) 或是 [加入 Slack 社区讨论](https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk)。
 
 进入路径 `home/$USER/milvus/conf`，打开 Milvus 服务设置文件 `server_config.yaml` 。
 
-#### `server_config` 区域
+### `server_config` 区域
 
 <div class="table-wrapper" markdown="block">
 
@@ -66,7 +69,7 @@ $ docker restart <container id>
 | `time_zone` | 使用 UTC-x 或 UTC+x 来指定时区。比如，您可以使用 `UTC+8` 来代表中国标准时间。 | Timezone | `UTC+8`   |
 </div>
 
-#### `db_config` 区域
+### `db_config` 区域
 
 <div class="table-wrapper" markdown="block">
 
@@ -74,10 +77,10 @@ $ docker restart <container id>
 | -------------------- | ------------------------------------------------------------ | ----------- | --------------- |
 | `backend_url`        | 元数据存储的 URL 。使用 SQLite（单机部署） 或 MySQL（分布式集群部署）来存储元数据。 <br/>`backend_url` 的格式为：`dialect://username:password@host:port/database`。（ `dialect` 可以是 `mysql` 或 `sqlite`，取决于你是用了 MySQL 还是 SQLite 数据库。） | Path        | `sqlite://:@:/` |
 | `preload_table`      | 定义在 Milvus 服务再次启动后，是否将之前已经导入并保存在磁盘的表预加载到内存。支持全部表格或者部分表格的预加载。 <br/>若要加载所有表格，使用 `*` ；若要加载部分表格，列出所有需要加载的表名，以逗号隔开。如果无需加载表格，请将该值留空 （ ` ` ）。 | PreloadType | ` `             |
-| `auto_flush_interval` | Milvus 每次自动将数据落盘的时间间隔。  | Integer |  1000   |
+| `auto_flush_interval` | Milvus 每次自动将数据落盘的时间间隔。如果 `auto_flush_interval` 值为0，则 Milvus 不会自动将数据落盘。  | Integer |  1000   |
 </div>
 
-#### `storage_config` 区域
+### `storage_config` 区域
 
 <div class="table-wrapper" markdown="block">
 
@@ -95,7 +98,7 @@ $ docker restart <container id>
 </div>
 
 
-#### `metric_config` 区域
+### `metric_config` 区域
 
 <div class="table-wrapper" markdown="block">
 
@@ -107,7 +110,7 @@ $ docker restart <container id>
 | `port`                    | 访问 Prometheus 的端口号。     | Integer | `8080`       |
 </div>
 
-#### `cache_config` 区域
+### `cache_config` 区域
 
 <div class="table-wrapper" markdown="block">
 
@@ -118,7 +121,7 @@ $ docker restart <container id>
 | `cache_insert_data` | 设置为 `true` ，则新插入的数据会自动加载到缓存以备搜索。| Boolean | `false`  |
 </div>
 
-#### `engine_config` 区域
+### `engine_config` 区域
 
 <div class="table-wrapper" markdown="block">
 
@@ -128,7 +131,7 @@ $ docker restart <container id>
 | `gpu_search_threshold` | Milvus 性能调优参数。此参数必须与 `nq` 比较以确定搜索计算是否只在 GPU 上进行。<br/>如果 `nq` >= `gpu_search_threshold` ，则搜索计算只在 GPU 上进行。如果 `nq` < `gpu_search_threshold` ，则搜索计算将在 CPU 和 GPU 上协同进行。| Integer | `1000` |
 </div>
 
-#### `gpu_resource_config` 区域
+### `gpu_resource_config` 区域
 
 在该区域选择是否在 Milvus 里启用 GPU 用于搜索和索引创建。同时使用 CPU 和 GPU 可以达到资源的最优利用，在特别大的数据集里做搜索时性能更佳。
 
@@ -155,7 +158,7 @@ $ docker restart <container id>
       - gpu1
   ```
 
-### `tracing_config` 区域
+## # `tracing_config` 区域
 
 <div class="table-wrapper" markdown="block">
 

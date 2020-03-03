@@ -32,9 +32,9 @@ $ docker restart <container id>
 
 ### Updating configurations during runtime
 
-You can use SDKs or the RESTful API to update some of the parameters in `server_config.yaml`. There is no need to restart Milvus. Refer to [Client Reference](sdk.md) for more information.
+You can use Milvus clients to update parameters in `server_config.yaml`. Refer to [Client Reference](sdk.md) for more information.
 
-You can update the following parameters during runtime.
+When you use Milvus clients to update the following parameters, the updates take effect immediately. 
  
  - section `cache_config`
     - `cpu_cache_capacity`
@@ -47,6 +47,8 @@ You can update the following parameters during runtime.
     - `cache_capacity`
     - `search_resources`
     - `build_index_resources`
+
+For other parameters, you still need to restart Milvus for the changes to take effect.
 
 ## Configuration parameters
 
@@ -74,7 +76,7 @@ In the directory `home/$USER/milvus/conf`, open Milvus service configuration fil
 | ------------------------ | ------------------------------------------------------------ | ------- | --------------- |
 | `backend_url`         | URL for metadata storage. Use SQLite (for single server Milvus) or MySQL (for distributed cluster) to store the metadata. <br/>The format of `backend_url` is: `dialect://username:password@host:port/database`. (`dialect` can be either `mysql` or `sqlite`, depending on which database you use. | Path   | `sqlite://:@:/`       |
 | `preload_table` | Determines how to preload tables into memory after Milvus server restarts. Tables can be selected for fully or partially preloading.<br/>To preload all the existing tables, use `*` ; To preload some tables, list the specific table names, separated by comma. If you choose not to preload any table, keep it empty ( ` ` ). | PreloadType | ` ` |
-| `auto_flush_interval` | The interval, in milliseconds, at which Milvus automatically flushes data to disk.  | Integer |  1000   |
+| `auto_flush_interval` | The interval, in seconds, at which Milvus automatically flushes data to disk. If `auto_flush_interval` is 0, auto-flush is disabled.  | Integer |  1   |
 </div>
 
 ### Section `storage_config`
