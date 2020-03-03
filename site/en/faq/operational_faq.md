@@ -13,7 +13,7 @@ sidebar_label: Operational FAQ
 - [Does Milvus support insert, delete, update, and query operations for vectors?](#Does-Milvus-support-insert-delete-update-and-query-operations-for-vectors)
 - [Should I specify vector IDs or use auto-generated vector IDs?](#Should-I-specify-vector-IDs-or-use-auto-generated-vector-IDs)
 - [Why do Euclidean distance and inner product have inconsistent results in computing vector similarity?](#Why-do-Euclidean-distance-and-inner-product-have-inconsistent-results-in-computing-vector-similarity)
-- [Why does Milvus display "no space left on device" when I import data to Milvus?](#why-does-Milvus-display-no-space-left-on-device-when-i-import-data-to-Milvus)
+- [Why does Milvus display "no space left on device" when I import data to Milvus?](#why-does-Milvus-display-no-space-left-on-device-when-I-import-data-to-Milvus)
 - [Why does this error "Vectors should be 2-dim array" still occur in the Python SDK when the data is a 2-dimensional array?](#Why-does-this-error-Vectors-should-be-2-dim-array-still-occur-in-the-Python-SDK-when-the-data-is-a-2-dimensional-array)
 - [Why sometimes it takes much longer for queries with smaller datasets?](#Why-sometimes-it-takes-much-longer-for-queries-with-smaller-datasets)
 - [Why is my Milvus constantly having bad performance?](#Why-is-my-Milvus-constantly-having-bad-performance)
@@ -26,9 +26,11 @@ sidebar_label: Operational FAQ
 - [Why is `cpu_cache_capacity` always too large for MacOS or Windows?](#Why-is-cpu_cache_capacity-always-too-large-for-MacOS-or-Windows)
 - [Why is the time in my log files different from the system time?](#Why-is-the-time-in-my-log-files-different-from-the-system-time)
 - [Why does my multiprocessing program fail?](#Why-does-my-multiprocessing-program-fail)
-- [Why are the search results fewer than K when I try to search the top K vectors?](#Why-are-the-search-results-fewer-than-K-when-i-try-to-search-the-top-K-vectors)
+- [Why are the search results fewer than K when I try to search the top K vectors?](#Why-are-the-search-results-fewer-than-K-when-I-try-to-search-the-top-K-vectors)
 - [How to build Milvus from source in the Docker container?](#How-to-build-Milvus-from-source-in-the-Docker-container)
 - [How often should I build indexes when inserting data?](How-often-should-I-build-indexes-when-inserting-data)
+- [How is data stored in Milvus?](How-is-data-stored-in-Milvus)
+- [How do I know whether my CPU is supported by Milvus?](How-do-I-know-whether-my-CPU-is-supported-by-Milvus)
 - [Related links](#Related-links)
 
 <!-- /TOC -->
@@ -247,6 +249,17 @@ In Milvus, metadata is stored in the database, while search data is stored as fi
 - [Milvus Metadata Management (1): How to View Metadata](https://medium.com/@milvusio/milvus-metadata-management-1-6b9e05c06fb0)
 - [Milvus Metadata Management (2): Fields in the Metadata Table](https://medium.com/@milvusio/milvus-metadata-management-2-fields-in-the-metadata-table-3bf0d296ca6d)
 - [Milvus Metadata Management (3): How to Manage Data Files with Metadata](https://medium.com/@milvusio/milvus-metadata-management-3-e65b14137f58)
+
+#### How do I know whether my CPU is supported by Milvus?
+
+Milvus currently supports the following instruction sets:
+
+- SSE4
+- AVX2
+- AVX512
+
+Therefore, as long as your CPU supports one of the instruction sets above, it is supported by Milvus.
+
 
 ## Related links
 
