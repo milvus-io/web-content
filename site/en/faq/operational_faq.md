@@ -28,9 +28,9 @@ sidebar_label: Operational FAQ
 - [Why does my multiprocessing program fail?](#Why-does-my-multiprocessing-program-fail)
 - [Why are the search results fewer than K when I try to search the top K vectors?](#Why-are-the-search-results-fewer-than-K-when-I-try-to-search-the-top-K-vectors)
 - [How to build Milvus from source in the Docker container?](#How-to-build-Milvus-from-source-in-the-Docker-container)
-- [How often should I build indexes when inserting data?](How-often-should-I-build-indexes-when-inserting-data)
-- [How is data stored in Milvus?](How-is-data-stored-in-Milvus)
-- [How do I know whether my CPU is supported by Milvus?](How-do-I-know-whether-my-CPU-is-supported-by-Milvus)
+- [How often should I build indexes when inserting data?](#How-often-should-I-build-indexes-when-inserting-data)
+- [How is data stored in Milvus?](#How-is-data-stored-in-Milvus)
+- [How do I know whether my CPU is supported by Milvus?](#How-do-I-know-whether-my-CPU-is-supported-by-Milvus)
 - [Related links](#Related-links)
 
 <!-- /TOC -->
