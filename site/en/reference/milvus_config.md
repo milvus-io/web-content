@@ -8,7 +8,7 @@ sidebar_label: Milvus Configuration
 
 ## Configuration overview
 
-The configurations apply to both single server Milvus and all nodes of a distributed Milvus cluster, for example, from whether or not to turn on the monitoring function to more advanced options for performance tuning.
+The configurations apply to both single server Milvus and all nodes of a distributed Milvus cluster.
 
 #### Milvus file structure
 
@@ -16,8 +16,8 @@ After you have successfully started Milvus server, you can see a Milvus file und
 
 - `milvus/db` (database storage)
 - `milvus/logs` (log storage)
-- `milvus/conf` (configuration file)
-  - `server_config.yaml` (service configuration)
+- `milvus/conf` (configuration file folder)
+  - `server_config.yaml` (server configuration)
   - `log_config.conf` (log configuration)
 
 ## Updating configurations
@@ -50,7 +50,7 @@ When you use Milvus clients to update the following parameters, the updates take
 
 For other parameters, you still need to restart Milvus for the changes to take effect.
 
-## Configuration parameters
+## Server configuration parameters 
 
 Many configurations below are intended for tuning Milvus internals. Before changing these settings, welcome to consult Milvus team on [GitHub issues](https://github.com/milvus-io/milvus/issues/new/choose) or [our Slack channel](https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk).
 

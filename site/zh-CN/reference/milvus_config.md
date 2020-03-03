@@ -8,7 +8,7 @@ sidebar_label: Milvus Configuration
 
 ## 配置概述
 
-以下配置说明主要包括是否需要启用监控功能，以及启用一些高级功能以进行性能调优。
+以下配置说明可同时应用于单机或者分布式场景。
 
 #### Milvus 文件结构
 
@@ -51,7 +51,7 @@ $ docker restart <container id>
 
 对于其它参数，您必须重新启动 Milvus 才能使改动生效。
 
-## 参数说明
+## 服务设置参数说明
 
 下文提到的许多配置都是给 Milvus 内部性能调优设计的，在编辑设置之前，请仔细考虑。若有任何疑问，欢迎在 GitHub 上给我们 [创建 issue](https://github.com/milvus-io/milvus/issues/new/choose) 或是 [加入 Slack 社区讨论](https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk)。
 
