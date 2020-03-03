@@ -76,7 +76,7 @@ In the directory `home/$USER/milvus/conf`, open Milvus service configuration fil
 | ------------------------ | ------------------------------------------------------------ | ------- | --------------- |
 | `backend_url`         | URL for metadata storage. Use SQLite (for single server Milvus) or MySQL (for distributed cluster) to store the metadata. <br/>The format of `backend_url` is: `dialect://username:password@host:port/database`. (`dialect` can be either `mysql` or `sqlite`, depending on which database you use. | Path   | `sqlite://:@:/`       |
 | `preload_table` | Determines how to preload tables into memory after Milvus server restarts. Tables can be selected for fully or partially preloading.<br/>To preload all the existing tables, use `*` ; To preload some tables, list the specific table names, separated by comma. If you choose not to preload any table, keep it empty ( ` ` ). | PreloadType | ` ` |
-| `auto_flush_interval` | The interval, in seconds, at which Milvus automatically flushes data to disk. If `auto_flush_interval` is 0, auto-flush at a fixed interval is disabled. However, when the cache is full during data insertion, Milvus still automatically flushes data to disk.  | Integer |  1   |
+| `auto_flush_interval` | The interval, in seconds, at which Milvus automatically flushes data to disk. If `auto_flush_interval` is 0, auto-flush at a fixed interval is disabled. However, when the cache is full during data insertion, Milvus always flushes data to disk, regardless of the value of `auto_flush_interval`.  | Integer |  1   |
 </div>
 
 ### Section `storage_config`
