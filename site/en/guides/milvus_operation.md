@@ -17,8 +17,10 @@ The basic workflow for the Milvus client is described below:
 3. Create/drop partitions in tables.
 4. Create/drop indexes for tables.
 5. Insert/delete vectors in tables/partitions.
-6. Search vectors in tables/partitions.
-7. Disconnect from the Milvus server.
+6. Flush data from memory to disk.
+7. Compact multiple segments into a single segment.
+8. Search vectors in tables/partitions.
+9. Disconnect from the Milvus server.
 
 ## Connect to the Milvus server
 
@@ -35,14 +37,12 @@ The basic workflow for the Milvus client is described below:
    # Connect to Milvus server
    >>> milvus = Milvus()
    >>> milvus.connect(host='localhost', port='19530')
-   Status(message='connected!', code=0)
    ```
 
    > Note: In the above code, default values are used for `host` and `port` parameters. Feel free to change them to the IP address and port you set for Milvus server.
    
    ```python
    >>> milvus.connect(uri='tcp://localhost:19530')
-   Status(message='connected!', code=0)
    ```
 
 ## Create/Drop tables
@@ -56,33 +56,18 @@ The basic workflow for the Milvus client is described below:
    >>> param = {'table_name':'test01', 'dimension':256, 'index_file_size':1024, 'metric_type':MetricType.L2}
    ```
 
-2. Create Table `test01`.
+2. Create Table `test01` with dimension size as 256, size of the data file for Milvus to automatically create indexes as 1024, and metric type as Euclidean distance (L2).
 
    ```python
    # Create a table
    >>> milvus.create_table(param)
-   Status(message='Table test01 created!', code=0)
    ```
-
-3. Verify details of the newly created table.
-
-   ```python
-   # Verify table info
-   >>> status, table = milvus.describe_table('test01')
-   >>> status
-   Status(message='Describe table successfully!')
-   >>> table
-   TableSchema(table_name='test01', dimension=256, index_file_size=1024, metric_type=<MetricType: L2>)
-   ```
-
 
 ### Drop a table
 
 ```python
 # Drop table
 >>> milvus.delete_table(table_name='test01')
->>> status
-Status(message='Delete table successfully!', code=0)
 ```
 
 ## Create/Drop partitions in a table
@@ -92,14 +77,21 @@ Status(message='Delete table successfully!', code=0)
 You can split tables into partitions by partition tags for improved search performance. Each partition is also a table.
 
 ```python
->>> milvus.create_partition('test01', 'tag01')
-Status(code=0, message='OK')
+# Create partition
+>>> milvus.create_partition(table_name='test01', partition_tag='tag01')
 ```
 
 Use `show_partitions()` to verify whether the partition is created.
 
 ```python
+# Show partitions
 >>> milvus.show_partitions(table_name='test01')
+```
+
+### Drop a partition
+
+```python
+>>> milvus.drop_partition(table_name='test01', partition_tag='tag01')
 ```
 
 ## Create/Drop indexes in a table
@@ -120,24 +112,12 @@ Use `show_partitions()` to verify whether the partition is created.
    ```python
    # Create index
    >>> milvus.create_index('test01', index_param)
-   Status(code=0, message='Build index successfully!')
-   ```
-
-3. Verify whether the index is successfully created:
-
-   ```python
-   # Show index info
-   >>> milvus.describe_index('test01')
-   >>> status
-   Status(code=0, message='Success'), IndexParam(table_name='test01', index_type=<IndexType: IVFLAT>, nlist=16384)
    ```
 
 ### Drop an index
 
 ```python
 >>> milvus.drop_index('test01')
->>> status
-Status(code=0, message='Success')
 ```
 
 ## Insert/Delete vectors in tables/partitions
@@ -152,34 +132,24 @@ Status(code=0, message='Success')
    >>> vectors = [[random.random() for _ in range(dim)] for _ in range(20)]
    ```
 
-2. Insert the list of vectors. Milvus returns a list of ids when successful.
+2. Insert the list of vectors. If you do not specify vector ids, Milvus automatically generates IDs for the vectors.
 
    ```python
    # Insert vectors
-   >>> status, ids = milvus.add_vectors(table_name='test01', records=vectors)
-   >>> status
-   Status(code=0, message='Success')
-   >>> ids  # 20 ids returned
-   23455321135511233
-   12245748929023489
-   ...
+   >>> milvus.add_vectors(table_name='test01', records=vectors)
    ```
 
    Alternatively, you can also provide user-defined vector ids:
 
    ```python
    >>> vector_ids = [id for id in range(20)]
-   >>> status, ids = milvus.add_vectors(table_name='test01', records=vectors, ids=vector_ids)
-   >>> print(ids)
-   [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+   >>> milvus.add_vectors(table_name='test01', records=vectors, ids=vector_ids)
    ```
 
-### Insert vectors to a partition
+### Insert vectors in a partition
 
 ```python
->>> status = milvus.insert('test01', vectors, partition_tag="tag01")
->>> status
-(Status(code=0, message='Add vectors successfully!')
+>>> milvus.insert('test01', vectors, partition_tag="tag01")
 ```
 
 ### Delete vectors by ID
@@ -193,14 +163,28 @@ Assume you have some vectors with the following IDs:
 You can delete these vectors by:
 
 ```python
->>> status = milvus.delete_by_id(table, ids)
->>> status
-(Status(code=0, message='Delete vectors successfully!')
+>>> milvus.delete_by_id(table_name='test01', ids)
+```
+
+## Flush data from memory to disk
+
+When performing operations related to data changes, you can flush the data from memory to disk to avoid possible data loss. Milvus also supports automatic flushing, which runs at a fixed interval to flush the data in all tables to disk. You can use the [Milvus server configuration file](../reference/milvus_config.md) to set the interval.
+
+```python
+>>> milvus.flush(table_name_array=['test01'])
+```
+
+## Compact segments
+
+You can compact segments in a table. Milvus creates segments by merging inserted vector data. A table may contain multiple segments.
+
+```python
+>>> milvus.compact(table_name='test01', timeout='1')
 ```
 
 ## Search vectors in tables/partitions
 
-### Search vectors in a table by vectors
+### Search vectors in a table
 
 ```python
 # Search 3 vectors
@@ -220,7 +204,7 @@ Status(message='Search vectors successfully!', code=0)
 ]
 ```
 
-### Search vectors in a partition by vectors
+### Search vectors in a partition
 
 ```python
 >>> milvus.search(table_name='test01', query_records=q_records, top_k=1, nprobe=8, partition_tags=['tag01'])

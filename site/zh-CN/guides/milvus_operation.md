@@ -6,11 +6,23 @@ sidebar_label: Learn Milvus Operations
 
 # 了解 Milvus 操作
 
-该页面将向您展示如何使用 [Python SDK](https://github.com/milvus-io/pymilvus) 运行 Milvus 基本操作。您也可以使用其它语言如 [Java](https://github.com/milvus-io/milvus-sdk-java), [C++](https://github.com/milvus-io/milvus/tree/master/sdk) 等来进行这些操作。
+该页面将向您展示如何使用 [Python SDK](https://github.com/milvus-io/pymilvus) 运行 Milvus 基本操作。
 
-## 运行操作前的准备
+您也可以使用其它客户端，例如 [Java](https://github.com/milvus-io/milvus-sdk-java), [C++](https://github.com/milvus-io/milvus/tree/master/sdk), [Go](https://github.com/milvus-io/milvus-sdk-go), 或 [RESTful](https://github.com/milvus-io/milvus/tree/master/core/src/server/web_impl).
 
-请使用 Milvus 自带的 Python 客户端 - pymilvus 运行下列操作。
+Milvus 客户端的基本操作流程如下：
+
+1. 连接 Milvus 服务端。
+2. 创建/删除表。
+3. 在表中创建/删除分区。
+4. 在表中创建/删除索引。
+5. 在表/分区中插入/删除向量。
+6. 将数据从内存落盘。
+7. 合并多个数据段。
+8. 在表/分区中搜索向量。
+9. 与 Milvus 服务端断开连接。
+
+## 连接 Milvus 服务端
 
 1. 导入 pymilvus。
 
@@ -19,222 +31,147 @@ sidebar_label: Learn Milvus Operations
    >>> from milvus import Milvus, IndexType, MetricType, Status
    ```
 
-2. 请用下列任一方式，将 Milvus 连接到您本地服务器。
+2.  使用以下任意一种方法连接 Milvus 服务端：
 
    ```python
    # Connect to Milvus server
    >>> milvus = Milvus()
    >>> milvus.connect(host='localhost', port='19530')
-   Status(message='connected!', code=0)
    ```
 
-   > 注意：在以上代码中，参数 `host` 和 `port` 用的都是默认值。请根据需要将其更换成 Milvus server 的 IP 地址和端口。
-
+   > 注意：在上面的代码中，`host` 和 `port` 都使用了默认值。您可以将其更改为自己设定的 IP 地址和端口。
+   
    ```python
    >>> milvus.connect(uri='tcp://localhost:19530')
-   Status(message='connected!', code=0)
    ```
 
+## 创建/删除表
 
-## 创建表
+### 创建表
 
-我们以创建表 test01 为例，向您展示如何创建一张数据表。以下是数据表相关参数，在创建表时可以根据实际需求选择：
-
-| 参数                    | 描述                                                         | 类型       | 参考值                             |
-| ----------------------- | ------------------------------------------------------------ | ---------- | ---------------------------------- |
-| `table_name`            | 要创建的表的名字，由于是表的唯一标识符，在数据库中必须唯一、不重复。<br/>表名由字母、下划线、和数字组成。首个字符必须是字母或下划线。总长度必须小于255个字符。 | String     | 'table name'                       |
-| `dimension`             | 要插入表中的向量的维度。                                     | Integer    | (0, 16384]                         |
-| `index_file_size` | 触发创建索引的阈值。该参数指定只有当原始数据文件大小达到某一阈值，系统才会为其创建索引，默认值为1024 MB。小于该阈值的数据文件不会创建索引。 | Integer    | (0 MB, 4096 MB]                    |
-| `metric_type`           | 计算向量距离的方式。你可以选择用欧氏距离（L2）或是内积（IP）的方法来计算。默认值为 `MetricType.L2`。 | MetricType | `MetricType.L2` 或 `MetricType.IP` |
-
-请使用 `milvus.create_table` 来创建表，后面跟表名、向量维度和索引方式：
-
-1. 准备表参数。
+1. 准备创建表所需参数。
 
    ```python
-   # Prepare param
+   # Prepare table parameters
    >>> param = {'table_name':'test01', 'dimension':256, 'index_file_size':1024, 'metric_type':MetricType.L2}
    ```
 
-2. 创建表 test01。
+2. 创建表名为 `test01`， 维度为256， 自动创建索引的数据文件大小为 1024 MB，距离度量方式为欧氏距离（L2）的表。
 
    ```python
    # Create a table
    >>> milvus.create_table(param)
-   Status(message='Table test01 created!', code=0)
    ```
 
-3. 确认新创建表的信息。
-
-   ```python
-   # Verify table info.
-   >>> status, table = milvus.describe_table('test01')
-   >>> status
-   Status(message='Describe table successfully!')
-   >>> table
-   TableSchema(table_name='test01',dimension=256, index_file_size=1024, metric_type=<MetricType: L2>)
-   ```
-
-## 显示表
-
-若要显示数据库中所有的表，请使用 `milvus.show_tables`：
+### 删除表
 
 ```python
->>> status, tables = milvus.show_tables()
->>> status
-Status(message='Show tables successfully!', code=0)
->>> tables
-['test01', 'others', ...]
+# Drop table
+>>> milvus.delete_table(table_name='test01')
 ```
 
-若要显示某张表的元数据：
+## 在表中创建/删除分区
+
+### 创建分区
+
+您可以通过标签将表分割为若干个分区，从而提高搜索效率。每个分区实际上也是一个表。
 
 ```python
->>> status, table = milvus.describe_table('test01')
->>> status
-Status(message='Describe table successfully!')
->>> table
-TableSchema(table_name='test01',dimension=256, index_file_size=1024, metric_type=<MetricType: L2>)
+# Create partition
+>>> milvus.create_partition('test01', 'tag01')
 ```
 
-若要显示表的行数， 使用 `milvus.get_table_row_count`，后面跟表名：
+## 在表中创建/删除索引
 
-```python
-# Show table rows
->>> status, num = milvus.get_table_row_count('test01')
->>> status
-Status(code=0, message='Success')
->>> num
-20
-```
+### 创建索引
 
-请用下列命令确认某张表是否存在：
+> 注意：在实际生产环境中，建议在插入向量之前先创建索引，以便系统自动增量创建索引。需要注意的是，在向量插入结束后，相同的索引需要手动再创建一次（因为可能存在大小不满足 `index_file_size` 的数据文件，系统不会为该文件自动创建索引）。
 
-```python
-<<<<<<< HEAD:site/zh-CN/guides/milvus_operation.md
->>> status, exists = milvus.has_table('test01')
->>> status     
-Status(code=0, message='Success')
->>> exists
-True	
-```
-
-> 注意：如果查询的表不存在，则以上代码中返回值为 `False`。
-
-## 将向量插入表
-
-> 注意：在实际生产环境中，在插入向量之前，建议先使用 `milvus.create_index` 以便系统自动增量创建索引。需要注意的是，在向量插入结束后，相同的索引需要手动再创建一次（因为可能存在大小不满足 `index_file_size` 的数据文件，系统不会为该文件自动创建索引）。
-
-以下是向量插入的参数列表：
-
-| 参数         | 描述                                                         | 类型                | 参考值                 |
-| ------------ | ------------------------------------------------------------ | ------------------- | ---------------------- |
-| `table_name` | 要创建的表的名字，由于是表的唯一标识符，在数据库中必须唯一、不重复。<br/>表名由字母，下划线 `_` 和数字（0-9）组成。首个字符必须是字母或下划线 `_`，不能为数字。总长度不可以超过255个字符。 | String              | 'table name'           |
-| `records`    | 要插入表的一组向量。每条向量必须为**浮点**数据类型，其维度必须和表中定义的维度一致。 | 2-dimensional  list | [[0.1, 0.2, ...], ...] |
-
-若要批量插入一组向量（在下面代码中以`records`表示），请使用 `milvus.add_vectors` ，后面跟表名和一组以逗号隔开的向量。如果没有可用的待插入向量，您也可以通过以下命令随机生成一组向量。此处假设需要自动生成20条256维的向量。
-
-```python
->>> import random
-
-# Generate 20 vectors of 256 dimension
->>> vectors = [[random.random() for _ in range(dim)] for _ in range(20)]
-```
-
-然后插入这组向量，成功后，将返回一组向量id。
-
-```python
-# Insert vectors
->>> status, ids = milvus.add_vectors(table_name='test01', records=vectors)
->>> status
-Status(code=0, message='Success')
->>> ids  # 20 ids returned
-23455321135511233
-12245748929023489
-...
-```
-
-您也可以为插入的向量提供用户自定义的向量 id：
-
-```python
->>> vector_ids = [id for id in range(20)]
->>> status, ids = milvus.add_vectors(table_name='test01', records=vectors, ids=vector_ids)
->>> print(ids)
-[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
-```
-
-若要查询某张表中一共插入了几条向量（表的总行数），请使用 `milvus.get_table_row_count`，后面跟要查询的表名。
-
-```python
-# Show number of vectors
->>> status, num = milvus.get_table_row_count('test01')
->>> status
-Status(code=0, message='Success')
->>> num
-20
-```
-
-## 创建索引
-
-以下是创建索引的参数列表：
-
-| 参数         | 说明                                                         | 类型      | 参考值                                                       |
-| ------------ | ------------------------------------------------------------ | --------- | ------------------------------------------------------------ |
-| `index_type` | 用于查询表的索引方式。关于各索引方式的详细信息，请参阅[索引类型](../reference/index.md)。 | IndexType | `FLAT` / `IVFLAT` / `IVF_SQ8` / `IVF_SQ8H` |
-| `nlist`      | 每个文件中的向量类的个数，默认值为 `16384`。                 | Integer   | > 0  |
-
-
-请使用 `milvus.create_index` 来创建索引，后面跟表名、索引方式和 nlist。
-
-1. 准备索引参数。
+1. 准备创建索引所需参数。
 
    ```python
    # Prepare index param
    >>> index_param = {'index_type': IndexType.IVFLAT, 'nlist': 16384}
    ```
 
-2. 创建索引。
+2. 为表创建索引。
 
    ```python
    # Create index
    >>> milvus.create_index('test01', index_param)
-   >>> status
-   Status(code=0, message='Build index successfully!')
    ```
 
-请使用 `milvus.describe_index` 来显示索引信息，后面跟表名：
-
-```python
-# Show index info
->>> milvus.describe_index('test01')
->>> status
-Status(code=0, message='Success'), IndexParam(table_name='test01', index_type=<IndexType: IVFLAT>, nlist=16384)
-```
-
-若要删除索引，请使用下列命令：
+### 删除索引
 
 ```python
 >>> milvus.drop_index('test01')
->>> status
-Status(code=0, message='Success')
 ```
 
-## 查询向量
+## 在表/分区中插入/删除向量
 
-以下是查询向量的参数列表：
+### 在表中插入向量
 
-| 参数                      | 描述                                                         | 类型                                  | 参考值                              |
-| ------------------------- | ------------------------------------------------------------ | ------------------------------------- | ----------------------------------- |
-| `table_name`              | 要创建的表的名字，由于是表的唯一标识符，在数据库中必须唯一、不重复。<br/>表名由字母，下划线 `_` 和数字（0-9）组成。首个字符必须是字母或下划线 `_`，不能为数字。总长度不可以超过255个字符。 | String                                | 'table name'                        |
-| `query_records`           | 要搜索的一组目标向量。每条向量必须为**浮点**数据类型，其维度必须和表中定义的维度一致。 | 2-dimensional list                    | [[0.1, 0.2, ...], ...]              |
-| `top_k`                   | 与要搜索的目标向量相似度最高的k个向量。                      | Integer                               | (0, 2048]     |
-| `nprobe`                  | 查询所涉及的向量类的个数。`nprobe` 影响查询精度。数值越大，精度越高，但查询速度更慢。 | Integer                               | [1, `nlist`]              |
+1. 使用 `random` 函数生成20个256维的向量。
 
-> 注意：目前搜索范围仅支持日期范围，格式为'yyyy-mm-dd'，为左闭右闭模式。比如您将范围定为 [2019.1.1, 2019.1.5]，则搜索范围为 2019.1.1 到2019.1.5，并且包含2019.1.1和2019.1.5。
+   ```python
+   >>> import random
+   # Generate 20 vectors of 256 dimension
+   >>> vectors = [[random.random() for _ in range(dim)] for _ in range(20)]
+   ```
 
-请使用 `milvus.search_vectors` 来搜索向量，后面跟要搜索的表的名字，要搜索的目标向量，以及您期望返回的与每个目标向量最相似的匹配向量个数。
+2. 插入向量列表。如果您不指定向量 ID，Milvus 自动为向量分配 ID。
 
-假设您要针对3条256维的目标向量（在下面代码中用 `q_records` 表示），搜索与每条目标向量相似度最高的前2条匹配向量，您可以：
+   ```python
+   # Insert vectors
+   >>> milvus.add_vectors(table_name='test01', records=vectors)
+   ```
+
+   您也可以自己定义向量 ID：
+
+   ```python
+   >>> vector_ids = [id for id in range(20)]
+   >>> milvus.add_vectors(table_name='test01', records=vectors, ids=vector_ids)
+   ```
+
+### 在分区中插入向量
+
+```python
+>>> milvus.insert('test01', vectors, partition_tag="tag01")
+```
+
+### 通过 ID 删除向量
+
+假设您的表中存在以下向量 ID：
+
+```python
+>>> ids = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+```
+
+您可以通过以下命令删除向量：
+
+```python
+>>> milvus.delete_by_id(table_name='test01', ids)
+```
+
+## 将表中的数据从内存落盘
+
+当您在进行有关数据更改的操作时，您可以将表中的数据从内存落盘以避免数据丢失。Milvus 也支持自动落盘。自动落盘会在固定的时间周期将所有现存表的数据落盘。您可以通过 [Milvus 服务端配置文件]((../reference/milvus_config.md))来设置自动落盘的时间间隔。
+
+```python
+>>> milvus.flush(table_name_array=['test01'])
+```
+
+## 压缩表中的段
+
+您可以对表中的段进行压缩。段是 Milvus 将插入的向量数据合并所获得的数据文件。一个表可包含多个段。
+
+```python
+>>> milvus.compact(table_name='test01', timeout='1')
+```
+
+## 在表/分区中搜索向量
+
+### 在表中搜索向量
 
 ```python
 # Search 3 vectors
@@ -254,19 +191,22 @@ Status(message='Search vectors successfully!', code=0)
 ]
 ```
 
-## 删除表
-
-若您不再需要某张表，请使用 `milvus.delete_table` 将该表及其数据删除：
+### 在分区中搜索向量
 
 ```python
-# Drop table
->>> milvus.delete_table(table_name='test01')
->>> status
-Status(message='Delete table successfully!', code=0)
+>>> milvus.search(table_name='test01', query_records=q_records, top_k=1, nprobe=8, partition_tags=['tag01'])
+```
+
+> 注意：如果您不指定 `partition_tags`， Milvus 会在整个表中搜索。
+
+## 与 Milvus 服务端断开连接
+
+```python
+>>> milvus.disconnect()
+Status(code=0, message='Disconnect successfully')
 ```
 
 ## 接下来您可以
 
 - [体验 Milvus 在线训练营](https://github.com/milvus-io/bootcamp) 了解更多解决方案
 - [故障诊断 API 行为](troubleshoot.md)
-
