@@ -76,7 +76,7 @@ In the directory `home/$USER/milvus/conf`, open Milvus service configuration fil
 | ------------------------ | ------------------------------------------------------------ | ------- | --------------- |
 | `backend_url`         | URL for metadata storage. Use SQLite (for single server Milvus) or MySQL (for distributed cluster) to store the metadata. <br/>The format of `backend_url` is: `dialect://username:password@host:port/database`. (`dialect` can be either `mysql` or `sqlite`, depending on which database you use. | Path   | `sqlite://:@:/`       |
 | `preload_table` | Determines how to preload tables into memory after Milvus server restarts. Tables can be selected for fully or partially preloading.<br/>To preload all the existing tables, use `*` ; To preload some tables, list the specific table names, separated by comma. If you choose not to preload any table, keep it empty ( ` ` ). | PreloadType | ` ` |
-| `auto_flush_interval` | The interval, in seconds, at which Milvus automatically flushes data to disk. If `auto_flush_interval` is 0, auto-flush is disabled.  | Integer |  1   |
+| `auto_flush_interval` | The interval, in seconds, at which Milvus automatically flushes data to disk. If `auto_flush_interval` is 0, auto-flush at a fixed interval is disabled. However, when the cache is full during data insertion, Milvus still automatically flushes data to disk.  | Integer |  1   |
 </div>
 
 ### Section `storage_config`
@@ -171,7 +171,7 @@ To switch to CPU-only mode, just set `enable` to `false`.
 | Parameter            | Description                                                  | Type         | Default |
 | -------------------- | ------------------------------------------------------------ | ------------ | ------- |
 |  `enable`               |   Whether to enable write-ahead logging (WAL) in Milvus. If WAL is enabled, Milvus writes all data changes to log files in advance before implementing data changes. WAL ensures the atomicity and durability for Milvus operations.      |    Boolean          |   true      |
-|  `recovery_error_ignore` |  Whether to ignore logs with errors that happens during WAL recovery. If true, when Milvus restarts for recovery and there are errors in WAL log files, log files with errors are ignored. If false, Milvus does not restart when there are errors in WAL log files.   |   Boolean           |   true      |
+|  `recovery_error_ignore` |  Whether to ignore logs with errors that happens during WAL recovery. If true, when Milvus restarts for recovery and there are errors in WAL log files, log files with errors are ignored. If false, Milvus fails to restart when there are errors in WAL log files.   |   Boolean           |   true      |
 |  `buffer_size`          |  Sum total of the read buffer and the write buffer in MBs. `buffer_size` must be in range [64, 4096] (MB) . If the value you specified is out of range, Milvus automatically uses the boundary value closest to the specified value. It is recommended you set `buffer_size` to a value greater than the inserted data size of a single insert operation for better performance.              |    Integer          |   256      |
 |  `wal_path`             |  Location of WAL log files.                                                            |    String          |    ` `     |
 </div>

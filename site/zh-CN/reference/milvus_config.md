@@ -77,7 +77,7 @@ $ docker restart <container id>
 | -------------------- | ------------------------------------------------------------ | ----------- | --------------- |
 | `backend_url`        | 元数据存储的 URL 。使用 SQLite（单机部署） 或 MySQL（分布式集群部署）来存储元数据。 <br/>`backend_url` 的格式为：`dialect://username:password@host:port/database`。（ `dialect` 可以是 `mysql` 或 `sqlite`，取决于你是用了 MySQL 还是 SQLite 数据库。） | Path        | `sqlite://:@:/` |
 | `preload_table`      | 定义在 Milvus 服务再次启动后，是否将之前已经导入并保存在磁盘的表预加载到内存。支持全部表格或者部分表格的预加载。 <br/>若要加载所有表格，使用 `*` ；若要加载部分表格，列出所有需要加载的表名，以逗号隔开。如果无需加载表格，请将该值留空 （ ` ` ）。 | PreloadType | ` `             |
-| `auto_flush_interval` | Milvus 每次自动将数据落盘的时间间隔。如果 `auto_flush_interval` 值为0，则 Milvus 不会自动将数据落盘。  | Integer |  1000   |
+| `auto_flush_interval` | Milvus 每次自动将数据落盘的时间间隔，单位为秒。如果 `auto_flush_interval` 值为0，则 Milvus 不会定时自动将数据落盘。如果插入数据时缓存空间已满，Milvus 仍然会自动落盘。  | Integer |  1   |
 </div>
 
 ### `storage_config` 区域
@@ -174,7 +174,7 @@ $ docker restart <container id>
 | 参数               | 说明                                                         | 类型    | 默认值     |
 | -------------------- | ------------------------------------------------------------ | ------------ | ------- |
 |  `enable`               |   是否开启预写式日志（write-ahead logging，WAL）。如果开启，Milvus 会将所有数据变化预先写入日志文件，之后才会执行数据操作。WAL 可以保证 Milvus 操作的原子性和持久性。  |    Boolean          |   true      |
-|  `recovery_error_ignore` |  在通过 WAL 执行恢复操作时，是否忽略出现错误的日志。如果设为 true，当 Milvus 重启恢复时，如果有日志出现错误，则 Milvus 会忽略出现错误的日志。如果设为 false，如果 WAL 日志中存在错误，则 Milvus 不会执行恢复操作。 |   Boolean           |   true      |
+|  `recovery_error_ignore` |  在通过 WAL 执行恢复操作时，是否忽略出现错误的日志。如果设为 true，当 Milvus 重启恢复时，如果有日志出现错误，则 Milvus 会忽略出现错误的日志。如果设为 false，如果 WAL 日志中存在错误，则 Milvus 会启动失败。 |   Boolean           |   true      |
 |  `buffer_size`          |   读取缓冲区和写入缓冲区的总大小，单位为 MB。`buffer_size` 的值必须在 [64, 4096] 范围内。如果您设的值超出范围，Milvus 自动使用与所设的值最接近的边界值。建议 `buffer_size` 的值要大于单次插入的数据量，以获取更好的性能。         |    Integer          |   256      |
 |  `wal_path`             |  预写式日志文件路径。                                                           |    String          |    ` `     |
 </div>
