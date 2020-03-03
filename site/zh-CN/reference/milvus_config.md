@@ -158,7 +158,7 @@ $ docker restart <container id>
       - gpu1
   ```
 
-## # `tracing_config` 区域
+### `tracing_config` 区域
 
 <div class="table-wrapper" markdown="block">
 
