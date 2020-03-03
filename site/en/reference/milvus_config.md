@@ -113,7 +113,7 @@ In the directory `home/$USER/milvus/conf`, open Milvus service configuration fil
 | -------------------- | ------------------------------------------------------------ | ------- | --------- |
 | `cpu_cache_capacity` | The size of the CPU memory for caching data for faster query. The sum of `cpu_cache_capacity` and `insert_buffer_size` (in "Section `db_config`) must be < total CPU memory size. | Integer | `16` (GB) |
 | `insert_buffer_size`     | Maximum buffer size allowed for data insertion. The sum of `insert_buffer_size` and `cpu_cache_capacity` (in "Section `cache_config`" ) should be < total memory. | Integer | `4` (GB)        |
-| `cache_insert_data`  | If set to `true` , the inserted data will be loaded into the cache immediately for hot query. <br/>If you want simultaneous inserting and searching of vector, it is recommended to enable this function. | Boolean | `false`   |
+| `cache_insert_data`  | If set to `true` , the inserted data will be loaded into the cache immediately for hot query. | Boolean | `false`   |
 </div>
 
 ### Section `engine_config`

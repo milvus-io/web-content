@@ -115,7 +115,7 @@ $ docker restart <container id>
 | -------------------------- | ------------------------------------------------------------ | ------- | --------- |
 | `cpu_cache_capacity`       | 内存中用于驻留搜索数据的缓存空间，`cpu_cache_capacity` 和 `insert_buffer_size`（`db_config` 区域）之和不能超过内存总量。 | Integer | `16` (GB) |
 | `insert_buffer_size` | 用于 buffer 的最大内存量。`insert_buffer_size` 和 `cpu_cache_capacity`（`cache_config` 区域）之和不能超过内存总量。 | Integer     | `4` (GB)        |
-| `cache_insert_data` | 设置为 `true` ，则新插入的数据会自动加载到缓存以备搜索。<br/>如果想要实现数据即插即搜索，建议启用该功能。 | Boolean | `false`  |
+| `cache_insert_data` | 设置为 `true` ，则新插入的数据会自动加载到缓存以备搜索。| Boolean | `false`  |
 </div>
 
 #### `engine_config` 区域
@@ -140,7 +140,7 @@ $ docker restart <container id>
 | ------------------ | ------------------------------------------------------------ | ------- | ---------- |
 | `enable` | 选择是否在 Milvus 里启用 GPU 用于搜索和索引创建。 | Boolean | `true` |
 | `cache_capacity` | 显存中用于驻留搜索数据的缓存空间，该值不能超过显存总量。 | Integer | `4` (GB) |
-| `search_resources` | 定义 Milvus 里用于搜索的 GPU 资源。格式为：`gpux`，其中 `x` 是 GPU 的序号，例如 `gpu0`。 | ResourceType        | ` gpu0` |
+| `search_resources` | 定义 Milvus 里用于搜索的 GPU 资源。格式为：`gpux`，其中 `x` 是 GPU 的序号，例如 `gpu0`。 | ResourceType        | `gpu0` |
 | `build_index_resources` | 定义 Milvus 里用户创建索引的 GPU 资源。格式为：`gpux`，其中 `x` 是 GPU 的序号，例如 `gpu0`。 | ResourceType | `gpu0` |
 </div>
 
