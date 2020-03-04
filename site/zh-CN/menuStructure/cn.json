@@ -30,7 +30,7 @@
     },
   {
       "id": "traditional_db.md",
-      "title": "传统数据库与特征向量搜索",
+      "title": "传统数据库与特征向量检索",
       "lang": "en",
       "label1": "about_milvus",
       "label2": null,
@@ -179,7 +179,7 @@
     },
     {
       "id": "comparison.md",
-      "title": "对比 FAISS 和 SPTAG",
+      "title": "与其它向量检索工具对比",
       "lang": "en",
       "label1": "reference",
       "label2": "",

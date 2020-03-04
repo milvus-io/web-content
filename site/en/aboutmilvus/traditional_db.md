@@ -1,10 +1,10 @@
 ---
 id: traditional_db.md
-title: Traditional Database
+title: Traditional Databases
 sidebar_label: Traditional Database
 ---
 
-# Traditional Database
+# Traditional Databases
 
 Traditional relational databases are designed to organize alphanumeric data items into interrelated collections. They do not support massive-scale, high-dimensional feature vectors because of the following reasons:
 

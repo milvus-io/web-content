@@ -6,19 +6,20 @@ sidebar_label: Milvus in Comparison
 
 # Milvus in Comparison
 
-Here is a comparison of Milvus with FAISS and SPTAG:
+Here is a comparison of Milvus with other vector search tools:
 
-|                                            | Milvus | FAISS | SPTAG |
-| ------------------------------------------ | ------ | ----- | ----- |
-| CPU/GPU heterogeneous computing capability | ✔️      | ✔️     | ❌     |
-| Quantization index                         | ✔️      | ✔️     | ❌     |
-| Hash index                                 | ✔️      | ✔️     | ❌     |
-| Graph index                                | ✔️      | ✔️     | ✔️     |
-| Distributed architecture                   | ✔️      | ❌     | ❌     |
-| High availability                          | ✔️      | ❌     | ❌     |
-| Easy-to-use user interface                 | ✔️      | ❌     | ❌     |
-| GUI monitoring dashboard                   | ✔️      | ❌     | ❌     |
-| Simple deployment                          | ✔️      | ❌     | ❌     |
-| C++/Java/Python/Go SDK                     | ✔️      | ✔️     | ✔️     |
-| RESTful API                                | ✔️      | ❌     | ❌     |
-| Enterprise user support                    | ✔️      | ❌     | ❌     |
+|                     | [Milvus](https://github.com/milvus-io/milvus) | [FAISS](https://github.com/facebookresearch/faiss) | [Hnswlib](https://github.com/nmslib/hnswlib) | [ANNOY](https://github.com/spotify/annoy) |
+| ------------------- | ------ | ----- | ----- | ----- |
+| CPU/GPU heterogeneous computing | ✔️      | ✔️     |  ❌    |  ❌    |
+| Quantization index           | ✔️      | ✔️     |   ❌   |   ❌    |
+| Hash index           | ✔️      | ✔️     |   ❌   |  ❌     |
+| Graph index              | ✔️      | ✔️     |  ✔️   |     ✔️   |
+| DIstributed architecture          | ✔️      | ❌     |    ❌   |  ❌       |
+| High availability          | ✔️      | ❌     |    ❌  |   ❌     |
+| Easy-to-use interface        | ✔️      | ❌     |    ❌ |    ❌     |
+| Graphic monitoring tool      | ✔️      | ❌     |    ❌  |    ❌     |
+| Ease of deployment             | ✔️      | ❌     |   ❌   |   ❌      |
+| Multi-client support       | ✔️  |    ✔️   |     ✔️   |   ✔️     |
+| RESTful API         | ✔️      | ❌     |  ❌    |    ❌   |
+| Enterprise user support     | ✔️      | ❌     |  ❌    |    ❌     |
+| Billion-scale data search       | ✔️      | ✔️     |  ❌    |    ❌     |
