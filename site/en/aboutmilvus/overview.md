@@ -18,7 +18,7 @@ Milvus is an open source similarity search engine for massive feature vectors. D
 
 - Multiple indexes
 
-  Milvus supports a variety of indexing types that employs quantization, tree-based, and graph indexing techniques. 
+  Milvus supports a variety of indexing types that employs quantization-based, tree-based, and graph indexing techniques. 
 
 - Intelligent resource management
 
@@ -46,10 +46,11 @@ Milvus is an open source similarity search engine for massive feature vectors. D
 
 
 ## Overall architecture
+
 ![Milvus architecture](https://raw.githubusercontent.com/milvus-io/docs/master/assets/milvus_arch.png)
 
 ## What's next
 
 - Explore more concepts of [vectors](vector.md), [vector search](index_method.md) and [vector database](vector_db.md)
-- [Install Milvus](https://www.milvus.io/docs/v0.6.0/guides/get_started/install_milvus/install_milvus.md) and start to explore around
+- [Install Milvus](../guides/get_started/install_milvus/install_milvus.md) and start to explore around
 
