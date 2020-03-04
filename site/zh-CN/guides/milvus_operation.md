@@ -157,7 +157,7 @@ sidebar_label: Learn Milvus Operations
 
 ## 压缩表中的段
 
-您可以对表中的段进行压缩。段是 Milvus 将插入的向量数据合并所获得的数据文件。一个表可包含多个段。
+段（segment）是 Milvus 自动将插入的向量数据合并所获得的数据文件。一个表可包含多个段。如果一个段中的向量数据被删除，被删除的向量数据占据的空间并不会自动释放。您可以对表中的段进行压缩操作以释放多余空间。
 
 ```python
 >>> milvus.compact(table_name='test01', timeout='1')

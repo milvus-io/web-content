@@ -165,7 +165,7 @@ When performing operations related to data changes, you can flush the data from 
 
 ## Compact all segments in a table
 
-You can compact all segments in a table. Milvus creates segments by merging inserted vector data. A table may contain multiple segments.
+A segment is a data file that Milvus automatically creates by merging inserted vector data. A table can contain multiple segments. If some vectors are deleted from a segment, the space taken by the deleted vectors cannot be released automatically. You can compact segments in a table to release space.
 
 ```python
 >>> milvus.compact(table_name='test01', timeout='1')
