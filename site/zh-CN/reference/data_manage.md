@@ -10,8 +10,9 @@ sidebar_label: Data Management
 
 - [数据管理策略](https://www.milvus.io/cn/blogs/2019-11-08-data-management.md)
 - [数据文件清理机制的改进](https://www.milvus.io/cn/blogs/2019-12-18-datafile-cleanup.md)
-- [元数据管理（一）：查看元数据](https://www.milvus.io/cn/blogs/2019-12-24-view-metadata.md)
-- [元数据管理（二）：元数据表的字段](https://www.milvus.io/cn/blogs/2019-12-27-meta-table.md)
+- [查看元数据](https://www.milvus.io/cn/blogs/2019-12-24-view-metadata.md)
+- [元数据表的字段](https://www.milvus.io/cn/blogs/2019-12-27-meta-table.md)
+- [如何通过元数据管理数据文件](https://www.milvus.io/cn/blogs/2020-01-09-milvus-meta.md)
 
 ## 数据云存储
 
