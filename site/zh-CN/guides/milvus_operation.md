@@ -4,7 +4,7 @@ title: Learn Milvus Operations
 sidebar_label: Learn Milvus Operations
 ---
 
-# 了解 Milvus 操作
+# Milvus 基本操作
 
 该页面将向您展示如何使用 [Python SDK](https://github.com/milvus-io/pymilvus) 运行 Milvus 基本操作。关于详细的 API 参考信息，请参考 [Python API 文档](https://github.com/milvus-io/pymilvus)。
 
