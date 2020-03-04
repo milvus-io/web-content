@@ -8,6 +8,7 @@ sidebar_label: Preface
 
 
 ## 概述
+
 本文档向您介绍如何对Milvus进行安装、设置与使用。
 
 如果您需要获取任何帮助，欢迎在 GitHub 上 [创建 issue](https://github.com/milvus-io/milvus/issues/new/choose ) 或 [加入我们的 Slack 社区](https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk) 参与讨论。
@@ -15,6 +16,7 @@ sidebar_label: Preface
 若要了解 Milvus 的产品优势，请参考 [与其他向量检索工具对比](../reference/comparison.md)。
 
 ## 声明
+
 本软件及相关文档根据许可协议提供，该协议包含对使用和披露的限制，并受知识产权法保护。 除非您的许可协议明确允许或法律允许，否则您不得以任何形式使用、复制、翻译、传播、修改、许可、分派、再授权、发布或再版任何部分。除非法律要求互操作性，否则禁止对该软件进行反向编译、反向工程、破解产品的任何部分或试图发现有关产品的任何源代码、基本理念或运算方法。
 
 此处包含的信息如有更改，恕不另行通知，并且不保证没有错误。如果您发现任何错误，请以书面形式告知我们。
