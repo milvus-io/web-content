@@ -13,7 +13,3 @@ From data import, data storage to data querying and scheduling, our blogs on Med
 - [Viewing Metadata](https://medium.com/@milvusio/milvus-metadata-management-1-6b9e05c06fb0)
 - [Fields in Metadata Tables](https://medium.com/@milvusio/milvus-metadata-management-2-fields-in-the-metadata-table-3bf0d296ca6d)
 - [How to Manage Data Files with Metadata](https://medium.com/@milvusio/milvus-metadata-management-3-e65b14137f58)
-
-## Cloud storage
-
-Milvus currently supports Amazon Simple Storage Service (S3) as cloud storage. You can configure settings to use S3 in the [configuration file](milvus_config.md).

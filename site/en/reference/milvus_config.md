@@ -85,12 +85,6 @@ Before changing these settings, welcome to consult Milvus team on [GitHub issues
 | ------------------------ | ------------------------------------------------------------ | ------- | --------------- |
 | `primary_path`         | Primary directory used for both the vector data files you want to import, and the metadata. | Path   | `/var/lib/milvus`    |
 | `secondary_path` | A semicolon-separated list of secondary directories used only for the vector data files imported into Milvus. Set this parameter when the data size is too much to fit in the `primary_path`. <br/>Each file, whether in `primary_path` or `secondary_path`, is assigned an equal part of the imported data.  Data Size per Directory = Total Data Size / Number of Directories. So make sure the available storage space in these files are enough. | Path   |     ` `       |
-|`s3_enable`| Whether to enable Simple Storage Service.                      | Boolean    | false           |
-| `s3_address`          | Simple Storage Service (S3) IP address.                         | IP         | `127.0.0.1`       |
-| `s3_port`              | S3 port. Port range must be in (1024, 65535).      | Integer    | `9000`            |
-| `s3_access_key`        | S3 access key.                  | String     | `minioadmin`      |
-| `s3_secret_key`        | S3 secret key.                    | String     | `minioadmin`      |
-| `s3_bucket`           | S3 bucket name.                     | String     | `milvus-bucket`   |
 </div>
 
 ### Section `metric_config`

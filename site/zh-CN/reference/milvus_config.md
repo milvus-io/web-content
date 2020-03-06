@@ -87,12 +87,6 @@ $ docker restart <container id>
 | `primary_path`       | 导入 Milvus 的数据文件和元数据存储的首选路径。               | Path        | `/var/lib/milvus`     |
 | `secondary_path`     | 导入 Milvus 的数据文件存储的二级路径，可以填多个，两个路径中间以分号隔开。当数据量很大，`primary_path` 指定的磁盘空间不够用时，可以设置此参数。<br/>`primary_path` 和 `secondary_path` 平均分配导入的数据。每个路径下的数据大小 = 数据总大小 / 路径数量。请确保这些路径下文件可用的存量差不多且够用。 | Path        | ` `             |
 | `backend_url`        | 元数据存储的 URL 。使用 SQLite（单机部署） 或 MySQL（分布式集群部署）来存储元数据。 <br/>`db_backend_url` 的格式为：`dialect://username:password@host:port/database`。（ `dialect` 可以是 `mysql` 或 `sqlite`，取决于你是用了MySQL 还是SQLite数据库。） | Path        | `sqlite://:@:/` |
-|`s3_enable`| 是否使用 Simple Storage Service (S3) 进行数据存储。                      | Boolean    | false           |
-| `s3_address`          | S3 存储的 IP 地址。                        | IP         | `127.0.0.1`       |
-| `s3_port`              | S3 端口。 端口必须在 (1024, 65535) 范围内。      | Integer    | `9000`            |
-| `s3_access_key`        | S3 访问秘钥 (access key)。                  | String     | `minioadmin`      |
-| `s3_secret_key`        | S3 秘密秘钥 (secret key)。                    | String     | `minioadmin`      |
-| `s3_bucket`           | S3 存储桶的名称。                    | String     | `milvus-bucket`   |
 </div>
 
 
