@@ -81,18 +81,18 @@ sidebar_label: Learn Milvus Operations
 
 > 注意：在实际生产环境中，建议在插入向量之前先创建索引，以便系统自动增量创建索引。需要注意的是，在向量插入结束后，相同的索引需要手动再创建一次（因为可能存在大小不满足 `index_file_size` 的数据文件，系统不会为该文件自动创建索引）。
 
-1. 准备创建索引所需参数。
+1. 准备创建索引所需参数(以IVF_FLAT为例)。
 
    ```python
    # Prepare index param
-   >>> index_param = {'index_type': IndexType.IVFLAT, 'nlist': 16384}
+   >>> ivf_param = {'nlist': 16384}
    ```
 
 2. 为表创建索引。
 
    ```python
    # Create index
-   >>> milvus.create_index('test01', index_param)
+   >>> milvus.create_index('test01', IndexType.IVF_FLAT, ivf_param)
    ```
 
 ### 删除索引
@@ -117,14 +117,14 @@ sidebar_label: Learn Milvus Operations
 
    ```python
    # Insert vectors
-   >>> milvus.add_vectors(table_name='test01', records=vectors)
+   >>> milvus.insert(table_name='test01', records=vectors)
    ```
 
    您也可以自己定义向量 ID：
 
    ```python
    >>> vector_ids = [id for id in range(20)]
-   >>> milvus.add_vectors(table_name='test01', records=vectors, ids=vector_ids)
+   >>> milvus.insert(table_name='test01', records=vectors, ids=vector_ids)
    ```
 
 ### 在分区中插入向量
@@ -147,6 +147,12 @@ sidebar_label: Learn Milvus Operations
 >>> milvus.delete_by_id(table_name='test01', ids)
 ```
 
+您也可以根据向量 ID 获取向量：
+
+```python
+>>> status, vector = milvus.get_vector_by_id(table_name='test01', vector_id=ids[0])
+```
+
 ## 将表中的数据落盘
 
 当您在进行有关数据更改的操作时，您可以将表中的数据从内存落盘以避免数据丢失。Milvus 也支持自动落盘。自动落盘会在固定的时间周期将所有现存表的数据落盘。您可以通过 [Milvus 服务端配置文件](../reference/milvus_config.md)来设置自动落盘的时间间隔。
@@ -167,10 +173,17 @@ sidebar_label: Learn Milvus Operations
 
 ### 在表中搜索向量
 
+1. 创建搜索参数
+```python
+>>> search_param = {'nprobe': 16}
+```
+
+2. 搜索
+
 ```python
 # create 5 vectors of 32-dimension
 >>> q_records = [[random.random() for _ in range(dim)] for _ in range(5)]
->>> milvus.search_vectors(table_name='test01', query_records=q_records, top_k=2, nprobe=16)
+>>> milvus.search(table_name='test01', query_records=q_records, top_k=2, params=search_param)
 ```
 
 ### 在分区中搜索向量
@@ -178,7 +191,7 @@ sidebar_label: Learn Milvus Operations
 ```python
 # create 5 vectors of 32-dimension
 >>> q_records = [[random.random() for _ in range(dim)] for _ in range(5)]
->>> milvus.search(table_name='test01', query_records=q_records, top_k=1, nprobe=8, partition_tags=['tag01'])
+>>> milvus.search(table_name='test01', query_records=q_records, top_k=1, partition_tags=['tag01'], params=search_param)
 ```
 
 > 注意：如果您不指定 `partition_tags`， Milvus 会在整个表中搜索。
