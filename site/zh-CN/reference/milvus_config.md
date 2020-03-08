@@ -119,7 +119,7 @@ $ docker restart <container id>
 
 | 参数                 | 说明                                                         | 类型    | 默认值 |
 | -------------------- | ------------------------------------------------------------ | ------- | ------ |
-| `use_blas_threshold` | Milvus 性能调优参数。此参数必须与 `nq` 比较以确定是否触发使用 OpenBLAS 计算库的阈值。<br/>如果 `nq` >= `use_blas_threshold` ，则使用 OpenBLAS，搜索响应时间波动较小，但搜索速度较慢。如果 `nq` < `use_blas_threshold` ，则使用 AVX 指令集，搜索速度明显提升，但搜索响应时间波动较大。取值范围为 >= 0. | Integer | `1100`  |
+| `use_blas_threshold` | Milvus 性能调优参数。此参数必须与 `nq` 比较以确定是否触发使用 OpenBLAS 计算库的阈值。<br/>如果 `nq` >= `use_blas_threshold` ，则使用 OpenBLAS，搜索响应时间波动较小，但搜索速度较慢。如果 `nq` < `use_blas_threshold` ，则使用 AVX 或 SSE 指令集，搜索速度明显提升，但搜索响应时间波动较大。取值范围为 >= 0. | Integer | `1100`  |
 | `gpu_search_threshold` | Milvus 性能调优参数。此参数必须与 `nq` 比较以确定搜索计算是否只在 GPU 上进行。<br/>如果 `nq` >= `gpu_search_threshold` ，则搜索计算只在 GPU 上进行。如果 `nq` < `gpu_search_threshold` ，则搜索计算将在 CPU 和 GPU 上协同进行。| Integer | `1000` |
 </div>
 
