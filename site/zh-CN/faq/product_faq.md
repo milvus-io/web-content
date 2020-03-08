@@ -14,7 +14,7 @@ sidebar_label: Product FAQ
 - [Milvus 的易用性如何？](#Milvus-的易用性如何)
 - [Milvus 具备高可用特性吗？](#Milvus-具备高可用特性吗)
 - [Milvus 可以处理百亿或千亿级数据吗？](#Milvus-可以处理百亿或千亿级数据吗)
-- [向量存入 Milvus 后，如何检索？](#向量存入-Milvus-后如何检索)
+- [向量存入 Milvus 后如何检索？](#向量存入-Milvus-后如何检索)
 - [如何选择向量索引的类型？](#如何选择向量索引的类型)
 - [Milvus 是否支持 “边插入边查询” ？](#Milvus-是否支持-边插入边查询-)
 - [数据存储在哪里？](#数据存储在哪里)
@@ -53,7 +53,7 @@ Milvus 集群具备高可用性，其存储和计算等集群均容许部分组�
 
 Milvus 提供了集群分片中间件 Mishards，可以实现集群分片部署，满足百亿或者千亿级数据的处理需求。Mishards 还处于试验阶段，不推荐部署到生产环境。详细信息请参考 [Mishards Readme](https://github.com/milvus-io/milvus/blob/0.6.0/shards/README_CN.md)。
 
-#### 向量存入 Milvus 后，如何检索？
+#### 向量存入 Milvus 后如何检索？
 
 向量导入 Milvus 后，会被存储并建立索引。Milvus 会给对应向量一个 ID，用户需要自己将该向量 ID 和其对应的其他属性存入另外一个数据库系统。查询的时候，用户提供需要查询的向量，Milvus 会返回和用户提供向量最匹配的数个向量的ID以及匹配度。
 
