@@ -18,7 +18,7 @@ sidebar_label: Product FAQ
 - [如何选择向量索引的类型？](#如何选择向量索引的类型)
 - [Milvus 是否支持 “边插入边查询” ？](#Milvus-是否支持-边插入边查询-)
 - [数据存储在哪里？](#数据存储在哪里)
-- [Milvus 与 FAISS 和 SPTAG 对比如何？](#Milvus-与-FAISS-和-SPTAG-对比如何)
+- [Milvus 与其他向量检索工具对比如何？](#Milvus-与其他向量检索工具对比如何)
 - [Milvus 是一款端到端产品吗？](#Milvus-是一款端到端产品吗)
 - [仍有问题没有得到解答？](#仍有问题没有得到解答)
 
@@ -36,18 +36,17 @@ Milvus 单行读取速度约 0.6 毫秒，单行写入速度在 0.03 毫秒左�
 
 #### 如何使用 Milvus？
 
-Milvus 提供 [Python](https://pypi.org/project/pymilvus/), [Java](https://milvus-io.github.io/milvus-sdk-java/javadoc/io/milvus/client/package-summary.html) and C++ SDK。同时还支持所有基于 gRPC 的通信方式。
+Milvus 提供多种[客户端](../reference/sdk.md)。同时还支持所有基于 gRPC 的通信方式。
 
 #### Milvus 的易用性如何？
 
-Milvus 安装简单，仅需下载相关 docker 镜像文件。易用性强，通过 Python，Java 等 API 接口即可完成向量插入、检索等操作。若要了解更多，请看 [安装 Milvus](../guides/get_started/install_milvus/install_milvus.md).
-
+Milvus 安装简单，仅需下载相关 docker 镜像文件。易用性强，通过 API 接口即可完成向量插入、检索等操作。若要了解更多，请看 [安装 Milvus](../guides/get_started/install_milvus/install_milvus.md).
 
 想要开启您的第一次向量搜索？请阅读 [运行示例程序](../guides/get_started/example_code.md).
 
 #### Milvus 具备高可用特性吗？
 
-Milvus 集群具备高可用性，其存储和计算等集群均容许部分组件失效，而不影响整个集群的使用。若要了解更多，请看 [Milvus 高可用方案](https://github.com/milvus-io/bootcamp/tree/0.5.3/solutions/Milvus_HA)。
+Milvus 支持预写式日志（Write-Ahead Logging，WAL）,可保证数据操作的原子性和持久性。Milvus 集群同样具备高可用性，其存储和计算等集群均容许部分组件失效，而不影响整个集群的使用。若要了解更多，请看 [Milvus 高可用方案](https://github.com/milvus-io/bootcamp/tree/0.5.3/solutions/Milvus_HA)。
 
 #### Milvus 可以处理百亿或千亿级数据吗？
 
@@ -55,7 +54,7 @@ Milvus 提供了集群分片中间件 Mishards，可以实现集群分片部署�
 
 #### 向量存入 Milvus 后如何检索？
 
-向量导入 Milvus 后，会被存储并建立索引。Milvus 会给对应向量一个 ID，用户需要自己将该向量 ID 和其对应的其他属性存入另外一个数据库系统。查询的时候，用户提供需要查询的向量，Milvus 会返回和用户提供向量最匹配的数个向量的ID以及匹配度。
+向量导入 Milvus 后，会被存储并建立索引。Milvus 会给对应向量一个 ID，用户需要自己将该向量 ID 和其对应的其他属性存入另外一个数据库系统。查询的时候，用户提供需要查询的向量，Milvus 会返回和用户提供向量最匹配的数个向量的 ID 以及匹配度。
 
 #### 如何选择向量索引的类型？
 
@@ -67,13 +66,13 @@ Milvus 提供了集群分片中间件 Mishards，可以实现集群分片部署�
 
 #### 数据存储在哪里？
 
-向量数据导入 Mivus 后，将自动存储在您的本地磁盘。元数据可以存储在 MySQL 或 SQLite 3 上。
+向量数据导入 Milvus 后，将自动存储在您的本地磁盘。元数据可以存储在 MySQL 或 SQLite 上。
 
-#### Milvus 与 FAISS 和 SPTAG 对比如何?
+#### Milvus 与其他向量检索工具对比如何?
 
-尽管这些都支持海量向量的相似度检索，Milvus 是其中唯一高性能、易用性强的向量检索引擎，具备高可用、弹性扩展等特性。
+与其他向量检索工具对毕，Milvus 是其中唯一高性能、易用性强的向量检索引擎，具备高可用、弹性扩展等特性。
 
-想要了解更多性能对比，请看 [与 FAISS 和 SPTAG 对比](../reference/comparison.md)。
+想要了解更多性能对比，请看 [其他向量检索工具对比](../reference/comparison.md)。
 
 #### Milvus 是一款端到端产品吗？
 
