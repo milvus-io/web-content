@@ -40,7 +40,7 @@ Milvus provides various [clients](../reference/sdk.md) and supports all gRPC com
 
 #### How easy is it to use Milvus?
 
-Milvus can be easily installed with docker images. For more details, see [Install Milvus](../guides/get_started/install_milvus/install_milvus.md).
+Milvus can be easily installed with docker images. You can use APIs for vector insertion, deletion, and search. For more details, see [Install Milvus](../guides/get_started/install_milvus/install_milvus.md).
 
 To start your first vector search program, please go to [Milvus example code](../guides/get_started/example_code.md).
 
