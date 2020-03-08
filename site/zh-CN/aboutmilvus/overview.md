@@ -30,7 +30,7 @@ Milvus 是一款开源的、针对海量特征向量的相似性搜索引擎。�
 
 - 高可用性
 
- Milvus 支持预写式日志（Write-Ahead Logging, WAL），可以有效保证数据操作的原子性和持久性。Milvus 对于分布式场景集成了 Kubernetes 框架，能有效避免单点障碍情况的发生。
+  Milvus 支持预写式日志（Write-Ahead Logging, WAL），可以有效保证数据操作的原子性和持久性。Milvus 对于分布式场景集成了 Kubernetes 框架，能有效避免单点障碍情况的发生。
 
 - 全面兼容
 
