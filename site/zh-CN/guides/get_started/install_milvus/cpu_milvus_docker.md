@@ -49,7 +49,7 @@ $ docker pull milvusdb/milvus:0.6.0-cpu-d120719-2b40dd
 
 ## 第三步 下载配置文件
 
-```
+```shell
 # Create Milvus file
 $ mkdir -p /home/$USER/milvus/conf
 $ cd /home/$USER/milvus/conf
