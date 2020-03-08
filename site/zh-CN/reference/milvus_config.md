@@ -32,7 +32,7 @@ $ docker restart <container id>
 
 ### 运行时修改
 
-您可以使用 Milvus 客户端 对 `server_config.yaml` 的配置进行运行时修改。修改后无需重启 Milvus 即可启用新的更改。详情请参考 [客户端参考](sdk.md)。
+您可以使用 Milvus 客户端 对 `server_config.yaml` 的配置进行运行时修改。修改后无需重启 Milvus 即可启用新的更改。详情请参考[客户端参考](sdk.md)。
 
 对以下参数的运行时修改是立即生效的：
  
@@ -61,10 +61,12 @@ $ docker restart <container id>
 
 | 参数        | 说明                                                         | 类型    | 默认值    |
 | ----------- | ------------------------------------------------------------ | ------- | --------- |
-| `address`   | Milvus server 监听的 IP 地址。                                  | String | `0.0.0.0`  |
-| `port`      | Milvus server 监听的端口号，范围：1025 - 65534。               | Integer | `19530`   |
-| `deploy_mode` | Milvus 部署类型。选择 `single` ，`cluster_readonly` 或 `cluster_writable`。 | Boolean | `single`  |
+| `address`   | Milvus 服务端监听的 IP 地址。                                  | String | `0.0.0.0`  |
+| `port`      | Milvus 服务端监听的端口号，范围：(1024, 65535)。               | Integer | `19530`   |
+| `deploy_mode` | Milvus 部署类型。选择 `single` ，`cluster_readonly` 或 `cluster_writable`。 | DeployMode | `single`  |
 | `time_zone` | 使用 UTC-x 或 UTC+x 来指定时区。比如，您可以使用 `UTC+8` 来代表中国标准时间。 | Timezone | `UTC+8`   |
+| `web_port` | Milvus 网络服务端监听的端口号，范围：(1024, 65535)。您可以使用 Milvus 网络服务端与 [Milvus RESTful API](sdk.md) 通信。| Integer | `19121`  |
+
 </div>
 
 ### `db_config` 区域
@@ -73,8 +75,8 @@ $ docker restart <container id>
 
 | 参数                 | 说明                                                         | 类型        | 默认值          |
 | -------------------- | ------------------------------------------------------------ | ----------- | --------------- |
-| `backend_url`        | 元数据存储的 URL 。使用 SQLite（单机部署） 或 MySQL（分布式集群部署）来存储元数据。 <br/>`backend_url` 的格式为：`dialect://username:password@host:port/database`。（ `dialect` 可以是 `mysql` 或 `sqlite`，取决于你是用了 MySQL 还是 SQLite 数据库。） | Path        | `sqlite://:@:/` |
-| `preload_table`      | 定义在 Milvus 服务再次启动后，是否将之前已经导入并保存在磁盘的表预加载到内存。支持全部表格或者部分表格的预加载。 <br/>若要加载所有表格，使用 `*` ；若要加载部分表格，列出所有需要加载的表名，以逗号隔开。如果无需加载表格，请将该值留空 （ ` ` ）。 | PreloadType | ` `             |
+| `backend_url`        | 元数据存储的 URL 。使用 SQLite（单机部署） 或 MySQL（分布式集群部署）来存储元数据。 <br/>`backend_url` 的格式为：`dialect://username:password@host:port/database`。（ `dialect` 可以是 `mysql` 或 `sqlite`，取决于你是用了 MySQL 还是 SQLite 数据库。） | String        | `sqlite://:@:/` |
+| `preload_table`      | 定义在 Milvus 服务再次启动后，是否将之前已经导入并保存在磁盘的表预加载到内存。支持全部表格或者部分表格的预加载。 <br/>若要加载所有表格，使用 `'*'` ；若要加载部分表格，列出所有需要加载的表名，以逗号隔开。如果无需加载表格，请将该值留空 （ ` ` ）。 | StringList | ` `             |
 | `auto_flush_interval` | Milvus 每次自动将缓存中的插入数据落盘的时间间隔，单位为秒。如果 `auto_flush_interval` 值为0，则 Milvus 不会定时自动将数据落盘。如果缓存空间已满，Milvus 总是会自动将数据落盘，这和 `auto_flush_interval` 的值无关。  | Integer |  1 (s)  |
 </div>
 
@@ -84,9 +86,8 @@ $ docker restart <container id>
 
 | 参数                 | 说明                                                         | 类型        | 默认值          |
 | -------------------- | ------------------------------------------------------------ | ----------- | --------------- |
-| `primary_path`       | 导入 Milvus 的数据文件和元数据存储的首选路径。               | Path        | `/var/lib/milvus`     |
-| `secondary_path`     | 导入 Milvus 的数据文件存储的二级路径，可以填多个，两个路径中间以分号隔开。当数据量很大，`primary_path` 指定的磁盘空间不够用时，可以设置此参数。<br/>`primary_path` 和 `secondary_path` 平均分配导入的数据。每个路径下的数据大小 = 数据总大小 / 路径数量。请确保这些路径下文件可用的存量差不多且够用。 | Path        | ` `             |
-| `backend_url`        | 元数据存储的 URL 。使用 SQLite（单机部署） 或 MySQL（分布式集群部署）来存储元数据。 <br/>`db_backend_url` 的格式为：`dialect://username:password@host:port/database`。（ `dialect` 可以是 `mysql` 或 `sqlite`，取决于你是用了MySQL 还是SQLite数据库。） | Path        | `sqlite://:@:/` |
+| `primary_path`       | 导入 Milvus 的向量文件、索引文件和元数据存储的首选路径。               | Path        | `/var/lib/milvus`     |
+| `secondary_path`     | 导入 Milvus 的向量文件和索引文件存储的二级路径，可以填多个，两个路径中间以分号隔开。当数据量很大，`primary_path` 指定的磁盘空间不够用时，可以设置此参数。<br/>`primary_path` 和 `secondary_path` 平均分配导入的数据。每个路径下的数据大小 = 数据总大小 / 路径数量。请确保这些路径下文件可用的存量差不多且够用。 | Path        | ` `             |
 </div>
 
 
@@ -97,9 +98,8 @@ $ docker restart <container id>
 | 参数                      | 说明                           | 类型    | 默认值       |
 | ------------------------- | ------------------------------ | ------- | ------------ |
 | `enable_monitor` | 设置为 `true` 以启动监控功能。 | Boolean | `false`       |
-| `collector`               | 连接的监控系统。               | String | `Prometheus`  |
-|  `address`                | Pushgateway 的 IP 地址。       |   IP     |   127.0.0.1    |
-| `port`                    | 访问 Prometheus 的端口号。     | Integer | `8080`       |
+| `address`                | 访问 Prometheus Pushgateway 的 IP 地址。       |   IP     |   127.0.0.1    |
+| `port`                    | 访问 Prometheus Pushgateway 的端口号。     | Integer | `9091`       |
 </div>
 
 ### `cache_config` 区域
@@ -108,8 +108,8 @@ $ docker restart <container id>
 
 | 参数                       | 说明                                                         | 类型    | 默认值    |
 | -------------------------- | ------------------------------------------------------------ | ------- | --------- |
-| `cpu_cache_capacity`       | 内存中用于驻留搜索数据的缓存空间，`cpu_cache_capacity` 和 `insert_buffer_size`（`db_config` 区域）之和不能超过内存总量。 | Integer | `16` (GB) |
-| `insert_buffer_size` | 用于 buffer 的最大内存量。`insert_buffer_size` 和 `cpu_cache_capacity`（`cache_config` 区域）之和不能超过内存总量。 | Integer     | `4` (GB)        |
+| `cpu_cache_capacity`       | 内存中用于驻留搜索数据的缓存空间，`cpu_cache_capacity` 和 `insert_buffer_size` 之和不能超过内存总量。 | Integer | `4` (GB) |
+| `insert_buffer_size` | 用于 buffer 的最大内存量。`insert_buffer_size` 和 `cpu_cache_capacity` 之和不能超过内存总量。 | Integer     | `1` (GB)        |
 | `cache_insert_data` | 设置为 `true` ，则新插入的数据会自动加载到缓存以备搜索。| Boolean | `false`  |
 </div>
 
@@ -119,7 +119,7 @@ $ docker restart <container id>
 
 | 参数                 | 说明                                                         | 类型    | 默认值 |
 | -------------------- | ------------------------------------------------------------ | ------- | ------ |
-| `use_blas_threshold` | Milvus 性能调优参数。此参数必须与 `nq` 比较以确定是否触发使用 OpenBLAS 计算库的阈值。<br/>如果 `nq` >= `use_blas_threshold` ，则使用 OpenBLAS，搜索响应时间无波动，且搜索速度尚可。如果 `nq` < `use_blas_threshold` ，搜索速度明显提升，但搜索响应时间有波动。取值范围为 >= 0. | Integer | `20`  |
+| `use_blas_threshold` | Milvus 性能调优参数。此参数必须与 `nq` 比较以确定是否触发使用 OpenBLAS 计算库的阈值。<br/>如果 `nq` >= `use_blas_threshold` ，则使用 OpenBLAS，搜索响应时间波动较小，但搜索速度较慢。如果 `nq` < `use_blas_threshold` ，则使用 AVX 指令集，搜索速度明显提升，但搜索响应时间波动较大。取值范围为 >= 0. | Integer | `20`  |
 | `gpu_search_threshold` | Milvus 性能调优参数。此参数必须与 `nq` 比较以确定搜索计算是否只在 GPU 上进行。<br/>如果 `nq` >= `gpu_search_threshold` ，则搜索计算只在 GPU 上进行。如果 `nq` < `gpu_search_threshold` ，则搜索计算将在 CPU 和 GPU 上协同进行。| Integer | `1000` |
 </div>
 
@@ -134,9 +134,9 @@ $ docker restart <container id>
 | 参数               | 说明                                                         | 类型    | 默认值     |
 | ------------------ | ------------------------------------------------------------ | ------- | ---------- |
 | `enable` | 选择是否在 Milvus 里启用 GPU 用于搜索和索引创建。 | Boolean | `true` |
-| `cache_capacity` | 显存中用于驻留搜索数据的缓存空间，该值不能超过显存总量。 | Integer | `4` (GB) |
-| `search_resources` | 定义 Milvus 里用于搜索的 GPU 资源。格式为：`gpux`，其中 `x` 是 GPU 的序号，例如 `gpu0`。 | ResourceType        | `gpu0` |
-| `build_index_resources` | 定义 Milvus 里用户创建索引的 GPU 资源。格式为：`gpux`，其中 `x` 是 GPU 的序号，例如 `gpu0`。 | ResourceType | `gpu0` |
+| `cache_capacity` | 显存中用于驻留搜索数据的缓存空间，该值不能超过显存总量。 | Integer | `1` (GB) |
+| `search_resources` | 定义 Milvus 里用于搜索的 GPU 资源。格式为：`gpux`，其中 `x` 是 GPU 的序号，例如 `gpu0`。 | DeviceList        | `gpu0` |
+| `build_index_resources` | 定义 Milvus 里用户创建索引的 GPU 资源。格式为：`gpux`，其中 `x` 是 GPU 的序号，例如 `gpu0`。 | DeviceList | `gpu0` |
 </div>
 
 > 注意：在 Milvus 里，创建索引和搜索是两个独立分开的过程，可以只在 `cpu`，或同时在 `cpu` 和 `gpu` 里进行。通过将 GPU 添加至 `search_resources` 或者 `build_index_resources` 下方，您可以指定多张 GPU 来进行创建索引或搜索。 请参考下面的 YAML 示例代码：
