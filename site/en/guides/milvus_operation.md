@@ -89,18 +89,18 @@ Use `show_partitions()` to verify whether the partition is created.
 
 > Note: In production, it is recommended to create indexes before inserting vectors into the table. Index is automatically built when vectors are being imported. However, you need to create the same index again after the vector insertion process is completed because some data files may not meet the `index_file_size` and index will not be automatically built for these data files.
 
-1. Prepare index parameters.
+1. Prepare index parameters. The following command uses `IVF_FLAT` index type as an example.
 
    ```python
    # Prepare index param
-   >>> index_param = {'index_type': IndexType.IVFLAT, 'nlist': 16384}
+   >>> ivf_param = {'nlist': 16384}
    ```
 
 2. Create an index for the table.
 
    ```python
    # Create index
-   >>> milvus.create_index('test01', index_param)
+   >>> milvus.create_index('test01', IndexType.IVF_FLAT, ivf_param)
    ```
 
 ### Drop an index
@@ -125,20 +125,26 @@ Use `show_partitions()` to verify whether the partition is created.
 
    ```python
    # Insert vectors
-   >>> milvus.add_vectors(table_name='test01', records=vectors)
+   >>> milvus.insert(table_name='test01', records=vectors)
    ```
 
    Alternatively, you can also provide user-defined vector ids:
 
    ```python
    >>> vector_ids = [id for id in range(20)]
-   >>> milvus.add_vectors(table_name='test01', records=vectors, ids=vector_ids)
+   >>> milvus.insert(table_name='test01', records=vectors, ids=vector_ids)
    ```
 
 ### Insert vectors in a partition
 
 ```python
 >>> milvus.insert('test01', vectors, partition_tag="tag01")
+```
+
+To verify the vectors you have inserted, use `get_vector_by_id()`. Assume you have some vectors with the following IDs.
+
+```python
+>>> status, vector = milvus.get_vector_by_id(table_name='test01', vector_id=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19])
 ```
 
 ### Delete vectors by ID
@@ -175,11 +181,19 @@ A segment is a data file that Milvus automatically creates by merging inserted v
 
 ### Search vectors in a table
 
+1. Prepare search parameters.
+
+```python
+>>> search_param = {'nprobe': 16}
+```
+
+2. Search vectors.
+
 ```python
 # create 5 vectors of 32-dimension
 >>> q_records = [[random.random() for _ in range(dim)] for _ in range(5)]
 # search vectors
->>> milvus.search_vectors(table_name='test01', query_records=q_records, top_k=2, nprobe=16)
+>>> milvus.search(table_name='test01', query_records=q_records, top_k=2, params=search_param)
 ```
 
 ### Search vectors in a partition
@@ -187,7 +201,7 @@ A segment is a data file that Milvus automatically creates by merging inserted v
 ```python
 # create 5 vectors of 32-dimension
 >>> q_records = [[random.random() for _ in range(dim)] for _ in range(5)]
->>> milvus.search(table_name='test01', query_records=q_records, top_k=1, nprobe=8, partition_tags=['tag01'])
+>>> milvus.search(table_name='test01', query_records=q_records, top_k=1, partition_tags=['tag01'], params=search_param)
 ```
 
 > Note: If you do not specify `partition_tags`, Milvus searches the whole table.

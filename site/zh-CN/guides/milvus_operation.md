@@ -133,6 +133,12 @@ sidebar_label: Learn Milvus Operations
 >>> milvus.insert('test01', vectors, partition_tag="tag01")
 ```
 
+您可以通过 `get_vector_by_id()` 验证已经插入的向量。这里假设您的表中存在以下向量 ID。
+
+```python
+>>> status, vector = milvus.get_vector_by_id(table_name='test01', vector_id=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19])
+```
+
 ### 通过 ID 删除向量
 
 假设您的表中存在以下向量 ID：
@@ -145,12 +151,6 @@ sidebar_label: Learn Milvus Operations
 
 ```python
 >>> milvus.delete_by_id(table_name='test01', ids)
-```
-
-您也可以根据向量 ID 获取向量：
-
-```python
->>> status, vector = milvus.get_vector_by_id(table_name='test01', vector_id=ids[0])
 ```
 
 ## 将表中的数据落盘
