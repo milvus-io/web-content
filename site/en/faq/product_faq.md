@@ -18,7 +18,7 @@ sidebar_label: Product FAQ
 - [Which index methods are supported?](#Which-index-methods-are-supported)
 - [Does Milvus support simultaneous inserting and searching?](#Does-Milvus-support-simultaneous-inserting-and-searching)
 - [Where are the data stored?](#Where-are-the-data-stored)
-- [How does Milvus compare to FAISS and SPTAG?](#How-does-Milvus-compare-to-FAISS-and-SPTAG)
+- [How does Milvus compare to other vector search tools?](#How-does-Milvus-compare-to-other-vector-search-tools)
 - [Is Milvus an end-to-end product?](#Is-Milvus-an-end-to-end-product)
 - [Have questions that were not answered?](#Have-questions-that-were-not-answered)
 
@@ -26,7 +26,7 @@ sidebar_label: Product FAQ
 
 #### What is Milvus?
 
-Milvus is an open source similarity search engine for massive feature vectors. It is built with heterogeneous computing architecture for the best performance and cost efficiency. Searches over billion-scale vectors take only milliseconds with minimum computing resources. It can be easily deployed on both bare metal and cloud platforms with Linux operating systems.
+Milvus is an open source similarity search engine for massive-scale feature vectors. It is built with heterogeneous computing architecture for the best performance and cost efficiency. Searches over billion-scale vectors take only milliseconds with minimum computing resources. It can be easily deployed on both bare metal and cloud platforms with Linux operating systems.
 
 #### When is Milvus a good choice?
 
@@ -36,17 +36,17 @@ Milvus returns single-row reads in 0.6 ms or less and single-row writes in appro
 
 #### How to use Milvus?
 
-Milvus provides [Python](https://pypi.org/project/pymilvus/), [Java](https://milvus-io.github.io/milvus-sdk-java/javadoc/io/milvus/client/package-summary.html) and C++ SDKs. It also supports all gRPC communication types. 
+Milvus provides various [clients](../reference/sdk.md) and supports all gRPC communication types. 
 
 #### How easy is it to use Milvus?
 
-Milvus can be easily installed through pulling docker images and simple pip install for SDKs. For more details, see [Install Milvus](../guides/get_started/install_milvus/install_milvus.md).
+Milvus can be easily installed with docker images. For more details, see [Install Milvus](../guides/get_started/install_milvus/install_milvus.md).
 
 To start your first vector search program, please go to [Milvus example code](../guides/get_started/example_code.md).
 
 #### Is Milvus highly available?
 
-Milvus is designed to be used in mission critical systems with high SLAs. Milvus cluster ensures continuous service capability in case of any single point of failure.
+Milvus supports write-ahead logging (WAL), which ensures the atomicity and durability of data operations. In distributed scenarios, Milvus ensures continuous service capability in case of any single point of failure.
 
 #### Can Milvus handle datasets with 10-billion or 100-billion scale?
 
@@ -68,9 +68,9 @@ Absolutely. You can simultaneously insert and search data in Milvus. If you want
 
 Vectors that have been imported into Milvus are stored in your local disk. Metadata can be stored either in MySQL or SQLite 3.
 
-#### How does Milvus compare to FAISS and SPTAG?
+#### How does Milvus compare to other vector search tools?
 
-While all of these supports large-scale vector similarity search, Milvus is the only one that is a high-performance and easy-to-use vector search engine that scales easily.
+Milvus is the only one that is a high-performance and easy-to-use vector search engine and scales easily.
 
 For more insight, see [Milvus in Comparison](../reference/comparison.md). 
 
