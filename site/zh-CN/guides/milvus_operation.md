@@ -173,10 +173,17 @@ sidebar_label: Learn Milvus Operations
 
 ### 在表中搜索向量
 
+1. 创建搜索参数
+```python
+>>> search_param = {'nprobe': 16}
+```
+
+2. 搜索
+
 ```python
 # create 5 vectors of 32-dimension
 >>> q_records = [[random.random() for _ in range(dim)] for _ in range(5)]
->>> milvus.search(table_name='test01', query_records=q_records, top_k=2, nprobe=16)
+>>> milvus.search(table_name='test01', query_records=q_records, top_k=2, params=search_param)
 ```
 
 ### 在分区中搜索向量
@@ -184,7 +191,7 @@ sidebar_label: Learn Milvus Operations
 ```python
 # create 5 vectors of 32-dimension
 >>> q_records = [[random.random() for _ in range(dim)] for _ in range(5)]
->>> milvus.search(table_name='test01', query_records=q_records, top_k=1, nprobe=8, partition_tags=['tag01'])
+>>> milvus.search(table_name='test01', query_records=q_records, top_k=1, partition_tags=['tag01'], params=search_param)
 ```
 
 > 注意：如果您不指定 `partition_tags`， Milvus 会在整个表中搜索。
