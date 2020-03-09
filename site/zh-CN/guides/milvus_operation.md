@@ -33,36 +33,36 @@ sidebar_label: Learn Milvus Operations
    >>> milvus.connect(uri='tcp://localhost:19530')
    ```
 
-## 创建/删除表
+## 创建/删除集合
 
-### 创建表
+### 创建集合
 
-1. 准备创建表所需参数。
-
-   ```python
-   # Prepare table parameters
-   >>> param = {'table_name':'test01', 'dimension':256, 'index_file_size':1024, 'metric_type':MetricType.L2}
-   ```
-
-2. 创建表名为 `test01`， 维度为256， 自动创建索引的数据文件大小为 1024 MB，距离度量方式为欧氏距离（L2）的表。
+1. 准备创建集合所需参数。
 
    ```python
-   # Create a table
-   >>> milvus.create_table(param)
+   # Prepare collection parameters
+   >>> param = {'collection_name':'test01', 'dimension':256, 'index_file_size':1024, 'metric_type':MetricType.L2}
    ```
 
-### 删除表
+2. 创建集合名为 `test01`， 维度为256， 自动创建索引的数据文件大小为 1024 MB，距离度量方式为欧氏距离（L2）的集合。
+
+   ```python
+   # Create a collection
+   >>> milvus.create_collection(param)
+   ```
+
+### 删除集合
 
 ```python
-# Drop table
->>> milvus.delete_table(table_name='test01')
+# Drop collection
+>>> milvus.delete_collection(collection_name='test01')
 ```
 
-## 在表中创建/删除分区
+## 在集合中创建/删除分区
 
 ### 创建分区
 
-您可以通过标签将表分割为若干个分区，从而提高搜索效率。每个分区实际上也是一个表。
+您可以通过标签将集合分割为若干个分区，从而提高搜索效率。每个分区实际上也是一个集合。
 
 ```python
 # Create partition
@@ -72,10 +72,10 @@ sidebar_label: Learn Milvus Operations
 ### 删除分区
 
 ```python
->>> milvus.drop_partition(table_name='test01', partition_tag='tag01')
+>>> milvus.drop_partition(collection_name='test01', partition_tag='tag01')
 ```
 
-## 在表中创建/删除索引
+## 在集合中创建/删除索引
 
 ### 创建索引
 
@@ -88,7 +88,7 @@ sidebar_label: Learn Milvus Operations
    >>> ivf_param = {'nlist': 16384}
    ```
 
-2. 为表创建索引。
+2. 为集合创建索引。
 
    ```python
    # Create index
@@ -101,9 +101,9 @@ sidebar_label: Learn Milvus Operations
 >>> milvus.drop_index('test01')
 ```
 
-## 在表/分区中插入/删除向量
+## 在集合/分区中插入/删除向量
 
-### 在表中插入向量
+### 在集合中插入向量
 
 1. 使用 `random` 函数生成20个256维的向量。
 
@@ -117,14 +117,14 @@ sidebar_label: Learn Milvus Operations
 
    ```python
    # Insert vectors
-   >>> milvus.insert(table_name='test01', records=vectors)
+   >>> milvus.insert(collection_name='test01', records=vectors)
    ```
 
    您也可以自己定义向量 ID：
 
    ```python
    >>> vector_ids = [id for id in range(20)]
-   >>> milvus.insert(table_name='test01', records=vectors, ids=vector_ids)
+   >>> milvus.insert(collection_name='test01', records=vectors, ids=vector_ids)
    ```
 
 ### 在分区中插入向量
@@ -136,7 +136,7 @@ sidebar_label: Learn Milvus Operations
 您可以通过 `get_vector_by_id()` 验证已经插入的向量。这里假设您的表中存在以下向量 ID。
 
 ```python
->>> status, vector = milvus.get_vector_by_id(table_name='test01', vector_id=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19])
+>>> status, vector = milvus.get_vector_by_id(collection_name='test01', vector_id=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19])
 ```
 
 ### 通过 ID 删除向量
@@ -150,7 +150,7 @@ sidebar_label: Learn Milvus Operations
 您可以通过以下命令删除向量：
 
 ```python
->>> milvus.delete_by_id(table_name='test01', ids)
+>>> milvus.delete_by_id(collection_name='test01', ids)
 ```
 
 ## 将表中的数据落盘
@@ -158,7 +158,7 @@ sidebar_label: Learn Milvus Operations
 当您在进行有关数据更改的操作时，您可以将表中的数据从内存落盘以避免数据丢失。Milvus 也支持自动落盘。自动落盘会在固定的时间周期将所有现存表的数据落盘。您可以通过 [Milvus 服务端配置文件](../reference/milvus_config.md)来设置自动落盘的时间间隔。
 
 ```python
->>> milvus.flush(table_name_array=['test01'])
+>>> milvus.flush(collection_name_array=['test01'])
 ```
 
 ## 压缩表中的段
@@ -166,7 +166,7 @@ sidebar_label: Learn Milvus Operations
 段（segment）是 Milvus 自动将插入的向量数据合并所获得的数据文件。一个表可包含多个段。如果一个段中的向量数据被删除，被删除的向量数据占据的空间并不会自动释放。您可以对表中的段进行压缩操作以释放多余空间。
 
 ```python
->>> milvus.compact(table_name='test01', timeout='1')
+>>> milvus.compact(collection_name='test01', timeout='1')
 ```
 
 ## 在表/分区中搜索向量
@@ -184,7 +184,7 @@ sidebar_label: Learn Milvus Operations
 ```python
 # create 5 vectors of 32-dimension
 >>> q_records = [[random.random() for _ in range(dim)] for _ in range(5)]
->>> milvus.search(table_name='test01', query_records=q_records, top_k=2, params=search_param)
+>>> milvus.search(collection_name='test01', query_records=q_records, top_k=2, params=search_param)
 ```
 
 ### 在分区中搜索向量
@@ -192,10 +192,10 @@ sidebar_label: Learn Milvus Operations
 ```python
 # create 5 vectors of 32-dimension
 >>> q_records = [[random.random() for _ in range(dim)] for _ in range(5)]
->>> milvus.search(table_name='test01', query_records=q_records, top_k=1, partition_tags=['tag01'], params=search_param)
+>>> milvus.search(collection_name='test01', query_records=q_records, top_k=1, partition_tags=['tag01'], params=search_param)
 ```
 
-> 注意：如果您不指定 `partition_tags`， Milvus 会在整个表中搜索。
+> 注意：如果您不指定 `partition_tags`， Milvus 会在整个集合中搜索。
 
 ## 与 Milvus 服务端断开连接
 
