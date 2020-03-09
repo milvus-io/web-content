@@ -62,7 +62,7 @@ Before changing these settings, welcome to consult Milvus team on [GitHub issues
 | ----------- | ------------------------------------------------------------ | ------- | ---------- |
 | `address`   | IP address that Milvus server monitors.                      | String | `0.0.0.0`  |
 | `port`      | Port that Milvus server monitors. Port range: (1024, 65535). | Integer | `19530`    |
-| `deploy_mode` | Milvus deployment type. Options are `single` , `cluster_readonly` and `cluster_writable`. | DeployMode | `single`   |
+| `deploy_mode` | Milvus deployment type. Options are `single`, `cluster_readonly` and `cluster_writable`. | DeployMode | `single`   |
 | `time_zone` | Use the UTC-x or UTC+x to specify a time zone. For example, use `UTC+8` for China Standard Time. | Timezone | `UTC+8`  |
 | `web_port` |  Port that Milvus web server monitors.  Port range: (1024, 65535). You can use the Milvus web server to communicate with the [Milvus RESTful API](sdk.md). | Integer |  `19121` |
 </div>
@@ -74,7 +74,7 @@ Before changing these settings, welcome to consult Milvus team on [GitHub issues
 | Parameter                | Description                                                  | Type    | Default         |
 | ------------------------ | ------------------------------------------------------------ | ------- | --------------- |
 | `backend_url`         | URL for metadata storage. Use SQLite (for single server Milvus) or MySQL (for distributed cluster) to store the metadata. <br/>The format of `backend_url` is: `dialect://username:password@host:port/database`. (`dialect` can be either `mysql` or `sqlite`, depending on which database you use. | String   | `sqlite://:@:/`       |
-| `preload_table` | Determines how to preload tables into memory after Milvus server restarts. Tables can be selected for fully or partially preloading.<br/>To preload all the existing tables, use `'*'` ; To preload some tables, list the specific table names, separated by comma. If you choose not to preload any table, keep it empty ( ` ` ). | StringList | ` ` |
+| `preload_table` | Determines how to preload tables into memory after Milvus server restarts. Tables can be selected for fully or partially preloading.<br/>To preload all the existing tables, use `'*'` (quote included); To preload some tables, list the specific table names, separated by comma. If you choose not to preload any table, keep it empty ( ` ` ). | StringList | ` ` |
 | `auto_flush_interval` | The interval, in seconds, at which Milvus automatically flushes inserted data in the cache to disk. If `auto_flush_interval` is 0, automatic flushing at a fixed interval is disabled. However, when the cache is full, Milvus always flushes data to disk, regardless of the value of `auto_flush_interval`.  | Integer |  1 (s)  |
 </div>
 
