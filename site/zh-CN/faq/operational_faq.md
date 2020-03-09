@@ -8,7 +8,7 @@ sidebar_label: Operational FAQ
 
 <!-- TOC -->
 
-- [如果在安装 Milvus 时，从 dockerhub 拉取镜像总是失败怎么办？](#如果在安装-Milvus-时，从-dockerhub-拉取镜像总是失败怎么办)
+- [如果在安装 Milvus 时，从 dockerhub 拉取镜像总是失败怎么办？](#如果在安装-Milvus-时从-dockerhub-拉取镜像总是失败怎么办)
 - [为什么我从源码编译 Milvus 失败了？](#为什么我从源码编译-Milvus-失败了)
 - [Milvus 支持对向量的插入、删除、更改和查询操作吗？](#Milvus-支持对向量的插入、删除、更改和查询操作吗)
 - [我应该自己指定向量 ID 还是由 Milvus 自动生成向量 ID？](#我应该自己指定向量-ID-还是由-Milvus-自动生成向量-ID)
