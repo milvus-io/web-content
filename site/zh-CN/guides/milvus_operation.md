@@ -33,36 +33,45 @@ sidebar_label: Learn Milvus Operations
    >>> milvus.connect(uri='tcp://localhost:19530')
    ```
 
-## 创建/删除表
+## 创建/删除集合
 
-### 创建表
+### 创建集合
 
-1. 准备创建表所需参数。
+1. 准备创建集合所需参数。
 
    ```python
    # Prepare collection parameters
    >>> param = {'collection_name':'test01', 'dimension':256, 'index_file_size':1024, 'metric_type':MetricType.L2}
    ```
 
-2. 创建表名为 `test01`， 维度为256， 自动创建索引的数据文件大小为 1024 MB，距离度量方式为欧氏距离（L2）的表。
+2. 创建集合名为 `test01`， 维度为256， 自动创建索引的数据文件大小为 1024 MB，距离度量方式为欧氏距离（L2）的集合。
 
    ```python
    # Create a collection
    >>> milvus.create_collection(param)
    ```
+   
+### 获取集合的统计信息
 
-### 删除表
+您可以调用如下接口查询集合的统计信息。查询结果的信息包含集合/分区/段的向量数量，存储使用量等信息。
+
+```python
+>>> milvus.collection_info('test01')
+```
+
+
+### 删除集合
 
 ```python
 # Drop collection
 >>> milvus.drop_collection(collection_name='test01')
 ```
 
-## 在表中创建/删除分区
+## 在集合中创建/删除分区
 
 ### 创建分区
 
-您可以通过标签将表分割为若干个分区，从而提高搜索效率。每个分区实际上也是一个表。
+您可以通过标签将集合分割为若干个分区，从而提高搜索效率。每个分区实际上也是一个集合。
 
 ```python
 # Create partition
@@ -75,11 +84,12 @@ sidebar_label: Learn Milvus Operations
 >>> milvus.drop_partition(collection_name='test01', partition_tag='tag01')
 ```
 
-## 在表中创建/删除索引
+## 在集合中创建/删除索引
 
 ### 创建索引
 
 > 注意：在实际生产环境中，建议在插入向量之前先创建索引，以便系统自动增量创建索引。需要注意的是，在向量插入结束后，相同的索引需要手动再创建一次（因为可能存在大小不满足 `index_file_size` 的数据文件，系统不会为该文件自动创建索引）。
+> 更多索引的用法请参考[pymilvus index example](https://github.com/milvus-io/pymilvus/tree/master/examples/indexes)
 
 1. 准备创建索引所需参数(以IVF_FLAT为例)。
 
@@ -88,7 +98,7 @@ sidebar_label: Learn Milvus Operations
    >>> ivf_param = {'nlist': 16384}
    ```
 
-2. 为表创建索引。
+2. 为集合创建索引。
 
    ```python
    # Create index
@@ -101,9 +111,9 @@ sidebar_label: Learn Milvus Operations
 >>> milvus.drop_index('test01')
 ```
 
-## 在表/分区中插入/删除向量
+## 在集合/分区中插入/删除向量
 
-### 在表中插入向量
+### 在集合中插入向量
 
 1. 使用 `random` 函数生成20个256维的向量。
 
@@ -133,6 +143,12 @@ sidebar_label: Learn Milvus Operations
 >>> milvus.insert('test01', vectors, partition_tag="tag01")
 ```
 
+您可以通过 `get_vector_by_id()` 验证已经插入的向量。这里假设您的表中存在以下向量 ID。
+
+```python
+>>> status, vector = milvus.get_vector_by_id(collection_name='test01', vector_id=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19])
+```
+
 ### 通过 ID 删除向量
 
 假设您的表中存在以下向量 ID：
@@ -147,7 +163,9 @@ sidebar_label: Learn Milvus Operations
 >>> milvus.delete_by_id(collection_name='test01', ids)
 ```
 
-您也可以根据向量 ID 获取向量：
+### 通过 ID 获取向量
+
+您也可以根据向量 ID 获取向量， 目前仅支持一次获取单条向量，暂不支持批量获取：
 
 ```python
 >>> status, vector = milvus.get_vector_by_id(collection_name='test01', vector_id=ids[0])
@@ -169,16 +187,25 @@ sidebar_label: Learn Milvus Operations
 >>> milvus.compact(collection_name='test01', timeout='1')
 ```
 
+## 获取段中的向量 ID
+
+您可以获取指定段中向量 ID 信息。您需要提供段的名称，其可以从`collection_info`中获取。
+
+```python
+>>> milvus.get_vector_ids('test01', '1583727470444700000')
+```
+
 ## 在表/分区中搜索向量
 
 ### 在表中搜索向量
 
 1. 创建搜索参数
+
 ```python
 >>> search_param = {'nprobe': 16}
 ```
 
-2. 搜索
+2. 进行搜索。
 
 ```python
 # create 5 vectors of 32-dimension
@@ -194,7 +221,8 @@ sidebar_label: Learn Milvus Operations
 >>> milvus.search(collection_name='test01', query_records=q_records, top_k=1, partition_tags=['tag01'], params=search_param)
 ```
 
-> 注意：如果您不指定 `partition_tags`， Milvus 会在整个表中搜索。
+> 注意：如果您不指定 `partition_tags`， Milvus 会在整个集合中搜索。
+
 
 ## 与 Milvus 服务端断开连接
 

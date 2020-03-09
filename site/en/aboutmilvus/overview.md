@@ -8,17 +8,17 @@ sidebar_label: Milvus Overview
 
 ## What is Milvus
 
-Milvus is an open source similarity search engine for massive feature vectors. Designed with heterogeneous computing architecture for the best cost efficiency. Searches over billion-scale vectors take only milliseconds with minimum computing resources.
+Milvus is an open source similarity search engine for massive-scale vector datasets. Built with heterogeneous computing architecture for the best cost efficiency. Searches over billion-scale vectors take only milliseconds with minimum computing resources.
 
 ## Key features
 
 - Heterogeneous computing
 
-  Milvus is designed with heterogeneous computing architecture for the best performance and cost efficiency. 
+  Milvus is designed with heterogeneous computing architecture for the best performance and cost efficiency.
 
 - Multiple indexes
 
-  Milvus supports a variety of indexing types that employs quantization-based, tree-based, and graph indexing techniques. 
+  Milvus supports a variety of indexing types that employs quantization-based, tree-based, and graph-based indexing techniques.
 
 - Intelligent resource management
 
@@ -30,15 +30,15 @@ Milvus is an open source similarity search engine for massive feature vectors. D
 
 - High availability
 
-  Milvus is integrated with Kubernetes framework so that all single point of failures could be avoided.
+  Milvus supports WAL (Write-Ahead Logging), which ensures the atomicity and durability of data operations. Milvus is integrated with the Kubernetes framework so that all single point of failures could be avoided for distributed scenarios.
 
 - High compatibility
 
-  Milvus is compatible with almost all deep learning models and major programming languages such as Python, Java and C++, etc.
+  Milvus is compatible with almost all deep learning models. Milvus supports multiple programming languages such as Python, Java, C++, and Go. Milvus also supports RESTful API.
 
 - Ease of use
 
-  Milvus can be easily installed in a few steps and enables you to exclusively focus on feature vectors. 
+  Milvus can be easily installed in a few steps and enables you to exclusively focus on feature vectors.
 
 - Visualized monitor
 

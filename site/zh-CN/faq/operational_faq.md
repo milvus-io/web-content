@@ -8,13 +8,13 @@ sidebar_label: Operational FAQ
 
 <!-- TOC -->
 
-- [如果在安装 Milvus 时，从 dockerhub 拉取镜像总是失败怎么办？](#如果在安装-Milvus-时，从-dockerhub-拉取镜像总是失败怎么办)
+- [如果在安装 Milvus 时，从 dockerhub 拉取镜像总是失败怎么办？](#如果在安装-Milvus-时从-dockerhub-拉取镜像总是失败怎么办)
 - [为什么我从源码编译 Milvus 失败了？](#为什么我从源码编译-Milvus-失败了)
-- [Milvus 支持对向量的插入、删除、更改和查询操作吗？](#Milvus-支持对向量的插入、删除、更改和查询操作吗)
+- [Milvus 支持对向量的插入、删除、更改和查询操作吗？](#Milvus-支持对向量的插入删除更改和查询操作吗)
 - [我应该自己指定向量 ID 还是由 Milvus 自动生成向量 ID？](#我应该自己指定向量-ID-还是由-Milvus-自动生成向量-ID)
 - [为什么欧氏距离和内积在计算向量相似度时的结果不一致？](#为什么欧氏距离和内积在计算向量相似度时的结果不一致)
 - [为什么在导入数据时 Milvus 显示 "no space left on device" 的错误？](#为什么在导入数据时-Milvus-显示-no-space-left-on-device-的错误)
-- [为什么数据是二维数组时， Milvus Python SDK 依然返回 "Vectors should be 2-dim array" 的错误？](#为什么数据是二维数组时，-Milvus-Python-SDK-依然返回-Vectors-should-be-2-dim-array-的错误)
+- [为什么数据是二维数组时， Milvus Python SDK 依然返回 "Vectors should be 2-dim array" 的错误？](#为什么数据是二维数组时-Milvus-Python-SDK-依然返回-Vectors-should-be-2-dim-array-的错误)
 - [为什么有时候小的数据集查询时间反而更长？](#为什么有时候小的数据集查询时间反而更长)
 - [为什么我的 Milvus 的性能一直不理想？](#为什么我的-Milvus-的性能一直不理想)
 - [为什么我的 Milvus 查询准确率一直不理想？](#为什么我的-Milvus-查询准确率一直不理想)
@@ -26,7 +26,7 @@ sidebar_label: Operational FAQ
 - [为什么在 Mac OS 或者 Windows 上运行 Milvus 时显示 `cpu_cache_capacity` 太大？](#为什么在-Mac-OS-或者-Windows-上运行-Milvus-时显示-cpu_cache_capacity-太大)
 - [为什么我的日志文件时间与系统时间不一致？](#为什么我的日志文件时间与系统时间不一致)
 - [为什么我启用多进程程序失败了？](#为什么我启用多进程程序失败了)
-- [为什么搜索 top K 的向量，结果不到 K 条向量？](#为什么搜索-top-K-的向量，结果不到-K-条向量)
+- [为什么搜索 top K 的向量，结果不到 K 条向量？](#为什么搜索-top-K-的向量结果不到-K-条向量)
 - [在插入数据时我应该多久构建一次索引？](#在插入数据时我应该多久构建一次索引)
 - [Milvus 中的数据是如何存储的？](#Milvus-中的数据是如何存储的)
 - [如何确认 Milvus 是否支持我的 CPU？](#如何确认-Milvus-是否支持我的-CPU)
@@ -77,20 +77,20 @@ sidebar_label: Operational FAQ
 
 #### 为什么有时候小的数据集查询时间反而更长？
 
-如果数据文件的大小小于配置文件里 `index_file_size` 参数的值，Milvus 则不会为此数据文件构建索引。因此，小的数据集有可能查询时间会更长。关于更多信息，请参考 [Milvus 配置](https://milvus.io/cn/docs/v0.7.0/reference/milvus_config.md)。
+如果数据文件的大小小于配置文件里 `index_file_size` 参数的值，Milvus 则不会为此数据文件构建索引。因此，小的数据集有可能查询时间会更长。关于更多信息，请参考 [Milvus 配置](../reference/milvus_config.md)。
 
 > 注意：在 0.4.0 版本之前，`index_file_size` 被命名为 `index_building_threshold`。
 
 #### 为什么我的 Milvus 的性能一直不理想？
 
-原因可能有多种，但建议您检查配置文件中的 `cpu_cache_capacity` 参数以确认是否所有的数据都加载到了内存中。如果没有，Milvus 就达不到最好的性能。关于更多信息，请参考 [Milvus 配置](https://milvus.io/cn/docs/v0.6.0/reference/milvus_config.md)。
+原因可能有多种，但建议您检查配置文件中的 `cpu_cache_capacity` 参数以确认是否所有的数据都加载到了内存中。如果没有，Milvus 就达不到最好的性能。关于更多信息，请参考 [Milvus 配置](../reference/milvus_config.md)。
 
 如果您的参数设置没有问题，请检查有没有其他应用在大量占用内存。
 
 #### 为什么我的 Milvus 查询准确率一直不理想？
 
 在调用 SDK 进行向量搜索时，请检查调用函数中 `nprobe` 参数的值。值越大，结果越精确，但耗时也越久。关于更多信息，请参考 [了解 Milvus 操作
-](https://milvus.io/cn/docs/v0.7.0/guides/milvus_operation.md)。
+](../guides/milvus_operation.md)。
 
 #### 为什么我更新过的设置没有生效？
 
