@@ -178,15 +178,6 @@
       "isMenu": true
     },
     {
-      "id": "comparison.md",
-      "title": "与其它向量检索工具对比",
-      "lang": "en",
-      "label1": "reference",
-      "label2": "",
-      "label3": "",
-      "order": 0
-    },
-    {
       "id": "milvus_config.md",
       "title": "配置",
       "lang": "en",

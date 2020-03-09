@@ -72,7 +72,7 @@ Vectors that have been imported into Milvus are stored in your local disk. Metad
 
 Milvus is the only one that is a high-performance and easy-to-use vector search engine and scales easily.
 
-For more insight, see [Milvus in Comparison](../reference/comparison.md). 
+For more insight, see [Other Feature Vector Search Tools](../aboutmilvus/vector_db.md).
 
 #### Is Milvus an end-to-end product?
 

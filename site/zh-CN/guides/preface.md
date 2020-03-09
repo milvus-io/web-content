@@ -13,7 +13,7 @@ sidebar_label: Preface
 
 如果您需要获取任何帮助，欢迎在 GitHub 上 [创建 issue](https://github.com/milvus-io/milvus/issues/new/choose ) 或 [加入我们的 Slack 社区](https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk) 参与讨论。
 
-若要了解 Milvus 的产品优势，请参考 [与其他向量检索工具对比](../reference/comparison.md)。
+若要了解 Milvus 的产品优势，请参考 [与其他向量检索工具对比](../aboutmilvus/vector_db.md)。
 
 ## 声明
 
