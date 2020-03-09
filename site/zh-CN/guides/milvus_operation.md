@@ -174,11 +174,12 @@ sidebar_label: Learn Milvus Operations
 ### 在表中搜索向量
 
 1. 创建搜索参数
+
 ```python
 >>> search_param = {'nprobe': 16}
 ```
 
-2. 搜索
+2. 进行搜索。
 
 ```python
 # create 5 vectors of 32-dimension
