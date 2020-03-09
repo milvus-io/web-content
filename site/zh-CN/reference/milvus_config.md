@@ -109,7 +109,7 @@ $ docker restart <container id>
 | 参数                       | 说明                                                         | 类型    | 默认值    |
 | -------------------------- | ------------------------------------------------------------ | ------- | --------- |
 | `cpu_cache_capacity`       | 内存中用于驻留搜索数据的缓存空间，`cpu_cache_capacity` 和 `insert_buffer_size` 之和不能超过内存总量。 | Integer | `4` (GB) |
-| `insert_buffer_size` | 用于 buffer 的最大内存量。`insert_buffer_size` 和 `cpu_cache_capacity` 之和不能超过内存总量。 | Integer     | `1` (GB)        |
+| `insert_buffer_size` | 用于数据导入的 buffer 所使用的最大内存量。`insert_buffer_size` 和 `cpu_cache_capacity` 之和不能超过内存总量。 | Integer     | `1` (GB)        |
 | `cache_insert_data` | 设置为 `true` ，则新插入的数据会自动加载到缓存以备搜索。| Boolean | `false`  |
 </div>
 

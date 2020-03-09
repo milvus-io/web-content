@@ -106,7 +106,7 @@ Before changing these settings, welcome to consult Milvus team on [GitHub issues
 | Parameter            | Description                                                  | Type    | Default   |
 | -------------------- | ------------------------------------------------------------ | ------- | --------- |
 | `cpu_cache_capacity` | The size of the CPU memory for caching data for faster query. The sum of `cpu_cache_capacity` and `insert_buffer_size` must < the total CPU memory size. | Integer | `4` (GB) |
-| `insert_buffer_size`     | Maximum buffer size allowed for data insertion. The sum of `insert_buffer_size` and `cpu_cache_capacity` must < the total memory. | Integer | `1` (GB)        |
+| `insert_buffer_size`     | Maximum memory size used by the buffer for data insertion. The sum of `insert_buffer_size` and `cpu_cache_capacity` must < the total memory. | Integer | `1` (GB)        |
 | `cache_insert_data`  | If set to `true` , the inserted data will be loaded into the cache immediately for hot query. | Boolean | `false`   |
 </div>
 
