@@ -174,7 +174,7 @@ sidebar_label: Learn Milvus Operations
 >>> milvus.delete_by_id(collection_name='test01', ids)
 ```
 
-> 注意：对于已经进行了删除向量操作的集合，您只能使用在 CPU 上运行的 `Flat`、`IVFlat`、`IVFSQ8`、`BinaryFlat`、`BinaryIVF` 等索引类型进行搜索。
+> 注意：对于已经进行了删除向量操作的集合，您只能使用在 CPU 上运行的 `FLAT`、`IVFLAT`、`IVFSQ8` 等索引类型进行搜索。
 
 ### 通过 ID 获取向量
 
