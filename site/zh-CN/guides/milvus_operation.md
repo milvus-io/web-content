@@ -222,7 +222,9 @@ sidebar_label: Learn Milvus Operations
       |  `NSG` | `search_length`：值越大，代表在图中搜索的节点越多，召回率越高，速度越慢。 | `{search_length:100}`|  [10, 300]   |
       |  `HNSW` | `ef`：值越大，则在索引中搜索的数据越多，召回率越高，速度越慢。 | `{ef: 64}`|  [`topk`, 4096]   |
 
-2. 进行搜索。
+   > 注意：`top_k` 是与目标向量最相似的 k 条向量，在搜索时定义。
+
+2. 创建随机向量作为 `query_records` 进行搜索。
 
    ```python
    # create 5 vectors of 32-dimension
