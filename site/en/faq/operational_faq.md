@@ -59,7 +59,7 @@ Yes. You can refer to [Milvus Operations](../guides/milvus_operation.md) for det
 
 #### Should I specify vector IDs or use auto-generated vector IDs?
 
-Both ways work. However, you must either specify IDs for all vectors or use auto-generated IDs for all vectors in one table.
+Both ways work. However, you must either specify IDs for all vectors or use auto-generated IDs for all vectors in one collection.
 
 #### Why do Euclidean distance and inner product have inconsistent results in computing vector similarity?
 
@@ -90,7 +90,7 @@ If your parameter settings look correct, check whether other running application
 
 #### Why is my Milvus constantly having low accuracy?
 
-Check the value of the `nprobe` parameter in the functions when you use an SDK to search vectors in a table. The greater the value, the more precise the result, yet the slower the search speed. Refer to [Learn Milvus Operation](../guides/milvus_operation.md) for more information.
+Check the value of the `nprobe` parameter in the functions when you use an SDK to search vectors in a collection. The greater the value, the more precise the result, yet the slower the search speed. Refer to [Learn Milvus Operation](../guides/milvus_operation.md) for more information.
 
 #### Why are my new configurations not working?
 
@@ -134,89 +134,6 @@ In order to successfully run multiprocessing in Milvus, make sure the following 
 
 - No client is created in the main process
 - Clients are created in each child process
-
-The following example shows a correct way to implement multiprocessing. When there is a table named `TABLE_NAME` which already includes `vector_1`, you can invoke this function in the main process to run two insert processes and one search process concurrently to get the correct result. It should be noted that the search result is irrelevant to the vectors that are being inserted.
-
-```python
-def test_add_vector_search_multiprocessing():
-    '''
-	target: test add vectors, and search it with multiprocessing
-	method: set vectors_1[0] as query vectors
-	expected: status ok and result length is 1
- 	'''
-    nq = 1000
-    vectors_1 = gen_vec_list(nq)
-    vectors_2 = gen_vec_list(nq)
-
- 	def add_vectors_search(idx):
-        if idx == 0:
-            MILVUS = Milvus()
-            connect_server(MILVUS)
-            status = add_vec_to_milvus(MILVUS, vectors_1)
-            print("add", i, "finished")
-            assert status.OK()
-        elif idx == 1:
-            MILVUS = Milvus()
-            connect_server(MILVUS)
-            status, result = MILVUS.search_vectors(TABLE_NAME, 1, NPROBE, [vectors_1[0]])
-            print(result)
-            assert status.OK()
-            assert len(result) == 1
-  		else:
-            MILVUS = Milvus()
-            connect_server(MILVUS)
-            status = add_vec_to_milvus(MILVUS, vectors_2)
-            print("add", i, "finished")
-            assert status.OK()
-
-    process_num = 3
- 	processes = []
-    for i in range(process_num):
-        p = mp.Process(target=add_vectors_search, args=(i,))
-        processes.append(p)
-        p.start()
-        print("process", i)
-    for p in processes:
-        p.join()
-```
-
-If a client already exists in the main process, enabling multiprocessing will cause the client to hang, which will eventually lead to timeout. The following function is a bad example, in which the `connect` is the client built in the main process.
-
-```python
-def test_add_vector_search_multiprocessing(self, connect, table):
-    '''
-	target: test add vectors, and search it with multiprocessing
-	method: set vectors_1[0] as query vectors
-	expected: status ok and result length is 1
-	'''
-    nq = 5
-    vectors_1 = gen_vectors(nq, dim)
-    vectors_2 = gen_vectors(nq, dim)
-
-    status, ids = connect.add_vectors(table, vectors_1)
-    time.sleep(3)
-
-    status, count = connect.get_table_row_count(table)
-    assert count == 5
-
-  	def add_vectors_search(connect, idx):
-        if (idx % 2) == 0:
-            status, ids = connect.add_vectors(table, vectors_2)
-            assert status.OK()
-        else:
-            status, result = connect.search_vectors(table, 1, [vectors_1[0]])
-            assert status.OK()
-            assert len(result) == 1
-
-    process_num = 3
-    processes = []
-    for i in range(process_num):
-        p = Process(target=add_vectors_search, args=(connect, i))
-        processes.append(p)
-        p.start()
-    for p in processes:
-        p.join()
-```
 
 #### Why are the search results fewer than K when I try to search the top K vectors?
 

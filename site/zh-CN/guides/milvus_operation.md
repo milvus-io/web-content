@@ -143,7 +143,7 @@ sidebar_label: Learn Milvus Operations
 >>> milvus.insert('test01', vectors, partition_tag="tag01")
 ```
 
-您可以通过 `get_vector_by_id()` 验证已经插入的向量。此处验证插入的第一条向量。这里假设您的表中存在以下向量 ID：
+您可以通过 `get_vector_by_id()` 验证已经插入的向量。此处验证插入的第一条向量。这里假设您的集合中存在以下向量 ID：
 
 ```python
 >>> status, vector = milvus.get_vector_by_id(collection_name='test01', vector_id=0)
@@ -151,7 +151,7 @@ sidebar_label: Learn Milvus Operations
 
 ### 通过 ID 删除向量
 
-假设您的表中存在以下向量 ID：
+假设您的集合中存在以下向量 ID：
 
 ```python
 >>> ids = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
@@ -171,17 +171,17 @@ sidebar_label: Learn Milvus Operations
 >>> status, vector = milvus.get_vector_by_id(collection_name='test01', vector_id=ids[0])
 ```
 
-## 将表中的数据落盘
+## 将集合中的数据落盘
 
-当您在进行有关数据更改的操作时，您可以将表中的数据从内存落盘以避免数据丢失。Milvus 也支持自动落盘。自动落盘会在固定的时间周期将所有现存表的数据落盘。您可以通过 [Milvus 服务端配置文件](../reference/milvus_config.md)来设置自动落盘的时间间隔。
+当您在进行有关数据更改的操作时，您可以将集合中的数据从内存落盘以避免数据丢失。Milvus 也支持自动落盘。自动落盘会在固定的时间周期将所有现存集合的数据落盘。您可以通过 [Milvus 服务端配置文件](../reference/milvus_config.md)来设置自动落盘的时间间隔。
 
 ```python
 >>> milvus.flush(collection_name_array=['test01'])
 ```
 
-## 压缩表中的段
+## 压缩集合中的段
 
-段（segment）是 Milvus 自动将插入的向量数据合并所获得的数据文件。一个表可包含多个段。如果一个段中的向量数据被删除，被删除的向量数据占据的空间并不会自动释放。您可以对表中的段进行压缩操作以释放多余空间。
+段（segment）是 Milvus 自动将插入的向量数据合并所获得的数据文件。一个集合可包含多个段。如果一个段中的向量数据被删除，被删除的向量数据占据的空间并不会自动释放。您可以对集合中的段进行压缩操作以释放多余空间。
 
 ```python
 >>> milvus.compact(collection_name='test01', timeout='1')
@@ -195,9 +195,9 @@ sidebar_label: Learn Milvus Operations
 >>> milvus.get_vector_ids('test01', '1583727470444700000')
 ```
 
-## 在表/分区中搜索向量
+## 在集合/分区中搜索向量
 
-### 在表中搜索向量
+### 在集合中搜索向量
 
 1. 创建搜索参数
 
