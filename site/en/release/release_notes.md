@@ -6,6 +6,81 @@ sidebar_label: Release Notes
 
 # Release Notes
 
+
+## v0.7.0
+
+**Release date**：2020-3-10
+
+**Compatibility**
+
+| Milvus version    | Python SDK version     | Java SDK version    |  Go SDK version  |
+| ---------------| -----------------|------------------|--------------|
+| 0.7.0          | 0.2.8            | 0.5.0            |      0.1.0         |
+
+#### New features
+
+- **Vector deletion**
+
+  Added support to delete one or multiple vectors. If you performed vector deletion on a collection, later search operations for this collection are limited to part of the index types, including FLAT, IVFLAT, IVFSQ8, etc. Milvus is planned to support other index types in the upcoming versions.[#861](https://github.com/milvus-io/milvus/pull/861)
+
+- **Get vector by ID**
+
+  Added support to get vector data by ID. [#861](https://github.com/milvus-io/milvus/pull/861)
+
+- **Flush and compact**
+
+  Added support to flushing and compaction. You can configure flushing at an interval or manual flushing to avoid data loss. If some vectors are deleted from a segment, the space taken by the deleted vectors cannot be released automatically. You can compact segments in a collection to release space. [#861](https://github.com/milvus-io/milvus/pull/861) [#1426](https://github.com/milvus-io/milvus/pull/1426)
+
+- **Change Milvus server configurations during runtime**
+
+  Added support to update Milvus server configurations during runtime. You can use Milvus clients to update the parameters. Changes to some parameters take effect immediately without restarting Milvus. [#665](https://github.com/milvus-io/milvus/pull/665)
+
+- **Write-Ahead logging (WAL)**
+
+  Added support for WAL, which significantly improves the reliability of data operations. You can configure WAL settings in the Milvus server configuration file (`server_config.yaml`). [#830](https://github.com/milvus-io/milvus/pull/830)
+
+- **RESTful API**
+
+  Added RESTful API. Refer to [RESTful API Readme](https://github.com/milvus-io/milvus/blob/master/core/src/server/web_impl/README.md) for more information.
+  
+- **Go SDK**
+
+  Added Go SDK. Refer to [https://github.com/milvus-io/milvus-sdk-go](https://github.com/milvus-io/milvus-sdk-go) for more information.
+
+- **HNSW index support**
+
+  Added support for HNSW index type. Refer to [Efficient and robust approximate nearest neighbor search using Hierarchical Navigable Small World graphs](https://arxiv.org/abs/1603.09320) for more information about HNSW. [#853](https://github.com/milvus-io/milvus/pull/853)
+
+- **Jaccard/Hamming/Tanimoto distance support**
+
+  Added support for Jaccard distance, Hamming distance, and Tanimoto distance. [#823](https://github.com/milvus-io/milvus/pull/823)
+
+- **Pushgateway support in Prometheus**
+
+  Added support for Pushgateway in Prometheus. Pushgateway makes it possible for short-lived, batch metrics to be acquired by Prometheus. [#813](https://github.com/milvus-io/milvus/pull/813)
+
+- **AVX 512**
+
+  Added support for AVX 512 instruction set. Milvus theoretically supports all CPUs with AVX 512. [#1122](https://github.com/milvus-io/milvus/pull/1122)
+
+#### Changes
+
+- **Interface updates for index creation and vector search**
+
+  Starting from Milvus 0.7.0, part of the Milvus client parameters for index creation and vector search use JSON strings as values.
+
+- **Milvus server configuration file updates**
+
+  Starting from Milvus 0.7.0, the Milvus server configuration file (`server_config.yaml`) is updated to 0.2 with parameter changes.
+
+- **Term updates**
+
+  Starting from Milvus 0.7.0, `Table` is named as `Collection` in Milvus.
+
+#### Bug fixes
+
+- Resolved the issue that duplicate IDs may be generated when inserting vector data using auto-generated IDs. [#1508](https://github.com/milvus-io/milvus/pull/1508)
+
 ----------
 
 ## v0.6.0
@@ -16,7 +91,7 @@ sidebar_label: Release Notes
 
 | Milvus version | pymilvus version | Java SDK version |
 | ---------------| -----------------|------------------|
-| 0.6.0          | 0.2.6            | 0.4.0            |
+| 0.6.0          | 0.2.6            |   0.4.0            |
 
 #### New features
 
@@ -28,7 +103,7 @@ sidebar_label: Release Notes
   
   Add table partitioning funtion to secure fast query performance for incremental data. Partitioning APIs are added to Python, Java and C++ SDK to support partition creation, vector insertion into a specified partition and query against a specified partition, etc. [#245](https://github.com/milvus-io/milvus/pull/245)
   
-- **Experimental features** 
+- **Experimental features**
 
   The experimental features in Milvus are still under development and subject to change. They may contain unknown errors, and are intended for testing and user feedback gathering.
 
