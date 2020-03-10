@@ -208,7 +208,7 @@ sidebar_label: Learn Milvus Operations
 
 ### 在集合中搜索向量
 
-1. 创建搜索参数。
+1. 创建搜索参数。搜索参数是一个 JSON 字符串，在 Python SDK 中以字典来表示。
 
    ```python
    >>> search_param = {'nprobe': 16}
