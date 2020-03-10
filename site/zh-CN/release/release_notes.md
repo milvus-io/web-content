@@ -8,21 +8,70 @@ sidebar_label: 发版说明
 
 ## v0.7.0
 
-**发布时间**：2019-12-07
+**发布时间**：2020-3-10
 
 **版本兼容**
 
 | Milvus 版本    | Python SDK 版本     | Java SDK 版本    |  Go SDK 版本  |
 | ---------------| -----------------|------------------|--------------|
-| 0.7.0          | 0.2.8            | 0.5.0            |               |
+| 0.7.0          | 0.2.8            | 0.5.0            |      0.1.0         |
 
 #### 新增功能
 
+- **向量删除**
 
-#### 主要改进
+  新增了对单条或多条向量的删除功能。如果您对一个集合进行了向量删除操作，后续对这个集合的搜索操作仅支持一部分索引类型，包括在CPU上运行的 Flat、IVFlat、IVFSQ8 等。Milvus 的后续版本将为其他索引类型提供支持。
+
+- **向量读取**
+
+  新增了通过向量 ID 读取对应的向量值的功能。
+
+- **运行时更改 Milvus 服务端参数**
+
+  新增了运行时更改 Milvus 服务端参数的功能。您可以通过 Milvus 客户端对 Milvus 服务端参数进行更改，部分参数更改后可即时生效，无需重启 Milvus。
+
+- **预写式日志(Write-Ahead Logging, WAL)**
+
+  新增了 WAL 功能，可以大大提高数据操作的可靠性。您可以在 Milvus 服务端配置文件中对 WAL 进行设置。
+
+- **RESTful API**
+
+  新增了 RESTful API。详细信息请参考 [RESTful API Readme](https://github.com/milvus-io/milvus/blob/master/core/src/server/web_impl/README.md)。
+
+- **Go SDK**
+
+  新增了 Go SDK，详细信息请参考 [https://github.com/milvus-io/milvus-sdk-go](https://github.com/milvus-io/milvus-sdk-go)。
+
+- **HNSW 索引的支持**
+
+  新增了对 HNSW 索引类型的支持。关于 HNSW 的详细介绍请参考[向量索引算法 HNSW 和 NSG 的比较](https://milvus.io/cn/blogs/2020-01-16-hnsw-nsg-comparison.md)。
+
+- **Jaccard/Hamming/Tanimoto 距离的支持**
+
+  新增了对 Jaccard、Hamming、Tanimoto 距离的支持。
+
+- **Prometheus 中 Pushgateway 的支持**
+
+  新增了在 Prometheus 中 Pushgateway 的支持。Pushgateway 使生命周期短、批量的 metric 能够被 Prometheus 提取。
+
+- **AVX 512 指令集的支持**
+
+  新增了对 AVX 512 指令集的支持。Milvus 理论上可支持所有包含 AVX 512 指令集的 CPU。
 
 
-#### Bug 修复
+#### 变更说明
+
+- **创建索引与搜索的接口更新**
+
+  从 Milvus 0.7.0开始，所有客户端创建索引与搜索的接口中的部分参数使用 JSON 字符串进行传值。
+
+- **Milvus 服务端配置文件更新**
+
+  从 Milvus 0.7.0开始，Milvus 服务端配置文件版本更新为0.2。
+
+- **术语更新**
+
+  从0.7.0开始，Milvus 的 Table（表） 正式改名为 Collection（集合）。
 
 ----------
 
