@@ -28,7 +28,7 @@ sidebar_label: Learn Milvus Operations
    ```
 
    > 注意：在上面的代码中，`host` 和 `port` 都使用了默认值。您可以将其更改为自己设定的 IP 地址和端口。
-   
+
    ```python
    >>> milvus.connect(uri='tcp://localhost:19530')
    ```
@@ -44,13 +44,13 @@ sidebar_label: Learn Milvus Operations
    >>> param = {'collection_name':'test01', 'dimension':256, 'index_file_size':1024, 'metric_type':MetricType.L2}
    ```
 
-2. 创建集合名为 `test01`， 维度为256， 自动创建索引的数据文件大小为 1024 MB，距离度量方式为欧氏距离（L2）的集合。
+2. 创建集合名为 `test01`， 维度为 256， 自动创建索引的数据文件大小为 1024 MB，距离度量方式为欧氏距离（L2）的集合。
 
    ```python
    # Create a collection
    >>> milvus.create_collection(param)
    ```
-   
+
 ### 获取集合的统计信息
 
 您可以调用如下接口查询集合的统计信息。查询结果的信息包含集合/分区/段的向量数量，存储使用量等信息。
@@ -58,7 +58,6 @@ sidebar_label: Learn Milvus Operations
 ```python
 >>> milvus.collection_info('test01')
 ```
-
 
 ### 删除集合
 
@@ -88,16 +87,25 @@ sidebar_label: Learn Milvus Operations
 
 ### 创建索引
 
-> 注意：在实际生产环境中，建议在插入向量之前先创建索引，以便系统自动增量创建索引。需要注意的是，在向量插入结束后，相同的索引需要手动再创建一次（因为可能存在大小不满足 `index_file_size` 的数据文件，系统不会为该文件自动创建索引）。
+> 注意：在实际生产环境中，建议在插入向量之前先创建索引，以便系统自动增量创建索引。需要注意的是，在向量插入结束后，相同的索引需要手动再创建一次（因为可能存在大小不满足 `index_file_size` 的数据文件，系统不会为该文件自动创建索引）。更多索引的用法请参考 [索引示例程序](https://github.com/milvus-io/pymilvus/tree/master/examples/indexes)。
 
-> 更多索引的用法请参考 [索引示例程序](https://github.com/milvus-io/pymilvus/tree/master/examples/indexes)。
-
-1. 准备创建索引所需参数(以IVF_FLAT为例)。
+1. 准备创建索引所需参数(以 `IVF_FLAT` 为例)。索引参数是一个 JSON 字符串，在 Python SDK 中以字典来表示。
 
    ```python
    # Prepare index param
    >>> ivf_param = {'nlist': 16384}
    ```
+
+   > 注意：对于不同的索引类型，创建索引所需参数也有区别。所有的参数都**必须赋值**。
+
+      | 索引类型              | 索引参数     | 示例参数                                                                | 取值范围               |
+      | --------------------- | ------------ | ----------------------------------------------------------------------- | -------------------- |
+      | `FLAT`/`IVFLAT`/`SQ8` | `nlist`：每个文件中的向量类的个数。特征空间被聚类为 nlist 个桶。      | `{nlist: 16384}`                                                        | `nlist`：[1, 999999] |
+      | `IVFPQ`               | `nlist`：每个文件中的向量类的个数。特征空间被聚类为 nlist 个桶。</br> `m`：建立索引时数据的压缩率。m 越小压缩率越高。 | `{nlist: 16384, m: 12}`                                                 | `nlist`：[1, 999999] |
+      | `NSG`                 | `search_length`：值越大，代表在图中搜索的节点越多，召回率越高，但速度也越慢。建议 `search_length` 小于 `candidate_pool` 的值，取值范围建议在 [40, 80]。</br> `out_degree`：值越大，则占用内存越大，搜索性能也越好。</br> `candidate_pool`：影响索引质量，建议取值范围 [200,500]。</br> `knng`：影响索引质量，建议取值为 `out_degree` + 20.             | `{search_length: 45, out_degree:50, candidate_pool_size:300, knng:100}` |  `search_length range`: [10, 300]</br>`out_degree`: [5, 300]</br>`candidate_pool_size`: [50, 1000]</br>`knng`: [5, 300]                |
+      | `HNSW`                |   `M`：影响 build 的时间以及索引的质量。 `M` 越大，构建索引耗时越长，索引质量越高，内存占用也越大。  `efConstruction`：影响 build 的时间以及索引的质量。 `efConstruction` 越大，构建索引耗时越长，索引质量越高，内存占用也越大。  | `{M: 16, efConstruction:500}`   |    `M` :[5, 48]</br>`efConstruction` :[100, 500]                |
+
+关于参数详细信息请参考 [Milvus 索引类型](index.md)。
 
 2. 为集合创建索引。
 
@@ -116,7 +124,7 @@ sidebar_label: Learn Milvus Operations
 
 ### 在集合中插入向量
 
-1. 使用 `random` 函数生成20个256维的向量。
+1. 使用 `random` 函数生成 20 个 256 维的向量。
 
    ```python
    >>> import random
@@ -190,7 +198,7 @@ sidebar_label: Learn Milvus Operations
 
 ## 获取段中的向量 ID
 
-您可以获取指定段中向量 ID 信息。您需要提供段的名称，其可以从`collection_info`中获取。
+您可以获取指定段中向量 ID 信息。您需要提供段的名称。段的名称可以从 `collection_info` 中获取。
 
 ```python
 >>> milvus.get_vector_ids('test01', '1583727470444700000')
@@ -200,19 +208,27 @@ sidebar_label: Learn Milvus Operations
 
 ### 在集合中搜索向量
 
-1. 创建搜索参数
+1. 创建搜索参数。
 
-```python
->>> search_param = {'nprobe': 16}
-```
+   ```python
+   >>> search_param = {'nprobe': 16}
+   ```
+
+    > 注意：对于不同的索引类型，搜索所需参数也有区别。所有的参数都**必须赋值**。
+
+      | 索引类型              | 搜索参数     | 示例参数                                                                | 取值范围               |
+      | --------------------- | ------------ | ----------------------------------------------------------------------- | -------------------- |
+      |  `FLAT`/`IVFLAT`/`SQ8`/`IVFPQ` | `nprobe`：查询所涉及的向量类的个数。`nprobe` 影响查询精度。数值越大，精度越高，速度越慢。 | `{nprobe: 32}`|  [1, `nlist`]   |
+      |  `NSG` | `search_length`：值越大，代表在图中搜索的节点越多，召回率越高，速度越慢。 | `{search_length:100}`|  [10, 300]   |
+      |  `HNSW` | `ef`：值越大，则在索引中搜索的数据越多，召回率越高，速度越慢。 | `{ef: 64}`|  [[topk, 4096]   |
 
 2. 进行搜索。
 
-```python
-# create 5 vectors of 32-dimension
->>> q_records = [[random.random() for _ in range(dim)] for _ in range(5)]
->>> milvus.search(collection_name='test01', query_records=q_records, top_k=2, params=search_param)
-```
+   ```python
+   # create 5 vectors of 32-dimension
+   >>> q_records = [[random.random() for _ in range(dim)] for _ in range(5)]
+   >>> milvus.search(collection_name='test01', query_records=q_records, top_k=2, params=search_param)
+   ```
 
 ### 在分区中搜索向量
 
@@ -223,7 +239,6 @@ sidebar_label: Learn Milvus Operations
 ```
 
 > 注意：如果您不指定 `partition_tags`， Milvus 会在整个集合中搜索。
-
 
 ## 与 Milvus 服务端断开连接
 
