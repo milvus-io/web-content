@@ -50,12 +50,21 @@ sidebar_label: Learn Milvus Operations
    # Create a collection
    >>> milvus.create_collection(param)
    ```
+   
+### 获取集合的统计信息
+
+您可以调用如下接口查询集合的统计信息。查询结果的信息包含集合/分区/段的向量数量，存储使用量等信息。
+
+```python
+>>> milvus.collection_info('test01')
+```
+
 
 ### 删除集合
 
 ```python
 # Drop collection
->>> milvus.delete_collection(collection_name='test01')
+>>> milvus.drop_collection(collection_name='test01')
 ```
 
 ## 在集合中创建/删除分区
@@ -80,6 +89,7 @@ sidebar_label: Learn Milvus Operations
 ### 创建索引
 
 > 注意：在实际生产环境中，建议在插入向量之前先创建索引，以便系统自动增量创建索引。需要注意的是，在向量插入结束后，相同的索引需要手动再创建一次（因为可能存在大小不满足 `index_file_size` 的数据文件，系统不会为该文件自动创建索引）。
+> 更多索引的用法请参考[pymilvus index example](https://github.com/milvus-io/pymilvus/tree/master/examples/indexes)
 
 1. 准备创建索引所需参数(以IVF_FLAT为例)。
 
@@ -133,10 +143,10 @@ sidebar_label: Learn Milvus Operations
 >>> milvus.insert('test01', vectors, partition_tag="tag01")
 ```
 
-您可以通过 `get_vector_by_id()` 验证已经插入的向量。这里假设您的表中存在以下向量 ID。
+您可以通过 `get_vector_by_id()` 验证已经插入的向量。此处验证插入的第一条向量。这里假设您的表中存在以下向量 ID：
 
 ```python
->>> status, vector = milvus.get_vector_by_id(collection_name='test01', vector_id=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19])
+>>> status, vector = milvus.get_vector_by_id(collection_name='test01', vector_id=0)
 ```
 
 ### 通过 ID 删除向量
@@ -153,6 +163,14 @@ sidebar_label: Learn Milvus Operations
 >>> milvus.delete_by_id(collection_name='test01', ids)
 ```
 
+### 通过 ID 获取向量
+
+您也可以根据向量 ID 获取向量， 目前仅支持一次获取单条向量，暂不支持批量获取：
+
+```python
+>>> status, vector = milvus.get_vector_by_id(collection_name='test01', vector_id=ids[0])
+```
+
 ## 将表中的数据落盘
 
 当您在进行有关数据更改的操作时，您可以将表中的数据从内存落盘以避免数据丢失。Milvus 也支持自动落盘。自动落盘会在固定的时间周期将所有现存表的数据落盘。您可以通过 [Milvus 服务端配置文件](../reference/milvus_config.md)来设置自动落盘的时间间隔。
@@ -167,6 +185,14 @@ sidebar_label: Learn Milvus Operations
 
 ```python
 >>> milvus.compact(collection_name='test01', timeout='1')
+```
+
+## 获取段中的向量 ID
+
+您可以获取指定段中向量 ID 信息。您需要提供段的名称，其可以从`collection_info`中获取。
+
+```python
+>>> milvus.get_vector_ids('test01', '1583727470444700000')
 ```
 
 ## 在表/分区中搜索向量
@@ -196,6 +222,7 @@ sidebar_label: Learn Milvus Operations
 ```
 
 > 注意：如果您不指定 `partition_tags`， Milvus 会在整个集合中搜索。
+
 
 ## 与 Milvus 服务端断开连接
 
