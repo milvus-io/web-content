@@ -20,19 +20,23 @@ sidebar_label: 发版说明
 
 - **向量删除**
 
-  新增了对单条或多条向量的删除功能。如果您对一个集合进行了向量删除操作，后续对这个集合的搜索操作仅支持一部分索引类型，包括在CPU上运行的 Flat、IVFlat、IVFSQ8 等。Milvus 的后续版本将为其他索引类型提供支持。
+  新增了对单条或多条向量的删除功能。如果您对一个集合进行了向量删除操作，后续对这个集合的搜索操作仅支持一部分索引类型，包括在CPU上运行的 Flat、IVFlat、IVFSQ8 等。Milvus 的后续版本将为其他索引类型提供支持。[#861](https://github.com/milvus-io/milvus/pull/861)
 
 - **向量读取**
 
-  新增了通过向量 ID 读取对应的向量值的功能。
+  新增了通过向量 ID 读取对应的向量值的功能。[#861](https://github.com/milvus-io/milvus/pull/861)
+
+- **数据落盘与压缩**
+
+  新增了数据落盘与压缩功能。您可以设置定时落盘或者手动落盘，从而避免数据丢失。如果一个段中的向量数据被删除，被删除的向量数据占据的空间并不会自动释放。您可以对集合中的段进行压缩操作以释放多余空间。[#861](https://github.com/milvus-io/milvus/pull/861) [#1426](https://github.com/milvus-io/milvus/pull/1426)
 
 - **运行时更改 Milvus 服务端参数**
 
-  新增了运行时更改 Milvus 服务端参数的功能。您可以通过 Milvus 客户端对 Milvus 服务端参数进行更改，部分参数更改后可即时生效，无需重启 Milvus。
+  新增了运行时更改 Milvus 服务端参数的功能。您可以通过 Milvus 客户端对 Milvus 服务端参数进行更改，部分参数更改后可即时生效，无需重启 Milvus。[#665](https://github.com/milvus-io/milvus/pull/665)
 
 - **预写式日志(Write-Ahead Logging, WAL)**
 
-  新增了 WAL 功能，可以大大提高数据操作的可靠性。您可以在 Milvus 服务端配置文件中对 WAL 进行设置。
+  新增了 WAL 功能，可以大大提高数据操作的可靠性。您可以在 Milvus 服务端配置文件中对 WAL 进行设置。[#830](https://github.com/milvus-io/milvus/pull/830)
 
 - **RESTful API**
 
@@ -44,19 +48,19 @@ sidebar_label: 发版说明
 
 - **HNSW 索引的支持**
 
-  新增了对 HNSW 索引类型的支持。关于 HNSW 的详细介绍请参考[向量索引算法 HNSW 和 NSG 的比较](https://milvus.io/cn/blogs/2020-01-16-hnsw-nsg-comparison.md)。
+  新增了对 HNSW 索引类型的支持。关于 HNSW 的详细介绍请参考[向量索引算法 HNSW 和 NSG 的比较](https://milvus.io/cn/blogs/2020-01-16-hnsw-nsg-comparison.md)。[#853](https://github.com/milvus-io/milvus/pull/853)
 
 - **Jaccard/Hamming/Tanimoto 距离的支持**
 
-  新增了对 Jaccard、Hamming、Tanimoto 距离的支持。
+  新增了对 Jaccard、Hamming、Tanimoto 距离的支持。[#823](https://github.com/milvus-io/milvus/pull/823)
 
 - **Prometheus 中 Pushgateway 的支持**
 
-  新增了在 Prometheus 中 Pushgateway 的支持。Pushgateway 使生命周期短、批量的 metric 能够被 Prometheus 提取。
+  新增了在 Prometheus 中 Pushgateway 的支持。Pushgateway 使生命周期短、批量的 metric 能够被 Prometheus 提取。[#813](https://github.com/milvus-io/milvus/pull/813)
 
 - **AVX 512 指令集的支持**
 
-  新增了对 AVX 512 指令集的支持。Milvus 理论上可支持所有包含 AVX 512 指令集的 CPU。
+  新增了对 AVX 512 指令集的支持。Milvus 理论上可支持所有包含 AVX 512 指令集的 CPU。[#1122](https://github.com/milvus-io/milvus/pull/1122)
 
 
 #### 变更说明
@@ -67,11 +71,15 @@ sidebar_label: 发版说明
 
 - **Milvus 服务端配置文件更新**
 
-  从 Milvus 0.7.0开始，Milvus 服务端配置文件版本更新为0.2。
+  从 Milvus 0.7.0开始，Milvus 服务端配置文件（`server_config.yaml`）版本更新为0.2。配置文件的参数也发生了变化。
 
 - **术语更新**
 
   从0.7.0开始，Milvus 的 Table（表） 正式改名为 Collection（集合）。
+
+#### Bug 修复
+
+- 解决了插入向量时使用自动生成的ID 时可能产生重复ID的问题。[#1508](https://github.com/milvus-io/milvus/pull/1508)
 
 ----------
 
