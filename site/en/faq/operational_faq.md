@@ -10,10 +10,10 @@ sidebar_label: Operational FAQ
 
 - [What if I failed to pull docker images from dockerhub when installing Milvus?](#What-if-I-failed-to-pull-docker-images-from-dockerhub-when-installing-Milvus)
 - [Why do I fail to compile Milvus from source?](#Why-do-I-fail-to-compile-Milvus-from-source)
-- [Does Milvus support insert, delete, update, and query operations for vectors?](#Does-Milvus-support-insert,-delete,-update,-and-query-operations-for-vectors)
+- [Does Milvus support insert, delete, update, and query operations for vectors?](#Does-Milvus-support-insert-delete-update-and-query-operations-for-vectors)
 - [Should I specify vector IDs or use auto-generated vector IDs?](#Should-I-specify-vector-IDs-or-use-auto-generated-vector-IDs)
 - [Why do Euclidean distance and inner product have inconsistent results in computing vector similarity?](#Why-do-Euclidean-distance-and-inner-product-have-inconsistent-results-in-computing-vector-similarity)
-- [Why does Milvus display "no space left on device" when I import data to Milvus?](#why-does-Milvus-display-no-space-left-on-device-when-i-import-data-to-Milvus)
+- [Why does Milvus display "no space left on device" when I import data to Milvus?](#why-does-Milvus-display-no-space-left-on-device-when-I-import-data-to-Milvus)
 - [Why does this error "Vectors should be 2-dim array" still occur in the Python SDK when the data is a 2-dimensional array?](#Why-does-this-error-Vectors-should-be-2-dim-array-still-occur-in-the-Python-SDK-when-the-data-is-a-2-dimensional-array)
 - [Why sometimes it takes much longer for queries with smaller datasets?](#Why-sometimes-it-takes-much-longer-for-queries-with-smaller-datasets)
 - [Why is my Milvus constantly having bad performance?](#Why-is-my-Milvus-constantly-having-bad-performance)
@@ -26,9 +26,11 @@ sidebar_label: Operational FAQ
 - [Why is `cpu_cache_capacity` always too large for MacOS or Windows?](#Why-is-cpu_cache_capacity-always-too-large-for-MacOS-or-Windows)
 - [Why is the time in my log files different from the system time?](#Why-is-the-time-in-my-log-files-different-from-the-system-time)
 - [Why does my multiprocessing program fail?](#Why-does-my-multiprocessing-program-fail)
-- [Why are the search results fewer than K when I try to search the top K vectors?](#Why-are-the-search-results-fewer-than-K-when-i-try-to-search-the-top-K-vectors)
+- [Why are the search results fewer than K when I try to search the top K vectors?](#Why-are-the-search-results-fewer-than-K-when-I-try-to-search-the-top-K-vectors)
 - [How to build Milvus from source in the Docker container?](#How-to-build-Milvus-from-source-in-the-Docker-container)
-- [How often should I build indexes when inserting data?](How-often-should-I-build-indexes-when-inserting-data)
+- [How often should I build indexes when inserting data?](#How-often-should-I-build-indexes-when-inserting-data)
+- [How is data stored in Milvus?](#How-is-data-stored-in-Milvus)
+- [How do I know whether my CPU is supported by Milvus?](#How-do-I-know-whether-my-CPU-is-supported-by-Milvus)
 - [Related links](#Related-links)
 
 <!-- /TOC -->
@@ -51,17 +53,13 @@ It is recommended that you use the docker images with the Milvus compilation env
 
 #### Does Milvus support insert, delete, update, and query operations for vectors?
 
-Milvus supports only the following operations for vectors:
+Yes. You can refer to [Milvus Operations](../guides/milvus_operation.md) for details.
 
-- Insert
-- Query
-
-> Note: Although Milvus does not support directly deleting vectors, you can drop a table for vector deletion.
+> Note: Before 0.7.0, only insertion and search are supported.
 
 #### Should I specify vector IDs or use auto-generated vector IDs?
 
-Both ways work. However, you must either specify IDs for all vectors or use auto-generated IDs for all vectors in one table.
-
+Both ways work. However, you must either specify IDs for all vectors or use auto-generated IDs for all vectors in one collection.
 
 #### Why do Euclidean distance and inner product have inconsistent results in computing vector similarity?
 
@@ -80,19 +78,19 @@ Even if the data is a 2-dim array, this error can still occur if the data type i
 
 #### Why sometimes it takes much longer for queries with smaller datasets?
 
-If the size of a data file is smaller than the value of the `index_file_size` parameter in the config file, Milvus will not build indexes for the data file. Thus, it is possible that smaller datasets may need more time for queries. Refer to [Milvus Configuration](https://milvus.io/docs/v0.6.0/reference/milvus_config.md) for more information.
+If the size of a data file is smaller than the value of the `index_file_size` parameter in the config file, Milvus will not build indexes for the data file. Thus, it is possible that smaller datasets may need more time for queries. Refer to [Milvus Configuration](../reference/milvus_config.md) for more information.
 
 > Note: `index_file_size` was named as `index_building_threshold` before the 0.4.0 release.
 
 #### Why is my Milvus constantly having bad performance?
 
-The reasons may vary, but it is recommended that you check the `cpu_cache_capacity` parameter in the config file to see if all data can be successfully loaded to the memory. Milvus cannot have the best performance before all data is loaded to the memory. Refer to [Milvus Configuration](https://milvus.io/docs/v0.6.0/reference/milvus_config.md) for more information.
+The reasons may vary, but it is recommended that you check the `cpu_cache_capacity` parameter in the config file to see if all data can be successfully loaded to the memory. Milvus cannot have the best performance before all data is loaded to the memory. Refer to [Milvus Configuration](../reference/milvus_config.md) for more information.
 
 If your parameter settings look correct, check whether other running applications have high memory usage.
 
 #### Why is my Milvus constantly having low accuracy?
 
-Check the value of the `nprobe` parameter in the functions when you use an SDK to search vectors in a table. The greater the value, the more precise the result, yet the slower the search speed. Refer to [Learn Milvus Operation](https://milvus.io/docs/v0.6.0/guides/milvus_operation.md) for more information.
+Check the value of the `nprobe` parameter in the functions when you use an SDK to search vectors in a collection. The greater the value, the more precise the result, yet the slower the search speed. Refer to [Learn Milvus Operation](../guides/milvus_operation.md) for more information.
 
 #### Why are my new configurations not working?
 
@@ -137,89 +135,6 @@ In order to successfully run multiprocessing in Milvus, make sure the following 
 - No client is created in the main process
 - Clients are created in each child process
 
-The following example shows a correct way to implement multiprocessing. When there is a table named `TABLE_NAME` which already includes `vector_1`, you can invoke this function in the main process to run two insert processes and one search process concurrently to get the correct result. It should be noted that the search result is irrelevant to the vectors that are being inserted.
-
-```python
-def test_add_vector_search_multiprocessing():
-    '''
-	target: test add vectors, and search it with multiprocessing
-	method: set vectors_1[0] as query vectors
-	expected: status ok and result length is 1
- 	'''
-    nq = 1000
-    vectors_1 = gen_vec_list(nq)
-    vectors_2 = gen_vec_list(nq)
-
- 	def add_vectors_search(idx):
-        if idx == 0:
-            MILVUS = Milvus()
-            connect_server(MILVUS)
-            status = add_vec_to_milvus(MILVUS, vectors_1)
-            print("add", i, "finished")
-            assert status.OK()
-        elif idx == 1:
-            MILVUS = Milvus()
-            connect_server(MILVUS)
-            status, result = MILVUS.search_vectors(TABLE_NAME, 1, NPROBE, [vectors_1[0]])
-            print(result)
-            assert status.OK()
-            assert len(result) == 1
-  		else:
-            MILVUS = Milvus()
-            connect_server(MILVUS)
-            status = add_vec_to_milvus(MILVUS, vectors_2)
-            print("add", i, "finished")
-            assert status.OK()
-
-    process_num = 3
- 	processes = []
-    for i in range(process_num):
-        p = mp.Process(target=add_vectors_search, args=(i,))
-        processes.append(p)
-        p.start()
-        print("process", i)
-    for p in processes:
-        p.join()
-```
-
-If a client already exists in the main process, enabling multiprocessing will cause the client to hang, which will eventually lead to timeout. The following function is a bad example, in which the `connect` is the client built in the main process.
-
-```python
-def test_add_vector_search_multiprocessing(self, connect, table):
-    '''
-	target: test add vectors, and search it with multiprocessing
-	method: set vectors_1[0] as query vectors
-	expected: status ok and result length is 1
-	'''
-    nq = 5
-    vectors_1 = gen_vectors(nq, dim)
-    vectors_2 = gen_vectors(nq, dim)
-
-    status, ids = connect.add_vectors(table, vectors_1)
-    time.sleep(3)
-
-    status, count = connect.get_table_row_count(table)
-    assert count == 5
-
-  	def add_vectors_search(connect, idx):
-        if (idx % 2) == 0:
-            status, ids = connect.add_vectors(table, vectors_2)
-            assert status.OK()
-        else:
-            status, result = connect.search_vectors(table, 1, [vectors_1[0]])
-            assert status.OK()
-            assert len(result) == 1
-
-    process_num = 3
-    processes = []
-    for i in range(process_num):
-        p = Process(target=add_vectors_search, args=(connect, i))
-        processes.append(p)
-        p.start()
-    for p in processes:
-        p.join()
-```
-
 #### Why are the search results fewer than K when I try to search the top K vectors?
 
 In all the indexing types that Milvus supports, `IVFLAT` and `IVF_SQ8` are cell-probe methods that employ a partitioning technique called k-means. The feature space is partitioned into `nlist` cells, and vectors are assigned to one of these cells (to the centroid closest to the query), and stored in an inverted file structure formed of `nlist` inverted lists. When query occurs, only a set of `nprobe` inverted lists are selected.
@@ -247,6 +162,17 @@ In Milvus, metadata is stored in the database, while search data is stored as fi
 - [Milvus Metadata Management (1): How to View Metadata](https://medium.com/@milvusio/milvus-metadata-management-1-6b9e05c06fb0)
 - [Milvus Metadata Management (2): Fields in the Metadata Table](https://medium.com/@milvusio/milvus-metadata-management-2-fields-in-the-metadata-table-3bf0d296ca6d)
 - [Milvus Metadata Management (3): How to Manage Data Files with Metadata](https://medium.com/@milvusio/milvus-metadata-management-3-e65b14137f58)
+
+#### How do I know whether my CPU is supported by Milvus?
+
+Milvus currently supports the following instruction sets:
+
+- SSE4
+- AVX2
+- AVX512
+
+Therefore, as long as your CPU supports one of the instruction sets above, it is supported by Milvus.
+
 
 ## Related links
 

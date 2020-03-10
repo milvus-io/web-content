@@ -5,6 +5,7 @@ sidebar_label: Application Scenarios
 ---
 
 # 应用场景
+
 ## 典型场景
 
 在目前大部分的 AI 应用场景下，都可以使用 Milvus 来搭建智能应用系统：

@@ -1,6 +1,5 @@
 # 参考手册
 
-- [对比 FAISS 和 SPTAG](comparison.md)
 - [Configuration](milvus_config.md)
 - [Data Management](data_manage.md)
 - [Monitoring Metrics](monitoring_metrics.md)

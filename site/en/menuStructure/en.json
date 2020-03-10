@@ -30,7 +30,7 @@
     },
   {
       "id": "traditional_db.md",
-      "title": "Traditional Database",
+      "title": "Traditional Databases",
       "lang": "en",
       "label1": "about_milvus",
       "label2": null,
@@ -178,15 +178,6 @@
       "isMenu": true
     },
     {
-      "id": "comparison.md",
-      "title": "Milvus in Comparison",
-      "lang": "en",
-      "label1": "reference",
-      "label2": "",
-      "label3": "",
-      "order": 0
-    },
-    {
       "id": "milvus_config.md",
       "title": "Configuration",
       "lang": "en",
@@ -286,8 +277,8 @@
       "isMenu": true
     },
     {
-      "id": "v0.6.0.md",
-      "title": "v0.6.0",
+      "id": "release_notes.md",
+      "title": "Release Notes",
       "lang": "en",
       "label1": "releases",
       "label2": "",

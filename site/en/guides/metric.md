@@ -27,27 +27,29 @@ where **a** = (a1, a2,..., an) and **b** = (b1, b2,..., bn) are two points in n-
 
 It's the most commonly used distance metric, and is very useful when the data is continuous.
 
-### Cosine/Inner product (IP)
+### Inner product (IP)
 
-Cosine/Inner product measures the cosine of the angle between 2 vectors, and returns the normalized dot product of them.
+IP measures the cosine of the angle between 2 vectors, and returns the normalized dot product of them.
 
-So the formula for the cosine/IP is:
+So the formula for IP is:
 
 ![ip](../../../assets/ip_metric.png)
 
-where A and B are vectors, `||A||` and `||B||` are the norm of A and B, and cosθ is the cosine of the angle between A and B.
+where A and B are vectors, `||A||` and `||B||` are the norms of A and B, and cosθ is the cosine of the angle between A and B.
 
-Cosine/IP is more useful if you are more interested in measuring the orientation but not the magnitude of the vectors.
+IP is more useful if you are more interested in measuring the orientation but not the magnitude of the vectors.
+
+> Note: If the vectors are normalized, IP is equivalent to cosine similarity. Thus, Milvus does not provide a metric for cosine similarity.
 
 ### Jaccard distance
-
-Jaccard distance measures the dissimilarity between data sets, and is obtained by subtracting the Jaccard similarity coefficient from 1. For binary variables, Jaccard distance is equivalent to Tanimoto coefficient. 
-
-![Jaccard similarity coefficient](../../../assets/jaccard_coeff.png)
 
 Jaccard similarity coefficient measures the similarity between two sample sets, and is defined as the cardinality of the intersection of the defined sets divided by the cardinality of the union of them. It can only be applied to finite sample sets.
 
 ![Jaccard distance](../../../assets/jaccard_dist.png)
+
+Jaccard distance measures the dissimilarity between data sets, and is obtained by subtracting the Jaccard similarity coefficient from 1. For binary variables, Jaccard distance is equivalent to Tanimoto coefficient. 
+
+![Jaccard similarity coefficient](../../../assets/jaccard_coeff.png)
 
 ### Tanimoto distance
 
