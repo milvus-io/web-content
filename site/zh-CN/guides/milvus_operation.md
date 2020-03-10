@@ -143,10 +143,10 @@ sidebar_label: Learn Milvus Operations
 >>> milvus.insert('test01', vectors, partition_tag="tag01")
 ```
 
-您可以通过 `get_vector_by_id()` 验证已经插入的向量。这里假设您的表中存在以下向量 ID。
+您可以通过 `get_vector_by_id()` 验证已经插入的向量。此处验证插入的第一条向量。这里假设您的表中存在以下向量 ID：
 
 ```python
->>> status, vector = milvus.get_vector_by_id(collection_name='test01', vector_id=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19])
+>>> status, vector = milvus.get_vector_by_id(collection_name='test01', vector_id=0)
 ```
 
 ### 通过 ID 删除向量
