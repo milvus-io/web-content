@@ -89,7 +89,8 @@ sidebar_label: Learn Milvus Operations
 ### 创建索引
 
 > 注意：在实际生产环境中，建议在插入向量之前先创建索引，以便系统自动增量创建索引。需要注意的是，在向量插入结束后，相同的索引需要手动再创建一次（因为可能存在大小不满足 `index_file_size` 的数据文件，系统不会为该文件自动创建索引）。
-> 更多索引的用法请参考[pymilvus index example](https://github.com/milvus-io/pymilvus/tree/master/examples/indexes)
+
+> 更多索引的用法请参考 [索引示例程序](https://github.com/milvus-io/pymilvus/tree/master/examples/indexes)。
 
 1. 准备创建索引所需参数(以IVF_FLAT为例)。
 
