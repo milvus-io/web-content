@@ -59,7 +59,7 @@ sidebar_label: Learn Milvus Operations
 >>> milvus.collection_info('test01')
 ```
 
-> 注意：参考[此处](https://github.com/milvus-io/pymilvus/blob/master/examples/example_vectors.py)获取更详细的使用方式。
+> 注意：参考[示例程序](https://github.com/milvus-io/pymilvus/blob/master/examples)获取更详细的使用方式。
 
 ### 删除集合
 
@@ -98,16 +98,16 @@ sidebar_label: Learn Milvus Operations
    >>> ivf_param = {'nlist': 16384}
    ```
 
-   > 注意：对于不同的索引类型，创建索引所需参数也有区别。所有的参数都**必须赋值**。
+   > 注意：对于不同的索引类型，创建索引所需参数也有区别。所有的索引参数都**必须赋值**。
 
       | 索引类型              | 索引参数     | 示例参数                                                                | 取值范围               |
       | --------------------- | ------------ | ----------------------------------------------------------------------- | -------------------- |
-      | `FLAT`/`IVFLAT`/`SQ8` | `nlist`：每个文件中的向量类的个数。特征空间被聚类为 nlist 个桶。      | `{nlist: 16384}`                                                        | `nlist`：[1, 999999] |
-      | `IVFPQ`               | `nlist`：每个文件中的向量类的个数。特征空间被聚类为 nlist 个桶。</br></br> `m`：建立索引时数据的压缩率。m 越小压缩率越高。 | `{nlist: 16384, m: 12}`                                                 | `nlist`：[1, 999999] |
+      | `FLAT`/`IVFLAT`/`SQ8` | `nlist`：建立索引时对向量数据文件进行聚类运算的分簇数。索引文件会记录聚类运算后的结果，包括索引的类型，每个簇的中心向量，以及每个簇分别有哪些向量，以便于后期搜索。      | `{nlist: 16384}`                                                        | `nlist`：[1, 999999] |
+      | `IVFPQ`               | `nlist`：建立索引时对向量数据文件进行聚类运算的分簇数。索引文件会记录聚类运算后的结果，包括索引的类型，每个簇的中心向量，以及每个簇分别有哪些向量，以便于后期搜索。 </br></br> `m`：建立索引时数据的压缩率。m 越小压缩率越高。 | `{nlist: 16384, m: 12}`                                                 | `nlist`：[1, 999999] </br></br> `m`: {96, 64, 56, 48, 40, 32, 28, 24, 20, 16, 12, 8, 4, 3, 2, 1} 中的值|
       | `NSG`                 | `search_length`：值越大，代表在图中搜索的节点越多，召回率越高，但速度也越慢。建议 `search_length` 小于 `candidate_pool` 的值，取值范围建议在 [40, 80]。</br></br> `out_degree`：值越大，则占用内存越大，搜索性能也越好。</br></br> `candidate_pool`：影响索引质量，建议取值范围 [200,500]。</br> `knng`：影响索引质量，建议取值为 `out_degree` + 20.             | `{search_length: 45, out_degree:50, candidate_pool_size:300, knng:100}` |  `search_length range`: [10, 300]</br></br>`out_degree`: [5, 300]</br></br>`candidate_pool_size`: [50, 1000]</br></br>`knng`: [5, 300]                |
-      | `HNSW`                |   `M`：影响 build 的时间以及索引的质量。 `M` 越大，构建索引耗时越长，索引质量越高，内存占用也越大。 </br></br> `efConstruction`：影响 build 的时间以及索引的质量。 `efConstruction` 越大，构建索引耗时越长，索引质量越高，内存占用也越大。  | `{M: 16, efConstruction:500}`   |    `M` :[5, 48]</br>`efConstruction` :[100, 500]                |
+      | `HNSW`                |   `M`：影响 build 的时间以及索引的质量。 `M` 越大，构建索引耗时越长，索引质量越高，内存占用也越大。 </br></br> `efConstruction`：影响 build 的时间以及索引的质量。 `efConstruction` 越大，构建索引耗时越长，索引质量越高，内存占用也越大。  | `{M: 16, efConstruction:500}`   |    `M` :[5, 48]</br>`efConstruction` :[100, 500]        |
 
-关于参数详细信息请参考 [Milvus 索引类型](index.md)。
+   关于详细信息请参考 [Milvus 索引类型](index.md)。
 
 2. 为集合创建索引。
 
@@ -218,11 +218,11 @@ sidebar_label: Learn Milvus Operations
    >>> search_param = {'nprobe': 16}
    ```
 
-    > 注意：对于不同的索引类型，搜索所需参数也有区别。所有的参数都**必须赋值**。
+    > 注意：对于不同的索引类型，搜索所需参数也有区别。所有的搜索参数都**必须赋值**。
 
       | 索引类型              | 搜索参数     | 示例参数                                                                | 取值范围               |
       | --------------------- | ------------ | ----------------------------------------------------------------------- | -------------------- |
-      |  `FLAT`/`IVFLAT`/`SQ8`/`IVFPQ` | `nprobe`：查询所涉及的向量类的个数。`nprobe` 影响查询精度。数值越大，精度越高，速度越慢。 | `{nprobe: 32}`|  [1, `nlist`]   |
+      |  `FLAT`/`IVFLAT`/`SQ8`/`IVFPQ` | `nprobe`：查询时所涉及的向量类的个数。`nprobe` 影响查询精度。数值越大，精度越高，速度越慢。 | `{nprobe: 32}`|  [1, `nlist`]   |
       |  `NSG` | `search_length`：值越大，代表在图中搜索的节点越多，召回率越高，速度越慢。 | `{search_length:100}`|  [10, 300]   |
       |  `HNSW` | `ef`：值越大，则在索引中搜索的数据越多，召回率越高，速度越慢。 | `{ef: 64}`|  [`topk`, 4096]   |
 

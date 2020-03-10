@@ -52,6 +52,16 @@ You can also use other clients, including [Java](https://github.com/milvus-io/mi
    >>> milvus.create_collection(param)
    ```
 
+### Acquire statistical information of a collection
+
+You can use the following command to acquire the statistical information of a collection, including the number of vectors in a collection/partition/segment and storage usage.
+
+```python
+>>> milvus.collection_info('test01')
+```
+
+> Note：Refer to [this link](https://github.com/milvus-io/pymilvus/blob/master/examples/example_vectors.py) for more information.
+
 ### Drop a collection
 
 ```python
@@ -87,14 +97,25 @@ Use `show_partitions()` to verify whether the partition is created.
 
 ### Create an index
 
-> Note: In production, it is recommended to create indexes before inserting vectors into the collection. Index is automatically built when vectors are being imported. However, you need to create the same index again after the vector insertion process is completed because some data files may not meet the `index_file_size` and index will not be automatically built for these data files.
+> Note: In production, it is recommended to create indexes before inserting vectors into the collection. Index is automatically built when vectors are being imported. However, you need to create the same index again after the vector insertion process is completed because some data files may not meet the `index_file_size` and index will not be automatically built for these data files. Refer to [example programs](https://github.com/milvus-io/pymilvus/tree/master/examples/indexes) to learn more about how to create indexes.
 
-1. Prepare index parameters. The following command uses `IVF_FLAT` index type as an example.
+1. Prepare index parameters. The following command uses `IVF_FLAT` index type as an example. The index parameters is a JSON string and represented by dict in Python.
 
    ```python
    # Prepare index param
    >>> ivf_param = {'nlist': 16384}
    ```
+
+   > Note: For different index types, the required parameters for index building is also different. You **must** specify values for all index parameters.
+
+      | Index type    | Index parameters | Example                                                                | Value range               |
+      | --------------------- | ------------ | ----------------------------------------------------------------------- | -------------------- |
+      | `FLAT`/`IVFLAT`/`SQ8` | `nlist`：Number of clusters from the vector data file when Milvus performs clustering operation for index creation. The index file records the results of the clustering operation, including index type, central vector of each cluster, and the vectors in each cluster, for later search operations.      | `{nlist: 16384}`                                                        | `nlist`：[1, 999999] |
+      | `IVFPQ`               | `nlist`：Number of clusters from the vector data file when Milvus performs clustering operation for index creation. The index file records the results of the clustering operation, including index type, central vector of each cluster, and the vectors in each cluster, for later search operations. </br></br> `m`：Compression ratio during index creation. The smaller `m` is, the higher the compression ratio. | `{nlist: 16384, m: 12}`                                                 | `nlist`：[1, 999999] </br></br> `m`: one of {96, 64, 56, 48, 40, 32, 28, 24, 20, 16, 12, 8, 4, 3, 2, 1} |
+      | `NSG`                 | `search_length`：The higher the value, the more nodes are searched in the graph, the higher the recall rate, but the slower the search speed. It is recommended that `search_length` is smaller than `candidate_pool` and in range [40, 80]。</br></br> `out_degree`：The higher the value, the higher the memory usage, and the better search performance.</br></br> `candidate_pool`：Affects index quality and is suggested to be in range [200, 500]. </br></br> `knng`：Affects index quality and is suggested to be `out_degree` + 20.             | `{search_length: 45, out_degree:50, candidate_pool_size:300, knng:100}` |  `search_length range`: [10, 300]</br></br>`out_degree`: [5, 300]</br></br>`candidate_pool_size`: [50, 1000]</br></br>`knng`: [5, 300]                |
+      | `HNSW`                |   `M`：Affects index build time and index quality. The higher the value, the longer it costs to build an index, the higher the index quality, and the higher the memory usage.  </br></br> `efConstruction`：Affects index build time and index quality. The higher the value, the longer it costs to build and index, the higher the index quality, and the higher the memory usage.  | `{M: 16, efConstruction:500}`   |    `M` :[5, 48]</br></br>`efConstruction` :[100, 500]                |
+
+   Refer to [Milvus Indexes](index.md) for more information。
 
 2. Create an index for the collection.
 
@@ -183,18 +204,28 @@ A segment is a data file that Milvus automatically creates by merging inserted v
 
 1. Prepare search parameters.
 
-```python
->>> search_param = {'nprobe': 16}
-```
+   ```python
+   >>> search_param = {'nprobe': 16}
+   ```
+
+   > Note: For different index types, search parameters also differs. You **must** assign values to all search parameters.
+
+      | Index type          | Search parameters     | Example                                                | Value range              |
+      | --------------------- | ------------ | ----------------------------------------------------------------------- | -------------------- |
+      |  `FLAT`/`IVFLAT`/`SQ8`/`IVFPQ` | `nprobe`：Number of classes of vectors to search. `nprobe` affects search precision. The higher the value, the higher the precision, but the lower the search speed. | `{nprobe: 32}`|  [1, `nlist`]   |
+      |  `NSG` | `search_length`：The higher the value, the more number of nodes are searched in the graph and the higher the recall rate, but the lower the search speed. | `{search_length:100}`|  [10, 300]   |
+      |  `HNSW` | `ef`：The higher the value, the more data is searched in the index and the higher the recall rate, but the lower the search speed.| `{ef: 64}`|  [`topk`, 4096]   |
+
+   > Note: `top_k` stands for the number of vectors that are the most similar to the target vector. `top_k` is defined during search.
 
 2. Search vectors.
 
-```python
-# create 5 vectors of 32-dimension
->>> q_records = [[random.random() for _ in range(dim)] for _ in range(5)]
-# search vectors
->>> milvus.search(collection_name='test01', query_records=q_records, top_k=2, params=search_param)
-```
+   ```python
+   # create 5 vectors of 32-dimension
+   >>> q_records = [[random.random() for _ in range(dim)] for _ in range(5)]
+   # search vectors
+   >>> milvus.search(collection_name='test01', query_records=q_records, top_k=2, params=search_param)
+   ```
 
 ### Search vectors in a partition
 
