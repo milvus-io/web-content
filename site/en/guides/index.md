@@ -23,6 +23,8 @@ Milvus supports multiple types of indexes to suit various scenarios. The page in
 | Hierarchical Navigable Small World Graphs             | `HNSW`        | ✔️               | ✔️                  | ✔️               | ❌                  |
 </div>
 
+> Note: For different index types, the index building parameters and search parameters also differ. Refer to [learn Milvus Operations](milvus_operation.md) for more information.
+
 
 ## Milvus Indexes
 
