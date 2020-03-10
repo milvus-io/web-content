@@ -12,28 +12,17 @@ Milvus supports multiple types of indexes to suit various scenarios. The page in
 
 <div class="table-wrapper" markdown="block">
 
-| Type                                               | Name | Parameters affecting performance | CPU-only Milvus  | GPU-enabled Milvus | Float vector support |  Binary vector support |
-| -------------------------------------------------- | ---------- | --------------------------------------------- | ---------------- | ------------------ | ------ | -----| 
-| Exact search                                       | `FLAT`     | `top_k`, nq                                   | ✔️               | ✔️                  | ✔️               | ✔️                  |
-| Inverted file with exact post-verification         | `IVFLAT`   | `top_k`, nq, `nprobe`, `gpu_search_threshold` | ✔️               | ✔️                  | ✔️               | ✔️                  |
-| IVF and scalar quantizer                           | `IVF_SQ8`  | `top_k`, nq, `nprobe`, `nlist`, `gpu_search_threshold`  | ✔️               | ✔️                  | ✔️               | ❌                  |
-| IVFSQ8 hybrid search on both CPU and GPU           | `IVF_SQ8H` | `top_k`, nq, `nprobe`, `nlist`, `gpu_search_threshold`  | ❌               | ✔️                  | ✔️               | ❌                  |
-| Inverted file with product quantization refinement | `IVF_PQ`   | `top_k`, nq, `nprobe`, `nlist`                          | ✔️               | ❌                  | ✔️               | ❌                  |
-| Refined Navigating Spreading-out Graph             | `RNSG`     | `top_k`, nq                                             | ✔️               | ✔️                  | ✔️               | ❌                  |
-| Hierarchical Navigable Small World Graphs             | `HNSW`     | `top_k`, nq                                             | ✔️               | ✔️                  | ✔️               | ❌                  |
+| Type                                               | Name |  CPU-only Milvus  | GPU-enabled Milvus | Float vector support |  Binary vector support |
+| -------------------------------------------------- | --------------------------------------------- | ---------------- | ------------------ | ------ | -----| 
+| Exact search                                       | `FLAT`        | ✔️               | ✔️                  | ✔️               | ✔️                  |
+| Inverted file with exact post-verification         | `IVFLAT`    | ✔️               | ✔️                  | ✔️               | ✔️                  |
+| IVF and scalar quantizer                           | `IVF_SQ8`   | ✔️               | ✔️                  | ✔️               | ❌                  |
+| IVFSQ8 hybrid search on both CPU and GPU           | `IVF_SQ8H`   | ❌               | ✔️                  | ✔️               | ❌                  |
+| Inverted file with product quantization refinement | `IVF_PQ`       | ✔️               | ❌                  | ✔️               | ❌                  |
+| Refined Navigating Spreading-out Graph             | `RNSG`              | ✔️               | ✔️                  | ✔️               | ❌                  |
+| Hierarchical Navigable Small World Graphs             | `HNSW`        | ✔️               | ✔️                  | ✔️               | ❌                  |
 </div>
 
-Parameters that affect performance are explained in the following list in detail:
-
-- `top_k`: top k vectors with the highest similarity compared to the query vectors.
-
-- nq: number of queried vectors.
-
-- `nlist`: total number of buckets generated. The feature space is partitioned into `nlist` buckets. 
-
-- `nprobe`: number of buckets to search at query.
-
-- `gpu_search_threshold`: The threshold value must be compared with nq to decide if the search computation will be executed on GPUs only. If nq >= `gpu_search_threshold`, the search computation will be executed on GPUs only. If nq < `gpu_search_threshold`, the search computation will be executed on both CPUs and GPUs.
 
 ## Milvus Indexes
 
