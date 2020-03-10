@@ -59,6 +59,8 @@ sidebar_label: Learn Milvus Operations
 >>> milvus.collection_info('test01')
 ```
 
+> 注意：参考[此处](https://github.com/milvus-io/pymilvus/blob/master/examples/example_vectors.py)获取更详细的使用方式。
+
 ### 删除集合
 
 ```python
