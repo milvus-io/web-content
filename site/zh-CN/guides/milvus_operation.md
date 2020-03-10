@@ -101,9 +101,9 @@ sidebar_label: Learn Milvus Operations
       | 索引类型              | 索引参数     | 示例参数                                                                | 取值范围               |
       | --------------------- | ------------ | ----------------------------------------------------------------------- | -------------------- |
       | `FLAT`/`IVFLAT`/`SQ8` | `nlist`：每个文件中的向量类的个数。特征空间被聚类为 nlist 个桶。      | `{nlist: 16384}`                                                        | `nlist`：[1, 999999] |
-      | `IVFPQ`               | `nlist`：每个文件中的向量类的个数。特征空间被聚类为 nlist 个桶。</br> `m`：建立索引时数据的压缩率。m 越小压缩率越高。 | `{nlist: 16384, m: 12}`                                                 | `nlist`：[1, 999999] |
-      | `NSG`                 | `search_length`：值越大，代表在图中搜索的节点越多，召回率越高，但速度也越慢。建议 `search_length` 小于 `candidate_pool` 的值，取值范围建议在 [40, 80]。</br> `out_degree`：值越大，则占用内存越大，搜索性能也越好。</br> `candidate_pool`：影响索引质量，建议取值范围 [200,500]。</br> `knng`：影响索引质量，建议取值为 `out_degree` + 20.             | `{search_length: 45, out_degree:50, candidate_pool_size:300, knng:100}` |  `search_length range`: [10, 300]</br>`out_degree`: [5, 300]</br>`candidate_pool_size`: [50, 1000]</br>`knng`: [5, 300]                |
-      | `HNSW`                |   `M`：影响 build 的时间以及索引的质量。 `M` 越大，构建索引耗时越长，索引质量越高，内存占用也越大。  `efConstruction`：影响 build 的时间以及索引的质量。 `efConstruction` 越大，构建索引耗时越长，索引质量越高，内存占用也越大。  | `{M: 16, efConstruction:500}`   |    `M` :[5, 48]</br>`efConstruction` :[100, 500]                |
+      | `IVFPQ`               | `nlist`：每个文件中的向量类的个数。特征空间被聚类为 nlist 个桶。</br></br> `m`：建立索引时数据的压缩率。m 越小压缩率越高。 | `{nlist: 16384, m: 12}`                                                 | `nlist`：[1, 999999] |
+      | `NSG`                 | `search_length`：值越大，代表在图中搜索的节点越多，召回率越高，但速度也越慢。建议 `search_length` 小于 `candidate_pool` 的值，取值范围建议在 [40, 80]。</br></br> `out_degree`：值越大，则占用内存越大，搜索性能也越好。</br></br> `candidate_pool`：影响索引质量，建议取值范围 [200,500]。</br> `knng`：影响索引质量，建议取值为 `out_degree` + 20.             | `{search_length: 45, out_degree:50, candidate_pool_size:300, knng:100}` |  `search_length range`: [10, 300]</br></br>`out_degree`: [5, 300]</br></br>`candidate_pool_size`: [50, 1000]</br></br>`knng`: [5, 300]                |
+      | `HNSW`                |   `M`：影响 build 的时间以及索引的质量。 `M` 越大，构建索引耗时越长，索引质量越高，内存占用也越大。 </br></br> `efConstruction`：影响 build 的时间以及索引的质量。 `efConstruction` 越大，构建索引耗时越长，索引质量越高，内存占用也越大。  | `{M: 16, efConstruction:500}`   |    `M` :[5, 48]</br>`efConstruction` :[100, 500]                |
 
 关于参数详细信息请参考 [Milvus 索引类型](index.md)。
 
