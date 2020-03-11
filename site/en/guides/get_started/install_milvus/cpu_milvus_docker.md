@@ -33,7 +33,7 @@ sidebar_label: Install CPU-only Milvus
 
 ## Install Milvus on Ubuntu/CentOS
 
-### Step 1 Confirm Docker status
+#### Step 1 Confirm Docker status
 
 Confirm that the Docker daemon is running in the background:
 
@@ -45,7 +45,7 @@ If you do not see the server listed, start the **Docker** daemon.
 
 > Note: On Linux, Docker needs sudo privileges. To run Docker command without `sudo`, create the `docker` group and add your user. For details, see the [post-installation steps for Linux](https://docs.docker.com/install/linux/linux-postinstall/).
 
-### Step 2 Pull Docker image
+#### Step 2 Pull Docker image
 
 Pull the CPU-only image:
 
@@ -55,7 +55,7 @@ $ docker pull milvusdb/milvus:0.6.0-cpu-d120719-2b40dd
 
 > Note: If the pulling speed is too slow or the pulling process constantly fails, refer to [Operational FAQ](../../../faq/operational_faq.md) for possible solutions.
 
-### Step 3 Download configuration files
+#### Step 3 Download configuration files
 
 ```shell
 # Create Milvus file
@@ -67,7 +67,7 @@ $ wget https://raw.githubusercontent.com/milvus-io/milvus/0.7.0/core/conf/demo/l
 
 > Note: In case you encounter problems downloading configuration files using `wget` command, you can also create the `server_config.yaml` and `log_config.conf` files under `/home/$USER/milvus/conf`, then copy and paste the content from [server config file](https://github.com/milvus-io/milvus/blob/0.7.0/core/conf/demo/server_config.yaml) and [log config file](https://github.com/milvus-io/milvus/blob/0.7.0/core/conf/demo/log_config.conf).
 
-### Step 4 Start Docker container
+#### Step 4 Start Docker container
 
 ```shell
 # Start Milvus
