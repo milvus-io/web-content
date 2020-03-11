@@ -35,6 +35,7 @@ Milvus 使用 Prometheus 作为监控和性能指标存储方案，使用 Grafan
 
   ![prometheus.png](https://raw.githubusercontent.com/milvus-io/docs/v0.7.0/assets/prometheus.png)
 
+
 ### 需要报警的事件
 
 积极的监控帮助及早发现问题，但创建报警规则以便在出现突发事件时触发用户通知也非常有必要。
@@ -128,7 +129,7 @@ Milvus 会生成详细的关于系统运行状态的时序 metrics。该页面�
 5. 下载 [Grafana 配置文件](https://github.com/milvus-io/docs/blob/v0.7.0/assets/monitoring/dashboard.json) :
 
    ```shell
-   $ wget https://raw.githubusercontent.com/milvus-io/docs/v0.7.0/assets/monitoring/dashboard.json
+   $ wget https://raw.githubusercontent.com/milvus-io/docs/v0.7.0/assets/monitoring/dashboard.jsonr
    ```
 
 6. [将配置文件导入 Grafana](http://docs.grafana.org/reference/export_import/#importing-a-dashboard).

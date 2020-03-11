@@ -20,7 +20,7 @@ This page describes the common issues you may run into with Milvus. The issues f
 
 - Operational issue
 
-  Issues that occur during the server operation, which may cause server down. If you encounter issues during operation, first confirm that if the issue is caused by the imcompatiblity of Milvus and SDK versions. Then check the error messages that are recorded in `/home/$USER/<milvus>/logs`.
+  Issues that occur during the server operation, which may cause server down. If you encounter issues during operation, first confirm that if the issue is caused by the imcompatiblity of Milvus and SDK versions. Then check the error messages that are recorded in `/home/$USER/milvus/logs`.
 
 - API issue
 

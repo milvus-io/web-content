@@ -86,6 +86,7 @@ Before changing these settings, welcome to consult Milvus team on [GitHub issues
 | ------------------------ | ------------------------------------------------------------ | ------- | --------------- |
 | `primary_path`         | Primary directory used for the vector data files, index files, and the metadata. | Path   | `/var/lib/milvus`    |
 | `secondary_path` | A semicolon-separated list of secondary directories used vector data files and index files. Set this parameter when the data size is too much to fit in the `primary_path`. <br/>Each file, whether in `primary_path` or `secondary_path`, is assigned an equal part of the imported data.  Data Size per Directory = Total Data Size / Number of Directories. So make sure the available storage space in these files are enough. | Path   |     ` `       |
+
 </div>
 
 ### Section `metric_config`
@@ -108,6 +109,7 @@ Before changing these settings, welcome to consult Milvus team on [GitHub issues
 | `cpu_cache_capacity` | The size of the CPU memory for caching data for faster query. The sum of `cpu_cache_capacity` and `insert_buffer_size` must < the total CPU memory size. | Integer | `4` (GB) |
 | `insert_buffer_size`     | Maximum memory size used by the buffer for data insertion. The sum of `insert_buffer_size` and `cpu_cache_capacity` must < the total memory. | Integer | `1` (GB)        |
 | `cache_insert_data`  | If set to `true` , the inserted data will be loaded into the cache immediately for hot query. | Boolean | `false`   |
+
 </div>
 
 ### Section `engine_config`

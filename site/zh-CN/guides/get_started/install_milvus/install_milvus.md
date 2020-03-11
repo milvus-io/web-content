@@ -20,6 +20,7 @@ Milvus 中的向量搜索包含但不限于这两个独立的部分：创建索�
 
 请参考[从源代码编译 Milvus](https://github.com/milvus-io/milvus/blob/master/INSTALL.md)了解如何从源代码编译。
 
+
 ## 接下来您可以
 
 - 如果您刚开始了解 Milvus：
