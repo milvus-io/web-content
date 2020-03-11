@@ -6,23 +6,6 @@ sidebar_label: Product FAQ
 
 # 产品常见问题
 
-<!-- TOC -->
-
-- [Milvus 是什么？](#Milvus-是什么)
-- [Milvus 适合什么时候使用 ？](#Milvus-适合什么时候使用-)
-- [如何使用 Milvus？](#如何使用-Milvus)
-- [Milvus 的易用性如何？](#Milvus-的易用性如何)
-- [Milvus 具备高可用特性吗？](#Milvus-具备高可用特性吗)
-- [Milvus 可以处理百亿或千亿级数据吗？](#Milvus-可以处理百亿或千亿级数据吗)
-- [向量存入 Milvus 后如何检索？](#向量存入-Milvus-后如何检索)
-- [如何选择向量索引的类型？](#如何选择向量索引的类型)
-- [Milvus 是否支持 “边插入边查询” ？](#Milvus-是否支持-边插入边查询-)
-- [数据存储在哪里？](#数据存储在哪里)
-- [Milvus 与 FAISS 和 SPTAG 对比如何？](#Milvus-与-FAISS-和-SPTAG-对比如何)
-- [Milvus 是一款端到端产品吗？](#Milvus-是一款端到端产品吗)
-- [仍有问题没有得到解答？](#仍有问题没有得到解答)
-
-<!-- /TOC -->
 
 <!-- TOC -->
 
