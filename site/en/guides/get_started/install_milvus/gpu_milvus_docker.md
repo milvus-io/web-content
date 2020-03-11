@@ -62,7 +62,7 @@ $ wget https://raw.githubusercontent.com/milvus-io/milvus/v0.7.0/core/conf/demo/
 $ wget https://raw.githubusercontent.com/milvus-io/milvus/v0.7.0/core/conf/demo/log_config.conf
 ```
 
-> Note: In case you encounter problems downloading configuration files using `wget` command, you can also create the `server_config.yaml` and `log_config.conf` files under `/home/$USER/milvus/conf`, then copy and paste the content from [server config file](https://github.com/milvus-io/milvus/blob/0.7.0/core/conf/demo/server_config.yaml) and [log config file](https://github.com/milvus-io/milvus/blob/0.7.0/core/conf/demo/log_config.conf).
+> Note: In case you encounter problems downloading configuration files using `wget` command, you can also create the `server_config.yaml` and `log_config.conf` files under `/home/$USER/milvus/conf`, then copy and paste the content from [server config file](https://github.com/milvus-io/milvus/blob/v0.7.0/core/conf/demo/server_config.yaml) and [log config file](https://github.com/milvus-io/milvus/blob/v0.7.0/core/conf/demo/log_config.conf).
 
 ## Step 4 Start Docker container
 
