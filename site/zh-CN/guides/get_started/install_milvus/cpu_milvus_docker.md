@@ -50,7 +50,7 @@ $ docker info
 拉取仅需 CPU 的镜像：
 
 ```shell
-$ docker pull milvusdb/milvus:0.6.0-cpu-d120719-2b40dd
+$ docker pull milvusdb/milvus:0.7.0-cpu-d031120-de409b
 ```
 
 > 注意：如果您在拉取镜像时速度过慢或一直失败，请参考[操作常见问题](../../../faq/operational_faq.md)中提供的解决办法。
@@ -73,11 +73,13 @@ $ wget https://raw.githubusercontent.com/milvus-io/milvus/v0.7.0/core/conf/demo/
 # Start Milvus
 $ docker run -d --name milvus_cpu \
 -p 19530:19530 \
--p 8080:8080 \
+-p 19121:19121 \
+-p 9091:9091 \
 -v /home/$USER/milvus/db:/var/lib/milvus/db \
 -v /home/$USER/milvus/conf:/var/lib/milvus/conf \
 -v /home/$USER/milvus/logs:/var/lib/milvus/logs \
-milvusdb/milvus:0.6.0-cpu-d120719-2b40dd
+-v /home/$USER/milvus/wal:/var/lib/milvus/wal \
+milvusdb/milvus:0.7.0-cpu-d031120-de409b
 ```
 
 上述命令中用到的 `docker run` 参数定义如下：
@@ -111,15 +113,17 @@ $ docker logs <milvus container id>
 
 第四步，启动 Docker 容器，将 Milvus 文件映射到您本地的文件路径。下面的命令是在命令提示符中运行的：
 
-```shell
+```cmd
 # Start Milvus
 $ docker run -d --name milvus_cpu ^
 -p 19530:19530 ^
--p 8080:8080 ^
+-p 19121:19121 ^
+-p 9091:9091 ^
 -v C:\milvus\db:/var/lib/milvus/db ^
 -v C:\milvus\conf:/var/lib/milvus/conf ^
 -v C:\milvus\logs:/var/lib/milvus/logs ^
-milvusdb/milvus:0.6.0-cpu-d120719-2b40dd
+-v C:\milvus\wal:/var/lib/milvus/wal ^
+milvusdb/milvus:0.7.0-cpu-d031120-de409b
 ```
 
 ## 在 MacOS 上安装 Milvus
@@ -142,11 +146,13 @@ $ wget https://raw.githubusercontent.com/milvus-io/milvus/v0.7.0/core/conf/demo/
 # Start Milvus
 $ docker run -d --name milvus_cpu \
 -p 19530:19530 \
--p 8080:8080 \
--v /Users/$USER/milvus/db:/var/lib/milvus/db \
--v /Users/$USER/milvus/conf:/var/lib/milvus/conf \
--v /Users/$USER/milvus/logs:/var/lib/milvus/logs \
-milvusdb/milvus:0.6.0-cpu-d120719-2b40dd
+-p 19121:19121 \
+-p 9091:9091 \
+-v /home/$USER/milvus/db:/var/lib/milvus/db \
+-v /home/$USER/milvus/conf:/var/lib/milvus/conf \
+-v /home/$USER/milvus/logs:/var/lib/milvus/logs \
+-v /home/$USER/milvus/wal:/var/lib/milvus/wal \
+milvusdb/milvus:0.7.0-cpu-d031120-de409b
 ```
 
 ## 接下来您可以

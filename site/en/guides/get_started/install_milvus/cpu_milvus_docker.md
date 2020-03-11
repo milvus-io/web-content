@@ -50,7 +50,7 @@ If you do not see the server listed, start the **Docker** daemon.
 Pull the CPU-only image:
 
 ```shell
-$ docker pull milvusdb/milvus:0.6.0-cpu-d120719-2b40dd
+$ docker pull milvusdb/milvus:0.7.0-cpu-d031120-de409b
 ```
 
 > Note: If the pulling speed is too slow or the pulling process constantly fails, refer to [Operational FAQ](../../../faq/operational_faq.md) for possible solutions.
@@ -73,11 +73,13 @@ $ wget https://raw.githubusercontent.com/milvus-io/milvus/v0.7.0/core/conf/demo/
 # Start Milvus
 $ docker run -d --name milvus_cpu \
 -p 19530:19530 \
--p 8080:8080 \
+-p 19121:19121 \
+-p 9091:9091 \
 -v /home/$USER/milvus/db:/var/lib/milvus/db \
 -v /home/$USER/milvus/conf:/var/lib/milvus/conf \
 -v /home/$USER/milvus/logs:/var/lib/milvus/logs \
-milvusdb/milvus:0.6.0-cpu-d120719-2b40dd
+-v /home/$USER/milvus/wal:/var/lib/milvus/wal \
+milvusdb/milvus:0.7.0-cpu-d031120-de409b
 ```
 
 The `docker run` options used in the above command are defined as follows:
@@ -112,15 +114,17 @@ For Step 3, instead of using `wget` to obtain the files, it is suggested to crea
 
 For Step 4, start the docker by mapping Milvus files to the right path. The following command is run in Windows Command shell:
 
-```shell
+```cmd
 # Start Milvus
 $ docker run -d --name milvus_cpu ^
 -p 19530:19530 ^
--p 8080:8080 ^
+-p 19121:19121 ^
+-p 9091:9091 ^
 -v C:\milvus\db:/var/lib/milvus/db ^
 -v C:\milvus\conf:/var/lib/milvus/conf ^
 -v C:\milvus\logs:/var/lib/milvus/logs ^
-milvusdb/milvus:0.6.0-cpu-d120719-2b40dd
+-v C:\milvus\wal:/var/lib/milvus/wal ^
+milvusdb/milvus:0.7.0-cpu-d031120-de409b
 ```
 
 ## Install Milvus on MacOS
@@ -143,11 +147,13 @@ For Step 4, start the docker by mapping Milvus files to the right path:
 # Start Milvus
 $ docker run -d --name milvus_cpu \
 -p 19530:19530 \
--p 8080:8080 \
--v /Users/$USER/milvus/db:/var/lib/milvus/db \
--v /Users/$USER/milvus/conf:/var/lib/milvus/conf \
--v /Users/$USER/milvus/logs:/var/lib/milvus/logs \
-milvusdb/milvus:0.6.0-cpu-d120719-2b40dd
+-p 19121:19121 \
+-p 9091:9091 \
+-v /home/$USER/milvus/db:/var/lib/milvus/db \
+-v /home/$USER/milvus/conf:/var/lib/milvus/conf \
+-v /home/$USER/milvus/logs:/var/lib/milvus/logs \
+-v /home/$USER/milvus/wal:/var/lib/milvus/wal \
+milvusdb/milvus:0.7.0-cpu-d031120-de409b
 ```
 
 ## What's next
