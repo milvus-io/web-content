@@ -8,9 +8,9 @@ sidebar_label: Product FAQ
 
 <!-- TOC -->
 
-- [Does Milvus 0.7.0 support data files from previous versions of Milvus?](#Does-Milvus-0.7.0-support-data-files-from-previous-versions-of-Milvus)
-- [Does Milvus 0.7.0 support server configuration files from previous versions of Milvus?](#Does-Milvus-0.7.0-support-server-configuration-files-from-previous-versions-of-Milvus)
-- [Does Milvus 0.7.0 support applications built by clients from previous versions of Milvus?](#Does-Milvus-0.7.0-support-applications-built-by-clients-from-previous-versions-of-Milvus)
+- [Does Milvus 0.7.0 support data files from previous versions of Milvus?](#Does-Milvus-070-support-data-files-from-previous-versions-of-Milvus)
+- [Does Milvus 0.7.0 support server configuration files from previous versions of Milvus?](#Does-Milvus-070-support-server-configuration-files-from-previous-versions-of-Milvus)
+- [Does Milvus 0.7.0 support applications built by clients from previous versions of Milvus?](#Does-Milvus-070-support-applications-built-by-clients-from-previous-versions-of-Milvus)
 - [What is Milvus?](#What-is-Milvus)
 - [When is Milvus a good choice?](#When-is-Milvus-a-good-choice)
 - [How to use Milvus?](#How-to-use-Milvus)
