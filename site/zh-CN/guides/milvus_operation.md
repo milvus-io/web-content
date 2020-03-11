@@ -35,7 +35,7 @@ sidebar_label: Learn Milvus Operations
 
 ## 创建/删除集合
 
-### 创建集合
+#### 创建集合
 
 1. 准备创建集合所需参数。
 
@@ -51,7 +51,7 @@ sidebar_label: Learn Milvus Operations
    >>> milvus.create_collection(param)
    ```
 
-### 获取集合的统计信息
+#### 获取集合的统计信息
 
 您可以调用如下接口查询集合的统计信息。查询结果的信息包含集合/分区/段的向量数量，存储使用量等信息。
 
@@ -61,7 +61,7 @@ sidebar_label: Learn Milvus Operations
 
 > 注意：参考[示例程序](https://github.com/milvus-io/pymilvus/blob/master/examples)获取更详细的使用方式。
 
-### 删除集合
+#### 删除集合
 
 ```python
 # Drop collection
@@ -70,7 +70,7 @@ sidebar_label: Learn Milvus Operations
 
 ## 在集合中创建/删除分区
 
-### 创建分区
+#### 创建分区
 
 您可以通过标签将集合分割为若干个分区，从而提高搜索效率。每个分区实际上也是一个集合。
 
@@ -79,7 +79,7 @@ sidebar_label: Learn Milvus Operations
 >>> milvus.create_partition('test01', 'tag01')
 ```
 
-### 删除分区
+#### 删除分区
 
 ```python
 >>> milvus.drop_partition(collection_name='test01', partition_tag='tag01')
@@ -87,7 +87,7 @@ sidebar_label: Learn Milvus Operations
 
 ## 在集合中创建/删除索引
 
-### 创建索引
+#### 创建索引
 
 > 注意：在实际生产环境中，建议在插入向量之前先创建索引，以便系统自动增量创建索引。需要注意的是，在向量插入结束后，相同的索引需要手动再创建一次（因为可能存在大小不满足 `index_file_size` 的数据文件，系统不会为该文件自动创建索引）。更多索引的用法请参考 [索引示例程序](https://github.com/milvus-io/pymilvus/tree/master/examples/indexes)。
 
@@ -116,7 +116,7 @@ sidebar_label: Learn Milvus Operations
    >>> milvus.create_index('test01', IndexType.IVF_FLAT, ivf_param)
    ```
 
-### 删除索引
+#### 删除索引
 
 ```python
 >>> milvus.drop_index('test01')
@@ -124,7 +124,7 @@ sidebar_label: Learn Milvus Operations
 
 ## 在集合/分区中插入/删除向量
 
-### 在集合中插入向量
+#### 在集合中插入向量
 
 1. 使用 `random` 函数生成 20 个 256 维的向量。
 
@@ -148,7 +148,7 @@ sidebar_label: Learn Milvus Operations
    >>> milvus.insert(collection_name='test01', records=vectors, ids=vector_ids)
    ```
 
-### 在分区中插入向量
+#### 在分区中插入向量
 
 ```python
 >>> milvus.insert('test01', vectors, partition_tag="tag01")
@@ -160,7 +160,7 @@ sidebar_label: Learn Milvus Operations
 >>> status, vector = milvus.get_vector_by_id(collection_name='test01', vector_id=0)
 ```
 
-### 通过 ID 删除向量
+#### 通过 ID 删除向量
 
 假设您的集合中存在以下向量 ID：
 
@@ -176,7 +176,7 @@ sidebar_label: Learn Milvus Operations
 
 > 注意：对于已经进行了删除向量操作的集合，您只能使用在 CPU 上运行的 `FLAT`、`IVFLAT`、`IVFSQ8` 等索引类型进行搜索。
 
-### 通过 ID 获取向量
+#### 通过 ID 获取向量
 
 您也可以根据向量 ID 获取向量， 目前仅支持一次获取单条向量，暂不支持批量获取：
 
@@ -210,7 +210,7 @@ sidebar_label: Learn Milvus Operations
 
 ## 在集合/分区中搜索向量
 
-### 在集合中搜索向量
+#### 在集合中搜索向量
 
 1. 创建搜索参数。搜索参数是一个 JSON 字符串，在 Python SDK 中以字典来表示。
 
@@ -236,7 +236,7 @@ sidebar_label: Learn Milvus Operations
    >>> milvus.search(collection_name='test01', query_records=q_records, top_k=2, params=search_param)
    ```
 
-### 在分区中搜索向量
+#### 在分区中搜索向量
 
 ```python
 # create 5 vectors of 32-dimension

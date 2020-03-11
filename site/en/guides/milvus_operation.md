@@ -36,7 +36,7 @@ You can also use other clients, including [Java](https://github.com/milvus-io/mi
 
 ## Create/Drop collections
 
-### Create a collection
+#### Create a collection
 
 1. Prepare collection parameters.
 
@@ -52,7 +52,7 @@ You can also use other clients, including [Java](https://github.com/milvus-io/mi
    >>> milvus.create_collection(param)
    ```
 
-### Acquire statistical information of a collection
+#### Acquire statistical information of a collection
 
 You can use the following command to acquire the statistical information of a collection, including the number of vectors in a collection/partition/segment and storage usage.
 
@@ -62,7 +62,7 @@ You can use the following command to acquire the statistical information of a co
 
 > Note：Refer to [this link](https://github.com/milvus-io/pymilvus/blob/master/examples/example_vectors.py) for more information.
 
-### Drop a collection
+#### Drop a collection
 
 ```python
 # Drop collection
@@ -71,7 +71,7 @@ You can use the following command to acquire the statistical information of a co
 
 ## Create/Drop partitions in a collection
 
-### Create a partition
+#### Create a partition
 
 You can split collections into partitions by partition tags for improved search performance. Each partition is also a collection.
 
@@ -87,7 +87,7 @@ Use `show_partitions()` to verify whether the partition is created.
 >>> milvus.show_partitions(collection_name='test01')
 ```
 
-### Drop a partition
+#### Drop a partition
 
 ```python
 >>> milvus.drop_partition(collection_name='test01', partition_tag='tag01')
@@ -95,7 +95,7 @@ Use `show_partitions()` to verify whether the partition is created.
 
 ## Create/Drop indexes in a collection
 
-### Create an index
+#### Create an index
 
 > Note: In production, it is recommended to create indexes before inserting vectors into the collection. Index is automatically built when vectors are being imported. However, you need to create the same index again after the vector insertion process is completed because some data files may not meet the `index_file_size` and index will not be automatically built for these data files. Refer to [example programs](https://github.com/milvus-io/pymilvus/tree/master/examples/indexes) to learn more about how to create indexes.
 
@@ -124,7 +124,7 @@ Use `show_partitions()` to verify whether the partition is created.
    >>> milvus.create_index('test01', IndexType.IVF_FLAT, ivf_param)
    ```
 
-### Drop an index
+#### Drop an index
 
 ```python
 >>> milvus.drop_index('test01')
@@ -132,7 +132,7 @@ Use `show_partitions()` to verify whether the partition is created.
 
 ## Insert/Delete vectors in collections/partitions
 
-### Insert vectors in a collection
+#### Insert vectors in a collection
 
 1. Generate 20 vectors of 256 dimension.
 
@@ -156,7 +156,7 @@ Use `show_partitions()` to verify whether the partition is created.
    >>> milvus.insert(collection_name='test01', records=vectors, ids=vector_ids)
    ```
 
-### Insert vectors in a partition
+#### Insert vectors in a partition
 
 ```python
 >>> milvus.insert('test01', vectors, partition_tag="tag01")
@@ -168,7 +168,7 @@ To verify the vectors you have inserted, use `get_vector_by_id()`. Assume you ha
 >>> status, vector = milvus.get_vector_by_id(collection_name='test01', vector_id=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19])
 ```
 
-### Delete vectors by ID
+#### Delete vectors by ID
 
 Assume you have some vectors with the following IDs:
 
@@ -200,7 +200,7 @@ A segment is a data file that Milvus automatically creates by merging inserted v
 
 ## Search vectors in collections/partitions
 
-### Search vectors in a collection
+#### Search vectors in a collection
 
 1. Prepare search parameters.
 
@@ -227,7 +227,7 @@ A segment is a data file that Milvus automatically creates by merging inserted v
    >>> milvus.search(collection_name='test01', query_records=q_records, top_k=2, params=search_param)
    ```
 
-### Search vectors in a partition
+#### Search vectors in a partition
 
 ```python
 # create 5 vectors of 32-dimension
