@@ -198,12 +198,12 @@ Add a Japanese version of README file. (from an external contributor)
 
 **Release date**: 2019-11-04
 
-### Features
+#### Features
 
 - Start supporting GPU-only mode for `IVF_SQ8` and `IVFFLAT` index types.
 - Add configuration parameter `gpu_search_threshold` to control GPU-only execution trigger point.
 
-### Enhancements
+#### Enhancements
 
 - Reduce memory footprint of queries.
 - Optimize query performance to achieve unfluctuating search speed.
@@ -224,7 +224,7 @@ Add a Japanese version of README file. (from an external contributor)
 
 ----------
 
-# v0.4.0
+## v0.4.0
 
 **Release date**: 2019-09-11
 

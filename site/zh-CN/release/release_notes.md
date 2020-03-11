@@ -129,7 +129,7 @@ sidebar_label: 发版说明
 
   支持使用多张 GPU 来创建索引以减少创建索引和整体查询的时间。您可以通过对 Milvus 配置文件中的参数 `build_index_resources` 来指定用于创建索引的 GPU 卡。[#414](https://github.com/milvus-io/milvus/pull/414)
   
-### Bug 修复
+#### Bug 修复
 
 - 进一步解决了随查询次数增加，内存占用持续增加的问题。[#335](https://github.com/milvus-io/milvus/pull/335)
 
@@ -184,7 +184,7 @@ sidebar_label: 发版说明
 
 **发布时间**：2019-11-07
 
-### Bug 修复
+#### Bug 修复
 
 新增了文件名检查的系统锁，避免生成重复的数据文件名。解决了由于重复文件名而误删文件导致的搜索失败问题。
 
@@ -266,7 +266,7 @@ sidebar_label: 发版说明
 
 ## v0.3.0
 
-## 2019-06-30
+**发布时间**：2019-06-30
 
 #### 新增功能
 
