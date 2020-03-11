@@ -6,7 +6,7 @@ sidebar_label: Other Feature Vector Search Tools
 
 # 其他特征向量检索工具
 
-目前，市场上的特征向量检索工具主要包括以下几种：
+下面列出了几种现有的向量检索工具：
 
 ## FAISS
 
