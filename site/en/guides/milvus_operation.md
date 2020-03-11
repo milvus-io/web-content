@@ -179,7 +179,7 @@ Assume you have some vectors with the following IDs:
 You can delete these vectors by:
 
 ```python
->>> milvus.delete_by_id(collection_name='test01', ids)
+>>> milvus.delete_by_id(collection_name='test01', id_array=ids)
 ```
 
 ## Flush data in one or multiple collections to disk
