@@ -1,5 +1,4 @@
 ---
-
 id: milvus_operation.md
 title: Learn Milvus Operations
 sidebar_label: Learn Milvus Operations
@@ -7,13 +6,12 @@ sidebar_label: Learn Milvus Operations
 
 # Learn Milvus Operations
 
-This page walks you through some basic Milvus operations using the [**Python** SDK](https://github.com/milvus-io/pymilvus).
+This page walks you through some basic Milvus operations using the [Python client](https://github.com/milvus-io/pymilvus). Refer to [Python API documentation](https://github.com/milvus-io/pymilvus) for detailed information.
 
-You can also use other languages such as [Java](https://github.com/milvus-io/milvus-sdk-java), [C++](https://github.com/milvus-io/milvus/tree/master/sdk), etc.
+You can also use other clients, including [Java](https://github.com/milvus-io/milvus-sdk-java), [C++](https://github.com/milvus-io/milvus/tree/master/sdk), [Go](https://github.com/milvus-io/milvus-sdk-go), and [RESTful](https://github.com/milvus-io/milvus/tree/master/core/src/server/web_impl).
 
-## Before trying out these operations
 
-Please use pymilvus, the built-in Python client, to try out these operations.
+## Connect to the Milvus server
 
 1. Import pymilvus.
 
@@ -22,251 +20,227 @@ Please use pymilvus, the built-in Python client, to try out these operations.
    >>> from milvus import Milvus, IndexType, MetricType, Status
    ```
 
-2. Connect to Milvus on your local server by using one of the following methods:
+2. Connect to Milvus server by using one of the following methods:
 
    ```python
    # Connect to Milvus server
    >>> milvus = Milvus()
    >>> milvus.connect(host='localhost', port='19530')
-   Status(message='connected!', code=0)
    ```
 
    > Note: In the above code, default values are used for `host` and `port` parameters. Feel free to change them to the IP address and port you set for Milvus server.
    
    ```python
    >>> milvus.connect(uri='tcp://localhost:19530')
-   Status(message='connected!', code=0)
    ```
 
-## Create a table
+## Create/Drop collections
 
-Assume we would create a table named test01. Read below parameters carefully and set values according to your requirements.
+#### Create a collection
 
-| Parameter               | Description                                                  | Type       | Reference value                   |
-| ----------------------- | ------------------------------------------------------------ | ---------- | --------------------------------- |
-| `table_name`            | The name of the table to create, which must be unique within its database. <br/>Begin a table name with a letter or an underscore (_) . Subsequent characters can be letters, underscores, numbers (0-9). The entire length can not exceed 255 characters. | String     | 'table name'                      |
-| `dimension`             | The dimension of the vectors that are to be inserted into the created table. | Integer    | （0, 16384]                       |
-| `index_file_size` | Threshold value that triggers index building for raw data files. Index creation is controlled by the size of raw data files specified in this parameter, with a default of 1024 MB. Data files with smaller sizes will not have indexes built. | Integer    | (0 MB, 4096 MB]                   |
-| `metric_type`           | The method vector distances are compared in Milvus. Available options are: Euclidean distance (L2) and inner product (IP). Default value is `MetricType.L2`. | MetricType | `MetricType.L2` / `MetricType.IP` |
-
-To create a table, use `milvus.create_table` followed by parameters that include the table name, vector dimension, and the index type:
-
-1. Prepare table parameters.
+1. Prepare collection parameters.
 
    ```python
-   # Prepare param
-   >>> param = {'table_name':'test01', 'dimension':256, 'index_file_size':1024, 'metric_type':MetricType.L2}
+   # Prepare collection parameters
+   >>> param = {'collection_name':'test01', 'dimension':256, 'index_file_size':1024, 'metric_type':MetricType.L2}
    ```
 
-2. Create Table test01.
+2. Create collection `test01` with dimension size as 256, size of the data file for Milvus to automatically create indexes as 1024, and metric type as Euclidean distance (L2).
 
    ```python
-   # Create a table
-   >>> milvus.create_table(param)
-   Status(message='Table test01 created!', code=0)
+   # Create a collection
+   >>> milvus.create_collection(param)
    ```
 
-3. Verify details of the newly created table.
+#### Acquire statistical information of a collection
 
-   ```python
-   # Verify table info.
-   >>> status, table = milvus.describe_table('test01')
-   >>> status
-   Status(message='Describe table successfully!')
-   >>> table
-   TableSchema(table_name='test01',dimension=256, index_file_size=1024, metric_type=<MetricType: L2>)
-   ```
-
-## List tables
-
-To see all active tables in the database, use `milvus.show_tables`:
+You can use the following command to acquire the statistical information of a collection, including the number of vectors in a collection/partition/segment and storage usage.
 
 ```python
->>> status, tables = milvus.show_tables()
->>> status
-Status(message='Show tables successfully!', code=0)
->>> tables
-['test01', 'others', ...]
+>>> milvus.collection_info('test01')
 ```
 
-To show the metadata of a particular table:
+> Note：Refer to [this link](https://github.com/milvus-io/pymilvus/blob/master/examples/example_vectors.py) for more information.
+
+#### Drop a collection
 
 ```python
->>> status, table = milvus.describe_table('test01')
->>> status
-Status(message='Describe table successfully!')
->>> table
-TableSchema(table_name='test01',dimension=256, index_file_size=1024, metric_type=<MetricType: L2>)
+# Drop collection
+>>> milvus.delete_collection(collection_name='test01')
 ```
 
-To show all the rows of a table, use `milvus.get_table_row_count` followed by the table name:
+## Create/Drop partitions in a collection
 
+#### Create a partition
+
+You can split collections into partitions by partition tags for improved search performance. Each partition is also a collection.
 
 ```python
-# Show table rows
->>> status, num = milvus.get_table_row_count('test01')
->>> status
-Status(code=0, message='Success')
->>> num
-20
+# Create partition
+>>> milvus.create_partition(collection_name='test01', partition_tag='tag01')
 ```
 
-To verify if a table exists in Milvus, use this command:
+Use `show_partitions()` to verify whether the partition is created.
 
 ```python
-<<<<<<< HEAD:site/en/guides/milvus_operation.md
->>> status, exists = milvus.has_table('test01')
->>> status     
-Status(code=0, message='Success')
->>> exists
-True	
+# Show partitions
+>>> milvus.show_partitions(collection_name='test01')
 ```
 
-> Note: If the table you verified is not available, the terminal returns `False`.
-
-
-## Insert vectors into a table
-
-
-> Note: In the production scenario, it is recommended to use the `milvus.create_index` before inserting vectors into the table. Index will be automatically built when vectors are being imported.  However, you need to create the same index again after the vector insertion process is completed because some data files may not meet the `index_file_size` and index will not be automatically built for these data files.
-
-Below is the list of parameters for inserting vectors into a table:
-
-| Parameter    | Description                                                  | Type                | Reference value        |
-| ------------ | ------------------------------------------------------------ | ------------------- | ---------------------- |
-| `table_name` | The name of the table to create, which must be unique within its database. <br/>Table name can only contain numbers, letters, and underscores. The first character of a table name must be an underscore or letter. The length of a table name must be less than 255 characters.  | String              | 'table name'           |
-| `records`    | The list of vectors to insert into the table. Each vector value must be **Float** data type and has the same dimension as the table. | 2-dimensional list | [[0.1, 0.2, ...], ...] |
-
-To insert a batch of vectors (represented by `records` in the code) into a table, use `milvus.add_vectors` followed by the table name and a comma-separated list of vectors. 
-
-If you don't have vectors available at hand, you can also use the randomly-generated vectors by below command. Assume we would generate 20 vectors of 256 dimension.
+#### Drop a partition
 
 ```python
->>> import random
-# Generate 20 vectors of 256 dimension
->>> vectors = [[random.random() for _ in range(dim)] for _ in range(20)]
+>>> milvus.drop_partition(collection_name='test01', partition_tag='tag01')
 ```
 
-Then insert the list of vectors. When succeeded, a group of vector ids will be returned.
+## Create/Drop indexes in a collection
 
-```python
-# Insert vectors
->>> status, ids = milvus.add_vectors(table_name='test01', records=vectors)
->>> status
-Status(code=0, message='Success')
->>> ids  # 20 ids returned
-23455321135511233
-12245748929023489
-...
-```
+#### Create an index
 
-You can also provide user-defined vector ids:
+> Note: In production, it is recommended to create indexes before inserting vectors into the collection. Index is automatically built when vectors are being imported. However, you need to create the same index again after the vector insertion process is completed because some data files may not meet the `index_file_size` and index will not be automatically built for these data files. Refer to [example programs](https://github.com/milvus-io/pymilvus/tree/master/examples/indexes) to learn more about how to create indexes.
 
-```python
->>> vector_ids = [id for id in range(20)]
->>> status, ids = milvus.add_vectors(table_name='test01', records=vectors, ids=vector_ids)
->>> print(ids)
-[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
-```
-
-To show the number of vectors inserted into a table (all of the rows from a table), use `milvus.get_table_row_count` followed by the table name.
-
-```python
-# Show number of vectors
->>> status, num = milvus.get_table_row_count('test01')
->>> status
-Status(code=0, message='Success')
->>> num
-20
-```
-
-## Create an index
-
-Below is the list of parameters for creating index for a table:
-
-| Parameter    | Description                                                  | Type      | Reference value                                              |
-| ------------ | ------------------------------------------------------------ | --------- | ------------------------------------------------------------ |
-| `index_type` | The type of indexing method to query the table. Please refer to [Index Types](../reference/index.md) for detailed introduction of supported indexes. | IndexType | `FLAT` / `IVFLAT` / `IVF_SQ8` / `IVF_SQ8H` |
-| `nlist`      | Number of vector buckets in a file. Default value is 16384.  | Integer   | > 0   |
-
-To create an index for the table, use `milvus.create_index` followed by parameters that include the table name, index type, and nlist.
-
-1. Prepare index parameters.
+1. Prepare index parameters. The following command uses `IVF_FLAT` index type as an example. The index parameters is a JSON string and represented by dict in Python.
 
    ```python
    # Prepare index param
-   >>> index_param = {'index_type': IndexType.IVFLAT, 'nlist': 16384}
+   >>> ivf_param = {'nlist': 16384}
    ```
 
-2. Create an index for the table.
+   > Note: For different index types, the required parameters for index building is also different. You **must** specify values for all index parameters.
+
+      | Index type    | Index parameters | Example                                                                | Value range               |
+      | --------------------- | ------------ | ----------------------------------------------------------------------- | -------------------- |
+      | `FLAT`/`IVFLAT`/`SQ8` | `nlist`：Number of clusters from the vector data file when Milvus performs clustering operation for index creation. The index file records the results of the clustering operation, including index type, central vector of each cluster, and the vectors in each cluster, for later search operations.      | `{nlist: 16384}`                                                        | `nlist`：[1, 999999] |
+      | `IVFPQ`               | `nlist`：Number of clusters from the vector data file when Milvus performs clustering operation for index creation. The index file records the results of the clustering operation, including index type, central vector of each cluster, and the vectors in each cluster, for later search operations. </br></br> `m`：Compression ratio during index creation. The smaller `m` is, the higher the compression ratio. | `{nlist: 16384, m: 12}`                                                 | `nlist`：[1, 999999] </br></br> `m`: one of {96, 64, 56, 48, 40, 32, 28, 24, 20, 16, 12, 8, 4, 3, 2, 1} |
+      | `NSG`                 | `search_length`：The higher the value, the more nodes are searched in the graph, the higher the recall rate, but the slower the search speed. It is recommended that `search_length` is smaller than `candidate_pool` and in range [40, 80]。</br></br> `out_degree`：The higher the value, the higher the memory usage, and the better search performance.</br></br> `candidate_pool`：Affects index quality and is suggested to be in range [200, 500]. </br></br> `knng`：Affects index quality and is suggested to be `out_degree` + 20.             | `{search_length: 45, out_degree:50, candidate_pool_size:300, knng:100}` |  `search_length range`: [10, 300]</br></br>`out_degree`: [5, 300]</br></br>`candidate_pool_size`: [50, 1000]</br></br>`knng`: [5, 300]                |
+      | `HNSW`                |   `M`：Affects index build time and index quality. The higher the value, the longer it costs to build an index, the higher the index quality, and the higher the memory usage.  </br></br> `efConstruction`：Affects index build time and index quality. The higher the value, the longer it costs to build and index, the higher the index quality, and the higher the memory usage.  | `{M: 16, efConstruction:500}`   |    `M` :[5, 48]</br></br>`efConstruction` :[100, 500]                |
+
+   Refer to [Milvus Indexes](index.md) for more information。
+
+2. Create an index for the collection.
 
    ```python
    # Create index
-   >>> milvus.create_index('test01', index_param)
-   Status(code=0, message='Build index successfully!')
+   >>> milvus.create_index('test01', IndexType.IVF_FLAT, ivf_param)
    ```
 
-To show index information of a table, use `milvus.describe_index` followed by the table name:
-
-```python
-# Show index info
->>> milvus.describe_index('test01')
->>> status
-Status(code=0, message='Success'), IndexParam(table_name='test01', index_type=<IndexType: IVFLAT>, nlist=16384)
-```
-
-To drop an index, use below command:
+#### Drop an index
 
 ```python
 >>> milvus.drop_index('test01')
->>> status
-Status(code=0, message='Success')
 ```
 
-## Search vectors in a table
+## Insert/Delete vectors in collections/partitions
 
-Below is the list of parameters for searching vectors in a table:
+#### Insert vectors in a collection
 
-| Parameter                 | Description                                                  | Type                                  | Reference value                     |
-| ------------------------- | ------------------------------------------------------------ | ------------------------------------- | ----------------------------------- |
-| `table_name`              | The name of the table to create, which must be unique within its database. <br/>Table name can only contain numbers, letters, and underscores. The first character of a table name must be an underscore or letter. The length of a table name must be less than 255 characters. | String                                | 'table name'                        |
-| `query_records`           | The list of query vectors to be searched in the table. Each vector value must be float data type, with the same dimension as that defined for the table. | 2-dimensional list                    | [[0.1, 0.2, ...], ...]              |
-| `top_k`                   | The top k most similar results of each query vector.         | Integer                               | (0, 2048]                           |
-| `nprobe`                  | Number of queried vector buckets. <br/>`nprobe` affects search precision. The greater the value, the more precise the result, yet the slower the search speed. | Integer                               | [1, `nlist`]                          |
+1. Generate 20 vectors of 256 dimension.
 
-> Note: Currently, only date range is supported in `query_ranges`. The date format is 'yyyy-mm-dd'. The date range [2019.1.1, 2019.1.5] contains 2019.1.1 and 2019.1.5.
+   ```python
+   >>> import random
+   # Generate 20 vectors of 256 dimension
+   >>> vectors = [[random.random() for _ in range(dim)] for _ in range(20)]
+   ```
 
-To search a batch of vectors, use `milvus.search_vectors` followed by the table from which to retrieve the data, the query vectors, and the number of vectors that will be returned for each query vector.
+2. Insert the list of vectors. If you do not specify vector ids, Milvus automatically generates IDs for the vectors.
 
-Suppose you want to search the top 2 most similar vectors of three 256-dimensional vectors (represented by `query_records` in below codes), you may:
+   ```python
+   # Insert vectors
+   >>> milvus.insert(collection_name='test01', records=vectors)
+   ```
+
+   Alternatively, you can also provide user-defined vector ids:
+
+   ```python
+   >>> vector_ids = [id for id in range(20)]
+   >>> milvus.insert(collection_name='test01', records=vectors, ids=vector_ids)
+   ```
+
+#### Insert vectors in a partition
 
 ```python
-# Search 3 vectors
->>> status, results = milvus.search_vectors(table_name='test01', query_records=q_records, top_k=2, nprobe=16)
->>> status
-Status(message='Search vectors successfully!', code=0)
->>> results # Searched top_k vectors
->>> print(results) # Searched top_k vectors
-[
-[(id:15, distance:2.855304718017578),
- (id:16, distance:3.040700674057007)],
-[(id:11, distance:3.673950433731079),
- (id:15, distance:4.183730602264404)],
-      ........
-[(id:6, distance:4.065953254699707),
- (id:1, distance:4.149323463439941)]
-]
+>>> milvus.insert('test01', vectors, partition_tag="tag01")
 ```
 
-## Drop a table
-
-When you no longer need a table, use `milvus.delete_table` followed by the table name to remove the table and all its data:
+To verify the vectors you have inserted, use `get_vector_by_id()`. Assume you have some vectors with the following IDs.
 
 ```python
-# Drop table
->>> milvus.delete_table(table_name='test01')
->>> status
-Status(message='Delete table successfully!', code=0)
+>>> status, vector = milvus.get_vector_by_id(collection_name='test01', vector_id=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19])
+```
+
+#### Delete vectors by ID
+
+Assume you have some vectors with the following IDs:
+
+```python
+>>> ids = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+```
+
+You can delete these vectors by:
+
+```python
+>>> milvus.delete_by_id(collection_name='test01', ids)
+```
+
+## Flush data in one or multiple collections to disk
+
+When performing operations related to data changes, you can flush the data from memory to disk to avoid possible data loss. Milvus also supports automatic flushing, which runs at a fixed interval to flush the data in all collections to disk. You can use the [Milvus server configuration file](../reference/milvus_config.md) to set the interval.
+
+```python
+>>> milvus.flush(collection_name_array=['test01'])
+```
+
+## Compact all segments in a collection
+
+A segment is a data file that Milvus automatically creates by merging inserted vector data. A collection can contain multiple segments. If some vectors are deleted from a segment, the space taken by the deleted vectors cannot be released automatically. You can compact segments in a collection to release space.
+
+```python
+>>> milvus.compact(collection_name='test01', timeout='1')
+```
+
+## Search vectors in collections/partitions
+
+#### Search vectors in a collection
+
+1. Prepare search parameters.
+
+   ```python
+   >>> search_param = {'nprobe': 16}
+   ```
+
+   > Note: For different index types, search parameters also differs. You **must** assign values to all search parameters.
+
+      | Index type          | Search parameters     | Example                                                | Value range              |
+      | --------------------- | ------------ | ----------------------------------------------------------------------- | -------------------- |
+      |  `FLAT`/`IVFLAT`/`SQ8`/`IVFPQ` | `nprobe`：Number of classes of vectors to search. `nprobe` affects search precision. The higher the value, the higher the precision, but the lower the search speed. | `{nprobe: 32}`|  [1, `nlist`]   |
+      |  `NSG` | `search_length`：The higher the value, the more number of nodes are searched in the graph and the higher the recall rate, but the lower the search speed. | `{search_length:100}`|  [10, 300]   |
+      |  `HNSW` | `ef`：The higher the value, the more data is searched in the index and the higher the recall rate, but the lower the search speed.| `{ef: 64}`|  [`topk`, 4096]   |
+
+   > Note: `top_k` stands for the number of vectors that are the most similar to the target vector. `top_k` is defined during search.
+
+2. Search vectors.
+
+   ```python
+   # create 5 vectors of 32-dimension
+   >>> q_records = [[random.random() for _ in range(dim)] for _ in range(5)]
+   # search vectors
+   >>> milvus.search(collection_name='test01', query_records=q_records, top_k=2, params=search_param)
+   ```
+
+#### Search vectors in a partition
+
+```python
+# create 5 vectors of 32-dimension
+>>> q_records = [[random.random() for _ in range(dim)] for _ in range(5)]
+>>> milvus.search(collection_name='test01', query_records=q_records, top_k=1, partition_tags=['tag01'], params=search_param)
+```
+
+> Note: If you do not specify `partition_tags`, Milvus searches the whole collection.
+
+## Disconnect from the Milvus server
+
+```python
+>>> milvus.disconnect()
 ```
 
 ## What's next

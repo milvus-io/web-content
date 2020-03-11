@@ -28,7 +28,7 @@ sidebar_label: Install GPU-enabled Milvus on Docker
 
 - 在您的宿主机上 [安装 Docker](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/) 19.03 或更高版本。
 - 安装 NVIDIA driver 418 或更高版本。
-- [安装 NVIDIA Docker](https://github.com/NVIDIA/nvidia-docker)
+- [安装 NVIDIA Docker](https://github.com/NVIDIA/nvidia-docker)。
 
 ## 第一步 确认 Docker 状态
 
@@ -47,19 +47,27 @@ $ docker info
 拉取支持 GPU 的镜像：
 
 ```shell
-$ docker pull milvusdb/milvus:0.6.0-gpu-d120719-2b40dd
+$ docker pull milvusdb/milvus:0.7.0-gpu-d031120-40c7e8
 ```
-## 第三步 下载配置文件
 
-```
+> 注意：如果您在拉取镜像时速度过慢或一直失败，请参考[操作常见问题](../../../faq/operational_faq.md)中提供的解决办法。
+
+## 第三步 下载并修改配置文件
+
+您可以使用以下方法下载配置文件：
+
+```shell
 # Create Milvus file
 $ mkdir -p /home/$USER/milvus/conf
-$ cd /home/$USER/milvus/conf
-$ wget https://raw.githubusercontent.com/milvus-io/docs/v0.6.0/assets/config/server_config.yaml
-$ wget https://raw.githubusercontent.com/milvus-io/docs/v0.6.0/assets/config/log_config.conf
+$ cd home/$USER/milvus/conf
+$ wget https://raw.githubusercontent.com/milvus-io/milvus/v0.7.0/core/conf/demo/server_config.yaml
+$ wget https://raw.githubusercontent.com/milvus-io/milvus/v0.7.0/core/conf/demo/log_config.conf
 ```
 
-> 注意：万一您遇到无法通过 `wget` 命令正常下载配置文件的情况，您也可以在 `/home/$USER/milvus/conf` 路径下创建 `server_config.yaml` 和 `log_config.conf` 文件，然后复制粘贴 [server config 文件](https://github.com/milvus-io/docs/blob/v0.6.0/assets/config/server_config.yaml) 和 [log config 文件](https://github.com/milvus-io/docs/blob/v0.6.0/assets/config/log_config.conf)的内容。
+> 注意：万一您遇到无法通过 `wget` 命令正常下载配置文件的情况，您也可以在 `/home/$USER/milvus/conf` 路径下创建 `server_config.yaml` 和 `log_config.conf` 文件，然后复制粘贴 [server config 文件](https://github.com/milvus-io/milvus/blob/v0.7.0/core/conf/demo/server_config.yaml) 和 [log config 文件](https://github.com/milvus-io/milvus/blob/v0.7.0/core/conf/demo/log_config.conf)的内容。
+
+配置文件下载完成后，您需要将 `server_config.yaml` 中的 `gpu_resource_config` 部分的 `enable` 参数设置为 `true`。
+
 
 ## 第四步 启动 Milvus Docker 容器
 
@@ -67,20 +75,22 @@ $ wget https://raw.githubusercontent.com/milvus-io/docs/v0.6.0/assets/config/log
 # Start Milvus
 $ docker run -d --name milvus_gpu --gpus all \
 -p 19530:19530 \
--p 8080:8080 \
+-p 19121:19121 \
+-p 9091:9091 \
 -v /home/$USER/milvus/db:/var/lib/milvus/db \
 -v /home/$USER/milvus/conf:/var/lib/milvus/conf \
 -v /home/$USER/milvus/logs:/var/lib/milvus/logs \
-milvusdb/milvus:0.6.0-gpu-d120719-2b40dd
+-v /home/$USER/milvus/wal:/var/lib/milvus/wal \
+milvusdb/milvus:0.7.0-gpu-d031120-40c7e8
 ```
 
 上述命令中用到的 `docker run` 参数定义如下：
 
 - `-d`: 运行 container 到后台并打印 container id。
 - `--name`: 为 container 分配一个名字。
-- `--gpus`: 指定可用的 GPU。如未填写任何值，则所有GPU都可用。
+- `--gpus`: 指定可用的 GPU。如未填写任何值，则所有 GPU 都可用。
 - `-p`: 暴露 container 端口到 host。
-- `-v`: 绑定挂载卷。
+- `-v`: 将路径挂载至 container。
 
 最后，确认 Milvus 运行状态：
 

@@ -30,7 +30,7 @@
     },
   {
       "id": "traditional_db.md",
-      "title": "传统数据库与特征向量搜索",
+      "title": "传统数据库与特征向量检索",
       "lang": "en",
       "label1": "about_milvus",
       "label2": null,
@@ -123,12 +123,30 @@
     },
     {
       "id": "milvus_operation.md",
-      "title": "了解 Milvus 操作",
+      "title": "Milvus 基本操作",
       "lang": "en",
       "label1": "guides",
       "label2": "",
       "label3": "",
       "order": 1
+    },
+    {
+      "id": "metric.md",
+      "title": "选择距离计算方式",
+      "lang": "en",
+      "label1": "guides",
+      "label2": "",
+      "label3": "",
+      "order": 2
+    },
+    {
+      "id": "index.md",
+      "title": "索引类型",
+      "lang": "en",
+      "label1": "guides",
+      "label2": "",
+      "label3": "",
+      "order": 3
     },
     {
       "id": "monitor.md",
@@ -137,7 +155,7 @@
       "label1": "guides",
       "label2": "",
       "label3": "",
-      "order": 2
+      "order": 5
     },
     {
       "id": "troubleshoot.md",
@@ -146,7 +164,7 @@
       "label1": "guides",
       "label2": "",
       "label3": "",
-      "order": 3
+      "order": 6
     },
     
     {
@@ -160,15 +178,6 @@
       "isMenu": true
     },
     {
-      "id": "comparison.md",
-      "title": "对比 FAISS 和 SPTAG",
-      "lang": "en",
-      "label1": "reference",
-      "label2": "",
-      "label3": "",
-      "order": 0
-    },
-    {
       "id": "milvus_config.md",
       "title": "配置",
       "lang": "en",
@@ -178,31 +187,13 @@
       "order": 1
     },
     {
-      "id": "index.md",
-      "title": "索引类型",
-      "lang": "en",
-      "label1": "reference",
-      "label2": "",
-      "label3": "",
-      "order": 2
-    },
-    {
       "id": "data_manage.md",
       "title": "数据管理",
       "lang": "en",
       "label1": "reference",
       "label2": "",
       "label3": "",
-      "order": 3
-    },
-    {
-      "id": "partition.md",
-      "title": "分区表",
-      "lang": "en",
-      "label1": "reference",
-      "label2": "",
-      "label3": "",
-      "order": 4
+      "order": 2
     },
     {
       "id": "monitoring_metrics.md",
@@ -211,7 +202,7 @@
       "label1": "reference",
       "label2": "",
       "label3": "",
-      "order": 5
+      "order": 3
     },
     {
       "id": "sdk.md",
@@ -220,7 +211,7 @@
       "label1": "reference",
       "label2": null,
       "label3": null,
-      "order": 6
+      "order": 4
     },
     {
       "id": "application.md",
@@ -228,7 +219,7 @@
       "lang": "en",
       "label1": "reference",
       "label2": "",
-      "order": 7
+      "order": 5
     },
     {
       "id": "faq",
@@ -277,7 +268,7 @@
     },
     {
       "id": "releases",
-      "title": "版本说明",
+      "title": "发版说明",
       "lang": "en",
       "label1": "",
       "label2": "",
@@ -286,8 +277,8 @@
       "isMenu": true
     },
     {
-      "id": "v0.6.0.md",
-      "title": "v0.6.0",
+      "id": "release_notes.md",
+      "title": "发版说明",
       "lang": "en",
       "label1": "releases",
       "label2": "",

@@ -1,17 +1,17 @@
 ---
 id: sdk.md
-title: SDK
-sidebar_label: SDK
+title: 客户端
+sidebar_label: 客户端
 ---
 
-# SDK 参考
+# 客户端参考
 
-Milvus 支持以下类型的 SDK: 
+Milvus 支持以下类型的客户端:
 
-- [Java SDK](https://github.com/milvus-io/milvus-sdk-java)
+- [Java](https://github.com/milvus-io/milvus-sdk-java)
+- [Python](https://github.com/milvus-io/pymilvus)
+- [C++](https://github.com/milvus-io/milvus/tree/master/sdk)
+- [Go](https://github.com/milvus-io/milvus-sdk-go)
+- [RESTful](https://github.com/milvus-io/milvus/tree/master/core/src/server/web_impl)
 
-- [Python SDK](https://github.com/milvus-io/pymilvus)
-
-- [C++ SDK](https://github.com/milvus-io/milvus/tree/master/sdk)
-
-
+您可以使用相应的 SDK/API 开发 Milvus 客户端。

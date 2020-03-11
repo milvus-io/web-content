@@ -47,34 +47,40 @@ If you do not see the server listed, start the **Docker** daemon.
 Pull the GPU-enabled image:
 
 ```shell
-$ docker pull milvusdb/milvus:0.6.0-gpu-d120719-2b40dd
+$ docker pull milvusdb/milvus:0.7.0-gpu-d031120-40c7e8
 ```
+
+> Note: If the pulling speed is too slow or the pulling process constantly fails, refer to [Operational FAQ](../../../faq/operational_faq.md) for possible solutions.
 
 ## Step 3 Download configuration files
 
 ```shell
 # Create Milvus file
 $ mkdir -p /home/$USER/milvus/conf
-$ cd /home/$USER/milvus/conf
-$ wget https://raw.githubusercontent.com/milvus-io/docs/v0.6.0/assets/config/server_config.yaml
-$ wget https://raw.githubusercontent.com/milvus-io/docs/v0.6.0/assets/config/log_config.conf
+$ cd home/$USER/milvus/conf
+$ wget https://raw.githubusercontent.com/milvus-io/milvus/v0.7.0/core/conf/demo/server_config.yaml
+$ wget https://raw.githubusercontent.com/milvus-io/milvus/v0.7.0/core/conf/demo/log_config.conf
 ```
 
-> Note: In case you encounter problems downloading configuration files using `wget` command, you can also create the `server_config.yaml` and `log_config.conf` files under `/home/$USER/milvus/conf`, then copy and paste the content from [server config file](https://github.com/milvus-io/docs/blob/v0.6.0/assets/config/server_config.yaml) and [log config file](https://github.com/milvus-io/docs/blob/v0.6.0/assets/config/log_config.conf).
+> Note: In case you encounter problems downloading configuration files using `wget` command, you can also create the `server_config.yaml` and `log_config.conf` files under `/home/$USER/milvus/conf`, then copy and paste the content from [server config file](https://github.com/milvus-io/milvus/blob/v0.7.0/core/conf/demo/server_config.yaml) and [log config file](https://github.com/milvus-io/milvus/blob/v0.7.0/core/conf/demo/log_config.conf).
+
 
 ## Step 4 Start Docker container
+
+Before starting the Docker container, you must set `enable` to `true` in `gpu_resource_config` section of `server_config.yaml`.
 
 ```shell
 # Start Milvus
 $ docker run -d --name milvus_gpu --gpus all \
 -p 19530:19530 \
--p 8080:8080 \
+-p 19121:19121 \
+-p 9091:9091 \
 -v /home/$USER/milvus/db:/var/lib/milvus/db \
 -v /home/$USER/milvus/conf:/var/lib/milvus/conf \
 -v /home/$USER/milvus/logs:/var/lib/milvus/logs \
-milvusdb/milvus:0.6.0-gpu-d120719-2b40dd
+-v /home/$USER/milvus/wal:/var/lib/milvus/wal \
+milvusdb/milvus:0.7.0-gpu-d031120-40c7e8
 ```
-
 
 The `docker run` options used in the above command are defined as follows:
 
@@ -82,9 +88,9 @@ The `docker run` options used in the above command are defined as follows:
 - `--name`: assign a name to the container
 - `--gpus`: GPU devices to add to the container (‘all’ to pass all GPUs)
 - `-p`: publish a container’s port(s) to the host
-- `-v`: bind mount a volume
+- `-v`: mounts a directory into the container
 
-Finally confirm Milvus running status by the following command:
+Confirm Milvus running status by the following command:
 
 ```shell
 # Confirm Milvus status
