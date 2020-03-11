@@ -29,11 +29,13 @@ The following graph shows how Prometheus works in Milvus:
 
 ![prometheus](https://raw.githubusercontent.com/milvus-io/docs/v0.7.0/assets/monitoring/monitoring.png)
 
+
 - Grafana
 
   Grafana is an open source platform for time-series analytics and used in Milvus to visualize various performance metrics:
 
   ![dashboard](https://raw.githubusercontent.com/milvus-io/docs/v0.7.0/assets/prometheus.png)
+
 
 ### Events to create alert rules
 
@@ -77,6 +79,7 @@ Milvus generates detailed time series metrics. This page shows you how to pull t
 
    ```shell
    $ wget https://raw.githubusercontent.com/milvus-io/docs/v0.7.0/assets/monitoring/prometheus.yml \ -O prometheus.yml
+
    ```
 
 2. Configure the file to suit your requirements. Refer to [https://prometheus.io/docs/prometheus/latest/configuration/configuration/](https://prometheus.io/docs/prometheus/latest/configuration/configuration/) to learn more about the configuration file for Prometheus.
@@ -87,6 +90,7 @@ Milvus generates detailed time series metrics. This page shows you how to pull t
 
    ```shell
    wget -P rules https://raw.githubusercontent.com/milvus-io/docs/v0.7.0/assets/monitoring/alert_rules.yml
+
    ```
 
 ### Start Prometheus
@@ -128,6 +132,7 @@ Refer to [https://github.com/prometheus/pushgateway](https://github.com/promethe
 
    ```shell
    $ wget https://raw.githubusercontent.com/milvus-io/docs/v0.7.0/assets/monitoring/dashboard.json
+
    ```
 
 6. [Add the dashboard to Grafana](http://docs.grafana.org/reference/export_import/#importing-a-dashboard).

@@ -49,7 +49,7 @@ Users in some countries may have limited access to dockerhub. In this case, you 
 
 Although the reasons may vary, the most possible cause could be environmental issues, such as incompatible versions, missing dependencies, etc. Refer to [Install Milvus from Source Code](https://github.com/milvus-io/milvus/blob/master/INSTALL.md) for more information.
 
-It is recommended that you use the docker images with the Milvus compilation environment. Refer to [How to build Milvus from source in the Docker container?](#how-to-build-milvus-from-source-in-the-docker-container) to learn how to compile Milvus with the docker images.
+It is recommended that you use the docker images with the Milvus compilation environment. Refer to [How to build Milvus from source in the Docker container?](#How-to-build-Milvus-from-source-in-the-Docker-container) to learn how to compile Milvus with the docker images.
 
 #### Does Milvus support insert, delete, update, and query operations for vectors?
 
