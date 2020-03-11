@@ -73,6 +73,7 @@ $ wget https://raw.githubusercontent.com/milvus-io/milvus/v0.7.0/core/conf/demo/
 ```shell
 # Start Milvus
 $ docker run -d --name milvus_gpu --gpus all \
+-p 19530:19530 \
 -p 19121:19121 \
 -p 9091:9091 \
 -v /home/$USER/milvus/db:/var/lib/milvus/db \
