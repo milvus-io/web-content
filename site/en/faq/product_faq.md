@@ -8,6 +8,9 @@ sidebar_label: Product FAQ
 
 <!-- TOC -->
 
+- [Does Milvus 0.7.0 support data files from previous versions of Milvus?](#Does-Milvus-0.7.0-support-data-files-from-previous-versions-of-Milvus)
+- [Does Milvus 0.7.0 support server configuration files from previous versions of Milvus?](#Does-Milvus-0.7.0-support-server-configuration-files-from-previous-versions-of-Milvus)
+- [Does Milvus 0.7.0 support applications built by clients from previous versions of Milvus?](#Does-Milvus-0.7.0-support-applications-built-by-clients-from-previous-versions-of-Milvus)
 - [What is Milvus?](#What-is-Milvus)
 - [When is Milvus a good choice?](#When-is-Milvus-a-good-choice)
 - [How to use Milvus?](#How-to-use-Milvus)
@@ -23,6 +26,18 @@ sidebar_label: Product FAQ
 - [Have questions that were not answered?](#Have-questions-that-were-not-answered)
 
 <!-- /TOC -->
+
+#### Does Milvus 0.7.0 support data files from previous versions of Milvus?
+
+No. Milvus 0.7.0 cannot directly use data files from previous versions of Milvus. You must import data again.
+
+#### Does Milvus 0.7.0 support server configuration files from previous versions of Milvus?
+
+No, Milvus 0.7.0 does not support server configuration files (`server_config.yaml`) from previous versions of Milvus.
+
+#### Does Milvus 0.7.0 support applications built by clients from previous versions of Milvus?
+
+No. The client interface in Milvus 0.7.0 have been updated. Applications based on previous versions of Milvus must also be updated before they can support Milvus 0.7.0.
 
 #### What is Milvus?
 
