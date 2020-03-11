@@ -33,7 +33,7 @@ sidebar_label: Install CPU-only Milvus on Docker
 
 ## 在 Ubuntu/CentOS 上安装 Milvus
 
-### 第一步 确认 Docker 状态
+#### 第一步 确认 Docker 状态
 
 确认 Docker daemon 正在运行：
 
@@ -45,7 +45,7 @@ $ docker info
 
 > 提示：在 Linux 上，Docker 命令前面需加 `sudo`。若要在没有 `sudo` 情况下运行 Docker 命令，请创建 `docker` 组并添加用户。更多详情，请参阅 [Linux 安装后步骤](https://docs.docker.com/install/linux/linux-postinstall/)。
 
-### 第二步 拉取 Milvus 镜像
+#### 第二步 拉取 Milvus 镜像
 
 拉取仅需 CPU 的镜像：
 
@@ -55,7 +55,7 @@ $ docker pull milvusdb/milvus:0.6.0-cpu-d120719-2b40dd
 
 > 注意：如果您在拉取镜像时速度过慢或一直失败，请参考[操作常见问题](../../../faq/operational_faq.md)中提供的解决办法。
 
-### 第三步 下载配置文件
+#### 第三步 下载配置文件
 
 ```shell
 # Create Milvus file
@@ -67,7 +67,7 @@ $ wget https://raw.githubusercontent.com/milvus-io/milvus/0.7.0/core/conf/demo/l
 
 > 注意：万一您遇到无法通过 `wget` 命令正常下载配置文件的情况，您也可以在 `/home/$USER/milvus/conf` 路径下创建 `server_config.yaml` 和 `log_config.conf` 文件，然后复制粘贴 [server config 文件](https://github.com/milvus-io/milvus/blob/0.7.0/core/conf/demo/server_config.yaml) 和 [log config 文件](https://github.com/milvus-io/milvus/blob/0.7.0/core/conf/demo/log_config.conf)的内容。
 
-### 第四步 启动 Milvus Docker 容器
+#### 第四步 启动 Milvus Docker 容器
 
 ```shell
 # Start Milvus
