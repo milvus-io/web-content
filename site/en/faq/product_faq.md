@@ -77,7 +77,7 @@ Please refer to [Index Types](../guides/index.md) for supported index methods.
 
 #### Does Milvus support simultaneous inserting and searching?
 
-Absolutely. You can simultaneously insert and search data in Milvus. If you want this function, it is recommended to set the parameter `cache_insert_data` to `true` in section `cache_config` at `home/$USER/milvus/conf/server_config.yaml`.
+Yes.
 
 #### Where are the data stored?
 

@@ -78,13 +78,13 @@ Milvus 提供了集群分片中间件 Mishards，可以实现集群分片部署�
 
 #### Milvus 是否支持 “边插入边查询” ？
 
-支持。如果您想在Milvus里边插入向量边查询，建议在 `home/$USER/milvus/conf/server_config.yaml` 下的 `cache_config` 区域，将参数 `cache_insert_data` 设置为 `True`。
+支持。 
 
 #### 数据存储在哪里？
 
 向量数据导入 Milvus 后，将自动存储在您的本地磁盘。元数据可以存储在 MySQL 或 SQLite 上。
 
-#### Milvus 与其他向量检索工具对比如何?
+#### Milvus 与其他向量检索工具对比如何？
 
 与其他向量检索工具对比，Milvus 是其中唯一高性能、易用性强的向量检索引擎，具备高可用、弹性扩展等特性。
 
