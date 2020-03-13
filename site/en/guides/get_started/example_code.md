@@ -23,7 +23,7 @@ After the Milvus server is successfully started, you can use this example progra
 
    ```shell
    # Download Python example
-   $ wget https://raw.githubusercontent.com/milvus-io/pymilvus/blob/0.7.0/examples/example.py
+   $ wget https://raw.githubusercontent.com/milvus-io/pymilvus/0.7.0/examples/example.py
    ```
    
     > Note: If you cannot use `wget` to download the example code, you can also create `example.py` and copy the [example code](https://github.com/milvus-io/pymilvus/blob/0.7.0/examples/example.py).
