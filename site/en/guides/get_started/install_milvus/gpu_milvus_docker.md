@@ -57,7 +57,7 @@ $ docker pull milvusdb/milvus:0.7.0-gpu-d031120-40c7e8
 ```shell
 # Create Milvus file
 $ mkdir -p /home/$USER/milvus/conf
-$ cd home/$USER/milvus/conf
+$ cd /home/$USER/milvus/conf
 $ wget https://raw.githubusercontent.com/milvus-io/milvus/v0.7.0/core/conf/demo/server_config.yaml
 $ wget https://raw.githubusercontent.com/milvus-io/milvus/v0.7.0/core/conf/demo/log_config.conf
 ```
