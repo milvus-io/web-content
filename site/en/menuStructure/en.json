@@ -284,6 +284,52 @@
       "label2": "",
       "label3": null,
       "order": 0
+    },
+    {
+      "id": "Milvus Admin",
+      "title": "Milvus Admin",
+      "lang": "en",
+      "label1": "",
+      "label2": "",
+      "label3": null,
+      "order": 0,
+      "isMenu": true
+    },
+    {
+      "id": "release_notes_admin.md",
+      "title": "Milvus Admin Release Notes",
+      "lang": "en",
+      "label1": "Milvus Admin",
+      "label2": "",
+      "label3": null,
+      "order": 0
+    },
+    {
+      "id": "install_admin.md",
+      "title": "Install Milvus Admin",
+      "lang": "en",
+      "label1": "Milvus Admin",
+      "label2": "",
+      "label3": null,
+      "order": 1
+    },
+    {
+      "id": "connect_to_admin.md",
+      "title": "Connect to Milvus Admin",
+      "lang": "en",
+      "label1": "Milvus Admin",
+      "label2": "",
+      "label3": null,
+      "order": 2
+    },
+    {
+      "id": "admin_operations.md",
+      "title": "Milvus Admin Operations",
+      "lang": "en",
+      "label1": "Milvus Admin",
+      "label2": "",
+      "label3": null,
+      "order": 3
     }
     
   ]
