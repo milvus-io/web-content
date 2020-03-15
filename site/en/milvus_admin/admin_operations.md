@@ -14,7 +14,7 @@ Select **Collection** in the **Collection** tab ![collection](assets/collection.
 
 Select **Collection** in the **Collection** tab ![collection](assets/collection.png) on the left. Click **CREATE INDEX**/**DELETE**. Refer to [Milvus Operations](../guides/milvus_operation.md) for parameter details.
 
-## Create/Delete collect partitions
+## Create/Delete partitions
 
 Select **Collection** in the **Collection** tab ![collection](assets/collection.png) on the left. Click **CREATE PARTITION**/**DELETE**. Refer to [Milvus Operations](../guides/milvus_operation.md) for parameter details.
 
