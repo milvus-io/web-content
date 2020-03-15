@@ -8,7 +8,7 @@ sidebar_label: Milvus Admin Operations
 
 ## Create/Delete collections
 
-Select **Collection** in the **Collection** tab ![collection](assets/collection.png) on the left. Click **CREATE COLLECTION**/**DELETE**. Refer to [Milvus Operations](../guides/milvus_operation.md) for parameter details.
+Select **Collections** in the **Collection** tab ![collection](assets/collection.png) on the left. Click **CREATE COLLECTION**/**DELETE**. Refer to [Milvus Operations](../guides/milvus_operation.md) for parameter details.
 
 ## Create/Delete indexes
 
