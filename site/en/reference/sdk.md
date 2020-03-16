@@ -13,5 +13,4 @@ Milvus supports the following clients:
 - [C++](https://github.com/milvus-io/milvus/tree/master/sdk)
 - [Go](https://github.com/milvus-io/milvus-sdk-go)
 - [RESTful](https://github.com/milvus-io/milvus/tree/master/core/src/server/web_impl)
-
-You can use the corresponding SDK/API to create Milvus clients.
+- [GUI](https://milvus.io/gui/)
