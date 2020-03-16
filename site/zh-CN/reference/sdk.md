@@ -13,5 +13,4 @@ Milvus 支持以下类型的客户端:
 - [C++](https://github.com/milvus-io/milvus/tree/master/sdk)
 - [Go](https://github.com/milvus-io/milvus-sdk-go)
 - [RESTful](https://github.com/milvus-io/milvus/tree/master/core/src/server/web_impl)
-
-您可以使用相应的 SDK/API 开发 Milvus 客户端。
+- [GUI](https://milvus.io/gui/)
