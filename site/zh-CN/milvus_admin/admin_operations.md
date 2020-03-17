@@ -6,21 +6,21 @@ sidebar_label: Milvus Admin 基本操作
 
 # Milvus Admin 基本操作
 
-## 创建/删除集合
+## 创建/删除 collection
 
-在左侧**集合**选项卡![collection](assets/collection.png)中选择**Collections**，点击**CREATE COLLECTION**/**DELETE**。相关参数请参考 [Milvus 基本操作](../guides/milvus_operation.md)。
+在左侧**collection**选项卡![collection](assets/collection.png)中选择**Collections**，点击**CREATE COLLECTION**/**DELETE**。相关参数请参考 [Milvus 基本操作](../guides/milvus_operation.md)。
 
 ## 创建/删除索引
 
-在左侧**集合**选项卡![collection](assets/collection.png)中选择集合名，点击**CREATE INDEX**/**DELETE**。相关参数请参考 [Milvus 基本操作](../guides/milvus_operation.md)。
+在左侧**collection**选项卡![collection](assets/collection.png)中选择 collection 名，点击**CREATE INDEX**/**DELETE**。相关参数请参考 [Milvus 基本操作](../guides/milvus_operation.md)。
 
 ## 创建/删除分区
 
-在左侧**集合**选项卡![collection](assets/collection.png)中选择集合名，点击**CREATE PARTITION**/**DELETE**。相关参数请参考 [Milvus 基本操作](../guides/milvus_operation.md)。
+在左侧**collection**选项卡![collection](assets/collection.png)中选择 collection 名，点击**CREATE PARTITION**/**DELETE**。相关参数请参考 [Milvus 基本操作](../guides/milvus_operation.md)。
 
 ## 插入/删除向量
 
-在左侧**集合**选项卡![collection](assets/collection.png)中选择分区名，点击**IMPORT VECTORS**/**DELETE**。相关参数请参考 [Milvus 基本操作](../guides/milvus_operation.md)。
+在左侧**Collection**选项卡![collection](assets/collection.png)中选择分区名，点击**IMPORT VECTORS**/**DELETE**。相关参数请参考 [Milvus 基本操作](../guides/milvus_operation.md)。
 
 ## 查询向量
 

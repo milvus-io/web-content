@@ -33,27 +33,27 @@ sidebar_label: Learn Milvus Operations
    >>> milvus.connect(uri='tcp://localhost:19530')
    ```
 
-## 创建/删除集合
+## 创建/删除 collection
 
-#### 创建集合
+#### 创建 collection 
 
-1. 准备创建集合所需参数。
+1. 准备创建 collection 所需参数。
 
    ```python
    # Prepare collection parameters
    >>> param = {'collection_name':'test01', 'dimension':256, 'index_file_size':1024, 'metric_type':MetricType.L2}
    ```
 
-2. 创建集合名为 `test01`， 维度为 256， 自动创建索引的数据文件大小为 1024 MB，距离度量方式为欧氏距离（L2）的集合。
+2. 创建 collection 名为 `test01`， 维度为 256， 自动创建索引的数据文件大小为 1024 MB，距离度量方式为欧氏距离（L2）的 collection 。
 
    ```python
    # Create a collection
    >>> milvus.create_collection(param)
    ```
 
-#### 获取集合的统计信息
+#### 获取 collection 的统计信息
 
-您可以调用如下接口查询集合的统计信息。查询结果的信息包含集合/分区/段的向量数量，存储使用量等信息。
+您可以调用如下接口查询 collection 的统计信息。查询结果的信息包含 collection /分区/ segment 的向量数量，存储使用量等信息。
 
 ```python
 >>> milvus.collection_info('test01')
@@ -61,18 +61,18 @@ sidebar_label: Learn Milvus Operations
 
 > 注意：参考[示例程序](https://github.com/milvus-io/pymilvus/blob/master/examples)获取更详细的使用方式。
 
-#### 删除集合
+#### 删除 collection
 
 ```python
 # Drop collection
 >>> milvus.drop_collection(collection_name='test01')
 ```
 
-## 在集合中创建/删除分区
+## 在 collection 中创建/删除分区
 
 #### 创建分区
 
-您可以通过标签将集合分割为若干个分区，从而提高搜索效率。每个分区实际上也是一个集合。
+您可以通过标签将 collection 分割为若干个分区，从而提高搜索效率。每个分区实际上也是一个 collection 。
 
 ```python
 # Create partition
@@ -85,7 +85,7 @@ sidebar_label: Learn Milvus Operations
 >>> milvus.drop_partition(collection_name='test01', partition_tag='tag01')
 ```
 
-## 在集合中创建/删除索引
+## 在 collection 中创建/删除索引
 
 #### 创建索引
 
@@ -109,7 +109,7 @@ sidebar_label: Learn Milvus Operations
 
    关于详细信息请参考 [Milvus 索引类型](index.md)。
 
-2. 为集合创建索引。
+2. 为 collection 创建索引。
 
    ```python
    # Create index
@@ -122,9 +122,9 @@ sidebar_label: Learn Milvus Operations
 >>> milvus.drop_index('test01')
 ```
 
-## 在集合/分区中插入/删除向量
+## 在 collection /分区中插入/删除向量
 
-#### 在集合中插入向量
+#### 在 collection 中插入向量
 
 1. 使用 `random` 函数生成 20 个 256 维的向量。
 
@@ -154,7 +154,7 @@ sidebar_label: Learn Milvus Operations
 >>> milvus.insert('test01', vectors, partition_tag="tag01")
 ```
 
-您可以通过 `get_vector_by_id()` 验证已经插入的向量。此处验证插入的第一条向量。这里假设您的集合中存在以下向量 ID：
+您可以通过 `get_vector_by_id()` 验证已经插入的向量。此处验证插入的第一条向量。这里假设您的 collection 中存在以下向量 ID：
 
 ```python
 >>> status, vector = milvus.get_vector_by_id(collection_name='test01', vector_id=0)
@@ -162,7 +162,7 @@ sidebar_label: Learn Milvus Operations
 
 #### 通过 ID 删除向量
 
-假设您的集合中存在以下向量 ID：
+假设您的 collection 中存在以下向量 ID：
 
 ```python
 >>> ids = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
@@ -174,7 +174,7 @@ sidebar_label: Learn Milvus Operations
 >>> milvus.delete_by_id(collection_name='test01', id_array=ids)
 ```
 
-> 注意：对于已经进行了删除向量操作的集合，您只能使用在 CPU 上运行的 `FLAT`、`IVFLAT`、`IVFSQ8` 等索引类型进行搜索。
+> 注意：对于已经进行了删除向量操作的 collection ，您只能使用在 CPU 上运行的 `FLAT`、`IVFLAT`、`IVFSQ8` 等索引类型进行搜索。
 
 #### 通过 ID 获取向量
 
@@ -184,33 +184,33 @@ sidebar_label: Learn Milvus Operations
 >>> status, vector = milvus.get_vector_by_id(collection_name='test01', vector_id=ids[0])
 ```
 
-## 将集合中的数据落盘
+## 将 collection 中的数据进行 flush 操作
 
-当您在进行有关数据更改的操作时，您可以将集合中的数据从内存落盘以避免数据丢失。Milvus 也支持自动落盘。自动落盘会在固定的时间周期将所有现存集合的数据落盘。您可以通过 [Milvus 服务端配置文件](../reference/milvus_config.md)来设置自动落盘的时间间隔。
+当您在进行有关数据更改的操作时，您可以将 collection 中的数据从内存中进行 flush 操作以避免数据丢失。Milvus 也支持自动 flush。自动 flush 会在固定的时间周期将所有现存 collection 的数据进行 flush 操作。您可以通过 [Milvus 服务端配置文件](../reference/milvus_config.md)来设置自动 flush 的时间间隔。
 
 ```python
 >>> milvus.flush(collection_name_array=['test01'])
 ```
 
-## 压缩集合中的段
+## 对 collection 中的 segment 进行 compact 操作
 
-段（segment）是 Milvus 自动将插入的向量数据合并所获得的数据文件。一个集合可包含多个段。如果一个段中的向量数据被删除，被删除的向量数据占据的空间并不会自动释放。您可以对集合中的段进行压缩操作以释放多余空间。
+Segment 是 Milvus 自动将插入的向量数据合并所获得的数据文件。一个 collection 可包含多个 segment 。如果一个 segment 中的向量数据被删除，被删除的向量数据占据的空间并不会自动释放。您可以对 collection 中的 segment 进行 compact 操作以释放多余空间。
 
 ```python
 >>> milvus.compact(collection_name='test01', timeout='1')
 ```
 
-## 获取段中的向量 ID
+## 获取 segment 中的向量 ID
 
-您可以获取指定段中向量 ID 信息。您需要提供段的名称。段的名称可以从 `collection_info` 中获取。
+您可以获取指定 segment 中向量 ID 信息。您需要提供 segment 的名称。 segment 的名称可以从 `collection_info` 中获取。
 
 ```python
 >>> milvus.get_vector_ids('test01', '1583727470444700000')
 ```
 
-## 在集合/分区中搜索向量
+## 在 collection /分区中搜索向量
 
-#### 在集合中搜索向量
+#### 在 collection 中搜索向量
 
 1. 创建搜索参数。搜索参数是一个 JSON 字符串，在 Python SDK 中以字典来表示。
 
@@ -244,7 +244,7 @@ sidebar_label: Learn Milvus Operations
 >>> milvus.search(collection_name='test01', query_records=q_records, top_k=1, partition_tags=['tag01'], params=search_param)
 ```
 
-> 注意：如果您不指定 `partition_tags`， Milvus 会在整个集合中搜索。
+> 注意：如果您不指定 `partition_tags`， Milvus 会在整个 collection 中搜索。
 
 ## 与 Milvus 服务端断开连接
 
