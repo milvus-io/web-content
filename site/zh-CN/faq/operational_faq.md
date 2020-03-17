@@ -58,7 +58,7 @@ sidebar_label: Operational FAQ
 
 #### 我应该自己指定向量 ID 还是由 Milvus 自动生成向量 ID？
 
-两种方法均可。但是，在一个集合内的向量必须全部使用用户指定的向量 ID 或者全部使用自动生成的向量 ID。
+两种方法均可。但是，在一个 Collection 内的向量必须全部使用用户指定的向量 ID 或者全部使用自动生成的向量 ID。
 
 
 #### 为什么欧氏距离和内积在计算向量相似度时的结果不一致？
@@ -77,7 +77,7 @@ sidebar_label: Operational FAQ
 
 #### 为什么有时候小的数据集查询时间反而更长？
 
-如果数据文件的大小小于创建集合时 `index_file_size` 参数的值，Milvus 则不会为此数据文件构建索引。因此，小的数据集有可能查询时间会更长。关于`index_file_size` 参数的更多信息，请参考 [Milvus 基本操作](../guides/milvus_operation.md)。
+如果数据文件的大小小于创建 collection 时 `index_file_size` 参数的值，Milvus 则不会为此数据文件构建索引。因此，小的数据集有可能查询时间会更长。关于`index_file_size` 参数的更多信息，请参考 [Milvus 基本操作](../guides/milvus_operation.md)。
 
 #### 为什么我的 Milvus 的性能一直不理想？
 

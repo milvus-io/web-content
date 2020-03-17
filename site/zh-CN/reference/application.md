@@ -29,7 +29,7 @@ sidebar_label: Application Scenarios
 
 ## 典型架构
 
-Milvus做特征向量检索时典型应用架构如下：
+Milvus 做特征向量检索时典型应用架构如下：
 
 ![MilvusApplication](https://raw.githubusercontent.com/milvus-io/docs/master/assets/application_arch_cn.png)
 
