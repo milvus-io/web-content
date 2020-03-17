@@ -78,7 +78,7 @@ Even if the data is a 2-dim array, this error can still occur if the data type i
 
 #### Why sometimes it takes much longer for queries with smaller datasets?
 
-If the size of a data file is smaller than the value of the `index_file_size` parameter, Milvus will not build indexes for the data file. Thus, it is possible that smaller datasets may need more time for queries. Refer to [Milvus Operation](../guides/milvus_operation.md) for more information.
+If the size of a data file is smaller than the value of the `index_file_size` parameter when creating a collection, Milvus will not build indexes for the data file. Thus, it is possible that smaller datasets may need more time for queries. Refer to [Milvus Operation](../guides/milvus_operation.md) for more information.
 
 > Note: `index_file_size` was named as `index_building_threshold` before the 0.4.0 release.
 
