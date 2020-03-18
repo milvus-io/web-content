@@ -8,9 +8,9 @@ sidebar_label: Install CPU-only Milvus
 
 ## Prerequisites
 
-#### System requirements
+#### Operating system requirements
 
-| Operating system | Supported versions                                           |
+| Operating system | Supported versions                              |
 | :--------------- | :----------------------------------------------------------- |
 | CentOS           | 7.5 or higher                                                |
 | Ubuntu LTS       | 18.04 or higher                                              |
