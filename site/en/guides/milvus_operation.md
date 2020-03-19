@@ -216,7 +216,7 @@ A segment is a data file that Milvus automatically creates by merging inserted v
       |  `NSG` | `search_length`：The higher the value, the more number of nodes are searched in the graph and the higher the recall rate, but the lower the search speed. | `{search_length:100}`|  [10, 300]   |
       |  `HNSW` | `ef`：The higher the value, the more data is searched in the index and the higher the recall rate, but the lower the search speed.| `{ef: 64}`|  [`topk`, 4096]   |
 
-   > Note: `top_k` stands for the number of vectors that are the most similar to the target vector. `top_k` is defined during search.
+   > Note: `top_k` stands for the number of vectors that are the most similar to the target vector. `top_k` is defined during search. The value range of `top_k` is `(0, 2048]`.
 
 2. Search vectors.
 
