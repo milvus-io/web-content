@@ -10,6 +10,8 @@ sidebar_label: Operational FAQ
 
 - [What if I failed to pull docker images from dockerhub when installing Milvus?](#What-if-I-failed-to-pull-docker-images-from-dockerhub-when-installing-Milvus)
 - [Why do I fail to compile Milvus from source?](#Why-do-I-fail-to-compile-Milvus-from-source)
+- [Is there a limitation for the number of collections and partitions in Milvus?](#Is-there-a-limitation-for-the-number-of-collections-and-partitions-in-Milvus)
+- [Why does Milvus return config check error?](#Why-does-Milvus-return-config-check-error)
 - [Does Milvus support insert, delete, update, and query operations for vectors?](#Does-Milvus-support-insert-delete-update-and-query-operations-for-vectors)
 - [Should I specify vector IDs or use auto-generated vector IDs?](#Should-I-specify-vector-IDs-or-use-auto-generated-vector-IDs)
 - [Why do Euclidean distance and inner product have inconsistent results in computing vector similarity?](#Why-do-Euclidean-distance-and-inner-product-have-inconsistent-results-in-computing-vector-similarity)
@@ -50,6 +52,14 @@ Users in some countries may have limited access to dockerhub. In this case, you 
 Although the reasons may vary, the most possible cause could be environmental issues, such as incompatible versions, missing dependencies, etc. Refer to [Install Milvus from Source Code](https://github.com/milvus-io/milvus/blob/master/INSTALL.md) for more information.
 
 It is recommended that you use the docker images with the Milvus compilation environment. Refer to [How to build Milvus from source in the Docker container?](#How-to-build-Milvus-from-source-in-the-Docker-container) to learn how to compile Milvus with the docker images.
+
+#### Is there a limitation for the number of collections and partitions in Milvus?
+
+Yes. The sum of collection number and partition number must not exceed 50000.
+
+#### Why does Milvus return config check error?
+
+The version of your Milvus server configuration file is incorrect. Milvus 0.7.0 only supports the 0.2 version of the Milvus server configuration file (`server_config.yaml`).
 
 #### Does Milvus support insert, delete, update, and query operations for vectors?
 

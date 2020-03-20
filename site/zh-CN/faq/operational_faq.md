@@ -10,6 +10,8 @@ sidebar_label: Operational FAQ
 
 - [如果在安装 Milvus 时，从 dockerhub 拉取镜像总是失败怎么办？](#如果在安装-Milvus-时从-dockerhub-拉取镜像总是失败怎么办)
 - [为什么我从源码编译 Milvus 失败了？](#为什么我从源码编译-Milvus-失败了)
+- [Milvus 对 collection 和 分区的数量有限制吗？](Milvus-对-collection-和-分区的数量有限制吗)
+- [为什么 Milvus 返回 config check error 的错误？](为什么-Milvus-返回-config-check-error-的错误)
 - [Milvus 支持对向量的插入、删除、更改和查询操作吗？](#Milvus-支持对向量的插入删除更改和查询操作吗)
 - [我应该自己指定向量 ID 还是由 Milvus 自动生成向量 ID？](#我应该自己指定向量-ID-还是由-Milvus-自动生成向量-ID)
 - [为什么欧氏距离和内积在计算向量相似度时的结果不一致？](#为什么欧氏距离和内积在计算向量相似度时的结果不一致)
@@ -49,6 +51,14 @@ sidebar_label: Operational FAQ
 原因可能有多种，但最可能的是环境因素，比如版本不匹配或者依赖关系缺失等。请参考 [从源码安装 Milvus](https://github.com/milvus-io/milvus/blob/master/INSTALL.md) 获取详细信息。
 
 建议您使用带有 Milvus 编译环境的 docker 镜像进行源码编译。关于详细流程请参考 [在 Docker 容器中编译运行 Milvus](https://www.milvus.io/cn/blogs/2019-11-25-docker-compilation.md)。
+
+#### Milvus 对 collection 和 分区的数量有限制吗？
+
+有。Collection 和 分区总数不能超过50000。
+
+#### 为什么 Milvus 返回 config check error 的错误？
+
+您的 Milvus 服务端配置文件版本不正确。Milvus 0.7.0 仅支持 0.2 版本的配置文件 (`server_config.yaml`)。
 
 #### Milvus 支持对向量的插入、删除、更改和查询操作吗？
 
