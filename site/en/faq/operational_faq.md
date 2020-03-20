@@ -21,7 +21,7 @@ sidebar_label: Operational FAQ
 - [Why are my new configurations not working?](#Why-are-my-new-configurations-not-working)
 - [Why is my Python SDK constantly having errors?](#Why-is-my-Python-SDK-constantly-having-errors)
 - [How do I know whether Milvus is successfully started?](#How-do-I-know-whether-Milvus-is-successfully-started)
-- [Why there are a lot of `-1`s in my search result?](#Why-there-are-a-lot-of--1s-in-my-search-result)
+- [Why there are vectors with `-1` as IDs in my search result?](#Why-there-are-vectors-with--1-as-IDs-in-my-search-result)
 - [Why does my Milvus return "Illegal instruction" during startup?](#Why-does-my-Milvus-return-Illegal-instruction-during-startup)
 - [Why is `cpu_cache_capacity` always too large for MacOS or Windows?](#Why-is-cpu_cache_capacity-always-too-large-for-MacOS-or-Windows)
 - [Why is the time in my log files different from the system time?](#Why-is-the-time-in-my-log-files-different-from-the-system-time)
@@ -112,9 +112,9 @@ Use the following command to check the running status of Milvus:
 $ docker logs <container ID>
 ```
 
-#### Why there are a lot of `-1`s in my search result?
+#### Why there are vectors with `-1` as IDs in my search result?
 
-When the number of vectors in the dataset is less than `topk`, Milvus automatically adds `-1`s to the search result to ensure that the search result contains `topk` elements.
+When the number of vectors in the dataset is less than `topk`, Milvus automatically adds vectors with `-1` as IDs to the search result to ensure that the search result contains `topk` elements.
 
 #### Why does my Milvus return "Illegal instruction" during startup? 
 
