@@ -10,6 +10,8 @@ sidebar_label: Learn Milvus Operations
 
 您也可以使用其它客户端，例如 [Java](https://github.com/milvus-io/milvus-sdk-java), [C++](https://github.com/milvus-io/milvus/tree/master/sdk), [Go](https://github.com/milvus-io/milvus-sdk-go), 或 [RESTful](https://github.com/milvus-io/milvus/tree/master/core/src/server/web_impl).
 
+> 注意：建议您使用[资源评估工具](https://milvus.io/tools/sizing)来估算数据所需的硬件资源。
+
 ## 连接 Milvus 服务端
 
 1. 导入 pymilvus。
