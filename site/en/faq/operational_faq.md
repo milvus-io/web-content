@@ -181,7 +181,7 @@ Milvus currently supports the following instruction sets:
 - AVX2
 - AVX512
 
-However, you need either AVX2 or AVX512 for Milvus to function properly.
+However, you need AVX2 for Milvus to function properly.
 
 
 ## Related links
