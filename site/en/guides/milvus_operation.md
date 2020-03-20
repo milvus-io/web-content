@@ -10,6 +10,7 @@ This page walks you through some basic Milvus operations using the [Python clien
 
 You can also use other clients, including [Java](https://github.com/milvus-io/milvus-sdk-java), [C++](https://github.com/milvus-io/milvus/tree/master/sdk), [Go](https://github.com/milvus-io/milvus-sdk-go), and [RESTful](https://github.com/milvus-io/milvus/tree/master/core/src/server/web_impl).
 
+> Note: It is recommended that you use the [sizing tool](https://milvus.io/tools/sizing) to estimate required hardware resources for your data.
 
 ## Connect to the Milvus server
 
