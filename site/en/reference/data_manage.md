@@ -6,6 +6,47 @@ sidebar_label: Data Management
 
 # Data Management
 
+## Use MySQL as metadata management service
+
+Milvus uses SQLite as metadata management service in the backend by default. SQLite is embedded in the Milvus process, so there is no need to run additional services. However, in production, it is strongly recommended that you use MySQL as metadata management service because of reliability.
+
+Follow the steps below to use MySQL as metadata management service in Linux:
+
+1. Pull the latest image of MySQL:
+
+    ```shell
+    $ docker pull mysql:latest
+    ```
+
+2. Launch MySQL service. You can set your own password and port.
+
+    ```shell
+    $ docker run -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 -d mysql:latest
+    ```
+
+3. Use root account to log in MySQL. Press \<ENTER\> to enter the password you set in the previous step.
+
+    ```shell
+    $ mysql -h127.0.0.1 -uroot -p
+    ```
+
+4. Enter MySQL client command line interface to create a database. Here we use `milvus` as the database name.
+
+    ```sql
+    create database milvus
+    ```
+
+5. Quit MySQL client and update the `backend_url` parameter in `server_config.yaml`. Note that the password, port, and database name must be consistent with your previous settings.
+
+    ```yaml
+    backend_url: mysql://root:123456@127.0.0.1:3306/milvus
+    ```
+
+6. Use the updated `server_config.yaml` to launch Milvus.
+
+
+## Related blogs about data management
+
 From data import, data storage to data querying and scheduling, our blogs on Medium introduce detailed insights about the data management strategy in Milvus.
 
 - [Managing Data in Massive-Scale Vector Search Engine](https://medium.com/@milvusio/managing-data-in-massive-scale-vector-search-engine-db2e8941ce2f)
