@@ -6,11 +6,9 @@ sidebar_label: Index Types
 
 # Milvus 索引类型
 
-Milvus 支持多种索引类型。本页面主要介绍这些索引类型的定义，和影响搜索速度和召回率的主要参数，以及这些索引类型是否可以用在仅支持 CPU 和支持 GPU 的 Milvus 中。
-
 ## 索引概览
 
-> 注意：对于使用 CPU 或 GPU 建立的索引，只要索引本身支持 CPU 和 GPU 搜索，那就既可以在 CPU 上搜索，又可以在 GPU 上搜索。
+> 注意：索引的实际构建方式（使用 CPU 或者 GPU）不影响索引本身对 CPU 或 GPU 搜索的支持。
 
 ### 仅支持 CPU 的 Milvus 包含的索引类型
 

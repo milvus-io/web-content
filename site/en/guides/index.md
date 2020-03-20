@@ -8,7 +8,7 @@ sidebar_label: Index Types
 
 ## Index Overview
 
-> Note: For a specific index type, support for search with GPU also indicates support for index building with GPU. Otherwise, if an index type does not support search with GPU, index building is also supported only with CPU. For an index built with CPU or GPU, as long as the index supports CPU and GPU search, you can perform search based on the index either with CPU or GPU.
+> Note: How an index is built (whether with CPU or GPU) does not affect its support of CPU search or GPU search.
 
 ### Index types in CPU-only Milvus
 
