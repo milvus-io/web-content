@@ -6,25 +6,43 @@ sidebar_label: Index Types
 
 # Milvus Indexes
 
-Milvus supports multiple types of indexes to suit various scenarios. The page introduces the description and main parameters that affects query performance or recall rate when using these indexes. The compatibility of the index with CPU or GPU supported Milvus is also demonstrated.
-
 ## Index Overview
+
+> Note: How an index is built (whether with CPU or GPU) does not affect its support of CPU search or GPU search.
+
+### Index types in CPU-only Milvus
 
 <div class="table-wrapper" markdown="block">
 
-| Type                                               | Name |  CPU-only Milvus  | GPU-enabled Milvus | Float vector support |  Binary vector support |
-| -------------------------------------------------- | --------------------------------------------- | ---------------- | ------------------ | ------ | -----| 
-| Exact search                                       | `FLAT`        | ✔️               | ✔️                  | ✔️               | ✔️                  |
-| Inverted file with exact post-verification         | `IVFLAT`    | ✔️               | ✔️                  | ✔️               | ✔️                  |
-| IVF and scalar quantizer                           | `IVF_SQ8`   | ✔️               | ✔️                  | ✔️               | ❌                  |
-| IVFSQ8 hybrid search on both CPU and GPU           | `IVF_SQ8H`   | ❌               | ✔️                  | ✔️               | ❌                  |
-| Inverted file with product quantization refinement | `IVF_PQ`       | ✔️               | ❌                  | ✔️               | ❌                  |
-| Refined Navigating Spreading-out Graph             | `RNSG`              | ✔️               | ✔️                  | ✔️               | ❌                  |
-| Hierarchical Navigable Small World Graphs             | `HNSW`        | ✔️               | ✔️                  | ✔️               | ❌                  |
+| Name       | Index building with CPU | Search with CPU | Float vector support | Binary vector support |
+| ---------- | ----------------------- | --------------- | -------------------- | --------------------- |
+| `FLAT`     | ✔️                      | ✔️              | ✔️                   | ✔️                    |
+| `IVFLAT`   | ✔️                      | ✔️              | ✔️                   | ✔️                    |
+| `IVF_SQ8`  | ✔️                      | ✔️              | ✔️                   | ❌                    |
+| `IVF_SQ8H` | ❌                      | ❌              | ✔️                   | ❌                    |
+| `IVF_PQ`   | ✔️                      | ✔️              | ✔️                   | ❌                    |
+| `RNSG`     | ✔️                      | ✔️              | ✔️                   | ❌                    |
+| `HNSW`     | ✔️                      | ✔️              | ✔️                   | ❌                    |
+
+</div>
+
+### Index types in Milvus with GPU support
+
+<div class="table-wrapper" markdown="block">
+
+| Name       | Index building with CPU | Search with CPU | Search with GPU                                                  | Search with GPU                                          | Float vector support | Binary vector support |
+| ---------- | ----------------------- | --------------- | ---------------------------------------------------------------- | -------------------------------------------------------- | -------------------- | --------------------- |
+| `FLAT`     | ✔️                      | ✔️              | ✔️ (Does not support GPU index building for binary vectors)      | ✔️ (Does not support GPU search for binary vectors)      | ✔️                   | ✔️                    |
+| `IVFLAT`   | ✔️                      | ✔️              | ✔️ (Does not support GPU index building for binary vectors)      | ✔️ (Does not support GPU search for binary vectors)      | ✔️                   | ✔️                    |
+| `IVF_SQ8`  | ✔️                      | ✔️              | ✔️                                                               | ✔️                                                       | ✔️                   | ❌                    |
+| `IVF_SQ8H` | ✔️                      | ✔️              | ✔️                                                               | ✔️                                                       | ✔️                   | ❌                    |
+| `IVF_PQ`   | ✔️                      | ✔️              | ✔️ (GPU index building is supported only for Euclidean distance) | ✔️ (GPU search is supported only for Euclidean distance) | ✔️                   | ❌                    |
+| `RNSG`     | ✔️                      | ✔️              | ❌                                                               | ❌                                                       | ✔️                   | ❌                    |
+| `HNSW`     | ✔️                      | ✔️              | ❌                                                               | ❌                                                       | ✔️                   | ❌                    |
+
 </div>
 
 > Note: For different index types, the index building parameters and search parameters also differ. Refer to [learn Milvus Operations](milvus_operation.md) for more information.
-
 
 ## Milvus Indexes
 
@@ -40,17 +58,17 @@ Vectors are partitioned into buckets without any compression. This partition bas
 
 ### `IVF_SQ8`
 
-Adopts a scalar quantizer to significantly reduce the size of a vector (to about 1/4 of the original size). Compared to `FLAT` and `IVFFLAT`, query speed is much faster and requires less disk and CPU/GPU memory.
+Adopts a scalar quantizer to significantly reduce the size of a vector (to about 1/4 of the original size). Compared to `FLAT`, query speed is much faster. Compared with `IVFFLAT`, less disk and CPU/GPU memory is required.
 
 Vectors are quantized to 8-bit floats, which may cause some loss of precision.
 
 ### `IVF_SQ8H`
 
-Optimized version of `IVF_SQ8` that requires both CPU and GPU to work. Different from `IVF_SQ8`,  `IVF_SQ8H` uses a GPU-based coarse quantizer that greatly reduces the quantization time.
+Optimized version of `IVF_SQ8` that requires both CPU and GPU to work. Different from `IVF_SQ8`, `IVF_SQ8H` uses a GPU-based coarse quantizer that greatly reduces the quantization time.
 
 ### `IVF_PQ`
 
-`IVF_PQ` index is built based on product quantization. The input vectors are split into distinct sub-vectors which are then quantized separately. 
+`IVF_PQ` index is built based on product quantization. The input vectors are split into distinct sub-vectors which are then quantized separately.
 
 Vector size can be reduced to 1/16 or 1/32 of the original size. If you choose this index, note that there is an inevitable trade-off between memory and search accuracy.
 
@@ -60,7 +78,7 @@ Only 1, 2, 3, 4, 6, 8, 10, 12, 16, 20, 24, 28, 32 dimensions per sub-quantizer a
 
 ### `RNSG`
 
-`RNSG` is a self-developed index that makes various optimizations based on `NSG` index. `NSG`  is a graph-based search algorithm that a) lowers the average out-degree of the graph for fast traversal; b) shortens the search path; c) reduces the index size; d) lowers the indexing complexity.
+`RNSG` is a self-developed index that makes various optimizations based on `NSG` index. `NSG` is a graph-based search algorithm that a) lowers the average out-degree of the graph for fast traversal; b) shortens the search path; c) reduces the index size; d) lowers the indexing complexity.
 
 Compared to `NSG` which searches query vectors one by one, `RNSG` supports concurrent searches of multiple query vectors.
 
