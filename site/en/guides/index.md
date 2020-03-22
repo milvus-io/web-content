@@ -14,15 +14,15 @@ sidebar_label: Index Types
 
 <div class="table-wrapper" markdown="block">
 
-| Type                                               | Name       | Index building with CPU | Search with CPU | Float vector support | Binary vector support |
-| -------------------------------------------------- | ---------- | ----------------------- | --------------- | -------------------- | --------------------- |
-| Exact search                                       | `FLAT`     | ✔️                      | ✔️              | ✔️                   | ✔️                    |
-| Inverted file with exact post-verification         | `IVFLAT`   | ✔️                      | ✔️              | ✔️                   | ✔️                    |
-| IVF and scalar quantizer                           | `IVF_SQ8`  | ✔️                      | ✔️              | ✔️                   | ❌                    |
-| IVFSQ8 hybrid search on both CPU and GPU           | `IVF_SQ8H` | ❌                      | ❌              | ✔️                   | ❌                    |
-| Inverted file with product quantization refinement | `IVF_PQ`   | ✔️                      | ✔️              | ✔️                   | ❌                    |
-| Refined Navigating Spreading-out Graph             | `RNSG`     | ✔️                      | ✔️              | ✔️                   | ❌                    |
-| Hierarchical Navigable Small World Graphs          | `HNSW`     | ✔️                      | ✔️              | ✔️                   | ❌                    |
+| Name       | Index building with CPU | Search with CPU | Float vector support | Binary vector support |
+| ---------- | ----------------------- | --------------- | -------------------- | --------------------- |
+| `FLAT`     | ✔️                      | ✔️              | ✔️                   | ✔️                    |
+| `IVFLAT`   | ✔️                      | ✔️              | ✔️                   | ✔️                    |
+| `IVF_SQ8`  | ✔️                      | ✔️              | ✔️                   | ❌                    |
+| `IVF_SQ8H` | ❌                      | ❌              | ✔️                   | ❌                    |
+| `IVF_PQ`   | ✔️                      | ✔️              | ✔️                   | ❌                    |
+| `RNSG`     | ✔️                      | ✔️              | ✔️                   | ❌                    |
+| `HNSW`     | ✔️                      | ✔️              | ✔️                   | ❌                    |
 
 </div>
 
@@ -30,15 +30,15 @@ sidebar_label: Index Types
 
 <div class="table-wrapper" markdown="block">
 
-| Type                                               | Name       | Index building with CPU | Search with CPU | Search with GPU                                          | Search with GPU                                          | Float vector support | Binary vector support |
-| -------------------------------------------------- | ---------- | ----------------------- | --------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------- | --------------------- |
-| Exact search                                       | `FLAT`     | ✔️                      | ✔️              | ✔️ (Does not support GPU index building for binary vectors)      | ✔️ (Does not support GPU search for binary vectors)      | ✔️                   | ✔️                    |
-| Inverted file with exact post-verification         | `IVFLAT`   | ✔️                      | ✔️              | ✔️ (Does not support GPU index building for binary vectors)      | ✔️ (Does not support GPU search for binary vectors)      | ✔️                   | ✔️                    |
-| IVF and scalar quantizer                           | `IVF_SQ8`  | ✔️                      | ✔️              | ✔️                                                       | ✔️                                                       | ✔️                   | ❌                    |
-| IVFSQ8 hybrid search on both CPU and GPU           | `IVF_SQ8H` | ✔️                      | ✔️              | ✔️                                                       | ✔️                                                       | ✔️                   | ❌                    |
-| Inverted file with product quantization refinement | `IVF_PQ`   | ✔️                      | ✔️              | ✔️ (GPU index building is supported only for Euclidean distance) | ✔️ (GPU search is supported only for Euclidean distance) | ✔️                   | ❌                    |
-| Refined Navigating Spreading-out Graph             | `RNSG`     | ✔️                      | ✔️              | ❌                                                       | ❌                                                       | ✔️                   | ❌                    |
-| Hierarchical Navigable Small World Graphs          | `HNSW`     | ✔️                      | ✔️              | ❌                                                       | ❌                                                       | ✔️                   | ❌                    |
+| Name       | Index building with CPU | Search with CPU | Search with GPU                                                  | Search with GPU                                          | Float vector support | Binary vector support |
+| ---------- | ----------------------- | --------------- | ---------------------------------------------------------------- | -------------------------------------------------------- | -------------------- | --------------------- |
+| `FLAT`     | ✔️                      | ✔️              | ✔️ (Does not support GPU index building for binary vectors)      | ✔️ (Does not support GPU search for binary vectors)      | ✔️                   | ✔️                    |
+| `IVFLAT`   | ✔️                      | ✔️              | ✔️ (Does not support GPU index building for binary vectors)      | ✔️ (Does not support GPU search for binary vectors)      | ✔️                   | ✔️                    |
+| `IVF_SQ8`  | ✔️                      | ✔️              | ✔️                                                               | ✔️                                                       | ✔️                   | ❌                    |
+| `IVF_SQ8H` | ✔️                      | ✔️              | ✔️                                                               | ✔️                                                       | ✔️                   | ❌                    |
+| `IVF_PQ`   | ✔️                      | ✔️              | ✔️ (GPU index building is supported only for Euclidean distance) | ✔️ (GPU search is supported only for Euclidean distance) | ✔️                   | ❌                    |
+| `RNSG`     | ✔️                      | ✔️              | ❌                                                               | ❌                                                       | ✔️                   | ❌                    |
+| `HNSW`     | ✔️                      | ✔️              | ❌                                                               | ❌                                                       | ✔️                   | ❌                    |
 
 </div>
 
@@ -58,7 +58,7 @@ Vectors are partitioned into buckets without any compression. This partition bas
 
 ### `IVF_SQ8`
 
-Adopts a scalar quantizer to significantly reduce the size of a vector (to about 1/4 of the original size). Compared to `FLAT` and `IVFFLAT`, query speed is much faster and requires less disk and CPU/GPU memory.
+Adopts a scalar quantizer to significantly reduce the size of a vector (to about 1/4 of the original size). Compared to `FLAT`, query speed is much faster. Compared with `IVFFLAT`, less disk and CPU/GPU memory is required.
 
 Vectors are quantized to 8-bit floats, which may cause some loss of precision.
 
