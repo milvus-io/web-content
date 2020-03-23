@@ -1,22 +1,22 @@
 ---
 id: performance_tuning.md
-title: 配置 Milvus 以用于生产环境
-sidebar_label: 配置 Milvus 以用于生产环境
+title: Configure Milvus for Production
+sidebar_label: Configure Milvus for Production
 ---
 
-# 配置 Milvus 以用于生产环境
+# Configure Milvus for Production
 
-在生产环节中使用 Milvus 之前，请您检查以下设置，以保证 Milvus 可以保证数据安全并达到一定的性能要求。
+Before using Milvus for production, please check the following configurations to ensure data security and improve performance. 
 
-## 数据安全
+## Data security
 
-### 使用 MySQL 作为元数据管理服务
+### Use MySQL as metadata management service
 
-详细信息请参考[数据管理](data_manage.md)。
+Refer to [Data Management](data_manage.md) for more information.
 
-### 将数据存储目录移动到 `tmp` 以外的目录
+### Move data storage locations out of the `tmp` folder
 
-把服务段配置文件中的以下目录移动到 `tmp` 以外的目录
+Move data storage locations out of the `tmp` folder:
 
 - `storage_config`
 - `primary_path`
@@ -24,9 +24,9 @@ sidebar_label: 配置 Milvus 以用于生产环境
 - `wal_path`
 - `log_path`
 
-## 性能调优
+## Improve performance
 
-请检查以下参数的设置以确保性能：
+Please check the following configurations to improve performance:
 
 ### Milvus 服务端配置文件参数设置
 
