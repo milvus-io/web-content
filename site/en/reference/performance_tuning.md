@@ -24,22 +24,22 @@ Move data storage locations out of the `tmp` folder:
 - `wal_path`
 - `log_path`
 
-## Improve performance
+## Performance improvement
 
 Please check the following configurations to improve performance:
 
-### Milvus 服务端配置文件参数设置
+### Milvus server configuration
 
-- `preload_table`: 建议在内存允许的情况下尽可能多地加载 collection。这样在每次重启服务端之后，数据都会先载入到 Milvus 中，可以解决第一次搜索耗时很长的问题。
-- `buffer_size`: 影响插入性能。建议插入数据量为 `buffer_size` 的一半。
-- `insert_buffer_size`：
-  - （如果 WAL 开启了）建议 `insert_buffer_size` 大于 `wal_buffer_size` 的一半 且插入数据量小于 `wal_buffer_size`的一半。
-  - （如果 WAL 没有开启）建议插入的数据量小于 `insert_buffer_size`。
-- `cpu_cache_capacity`：建议在内存允许的情况下尽可能调大。这样有助于确保数据全部在内存中，减少内存和磁盘的数据交换，从而提高查询性能。
-- `use_blas_threhold`: 影响的不同查询批量使用的距离计算函数。nq < `use_blas_threshold` 时使用 CPU 指令集进行查询，否则使用的是 OpenBLAS 来计算距离。大多数场景下，使用 CPU 指令集进行查询的性能会更好。
+- `preload_table`: It is recommended that you load as many collections as the memory size permits. In this way, data will be loaded to Milvus first every time Milvus restarts. Otherwise, the first search operation will spend some time loading collections.
+- `buffer_size`: Affects data insertion performance. It is recommended that you set the inserted data size half of `buffer_size`.
+- `insert_buffer_size`:
+  - **(If WAL is on)** It is recommended that you set `insert_buffer_size` greater than half of `wal_buffer_size` and the inserted data size less than half of `wal_buffer_size`.
+  - **(If WAL is not on)** It is recommended that you set the inserted data size smaller than `insert_buffer_size`.
+- `cpu_cache_capacity`: It is recommended that you set `cpu_cache_capacity` as large as possible to ensure that data is stored in memory, thus reducing data swapping between the memory and the disk and improving search performance.
+- `use_blas_threhold`: Determines the distance metric functions used by different batches of search data. If nq < `use_blas_threshold`, Milvus uses CPU instruction sets to search. Otherwise, OpenBLAS is used. In most cases, it is recommended to use CPU instruction sets for distance computation.
 
-### Milvus 客户端参数设置
+### Milvus client parameters
 
 - `index_file_size`:
-  - （数据量固定，无增量数据的场景）提高此参数使得每个索引文件变大。推荐大小为 1 ～ 2 GB。设置太小会导致索引过于分散。搜索时间远小于加载时间。达不到加载和搜索形成 pipeline 的效果。内存或显存允许的情况，该值设置的更大可以提高查询性能。使用 GPU 进行查询时，建议该值不要超过可用显存的 1/4。
-  - （数据量不固定，连续有增量数据进入，并且伴随查询的场景）不宜设得太大，最好 256 MB 或者 512 MB，看具体情况而定。
+  - **(Fixed data quantity, no incremental data)** The higher the parameter value, the larger the size of each index file. The recommended value is 1 ~ 2 GB. If the value is too small, index files will be too scattered and search time will be much less than the load time. As a result, load and search cannot form a pipeline. If CPU/GPU memory permits, you can set a relatively large value to improve search performance. When you use GPU to search, it is recommended that you set this value less than 1/4 of available GPU memory.
+  - **(Flexible data quantity, with continuous incoming data and simultaneous search operations)** Recommended values include 256 MB, 512 MB, or other values per different conditions. Do not set too high a value.
