@@ -17,15 +17,15 @@ You can load as many collections as the memory permits in `preload_table` from `
 
 #### Why the search speed is low?
 
-- 将`cpu_cache_capacity` 设置为用户能提供的最大内存数。
-- 调整 `use_blas_threhold`（根据硬件环境调整）:
-  - 如果当前批量查询的 nq 数（向量条数）小于 `use_blas_threhold`，可以尝试将 `use_blas_threhold` 调整为 `nq - 1`, 反之把 `use_blas_threhold` 调整为 `nq + 1`。
-- 在创建 collection 时，`index_file_size` 参数应该尽量调大。
+- Set `cpu_cache_capacity` to the largest memory size you can provide.
+- Adjust the value of `use_blas_threhold` based on the hardware environment.
+  - If the number of nq (number of vectors to search) is smaller than `use_blas_threhold`, you can try changing `use_blas_threhold` to `nq - 1`. Conversely, you can change `use_blas_threhold` to `nq + 1`.
+- When creating a collection, the value of `index_file_size` should be as large as possible.
 
 #### Why is my GPU always idle?
 
-将 `gpu_search_threshold` 的值调整为您期望开启 GPU 搜索的批量查询的 nq 数（向量条数）。不建议在搜索量较小时使用 GPU 搜索。
+Change the value of `gpu_search_threshold` to the value of nq (number of vectors to search) above which Milvus uses GPU to search. when the number of vectors to search is small, GPU search is not recommended.
 
 #### Why my data cannot be searched immediately after insertion?
 
-要确保数据插入后立刻能搜索到，可以手动调用 flush 接口。但是频繁调用 flush 接口可能会产生大量小数据文件，从而导致查询变慢。
+To ensure that data can be searched immediately after insertion, you can manually invoke the flush interface. However, invoking the flush interface too often will create too many small files, which negatively affects search speed.
