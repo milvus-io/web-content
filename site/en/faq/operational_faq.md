@@ -92,12 +92,6 @@ If the size of a data file is smaller than the value of the `index_file_size` pa
 
 > Note: `index_file_size` was named as `index_building_threshold` before the 0.4.0 release.
 
-#### Why is my Milvus constantly having bad performance?
-
-The reasons may vary, but it is recommended that you check the `cpu_cache_capacity` parameter in the config file to see if all data can be successfully loaded to the memory. Milvus cannot have the best performance before all data is loaded to the memory. Refer to [Milvus Configuration](../reference/milvus_config.md) for more information.
-
-If your parameter settings look correct, check whether other running applications have high memory usage.
-
 #### Why is my Milvus constantly having low accuracy?
 
 Check the value of the `nprobe` parameter in the functions when you use an SDK to search vectors in a collection. The greater the value, the more precise the result, yet the slower the search speed. Refer to [Learn Milvus Operation](../guides/milvus_operation.md) for more information.
