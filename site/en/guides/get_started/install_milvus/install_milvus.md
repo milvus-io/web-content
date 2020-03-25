@@ -17,6 +17,26 @@ Docker is the easiest and recommended way to install and run Milvus.
 - [Install CPU-only Milvus on Docker](cpu_milvus_docker.md)
 - [Install GPU-enabled Milvus on Docker](gpu_milvus_docker.md)
 
+> Note: If you cannot install online because of network restrictions, please use offline installation. The following steps use `milvusdb/milvus` as the Docker image tag.
+
+  **Transfer Docker image offline**
+
+  1. Save the Docker image to a tar file and use appropriate methods to transfer the tar file.
+
+      ```shell
+      $ docker save milvusdb/milvus > milvus_image.tar
+      ```
+
+  2. After transferring the tar file, use the following command to load the tar file to a Docker image.  
+
+      ```shell
+      $ docker load < milvus_image.tar
+      ```
+  
+  **Transfer configuration files offline**
+
+  You can download configuration files and use appropriate methods to transfer the configuration files. Refer to installation steps for details.
+
 ## Build from Source
 
 Refer to [Build Milvus from source](https://github.com/milvus-io/milvus/blob/master/INSTALL.md) to learn how to build Milvus from source.
