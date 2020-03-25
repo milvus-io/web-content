@@ -4,7 +4,7 @@ title: Milvus Configuration
 sidebar_label: Milvus Configuration
 ---
 
-# Milvus 配置
+# Milvus 服务端配置
 
 ## 配置概述
 
