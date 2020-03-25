@@ -36,7 +36,7 @@ Milvus 默认使用 SQLite 作为元数据后台管理服务，SQLite 内嵌于 
     create database milvus
     ```
 
-5. 退出 MySQL 客户端, 修改 `server_config.yaml` 文件的 `backend_url` 参数，注意密码，端口以及 database 名称要和以上几步的设置一致。
+5. 退出 MySQL 客户端, 修改 `server_config.yaml` 文件的 `backend_url` 参数。使用 MySQL 服务所在的主机 IP 作为地址。注意密码，端口以及 database 名称要和以上几步的设置一致。
 
     ```yaml
     backend_url: mysql://root:123456@127.0.0.1:3306/milvus
