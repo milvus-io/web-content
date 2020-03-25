@@ -222,6 +222,15 @@
       "order": 5
     },
     {
+      "id": "performance_tuning.md",
+      "title": "配置 Milvus 以用于生产环境",
+      "lang": "en",
+      "label1": "reference",
+      "label2": null,
+      "label3": null,
+      "order": 6
+    },
+    {
       "id": "faq",
       "title": "常见问题",
       "lang": "en",
@@ -229,6 +238,14 @@
       "label2": "",
       "order": 3,
       "isMenu": true
+    },{
+      "id": "performance_faq.md",
+      "title": "性能常见问题",
+      "lang": "en",
+      "label1": "faq",
+      "label2": "",
+      "label3": "",
+      "order": 0
     },
     {
       "id": "product_faq.md",
@@ -237,7 +254,7 @@
       "label1": "faq",
       "label2": "",
       "label3": "",
-      "order": 0
+      "order": 1
     },
     {
       "id": "operational_faq.md",
@@ -245,7 +262,7 @@
       "lang": "en",
       "label1": "faq",
       "label2": "",
-      "order": 1
+      "order": 2
     },
     {
       "id": "",

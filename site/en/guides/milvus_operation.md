@@ -213,7 +213,7 @@ A segment is a data file that Milvus automatically creates by merging inserted v
 
       | Index type          | Search parameters     | Example                                                | Value range              |
       | --------------------- | ------------ | ----------------------------------------------------------------------- | -------------------- |
-      |  `FLAT`/`IVFLAT`/`SQ8`/`IVFPQ` | `nprobe`：Number of classes of vectors to search. `nprobe` affects search precision. The higher the value, the higher the precision, but the lower the search speed. | `{nprobe: 32}`|  [1, `nlist`]   |
+      |  `FLAT`/`IVFLAT`/`SQ8`/`SQ8H`/`IVFPQ` | `nprobe`：Number of classes of vectors to search. `nprobe` affects search precision. The higher the value, the higher the precision, but the lower the search speed. | `{nprobe: 32}`|  [1, `nlist`]   |
       |  `NSG` | `search_length`：The higher the value, the more number of nodes are searched in the graph and the higher the recall rate, but the lower the search speed. | `{search_length:100}`|  [10, 300]   |
       |  `HNSW` | `ef`：The higher the value, the more data is searched in the index and the higher the recall rate, but the lower the search speed.| `{ef: 64}`|  [`topk`, 4096]   |
 
