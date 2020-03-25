@@ -36,7 +36,7 @@ Follow the steps below to use MySQL as metadata management service in Linux:
     create database milvus
     ```
 
-5. Quit MySQL client and update the `backend_url` parameter in `server_config.yaml`. Note that the password, port, and database name must be consistent with your previous settings.
+5. Quit MySQL client and update the `backend_url` parameter in `server_config.yaml`. Use the IP of the host that runs MySQL service. Note that the password, port, and database name must be consistent with your previous settings.
 
     ```yaml
     backend_url: mysql://root:123456@127.0.0.1:3306/milvus
