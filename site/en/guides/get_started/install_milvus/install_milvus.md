@@ -19,7 +19,7 @@ Docker is the easiest and recommended way to install and run Milvus.
 
 ### Transfer Docker image and configuration files offline
 
-If you cannot use your host to acquire Docker images and configuration files online because of network restrictions, please acquire them online with another available host and transfer the files offline. The following steps use `milvusdb/milvus` as the Docker image tag.
+If you cannot use your host to acquire Docker images and configuration files online because of network restrictions, please acquire them online with another available host and transfer the files offline. Refer to installation steps to learn how to acquire a Docker image. The following steps use `milvusdb/milvus` as the Docker image tag.
 
 #### Transfer Docker image offline
 
