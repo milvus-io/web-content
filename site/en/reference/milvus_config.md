@@ -4,7 +4,7 @@ title: Milvus Configuration
 sidebar_label: Milvus Configuration
 ---
 
-# Milvus Configuration
+# Milvus Server Configuration
 
 ## Configuration overview
 

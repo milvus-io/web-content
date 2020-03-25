@@ -32,6 +32,5 @@ Refer to [Build Milvus from source](https://github.com/milvus-io/milvus/blob/mas
   
 - If you're ready to run Milvus in production:
 
-  - [Use MySQL as metadata management service](../../../reference/data_manage.md)
+  - [Configure Milvus for Production](../../../reference/performance_tuning.md)
   - Build a [monitoring and alerting system](../../monitor.md) to check real-time application performance
-  - Tune Milvus performance through [configuration](../../../reference/milvus_config.md)
