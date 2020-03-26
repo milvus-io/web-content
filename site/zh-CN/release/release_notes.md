@@ -6,6 +6,33 @@ sidebar_label: 发版说明
 
 # 发版说明
 
+## v0.7.1
+
+**发布时间**：2020-4-1
+
+**版本兼容**
+
+| Milvus 版本    | Python SDK 版本     | Java SDK 版本    |  Go SDK 版本  |
+| ---------------| -----------------|------------------|--------------|
+| 0.7.1          | 0.2.8            | 0.5.0            |      0.1.0         |
+
+#### 新增功能
+
+- **新特性**
+
+  - 针对 `FLAT` 索引类型，新增子结构（substructure）和超结构（superstructure）距离计算方式。这两种距离计算方式常用于化学分子式的子结构和超结构搜索 [#1603](https://github.com/milvus-io/milvus/issues/1603)。
+
+- **改进**
+
+  - 改善了 Compact 操作的性能。[#1619](https://github.com/milvus-io/milvus/issues/1619)
+  - 改善了 Milvus 使用 CPU 进行查询的性能，特别是提高了在多连接并发场景下的查询性能。[#267](https://github.com/milvus-io/milvus/issues/267)
+  - 改善了 Milvus 生成日志的可读性。[#1719](https://github.com/milvus-io/milvus/issues/1719)
+
+- **其他**
+
+  - Mishards 同步升级到 0.7.1。[#1698](https://github.com/milvus-io/milvus/issues/1698)
+  - 修复了一些软件缺陷，详情请参考 [CHANGELOG](https://github.com/milvus-io/milvus/blob/master/CHANGELOG.md)。
+
 ## v0.7.0
 
 **发布时间**：2020-3-10
@@ -20,23 +47,23 @@ sidebar_label: 发版说明
 
 - **向量删除**
 
-  新增了对单条或多条向量的删除功能。如果您对一个集合进行了向量删除操作，后续对这个集合的搜索操作仅支持一部分索引类型，包括在CPU上运行的 Flat、IVFlat、IVFSQ8 等。Milvus 的后续版本将为其他索引类型提供支持。[#861](https://github.com/milvus-io/milvus/pull/861)
+  新增了对单条或多条向量的删除功能。如果您对一个集合进行了向量删除操作，后续对这个集合的搜索操作仅支持一部分索引类型，包括在CPU上运行的 Flat、IVFlat、IVFSQ8 等。Milvus 的后续版本将为其他索引类型提供支持。[#861](https://github.com/milvus-io/milvus/issues/861)
 
 - **向量读取**
 
-  新增了通过向量 ID 读取对应的向量值的功能。[#861](https://github.com/milvus-io/milvus/pull/861)
+  新增了通过向量 ID 读取对应的向量值的功能。[#861](https://github.com/milvus-io/milvus/issues/861)
 
 - **数据落盘与压缩**
 
-  新增了数据落盘与压缩功能。您可以设置定时落盘或者手动落盘，从而避免数据丢失。如果一个段中的向量数据被删除，被删除的向量数据占据的空间并不会自动释放。您可以对集合中的段进行压缩操作以释放多余空间。[#861](https://github.com/milvus-io/milvus/pull/861) [#1426](https://github.com/milvus-io/milvus/pull/1426)
+  新增了数据落盘与压缩功能。您可以设置定时落盘或者手动落盘，从而避免数据丢失。如果一个段中的向量数据被删除，被删除的向量数据占据的空间并不会自动释放。您可以对集合中的段进行压缩操作以释放多余空间。[#861](https://github.com/milvus-io/milvus/issues/861) [#1426](https://github.com/milvus-io/milvus/pull/1426)
 
 - **运行时更改 Milvus 服务端参数**
 
-  新增了运行时更改 Milvus 服务端参数的功能。您可以通过 Milvus 客户端对 Milvus 服务端参数进行更改，部分参数更改后可即时生效，无需重启 Milvus。[#665](https://github.com/milvus-io/milvus/pull/665)
+  新增了运行时更改 Milvus 服务端参数的功能。您可以通过 Milvus 客户端对 Milvus 服务端参数进行更改，部分参数更改后可即时生效，无需重启 Milvus。[#665](https://github.com/milvus-io/milvus/issues/665)
 
 - **预写式日志(Write-Ahead Logging, WAL)**
 
-  新增了 WAL 功能，可以大大提高数据操作的可靠性。您可以在 Milvus 服务端配置文件（`server_config.yaml`）中对 WAL 进行设置。[#830](https://github.com/milvus-io/milvus/pull/830)
+  新增了 WAL 功能，可以大大提高数据操作的可靠性。您可以在 Milvus 服务端配置文件（`server_config.yaml`）中对 WAL 进行设置。[#830](https://github.com/milvus-io/milvus/issues/830)
 
 - **RESTful API**
 
@@ -48,19 +75,19 @@ sidebar_label: 发版说明
 
 - **HNSW 索引的支持**
 
-  新增了对 HNSW 索引类型的支持。关于 HNSW 的详细介绍请参考[向量索引算法 HNSW 和 NSG 的比较](https://milvus.io/cn/blogs/2020-01-16-hnsw-nsg-comparison.md)。[#853](https://github.com/milvus-io/milvus/pull/853)
+  新增了对 HNSW 索引类型的支持。关于 HNSW 的详细介绍请参考[向量索引算法 HNSW 和 NSG 的比较](https://milvus.io/cn/blogs/2020-01-16-hnsw-nsg-comparison.md)。[#853](https://github.com/milvus-io/milvus/issues/853)
 
 - **Jaccard/Hamming/Tanimoto 距离的支持**
 
-  新增了对 Jaccard、Hamming、Tanimoto 距离的支持。[#823](https://github.com/milvus-io/milvus/pull/823)
+  新增了对 Jaccard、Hamming、Tanimoto 距离的支持。[#823](https://github.com/milvus-io/milvus/issues/823)
 
 - **Prometheus 中 Pushgateway 的支持**
 
-  新增了在 Prometheus 中 Pushgateway 的支持。Pushgateway 使生命周期短、批量的 metric 能够被 Prometheus 提取。[#813](https://github.com/milvus-io/milvus/pull/813)
+  新增了在 Prometheus 中 Pushgateway 的支持。Pushgateway 使生命周期短、批量的 metric 能够被 Prometheus 提取。[#813](https://github.com/milvus-io/milvus/issues/813)
 
 - **AVX 512 指令集的支持**
 
-  新增了对 AVX 512 指令集的支持。Milvus 理论上可支持所有包含 AVX 512 指令集的 CPU。[#1122](https://github.com/milvus-io/milvus/pull/1122)
+  新增了对 AVX 512 指令集的支持。Milvus 理论上可支持所有包含 AVX 512 指令集的 CPU。[#1122](https://github.com/milvus-io/milvus/issues/1122)
 
 
 #### 变更说明
