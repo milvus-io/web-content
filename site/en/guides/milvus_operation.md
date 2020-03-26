@@ -107,7 +107,7 @@ Use `show_partitions()` to verify whether the partition is created.
    >>> ivf_param = {'nlist': 16384}
    ```
 
-   > Note: For different index types, the required parameters for index building is also different. You **must** specify values for all index parameters.
+   > Note: For different index types, the required parameters for index building also differ. You **must** specify values for all index parameters.
 
       | Index type    | Index parameters | Example                                                                | Value range               |
       | --------------------- | ------------ | ----------------------------------------------------------------------- | -------------------- |
@@ -209,7 +209,7 @@ A segment is a data file that Milvus automatically creates by merging inserted v
    >>> search_param = {'nprobe': 16}
    ```
 
-   > Note: For different index types, search parameters also differs. You **must** assign values to all search parameters.
+   > Note: For different index types, search parameters also differ. You **must** assign values to all search parameters.
 
       | Index type          | Search parameters     | Example                                                | Value range              |
       | --------------------- | ------------ | ----------------------------------------------------------------------- | -------------------- |
