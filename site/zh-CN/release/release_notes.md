@@ -8,30 +8,28 @@ sidebar_label: 发版说明
 
 ## v0.7.1
 
-**发布时间**：2020-4-1
+**发布时间**：2020-3-30
 
 **版本兼容**
 
-| Milvus 版本    | Python SDK 版本     | Java SDK 版本    |  Go SDK 版本  |
-| ---------------| -----------------|------------------|--------------|
-| 0.7.1          | 0.2.8            | 0.5.0            |      0.1.0         |
+| Milvus 版本 | Python SDK 版本 | Java SDK 版本 | Go SDK 版本 |
+| ----------- | --------------- | ------------- | ----------- |
+| 0.7.1       | 0.2.8           | 0.5.0         | 0.1.0       |
 
 #### 新增功能
 
-- **新特性**
+- 针对 `FLAT` 索引类型，新增子结构（substructure）和超结构（superstructure）距离计算方式。这两种距离计算方式常用于化学分子式的子结构和超结构搜索 [#1603](https://github.com/milvus-io/milvus/issues/1603)。
 
-  - 针对 `FLAT` 索引类型，新增子结构（substructure）和超结构（superstructure）距离计算方式。这两种距离计算方式常用于化学分子式的子结构和超结构搜索 [#1603](https://github.com/milvus-io/milvus/issues/1603)。
+#### 主要改进
 
-- **改进**
+- 改善了 Compact 操作的性能。[#1619](https://github.com/milvus-io/milvus/issues/1619)
+- 改善了 Milvus 使用 CPU 进行查询的性能，特别是提高了在多连接并发场景下的查询性能。[#267](https://github.com/milvus-io/milvus/issues/267)
+- 改善了 Milvus 日志的可读性。[#1719](https://github.com/milvus-io/milvus/issues/1719)
+- Mishards 同步升级到 0.7.1。[#1698](https://github.com/milvus-io/milvus/issues/1698)
 
-  - 改善了 Compact 操作的性能。[#1619](https://github.com/milvus-io/milvus/issues/1619)
-  - 改善了 Milvus 使用 CPU 进行查询的性能，特别是提高了在多连接并发场景下的查询性能。[#267](https://github.com/milvus-io/milvus/issues/267)
-  - 改善了 Milvus 生成日志的可读性。[#1719](https://github.com/milvus-io/milvus/issues/1719)
+#### Bug 修复
 
-- **其他**
-
-  - Mishards 同步升级到 0.7.1。[#1698](https://github.com/milvus-io/milvus/issues/1698)
-  - 修复了一些软件缺陷，详情请参考 [CHANGELOG](https://github.com/milvus-io/milvus/blob/master/CHANGELOG.md)。
+- 详情请参考 [CHANGELOG](https://github.com/milvus-io/milvus/blob/master/CHANGELOG.md)。
 
 ## v0.7.0
 
@@ -39,15 +37,15 @@ sidebar_label: 发版说明
 
 **版本兼容**
 
-| Milvus 版本    | Python SDK 版本     | Java SDK 版本    |  Go SDK 版本  |
-| ---------------| -----------------|------------------|--------------|
-| 0.7.0          | 0.2.8            | 0.5.0            |      0.1.0         |
+| Milvus 版本 | Python SDK 版本 | Java SDK 版本 | Go SDK 版本 |
+| ----------- | --------------- | ------------- | ----------- |
+| 0.7.0       | 0.2.8           | 0.5.0         | 0.1.0       |
 
 #### 新增功能
 
 - **向量删除**
 
-  新增了对单条或多条向量的删除功能。如果您对一个集合进行了向量删除操作，后续对这个集合的搜索操作仅支持一部分索引类型，包括在CPU上运行的 Flat、IVFlat、IVFSQ8 等。Milvus 的后续版本将为其他索引类型提供支持。[#861](https://github.com/milvus-io/milvus/issues/861)
+  新增了对单条或多条向量的删除功能。如果您对一个集合进行了向量删除操作，后续对这个集合的搜索操作仅支持一部分索引类型，包括在 CPU 上运行的 Flat、IVFlat、IVFSQ8 等。Milvus 的后续版本将为其他索引类型提供支持。[#861](https://github.com/milvus-io/milvus/issues/861)
 
 - **向量读取**
 
@@ -89,26 +87,25 @@ sidebar_label: 发版说明
 
   新增了对 AVX 512 指令集的支持。Milvus 理论上可支持所有包含 AVX 512 指令集的 CPU。[#1122](https://github.com/milvus-io/milvus/issues/1122)
 
-
 #### 变更说明
 
 - **创建索引与搜索的接口更新**
 
-  从 Milvus 0.7.0开始，所有客户端创建索引与搜索的接口中的部分参数使用 JSON 字符串进行传值。
+  从 Milvus 0.7.0 开始，所有客户端创建索引与搜索的接口中的部分参数使用 JSON 字符串进行传值。
 
 - **Milvus 服务端配置文件更新**
 
-  从 Milvus 0.7.0开始，Milvus 服务端配置文件（`server_config.yaml`）版本更新为0.2。配置文件的参数也发生了变化。
+  从 Milvus 0.7.0 开始，Milvus 服务端配置文件（`server_config.yaml`）版本更新为 0.2。配置文件的参数也发生了变化。
 
 - **术语更新**
 
-  从0.7.0开始，Milvus 的 Table（表） 正式改名为 Collection（集合）。
+  从 0.7.0 开始，Milvus 的 Table（表） 正式改名为 Collection（集合）。
 
 #### Bug 修复
 
-- 解决了插入向量时使用自动生成的ID 时可能产生重复ID的问题。[#1508](https://github.com/milvus-io/milvus/pull/1508)
+- 解决了插入向量时使用自动生成的 ID 时可能产生重复 ID 的问题。[#1508](https://github.com/milvus-io/milvus/pull/1508)
 
-----------
+---
 
 ## v0.6.0
 
@@ -116,28 +113,28 @@ sidebar_label: 发版说明
 
 **版本兼容**
 
-| Milvus 版本    | Python SDK 版本     | Java SDK 版本    |
-| ---------------| -----------------|------------------|
-| 0.6.0          | 0.2.6            | 0.4.0            |
+| Milvus 版本 | Python SDK 版本 | Java SDK 版本 |
+| ----------- | --------------- | ------------- |
+| 0.6.0       | 0.2.6           | 0.4.0         |
 
 #### 新增功能
 
 - **仅支持 CPU 的 Milvus**
-  
-  Milvus v0.6.0提供了仅支持 CPU 和支持 GPU 两个版本的 Milvus。同时支持在纯 CPU 和 GPU 环境下在 Docker 容器中编译 Milvus。[#192](https://github.com/milvus-io/milvus/pull/192)
-  
+
+  Milvus v0.6.0 提供了仅支持 CPU 和支持 GPU 两个版本的 Milvus。同时支持在纯 CPU 和 GPU 环境下在 Docker 容器中编译 Milvus。[#192](https://github.com/milvus-io/milvus/pull/192)
+
 - **分区表**
-  
+
   新增了分区表功能以确保增量数据的高性能查询。Python，Java 和 C++ SDK 中增加了表分区相关接口，支持创建/删除分区表，向量插入指定分区表，以及指定分区表的查询等。[#245](https://github.com/milvus-io/milvus/pull/245)
-  
-- **实验功能** 
+
+- **实验功能**
 
   Milvus 的实验功能仍在持续开发和更新中，可能包含未知的错误。这些功能主要用于测试和用户反馈收集。
-  
+
   - **Mishards**
-  
+
     推出 Milvus 集群分片中间件 Mishards 作为分布式部署方案之一。Mishards 内部处理请求转发、读写分离、水平扩展、动态扩容，为用户提供内存和算力可以无限扩容的 Milvus 集群实例。[#232](https://github.com/milvus-io/milvus/pull/232/files)
-  
+
   - **新的索引类型**
 
     支持新的索引类型如 `SPTAG-KDT`，`SPTAG-BKT`，`RNSG` 和 `IVFPQ`。Milvus 集成了微软的 SPTAG 算法库，进而支持 `SPTAG-KDT` 和 `SPTAG-BKT` 两种索引类型。`RNSG` 是 Milvus 在 NSG 基础上做了优化之后自研的一种索引方式。`IVFPQ` 是倒排索引基础上进一步利用笛卡儿积对每个倒排文件中的向量进行编码的索引方式。[SPTAG#438](https://github.com/milvus-io/milvus/pull/438) [RNSG#554](https://github.com/milvus-io/milvus/pull/554) [IVFPQ#324](https://github.com/milvus-io/milvus/pull/324)
@@ -151,16 +148,16 @@ sidebar_label: 发版说明
 - **Milvus 优化过的 FAISS**
 
   在原有 FAISS 的基础上， Milvus 做了一些深层代码的优化以获得更优的查询性能和支持更多类型的索引类型，比如 `IVFSQ8H`。现在，我们将这部分针对 FAISS 进行优化的代码开源了。[#585](https://github.com/milvus-io/milvus/pull/585)
-  
+
 - **多张 GPU 创建索引**
 
   支持使用多张 GPU 来创建索引以减少创建索引和整体查询的时间。您可以通过对 Milvus 配置文件中的参数 `build_index_resources` 来指定用于创建索引的 GPU 卡。[#414](https://github.com/milvus-io/milvus/pull/414)
-  
+
 #### Bug 修复
 
 - 进一步解决了随查询次数增加，内存占用持续增加的问题。[#335](https://github.com/milvus-io/milvus/pull/335)
 
-----------
+---
 
 ## v0.5.3
 
@@ -168,15 +165,14 @@ sidebar_label: 发版说明
 
 **版本兼容**
 
-| Milvus 版本     | pymilvus 版本    | Java SDK 版本    |
-| ---------------| -----------------|------------------|
-| 0.5.3          | 0.2.5            | 0.3.0            |
-
+| Milvus 版本 | pymilvus 版本 | Java SDK 版本 |
+| ----------- | ------------- | ------------- |
+| 0.5.3       | 0.2.5         | 0.3.0         |
 
 #### 主要改进
 
 - Milvus server 到客户端的结果集数据传输性能增强了至少一倍，主要通过对 gRPC 的以下更新来实现：
-  
+
   - 优化了 messages；
   - 更改了生成代码的 API 接口；
   - 删除了 compression。
@@ -194,18 +190,18 @@ sidebar_label: 发版说明
     ```
 
 - Java SDK
- 
+
   - 在连接到 Milvus server 时，增加了 keepalive 和 idleTimeout 等设置选项。
-  - 用户现在可以通过 `getResultIdsList` 和 `getResultDistancesList` 分别获取搜索结果的 ids 和 distances，分别获取性能更优。也能通过  `getQueryResultsList` 获取同时包含 ids 和 distances 的对象 `QueryResult`。
-  
+  - 用户现在可以通过 `getResultIdsList` 和 `getResultDistancesList` 分别获取搜索结果的 ids 和 distances，分别获取性能更优。也能通过 `getQueryResultsList` 获取同时包含 ids 和 distances 的对象 `QueryResult`。
+
 - C++ SDK
 
   - 将其更改为动态库。
   - 新增了 README 文件。
-  
+
 - 提升了 `IVF_SQ8H` 的搜索性能。
 
-----------
+---
 
 ## v0.5.2
 
@@ -219,7 +215,7 @@ sidebar_label: 发版说明
 
 新增了日语版的 README 文件。（来自外部贡献者）
 
-----------
+---
 
 ## v0.5.1
 
@@ -235,7 +231,7 @@ sidebar_label: 发版说明
 - 解决了随着搜索次数增加，内存占用过大的问题。
 - 优化了搜索性能，解决了随着搜索次数增加，速度减慢的问题。
 
-----------
+---
 
 ## v0.5.0
 
@@ -249,7 +245,7 @@ sidebar_label: 发版说明
 
 - 系统启动可以设置预加载向量数据，免去首次查询时的加载时间。
 
-----------
+---
 
 ## v0.4.0
 
@@ -263,12 +259,11 @@ sidebar_label: 发版说明
 
 - 新增了“创建索引”，“用户自定义向量 id”，和“按日期范围删除向量”等 API 接口。
 
-
 #### 主要改进
 
 - 使用了 gRPC 作为远程通信系统。
 
-----------
+---
 
 ## v0.3.1
 
@@ -289,7 +284,7 @@ sidebar_label: 发版说明
 - 通过参数”insert_cache_immediately"来启用一边插一边查的功能。
 - 将原先以分数来评价搜索结果，改成对应的向量距离评价搜索结果。
 
-----------
+---
 
 ## v0.3.0
 
@@ -309,7 +304,7 @@ sidebar_label: 发版说明
 - 改善了查询的性能。
 - 新增了更多的监控指标。
 
-----------
+---
 
 ## v0.2.1
 
@@ -323,7 +318,7 @@ sidebar_label: 发版说明
 
 支持基于时间范围的查询。
 
-----------
+---
 
 ## v0.2.0
 
@@ -333,5 +328,5 @@ sidebar_label: 发版说明
 
 - 添加基于 C++ 和 Python 的 SDK。
 - 增加基于 Prometheus 的监控指标。
-- 增加基于Inverted File Index 的向量索引。
+- 增加基于 Inverted File Index 的向量索引。
 - 实现单节点的 Milvus。
