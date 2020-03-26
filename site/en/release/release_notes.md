@@ -6,6 +6,30 @@ sidebar_label: Release Notes
 
 # Release Notes
 
+## v0.7.1
+
+**Release date**：2020-3-30
+
+**Compatibility**
+
+| Milvus version | Python SDK version | Java SDK version | Go SDK version |
+| -------------- | ------------------ | ---------------- | -------------- |
+| 0.7.1          | 0.2.8              | 0.5.0            | 0.1.0          |
+
+#### New features
+
+- Added new distance metrics, including substructure and superstructure, for the `FLAT` index type. These metrics are used for substructure and superstructure search of chemical components.[#1603](https://github.com/milvus-io/milvus/issues/1603).
+
+#### Enhancements
+
+- Improved the performance of the compact operation. [#1619](https://github.com/milvus-io/milvus/issues/1619)
+- Improved search performance using CPU, especially for scenarios with multiple, concurrent connections. [#267](https://github.com/milvus-io/milvus/issues/267)
+- Improved the readability of Milvus logs. [#1719](https://github.com/milvus-io/milvus/issues/1719)
+- Upgraded Mishards to 0.7.1. [#1698](https://github.com/milvus-io/milvus/issues/1698)
+
+#### Bug fixes
+
+Refer to [CHANGELOG](https://github.com/milvus-io/milvus/blob/master/CHANGELOG.md) for details.
 
 ## v0.7.0
 
@@ -13,9 +37,9 @@ sidebar_label: Release Notes
 
 **Compatibility**
 
-| Milvus version    | Python SDK version     | Java SDK version    |  Go SDK version  |
-| ---------------| -----------------|------------------|--------------|
-| 0.7.0          | 0.2.8            | 0.5.0            |      0.1.0         |
+| Milvus version | Python SDK version | Java SDK version | Go SDK version |
+| -------------- | ------------------ | ---------------- | -------------- |
+| 0.7.0          | 0.2.8              | 0.5.0            | 0.1.0          |
 
 #### New features
 
@@ -42,7 +66,7 @@ sidebar_label: Release Notes
 - **RESTful API**
 
   Added RESTful API. Refer to [RESTful API Readme](https://github.com/milvus-io/milvus/blob/master/core/src/server/web_impl/README.md) for more information.
-  
+
 - **Go SDK**
 
   Added Go SDK. Refer to [https://github.com/milvus-io/milvus-sdk-go](https://github.com/milvus-io/milvus-sdk-go) for more information.
@@ -81,7 +105,7 @@ sidebar_label: Release Notes
 
 - Resolved the issue that duplicate IDs may be generated when inserting vector data using auto-generated IDs. [#1508](https://github.com/milvus-io/milvus/pull/1508)
 
-----------
+---
 
 ## v0.6.0
 
@@ -90,8 +114,8 @@ sidebar_label: Release Notes
 **Version Compatibility**
 
 | Milvus version | pymilvus version | Java SDK version |
-| ---------------| -----------------|------------------|
-| 0.6.0          | 0.2.6            |   0.4.0            |
+| -------------- | ---------------- | ---------------- |
+| 0.6.0          | 0.2.6            | 0.4.0            |
 
 #### New features
 
@@ -100,40 +124,40 @@ sidebar_label: Release Notes
   Milvus v0.6.0 provides Docker images for both CPU-only and GPU support Milvus. Milvus compilation on Docker is also supported on machines with or without GPU. [#192](https://github.com/milvus-io/milvus/pull/192)
 
 - **Table partitioning**
-  
+
   Add table partitioning funtion to secure fast query performance for incremental data. Partitioning APIs are added to Python, Java and C++ SDK to support partition creation, vector insertion into a specified partition and query against a specified partition, etc. [#245](https://github.com/milvus-io/milvus/pull/245)
-  
+
 - **Experimental features**
 
   The experimental features in Milvus are still under development and subject to change. They may contain unknown errors, and are intended for testing and user feedback gathering.
 
   - **Mishards**
-  
+
     Propose Mishards, a Milvus sharding middleware, as the distributed deployment solution. Mishards provides unlimited extension of memory and computation capacity through request forwarding, read/write splitting, horizontal scalability and dynamic extension. [#232](https://github.com/milvus-io/milvus/pull/232)
-  
+
   - **New index types**
 
-    Start supporting new experimental index types such as `SPTAG-KDT`, `SPTAG-BKT`, `RNSG` and `IVFPQ`. [SPTAG#438](https://github.com/milvus-io/milvus/pull/438) [RNSG#554](https://github.com/milvus-io/milvus/pull/554) [IVFPQ#324](https://github.com/milvus-io/milvus/pull/324) 
+    Start supporting new experimental index types such as `SPTAG-KDT`, `SPTAG-BKT`, `RNSG` and `IVFPQ`. [SPTAG#438](https://github.com/milvus-io/milvus/pull/438) [RNSG#554](https://github.com/milvus-io/milvus/pull/554) [IVFPQ#324](https://github.com/milvus-io/milvus/pull/324)
 
 - **Index test reports**
 
-  Provide performance [test reports](https://github.com/milvus-io/milvus/tree/master/docs) for `IVFFLAT`, `IVFSQ8` and `IVFSQ8H` indexes. 
-  
+  Provide performance [test reports](https://github.com/milvus-io/milvus/tree/master/docs) for `IVFFLAT`, `IVFSQ8` and `IVFSQ8H` indexes.
+
 #### Improvements
 
 - **Milvus internal FAISS**
 
   In addition to original FAISS, Milvus has made deep optimizations to increase query performance and support more index types such as `IVFSQ8H`. Now this part of internal FAISS is open sourced. [#585](https://github.com/milvus-io/milvus/pull/585)
-  
+
 - **Multiple GPUs for index building**
 
   Support index building by multiple GPUs to reduce index building and overall query time. You can specify multiple GPUs for index building process through Milvus configuration parameter `build_index_resources`. [#414](https://github.com/milvus-io/milvus/pull/414)
-  
+
 #### Bug fixes
 
 - Solved the issue of increased memory usage during vector queries. [#335](https://github.com/milvus-io/milvus/pull/335)
 
-----------
+---
 
 ## v0.5.3
 
@@ -142,24 +166,23 @@ sidebar_label: Release Notes
 **Version Compatibility**
 
 | Milvus version | pymilvus version | Java SDK version |
-| ---------------| -----------------|------------------|
+| -------------- | ---------------- | ---------------- |
 | 0.5.3          | 0.2.5            | 0.3.0            |
-
 
 #### Enhancements
 
 - Double the transmission speed of search results to the client application through the following updates to gRPC:
-  
+
   - Optimize messages.
   - Change the API of generated code.
   - Remove compression.
-  
+
 - Python SDK
 
   - Divide the storage of search result ids and distances into separate arrays, which reduces the API response time.
   - Add a new option to retrieve a specific target vector in search results: `id = results.id_array[i][j], distance = results.distance_array[i][j]`.
   - Add a new option for looping over arrays, which takes much less time if `nq` and `topk` is large.
-    
+
     ```python
     >> for id_list, dis_list in zip(results.id_array, results.distance_array):
     >>     for id, dis in zip(id_list, dis_list):
@@ -167,18 +190,18 @@ sidebar_label: Release Notes
     ```
 
 - Java SDK
- 
+
   - Add keepalive and idleTimeout settings when connecting to Milvus server.
   - Now users can retrieve search result ids and distances separately through `getResultIdsList` and `getResultDistancesList` with better performance, or they can retrieve them together as a list of `QueryResult` objects through `getQueryResultsList`.
-  
+
 - C++ SDK
 
   - Now C++ SDK uses shared library.
   - Add README file.
-  
+
 - Enhance the search performance of `IVF_SQ8H`.
 
-----------
+---
 
 ## v0.5.2
 
@@ -192,7 +215,7 @@ Add a system lock to avoid the generation of files with duplicated data file nam
 
 Add a Japanese version of README file. (from an external contributor)
 
-----------
+---
 
 ## v0.5.1
 
@@ -208,7 +231,7 @@ Add a Japanese version of README file. (from an external contributor)
 - Reduce memory footprint of queries.
 - Optimize query performance to achieve unfluctuating search speed.
 
-----------
+---
 
 ## v0.5.0
 
@@ -222,7 +245,7 @@ Add a Japanese version of README file. (from an external contributor)
 
 - Add preload table into memory at Milvus startup.
 
-----------
+---
 
 ## v0.4.0
 
@@ -236,12 +259,11 @@ Add a Japanese version of README file. (from an external contributor)
 
 - Add new API about index creation, user-defined vector ids, and vector deletion by date range, etc.
 
-
 #### Improvements
 
 - Use gRPC as the communication facility.
 
-----------
+---
 
 ## v0.3.1
 
@@ -251,7 +273,7 @@ Add a Japanese version of README file. (from an external contributor)
 
 - Added a new type of index `IVFSQ` which could significantly improve the overall throughput of vector processing.
 - Added a new metric of vector distance calculation `IP` (Inner Product), in addition to `L2` (Euclidean Distance).
-- Added multiple parameters which optimizes index building, search precision and search speed. 
+- Added multiple parameters which optimizes index building, search precision and search speed.
 
 #### Improvements
 
@@ -260,9 +282,9 @@ Add a Japanese version of README file. (from an external contributor)
 - You can designate a portion of the memory for buffer usage of data insertion, by configuring parameter `insert_buffer_size`.
 - In regard to cache management, by configuring `cache_free_percent`, you can now decide, when the cache reaches its capacity, how much data should be kept instead of being erased.
 - You can enable simultaneous inserting and searching of vectors by setting `insert_cache_immediately` to `True`.
-- Search results are evaluated based on the distances between search results and the target vectors, rather than the score. 
+- Search results are evaluated based on the distances between search results and the target vectors, rather than the score.
 
-----------
+---
 
 ## v0.3.0
 
@@ -286,7 +308,7 @@ Add a Japanese version of README file. (from an external contributor)
 - CMake makefile refactoring
 - Improved the time range query
 
-----------
+---
 
 ## v0.2.1
 
@@ -300,7 +322,7 @@ Added data loading and computation pipeline.
 
 You can now search data within a specific date range.
 
-----------
+---
 
 ## v0.2.0
 
