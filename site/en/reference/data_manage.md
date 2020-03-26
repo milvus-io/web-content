@@ -24,10 +24,10 @@ Follow the steps below to use MySQL as metadata management service in Linux:
     $ docker run -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 -d mysql:latest
     ```
 
-3. Use root account to log in MySQL. Press \<ENTER\> to enter the password you set in the previous step.
+3. Use root account and the IP of the host that runs MySQL service (`<MySQL_server_host IP>`) to log in MySQL. Press \<ENTER\> to enter the password you set in the previous step.
 
     ```shell
-    $ mysql -h127.0.0.1 -uroot -p
+    $ mysql -h<MySQL_server_host IP> -uroot -p
     ```
 
 4. Enter MySQL client command line interface to create a database. Here we use `milvus` as the database name.
@@ -36,10 +36,10 @@ Follow the steps below to use MySQL as metadata management service in Linux:
     create database milvus
     ```
 
-5. Quit MySQL client and update the `backend_url` parameter in `server_config.yaml`. Use the IP of the host that runs MySQL service. `127.0.0.1` is used in the following example. Note that the password, port, and database name must be consistent with your previous settings.
+5. Quit MySQL client and update the `backend_url` parameter in `server_config.yaml`. Use the IP of the host that runs MySQL service (`<MySQL_server_host IP>`). Note that the password, IP address, port, and database name must be consistent with your previous settings.
 
     ```yaml
-    backend_url: mysql://root:123456@127.0.0.1:3306/milvus
+    backend_url: mysql://root:123456@<MySQL_server_host IP>:3306/milvus
     ```
 
 6. Use the updated `server_config.yaml` to launch Milvus.
