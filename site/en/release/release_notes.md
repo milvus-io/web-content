@@ -18,7 +18,7 @@ sidebar_label: Release Notes
 
 #### New features
 
-- Added new distance metrics, including substructure and superstructure, for the `FLAT` index type. These metrics are used for substructure and superstructure search of chemical components.[#1603](https://github.com/milvus-io/milvus/issues/1603).
+- Added new distance metrics, including substructure and superstructure, for the `FLAT` index type. These metrics are used for substructure and superstructure search of chemical structures.[#1603](https://github.com/milvus-io/milvus/issues/1603).
 
 #### Enhancements
 
