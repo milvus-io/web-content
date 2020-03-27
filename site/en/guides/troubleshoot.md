@@ -62,20 +62,17 @@ Milvus includes the following index building methods:
 
 #### Automatic index building
 
-- CPU-only Milvus: Index building and search need to consume all CPU resources. Thus, when building indexes in the backend, the search operation starts running when index building is complete.
-- GPU-supported Milvus: If you use GPU for index building, other GPU or CPU resources can still perform search operations.
+- **(CPU-only Milvus)** Index building and search need to consume all CPU resources. Thus, when building indexes in the backend, the search operation starts running when index building is complete.
+- **(GPU-supported Milvus)** If you use GPU for index building, other GPU or CPU resources can still perform search operations.
 
 #### Manual index building
 
-- CPU-only Milvus: Because `create_index` is an blocking operation, the search operation can start only after `create_index` is complete. If there are multiple clients available, you can use another client for search operations. Because both index building and search need to consume all CPU resources, search operations wait until index building is complete.
-- GPU-supported Milvus: Because `create_index` is an blocking operation, the search operation can start only after `create_index` is complete. Index building only uses one GPU. If there are multiple clients available, you can use another client for search operations with other GPU or CPU resources. Thus, index building can run asynchronously with search.
+- **(CPU-only Milvus)** Because `create_index` is an blocking operation, the search operation can start only after `create_index` is complete. If there are multiple clients available, you can use another client for search operations. Because both index building and search need to consume all CPU resources, search operations wait until index building is complete.
+- **(GPU-supported Milvus)** Because `create_index` is an blocking operation, the search operation can start only after `create_index` is complete. Index building only uses one GPU. If there are multiple clients available, you can use another client for search operations with other GPU or CPU resources. Thus, index building can run asynchronously with search.
 
 ### `compact` operation
 
-`delete_by_id` only records a list of ids of vectors to delete and the vectors are not actually deleted from data files. `compact` is required to remove the deleted vectors from data files.
-
-- The `compact` operation consumes a lot of resources. First, vector data that is not deleted is retrieved from raw data files and generated to a new data file. If index is built for the data file, the index file is deleted and a new index file is created.
-- The `compact` operation is a blocking operation because it contains a lot of disk IO and possibly index building operations. Therefore, search performance of other clients can be severely affected.
+`delete_by_id` only records a list of ids of vectors to delete and the vectors are not actually deleted from data files. `compact` is required to remove the deleted vectors from data files. The `compact` operation consumes a lot of resources. First, vector data that is not deleted is retrieved from raw data files and generated to a new data file. If index is built for the data file, the index file is deleted and a new index file is created. The `compact` operation is a blocking operation because it contains a lot of disk IO and possibly index building operations. Therefore, search performance of other clients can be severely affected.
 
 ### `preload_collection` operation
 
