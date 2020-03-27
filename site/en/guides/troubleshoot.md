@@ -39,7 +39,7 @@ Multiple Milvus operations can affect search operations. If you encounter proble
 
 - For one client, the insert operation is a blocking operation. The search operation cannot be performed before the insert operation is completed.
 - For multiple clients, assume client A frequently performs insert operations and client B performs search operations at the same time. Because part of CPU resources is consumed by insert operations, the search performance of client B is also affected.
-- After inserting data, to ensure that data is written to disk, you need to invoke the `flush` operation. The `flush` operation is a blocking operation and consumes minor CPU and disk IO resources. Thus, the effect on the performance of other clients is limited.
+- After inserting data, to ensure that data is written to disk, you need to invoke the `flush` operation. The `flush` operation is a blocking operation and consumes minor CPU and disk I/O resources. Thus, the effect on the performance of other clients is limited.
 - Index building operations caused by insert operations can also affect search operations.
 
 ### Index building operations
@@ -48,13 +48,13 @@ Multiple Milvus operations can affect search operations. If you encounter proble
 
 Milvus includes the following index building methods:
 
-- Automatic index building in the backend. The steps are:
+- Automatic index building in the backend:
 
   1. Invoke `create_collection` to create an empty collection.
   2. Invoke `create_index` to assign an index type for the collection (any index type other than IDMAP).
   3. Invoke `insert` multiple times to insert data. When the size of accumulated inserted data reaches the value of `index_file_size`, the backend automatically builds index for new data files that reach the size of `index_file_size`.
 
-- Manually invoke `create_index` to build index. The primary steps include:
+- Manually invoke `create_index` to build index:
 
   1. Invoke `create_collection` to create an empty collection.
   2. Invoke `insert` multiple times to insert data. Because no index is assigned to the collection, Milvus does not automatically build indexes in the backend.
@@ -72,7 +72,7 @@ Milvus includes the following index building methods:
 
 ### `compact` operation
 
-`delete_by_id` only records a list of ids of vectors to delete and the vectors are not actually deleted from data files. `compact` is required to remove the deleted vectors from data files. The `compact` operation consumes a lot of resources. First, vector data that is not deleted is retrieved from raw data files and generated to a new data file. If index is built for the data file, the index file is deleted and a new index file is created. The `compact` operation is a blocking operation because it contains a lot of disk IO and possibly index building operations. Therefore, search performance of other clients can be severely affected.
+`delete_by_id` only records a list of ids of vectors to delete and the vectors are not actually deleted from data files. `compact` is required to remove the deleted vectors from data files. The `compact` operation consumes a lot of resources. First, vector data that is not deleted is retrieved from raw data files and generated to a new data file. If index is built for the data file, the index file is deleted and a new index file is created. The `compact` operation is a blocking operation because it contains a lot of disk I/O and possibly index building operations. Therefore, search performance of other clients can be severely affected.
 
 ### `preload_collection` operation
 
@@ -80,7 +80,7 @@ Milvus includes the following index building methods:
 
 ### `delete_by_id` operation
 
-`delete_by_id` is often accompanied by `flush` to ensure that delete operations take effect. The `flush` operation consumes minor CPU and disk IO resources and has relatively small effect on the search performance of other clients.
+`delete_by_id` is often accompanied by `flush` to ensure that delete operations take effect. The `flush` operation consumes minor CPU and disk I/O resources and has relatively small effect on the search performance of other clients.
 
 ### Operations to acquire information
 
