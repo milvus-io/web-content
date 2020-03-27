@@ -33,7 +33,7 @@ If you cannot resolve the issue easily yourself, you can:
 
 ## Troubleshoot search operations
 
-Multiple Milvus operations can affect search operations. If you encounter problems in vector search, please check whether your problem is caused by one of the following reasons:
+Multiple Milvus operations can affect search operations. If you encounter problems in search operations such as blocked operations or low performance, please check whether your problem is caused by one of the following operations:
 
 ### Insert operations
 
