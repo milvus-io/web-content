@@ -14,7 +14,7 @@ sidebar_label: Release Notes
 
 | Milvus version | Python SDK version | Java SDK version | Go SDK version |
 | -------------- | ------------------ | ---------------- | -------------- |
-| 0.7.1          | 0.2.8              | 0.5.0            | 0.1.0          |
+| 0.7.1          | 0.2.9              | 0.6.0            | 0.2.0          |
 
 #### New features
 
