@@ -24,7 +24,8 @@ sidebar_label: 发版说明
 
 - 改善了 Compact 操作的性能。[#1619](https://github.com/milvus-io/milvus/issues/1619)
 - 改善了 Milvus 使用 CPU 进行查询的性能，特别是提高了在多连接并发场景下的查询性能。[#267](https://github.com/milvus-io/milvus/issues/267)
-- 改善了 Milvus 日志的可读性。[#1719](https://github.com/milvus-io/milvus/issues/1719)
+- 改善了 nq 小于 CPU 线程数时 Milvus 的搜索性能。[#1690](https://github.com/milvus-io/milvus/issues/1690)
+- 对于多个客户端的相同查询请求，Milvus 会将进行合并查询，从而显著提高查询速度。[#1728](https://github.com/milvus-io/milvus/issues/1728)
 - Mishards 同步升级到 0.7.1。[#1698](https://github.com/milvus-io/milvus/issues/1698)
 
 #### Bug 修复
