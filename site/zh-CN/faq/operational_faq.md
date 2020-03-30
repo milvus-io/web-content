@@ -54,7 +54,7 @@ sidebar_label: Operational FAQ
 
 #### Milvus 对 collection 和 分区的数量有限制吗？
 
-有。Collection 和 分区总数不能超过50000。
+有。如果您使用 SQLite 作为元数据管理服务，则 Collection 和分区总数不能超过50000。如果您需要更多的 collection 和分区，请[使用 MySQL](../reference/data_manage.md)。
 
 #### 为什么 Milvus 返回 config check error 的错误？
 

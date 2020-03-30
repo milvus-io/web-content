@@ -55,7 +55,7 @@ It is recommended that you use the docker images with the Milvus compilation env
 
 #### Is there a limitation for the number of collections and partitions in Milvus?
 
-Yes. The sum of collection number and partition number must not exceed 50000.
+Yes. If you use SQLite as the metadata management service, the sum of collection number and partition number must not exceed 50000. To create more collections and partitions, please [use MySQL](../reference/data_manage.md).
 
 #### Why does Milvus return config check error?
 
