@@ -1,7 +1,7 @@
 {
   "menuList": [
   {
-      "id": "about_milvus",
+      "id": "aboutmilvus",
       "title": "About Milvus",
       "lang": "en",
       "label1": "",
@@ -14,7 +14,7 @@
       "id": "overview.md",
       "title": "Milvus Overview",
       "lang": "en",
-      "label1": "about_milvus",
+      "label1": "aboutmilvus",
       "label2": null,
       "label3": null,
       "order": 0
@@ -23,7 +23,7 @@
       "id": "vector.md",
       "title": "Feature Vector",
       "lang": "en",
-      "label1": "about_milvus",
+      "label1": "aboutmilvus",
       "label2": null,
       "label3": null,
       "order": 1
@@ -32,7 +32,7 @@
       "id": "traditional_db.md",
       "title": "Traditional Databases",
       "lang": "en",
-      "label1": "about_milvus",
+      "label1": "aboutmilvus",
       "label2": null,
       "label3": null,
       "order": 2
@@ -41,7 +41,7 @@
       "id": "index_method.md",
       "title": "Vector Search Methods",
       "lang": "en",
-      "label1": "about_milvus",
+      "label1": "aboutmilvus",
       "label2": null,
       "label3": null,
       "order": 3
@@ -50,7 +50,7 @@
       "id": "vector_db.md",
       "title": "Other Feature Vector Search Tools",
       "lang": "en",
-      "label1": "about_milvus",
+      "label1": "aboutmilvus",
       "label2": null,
       "label3": null,
       "order": 4
