@@ -1,7 +1,7 @@
 {
   "menuList": [
   {
-      "id": "aboutmilvus",
+      "id": "about_milvus",
       "title": "关于 Milvus",
       "lang": "en",
       "label1": "",
@@ -14,7 +14,7 @@
       "id": "overview.md",
       "title": "Milvus 简介",
       "lang": "en",
-      "label1": "aboutmilvus",
+      "label1": "about_milvus",
       "label2": null,
       "label3": null,
       "order": 0
@@ -23,7 +23,7 @@
       "id": "vector.md",
       "title": "特征向量",
       "lang": "en",
-      "label1": "aboutmilvus",
+      "label1": "about_milvus",
       "label2": null,
       "label3": null,
       "order": 1
@@ -32,7 +32,7 @@
       "id": "traditional_db.md",
       "title": "传统数据库与特征向量检索",
       "lang": "en",
-      "label1": "aboutmilvus",
+      "label1": "about_milvus",
       "label2": null,
       "label3": null,
       "order": 2
@@ -41,7 +41,7 @@
       "id": "index_method.md",
       "title": "向量检索算法",
       "lang": "en",
-      "label1": "aboutmilvus",
+      "label1": "about_milvus",
       "label2": null,
       "label3": null,
       "order": 3
@@ -50,7 +50,7 @@
       "id": "vector_db.md",
       "title": "其它特征向量检索工具",
       "lang": "en",
-      "label1": "aboutmilvus",
+      "label1": "about_milvus",
       "label2": null,
       "label3": null,
       "order": 4
