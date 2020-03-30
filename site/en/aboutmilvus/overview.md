@@ -8,41 +8,45 @@ sidebar_label: Milvus Overview
 
 ## What is Milvus
 
-Milvus is an open source similarity search engine for massive-scale vector datasets. Built with heterogeneous computing architecture for the best cost efficiency. Searches over billion-scale vectors take only milliseconds with minimum computing resources.
+As an open source vector similarity search engine, Milvus is easy-to-use, highly reliable, scalable, robust, and blazing fast. Adopted by over 100 organizations and institutions worldwide, Milvus empowers applications in a variety of fields, including image processing, computer vision, natural language processing, voice recognition, recommender systems, drug discovery, etc.
 
 ## Key features
 
-- Heterogeneous computing
+- Comprehensive Similarity Metrics
 
-  Milvus is designed with heterogeneous computing architecture for the best performance and cost efficiency.
+  Milvus offers frequently used similarity metrics, including Euclidean distance, inner product, Hamming distance, Jaccard distance, etc, allowing you to explore vector similarity in the most effective and efficient way possible.
 
-- Multiple indexes
+- Leading-Edge Performance
 
-  Milvus supports a variety of indexing types that employs quantization-based, tree-based, and graph-based indexing techniques.
+  Milvus is built on top of multiple optimized Approximate Nearest Neighbor Search (ANNS) indexing libraries, including faiss, annoy, and hnswlib, etc., thus ensuring that you always get the best performance across various scenarios.
 
-- Intelligent resource management
+- Dynamic Data Management
+  
+  No longer troubled by static data, you can operate data with insertion, deletion, search and update whenever needed. 
 
-  Milvus automatically adapts search computation and index building processes based on your datasets and available resources.
+- Near Real Time Search
+  
+  Data is available for search almost immediately after being inserted and updated. Milvus does the heavy lifting in your best interests in terms of both result accuracy and data consistency.
 
-- Horizontal scalability
+- Cost-Efficient
+  
+  Milvus harnesses the parallelism of modern processors and enables billion-scale similarity searches in milliseconds on a single off-the-shelf server. 
 
-  Milvus supports online / offline expansion to scale both storage and computation resources with simple commands.
+- Rich Data Type and Advanced Search (coming soon)
+  
+  Milvus supports various data types for fields in a record. You can also use advanced search methods, such as filtering, sorting and aggregation for one or multiple fields.
 
-- High availability
+- Highly Scalable and Robust
+  
+  You can deploy Milvus in a distributed environment. To increase the capacity and reliability of a Milvus cluster, you can simply add more nodes.
 
-  Milvus supports WAL (Write-Ahead Logging), which ensures the atomicity and durability of data operations. Milvus is integrated with the Kubernetes framework so that all single point of failures could be avoided for distributed scenarios.
+- Cloud Native
+  
+  We make it easy for you to run Milvus on public cloud, private cloud, or somewhere in between.
 
-- High compatibility
+- Ease of Use
 
-  Milvus is compatible with almost all deep learning models. Milvus supports multiple programming languages such as Python, Java, C++, and Go. Milvus also supports RESTful API.
-
-- Ease of use
-
-  Milvus can be easily installed in a few steps and enables you to exclusively focus on feature vectors.
-
-- Visualized monitor
-
-  You can track system performance on Prometheus-based GUI monitor dashboards.
+  Milvus provides easy-to-use SDKs in Python, Java, Go and C++, as well as a RESTful API.
 
 
 ## Overall architecture
