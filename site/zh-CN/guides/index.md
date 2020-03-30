@@ -64,7 +64,7 @@ sidebar_label: Index Types
 
 ### `IVF_SQ8H`
 
-基于 `IVF_SQ8` 做了深层优化，但需要 CPU 和 GPU 都在的情况下才能使用。不同于 `IVF_SQ8`，`IVF_SQ8H` 使用基于 GPU 的 coarse quantizer，能极大减少标准量化时间，提高查询速度。
+基于 `IVF_SQ8` 做了深层优化，但需要 CPU 和 GPU 都在的情况下才能使用。不同于 `IVF_SQ8`，`IVF_SQ8H` 使用基于 GPU 的 coarse quantizer，可以提高查询速度。
 
 ### `IVF_PQ`
 
