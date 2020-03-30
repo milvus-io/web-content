@@ -10,6 +10,8 @@ sidebar_label: Data Management
 
 Milvus 默认使用 SQLite 作为元数据后台管理服务，SQLite 内嵌于 Milvus 进程中，无需启动额外服务。但是在生产环境中，基于可靠性的考虑，我们强烈建议您使用 MySQL 作为元数据管理服务。
 
+> 注意：Milvus 在 CentOS 系统中不支持 MySQL 8.0 或更高版本。
+
 请参考以下步骤使用 MySQL 作为元数据管理服务：
 
 1. 拉取 MySQL 最新镜像。
