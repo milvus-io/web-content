@@ -51,7 +51,7 @@ As an open source vector similarity search engine, Milvus is easy-to-use, highly
 
 ## Overall architecture
 
-![Milvus architecture](https://raw.githubusercontent.com/milvus-io/docs/master/assets/milvus_arch.png)
+![Milvus architecture](../../../assets/milvus_arch.png)
 
 ## What's next
 
