@@ -1,10 +1,10 @@
 ---
 id: glossary.md
-title: Glossary
-sidebar_label: Glossary
+title: Milvus Terminology
+sidebar_label: Milvus Terminology
 ---
 
-# Glossary
+# Milvus Terminology
 
 - **Compact**: An operation that releases space from a segment when data is deleted from the segment.
 - **Collection**: A collection that consists of a set of entities and are equivalent to a table in an RDBMS.

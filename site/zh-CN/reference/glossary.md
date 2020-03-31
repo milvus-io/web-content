@@ -1,10 +1,10 @@
 ---
 id: glossary.md
-title: Glossary
-sidebar_label: Glossary
+title: Milvus 术语
+sidebar_label: Milvus 术语
 ---
 
-# 名词解释
+# Milvus 术语
 
 - 集合（Collection）: 包含一组 entity，可以等价于关系型数据库系统（RDBMS）中的表。
 - 整合（Compact）: 当数据从 segment 中删除时释放相应空间。
