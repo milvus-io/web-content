@@ -229,6 +229,15 @@
       "label1": "reference",
       "label2": "",
       "order": 6
+    },    
+    {
+      "id": "glossary.md",
+      "title": "Glossary",
+      "lang": "en",
+      "label1": "reference",
+      "label2": null,
+      "label3": null,
+      "order": 7
     },
     {
       "id": "faq",
