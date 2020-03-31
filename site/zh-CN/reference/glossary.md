@@ -1,5 +1,5 @@
 ---
-id: glossary.md
+id: terms.md
 title: Milvus 术语
 sidebar_label: Milvus 术语
 ---

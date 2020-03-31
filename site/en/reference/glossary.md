@@ -1,5 +1,5 @@
 ---
-id: glossary.md
+id: terms.md
 title: Milvus Terminology
 sidebar_label: Milvus Terminology
 ---
