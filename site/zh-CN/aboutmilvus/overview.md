@@ -51,7 +51,7 @@ Milvus 是一款开源的特征向量相似度搜索引擎，具有使用方便�
 
 ## 整体架构
 
-![Milvus 架构](https://raw.githubusercontent.com/milvus-io/docs/master/assets/milvus_arch.png)
+![Milvus 架构](../../../assets/milvus_arch.png)
 
 ## 接下来您可以
 

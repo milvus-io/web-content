@@ -27,14 +27,14 @@ Milvus uses Prometheus to store and monitor its metrics, and it uses Grafana for
 
 The following graph shows how Prometheus works in Milvus:
 
-![prometheus](https://raw.githubusercontent.com/milvus-io/docs/v0.7.0/assets/monitoring/monitoring.png)
+![prometheus](../../../assets/monitoring/monitoring.png)
 
 
 - Grafana
 
   Grafana is an open source platform for time-series analytics and used in Milvus to visualize various performance metrics:
 
-  ![dashboard](https://raw.githubusercontent.com/milvus-io/docs/v0.7.0/assets/prometheus.png)
+  ![dashboard](../../../assets/prometheus.png)
 
 
 ### Events to create alert rules

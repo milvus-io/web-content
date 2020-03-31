@@ -27,13 +27,13 @@ Milvus 使用 Prometheus 作为监控和性能指标存储方案，使用 Grafan
 
 其工作流程如下图所示:
 
-![1566787785125](https://raw.githubusercontent.com/milvus-io/docs/v0.7.0/assets/monitoring/monitoring.png)
+![1566787785125](../../../assets/monitoring/monitoring.png)
 
 - Grafana
 
   Grafana 是一个开源的时序数据分析及可视化平台。Milvus 使用 Grafana 来展示各项性能指标：
 
-  ![prometheus.png](https://raw.githubusercontent.com/milvus-io/docs/v0.7.0/assets/prometheus.png)
+  ![prometheus.png](../../../assets/prometheus.png)
 
 
 ### 需要报警的事件
