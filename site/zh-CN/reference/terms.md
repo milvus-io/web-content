@@ -19,7 +19,7 @@ sidebar_label: Milvus 术语
 
 - **Mapping**: 一系列规则用来定义 collection 如何组织数据。
 
-- **Segment**: Milvus 在数据插入时通过合并数据自动创建的数据文件。一个 collection 可以包含多个 segment。在搜索中，Milvus 会搜索每个 segment，过滤被删除的数据，并返回合并后的结果。
+- **Segment**: Milvus 在数据插入时通过合并数据自动创建的数据文件。一个 collection 可以包含多个 segment。一个 segment 可以包含多个 entity。在搜索中，Milvus 会搜索每个 segment，过滤被删除的数据，并返回合并后的结果。
 
 - **Vector**: 一种类型的 field，代表对象的特征。
   > 注意：目前，一个实体最多只能包含一个向量。

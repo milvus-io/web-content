@@ -19,7 +19,7 @@ sidebar_label: Milvus Terminology
 
 - **Mapping**: A set of rules that define how data is organized in a collection.
 
-- **Segment**: A data file that Milvus automatically creates by merging inserted data. A collection can contain multiple segments. During search, Milvus searches each segment, filters deleted data, and returns the combined result.
+- **Segment**: A data file that Milvus automatically creates by merging inserted data. A collection can contain multiple segments. One segment can contain multiple entities. During search, Milvus searches each segment, filters deleted data, and returns the combined result.
 
 - **Vector**: A type of field representing the feature of an object.
   > Note: Currently, an entity can only contain up to one vector.
