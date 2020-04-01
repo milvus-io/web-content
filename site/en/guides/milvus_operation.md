@@ -187,7 +187,7 @@ You can delete these vectors by:
 
 ## Flush data in one or multiple collections to disk
 
-When performing operations related to data changes, you can flush the data from memory to disk to avoid possible data loss. Milvus also supports automatic flushing, which runs at a fixed interval to flush the data in all collections to disk. You can use the [Milvus server configuration file](../reference/milvus_config.md) to set the interval.
+When performing operations related to data changes, you can flush the data from memory to disk to avoid possible data loss. Milvus also performs automatic flushing, which runs at a fixed interval (1 second) to flush the data in all collections to disk.
 
 ```python
 >>> milvus.flush(collection_name_array=['test01'])
