@@ -6,6 +6,30 @@ sidebar_label: Release Notes
 
 # Release Notes
 
+## v0.8.0
+
+**Release date**：2020-4-15
+
+**Compatibility**
+
+| Milvus version | Python SDK version | Java SDK version | Go SDK version |
+| ----------- | --------------- | ------------- | ----------- |
+| 0.8.0       | ？          | ？         | ？       |
+
+#### New features
+
+- Added `ANNOY` index type. Refer to [our documentation](../guides/index.md) for more information. [#261](https://github.com/milvus-io/milvus/issues/261)
+
+#### Enhancements
+
+- Index types that did not support delete operations in previous versions support delete operations from the 0.8.0 release. [#1603](https://github.com/milvus-io/milvus/issues/1603)
+
+#### Bug fixes
+
+- Refer to [CHANGELOG](https://github.com/milvus-io/milvus/blob/master/CHANGELOG.md) for more information.
+
+---
+
 ## v0.7.1
 
 **Release date**：2020-3-30
@@ -31,6 +55,8 @@ sidebar_label: Release Notes
 #### Bug fixes
 
 Refer to [CHANGELOG](https://github.com/milvus-io/milvus/blob/master/CHANGELOG.md) for details.
+
+---
 
 ## v0.7.0
 
