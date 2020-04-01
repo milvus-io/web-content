@@ -50,7 +50,7 @@ If you do not see the server listed, start the **Docker** daemon.
 Pull the CPU-only image:
 
 ```shell
-$ docker pull milvusdb/milvus:0.7.1-cpu-d032920-3cdba5
+$ docker pull milvusdb/milvus:0.7.1-cpu-d040120-d2fad1
 ```
 
 > Note: If the pulling speed is too slow or the pulling process constantly fails, refer to [Operational FAQ](../../../faq/operational_faq.md) for possible solutions.
@@ -79,7 +79,7 @@ $ docker run -d --name milvus_cpu \
 -v /home/$USER/milvus/conf:/var/lib/milvus/conf \
 -v /home/$USER/milvus/logs:/var/lib/milvus/logs \
 -v /home/$USER/milvus/wal:/var/lib/milvus/wal \
-milvusdb/milvus:0.7.1-cpu-d032920-3cdba5
+milvusdb/milvus:0.7.1-cpu-d040120-d2fad1
 ```
 
 The `docker run` options used in the above command are defined as follows:
@@ -124,7 +124,7 @@ $ docker run -d --name milvus_cpu ^
 -v C:\milvus\conf:/var/lib/milvus/conf ^
 -v C:\milvus\logs:/var/lib/milvus/logs ^
 -v C:\milvus\wal:/var/lib/milvus/wal ^
-milvusdb/milvus:0.7.1-cpu-d032920-3cdba5
+milvusdb/milvus:0.7.1-cpu-d040120-d2fad1
 ```
 
 ## Install Milvus on MacOS
@@ -153,7 +153,7 @@ $ docker run -d --name milvus_cpu \
 -v /home/$USER/milvus/conf:/var/lib/milvus/conf \
 -v /home/$USER/milvus/logs:/var/lib/milvus/logs \
 -v /home/$USER/milvus/wal:/var/lib/milvus/wal \
-milvusdb/milvus:0.7.1-cpu-d032920-3cdba5
+milvusdb/milvus:0.7.1-cpu-d040120-d2fad1
 ```
 
 ## What's next
