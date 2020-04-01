@@ -183,7 +183,7 @@ You can delete these vectors by:
 >>> milvus.delete_by_id(collection_name='test01', id_array=ids)
 ```
 
-> Note: Vector deletion only supported by index types that run in CPU, including `FLAT`, `IVFLAT`, and `IVFSQ8`. For other index types, even if you have performed vector deletion, the deleted vectors can still be searched.
+> Note: Vector deletion is only supported by index types that run in CPU, including `FLAT`, `IVFLAT`, and `IVFSQ8`. For other index types, even if you have performed vector deletion, the deleted vectors can still be searched.
 
 ## Flush data in one or multiple collections to disk
 
