@@ -188,7 +188,7 @@ sidebar_label: Learn Milvus Operations
 
 ## 将 collection 中的数据进行 flush 操作
 
-当您在进行有关数据更改的操作时，您可以将 collection 中的数据从内存中进行 flush 操作使数据落盘。Milvus 也支持自动 flush。自动 flush 会在固定的时间周期（1 秒）将所有现存 collection 的数据进行 flush 操作。
+当您在进行有关数据更改的操作时，您可以将 collection 中的数据从内存中进行 flush 操作使数据落盘。Milvus 也会执行自动 flush。自动 flush 会在固定的时间周期（1 秒）将所有现存 collection 的数据进行 flush 操作。
 
 ```python
 >>> milvus.flush(collection_name_array=['test01'])
