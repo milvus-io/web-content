@@ -23,7 +23,7 @@ sidebar_label: Index Types
 | `IVF_PQ`   | ✔️                      | ✔️              | ✔️                   | ❌                    |
 | `RNSG`     | ✔️                      | ✔️              | ✔️                   | ❌                    |
 | `HNSW`     | ✔️                      | ✔️              | ✔️                   | ❌                    |
-
+| `ANNOY`     | ✔️                      | ✔️              | ✔️                   | ❌                    |
 </div>
 
 ### Index types in Milvus with GPU support
@@ -39,7 +39,7 @@ sidebar_label: Index Types
 | `IVF_PQ`   | ✔️                      | ✔️              | ✔️ (GPU index building is supported only for Euclidean distance) | ✔️ (GPU search is supported only for Euclidean distance) | ✔️                   | ❌                    |
 | `RNSG`     | ✔️                      | ✔️              | ❌                                                               | ❌                                                       | ✔️                   | ❌                    |
 | `HNSW`     | ✔️                      | ✔️              | ❌                                                               | ❌                                                       | ✔️                   | ❌                    |
-
+| `ANNOY`     | ✔️                      | ✔️              | ❌                                                               | ❌                                                       | ✔️               | ❌                    |
 </div>
 
 > Note: For different index types, the index building parameters and search parameters also differ. Refer to [learn Milvus Operations](milvus_operation.md) for more information.
@@ -87,6 +87,12 @@ Compared to `NSG` which searches query vectors one by one, `RNSG` supports concu
 `HNSW` index is built based on hierarchical navigable small world graphs, which is a graph-based structure that incrementally builds a multi-layer structure and separates links by characteristc distance scales. Logarithmic scaling complexity makes it quite efficient for high-dimensional data.
 
 Compared with `RNSG`, `HNSW` has better memory and time efficiency. `HNSW` also supports incremental indexing, which is missing in `RNSG`. However, because the graphs need to be loaded to memory, `HNSW` requires more memory than `RNSG`.
+
+### `ANNOY`
+
+`ANNOY` index is built based on the tree structure and divides the space by hyperplanes chosen with random projections. Because data can be saved to files and mmapped to memory, multiple processes can share the same data.
+
+Compared with other index types, `ANNOY` has the best performance when it comes to scenarios with multiple processes. However, because data is mmapped to memory, memory usage is relatively high.
 
 ## Choosing an index
 

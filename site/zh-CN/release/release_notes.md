@@ -6,6 +6,30 @@ sidebar_label: 发版说明
 
 # 发版说明
 
+## v0.8.0
+
+**发布时间**：2020-4-15
+
+**版本兼容**
+
+| Milvus 版本 | Python SDK 版本 | Java SDK 版本 | Go SDK 版本 |
+| ----------- | --------------- | ------------- | ----------- |
+| 0.8.0       | 0.2.10          | 0.7.0         | 0.3.0     |
+
+#### 新增功能
+
+- 增加 `ANNOY` 索引类型,，关于 `ANNOY` 索引的详细介绍请参考[文档](../guides/index.md)。[#261](https://github.com/milvus-io/milvus/issues/261)
+
+#### 主要改进
+
+- 在之前版本不支持删除操作的索引从 0.8.0 开始支持删除操作。[#1603](https://github.com/milvus-io/milvus/issues/1603)
+
+#### Bug 修复
+
+- 详情请参考 [CHANGELOG](https://github.com/milvus-io/milvus/blob/master/CHANGELOG.md)。
+
+---
+
 ## v0.7.1
 
 **发布时间**：2020-3-30
@@ -31,6 +55,8 @@ sidebar_label: 发版说明
 #### Bug 修复
 
 - 详情请参考 [CHANGELOG](https://github.com/milvus-io/milvus/blob/master/CHANGELOG.md)。
+
+---
 
 ## v0.7.0
 

@@ -13,7 +13,7 @@ sidebar_label: Try an Example Program
 
    ```shell
    # Install Milvus Python SDK
-   $ pip3 install pymilvus==0.2.9
+   $ pip3 install pymilvus==0.2.10
    ```
 
    > 提示：如果需要进一步了解 Milvus Python SDK，请参考 [Milvus Python SDK Readme](https://github.com/milvus-io/pymilvus/blob/master/README.md)。
@@ -22,10 +22,10 @@ sidebar_label: Try an Example Program
    
    ```shell
    # Download Python example
-   $ wget https://raw.githubusercontent.com/milvus-io/pymilvus/0.7.1/examples/example.py
+   $ wget https://raw.githubusercontent.com/milvus-io/pymilvus/0.8.0/examples/example.py
    ```
    
-   > 注意：万一您遇到无法通过 `wget` 命令正常下载示例代码的情况，您也可以创建 `example.py` 文件并复制粘贴[示例代码](https://github.com/milvus-io/pymilvus/blob/0.7.1/examples/example.py)的内容。
+   > 注意：万一您遇到无法通过 `wget` 命令正常下载示例代码的情况，您也可以创建 `example.py` 文件并复制粘贴[示例代码](https://github.com/milvus-io/pymilvus/blob/0.8.0/examples/example.py)的内容。
 
 4. 运行示例代码。
 
