@@ -87,8 +87,6 @@ Vectors that have been imported into Milvus are stored in your local disk. Metad
 
 Milvus is the only one that is a high-performance and easy-to-use vector search engine and scales easily.
 
-For more insight, see [Other Feature Vector Search Tools](../aboutmilvus/vector_db.md).
-
 #### Is Milvus an end-to-end product?
 
 Not yet. Milvus accepts vectors as input and returns vectors through queries. You cannot use Milvus to extract features from unstructured data.
