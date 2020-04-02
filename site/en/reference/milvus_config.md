@@ -75,7 +75,6 @@ Before changing these settings, welcome to consult Milvus team on [GitHub issues
 | ------------------------ | ------------------------------------------------------------ | ------- | --------------- |
 | `backend_url`         | URL for metadata storage. Use SQLite (for single server Milvus) or MySQL (for distributed cluster) to store the metadata. <br/>The format of `backend_url` is: `dialect://username:password@host:port/database`. (`dialect` can be either `mysql` or `sqlite`, depending on which database you use. | String   | `sqlite://:@:/`       |
 | `preload_table` | Determines how to preload collections into memory after Milvus server restarts. Collections can be selected for fully or partially preloading.<br/>To preload all the existing collections, use `'*'` (quote included); To preload some collections, list the specific collection names, separated by comma. If you choose not to preload any collection, keep it empty ( ` ` ). | StringList | ` ` |
-| `auto_flush_interval` | The interval, in seconds, at which Milvus automatically flushes inserted data in the cache to disk. If `auto_flush_interval` is 0, automatic flushing at a fixed interval is disabled. However, when the cache is full, Milvus always flushes data to disk, regardless of the value of `auto_flush_interval`.  | Integer |  1 (s)  |
 </div>
 
 ### Section `storage_config`
