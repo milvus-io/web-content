@@ -25,7 +25,7 @@ sidebar_label: Release Notes
 - Improved the performance of the compact operation. [#1619](https://github.com/milvus-io/milvus/issues/1619)
 - Improved search performance using CPU, especially for scenarios with multiple, concurrent connections. [#267](https://github.com/milvus-io/milvus/issues/267)
 - Improved the search performance when nq is less than the number of threads in the CPU. [#1690](https://github.com/milvus-io/milvus/issues/1690)
-- Milvus performs a combined search for same search requests from multiple clients, thus significantly improving search speed. [#1728](https://github.com/milvus-io/milvus/issues/1728)
+- Milvus performs a combined search for the same search requests from multiple clients, thus significantly improving search speed. [#1728](https://github.com/milvus-io/milvus/issues/1728)
 - Upgraded Mishards to 0.7.1. [#1698](https://github.com/milvus-io/milvus/issues/1698)
 
 #### Bug fixes
