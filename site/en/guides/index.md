@@ -90,9 +90,7 @@ Compared with `RNSG`, `HNSW` has better memory and time efficiency. `HNSW` also 
 
 ### `ANNOY`
 
-`ANNOY` index is built based on the tree structure and divides the space by hyperplanes chosen with random projections. Because data can be saved to files and mmapped to memory, multiple processes can share the same data.
-
-Compared with other index types, `ANNOY` has the best performance when it comes to scenarios with multiple processes. However, because data is mmapped to memory, memory usage is relatively high.
+`ANNOY` index is built based on the tree structure and divides the space by hyperplanes chosen with random projections. `ANNOY` supports concurrent searches of multiple query vectors.
 
 ## Choosing an index
 
