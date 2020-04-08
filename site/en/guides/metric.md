@@ -13,7 +13,7 @@ Below table shows how these widely used distance metrics fit with various input 
 | Input Data | Distance Metrics                                             | Index Types                                                    |
 | ---------- | ------------------------------------------------------------ | -------------------------------------------------------------- |
 | Float      | Euclidean distance (L2) and inner product (IP)              | `FLAT`, `IVFLAT`, `IVFSQ8`, `IVFSQ8H`, `IVFPQ`, `RNSG`, `HNSW` |
-| Binary     | Jaccard, Tanimoto, Hamming, superstructure, and substructure | `FLAT`, `IVFLAT`                                               |
+| Binary     | Jaccard, Tanimoto, Hamming, superstructure(FLAT only), and substructure(FLAT only) | `FLAT`, `IVFLAT`                                               |
 
 ### Euclidean distance (L2)
 
@@ -45,11 +45,11 @@ IP is more useful if you are more interested in measuring the orientation but no
 
 Jaccard similarity coefficient measures the similarity between two sample sets, and is defined as the cardinality of the intersection of the defined sets divided by the cardinality of the union of them. It can only be applied to finite sample sets.
 
-![Jaccard distance](../../../assets/jaccard_dist.png)
+![Jaccard similarity coefficient](../../../assets/jaccard_coeff.png)
 
 Jaccard distance measures the dissimilarity between data sets, and is obtained by subtracting the Jaccard similarity coefficient from 1. For binary variables, Jaccard distance is equivalent to Tanimoto coefficient.
 
-![Jaccard similarity coefficient](../../../assets/jaccard_coeff.png)
+![Jaccard distance](../../../assets/jaccard_dist.png)
 
 ### Tanimoto distance
 
@@ -75,7 +75,7 @@ For example, suppose there are two strings 1101 1001 and 1001 1101.
 
 ### Superstructure
 
-Superstructure is used to measure the similarity of a chemical structure and its superstructure. The less the value, the more similar the structure is to its superstructure.
+Superstructure is used to measure the similarity of a chemical structure and its superstructure. The less the value, the more similar the structure is to its superstructure. Only the vectors whose distance equals to 0 can be found now.
 
 Superstructure similarity can be measured by:
 
@@ -90,7 +90,7 @@ Where
 
 ### Substructure
 
-Substructure is used to measure the similarity of a chemical structure and its substructure. The less the value, the more similar the structure is to its substructure.
+Substructure is used to measure the similarity of a chemical structure and its substructure. The less the value, the more similar the structure is to its substructure. Only the vectors whose distance equals to 0 can be found now.
 
 Substructure similarity can be measured by:
 
