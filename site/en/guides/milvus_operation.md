@@ -97,7 +97,7 @@ Use `show_partitions()` to verify whether the partition is created.
 ## Create/Drop indexes in a collection
 
 #### Create an index
-
+Currently, a collection only supports one index type, and switching the index type will automatically delete the old index files. Before creating another index, FLAT is used as the default index type.
 > Note: `create_index` will specify the index type of the collection, and synchronously create an index for the previously inserted data. When the size of the subsequently inserted data reaches `index_file_size`, the index will be automatically created in the background. In the production environment, if it is streaming data, it is recommended to call `create_index` before inserting the vector so that the systems can automatically build it later; if it is static data, it is recommended to call `create_index` once after importing all the data. Refer to [example programs](https://github.com/milvus-io/pymilvus/tree/master/examples/indexes) to learn more about how to create indexes.
 
 1. Prepare index parameters. The following command uses `IVF_FLAT` index type as an example. The index parameters is a JSON string and represented by dict in Python.
@@ -119,7 +119,7 @@ Use `show_partitions()` to verify whether the partition is created.
    Refer to [Milvus Indexes](index.md) for more information。
 
 2. Create an index for the collection.
-
+   After deleting the index, the collection uses the default index type FLAT again.
    ```python
    # Create index
    >>> milvus.create_index('test01', IndexType.IVF_FLAT, ivf_param)
@@ -215,7 +215,8 @@ A segment is a data file that Milvus automatically creates by merging inserted v
 
       | Index type          | Search parameters     | Example                                                | Value range              |
       | --------------------- | ------------ | ----------------------------------------------------------------------- | -------------------- |
-      |  `FLAT`/`IVFLAT`/`SQ8`/`SQ8H`/`IVFPQ` | `nprobe`：Number of classes of vectors to search. `nprobe` affects search precision. The higher the value, the higher the precision, but the lower the search speed. | `{nprobe: 32}`|  [1, `nlist`]   |
+      |  `FLAT` | - | | - |
+      |  `IVFLAT`/`SQ8`/`SQ8H`/`IVFPQ` | `nprobe`：Number of classes of vectors to search. `nprobe` affects search precision. The higher the value, the higher the precision, but the lower the search speed. | `{nprobe: 32}`|  [1, `nlist`]   |
       |  `NSG` | `search_length`：The higher the value, the more number of nodes are searched in the graph and the higher the recall rate, but the lower the search speed. | `{search_length:100}`|  [10, 300]   |
       |  `HNSW` | `ef`：The higher the value, the more data is searched in the index and the higher the recall rate, but the lower the search speed.| `{ef: 64}`|  [`topk`, 4096]   |
 
