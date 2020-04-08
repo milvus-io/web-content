@@ -97,8 +97,8 @@ Use `show_partitions()` to verify whether the partition is created.
 ## Create/Drop indexes in a collection
 
 #### Create an index
-
-> Note: In production, it is recommended to create indexes before inserting vectors into the collection. Index is automatically built when vectors are being imported. However, you need to create the same index again after the vector insertion process is completed because some data files may not meet the `index_file_size` and index will not be automatically built for these data files. Refer to [example programs](https://github.com/milvus-io/pymilvus/tree/master/examples/indexes) to learn more about how to create indexes.
+Currently, a collection only supports one index type, and switching the index type will automatically delete the old index files. Before creating another index, FLAT is used as the default index type.
+> Note: `create_index` will specify the index type of the collection, and synchronously create an index for the previously inserted data. When the size of the subsequently inserted data reaches `index_file_size`, the index will be automatically created in the background. In the production environment, if it is streaming data, it is recommended to call `create_index` before inserting the vector so that the systems can automatically build it later; if it is static data, it is recommended to call `create_index` once after importing all the data. Refer to [example programs](https://github.com/milvus-io/pymilvus/tree/master/examples/indexes) to learn more about how to create indexes.
 
 1. Prepare index parameters. The following command uses `IVF_FLAT` index type as an example. The index parameters is a JSON string and represented by dict in Python.
 
@@ -111,7 +111,7 @@ Use `show_partitions()` to verify whether the partition is created.
 
       | Index type    | Index parameters | Example                                                                | Value range               |
       | --------------------- | ------------ | ----------------------------------------------------------------------- | -------------------- |
-      | `FLAT` / `IVFLAT` / `SQ8` / `SQ8H`| `nlist`：Number of clusters from the vector data file when Milvus performs clustering operation for index creation. The index file records the results of the clustering operation, including index type, central vector of each cluster, and the vectors in each cluster, for later search operations.      | `{nlist: 16384}`                                                        | `nlist`：[1, 999999] |
+      | `IVFLAT` / `SQ8` / `SQ8H`| `nlist`：Number of clusters from the vector data file when Milvus performs clustering operation for index creation. The index file records the results of the clustering operation, including index type, central vector of each cluster, and the vectors in each cluster, for later search operations.      | `{nlist: 16384}`                                                        | `nlist`：[1, 999999] |
       | `IVFPQ`               | `nlist`：Number of clusters from the vector data file when Milvus performs clustering operation for index creation. The index file records the results of the clustering operation, including index type, central vector of each cluster, and the vectors in each cluster, for later search operations. </br></br> `m`：Compression ratio during index creation. The smaller `m` is, the higher the compression ratio. | `{nlist: 16384, m: 12}`                                                 | `nlist`：[1, 999999] </br></br> `m`: one of {96, 64, 56, 48, 40, 32, 28, 24, 20, 16, 12, 8, 4, 3, 2, 1} |
       | `NSG`                 | `search_length`：The higher the value, the more nodes are searched in the graph, the higher the recall rate, but the slower the search speed. It is recommended that `search_length` is smaller than `candidate_pool` and in range [40, 80]。</br></br> `out_degree`：The higher the value, the higher the memory usage, and the better search performance.</br></br> `candidate_pool`：Affects index quality and is suggested to be in range [200, 500]. </br></br> `knng`：Affects index quality and is suggested to be `out_degree` + 20.             | `{search_length: 45, out_degree:50, candidate_pool_size:300, knng:100}` |  `search_length range`: [10, 300]</br></br>`out_degree`: [5, 300]</br></br>`candidate_pool_size`: [50, 1000]</br></br>`knng`: [5, 300]                |
       | `HNSW`                |   `M`：Affects index build time and index quality. The higher the value, the longer it costs to build an index, the higher the index quality, and the higher the memory usage.  </br></br> `efConstruction`：Affects index build time and index quality. The higher the value, the longer it costs to build and index, the higher the index quality, and the higher the memory usage.  | `{M: 16, efConstruction:500}`   |    `M` :[5, 48]</br></br>`efConstruction` :[100, 500]                |
@@ -119,7 +119,7 @@ Use `show_partitions()` to verify whether the partition is created.
    Refer to [Milvus Indexes](index.md) for more information。
 
 2. Create an index for the collection.
-
+   After deleting the index, the collection uses the default index type FLAT again.
    ```python
    # Create index
    >>> milvus.create_index('test01', IndexType.IVF_FLAT, ivf_param)
@@ -215,7 +215,8 @@ A segment is a data file that Milvus automatically creates by merging inserted v
 
       | Index type          | Search parameters     | Example                                                | Value range              |
       | --------------------- | ------------ | ----------------------------------------------------------------------- | -------------------- |
-      |  `FLAT`/`IVFLAT`/`SQ8`/`SQ8H`/`IVFPQ` | `nprobe`：Number of classes of vectors to search. `nprobe` affects search precision. The higher the value, the higher the precision, but the lower the search speed. | `{nprobe: 32}`|  [1, `nlist`]   |
+      |  `FLAT` | - | | - |
+      |  `IVFLAT`/`SQ8`/`SQ8H`/`IVFPQ` | `nprobe`：Number of classes of vectors to search. `nprobe` affects search precision. The higher the value, the higher the precision, but the lower the search speed. | `{nprobe: 32}`|  [1, `nlist`]   |
       |  `NSG` | `search_length`：The higher the value, the more number of nodes are searched in the graph and the higher the recall rate, but the lower the search speed. | `{search_length:100}`|  [10, 300]   |
       |  `HNSW` | `ef`：The higher the value, the more data is searched in the index and the higher the recall rate, but the lower the search speed.| `{ef: 64}`|  [`topk`, 4096]   |
 

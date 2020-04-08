@@ -45,11 +45,11 @@ IP is more useful if you are more interested in measuring the orientation but no
 
 Jaccard similarity coefficient measures the similarity between two sample sets, and is defined as the cardinality of the intersection of the defined sets divided by the cardinality of the union of them. It can only be applied to finite sample sets.
 
-![Jaccard distance](../../../assets/jaccard_dist.png)
+![Jaccard similarity coefficient](../../../assets/jaccard_coeff.png)
 
 Jaccard distance measures the dissimilarity between data sets, and is obtained by subtracting the Jaccard similarity coefficient from 1. For binary variables, Jaccard distance is equivalent to Tanimoto coefficient. 
 
-![Jaccard similarity coefficient](../../../assets/jaccard_coeff.png)
+![Jaccard distance](../../../assets/jaccard_dist.png)
 
 ### Tanimoto distance
 
