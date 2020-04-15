@@ -14,21 +14,30 @@ sidebar_label: 发版说明
 
 | Milvus 版本 | Python SDK 版本 | Java SDK 版本 | Go SDK 版本 |
 | ----------- | --------------- | ------------- | ----------- |
-| 0.8.0       | 0.2.10          | 0.7.0         | 0.3.0     |
+| 0.8.0       | 0.2.10          | 0.7.0         | 0.3.0       |
 
 #### 新增功能
 
-- 增加 `ANNOY` 索引类型,，关于 `ANNOY` 索引的详细介绍请参考[文档](../guides/index.md)。[#261](https://github.com/milvus-io/milvus/issues/261)
+- **ANNOY 索引的支持**
+
+  增加 `ANNOY` 索引类型，关于 `ANNOY` 索引的详细介绍请参考[文档](../guides/index.md)。[#261](https://github.com/milvus-io/milvus/issues/261)
+  
+- **向量删除**
+
+  新增下列索引类型支持删除操作。[#1655](https://github.com/milvus-io/milvus/issues/1655) [#1660](https://github.com/milvus-io/milvus/issues/1660) [#1661](https://github.com/milvus-io/milvus/issues/1661) [#1849](https://github.com/milvus-io/milvus/issues/1849)
+  
+  包括：Flat/IVFlat/IVFPQ/IVFSQ8/IVFSQ8H/NSG/HNSW/ANNOY
 
 #### 主要改进
 
-- 在之前版本不支持删除操作的索引从 0.8.0 开始支持删除操作。[#1603](https://github.com/milvus-io/milvus/issues/1603)
+- 在 http 模块支持超集/子集距离。[#1784](https://github.com/milvus-io/milvus/issues/1784)
 
 #### Bug 修复
 
-- 详情请参考 [CHANGELOG](https://github.com/milvus-io/milvus/blob/master/CHANGELOG.md)。
-
----
+- 限制 partition 数目上限为4096。[#1276](https://github.com/milvus-io/milvus/issues/1276)
+- 禁止创建 `_default` partition。[#1762](https://github.com/milvus-io/milvus/issues/1762)
+- 解决多客户端并发时系统崩溃的问题。[#1789](https://github.com/milvus-io/milvus/issues/1789)
+- 解决读取 >2GB 原始数据文件时部分数据丢失的问题。[#1883](https://github.com/milvus-io/milvus/issues/1883)
 
 ## v0.7.1
 
