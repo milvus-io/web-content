@@ -75,20 +75,20 @@ Milvus 会生成详细的关于系统运行状态的时序 metrics。该页面�
 
 ### 设置 Prometheus
 
-1. 下载 Milvus [Prometheus 配置文件](https://github.com/milvus-io/docs/blob/v0.7.1/assets/monitoring/prometheus.yml) 。
+1. 下载 Milvus [Prometheus 配置文件](https://github.com/milvus-io/docs/blob/v0.8.0/assets/monitoring/prometheus.yml) 。
 
    ```shell
-   $ wget https://raw.githubusercontent.com/milvus-io/docs/v0.7.1/assets/monitoring/prometheus.yml \ -O prometheus.yml
+   $ wget https://raw.githubusercontent.com/milvus-io/docs/v0.8.0/assets/monitoring/prometheus.yml \ -O prometheus.yml
    ```
 
 2. 根据您的需求编辑配置文件。参考 [https://prometheus.io/docs/prometheus/latest/configuration/configuration/](https://prometheus.io/docs/prometheus/latest/configuration/configuration/) 了解更多关于 Prometheus 配置文件的信息。
 
    > 注意：如果您使用了分布式集群，则需要在 `job_name = 'milvus_server'` 下的 `targets` 字段，为集群中的每个节点分布添加相应的 `localhost: <http-port>` 。
 
-3. 下载 Milvus [报警规则文件](https://github.com/milvus-io/docs/blob/v0.7.1/assets/monitoring/alert_rules.yml) 到 Prometheus 根目录。
+3. 下载 Milvus [报警规则文件](https://github.com/milvus-io/docs/blob/v0.8.0/assets/monitoring/alert_rules.yml) 到 Prometheus 根目录。
 
    ```shell
-   wget -P rules https://raw.githubusercontent.com/milvus-io/docs/v0.7.1/assets/monitoring/alert_rules.yml
+   wget -P rules https://raw.githubusercontent.com/milvus-io/docs/v0.8.0/assets/monitoring/alert_rules.yml
    ```
 
 ### 启动 Prometheus
@@ -126,10 +126,10 @@ Milvus 会生成详细的关于系统运行状态的时序 metrics。该页面�
    | URL     | `http://<hostname of machine running prometheus>:9090` |
    | Access  | Browser                                                |
 
-5. 下载 [Grafana 配置文件](https://github.com/milvus-io/docs/blob/v0.7.1/assets/monitoring/dashboard.json) :
+5. 下载 [Grafana 配置文件](https://github.com/milvus-io/docs/blob/v0.8.0/assets/monitoring/dashboard.json) :
 
    ```shell
-   $ wget https://raw.githubusercontent.com/milvus-io/docs/v0.7.1/assets/monitoring/dashboard.jsonr
+   $ wget https://raw.githubusercontent.com/milvus-io/docs/v0.8.0/assets/monitoring/dashboard.jsonr
    ```
 
 6. [将配置文件导入 Grafana](http://docs.grafana.org/reference/export_import/#importing-a-dashboard).

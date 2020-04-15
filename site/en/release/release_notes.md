@@ -6,6 +6,39 @@ sidebar_label: Release Notes
 
 # Release Notes
 
+## v0.8.0
+
+**Release date**：2020-4-15
+
+**Compatibility**
+
+| Milvus version | Python SDK version | Java SDK version | Go SDK version |
+| -------------- | ------------------ | ---------------- | -------------- |
+| 0.8.0          | 0.2.10             | 0.7.0            | 0.3.0          |
+
+#### New features
+
+- **ANNOY index support**
+
+  Added support for ANNOY index type. Refer to [our documentation](../guides/index.md) for more information. [#261](https://github.com/milvus-io/milvus/issues/261)
+
+- **Vector deletion**
+
+  Added support to delete one or multiple vectors for more index types. [#1655](https://github.com/milvus-io/milvus/issues/1655) [#1660](https://github.com/milvus-io/milvus/issues/1660) [#1661](https://github.com/milvus-io/milvus/issues/1661) [#1849](https://github.com/milvus-io/milvus/issues/1849)
+  
+  Including: Flat/IVFlat/IVFPQ/IVFSQ8/IVFSQ8H/NSG/HNSW/ANNOY
+
+#### Enhancements
+
+- Added new metric SuperStructure and SubStructure in HTTP module. [#1784](https://github.com/milvus-io/milvus/issues/1784)
+
+#### Bug fixes
+
+- Limited the maximum number of partitions to 4096. [#1276](https://github.com/milvus-io/milvus/issues/1276)
+- Forbidden to create partition with name `_default`. [#1762](https://github.com/milvus-io/milvus/issues/1762)
+- Resolved the issue that concurrent operations from multiple clients cause system crash. [#1789](https://github.com/milvus-io/milvus/issues/1789)
+- Resolved the issue that some raw vectors are missed when the raw data file size is larger than 2GB. [#1883](https://github.com/milvus-io/milvus/issues/1883)
+
 ## v0.7.1
 
 **Release date**：2020-3-30
@@ -31,6 +64,8 @@ sidebar_label: Release Notes
 #### Bug fixes
 
 Refer to [CHANGELOG](https://github.com/milvus-io/milvus/blob/master/CHANGELOG.md) for details.
+
+---
 
 ## v0.7.0
 
