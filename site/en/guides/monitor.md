@@ -75,10 +75,10 @@ Milvus generates detailed time series metrics. This page shows you how to pull t
 
 ### Configure Prometheus
 
-1. Go to the Prometheus root directory, and download starter [Prometheus configuration file](https://github.com/milvus-io/docs/blob/v0.7.1/assets/monitoring/prometheus.yml) for Milvus.
+1. Go to the Prometheus root directory, and download starter [Prometheus configuration file](https://github.com/milvus-io/docs/blob/v0.8.0/assets/monitoring/prometheus.yml) for Milvus.
 
    ```shell
-   $ wget https://raw.githubusercontent.com/milvus-io/docs/v0.7.1/assets/monitoring/prometheus.yml \ -O prometheus.yml
+   $ wget https://raw.githubusercontent.com/milvus-io/docs/v0.8.0/assets/monitoring/prometheus.yml \ -O prometheus.yml
 
    ```
 
@@ -86,10 +86,10 @@ Milvus generates detailed time series metrics. This page shows you how to pull t
 
    > Note: If you use distributed cluster, you must expand the `targets` field to include `localhost: <http-port>` for each additional node in the cluster.
 
-3. Download starter [alerting rules](https://github.com/milvus-io/docs/blob/v0.7.1/assets/monitoring/alert_rules.yml) for Milvus to the Prometheus root directory.
+3. Download starter [alerting rules](https://github.com/milvus-io/docs/blob/v0.8.0/assets/monitoring/alert_rules.yml) for Milvus to the Prometheus root directory.
 
    ```shell
-   wget -P rules https://raw.githubusercontent.com/milvus-io/docs/v0.7.1/assets/monitoring/alert_rules.yml
+   wget -P rules https://raw.githubusercontent.com/milvus-io/docs/v0.8.0/assets/monitoring/alert_rules.yml
 
    ```
 
@@ -128,10 +128,10 @@ Refer to [https://github.com/prometheus/pushgateway](https://github.com/promethe
    | URL     | `http://<hostname of machine running prometheus>:9090` |
    | Access  | Browser                                                |
 
-5. Download the starter [Grafana dashboard](https://github.com/milvus-io/docs/blob/v0.7.1/assets/monitoring/dashboard.json) for Milvus:
+5. Download the starter [Grafana dashboard](https://github.com/milvus-io/docs/blob/v0.8.0/assets/monitoring/dashboard.json) for Milvus:
 
    ```shell
-   $ wget https://raw.githubusercontent.com/milvus-io/docs/v0.7.1/assets/monitoring/dashboard.json
+   $ wget https://raw.githubusercontent.com/milvus-io/docs/v0.8.0/assets/monitoring/dashboard.json
 
    ```
 
