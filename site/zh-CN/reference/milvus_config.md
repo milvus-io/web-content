@@ -76,7 +76,7 @@ $ docker restart <container id>
 | 参数                 | 说明                                                         | 类型        | 默认值          |
 | -------------------- | ------------------------------------------------------------ | ----------- | --------------- |
 | `backend_url`        | 元数据存储的 URL 。使用 SQLite（单机部署） 或 MySQL（分布式集群部署）来存储元数据。 <br/>`backend_url` 的格式为：`dialect://username:password@host:port/database`。（ `dialect` 可以是 `mysql` 或 `sqlite`，取决于您是用了 MySQL 还是 SQLite 数据库。） | String        | `sqlite://:@:/` |
-| `preload_table`      | 定义在 Milvus 服务再次启动后，是否将之前已经导入并保存在磁盘的 collection 预加载到内存。支持全部 collection 或者部分 collection 的预加载。 <br/>若要加载所有 collection，使用 `'*'` (包含引号)；若要加载部分 collection，列出所有需要加载的 collection 名，以逗号隔开。如果无需加载 collection，请将该值留空 （ ` ` ）。 | StringList | ` `             |
+| `preload_collection`      | 定义在 Milvus 服务再次启动后，是否将之前已经导入并保存在磁盘的 collection 预加载到内存。支持全部 collection 或者部分 collection 的预加载。 <br/>若要加载所有 collection，使用 `'*'` (包含引号)；若要加载部分 collection，列出所有需要加载的 collection 名，以逗号隔开。如果无需加载 collection，请将该值留空 （ ` ` ）。 | StringList | ` `             |
 </div>
 
 ### `storage_config` 区域
