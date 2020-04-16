@@ -8,6 +8,23 @@ sidebar_label: Milvus Admin Release Notes
 
 Milvus Admin is the GUI client of Milvus. You can use Milvus Admin to perform operations to the Milvus server.
 
+## v0.2.0
+
+**Release Date**：2020-4-17
+
+**Compatibility**
+
+| Milvus Version    | Milvus Admin Version  |
+| ---------------| -----------------|
+| 0.8.0          | 0.2.0           |
+
+**Bug fix**
+
+- Fix the count value does not change after inserting vector. #1853.
+- Support https connection for milvus restful api, if only you have https proxy in front of milvus.
+- Show segments in partition panel.
+- Support displaying new index and metrics alone with milvus 0.8.0.
+
 ## v0.1.0
 
 **Release Date**：2020-3-14
