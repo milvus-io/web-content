@@ -129,7 +129,7 @@ Milvus 会生成详细的关于系统运行状态的时序 metrics。该页面�
 5. 下载 [Grafana 配置文件](https://github.com/milvus-io/docs/blob/v0.8.0/assets/monitoring/dashboard.json) :
 
    ```shell
-   $ wget https://raw.githubusercontent.com/milvus-io/docs/v0.8.0/assets/monitoring/dashboard.jsonr
+   $ wget https://raw.githubusercontent.com/milvus-io/docs/v0.8.0/assets/monitoring/dashboard.json
    ```
 
 6. [将配置文件导入 Grafana](http://docs.grafana.org/reference/export_import/#importing-a-dashboard).
