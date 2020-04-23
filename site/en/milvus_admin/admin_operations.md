@@ -16,7 +16,7 @@ Select **Collection** in the **Collection** tab ![collection](assets/collection.
 
 ## Create/Delete partitions
 
-Select **Collection** in the **Collection** tab ![collection](assets/collection.png) on the left. Click **CREATE PARTITION**/**DELETE**. Refer to [Milvus Operations](../guides/milvus_operation.md) for parameter details.
+Select **Collections** in the **Collection** tab ![collection](assets/collection.png) on the left. Click **CREATE PARTITION**/**DELETE**. Refer to [Milvus Operations](../guides/milvus_operation.md) for parameter details.
 
 ## Import/Delete vectors
 
