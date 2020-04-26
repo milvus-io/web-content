@@ -12,7 +12,7 @@ sidebar_label: Milvus Admin 基本操作
 
 ## 创建/删除索引
 
-在左侧**collection**选项卡![collection](assets/collection.png)中选择 collection 名，点击**CREATE INDEX**/**DELETE**。相关参数请参考 [Milvus 基本操作](../guides/milvus_operation.md)。
+在左侧**collection**选项卡![collection](assets/collection.png)中选择**Collections**，点击**CREATE INDEX**/**DELETE**。相关参数请参考 [Milvus 基本操作](../guides/milvus_operation.md)。
 
 ## 创建/删除分区
 
