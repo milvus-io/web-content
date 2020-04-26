@@ -149,10 +149,10 @@ $ docker run -d --name milvus_cpu \
 -p 19530:19530 \
 -p 19121:19121 \
 -p 9091:9091 \
--v /home/$USER/milvus/db:/var/lib/milvus/db \
--v /home/$USER/milvus/conf:/var/lib/milvus/conf \
--v /home/$USER/milvus/logs:/var/lib/milvus/logs \
--v /home/$USER/milvus/wal:/var/lib/milvus/wal \
+-v /Users/$USER/milvus/db:/var/lib/milvus/db \
+-v /Users/$USER/milvus/conf:/var/lib/milvus/conf \
+-v /Users/$USER/milvus/logs:/var/lib/milvus/logs \
+-v /Users/$USER/milvus/wal:/var/lib/milvus/wal \
 milvusdb/milvus:0.8.0-cpu-d041520-464400
 ```
 
