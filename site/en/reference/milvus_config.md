@@ -34,7 +34,7 @@ $ docker restart <container id>
 You can use Milvus clients to update parameters in `server_config.yaml`. Refer to [Client Reference](sdk.md) for more information.
 
 When you use Milvus clients to update the following parameters, the updates take effect immediately. 
- 
+
  - section `cache_config`
     - `cpu_cache_capacity`
     - `cache_insert_data`
@@ -183,7 +183,7 @@ To switch to CPU-only mode, just set `enable` to `false`.
 |  `warning.enable`    |   Whether to enable warning level logging in Milvus.         |    Boolean   |  `true` |
 |  `error.enable`      |   Whether to enable error level logging in Milvus.           |    Boolean   |  `true` |
 |  `fatal.enable`      |   Whether to enable fatal level logging in Milvus.           |    Boolean   |  `true` |
-|  `path`              |  Location of logs files.                                     |    String    |   ` `   |
-|  `max_log_file_size` |  Max size of a single log file.                              |    Integer   | `256(MB)`  |
-|  `logrotate`         |  The number of log files per each logging level that Milvus will keep. |    Integer   | `10`  |
+|  `path`              |  Absolute path to the folder holding the log files.  |    String    |   ` `   |
+|  `max_log_file_size` |  The maximum size of each log file.              |    Integer   | `256 (MB)` |
+|  `logrotate`         | The maximum number of log files that Milvus keeps for each logging level. |    Integer   | `10`  |
 </div>
