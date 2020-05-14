@@ -20,7 +20,7 @@ sidebar_label: Release Notes
 
 
 - Checks the CPU instruction set, GPU driver version, and CUDA version, when Milvus starts up. [#2054](https://github.com/milvus-io/milvus/issues/2054) [#2111](https://github.com/milvus-io/milvus/issues/2111)
-- Adds a lock file to avoid concurrent access to the database by multiple Milvus instances. [#2059](https://github.com/milvus-io/milvus/issues/2059)
+- Prevents multiple Milvus instances from accessing the same Milvus database at the same time. [#2059](https://github.com/milvus-io/milvus/issues/2059)
 - Supports log file rotating. [#2206](https://github.com/milvus-io/milvus/issues/2206)
 - Suspends index building when a search request comes in. [#2283](https://github.com/milvus-io/milvus/issues/2283)
 
@@ -113,16 +113,7 @@ sidebar_label: Release Notes
 |                     | C++               | Python               | Java              | Go                |
 | ------------------- | ----------------- | -------------------- | ----------------- | ----------------- |
 | Earlier than v0.9.0 | `GetIDsInSegment` | `get_vector_ids`     | `getVectorIds`    | `GetEntityIDs`    |
-| v0.9.0              | `ListIDInSegment` | `list_id_in_setment` | `listIDInSegment` | `ListIDInSegment` |
-
-
-
-|                     | C++          | Python          | Java          | Go           |
-| ------------------- | ------------ | --------------- | ------------- | ------------ |
-| Earlier than v0.9.0 | `SearchByID` | `search_by_ids` | `searchByIds` | `searchByID` |
-| v0.9.0              | *DELETED*    | *DELETED*       | *DELETED*     | *DELETED*    |
-
-
+| v0.9.0              | `ListIDInSegment` | `list_id_in_segment` | `listIDInSegment` | `ListIDInSegment` |
 
 
 
@@ -153,21 +144,46 @@ sidebar_label: Release Notes
 
 
 
-|                     | C++               | Python      | Java                     | Go          |
-| ------------------- | ----------------- | ----------- | ------------------------ | ----------- |
-| Earlier than v0.9.0 | `FlushCollection` | `flush`     | `flush` and `flushAsync` | `Flush`     |
-| v0.9.0              | `Flush`           | *UNCHANGED* | *UNCHANGED*              | *UNCHANGED* |
+|                     | C++                           | Python      | Java                     | Go          |
+| ------------------- | ----------------------------- | ----------- | ------------------------ | ----------- |
+| Earlier than v0.9.0 | `FlushCollection` and `Flush` | `flush`     | `flush` and `flushAsync` | `Flush`     |
+| v0.9.0              | `Flush`                       | *UNCHANGED* | *UNCHANGED*              | *UNCHANGED* |
 
 
 
 
 
-|                     | C++                 | Python      | Java                         | Go          |
-| ------------------- | ------------------- | ----------- | ---------------------------- | ----------- |
-| Earlier than v0.9.0 | `CompactCollection` | `compact`   | `compact` and `compactAsync` | `Compact`   |
-| v0.9.0              | `Compact`           | *UNCHANGED* | *UNCHANGED*                  | *UNCHANGED* |
+|                     | C++                               | Python      | Java                         | Go          |
+| ------------------- | --------------------------------- | ----------- | ---------------------------- | ----------- |
+| Earlier than v0.9.0 | `CompactCollection` and `Compact` | `compact`   | `compact` and `compactAsync` | `Compact`   |
+| v0.9.0              | `Compact`                         | *UNCHANGED* | *UNCHANGED*                  | *UNCHANGED* |
 
 
+
+
+
+|                     | C++         | Python    | Java        | Go          |
+| ------------------- | ----------- | --------- | ----------- | ----------- |
+| Earlier than v0.9.0 | `Connect`   | `connect` | `connect`   | `Connect`   |
+| v0.9.0              | *UNCHANGED* | *DELETED* | *UNCHANGED* | *UNCHANGED* |
+
+
+
+
+
+|                     | C++         | Python      | Java          | Go            |
+| ------------------- | ----------- | ----------- | ------------- | ------------- |
+| Earlier than v0.9.0 | `Connected` | `connected` | `isConnected` | `IsConnected` |
+| v0.9.0              | *UNCHANGED* | *DELETED*   | *UNCHANGED*   | *UNCHANGED*   |
+
+
+
+
+
+|                     | C++          | Python       | Java         | Go           |
+| ------------------- | ------------ | ------------ | ------------ | ------------ |
+| Earlier than v0.9.0 | `Disconnect` | `disconnect` | `disconnect` | `Disconnect` |
+| v0.9.0              | *UNCHANGED*  | *DELETED*    | *UNCHANGED*  | *UNCHANGED*  |
 
 
 
