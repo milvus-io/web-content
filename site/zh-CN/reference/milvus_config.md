@@ -35,7 +35,7 @@ $ docker restart <container id>
 您可以使用 Milvus 客户端 对 `server_config.yaml` 的配置进行运行时修改。修改后无需重启 Milvus 即可启用新的更改。详情请参考[客户端参考](sdk.md)。
 
 对以下参数的运行时修改是立即生效的：
- 
+
  - `cache_config` 区域
     - `cpu_cache_capacity`
     - `insert_buffer_size`
@@ -62,10 +62,11 @@ $ docker restart <container id>
 | 参数        | 说明                                                         | 类型    | 默认值    |
 | ----------- | ------------------------------------------------------------ | ------- | --------- |
 | `address`   | Milvus 服务端监听的 IP 地址。                                  | String | `0.0.0.0`  |
-| `port`      | Milvus 服务端监听的端口号，范围：(1024, 65535)。               | Integer | `19530`   |
+| `port`      | Milvus 服务端监听的端口号，范围：[1024, 65535]。             | Integer | `19530`   |
 | `deploy_mode` | Milvus 部署类型。选择 `single` ，`cluster_readonly` 或 `cluster_writable`。 | DeployMode | `single`  |
 | `time_zone` | 使用 UTC-x 或 UTC+x 来指定时区。比如，您可以使用 `UTC+8` 来代表中国标准时间。 | Timezone | `UTC+8`   |
-| `web_port` | Milvus 网络服务端监听的端口号，范围：(1024, 65535)。您可以使用 Milvus 网络服务端与 [Milvus RESTful API](sdk.md) 通信。| Integer | `19121`  |
+| `web_enable` | 选择是否启用 Web 服务器。 | Boolean | `true` |
+| `web_port` | Milvus 网络服务端监听的端口号，范围：[1024, 65535]。您可以使用 Milvus 网络服务端与 [Milvus RESTful API](sdk.md) 通信。 | Integer | `19121`  |
 
 </div>
 
@@ -88,6 +89,7 @@ $ docker restart <container id>
 | -------------------- | ------------------------------------------------------------ | ----------- | --------------- |
 | `primary_path`       | 导入 Milvus 的向量文件、索引文件和元数据存储的首选路径。               | Path        | `/var/lib/milvus`     |
 | `secondary_path`     | 导入 Milvus 的向量文件和索引文件存储的二级路径，可以填多个，两个路径中间以分号隔开。当数据量很大，`primary_path` 指定的磁盘空间不够用时，可以设置此参数。<br/>`primary_path` 和 `secondary_path` 平均分配导入的数据。每个路径下的数据大小 = 数据总大小 / 路径数量。请确保这些路径下文件可用的存量差不多且够用。 | Path        | ` `             |
+| `file_cleanup_timeout` | 从标记一个文件为 `deleted` 到该文件在磁盘被物理删除的时间差。单位为秒。范围：[0, 3600]。 | Integer | `10` |
 </div>
 
 
@@ -169,4 +171,21 @@ $ docker restart <container id>
 |  `recovery_error_ignore` |  在通过 WAL 执行恢复操作时，是否忽略出现错误的日志。如果设为 true，当 Milvus 重启恢复时，如果有日志出现错误，则 Milvus 会忽略出现错误的日志。如果设为 false，如果 WAL 日志中存在错误，则 Milvus 会启动失败。 |   Boolean           |   true      |
 |  `buffer_size`          |   读取缓冲区和写入缓冲区的总大小，单位为 MB。`buffer_size` 的值必须在 `[64, 4096]` 范围内。如果您设的值超出范围，Milvus 自动使用与所设的值最接近的边界值。建议 `buffer_size` 的值要大于单次插入的数据量，以获取更好的性能。         |    Integer          |   `256` (MB)      |
 |  `wal_path`             |  预写式日志文件路径。                                                           |    String          |    ` `     |
+</div>
+
+###  `logs` 区域
+
+<div class="table-wrapper" markdown="block">
+
+| 参数           | 说明                                                 | 类型         | 默认值 |
+| -------------------- | ------------------------------------------------------------ | ------------ | ------- |
+|  `trace.enable`      |   是否开启 trace 级别日志打印。           |    Boolean   |  `true` |
+|  `debug.enable`      |   是否开启 debug 级别日志打印。          |    Boolean   |  `true` |
+|  `info.enable`       |   是否开启 info 级别日志打印。         |    Boolean   |  `true` |
+|  `warning.enable`    |   是否开启 warning 级别日志打印。        |    Boolean   |  `true` |
+|  `error.enable`      |   是否开启 error 级别日志打印。         |    Boolean   |  `true` |
+|  `fatal.enable`      |   是否开启 fatal 级别日志打印。         |    Boolean   |  `true` |
+|  `path`              |  日志文件绝对路径。  |    String    |   ` `   |
+|  `max_log_file_size` |  每份日志文件的最大值。范围： [1024, 4096]。  |    Integer   | `1024` (MB) |
+|  `logrotate`         | Milvus 为每个日志打印级别保存的最多文件数。范围： [0, 1024]。 `0` 代表日志文件数无上限。|    Integer   | `0` |
 </div>
