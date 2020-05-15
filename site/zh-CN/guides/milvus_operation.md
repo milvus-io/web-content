@@ -25,14 +25,13 @@ sidebar_label: Learn Milvus Operations
 
    ```python
    # Connect to Milvus server
-   >>> milvus = Milvus()
-   >>> milvus.connect(host='localhost', port='19530')
+   >>> milvus = Milvus(host='localhost', port='19530')
    ```
 
    > 注意：在上面的代码中，`host` 和 `port` 都使用了默认值。您可以将其更改为自己设定的 IP 地址和端口。
 
    ```python
-   >>> milvus.connect(uri='tcp://localhost:19530')
+   >>> milvus = Milvus(uri='tcp://localhost:19530')
    ```
 
 ## 创建/删除 collection
@@ -58,7 +57,7 @@ sidebar_label: Learn Milvus Operations
 您可以调用如下接口查询 collection 的统计信息。查询结果的信息包含 collection /分区/ segment 的向量数量，存储使用量等信息。
 
 ```python
->>> milvus.collection_info('test01')
+>>> milvus.get_collection_stats('test01')
 ```
 
 > 注意：参考[示例程序](https://github.com/milvus-io/pymilvus/blob/master/examples)获取更详细的使用方式。
@@ -157,12 +156,6 @@ sidebar_label: Learn Milvus Operations
 >>> milvus.insert('test01', vectors, partition_tag="tag01")
 ```
 
-您可以通过 `get_vector_by_id()` 验证已经插入的向量。此处验证插入的第一条向量。这里假设您的 collection 中存在以下向量 ID：
-
-```python
->>> status, vector = milvus.get_vector_by_id(collection_name='test01', vector_id=0)
-```
-
 #### 通过 ID 删除向量
 
 假设您的 collection 中存在以下向量 ID：
@@ -174,15 +167,15 @@ sidebar_label: Learn Milvus Operations
 您可以通过以下命令删除向量：
 
 ```python
->>> milvus.delete_by_id(collection_name='test01', id_array=ids)
+>>> milvus.delete_entity_by_id(collection_name='test01', id_array=ids)
 ```
 
 #### 通过 ID 获取向量
 
-您也可以根据向量 ID 获取向量， 目前仅支持一次获取单条向量，暂不支持批量获取：
+您也可以根据向量 ID 获取向量：
 
 ```python
->>> status, vector = milvus.get_vector_by_id(collection_name='test01', vector_id=ids[0])
+>>> status, vector = milvus.get_entity_by_id(collection_name='test01', ids=ids[:10])
 ```
 
 ## 将 collection 中的数据进行 flush 操作
@@ -203,10 +196,10 @@ Segment 是 Milvus 自动将插入的向量数据合并所获得的数据文件�
 
 ## 获取 segment 中的向量 ID
 
-您可以获取指定 segment 中向量 ID 信息。您需要提供 segment 的名称。 segment 的名称可以从 `collection_info` 中获取。
+您可以获取指定 segment 中向量 ID 信息。您需要提供 segment 的名称。 segment 的名称可以从 `get_collection_stats` 中获取。
 
 ```python
->>> milvus.get_vector_ids('test01', '1583727470444700000')
+>>> milvus.list_id_in_segment('test01', '1583727470444700000')
 ```
 
 ## 在 collection /分区中搜索向量
