@@ -184,6 +184,6 @@ To switch to CPU-only mode, just set `enable` to `false`.
 |  `error.enable`      |   Whether to enable error level logging.           |    Boolean   |  `true` |
 |  `fatal.enable`      |   Whether to enable fatal level logging.           |    Boolean   |  `true` |
 |  `path`              |  Absolute path to the folder holding the log files.  |    String    |   ` `   |
-|  `max_log_file_size` |  The maximum size of each log file. Range: [512, 4096]  |    Integer   | `1024` (MB) |
+|  `max_log_file_size` |  The maximum size of each log file. Range: [1024, 4096]  |    Integer   | `1024` (MB) |
 |  `logrotate`         | The maximum number of log files that Milvus keeps for each logging level. Range: [0, 1024]. `0` means that the number does not have an upper limit. |    Integer   | `0` |
 </div>
