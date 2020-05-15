@@ -20,7 +20,7 @@ sidebar_label: 发版说明
 
 
 - 支持在 Milvus 启动时检查 CPU 指令集、GPU 驱动版本 和 CUDA 版本。 [#2054](https://github.com/milvus-io/milvus/issues/2054) [#2111](https://github.com/milvus-io/milvus/issues/2111)
-- 避免多个 Milvus 实例同时读取同一 Milvus 数据库。 [#2059](https://github.com/milvus-io/milvus/issues/2059)
+- 避免多个 Milvus 实例同时操作同一 Milvus 数据。 [#2059](https://github.com/milvus-io/milvus/issues/2059)
 - 支持日志文件轮转。 [#2206](https://github.com/milvus-io/milvus/issues/2206)
 - 处理搜索请求时暂停创建索引。[#2283](https://github.com/milvus-io/milvus/issues/2283)
 
