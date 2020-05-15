@@ -25,14 +25,13 @@ You can also use other clients, including [Java](https://github.com/milvus-io/mi
 
    ```python
    # Connect to Milvus server
-   >>> milvus = Milvus()
-   >>> milvus.connect(host='localhost', port='19530')
+   >>> milvus = Milvus(host='localhost', port='19530')
    ```
 
    > Note: In the above code, default values are used for `host` and `port` parameters. Feel free to change them to the IP address and port you set for Milvus server.
    
    ```python
-   >>> milvus.connect(uri='tcp://localhost:19530')
+   >>> milvus = Milvus(uri='tcp://localhost:19530')
    ```
 
 ## Create/Drop collections
@@ -58,7 +57,7 @@ You can also use other clients, including [Java](https://github.com/milvus-io/mi
 You can use the following command to acquire the statistical information of a collection, including the number of vectors in a collection/partition/segment and storage usage.
 
 ```python
->>> milvus.collection_info('test01')
+>>> milvus.get_collection_stats('test01')
 ```
 
 > Note：Refer to [this link](https://github.com/milvus-io/pymilvus/blob/master/examples/example_vectors.py) for more information.
@@ -67,7 +66,7 @@ You can use the following command to acquire the statistical information of a co
 
 ```python
 # Drop collection
->>> milvus.delete_collection(collection_name='test01')
+>>> milvus.drop_collection(collection_name='test01')
 ```
 
 ## Create/Drop partitions in a collection
@@ -85,7 +84,7 @@ Use `show_partitions()` to verify whether the partition is created.
 
 ```python
 # Show partitions
->>> milvus.show_partitions(collection_name='test01')
+>>> milvus.list_partitions(collection_name='test01')
 ```
 
 #### Drop a partition
@@ -164,10 +163,10 @@ Currently, a collection only supports one index type, and switching the index ty
 >>> milvus.insert('test01', vectors, partition_tag="tag01")
 ```
 
-To verify the vectors you have inserted, use `get_vector_by_id()`. Assume you have some vectors with the following IDs.
+To verify the vectors you have inserted, use `get_entity_by_id()`. Assume you have some vectors with the following IDs.
 
 ```python
->>> status, vector = milvus.get_vector_by_id(collection_name='test01', vector_id=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19])
+>>> status, vector = milvus.get_entity_by_id(collection_name='test01', ids=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19])
 ```
 
 #### Delete vectors by ID
@@ -181,7 +180,7 @@ Assume you have some vectors with the following IDs:
 You can delete these vectors by:
 
 ```python
->>> milvus.delete_by_id(collection_name='test01', id_array=ids)
+>>> milvus.delete_entity_by_id(collection_name='test01', id_array=ids)
 ```
 
 ## Flush data in one or multiple collections to disk
@@ -241,10 +240,10 @@ A segment is a data file that Milvus automatically creates by merging inserted v
 
 > Note: If you do not specify `partition_tags`, Milvus searches the whole collection.
 
-## Disconnect from the Milvus server
+## Close client
 
 ```python
->>> milvus.disconnect()
+>>> milvus.close()
 ```
 
 ## What's next
