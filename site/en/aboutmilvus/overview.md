@@ -8,7 +8,7 @@ sidebar_label: Milvus Overview
 
 ## What is Milvus
 
-As an open source vector similarity search engine, Milvus is easy-to-use, highly reliable, scalable, robust, and blazing fast. Adopted by over 100 organizations and institutions worldwide, Milvus empowers applications in a variety of fields, including image processing, computer vision, natural language processing, voice recognition, recommender systems, drug discovery, etc.
+As an open source vector similarity search engine, Milvus is easy-to-use, highly reliable, scalable, robust, and blazing fast. Adopted by over 100 organizations and institutions worldwide, Milvus empowers applications in a variety of fields, including image processing, computer vision, natural language processing, voice recognition, recommender systems, drug discovery, and more.
 
 ## Key features
 
@@ -18,7 +18,7 @@ As an open source vector similarity search engine, Milvus is easy-to-use, highly
 
 - Leading-Edge Performance
 
-  Milvus is built on top of multiple optimized Approximate Nearest Neighbor Search (ANNS) indexing libraries, including faiss, annoy, and hnswlib, etc., thus ensuring that you always get the best performance across various scenarios.
+  Milvus is built on top of multiple optimized Approximate Nearest Neighbor Search (ANNS) indexing libraries, such as faiss, annoy, and hnswlib, ensuring that you always get the best performance across various scenarios.
 
 - Dynamic Data Management
   
@@ -42,11 +42,11 @@ As an open source vector similarity search engine, Milvus is easy-to-use, highly
 
 - Cloud Native
   
-  We make it easy for you to run Milvus on public cloud, private cloud, or somewhere in between.
+  We make it easy for you to run Milvus on public cloud, private cloud, or anywhere in between.
 
 - Ease of Use
 
-  Milvus provides easy-to-use SDKs in Python, Java, Go and C++, as well as a RESTful API.
+  Milvus provides easy-to-use SDKs in Python, Java, Go and C++, as well as RESTful APIs.
 
 
 ## Overall architecture

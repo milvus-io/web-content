@@ -19,10 +19,11 @@ sidebar_label: Install CPU-only Milvus
 
 #### Hardware requirements
 
-| Component  | Recommended configuration             |
+| Component | Recommended configuration             |
 | ---------- | ------------------------------------- |
-| CPU        | Intel CPU Haswell or higher           |
-| RAM        | 8 GB or more (depends on data volume) |
+| CPU        | Intel CPU Sandy Bridge or higher. |
+| CPU instruction set | <li>SSE42</li><li>AVX</li><li>AVX2</li><li>AVX512</li> |
+| RAM        | 8 GB or more (depends on the data volume) |
 | Hard drive | SATA 3.0 SSD or higher                |
 
 #### Milvus Docker requirements
@@ -66,9 +67,10 @@ $ wget https://raw.githubusercontent.com/milvus-io/milvus/v0.9.0/core/conf/demo/
 
 > Note: In case you encounter problems downloading configuration files using `wget` command, you can also create `server_config.yaml` under `/home/$USER/milvus/conf`, then copy and paste the content from [server config file](https://github.com/milvus-io/milvus/blob/v0.9.0/core/conf/demo/server_config.yaml).
 
+
 #### Step 4 Start Docker container
 
-```shell
+​```shell
 # Start Milvus
 $ docker run -d --name milvus_cpu \
 -p 19530:19530 \
@@ -146,7 +148,6 @@ For Step 4, start the docker by mapping Milvus files to the right path:
 $ docker run -d --name milvus_cpu \
 -p 19530:19530 \
 -p 19121:19121 \
--p 9091:9091 \
 -v /Users/$USER/milvus/db:/var/lib/milvus/db \
 -v /Users/$USER/milvus/conf:/var/lib/milvus/conf \
 -v /Users/$USER/milvus/logs:/var/lib/milvus/logs \

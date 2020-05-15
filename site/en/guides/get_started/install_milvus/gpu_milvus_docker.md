@@ -19,7 +19,8 @@ sidebar_label: Install GPU-enabled Milvus
 
 | Component  | Recommended configuration             |
 | ---------- | ------------------------------------- |
-| CPU        | Intel CPU Haswell or higher           |
+| CPU        | Intel CPU Sandy Bridge or higher. |
+| CPU instruction set | <li>SSE42</li><li>AVX</li><li>AVX2</li><li>AVX512</li> |
 | GPU        | NVIDIA Pascal or higher               |
 | RAM        | 8 GB or more (depends on data volume) |
 | Hard drive | SATA 3.0 SSD or higher                |
@@ -74,7 +75,6 @@ Before starting the Docker container, you must set `enable` to `true` in `gpu_re
 $ docker run -d --name milvus_gpu --gpus all \
 -p 19530:19530 \
 -p 19121:19121 \
--p 9091:9091 \
 -v /home/$USER/milvus/db:/var/lib/milvus/db \
 -v /home/$USER/milvus/conf:/var/lib/milvus/conf \
 -v /home/$USER/milvus/logs:/var/lib/milvus/logs \
