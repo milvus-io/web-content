@@ -19,7 +19,8 @@ sidebar_label: Install GPU-enabled Milvus on Docker
 
 | 组件 | 建议配置                               |
 | ---- | -------------------------------------- |
-| CPU  | Intel CPU Haswell 或以上               |
+| CPU        | Intel CPU Sandy Bridge 或以上 |
+| CPU 指令集 | <li>SSE42</li><li>AVX</li><li>AVX2</li><li>AVX512</li> |
 | GPU  | NVIDIA Pascal 或以上                   |
 | 内存 | 8 GB 或以上 （取决于具体向量数据规模） |
 | 硬盘 | SATA 3.0 SSD 或以上                    |
@@ -76,7 +77,6 @@ $ wget https://raw.githubusercontent.com/milvus-io/milvus/v0.8.0/core/conf/demo/
 $ docker run -d --name milvus_gpu --gpus all \
 -p 19530:19530 \
 -p 19121:19121 \
--p 9091:9091 \
 -v /home/$USER/milvus/db:/var/lib/milvus/db \
 -v /home/$USER/milvus/conf:/var/lib/milvus/conf \
 -v /home/$USER/milvus/logs:/var/lib/milvus/logs \

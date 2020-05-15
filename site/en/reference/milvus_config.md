@@ -18,7 +18,6 @@ After you have successfully started Milvus server, you can see a Milvus file und
 - `milvus/logs` (log storage)
 - `milvus/conf` (configuration file folder)
   - `server_config.yaml` (server configuration)
-  - `log_config.conf` (log configuration)
 
 ## Updating configurations
 
@@ -35,7 +34,7 @@ $ docker restart <container id>
 You can use Milvus clients to update parameters in `server_config.yaml`. Refer to [Client Reference](sdk.md) for more information.
 
 When you use Milvus clients to update the following parameters, the updates take effect immediately. 
- 
+
  - section `cache_config`
     - `cpu_cache_capacity`
     - `cache_insert_data`
@@ -64,7 +63,8 @@ Before changing these settings, welcome to consult Milvus team on [GitHub issues
 | `port`      | Port that Milvus server monitors. Port range: (1024, 65535). | Integer | `19530`    |
 | `deploy_mode` | Milvus deployment type. Options are `single`, `cluster_readonly` and `cluster_writable`. | DeployMode | `single`   |
 | `time_zone` | Use the UTC-x or UTC+x to specify a time zone. For example, use `UTC+8` for China Standard Time. | Timezone | `UTC+8`  |
-| `web_port` |  Port that Milvus web server monitors.  Port range: (1024, 65535). You can use the Milvus web server to communicate with the [Milvus RESTful API](sdk.md). | Integer |  `19121` |
+| `web_enable` | Whether to enable web server. | Boolean |  `true` |
+| `web_port` | Port that Milvus web server monitors.  Port range: (1024, 65535). You can use the Milvus web server to communicate with the [Milvus RESTful API](sdk.md). | Integer |  `19121` |
 </div>
 
 ### Section `db_config`
@@ -86,6 +86,7 @@ Before changing these settings, welcome to consult Milvus team on [GitHub issues
 | ------------------------ | ------------------------------------------------------------ | ------- | --------------- |
 | `primary_path`         | Primary directory used for the vector data files, index files, and the metadata. | Path   | `/var/lib/milvus`    |
 | `secondary_path` | A semicolon-separated list of secondary directories used vector data files and index files. Set this parameter when the data size is too much to fit in the `primary_path`. <br/>Each file, whether in `primary_path` or `secondary_path`, is assigned an equal part of the imported data.  Data Size per Directory = Total Data Size / Number of Directories. So make sure the available storage space in these files are enough. | Path   |     ` `       |
+| `file_cleanup_timeout` | The time gap in seconds between marking a file as `deleted` and physically deleting it from the disk. Range: [0,3600]. | Integer |    `10` (s)    |
 
 </div>
 
@@ -107,8 +108,8 @@ Before changing these settings, welcome to consult Milvus team on [GitHub issues
 | Parameter            | Description                                                  | Type    | Default   |
 | -------------------- | ------------------------------------------------------------ | ------- | --------- |
 | `cpu_cache_capacity` | The size of the CPU memory for caching data for faster query. The sum of `cpu_cache_capacity` and `insert_buffer_size` must < the total CPU memory size. | Integer | `4` (GB) |
-| `insert_buffer_size`     | Maximum memory size used by the buffer for data insertion. The sum of `insert_buffer_size` and `cpu_cache_capacity` must < the total memory. | Integer | `1` (GB)        |
-| `cache_insert_data`  | If set to `true` , the inserted data will be loaded into the cache immediately for hot query. | Boolean | `false`   |
+| `insert_buffer_size` | The maximum memory size used by the buffer for data insertion. The sum of `insert_buffer_size` and `cpu_cache_capacity` must < the total memory size. | Integer | `1` (GB)        |
+| `cache_insert_data`  | If set to `true` , the inserted data will be loaded to the cache immediately for hot query. | Boolean | `false`   |
 
 </div>
 
@@ -168,4 +169,21 @@ To switch to CPU-only mode, just set `enable` to `false`.
 |  `recovery_error_ignore` |  Whether to ignore logs with errors that happens during WAL recovery. If true, when Milvus restarts for recovery and there are errors in WAL log files, log files with errors are ignored. If false, Milvus fails to restart when there are errors in WAL log files.   |   Boolean           |   true      |
 |  `buffer_size`          |  Sum total of the read buffer and the write buffer in MBs. `buffer_size` must be in range `[64, 4096]` (MB) . If the value you specified is out of range, Milvus automatically uses the boundary value closest to the specified value. It is recommended you set `buffer_size` to a value greater than the inserted data size of a single insert operation for better performance.              |    Integer          |   `256` (MB)     |
 |  `wal_path`             |  Location of WAL log files.                                                            |    String          |    ` `     |
+</div>
+
+### Section `logs`
+
+<div class="table-wrapper" markdown="block">
+
+| Parameter            | Description                                                  | Type         | Default |
+| -------------------- | ------------------------------------------------------------ | ------------ | ------- |
+|  `trace.enable`      |   Whether to enable trace level logging.           |    Boolean   |  `true` |
+|  `debug.enable`      |   Whether to enable debug level logging.           |    Boolean   |  `true` |
+|  `info.enable`       |   Whether to enable info level logging.            |    Boolean   |  `true` |
+|  `warning.enable`    |   Whether to enable warning level logging.         |    Boolean   |  `true` |
+|  `error.enable`      |   Whether to enable error level logging.           |    Boolean   |  `true` |
+|  `fatal.enable`      |   Whether to enable fatal level logging.           |    Boolean   |  `true` |
+|  `path`              |  Absolute path to the folder holding the log files.  |    String    |   ` `   |
+|  `max_log_file_size` |  The maximum size of each log file. Range: [1024, 4096]  |    Integer   | `1024` (MB) |
+|  `logrotate`         | The maximum number of log files that Milvus keeps for each logging level. Range: [0, 1024]. `0` means that the number does not have an upper limit. |    Integer   | `0` |
 </div>

@@ -21,9 +21,10 @@ sidebar_label: Install CPU-only Milvus on Docker
 
 | 组件 | 建议配置                               |
 | ---- | -------------------------------------- |
-| CPU  | Intel CPU Haswell 或以上               |
+| CPU        | Intel CPU Sandy Bridge 或以上 |
+| CPU 指令集 | <li>SSE42</li><li>AVX</li><li>AVX2</li><li>AVX512</li> |
 | 内存 | 8 GB 或以上 （取决于具体向量数据规模） |
-| 硬盘 | SATA 3.0 SSD 或以上                    |
+| 硬盘 | SATA 3.0 SSD 或以上                |
 
 #### Milvus Docker 要求
 
@@ -147,7 +148,6 @@ $ wget https://raw.githubusercontent.com/milvus-io/milvus/v0.8.0/core/conf/demo/
 $ docker run -d --name milvus_cpu \
 -p 19530:19530 \
 -p 19121:19121 \
--p 9091:9091 \
 -v /Users/$USER/milvus/db:/var/lib/milvus/db \
 -v /Users/$USER/milvus/conf:/var/lib/milvus/conf \
 -v /Users/$USER/milvus/logs:/var/lib/milvus/logs \
