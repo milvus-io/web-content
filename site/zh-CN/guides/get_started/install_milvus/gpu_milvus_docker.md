@@ -48,7 +48,7 @@ $ docker info
 拉取支持 GPU 的镜像：
 
 ```shell
-$ docker pull milvusdb/milvus:0.8.0-gpu-d041520-464400
+$ docker pull milvusdb/milvus::0.9.0-gpu-d051520-cb92b1
 ```
 
 > 注意：如果您在拉取镜像时速度过慢或一直失败，请参考[操作常见问题](../../../faq/operational_faq.md)中提供的解决办法。
@@ -61,11 +61,11 @@ $ docker pull milvusdb/milvus:0.8.0-gpu-d041520-464400
 # Create Milvus file
 $ mkdir -p /home/$USER/milvus/conf
 $ cd /home/$USER/milvus/conf
-$ wget https://raw.githubusercontent.com/milvus-io/milvus/v0.8.0/core/conf/demo/server_config.yaml
-$ wget https://raw.githubusercontent.com/milvus-io/milvus/v0.8.0/core/conf/demo/log_config.conf
+$ wget https://raw.githubusercontent.com/milvus-io/milvus/v0.9.0/core/conf/demo/server_config.yaml
+$ wget https://raw.githubusercontent.com/milvus-io/milvus/v0.9.0/core/conf/demo/log_config.conf
 ```
 
-> 注意：万一您遇到无法通过 `wget` 命令正常下载配置文件的情况，您也可以在 `/home/$USER/milvus/conf` 路径下创建 `server_config.yaml` 和 `log_config.conf` 文件，然后复制粘贴 [server config 文件](https://github.com/milvus-io/milvus/blob/v0.8.0/core/conf/demo/server_config.yaml) 和 [log config 文件](https://github.com/milvus-io/milvus/blob/v0.8.0/core/conf/demo/log_config.conf)的内容。
+> 注意：万一您遇到无法通过 `wget` 命令正常下载配置文件的情况，您也可以在 `/home/$USER/milvus/conf` 路径下创建 `server_config.yaml` 和 `log_config.conf` 文件，然后复制粘贴 [server config 文件](https://github.com/milvus-io/milvus/blob/v0.9.0/core/conf/demo/server_config.yaml) 和 [log config 文件](https://github.com/milvus-io/milvus/blob/v0.9.0/core/conf/demo/log_config.conf)的内容。
 
 配置文件下载完成后，您需要将 `server_config.yaml` 中的 `gpu_resource_config` 部分的 `enable` 参数设置为 `true`。
 
@@ -81,7 +81,7 @@ $ docker run -d --name milvus_gpu --gpus all \
 -v /home/$USER/milvus/conf:/var/lib/milvus/conf \
 -v /home/$USER/milvus/logs:/var/lib/milvus/logs \
 -v /home/$USER/milvus/wal:/var/lib/milvus/wal \
-milvusdb/milvus:0.8.0-gpu-d041520-464400
+milvusdb/milvus::0.9.0-gpu-d051520-cb92b1
 ```
 
 上述命令中用到的 `docker run` 参数定义如下：
