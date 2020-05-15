@@ -71,7 +71,7 @@ Before starting the Docker container, you must set `enable` to `true` in `gpu_re
 
 ```shell
 # Start Milvus
-$ docker run -d --name milvus_gpu --gpus all \
+$ docker run -d --name milvus_gpu_0.9.0 --gpus all \
 -p 19530:19530 \
 -p 19121:19121 \
 -p 9091:9091 \
