@@ -60,11 +60,11 @@ Before changing these settings, welcome to consult Milvus team on [GitHub issues
 | Parameter   | Description                                                  | Type    | Default    |
 | ----------- | ------------------------------------------------------------ | ------- | ---------- |
 | `address`   | IP address that Milvus server monitors.                      | String | `0.0.0.0`  |
-| `port`      | Port that Milvus server monitors. Port range: [1024, 65535]. | Integer | `19530`    |
+| `port`      | Port that Milvus server monitors. Port range: (1024, 65535). | Integer | `19530`    |
 | `deploy_mode` | Milvus deployment type. Options are `single`, `cluster_readonly` and `cluster_writable`. | DeployMode | `single`   |
 | `time_zone` | Use the UTC-x or UTC+x to specify a time zone. For example, use `UTC+8` for China Standard Time. | Timezone | `UTC+8`  |
 | `web_enable` | Whether to enable web server. | Boolean |  `true` |
-| `web_port` | Port that Milvus web server monitors.  Port range: [1024, 65535]. You can use the Milvus web server to communicate with the [Milvus RESTful API](sdk.md). | Integer |  `19121` |
+| `web_port` | Port that Milvus web server monitors.  Port range: (1024, 65535). You can use the Milvus web server to communicate with the [Milvus RESTful API](sdk.md). | Integer |  `19121` |
 </div>
 
 ### Section `db_config`
@@ -86,7 +86,7 @@ Before changing these settings, welcome to consult Milvus team on [GitHub issues
 | ------------------------ | ------------------------------------------------------------ | ------- | --------------- |
 | `primary_path`         | Primary directory used for the vector data files, index files, and the metadata. | Path   | `/var/lib/milvus`    |
 | `secondary_path` | A semicolon-separated list of secondary directories used vector data files and index files. Set this parameter when the data size is too much to fit in the `primary_path`. <br/>Each file, whether in `primary_path` or `secondary_path`, is assigned an equal part of the imported data.  Data Size per Directory = Total Data Size / Number of Directories. So make sure the available storage space in these files are enough. | Path   |     ` `       |
-| `file_cleanup_timeout` | The time gap between marking a file as `deleted` and physically deleting it from the disk. Range: [0,3600]. | Integer |     `10s`       |
+| `file_cleanup_timeout` | The time gap in seconds between marking a file as `deleted` and physically deleting it from the disk. Range: [0,3600]. | Integer |    `10` (s)    |
 
 </div>
 

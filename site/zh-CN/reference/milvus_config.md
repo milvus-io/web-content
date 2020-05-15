@@ -62,11 +62,11 @@ $ docker restart <container id>
 | 参数        | 说明                                                         | 类型    | 默认值    |
 | ----------- | ------------------------------------------------------------ | ------- | --------- |
 | `address`   | Milvus 服务端监听的 IP 地址。                                  | String | `0.0.0.0`  |
-| `port`      | Milvus 服务端监听的端口号，范围：[1024, 65535]。             | Integer | `19530`   |
+| `port`      | Milvus 服务端监听的端口号，范围：(1024, 65535)。           | Integer | `19530`   |
 | `deploy_mode` | Milvus 部署类型。选择 `single` ，`cluster_readonly` 或 `cluster_writable`。 | DeployMode | `single`  |
 | `time_zone` | 使用 UTC-x 或 UTC+x 来指定时区。比如，您可以使用 `UTC+8` 来代表中国标准时间。 | Timezone | `UTC+8`   |
 | `web_enable` | 选择是否启用 Web 服务器。 | Boolean | `true` |
-| `web_port` | Milvus 网络服务端监听的端口号，范围：[1024, 65535]。您可以使用 Milvus 网络服务端与 [Milvus RESTful API](sdk.md) 通信。 | Integer | `19121`  |
+| `web_port` | Milvus 网络服务端监听的端口号，范围：(1024, 65535)。您可以使用 Milvus 网络服务端与 [Milvus RESTful API](sdk.md) 通信。 | Integer | `19121`  |
 
 </div>
 
@@ -89,7 +89,7 @@ $ docker restart <container id>
 | -------------------- | ------------------------------------------------------------ | ----------- | --------------- |
 | `primary_path`       | 导入 Milvus 的向量文件、索引文件和元数据存储的首选路径。               | Path        | `/var/lib/milvus`     |
 | `secondary_path`     | 导入 Milvus 的向量文件和索引文件存储的二级路径，可以填多个，两个路径中间以分号隔开。当数据量很大，`primary_path` 指定的磁盘空间不够用时，可以设置此参数。<br/>`primary_path` 和 `secondary_path` 平均分配导入的数据。每个路径下的数据大小 = 数据总大小 / 路径数量。请确保这些路径下文件可用的存量差不多且够用。 | Path        | ` `             |
-| `file_cleanup_timeout` | 从标记一个文件为 `deleted` 到该文件在磁盘被物理删除的时间差。单位为秒。范围：[0, 3600]。 | Integer | `10` |
+| `file_cleanup_timeout` | 从标记一个文件为 `deleted` 到该文件在磁盘被物理删除的时间差。单位为秒。范围：[0, 3600]。 | Integer | `10` (s) |
 </div>
 
 
