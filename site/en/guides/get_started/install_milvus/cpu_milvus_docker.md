@@ -63,10 +63,10 @@ $ docker pull milvusdb/milvus::0.9.0-gpu-d051520-cb92b1
 $ mkdir -p /home/$USER/milvus/conf
 $ cd /home/$USER/milvus/conf
 $ wget https://raw.githubusercontent.com/milvus-io/milvus/v0.9.0/core/conf/demo/server_config.yaml
-$ wget https://raw.githubusercontent.com/milvus-io/milvus/v0.9.0/core/conf/demo/log_config.conf
 ```
 
-> Note: In case you encounter problems downloading configuration files using `wget` command, you can also create the `server_config.yaml` and `log_config.conf` files under `/home/$USER/milvus/conf`, then copy and paste the content from [server config file](https://github.com/milvus-io/milvus/blob/v0.9.0/core/conf/demo/server_config.yaml) and [log config file](https://github.com/milvus-io/milvus/blob/v0.9.0/core/conf/demo/log_config.conf).
+> Note: In case you encounter problems downloading configuration files using `wget` command, you can also create `server_config.yaml` under `/home/$USER/milvus/conf`, then copy and paste the content from [server config file](https://github.com/milvus-io/milvus/blob/v0.9.0/core/conf/demo/server_config.yaml).
+
 
 #### Step 4 Start Docker container
 
@@ -112,7 +112,7 @@ $ docker logs <milvus container id>
 
 The procedures of installing Milvus on Windows are similar to the steps on Ubuntu/CentOS, except for **Step 3 and Step 4**.
 
-For Step 3, instead of using `wget` to obtain the files, it is suggested to create a `milvus` file containing `db`, `conf`, `logs`, and `wal` folders in a location you find appropriate, for example on the C drive, and copy the the content from [server config file](https://github.com/milvus-io/milvus/blob/v0.9.0/core/conf/demo/server_config.yaml) and [log config file](https://github.com/milvus-io/milvus/blob/v0.9.0/core/conf/demo/log_config.conf) to `server_config.yaml` and `log_config.conf` you created under `C:\milvus\conf`.
+For Step 3, instead of using `wget` to obtain the files, it is suggested to create a `milvus` file containing `db`, `conf`, `logs`, and `wal` folders in a location you find appropriate, for example on the C drive, and copy the the content from [server config file](https://github.com/milvus-io/milvus/blob/v0.9.0/core/conf/demo/server_config.yaml) to `server_config.yaml` that you created under `C:\milvus\conf`.
 
 For Step 4, start the docker by mapping Milvus files to the right path. The following command is run in Windows Command shell:
 
@@ -140,7 +140,6 @@ For Step 3, the path has some minor differences:
 $ mkdir -p /Users/$USER/milvus/conf
 $ cd /Users/$USER/milvus/conf
 $ wget https://raw.githubusercontent.com/milvus-io/milvus/v0.9.0/core/conf/demo/server_config.yaml
-$ wget https://raw.githubusercontent.com/milvus-io/milvus/v0.9.0/core/conf/demo/log_config.conf
 ```
 
 For Step 4, start the docker by mapping Milvus files to the right path:
@@ -150,6 +149,7 @@ For Step 4, start the docker by mapping Milvus files to the right path:
 $ docker run -d --name milvus_cpu \
 -p 19530:19530 \
 -p 19121:19121 \
+-p 9091:9091 \
 -v /Users/$USER/milvus/db:/var/lib/milvus/db \
 -v /Users/$USER/milvus/conf:/var/lib/milvus/conf \
 -v /Users/$USER/milvus/logs:/var/lib/milvus/logs \

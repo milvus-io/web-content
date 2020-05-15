@@ -74,6 +74,7 @@ Before starting the Docker container, you must set `enable` to `true` in `gpu_re
 $ docker run -d --name milvus_gpu --gpus all \
 -p 19530:19530 \
 -p 19121:19121 \
+-p 9091:9091 \
 -v /home/$USER/milvus/db:/var/lib/milvus/db \
 -v /home/$USER/milvus/conf:/var/lib/milvus/conf \
 -v /home/$USER/milvus/logs:/var/lib/milvus/logs \
