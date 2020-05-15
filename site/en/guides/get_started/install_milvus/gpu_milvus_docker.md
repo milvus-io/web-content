@@ -19,7 +19,8 @@ sidebar_label: Install GPU-enabled Milvus
 
 | Component  | Recommended configuration             |
 | ---------- | ------------------------------------- |
-| CPU        | Intel CPU Haswell or higher           |
+| CPU        | Intel CPU Sandy Bridge or higher. |
+| CPU instruction set | <li>SSE42</li><li>AVX</li><li>AVX2</li><li>AVX512</li> |
 | GPU        | NVIDIA Pascal or higher               |
 | RAM        | 8 GB or more (depends on data volume) |
 | Hard drive | SATA 3.0 SSD or higher                |

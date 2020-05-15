@@ -19,7 +19,8 @@ sidebar_label: Install GPU-enabled Milvus on Docker
 
 | 组件 | 建议配置                               |
 | ---- | -------------------------------------- |
-| CPU  | Intel CPU Haswell 或以上               |
+| CPU        | Intel CPU Sandy Bridge 或以上 |
+| CPU 指令集 | <li>SSE42</li><li>AVX</li><li>AVX2</li><li>AVX512</li> |
 | GPU  | NVIDIA Pascal 或以上                   |
 | 内存 | 8 GB 或以上 （取决于具体向量数据规模） |
 | 硬盘 | SATA 3.0 SSD 或以上                    |

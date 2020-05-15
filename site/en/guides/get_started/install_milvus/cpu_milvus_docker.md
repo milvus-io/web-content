@@ -19,10 +19,11 @@ sidebar_label: Install CPU-only Milvus
 
 #### Hardware requirements
 
-| Component  | Recommended configuration             |
+| Component | Recommended configuration             |
 | ---------- | ------------------------------------- |
-| CPU        | Intel CPU Haswell or higher           |
-| RAM        | 8 GB or more (depends on data volume) |
+| CPU        | Intel CPU Sandy Bridge or higher. |
+| CPU instruction set | <li>SSE42</li><li>AVX</li><li>AVX2</li><li>AVX512</li> |
+| RAM        | 8 GB or more (depends on the data volume) |
 | Hard drive | SATA 3.0 SSD or higher                |
 
 #### Milvus Docker requirements
