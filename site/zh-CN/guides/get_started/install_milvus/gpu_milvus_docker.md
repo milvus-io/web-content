@@ -48,7 +48,7 @@ $ docker info
 拉取支持 GPU 的镜像：
 
 ```shell
-$ docker pull milvusdb/milvus::0.9.0-gpu-d051520-cb92b1
+$ docker pull milvusdb/milvus:0.9.0-gpu-d051520-cb92b1
 ```
 
 > 注意：如果您在拉取镜像时速度过慢或一直失败，请参考[操作常见问题](../../../faq/operational_faq.md)中提供的解决办法。
@@ -81,7 +81,7 @@ $ docker run -d --name milvus_gpu --gpus all \
 -v /home/$USER/milvus/conf:/var/lib/milvus/conf \
 -v /home/$USER/milvus/logs:/var/lib/milvus/logs \
 -v /home/$USER/milvus/wal:/var/lib/milvus/wal \
-milvusdb/milvus::0.9.0-gpu-d051520-cb92b1
+milvusdb/milvus:0.9.0-gpu-d051520-cb92b1
 ```
 
 上述命令中用到的 `docker run` 参数定义如下：
