@@ -81,6 +81,7 @@ $ docker run -d --name milvus_cpu \
 -v /home/$USER/milvus/logs:/var/lib/milvus/logs \
 -v /home/$USER/milvus/wal:/var/lib/milvus/wal \
 milvusdb/milvus::0.9.0-gpu-d051520-cb92b1
+
 ```
 
 The `docker run` options used in the above command are defined as follows:
@@ -93,7 +94,7 @@ The `docker run` options used in the above command are defined as follows:
 
 Finally confirm Milvus running status by the following command:
 
-```shell
+​```shell
 # Confirm Milvus status
 $ docker ps
 ```
@@ -149,6 +150,7 @@ For Step 4, start the docker by mapping Milvus files to the right path:
 $ docker run -d --name milvus_cpu \
 -p 19530:19530 \
 -p 19121:19121 \
+-p 9091:9091 \
 -v /Users/$USER/milvus/db:/var/lib/milvus/db \
 -v /Users/$USER/milvus/conf:/var/lib/milvus/conf \
 -v /Users/$USER/milvus/logs:/var/lib/milvus/logs \
