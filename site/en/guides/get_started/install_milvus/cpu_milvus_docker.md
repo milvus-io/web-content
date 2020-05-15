@@ -149,7 +149,6 @@ For Step 4, start the docker by mapping Milvus files to the right path:
 $ docker run -d --name milvus_cpu \
 -p 19530:19530 \
 -p 19121:19121 \
--p 9091:9091 \
 -v /Users/$USER/milvus/db:/var/lib/milvus/db \
 -v /Users/$USER/milvus/conf:/var/lib/milvus/conf \
 -v /Users/$USER/milvus/logs:/var/lib/milvus/logs \
