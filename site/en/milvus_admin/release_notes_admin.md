@@ -12,6 +12,12 @@ Milvus Admin is the GUI client of Milvus. You can use Milvus Admin to perform op
 
 **Release Date**：2020-5-5
 
+**Compatibility**
+
+| Milvus Version | Milvus Admin Version  |
+| ---------------| -----------------|
+| 0.9.0          | 0.3.0           |
+
 **Features**
 
 - Makes some UI changes to improve user experience.
