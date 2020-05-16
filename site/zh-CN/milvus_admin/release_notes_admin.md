@@ -8,6 +8,25 @@ sidebar_label: Milvus Admin 发版说明
 
 Milvus Admin 是 Milvus 的图形化客户端。您可以通过 Milvus Admin 对 Milvus 服务端进行操作。
 
+## v0.3.0
+
+**发布时间**：2020-5-15
+
+**版本兼容**
+
+| Milvus Version    | Milvus Admin Version  |
+| ---------------| -----------------|
+| 0.9.0          | 0.3.0           |
+
+
+**更新**
+
+1.一些界面设计修改，优化用户体验，
+2.在浏览器标签显示当前连接的milvus地址
+3.在页面显示当前链接的milvus版本号
+4.兼容milvus0.9.0相关API修改
+5.支持在界面修改参数：auto_flush_interval
+
 ## v0.2.0
 
 **发布时间**：2020-4-17
