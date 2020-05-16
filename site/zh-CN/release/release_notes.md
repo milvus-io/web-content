@@ -146,8 +146,8 @@ sidebar_label: 发版说明
 
 |                     | C++                           | Python      | Java                     | Go          |
 | ------------------- | ----------------------------- | ----------- | ------------------------ | ----------- |
-| v0.9.0 之前版本 | `FlushCollection` and `Flush` | `flush`     | `flush` and `flushAsync` | `Flush`     |
-| v0.9.0              | `Flush`                       | *UNCHANGED* | *UNCHANGED*              | *UNCHANGED* |
+| v0.9.0 之前版本 | `FlushCollection` 和 `Flush` | `flush`     | `flush` 和 `flushAsync` | `Flush`     |
+| v0.9.0              | `Flush`                       | *不变* | *不变*              | *不变* |
 
 
 
@@ -155,8 +155,8 @@ sidebar_label: 发版说明
 
 |                     | C++                               | Python      | Java                         | Go          |
 | ------------------- | --------------------------------- | ----------- | ---------------------------- | ----------- |
-| v0.9.0 之前版本 | `CompactCollection` and `Compact` | `compact`   | `compact` and `compactAsync` | `Compact`   |
-| v0.9.0              | `Compact`                         | *UNCHANGED* | *UNCHANGED*                  | *UNCHANGED* |
+| v0.9.0 之前版本 | `CompactCollection` 和 `Compact` | `compact`   | `compact` 和 `compactAsync` | `Compact`   |
+| v0.9.0              | `Compact`                         | *不变* | *不变*              | *不变* |
 
 
 
@@ -165,7 +165,7 @@ sidebar_label: 发版说明
 |                     | C++         | Python    | Java        | Go          |
 | ------------------- | ----------- | --------- | ----------- | ----------- |
 | v0.9.0 之前版本 | `Connect`   | `connect` | `connect`   | `Connect`   |
-| v0.9.0              | *UNCHANGED* | *DELETED* | *UNCHANGED* | *UNCHANGED* |
+| v0.9.0              | *不变* | *删除* | *不变* | *不变* |
 
 
 
@@ -174,7 +174,7 @@ sidebar_label: 发版说明
 |                     | C++         | Python      | Java          | Go            |
 | ------------------- | ----------- | ----------- | ------------- | ------------- |
 | v0.9.0 之前版本 | `Connected` | `connected` | `isConnected` | `IsConnected` |
-| v0.9.0              | *UNCHANGED* | *DELETED*   | *UNCHANGED*   | *UNCHANGED*   |
+| v0.9.0              | *不变* | *删除* | *不变* | *不变* |
 
 
 
@@ -183,7 +183,7 @@ sidebar_label: 发版说明
 |                     | C++          | Python       | Java         | Go           |
 | ------------------- | ------------ | ------------ | ------------ | ------------ |
 | v0.9.0 之前版本 | `Disconnect` | `disconnect` | `disconnect` | `Disconnect` |
-| v0.9.0              | *UNCHANGED*  | *DELETED*    | *UNCHANGED*  | *UNCHANGED*  |
+| v0.9.0              | *不变* | *删除*    | *不变* | *不变* |
 
 
 
