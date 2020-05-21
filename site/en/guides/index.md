@@ -58,13 +58,13 @@ Vectors are partitioned into buckets without any compression. This partition bas
 
 ### `IVF_SQ8`
 
-Adopts a scalar quantizer to significantly reduce the size of a vector (to about 1/4 of the original size). Compared to `FLAT`, query speed is much faster. Compared with `IVFFLAT`, less disk and CPU/GPU memory is required.
+Adopts a scalar quantizer to significantly reduce the size of a vector (to about 1/4 of the original size). `IVF_SQ8` has a much faster query speed than `FLAT`, and requires less disk storage and CPU/GPU memory than `IVFFLAT`.
 
-Vectors are quantized to 8-bit floats, which may cause some loss of precision.
+Vectors are quantized to 8-bit floats, which may cause accuracy loss.
 
 ### `IVF_SQ8H`
 
-Optimized version of `IVF_SQ8` that requires both CPU and GPU to work. Different from `IVF_SQ8`, `IVF_SQ8H` uses a GPU-based coarse quantizer that greatly reduces the quantization time.
+Optimized version of `IVF_SQ8` that requires both CPU and GPU to work. Unlike `IVF_SQ8`, `IVF_SQ8H` uses a GPU-based coarse quantizer, which greatly reduces quantization time.
 
 ### `IVF_PQ`
 
