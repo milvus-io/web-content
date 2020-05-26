@@ -11,13 +11,13 @@ sidebar_label: 安装 Milvus Admin
 1. 拉取 Milvus Admin 的 Docker 镜像：
 
     ```shell
-    $ docker pull milvusdb/milvus-admin:v0.2.0
+    $ docker pull milvusdb/milvus-admin:v0.3.0
     ```
 
 2. 运行 Docker 镜像：
 
     ```shell
-    $ docker run -p 3000:80 milvusdb/milvus-admin:v0.2.0
+    $ docker run -p 3000:80 milvusdb/milvus-admin:v0.3.0
     ```
 
     > 注意：您也可以映射3000以外的端口，但相应的访问 URL 也需要更新。
