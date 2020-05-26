@@ -31,7 +31,7 @@ $ docker restart <container id>
 
 ### Updating configurations during runtime
 
-You can use Milvus clients to update parameters in `server_config.yaml`. Refer to [Client Reference](sdk.md) for more information.
+You can update parameters in `server_config.yaml` from a Milvus client. See [Client Reference](sdk.md) for more information.
 
 Updates to the following parameters take effect immediately.
 
