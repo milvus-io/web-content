@@ -15,7 +15,7 @@ sidebar_label: Install CPU-only Milvus on Docker
 | CentOS     | 7.5 或以上                                                   |
 | Ubuntu LTS | 18.04 或以上                                                 |
 | Windows    | Windows 10 64-bit：Pro，Enterprise，或 Education 版（Build 15063 或以上） |
-| MacOS      | 10.13 或以上         |
+| macOS      | 10.13 或以上         |
 
 #### 硬件要求
 
@@ -30,7 +30,7 @@ sidebar_label: Install CPU-only Milvus on Docker
 
 - 如果使用 Ubuntu 或 CentOS 安装 Milvus，请在您的宿主机上 [安装 Docker](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/) 19.03或更高版本。
 - 如果在 Windows 上安装 Milvus，请安装 [Docker Desktop](https://docs.docker.com/docker-for-windows/install/)，并进入 **Settings -> Advanced** 调整相关配置。请确保‘可用内存’大于您在 `server_config.yaml` 文件中设置的`insert_buffer_size` 和 `cpu_cache_capacity` 之和。
-- 如果在 MacOS 上安装 Milvus，请安装[Docker Desktop for Mac](https://docs.docker.com/docker-for-mac/install/)，并进入 **Preferences -> Advanced** 调整相关配置。请确保‘可用内存’大于您在 `server_config.yaml` 文件中设置的`insert_buffer_size` 和 `cpu_cache_capacity` 之和。
+- 如果在 macOS 上安装 Milvus，请安装[Docker Desktop for Mac](https://docs.docker.com/docker-for-mac/install/)，并进入 **Preferences -> Advanced** 调整相关配置。请确保‘可用内存’大于您在 `server_config.yaml` 文件中设置的`insert_buffer_size` 和 `cpu_cache_capacity` 之和。
 
 ## 在 Ubuntu/CentOS 上安装 Milvus
 
@@ -126,7 +126,7 @@ $ docker run -d --name milvus_cpu_0.9.0 \
 milvusdb/milvus:0.9.0-cpu-d051520-cb92b1
 ```
 
-## 在 MacOS 上安装 Milvus
+## 在 macOS 上安装 Milvus
 
 在 Windows 上安装 Milvus 的步骤和在 Ubuntu/CentOS 上几乎一样，只不过 **第三步** 和 **第四步** 略有不同。
 

@@ -15,7 +15,7 @@ sidebar_label: Install CPU-only Milvus
 | CentOS           | 7.5 or higher                                                |
 | Ubuntu LTS       | 18.04 or higher                                              |
 | Windows          | Windows 10 64-bit: Pro, Enterprise, or Education (Build 15063 or later) |
-| MacOS            |  10.13 or higher      |
+| macOS            |  10.13 or higher      |
 
 #### Hardware requirements
 
@@ -30,7 +30,7 @@ sidebar_label: Install CPU-only Milvus
 
 - If you're using Ubuntu or CentOS, [Install Docker](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/) 19.03 or higher on your local host machine.
 - If you're installing Milvus on Windows, install [Docker Desktop](https://docs.docker.com/docker-for-windows/install/), and make certain configurations in **Settings -> Advanced**. Make sure the Memory available to Docker Engine exceeds the sum of `insert_buffer_size` and `cpu_cache_capacity` you set in the `server_config.yaml` file.
-- If you're installing Milvus on MacOS, install [Docker Desktop for Mac](https://docs.docker.com/docker-for-mac/install/), and make certain configurations in **Settings -> Advanced**. Make sure the Memory available to Docker Engine exceeds the sum of `insert_buffer_size` and `cpu_cache_capacity` you set in the `server_config.yaml` file.
+- If you're installing Milvus on macOS, install [Docker Desktop for Mac](https://docs.docker.com/docker-for-mac/install/), and make certain configurations in **Settings -> Advanced**. Make sure the Memory available to Docker Engine exceeds the sum of `insert_buffer_size` and `cpu_cache_capacity` you set in the `server_config.yaml` file.
 
 ## Install Milvus on Ubuntu/CentOS
 
@@ -128,7 +128,7 @@ $ docker run -d --name milvus_cpu_0.9.0 \
 milvusdb/milvus:0.9.0-cpu-d051520-cb92b1
 ```
 
-## Install Milvus on MacOS
+## Install Milvus on macOS
 
 The procedures of installing Milvus on Windows are similar to the steps on Ubuntu/CentOS, except for **Step 3 and Step 4**.
 
