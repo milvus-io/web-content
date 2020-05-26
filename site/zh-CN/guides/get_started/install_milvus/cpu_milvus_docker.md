@@ -113,16 +113,16 @@ $ docker logs <milvus container id>
 
 第四步，启动 Docker 容器，将 Milvus 文件映射到您本地的文件路径。下面的命令是在命令提示符中运行的：
 
-```cmd
+```shell
 # Start Milvus
-$ docker run -d --name milvus_cpu_0.9.0 ^
--p 19530:19530 ^
--p 19121:19121 ^
--p 9091:9091 ^
--v C:\milvus\db:/var/lib/milvus/db ^
--v C:\milvus\conf:/var/lib/milvus/conf ^
--v C:\milvus\logs:/var/lib/milvus/logs ^
--v C:\milvus\wal:/var/lib/milvus/wal ^
+$ docker run -d --name milvus_cpu_0.9.0 \
+-p 19530:19530 \
+-p 19121:19121 \
+-p 9091:9091 \
+-v C:\milvus\db:/var/lib/milvus/db \
+-v C:\milvus\conf:/var/lib/milvus/conf \
+-v C:\milvus\logs:/var/lib/milvus/logs \
+-v C:\milvus\wal:/var/lib/milvus/wal \
 milvusdb/milvus:0.9.0-cpu-d051520-cb92b1
 ```
 

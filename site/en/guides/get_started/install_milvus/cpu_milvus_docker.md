@@ -81,7 +81,6 @@ $ docker run -d --name milvus_cpu_0.9.0 \
 -v /home/$USER/milvus/logs:/var/lib/milvus/logs \
 -v /home/$USER/milvus/wal:/var/lib/milvus/wal \
 milvusdb/milvus:0.9.0-cpu-d051520-cb92b1
-
 ```
 
 The `docker run` options used in the above command are defined as follows:
@@ -116,16 +115,16 @@ For Step 3, instead of using `wget` to obtain the files, it is suggested to crea
 
 For Step 4, start the docker by mapping Milvus files to the right path. The following command is run in Windows Command shell:
 
-​```cmd
+```shell
 # Start Milvus
-$ docker run -d --name milvus_cpu_0.9.0 ^
--p 19530:19530 ^
--p 19121:19121 ^
--p 9091:9091 ^
--v C:\milvus\db:/var/lib/milvus/db ^
--v C:\milvus\conf:/var/lib/milvus/conf ^
--v C:\milvus\logs:/var/lib/milvus/logs ^
--v C:\milvus\wal:/var/lib/milvus/wal ^
+$ docker run -d --name milvus_cpu_0.9.0 \
+-p 19530:19530 \
+-p 19121:19121 \
+-p 9091:9091 \
+-v C:\milvus\db:/var/lib/milvus/db \
+-v C:\milvus\conf:/var/lib/milvus/conf \
+-v C:\milvus\logs:/var/lib/milvus/logs \
+-v C:\milvus\wal:/var/lib/milvus/wal \
 milvusdb/milvus:0.9.0-cpu-d051520-cb92b1
 ```
 
