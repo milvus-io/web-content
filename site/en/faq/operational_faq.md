@@ -25,7 +25,7 @@ sidebar_label: Operational FAQ
 - [How do I know whether Milvus is successfully started?](#How-do-I-know-whether-Milvus-is-successfully-started)
 - [Why there are vectors with `-1` as IDs in my search result?](#Why-there-are-vectors-with--1-as-IDs-in-my-search-result)
 - [Why does my Milvus return "Illegal instruction" during startup?](#Why-does-my-Milvus-return-Illegal-instruction-during-startup)
-- [Why is `cpu_cache_capacity` always too large for MacOS or Windows?](#Why-is-cpu_cache_capacity-always-too-large-for-MacOS-or-Windows)
+- [Why is `cpu_cache_capacity` always too large for macOS or Windows?](#Why-is-cpu_cache_capacity-always-too-large-for-macOS-or-Windows)
 - [Why is the time in my log files different from the system time?](#Why-is-the-time-in-my-log-files-different-from-the-system-time)
 - [Why does my multiprocessing program fail?](#Why-does-my-multiprocessing-program-fail)
 - [Why are the search results fewer than K when I try to search the top K vectors?](#Why-are-the-search-results-fewer-than-K-when-I-try-to-search-the-top-K-vectors)
@@ -124,9 +124,9 @@ When the number of vectors in the dataset is less than `topk`, Milvus automatica
 
 If your CPU does not support the avx2 instruction set, Milvus cannot run properly. You can use `cat /proc/cpuinfo` to check supported instruction sets.
 
-#### Why is `cpu_cache_capacity` always too large for MacOS or Windows?
+#### Why is `cpu_cache_capacity` always too large for macOS or Windows?
 
-You need to check the memory allocated to the docker engine in MacOS or Windows. If the allocated memory is not greater than `cpu_cache_capacity`, Milvus cannot start even if the memory of your host is sufficient.
+You need to check the memory allocated to the docker engine in macOS or Windows. If the allocated memory is not greater than `cpu_cache_capacity`, Milvus cannot start even if the memory of your host is sufficient.
 
 #### Why is the time in my log files different from the system time?
 

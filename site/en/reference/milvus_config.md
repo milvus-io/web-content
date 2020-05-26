@@ -33,7 +33,7 @@ $ docker restart <container id>
 
 You can use Milvus clients to update parameters in `server_config.yaml`. Refer to [Client Reference](sdk.md) for more information.
 
-When you use Milvus clients to update the following parameters, the updates take effect immediately. 
+Updates to the following parameters take effect immediately.
 
  - section `cache_config`
     - `cpu_cache_capacity`
