@@ -9,13 +9,13 @@ sidebar_label: Install Milvus Admin
 1. Pull the Docker image of Milvus Admin:
 
     ```shell
-    $ docker pull milvusdb/milvus-admin:v0.2.0
+    $ docker pull milvusdb/milvus-admin:v0.3.0
     ```
 
 2. Run the Docker image:
 
     ```shell
-    $ docker run -p 3000:80 milvusdb/milvus-admin:v0.2.0
+    $ docker run -p 3000:80 milvusdb/milvus-admin:v0.3.0
     ```
 
     > Note: You can also map a port other than 3000, but you need to update the URL accordingly/

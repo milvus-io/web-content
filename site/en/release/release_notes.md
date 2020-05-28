@@ -6,6 +6,196 @@ sidebar_label: Release Notes
 
 # Release Notes
 
+## v0.9.0
+
+**Release date**：2020-5-15
+
+#### Compatibility
+
+| Milvus version | Python SDK version | Java SDK version | Go SDK version |
+| -------------- | ------------------ | ---------------- | -------------- |
+| 0.9.0          | 0.2.11             | 0.8.0            | 0.4.0          |
+
+#### New features
+
+
+- Checks the CPU instruction set, GPU driver version, and CUDA version, when Milvus starts up. [#2054](https://github.com/milvus-io/milvus/issues/2054) [#2111](https://github.com/milvus-io/milvus/issues/2111)
+- Prevents multiple Milvus instances from accessing the same Milvus database at the same time. [#2059](https://github.com/milvus-io/milvus/issues/2059)
+- Supports log file rotating. [#2206](https://github.com/milvus-io/milvus/issues/2206)
+- Suspends index building when a search request comes in. [#2283](https://github.com/milvus-io/milvus/issues/2283)
+
+#### Improvements
+
+- Refactors log output. [#221](https://github.com/milvus-io/milvus/issues/221)
+- Upgrades OpenBLAS to improve Milvus' performance. [#1796](https://github.com/milvus-io/milvus/issues/1796)
+- Unifies the vector distance calculation algorithms among FAISS, NSG, HNSW, and ANNOY. [#1965](https://github.com/milvus-io/milvus/issues/1965)
+- Supports SSE4.2 instruction set. [#2039](https://github.com/milvus-io/milvus/issues/2039)
+- Refactors the configuration files. [#2149](https://github.com/milvus-io/milvus/issues/2149) [#2167](https://github.com/milvus-io/milvus/issues/2167)
+- Uses Elkan K-means algorithm to improve the IVF index performance. [#2178](https://github.com/milvus-io/milvus/issues/2178)
+
+#### Fixed issues
+
+> See [CHANGELOG](https://github.com/milvus-io/milvus/blob/master/CHANGELOG.md) for more information.
+
+#### API changes
+
+##### Added methods
+
+
+
+| C++            | Python             | Java                 | Go |
+| -------------- | ------------------ | -------------------- | ------------------------ |
+| `HasPartition`   |`has_partition`|`hasPartition`|`HasPartition`|
+
+##### Changed methods
+
+
+
+|               | C++            | Python             | Java                 | Go |
+| -------------- | -------------- | ------------------ | -------------------- | ------------------------ |
+| Earlier than v0.9.0 | `DescribeCollection` |`describe_collection`|`describeCollection`|`DescribeCollection`|
+| v0.9.0 | `GetCollectionInfo` |`get_collection_info`|`getCollectionInfo`|`GetCollectionInfo`|
+
+
+
+|                     | C++               | Python             | Java                    | Go                |
+| ------------------- | ----------------- | ------------------ | ----------------------- | ----------------- |
+| Earlier than v0.9.0 | `CountCollection` | `count_collection` | `getCollectionRowCount` | `CountCollection` |
+| v0.9.0              | `CountEntities`   | `count_entities`   | `countEntities`         | `CountEntities`   |
+
+
+
+
+
+|                     | C++               | Python             | Java              | Go                |
+| ------------------- | ----------------- | ------------------ | ----------------- | ----------------- |
+| Earlier than v0.9.0 | `ShowCollections` | `show_collections` | `showCollections` | `ShowCollections` |
+| v0.9.0              | `ListCollections` | `list_collections` | `listCollections` | `ListCollections` |
+
+
+
+
+
+|                     | C++                  | Python                 | Java                 | Go                   |
+| ------------------- | -------------------- | ---------------------- | -------------------- | -------------------- |
+| Earlier than v0.9.0 | `ShowCollectionInfo` | `collection_info`      | `showCollectionInfo` | `ShowCollectionInfo` |
+| v0.9.0              | `GetCollectionStats` | `get_collection_stats` | `getCollectionStats` | `GetCollectionStats` |
+
+
+
+
+
+|                     | C++             | Python           | Java            | Go              |
+| ------------------- | --------------- | ---------------- | --------------- | --------------- |
+| Earlier than v0.9.0 | `DescribeIndex` | `describe_index` | `describeIndex` | `DescribeIndex` |
+| v0.9.0              | `GetIndexInfo`  | `get_index_info` | `getIndexInfo`  | `GetIndexInfo`  |
+
+
+
+
+
+|                     | C++              | Python            | Java             | Go               |
+| ------------------- | ---------------- | ----------------- | ---------------- | ---------------- |
+| Earlier than v0.9.0 | `ShowPartitions` | `show_partitions` | `showPartitions` | `ShowPartitions` |
+| v0.9.0              | `ListPartitions` | `list_partitions` | `listPartitions` | `ListPartitions` |
+
+
+
+|                     | C++               | Python               | Java              | Go               |
+| ------------------- | ----------------- | -------------------- | ----------------- | ---------------- |
+| Earlier than v0.9.0 | `GetEntitiesByID` | `get_vectors_by_ids` | `getVectorsByIds` | `GetVectorsByID` |
+| v0.9.0              | `GetEntityByID`   | `get_entity_by_id`   | `getEntityByID`   | `GetEntityByID`  |
+
+
+
+
+
+|                     | C++               | Python               | Java              | Go                |
+| ------------------- | ----------------- | -------------------- | ----------------- | ----------------- |
+| Earlier than v0.9.0 | `GetIDsInSegment` | `get_vector_ids`     | `getVectorIds`    | `GetEntityIDs`    |
+| v0.9.0              | `ListIDInSegment` | `list_id_in_segment` | `listIDInSegment` | `ListIDInSegment` |
+
+
+
+|                     | C++   | Python              | Java            | Go    |
+| ------------------- | ----- | ------------------- | --------------- | ----- |
+| Earlier than v0.9.0 | *N/A* | `search_in_files`   | `searchInFiles` | *N/A* |
+| v0.9.0              | *N/A* | `search_in_segment` | *DELETED*       | *N/A* |
+
+
+
+
+
+|                     | C++                | Python                | Java               | Go                 |
+| ------------------- | ------------------ | --------------------- | ------------------ | ------------------ |
+| Earlier than v0.9.0 | `DeleteByID`       | `delete_by_id`        | `deleteByIds`      | `DeleteByID`       |
+| v0.9.0              | `DeleteEntityByID` | `delete_entity_by_id` | `deleteEntityByID` | `DeleteEntityByID` |
+
+
+
+
+
+|                     | C++                 | Python               | Java                | Go                  |
+| ------------------- | ------------------- | -------------------- | ------------------- | ------------------- |
+| Earlier than v0.9.0 | `PreloadCollection` | `preload_collection` | `preloadCollection` | `PreloadCollection` |
+| v0.9.0              | `LoadCollection`    | `load_collection`    | `loadCollection`    | `LoadCollection`    |
+
+
+
+
+
+|                     | C++                           | Python      | Java                     | Go          |
+| ------------------- | ----------------------------- | ----------- | ------------------------ | ----------- |
+| Earlier than v0.9.0 | `FlushCollection` and `Flush` | `flush`     | `flush` and `flushAsync` | `Flush`     |
+| v0.9.0              | `Flush`                       | *UNCHANGED* | *UNCHANGED*              | *UNCHANGED* |
+
+
+
+
+
+|                     | C++                               | Python      | Java                         | Go          |
+| ------------------- | --------------------------------- | ----------- | ---------------------------- | ----------- |
+| Earlier than v0.9.0 | `CompactCollection` and `Compact` | `compact`   | `compact` and `compactAsync` | `Compact`   |
+| v0.9.0              | `Compact`                         | *UNCHANGED* | *UNCHANGED*                  | *UNCHANGED* |
+
+
+
+
+
+|                     | C++         | Python    | Java        | Go          |
+| ------------------- | ----------- | --------- | ----------- | ----------- |
+| Earlier than v0.9.0 | `Connect`   | `connect` | `connect`   | `Connect`   |
+| v0.9.0              | *UNCHANGED* | *DELETED* | *UNCHANGED* | *UNCHANGED* |
+
+
+
+
+
+|                     | C++         | Python      | Java          | Go            |
+| ------------------- | ----------- | ----------- | ------------- | ------------- |
+| Earlier than v0.9.0 | `Connected` | `connected` | `isConnected` | `IsConnected` |
+| v0.9.0              | *UNCHANGED* | *DELETED*   | *UNCHANGED*   | *UNCHANGED*   |
+
+
+
+
+
+|                     | C++          | Python       | Java         | Go           |
+| ------------------- | ------------ | ------------ | ------------ | ------------ |
+| Earlier than v0.9.0 | `Disconnect` | `disconnect` | `disconnect` | `Disconnect` |
+| v0.9.0              | *UNCHANGED*  | *DELETED*    | *UNCHANGED*  | *UNCHANGED*  |
+
+
+
+
+
+
+
+
+
+
+
+
 ## v0.8.0
 
 **Release date**：2020-4-15
@@ -20,7 +210,7 @@ sidebar_label: Release Notes
 
 - **ANNOY index support**
 
-  Added support for ANNOY index type. Refer to [our documentation](../guides/index.md) for more information. [#261](https://github.com/milvus-io/milvus/issues/261)
+  Added support for ANNOY index type. See [our documentation](../guides/index.md) for more information. [#261](https://github.com/milvus-io/milvus/issues/261)
 
 - **Vector deletion**
 
@@ -28,11 +218,11 @@ sidebar_label: Release Notes
   
   Including: Flat/IVFlat/IVFPQ/IVFSQ8/IVFSQ8H/NSG/HNSW/ANNOY
 
-#### Enhancements
+#### Improvements
 
 - Added new metric SuperStructure and SubStructure in HTTP module. [#1784](https://github.com/milvus-io/milvus/issues/1784)
 
-#### Bug fixes
+#### Fixed issues
 
 - Limited the maximum number of partitions to 4096. [#1276](https://github.com/milvus-io/milvus/issues/1276)
 - Forbidden to create partition with name `_default`. [#1762](https://github.com/milvus-io/milvus/issues/1762)
@@ -53,7 +243,7 @@ sidebar_label: Release Notes
 
 - Added new distance metrics, including substructure and superstructure, for the `FLAT` index type. These metrics are used for substructure and superstructure search of chemical structures.[#1603](https://github.com/milvus-io/milvus/issues/1603).
 
-#### Enhancements
+#### Improvements
 
 - Improved the performance of the compact operation. [#1619](https://github.com/milvus-io/milvus/issues/1619)
 - Improved search performance using CPU, especially for scenarios with multiple, concurrent connections. [#267](https://github.com/milvus-io/milvus/issues/267)
@@ -61,7 +251,7 @@ sidebar_label: Release Notes
 - Milvus performs a combined search for the same search requests from multiple clients, thus significantly improving search speed. [#1728](https://github.com/milvus-io/milvus/issues/1728)
 - Upgraded Mishards to 0.7.1. [#1698](https://github.com/milvus-io/milvus/issues/1698)
 
-#### Bug fixes
+#### Fixed issues
 
 Refer to [CHANGELOG](https://github.com/milvus-io/milvus/blob/master/CHANGELOG.md) for details.
 
@@ -137,7 +327,7 @@ Refer to [CHANGELOG](https://github.com/milvus-io/milvus/blob/master/CHANGELOG.m
 
   Starting from Milvus 0.7.0, `Table` is named as `Collection` in Milvus.
 
-#### Bug fixes
+#### Fixed issues
 
 - Resolved the issue that duplicate IDs may be generated when inserting vector data using auto-generated IDs. [#1508](https://github.com/milvus-io/milvus/pull/1508)
 
@@ -189,7 +379,7 @@ Refer to [CHANGELOG](https://github.com/milvus-io/milvus/blob/master/CHANGELOG.m
 
   Support index building by multiple GPUs to reduce index building and overall query time. You can specify multiple GPUs for index building process through Milvus configuration parameter `build_index_resources`. [#414](https://github.com/milvus-io/milvus/pull/414)
 
-#### Bug fixes
+#### Fixed issues
 
 - Solved the issue of increased memory usage during vector queries. [#335](https://github.com/milvus-io/milvus/pull/335)
 
@@ -205,7 +395,7 @@ Refer to [CHANGELOG](https://github.com/milvus-io/milvus/blob/master/CHANGELOG.m
 | -------------- | ---------------- | ---------------- |
 | 0.5.3          | 0.2.5            | 0.3.0            |
 
-#### Enhancements
+#### Improvements
 
 - Double the transmission speed of search results to the client application through the following updates to gRPC:
 
@@ -243,11 +433,11 @@ Refer to [CHANGELOG](https://github.com/milvus-io/milvus/blob/master/CHANGELOG.m
 
 **Release date**: 2019-11-07
 
-#### Bug fixes
+#### Fixed issues
 
 Add a system lock to avoid the generation of files with duplicated data file names, which fixes the bug of search failure due to false deletion of files that have duplicated file names.
 
-#### Enhancements
+#### Improvements
 
 Add a Japanese version of README file. (from an external contributor)
 
@@ -262,7 +452,7 @@ Add a Japanese version of README file. (from an external contributor)
 - Start supporting GPU-only mode for `IVF_SQ8` and `IVFFLAT` index types.
 - Add configuration parameter `gpu_search_threshold` to control GPU-only execution trigger point.
 
-#### Enhancements
+#### Improvements
 
 - Reduce memory footprint of queries.
 - Optimize query performance to achieve unfluctuating search speed.

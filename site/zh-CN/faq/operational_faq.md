@@ -124,7 +124,7 @@ $ docker logs <container ID>
 
 #### 为什么在 Mac OS 或者 Windows 上运行 Milvus 时显示 `cpu_cache_capacity` 太大？
 
-您需要检查 MacOS 或者 Windows 为 docker engine 分配的内存值。如果分配的内存值小于或等于 `cpu_cache_capacity`，尽管您的主机内存可能足够，但 Milvus 仍然无法正常运行。
+您需要检查 macOS 或者 Windows 为 docker engine 分配的内存值。如果分配的内存值小于或等于 `cpu_cache_capacity`，尽管您的主机内存可能足够，但 Milvus 仍然无法正常运行。
 
 #### 为什么我的日志文件时间与系统时间不一致？
 
