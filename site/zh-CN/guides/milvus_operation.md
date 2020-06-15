@@ -6,11 +6,11 @@ sidebar_label: Learn Milvus Operations
 
 # Milvus 基本操作
 
-该页面将向您展示如何使用 [Python SDK](https://github.com/milvus-io/pymilvus) 运行 Milvus 基本操作。关于详细的 API 参考信息，请参考 [Python API 文档](https://github.com/milvus-io/pymilvus)。
+该页面将向你展示如何使用 [Python SDK](https://github.com/milvus-io/pymilvus) 运行 Milvus 基本操作。关于详细的 API 参考信息，请参考 [Python API 文档](https://github.com/milvus-io/pymilvus)。
 
-您也可以使用其它客户端，例如 [Java](https://github.com/milvus-io/milvus-sdk-java), [C++](https://github.com/milvus-io/milvus/tree/master/sdk), [Go](https://github.com/milvus-io/milvus-sdk-go), 或 [RESTful](https://github.com/milvus-io/milvus/tree/master/core/src/server/web_impl).
+你也可以使用其它客户端，例如 [Java](https://github.com/milvus-io/milvus-sdk-java), [C++](https://github.com/milvus-io/milvus/tree/master/sdk), [Go](https://github.com/milvus-io/milvus-sdk-go), 或 [RESTful](https://github.com/milvus-io/milvus/tree/master/core/src/server/web_impl).
 
-> 注意：建议您使用[资源评估工具](https://milvus.io/tools/sizing)来估算数据所需的硬件资源。
+> 注意：建议你使用[资源评估工具](https://milvus.io/tools/sizing)来估算数据所需的硬件资源。
 
 ## 连接 Milvus 服务端
 
@@ -28,7 +28,7 @@ sidebar_label: Learn Milvus Operations
    >>> milvus = Milvus(host='localhost', port='19530')
    ```
 
-   > 注意：在上面的代码中，`host` 和 `port` 都使用了默认值。您可以将其更改为自己设定的 IP 地址和端口。
+   > 注意：在上面的代码中，`host` 和 `port` 都使用了默认值。你可以将其更改为自己设定的 IP 地址和端口。
 
    ```python
    >>> milvus = Milvus(uri='tcp://localhost:19530')
@@ -54,7 +54,7 @@ sidebar_label: Learn Milvus Operations
 
 #### 获取 collection 的统计信息
 
-您可以调用如下接口查询 collection 的统计信息。查询结果的信息包含 collection /分区/ segment 的向量数量，存储使用量等信息。
+你可以调用如下接口查询 collection 的统计信息。查询结果的信息包含 collection /分区/ segment 的向量数量，存储使用量等信息。
 
 ```python
 >>> milvus.get_collection_stats('test01')
@@ -73,7 +73,7 @@ sidebar_label: Learn Milvus Operations
 
 #### 创建分区
 
-您可以通过标签将 collection 分割为若干个分区，从而提高搜索效率。每个分区实际上也是一个 collection 。
+你可以通过标签将 collection 分割为若干个分区，从而提高搜索效率。每个分区实际上也是一个 collection 。
 
 ```python
 # Create partition
@@ -136,14 +136,14 @@ sidebar_label: Learn Milvus Operations
    >>> vectors = [[random.random() for _ in range(dim)] for _ in range(20)]
    ```
 
-2. 插入向量列表。如果您不指定向量 ID，Milvus 自动为向量分配 ID。
+2. 插入向量列表。如果你不指定向量 ID，Milvus 自动为向量分配 ID。
 
    ```python
    # Insert vectors
    >>> milvus.insert(collection_name='test01', records=vectors)
    ```
 
-   您也可以自己定义向量 ID：
+   你也可以自己定义向量 ID：
 
    ```python
    >>> vector_ids = [id for id in range(20)]
@@ -158,13 +158,13 @@ sidebar_label: Learn Milvus Operations
 
 #### 通过 ID 删除向量
 
-假设您的 collection 中存在以下向量 ID：
+假设你的 collection 中存在以下向量 ID：
 
 ```python
 >>> ids = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
 ```
 
-您可以通过以下命令删除向量：
+你可以通过以下命令删除向量：
 
 ```python
 >>> milvus.delete_entity_by_id(collection_name='test01', id_array=ids)
@@ -172,7 +172,7 @@ sidebar_label: Learn Milvus Operations
 
 #### 通过 ID 获取向量
 
-您也可以根据向量 ID 获取向量：
+你也可以根据向量 ID 获取向量：
 
 ```python
 >>> status, vector = milvus.get_entity_by_id(collection_name='test01', ids=ids[:10])
@@ -180,7 +180,7 @@ sidebar_label: Learn Milvus Operations
 
 ## 将 collection 中的数据进行 flush 操作
 
-当您在进行有关数据更改的操作时，您可以将 collection 中的数据从内存中进行 flush 操作使数据落盘。Milvus 也会执行自动 flush。自动 flush 会在固定的时间周期（1 秒）将所有现存 collection 的数据进行 flush 操作。
+当你在进行有关数据更改的操作时，你可以将 collection 中的数据从内存中进行 flush 操作使数据落盘。Milvus 也会执行自动 flush。自动 flush 会在固定的时间周期（1 秒）将所有现存 collection 的数据进行 flush 操作。
 
 ```python
 >>> milvus.flush(collection_name_array=['test01'])
@@ -188,7 +188,7 @@ sidebar_label: Learn Milvus Operations
 
 ## 对 collection 中的 segment 进行 compact 操作
 
-Segment 是 Milvus 自动将插入的向量数据合并所获得的数据文件。一个 collection 可包含多个 segment 。如果一个 segment 中的向量数据被删除，被删除的向量数据占据的空间并不会自动释放。您可以对 collection 中的 segment 进行 compact 操作以释放多余空间。
+Segment 是 Milvus 自动将插入的向量数据合并所获得的数据文件。一个 collection 可包含多个 segment 。如果一个 segment 中的向量数据被删除，被删除的向量数据占据的空间并不会自动释放。你可以对 collection 中的 segment 进行 compact 操作以释放多余空间。
 
 ```python
 >>> milvus.compact(collection_name='test01', timeout='1')
@@ -196,7 +196,7 @@ Segment 是 Milvus 自动将插入的向量数据合并所获得的数据文件�
 
 ## 获取 segment 中的向量 ID
 
-您可以获取指定 segment 中向量 ID 信息。您需要提供 segment 的名称。 segment 的名称可以从 `get_collection_stats` 中获取。
+你可以获取指定 segment 中向量 ID 信息。你需要提供 segment 的名称。 segment 的名称可以从 `get_collection_stats` 中获取。
 
 ```python
 >>> milvus.list_id_in_segment('test01', '1583727470444700000')
@@ -240,7 +240,7 @@ Segment 是 Milvus 自动将插入的向量数据合并所获得的数据文件�
 >>> milvus.search(collection_name='test01', query_records=q_records, top_k=1, partition_tags=['tag01'], params=search_param)
 ```
 
-> 注意：如果您不指定 `partition_tags`， Milvus 会在整个 collection 中搜索。
+> 注意：如果你不指定 `partition_tags`， Milvus 会在整个 collection 中搜索。
 
 ## 关闭客户端
 
@@ -248,7 +248,7 @@ Segment 是 Milvus 自动将插入的向量数据合并所获得的数据文件�
 >>> milvus.close()
 ```
 
-## 接下来您可以
+## 接下来你可以
 
 - [体验 Milvus 在线训练营](https://github.com/milvus-io/bootcamp) 了解更多解决方案
 - [故障诊断 API 行为](troubleshoot.md)

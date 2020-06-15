@@ -6,7 +6,7 @@ sidebar_label: Milvus Admin 发版说明
 
 # Milvus Admin 发版说明
 
-Milvus Admin 是 Milvus 的图形化客户端。您可以通过 Milvus Admin 对 Milvus 服务端进行操作。
+Milvus Admin 是 Milvus 的图形化客户端。你可以通过 Milvus Admin 对 Milvus 服务端进行操作。
 
 ## v0.3.0
 

@@ -54,12 +54,12 @@ Milvus 使用 Prometheus 作为监控和性能指标存储方案，使用 Grafan
 
 ## 使用 Prometheus 和 Alertmanager
 
-Milvus 会生成详细的关于系统运行状态的时序 metrics。该页面向您展示如何利用 [Prometheus](https://prometheus.io/) 提取收集这些 metrics，如何将 [Grafana](https://grafana.com/) 和 [Alertmanager](https://prometheus.io/docs/alerting/alertmanager/) 连接到 Prometheus 实现数据可视化的展示和报警机制。
+Milvus 会生成详细的关于系统运行状态的时序 metrics。该页面向你展示如何利用 [Prometheus](https://prometheus.io/) 提取收集这些 metrics，如何将 [Grafana](https://grafana.com/) 和 [Alertmanager](https://prometheus.io/docs/alerting/alertmanager/) 连接到 Prometheus 实现数据可视化的展示和报警机制。
 
 ### 前提条件
 
-- 请确保您已经启动了 Milvus 服务。
-- 请确保您已经启用了 Milvus 的监控功能。
+- 请确保你已经启动了 Milvus 服务。
+- 请确保你已经启用了 Milvus 的监控功能。
 
 ### 安装 Prometheus
 
@@ -71,24 +71,24 @@ Milvus 会生成详细的关于系统运行状态的时序 metrics。该页面�
    $ prometheus --version
    ```
 
-   > 建议：您可以提取 Prometheus binary 并添加到 `PATH` ，以便在任意 Shell 上都能快速启动 Prometheus。
+   > 建议：你可以提取 Prometheus binary 并添加到 `PATH` ，以便在任意 Shell 上都能快速启动 Prometheus。
 
 ### 设置 Prometheus
 
-1. 下载 Milvus [Prometheus 配置文件](https://github.com/milvus-io/docs/blob/v0.8.0/assets/monitoring/prometheus.yml) 。
+1. 下载 Milvus [Prometheus 配置文件](https://github.com/milvus-io/docs/blob/v0.10.0/assets/monitoring/prometheus.yml) 。
 
    ```shell
-   $ wget https://raw.githubusercontent.com/milvus-io/docs/v0.8.0/assets/monitoring/prometheus.yml \ -O prometheus.yml
+   $ wget https://raw.githubusercontent.com/milvus-io/docs/v0.10.0/assets/monitoring/prometheus.yml \ -O prometheus.yml
    ```
 
-2. 根据您的需求编辑配置文件。参考 [https://prometheus.io/docs/prometheus/latest/configuration/configuration/](https://prometheus.io/docs/prometheus/latest/configuration/configuration/) 了解更多关于 Prometheus 配置文件的信息。
+2. 根据你的需求编辑配置文件。参考 [https://prometheus.io/docs/prometheus/latest/configuration/configuration/](https://prometheus.io/docs/prometheus/latest/configuration/configuration/) 了解更多关于 Prometheus 配置文件的信息。
 
-   > 注意：如果您使用了分布式集群，则需要在 `job_name = 'milvus_server'` 下的 `targets` 字段，为集群中的每个节点分布添加相应的 `localhost: <http-port>` 。
+   > 注意：如果你使用了分布式集群，则需要在 `job_name = 'milvus_server'` 下的 `targets` 字段，为集群中的每个节点分布添加相应的 `localhost: <http-port>` 。
 
-3. 下载 Milvus [报警规则文件](https://github.com/milvus-io/docs/blob/v0.8.0/assets/monitoring/alert_rules.yml) 到 Prometheus 根目录。
+3. 下载 Milvus [报警规则文件](https://github.com/milvus-io/docs/blob/v0.10.0/assets/monitoring/alert_rules.yml) 到 Prometheus 根目录。
 
    ```shell
-   wget -P rules https://raw.githubusercontent.com/milvus-io/docs/v0.8.0/assets/monitoring/alert_rules.yml
+   wget -P rules https://raw.githubusercontent.com/milvus-io/docs/v0.10.0/assets/monitoring/alert_rules.yml
    ```
 
 ### 启动 Prometheus
@@ -113,7 +113,7 @@ Milvus 会生成详细的关于系统运行状态的时序 metrics。该页面�
    $ docker run -i -p 3000:3000 grafana/grafana
    ```
 
-2. 将浏览器指向 `http://<hostname of machine running grafana>:3000` ，使用默认的用户名/密码，`admin/admin`，登录 Grafana 用户交互页面。您也可以在此创建新的 Grafana 账号。
+2. 将浏览器指向 `http://<hostname of machine running grafana>:3000` ，使用默认的用户名/密码，`admin/admin`，登录 Grafana 用户交互页面。你也可以在此创建新的 Grafana 账号。
 
 3. [添加 Prometheus 作为 data source](https://grafana.com/docs/grafana/latest/features/datasources/prometheus/).
 
@@ -126,17 +126,17 @@ Milvus 会生成详细的关于系统运行状态的时序 metrics。该页面�
    | URL     | `http://<hostname of machine running prometheus>:9090` |
    | Access  | Browser                                                |
 
-5. 下载 [Grafana 配置文件](https://github.com/milvus-io/docs/blob/v0.8.0/assets/monitoring/dashboard.json) :
+5. 下载 [Grafana 配置文件](https://github.com/milvus-io/docs/blob/v0.10.0/assets/monitoring/dashboard.json) :
 
    ```shell
-   $ wget https://raw.githubusercontent.com/milvus-io/docs/v0.8.0/assets/monitoring/dashboard.json
+   $ wget https://raw.githubusercontent.com/milvus-io/docs/v0.10.0/assets/monitoring/dashboard.json
    ```
 
 6. [将配置文件导入 Grafana](http://docs.grafana.org/reference/export_import/#importing-a-dashboard).
 
 ### 使用 Alertmanager 发送通知
 
-在 Prometheus 配置，您已经下载了 Milvus 的报警规则文件。现在，您只需要下载、配置并启动 Alertmanager。
+在 Prometheus 配置，你已经下载了 Milvus 的报警规则文件。现在，你只需要下载、配置并启动 Alertmanager。
 
 1. 下载 [最新 Alertmanager tarball](https://prometheus.io/download/#alertmanager) 。
 
@@ -146,7 +146,7 @@ Milvus 会生成详细的关于系统运行状态的时序 metrics。该页面�
    $ alertmanager --version
    ```
 
-   > 建议：您可以提取 Alertmanager binary 并添加到 `PATH` ，以便在任意 Shell 上都能快速启动 Alertmanager。
+   > 建议：你可以提取 Alertmanager binary 并添加到 `PATH` ，以便在任意 Shell 上都能快速启动 Alertmanager。
 
 3. 创建 [Alertmanager 配置文件](https://prometheus.io/docs/alerting/configuration/) 来指定接受报警通知的邮箱/微信账户，并将配置文件添加到 Alertmanager 根目录下。
 
@@ -156,7 +156,7 @@ Milvus 会生成详细的关于系统运行状态的时序 metrics。该页面�
    alertmanager --config.file=simple.yml
    ```
 
-5. 将浏览器指向 `http://<hostname of machine running alertmanager>:9093` ，进入 Alertmanager 用户交互页面。您可以在此定义 [muting alerts](https://prometheus.io/docs/alerting/alertmanager/#silences) 的条件。
+5. 将浏览器指向 `http://<hostname of machine running alertmanager>:9093` ，进入 Alertmanager 用户交互页面。你可以在此定义 [muting alerts](https://prometheus.io/docs/alerting/alertmanager/#silences) 的条件。
 
 ## 相关阅读
 

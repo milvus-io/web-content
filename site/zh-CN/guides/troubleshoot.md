@@ -12,7 +12,7 @@ sidebar_label: Troubleshoot
 
 - 服务启动问题
 
-  服务启动时发生的故障，通常会导致服务无法正常启动。您可以通过以下命令来查看相关错误信息：
+  服务启动时发生的故障，通常会导致服务无法正常启动。你可以通过以下命令来查看相关错误信息：
 
   ```shell
   $ docker logs <milvus container id>
@@ -26,15 +26,15 @@ sidebar_label: Troubleshoot
 
   通过 API 使用 Milvus 时发生的故障。这类错误信息将实时返回给客户端。
 
-对于您无法自己解决的问题，您可以：
+对于你无法自己解决的问题，你可以：
 
 - [加入我们的 Slack 社区](https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk)，提问并与 Milvus 团队及其它社区成员交流讨论。
 
-- 在 GitHub 上 [创建 issue](https://github.com/milvus-io/milvus/issues/new/choose)，详细描述您的问题。
+- 在 GitHub 上 [创建 issue](https://github.com/milvus-io/milvus/issues/new/choose)，详细描述你的问题。
 
 ## 向量搜索故障诊断
 
-有多种 Milvus 操作都会对向量搜索造成影响。如果您在向量搜索操作中遇到运行阻塞或性能下降等问题，请检查是不是下面的一种或多种操作对搜索操作造成了影响：
+有多种 Milvus 操作都会对向量搜索造成影响。如果你在向量搜索操作中遇到运行阻塞或性能下降等问题，请检查是不是下面的一种或多种操作对搜索操作造成了影响：
 
 ### `Insert` 操作
 
@@ -64,7 +64,7 @@ Milvus 包括两种索引建立方式：
 #### 自动建立索引
 
 - **（仅支持 CPU 的 Milvus）** 建索引和搜索都需要全部占用 CPU 资源，因此在后台建索引的时候，搜索任务会等待索引完成后才能执行。
-- **（支持 GPU 的 Milvus）** 如果您使用 GPU 建索引，其他的 GPU 或者 CPU 仍能执行搜索任务，因此建立索引和搜索可以异步进行。
+- **（支持 GPU 的 Milvus）** 如果你使用 GPU 建索引，其他的 GPU 或者 CPU 仍能执行搜索任务，因此建立索引和搜索可以异步进行。
 
 #### 手动建立索引
 
