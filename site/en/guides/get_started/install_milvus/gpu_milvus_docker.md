@@ -48,7 +48,7 @@ If you do not see the server listed, start the **Docker** daemon.
 Pull the GPU-enabled image:
 
 ```shell
-$ docker pull milvusdb/milvus:0.10.0-gpu-d061320-83cc81
+$ docker pull milvusdb/milvus:0.10.0-gpu-d061620-5f3c00
 ```
 
 > Note: If the pulling speed is too slow or the pulling process constantly fails, refer to [Operational FAQ](../../../faq/operational_faq.md) for possible solutions.
@@ -76,7 +76,7 @@ $ docker run -d --name milvus_gpu_0.10.0 --gpus all \
 -v /home/$USER/milvus/conf:/var/lib/milvus/conf \
 -v /home/$USER/milvus/logs:/var/lib/milvus/logs \
 -v /home/$USER/milvus/wal:/var/lib/milvus/wal \
-milvusdb/milvus:0.10.0-gpu-d061320-83cc81
+milvusdb/milvus:0.10.0-gpu-d061620-5f3c00
 ```
 
 The `docker run` options used in the above command are defined as follows:
