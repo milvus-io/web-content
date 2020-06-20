@@ -4,7 +4,52 @@ title: Release Notes
 sidebar_label: Release Notes
 ---
 
-# Release Notes
+# Release notes
+
+## v0.10.0
+
+**Release date**：2020-6-15
+
+#### Compatibility
+
+| Milvus version | Python SDK version | Java SDK version | Go SDK version |
+| :------------- | :----------------- | :--------------- | :------------- |
+| 0.10.0          | 0.2.13             | 0.8.2            | 0.4.2          |
+
+#### Compatibility changes
+
+- Updates the Milvus configuration file. [#2510](https://github.com/milvus-io/milvus/issues/2510)
+
+#### Improvements
+
+- Optimizes the index building performance when many small segments exist. [#2373](https://github.com/milvus-io/milvus/issues/2373)
+- FAISS is upgraded to 1.6.3. [#2381](https://github.com/milvus-io/milvus/issues/2381)
+- Optimizes dropping collection performance when too many partitions exist. [#2394](https://github.com/milvus-io/milvus/issues/2394)
+- Optimizes the implementation of k-selection algorithm for GPU-enabled Milvus. [#2466](https://github.com/milvus-io/milvus/issues/2466)
+
+#### Fixed issues
+
+- The search performance degrades on Milvus 0.9.1. [#2429](https://github.com/milvus-io/milvus/issues/2429)
+
+> See [CHANGELOG](https://github.com/milvus-io/milvus/blob/0.10.0/CHANGELOG.md) for more information.
+
+## v0.9.1
+
+**Release date**：2020-5-29
+
+#### Compatibility
+
+| Milvus version | Python SDK version | Java SDK version | Go SDK version |
+| :------------- | :----------------- | :--------------- | :------------- |
+| 0.9.1          | 0.2.12             | 0.8.1            | 0.4.1          |
+
+#### Fixed issues
+
+- In a multi-partition situation, data is inserted twice after the server reboots. [#2378](https://github.com/milvus-io/milvus/issues/2378)
+- A `cudaMalloc` failure occurs with GPU IVF index when nq (number of queries) is high. [#2395](https://github.com/milvus-io/milvus/issues/2395). 
+- Deleted vectors are still found in GPU-enabled Milvus. [#2450](https://github.com/milvus-io/milvus/issues/2450)
+
+> See [CHANGELOG](https://github.com/milvus-io/milvus/blob/0.9.1/CHANGELOG.md) for more information.
 
 ## v0.9.0
 

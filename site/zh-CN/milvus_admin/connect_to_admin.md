@@ -13,6 +13,6 @@ sidebar_label: 连接 Milvus Admin
 
 2. 点击 **连接** 连接 Milvus Admin。如果连接成功，Milvus Admin 会返回成功信息并进入操作页面。
 
-## 下一步您可以
+## 下一步你可以
 
 - [Milvus Admin 基本操作](admin_operations.md)

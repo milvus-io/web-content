@@ -12,9 +12,9 @@ We warmly welcome and greatly appreciate contributions to all our projects ([Mil
 
 To contribute to Milvus, please follow below steps to proceed:
 
-1. Browse the existing issues and find the one that you want to resolve, or create a new issue describing your ideas and proposed changes. 
+1. Browse the existing issues and find the one that you want to resolve, or create a new issue describing your ideas and proposed changes.
 
-   If you are a first time contributor, we recommend that you start by tackling one of the [issues with the `good first issues` label](https://github.com/milvus-io/milvus/labels/good%20first%20issue). 
+   If you are a first time contributor, we recommend that you start by tackling one of the [issues with the `good first issues` label](https://github.com/milvus-io/milvus/labels/good%20first%20issue).
 
 2. Repository owners will reply to your issues promptly.
 
@@ -22,13 +22,12 @@ To contribute to Milvus, please follow below steps to proceed:
 
 4. Run unit test and submit your pull request to the master branch.
 
-The pull request submitted by you will be reviewed, and if it is approved and merged, congratulations, you become a Milvus contributor. 
+The pull request submitted by you will be reviewed, and if it is approved and merged, congratulations, you become a Milvus contributor.
 
 ## Improve the docs
 
-Contributions to help improve the documentation are also greatly welcomed. 
+Contributions to help improve the documentation are also greatly welcomed.
 
-The Milvus documentation are written in Markdown and follows the [Google Developer Documentation Style Guide](https://developers.google.com/style/). 
+The Milvus documentation are written in Markdown and follows the [Google Developer Documentation Style Guide](https://developers.google.com/style/).
 
 To contribute to the docs, just fork the [docs repository](https://github.com/milvus-io/docs) and file an issue.
-

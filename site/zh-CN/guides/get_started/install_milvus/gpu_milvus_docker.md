@@ -27,9 +27,9 @@ sidebar_label: Install GPU-enabled Milvus on Docker
 
 #### Milvus Docker 要求
 
-- 在您的宿主机上 [安装 Docker](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/) 19.03 或更高版本。
+- 在你的宿主机上安装 [Docker](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/) 19.03 或更高版本。
 - 安装 NVIDIA driver 418 或更高版本。
-- [安装 NVIDIA Docker](https://github.com/NVIDIA/nvidia-docker)。
+- 安装 [NVIDIA Docker](https://github.com/NVIDIA/nvidia-docker)。
 
 ## 第一步 确认 Docker 状态
 
@@ -48,40 +48,37 @@ $ docker info
 拉取支持 GPU 的镜像：
 
 ```shell
-$ docker pull milvusdb/milvus:0.9.0-gpu-d051520-cb92b1
+$ docker pull milvusdb/milvus:0.10.0-gpu-d061620-5f3c00
 ```
 
-> 注意：如果您在拉取镜像时速度过慢或一直失败，请参考[操作常见问题](../../../faq/operational_faq.md)中提供的解决办法。
+> 注意：如果你在拉取镜像时速度过慢或一直失败，请参考 [操作常见问题](../../../faq/operational_faq.md) 中提供的解决办法。
 
 ## 第三步 下载并修改配置文件
 
-您可以使用以下方法下载配置文件：
+你可以使用以下方法下载配置文件：
 
 ```shell
-# Create Milvus file
 $ mkdir -p /home/$USER/milvus/conf
 $ cd /home/$USER/milvus/conf
-$ wget https://raw.githubusercontent.com/milvus-io/milvus/v0.9.0/core/conf/demo/server_config.yaml
+$ wget https://raw.githubusercontent.com/milvus-io/milvus/v0.10.0/core/conf/demo/server_config.yaml
 ```
 
-> 注意：万一您遇到无法通过 `wget` 命令正常下载配置文件的情况，您也可以在 `/home/$USER/milvus/conf` 路径下创建 `server_config.yaml` 文件，然后复制粘贴 [server config 文件](https://github.com/milvus-io/milvus/blob/v0.9.0/core/conf/demo/server_config.yaml) 的内容。
+> 注意：万一你遇到无法通过 `wget` 命令正常下载配置文件的情况，你也可以在 `/home/$USER/milvus/conf` 路径下创建 `server_config.yaml` 文件，然后复制粘贴 [server config 文件](https://github.com/milvus-io/milvus/blob/v0.10.0/core/conf/demo/server_config.yaml) 的内容。
 
-配置文件下载完成后，您需要将 `server_config.yaml` 中的 `gpu_resource_config` 部分的 `enable` 参数设置为 `true`。
+配置文件下载完成后，你需要将 `server_config.yaml` 中的 `gpu_resource_config` 部分的 `enable` 参数设置为 `true`。
 
 
 ## 第四步 启动 Milvus Docker 容器
 
 ```shell
-# Start Milvus
-$ docker run -d --name milvus_gpu_0.9.0 --gpus all \
+$ docker run -d --name milvus_gpu_0.10.0 --gpus all \
 -p 19530:19530 \
 -p 19121:19121 \
--p 9091:9091 \
 -v /home/$USER/milvus/db:/var/lib/milvus/db \
 -v /home/$USER/milvus/conf:/var/lib/milvus/conf \
 -v /home/$USER/milvus/logs:/var/lib/milvus/logs \
 -v /home/$USER/milvus/wal:/var/lib/milvus/wal \
-milvusdb/milvus:0.9.0-gpu-d051520-cb92b1
+milvusdb/milvus:0.10.0-gpu-d061620-5f3c00
 ```
 
 上述命令中用到的 `docker run` 参数定义如下：
@@ -95,33 +92,32 @@ milvusdb/milvus:0.9.0-gpu-d051520-cb92b1
 最后，确认 Milvus 运行状态：
 
 ```shell
-# Confirm Milvus status
 $ docker ps
 ```
 
-如果 Milvus 服务没有正常启动，您可以执行以下命令查询错误日志。
+如果 Milvus 服务没有正常启动，你可以执行以下命令查询错误日志。
 
 ```shell
-# Get id of the container running Milvus
+# 获得运行 Milvus 的 container ID。
 $ docker ps -a
-# Check docker logs
+# 检查 docker 日志。
 $ docker logs <milvus container id>
 ```
 
-## 接下来您可以
+## 接下来你可以
 
-- 如果您刚开始了解 Milvus：
+- 如果你刚开始了解 Milvus：
 
   - [运行示例程序](../example_code.md)
   - [了解更多 Milvus 操作](../../milvus_operation.md)
   - [体验 Milvus 在线训练营](https://github.com/milvus-io/bootcamp)
 
-- 如果您已准备好在生产环境中部署 Milvus：
+- 如果你已准备好在生产环境中部署 Milvus：
 
   - 创建 [监控与报警系统](../../monitor.md) 实时查看系统表现
   - [设置 Milvus 参数](../../../reference/milvus_config.md)
   
-- 如果您想在仅有 CPU 的环境下使用 Milvus：
+- 如果你想在仅有 CPU 的环境下使用 Milvus：
 
   - [安装仅需 CPU 的 Milvus](cpu_milvus_docker.md)
 

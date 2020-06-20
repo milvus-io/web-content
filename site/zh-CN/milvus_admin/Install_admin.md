@@ -20,7 +20,7 @@ sidebar_label: 安装 Milvus Admin
     $ docker run -p 3000:80 milvusdb/milvus-admin:v0.3.0
     ```
 
-    > 注意：您也可以映射3000以外的端口，但相应的访问 URL 也需要更新。
+    > 注意：你也可以映射 3000 以外的端口，但相应的访问 URL 也需要更新。
 
 3. 打开任意浏览器并访问以下 URL：
 
@@ -28,8 +28,8 @@ sidebar_label: 安装 Milvus Admin
     http://localhost:3000/
     ```
 
-    如果您能看到 Milvus Admin 的界面，则说明安装成功。
+    如果你能看到 Milvus Admin 的界面，则说明安装成功。
 
-## 下一步您可以
+## 下一步你可以
 
 - [连接 Milvus Admin](connect_to_admin.md)

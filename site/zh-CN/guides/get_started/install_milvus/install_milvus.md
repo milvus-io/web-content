@@ -18,7 +18,7 @@ Milvus 中的向量搜索包含但不限于这两个独立的部分：创建索�
 
 ### 离线传输 Docker 镜像和配置文件
 
-如果您的主机由于网络限制无法在线获得 Docker 镜像和配置文件，请从其他主机在线获取并使用以下方法离线传输。关于如何获取 Docker 镜像请参考具体安装步骤。在这里假设您的镜像标签是 `milvusdb/milvus`。
+如果你的主机由于网络限制无法在线获得 Docker 镜像和配置文件，请从其他主机在线获取并使用以下方法离线传输。关于如何获取 Docker 镜像请参考具体安装步骤。在这里假设你的镜像标签是 `milvusdb/milvus`。
 
 #### 离线传输 Docker 镜像
 
@@ -36,21 +36,21 @@ Milvus 中的向量搜索包含但不限于这两个独立的部分：创建索�
 
 #### 离线传输配置文件
 
-您可以下载配置文件并使用合适的方式传输。关于如何下载配置文件请参考具体安装步骤。
+你可以下载配置文件并使用合适的方式传输。关于如何下载配置文件请参考具体安装步骤。
 
 ## 从源代码编译
 
 请参考[从源代码编译 Milvus](https://github.com/milvus-io/milvus/blob/master/INSTALL.md)了解如何从源代码编译。
 
-## 接下来您可以
+## 接下来你可以
 
-- 如果您刚开始了解 Milvus：
+- 如果你刚开始了解 Milvus：
 
   - [运行示例程序](../example_code.md)
   - [了解更多 Milvus 操作](../../milvus_operation.md)
   - [体验 Milvus 在线训练营](https://github.com/milvus-io/bootcamp)
 
-- 如果您已准备好在生产环境中部署 Milvus：
+- 如果你已准备好在生产环境中部署 Milvus：
 
   - [配置 Milvus 以用于生产环境](../../../reference/performance_tuning.md)
   - 创建 [监控与报警系统](../../monitor.md) 实时监控系统性能

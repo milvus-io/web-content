@@ -21,7 +21,7 @@ Milvus Admin is the GUI client of Milvus. You can use Milvus Admin to perform op
 **Features**
 
 - Makes some UI changes to improve user experience.
-- Displays connection infomation on top of the web page.
+- Displays connection information on top of the web page.
 - Displays the connected Milvus version on the web page.
 - Compatible with the Milvus 0.9.0 APIs
 - Supports setting `auto_flush_interval` from `Advanced Setting` > `PERFORMANCE TUNNING` > `Auto Flush Interval`.
