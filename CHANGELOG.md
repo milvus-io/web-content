@@ -43,4 +43,5 @@ sidebar_label: Milvus Changelog
 - \#93 Update README and create CONTRIBUTING.md.
 - \#100 Update Milvus config file to remove doc about GPU-only search 
 - \#107 Remove "Delete vectors by range" in Milvus operations
+- \#547 search parameter of index annoy has conflict with document
 
