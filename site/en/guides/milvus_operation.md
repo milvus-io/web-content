@@ -140,7 +140,7 @@ Currently, a collection only supports one index type, and switching the index ty
    ```python
    >>> import random
    # Generate 20 vectors of 256 dimension
-   >>> vectors = [[random.random() for _ in range(dim)] for _ in range(20)]
+   >>> vectors = [[random.random() for _ in range(256)] for _ in range(20)]
    ```
 
 2. Insert the list of vectors. If you do not specify vector ids, Milvus automatically generates IDs for the vectors.
