@@ -70,7 +70,7 @@ Milvus generates detailed time series metrics. This page shows you how to pull t
    ```shell
    $ ./prometheus --version
    ```
-   > Tip: You can extract the Prometheus binary and add it to your `PATH`. This makes it easy to start Prometheus from any Shell.
+   > Tip: You can extract the Prometheus binary and add it to your `PATH`. This makes it easy to start Prometheus from any shell.
 
 
 ### Configure Prometheus
@@ -139,7 +139,7 @@ Refer to [https://github.com/prometheus/pushgateway](https://github.com/promethe
 
 ### Send notifications with Alertmanager
 
-In Configure Prometheus, you have already downloaded the starter alerting rules for Milvus. Now, download, configure and start Alertmanager.
+In Configure Prometheus, you have already downloaded the starter alerting rules for Milvus. Now, download, configure, and start Alertmanager.
 
 1. Download the [latest Alertmanager tarball](https://prometheus.io/download/#alertmanager) for your OS.
 

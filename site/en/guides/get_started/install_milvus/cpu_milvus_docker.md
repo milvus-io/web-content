@@ -82,11 +82,11 @@ milvusdb/milvus:0.10.0-cpu-d061620-5f3c00
 
 The `docker run` options used in the above command are defined as follows:
 
-- `-d`: Run container in background and print container ID
-- `--name`: Assign a name to the container
-- `--gpus`: GPU devices to add to the container (‘all’ to pass all GPUs)
-- `-p`: Publish a container’s port(s) to the host
-- `-v`: Mounts the directory into the container
+- `-d`: Run container in background and print container ID.
+- `--name`: Assign a name to the container.
+- `--gpus`: GPU devices to add to the container (‘all’ to pass all GPUs).
+- `-p`: Publish a container’s port(s) to the host.
+- `-v`: Mount the directory into the container.
 
 Finally confirm Milvus running status by the following command:
 
@@ -156,8 +156,8 @@ milvusdb/milvus:0.10.0-cpu-d061620-5f3c00
   
 - If you're ready to run Milvus in production:
 
-  - Build a [monitoring and alerting system](../../monitor.md) to check real-time application performance
-  - Tune Milvus performance through [configuration](../../../reference/milvus_config.md)
+  - Build a [monitoring and alerting system](../../monitor.md) to check real-time application performance.
+  - Tune Milvus performance through [configuration](../../../reference/milvus_config.md).
   
 - If you want to use GPU-accelerated Milvus for search in large datasets:
   

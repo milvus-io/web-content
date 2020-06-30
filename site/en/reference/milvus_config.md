@@ -33,7 +33,7 @@ $ docker restart <container id>
 
 You can update parameters in `server_config.yaml` from a Milvus client. See [Client Reference](sdk.md) for more information.
 
-Updates to the following parameters take effect immediately.
+Updates to the following parameters take effect immediately:
 
  - section `cache`
     - `cache_size`
@@ -102,7 +102,7 @@ Before changing these settings, welcome to consult Milvus team on [GitHub issues
 | Parameter            | Description                                                  | Type         | Default |
 | -------------------- | ------------------------------------------------------------ | ------------ | ------- |
 |  `enable`               |   Whether to enable write-ahead logging (WAL) in Milvus. If WAL is enabled, Milvus writes all data changes to log files in advance before implementing data changes. WAL ensures the atomicity and durability for Milvus operations.      |    Boolean          |   true      |
-|  `recovery_error_ignore` |  Whether to ignore logs with errors that happens during WAL recovery. If true, when Milvus restarts for recovery and there are errors in WAL log files, log files with errors are ignored. If false, Milvus fails to restart when there are errors in WAL log files.   |   Boolean           |   true      |
+|  `recovery_error_ignore` |  Whether to ignore logs with errors that happen during WAL recovery. If true, when Milvus restarts for recovery and there are errors in WAL log files, log files with errors are ignored. If false, Milvus fails to restart when there are errors in WAL log files.   |   Boolean           |   true      |
 |  `buffer_size`          |  Sum total of the read buffer and the write buffer in Bytes. `buffer_size` must be in range `[64MB, 4096MB]`. If the value you specified is out of range, Milvus automatically uses the boundary value closest to the specified value. It is recommended you set `buffer_size` to a value greater than the inserted data size of a single insert operation for better performance.           |    String          |   `256MB`     |
 |  `wal_path`             |  Location of WAL log files.                                                            |    String          |    `/var/lib/milvus/wal`     |
 </div>
@@ -121,7 +121,7 @@ Before changing these settings, welcome to consult Milvus team on [GitHub issues
 
 ### Section `gpu`
 
-This section determines whether to enable GPU support/usage in Milvus. GPU support, which uses both CPU and GPUs for optimized resource utilization, can achieve accelerated search performance on very large datasets.
+This section determines whether to enable GPU support/usage in Milvus. GPU support, which uses both CPUs and GPUs for optimized resource utilization, can achieve accelerated search performance on very large datasets.
 
 
 <div class="table-wrapper" markdown="block">

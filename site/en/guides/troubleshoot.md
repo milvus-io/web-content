@@ -24,7 +24,7 @@ This page describes the common issues you may run into with Milvus. The issues f
 
 - API issue
 
-  Issues that occur during the operation with Milvus through APIs. Corresponding error messages will be returned real time to the client side.
+  Issues that occur during the operation with Milvus through APIs. Corresponding error messages will be returned in real time to the client side.
 
 If you cannot resolve the issue easily yourself, you can:
 
@@ -33,7 +33,7 @@ If you cannot resolve the issue easily yourself, you can:
 
 ## Troubleshoot search operations
 
-Multiple Milvus operations can affect search operations. If you encounter problems in search operations such as blocked operations or low performance, please check whether your problem is caused by one or multiple operations described below:
+Multiple Milvus operations can affect search operations. If you encounter problems in search operations such as blocked operations or low performance, check whether your problem is caused by one or multiple operations described below:
 
 ### Insert operations
 
@@ -51,7 +51,7 @@ Milvus includes the following index building methods:
 - Automatic index building in the backend:
 
   1. Invoke `create_collection` to create an empty collection.
-  2. Invoke `create_index` to assign an index type for the collection (any index type other than IDMAP).
+  2. Invoke `create_index` to assign an index type to the collection (any index type other than IDMAP).
   3. Invoke `insert` multiple times to insert data. When the size of accumulated inserted data reaches the value of `index_file_size`, the backend automatically builds index for new data files that reach the size of `index_file_size`.
 
 - Manually invoke `create_index` to build index:
@@ -62,7 +62,7 @@ Milvus includes the following index building methods:
 
 #### Automatic index building
 
-- **(CPU-only Milvus)** Index building and search need to consume all CPU resources. Thus, when building indexes in the backend, the search operation starts running when index building is complete.
+- **(CPU-only Milvus)** Both index building and search need to consume all CPU resources. Thus, when building indexes in the backend, the search operation starts running only after index building is complete.
 - **(GPU-supported Milvus)** If you use GPU for index building, other GPU or CPU resources can still perform search operations.
 
 #### Manual index building
@@ -84,7 +84,7 @@ Milvus includes the following index building methods:
 
 ### Operations to acquire information
 
-Interfaces to acquire information include `describe_collection`, `describe_index`, `get_vector_ids`, `get_vector_by_id`, `collection_info`, and so on. These interfaces acquire information from meta and return to the client, or read from some small files that record vector information. So, these operations are light-weight and has minimum effect on search operations from other clients.
+Interfaces to acquire information include `describe_collection`, `describe_index`, `get_vector_ids`, `get_vector_by_id`, `collection_info`, and so on. These interfaces acquire information from meta and return to the client, or read from some small files that record vector information. So, these operations are light-weight and have minimum effect on search performance of other clients.
 
 ## Related links
 

@@ -6,7 +6,7 @@ sidebar_label: Index Types
 
 # Milvus Indexes
 
-## Index Overview
+## Index overview
 
 > Note: For indexes supporting both CPU search and GPU search, you can create or search them using different devices, either CPU or GPU. For example, you can create an index using CPU and conduct a vector search using GPU. 
 
@@ -31,7 +31,7 @@ sidebar_label: Index Types
 
 <div class="table-wrapper" markdown="block">
 
-| Name       | Index building with CPU | Search with CPU | Search with GPU                                                  | Search with GPU                                          | Float vector support | Binary vector support |
+| Name       | Index building with CPU | Search with CPU | Index building with GPU                                                  | Search with GPU                                          | Float vector support | Binary vector support |
 | ---------- | ----------------------- | --------------- | ---------------------------------------------------------------- | -------------------------------------------------------- | -------------------- | --------------------- |
 | `FLAT`     | ✔️                      | ✔️              | ✔️ (Does not support GPU index building for binary vectors)      | ✔️ (Does not support GPU search for binary vectors)      | ✔️                   | ✔️                    |
 | `IVFLAT`   | ✔️                      | ✔️              | ✔️ (Does not support GPU index building for binary vectors)      | ✔️ (Does not support GPU search for binary vectors)      | ✔️                   | ✔️                    |
@@ -44,15 +44,15 @@ sidebar_label: Index Types
 
 </div>
 
-> Note: Index building parameters and search parameters vary with index type. Refer to [learn Milvus Operations](milvus_operation.md) for more information.
+> Note: Index building parameters and search parameters vary with index type. Refer to [Learn Milvus Operations](milvus_operation.md) for more information.
 
-## Milvus Indexes
+## Milvus indexes
 
 ### `FLAT`
 
 If `FLAT` index is used, the vectors are stored in an array of float/binary data without any compression. At search time, all indexed vectors are decoded sequentially and compared to the query vectors.
 
-`FLAT` index provides 100% query recall rate. Compared to other indexes, it is the most efficient indexing method when number of queries is small.
+`FLAT` index provides 100% query recall rate. Compared to other indexes, it is the most efficient indexing method when the number of queries is small.
 
 ### `IVFLAT`
 
@@ -66,7 +66,7 @@ Vectors are quantized to 8-bit floats. This may cause accuracy loss.
 
 ### `IVF_SQ8H`
 
-Optimized version of `IVF_SQ8` that requires both CPU and GPU to work. Unlike `IVF_SQ8`, `IVF_SQ8H` uses a GPU-based coarse quantizer, which greatly reduces time to quantize.
+Optimized version of `IVF_SQ8` that requires both CPU and GPU to work. Unlike `IVF_SQ8`, `IVF_SQ8H` uses a GPU-based coarse quantizer, which greatly reduces the time to quantize.
 
 ### `IVF_PQ`
 
@@ -80,7 +80,7 @@ Only 1, 2, 3, 4, 6, 8, 10, 12, 16, 20, 24, 28, 32 dimensions per sub-quantizer a
 
 ### `RNSG`
 
-`RNSG` is a self-developed index that makes various optimizations based on `NSG` index. `NSG` is a graph-based search algorithm that a) lowers the average out-degree of the graph for fast traversal; b) shortens the search path; c) reduces the index size; d) lowers the indexing complexity.
+`RNSG` is a self-developed index that makes various optimizations based on `NSG` index. `NSG` is a graph-based search algorithm that a) lowers the average out-degree of the graph for fast traversal; b) shortens the search path; c) reduces the index size; and d) lowers the indexing complexity.
 
 Compared to `NSG` which searches query vectors one by one, `RNSG` supports concurrent searches of multiple query vectors.
 
@@ -96,6 +96,6 @@ Compared with `RNSG`, `HNSW` has better memory and time efficiency. `HNSW` also 
 
 ## Choosing an index
 
-To learn how to choose an appropriate index for your application scenarios, please read [How to Select an Index in Milvus](https://medium.com/@milvusio/how-to-choose-an-index-in-milvus-4f3d15259212).
+To learn how to choose an appropriate index for your application scenarios, refer to [How to Select an Index in Milvus](https://medium.com/@milvusio/how-to-choose-an-index-in-milvus-4f3d15259212).
 
 To learn how to choose an appropriate index for a metric, refer to [Distance Metrics](metric.md).

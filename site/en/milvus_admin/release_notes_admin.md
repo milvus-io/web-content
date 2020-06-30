@@ -10,11 +10,11 @@ Milvus Admin is the GUI client of Milvus. You can use Milvus Admin to perform op
 
 ## v0.3.0
 
-**Release Date**：2020-5-5
+**Release date**：2020-5-5
 
 **Compatibility**
 
-| Milvus Version | Milvus Admin Version  |
+| Milvus version | Milvus admin version  |
 | ---------------| -----------------|
 | 0.9.0          | 0.3.0           |
 
@@ -28,11 +28,11 @@ Milvus Admin is the GUI client of Milvus. You can use Milvus Admin to perform op
 
 ## v0.2.0
 
-**Release Date**：2020-4-17
+**Release date**：2020-4-17
 
 **Compatibility**
 
-| Milvus Version | Milvus Admin Version  |
+| Milvus version | Milvus admin version  |
 | ---------------| -----------------|
 | 0.8.0          | 0.2.0           |
 
@@ -45,11 +45,11 @@ Milvus Admin is the GUI client of Milvus. You can use Milvus Admin to perform op
 
 ## v0.1.0
 
-**Release Date**：2020-3-14
+**Release date**：2020-3-14
 
 **Compatibility**
 
-| Milvus Version    | Milvus Admin Version  |
+| Milvus version    | Milvus admin version  |
 | ---------------| -----------------|
 | 0.7.0          | 0.1.0           |
 

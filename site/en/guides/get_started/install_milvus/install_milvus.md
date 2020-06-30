@@ -8,7 +8,7 @@ sidebar_label: Installation Overview
 
 Milvus runs on machines with or without GPU. To use Milvus on machines without a GPU, install CPU-only Milvus. Otherwise, it is recommended to use GPU-enabled Milvus to achieve better search performance for larger queries.
 
-In Milvus, the vector search includes 2 separate processes: index building and search. For GPU-enabled Milvus, these two processes can run concurrently, which facilitate more efficient query, especially for incremental data. While for CPU-only Milvus, search computation can only be executed after index building is completed, which makes it more suitable for static data.
+In Milvus, the vector search includes two separate processes: index building and search. For GPU-enabled Milvus, these two processes can run concurrently, which facilitates more efficient query, especially for incremental data. While for CPU-only Milvus, search computation can only be executed after index building is completed, which makes it more suitable for static data.
 
 ## Install using Docker
 
@@ -39,7 +39,7 @@ If you cannot use your host to acquire Docker images and configuration files onl
 
   You can download configuration files and use appropriate methods to transfer the configuration files. Refer to installation steps for details.
 
-## Build from Source
+## Build from source
 
 Refer to [Build Milvus from source](https://github.com/milvus-io/milvus/blob/master/INSTALL.md) to learn how to build Milvus from source.
 
@@ -55,4 +55,4 @@ Refer to [Build Milvus from source](https://github.com/milvus-io/milvus/blob/mas
 - If you're ready to run Milvus in production:
 
   - [Configure Milvus for Production](../../../reference/performance_tuning.md)
-  - Build a [monitoring and alerting system](../../monitor.md) to check real-time application performance
+  - Build a [monitoring and alerting system](../../monitor.md) to check real-time application performance.

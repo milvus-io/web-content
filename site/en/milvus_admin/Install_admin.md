@@ -18,7 +18,7 @@ sidebar_label: Install Milvus Admin
     $ docker run -p 3000:80 milvusdb/milvus-admin:v0.3.0
     ```
 
-    > Note: You can also map a port other than 3000, but you need to update the URL accordingly/
+    > Note: You can also map a port other than 3000, but you need to update the URL accordingly.
 
 3. Launch any browser and access the following URL:
 

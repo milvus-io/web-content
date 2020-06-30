@@ -8,7 +8,7 @@ sidebar_label: Monitoring Metrics
 
 # Monitoring Metrics
 
-## Metrics Overview
+## Metrics overview
 
 The Milvus dashboard provides details about your application and database configuration. It helps you optimize Milvus performance by monitoring the following areas: 
 
@@ -18,17 +18,17 @@ The Milvus dashboard provides details about your application and database config
 | Hardware Metrics | Metrics about CPU/GPU usage, network traffic.              |
 | Storage Metrics  | Metrics about data size, storage capacity and total files. |
 
-## Performance Metrics
+## Performance metrics
 
 | Metric                    | Description                                                  |
 | ------------------------- | ------------------------------------------------------------ |
 | **Insert per Second**     | Number of vectors that are inserted in a second. (Real-time display) |
 | **Queries per Minute**    | Number of queries that are run in a minute. (Real-time display) |
 | **Query Time per Vector** | Average time to query one vector. Divide the query elapsed time by the number of queried vectors. |
-| **Query Service Level**   | A system wide metric. Query service level (%) = n_queries_completed_within_threshold1 / n_queries <br/>Generally, it is recommended to set 3 time periods - threshold1, threshold2 and threshold3, to track the query service level. |
+| **Query Service Level**   | A system wide metric. Query service level (%) = n_queries_completed_within_threshold1 / n_queries <br/>Generally, it is recommended to set three time periods - threshold1, threshold2, and threshold3, to track the query service level. |
 | **Uptime**                | How long Milvus has been running. (Minutes)                  |
 
-## Hardware Metrics
+## Hardware metrics
 
 | Metric                | Description                                                  |
 | --------------------- | ------------------------------------------------------------ |
@@ -41,7 +41,7 @@ The Milvus dashboard provides details about your application and database config
 | **Disk Read Speed**   | Disk read speed (GB/s).                                      |
 | **Disk Write Speed**  | Disk write speed (GB/s).                                     |
 
-## Storage Metrics
+## Storage metrics
 
 | Metric         | Description                                      |
 | -------------- | ------------------------------------------------ |

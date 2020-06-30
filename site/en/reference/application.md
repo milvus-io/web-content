@@ -12,7 +12,7 @@ Milvus can be used to build intelligent systems in most AI application scenarios
 
 - Image search
 
-  Query by image content，including content-based image retrieval such as bio-identification, object detection and recognition, etc.
+  Query by image content, including content-based image retrieval such as bio-identification, object detection and recognition, etc.
 
 - Video processing
 
@@ -38,7 +38,7 @@ Unstructured data (images/videos/texts/audios) are transformed to feature vector
 
 #### Background
 
-Nowadays, when you shop or view pages online, you will often see such words as "You may also like" or "Related products". In fact, many tech companies have embedded recommendation algorithms into their mobile Apps. Some examples include the Toutiao news, NetEase news, Pinduoduo, and WeChat, etc. With Milvus, you can implement your own personalized recommendation system.
+Nowadays, when you shop or view pages online, you will often see such words as "You may also like" or "Related products". In fact, many tech companies have embedded recommendation algorithms into their mobile Apps. Some examples include the Toutiao news, NetEase news, Pinduoduo, WeChat, etc. With Milvus, you can implement your own personalized recommendation system.
 
 #### User requirements
 
@@ -52,7 +52,7 @@ Take personalized advertising content recommendation as an example, the applicat
 
 1. Create user persona by data analysis and key feature extraction
 
-   By analyzing user history data and extracting key features, the user persona can be built. For example: The user history data contains news content about tennis, Wimbledon Championships, sports and Tennis Masters. So we can conclude from these keywords that the user is a tennis fan.
+   By analyzing user history data and extracting key features, the user persona can be built. For example, the user history data contains news content about tennis, Wimbledon Championships, sports, and Tennis Masters. So we can conclude from these keywords that the user is a tennis fan.
 
 2. Convert user keywords to vectors, load them to Milvus, and extract user feature vectors.
 
@@ -70,7 +70,7 @@ Online sellers need to prepare product images and tag product categories to help
 
 #### User requirements
 
-Manage product images, and run multimodal similarity search based on keywords, for example, find out the most similar images of the most popular products.
+Manage product images, and run multimodal similarity search based on keywords. For example, find out the most similar images of the most popular products.
 
 #### Application 
 
@@ -89,9 +89,9 @@ Milvus helps you realize product feature extraction and multimodal search by the
 
 #### Background
 
-Today, online shopping and product trading has becoming a daily routine. On commodity trading platforms such as Taobao and Xianyu, sellers can display products to customers more fully and intuitively through product videos. Meanwhile, product video copying and plagiarism have also appeared. One solution to find a duplicate video is by vector similarity search.
+Today, online shopping and product trading has become a daily routine. On commodity trading platforms such as Taobao and Xianyu, sellers can display products to customers more comprehensively and intuitively through product videos. Meanwhile, product video copying and plagiarism have also appeared. One solution to find a duplicate video is by vector similarity search.
 
-Take Xianyu, the second-hand commodity trading platform as an example. According to its current product size and business development trend, the vector index system needs to support billions of videos with an average length of 20 seconds, and a 1024-dimensional vector per second.
+Take Xianyu, the second-hand commodity trading platform, as an example. According to its current product size and business development trend, the vector index system needs to support billions of videos with an average length of 20 seconds, and a 1024-dimensional vector per second.
 
 #### User requirements
 
@@ -107,8 +107,8 @@ The core of video deduplication is high-dimensional vector index. Milvus helps y
 
 2. Vector distance computation
 
-   When the video is represented by vectors, the similarity of videos can be measured by similarity of vectors. The distance between vectors can be calculated by the angle cosine, Euclidean distance and vector inner product.
+   When the video is represented by vectors, the similarity of videos can be measured by similarity of vectors. The distance between vectors can be calculated by the angle cosine, Euclidean distance, and vector inner product.
 
 3. Vector index
 
-   Search the most similar vector by multiple vector indexing methods such as tree-based, hash-based and vector quantization, etc.
+   Search the most similar vector by multiple vector indexing methods such as tree-based, hash-based, vector quantization, etc.

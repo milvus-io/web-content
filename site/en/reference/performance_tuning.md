@@ -6,7 +6,7 @@ sidebar_label: Configure Milvus for Production
 
 # Configure Milvus for Production
 
-Before using Milvus for production, please check the following configurations to ensure data security and improve performance. 
+Before using Milvus for production, check the following configurations to ensure data security and improve performance. 
 
 ## Data security
 
@@ -26,7 +26,7 @@ Move data storage locations out of the `tmp` folder:
 
 ## Performance improvement
 
-Please check the following configurations to improve performance:
+Check the following configurations to improve performance:
 
 ### Milvus server configuration
 

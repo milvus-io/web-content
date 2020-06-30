@@ -12,13 +12,13 @@ Similarity search methods for vectors can be generally categorized into exact se
 
 Exact search can be implemented by linear search. Linear search traverses all vectors in a vector space and computes the dot product or Euclidean distance between vectors in the vector space and the target vector. The vector that has the closest Euclidean distance from the target vector or the largest dot product with the target vector has the highest similarity. Linear search is easy to use because you do not need to create extra data structures or storage spaces.
 
-For example, you can use parallel computation libraries such as MKL for Intel processors and cuBLAS for NVIDIA GPUs for small-sized or middle-sized vector datasets. However, because the time complexity of linear search is O\(Nd\), where N is the size of the vector dataset and d is the vector dimension, the performance of linear search deteriorates as the size of the vector dataset or the vector dimension increases.
+For example, you can use parallel computation libraries such as MKL for Intel processors and cuBLAS for NVIDIA GPUs for small- or medium-sized vector datasets. However, because the time complexity of linear search is O\(Nd\), where N is the size of the vector dataset and d is the vector dimension, the performance of linear search deteriorates as the size of the vector dataset or the vector dimension increases.
 
 ## Approximate search
 
 Approximate search converts searches in high-dimensional vector spaces to searches in vector spaces with reduced size or dimensions through clustering, dimension reduction, and encoding. The time complexity is less than O(Nd). However, you need to use a training dataset with similar vector distribution to train a model with appropriate data distribution or encoding. You can then use this model to create indexes for all high-dimensional vectors.
 
-Currently, approximate search use the following algorithms:
+Currently, approximate search uses the following algorithms:
 
 ### Tree-based search
 
@@ -30,7 +30,7 @@ Tree-based search is efficient by quickly locating the most similar leaf nodes w
 
 Hash-based space division uses a group of locality-sensitive hashing (LSH) algorithms to divide the vector space. LSH can be used to compute the hash value for each vector. For vectors that are closer to each other, the hash values are also similar. The algorithm divides the value range of LSH algorithms into parts so that each vector and its hash value have a corresponding part. Vectors are then divided by the parts of corresponding hash values. If the hash values of two vectors are within the same part, these vectors are in the same category. During the search, the algorithm uses the same LSH and part division rules to acquire the category of the target vector. Then the algorithm computes the distance between all vectors that are in the same category or nearby categories and the target vector to acquire the most similar vector.
    
-Hash-based space division computes the category and nearly categories of the target vector to exclude vectors that are less similar, thus reducing the number of computations for vector similarity. However, this algorithm can only evenly divide the vector space. In real-world scenarios, the distribution of vectors in a vector space is often uneven. Thus, the number of vectors differ greatly among different categories, which results in decreased efficiency and precision.
+Hash-based space division computes the category and near categories of the target vector to exclude vectors that are less similar, thus reducing the number of computations for vector similarity. However, this algorithm can only evenly divide the vector space. In real-world scenarios, the distribution of vectors in a vector space is often uneven. Thus, the number of vectors differ greatly among different categories, which results in decreased efficiency and precision.
 
 
 ### Vector quantization encoding
