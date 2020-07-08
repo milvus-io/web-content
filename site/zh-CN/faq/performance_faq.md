@@ -16,7 +16,7 @@ sidebar_label: 性能常见问题
 
 #### 为什么重启 Milvus 服务端之后，第一次搜索时间非常长？
 
-您需要在 `server_config.yaml` 中开启 `preload_table`。在内存允许的情况下尽可能多地加载 collection。这样在每次重启服务端之后，数据都会先载入到 Milvus 中，可以解决第一次搜索耗时很长的问题。
+你需要在 `server_config.yaml` 中开启 `preload_table`。在内存允许的情况下尽可能多地加载 collection。这样在每次重启服务端之后，数据都会先载入到 Milvus 中，可以解决第一次搜索耗时很长的问题。
 
 #### 为什么插入数据的速度很慢？
 
@@ -25,14 +25,14 @@ sidebar_label: 性能常见问题
 
 #### 为什么搜索的速度很慢？
 
-- 将`cpu_cache_capacity` 设置为用户能提供的最大内存数。
+- 在确保 `insert_buffer_size` 和 `cache_size` 不超过内存总量的前提下，将`cache_size` 设置为用户能提供的最大内存数。
 - 调整 `use_blas_threhold`（根据硬件环境调整）:
   - 如果当前批量查询的 nq 数（向量条数）小于 `use_blas_threhold`，可以尝试将 `use_blas_threhold` 调整为 `nq - 1`, 反之把 `use_blas_threhold` 调整为 `nq + 1`。
 - 在创建 collection 时，`index_file_size` 参数应该尽量调大。
 
 #### 为什么 GPU 一直空闲？
 
-将 `gpu_search_threshold` 的值调整为您期望开启 GPU 搜索的批量查询的 nq 数（向量条数）。不建议在搜索量较小时使用 GPU 搜索。
+将 `gpu_search_threshold` 的值调整为你期望开启 GPU 搜索的批量查询的 nq 数（向量条数）。不建议在搜索量较小时使用 GPU 搜索。
 
 #### 为什么我的数据插入后不可以马上被搜索到？
 

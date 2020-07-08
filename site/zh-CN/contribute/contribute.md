@@ -12,12 +12,12 @@ sidebar_label: Contribute
 
 想要给 Milvus 贡献代码，请按照以下步骤进行：
 
-1. 浏览现有的 issues 并找到您感兴趣的领域，或创建一个新的 issue 描述您的想法和改动。如果您是第一次提交贡献，我们建议您先从[带 `good first issues` 标签的 issues](https://github.com/milvus-io/milvus/labels/good%20first%20issue) 入手。
-2. 相关仓库的负责人会及时回复您的 issue。
-3. 如果您的更改建议被接受，请克隆主仓库（master）并开始您的工作。
+1. 浏览现有的 issues 并找到你感兴趣的领域，或创建一个新的 issue 描述你的想法和改动。如果你是第一次提交贡献，我们建议你先从[带 `good first issues` 标签的 issues](https://github.com/milvus-io/milvus/labels/good%20first%20issue) 入手。
+2. 相关仓库的负责人会及时回复你的 issue。
+3. 如果你的更改建议被接受，请克隆主仓库（master）并开始你的工作。
 4. 确保更改通过所有测试之后，便可以提交 pull request 到主仓库。
 
-收到您提交的 pull request 之后，我们会及时 review 并回复，如果 pull request 通过批准且被合并，恭喜您，您已经成为 Milvus 贡献者！
+收到你提交的 pull request 之后，我们会及时 review 并回复，如果 pull request 通过批准且被合并，恭喜你，你已经成为 Milvus 贡献者！
 
 ## 改进文档
 

@@ -25,7 +25,7 @@ You can load as many collections as the memory permits in `preload_table` from `
 
 #### Why the search speed is low?
 
-- Set `cpu_cache_capacity` to the largest memory size you can provide.
+- Set `cache_size` to the largest memory size you can provide, ensuring that `cache_size` and `insert_buffer_size` combined does not exceed the system memory size.
 - Adjust the value of `use_blas_threhold` based on the hardware environment.
   - If the number of nq (number of vectors to search) is smaller than `use_blas_threhold`, you can try changing `use_blas_threhold` to `nq - 1`. Conversely, you can change `use_blas_threhold` to `nq + 1`.
 - When creating a collection, the value of `index_file_size` should be as large as possible.
