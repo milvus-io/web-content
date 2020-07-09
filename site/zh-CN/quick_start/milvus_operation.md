@@ -4,7 +4,7 @@ title: Learn Milvus Operations
 sidebar_label: Learn Milvus Operations
 ---
 
-# Milvus 基本操作
+# Milvus Hello World
 
 该页面将向你展示如何使用 [Python SDK](https://github.com/milvus-io/pymilvus) 运行 Milvus 基本操作。关于详细的 API 参考信息，请参考 [Python API 文档](https://github.com/milvus-io/pymilvus)。
 
@@ -133,7 +133,7 @@ sidebar_label: Learn Milvus Operations
    ```python
    >>> import random
    # Generate 20 vectors of 256 dimension
-   >>> vectors = [[random.random() for _ in range(dim)] for _ in range(20)]
+   >>> vectors = [[random.random() for _ in range(256)] for _ in range(20)]
    ```
 
 2. 插入向量列表。如果你不指定向量 ID，Milvus 自动为向量分配 ID。
@@ -227,16 +227,16 @@ Segment 是 Milvus 自动将插入的向量数据合并所获得的数据文件�
 2. 创建随机向量作为 `query_records` 进行搜索。
 
    ```python
-   # create 5 vectors of 32-dimension
-   >>> q_records = [[random.random() for _ in range(dim)] for _ in range(5)]
+   # create 5 vectors of 256-dimension
+   >>> q_records = [[random.random() for _ in range(256)] for _ in range(5)]
    >>> milvus.search(collection_name='test01', query_records=q_records, top_k=2, params=search_param)
    ```
 
 #### 在分区中搜索向量
 
 ```python
-# create 5 vectors of 32-dimension
->>> q_records = [[random.random() for _ in range(dim)] for _ in range(5)]
+# create 5 vectors of 256-dimension
+>>> q_records = [[random.random() for _ in range(256)] for _ in range(5)]
 >>> milvus.search(collection_name='test01', query_records=q_records, top_k=1, partition_tags=['tag01'], params=search_param)
 ```
 

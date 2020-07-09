@@ -18,7 +18,6 @@ sidebar_label: Milvus Configuration
 - `milvus/logs`（日志存储）
 - `milvus/conf`（设置文件）
   - `server_config.yaml`（服务设置）
-  - `log_config.conf`（日志设置）
 
 ## 配置修改 
 
@@ -30,9 +29,17 @@ sidebar_label: Milvus Configuration
 $ docker restart <container id>
 ```
 
+下面以 Milvus 的系统配置文件 **server_config.yaml** 为例，演示如何修改日志级别和日志存储路径：
+
+```YAML
+logs:
+  level: info
+  path: /var/lib/milvus/logs
+```
+
 ### 运行时修改
 
-你可以使用 Milvus 客户端 对 `server_config.yaml` 的配置进行运行时修改。修改后无需重启 Milvus 即可启用新的更改。详情请参考[客户端参考](sdk.md)。
+你可以使用 Milvus 客户端对 `server_config.yaml` 的配置进行运行时修改。详情请参考[客户端参考](sdk.md)。
 
 对以下参数的运行时修改是立即生效的：
 
@@ -56,10 +63,10 @@ $ docker restart <container id>
 
 <div class="table-wrapper" markdown="block">
 
-| 参数        | 说明                                                         | 类型    | 默认值    |
-| --------- | ------------------------------------------------------------ | ------- | ------- |
-| `enable`  | 如需与 Mishards 配合使用，请将其设为 `true`，不然就设为 `false`。 | Boolean | `false` |
-| `role`    | Milvus 部署角色: `rw` / `ro`                          | Role    | `rw`    |
+| 参数           | 说明                                                         | 类型                                                       | 默认值                                                      |
+| ---------------- | ------------------------------------------------------------ | ------------------------------------------------------------- | ------------------------------------------------------------- |
+| `enable` | 是否开启集群模式。<ul><li><code>true</code>：开启集群模式。</li><li><code>false</code>：不开启集群模式。</li></ul> | Boolean                                    | `false`                                    |
+| `role`   | 节点的运行模式，可选配置：<ul><li><code>rw</code>：读写模式</li><li><code>ro</code>：只读模式</li></ul> | Role | `rw` |
 
 </div>
 
@@ -67,10 +74,10 @@ $ docker restart <container id>
 
 <div class="table-wrapper" markdown="block">
 
-| 参数        | 说明                                                         | 类型    | 默认值    |
-| ---------- | ------------------------------------------------------------ | -------- | --------------- |
-| `timezone` | 通过 `UTC-x` 或 `UTC+x` 设定时区。                  | Timezone | `UTF+8`         |
-| `meta_uri` | 用于存储元数据的 URI。单机版 Milvus 请使用 SQLite，分布式集群版 Milvus 请使用 MySQL。 格式： `dialect://username:password@host:port/database`。请保持 `dialect://:@:/` 的格式。 `dialect` 可以是 `sqlite` 也可以是 `mysql`。至于其他区域请填入对应的真实值。 | URI      | `sqlite://:@:/` |
+| 参数             | 说明                                                         | 类型                                                       | 默认值                                                      |
+| ------------------ | ------------------------------------------------------------ | ------------------------------------------------------------- | ------------------------------------------------------------- |
+| `timezone` | 使用 UTC-x 或 UTC+x 来指定时区。比如，可以使用 UTC+8 来代表中国标准时间。 | Timezone | `UTC+8` |
+| `meta_uri` | 元数据存储的 URI。可以使用 SQLite（Milvus 单机版本）或者 MySQL（Milvus 分布式版本）来存储元数据。URI 格式为 dialect://username:password@host:port/database。其中，dialect 可以是 sqlite 或者 mysql，其他文字需要替换成实际值。| URI | `sqlite://:@:/` |
 
 </div>
 
@@ -78,12 +85,12 @@ $ docker restart <container id>
 
 <div class="table-wrapper" markdown="block">
 
-| 参数        | 说明                                                         | 类型    | 默认值    |
-| -------------- | ------------------------------------------------------------ | ------- | --------- |
-| `bind.address` | Milvus 服务器监听的 IP 地址。                      | IP      | `0.0.0.0` |
-| `bind.port`    | Milvus 监听的端口号. 范围： (1024, 65535)   | Integer | `19530`   |
-| `http.enable`  | 是否启用 HTTP 服务器。                              | Boolean | `true`    |
-| `http.port`    | Milvus HTTP 服务器监听的端口号。 范围： (1024, 65535)。 | Integer | `19121`   |
+| 参数                 | 说明                                               | 类型                                             | 默认值                                            |
+| ---------------------- | -------------------------------------------------- | --------------------------------------------------- | --------------------------------------------------- |
+| `bind.address` | Milvus 服务端监听的 IP 地址。                      | IP        | `0.0.0.0`             |
+| `bind.port`    | Milvus 服务端监听的端口号，范围：[1025, 65534]。 | Integer | `19530` |
+| `http.enable`  | 是否开启 HTTP 服务。<ul><li><code>true</code>：开启 HTTP 服务。</li><li><code>false</code>：不开启 HTTP 服务。</li></ul> | Boolean                        | `true`                         |
+| `http.port`    | Milvus HTTP 服务监听的端口号，范围：[1025, 65534]。 | Integer | `19121` |
 
 </div>
 
@@ -91,36 +98,37 @@ $ docker restart <container id>
 
 <div class="table-wrapper" markdown="block">
 
-| 参数                 | 说明                                                         | 类型        | 默认值          |
-| -------------------- | ------------------------------------------------------------ | ----------- | --------------- |
-| `path`       | 导入 Milvus 的向量文件、索引文件和元数据存储的路径。               | Path        | `/var/lib/milvus`     |
-| `auto_flush_interval` | Milvus 自动将数据 flush 到硬盘的时间间隔。单位为秒。0: 不启用定期 flush。 | Integer |    `1` (s)    |
+| 参数                        | 说明                                                         | 类型                                                       | 默认值                                                      |
+| ----------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------- | ------------------------------------------------------------- |
+| `path`                | Milvus 数据文件（向量文件、索引文件和元数据）的存储路径。                                  | Path                  | `/var/lib/milvus`                 |
+| `auto_flush_interval` | Milvus 定期将缓冲区数据落盘的时间间隔（单位为秒），范围：[0, 3600]。如果该值为 0，则关闭定期落盘功能。 | Integer | `1` |
+
 </div>
 
 ### `wal` 区域
 
 <div class="table-wrapper" markdown="block">
 
-| 参数               | 说明                                                         | 类型    | 默认值     |
-| -------------------- | ------------------------------------------------------------ | ------------ | ------- |
-|  `enable`               |   是否开启预写式日志（write-ahead logging，WAL）。如果开启，Milvus 会将所有数据变化预先写入日志文件，之后才会执行数据操作。WAL 可以保证 Milvus 操作的原子性和持久性。  |    Boolean          |   true      |
-|  `recovery_error_ignore` |  在通过 WAL 执行恢复操作时，是否忽略出现错误的日志。如果设为 true，当 Milvus 重启恢复时，如果有日志出现错误，则 Milvus 会忽略出现错误的日志。如果设为 false，如果 WAL 日志中存在错误，则 Milvus 会启动失败。 |   Boolean           |   true      |
-|  `buffer_size`          |   读取缓冲区和写入缓冲区的总大小，单位为字节。`buffer_size` 的值必须在 `[64MB, 4096MB]` 范围内。如果你设的值超出范围，Milvus 自动使用与所设的值最接近的边界值。建议 `buffer_size` 的值要大于单次插入的数据量，以获取更好的性能。     |    String          |   `256MB`      |
-|  `wal_path`             |  预写式日志文件路径。                                                           |    String          |    `/var/lib/milvus/wal `     |
+| 参数                      | 说明                                                         | 类型                                                       | 默认值                                                      |
+| --------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------- | ------------------------------------------------------------- |
+| `enable`                | 是否开启 WAL（Write-Ahead Logging，预写式日志）。如果启用 WAL，Milvus 会在更改数据之前将所有数据更改写入日志文件。WAL 确保 Milvus 操作的原子性和耐用性。<ul><li><code>true</code>：开启 WAL。</li><li><code>false</code>：不开启 WAL。</li></ul> | Boolean     | `true`      |
+| `recovery_error_ignore` | 在通过 WAL 执行恢复操作时，是否忽略出现错误的日志。<ul><li><code>true</code>：Milvus 重启恢复时，忽略错误的日志。</li><li><code>false</code>：Milvus 重启恢复时，会因错误的日志启动失败。</li></ul> | Boolean | `false` |
+| `buffer_size`           | WAL 缓冲区大小，范围：64MB ~ 4096MB。建议该值大于单次插入的数据量两倍，以获取更好的性能。格式请见 [空间大小的格式](#size)。 | String  | `256MB` |
+| `path`                  | 预写式日志文件存储路径。                                     | String                               | `/var/lib/milvus/wal`                |
+
 </div>
 
 ### `cache` 区域
 
 <div class="table-wrapper" markdown="block">
 
-| 参数                       | 说明                                                         | 类型    | 默认值    |
-| -------------------------- | ------------------------------------------------------------ | ------- | --------- |
-| `cache_size`       | 内存中用于驻留搜索数据的缓存空间，`cache_size` 和 `insert_buffer_size` 之和不能超过内存总量。 | String | `4GB` |
-| `insert_buffer_size` | 用于数据导入的 buffer 所使用的最大内存量。`insert_buffer_size` 和 `cache_size` 之和不能超过内存总量。 | String     | `1GB`        |
-| `preload_collection` | Milvus 服务器启动时需要预加载的集合。集合名以逗号分隔。'*' 表示预加载全部现有表格。必须用单引号或者双引号。 | StringList | N/A  |
+| 参数                     | 说明                                                         | 类型                                                       | 默认值                                                      |
+| -------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------- | ------------------------------------------------------------- |
+| `cache_size`         | 内存中用于驻留搜索数据的缓存空间大小。`cache_size` 和 `insert_buffer_size` 之和不能超过内存总量。格式请见 [空间大小的格式](#size)。 | String | `4GB` |
+| `insert_buffer_size` | 用于数据导入的缓冲区所使用的内存量。`cache_size` 和 `insert_buffer_size` 之和不能超过内存总量。格式请见 [空间大小的格式](#size)。 | String | `1GB` |
+| `preload_collection` | 在 Milvus 开启时，需要加载的集合列表。<ul><li>若要加载所有集合，使用 `'*'` (包含引号)。</li><li>若要加载指定集合，列出需要加载的集合名（用引号包围每个集合名，并用逗号隔开相邻集合）。</li></ul>格式请见 [空间大小的格式](#size)。 | StringList | `1GB` |
+
 </div>
-
-
 
 ### `gpu` 区域
 
@@ -130,16 +138,19 @@ $ docker restart <container id>
 
 <div class="table-wrapper" markdown="block">
 
-| 参数               | 说明                                                         | 类型    | 默认值     |
-| ------------------ | ------------------------------------------------------------ | ------- | ---------- |
-| `enable` | 选择是否在 Milvus 里启用 GPU 用于搜索和索引创建。 | Boolean | `false` |
-| `cache_size` | 显存中用于驻留搜索数据的缓存空间。 | String | `1GB` |
-| `gpu_search_threshold` | Milvus 性能调优参数。此参数必须与 `nq` 比较以确定搜索计算是否只在 GPU 上进行。<br/>如果 `nq` >= `gpu_search_threshold` ，则搜索计算只在 GPU 上进行。如果 `nq` 小于 `gpu_search_threshold` ，则搜索计算将在 CPU 和 GPU 上协同进行。| Integer | `1000` |
-| `search_devices` | 定义 Milvus 里用于搜索的 GPU 资源。格式为：`gpux`，其中 `x` 是 GPU 的序号，例如 `gpu0`。 | DeviceList        | `gpu0` |
-| `build_index_devices` | 定义 Milvus 里用户创建索引的 GPU 资源。格式为：`gpux`，其中 `x` 是 GPU 的序号，例如 `gpu0`。 | DeviceList | `gpu0` |
+| 参数                   | 说明                                                         | 类型                                                       | 默认值                                                      |
+| ------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------- | ------------------------------------------------------------- |
+| `enable`               | 是否开启 GPU 用于搜索和索引创建。<ul><li><code>true</code>：开启 GPU。</li><li><code>false</code>：不开启 GPU。</li></ul> | Boolean                                        | `false`                                        |
+| `cache_size`           | 显存中用于驻留搜索数据的缓存空间大小。该值不能超过显存总量。格式请见 [空间大小的格式](#size)。 | String | `1GB` |
+| `gpu_search_threshold` | 使用 GPU 查询的阈值。用 `nq` 表示单批次查询的向量数，则搜索计算方式如下： <ul><li>`nq` &ge; `gpu_search_threshold`：搜索计算只在 GPU 上进行。</li><li>`nq` &lt; `gpu_search_threshold`：搜索计算将在 CPU 和 GPU 上协同进行。</li></ul> | Integer | `1000` |
+| `search_devices`       | 用于搜索的 GPU 设备，格式为“gpux”。其中“x”是 GPU 的序号，例如“gpu0”。 | DeviceList | `gpu0` |
+| `build_index_devices`  | 用于创建索引的 GPU 设备，格式为“gpux”。其中“x”是 GPU 的序号，例如“gpu0”。 | DeviceList | `gpu0` |
+
 </div>
 
-> 注意：在 Milvus 里，创建索引和搜索是两个独立分开的过程，可以只在 `cpu`，或同时在 `cpu` 和 `gpu` 里进行。通过将 GPU 添加至 `search_devices` 或者 `build_index_devices` 下方，你可以指定多张 GPU 来进行创建索引或搜索。 请参考下面的 YAML 示例代码：
+<div class="alert note">
+在 Milvus 里，创建索引和搜索是两个独立分开的过程，可以只在 CPU，或同时在 CPU 和 GPU 里进行。通过将 GPU 添加至 <code>search_devices</code> 或者 <code>build_index_devices</code> 下方，你可以指定多个 GPU 设备来进行创建索引或搜索。请参考下面的 YAML 示例代码：
+</div>
 
 ```yaml
     search_devices:
@@ -154,41 +165,33 @@ $ docker restart <container id>
 
 <div class="table-wrapper" markdown="block">
 
-| 参数           | 说明                                                 | 类型         | 默认值 |
-| -------------------- | ------------------------------------------------------------ | ------------ | ------- |
-|  `level`      |   Milvus 日志等级。必须为 `debug`、 `info`、 `warning`、 `error` 和 `fatal` 其中之一。          |   String   |  `debug` |
-|  `trace.enable`      |   是否开启 trace 级别日志打印。           |    Boolean   |  `true` |
-|  `path`              |  日志文件绝对路径。  |    String    |   `/var/lib/milvus/logs`   |
-|  `max_log_file_size` |  每份日志文件的最大值。范围： [512MB, 4096MB]。  |    Integer   | `1024MB` |
-|  `log_rotate_num`         | Milvus 为每个日志打印级别保存的最多文件数。范围： [0, 1024]。 `0` 代表日志文件数无上限。|    Integer   | `0` |
+| 参数                   | 说明                                                         | 类型                                                       | 默认值                                                      |
+| ------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------- | ------------------------------------------------------------- |
+| `level`             | 日志打印的最低级别。日志级别：`debug` < `info` < `warning` < `error` < `fatal`。 | String | `debug` |
+| `trace.enable`      | 是否开启 trace 级别日志打印。<ul><li><code>true</code>：开启 trace 级别日志打印。</li><li><code>false</code>：不开启 trace 级别日志打印。</li></ul> | Boolean                         | `true`                          |
+| `path`              | 日志存储路径。                                    | String                                     | `/var/lib/milvus/logs`                     |
+| `max_log_file_size` | 单个日志文件的大小限制，范围：1024MB ~ 4096MB。格式请见 [空间大小的格式](#size)。            | Integer     | `1024MB`    |
+| `log_rotate_num`    | 每个日志级别最多保存的文件数量，范围：[0, 1024]。0 代表日志文件数无限制。 | Integer | `0` |
+
 </div>
-
-
-
 
 ### `metric_config` 区域
 
 <div class="table-wrapper" markdown="block">
 
-| 参数                      | 说明                           | 类型    | 默认值       |
-| ------------------------- | ------------------------------ | ------- | ------------ |
-| `enable` | 是否启用监听功能。 | Boolean | `false`       |
-| `address`                | 访问 Prometheus Pushgateway 的 IP 地址。       |   IP     |   `127.0.0.1`    |
-| `port`                    | 访问 Prometheus Pushgateway 的端口号。 范围 (1024, 65535)。      | Integer | `9091`       |
+| 参数           | 说明                                     | 类型                                   | 默认值                                |
+| ---------------- | ---------------------------------------- | ----------------------------------------- | ---------------------------------------- |
+| `enable`  | 是否开启 Prometheus 监控。<ul><li><code>true</code>：开启 Prometheus 监控。</li><li><code>false</code>：不开启 Prometheus 监控。</li></ul> | Boolean        | `false`        |
+| `address` | 访问 Prometheus Pushgateway 的 IP 地址。 | IP | `127.0.0.1` |
+| `port`    | 访问 Prometheus Pushgateway 的端口号。范围：[1025, 65534]。   | Integer | `9091` |
+
 </div>
 
-
-
-
-
-### `tracing_config` 区域
-
-<div class="table-wrapper" markdown="block">
-
-| 参数               | 说明                                                         | 类型    | 默认值     |
-| -------------------- | ------------------------------------------------------------ | ------------ | ------- |
-| `json_config_path` | 追踪系统配置文件的绝对路径。如果该值为空，则 Milvus 会创建一个空的追踪系统。  | Path | ` `  |
+<div class="alert info" id="size">
+在 Milvus 配置文件中，空间大小的格式为“数字+单位”，如“4GB”。
+<ul>
+<li>数字和单位之间没有空格。</li>
+<li>数字必须是整数。</li>
+<li>可选单位为 GB、MB、KB。</li>
+</ul>
 </div>
-
-
-

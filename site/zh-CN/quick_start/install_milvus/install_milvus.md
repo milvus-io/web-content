@@ -5,7 +5,7 @@ sidebar_label: Installation Overview
 ---
 # 安装概述
 
-Milvus 在 CPU 或 GPU 环境下都可以运行。若要在 CPU 环境下使用 Milvus，请安装仅需 CPU 的 Milvus。否则，建议安装支持 GPU 的 Milvus 以获取针对海量数据的更优的查询性能。
+Milvus 提供两个发行版本：CPU 版本和 GPU 版本。CPU 版本仅支持 CPU 运算。GPU 版本在 CPU 版本的基础上对部分功能进行了 GPU 加速。如果你的计算机上安装了支持 CUDA 功能的 GPU 设备，建议你安装 Milvus 的 GPU 版本以获取针对海量数据的更优的查询性能。
 
 Milvus 中的向量搜索包含但不限于这两个独立的部分：创建索引过程和搜索计算过程。在支持 GPU 的 Milvus中，这两个过程可以同时进行，提高查询效率，特别适合动态增加的数据。而在仅需 CPU 的 Milvus 中，搜索计算必须在创建索引结束后才能进行，所以更适合静态数据。
 
@@ -13,8 +13,8 @@ Milvus 中的向量搜索包含但不限于这两个独立的部分：创建索�
 
 使用 Docker 启动 Milvus 是最简单且推荐的方法。
 
-- [安装仅需 CPU 的 Milvus](cpu_milvus_docker.md)
-- [安装支持 GPU 的 Milvus](gpu_milvus_docker.md)
+- [安装 CPU 版本的 Milvus](cpu_milvus_docker.md)
+- [安装 GPU 版本的 Milvus](gpu_milvus_docker.md)
 
 ### 离线传输 Docker 镜像和配置文件
 
@@ -40,7 +40,7 @@ Milvus 中的向量搜索包含但不限于这两个独立的部分：创建索�
 
 ## 从源代码编译
 
-请参考[从源代码编译 Milvus](https://github.com/milvus-io/milvus/blob/master/INSTALL.md)了解如何从源代码编译。
+请参考[从源代码编译 Milvus](https://github.com/milvus-io/milvus/blob/master/INSTALL.md)。
 
 ## 接下来你可以
 

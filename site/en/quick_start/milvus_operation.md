@@ -4,7 +4,7 @@ title: Learn Milvus Operations
 sidebar_label: Learn Milvus Operations
 ---
 
-# Learn Milvus Operations
+# Milvus Hello World
 
 This page walks you through some basic Milvus operations using the [Python client](https://github.com/milvus-io/pymilvus). Refer to [Python API documentation](https://github.com/milvus-io/pymilvus) for detailed information.
 
@@ -108,13 +108,13 @@ Currently, a collection only supports one index type, and switching the index ty
 
    > Note: For different index types, the required parameters for index building also differ. You **must** specify values for all index parameters.
 
-      | Index type    | Index parameters | Example                                                                | Value range               |
-      | --------------------- | ------------ | ----------------------------------------------------------------------- | -------------------- |
-      | `IVFLAT` / `SQ8` / `SQ8H`| `nlist`：Number of clusters from the vector data file when Milvus performs clustering operation for index creation. The index file records the results of the clustering operation, including index type, central vector of each cluster, and the vectors in each cluster, for later search operations.      | `{nlist: 16384}`                                                        | `nlist`：[1, 999999] |
-      | `IVFPQ`               | `nlist`：Number of clusters from the vector data file when Milvus performs clustering operation for index creation. The index file records the results of the clustering operation, including index type, central vector of each cluster, and the vectors in each cluster, for later search operations. </br></br> `m`：Compression ratio during index creation. The smaller `m` is, the higher the compression ratio. | `{nlist: 16384, m: 12}`                                                 | `nlist`：[1, 999999] </br></br> `m`: one of {96, 64, 56, 48, 40, 32, 28, 24, 20, 16, 12, 8, 4, 3, 2, 1} |
-      | `NSG`                 | `search_length`：The higher the value, the more the nodes searched in the graph, and the higher the recall rate, but the slower the search speed. It is recommended that `search_length` is smaller than `candidate_pool` and in range [40, 80].</br></br> `out_degree`：The higher the value, the higher the memory usage, and the better the search performance.</br></br> `candidate_pool`：Affects index quality and is suggested to be in range [200, 500]. </br></br> `knng`：Affects index quality and is suggested to be `out_degree` + 20.             | `{search_length: 45, out_degree:50, candidate_pool_size:300, knng:100}` |  `search_length range`: [10, 300]</br></br>`out_degree`: [5, 300]</br></br>`candidate_pool_size`: [50, 1000]</br></br>`knng`: [5, 300]                |
-      | `HNSW`                |   `M`：Affects index build time and index quality. The higher the value, the longer it takes to build an index, the higher the index quality, and the higher the memory usage.  </br></br> `efConstruction`：Affects index build time and index quality. The higher the value, the longer it costs to build and index, the higher the index quality, and the higher the memory usage.  | `{M: 16, efConstruction:500}`   |    `M` :[5, 48]</br></br>`efConstruction` :[100, 500]                |
-      | `ANNOY`                 |  `n_trees`: Affects the build time and the index size. A larger value will give more accurate results, but larger indexes. | `{"n_trees": 8}`  |  [1, 1024]   |
+   | Index type    | Index parameters | Example                                                                | Value range               |
+   | --------------------- | ------------ | ----------------------------------------------------------------------- | -------------------- |
+   | `IVFLAT` / `SQ8` / `SQ8H`| `nlist`：Number of clusters from the vector data file when Milvus performs clustering operation for index creation. The index file records the results of the clustering operation, including index type, central vector of each cluster, and the vectors in each cluster, for later search operations.      | `{nlist: 16384}`                                                        | `nlist`：[1, 999999] |
+   | `IVFPQ`               | `nlist`：Number of clusters from the vector data file when Milvus performs clustering operation for index creation. The index file records the results of the clustering operation, including index type, central vector of each cluster, and the vectors in each cluster, for later search operations. </br></br> `m`：Compression ratio during index creation. The smaller `m` is, the higher the compression ratio. | `{nlist: 16384, m: 12}`                                                 | `nlist`：[1, 999999] </br></br> `m`: one of {96, 64, 56, 48, 40, 32, 28, 24, 20, 16, 12, 8, 4, 3, 2, 1} |
+   | `NSG`                 | `search_length`：The higher the value, the more nodes are searched in the graph, the higher the recall rate, but the slower the search speed. It is recommended that `search_length` is smaller than `candidate_pool` and in range [40, 80]。</br></br> `out_degree`：The higher the value, the higher the memory usage, and the better search performance.</br></br> `candidate_pool`：Affects index quality and is suggested to be in range [200, 500]. </br></br> `knng`：Affects index quality and is suggested to be `out_degree` + 20.             | `{search_length: 45, out_degree:50, candidate_pool_size:300, knng:100}` |  `search_length range`: [10, 300]</br></br>`out_degree`: [5, 300]</br></br>`candidate_pool_size`: [50, 1000]</br></br>`knng`: [5, 300]                |
+   | `HNSW`                |   `M`：Affects index build time and index quality. The higher the value, the longer it costs to build an index, the higher the index quality, and the higher the memory usage.  </br></br> `efConstruction`：Affects index build time and index quality. The higher the value, the longer it costs to build and index, the higher the index quality, and the higher the memory usage.  | `{M: 16, efConstruction:500}`   |    `M` :[5, 48]</br></br>`efConstruction` :[100, 500]                |
+   | `ANNOY`                 |  `n_trees`: Affects the build time and the index size. A larger value will give more accurate results, but larger indexes. | `{"n_trees": 8}`  |  [1, 1024]   |
 
    Refer to [Milvus Indexes](index.md) for more information.
 
@@ -140,7 +140,7 @@ Currently, a collection only supports one index type, and switching the index ty
    ```python
    >>> import random
    # Generate 20 vectors of 256 dimension
-   >>> vectors = [[random.random() for _ in range(dim)] for _ in range(20)]
+   >>> vectors = [[random.random() for _ in range(256)] for _ in range(20)]
    ```
 
 2. Insert the list of vectors. If you do not specify vector ids, Milvus will automatically generate IDs for the vectors.
@@ -211,21 +211,21 @@ A segment is a data file that Milvus automatically creates by merging inserted v
 
    > Note: For different index types, search parameters also differ. You **must** assign values to all search parameters.
 
-      | Index type          | Search parameters     | Example                                                | Value range              |
-      | --------------------- | ------------ | ----------------------------------------------------------------------- | -------------------- |
-      |  `FLAT` | - | | - |
-      |  `IVFLAT`/`SQ8`/`SQ8H`/`IVFPQ` | `nprobe`：Number of classes of vectors to search. `nprobe` affects search precision. The higher the value, the higher the precision, but the lower the search speed. | `{nprobe: 32}`|  [1, `nlist`]   |
-      |  `NSG` | `search_length`：The higher the value, the more the nodes searched in the graph, and the higher the recall rate, but the lower the search speed. | `{search_length:100}`|  [10, 300]   |
-      |  `HNSW` | `ef`：The higher the value, the more data is searched in the index and the higher the recall rate, but the lower the search speed.| `{ef: 64}`|  [`topk`, 4096]   |
-      | `ANNOY`                 |  `search_k`: Affects the search performance. A larger value will give more accurate results, but will take longer to return.</br>-1 indicates the default value which is 5% of the total data amount.  | `{"search_k": -1}`  | {-1} ∪ [topk, ∞) |
+   | Index type          | Search parameters     | Example                                                | Value range              |
+   | --------------------- | ------------ | ----------------------------------------------------------------------- | -------------------- |
+   |  `FLAT` | - | | - |
+   |  `IVFLAT`/`SQ8`/`SQ8H`/`IVFPQ` | `nprobe`：Number of classes of vectors to search. `nprobe` affects search precision. The higher the value, the higher the precision, but the lower the search speed. | `{nprobe: 32}`|  [1, `nlist`]   |
+   |  `NSG` | `search_length`：The higher the value, the more number of nodes are searched in the graph and the higher the recall rate, but the lower the search speed. | `{search_length:100}`|  [10, 300]   |
+   |  `HNSW` | `ef`：The higher the value, the more data is searched in the index and the higher the recall rate, but the lower the search speed.| `{ef: 64}`|  [`topk`, 4096]   |
+   | `ANNOY`                 |  `search_k`: Affects the search performance. A larger value will give more accurate results, but will take longer time to return.</br>-1 indicates the default value which is 5% of the total data amount.  | `{"search_k": -1}`  | {-1} ∪ [topk, ∞) |
 
    > Note: `top_k` stands for the number of vectors that are the most similar to the target vector. `top_k` is defined during search. The value range of `top_k` is `(0, 2048]`.
 
 2. Search vectors.
 
    ```python
-   # create 5 vectors of 32-dimension
-   >>> q_records = [[random.random() for _ in range(dim)] for _ in range(5)]
+   # create 5 vectors of 256-dimension
+   >>> q_records = [[random.random() for _ in range(256)] for _ in range(5)]
    # search vectors
    >>> milvus.search(collection_name='test01', query_records=q_records, top_k=2, params=search_param)
    ```
@@ -233,8 +233,8 @@ A segment is a data file that Milvus automatically creates by merging inserted v
 #### Search vectors in a partition
 
 ```python
-# create 5 vectors of 32-dimension
->>> q_records = [[random.random() for _ in range(dim)] for _ in range(5)]
+# create 5 vectors of 256-dimension
+>>> q_records = [[random.random() for _ in range(256)] for _ in range(5)]
 >>> milvus.search(collection_name='test01', query_records=q_records, top_k=1, partition_tags=['tag01'], params=search_param)
 ```
 

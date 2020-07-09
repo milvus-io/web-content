@@ -66,7 +66,7 @@ Vectors are quantized to 8-bit floats. This may cause accuracy loss.
 
 ### `IVF_SQ8H`
 
-Optimized version of `IVF_SQ8` that requires both CPU and GPU to work. Unlike `IVF_SQ8`, `IVF_SQ8H` uses a GPU-based coarse quantizer, which greatly reduces the time to quantize.
+Optimized version of `IVF_SQ8` that requires both CPU and GPU to work. Unlike `IVF_SQ8`, `IVF_SQ8H` uses a GPU-based coarse quantizer, which greatly reduces time to quantize.
 
 ### `IVF_PQ`
 
