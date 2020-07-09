@@ -87,6 +87,7 @@ The `docker run` options used in the above command are defined as follows:
 - `-p`: Publish a container’s port(s) to the host.
 - `-v`: Mount a directory into the container.
 
+
 Confirm Milvus running status by the following command:
 
 ```shell

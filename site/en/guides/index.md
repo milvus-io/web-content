@@ -44,7 +44,9 @@ sidebar_label: Index Types
 
 </div>
 
+
 > Note: Index building parameters and search parameters vary with index type. Refer to [Learn Milvus Operations](milvus_operation.md) for more information.
+
 
 ## Milvus indexes
 

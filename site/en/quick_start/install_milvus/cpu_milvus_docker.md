@@ -88,6 +88,7 @@ The `docker run` options used in the above command are defined as follows:
 - `-p`: Publish a container’s port(s) to the host.
 - `-v`: Mount the directory into the container.
 
+
 Finally confirm Milvus running status by the following command:
 
 ```shell
@@ -158,7 +159,7 @@ milvusdb/milvus:0.10.0-cpu-d061620-5f3c00
 
   - Build a [monitoring and alerting system](../../monitor.md) to check real-time application performance.
   - Tune Milvus performance through [configuration](../../../reference/milvus_config.md).
-  
+
 - If you want to use GPU-accelerated Milvus for search in large datasets:
   
   - [Install GPU-enabled Milvus](gpu_milvus_docker.md)

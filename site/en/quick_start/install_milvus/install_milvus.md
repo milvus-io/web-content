@@ -39,6 +39,7 @@ If you cannot use your host to acquire Docker images and configuration files onl
 
   You can download configuration files and use appropriate methods to transfer the configuration files. Refer to installation steps for details.
 
+
 ## Build from source
 
 Refer to [Build Milvus from source](https://github.com/milvus-io/milvus/blob/master/INSTALL.md) to learn how to build Milvus from source.
@@ -56,3 +57,4 @@ Refer to [Build Milvus from source](https://github.com/milvus-io/milvus/blob/mas
 
   - [Configure Milvus for Production](../../../reference/performance_tuning.md)
   - Build a [monitoring and alerting system](../../monitor.md) to check real-time application performance.
+

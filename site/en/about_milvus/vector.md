@@ -14,7 +14,9 @@ A feature vector is a vector that contains information describing the characteri
 
 ## Why feature vector
 
+
 Advances in modern computer and machine learning technologies have led to massive amounts of multimedia data in diverse application fields such as security, medicine, education, and online information services. A multimedia object cannot be simply described by alphanumeric data because a multimedia object has multiple dimensions of properties. For example, it is impossible to describe an image of a human face with a few numeric parameters or text strings. 
+
 
 Instead, feature vectors describe an object in a multi-dimensional, easily analyzable way, and are suitable to represent numeric or symbolic characteristics of multimedia content. For example, a feature vector of hundreds of dimensions is used to precisely describe a face.
 
@@ -22,7 +24,9 @@ Feature vectors are important for many different fields of machine learning and 
 
 ## Use cases
 
+
 Feature vectors, with their effectiveness and practicality in numerically representing objects, are used widely in different fields of machine learning. 
+
 
 - Image processing
 
