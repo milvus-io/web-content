@@ -9,17 +9,17 @@ sidebar_label: Preface
 
 ## 概述
 
-本文档向您介绍如何对Milvus进行安装、设置与使用。
+本文档向你介绍如何安装、设置与使用 Milvus。
 
-如果您需要获取任何帮助，欢迎在 GitHub 上 [创建 issue](https://github.com/milvus-io/milvus/issues/new/choose ) 或 [加入我们的 Slack 社区](https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk) 参与讨论。
+如果你需要获取任何帮助，欢迎在 GitHub 上 [创建 issue](https://github.com/milvus-io/milvus/issues/new/choose ) 或 [加入我们的 Slack 社区](https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk) 参与讨论。
 
 若要了解 Milvus 的产品优势，请参考 [与其他向量检索工具对比](../aboutmilvus/vector_db.md)。
 
 ## 声明
 
-本软件及相关文档根据许可协议提供，该协议包含对使用和披露的限制，并受知识产权法保护。 除非您的许可协议明确允许或法律允许，否则您不得以任何形式使用、复制、翻译、传播、修改、许可、分派、再授权、发布或再版任何部分。除非法律要求互操作性，否则禁止对该软件进行反向编译、反向工程、破解产品的任何部分或试图发现有关产品的任何源代码、基本理念或运算方法。
+本软件及相关文档根据许可协议提供，该协议包含对使用和披露的限制，并受知识产权法保护。 除非你的许可协议明确允许或法律允许，否则你不得以任何形式使用、复制、翻译、传播、修改、许可、分派、再授权、发布或再版任何部分。除非法律要求互操作性，否则禁止对该软件进行反向编译、反向工程、破解产品的任何部分或试图发现有关产品的任何源代码、基本理念或运算方法。
 
-此处包含的信息如有更改，恕不另行通知，并且不保证没有错误。如果您发现任何错误，请以书面形式告知我们。
+此处包含的信息如有更改，恕不另行通知，并且不保证没有错误。如果你发现任何错误，请以书面形式告知我们。
 
 本文档内容仅作为指导使用，文档中的所有内容不构成任何明示或暗示的担保。
 
@@ -31,5 +31,5 @@ sidebar_label: Preface
 | 代码体    | 代码体指代文件名和路径，参数名称和参数值，功能名称等。|
 | 代码块    | 代码块指代文章里出现的代码或命令。 |
 | 粗体      | 粗体字指代标题，用户交互界面文字，以及需要特别强调的内容文字。    |
-| 注意      | 注意指代一条有用的补充说明，帮助您更高效地工作。         |
-| 警告      | 警告通常指出一个您需要特别注意的问题。它指出可能导致失败或问题的可能操作。|
+| 注意      | 注意指代一条有用的补充说明，帮助你更高效地工作。         |
+| 警告      | 警告通常指出一个你需要特别注意的问题。它指出可能导致失败或问题的可能操作。|

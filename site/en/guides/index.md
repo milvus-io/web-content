@@ -8,7 +8,7 @@ sidebar_label: Index Types
 
 ## Index Overview
 
-> Note: How an index is built (whether with CPU or GPU) does not affect its support of CPU search or GPU search.
+> Note: For indexes supporting both CPU search and GPU search, you can create or search them using different devices, either CPU or GPU. For example, you can create an index using CPU and conduct a vector search using GPU. 
 
 ### Index types in CPU-only Milvus
 
@@ -23,7 +23,8 @@ sidebar_label: Index Types
 | `IVF_PQ`   | ✔️                      | ✔️              | ✔️                   | ❌                    |
 | `RNSG`     | ✔️                      | ✔️              | ✔️                   | ❌                    |
 | `HNSW`     | ✔️                      | ✔️              | ✔️                   | ❌                    |
-| `ANNOY`     | ✔️                      | ✔️              | ✔️                   | ❌                    |
+| `ANNOY`    | ✔️                      | ✔️              | ✔️                   | ❌                    |
+
 </div>
 
 ### Index types in Milvus with GPU support
@@ -39,10 +40,11 @@ sidebar_label: Index Types
 | `IVF_PQ`   | ✔️                      | ✔️              | ✔️ (GPU index building is supported only for Euclidean distance) | ✔️ (GPU search is supported only for Euclidean distance) | ✔️                   | ❌                    |
 | `RNSG`     | ✔️                      | ✔️              | ❌                                                               | ❌                                                       | ✔️                   | ❌                    |
 | `HNSW`     | ✔️                      | ✔️              | ❌                                                               | ❌                                                       | ✔️                   | ❌                    |
-| `ANNOY`     | ✔️                      | ✔️              | ❌                                                               | ❌                                                       | ✔️               | ❌                    |
+| `ANNOY`    | ✔️                      | ✔️              | ❌                                                               | ❌                                                       | ✔️                   | ❌                    |
+
 </div>
 
-> Note: For different index types, the index building parameters and search parameters also differ. Refer to [learn Milvus Operations](milvus_operation.md) for more information.
+> Note: Index building parameters and search parameters vary with index type. Refer to [learn Milvus Operations](milvus_operation.md) for more information.
 
 ## Milvus Indexes
 
@@ -60,11 +62,11 @@ Vectors are partitioned into buckets without any compression. This partition bas
 
 Adopts a scalar quantizer to significantly reduce the size of a vector (to about 1/4 of the original size). `IVF_SQ8` has a much faster query speed than `FLAT`, and requires less disk storage and CPU/GPU memory than `IVFFLAT`.
 
-Vectors are quantized to 8-bit floats, which may cause accuracy loss.
+Vectors are quantized to 8-bit floats. This may cause accuracy loss.
 
 ### `IVF_SQ8H`
 
-Optimized version of `IVF_SQ8` that requires both CPU and GPU to work. Unlike `IVF_SQ8`, `IVF_SQ8H` uses a GPU-based coarse quantizer, which greatly reduces quantization time.
+Optimized version of `IVF_SQ8` that requires both CPU and GPU to work. Unlike `IVF_SQ8`, `IVF_SQ8H` uses a GPU-based coarse quantizer, which greatly reduces time to quantize.
 
 ### `IVF_PQ`
 
