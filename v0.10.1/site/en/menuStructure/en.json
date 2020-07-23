@@ -18,18 +18,24 @@
       "order": 0
     },
     {
-      "id": "features.md",
-      "title": "Key Features",
+      "id": "architecture.md",
+      "title": "Architecture",
       "label1": "about_milvus",
       "label2": "",
       "label3": "",
       "order": 1
     },
-
-    
     {
-      "id": "architecture.md",
-      "title": "Architecture",
+      "id": "features.md",
+      "title": "Key Features",
+      "label1": "about_milvus",
+      "label2": "",
+      "label3": "",
+      "order": 2
+    },
+    {
+      "id": "milvus_versions.md",
+      "title": "Milvus Versions",
       "label1": "about_milvus",
       "label2": "",
       "label3": "",
