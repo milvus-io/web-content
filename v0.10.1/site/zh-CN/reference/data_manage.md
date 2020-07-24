@@ -2,9 +2,7 @@
 id: data_manage.md
 ---
 
-# 数据管理
-
-## 使用 MySQL 作为元数据管理服务
+# 使用 MySQL 管理元数据
 
 Milvus 默认使用 SQLite 作为元数据后台管理服务，SQLite 内嵌于 Milvus 进程中，无需启动额外服务。但是在生产环境中，基于可靠性的考虑，我们强烈建议你使用 MySQL 作为元数据管理服务。
 
