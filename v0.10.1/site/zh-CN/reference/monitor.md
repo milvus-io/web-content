@@ -78,7 +78,7 @@ Milvus 会生成详细的关于系统运行状态的时序 metrics。该页面�
     ./pushgateway
     ```
 
-    <div class="alert note">
+    <div class="alert warning">
     必须在启动 Milvus Server 之前启动 Pushgateway 进程。
     </div>
     

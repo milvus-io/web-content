@@ -80,8 +80,8 @@ Milvus generates detailed time series metrics. This page shows you how to pull t
     ./pushgateway
     ```
 
-    <div class="alert note">
-    You must start Pushgateway before starting the Milvus Server.
+    <div class="alert warning">
+    You <i>must</i> start Pushgateway before starting the Milvus Server.
     </div>
     
 2. Start the Prometheus monitor in **server_config.yaml** and set the address and port number of Pushgateway:
