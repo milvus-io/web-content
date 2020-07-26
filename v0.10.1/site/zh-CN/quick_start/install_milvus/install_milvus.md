@@ -50,5 +50,4 @@ Milvus 中的向量搜索包含但不限于这两个独立的部分：创建索�
 
 - 如果你已准备好在生产环境中部署 Milvus：
 
-  - [配置 Milvus 以用于生产环境](performance_tuning.md)
   - 创建 [监控与报警系统](monitor.md) 实时监控系统性能

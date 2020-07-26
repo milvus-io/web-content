@@ -60,7 +60,7 @@ Milvus generates detailed time series metrics. This page shows you how to pull t
 
 ### Install Prometheus
 
-1. Download the [Prometheus tarball](https://prometheus.io/download/) for your OS.
+1. Download the [Prometheus tarball](https://prometheus.io/download/) for your operating system.
 
 2. Go to the Prometheus file directory, and make sure Prometheus is installed successfully:
 
@@ -182,7 +182,7 @@ metric:
 2. Use your browser to open `http://<hostname of machine running grafana>:3000` and log into the Grafana UI.
 
 <div class="alert note">
-Grafana's default username and password are both "admin". You can create a Grafana account of your own.
+Grafana's default username and password are both <code>admin</code>. You can create a Grafana account of your own.
 </div>
 
 3. [Add Prometheus as a data source](https://grafana.com/docs/grafana/latest/features/datasources/prometheus/).
@@ -193,7 +193,7 @@ Grafana's default username and password are both "admin". You can create a Grafa
    | :------ | :----------------------------------------------------- |
    | Name    | Prometheus                                             |
    | Default | `True`                                                   |
-   | URL     | `http://<hostname of machine running prometheus>:9090` |
+   | URL     | *http://<hostname of machine running prometheus>:9090* |
    | Access  | Browser                                                |
 
 5. Download the starter [Grafana dashboard](https://github.com/milvus-io/docs/blob/v0.10.1/assets/monitoring/dashboard.json) for Milvus:
@@ -206,7 +206,7 @@ Grafana's default username and password are both "admin". You can create a Grafa
 
 ### Send notifications with Alertmanager
 
-1. Download the [latest Alertmanager tarball](https://prometheus.io/download/#alertmanager) for your OS.
+1. Download the [latest Alertmanager tarball](https://prometheus.io/download/#alertmanager) for your operating system.
 
 2. Ensure that Alertmanager is properly installed:
 

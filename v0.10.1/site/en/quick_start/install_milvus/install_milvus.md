@@ -49,5 +49,4 @@ Refer to [Build Milvus from source](https://github.com/milvus-io/milvus/blob/mas
   
 - If you're ready to run Milvus in production:
 
-  - [Configure Milvus for Production](performance_tuning.md)
   - Build a [monitoring and alerting system](monitor.md) to check real-time application performance

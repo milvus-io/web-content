@@ -17,35 +17,13 @@ Milvus 使用的监控与报警方案如下：
     - Pushgateway：推送指标数据，确保生命周期短且难以被及时提取的监控指标能够被 Prometheus 获取。
     - Alertmanager：实现报警机制。
 
-- 使用 Grafana 作为可视化组件进行数据展示。
+- 使用开源的时序数据分析及可视化平台 Grafana 展示各项性能指标。
 
-## Prometheus 监控系统
-
-Prometheus 是一个拥有多维度数据模型和灵活查询语句的监控报警系统。Milvus 使用 Prometheus 监控和存储性能指标存储。
-
-### 工作流程
+## 工作流程
 
 Milvus 会收集监控数据并将其推送到 Pushgateway。同时，Prometheus 服务器会定期从 Pushgateway 中拉取数据并将其保存到它的时序数据库。具体工作流程如下：
 
 ![proxy](https://milvus.io/static/3d68d75d595d1af1c1f3acd780cb7044/8c557/monitoring.png)
 
-### 需要报警的事件
 
-积极的监控帮助及早发现问题，但创建报警规则以便在出现突发事件时触发用户通知也非常有必要。
-
-以下主要介绍需要创建报警规则的事件。
-
-**服务器宕机**
-
-- 报警规则：当 Milvus 服务器宕机时发送报警信息。
-- 如何判断：当 Milvus 服务器宕机时，监控仪表盘上各个指标会显示 **No Data**。
-
-**CPU/GPU 温度过高**
-
-- 报警规则：当 CPU/GPU 温度超过 80 摄氏度时发送报警信息。
-- 如何判断：查看监控仪表盘上的 **CPU Temperature** 和  **GPU Temperature** 两个指标。
-
-## Grafana 数据可视化平台
-
-Grafana 是一个开源的时序数据分析及可视化平台。Milvus 使用 Grafana 来展示各项性能指标。
 

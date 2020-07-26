@@ -142,7 +142,7 @@ This section determines whether to enable GPU support/usage in Milvus. GPU suppo
 </div>
 
 <div class="alert note">
-In Milvus, index building and search computation are separate processes, which can be executed on CPU, GPU, or both. You can assign index building and search computation to multiple GPUs by adding GPUs under <code>search_devices</code> or <code>build_index_devices</code>. Please refer to the following YAML sample code:
+In Milvus, index building and search computation are separate processes, which can be executed on CPU, GPU, or both. You can assign index building and search computation to multiple GPUs by adding GPUs under <code>search_devices</code> or <code>build_index_devices</code>. See the following YAML sample code:
 </div>
 
 ```yaml

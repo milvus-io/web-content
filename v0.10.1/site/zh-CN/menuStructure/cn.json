@@ -48,7 +48,7 @@
       "label1": "",
       "label2": "",
       "label3": "",
-      "order": 2,
+      "order": 1,
       "isMenu": true
     },
     {
@@ -105,7 +105,7 @@
       "label1": "",
       "label2": "",
       "label3": "",
-      "order": 4,
+      "order": 2,
       "isMenu": true
     },
     {
@@ -208,7 +208,7 @@
     },
     {
       "id": "search_vector_python.md",
-      "title": "搜索向量",
+      "title": "查询向量",
       "label1": "quick_start",
       "label2": "get_started",
       "label3": "",
@@ -244,7 +244,7 @@
       "label1": "",
       "label2": "",
       "label3": "",
-      "order": 5,
+      "order": 3,
       "isMenu": true
     },
     {
@@ -253,7 +253,7 @@
       "label1": "reference",
       "label2": "",
       "label3": "",
-      "order": 1
+      "order": 0
     },
     {
       "id": "data_manage.md",
@@ -261,7 +261,7 @@
       "label1": "reference",
       "label2": "",
       "label3": "",
-      "order": 2
+      "order": 1
     },
 
     {
@@ -270,7 +270,7 @@
       "label1": "reference",
       "label2": "",
       "label3": "",
-      "order": 4
+      "order": 2
     },
     {
       "id": "metric.md",
@@ -278,7 +278,7 @@
       "label1": "reference",
       "label2": "",
       "label3": "",
-      "order": 5
+      "order": 3
     },
     {
       "id": "monitor",
@@ -286,7 +286,7 @@
       "label1": "reference",
       "label2": "",
       "label3": "",
-      "order": 6,
+      "order": 4,
       "isMenu": true
     },
     {
@@ -320,7 +320,7 @@
       "label1": "reference",
       "label2": "",
       "label3": "",
-      "order": 7
+      "order": 5
     },
     {
       "id": "mishards.md",
@@ -328,7 +328,7 @@
       "label1": "reference",
       "label2": "",
       "label3": "",
-      "order": 8
+      "order": 6
     },
     {
       "id": "storage_operation.md",
@@ -336,14 +336,14 @@
       "label1": "reference",
       "label2": "",
       "label3": "",
-      "order": 9
+      "order": 7
     },
     {
       "id": "faq",
       "title": "常见问题",
       "label1": "",
       "label2": "",
-      "order": 7,
+      "order": 4,
       "isMenu": true
     },
     {
@@ -383,7 +383,7 @@
       "label1": "",
       "label2": "",
       "label3": "",
-      "order": 8,
+      "order": 5,
       "isMenu": true
     },
     {
@@ -437,7 +437,7 @@
       "label1": "",
       "label2": "",
       "label3": "",
-      "order": 9,
+      "order": 6,
       "isMenu": true
     },
     {
@@ -472,7 +472,7 @@
       "label1": "",
       "label2": "",
       "label3": "",
-      "order": 10
+      "order": 7
     }
   ]
 }

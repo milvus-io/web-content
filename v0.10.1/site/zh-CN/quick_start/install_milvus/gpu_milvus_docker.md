@@ -73,7 +73,7 @@ $ wget http://raw.githubusercontent.com/milvus-io/milvus/v0.10.1/core/conf/demo/
 
 ## 启动 Milvus Docker 容器
 
-启动 Docker 容器之前，你必须将 `server_config.yaml` 中 `gpu` 部分的 `enable` 设为 `true`。
+启动 Docker 容器之前，你必须将 **server_config.yaml** 中 `gpu` 部分的 `enable` 设为 `true`。
 
 启动 Docker 容器，将本地的文件路径映射到容器中：
 

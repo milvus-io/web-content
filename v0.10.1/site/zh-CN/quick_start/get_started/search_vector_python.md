@@ -2,11 +2,11 @@
 id: search_vector_python.md
 ---
 
-# 搜索向量
+# 查询向量
 
-Milvus 支持在 collection 或分区中搜索向量。
+Milvus 支持在 collection 或分区中查询向量。
 
-## 在 collection 中搜索向量
+## 在 collection 中查询向量
 
 1. 创建搜索参数。搜索参数是一个 JSON 字符串，在 Python SDK 中以字典来表示。
 
@@ -38,7 +38,7 @@ Milvus 支持在 collection 或分区中搜索向量。
    >>> milvus.search(collection_name='test01', query_records=q_records, top_k=2, params=search_param)
    ```
 
-## 在分区中搜索向量
+## 在分区中查询向量
 
 ```python
 # create 5 vectors of 256-dimension

@@ -17,7 +17,7 @@ docker run -i -p 3000:3000 grafana/grafana
 2. 在浏览器中打开 *http://<提供 Grafana 服务的主机 IP>:3000* 网址，并登录 Grafana 用户交互页面。
 
   <div class="alert note">
-  Grafana 的默认用户名和密码都是 `admin`。你也可以在此创建新的 Grafana 账号。
+  Grafana 的默认用户名和密码都是 <code>admin</code>。你也可以在此创建新的 Grafana 账号。
   </div>
 
 3. [将 Prometheus 添加为数据源](https://grafana.com/docs/grafana/latest/features/datasources/add-a-data-source/)。
