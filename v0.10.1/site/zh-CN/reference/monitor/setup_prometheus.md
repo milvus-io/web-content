@@ -10,7 +10,7 @@ Milvus 会生成详细的关于系统运行状态的时序 metrics。该页面�
 ## 前提条件
 
 
-- 已经通过阅读[监控与报警方案概述](monitor.md)了解了 Milvus 支持的监控与报警方案。
+- 已通过阅读[监控与报警方案概述](monitor.md)了解了 Milvus 支持的监控与报警方案。
 
 ## 安装 Prometheus
 
@@ -115,6 +115,24 @@ Milvus 会生成详细的关于系统运行状态的时序 metrics。该页面�
 
 ## 配置 Alertmanager
 
+### 需要报警的事件
+
+积极的监控帮助及早发现问题，但创建报警规则以便在出现突发事件时触发用户通知也非常有必要。
+
+以下主要介绍需要创建报警规则的事件。
+
+**服务器宕机**
+
+- 报警规则：当 Milvus 服务器宕机时发送报警信息。
+- 如何判断：当 Milvus 服务器宕机时，监控仪表盘上各个指标会显示 **No Data**。
+
+**CPU/GPU 温度过高**
+
+- 报警规则：当 CPU/GPU 温度超过 80 摄氏度时发送报警信息。
+- 如何判断：查看监控仪表盘上的 **CPU Temperature** 和  **GPU Temperature** 两个指标。
+
+### 配置步骤
+
 1. 下载 [Alertmanager 二进制文件的压缩包](https://prometheus.io/download/#alertmanager)。
 
 2. 确保 Alertmanager 已经成功安装：
@@ -135,5 +153,5 @@ Milvus 会生成详细的关于系统运行状态的时序 metrics。该页面�
     ./alertmanager --config.file=alertmanager.yml
     ```
 
-5. 通过浏览器登录 `http://<提供 Alertmanager 服务的主机>:9093`，进入 Alertmanager 用户交互页面。你可以在此定义 [报警的条件](https://prometheus.io/docs/alerting/alertmanager/#silences)。
+5. 通过浏览器登录 *http://<提供 Alertmanager 服务的主机>:9093*，进入 Alertmanager 用户交互页面。你可以在此定义 [报警的条件](https://prometheus.io/docs/alerting/alertmanager/#silences)。
 

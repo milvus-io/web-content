@@ -14,7 +14,7 @@ id: setup_grafana.md
 docker run -i -p 3000:3000 grafana/grafana
 ```
 
-2. 在浏览器中打开 **http://<提供 Grafana 服务的主机 IP>:3000** 网址，并登录 Grafana 用户交互页面。
+2. 在浏览器中打开 *http://<提供 Grafana 服务的主机 IP>:3000* 网址，并登录 Grafana 用户交互页面。
 
   <div class="alert note">
   Grafana 的默认用户名和密码都是 `admin`。你也可以在此创建新的 Grafana 账号。
@@ -28,25 +28,20 @@ docker run -i -p 3000:3000 grafana/grafana
    | :------ | :------------------------------------------ |
    | Name    | Prometheus                                  |
    | Default | `True`                                        |
-   | URL     | http://<提供 Prometheus 服务的主机 IP>:9090 |
+   | URL     | *http://<提供 Prometheus 服务的主机 IP>:9090* |
    | Access  | Browser                                     |
 
 5. 下载 [Grafana 配置文件](https://github.com/milvus-io/docs/blob/v0.10.1/assets/monitoring/dashboard.json)。
 
 6. [将配置文件导入 Grafana](http://docs.grafana.org/reference/export_import/#importing-a-dashboard)。
 
-   ![prometheus.png](../../../assets/prometheus.png)
+   ![prometheus.png](../../../../assets/prometheus.png)
 
 
-# 监控指标
-
-## 指标概述
+## 监控指标概述
 
 你可以通过 Milvus 提供的 [Grafana 配置文件](https://github.com/milvus-io/docs/blob/v0.10.1/assets/monitoring/dashboard.json) 配置展示在 Grafana Dashboard 以下各种指标：
 
-- Milvus 性能指标
-- 系统运行指标
-- 硬件存储指标
 
 | 指标类型 | 说明                                     |
 | -------- | ---------------------------------------- |
@@ -54,7 +49,7 @@ docker run -i -p 3000:3000 grafana/grafana
 | 系统运行指标 | CPU/GPU 使用状况，网络、磁盘读取等指标。 |
 | 硬件存储指标 | 数据大小，数据文件及存储情况等指标。     |
 
-## Milvus 性能指标
+### Milvus 性能指标
 
 | 指标                      | 说明                                                         |
 | ------------------------- | ------------------------------------------------------------ |
@@ -64,7 +59,7 @@ docker run -i -p 3000:3000 grafana/grafana
 | **Query Service Level**   | 查询服务级别 = 一定时间阈值内的查询数量/总查询数量 <br/>一般建议设置 3 个时间阈值来跟踪查询服务基本。 |
 | **Uptime**                | Milvus 服务器正常运行的时长（分钟）。                        |
 
-## 系统运行指标
+### 系统运行指标
 
 | 指标                  | 说明                                                   |
 | --------------------- | ------------------------------------------------------ |
@@ -77,7 +72,7 @@ docker run -i -p 3000:3000 grafana/grafana
 | **Disk Read Speed**   | 磁盘读取速度（GB/s）。                                 |
 | **Disk Write Speed**  | 磁盘写入速度（GB/s）。                                 |
 
-## 硬件存储指标
+### 硬件存储指标
 
 | 指标           | 说明                        |
 | -------------- | --------------------------- |
