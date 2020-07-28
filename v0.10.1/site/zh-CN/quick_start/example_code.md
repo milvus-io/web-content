@@ -1,7 +1,7 @@
 ---
 id: example_code.md
 ---
-# Milvus Hello World
+# Hello Milvus
 
 在 Milvus 服务端成功启动之后，你可以运行一个 Python 示例程序。这个示例程序将创建一个向量数据表，向其中插入 10 条向量，然后运行向量相似度查询。
 

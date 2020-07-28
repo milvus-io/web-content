@@ -2,7 +2,7 @@
 id: example_code.md
 ---
 
-# Milvus Hello World
+# Hello Milvus 
 
 After the Milvus server is successfully started, you can use this example program to create a table, insert 10 vectors, and then run a vector similarity search.
 
