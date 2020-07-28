@@ -29,6 +29,7 @@ id: gpu_milvus_docker.md
 | ------- | -------------------------------------- |
 | Docker  | 19.03 or higher                             |
 | NVIDIA driver  | 418 or higher                              |
+| NVIDIA Container Toolkit  | [NVIDIA-Container-Toolkit](https://github.com/NVIDIA/nvidia-docker)                              |
 
 ## Confirm Docker status
 

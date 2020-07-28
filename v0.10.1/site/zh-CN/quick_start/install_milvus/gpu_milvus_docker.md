@@ -1,6 +1,11 @@
 ---
 id: gpu_milvus_docker.md
+label: GPU 版 Milvus
+order: 1
 ---
+
+{{tab_milvus_version}}
+
 
 # 安装 GPU 版本的 Milvus
 
@@ -29,6 +34,7 @@ id: gpu_milvus_docker.md
 | -------------- | -------------------------------------- |
 | Docker         | 19.03 或以上                            |
 | NVIDIA driver  | 418 或以上                              |
+| NVIDIA Container Toolkit  | [NVIDIA-Container-Toolkit](https://github.com/NVIDIA/nvidia-docker)                              |
 
 ## 确认 Docker 状态
 
@@ -52,7 +58,7 @@ $ sudo docker info
 ```shell
 $ sudo docker pull milvusdb/milvus:0.10.1-gpu-d072020-bd02b1
 ```
-
+{{fragment/tar_workaround.md}}
 <div class="alert note">
 如果拉取镜像的速度过慢或一直失败，请参考 <a href="operational_faq.md">操作常见问题</a> 中提供的解决办法。
 </div>

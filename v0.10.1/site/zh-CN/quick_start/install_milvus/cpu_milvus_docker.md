@@ -1,6 +1,10 @@
 ---
 id: cpu_milvus_docker.md
+label: CPU 版 Milvus
+order: 0
 ---
+
+{{tab_milvus_version}}
 
 # 安装 CPU 版本的 Milvus
 
@@ -54,7 +58,7 @@ $ sudo docker info
 ```shell
 $ sudo docker pull milvusdb/milvus:0.10.1-cpu-d072020-bd02b1
 ```
-
+{{fragment/tar_workaround.md}}
 <div class="alert note">
 如果拉取镜像的速度过慢或一直失败，请参考 <a href="operational_faq.md">操作常见问题</a> 中提供的解决办法。
 </div>
