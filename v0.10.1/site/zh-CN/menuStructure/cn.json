@@ -133,7 +133,14 @@
       "label3": "",
       "order": 1
     },
-
+    {
+      "id": "gpu_milvus_docker.md",
+      "title": "安装、启动 Milvus 服务",
+      "label1": "quick_start",
+      "label2": "install_milvus",
+      "label3": "",
+      "order": 2
+    },
     {
       "id": "example_code.md",
       "title": "Hello Milvus",
