@@ -1,11 +1,11 @@
 ---
-id: gpu_milvus_docker.md
+id: milvus_docker-gpu.md
 label: GPU 版 Milvus
 order: 1
 group: version
 ---
 
-<div class="tab-wrapper"><a href="cpu_milvus_docker.md" >CPU 版 Milvus</a><a href="gpu_milvus_docker.md" class='active'>GPU 版 Milvus</a></div>
+<div class="tab-wrapper"><a href="milvus_docker-cpu.md" >CPU 版 Milvus</a><a href="milvus_docker-gpu.md" class='active'>GPU 版 Milvus</a></div>
 
 
 # 安装 GPU 版的 Milvus
