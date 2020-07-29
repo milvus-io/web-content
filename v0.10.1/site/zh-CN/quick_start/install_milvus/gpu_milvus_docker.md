@@ -5,10 +5,10 @@ order: 1
 group: version
 ---
 
-<div class="tab-wrapper"><a href="/doc_to/zh-CN/quick_start/install_milvus/cpu_milvus_docker.md" >CPU 版 Milvus</a><a href="/doc_to/zh-CN/quick_start/install_milvus/gpu_milvus_docker.md" class='active'>GPU 版 Milvus</a></div>
+<div class="tab-wrapper"><a href="cpu_milvus_docker.md" >CPU 版 Milvus</a><a href="gpu_milvus_docker.md" class='active'>GPU 版 Milvus</a></div>
 
 
-# 安装 GPU 版本的 Milvus
+# 安装 GPU 版的 Milvus
 
 ## 安装前提
 
