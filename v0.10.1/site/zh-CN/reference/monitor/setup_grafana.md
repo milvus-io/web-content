@@ -40,7 +40,7 @@ docker run -i -p 3000:3000 grafana/grafana
 
 ## 监控指标概述
 
-你可以通过 Milvus 提供的 [Grafana 配置文件](https://github.com/milvus-io/docs/blob/v0.10.1/assets/monitoring/dashboard.json) 配置展示在 Grafana Dashboard 以下各种指标：
+你可以通过 Milvus 提供的 [Grafana 配置文件](https://github.com/milvus-io/docs/blob/v0.10.1/assets/monitoring/dashboard.json) 配置展示在 Grafana Dashboard 的以下各种指标：
 
 
 | 指标类型 | 说明                                     |
@@ -56,7 +56,7 @@ docker run -i -p 3000:3000 grafana/grafana
 | **Insert per Second**     | 每秒钟插入的向量数量（实时显示）。                           |
 | **Queries per Minute**    | 每分钟运行的查询数量（实时显示）。                           |
 | **Query Time per Vector** | 单条向量查询时间 = 查询使用时间 / 向量数量                   |
-| **Query Service Level**   | 查询服务级别 = 一定时间阈值内的查询数量/总查询数量 <br/>一般建议设置 3 个时间阈值来跟踪查询服务基本。 |
+| **Query Service Level**   | 查询服务级别 = 一定时间阈值内的查询数量/总查询数量 <br/>一般建议设置 3 个时间阈值来跟踪查询服务级别。 |
 | **Uptime**                | Milvus 服务器正常运行的时长（分钟）。                        |
 
 ### 系统运行指标

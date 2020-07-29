@@ -249,13 +249,39 @@
       "order": 1
     },
     {
-      "id": "monitor.md",
+      "id": "monitor",
       "title": "Monitoring and Alerting",
       "label1": "reference",
       "label2": "",
       "label3": "",
+      "order": 2,
+      "isMenu": true
+    },
+    {
+      "id": "monitor.md",
+      "title": "Overview",
+      "label1": "reference",
+      "label2": "monitor",
+      "label3": "",
+      "order": 0
+    },
+    {
+      "id": "setup_prometheus.md",
+      "title": "Configure and Start Prometheus",
+      "label1": "reference",
+      "label2": "monitor",
+      "label3": "",
+      "order": 1
+    },
+    {
+      "id": "setup_grafana.md",
+      "title": "Visualize Metrics in Grafana",
+      "label1": "reference",
+      "label2": "monitor",
+      "label3": "",
       "order": 2
     },
+
     {
       "id": "vector_db.md",
       "title": "Other Feature Vector Search Tools",

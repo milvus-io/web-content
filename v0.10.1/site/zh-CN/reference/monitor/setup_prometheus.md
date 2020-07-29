@@ -48,7 +48,7 @@ Milvus 会生成详细的关于系统运行状态的时序 metrics。该页面�
     ```
 
     <div class="alert note">
-    如果是在 Kubernetes 集群中，你需要为每个需要监控的 Milvus 节点的配置 <b>server_config.yaml</b>。
+    如果是在 Kubernetes 集群中，你需要为每个需要监控的 Milvus 节点配置 <b>server_config.yaml</b>。
     </div>
 
 3. 下载 Milvus [Prometheus 配置文件](https://github.com/milvus-io/docs/blob/v0.10.1/assets/monitoring/prometheus.yml)：
