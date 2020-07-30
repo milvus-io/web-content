@@ -60,7 +60,9 @@ $ sudo docker info
 $ sudo docker pull milvusdb/milvus:0.10.1-gpu-d072020-bd02b1
 ```
 <div class="alert note">
-如果你的主机由于网络限制无法在线获得 Docker 镜像和配置文件，请从其他主机在线获取并使用以下方法离线传输。在这里假设你的镜像标签是 <code>milvusdb/milvus</code>。
+如果你的主机由于网络限制无法在线获得 Docker 镜像和配置文件，请从其他主机在线获取镜像，保存为 TAR 文件传输回本地，传输完成后重新加载为 Docker 镜像：
+<details>
+<summary><font color="#3ab7f8">离线传输相关代码示例</font></summary>
 <ol>
  <li>将 Docker 镜像保存为 TAR 文件再使用合适的方式传输。</br>
 
@@ -75,6 +77,7 @@ $ sudo docker pull milvusdb/milvus:0.10.1-gpu-d072020-bd02b1
     $ docker load < milvus_image.tar
 </code>
 </li></ol>
+</details>
 </div>
 <div class="alert note">
 如果拉取镜像的速度过慢或一直失败，请参考 <a href="operational_faq.md">操作常见问题</a> 中提供的解决办法。
