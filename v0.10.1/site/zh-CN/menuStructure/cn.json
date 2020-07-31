@@ -44,7 +44,7 @@
     
     {
       "id": "milvus_basics",
-      "title": "Milvus 术语",
+      "title": "基本概念",
       "label1": "",
       "label2": "",
       "label3": "",
@@ -60,24 +60,24 @@
       "order": 0
     },
     {
-      "id": "index_overview.md",
-      "title": "向量索引概述",
+      "id": "index.md",
+      "title": "向量索引",
       "label1": "milvus_basics",
       "label2": "",
       "label3": "",
       "order": 1
     },
     {
-      "id": "index.md",
-      "title": "索引类型",
+      "id": "storage_concept.md",
+      "title": "存储相关",
       "label1": "milvus_basics",
       "label2": "",
       "label3": "",
       "order": 2
     },
     {
-      "id": "storage_concept.md",
-      "title": "存储相关概念",
+      "id": "storage_operation.md",
+      "title": "存储操作",
       "label1": "milvus_basics",
       "label2": "",
       "label3": "",
@@ -322,14 +322,6 @@
       "label2": "",
       "label3": "",
       "order": 6
-    },
-    {
-      "id": "storage_operation.md",
-      "title": "存储操作",
-      "label1": "reference",
-      "label2": "",
-      "label3": "",
-      "order": 7
     },
     {
       "id": "faq",

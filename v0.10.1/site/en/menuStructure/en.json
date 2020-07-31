@@ -43,7 +43,7 @@
     },
     {
       "id": "milvus_basics",
-      "title": "MILVUS GLOSSARY",
+      "title": "Concepts & Terminology",
       "label1": "",
       "label2": "",
       "label3": "",
@@ -59,22 +59,13 @@
       "order": 0
     },
     {
-      "id": "index_overview.md",
-      "title": "Index Overview",
-      "label1": "milvus_basics",
-      "label2": "",
-      "label3": "",
-      "order": 1
-    },
-    {
       "id": "index.md",
       "title": "Index Types",
       "label1": "milvus_basics",
       "label2": "",
       "label3": "",
-      "order": 2
+      "order": 1
     },
-
 
     {
       "id": "terms.md",
