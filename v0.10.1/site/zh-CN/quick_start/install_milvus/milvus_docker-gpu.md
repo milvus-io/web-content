@@ -59,6 +59,7 @@ $ sudo docker info
 ```shell
 $ sudo docker pull milvusdb/milvus:0.10.1-gpu-d072020-bd02b1
 ```
+
 <div class="alert note">
 <ul>
 <li>如果你的主机由于网络限制无法在线获得 Docker 镜像和配置文件，请从其他主机在线获取镜像，保存为 TAR 文件传输回本地，传输完成后重新加载为 Docker 镜像：
@@ -99,7 +100,9 @@ $ wget http://raw.githubusercontent.com/milvus-io/milvus/v0.10.1/core/conf/demo/
 
 ## 启动 Milvus Docker 容器
 
-启动 Docker 容器之前，你必须将 **server_config.yaml** 中 `gpu` 部分的 `enable` 设为 `true`。
+<div class="alert note">
+启动 Docker 容器之前，你必须将 <b>server_config.yaml</b> 中 <code>gpu</code> 部分的 <code>enable</code> 设为 <code>true</code>。
+</div>
 
 启动 Docker 容器，将本地的文件路径映射到容器中：
 
@@ -116,11 +119,11 @@ milvusdb/milvus:0.10.1-gpu-d072020-bd02b1
 
 上述命令中用到的参数定义如下：
 
-- `-d`: 在后台运行 container。
-- `--name`: 为 container 指定一个名字。
+- `-d`: 在后台运行容器。
+- `--name`: 为容器指定一个名字。
 - `--gpus`: 指定可用的 GPU。如未填写任何值，则所有 GPU 都可用。
-- `-p`: 映射宿主机端口到 container。
-- `-v`: 将宿主机路径挂载至 container。
+- `-p`: 指定端口映射。
+- `-v`: 将宿主机路径挂载至容器。
 
 最后，确认 Milvus 运行状态：
 

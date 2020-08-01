@@ -58,7 +58,7 @@ Milvus 能够调度多个 GPU 进行向量搜索和索引建立。利用 GPU 强
 
 ## 向量索引
 
-Milvus 支持基于 Faiss、NMSLIB 和 Annoy 的树、图和量化等多种索引。关于向量索引的详情，请参阅 [向量索引](index_overview.md)。而对于索引的选择和索引参数的选择，请参阅 [性能调优](tuning.md)。
+Milvus 支持基于 Faiss、NMSLIB 和 Annoy 的树、图和量化等多种索引。关于向量索引的详情，请参阅 [向量索引](index.md)。而对于索引的选择和索引参数的选择，请参阅 [性能调优](tuning.md)。
 
 ## 监控与告警
 

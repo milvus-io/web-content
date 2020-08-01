@@ -102,21 +102,14 @@
       "order": 0
     },
     {
-      "id": "cpu_milvus_docker.md",
-      "title": "Install CPU-only Milvus",
+      "id": "milvus_docker-cpu.md",
+      "title": "Install and Start Milvus",
       "label1": "quick_start",
       "label2": "install_milvus",
       "label3": "",
       "order": 1
     },
-    {
-      "id": "gpu_milvus_docker.md",
-      "title": "Install GPU-enabled Milvus",
-      "label1": "quick_start",
-      "label2": "install_milvus",
-      "label3": "",
-      "order": 2
-    },
+    
     {
       "id": "example_code.md",
       "title": "Hello Milvus",

@@ -55,7 +55,7 @@ $ sudo docker info
 
 ## 拉取 Milvus 镜像
 
-拉取 CPU 版本 的 Milvus 镜像：
+拉取 CPU 版本的 Milvus 镜像：
 
 ```shell
 $ sudo docker pull milvusdb/milvus:0.10.1-cpu-d072020-bd02b1
@@ -115,7 +115,7 @@ milvusdb/milvus:0.10.1-cpu-d072020-bd02b1
 
 - `-d`: 在后台运行容器。
 - `--name`: 为容器指定一个名字。
-- `-p`: 映射宿主机端口到容器。
+- `-p`: 指定端口映射。
 - `-v`: 将宿主机路径挂载至容器。
 
 确认 Milvus 运行状态：
