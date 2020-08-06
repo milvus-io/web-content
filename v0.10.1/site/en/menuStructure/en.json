@@ -272,11 +272,19 @@
       "label1": "reference",
       "label2": "",
       "label3": "",
-      "order": 4
+      "order": 3
     },
     {
       "id": "metric.md",
       "title": "Choose a Distance Metric",
+      "label1": "reference",
+      "label2": "",
+      "label3": "",
+      "order": 4
+    },
+    {
+      "id": "tuning.md",
+      "title": "Performancing Tuning",
       "label1": "reference",
       "label2": "",
       "label3": "",
