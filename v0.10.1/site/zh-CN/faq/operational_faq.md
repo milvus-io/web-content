@@ -18,7 +18,6 @@ id: operational_faq.md
 - [如何确认 Milvus 是否支持我的 GPU？](#如何确认-Milvus-是否支持我的-GPU)
 - [Milvus 镜像里面启动 server 的脚本在哪？](#Milvus-镜像里面启动-server-的脚本在哪)
 - [除了配置文件外，怎样可以判断我确实在使用 GPU 做 search？](#除了配置文件外怎样可以判断我确实在使用-GPU-做-search)
-- [SQLite 和 MySQL 的地址在哪里换？](#SQLite-和-MySQL-的地址在哪里换)
 - [可以在 Windows 上安装 Milvus 吗？](#可以在-Windows-上安装-Milvus-吗)
 - [在 Windows 安装 pymilvus 报错，如何解决？](#在-Windows-安装-pymilvus-报错如何解决)
 - [内网环境，即离线方式，能否部署 Milvus 服务？](#内网环境即离线方式能否部署-Milvus-服务)
@@ -88,23 +87,19 @@ Milvus 支持 Nvidia 6.0 架构以后的显卡。关于 Pascal 及更新架构�
 
 #### 除了配置文件外，怎样可以判断我确实在使用 GPU 做 search？
 
-可以在查询的时候查看 GPU 资源是否在使用。也可以在日志中查看是否有用到 GPU。
+有三种方式：
 
 1. 使用 `nvidia-smi` 命令查看 GPU 使用情况。
 2. 用 Prometheus 配置，详见 [使用 Grafana 展示监控指标 > 系统运行指标](setup_grafana.md#系统运行指标)。
 3. 使用 Milvus 服务器的日志。
 
-#### SQLite 和 MySQL 的地址在哪里换？
-
-在配置文件 **server_config.yaml: db_config.backend_url**。
-
 #### 可以在 Windows 上安装 Milvus 吗？
 
-可以。Windows 上装了 Docker 就行，但只能运行 CPU 版本的 Milvus。
+理论上只要能够支持 Docker 的操作系统都可以运行 Milvus。
 
 #### 在 Windows 安装 pymilvus 报错，如何解决？
 
-可以尝试在 conda 环境下安装，在 conda 环境下运行安装 pymilvus 是没有问题的。
+可以尝试在 conda 环境下安装。
 
 #### 内网环境，即离线方式，能否部署 Milvus 服务？
 
@@ -118,7 +113,7 @@ Milvus 是以 Docker 镜像形式发行的，是可以离线部署的。在有�
 
 #### 部署 Milvus 时，使用 SQLite 还是 MySQL 比较好？
 
-在生产环境中，出于可靠性的考虑，使用 MySQL 比较好。
+生产环境下，推荐使用 MySQL 。
 
 #### 如何根据数据量计算需要多大的内存？
 
@@ -133,7 +128,7 @@ Milvus 是以 Docker 镜像形式发行的，是可以离线部署的。在有�
 
 目前暂不支持。
 
-#### Milvus 日志中为什么会出现这个警告 `WARN: increase temp memory to avoid cudaMalloc, or decrease query/add size (alloc 307200000 B, highwater 0 B` ？
+#### Milvus 日志中为什么会出现这个警告 `WARN: increase temp memory to avoid cudaMalloc, or decrease query/add size (alloc 307200000 B, highwater 0 B)` ？
 
 在 Milvus 中，如果单次申请的显存量大于它预先开辟的一段显存空间，就会报这个警告。不过没有影响，Milvus 中会扩大它使用的显存空间来满足这个显存的申请。这个警告的意思就是要使用更多显存空间了。
 

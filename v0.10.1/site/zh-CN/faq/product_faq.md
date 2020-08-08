@@ -56,7 +56,7 @@ id: product_faq.md
 
 #### Milvus 会收费吗？
 
-Milvus会一直走开源路线的，现有的版本都不会收费，我们的开源项目也一直会维护下去的。
+Milvus 会坚持开源路线，现有的版本都不会收费。
 
 项目开源，请遵循 [Apache 2.0 协议](http://www.apache.org/licenses/LICENSE-2.0) 使用。
 
@@ -95,7 +95,7 @@ SQLite / MySQL 只是存放原始向量数据的元数据。向量和索引直�
 
 #### Milvus 的 Python SDK 有连接池吗？
 
-Milvus 0.9 及更高版本对应的 Python SDK 有连接池。连接池的默认连接数量没有上限。
+Milvus v0.9.0 及更高版本对应的 Python SDK 有连接池。连接池的默认连接数量没有上限。
 
 #### Milvus 是否支持 “边插入边查询” ？
 
@@ -103,7 +103,7 @@ Milvus 0.9 及更高版本对应的 Python SDK 有连接池。连接池的默认
 
 #### Milvus 是否有可视化管理工具？
 
-从 Milvus 0.7 开始有 [Milvus Enterprise Manager](https://zilliz.com/products/em) 提供图形管理功能。
+从 Milvus v0.7.0 开始有 [Milvus Enterprise Manager](https://zilliz.com/products/em) 提供图形管理功能。
 
 #### Milvus 有没有数据导出的功能？
 

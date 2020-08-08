@@ -22,7 +22,7 @@ This parameter is used to enable or disable the [Write Ahead Log (WAL)](write_ah
 * When write ahead log is enabled, the write ahead log module writes data to the disk, and then turns to the insert operation.
 * When write ahead log is disabled, the data insertion speed is faster. The system directly writes the data to the mutable buffer in the memory and immediately turns to the insert operation.
 
-However, for [delete operations](storage_operation.md#Delete), the operation speed is faster when write ahead log is enabled. To ensure the reliability of the data, it is recommended that you enable write ahead log.
+However, for `delete` operations, the operation speed is faster when write ahead log is enabled. To ensure the reliability of the data, it is recommended that you enable write ahead log.
 
 - `storage.auto_flush_interval`
 
