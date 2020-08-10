@@ -2,14 +2,14 @@
 id: milvus_operation.md
 ---
 
-# Milvus Hello World
+# Hello Milvus 
 
 This page walks you through some basic Milvus operations using the [Python client](https://github.com/milvus-io/pymilvus). Refer to [Python API documentation](https://github.com/milvus-io/pymilvus) for detailed information.
 
 You can also use other clients, including [Java](https://github.com/milvus-io/milvus-sdk-java), [C++](https://github.com/milvus-io/milvus/tree/master/sdk), [Go](https://github.com/milvus-io/milvus-sdk-go), and [RESTful](https://github.com/milvus-io/milvus/tree/master/core/src/server/web_impl).
 
 <div class="alert note">
-It is recommended that you use the <a href="https://milvus.io/tools/sizing">sizing tool</a> to estimate required hardware resources for your data.
+We recommend that you use the <a href="https://milvus.io/tools/sizing">sizing tool</a> to estimate required hardware resources for your data.
 </div>
 
 ## Connect to the Milvus server

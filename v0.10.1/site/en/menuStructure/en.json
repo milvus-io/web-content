@@ -43,7 +43,7 @@
     },
     {
       "id": "milvus_basics",
-      "title": "Basic Concepts",
+      "title": "Concepts",
       "label1": "",
       "label2": "",
       "label3": "",
@@ -120,7 +120,7 @@
     },
     {
       "id": "get_started",
-      "title": "Basic Milvus Operations",
+      "title": "Basic Operations",
       "label1": "quick_start",
       "label2": "",
       "label3": "",
