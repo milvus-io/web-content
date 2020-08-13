@@ -8,7 +8,7 @@ This article decribes how to connect to a Milvus server from a Python client.
 
 <div class="alert note">
 <li>See <a href="https://github.com/milvus-io/pymilvus">Python API documentation</a> for details about APIs.</li>
-<li>It is recommended that you use <a href="https://milvus.io/tools/sizing">Milvus Sizing Tool</a> to estimate the hardware resources required for the data.</li>
+<li>We recommend using <a href="https://milvus.io/tools/sizing">Milvus Sizing Tool</a> to estimate the hardware resources required for the data.</li>
 </div>
 
 
