@@ -152,5 +152,5 @@ This section includes the most important events for which you must create alerti
    alertmanager --config.file=alertmanager.yml
    ```
 
-5. Use your browser to open http://\<hostname of machine running alertmanager\>:9093, and use the Alertmanager UI to define rules for [muting alerts](https://prometheus.io/docs/alerting/alertmanager/#silences).
+5. Use your browser to open http://&lt;hostname of machine running alertmanager&gt;:9093, and use the Alertmanager UI to define rules for [muting alerts](https://prometheus.io/docs/alerting/alertmanager/#silences).
 
