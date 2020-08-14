@@ -13,7 +13,7 @@ id: setup_grafana.md
    $ docker run -i -p 3000:3000 grafana/grafana
    ```
 
-2. Use your browser to open http://&lt;hostname of machine running grafana&gt;:3000 and log into the Grafana UI.
+2. Use your browser to open http://&lt;hostname&nbsp;of&nbsp;machine&nbsp;running&nbsp;grafana&gt;:3000 and log into the Grafana UI.
 
 <div class="alert note">
 Grafana's default username and password are both <code>admin</code>. You can create a Grafana account of your own.
@@ -27,7 +27,7 @@ Grafana's default username and password are both <code>admin</code>. You can cre
    | :------ | :----------------------------------------------------- |
    | Name    | Prometheus                                             |
    | Default | `True`                                                   |
-   | URL     | http://&lt;hostname of machine running prometheus&gt;:9090 |
+   | URL     | http://&lt;hostname&nbsp;of&nbsp;machine&nbsp;running&nbsp;prometheus&gt;:9090 |
    | Access  | Browser                                                |
 
 5. Download the starter [Grafana dashboard](https://github.com/milvus-io/docs/blob/v0.10.1/assets/monitoring/dashboard.json) for Milvus:
