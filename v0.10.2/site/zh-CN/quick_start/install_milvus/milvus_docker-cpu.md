@@ -127,10 +127,7 @@ $ sudo docker ps
 如果 Milvus 服务没有正常启动，执行以下命令查询错误日志：
 
 ```shell
-# 获得运行 Milvus 的 container ID。
-$ docker ps -a
-# 检查 docker 日志。
-$ docker logs <milvus container id>
+$ sudo docker logs milvus_cpu_0.10.2
 ```
 
 ## 接下来你可以

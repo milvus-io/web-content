@@ -127,10 +127,7 @@ $ sudo docker ps
 If the Milvus server does not start up properly, check the error logs:
 
 ```shell
-# Get the ID of the container running Milvus.
-$ docker ps -a
-# Check docker logs.
-$ docker logs <milvus container id>
+$ sudo docker logs milvus_cpu_0.10.2
 ```
 
 ## What's next
