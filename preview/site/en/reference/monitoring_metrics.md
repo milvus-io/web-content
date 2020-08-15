@@ -1,9 +1,5 @@
 ---
-
 id: monitoring_metrics.md
-title: Monitoring Metrics
-sidebar_label: Monitoring Metrics
-
 ---
 
 # Monitoring Metrics
@@ -49,5 +45,5 @@ The Milvus dashboard provides details about your application and database config
 | **Total File** | Number of data files currently stored in Milvus. |
 
 ## Related links
-[Monitoring and Alerting](../guides/monitor.md)
+[Monitoring and Alerting](monitor.md)
 
