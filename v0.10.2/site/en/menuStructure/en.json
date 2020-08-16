@@ -66,7 +66,30 @@
       "label3": "",
       "order": 1
     },
-
+    {
+      "id": "storage_concept.md",
+      "title": "Storage Concepts",
+      "label1": "milvus_basics",
+      "label2": "",
+      "label3": "",
+      "order": 2
+    },
+    {
+      "id": "storage_operation.md",
+      "title": "Storage Operations",
+      "label1": "milvus_basics",
+      "label2": "",
+      "label3": "",
+      "order": 3
+    },
+    {
+      "id": "write_ahead_log.md",
+      "title": "Write Ahead Log",
+      "label1": "milvus_basics",
+      "label2": "",
+      "label3": "",
+      "order": 4
+    },
     {
       "id": "terms.md",
       "title": "Milvus Terms",
