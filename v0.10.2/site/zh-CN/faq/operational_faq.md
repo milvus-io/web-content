@@ -26,7 +26,7 @@ id: operational_faq.md
 - [如何根据数据量计算需要多大的内存？](#如何根据数据量计算需要多大的内存)
 - [Milvus 中如何实现数据迁移？](#Milvus-中如何实现数据迁移)
 - [Milvus 可以通过扩展某些接口（如 S3 接口、GlusterFS 接口）来扩展存储吗？](#Milvus-可以通过扩展某些接口如-S3-接口-GlusterFS-接口来扩展存储吗)
-- [Milvus 日志中为什么会出现这个警告 `WARN: increase temp memory to avoid cudaMalloc, or decrease query/add size (alloc 307200000 B, highwater 0 B` ？](#Milvus-日志中为什么会出现这个警告-WARN-increase-temp-memory-to-avoid-cudaMalloc-or-decrease-query/add-size-alloc-307200000-B-highwater-0-B-)
+- [Milvus 日志中为什么会出现这个警告 `WARN: increase temp memory to avoid cudaMalloc, or decrease query/add size (alloc 307200000 B, highwater 0 B)` ？](#Milvus-日志中为什么会出现这个警告-WARN-increase-temp-memory-to-avoid-cudaMalloc-or-decrease-query/add-size-alloc-307200000-B-highwater-0-B)
 - [出现 `database is locked` 的报错怎么解决？](#出现-database-is-locked-的报错怎么解决)
 - [仍有问题没有得到解答？](#仍有问题没有得到解答)
 

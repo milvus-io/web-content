@@ -95,7 +95,7 @@ A distributed systems often distributes requests to multiple internal services. 
 
 Mishards defines the chain tracking APIs and provides extensions in extension mode. It provides Jaeger-based extensions for now.
 
-<div class="alert info">
+<div class="alert note">
 See <a href="https://www.jaegertracing.io/docs/1.18/getting-started/">Jaeger Doc</a> to learn how to integrate Jaeger.
 </div>
 
@@ -237,7 +237,7 @@ $ make clean_deploy
 - Kubernetes 1.10 or later
 - Helm 2.12.0 or later
 
-<div class="alert info">
+<div class="alert note">
 See <a href="https://helm.sh/docs/">Helm Docs</a> for more information about using Helm.
 </div>
 
@@ -309,7 +309,7 @@ Mishards is based on shared storage, so the Kubernetes cluster must have availab
    - If your cluster is deployed on AWS, use [Elastic File System (EFS)](https://aws.amazon.com/efs/).
    - If your cluster is deployed on Azure, use [Azure File Storage (AFS)](https://docs.microsoft.com/en-us/azure/aks/azure-files-dynamic-pv).
 
-<div class="alert info">
+<div class="alert note">
 <ul>
 <li>See <a href="https://kubernetes.io/docs/concepts/storage/persistent-volumes/">Persistent Volumes</a> for more information about applying for and managing Persistent Volume.</li>
 <li>See <a href="https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes">Access Modes</a> for more information about the access modes of Persistent Volume.</li>
@@ -336,7 +336,7 @@ You can find all parameters supported by Milvus-Helm at [Milvus Helm Charts](htt
 
    Here, the number of replica sets is controlled by `mishards.replica` and `readonly.replica`. Their default values are 1.
 
-   <div class="alert info">
+   <div class="alert note">
    Currently, the write nodes in the Mishards cluster cannot be expanded.
    </div>
 
@@ -373,7 +373,7 @@ You can find all parameters supported by Milvus-Helm at [Milvus Helm Charts](htt
       milvus-release .
    ```
 
-   <div class="alert info">
+   <div class="alert note">
    <ul>
    <li>See <a href="milvus_config.md">Milvus configuration</a> for more Milvus configuration parameters.</li>
    <li>See <a href="https://github.com/milvus-io/milvus-helm/blob/master/README.md">Milvus Helm Charts</a> for more Milvus-Helm configuration parameters.</li>
@@ -393,6 +393,6 @@ You can find all parameters supported by Milvus-Helm at [Milvus Helm Charts](htt
       milvus-release .
    ```
 
-   <div class="alert info">
+   <div class="alert note">
    See <a href="https://kubernetes.io/docs/tasks/manage-gpus/scheduling-gpus/">Schedule GPUs</a> for GPU resource management and scheduling in Kubernetes.
    </div>
