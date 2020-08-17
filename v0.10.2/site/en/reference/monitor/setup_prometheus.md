@@ -48,13 +48,13 @@ Milvus generates detailed time series metrics. This page shows you how to pull t
     In the Kubernetes cluster, you need to set the <b>server_config.yaml</b> for each node to monitor.
     </div>
 
-3. Go to the Prometheus root directory, and download starter [Prometheus configuration file](../../../../assets/monitoring/prometheus.yml) for Milvus:
+3. Go to the Prometheus root directory, and download starter [Prometheus configuration file](https://github.com/milvus-io/docs/blob/master/v0.10.2/assets/monitoring/prometheus.yml) for Milvus:
 
    ```shell
    $ wget https://raw.githubusercontent.com/milvus-io/docs/master/v0.10.2/assets/monitoring/prometheus.yml \ -O prometheus.yml
    ```
 
-4. Download starter [alerting rules](../../../../assets/monitoring/alert_rules.yml) for Milvus to the Prometheus root directory:
+4. Download starter [alerting rules](https://github.com/milvus-io/docs/blob/master/v0.10.2/assets/monitoring/alert_rules.yml) for Milvus to the Prometheus root directory:
 
    ```shell
    wget -P rules https://raw.githubusercontent.com/milvus-io/docs/master/v0.10.2/assets/monitoring/alert_rules.yml
