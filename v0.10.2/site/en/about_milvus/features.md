@@ -58,7 +58,7 @@ Milvus can schedule multiple GPUs for vector search and index building. Taking a
 
 ## Vector Index
 
-Milvus supports multiple indexes based on Faiss, NMSLIB, and Annoy, such as tree-based index, graph index, and quantization index. See [Vector Index](index_overview.md) for details of vector index. See [Performance Tuning](tuning.md) for details about how to select indexes and index parameters.
+Milvus supports multiple indexes based on Faiss, NMSLIB, and Annoy, such as tree-based index, graph index, and quantization index. See [Vector Index](index.md) for details of vector index. See [Performance Tuning](tuning.md) for details about how to select indexes and index parameters.
 
 ## Monitoring and Alerting
 
