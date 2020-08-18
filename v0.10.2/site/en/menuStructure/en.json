@@ -307,7 +307,7 @@
     },
     {
       "id": "mishards.md",
-      "title": "Mishards - Milvus Cluster Middleware",
+      "title": "Mishards: Cluster Sharding Middleware",
       "label1": "reference",
       "label2": "",
       "label3": "",

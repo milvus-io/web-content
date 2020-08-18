@@ -2,7 +2,7 @@
 id: mishards.md
 ---
 
-# [Mishards](https://github.com/milvus-io/milvus/tree/master/shards) - Milvus 集群分片中间件
+# Mishards：集群分片中间件
 
 ## Mishards 是什么
 

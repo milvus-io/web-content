@@ -70,7 +70,7 @@ The log files in the Docker container use UTC time by default. If your host mach
 
 #### How can I know whether my CPU supports Milvus?
 
-The instruction sets Milvus supports are SSE42, AVX, AVX2, and AVX512. Your CPU must support at least one of them for Milvus to function properly.
+The instruction sets that Milvus supports are SSE42, AVX, AVX2, and AVX512. Your CPU must support at least one of them for Milvus to function properly.
 
 #### Why does Milvus return Illegal instruction during startup?
 
@@ -104,15 +104,15 @@ Try installing pymilvus in a Conda environment.
 
 #### Can I deploy Milvus service in an air-gapped environment?
 
-Milvus is released as a Docker image, and hence can be deployed from offline:
+Milvus is released as a Docker image. Follow these steps to deploy it from offline:
 
-- Pull the latest Milvus Docker image when you have Internet access.
+1. Pull the latest Milvus Docker image when you have Internet access.
 
-- Run `docker save` to save the Docker image as a TAR file.
+2. Run `docker save` to save the Docker image as a TAR file.
 
-- Transfer the TAR file to **the** air-gapped environment.
+3. Transfer the TAR file to the air-gapped environment.
 
-- Run `docker load` to load the file as a Docker image.
+4. Run `docker load` to load the file as a Docker image.
 
 For more information about Docker, see [docs.docker.com](https://docs.docker.com/).
 

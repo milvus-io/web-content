@@ -2,7 +2,7 @@
 id: mishards.md
 ---
 
-# [Mishards](https://github.com/milvus-io/milvus/tree/master/shards) - Milvus Cluster Sharding Middleware
+# Mishards: Cluster Sharding Middleware
 
 ## What is Mishards
 
