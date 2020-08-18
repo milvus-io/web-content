@@ -6,6 +6,10 @@ id: overview.md
 
 As an open source vector similarity search engine, Milvus is easy-to-use, highly reliable, scalable, robust, and blazing fast. It integrates vector index libraries such as Faiss, NMSLIB, and Annoy, hides their complexity, and provides simple and consistent APIs. Milvus offers efficient means of managing vector data, including adding, deleting, and modifying vector and non-vector data. Aside from near real-time search for vectors, Milvus also supports filtering scalar data. With the increase of data and query scale, Milvus also provides a solution for cluster sharding, which supports functions such as read/write separation, horizontal scalability, and dynamic scalability, to cope with large data volume. Currently, Milvus is a single-node server based on the client-server model. It provides storage and search services for TB-level feature data. For scenarios with large data size or high concurrency requirements, you can use Mishards, an experimental cluster sharding middleware, for deployment.
 
+## Overall architecture
+
+![Milvus architecture](../../../assets/milvus_arch.png)
+
 On the server side, Milvus consists of two parts: Milvus server and Meta store.
 
 * Milvus server provides the main functions of Milvus, including the data storage, data management, and data search.

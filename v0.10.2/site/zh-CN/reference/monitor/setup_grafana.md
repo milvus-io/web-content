@@ -35,7 +35,7 @@ docker run -i -p 3000:3000 grafana/grafana
 
 6. [将配置文件导入 Grafana](http://docs.grafana.org/reference/export_import/#importing-a-dashboard)。
 
-   ![prometheus.png](/assets/prometheus.png)
+   ![prometheus.png](../../../../assets/prometheus.png)
 
 
 ## 监控指标概述

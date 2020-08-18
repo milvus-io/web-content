@@ -18,20 +18,12 @@
       "order": 0
     },
     {
-      "id": "architecture.md",
-      "title": "整体架构",
-      "label1": "about_milvus",
-      "label2": "",
-      "label3": "",
-      "order": 1
-    },
-    {
       "id": "features.md",
       "title": "主要特性",
       "label1": "about_milvus",
       "label2": "",
       "label3": "",
-      "order": 2
+      "order": 1
     },
     {
       "id": "milvus_versions.md",
@@ -39,9 +31,8 @@
       "label1": "about_milvus",
       "label2": "",
       "label3": "",
-      "order": 3
+      "order": 2
     },
-    
     {
       "id": "milvus_basics",
       "title": "基本概念",

@@ -18,7 +18,7 @@ Milvus 基于高度优化的 Approximate Nearest Neighbor Search (ANNS) 索引�
 
 ## 近实时搜索
 
-近实时搜索指的是，插入 Milvus 的数据在默认 1 秒后即被存入存储设备并能被搜索到。详情请参阅 [Search](index.md)。
+近实时搜索指的是，插入 Milvus 的数据在默认 1 秒后即被存入存储设备并能被搜索到。
 
 ## 高成本效益
   

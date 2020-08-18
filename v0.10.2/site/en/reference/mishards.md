@@ -12,7 +12,7 @@ Mishards is a Milvus cluster sharding middleware developed in Python. It handles
 
 Mishards cascades a request from upstream down to its sub-modules splitting the upstream request, and then collects and returns the results of the sub-services to upstream.
 
-![proxy](https://milvus.io/static/c00635f52b4cbe35ebd6bb9ce5af1db2/302a4/image_04.png)
+![proxy](../../../assets/mishards.png)
 
 ## Target scenarios
 
@@ -34,7 +34,7 @@ Mishards is suitable for scenarios with large data scale. So how to judge the si
 
 ### Overall architecture
 
-![structure](https://milvus.io/static/c1dcc5824580dd51b8beb81bbf4cb00d/302a4/image_02.png)
+![structure](../../../assets/mishards_structure.png)
 
 ### Main components
 
@@ -75,7 +75,7 @@ Milvus only supports MySQL or SQLite as its Metadata backend for now. In a distr
 
 Service discovery provides Mishards with the address information of all Milvus read and write nodes. Mishards defines the relevant service discovery API `IServiceRegistryProvider`, and provides extensions in extension mode. Milvus provides two extensions by default: **KubernetesProvider** corresponds to Kubernetes cluster; **StaticProvider** corresponds to static configuration. You can customize your own service discovery extension based on these two extensions.
 
-![discovery](https://milvus.io/static/63f649314b297b1fe0b07d2c8c0ba8ea/302a4/image_07.png)
+![discovery](../../../assets/mishards_discovery.png)
 
 | Parameter | Required | Type    | Default  | Description                                                         |
 | ------------------------------------- | -------- | ------- | -------- | ------------------------------------------------------------ |
@@ -125,7 +125,7 @@ Mishards obtains the addresses of Milvus read and write nodes from the service d
 
 Mishards defines APIs related to routing strategies and provides relevant extensions. You can customize your routes according to your business scenario and based on the default consistent hash routing extension.
 
-![router](https://milvus.io/static/84435d8783b7f4454b3667544ba2a4cf/302a4/image_08.png)
+![router](../../../assets/mishards_router.png)
 
 | Parameter | Required | Type    | Default  | Description                                                         |
 | -------------------- | -------- | ------ | ------------------------- | ------------------------------------------------------------ |

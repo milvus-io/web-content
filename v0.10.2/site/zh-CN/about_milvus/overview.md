@@ -6,6 +6,10 @@ id: overview.md
 
 Milvus 是一款开源向量相似度搜索引擎，建立在 Faiss、NMSLIB、Annoy 等向量索引库基础之上，具有功能强大、稳定可靠以及易于使用等特点。Milvus 集成了这些向量索引库，隐藏了他们的复杂性，提供了一套简单而一致的 API。此外，Milvus 能够有效的管理向量数据，提供针对向量和非向量数据的增删改查的能力。除了提供针对向量的近实时搜索能力外，Milvus 可以对标量数据进行过滤。随着数据和查询规模的增加，Milvus 还提供了集群分片的解决方案，支持读写分离、水平扩展、动态扩容等功能，实现了对于超大数据规模的支持。目前，Milvus 是一个单节点主从式架构（Client-server model）的服务器，最高可以支持 TB 级特征数据的存储和搜索服务。对于有更大数据规模或者高并发需求的用户，可以使用目前尚在实验阶段的集群分片中间件 Mishards 进行部署。
 
+## 整体架构
+
+![Milvus 架构](../../../assets/milvus_arch.png)
+
 在服务端，Milvus 由两部分组成：Milvus server 和 Meta store。
 
 * Milvus server 提供了 Milvus 的主要功能，包括数据的存储与管理、数据的搜索等。
@@ -22,7 +26,7 @@ Milvus 是一款开源向量相似度搜索引擎，建立在 Faiss、NMSLIB、A
 - 基于 JSON 的 DSL，提供用户灵活方便的搜索方式
 - 基于 Python / Java / Go / C++ 的 SDK 和 RESTful API
 - 对接基于 Prometheus 的监控与告警系统
-- 基于 Docker和 Kubernetes 的部署方式
+- 基于 Docker 和 Kubernetes 的部署方式
 
 以上功能都极大地增强了 Milvus 的易用性。
 
