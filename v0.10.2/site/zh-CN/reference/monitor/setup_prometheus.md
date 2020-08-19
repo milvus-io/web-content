@@ -89,7 +89,7 @@ Milvus 会生成详细的关于系统运行状态的时序 metrics。该页面�
       - "alert_rules.yml"
    ```
 
-   - scrape_configs：设置抓取数据的 `job_name` 及 `targets` 等信息。
+   - scrape_configs：设置抓取数据的 <code>job_name</code> 及 <code>targets</code> 等信息。
 
    ```yaml
    scrape_configs:

@@ -86,7 +86,7 @@ Milvus generates detailed time series metrics. This page shows you how to pull t
       - "alert_rules.yml"
    ```
 
-   - scrape_configs: Sets `job_name` and `targets` for scraping data.
+   - scrape_configs: Sets <code>job_name</code> and <code>targets</code> for scraping data.
 
    ```yaml
    scrape_configs:
