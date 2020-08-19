@@ -140,13 +140,13 @@ See [How Does Milvus Schedule Query Tasks](https://medium.com/unstructured-data-
 
 It depends on your scenario. See [Select Vector Search Tool](vector_db.md) and [How to Choose an Index in Milvus](https://medium.com/unstructured-data-service/how-to-choose-an-index-in-milvus-4f3d15259212) for more information.
 
-#### Can Milvus create different types of index for different partitions?
+#### Are indexes partition-specific?
 
-No, you cannot. Indexes are created at the collection level, not at the partition level.
+No. A collection can have only one index type at a time. 
 
 #### Can Milvus create different types of index in the same collection?
 
-No, you cannot. Although a collection can hold various types of data, the same collection can use only one index type.
+No. Although a collection can hold various types of data, the same collection can use only one index type.
 
 #### Does Milvus create new indexes after vectors are inserted?
 

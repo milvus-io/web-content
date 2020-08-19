@@ -122,11 +122,11 @@ Milvus 是以 Docker 镜像形式发行的，是可以离线部署的：
 
 #### 如何根据数据量计算需要多大的内存？
 
-即使是同样的数据，不同的索引所需内存也不同。可以使用 [Milvus 的 sizing 工具](https://milvus.io/tools/sizing) 去计算查询时所需要的内存。
+不同的索引所需内存不同。可以使用 [Milvus 的 sizing 工具](https://milvus.io/tools/sizing) 去计算查询时所需要的内存。
 
 #### Milvus 中如何实现数据迁移？
 
-把原有的 Milvus 服务的整个 **db** 目录拷贝到新的路径下，启动新的 Milvus 服务时，将该 Milvus 服务的 **db** 目录映射为刚拷贝过来的 `db` 目录。
+把原有的 Milvus 服务的整个 **db** 目录拷贝到新的路径下，启动新的 Milvus 服务时，将该 Milvus 服务的 **db** 目录映射为刚拷贝过来的 **db** 目录。
 > 注意：不同版本之间，数据可能会不兼容。目前数据格式兼容到 0.7.0。
 
 #### Milvus 可以通过扩展某些接口（如 S3 接口、GlusterFS 接口）来扩展存储吗？

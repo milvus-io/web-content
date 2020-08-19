@@ -49,7 +49,7 @@ id: performance_faq.md
 
 #### 建立索引时需要设置 `nlist` 值，如何选择该值大小？
 
-该值需要根据具体的使用情况去设置。详见 [性能调优 > 索引](tuning.md#索引)。
+该值需要根据具体的使用情况去设置。详见 [性能调优 > 索引](tuning.md#索引) 和 [如何设置 Milvus 参数](https://www.milvus.io/cn/blogs/2020-2-16-api-setting.md)。
 
 
 #### 为什么有时候小的数据集查询时间反而更长？
