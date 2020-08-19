@@ -3,17 +3,18 @@ id: setup_prometheus.md
 ---
 
 # Configure and Start Prometheus
-Milvus generates detailed time series metrics. This page shows you how to pull these metrics into [Prometheus](https://prometheus.io/), and how to connect [Grafana](https://grafana.com/) and [Alertmanager](https://prometheus.io/docs/alerting/alertmanager/) to Prometheus for flexible data visualizations and notifications.
+
+This page describes how to configure and start up [Prometheus](https://prometheus.io/), and how to connect [Alertmanager](https://prometheus.io/docs/alerting/alertmanager/) to Prometheus for metrics visualization and early warning purposes.
 
 ## Before you begin
 
-- Make sure you have already read [Monitoring and Alerting](monitor.md) and learned about the monitoring and alerting solutions of Milvus.
+- Ensure that you have already read [Monitoring and Alerting](monitor.md) and learned about the monitoring and alerting solutions of Milvus.
 
 ## Install Prometheus
 
 1. Download the [Prometheus tarball](https://prometheus.io/download/) for your operating system.
 
-2. Go to the Prometheus file directory, and make sure Prometheus is installed successfully:
+2. Go to the directory holding the Prometheus file, and ensure that Prometheus is properly installed:
 
    ```shell
    $ ./prometheus --version
@@ -62,7 +63,7 @@ Milvus generates detailed time series metrics. This page shows you how to pull t
 
 5. Edit the Prometheus configuration file according to your needs:
 
-   - global: Configures parameters such as `scrape_interval` and `evaluation_interval`.
+   - `global`: Configures parameters such as `scrape_interval` and `evaluation_interval`.
 
    ```yaml
    global:
@@ -70,7 +71,7 @@ Milvus generates detailed time series metrics. This page shows you how to pull t
      evaluation_interval: 2s # Set the evaluation interval to 2s.
    ```
 
-   - alerting: Sets the address and port of Alertmanager.
+   - `alerting`: Sets the address and port of Alertmanager.
 
    ```yaml
    alerting:
@@ -79,14 +80,14 @@ Milvus generates detailed time series metrics. This page shows you how to pull t
       - targets: ['localhost:9093']
    ```
 
-   - rule_files: Specifies the file that defines the alerting rules.
+   - `rule_files`: Specifies the file that defines the alerting rules.
 
    ```yaml
    rule_files:
       - "alert_rules.yml"
    ```
 
-   - scrape_configs: Sets <code>job_name</code> and <code>targets</code> for scraping data.
+   - `scrape_configs`: Sets `job_name` and `targets` for scraping data.
 
    ```yaml
    scrape_configs:
@@ -109,6 +110,8 @@ Milvus generates detailed time series metrics. This page shows you how to pull t
     ```shell
     ./prometheus --config.file=prometheus.yml
     ```
+
+*After starting up Prometheus, you can display and render on its interface the metrics that Milvus provides. See [Milvus Metrics](milvus_metrics.md) for more information.*
 
 ## Configure Alertmanager
 
