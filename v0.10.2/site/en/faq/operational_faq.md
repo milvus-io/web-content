@@ -62,7 +62,7 @@ You need to restart Milvus Docker each time you update the configuration file. S
 
 #### How can I know if Milvus has started successfully?
 
-Run `docker logs <container ID>` to check if Milvus is running properly.
+Run `sudo docker logs <container ID>` to check if Milvus is running properly.
 
 #### Why is the time in the log files different from the system time?
 

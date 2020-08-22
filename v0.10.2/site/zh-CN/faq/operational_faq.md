@@ -62,7 +62,7 @@ Milvus 和服务端配置文件的版本不对应。
 
 #### 如何得知我的 Milvus 已经成功启动？
 
-使用 `docker logs <container ID>` 命令检查 Milvus 的运行状态。
+使用 `sudo docker logs <container ID>` 命令检查 Milvus 的运行状态。
 
 #### 为什么我的日志文件时间与系统时间不一致？
 

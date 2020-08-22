@@ -36,7 +36,7 @@ id: storage_operation.md
 2. 系统将之前的可写缓冲区设为只读（immutable buffer）。
 3. 系统把只读缓冲区的数据写入磁盘，并将新数据段的描述信息写入元数据后端服务。
 
-完成以上流程后，系统就成功创建了一个段（segment）。
+完成以上流程后，系统就成功创建了一个数据段（segment）。
 
 #### 客户端触发
 
@@ -49,7 +49,7 @@ id: storage_operation.md
 每个分段的所有相关文件都被存放在以段 ID 命名的文件夹中，比如记录实体 ID 的 UID 文件、用于标记已被删除实体的 **delete_docs** 文件，以及用于快速查找实体的布隆过滤器（**bloom-filter**）文件。
 
 <div class="alert note">
-段内数据文件请参考 <a href="storage_concept.md#分区和段">分区和段</a> 中的示意图。
+段内数据文件请参考 <a href="storage_concept.md#分区和数据段">分区和数据段</a> 中的示意图。
 </div>
 
 ## 数据合并
@@ -69,7 +69,7 @@ id: storage_operation.md
 
 ## 建立索引
 
-未建立索引之前，Milvus 对集合的查询操作都是以暴力搜索（brute-force search）的方式完成的。为提高查询性能，你可以为集合建立合适的索引。索引建成后，每个段都会产生一个索引文件，此时元数据也会同步更新。
+未建立索引之前，Milvus 对集合的查询操作都是以暴力搜索（brute-force search）的方式完成的。为提高查询性能，你可以为集合建立合适的索引。索引建成后，每个数据段都会产生一个索引文件，此时元数据也会同步更新。
 
 <div class="alert note">
 更多索引相关信息，请参考 <a href="index.md">向量索引</a>。

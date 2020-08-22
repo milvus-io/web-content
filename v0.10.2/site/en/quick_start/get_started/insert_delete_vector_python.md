@@ -18,14 +18,14 @@ You can perform vector operations on collections or partitions. This article tal
 
    ```python
    >>> import random
-   # Generate 20 vectors of 256 dimension
+   # Generate 20 vectors of 256 dimensions.
    >>> vectors = [[random.random() for _ in range(256)] for _ in range(20)]
    ```
 
 2. Insert a list of vectors. If you do not specify vector IDs, Milvus automatically assigns IDs to the vectors.
 
    ```python
-   # Insert vectors
+   # Insert vectors.
    >>> milvus.insert(collection_name='test01', records=vectors)
    ```
 
@@ -57,3 +57,6 @@ You can delete the vectors with the following command:
 ```python
 >>> milvus.delete_entity_by_id(collection_name='test01', id_array=ids)
 ```
+<div class="alert note">
+After calling <code>delete</code>, you can call <code>flush</code> again to ensure that the newly inserted data is visible and the deleted data is no longer recoverable.
+</div>

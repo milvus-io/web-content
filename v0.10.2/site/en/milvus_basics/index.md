@@ -103,7 +103,7 @@ IVF_PQ quantizes the product of vectors, and then performs IVF index clustering.
    | `nlist` | Number of cluster units　    | [1, 65536] |
    | `m`     | Number of factors of product quantization | `m` should be in {1, 2, 3, 4, 8, 12, 16, 20, 24, 28, 32, 40, 48, 56, 64, 96}, and the dimensions of the low-dimensional vector space should be in {1, 2, 3, 4, 6, 8, 10, 12, 16, 20, 24, 28, 32}.<br>Besides, when computing with GPU, ensure that the result of m x 1024 does not exceed `MaxSharedMemPerBlock` of your graphics card. |
    
-   **Example:** `{"nlist": 2048, "m": 16}`
+   **Example:** `{nlist: 2048, m: 16}`
 
 - IVF_PQ has the same search parameters as IVF_FLAT.
 
@@ -130,7 +130,7 @@ Reference: <a href="http://www.vldb.org/pvldb/vol12/p461-fu.pdf"> Fast Approxima
    | `search_length`       | Number of query iterations        　| [10, 300] |
    | `knng`                | Number of nearest neighbors   　| [5, 300] |
    
-   **Example:** `{"out_degree": 30, "candidate_pool_size": 300, "search_length": 60, "knng": 50}`
+   **Example:** `{out_degree: 30, candidate_pool_size: 300, search_length: 60, knng: 50}`
 
 - Search parameters
 
@@ -138,7 +138,7 @@ Reference: <a href="http://www.vldb.org/pvldb/vol12/p461-fu.pdf"> Fast Approxima
    | -------- | ----------- | ---------- |
    | `search_length` | Number of query iterations  | [10, 300] |
    
-   **Example:** `{"search_length": 100}`
+   **Example:** `{search_length: 100}`
 
 ### HNSW
 
@@ -157,7 +157,7 @@ Reference: <a href="https://arxiv.org/abs/1603.09320">Efficient and robust appro
    | `M`              | Maximum degree of the node        | [5, 48]  |
    | `efConstruction` | Search scope      | [100, 500] |
 
-   **Example:** `{"M": 16, "efConstruction": 40}`
+   **Example:** `{M: 16, efConstruction: 40}`
 
 - Search parameters
 
@@ -165,7 +165,7 @@ Reference: <a href="https://arxiv.org/abs/1603.09320">Efficient and robust appro
    | --------|--------------- | ------------ |
    | `ef`    | Search scope  | [`top_k`, 4096] |
 
-   **Example:** `{"ef": 64}`
+   **Example:** `{ef: 64}`
 
 ### ANNOY
 
@@ -183,7 +183,7 @@ Reference: <a href="https://erikbern.com/2015/10/01/nearest-neighbors-and-vector
    | --------- |-------------- | -------- |
    | `n_trees` | The number of methods of space division | [1, 1024] |
 
-   **Example:**`{"n_trees": 8}`
+   **Example:**`{n_trees: 8}`
 
 - Search parameters
 
@@ -191,7 +191,7 @@ Reference: <a href="https://erikbern.com/2015/10/01/nearest-neighbors-and-vector
    | -----------|--------------------------------- | ---------------- |
    | `search_k` | The number of nodes to be searched. `-1` means 5% of the whole data. | {-1} ∪ [`top_k`, n × `n_trees`] |
 
-   **Example:**`{"search_k": -1}`
+   **Example:**`{search_k: -1}`
 
 ## How to choose an index
 
