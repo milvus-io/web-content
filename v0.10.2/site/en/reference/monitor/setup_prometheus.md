@@ -6,9 +6,6 @@ id: setup_prometheus.md
 
 This page describes how to configure and start up [Prometheus](https://prometheus.io/), and how to connect [Alertmanager](https://prometheus.io/docs/alerting/alertmanager/) to Prometheus for metrics visualization and early warning purposes.
 
-## Before you begin
-
-- Ensure that you have already read [Monitoring and Alerting](monitor.md) and learned about the monitoring and alerting solutions of Milvus.
 
 ## Install Prometheus
 
@@ -118,7 +115,7 @@ This page describes how to configure and start up [Prometheus](https://prometheu
 
 ### Events to create alert rules
 
-Active monitoring helps you identify problems early. But it is also essential to create alerting rules that promptly send notifications when there are events that require investigation or intervention.
+Proactively monitoring metrics contributes to identification of emerging issues. Creating alerting rules for events requiring immediate intervention is essential as well.
 
 This section includes the most important events for which you must create alerting rules.
 
