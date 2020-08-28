@@ -61,3 +61,19 @@ id: insert_delete_vector_python.md
 <div class="alert note">
 在调用 <code>delete</code> 接口后，用户可以选择再调用 <code>flush</code>，保证新增的数据可见，被删除的数据不会再被搜到。
 </div>
+
+
+## 常见问题
+
+<details>
+<summary><font color="#3ab7f8">Milvus 中自定义 ID 有没有长度限制？</font></summary>
+ID 类型是非负的 64 位整型。
+</details>
+<details>
+<summary><font color="#3ab7f8">Milvus 是否支持 “边插入边查询” ？</font></summary>
+支持。
+</details>
+<details>
+<summary><font color="#3ab7f8">Milvus 中单次插入数据有上限吗？</font></summary>
+单次插入数据不能超过 256 MB。
+</details>

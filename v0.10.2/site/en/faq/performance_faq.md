@@ -35,7 +35,6 @@ Check if the value of `cache.cache_size` in **server_config.yaml** is greater th
 #### How do I improve Milvus' performance?
 
 - Ensure that the value of `cache.cache_size` in **server_config.yaml** is greater than the size of the collection.
-- Adjust the value of `use_blas_threshold`, ensuring that `nq` < `use_blas_threshold`.
 - Ensure that all segments are indexed. 
 - Check if there are other processes on the server consuming CPU resources.
 - Adjust the values of `index_file_size` and `nlist`.

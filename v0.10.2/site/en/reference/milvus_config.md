@@ -186,3 +186,35 @@ In the Milvus configuration file, space size should be written in the format of 
 <li>Available units include GB, MB, and KB.</li>
 </ul>
 </div>
+
+
+## FAQ
+
+<details>
+<summary><font color="#3ab7f8">Besides the configuration file, how can I tell Milvus is using GPU for search?</font></summary>
+Use any of the following methods:
+
+- Use `nvidia-smi` to monitor your GPU usage.
+
+- Use Prometheus to monitor performance metrics. See [Visualize Metrics in Grafana > System performance metrics](setup_grafana.md#System-performance-metrics).
+
+- Check the Milvus server logs.
+
+</details>
+<details>
+<summary><font color="#3ab7f8">If I have set <code>preload_collection</code>, does Milvus service start only after all collections are loaded to the memory?</font></summary>
+Yes. If you have set `preload_collection` in **server_config.yaml**, Milvus' service is not available until it loads all specified collections.
+</details>
+<details>
+<summary><font color="#3ab7f8">Why is my GPU always idle?</font></summary>
+It is very likely that Milvus is using CPU for query. If you want to use GPU for query, you need to set the value of `gpu_search_threshold` in **server_config.yaml** to be greater than `nq` (number of vectors per query).
+
+You can use `gpu_search_threshold` to set the threshold: when `nq` is less than this value, Milvus uses CPU for queries; otherwise, Milvus uses GPU instead.
+
+We do not recommend enabling GPU when the query number is small.
+
+</details>
+<details>
+<summary><font color="#3ab7f8">Why is the time in the log files different from the system time?</font></summary>
+The log files in the Docker container use UTC time by default. If your host machine does not use UTC time, then the time in the log files is different. We recommend that you mount the log files onto your host machine to keep the time consistent between the log and the host.
+</details>

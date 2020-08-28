@@ -13,3 +13,12 @@ id: flush_python.md
 <div class="alert note">
 在调用 <code>delete</code> 接口后，用户可以选择再调用 <code>flush</code>，保证新增的数据可见，被删除的数据不会再被搜到。
 </div>
+
+
+
+## 常见问题
+
+<details>
+<summary><font color="#3ab7f8">为什么数据插入后不能马上被搜索到？</font></summary>
+因为数据还没有落盘。要确保数据插入后立刻能搜索到，可以手动调用 `flush` 接口。但是频繁调用 `flush` 接口可能会产生大量小数据文件，从而导致查询变慢。
+</details>

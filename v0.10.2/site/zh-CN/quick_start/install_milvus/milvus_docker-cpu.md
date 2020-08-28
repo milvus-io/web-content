@@ -64,7 +64,7 @@ $ sudo docker pull milvusdb/milvus:0.10.2-cpu-d081520-8a2393
 <ul>
 <li>如果你的主机由于网络限制无法在线获得 Docker 镜像和配置文件，请从其他主机在线获取镜像，保存为 TAR 文件传输回本地，传输完成后重新加载为 Docker 镜像：
 <details>
-<summary><font color="#3ab7f8">离线传输相关代码示例</font></summary>
+<summary><font color="#3ab7f8">点击查看离线传输相关代码示例。</font></summary>
 <ol>
  <li>将 Docker 镜像保存为 TAR 文件再使用合适的方式传输。</br>
 
@@ -80,7 +80,7 @@ $ sudo docker pull milvusdb/milvus:0.10.2-cpu-d081520-8a2393
 </code>
 </li></ol>
 </details></li>
-<li>如果拉取镜像的速度过慢或一直失败，请参考 <a href="operational_faq.md">操作常见问题</a> 中提供的解决办法。</li>
+<li>如果拉取镜像的速度过慢或一直失败，请参考 <a href="operational_faq.md">部署运维问题</a> 中提供的解决办法。</li>
 </ul>
 </div>
 
@@ -129,6 +129,26 @@ $ sudo docker ps
 ```shell
 $ sudo docker logs milvus_cpu_0.10.2
 ```
+
+## 常见问题
+
+<details>
+<summary><font color="#3ab7f8">可以在 Windows 上安装 Milvus 吗？</font></summary>
+理论上只要能够支持 Docker 的操作系统都可以运行 Milvus。
+</details>
+<details>
+<summary><font color="#3ab7f8">为什么 Milvus 在启动时返回 <code>Illegal instruction</code>？</font></summary>
+如果你的 CPU 不支持 SSE42、AVX、AVX2、AVX512 其中任何一个指令集，则 Milvus 无法正常启动。可以通过 `cat /proc/cpuinfo` 查看 CPU 支持的指令集。
+</details>
+<details>
+<summary><font color="#3ab7f8">Milvus 中如何实现数据迁移？</font></summary>
+把原有的 Milvus 服务的整个 **db** 目录拷贝到新的路径下，启动新的 Milvus 服务时，将该 Milvus 服务的 **db** 目录映射为刚拷贝过来的 **db** 目录。
+> 注意：不同版本之间，数据可能会不兼容。目前数据格式兼容到 0.7.0。
+
+</details>
+
+
+
 
 ## 接下来你可以
 

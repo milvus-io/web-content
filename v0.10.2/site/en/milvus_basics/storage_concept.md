@@ -47,3 +47,11 @@ When data changes, the metadata should change accordingly and be easy to obtain.
 The metadata back-end service is not responsible for storing entity data and indexes.
 
 ![meta](../../../assets/storage/meta.png)
+
+
+## FAQ
+
+<details>
+<summary><font color="#3ab7f8">Can I use SQL Server or PostgreSQL to store metadata in Milvus?</font></summary>
+No, we only support storing metadata using SQLite or MySQL.
+</details>

@@ -34,3 +34,13 @@ id: connect_milvus_python.md
    >>> milvus = Milvus(uri='tcp://localhost:19530')
    ```
 
+## 常见问题
+
+<details>
+<summary><font color="#3ab7f8">Milvus 的 Python SDK 有连接池吗？</font></summary>
+Milvus v0.9.0 及更高版本对应的 Python SDK 有连接池。连接池的默认连接数量没有上限。
+</details>
+<details>
+<summary><font color="#3ab7f8">在 Windows 安装 pymilvus 报错，如何解决？</font></summary>
+可以尝试在 Conda 环境下安装。
+</details>

@@ -67,9 +67,9 @@ This parameter (4 GB by default) refers to the size of the cache space used for 
 
 After the indexes are created (FLAT is not included), the index files require additional disk space and the query only needs to load the index files.
 
-* The data volume of the IVFFLAT index is basically equal to the total data volume of its original vectors.
-* The data volume of the IVFSQ8 / IVFSQ8H index is equivalent to 25% to 30% of the total data volume of the original vectors.
-* The data volume of the IVFPQ index changes according to its parameters, which is generally lower than 10% of the total data volume of the original vectors.
+* The data volume of the IVF_FLAT index is basically equal to the total data volume of its original vectors.
+* The data volume of the IVF\_SQ8 / IVF\_SQ8H index is equivalent to 25% to 30% of the total data volume of the original vectors.
+* The data volume of the IVF_PQ index changes according to its parameters, which is generally lower than 10% of the total data volume of the original vectors.
 * The data volume of HNSW/RNSG/ANNOY index is greater than the total data volume of the original vectors.
 
 <div class="alert note">
@@ -107,7 +107,7 @@ As the number of target vectors increases, the time spent on using CPUs to perfo
 
 - IVF Indexes
 
-IVF indexes include IVF_FLAT, IVF_SQ8 / IVF_SQ8H, and IVF_PQ. The IVF_SQ8 / IVF_SQ8H and IVF_PQ indexes perform lossy compression on vector data to reduce the disk space occupied by index files.
+IVF indexes include IVF\_FLAT, IVF\_SQ8 / IVF\_SQ8H, and IVF\_PQ. The IVF\_SQ8 / IVF\_SQ8H and IVF\_PQ indexes perform lossy compression on vector data to reduce the disk space occupied by index files.
 
 All types of IVF index have two parameters: `nlist` and `nprobe`. See [Milvus Indexes](index.md#Indexes-that-Milvus-supports) for more information about these parameters.
 
@@ -151,3 +151,39 @@ To filter deleted entities, Milvus reads **delete_docs** into memory when queryi
 - Compact segments
 
 Deleted entities do not participate in the calculation and takes up disk space. If a large number of entities have been deleted, you can call `compact` to free up disk space.
+
+
+## FAQ
+
+<details>
+<summary><font color="#3ab7f8">Why is my GPU always idle?</font></summary>
+It is very likely that Milvus is using CPU for query. If you want to use GPU for query, you need to set the value of `gpu_search_threshold` in **server_config.yaml** to be greater than `nq` (number of vectors per query).
+
+You can use `gpu_search_threshold` to set the threshold: when `nq` is less than this value, Milvus uses CPU for queries; otherwise, Milvus uses GPU instead.
+
+We do not recommend enabling GPU when the query number is small.
+
+</details>
+<details>
+<summary><font color="#3ab7f8">Why the search is very slow?</font></summary>
+Check if the value of `cache.cache_size` in **server_config.yaml** is greater than the size of the collection.
+</details>
+<details>
+<summary><font color="#3ab7f8">How can I get the best performance from Milvus through setting <code>index_file_size</code>?</font></summary>
+You need to set `index_file_size` when creating a collection from a client. This parameter specifies the size of each segment, and its default value is `1024` in MB. When the size of newly inserted vectors reaches the specified volume, Milvus packs these vectors into a new segment. In other words, newly inserted vectors do not go into a segment until they grow to the specified volume. When it comes to creating indexes, Milvus creates one index file for each segment. When conducting a vector search, Milvus searches all index files one by one.
+
+As a rule of thumb, we would see a 30% ~ 50% increase in the search performance after changing the value of `index_file_size` from 1024 to 2048. Note that an overly large `index_file_size` value may cause failure to load a segment into the memory or graphics memory. Suppose the graphics memory is 2 GB and `index_file_size` 3 GB, each segment is obviously too large.
+
+In situations where vectors are not frequently inserted, we recommend setting the value of `index_file_size` to 1024 MB or 2048 MB. Otherwise, we recommend setting the value to 256 MB or 512 MB to keep unindexed files from getting too large.
+
+</details>
+<details>
+<summary><font color="#3ab7f8">Why GPU-enabled query is sometimes slower than CPU-only query?</font></summary>
+Generally speaking, CPU-only query works for situations where `nq` (number of vectors per query) is small, whilst GPU-enabled query works best with a large `nq`, say 500.
+
+Milvus needs to load data from the memory to the graphics memory for a GPU-enabled query. Only when the load time is negligible compared to the time to query, is GPU-enabled query faster.
+</details>
+<details>
+<summary><font color="#3ab7f8">Why sometimes the query time for a small dataset is longer?</font></summary>
+If the size of the dataset is smaller than the value of `index_file_size` that you set when creating a collection, Milvus does not create an index for this dataset. Therefore, the time to query in a small dataset may be longer. You may as well call `create_index` to build the index.
+</details>

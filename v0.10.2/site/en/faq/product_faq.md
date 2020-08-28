@@ -11,9 +11,9 @@ id: product_faq.md
 - [Does Milvus support CRUD operations on vectors?](#Does-Milvus-support-CRUD-operations-on-vectors)
 - [Can Milvus handle datasets of up to a 100-billion scale?](#Can-Milvus-handle-datasets-of-up-to-a-100-billion-scale)
 - [Where does Milvus store imported data?](#Where-does-Milvus-store-imported-data)
-- [Why can't I find vectors on SQLite or MySQL?](#Why-can't-I-find-vectors-on-SQLite-or-MySQL)
+- [Why can't I find vectors on SQLite or MySQL?](#Why-cant-I-find-vectors-on-SQLite-or-MySQL)
 - [Can I use SQL Server or PostgreSQL to store metadata in Milvus?](#Can-I-use-SQL-Server-or-PostgreSQL-to-store-metadata-in-Milvus)
-- [Does Milvus' Python SDK have a connection pool?](#Does-Milvus'-Python-SDK-have-a-connection-pool)
+- [Does Milvus' Python SDK have a connection pool?](#Does-Milvus-Python-SDK-have-a-connection-pool)
 - [Does Milvus support inserting while searching?](#Does-Milvus-support-inserting-while-searching)
 - [Is there a graphical tool for managing Milvus?](#Is-there-a-graphical-tool-for-managing-Milvus)
 - [Can I export data from Milvus?](#Can-I-export-data-from-Milvus)
@@ -26,10 +26,10 @@ id: product_faq.md
 - [Does Milvus load the whole collection to the memory if I search only certain partitions in that collection?](#Does-Milvus-load-the-whole-collection-to-the-memory-if-I-search-only-certain-partitions-in-that-collection)
 - [Are queries in segments processed in parallel?](#Are-queries-in-segments-processed-in-parallel)
 - [How to choose an index in Milvus?](#How-to-choose-an-index-in-Milvus)
-- [Can Milvus create different types of index for different partitions?](#Can-Milvus-create-different-types-of-index-for-different-partitions)
+- [Are indexes partition-specific?](#Are-indexes-partition-specific)
 - [Can Milvus create different types of index in the same collection?](#Can-Milvus-create-different-types-of-index-in-the-same-collection)
 - [Does Milvus create new indexes after vectors are inserted?](#Does-Milvus-create-new-indexes-after-vectors-are-inserted)
-- [Does IVF_SQ8 differ from IVF_SQ8H in terms of recall rate?](#Does-IVF_SQ8-differ-from-IVF_SQ8H-in-terms-of-recall-rate)
+- [Does IVF\_SQ8 differ from IVF\_SQ8H in terms of recall rate?](#Does-IVF\_SQ8-differ-from-IVF\_SQ8H-in-terms-of-recall-rate)
 - [What is the difference between FLAT index and IVF_FLAT index?](#What-is-the-difference-between-FLAT-index-and-IVF_FLAT-index)
 - [Why do I see a surge in memory usage when conducting a vector search immediately after an index is created?](#Why-do-I-see-a-surge-in-memory-usage-when-conducting-a-vector-search-immediately-after-an-index-is-created)
 - [Can I update `index_file_size` and `metric_type` after creating a collection?](#Can-I-update-index_file_size-and-metric_type-after-creating-a-collection)
@@ -39,7 +39,7 @@ id: product_faq.md
 - [What is the recommended configuration for Mishards?](#What-is-the-recommended-configuration-for-Mishards)
 - [Does Mishards support RESTful APIs?](#Does-Mishards-support-RESTful-APIs)
 - [What is normalization? Why is normalization needed?](#What-is-normalization-Why-is-normalization-needed)
-- [Why do I get different results using Euclidean distance (L2) and inner product (IP) as the distance metric?](#Why-do-I-get-different-results-using-Euclidean-distance-(L2)-and-inner-product-(IP)-as-the-distance-metric)
+- [Why do I get different results using Euclidean distance (L2) and inner product (IP) as the distance metric?](#Why-do-I-get-different-results-using-Euclidean-distance-L2-and-inner-product-IP-as-the-distance-metric)
 - [Is there a limit on the total number of collections and partitions?](#Is-there-a-limit-on-the-total-number-of-collections-and-partitions)
 - [Why do I get fewer than k vectors when searching for `topk` vectors?](#Why-do-I-get-fewer-than-k-vectors-when-searching-for-topk-vectors)
 - [Still have questions?](#Still-have-questions)
@@ -152,7 +152,7 @@ No. Although a collection can hold various types of data, the same collection ca
 
 Yes. When the inserted vectors grow to a specified volume, Milvus creates a new segment and starts to create an index file for it at the same time. The building of the new index file does not affect the existing index files.
 
-#### Does IVF_SQ8 differ from IVF_SQ8H in terms of recall rate?
+#### Does IVF\_SQ8 differ from IVF\_SQ8H in terms of recall rate?
 
 No, they have the same recall rate for the same dataset.
 

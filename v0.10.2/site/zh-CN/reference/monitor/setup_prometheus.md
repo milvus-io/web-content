@@ -153,3 +153,10 @@ id: setup_prometheus.md
 
 5. 通过浏览器登录 *http://<提供 Alertmanager 服务的主机>:9093*，进入 Alertmanager 用户交互页面。你可以在此定义 [报警的条件](https://prometheus.io/docs/alerting/alertmanager/#silences)。
 
+
+## 常见问题
+
+<details>
+<summary><font color="#3ab7f8">在多个 Milvus 节点接入 Pushgateway 的情况下如何进行区分数据来源？</font></summary>
+在 **prometheus.yaml** 里面加一个 Prometheus 的实例就可以。最后在 Prometheus 或者 Grafana 里面显示监控的时候，会指明数据是来自哪个 Milvus 实例。
+</details>
