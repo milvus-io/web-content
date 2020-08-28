@@ -132,10 +132,10 @@ Floating-point vectors are stored in Milvus as single-precision (float) data.
 ## FAQ
 
 <details>
-<summary><font color="#3ab7f8">Can I increase my storage by adding interfaces such as S3 or GlusterFS?</font></summary>
+<summary><font color="#3f9cd1">Can I increase my storage by adding interfaces such as S3 or GlusterFS?</font></summary>
 No, you cannot. Milvus does not support this feature for now.
 </details>
 <details>
-<summary><font color="#3ab7f8">Can I export data from Milvus?</font></summary>
-We do not have a dedicated tool as yet. You can call `get_entity_by_id` to get the intended vectors by ID.
+<summary><font color="#3f9cd1">Can I export data from Milvus?</font></summary>
+We do not have a dedicated tool as yet. You can call <code>get_entity_by_id</code> to get the intended vectors by ID.
 </details>

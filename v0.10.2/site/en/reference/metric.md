@@ -107,16 +107,16 @@ Where
 ## FAQ
 
 <details>
-<summary><font color="#3ab7f8">Why is the top1 result of a vector search not the search vector itself, if the metric type is inner product?</font></summary>
+<summary><font color="#3f9cd1">Why is the top1 result of a vector search not the search vector itself, if the metric type is inner product?</font></summary>
 This occurs if you have not normalized the vectors when using inner product as the distance metric.
 </details>
 <details>
-<summary><font color="#3ab7f8">What is normalization? Why is normalization needed?</font></summary>
+<summary><font color="#3f9cd1">What is normalization? Why is normalization needed?</font></summary>
 To normalize a vector is to uniformly set the length of all vectors to 1. If you have normalized the vectors in the same space, then the top k nearest vectors returned using Euclidean distance (L2) are identical to the the nearest vectors returned using inner product (IP).
 
-See [Wikipedia](https://en.wikipedia.org/wiki/Unit_vector) for more information.
+See <a href="https://en.wikipedia.org/wiki/Unit_vector">Wikipedia</a> for more information.
 </details>
 <details>
-<summary><font color="#3ab7f8">Why do I get different results using Euclidean distance (L2) and inner product (IP) as the distance metric?</font></summary>
+<summary><font color="#3f9cd1">Why do I get different results using Euclidean distance (L2) and inner product (IP) as the distance metric?</font></summary>
 Check if the vectors are normalized. If not, you need to normalize the vectors first. Theoretically speaking, similarities worked out by L2 are different from similarities worked out by IP, if the vectors are not normalized.
 </details>

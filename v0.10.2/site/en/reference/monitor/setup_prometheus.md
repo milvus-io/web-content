@@ -159,6 +159,6 @@ This section includes the most important events for which you must create alerti
 
 
 <details>
-<summary><font color="#3ab7f8">How can I differentiate if I have multiple Milvus nodes connected to Pushgateway?</font></summary>
-You can add a Prometheus instance in **prometheus.yaml**. Then Prometheus or Granafa will show the monitoring data, as well as the source node.
+<summary><font color="#3f9cd1">How can I differentiate if I have multiple Milvus nodes connected to Pushgateway?</font></summary>
+You can add a Prometheus instance in <strong>prometheus.yaml</strong>. Then Prometheus or Granafa will show the monitoring data, as well as the source node.
 </details>

@@ -54,26 +54,26 @@ If you do not specify <code>partition_tags</code>, Milvus searches similar vecto
 ## FAQ
 
 <details>
-<summary><font color="#3ab7f8">Why is my recall rate unsatisfying?</font></summary>
-You can increase the value of `nprobe` when searching from a client. The greater the value, the more accurate the result, and the more time it takes.
+<summary><font color="#3f9cd1">Why is my recall rate unsatisfying?</font></summary>
+You can increase the value of <code>nprobe</code> when searching from a client. The greater the value, the more accurate the result, and the more time it takes.
 
-See [Learn Milvus Operation](milvus_operation.md) for more information.
+See <a href="milvus_operation.md">Learn Milvus Operation</a> for more information.
 
 </details>
 <details>
-<summary><font color="#3ab7f8">Does Milvus support inserting while searching?</font></summary>
+<summary><font color="#3f9cd1">Does Milvus support inserting while searching?</font></summary>
 Yes.
 </details>
 <details>
-<summary><font color="#3ab7f8">Does the size of a collection affect vector searches in one of its partitions, especially when it holds up to 100 million vectors?</font></summary>
+<summary><font color="#3f9cd1">Does the size of a collection affect vector searches in one of its partitions, especially when it holds up to 100 million vectors?</font></summary>
 No. If you have specified partitions when conducting a vector search, Milvus searches the specified partitions only.
 </details>
 <details>
-<summary><font color="#3ab7f8">Does Milvus load the whole collection to the memory if I search only certain partitions in that collection?</font></summary>
+<summary><font color="#3f9cd1">Does Milvus load the whole collection to the memory if I search only certain partitions in that collection?</font></summary>
 No, Milvus only loads the partitions to search.
 </details>
 <details>
-<summary><font color="#3ab7f8">Are queries in segments processed in parallel?</font></summary>
+<summary><font color="#3f9cd1">Are queries in segments processed in parallel?</font></summary>
 Yes. But the parallelism processing mechanism varies with Milvus versions.
 
 Suppose a collection has multiple segments, then when a query request comes in:
@@ -82,31 +82,31 @@ Suppose a collection has multiple segments, then when a query request comes in:
 
 - On top of the abovementioned pipeline mechanism, GPU-enabled Milvus distributes the segments among the available GPUs.
 
-See [How Does Milvus Schedule Query Tasks](https://medium.com/unstructured-data-service/how-does-milvus-schedule-query-tasks-2ca38d7bc2f2) for more information.
+See <a href="https://medium.com/unstructured-data-service/how-does-milvus-schedule-query-tasks-2ca38d7bc2f2">How Does Milvus Schedule Query Tasks</a> for more information.
 
 </details>
 <details>
-<summary><font color="#3ab7f8">Will a batch query benefit from multi-threading?</font></summary>
-If your batch query is on a small scale (`nq` < 64), Milvus combines the query requests, in which case multi-threading helps.
+<summary><font color="#3f9cd1">Will a batch query benefit from multi-threading?</font></summary>
+If your batch query is on a small scale (<code>nq</code> < 64), Milvus combines the query requests, in which case multi-threading helps.
 
 Otherwise, the resources are already exhausted, hence multi-threading does not help much.
 </details>
 <details>
-<summary><font color="#3ab7f8">Why the search is very slow?</font></summary>
-Check if the value of `cache.cache_size` in **server_config.yaml** is greater than the size of the collection.
+<summary><font color="#3f9cd1">Why the search is very slow?</font></summary>
+Check if the value of <code>cache.cache_size</code> in <strong>server_config.yaml</strong> is greater than the size of the collection.
 </details>
 <details>
-<summary><font color="#3ab7f8">Why do I see a surge in memory usage when conducting a vector search immediately after an index is created?</font></summary>
+<summary><font color="#3f9cd1">Why do I see a surge in memory usage when conducting a vector search immediately after an index is created?</font></summary>
 This is because:
 
 - Milvus loads the newly created index file to the memory for the vector search.
 
-- The original vector files used to create the index are not yet released from the memory, because the size of original vector files and the index file has not exceeded the upper limit specified by `cache.cache_size`.
+- The original vector files used to create the index are not yet released from the memory, because the size of original vector files and the index file has not exceeded the upper limit specified by <code>cache.cache_size</code>.
 </details>
 <details>
-<summary><font color="#3ab7f8">Why does the first search take a long time after Milvus restarts?</font></summary>
-This is because, after restarting, Milvus needs to load data from the disk to the memory for the first vector search. You can set `preload_collection` in **server_config.yaml** and load as many collections as the memory permits. Milvus loads collections to the memory each time it restarts. 
+<summary><font color="#3f9cd1">Why does the first search take a long time after Milvus restarts?</font></summary>
+This is because, after restarting, Milvus needs to load data from the disk to the memory for the first vector search. You can set <code>preload_collection</code> in <strong>server_config.yaml</strong> and load as many collections as the memory permits. Milvus loads collections to the memory each time it restarts. 
 
-Otherwise, you can call `load_collection()` to load collections to the memory.
+Otherwise, you can call <code>load_collection()</code> to load collections to the memory.
 
 </details>

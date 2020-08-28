@@ -49,6 +49,6 @@ id: storage_concept.md
 ## 常见问题
 
 <details>
-<summary><font color="#3ab7f8">Milvus 的元数据存储可以使用 SQL Server 或者 PostgreSQL 吗？</font></summary>
+<summary><font color="#3f9cd1">Milvus 的元数据存储可以使用 SQL Server 或者 PostgreSQL 吗？</font></summary>
 不可以，目前仅支持 SQLite 和 MySQL。
 </details>

@@ -128,11 +128,11 @@ Milvus 使用布隆过滤器（bloom filter）来快速判断一个实体 ID 是
 ## 常见问题
 
 <details>
-<summary><font color="#3ab7f8">Milvus 可以通过扩展某些接口（如 S3 接口、GlusterFS 接口）来扩展存储吗？</font></summary>
+<summary><font color="#3f9cd1">Milvus 可以通过扩展某些接口（如 S3 接口、GlusterFS 接口）来扩展存储吗？</font></summary>
 目前暂不支持。
 </details>
 <details>
-<summary><font color="#3ab7f8">Milvus 有没有数据导出的功能？</font></summary>
-目前没有专门的工具实现该功能。你可以通过 `get_entity_by_id` 得到指定 ID 对应的向量。
+<summary><font color="#3f9cd1">Milvus 有没有数据导出的功能？</font></summary>
+目前没有专门的工具实现该功能。你可以通过 <code>get_entity_by_id</code> 得到指定 ID 对应的向量。
 
 </details>

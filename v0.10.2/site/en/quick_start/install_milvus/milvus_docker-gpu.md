@@ -139,19 +139,18 @@ $ sudo docker logs milvus_gpu_0.10.2
 ## FAQ
 
 <details>
-<summary><font color="#3ab7f8">Can I install Milvus on Windows?</font></summary>
+<summary><font color="#3f9cd1">Can I install Milvus on Windows?</font></summary>
 Yes, so long as you have set up a Docker environment on your operating system.
 </details>
 <details>
-<summary><font color="#3ab7f8">Why does Milvus return <code>Illegal instruction</code> during startup?</font></summary>
-If your CPU does not support SSE42, AVX, AVX2, or AVX512, Milvus cannot start properly. You can use `cat /proc/cpuinfo` to check the supported instruction sets.
+<summary><font color="#3f9cd1">Why does Milvus return <code>Illegal instruction</code> during startup?</font></summary>
+If your CPU does not support SSE42, AVX, AVX2, or AVX512, Milvus cannot start properly. You can use <code>cat /proc/cpuinfo</code> to check the supported instruction sets.
 
 </details>
 <details>
-<summary><font color="#3ab7f8">How to migrate data in Milvus?</font></summary>
-Copy the entire **db** directory of the original Milvus service to the new directory. When restarting the Milvus service, map the copied **db** directory to the **db** directory of the Milvus service.
-
-> Note: Data formats of different versions may not be compatible with each other. The current data format is backward compatible with Milvus v0.7.0.
+<summary><font color="#3f9cd1">How to migrate data in Milvus?</font></summary>
+Copy the entire <strong>db</strong> directory of the original Milvus service to the new directory. When restarting the Milvus service, map the copied <strong>db</strong> directory to the <strong>db</strong> directory of the Milvus service.
+</br> Note: Data formats of different versions may not be compatible with each other. The current data format is backward compatible with Milvus v0.7.0.
 
 </details>
 

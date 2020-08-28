@@ -48,15 +48,15 @@ Follow the steps below to use MySQL as metadata management service in Linux:
 ## FAQ
 
 <details>
-<summary><font color="#3ab7f8">Why does Milvus return <code>database is locked</code>?</font></summary>
-If you use SQLite to manage Metadata, you receive this error message when write requests occur frequently. We recommend using MySQL for Metadata management. See [Manage Metadata with MySQL](data_manage.md).
+<summary><font color="#3f9cd1">Why does Milvus return <code>database is locked</code>?</font></summary>
+If you use SQLite to manage Metadata, you receive this error message when write requests occur frequently. We recommend using MySQL for Metadata management. See <a href="data_manage.md">Manage Metadata with MySQL</a>.
 </details>
 <details>
-<summary><font color="#3ab7f8">Why can't I find vectors on SQLite or MySQL?</font></summary>
-Milvus stores vectors and indexes directly in the disk as files, not in SQLite or MySQL. It uses SQLite or MySQL to store metadata of the vectors instead. See [Storage Concepts](storage_concept.md) for more information.
+<summary><font color="#3f9cd1">Why can't I find vectors on SQLite or MySQL?</font></summary>
+Milvus stores vectors and indexes directly in the disk as files, not in SQLite or MySQL. It uses SQLite or MySQL to store metadata of the vectors instead. See <a href="storage_concept.md">Storage Concepts</a> for more information.
 </details>
 <details>
-<summary><font color="#3ab7f8">Can I use SQL Server or PostgreSQL to store metadata in Milvus?</font></summary>
+<summary><font color="#3f9cd1">Can I use SQL Server or PostgreSQL to store metadata in Milvus?</font></summary>
 No, we only support storing metadata using SQLite or MySQL.
 </details>
 

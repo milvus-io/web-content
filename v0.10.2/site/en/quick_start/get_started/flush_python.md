@@ -17,6 +17,6 @@ After calling <code>delete</code>, you can call <code>flush</code> again to ensu
 ## FAQ
 
 <details>
-<summary><font color="#3ab7f8">Why my data cannot be searched immediately after insertion?</font></summary>
-This is because the data has not been flushed from memory to disk. To ensure that data can be searched immediately after insertion, you can call `flush`. However, calling this method too often creates too many small files and affects search speed.
+<summary><font color="#3f9cd1">Why my data cannot be searched immediately after insertion?</font></summary>
+This is because the data has not been flushed from memory to disk. To ensure that data can be searched immediately after insertion, you can call <code>flush</code>. However, calling this method too often creates too many small files and affects search speed.
 </details>

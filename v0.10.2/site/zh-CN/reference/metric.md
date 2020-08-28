@@ -114,16 +114,16 @@ Milvus 基于不同的距离计算方式比较向量间的距离。选择合适�
 ## 常见问题
 
 <details>
-<summary><font color="#3ab7f8">为什么向量距离计算方式是内积时，搜索出来的 top1 不是目标向量本身？</font></summary>
+<summary><font color="#3f9cd1">为什么向量距离计算方式是内积时，搜索出来的 top1 不是目标向量本身？</font></summary>
 向量距离计算方式用内积时，如果向量未归一化，会出现这样的情况。
 </details>
 <details>
-<summary><font color="#3ab7f8">什么是归一化？Milvus 中为什么有时候需要归一化？</font></summary>
+<summary><font color="#3f9cd1">什么是归一化？Milvus 中为什么有时候需要归一化？</font></summary>
 归一化是使向量的模长等于一。归一化后，针对同一个向量，在同等搜索空间的条件下，欧氏距离返回的前 k 个距离最近的向量结果集，与内积返回的前 k 个相似度最大的向量结果集是等价的。
 
-可参阅文章 [向量搜索的简明数学基础](https://zhuanlan.zhihu.com/p/88117781)。
+可参阅文章 <a href="https://zhuanlan.zhihu.com/p/88117781">向量搜索的简明数学基础</a>。
 </details>
 <details>
-<summary><font color="#3ab7f8">为什么欧氏距离和内积在计算向量相似度时的结果不一致？</font></summary>
+<summary><font color="#3f9cd1">为什么欧氏距离和内积在计算向量相似度时的结果不一致？</font></summary>
 如果欧氏距离和内积返回不一致的结果，需要检查数据是否已经归一化。如果没有，请先对数据进行归一化。理论上可以证明，对于未归一化的数据，欧氏距离和内积的结果是不一致的。
 </details>
