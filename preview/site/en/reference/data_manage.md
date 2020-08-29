@@ -2,7 +2,7 @@
 id: data_manage.md
 ---
 
-# Manage metadata with MySQL
+# Manage Metadata with MySQL
 
 Milvus uses SQLite as metadata management service in the backend by default. SQLite is embedded in the Milvus process, so there is no need to run additional services. However, in production, it is strongly recommended that you use MySQL as metadata management service because of reliability.
 
