@@ -199,11 +199,13 @@ logs:
 
 <details>
 <summary><font color="#3f9cd1">除了配置文件外，怎样可以判断我确实在使用 GPU 做搜索？</font></summary>
-有以下三种方式：
-
-- 使用 <code>nvidia-smi</code> 命令查看 GPU 使用情况。
-- 用 Prometheus 配置，详见 <a href="setup_grafana.md#系统运行指标">使用 Grafana 展示监控指标 > 系统运行指标</a>。
-- 使用 Milvus 服务端的日志。
+<p>有以下三种方式：
+<ul>
+<li>使用 <code>nvidia-smi</code> 命令查看 GPU 使用情况。</li>
+<li>用 Prometheus 配置，详见 <a href="setup_grafana.md#系统运行指标">使用 Grafana 展示监控指标 > 系统运行指标</a>。</li>
+<li>使用 Milvus 服务端的日志。</li>
+</ul>
+</p>
 </details>
 <details>
 <summary><font color="#3f9cd1">如果设置了 <code>preload_collection</code>，必须是等集合全部加载到内存，服务才能访问吗？</font></summary>
