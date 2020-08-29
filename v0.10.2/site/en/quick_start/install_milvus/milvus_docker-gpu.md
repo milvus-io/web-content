@@ -102,6 +102,7 @@ After you downloaded the configuration file, you must set `enable` to `true` in 
 
 <div class="alert note">
 Before starting Docker container, you must set <code>enable</code> to <code>true</code> in <code>gpu</code> section of <b>server_config.yaml</b>.
+</div>
 
 Start Docker container and map the paths to the local files to the container:
 
