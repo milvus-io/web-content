@@ -157,12 +157,14 @@ Deleted entities do not participate in the calculation and takes up disk space. 
 
 <details>
 <summary><font color="#3f9cd1">Why is my GPU always idle?</font></summary>
-It is very likely that Milvus is using CPU for query. If you want to use GPU for query, you need to set the value of <code>gpu_search_threshold</code> in <strong>server_config.yaml</strong> to be greater than <code>nq</code> (number of vectors per query).
-
+<p>It is very likely that Milvus is using CPU for query. If you want to use GPU for query, you need to set the value of <code>gpu_search_threshold</code> in <strong>server_config.yaml</strong> to be greater than <code>nq</code> (number of vectors per query).
+</p>
+<p>
 You can use <code>gpu_search_threshold</code> to set the threshold: when <code>nq</code> is less than this value, Milvus uses CPU for queries; otherwise, Milvus uses GPU instead.
-
+</p>
+<p>
 We do not recommend enabling GPU when the query number is small.
-
+</p>
 </details>
 <details>
 <summary><font color="#3f9cd1">Why the search is very slow?</font></summary>
@@ -170,18 +172,22 @@ Check if the value of <code>cache.cache_size</code> in <strong>server_config.yam
 </details>
 <details>
 <summary><font color="#3f9cd1">How can I get the best performance from Milvus through setting <code>index_file_size</code>?</font></summary>
-You need to set <code>index_file_size</code> when creating a collection from a client. This parameter specifies the size of each segment, and its default value is `1024` in MB. When the size of newly inserted vectors reaches the specified volume, Milvus packs these vectors into a new segment. In other words, newly inserted vectors do not go into a segment until they grow to the specified volume. When it comes to creating indexes, Milvus creates one index file for each segment. When conducting a vector search, Milvus searches all index files one by one.
-
+<p>You need to set <code>index_file_size</code> when creating a collection from a client. This parameter specifies the size of each segment, and its default value is 1024 in MB. When the size of newly inserted vectors reaches the specified volume, Milvus packs these vectors into a new segment. In other words, newly inserted vectors do not go into a segment until they grow to the specified volume. When it comes to creating indexes, Milvus creates one index file for each segment. When conducting a vector search, Milvus searches all index files one by one.
+</p>
+<p>
 As a rule of thumb, we would see a 30% ~ 50% increase in the search performance after changing the value of <code>index_file_size</code> from 1024 to 2048. Note that an overly large <code>index_file_size</code> value may cause failure to load a segment into the memory or graphics memory. Suppose the graphics memory is 2 GB and <code>index_file_size</code> 3 GB, each segment is obviously too large.
-
+</p>
+<p>
 In situations where vectors are not frequently inserted, we recommend setting the value of <code>index_file_size</code> to 1024 MB or 2048 MB. Otherwise, we recommend setting the value to 256 MB or 512 MB to keep unindexed files from getting too large.
-
+</p>
 </details>
 <details>
 <summary><font color="#3f9cd1">Why GPU-enabled query is sometimes slower than CPU-only query?</font></summary>
-Generally speaking, CPU-only query works for situations where <code>nq</code> (number of vectors per query) is small, whilst GPU-enabled query works best with a large <code>nq</code>, say 500.
-
+<p>Generally speaking, CPU-only query works for situations where <code>nq</code> (number of vectors per query) is small, whilst GPU-enabled query works best with a large <code>nq</code>, say 500.
+</p>
+<p>
 Milvus needs to load data from the memory to the graphics memory for a GPU-enabled query. Only when the load time is negligible compared to the time to query, is GPU-enabled query faster.
+</p>
 </details>
 <details>
 <summary><font color="#3f9cd1">Why sometimes the query time for a small dataset is longer?</font></summary>

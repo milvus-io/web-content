@@ -49,7 +49,7 @@ Follow the steps below to use MySQL as metadata management service in Linux:
 
 <details>
 <summary><font color="#3f9cd1">Why does Milvus return <code>database is locked</code>?</font></summary>
-If you use SQLite to manage Metadata, you receive this error message when write requests occur frequently. We recommend using MySQL for Metadata management. See <a href="data_manage.md">Manage Metadata with MySQL</a>.
+If you use SQLite to manage metadata, you receive this error message when write requests occur frequently. We recommend using MySQL for metadata management. See <a href="data_manage.md">Manage Metadata with MySQL</a> for more information.
 </details>
 <details>
 <summary><font color="#3f9cd1">Why can't I find vectors on SQLite or MySQL?</font></summary>

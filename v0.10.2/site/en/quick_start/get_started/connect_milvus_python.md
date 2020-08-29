@@ -34,3 +34,13 @@ This article decribes how to connect to a Milvus server from a Python client.
    >>> milvus = Milvus(uri='tcp://localhost:19530')
    ```
 
+## FAQ
+
+<details>
+<summary><font color="#3f9cd1">Does Milvus' Python SDK have a connection pool?</font></summary>
+Python SDKs corresponding to Milvus v0.9.0 or later have a connection pool. There is no upper limit on the default number of connections in a connection pool.
+</details>
+<details>
+<summary><font color="#3f9cd1">How to fix the error when I install pymilvus on Windows?</font></summary>
+Try installing pymilvus in a Conda environment.
+</details>
