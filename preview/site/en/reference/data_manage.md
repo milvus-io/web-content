@@ -36,13 +36,30 @@ Follow the steps below to use MySQL as metadata management service in Linux:
     create database milvus
     ```
 
-5. Quit MySQL client and update the `backend_url` parameter in `server_config.yaml`. Use the IP of the host that runs MySQL service (`<MySQL_server_host IP>`). Note that the password, IP address, port, and database name must be consistent with your previous settings.
+5. Quit MySQL client and update the `backend_url` parameter in **server_config.yaml**. Use the IP of the host that runs MySQL service (`<MySQL_server_host IP>`). Note that the password, IP address, port, and database name must be consistent with your previous settings.
 
     ```yaml
     backend_url: mysql://root:123456@<MySQL_server_host IP>:3306/milvus
     ```
 
 6. Use the updated **server_config.yaml** to launch Milvus.
+
+
+## FAQ
+
+<details>
+<summary><font color="#3f9cd1">Why does Milvus return <code>database is locked</code>?</font></summary>
+If you use SQLite to manage Metadata, you receive this error message when write requests occur frequently. We recommend using MySQL for Metadata management. See <a href="data_manage.md">Manage Metadata with MySQL</a>.
+</details>
+<details>
+<summary><font color="#3f9cd1">Why can't I find vectors on SQLite or MySQL?</font></summary>
+Milvus stores vectors and indexes directly in the disk as files, not in SQLite or MySQL. It uses SQLite or MySQL to store metadata of the vectors instead. See <a href="storage_concept.md">Storage Concepts</a> for more information.
+</details>
+<details>
+<summary><font color="#3f9cd1">Can I use SQL Server or PostgreSQL to store metadata in Milvus?</font></summary>
+No, we only support storing metadata using SQLite or MySQL.
+</details>
+
 
 
 ## Related blogs about data management

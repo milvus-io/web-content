@@ -27,9 +27,9 @@ id: index.md
     当插入的数据段少于 4096 行时，Milvus 不会为其建立索引。
 </div>
 
-## 分段建索引
+## 数据段建索引
 
-Milvus 分段存储海量数据。在建立索引时，Milvus 为每个数据分段单独创建索引。
+Milvus 数据段存储海量数据。在建立索引时，Milvus 为每个数据段单独创建索引。
 
 ## 闲时建索引
 
@@ -56,7 +56,7 @@ IVF_FLAT 是最基础的 IVF 索引，存储在各个单元中的数据编码与
    | ------- | -------- |----------- |
    | `nlist` | 聚类单元数 |[1, 65536] |
    
-   **示例：**`{"nlist": 2048}`
+   **示例：**`{nlist: 2048}`
 
 - 查询参数
 
@@ -64,7 +64,7 @@ IVF_FLAT 是最基础的 IVF 索引，存储在各个单元中的数据编码与
    | -------- | ----------- | ---------- |
    | `nprobe` | 查询取的单元数 | CPU: [1, nlist] <br> GPU: [1, min(2048, nlist)] |
    
-   **示例：**`{"nprobe": 8}`
+   **示例：**`{nprobe: 8}`
 
 ### IVF_SQ8
 
@@ -98,7 +98,7 @@ IVF_PQ 是先对向量做乘积量化，然后进行 IVF 索引聚类。其索�
    | `nlist` | 聚类单元数　    | [1, 65536] |
    | `m`     | 乘积量化因子个数 | `m` 须在 {1, 2, 3, 4, 8, 12, 16, 20, 24, 28, 32, 40, 48, 56, 64, 96} 内，并且分解出的低维向量空间的维度须在 {1, 2, 3, 4, 6, 8, 10, 12, 16, 20, 24, 28, 32} 内。<br>此外，用 GPU 计算时，m x 1024 的值还不能超过显卡的 `MaxSharedMemPerBlock`。 |
    
-   **示例：**`{"nlist": 2048, "m": 16}`
+   **示例：**`{nlist: 2048, m: 16}`
 
 - 查询参数同 IVF_FLAT
 
@@ -127,7 +127,7 @@ RNSG 的查询流程与建图流程类似，以导航点为起点至少迭代 `s
    | `search_length`       | 查询迭代次数        　| [10, 300] |
    | `knng`                | 预计算最近邻结点数   　| [5, 300] |
    
-   **示例：**`{"out_degree": 30, "candidate_pool_size": 300, "search_length": 60, "knng": 50}`
+   **示例：**`{out_degree: 30, candidate_pool_size: 300, search_length: 60, knng: 50}`
 
 - 查询参数
 
@@ -135,7 +135,7 @@ RNSG 的查询流程与建图流程类似，以导航点为起点至少迭代 `s
    | --------------- | ----------- | --------- |
    | `search_length` | 查询迭代次数  | [10, 300] |
 
-   **示例：**`{"search_length": 100}`
+   **示例：**`{search_length: 100}`
 
 ### HNSW
 
@@ -154,7 +154,7 @@ HNSW（Hierarchical Small World Graph）是一种基于图的索引算法。它�
    | `M`              | 结点的最大度数        | [5, 48]  |
    | `efConstruction` | 搜索范围      | [100, 500] |
 
-   **示例：**`{"M": 16, "efConstruction": 40}`
+   **示例：**`{M: 16, efConstruction: 40}`
 
 - 查询参数
 
@@ -162,7 +162,7 @@ HNSW（Hierarchical Small World Graph）是一种基于图的索引算法。它�
    | --------|--------------- | ------------ |
    | `ef`    | 搜索范围  | [`top_k`, 4096] |
 
-   **示例：**`{"ef": 64}`
+   **示例：**`{ef: 64}`
 
 ### ANNOY
 
@@ -180,7 +180,7 @@ ANNOY（Approximate Nearest Neighbors Oh Yeah）是一种用超平面把高维�
    | --------- |-------------- | -------- |
    | `n_trees` | 空间划分的方法数 | [1, 1024] |
 
-   **示例：**`{"n_trees": 8}`
+   **示例：**`{n_trees: 8}`
 
 - 查询参数
 
@@ -188,10 +188,25 @@ ANNOY（Approximate Nearest Neighbors Oh Yeah）是一种用超平面把高维�
    | -----------|--------------------------------- | ---------------- |
    | `search_k` | 搜索的结点数。`-1` 表示用全数据量的 5% | {-1} ∪ [`top_k`, n × `n_trees`] |
 
-   **示例：**`{"search_k": -1}`
+   **示例：**`{search_k: -1}`
 
 ## 选择索引
 
-若要为你的使用场景选择合适的索引，请参阅 [如何选择索引类型](https://milvus.io/cn/blogs/2019-12-03-select-index.md)。
+- 若要为你的使用场景选择合适的索引，请参阅 [如何选择索引类型](https://milvus.io/cn/blogs/2019-12-03-select-index.md)。
+- 关于索引和向量距离计算方法的选择，请访问 [距离计算方式](metric.md)。
 
-关于索引和向量距离计算方法的选择，请访问 [距离计算方式](metric.md)。
+
+## 常见问题
+
+<details>
+<summary><font color="#3f9cd1">索引 IVF_SQ8 和 IVF_SQ8H 在召回率上有区别吗？</font></summary>
+对于相同的数据集，IVF_SQ8 和 IVF_SQ8H 的召回率一致。
+</details>
+<details>
+<summary><font color="#3f9cd1">Milvus 中 FLAT 索引和 IVF_FLAT 索引的原理比较？</font></summary>
+把 FLAT 和 IVF_FLAT 做比较，可以这么估算：
+
+已知 IVF_FLAT 索引是把向量分成 nlist 个单元。假设用默认的 <code>nlist</code> = 16384，搜索的时候是先用目标向量和这 16384 个中心点计算距离，得到最近的 <code>nprobe</code> 个单元，再在单元里计算最近向量。而 FLAT 是每条向量和目标向量计算距离。
+
+所以当总的向量条数约等于 <code>nlist</code> 时，两者的计算量相当，性能也差不多。而随着向量条数达到 <code>nlist</code> 的 2 倍、3 倍、n 倍之后，IVF_FLAT 的优势就越来越大。
+</details>

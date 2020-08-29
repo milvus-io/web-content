@@ -53,7 +53,7 @@ logs:
 
 对于其它参数，你必须重新启动 Milvus 才能使改动生效。
 
-## `server_config.yaml` 参数说明
+## **server_config.yaml** 参数说明
 
 若有任何疑问，欢迎在 GitHub 上给我们 [创建 issue](https://github.com/milvus-io/milvus/issues/new/choose) 或是 [加入 Slack 社区讨论](https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk)。
 
@@ -193,3 +193,28 @@ logs:
 <li>可选单位为 GB、MB、KB。</li>
 </ul>
 </div>
+
+
+## 常见问题
+
+<details>
+<summary><font color="#3f9cd1">除了配置文件外，怎样可以判断我确实在使用 GPU 做搜索？</font></summary>
+有以下三种方式：
+
+- 使用 <code>nvidia-smi</code> 命令查看 GPU 使用情况。
+- 用 Prometheus 配置，详见 <a href="setup_grafana.md#系统运行指标">使用 Grafana 展示监控指标 > 系统运行指标</a>。
+- 使用 Milvus 服务端的日志。
+</details>
+<details>
+<summary><font color="#3f9cd1">如果设置了 <code>preload_collection</code>，必须是等集合全部加载到内存，服务才能访问吗？</font></summary>
+是的。如果是在 <strong>server_config.yaml</strong> 里设置的，那在启动 Milvus 时就会加载好数据后才开始提供服务。
+</details>
+<details>
+<summary><font color="#3f9cd1">为什么查询时 GPU 一直空闲？</font></summary>
+此时应该是在用 CPU 进行查询。如果要用 GPU 进行查询，需要在配置文件中将 <code>gpu_search_threshold</code> 的值设置为大于 <code>nq</code> (每次查询的向量条数) 。可以将 <code>gpu_search_threshold</code> 的值调整为期望开启 GPU 搜索的 <code>nq</code> 数。若 <code>nq</code> 小于该值，则用 CPU 查询，否则使用 GPU 查询。不建议在查询批量较小时使用 GPU 搜索。
+</details>
+<details>
+<summary><font color="#3f9cd1">为什么我的日志文件时间与系统时间不一致？</font></summary>
+Docker 镜像内部的日志文件默认使用 UTC 时间。如果宿主机未使用 UTC 时间，就会出现日志文件时间与系统时间不一致的情况。建议在宿主机上挂载日志文件，这样可以保证宿主机上的日志文件和系统时间是一致的。
+
+</details>

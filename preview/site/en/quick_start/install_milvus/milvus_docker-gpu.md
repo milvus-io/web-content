@@ -63,7 +63,7 @@ $ sudo docker pull milvusdb/milvus:0.10.2-gpu-d081520-8a2393
 <ul>
 <li>If you cannot use your host to acquire Docker images and configuration files online because of network restrictions, please acquire them online from another available host, save them as a TAR file, pass it on to your local machine, and then load the TAR file as a Docker image:
 <details>
-<summary><font color="#3ab7f8">Sample code</font></summary>
+<summary><font color="#3ab7f8">Click here to view the sample code.</font></summary>
 <ol>
  <li>Save the Docker image as a TAR file, and pass it on to your local machine:</br>
 
@@ -102,6 +102,7 @@ After you downloaded the configuration file, you must set `enable` to `true` in 
 
 <div class="alert note">
 Before starting Docker container, you must set <code>enable</code> to <code>true</code> in <code>gpu</code> section of <b>server_config.yaml</b>.
+</div>
 
 Start Docker container and map the paths to the local files to the container:
 
@@ -135,6 +136,26 @@ If the Milvus server does not start up properly, check the error logs:
 ```shell
 $ sudo docker logs milvus_gpu_0.10.2
 ```
+
+## FAQ
+
+<details>
+<summary><font color="#3f9cd1">Can I install Milvus on Windows?</font></summary>
+Yes, so long as you have set up a Docker environment on your operating system.
+</details>
+<details>
+<summary><font color="#3f9cd1">Why does Milvus return <code>Illegal instruction</code> during startup?</font></summary>
+If your CPU does not support SSE42, AVX, AVX2, or AVX512, Milvus cannot start properly. You can use <code>cat /proc/cpuinfo</code> to check the supported instruction sets.
+
+</details>
+<details>
+<summary><font color="#3f9cd1">How to migrate data in Milvus?</font></summary>
+Copy the entire <strong>db</strong> directory of the original Milvus service to the new directory. When restarting the Milvus service, map the copied <strong>db</strong> directory to the <strong>db</strong> directory of the Milvus service.
+</br> Note: Data formats of different versions may not be compatible with each other. The current data format is backward compatible with Milvus v0.7.0.
+
+</details>
+
+
 
 ## What's next
 

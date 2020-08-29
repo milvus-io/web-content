@@ -10,8 +10,8 @@ Below table shows how these widely used distance metrics fit with various input 
 
 | Input Data | Distance Metrics                                             | Index Types                                                    |
 | ---------- | ------------------------------------------------------------ | -------------------------------------------------------------- |
-| Float      | Euclidean distance (L2) and inner product (IP)              | `FLAT`, `IVFLAT`, `IVFSQ8`, `IVFSQ8H`, `IVFPQ`, `RNSG`, `HNSW` |
-| Binary     | Jaccard, Tanimoto, Hamming, superstructure(FLAT only), and substructure(FLAT only) | `FLAT`, `IVFLAT`                                               |
+| Float      | Euclidean distance (L2) and inner product (IP)              | `FLAT`, `IVF_FLAT`, `IVF_SQ8`, `IVF_SQ8H`, `IVF_PQ`, `RNSG`, `HNSW` |
+| Binary     | Jaccard, Tanimoto, Hamming, superstructure(FLAT only), and substructure(FLAT only) | `FLAT`, `IVF_FLAT`                                               |
 
 ### Euclidean distance (L2)
 
@@ -102,3 +102,21 @@ Where
 - N<sub>A</sub> specifies the number of bits in the fingerprint of molecular A.
 - N<sub>B</sub> specifies the number of bits in the fingerprint of molecular B.
 - N<sub>AB</sub> specifies the number of shared bits in the fingerprint of molecular A and B.
+
+
+## FAQ
+
+<details>
+<summary><font color="#3f9cd1">Why is the top1 result of a vector search not the search vector itself, if the metric type is inner product?</font></summary>
+This occurs if you have not normalized the vectors when using inner product as the distance metric.
+</details>
+<details>
+<summary><font color="#3f9cd1">What is normalization? Why is normalization needed?</font></summary>
+To normalize a vector is to uniformly set the length of all vectors to 1. If you have normalized the vectors in the same space, then the top k nearest vectors returned using Euclidean distance (L2) are identical to the the nearest vectors returned using inner product (IP).
+
+See <a href="https://en.wikipedia.org/wiki/Unit_vector">Wikipedia</a> for more information.
+</details>
+<details>
+<summary><font color="#3f9cd1">Why do I get different results using Euclidean distance (L2) and inner product (IP) as the distance metric?</font></summary>
+Check if the vectors are normalized. If not, you need to normalize the vectors first. Theoretically speaking, similarities worked out by L2 are different from similarities worked out by IP, if the vectors are not normalized.
+</details>

@@ -66,9 +66,9 @@ Milvus 在支持 AVX 指令集的 CPU 上的查询性能较好。
 
 索引建立完成后（不包括 FLAT），索引文件需要额外占用磁盘空间，查询只需加载索引文件。
 
-* IVFFLAT 索引的数据量和其原始向量总数据量基本相等。
-* IVFSQ8 / IVFSQ8H 索引的数据量相当于其原始向量总数据量的 25% ～ 30%。
-* IVFPQ 索引的数据量根据其参数变化，一般低于其原始向量总数据量的 10%。
+* IVF_FLAT 索引的数据量和其原始向量总数据量基本相等。
+* IVF\_SQ8 / IVF\_SQ8H 索引的数据量相当于其原始向量总数据量的 25% ～ 30%。
+* IVF_PQ 索引的数据量根据其参数变化，一般低于其原始向量总数据量的 10%。
 * HNSW／RNSG／ANNOY 索引的数据量都大于其原始向量总数据量。
 
 <div class="alert note">
@@ -105,20 +105,20 @@ FLAT 是对向量的暴力搜索（brute-force search），速度最慢，但召
 
 - IVF 系列索引
 
-IVF 系列索引包括 IVF_FLAT、IVF_SQ8／IVF_SQ8H 和 IVF_PQ。IVF_SQ8／IVF_SQ8H 和 IVF_PQ 索引对向量数据做了有损压缩，磁盘占用量较少。
+IVF 系列索引包括 IVF\_FLAT、IVF\_SQ8／IVF\_SQ8H 和 IVF\_PQ。IVF\_SQ8／IVF\_SQ8H 和 IVF_PQ 索引对向量数据做了有损压缩，磁盘占用量较少。
 
 IVF 索引都有两个相同的参数：`nlist` 和 `nprobe`，相关原理可参考 [索引概览](index.md#索引概览)。
 
 根据其原理，可估算出使用 IVF 索引进行查询时的计算量。
 
-* 单个分段计算量可估算为：目标向量数量 × (`nlist` + （段内向量数 ÷ `nlist`）× `nprobe`)
-* 分段的数量可估算为：集合数据总量 ÷ `index_file_size`
-* 对集合查询所需的计算总量则为：单个分段计算量 × 分段数量 
+* 单个数据段计算量可估算为：目标向量数量 × (`nlist` + （段内向量数 ÷ `nlist`）× `nprobe`)
+* 数据段的数量可估算为：集合数据总量 ÷ `index_file_size`
+* 对集合查询所需的计算总量则为：单个数据段计算量 × 数据段数量 
 
 通过估算得出的计算总量越大，查询耗时越长。实际使用中可根据以上公式确定合理的参数，在满足召回率的前提下获得较高的查询性能。
 
 <div class="alert note">
-在持续插入数据的场景下，由于对大小未达到 <code>index_file_size</code> 的分段未建立索引，对其使用的查询方式是暴力搜索。计算量为：目标向量数量 x 该分段向量总数。
+在持续插入数据的场景下，由于对大小未达到 <code>index_file_size</code> 的数据段未建立索引，对其使用的查询方式是暴力搜索。计算量为：目标向量数量 x 该数据段向量总数。
 </div>
 
 - HNSW / RNSG / ANNOY 索引
@@ -148,3 +148,33 @@ Milvus 使用 MySQL 作为元数据后端服务。Milvus 在查询数据时会�
 - 数据段整理
 
 在 [数据段整理](storage_operation.md#数据段整理) 中提到，被删除的实体不参与计算，并且占用磁盘空间。如果有大量的实体已被删除，你可以调用 `compact` 接口来释放磁盘空间。
+
+
+## 常见问题
+
+<details>
+<summary><font color="#3f9cd1">为什么查询时 GPU 一直空闲？</font></summary>
+此时应该是在用 CPU 进行查询。如果要用 GPU 进行查询，需要在配置文件中将 <code>gpu_search_threshold</code> 的值设置为大于 <code>nq</code> (每次查询的向量条数) 。可以将 <code>gpu_search_threshold</code> 的值调整为期望开启 GPU 搜索的 <code>nq</code> 数。若 <code>nq</code> 小于该值，则用 CPU 查询，否则使用 GPU 查询。不建议在查询批量较小时使用 GPU 搜索。
+</details>
+<details>
+<summary><font color="#3f9cd1">为什么搜索的速度非常慢？</font></summary>
+请首先检查 <strong>server_config.yaml</strong> 的 <code>cache.cache_size</code> 参数是否大于集合中的数据量。
+</details>
+<details>
+<summary><font color="#3f9cd1">创建集合时 <code>index_file_size</code> 如何设置能达到性能最优？</font></summary>
+使用客户端创建集合时有一个 <code>index_file_size</code> 参数，用来指定数据存储时单个文件的大小，其单位为 MB，默认值为 1024。当向量数据不断导入时，Milvus 会把数据增量式地合并成文件。当某个文件达到 <code>index_file_size</code> 所设置的值之后，这个文件就不再接受新的数据，Milvus 会把新的数据存成另外一个文件。这些都是原始向量数据文件，如果建立了索引，则每个原始文件会对应生成一个索引文件。Milvus 在进行搜索时，是依次对每个索引文件进行搜索。
+
+根据我们的经验，当 <code>index_file_size</code> 从 1024 改为 2048 时，搜索性能会有 30% ~ 50% 左右的提升。但要注意如果该值设得过大，有可能导致大文件无法加载进显存（甚至内存）。比如显存只有 2 GB，该参数设为 3 GB，显存明显放不下。
+
+如果向集合中导入数据的频率不高，建议将 <code>index_file_size</code> 的值设为 1024 MB 或者 2048 MB。如果后续会持续地向集合中导入增量数据，为了避免查询时未建立索引的数据文件过大，建议这种情况下将该值设置为 256 MB 或者 512 MB。
+</details>
+<details>
+<summary><font color="#3f9cd1">为什么同样的数据量，用 GPU 查询比 CPU 查询慢？</font></summary>
+一般来说，当 <code>nq</code>（每次查询的向量条数）较小时，用 CPU 查询比较快。只有当 <code>nq</code> 较大（约大于 500）时，用 GPU 查询才会更有优势。
+
+因为在 Milvus 中，每次用 GPU 查询都需要将数据从内存加载到显存。只有当 GPU 查询节省的计算时间能抵消掉数据加载的时间，才能体现出 GPU 查询的优势。
+</details>
+<details>
+<summary><font color="#3f9cd1">为什么有时候小的数据集查询时间反而更长？</font></summary>
+如果数据文件的大小小于创建集合时 <code>index_file_size</code> 参数的值，Milvus 则不会为此数据文件构建索引。因此，小的数据集有可能查询时间会更长。你还可以调用 <code>create_index</code> 建立索引。
+</details>
