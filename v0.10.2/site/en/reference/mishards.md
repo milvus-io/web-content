@@ -220,9 +220,9 @@ Follow these steps to start a Milvus instance and Mishards service on a machine:
 
 To view the service chain, open [Jaeger Page](http://127.0.0.1:16686/) in your browser.
 
-![jaegerui](https://github.com/milvus-io/docs/blob/master/assets/jaegerui.png)
+![jaegerui](../../../assets/jaegerui.png)
 
-![jaegertraces](https://github.com/milvus-io/docs/blob/master/assets/jaegertraces.png)
+![jaegertraces](../../../assets/jaegertraces.png)
 
 To clean up all services:
 

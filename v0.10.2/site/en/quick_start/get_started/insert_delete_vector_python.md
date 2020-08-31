@@ -9,7 +9,7 @@ You can perform vector operations on collections or partitions. This article tal
 
 - [Insert vectors to a collection](#insert-vector-to-collection)
 - [Insert vectors to a partition](#insert-vector-to-partition)
-- [Delete vectors by IDs](#delete-vector)
+- [Delete vectors by ID](#delete-vector)
 
 ## Insert vectors to a collection
 <a name="insert-vector-to-collection"></a>
