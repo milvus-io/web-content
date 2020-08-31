@@ -19,6 +19,7 @@ id: product_faq.md
 - [Can I export data from Milvus?](#Can-I-export-data-from-Milvus)
 - [Why do the retrieved vectors suffer precision loss after the `get_entity_by_id` method call?](#Why-do-the-retrieved-vectors-suffer-precision-loss-after-the-get_entity_by_id-method-call)
 - [Should I specify entity IDs when importing vectors or have Milvus generate them for me?](#Should-I-specify-entity-IDs-when-importing-vectors-or-have-Milvus-generate-them-for-me)
+- [Can I insert vectors with existing IDs?](#Can-I-insert-vectors-with-existing-IDs)
 - [Is there a length limit on the self-defined entity IDs?](#Is-there-a-length-limit-on-the-self-defined-entity-IDs)
 - [Is there a volume limit on the vectors inserted each time?](#Is-there-a-volume-limit-on-the-vectors-inserted-each-time)
 - [Why is the `top1` result of a vector search not the search vector itself, if the metric type is inner product?](#Why-is-the-top1-result-of-a-vector-search-not-the-search-vector-itself-if-the-metric-type-is-inner-product)
@@ -103,6 +104,10 @@ Milvus stores and processes each dimension of a vector in single-precision float
 #### Should I specify entity IDs when importing vectors or have Milvus generate them for me?
 
 Either way is fine. But please note that entity IDs in the same collection must be either user-generated or Milvus-generated. Can't be both. 
+
+#### Can I insert vectors with existing IDs?
+
+Yes, you can. If you insert vectors with an existing ID, you would end up having duplicate IDs.
 
 #### Is there a length limit on the self-defined entity IDs?
 

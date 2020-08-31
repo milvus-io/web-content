@@ -7,6 +7,7 @@ id: operational_faq.md
 <!-- TOC -->
 
 - [如果在安装 Milvus 时，从 Docker Hub 拉取镜像总是失败怎么办？](#如果在安装-Milvus-时从-Docker-Hub-拉取镜像总是失败怎么办)
+- [Milvus 只能使用 Docker 部署吗？](#Milvus-只能使用-Docker-部署吗)
 - [为什么 Milvus 返回 `config check error` 的错误？](#为什么-Milvus-返回-config-check-error-的错误)
 - [为什么在导入数据时 Milvus 显示 `no space left on device` 的错误？](#为什么在导入数据时-Milvus-显示-no-space-left-on-device-的错误)
 - [为什么 Milvus 查询召回率一直不理想？](#为什么-Milvus-查询召回率一直不理想)
@@ -42,6 +43,11 @@ id: operational_faq.md
 }
 ```
 
+#### Milvus 只能使用 Docker 部署吗？
+
+Milvus 还支持源码编译，该方法仅支持 Linux 系统。详见 [从源代码编译 Milvus](https://github.com/milvus-io/milvus/blob/master/INSTALL.md)。
+
+
 #### 为什么 Milvus 返回 `config check error` 的错误？
 
 Milvus 和服务端配置文件的版本不对应。
@@ -54,7 +60,7 @@ Milvus 和服务端配置文件的版本不对应。
 
 #### 为什么 Milvus 查询召回率一直不理想？
 
-在调用 SDK 进行向量搜索时，可以增大函数中 `nprobe` 参数的值。值越大，结果越精确，但耗时也越久。详见 [Milvus 基本操作](milvus_operation.md)。
+在调用 SDK 进行向量搜索时，可以增大函数中 `nprobe` 参数的值。值越大，结果越精确，但耗时也越久。详见 [如何设置 Milvus 客户端参数](https://www.milvus.io/cn/blogs/2020-2-16-api-setting.md)。
 
 #### 为什么更新过的设置没有生效？
 

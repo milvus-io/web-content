@@ -70,6 +70,10 @@ id: insert_delete_vector_python.md
 ID 类型是非负的 64 位整型。
 </details>
 <details>
+<summary><font color="#3f9cd1">Milvus 可以插入重复 ID 的向量吗？</font></summary>
+可以，这样在 Milvus 中会存在相同 ID 的多条向量。
+</details>
+<details>
 <summary><font color="#3f9cd1">Milvus 是否支持 “边插入边查询” ？</font></summary>
 支持。
 </details>

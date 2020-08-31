@@ -46,6 +46,8 @@ As a rule of thumb, we would see a 30% ~ 50% increase in the search performance 
 <p>
 In situations where vectors are not frequently inserted, we recommend setting the value of <code>index_file_size</code> to 1024 MB or 2048 MB. Otherwise, we recommend setting the value to 256 MB or 512 MB to keep unindexed files from getting too large.
 </p>
+See <a href="tuning.md#Index">Performance Tuning > Index</a> for more information.
+
 </details>
 <details>
 <summary><font color="#3f9cd1">Can I update <code>index_file_size</code> and <code>metric_type</code> after creating a collection?</font></summary>

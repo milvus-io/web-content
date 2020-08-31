@@ -55,7 +55,7 @@ Milvus 支持在集合或分区中查询向量。
 
 <details>
 <summary><font color="#3f9cd1">为什么 Milvus 查询召回率一直不理想？</font></summary>
-在调用 SDK 进行向量搜索时，可以增大函数中 <code>nprobe</code> 参数的值。值越大，结果越精确，但耗时也越久。详见 <a href="milvus_operation.md">Milvus 基本操作</a>。
+在调用 SDK 进行向量搜索时，可以增大函数中 <code>nprobe</code> 参数的值。值越大，结果越精确，但耗时也越久。详见 <a href="https://www.milvus.io/cn/blogs/2020-2-16-api-setting.md">如何设置 Milvus 客户端参数</a>。
 </details>
 <details>
 <summary><font color="#3f9cd1">Milvus 是否支持 “边插入边查询” ？</font></summary>

@@ -69,6 +69,10 @@ After calling <code>delete</code>, you can call <code>flush</code> again to ensu
 Entity IDs must be non-negative 64-bit integers.
 </details>
 <details>
+<summary><font color="#3f9cd1">Can I insert vectors with existing IDs?</font></summary>
+Yes, you can. If you insert vectors with an existing ID, you would end up having duplicate IDs.
+</details>
+<details>
 <summary><font color="#3f9cd1">Does Milvus support inserting while searching?</font></summary>
 Yes.
 </details>

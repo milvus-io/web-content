@@ -20,6 +20,7 @@ id: product_faq.md
 - [Milvus 有没有数据导出的功能？](#Milvus-有没有数据导出的功能)
 - [为什么我通过 `get_entity_by_id` 获取的向量精度损失了？](#为什么我通过-get_entity_by_id-获取的向量精度损失了)
 - [向 Milvus 中导入数据时，应该自己指定 entity ID 还是由 Milvus 自动生成 entity ID？](#向-Milvus-中导入数据时应该自己指定-entity-ID-还是由-Milvus-自动生成-entity-ID)
+- [Milvus 可以插入重复 ID 的向量吗？](#Milvus-可以插入重复-ID-的向量吗)
 - [Milvus 中自定义 ID 有没有长度限制？](#Milvus-中自定义-ID-有没有长度限制)
 - [Milvus 中单次插入数据有上限吗？](#Milvus-中单次插入数据有上限吗)
 - [为什么向量距离计算方式是内积时，搜索出来的 `top1` 不是目标向量本身？](#为什么向量距离计算方式是内积时搜索出来的-top1-不是目标向量本身)
@@ -106,6 +107,11 @@ Milvus 将向量的每个维度以单精度（精确到小数点后 7 位）存�
 #### 向 Milvus 中导入数据时，应该自己指定 entity ID 还是由 Milvus 自动生成 entity ID？
 
 两种方法均可。但是，在一个集合内的向量必须全部使用用户指定的 entity ID 或者全部使用自动生成的 entity ID。
+
+
+#### Milvus 可以插入重复 ID 的向量吗？
+
+可以，这样在 Milvus 中会存在相同 ID 的多条向量。
 
 #### Milvus 中自定义 ID 有没有长度限制？
 

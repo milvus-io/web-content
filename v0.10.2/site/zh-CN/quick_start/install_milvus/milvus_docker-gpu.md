@@ -153,6 +153,11 @@ $ sudo docker logs milvus_gpu_0.10.2
 <p>注意：不同版本之间，数据可能会不兼容。目前数据格式兼容到 0.7.0。</p>
 
 </details>
+<details>
+<summary><font color="#3f9cd1">Milvus 只能使用 Docker 部署吗？</font></summary>
+Milvus 还支持源码编译，该方法仅支持 Linux 系统。详见 <a href="https://github.com/milvus-io/milvus/blob/master/INSTALL.md">从源代码编译 Milvus</a>。
+
+</details>
 
 
 

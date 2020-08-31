@@ -48,7 +48,7 @@ id: performance_faq.md
 
 #### 建立索引时需要设置 `nlist` 值，如何选择该值大小？
 
-该值需要根据具体的使用情况去设置。详见 [性能调优 > 索引](tuning.md#索引) 和 [如何设置 Milvus 参数](https://www.milvus.io/cn/blogs/2020-2-16-api-setting.md)。
+该值需要根据具体的使用情况去设置。详见 [性能调优 > 索引](tuning.md#索引) 和 [如何设置 Milvus 客户端参数](https://www.milvus.io/cn/blogs/2020-2-16-api-setting.md)。
 
 
 #### 为什么有时候小的数据集查询时间反而更长？
@@ -79,6 +79,7 @@ id: performance_faq.md
 
 如果向集合中导入数据的频率不高，建议将 `index_file_size` 的值设为 1024 MB 或者 2048 MB。如果后续会持续地向集合中导入增量数据，为了避免查询时未建立索引的数据文件过大，建议这种情况下将该值设置为 256 MB 或者 512 MB。
 
+可参阅 [如何设置 Milvus 客户端参数](https://www.milvus.io/cn/blogs/2020-2-16-api-setting.md)。
 
 #### Milvus 的导入性能如何？
 

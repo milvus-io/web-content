@@ -154,6 +154,10 @@ If your CPU does not support SSE42, AVX, AVX2, or AVX512, Milvus cannot start pr
 <p> Note: Data formats of different versions may not be compatible with each other. The current data format is backward compatible with Milvus v0.7.0.
 </p>
 </details>
+<details>
+<summary><font color="#3f9cd1">Is Docker the only way to install and run Milvus?</font></summary>
+No. You can also build Milvus from source code in Linux. See <a href="https://github.com/milvus-io/milvus/blob/master/INSTALL.md">Build Milvus from source code</a> for more information.
+</details>
 
 
 

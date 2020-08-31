@@ -37,7 +37,7 @@ group: version
 Please ensure that the available memory is greater than the sum of <code>cache.insert_buffer_size</code> and <code>cache.cache_size</code> set in the <b>server_config.yaml</b> file.
 </div>
 
-#### Confirm Docker status
+## Confirm Docker status
 
 Confirm that the Docker daemon is running in the background:
 
@@ -146,6 +146,10 @@ If your CPU does not support SSE42, AVX, AVX2, or AVX512, Milvus cannot start pr
 <p>Copy the entire <strong>db</strong> directory of the original Milvus service to the new directory. When restarting the Milvus service, map the copied <strong>db</strong> directory to the <strong>db</strong> directory of the Milvus service.</p>
 <p> Note: Data formats of different versions may not be compatible with each other. The current data format is backward compatible with Milvus v0.7.0.
 </p>
+</details>
+<details>
+<summary><font color="#3f9cd1">Is Docker the only way to install and run Milvus?</font></summary>
+No. You can also build Milvus from source code in Linux. See <a href="https://github.com/milvus-io/milvus/blob/master/INSTALL.md">Build Milvus from source code</a> for more information.
 </details>
 
 

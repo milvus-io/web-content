@@ -75,6 +75,8 @@ As a rule of thumb, we would see a 30% ~ 50% increase in the search performance 
 
 In situations where vectors are not frequently inserted, we recommend setting the value of `index_file_size` to 1024 MB or 2048 MB. Otherwise, we recommend setting the value to 256 MB or 512 MB to keep unindexed files from getting too large.
 
+See [Performance Tuning > Index](tuning.md#Index) for more information.
+
 #### What is the importing performance of Milvus in practical terms?
 
 When the client and the server are running on the same physical machine, it takes about 0.8 second to import 100,000 128-dimensional vectors (to an SSD disk). More specifically, the performance depends on the I/O speed of your disk.

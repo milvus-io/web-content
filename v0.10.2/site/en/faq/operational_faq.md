@@ -7,6 +7,7 @@ id: operational_faq.md
 <!-- TOC -->
 
 - [What if I failed to pull Milvus Docker image from Docker Hub?](#What-if-I-failed-to-pull-Milvus-Docker-image-from-Docker-Hub)
+- [Is Docker the only way to install and run Milvus?](#Is-Docker-the-only-way-to-install-and-run-Milvus)
 - [Why does Milvus return `config check error`?](#Why-does-Milvus-return-config-check-error)
 - [Why do I get `no space left on device` when importing data to Milvus?](#Why-do-I-get-no-space-left-on-device-when-importing-data-to-Milvus)
 - [Why is my recall rate unsatisfying?](#Why-is-my-recall-rate-unsatisfying)
@@ -42,6 +43,10 @@ Users in some countries may have limited access to Docker Hub. In this case, you
 }
 ```
 
+#### Is Docker the only way to install and run Milvus?
+
+No. You can also build Milvus from source code in Linux. See [Build Milvus from source code](https://github.com/milvus-io/milvus/blob/master/INSTALL.md) for more information.
+
 #### Why does Milvus return `config check error`?
 
 The version of configuration file does not match the version your Milvus server.
@@ -54,7 +59,7 @@ It is likely that you have not saved enough disk space.
 
 You can increase the value of `nprobe` when searching from a client. The greater the value, the more accurate the result, and the more time it takes.
 
-See [Learn Milvus Operation](milvus_operation.md) for more information.
+See [Performance Tuning > Index](tuning.md#Index) for more information.
 
 #### Why does my updated configuration not work?
 
