@@ -241,20 +241,12 @@
     },
 
     {
-      "id": "vector_db.md",
-      "title": "选择向量索引工具",
-      "label1": "reference",
-      "label2": "",
-      "label3": "",
-      "order": 2
-    },
-    {
       "id": "metric.md",
       "title": "选择距离计算方式",
       "label1": "reference",
       "label2": "",
       "label3": "",
-      "order": 3
+      "order": 2
     },
     {
       "id": "monitor",
@@ -262,7 +254,7 @@
       "label1": "reference",
       "label2": "",
       "label3": "",
-      "order": 4,
+      "order": 3,
       "isMenu": true
     },
     {
@@ -303,7 +295,7 @@
       "label1": "reference",
       "label2": "",
       "label3": "",
-      "order": 5
+      "order": 4
     },
     {
       "id": "mishards.md",
@@ -311,7 +303,7 @@
       "label1": "reference",
       "label2": "",
       "label3": "",
-      "order": 6
+      "order": 5
     },
     {
       "id": "faq",

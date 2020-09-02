@@ -239,13 +239,23 @@
       "label3": "",
       "order": 1
     },
+        
+    {
+      "id": "metric.md",
+      "title": "Choose a Distance Metric",
+      "label1": "reference",
+      "label2": "",
+      "label3": "",
+      "order": 2
+    },
+
     {
       "id": "monitor",
       "title": "Monitoring and Alerting",
       "label1": "reference",
       "label2": "",
       "label3": "",
-      "order": 2,
+      "order": 3,
       "isMenu": true
     },
     {
@@ -278,23 +288,7 @@
       "label1": "reference",
       "label2": "monitor",
       "label3": "",
-      "order": 3
-    },
-    {
-      "id": "vector_db.md",
-      "title": "Other Feature Vector Search Tools",
-      "label1": "reference",
-      "label2": "",
-      "label3": "",
-      "order": 3
-    },
-    {
-      "id": "metric.md",
-      "title": "Choose a Distance Metric",
-      "label1": "reference",
-      "label2": "",
-      "label3": "",
-      "order": 4
+      "order": 2
     },
     {
       "id": "tuning.md",
@@ -302,7 +296,7 @@
       "label1": "reference",
       "label2": "",
       "label3": "",
-      "order": 5
+      "order": 4
     },
     {
       "id": "mishards.md",
@@ -310,7 +304,7 @@
       "label1": "reference",
       "label2": "",
       "label3": "",
-      "order": 6
+      "order": 5
     },
 
     {
