@@ -1,26 +1,17 @@
 ---
-id: milvus_versions.md
+id: milvus_distributions.md
 ---
 
-# 发行版本
-
-## 概述
+# Milvus 版本比较
 
 Milvus 提供两个发行版本：CPU 版本和 GPU 版本。
 
-- CPU 版 Milvus 仅支持 CPU 运算。
-- GPU 版 Milvus 在 CPU 版的基础上对部分功能进行了 GPU 加速。
-
-如果你的计算机上安装了支持 CUDA 功能的 GPU 设备，建议你安装 Milvus 的 GPU 版本以获取针对海量数据的更优的查询性能。
-
-## 版本比较
-
-Milvus 中的向量搜索包含但不限于这两个独立的部分：创建索引过程和搜索计算过程。
-
-- GPU 版 Milvus 支持同时进行索引创建和搜索计算以提高查询效率，特别适合动态增加的数据。
 - CPU 版 Milvus 仅支持搜索计算在创建索引结束后进行，更适合静态数据。
+- GPU 版 Milvus 在 CPU 版的基础上进行了 GPU 加速：支持同时进行索引创建和搜索计算以提高查询效率，适合动态增加的数据。
 
-### CPU 版本 Milvus 支持的索引类型
+如果你的计算机上安装了支持 CUDA 功能的 GPU 设备，你可以安装 Milvus 的 GPU 版本以获取针对海量数据的更优的查询性能。
+
+## CPU 版本 Milvus 支持的索引类型
 
 <div class="table-wrapper" markdown="block">
 
@@ -36,7 +27,7 @@ Milvus 中的向量搜索包含但不限于这两个独立的部分：创建索�
 
 </div>
 
-### GPU 版本 Milvus 支持的索引类型
+## GPU 版本 Milvus 支持的索引类型
 
 <div class="table-wrapper" markdown="block">
 
@@ -55,8 +46,6 @@ Milvus 中的向量搜索包含但不限于这两个独立的部分：创建索�
 
 <div class="alert note">
 <ul>
-<li>FLAT 类型不需要建索引。</li>
 <li>对于那些 CPU 和 GPU 同时支持的索引，Milvus 支持在创建和搜索时使用不同的设备。比如，你可以在 GPU 上创建索引后再在 CPU 上查询，也可以在 CPU 上创建索引后再在 GPU 上查询。</li>
-<li>对于不同索引类型，创建索引的参数和搜索参数也有所不同。详细信息请参考 <a href="milvus_operation.md">Milvus 基本操作</a>。</li>
 </ul>
 </div>

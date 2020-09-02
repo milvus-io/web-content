@@ -44,7 +44,15 @@ Milvus 在全球范围内已被数百家组织和机构所采用，广泛应用�
 | 近实时搜索                               | 插入 Milvus 的数据默认在 1 秒后即可被搜索到。              |
 | 标量字段过滤 (即将上线)             | <ul><li>支持 Embeddings 和标量数据。 </li><li>可以对标量数据进行过滤，增强搜索的灵活性。</li></ul> |
 
+## 发行版本
+<a name='distributions'></a>
 
+Milvus 提供两个发行版本：CPU 版本和 GPU 版本。
+
+- CPU 版 Milvus 仅支持搜索计算在创建索引结束后进行，更适合静态数据。
+- GPU 版 Milvus 在 CPU 版的基础上进行了 GPU 加速：支持同时进行索引创建和搜索计算以提高查询效率，适合动态增加的数据。
+
+如果你的计算机上安装了支持 CUDA 功能的 GPU 设备，你可以安装 Milvus 的 GPU 版本以获取针对海量数据的更优的查询性能。详见：[Milvus Distributions](milvus_distributions.md)。
 
 ## 加入开发者社区
 

@@ -1,12 +1,15 @@
 ---
-id: milvus_versions.md
+id: milvus_distributions.md
 ---
 
 # Milvus Versions
 
-## Overview
+Milvus comes in two distributions: CPU-only Milvus and GPU-enabled Milvus.
 
-Milvus runs on machines with or without GPU. To use Milvus on machines without a GPU, install CPU-only Milvus. Otherwise, if you have CUDA-enabled GPUs in your computer, it is recommended that you use GPU-enabled Milvus to achieve better search performance for larger queries.
+- CPU-only Milvus only supports searching after index building completes, and hence is applicable to static datasets. 
+- GPU-enabled Milvus supports GPU acceleration for searching and index building: It supports searching and index building at the same time to improve query efficiency, and hence is applicable to dynamic datasets. 
+
+If your GPU supports CUDA, then you can install GPU-enabled Milvus to achieve much higher search performance in large-scale datasets. 
 
 
 
@@ -54,8 +57,6 @@ In Milvus, a vector search includes two separate processes: index building and s
 
 <div class="alert note">
 <ul>
-<li>FLAT index does not need index building.</li>
 <li>For indexes supporting both CPU search and GPU search, you can create or search them using different devices, either CPU or GPU. For example, you can create an index using CPU and conduct a vector search using GPU.</li>
-<li>Index building parameters and search parameters vary with index type. See <a href="milvus_operation.md">Milvus Operations</a> for more information.</li>
 </ul>
 </div>
