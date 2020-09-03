@@ -25,17 +25,30 @@ If your GPU supports CUDA, then you can install GPU-enabled Milvus to achieve mu
 
 ## Indexes for CPU-only Milvus
 
-<div class="table-wrapper" markdown="block">
+<div class="filter">
+<a href="#floating">Floating point embeddings</a> <a href="#binary">Binary embeddings</a>
+</div>
 
-| Name       | Index building with CPU | Search with CPU | Float vector support | Binary vector support |
-| -------- | ----------------- | -------------- | -------------- | ---------------- |
-| FLAT     | -                 | ✔️             | ✔️             | ✔️         　   |
-| IVF_FLAT | ✔️                | ✔️            | ✔️             | ✔️          　  |
-| IVF_SQ8  | ✔️                | ✔️            | ✔️             | ❌             |
-| IVF_PQ   | ✔️                | ✔️            | ✔️             | ❌             |
-| RNSG     | ✔️                | ✔️            | ✔️             | ❌             |
-| HNSW     | ✔️                | ✔️            | ✔️             | ❌             |
-| ANNOY    | ✔️                | ✔️            | ✔️             | ❌             |
+<div class="table-wrapper filter-floating" markdown="block">
+
+| Index type       | Indexing with CPU | Search with CPU |
+| -------- | ----------------- | -------------- |
+| FLAT     | N/A                 | ✔️           |
+| IVF_FLAT | ✔️                | ✔️            |
+| IVF_SQ8  | ✔️                | ✔️            |
+| IVF_PQ   | ✔️                | ✔️            |
+| RNSG     | ✔️                | ✔️            |
+| HNSW     | ✔️                | ✔️            |
+| ANNOY    | ✔️                | ✔️            |
+
+</div>
+
+<div class="table-wrapper filter-binary" markdown="block">
+
+| Index type      | Index building with CPU | Search with CPU |
+| -------- | ----------------- | -------------- |
+| FLAT     | N/A                | ✔️           |
+| IVF_FLAT | ✔️                | ✔️            |
 
 </div>
 

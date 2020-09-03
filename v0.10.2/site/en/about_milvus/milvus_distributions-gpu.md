@@ -23,18 +23,32 @@ If your GPU supports CUDA, then you can install GPU-enabled Milvus to achieve mu
 
 ## Indexes for GPU-enabled Milvus
 
-<div class="table-wrapper" markdown="block">
+<div class="filter">
+<a href="#floating">Floating point embeddings</a> <a href="#binary">Binary embeddings</a>
+</div>
 
-| Name       | Index building with CPU | Search with CPU | Search with GPU                                                  | Search with GPU                                          | Float vector support | Binary vector support |
-| ---------- | ----------------------- | --------------- | ---------------------------------------------------------------- | -------------------------------------------------------- | -------------------- | --------------------- |
-| FLAT     | -                | ✔️            | -                  | ✔️<br>(Only Supports floating point vectors) | ✔️             | ✔️            |
-| IVF_FLAT | ✔️                | ✔️            | ✔️<br>(Only Supports floating point vectors)  | ✔️<br>(Only Supports floating point vectors) | ✔️             | ✔️            |
-| IVF_SQ8  | ✔️                | ✔️            | ✔️                  | ✔️                 | ✔️             | ❌           |
-| IVF_SQ8H | ✔️                | ✔️            | ✔️                  | ✔️                 | ✔️             | ❌           |
-| IVF_PQ   | ✔️                | ✔️            | ✔️<br>(Only Supports GPU index for Euclidean distance)                  | ✔️<br>(Only Supports GPU search for Euclidean distance)                 | ✔️             | ❌           |
-| RNSG     | ✔️                | ✔️            | ❌                 | ❌                | ✔️             | ❌           |
-| HNSW     | ✔️                | ✔️            | ❌                 | ❌                | ✔️             | ❌           |
-| ANNOY    | ✔️                | ✔️            | ❌                 | ❌                | ✔️             | ❌           |
+<div class="table-wrapper filter-floating" markdown="block">
+
+| Index type | Indexing with CPU | Search with CPU | Indexing with GPU         | Search with GPU |
+| ---------- | ----------------- | --------------- | ------------------------- | --------------- |
+| FLAT     | N/A                | ✔️            | N/A                  | ✔️                    |
+| IVF_FLAT | ✔️                | ✔️            | ✔️                  | ✔️                 |
+| IVF_SQ8  | ✔️                | ✔️            | ✔️                  | ✔️                 |
+| IVF_SQ8H | ✔️                | ✔️            | ✔️                  | ✔️                 |
+| IVF_PQ   | ✔️                | ✔️            | ✔️                  | ✔️                |
+| RNSG     | ✔️                | ✔️            | ❌                 | ❌                |
+| HNSW     | ✔️                | ✔️            | ❌                 | ❌                |
+| ANNOY    | ✔️                | ✔️            | ❌                 | ❌                |
+
+</div>
+
+<div class="table-wrapper filter-binary" markdown="block">
+
+| Index type | Indexing with CPU | Search with CPU | Indexing with GPU  | Search with GPU |
+| ---------- | ----------------- | --------------- | ------------------ | --------------- |
+| FLAT       | N/A                | ✔️             | N/A                | ❌             |
+| IVF_FLAT   | ✔️                | ✔️             | ❌                 | ❌             |
+
 
 </div>
 

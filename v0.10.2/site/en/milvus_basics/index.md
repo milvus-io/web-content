@@ -71,30 +71,30 @@ IVF_FLAT is the most basic IVF index, and the encoded data stored in each unit i
 
 ### IVF_SQ8
 
-IVF_SQ8 does scalar quantization for each vector placed in the unit based on IVF. Scalar quantization converts each dimension of the original vector from a 4-byte floating-point number to a 1-byte unsigned integer, so the IVF_SQ8 index file occupies much less space than the IVF_FLAT index file. However, scalar quantization results in a loss of accuracy during searching vectors.
+IVF\_SQ8 does scalar quantization for each vector placed in the unit based on IVF. Scalar quantization converts each dimension of the original vector from a 4-byte floating-point number to a 1-byte unsigned integer, so the IVF\_SQ8 index file occupies much less space than the IVF\_FLAT index file. However, scalar quantization results in a loss of accuracy during searching vectors.
 
-- IVF_SQ8 has the same index building parameters as IVF_FLAT.
-- IVF_SQ8 has the same search parameters as IVF_FLAT.
+- IVF\_SQ8 has the same index building parameters as IVF\_FLAT.
+- IVF\_SQ8 has the same search parameters as IVF\_FLAT.
 
 ### IVF_SQ8H
 
-Optimized version of `IVF_SQ8` that requires both CPU and GPU to work. Unlike `IVF_SQ8`, `IVF_SQ8H` uses a GPU-based coarse quantizer, which greatly reduces time to quantize.
+Optimized version of IVF\_SQ8 that requires both CPU and GPU to work. Unlike IVF\_SQ8, IVF\_SQ8H uses a GPU-based coarse quantizer, which greatly reduces time to quantize.
 
-IVF_SQ8H is an IVF_SQ8 index that optimizes query execution.
+IVF\_SQ8H is an IVF\_SQ8 index that optimizes query execution.
 
 The query method is as follows:
 
 - If `NQ` &ge; `gpu_search_threshold`, GPU handles the entire query task.
 - If `NQ` < `gpu_search_threshold`, GPU handles the task of retrieving the `nprobe` nearest unit in the IVF index file, and CPU handles the rest.
 
-- IVF_SQ8H has the same index building parameters as IVF_FLAT.
-- IVF_SQ8H has the same search parameters as IVF_FLAT.
+- IVF\_SQ8H has the same index building parameters as IVF\_FLAT.
+- IVF\_SQ8H has the same search parameters as IVF\_FLAT.
 
 ### IVF_PQ
 
 `PQ` (Product Quantization) uniformly decomposes the original high-dimensional vector space into Cartesian products of `m` low-dimensional vector spaces, and then quantizes the decomposed low-dimensional vector spaces. Instead of calculating the distances between the target vector and the center of all the units, product quantization enables the calculation of distances between the target vector and the clustering center of each low-dimensional space and greatly reduces the time complexity and space complexity of the algorithm.
 
-IVF_PQ quantizes the product of vectors, and then performs IVF index clustering. Its index file is even smaller than IVF_SQ8, but it also causes a loss of accuracy during searching vectors.
+IVF\_PQ quantizes the product of vectors, and then performs IVF index clustering. Its index file is even smaller than IVF\_SQ8, but it also causes a loss of accuracy during searching vectors.
 
 - Index building parameters
 
@@ -105,7 +105,7 @@ IVF_PQ quantizes the product of vectors, and then performs IVF index clustering.
    
    **Example:** `{nlist: 2048, m: 16}`
 
-- IVF_PQ has the same search parameters as IVF_FLAT.
+- IVF\_PQ has the same search parameters as IVF\_FLAT.
 
 ### RNSG
 
@@ -154,8 +154,8 @@ Reference: <a href="https://arxiv.org/abs/1603.09320">Efficient and robust appro
 
    | Parameter   | Description     | Range     |
    | ---------------- | ------------------ | --------- |
-   | `M`              | Maximum degree of the node        | [5, 48]  |
-   | `efConstruction` | Search scope      | [100, 500] |
+   | `M`              | Maximum degree of the node        | [4, 64]  |
+   | `efConstruction` | Search scope      | [8, 512] |
 
    **Example:** `{M: 16, efConstruction: 40}`
 

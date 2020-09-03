@@ -23,34 +23,32 @@ Milvus 提供两个发行版本：CPU 版本和 GPU 版本。
 
 ## CPU 版本 Milvus 支持的索引类型
 
-<div class="table-wrapper" markdown="block">
+<div class="filter">
+<a href="#floating">浮点型向量</a> <a href="#binary">二值型向量</a>
+</div>
 
-| 索引类型    | CPU 建索引 | CPU 搜索 | 浮点型向量 | 二值型向量 |
-| ---------- | ---------------- | ------------ | ------------- | ------------- |
-| FLAT     | N/A                | ✔️            | ✔️             | ✔️         　   |
-| IVF_FLAT | ✔️                | ✔️            | ✔️             | ✔️          　  |
-| IVF_SQ8  | ✔️                | ✔️            | ✔️             | ❌             |
-| IVF_PQ   | ✔️                | ✔️            | ✔️             | ❌             |
-| RNSG     | ✔️                | ✔️            | ✔️             | ❌             |
-| HNSW     | ✔️                | ✔️            | ✔️             | ❌             |
-| ANNOY    | ✔️                | ✔️            | ✔️             | ❌             |
+<div class="table-wrapper filter-floating" markdown="block">
+
+| 索引类型  | CPU 建索引        | CPU 搜索       |
+| -------- | ----------------- | -------------- |
+| FLAT     | N/A                | ✔️           |
+| IVF_FLAT | ✔️                | ✔️            |
+| IVF_SQ8  | ✔️                | ✔️            |
+| IVF_PQ   | ✔️                | ✔️            |
+| RNSG     | ✔️                | ✔️            |
+| HNSW     | ✔️                | ✔️            |
+| ANNOY    | ✔️                | ✔️            |
 
 </div>
 
 ## GPU 版本 Milvus 支持的索引类型
 
-<div class="table-wrapper" markdown="block">
+<div class="table-wrapper filter-binary" markdown="block">
 
-| 索引类型    | CPU 建索引    | CPU 搜索 | GPU 建索引      | GPU 搜索       | 浮点型向量  | 二值型向量 |
-| ---------- | ---------------- | ------------ | ------------------ | ----------------- | ------------- | ------------ |
-| FLAT     | N/A                | ✔️            | N/A                  | ✔️<br>（仅支持浮点型向量） | ✔️             | ✔️            |
-| IVF_FLAT | ✔️                | ✔️            | ✔️<br>（仅支持浮点型向量）  | ✔️<br>（仅支持浮点型向量） | ✔️             | ✔️            |
-| IVF_SQ8  | ✔️                | ✔️            | ✔️                  | ✔️                 | ✔️             | ❌           |
-| IVF_SQ8H | ✔️                | ✔️            | ✔️                  | ✔️                 | ✔️             | ❌           |
-| IVF_PQ   | ✔️                | ✔️            | ✔️<br>（仅对欧氏距离支持 GPU 索引）                  | ✔️<br>（仅对欧氏距离支持 GPU 搜索）                 | ✔️             | ❌           |
-| RNSG     | ✔️                | ✔️            | ❌                 | ❌                | ✔️             | ❌           |
-| HNSW     | ✔️                | ✔️            | ❌                 | ❌                | ✔️             | ❌           |
-| ANNOY    | ✔️                | ✔️            | ❌                 | ❌                | ✔️             | ❌           |
+| 索引类型  | CPU 建索引        | CPU 搜索        |
+| -------- | ----------------- | -------------- |
+| FLAT     | N/A               | ✔️             |
+| IVF_FLAT | ✔️                | ✔️            |
 
 </div>
 

@@ -10,8 +10,8 @@ Milvus 基于不同的距离计算方式比较向量间的距离。选择合适�
 
 | 数据格式 | 距离计算方式                                                                                                       | 索引类型                                                       |
 | -------- | ------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------- |
-| 浮点型   | 欧氏距离（L2）、内积（IP）                                                                                         | `FLAT`, `IVF_FLAT`, `IVF_SQ8`, `IVF_SQ8H`, `IVF_PQ`, `RNSG`, `HNSW` |
-| 二值型   | 杰卡德距离（Jaccard）、谷本距离（Tanimoto）、汉明距离（Hamming）、超结构（superstructure）(仅 FLAT 支持)、子结构（substructure）(仅 FLAT 支持) | `FLAT`, `IVF_FLAT`                                               |
+| 浮点型   | 欧氏距离（L2）、内积（IP）                                                                                         | FLAT, IVF\_FLAT, IVF\_SQ8, IVF\_SQ8H, IVF\_PQ, RNSG, HNSW |
+| 二值型   | 杰卡德距离（Jaccard）、谷本距离（Tanimoto）、汉明距离（Hamming）、超结构（superstructure）(仅 FLAT 支持)、子结构（substructure）(仅 FLAT 支持) | FLAT, IVF_FLAT                                               |
 
 ### 欧氏距离（L2）
 

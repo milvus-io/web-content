@@ -20,11 +20,11 @@ Milvus supports searching vectors in a collection or partition.
 
    | Index Type | Search Parameter | Example Parameter | Range |
    | ---------- | --------------- | ----------------- | ----- |
-   | `FLAT` | - | | - |
-   | `IVF_FLAT`/`IVF_SQ8`/`IVF_SQ8H`/`IVF_PQ` | `nprobe`: The number of vector classes involved in the query. `nprobe` affects query accuracy. The larger the value, the higher the accuracy and the slower the speed.         | `{nprobe: 32}`         | CPU: [1, nlist] </br> GPU: [1, min(2048, nlist)]   |
-   | `RNSG`                                | `search_length`: The larger the value, the more nodes to search in the graph, the higher the recall rate, and the slower the speed.                         | `{search_length: 100}` | [10, 300]      |
-   | `HNSW`                               | `ef`: The larger the value, the more data to search in the index, the higher the recall rate, and the slower the speed.                                    | `{ef: 64}`            | [`top_k`, 4096] |
-   | `ANNOY`                              | `search_k`: The value affects search performance. The larger the value, the more accurate the search results, but the longer the search time.</br>-1 represents the default value, taking 5% of the total data. | `{search_k: -1}`    | {-1} ∪ [`top_k`, n × n_trees] |
+   | FLAT | - | | - |
+   | IVF\_FLAT / IVF\_SQ8/ IVF\_SQ8H / IVF\_PQ | `nprobe`: The number of vector classes involved in the query. `nprobe` affects query accuracy. The larger the value, the higher the accuracy and the slower the speed.         | `{nprobe: 32}`         | CPU: [1, nlist] </br> GPU: [1, min(2048, nlist)]   |
+   | RNSG                                | `search_length`: The larger the value, the more nodes to search in the graph, the higher the recall rate, and the slower the speed.                         | `{search_length: 100}` | [10, 300]      |
+   | HNSW                               | `ef`: The larger the value, the more data to search in the index, the higher the recall rate, and the slower the speed.                                    | `{ef: 64}`            | [`top_k`, 4096] |
+   | ANNOY                              | `search_k`: The value affects search performance. The larger the value, the more accurate the search results, but the longer the search time.</br>-1 represents the default value, taking 5% of the total data. | `{search_k: -1}`    | {-1} ∪ [`top_k`, n × n_trees] |
 
    <div class="alert note">
    <code>top_k</code> means searching the k vectors most similar to the target vector. It is defined during the search. The range of <code>top_k</code> is (0, 2048].
