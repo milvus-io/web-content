@@ -1,13 +1,13 @@
 ---
 id: milvus_distributions-gpu.md
-label: GPU-only Milvus
+label: GPU-enabled Milvus
 order: 1
 group: distribution
 ---
 
 # Milvus Distributions
 
-<div class="tab-wrapper"><a href="milvus_distributions-cpu.md" >CPU-only Milvus</a><a href="milvus_distributions-gpu.md" class='active'>GPU-only Milvus</a></div> 
+<div class="tab-wrapper"><a href="milvus_distributions-cpu.md" >CPU-only Milvus</a><a href="milvus_distributions-gpu.md" class='active'>GPU-enabled Milvus</a></div> 
 
 ## Overview
 

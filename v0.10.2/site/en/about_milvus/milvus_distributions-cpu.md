@@ -7,7 +7,7 @@ group: distribution
 
 # Milvus Distributions
 
-<div class="tab-wrapper"><a href="milvus_distributions-cpu.md" class='active'>CPU-only Milvus</a><a href="milvus_distributions-gpu.md" >GPU-only Milvus</a></div> 
+<div class="tab-wrapper"><a href="milvus_distributions-cpu.md" class='active'>CPU-only Milvus</a><a href="milvus_distributions-gpu.md" >GPU-enabled Milvus</a></div> 
 
 ## Overview
 
