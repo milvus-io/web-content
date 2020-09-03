@@ -21,7 +21,7 @@ Milvus 提供两个发行版本：CPU 版本和 GPU 版本。
 如果你的计算机上安装了支持 CUDA 功能的 GPU 设备，你可以安装 Milvus 的 GPU 版本以获取针对海量数据的更优的查询性能。
 
 
-## CPU 版本 Milvus 支持的索引类型
+## GPU 版本 Milvus 支持的索引类型
 
 <div class="filter">
 <a href="#floating">浮点型向量</a> <a href="#binary">二值型向量</a>
@@ -42,7 +42,6 @@ Milvus 提供两个发行版本：CPU 版本和 GPU 版本。
 
 </div>
 
-## GPU 版本 Milvus 支持的索引类型
 
 <div class="table-wrapper  filter-binary" markdown="block">
 

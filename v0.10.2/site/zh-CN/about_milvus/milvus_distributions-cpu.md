@@ -41,8 +41,6 @@ Milvus 提供两个发行版本：CPU 版本和 GPU 版本。
 
 </div>
 
-## GPU 版本 Milvus 支持的索引类型
-
 <div class="table-wrapper filter-binary" markdown="block">
 
 | 索引类型  | CPU 建索引        | CPU 搜索        |
