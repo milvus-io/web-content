@@ -36,10 +36,10 @@ Milvus 在 CentOS 系统中不支持 MySQL 8.0 或更高版本。
     create database milvus
     ```
 
-5. 退出 MySQL 客户端, 修改 **server_config.yaml** 文件的 `backend_url` 参数。使用 MySQL 服务所在的主机 IP 作为 IP 地址（`<MySQL_server_host IP>`）。注意密码、IP 地址、端口以及 database 名称要和以上几步的设置一致。
+5. 退出 MySQL 客户端, 修改 **server_config.yaml** 文件的 `meta_uri` 参数。使用 MySQL 服务所在的主机 IP 作为 IP 地址（`<MySQL_server_host IP>`）。注意密码、IP 地址、端口以及 database 名称要和以上几步的设置一致。
 
     ```yaml
-    backend_url: mysql://root:123456@<MySQL_server_host IP>:3306/milvus
+    meta_uri: mysql://root:123456@<MySQL_server_host IP>:3306/milvus
     ```
 
 6. 使用修改过的 **server_config.yaml** 启动 Milvus 服务。

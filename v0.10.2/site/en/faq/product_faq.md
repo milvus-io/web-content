@@ -143,7 +143,7 @@ See [How Does Milvus Schedule Query Tasks](https://medium.com/unstructured-data-
 
 #### How to choose an index in Milvus?
 
-It depends on your scenario. See [Select Vector Search Tool](vector_db.md) and [How to Choose an Index in Milvus](https://medium.com/unstructured-data-service/how-to-choose-an-index-in-milvus-4f3d15259212) for more information.
+It depends on your scenario. See [How to Choose an Index in Milvus](https://medium.com/unstructured-data-service/how-to-choose-an-index-in-milvus-4f3d15259212) for more information.
 
 #### Are indexes partition-specific?
 
@@ -167,7 +167,7 @@ IVF_FLAT index divides a vector space into `nlist` clusters. If you keep the def
 
 Therefore, when the total number of vectors approximately equals `nlist`, IVF_FLAT and FLAT has little difference in the way of calculation required and search performance. But as the number of vectors grows to two times, three times, or n times of `nlist`, IVF_FLAT index begins to show increasingly greater advantages.
 
-See [Select Vector Search Tool](vector_db.md) for more information.
+See [How to Choose an Index in Milvus](https://medium.com/unstructured-data-service/how-to-choose-an-index-in-milvus-4f3d15259212) for more information.
 
 #### Why do I see a surge in memory usage when conducting a vector search immediately after an index is created?
 
