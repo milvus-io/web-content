@@ -9,4 +9,3 @@ Milvus automatically merges the inserted vector data to segments. A collection c
 ```python
 >>> milvus.compact(collection_name='test01', timeout='1')
 ```
-

@@ -57,13 +57,13 @@ $ sudo docker info
 Pull the CPU-only image:
 
 ```shell
-$ sudo docker pull milvusdb/milvus:0.10.2-cpu-d081520-8a2393
+$ sudo docker pull milvusdb/milvus:0.10.1-cpu-d072020-bd02b1
 ```
 <div class="alert note">
 <ul>
 <li>If you cannot use your host to acquire Docker images and configuration files online because of network restrictions, please acquire them online from another available host, save them as a TAR file, pass it on to your local machine, and then load the TAR file as a Docker image:
 <details>
-<summary><font color="#3ab7f8">Click here to view the sample code.</font></summary>
+<summary><font color="#3ab7f8">Sample code</font></summary>
 <ol>
  <li>Save the Docker image as a TAR file, and pass it on to your local machine:</br>
 
@@ -89,11 +89,11 @@ $ sudo docker pull milvusdb/milvus:0.10.2-cpu-d081520-8a2393
 ```shell
 $ mkdir -p /home/$USER/milvus/conf
 $ cd /home/$USER/milvus/conf
-$ wget https://raw.githubusercontent.com/milvus-io/milvus/0.10.2/core/conf/demo/server_config.yaml
+$ wget https://raw.githubusercontent.com/milvus-io/milvus/v0.10.1/core/conf/demo/server_config.yaml
 ```
 
 <div class="alert note">
-If you cannot download configuration files via the <code>wget</code> command, you can create a <b>server_config.yaml</b> file under <b>/home/$USER/milvus/conf</b>, and then copy the content from <a href="https://github.com/milvus-io/milvus/blob/0.10.2/core/conf/demo/server_config.yaml">server config</a> to it.
+If you cannot download configuration files via the <code>wget</code> command, you can create a <b>server_config.yaml</b> file under <b>/home/$USER/milvus/conf</b>, and then copy the content from <a href="https://github.com/milvus-io/milvus/blob/v0.10.1/core/conf/demo/server_config.yaml">server config</a> to it.
 </div>
 
 ## Start Docker container
@@ -101,14 +101,14 @@ If you cannot download configuration files via the <code>wget</code> command, yo
 Start Docker container and map the paths to the local files to the container:
 
 ```shell
-$ sudo docker run -d --name milvus_cpu_0.10.2 \
+$ sudo docker run -d --name milvus_cpu_0.10.1 \
 -p 19530:19530 \
 -p 19121:19121 \
 -v /home/$USER/milvus/db:/var/lib/milvus/db \
 -v /home/$USER/milvus/conf:/var/lib/milvus/conf \
 -v /home/$USER/milvus/logs:/var/lib/milvus/logs \
 -v /home/$USER/milvus/wal:/var/lib/milvus/wal \
-milvusdb/milvus:0.10.2-cpu-d081520-8a2393
+milvusdb/milvus:0.10.1-cpu-d072020-bd02b1
 ```
 
 The `docker run` options used in the above command are defined as follows:
@@ -127,28 +127,11 @@ $ sudo docker ps
 If the Milvus server does not start up properly, check the error logs:
 
 ```shell
-$ sudo docker logs milvus_cpu_0.10.2
+# Get the ID of the container running Milvus.
+$ docker ps -a
+# Check docker logs.
+$ docker logs <milvus container id>
 ```
-
-## FAQ
-
-<details>
-<summary><font color="#3f9cd1">Can I install Milvus on Windows?</font></summary>
-Yes, so long as you have set up a Docker environment on your operating system.
-</details>
-<details>
-<summary><font color="#3f9cd1">Why does Milvus return <code>Illegal instruction</code> during startup?</font></summary>
-If your CPU does not support SSE42, AVX, AVX2, or AVX512, Milvus cannot start properly. You can use <code>cat /proc/cpuinfo</code> to check the supported instruction sets.
-
-</details>
-<details>
-<summary><font color="#3f9cd1">How to migrate data in Milvus?</font></summary>
-<p>Copy the entire <strong>db</strong> directory of the original Milvus service to the new directory. When restarting the Milvus service, map the copied <strong>db</strong> directory to the <strong>db</strong> directory of the Milvus service.</p>
-<p> Note: Data formats of different versions may not be compatible with each other. The current data format is backward compatible with Milvus v0.7.0.
-</p>
-</details>
-
-
 
 ## What's next
 

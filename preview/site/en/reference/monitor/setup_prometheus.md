@@ -3,15 +3,17 @@ id: setup_prometheus.md
 ---
 
 # Configure and Start Prometheus
+Milvus generates detailed time series metrics. This page shows you how to pull these metrics into [Prometheus](https://prometheus.io/), and how to connect [Grafana](https://grafana.com/) and [Alertmanager](https://prometheus.io/docs/alerting/alertmanager/) to Prometheus for flexible data visualizations and notifications.
 
-This page describes how to configure and start up [Prometheus](https://prometheus.io/), and how to connect [Alertmanager](https://prometheus.io/docs/alerting/alertmanager/) to Prometheus for metrics visualization and early warning purposes.
+## Before you begin
 
+- Make sure you have already read [Monitoring and Alerting](monitor.md) and learned about the monitoring and alerting solutions of Milvus.
 
 ## Install Prometheus
 
 1. Download the [Prometheus tarball](https://prometheus.io/download/) for your operating system.
 
-2. Go to the directory holding the Prometheus file, and ensure that Prometheus is properly installed:
+2. Go to the Prometheus file directory, and make sure Prometheus is installed successfully:
 
    ```shell
    $ ./prometheus --version
@@ -46,21 +48,21 @@ This page describes how to configure and start up [Prometheus](https://prometheu
     In the Kubernetes cluster, you need to set the <b>server_config.yaml</b> for each node to monitor.
     </div>
 
-3. Go to the Prometheus root directory, and download starter [Prometheus configuration file](https://github.com/milvus-io/docs/blob/master/v0.10.2/assets/monitoring/prometheus.yml) for Milvus:
+3. Go to the Prometheus root directory, and download starter [Prometheus configuration file](https://github.com/milvus-io/docs/blob/v0.10.1/assets/monitoring/prometheus.yml) for Milvus:
 
    ```shell
-   $ wget https://raw.githubusercontent.com/milvus-io/docs/master/v0.10.2/assets/monitoring/prometheus.yml \ -O prometheus.yml
+   $ wget https://raw.githubusercontent.com/milvus-io/docs/v0.10.1/assets/monitoring/prometheus.yml \ -O prometheus.yml
    ```
 
-4. Download starter [alerting rules](https://github.com/milvus-io/docs/blob/master/v0.10.2/assets/monitoring/alert_rules.yml) for Milvus to the Prometheus root directory:
+4. Download starter [alerting rules](https://github.com/milvus-io/docs/blob/v0.10.1/assets/monitoring/alert_rules.yml) for Milvus to the Prometheus root directory:
 
    ```shell
-   wget -P rules https://raw.githubusercontent.com/milvus-io/docs/master/v0.10.2/assets/monitoring/alert_rules.yml
+   wget -P rules https://raw.githubusercontent.com/milvus-io/docs/v0.10.1/assets/monitoring/alert_rules.yml
    ```
 
 5. Edit the Prometheus configuration file according to your needs:
 
-   - `global`: Configures parameters such as `scrape_interval` and `evaluation_interval`.
+   - global: Configures parameters such as `scrape_interval` and `evaluation_interval`.
 
    ```yaml
    global:
@@ -68,7 +70,7 @@ This page describes how to configure and start up [Prometheus](https://prometheu
      evaluation_interval: 2s # Set the evaluation interval to 2s.
    ```
 
-   - `alerting`: Sets the address and port of Alertmanager.
+   - alerting: Sets the address and port of Alertmanager.
 
    ```yaml
    alerting:
@@ -77,14 +79,14 @@ This page describes how to configure and start up [Prometheus](https://prometheu
       - targets: ['localhost:9093']
    ```
 
-   - `rule_files`: Specifies the file that defines the alerting rules.
+   - rule_files: Specifies the file that defines the alerting rules.
 
    ```yaml
    rule_files:
       - "alert_rules.yml"
    ```
 
-   - `scrape_configs`: Sets `job_name` and `targets` for scraping data.
+   - scrape_configs: Sets `job_name` and `targets` for scraping data.
 
    ```yaml
    scrape_configs:
@@ -108,14 +110,12 @@ This page describes how to configure and start up [Prometheus](https://prometheu
     ./prometheus --config.file=prometheus.yml
     ```
 
-*After starting up Prometheus, you can display and render on its interface the metrics that Milvus provides. See [Milvus Metrics](milvus_metrics.md) for more information.*
-
 ## Configure Alertmanager
 
 
 ### Events to create alert rules
 
-Proactively monitoring metrics contributes to identification of emerging issues. Creating alerting rules for events requiring immediate intervention is essential as well.
+Active monitoring helps you identify problems early. But it is also essential to create alerting rules that promptly send notifications when there are events that require investigation or intervention.
 
 This section includes the most important events for which you must create alerting rules.
 
@@ -154,11 +154,3 @@ This section includes the most important events for which you must create alerti
 
 5. Use your browser to open http://&lt;hostname&nbsp;of&nbsp;machine&nbsp;running&nbsp;alertmanager&gt;:9093, and use the Alertmanager UI to define rules for [muting alerts](https://prometheus.io/docs/alerting/alertmanager/#silences).
 
-
-## FAQ
-
-
-<details>
-<summary><font color="#3f9cd1">How can I differentiate if I have multiple Milvus nodes connected to Pushgateway?</font></summary>
-You can add a Prometheus instance in <strong>prometheus.yaml</strong>. Then Prometheus or Granafa will show the monitoring data, as well as the source node.
-</details>

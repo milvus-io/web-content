@@ -18,13 +18,30 @@
       "order": 0
     },
     {
-      "id": "milvus_versions.md",
-      "title": "发行版本",
+      "id": "architecture.md",
+      "title": "整体架构",
       "label1": "about_milvus",
       "label2": "",
       "label3": "",
       "order": 1
     },
+    {
+      "id": "features.md",
+      "title": "主要特性",
+      "label1": "about_milvus",
+      "label2": "",
+      "label3": "",
+      "order": 2
+    },
+    {
+      "id": "milvus_versions.md",
+      "title": "发行版本",
+      "label1": "about_milvus",
+      "label2": "",
+      "label3": "",
+      "order": 3
+    },
+    
     {
       "id": "milvus_basics",
       "title": "基本概念",
@@ -289,14 +306,7 @@
       "label3": "",
       "order": 2
     },
-    {
-      "id": "milvus_metrics.md",
-      "title": "Milvus 监控指标",
-      "label1": "reference",
-      "label2": "monitor",
-      "label3": "",
-      "order": 3
-    },
+
     {
       "id": "tuning.md",
       "title": "性能调优",
@@ -307,7 +317,7 @@
     },
     {
       "id": "mishards.md",
-      "title": "Mishards: 集群分片中间件",
+      "title": "Mishards - Milvus 集群分片中间件",
       "label1": "reference",
       "label2": "",
       "label3": "",
@@ -323,7 +333,7 @@
     },
     {
       "id": "performance_faq.md",
-      "title": "性能优化问题",
+      "title": "性能常见问题",
       "label1": "faq",
       "label2": "",
       "label3": "",
@@ -331,7 +341,7 @@
     },
     {
       "id": "product_faq.md",
-      "title": "产品问题",
+      "title": "产品常见问题",
       "label1": "faq",
       "label2": "",
       "label3": "",
@@ -339,7 +349,7 @@
     },
     {
       "id": "operational_faq.md",
-      "title": "部署运维问题",
+      "title": "操作常见问题",
       "label1": "faq",
       "label2": "",
       "order": 2

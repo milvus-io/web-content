@@ -4,34 +4,6 @@ id: release_notes.md
 
 # 发版说明
 
-## v0.10.2
-
-**发布时间**：2020-8-15
-
-#### 版本兼容
-
-| Milvus 版本 | Python SDK 版本 | Java SDK 版本 | Go SDK 版本 |
-| :------------- | :----------------- | :--------------- | :------------- |
-| 0.10.2     | 0.2.14     | 0.8.4       | 0.4.4      |
-
-
-#### 主要改进
-
-
-- 提升了大 `nq` 和大 `nprobe` 情况下的搜索性能。[#2653](https://github.com/milvus-io/milvus/issues/2653)
-
-
-#### 问题修复
-
-- 修复了缓存中索引占用大小计算不准确的问题。[#2890](https://github.com/milvus-io/milvus/issues/2890)
-- 修复了 IVF_PQ 索引中 IP 距离结果归并不正确的问题。[#2952](https://github.com/milvus-io/milvus/issues/2952)
-- 修复了多 GPU 场景下，如果 `cache.cache_size` 设置小于单个索引文件大小，搜索时会造成系统崩溃的问题。[#3012](https://github.com/milvus-io/milvus/issues/3012)
-- 修复了在 Mishards 中插入数据至多个分区，IP 距离结果归并不正确的问题。[#3133](https://github.com/milvus-io/milvus/issues/3133)
-
-> 详见 [CHANGELOG](https://github.com/milvus-io/milvus/blob/0.10.2/CHANGELOG.md) 了解更多已修复问题。
-
-
-
 ## v0.10.1
 
 **发布时间**：2020-7-20

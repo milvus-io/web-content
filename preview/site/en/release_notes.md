@@ -6,33 +6,6 @@ sidebar_label: Release Notes
 
 # Release notes
 
-## v0.10.2
-
-**Release date**：2020-8-15
-
-#### Compatibility
-
-| Milvus version | Python SDK version | Java SDK version | Go SDK version |
-| :------------- | :----------------- | :--------------- | :------------- |
-| 0.10.2     | 0.2.14     | 0.8.4       | 0.4.4      |
-
-
-#### Improvements
-
-
-- Improved IVF search performance when both `nq` and `nprobe` are large. [#2653](https://github.com/milvus-io/milvus/issues/2653)
-
-
-#### Fixed issues
-
-- Inaccurate calculation of the memory allocated for index files. [#2890](https://github.com/milvus-io/milvus/issues/2890)
-- Search result sets based on IVF_PQ index with IP metric are incorrectly merged in situations where multiple segments are produced for the inserted data. [#2952](https://github.com/milvus-io/milvus/issues/2952)
-- The server crashes if you set `cache.cache_size` smaller than the size of an index file in a multi-GPU scenario. [#3012](https://github.com/milvus-io/milvus/issues/3012)
-- Search result sets based on IP metric are incorrectly merged, if you insert vectors to multiple partitions in Mishards. [#3133](https://github.com/milvus-io/milvus/issues/3133)
-
-> See [CHANGELOG](https://github.com/milvus-io/milvus/blob/0.10.2/CHANGELOG.md) for more information.
-
-
 ## v0.10.1
 
 **Release date**：2020-7-20

@@ -15,14 +15,14 @@ id: connect_milvus_python.md
 1. 导入 pymilvus：
 
    ```python
-   # Import pymilvus.
+   # Import pymilvus
    >>> from milvus import Milvus, IndexType, MetricType, Status
    ```
 
 2. 使用以下任意一种方法连接 Milvus 服务端：
 
    ```python
-   # Connect to the Milvus server.
+   # Connect to Milvus server
    >>> milvus = Milvus(host='localhost', port='19530')
    ```
 
@@ -34,13 +34,3 @@ id: connect_milvus_python.md
    >>> milvus = Milvus(uri='tcp://localhost:19530')
    ```
 
-## 常见问题
-
-<details>
-<summary><font color="#3f9cd1">Milvus 的 Python SDK 有连接池吗？</font></summary>
-Milvus v0.9.0 及更高版本对应的 Python SDK 有连接池。连接池的默认连接数量没有上限。
-</details>
-<details>
-<summary><font color="#3f9cd1">在 Windows 安装 pymilvus 报错，如何解决？</font></summary>
-可以尝试在 Conda 环境下安装。
-</details>

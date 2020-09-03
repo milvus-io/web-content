@@ -7,13 +7,13 @@ id: performance_faq.md
 <!-- TOC -->
 - [Why does the first search take a long time after Milvus restarts?](#Why-does-the-first-search-take-a-long-time-after-Milvus-restarts)
 - [Why the search is very slow?](#Why-the-search-is-very-slow)
-- [How do I improve Milvus' performance?](#How-do-I-improve-Milvus-performance)
-- [How to set the value of `nlist` when I build indexes?](#How-to-set-the-value-of-nlist-when-I-build-indexes)
+- [How do I improve Milvus' performance?](#How-do-I-improve-Milvus'-performance)
+- [How to set the value of `nlist` when I build indexes?](#How-to-set-the-value-of-`nlist`-when-I-build-indexes)
 - [Why sometimes the query time for a small dataset is longer?](#Why-sometimes-the-query-time-for-a-small-dataset-is-longer)
 - [Why is my GPU always idle?](#Why-is-my-GPU-always-idle)
 - [Why my data cannot be searched immediately after insertion?](#Why-my-data-cannot-be-searched-immediately-after-insertion)
 - [Why does my CPU usage stay low?](#Why-does-my-CPU-usage-stay-low)
-- [How can I get the best performance from Milvus through setting `index_file_size`?](#How-can-I-get-the-best-performance-from-Milvus-through-setting-index_file_size)
+- [How can I get the best performance from Milvus through setting `index_file_size`?](#How-can-I-get-the-best-performance-from-Milvus-through-setting-`index_file_size`)
 - [What is the importing performance of Milvus in practical terms?](#What-is-the-importing-performance-of-Milvus-in-practical-terms)
 - [Does searching while inserting affect the search speed?](#Does-searching-while-inserting-affect-the-search-speed)
 - [Will a batch query benefit from multi-threading?](#Will-a-batch-query-benefit-from-multi-threading)
@@ -35,6 +35,7 @@ Check if the value of `cache.cache_size` in **server_config.yaml** is greater th
 #### How do I improve Milvus' performance?
 
 - Ensure that the value of `cache.cache_size` in **server_config.yaml** is greater than the size of the collection.
+- Adjust the value of `use_blas_threshold`, ensuring that `nq` < `use_blas_threshold`.
 - Ensure that all segments are indexed. 
 - Check if there are other processes on the server consuming CPU resources.
 - Adjust the values of `index_file_size` and `nlist`.

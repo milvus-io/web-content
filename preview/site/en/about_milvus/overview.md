@@ -4,51 +4,23 @@ id: overview.md
 
 # What is Milvus 
 
-## Overview
+As an open source vector similarity search engine, Milvus is easy-to-use, highly reliable, scalable, robust, and blazing fast. It integrates vector index libraries such as Faiss, NMSLIB, and Annoy, hides their complexity, and provides simple and consistent APIs. Milvus offers efficient means of managing vector data, including adding, deleting, and modifying vector and non-vector data. Aside from near real-time search for vectors, Milvus also supports filtering scalar data. With the increase of data and query scale, Milvus also provides a solution for cluster sharding, which supports functions such as read/write separation, horizontal scalability, and dynamic scalability, to cope with large data volume. These capabilities facilitate the extensive use of Milvus in hundreds of organizations and institutions worldwide in the following scenarios:
 
-Milvus is an embeddings similarity search engine that is highly flexible, reliable, and blazing fast. It supports adding, deleting, updating, and near-real-time search of embeddings on a scale of trillion bytes. By encapsulating multiple widely adopted index libraries, such as Faiss, NMSLIB, and Annoy, it provides a comprehensive set of intuitive APIs, allowing you to choose index types based on your scenario. By supporting filtering of scalar data, Milvus takes the recall rate even higher and adds more flexibility to your search. 
+- Image, video, and audio search
+- Text search, recommender system, interactive question answering system, and other text search fields
+- Drug discovery, genetic screening, and other biomedical fields
 
+In addition to core functions such as data management and vector search, Milvus also provides
 
-Milvus runs on the client-server model.
+- JSON-based DSL that contains flexible and convenient search methods,
+- SDK and RESTful APIs based on Python / Java / Go / C++,
+- monitoring and alarm system based on Prometheus,
+- deployment methods based on Docker and Kubernetes.
 
-- The Milvus server comprises two parts: Milvus Core and Meta Store.
+The above features have greatly enhanced the ease of use of Milvus.
 
-    * Milvus Core stores and manages embeddings and scalar data.
-    * Meta Store stores and manages metadata in SQLite for testing or MySQL for production. 
+Milvus is a user-friendly product out of the box because all configuration parameters have default values. With the growing understanding of Milvus, you will find that Milvus is flexible and configurable in its entirety. You can explore the advanced features of Milvus to optimize the storage and search of vectors to better serve your business.
 
-- On the client side, Milvus provides SDKs in Python, Java, Go, and C++, as well as RESTful APIs. 
+Milvus was released under the Apache 2.0 License and officially open sourced in October 2019. It is an incubation project of the [LF AI](https://lfai.foundation/) Foundation. The source code of Milvus is hosted on GitHub: [Milvus · An Open Source Vector Similarity Search Engine](https://github.com/milvus-io/milvus). If you want to join our developer community, welcome to visit: [Contribute to Milvus](https://github.com/milvus-io/milvus/blob/master/CONTRIBUTING.md#contributing-to-milvus).
 
-Milvus was released under the Apache 2.0 License and officially open sourced in October 2019. It is an incubation project under [LF AI Foundation](https://lfai.foundation/). The source code of Milvus is hosted on [GitHub](https://github.com/milvus-io/milvus).
-
-> For now, the Milvus server runs on a standalone node. For scenarios involving large datasets or requiring high concurrency, check out Mishards, our cluster sharding middleware that is currently under development.
-
-## Overall architecture
-
-![Milvus architecture](../../../assets/milvus_arch.png)
-
-
-## Scenarios
-
-Milvus has been used in hundreds of organizations and institutions worldwide mainly in the following scenarios:
-
-- Image, video, and audio search.
-- Text search, recommender system, interactive question answering system, and other text search fields.
-- Drug discovery, genetic screening, and other biomedical fields.
-
-See [Scenarios](https://www.milvus.io/scenarios/) for more information. 
-
-## Key features
-
-| Feature                                                    | Description                                                  |
-| ---------------------------------------------------------- | ------------------------------------------------------------ |
-| Heterogeneous computing                                    | <ul><li>Optimizes search and indexing performance for GPU.</li><li>Completes a search in milliseconds for datasets on a scale of trillion Bytes.</li><li>Manages datasets in a dynamic environment. </li></ul> |
-| Compatible with mainstream libraries, metrics, and tooling | <ul><li>Encapsulates Faiss, NMSLIB, and Annoy libraries.</li><li>Supports Quantization, Graph-based, and Tree-based indexes.</li><li>Similarity metrics including Euclidean distance (L2), Inner Product, Hamming distance, Jaccard distance, and more.</li><li>Prometheus and Grafana for monitoring and visualization of runtime metrics.</li></ul> |
-| Near-real-time (NRT) search                                | Inserted datasets are searchable in one second.              |
-| Scalar field filtering (coming soon)               | <ul><li>Supports embeddings and scalar data. </li><li>Adds more flexibility to your search by supporting filtering of scalar data.</li></ul> |
-
-
-## Join our community
-
-Before joining our developer community, please take some time reading our code contribution guidelines [Contribute to Milvus](https://github.com/milvus-io/milvus/blob/master/CONTRIBUTING.md#contributing-to-milvus).
-
-If you have questions about functions or SDKs of Milvus, you can join our [GitHub Discussions](https://github.com/milvus-io/milvus/discussions) or [our Slack channel](https://join.slack.com/t/milvusio/shared_invite/zt-e0u4qu3k-bI2GDNys3ZqX1YCJ9OM~GQ).
+If you have any questions about the functions or SDK of Milvus, you are welcomed to join [Slack](https://join.slack.com/t/milvusio/shared_invite/zt-e0u4qu3k-bI2GDNys3ZqX1YCJ9OM~GQ) and talk with us.

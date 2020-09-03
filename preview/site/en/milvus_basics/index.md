@@ -71,30 +71,30 @@ IVF_FLAT is the most basic IVF index, and the encoded data stored in each unit i
 
 ### IVF_SQ8
 
-IVF_SQ8 does scalar quantization for each vector placed in the unit based on IVF. Scalar quantization converts each dimension of the original vector from a 4-byte floating-point number to a 1-byte unsigned integer, so the IVF_SQ8 index file occupies much less space than the IVF_FLAT index file. However, scalar quantization results in a loss of accuracy during searching vectors.
+IVF\_SQ8 does scalar quantization for each vector placed in the unit based on IVF. Scalar quantization converts each dimension of the original vector from a 4-byte floating-point number to a 1-byte unsigned integer, so the IVF\_SQ8 index file occupies much less space than the IVF\_FLAT index file. However, scalar quantization results in a loss of accuracy during searching vectors.
 
-- IVF_SQ8 has the same index building parameters as IVF_FLAT.
-- IVF_SQ8 has the same search parameters as IVF_FLAT.
+- IVF\_SQ8 has the same index building parameters as IVF\_FLAT.
+- IVF\_SQ8 has the same search parameters as IVF\_FLAT.
 
 ### IVF_SQ8H
 
-Optimized version of `IVF_SQ8` that requires both CPU and GPU to work. Unlike `IVF_SQ8`, `IVF_SQ8H` uses a GPU-based coarse quantizer, which greatly reduces time to quantize.
+Optimized version of IVF\_SQ8 that requires both CPU and GPU to work. Unlike IVF\_SQ8, IVF\_SQ8H uses a GPU-based coarse quantizer, which greatly reduces time to quantize.
 
-IVF_SQ8H is an IVF_SQ8 index that optimizes query execution.
+IVF\_SQ8H is an IVF\_SQ8 index that optimizes query execution.
 
 The query method is as follows:
 
 - If `NQ` &ge; `gpu_search_threshold`, GPU handles the entire query task.
 - If `NQ` < `gpu_search_threshold`, GPU handles the task of retrieving the `nprobe` nearest unit in the IVF index file, and CPU handles the rest.
 
-- IVF_SQ8H has the same index building parameters as IVF_FLAT.
-- IVF_SQ8H has the same search parameters as IVF_FLAT.
+- IVF\_SQ8H has the same index building parameters as IVF\_FLAT.
+- IVF\_SQ8H has the same search parameters as IVF\_FLAT.
 
 ### IVF_PQ
 
 `PQ` (Product Quantization) uniformly decomposes the original high-dimensional vector space into Cartesian products of `m` low-dimensional vector spaces, and then quantizes the decomposed low-dimensional vector spaces. Instead of calculating the distances between the target vector and the center of all the units, product quantization enables the calculation of distances between the target vector and the clustering center of each low-dimensional space and greatly reduces the time complexity and space complexity of the algorithm.
 
-IVF_PQ quantizes the product of vectors, and then performs IVF index clustering. Its index file is even smaller than IVF_SQ8, but it also causes a loss of accuracy during searching vectors.
+IVF\_PQ quantizes the product of vectors, and then performs IVF index clustering. Its index file is even smaller than IVF\_SQ8, but it also causes a loss of accuracy during searching vectors.
 
 - Index building parameters
 
@@ -103,9 +103,9 @@ IVF_PQ quantizes the product of vectors, and then performs IVF index clustering.
    | `nlist` | Number of cluster units　    | [1, 65536] |
    | `m`     | Number of factors of product quantization | `m` should be in {1, 2, 3, 4, 8, 12, 16, 20, 24, 28, 32, 40, 48, 56, 64, 96}, and the dimensions of the low-dimensional vector space should be in {1, 2, 3, 4, 6, 8, 10, 12, 16, 20, 24, 28, 32}.<br>Besides, when computing with GPU, ensure that the result of m x 1024 does not exceed `MaxSharedMemPerBlock` of your graphics card. |
    
-   **Example:** `{nlist: 2048, m: 16}`
+   **Example:** `{"nlist": 2048, "m": 16}`
 
-- IVF_PQ has the same search parameters as IVF_FLAT.
+- IVF\_PQ has the same search parameters as IVF\_FLAT.
 
 ### RNSG
 
@@ -130,7 +130,7 @@ Reference: <a href="http://www.vldb.org/pvldb/vol12/p461-fu.pdf"> Fast Approxima
    | `search_length`       | Number of query iterations        　| [10, 300] |
    | `knng`                | Number of nearest neighbors   　| [5, 300] |
    
-   **Example:** `{out_degree: 30, candidate_pool_size: 300, search_length: 60, knng: 50}`
+   **Example:** `{"out_degree": 30, "candidate_pool_size": 300, "search_length": 60, "knng": 50}`
 
 - Search parameters
 
@@ -138,7 +138,7 @@ Reference: <a href="http://www.vldb.org/pvldb/vol12/p461-fu.pdf"> Fast Approxima
    | -------- | ----------- | ---------- |
    | `search_length` | Number of query iterations  | [10, 300] |
    
-   **Example:** `{search_length: 100}`
+   **Example:** `{"search_length": 100}`
 
 ### HNSW
 
@@ -154,10 +154,10 @@ Reference: <a href="https://arxiv.org/abs/1603.09320">Efficient and robust appro
 
    | Parameter   | Description     | Range     |
    | ---------------- | ------------------ | --------- |
-   | `M`              | Maximum degree of the node        | [5, 48]  |
-   | `efConstruction` | Search scope      | [100, 500] |
+   | `M`              | Maximum degree of the node        | [4, 64]  |
+   | `efConstruction` | Search scope      | [8, 512] |
 
-   **Example:** `{M: 16, efConstruction: 40}`
+   **Example:** `{"M": 16, "efConstruction": 40}`
 
 - Search parameters
 
@@ -165,7 +165,7 @@ Reference: <a href="https://arxiv.org/abs/1603.09320">Efficient and robust appro
    | --------|--------------- | ------------ |
    | `ef`    | Search scope  | [`top_k`, 4096] |
 
-   **Example:** `{ef: 64}`
+   **Example:** `{"ef": 64}`
 
 ### ANNOY
 
@@ -183,7 +183,7 @@ Reference: <a href="https://erikbern.com/2015/10/01/nearest-neighbors-and-vector
    | --------- |-------------- | -------- |
    | `n_trees` | The number of methods of space division | [1, 1024] |
 
-   **Example:**`{n_trees: 8}`
+   **Example:**`{"n_trees": 8}`
 
 - Search parameters
 
@@ -191,30 +191,10 @@ Reference: <a href="https://erikbern.com/2015/10/01/nearest-neighbors-and-vector
    | -----------|--------------------------------- | ---------------- |
    | `search_k` | The number of nodes to be searched. `-1` means 5% of the whole data. | {-1} ∪ [`top_k`, n × `n_trees`] |
 
-   **Example:**`{search_k: -1}`
+   **Example:**`{"search_k": -1}`
 
 ## How to choose an index
 
 To learn how to choose an appropriate index for your application scenarios, please read [How to Select an Index in Milvus](https://medium.com/@milvusio/how-to-choose-an-index-in-milvus-4f3d15259212).
 
 To learn how to choose an appropriate index for a metric, see [Distance Metrics](metric.md).
-
-
-## FAQ
-
-<details>
-<summary><font color="#3f9cd1">Does IVF_SQ8 differ from IVF_SQ8H in terms of recall rate?
-</font></summary>
-No, they have the same recall rate for the same dataset.
-</details>
-<details>
-<summary><font color="#3f9cd1">What is the difference between FLAT index and IVF_FLAT index?</font></summary>
-<p>IVF_FLAT index divides a vector space into <code>nlist</code> clusters. If you keep the default value of <code>nlist</code> as 16384, Milvus compares the distances between the target vector and the centers of all 16384 clusters to get <code>nprobe</code> nearest clusters. Then Milvus compares the distances between the target vector and the vectors in the selected clusters to get the nearest vectors. Unlike IVF_FLAT, FLAT directly compares the distances between the target vector and each and every vector.
-</p>
-<p>
-Therefore, when the total number of vectors approximately equals <code>nlist</code>, IVF_FLAT and FLAT has little difference in the way of calculation required and search performance. But as the number of vectors grows to two times, three times, or n times of <code>nlist</code>, IVF_FLAT index begins to show increasingly greater advantages.
-</p>
-<p>
-See <a href="vector_db.md">Select Vector Search Tool</a> for more information.
-</p>
-</details>

@@ -62,7 +62,7 @@ You need to restart Milvus Docker each time you update the configuration file. S
 
 #### How can I know if Milvus has started successfully?
 
-Run `sudo docker logs <container ID>` to check if Milvus is running properly.
+Run `docker logs <container ID>` to check if Milvus is running properly.
 
 #### Why is the time in the log files different from the system time?
 
@@ -70,7 +70,7 @@ The log files in the Docker container use UTC time by default. If your host mach
 
 #### How can I know whether my CPU supports Milvus?
 
-The instruction sets that Milvus supports are SSE42, AVX, AVX2, and AVX512. Your CPU must support at least one of them for Milvus to function properly.
+The instruction sets Milvus supports are SSE42, AVX, AVX2, and AVX512. Your CPU must support at least one of them for Milvus to function properly.
 
 #### Why does Milvus return Illegal instruction during startup?
 
@@ -104,15 +104,15 @@ Try installing pymilvus in a Conda environment.
 
 #### Can I deploy Milvus service in an air-gapped environment?
 
-Milvus is released as a Docker image. Follow these steps to deploy it from offline:
+Milvus is released as a Docker image, and hence can be deployed from offline:
 
-1. Pull the latest Milvus Docker image when you have Internet access.
+- Pull the latest Milvus Docker image when you have Internet access.
 
-2. Run `docker save` to save the Docker image as a TAR file.
+- Run `docker save` to save the Docker image as a TAR file.
 
-3. Transfer the TAR file to the air-gapped environment.
+- Transfer the TAR file to **the** air-gapped environment.
 
-4. Run `docker load` to load the file as a Docker image.
+- Run `docker load` to load the file as a Docker image.
 
 For more information about Docker, see [docs.docker.com](https://docs.docker.com/).
 
@@ -126,11 +126,11 @@ We recommend using MySQL to manage Metadata in production environment.
 
 #### How to calculate required memory based on the size of the dataset?
 
-Different indexes require different memory space. You can use [Milvus sizing tool](https://milvus.io/tools/sizing) to calculate the required memory for a vector search.
+Different indexes require different memory space. You can use [Milvus sizing tool](https://milvus.io/tools/sizing) to calculate the required memory for vector search.
 
 #### How to migrate data in Milvus?
 
-Copy the entire **db** directory of the original Milvus service to the new directory. When restarting the Milvus service, map the copied **db** directory to the **db** directory of the Milvus service.
+Copy the entire db directory of the original Milvus service to the new directory. When restarting the Milvus service, map the copied db directory to the db directory of the Milvus service.
 
 <div class="alert note">
 Note: Data formats of different versions may not be compatible with each other. The current data format is backward compatible with Milvus v0.7.0.

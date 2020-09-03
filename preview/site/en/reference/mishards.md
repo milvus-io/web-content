@@ -2,7 +2,7 @@
 id: mishards.md
 ---
 
-# Mishards: Cluster Sharding Middleware
+# [Mishards](https://github.com/milvus-io/milvus/tree/master/shards) - Milvus Cluster Sharding Middleware
 
 ## What is Mishards
 
@@ -12,7 +12,7 @@ Mishards is a Milvus cluster sharding middleware developed in Python. It handles
 
 Mishards cascades a request from upstream down to its sub-modules splitting the upstream request, and then collects and returns the results of the sub-services to upstream.
 
-![proxy](../../../assets/mishards.png)
+![proxy](https://milvus.io/static/c00635f52b4cbe35ebd6bb9ce5af1db2/302a4/image_04.png)
 
 ## Target scenarios
 
@@ -34,7 +34,7 @@ Mishards is suitable for scenarios with large data scale. So how to judge the si
 
 ### Overall architecture
 
-![structure](../../../assets/mishards_structure.png)
+![structure](https://milvus.io/static/c1dcc5824580dd51b8beb81bbf4cb00d/302a4/image_02.png)
 
 ### Main components
 
@@ -61,7 +61,7 @@ Mishards is suitable for scenarios with large data scale. So how to judge the si
 
 Metadata records the structure information of the underlying data. In a distributed system, Milvus write nodes are the only producers of metadata; Mishards nodes, Milvus write nodes, and Milvus read nodes are consumers of Metadata. 
 
-<div class="alert note">
+<div class="alert note">
 Milvus only supports MySQL or SQLite as its Metadata backend for now. In a distributed system, the storage backend for metadata can only be MySQL.
 </div>
 
@@ -75,7 +75,7 @@ Milvus only supports MySQL or SQLite as its Metadata backend for now. In a distr
 
 Service discovery provides Mishards with the address information of all Milvus read and write nodes. Mishards defines the relevant service discovery API `IServiceRegistryProvider`, and provides extensions in extension mode. Milvus provides two extensions by default: **KubernetesProvider** corresponds to Kubernetes cluster; **StaticProvider** corresponds to static configuration. You can customize your own service discovery extension based on these two extensions.
 
-![discovery](../../../assets/mishards_discovery.png)
+![discovery](https://milvus.io/static/63f649314b297b1fe0b07d2c8c0ba8ea/302a4/image_07.png)
 
 | Parameter | Required | Type    | Default  | Description                                                         |
 | ------------------------------------- | -------- | ------- | -------- | ------------------------------------------------------------ |
@@ -95,7 +95,7 @@ A distributed systems often distributes requests to multiple internal services. 
 
 Mishards defines the chain tracking APIs and provides extensions in extension mode. It provides Jaeger-based extensions for now.
 
-<div class="alert note">
+<div class="alert info">
 See <a href="https://www.jaegertracing.io/docs/1.18/getting-started/">Jaeger Doc</a> to learn how to integrate Jaeger.
 </div>
 
@@ -125,7 +125,7 @@ Mishards obtains the addresses of Milvus read and write nodes from the service d
 
 Mishards defines APIs related to routing strategies and provides relevant extensions. You can customize your routes according to your business scenario and based on the default consistent hash routing extension.
 
-![router](../../../assets/mishards_router.png)
+![router](https://milvus.io/static/84435d8783b7f4454b3667544ba2a4cf/302a4/image_08.png)
 
 | Parameter | Required | Type    | Default  | Description                                                         |
 | -------------------- | -------- | ------ | ------------------------- | ------------------------------------------------------------ |
@@ -164,13 +164,13 @@ Follow these steps to start a Milvus instance and Mishards service on a machine:
    - If your Docker version is earlier than v19.03:
 
    ```shell
-   $ sudo docker  run --runtime=nvidia --rm -d -p 19530:19530 -v /tmp/milvus/db:/var/lib/milvus/db milvusdb/milvus:0.10.2-gpu-d081520-8a2393
+   $ sudo docker  run --runtime=nvidia --rm -d -p 19530:19530 -v /tmp/milvus/db:/var/lib/milvus/db milvusdb/milvus:0.10.1-gpu-d072020-bd02b1
    ```
 
    - Otherwise:
 
    ```shell
-   $ sudo docker run --gpus all --rm -d -p 19530:19530 -v /tmp/milvus/db:/var/lib/milvus/db milvusdb/milvus:0.10.2-gpu-d081520-8a2393
+   $ sudo docker run --gpus all --rm -d -p 19530:19530 -v /tmp/milvus/db:/var/lib/milvus/db milvusdb/milvus:0.10.1-gpu-d072020-bd02b1
    ```
 
 4. Change the directory permission:
@@ -237,7 +237,7 @@ $ make clean_deploy
 - Kubernetes 1.10 or later
 - Helm 2.12.0 or later
 
-<div class="alert note">
+<div class="alert info">
 See <a href="https://helm.sh/docs/">Helm Docs</a> for more information about using Helm.
 </div>
 
@@ -309,7 +309,7 @@ Mishards is based on shared storage, so the Kubernetes cluster must have availab
    - If your cluster is deployed on AWS, use [Elastic File System (EFS)](https://aws.amazon.com/efs/).
    - If your cluster is deployed on Azure, use [Azure File Storage (AFS)](https://docs.microsoft.com/en-us/azure/aks/azure-files-dynamic-pv).
 
-<div class="alert note">
+<div class="alert info">
 <ul>
 <li>See <a href="https://kubernetes.io/docs/concepts/storage/persistent-volumes/">Persistent Volumes</a> for more information about applying for and managing Persistent Volume.</li>
 <li>See <a href="https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes">Access Modes</a> for more information about the access modes of Persistent Volume.</li>
@@ -336,7 +336,7 @@ You can find all parameters supported by Milvus-Helm at [Milvus Helm Charts](htt
 
    Here, the number of replica sets is controlled by `mishards.replica` and `readonly.replica`. Their default values are 1.
 
-   <div class="alert note">
+   <div class="alert info">
    Currently, the write nodes in the Mishards cluster cannot be expanded.
    </div>
 
@@ -373,7 +373,7 @@ You can find all parameters supported by Milvus-Helm at [Milvus Helm Charts](htt
       milvus-release .
    ```
 
-   <div class="alert note">
+   <div class="alert info">
    <ul>
    <li>See <a href="milvus_config.md">Milvus configuration</a> for more Milvus configuration parameters.</li>
    <li>See <a href="https://github.com/milvus-io/milvus-helm/blob/master/README.md">Milvus Helm Charts</a> for more Milvus-Helm configuration parameters.</li>
@@ -393,6 +393,6 @@ You can find all parameters supported by Milvus-Helm at [Milvus Helm Charts](htt
       milvus-release .
    ```
 
-   <div class="alert note">
+   <div class="alert info">
    See <a href="https://kubernetes.io/docs/tasks/manage-gpus/scheduling-gpus/">Schedule GPUs</a> for GPU resource management and scheduling in Kubernetes.
    </div>
