@@ -22,7 +22,7 @@ This parameter is used to enable or disable the [Write Ahead Log (WAL)](write_ah
 * When write ahead log is enabled, the write ahead log module writes data to the disk, and then turns to the insert operation.
 * When write ahead log is disabled, the data insertion speed is faster. The system directly writes the data to the mutable buffer in the memory and immediately turns to the insert operation.
 
-However, for `delete` operations, the operation speed is faster when write ahead log is enabled. To ensure the reliability of the data, it is recommended that you enable write ahead log.
+`delete` operations are faster when write ahead log is enabled. We recommend that you enable write ahead log to ensure reliability of your data. 
 
 - `storage.auto_flush_interval`
 
@@ -32,7 +32,7 @@ This parameter (1 second by default) refers to the interval time of the data flu
 Milvus cannot search for data that has not been flushed within this time interval.
 </div>
 
-Besides, the parameter `index_file_size`, which is used when creating collections, has an impact on the insertion performance. The value of this parameter is 1024 MB by default and 4096 MB at most. The larger the `index_file_size`, the more times it takes to merge data to the size set by this parameter, which affects the throughput rate of the insert operation. The smaller the parameter, the more data segments are generated. This may deteriorate the query performance.
+Besides, the parameter `index_file_size`, which is used when creating collections, has an impact on the insertion performance. The value of this parameter is 1024 MB by default and 4096 MB at most. The larger the `index_file_size`, the more time it takes to merge data to the size set by this parameter, which affects the throughput rate of the insert operation. The smaller the parameter, the more data segments are generated. This may worsen query performance.
 
 Besides software-level elements, network bandwidth and storage media also play a role in the insertion performance.
 

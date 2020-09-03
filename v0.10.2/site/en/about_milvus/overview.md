@@ -59,7 +59,7 @@ Milvus comes in two distributions: CPU-only Milvus and GPU-enabled Milvus.
 
 If your GPU supports CUDA, then you can install GPU-enabled Milvus to achieve much higher search performance in large-scale datasets.
 
-For more information, see [Milvus Distributions](milvus_distributions.md).
+For more information, see [Milvus Distributions](milvus_distributions-cpu.md).
 
 ## Join our community
 

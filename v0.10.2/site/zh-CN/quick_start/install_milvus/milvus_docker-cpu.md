@@ -2,7 +2,7 @@
 id: milvus_docker-cpu.md
 label: CPU 版 Milvus
 order: 0
-group: version
+group: distribution
 ---
 
 

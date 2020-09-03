@@ -2,7 +2,7 @@
 id: milvus_docker-gpu.md
 label: GPU 版 Milvus
 order: 1
-group: version
+group: distribution
 ---
 
 

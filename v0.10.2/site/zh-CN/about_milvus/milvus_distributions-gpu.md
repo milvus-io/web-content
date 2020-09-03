@@ -1,8 +1,15 @@
 ---
-id: milvus_distributions.md
+id: milvus_distributions-gpu.md
+label: GPU 版 Milvus
+order: 1
+group: distribution
 ---
 
 # Milvus 版本比较
+
+<div class="tab-wrapper"><a href="milvus_distributions-cpu.md" >CPU 版 Milvus</a><a href="milvus_distributions-gpu.md" class='active'>GPU 版 Milvus</a></div> 
+
+## 概述
 
 Milvus 提供两个发行版本：CPU 版本和 GPU 版本。
 

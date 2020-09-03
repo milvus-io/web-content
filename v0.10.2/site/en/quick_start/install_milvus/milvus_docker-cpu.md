@@ -2,10 +2,10 @@
 id: milvus_docker-cpu.md
 label: CPU-only Milvus
 order: 0
-group: version
+group: distribution
 ---
 
-# Install and Run Milvus
+# Install and Start Milvus
 
 <div class="tab-wrapper"><a href="milvus_docker-cpu.md" class='active'>CPU-only Milvus</a><a href="milvus_docker-gpu.md" >GPU-enabled Milvus</a></div> 
 

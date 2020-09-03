@@ -1,8 +1,15 @@
 ---
-id: milvus_distributions.md
+id: milvus_distributions-gpu.md
+label: GPU-only Milvus
+order: 1
+group: distribution
 ---
 
 # Milvus Distributions
+
+<div class="tab-wrapper"><a href="milvus_distributions-cpu.md" >CPU-only Milvus</a><a href="milvus_distributions-gpu.md" class='active'>GPU-only Milvus</a></div> 
+
+## Overview
 
 Milvus comes in two distributions: CPU-only Milvus and GPU-enabled Milvus.
 
@@ -14,32 +21,7 @@ Milvus comes in two distributions: CPU-only Milvus and GPU-enabled Milvus.
 If your GPU supports CUDA, then you can install GPU-enabled Milvus to achieve much higher search performance in large-scale datasets.
 
 
-
-## CPU-only Milvus vs. GPU-enabled Milvus
-
-In Milvus, a vector search includes two separate processes: index building and search. 
-
-- For GPU-enabled Milvus, these two processes can run concurrently, which facilitates more efficient query, especially for incremental data. 
-- For CPU-only Milvus, search computation can only be executed after index building is completed, which makes it more suitable for static data.
-
-
-### Index types in CPU-only Milvus
-
-<div class="table-wrapper" markdown="block">
-
-| Name       | Index building with CPU | Search with CPU | Float vector support | Binary vector support |
-| -------- | ----------------- | -------------- | -------------- | ---------------- |
-| FLAT     | -                 | ✔️             | ✔️             | ✔️         　   |
-| IVF_FLAT | ✔️                | ✔️            | ✔️             | ✔️          　  |
-| IVF_SQ8  | ✔️                | ✔️            | ✔️             | ❌             |
-| IVF_PQ   | ✔️                | ✔️            | ✔️             | ❌             |
-| RNSG     | ✔️                | ✔️            | ✔️             | ❌             |
-| HNSW     | ✔️                | ✔️            | ✔️             | ❌             |
-| ANNOY    | ✔️                | ✔️            | ✔️             | ❌             |
-
-</div>
-
-### Index types in Milvus with GPU support
+## Indexes for GPU-enabled Milvus
 
 <div class="table-wrapper" markdown="block">
 

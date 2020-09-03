@@ -56,7 +56,7 @@ Milvus 提供两个发行版本：CPU 版本和 GPU 版本。
 
 如果你的计算机上安装了支持 CUDA 功能的 GPU 设备，你可以安装 Milvus 的 GPU 版本以获取针对海量数据的更优的查询性能。
 
-详见：[Milvus Distributions](milvus_distributions.md)。
+详见：[Milvus Distributions](milvus_distributions-cpu.md)。
 
 ## 加入开发者社区
 
