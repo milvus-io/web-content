@@ -5,12 +5,8 @@ id: setup_prometheus.md
 
 # 配置、启动 Prometheus
 
-Milvus 会生成详细的关于系统运行状态的时序 metrics。该页面向你展示如何利用 [Prometheus](https://prometheus.io/) 提取收集这些 metrics，如何将 [Grafana](https://grafana.com/) 和 [Alertmanager](https://prometheus.io/docs/alerting/alertmanager/) 连接到 Prometheus 实现数据可视化的展示和报警机制。
+本页面介绍如何配置、启用 [Prometheus](https://prometheus.io/) 搜集 Milvus 监控指标，以及如何将 [Alertmanager](https://prometheus.io/docs/alerting/alertmanager/) 连接到 Prometheus 实现数据可视化的展示和报警机制。
 
-## 前提条件
-
-
-- 已通过阅读[监控与报警方案概述](monitor.md)了解了 Milvus 支持的监控与报警方案。
 
 ## 安装 Prometheus
 
@@ -26,7 +22,7 @@ Milvus 会生成详细的关于系统运行状态的时序 metrics。该页面�
    你可以将 Prometheus 的路径添加到 <code>PATH</code>，以便在任意 Shell 上都能快速启动 Prometheus。
    </div>
 
-## 配置和启动 Prometheus
+## 配置、启动 Prometheus
 
 1. 启动 Pushgateway：
 
@@ -51,29 +47,29 @@ Milvus 会生成详细的关于系统运行状态的时序 metrics。该页面�
     如果是在 Kubernetes 集群中，你需要为每个需要监控的 Milvus 节点配置 <b>server_config.yaml</b>。
     </div>
 
-3. 下载 Milvus [Prometheus 配置文件](https://github.com/milvus-io/docs/blob/v0.10.1/assets/monitoring/prometheus.yml)：
+3. 下载 Milvus [Prometheus 配置文件](https://github.com/milvus-io/docs/blob/master/v0.10.2/assets/monitoring/prometheus.yml)：
 
    ```shell
-   $ wget https://raw.githubusercontent.com/milvus-io/docs/v0.10.1/assets/monitoring/prometheus.yml \ -O prometheus.yml
+   $ wget https://raw.githubusercontent.com/milvus-io/docs/master/v0.10.2/assets/monitoring/prometheus.yml \ -O prometheus.yml
    ```
 
-4. 下载 Milvus [报警规则文件](https://github.com/milvus-io/docs/blob/v0.10.1/assets/monitoring/alert_rules.yml) 到  Prometheus 根目录：
+4. 下载 Milvus [报警规则文件](https://github.com/milvus-io/docs/blob/master/v0.10.2/assets/monitoring/alert_rules.yml) 到  Prometheus 根目录：
 
    ```shell
-   wget -P rules https://raw.githubusercontent.com/milvus-io/docs/v0.10.1/assets/monitoring/alert_rules.yml
+   wget -P rules https://raw.githubusercontent.com/milvus-io/docs/master/v0.10.2/assets/monitoring/alert_rules.yml
    ```
 
 5. 根据实际需求编辑 Prometheus 配置文件：
 
-   - global：配置 `scrape_interval` 和 `evaluation_interval` 等参数。
+   - `global`：配置 `scrape_interval` 和 `evaluation_interval` 等参数。
 
    ```yaml
    global:
-     scrape_interval:     2s # 设置抓取时间间隔为2s。
-     evaluation_interval: 2s # 设置评估时间间隔为2s。
+     scrape_interval:     2s # 设置抓取时间间隔为 2s。
+     evaluation_interval: 2s # 设置评估时间间隔为 2s。
    ```
 
-   - alerting：设置 Alertmanager 的地址和端口。
+   - `alerting`：设置 Alertmanager 的地址和端口。
 
    ```yaml
    alerting:
@@ -82,14 +78,14 @@ Milvus 会生成详细的关于系统运行状态的时序 metrics。该页面�
       - targets: ['localhost:9093']
    ```
 
-   - rule_files：设置报警规则文件。
+   - `rule_files`：设置报警规则文件。
 
    ```yaml
    rule_files:
       - "alert_rules.yml"
    ```
 
-   - scrape_configs：设置抓取数据的 `job_name` 及 `targets` 等信息。
+   - `scrape_configs`：设置抓取数据的 `job_name` 及 `targets` 等信息。
 
    ```yaml
    scrape_configs:
@@ -112,6 +108,8 @@ Milvus 会生成详细的关于系统运行状态的时序 metrics。该页面�
     ```shell
     ./prometheus --config.file=prometheus.yml
     ```
+
+*启动 Prometheus 后，你可以在 Prometheus 界面上配置 Milvus 提供的监控指标。详见：[Milvus 监控指标](milvus_metrics.md)。*
 
 ## 配置 Alertmanager
 
@@ -155,3 +153,10 @@ Milvus 会生成详细的关于系统运行状态的时序 metrics。该页面�
 
 5. 通过浏览器登录 *http://<提供 Alertmanager 服务的主机>:9093*，进入 Alertmanager 用户交互页面。你可以在此定义 [报警的条件](https://prometheus.io/docs/alerting/alertmanager/#silences)。
 
+
+## 常见问题
+
+<details>
+<summary><font color="#3f9cd1">在多个 Milvus 节点接入 Pushgateway 的情况下如何进行区分数据来源？</font></summary>
+在 <strong>prometheus.yaml</strong> 里面加一个 Prometheus 的实例就可以。最后在 Prometheus 或者 Grafana 里面显示监控的时候，会指明数据是来自哪个 Milvus 实例。
+</details>

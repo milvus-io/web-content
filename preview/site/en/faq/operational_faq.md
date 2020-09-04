@@ -7,6 +7,7 @@ id: operational_faq.md
 <!-- TOC -->
 
 - [What if I failed to pull Milvus Docker image from Docker Hub?](#What-if-I-failed-to-pull-Milvus-Docker-image-from-Docker-Hub)
+- [Is Docker the only way to install and run Milvus?](#Is-Docker-the-only-way-to-install-and-run-Milvus)
 - [Why does Milvus return `config check error`?](#Why-does-Milvus-return-config-check-error)
 - [Why do I get `no space left on device` when importing data to Milvus?](#Why-do-I-get-no-space-left-on-device-when-importing-data-to-Milvus)
 - [Why is my recall rate unsatisfying?](#Why-is-my-recall-rate-unsatisfying)
@@ -42,6 +43,10 @@ Users in some countries may have limited access to Docker Hub. In this case, you
 }
 ```
 
+#### Is Docker the only way to install and run Milvus?
+
+No. You can also build Milvus from source code in Linux. See [Build Milvus from source code](https://github.com/milvus-io/milvus/blob/master/INSTALL.md) for more information.
+
 #### Why does Milvus return `config check error`?
 
 The version of configuration file does not match the version your Milvus server.
@@ -54,7 +59,7 @@ It is likely that you have not saved enough disk space.
 
 You can increase the value of `nprobe` when searching from a client. The greater the value, the more accurate the result, and the more time it takes.
 
-See [Learn Milvus Operation](milvus_operation.md) for more information.
+See [Performance Tuning > Index](tuning.md#Index) for more information.
 
 #### Why does my updated configuration not work?
 
@@ -62,7 +67,7 @@ You need to restart Milvus Docker each time you update the configuration file. S
 
 #### How can I know if Milvus has started successfully?
 
-Run `docker logs <container ID>` to check if Milvus is running properly.
+Run `sudo docker logs <container ID>` to check if Milvus is running properly.
 
 #### Why is the time in the log files different from the system time?
 
@@ -70,7 +75,7 @@ The log files in the Docker container use UTC time by default. If your host mach
 
 #### How can I know whether my CPU supports Milvus?
 
-The instruction sets Milvus supports are SSE42, AVX, AVX2, and AVX512. Your CPU must support at least one of them for Milvus to function properly.
+The instruction sets that Milvus supports are SSE42, AVX, AVX2, and AVX512. Your CPU must support at least one of them for Milvus to function properly.
 
 #### Why does Milvus return Illegal instruction during startup?
 
@@ -104,15 +109,15 @@ Try installing pymilvus in a Conda environment.
 
 #### Can I deploy Milvus service in an air-gapped environment?
 
-Milvus is released as a Docker image, and hence can be deployed from offline:
+Milvus is released as a Docker image. Follow these steps to deploy it from offline:
 
-- Pull the latest Milvus Docker image when you have Internet access.
+1. Pull the latest Milvus Docker image when you have Internet access.
 
-- Run `docker save` to save the Docker image as a TAR file.
+2. Run `docker save` to save the Docker image as a TAR file.
 
-- Transfer the TAR file to **the** air-gapped environment.
+3. Transfer the TAR file to the air-gapped environment.
 
-- Run `docker load` to load the file as a Docker image.
+4. Run `docker load` to load the file as a Docker image.
 
 For more information about Docker, see [docs.docker.com](https://docs.docker.com/).
 
@@ -126,11 +131,11 @@ We recommend using MySQL to manage Metadata in production environment.
 
 #### How to calculate required memory based on the size of the dataset?
 
-Different indexes require different memory space. You can use [Milvus sizing tool](https://milvus.io/tools/sizing) to calculate the required memory for vector search.
+Different indexes require different memory space. You can use [Milvus sizing tool](https://milvus.io/tools/sizing) to calculate the required memory for a vector search.
 
 #### How to migrate data in Milvus?
 
-Copy the entire db directory of the original Milvus service to the new directory. When restarting the Milvus service, map the copied db directory to the db directory of the Milvus service.
+Copy the entire **db** directory of the original Milvus service to the new directory. When restarting the Milvus service, map the copied **db** directory to the **db** directory of the Milvus service.
 
 <div class="alert note">
 Note: Data formats of different versions may not be compatible with each other. The current data format is backward compatible with Milvus v0.7.0.

@@ -15,7 +15,6 @@ According to the implementation methods, the ANNS vector index can be divided in
 - Hash-based index
 - Quantization-based index
 
-For more details on index types, see [Milvus Index Types](index.md).
 
 ## Vector field and index
 
@@ -103,7 +102,7 @@ IVF\_PQ quantizes the product of vectors, and then performs IVF index clustering
    | `nlist` | Number of cluster units　    | [1, 65536] |
    | `m`     | Number of factors of product quantization | `m` should be in {1, 2, 3, 4, 8, 12, 16, 20, 24, 28, 32, 40, 48, 56, 64, 96}, and the dimensions of the low-dimensional vector space should be in {1, 2, 3, 4, 6, 8, 10, 12, 16, 20, 24, 28, 32}.<br>Besides, when computing with GPU, ensure that the result of m x 1024 does not exceed `MaxSharedMemPerBlock` of your graphics card. |
    
-   **Example:** `{"nlist": 2048, "m": 16}`
+   **Example:** `{nlist: 2048, m: 16}`
 
 - IVF\_PQ has the same search parameters as IVF\_FLAT.
 
@@ -130,7 +129,7 @@ Reference: <a href="http://www.vldb.org/pvldb/vol12/p461-fu.pdf"> Fast Approxima
    | `search_length`       | Number of query iterations        　| [10, 300] |
    | `knng`                | Number of nearest neighbors   　| [5, 300] |
    
-   **Example:** `{"out_degree": 30, "candidate_pool_size": 300, "search_length": 60, "knng": 50}`
+   **Example:** `{out_degree: 30, candidate_pool_size: 300, search_length: 60, knng: 50}`
 
 - Search parameters
 
@@ -138,7 +137,7 @@ Reference: <a href="http://www.vldb.org/pvldb/vol12/p461-fu.pdf"> Fast Approxima
    | -------- | ----------- | ---------- |
    | `search_length` | Number of query iterations  | [10, 300] |
    
-   **Example:** `{"search_length": 100}`
+   **Example:** `{search_length: 100}`
 
 ### HNSW
 
@@ -157,7 +156,7 @@ Reference: <a href="https://arxiv.org/abs/1603.09320">Efficient and robust appro
    | `M`              | Maximum degree of the node        | [4, 64]  |
    | `efConstruction` | Search scope      | [8, 512] |
 
-   **Example:** `{"M": 16, "efConstruction": 40}`
+   **Example:** `{M: 16, efConstruction: 40}`
 
 - Search parameters
 
@@ -165,7 +164,7 @@ Reference: <a href="https://arxiv.org/abs/1603.09320">Efficient and robust appro
    | --------|--------------- | ------------ |
    | `ef`    | Search scope  | [`top_k`, 4096] |
 
-   **Example:** `{"ef": 64}`
+   **Example:** `{ef: 64}`
 
 ### ANNOY
 
@@ -183,7 +182,7 @@ Reference: <a href="https://erikbern.com/2015/10/01/nearest-neighbors-and-vector
    | --------- |-------------- | -------- |
    | `n_trees` | The number of methods of space division | [1, 1024] |
 
-   **Example:**`{"n_trees": 8}`
+   **Example:**`{n_trees: 8}`
 
 - Search parameters
 
@@ -191,10 +190,30 @@ Reference: <a href="https://erikbern.com/2015/10/01/nearest-neighbors-and-vector
    | -----------|--------------------------------- | ---------------- |
    | `search_k` | The number of nodes to be searched. `-1` means 5% of the whole data. | {-1} ∪ [`top_k`, n × `n_trees`] |
 
-   **Example:**`{"search_k": -1}`
+   **Example:**`{search_k: -1}`
 
 ## How to choose an index
 
 To learn how to choose an appropriate index for your application scenarios, please read [How to Select an Index in Milvus](https://medium.com/@milvusio/how-to-choose-an-index-in-milvus-4f3d15259212).
 
 To learn how to choose an appropriate index for a metric, see [Distance Metrics](metric.md).
+
+
+## FAQ
+
+<details>
+<summary><font color="#3f9cd1">Does IVF_SQ8 differ from IVF_SQ8H in terms of recall rate?
+</font></summary>
+No, they have the same recall rate for the same dataset.
+</details>
+<details>
+<summary><font color="#3f9cd1">What is the difference between FLAT index and IVF_FLAT index?</font></summary>
+<p>IVF_FLAT index divides a vector space into <code>nlist</code> clusters. If you keep the default value of <code>nlist</code> as 16384, Milvus compares the distances between the target vector and the centers of all 16384 clusters to get <code>nprobe</code> nearest clusters. Then Milvus compares the distances between the target vector and the vectors in the selected clusters to get the nearest vectors. Unlike IVF_FLAT, FLAT directly compares the distances between the target vector and each and every vector.
+</p>
+<p>
+Therefore, when the total number of vectors approximately equals <code>nlist</code>, IVF_FLAT and FLAT has little difference in the way of calculation required and search performance. But as the number of vectors grows to two times, three times, or n times of <code>nlist</code>, IVF_FLAT index begins to show increasingly greater advantages.
+</p>
+<p>
+See <a href="https://medium.com/unstructured-data-service/how-to-choose-an-index-in-milvus-4f3d15259212">How to Choose an Index in Milvus</a> for more information.
+</p>
+</details>

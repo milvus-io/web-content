@@ -11,37 +11,38 @@ id: product_faq.md
 - [Does Milvus support CRUD operations on vectors?](#Does-Milvus-support-CRUD-operations-on-vectors)
 - [Can Milvus handle datasets of up to a 100-billion scale?](#Can-Milvus-handle-datasets-of-up-to-a-100-billion-scale)
 - [Where does Milvus store imported data?](#Where-does-Milvus-store-imported-data)
-- [Why can't I find vectors on SQLite or MySQL?](#Why-can't-I-find-vectors-on-SQLite-or-MySQL)
+- [Why can't I find vectors on SQLite or MySQL?](#Why-cant-I-find-vectors-on-SQLite-or-MySQL)
 - [Can I use SQL Server or PostgreSQL to store metadata in Milvus?](#Can-I-use-SQL-Server-or-PostgreSQL-to-store-metadata-in-Milvus)
-- [Does Milvus' Python SDK have a connection pool?](#Does-Milvus'-Python-SDK-have-a-connection-pool)
+- [Does Milvus' Python SDK have a connection pool?](#Does-Milvus-Python-SDK-have-a-connection-pool)
 - [Does Milvus support inserting while searching?](#Does-Milvus-support-inserting-while-searching)
 - [Is there a graphical tool for managing Milvus?](#Is-there-a-graphical-tool-for-managing-Milvus)
 - [Can I export data from Milvus?](#Can-I-export-data-from-Milvus)
-- [Why do the retrieved vectors suffer precision loss after the `get_entity_by_id` method call?](#Why-do-the-retrieved-vectors-suffer-precision-loss-after-the-`get_entity_by_id`-method-call)
+- [Why do the retrieved vectors suffer precision loss after the `get_entity_by_id` method call?](#Why-do-the-retrieved-vectors-suffer-precision-loss-after-the-get_entity_by_id-method-call)
 - [Should I specify entity IDs when importing vectors or have Milvus generate them for me?](#Should-I-specify-entity-IDs-when-importing-vectors-or-have-Milvus-generate-them-for-me)
+- [Can I insert vectors with existing IDs?](#Can-I-insert-vectors-with-existing-IDs)
 - [Is there a length limit on the self-defined entity IDs?](#Is-there-a-length-limit-on-the-self-defined-entity-IDs)
 - [Is there a volume limit on the vectors inserted each time?](#Is-there-a-volume-limit-on-the-vectors-inserted-each-time)
-- [Why is the `top1` result of a vector search not the search vector itself, if the metric type is inner product?](#Why-is-the-`top1`-result-of-a-vector-search-not-the-search-vector-itself-if-the-metric-type-is-inner-product)
+- [Why is the `top1` result of a vector search not the search vector itself, if the metric type is inner product?](#Why-is-the-top1-result-of-a-vector-search-not-the-search-vector-itself-if-the-metric-type-is-inner-product)
 - [Does the size of a collection affect vector searches in one of its partitions, especially when it holds up to 100 million vectors?](#Does-the-size-of-a-collection-affect-vector-searches-in-one-of-its-partitions-especially-when-it-holds-up-to-100-million-vectors)
 - [Does Milvus load the whole collection to the memory if I search only certain partitions in that collection?](#Does-Milvus-load-the-whole-collection-to-the-memory-if-I-search-only-certain-partitions-in-that-collection)
 - [Are queries in segments processed in parallel?](#Are-queries-in-segments-processed-in-parallel)
 - [How to choose an index in Milvus?](#How-to-choose-an-index-in-Milvus)
-- [Can Milvus create different types of index for different partitions?](#Can-Milvus-create-different-types-of-index-for-different-partitions)
+- [Are indexes partition-specific?](#Are-indexes-partition-specific)
 - [Can Milvus create different types of index in the same collection?](#Can-Milvus-create-different-types-of-index-in-the-same-collection)
 - [Does Milvus create new indexes after vectors are inserted?](#Does-Milvus-create-new-indexes-after-vectors-are-inserted)
-- [Does IVF_SQ8 differ from IVF_SQ8H in terms of recall rate?](#Does-IVF_SQ8-differ-from-IVF_SQ8H-in-terms-of-recall-rate)
+- [Does IVF\_SQ8 differ from IVF\_SQ8H in terms of recall rate?](#Does-IVF\_SQ8-differ-from-IVF\_SQ8H-in-terms-of-recall-rate)
 - [What is the difference between FLAT index and IVF_FLAT index?](#What-is-the-difference-between-FLAT-index-and-IVF_FLAT-index)
 - [Why do I see a surge in memory usage when conducting a vector search immediately after an index is created?](#Why-do-I-see-a-surge-in-memory-usage-when-conducting-a-vector-search-immediately-after-an-index-is-created)
-- [Can I update `index_file_size` and `metric_type` after creating a collection?](#Can-I-update-`index_file_size`-and-`metric_type`-after-creating-a-collection)
+- [Can I update `index_file_size` and `metric_type` after creating a collection?](#Can-I-update-index_file_size-and-metric_type-after-creating-a-collection)
 - [What is the interval at which Milvus flushes data to the disk?](#What-is-the-interval-at-which-Milvus-flushes-data-to-the-disk)
-- [If I have set `preload_collection`, does Milvus service start only after all collections are loaded to the memory?](#If-I-have-set-`preload_collection`-does-Milvus-service-start-only-after-all-collections-are-loaded-to-the-memory)
+- [If I have set `preload_collection`, does Milvus service start only after all collections are loaded to the memory?](#If-I-have-set-preload_collection-does-Milvus-service-start-only-after-all-collections-are-loaded-to-the-memory)
 - [In what way does Milvus flush data?](#In-what-way-does-Milvus-flush-data)
 - [What is the recommended configuration for Mishards?](#What-is-the-recommended-configuration-for-Mishards)
 - [Does Mishards support RESTful APIs?](#Does-Mishards-support-RESTful-APIs)
 - [What is normalization? Why is normalization needed?](#What-is-normalization-Why-is-normalization-needed)
-- [Why do I get different results using Euclidean distance (L2) and inner product (IP) as the distance metric?](#Why-do-I-get-different-results-using-Euclidean-distance-(L2)-and-inner-product-(IP)-as-the-distance-metric)
+- [Why do I get different results using Euclidean distance (L2) and inner product (IP) as the distance metric?](#Why-do-I-get-different-results-using-Euclidean-distance-L2-and-inner-product-IP-as-the-distance-metric)
 - [Is there a limit on the total number of collections and partitions?](#Is-there-a-limit-on-the-total-number-of-collections-and-partitions)
-- [Why do I get fewer than k vectors when searching for `topk` vectors?](#Why-do-I-get-fewer-than-k-vectors-when-searching-for-`topk`-vectors)
+- [Why do I get fewer than k vectors when searching for `topk` vectors?](#Why-do-I-get-fewer-than-k-vectors-when-searching-for-topk-vectors)
 - [Still have questions?](#Still-have-questions)
 
 
@@ -104,6 +105,10 @@ Milvus stores and processes each dimension of a vector in single-precision float
 
 Either way is fine. But please note that entity IDs in the same collection must be either user-generated or Milvus-generated. Can't be both. 
 
+#### Can I insert vectors with existing IDs?
+
+Yes, you can. If you insert vectors with an existing ID, you would end up having duplicate IDs.
+
 #### Is there a length limit on the self-defined entity IDs?
 
 Entity IDs must be non-negative 64-bit integers.
@@ -138,21 +143,21 @@ See [How Does Milvus Schedule Query Tasks](https://medium.com/unstructured-data-
 
 #### How to choose an index in Milvus?
 
-It depends on your scenario. See [Select Vector Search Tool](vector_db.md) and [How to Choose an Index in Milvus](https://medium.com/unstructured-data-service/how-to-choose-an-index-in-milvus-4f3d15259212) for more information.
+It depends on your scenario. See [How to Choose an Index in Milvus](https://medium.com/unstructured-data-service/how-to-choose-an-index-in-milvus-4f3d15259212) for more information.
 
-#### Can Milvus create different types of index for different partitions?
+#### Are indexes partition-specific?
 
-No, you cannot. Indexes are created at the collection level, not at the partition level.
+No. A collection can have only one index type at a time. 
 
 #### Can Milvus create different types of index in the same collection?
 
-No, you cannot. Although a collection can hold various types of data, the same collection can use only one index type.
+No. Although a collection can hold various types of data, the same collection can use only one index type.
 
 #### Does Milvus create new indexes after vectors are inserted?
 
 Yes. When the inserted vectors grow to a specified volume, Milvus creates a new segment and starts to create an index file for it at the same time. The building of the new index file does not affect the existing index files.
 
-#### Does IVF_SQ8 differ from IVF_SQ8H in terms of recall rate?
+#### Does IVF\_SQ8 differ from IVF\_SQ8H in terms of recall rate?
 
 No, they have the same recall rate for the same dataset.
 
@@ -162,7 +167,7 @@ IVF_FLAT index divides a vector space into `nlist` clusters. If you keep the def
 
 Therefore, when the total number of vectors approximately equals `nlist`, IVF_FLAT and FLAT has little difference in the way of calculation required and search performance. But as the number of vectors grows to two times, three times, or n times of `nlist`, IVF_FLAT index begins to show increasingly greater advantages.
 
-See [Select Vector Search Tool](vector_db.md) for more information.
+See [How to Choose an Index in Milvus](https://medium.com/unstructured-data-service/how-to-choose-an-index-in-milvus-4f3d15259212) for more information.
 
 #### Why do I see a surge in memory usage when conducting a vector search immediately after an index is created?
 
@@ -198,7 +203,7 @@ No, it does not.
 
 #### What is normalization? Why is normalization needed?
 
-To normalize a vector is to uniformly set the length of all vectors to 1. If you have normalized the vectors in the same space, then the top k nearest vectors returned using Euclidean distance (L2) are identical to the the nearest vectors returned using inner product (IP).
+Normalization refers to the process of converting an embedding (vector) so that its norm equals 1. If you use Inner Product to calculate embeddings similarities, you must normalize your embeddings. After normalization, inner product equals cosine similarity.
 
 See [Wikipedia](https://en.wikipedia.org/wiki/Unit_vector) for more information.
 

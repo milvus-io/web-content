@@ -17,7 +17,7 @@ Currently, a collection only supports one index type. When you change the index 
 1. Prepare the parameters needed to create indexes (take IVF_FLAT as an example). The index parameters are stored in a JSON string, which is represented by a dictionary in the Python SDK.
 
    ```python
-   # Prepare index param
+   # Prepare index param.
    >>> ivf_param = {'nlist': 16384}
    ```
 
@@ -25,7 +25,7 @@ Currently, a collection only supports one index type. When you change the index 
    Different index types requires different parameters to create indexes. You must <b>assign values</b> to all index parameters.
    </div>
 
-   | Index Type | Index Parameter | Exmaple Parameter | Range |
+   | Index Type | Index Parameter | Example Parameter | Range |
    | ---------- | --------------- | ----------------- | ----- |
    | IVF\_FLAT / IVF\_SQ8/ IVF\_SQ8H | `nlist`: The number of clusters to perform clustering operations on vector data files during index building. To facilitate later search, the index file records the results of the clustering operation, including the type of index, the center vector of each cluster, and the vectors in cluster.  | `{nlist: 16384}` | `nlist`: [1, 65536] |
    | IVF\_PQ                           | `nlist`: The number of clusters to perform clustering operations on vector data files during index building. To facilitate later search, the index file records the results of the clustering operation, including the type of index, the center vector of each cluster, and the vectors in cluster. </br></br> `m`: The compression rate during index building. The smaller the `m`, the higher the compression rate.  | `{nlist: 16384, m: 12}` | `nlist`: [1, 65536] </br></br> `m`: a value in {96, 64, 56, 48, 40, 32, 28, 24, 20, 16, 12, 8, 4, 3, 2, 1}, and the dimensions of the low-dimensional vector space must be in {1, 2, 3, 4, 6, 8, 10, 12, 16, 20, 24, 28, 32}. Besides, when computing with GPU, ensure that the result of m x 1024 does not exceed MaxSharedMemPerBlock of your graphics card.                                |
@@ -38,7 +38,7 @@ Currently, a collection only supports one index type. When you change the index 
 2. Create index for the collection:
 
    ```python
-   # Create index
+   # Create an index.
    >>> milvus.create_index('test01', IndexType.IVF_FLAT, ivf_param)
    ```
 
@@ -49,3 +49,19 @@ After deleting the index, the collection uses the default index type FLAT again.
 ```python
 >>> milvus.drop_index('test01')
 ```
+
+## FAQ
+
+<details>
+<summary><font color="#3f9cd1">How to set the value of <code>nlist</code> when I build indexes?</font></summary>
+It depends on your scenario. See <a href="tuning.md#Index">Performance tuning > Index</a> for more information.
+</details>
+<details>
+<summary><font color="#3f9cd1">Can Milvus create different types of index for different partitions in the same collection?</font></summary>
+No. A collection can have only one index type at a time.
+</details>
+<details>
+<summary><font color="#3f9cd1">Does Milvus create new indexes after vectors are inserted?</font></summary>
+Yes. When the inserted vectors grow to a specified volume, Milvus creates a new segment and starts to create an index file for it at the same time. The building of the new index file does not affect the existing index files.
+</details>
+
