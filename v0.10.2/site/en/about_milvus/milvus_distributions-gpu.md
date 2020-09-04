@@ -28,25 +28,25 @@ If your GPU supports CUDA, then you can install GPU-enabled Milvus to achieve mu
 
 <div class="filter-floating table-wrapper" markdown="block">
 
-| Index type | Indexing with CPU | Search with CPU | Indexing with GPU         | Search with GPU |
-| ---------- | ----------------- | --------------- | ------------------------- | --------------- |
-| FLAT     | N/A                | ✔️            | N/A                  | ✔️                    |
-| IVF_FLAT | ✔️                | ✔️            | ✔️                  | ✔️                 |
-| IVF_SQ8  | ✔️                | ✔️            | ✔️                  | ✔️                 |
-| IVF_SQ8H | ✔️                | ✔️            | ✔️                  | ✔️                 |
-| IVF_PQ   | ✔️                | ✔️            | ✔️                  | ✔️                |
-| RNSG     | ✔️                | ✔️            | ❌                 | ❌                |
-| HNSW     | ✔️                | ✔️            | ❌                 | ❌                |
-| ANNOY    | ✔️                | ✔️            | ❌                 | ❌                |
+| Index type | Indexing with CPU | Indexing with GPU |  Search with CPU     | Search with GPU |
+| ---------- | ----------------- | ----------------- | -------------------- | --------------- |
+| FLAT     | N/A                | N/A                | ✔️                  | ✔️              |
+| IVF_FLAT | ✔️                | ✔️                 | ✔️                  | ✔️              |
+| IVF_SQ8  | ✔️                | ✔️                 | ✔️                  | ✔️              |
+| IVF_SQ8H | ✔️                | ✔️                 | ✔️                  | ✔️              |
+| IVF_PQ   | ✔️                | ✔️                 | ✔️                  | ✔️              |
+| RNSG     | ✔️                | ❌                 | ✔️                  | ❌              |
+| HNSW     | ✔️                | ❌                 | ✔️                  | ❌              |
+| ANNOY    | ✔️                | ❌                 | ✔️                  | ❌              |
 
 </div>
 
 <div class="filter-binary table-wrapper" markdown="block">
 
-| Index type | Indexing with CPU | Search with CPU | Indexing with GPU  | Search with GPU |
-| ---------- | ----------------- | --------------- | ------------------ | --------------- |
-| FLAT       | N/A                | ✔️             | N/A                | ❌             |
-| IVF_FLAT   | ✔️                | ✔️             | ❌                 | ❌             |
+| Index type | Indexing with CPU | Indexing with GPU | Search with CPU    | Search with GPU |
+| ---------- | ----------------- | ----------------  | ------------------ | --------------- |
+| FLAT       | N/A               | N/A               | ✔️                 | ❌             |
+| IVF_FLAT   | ✔️                | ❌               | ✔️                 | ❌             |
 
 
 </div>
