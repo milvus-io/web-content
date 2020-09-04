@@ -7,7 +7,7 @@ group: distribution
 
 # Milvus Distributions
 
-<div class="tab-wrapper"><a href="milvus_distributions-cpu.md" class='active'>CPU-only Milvus</a><a href="milvus_distributions-gpu.md" >GPU-enabled Milvus</a></div> 
+
 
 ## Overview
 
@@ -21,7 +21,7 @@ Milvus comes in two distributions: CPU-only Milvus and GPU-enabled Milvus.
 
 If your GPU supports CUDA, then you can install GPU-enabled Milvus to achieve much higher search performance in large-scale datasets.
 
-
+<div class="tab-wrapper"><a href="milvus_distributions-cpu.md" class='active'>CPU-only Milvus</a><a href="milvus_distributions-gpu.md" >GPU-enabled Milvus</a></div> 
 
 ## Indexes for CPU-only Milvus
 
@@ -33,7 +33,7 @@ If your GPU supports CUDA, then you can install GPU-enabled Milvus to achieve mu
 
 | Index type | Indexing with CPU | Search with CPU | Indexing with GPU        | Search with GPU |
 | ---------- | ----------------- | --------------- | ------------------------ | --------------- |
-| FLAT       | N/A               | ✔️              | ❌                      | ❌              |
+| FLAT       | N/A               | ✔️              | N/A                     | ❌              |
 | IVF_FLAT   | ✔️                | ✔️             | ❌                      | ❌              |
 | IVF_SQ8    | ✔️                | ✔️             | ❌                      | ❌              |
 | IVF_PQ     | ✔️                | ✔️             | ❌                      | ❌              |
@@ -47,7 +47,7 @@ If your GPU supports CUDA, then you can install GPU-enabled Milvus to achieve mu
 
 | Index type | Index building with CPU | Search with CPU | Indexing with GPU     | Search with GPU |
 | ---------- | ----------------------- | --------------- | --------------------- | --------------- |
-| FLAT       | N/A                     | ✔️             | ❌                    | ❌              |
+| FLAT       | N/A                     | ✔️             | N/A                   | ❌              |
 | IVF_FLAT   | ✔️                      | ✔️             | ❌                    | ❌              |
 
 </div>
