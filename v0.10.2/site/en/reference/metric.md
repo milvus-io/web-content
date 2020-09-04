@@ -29,7 +29,7 @@ It's the most commonly used distance metric, and is very useful when the data is
 
 The IP distance between two embeddings are defined as follows: 
 
-![ip](../../../assets/ip_metric.png)
+![ip](../../../assets/IP.png)
 
 where A and B are embeddings, `||A||` and `||B||` are the norms of A and B.
 
