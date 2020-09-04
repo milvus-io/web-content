@@ -27,7 +27,7 @@ Milvus 提供两个发行版本：CPU 版本和 GPU 版本。
 <a href="#floating">浮点型向量</a> <a href="#binary">二值型向量</a>
 </div>
 
-<div class="table-wrapper filter-floating" markdown="block">
+<div class="filter-floating table-wrapper" markdown="block">
 
 | 索引类型  | CPU 建索引        | CPU 搜索       | GPU 建索引           | GPU 搜索         |
 | -------- | ----------------- | ------------- | -------------------- | --------------- |
@@ -43,7 +43,7 @@ Milvus 提供两个发行版本：CPU 版本和 GPU 版本。
 </div>
 
 
-<div class="table-wrapper  filter-binary" markdown="block">
+<div class="filter-binary table-wrapper" markdown="block">
 
 | 索引类型  | CPU 建索引        | CPU 搜索       | GPU 建索引           | GPU 搜索        |
 | --------- | ---------------- | -------------- | ------------------- | --------------- |
