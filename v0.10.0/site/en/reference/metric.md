@@ -27,17 +27,26 @@ It's the most commonly used distance metric, and is very useful when the data is
 
 ### Inner product (IP)
 
-IP measures the cosine of the angle between 2 vectors, and returns the normalized dot product of them.
+The IP distance between two embeddings are defined as follows: 
 
-So the formula for IP is:
+![ip](../../../assets/IP.png)
 
-![ip](../../../assets/ip_metric.png)
-
-where A and B are vectors, `||A||` and `||B||` are the norms of A and B, and cosθ is the cosine of the angle between A and B.
+where A and B are embeddings, `||A||` and `||B||` are the norms of A and B.
 
 IP is more useful if you are more interested in measuring the orientation but not the magnitude of the vectors.
 
-> Note: If the vectors are normalized, IP is equivalent to cosine similarity. Thus, Milvus does not provide a metric for cosine similarity.
+<div class="alert note">
+ If you use IP to calculate embeddings similarities, you must normalize your embeddings. After normalization, inner product equals cosine similarity.
+</div>
+
+
+Suppose X' is normalized from embedding X: 
+
+![normalize](../../../assets/normalize.png)
+
+The correlation between the two embeddings is as follows: 
+
+![normalization](../../../assets/normalization.png)
 
 ### Jaccard distance
 
