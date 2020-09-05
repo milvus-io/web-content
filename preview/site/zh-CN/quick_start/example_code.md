@@ -1,7 +1,7 @@
 ---
 id: example_code.md
 ---
-# Hello Milvus
+# Milvus Hello World
 
 在 Milvus 服务端成功启动之后，你可以运行一个 Python 示例程序。这个示例程序将创建一个向量数据表，向其中插入 10 条向量，然后运行向量相似度查询。
 
@@ -11,23 +11,19 @@ id: example_code.md
 
    ```shell
    # Install Milvus Python SDK
-   $ pip3 install pymilvus==0.2.14
+   $ pip3 install pymilvus==0.2.13
    ```
 
-   <div class="alert note">
-   如果需要进一步了解 Milvus Python SDK，请参考 <a href="https://github.com/milvus-io/pymilvus/blob/master/README.md">Milvus Python SDK Readme</a>。
-   </div>
+   > 提示：如果需要进一步了解 Milvus Python SDK，请参考 [Milvus Python SDK Readme](https://github.com/milvus-io/pymilvus/blob/master/README.md)。
    
 3. 下载 Python 示例代码。
    
    ```shell
    # Download Python example
-   $ wget https://raw.githubusercontent.com/milvus-io/pymilvus/0.2.14/examples/example.py
+   $ wget https://raw.githubusercontent.com/milvus-io/pymilvus/0.2.13/examples/example.py
    ```
    
-   <div class="alert note">
-   万一你遇到无法通过 <code>wget</code> 命令正常下载示例代码的情况，你也可以创建 <b>example.py</b> 文件并复制粘贴 <a href="https://github.com/milvus-io/pymilvus/blob/0.2.14/examples/example.py">示例代码</a> 的内容。
-   </div>
+   > 注意：万一你遇到无法通过 `wget` 命令正常下载示例代码的情况，你也可以创建 `example.py` 文件并复制粘贴[示例代码](https://github.com/milvus-io/pymilvus/blob/0.2.13/examples/example.py)的内容。
 
 4. 运行示例代码。
 

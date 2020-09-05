@@ -10,8 +10,8 @@ Below table shows how these widely used distance metrics fit with various input 
 
 | Input Data | Distance Metrics                                             | Index Types                                                    |
 | ---------- | ------------------------------------------------------------ | -------------------------------------------------------------- |
-| Float      | Euclidean distance (L2) and inner product (IP)              | FLAT, IVF\_FLAT, IVF\_SQ8, IVF\_SQ8H, IVF\_PQ, RNSG, HNSW |
-| Binary     | Jaccard, Tanimoto, Hamming, superstructure(FLAT only), and substructure(FLAT only) | FLAT, IVF_FLAT                                               |
+| Float      | Euclidean distance (L2) and inner product (IP)              | `FLAT`, `IVFLAT`, `IVFSQ8`, `IVFSQ8H`, `IVFPQ`, `RNSG`, `HNSW` |
+| Binary     | Jaccard, Tanimoto, Hamming, superstructure(FLAT only), and substructure(FLAT only) | `FLAT`, `IVFLAT`                                               |
 
 ### Euclidean distance (L2)
 
@@ -27,19 +27,26 @@ It's the most commonly used distance metric, and is very useful when the data is
 
 ### Inner product (IP)
 
-IP measures the cosine of the angle between 2 vectors, and returns the normalized dot product of them.
+The IP distance between two embeddings are defined as follows: 
 
-So the formula for IP is:
+![ip](../../../assets/IP.png)
 
-![ip](../../../assets/ip_metric.png)
-
-where A and B are vectors, `||A||` and `||B||` are the norms of A and B, and cosθ is the cosine of the angle between A and B.
+where A and B are embeddings, `||A||` and `||B||` are the norms of A and B.
 
 IP is more useful if you are more interested in measuring the orientation but not the magnitude of the vectors.
 
 <div class="alert note">
-If the vectors are normalized, IP is equivalent to cosine similarity. Thus, Milvus does not provide a metric for cosine similarity.
+ If you use IP to calculate embeddings similarities, you must normalize your embeddings. After normalization, inner product equals cosine similarity.
 </div>
+
+
+Suppose X' is normalized from embedding X: 
+
+![normalize](../../../assets/normalize.png)
+
+The correlation between the two embeddings is as follows: 
+
+![normalization](../../../assets/normalization.png)
 
 ### Jaccard distance
 
@@ -102,23 +109,3 @@ Where
 - N<sub>A</sub> specifies the number of bits in the fingerprint of molecular A.
 - N<sub>B</sub> specifies the number of bits in the fingerprint of molecular B.
 - N<sub>AB</sub> specifies the number of shared bits in the fingerprint of molecular A and B.
-
-
-## FAQ
-
-<details>
-<summary><font color="#3f9cd1">Why is the top1 result of a vector search not the search vector itself, if the metric type is inner product?</font></summary>
-This occurs if you have not normalized the vectors when using inner product as the distance metric.
-</details>
-<details>
-<summary><font color="#3f9cd1">What is normalization? Why is normalization needed?</font></summary>
-<p>Normalization refers to the process of converting an embedding (vector) so that its norm equals 1. If you use Inner Product to calculate embeddings similarities, you must normalize your embeddings. After normalization, inner product equals cosine similarity.
-</p>
-<p>
-See <a href="https://en.wikipedia.org/wiki/Unit_vector">Wikipedia</a> for more information.
-</p>
-</details>
-<details>
-<summary><font color="#3f9cd1">Why do I get different results using Euclidean distance (L2) and inner product (IP) as the distance metric?</font></summary>
-Check if the vectors are normalized. If not, you need to normalize the vectors first. Theoretically speaking, similarities worked out by L2 are different from similarities worked out by IP, if the vectors are not normalized.
-</details>

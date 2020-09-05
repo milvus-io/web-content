@@ -11,18 +11,12 @@ id: terms.md
 - **Entity**: A group of fields that correspond to real world objects. These fields can be structured data representing object properties or vectors representing object features.
 
 - **Entity ID**: A guaranteed unique value that can be used to always reference an entity.
-
-  <div class="alert note">
-  Currently, Milvus does not support entity ID de-duplication and it is possible to have duplicate IDs in a segment.
-  </div>
+  > Note: Currently, Milvus does not support entity ID de-duplication and it is possible to have duplicate IDs in a segment.
 
 - **Field**: A field within an entity. A field can either be structured data, such as numbers, strings, or unstructured data, such as vectors.
 
 - **Vector**: A type of field representing the feature of an object.
-
-  <div class="alert note">
-  Currently, an entity can only contain up to one vector.
-  </div>
+  > Note: Currently, an entity can only contain up to one vector.
 
 - **Index**: An index built based on raw data and improves the speed of data retrieval operations on a collection.
 

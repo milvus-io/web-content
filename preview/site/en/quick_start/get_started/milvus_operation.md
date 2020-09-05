@@ -2,9 +2,9 @@
 id: milvus_operation.md
 ---
 
-# Basic Operations
+# Basic Milvus Operations
 
-In this section, we will walk you through the following basic operations using the [Milvus Python SDK](https://github.com/milvus-io/pymilvus):
+In Get Started, we take you through the following basic operations of the Milvus client [Python SDK](https://github.com/milvus-io/pymilvus):
 
 - [Connect to the Server](connect_milvus_python.md)
 - [Create and Drop a Collection](create_drop_collection_python.md)

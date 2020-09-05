@@ -2,7 +2,7 @@
 id: example_code.md
 ---
 
-# Hello Milvus 
+# Milvus Hello World
 
 After the Milvus server is successfully started, you can use this example program to create a table, insert 10 vectors, and then run a vector similarity search.
 
@@ -12,23 +12,19 @@ After the Milvus server is successfully started, you can use this example progra
 
    ```shell
    # Install Milvus Python SDK
-   $ pip3 install pymilvus==0.2.14
+   $ pip3 install pymilvus==0.2.13
    ```
 
-   <div class="alert note">
-   To learn more about Milvus Python SDK, go to <a href="https://github.com/milvus-io/pymilvus/blob/master/README.md">Milvus Python SDK Readme.</a>
-   </div>
+   > Note: To learn more about Milvus Python SDK, go to [Milvus Python SDK Readme](https://github.com/milvus-io/pymilvus/blob/master/README.md).
 
 3. Download Python example code.
 
    ```shell
    # Download Python example
-   $ wget https://raw.githubusercontent.com/milvus-io/pymilvus/0.2.14/examples/example.py
+   $ wget https://raw.githubusercontent.com/milvus-io/pymilvus/0.2.13/examples/example.py
    ```
-
-   <div class="alert note">
-   If you cannot use <code>wget</code> to download the example code, you can also create <b>example.py</b> and copy the <a href="https://github.com/milvus-io/pymilvus/blob/0.2.14/examples/example.py">example code.</a>
-   </div>
+   
+    > Note: If you cannot use `wget` to download the example code, you can also create `example.py` and copy the [example code](https://github.com/milvus-io/pymilvus/blob/0.2.13/examples/example.py).
    
 4. Run the example code.
 

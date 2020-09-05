@@ -8,21 +8,21 @@ This article decribes how to connect to a Milvus server from a Python client.
 
 <div class="alert note">
 <li>See <a href="https://github.com/milvus-io/pymilvus">Python API documentation</a> for details about APIs.</li>
-<li>We recommend using <a href="https://milvus.io/tools/sizing">Milvus Sizing Tool</a> to estimate the hardware resources required for the data.</li>
+<li>It is recommended that you use <a href="https://milvus.io/tools/sizing">Milvus Sizing Tool</a> to estimate the hardware resources required for the data.</li>
 </div>
 
 
 1. Import pymilvus:
 
    ```python
-   # Import pymilvus.
+   # Import pymilvus
    >>> from milvus import Milvus, IndexType, MetricType, Status
    ```
 
 2. Use any of the following methods to connect to the Milvus server:
 
    ```python
-   # Connect to the Milvus server.
+   # Connect to Milvus server
    >>> milvus = Milvus(host='localhost', port='19530')
    ```
 
@@ -34,13 +34,3 @@ This article decribes how to connect to a Milvus server from a Python client.
    >>> milvus = Milvus(uri='tcp://localhost:19530')
    ```
 
-## FAQ
-
-<details>
-<summary><font color="#3f9cd1">Does Milvus' Python SDK have a connection pool?</font></summary>
-Python SDKs corresponding to Milvus v0.9.0 or later have a connection pool. There is no upper limit on the default number of connections in a connection pool.
-</details>
-<details>
-<summary><font color="#3f9cd1">How to fix the error when I install pymilvus on Windows?</font></summary>
-Try installing pymilvus in a Conda environment.
-</details>
