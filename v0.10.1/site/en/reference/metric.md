@@ -10,8 +10,8 @@ Below table shows how these widely used distance metrics fit with various input 
 
 | Input Data | Distance Metrics                                             | Index Types                                                    |
 | ---------- | ------------------------------------------------------------ | -------------------------------------------------------------- |
-| Float      | Euclidean distance (L2) and inner product (IP)              | `FLAT`, `IVFLAT`, `IVFSQ8`, `IVFSQ8H`, `IVFPQ`, `RNSG`, `HNSW` |
-| Binary     | Jaccard, Tanimoto, Hamming, superstructure(FLAT only), and substructure(FLAT only) | `FLAT`, `IVFLAT`                                               |
+| Float      | Euclidean distance (L2) and inner product (IP)              | FLAT, IVF\_FLAT, IVF\_SQ8, IVF\_SQ8H, IVF\_PQ, RNSG, HNSW |
+| Binary     | Jaccard, Tanimoto, Hamming, superstructure(FLAT only), and substructure(FLAT only) | FLAT, IVF_FLAT                                               |
 
 ### Euclidean distance (L2)
 
@@ -27,19 +27,26 @@ It's the most commonly used distance metric, and is very useful when the data is
 
 ### Inner product (IP)
 
-IP measures the cosine of the angle between 2 vectors, and returns the normalized dot product of them.
+The IP distance between two embeddings are defined as follows: 
 
-So the formula for IP is:
+![ip](../../../assets/IP.png)
 
-![ip](../../../assets/ip_metric.png)
-
-where A and B are vectors, `||A||` and `||B||` are the norms of A and B, and cosθ is the cosine of the angle between A and B.
+where A and B are embeddings, `||A||` and `||B||` are the norms of A and B.
 
 IP is more useful if you are more interested in measuring the orientation but not the magnitude of the vectors.
 
 <div class="alert note">
-If the vectors are normalized, IP is equivalent to cosine similarity. Thus, Milvus does not provide a metric for cosine similarity.
+ If you use IP to calculate embeddings similarities, you must normalize your embeddings. After normalization, inner product equals cosine similarity.
 </div>
+
+
+Suppose X' is normalized from embedding X: 
+
+![normalize](../../../assets/normalize.png)
+
+The correlation between the two embeddings is as follows: 
+
+![normalization](../../../assets/normalization.png)
 
 ### Jaccard distance
 
