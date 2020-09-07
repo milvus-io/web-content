@@ -10,12 +10,12 @@ The configurations apply to both single server Milvus and all nodes of a distrib
 
 #### Milvus file structure
 
-After successfully starting Milvus server, you can see a Milvus folder at `home/$USER/milvus`, which contains the following files:
+After successfully starting Milvus server, you can see a Milvus folder at **home/$USER/milvus**, which contains the following files:
 
-- `milvus/db` (database storage)
-- `milvus/logs` (log storage)
-- `milvus/conf` (configuration file folder)
-  - `server_config.yaml` (server configuration)
+- **milvus/db** (database storage)
+- **milvus/logs** (log storage)
+- **milvus/conf** (configuration file folder)
+  - **server_config.yaml** (server configuration)
 
 ## Updating configurations
 
@@ -37,7 +37,7 @@ logs:
 
 ### Updating configurations during runtime
 
-You can update parameters in `server_config.yaml` from a Milvus client. See [Client Reference](sdk.md) for more information.
+You can update parameters in **server_config.yaml** from a Milvus client. See [Client Reference](sdk.md) for more information.
 
 Changes to the following parameters take effect immediately without the need to restart Milvus.
 
@@ -142,7 +142,7 @@ This section determines whether to enable GPU support/usage in Milvus. GPU suppo
 </div>
 
 <div class="alert note">
-In Milvus, index building and search computation are separate processes, which can be executed on CPU, GPU, or both. You can assign index building and search computation to multiple GPUs by adding GPUs under <code>search_devices</code> or <code>build_index_devices</code>. Please refer to the following YAML sample code:
+In Milvus, index building and search computation are separate processes, which can be executed on CPU, GPU, or both. You can assign index building and search computation to multiple GPUs by adding GPUs under <code>search_devices</code> or <code>build_index_devices</code>. See the following YAML sample code:
 </div>
 
 ```yaml
@@ -178,7 +178,7 @@ In Milvus, index building and search computation are separate processes, which c
 | `port`           | Port of Prometheus Pushgateway. Range: [1025, 65534].                       | Integer | `9091`       |
 </div>
 
-<div class="alert info" id="size">
+<div class="alert note" id="size">
 In the Milvus configuration file, space size should be written in the format of "number+unit", such as "4GB".
 <ul>
 <li>Do not add a space between the number and its unit.</li>
@@ -186,3 +186,38 @@ In the Milvus configuration file, space size should be written in the format of 
 <li>Available units include GB, MB, and KB.</li>
 </ul>
 </div>
+
+
+## FAQ
+
+<details>
+<summary><font color="#3f9cd1">Besides the configuration file, how can I tell Milvus is using GPU for search?</font></summary>
+<p>Use any of the following methods:
+<ul>
+<li>Use <code>nvidia-smi</code> to monitor your GPU usage.</li>
+<li>
+Use Prometheus to monitor performance metrics. See <a href="setup_grafana.md#System-performance-metrics">Visualize Metrics in Grafana > System performance metrics</a>.
+</li>
+<li>Check the Milvus server logs.</li>
+</ul>
+</p>
+</details>
+<details>
+<summary><font color="#3f9cd1">If I have set <code>preload_collection</code>, does Milvus service start only after all collections are loaded to the memory?</font></summary>
+Yes. If you have set <code>preload_collection</code> in <strong>server_config.yaml</strong>, Milvus' service is not available until it loads all specified collections.
+</details>
+<details>
+<summary><font color="#3f9cd1">Why is my GPU always idle?</font></summary>
+<p>It is very likely that Milvus is using CPU for query. If you want to use GPU for query, you need to set the value of <code>gpu_search_threshold</code> in <strong>server_config.yaml</strong> to be greater than <code>nq</code> (number of vectors per query).
+</p>
+<p>
+You can use <code>gpu_search_threshold</code> to set the threshold: when <code>nq</code> is less than this value, Milvus uses CPU for queries; otherwise, Milvus uses GPU instead.
+</p>
+<p>
+We do not recommend enabling GPU when the query number is small.
+</p>
+</details>
+<details>
+<summary><font color="#3f9cd1">Why is the time in the log files different from the system time?</font></summary>
+The log files in the Docker container use UTC time by default. If your host machine does not use UTC time, then the time in the log files is different. We recommend that you mount the log files onto your host machine to keep the time consistent between the log and the host.
+</details>

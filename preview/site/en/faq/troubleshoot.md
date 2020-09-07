@@ -16,11 +16,11 @@ $ docker logs <milvus container id>
 
 ## Operational issue
 
-Issues that occur during the server operation, which may cause server down. If you encounter issues during operation, first confirm that whether the issue is caused by the incompatibility of Milvus and SDK versions. Then check the error messages that are recorded in `/home/$USER/milvus/logs`.
+Issues that occur during the server operation, which may cause server down. If you encounter issues during operation, first confirm that whether the issue is caused by the incompatibility of Milvus and SDK versions. Then check the error messages that are recorded in **/home/$USER/milvus/logs**.
 
 ## API issue
 
-Issues that occur during the operation with Milvus through APIs. Corresponding error messages will be returned real time to the client side.
+Issues that occur during the operation with Milvus through APIs. Corresponding error messages will be returned in real time to the client.
 
 If you cannot resolve the issue easily yourself, you can:
 

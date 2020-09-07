@@ -4,6 +4,60 @@ id: release_notes.md
 
 # 发版说明
 
+## v0.10.2
+
+**发布时间**：2020-8-15
+
+#### 版本兼容
+
+| Milvus 版本 | Python SDK 版本 | Java SDK 版本 | Go SDK 版本 |
+| :------------- | :----------------- | :--------------- | :------------- |
+| 0.10.2     | 0.2.14     | 0.8.4       | 0.4.4      |
+
+
+#### 主要改进
+
+
+- 提升了大 `nq` 和大 `nprobe` 情况下的搜索性能。[#2653](https://github.com/milvus-io/milvus/issues/2653)
+
+
+#### 问题修复
+
+- 修复了缓存中索引占用大小计算不准确的问题。[#2890](https://github.com/milvus-io/milvus/issues/2890)
+- 修复了 IVF_PQ 索引中 IP 距离结果归并不正确的问题。[#2952](https://github.com/milvus-io/milvus/issues/2952)
+- 修复了多 GPU 场景下，如果 `cache.cache_size` 设置小于单个索引文件大小，搜索时会造成系统崩溃的问题。[#3012](https://github.com/milvus-io/milvus/issues/3012)
+- 修复了在 Mishards 中插入数据至多个分区，IP 距离结果归并不正确的问题。[#3133](https://github.com/milvus-io/milvus/issues/3133)
+
+> 详见 [CHANGELOG](https://github.com/milvus-io/milvus/blob/0.10.2/CHANGELOG.md) 了解更多已修复问题。
+
+
+
+## v0.10.1
+
+**发布时间**：2020-7-20
+
+#### 版本兼容
+
+| Milvus 版本 | Python SDK 版本 | Java SDK 版本 | Go SDK 版本 |
+| :------------- | :----------------- | :--------------- | :------------- |
+| 0.10.1          | 0.2.14             | 0.8.3            | 0.4.3          |
+
+#### 问题修复
+
+- 修复了一个查询结果与查询行数不匹配的问题。[#2578](https://github.com/milvus-io/milvus/issues/2578)
+- 修复了一个 GPU 上 IVF_PQ 索引无法支持 IP 的问题。[#2585](https://github.com/milvus-io/milvus/issues/2585)
+- 修复了一些老的 CPU 上运行时出现 illegal instruction 的问题。[#2598](https://github.com/milvus-io/milvus/issues/2598)
+- 调整了 HNSW 参数范围。[#2637](https://github.com/milvus-io/milvus/issues/2637)
+- 修复了一个构建索引可能会导致 Milvus 进程崩溃退出的问题。[#2642](https://github.com/milvus-io/milvus/issues/2642)
+- 修复了一个 ANNOY 索引默认参数与文档不对应的问题。[#2649](https://github.com/milvus-io/milvus/issues/2649)
+- 修复了一个压力测试下出现的 Milvus 无响应的问题。[#2692](https://github.com/milvus-io/milvus/issues/2692)
+- 修复了一个 HTTP 接口返回向量精度错误的问题。[#2752](https://github.com/milvus-io/milvus/issues/2752)
+- 修复了一个 GPU 版本中 `nprobe` 上限错误的问题。[#2767](https://github.com/milvus-io/milvus/issues/2767)
+- 修复了一个构建索引后可能会导致集合中向量条数变化的问题。[#2768](https://github.com/milvus-io/milvus/issues/2768)
+
+
+> 详见 [CHANGELOG](https://github.com/milvus-io/milvus/blob/0.10.1/CHANGELOG.md) 了解更多已修复问题。
+
 ## v0.10.0
 
 **发布时间**：2020-6-15
@@ -450,7 +504,7 @@ id: release_notes.md
 
   - 不同的数组分开存储搜索结果的 ids 和 distances 以减少接口读取结果集的响应时间。
   - 新增了一种新的获取结果集里面某个目标向量的方式：`id = results.id_array[i][j], distance = results.distance_array[i][j]`
-  - 新增了一种数组遍历方式，在 `nq` 和 `topk` 很大的情况下处理时间大大缩短。
+  - 新增了一种数组遍历方式，在 `nq` 和 `top_k` 很大的情况下处理时间大大缩短。
 
     ```python
     >> for id_list, dis_list in zip(results.id_array, results.distance_array):

@@ -2,7 +2,7 @@
 id: mishards.md
 ---
 
-# [Mishards](https://github.com/milvus-io/milvus/tree/master/shards) - Milvus 集群分片中间件
+# Mishards：集群分片中间件
 
 ## Mishards 是什么
 
@@ -12,7 +12,7 @@ Mishards 是一个用 Python 开发的 Milvus 集群分片中间件，其内部�
 
 Mishards 负责将上游请求拆分，并路由到内部各细分子服务，最后将子服务结果汇总，返回给上游。
 
-![proxy](https://milvus.io/static/c00635f52b4cbe35ebd6bb9ce5af1db2/302a4/image_04.png)
+![proxy](../../../assets/mishards.png)
 
 ## Mishards 目标场景
 
@@ -34,7 +34,7 @@ Mishards 适合大数据规模下的搜索场景。那么，怎么判断数据�
 
 ### 总体架构
 
-![structure](https://milvus.io/static/c1dcc5824580dd51b8beb81bbf4cb00d/302a4/image_02.png)
+![structure](../../../assets/mishards_structure.png)
 
 ### 主要构件
 
@@ -74,7 +74,7 @@ Mishards 适合大数据规模下的搜索场景。那么，怎么判断数据�
 
 服务发现为 Mishards 提供所有 Milvus 读写节点的地址信息。Mishards 定义了相关的服务发现接口 `IServiceRegistryProvider`，并通过插件模式提供了扩展的可能性。目前默认提供了两种插件：**KubernetesProvider** 对应 Kubernetes 集群；**StaticProvider** 对应静态配置。你可以仿照这两种插件的实现，定制自己的服务发现插件。
 
-![discovery](https://milvus.io/static/63f649314b297b1fe0b07d2c8c0ba8ea/302a4/image_07.png)
+![discovery](../../../assets/mishards_discovery.png)
 
 | 参数                                  | 是否必填 | 类型    | 默认值   | 说明                                                         |
 | ------------------------------------- | -------- | ------- | -------- | ------------------------------------------------------------ |
@@ -82,7 +82,7 @@ Mishards 适合大数据规模下的搜索场景。那么，怎么判断数据�
 | `DISCOVERY_STATIC_PORT`               | 否       | Integer | `19530`  | `DISCOVERY_CLASS_NAME` 为 `static` 时，定义服务地址监听端口。 |
 | `DISCOVERY_PLUGIN_PATH`               | 否       | String  | ` `      | 用户自定义服务发现插件的搜索路径，默认使用系统搜索路径。     |
 | `DISCOVERY_CLASS_NAME`                | 否       | String  | `static` | 在插件搜索路径下，根据类名搜索类，并将其实例化。目前系统提供 `static` 和 `kubernetes` 两种类，默认使用 `static`。 |
-| `DISCOVERY_KUBERNETES_NAMESPACE`      | 否       | String  | ` `      | `DISCOVERY_CLASS_NAME` 为 `kubernetes`时，定义 Milvus 集群的 namespace。 |
+| `DISCOVERY_KUBERNETES_NAMESPACE`      | 否       | String  | ` `      | `DISCOVERY_CLASS_NAME` 为 `kubernetes` 时，定义 Milvus 集群的 namespace。 |
 | `DISCOVERY_KUBERNETES_IN_CLUSTER`     | 否       | Boolean | `False`  | `DISCOVERY_CLASS_NAME` 为 `kubernetes` 时，选择服务发现是否在集群中运行。 |
 | `DISCOVERY_KUBERNETES_POLL_INTERVAL`  | 否       | Integer | `5`      | `DISCOVERY_CLASS_NAME` 为 `kubernetes` 时，定义服务发现监听周期（单位：秒）。 |
 | `DISCOVERY_KUBERNETES_POD_PATT`       | 否       | String  | ` `      | `DISCOVERY_CLASS_NAME` 为 `kubernetes` 时，匹配 Milvus Pod 名字的正则表达式。 |
@@ -123,7 +123,7 @@ Mishards 从服务发现中心获取 Milvus 读写节点的地址信息，通过
 
 Mishards 定义了路由策略相关的接口，并通过插件提供扩展。你可以仿照默认的一致性哈希路由插件，根据自己的业务特点定制个性化路由。
 
-![router](https://milvus.io/static/84435d8783b7f4454b3667544ba2a4cf/302a4/image_08.png)
+![router](../../../assets/mishards_router.png)
 
 | 参数                     | 是否必填 | 类型   | 默认值                    | 说明                                                         |
 | ------------------------ | -------- | ------ | ------------------------- | ------------------------------------------------------------ |
@@ -162,13 +162,13 @@ Mishards 定义了路由策略相关的接口，并通过插件提供扩展。�
    - 如果 Docker 版本低于 v19.03，运行如下命令：
 
    ```shell
-   $ sudo docker  run --runtime=nvidia --rm -d -p 19530:19530 -v /tmp/milvus/db:/var/lib/milvus/db milvusdb/milvus:0.10.0-gpu-d061620-5f3c00
+   $ sudo docker  run --runtime=nvidia --rm -d -p 19530:19530 -v /tmp/milvus/db:/var/lib/milvus/db milvusdb/milvus:0.10.2-gpu-d081520-8a2393
    ```
 
    - 否则，运行如下命令：
 
    ```shell
-   $ sudo docker run --gpus all --rm -d -p 19530:19530 -v /tmp/milvus/db:/var/lib/milvus/db milvusdb/milvus:0.10.0-gpu-d061620-5f3c00
+   $ sudo docker run --gpus all --rm -d -p 19530:19530 -v /tmp/milvus/db:/var/lib/milvus/db milvusdb/milvus:0.10.2-gpu-d081520-8a2393
    ```
 
 4. 更改目录权限：

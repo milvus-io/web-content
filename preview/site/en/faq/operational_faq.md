@@ -6,38 +6,36 @@ id: operational_faq.md
 
 <!-- TOC -->
 
-- [What if I failed to pull docker images from dockerhub when installing Milvus?](#What-if-I-failed-to-pull-docker-images-from-dockerhub-when-installing-Milvus)
-- [Why do I fail to compile Milvus from source?](#Why-do-I-fail-to-compile-Milvus-from-source)
-- [Is there a limitation for the number of collections and partitions in Milvus?](#Is-there-a-limitation-for-the-number-of-collections-and-partitions-in-Milvus)
-- [Why does Milvus return config check error?](#Why-does-Milvus-return-config-check-error)
-- [Does Milvus support insert, delete, update, and query operations for vectors?](#Does-Milvus-support-insert-delete-update-and-query-operations-for-vectors)
-- [Should I specify vector IDs or use auto-generated vector IDs?](#Should-I-specify-vector-IDs-or-use-auto-generated-vector-IDs)
-- [Why do Euclidean distance and inner product have inconsistent results in computing vector similarity?](#Why-do-Euclidean-distance-and-inner-product-have-inconsistent-results-in-computing-vector-similarity)
-- [Why does Milvus display "no space left on device" when I import data to Milvus?](#why-does-Milvus-display-no-space-left-on-device-when-I-import-data-to-Milvus)
-- [Why does this error "Vectors should be 2-dim array" still occur in the Python SDK when the data is a 2-dimensional array?](#Why-does-this-error-Vectors-should-be-2-dim-array-still-occur-in-the-Python-SDK-when-the-data-is-a-2-dimensional-array)
-- [Why sometimes it takes much longer for queries with smaller datasets?](#Why-sometimes-it-takes-much-longer-for-queries-with-smaller-datasets)
-- [Why is my Milvus constantly having bad performance?](#Why-is-my-Milvus-constantly-having-bad-performance)
-- [Why is my Milvus constantly having low accuracy?](#Why-is-my-Milvus-constantly-having-low-accuracy)
-- [Why are my new configurations not working?](#Why-are-my-new-configurations-not-working)
-- [Why is my Python SDK constantly having errors?](#Why-is-my-Python-SDK-constantly-having-errors)
-- [How do I know whether Milvus is successfully started?](#How-do-I-know-whether-Milvus-is-successfully-started)
-- [Why there are vectors with `-1` as IDs in my search result?](#Why-there-are-vectors-with--1-as-IDs-in-my-search-result)
-- [Why does my Milvus return "Illegal instruction" during startup?](#Why-does-my-Milvus-return-Illegal-instruction-during-startup)
-- [Why is `cpu_cache_capacity` always too large for macOS or Windows?](#Why-is-cpu_cache_capacity-always-too-large-for-macOS-or-Windows)
-- [Why is the time in my log files different from the system time?](#Why-is-the-time-in-my-log-files-different-from-the-system-time)
-- [Why does my multiprocessing program fail?](#Why-does-my-multiprocessing-program-fail)
-- [Why are the search results fewer than K when I try to search the top K vectors?](#Why-are-the-search-results-fewer-than-K-when-I-try-to-search-the-top-K-vectors)
-- [How to build Milvus from source in the Docker container?](#How-to-build-Milvus-from-source-in-the-Docker-container)
-- [How often should I build indexes when inserting data?](#How-often-should-I-build-indexes-when-inserting-data)
-- [How is data stored in Milvus?](#How-is-data-stored-in-Milvus)
-- [How do I know whether my CPU is supported by Milvus?](#How-do-I-know-whether-my-CPU-is-supported-by-Milvus)
-- [Related links](#Related-links)
+- [What if I failed to pull Milvus Docker image from Docker Hub?](#What-if-I-failed-to-pull-Milvus-Docker-image-from-Docker-Hub)
+- [Is Docker the only way to install and run Milvus?](#Is-Docker-the-only-way-to-install-and-run-Milvus)
+- [Why does Milvus return `config check error`?](#Why-does-Milvus-return-config-check-error)
+- [Why do I get `no space left on device` when importing data to Milvus?](#Why-do-I-get-no-space-left-on-device-when-importing-data-to-Milvus)
+- [Why is my recall rate unsatisfying?](#Why-is-my-recall-rate-unsatisfying)
+- [Why does my updated configuration not work?](#Why-does-my-updated-configuration-not-work)
+- [How can I know if Milvus has started successfully?](#How-can-I-know-if-Milvus-has-started-successfully)
+- [Why is the time in the log files different from the system time?](#Why-is-the-time-in-the-log-files-different-from-the-system-time)
+- [How can I know whether my CPU supports Milvus?](#How-can-I-know-whether-my-CPU-supports-Milvus)
+- [Why does Milvus return Illegal instruction during startup?](#Why-does-Milvus-return-Illegal-instruction-during-startup)
+- [How can I know whether my GPU is supported by Milvus?](#How-can-I-know-whether-my-GPU-is-supported-by-Milvus)
+- [Where is the script for starting the server in the Milvus Docker container?](#Where-is-the-script-for-starting-the-server-in-the-Milvus-Docker-container)
+- [Besides the configuration file, how can I tell Milvus is using GPU for search?](#Besides-the-configuration-file-how-can-I-tell-Milvus-is-using-GPU-for-search)
+- [Can I install Milvus on Windows?](#Can-I-install-Milvus-on-Windows)
+- [How to fix the error when I install pymilvus on Windows?](#How-to-fix-the-error-when-I-install-pymilvus-on-Windows)
+- [Can I deploy Milvus service in an air-gapped environment?](#Can-I-deploy-Milvus-service-in-an-air-gapped-environment)
+- [How can I differentiate if I have multiple Milvus nodes connected to Pushgateway?](#How-can-I-differentiate-if-I-have-multiple-Milvus-nodes-connected-to-Pushgateway)
+- [Which database system should I use to manage Metadata, SQLite or MySQL?](#Which-database-system-should-I-use-to-manage-Metadata-SQLite-or-MySQL)
+- [How to calculate required memory based on the size of the dataset?](#How-to-calculate-required-memory-based-on-the-size-of-the-dataset)
+- [How to migrate data in Milvus?](#How-to-migrate-data-in-Milvus)
+- [Can I increase my storage by adding interfaces such as S3 or GlusterFS?](#Can-I-increase-my-storage-by-adding-interfaces-such-as-S3-or-GlusterFS)
+- [Why do I see `WARN: increase temp memory to avoid cudaMalloc, or decrease query/add size (alloc 307200000 B, highwater 0 B)` in the log file?](#Why-do-I-see-WARN-increase-temp-memory-to-avoid-cudaMalloc-or-decrease-queryadd-size-alloc-307200000-B-highwater-0-B-in-the-log-file)
+- [Why does Milvus return `database is locked`?](#Why-does-Milvus-return-database-is-locked)
+- [Still have questions?](#Still-have-questions)
 
 <!-- /TOC -->
 
-#### What if I failed to pull docker images from dockerhub when installing Milvus?
+#### What if I failed to pull Milvus Docker image from Docker Hub?
 
-Users in some countries may have limited access to dockerhub. In this case, you can pull images from the local registry mirror. For example, the URL of the registry mirror for China is `registry.docker-cn.com`. You can add `"https://registry.docker-cn.com"` to the `registry-mirrors` array in `/etc.docker/daemon.json` to pull from the China registry mirror by default.
+Users in some countries may have limited access to Docker Hub. In this case, you can pull the Docker image from other registry mirrors. You can add the URL `"https://registry.docker-cn.com"` to the `registry-mirrors` array in `/etc.docker/daemon.json`.
 
 ```json
 {
@@ -45,137 +43,119 @@ Users in some countries may have limited access to dockerhub. In this case, you 
 }
 ```
 
-#### Why do I fail to compile Milvus from source?
+#### Is Docker the only way to install and run Milvus?
 
-Although the reasons may vary, the most possible cause could be environmental issues, such as incompatible versions, missing dependencies, etc. Refer to [Install Milvus from Source Code](https://github.com/milvus-io/milvus/blob/master/INSTALL.md) for more information.
+No. You can also build Milvus from source code in Linux. See [Build Milvus from source code](https://github.com/milvus-io/milvus/blob/master/INSTALL.md) for more information.
 
-It is recommended that you use the docker images with the Milvus compilation environment. Refer to [How to build Milvus from source in the Docker container?](#How-to-build-Milvus-from-source-in-the-Docker-container) to learn how to compile Milvus with the docker images.
+#### Why does Milvus return `config check error`?
 
-#### Is there a limitation for the number of collections and partitions in Milvus?
+The version of configuration file does not match the version your Milvus server.
 
-Yes. If you use SQLite as the metadata management service, the sum of collection number and partition number must not exceed 50000. To create more collections and partitions, please [use MySQL](data_manage.md).
+#### Why do I get `no space left on device` when importing data to Milvus?
 
-#### Why does Milvus return config check error?
+It is likely that you have not saved enough disk space.
 
-The version of your Milvus server configuration file is incorrect. Milvus 0.7.0 only supports the 0.2 version of the Milvus server configuration file (`server_config.yaml`).
+#### Why is my recall rate unsatisfying?
 
-#### Does Milvus support insert, delete, update, and query operations for vectors?
+You can increase the value of `nprobe` when searching from a client. The greater the value, the more accurate the result, and the more time it takes.
 
-Yes. You can refer to [Milvus Operations](milvus_operation.md) for details.
+See [Performance Tuning > Index](tuning.md#Index) for more information.
 
-> Note: Before 0.7.0, only insertion and search are supported.
+#### Why does my updated configuration not work?
 
-#### Should I specify vector IDs or use auto-generated vector IDs?
+You need to restart Milvus Docker each time you update the configuration file. See [Milvus Server Configuration > Updating configurations](milvus_config.md#Updating-configurations).
 
-Both ways work. However, you must either specify IDs for all vectors or use auto-generated IDs for all vectors in one collection.
+#### How can I know if Milvus has started successfully?
 
-#### Why do Euclidean distance and inner product have inconsistent results in computing vector similarity?
+Run `sudo docker logs <container ID>` to check if Milvus is running properly.
 
-If Euclidean distance and inner product have inconsistent results, you need to check whether the data has been normalized. If not, please normalize your data before computing vector similarity.
+#### Why is the time in the log files different from the system time?
 
-It can be theoretically proved that Euclidean distance will not be consistent with inner product for data without normalization. For detailed analysis, please refer to [data normalization](https://github.com/milvus-io/bootcamp/blob/0.6.0/EN_getting_started/data_preparation/data_normalization.md).
+The log files in the Docker container use UTC time by default. If your host machine does not use UTC time, then the time in the log files is different. We recommend that you mount the log files onto your host machine to keep the time consistent between the log and the host.
 
+#### How can I know whether my CPU supports Milvus?
 
-#### Why does Milvus display "no space left on device" when I import data to Milvus?
+The instruction sets that Milvus supports are SSE42, AVX, AVX2, and AVX512. Your CPU must support at least one of them for Milvus to function properly.
 
-You probably did not leave enough disk space for the data to import. For example, to build `FLAT` or `IVFLAT` index for 100 million single-precision vectors, the space needed for importing data is about 200 GB. For `IVF_SQ8` index, the space is about 50 GB.
+#### Why does Milvus return Illegal instruction during startup?
 
-#### Why does this error "Vectors should be 2-dim array" still occur in the Python SDK when the data is a 2-dimensional array?
+If your CPU does not support SSE42, AVX, AVX2, or AVX512, Milvus cannot start properly. You can use `cat /proc/cpuinfo` to check the supported instruction sets.
 
-Even if the data is a 2-dim array, this error can still occur if the data type is integer instead of float. Milvus only support the float data type.
+#### How can I know whether my GPU is supported by Milvus?
 
-#### Why sometimes it takes much longer for queries with smaller datasets?
+Milvus supports CUBA architecture 6.0 or later. See [Wikipedia](https://en.wikipedia.org/wiki/CUDA) for supported architectures.
 
-If the size of a data file is smaller than the value of the `index_file_size` parameter when creating a collection, Milvus will not build indexes for the data file. Thus, it is possible that smaller datasets may need more time for queries. Refer to [Milvus Operation](milvus_operation.md) for more information.
+#### Where is the script for starting the server in the Milvus Docker container?
 
-> Note: `index_file_size` was named as `index_building_threshold` before the 0.4.0 release.
+It is at **/var/lib/milvus/script/** in the Milvus Docker container.
 
-#### Why is my Milvus constantly having low accuracy?
+#### Besides the configuration file, how can I tell Milvus is using GPU for search?
 
-Check the value of the `nprobe` parameter in the functions when you use an SDK to search vectors in a collection. The greater the value, the more precise the result, yet the slower the search speed. Refer to [Learn Milvus Operation](milvus_operation.md) for more information.
+Use any of the following methods:
 
-#### Why are my new configurations not working?
+- Use `nvidia-smi` to monitor your GPU usage.
 
-You need to restart Milvus docker every time you change the configuration file.
+- Use Prometheus to monitor performance metrics. See [Visualize Metrics in Grafana > System performance metrics](setup_grafana.md#System-performance-metrics).
 
-```bash
-$ docker restart <container id>
-```
+- Check the Milvus server logs.
 
-#### Why is my Python SDK constantly having errors?
+#### Can I install Milvus on Windows?
 
-Check whether your pymilvus is supported by the installed Milvus. Refer to [https://pypi.org/project/pymilvus](https://pypi.org/project/pymilvus) for a detailed list of supported pymilvus versions.
+Yes, so long as you have set up a Docker environment on your operating system.
 
-#### How do I know whether Milvus is successfully started?
+#### How to fix the error when I install pymilvus on Windows?
 
-Use the following command to check the running status of Milvus:
+Try installing pymilvus in a Conda environment.
 
-```bash
-$ docker logs <container ID>
-```
+#### Can I deploy Milvus service in an air-gapped environment?
 
-#### Why there are vectors with `-1` as IDs in my search result?
+Milvus is released as a Docker image. Follow these steps to deploy it from offline:
 
-When the number of vectors in the dataset is less than `topk`, Milvus automatically adds vectors with `-1` as IDs to the search result to ensure that the search result contains `topk` elements.
+1. Pull the latest Milvus Docker image when you have Internet access.
 
-#### Why does my Milvus return "Illegal instruction" during startup? 
+2. Run `docker save` to save the Docker image as a TAR file.
 
-If your CPU does not support the avx2 instruction set, Milvus cannot run properly. You can use `cat /proc/cpuinfo` to check supported instruction sets.
+3. Transfer the TAR file to the air-gapped environment.
 
-#### Why is `cpu_cache_capacity` always too large for macOS or Windows?
+4. Run `docker load` to load the file as a Docker image.
 
-You need to check the memory allocated to the docker engine in macOS or Windows. If the allocated memory is not greater than `cpu_cache_capacity`, Milvus cannot start even if the memory of your host is sufficient.
+For more information about Docker, see [docs.docker.com](https://docs.docker.com/).
 
-#### Why is the time in my log files different from the system time?
+#### How can I differentiate if I have multiple Milvus nodes connected to Pushgateway?
 
-The log files in the docker container use UTC timezone by default. If the timezone of your host is not UTC, the time might be different between the docker container and the host. It is recommended that you check the log files mapped to your host so that the timezone is consistent.
+You can add a Prometheus instance in **prometheus.yaml**. Then Prometheus or Granafa will show the monitoring data, as well as the source node.
 
-#### Why does my multiprocessing program fail? 
+#### Which database system should I use to manage Metadata, SQLite or MySQL?
 
-In order to successfully run multiprocessing in Milvus, make sure the following conditions are met:
+We recommend using MySQL to manage Metadata in production environment.
 
-- No client is created in the main process
-- Clients are created in each child process
+#### How to calculate required memory based on the size of the dataset?
 
-#### Why are the search results fewer than K when I try to search the top K vectors?
+Different indexes require different memory space. You can use [Milvus sizing tool](https://milvus.io/tools/sizing) to calculate the required memory for a vector search.
 
-In all the indexing types that Milvus supports, `IVFLAT` and `IVF_SQ8` are cell-probe methods that employ a partitioning technique called k-means. The feature space is partitioned into `nlist` cells, and vectors are assigned to one of these cells (to the centroid closest to the query), and stored in an inverted file structure formed of `nlist` inverted lists. When query occurs, only a set of `nprobe` inverted lists are selected.
+#### How to migrate data in Milvus?
 
-If the `nlist` and K is relatively large, and `nprobe` is small enough, it happens that the vectors in `nprobe` lists are even fewer than K. Thus, when you search the top K vectors, the results would be fewer than K.
+Copy the entire **db** directory of the original Milvus service to the new directory. When restarting the Milvus service, map the copied **db** directory to the **db** directory of the Milvus service.
 
-In order to avoid this situation, you can try increasing the value of `nprobe`, or smaller `nlist` and K.
+<div class="alert note">
+Note: Data formats of different versions may not be compatible with each other. The current data format is backward compatible with Milvus v0.7.0.
+</div>
 
-#### How to build Milvus from source in the Docker container?
+#### Can I increase my storage by adding interfaces such as S3 or GlusterFS?
 
-As Milvus is mainly developed under the Ubuntu environment, the recommended compilation environment is Ubuntu 18.04 or higher. If your developing environment is not Ubuntu 18.04, you can also build Milvus from source code in the docker container. We provide two docker images that provide the build environment needed for the Milvus CPU-only and GPU supported versions.
+No, you cannot. Milvus does not support this feature for now.
 
-To build Milvus from source in the Docker container, please refer to [Compile Milvus on Docker](https://github.com/milvus-io/milvus/blob/0.6.0/install.md#compile-milvus-on-docker).
+#### Why do I see `WARN: increase temp memory to avoid cudaMalloc, or decrease query/add size (alloc 307200000 B, highwater 0 B)` in the log file?
 
-#### How often should I build indexes when inserting data?
+You receive this warning if the graphics memory required for a request is larger than the graphics memory allocated beforehand. The warning merely denotes an insufficient graphics memory. Milvus will expand the graphics memory accordingly. 
 
-You should always avoid building indexes too frequently when inserting data. Otherwise, a lot of small index files will be generated and performance will be negatively affected.
+#### Why does Milvus return `database is locked`?
 
-#### How is data stored in Milvus?
+If you use SQLite to manage Metadata, you receive this error message when write requests occur frequently. We recommend using MySQL for Metadata management. See [Manage Metadata with MySQL](data_manage.md).
 
-In Milvus, metadata is stored in the database, while search data is stored as files. For detailed information, refer to the following blogs:
+#### Still have questions?
 
-- [Managing Data in Massive-Scale Vector Search Engine: How data management is done in Milvus](https://medium.com/@milvusio/managing-data-in-massive-scale-vector-search-engine-db2e8941ce2f)
-- [Improvements of the Data File Cleanup Mechanism](https://github.com/milvus-io/community/blob/master/blog/en/2019-12-18-datafile-cleanup.md)
-- [Milvus Metadata Management (1): How to View Metadata](https://medium.com/@milvusio/milvus-metadata-management-1-6b9e05c06fb0)
-- [Milvus Metadata Management (2): Fields in the Metadata Table](https://medium.com/@milvusio/milvus-metadata-management-2-fields-in-the-metadata-table-3bf0d296ca6d)
-- [Milvus Metadata Management (3): How to Manage Data Files with Metadata](https://medium.com/@milvusio/milvus-metadata-management-3-e65b14137f58)
+You can:
 
-#### How do I know whether my CPU is supported by Milvus?
-
-Milvus currently supports the following instruction sets:
-
-- SSE4
-- AVX2
-- AVX512
-
-However, you need AVX2 for Milvus to function properly.
-
-
-## Related links
-
-[Product FAQ](product_faq.md)
+- Check out [Milvus](https://github.com/milvus-io/milvus/issues) on GitHub. You're welcome to raise questions, share ideas, and help others.
+- Join our [Slack community](https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk) to find more help and have fun!

@@ -10,8 +10,8 @@ Below table shows how these widely used distance metrics fit with various input 
 
 | Input Data | Distance Metrics                                             | Index Types                                                    |
 | ---------- | ------------------------------------------------------------ | -------------------------------------------------------------- |
-| Float      | Euclidean distance (L2) and inner product (IP)              | `FLAT`, `IVFLAT`, `IVFSQ8`, `IVFSQ8H`, `IVFPQ`, `RNSG`, `HNSW` |
-| Binary     | Jaccard, Tanimoto, Hamming, superstructure(FLAT only), and substructure(FLAT only) | `FLAT`, `IVFLAT`                                               |
+| Float      | <ul><li>Euclidean distance (L2)</li> <li>Inner product (IP)</li></ul>             | <ul><li>FLAT</li><li>IVF\_FLAT</li><li>IVF\_SQ8</li><li>IVF\_SQ8H</li><li>IVF\_PQ</li><li>RNSG</li><li>HNSW</li></ul> |
+| Binary     | <ul><li>Jaccard</li><li>Tanimoto</li><li>Hamming</li><li>Superstructure (FLAT only)</li><li>Substructure (FLAT only)</li></ul> | <ul><li>FLAT</li><li>IVF_FLAT</li></ul>                                              |
 
 ### Euclidean distance (L2)
 
@@ -29,7 +29,7 @@ It's the most commonly used distance metric, and is very useful when the data is
 
 The IP distance between two embeddings are defined as follows: 
 
-![ip](../../../assets/IP.png)
+![ip](../../../assets/IP_formula.png)
 
 where A and B are embeddings, `||A||` and `||B||` are the norms of A and B.
 
@@ -42,11 +42,11 @@ IP is more useful if you are more interested in measuring the orientation but no
 
 Suppose X' is normalized from embedding X: 
 
-![normalize](../../../assets/normalize.png)
+![normalize](../../../assets/normalize_formula.png)
 
 The correlation between the two embeddings is as follows: 
 
-![normalization](../../../assets/normalization.png)
+![normalization](../../../assets/normalization_formula.png)
 
 ### Jaccard distance
 
@@ -109,3 +109,23 @@ Where
 - N<sub>A</sub> specifies the number of bits in the fingerprint of molecular A.
 - N<sub>B</sub> specifies the number of bits in the fingerprint of molecular B.
 - N<sub>AB</sub> specifies the number of shared bits in the fingerprint of molecular A and B.
+
+
+## FAQ
+
+<details>
+<summary><font color="#3f9cd1">Why is the top1 result of a vector search not the search vector itself, if the metric type is inner product?</font></summary>
+This occurs if you have not normalized the vectors when using inner product as the distance metric.
+</details>
+<details>
+<summary><font color="#3f9cd1">What is normalization? Why is normalization needed?</font></summary>
+<p>Normalization refers to the process of converting an embedding (vector) so that its norm equals 1. If you use Inner Product to calculate embeddings similarities, you must normalize your embeddings. After normalization, inner product equals cosine similarity.
+</p>
+<p>
+See <a href="https://en.wikipedia.org/wiki/Unit_vector">Wikipedia</a> for more information.
+</p>
+</details>
+<details>
+<summary><font color="#3f9cd1">Why do I get different results using Euclidean distance (L2) and inner product (IP) as the distance metric?</font></summary>
+Check if the vectors are normalized. If not, you need to normalize the vectors first. Theoretically speaking, similarities worked out by L2 are different from similarities worked out by IP, if the vectors are not normalized.
+</details>

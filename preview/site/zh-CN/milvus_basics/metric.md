@@ -10,10 +10,10 @@ Milvus 基于不同的距离计算方式比较向量间的距离。选择合适�
 
 | 数据格式 | 距离计算方式                                                                                                       | 索引类型                                                       |
 | -------- | ------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------- |
-| 浮点型   | 欧氏距离（L2）、内积（IP）                                                                                         | `FLAT`, `IVFLAT`, `IVFSQ8`, `IVFSQ8H`, `IVFPQ`, `RNSG`, `HNSW` |
-| 二值型   | 杰卡德距离（Jaccard）、谷本距离（Tanimoto）、汉明距离（Hamming）、超结构（superstructure）(仅FLAT支持)、子结构（substructure）(仅FLAT支持) | `FLAT`, `IVFLAT`                                               |
+| 浮点型   | <ul><li>欧氏距离（L2）</li><li>内积（IP）</li></ul>                                                                                         | <ul><li>FLAT</li><li>IVF\_FLAT</li><li>IVF\_SQ8</li><li>IVF\_SQ8H</li><li>IVF\_PQ</li><li>RNSG</li><li>HNSW</li></ul> |
+| 二值型   | <ul><li>杰卡德距离（Jaccard）</li><li>谷本距离（Tanimoto）</li><li>汉明距离（Hamming）</li><li>超结构（superstructure）(仅 FLAT 支持)</li><li>子结构（substructure）(仅 FLAT 支持)</li></ul> | <ul><li>FLAT</li><li>IVF_FLAT</li></ul>                                               |
 
-### 欧氏距离 (L2)
+### 欧氏距离（L2）
 
 欧氏距离计算的是两点之间最短的直线距离。
 
@@ -25,11 +25,11 @@ Milvus 基于不同的距离计算方式比较向量间的距离。选择合适�
 
 欧氏距离是最常用的距离计算方式之一，应用广泛，适合数据完整，数据量纲统一的场景。
 
-### 内积 (IP)
+### 内积 （IP）
 
 两条向量内积距离的计算公式为：
 
-![ip](../../../assets/IP.png)
+![ip](../../../assets/IP_formula.png)
 
 
 假设有 A 和 B 两条向量，则 `||A||` 与 `||B||` 分别代表 A 和 B 归一化后的值。
@@ -42,11 +42,11 @@ Milvus 基于不同的距离计算方式比较向量间的距离。选择合适�
 
 假设 X' 是向量 X 的归一化向量：
 
-![normalize](../../../assets/normalize.png)
+![normalize](../../../assets/normalize_formula.png)
 
 两者之间的关系为：
 
-![normalization](../../../assets/normalization.png)
+![normalization](../../../assets/normalization_formula.png)
 
 ### 杰卡德距离
 
@@ -74,7 +74,7 @@ Milvus 基于不同的距离计算方式比较向量间的距离。选择合适�
 
 ![tanimoto coefficient](../../../assets/tanimoto_coeff.png)
 
-对于二值变量，谷本系数值域为 0 到+1（+1 的相似度最高）
+对于二值变量，谷本系数值域为 0 到 +1（+1 的相似度最高）
 
 ### 汉明距离
 
@@ -88,7 +88,7 @@ Milvus 基于不同的距离计算方式比较向量间的距离。选择合适�
 
 ### 超结构
 
-超结构主要用来计算某化学结构与其超结构的相似度。值越小则相似度越大。Milvus目前只返回距离为0的结果。
+超结构主要用来计算某化学结构与其超结构的相似度。值越小则相似度越大。Milvus 目前只返回距离为 0 的结果。
 
 超结构的公式可表示为：
 
@@ -115,3 +115,24 @@ Milvus 基于不同的距离计算方式比较向量间的距离。选择合适�
 - N<sub>A</sub> 表示分子式 A 的化学指纹中二进制位的数量。
 - N<sub>B</sub> 表示分子式 B 的化学指纹中二进制位的数量。
 - N<sub>AB</sub> 表示分子式 A 和 B 的化学指纹中共有的二进制位的数量。
+
+
+
+## 常见问题
+
+<details>
+<summary><font color="#3f9cd1">为什么向量距离计算方式是内积时，搜索出来的 top1 不是目标向量本身？</font></summary>
+向量距离计算方式用内积时，如果向量未归一化，会出现这样的情况。
+</details>
+<details>
+<summary><font color="#3f9cd1">什么是归一化？Milvus 中为什么有时候需要归一化？</font></summary>
+<p>归一化指的是通过数学变换将向量的模长变为 1 的过程。如需使用点积计算向量相似度，则必须对向量作归一化处理。处理后点积与余弦相似度等价。
+</p>
+<p>
+可参阅文章 <a href="https://zhuanlan.zhihu.com/p/88117781">向量搜索的简明数学基础</a>。
+</p>
+</details>
+<details>
+<summary><font color="#3f9cd1">为什么欧氏距离和内积在计算向量相似度时的结果不一致？</font></summary>
+如果欧氏距离和内积返回不一致的结果，需要检查数据是否已经归一化。如果没有，请先对数据进行归一化。理论上可以证明，对于未归一化的数据，欧氏距离和内积的结果是不一致的。
+</details>

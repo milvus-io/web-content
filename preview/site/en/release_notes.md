@@ -6,6 +6,58 @@ sidebar_label: Release Notes
 
 # Release notes
 
+## v0.10.2
+
+**Release date**：2020-8-15
+
+#### Compatibility
+
+| Milvus version | Python SDK version | Java SDK version | Go SDK version |
+| :------------- | :----------------- | :--------------- | :------------- |
+| 0.10.2     | 0.2.14     | 0.8.4       | 0.4.4      |
+
+
+#### Improvements
+
+
+- Improved IVF search performance when both `nq` and `nprobe` are large. [#2653](https://github.com/milvus-io/milvus/issues/2653)
+
+
+#### Fixed issues
+
+- Inaccurate calculation of the memory allocated for index files. [#2890](https://github.com/milvus-io/milvus/issues/2890)
+- Search result sets based on IVF_PQ index with IP metric are incorrectly merged in situations where multiple segments are produced for the inserted data. [#2952](https://github.com/milvus-io/milvus/issues/2952)
+- The server crashes if you set `cache.cache_size` smaller than the size of an index file in a multi-GPU scenario. [#3012](https://github.com/milvus-io/milvus/issues/3012)
+- Search result sets based on IP metric are incorrectly merged, if you insert vectors to multiple partitions in Mishards. [#3133](https://github.com/milvus-io/milvus/issues/3133)
+
+> See [CHANGELOG](https://github.com/milvus-io/milvus/blob/0.10.2/CHANGELOG.md) for more information.
+
+
+## v0.10.1
+
+**Release date**：2020-7-20
+
+#### Compatibility
+
+| Milvus version | Python SDK version | Java SDK version | Go SDK version |
+| :------------- | :----------------- | :--------------- | :------------- |
+| 0.10.1          | 0.2.14             | 0.8.3            | 0.4.3          |
+
+#### Fixed issues
+
+- Occasionally, the result count does not match the query count. [#2578](https://github.com/milvus-io/milvus/issues/2578)
+- IVF_PQ does not support IP on GPU-enabled Milvus. [#2585](https://github.com/milvus-io/milvus/issues/2585)
+- Milvus reports "illegal instruction" when running on some legacy CPUs. [#2598](https://github.com/milvus-io/milvus/issues/2598)
+- Updated the range of HNSW settings. [#2637](https://github.com/milvus-io/milvus/issues/2637)
+- Milvus processes crash when building an index. [#2642](https://github.com/milvus-io/milvus/issues/2642)
+- The default ANNOY settings do not match the settings specified in the document. [#2649](https://github.com/milvus-io/milvus/issues/2649)
+- Milvus does not respond under a stress test. [#2692](https://github.com/milvus-io/milvus/issues/2692)
+- The precision of the returned vectors is incorrect in an HTTP interface. [#2752](https://github.com/milvus-io/milvus/issues/2752)
+- The upper limit of `nprobe` is incorrect on the GPU-enabled Milvus. [#2767](https://github.com/milvus-io/milvus/issues/2767)
+- The number of the vectors changes occasionally after building an index. [#2768](https://github.com/milvus-io/milvus/issues/2768)
+
+> See [CHANGELOG](https://github.com/milvus-io/milvus/blob/0.10.1/CHANGELOG.md) for more information.
+
 ## v0.10.0
 
 **Release date**：2020-6-15
@@ -370,7 +422,7 @@ Refer to [CHANGELOG](https://github.com/milvus-io/milvus/blob/master/CHANGELOG.m
 
 - **Term updates**
 
-  Starting from Milvus 0.7.0, `Table` is named as `Collection` in Milvus.
+  As of Milvus 0.7.0, `Table` is named as `Collection` in Milvus.
 
 #### Fixed issues
 
@@ -452,7 +504,7 @@ Refer to [CHANGELOG](https://github.com/milvus-io/milvus/blob/master/CHANGELOG.m
 
   - Divide the storage of search result ids and distances into separate arrays, which reduces the API response time.
   - Add a new option to retrieve a specific target vector in search results: `id = results.id_array[i][j], distance = results.distance_array[i][j]`.
-  - Add a new option for looping over arrays, which takes much less time if `nq` and `topk` is large.
+  - Add a new option for looping over arrays, which takes much less time if `nq` and `top_k` is large.
 
     ```python
     >> for id_list, dis_list in zip(results.id_array, results.distance_array):

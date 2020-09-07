@@ -1,49 +1,43 @@
 ---
-id: monitoring_metrics.md
+id: milvus_metrics.md
 ---
 
-# Monitoring Metrics
 
-## Metrics Overview
+# Visualize Metrics in Grafana
 
-The Milvus dashboard provides details about your application and database configuration. It helps you optimize Milvus performance by monitoring the following areas: 
+Milvus outputs detailed time-series metrics during runtime. You can use [Prometheus](https://prometheus.io/), [Grafana](https://grafana.com/), or any visualization tool that you think appropriate to display and render the following metrics:
 
-| Area             | Description                                                |
-| ---------------- | ---------------------------------------------------------- |
-| Performance Metrics | Important metrics about Milvus performance.                |
-| Hardware Metrics | Metrics about CPU/GPU usage, network traffic.              |
-| Storage Metrics  | Metrics about data size, storage capacity and total files. |
+- Milvus Performance Metrics
+- System Performance Metrics: Metrics relating to CPU/GPU usage, network traffic, and disk read speed.
+- Hardware Storage Metrics: Metrics relating to data size, data files, and storage capacity.
 
-## Performance Metrics
+## Milvus performance metrics
 
 | Metric                    | Description                                                  |
 | ------------------------- | ------------------------------------------------------------ |
 | **Insert per Second**     | Number of vectors that are inserted in a second. (Real-time display) |
 | **Queries per Minute**    | Number of queries that are run in a minute. (Real-time display) |
 | **Query Time per Vector** | Average time to query one vector. Divide the query elapsed time by the number of queried vectors. |
-| **Query Service Level**   | A system wide metric. Query service level (%) = n_queries_completed_within_threshold1 / n_queries <br/>Generally, it is recommended to set 3 time periods - threshold1, threshold2 and threshold3, to track the query service level. |
+| **Query Service Level**   | Query service level = n_queries_completed_within_threshold1 / n_queries <br/>Generally, it is recommended to set 3 time periods - threshold1, threshold2, and threshold3, to track the query service level. |
 | **Uptime**                | How long Milvus has been running. (Minutes)                  |
 
-## Hardware Metrics
+## System performance metrics
 
 | Metric                | Description                                                  |
 | --------------------- | ------------------------------------------------------------ |
 | **GPU Utilization**   | GPU utilization ratio (%).                                   |
 | **GPU Memory Usage**  | GPU memory (GB) currently consumed by Milvus.                |
-| **CPU Utilization**   | Divide the time that the server is busy by the total elapsed time. |
+| **CPU Utilization**   | CPU utilization ratio (%). Divide the time that the server is busy by the total elapsed time. |
 | **Memory Usage**      | Memory (GB) currently consumed by Milvus.                    |
 | **Cache Utilization** | Cache utilization ratio (%).                                 |
-| **Network IO**        | Network IO read/write speed (per second).                    |
+| **Network IO**        | Network IO read/write speed (GB/s).                          |
 | **Disk Read Speed**   | Disk read speed (GB/s).                                      |
 | **Disk Write Speed**  | Disk write speed (GB/s).                                     |
 
-## Storage Metrics
+## Hardware storage metrics
 
 | Metric         | Description                                      |
 | -------------- | ------------------------------------------------ |
-| **Data Size**  | Total amount of data stored in Milvus.           |
+| **Data Size**  | Total amount (GB) of data stored in Milvus.      |
 | **Total File** | Number of data files currently stored in Milvus. |
-
-## Related links
-[Monitoring and Alerting](monitor.md)
 
