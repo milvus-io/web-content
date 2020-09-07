@@ -10,8 +10,8 @@ Milvus 基于不同的距离计算方式比较向量间的距离。选择合适�
 
 | 数据格式 | 距离计算方式                                                                                                       | 索引类型                                                       |
 | -------- | ------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------- |
-| 浮点型   | 欧氏距离（L2）、内积（IP）                                                                                         | FLAT, IVF\_FLAT, IVF\_SQ8, IVF\_SQ8H, IVF\_PQ, RNSG, HNSW |
-| 二值型   | 杰卡德距离（Jaccard）、谷本距离（Tanimoto）、汉明距离（Hamming）、超结构（superstructure）(仅 FLAT 支持)、子结构（substructure）(仅 FLAT 支持) | FLAT, IVF_FLAT                                               |
+| 浮点型   | <ul><li>欧氏距离（L2）</li><li>内积（IP）</li></ul>                                                                                         | <ul><li>FLAT</li><li>IVF\_FLAT</li><li>IVF\_SQ8</li><li>IVF\_SQ8H</li><li>IVF\_PQ</li><li>RNSG</li><li>HNSW</li></ul> |
+| 二值型   | <ul><li>杰卡德距离（Jaccard）</li><li>谷本距离（Tanimoto）</li><li>汉明距离（Hamming）</li><li>超结构（superstructure）(仅 FLAT 支持)</li><li>子结构（substructure）(仅 FLAT 支持)</li></ul> | <ul><li>FLAT</li><li>IVF_FLAT</li></ul>                                               |
 
 ### 欧氏距离（L2）
 
@@ -29,7 +29,7 @@ Milvus 基于不同的距离计算方式比较向量间的距离。选择合适�
 
 两条向量内积距离的计算公式为：
 
-![ip](../../../assets/IP.png)
+![ip](../../../assets/IP_formula.png)
 
 
 假设有 A 和 B 两条向量，则 `||A||` 与 `||B||` 分别代表 A 和 B 归一化后的值。
@@ -42,11 +42,11 @@ Milvus 基于不同的距离计算方式比较向量间的距离。选择合适�
 
 假设 X' 是向量 X 的归一化向量：
 
-![normalize](../../../assets/normalize.png)
+![normalize](../../../assets/normalize_formula.png)
 
 两者之间的关系为：
 
-![normalization](../../../assets/normalization.png)
+![normalization](../../../assets/normalization_formula.png)
 
 ### 杰卡德距离
 

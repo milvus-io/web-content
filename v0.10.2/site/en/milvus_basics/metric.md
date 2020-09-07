@@ -10,8 +10,8 @@ Below table shows how these widely used distance metrics fit with various input 
 
 | Input Data | Distance Metrics                                             | Index Types                                                    |
 | ---------- | ------------------------------------------------------------ | -------------------------------------------------------------- |
-| Float      | Euclidean distance (L2) and inner product (IP)              | FLAT, IVF\_FLAT, IVF\_SQ8, IVF\_SQ8H, IVF\_PQ, RNSG, HNSW |
-| Binary     | Jaccard, Tanimoto, Hamming, superstructure(FLAT only), and substructure(FLAT only) | FLAT, IVF_FLAT                                               |
+| Float      | <ul><li>Euclidean distance (L2)</li> <li>Inner product (IP)</li></ul>             | <ul><li>FLAT</li><li>IVF\_FLAT</li><li>IVF\_SQ8</li><li>IVF\_SQ8H</li><li>IVF\_PQ</li><li>RNSG</li><li>HNSW</li></ul> |
+| Binary     | <ul><li>Jaccard</li><li>Tanimoto</li><li>Hamming</li><li>Superstructure (FLAT only)</li><li>Substructure (FLAT only)</li></ul> | <ul><li>FLAT</li><li>IVF_FLAT</li></ul>                                              |
 
 ### Euclidean distance (L2)
 
@@ -29,7 +29,7 @@ It's the most commonly used distance metric, and is very useful when the data is
 
 The IP distance between two embeddings are defined as follows: 
 
-![ip](../../../assets/IP.png)
+![ip](../../../assets/IP_formula.png)
 
 where A and B are embeddings, `||A||` and `||B||` are the norms of A and B.
 
@@ -42,11 +42,11 @@ IP is more useful if you are more interested in measuring the orientation but no
 
 Suppose X' is normalized from embedding X: 
 
-![normalize](../../../assets/normalize.png)
+![normalize](../../../assets/normalize_formula.png)
 
 The correlation between the two embeddings is as follows: 
 
-![normalization](../../../assets/normalization.png)
+![normalization](../../../assets/normalization_formula.png)
 
 ### Jaccard distance
 
