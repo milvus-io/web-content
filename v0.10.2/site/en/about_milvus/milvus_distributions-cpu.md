@@ -27,6 +27,11 @@ If your GPU supports CUDA, then you can install GPU-enabled Milvus to achieve mu
 
 <div class="filter">
 <a href="#floating">Floating point embeddings</a> <a href="#binary">Binary embeddings</a>
+<div class="alert important">
+Milvus maps different embedding types with different index types. Click to view the index types supporting your embedding type. 
+</div>
+
+
 </div>
 
 <div class="filter-floating table-wrapper" markdown="block">
