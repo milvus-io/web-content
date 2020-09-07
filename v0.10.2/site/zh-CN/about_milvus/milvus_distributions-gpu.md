@@ -21,7 +21,7 @@ Milvus 提供两个发行版本：CPU 版本和 GPU 版本。
 <div class="tab-wrapper"><a href="milvus_distributions-cpu.md" >CPU 版 Milvus</a><a href="milvus_distributions-gpu.md" class='active'>GPU 版 Milvus</a></div> 
 
 
-## GPU 版本 Milvus 支持的索引类型
+## GPU 版 Milvus 支持的索引类型
 
 <div class="filter">
 <a href="#floating">浮点型向量</a> <a href="#binary">二值型向量</a>
