@@ -69,7 +69,7 @@
     {
       "id": "metric.md",
       "title": "Distance Metrics",
-      "label1": "reference",
+      "label1": "milvus_basics",
       "label2": "",
       "label3": "",
       "order": 4

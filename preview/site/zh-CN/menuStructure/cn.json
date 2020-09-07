@@ -69,7 +69,7 @@
     {
       "id": "metric.md",
       "title": "距离计算方式",
-      "label1": "reference",
+      "label1": "milvus_basics",
       "label2": "",
       "label3": "",
       "order": 4
