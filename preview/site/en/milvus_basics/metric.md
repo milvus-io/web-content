@@ -8,10 +8,58 @@ In Milvus, distance metrics are used to measure similarities among vectors. Choo
 
 Below table shows how these widely used distance metrics fit with various input data forms and Milvus indexes.
 
-| Input Data | Distance Metrics                                             | Index Types                                                    |
-| ---------- | ------------------------------------------------------------ | -------------------------------------------------------------- |
-| Float      | <ul><li>Euclidean distance (L2)</li> <li>Inner product (IP)</li></ul>             | <ul><li>FLAT</li><li>IVF\_FLAT</li><li>IVF\_SQ8</li><li>IVF\_SQ8H</li><li>IVF\_PQ</li><li>RNSG</li><li>HNSW</li></ul> |
-| Binary     | <ul><li>Jaccard</li><li>Tanimoto</li><li>Hamming</li><li>Superstructure (FLAT only)</li><li>Substructure (FLAT only)</li></ul> | <ul><li>FLAT</li><li>IVF_FLAT</li></ul>                                              |
+
+<div class="filter">
+<a href="#floating">Floating point embeddings</a> <a href="#binary">Binary embeddings</a>
+
+</div>
+
+<div class="filter-floating table-wrapper" markdown="block">
+
+<table class="tg">
+<thead>
+  <tr>
+    <th class="tg-0pky">Distance Metrics</th>
+    <th class="tg-0pky">Index Types</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="tg-0pky">Euclidean distance (L2)</td>
+    <td class="tg-0pky" rowspan="2"><ul><li>FLAT</li><li>IVF_FLAT</li><li>IVF_SQ8</li><li>IVF_SQ8H</li><li>IVF_PQ</li><li>RNSG</li><li>HNSW</li></ul></td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">Inner product (IP)</td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+
+<div class="filter-binary table-wrapper" markdown="block">
+
+<table class="tg">
+<thead>
+  <tr>
+    <th class="tg-0pky">Distance Metrics</th>
+    <th class="tg-0pky">Index Types</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="tg-0pky"><ul><li>Jaccard</li><li>Tanimoto</li><li>Hamming</li></ul></td>
+    <td class="tg-0pky"><ul><li>FLAT</li><li>IVF_FLAT</li></ul></td>
+  </tr>
+  <tr>
+    <td class="tg-0pky"><ul><li>Superstructure</li><li>Substructure</li></ul></td>
+    <td class="tg-0pky">FLAT</td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+
+
 
 ### Euclidean distance (L2)
 

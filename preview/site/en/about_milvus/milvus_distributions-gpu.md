@@ -22,8 +22,15 @@ If your GPU supports CUDA, then you can install GPU-enabled Milvus to achieve mu
 
 ## Indexes for GPU-enabled Milvus
 
+<div class="alert info">
+Milvus maps different embedding types with different index types. Click to view the index types supporting your embedding type. 
+</div>
+
+
+
 <div class="filter">
 <a href="#floating">Floating point embeddings</a> <a href="#binary">Binary embeddings</a>
+
 </div>
 
 <div class="filter-floating table-wrapper" markdown="block">
@@ -39,6 +46,11 @@ If your GPU supports CUDA, then you can install GPU-enabled Milvus to achieve mu
 | HNSW     | ✔️                | ❌                 | ✔️                  | ❌              |
 | ANNOY    | ✔️                | ❌                 | ✔️                  | ❌              |
 
+<div class="alert note">
+<ul>
+<li>For indexes supporting both CPU and GPU, you can create or search them using different devices. For example, you can create an index using CPU and conduct a vector search using GPU, and vice versa.</li>
+</ul>
+</div>
 </div>
 
 <div class="filter-binary table-wrapper" markdown="block">
@@ -51,8 +63,3 @@ If your GPU supports CUDA, then you can install GPU-enabled Milvus to achieve mu
 
 </div>
 
-<div class="alert note">
-<ul>
-<li>For indexes supporting both CPU search and GPU search, you can create or search them using different devices, either CPU or GPU. For example, you can create an index using CPU and conduct a vector search using GPU.</li>
-</ul>
-</div>
