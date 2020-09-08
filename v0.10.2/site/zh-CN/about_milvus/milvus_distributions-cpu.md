@@ -23,7 +23,7 @@ Milvus 提供两个发行版本：CPU 版本和 GPU 版本。
 
 ## CPU 版 Milvus 支持的索引类型
 
-<div class="alert info">
+<div class="alert info">
 Milvus 会根据不同的向量类型提供不同的索引支持。请根据你的向量类型查看适用于你的索引。
 </div>
 
