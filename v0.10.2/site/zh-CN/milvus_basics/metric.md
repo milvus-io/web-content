@@ -8,10 +8,59 @@ Milvus 基于不同的距离计算方式比较向量间的距离。选择合适�
 
 以下表格列出了 Milvus 目前支持的距离计算方式与数据格式、索引类型之间的兼容关系。
 
-| 数据格式 | 距离计算方式                                                                                                       | 索引类型                                                       |
-| -------- | ------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------- |
-| 浮点型   | <ul><li>欧氏距离（L2）</li><li>内积（IP）</li></ul>                                                                                         | <ul><li>FLAT</li><li>IVF\_FLAT</li><li>IVF\_SQ8</li><li>IVF\_SQ8H</li><li>IVF\_PQ</li><li>RNSG</li><li>HNSW</li></ul> |
-| 二值型   | <ul><li>杰卡德距离（Jaccard）</li><li>谷本距离（Tanimoto）</li><li>汉明距离（Hamming）</li><li>超结构（superstructure）(仅 FLAT 支持)</li><li>子结构（substructure）(仅 FLAT 支持)</li></ul> | <ul><li>FLAT</li><li>IVF_FLAT</li></ul>                                               |
+
+
+<div class="filter">
+<a href="#floating">浮点型向量</a> <a href="#binary">二值型向量</a>
+
+</div>
+
+<div class="filter-floating table-wrapper" markdown="block">
+
+<table class="tg">
+<thead>
+  <tr>
+    <th class="tg-0pky">距离计算方式</th>
+    <th class="tg-0pky">索引类型</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="tg-0pky">欧氏距离 (L2)</td>
+    <td class="tg-0pky" rowspan="2"><ul><li>FLAT</li><li>IVF_FLAT</li><li>IVF_SQ8</li><li>IVF_SQ8H</li><li>IVF_PQ</li><li>RNSG</li><li>HNSW</li></ul></td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">内积 (IP)</td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+
+<div class="filter-binary table-wrapper" markdown="block">
+
+<table class="tg">
+<thead>
+  <tr>
+    <th class="tg-0pky">距离计算方式</th>
+    <th class="tg-0pky">索引类型</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="tg-0pky">杰卡德距离 (Jaccard)<br>谷本距离 (Tanimoto)<br>汉明距离 (Hamming)</td>
+    <td class="tg-0pky"><ul><li>FLAT</li><li>IVF_FLAT</li></ul></td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">超结构 (superstructure)<br>子结构 (substructure)</td>
+    <td class="tg-0pky">FLAT</td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+
+
 
 ### 欧氏距离（L2）
 

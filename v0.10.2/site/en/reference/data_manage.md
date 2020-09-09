@@ -33,7 +33,7 @@ Follow the steps below to use MySQL as metadata management service in Linux:
 4. Enter MySQL client command line interface to create a database. Here we use `milvus` as the database name.
 
     ```sql
-    create database milvus
+    create database milvus;
     ```
 
 5. Quit MySQL client and update the `meta_uri` parameter in **server_config.yaml**. Use the IP of the host that runs MySQL service (`<MySQL_server_host IP>`). Note that the password, IP address, port, and database name must be consistent with your previous settings.
