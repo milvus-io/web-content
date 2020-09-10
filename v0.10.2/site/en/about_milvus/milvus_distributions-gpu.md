@@ -48,7 +48,7 @@ Milvus maps different embedding types with different index types. Click to view 
 
 <div class="alert note">
 <ul>
-<li>For indexes supporting both CPU and GPU, you can create or search them using different devices. For example, you can create an index using CPU and conduct a vector search using GPU, and vice versa.</li>
+<li>An index built with CPU is the same as built with GPU. The only difference is that the time to build the index using GPU, for most of the time, is shorter than using CPU.</li>
 </ul>
 </div>
 </div>

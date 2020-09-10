@@ -48,7 +48,7 @@ Milvus 会根据不同的向量类型提供不同的索引支持。请根据你�
 | ANNOY    | ✔️                | ❌            | ✔️                  | ❌              |
 
 <div class="alert note">
-对于那些 CPU 和 GPU 同时支持的索引，Milvus 支持在创建和搜索时使用不同的设备。比如，你可以在 GPU 上创建索引后再在 CPU 上查询，也可以在 CPU 上创建索引后再在 GPU 上查询。
+CPU 和 GPU 创建的索引完全一致，只是一般情况下 GPU 的创建索引速度快于 CPU 的创建速度。
 </div>
 </div>
 
