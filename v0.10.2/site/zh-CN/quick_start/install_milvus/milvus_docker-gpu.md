@@ -140,21 +140,21 @@ $ sudo docker logs milvus_gpu_0.10.2
 ## 常见问题
 
 <details>
-<summary><font color="#3f9cd1">可以在 Windows 上安装 Milvus 吗？</font></summary>
+<summary><font color="#4fc4f9">可以在 Windows 上安装 Milvus 吗？</font></summary>
 理论上只要能够支持 Docker 的操作系统都可以运行 Milvus。
 </details>
 <details>
-<summary><font color="#3f9cd1">为什么 Milvus 在启动时返回 <code>Illegal instruction</code>？</font></summary>
+<summary><font color="#4fc4f9">为什么 Milvus 在启动时返回 <code>Illegal instruction</code>？</font></summary>
 如果你的 CPU 不支持 SSE42、AVX、AVX2、AVX512 其中任何一个指令集，则 Milvus 无法正常启动。可以通过 <code>cat /proc/cpuinfo</code> 查看 CPU 支持的指令集。
 </details>
 <details>
-<summary><font color="#3f9cd1">Milvus 中如何实现数据迁移？</font></summary>
+<summary><font color="#4fc4f9">Milvus 中如何实现数据迁移？</font></summary>
 <p>把原有的 Milvus 服务的整个 <strong>db</strong> 目录拷贝到新的路径下，启动新的 Milvus 服务时，将该 Milvus 服务的 <strong>db</strong> 目录映射为刚拷贝过来的 <strong>db</strong> 目录。</p>
 <p>注意：不同版本之间，数据可能会不兼容。目前数据格式兼容到 0.7.0。</p>
 
 </details>
 <details>
-<summary><font color="#3f9cd1">Milvus 只能使用 Docker 部署吗？</font></summary>
+<summary><font color="#4fc4f9">Milvus 只能使用 Docker 部署吗？</font></summary>
 Milvus 还支持源码编译，该方法仅支持 Linux 系统。详见 <a href="https://github.com/milvus-io/milvus/blob/master/INSTALL.md">从源代码编译 Milvus</a>。
 
 </details>

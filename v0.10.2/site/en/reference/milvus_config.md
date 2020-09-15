@@ -191,7 +191,7 @@ In the Milvus configuration file, space size should be written in the format of 
 ## FAQ
 
 <details>
-<summary><font color="#3f9cd1">Besides the configuration file, how can I tell Milvus is using GPU for search?</font></summary>
+<summary><font color="#4fc4f9">Besides the configuration file, how can I tell Milvus is using GPU for search?</font></summary>
 <p>Use any of the following methods:
 <ul>
 <li>Use <code>nvidia-smi</code> to monitor your GPU usage.</li>
@@ -203,11 +203,11 @@ Use Prometheus to monitor performance metrics. See <a href="setup_grafana.md#Sys
 </p>
 </details>
 <details>
-<summary><font color="#3f9cd1">If I have set <code>preload_collection</code>, does Milvus service start only after all collections are loaded to the memory?</font></summary>
+<summary><font color="#4fc4f9">If I have set <code>preload_collection</code>, does Milvus service start only after all collections are loaded to the memory?</font></summary>
 Yes. If you have set <code>preload_collection</code> in <strong>server_config.yaml</strong>, Milvus' service is not available until it loads all specified collections.
 </details>
 <details>
-<summary><font color="#3f9cd1">Why is my GPU always idle?</font></summary>
+<summary><font color="#4fc4f9">Why is my GPU always idle?</font></summary>
 <p>It is very likely that Milvus is using CPU for query. If you want to use GPU for query, you need to set the value of <code>gpu_search_threshold</code> in <strong>server_config.yaml</strong> to be greater than <code>nq</code> (number of vectors per query).
 </p>
 <p>
@@ -218,6 +218,6 @@ We do not recommend enabling GPU when the query number is small.
 </p>
 </details>
 <details>
-<summary><font color="#3f9cd1">Why is the time in the log files different from the system time?</font></summary>
+<summary><font color="#4fc4f9">Why is the time in the log files different from the system time?</font></summary>
 The log files in the Docker container use UTC time by default. If your host machine does not use UTC time, then the time in the log files is different. We recommend that you mount the log files onto your host machine to keep the time consistent between the log and the host.
 </details>

@@ -156,7 +156,7 @@ Deleted entities do not participate in the calculation and takes up disk space. 
 ## FAQ
 
 <details>
-<summary><font color="#3f9cd1">Why is my GPU always idle?</font></summary>
+<summary><font color="#4fc4f9">Why is my GPU always idle?</font></summary>
 <p>It is very likely that Milvus is using CPU for query. If you want to use GPU for query, you need to set the value of <code>gpu_search_threshold</code> in <strong>server_config.yaml</strong> to be greater than <code>nq</code> (number of vectors per query).
 </p>
 <p>
@@ -167,11 +167,11 @@ We do not recommend enabling GPU when the query number is small.
 </p>
 </details>
 <details>
-<summary><font color="#3f9cd1">Why the search is very slow?</font></summary>
+<summary><font color="#4fc4f9">Why the search is very slow?</font></summary>
 Check if the value of <code>cache.cache_size</code> in <strong>server_config.yaml</strong> is greater than the size of the collection.
 </details>
 <details>
-<summary><font color="#3f9cd1">How can I get the best performance from Milvus through setting <code>index_file_size</code>?</font></summary>
+<summary><font color="#4fc4f9">How can I get the best performance from Milvus through setting <code>index_file_size</code>?</font></summary>
 <p>You need to set <code>index_file_size</code> when creating a collection from a client. This parameter specifies the size of each segment, and its default value is 1024 in MB. When the size of newly inserted vectors reaches the specified volume, Milvus packs these vectors into a new segment. In other words, newly inserted vectors do not go into a segment until they grow to the specified volume. When it comes to creating indexes, Milvus creates one index file for each segment. When conducting a vector search, Milvus searches all index files one by one.
 </p>
 <p>
@@ -184,7 +184,7 @@ See <a href="tuning.md#Index">Performance Tuning > Index</a> for more informatio
 
 </details>
 <details>
-<summary><font color="#3f9cd1">Why GPU-enabled query is sometimes slower than CPU-only query?</font></summary>
+<summary><font color="#4fc4f9">Why GPU-enabled query is sometimes slower than CPU-only query?</font></summary>
 <p>Generally speaking, CPU-only query works for situations where <code>nq</code> (number of vectors per query) is small, whilst GPU-enabled query works best with a large <code>nq</code>, say 500.
 </p>
 <p>
@@ -192,6 +192,6 @@ Milvus needs to load data from the memory to the graphics memory for a GPU-enabl
 </p>
 </details>
 <details>
-<summary><font color="#3f9cd1">Why sometimes the query time for a small dataset is longer?</font></summary>
+<summary><font color="#4fc4f9">Why sometimes the query time for a small dataset is longer?</font></summary>
 If the size of the dataset is smaller than the value of <code>index_file_size</code> that you set when creating a collection, Milvus does not create an index for this dataset. Therefore, the time to query in a small dataset may be longer. You may as well call <code>create_index</code> to build the index.
 </details>

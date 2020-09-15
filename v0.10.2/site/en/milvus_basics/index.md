@@ -202,12 +202,12 @@ To learn how to choose an appropriate index for a metric, see [Distance Metrics]
 ## FAQ
 
 <details>
-<summary><font color="#3f9cd1">Does IVF_SQ8 differ from IVF_SQ8H in terms of recall rate?
+<summary><font color="#4fc4f9">Does IVF_SQ8 differ from IVF_SQ8H in terms of recall rate?
 </font></summary>
 No, they have the same recall rate for the same dataset.
 </details>
 <details>
-<summary><font color="#3f9cd1">What is the difference between FLAT index and IVF_FLAT index?</font></summary>
+<summary><font color="#4fc4f9">What is the difference between FLAT index and IVF_FLAT index?</font></summary>
 <p>IVF_FLAT index divides a vector space into <code>nlist</code> clusters. If you keep the default value of <code>nlist</code> as 16384, Milvus compares the distances between the target vector and the centers of all 16384 clusters to get <code>nprobe</code> nearest clusters. Then Milvus compares the distances between the target vector and the vectors in the selected clusters to get the nearest vectors. Unlike IVF_FLAT, FLAT directly compares the distances between the target vector and each and every vector.
 </p>
 <p>

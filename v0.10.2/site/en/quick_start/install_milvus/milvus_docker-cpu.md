@@ -133,22 +133,22 @@ $ sudo docker logs milvus_cpu_0.10.2
 ## FAQ
 
 <details>
-<summary><font color="#3f9cd1">Can I install Milvus on Windows?</font></summary>
+<summary><font color="#4fc4f9">Can I install Milvus on Windows?</font></summary>
 Yes, so long as you have set up a Docker environment on your operating system.
 </details>
 <details>
-<summary><font color="#3f9cd1">Why does Milvus return <code>Illegal instruction</code> during startup?</font></summary>
+<summary><font color="#4fc4f9">Why does Milvus return <code>Illegal instruction</code> during startup?</font></summary>
 If your CPU does not support SSE42, AVX, AVX2, or AVX512, Milvus cannot start properly. You can use <code>cat /proc/cpuinfo</code> to check the supported instruction sets.
 
 </details>
 <details>
-<summary><font color="#3f9cd1">How to migrate data in Milvus?</font></summary>
+<summary><font color="#4fc4f9">How to migrate data in Milvus?</font></summary>
 <p>Copy the entire <strong>db</strong> directory of the original Milvus service to the new directory. When restarting the Milvus service, map the copied <strong>db</strong> directory to the <strong>db</strong> directory of the Milvus service.</p>
 <p> Note: Data formats of different versions may not be compatible with each other. The current data format is backward compatible with Milvus v0.7.0.
 </p>
 </details>
 <details>
-<summary><font color="#3f9cd1">Is Docker the only way to install and run Milvus?</font></summary>
+<summary><font color="#4fc4f9">Is Docker the only way to install and run Milvus?</font></summary>
 No. You can also build Milvus from source code in Linux. See <a href="https://github.com/milvus-io/milvus/blob/master/INSTALL.md">Build Milvus from source code</a> for more information.
 </details>
 

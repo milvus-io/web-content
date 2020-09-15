@@ -53,15 +53,15 @@ id: create_drop_index_python.md
 ## 常见问题
 
 <details>
-<summary><font color="#3f9cd1">建索引参数 <code>nlist</code> 的大小该如何选择？</font></summary>
+<summary><font color="#4fc4f9">建索引参数 <code>nlist</code> 的大小该如何选择？</font></summary>
 该值需要根据具体的使用情况去设置。详见 <a href="tuning.md#索引">性能调优 > 索引</a> 和 <a href="https://www.milvus.io/cn/blogs/2020-2-16-api-setting.md">如何设置 Milvus 参数</a>。
 </details>
 <details>
-<summary><font color="#3f9cd1">Milvus 可以在同一个集合中的不同分区上建立不同索引吗？</font></summary>
+<summary><font color="#4fc4f9">Milvus 可以在同一个集合中的不同分区上建立不同索引吗？</font></summary>
 不可以。同一个集合在某一刻只能有一种索引。
 </details>
 <details>
-<summary><font color="#3f9cd1">Milvus 中支持新增向量后再建索引吗？</font></summary>
+<summary><font color="#4fc4f9">Milvus 中支持新增向量后再建索引吗？</font></summary>
 支持。Milvus 中数据是分文件存储的，后续新增向量会存在新的数据文件中。该文件达到一定量后会自动触发建立索引，生成一个新的索引文件，不会影响之前已经建立过的索引。
 </details>
 

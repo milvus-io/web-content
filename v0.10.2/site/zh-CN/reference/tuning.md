@@ -153,15 +153,15 @@ Milvus 使用 MySQL 作为元数据后端服务。Milvus 在查询数据时会�
 ## 常见问题
 
 <details>
-<summary><font color="#3f9cd1">为什么查询时 GPU 一直空闲？</font></summary>
+<summary><font color="#4fc4f9">为什么查询时 GPU 一直空闲？</font></summary>
 此时应该是在用 CPU 进行查询。如果要用 GPU 进行查询，需要在配置文件中将 <code>gpu_search_threshold</code> 的值设置为大于 <code>nq</code> (每次查询的向量条数) 。可以将 <code>gpu_search_threshold</code> 的值调整为期望开启 GPU 搜索的 <code>nq</code> 数。若 <code>nq</code> 小于该值，则用 CPU 查询，否则使用 GPU 查询。不建议在查询批量较小时使用 GPU 搜索。
 </details>
 <details>
-<summary><font color="#3f9cd1">为什么搜索的速度非常慢？</font></summary>
+<summary><font color="#4fc4f9">为什么搜索的速度非常慢？</font></summary>
 请首先检查 <strong>server_config.yaml</strong> 的 <code>cache.cache_size</code> 参数是否大于集合中的数据量。
 </details>
 <details>
-<summary><font color="#3f9cd1">创建集合时 <code>index_file_size</code> 如何设置能达到性能最优？</font></summary>
+<summary><font color="#4fc4f9">创建集合时 <code>index_file_size</code> 如何设置能达到性能最优？</font></summary>
 <p>使用客户端创建集合时有一个 <code>index_file_size</code> 参数，用来指定数据存储时单个文件的大小，其单位为 MB，默认值为 1024。当向量数据不断导入时，Milvus 会把数据增量式地合并成文件。当某个文件达到 <code>index_file_size</code> 所设置的值之后，这个文件就不再接受新的数据，Milvus 会把新的数据存成另外一个文件。这些都是原始向量数据文件，如果建立了索引，则每个原始文件会对应生成一个索引文件。Milvus 在进行搜索时，是依次对每个索引文件进行搜索。
 </p>
 <p>
@@ -173,7 +173,7 @@ Milvus 使用 MySQL 作为元数据后端服务。Milvus 在查询数据时会�
 可参阅 <a href="https://www.milvus.io/cn/blogs/2020-2-16-api-setting.md">如何设置 Milvus 客户端参数</a>。
 </details>
 <details>
-<summary><font color="#3f9cd1">为什么同样的数据量，用 GPU 查询比 CPU 查询慢？</font></summary>
+<summary><font color="#4fc4f9">为什么同样的数据量，用 GPU 查询比 CPU 查询慢？</font></summary>
 <p>一般来说，当 <code>nq</code>（每次查询的向量条数）较小时，用 CPU 查询比较快。只有当 <code>nq</code> 较大（约大于 500）时，用 GPU 查询才会更有优势。
 </p>
 <p>
@@ -181,6 +181,6 @@ Milvus 使用 MySQL 作为元数据后端服务。Milvus 在查询数据时会�
 </p>
 </details>
 <details>
-<summary><font color="#3f9cd1">为什么有时候小的数据集查询时间反而更长？</font></summary>
+<summary><font color="#4fc4f9">为什么有时候小的数据集查询时间反而更长？</font></summary>
 如果数据文件的大小小于创建集合时 <code>index_file_size</code> 参数的值，Milvus 则不会为此数据文件构建索引。因此，小的数据集有可能查询时间会更长。你还可以调用 <code>create_index</code> 建立索引。
 </details>

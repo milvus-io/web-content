@@ -157,6 +157,6 @@ id: setup_prometheus.md
 ## 常见问题
 
 <details>
-<summary><font color="#3f9cd1">在多个 Milvus 节点接入 Pushgateway 的情况下如何进行区分数据来源？</font></summary>
+<summary><font color="#4fc4f9">在多个 Milvus 节点接入 Pushgateway 的情况下如何进行区分数据来源？</font></summary>
 在 <strong>prometheus.yaml</strong> 里面加一个 Prometheus 的实例就可以。最后在 Prometheus 或者 Grafana 里面显示监控的时候，会指明数据是来自哪个 Milvus 实例。
 </details>

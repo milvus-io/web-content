@@ -54,24 +54,24 @@ If you do not specify <code>partition_tags</code>, Milvus searches similar vecto
 ## FAQ
 
 <details>
-<summary><font color="#3f9cd1">Why is my recall rate unsatisfying?</font></summary>
+<summary><font color="#4fc4f9">Why is my recall rate unsatisfying?</font></summary>
 You can increase the value of <code>nprobe</code> when searching from a client. The greater the value, the more accurate the result, and the more time it takes. See <a href="tuning.md#Index">Performance Tuning > Index</a> for more information.
 
 </details>
 <details>
-<summary><font color="#3f9cd1">Does Milvus support inserting while searching?</font></summary>
+<summary><font color="#4fc4f9">Does Milvus support inserting while searching?</font></summary>
 Yes.
 </details>
 <details>
-<summary><font color="#3f9cd1">Does the size of a collection affect vector searches in one of its partitions, especially when it holds up to 100 million vectors?</font></summary>
+<summary><font color="#4fc4f9">Does the size of a collection affect vector searches in one of its partitions, especially when it holds up to 100 million vectors?</font></summary>
 No. If you have specified partitions when conducting a vector search, Milvus searches the specified partitions only.
 </details>
 <details>
-<summary><font color="#3f9cd1">Does Milvus load the whole collection to the memory if I search only certain partitions in that collection?</font></summary>
+<summary><font color="#4fc4f9">Does Milvus load the whole collection to the memory if I search only certain partitions in that collection?</font></summary>
 No, Milvus only loads the partitions to search.
 </details>
 <details>
-<summary><font color="#3f9cd1">Are queries in segments processed in parallel?</font></summary>
+<summary><font color="#4fc4f9">Are queries in segments processed in parallel?</font></summary>
 <p>Yes. But the parallelism processing mechanism varies with Milvus versions.
 </p>
 <p>
@@ -87,17 +87,17 @@ See <a href="https://medium.com/unstructured-data-service/how-does-milvus-schedu
 
 </details>
 <details>
-<summary><font color="#3f9cd1">Will a batch query benefit from multi-threading?</font></summary>
+<summary><font color="#4fc4f9">Will a batch query benefit from multi-threading?</font></summary>
 If your batch query is on a small scale (<code>nq</code> < 64), Milvus combines the query requests, in which case multi-threading helps.
 
 Otherwise, the resources are already exhausted, hence multi-threading does not help much.
 </details>
 <details>
-<summary><font color="#3f9cd1">Why the search is very slow?</font></summary>
+<summary><font color="#4fc4f9">Why the search is very slow?</font></summary>
 Check if the value of <code>cache.cache_size</code> in <strong>server_config.yaml</strong> is greater than the size of the collection.
 </details>
 <details>
-<summary><font color="#3f9cd1">Why do I see a surge in memory usage when conducting a vector search immediately after an index is created?</font></summary>
+<summary><font color="#4fc4f9">Why do I see a surge in memory usage when conducting a vector search immediately after an index is created?</font></summary>
 This is because:
 
 - Milvus loads the newly created index file to the memory for the vector search.
@@ -105,7 +105,7 @@ This is because:
 - The original vector files used to create the index are not yet released from the memory, because the size of original vector files and the index file has not exceeded the upper limit specified by <code>cache.cache_size</code>.
 </details>
 <details>
-<summary><font color="#3f9cd1">Why does the first search take a long time after Milvus restarts?</font></summary>
+<summary><font color="#4fc4f9">Why does the first search take a long time after Milvus restarts?</font></summary>
 <p>
 This is because, after restarting, Milvus needs to load data from the disk to the memory for the first vector search. You can set <code>preload_collection</code> in <strong>server_config.yaml</strong> and load as many collections as the memory permits. Milvus loads collections to the memory each time it restarts. 
 </p>

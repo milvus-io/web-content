@@ -53,15 +53,15 @@ After deleting the index, the collection uses the default index type FLAT again.
 ## FAQ
 
 <details>
-<summary><font color="#3f9cd1">How to set the value of <code>nlist</code> when I build indexes?</font></summary>
+<summary><font color="#4fc4f9">How to set the value of <code>nlist</code> when I build indexes?</font></summary>
 It depends on your scenario. See <a href="tuning.md#Index">Performance tuning > Index</a> for more information.
 </details>
 <details>
-<summary><font color="#3f9cd1">Can Milvus create different types of index for different partitions in the same collection?</font></summary>
+<summary><font color="#4fc4f9">Can Milvus create different types of index for different partitions in the same collection?</font></summary>
 No. A collection can have only one index type at a time.
 </details>
 <details>
-<summary><font color="#3f9cd1">Does Milvus create new indexes after vectors are inserted?</font></summary>
+<summary><font color="#4fc4f9">Does Milvus create new indexes after vectors are inserted?</font></summary>
 Yes. When the inserted vectors grow to a specified volume, Milvus creates a new segment and starts to create an index file for it at the same time. The building of the new index file does not affect the existing index files.
 </details>
 

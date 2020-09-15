@@ -37,10 +37,10 @@ id: connect_milvus_python.md
 ## 常见问题
 
 <details>
-<summary><font color="#3f9cd1">Milvus 的 Python SDK 有连接池吗？</font></summary>
+<summary><font color="#4fc4f9">Milvus 的 Python SDK 有连接池吗？</font></summary>
 Milvus v0.9.0 及更高版本对应的 Python SDK 有连接池。连接池的默认连接数量没有上限。
 </details>
 <details>
-<summary><font color="#3f9cd1">在 Windows 安装 pymilvus 报错，如何解决？</font></summary>
+<summary><font color="#4fc4f9">在 Windows 安装 pymilvus 报错，如何解决？</font></summary>
 可以尝试在 Conda 环境下安装。
 </details>
