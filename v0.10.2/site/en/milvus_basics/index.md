@@ -27,7 +27,7 @@ The following table classifies the indexes that Milvus supports:
 </thead>
 <tbody>
   <tr>
-    <td><a href="FLAT">FLAT</a></td>
+    <td><a href="#FLAT">FLAT</a></td>
     <td>N/A</td>
     <td><ul>
         <li>Small dataset.</li>
@@ -35,7 +35,7 @@ The following table classifies the indexes that Milvus supports:
         </ul></td>
   </tr>
   <tr>
-    <td><a href="IVF_FLAT">IVF_FLAT</a></td>
+    <td><a href="#IVF_FLAT">IVF_FLAT</a></td>
     <td rowspan="4">Quantization-based index</td>
     <td><ul>
         <li>High-performance query.</li>
@@ -43,7 +43,7 @@ The following table classifies the indexes that Milvus supports:
         </ul></td>
   </tr>
   <tr>
-    <td><a href="IVF_SQ8">IVF_SQ8</a></td>
+    <td><a href="#IVF_SQ8">IVF_SQ8</a></td>
     <td><ul>
         <li>High-performance query.</li>
         <li>Limited disk and memory capacity. </li>
@@ -51,27 +51,27 @@ The following table classifies the indexes that Milvus supports:
         </ul></td>
   </tr>
   <tr>
-    <td><a href="IVF_SQ8H">IVF_SQ8H</a></td>
+    <td><a href="#IVF_SQ8H">IVF_SQ8H</a></td>
     <td><ul>
         <li>High-performance query. </li>
         <li>Limited disk, memory, and graphics memory capacities. </li>
         </ul></td>
   </tr>
   <tr>
-    <td><a href="IVF_PQ">IVF_PQ</a></td>
+    <td><a href="#IVF_PQ">IVF_PQ</a></td>
     <td></td>
   </tr>
   <tr>
-    <td><a href="RNSG">RNSG</a></td>
+    <td><a href="#RNSG">RNSG</a></td>
     <td rowspan="2">Graph-based index</td>
     <td></td>
   </tr>
   <tr>
-    <td><a href="HNSW">HNSW</a></td>
+    <td><a href="#HNSW">HNSW</a></td>
     <td></td>
   </tr>
   <tr>
-    <td><a href="ANNOY">ANNOY</a></td>
+    <td><a href="#ANNOY">ANNOY</a></td>
     <td>Tree-based index</td>
     <td></td>
   </tr>
