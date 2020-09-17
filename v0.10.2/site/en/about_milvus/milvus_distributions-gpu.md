@@ -47,9 +47,7 @@ Milvus maps different embedding types with different index types. Click to view 
 | ANNOY    | ✔️                | ❌                 | ✔️                  | ❌              |
 
 <div class="alert note">
-<ul>
-<li>An index built with CPU is the same as built with GPU. The only difference is that the time to build the index using GPU, for most of the time, is shorter than using CPU.</li>
-</ul>
+An index built with CPU is the same as built with GPU. The only difference is that, for most of the time, the time to build the index using GPU is shorter than using CPU.
 </div>
 </div>
 

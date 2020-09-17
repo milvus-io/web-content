@@ -17,12 +17,67 @@ id: index.md
 
 下表将目前 Milvus 支持的索引进行了归类：
 
-| Milvus 支持的索引                                            | 索引分类       |
-| ------------------------------------------------------------ | -------------- |
-| FLAT                                                         | N/A            |
-| <ul><li>IVF_FLAT</li><li>IVF_SQ8</li><li>IVF_SQ8H</li><li>IVF_PQ</li></ul> | 基于量化的索引 |
-| <ul><li>RNSG</li><li>HNSW</li></ul>                          | 基于图的索引   |
-| ANNOY                                                        | 基于树的索引   |
+
+<table>
+<thead>
+  <tr>
+    <th>Milvus 支持的索引</th>
+    <th>索引分类</th>
+    <th>适用场景</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td><a href="FLAT">FLAT</a></td>
+    <td>N/A</td>
+    <td><ul>
+        <li>查询数据规模小，</li>
+        <li>需要 100% 的召回率。</li>
+        </ul></td>
+  </tr>
+  <tr>
+    <td><a href="IVF_FLAT">IVF_FLAT</a></td>
+    <td rowspan="4">基于量化的索引</td>
+    <td><ul>
+        <li>高性能查询，</li>
+        <li>要求尽可能高的召回率。</li>
+        </ul></td>
+  </tr>
+  <tr>
+    <td><a href="IVF_SQ8">IVF_SQ8</a></td>
+    <td><ul>
+        <li>高性能查询，</li>
+        <li>磁盘和内存资源有限，</li>
+        <li>仅有 CPU 资源。</li>
+        </ul></td>
+  </tr>
+  <tr>
+    <td><a href="IVF_SQ8H">IVF_SQ8H</a></td>
+    <td><ul>
+        <li>高性能查询，</li>
+        <li>磁盘、内存、显存有限。</li>
+        </ul></td>
+  </tr>
+  <tr>
+    <td><a href="IVF_PQ">IVF_PQ</a></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><a href="RNSG">RNSG</a></td>
+    <td rowspan="2">基于图的索引</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><a href="HNSW">HNSW</a></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><a href="ANNOY">ANNOY</a></td>
+    <td>基于树的索引</td>
+    <td></td>
+  </tr>
+</tbody>
+</table>
 
 ## 向量字段与索引
 

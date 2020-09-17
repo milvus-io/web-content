@@ -33,7 +33,7 @@ Milvus 在 CentOS 系统中不支持 MySQL 8.0 或更高版本。
 4. 进入 MySQL 客户端命令行，创建一个 database，名称可自行设定，这里使用 `milvus`。
 
     ```sql
-    create database milvus;
+    mysql> create database milvus;
     ```
 
 5. 退出 MySQL 客户端, 修改 **server_config.yaml** 文件的 `meta_uri` 参数。使用 MySQL 服务所在的主机 IP 作为 IP 地址（`<MySQL_server_host IP>`）。注意密码、IP 地址、端口以及 database 名称要和以上几步的设置一致。

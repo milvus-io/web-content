@@ -21,9 +21,9 @@ Milvus supports searching vectors in a collection or partition.
    | Index Type | Search Parameter | Example Parameter | Range |
    | ---------- | --------------- | ----------------- | ----- |
    | FLAT | - | | - |
-   | IVF\_FLAT / IVF\_SQ8/ IVF\_SQ8H / IVF\_PQ | `nprobe`: The number of vector classes involved in the query. `nprobe` affects query accuracy. The larger the value, the higher the accuracy and the slower the speed.         | `{nprobe: 32}`         | CPU: [1, nlist] </br> GPU: [1, min(2048, nlist)]   |
-   | RNSG                                | `search_length`: The larger the value, the more nodes to search in the graph, the higher the recall rate, and the slower the speed.                         | `{search_length: 100}` | [10, 300]      |
-   | HNSW                               | `ef`: The larger the value, the more data to search in the index, the higher the recall rate, and the slower the speed.                                    | `{ef: 64}`            | [`top_k`, 4096] |
+   | IVF\_FLAT / IVF\_SQ8/ IVF\_SQ8H / IVF\_PQ | `nprobe`: The number of vector classes involved in the query. `nprobe` affects query accuracy. The larger the value, the higher the accuracy and the lower the speed.         | `{nprobe: 32}`         | CPU: [1, nlist] </br> GPU: [1, min(2048, nlist)]   |
+   | RNSG                                | `search_length`: The larger the value, the more nodes to search in the graph, the higher the recall rate, and the lower the speed.                         | `{search_length: 100}` | [10, 300]      |
+   | HNSW                               | `ef`: The larger the value, the more data to search in the index, the higher the recall rate, and the lower the speed.                                    | `{ef: 64}`            | [`top_k`, 4096] |
    | ANNOY                              | `search_k`: The value affects search performance. The larger the value, the more accurate the search results, but the longer the search time.</br>-1 represents the default value, taking 5% of the total data. | `{search_k: -1}`    | {-1} ∪ [`top_k`, n × n_trees] |
 
    <div class="alert note">

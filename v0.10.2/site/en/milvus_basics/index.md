@@ -15,6 +15,68 @@ According to the implementation methods, the ANNS vector index can be divided in
 - Hash-based index
 - Quantization-based index
 
+The following table classifies the indexes that Milvus supports:
+
+<table>
+<thead>
+  <tr>
+    <th>Supported index</th>
+    <th>Classification</th>
+    <th>Scenario</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td><a href="FLAT">FLAT</a></td>
+    <td>N/A</td>
+    <td><ul>
+        <li>Small dataset.</li>
+        <li>Requires a 100% recall rate. </li>
+        </ul></td>
+  </tr>
+  <tr>
+    <td><a href="IVF_FLAT">IVF_FLAT</a></td>
+    <td rowspan="4">Quantization-based index</td>
+    <td><ul>
+        <li>High-performance query.</li>
+        <li>Requires a recall rate as high as possible.</li>
+        </ul></td>
+  </tr>
+  <tr>
+    <td><a href="IVF_SQ8">IVF_SQ8</a></td>
+    <td><ul>
+        <li>High-performance query.</li>
+        <li>Limited disk and memory capacity. </li>
+        <li>Has CPU resources only.</li>
+        </ul></td>
+  </tr>
+  <tr>
+    <td><a href="IVF_SQ8H">IVF_SQ8H</a></td>
+    <td><ul>
+        <li>High-performance query. </li>
+        <li>Limited disk, memory, and graphics memory capacities. </li>
+        </ul></td>
+  </tr>
+  <tr>
+    <td><a href="IVF_PQ">IVF_PQ</a></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><a href="RNSG">RNSG</a></td>
+    <td rowspan="2">Graph-based index</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><a href="HNSW">HNSW</a></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><a href="ANNOY">ANNOY</a></td>
+    <td>Tree-based index</td>
+    <td></td>
+  </tr>
+</tbody>
+</table>
 
 ## Vector field and index
 
@@ -41,12 +103,14 @@ It is known that indexing is a resource-consuming and time-consuming task. When 
 ## Indexes that Milvus supports
 
 ### FLAT
+<a name="FLAT"></a>
 
 If FLAT index is used, the vectors are stored in an array of float/binary data without any compression. during searching vectors, all indexed vectors are decoded sequentially and compared to the query vectors.
 
 FLAT index provides 100% query recall rate. Compared to other indexes, it is the most efficient indexing method when the number of queries is small.
 
 ### IVF_FLAT
+<a name="IVF_FLAT"></a>
 
 IVF (Inverted File) is an index type based on quantization. It divides the points in space into `nlist` units by clustering method. during searching vectors, it compares the distances between the target vector and the center of all the units, and then select the `nprobe` nearest unit. Then, it compares all the vectors in these selected cells to get the final result. 
 
@@ -69,6 +133,7 @@ IVF_FLAT is the most basic IVF index, and the encoded data stored in each unit i
    **Example:** `{"nprobe": 8}`
 
 ### IVF_SQ8
+<a name="IVF_SQ8"></a>
 
 IVF\_SQ8 does scalar quantization for each vector placed in the unit based on IVF. Scalar quantization converts each dimension of the original vector from a 4-byte floating-point number to a 1-byte unsigned integer, so the IVF\_SQ8 index file occupies much less space than the IVF\_FLAT index file. However, scalar quantization results in a loss of accuracy during searching vectors.
 
@@ -76,6 +141,7 @@ IVF\_SQ8 does scalar quantization for each vector placed in the unit based on IV
 - IVF\_SQ8 has the same search parameters as IVF\_FLAT.
 
 ### IVF_SQ8H
+<a name="IVF_SQ8H"></a>
 
 Optimized version of IVF\_SQ8 that requires both CPU and GPU to work. Unlike IVF\_SQ8, IVF\_SQ8H uses a GPU-based coarse quantizer, which greatly reduces time to quantize.
 
@@ -90,6 +156,7 @@ The query method is as follows:
 - IVF\_SQ8H has the same search parameters as IVF\_FLAT.
 
 ### IVF_PQ
+<a name="IVF_PQ"></a>
 
 `PQ` (Product Quantization) uniformly decomposes the original high-dimensional vector space into Cartesian products of `m` low-dimensional vector spaces, and then quantizes the decomposed low-dimensional vector spaces. Instead of calculating the distances between the target vector and the center of all the units, product quantization enables the calculation of distances between the target vector and the clustering center of each low-dimensional space and greatly reduces the time complexity and space complexity of the algorithm.
 
@@ -107,6 +174,7 @@ IVF\_PQ quantizes the product of vectors, and then performs IVF index clustering
 - IVF\_PQ has the same search parameters as IVF\_FLAT.
 
 ### RNSG
+<a name="RNSG"></a>
 
 RNSG (Refined Navigating Spreading-out Graph) is a graph-based indexing algorithm. It sets the center position of the whole image as a navigation point, and then uses a specific edge selection strategy to control the out-degree of each point (less than or equal to `out_degree`). Therefore, it can reduce memory usage and quickly locate the target position nearby during searching vectors.
 
@@ -140,6 +208,7 @@ Reference: <a href="http://www.vldb.org/pvldb/vol12/p461-fu.pdf"> Fast Approxima
    **Example:** `{search_length: 100}`
 
 ### HNSW
+<a name="HNSW"></a>
 
 HNSW (Hierarchical Small World Graph) is a graph-based indexing algorithm. It builds a multi-layer navigation structure for an image according to certain rules. In this structure, the upper layers are more sparse and the distances between nodes are farther; the lower layers are denser and the distances between nodes are closer. The search starts from the uppermost layer, finds the node closest to the target in this layer, and then enters the next layer to begin another search. After multiple iterations, it can quickly approach the target position.
 
@@ -167,6 +236,7 @@ Reference: <a href="https://arxiv.org/abs/1603.09320">Efficient and robust appro
    **Example:** `{ef: 64}`
 
 ### ANNOY
+<a name="ANNOY"></a>
 
 ANNOY (Approximate Nearest Neighbors Oh Yeah) is an index that uses a hyperplane to divide a high-dimensional space into multiple subspaces, and then stores them in a tree structure.
 
