@@ -20,7 +20,7 @@ sidebar_label: Release Notes
 
 
 - Allows the user to specify `metric_type` when searching in a collection with FLAT index. [#3213](https://github.com/milvus-io/milvus/issues/3213)
-- Adds more valid values to the indexing parameter `m` of IVF_PQ: An `m` is valid so long as it can be divided by `dim`, the number of vector dimensions. [#3254](https://github.com/milvus-io/milvus/issues/3254)
+- Adds more valid values to the indexing parameter `m` of IVF_PQ: An `m` is valid so long as it can be divided by `dim`, which represents the number of vector dimensions. [#3254](https://github.com/milvus-io/milvus/issues/3254)
 - Expands the range of `nprobe` to [1, 16384] for all IVF indexes. [#3606](https://github.com/milvus-io/milvus/issues/3606)
 - Expands the range of `top_k` in an embeddings search to [1, 16384]. [#3639](https://github.com/milvus-io/milvus/issues/3639)
 - Optimizes the memory release strategy to avoid memory overuse. [#3536](https://github.com/milvus-io/milvus/issues/3536)
