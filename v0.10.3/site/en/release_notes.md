@@ -20,7 +20,7 @@ sidebar_label: Release Notes
 
 
 - Allows the user to specify `metric_type` when searching in a collection with FLAT index. [#3213](https://github.com/milvus-io/milvus/issues/3213)
-- Adds more valid values to the indexing parameter `m` of IVF_PQ: A `m` is valid so long as it can be divided by `dim`, the number of vector dimensions. [#3254](https://github.com/milvus-io/milvus/issues/3254)
+- Adds more valid values to the indexing parameter `m` of IVF_PQ: An `m` is valid so long as it can be divided by `dim`, the number of vector dimensions. [#3254](https://github.com/milvus-io/milvus/issues/3254)
 - Expands the range of `nprobe` to [1, 16384] for all IVF indexes. [#3606](https://github.com/milvus-io/milvus/issues/3606)
 - Expands the range of `top_k` in an embeddings search to [1, 16384]. [#3639](https://github.com/milvus-io/milvus/issues/3639)
 - Optimizes the memory release strategy to avoid memory overuse. [#3536](https://github.com/milvus-io/milvus/issues/3536)
@@ -31,7 +31,7 @@ sidebar_label: Release Notes
 - Milvus running on multiple GPU devices and using IVF_SQ8H crashes if GPU cache is set too low. [#3742](https://github.com/milvus-io/milvus/issues/3742)
 - Milvus reports a CUDA error when quitting, if the index is IVF_SQ8H. [#3760](https://github.com/milvus-io/milvus/issues/3760)
 
-> See [CHANGELOG](https://github.com/milvus-io/milvus/blob/0.10.2/CHANGELOG.md) for more information.
+> See [CHANGELOG](https://github.com/milvus-io/milvus/blob/0.10.3/CHANGELOG.md) for more information.
 
 ## v0.10.2
 
