@@ -2,7 +2,7 @@
   "menuList": [
     {
       "id": "about_milvus",
-      "title": "ABOUT MILVUS",
+      "title": "About Milvus",
       "label1": "",
       "label2": "",
       "label3": "",
@@ -92,7 +92,7 @@
     },
     {
       "id": "quick_start",
-      "title": "QUICK START",
+      "title": "Quick Start",
       "label1": "",
       "label2": "",
       "label3": "",
@@ -224,7 +224,7 @@
     },
     {
       "id": "reference",
-      "title": "REFERENCE",
+      "title": "Reference",
       "label1": "",
       "label2": "",
       "label3": "",
@@ -346,7 +346,7 @@
     },
     {
       "id": "API",
-      "title": "API REFERENCE",
+      "title": "API Reference",
       "label1": "",
       "label2": "",
       "label3": "",
@@ -435,7 +435,7 @@
     },
     {
       "id": "release_notes.md",
-      "title": "RELEASE NOTES",
+      "title": "Release Notes",
       "label1": "",
       "label2": "",
       "label3": "",

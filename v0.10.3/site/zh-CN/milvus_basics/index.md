@@ -185,10 +185,6 @@ RNSG 的建图流程如下：
 
 RNSG 的查询流程与建图流程类似，以导航点为起点至少迭代 `search_length` 次以得到最终结果。
 
-<div class="alert note">
-参考文献：<a href="http://www.vldb.org/pvldb/vol12/p461-fu.pdf">Fast Approximate Nearest Neighbor Search With The Navigating Spreading-out Graph</a>
-</div>
-
 - 建索引参数
 
    | 参数                 | 说明                | 取值范围   |
@@ -213,9 +209,7 @@ HNSW（Hierarchical Small World Graph）是一种基于图的索引算法。它�
   
 为了提高性能，HNSW 限定了每层图上结点的最大度数 `M` 。此外，建索引时可以用 `efConstruction`，查询时可以用 `ef` 来指定搜索范围。
 
-<div class="alert note">
-参考文献：<a href="https://arxiv.org/abs/1603.09320">Efficient and robust approximate nearest neighbor search using Hierarchical Navigable Small World graphs</a>
-</div>
+
 
 - 建索引参数
 
@@ -237,10 +231,6 @@ HNSW（Hierarchical Small World Graph）是一种基于图的索引算法。它�
 ANNOY（Approximate Nearest Neighbors Oh Yeah）是一种用超平面把高维空间分割成多个子空间，并把这些子空间以树型结构存储的索引方式。
 
 在查询时，ANNOY 会顺着树结构找到距离目标向量较近的一些子空间，然后比较这些子空间里的所有向量（要求比较的向量数不少于 `search_k` 个）以获得最终结果。显然，当目标向量靠近某个子空间的边缘时，有时需要大大增加搜索的子空间数以获得高召回率。因此，ANNOY 会使用 `n_trees` 次不同的方法来划分全空间，并同时搜索所有划分方法以减少目标向量总是处于子空间边缘的概率。
-
-<div class="alert note">
-参考文献：<a href="https://erikbern.com/2015/10/01/nearest-neighbors-and-vector-models-part-2-how-to-search-in-high-dimensional-spaces.html">Nearest neighbors and vector models – part 2 – algorithms and data structures</a>
-</div>
 
 - 建索引参数
 
@@ -278,3 +268,9 @@ ANNOY（Approximate Nearest Neighbors Oh Yeah）是一种用超平面把高维�
 可参阅 <a href="https://milvus.io/cn/blogs/2019-12-03-select-index.md">如何选择索引类型</a>。
 </p>
 </details>
+
+## 参考文献
+
+- RNSG：<a href="http://www.vldb.org/pvldb/vol12/p461-fu.pdf">Fast Approximate Nearest Neighbor Search With The Navigating Spreading-out Graph</a>
+- HNSW：<a href="https://arxiv.org/abs/1603.09320">Efficient and robust approximate nearest neighbor search using Hierarchical Navigable Small World graphs</a>
+- ANNOY：<a href="https://erikbern.com/2015/10/01/nearest-neighbors-and-vector-models-part-2-how-to-search-in-high-dimensional-spaces.html">Nearest neighbors and vector models – part 2 – algorithms and data structures</a>
