@@ -39,12 +39,6 @@ See [Scenarios](https://www.milvus.io/scenarios/) for more information.
 
 ## Key features
 
-| Feature                                                    | Description                                                  |
-| ---------------------------------------------------------- | ------------------------------------------------------------ |
-|                                     |  |
-|  |  |
-|                                 |               |
-|                |  |
 
 #### Heterogeneous computing
 
@@ -85,6 +79,6 @@ For more information, see [Milvus Distributions](milvus_distributions-cpu.md).
 
 ## Join our community
 
-Before joining our developer community, please take some time reading our code contribution guidelines [Contribute to Milvus](https://github.com/milvus-io/milvus/blob/master/CONTRIBUTING.md#contributing-to-milvus).
+Before joining our developer community, please take some time reading [our code contribution guidelines](https://github.com/milvus-io/milvus/blob/master/CONTRIBUTING.md#contributing-to-milvus).
 
 If you have questions about functions or SDKs of Milvus, you can join our [GitHub Discussions](https://github.com/milvus-io/milvus/discussions) or [our Slack channel](https://join.slack.com/t/milvusio/shared_invite/zt-e0u4qu3k-bI2GDNys3ZqX1YCJ9OM~GQ).
