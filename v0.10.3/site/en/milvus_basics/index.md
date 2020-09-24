@@ -146,8 +146,8 @@ IVF\_SQ8H is an IVF\_SQ8 index that optimizes query execution.
 
 The query method is as follows:
 
-- If `NQ` &ge; `gpu_search_threshold`, GPU handles the entire query task.
-- If `NQ` < `gpu_search_threshold`, GPU handles the task of retrieving the `nprobe` nearest unit in the IVF index file, and CPU handles the rest.
+- If `nq` &ge; `gpu_search_threshold`, GPU handles the entire query task.
+- If `nq` < `gpu_search_threshold`, GPU handles the task of retrieving the `nprobe` nearest unit in the IVF index file, and CPU handles the rest.
 
 - IVF\_SQ8H has the same index building parameters as IVF\_FLAT.
 - IVF\_SQ8H has the same search parameters as IVF\_FLAT.
@@ -183,9 +183,6 @@ The graph construction process of RNSG is as follows:
 2. Iterate at least `search_length` times based on `knng` nearest neighbor nodes to select `candidate_pool_size` possible nearest neighbor nodes.
 3. Construct the out-edge of each point in the selected `candidate_pool_size` nodes according to the edge selection strategy.
 
-<div class="alert note">
-Reference: <a href="http://www.vldb.org/pvldb/vol12/p461-fu.pdf"> Fast Approximate Nearest Neighbor Search With The Navigating Spreading-out Graph</a>
-</div>
 
 - Index building parameters
 
@@ -211,10 +208,6 @@ HNSW (Hierarchical Small World Graph) is a graph-based indexing algorithm. It bu
 
 In order to improve performance, HNSW limits the maximum degree of nodes on each layer of the graph to `M`. In addition, you can use `efConstruction` (when building index) or `ef` (when searching targets) to specify a search range.
 
-<div class="alert note">
-Reference: <a href="https://arxiv.org/abs/1603.09320">Efficient and robust approximate nearest neighbor search using Hierarchical Navigable Small World graphs</a>
-</div>
-
 - Index building parameters
 
    | Parameter   | Description     | Range     |
@@ -237,9 +230,6 @@ ANNOY (Approximate Nearest Neighbors Oh Yeah) is an index that uses a hyperplane
 
 during searching vectors, ANNOY follows the tree structure to find subspaces closer to the target vector, and then compares all the vectors in these subspaces (The number of vectors being compared should not be less than `search_k`) to obtain the final result. Obviously, when the target vector is close to the edge of a certain subspace, sometimes it is necessary to greatly increase the number of searched subspaces to obtain a high recall rate. Therefore, ANNOY uses `n_trees` different methods to divide the whole space, and searches all the dividing methods simultaneously to reduce the probability that the target vector is always at the edge of the subspace.
 
-<div class="alert note">
-Reference: <a href="https://erikbern.com/2015/10/01/nearest-neighbors-and-vector-models-part-2-how-to-search-in-high-dimensional-spaces.html">Nearest neighbors and vector models – part 2 – algorithms and data structures</a>
-</div>
 
 - Index building parameters
 

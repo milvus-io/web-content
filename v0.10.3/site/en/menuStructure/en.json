@@ -44,7 +44,7 @@
     },
     {
       "id": "index.md",
-      "title": "Index Types",
+      "title": "Vector Index",
       "label1": "milvus_basics",
       "label2": "",
       "label3": "",
@@ -400,7 +400,7 @@
     },
     {
       "id": "developer_tools",
-      "title": "TOOLS",
+      "title": "Tools",
       "label1": "",
       "label2": "",
       "label3": "",

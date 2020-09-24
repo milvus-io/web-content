@@ -41,11 +41,32 @@ See [Scenarios](https://www.milvus.io/scenarios/) for more information.
 
 | Feature                                                    | Description                                                  |
 | ---------------------------------------------------------- | ------------------------------------------------------------ |
-| Heterogeneous computing                                    | <ul><li>Optimizes search and indexing performance for GPU.</li><li>Completes a search in milliseconds for datasets on a scale of trillion Bytes.</li><li>Manages datasets in a dynamic environment. </li></ul> |
-| Compatible with mainstream libraries, metrics, and tooling | <ul><li>Encapsulates Faiss, NMSLIB, and Annoy libraries.</li><li>Supports Quantization, Graph-based, and Tree-based indexes.</li><li>Similarity metrics including Euclidean distance (L2), Inner Product, Hamming distance, Jaccard distance, and more.</li><li>Prometheus and Grafana for monitoring and visualization of runtime metrics.</li></ul> |
-| Near-real-time (NRT) search                                | Inserted datasets are searchable in one second.              |
-| Scalar field filtering (coming soon)               | <ul><li>Supports embeddings and scalar data. </li><li>Adds more flexibility to your search by supporting filtering of scalar data.</li></ul> |
+|                                     |  |
+|  |  |
+|                                 |               |
+|                |  |
 
+#### Heterogeneous computing
+
+- Optimizes search and indexing performance for GPU.
+- Completes a search in milliseconds for datasets on a scale of trillion Bytes.
+- Manages datasets in a dynamic environment.
+
+#### Compatible with mainstream libraries, metrics, and tooling
+
+- Encapsulates Faiss, NMSLIB, and Annoy libraries.
+- Supports Quantization, Graph-based, and Tree-based indexes.
+- Similarity metrics including Euclidean distance (L2), Inner Product, Hamming distance, Jaccard distance, and more.
+- Prometheus and Grafana for monitoring and visualization of runtime metrics.
+
+#### Near-real-time (NRT) search
+
+- Inserted datasets are searchable in one second.
+
+#### Scalar field filtering (coming soon)
+
+- Supports embeddings and scalar data. 
+- Adds more flexibility to your search by supporting filtering of scalar data.
 
 ## Milvus distributions
 <a name='distributions'></a>

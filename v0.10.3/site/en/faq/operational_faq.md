@@ -83,7 +83,7 @@ If your CPU does not support SSE42, AVX, AVX2, or AVX512, Milvus cannot start pr
 
 #### How can I know whether my GPU is supported by Milvus?
 
-Milvus supports CUBA architecture 6.0 or later. See [Wikipedia](https://en.wikipedia.org/wiki/CUDA) for supported architectures.
+Milvus supports CUDA architecture 6.0 or later. See [Wikipedia](https://en.wikipedia.org/wiki/CUDA) for supported architectures.
 
 #### Where is the script for starting the server in the Milvus Docker container?
 

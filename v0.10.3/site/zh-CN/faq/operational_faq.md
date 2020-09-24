@@ -85,7 +85,7 @@ Docker 镜像内部的日志文件默认使用 UTC 时间。如果宿主机未�
 
 #### 如何确认 Milvus 是否支持我的 GPU？
 
-Milvus 支持 CUBA 6.0 架构以后的显卡。关于 Milvus 支持的架构，详见 [Wikipedia](https://en.wikipedia.org/wiki/CUDA)。
+Milvus 支持 CUDA 6.0 架构以后的显卡。关于 Milvus 支持的架构，详见 [Wikipedia](https://en.wikipedia.org/wiki/CUDA)。
 
 #### Milvus 镜像里面启动 server 的脚本在哪？
 

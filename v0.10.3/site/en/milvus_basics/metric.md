@@ -19,7 +19,7 @@ Below table shows how these widely used distance metrics fit with various input 
 <table class="tg">
 <thead>
   <tr>
-    <th class="tg-0pky">Distance Metrics</th>
+    <th class="tg-0pky" style="width: 175px;">Distance Metrics</th>
     <th class="tg-0pky">Index Types</th>
   </tr>
 </thead>
@@ -41,7 +41,7 @@ Below table shows how these widely used distance metrics fit with various input 
 <table class="tg">
 <thead>
   <tr>
-    <th class="tg-0pky">Distance Metrics</th>
+    <th class="tg-0pky" style="width: 175px;">Distance Metrics</th>
     <th class="tg-0pky">Index Types</th>
   </tr>
 </thead>
