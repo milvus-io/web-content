@@ -20,7 +20,10 @@ Milvus runs on the client-server model.
 
 Milvus was released under the Apache 2.0 License and officially open sourced in October 2019. It is an incubation project under [LF AI Foundation](https://lfai.foundation/). The source code of Milvus is hosted on [GitHub](https://github.com/milvus-io/milvus).
 
-> For now, the Milvus server runs on a standalone node. For scenarios involving large datasets or requiring high concurrency, check out Mishards, our cluster sharding middleware that is currently under development.
+
+<div class="alert note">
+The Milvus server runs on a standalone node. For scenarios involving large datasets or requiring high concurrency, check out Mishards, our cluster sharding middleware that is currently under development.
+</div>
 
 ## Overall architecture
 
