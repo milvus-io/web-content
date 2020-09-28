@@ -151,8 +151,11 @@ If your CPU does not support SSE42, AVX, AVX2, or AVX512, Milvus cannot start pr
 <details>
 <summary><font color="#4fc4f9">How to migrate data in Milvus?</font></summary>
 <p>Copy the entire <strong>db</strong> directory of the original Milvus service to the new directory. When restarting the Milvus service, map the copied <strong>db</strong> directory to the <strong>db</strong> directory of the Milvus service.</p>
-<p> Note: Data formats of different versions may not be compatible with each other. The current data format is backward compatible with Milvus v0.7.0.
-</p>
+
+<div class="alert note">
+Data formats of different versions may not be compatible with each other. The current data format is backward compatible with Milvus v0.7.0.
+</div>
+
 </details>
 <details>
 <summary><font color="#4fc4f9">Is Docker the only way to install and run Milvus?</font></summary>

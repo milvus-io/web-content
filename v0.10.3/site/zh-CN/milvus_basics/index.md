@@ -31,7 +31,7 @@ Milvus 目前支持的向量索引类型大都属于 ANNS（Approximate Nearest 
     <td><a href="#FLAT">FLAT</a></td>
     <td>N/A</td>
     <td><ul>
-        <li>查询数据规模小，</li>
+        <li>查询数据规模小，对查询速度要求不高。</li>
         <li>需要 100% 的召回率。</li>
         </ul></td>
   </tr>
@@ -39,14 +39,14 @@ Milvus 目前支持的向量索引类型大都属于 ANNS（Approximate Nearest 
     <td><a href="#IVF_FLAT">IVF_FLAT</a></td>
     <td rowspan="4">基于量化的索引</td>
     <td><ul>
-        <li>高性能查询，</li>
+        <li>高速查询，</li>
         <li>要求尽可能高的召回率。</li>
         </ul></td>
   </tr>
   <tr>
     <td><a href="#IVF_SQ8">IVF_SQ8</a></td>
     <td><ul>
-        <li>高性能查询，</li>
+        <li>高速查询，</li>
         <li>磁盘和内存资源有限，</li>
         <li>仅有 CPU 资源。</li>
         </ul></td>
@@ -54,7 +54,7 @@ Milvus 目前支持的向量索引类型大都属于 ANNS（Approximate Nearest 
   <tr>
     <td><a href="#IVF_SQ8H">IVF_SQ8H</a></td>
     <td><ul>
-        <li>高性能查询，</li>
+        <li>高速查询，</li>
         <li>磁盘、内存、显存有限。</li>
         </ul></td>
   </tr>

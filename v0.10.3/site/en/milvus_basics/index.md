@@ -30,7 +30,7 @@ The following table classifies the indexes that Milvus supports:
     <td><a href="#FLAT">FLAT</a></td>
     <td>N/A</td>
     <td><ul>
-        <li>Small dataset.</li>
+        <li>Has a relatively small dataset.</li>
         <li>Requires a 100% recall rate. </li>
         </ul></td>
   </tr>
@@ -38,14 +38,14 @@ The following table classifies the indexes that Milvus supports:
     <td><a href="#IVF_FLAT">IVF_FLAT</a></td>
     <td rowspan="4">Quantization-based index</td>
     <td><ul>
-        <li>High-performance query.</li>
+        <li>High-speed query.</li>
         <li>Requires a recall rate as high as possible.</li>
         </ul></td>
   </tr>
   <tr>
     <td><a href="#IVF_SQ8">IVF_SQ8</a></td>
     <td><ul>
-        <li>High-performance query.</li>
+        <li>High-speed query.</li>
         <li>Limited disk and memory capacity. </li>
         <li>Has CPU resources only.</li>
         </ul></td>
@@ -53,7 +53,7 @@ The following table classifies the indexes that Milvus supports:
   <tr>
     <td><a href="#IVF_SQ8H">IVF_SQ8H</a></td>
     <td><ul>
-        <li>High-performance query. </li>
+        <li>High-speed query. </li>
         <li>Limited disk, memory, and graphics memory capacities. </li>
         </ul></td>
   </tr>
@@ -84,7 +84,7 @@ To improve query performance, you can specify an index type for each vector fiel
 
 ## Create indexes
 
-When the `create_index` API is called, Milvus synchronously indexes the existing data on this field. Whenever the size of the inserted data reaches the `index_file_size`, Milvus automatically creates an index for it in the background.
+When the `create_index` method is called, Milvus synchronously indexes the existing data on this field. Whenever the size of the inserted data reaches the `index_file_size`, Milvus automatically creates an index for it in the background.
 
 <div class="alert note">
 When the inserted data segment is less than 4096 rows, Milvus does not index it.
@@ -100,7 +100,7 @@ It is known that indexing is a resource-consuming and time-consuming task. When 
 
 
 
-## Indexes that Milvus supports
+## Supported vector indexes
 
 ### FLAT
 <a name="FLAT"></a>

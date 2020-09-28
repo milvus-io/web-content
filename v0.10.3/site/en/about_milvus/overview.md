@@ -27,7 +27,7 @@ The Milvus server runs on a standalone node. For scenarios involving large datas
 
 ## Overall architecture
 
-![Milvus architecture](../../../assets/milvus_arch.png)
+![Milvus architecture](../../../assets/milvus_arch.png){:width="640"}
 
 
 ## Scenarios
