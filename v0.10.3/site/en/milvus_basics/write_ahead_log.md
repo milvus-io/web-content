@@ -4,7 +4,7 @@ id: write_ahead_log.md
 
 # Write Ahead Log
 
-![wal_structure](../../../assets/wal/wal_workflow.jpg)
+![wal_structure](../../../assets/wal/wal_workflow.png)
 
 Write ahead log records insertion and deletion requests into the log file, and then the background thread writes it to the system. Once the requests are successfully written to the log file, the server returns success. This function enhances data reliability and reduces client blocking.
 

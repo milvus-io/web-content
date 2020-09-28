@@ -4,7 +4,7 @@ id: write_ahead_log.md
 
 # 预写式日志
 
-![wal_structure](../../../assets/wal/wal_workflow.jpg)
+![wal_structure](../../../assets/wal/wal_workflow.png)
 
 预写式日志首先把用户的插入和删除请求记入日志文件，然后由后台线程写入系统。一旦将用户请求成功写入日志，服务端即会返回成功。开启该功能可以增强数据的可靠性，并减少对客户端的阻塞。
 

@@ -21,7 +21,7 @@ Milvus 在 Apache 2 License 协议下发布，于 2019 年 10 月正式开源，
 
 ## 整体架构
 
-![Milvus 架构](../../../assets/milvus_arch.png){:width="640"}
+![Milvus 架构](../../../assets/milvus_arch.png)
 
 
 ## 应用场景
