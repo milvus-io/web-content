@@ -121,7 +121,7 @@ Before changing these settings, welcome to consult Milvus team on [GitHub issues
 | -------------------- | ------------------------------------------------------------ | ------- | --------- |
 | `cache_size` | The size of the CPU memory for caching data for faster query. The sum of `cache_size` and `insert_buffer_size` must be less than the system memory size. | String | `4GB` |
 | `insert_buffer_size` | Buffer size used for data insertion. The sum of `insert_buffer_size` and `cache_size` must be less than the system memory size. | String | `1GB`        |
-| `preload_collection`  | A comma-separated list of collection names that need to be pre-loaded when Milvus server starts up. <ul><li>'*' means preload all existing tables (single-quote or double-quote required).For example: `preload_collection='*'`.</li><li>To load specific collections, list the collection names that need to be loaded (enclose each collection name with single-quote or double-quote, and separate adjacent collections with a comma). For example: `preload_collection=['collection1','collection2']`.</li></ul>  | StringList | N/A   |
+| `preload_collection`  | A comma-separated list of collection names that need to be pre-loaded when Milvus server starts up. <ul><li>`'*'` means preload all existing tables (single-quote or double-quote required).For example: `preload_collection='*'`.</li><li>To load specific collections, list the collection names that need to be loaded (enclose each collection name with single-quote or double-quote, and separate adjacent collections with a comma). For example: `preload_collection=['collection1','collection2']`.</li></ul>  | StringList | N/A   |
 
 </div>
 
