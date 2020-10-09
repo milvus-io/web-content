@@ -37,7 +37,7 @@ Milvus 目前支持的向量索引类型大都属于 ANNS（Approximate Nearest 
   </tr>
   <tr>
     <td><a href="#IVF_FLAT">IVF_FLAT</a></td>
-    <td rowspan="4">基于量化的索引</td>
+    <td>基于量化的索引</td>
     <td><ul>
         <li>高速查询，</li>
         <li>要求尽可能高的召回率。</li>
@@ -45,6 +45,7 @@ Milvus 目前支持的向量索引类型大都属于 ANNS（Approximate Nearest 
   </tr>
   <tr>
     <td><a href="#IVF_SQ8">IVF_SQ8</a></td>
+    <td>基于量化的索引</td>
     <td><ul>
         <li>高速查询，</li>
         <li>磁盘和内存资源有限，</li>
@@ -53,6 +54,7 @@ Milvus 目前支持的向量索引类型大都属于 ANNS（Approximate Nearest 
   </tr>
   <tr>
     <td><a href="#IVF_SQ8H">IVF_SQ8H</a></td>
+    <td>基于量化的索引</td>
     <td><ul>
         <li>高速查询，</li>
         <li>磁盘、内存、显存有限。</li>
@@ -60,15 +62,17 @@ Milvus 目前支持的向量索引类型大都属于 ANNS（Approximate Nearest 
   </tr>
   <tr>
     <td><a href="#IVF_PQ">IVF_PQ</a></td>
+    <td>基于量化的索引</td>
     <td></td>
   </tr>
   <tr>
     <td><a href="#RNSG">RNSG</a></td>
-    <td rowspan="2">基于图的索引</td>
+    <td>基于图的索引</td>
     <td></td>
   </tr>
   <tr>
     <td><a href="#HNSW">HNSW</a></td>
+    <td rowspan="2">基于图的索引</td>
     <td></td>
   </tr>
   <tr>
@@ -126,7 +130,7 @@ IVF_FLAT 是最基础的 IVF 索引，存储在各个单元中的数据编码与
 
 - 查询参数
 
-   | 参数    | 说明        | 取值范围    |
+   | 参数     | 说明        | 取值范围    |
    | -------- | ----------- | ---------- |
    | `nprobe` | 查询取的单元数 | [1, 65536] <br> GPU 版 Milvus 在 `nprobe` > 2048 时由 GPU 查询切换为 CPU 查询。|
 

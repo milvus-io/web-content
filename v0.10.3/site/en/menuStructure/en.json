@@ -36,7 +36,7 @@
     },
     {
       "id": "vector.md",
-      "title": "Feature Vector",
+      "title": "Embedding Vector",
       "label1": "milvus_basics",
       "label2": "",
       "label3": "",
@@ -160,7 +160,7 @@
     },
     {
       "id": "create_drop_collection_python.md",
-      "title": "Create and Drop a Collection",
+      "title": "Create/Drop a Collection",
       "label1": "quick_start",
       "label2": "get_started",
       "label3": "",
@@ -168,7 +168,7 @@
     },
     {
       "id": "create_drop_partition_python.md",
-      "title": "Create and Drop a Partition",
+      "title": "Create/Drop a Partition",
       "label1": "quick_start",
       "label2": "get_started",
       "label3": "",
@@ -176,7 +176,7 @@
     },
     {
       "id": "insert_delete_vector_python.md",
-      "title": "Insert and Delete Vectors",
+      "title": "Insert/Delete Vectors",
       "label1": "quick_start",
       "label2": "get_started",
       "label3": "",
@@ -184,7 +184,7 @@
     },
     {
       "id": "create_drop_index_python.md",
-      "title": "Create and Drop an Index",
+      "title": "Create/Drop an Index",
       "label1": "quick_start",
       "label2": "get_started",
       "label3": "",
@@ -266,7 +266,7 @@
     },
     {
       "id": "setup_prometheus.md",
-      "title": "Configure & Start Prometheus",
+      "title": "Start up Prometheus",
       "label1": "reference",
       "label2": "monitor",
       "label3": "",
@@ -290,7 +290,7 @@
     },
     {
       "id": "tuning.md",
-      "title": "Performancing Tuning",
+      "title": "Performance Tuning",
       "label1": "reference",
       "label2": "",
       "label3": "",

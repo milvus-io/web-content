@@ -36,7 +36,7 @@ The following table classifies the indexes that Milvus supports:
   </tr>
   <tr>
     <td><a href="#IVF_FLAT">IVF_FLAT</a></td>
-    <td rowspan="4">Quantization-based index</td>
+    <td>Quantization-based index</td>
     <td><ul>
         <li>High-speed query.</li>
         <li>Requires a recall rate as high as possible.</li>
@@ -44,6 +44,7 @@ The following table classifies the indexes that Milvus supports:
   </tr>
   <tr>
     <td><a href="#IVF_SQ8">IVF_SQ8</a></td>
+    <td>Quantization-based index</td>
     <td><ul>
         <li>High-speed query.</li>
         <li>Limited disk and memory capacity. </li>
@@ -52,6 +53,7 @@ The following table classifies the indexes that Milvus supports:
   </tr>
   <tr>
     <td><a href="#IVF_SQ8H">IVF_SQ8H</a></td>
+    <td>Quantization-based index</td>
     <td><ul>
         <li>High-speed query. </li>
         <li>Limited disk, memory, and graphics memory capacities. </li>
@@ -59,15 +61,17 @@ The following table classifies the indexes that Milvus supports:
   </tr>
   <tr>
     <td><a href="#IVF_PQ">IVF_PQ</a></td>
+    <td>Quantization-based index</td>
     <td></td>
   </tr>
   <tr>
     <td><a href="#RNSG">RNSG</a></td>
-    <td rowspan="2">Graph-based index</td>
+    <td>Graph-based index</td>
     <td></td>
   </tr>
   <tr>
     <td><a href="#HNSW">HNSW</a></td>
+    <td>Graph-based index</td>
     <td></td>
   </tr>
   <tr>
@@ -228,20 +232,20 @@ In order to improve performance, HNSW limits the maximum degree of nodes on each
 
 ANNOY (Approximate Nearest Neighbors Oh Yeah) is an index that uses a hyperplane to divide a high-dimensional space into multiple subspaces, and then stores them in a tree structure.
 
-during searching vectors, ANNOY follows the tree structure to find subspaces closer to the target vector, and then compares all the vectors in these subspaces (The number of vectors being compared should not be less than `search_k`) to obtain the final result. Obviously, when the target vector is close to the edge of a certain subspace, sometimes it is necessary to greatly increase the number of searched subspaces to obtain a high recall rate. Therefore, ANNOY uses `n_trees` different methods to divide the whole space, and searches all the dividing methods simultaneously to reduce the probability that the target vector is always at the edge of the subspace.
+When searching for vectors, ANNOY follows the tree structure to find subspaces closer to the target vector, and then compares all the vectors in these subspaces (The number of vectors being compared should not be less than `search_k`) to obtain the final result. Obviously, when the target vector is close to the edge of a certain subspace, sometimes it is necessary to greatly increase the number of searched subspaces to obtain a high recall rate. Therefore, ANNOY uses `n_trees` different methods to divide the whole space, and searches all the dividing methods simultaneously to reduce the probability that the target vector is always at the edge of the subspace.
 
 
 - Index building parameters
 
    | Parameter   | Description     | Range     |
    | --------- |-------------- | -------- |
-   | `n_trees` | The number of methods of space division | [1, 1024] |
+   | `n_trees` | The number of methods of space division. | [1, 1024] |
 
 - Search parameters
 
    | Parameter   | Description     | Range     |
    | -----------|--------------------------------- | ---------------- |
-   | `search_k` | The number of nodes to be searched. `-1` means 5% of the whole data. | {-1} ∪ [`top_k`, n × `n_trees`] |
+   | `search_k` | The number of nodes to search. -1 means 5% of the whole data. | {-1} ∪ [`top_k`, n × `n_trees`] |
 
 ## How to choose an index
 
