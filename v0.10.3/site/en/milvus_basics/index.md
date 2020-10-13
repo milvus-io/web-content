@@ -113,6 +113,12 @@ If FLAT index is used, the vectors are stored in an array of float/binary data w
 
 FLAT index provides 100% query recall rate. Compared to other indexes, it is the most efficient indexing method when the number of queries is small.
 
+- Search parameters
+
+   | Parameter   | Description     | Range     |
+   | -------- | ----------- | ---------- |
+   | `metric_type` | The chosen distance metric.  | See the corresponding API Reference. |
+
 ### IVF_FLAT
 <a name="IVF_FLAT"></a>
 
@@ -187,6 +193,7 @@ The graph construction process of RNSG is as follows:
 2. Iterate at least `search_length` times based on `knng` nearest neighbor nodes to select `candidate_pool_size` possible nearest neighbor nodes.
 3. Construct the out-edge of each point in the selected `candidate_pool_size` nodes according to the edge selection strategy.
 
+The query process is similar to the graph building process. It starts from the navigation point and iterate at least `search_length` times to get the final result. 
 
 - Index building parameters
 

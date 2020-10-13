@@ -72,7 +72,7 @@ Milvus 目前支持的向量索引类型大都属于 ANNS（Approximate Nearest 
   </tr>
   <tr>
     <td><a href="#HNSW">HNSW</a></td>
-    <td rowspan="2">基于图的索引</td>
+    <td>基于图的索引</td>
     <td></td>
   </tr>
   <tr>
@@ -82,7 +82,6 @@ Milvus 目前支持的向量索引类型大都属于 ANNS（Approximate Nearest 
   </tr>
 </tbody>
 </table>
-
 
 ## 索引创建机制
 
@@ -113,6 +112,12 @@ Milvus 数据段存储海量数据。在建立索引时，Milvus 为每个数据
 FLAT 索引类型是指对向量进行原始文件存储。搜索时，所有向量都会与目标向量进行距离计算和比较。
 
 FLAT 索引类型提供 100% 的检索召回率。与其他索引相比，当查询数量较少时，它是最有效的索引方法。
+
+- 查询参数
+
+   | 参数     | 说明     　    | 取值范围  |
+   | --------- |-------------- | -------- |
+   | `metric_type` | 距离计算方式 | 详见相应 API 参考 |
 
 ### IVF_FLAT
 <a name="IVF_FLAT"></a>

@@ -2,11 +2,11 @@
 id: search_vector_python.md
 ---
 
-# Search Vectors
+# Conduct a Vector Search
 
 Milvus supports searching vectors in a collection or partition.
 
-## Search vectors in a collection
+## Search for vectors in a collection
 
 1. Create search parameters. The search parameters are stored in a JSON string, which is represented by a dictionary in the Python SDK.
 

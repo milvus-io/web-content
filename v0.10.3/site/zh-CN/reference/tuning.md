@@ -154,7 +154,7 @@ Milvus 使用 MySQL 作为元数据后端服务。Milvus 在查询数据时会�
 
 <details>
 <summary><font color="#4fc4f9">为什么查询时 GPU 一直空闲？</font></summary>
-此时应该是在用 CPU 进行查询。如果要用 GPU 进行查询，需要在配置文件中将 <code>gpu_search_threshold</code> 的值设置为大于 <code>nq</code> (每次查询的向量条数) 。可以将 <code>gpu_search_threshold</code> 的值调整为期望开启 GPU 搜索的 <code>nq</code> 数。若 <code>nq</code> 小于该值，则用 CPU 查询，否则使用 GPU 查询。不建议在查询批量较小时使用 GPU 搜索。
+此时应该是在用 CPU 进行查询。如果要用 GPU 进行查询，需要在配置文件中将 <code>gpu_search_threshold</code> 的值设置为小于 <code>nq</code> (每次查询的向量条数) 。可以将 <code>gpu_search_threshold</code> 的值调整为期望开启 GPU 搜索的 <code>nq</code> 数。若 <code>nq</code> 小于该值，则用 CPU 查询，否则使用 GPU 查询。不建议在查询批量较小时使用 GPU 搜索。
 </details>
 <details>
 <summary><font color="#4fc4f9">为什么搜索的速度非常慢？</font></summary>

@@ -4,12 +4,12 @@ id: overview.md
 
 # Milvus 是什么
 
-Milvus 是一款开源的 Embeddings 相似度搜索引擎，支持针对 TB 级 Embeddings 的增删改和近实时搜索，具有高度灵活、稳定可靠以及高速搜索等特点。Milvus 集成了 Faiss、NMSLIB、Annoy 等广泛应用的向量索引库，提供了一整套简单直观的 API，让你可以针对不同场景选择不同的索引类型。此外，Milvus 还可以对标量数据进行过滤，进一步提高了召回率，增强了搜索的灵活性。
+Milvus 是一款开源的向量相似度搜索引擎，支持针对 TB 级向量的增删改操作和近实时查询，具有高度灵活、稳定可靠以及高速查询等特点。Milvus 集成了 Faiss、NMSLIB、Annoy 等广泛应用的向量索引库，提供了一整套简单直观的 API，让你可以针对不同场景选择不同的索引类型。此外，Milvus 还可以对标量数据进行过滤，进一步提高了召回率，增强了搜索的灵活性。
 
 Milvus 服务器采用主从式架构 (Client-server model)。
 
 - 在服务端，Milvus 由 Milvus Core 和 Meta Store 两部分组成：
-    - Milvus Core 存储与管理 Embeddings 和标量数据。
+    - Milvus Core 存储与管理向量和标量数据。
     - Meta Store 存储与管理 SQLite 和 MySQL 中的元数据，分别用于测试和生产。
 - 在客户端，Milvus 还提供了基于 Python、Java、Go、C++ 的 SDK 和 RESTful API。
 
@@ -56,7 +56,7 @@ Milvus 在全球范围内已被数百家组织和机构所采用，广泛应用�
 
 #### 标量字段过滤 (即将上线) 
 
-- 支持 Embeddings 和标量数据。
+- 支持向量和标量数据。
 - 可以对标量数据进行过滤，增强搜索的灵活性。
 
 ## 发行版本
@@ -71,7 +71,7 @@ Milvus 提供两个发行版本：CPU 版本和 GPU 版本。
 
 如果你的计算机上安装了支持 CUDA 功能的 GPU 设备，你可以安装 Milvus 的 GPU 版本以获取针对海量数据的更优的查询性能。
 
-详见：[Milvus Distributions](milvus_distributions-cpu.md)。
+详见：[Milvus 发行版本](milvus_distributions-cpu.md)。
 
 ## 加入开发者社区
 
