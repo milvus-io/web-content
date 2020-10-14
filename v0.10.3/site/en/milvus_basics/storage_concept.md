@@ -31,7 +31,7 @@ Each collection can have 4096 partitions at most.
 
 The relationship between collections, partitions, and segments is as follows:
 
-![file](../../../assets/storage/hierarchy.png)
+![file](../../../assets/storage/hierarchy.svg)
 
 <div class="alert info">
 Each collection has a <code>_default</code> section. If no partition is specified when inserting data, Milvus inserts the data into the <code>_default</code> partition.
