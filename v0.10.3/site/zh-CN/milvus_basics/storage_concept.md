@@ -30,7 +30,7 @@ id: storage_concept.md
 
 集合、分区以及数据段的关系如下所示：
 
-![file](../../../assets/storage/hierarchy.svg)
+![file](../../../assets/storage/hierarchy.png)
 
 <div class="alert note">
 每个集合都有一个 <code>_default</code> 分区。插入数据时如果没有指定分区，Milvus 会将数据插入该分区中。
