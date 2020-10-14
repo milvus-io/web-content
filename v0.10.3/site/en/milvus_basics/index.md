@@ -117,7 +117,7 @@ FLAT index provides 100% query recall rate. Compared to other indexes, it is the
 
    | Parameter   | Description     | Range     |
    | -------- | ----------- | ---------- |
-   | `metric_type` | The chosen distance metric.  | See the corresponding API Reference. |
+   | `metric_type` | The chosen distance metric.  | Optional. See [Supported Metrics](metric.md#floating). |
 
 ### IVF_FLAT
 <a name="IVF_FLAT"></a>
@@ -177,7 +177,7 @@ IVF\_PQ quantizes the product of vectors, and then performs IVF index clustering
    | `m`     | Number of factors of product quantization | CPU-only Milvus: `m` ≡ dim (mod m); GPU-enabled Milvus:  `m` ∈ {1, 2, 3, 4, 8, 12, 16, 20, 24, 28, 32, 40, 48, 56, 64, 96}, and (dim / m) ∈ {1, 2, 3, 4, 6, 8, 10, 12, 16, 20, 24, 28, 32}.<br>(`m` x 1024) &ge; `MaxSharedMemPerBlock` of your graphics card. |
    
 <div class="alert note">
-Milvus automatically switches from GPU search to CPU search if <code>m</code> is invalid.
+Milvus automatically switches from GPU search to CPU search if <code>m</code> is not supported.
 </div>
 
 - IVF\_PQ has the same search parameters as IVF\_FLAT.

@@ -117,7 +117,7 @@ FLAT 索引类型提供 100% 的检索召回率。与其他索引相比，当查
 
    | 参数     | 说明     　    | 取值范围  |
    | --------- |-------------- | -------- |
-   | `metric_type` | 距离计算方式 | 详见相应 API 参考 |
+   | `metric_type` | 距离计算方式 | 详见[目前支持的距离计算方式](metric.md#floating)。 |
 
 ### IVF_FLAT
 <a name="IVF_FLAT"></a>
@@ -176,7 +176,7 @@ IVF\_PQ 是先对向量做乘积量化，然后进行 IVF 索引聚类。其索�
    | `m`     | 乘积量化因子个数 | CPU 版 Milvus：`m` ≡ dim (mod m)；GPU 版 Milvus `m` ∈ {1, 2, 3, 4, 8, 12, 16, 20, 24, 28, 32, 40, 48, 56, 64, 96}, and (dim / m) ∈ {1, 2, 3, 4, 6, 8, 10, 12, 16, 20, 24, 28, 32}。<br>`m` x 1024 的值不能超过显卡的 `MaxSharedMemPerBlock`。 |
    
 <div class="alert note">
-如果设置的 <code>m</code> 值无效，Milvus 会自动由 GPU 检索切换为 CPU 检索。
+如果 GPU 版 Milvus 不支持设置的 <code>m</code> 值，Milvus 会自动由 GPU 检索切换为 CPU 检索。
 </div>
    
 

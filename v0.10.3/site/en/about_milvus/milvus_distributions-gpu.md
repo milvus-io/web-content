@@ -23,9 +23,7 @@ If your GPU supports CUDA, then you can install GPU-enabled Milvus to achieve mu
 
 ## Indexes for GPU-enabled Milvus
 
-<div class="alert info">
-Milvus maps different embedding types with different index types. Click to view the index types supporting your embedding type. 
-</div>
+Milvus maps different embedding types with different index types. Click the tab below to view the index types supporting your embedding type. 
 
 
 
