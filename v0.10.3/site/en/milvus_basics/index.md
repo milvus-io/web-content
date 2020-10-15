@@ -100,7 +100,7 @@ Milvus stores massive data in sections. When indexing, Milvus creates an index f
 
 ## Build indexes during free time
 
-It is known that indexing is a resource-consuming and time-consuming task. When the query task and indexing task are concurrent, Milvus preferentially allocates computing resources to the query task, that is, any query command will interrupt the indexing task being executed in the background. After that, only when the user does not send the query task for 5 seconds, Milvus resumes the indexing task in the background. Besides, if the data segment specified by the query command has not been built into the specified index, Milvus will do a full search directly within the segment.
+It is known that indexing is a resource-consuming and time-consuming task. When the query task and indexing task are concurrent, Milvus preferentially allocates computing resources to the query task, that is, any query command will interrupt the indexing task being executed in the background. After that, only when the user does not send the query task for 5 seconds, Milvus resumes the indexing task in the background. Besides, if the data segment specified by the query command has not been built into the specified index, Milvus will do an exhaustive search directly within the segment.
 
 
 
@@ -117,7 +117,7 @@ FLAT index provides 100% query recall rate. Compared to other indexes, it is the
 
    | Parameter   | Description     | Range     |
    | -------- | ----------- | ---------- |
-   | `metric_type` | The chosen distance metric.  | Optional. See [Supported Metrics](metric.md#floating). |
+   | `metric_type` | [Optional] The chosen distance metric.   | See [Supported Metrics](metric.md#floating). |
 
 ### IVF_FLAT
 <a name="IVF_FLAT"></a>

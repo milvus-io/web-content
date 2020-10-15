@@ -117,7 +117,7 @@ FLAT 索引类型提供 100% 的检索召回率。与其他索引相比，当查
 
    | 参数     | 说明     　    | 取值范围  |
    | --------- |-------------- | -------- |
-   | `metric_type` | 距离计算方式 | 详见[目前支持的距离计算方式](metric.md#floating)。 |
+   | `metric_type` | [可选] 距离计算方式 | 详见[目前支持的距离计算方式](metric.md#floating)。 |
 
 ### IVF_FLAT
 <a name="IVF_FLAT"></a>
