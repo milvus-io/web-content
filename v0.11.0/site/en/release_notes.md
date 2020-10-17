@@ -67,13 +67,13 @@ You can use scalar field filtering in an embedding search.
    - Less than or equal to: `lte`
 - Supports `MUST`, `MUST_NOT`, and `SHOULD` operations between the vector field and scalar fields. 
 - Supports returning scalar fields related to the search result. 
-
-Supports creating index for scalar fields to speed up searches for structured data. 
+- Supports creating index for scalar fields to speed up searches for structured data. 
 
 2. Supports specifying `MetricType` in an embedding search.
 
    - If the `MetricType` specified in an embedding search equals the `MetricType` specified when creating an index, Milvus uses the index for the search; 
    - Otherwise, Milvus resorts to brute-force search. 
+
 
 #### Improvements
 
