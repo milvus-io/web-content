@@ -29,7 +29,7 @@ id: release_notes.md
 3. 调整了二值型向量支持索引名称：
 
    - `IVF_FLAT` 变更为 `BIN_IVF_FLAT`，
-   - `FLAT`变更为为 `BIN_FLAT`。
+   - `FLAT`变更为 `BIN_FLAT`。
 
 4. 移除原有的 `CreateCollection()` 方法。
 
@@ -45,7 +45,7 @@ id: release_notes.md
 
 7. v0.11.0 Milvus 暂不支持 Mishards 分布式方案。
 
-8. Python SDK 操作失败会抛出异常。
+8. Python SDK 和 Java SDK 会在操作失败时抛出异常。
 9. RESTful API 支持分页读取实体。
    
    详见 `collections/{collection_name}/entities (GET)`。
@@ -104,7 +104,7 @@ IVF_FLAT 和 HNSW 两种索引的 **index_file** 文件不再包含原始向量�
 
 
 <div class="filter">
-<a href="#RESTful">RESTful</a> <a href="#Python">Python</a> <a href="#Java">Java</a> <a href="#Go">Go</a> <a href="#C++">C++</a>
+<a href="#RESTful">RESTful</a> <a href="#Python">Python</a> <a href="#Java">Java</a> <a href="#CPP">C++</a>
 </div>
 
 <div class="filter-RESTful" markdown="block">
@@ -158,7 +158,7 @@ IVF_FLAT 和 HNSW 两种索引的 **index_file** 文件不再包含原始向量�
 
 </div>
 
-<div class="filter-C++" markdown="block">
+<div class="filter-CPP" markdown="block">
 
 ##### 删除 API
 

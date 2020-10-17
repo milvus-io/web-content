@@ -46,7 +46,7 @@ sidebar_label: Release Notes
 
 7. v0.11.0 Milvus does not support the Mishards clustering solution. 
 
-8. Python SDK throws an exception when an operation fails. 
+8. For Python and Java platforms, the SDK throws an exception when an operation fails. 
 9. [RESTful] Supports retrieving entities by offset and page size. 
    
    See `collections/{collection_name}/entities (GET)` for more information.
@@ -74,6 +74,7 @@ Supports creating index for scalar fields to speed up searches for structured da
 
    - If the `MetricType` specified in an embedding search equals the `MetricType` specified when creating an index, Milvus uses the index for the search; 
    - Otherwise, Milvus resorts to brute-force search. 
+
 #### Improvements
 
 1. Upgrades oatpp.
@@ -106,7 +107,7 @@ For IVF_FLAT and HNSW, **index_file** no longer holds raw data and uses offsets 
 
 
 <div class="filter">
-<a href="#RESTful">RESTful</a> <a href="#Python">Python</a> <a href="#Java">Java</a> <a href="#C++">C++</a>
+<a href="#RESTful">RESTful</a> <a href="#Python">Python</a> <a href="#Java">Java</a> <a href="#CPP">C++</a>
 </div>
 
 <div class="filter-RESTful" markdown="block">
@@ -159,7 +160,7 @@ For IVF_FLAT and HNSW, **index_file** no longer holds raw data and uses offsets 
 
 </div>
 
-<div class="filter-C++" markdown="block">
+<div class="filter-CPP" markdown="block">
 
 ##### Deleted method
 
