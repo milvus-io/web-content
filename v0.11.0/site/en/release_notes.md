@@ -96,9 +96,9 @@ Supports Metadata-snapshot-based embedding search.
 When an insert or delete operation completes, Milvus creates a versioned Metadata snapshot and stores it in the memory so that an incoming search operation can use the corresponding Metadata snapshot. 
 
 
-5. Separate raw data from index. 
+5. Separates raw data from index. 
 
-For IVF_FLAT and HNSW, **index_file** no longer holds raw data and uses offsets of the embeddings instead to avoid overuse of the disk.  
+For IVF_FLAT and HNSW, **index\_file** no longer holds raw data and uses offsets of the embeddings instead to avoid overuse of the disk.  
 
 
 
