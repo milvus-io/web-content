@@ -28,16 +28,16 @@ id: create_drop_collection_python.md
    ...        {"name": "C", "type": DataType.INT64},
    ...        {"name": "Vec", "type": DataType.FLOAT_VECTOR, "params": {"dim": 128}}
    ...    ],
-   ...    "segment_row_limit": 4096,
+   ...    "segment_row_limit": 100000,
    ...    "auto_id": True
    ... }
    ```
 
-2. 创建集合名为 `test01`，维度为 256，自动创建索引的数据文件大小为 1024 MB，距离度量方式为欧氏距离（L2）的集合：
+2. 创建集合名为 `test01` 的集合：
 
    ```python
    # Create a collection.
-   >>> milvus.create_collection('test01', collection_param)
+   >>> client.create_collection('test01', collection_param)
    ```
 
 
@@ -45,7 +45,7 @@ id: create_drop_collection_python.md
 
 ```python
 # Drop a collection.
->>> milvus.drop_collection(collection_name='test01')
+>>> milvus.drop_collection('test01')
 ```
 
 ## 常见问题

@@ -5,7 +5,7 @@ id: example_code.md
 
 在 Milvus 服务端成功启动之后，你可以运行一个 Python 示例程序。这个示例程序将创建一个向量数据表，向其中插入 10 条向量，然后运行向量相似度查询。
 
-1. 请确保系统已经安装了 [Python 3.5](https://www.python.org/downloads/) 和 [pip](https://pip.pypa.io/en/stable/installing/)。
+1. 请确保系统已经安装了 [Python>=3.5](https://www.python.org/downloads/) 和 [pip](https://pip.pypa.io/en/stable/installing/)。
 
 2. 安装 Milvus Python SDK。
 
@@ -15,7 +15,7 @@ id: example_code.md
    ```
 
    <div class="alert note">
-   如果需要进一步了解 Milvus Python SDK，请参考 <a href="https://github.com/milvus-io/pymilvus/blob/master/README.md">Milvus Python SDK Readme</a>。
+   如果需要进一步了解 Milvus Python SDK，请参考 <a href="https://github.com/milvus-io/pymilvus/blob/0.3.0/README.md">Milvus Python SDK Readme</a>。
    </div>
    
 3. 下载 Python 示例代码。

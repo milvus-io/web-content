@@ -11,7 +11,7 @@ id: milvus_operation.md
 - [创建、删除分区](create_drop_partition_python.md)
 - [插入、删除向量](insert_delete_entity_python.md)
 - [创建、删除索引](create_drop_index_python.md)
-- [搜索向量](search_vector_python.md)
+- [搜索向量](search_entity_python.md)
 - [数据落盘](flush_python.md)
 - [数据段整理](compact_python.md)
 - [关闭客户端](close_client_python.md)

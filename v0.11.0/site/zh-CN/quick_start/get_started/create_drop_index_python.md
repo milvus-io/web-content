@@ -30,7 +30,7 @@ id: create_drop_index_python.md
 
    ```python
    # Create an index.
-   >>> milvus.create_index('test01', "Vec", ivf_param)
+   >>> client.create_index('test01', "Vec", ivf_param)
    ```
 
 ## 删除索引
@@ -38,7 +38,7 @@ id: create_drop_index_python.md
 删除索引后，向量字段再次使用默认索引类型 FLAT。
 
 ```python
->>> milvus.drop_index('test01', "Vec")
+>>> client.drop_index('test01', "Vec")
 ```
 
 ## 常见问题
