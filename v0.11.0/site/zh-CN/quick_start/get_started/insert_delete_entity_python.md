@@ -1,5 +1,5 @@
 ---
-id: insert_delete_vector_python.md
+id: insert_delete_entity_python.md
 ---
 
 
@@ -7,13 +7,13 @@ id: insert_delete_vector_python.md
 
 你可以在集合或集合的分区中进行向量操作，本页提供以下内容：
 
-- [在集合中插入向量](#insert-vector-to-collection)
-- [在分区中插入向量](#insert-vector-to-partition)
-- [通过 ID 删除向量](#delete-vector)
+- [在集合中插入向量](#insert-entity-to-collection)
+- [在分区中插入向量](#insert-entity-to-partition)
+- [通过 ID 删除向量](#delete-entity)
 
 
 ## 在集合中插入向量
-<a name="insert-vector-to-collection"></a>
+<a name="insert-entity-to-collection"></a>
 
 1. 随机生成 20 个 256 维的向量：
 
@@ -38,14 +38,14 @@ id: insert_delete_vector_python.md
    ```
 
 ## 在分区中插入向量
-<a name="insert-vector-to-partition"></a>
+<a name="insert-entity-to-partition"></a>
 
 ```python
 >>> milvus.insert('test01', vectors, partition_tag="tag01")
 ```
 
 ## 通过 ID 删除向量
-<a name="delete-vector"></a>
+<a name="delete-entity"></a>
 
 假设你的集合中存在以下向量 ID：
 

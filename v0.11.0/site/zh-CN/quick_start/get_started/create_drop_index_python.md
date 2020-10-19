@@ -8,17 +8,17 @@ id: create_drop_index_python.md
 
 ## 创建索引
 
-目前，一个集合只支持一种索引类型，切换索引类型会自动删除旧的索引文件。在创建其它索引前，FLAT 作为集合的默认索引类型。
+目前，一个集合的每个字段只支持一种索引类型，切换索引类型会自动删除旧的索引文件。在创建其它索引前，向量字段以 FLAT 作为集合的默认索引类型。
 
 <div class="alert note">
-<code>create_index()</code> 会指定该集合的索引类型，并同步为之前插入的数据建立索引，后续插入的数据在大小达到 <code>segment_row_limit</code> 时，索引会在后台自动建立。在实际生产环境中，如果是流式数据，建议在插入向量之前先创建索引，以便后续系统自动建立；如果是静态数据，建议导入所有数据后再一次性创建索引。更多索引用法请参考 <a href="https://github.com/milvus-io/pymilvus/tree/master/examples/indexes">索引示例程序</a>。
+<code>create_index()</code> 会指定该集合的索引类型，并同步为之前插入的数据建立索引，后续插入的数据在大小达到 <code>segment_row_limit</code> 时，索引会在后台自动建立。在实际生产环境中，如果是流式数据，建议在插入向量之前先创建索引，以便后续系统自动建立；如果是静态数据，建议导入所有数据后再一次性创建索引。更多索引用法请参考 <a href="https://github.com/milvus-io/pymilvus/blob/0.3.0/examples/example_index.py">索引示例程序</a>。
 </div>
 
-1. 准备创建索引所需参数（以 IVF_FLAT 为例）。索引参数是一个 JSON 字符串，在 Python SDK 中以字典来表示。
+1. 准备创建索引所需参数（以向量字段创建索引 IVF_FLAT 为例）。索引参数是一个 JSON 字符串，在 Python SDK 中以字典来表示。
 
    ```python
    # Prepare index param.
-   >>> ivf_param = {'nlist': 16384}
+   >>> ivf_param = {"index_type": "IVF_FLAT", "metric_type": "L2", "params": {"nlist": 4096}}
    ```
 
    <div class="alert note">
@@ -30,15 +30,15 @@ id: create_drop_index_python.md
 
    ```python
    # Create an index.
-   >>> milvus.create_index('test01', IndexType.IVF_FLAT, ivf_param)
+   >>> milvus.create_index('test01', "Vec", ivf_param)
    ```
 
 ## 删除索引
 
-删除索引后，集合再次使用默认索引类型 FLAT。
+删除索引后，向量字段再次使用默认索引类型 FLAT。
 
 ```python
->>> milvus.drop_index('test01')
+>>> milvus.drop_index('test01', "Vec")
 ```
 
 ## 常见问题
