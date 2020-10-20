@@ -79,26 +79,25 @@ You can use scalar field filtering in an embedding search.
 
 1. Upgrades oatpp.
 
-Upgrades the third-party dependency **oatpp** to v1.1.0, a more stable version. 
+  - Upgrades the third-party dependency **oatpp** to v1.1.0, a more stable version. 
 
 2. Rewrites SQLite-related codes.
 
-Removes the third-party dependency **sqlite_orm**. 
+  - Removes the third-party dependency **sqlite_orm**. 
 
 3. Reorganizes the WAL directory.
 
-As of this release, the WAL directory is organized by collection name. 
+  - As of this release, the WAL directory is organized by collection name. 
 
 4. Metadata Snapshot
 
-Supports Metadata-snapshot-based embedding search. 
+  - Supports Metadata-snapshot-based embedding search. 
 
-When an insert or delete operation completes, Milvus creates a versioned Metadata snapshot and stores it in the memory so that an incoming search operation can use the corresponding Metadata snapshot. 
-
+  - When an insert or delete operation completes, Milvus creates a versioned Metadata snapshot and stores it in the memory so that an incoming search operation can use the corresponding Metadata snapshot. 
 
 5. Separates raw data from index. 
 
-For IVF_FLAT and HNSW, **index\_file** no longer holds raw data and uses offsets of the embeddings instead to avoid overuse of the disk.  
+  - For IVF\_FLAT and HNSW, **index\_file** no longer holds raw data and uses offsets of the embeddings instead to avoid overuse of the disk.  
 
 
 
