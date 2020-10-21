@@ -4,129 +4,87 @@ id: product_faq.md
 
 # 产品问题
 
-
-<!-- TOC -->
-
-- [Milvus 会收费吗？](#Milvus-会收费吗)
-- [Milvus 支持非 x86 平台吗？](#Milvus-支持非-x86-平台吗)
-- [Milvus 支持对向量的插入、删除、更改和查询操作吗？](#Milvus-支持对向量的插入删除更改和查询操作吗)
-- [Milvus 数据存储在哪里？](#Milvus-数据存储在哪里)
-- [为什么我在 SQLite / MySQL 找不到向量数据？](#为什么我在-SQLite--MySQL-找不到向量数据)
-- [Milvus 的元数据存储可以使用 SQL Server 或者 PostgreSQL 吗？](#Milvus-的元数据存储可以使用-SQL-Server-或者-PostgreSQL-吗)
-- [Milvus 的 Python SDK 有连接池吗？](#Milvus-的-Python-SDK-有连接池吗)
-- [Milvus 是否支持 “边插入边查询”？](#Milvus-是否支持-边插入边查询)
-- [Milvus 是否有可视化管理工具？](#Milvus-是否有可视化管理工具)
-- [Milvus 有没有数据导出的功能？](#Milvus-有没有数据导出的功能)
-- [为什么我通过 `get_entity_by_id` 获取的向量精度损失了？](#为什么我通过-get_entity_by_id-获取的向量精度损失了)
-- [向 Milvus 中导入数据时，应该自己指定 Entity ID 还是由 Milvus 自动生成 Entity ID？](#向-Milvus-中导入数据时应该自己指定-Entity-ID-还是由-Milvus-自动生成-Entity-ID)
-- [Milvus 可以插入重复 ID 的向量吗？](#Milvus-可以插入重复-ID-的向量吗)
-- [Milvus 中自定义 ID 有没有长度限制？](#Milvus-中自定义-ID-有没有长度限制)
-- [Milvus 中单次插入数据有上限吗？](#Milvus-中单次插入数据有上限吗)
-- [为什么向量距离计算方式是内积时，搜索出来的 `top1` 不是目标向量本身？](#为什么向量距离计算方式是内积时搜索出来的-top1-不是目标向量本身)
-- [对集合分区的查询是否会受到集合大小的影响，尤其在集合数据量高达一亿数据量时？](#对集合分区的查询是否会受到集合大小的影响尤其在集合数据量高达一亿数据量时)
-- [如果只是搜索集合中的部分分区，整个集合的数据会全部加载到内存吗？](#如果只是搜索集合中的部分分区整个集合的数据会全部加载到内存吗)
-- [对各个数据段的查询是并行处理的吗？](#对各个数据段的查询是并行处理的吗)
-- [Milvus 中如何选择向量索引的类型？](#Milvus-中如何选择向量索引的类型)
-- [Milvus 可以在同一个集合中的不同分区上建立不同索引吗？](#Milvus-可以在同一个集合中的不同分区上建立不同索引吗)
-- [Milvus 中支持新增向量后再建索引吗？](#Milvus-中支持新增向量后再建索引吗)
-- [索引 IVF\_SQ8 和 IVF\_SQ8H 在召回率上有区别吗?](#索引-IVF\_SQ8-和-IVF\_SQ8H-在召回率上有区别吗)
-- [Milvus 中 FLAT 索引和 IVF_FLAT 索引的原理比较？](#Milvus-中-FLAT-索引和-IVF_FLAT-索引的原理比较)
-- [创建索引立即查询，为什么内存会突然增长？](#创建索引立即查询为什么内存会突然增长)
-- [建立集合后，`segment_row_limit` 和 `metric_type` 还支持修改吗？](#建立集合后segment_row_limit-和-metric_type-还支持修改吗)
-- [向量插入后自动落盘间隔时间是多少？](#向量插入后自动落盘间隔时间是多少)
-- [如果设置了 `preload_collection`，必须是等集合全部加载到内存，服务才能访问吗？](#如果设置了-preload_collection必须是等集合全部加载到内存服务才能访问吗)
-- [Milvus 的数据落盘逻辑是怎样的？](#Milvus-的数据落盘逻辑是怎样的)
-- [什么是归一化？Milvus 中为什么有时候需要归一化？](#什么是归一化Milvus-中为什么有时候需要归一化)
-- [为什么欧氏距离和内积在计算向量相似度时的结果不一致？](#为什么欧氏距离和内积在计算向量相似度时的结果不一致)
-- [Milvus 对集合和分区的总数有限制吗？](#Milvus-对集合和分区的总数有限制吗)
-- [为什么搜索 `topk` 向量，结果不到 k 条向量？](#为什么搜索-topk-向量结果不到-k-条向量)
-- [仍有问题没有得到解答？](#仍有问题没有得到解答)
-
-
-
-<!-- /TOC -->
-
-#### Milvus 会收费吗？
+<div class="faq-header" id="1">Milvus 会收费吗？</div>
 
 Milvus 会坚持开源路线，现有的版本都不会收费。
 
 项目开源，请遵循 [Apache 2.0 协议](http://www.apache.org/licenses/LICENSE-2.0) 使用。
 
-#### Milvus 支持非 x86 平台吗？
+<div class="faq-header" id="2">Milvus 支持非 x86 平台吗？</div>
 
 目前不支持。
 
-#### Milvus 支持对向量的插入、删除、更改和查询操作吗？
+<div class="faq-header" id="3">Milvus 支持对向量的插入、删除、更改和查询操作吗？</div>
 
 支持。其中，对向量的修改可以通过先删除再插入来实现。
 
-#### Milvus 数据存储在哪里？
+<div class="faq-header" id="4">Milvus 数据存储在哪里？</div>
 
 Milvus 在启动时会将容器内的 **/var/lib/milvus/db** 目录映射到本地磁盘的相应目录，比如 **/home/$USER/milvus/db**。所有导入数据都存储在该目录中。
 
 元数据可以存储在 MySQL 或 SQLite 上。详见 [使用 MySQL 管理元数据](data_manage.md)。
 
 
-#### 为什么我在 SQLite / MySQL 找不到向量数据？
+<div class="faq-header" id="5">为什么我在 SQLite / MySQL 找不到向量数据？</div>
 
 SQLite / MySQL 只是存放原始向量数据的元数据。向量和索引直接以文件的形式存在磁盘上，不存放在 SQLite 或 MySQL里。详见 [存储相关概念](storage_concept.md)。
 
-#### Milvus 的元数据存储可以使用 SQL Server 或者 PostgreSQL 吗？
+<div class="faq-header" id="6">Milvus 的元数据存储可以使用 SQL Server 或者 PostgreSQL 吗？</div>
 
 不可以，目前仅支持 SQLite 和 MySQL。
 
-#### Milvus 的 Python SDK 有连接池吗？
+<div class="faq-header" id="7">Milvus 的 Python SDK 有连接池吗？</div>
 
 Milvus v0.9.0 及更高版本对应的 Python SDK 有连接池。连接池的默认连接数量没有上限。
 
-#### Milvus 是否支持 “边插入边查询” ？
+<div class="faq-header" id="8">Milvus 是否支持 “边插入边查询” ？</div>
 
 支持。
 
-#### Milvus 是否有可视化管理工具？
+<div class="faq-header" id="9">Milvus 是否有可视化管理工具？</div>
 
 从 Milvus v0.7.0 开始有 [Milvus Enterprise Manager](https://zilliz.com/products/em) 提供图形管理功能。
 
-#### Milvus 有没有数据导出的功能？
+<div class="faq-header" id="10">Milvus 有没有数据导出的功能？</div>
 
 目前没有专门的工具实现该功能。你可以通过 `get_entity_by_id` 得到指定 ID 对应的向量。
 
 
-#### 为什么我通过 `get_entity_by_id` 获取的向量精度损失了？
+<div class="faq-header" id="11">为什么我通过 `get_entity_by_id` 获取的向量精度损失了？</div>
 
 Milvus 将向量的每个维度以单精度（精确到小数点后 7 位）存储和计算。所以如果原始数据为双精度（精确到小数点后 16 位），经过 Milvus 的处理后就会出现精度损失。
 
-#### 向 Milvus 中导入数据时，应该自己指定 Entity ID 还是由 Milvus 自动生成 Entity ID？
+<div class="faq-header" id="12">向 Milvus 中导入数据时，应该自己指定 Entity ID 还是由 Milvus 自动生成 Entity ID？</div>
 
 两种方法均可。但是，在一个集合内的向量必须全部使用用户指定的 Entity ID 或者全部使用自动生成的 Entity ID。
 
 
-#### Milvus 可以插入重复 ID 的向量吗？
+<div class="faq-header" id="13">Milvus 可以插入重复 ID 的向量吗？</div>
 
 可以，这样在 Milvus 中会存在相同 ID 的多条数据。
 
-#### Milvus 中自定义 ID 有没有长度限制？
+<div class="faq-header" id="14">Milvus 中自定义 ID 有没有长度限制？</div>
 
 ID 类型是非负的 64 位整型。
 
-#### Milvus 中单次插入数据有上限吗？
+<div class="faq-header" id="15">Milvus 中单次插入数据有上限吗？</div>
 
 单次插入数据不能超过 256 MB。
 
-#### 为什么向量距离计算方式是内积时，搜索出来的 `top1` 不是目标向量本身？
+<div class="faq-header" id="16">为什么向量距离计算方式是内积时，搜索出来的 `top1` 不是目标向量本身？</div>
 
 向量距离计算方式用内积时，如果向量未归一化，会出现这样的情况。
 
-#### 对集合分区的查询是否会受到集合大小的影响，尤其在集合数据量高达一亿数据量时？
+<div class="faq-header" id="17">对集合分区的查询是否会受到集合大小的影响，尤其在集合数据量高达一亿数据量时？</div>
 
 不会。如果你在搜索时指定了分区，Milvus 只会在相应分区进行搜索。
 
-#### 如果只是搜索集合中的部分分区，整个集合的数据会全部加载到内存吗？
+<div class="faq-header" id="18">如果只是搜索集合中的部分分区，整个集合的数据会全部加载到内存吗？</div>
 
 不会，只加载指定的分区里的数据。
 
 
-#### 对各个数据段的检索是并行处理的吗？
+<div class="faq-header" id="19">对各个数据段的检索是并行处理的吗？</div>
 
 一般而言，Milvus 对单个数据段内的查询是并行的，多个数据段的处理根据发行版本略有不同。
 
@@ -138,25 +96,25 @@ ID 类型是非负的 64 位整型。
 
 可参阅文章：[Milvus 开源向量搜索引擎 ANNS](https://zhuanlan.zhihu.com/p/110332250)。
 
-#### Milvus 中如何选择向量索引的类型？
+<div class="faq-header" id="20">Milvus 中如何选择向量索引的类型？</div>
 
 索引需要根据具体场景和需求去选择。详见 [如何选择索引类型](https://milvus.io/cn/blogs/2019-12-03-select-index.md)。
 
-#### Milvus 可以在同一个集合中的不同分区上建立不同索引吗？
+<div class="faq-header" id="21">Milvus 可以在同一个集合中的不同分区上建立不同索引吗？</div>
 
 不可以。同一个集合在某一刻只能有一种索引。
 
 
-#### Milvus 中支持新增向量后再建索引吗？
+<div class="faq-header" id="22">Milvus 中支持新增向量后再建索引吗？</div>
 
 支持。Milvus 中数据是分文件存储的，后续新增向量会存在新的数据文件中。该文件达到一定量后会自动触发建立索引，生成一个新的索引文件，不会影响之前已经建立过的索引。
 
 
-#### 索引 IVF\_SQ8 和 IVF\_SQ8H 在召回率上有区别吗?
+<div class="faq-header" id="23">索引 IVF\_SQ8 和 IVF\_SQ8H 在召回率上有区别吗?</div>
 
 对于相同的数据集，IVF\_SQ8 和 IVF\_SQ8H 的召回率一致。
 
-#### Milvus 中 FLAT 索引和 IVF_FLAT 索引的原理比较？
+<div class="faq-header" id="24">Milvus 中 FLAT 索引和 IVF_FLAT 索引的原理比较？</div>
 
 把 FLAT 和 IVF_FLAT 做比较，可以这么估算：
 
@@ -166,42 +124,42 @@ ID 类型是非负的 64 位整型。
 
 可参阅 [如何选择索引类型](https://milvus.io/cn/blogs/2019-12-03-select-index.md)。
 
-#### 创建索引立即查询，为什么内存会突然增长？
+<div class="faq-header" id="25">创建索引立即查询，为什么内存会突然增长？</div>
 
 这是因为 Milvus 在进行搜索时会将新生成的索引文件加载到内存，由于加载的索引文件和用于生成索引文件的原始向量文件总和小于 `cache.cache_size` 的上限，原始向量数据暂未被系统从内存释放。
 
-#### 向量插入后自动落盘间隔时间是多少？
+<div class="faq-header" id="26">向量插入后自动落盘间隔时间是多少？</div>
 
 1 秒。
 
-#### 如果设置了 `preload_collection`，必须是等集合全部加载到内存，服务才能访问吗？
+<div class="faq-header" id="27">如果设置了 `preload_collection`，必须是等集合全部加载到内存，服务才能访问吗？</div>
 
 是的。如果是在 **milvus.yaml** 里设置的，那在启动 Milvus 时就会加载好数据后才开始提供服务。
 
 
-#### Milvus 的数据落盘逻辑是怎样的？
+<div class="faq-header" id="28">Milvus 的数据落盘逻辑是怎样的？</div>
 
 插入时把数据写到内存，定时地把缓存里的数据落盘。如果调用 `flush` 方法，也会触发落盘的动作。
 
 详见 [存储操作 > 数据落盘](storage_operation.md#数据落盘)。
 
-#### 什么是归一化？Milvus 中为什么有时候需要归一化？
+<div class="faq-header" id="29">什么是归一化？Milvus 中为什么有时候需要归一化？</div>
 
 归一化指的是通过数学变换将向量的模长变为 1 的过程。如需使用点积计算向量相似度，则必须对向量作归一化处理。处理后点积与余弦相似度等价。
 
 可参阅文章 [向量搜索的简明数学基础](https://zhuanlan.zhihu.com/p/88117781)。
 
-#### 为什么欧氏距离和内积在计算向量相似度时的结果不一致？
+<div class="faq-header" id="30">为什么欧氏距离和内积在计算向量相似度时的结果不一致？</div>
 
 如果欧氏距离和内积返回不一致的结果，需要检查数据是否已经归一化。如果没有，请先对数据进行归一化。理论上可以证明，对于未归一化的数据，欧氏距离和内积的结果是不一致的。
 
 
-#### Milvus 对集合和分区的总数有限制吗？
+<div class="faq-header" id="31">Milvus 对集合和分区的总数有限制吗？</div>
 
 有。二者之和不能超过 4,096。
 
 
-#### 为什么搜索 `topk` 向量，结果不到 k 条向量？
+<div class="faq-header" id="32">为什么搜索 `topk` 向量，结果不到 k 条向量？</div>
 
 在 Milvus 支持的索引类型中，IVF_FLAT 和 IVF_SQ8 是基于 k-means 空间划分的分单元搜索算法。空间被分为 `nlist` 个单元，导入的向量被分配存储在基于 `nlist` 划分的文件结构中。搜索发生时，只搜索最近似的 `nprobe` 个单元。
 
@@ -215,7 +173,7 @@ ID 类型是非负的 64 位整型。
 
 
 
-#### 仍有问题没有得到解答？
+<div class="faq-header" id="33">仍有问题没有得到解答？</div>
 
 如果仍有其他问题，你可以：
 
