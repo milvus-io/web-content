@@ -8,36 +8,56 @@ Milvus 支持在集合或分区中查询向量。
 
 ## 在集合中查询向量
 
-1. 创建搜索参数。搜索参数是一个 JSON 字符串，在 Python SDK 中以字典来表示。
+1. 创建搜索参数 DSL。搜索参数 DSL 是一个 JSON 字符串，在 Python SDK 中以字典来表示。
 
    ```python
-   >>> search_param = {'nprobe': 16}
-   ```
-
-   <div class="alert note">
-   对于不同的索引类型，搜索所需参数也有区别。所有的搜索参数都<b>必须赋值</b>。详细信息请参考 <a href="index.md">Milvus 索引类型</a>。
-   </div>
-
-2. 创建随机向量作为 `query_records` 进行搜索：
-
-   ```python
-   # Create 5 vectors of 256 dimensions.
-   >>> q_records = [[random.random() for _ in range(256)] for _ in range(5)]
-   >>> milvus.search(collection_name='test01', query_records=q_records, top_k=2, params=search_param)
+   # This DSL searches for topk `entities` that are
+   # closest to vectors[:1] searched by `IVF_FLAT` index with `nprobe = 10` and `metric_type = L2`,
+   # AND field "A" in [1, 2, 5],
+   # AND field "B" greater than 1 less than 100
+   >>> dsl = {
+   ...     "bool": {
+   ...         "must":[
+   ...             {
+   ...                 "term": {"A": [1, 2, 5]}
+   ...             },
+   ...             {
+   ...                 "range": {"B": {"GT": 1, "LT": 100}}
+   ...             },
+   ...             {
+   ...                 "vector": {
+   ...                    "Vec": {"topk": 10, "query": vectors[:1], "metric_type": "L2", "params": {"nprobe": 10}}
+   ...                 }
+   ...             }
+   ...         ]
+   ...     }
+   ... }
    ```
 
    <div class="alert note">
    <ul>
-   <li><code>top_k</code> 指的是向量空间中距离目标向量最近的 k 个向量。</li><li><code>top_k</code> 的范围为：[1, 16384]。</li>
+   <li><code>top_k</code> 指的是向量空间中距离目标向量最近的 k 个向量。</li>
+   <li><code>top_k</code> 的范围为：[1, 16384]。</li>
+   <li>对于不同的索引类型，搜索所需参数也有区别。所有的搜索参数都<b>必须赋值</b>。详细信息请参考 <a href="index.md">Milvus 索引类型</a>。</li>
    </ul>
    </div>
+
+2. 进行搜索：
+
+   ```python
+   >>> client.search('test01', dsl)
+   ```
+
+   你也可以指定搜索结果中返回指定列的值，此处我们获取字段 `B` 的值：
+
+   ```python
+   >>> client.search('test01', dsl, fields=["B"])
+   ```
 
 ## 在分区中查询向量
 
 ```python
-# Create 5 vectors of 256 dimensions.
->>> q_records = [[random.random() for _ in range(256)] for _ in range(5)]
->>> milvus.search(collection_name='test01', query_records=q_records, top_k=1, partition_tags=['tag01'], params=search_param)
+>>> client.search('test01', dsl, partition_tags=['tag01'])
 ```
 
 <div class="alert note">

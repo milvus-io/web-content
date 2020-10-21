@@ -16,14 +16,14 @@ id: connect_milvus_python.md
 
    ```python
    # Import pymilvus.
-   >>> from milvus import Milvus, IndexType, MetricType, Status
+   >>> from milvus import DataType
    ```
 
 2. 使用以下任意一种方法连接 Milvus 服务端：
 
    ```python
    # Connect to the Milvus server.
-   >>> milvus = Milvus(host='localhost', port='19530')
+   >>> client = Milvus(host='localhost', port='19530')
    ```
 
    <div class="alert note">
@@ -31,7 +31,7 @@ id: connect_milvus_python.md
    </div>
 
    ```python
-   >>> milvus = Milvus(uri='tcp://localhost:19530')
+   >>> client = Milvus(uri='tcp://localhost:19530')
    ```
 
 ## 常见问题

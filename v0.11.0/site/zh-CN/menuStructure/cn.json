@@ -175,7 +175,7 @@
       "order": 3
     },
     {
-      "id": "insert_delete_vector_python.md",
+      "id": "insert_delete_entity_python.md",
       "title": "插入、删除向量",
       "label1": "quick_start",
       "label2": "get_started",
@@ -191,7 +191,7 @@
       "order": 5
     },
     {
-      "id": "search_vector_python.md",
+      "id": "search_entity_python.md",
       "title": "查询向量",
       "label1": "quick_start",
       "label2": "get_started",

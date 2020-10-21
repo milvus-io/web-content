@@ -37,10 +37,10 @@ Milvus maps different embedding types with different index types. Click the tab 
 | Index type | Indexing with CPU | Indexing with GPU |  Search with CPU     | Search with GPU |
 | ---------- | ----------------- | ----------------- | -------------------- | --------------- |
 | FLAT     | N/A                | N/A                | ✔️                  | ✔️              |
-| IVF_FLAT | ✔️                | ✔️                 | ✔️                  | ✔️              |
-| IVF_SQ8  | ✔️                | ✔️                 | ✔️                  | ✔️              |
-| IVF_SQ8H | ✔️                | ✔️                 | ✔️                  | ✔️              |
-| IVF_PQ   | ✔️                | ✔️                 | ✔️                  | ✔️              |
+| IVF\_FLAT | ✔️                | ✔️                 | ✔️                  | ✔️              |
+| IVF\_SQ8  | ✔️                | ✔️                 | ✔️                  | ✔️              |
+| IVF\_SQ8H | ✔️                | ✔️                 | ✔️                  | ✔️              |
+| IVF\_PQ   | ✔️                | ✔️                 | ✔️                  | ✔️              |
 | RNSG     | ✔️                | ❌                 | ✔️                  | ❌              |
 | HNSW     | ✔️                | ❌                 | ✔️                  | ❌              |
 | ANNOY    | ✔️                | ❌                 | ✔️                  | ❌              |
@@ -60,8 +60,8 @@ Milvus maps different embedding types with different index types. Click the tab 
 
 | Index type | Indexing with CPU | Indexing with GPU | Search with CPU    | Search with GPU |
 | ---------- | ----------------- | ----------------  | ------------------ | --------------- |
-| FLAT       | N/A               | N/A               | ✔️                 | ❌             |
-| IVF_FLAT   | ✔️                | ❌               | ✔️                 | ❌             |
+| BIN\_FLAT       | N/A               | N/A               | ✔️                 | ❌             |
+| BIN\_IVF_FLAT   | ✔️                | ❌               | ✔️                 | ❌             |
 
 
 </div>

@@ -40,9 +40,9 @@ Milvus maps different embedding types with different index types. Click the tab 
 | Index type | Indexing with CPU | Indexing with GPU | Search with CPU          | Search with GPU |
 | ---------- | ----------------- | ----------------- | ------------------------ | --------------- |
 | FLAT       | N/A               | N/A               | ✔️                      | ❌              |
-| IVF_FLAT   | ✔️                | ❌               | ✔️                      | ❌              |
-| IVF_SQ8    | ✔️                | ❌               | ✔️                      | ❌              |
-| IVF_PQ     | ✔️                | ❌               | ✔️                      | ❌              |
+| IVF\_FLAT   | ✔️                | ❌               | ✔️                      | ❌              |
+| IV\_SQ8    | ✔️                | ❌               | ✔️                      | ❌              |
+| IVF\_PQ     | ✔️                | ❌               | ✔️                      | ❌              |
 | RNSG       | ✔️                | ❌               | ✔️                      | ❌              |
 | HNSW       | ✔️                | ❌               | ✔️                      | ❌              |
 | ANNOY      | ✔️                | ❌               | ✔️                      | ❌              |
@@ -53,8 +53,8 @@ Milvus maps different embedding types with different index types. Click the tab 
 
 | Index type | Indexing with CPU | Indexing with GPU | Search with CPU       | Search with GPU |
 | ---------- | ----------------------- | ----------------- | --------------------- | --------------- |
-| BIN_FLAT       | N/A                     |  N/A              | ✔️                    | ❌              |
-| BIN_IVF_FLAT   | ✔️                      | ❌               | ✔️                    | ❌              |
+| BIN\_FLAT       | N/A                     |  N/A              | ✔️                    | ❌              |
+| BIN\_IVF\_FLAT   | ✔️                      | ❌               | ✔️                    | ❌              |
 
 </div>
 

@@ -12,11 +12,11 @@ id: create_drop_partition_python.md
 
 ```python
 # Create a partition.
->>> milvus.create_partition('test01', 'tag01')
+>>> client.create_partition('test01', 'tag01')
 ```
 
 ## 删除分区
 
 ```python
->>> milvus.drop_partition(collection_name='test01', partition_tag='tag01')
+>>> client.drop_partition(collection_name='test01', partition_tag='tag01')
 ```

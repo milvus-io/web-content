@@ -122,7 +122,7 @@ You receive this warning if the graphics memory required for a request is larger
 
 <div class="faq-header" id="23">Why does Milvus return `database is locked`?</div>
 
-If you use SQLite to manage Metadata, you receive this error message when write requests occur frequently. We recommend using MySQL for Metadata management. See [Manage Metadata with MySQL](data_manage.md).
+If you use SQLite to manage Metadata, you receive this error message when write requests occur frequently. We recommend using MySQL to manage Metadata. See [Manage Metadata with MySQL](data_manage.md).
 
 <div class="faq-header" id="24">Still have questions?</div>
 
