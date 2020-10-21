@@ -16,7 +16,7 @@ id: connect_milvus_python.md
 
    ```python
    # Import pymilvus.
-   >>> from milvus import DataType
+   >>> from milvus import Milvus, DataType
    ```
 
 2. 使用以下任意一种方法连接 Milvus 服务端：
