@@ -61,6 +61,11 @@ Milvus 基于不同的距离计算方式比较向量间的距离。选择合适�
 </div>
 
 
+<div class="filter">
+<a href="#floating">浮点型向量</a> <a href="#binary">二值型向量</a>
+</div>
+
+<div class="filter-floating" markdown="block">
 
 ### 欧氏距离（L2）
 
@@ -96,6 +101,10 @@ Milvus 基于不同的距离计算方式比较向量间的距离。选择合适�
 两者之间的关系为：
 
 ![normalization](../../../assets/normalization_formula.png)
+
+</div>
+
+<div class="filter-binary" markdown="block">
 
 ### 杰卡德距离
 
@@ -165,7 +174,7 @@ Milvus 基于不同的距离计算方式比较向量间的距离。选择合适�
 - N<sub>B</sub> 表示分子式 B 的化学指纹中二进制位的数量。
 - N<sub>AB</sub> 表示分子式 A 和 B 的化学指纹中共有的二进制位的数量。
 
-
+</div>
 
 ## 常见问题
 

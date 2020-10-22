@@ -59,7 +59,12 @@ The following table shows how these widely used distance metrics fit with variou
 
 </div>
 
+<div class="filter">
+<a href="#floating">Floating point embeddings</a> <a href="#binary">Binary embeddings</a>
 
+</div>
+
+<div class="filter-floating table-wrapper" markdown="block">
 
 ### Euclidean distance (L2)
 
@@ -95,6 +100,10 @@ Suppose X' is normalized from embedding X:
 The correlation between the two embeddings is as follows: 
 
 ![normalization](../../../assets/normalization_formula.png)
+
+</div>
+
+<div class="filter-binary table-wrapper" markdown="block">
 
 ### Jaccard distance
 
@@ -136,7 +145,7 @@ Superstructure similarity can be measured by:
 
 ![superstructure](../../../assets/superstructure.png)
 
-Where
+Where:
 
 - B is the superstructure of A
 - N<sub>A</sub> specifies the number of bits in the fingerprint of molecular A.
@@ -151,13 +160,14 @@ Substructure similarity can be measured by:
 
 ![substructure](../../../assets/substructure.png)
 
-Where
+Where:
 
 - B is the substructure of A
 - N<sub>A</sub> specifies the number of bits in the fingerprint of molecular A.
 - N<sub>B</sub> specifies the number of bits in the fingerprint of molecular B.
 - N<sub>AB</sub> specifies the number of shared bits in the fingerprint of molecular A and B.
 
+</div>
 
 ## FAQ
 
