@@ -21,12 +21,12 @@ id: operational_faq.md
 Milvus 还支持源码编译，该方法仅支持 Linux 系统。详见 [从源代码编译 Milvus](https://github.com/milvus-io/milvus/blob/master/INSTALL.md)。
 
 
-<div class="faq-header" id="3">为什么 Milvus 返回 `config check error` 的错误？</div>
+<div class="faq-header" id="3">为什么 Milvus 返回 <code>config check error</code> 的错误？</div>
 
-Milvus 和服务端配置文件的版本不对应。很可能是因为你没有下载正确版本的**milvus.yaml**配置文件，详见 [下载配置文件](milvus_docker-cpu.md#下载配置文件)。
+Milvus 和服务端配置文件的版本不对应。很可能是因为你没有下载正确版本的**milvus.yaml** 配置文件，详见 [下载配置文件](milvus_docker-cpu.md#下载配置文件)。
 
 
-<div class="faq-header" id="4">为什么在导入数据时 Milvus 显示 `no space left on device` 的错误？</div>
+<div class="faq-header" id="4">为什么在导入数据时 Milvus 显示 <code>no space left on device</code> 的错误？</div>
 
 可能是没有为导入数据预留足够的磁盘空间。
 
@@ -51,7 +51,7 @@ Docker 镜像内部的日志文件默认使用 UTC 时间。如果宿主机未�
 
 目前，Milvus 支持的指令集有：SSE42、AVX、AVX2、AVX512。你的 CPU 必须支持其中任意一个指令集才能保证 Milvus 正常工作。
 
-<div class="faq-header" id="10">为什么 Milvus 在启动时返回 `Illegal instruction`？</div>
+<div class="faq-header" id="10">为什么 Milvus 在启动时返回 <code>Illegal instruction</code>？</div>
 
 如果你的 CPU 不支持 SSE42、AVX、AVX2、AVX512 其中任何一个指令集，则 Milvus 无法正常启动。可以通过 `cat /proc/cpuinfo` 查看 CPU 支持的指令集。
 
@@ -112,7 +112,7 @@ Milvus 是以 Docker 镜像形式发行的，是可以离线部署的：
 
 目前暂不支持。
 
-<div class="faq-header" id="22">出现 `database is locked` 的报错怎么解决？</div>
+<div class="faq-header" id="22">出现 <code>database is locked</code> 的报错怎么解决？</div>
 
 如果元数据管理用的是 SQLite，在有数据频繁写入的情况下会出现该错误。建议将 SQLite 更换为 MySQL。如何更换请参考文档 [使用 MySQL 管理元数据](data_manage.md)。
 

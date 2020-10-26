@@ -1,5 +1,5 @@
 ---
-id: insert_delete_vector_python.md
+id: insert_delete_entity_python.md
 ---
 
 
@@ -7,26 +7,30 @@ id: insert_delete_vector_python.md
 
 You can perform vector operations on collections or partitions. This article talks about the following topics:
 
-- [Insert vectors to a collection](#insert-vector-to-collection)
-- [Insert vectors to a partition](#insert-vector-to-partition)
-- [Delete vectors by ID](#delete-vector)
+- [Insert vectors to a collection](#insert-entity-to-collection)
+- [Insert vectors to a partition](#insert-entity-to-partition)
+- [Delete vectors by ID](#delete-entity)
 
-## Insert vectors to a collection
-<a name="insert-vector-to-collection"></a>
+## Insert entities to a collection
+<a name="insert-entity-to-collection"></a>
 
-1. Randomly generate 20 256-dimensional vectors:
+1. Generate 1,000 random vectors.
 
    ```python
-   >>> import random
-   # Generate 20 vectors of 256 dimensions.
-   >>> vectors = [[random.random() for _ in range(256)] for _ in range(20)]
+   >>> list_of_int = [random.randint(0, 255) for _ in range(10000)]
+   >>> vectors = [[random.random() for _ in range(128)] for _ in range(10000)]
    ```
 
-2. Insert a list of vectors. If you do not specify vector IDs, Milvus automatically assigns IDs to the vectors.
+2. Insert a list of vectors. If you set `auto_id` to `True`, Milvus automatically assigns IDs to the vectors.
 
    ```python
-   # Insert vectors.
-   >>> milvus.insert(collection_name='test01', records=vectors)
+   >>> hybrid_entities = [
+           {"name": "A", "values": list_of_int, "type": DataType.INT32},
+           {"name": "B", "values": list_of_int, "type": DataType.INT32},
+           {"name": "C", "values": list_of_int, "type": DataType.INT64},
+           {"name": "Vec", "values": vectors, "type":DataType.FLOAT_VECTOR}
+       ]
+   >>> client.insert('test01', hybrid_entities)
    ```
 
    You can also specify the vector IDs:
@@ -36,15 +40,15 @@ You can perform vector operations on collections or partitions. This article tal
    >>> milvus.insert(collection_name='test01', records=vectors, ids=vector_ids)
    ```
 
-## Insert vectors to a partition
-<a name="insert-vector-to-partition"></a>
+## Insert entities to a partition
+<a name="insert-entity-to-partition"></a>
 
 ```python
->>> milvus.insert('test01', vectors, partition_tag="tag01")
+>>> client.insert('test01', vectors, partition_tag="tag01")
 ```
 
-## Delete vectors by ID
-<a name="delete-vector"></a>
+## Delete entities by ID
+<a name="delete-entity"></a>
 
 Suppose your collection contains the following vector IDs:
 
@@ -52,10 +56,10 @@ Suppose your collection contains the following vector IDs:
 >>> ids = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
 ```
 
-You can delete the vectors with the following command:
+Run these following command to delete specified embedding vectors:
 
 ```python
->>> milvus.delete_entity_by_id(collection_name='test01', id_array=ids)
+>>> client.delete_entity_by_id('test01', ids)
 ```
 <div class="alert note">
 After calling <code>delete</code>, you can call <code>flush</code> again to ensure that the newly inserted data is visible and the deleted data is no longer recoverable.

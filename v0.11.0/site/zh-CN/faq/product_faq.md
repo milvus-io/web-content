@@ -50,7 +50,7 @@ Milvus v0.9.0 及更高版本对应的 Python SDK 有连接池。连接池的默
 目前没有专门的工具实现该功能。你可以通过 `get_entity_by_id` 得到指定 ID 对应的向量。
 
 
-<div class="faq-header" id="11">为什么我通过 `get_entity_by_id` 获取的向量精度损失了？</div>
+<div class="faq-header" id="11">为什么我通过 <code>get_entity_by_id</code> 获取的向量精度损失了？</div>
 
 Milvus 将向量的每个维度以单精度（精确到小数点后 7 位）存储和计算。所以如果原始数据为双精度（精确到小数点后 16 位），经过 Milvus 的处理后就会出现精度损失。
 
@@ -71,7 +71,7 @@ ID 类型是非负的 64 位整型。
 
 单次插入数据不能超过 256 MB。
 
-<div class="faq-header" id="16">为什么向量距离计算方式是内积时，搜索出来的 `top1` 不是目标向量本身？</div>
+<div class="faq-header" id="16">为什么向量距离计算方式是内积时，搜索出来的 <code>top1</code> 不是目标向量本身？</div>
 
 向量距离计算方式用内积时，如果向量未归一化，会出现这样的情况。
 
@@ -110,7 +110,7 @@ ID 类型是非负的 64 位整型。
 支持。Milvus 中数据是分文件存储的，后续新增向量会存在新的数据文件中。该文件达到一定量后会自动触发建立索引，生成一个新的索引文件，不会影响之前已经建立过的索引。
 
 
-<div class="faq-header" id="23">索引 IVF\_SQ8 和 IVF\_SQ8H 在召回率上有区别吗?</div>
+<div class="faq-header" id="23">索引 IVF_SQ8 和 IVF_SQ8H 在召回率上有区别吗?</div>
 
 对于相同的数据集，IVF\_SQ8 和 IVF\_SQ8H 的召回率一致。
 
@@ -132,7 +132,7 @@ ID 类型是非负的 64 位整型。
 
 1 秒。
 
-<div class="faq-header" id="27">如果设置了 `preload_collection`，必须是等集合全部加载到内存，服务才能访问吗？</div>
+<div class="faq-header" id="27">如果设置了 <code>preload_collection</code>，必须是等集合全部加载到内存，服务才能访问吗？</div>
 
 是的。如果是在 **milvus.yaml** 里设置的，那在启动 Milvus 时就会加载好数据后才开始提供服务。
 
@@ -159,7 +159,7 @@ ID 类型是非负的 64 位整型。
 有。二者之和不能超过 4,096。
 
 
-<div class="faq-header" id="32">为什么搜索 `topk` 向量，结果不到 k 条向量？</div>
+<div class="faq-header" id="32">为什么搜索 <code>topk</code> 向量，结果不到 k 条向量？</div>
 
 在 Milvus 支持的索引类型中，IVF_FLAT 和 IVF_SQ8 是基于 k-means 空间划分的分单元搜索算法。空间被分为 `nlist` 个单元，导入的向量被分配存储在基于 `nlist` 划分的文件结构中。搜索发生时，只搜索最近似的 `nprobe` 个单元。
 

@@ -1,5 +1,5 @@
 ---
-id: search_vector_python.md
+id: search_entity_python.md
 ---
 
 # Conduct a Vector Search
@@ -11,32 +11,58 @@ Milvus supports searching vectors in a collection or partition.
 1. Create search parameters. The search parameters are stored in a JSON string, which is represented by a dictionary in the Python SDK.
 
    ```python
-   >>> search_param = {'nprobe': 16}
+   # This DSL searches for topk entities that are
+   # closest to vectors[:1] searched by IVF_FLAT index with nprobe = 10 and metric_type = L2,
+   # AND field "A" in [1, 2, 5],
+   # AND field "B" greater than 1 less than 100
+   >>> dsl = {
+   ...     "bool": {
+   ...         "must":[
+   ...             {
+   ...                 "term": {"A": [1, 2, 5]}
+   ...             },
+   ...             {
+   ...                 "range": {"B": {"GT": 1, "LT": 100}}
+   ...             },
+   ...             {
+   ...                 "vector": {
+   ...                    "Vec": {"topk": 10, "query": vectors[:1], "metric_type": "L2", "params": {"nprobe": 10}}
+   ...                 }
+   ...             }
+   ...         ]
+   ...     }
+   ... }
    ```
 
    <div class="alert note">
-   Different index types requires different search parameters. You must <b>assign values</b> to all search parameters. See <a href="index.md">Vector Indexes</a> for more information. 
+   <ul>
+   <li><code>topk</code> refers to the k vectors closest to the target vector in the vector space.</li>
+   <li>The range of <code>topk</code> is [1, 16384].</li>
+   <li>Different index requires different search parameters. To conduct an embedding search, you <b>must</b> assign values to all search parameters. See <a href="index.md">Vector Indexes</a> for more information. </li>  
+   </ul>
    </div>
 
 
 
-2. Create random vectors as `query_records` to search:
+2. Conduct a similarity search:
 
    ```python
-   # Create 5 vectors of 256 dimensions.
-   >>> q_records = [[random.random() for _ in range(256)] for _ in range(5)]
-   >>> milvus.search(collection_name='test01', query_records=q_records, top_k=2, params=search_param)
+   >>> client.search('test01', dsl)
    ```
    <div class="alert note">
    <ul><li><code>top_k</code> means searching the k vectors most similar to the target vector. It is defined during the search.</li><li>The range of <code>top_k</code> is [1, 16384].</li></ul>
    </div>
 
+You can also set Milvus to return a specified field. Here, we retrieve values in the `B` field:
+
+```python
+>>> client.search('test01', dsl, fields=["B"])
+```
+
 ## Search vectors in a partition
 
 ```python
-# Create 5 vectors of 256 dimensions.
->>> q_records = [[random.random() for _ in range(256)] for _ in range(5)]
->>> milvus.search(collection_name='test01', query_records=q_records, top_k=1, partition_tags=['tag01'], params=search_param)
+>>> client.search('test01', dsl, partition_tags=['tag01'])
 ```
 
 <div class="alert note">

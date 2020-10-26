@@ -7,7 +7,7 @@ id: create_drop_collection_python.md
 This article provides Python sample codes for creating or dropping collections.
 
 <div class="alert note">
-See <a href="https://github.com/milvus-io/pymilvus/tree/master/examples">example program</a> for more detailed usage.
+See <a href="https://github.com/milvus-io/pymilvus/tree/0.3.0/examples">example program</a> for more detailed usage.
 </div>
 
 ## Create a collection
@@ -15,15 +15,29 @@ See <a href="https://github.com/milvus-io/pymilvus/tree/master/examples">example
 1. Prepare the parameters needed to create the collection:
 
    ```python
-   # Prepare collection parameters.
-   >>> param = {'collection_name':'test01', 'dimension':256, 'segment_row_limit':1024, 'metric_type':MetricType.L2}
+   >>> param = {'collection_name':'test01', 'dimension':256, 'segment_row_limit':1024, 'metric_type':MetricType.L2}       >>> collection_name = 'test01'
+   
+   # Create a collection of 4 fields, where fields A, B, and C are int type fields
+   # and Vec is a 128-dimension float vector field.
+   # The default value of segment_row_limit is 524288 if not specified.
+   # If you set auto_id to True, you have Milvus create entity IDs. 
+   >>> collection_param = {
+   ...    "fields": [
+   ...        {"name": "A", "type": DataType.INT32},
+   ...        {"name": "B", "type": DataType.INT32},
+   ...        {"name": "C", "type": DataType.INT64},
+   ...        {"name": "Vec", "type": DataType.FLOAT_VECTOR, "params": {"dim": 128}}
+   ...    ],
+   ...    "segment_row_limit": 100000,
+   ...    "auto_id": True
+   ... }
    ```
 
-2. Create a collection named `test01`, with a dimension of 256 and an index file size of 1024 MB. It uses Euclidean distance (L2) as the distance measurement method.
+2. Create a collection with a name `test01`.
 
    ```python
    # Create a collection.
-   >>> milvus.create_collection(param)
+   >>> client.create_collection('test01', collection_param)
    ```
 
 
@@ -31,7 +45,7 @@ See <a href="https://github.com/milvus-io/pymilvus/tree/master/examples">example
 
 ```python
 # Drop a collection.
->>> milvus.drop_collection(collection_name='test01')
+>>> milvus.drop_collection('test01')
 ```
 
 ## FAQ

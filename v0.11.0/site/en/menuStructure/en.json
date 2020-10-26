@@ -175,8 +175,8 @@
       "order": 3
     },
     {
-      "id": "insert_delete_vector_python.md",
-      "title": "Insert/Delete Vectors",
+      "id": "insert_delete_entity_python.md",
+      "title": "Insert/Delete Entities",
       "label1": "quick_start",
       "label2": "get_started",
       "label3": "",
@@ -191,8 +191,8 @@
       "order": 5
     },
     {
-      "id": "search_vector_python.md",
-      "title": "Conduct a vector search",
+      "id": "search_entity_python.md",
+      "title": "Conduct a similarity search",
       "label1": "quick_start",
       "label2": "get_started",
       "label3": "",

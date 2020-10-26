@@ -18,11 +18,11 @@ Users in some countries may have limited access to Docker Hub. In this case, you
 
 No. You can also build Milvus from source code in Linux. See [Build Milvus from source code](https://github.com/milvus-io/milvus/blob/master/INSTALL.md) for more information.
 
-<div class="faq-header" id="3">Why does Milvus return `config check error`?</div>
+<div class="faq-header" id="3">Why does Milvus return <code>config check error</code>?</div>
 
 The version of configuration file does not match the version your Milvus server. It is very likely you have not downloaded the right version of **milvus.yaml**, see [Download Configuration File](milvus_docker-cpu.md#Download-configuration-file)
 
-<div class="faq-header" id="4">Why do I get `no space left on device` when importing data to Milvus?</div>
+<div class="faq-header" id="4">Why do I get <code>no space left on device</code> when importing data to Milvus?</div>
 
 It is likely that you have not saved enough disk space.
 
@@ -116,11 +116,11 @@ Note: Data formats of different versions may not be compatible with each other. 
 
 No, you cannot. Milvus does not support this feature for now.
 
-<div class="faq-header" id="22">Why do I see `WARN: increase temp memory to avoid cudaMalloc, or decrease query/add size (alloc 307200000 B, highwater 0 B)` in the log file?</div>
+<div class="faq-header" id="22">Why do I see <code>WARN: increase temp memory to avoid cudaMalloc, or decrease query/add size (alloc 307200000 B, highwater 0 B)</code> in the log file?</div>
 
 You receive this warning if the graphics memory required for a request is larger than the graphics memory allocated beforehand. The warning merely denotes an insufficient graphics memory. Milvus will expand the graphics memory accordingly. 
 
-<div class="faq-header" id="23">Why does Milvus return `database is locked`?</div>
+<div class="faq-header" id="23">Why does Milvus return <code>database is locked</code>?</div>
 
 If you use SQLite to manage Metadata, you receive this error message when write requests occur frequently. We recommend using MySQL to manage Metadata. See [Manage Metadata with MySQL](data_manage.md).
 

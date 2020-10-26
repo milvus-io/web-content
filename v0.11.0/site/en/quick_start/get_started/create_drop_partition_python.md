@@ -12,11 +12,11 @@ To improve search efficiency, you can divide a collection into several partition
 
 ```python
 # Create a partition.
->>> milvus.create_partition('test01', 'tag01')
+>>> client.create_partition('test01', 'tag01')
 ```
 
 ## Drop a partition
 
 ```python
->>> milvus.drop_partition(collection_name='test01', partition_tag='tag01')
+>>> client.drop_partition(collection_name='test01', partition_tag='tag01')
 ```

@@ -49,7 +49,7 @@ As of Milvus v0.7.0, we have provided [Milvus Enterprise Manager](https://zilliz
 
 We do not have a dedicated tool as yet. You can call `get_entity_by_id` to get the intended vectors by ID.
 
-<div class="faq-header" id="11">Why do the retrieved vectors suffer precision loss after the `get_entity_by_id` method call?</div>
+<div class="faq-header" id="11">Why do the retrieved vectors suffer precision loss after the <code>get_entity_by_id</code> method call?</div>
 
 Milvus stores and processes each dimension of a vector in single-precision floating-point format (accurate to seven decimal places). Therefore, if the original format of each dimension is double-precision floating-point (accurate to sixteen decimal places), you will see a precision loss.
 
@@ -69,7 +69,7 @@ Entity IDs must be non-negative 64-bit integers.
 
 Vectors inserted each time must not exceed 256 MB.
 
-<div class="faq-header" id="16">Why is the `top1` result of a vector search not the search vector itself, if the metric type is inner product?</div>
+<div class="faq-header" id="16">Why is the top 1 result of a vector search not the search vector itself, if the metric type is inner product?</div>
 
 This occurs if you have not normalized the vectors when using inner product as the distance metric.
 
@@ -108,7 +108,7 @@ No. Although a collection can hold various types of data, the same collection ca
 
 Yes. When the inserted vectors grow to a specified volume, Milvus creates a new segment and starts to create an index file for it at the same time. The building of the new index file does not affect the existing index files.
 
-<div class="faq-header" id="24">Does IVF\_SQ8 differ from IVF\_SQ8H in terms of recall rate?</div>
+<div class="faq-header" id="24">Does IVF_SQ8 differ from IVF_SQ8H in terms of recall rate?</div>
 
 No, they have the same recall rate for the same dataset.
 
@@ -120,7 +120,7 @@ Therefore, when the total number of vectors approximately equals `nlist`, IVF\_F
 
 See [How to Choose an Index in Milvus](https://medium.com/unstructured-data-service/how-to-choose-an-index-in-milvus-4f3d15259212) for more information.
 
-<div class="faq-header" id="26">Why do I see a surge in memory usage when conducting a vector search immediately after an index is created?</div>
+<div class="faq-header" id="26">Why do I see a surge in memory usage when conducting an embedding search immediately after an index is created?</div>
 
 This is because:
 
@@ -128,37 +128,33 @@ This is because:
 
 - The original vector files used to create the index are not yet released from the memory, because the size of original vector files and the index file has not exceeded the upper limit specified by `cache.cache_size`.
 
-<div class="faq-header" id="27">Can I update `segment_row_limit` and `metric_type` after creating a collection?</div>
-
-No, you cannot.
-
-<div class="faq-header" id="28">What is the interval at which Milvus flushes data to the disk?</div>
+<div class="faq-header" id="27">What is the interval at which Milvus flushes data to the disk?</div>
 
 Milvus automatically flushes data to disk at intervals of one second.
 
-<div class="faq-header" id="29">If I have set `preload_collection`, does Milvus service start only after all collections are loaded to the memory?</div>
+<div class="faq-header" id="28">If I have set <code>preload_collection</code>, does Milvus service start only after all collections are loaded to the memory?</div>
 
 Yes. If you have set `preload_collection` in **milvus.yaml**, Milvus' service is not available until it loads all specified collections.
 
-<div class="faq-header" id="30">In what way does Milvus flush data?</div>
+<div class="faq-header" id="29">In what way does Milvus flush data?</div>
 
 Milvus loads inserted data to the memory and automatically flushes data from memory to the disk at fixed intervals. You can call `flush` to <i>manually</i> trigger this operation. 
 
-<div class="faq-header" id="31">What is normalization? Why is normalization needed?</div>
+<div class="faq-header" id="30">What is normalization? Why is normalization needed?</div>
 
 Normalization refers to the process of converting an embedding (vector) so that its norm equals 1. If you use Inner Product to calculate embeddings similarities, you must normalize your embeddings. After normalization, inner product equals cosine similarity.
 
 See [Wikipedia](https://en.wikipedia.org/wiki/Unit_vector) for more information.
 
-<div class="faq-header" id="32">Why do I get different results using Euclidean distance (L2) and inner product (IP) as the distance metric?</div>
+<div class="faq-header" id="31">Why do I get different results using Euclidean distance (L2) and inner product (IP) as the distance metric?</div>
 
 Check if the vectors are normalized. If not, you need to normalize the vectors first. Theoretically speaking, similarities worked out by L2 are different from similarities worked out by IP, if the vectors are not normalized.
 
-<div class="faq-header" id="33">Is there a limit on the total number of collections and partitions?</div>
+<div class="faq-header" id="32">Is there a limit on the total number of collections and partitions?</div>
 
 Yes. The total number of collections and partitions must not exceed 4,096.
 
-<div class="faq-header" id="34">Why do I get fewer than k vectors when searching for `topk` vectors?</div>
+<div class="faq-header" id="33">Why do I get fewer than k vectors when searching for <code>topk</code> vectors?</div>
 
 Among the indexes that Milvus supports, IVF\_FLAT and IVF\_SQ8 implement the k-means clustering method. A data space is divided into `nlist` clusters and the inserted vectors are distributed to these clusters. Milvus then selects the `nprobe` nearest clusters and compares the distances between the target vector and all vectors in the selected clusters to return the final results.
 

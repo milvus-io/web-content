@@ -24,7 +24,7 @@ Check if the value of `cache.cache_size` in **milvus.yaml** is greater than the 
 
 See [Performance tuning](tuning.md) for more information. 
 
-<div class="faq-header" id="4">How to set the value of `nlist` when I build indexes?</div>
+<div class="faq-header" id="4">How to set the value of <code>nlist</code> when I build indexes?</div>
 
 It depends on your scenario. See [Performance tuning > Index](tuning.md#Index).
 

@@ -3,6 +3,7 @@ id: milvus_distributions-cpu.md
 label: CPU-only Milvus
 order: 0
 group: distribution
+icon: tab-icon-cpu
 ---
 
 # Milvus Distributions
@@ -22,7 +23,7 @@ Milvus comes in two distributions: CPU-only Milvus and GPU-enabled Milvus.
 
 If your GPU supports CUDA, then you can install GPU-enabled Milvus to achieve much higher search performance in large-scale datasets.
 
-<div class="tab-wrapper"><a href="milvus_distributions-cpu.md" class='active'>CPU-only Milvus</a><a href="milvus_distributions-gpu.md" >GPU-enabled Milvus</a></div> 
+<div class="tab-wrapper"><a href="milvus_distributions-cpu.md" class='active tab-icon-cpu'>CPU-only Milvus</a><a href="milvus_distributions-gpu.md" tab-icon-gpu>GPU-enabled Milvus</a></div> 
 
 ## Indexes for CPU-only Milvus
 
