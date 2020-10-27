@@ -8,7 +8,7 @@ group: distribution
 
 # 安装、启动 Milvus 服务
 
-<div class="tab-wrapper"><a href="milvus_docker-cpu.md" >CPU 版 Milvus</a><a href="milvus_docker-gpu.md" class='active '>GPU 版 Milvus</a></div>
+<div class="tab-wrapper"><a href="milvus_docker-cpu.md" class=''>CPU 版 Milvus</a><a href="milvus_docker-gpu.md" class='active '>GPU 版 Milvus</a></div>
 
 ## 安装前提
 
