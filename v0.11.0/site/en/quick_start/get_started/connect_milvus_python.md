@@ -23,7 +23,7 @@ This article decribes how to connect to a Milvus server from a Python client.
 
    ```python
    # Connect to the Milvus server.
-   >>> milvus = Milvus(host='localhost', port='19530')
+   >>> client = Milvus(host='localhost', port='19530')
    ```
 
    <div class="alert note">
@@ -31,7 +31,7 @@ This article decribes how to connect to a Milvus server from a Python client.
    </div>
 
    ```python
-   >>> milvus = Milvus(uri='tcp://localhost:19530')
+   >>> client = Milvus(uri='tcp://localhost:19530')
    ```
 
 ## FAQ

@@ -151,7 +151,7 @@
       "order": 0
     },
     {
-      "id": "connect_milvus_python.md",
+      "id": "connect_milvus.md",
       "title": "连接服务端",
       "label1": "quick_start",
       "label2": "get_started",
@@ -159,7 +159,7 @@
       "order": 1
     },
     {
-      "id": "create_drop_collection_python.md",
+      "id": "create_drop_collection.md",
       "title": "创建、删除集合",
       "label1": "quick_start",
       "label2": "get_started",
@@ -167,7 +167,7 @@
       "order": 2
     },
     {
-      "id": "create_drop_partition_python.md",
+      "id": "create_drop_partition.md",
       "title": "创建、删除分区",
       "label1": "quick_start",
       "label2": "get_started",
@@ -175,7 +175,7 @@
       "order": 3
     },
     {
-      "id": "insert_delete_entity_python.md",
+      "id": "insert_delete_entity.md",
       "title": "插入、删除向量",
       "label1": "quick_start",
       "label2": "get_started",
@@ -183,7 +183,7 @@
       "order": 4
     },
     {
-      "id": "create_drop_index_python.md",
+      "id": "create_drop_index.md",
       "title": "创建、删除索引",
       "label1": "quick_start",
       "label2": "get_started",
@@ -191,7 +191,7 @@
       "order": 5
     },
     {
-      "id": "search_entity_python.md",
+      "id": "search_entity.md",
       "title": "查询向量",
       "label1": "quick_start",
       "label2": "get_started",
@@ -199,7 +199,7 @@
       "order": 6
     },
     {
-      "id": "flush_python.md",
+      "id": "flush.md",
       "title": "数据落盘",
       "label1": "quick_start",
       "label2": "get_started",
@@ -207,7 +207,7 @@
       "order": 7
     },
     {
-      "id": "compact_python.md",
+      "id": "compact.md",
       "title": "数据段整理",
       "label1": "quick_start",
       "label2": "get_started",
