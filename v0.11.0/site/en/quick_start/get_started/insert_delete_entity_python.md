@@ -7,9 +7,9 @@ id: insert_delete_entity_python.md
 
 You can perform vector operations on collections or partitions. This article talks about the following topics:
 
-- [Insert vectors to a collection](#insert-entity-to-collection)
-- [Insert vectors to a partition](#insert-entity-to-partition)
-- [Delete vectors by ID](#delete-entity)
+- [Insert entities to a collection](#insert-entity-to-collection)
+- [Insert entities to a partition](#insert-entity-to-partition)
+- [Delete entities by ID](#delete-entity)
 
 ## Insert entities to a collection
 <a name="insert-entity-to-collection"></a>

@@ -1,5 +1,5 @@
 ---
-id: search_entity_python.md
+id: search_entity.md
 ---
 
 # 查询向量
@@ -8,7 +8,7 @@ Milvus 支持在集合或分区中查询向量。
 
 ## 在集合中查询向量
 
-1. 创建搜索参数 DSL。搜索参数 DSL 是一个 JSON 字符串，在 Python SDK 中以字典来表示。
+1. 创建搜索参数 DSL。
 
    ```python
    # This DSL searches for topk `entities` that are

@@ -47,7 +47,7 @@ The client calls the `flush` method to trigger the data flushing task.
 
 When the accumulated data reaches the upper limit of the mutable buffer (128MB), the data flushing task is triggered.
 
-All relevant files of each segment are stored in a folder named by the segment ID, such as a **delete_docs** file marking up deleted entities and a **bloom-filter** file for facilitating search.
+All relevant files of each segment are stored in a folder named by the segment ID, such as a **delete_docs** file marking up deleted entities and a **bloom-filter** file for speeding up search.
 
 <div class="alert info">
 Please see the diagram in <a href="storage_concept.md#Partition-and-segment">Partition and Segment</a> for data files within the segment.

@@ -1,5 +1,5 @@
 ---
-id: insert_delete_entity_python.md
+id: insert_delete_entity.md
 ---
 
 
@@ -15,7 +15,13 @@ id: insert_delete_entity_python.md
 ## 在集合中插入向量
 <a name="insert-entity-to-collection"></a>
 
-1. 随机生成 1000 个 Entity：
+1. 随机生成 10000 个 Entity：
+
+<div class="filter">
+<a href="#Python">Python</a> <a href="#Java">Java</a>
+</div>
+
+<div class="filter-Python" markdown="block">
 
    ```python
    >>> import random
@@ -23,32 +29,50 @@ id: insert_delete_entity_python.md
    >>> list_of_int = [random.randint(0, 255) for _ in range(10000)]
    >>> vectors = [[random.random() for _ in range(128)] for _ in range(10000)]
    ```
+</div>
+
+<div class="filter-Java" markdown="block">
+
+```java
+  private static List<List<Float>> randomFloatVectors() {
+    SplittableRandom splitCollectionRandom = new SplittableRandom();
+    List<List<Float>> vectors = new ArrayList<>(10000);
+    for (int i = 0; i < 10000; ++i) {
+      splitCollectionRandom = splitCollectionRandom.split();
+      DoubleStream doubleStream = splitCollectionRandom.doubles(128);
+      List<Float> vector =
+          doubleStream.boxed().map(Double::floatValue).collect(Collectors.toList());
+      vectors.add(vector);
+    }
+    return vectors;
+  }
+```
+</div>
 
 2. 插入向量列表。在创建集合时指定 `auto_id` 为 `True`, Milvus 自动为 Entity 分配 ID。
 
    ```python
    # Insert embeddings.
    >>> hybrid_entities = [
-           {"name": "A", "values": list_of_int, "type": DataType.INT32},
-           {"name": "B", "values": list_of_int, "type": DataType.INT32},
-           {"name": "C", "values": list_of_int, "type": DataType.INT64},
-           {"name": "Vec", "values": vectors, "type":DataType.FLOAT_VECTOR}
+           {"name": "duration", "values": list_of_int, "type": DataType.INT32},
+           {"name": "release_year", "values": list_of_int, "type": DataType.INT64},
+           {"name": "embedding", "values": vectors, "type":DataType.FLOAT_VECTOR}
        ]
-   >>> client.insert('test01', hybrid_entities)
+   >>> client.insert('demo_films', hybrid_entities)
    ```
 
    如果在创建集合时指定`auto_id` 为 `False`, 你也可以自己定义 Entity ID：
 
    ```python
    >>> entity_ids = [id for id in range(10000)]
-   >>> client.insert('test01', hybrid_entities, ids=entity_ids)
+   >>> client.insert('demo_films', hybrid_entities, ids=entity_ids)
    ```
 
 ## 在分区中插入向量
 <a name="insert-entity-to-partition"></a>
 
 ```python
->>> client.insert('test01', hybrid_entities, partition_tag="tag01")
+>>> client.insert('demo_films', hybrid_entities, partition_tag="American")
 ```
 
 ## 通过 ID 删除向量
@@ -63,7 +87,7 @@ id: insert_delete_entity_python.md
 你可以通过以下命令删除向量：
 
 ```python
->>> client.delete_entity_by_id('test01', ids)
+>>> client.delete_entity_by_id('demo_films', ids)
 ```
 <div class="alert note">
 在调用 <code>delete</code> 接口后，用户可以选择再调用 <code>flush</code>，保证新增的数据可见，被删除的数据不会再被搜到。

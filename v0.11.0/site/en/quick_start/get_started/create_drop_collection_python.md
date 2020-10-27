@@ -15,8 +15,6 @@ See <a href="https://github.com/milvus-io/pymilvus/tree/0.3.0/examples">example 
 1. Prepare the parameters needed to create the collection:
 
    ```python
-   >>> param = {'collection_name':'test01', 'dimension':256, 'segment_row_limit':1024, 'metric_type':MetricType.L2}       >>> collection_name = 'test01'
-   
    # Create a collection of 4 fields, where fields A, B, and C are int type fields
    # and Vec is a 128-dimension float vector field.
    # The default value of segment_row_limit is 524288 if not specified.
