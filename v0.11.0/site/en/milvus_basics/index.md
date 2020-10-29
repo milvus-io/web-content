@@ -88,7 +88,7 @@ To improve query performance, you can specify an index type for each vector fiel
 
 ## Create indexes
 
-When the `create_index` method is called, Milvus synchronously indexes the existing data on this field. Whenever the size of the inserted data reaches the `segment_row_limit`, Milvus automatically creates an index for it in the background.
+When the `create_index` method is called, Milvus synchronously indexes the existing data on this field. 
 
 <div class="alert note">
 When the inserted data segment is less than 4096 rows, Milvus does not index it.
@@ -167,7 +167,7 @@ The query method is as follows:
 
 `PQ` (Product Quantization) uniformly decomposes the original high-dimensional vector space into Cartesian products of `m` low-dimensional vector spaces, and then quantizes the decomposed low-dimensional vector spaces. Instead of calculating the distances between the target vector and the center of all the units, product quantization enables the calculation of distances between the target vector and the clustering center of each low-dimensional space and greatly reduces the time complexity and space complexity of the algorithm.
 
-IVF\_PQ quantizes the product of vectors, and then performs IVF index clustering. Its index file is even smaller than IVF\_SQ8, but it also causes a loss of accuracy during searching vectors.
+IVF\_PQ performs IVF index clustering before quantizing the product of vectors. Its index file is even smaller than IVF\_SQ8, but it also causes a loss of accuracy during searching vectors.
 
 - Index building parameters
 
@@ -215,7 +215,7 @@ The query process is similar to the graph building process. It starts from the n
 ### HNSW
 <a name="HNSW"></a>
 
-HNSW (Hierarchical Small World Graph) is a graph-based indexing algorithm. It builds a multi-layer navigation structure for an image according to certain rules. In this structure, the upper layers are more sparse and the distances between nodes are farther; the lower layers are denser and the distances between nodes are closer. The search starts from the uppermost layer, finds the node closest to the target in this layer, and then enters the next layer to begin another search. After multiple iterations, it can quickly approach the target position.
+HNSW (Hierarchical Navigable Small World Graph) is a graph-based indexing algorithm. It builds a multi-layer navigation structure for an image according to certain rules. In this structure, the upper layers are more sparse and the distances between nodes are farther; the lower layers are denser and the distances between nodes are closer. The search starts from the uppermost layer, finds the node closest to the target in this layer, and then enters the next layer to begin another search. After multiple iterations, it can quickly approach the target position.
 
 In order to improve performance, HNSW limits the maximum degree of nodes on each layer of the graph to `M`. In addition, you can use `efConstruction` (when building index) or `ef` (when searching targets) to specify a search range.
 

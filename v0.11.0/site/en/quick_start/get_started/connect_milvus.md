@@ -1,5 +1,5 @@
 ---
-id: connect_milvus_python.md
+id: connect_milvus.md
 ---
 
 # Connect to the Server

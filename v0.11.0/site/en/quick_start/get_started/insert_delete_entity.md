@@ -1,5 +1,5 @@
 ---
-id: insert_delete_entity_python.md
+id: insert_delete_entity.md
 ---
 
 

@@ -1,5 +1,5 @@
 ---
-id: search_entity_python.md
+id: search_entity.md
 ---
 
 # Conduct a Vector Search
@@ -8,7 +8,7 @@ Milvus supports searching vectors in a collection or partition.
 
 ## Search for vectors in a collection
 
-1. Create search parameters. The search parameters are stored in a JSON string, which is represented by a dictionary in the Python SDK.
+1. Create search parameters.
 
    ```python
    # This DSL searches for topk entities that are

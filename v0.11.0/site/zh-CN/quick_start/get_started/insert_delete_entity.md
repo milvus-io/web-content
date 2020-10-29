@@ -49,7 +49,13 @@ id: insert_delete_entity.md
 ```
 </div>
 
-2. 插入向量列表。在创建集合时指定 `auto_id` 为 `True`, Milvus 自动为 Entity 分配 ID。
+2. 插入向量列表。
+
+<div class="filter">
+<a href="#Python">Python</a> <a href="#Java">Java</a>
+</div>
+
+<div class="filter-Python" markdown="block">
 
    ```python
    # Insert embeddings.
@@ -60,23 +66,105 @@ id: insert_delete_entity.md
        ]
    >>> client.insert('demo_films', hybrid_entities)
    ```
+</div>
+
+<div class="filter-Java" markdown="block">
+
+```java
+    /*
+     *   Insert three films with their IDs, duration, release year, and fake embeddings into the collection "demo_films".
+     */
+    List<Long> ids = LongStream.range(0, 10000).boxed().collect(Collectors.toList());
+    List<Integer> durations =  /* A list of 1,000 Integers. */
+    List<Long> releaseYears =  LongStream.range(0, 10000).boxed().collect(Collectors.toList());
+    List<List<Float>> embeddings = randomFloatVectors();
+
+    InsertParam insertParam = InsertParam
+        .create(collectionName)
+        .addField("duration", DataType.INT32, durations)
+        .addField("release_year", DataType.INT64, releaseYears)
+        .addVectorField("embedding", DataType.VECTOR_FLOAT, embeddings)
+```
+</div>
+
 
    如果在创建集合时指定`auto_id` 为 `False`, 你也可以自己定义 Entity ID：
+
+   <div class="filter">
+   <a href="#Python">Python</a> <a href="#Java">Java</a>
+   </div>
+
+   <div class="filter-Python" markdown="block">
 
    ```python
    >>> entity_ids = [id for id in range(10000)]
    >>> client.insert('demo_films', hybrid_entities, ids=entity_ids)
    ```
+   </div>
+
+<div class="filter-Java" markdown="block">
+
+```java
+    /*
+     *   Insert three films with their IDs, duration, release year, and fake embeddings into the collection "demo_films".
+     */
+    List<Long> ids = LongStream.range(0, 10000).boxed().collect(Collectors.toList());
+    List<Integer> durations =  /* A list of 1,000 Integers. */
+    List<Long> releaseYears =  LongStream.range(0, 10000).boxed().collect(Collectors.toList());
+    List<List<Float>> embeddings = randomFloatVectors();
+
+    InsertParam insertParam = InsertParam
+        .create(collectionName)
+        .addField("duration", DataType.INT32, durations)
+        .addField("release_year", DataType.INT64, releaseYears)
+        .addVectorField("embedding", DataType.VECTOR_FLOAT, embeddings)
+        .setEntityIds(ids)
+```
+</div>
 
 ## 在分区中插入向量
 <a name="insert-entity-to-partition"></a>
 
+<div class="filter">
+<a href="#Python">Python</a> <a href="#Java">Java</a>
+</div>
+
+<div class="filter-Python" markdown="block">
+
 ```python
 >>> client.insert('demo_films', hybrid_entities, partition_tag="American")
 ```
+</div>
+
+<div class="filter-Java" markdown="block">
+
+```java
+    /*
+     *   Insert three films with their IDs, duration, release year, and fake embeddings into the partition "American".
+     */
+    List<Long> ids = LongStream.range(0, 10000).boxed().collect(Collectors.toList());
+    List<Integer> durations =  /* A list of 1,000 Integers. */
+    List<Long> releaseYears =  LongStream.range(0, 10000).boxed().collect(Collectors.toList());
+    List<List<Float>> embeddings = randomFloatVectors();
+
+    InsertParam insertParam = InsertParam
+        .create(collectionName)
+        .addField("duration", DataType.INT32, durations)
+        .addField("release_year", DataType.INT64, releaseYears)
+        .addVectorField("embedding", DataType.VECTOR_FLOAT, embeddings)
+        .setEntityIds(ids)
+        .setPartitionTag(partitionTag);
+```
+</div>
 
 ## 通过 ID 删除向量
 <a name="delete-entity"></a>
+
+<div class="filter">
+<a href="#Python">Python</a> <a href="#Java">Java</a>
+</div>
+
+<div class="filter-Python" markdown="block">
 
 假设你的集合中存在以下向量 ID：
 
@@ -89,6 +177,15 @@ id: insert_delete_entity.md
 ```python
 >>> client.delete_entity_by_id('demo_films', ids)
 ```
+</div>
+
+<div class="filter-Python" markdown="block">
+
+```java
+client.deleteEntityByID(collectionName, ids.subList(0, 10));
+```
+</div>
+
 <div class="alert note">
 在调用 <code>delete</code> 接口后，用户可以选择再调用 <code>flush</code>，保证新增的数据可见，被删除的数据不会再被搜到。
 </div>

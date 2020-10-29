@@ -1,5 +1,5 @@
 ---
-id: flush_python.md
+id: flush.md
 ---
 
 # Data Flushing

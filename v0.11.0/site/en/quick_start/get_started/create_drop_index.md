@@ -1,5 +1,5 @@
 ---
-id: create_drop_index_python.md
+id: create_drop_index.md
 ---
 
 # Create and Drop an Index
@@ -37,7 +37,7 @@ Milvus supports one index for each field in a collection. Switching index type c
 After deleting the index, the vector field uses the default index type FLAT again.
 
 ```python
->>> client.drop_index('test01')
+>>> client.drop_index('test01', "Vec")
 ```
 
 ## FAQ

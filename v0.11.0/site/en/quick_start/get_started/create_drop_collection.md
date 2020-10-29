@@ -1,5 +1,5 @@
 ---
-id: create_drop_collection_python.md
+id: create_drop_collection.md
 ---
 
 # Create and Drop a Collection

@@ -20,7 +20,7 @@ id: flush.md
 <div class="filter-Java" markdown="block">
 
 ```java
-client.flush('test01')
+client.flush('test01');
 ```
 </div>
 

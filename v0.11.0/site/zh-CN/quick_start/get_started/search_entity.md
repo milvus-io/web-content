@@ -10,6 +10,12 @@ Milvus 支持在集合或分区中查询向量。
 
 1. 创建搜索参数 DSL。
 
+   <div class="filter">
+   <a href="#Python">Python</a> <a href="#Java">Java</a>
+   </div>
+
+   <div class="filter-Python" markdown="block">
+
    ```python
    # This DSL searches for topk `entities` that are
    # closest to vectors[:1] searched by `IVF_FLAT` index with `nprobe = 10` and `metric_type = L2`,
@@ -33,6 +39,37 @@ Milvus 支持在集合或分区中查询向量。
    ...     }
    ... }
    ```
+   </div>
+
+   <div class="filter-Java" markdown="block">
+
+   ```java
+    /*
+     * Basic hybrid search:
+     *   Let's say we have a film with its `embedding` and we want to find `top1` film that is
+     *   most similar to it by L2 metric_type (Euclidean Distance).
+     *
+     *   In addition to vector similarities, we also want to filter films such that:
+     *     - `term` is 1, 2, or 5,
+     *     - `duration` larger than 250 minutes.
+     */
+    List<List<Float>> queryEmbedding = /* your query vectors */;
+    final long topK = 10;
+    String dsl = String.format(
+        "{\"bool\": {"
+            + "\"must\": [{"
+            + "    \"range\": {"
+            + "        \"A\": {\"GT\": 250}" // "GT" for greater than
+            + "    }},{"
+            + "    \"term\": {"
+            + "        \"B\": [1, 5, 10]" // "term" is a list
+            + "    }},{"
+            + "    \"vector\": {"
+            + "        \"embedding\": {"
+            + "            \"topk\": %d, \"metric_type\": \"L2\", \"type\": \"float\", \"query\": %s"
+            + "    }}}]}}", topK, queryEmbedding.toString());
+   ```
+   </div>
 
    <div class="alert note">
    <ul>
@@ -44,21 +81,71 @@ Milvus 支持在集合或分区中查询向量。
 
 2. 进行搜索：
 
+   <div class="filter">
+   <a href="#Python">Python</a> <a href="#Java">Java</a>
+   </div>
+
+   <div class="filter-Python" markdown="block">
+
    ```python
    >>> client.search('test01', dsl)
    ```
+   </div>
+
+   <div class="filter-Java" markdown="block">
+
+   ```java
+   SearchParam searchParam = SearchParam
+    .create(collectionName)
+    .setDsl(dsl);
+
+   SearchResult searchResult = client.search(searchParam);
+   ```
+   </div>
 
    你也可以指定搜索结果中返回指定列的值，此处我们获取字段 `B` 的值：
+
+   <div class="filter">
+   <a href="#Python">Python</a> <a href="#Java">Java</a>
+   </div>
+
+   <div class="filter-Python" markdown="block">
 
    ```python
    >>> client.search('test01', dsl, fields=["B"])
    ```
+   </div>
+   
+   <div class="filter-Java" markdown="block">
+
+   ```java
+   SearchParam searchParam = SearchParam
+        .create(collectionName)
+        .setDsl(dsl)
+        .setParamsInJson("{\"fields\": [\"B\"]}");
+   SearchResult searchResult = client.search(searchParam);
+   ```
+   </div>
 
 ## 在分区中查询向量
+
+<div class="filter">
+<a href="#Python">Python</a> <a href="#Java">Java</a>
+</div>
+
+<div class="filter-Python" markdown="block">
 
 ```python
 >>> client.search('test01', dsl, partition_tags=['tag01'])
 ```
+</div>
+
+<div class="filter-Java" markdown="block">
+
+```java
+setPartitionTags​(java.util.List<java.lang.String> partitionTags);
+```
+</div>
 
 <div class="alert note">
 如果你不指定 <code>partition_tags</code>， Milvus 会在整个集合中搜索。

@@ -1,5 +1,5 @@
 ---
-id: compact_python.md
+id: compact.md
 ---
 
 # Compact Segments

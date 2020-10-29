@@ -1,5 +1,5 @@
 ---
-id: close_client_python.md
+id: close_client.md
 ---
 
 # Close the Client

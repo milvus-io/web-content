@@ -75,7 +75,7 @@ id: create_drop_index.md
 <div class="filter-Python" markdown="block">
 
 ```python
->>> client.drop_index('demo_films')
+>>> client.drop_index('demo_films', "Vec")
 ```
 </div>
 

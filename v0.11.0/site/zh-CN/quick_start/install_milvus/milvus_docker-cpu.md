@@ -3,12 +3,13 @@ id: milvus_docker-cpu.md
 label: CPU 版 Milvus
 order: 0
 group: distribution
+icon: tab-icon-cpu
 ---
 
 
 # 安装、启动 Milvus 服务
 
-<div class="tab-wrapper"><a href="milvus_docker-cpu.md" class='active '>CPU 版 Milvus</a><a href="milvus_docker-gpu.md" class=''>GPU 版 Milvus</a></div>
+<div class="tab-wrapper"><a href="milvus_docker-cpu.md" class='active tab-icon-cpu'>CPU 版 Milvus</a><a href="milvus_docker-gpu.md" class='tab-icon-gpu'>GPU 版 Milvus</a></div>
 
 ## 安装前提
 

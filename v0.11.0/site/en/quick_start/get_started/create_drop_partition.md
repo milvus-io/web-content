@@ -1,5 +1,5 @@
 ---
-id: create_drop_partition_python.md
+id: create_drop_partition.md
 ---
 
 # Create and Drop a Partition
