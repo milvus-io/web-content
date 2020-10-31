@@ -37,13 +37,7 @@ After the Milvus server is successfully started, you can use this example progra
    $ python3 example.py
    ```
 
-5. Confirm the program is running correctly.
-
-   ```shell
-   Query result is correct.
-   ```
-
-Congratulations! You have successfully completed your first vector similarity search with Milvus.
+*All going well, you should have seen the outcome of the CRUD operation results being printed on your screen.*
 
 ## What's next
 

@@ -12,7 +12,7 @@ When creating a collection, Milvus controls the size of a data segment according
 
 To process massive data, Milvus segments the data and each segment of data has tens or even hundreds of thousands of entities. Milvus separates the data in each segment by fields and stores the data in each field a data file. In the current version, each entity contains one ID field, one vector field, and multiple scala fields.
 
-The size of a segment is determined by the `segment_row_limit` (by default 512 &times; 1024 rows) when creating a collection. You can set its value to as high as 4 &times; 1024 &times; 1024 rows. 
+The value of `segment_row_limit` determines the maximum number of entities a segment can hold. You can set `segment_row_limit` when creating a collection, its default value being 512 &times; 1024 rows and maximum value being 4 &times; 1024 &times; 1024 rows. 
 
 When building indexes, Milvus builds an index for each segment in the collection in order and stores the index into a separate file. Index files are independent of each other. Indexing can significantly improve retrieval performance.
 

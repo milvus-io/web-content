@@ -11,7 +11,7 @@ Please read <a href="storage_concept.md">Storage Concepts</a> before reading thi
 
 ## Insert data
 
-The client inserts data by calling the `insert` API, and the amount of inserted data cannot exceed 256 MB at a time. The process of data insertion is as follows:
+The client inserts data by calling `insert`, and the amount of inserted data cannot exceed 256 MB at a time. The process of data insertion is as follows:
 
 1. After receiving the insert request, the server writes the data to the write ahead log (WAL).
 2. After the request is successfully recorded to the log file, the server handles the insert operation.

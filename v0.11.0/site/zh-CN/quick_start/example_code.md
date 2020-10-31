@@ -36,13 +36,7 @@ id: example_code.md
    $ python3 example.py
    ```
 
-5. 确认程序正确运行。
-
-   ```shell
-   Query result is correct.
-   ```
-
-   恭喜你！你已经成功完成了在 Milvus 上的第一次向量相似度查询。
+*如果一切运行正常，你会在屏幕上看到程序执行增删改查操作的所有结果。*
 
 ## 接下来你可以
 
