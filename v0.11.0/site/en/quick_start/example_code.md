@@ -6,7 +6,7 @@ id: example_code.md
 
 After the Milvus server is successfully started, you can use this example program to create a table, insert 10 vectors, and then run a vector similarity search.
 
-1.Ensure that you have installed [Python 3.5+](https://www.python.org/downloads/) and a compatible [pip](https://pip.pypa.io/en/stable/installing/).
+1. Ensure that you have installed [Python 3.5+](https://www.python.org/downloads/) and a compatible [pip](https://pip.pypa.io/en/stable/installing/).
 
 2. Install Milvus Python SDK.
 
@@ -36,8 +36,7 @@ After the Milvus server is successfully started, you can use this example progra
    # Run Milvus Python example
    $ python3 example.py
    ```
-
-*All going well, you should have seen the outcome of the CRUD operation results being printed on your screen.*
+   <i>All going well, you should have seen the outcome of the CRUD operation results being printed on your screen.</i>
 
 ## What's next
 

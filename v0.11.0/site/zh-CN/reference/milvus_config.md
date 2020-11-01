@@ -110,8 +110,6 @@ logs:
 | 参数                      | 说明                                                         | 类型                                                       | 默认值                                                      |
 | --------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------- | ------------------------------------------------------------- |
 | `enable`                | 是否开启 WAL（Write-Ahead Logging，预写式日志）。如果启用 WAL，Milvus 会在更改数据之前将所有数据更改写入日志文件。WAL 确保 Milvus 操作的原子性和耐用性。<ul><li><code>true</code>：开启 WAL。</li><li><code>false</code>：不开启 WAL。</li></ul> | Boolean     | `true`      |
-| `recovery_error_ignore` | 在通过 WAL 执行恢复操作时，是否忽略出现错误的日志。<ul><li><code>true</code>：Milvus 重启恢复时，忽略错误的日志。</li><li><code>false</code>：Milvus 重启恢复时，会因错误的日志启动失败。</li></ul> | Boolean | `false` |
-| `buffer_size`           | WAL 缓冲区大小，范围：64MB ~ 4096MB。建议该值大于单次插入的数据量两倍，以获取更好的性能。格式请见 [空间大小的格式](#size)。 | String  | `256MB` |
 | `path`                  | 预写式日志文件存储路径。                                     | String                               | `/var/lib/milvus/wal`                |
 
 </div>

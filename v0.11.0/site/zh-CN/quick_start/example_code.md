@@ -35,8 +35,7 @@ id: example_code.md
    # Run Milvus Python example
    $ python3 example.py
    ```
-
-*如果一切运行正常，你会在屏幕上看到程序执行增删改查操作的所有结果。*
+   <i>如果一切运行正常，你会在屏幕上看到程序执行增删改查操作的所有结果。</i>
 
 ## 接下来你可以
 
