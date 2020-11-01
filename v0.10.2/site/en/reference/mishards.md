@@ -254,7 +254,7 @@ See <a href="https://helm.sh/docs/">Helm Docs</a> for more information about usi
    
    ```bash
    $ git clone https://github.com/milvus-io/milvus-helm.git
-   $ cd milvus-helm
+   $ cd milvus-helm/charts/milvus
    $ helm dep update
    ```
 
