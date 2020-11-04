@@ -1,5 +1,6 @@
 ---
 id: overview.md
+keywords: Near-real-time search, Near real-time, NRT, Scalar field filtering, compound query
 ---
 
 # What is Milvus 

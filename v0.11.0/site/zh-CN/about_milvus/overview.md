@@ -1,5 +1,6 @@
 ---
 id: overview.md
+keywords: 近实时搜索, 标量字段过滤, 混合查询
 ---
 
 # Milvus 是什么
