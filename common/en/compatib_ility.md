@@ -4,6 +4,8 @@ id: compatibility.md
 
 # Compatibility Information
 
+
+
 - 0.6.0: No longer supported. 
 - 0.7.0 ~ 0.91.: No longer supported. We highly recommend migrating your data to v0.10.x. Before you proceed: 
   1. Delete the **/db/wal** directory.
