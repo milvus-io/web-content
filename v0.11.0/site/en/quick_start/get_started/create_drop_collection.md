@@ -6,13 +6,33 @@ id: create_drop_collection.md
 
 This article provides Python sample codes for creating or dropping collections.
 
+<div class="filter">
+<a href="#Python">Python</a> <a href="#Java">Java</a>
+</div>
+
+<div class="filter-Python" markdown="block">
+
 <div class="alert note">
 See <a href="https://github.com/milvus-io/pymilvus/tree/0.3.0/examples">example program</a> for more detailed usage.
 </div>
+</div>
+
+<div class="filter-Java" markdown="block">
+<div class="alert note">
+See <a href="https://github.com/milvus-io/milvus-sdk-java/tree/0.9.0/examples/src/main/java">example program</a> for more detailed usage.
+</div>
+</div>
+
 
 ## Create a collection
 
 1. Prepare the parameters needed to create the collection:
+
+<div class="filter">
+<a href="#Python">Python</a> <a href="#Java">Java</a>
+</div>
+
+<div class="filter-Python" markdown="block">
 
    ```python
    # Create a collection of 4 fields, where fields A, B, and C are int type fields
@@ -30,21 +50,68 @@ See <a href="https://github.com/milvus-io/pymilvus/tree/0.3.0/examples">example 
    ...    "auto_id": True
    ... }
    ```
+</div>
+
+<div class="filter-Java" markdown="block">
+
+```java 
+   // Basic create collection:
+   // We will create a collection with three fields: film  duration, release_year and an
+   // embedding which is essentially a float vector.
+   // CollectionMapping will be used to create a collection. When adding vector fields, the
+   // dimension must be specified. `auto_id` is set to false so we can provide custom ids.
+    final int dimension = 8;
+    final String collectionName = "demo_films";
+    CollectionMapping collectionMapping = CollectionMapping
+        .create(collectionName)
+        .addField("duration", DataType.INT32)
+        .addField("release_year", DataType.INT64)
+        .addVectorField("embedding", DataType.VECTOR_FLOAT, dimension)
+        .setParamsInJson("{\"segment_row_limit\": 4096, \"auto_id\": false}");
+```
+</div>
 
 2. Create a collection with a name `test01`.
+
+<div class="filter">
+<a href="#Python">Python</a> <a href="#Java">Java</a>
+</div>
+
+<div class="filter-Python" markdown="block">
 
    ```python
    # Create a collection.
    >>> client.create_collection('test01', collection_param)
    ```
+</div>
 
+<div class="filter-Java" markdown="block">
+
+```java
+client.createCollection(collectionMapping);
+```
+</div>
 
 ## Drop a collection
+
+<div class="filter">
+<a href="#Python">Python</a> <a href="#Java">Java</a>
+</div>
+
+<div class="filter-Python" markdown="block">
 
 ```python
 # Drop a collection.
 >>> milvus.drop_collection('test01')
 ```
+</div>
+
+<div class="filter-Java" markdown="block">
+
+```java
+client.dropCollection(collectionName);
+```
+</div>
 
 ## FAQ
 

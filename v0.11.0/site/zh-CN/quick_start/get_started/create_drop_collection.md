@@ -55,14 +55,11 @@ id: create_drop_collection.md
 <div class="filter-Java" markdown="block">
 
 ```java 
-    /*
-     * Basic create collection:
-     *   We will create a collection with three fields: film duration, release_year and an
-     *   embedding which is essentially a float vector.
-     *
-     *   CollectionMapping will be used to create a collection. When adding vector fields, the
-     *   dimension must be specified. `auto_id` is set to false so we can provide custom ids.
-     */
+   // Basic create collection:
+   // We will create a collection with three fields: film duration, release_year and an
+   // embedding which is essentially a float vector.
+   // CollectionMapping will be used to create a collection. When adding vector fields, the
+   // dimension must be specified. `auto_id` is set to false so we can provide custom ids.
     final int dimension = 8;
     final String collectionName = "demo_films";
     CollectionMapping collectionMapping = CollectionMapping

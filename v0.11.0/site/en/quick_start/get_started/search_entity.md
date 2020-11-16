@@ -8,11 +8,17 @@ Milvus supports searching vectors in a collection or partition.
 
 ## Search for vectors in a collection
 
-1. Create search parameters.
+1. Create search parameters DSL.
+
+      <div class="filter">
+   <a href="#Python">Python</a> <a href="#Java">Java</a>
+   </div>
+
+   <div class="filter-Python" markdown="block">
 
    ```python
-   # This DSL searches for topk entities that are
-   # closest to vectors[:1] searched by IVF_FLAT index with nprobe = 10 and metric_type = L2,
+   # This DSL searches for topk `entities` that are
+   # closest to vectors[:1] searched by `IVF_FLAT` index with `nprobe = 10` and `metric_type = L2`,
    # AND field "A" in [1, 2, 5],
    # AND field "B" greater than 1 less than 100
    >>> dsl = {
@@ -33,6 +39,34 @@ Milvus supports searching vectors in a collection or partition.
    ...     }
    ... }
    ```
+   </div>
+
+   <div class="filter-Java" markdown="block">
+
+   ```java
+   // Basic hybrid search:
+   // Let's say we have a film with its `embedding` and we want to find `top1` film that is
+   // most similar to it by L2 metric_type (Euclidean Distance).
+   // In addition to vector similarities, we also want to filter films such that:
+   // - `term` is 1, 2, or 5,
+   // - `duration` larger than 250 minutes.
+   List<List<Float>> queryEmbedding = /* your query vectors */;
+    final long topK = 10;
+    String dsl = String.format(
+        "{\"bool\": {"
+            + "\"must\": [{"
+            + "    \"range\": {"
+            + "        \"A\": {\"GT\": 250}" // "GT" for greater than
+            + "    }},{"
+            + "    \"term\": {"
+            + "        \"B\": [1, 5, 10]" // "term" is a list
+            + "    }},{"
+            + "    \"vector\": {"
+            + "        \"embedding\": {"
+            + "            \"topk\": %d, \"metric_type\": \"L2\", \"type\": \"float\", \"query\": %s"
+            + "    }}}]}}", topK, queryEmbedding.toString());
+   ```
+   </div>
 
    <div class="alert note">
    <ul>
@@ -46,24 +80,71 @@ Milvus supports searching vectors in a collection or partition.
 
 2. Conduct a similarity search:
 
+     <div class="filter">
+   <a href="#Python">Python</a> <a href="#Java">Java</a>
+   </div>
+
+   <div class="filter-Python" markdown="block">
+
    ```python
    >>> client.search('test01', dsl)
    ```
-   <div class="alert note">
-   <ul><li><code>top_k</code> means searching the k vectors most similar to the target vector. It is defined during the search.</li><li>The range of <code>top_k</code> is [1, 16384].</li></ul>
+   </div>
+
+   <div class="filter-Java" markdown="block">
+
+   ```java
+   SearchParam searchParam = SearchParam
+    .create(collectionName)
+    .setDsl(dsl);
+
+   SearchResult searchResult = client.search(searchParam);
+   ```
    </div>
 
 You can also set Milvus to return a specified field. Here, we retrieve values in the `B` field:
 
-```python
->>> client.search('test01', dsl, fields=["B"])
-```
+<div class="filter">
+   <a href="#Python">Python</a> <a href="#Java">Java</a>
+   </div>
+
+   <div class="filter-Python" markdown="block">
+
+   ```python
+   >>> client.search('test01', dsl, fields=["B"])
+   ```
+   </div>
+   
+   <div class="filter-Java" markdown="block">
+
+   ```java
+   SearchParam searchParam = SearchParam
+        .create(collectionName)
+        .setDsl(dsl)
+        .setParamsInJson("{\"fields\": [\"B\"]}");
+   SearchResult searchResult = client.search(searchParam);
+   ```
+   </div>
 
 ## Search vectors in a partition
+
+<div class="filter">
+<a href="#Python">Python</a> <a href="#Java">Java</a>
+</div>
+
+<div class="filter-Python" markdown="block">
 
 ```python
 >>> client.search('test01', dsl, partition_tags=['tag01'])
 ```
+</div>
+
+<div class="filter-Java" markdown="block">
+
+```java
+setPartitionTags​(java.util.List<java.lang.String> partitionTags);
+```
+</div>
 
 <div class="alert note">
 If you do not specify <code>partition_tags</code>, Milvus searches similar vectors in the entire collection.

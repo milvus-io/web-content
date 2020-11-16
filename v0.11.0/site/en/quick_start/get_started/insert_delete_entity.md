@@ -3,7 +3,7 @@ id: insert_delete_entity.md
 ---
 
 
-# Insert and Delete Vectors
+# Insert and Delete Entities
 
 You can perform vector operations on collections or partitions. This article talks about the following topics:
 
@@ -11,59 +11,178 @@ You can perform vector operations on collections or partitions. This article tal
 - [Insert entities to a partition](#insert-entity-to-partition)
 - [Delete entities by ID](#delete-entity)
 
+
 ## Insert entities to a collection
 <a name="insert-entity-to-collection"></a>
 
 1. Generate 1,000 random vectors.
 
+  <div class="filter">
+<a href="#Python">Python</a> <a href="#Java">Java</a>
+</div>
+
+<div class="filter-Python" markdown="block">
+
    ```python
+   >>> import random
+   # Generate 10000 entities.
    >>> list_of_int = [random.randint(0, 255) for _ in range(10000)]
    >>> vectors = [[random.random() for _ in range(128)] for _ in range(10000)]
    ```
+</div>
 
-2. Insert a list of vectors. If you set `auto_id` to `True`, Milvus automatically assigns IDs to the vectors.
+<div class="filter-Java" markdown="block">
+
+```java
+  private static List<List<Float>> randomFloatVectors() {
+    SplittableRandom splitCollectionRandom = new SplittableRandom();
+    List<List<Float>> vectors = new ArrayList<>(10000);
+    for (int i = 0; i < 10000; ++i) {
+      splitCollectionRandom = splitCollectionRandom.split();
+      DoubleStream doubleStream = splitCollectionRandom.doubles(128);
+      List<Float> vector =
+          doubleStream.boxed().map(Double::floatValue).collect(Collectors.toList());
+      vectors.add(vector);
+    }
+    return vectors;
+  }
+```
+</div>
+
+2. Insert a list of vectors. 
+
+   <div class="filter">
+<a href="#Python">Python</a> <a href="#Java">Java</a>
+</div>
+
+<div class="filter-Python" markdown="block">
 
    ```python
+   # Insert embeddings.
    >>> hybrid_entities = [
-           {"name": "A", "values": list_of_int, "type": DataType.INT32},
-           {"name": "B", "values": list_of_int, "type": DataType.INT32},
-           {"name": "C", "values": list_of_int, "type": DataType.INT64},
-           {"name": "Vec", "values": vectors, "type":DataType.FLOAT_VECTOR}
+           {"name": "duration", "values": list_of_int, "type": DataType.INT32},
+           {"name": "release_year", "values": list_of_int, "type": DataType.INT64},
+           {"name": "embedding", "values": vectors, "type":DataType.FLOAT_VECTOR}
        ]
-   >>> client.insert('test01', hybrid_entities)
+   >>> client.insert('demo_films', hybrid_entities)
+   ```
+</div>
+
+<div class="filter-Java" markdown="block">
+
+```java
+    // Insert three films with their IDs, duration, release year, and fake embeddings into the collection "demo_films".
+    List<Long> ids = LongStream.range(0, 10000).boxed().collect(Collectors.toList());
+    List<Integer> durations =  /* A list of 1,000 Integers. */
+    List<Long> releaseYears =  LongStream.range(0, 10000).boxed().collect(Collectors.toList());
+    List<List<Float>> embeddings = randomFloatVectors();
+
+    InsertParam insertParam = InsertParam
+        .create(collectionName)
+        .addField("duration", DataType.INT32, durations)
+        .addField("release_year", DataType.INT64, releaseYears)
+        .addVectorField("embedding", DataType.VECTOR_FLOAT, embeddings)
+```
+</div>
    ```
 
-   You can also specify the vector IDs:
+   If `auto_id` is specified as `False` in the collection, you can also specify the entity IDs:
+
+   <div class="filter">
+   <a href="#Python">Python</a> <a href="#Java">Java</a>
+   </div>
+
+   <div class="filter-Python" markdown="block">
 
    ```python
-   >>> vector_ids = [id for id in range(20)]
-   >>> milvus.insert(collection_name='test01', records=vectors, ids=vector_ids)
+   >>> entity_ids = [id for id in range(10000)]
+   >>> client.insert('demo_films', hybrid_entities, ids=entity_ids)
    ```
+   </div>
+
+<div class="filter-Java" markdown="block">
+
+```java
+    // Insert three films with their IDs, duration, release year, and fake embeddings into the collection "demo_films".
+    List<Long> ids = LongStream.range(0, 10000).boxed().collect(Collectors.toList());
+    List<Integer> durations =  /* A list of 1,000 Integers. */
+    List<Long> releaseYears =  LongStream.range(0, 10000).boxed().collect(Collectors.toList());
+    List<List<Float>> embeddings = randomFloatVectors();
+
+    InsertParam insertParam = InsertParam
+        .create(collectionName)
+        .addField("duration", DataType.INT32, durations)
+        .addField("release_year", DataType.INT64, releaseYears)
+        .addVectorField("embedding", DataType.VECTOR_FLOAT, embeddings)
+        .setEntityIds(ids)
+```
+</div>
 
 ## Insert entities to a partition
 <a name="insert-entity-to-partition"></a>
 
+<div class="filter">
+<a href="#Python">Python</a> <a href="#Java">Java</a>
+</div>
+
+<div class="filter-Python" markdown="block">
+
 ```python
->>> client.insert('test01', vectors, partition_tag="tag01")
+>>> client.insert('demo_films', hybrid_entities, partition_tag="American")
 ```
+</div>
+
+<div class="filter-Java" markdown="block">
+
+```java
+    // Insert three films with their IDs, duration, release year, and fake embeddings into the partition "American".
+    List<Long> ids = LongStream.range(0, 10000).boxed().collect(Collectors.toList());
+    List<Integer> durations =  /* A list of 1,000 Integers. */
+    List<Long> releaseYears =  LongStream.range(0, 10000).boxed().collect(Collectors.toList());
+    List<List<Float>> embeddings = randomFloatVectors();
+
+    InsertParam insertParam = InsertParam
+        .create(collectionName)
+        .addField("duration", DataType.INT32, durations)
+        .addField("release_year", DataType.INT64, releaseYears)
+        .addVectorField("embedding", DataType.VECTOR_FLOAT, embeddings)
+        .setEntityIds(ids)
+        .setPartitionTag(partitionTag);
+```
+</div>
 
 ## Delete entities by ID
 <a name="delete-entity"></a>
 
+<div class="filter">
+<a href="#Python">Python</a> <a href="#Java">Java</a>
+</div>
+
+<div class="filter-Python" markdown="block">
+
 Suppose your collection contains the following vector IDs:
 
 ```python
->>> ids = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+>>> ids = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 ```
 
 Run these following command to delete specified embedding vectors:
 
 ```python
->>> client.delete_entity_by_id('test01', ids)
+>>> client.delete_entity_by_id('demo_films', ids)
 ```
+</div>
+
+<div class="filter-Python" markdown="block">
+
+```java
+client.deleteEntityByID(collectionName, ids.subList(0, 10));
+```
+</div>
 <div class="alert note">
 After calling <code>delete</code>, you can call <code>flush</code> again to ensure that the newly inserted data is visible and the deleted data is no longer recoverable.
 </div>
+
 
 
 ## FAQ

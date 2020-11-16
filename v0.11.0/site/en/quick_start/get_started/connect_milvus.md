@@ -11,6 +11,11 @@ This article decribes how to connect to a Milvus server from a Python client.
 <li>We recommend using <a href="https://milvus.io/tools/sizing">Milvus Sizing Tool</a> to estimate the hardware resources required for the data.</li>
 </div>
 
+<div class="filter">
+<a href="#Python">Python</a> <a href="#Java">Java</a>
+</div>
+
+<div class="filter-Python" markdown="block">
 
 1. Import pymilvus:
 
@@ -44,3 +49,20 @@ Python SDKs corresponding to Milvus v0.9.0 or later have a connection pool. Ther
 <summary><font color="#4fc4f9">How to fix the error when I install pymilvus on Windows?</font></summary>
 Try installing pymilvus in a Conda environment.
 </details>
+
+<div class="filter-Java" markdown="block">
+
+1. Import all Milvus.client related file packages：
+
+   ```java
+   import io.milvus.client.*;
+   ```
+
+2. Connect to the Milvus server：
+
+   ```java
+    // You can call withLogging() to enable logging framework.
+    ConnectParam connectParam = new ConnectParam.Builder().withHost("127.0.0.1").withPort(19530).build();
+    MilvusClient client = new MilvusGrpcClient(connectParam);
+    ```
+</div>

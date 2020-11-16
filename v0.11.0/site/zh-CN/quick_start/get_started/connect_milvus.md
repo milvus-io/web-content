@@ -62,9 +62,7 @@ Milvus v0.9.0 及更高版本对应的 Python SDK 有连接池。连接池的默
 2. 连接 Milvus 服务端：
 
    ```java
-    /*
-     *   You can call withLogging() to enable logging framework.
-     */
+    // You can call withLogging() to enable logging framework.
     ConnectParam connectParam = new ConnectParam.Builder().withHost("127.0.0.1").withPort(19530).build();
     MilvusClient client = new MilvusGrpcClient(connectParam);
     ```
