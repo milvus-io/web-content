@@ -44,15 +44,12 @@ Milvus 支持在集合或分区中查询向量。
    <div class="filter-Java" markdown="block">
 
    ```java
-    /*
-     * Basic hybrid search:
-     *   Let's say we have a film with its `embedding` and we want to find `top1` film that is
-     *   most similar to it by L2 metric_type (Euclidean Distance).
-     *
-     *   In addition to vector similarities, we also want to filter films such that:
-     *     - `term` is 1, 2, or 5,
-     *     - `duration` larger than 250 minutes.
-     */
+   // Basic hybrid search:
+   // Let's say we have a film with its `embedding` and we want to find `top1` film that is
+   // most similar to it by L2 metric_type (Euclidean Distance).
+   // In addition to vector similarities, we also want to filter films such that:
+   // - `term` is 1, 2, or 5,
+   // - `duration` larger than 250 minutes.
     List<List<Float>> queryEmbedding = /* your query vectors */;
     final long topK = 10;
     String dsl = String.format(

@@ -25,10 +25,8 @@ id: create_drop_partition.md
 <div class="filter-Java" markdown="block">
 
 ```java
-/*
- *   Here we create a partition called "American"
- *   because the films to insert are American films.
- */
+// Here we create a partition called "American"
+// because the films to insert are American films.
 final String partitionTag = "American";
 client.createPartition(collectionName, partitionTag);
 ```

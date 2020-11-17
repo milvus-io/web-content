@@ -13,8 +13,9 @@ When performing operations that change data, you can flush the data in the colle
 <div class="filter-Python" markdown="block">
 
 ```python
->>> client.flush(collection_name_array=['test01'])
+>>> client.flush('test01')
 ```
+</div>
 
 <div class="filter-Java" markdown="block">
 
@@ -26,6 +27,8 @@ client.flush('test01');
 <div class="alert note">
 After calling <code>delete</code>, you can call <code>flush</code> again to ensure that the newly inserted data is visible and the deleted data is no longer recoverable.
 </div>
+
+
 
 ## FAQ
 

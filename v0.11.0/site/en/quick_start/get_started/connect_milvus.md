@@ -4,7 +4,7 @@ id: connect_milvus.md
 
 # Connect to the Server
 
-This article decribes how to connect to a Milvus server from a Python client.
+This article decribes how to connect to the Milvus server.
 
 <div class="alert note">
 <li>See <a href="https://github.com/milvus-io/pymilvus">Python API documentation</a> for details about APIs.</li>
@@ -49,6 +49,8 @@ Python SDKs corresponding to Milvus v0.9.0 or later have a connection pool. Ther
 <summary><font color="#4fc4f9">How to fix the error when I install pymilvus on Windows?</font></summary>
 Try installing pymilvus in a Conda environment.
 </details>
+
+</div>
 
 <div class="filter-Java" markdown="block">
 

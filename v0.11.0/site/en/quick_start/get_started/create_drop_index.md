@@ -11,7 +11,7 @@ This article provides Python sample codes for creating or dropping indexes.
 Milvus supports one index for each field in a collection. Switching index type causes the original index to be deleted. A collection uses FLAT as its default index before an index type is specified. 
 
 <div class="alert note">
-<code>create_index()</code> specifies the index type of a collection and synchronously creates indexes for the previously inserted data. When the size of the subsequently inserted data reaches the <code>segment_row_limit</code>, Milvus automatically creates indexes in the background. For streaming data, it is recommended to create indexes before inserting the vector so that the system can automatically build indexes for the next data. For static data, it is recommended to import all the data at first and then create indexes. See <a href="https://github.com/milvus-io/pymilvus/tree/0.3.0/examples/indexes">index sample program</a> for more information about using index.
+<code>create_index()</code> specifies the index type of a collection and synchronously creates indexes for the previously inserted data. When the row count of the inserted data reaches <code>segment_row_limit</code>, Milvus automatically creates indexes in the background. For streaming data, it is recommended to create indexes before inserting the vector so that the system can automatically build indexes for the next data. For static data, it is recommended to import all the data at first and then create indexes. See <a href="https://github.com/milvus-io/pymilvus/tree/0.3.0/examples/indexes">index sample program</a> for more information about using index.
 </div>
 
 1. Prepare the parameters required for creating an IVF_FLAT vector index. 

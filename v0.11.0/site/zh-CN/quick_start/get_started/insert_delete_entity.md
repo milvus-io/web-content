@@ -135,11 +135,11 @@ id: insert_delete_entity.md
 <div class="filter-Java" markdown="block">
 
 ```java
-    //Insert three films with their IDs, duration, release year, and fake embeddings into the partition "American".
-    List<Long> ids = LongStream.range(0, 10000).boxed().collect(Collectors.toList());
-    List<Integer> durations =  /* A list of 1,000 Integers. */
-    List<Long> releaseYears =  LongStream.range(0, 10000).boxed().collect(Collectors.toList());
-    List<List<Float>> embeddings = randomFloatVectors();
+  //Insert three films with their IDs, duration, release year, and fake embeddings into the partition "American".
+  List<Long> ids = LongStream.range(0, 10000).boxed().collect(Collectors.toList());
+  List<Integer> durations =  /* A list of 1,000 Integers. */
+  List<Long> releaseYears =  LongStream.range(0, 10000).boxed().collect(Collectors.toList());
+  List<List<Float>> embeddings = randomFloatVectors();
 
     InsertParam insertParam = InsertParam
         .create(collectionName)
