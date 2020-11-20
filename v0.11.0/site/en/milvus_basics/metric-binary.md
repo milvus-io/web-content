@@ -14,7 +14,6 @@ The following table shows how these widely used distance metrics fit with variou
 
 <div class="tab-wrapper"><a href="metric-binary.md" class='active '>Binary vectors</a><a href="metric-floating.md" class=''>Floating point vectors</a></div> 
 
-<div class="filter-binary table-wrapper" markdown="block">
 
 <table class="tg">
 <thead>
@@ -35,7 +34,6 @@ The following table shows how these widely used distance metrics fit with variou
 </tbody>
 </table>
 
-<div class="filter-binary table-wrapper" markdown="block">
 
 ### Jaccard distance
 
@@ -99,7 +97,6 @@ Where:
 - N<sub>B</sub> specifies the number of bits in the fingerprint of molecular B.
 - N<sub>AB</sub> specifies the number of shared bits in the fingerprint of molecular A and B.
 
-</div>
 
 ## FAQ
 

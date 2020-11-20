@@ -12,7 +12,6 @@ Milvus 基于不同的距离计算方式比较向量间的距离。选择合适�
 
 <div class="tab-wrapper"><a href="metric-binary.md" class='active '>二值型向量</a><a href="metric-floating.md" class=''>浮点型向量</a></div> 
 
-<div class="filter-binary table-wrapper" markdown="block">
 
 <table class="tg">
 <thead>
@@ -33,8 +32,6 @@ Milvus 基于不同的距离计算方式比较向量间的距离。选择合适�
 </tbody>
 </table>
 
-
-<div class="filter-binary" markdown="block">
 
 ### 杰卡德距离
 
@@ -104,7 +101,6 @@ Milvus 基于不同的距离计算方式比较向量间的距离。选择合适�
 - N<sub>B</sub> 表示分子式 B 的化学指纹中二进制位的数量。
 - N<sub>AB</sub> 表示分子式 A 和 B 的化学指纹中共有的二进制位的数量。
 
-</div>
 
 ## 常见问题
 
