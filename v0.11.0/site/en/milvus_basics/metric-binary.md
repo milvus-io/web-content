@@ -1,5 +1,8 @@
 ---
-id: metric.md
+id: metric-binary.md
+label: Binary vectors
+order: 1
+group: vectors
 ---
 
 # Distance Metrics
@@ -9,32 +12,7 @@ In Milvus, distance metrics are used to measure similarities among vectors. Choo
 The following table shows how these widely used distance metrics fit with various input data forms and Milvus indexes.
 
 
-<div class="filter">
-<a href="#floating">Floating point embeddings</a> <a href="#binary">Binary embeddings</a>
-
-</div>
-
-<div class="filter-floating table-wrapper" markdown="block">
-
-<table class="tg">
-<thead>
-  <tr>
-    <th class="tg-0pky" style="width: 204px;">Distance Metrics</th>
-    <th class="tg-0pky">Index Types</th>
-  </tr>
-</thead>
-<tbody>
-  <tr>
-    <td class="tg-0pky">Euclidean distance (L2)</td>
-    <td class="tg-0pky" rowspan="2"><ul><li>FLAT</li><li>IVF_FLAT</li><li>IVF_SQ8</li><li>IVF_SQ8H</li><li>IVF_PQ</li><li>RNSG</li><li>HNSW</li></ul></td>
-  </tr>
-  <tr>
-    <td class="tg-0pky">Inner product (IP)</td>
-  </tr>
-</tbody>
-</table>
-
-</div>
+<div class="tab-wrapper"><a href="metric-binary.md" class='active '>Binary vectors</a><a href="metric-floating.md" class=''>Floating point vectors</a></div> 
 
 <div class="filter-binary table-wrapper" markdown="block">
 
@@ -56,52 +34,6 @@ The following table shows how these widely used distance metrics fit with variou
   </tr>
 </tbody>
 </table>
-
-</div>
-
-<div class="filter">
-<a href="#floating">Floating point embeddings</a> <a href="#binary">Binary embeddings</a>
-
-</div>
-
-<div class="filter-floating table-wrapper" markdown="block">
-
-### Euclidean distance (L2)
-
-Essentially, Euclidean distance measures the length of a segment that connects 2 points.
-
-The formula for Euclidean distance is as follows:
-
-![euclidean](../../../assets/euclidean_metric.png)
-
-where **a** = (a1, a2,..., an) and **b** = (b1, b2,..., bn) are two points in n-dimensional Euclidean space
-
-It's the most commonly used distance metric, and is very useful when the data is continuous.
-
-### Inner product (IP)
-
-The IP distance between two embeddings are defined as follows: 
-
-![ip](../../../assets/IP_formula.png)
-
-where A and B are embeddings, `||A||` and `||B||` are the norms of A and B.
-
-IP is more useful if you are more interested in measuring the orientation but not the magnitude of the vectors.
-
-<div class="alert note">
- If you use IP to calculate embeddings similarities, you must normalize your embeddings. After normalization, inner product equals cosine similarity.
-</div>
-
-
-Suppose X' is normalized from embedding X: 
-
-![normalize](../../../assets/normalize_formula.png)
-
-The correlation between the two embeddings is as follows: 
-
-![normalization](../../../assets/normalization_formula.png)
-
-</div>
 
 <div class="filter-binary table-wrapper" markdown="block">
 

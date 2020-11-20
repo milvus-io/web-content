@@ -117,7 +117,7 @@ FLAT 索引类型提供 100% 的检索召回率。与其他索引相比，当查
 
    | 参数     | 说明     　    | 取值范围  |
    | --------- |-------------- | -------- |
-   | `metric_type` | [可选] 距离计算方式 | 详见[目前支持的距离计算方式](metric.md#floating)。 |
+   | `metric_type` | [可选] 距离计算方式 | 详见[目前支持的距离计算方式](metric-floating.md)。 |
 
 ### IVF_FLAT
 <a name="IVF_FLAT"></a>
@@ -257,7 +257,7 @@ ANNOY（Approximate Nearest Neighbors Oh Yeah）是一种用超平面把高维�
 ## 选择索引
 
 - 若要为你的使用场景选择合适的索引，请参阅 [如何选择索引类型](https://milvus.io/cn/blogs/2019-12-03-select-index.md)。
-- 关于索引和向量距离计算方法的选择，请访问 [距离计算方式](metric.md)。
+- 关于索引和向量距离计算方法的选择，请访问 [距离计算方式](metric-floating.md)。
 
 
 ## 常见问题

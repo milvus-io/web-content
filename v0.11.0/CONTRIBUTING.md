@@ -10,7 +10,7 @@ Generally, we follow the "fork-and-pull" Git workflow.
 2. [**Commit**](https://docs.github.com/en/free-pro-team@latest/github/collaborating-with-issues-and-pull-requests/committing-changes-to-a-pull-request-branch-created-from-a-fork) changes to your own branch
 3. Submit a [**pull request**](https://docs.github.com/en/free-pro-team@latest/github/collaborating-with-issues-and-pull-requests/about-pull-requests) so that we can review your changes
 
-Remember to [sync your forked repository](https://docs.github.com/en/free-pro-team@latest/github/getting-started-with-github/fork-a-repo#keep-your-fork-synced) *before* submitting proposed changes upstream. Quickly fork repositories and start making contributions directly from [milvus.io](https://www.milvus.io/docs/install_milvus.md) using the *Edit* button located in the top right corner of most pages.
+Remember to [sync your forked repository](https://docs.github.com/en/free-pro-team@latest/github/getting-started-with-github/fork-a-repo#keep-your-fork-synced) *before* submitting proposed changes upstream. Quickly fork repositories and start making contributions directly from [milvus.io](https://www.milvus.io/docs/overview.md) using the *Edit* button located in the top right corner of most pages.
 
 ### Issues
 

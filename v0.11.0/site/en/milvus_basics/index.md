@@ -117,7 +117,7 @@ FLAT index provides 100% query recall rate. Compared to other indexes, it is the
 
    | Parameter   | Description     | Range     |
    | -------- | ----------- | ---------- |
-   | `metric_type` | [Optional] The chosen distance metric.   | See [Supported Metrics](metric.md#floating). |
+   | `metric_type` | [Optional] The chosen distance metric.   | See [Supported Metrics](metric-floating.md). |
 
 ### IVF_FLAT
 <a name="IVF_FLAT"></a>
@@ -258,7 +258,7 @@ When searching for vectors, ANNOY follows the tree structure to find subspaces c
 
 To learn how to choose an appropriate index for your application scenarios, please read [How to Select an Index in Milvus](https://medium.com/@milvusio/how-to-choose-an-index-in-milvus-4f3d15259212).
 
-To learn how to choose an appropriate index for a metric, see [Distance Metrics](metric.md).
+To learn how to choose an appropriate index for a metric, see [Distance Metrics](metric-floating.md).
 
 
 ## FAQ
