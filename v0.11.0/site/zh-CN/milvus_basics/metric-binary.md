@@ -10,7 +10,7 @@ Milvus 基于不同的距离计算方式比较向量间的距离。选择合适�
 
 以下表格列出了 Milvus 目前支持的距离计算方式与数据格式、索引类型之间的兼容关系。
 
-<div class="tab-wrapper"><a href="metric-binary.md" class='active '>二值型向量</a><a href="metric-floating.md" class=''>浮点型向量</a></div> 
+<div class="tab-wrapper"><a href="metric-floating.md" class=''>浮点型向量</a><a href="metric-binary.md" class='active '>二值型向量</a></div> 
 
 
 <table class="tg">

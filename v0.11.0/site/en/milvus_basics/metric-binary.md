@@ -12,7 +12,7 @@ In Milvus, distance metrics are used to measure similarities among vectors. Choo
 The following table shows how these widely used distance metrics fit with various input data forms and Milvus indexes.
 
 
-<div class="tab-wrapper"><a href="metric-binary.md" class='active '>Binary vectors</a><a href="metric-floating.md" class=''>Floating point vectors</a></div> 
+<div class="tab-wrapper"><a href="metric-floating.md" class=''>Floating point vectors</a><a href="metric-binary.md" class='active '>Binary vectors</a></div> 
 
 
 <table class="tg">
