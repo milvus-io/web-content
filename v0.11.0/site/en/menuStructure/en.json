@@ -100,12 +100,29 @@
       "isMenu": true
     },
     {
-      "id": "milvus_docker-cpu.md",
+      "id": "install_milvus",
       "title": "Install Milvus",
       "label1": "quick_start",
       "label2": "",
       "label3": "",
+      "order": 0,
+      "isMenu": true
+    },
+    {
+      "id": "install_milvus.md",
+      "title": "Installation Overview",
+      "label1": "quick_start",
+      "label2": "install_milvus",
+      "label3": "",
       "order": 0
+    },
+    {
+      "id": "milvus_docker-cpu.md",
+      "title": "Install and Start Milvus",
+      "label1": "quick_start",
+      "label2": "install_milvus",
+      "label3": "",
+      "order": 1
     },
     
     {
@@ -115,6 +132,7 @@
       "label2": "",
       "label3": "",
       "order": 1
+
     },
     {
       "id": "get_started",

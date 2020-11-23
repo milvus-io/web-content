@@ -34,7 +34,6 @@ The following table shows how these widely used distance metrics fit with variou
 </tbody>
 </table>
 
-
 ### Jaccard distance
 
 Jaccard similarity coefficient measures the similarity between two sample sets, and is defined as the cardinality of the intersection of the defined sets divided by the cardinality of the union of them. It can only be applied to finite sample sets.

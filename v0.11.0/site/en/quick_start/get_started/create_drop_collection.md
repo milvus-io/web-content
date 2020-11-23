@@ -102,7 +102,7 @@ client.createCollection(collectionMapping);
 
 ```python
 # Drop a collection.
->>> milvus.drop_collection('test01')
+>>> client.drop_collection('test01')
 ```
 </div>
 

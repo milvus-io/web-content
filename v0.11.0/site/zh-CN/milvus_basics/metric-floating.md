@@ -12,6 +12,7 @@ Milvus 基于不同的距离计算方式比较向量间的距离。选择合适�
 <div class="tab-wrapper"><a href="metric-floating.md" class='active '>浮点型向量</a><a href="metric-binary.md" class=''>二值型向量</a></div> 
 
 
+
 <table class="tg">
 <thead>
   <tr>
