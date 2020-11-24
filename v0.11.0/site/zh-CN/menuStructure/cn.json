@@ -101,7 +101,7 @@
     },
     {
       "id": "install_milvus",
-      "title": "Install Milvus",
+      "title": "安装 Milvus",
       "label1": "quick_start",
       "label2": "",
       "label3": "",
@@ -110,7 +110,7 @@
     },
     {
       "id": "install_milvus.md",
-      "title": "Installation Overview",
+      "title": "安装概述",
       "label1": "quick_start",
       "label2": "install_milvus",
       "label3": "",

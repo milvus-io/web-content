@@ -44,7 +44,7 @@ id: storage_concept.md
 
 元数据后端服务不负责存储实体数据和索引。
 
-![meta](../../../assets/storage/meta.png)
+
 
 ## 常见问题
 

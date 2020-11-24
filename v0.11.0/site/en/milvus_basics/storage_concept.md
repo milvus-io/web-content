@@ -46,7 +46,7 @@ When data changes, the Metadata should change accordingly and be easy to obtain.
 
 The Metadata back-end service is not responsible for storing entity data and indexes.
 
-![meta](../../../assets/storage/meta.png)
+
 
 
 ## FAQ
