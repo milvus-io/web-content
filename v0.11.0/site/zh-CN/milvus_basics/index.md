@@ -28,7 +28,7 @@ Milvus 目前支持的向量索引类型大都属于 ANNS（Approximate Nearest 
 </thead>
 <tbody>
   <tr>
-    <td><a href="#FLAT">FLAT</a></td>
+    <td>FLAT</td>
     <td>N/A</td>
     <td><ul>
         <li>查询数据规模小，对查询速度要求不高。</li>
@@ -36,7 +36,7 @@ Milvus 目前支持的向量索引类型大都属于 ANNS（Approximate Nearest 
         </ul></td>
   </tr>
   <tr>
-    <td><a href="#IVF_FLAT">IVF_FLAT</a></td>
+    <td>IVF_FLAT</td>
     <td>基于量化的索引</td>
     <td><ul>
         <li>高速查询，</li>
@@ -44,7 +44,7 @@ Milvus 目前支持的向量索引类型大都属于 ANNS（Approximate Nearest 
         </ul></td>
   </tr>
   <tr>
-    <td><a href="#IVF_SQ8">IVF_SQ8</a></td>
+    <td>IVF_SQ8</td>
     <td>基于量化的索引</td>
     <td><ul>
         <li>高速查询，</li>
@@ -53,7 +53,7 @@ Milvus 目前支持的向量索引类型大都属于 ANNS（Approximate Nearest 
         </ul></td>
   </tr>
   <tr>
-    <td><a href="#IVF_SQ8H">IVF_SQ8H</a></td>
+    <td>IVF_SQ8H</td>
     <td>基于量化的索引</td>
     <td><ul>
         <li>高速查询，</li>
@@ -61,22 +61,22 @@ Milvus 目前支持的向量索引类型大都属于 ANNS（Approximate Nearest 
         </ul></td>
   </tr>
   <tr>
-    <td><a href="#IVF_PQ">IVF_PQ</a></td>
+    <td>IVF_PQ</td>
     <td>基于量化的索引</td>
     <td></td>
   </tr>
   <tr>
-    <td><a href="#RNSG">RNSG</a></td>
+    <td>RNSG</td>
     <td>基于图的索引</td>
     <td></td>
   </tr>
   <tr>
-    <td><a href="#HNSW">HNSW</a></td>
+    <td>HNSW</td>
     <td>基于图的索引</td>
     <td></td>
   </tr>
   <tr>
-    <td><a href="#ANNOY">ANNOY</a></td>
+    <td>ANNOY</td>
     <td>基于树的索引</td>
     <td></td>
   </tr>
@@ -104,7 +104,9 @@ Milvus 数据段存储海量数据。在建立索引时，Milvus 为每个数据
 众所周知，建索引是一个比较消耗计算资源和时间的工作。当查询任务和后台建索引任务并发时，Milvus 通常把计算资源优先分配给查询任务，即用户发起的任何查询命令都会打断后台正在执行的建索引任务。之后仅当用户持续 5 秒不再发起查询任务，Milvus 才会恢复执行后台建索引任务。此外，如果查询命令指定的数据段尚未建成指定索引，Milvus 会直接在段内做全量搜索。
 
 ## 索引概览
-
+<div class="filter">
+<a href="#FLAT">FLAT</a> <a href="#IVF_FLAT">IVF_FLAT</a> <a href="#IVF_SQ8">IVF_SQ8</a> <a href="#IVF_SQ8H">IVF_SQ8H</a> <a href="#IVF_PQ">IVF_PQ</a> <a href="#RNSG">RNSG</a> <a href="#HNSW">HNSW</a> <a href="#ANNOY">ANNOY</a>
+</div>
 
 ### FLAT
 <a name="FLAT"></a>
@@ -145,8 +147,19 @@ IVF_FLAT 是最基础的 IVF 索引，存储在各个单元中的数据编码与
 
 IVF\_SQ8 是在 IVF 的基础上对放入单元里的每条向量做一次标量量化（Scalar Quantization）。标量量化会把原始向量的每个维度从 4 个字节的浮点数转为 1 个字节的无符号整数，因此 IVF\_SQ8 索引文件占用的存储空间远小于 IVF\_FLAT。但是，标量量化会导致查询时的精度损失。
 
-- 建索引参数同 IVF\_FLAT
-- 查询参数同 IVF\_FLAT
+- 建索引参数
+
+   | 参数   | 说明     | 取值范围     |
+   | ------- | -------- |----------- |
+   | `nlist` | 聚类单元数 |[1, 65536] |
+   
+   
+- 查询参数
+
+   | 参数     | 说明        | 取值范围    |
+   | -------- | ----------- | ---------- |
+   | `nprobe` | 查询取的单元数 | [1, 65536] <br> GPU 版 Milvus 在 `nprobe` > 2048 时由 GPU 查询切换为 CPU 查询。|
+
 
 ### IVF_SQ8H
 <a name="IVF_SQ8H"></a>
@@ -158,8 +171,19 @@ IVF\_SQ8H 是一种优化查询执行的 IVF\_SQ8 索引类型。
 - `nq` &ge; `gpu_search_threshold`：整个查询过程都在 GPU 上执行。
 - `nq` < `gpu_search_threshold`：在 GPU 上执行在 IVF 里寻找 `nprobe` 个最近单元的运算，在 CPU 上执行其它运算。
 
-- 建索引参数同 IVF\_FLAT
-- 查询参数同 IVF\_FLAT
+- 建索引参数
+
+   | 参数   | 说明     | 取值范围     |
+   | ------- | -------- |----------- |
+   | `nlist` | 聚类单元数 |[1, 65536] |
+   
+   
+- 查询参数
+
+   | 参数     | 说明        | 取值范围    |
+   | -------- | ----------- | ---------- |
+   | `nprobe` | 查询取的单元数 | [1, 65536] <br> GPU 版 Milvus 在 `nprobe` > 2048 时由 GPU 查询切换为 CPU 查询。|
+
 
 ### IVF_PQ
 <a name="IVF_PQ"></a>
@@ -168,19 +192,39 @@ IVF\_SQ8H 是一种优化查询执行的 IVF\_SQ8 索引类型。
 
 IVF\_PQ 先进行 IVF 索引聚类，再对向量做乘积量化。其索引文件甚至可以比 IVF\_SQ8 更小，不过同样地也会导致查询时的精度损失。  
 
+<div class="filter">
+<a href="#CPU">CPU 版 Milvus</a> <a href="#GPU">GPU 版 Milvus</a>
+</div>
+
 - 建索引参数
+<div class="filter-CPU" markdown="block">
 
    | 参数   | 说明          | 取值范围     |
    | --------| ------------- | ----------- |
    | `nlist` | 聚类单元数　    | [1, 65536] |
-   | `m`     | 乘积量化因子个数 | CPU 版 Milvus：`m` ≡ dim (mod m)；GPU 版 Milvus `m` ∈ {1, 2, 3, 4, 8, 12, 16, 20, 24, 28, 32, 40, 48, 56, 64, 96}, and (dim / m) ∈ {1, 2, 3, 4, 6, 8, 10, 12, 16, 20, 24, 28, 32}。<br>`m` x 1024 的值不能超过显卡的 `MaxSharedMemPerBlock`。 |
-   
+   | `m`     | 乘积量化因子个数 | CPU 版 Milvus：`m` ≡ dim (mod m) |
+ </div>
+
+- 建索引参数
+<div class="filter-GPU" markdown="block">
+
+   | 参数   | 说明          | 取值范围     |
+   | --------| ------------- | ----------- |
+   | `nlist` | 聚类单元数　    | [1, 65536] |
+   | `m`     | 乘积量化因子个数 | GPU 版 Milvus `m` ∈ {1, 2, 3, 4, 8, 12, 16, 20, 24, 28, 32, 40, 48, 56, 64, 96}, and (dim / m) ∈ {1, 2, 3, 4, 6, 8, 10, 12, 16, 20, 24, 28, 32}。<br>`m` x 1024 的值不能超过显卡的 `MaxSharedMemPerBlock`。 |
+ </div>
+
 <div class="alert note">
 如果 GPU 版 Milvus 不支持设置的 <code>m</code> 值，Milvus 会自动由 GPU 检索切换为 CPU 检索。
 </div>
    
+   
+- 查询参数
 
-- 查询参数同 IVF_FLAT
+   | 参数     | 说明        | 取值范围    |
+   | -------- | ----------- | ---------- |
+   | `nprobe` | 查询取的单元数 | [1, 65536] <br> GPU 版 Milvus 在 `nprobe` > 2048 时由 GPU 查询切换为 CPU 查询。|
+
 
 ### RNSG
 <a name="RNSG"></a>

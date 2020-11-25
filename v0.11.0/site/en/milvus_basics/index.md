@@ -4,7 +4,7 @@ id: index.md
 
 # Vector index
 
-Vector index is a time-efficient and space-efficient data structure built on vectors through a certain mathematical model. Through the vector index, we can efficiently query several vectors similar to the target vector.
+Vector index is a time- and space-efficient data structure built on vectors through a certain mathematical model. Through the vector index, we can efficiently query several vectors similar to the target vector.
 
 Since accurate retrieval is usually very time-consuming, most of the vector index types of Milvus use ANNS (Approximate Nearest Neighbors Search). Compared with accurate retrieval, the core idea of ANNS is no longer limited to returning the most accurate result, but only searching for neighbors of the target. ANNS improves retrieval efficiency by sacrificing accuracy within an acceptable range.
 
@@ -27,7 +27,7 @@ The following table classifies the indexes that Milvus supports:
 </thead>
 <tbody>
   <tr>
-    <td><a href="#FLAT">FLAT</a></td>
+    <td>FLAT</td>
     <td>N/A</td>
     <td><ul>
         <li>Has a relatively small dataset.</li>
@@ -35,7 +35,7 @@ The following table classifies the indexes that Milvus supports:
         </ul></td>
   </tr>
   <tr>
-    <td><a href="#IVF_FLAT">IVF_FLAT</a></td>
+    <td>IVF_FLAT</td>
     <td>Quantization-based index</td>
     <td><ul>
         <li>High-speed query.</li>
@@ -43,7 +43,7 @@ The following table classifies the indexes that Milvus supports:
         </ul></td>
   </tr>
   <tr>
-    <td><a href="#IVF_SQ8">IVF_SQ8</a></td>
+    <td>IVF_SQ8</td>
     <td>Quantization-based index</td>
     <td><ul>
         <li>High-speed query.</li>
@@ -52,7 +52,7 @@ The following table classifies the indexes that Milvus supports:
         </ul></td>
   </tr>
   <tr>
-    <td><a href="#IVF_SQ8H">IVF_SQ8H</a></td>
+    <td>IVF_SQ8H</td>
     <td>Quantization-based index</td>
     <td><ul>
         <li>High-speed query. </li>
@@ -60,22 +60,22 @@ The following table classifies the indexes that Milvus supports:
         </ul></td>
   </tr>
   <tr>
-    <td><a href="#IVF_PQ">IVF_PQ</a></td>
+    <td>IVF_PQ</td>
     <td>Quantization-based index</td>
     <td></td>
   </tr>
   <tr>
-    <td><a href="#RNSG">RNSG</a></td>
+    <td>RNSG</td>
     <td>Graph-based index</td>
     <td></td>
   </tr>
   <tr>
-    <td><a href="#HNSW">HNSW</a></td>
+    <td>HNSW</td>
     <td>Graph-based index</td>
     <td></td>
   </tr>
   <tr>
-    <td><a href="#ANNOY">ANNOY</a></td>
+    <td>ANNOY</td>
     <td>Tree-based index</td>
     <td></td>
   </tr>
@@ -106,6 +106,10 @@ It is known that indexing is a resource-consuming and time-consuming task. When 
 
 ## Supported vector indexes
 
+<div class="filter">
+<a href="#FLAT">FLAT</a> <a href="#IVF_FLAT">IVF_FLAT</a> <a href="#IVF_SQ8">IVF_SQ8</a> <a href="#IVF_SQ8H">IVF_SQ8H</a> <a href="#IVF_PQ">IVF_PQ</a> <a href="#RNSG">RNSG</a> <a href="#HNSW">HNSW</a> <a href="#ANNOY">ANNOY</a>
+</div>
+
 ### FLAT
 <a name="FLAT"></a>
 
@@ -132,20 +136,31 @@ IVF_FLAT is the most basic IVF index, and the encoded data stored in each unit i
    | ------- | -------- |----------- |
    | `nlist` | Number of cluster units |[1, 65536] |
    
-
+   
 - Search parameters
 
    | Parameter   | Description     | Range     |
    | -------- | ----------- | ---------- |
    | `nprobe` | Number of units to query | CPU: [1, nlist] <br> GPU: [1, min(2048, nlist)] |
 
+
 ### IVF_SQ8
 <a name="IVF_SQ8"></a>
 
 IVF\_SQ8 does scalar quantization for each vector placed in the unit based on IVF. Scalar quantization converts each dimension of the original vector from a 4-byte floating-point number to a 1-byte unsigned integer, so the IVF\_SQ8 index file occupies much less space than the IVF\_FLAT index file. However, scalar quantization results in a loss of accuracy during searching vectors.
 
-- IVF\_SQ8 has the same index building parameters as IVF\_FLAT.
-- IVF\_SQ8 has the same search parameters as IVF\_FLAT.
+- Index building parameters
+
+   | Parameter   | Description     | Range     |
+   | ------- | -------- |----------- |
+   | `nlist` | Number of cluster units |[1, 65536] |
+   
+   
+- Search parameters
+
+   | Parameter   | Description     | Range     |
+   | -------- | ----------- | ---------- |
+   | `nprobe` | Number of units to query | CPU: [1, nlist] <br> GPU: [1, min(2048, nlist)] |
 
 ### IVF_SQ8H
 <a name="IVF_SQ8H"></a>
@@ -159,8 +174,18 @@ The query method is as follows:
 - If `nq` &ge; `gpu_search_threshold`, GPU handles the entire query task.
 - If `nq` < `gpu_search_threshold`, GPU handles the task of retrieving the `nprobe` nearest unit in the IVF index file, and CPU handles the rest.
 
-- IVF\_SQ8H has the same index building parameters as IVF\_FLAT.
-- IVF\_SQ8H has the same search parameters as IVF\_FLAT.
+- Index building parameters
+
+   | Parameter   | Description     | Range     |
+   | ------- | -------- |----------- |
+   | `nlist` | Number of cluster units |[1, 65536] |
+   
+   
+- Search parameters
+
+   | Parameter   | Description     | Range     |
+   | -------- | ----------- | ---------- |
+   | `nprobe` | Number of units to query | CPU: [1, nlist] <br> GPU: [1, min(2048, nlist)] |
 
 ### IVF_PQ
 <a name="IVF_PQ"></a>
@@ -169,18 +194,37 @@ The query method is as follows:
 
 IVF\_PQ performs IVF index clustering before quantizing the product of vectors. Its index file is even smaller than IVF\_SQ8, but it also causes a loss of accuracy during searching vectors.
 
+<div class="filter">
+<a href="#CPU">CPU-only Milvus</a> <a href="#GPU">GPU-enabled Milvus</a>
+</div>
+
 - Index building parameters
+<div class="filter-CPU" markdown="block">
 
    | Parameter   | Description     | Range     |
    | --------| ------------- | ----------- |
    | `nlist` | Number of cluster units　    | [1, 65536] |
-   | `m`     | Number of factors of product quantization | CPU-only Milvus: `m` ≡ dim (mod m); GPU-enabled Milvus:  `m` ∈ {1, 2, 3, 4, 8, 12, 16, 20, 24, 28, 32, 40, 48, 56, 64, 96}, and (dim / m) ∈ {1, 2, 3, 4, 6, 8, 10, 12, 16, 20, 24, 28, 32}.<br>(`m` x 1024) &ge; `MaxSharedMemPerBlock` of your graphics card. |
-   
+   | `m`     | Number of factors of product quantization | CPU-only Milvus: `m` ≡ dim (mod m)|
+</div>
+
+- Index building parameters
+<div class="filter-GPU" markdown="block">
+
+   | Parameter   | Description     | Range     |
+   | --------| ------------- | ----------- |
+   | `nlist` | Number of cluster units　    | [1, 65536] |
+   | `m`     | Number of factors of product quantization |  GPU-enabled Milvus:  `m` ∈ {1, 2, 3, 4, 8, 12, 16, 20, 24, 28, 32, 40, 48, 56, 64, 96}, and (dim / m) ∈ {1, 2, 3, 4, 6, 8, 10, 12, 16, 20, 24, 28, 32}.<br>(`m` x 1024) &ge; `MaxSharedMemPerBlock` of your graphics card. |
+</div>
+
 <div class="alert note">
 Milvus automatically switches from GPU search to CPU search if <code>m</code> is not supported.
 </div>
 
-- IVF\_PQ has the same search parameters as IVF\_FLAT.
+- Search parameters
+
+   | Parameter   | Description     | Range     |
+   | -------- | ----------- | ---------- |
+   | `nprobe` | Number of units to query | CPU: [1, nlist] <br> GPU: [1, min(2048, nlist)] |
 
 ### RNSG
 <a name="RNSG"></a>
