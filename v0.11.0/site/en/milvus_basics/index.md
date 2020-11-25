@@ -27,7 +27,7 @@ The following table classifies the indexes that Milvus supports:
 </thead>
 <tbody>
   <tr>
-    <td>FLAT</td>
+    <td><a href="#FLAT">FLAT</a></td>
     <td>N/A</td>
     <td><ul>
         <li>Has a relatively small dataset.</li>
@@ -35,7 +35,7 @@ The following table classifies the indexes that Milvus supports:
         </ul></td>
   </tr>
   <tr>
-    <td>IVF_FLAT</td>
+    <td><a href="#IVF_FLAT">IVF_FLAT</a></td>
     <td>Quantization-based index</td>
     <td><ul>
         <li>High-speed query.</li>
@@ -43,7 +43,7 @@ The following table classifies the indexes that Milvus supports:
         </ul></td>
   </tr>
   <tr>
-    <td>IVF_SQ8</td>
+    <td><a href="#IVF_SQ8">IVF_SQ8</a></td>
     <td>Quantization-based index</td>
     <td><ul>
         <li>High-speed query.</li>
@@ -52,7 +52,7 @@ The following table classifies the indexes that Milvus supports:
         </ul></td>
   </tr>
   <tr>
-    <td>IVF_SQ8H</td>
+    <td><a href="#IVF_SQ8H">IVF_SQ8H</a></td>
     <td>Quantization-based index</td>
     <td><ul>
         <li>High-speed query. </li>
@@ -60,22 +60,22 @@ The following table classifies the indexes that Milvus supports:
         </ul></td>
   </tr>
   <tr>
-    <td>IVF_PQ</td>
+    <td><a href="#IVF_PQ">IVF_PQ</a></td>
     <td>Quantization-based index</td>
     <td></td>
   </tr>
   <tr>
-    <td>RNSG</td>
+    <td><a href="#RNSG">RNSG</a></td>
     <td>Graph-based index</td>
     <td></td>
   </tr>
   <tr>
-    <td>HNSW</td>
+    <td><a href="#HNSW">HNSW</a></td>
     <td>Graph-based index</td>
     <td></td>
   </tr>
   <tr>
-    <td>ANNOY</td>
+    <td><a href="#ANNOY">ANNOY</a></td>
     <td>Tree-based index</td>
     <td></td>
   </tr>
@@ -106,13 +106,8 @@ It is known that indexing is a resource-consuming and time-consuming task. When 
 
 ## Supported vector indexes
 
-<div class="filter">
-<a href="#FLAT">FLAT</a> <a href="#IVF_FLAT">IVF_FLAT</a> <a href="#IVF_SQ8">IVF_SQ8</a> <a href="#IVF_SQ8H">IVF_SQ8H</a> <a href="#IVF_PQ">IVF_PQ</a> <a href="#RNSG">RNSG</a> <a href="#HNSW">HNSW</a> <a href="#ANNOY">ANNOY</a>
-</div>
-
-<div class="filter-FLAT" markdown="block">
-
 ### FLAT
+<a name="FLAT"></a>
 
 If FLAT index is used, the vectors are stored in an array of float/binary data without any compression. during searching vectors, all indexed vectors are decoded sequentially and compared to the query vectors.
 
@@ -123,55 +118,45 @@ FLAT index provides 100% query recall rate. Compared to other indexes, it is the
    | Parameter   | Description     | Range     |
    | -------- | ----------- | ---------- |
    | `metric_type` | [Optional] The chosen distance metric.   | See [Supported Metrics](metric-floating.md). |
-</div>
-
-<div class="filter-IVF_FLAT" markdown="block">
 
 ### IVF_FLAT
+<a name="IVF_FLAT"></a>
 
 IVF (Inverted File) is an index type based on quantization. It divides the points in space into `nlist` units by clustering method. during searching vectors, it compares the distances between the target vector and the center of all the units, and then select the `nprobe` nearest unit. Then, it compares all the vectors in these selected cells to get the final result. 
 
 IVF_FLAT is the most basic IVF index, and the encoded data stored in each unit is consistent with the original data.
 
-- Index building parameters
+ Index building parameters
 
    | Parameter   | Description     | Range     |
    | ------- | -------- |----------- |
    | `nlist` | Number of cluster units |[1, 65536] |
-   
-   
+
 - Search parameters
 
    | Parameter   | Description     | Range     |
    | -------- | ----------- | ---------- |
    | `nprobe` | Number of units to query | CPU: [1, nlist] <br> GPU: [1, min(2048, nlist)] |
 
-</div>
-
-<div class="filter-IVF_SQ8" markdown="block">
-
 ### IVF_SQ8
+<a name="IVF_SQ8"></a>
 
 IVF\_SQ8 does scalar quantization for each vector placed in the unit based on IVF. Scalar quantization converts each dimension of the original vector from a 4-byte floating-point number to a 1-byte unsigned integer, so the IVF\_SQ8 index file occupies much less space than the IVF\_FLAT index file. However, scalar quantization results in a loss of accuracy during searching vectors.
 
-- Index building parameters
+ Index building parameters
 
    | Parameter   | Description     | Range     |
    | ------- | -------- |----------- |
    | `nlist` | Number of cluster units |[1, 65536] |
-   
-   
+
 - Search parameters
 
    | Parameter   | Description     | Range     |
    | -------- | ----------- | ---------- |
    | `nprobe` | Number of units to query | CPU: [1, nlist] <br> GPU: [1, min(2048, nlist)] |
 
-</div>
-
-<div class="filter-IVF_SQ8H" markdown="block">
-
 ### IVF_SQ8H
+<a name="IVF_SQ8H"></a>
 
 Optimized version of IVF\_SQ8 that requires both CPU and GPU to work. Unlike IVF\_SQ8, IVF\_SQ8H uses a GPU-based coarse quantizer, which greatly reduces time to quantize.
 
@@ -182,34 +167,28 @@ The query method is as follows:
 - If `nq` &ge; `gpu_search_threshold`, GPU handles the entire query task.
 - If `nq` < `gpu_search_threshold`, GPU handles the task of retrieving the `nprobe` nearest unit in the IVF index file, and CPU handles the rest.
 
-- Index building parameters
+ Index building parameters
 
    | Parameter   | Description     | Range     |
    | ------- | -------- |----------- |
    | `nlist` | Number of cluster units |[1, 65536] |
-   
-   
+
 - Search parameters
 
    | Parameter   | Description     | Range     |
    | -------- | ----------- | ---------- |
    | `nprobe` | Number of units to query | CPU: [1, nlist] <br> GPU: [1, min(2048, nlist)] |
 
-</div>
-
-<div class="filter-IVF_PQ" markdown="block">
-
 ### IVF_PQ
+<a name="IVF_PQ"></a>
 
 `PQ` (Product Quantization) uniformly decomposes the original high-dimensional vector space into Cartesian products of `m` low-dimensional vector spaces, and then quantizes the decomposed low-dimensional vector spaces. Instead of calculating the distances between the target vector and the center of all the units, product quantization enables the calculation of distances between the target vector and the clustering center of each low-dimensional space and greatly reduces the time complexity and space complexity of the algorithm.
 
 IVF\_PQ performs IVF index clustering before quantizing the product of vectors. Its index file is even smaller than IVF\_SQ8, but it also causes a loss of accuracy during searching vectors.
 
-
-
 - Index building parameters
 <div class="filter">
-<a href="#CPU">CPU-only Milvus</a> <a href="#GPU">GPU-enabled Milvus</a>
+<a href="#CPU">CPU-only Milvus</a> <a href="#GPU">GPU-enabled Milvus </a>
 </div>
 
 <div class="filter-CPU" markdown="block">
@@ -217,8 +196,9 @@ IVF\_PQ performs IVF index clustering before quantizing the product of vectors. 
    | Parameter   | Description     | Range     |
    | --------| ------------- | ----------- |
    | `nlist` | Number of cluster units　    | [1, 65536] |
-   | `m`     | Number of factors of product quantization | CPU-only Milvus: `m` ≡ dim (mod m)|
+   | `m`     | Number of factors of product quantization | CPU-only Milvus: `m` ≡ dim (mod m) |
 </div>
+
 
 <div class="filter-GPU" markdown="block">
 
@@ -237,11 +217,9 @@ Milvus automatically switches from GPU search to CPU search if <code>m</code> is
    | Parameter   | Description     | Range     |
    | -------- | ----------- | ---------- |
    | `nprobe` | Number of units to query | CPU: [1, nlist] <br> GPU: [1, min(2048, nlist)] |
-</div>
-
-<div class="filter-RNSG" markdown="block">
 
 ### RNSG
+<a name="RNSG"></a>
 
 RNSG (Refined Navigating Spreading-out Graph) is a graph-based indexing algorithm. It sets the center position of the whole image as a navigation point, and then uses a specific edge selection strategy to control the out-degree of each point (less than or equal to `out_degree`). Therefore, it can reduce memory usage and quickly locate the target position nearby during searching vectors.
 
@@ -268,11 +246,10 @@ The query process is similar to the graph building process. It starts from the n
    | Parameter   | Description     | Range     |
    | -------- | ----------- | ---------- |
    | `search_length` | Number of query iterations  | [10, 300] |
-</div>
 
-<div class="filter-HNSW" markdown="block">
 
 ### HNSW
+<a name="HNSW"></a>
 
 HNSW (Hierarchical Navigable Small World Graph) is a graph-based indexing algorithm. It builds a multi-layer navigation structure for an image according to certain rules. In this structure, the upper layers are more sparse and the distances between nodes are farther; the lower layers are denser and the distances between nodes are closer. The search starts from the uppermost layer, finds the node closest to the target in this layer, and then enters the next layer to begin another search. After multiple iterations, it can quickly approach the target position.
 
@@ -291,11 +268,10 @@ In order to improve performance, HNSW limits the maximum degree of nodes on each
    | Parameter   | Description     | Range     |
    | --------|--------------- | ------------ |
    | `ef`    | Search scope  | [`top_k`, 32768] |
-</div>
 
-<div class="filter-ANNOY" markdown="block">
 
 ### ANNOY
+<a name="ANNOY"></a>
 
 ANNOY (Approximate Nearest Neighbors Oh Yeah) is an index that uses a hyperplane to divide a high-dimensional space into multiple subspaces, and then stores them in a tree structure.
 
@@ -313,7 +289,6 @@ When searching for vectors, ANNOY follows the tree structure to find subspaces c
    | Parameter   | Description     | Range     |
    | -----------|--------------------------------- | ---------------- |
    | `search_k` | The number of nodes to search. -1 means 5% of the whole data. | {-1} ∪ [`top_k`, n × `n_trees`] |
-</div>
 
 ## How to choose an index
 
