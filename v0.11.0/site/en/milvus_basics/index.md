@@ -126,11 +126,13 @@ IVF (Inverted File) is an index type based on quantization. It divides the point
 
 IVF_FLAT is the most basic IVF index, and the encoded data stored in each unit is consistent with the original data.
 
- Index building parameters
+ 
+ - Index building parameters
 
    | Parameter   | Description     | Range     |
    | ------- | -------- |----------- |
    | `nlist` | Number of cluster units |[1, 65536] |
+
 
 - Search parameters
 
@@ -143,11 +145,13 @@ IVF_FLAT is the most basic IVF index, and the encoded data stored in each unit i
 
 IVF\_SQ8 does scalar quantization for each vector placed in the unit based on IVF. Scalar quantization converts each dimension of the original vector from a 4-byte floating-point number to a 1-byte unsigned integer, so the IVF\_SQ8 index file occupies much less space than the IVF\_FLAT index file. However, scalar quantization results in a loss of accuracy during searching vectors.
 
- Index building parameters
+ 
+ - Index building parameters
 
    | Parameter   | Description     | Range     |
    | ------- | -------- |----------- |
    | `nlist` | Number of cluster units |[1, 65536] |
+
 
 - Search parameters
 
@@ -167,11 +171,13 @@ The query method is as follows:
 - If `nq` &ge; `gpu_search_threshold`, GPU handles the entire query task.
 - If `nq` < `gpu_search_threshold`, GPU handles the task of retrieving the `nprobe` nearest unit in the IVF index file, and CPU handles the rest.
 
- Index building parameters
+ 
+ - Index building parameters
 
    | Parameter   | Description     | Range     |
    | ------- | -------- |----------- |
    | `nlist` | Number of cluster units |[1, 65536] |
+
 
 - Search parameters
 
@@ -187,6 +193,9 @@ The query method is as follows:
 IVF\_PQ performs IVF index clustering before quantizing the product of vectors. Its index file is even smaller than IVF\_SQ8, but it also causes a loss of accuracy during searching vectors.
 
 - Index building parameters
+
+Index building parameters may vary with Milvus distribution. Please select your Milvus distribution first.
+
 <div class="filter">
 <a href="#CPU">CPU-only Milvus</a> <a href="#GPU">GPU-enabled Milvus </a>
 </div>
@@ -206,11 +215,11 @@ IVF\_PQ performs IVF index clustering before quantizing the product of vectors. 
    | --------| ------------- | ----------- |
    | `nlist` | Number of cluster units　    | [1, 65536] |
    | `m`     | Number of factors of product quantization |  GPU-enabled Milvus:  `m` ∈ {1, 2, 3, 4, 8, 12, 16, 20, 24, 28, 32, 40, 48, 56, 64, 96}, and (dim / m) ∈ {1, 2, 3, 4, 6, 8, 10, 12, 16, 20, 24, 28, 32}.<br>(`m` x 1024) &ge; `MaxSharedMemPerBlock` of your graphics card. |
-</div>
-
 <div class="alert note">
 Milvus automatically switches from GPU search to CPU search if <code>m</code> is not supported.
 </div>
+</div>
+
 
 - Search parameters
 
