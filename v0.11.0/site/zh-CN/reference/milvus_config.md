@@ -122,7 +122,7 @@ logs:
 | -------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------- | ------------------------------------------------------------- |
 | `cache_size`         | 内存中用于驻留搜索数据的缓存空间大小。`cache_size` 和 `insert_buffer_size` 之和不能超过内存总量。格式请见 [空间大小的格式](#size)。 | String | `4GB` |
 | `insert_buffer_size` | 用于数据导入的缓冲区所使用的内存量。`cache_size` 和 `insert_buffer_size` 之和不能超过内存总量。格式请见 [空间大小的格式](#size)。 | String | `1GB` |
-| `preload_collection` | 在 Milvus 开启时，需要加载的集合列表。<ul><li>若要加载所有集合，使用 `'*'` (包含引号)。例如：`preload_collection='*'`。</li><li>若要加载指定集合，列出需要加载的集合名（用引号包围每个集合名，并用逗号隔开相邻集合）。例如：`preload_collection=['collection1','collection2']`。</li></ul> | StringList | N/A |
+| `preload_collection` | 在 Milvus 开启时，需要加载的集合列表。<ul><li>若要加载所有集合，使用 `*`。例如：`preload_collection=*`。</li><li>若要加载指定集合，列出需要加载的集合名（以逗号隔开相邻集合）。例如：`preload_collection=collection1,collection2`。</li></ul> | StringList | N/A |
 
 </div>
 

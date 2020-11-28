@@ -205,7 +205,7 @@ Index building parameters may vary with Milvus distribution. Please select your 
    | Parameter   | Description     | Range     |
    | --------| ------------- | ----------- |
    | `nlist` | Number of cluster units　    | [1, 65536] |
-   | `m`     | Number of factors of product quantization | CPU-only Milvus: `m` ≡ dim (mod m) |
+   | `m`     | Number of factors of product quantization | CPU-only Milvus: dim ≡ 0 (mod m) |
 </div>
 
 
