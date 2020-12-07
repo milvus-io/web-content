@@ -204,24 +204,49 @@ IVF\_PQ 先进行 IVF 索引聚类，再对向量做乘积量化。其索引文�
 
 <div class="filter-CPU" markdown="block">
 
+- 建索引参数
 
    | 参数   | 说明          | 取值范围     |
    | --------| ------------- | ----------- |
    | `nlist` | 聚类单元数　    | [1, 65536] |
-   | `m`     | 乘积量化因子个数 | CPU 版 Milvus：dim ≡ 0 (mod m) |
+   | `m`     | 乘积量化因子个数 | dim ≡ 0 (mod m) |
+
+- 查询参数
+
+   | 参数   | 说明          | 取值范围     |
+   | -------- | ----------- | ---------- |
+   | `nprobe` | 查询取的单元数 | [1, nlist] |
+
 </div>
 
 
 <div class="filter-GPU" markdown="block">
 
+- 建索引参数
 
    | 参数   | 说明          | 取值范围     |
    | --------| ------------- | ----------- |
    | `nlist` | 聚类单元数　    | [1, 65536] |
-   | `m`     | 乘积量化因子个数 | GPU 版 Milvus `m` ∈ {1, 2, 3, 4, 8, 12, 16, 20, 24, 28, 32, 40, 48, 56, 64, 96}, and (dim / m) ∈ {1, 2, 3, 4, 6, 8, 10, 12, 16, 20, 24, 28, 32}。<br>`m` x 1024 的值不能超过显卡的 `MaxSharedMemPerBlock`。 |
+   | `m`     | 乘积量化因子个数 | CPU: dim ≡ 0 (mod m)<br>GPU: `m` ∈ {1, 2, 3, 4, 8, 12, 16, 20, 24, 28, 32, 40, 48, 56, 64, 96}, and (dim / m) ∈ {1, 2, 3, 4, 6, 8, 10, 12, 16, 20, 24, 28, 32}。<br>`m` x 1024 的值不能超过显卡的 `MaxSharedMemPerBlock`。 |
 
 <div class="alert note">
-如果 GPU 版 Milvus 不支持设置的 <code>m</code> 值，Milvus 会自动由 GPU 检索切换为 CPU 检索。
+<ul>
+<li>如果 <code>m</code> 值不在指定区间，但是只要 <code>m</code> 值是 CPU 版 Milvus 支持的，Milvus 会自动由 GPU 建索引切换为 CPU 建索引。</li>
+<li>如果 <code>m</code> 值不在指定区间，也不在 GPU 版 Milvus 的指定区间，Milvus 会报错。</li>
+</ul>
+</div>
+
+- 查询参数
+
+   | 参数   | 说明          | 取值范围     |
+   | -------- | ----------- | ---------- |
+   | `nprobe` | 查询取的单元数 | CPU: [1, nlist]<br>GPU: [1, min(2048, nlist)] |
+
+<div class="alert note">
+<ul>
+<li> 如果 <code>nprobe</code> 值不在指定区间，但是只要 <code>nprobe</code> 值是 CPU 版 Milvus 支持的，Milvus 会自动由 GPU 查询切换为 CPU 查询。</li> 
+<li> 如果 <code>nprobe</code> 值不在指定区间，也不在 CPU 版 Milvus 的指定区间，Milvus 会报错。</li> 
+</ul>
 </div>
 </div>   
 
