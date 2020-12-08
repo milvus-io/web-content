@@ -193,7 +193,7 @@ The query method is as follows:
 IVF\_PQ performs IVF index clustering before quantizing the product of vectors. Its index file is even smaller than IVF\_SQ8, but it also causes a loss of accuracy during searching vectors.
 
 <div class="alert note">
-Index building parameters and search parameters may vary with Milvus distribution. Please select your Milvus distribution first.
+Index building parameters and search parameters vary with Milvus distribution. Select your Milvus distribution first.
 </div>
 
 <div class="filter">
@@ -214,6 +214,7 @@ Index building parameters and search parameters may vary with Milvus distributio
    | Parameter   | Description     | Range     |
    | -------- | ----------- | ---------- |
    | `nprobe` | Number of units to query | [1, nlist] |
+
 </div>
 
 
@@ -224,35 +225,23 @@ Index building parameters and search parameters may vary with Milvus distributio
    | Parameter   | Description     | Range     |
    | --------| ------------- | ----------- |
    | `nlist` | Number of cluster units　    | [1, 65536] |
-   | `m`     | Number of factors of product quantization |  CPU: dim ≡ 0 (mod m)<br>GPU:  `m` ∈ {1, 2, 3, 4, 8, 12, 16, 20, 24, 28, 32, 40, 48, 56, 64, 96}, and (dim / m) ∈ {1, 2, 3, 4, 6, 8, 10, 12, 16, 20, 24, 28, 32}.<br>(`m` x 1024) &ge; `MaxSharedMemPerBlock` of your graphics card. |
+   | `m`     | Number of factors of product quantization |  `m` ∈ {1, 2, 3, 4, 8, 12, 16, 20, 24, 28, 32, 40, 48, 56, 64, 96}, and (dim / m) ∈ {1, 2, 3, 4, 6, 8, 10, 12, 16, 20, 24, 28, 32}.<br>(`m` x 1024) &ge; `MaxSharedMemPerBlock` of your graphics card. |
 
 <div class="alert note">
-<ul>
-<li> If the value of <code>m</code> does not fall into the specified range for GPU indexing but falls into the range of CPU indexing, Milvus switches to using CPU to build index. </li>
-<li> If the value of <code>m</code> does not fall into either the range of GPU indexing or CPU indexing, Milvus reports an error.</li>
-</ul>
+If the value of <code>m</code> does not fall into the specified range for GPU indexing but falls into the range of CPU indexing, Milvus switches to using CPU to build the index (click the button above to view the range supported by CPU-enabled Milvus).
 </div>
 
 - Search parameters
 
    | Parameter   | Description     | Range     |
    | -------- | ----------- | ---------- |
-   | `nprobe` | Number of units to query | CPU: [1, nlist]<br>GPU: [1, min(2048, nlist)] |
+   | `nprobe` | Number of units to query | [1, min(2048, nlist)] |
 
 <div class="alert note">
-<ul>
-<li> If the value of <code>nprobe</code> does not fall into the specified range for GPU search but falls into the range of CPU search, Milvus switches to CPU search. </li>
-<li> If the value of <code>nprobe</code> does not fall into either the range of GPU search or CPU search, Milvus reports an error.</li>
-</ul>
-</div>
+If the value of <code>nprobe</code> does not fall into the specified range but falls into the range for CPU search, Milvus switches to CPU search (click the button above to view the range supported by CPU-enabled Milvus).
 </div>
 
-
-- Search parameters
-
-   | Parameter   | Description     | Range     |
-   | -------- | ----------- | ---------- |
-   | `nprobe` | Number of units to query | CPU: [1, nlist] <br> GPU: [1, min(2048, nlist)] |
+</div>
 
 ### RNSG
 <a name="RNSG"></a>

@@ -19,7 +19,7 @@ id: create_drop_collection.md
 
 <div class="filter-Java" markdown="block">
 <div class="alert note">
-参考 <a href="https://github.com/milvus-io/milvus-sdk-java/tree/0.9.0/examples/src/main/java">示例程序</a> 获取更详细的使用方式。
+参考 <a href="https://github.com/milvus-io/milvus-sdk-java/tree/0.9.1/examples/src/main/java">示例程序</a> 获取更详细的使用方式。
 </div>
 </div>
 

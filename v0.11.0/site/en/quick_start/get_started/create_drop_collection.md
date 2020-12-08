@@ -19,7 +19,7 @@ See <a href="https://github.com/milvus-io/pymilvus/tree/0.3.0/examples">example 
 
 <div class="filter-Java" markdown="block">
 <div class="alert note">
-See <a href="https://github.com/milvus-io/milvus-sdk-java/tree/0.9.0/examples/src/main/java">example program</a> for more detailed usage.
+See <a href="https://github.com/milvus-io/milvus-sdk-java/tree/0.9.1/examples/src/main/java">example program</a> for more detailed usage.
 </div>
 </div>
 

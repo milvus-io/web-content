@@ -194,12 +194,12 @@ IVF\_SQ8H 是一种优化查询执行的 IVF\_SQ8 索引类型。
 
 IVF\_PQ 先进行 IVF 索引聚类，再对向量做乘积量化。其索引文件甚至可以比 IVF\_SQ8 更小，不过同样地也会导致查询时的精度损失。  
 
-- 建索引参数
-
-请根据你的 Milvus 版本查看相应的建索引参数。
+<div class="alert note">
+不同版本的建索引参数和查询参数设置不同，请根据使用的 Milvus 版本查看相应的参数信息。
+</div>
 
 <div class="filter">
-<a href="#CPU">CPU-only Milvus</a> <a href="#GPU">GPU-enabled Milvus </a>
+<a href="#CPU">CPU 版 Milvus</a> <a href="#GPU">GPU 版 Milvus </a>
 </div>
 
 <div class="filter-CPU" markdown="block">
@@ -219,7 +219,6 @@ IVF\_PQ 先进行 IVF 索引聚类，再对向量做乘积量化。其索引文�
 
 </div>
 
-
 <div class="filter-GPU" markdown="block">
 
 - 建索引参数
@@ -227,37 +226,23 @@ IVF\_PQ 先进行 IVF 索引聚类，再对向量做乘积量化。其索引文�
    | 参数   | 说明          | 取值范围     |
    | --------| ------------- | ----------- |
    | `nlist` | 聚类单元数　    | [1, 65536] |
-   | `m`     | 乘积量化因子个数 | CPU: dim ≡ 0 (mod m)<br>GPU: `m` ∈ {1, 2, 3, 4, 8, 12, 16, 20, 24, 28, 32, 40, 48, 56, 64, 96}, and (dim / m) ∈ {1, 2, 3, 4, 6, 8, 10, 12, 16, 20, 24, 28, 32}。<br>`m` x 1024 的值不能超过显卡的 `MaxSharedMemPerBlock`。 |
+   | `m`     | 乘积量化因子个数 | `m` ∈ {1, 2, 3, 4, 8, 12, 16, 20, 24, 28, 32, 40, 48, 56, 64, 96}, and (dim / m) ∈ {1, 2, 3, 4, 6, 8, 10, 12, 16, 20, 24, 28, 32}。<br>`m` x 1024 的值不能超过显卡的 `MaxSharedMemPerBlock`。 |
 
 <div class="alert note">
-<ul>
-<li>如果 <code>m</code> 值不在指定区间，但是只要 <code>m</code> 值是 CPU 版 Milvus 支持的，Milvus 会自动由 GPU 建索引切换为 CPU 建索引。</li>
-<li>如果 <code>m</code> 值不在指定区间，也不在 GPU 版 Milvus 的指定区间，Milvus 会报错。</li>
-</ul>
+如果 <code>m</code> 值不在指定区间，但是只要 <code>m</code> 值是 CPU 版 Milvus 支持的（点击上面按钮可查看 CPU 版 Milvus 支持的取值范围），Milvus 会自动由 GPU 建索引切换为 CPU 建索引。
 </div>
 
 - 查询参数
 
    | 参数   | 说明          | 取值范围     |
    | -------- | ----------- | ---------- |
-   | `nprobe` | 查询取的单元数 | CPU: [1, nlist]<br>GPU: [1, min(2048, nlist)] |
+   | `nprobe` | 查询取的单元数 | [1, min(2048, nlist)] |
 
 <div class="alert note">
-<ul>
-<li> 如果 <code>nprobe</code> 值不在指定区间，但是只要 <code>nprobe</code> 值是 CPU 版 Milvus 支持的，Milvus 会自动由 GPU 查询切换为 CPU 查询。</li> 
-<li> 如果 <code>nprobe</code> 值不在指定区间，也不在 CPU 版 Milvus 的指定区间，Milvus 会报错。</li> 
-</ul>
+如果 <code>nprobe</code> 值不在指定区间，但是只要 <code>nprobe</code> 值是 CPU 版 Milvus 支持的（点击上面按钮可查看 CPU 版 Milvus 支持的取值范围），Milvus 会自动由 GPU 查询切换为 CPU 查询。
 </div>
+
 </div>   
-
-
-- 查询参数
-
-   | 参数     | 说明        | 取值范围    |
-   | -------- | ----------- | ---------- |
-   | `nprobe` | 查询取的单元数 | [1, 65536] <br> GPU 版 Milvus 在 `nprobe` > 2048 时由 GPU 查询切换为 CPU 查询。|
-
-
 
 ### RNSG
 <a name="RNSG"></a>
