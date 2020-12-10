@@ -12,7 +12,7 @@ Mishards 是一个用 Python 开发的 Milvus 集群分片中间件，其内部�
 
 Mishards 负责将上游请求拆分，并路由到内部各细分子服务，最后将子服务结果汇总，返回给上游。
 
-![proxy](https://milvus.io/static/c00635f52b4cbe35ebd6bb9ce5af1db2/302a4/image_04.png)
+![proxy](../../../assets/mishards.png)
 
 ## Mishards 目标场景
 

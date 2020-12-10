@@ -12,7 +12,7 @@ Mishards is a Milvus cluster sharding middleware developed in Python. It handles
 
 Mishards cascades a request from upstream down to its sub-modules splitting the upstream request, and then collects and returns the results of the sub-services to upstream.
 
-![proxy](https://milvus.io/static/c00635f52b4cbe35ebd6bb9ce5af1db2/302a4/image_04.png)
+![proxy](../../../assets/mishards.png)
 
 ## Target scenarios
 
