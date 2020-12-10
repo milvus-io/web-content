@@ -118,7 +118,7 @@
     },
     {
       "id": "milvus_docker-cpu.md",
-      "title": "Install and Start Milvus",
+      "title": "安装、启动 Milvus 服务",
       "label1": "quick_start",
       "label2": "install_milvus",
       "label3": "",

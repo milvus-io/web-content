@@ -19,7 +19,7 @@ Milvus runs on the client-server model.
 
 - On the client side, Milvus provides SDKs in Python, Java, Go, and C++, as well as RESTful APIs. 
 
-Milvus was released under the Apache 2.0 License and officially open sourced in October 2019. It is an incubation project under [LF AI Foundation](https://lfai.foundation/). The source code of Milvus is hosted on [GitHub](https://github.com/milvus-io/milvus).
+Milvus was released under the Apache 2.0 License and officially open sourced in October 2019. It is an incubation-stage project at [LF AI & Data Foundation](https://lfaidata.foundation/). The source code of Milvus is hosted on [GitHub](https://github.com/milvus-io/milvus).
 
 ## Overall architecture
 
