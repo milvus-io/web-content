@@ -57,17 +57,6 @@ logs:
 
 若有任何疑问，欢迎在 GitHub 上给我们 [创建 issue](https://github.com/milvus-io/milvus/issues/new/choose) 或是 [加入 Slack 社区讨论](https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk)。
 
-### `cluster` 区域
-
-<div class="table-wrapper" markdown="block">
-
-| 参数           | 说明                                                         | 类型                                                       | 默认值                                                      |
-| ---------------- | ------------------------------------------------------------ | ------------------------------------------------------------- | ------------------------------------------------------------- |
-| `enable` | 是否开启集群模式。<ul><li><code>true</code>：开启集群模式。</li><li><code>false</code>：不开启集群模式。</li></ul> | Boolean                                    | `false`                                    |
-| `role`   | 节点的运行模式，可选配置：<ul><li><code>rw</code>：读写模式</li><li><code>ro</code>：只读模式</li></ul> | Role | `rw` |
-
-</div>
-
 ### `general` 区域
 
 <div class="table-wrapper" markdown="block">

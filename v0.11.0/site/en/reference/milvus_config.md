@@ -57,16 +57,6 @@ For other parameters, you still need to restart Milvus for the changes to take e
 
 Before changing these settings, welcome to consult Milvus team on [GitHub issues](https://github.com/milvus-io/milvus/issues/new/choose) or [our Slack channel](https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk).
 
-### Section `cluster`
-
-<div class="table-wrapper" markdown="block">
-
-| Parameter                | Description                                                  | Type    | Default         |
-| ------------------------ | ------------------------------------------------------------ | ------- | --------------- |
-| `enable`               | Whether to enable cluster mode. <ul><li><code>true</code>: Enable cluster mode.</li><li><code>false</code>: Disable cluster mode.</li></ul>  | Boolean   | `false`         |
-| `role`                | Milvus deployment role: <ul><li><code>rw</code>: Read and write.</li><li><code>ro</code>: Read only.</li></ul>       | Role    | `rw`         |
-</div>
-
 ### Section `general`
 
 <div class="table-wrapper" markdown="block">
