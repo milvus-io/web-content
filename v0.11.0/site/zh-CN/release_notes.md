@@ -16,6 +16,10 @@ id: release_notes.md
 
 #### 升级必看
 
+<div class="alert warning">
+Milvus v0.11.0 暂不支持 Mishards 分布式方案。
+</div>
+
 1. 调整了 partition tag 的支持字符集：
    
    - 不支持使用英文字母、数字、"_"、"$" 以外的字符命名 partition tag。
@@ -43,10 +47,9 @@ id: release_notes.md
 
    改用 `GetCollectionInfo()` 获取相关数据。
 
-7. v0.11.0 Milvus 暂不支持 Mishards 分布式方案。
+7. Python SDK 和 Java SDK 会在操作失败时抛出异常。
 
-8. Python SDK 和 Java SDK 会在操作失败时抛出异常。
-9. RESTful API 支持分页读取实体。
+8. RESTful API 支持分页读取实体。
    
    详见 `collections/{collection_name}/entities (GET)`。
 

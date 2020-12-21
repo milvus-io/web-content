@@ -18,6 +18,10 @@ sidebar_label: Release Notes
 
 #### Compatibility changes
 
+<div class="alert warning">
+Milvus v0.11.0 does not support the Mishards clustering solution.
+</div>
+
 1. Updates the supported character set for naming a partition tag:
    
    - The supported character set for a partition tag must be within the range of all English letters, "_", and "$". 
@@ -44,10 +48,9 @@ sidebar_label: Release Notes
 
    Uses `GetCollectionInfo()` instead to retrieve the corresponding information. 
 
-7. v0.11.0 Milvus does not support the Mishards clustering solution. 
+7. The Python or Java SDK throws an exception when an operation fails. 
 
-8. For Python and Java platforms, the SDK throws an exception when an operation fails. 
-9. [RESTful] Supports retrieving entities by offset and page size. 
+8. [RESTful] Supports retrieving entities by offset and page size. 
    
    See `collections/{collection_name}/entities (GET)` for more information.
 
