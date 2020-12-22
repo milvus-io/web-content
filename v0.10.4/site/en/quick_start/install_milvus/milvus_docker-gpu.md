@@ -121,7 +121,7 @@ The `docker run` options used in the above command are defined as follows:
 
 - `-d`: Runs container in the background and prints container ID.
 - `--name`: Assigns a name to the container.
-- `--gpus`: Assigns GPU devices to the container. (`all` represents all GPUs.)
+- `--gpus`: Assigns GPU devices to the container (`all` represents all GPUs).
 - `-p`: Publishes a container’s port(s) to the host.
 - `-v`: Mounts the directory into the container.
 
