@@ -165,7 +165,29 @@ $ sudo docker logs milvus_cpu_0.11.0
 Milvus 还支持源码编译，该方法仅支持 Linux 系统。详见 <a href="https://github.com/milvus-io/milvus/blob/master/INSTALL.md">从源代码编译 Milvus</a>。
 
 </details>
+<details>
+<summary><font color="#4fc4f9">应如何设置 IVF 索引的 <code>nlist</code> 和 <code>nprobe</code> 参数？</font></summary>
+IVF 索引的 `nlist` 值需要根据具体的使用情况去设置。一般来说，推荐值为 `4 * sqrt(n)`，其中 n 为数据集的向量总条数。
 
+`nprobe` 的选取需要根据数据总量和实际场景在速度性能和准确率之间进行取舍。建议通过多次实验确定一个合理的值。
+
+以下是使用公开测试数据集 sift50m 针对 `nlist` 和 `nprobe` 的一个测试。以索引类型 IVF\_SQ8 为例，针对不同 `nlist`/`nprobe` 组合的搜索时间和召回率分别进行对比。
+
+<div class="alert note">
+
+因 CPU 版 Milvus 和 GPU 版 Milvus 测试结果类似，此处仅展示基于 GPU 版 Milvus 测试的结果。
+
+</div>
+
+![Accuracy](../../../assets/accuracy_nlist_nprobe.png)
+
+在本次测试中，`nlist` 和 `nprobe` 的值成比例增长，召回率随 `nlist`/`nprobe` 组合增长呈现上升的趋势。
+
+![Performance](../../../assets/performance_nlist_nprobe.png)
+
+在 `nlist` 为 4096 和 `nprobe` 为 128 时，速度性能最佳。
+
+</details>
 
 
 
