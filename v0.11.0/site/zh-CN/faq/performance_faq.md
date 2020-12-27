@@ -27,7 +27,7 @@ id: performance_faq.md
 
 ## 应如何设置 IVF 索引的 <code>nlist</code> 和 <code>nprobe</code> 参数？{#4}
 
-IVF 索引的 `nlist` 值需要根据具体的使用情况去设置。一般来说，推荐值为 `4 * sqrt(n)`，其中 n 为数据集的向量总条数。
+IVF 索引的 <code>nlist</code> 值需要根据具体的使用情况去设置。一般来说，推荐值为 <code>4 &times; sqrt(n)</code>，其中 n 为数据集的向量总条数。
 
 `nprobe` 的选取需要根据数据总量和实际场景在速度性能和准确率之间进行取舍。建议通过多次实验确定一个合理的值。
 

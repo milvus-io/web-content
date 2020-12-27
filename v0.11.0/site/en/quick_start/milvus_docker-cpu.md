@@ -170,7 +170,7 @@ No. You can also build Milvus from source code in Linux. See <a href="https://gi
 </details>
 <details>
 <summary><font color="#4fc4f9">How to set <code>nlist</code> or <code>nprobe</code> for IVF indexes?</font></summary>
-In general terms, the recommended value of `nlist` is `4 * sqrt(n)`, where n is the total number of vectors in the dataset. 
+In general terms, the recommended value of <code>nprobe</code> is <code>4 &times; sqrt(n)</code>, where n is the total number of vectors in the dataset. 
 
 Determining `nprobe` is a trade-off between search performance and accuracy, and based on your dataset and scenario. It is recommended to run several rounds of tests to determine the value of `nprobe`.
 
