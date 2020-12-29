@@ -44,7 +44,26 @@ See [Performance tuning](tuning.md) for more information.
 
 #### How to set the value of `nlist` when I build indexes?
 
-It depends on your scenario. See [Performance tuning > Index](tuning.md#Index).
+In general terms, the recommended value of <code>nlist</code> is <code>4 &times; sqrt(n)</code>, where n is the total number of vectors in the dataset. 
+
+Determining `nprobe` is a trade-off between search performance and accuracy, and based on your dataset and scenario. It is recommended to run several rounds of tests to determine the value of `nprobe`.
+
+The following charts are from a test running on the sift50m dataset and IVF\_SQ8 index. The test compares search performance and recall rate between different `nlist`/`nprobe` pairs.
+
+<div class="alert note">
+
+We only show the results of GPU-enabled Milvus here, because the two distributions of Milvus show similar results.
+
+</div>
+
+![Accuracy](../../../assets/accuracy_nlist_nprobe.png)
+
+Key takeaways: This test shows that the recall rate increases with the `nlist`/`nprobe` pair.
+
+![Performance](../../../assets/performance_nlist_nprobe.png)
+
+Key takeaways: When `nlist` is 4096 and `nprobe` 128, Milvus shows the best search performance.
+
 
 #### Why sometimes the query time for a small dataset is longer?
 
