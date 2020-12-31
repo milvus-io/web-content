@@ -107,7 +107,7 @@ FLAT 是对向量的暴力搜索（brute-force search），速度最慢，但召
 
 IVF 系列索引包括 IVF\_FLAT、IVF\_SQ8／IVF\_SQ8H 和 IVF\_PQ。IVF\_SQ8／IVF\_SQ8H 和 IVF_PQ 索引对向量数据做了有损压缩，磁盘占用量较少。
 
-IVF 索引都有两个相同的参数：`nlist` 和 `nprobe`。`nlist` 是建索引参数，`nprobe` 是搜索参数。选取 `nlist` 和 `nprobe` 的推荐值，详见 [性能优化问题 > 应如何设置 IVF 索引的 <code>nlist</code> 和 <code>nprobe</code> 参数？](performance_faq.md)
+IVF 索引都有两个相同的参数：`nlist` 和 `nprobe`。`nlist` 是建索引参数，`nprobe` 是搜索参数。选取 `nlist` 和 `nprobe` 的推荐值，详见 [性能优化问题 > 应如何设置 IVF 索引的 <code>nlist</code> 和 <code>nprobe</code> 参数？](performance_faq.md#应如何设置-ivf-索引的-nlist-和-nprobe-参数)
 
 根据相关原理，估算使用 IVF 索引进行查询时的计算量：
 
