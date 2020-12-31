@@ -73,7 +73,6 @@ Pull the GPU-enabled image:
 $ sudo docker pull milvusdb/milvus:0.11.0-gpu-d101620-4c44c0
 ```
 
-<div class="alert note">
 <ul>
 <li>If you cannot use your host to acquire Docker images and configuration files online because of network restrictions, please acquire them online from another available host, save them as a TAR file, pass it on to your local machine, and then load the TAR file as a Docker image:
 <details>
@@ -95,7 +94,6 @@ $ sudo docker pull milvusdb/milvus:0.11.0-gpu-d101620-4c44c0
 </details></li>
 <li>If pulling the docker image is too slow or keeps failing, see <a href="operational_faq.md">Operational FAQ</a> for solutions.</li>
 </ul>
-</div>
 
 
 ## Download configuration file

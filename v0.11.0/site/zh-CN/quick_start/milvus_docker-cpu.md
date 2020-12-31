@@ -74,7 +74,6 @@ $ sudo docker info
 ```shell
 $ sudo docker pull milvusdb/milvus:0.11.0-cpu-d101620-4c44c0
 ```
-<div class="alert note">
 <ul>
 <li>如果你的主机由于网络限制无法在线获得 Docker 镜像和配置文件，请从其他主机在线获取镜像，保存为 TAR 文件传输回本地，传输完成后重新加载为 Docker 镜像：
 <details>
@@ -96,7 +95,6 @@ $ sudo docker pull milvusdb/milvus:0.11.0-cpu-d101620-4c44c0
 </details></li>
 <li>如果拉取镜像的速度过慢或一直失败，请参考 <a href="operational_faq.md">部署运维问题</a> 中提供的解决办法。</li>
 </ul>
-</div>
 
 ## 下载配置文件
 
