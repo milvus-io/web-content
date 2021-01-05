@@ -45,11 +45,11 @@ Milvus 支持在集合或分区中查询向量。
 
    ```java
    // Basic hybrid search:
-   // Let's say we have a film with its `embedding` and we want to find `top1` film that is
+   // Let's say we have a film with its `embedding` and we want to find `top10` films that are
    // most similar to it by L2 metric_type (Euclidean Distance).
    // In addition to vector similarities, we also want to filter films such that:
    // - `term` is 1, 2, or 5,
-   // - `duration` larger than 250 minutes.
+   // - `range` larger than 250 minutes.
     List<List<Float>> queryEmbedding = /* your query vectors */;
     final long topK = 10;
     String dsl = String.format(
@@ -59,7 +59,7 @@ Milvus 支持在集合或分区中查询向量。
             + "        \"A\": {\"GT\": 250}" // "GT" for greater than
             + "    }},{"
             + "    \"term\": {"
-            + "        \"B\": [1, 5, 10]" // "term" is a list
+            + "        \"B\": [1, 2, 5]" // "term" is a list
             + "    }},{"
             + "    \"vector\": {"
             + "        \"embedding\": {"

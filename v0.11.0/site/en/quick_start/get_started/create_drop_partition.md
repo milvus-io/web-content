@@ -4,7 +4,7 @@ id: create_drop_partition.md
 
 # Create and Drop a Partition
 
-This article provides Python sample codes for creating or dropping partitions.
+This article provides sample codes for creating or dropping partitions.
 
 ## Create a partition
 

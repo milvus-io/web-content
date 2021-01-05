@@ -173,7 +173,7 @@ id: insert_delete_entity.md
 ```
 </div>
 
-<div class="filter-Python" markdown="block">
+<div class="filter-Java" markdown="block">
 
 ```java
 client.deleteEntityByID(collectionName, ids.subList(0, 10));
