@@ -44,7 +44,7 @@ See [Performance tuning](tuning.md) for more information.
 
 #### How to set <code>nlist</code> and <code>nprobe</code> for IVF indexes?
 
-In general terms, the recommended value of <code>nlist</code> is <code>4 &times; sqrt(n)</code>, where n is the total number of vectors in the dataset. 
+In general terms, the recommended value of <code>nprobe</code> is <code>4 &times; sqrt(n)</code>, where n is the total number of entities in a segment.
 
 Determining `nprobe` is a trade-off between search performance and accuracy, and based on your dataset and scenario. It is recommended to run several rounds of tests to determine the value of `nprobe`.
 
