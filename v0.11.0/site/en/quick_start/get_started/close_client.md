@@ -4,7 +4,7 @@ id: close_client.md
 
 # Close the Client
 
-This article describes how to close a Python client.
+This article describes how to close a Milvus client.
 
 <div class="filter">
 <a href="#Python">Python</a> <a href="#Java">Java</a>

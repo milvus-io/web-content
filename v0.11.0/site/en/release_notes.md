@@ -170,32 +170,6 @@ You can use scalar field filtering in an embedding search.
 
 </div>
 
-## v0.10.4
-
-**Release date**：2020-12-03
-
-#### Compatibility
-
-| Milvus version | Python SDK version | Java SDK version | Go SDK version |
-| :------------- | :----------------- | :--------------- | :------------- |
-| 0.10.4         | 0.2.14             | 0.8.5            | 0.4.4          |
-
-#### Improvements
-
-- Improves the query performance in situations where no entities are deleted. [#3775](https://github.com/milvus-io/milvus/issues/3775)
-- Reduces the time to create a large number of partitions. [#4318](https://github.com/milvus-io/milvus/issues/4318)
-
-#### Fixed issues
-
-- The server crashes when searching with IVF_PQ on GPU. [#3626](https://github.com/milvus-io/milvus/issues/3626)
-- The performance of query on IVF_SQ8H worsens. [#3903](https://github.com/milvus-io/milvus/issues/3903)
-- The server crashes when deleting entities. [#3906](https://github.com/milvus-io/milvus/issues/3906)
-- The server occasionally hangs when creating and dropping partitions continuously. [#4012](https://github.com/milvus-io/milvus/issues/4012)
-- An out-of-memory error occurs when searching on GPU. [#4174](https://github.com/milvus-io/milvus/issues/4174)
-- Memory leaks when building an IVF index. [#4318](https://github.com/milvus-io/milvus/issues/4318)
-
-> See [CHANGELOG](https://github.com/milvus-io/milvus/blob/0.10.4/CHANGELOG.md) for more information.
-
 ## v0.10.3
 
 **Release date**：2020-9-21

@@ -4,7 +4,7 @@ id: create_drop_collection.md
 
 # Create and Drop a Collection
 
-This article provides Python sample codes for creating or dropping collections.
+This article provides sample codes for creating or dropping collections.
 
 <div class="filter">
 <a href="#Python">Python</a> <a href="#Java">Java</a>
