@@ -32,6 +32,54 @@ sidebar_label: Release Notes
 
 > See [CHANGELOG](https://github.com/milvus-io/milvus/blob/0.10.4/CHANGELOG.md) for more information.
 
+## v0.11.0
+
+**Release note**：2020-10-16
+
+#### Compatibility
+
+| Milvus version | Python SDK version | Java SDK version | Go SDK version |
+| :------------- | :----------------- | :--------------- | :------------- |
+| 0.11.0     | 0.3.0     | 0.9.1       | 0.5.0      |
+
+#### Compatibility changes
+
+<div class="alert warning">
+Milvus v0.11.0 does not support the Mishards clustering solution.
+</div>
+
+1. Updates the supported character set for naming a partition tag:
+   
+   - The supported character set for a partition tag must be within the range of all English letters, "_", and "$". 
+   - The initial of a partition tag must be an English letter or an underscore. 
+
+2. Restructures the server configuration file. 
+
+   - Renames **server_config.yaml**  to **milvus.yaml**.
+   - Compatible with the flattened setting format `a.b.c: value`.
+
+3. Renames the indexes supporting binary embeddings:
+   - Changes `IVF_FLAT` to `BIN_IVF_FLAT`.
+   - Changes `FLAT` to `BIN_FLAT`.
+
+4. Removes the `CreateCollection()` method.
+
+   The new `CreateCollection()` method removes the original `index_file_size` parameter and adds the `segment_row_limit` parameter for setting the upper and lower limits of a segment. The row number of a segment is eventually [ 1 &times; `segment_row_limit`, 2 &times; `segment_row_limit`). 
+
+5. Removes the `Search()` method. 
+
+   The new `Search()` method adds the `MetricType` parameter for specifying the distance metric type.
+
+6. Removes the `GetIndexInfo()` method.
+
+   Uses `GetCollectionInfo()` instead to retrieve the corresponding information. 
+
+7. The Python or Java SDK throws an exception when an operation fails. 
+
+8. [RESTful] Supports retrieving entities by offset and page size. 
+   
+   See `collections/{collection_name}/entities (GET)` for more information.
+
 ## v0.10.3
 
 **Release date**：2020-9-21

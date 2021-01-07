@@ -30,6 +30,55 @@ id: release_notes.md
 
 > 详见 [CHANGELOG](https://github.com/milvus-io/milvus/blob/0.10.4/CHANGELOG.md) 了解更多已修复问题。
 
+## v0.11.0
+
+**发布时间**：2020-10-16
+
+#### 版本兼容
+
+| Milvus 版本 | Python SDK 版本 | Java SDK 版本 | Go SDK 版本 |
+| :------------- | :----------------- | :--------------- | :------------- |
+| 0.11.0     | 0.3.0     | 0.9.1       | 0.5.0      |
+
+#### 升级必看
+
+<div class="alert warning">
+Milvus v0.11.0 暂不支持 Mishards 分布式方案。
+</div>
+
+1. 调整了 partition tag 的支持字符集：
+   
+   - 不支持使用英文字母、数字、"_"、"$" 以外的字符命名 partition tag。
+   - partition tag 的首字母不支持使用英文字母或下划线以外的字符。
+
+2. 服务端配置文件结构调整
+
+   - **server_config.yaml**  更名为 **milvus.yaml**，
+   - 配置参数兼容 `a.b.c: value` 的展平格式。
+
+3. 调整了二值型向量支持索引名称：
+
+   - `IVF_FLAT` 变更为 `BIN_IVF_FLAT`，
+   - `FLAT`变更为 `BIN_FLAT`。
+
+4. 移除原有的 `CreateCollection()` 方法。
+
+   新增的 `CreateCollection()` 方法删除了原有的 `index_file_size` 参数，新增 `segment_row_limit` 参数用于设置单个数据段文件大小的上限和下限。单个数据段文件的值域范围为 [ 1 &times; `segment_row_limit`, 2 &times; `segment_row_limit`)。
+
+5. 移除原有的 `Search()` 方法。
+
+   新增的 `Search()` 方法新增 `MetricType` 参数用于指定距离计算方式。
+
+6. 移除原有的 `GetIndexInfo()` 方法。
+
+   改用 `GetCollectionInfo()` 获取相关数据。
+
+7. Python SDK 和 Java SDK 会在操作失败时抛出异常。
+
+8. RESTful API 支持分页读取实体。
+   
+   详见 `collections/{collection_name}/entities (GET)`。
+
 ## v0.10.3
 
 **发布时间**：2020-9-21
