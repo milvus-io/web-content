@@ -72,7 +72,7 @@ Milvus v0.11.0 does not support the Mishards clustering solution.
 </div>
 
 1. Updates the supported character set for naming a partition tag:
-
+   
    - The supported character set for a partition tag must be within the range of all English letters, "_", and "$". 
    - The initial of a partition tag must be an English letter or an underscore. 
 
@@ -100,8 +100,124 @@ Milvus v0.11.0 does not support the Mishards clustering solution.
 7. The Python or Java SDK throws an exception when an operation fails. 
 
 8. [RESTful] Supports retrieving entities by offset and page size. 
-
+   
    See `collections/{collection_name}/entities (GET)` for more information.
+
+
+#### New features
+
+1. Scalar field filtering
+
+As of this release, an embedding insert operation can carry scalar fields. 
+
+You can use scalar field filtering in an embedding search. 
+
+- Supports TermQuery and RangeQuery match patterns for scalar filtering. The latter supports the following four operators: 
+   - Greater than: `gt`
+   - Greater than or equal to: `gte`
+   - Less than: `lt`
+   - Less than or equal to: `lte`
+- Supports `MUST`, `MUST_NOT`, and `SHOULD` operations between the vector and scalar fields. 
+- Supports returning scalar fields related to the search result. 
+- Supports creating index for scalar fields to speed up searches for structured data. 
+
+2. Supports specifying `MetricType` in an embedding search.
+
+   - If the `MetricType` specified in an embedding search equals the `MetricType` specified when creating an index, Milvus uses the index for the search; 
+   - Otherwise, Milvus resorts to brute-force search. 
+
+
+#### Improvements
+
+1. Upgrades oatpp.
+
+  - Upgrades the third-party dependency **oatpp** to v1.1.0, a more stable version. 
+
+2. Rewrites SQLite-related codes.
+
+  - Removes the third-party dependency **sqlite_orm**. 
+
+3. Reorganizes the WAL directory.
+
+  - As of this release, the WAL directory is organized by collection name. 
+
+4. Metadata Snapshot
+
+  - Supports Metadata-snapshot-based embedding search. 
+
+  - When an insert or delete operation completes, Milvus creates a versioned Metadata snapshot and stores it in the memory so that an incoming search operation can use the corresponding Metadata snapshot. 
+
+5. Separates raw data from index. 
+
+  - For IVF\_FLAT and HNSW, **index\_file** no longer holds raw data and uses offsets of the embeddings instead to avoid overuse of the disk.  
+
+
+
+#### API changes
+
+
+
+<div class="filter">
+<a href="#RESTful">RESTful</a> <a href="#Python">Python</a> <a href="#Java">Java</a> <a href="#CPP">C++</a>
+</div>
+
+<div class="filter-RESTful" markdown="block">
+
+##### Added methods
+
+- `collections/{collection_name}/entities (PUT)`
+- `collections/{collection_name}/entities (POST)`
+- `collections/{collection_name}/entities (DELETE)`
+- `collections/{collection_name}/entities (GET)`: Supports retrieving entities by offset and page size. 
+- `collections/{collection_name}/entities (OPTIONS)`
+- `/status (GET)`: Supports retrieving information such as server uptime. 
+
+##### Deleted methods
+
+- `/config/advanced (GET)`
+- `/config/advanced (PUT)`
+- `/config/advanced (OPTIONS)`
+- `config/gpu_resources (GET)`
+- `config/gpu_resources (PUT)`
+- `config/gpu_resources (OPTIONS)`
+- `collections/{collection_name}/segments (GET)`
+- `collections/{collection_name}/segments/{segment_name}/vectors (GET)`
+- `collections/{collection_name}/vectors (PUT)`
+- `collections/{collection_name}/vectors (POST)`
+- `collections/{collection_name}/vectors (GET)`
+- `collections/{collection_name}/vectors (OPTIONS)`
+
+</div>
+
+
+<div class="filter-Python" markdown="block">
+
+##### Added methods
+
+- `set_config`
+- `get_config`
+
+##### Deleted method
+
+- `get_index_info`
+
+</div>
+
+<div class="filter-Java" markdown="block">
+
+##### Deleted method
+
+- `getIndexInfo`
+
+</div>
+
+<div class="filter-CPP" markdown="block">
+
+##### Deleted method
+
+- `GetIndexInfo`
+
+</div>
 
 ## v0.10.3
 
