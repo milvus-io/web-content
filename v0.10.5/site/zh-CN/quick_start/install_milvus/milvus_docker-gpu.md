@@ -149,8 +149,11 @@ $ sudo docker logs milvus_gpu_0.10.5
 </details>
 <details>
 <summary><font color="#4fc4f9">Milvus 中如何实现数据迁移？</font></summary>
-<p>把原有的 Milvus 服务的整个 <strong>db</strong> 目录拷贝到新的路径下，启动新的 Milvus 服务时，将该 Milvus 服务的 <strong>db</strong> 目录映射为刚拷贝过来的 <strong>db</strong> 目录。</p>
-<p>注意：不同版本之间，数据可能会不兼容。目前数据格式兼容到 0.7.0。</p>
+详见<a href="data_migration.md">数据迁移</a>。
+
+<div class="alert note">
+注意：不同版本之间，数据可能会不兼容。目前数据格式兼容到 Milvus v0.7.0。
+</div>
 
 </details>
 <details>
