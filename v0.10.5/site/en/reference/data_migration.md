@@ -4,7 +4,7 @@ id: data_migration.md
 
 # Migrate Data to Milvus v.0.10.5
 
-This tutorial introduces how to migrate data from Milvus v0.7.x/0.8.x/0.9.x to Milvus v.0.10.5.
+This tutorial introduces how to migrate data from Milvus v0.7.x/0.8.x/0.9.x/0.10.x to Milvus v.0.10.5.
 
 <div class="alert warning">
 This version is <i>incompatible</i> with v0.11.0.
