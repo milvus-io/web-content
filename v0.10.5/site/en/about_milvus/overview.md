@@ -6,19 +6,19 @@ id: overview.md
 
 ## Overview
 
-Milvus is an embeddings similarity search engine that is highly flexible, reliable, and blazing fast. It supports adding, deleting, updating, and near-real-time search of embeddings on a scale of trillion bytes. By encapsulating multiple widely adopted index libraries, such as Faiss, NMSLIB, and Annoy, it provides a comprehensive set of intuitive APIs, allowing you to choose index types based on your scenario. By supporting filtering of scalar data, Milvus takes the recall rate even higher and adds more flexibility to your search. 
+Milvus is a vector similarity search engine that is highly flexible, reliable, and blazing fast. It supports adding, deleting, updating, and near-real-time search of vectors on a scale of trillion bytes. By encapsulating multiple widely adopted index libraries, such as Faiss, NMSLIB, and Annoy, it provides a comprehensive set of intuitive APIs, allowing you to choose index types based on your scenario. By supporting filtering of scalar data, Milvus takes the recall rate even higher and adds more flexibility to your search. 
 
 
 Milvus runs on the client-server model.
 
 - The Milvus server comprises two parts: Milvus Core and Meta Store.
 
-    * Milvus Core stores and manages embeddings and scalar data.
+    * Milvus Core stores and manages vectors and scalar data.
     * Meta Store stores and manages metadata in SQLite for testing or MySQL for production. 
 
 - On the client side, Milvus provides SDKs in Python, Java, Go, and C++, as well as RESTful APIs. 
 
-Milvus was released under the Apache 2.0 License and officially open sourced in October 2019. It is an incubation project under [LF AI Foundation](https://lfai.foundation/). The source code of Milvus is hosted on [GitHub](https://github.com/milvus-io/milvus).
+Milvus was released under the Apache 2.0 License and officially open sourced in October 2019. It is an incubation project under [LF AI & Data Foundation](https://lfaidata.foundation/). The source code of Milvus is hosted on [GitHub](https://github.com/milvus-io/milvus).
 
 
 <div class="alert note">
@@ -62,7 +62,7 @@ See [Scenarios](https://www.milvus.io/scenarios/) for more information.
 
 #### Scalar field filtering (coming soon)
 
-- Supports embeddings and scalar data. 
+- Supports vectors and scalar data. 
 - Adds more flexibility to your search by supporting filtering of scalar data.
 
 ## Milvus distributions
