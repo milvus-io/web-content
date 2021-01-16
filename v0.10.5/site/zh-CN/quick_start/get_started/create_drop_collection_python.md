@@ -54,5 +54,6 @@ id: create_drop_collection_python.md
 </details>
 <details>
 <summary><font color="#4fc4f9">Milvus 对集合和分区的总数有限制吗？</font></summary>
-有。二者之和不能超过 4,096。
+collection 数量没有限制。每个 collection 内的 partition 总数不能超过 4096 个。
+
 </details>
