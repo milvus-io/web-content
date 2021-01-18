@@ -8,7 +8,7 @@ id: connect_milvus_python.md
 
 <div class="alert note">
 <li>关于详细的 API 使用方法，请参考 <a href="https://github.com/milvus-io/pymilvus">Python API 文档</a>。</li>
-<li>建议你使用 <a href="https://milvus.io/tools/sizing">资源评估工具</a> 来估算数据所需的硬件资源。</li>
+<li>建议你使用 <a href="https://zilliz.com/sizing-tool/">资源评估工具</a> 来估算数据所需的硬件资源。</li>
 </div>
 
 

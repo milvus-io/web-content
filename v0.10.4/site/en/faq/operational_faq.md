@@ -131,7 +131,7 @@ We recommend using MySQL to manage Metadata in production environment.
 
 #### How to calculate required memory based on the size of the dataset?
 
-Different indexes require different memory space. You can use [Milvus sizing tool](https://milvus.io/tools/sizing) to calculate the required memory for a vector search.
+Different indexes require different memory space. You can use [Milvus sizing tool](https://zilliz.com/sizing-tool/) to calculate the required memory for a vector search.
 
 #### How to migrate data in Milvus?
 

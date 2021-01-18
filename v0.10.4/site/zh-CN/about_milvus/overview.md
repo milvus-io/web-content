@@ -13,7 +13,7 @@ Milvus 服务器采用主从式架构 (Client-server model)。
     - Meta Store 存储与管理 SQLite 和 MySQL 中的元数据，分别用于测试和生产。
 - 在客户端，Milvus 还提供了基于 Python、Java、Go、C++ 的 SDK 和 RESTful API。
 
-Milvus 在 Apache 2 License 协议下发布，于 2019 年 10 月正式开源，是 [LF AI](https://lfai.foundation/) 基金会的孵化项目。Milvus 的源代码被托管于 [Github](https://github.com/milvus-io/milvus)。
+Milvus 在 Apache 2 License 协议下发布，于 2019 年 10 月正式开源，是 [LF AI & DATA 基金会](https://lfaidata.foundation/)的孵化项目。Milvus 的源代码被托管于 [Github](https://github.com/milvus-io/milvus)。
 
 > 目前，Milvus 的服务器在单节点上运行。对于有更大数据规模或者高并发需求的用户，可以使用目前尚在开发阶段的集群分片中间件 Mishards 进行部署。
 
