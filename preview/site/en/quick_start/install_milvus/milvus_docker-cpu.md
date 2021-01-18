@@ -57,7 +57,7 @@ $ sudo docker info
 Pull the CPU-only image:
 
 ```shell
-$ sudo docker pull milvusdb/milvus:0.10.2-cpu-d081520-8a2393
+$ sudo docker pull milvusdb/milvus:0.10.5-cpu-d010621-4eda95
 ```
 <div class="alert note">
 <ul>
@@ -89,11 +89,11 @@ $ sudo docker pull milvusdb/milvus:0.10.2-cpu-d081520-8a2393
 ```shell
 $ mkdir -p /home/$USER/milvus/conf
 $ cd /home/$USER/milvus/conf
-$ wget https://raw.githubusercontent.com/milvus-io/milvus/0.10.2/core/conf/demo/server_config.yaml
+$ wget https://raw.githubusercontent.com/milvus-io/milvus/0.10.5/core/conf/demo/server_config.yaml
 ```
 
 <div class="alert note">
-If you cannot download configuration files via the <code>wget</code> command, you can create a <b>server_config.yaml</b> file under <b>/home/$USER/milvus/conf</b>, and then copy the content from <a href="https://github.com/milvus-io/milvus/blob/0.10.2/core/conf/demo/server_config.yaml">server config</a> to it.
+If you cannot download configuration files via the <code>wget</code> command, you can create a <b>server_config.yaml</b> file under <b>/home/$USER/milvus/conf</b>, and then copy the content from <a href="https://github.com/milvus-io/milvus/blob/0.10.5/core/conf/demo/server_config.yaml">server config</a> to it.
 </div>
 
 ## Start Docker container
@@ -101,14 +101,14 @@ If you cannot download configuration files via the <code>wget</code> command, yo
 Start Docker container and map the paths to the local files to the container:
 
 ```shell
-$ sudo docker run -d --name milvus_cpu_0.10.2 \
+$ sudo docker run -d --name milvus_cpu_0.10.5 \
 -p 19530:19530 \
 -p 19121:19121 \
 -v /home/$USER/milvus/db:/var/lib/milvus/db \
 -v /home/$USER/milvus/conf:/var/lib/milvus/conf \
 -v /home/$USER/milvus/logs:/var/lib/milvus/logs \
 -v /home/$USER/milvus/wal:/var/lib/milvus/wal \
-milvusdb/milvus:0.10.2-cpu-d081520-8a2393
+milvusdb/milvus:0.10.5-cpu-d010621-4eda95
 ```
 
 The `docker run` options used in the above command are defined as follows:
@@ -127,29 +127,55 @@ $ sudo docker ps
 If the Milvus server does not start up properly, check the error logs:
 
 ```shell
-$ sudo docker logs milvus_cpu_0.10.2
+$ sudo docker logs milvus_cpu_0.10.5
 ```
 
 ## FAQ
 
 <details>
-<summary><font color="#3f9cd1">Can I install Milvus on Windows?</font></summary>
+<summary><font color="#4fc4f9">Can I install Milvus on Windows?</font></summary>
 Yes, so long as you have set up a Docker environment on your operating system.
 </details>
 <details>
-<summary><font color="#3f9cd1">Why does Milvus return <code>Illegal instruction</code> during startup?</font></summary>
+<summary><font color="#4fc4f9">Why does Milvus return <code>Illegal instruction</code> during startup?</font></summary>
 If your CPU does not support SSE42, AVX, AVX2, or AVX512, Milvus cannot start properly. You can use <code>cat /proc/cpuinfo</code> to check the supported instruction sets.
 
 </details>
 <details>
-<summary><font color="#3f9cd1">How to migrate data in Milvus?</font></summary>
-<p>Copy the entire <strong>db</strong> directory of the original Milvus service to the new directory. When restarting the Milvus service, map the copied <strong>db</strong> directory to the <strong>db</strong> directory of the Milvus service.</p>
-<p> Note: Data formats of different versions may not be compatible with each other. The current data format is backward compatible with Milvus v0.7.0.
-</p>
+<summary><font color="#4fc4f9">How to migrate data in Milvus?</font></summary>
+For details, see <a href="data_migration.md">data migration</a>.
+
+<div class="alert note">
+Data formats of different versions may not be compatible with each other. The current data format is backward compatible with Milvus v0.7.0.
+</div>
+
 </details>
 <details>
-<summary><font color="#3f9cd1">Is Docker the only way to install and run Milvus?</font></summary>
+<summary><font color="#4fc4f9">Is Docker the only way to install and run Milvus?</font></summary>
 No. You can also build Milvus from source code in Linux. See <a href="https://github.com/milvus-io/milvus/blob/master/INSTALL.md">Build Milvus from source code</a> for more information.
+</details>
+<details>
+<summary><font color="#4fc4f9">How to set <code>nlist</code> or <code>nprobe</code> for IVF indexes?</font></summary>
+In general terms, the recommended value of <code>nlist</code> is <code>4 &times; sqrt(n)</code>, where n is the total number of entities in a segment. 
+
+Determining `nprobe` is a trade-off between search performance and accuracy, and based on your dataset and scenario. It is recommended to run several rounds of tests to determine the value of `nprobe`.
+
+The following charts are from a test running on the sift50m dataset and IVF\_SQ8 index. The test compares search performance and recall rate between different `nlist`/`nprobe` pairs.
+
+<div class="alert note">
+
+We only show the results of GPU-enabled Milvus here, because the two distributions of Milvus show similar results.
+
+</div>
+
+<img src="https://raw.githubusercontent.com/milvus-io/docs/master/v0.10.5/assets/accuracy_nlist_nprobe.png" alt="accuracy_nlist_nprobe.png">
+
+Key takeaways: This test shows that the recall rate increases with the `nlist`/`nprobe` pair.
+
+<img src="https://raw.githubusercontent.com/milvus-io/docs/master/v0.10.5/assets/performance_nlist_nprobe.png" alt="performance_nlist_nprobe.png">
+
+Key takeaways: When `nlist` is 4096 and `nprobe` 128, Milvus shows the best search performance.
+
 </details>
 
 
@@ -160,7 +186,7 @@ No. You can also build Milvus from source code in Linux. See <a href="https://gi
 
   - [Try an example program](example_code.md)
   - [Learn more about Milvus operations](milvus_operation.md)
-  - [Try Milvus Bootcamp](https://github.com/milvus-io/bootcamp)
+  - [Try Milvus Bootcamp](https://github.com/zilliz-bootcamp)
   
 - If you're ready to run Milvus in production:
 

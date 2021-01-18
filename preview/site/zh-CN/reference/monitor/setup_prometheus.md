@@ -47,16 +47,16 @@ id: setup_prometheus.md
     如果是在 Kubernetes 集群中，你需要为每个需要监控的 Milvus 节点配置 <b>server_config.yaml</b>。
     </div>
 
-3. 下载 Milvus [Prometheus 配置文件](https://github.com/milvus-io/docs/blob/master/v0.10.2/assets/monitoring/prometheus.yml)：
+3. 下载 Milvus [Prometheus 配置文件](https://github.com/milvus-io/docs/blob/master/v0.10.5/assets/monitoring/prometheus.yml)：
 
    ```shell
-   $ wget https://raw.githubusercontent.com/milvus-io/docs/master/v0.10.2/assets/monitoring/prometheus.yml \ -O prometheus.yml
+   $ wget https://raw.githubusercontent.com/milvus-io/docs/master/v0.10.5/assets/monitoring/prometheus.yml \ -O prometheus.yml
    ```
 
-4. 下载 Milvus [报警规则文件](https://github.com/milvus-io/docs/blob/master/v0.10.2/assets/monitoring/alert_rules.yml) 到  Prometheus 根目录：
+4. 下载 Milvus [报警规则文件](https://github.com/milvus-io/docs/blob/master/v0.10.5/assets/monitoring/alert_rules.yml) 到  Prometheus 根目录：
 
    ```shell
-   wget -P rules https://raw.githubusercontent.com/milvus-io/docs/master/v0.10.2/assets/monitoring/alert_rules.yml
+   wget -P rules https://raw.githubusercontent.com/milvus-io/docs/master/v0.10.5/assets/monitoring/alert_rules.yml
    ```
 
 5. 根据实际需求编辑 Prometheus 配置文件：
@@ -157,6 +157,6 @@ id: setup_prometheus.md
 ## 常见问题
 
 <details>
-<summary><font color="#3f9cd1">在多个 Milvus 节点接入 Pushgateway 的情况下如何进行区分数据来源？</font></summary>
+<summary><font color="#4fc4f9">在多个 Milvus 节点接入 Pushgateway 的情况下如何进行区分数据来源？</font></summary>
 在 <strong>prometheus.yaml</strong> 里面加一个 Prometheus 的实例就可以。最后在 Prometheus 或者 Grafana 里面显示监控的时候，会指明数据是来自哪个 Milvus 实例。
 </details>

@@ -124,7 +124,7 @@ logs:
 | -------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------- | ------------------------------------------------------------- |
 | `cache_size`         | 内存中用于驻留搜索数据的缓存空间大小。`cache_size` 和 `insert_buffer_size` 之和不能超过内存总量。格式请见 [空间大小的格式](#size)。 | String | `4GB` |
 | `insert_buffer_size` | 用于数据导入的缓冲区所使用的内存量。`cache_size` 和 `insert_buffer_size` 之和不能超过内存总量。格式请见 [空间大小的格式](#size)。 | String | `1GB` |
-| `preload_collection` | 在 Milvus 开启时，需要加载的集合列表。<ul><li>若要加载所有集合，使用 `'*'` (包含引号)。</li><li>若要加载指定集合，列出需要加载的集合名（用引号包围每个集合名，并用逗号隔开相邻集合）。</li></ul>格式请见 [空间大小的格式](#size)。 | StringList | `1GB` |
+| `preload_collection` | 在 Milvus 开启时，需要加载的集合列表。<ul><li>若要加载所有集合，使用 `'*'` (包含引号)。例如：`preload_collection='*'`。</li><li>若要加载指定集合，列出需要加载的集合名（用引号包围每个集合名，并用逗号隔开相邻集合）。例如：`preload_collection=['collection1','collection2']`。</li></ul> | StringList | N/A |
 
 </div>
 
@@ -198,7 +198,7 @@ logs:
 ## 常见问题
 
 <details>
-<summary><font color="#3f9cd1">除了配置文件外，怎样可以判断我确实在使用 GPU 做搜索？</font></summary>
+<summary><font color="#4fc4f9">除了配置文件外，怎样可以判断我确实在使用 GPU 做搜索？</font></summary>
 <p>有以下三种方式：
 <ul>
 <li>使用 <code>nvidia-smi</code> 命令查看 GPU 使用情况。</li>
@@ -208,15 +208,15 @@ logs:
 </p>
 </details>
 <details>
-<summary><font color="#3f9cd1">如果设置了 <code>preload_collection</code>，必须是等集合全部加载到内存，服务才能访问吗？</font></summary>
+<summary><font color="#4fc4f9">如果设置了 <code>preload_collection</code>，必须是等集合全部加载到内存，服务才能访问吗？</font></summary>
 是的。如果是在 <strong>server_config.yaml</strong> 里设置的，那在启动 Milvus 时就会加载好数据后才开始提供服务。
 </details>
 <details>
-<summary><font color="#3f9cd1">为什么查询时 GPU 一直空闲？</font></summary>
-此时应该是在用 CPU 进行查询。如果要用 GPU 进行查询，需要在配置文件中将 <code>gpu_search_threshold</code> 的值设置为大于 <code>nq</code> (每次查询的向量条数) 。可以将 <code>gpu_search_threshold</code> 的值调整为期望开启 GPU 搜索的 <code>nq</code> 数。若 <code>nq</code> 小于该值，则用 CPU 查询，否则使用 GPU 查询。不建议在查询批量较小时使用 GPU 搜索。
+<summary><font color="#4fc4f9">为什么查询时 GPU 一直空闲？</font></summary>
+<p>此时应该是在用 CPU 进行查询。如果要用 GPU 进行查询，需要在配置文件中将 <code>gpu_search_threshold</code> 的值设置为小于 <code>nq</code> (每次查询的向量条数) 。可以将 <code>gpu_search_threshold</code> 的值调整为期望开启 GPU 搜索的 <code>nq</code> 数。若 <code>nq</code> 小于该值，则用 CPU 查询，否则将使用 GPU 查询。不建议在查询批量较小时使用 GPU 搜索。</p>
 </details>
 <details>
-<summary><font color="#3f9cd1">为什么我的日志文件时间与系统时间不一致？</font></summary>
+<summary><font color="#4fc4f9">为什么我的日志文件时间与系统时间不一致？</font></summary>
 Docker 镜像内部的日志文件默认使用 UTC 时间。如果宿主机未使用 UTC 时间，就会出现日志文件时间与系统时间不一致的情况。建议在宿主机上挂载日志文件，这样可以保证宿主机上的日志文件和系统时间是一致的。
 
 </details>

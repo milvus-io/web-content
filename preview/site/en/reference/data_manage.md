@@ -15,13 +15,13 @@ Follow the steps below to use MySQL as metadata management service in Linux:
 1. Pull the latest image of MySQL:
 
     ```shell
-    $ docker pull mysql:latest
+    $ docker pull mysql:5.7
     ```
 
 2. Launch MySQL service. You can set your own password and port.
 
     ```shell
-    $ docker run -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 -d mysql:latest
+    $ docker run -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.7
     ```
 
 3. Use root account and the IP of the host that runs MySQL service (`<MySQL_server_host IP>`) to log in MySQL. Press \<ENTER\> to enter the password you set in the previous step.
@@ -33,7 +33,7 @@ Follow the steps below to use MySQL as metadata management service in Linux:
 4. Enter MySQL client command line interface to create a database. Here we use `milvus` as the database name.
 
     ```sql
-    create database milvus
+    mysql> create database milvus;
     ```
 
 5. Quit MySQL client and update the `meta_uri` parameter in **server_config.yaml**. Use the IP of the host that runs MySQL service (`<MySQL_server_host IP>`). Note that the password, IP address, port, and database name must be consistent with your previous settings.
@@ -48,23 +48,23 @@ Follow the steps below to use MySQL as metadata management service in Linux:
 ## FAQ
 
 <details>
-<summary><font color="#3f9cd1">Why does Milvus return <code>database is locked</code>?</font></summary>
+<summary><font color="#4fc4f9">Why does Milvus return <code>database is locked</code>?</font></summary>
 If you use SQLite to manage metadata, you receive this error message when write requests occur frequently. We recommend using MySQL for metadata management. See <a href="data_manage.md">Manage Metadata with MySQL</a> for more information.
 </details>
 <details>
-<summary><font color="#3f9cd1">Why can't I find vectors on SQLite or MySQL?</font></summary>
+<summary><font color="#4fc4f9">Why can't I find vectors on SQLite or MySQL?</font></summary>
 Milvus stores vectors and indexes directly in the disk as files, not in SQLite or MySQL. It uses SQLite or MySQL to store metadata of the vectors instead. See <a href="storage_concept.md">Storage Concepts</a> for more information.
 </details>
 <details>
-<summary><font color="#3f9cd1">Can I use SQL Server or PostgreSQL to store metadata in Milvus?</font></summary>
+<summary><font color="#4fc4f9">Can I use SQL Server or PostgreSQL to store metadata in Milvus?</font></summary>
 No, we only support storing metadata using SQLite or MySQL.
 </details>
 
 
 
-## Related blogs about data management
+## Related blogs
 
-From data import, data storage to data querying and scheduling, our blogs on Medium introduce detailed insights about the data management strategy in Milvus.
+From data import, data storage to data querying and scheduling, our blogs on Medium provide detailed insights into the data management mechanism of Milvus.
 
 - [Managing Data in Massive-Scale Vector Search Engine](https://medium.com/@milvusio/managing-data-in-massive-scale-vector-search-engine-db2e8941ce2f)
 - [Improvements of the Data File Cleanup Mechanism](https://github.com/milvus-io/community/blob/master/blog/en/2019-12-18-datafile-cleanup.md)

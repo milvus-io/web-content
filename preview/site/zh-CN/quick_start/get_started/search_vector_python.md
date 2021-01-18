@@ -15,19 +15,7 @@ Milvus 支持在集合或分区中查询向量。
    ```
 
    <div class="alert note">
-   对于不同的索引类型，搜索所需参数也有区别。所有的搜索参数都<b>必须赋值</b>。
-   </div>
-
-   | 索引类型                             | 搜索参数                                                                                    | 示例参数              | 取值范围       |
-   | ------------------------------------ | ------------------------------------------------------------------------------------------- | --------------------- | -------------- |
-   | FLAT | - | | - |
-   | IVF\_FLAT / IVF\_SQ8 / IVF\_SQ8H / IVF\_PQ | `nprobe`：查询时所涉及的向量类的个数。`nprobe` 影响查询精度。数值越大，精度越高，速度越慢。         | `{nprobe: 32}`         | CPU: [1, nlist] </br> GPU: [1, min(2048, nlist)]   |
-   | RNSG                                | `search_length`：值越大，代表在图中搜索的节点越多，召回率越高，速度越慢。                         | `{search_length: 100}` | [10, 300]      |
-   | HNSW                               | `ef`：值越大，则在索引中搜索的数据越多，召回率越高，速度越慢。                                    | `{ef: 64}`            | [`top_k`, 4096] |
-   | ANNOY                              | `search_k`: 影响搜索性能。值越大，搜索结果越精确，但搜索时间越长。</br>-1 表示默认值，取总数据量的5%。 | `{search_k: -1}`    | {-1} ∪ [`top_k`, n × n_trees] |
-
-   <div class="alert note">
-   <code>top_k</code> 是与目标向量最相似的 k 条向量，在搜索时定义。<code>top_k</code> 的取值范围是 (0, 2048]。
+   对于不同的索引类型，搜索所需参数也有区别。所有的搜索参数都<b>必须赋值</b>。详细信息请参考 <a href="index.md">Milvus 索引类型</a>。
    </div>
 
 2. 创建随机向量作为 `query_records` 进行搜索：
@@ -37,6 +25,12 @@ Milvus 支持在集合或分区中查询向量。
    >>> q_records = [[random.random() for _ in range(256)] for _ in range(5)]
    >>> milvus.search(collection_name='test01', query_records=q_records, top_k=2, params=search_param)
    ```
+
+   <div class="alert note">
+   <ul>
+   <li><code>top_k</code> 指的是向量空间中距离目标向量最近的 k 个向量。</li><li><code>top_k</code> 的范围为：[1, 16384]。</li>
+   </ul>
+   </div>
 
 ## 在分区中查询向量
 
@@ -54,23 +48,23 @@ Milvus 支持在集合或分区中查询向量。
 ## 常见问题
 
 <details>
-<summary><font color="#3f9cd1">为什么 Milvus 查询召回率一直不理想？</font></summary>
+<summary><font color="#4fc4f9">为什么 Milvus 查询召回率一直不理想？</font></summary>
 在调用 SDK 进行向量搜索时，可以增大函数中 <code>nprobe</code> 参数的值。值越大，结果越精确，但耗时也越久。详见 <a href="https://www.milvus.io/cn/blogs/2020-2-16-api-setting.md">如何设置 Milvus 客户端参数</a>。
 </details>
 <details>
-<summary><font color="#3f9cd1">Milvus 是否支持 “边插入边查询” ？</font></summary>
+<summary><font color="#4fc4f9">Milvus 是否支持 “边插入边查询” ？</font></summary>
 支持。
 </details>
 <details>
-<summary><font color="#3f9cd1">对集合分区的查询是否会受到集合大小的影响，尤其在集合数据量高达一亿数据量时？</font></summary>
+<summary><font color="#4fc4f9">对集合分区的查询是否会受到集合大小的影响，尤其在集合数据量高达一亿数据量时？</font></summary>
 不会。如果你在搜索时指定了分区，Milvus 只会在相应分区进行搜索。
 </details>
 <details>
-<summary><font color="#3f9cd1">如果只是搜索集合中的部分分区，整个集合的数据会全部加载到内存吗？</font></summary>
+<summary><font color="#4fc4f9">如果只是搜索集合中的部分分区，整个集合的数据会全部加载到内存吗？</font></summary>
 不会，只加载指定的分区里的数据。
 </details>
 <details>
-<summary><font color="#3f9cd1">各个数据段的检索是并行处理的吗？</font></summary>
+<summary><font color="#4fc4f9">各个数据段的检索是并行处理的吗？</font></summary>
 <p>一般而言，Milvus 对单个数据段内的查询是并行的，多个数据段的处理根据发行版本略有不同。</p>
 <p>
 假设一个集合存在多个数据段，当查询请求到达时：
@@ -84,18 +78,18 @@ Milvus 支持在集合或分区中查询向量。
 </p>
 </details>
 <details>
-<summary><font color="#3f9cd1">批量搜索时，用多线程的收益大吗？</font></summary>
+<summary><font color="#4fc4f9">批量搜索时，用多线程的收益大吗？</font></summary>
 多线程查询，如果是小批量（<code>nq</code> < 64）的话，后台会合并查询请求。如果是大批量查询的话，就不会有什么优势。
 </details>
 <details>
-<summary><font color="#3f9cd1">为什么搜索的速度非常慢？</font></summary>
+<summary><font color="#4fc4f9">为什么搜索的速度非常慢？</font></summary>
 请首先检查 <strong>server_config.yaml</strong> 的 <code>cache.cache_size</code> 参数是否大于集合中的数据量。
 </details>
 <details>
-<summary><font color="#3f9cd1">创建索引立即查询，为什么内存会突然增长？</font></summary>
+<summary><font color="#4fc4f9">创建索引立即查询，为什么内存会突然增长？</font></summary>
 这是因为 Milvus 在进行搜索时会将新生成的索引文件加载到内存，由于加载的索引文件和用于生成索引文件的原始向量文件总和小于 <code>cache.cache_size</code> 的上限，原始向量数据暂未被系统从内存释放。
 </details>
 <details>
-<summary><font color="#3f9cd1">为什么重启 Milvus 服务端之后，第一次搜索时间非常长？</font></summary>
+<summary><font color="#4fc4f9">为什么重启 Milvus 服务端之后，第一次搜索时间非常长？</font></summary>
 重启后第一次搜索时，会将数据从磁盘加载到内存，所以这个时间会比较长。可以在 <strong>server_config.yaml</strong> 中开启 <code>preload_collection</code>，在内存允许的情况下尽可能多地加载集合。这样在每次重启服务端之后，数据都会先载入到内存中，可以解决第一次搜索耗时很长的问题。或者在查询前，调用方法 <code>load_collection()</code> 将该集合加载到内存。
 </details>

@@ -164,13 +164,13 @@ Follow these steps to start a Milvus instance and Mishards service on a machine:
    - If your Docker version is earlier than v19.03:
 
    ```shell
-   $ sudo docker  run --runtime=nvidia --rm -d -p 19530:19530 -v /tmp/milvus/db:/var/lib/milvus/db milvusdb/milvus:0.10.2-gpu-d081520-8a2393
+   $ sudo docker  run --runtime=nvidia --rm -d -p 19530:19530 -v /tmp/milvus/db:/var/lib/milvus/db milvusdb/milvus:0.10.5-gpu-d010621-4eda95
    ```
 
    - Otherwise:
 
    ```shell
-   $ sudo docker run --gpus all --rm -d -p 19530:19530 -v /tmp/milvus/db:/var/lib/milvus/db milvusdb/milvus:0.10.2-gpu-d081520-8a2393
+   $ sudo docker run --gpus all --rm -d -p 19530:19530 -v /tmp/milvus/db:/var/lib/milvus/db milvusdb/milvus:0.10.5-gpu-d010621-4eda95
    ```
 
 4. Change the directory permission:
@@ -254,7 +254,7 @@ See <a href="https://helm.sh/docs/">Helm Docs</a> for more information about usi
    
    ```bash
    $ git clone https://github.com/milvus-io/milvus-helm.git
-   $ cd milvus-helm
+   $ cd milvus-helm/charts/milvus
    $ helm dep update
    ```
 

@@ -58,7 +58,7 @@ $ sudo docker info
 拉取 CPU 版本的 Milvus 镜像：
 
 ```shell
-$ sudo docker pull milvusdb/milvus:0.10.2-cpu-d081520-8a2393
+$ sudo docker pull milvusdb/milvus:0.10.5-cpu-d010621-4eda95
 ```
 <div class="alert note">
 <ul>
@@ -89,11 +89,11 @@ $ sudo docker pull milvusdb/milvus:0.10.2-cpu-d081520-8a2393
 ```shell
 $ mkdir -p /home/$USER/milvus/conf
 $ cd /home/$USER/milvus/conf
-$ wget https://raw.githubusercontent.com/milvus-io/milvus/0.10.2/core/conf/demo/server_config.yaml
+$ wget https://raw.githubusercontent.com/milvus-io/milvus/0.10.5/core/conf/demo/server_config.yaml
 ```
 
 <div class="alert note">
-如果无法通过 <code>wget</code> 命令下载配置文件，你也可以在 <b>/home/$USER/milvus/conf</b> 目录下创建 <b>server_config.yaml</b> 文件，然后将 <a href="https://github.com/milvus-io/milvus/blob/0.10.2/core/conf/demo/server_config.yaml">server config 文件</a> 的内容复制到你创建的配置文件中。
+如果无法通过 <code>wget</code> 命令下载配置文件，你也可以在 <b>/home/$USER/milvus/conf</b> 目录下创建 <b>server_config.yaml</b> 文件，然后将 <a href="https://github.com/milvus-io/milvus/blob/0.10.5/core/conf/demo/server_config.yaml">server config 文件</a> 的内容复制到你创建的配置文件中。
 </div>
 
 ## 启动 Milvus Docker 容器
@@ -101,14 +101,14 @@ $ wget https://raw.githubusercontent.com/milvus-io/milvus/0.10.2/core/conf/demo/
 启动 Docker 容器，将本地的文件路径映射到容器中：
 
 ```shell
-$ sudo docker run -d --name milvus_cpu_0.10.2 \
+$ sudo docker run -d --name milvus_cpu_0.10.5 \
 -p 19530:19530 \
 -p 19121:19121 \
 -v /home/$USER/milvus/db:/var/lib/milvus/db \
 -v /home/$USER/milvus/conf:/var/lib/milvus/conf \
 -v /home/$USER/milvus/logs:/var/lib/milvus/logs \
 -v /home/$USER/milvus/wal:/var/lib/milvus/wal \
-milvusdb/milvus:0.10.2-cpu-d081520-8a2393
+milvusdb/milvus:0.10.5-cpu-d010621-4eda95
 ```
 
 上述命令中用到的参数定义如下：
@@ -127,31 +127,56 @@ $ sudo docker ps
 如果 Milvus 服务没有正常启动，执行以下命令查询错误日志：
 
 ```shell
-$ sudo docker logs milvus_cpu_0.10.2
+$ sudo docker logs milvus_cpu_0.10.5
 ```
 
 ## 常见问题
 
 <details>
-<summary><font color="#3f9cd1">可以在 Windows 上安装 Milvus 吗？</font></summary>
+<summary><font color="#4fc4f9">可以在 Windows 上安装 Milvus 吗？</font></summary>
 理论上只要能够支持 Docker 的操作系统都可以运行 Milvus。
 </details>
 <details>
-<summary><font color="#3f9cd1">为什么 Milvus 在启动时返回 <code>Illegal instruction</code>？</font></summary>
+<summary><font color="#4fc4f9">为什么 Milvus 在启动时返回 <code>Illegal instruction</code>？</font></summary>
 如果你的 CPU 不支持 SSE42、AVX、AVX2、AVX512 其中任何一个指令集，则 Milvus 无法正常启动。可以通过 <code>cat /proc/cpuinfo</code> 查看 CPU 支持的指令集。
 </details>
 <details>
-<summary><font color="#3f9cd1">Milvus 中如何实现数据迁移？</font></summary>
-<p>把原有的 Milvus 服务的整个 <strong>db</strong> 目录拷贝到新的路径下，启动新的 Milvus 服务时，将该 Milvus 服务的 <strong>db</strong> 目录映射为刚拷贝过来的 <strong>db</strong> 目录。</p>
-<p>注意：不同版本之间，数据可能会不兼容。目前数据格式兼容到 0.7.0。</p>
+<summary><font color="#4fc4f9">Milvus 中如何实现数据迁移？</font></summary>
+详见<a href="data_migration.md">数据迁移</a>。
+
+<div class="alert note">
+注意：不同版本之间，数据可能会不兼容。目前数据格式兼容到 Milvus v0.7.0。
+</div>
 
 </details>
 <details>
-<summary><font color="#3f9cd1">Milvus 只能使用 Docker 部署吗？</font></summary>
+<summary><font color="#4fc4f9">Milvus 只能使用 Docker 部署吗？</font></summary>
 Milvus 还支持源码编译，该方法仅支持 Linux 系统。详见 <a href="https://github.com/milvus-io/milvus/blob/master/INSTALL.md">从源代码编译 Milvus</a>。
 
 </details>
+<details>
+<summary><font color="#4fc4f9">应如何设置 IVF 索引的 <code>nlist</code> 和 <code>nprobe</code> 参数？</font></summary>
+IVF 索引的 <code>nlist</code> 值需要根据具体的使用情况去设置。一般来说，推荐值为 <code>4 &times; sqrt(n)</code>，其中 n 为 segment 内的 entity 总量。
 
+`nprobe` 的选取需要根据数据总量和实际场景在速度性能和准确率之间进行取舍。建议通过多次实验确定一个合理的值。
+
+以下是使用公开测试数据集 sift50m 针对 `nlist` 和 `nprobe` 的一个测试。以索引类型 IVF\_SQ8 为例，针对不同 `nlist`/`nprobe` 组合的搜索时间和召回率分别进行对比。
+
+<div class="alert note">
+
+因 CPU 版 Milvus 和 GPU 版 Milvus 测试结果类似，此处仅展示基于 GPU 版 Milvus 测试的结果。
+
+</div>
+
+<img src="https://raw.githubusercontent.com/milvus-io/docs/master/v0.10.5/assets/accuracy_nlist_nprobe.png" alt="accuracy_nlist_nprobe.png">
+
+在本次测试中，`nlist` 和 `nprobe` 的值成比例增长，召回率随 `nlist`/`nprobe` 组合增长呈现上升的趋势。
+
+<img src="https://raw.githubusercontent.com/milvus-io/docs/master/v0.10.5/assets/performance_nlist_nprobe.png" alt="performance_nlist_nprobe.png">
+
+在 `nlist` 为 4096 和 `nprobe` 为 128 时，速度性能最佳。
+
+</details>
 
 
 
@@ -161,7 +186,7 @@ Milvus 还支持源码编译，该方法仅支持 Linux 系统。详见 <a href=
 
   - [运行示例程序](example_code.md)
   - [了解更多 Milvus 操作](milvus_operation.md)
-  - [体验 Milvus 在线训练营](https://github.com/milvus-io/bootcamp)
+  - [体验 Milvus 在线训练营](https://github.com/zilliz-bootcamp)
 
 - 如果你已准备好在生产环境中部署 Milvus：
 

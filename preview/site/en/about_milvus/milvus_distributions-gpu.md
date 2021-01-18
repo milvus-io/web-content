@@ -12,8 +12,9 @@ group: distribution
 Milvus comes in two distributions: CPU-only Milvus and GPU-enabled Milvus.
 
 <ul>
-<li>CPU-only Milvus only supports searching after index building completes, and hence is applicable to static datasets.</li> 
-<li>GPU-enabled Milvus supports GPU acceleration for searching and index building: It supports searching and index building at the same time to improve query efficiency, and hence is applicable to dynamic datasets.</li>
+<li>CPU-only Milvus only supports using CPU to search or build index. 
+</li> 
+<li>GPU-enabled Milvus supports GPU acceleration for searching and index building: You can use CPU for searching and GPU for index building at the same time to improve query efficiency.</li>
 </ul>
 
 If your GPU supports CUDA, then you can install GPU-enabled Milvus to achieve much higher search performance in large-scale datasets.
@@ -22,9 +23,7 @@ If your GPU supports CUDA, then you can install GPU-enabled Milvus to achieve mu
 
 ## Indexes for GPU-enabled Milvus
 
-<div class="alert info">
-Milvus maps different embedding types with different index types. Click to view the index types supporting your embedding type. 
-</div>
+Milvus maps different embedding types with different index types. Click the tab below to view the index types supporting your embedding type. 
 
 
 
@@ -46,11 +45,15 @@ Milvus maps different embedding types with different index types. Click to view 
 | HNSW     | ✔️                | ❌                 | ✔️                  | ❌              |
 | ANNOY    | ✔️                | ❌                 | ✔️                  | ❌              |
 
+
 <div class="alert note">
 <ul>
-<li>For indexes supporting both CPU and GPU, you can create or search them using different devices. For example, you can create an index using CPU and conduct a vector search using GPU, and vice versa.</li>
+<li>An index built with CPU is identical to built with CPU. The only difference is the time to build the index: GPU usually takes less time.</li>
+<li>If <code>top_k</code> > 2048, Milvus switches from GPU search to CPU search.</li>
+<li>If <code>nprobe</code> > 2048, Milvus switches from GPU search to CPU search.</li>
 </ul>
 </div>
+
 </div>
 
 <div class="filter-binary table-wrapper" markdown="block">

@@ -66,18 +66,18 @@ id: insert_delete_vector_python.md
 ## 常见问题
 
 <details>
-<summary><font color="#3f9cd1">Milvus 中自定义 ID 有没有长度限制？</font></summary>
+<summary><font color="#4fc4f9">Milvus 中自定义 ID 有没有长度限制？</font></summary>
 ID 类型是非负的 64 位整型。
 </details>
 <details>
-<summary><font color="#3f9cd1">Milvus 可以插入重复 ID 的向量吗？</font></summary>
+<summary><font color="#4fc4f9">Milvus 可以插入重复 ID 的向量吗？</font></summary>
 可以，这样在 Milvus 中会存在相同 ID 的多条向量。
 </details>
 <details>
-<summary><font color="#3f9cd1">Milvus 是否支持 “边插入边查询” ？</font></summary>
+<summary><font color="#4fc4f9">Milvus 是否支持 “边插入边查询” ？</font></summary>
 支持。
 </details>
 <details>
-<summary><font color="#3f9cd1">Milvus 中单次插入数据有上限吗？</font></summary>
+<summary><font color="#4fc4f9">Milvus 中单次插入数据有上限吗？</font></summary>
 单次插入数据不能超过 256 MB。
 </details>

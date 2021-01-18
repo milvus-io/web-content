@@ -11,7 +11,7 @@ id: example_code.md
 
    ```shell
    # Install Milvus Python SDK
-   $ pip3 install pymilvus==0.2.14
+   $ pip3 install pymilvus==0.2.15
    ```
 
    <div class="alert note">
@@ -22,11 +22,11 @@ id: example_code.md
    
    ```shell
    # Download Python example
-   $ wget https://raw.githubusercontent.com/milvus-io/pymilvus/0.2.14/examples/example.py
+   $ wget https://raw.githubusercontent.com/milvus-io/pymilvus/0.2.15/examples/example.py
    ```
    
    <div class="alert note">
-   万一你遇到无法通过 <code>wget</code> 命令正常下载示例代码的情况，你也可以创建 <b>example.py</b> 文件并复制粘贴 <a href="https://github.com/milvus-io/pymilvus/blob/0.2.14/examples/example.py">示例代码</a> 的内容。
+   万一你遇到无法通过 <code>wget</code> 命令正常下载示例代码的情况，你也可以创建 <b>example.py</b> 文件并复制粘贴 <a href="https://github.com/milvus-io/pymilvus/blob/0.2.15/examples/example.py">示例代码</a> 的内容。
    </div>
 
 4. 运行示例代码。
@@ -47,4 +47,4 @@ id: example_code.md
 ## 接下来你可以
 
 - 了解更多 Milvus [基础操作](milvus_operation.md)
-- [体验 Milvus 在线训练营](https://github.com/milvus-io/bootcamp)，发现更多解决方案。
+- [体验 Milvus 在线训练营](https://github.com/zilliz-bootcamp)，发现更多解决方案。

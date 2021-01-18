@@ -162,13 +162,13 @@ Mishards 定义了路由策略相关的接口，并通过插件提供扩展。�
    - 如果 Docker 版本低于 v19.03，运行如下命令：
 
    ```shell
-   $ sudo docker  run --runtime=nvidia --rm -d -p 19530:19530 -v /tmp/milvus/db:/var/lib/milvus/db milvusdb/milvus:0.10.2-gpu-d081520-8a2393
+   $ sudo docker  run --runtime=nvidia --rm -d -p 19530:19530 -v /tmp/milvus/db:/var/lib/milvus/db milvusdb/milvus:0.10.5-gpu-d010621-4eda95
    ```
 
    - 否则，运行如下命令：
 
    ```shell
-   $ sudo docker run --gpus all --rm -d -p 19530:19530 -v /tmp/milvus/db:/var/lib/milvus/db milvusdb/milvus:0.10.2-gpu-d081520-8a2393
+   $ sudo docker run --gpus all --rm -d -p 19530:19530 -v /tmp/milvus/db:/var/lib/milvus/db milvusdb/milvus:0.10.5-gpu-d010621-4eda95
    ```
 
 4. 更改目录权限：
@@ -251,7 +251,7 @@ $ make clean_deploy
    
    ```bash
    $ git clone https://github.com/milvus-io/milvus-helm.git
-   $ cd milvus-helm
+   $ cd milvus-helm/charts/milvus
    $ helm dep update
    ```
 

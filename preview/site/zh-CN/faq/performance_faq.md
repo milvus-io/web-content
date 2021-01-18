@@ -9,7 +9,7 @@ id: performance_faq.md
 - [为什么重启 Milvus 服务端之后，第一次搜索时间非常长？](#为什么重启-Milvus-服务端之后第一次搜索时间非常长)            
 - [为什么搜索的速度非常慢？](#为什么搜索的速度非常慢)            
 - [如何进行性能调优？](#如何进行性能调优)           
-- [建立索引时需要设置 `nlist` 值，如何选择该值大小？](#建立索引时需要设置-nlist-值如何选择该值大小)            
+- [应如何设置 IVF 索引的 <code>nlist</code> 和 <code>nprobe</code> 参数？](#应如何设置-ivf-索引的-nlist-和-nprobe-参数)            
 - [为什么有时候小的数据集查询时间反而更长？](#为什么有时候小的数据集查询时间反而更长)             
 - [为什么查询时 GPU 一直空闲？](#为什么查询时-GPU-一直空闲)            
 - [为什么数据插入后不能马上被搜索到？](#为什么数据插入后不能马上被搜索到)          
@@ -46,9 +46,27 @@ id: performance_faq.md
 详见 [性能调优](tuning.md)。
 
 
-#### 建立索引时需要设置 `nlist` 值，如何选择该值大小？
+#### 应如何设置 IVF 索引的 <code>nlist</code> 和 <code>nprobe</code> 参数？
 
-该值需要根据具体的使用情况去设置。详见 [性能调优 > 索引](tuning.md#索引) 和 [如何设置 Milvus 客户端参数](https://www.milvus.io/cn/blogs/2020-2-16-api-setting.md)。
+IVF 索引的 <code>nlist</code> 值需要根据具体的使用情况去设置。一般来说，推荐值为 <code>4 &times; sqrt(n)</code>，其中 n 为 segment 内的 entity 总量。
+
+`nprobe` 的选取需要根据数据总量和实际场景在速度性能和准确率之间进行取舍。建议通过多次实验确定一个合理的值。
+
+以下是使用公开测试数据集 sift50m 针对 `nlist` 和 `nprobe` 的一个测试。以索引类型 IVF\_SQ8 为例，针对不同 `nlist`/`nprobe` 组合的搜索时间和召回率分别进行对比。
+
+<div class="alert note">
+
+因 CPU 版 Milvus 和 GPU 版 Milvus 测试结果类似，此处仅展示基于 GPU 版 Milvus 测试的结果。
+
+</div>
+
+<img src="https://raw.githubusercontent.com/milvus-io/docs/master/v0.10.5/assets/accuracy_nlist_nprobe.png" alt="accuracy_nlist_nprobe.png">
+
+在本次测试中，`nlist` 和 `nprobe` 的值成比例增长，召回率随 `nlist`/`nprobe` 组合增长呈现上升的趋势。
+
+<img src="https://raw.githubusercontent.com/milvus-io/docs/master/v0.10.5/assets/performance_nlist_nprobe.png" alt="performance_nlist_nprobe.png">
+
+在 `nlist` 为 4096 和 `nprobe` 为 128 时，速度性能最佳。
 
 
 #### 为什么有时候小的数据集查询时间反而更长？
@@ -58,7 +76,7 @@ id: performance_faq.md
 
 #### 为什么查询时 GPU 一直空闲？
 
-此时应该是在用 CPU 进行查询。如果要用 GPU 进行查询，需要在配置文件中将 `gpu_search_threshold` 的值设置为大于 `nq` (每次查询的向量条数) 。可以将 `gpu_search_threshold` 的值调整为期望开启 GPU 搜索的 `nq` 数。若 `nq` 小于该值，则用 CPU 查询，否则使用 GPU 查询。不建议在查询批量较小时使用 GPU 搜索。
+<p>此时应该是在用 CPU 进行查询。如果要用 GPU 进行查询，需要在配置文件中将 <code>gpu_search_threshold</code> 的值设置为小于 <code>nq</code> (每次查询的向量条数) 。可以将 <code>gpu_search_threshold</code> 的值调整为期望开启 GPU 搜索的 <code>nq</code> 数。若 <code>nq</code> 小于该值，则用 CPU 查询，否则将使用 GPU 查询。不建议在查询批量较小时使用 GPU 搜索。</p>
 
 
 #### 为什么数据插入后不能马上被搜索到？
@@ -112,4 +130,3 @@ id: performance_faq.md
 
 - 在 GitHub 上访问 [Milvus](https://github.com/milvus-io/milvus/issues)，提问、分享、交流，帮助其他用户。
 - 加入我们的 [Slack 社区](https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk)，与其他用户讨论交流。
-

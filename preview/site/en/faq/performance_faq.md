@@ -8,7 +8,7 @@ id: performance_faq.md
 - [Why does the first search take a long time after Milvus restarts?](#Why-does-the-first-search-take-a-long-time-after-Milvus-restarts)
 - [Why the search is very slow?](#Why-the-search-is-very-slow)
 - [How do I improve Milvus' performance?](#How-do-I-improve-Milvus-performance)
-- [How to set the value of `nlist` when I build indexes?](#How-to-set-the-value-of-nlist-when-I-build-indexes)
+- [How to set <code>nlist</code> and <code>nprobe</code> for IVF indexes?](#how-to-set-nlist-and-nprobe-for-ivf-indexes)
 - [Why sometimes the query time for a small dataset is longer?](#Why-sometimes-the-query-time-for-a-small-dataset-is-longer)
 - [Why is my GPU always idle?](#Why-is-my-GPU-always-idle)
 - [Why my data cannot be searched immediately after insertion?](#Why-my-data-cannot-be-searched-immediately-after-insertion)
@@ -42,9 +42,28 @@ Check if the value of `cache.cache_size` in **server_config.yaml** is greater th
 
 See [Performance tuning](tuning.md) for more information. 
 
-#### How to set the value of `nlist` when I build indexes?
+#### How to set <code>nlist</code> and <code>nprobe</code> for IVF indexes?
 
-It depends on your scenario. See [Performance tuning > Index](tuning.md#Index).
+In general terms, the recommended value of <code>nlist</code> is <code>4 &times; sqrt(n)</code>, where n is the total number of entities in a segment. 
+
+Determining `nprobe` is a trade-off between search performance and accuracy, and based on your dataset and scenario. It is recommended to run several rounds of tests to determine the value of `nprobe`.
+
+The following charts are from a test running on the sift50m dataset and IVF\_SQ8 index. The test compares search performance and recall rate between different `nlist`/`nprobe` pairs.
+
+<div class="alert note">
+
+We only show the results of GPU-enabled Milvus here, because the two distributions of Milvus show similar results.
+
+</div>
+
+<img src="https://raw.githubusercontent.com/milvus-io/docs/master/v0.10.5/assets/accuracy_nlist_nprobe.png" alt="accuracy_nlist_nprobe.png">
+
+Key takeaways: This test shows that the recall rate increases with the `nlist`/`nprobe` pair.
+
+<img src="https://raw.githubusercontent.com/milvus-io/docs/master/v0.10.5/assets/performance_nlist_nprobe.png" alt="performance_nlist_nprobe.png">
+
+Key takeaways: When `nlist` is 4096 and `nprobe` 128, Milvus shows the best search performance.
+
 
 #### Why sometimes the query time for a small dataset is longer?
 
@@ -53,11 +72,14 @@ If the size of the dataset is smaller than the value of `index_file_size` that y
 
 #### Why is my GPU always idle?
 
-It is very likely that Milvus is using CPU for query. If you want to use GPU for query, you need to set the value of `gpu_search_threshold` in **server_config.yaml** to be greater than `nq` (number of vectors per query).
-
-You can use `gpu_search_threshold` to set the threshold: when `nq` is less than this value, Milvus uses CPU for queries; otherwise, Milvus uses GPU instead.
-
+<p>It is very likely that Milvus is using CPU for query. If you want to use GPU for query, you need to set the value of <code>gpu_search_threshold</code> in <strong>server_config.yaml</strong> to be less than <code>nq</code> (number of vectors per query).
+</p>
+<p>
+You can use <code>gpu_search_threshold</code> to set the threshold: when <code>nq</code> is less than this value, Milvus uses CPU for queries; otherwise, Milvus uses GPU instead.
+</p>
+<p>
 We do not recommend enabling GPU when the query number is small.
+</p>
 
 #### Why my data cannot be searched immediately after insertion?
 

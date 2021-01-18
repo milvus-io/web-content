@@ -19,6 +19,6 @@ id: flush_python.md
 ## 常见问题
 
 <details>
-<summary><font color="#3f9cd1">为什么数据插入后不能马上被搜索到？</font></summary>
+<summary><font color="#4fc4f9">为什么数据插入后不能马上被搜索到？</font></summary>
 因为数据还没有落盘。要确保数据插入后立刻能搜索到，可以手动调用 <code>flush</code> 接口。但是频繁调用 <code>flush</code> 接口可能会产生大量小数据文件，从而导致查询变慢。
 </details>

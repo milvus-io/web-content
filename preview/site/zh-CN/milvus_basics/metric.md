@@ -27,7 +27,7 @@ Milvus 基于不同的距离计算方式比较向量间的距离。选择合适�
 <tbody>
   <tr>
     <td class="tg-0pky">欧氏距离 (L2)</td>
-    <td class="tg-0pky" rowspan="2"><ul><li>FLAT</li><li>IVF_FLAT</li><li>IVF_SQ8</li><li>IVF_SQ8H</li><li>IVF_PQ</li><li>RNSG</li><li>HNSW</li></ul></td>
+    <td class="tg-0pky" rowspan="2"><ul><li>FLAT</li><li>IVF_FLAT</li><li>IVF_SQ8</li><li>IVF_SQ8H</li><li>IVF_PQ</li><li>RNSG</li><li>HNSW</li><li>ANNOY</li></ul></td>
   </tr>
   <tr>
     <td class="tg-0pky">内积 (IP)</td>
@@ -170,11 +170,11 @@ Milvus 基于不同的距离计算方式比较向量间的距离。选择合适�
 ## 常见问题
 
 <details>
-<summary><font color="#3f9cd1">为什么向量距离计算方式是内积时，搜索出来的 top1 不是目标向量本身？</font></summary>
+<summary><font color="#4fc4f9">为什么向量距离计算方式是内积时，搜索出来的 top1 不是目标向量本身？</font></summary>
 向量距离计算方式用内积时，如果向量未归一化，会出现这样的情况。
 </details>
 <details>
-<summary><font color="#3f9cd1">什么是归一化？Milvus 中为什么有时候需要归一化？</font></summary>
+<summary><font color="#4fc4f9">什么是归一化？Milvus 中为什么有时候需要归一化？</font></summary>
 <p>归一化指的是通过数学变换将向量的模长变为 1 的过程。如需使用点积计算向量相似度，则必须对向量作归一化处理。处理后点积与余弦相似度等价。
 </p>
 <p>
@@ -182,6 +182,6 @@ Milvus 基于不同的距离计算方式比较向量间的距离。选择合适�
 </p>
 </details>
 <details>
-<summary><font color="#3f9cd1">为什么欧氏距离和内积在计算向量相似度时的结果不一致？</font></summary>
+<summary><font color="#4fc4f9">为什么欧氏距离和内积在计算向量相似度时的结果不一致？</font></summary>
 如果欧氏距离和内积返回不一致的结果，需要检查数据是否已经归一化。如果没有，请先对数据进行归一化。理论上可以证明，对于未归一化的数据，欧氏距离和内积的结果是不一致的。
 </details>

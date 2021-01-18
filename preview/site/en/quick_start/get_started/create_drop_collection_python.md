@@ -37,7 +37,7 @@ See <a href="https://github.com/milvus-io/pymilvus/tree/master/examples">example
 ## FAQ
 
 <details>
-<summary><font color="#3f9cd1">How can I get the best performance from Milvus through setting <code>index_file_size</code>?</font></summary>
+<summary><font color="#4fc4f9">How can I get the best performance from Milvus through setting <code>index_file_size</code>?</font></summary>
 <p>You need to set <code>index_file_size</code> when creating a collection from a client. This parameter specifies the size of each segment, and its default value is 1024 in MB. When the size of newly inserted vectors reaches the specified volume, Milvus packs these vectors into a new segment. In other words, newly inserted vectors do not go into a segment until they grow to the specified volume. When it comes to creating indexes, Milvus creates one index file for each segment. When conducting a vector search, Milvus searches all index files one by one.
 </p>
 <p>
@@ -50,10 +50,10 @@ See <a href="tuning.md#Index">Performance Tuning > Index</a> for more informatio
 
 </details>
 <details>
-<summary><font color="#3f9cd1">Can I update <code>index_file_size</code> and <code>metric_type</code> after creating a collection?</font></summary>
+<summary><font color="#4fc4f9">Can I update <code>index_file_size</code> and <code>metric_type</code> after creating a collection?</font></summary>
 No, you cannot.
 </details>
 <details>
-<summary><font color="#3f9cd1">Is there a limit on the total number of collections and partitions?</font></summary>
-Yes. The total number of collections and partitions must not exceed 4,096.
+<summary><font color="#4fc4f9">Is there a limit on the total number of collections and partitions?</font></summary>
+There is no limit on the number of collections. The upper limit on the number of partitions in a collection is 4096.
 </details>

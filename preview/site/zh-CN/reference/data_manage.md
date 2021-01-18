@@ -15,13 +15,13 @@ Milvus 在 CentOS 系统中不支持 MySQL 8.0 或更高版本。
 1. 拉取 MySQL 最新镜像。
 
     ```shell
-    $ docker pull mysql:latest
+    $ docker pull mysql:5.7
     ```
 
 2. 启动 MySQL 服务（密码和端口可自行设置）。
 
     ```shell
-    $ docker run -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 -d mysql:latest
+    $ docker run -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.7
     ```
 
 3. 使用 root 账号和 MySQL 服务所在的主机 IP （`<MySQL_server_host IP>`）登录 MySQL，回车后系统提示输入密码。输入上一步设置的密码。
@@ -33,7 +33,7 @@ Milvus 在 CentOS 系统中不支持 MySQL 8.0 或更高版本。
 4. 进入 MySQL 客户端命令行，创建一个 database，名称可自行设定，这里使用 `milvus`。
 
     ```sql
-    create database milvus
+    mysql> create database milvus;
     ```
 
 5. 退出 MySQL 客户端, 修改 **server_config.yaml** 文件的 `meta_uri` 参数。使用 MySQL 服务所在的主机 IP 作为 IP 地址（`<MySQL_server_host IP>`）。注意密码、IP 地址、端口以及 database 名称要和以上几步的设置一致。
@@ -49,15 +49,15 @@ Milvus 在 CentOS 系统中不支持 MySQL 8.0 或更高版本。
 ## 常见问题
 
 <details>
-<summary><font color="#3f9cd1">出现 <code>database is locked</code> 的报错怎么解决？</font></summary>
+<summary><font color="#4fc4f9">出现 <code>database is locked</code> 的报错怎么解决？</font></summary>
 如果元数据管理用的是 SQLite，在有数据频繁写入的情况下会出现该错误。建议将 SQLite 更换为 MySQL。如何更换请参考文档 <a href="data_manage.md">使用 MySQL 管理元数据</a>。
 </details>
 <details>
-<summary><font color="#3f9cd1">为什么我在 SQLite / MySQL 找不到向量数据？</font></summary>
+<summary><font color="#4fc4f9">为什么我在 SQLite / MySQL 找不到向量数据？</font></summary>
 SQLite / MySQL 只是存放原始向量数据的元数据。向量和索引直接以文件的形式存在磁盘上，不存放在 SQLite 或 MySQL里。详见 <a href="storage_concept.md">存储相关概念</a>。
 </details>
 <details>
-<summary><font color="#3f9cd1">Milvus 的元数据存储可以使用 SQL Server 或者 PostgreSQL 吗？</font></summary>
+<summary><font color="#4fc4f9">Milvus 的元数据存储可以使用 SQL Server 或者 PostgreSQL 吗？</font></summary>
 不可以，目前仅支持 SQLite 和 MySQL。
 </details>
 

@@ -1,10 +1,86 @@
 ---
 id: release_notes.md
-title: Release Notes
-sidebar_label: Release Notes
 ---
 
 # Release notes
+
+## v0.10.5
+
+**Release date**：2021-01-07
+
+#### Compatibility
+
+| Milvus version | Python SDK version | Java SDK version | Go SDK version |
+| :------------- | :----------------- | :--------------- | :------------- |
+| 0.10.5         | 0.2.15             | 0.8.6            | 0.4.5          |
+
+#### Compatibility changes
+
+- The `load_collection()` method supports preloading specified partitions. [#4307](https://github.com/milvus-io/milvus/issues/4307)
+
+#### Improvements
+
+- Optimizes the process of indexing and querying. [#4454](https://github.com/milvus-io/milvus/issues/4454)
+
+#### Fixed issues
+
+- Calling `load_collection()` and `search()` in multiple threads causes Milvus to hang. [#4378](https://github.com/milvus-io/milvus/issues/4378)
+- Milvus only searches the default partition if the search parameter `partition_tags` contains `_default`. [#4484](https://github.com/milvus-io/milvus/issues/4484)
+
+> See [CHANGELOG](https://github.com/milvus-io/milvus/blob/0.10.5/CHANGELOG.md) for more information.
+
+## v0.10.4
+
+**Release date**：2020-12-03
+
+#### Compatibility
+
+| Milvus version | Python SDK version | Java SDK version | Go SDK version |
+| :------------- | :----------------- | :--------------- | :------------- |
+| 0.10.4         | 0.2.14             | 0.8.5            | 0.4.4          |
+
+#### Improvements
+
+- Improves the query performance in situations where no entities are deleted. [#3775](https://github.com/milvus-io/milvus/issues/3775)
+- Reduces the time to create a large number of partitions. [#4318](https://github.com/milvus-io/milvus/issues/4318)
+
+#### Fixed issues
+
+- The server crashes when searching with IVF_PQ on GPU. [#3626](https://github.com/milvus-io/milvus/issues/3626)
+- The performance of query on IVF_SQ8H worsens. [#3903](https://github.com/milvus-io/milvus/issues/3903)
+- The server crashes when deleting entities. [#3906](https://github.com/milvus-io/milvus/issues/3906)
+- The server occasionally hangs when creating and dropping partitions continuously. [#4012](https://github.com/milvus-io/milvus/issues/4012)
+- An out-of-memory error occurs when searching on GPU. [#4174](https://github.com/milvus-io/milvus/issues/4174)
+- Memory leaks when building an IVF index. [#4318](https://github.com/milvus-io/milvus/issues/4318)
+
+> See [CHANGELOG](https://github.com/milvus-io/milvus/blob/0.10.4/CHANGELOG.md) for more information.
+
+## v0.10.3
+
+**Release date**：2020-9-21
+
+#### Compatibility
+
+| Milvus version | Python SDK version | Java SDK version | Go SDK version |
+| :------------- | :----------------- | :--------------- | :------------- |
+| 0.10.3     | 0.2.14     | 0.8.5       | 0.4.4      |
+
+#### Improvements
+
+
+- Allows the user to specify `metric_type` when searching in a collection with FLAT index. [#3213](https://github.com/milvus-io/milvus/issues/3213)
+- Adds more valid values to the indexing parameter `m` of IVF_PQ: An `m` is valid so long as it can be divided by `dim`, which represents the number of vector dimensions. [#3254](https://github.com/milvus-io/milvus/issues/3254)
+- Expands the range of `nprobe` to [1, 16384] for all IVF indexes. [#3606](https://github.com/milvus-io/milvus/issues/3606)
+- Expands the range of `top_k` in an embeddings search to [1, 16384]. [#3639](https://github.com/milvus-io/milvus/issues/3639)
+- Optimizes the memory release strategy to avoid memory overuse. [#3536](https://github.com/milvus-io/milvus/issues/3536)
+
+#### Fixed issues
+
+
+- Milvus running on multiple GPU devices and using IVF_SQ8H crashes if GPU cache is set too low. [#3742](https://github.com/milvus-io/milvus/issues/3742)
+- Milvus reports a CUDA error when quitting, if the index is IVF_SQ8H. [#3760](https://github.com/milvus-io/milvus/issues/3760)
+
+> See [CHANGELOG](https://github.com/milvus-io/milvus/blob/0.10.3/CHANGELOG.md) for more information.
 
 ## v0.10.2
 

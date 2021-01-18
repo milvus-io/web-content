@@ -46,16 +46,16 @@ This page describes how to configure and start up [Prometheus](https://prometheu
     In the Kubernetes cluster, you need to set the <b>server_config.yaml</b> for each node to monitor.
     </div>
 
-3. Go to the Prometheus root directory, and download starter [Prometheus configuration file](https://github.com/milvus-io/docs/blob/master/v0.10.2/assets/monitoring/prometheus.yml) for Milvus:
+3. Go to the Prometheus root directory, and download starter [Prometheus configuration file](https://github.com/milvus-io/docs/blob/master/v0.10.5/assets/monitoring/prometheus.yml) for Milvus:
 
    ```shell
-   $ wget https://raw.githubusercontent.com/milvus-io/docs/master/v0.10.2/assets/monitoring/prometheus.yml \ -O prometheus.yml
+   $ wget https://raw.githubusercontent.com/milvus-io/docs/master/v0.10.5/assets/monitoring/prometheus.yml \ -O prometheus.yml
    ```
 
-4. Download starter [alerting rules](https://github.com/milvus-io/docs/blob/master/v0.10.2/assets/monitoring/alert_rules.yml) for Milvus to the Prometheus root directory:
+4. Download starter [alerting rules](https://github.com/milvus-io/docs/blob/master/v0.10.5/assets/monitoring/alert_rules.yml) for Milvus to the Prometheus root directory:
 
    ```shell
-   wget -P rules https://raw.githubusercontent.com/milvus-io/docs/master/v0.10.2/assets/monitoring/alert_rules.yml
+   wget -P rules https://raw.githubusercontent.com/milvus-io/docs/master/v0.10.5/assets/monitoring/alert_rules.yml
    ```
 
 5. Edit the Prometheus configuration file according to your needs:
@@ -159,6 +159,6 @@ This section includes the most important events for which you must create alerti
 
 
 <details>
-<summary><font color="#3f9cd1">How can I differentiate if I have multiple Milvus nodes connected to Pushgateway?</font></summary>
+<summary><font color="#4fc4f9">How can I differentiate if I have multiple Milvus nodes connected to Pushgateway?</font></summary>
 You can add a Prometheus instance in <strong>prometheus.yaml</strong>. Then Prometheus or Granafa will show the monitoring data, as well as the source node.
 </details>

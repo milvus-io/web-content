@@ -2,7 +2,7 @@
   "menuList": [
     {
       "id": "about_milvus",
-      "title": "ABOUT MILVUS",
+      "title": "About Milvus",
       "label1": "",
       "label2": "",
       "label3": "",
@@ -36,7 +36,7 @@
     },
     {
       "id": "vector.md",
-      "title": "Feature Vector",
+      "title": "Embedding Vector",
       "label1": "milvus_basics",
       "label2": "",
       "label3": "",
@@ -44,7 +44,7 @@
     },
     {
       "id": "index.md",
-      "title": "Index Types",
+      "title": "Vector Index",
       "label1": "milvus_basics",
       "label2": "",
       "label3": "",
@@ -92,7 +92,7 @@
     },
     {
       "id": "quick_start",
-      "title": "QUICK START",
+      "title": "Quick Start",
       "label1": "",
       "label2": "",
       "label3": "",
@@ -160,7 +160,7 @@
     },
     {
       "id": "create_drop_collection_python.md",
-      "title": "Create and Drop a Collection",
+      "title": "Create/Drop a Collection",
       "label1": "quick_start",
       "label2": "get_started",
       "label3": "",
@@ -168,7 +168,7 @@
     },
     {
       "id": "create_drop_partition_python.md",
-      "title": "Create and Drop a Partition",
+      "title": "Create/Drop a Partition",
       "label1": "quick_start",
       "label2": "get_started",
       "label3": "",
@@ -176,7 +176,7 @@
     },
     {
       "id": "insert_delete_vector_python.md",
-      "title": "Insert and Delete Vectors",
+      "title": "Insert/Delete Vectors",
       "label1": "quick_start",
       "label2": "get_started",
       "label3": "",
@@ -184,7 +184,7 @@
     },
     {
       "id": "create_drop_index_python.md",
-      "title": "Create and Drop an Index",
+      "title": "Create/Drop an Index",
       "label1": "quick_start",
       "label2": "get_started",
       "label3": "",
@@ -192,7 +192,7 @@
     },
     {
       "id": "search_vector_python.md",
-      "title": "Search Vectors",
+      "title": "Conduct a vector search",
       "label1": "quick_start",
       "label2": "get_started",
       "label3": "",
@@ -224,7 +224,7 @@
     },
     {
       "id": "reference",
-      "title": "REFERENCE",
+      "title": "Reference",
       "label1": "",
       "label2": "",
       "label3": "",
@@ -266,7 +266,7 @@
     },
     {
       "id": "setup_prometheus.md",
-      "title": "Configure and Start Prometheus",
+      "title": "Start up Prometheus",
       "label1": "reference",
       "label2": "monitor",
       "label3": "",
@@ -290,7 +290,7 @@
     },
     {
       "id": "tuning.md",
-      "title": "Performancing Tuning",
+      "title": "Performance Tuning",
       "label1": "reference",
       "label2": "",
       "label3": "",
@@ -304,7 +304,7 @@
       "label3": "",
       "order": 4
     },
-
+    
     {
       "id": "faq",
       "title": "FAQ",
@@ -338,7 +338,7 @@
     },
     {
       "id": "troubleshoot.md",
-      "title": "Troubleshoot",
+      "title": "Troubleshooting",
       "label1": "faq",
       "label2": "",
       "label3": "",
@@ -346,7 +346,7 @@
     },
     {
       "id": "API",
-      "title": "API REFERENCE",
+      "title": "API Reference",
       "label1": "",
       "label2": "",
       "label3": "",
@@ -360,7 +360,7 @@
       "label2": "",
       "label3": "",
       "order": 0,
-      "outLink": "https://github.com/milvus-io/pymilvus"
+      "outLink": "https://github.com/milvus-io/pymilvus/tree/0.2.14"
     },
     {
       "id": "Java",
@@ -369,7 +369,7 @@
       "label2": "",
       "label3": "",
       "order": 1,
-      "outLink": "https://github.com/milvus-io/milvus-sdk-java"
+      "outLink": "https://github.com/milvus-io/milvus-sdk-java/tree/0.8.4"
     },
     {
       "id": "Go",
@@ -378,7 +378,7 @@
       "label2": "",
       "label3": "",
       "order": 2,
-      "outLink": "https://github.com/milvus-io/milvus-sdk-go"
+      "outLink": "https://github.com/milvus-io/milvus-sdk-go/tree/0.4.4"
     },
     {
       "id": "RESTful",
@@ -387,7 +387,7 @@
       "label2": "",
       "label3": "",
       "order": 3,
-      "outLink": "https://github.com/milvus-io/milvus/tree/master/core/src/server/web_impl"
+      "outLink": "https://github.com/milvus-io/milvus/tree/0.10.3/core/src/server/web_impl"
     },
     {
       "id": "C++",
@@ -396,11 +396,11 @@
       "label2": "",
       "label3": "",
       "order": 4,
-      "outLink": "https://github.com/milvus-io/milvus/tree/master/sdk"
+      "outLink": "https://github.com/milvus-io/milvus/tree/0.10.3/sdk"
     },
     {
       "id": "developer_tools",
-      "title": "TOOLS",
+      "title": "Tools",
       "label1": "",
       "label2": "",
       "label3": "",
@@ -431,11 +431,11 @@
       "label2": "",
       "label3": "",
       "order": 2,
-      "outLink": "https://www.milvus.io/tools/sizing"
+      "outLink": "https://zilliz.com/sizing-tool/"
     },
     {
       "id": "release_notes.md",
-      "title": "RELEASE NOTES",
+      "title": "Release Notes",
       "label1": "",
       "label2": "",
       "label3": "",
