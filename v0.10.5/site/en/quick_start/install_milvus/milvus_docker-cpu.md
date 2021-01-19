@@ -168,11 +168,11 @@ We only show the results of GPU-enabled Milvus here, because the two distributio
 
 </div>
 
-<img src="https://raw.githubusercontent.com/milvus-io/docs/master/v0.10.5/assets/accuracy_nlist_nprobe.png" alt="accuracy_nlist_nprobe.png">
+<img src="../../../../assets/accuracy_nlist_nprobe.png" alt="accuracy_nlist_nprobe.png">
 
 Key takeaways: This test shows that the recall rate increases with the `nlist`/`nprobe` pair.
 
-<img src="https://raw.githubusercontent.com/milvus-io/docs/master/v0.10.5/assets/performance_nlist_nprobe.png" alt="performance_nlist_nprobe.png">
+<img src="../../../../assets/performance_nlist_nprobe.png" alt="performance_nlist_nprobe.png">
 
 Key takeaways: When `nlist` is 4096 and `nprobe` 128, Milvus shows the best search performance.
 

@@ -9,7 +9,7 @@ id: performance_faq.md
 - [为什么重启 Milvus 服务端之后，第一次搜索时间非常长？](#为什么重启-Milvus-服务端之后第一次搜索时间非常长)            
 - [为什么搜索的速度非常慢？](#为什么搜索的速度非常慢)            
 - [如何进行性能调优？](#如何进行性能调优)           
-- [应如何设置 IVF 索引的 <code>nlist</code> 和 <code>nprobe</code> 参数？](#应如何设置-ivf-索引的-nlist-和-nprobe-参数)            
+- [应如何设置 IVF 索引的 `nlist` 和 `nprobe` 参数？](#应如何设置-ivf-索引的-nlist-和-nprobe-参数)            
 - [为什么有时候小的数据集查询时间反而更长？](#为什么有时候小的数据集查询时间反而更长)             
 - [为什么查询时 GPU 一直空闲？](#为什么查询时-GPU-一直空闲)            
 - [为什么数据插入后不能马上被搜索到？](#为什么数据插入后不能马上被搜索到)          
@@ -46,7 +46,7 @@ id: performance_faq.md
 详见 [性能调优](tuning.md)。
 
 
-#### 应如何设置 IVF 索引的 <code>nlist</code> 和 <code>nprobe</code> 参数？
+#### 应如何设置 IVF 索引的 `nlist` 和 `nprobe` 参数？
 
 IVF 索引的 <code>nlist</code> 值需要根据具体的使用情况去设置。一般来说，推荐值为 <code>4 &times; sqrt(n)</code>，其中 n 为 segment 内的 entity 总量。
 
@@ -60,11 +60,11 @@ IVF 索引的 <code>nlist</code> 值需要根据具体的使用情况去设置�
 
 </div>
 
-<img src="https://raw.githubusercontent.com/milvus-io/docs/master/v0.10.5/assets/accuracy_nlist_nprobe.png" alt="accuracy_nlist_nprobe.png">
+<img src="../../../assets/accuracy_nlist_nprobe.png" alt="accuracy_nlist_nprobe.png">
 
 在本次测试中，`nlist` 和 `nprobe` 的值成比例增长，召回率随 `nlist`/`nprobe` 组合增长呈现上升的趋势。
 
-<img src="https://raw.githubusercontent.com/milvus-io/docs/master/v0.10.5/assets/performance_nlist_nprobe.png" alt="performance_nlist_nprobe.png">
+<img src="../../../assets/performance_nlist_nprobe.png" alt="performance_nlist_nprobe.png">
 
 在 `nlist` 为 4096 和 `nprobe` 为 128 时，速度性能最佳。
 
