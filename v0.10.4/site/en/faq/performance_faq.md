@@ -8,7 +8,7 @@ id: performance_faq.md
 - [Why does the first search take a long time after Milvus restarts?](#Why-does-the-first-search-take-a-long-time-after-Milvus-restarts)
 - [Why the search is very slow?](#Why-the-search-is-very-slow)
 - [How do I improve Milvus' performance?](#How-do-I-improve-Milvus-performance)
-- [How to set <code>nlist</code> and <code>nprobe</code> for IVF indexes?](#how-to-set-nlist-and-nprobe-for-ivf-indexes)
+- [How to set `nlist` and `nprobe` for IVF indexes?](#how-to-set-nlist-and-nprobe-for-ivf-indexes)
 - [Why sometimes the query time for a small dataset is longer?](#Why-sometimes-the-query-time-for-a-small-dataset-is-longer)
 - [Why is my GPU always idle?](#Why-is-my-GPU-always-idle)
 - [Why my data cannot be searched immediately after insertion?](#Why-my-data-cannot-be-searched-immediately-after-insertion)
@@ -42,7 +42,7 @@ Check if the value of `cache.cache_size` in **server_config.yaml** is greater th
 
 See [Performance tuning](tuning.md) for more information. 
 
-#### How to set <code>nlist</code> and <code>nprobe</code> for IVF indexes?
+#### How to set `nlist` and `nprobe` for IVF indexes?
 
 In general terms, the recommended value of <code>nprobe</code> is <code>4 &times; sqrt(n)</code>, where n is the total number of entities in a segment.
 
@@ -56,11 +56,11 @@ We only show the results of GPU-enabled Milvus here, because the two distributio
 
 </div>
 
-<img src="https://raw.githubusercontent.com/milvus-io/docs/master/v0.10.4/assets/accuracy_nlist_nprobe.png" alt="accuracy_nlist_nprobe.png">
+<img src="../../../assets/accuracy_nlist_nprobe.png" alt="accuracy_nlist_nprobe.png">
 
 Key takeaways: This test shows that the recall rate increases with the `nlist`/`nprobe` pair.
 
-<img src="https://raw.githubusercontent.com/milvus-io/docs/master/v0.10.4/assets/performance_nlist_nprobe.png" alt="performance_nlist_nprobe.png">
+<img src="../../../assets/performance_nlist_nprobe.png" alt="performance_nlist_nprobe.png">
 
 Key takeaways: When `nlist` is 4096 and `nprobe` 128, Milvus shows the best search performance.
 
