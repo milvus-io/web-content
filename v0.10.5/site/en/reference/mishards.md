@@ -349,7 +349,7 @@ You can find all parameters supported by Milvus-Helm at [Milvus Helm Charts](htt
       --set cluster.enabled=true             \
       --set persistence.enabled=true         \
       --set mysql.enabled=false              \
-      --set externalMysql.enable=true        \
+      --set externalMysql.enabled=true       \
       --set externalMysql.ip=192.168.1.xx    \
       --set externalMysql.port=3306          \
       --set externalMysql.user=root          \
