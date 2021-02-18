@@ -47,5 +47,5 @@ Congratulations! You have successfully completed your first vector similarity se
 
 ## What's next
 
-- Learn [basic operations](milvus_operation.md) in Milvus
+- [Learn basic Milvus operations](connect_milvus_python.md) in Milvus
 - [Try Milvus bootcamp](https://github.com/zilliz-bootcamp) to check more solutions

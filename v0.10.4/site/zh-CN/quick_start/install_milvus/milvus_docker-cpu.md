@@ -181,7 +181,7 @@ IVF 索引的 <code>nlist</code> 值需要根据具体的使用情况去设置�
 - 如果你刚开始了解 Milvus：
 
   - [运行示例程序](example_code.md)
-  - [了解更多 Milvus 操作](milvus_operation.md)
+  - [了解更多 Milvus 基础操作](connect_milvus_python.md)
   - [体验 Milvus 在线训练营](https://github.com/zilliz-bootcamp)
 
 - 如果你已准备好在生产环境中部署 Milvus：
