@@ -12,7 +12,7 @@ After the Milvus server is successfully started, you can use this example progra
 
    ```shell
    # Install Milvus Python SDK
-   $ pip3 install pymilvus==0.2.15
+   $ pip3 install pymilvus==0.2.14
    ```
 
    <div class="alert note">
@@ -23,11 +23,11 @@ After the Milvus server is successfully started, you can use this example progra
 
    ```shell
    # Download Python example
-   $ wget https://raw.githubusercontent.com/milvus-io/pymilvus/0.2.15/examples/example.py
+   $ wget https://raw.githubusercontent.com/milvus-io/pymilvus/0.2.14/examples/example.py
    ```
 
    <div class="alert note">
-   If you cannot use <code>wget</code> to download the example code, you can also create <b>example.py</b> and copy the <a href="https://github.com/milvus-io/pymilvus/blob/0.2.15/examples/example.py">example code.</a>
+   If you cannot use <code>wget</code> to download the example code, you can also create <b>example.py</b> and copy the <a href="https://github.com/milvus-io/pymilvus/blob/0.2.14/examples/example.py">example code.</a>
    </div>
    
 4. Run the example code.

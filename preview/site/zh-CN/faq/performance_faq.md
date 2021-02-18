@@ -46,7 +46,7 @@ id: performance_faq.md
 详见 [性能调优](tuning.md)。
 
 
-#### 应如何设置 IVF 索引的 `nlist` 和 `nprobe` 参数？
+#### 应如何设置 IVF 索引的 `nlist` 和 `nprobes` 参数？
 
 IVF 索引的 <code>nlist</code> 值需要根据具体的使用情况去设置。一般来说，推荐值为 <code>4 &times; sqrt(n)</code>，其中 n 为 segment 内的 entity 总量。
 

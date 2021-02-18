@@ -30,7 +30,7 @@ Grafana's default username and password are both <code>admin</code>. You can cre
    | URL     | http://&lt;hostname&nbsp;of&nbsp;machine&nbsp;running&nbsp;prometheus&gt;:9090 |
    | Access  | Browser                                                |
 
-5. Download the starter [Grafana dashboard](https://github.com/milvus-io/docs/blob/master/v0.10.5/assets/monitoring/dashboard.json) for Milvus:
+5. Download the starter [Grafana dashboard](https://github.com/milvus-io/docs/blob/master/v0.10.4/assets/monitoring/dashboard.json) for Milvus:
 
 
 6. [Add the dashboard to Grafana](http://docs.grafana.org/reference/export_import/#importing-a-dashboard).
@@ -40,4 +40,4 @@ Grafana's default username and password are both <code>admin</code>. You can cre
 
 ## Display and Render Milvus Metrics
 
-You can use [Grafana dashboard](https://github.com/milvus-io/docs/blob/master/v0.10.5/assets/monitoring/dashboard.json) to determine how to display and render Milvus metrics. See [Milvus Metrics](milvus_metrics.md) for more information. 
+You can use [Grafana dashboard](https://github.com/milvus-io/docs/blob/master/v0.10.4/assets/monitoring/dashboard.json) to determine how to display and render Milvus metrics. See [Milvus Metrics](milvus_metrics.md) for more information. 

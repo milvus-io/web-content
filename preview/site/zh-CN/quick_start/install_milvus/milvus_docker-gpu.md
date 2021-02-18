@@ -57,7 +57,7 @@ $ sudo docker info
 拉取支持 GPU 的镜像：
 
 ```shell
-$ sudo docker pull milvusdb/milvus:0.10.5-gpu-d010621-4eda95
+$ sudo docker pull milvusdb/milvus:0.10.4-gpu-d120220-e72454
 ```
 
 <div class="alert note">
@@ -89,11 +89,11 @@ $ sudo docker pull milvusdb/milvus:0.10.5-gpu-d010621-4eda95
 ```shell
 $ mkdir -p /home/$USER/milvus/conf
 $ cd /home/$USER/milvus/conf
-$ wget http://raw.githubusercontent.com/milvus-io/milvus/0.10.5/core/conf/demo/server_config.yaml
+$ wget http://raw.githubusercontent.com/milvus-io/milvus/0.10.4/core/conf/demo/server_config.yaml
 ```
 
 <div class="alert note">
-如果无法通过 <code>wget</code> 命令正常下载，你也可以在 <b>/home/$USER/milvus/conf</b> 目录下创建 <b>server_config.yaml</b> 文件，然后将 <a href="https://github.com/milvus-io/milvus/blob/0.10.5/core/conf/demo/server_config.yaml">server config 文件</a> 的内容复制到你创建的配置文件中。
+如果无法通过 <code>wget</code> 命令正常下载，你也可以在 <b>/home/$USER/milvus/conf</b> 目录下创建 <b>server_config.yaml</b> 文件，然后将 <a href="https://github.com/milvus-io/milvus/blob/0.10.4/core/conf/demo/server_config.yaml">server config 文件</a> 的内容复制到你创建的配置文件中。
 </div>
 
 配置文件下载完成后，你需要将 **server_config.yaml** 中的 `gpu` 区域的 `enable` 参数设置为 `true`。
@@ -107,14 +107,14 @@ $ wget http://raw.githubusercontent.com/milvus-io/milvus/0.10.5/core/conf/demo/s
 启动 Docker 容器，将本地的文件路径映射到容器中：
 
 ```shell
-$ sudo docker run -d --name milvus_gpu_0.10.5 --gpus all \
+$ sudo docker run -d --name milvus_gpu_0.10.4 --gpus all \
 -p 19530:19530 \
 -p 19121:19121 \
 -v /home/$USER/milvus/db:/var/lib/milvus/db \
 -v /home/$USER/milvus/conf:/var/lib/milvus/conf \
 -v /home/$USER/milvus/logs:/var/lib/milvus/logs \
 -v /home/$USER/milvus/wal:/var/lib/milvus/wal \
-milvusdb/milvus:0.10.5-gpu-d010621-4eda95
+milvusdb/milvus:0.10.4-gpu-d120220-e72454
 ```
 
 上述命令中用到的参数定义如下：
@@ -134,7 +134,7 @@ $ sudo docker ps
 如果 Milvus 服务没有正常启动，执行以下命令查询错误日志：
 
 ```shell
-$ sudo docker logs milvus_gpu_0.10.5
+$ sudo docker logs milvus_gpu_0.10.4
 ```
 
 ## 常见问题
@@ -149,11 +149,8 @@ $ sudo docker logs milvus_gpu_0.10.5
 </details>
 <details>
 <summary><font color="#4fc4f9">Milvus 中如何实现数据迁移？</font></summary>
-详见<a href="data_migration.md">数据迁移</a>。
-
-<div class="alert note">
-注意：不同版本之间，数据可能会不兼容。目前数据格式兼容到 Milvus v0.7.0。
-</div>
+<p>把原有的 Milvus 服务的整个 <strong>db</strong> 目录拷贝到新的路径下，启动新的 Milvus 服务时，将该 Milvus 服务的 <strong>db</strong> 目录映射为刚拷贝过来的 <strong>db</strong> 目录。</p>
+<p>注意：不同版本之间，数据可能会不兼容。目前数据格式兼容到 0.7.0。</p>
 
 </details>
 <details>
