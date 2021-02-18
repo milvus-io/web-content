@@ -168,14 +168,13 @@ IVF 索引的 <code>nlist</code> 值需要根据具体的使用情况去设置�
 
 </div>
 
-<img src="https://raw.githubusercontent.com/milvus-io/docs/master/v0.10.5/assets/accuracy_nlist_nprobe.png" alt="accuracy_nlist_nprobe.png">
+<img src="../../../../assets/accuracy_nlist_nprobe.png" alt="accuracy_nlist_nprobe.png">
 
 在本次测试中，`nlist` 和 `nprobe` 的值成比例增长，召回率随 `nlist`/`nprobe` 组合增长呈现上升的趋势。
 
-<img src="https://raw.githubusercontent.com/milvus-io/docs/master/v0.10.5/assets/performance_nlist_nprobe.png" alt="performance_nlist_nprobe.png">
+<img src="../../../../assets/performance_nlist_nprobe.png" alt="performance_nlist_nprobe.png">
 
 在 `nlist` 为 4096 和 `nprobe` 为 128 时，速度性能最佳。
-
 </details>
 
 
@@ -185,7 +184,7 @@ IVF 索引的 <code>nlist</code> 值需要根据具体的使用情况去设置�
 - 如果你刚开始了解 Milvus：
 
   - [运行示例程序](example_code.md)
-  - [了解更多 Milvus 操作](milvus_operation.md)
+  - [了解更多 Milvus 基础操作](connect_milvus_python.md)
   - [体验 Milvus 在线训练营](https://github.com/zilliz-bootcamp)
 
 - 如果你已准备好在生产环境中部署 Milvus：
