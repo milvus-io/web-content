@@ -109,19 +109,10 @@
       "isMenu": true
     },
     {
-      "id": "install_milvus",
-      "title": "安装 Milvus",
-      "label1": "quick_start",
-      "label2": "",
-      "label3": "",
-      "order": 0,
-      "isMenu": true
-    },
-    {
       "id": "install_milvus.md",
       "title": "安装概述",
       "label1": "quick_start",
-      "label2": "install_milvus",
+      "label2": "",
       "label3": "",
       "order": 0
     },
@@ -129,7 +120,7 @@
       "id": "milvus_docker-cpu.md",
       "title": "安装、启动 Milvus 服务",
       "label1": "quick_start",
-      "label2": "install_milvus",
+      "label2": "",
       "label3": "",
       "order": 1
     },
@@ -140,48 +131,31 @@
       "label1": "quick_start",
       "label2": "",
       "label3": "",
-      "order": 1
-    },
-    {
-      "id": "get_started",
-      "title": "Milvus 基本操作",
-      "label1": "quick_start",
-      "label2": "",
-      "label3": "",
-      "order": 2,
-      "isMenu": true
-    },
-    {
-      "id": "milvus_operation.md",
-      "title": "基本操作概述",
-      "label1": "quick_start",
-      "label2": "get_started",
-      "label3": "",
-      "order": 0
+      "order": 2
     },
     {
       "id": "connect_milvus_python.md",
       "title": "连接服务端",
       "label1": "quick_start",
-      "label2": "get_started",
+      "label2": "",
       "label3": "",
-      "order": 1
+      "order": 3
     },
     {
       "id": "create_drop_collection_python.md",
       "title": "创建、删除集合",
       "label1": "quick_start",
-      "label2": "get_started",
+      "label2": "",
       "label3": "",
-      "order": 2
+      "order": 4
     },
     {
       "id": "create_drop_partition_python.md",
       "title": "创建、删除分区",
       "label1": "quick_start",
-      "label2": "get_started",
+      "label2": "",
       "label3": "",
-      "order": 3
+      "order": 5
     },
     {
       "id": "insert_delete_vector_python.md",
@@ -189,47 +163,47 @@
       "label1": "quick_start",
       "label2": "get_started",
       "label3": "",
-      "order": 4
+      "order": 6
     },
     {
       "id": "create_drop_index_python.md",
       "title": "创建、删除索引",
       "label1": "quick_start",
-      "label2": "get_started",
+      "label2": "",
       "label3": "",
-      "order": 5
+      "order": 7
     },
     {
       "id": "search_vector_python.md",
       "title": "查询向量",
       "label1": "quick_start",
-      "label2": "get_started",
+      "label2": "",
       "label3": "",
-      "order": 6
+      "order": 8
     },
     {
       "id": "flush_python.md",
       "title": "数据落盘",
       "label1": "quick_start",
-      "label2": "get_started",
+      "label2": "",
       "label3": "",
-      "order": 7
+      "order": 9
     },
     {
       "id": "compact_python.md",
       "title": "数据段整理",
       "label1": "quick_start",
-      "label2": "get_started",
+      "label2": "",
       "label3": "",
-      "order": 8
+      "order": 10
     },
     {
       "id": "close_client_python.md",
       "title": "关闭客户端",
       "label1": "quick_start",
-      "label2": "get_started",
+      "label2": "",
       "label3": "",
-      "order": 9
+      "order": 11
     },
     {
       "id": "reference",

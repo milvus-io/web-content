@@ -46,5 +46,5 @@ id: example_code.md
 
 ## 接下来你可以
 
-- 了解更多 Milvus [基础操作](milvus_operation.md)
-- [体验 Milvus 在线训练营](https://github.com/milvus-io/bootcamp)，发现更多解决方案。
+- [了解更多 Milvus 基础操作](connect_milvus_python.md)
+- [体验 Milvus 在线训练营](https://github.com/zilliz-bootcamp)，发现更多解决方案。
