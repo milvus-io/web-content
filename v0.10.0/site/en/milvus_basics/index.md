@@ -106,18 +106,58 @@ The query method is as follows:
 
 `PQ` (Product Quantization) uniformly decomposes the original high-dimensional vector space into Cartesian products of `m` low-dimensional vector spaces, and then quantizes the decomposed low-dimensional vector spaces. Instead of calculating the distances between the target vector and the center of all the units, product quantization enables the calculation of distances between the target vector and the clustering center of each low-dimensional space and greatly reduces the time complexity and space complexity of the algorithm.
 
-IVF_PQ quantizes the product of vectors, and then performs IVF index clustering. Its index file is even smaller than IVF_SQ8, but it also causes a loss of accuracy during searching vectors.
+IVF\_PQ performs IVF index clustering before quantizing the product of vectors. Its index file is even smaller than IVF\_SQ8, but it also causes a loss of accuracy during searching vectors.
+
+<div class="alert note">
+Index building parameters and search parameters vary with Milvus distribution. Select your Milvus distribution first.
+</div>
+
+<div class="filter">
+<a href="#CPU">CPU-only Milvus</a> <a href="#GPU">GPU-enabled Milvus </a>
+</div>
+
+<div class="filter-CPU" markdown="block">
 
 - Index building parameters
 
    | Parameter   | Description     | Range     |
    | --------| ------------- | ----------- |
    | `nlist` | Number of cluster units　    | [1, 65536] |
-   | `m`     | Number of factors of product quantization | `m` should be in {1, 2, 3, 4, 8, 12, 16, 20, 24, 28, 32, 40, 48, 56, 64, 96}, and the dimensions of the low-dimensional vector space should be in {1, 2, 3, 4, 6, 8, 10, 12, 16, 20, 24, 28, 32}.<br>Besides, when computing with GPU, ensure that the result of m x 1024 does not exceed `MaxSharedMemPerBlock` of your graphics card. |
-   
-   **Example:** `{"nlist": 2048, "m": 16}`
+   | `m`     | Number of factors of product quantization | dim ≡ 0 (mod m) |
 
-- IVF_PQ has the same search parameters as IVF_FLAT.
+- Search parameters
+
+   | Parameter   | Description     | Range     |
+   | -------- | ----------- | ---------- |
+   | `nprobe` | Number of units to query | [1, nlist] |
+
+</div>
+
+
+<div class="filter-GPU" markdown="block">
+
+- Index building parameters
+
+   | Parameter   | Description     | Range     |
+   | --------| ------------- | ----------- |
+   | `nlist` | Number of cluster units　    | [1, 65536] |
+   | `m`     | Number of factors of product quantization |  `m` ∈ {1, 2, 3, 4, 8, 12, 16, 20, 24, 28, 32, 40, 48, 56, 64, 96}, and (dim / m) ∈ {1, 2, 3, 4, 6, 8, 10, 12, 16, 20, 24, 28, 32}.<br>(`m` x 1024) &ge; `MaxSharedMemPerBlock` of your graphics card. |
+
+<div class="alert note">
+If the value of <code>m</code> does not fall into the specified range for GPU indexing but into the range of CPU indexing, Milvus switches to using CPU to build the index (click the button above to view the range supported by CPU-enabled Milvus).
+</div>
+
+- Search parameters
+
+   | Parameter   | Description     | Range     |
+   | -------- | ----------- | ---------- |
+   | `nprobe` | Number of units to query | [1, min(2048, nlist)] |
+
+<div class="alert note">
+If the value of <code>nprobe</code> does not fall into the specified range but falls into the range for CPU search, Milvus switches to CPU search (click the button above to view the range supported by CPU-enabled Milvus).
+</div>
+
+</div>
 
 ### RNSG
 
