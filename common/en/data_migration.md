@@ -2,9 +2,9 @@
 id: data_migration.md
 ---
 
-# Migrate Data to Milvus v.0.10.5
+# Migrate Data to Milvus v.0.10.6
 
-Milvus v0.7.x/0.8.x/0.9.x is no longer supported. We highly recommend migrating your data to Milvus v0.10.5. 
+Milvus v0.7.x/0.8.x/0.9.x is no longer supported. We highly recommend migrating your data to Milvus v0.10.6. 
 
 <div class="alert warning">
 This version is <i>incompatible</i> with v0.11.0.
@@ -31,14 +31,14 @@ This version is <i>incompatible</i> with v0.11.0.
     Save a copy of the <b>logs</b> folder if you want to retain log files.
     </div>
 
-## Step 2: Download the v0.10.5 configuration file
+## Step 2: Download the v0.10.6 configuration file
 
-Create a **conf** directory and download the v0.10.5 configuration file:
+Create a **conf** directory and download the v0.10.6 configuration file:
 
 ```
 mkdir conf
 cd conf
-wget https://raw.githubusercontent.com/milvus-io/milvus/0.10.5/core/conf/demo/server_config.yaml
+wget https://raw.githubusercontent.com/milvus-io/milvus/0.10.6/core/conf/demo/server_config.yaml
 ```
 
 <div class="alert note">
@@ -59,19 +59,19 @@ Ensure that the MySQL/SQLite server address specified in `general.meta_uri` matc
   meta_uri: mysql://root:123456@<MySQL_server_host IP>:3306/milvus
 ```
 
-## Step 4: Download and start Milvus v0.10.5
+## Step 4: Download and start Milvus v0.10.6
 
-Download and run a Milvus v0.10.5 docker image using the same mapping path settings as in the current version:
-
-```
-docker pull milvusdb/milvus:0.10.5-cpu-d010621-4eda95
-docker run -it -d -p 19530:19530 -v ~/milvus/db:/var/lib/milvus/db -v ~/milvus/conf:/var/lib/milvus/conf -v ~/milvus/logs:/var/lib/milvus/logs -v ~/milvus/wal:/var/lib/milvus/wal milvusdb/milvus:0.10.5-cpu-d010621-4eda95
-```
-
-## Step 5: Install the Python SDK corresponding to Milvus v0.10.5
+Download and run a Milvus v0.10.6 docker image using the same mapping path settings as in the current version:
 
 ```
-pip3 install pymilvus==0.2.15
+docker pull milvusdb/milvus:0.10.6-cpu-d022221-64ddc2
+docker run -it -d -p 19530:19530 -v ~/milvus/db:/var/lib/milvus/db -v ~/milvus/conf:/var/lib/milvus/conf -v ~/milvus/logs:/var/lib/milvus/logs -v ~/milvus/wal:/var/lib/milvus/wal milvusdb/milvus:0.10.6-cpu-d022221-64ddc2
+```
+
+## Step 5: Install the Python SDK corresponding to Milvus v0.10.6
+
+```
+pip3 install pymilvus==0.4.0
 ```
 
 ## Step 6: Verify data correctness
