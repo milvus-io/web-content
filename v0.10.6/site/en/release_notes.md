@@ -16,21 +16,21 @@ id: release_notes.md
 
 #### Compatibility changes
 
-- Adds an optional argument `nbits` to the `create_index(`) method for the IVF\_PQ index. [#3920](https://github.com/milvus-io/milvus/issues/3920)
+- Adds an optional argument `nbits` to the `create_index()` method for the IVF\_PQ index. [#3920](https://github.com/milvus-io/milvus/issues/3920)
 
 <div class="alert note">For more information about setting IVF_PQ parameters, see <a href="index.md#CPU">Vector index</a>.</div>
 
 #### Improvements
 
-- Improves the FLAT search performance on binary vectors using the AVX2 instruction set.[#1970](https://github.com/milvus-io/milvus/issues/1970)
+- Improves the FLAT search performance on binary vectors using the AVX2 instruction set. [#1970](https://github.com/milvus-io/milvus/issues/1970)
 - Adds an optional parameter `nbits` to the `create_index()` method for the IVF\_PQ index. [#3920](https://github.com/milvus-io/milvus/issues/3920)
-- Supports configuring Prometheus labels `cluster_label` and `instance_label` under `metric`.[#4614](https://github.com/milvus-io/milvus/issues/4614)
+- Supports configuring Prometheus labels `cluster_label` and `instance_label` under `metric`. [#4614](https://github.com/milvus-io/milvus/issues/4614)
 
 #### Fixed issues
 
-- The system returns a `-0` distance, if metric type is tanimoto.[#4683](https://github.com/milvus-io/milvus/issues/4683)
-- A FLAT search on binary vectors causes the server to crash, if the dimension of the vectors is not multiple of 2.[#4678](https://github.com/milvus-io/milvus/issues/4678)
-- The GPU cache holds more data than specified.[#4719](https://github.com/milvus-io/milvus/issues/4719)
+- The system returns a `-0` distance, if metric type is tanimoto. [#4683](https://github.com/milvus-io/milvus/issues/4683)
+- A FLAT search on binary vectors causes the server to crash, if the dimension of the vectors is not multiple of 2. [#4678](https://github.com/milvus-io/milvus/issues/4678)
+- The GPU cache holds more data than specified. [#4719](https://github.com/milvus-io/milvus/issues/4719)
 
 > See [CHANGELOG](https://github.com/milvus-io/milvus/blob/0.10.6/CHANGELOG.md) for more information.
 
