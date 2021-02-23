@@ -2,9 +2,9 @@
 id: data_migration.md
 ---
 
-# 迁移数据至 Milvus v0.10.x
+# 迁移数据至 Milvus v0.10.6
 
-Milvus v0.7.x/0.8.x/0.9.x 已不再维护。建议将数据迁移至 Milvus v0.10.5。
+Milvus v0.7.x/0.8.x/0.9.x 已不再维护。建议将数据迁移至 Milvus v0.10.6。
 
 <div class="alert warning">
 本版本与 v0.11.0 <b>不兼容</b>。
@@ -33,12 +33,12 @@ Milvus v0.7.x/0.8.x/0.9.x 已不再维护。建议将数据迁移至 Milvus v0.1
 
 ### 第 2 步：下载配置文件
 
-新建 **conf** 目录并下载 v0.10.5 的配置文件：
+新建 **conf** 目录并下载 v0.10.6 的配置文件：
 
 ```
 mkdir conf
 cd conf
-wget https://raw.githubusercontent.com/milvus-io/milvus/0.10.5/core/conf/demo/server_config.yaml
+wget https://raw.githubusercontent.com/milvus-io/milvus/0.10.6/core/conf/demo/server_config.yaml
 ```
 
 <div class="alert note">
@@ -61,17 +61,17 @@ vim ./server_config.yaml
 
 ### 第 4 步：下载并启动新版 Milvus
 
-使用与当前版本相同的映射路径下载并启动 v0.10.5 Milvus 容器：
+使用与当前版本相同的映射路径下载并启动 v0.10.6 Milvus 容器：
 
 ```
-docker pull milvusdb/milvus:0.10.5-cpu-d010621-4eda95
-docker run -it -d -p 19530:19530 -v ~/milvus/db:/var/lib/milvus/db -v ~/milvus/conf:/var/lib/milvus/conf -v ~/milvus/logs:/var/lib/milvus/logs -v ~/milvus/wal:/var/lib/milvus/wal milvusdb/milvus:0.10.5-cpu-d010621-4eda95
+docker pull milvusdb/milvus:0.10.6-cpu-d022221-64ddc2
+docker run -it -d -p 19530:19530 -v ~/milvus/db:/var/lib/milvus/db -v ~/milvus/conf:/var/lib/milvus/conf -v ~/milvus/logs:/var/lib/milvus/logs -v ~/milvus/wal:/var/lib/milvus/wal milvusdb/milvus:0.10.6-cpu-d022221-64ddc2
 ```
 
 ### 第 5 步：安装对应版本的 Python SDK
 
 ```
-pip3 install pymilvus==0.2.15
+pip3 install pymilvus==0.4.0
 ```
 
 ### 第 6 步：验证数据正确性
