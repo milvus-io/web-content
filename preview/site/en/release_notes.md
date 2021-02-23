@@ -18,7 +18,7 @@ id: release_notes.md
 
 - Adds an optional argument `nbits` to the `create_index(`) method for the IVF\_PQ index. [#3920](https://github.com/milvus-io/milvus/issues/3920)
 
-<div class="alert note">For more information about setting IVF_PQ parameters, see <a href="https://www.milvus.io/docs/index.md#CPU">Vector index</a>.</div>
+<div class="alert note">For more information about setting IVF_PQ parameters, see <a href="index.md#CPU">Vector index</a>.</div>
 
 #### Improvements
 
