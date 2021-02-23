@@ -57,7 +57,7 @@ $ sudo docker info
 Pull the CPU-only image:
 
 ```shell
-$ sudo docker pull milvusdb/milvus:0.10.4-cpu-d120220-e72454
+$ sudo docker pull milvusdb/milvus:0.10.6-cpu-d022221-64ddc2
 ```
 <div class="alert note">
 <ul>
@@ -89,11 +89,11 @@ $ sudo docker pull milvusdb/milvus:0.10.4-cpu-d120220-e72454
 ```shell
 $ mkdir -p /home/$USER/milvus/conf
 $ cd /home/$USER/milvus/conf
-$ wget https://raw.githubusercontent.com/milvus-io/milvus/0.10.4/core/conf/demo/server_config.yaml
+$ wget https://raw.githubusercontent.com/milvus-io/milvus/0.10.6/core/conf/demo/server_config.yaml
 ```
 
 <div class="alert note">
-If you cannot download configuration files via the <code>wget</code> command, you can create a <b>server_config.yaml</b> file under <b>/home/$USER/milvus/conf</b>, and then copy the content from <a href="https://github.com/milvus-io/milvus/blob/0.10.4/core/conf/demo/server_config.yaml">server config</a> to it.
+If you cannot download configuration files via the <code>wget</code> command, you can create a <b>server_config.yaml</b> file under <b>/home/$USER/milvus/conf</b>, and then copy the content from <a href="https://github.com/milvus-io/milvus/blob/0.10.6/core/conf/demo/server_config.yaml">server config</a> to it.
 </div>
 
 ## Start Docker container
@@ -101,14 +101,14 @@ If you cannot download configuration files via the <code>wget</code> command, yo
 Start Docker container and map the paths to the local files to the container:
 
 ```shell
-$ sudo docker run -d --name milvus_cpu_0.10.4 \
+$ sudo docker run -d --name milvus_cpu_0.10.6 \
 -p 19530:19530 \
 -p 19121:19121 \
 -v /home/$USER/milvus/db:/var/lib/milvus/db \
 -v /home/$USER/milvus/conf:/var/lib/milvus/conf \
 -v /home/$USER/milvus/logs:/var/lib/milvus/logs \
 -v /home/$USER/milvus/wal:/var/lib/milvus/wal \
-milvusdb/milvus:0.10.4-cpu-d120220-e72454
+milvusdb/milvus:0.10.6-cpu-d022221-64ddc2
 ```
 
 The `docker run` options used in the above command are defined as follows:
@@ -127,7 +127,7 @@ $ sudo docker ps
 If the Milvus server does not start up properly, check the error logs:
 
 ```shell
-$ sudo docker logs milvus_cpu_0.10.4
+$ sudo docker logs milvus_cpu_0.10.6
 ```
 
 ## FAQ
@@ -143,7 +143,7 @@ If your CPU does not support SSE42, AVX, AVX2, or AVX512, Milvus cannot start pr
 </details>
 <details>
 <summary><font color="#4fc4f9">How to migrate data in Milvus?</font></summary>
-<p>Copy the entire <strong>db</strong> directory of the original Milvus service to the new directory. When restarting the Milvus service, map the copied <strong>db</strong> directory to the <strong>db</strong> directory of the Milvus service.</p>
+For details, see <a href="data_migration.md">data migration</a>.
 
 <div class="alert note">
 Data formats of different versions may not be compatible with each other. The current data format is backward compatible with Milvus v0.7.0.

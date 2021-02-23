@@ -55,5 +55,5 @@ No, you cannot.
 </details>
 <details>
 <summary><font color="#4fc4f9">Is there a limit on the total number of collections and partitions?</font></summary>
-Yes. The total number of collections and partitions must not exceed 4,096.
+There is no limit on the number of collections. The upper limit on the number of partitions in a collection is 4096.
 </details>

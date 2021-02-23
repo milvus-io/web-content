@@ -213,7 +213,7 @@ Check if the vectors are normalized. If not, you need to normalize the vectors f
 
 #### Is there a limit on the total number of collections and partitions?
 
-Yes. The total number of collections and partitions must not exceed 4,096.
+There is no limit on the number of collections. The upper limit on the number of partitions in a collection is 4096.
 
 #### Why do I get fewer than k vectors when searching for `topk` vectors?
 

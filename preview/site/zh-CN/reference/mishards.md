@@ -162,13 +162,13 @@ Mishards 定义了路由策略相关的接口，并通过插件提供扩展。�
    - 如果 Docker 版本低于 v19.03，运行如下命令：
 
    ```shell
-   $ sudo docker  run --runtime=nvidia --rm -d -p 19530:19530 -v /tmp/milvus/db:/var/lib/milvus/db milvusdb/milvus:0.10.4-gpu-d120220-e72454
+   $ sudo docker  run --runtime=nvidia --rm -d -p 19530:19530 -v /tmp/milvus/db:/var/lib/milvus/db milvusdb/milvus:0.10.6-gpu-d022221-64ddc2
    ```
 
    - 否则，运行如下命令：
 
    ```shell
-   $ sudo docker run --gpus all --rm -d -p 19530:19530 -v /tmp/milvus/db:/var/lib/milvus/db milvusdb/milvus:0.10.4-gpu-d120220-e72454
+   $ sudo docker run --gpus all --rm -d -p 19530:19530 -v /tmp/milvus/db:/var/lib/milvus/db milvusdb/milvus:0.10.6-gpu-d022221-64ddc2
    ```
 
 4. 更改目录权限：

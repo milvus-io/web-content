@@ -4,6 +4,61 @@ id: release_notes.md
 
 # 发版说明
 
+## v0.10.6
+
+**发布时间**：2021-02-23
+
+#### 版本兼容
+
+| Milvus version | Python SDK version | Java SDK version | Go SDK version |
+| :------------- | :----------------- | :--------------- | :------------- |
+| 0.10.6         | 0.4.0             | 0.8.6            | 0.4.6          |
+
+#### 升级必看
+
+- 在 `create_index()` 方法中增加了可选参数 `nbits`，用于 IVF\_PQ 索引。[#3920](https://github.com/milvus-io/milvus/issues/3920)
+
+<div class="alert note">IVF_PQ 参数信息，详见 <a href="https://milvus.io/cn/docs/v0.10.5/index.md#CPU">向量索引</a> 。</div>
+
+#### 主要改进
+
+- 用 AVX2 指令集优化了 FLAT 索引在二值型向量的查询性能。[#1970](https://github.com/milvus-io/milvus/issues/1970)
+- 在 `create_index()` 方法中增加了可选参数 `nbits`，用于 IVF\_PQ 索引。[#3920](https://github.com/milvus-io/milvus/issues/3920)
+- 支持在 `metric` 中设置 Prometheus 的配置项 `cluster_label` 和 `instance_label` （由爱奇艺实现）。[#4614](https://github.com/milvus-io/milvus/issues/4614)
+
+#### 问题修复
+
+- 采用谷本距离查询时系统会返回 `-0` 的距离。[#4683](https://github.com/milvus-io/milvus/issues/4683)
+- 对维度不是 2 的整数倍的二值型向量进行 FLAT 暴搜会导致服务端崩溃。[#4678](https://github.com/milvus-io/milvus/issues/4678)
+- GPU 缓存的存储内容超过指定值。[#4719](https://github.com/milvus-io/milvus/issues/4719)
+
+> 详见 [CHANGELOG](https://github.com/milvus-io/milvus/blob/0.10.6/CHANGELOG.md) 了解更多已修复问题。
+
+## v0.10.5
+
+**发布时间**：2020-01-07
+
+#### 版本兼容
+
+| Milvus version | Python SDK version | Java SDK version | Go SDK version |
+| :------------- | :----------------- | :--------------- | :------------- |
+| 0.10.5         | 0.2.15             | 0.8.6            | 0.4.5          |
+
+#### 升级必看
+
+- `load_collection()` 方法支持预加载指定分区。[#4307](https://github.com/milvus-io/milvus/issues/4307)
+
+#### 主要改进
+
+- 优化了系统建索引和查询的过程。[#4454](https://github.com/milvus-io/milvus/issues/4454)
+
+#### 问题修复
+
+- 在多线程中调用 `load_collection()` 和 `search()` 方法会造成 Milvus 死机。[#4378](https://github.com/milvus-io/milvus/issues/4378)
+- Milvus 在搜索参数 `partition_tags` 包含 `_default` 字样时仅搜索默认分区。[#4484](https://github.com/milvus-io/milvus/issues/4484)
+
+> 详见 [CHANGELOG](https://github.com/milvus-io/milvus/blob/0.10.5/CHANGELOG.md) 了解更多已修复问题。
+
 ## v0.10.4
 
 **发布时间**：2020-12-03
@@ -29,171 +84,7 @@ id: release_notes.md
 - 修复了一个创建 IVF 索引时出现内存泄漏的问题。[#4318](https://github.com/milvus-io/milvus/issues/4318)
 
 > 详见 [CHANGELOG](https://github.com/milvus-io/milvus/blob/0.10.4/CHANGELOG.md) 了解更多已修复问题。
-
-## v0.11.0
-
-**发布时间**：2020-10-16
-
-#### 版本兼容
-
-| Milvus 版本 | Python SDK 版本 | Java SDK 版本 | Go SDK 版本 |
-| :------------- | :----------------- | :--------------- | :------------- |
-| 0.11.0     | 0.3.0     | 0.9.1       | 0.5.0      |
-
-#### 升级必看
-
-<div class="alert warning">
-Milvus v0.11.0 暂不支持 Mishards 分布式方案。
-</div>
-
-1. 调整了 partition tag 的支持字符集：
    
-   - 不支持使用英文字母、数字、"_"、"$" 以外的字符命名 partition tag。
-   - partition tag 的首字母不支持使用英文字母或下划线以外的字符。
-
-2. 服务端配置文件结构调整
-
-   - **server_config.yaml**  更名为 **milvus.yaml**，
-   - 配置参数兼容 `a.b.c: value` 的展平格式。
-
-3. 调整了二值型向量支持索引名称：
-
-   - `IVF_FLAT` 变更为 `BIN_IVF_FLAT`，
-   - `FLAT`变更为 `BIN_FLAT`。
-
-4. 移除原有的 `CreateCollection()` 方法。
-
-   新增的 `CreateCollection()` 方法删除了原有的 `index_file_size` 参数，新增 `segment_row_limit` 参数用于设置单个数据段文件大小的上限和下限。单个数据段文件的值域范围为 [ 1 &times; `segment_row_limit`, 2 &times; `segment_row_limit`)。
-
-5. 移除原有的 `Search()` 方法。
-
-   新增的 `Search()` 方法新增 `MetricType` 参数用于指定距离计算方式。
-
-6. 移除原有的 `GetIndexInfo()` 方法。
-
-   改用 `GetCollectionInfo()` 获取相关数据。
-
-7. Python SDK 和 Java SDK 会在操作失败时抛出异常。
-
-8. RESTful API 支持分页读取实体。
-   
-   详见 `collections/{collection_name}/entities (GET)`。
-
-#### 新增功能
-
-1. 标量字段过滤
-
-支持在插入向量数据时携带与该向量相关的标量数据。
-
-支持在查询时利用标量数据过滤查询结果：
-
-- 标量数据支持 TermQuery 和 RangeQuery 两种匹配模式。后者支持以下四种运算符：
-   - 大于：`gt`
-   - 大于等于：`gte`
-   - 小于：`lt`
-   - 小于等于：`lte`
-- 在标量匹配和向量查询之间支持 `MUST`, `MUST_NOT` 和 `SHOULD` 三种逻辑组合， 
-- 支持在查询结果中返回结果向量相关的标量字段。
-
-支持在标量数据上创建索引加速结构化数据的过滤。
-
-2. 支持在查询时指定距离计算方式
-
-   - 如果查询时指定的 `MetricType` 与建索引时设置的 `MetricType` 一致，Milvus 使用索引查询；
-   - 如果指定的 `MetricType` 与建索引时设置的 `MetricType` 不一致，Milvus 会进行暴搜。
-
-#### 主要改进
-
-1. 升级第三方依赖 oatpp
-
-  - 升级第三方依赖 oatpp 至更为稳定的 v1.1.0 版本。
-
-2. 重写 SQLite 后端操作
-
-  - 移除第三方依赖 sqlite_orm。
-
-3. 重组 WAL 目录结构
-
-  - 新版 WAL 的目录结构按照 collection 存储相关数据。
-
-4. 元数据快照
-
-  - 支持基于元数据快照的搜索： 进行数据插入、删除操作后 Milvus 会自动为元数据产生包含版本信息的快照并缓存至内存中，查询请求可以使用缓存的对应版本中进行。
-
-
-5. 分离索引和原始数据
-
-  - IVF\_FLAT 和 HNSW 两种索引的 **index\_file** 文件不再包含原始向量数据，改用向量的偏移量以减小硬盘占用。
-
-
-
-#### API 变更
-
-
-
-<div class="filter">
-<a href="#RESTful">RESTful</a> <a href="#Python">Python</a> <a href="#Java">Java</a> <a href="#CPP">C++</a>
-</div>
-
-<div class="filter-RESTful" markdown="block">
-
-##### 新增 API
-
-- `collections/{collection_name}/entities (PUT)`
-- `collections/{collection_name}/entities (POST)`
-- `collections/{collection_name}/entities (DELETE)`
-- `collections/{collection_name}/entities (GET)`：支持分页读取实体。
-- `collections/{collection_name}/entities (OPTIONS)`
-- `/status (GET)`：支持获取服务端启动时间 uptime 等信息。
-
-##### 删除 API
-
-- `/config/advanced (GET)`
-- `/config/advanced (PUT)`
-- `/config/advanced (OPTIONS)`
-- `config/gpu_resources (GET)`
-- `config/gpu_resources (PUT)`
-- `config/gpu_resources (OPTIONS)`
-- `collections/{collection_name}/segments (GET)`
-- `collections/{collection_name}/segments/{segment_name}/vectors (GET)`
-- `collections/{collection_name}/vectors (PUT)`
-- `collections/{collection_name}/vectors (POST)`
-- `collections/{collection_name}/vectors (GET)`
-- `collections/{collection_name}/vectors (OPTIONS)`
-
-</div>
-
-
-<div class="filter-Python" markdown="block">
-
-##### 新增 API
-
-- `set_config`
-- `get_config`
-
-
-##### 删除 API
-
-- `get_index_info`
-
-</div>
-
-<div class="filter-Java" markdown="block">
-
-##### 删除 API
-
-- `getIndexInfo`
-
-</div>
-
-<div class="filter-CPP" markdown="block">
-
-##### 删除 API
-
-- `GetIndexInfo`
-
-</div>
-
 ## v0.10.3
 
 **发布时间**：2020-9-21
