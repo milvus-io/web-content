@@ -6,7 +6,7 @@ id: release_notes.md
 
 ## v0.10.6
 
-**发布时间**：2021-02-20
+**发布时间**：2021-02-23
 
 #### 版本兼容
 
@@ -30,7 +30,7 @@ id: release_notes.md
 
 - 采用谷本距离查询时系统会返回 `-0` 的距离[#4683](https://github.com/milvus-io/milvus/issues/4683)
 - 对维度不是 2 的整数倍的二值型向量进行 FLAT 暴搜会导致服务端崩溃。[#4678](https://github.com/milvus-io/milvus/issues/4678)
-- GPU 缓存的存储内容超过指定值。[#4720](https://github.com/milvus-io/milvus/issues/4720)
+- GPU 缓存的存储内容超过指定值。[#4719](https://github.com/milvus-io/milvus/issues/4719)
 
 > 详见 [CHANGELOG](https://github.com/milvus-io/milvus/blob/0.10.6/CHANGELOG.md) 了解更多已修复问题。
 

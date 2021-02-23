@@ -6,7 +6,7 @@ id: release_notes.md
 
 ## v0.10.6
 
-**Release date**：2021-02-20
+**Release date**：2021-02-23
 
 #### Compatibility
 
@@ -30,7 +30,7 @@ id: release_notes.md
 
 - The system returns a `-0` distance, if metric type is tanimoto.[#4683](https://github.com/milvus-io/milvus/issues/4683)
 - A FLAT search on binary vectors causes the server to crash, if the dimension of the vectors is not multiple of 2.[#4678](https://github.com/milvus-io/milvus/issues/4678)
-- The GPU cache holds more data than specified.[#4720](https://github.com/milvus-io/milvus/issues/4720)
+- The GPU cache holds more data than specified.[#4719](https://github.com/milvus-io/milvus/issues/4719)
 
 > See [CHANGELOG](https://github.com/milvus-io/milvus/blob/0.10.6/CHANGELOG.md) for more information.
 
