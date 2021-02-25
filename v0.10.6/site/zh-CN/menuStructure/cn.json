@@ -395,7 +395,7 @@
       "label2": "",
       "label3": "",
       "order": 1,
-      "outLink": "https://zilliz.com/products/em/"
+      "outLink": "https://zilliz.com/products/em"
     },
     {
       "id": "sizing",
@@ -404,7 +404,7 @@
       "label2": "",
       "label3": "",
       "order": 2,
-      "outLink": "https://zilliz.com/sizing-tool/"
+      "outLink": "https://zilliz.com/sizing-tool"
     },
     {
       "id": "release_notes.md",
