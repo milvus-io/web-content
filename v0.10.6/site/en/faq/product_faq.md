@@ -70,7 +70,7 @@ By deploying Mishards, a cluster sharding middleware for Milvus, you can process
 
 Vectors imported into Milvus are stored locally at **milvus/db/tables/**.
 
-Metadata can be stored in either MySQL or SQLite. See [Manage Metadata with MySQL](http://192.168.1.105:8090/data_manage.md) for more information.
+Metadata can be stored in either MySQL or SQLite. See [Manage Metadata with MySQL](data_manage.md) for more information.
 
 #### Why can't I find vectors on SQLite or MySQL?
 
