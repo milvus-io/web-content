@@ -1,18 +1,26 @@
 # Milvus Documentation
 
-This repository contains the Milvus documentation for [milvus.io](https://www.milvus.io/) (Milvus official website). 
+This repository contains technical documentation for [Milvus](https://github.com/milvus-io/milvus), an open-source vector similarity search engine designed by [Zilliz](https://zilliz.com).
 
-To contribute, read the [contributing guide](CONTRIBUTING.md).
+Up-to-date technical documentation can be found at [milvus.io](https://www.milvus.io/). Please note that not all documentation on the website exists in this repository. Some projects have their own separate repositories and project-specific documentation.
 
-To file an issue, you can use the tracker in [this repository](https://github.com/milvus-io/docs/issues/new/choose) or in the [milvus-io/milvus](https://github.com/milvus-io/milvus/issues/new?assignees=&labels=&template=documentation-request.md&title=[DOC]) repo.
+### Contributions are welcome from everyone
 
-To send a pull request, please fork this repository first.
+But first, please see our [guidelines for contributing](CONTRIBUTING.md).
+
+Generally, we follow the "[fork](https://docs.github.com/en/free-pro-team@latest/github/getting-started-with-github/fork-a-repo)-and-[pull](https://docs.github.com/en/free-pro-team@latest/github/collaborating-with-issues-and-pull-requests/about-pull-requests)" Git workflow. Remember to [sync your forked repository](https://docs.github.com/en/free-pro-team@latest/github/getting-started-with-github/fork-a-repo#keep-your-fork-synced) *before* submitting proposed changes upstream.
+
+### Issues
+
+Flag issues and request improvements using the links below:
+
+- [Make change requests, report errors, or submit questions about this repository.](https://github.com/milvus-io/docs/issues/new/choose) 
+- [File technical documentation issues or request new technical documentation for Milvus.](https://github.com/milvus-io/milvus/issues/new?assignees=&labels=&template=documentation-request.md&title=[DOC])
 
 ### Writing style
 
-The Milvus documentation is written in [Markdown](https://commonmark.org/help/), and generally follow [Google Developer Documentation Style Guide](https://developers.google.com/style/).
+Technical documentation for Milvus is written in [Markdown](https://commonmark.org/help/). In general, we adhere to the [Google Developer Documentation Style Guide](https://developers.google.com/style/).
 
 ### License
 
-[Apache License 2.0](LICENSE)
-
+[Milvus-io/docs](https://github.com/milvus-io/docs) is licensed under the Apache License, Version 2.0. View a copy of the license in this repository's [LICENSE file](LICENSE).
