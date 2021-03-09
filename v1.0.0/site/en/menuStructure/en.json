@@ -414,6 +414,128 @@
       "label2": "",
       "label3": "",
       "order": 7
+
+    },
+    {
+      "id": "milvus_community_charters",
+      "title": "Milvus Community Charters",
+      "label1": "",
+      "label2": "",
+      "label3": "",
+      "order": 7,
+      "isMenu": true
+
+    },
+    {
+      "id": "milvus_community_charters.md",
+      "title": "Milvus Community Charters",
+      "label1": "milvus_community_charters",
+      "label2": "",
+      "label3": "",
+      "order": 0
+    
+    },
+    {
+
+      "id": "sigs",
+      "title": "Special Interest Groups (SIGs)",
+      "label1": "milvus_community_charters",
+      "label2": "",
+      "label3": "",
+      "order": 1,
+      "isMenu": true
+    
+    },
+    {
+
+      "id": "sig_engine.md",
+      "title": "The Engine SIG",
+      "label1": "milvus_community_charters",
+      "label2": "sigs",
+      "label3": "",
+      "order": 0
+
+    },
+    {
+
+      "id": "sig_testing.md",
+      "title": "The Testing SIG",
+      "label1": "milvus_community_charters",
+      "label2": "sigs",
+      "label3": "",
+      "order": 1
+
+    },
+    {
+
+      "id": "sig_tool.md",
+      "title": "The Toolchain SIG",
+      "label1": "milvus_community_charters",
+      "label2": "sigs",
+      "label3": "",
+      "order": 2
+     
+    },
+    {
+
+      "id": "wgs",
+      "title": "Working Groups (WGs)",
+      "label1": "milvus_community_charters",
+      "label2": "",
+      "label3": "",
+      "order": 2,
+      "isMenu": true
+
+    },
+    {
+
+      "id": "wg_release.md",
+      "title": "The Release WG",
+      "label1": "milvus_community_charters",
+      "label2": "wgs",
+      "label3": "",
+      "order": 0
+
+    },
+    {
+
+      "id": "wg_devrel.md",
+      "title": "The DevRel WG",
+      "label1": "milvus_community_charters",
+      "label2": "wgs",
+      "label3": "",
+      "order": 1
+
+    },
+    {
+
+      "id": "wg_grad.md",
+      "title": "The Graduation WG",
+      "label1": "milvus_community_charters",
+      "label2": "wgs",
+      "label3": "",
+      "order": 2
+
+    },
+    {
+
+      "id": "project_guidelines",
+      "title": "Project Guidelines",
+      "label1": "milvus_community_charters",
+      "label2": "",
+      "label3": "",
+      "order": 3,
+      "isMenu": true
+
+    },
+    {
+
+      "id": "milvus_release_guideline.md",
+      "title": "The Milvus Release Guideline",
+      "label1": "milvus_community_charters",
+      "label2": "project_guidelines",
+      "label3": "",
+      "order": 0
     }
   ]
 }
