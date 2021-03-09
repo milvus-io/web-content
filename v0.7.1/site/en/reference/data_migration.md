@@ -4,7 +4,7 @@ id: data_migration.md
 
 # Migrate Data to Milvus v.0.10.x
 
-Milvus v0.7.1  is no longer supported. We highly recommend migrating your data to v0.10.x. For demonstration purposes, this tutorial covers migrating data to v0.10.3.
+Milvus v0.7.1 is no longer supported. We highly recommend migrating your data to v0.10.x. For demonstration purposes, this tutorial covers migrating data to v0.10.3.
 
 <div class="alert warning">
 This version is <i>incompatible</i> with v0.11.0.
