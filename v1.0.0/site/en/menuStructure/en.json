@@ -24,6 +24,16 @@
       "label2": "",
       "label3": "",
       "order": 1
+
+    },
+    {
+      "id": "announcement.md",
+      "title": "Announcement Letter",
+      "label1": "about_milvus",
+      "label2": "",
+      "label3": "",
+      "order": 2
+
     },
     {
       "id": "milvus_basics",
