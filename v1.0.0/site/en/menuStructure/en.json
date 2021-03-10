@@ -454,6 +454,16 @@
       "label3": "",
       "order": 1,
       "isMenu": true
+
+    },
+    {
+
+      "id": "sig_anns.md",
+      "title": "The ANNS SIG",
+      "label1": "milvus_community_charters",
+      "label2": "sigs",
+      "label3": "",
+      "order": 0
     
     },
     {
@@ -463,7 +473,7 @@
       "label1": "milvus_community_charters",
       "label2": "sigs",
       "label3": "",
-      "order": 0
+      "order": 1
 
     },
     {
@@ -473,7 +483,7 @@
       "label1": "milvus_community_charters",
       "label2": "sigs",
       "label3": "",
-      "order": 1
+      "order": 2
 
     },
     {
@@ -483,7 +493,7 @@
       "label1": "milvus_community_charters",
       "label2": "sigs",
       "label3": "",
-      "order": 2
+      "order": 3
      
     },
     {

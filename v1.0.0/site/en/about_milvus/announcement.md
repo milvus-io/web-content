@@ -14,13 +14,14 @@ What you can expect in Milvus V1.0 includes
 
 (Please refer to https://milvus.io for details.)
 
+<br/>
+
 Although the Milvus project is a continuously evolving OSS project, we believe the first major release is very important to our community users from the following aspects.
 
 - Milvus V1.0 is a long-term support version.
 - A stable version is easy to be integrated into the AI ECO system.
 - Milvus is ready to evolve into the next stage.
 
-<br/>
 
 ## Long-term support
 
@@ -30,7 +31,6 @@ With the continuous development of Milvus, new features will not be added to Mil
 
 Please refer to [The Milvus Release Guideline](https://www.milvus.io/docs/v1.0.0/milvus_release_guideline.md) for more information about the Milvus release strategy.
 
-<br/>
 
 
 ## Toolchain and AI ECO-system integration
@@ -39,7 +39,7 @@ While the Milvus engine development is rapidly iterating, we haven’t spent muc
 
 A stable version makes the ECO system integration much easier as well. We are looking for collaboration between Milvus and other AI OSS communities. We are also encouraging the support of the new AI ASIC in Milvus. If you are interested in this work, please find more details in The ASIC SIG.
 
-<br/>
+
 
 ## The future of Milvus
 
