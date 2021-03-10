@@ -89,11 +89,11 @@ $ sudo docker pull milvusdb/milvus:1.0.0-gpu-d030521-1ea92e
 ```shell
 $ mkdir -p /home/$USER/milvus/conf
 $ cd /home/$USER/milvus/conf
-$ wget http://raw.githubusercontent.com/milvus-io/milvus/1.0.0/core/conf/demo/server_config.yaml
+$ wget http://raw.githubusercontent.com/milvus-io/milvus/v1.0.0/core/conf/demo/server_config.yaml
 ```
 
 <div class="alert note">
-如果无法通过 <code>wget</code> 命令正常下载，你也可以在 <b>/home/$USER/milvus/conf</b> 目录下创建 <b>server_config.yaml</b> 文件，然后将 <a href="https://github.com/milvus-io/milvus/blob/1.0.0/core/conf/demo/server_config.yaml">server config 文件</a> 的内容复制到你创建的配置文件中。
+如果无法通过 <code>wget</code> 命令正常下载，你也可以在 <b>/home/$USER/milvus/conf</b> 目录下创建 <b>server_config.yaml</b> 文件，然后将 <a href="https://github.com/milvus-io/milvus/blob/v1.0.0/core/conf/demo/server_config.yaml">server config 文件</a> 的内容复制到你创建的配置文件中。
 </div>
 
 配置文件下载完成后，你需要将 **server_config.yaml** 中的 `gpu` 区域的 `enable` 参数设置为 `true`。
