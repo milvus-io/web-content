@@ -128,7 +128,7 @@ Milvus 是以 Docker 镜像形式发行的，是可以离线部署的：
 
 #### 如何根据数据量计算需要多大的内存？
 
-不同的索引所需内存不同。可以使用 [Milvus 的 sizing 工具](https://zilliz.com/sizing-tool/) 去计算查询时所需要的内存。
+不同的索引所需内存不同。可以使用 [Milvus 的 sizing 工具](https://zilliz.com/sizing-tool) 去计算查询时所需要的内存。
 
 #### Milvus 中如何实现数据迁移？
 

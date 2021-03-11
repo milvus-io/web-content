@@ -91,7 +91,7 @@ Yes.
 
 #### Is there a graphical tool for managing Milvus?
 
-As of Milvus v0.7.0, we have provided [Milvus Enterprise Manager](https://zilliz.com/products/em/) as a graphical tool for managing Milvus.
+As of Milvus v0.7.0, we have provided [Milvus Enterprise Manager](https://zilliz.com/products/em) as a graphical tool for managing Milvus.
 
 #### Can I export data from Milvus?
 
