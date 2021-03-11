@@ -13,7 +13,7 @@ Milvus v1.0 brings with it the following features:
 - Scale-out capability through the Mishards sharding proxy.
 - Support for processors commonly used in AI scenarios, including X86, Nvidia GPU, Xilinx FPGA, and more.
 
-See the [release notes](release_notes.md) for more of the v1.0 features. 
+> See the [release notes](release_notes.md) for more of the v1.0 features. 
 
 Milvus is an ongoing Open-Source Software (OSS) project. Still, we believe the first major release is of crucial importance to our community users for the following reasons:
 
