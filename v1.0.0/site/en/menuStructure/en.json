@@ -400,6 +400,15 @@
       "order": 0
     },
     {
+      "id": "milvusdm.md",
+      "title": "Milvusdm",
+      "label1": "developer_tools",
+      "label2": "",
+      "label3": "",
+      "order": 1
+
+    },
+    {
       "id": "em",
       "title": "Milvus Enterprise Manager",
       "label1": "developer_tools",
