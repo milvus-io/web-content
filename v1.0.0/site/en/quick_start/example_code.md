@@ -27,7 +27,7 @@ After the Milvus server is successfully started, you can use this example progra
    ```
 
    <div class="alert note">
-   If you cannot use <code>wget</code> to download the example code, you can also create <b>example.py</b> and copy the <a href="https://github.com/milvus-io/pymilvus/blob/1.0.1/examples/example.py">example code.</a>
+   If you cannot use <code>wget</code> to download the example code, you can also create <b>example.py</b> and copy the <a href="https://github.com/milvus-io/pymilvus/blob/v1.0.1/examples/example.py">example code.</a>
    </div>
    
 4. Run the example code.

@@ -26,7 +26,7 @@ id: example_code.md
    ```
    
    <div class="alert note">
-   万一你遇到无法通过 <code>wget</code> 命令正常下载示例代码的情况，你也可以创建 <b>example.py</b> 文件并复制粘贴 <a href="https://github.com/milvus-io/pymilvus/blob/1.0.1/examples/example.py">示例代码</a> 的内容。
+   万一你遇到无法通过 <code>wget</code> 命令正常下载示例代码的情况，你也可以创建 <b>example.py</b> 文件并复制粘贴 <a href="https://github.com/milvus-io/pymilvus/blob/v1.0.1/examples/example.py">示例代码</a> 的内容。
    </div>
 
 4. 运行示例代码。
