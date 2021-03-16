@@ -80,7 +80,7 @@ Docker 镜像内部的日志文件默认使用 UTC 时间。如果宿主机未�
 
 #### 为什么 Milvus 在启动时返回 `Illegal instruction`？
 
-如果你的 CPU 不支持 SSE42、AVX、AVX2、AVX512 其中任何一个指令集，则 Milvus 无法正常启动。可以通过 `cat /proc/cpuinfo` 查看 CPU 支持的指令集。
+如果你的 CPU 对于 SSE42、AVX、AVX2、AVX512 这四种指令集都不支持，则 Milvus 在启动时会返回上述报错信息。可以通过 `cat /proc/cpuinfo` 查看 CPU 支持的指令集。
 
 
 #### 如何确认 Milvus 是否支持我的 GPU？
