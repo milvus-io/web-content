@@ -2,7 +2,7 @@
 id: announcement.md
 ---
 
-# Milvus V1.0 is coming
+# Milvus v1.0 is coming
 
 Today we proudly announce the release of Milvus v1.0. After 8 months of painstaking tests and trials by hundreds of Milvus community users, Milvus v0.10.x finally became stable, and it’s now time to release Milvus v1.0 based on Milvus v0.10.6.
 
