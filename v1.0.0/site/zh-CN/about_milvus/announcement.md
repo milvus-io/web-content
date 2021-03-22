@@ -4,7 +4,7 @@ id: announcement.md
 
 # Milvus v1.0 已发布
 
-今天，我们很高兴地宣布 Milvus 1.0 版本的发布。经过了 8 个月与数百名 Milvus 社区用户不断地测试和试验后，现在 Milvus v0.10.x 已足够稳定，该发布基于 Milvus v0.10.6 的 Milvus v1.0 了。
+今天，我们很高兴地宣布 Milvus 1.0 版本的发布。经过了 8 个月与数百名 Milvus 社区用户不断地测试和试验后，现在 Milvus v0.10.x 已足够稳定，是时候该发布基于 Milvus v0.10.6 的 Milvus v1.0 了。
 
 Milvus v1.0 具有以下功能：
 
