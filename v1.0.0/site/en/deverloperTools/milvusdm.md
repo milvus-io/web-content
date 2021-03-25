@@ -6,24 +6,22 @@ id: milvusdm.md
 # Overview
 [MilvusDM](https://github.com/milvus-io/milvus-tools) (Milvus Data Migration) is an open-source tool designed specifically for importing and exporting data files with Milvus. MilvusDM can greatly improve data mangement efficiency and reduce DevOps costs in the following ways:
 
-- [Faiss to Milvus](#faiss-to-milvus): Imports unzipped data from Faiss into Milvus.
+- [Faiss to Milvus](#Faiss-to-Milvus): Imports unzipped data from Faiss into Milvus.
 
-- [HDF5 to Milvus](#hdf5-to-milvus): Imports HDF5 files into Milvus.
+- [HDF5 to Milvus](#HDF5-to-Milvus): Imports HDF5 files into Milvus.
 
-- [Milvus to Milvus](#milvus-to-milvus): Migrates data from a source Milvus to the target Milvus.
+- [Milvus to Milvus](#Milvus-to-Milvus): Migrates data from a source Milvus to the target Milvus.
 
-- [Milvus to HDF5](#milvus-to-hdf5): Saves the data in Milvus as HDF5 files.
+- [Milvus to HDF5](#Milvus-to-HDF5): Saves the data in Milvus as HDF5 files.
 
 ![milvusdm blog 1.png](https://zillizstorage.blob.core.windows.net/zilliz-assets/zilliz-assets/assets/milvusdm_blog_1_199cbdebe7.png)
 
 MilvusDM is hosted on Github and can be easily installed by running the command line ```pip3 install``` pymilvusdm. MilvusDM allows you to migrate data in a specific collection or partition. In the following sections, we will explain how to use each data migration type. 
 
-<br/>
-
-
 # Faiss to Milvus
 
 ## Steps
+
 1.Download **F2M.yaml**: 
 
 ```$ wget https://raw.githubusercontent.com/milvus-io/milvus-tools/main/yamls/F2```
@@ -77,8 +75,6 @@ F2M:
 2.Insert the retrieved data into Milvus: 
 
 ```insert_milvus.insert_data(vectors, self.dest_collection_name, self.collection_parameter, self.mode, ids, self.dest_partition_name)```
-
-<br/>
 
 # HDF5 to Milvus
 ## Steps
@@ -143,8 +139,6 @@ H2M:
 
 ```ids = insert_milvus.insert_data(vectors, self.c_name, self.c_param, self.mode, ids,self.p_name)```
 
-<br/>
-
 # Milvus to Milvus
 ## Steps
 1.Download **M2M.yaml**.
@@ -208,7 +202,6 @@ r_vectors, r_ids, r_rows = milvusdb.read_milvus_file(self.milvus_meta, collectio
 
 ```milvus_insert.insert_data(r_vectors, collection_name, collection_parameter, self.mode, r_ids, partition_tag)```
 
-<br/>
 
 # Milvus to HDF5
 ## Steps
@@ -303,7 +296,6 @@ MilvusDM file structure:
 
 - **setup.py**: Creates **pymilvusdm** file packages and uploads them to PyPI (Python Package Index).
 
-<br/>
 
 # Recap
 

@@ -8,13 +8,13 @@ id: milvusdm.md
 
 [MilvusDM](https://github.com/milvus-io/milvus-tools) 是一款针对 Milvus 研发的数据迁移工具，支持 Milvus 数据传输以及数据文件的导入与导出：
 
-- [Faiss to Milvus](#faiss-to-milvus)：将未压缩的 Faiss 文件导入 Milvus
+- [Faiss to Milvus](#Faiss-to-Milvus)：将未压缩的 Faiss 文件导入 Milvus
 
-- [HDF5 to Milvus](#hdf5-to-milvus)：将 HDF5 格式的文件导入 Milvus
+- [HDF5 to Milvus](#HDF5-to-Milvus)：将 HDF5 格式的文件导入 Milvus
 
-- [Milvus to Milvus](#milvus-to-milvus)：支持 Milvus 之间的数据迁移
+- [Milvus to Milvus](#Milvus-to-Milvus)：支持 Milvus 之间的数据迁移
 
-- [Milvus to HDF5](#milvus-to-hdf5)：将 Milvus 数据批量备份为 HDF5 格式的本地文件
+- [Milvus to HDF5](#Milvus-to-HDF5)：将 Milvus 数据批量备份为 HDF5 格式的本地文件
 
 开发者使用 MilvusDM 可以提升数据管理效率，降低运维成本。
 
@@ -202,6 +202,7 @@ insert_milvus.insert_data(vectors, self.dest_collection_name, self.collection_pa
     r_vectors, r_ids, r_rows = milvusdb.read_milvus_file(self.milvus_meta, collection_name, partition_tag)
     data_save.save_yaml(collection_name, partition_tag, collection_parameter, version, save_hdf5_name)
     ```
+
 ## MilvusDM 代码结构
 
 我们十分欢迎大家为开源项目 MilvusDM 贡献代码。你可以通过代码文件结构了解 MilvusDM 工具的设计构思。如有新的数据迁移需求，你还可以通过修改源码，为社区贡献代码。
