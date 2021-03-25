@@ -6,23 +6,24 @@ id: overview.md
 
 ## Overview
 
-Milvus is a vector similarity search engine that is highly flexible, reliable, and blazing fast. It supports adding, deleting, updating, and near-real-time search of vectors on a scale of trillion bytes. By encapsulating multiple widely adopted index libraries, such as Faiss, NMSLIB, and Annoy, it provides a comprehensive set of intuitive APIs, allowing you to choose index types based on your scenario. By supporting filtering of scalar data, Milvus takes the recall rate even higher and adds more flexibility to your search. 
+Milvus is an open-source vector database that is highly flexible, reliable, and blazing fast. It supports adding, deleting, updating, and near real-time search of vectors on a trillion-byte scale. A comprehensive set of intuitive APIs, and support for multiple widely adopted index libraries (e.g., Faiss, NMSLIB, and Annoy), simplifies the process of choosing the right index type for a given scenario. Additionally, support for scalar data filtering ensures Milvus maintains a high recall rate and remains adaptable.
 
 
-Milvus runs on the client-server model.
+Milvus runs on a client-server model. At a high-level, it operates as follows:
 
-- The Milvus server comprises two parts: Milvus Core and Meta Store.
+- The Milvus server includes the Milvus Core and Meta Store.
 
     * Milvus Core stores and manages vectors and scalar data.
-    * Meta Store stores and manages metadata in SQLite for testing or MySQL for production. 
 
-- On the client side, Milvus provides SDKs in Python, Java, Go, and C++, as well as RESTful APIs. 
+    * Meta Store stores and manages metadata in SQLite for testing or MySQL for production.
 
-Milvus was released under the Apache 2.0 License and officially open sourced in October 2019. It is an incubation project under [LF AI & Data Foundation](https://lfaidata.foundation/). The source code of Milvus is hosted on [GitHub](https://github.com/milvus-io/milvus).
+- On the client side, Milvus provides SDKs in Python, Java, Go, and C++, as well as RESTful APIs.
+
+Milvus was released under the open-source Apache License 2.0 in October 2019. It is currently an incubation-stage project under [LF AI & Data Foundation](https://lfaidata.foundation/). Milvus' source code is hosted on [GitHub](https://github.com/milvus-io/milvus).
 
 
 <div class="alert note">
-The Milvus server runs on a standalone node. For scenarios involving large datasets or requiring high concurrency, check out Mishards, our cluster sharding middleware that is currently under development.
+The Milvus server runs on a standalone node. For scenarios involving large datasets or requiring high concurrency consider Mishards, our cluster sharding middleware.
 </div>
 
 ## Overall architecture
@@ -32,11 +33,11 @@ The Milvus server runs on a standalone node. For scenarios involving large datas
 
 ## Scenarios
 
-Milvus has been used in hundreds of organizations and institutions worldwide mainly in the following scenarios:
+Milvus has been used in hundreds of organizations and institutions worldwide including the following scenarios:
 
 - Image, video, and audio search.
-- Text search, recommender system, interactive question answering system, and other text search fields.
-- Drug discovery, genetic screening, and other biomedical fields.
+- Recommender systems, chatbots, and other text search fields.
+- New drug discovery, genetic screening, and other biomedical fields.
 
 See [Scenarios](https://www.milvus.io/scenarios/) for more information. 
 
@@ -45,43 +46,42 @@ See [Scenarios](https://www.milvus.io/scenarios/) for more information.
 
 #### Heterogeneous computing
 
-- Optimizes search and indexing performance for GPU.
-- Completes a search in milliseconds for datasets on a scale of trillion Bytes.
-- Manages datasets in a dynamic environment.
+- Optimizes search and indexing performance on GPU.
+- Searches trillion-byte scale datasets in milliseconds.
+- Manages inserting, deleting, updating, and querying vector data in a dynamic environment.
 
 #### Compatible with mainstream libraries, metrics, and tooling
 
-- Encapsulates Faiss, NMSLIB, and Annoy libraries.
-- Supports Quantization, Graph-based, and Tree-based indexes.
-- Similarity metrics including Euclidean distance (L2), Inner Product, Hamming distance, Jaccard distance, and more.
-- Prometheus and Grafana for monitoring and visualization of runtime metrics.
+- Offers support for Faiss, NMSLIB, and Annoy libraries.
+- Supports graph- and tree-based indexes as well as quantization.
+- Measures similarity using Euclidean distance (L2), inner product, Hamming distance, Jaccard distance, and more.
+- Monitors and visualizes runtime metrics using Prometheus and Grafana.
 
 #### Near-real-time (NRT) search
 
-- Inserted datasets are searchable in one second.
+- Newly inserted datasets are available for search in one second or less.
 
 #### Scalar field filtering (coming soon)
 
-- Supports vectors and scalar data. 
-- Adds more flexibility to your search by supporting filtering of scalar data.
+- Makes search more flexible by allowing data to be filtered more granularly.
 
 ## Milvus distributions
 <a name='distributions'></a>
 
-Milvus comes in two distributions: CPU-only Milvus and GPU-enabled Milvus.
+Milvus is available in CPU-only and GPU-enabled distributions:
 
 <ul>
-<li>CPU-only Milvus only supports using CPU to search or build index. 
+<li>The CPU-only Milvus distribution relies on CPU exclusively to search and build indexes. 
 </li> 
-<li>GPU-enabled Milvus supports GPU acceleration for searching and index building: You can use CPU for searching and GPU for index building at the same time to improve query efficiency.</li>
+<li>The GPU-enabled Milvus distribution supports GPU acceleration for search and index building. For example, CPU can be used for search while GPU is used for index building, improving query efficiency.</li>
 </ul>
 
-If your GPU supports CUDA, then you can install GPU-enabled Milvus to achieve much higher search performance in large-scale datasets.
+For GPUs that support CUDA, the GPU-enabled Milvus distribution can be used to achieve much better search performance when working with large-scale datasets.
 
-For more information, see [Milvus Distributions](milvus_distributions-cpu.md).
+See [Milvus Distributions](milvus_distributions-cpu.md) for more information..
 
 ## Join our community
 
-Before joining our developer community, please take some time reading [our code contribution guidelines](https://github.com/milvus-io/milvus/blob/master/CONTRIBUTING.md#contributing-to-milvus).
+Before joining our developer community, please take some time to read [our code contribution guidelines](https://github.com/milvus-io/milvus/blob/master/CONTRIBUTING.md#contributing-to-milvus).
 
-If you have questions about functions or SDKs of Milvus, you can join our [GitHub Discussions](https://github.com/milvus-io/milvus/discussions) or [our Slack channel](https://join.slack.com/t/milvusio/shared_invite/zt-e0u4qu3k-bI2GDNys3ZqX1YCJ9OM~GQ).
+For questions about Milvus' functionality or SDKs, join our [GitHub Discussions](https://github.com/milvus-io/milvus/discussions) or [Slack channel](https://join.slack.com/t/milvusio/shared_invite/zt-e0u4qu3k-bI2GDNys3ZqX1YCJ9OM~GQ).
