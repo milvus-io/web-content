@@ -397,6 +397,17 @@
       "label2": "",
       "label3": "",
       "order": 0
+
+    },
+    {
+      "id": "milvusdm.md",
+      "title": "MilvusDM数据迁移工具",
+      "label1": "developer_tools",
+      "label2": "",
+      "label3": "",
+      "order": 1
+
+
     },
     {
       "id": "em",

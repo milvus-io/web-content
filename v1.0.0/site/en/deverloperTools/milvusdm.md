@@ -299,7 +299,7 @@ MilvusDM file structure:
 
   - **main.py**: Performs corresponding tasks according to the received YAML file.
 
-  - **setting.py**: Configurations relating to running the Milvusdm code.
+  - **setting.py**: Configurations relating to running the MilvusDM code.
 
 - **setup.py**: Creates **pymilvusdm** file packages and uploads them to PyPI (Python Package Index).
 
