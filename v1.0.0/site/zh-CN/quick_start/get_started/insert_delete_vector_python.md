@@ -81,3 +81,7 @@ ID 类型是非负的 64 位整型。
 <summary><font color="#4fc4f9">Milvus 中单次插入数据有上限吗？</font></summary>
 单次插入数据不能超过 256 MB。
 </details>
+<details>
+<summary><font color="#4fc4f9">Milvus 支持的向量维度的最大值是多少? </font></summary>
+Milvus 最多能够支持 32,768 向量维度。
+</details>

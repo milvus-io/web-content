@@ -57,3 +57,7 @@ No, you cannot.
 <summary><font color="#4fc4f9">Is there a limit on the total number of collections and partitions?</font></summary>
 There is no limit on the number of collections. The upper limit on the number of partitions in a collection is 4096.
 </details>
+<details>
+<summary><font color="#4fc4f9">What is the maximum dimension of a vector in Milvus?</font></summary>
+Milvus can support vectors with up to 32,768 dimensions.  
+</details>

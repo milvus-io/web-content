@@ -57,3 +57,7 @@ id: create_drop_collection_python.md
 collection 数量没有限制。每个 collection 内的 partition 总数不能超过 4096 个。
 
 </details>
+<details>
+<summary><font color="#4fc4f9">Milvus 支持的向量维度的最大值是多少? </font></summary>
+Milvus 最多能够支持 32,768 向量维度。
+</details>
