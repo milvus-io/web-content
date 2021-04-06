@@ -36,6 +36,14 @@
 
     },
     {
+      "id": "data_migration.md",
+      "title": "Milvus Data Migration Guide",
+      "label1": "about_milvus",
+      "label2": "",
+      "label3": "",
+      "order": 3
+    },
+    {
       "id": "milvus_basics",
       "title": "Concepts",
       "label1": "",
