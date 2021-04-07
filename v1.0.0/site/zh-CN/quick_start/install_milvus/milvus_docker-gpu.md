@@ -34,7 +34,7 @@ group: distribution
 | 软件            | 版本                                |
 | -------------- | -------------------------------------- |
 | Docker         | 19.03 或以上                            |
-| NVIDIA driver  | 418 或以上                              |
+| NVIDIA Driver  | 418 或以上                              |
 | NVIDIA Container Toolkit  | [NVIDIA-Container-Toolkit](https://github.com/NVIDIA/nvidia-docker)                              |
 
 ## 确认 Docker 状态

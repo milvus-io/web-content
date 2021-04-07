@@ -7,13 +7,13 @@ id: insert_delete_vector_python.md
 
 You can perform vector operations on collections or partitions. This article talks about the following topics:
 
-- [Insert and Delete Vectors](#insert-and-delete-vectors)
-  - [Insert vectors to a collection](#insert-vectors-to-a-collection)
-  - [Insert vectors to a partition](#insert-vectors-to-a-partition)
-  - [Delete vectors by ID](#delete-vectors-by-id)
-  - [FAQ](#faq)
 
-## Insert vectors to a collection
+- [Insert vectors to a collection](#insert-vectors-to-a-collection)
+- [Insert vectors to a partition](#insert-vectors-to-a-partition)
+- [Delete vectors by ID](#delete-vectors-by-id)
+
+
+## Insert Vectors to a Collection
 <a name="insert-vector-to-collection"></a>
 
 1. Randomly generate 20 256-dimensional vectors:
@@ -38,14 +38,14 @@ You can perform vector operations on collections or partitions. This article tal
    >>> milvus.insert(collection_name='test01', records=vectors, ids=vector_ids)
    ```
 
-## Insert vectors to a partition
+## Insert Vectors to a Partition
 <a name="insert-vector-to-partition"></a>
 
 ```python
 >>> milvus.insert('test01', vectors, partition_tag="tag01")
 ```
 
-## Delete vectors by ID
+## Delete Vectors by ID
 <a name="delete-vector"></a>
 
 Suppose your collection contains the following vector IDs:

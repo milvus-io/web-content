@@ -14,6 +14,6 @@ Docker is the recommended way to install and run Milvus.
 
   
 <div class="alert note">
-If you have not set up a Docker environment, see <a href="https://github.com/milvus-io/milvus/blob/master/INSTALL.md">Build Milvus from source</a> to learn how to build Milvus from source.
+If you have not set up a Docker environment, see <a href="https://github.com/milvus-io/milvus/blob/master/INSTALL.md">Build Milvus from Source</a> to learn how to build Milvus from source.
 </div>
 

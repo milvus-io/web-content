@@ -4,7 +4,7 @@ id: connect_milvus_python.md
 
 # Connect to the Server
 
-This article decribes how to connect to a Milvus server from a Python client.
+This article describes how to connect to a Milvus server from a Python client.
 
 <div class="alert note">
 <li>See <a href="https://github.com/milvus-io/pymilvus">Python API documentation</a> for details about APIs.</li>

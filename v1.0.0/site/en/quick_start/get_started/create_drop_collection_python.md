@@ -4,13 +4,13 @@ id: create_drop_collection_python.md
 
 # Create and Drop a Collection
 
-This article provides Python sample codes for creating or droping collections.
+This article provides Python sample codes for creating or dropping collections.
 
 <div class="alert note">
-See <a href="https://github.com/milvus-io/pymilvus/tree/master/examples">example program</a> for more detailed usage.
+See <a href="https://github.com/milvus-io/pymilvus/tree/master/examples">Example Program</a> for more detailed usage.
 </div>
 
-## Create a collection
+## Create a Collection
 
 1. Prepare the parameters needed to create the collection:
 
@@ -27,7 +27,7 @@ See <a href="https://github.com/milvus-io/pymilvus/tree/master/examples">example
    ```
 
 
-## Drop a collection
+## Drop a Collection
 
 ```python
 # Drop a collection.

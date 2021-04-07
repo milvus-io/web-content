@@ -6,7 +6,7 @@ id: search_vector_python.md
 
 Milvus supports searching vectors in a collection or partition.
 
-## Search for vectors in a collection
+## Search for Vectors in a Collection
 
 1. Create search parameters. The search parameters are stored in a JSON string, which is represented by a dictionary in the Python SDK.
 
@@ -31,7 +31,7 @@ Milvus supports searching vectors in a collection or partition.
    <ul><li><code>top_k</code> means searching the k vectors most similar to the target vector. It is defined during the search.</li><li>The range of <code>top_k</code> is [1, 16384].</li></ul>
    </div>
 
-## Search vectors in a partition
+## Search Vectors in a Partition
 
 ```python
 # Create 5 vectors of 256 dimensions.

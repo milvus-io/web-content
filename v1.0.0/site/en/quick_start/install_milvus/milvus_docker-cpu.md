@@ -11,23 +11,23 @@ group: distribution
 
 ## Prerequisites
 
-#### Operating system requirements
+#### Operating System Requirements
 
 | Operating system | Supported versions                              |
 | :--------------- | :----------------------------------------------------------- |
 | CentOS           | 7.5 or higher                                                |
 | Ubuntu LTS       | 18.04 or higher                                              |
 
-#### Hardware requirements
+#### Hardware Requirements
 
 | Component | Recommended configuration             |
 | ---------- | ------------------------------------- |
 | CPU        | Intel CPU Sandy Bridge or higher. |
-| CPU instruction set | <ul><li>SSE42</li><li>AVX</li><li>AVX2</li><li>AVX512</li></ul> |
+| CPU Instruction Set | <ul><li>SSE42</li><li>AVX</li><li>AVX2</li><li>AVX512</li></ul> |
 | RAM        | 8 GB or more (depends on the data volume) |
-| Hard drive | SATA 3.0 SSD or higher                |
+| Hard Drive | SATA 3.0 SSD or higher                |
 
-#### Software requirements
+#### Software Requirements
 
 | Software     | Version                                |
 | ------- | -------------------------------------- |
@@ -37,7 +37,7 @@ group: distribution
 Please ensure that the available memory is greater than the sum of <code>cache.insert_buffer_size</code> and <code>cache.cache_size</code> set in the <b>server_config.yaml</b> file.
 </div>
 
-## Confirm Docker status
+## Confirm Docker Status
 
 Confirm that the Docker daemon is running in the background:
 
@@ -48,11 +48,11 @@ $ sudo docker info
 <div class="alert note">
 <ul>
 <li>If you do not see the server listed, start the Docker daemon.</li>
-<li>On Linux, Docker needs <code>sudo</code> privileges. To run Docker commands without <code>sudo</code> privileges, create a <code>docker</code> group and add your users (see <a href="https://docs.docker.com/install/linux/linux-postinstall/">Post-installation steps for Linux</a> for details).</li>
+<li>On Linux, Docker needs <code>sudo</code> privileges. To run Docker commands without <code>sudo</code> privileges, create a <code>docker</code> group and add your users (see <a href="https://docs.docker.com/install/linux/linux-postinstall/">Post-installation Steps for Linux</a> for details).</li>
 </ul>
 </div>
 
-## Pull Docker image
+## Pull Docker Image
 
 Pull the CPU-only image:
 
@@ -84,7 +84,7 @@ $ sudo docker pull milvusdb/milvus:1.0.0-cpu-d030521-1ea92e
 </div>
 
 
-## Download configuration files
+## Download Configuration Files
 
 ```shell
 $ mkdir -p /home/$USER/milvus/conf
@@ -96,7 +96,7 @@ $ wget https://raw.githubusercontent.com/milvus-io/milvus/v1.0.0/core/conf/demo/
 If you cannot download configuration files via the <code>wget</code> command, you can create a <b>server_config.yaml</b> file under <b>/home/$USER/milvus/conf</b>, and then copy the content from <a href="https://github.com/milvus-io/milvus/blob/v1.0.0/core/conf/demo/server_config.yaml">server config</a> to it.
 </div>
 
-## Start Docker container
+## Start Docker Container
 
 Start Docker container and map the paths to the local files to the container:
 

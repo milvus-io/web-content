@@ -11,32 +11,32 @@ group: distribution
 
 ## Prerequisites
 
-#### System requirements
+#### System Requirements
 
 | Operating system | Supported versions |
 | :--------------- | :----------------- |
 | CentOS           | 7.5 or higher      |
 | Ubuntu LTS       | 18.04 or higher    |
 
-#### Hardware requirements
+#### Hardware Requirements
 
 | Component  | Recommended configuration             |
 | ---------- | ------------------------------------- |
 | CPU        | Intel CPU Sandy Bridge or higher. |
-| CPU instruction set | <ul><li>SSE42</li><li>AVX</li><li>AVX2</li><li>AVX512</li></ul> |
+| CPU Instruction Set | <ul><li>SSE42</li><li>AVX</li><li>AVX2</li><li>AVX512</li></ul> |
 | GPU        | NVIDIA Pascal or higher               |
 | RAM        | 8 GB or more (depends on data volume) |
-| Hard drive | SATA 3.0 SSD or higher                |
+| Hard Drive | SATA 3.0 SSD or higher                |
 
-#### Software requirements
+#### Software Requirements
 
 | Software     | Version                                |
 | ------- | -------------------------------------- |
 | Docker  | 19.03 or higher                             |
-| NVIDIA driver  | 418 or higher                              |
+| NVIDIA Driver  | 418 or higher                              |
 | NVIDIA Container Toolkit  | [NVIDIA-Container-Toolkit](https://github.com/NVIDIA/nvidia-docker)                              |
 
-## Confirm Docker status
+## Confirm Docker Status
 
 Confirm that the Docker daemon is running in the background:
 
@@ -47,11 +47,11 @@ $ sudo docker info
 <div class="alert note">
 <ul>
 <li>If you do not see the server listed, start the Docker daemon.</li>
-<li>On Linux, Docker needs <code>sudo</code> privileges. To run Docker commands without <code>sudo</code> privileges, create a <code>docker</code> group and add your users (see <a href="https://docs.docker.com/install/linux/linux-postinstall/">Post-installation steps for Linux</a> for details).</li>
+<li>On Linux, Docker needs <code>sudo</code> privileges. To run Docker commands without <code>sudo</code> privileges, create a <code>docker</code> group and add your users (see <a href="https://docs.docker.com/install/linux/linux-postinstall/">Post-installation Steps for Linux</a> for details).</li>
 </ul>
 </div>
 
-## Pull Milvus image
+## Pull Milvus Image
 
 Pull the GPU-enabled image:
 
@@ -84,7 +84,7 @@ $ sudo docker pull milvusdb/milvus:1.0.0-gpu-d030521-1ea92e
 </div>
 
 
-## Download configuration files
+## Download Configuration Files
 
 ```shell
 $ mkdir -p /home/$USER/milvus/conf
@@ -98,7 +98,7 @@ If you cannot download configuration files via the <code>wget</code> command, yo
 
 After you downloaded the configuration file, you must set `enable` to `true` in `gpu` section of **server_config.yaml**.
 
-## Start Docker container
+## Start Docker Container
 
 <div class="alert note">
 Before starting Docker container, you must set <code>enable</code> to <code>true</code> in <code>gpu</code> section of <b>server_config.yaml</b>.
