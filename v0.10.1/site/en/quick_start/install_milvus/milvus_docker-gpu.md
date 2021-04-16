@@ -7,7 +7,7 @@ group: version
 
 # Install and Run Milvus
 
-<div class="tab-wrapper"><a href="milvus_docker-cpu.md" >CPU-only Milvus</a><a href="milvus_docker-gpu.md" class='active'>GPU-enabled Milvus</a></div>
+<div class="tab-wrapper"><a href="milvus_docker-cpu.md" class=''>CPU-only Milvus</a><a href="milvus_docker-gpu.md" class='active '>GPU-enabled Milvus</a></div>
 
 ## Prerequisites
 
