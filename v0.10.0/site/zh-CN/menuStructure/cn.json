@@ -350,7 +350,7 @@
       "label2": "",
       "label3": "",
       "order": 1,
-      "outLink": "https://github.com/milvus-io/milvus-sdk-java"
+      "outLink": "https://github.com/milvus-io/milvus-sdk-java/releases/tag/v0.8.2"
     },
     {
       "id": "Go",
@@ -359,7 +359,7 @@
       "label2": "",
       "label3": "",
       "order": 2,
-      "outLink": "https://github.com/milvus-io/milvus-sdk-go"
+      "outLink": "https://github.com/milvus-io/milvus-sdk-go/releases/tag/v0.4.2"
     },
     {
       "id": "RESTful",
@@ -368,7 +368,7 @@
       "label2": "",
       "label3": "",
       "order": 3,
-      "outLink": "https://github.com/milvus-io/milvus/tree/master/core/src/server/web_impl"
+      "outLink": "https://github.com/milvus-io/milvus/tree/v0.10.0/core/src/server/web_impl"
     },
     {
       "id": "C++",
@@ -377,7 +377,7 @@
       "label2": "",
       "label3": "",
       "order": 4,
-      "outLink": "https://github.com/milvus-io/milvus/tree/master/sdk"
+      "outLink": "https://github.com/milvus-io/milvus/tree/v0.10.0/sdk"
     },
     {
       "id": "developer_tools",
