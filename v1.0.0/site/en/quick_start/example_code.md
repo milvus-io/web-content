@@ -16,7 +16,7 @@ After the Milvus server is successfully started, you can use this example progra
    ```
 
    <div class="alert note">
-   To learn more about Milvus Python SDK, go to <a href="https://github.com/milvus-io/pymilvus/blob/master/README.md">Milvus Python SDK Readme.</a>
+   To learn more about Milvus Python SDK, go to <a href="https://github.com/milvus-io/pymilvus/blob/v1.0.1/README.md">Milvus Python SDK Readme.</a>
    </div>
 
 3. Download Python example code.

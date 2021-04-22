@@ -15,7 +15,7 @@ id: example_code.md
    ```
 
    <div class="alert note">
-   如果需要进一步了解 Milvus Python SDK，请参考 <a href="https://github.com/milvus-io/pymilvus/blob/master/README.md">Milvus Python SDK Readme</a>。
+   如果需要进一步了解 Milvus Python SDK，请参考 <a href="https://github.com/milvus-io/pymilvus/blob/v1.0.1/README.md">Milvus Python SDK Readme</a>。
    </div>
    
 3. 下载 Python 示例代码。
