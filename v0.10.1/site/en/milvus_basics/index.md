@@ -129,7 +129,7 @@ Index building parameters and search parameters vary with Milvus distribution. S
    | Parameter   | Description     | Range     |
    | --------| ------------- | ----------- |
    | `nlist` | Number of cluster units　    | [1, 65536] |
-   | `m`     | Number of factors of product quantization |  `m` ∈ {1, 2, 3, 4, 8, 12, 16, 20, 24, 28, 32, 40, 48, 56, 64, 96}, and (dim / m) ∈ {1, 2, 3, 4, 6, 8, 10, 12, 16, 20, 24, 28, 32}.<br>(`m` x 1024) &ge; `MaxSharedMemPerBlock` of your graphics card. |
+   | `m`     | Number of factors of product quantization |  `m` ∈ {1, 2, 3, 4, 8, 12, 16, 20, 24, 28, 32, 40, 48, 56, 64, 96}, and (dim / m) ∈ {1, 2, 3, 4, 6, 8, 10, 12, 16, 20, 24, 28, 32}.<br>(`m` x 1024) &le; `MaxSharedMemPerBlock` of your graphics card. |
 
 <div class="alert note">
 If the value of <code>m</code> does not fall into the specified range for GPU indexing but into the range of CPU indexing, Milvus switches to using CPU to build the index (click the button above to view the range supported by CPU-enabled Milvus).
