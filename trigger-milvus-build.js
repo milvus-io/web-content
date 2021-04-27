@@ -1,4 +1,4 @@
-import axios from "axios";
+const axios = require("axios");
 
 const token = process.env.GH_TOKEN;
 const prodRes = await axios.post(
