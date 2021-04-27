@@ -17,4 +17,5 @@ jobs:
 
       - name: Trigger milvus.io
         run: |
+          yarn
           node trigger-milvus-build.js
