@@ -6,7 +6,6 @@ on:
   push:
     branches:
       - master
-      - ci
 
 jobs:
   build:
