@@ -1,0 +1,20 @@
+name: Trigger milvus.io publish every time
+
+on:
+  repository_dispatch:
+    types: prod-deploy
+  push:
+    branches:
+      - master
+      - ci
+
+jobs:
+  build:
+    runs-on: "ubuntu-latest"
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Trigger milvus.io
+        run: |
+          node trigger-milvus-build.js
