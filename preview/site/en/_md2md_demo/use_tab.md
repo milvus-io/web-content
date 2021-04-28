@@ -3,6 +3,6 @@ label: c++
 order: 1
 ---
 
-{{tab_cpu}}
+<div class="tab-wrapper"><a href="use_tab.md" class='active '>c++</a></div>
 
 {{asdasd::tip.collection}}

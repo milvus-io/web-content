@@ -1,5 +1,7 @@
 ---
 id: sdk.md
+title: 客户端
+sidebar_label: 客户端
 ---
 
 # 客户端参考

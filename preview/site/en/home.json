@@ -1,0 +1,87 @@
+{
+    "section1": {
+      "title": "Get Started",
+      "items": [
+        {
+          "title": "Start a Milvus standalone",
+          "key": "stand-alone",
+          "btnLabel": "Learn to build",
+          "link": "https://milvus.io/docs/overview_standalone.md"
+        },
+        {
+          "title": "Start a Milvus Cluster",
+          "key": "Cluster",
+          "btnLabel": "Learn to build",
+          "link": "https://milvus.io/docs/overview_cluster.md"
+        }
+      ]
+    },
+    "section2": {
+      "title": "introduction",
+      "desc": "Milvus is an open-source vector database that is highly flexible, reliable, and blazing fast. It supports adding, deleting, updating, and near real-time search of vectors on a trillion-byte scale. A comprehensive set of intuitive APIs, and support for multiple widely adopted index libraries (e.g., Faiss, NMSLIB, and Annoy), simplifies the process of choosing the right index type for a given scenario. Additionally, support for scalar data filtering ensures Milvus maintains a high recall rate and remains adaptable."
+    },
+    "section3": {
+      "title": "Recommended articles",
+      "items": [
+        {
+          "label": "Get started",
+          "list": [
+            {
+              "text": "Start a Milvus Standalone",
+              "link": "https://milvus.io/docs/overview_standalone.md"
+            },
+            {
+              "text": "Start a Milvus Cluster",
+              "link": "https://milvus.io/docs/overview_cluster.md"
+            }
+          ]
+        },
+        {
+          "label": "Develop",
+          "list": [
+            {
+              "text": "Pymilvus API Reference",
+              "link": "https://milvus.io/docs/pymilvusapireference.md"
+            }
+          ]
+        },
+        {
+            "label": "FAQs",
+            "list": [
+              {
+                "text": "Milvus Product FAQs",
+                "link": "https://milvus.io/docs/product_faq.md"
+              },
+              {
+                "text": "Milvus Operations FAQs",
+                "link": "https://milvus.io/docs/operations_faq.md"
+              },
+              {
+                "text": "Milvus Performance FAQs",
+                "link": "https://milvus.io/docs/performance_faq.md"
+              },
+              {
+                "text": "Troubleshooting",
+                "link": "https://milvus.io/docs/troubleshooting.md"
+              },
+              {
+                "text": "Pymilvus FAQs",
+                "link": "https://milvus.io/docs/pymilvus_faq.md"
+              }
+            ]
+          }
+      ]
+    },
+    "section4": {
+      "title": "Blog",
+      "items": [
+        {
+          "time": "January 13, 2021",
+          "title": "Milvus Is an Open-Source Scalable Vector Database",
+          "abstract": "Artificial intelligence makes it possible to extract deep insights from massive unstructured datasets. By converting abstract data like video and audio into vectors, a conceptual task becomes a rigorous mathematical one well suited for machines. Milvus is a vector data management platform that is the ideal backbone for your next AI project.",
+          "imgSrc": "https://zillizstorage.blob.core.windows.net/zilliz-assets/zilliz-assets/assets/small_milvus_5b2cdec665.jpg?19189.8199999996.png"
+        }
+      ]
+    }
+  }
+  
