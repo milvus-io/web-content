@@ -30,7 +30,7 @@
       "isMenu": true
     },
   {
-      "id": "overview_standalone.md",
+      "id": "standalone",
       "title": "Milvus Standalone",
       "lang": "en",
       "label1": "getstarted",
@@ -41,13 +41,23 @@
 
     },
     {
+      "id": "overview_standalone.md",
+      "title": "Milvus Standalone",
+      "lang": "en",
+      "label1": "getstarted",
+      "label2": "standalone",
+      "label3": null,
+      "order": 0
+     
+    },
+    {
       "id": "installing",
       "title": "Installing",
       "lang": "en",
       "label1": "getstarted",
       "label2": "standalone",
       "label3": null,
-      "order": 0,
+      "order": 1,
       "isMenu": true
     },
     {
@@ -75,7 +85,7 @@
       "label1": "getstarted",
       "label2": "standalone",
       "label3": "",
-      "order": 1
+      "order": 2
     },
     {
       "id": "explore_standalone.md",
@@ -84,7 +94,7 @@
       "label1": "getstarted",
       "label2": "standalone",
       "label3": "",
-      "order": 2
+      "order": 3
     },
     {
       "id": "configuration_standalone.md",
@@ -93,10 +103,10 @@
       "label1": "getstarted",
       "label2": "standalone",
       "label3": "",
-      "order": 3
+      "order": 4
     },
     {
-      "id": "overview_cluster.md",
+      "id": "cluster",
       "title": "Milvus Cluster",
       "lang": "en",
       "label1": "getstarted",
@@ -107,13 +117,23 @@
 
     },
     {
+      "id": "overview_cluster.md",
+      "title": "Milvus Cluster",
+      "lang": "en",
+      "label1": "getstarted",
+      "label2": "cluster",
+      "label3": null,
+      "order": 0
+
+    },
+    {
       "id": "installing",
       "title": "Installing",
       "lang": "en",
       "label1": "getstarted",
       "label2": "cluster",
       "label3": null,
-      "order": 0,
+      "order": 1,
       "isMenu": true
     },
     {
@@ -141,7 +161,7 @@
       "label1": "getstarted",
       "label2": "cluster",
       "label3": "",
-      "order": 1
+      "order": 2
     },
     {
       "id": "explore_cluster.md",
@@ -150,7 +170,7 @@
       "label1": "getstarted",
       "label2": "cluster",
       "label3": "",
-      "order": 2
+      "order": 3
     },
     {
       "id": "configuration_cluster.md",
@@ -159,7 +179,7 @@
       "label1": "getstarted",
       "label2": "cluster",
       "label3": "",
-      "order": 3
+      "order": 4
     },
     {
       "id": "develope",
