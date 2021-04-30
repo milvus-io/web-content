@@ -180,6 +180,15 @@
       "order": 0
     },
     {
+      "id": "index.md",
+      "title": "Vector Index",
+      "lang": "en",
+      "label1": "develop",
+      "label2": "",
+      "label3": "",
+      "order": 1
+    },
+    {
       "id": "faq",
       "title": "FAQs",
       "lang": "en",

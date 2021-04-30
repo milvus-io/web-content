@@ -76,8 +76,10 @@ $ sudo docker-compose down
 
 ```
 $ docker ps 
-CONTAINER ID   IMAGE                                      COMMAND                  CREATED         STATUS                            PORTS                                                      NAMES
-3baf500700ff   milvusdb/milvus:2.0.0-d043021-19c36b       "/tini -- /milvus-di…"   3 seconds ago   Up 1 second                       0.0.0.0:19530->19530/tcp                                   deploy_standalone_1
-d807e1e1e9b1   quay.io/coreos/etcd:latest                 "etcd -listen-peer-u…"   6 seconds ago   Up 4 seconds                      0.0.0.0:2379-2380->2379-2380/tcp, 0.0.0.0:4001->4001/tcp   deploy_etcd_1
-a103514a959a   minio/minio:RELEASE.2020-12-03T00-03-10Z   "/usr/bin/docker-ent…"   6 seconds ago   Up 4 seconds (health: starting)   0.0.0.0:9000->9000/tcp                                     deploy_minio_1
+
+CONTAINER ID | IMAGE | COMMAND | CREATED | STATUS | PORTS | NAMES
+| ----------- | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- | 
+3baf500700ff | milvusdb/milvus:2.0.0-d043021-19c36b | "/tini -- /milvus-di…" | 3 seconds ago | Up 1 second |   0.0.0.0:19530->19530/tcp | deploy_standalone_1
+d807e1e1e9b1 |  quay.io/coreos/etcd:latest                 "etcd -listen-peer-u…" |  6 seconds ago  | Up 4 seconds  |   |  0.0.0.0:2379-2380->2379-2380/tcp, 0.0.0.0:4001->4001/tcp   deploy_etcd_1
+a103514a959a  | minio/minio:RELEASE.2020-12-03T00-03-10Z |   "/usr/bin/docker-ent…"  | 6 seconds ago  | Up 4 seconds (health: starting) |  0.0.0.0:9000->9000/tcp    | deploy_minio_1
 ```
