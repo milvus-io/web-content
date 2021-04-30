@@ -60,7 +60,7 @@
       "order": 0
     },
     {
-      "id": "install_standalone.md",
+      "id": "install_standalone-docker.md.md",
       "title": "Install Milvus Standalone",
       "lang": "en",
       "label1": "getstarted",
@@ -70,7 +70,7 @@
     },
     {
       "id": "helloworld_standalone.md",
-      "title": "Milvus Standalone Hello World",
+      "title": "Milvus Hello World",
       "lang": "en",
       "label1": "getstarted",
       "label2": "standalone",
@@ -136,7 +136,7 @@
     },
     {
       "id": "helloworld_cluster.md",
-      "title": "Milvus Cluster Hello World",
+      "title": "Milvus Hello World",
       "lang": "en",
       "label1": "getstarted",
       "label2": "cluster",
