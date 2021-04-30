@@ -30,7 +30,7 @@
       "isMenu": true
     },
   {
-      "id": "standalone",
+      "id": "overview_standalone.md",
       "title": "Milvus Standalone",
       "lang": "en",
       "label1": "getstarted",
@@ -96,7 +96,7 @@
       "order": 3
     },
     {
-      "id": "cluster",
+      "id": "overview_cluster.md",
       "title": "Milvus Cluster",
       "lang": "en",
       "label1": "getstarted",
