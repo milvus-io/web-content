@@ -26,6 +26,9 @@ id: release_notes.md
 
 - Memory leaks during indexing or querying operations. [#4749](https://github.com/milvus-io/milvus/issues/4749), [#4757](https://github.com/milvus-io/milvus/issues/4757), [#4765](https://github.com/milvus-io/milvus/issues/4765), [#4766](https://github.com/milvus-io/milvus/issues/4766)
 
+> - For more information about the features of Milvus 1.0, go to [What's Inside Milvus 1.0?](https://www.zilliz.com/blog/whats-inside-milvus-1-0).
+> - For more information about its roadmap, see [Milvus 1.0: The World's Most Popular Open-Source Vector Database Just Got Better](https://zilliz.com/blog/milvus-1-0-the-worlds-most-popular-open-source-vector-database-just-got-better).
+
 ## v0.10.6
 
 **Release date**：2021-02-23
