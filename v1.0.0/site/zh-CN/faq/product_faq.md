@@ -143,7 +143,7 @@ ID 类型是非负的 64 位整型。
 
 - GPU 版 Milvus 会在 CPU 版的基础上，将多个数据段分配给各个 GPU 处理。
 
-可参阅文章：[Milvus 开源向量搜索引擎 ANNS](https://zhuanlan.zhihu.com/p/110332250)。
+可参阅文章：[Milvus 开源向量数据库 ANNS](https://zhuanlan.zhihu.com/p/110332250)。
 
 #### Milvus 中如何选择向量索引的类型？
 
