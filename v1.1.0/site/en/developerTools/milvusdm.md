@@ -50,7 +50,7 @@ MilvusDM is hosted on Github and can be easily installed by running the command 
 
 ```
 F2M:
-  milvus_version: 1.0.0
+  milvus_version: 1.1.0
   data_path: '/home/data/faiss.index'
   dest_host: '127.0.0.1'
   dest_port: 19530
@@ -110,7 +110,7 @@ F2M:
 
 ```
 H2M:
-  milvus-version: 1.0.0
+  milvus-version: 1.1.0
   data_path:
     - /Users/zilliz/float_1.h5
     - /Users/zilliz/float_2.h5
@@ -167,7 +167,7 @@ H2M:
 
 ```
 M2M:
-  milvus_version: 1.0.0
+  milvus_version: 1.1.0
   source_milvus_path: '/home/user/milvus'
   mysql_parameter:
     host: '127.0.0.1'
@@ -223,7 +223,7 @@ r_vectors, r_ids, r_rows = milvusdb.read_milvus_file(self.milvus_meta, collectio
 
 ```
 M2H:
-  milvus_version: 1.0.0
+  milvus_version: 1.1.0
   source_milvus_path: '/home/user/milvus'
   mysql_parameter:
     host: '127.0.0.1'

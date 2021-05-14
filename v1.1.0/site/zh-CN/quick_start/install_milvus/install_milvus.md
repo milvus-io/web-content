@@ -13,7 +13,7 @@ id: install_milvus.md
 
 
 <div class="alert note">
-如果你没有安装 Docker 环境，你可以参考<a href="https://github.com/milvus-io/milvus/blob/master/INSTALL.md">从源代码编译 Milvus</a>。
+如果你没有安装 Docker 环境，你可以参考<a href="https://github.com/milvus-io/milvus/blob/1.1/INSTALL.md">从源代码编译 Milvus</a>。
 </div>
 
 
