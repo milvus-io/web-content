@@ -42,7 +42,7 @@
     },
     {
       "id": "overview_standalone.md",
-      "title": "Milvus Standalone",
+      "title": "Overview",
       "lang": "en",
       "label1": "getstarted",
       "label2": "standalone",
@@ -70,7 +70,7 @@
       "order": 0
     },
     {
-      "id": "install_standalone-docker.md.md",
+      "id": "install_standalone-docker.md",
       "title": "Install Milvus Standalone",
       "lang": "en",
       "label1": "getstarted",
@@ -118,7 +118,7 @@
     },
     {
       "id": "overview_cluster.md",
-      "title": "Milvus Cluster",
+      "title": "Overview",
       "lang": "en",
       "label1": "getstarted",
       "label2": "cluster",
@@ -146,7 +146,7 @@
       "order": 0
     },
     {
-      "id": "install_cluster.md",
+      "id": "install_cluster-docker.md",
       "title": "Install Milvus Cluster",
       "lang": "en",
       "label1": "getstarted",
@@ -182,8 +182,8 @@
       "order": 4
     },
     {
-      "id": "develope",
-      "title": "Develope",
+      "id": "develop",
+      "title": "Develop",
       "lang": "en",
       "label1": "",
       "label2": "",

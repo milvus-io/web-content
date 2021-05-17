@@ -3,9 +3,9 @@ id: overview_standalone.md
 title: Milvus Standalone Overview
 ---
 
-# What’s in Milvus Standalone?
+# What’s Inside Milvus Standalone?
 
-![Milvus Standalone](../../../../../assets/milvus_standalone.jpeg)
+![Milvus Standalone](../../../../../assets/single_host.jpg)
 
 
 Milvus Standalone installs three components: Milvus, Etcd, and MinIO.
