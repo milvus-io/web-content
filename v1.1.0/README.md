@@ -1,6 +1,6 @@
 # Milvus Documentation
 
-This repository contains technical documentation for [Milvus](https://github.com/milvus-io/milvus), an open-source vector similarity search engine designed by [Zilliz](https://zilliz.com).
+This repository contains technical documentation for [Milvus](https://github.com/milvus-io/milvus), an open-source vector database designed by [Zilliz](https://zilliz.com).
 
 Up-to-date technical documentation can be found at [milvus.io](https://www.milvus.io/). Please note that not all documentation on the website exists in this repository. Some projects have their own separate repositories and project-specific documentation.
 
