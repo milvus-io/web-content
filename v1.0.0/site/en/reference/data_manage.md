@@ -66,7 +66,7 @@ No, we only support storing metadata using SQLite or MySQL.
 
 From data import, data storage to data querying and scheduling, our blogs on Medium provide detailed insights into the data management mechanism of Milvus.
 
-- [Managing Data in Massive-Scale Vector Search Engine](https://medium.com/@milvusio/managing-data-in-massive-scale-vector-search-engine-db2e8941ce2f)
+- [Managing Data in Massive-Scale Vector Database](https://medium.com/@milvusio/managing-data-in-massive-scale-vector-search-engine-db2e8941ce2f)
 - [Improvements of the Data File Cleanup Mechanism](https://github.com/milvus-io/community/blob/master/blog/en/2019-12-18-datafile-cleanup.md)
 - [Viewing Metadata](https://medium.com/@milvusio/milvus-metadata-management-1-6b9e05c06fb0)
 - [Fields in Metadata Tables](https://medium.com/@milvusio/milvus-metadata-management-2-fields-in-the-metadata-table-3bf0d296ca6d)
