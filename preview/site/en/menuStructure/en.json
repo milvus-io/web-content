@@ -3,7 +3,6 @@
   {
       "id": "about",
       "title": "About",
-      "lang": "en",
       "label1": "",
       "label2": null,
       "label3": null,
@@ -13,7 +12,6 @@
   {
       "id": "overview.md",
       "title": "What is Milvus",
-      "lang": "en",
       "label1": "about",
       "label2": null,
       "label3": null,
@@ -22,7 +20,6 @@
   {
       "id": "getstarted",
       "title": "Get Started",
-      "lang": "en",
       "label1": "",
       "label2": null,
       "label3": null,
@@ -32,7 +29,6 @@
   {
       "id": "standalone",
       "title": "Milvus Standalone",
-      "lang": "en",
       "label1": "getstarted",
       "label2": null,
       "label3": null,
@@ -43,7 +39,6 @@
     {
       "id": "overview_standalone.md",
       "title": "Overview",
-      "lang": "en",
       "label1": "getstarted",
       "label2": "standalone",
       "label3": null,
@@ -53,7 +48,6 @@
     {
       "id": "installing",
       "title": "Installing",
-      "lang": "en",
       "label1": "getstarted",
       "label2": "standalone",
       "label3": null,
@@ -63,7 +57,6 @@
     {
       "id": "begin_standalone.md",
       "title": "Before You Begin",
-      "lang": "en",
       "label1": "getstarted",
       "label2": "standalone",
       "label3": "installing",
@@ -72,7 +65,6 @@
     {
       "id": "install_standalone-docker.md",
       "title": "Install Milvus Standalone",
-      "lang": "en",
       "label1": "getstarted",
       "label2": "standalone",
       "label3": "installing",
@@ -81,7 +73,6 @@
     {
       "id": "helloworld_standalone.md",
       "title": "Milvus Hello World",
-      "lang": "en",
       "label1": "getstarted",
       "label2": "standalone",
       "label3": "",
@@ -90,7 +81,6 @@
     {
       "id": "explore_standalone.md",
       "title": "Explore Pymilvus",
-      "lang": "en",
       "label1": "getstarted",
       "label2": "standalone",
       "label3": "",
@@ -99,7 +89,6 @@
     {
       "id": "configuration_standalone.md",
       "title": "Milvus Standalone System Configuration",
-      "lang": "en",
       "label1": "getstarted",
       "label2": "standalone",
       "label3": "",
@@ -108,7 +97,6 @@
     {
       "id": "cluster",
       "title": "Milvus Cluster",
-      "lang": "en",
       "label1": "getstarted",
       "label2": null,
       "label3": null,
@@ -119,7 +107,6 @@
     {
       "id": "overview_cluster.md",
       "title": "Overview",
-      "lang": "en",
       "label1": "getstarted",
       "label2": "cluster",
       "label3": null,
@@ -129,7 +116,6 @@
     {
       "id": "installing",
       "title": "Installing",
-      "lang": "en",
       "label1": "getstarted",
       "label2": "cluster",
       "label3": null,
@@ -139,7 +125,6 @@
     {
       "id": "begin_cluster.md",
       "title": "Before You Begin",
-      "lang": "en",
       "label1": "getstarted",
       "label2": "cluster",
       "label3": "installing",
@@ -148,7 +133,6 @@
     {
       "id": "install_cluster-docker.md",
       "title": "Install Milvus Cluster",
-      "lang": "en",
       "label1": "getstarted",
       "label2": "cluster",
       "label3": "installing",
@@ -157,7 +141,6 @@
     {
       "id": "helloworld_cluster.md",
       "title": "Milvus Hello World",
-      "lang": "en",
       "label1": "getstarted",
       "label2": "cluster",
       "label3": "",
@@ -166,7 +149,6 @@
     {
       "id": "explore_cluster.md",
       "title": "Explore Pymilvus",
-      "lang": "en",
       "label1": "getstarted",
       "label2": "cluster",
       "label3": "",
@@ -175,7 +157,6 @@
     {
       "id": "configuration_cluster.md",
       "title": "Milvus Cluster System Configuration",
-      "lang": "en",
       "label1": "getstarted",
       "label2": "cluster",
       "label3": "",
@@ -184,7 +165,6 @@
     {
       "id": "develop",
       "title": "Develop",
-      "lang": "en",
       "label1": "",
       "label2": "",
       "order": 2,
@@ -193,7 +173,6 @@
     {
       "id": "pymilvusapireference.md",
       "title": "Pymilvus API Reference",
-      "lang": "en",
       "label1": "develop",
       "label2": "",
       "label3": "",
@@ -202,7 +181,6 @@
     {
       "id": "index.md",
       "title": "Vector Index",
-      "lang": "en",
       "label1": "develop",
       "label2": "",
       "label3": "",
@@ -211,7 +189,6 @@
     {
       "id": "faq",
       "title": "FAQs",
-      "lang": "en",
       "label1": "",
       "label2": "",
       "order": 3,
@@ -220,25 +197,14 @@
     {
       "id": "milvusfaq",
       "title": "Milvus FAQs",
-      "lang": "en",
       "label1": "faq",
       "label2": "",
       "order": 0,
       "isMenu": true
     },
     {
-      "id": "Pymilvusfaq",
-      "title": "Pymilvus FAQs",
-      "lang": "en",
-      "label1": "faq",
-      "label2": "",
-      "order": 1,
-      "isMenu": true
-    },
-    {
       "id": "performance_faq.md",
       "title": "Performance FAQs",
-      "lang": "en",
       "label1": "faq",
       "label2": "milvusfaq",
       "label3": "",
@@ -247,16 +213,14 @@
     {
       "id": "product_faq.md",
       "title": "Product FAQs",
-      "lang": "en",
       "label1": "faq",
       "label2": "milvusfaq",
       "label3": "",
       "order": 1
     },
     {
-      "id": "operations_faq.md",
-      "title": "Operations FAQs",
-      "lang": "en",
+      "id": "operational_faq.md",
+      "title": "Operational FAQs",
       "label1": "faq",
       "label2": "milvusfaq",
       "order": 2
@@ -264,7 +228,6 @@
     {
       "id": "troubleshooting.md",
       "title": "Troubleshooting",
-      "lang": "en",
       "label1": "faq",
       "label2": "milvusfaq",
       "order": 3
@@ -272,10 +235,9 @@
     {
       "id": "pymilvus_faq.md",
       "title": "Pymilvus FAQs",
-      "lang": "en",
       "label1": "faq",
-      "label2": "pymilvusfaq",
-      "order": 0
+      "label2": "",
+      "order": 1
     }
     
   ]

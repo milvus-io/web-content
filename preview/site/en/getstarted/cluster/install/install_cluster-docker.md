@@ -1,5 +1,5 @@
 ---
-id: install_cluster.md
+id: install_cluster-docker.md
 title: Install Milvus Cluster
 ---
 

@@ -3,13 +3,13 @@
       "title": "Get Started",
       "items": [
         {
-          "title": "Start a Milvus Standalone",
+          "title": "启动单机版 Milvus",
           "key": "stand-alone",
           "btnLabel": "Learn to build",
           "link": "overview_standalone.md"
         },
         {
-          "title": "Start a Milvus Cluster",
+          "title": "启动分布式版 Milvus",
           "key": "Cluster",
           "btnLabel": "Learn to build",
           "link": "overview_cluster.md"
@@ -17,55 +17,55 @@
       ]
     },
     "section2": {
-      "title": "Introduction",
-      "desc": "Milvus is an open-source vector database that is highly flexible, reliable, and blazing fast. It supports adding, deleting, updating, and near real-time search of vectors on a trillion-byte scale. A comprehensive set of intuitive APIs, and support for multiple widely adopted index libraries (e.g., Faiss, NMSLIB, and Annoy), simplifies the process of choosing the right index type for a given scenario. Additionally, support for scalar data filtering ensures Milvus maintains a high recall rate and remains adaptable."
+      "title": "Milvus 是什么",
+      "desc": "Milvus 是一款开源向量数据库，支持针对 TB 级向量的增删改操作和近实时查询，具有高度灵活、稳定可靠以及高速查询等特点。Milvus 集成了 Faiss、NMSLIB、Annoy 等广泛应用的向量索引库，提供了一整套简单直观的 API，让你可以针对不同场景选择不同的索引类型。此外，Milvus 还可以对标量数据进行过滤，进一步提高了召回率，增强了搜索的灵活性。"
     },
     "section3": {
-      "title": "Recommended articles",
+      "title": "推荐阅读",
       "items": [
         {
           "label": "Get started",
           "list": [
             {
-              "text": "Start a Milvus Standalone",
+              "text": "启动单机版 Milvus",
               "link": "overview_standalone.md"
             },
             {
-              "text": "Start a Milvus Cluster",
+              "text": "启动分布式版 Milvus",
               "link": "overview_cluster.md"
             }
           ]
         },
         {
-          "label": "Develop",
+          "label": "开发文档",
           "list": [
             {
-              "text": "Pymilvus API Reference",
+              "text": "Pymilvus API 参考",
               "link": "pymilvusapireference.md"
             }
           ]
         },
         {
-            "label": "FAQs",
+            "label": "常见问题",
             "list": [
               {
-                "text": "Milvus Product FAQs",
+                "text": "产品问题",
                 "link": "product_faq.md"
               },
               {
-                "text": "Milvus Operational FAQs",
+                "text": "运维问题",
                 "link": "operational_faq.md"
               },
               {
-                "text": "Milvus Performance FAQs",
+                "text": "性能调优",
                 "link": "performance_faq.md"
               },
               {
-                "text": "Troubleshooting",
+                "text": "故障诊断",
                 "link": "troubleshooting.md"
               },
               {
-                "text": "Pymilvus FAQs",
+                "text": "Pymilvus 问题",
                 "link": "pymilvus_faq.md"
               }
             ]
@@ -73,7 +73,7 @@
       ]
     },
     "section4": {
-      "title": "Blog",
+      "title": "博客文章",
       "items": [
         {
           "time": "January 13, 2021",

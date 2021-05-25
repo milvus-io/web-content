@@ -3,51 +3,90 @@ id: overview.md
 title: What is Milvus
 ---
 
-# What is Milvus?
-*An introduction to Milvus*
-
-Milvus is a cloud-native, AI-infused database geared towards (embedding) vector similarity search. Milvus is dedicated to lowering the bar for unstructured data search and providing a consistent user experience regardless of users' deployment environment. 
-
-## Milvus is an LF AI & Data Project
-
-Milvus was released under the open-source Apache License 2.0 in October 2019. It is currently an incubation-stage project under [LF AI & Data Foundation](https://lfaidata.foundation/). 
+# What is Milvus
+Milvus is an open-source vector database built to power AI applications and vector similarity search. 
 
 ## Key Features
 
-- **Flexible Deployment**
+### Millisecond search on trillion vector datasets
 
-Thanks to its support for both standalone and distributed deployments, Milvus is gifted with the merits of either environment - flexibility and low latency of a standalone environment and the high availability, high throughput, and high capacity of a distributed environment.
+Average latency measured in milliseconds on trillion vector datasets.
 
-- **Functionality-level Autoscaling**
+### Simplified unstructured data management
 
-With the main functionalities implemented equivalent among nodes, Milvus is able to autoscale at the functionality level, laying the foundation for a more efficient resource scheduling. 
+Rich APIs designed for data science workflows.
 
-- **Hybrid Search**
+Consistent cross-platform UX from laptop, to local cluster, to cloud.
 
-In addition to the core data type of vectors, Milvus also introduces basic numeric types, such as boolean, integer, floating-point number. Search for data from hybrid fields are now supported.
+Embed real-time search and analytics into virtually any application.
 
-- **Combined Data Storage**
+### Reliable, always on vector database
 
-Milvus has reinforced its support for both streaming and batch data persistence and for the adaptation of alternative message/storage engines, in response to increasing demand for higher throughput.
+Milvus’ built-in replication and failover/failback features ensure data and applications can maintain business continuity in the event of a disruption.
 
-- **Multiple Indexes in a Single Field**
+### Highly scalable and elastic
 
-Milvus now supports multiple indexes in a vector field, and decouples indexing from querying. Users are allowed to maintain multiple indexes simultaneously and switch flexibly when necessary.
+Component-level scalability makes it possible to only scale where necessary.
 
-## Getting Involved
+### Community supported, industry recognized
 
-Join the Milvus community on [Slack Channel](https://join.slack.com/t/milvusio/shared_invite/zt-e0u4qu3k-bI2GDNys3ZqX1YCJ9OM~GQ) to share your suggestions, advice, and questions with our engineer team. You can also ask for help at our [FAQ page](operation_faq.md).
+With over 1,000 enterprise users, 5,000+ stars on GitHub, and an active open-source community, you’re not alone when you use Milvus. As an incubation-stage project under the LF AI & Data Foundation, Milvus has institutional support.
 
-You can subscribe to our mailing lists at:
+## Milvus Roadmap
 
-- [Milvus Technical Steering Committee](https://lists.lfai.foundation/g/milvus-tsc)
-- [Milvus Technical Discussions](https://lists.lfai.foundation/g/milvus-technical-discuss)
-- [Milvus Announcement](https://lists.lfai.foundation/g/milvus-announce)
+### Milvus 2.0 - Beta version of distributed vector database
 
-and follow us on social media:
+- Highly available with fully managed failure recovery and service discovery
+- Support for scalar filtering and point query
+- Provides highly abstract ORM-style APIs
+- Offers three levels of tunable consistency: strong, session, consistent prefix
 
-- [Milvus Medium](https://medium.com/@milvusio)
-- [Milvus CSDN](https://zilliz.blog.csdn.net/)
-- [Milvus Twitter](https://twitter.com/milvusio)
-- [Milvus Facebook](https://www.facebook.com/io.milvus.5)
+### Milvus 2.1 - Stable version including complete set of DML functions
+
+- Supports delete and update operations
+- Supports string and varbinary data types
+- Vector similarity search by distance
+- Segment compaction that saves disk space and optimizes query performance
+- Implements load balancing for Milvus Cluster
+- Kubernetes deployment ready to optimize resource allocation
+- Expands the Milvus ecosystem with support for mainstream extensions such as Apache Spark and Flink connector
+
+### Milvus 2.2 - A cloud-native vector database
+
+- Adds access control to ensure data security in multi-tenant scenarios
+- Support for query node isolation for exclusive access
+- Supports bulk insert to improve efficiency
+- A cluster protection mechanism featuring traffic control and back pressure
+- Improves observability for failover and failback through distributed tracing and log aggregation
+- Embedded Milvus that runs on laptops and feature out-of-the-box deployment in cloud production environments
+- Integrates stream and batch processing through Kafta/Pulsar connector
+- Multi-machine, multi-site deployment and multi-cloud integration
+- Supports memory replicas for higher availability and optimized computing performance 
+
+### Long-term Milvus features
+
+- Federated queries across operational databases, data warehouses, and data lakes
+- Supports time travel to any specified point in time
+- Separates hot data storage from cold data storage for more efficient resource allocation
+- Adopts incremental backup to save time and disk space
+- Adopts cost-based query optimization algorithm to improve query efficiency
+- Supports on-disk vector indexing
+- Supports change data capture to facilitate data integration
+- Offers embedding-as-service through data importer/transformer
+
+## Join Our Community
+
+Join the Milvus community on [Slack](https://join.slack.com/t/milvusio/shared_invite/zt-e0u4qu3k-bI2GDNys3ZqX1YCJ9OM~GQ) to share your suggestions, advice, and questions with our engineering team. You can also submit questions to our [FAQ page](https://milvus.io/docs/v1.1.0/performance_faq.md).
+
+Subscribe to Milvus mailing lists:
+
+- [Technical Steering Committee](https://lists.lfai.foundation/g/milvus-tsc)
+- [Technical Discussions](https://lists.lfai.foundation/g/milvus-technical-discuss)
+- [Announcement](https://lists.lfai.foundation/g/milvus-announce)
+
+Follow Milvus on social media:
+
+- [Medium](https://medium.com/@milvusio)
+- [Twitter](https://twitter.com/milvusio)
+- [Facebook](https://www.facebook.com/io.milvus.5)
 
