@@ -94,7 +94,7 @@ Specifies the GPU devices used for indexing. For scenarios where data insertion 
 ### Index
 
 <div class="alert note">
-See <a href="index_overview.md">Index Overview</a> for the basic concepts of vector index.
+See <a href="index.md">Index Overview</a> for the basic concepts of vector index.
 </div>
 
 To choose the right index, you need to trade off between multiple indicators such as storage space, query performance, and query recall rate.
