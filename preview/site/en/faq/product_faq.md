@@ -130,7 +130,7 @@ title: Product FAQ
 
   #### Why do Euclidean distance (L2) and inner product (IP) return different results?
 
-  For normalized vectors, Euclidean distance (L2) is mathematically equivalent to inner product (IP). If these distance metrics return different results, check to see if your vectors are normalized
+  For normalized vectors, Euclidean distance (L2) is mathematically equivalent to inner product (IP). If these similarity metrics return different results, check to see if your vectors are normalized
 
   #### Is there a limit to the total number of collections and partitions in Milvus?
 
