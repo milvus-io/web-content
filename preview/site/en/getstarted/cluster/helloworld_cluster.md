@@ -1,6 +1,6 @@
 ---
 id: helloworld_cluster.md
-title: Milvus Cluster Hello World
+title: Hello Milvus
 ---
 
 # Run Milvus Standalone using Python

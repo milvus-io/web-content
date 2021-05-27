@@ -1,6 +1,6 @@
 ---
 id: helloworld_standalone.md
-title: Milvus Hello World
+title: Hello Milvus
 ---
 
 # Run Milvus Standalone using Python

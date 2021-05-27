@@ -2,7 +2,7 @@
 id: index.md
 ---
 
-# Vector index
+# Vector Index
 
 Vector index is a time- and space-efficient data structure built on vectors through a certain mathematical model. Through the vector index, we can efficiently query several vectors similar to the target vector.
 
@@ -15,7 +15,7 @@ According to the implementation methods, the ANNS vector index can be divided in
 - Hash-based index
 - Quantization-based index
 
-The following table classifies the indexes that Milvus supports:
+The following table classifies the indices that Milvus supports:
 
 <table>
 <thead>
@@ -77,9 +77,9 @@ The following table classifies the indexes that Milvus supports:
 
 To improve query performance, you can specify an index type for each vector field. Currently, a vector field only supports one index type, Milvus will automatically delete the old index when switching the index type.
 
-## Create indexes
+## Create indices
 
-When the `create_index` method is called, Milvus synchronously indexes the existing data on this field. 
+When the `create_index` method is called, Milvus synchronously indices the existing data on this field. 
 
 <div class="alert note">
 When the inserted data segment is less than 4096 rows, Milvus does not index it.
@@ -89,20 +89,20 @@ When the inserted data segment is less than 4096 rows, Milvus does not index it.
 
 Milvus stores massive data in sections. When indexing, Milvus creates an index for each data segment separately.
 
-## Build indexes during free time
+## Build indices during free time
 
 It is known that indexing is a resource-consuming and time-consuming task. When the query task and indexing task are concurrent, Milvus preferentially allocates computing resources to the query task, that is, any query command will interrupt the indexing task being executed in the background. After that, only when the user does not send the query task for 5 seconds, Milvus resumes the indexing task in the background. Besides, if the data segment specified by the query command has not been built into the specified index, Milvus will do an exhaustive search directly within the segment.
 
 
 
-## Supported vector indexes
+## Supported vector indices
 
 ### FLAT
 <a name="FLAT"></a>
 
 If FLAT index is used, the vectors are stored in an array of float/binary data without any compression. during searching vectors, all indexed vectors are decoded sequentially and compared to the query vectors.
 
-FLAT index provides 100% query recall rate. Compared to other indexes, it is the most efficient indexing method when the number of queries is small.
+FLAT index provides 100% query recall rate. Compared to other indices, it is the most efficient indexing method when the number of queries is small.
 
 - Search parameters
 
@@ -286,6 +286,25 @@ To learn how to choose an appropriate index for your application scenarios, plea
 
 To learn how to choose an appropriate index for a metric, see [Distance Metrics](metric.md).
 
+
+## FAQ
+
+<details>
+<summary><font color="#4fc4f9">Does IVF_SQ8 differ from IVF_SQ8H in terms of recall rate?
+</font></summary>
+No, they have the same recall rate for the same dataset.
+</details>
+<details>
+<summary><font color="#4fc4f9">What is the difference between FLAT index and IVF_FLAT index?</font></summary>
+<p>IVF_FLAT index divides a vector space into <code>nlist</code> clusters. If you keep the default value of <code>nlist</code> as 16384, Milvus compares the distances between the target vector and the centers of all 16384 clusters to get <code>nprobe</code> nearest clusters. Then Milvus compares the distances between the target vector and the vectors in the selected clusters to get the nearest vectors. Unlike IVF_FLAT, FLAT directly compares the distances between the target vector and each and every vector.
+</p>
+<p>
+Therefore, when the total number of vectors approximately equals <code>nlist</code>, IVF_FLAT and FLAT has little difference in the way of calculation required and search performance. But as the number of vectors grows to two times, three times, or n times of <code>nlist</code>, IVF_FLAT index begins to show increasingly greater advantages.
+</p>
+<p>
+See <a href="https://medium.com/unstructured-data-service/how-to-choose-an-index-in-milvus-4f3d15259212">How to Choose an Index in Milvus</a> for more information.
+</p>
+</details>
 
 ## FAQ
 

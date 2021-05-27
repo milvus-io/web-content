@@ -6,7 +6,7 @@ id: metric.md
 
 In Milvus, distance metrics are used to measure similarities among vectors. Choosing a good distance metric helps improve the classification and clustering performance significantly.
 
-The following table shows how these widely used distance metrics fit with various input data forms and Milvus indexes.
+The following table shows how these widely used distance metrics fit with various input data forms and Milvus indices.
 
 
 <div class="filter">
@@ -158,3 +158,21 @@ Where
 - N<sub>B</sub> specifies the number of bits in the fingerprint of molecular B.
 - N<sub>AB</sub> specifies the number of shared bits in the fingerprint of molecular A and B.
 
+## FAQ
+
+<details>
+<summary><font color="#4fc4f9">Why is the top1 result of a vector search not the search vector itself, if the metric type is inner product?</font></summary>
+This occurs if you have not normalized the vectors when using inner product as the distance metric.
+</details>
+<details>
+<summary><font color="#4fc4f9">What is normalization? Why is normalization needed?</font></summary>
+<p>Normalization refers to the process of converting an embedding (vector) so that its norm equals 1. If you use Inner Product to calculate embeddings similarities, you must normalize your embeddings. After normalization, inner product equals cosine similarity.
+</p>
+<p>
+See <a href="https://en.wikipedia.org/wiki/Unit_vector">Wikipedia</a> for more information.
+</p>
+</details>
+<details>
+<summary><font color="#4fc4f9">Why do I get different results using Euclidean distance (L2) and inner product (IP) as the distance metric?</font></summary>
+Check if the vectors are normalized. If not, you need to normalize the vectors first. Theoretically speaking, similarities worked out by L2 are different from similarities worked out by IP, if the vectors are not normalized.
+</details>

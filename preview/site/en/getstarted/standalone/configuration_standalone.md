@@ -1,6 +1,6 @@
 ---
 id: configuration_standalone.md
-title: Milvus Standalone System Configuration
+title: System Configuration
 ---
 # System Configurations
 
@@ -172,7 +172,7 @@ Specific configurations of querynode module
 
 ### Other configurations
 
-Configurations of the default names of partitions and indexes in the system
+Configurations of the default names of partitions and indices in the system
 
 | **Configuration**           | **Description**           |
 | --------------------------- | ------------------------- |

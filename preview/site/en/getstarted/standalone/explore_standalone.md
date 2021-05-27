@@ -1,6 +1,6 @@
 ---
 id: explore_standalone.md
-title: Explore Pymilvus (Standalone)
+title: Explore Pymilvus
 ---
 
 # Basic Milvus Operations

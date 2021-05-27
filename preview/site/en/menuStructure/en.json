@@ -46,33 +46,16 @@
      
     },
     {
-      "id": "installing",
-      "title": "Installing",
-      "label1": "getstarted",
-      "label2": "standalone",
-      "label3": null,
-      "order": 1,
-      "isMenu": true
-    },
-    {
-      "id": "begin_standalone.md",
-      "title": "Before You Begin",
-      "label1": "getstarted",
-      "label2": "standalone",
-      "label3": "installing",
-      "order": 0
-    },
-    {
       "id": "install_standalone-docker.md",
       "title": "Install Milvus Standalone",
       "label1": "getstarted",
       "label2": "standalone",
-      "label3": "installing",
+      "label3": null,
       "order": 1
     },
     {
       "id": "helloworld_standalone.md",
-      "title": "Milvus Hello World",
+      "title": "Hello Milvus",
       "label1": "getstarted",
       "label2": "standalone",
       "label3": "",
@@ -88,7 +71,7 @@
     },
     {
       "id": "configuration_standalone.md",
-      "title": "Milvus Standalone System Configuration",
+      "title": "System Configuration",
       "label1": "getstarted",
       "label2": "standalone",
       "label3": "",
@@ -114,33 +97,16 @@
 
     },
     {
-      "id": "installing",
-      "title": "Installing",
-      "label1": "getstarted",
-      "label2": "cluster",
-      "label3": null,
-      "order": 1,
-      "isMenu": true
-    },
-    {
-      "id": "begin_cluster.md",
-      "title": "Before You Begin",
-      "label1": "getstarted",
-      "label2": "cluster",
-      "label3": "installing",
-      "order": 0
-    },
-    {
       "id": "install_cluster-docker.md",
       "title": "Install Milvus Cluster",
       "label1": "getstarted",
       "label2": "cluster",
-      "label3": "installing",
+      "label3": null,
       "order": 1
     },
     {
       "id": "helloworld_cluster.md",
-      "title": "Milvus Hello World",
+      "title": "Hello Milvus",
       "label1": "getstarted",
       "label2": "cluster",
       "label3": "",
@@ -156,7 +122,7 @@
     },
     {
       "id": "configuration_cluster.md",
-      "title": "Milvus Cluster System Configuration",
+      "title": "System Configuration",
       "label1": "getstarted",
       "label2": "cluster",
       "label3": "",
@@ -181,6 +147,14 @@
     {
       "id": "index.md",
       "title": "Vector Index",
+      "label1": "develop",
+      "label2": "",
+      "label3": "",
+      "order": 1
+    },
+    {
+      "id": "metric.md",
+      "title": "Distance Metrics",
       "label1": "develop",
       "label2": "",
       "label3": "",

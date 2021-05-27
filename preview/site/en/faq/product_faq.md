@@ -72,8 +72,6 @@ title: Product FAQ
 
   Yes. Milvus does not check if vector IDs are duplicates.
 
-  
-
   #### When vectors with duplicate IDs are inserted, does Milvus treat it as an update operation?
 
   No. Milvus does not currently support update operations and does not check if entity IDs are duplicates. You are responsible for ensuring entity IDs are unique, and if they aren't Milvus may contain multiple entities with duplicate IDs.
@@ -88,15 +86,9 @@ title: Product FAQ
 
   An insert operation must not exceed 1,024 MB in size. This is a limit imposed by gRPC.
 
-  
-
   #### Does collection size impact query performance when searching in a specific partition?
 
   No. If partitions for a search are specified, Milvus searches the specified partitions only.
-
-  
-
-  
 
   #### Does Milvus load the entire collection when partitions are specified for a search?
 
@@ -106,19 +98,9 @@ title: Product FAQ
   - If you do not know the exact partitions, call `load_collection()` before calling `search()`.
   - If you fail to load collections or partitions before searching, Milvus returns an error.
 
-  
-
-  
-
-  
-
-  
-
   #### Can multiple indices be created for the same field in a collection?
 
   Yes. Multiple indices can be built on the same field of a collection. However, each index must be assigned a unique name in the collection. If indices are not given unique names, new ones overwrite old ones. Call `load_index()` to load a specified index to memory so that Milvus searches it.
-
-  
 
   #### Can indices be created after inserting vectors?
 
@@ -136,15 +118,9 @@ title: Product FAQ
 
   See [How to Choose an Index in Milvus](https://zilliz.com/blog/Accelerating-Similarity-Search-on-Really-Big-Data-with-Vector-Indexing) for more information.
 
-  
-
-  
-
   #### How does Milvus flush data?
 
   Milvus returns success when inserted data is loaded to the message queue. However, the data is not yet flushed to the disk. Then Milvus' data node writes the data in the message queue to persistent storage as incremental logs. If `flush()` is called, the data node is forced to write all data in the message queue to persistent storage immediately.
-
-  
 
   #### What is normalization? Why is normalization needed?
 
@@ -152,23 +128,21 @@ title: Product FAQ
 
   See [Wikipedia](https://en.wikipedia.org/wiki/Unit_vector) for more information.
 
-  
-
   #### Why do Euclidean distance (L2) and inner product (IP) return different results?
 
   For normalized vectors, Euclidean distance (L2) is mathematically equivalent to inner product (IP). If these distance metrics return different results, check to see if your vectors are normalized
 
   #### Is there a limit to the total number of collections and partitions in Milvus?
 
-  There is no limit on the number of collections. However, the number of partitions in each collection must not exceed the value set by the parameter master.maxPartitionNum.
+  There is no limit on the number of collections. However, the number of partitions in each collection must not exceed the value set by the parameter `master.maxPartitionNum`.
 
   #### Why do I get fewer than k vectors when searching for topk vectors?
 
-  Among the indices that Milvus supports, IVF_FLAT and IVF_SQ8 implement the k-means clustering method. A data space is divided into nlist clusters and the inserted vectors are distributed to these clusters. Milvus then selects the nprobe nearest clusters and compares the distances between the target vector and all vectors in the selected clusters to return the final results.
+  Among the indices that Milvus supports, IVF_FLAT and IVF_SQ8 implement the k-means clustering method. A data space is divided into `nlist` clusters and the inserted vectors are distributed to these clusters. Milvus then selects the `nprobe` nearest clusters and compares the distances between the target vector and all vectors in the selected clusters to return the final results.
 
-  If nlist and topk are large and nprobe is small, the number of vectors in the nprobe clusters may be less than k. Therefore, when you search for the topk nearest vectors, the number of returned vectors is less than k.
+  If `nlist` and `topk` are large and nprobe is small, the number of vectors in the nprobe clusters may be less than `k`. Therefore, when you search for the `topk` nearest vectors, the number of returned vectors is less than `k`.
 
-  To avoid this, try setting nprobe larger and nlist and k smaller.
+  To avoid this, try setting `nprobe` larger and `nlist` and `k` smaller.
 
   See [Index](index.md) for more information.
 
