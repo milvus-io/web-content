@@ -4,7 +4,7 @@ title: Milvus Cluster Overview
 ---
 # What’s Inside Milvus Cluster?
 
-![Milvus Cluster](../../../assets/sys_overview_distributed.jpg)
+![Milvus Cluster](../../../../assets/sys_overview_distributed.jpg)
 
 In Milvus Cluster mode, all microservices can be deployed independently on different physical nodes.
 

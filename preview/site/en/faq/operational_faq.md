@@ -6,18 +6,8 @@ title: Operational FAQ
 # Operational FAQ
 
 <!-- TOC -->
-[What if I failed to pull Milvus Docker image from Docker Hub?](#what-if-i-failed-to-pull-milvus-docker-image-from-docker-hub)
-[Is Docker the only way to install and run Milvus?](#is-docker-the-only-way-to-install-and-run-milvus)
-[What are the main factors affecting recall?](#what-are-the-main-factors-affecting-recall)
-[Why my changes to the configuration files did not take effect?](#why-my-changes-to-the-configuration-files-did-not-take-effect)
-[How can I know if Milvus has started successfully?](#how-can-i-know-if-milvus-has-started-successfully)
-[Why is the time in the log files different from the system time?](#why-is-the-time-in-the-log-files-different-from-the-system-time)
-[How can I know whether my CPU supports Milvus?](#how-can-i-know-whether-my-cpu-supports-milvus)
-[Why does Milvus return Illegal instruction during startup?](#why-does-milvus-return-illegal-instruction-during-startup)
-[Can I install Milvus on Windows?](#can-i-install-milvus-on-windows)
-[How to fix the error when I install pymilvus on Windows?](#how-to-fix-the-error-when-i-install-pymilvus-on-windows)
-[Can I deploy Milvus service when disconnected from the Internet?](#can-i-deploy-milvus-service-when-disconnected-from-the-internet)
-[Still have questions?](#still-have-questions)
+
+
 <!-- /TOC -->
 
 #### What if I failed to pull the Milvus Docker image from Docker Hub?

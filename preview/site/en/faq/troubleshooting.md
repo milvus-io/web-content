@@ -2,11 +2,11 @@
 id: troubleshooting.md
 title: Troubleshooting
 ---
-- This page lists common issues that may occur when running Milvus, as well as possible troubleshooting tips. Issues on this page fall into the following categories:
+This page lists common issues that may occur when running Milvus, as well as possible troubleshooting tips. Issues on this page fall into the following categories:
 
-  - [Boot issues](#boot_issues)
-  - [Runtime issues](#runtime_issues)
-  - [API issues](#api_issues)
+- [Boot issues](#boot_issues)
+- [Runtime issues](#runtime_issues)
+- [API issues](#api_issues)
 
 <a href="#boot_issues"></a>
   ## Boot issues

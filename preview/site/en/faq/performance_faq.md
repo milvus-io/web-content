@@ -6,11 +6,8 @@ title: Performance FAQ
 # Performance FAQ
 
 <!-- TOC -->
-- [Why the first search operations takes a long time after restarting Milvus?](#Why-the-first-search-operations-takes-a-long-time-after-restarting-Milvus)
-- [Why it is slow to insert data?](#Why-it-is-slow-to-insert-data)
-- [Why the search speed is low?](#Why-the-search-speed-is-low)
-- [Why is my GPU always idle?](#Why-is-my-GPU-always-idle)
-- [Why my data cannot be searched immediately after insertion?](#Why-my-data-cannot-be-searched-immediately-after-insertion)
+
+
 <!-- /TOC -->
 
 #### How to set `nlist` and `nprobe` for IVF indices?
