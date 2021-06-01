@@ -1,23 +1,23 @@
-name: Trigger milvus.io publish every time
+# name: Trigger milvus.io publish every time
 
-on:
-  repository_dispatch:
-    types: prod-deploy
-  push:
-    branches:
-      - master
+# on:
+#   repository_dispatch:
+#     types: prod-deploy
+#   push:
+#     branches:
+#       - master
 
-jobs:
-  build:
-    runs-on: "ubuntu-latest"
+# jobs:
+#   build:
+#     runs-on: "ubuntu-latest"
 
-    steps:
-      - uses: actions/checkout@v2
+#     steps:
+#       - uses: actions/checkout@v2
 
-      - name: Trigger milvus.io
-        env:
-          GH_TOKEN: ${{secrets.GH_TOKEN}}
-        run: |
-          mv trigger-milvus-build.md trigger-milvus-build.js
-          yarn
-          node trigger-milvus-build.js
+#       - name: Trigger milvus.io
+#         env:
+#           GH_TOKEN: ${{secrets.GH_TOKEN}}
+#         run: |
+#           mv trigger-milvus-build.md trigger-milvus-build.js
+#           yarn
+#           node trigger-milvus-build.js
