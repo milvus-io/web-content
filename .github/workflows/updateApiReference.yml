@@ -42,7 +42,6 @@ jobs:
           git config --global user.name "Milvus-doc-bot"
           sudo chmod -R 777 ${{ github.event.repository.name }}
           cd ${{ github.event.repository.name }}
-          git checkout -f apireference
           if [ ! -d "./APIReference" ]
           then
           echo "=>No APIReference directory, create it."
@@ -88,5 +87,5 @@ jobs:
           sudo cp ../../../pymilvus/docs/build/html/api.html "./${{ github.event.inputs.tagName }}"
           git add .
           git commit -m "Update pymilvus"
-          git push -f origin apireference
+          git push -f origin master
           echo "=>Completed: Update pymilvus doc repo."
