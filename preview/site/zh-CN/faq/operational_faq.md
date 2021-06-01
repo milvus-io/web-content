@@ -90,5 +90,5 @@ Milvus 可以通过 Docker 镜像的形式进行离线部署以单机版 Milvus 
 
 如果仍有其他问题，你可以：
 
-- 访问我们的 [GitHub](https://github.com/milvus-io/milvus/issues)，与我们分享你的问题和想法，或帮助其他用户。
+- 访问我们的 [GitHub 主页](https://github.com/milvus-io/milvus/issues)，与我们分享你的问题和想法，或帮助其他用户。
 - 加入我们的 [Slack 社区](https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk)，参与开源社区的讨论交流。
