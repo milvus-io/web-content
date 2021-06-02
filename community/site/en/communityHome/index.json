@@ -1,0 +1,120 @@
+{
+  "heroSection": {
+    "title": "Join the community",
+    "list": [
+      {
+        "title": "Slack Channel",
+        "desc": "To connect with other users and contributors, welcome to join our Slack Channel.",
+        "link": "https://milvusio.slack.com/",
+        "type": "SLACK"
+      },
+      {
+        "title": "Github Discussion",
+        "desc": "To ask questions to the community or request features, welcome to visit our GitHub Discussions.",
+        "link": "https://github.com/milvus-io/milvus/discussions",
+        "type": "GITHUB"
+      }
+    ]
+  },
+  "repoSection": {
+    "title": "Our Repositories",
+    "list": [
+      {
+        "title": "Milvus",
+        "desc": "Vector similarity search",
+        "link": "https://github.com/milvus-io/milvus"
+      },
+      {
+        "title": "Pymilvus-orm",
+        "desc": "Python SDK for Milvus",
+        "link": "https://github.com/milvus-io/pymilvus"
+      },
+      {
+        "title": "Milvus-sdk-java",
+        "desc": "JAVA SDK for Milvus",
+        "link": "https://github.com/milvus-io/milvus-sdk-java"
+      },
+      {
+        "title": "Milvus-helm",
+        "desc": "The helm chart to deploy Milvus",
+        "link": "https://github.com/milvus-io/milvus-helm"
+      },
+      {
+        "title": "www.milvus.io",
+        "desc": "Milvus official website",
+        "link": "https://github.com/milvus-io/www.milvus.io"
+      },
+      {
+        "title": "Milvus-sdk-go",
+        "desc": "Golang SDK for Milvus",
+        "link": "https://github.com/milvus-io/milvus-sdk-go"
+      }
+    ]
+  },
+  "contributeSection": {
+    "title": "How to contribute",
+    "desc": "Contributions are welcomed and greatly appreciated. Please read our contribution guidelines for detailed contribution workflow. This project adheres to the code of conduct of Milvus. By participating, you are expected to uphold this code. We use GitHub issues to track issues and bugs. For general questions and public discussions, please join our community."
+  },
+  "mailingSection": {
+    "title": "Mailing List",
+    "list": [
+      {
+        "title": "Milvus Technical Discuss",
+        "link": "https://lists.lfaidata.foundation/g/milvus-technical-discuss"
+      },
+      {
+        "title": "Milvus TSC",
+        "link": "https://lists.lfaidata.foundation/g/milvus-tsc"
+      },
+      {
+        "title": "Milvus Announce",
+        "link": "https://lists.lfaidata.foundation/g/milvus-announce"
+      }
+    ]
+  },
+  "contributorSection": {
+    "title": "Featured Contributors",
+    "list": [
+      {
+        "login": "1",
+        "avatar": "../../assets/contributor.png",
+        "link": "https://github.com/"
+      },
+      {
+        "login": "2",
+        "avatar": "../../assets/contributor.png",
+        "link": "https://github.com/"
+      },
+      {
+        "login": "3",
+        "avatar": "../../assets/contributor.png",
+        "link": "https://github.com/"
+      },
+      {
+        "login": "4",
+        "avatar": "../../assets/contributor.png",
+        "link": "https://github.com/"
+      },
+      {
+        "login": "5",
+        "avatar": "../../assets/contributor.png",
+        "link": "https://github.com/"
+      },
+      {
+        "login": "6",
+        "avatar": "../../assets/contributor.png",
+        "link": "https://github.com/"
+      },
+      {
+        "login": "7",
+        "avatar": "../../assets/contributor.png",
+        "link": "https://github.com/"
+      },
+      {
+        "login": "8",
+        "avatar": "../../assets/contributor.png",
+        "link": "https://github.com/"
+      }
+    ]
+  }
+}
