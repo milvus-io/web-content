@@ -10,18 +10,190 @@ title: Milvus Cluster System Configuration
 
 The Milvus Cluster uses three third-party engines: etcd, minIO, and Pulsar. Among them, etcd is the metadata engine of the system, supporting the metadata storage and visit. minIO is the storage engine that supports the persistent storage of the log files and index files. And Pulsar is the underlying engine that supports the reliable storage and pub/sub of log streams.
 
-| **Configuration**     | **Description**                                             |
-| --------------------- | ----------------------------------------------------------- |
-| etcd.address          | IP address of etcd                                          |
-| etcd.port             | Port of etcd                                                |
-| etcd.rootPath         | Root path to etcd for data storage                          |
-| minio.address         | IP address of minIO                                         |
-| minio.port            | Port of minIO                                               |
-| minio.accessKeyID     | User access key ID that minIO provided for authorized acess |
-| minio.secretAccessKey | String that minIO used for encryption                       |
-| minio.useSSL          | Whether enable minIO to use SSL protocol                    |
-| pulsar.address        | IP address of Pulsar                                        |
-| pulsar.port           | Port of Pulsar                                              |
+<table id="third_party">
+  <tr>     
+    <th>Configuration</th>     
+    <th>Description</th>     
+    <th>Default Value</th>   
+  </tr>
+  <tr>     
+    <td>etcd.address</td>
+    <td>
+      <details>
+       <summary>IP address of the etcd</summary>
+        <li>
+           Environment variable: ETCD_ADDRESS
+        </li> 
+        <li>
+           Access etcd service with etcd.address. etcd.address and etcd.port together generates the valid address to monitor etcd. etcd preferentially acquires valid address from environment variable ETCD_ADDRESS when Milvus is booted.
+         </li>
+         <li>
+           Milvus 2.0 supports communication with single-node etcd. Default value applies when etcd and Milvus are running on the same network.
+         </li>
+         <li>
+           Upcoming Milvus versions will support communication with etcd cluster.
+         </li>
+      </details>
+    </td>     
+    <td>localhost</td>
+  </tr>
+  <tr>     
+    <td>etcd.port</td>
+    <td>
+      <details>
+       <summary>Port of etcd</summary>
+        <li>
+           Environment variable: ETCD_ADDRESS
+        </li> 
+        <li>
+           Access etcd service with etcd.port. etcd.address and etcd.port together generates the valid address to monitor etcd. etcd preferentially acquires valid address from environment variable ETCD_ADDRESS when Milvus is booted.
+         </li>
+      </details>
+    </td>     
+    <td>2379</td>
+  </tr>
+  <tr>     
+    <td>etcd.rootPath</td>
+    <td>
+      <details>
+       <summary>Root of key prefix to etcd</summary>
+        <li>
+           Milvus stores data in etcd with this root key prefix.
+        </li> 
+        <li>
+           Be careful with changing this configuration if you have used Milvus for a period of time. Changes to this configuration will affect your access to old data.
+         </li>
+        <li>
+           We recommend changing this configuration before using Milvus for the first time.
+        </li> 
+        <li>
+           Set an easy-to-identify root key prefix for Milvus if etcd already exists. We recommend setting it as "milvus-root".
+         </li>
+      </details>
+    </td>     
+    <td>"by-dev"</td>
+  </tr>
+  <tr>     
+    <td>minio.address</td>
+    <td>
+      <details>
+       <summary>IP address of MinIO</summary>
+        <li>
+           Environment variable: MINIO_ADDRESS
+        </li> 
+        <li>
+           Access MinIO service with minio.address. minio.address and minio.port together generates the valid address to MinIO. MinIO preferentially acquires the valid address from the environment variable MINIO_ADDRESS when Milvus is booted.
+         </li>
+        <li>
+           Default value applies when MinIO and Milvus are running on the same network.
+        </li> 
+        <li>
+           Milvus 2.0 uses non-secure mode to access MinIO. Upcoming Milvus versions will support secure access to MinIO.
+         </li>
+      </details>
+    </td>     
+    <td>localhost</td>
+  </tr>
+  <tr>     
+    <td>minio.port</td>
+    <td>
+      <details>
+       <summary>The port of MinIO</summary>
+        <li>
+           Environment variable: MINIO_ADDRESS
+        </li> 
+        <li>
+           Access the MinIO service with minio.port. minio.address and minio.port together generates the valid address to MinIO. MinIO preferentially acquires the valid address from the environment variable MINIO_ADDRESS when Milvus is booted.
+         </li>
+      </details>
+    </td>     
+    <td>9000</td>
+  </tr>
+  <tr>     
+    <td>minio.accessKeyID</td>
+    <td>
+      <details>
+       <summary>MinIO key ID for authorized user access</summary>
+        <li>
+           Environment variable: MINIO_ACCESS_KEY
+        </li> 
+        <li>
+           Access key ID that MinIO issued to authorized users. minio.accessKeyID and minio.secretAccessKey together is used for identity authentication to access the MinIO service.
+         </li>
+        <li>
+           This configuration must be set identical to the environment variable MINIO_ACCESS_KEY, which is necessary for booting MinIO. The default value applies to the MinIO service that booted with the default docker-compose.yml provided by Milvus.
+        </li>
+      </details>
+    </td>     
+    <td>minioadmin</td>
+  </tr>
+  <tr>     
+    <td>minio.secretAccessKey</td>
+    <td>
+      <details>
+       <summary>MinIO encryption string</summary>
+        <li>
+           Environment variable: MINIO_SECRET_KEY
+        </li> 
+        <li>
+           Secret key used to encrypt the signature string and verify the signature string on server. It must be kept strictly confidential and accessible only to the MinIO server and users.
+         </li>
+        <li>
+           This configuration must be set identical to the environment variable MINIO_SECRET_KEY, which is necessary for booting MinIO. The default value applies to the MinIO service booted with the default docker-compose.yml provided by Milvus.
+        </li>
+      </details>
+    </td>     
+    <td>minioadmin</td>
+  </tr>
+  <tr>     
+    <td>minio.useSSL</td>
+    <td>
+      <details>
+       <summary>Enable SSL protocol for MinIO</summary>
+        <li>
+           Setting this parameter as true refers to accessing MinIO via high-security HTTPS protocol. Setting this parameter as false refers to accessing MinIO via less secure HTTP protocol.
+        </li> 
+        <li>
+           Milvus 2.0 does not support secure access to the MinIO service. Upcoming Milvus versions will support secure access to the MinIO service.
+         </li>
+      </details>
+    </td>     
+    <td>false</td>
+  </tr>
+  <tr>     
+    <td>pulsar.address</td>
+    <td>
+      <details>
+       <summary>IP address of Pulsar</summary>
+        <li>
+           Environment variable: PULSAR_ADDRESS
+        </li> 
+        <li>
+           Access Pulsar service with pulsar.address. pulsar.address and pulsar.port together generates the valid address to Pulsar. Pulsar preferentially acquires the valid address from the environment variable PULSAR_ADDRESS when Milvus is booted.
+         </li>
+        <li>
+           The default value applies when Pulsar and Milvus are running on the same network.
+        </li>
+      </details>
+    </td>     
+    <td>localhost</td>
+  </tr>
+  <tr>     
+    <td>pulsar.port</td>
+    <td>
+      <details>
+       <summary>Port of Pulsar</summary>
+        <li>
+           Environment variable: PULSAR_ADDRESS
+        </li> 
+        <li>
+           Access Pulsar service with pulsar.port. pulsar.address and pulsar.port together generates the valid address to Pulsar. Pulsar preferentially acquires the valid address from the environment variable PULSAR_ADDRESS when Milvus is booted.
+         </li>
+      </details>
+    </td>     
+    <td>6650</td>
+  </tr>
+</table>
 
 ### Log configurations
 
