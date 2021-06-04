@@ -14,7 +14,7 @@ This page lists common issues that may occur when running Milvus, as well as pos
   Boot errors are usually fatal. Run the following command to view error details:
 
   ```
-  $ docker logs <milvus container id>
+  $ docker logs <your milvus container id>
   ```
 
 <a href="#runtime_issues"></a>

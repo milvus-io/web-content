@@ -82,7 +82,7 @@ Entity ID 必须是非负的 64 位整型。
 
 #### Milvus 中单次插入数据有上限吗？
 
-因 gRPC 限制，单次插入数据不能超过 1024MB。
+因 gRPC 限制，单次插入数据不能超过 1024 MB。
 
  
 
@@ -96,19 +96,19 @@ Entity ID 必须是非负的 64 位整型。
 
 不会。查询前需先保证数据已加载到内存。
 
-- 如果明确知道当前数据所在 partition，可直接调用 load_partition() 方法加载指定 partition 的数据，然后调用 search() 方法并指定该 partition。
-- 如果不确定数据所在 partition，那么在调用 search() 方法前需先调用 load_collection() 方法。
+- 如果明确知道当前数据所在 partition，可直接调用 `load_partition()` 方法加载指定 partition 的数据，然后调用 `search()` 方法并指定该 partition。
+- 如果不确定数据所在 partition，那么在调用 `search()` 方法前需先调用 `load_collection()` 方法。
 - 如果未在查询前加载 collection 或 partition 数据，Milvus 会报错。
 
 #### Milvus 支持在同一 collection 的同一字段上创建多个不同索引吗？
 
-支持。Milvus 支持在 collection 中的同一字段上创建多个索引，但必须给每个索引指定 collection 内唯一的索引名。如果出现索引重名的情况，后建的索引会覆盖之前构建的同名索引。调用 load_index() 方法可加载指定索引 ，在该索引上进行查询操作。
+支持。Milvus 支持在 collection 中的同一字段上创建多个索引，但必须给每个索引指定 collection 内唯一的索引名。如果出现索引重名的情况，后建的索引会覆盖之前构建的同名索引。调用 `load_index()` 方法可加载指定索引 ，在该索引上进行查询操作。
 
  
 
 #### Milvus 支持新增向量后再建索引吗？
 
-支持。调用 create_index() 方法后，Milvus 会为后续新增向量自动构建索引的任务。每当新增数据量达到一个完整的 segment 时即触发这一任务，Milvus 为新插入的向量构建索引。
+支持。调用 `create_index()` 方法后，Milvus 会为后续新增向量自动构建索引的任务。每当新增数据量达到一个完整的 segment 时即触发这一任务，Milvus 为新插入的向量构建索引。
 
 新增向量的索引文件与前期构建的索引文件相互独立。
 
@@ -122,11 +122,11 @@ Entity ID 必须是非负的 64 位整型。
 
 #### Milvus 中 FLAT 索引和 IVF_FLAT 索引的原理比较？
 
-IVF_FLAT 索引将向量空间分成 nlist 个聚类单元。假设以默认值 nlist = 16,384 搜索，Milvus 会先比较这 16,384 个单元的中心与目标向量之间的距离，得出最近的 nprobe 个单元，接着比较这些单元内所有向量距离，得到最接近的向量。
+IVF_FLAT 索引将向量空间分成 `nlist` 个聚类单元。假设以默认值 `nlist` = 16,384 搜索，Milvus 会先比较这 16384 个单元的中心与目标向量之间的距离，得出最近的 `nprobe` 个单元，接着比较这些单元内所有向量距离，得到最接近的向量。
 
 FLAT 则计算每条向量和目标向量之间的距离。
 
-当向量总条数约等于 nlist 时，两者的计算量相当，无明显性能差距。然而，随着向量条数达到 nlist 的 2 倍、3 倍、n 倍之后，IVF_FLAT 的性能优势就越来越突出。
+当向量总条数约等于 `nlist` 时，两者的计算量相当，无明显性能差距。然而，随着向量条数达到 `nlist` 的 2 倍、3 倍、n 倍之后，IVF_FLAT 的性能优势就越来越突出。
 
 可参阅 [如何选择索引类型](https://milvus.io/cn/blogs/2019-12-03-select-index.md)。
 
@@ -134,7 +134,7 @@ FLAT 则计算每条向量和目标向量之间的距离。
 
 #### Milvus 的数据落盘逻辑是怎样的？
 
-新增数据写入消息队列后，Milvus 即返回插入成功，表示当前插入操作已经结束，但是此时数据并未落盘。Milvus 系统的 data node 负责将消息队列中的数据以增量日志的方式写入持久化存储；如果调用 flush() 方法，也会迫使 data node 立刻将当前消息队列的所有数据写入持久化存储。
+新增数据写入消息队列后，Milvus 即返回插入成功，表示当前插入操作已经结束，但是此时数据并未落盘。Milvus 系统的 data node 负责将消息队列中的数据以增量日志的方式写入持久化存储；如果调用 `flush()` 方法，也会迫使 data node 立刻将当前消息队列的所有数据写入持久化存储。
 
  
 
@@ -154,23 +154,23 @@ FLAT 则计算每条向量和目标向量之间的距离。
 
 #### Milvus 对 collection 和 partition 的总数有限制吗？
 
-Milvus 对 collection 数量没有限制，但每个 collection 内的 partition 数量不能超过参数 master.maxPartitionNum 所设定的值。
+Milvus 对 collection 数量没有限制，但每个 collection 内的 partition 数量不能超过参数 `master.maxPartitionNum` 所设定的值。
 
  
 
-#### 为什么搜索 topk 条向量，但召回结果不足 k 条向量？
+#### 为什么搜索 `topk` 条向量，但召回结果不足 k 条向量？
 
-在 Milvus 支持的索引类型中，IVF_FLAT 和 IVF_SQ8 是基于 k-means 空间划分的分单元搜索算法。空间被分为 nlist 个单元，导入的向量被分配存储在基于 nlist 划分的文件结构中。Milvus 计算出距离最近的 nprobe 个单元，比较目标向量与选定单元中所有向量之间的距离，以返回最终结果。
+在 Milvus 支持的索引类型中，IVF_FLAT 和 IVF_SQ8 是基于 k-means 空间划分的分单元搜索算法。空间被分为 `nlist` 个单元，导入的向量被分配存储在基于 `nlist` 划分的文件结构中。Milvus 计算出距离最近的 `nprobe` 个单元，比较目标向量与选定单元中所有向量之间的距离，以返回最终结果。
 
-如果 nlist 和 topk 比较大，而 nprobe 又足够小，就有可能出现 nprobe 个单元中的所有向量总数小于 k 的情况，导致返回结果不足 k 条向量。
+如果 `nlist` 和 `topk` 比较大，而 `nprobe` 又足够小，就有可能出现 `nprobe` 个单元中的所有向量总数小于 k 的情况，导致返回结果不足 k 条向量。
 
-想要避免这种情况，可以尝试将 nprobe 设置为更大值，或者把 nlist 和 k 设置为更小值。
+想要避免这种情况，可以尝试将 `nprobe` 设置为更大值，或者把 `nlist` 和 `topk` 设置为更小值。
 
-详见 索引类型。
+详见 [索引类型]()。
 
 #### Milvus 支持的向量维度的最大值是多少？
 
-Milvus 最多支持 32,768 维向量。
+Milvus 最多支持 32768 维向量。
 
 #### 仍有问题没有得到解答？
 

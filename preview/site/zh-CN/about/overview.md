@@ -77,7 +77,7 @@ Milvus 项目在 GitHub 上获星超 6,000，拥有逾 1,000 家企业用户，�
 
 ## 加入开发者社区
 
-如果你有任何建议、意见或问题，欢迎加入 Milvus 的 [Slack](https://join.slack.com/t/milvusio/shared_invite/zt-e0u4qu3k-bI2GDNys3ZqX1YCJ9OM~GQ) 社区与我们的工程师团队交流，或者你也可以通过 [常见问题](https://milvus.io/cn/docs/v1.1.0/performance_faq.md) 页面提交相关问题。
+如果你有任何建议、意见或问题，欢迎加入 Milvus 的 [Slack](https://join.slack.com/t/milvusio/shared_invite/zt-e0u4qu3k-bI2GDNys3ZqX1YCJ9OM~GQ) 社区与我们的工程师团队交流，或者你也可以访问 [常见问题](https://milvus.io/cn/docs/v1.1.0/performance_faq.md) 页面查看相关问题。
 
 订阅 Milvus 邮件：
 

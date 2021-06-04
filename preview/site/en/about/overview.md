@@ -76,7 +76,7 @@ With over 1,000 enterprise users, 5,000+ stars on GitHub, and an active open-sou
 
 ## Join Our Community
 
-Join the Milvus community on [Slack](https://join.slack.com/t/milvusio/shared_invite/zt-e0u4qu3k-bI2GDNys3ZqX1YCJ9OM~GQ) to share your suggestions, advice, and questions with our engineering team. You can also submit questions to our [FAQ page](https://milvus.io/docs/v1.1.0/performance_faq.md).
+Join the Milvus community on [Slack](https://join.slack.com/t/milvusio/shared_invite/zt-e0u4qu3k-bI2GDNys3ZqX1YCJ9OM~GQ) to share your suggestions, advice, and questions with our engineering team. You can also check out our [FAQ page](https://milvus.io/docs/v1.1.0/performance_faq.md) to find out solutions or answers to your issues or questions.
 
 Subscribe to Milvus mailing lists:
 

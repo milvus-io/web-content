@@ -13,7 +13,7 @@ title: Operational FAQ
 
 如果无法从 Docker Hub 拉取镜像，可以尝试添加其它的镜像源。
 
-中国大陆用户可以在文件 **/etc/docker/daemon.json** 中的 registry-mirrors 组添加国内镜像源地址 "https://registry.docker-cn.com" 。
+中国大陆用户可以在文件 **/etc/docker/daemon.json** 中的 `registry-mirrors` 组添加国内镜像源地址 `"https://registry.docker-cn.com"` 。
 
 ```
 {
@@ -31,9 +31,9 @@ title: Operational FAQ
 
 对于 FLAT 索引，Milvus 会在 collection 内做全量搜索，召回率为 100%。
 
-对于 IVF 索引，nprobe 参数决定了搜索范围——nprobe 越大，搜索的数据比例越高，召回率也就越高，但查询性能会相应降低。
+对于 IVF 索引，`nprobe` 参数决定了搜索范围——`nprobe` 越大，搜索的数据比例越高，召回率也就越高，但查询性能会相应降低。
 
-对于 HNSW 索引，ef 参数决定了导航图搜索的广度——ef 越大，图上扫描到的结点越多，召回率也就越高，但查询性能会相应降低。
+对于 HNSW 索引，`ef` 参数决定了导航图搜索的广度——`ef` 越大，图上扫描到的结点越多，召回率也就越高，但查询性能会相应降低。
 
 详见 [Milvus 索引类型](https://www.zilliz.com/blog/Accelerating-Similarity-Search-on-Really-Big-Data-with-Vector-Indexing)。
 
@@ -43,7 +43,7 @@ Milvus v2.0 暂不支持运行时动态修改配置文件。配置文件更新�
 
 #### 如何得知我的 Milvus 已经成功启动？
 
-如果通过 Docker Compose 启动 Milvus 服务，可运行 docker ps 命令观察运行中的 Docker 容器数量，以此判断 Milvus 服务是否已经启动。
+如果通过 Docker Compose 启动 Milvus 服务，可运行 `docker ps` 命令观察运行中的 Docker 容器数量，以此判断 Milvus 服务是否已经启动。
 
 - 对于单机版 Milvus ，应至少有三个 Docker 容器正在运行，其中一个是 Milvus 服务，其余两个是 etcd 管理和存储服务。详见 [安装单机版 Milvus]()。
 - 对于分布式 Milvus ，应至少有 12 个 Docker 容器正在运行，其中 9 个是 Milvus 服务，其余三个是基础服务。详见 [安装分布式 Milvus]()。
@@ -56,11 +56,27 @@ Docker 镜像内部的日志文件默认使用 UTC 时间。因此，如果主�
 
 #### 如何确认我的 CPU 支持 Milvus？
 
-[fragment] 详见 [CPU 对 SIMD 指令集的支持]()。
+Milvus 在构建索引和向量查询时依赖于 CPU 对 SIMD (Single Instruction Multiple Data) 扩展指令集的支持。请确认运行 Milvus 的 CPU 至少支持以下 SIMD 指令集中的一种：
 
-#### 为什么 Milvus 在启动时返回 Illegal instruction？
+- SSE4.2
 
-要保证 Milvus 的正常运行，你的 CPU 须支持以下至少一种 SIMD 指令集种：SSE4.2、AVX、AVX2 和 AVX512。如果 Milvus 在启动时返回 Illegal instruction ，说明当前 CPU 不支持以上任何一种指令集。
+- AVX
+
+- AVX2
+
+- AVX512
+
+可以使用 lscpu 命令来判断 CPU 是否支持特定 SIMD 指令集
+
+
+```
+$ lscpu | grep -e sse4_2 -e avx -e avx2 -e avx512
+```
+ 详见 [CPU 对 SIMD 指令集的支持]()。
+
+#### 为什么 Milvus 在启动时返回 `Illegal instruction`？
+
+要保证 Milvus 的正常运行，你的 CPU 须支持以下至少一种 SIMD 指令集种：SSE4.2、AVX、AVX2 和 AVX512。如果 Milvus 在启动时返回 `Illegal instruction`，说明当前 CPU 不支持以上任何一种指令集。
 
 详见 [CPU 对 SIMD 指令集的支持]()。
 
@@ -79,10 +95,10 @@ Docker 镜像内部的日志文件默认使用 UTC 时间。因此，如果主�
 Milvus 可以通过 Docker 镜像的形式进行离线部署以单机版 Milvus 为例:
 
 1. 在有网的环境中拉取 MinIO、etcd 及 Milvus 的Docker 镜像；
-2. 运行 docker save 命令将各个镜像保存为 **.TAR** 文件；
-3. 将 .**TAR** 文件保存至本地；
-4. 运行 docker load 命令将该文件导入为镜像；
-5. 运行 docker-compose 命令启动 Milvus 服务。
+2. 运行 `docker save` 命令将各个镜像保存为 **.TAR** 文件；
+3. 将 **.TAR** 文件保存至本地；
+4. 运行 `docker load` 命令将该文件导入为镜像；
+5. 运行 `docker-compose` 命令启动 Milvus 服务。
 
 更多 Docker 相关内容，详见 [安装单机版 Milvus]()。
 
