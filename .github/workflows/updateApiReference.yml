@@ -120,9 +120,9 @@ jobs:
             echo "===miss tag name, create this dir==="
             sudo mkdir "./${{ github.event.inputs.tagName }}"
           fi
-          sudo rm -fr ../../../pymilvus-orm/docs/build/html/api.html
-          sudo cp ../../../pymilvus-orm/docs/build/html/*.html "./${{ github.event.inputs.tagName }}"
+          sudo rm -fr ../../../pymilvus-orm/docs/build/html/api/api.html
+          sudo cp -r ../../../pymilvus-orm/docs/build/html/api "./${{ github.event.inputs.tagName }}"
           git add .
           git commit -m "Update pymilvus-orm"
-          git push -f origin macos
+          git push -f origin master
           echo "=>Completed: Update pymilvus-orm doc repo."
