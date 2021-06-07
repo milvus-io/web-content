@@ -4,10 +4,10 @@ on:
   workflow_dispatch:
     inputs:
       tagName:
-        description: 'Tag name'
+        description: "Tag name"
         required: true
       repoName:
-        description: 'Repo name'
+        description: "Repo name"
         required: true
 
 jobs:
@@ -89,3 +89,40 @@ jobs:
           git commit -m "Update pymilvus"
           git push -f origin master
           echo "=>Completed: Update pymilvus doc repo."
+      - id: update_repo_pymilvus_orm
+        name: Update pymilvus-orm doc repo
+        if: ${{ github.event.inputs.repoName == 'pymilvus-orm' }}
+        run: |
+          sudo chmod -R 777 ${{ github.event.inputs.repoName }}
+          cd ${{ github.event.inputs.repoName }}
+          sudo apt update
+          sudo apt install python3
+          sudo apt install python3-pip
+          python3 --version
+          pip3 --version
+          # tmporarily fix pprint issue
+          pip3 install pprint -i https://pypi.doubanio.com/simple/ --trusted-host pypi.douban.com
+          pip3 install -r requirements.txt
+          cd docs
+          # tmporarily fix PBR_VERSION issue
+          export PBR_VERSION=1.2.3 
+          sudo apt install make
+          make html
+          cd ../../${{ github.event.repository.name }}/APIReference/pymilvus-orm
+          echo "Upcomming tag name: ${{ github.event.inputs.tagName }}"
+          echo "=>List all doc versions"
+          ls -l
+          if [ -d "./${{ github.event.inputs.tagName }}" ]
+          then
+            echo "===tag name exists, remove all under this dir==="
+            sudo rm -fr "./${{ github.event.inputs.tagName }}"
+          else
+            echo "===miss tag name, create this dir==="
+            sudo mkdir "./${{ github.event.inputs.tagName }}"
+          fi
+          sudo rm -fr ../../../pymilvus-orm/docs/build/html/api.html
+          sudo cp ../../../pymilvus-orm/docs/build/html/*.html "./${{ github.event.inputs.tagName }}"
+          git add .
+          git commit -m "Update pymilvus-orm"
+          git push -f origin macos
+          echo "=>Completed: Update pymilvus-orm doc repo."
