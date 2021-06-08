@@ -1,0 +1,1731 @@
+using module mode; GOMOD=/Users/czhen/Downloads/milvus-sdk-go-1.0.0/go.mod
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#375EAB">
+
+  <title>milvus - Go Documentation Server</title>
+
+<link type="text/css" rel="stylesheet" href="/lib/godoc/style.css">
+
+<script>window.initFuncs = [];</script>
+<script src="/lib/godoc/jquery.js" defer></script>
+
+
+
+<script>var goVersion = "go1.16.4";</script>
+<script src="/lib/godoc/godocs.js" defer></script>
+</head>
+<body>
+
+<div id='lowframe' style="position: fixed; bottom: 0; left: 0; height: 0; width: 100%; border-top: thin solid grey; background-color: white; overflow: auto;">
+...
+</div><!-- #lowframe -->
+
+<div id="topbar" class="wide"><div class="container">
+<div class="top-heading" id="heading-wide"><a href="/pkg/">Go Documentation Server</a></div>
+<div class="top-heading" id="heading-narrow"><a href="/pkg/">GoDoc</a></div>
+<a href="#" id="menu-button"><span id="menu-button-arrow">&#9661;</span></a>
+<form method="GET" action="/search">
+<div id="menu">
+
+<span class="search-box"><input type="search" id="search" name="q" placeholder="Search" aria-label="Search" required><button type="submit"><span><!-- magnifying glass: --><svg width="24" height="24" viewBox="0 0 24 24"><title>submit search</title><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/><path d="M0 0h24v24H0z" fill="none"/></svg></span></button></span>
+</div>
+</form>
+
+</div></div>
+
+
+
+<div id="page" class="wide">
+<div class="container">
+
+
+  <h1>
+    Package milvus
+    <span class="text-muted"></span>
+  </h1>
+
+
+
+
+
+
+
+<div id="nav"></div>
+
+
+<!--
+	Copyright 2009 The Go Authors. All rights reserved.
+	Use of this source code is governed by a BSD-style
+	license that can be found in the LICENSE file.
+-->
+<!--
+	Note: Static (i.e., not template-generated) href and id
+	attributes start with "pkg-" to make it impossible for
+	them to conflict with generated attributes (some of which
+	correspond to Go identifiers).
+-->
+
+	<script>
+	document.ANALYSIS_DATA = null;
+	document.CALLGRAPH = null;
+	</script>
+
+	
+		
+		<div id="short-nav">
+			<dl>
+			<dd><code>import "github.com/milvus-io/milvus-sdk-go/milvus"</code></dd>
+			</dl>
+			<dl>
+			<dd><a href="#pkg-overview" class="overviewLink">Overview</a></dd>
+			<dd><a href="#pkg-index" class="indexLink">Index</a></dd>
+			
+			
+				<dd><a href="#pkg-subdirectories">Subdirectories</a></dd>
+			
+			</dl>
+		</div>
+		<!-- The package's Name is printed as title by the top-level template -->
+		<div id="pkg-overview" class="toggleVisible">
+			<div class="collapsed">
+				<h2 class="toggleButton" title="Click to show Overview section">Overview ▹</h2>
+			</div>
+			<div class="expanded">
+				<h2 class="toggleButton" title="Click to hide Overview section">Overview ▾</h2>
+				<p>
+package milvus
+</p>
+<p>
+package milvus
+</p>
+<p>
+package milvus
+</p>
+
+				
+			</div>
+		</div>
+
+		<div id="pkg-index" class="toggleVisible">
+		<div class="collapsed">
+			<h2 class="toggleButton" title="Click to show Index section">Index ▹</h2>
+		</div>
+		<div class="expanded">
+			<h2 class="toggleButton" title="Click to hide Index section">Index ▾</h2>
+
+		<!-- Table of contents for API; must be named manual-nav to turn off auto nav. -->
+			<div id="manual-nav">
+			<dl>
+			
+			
+			
+			
+				
+				<dd><a href="#CollectionParam">type CollectionParam</a></dd>
+				
+				
+			
+				
+				<dd><a href="#ConnectParam">type ConnectParam</a></dd>
+				
+				
+			
+				
+				<dd><a href="#Entity">type Entity</a></dd>
+				
+				
+			
+				
+				<dd><a href="#ErrorCode">type ErrorCode</a></dd>
+				
+				
+			
+				
+				<dd><a href="#IndexParam">type IndexParam</a></dd>
+				
+				
+			
+				
+				<dd><a href="#IndexType">type IndexType</a></dd>
+				
+				
+			
+				
+				<dd><a href="#InsertParam">type InsertParam</a></dd>
+				
+				
+			
+				
+				<dd><a href="#ListIDInSegmentParam">type ListIDInSegmentParam</a></dd>
+				
+				
+			
+				
+				<dd><a href="#LoadCollectionParam">type LoadCollectionParam</a></dd>
+				
+				
+			
+				
+				<dd><a href="#MetricType">type MetricType</a></dd>
+				
+				
+			
+				
+				<dd><a href="#MilvusClient">type MilvusClient</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#NewMilvusClient">func NewMilvusClient(client MilvusGrpcClient) MilvusClient</a></dd>
+				
+				
+			
+				
+				<dd><a href="#MilvusGrpcClient">type MilvusGrpcClient</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#NewMilvusGrpcClient">func NewMilvusGrpcClient(client pb.MilvusServiceClient) MilvusGrpcClient</a></dd>
+				
+				
+			
+				
+				<dd><a href="#Milvusclient">type Milvusclient</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Milvusclient.Compact">func (client *Milvusclient) Compact(collectionName string) (Status, error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Milvusclient.Connect">func (client *Milvusclient) Connect(connectParam ConnectParam) error</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Milvusclient.CountEntities">func (client *Milvusclient) CountEntities(collectionName string) (int64, Status, error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Milvusclient.CreateCollection">func (client *Milvusclient) CreateCollection(collectionParam CollectionParam) (Status, error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Milvusclient.CreateIndex">func (client *Milvusclient) CreateIndex(indexParam *IndexParam) (Status, error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Milvusclient.CreatePartition">func (client *Milvusclient) CreatePartition(partitionParam PartitionParam) (Status, error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Milvusclient.DeleteEntityByID">func (client *Milvusclient) DeleteEntityByID(collectionName string, id_array []int64) (Status, error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Milvusclient.Disconnect">func (client *Milvusclient) Disconnect() error</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Milvusclient.DropCollection">func (client *Milvusclient) DropCollection(collectionName string) (Status, error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Milvusclient.DropIndex">func (client *Milvusclient) DropIndex(collectionName string) (Status, error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Milvusclient.DropPartition">func (client *Milvusclient) DropPartition(partitionParam PartitionParam) (Status, error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Milvusclient.Flush">func (client *Milvusclient) Flush(collectionNameArray []string) (Status, error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Milvusclient.GetClientVersion">func (client *Milvusclient) GetClientVersion() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Milvusclient.GetCollectionInfo">func (client *Milvusclient) GetCollectionInfo(collectionName string) (CollectionParam, Status, error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Milvusclient.GetCollectionStats">func (client *Milvusclient) GetCollectionStats(collectionName string) (string, Status, error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Milvusclient.GetConfig">func (client *Milvusclient) GetConfig(nodeName string) (string, Status, error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Milvusclient.GetEntityByID">func (client *Milvusclient) GetEntityByID(collectionName string, vector_id []int64) ([]Entity, Status, error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Milvusclient.GetIndexInfo">func (client *Milvusclient) GetIndexInfo(collectionName string) (IndexParam, Status, error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Milvusclient.HasCollection">func (client *Milvusclient) HasCollection(collectionName string) (bool, Status, error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Milvusclient.Insert">func (client *Milvusclient) Insert(insertParam *InsertParam) ([]int64, Status, error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Milvusclient.IsConnected">func (client *Milvusclient) IsConnected() bool</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Milvusclient.ListCollections">func (client *Milvusclient) ListCollections() ([]string, Status, error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Milvusclient.ListIDInSegment">func (client *Milvusclient) ListIDInSegment(listIDInSegmentParam ListIDInSegmentParam) ([]int64, Status, error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Milvusclient.ListPartitions">func (client *Milvusclient) ListPartitions(collectionName string) ([]PartitionParam, Status, error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Milvusclient.LoadCollection">func (client *Milvusclient) LoadCollection(param LoadCollectionParam) (Status, error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Milvusclient.Search">func (client *Milvusclient) Search(searchParam SearchParam) (TopkQueryResult, Status, error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Milvusclient.ServerStatus">func (client *Milvusclient) ServerStatus() (string, Status, error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Milvusclient.ServerVersion">func (client *Milvusclient) ServerVersion() (string, Status, error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Milvusclient.SetConfig">func (client *Milvusclient) SetConfig(nodeName string, value string) (Status, error)</a></dd>
+				
+			
+				
+				<dd><a href="#PartitionParam">type PartitionParam</a></dd>
+				
+				
+			
+				
+				<dd><a href="#PartitionStat">type PartitionStat</a></dd>
+				
+				
+			
+				
+				<dd><a href="#QueryResult">type QueryResult</a></dd>
+				
+				
+			
+				
+				<dd><a href="#Range">type Range</a></dd>
+				
+				
+			
+				
+				<dd><a href="#SearchParam">type SearchParam</a></dd>
+				
+				
+			
+				
+				<dd><a href="#SegmentStat">type SegmentStat</a></dd>
+				
+				
+			
+				
+				<dd><a href="#Status">type Status</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#NewStatus">func NewStatus(_status status) Status</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#NewStatus1">func NewStatus1(errorCode ErrorCode, state string) Status</a></dd>
+				
+				
+			
+				
+				<dd><a href="#TopkQueryResult">type TopkQueryResult</a></dd>
+				
+				
+			
+			
+			</dl>
+			</div><!-- #manual-nav -->
+
+		
+
+		
+			<h3>Package files</h3>
+			<p>
+			<span style="font-size:90%">
+			
+				<a href="/src/github.com/milvus-io/milvus-sdk-go/milvus/ClientProxy.go">ClientProxy.go</a>
+			
+				<a href="/src/github.com/milvus-io/milvus-sdk-go/milvus/MilvusClient.go">MilvusClient.go</a>
+			
+				<a href="/src/github.com/milvus-io/milvus-sdk-go/milvus/MilvusGrpcClient.go">MilvusGrpcClient.go</a>
+			
+				<a href="/src/github.com/milvus-io/milvus-sdk-go/milvus/Status.go">Status.go</a>
+			
+			</span>
+			</p>
+		
+		</div><!-- .expanded -->
+		</div><!-- #pkg-index -->
+
+		
+
+		
+		
+		
+		
+			
+			
+			<h2 id="CollectionParam">type <a href="/src/github.com/milvus-io/milvus-sdk-go/milvus/MilvusClient.go?s=2487:2782#L96">CollectionParam</a>
+				<a class="permalink" href="#CollectionParam">&#xb6;</a>
+				
+				
+			</h2>
+			<p>
+CollectionParam informations of a collection
+</p>
+
+			<pre>type CollectionParam struct {
+<span id="CollectionParam.CollectionName"></span>    <span class="comment">// CollectionName collection name</span>
+    CollectionName <a href="/pkg/builtin/#string">string</a>
+<span id="CollectionParam.Dimension"></span>    <span class="comment">// Dimension Entity dimension, must be a positive value</span>
+    Dimension <a href="/pkg/builtin/#int64">int64</a>
+<span id="CollectionParam.IndexFileSize"></span>    <span class="comment">// IndexFileSize Index file size, must be a positive value</span>
+    IndexFileSize <a href="/pkg/builtin/#int64">int64</a>
+<span id="CollectionParam.MetricType"></span>    <span class="comment">// MetricType Index metric type</span>
+    MetricType <a href="/pkg/builtin/#int64">int64</a>
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="ConnectParam">type <a href="/src/github.com/milvus-io/milvus-sdk-go/milvus/MilvusClient.go?s=1874:1986#L66">ConnectParam</a>
+				<a class="permalink" href="#ConnectParam">&#xb6;</a>
+				
+				
+			</h2>
+			<p>
+ConnectParam Parameters for connect
+</p>
+
+			<pre>type ConnectParam struct {
+<span id="ConnectParam.IPAddress"></span>    <span class="comment">// IPAddress Server IP address</span>
+    IPAddress <a href="/pkg/builtin/#string">string</a>
+<span id="ConnectParam.Port"></span>    <span class="comment">// Port Server port</span>
+    Port <a href="/pkg/builtin/#string">string</a>
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="Entity">type <a href="/src/github.com/milvus-io/milvus-sdk-go/milvus/MilvusClient.go?s=3896:3959#L133">Entity</a>
+				<a class="permalink" href="#Entity">&#xb6;</a>
+				
+				
+			</h2>
+			<p>
+Entity record typy
+</p>
+
+			<pre>type Entity struct {
+<span id="Entity.FloatData"></span>    FloatData  []<a href="/pkg/builtin/#float32">float32</a>
+<span id="Entity.BinaryData"></span>    BinaryData []<a href="/pkg/builtin/#byte">byte</a>
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="ErrorCode">type <a href="/src/github.com/milvus-io/milvus-sdk-go/milvus/Status.go?s=849:869#L13">ErrorCode</a>
+				<a class="permalink" href="#ErrorCode">&#xb6;</a>
+				
+				
+			</h2>
+			<p>
+ErrorCode error code
+</p>
+
+			<pre>type ErrorCode <a href="/pkg/builtin/#int64">int64</a></pre>
+
+			
+				
+				<pre>const (
+    <span class="comment">// OK status</span>
+    <span id="OK">OK</span> <a href="#ErrorCode">ErrorCode</a> = 0
+
+    <span class="comment">// UnKnownError unknow error</span>
+    <span id="UnKnownError">UnKnownError</span> <a href="#ErrorCode">ErrorCode</a> = 1
+    <span class="comment">// NotSupported not supported operation</span>
+    <span id="NotSupported">NotSupported</span> <a href="#ErrorCode">ErrorCode</a> = 2
+    <span class="comment">// NotConnected not connected</span>
+    <span id="NotConnected">NotConnected</span> <a href="#ErrorCode">ErrorCode</a> = 3
+
+    <span class="comment">// RPCFailed rpc failed</span>
+    <span id="RPCFailed">RPCFailed</span> <a href="#ErrorCode">ErrorCode</a> = 4
+    <span class="comment">// ServerFailed server failed</span>
+    <span id="ServerFailed">ServerFailed</span> <a href="#ErrorCode">ErrorCode</a> = 5
+)</pre>
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="IndexParam">type <a href="/src/github.com/milvus-io/milvus-sdk-go/milvus/MilvusClient.go?s=2815:3872#L108">IndexParam</a>
+				<a class="permalink" href="#IndexParam">&#xb6;</a>
+				
+				
+			</h2>
+			<p>
+IndexParam index parameters
+</p>
+
+			<pre>type IndexParam struct {
+<span id="IndexParam.CollectionName"></span>    <span class="comment">// CollectionName collection name for create index</span>
+    CollectionName <a href="/pkg/builtin/#string">string</a>
+<span id="IndexParam.IndexType"></span>    <span class="comment">// IndexType create index type</span>
+    IndexType <a href="#IndexType">IndexType</a>
+<span id="IndexParam.ExtraParams"></span>    <span class="comment">// ExtraParams extra parameters</span>
+    <span class="comment">// 	Note: extra_params is extra parameters list, it must be json format</span>
+    <span class="comment">//        For different index type, parameter list is different accordingly, for example:</span>
+    <span class="comment">//        FLAT/IVFLAT/SQ8:  &#34;{nlist: &#39;16384&#39;}&#34;</span>
+    <span class="comment">//            ///&lt; nlist range:[1, 999999]</span>
+    <span class="comment">//        IVFPQ:  &#34;{nlist: &#39;16384&#39;, m: &#34;12&#34;}&#34;</span>
+    <span class="comment">//            ///&lt; nlist range:[1, 999999]</span>
+    <span class="comment">//            ///&lt; m is decided by dim and have a couple of results.</span>
+    <span class="comment">//        NSG:  &#34;{search_length: &#39;45&#39;, out_degree:&#39;50&#39;, candidate_pool_size:&#39;300&#39;, &#34;knng&#34;:&#39;100&#39;}&#34;</span>
+    <span class="comment">//            ///&lt; search_length range:[10, 300]</span>
+    <span class="comment">//            ///&lt; out_degree range:[5, 300]</span>
+    <span class="comment">//            ///&lt; candidate_pool_size range:[50, 1000]</span>
+    <span class="comment">//            ///&lt; knng range:[5, 300]</span>
+    <span class="comment">//        HNSW  &#34;{M: &#39;16&#39;, efConstruction:&#39;500&#39;}&#34;</span>
+    <span class="comment">//            ///&lt; M range:[5, 48]</span>
+    <span class="comment">//            ///&lt; efConstruction range:[topk, 4096]</span>
+    ExtraParams <a href="/pkg/builtin/#string">string</a>
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="IndexType">type <a href="/src/github.com/milvus-io/milvus-sdk-go/milvus/MilvusClient.go?s=963:983#L21">IndexType</a>
+				<a class="permalink" href="#IndexType">&#xb6;</a>
+				
+				
+			</h2>
+			<p>
+IndexType index type
+</p>
+
+			<pre>type IndexType <a href="/pkg/builtin/#int64">int64</a></pre>
+
+			
+				
+				<pre>const (
+    <span class="comment">// INVALID invald index type</span>
+    <span id="INVALID">INVALID</span> <a href="#IndexType">IndexType</a> = 0
+    <span class="comment">// FLAT flat</span>
+    <span id="FLAT">FLAT</span> <a href="#IndexType">IndexType</a> = 1
+    <span class="comment">// IVFFLAT ivfflat</span>
+    <span id="IVFFLAT">IVFFLAT</span> <a href="#IndexType">IndexType</a> = 2
+    <span class="comment">// IVFSQ8 ivfsq8</span>
+    <span id="IVFSQ8">IVFSQ8</span> <a href="#IndexType">IndexType</a> = 3
+    <span class="comment">//RNSG rnsg</span>
+    <span id="RNSG">RNSG</span> <a href="#IndexType">IndexType</a> = 4
+    <span class="comment">// IVFSQ8H ivfsq8h</span>
+    <span id="IVFSQ8H">IVFSQ8H</span> <a href="#IndexType">IndexType</a> = 5
+    <span class="comment">// IVFPQ ivfpq</span>
+    <span id="IVFPQ">IVFPQ</span> <a href="#IndexType">IndexType</a> = 6
+    <span class="comment">// SPTAGKDT sptagkdt</span>
+    <span id="SPTAGKDT">SPTAGKDT</span> <a href="#IndexType">IndexType</a> = 7
+    <span class="comment">// SPTAGBKT sptagbkt</span>
+    <span id="SPTAGBKT">SPTAGBKT</span> <a href="#IndexType">IndexType</a> = 8
+    <span class="comment">// HNSW hnsw</span>
+    <span id="HNSW">HNSW</span> <a href="#IndexType">IndexType</a> = 11
+    <span class="comment">// ANNOY annoy</span>
+    <span id="ANNOY">ANNOY</span> <a href="#IndexType">IndexType</a> = 12
+)</pre>
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="InsertParam">type <a href="/src/github.com/milvus-io/milvus-sdk-go/milvus/MilvusClient.go?s=3994:4226#L139">InsertParam</a>
+				<a class="permalink" href="#InsertParam">&#xb6;</a>
+				
+				
+			</h2>
+			<p>
+InsertParam insert parameters
+</p>
+
+			<pre>type InsertParam struct {
+<span id="InsertParam.CollectionName"></span>    <span class="comment">// CollectionName collection name</span>
+    CollectionName <a href="/pkg/builtin/#string">string</a>
+<span id="InsertParam.PartitionTag"></span>    <span class="comment">// PartitionTag partition tag</span>
+    PartitionTag <a href="/pkg/builtin/#string">string</a>
+<span id="InsertParam.RecordArray"></span>    <span class="comment">// RecordArray raw entities array</span>
+    RecordArray []<a href="#Entity">Entity</a>
+<span id="InsertParam.IDArray"></span>    <span class="comment">// IDArray id array</span>
+    IDArray []<a href="/pkg/builtin/#int64">int64</a>
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="ListIDInSegmentParam">type <a href="/src/github.com/milvus-io/milvus-sdk-go/milvus/MilvusClient.go?s=5608:5690#L202">ListIDInSegmentParam</a>
+				<a class="permalink" href="#ListIDInSegmentParam">&#xb6;</a>
+				
+				
+			</h2>
+			
+			<pre>type ListIDInSegmentParam struct {
+<span id="ListIDInSegmentParam.CollectionName"></span>    CollectionName <a href="/pkg/builtin/#string">string</a>
+<span id="ListIDInSegmentParam.SegmentName"></span>    SegmentName    <a href="/pkg/builtin/#string">string</a>
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="LoadCollectionParam">type <a href="/src/github.com/milvus-io/milvus-sdk-go/milvus/MilvusClient.go?s=5692:5779#L207">LoadCollectionParam</a>
+				<a class="permalink" href="#LoadCollectionParam">&#xb6;</a>
+				
+				
+			</h2>
+			
+			<pre>type LoadCollectionParam struct {
+<span id="LoadCollectionParam.CollectionName"></span>    CollectionName   <a href="/pkg/builtin/#string">string</a>
+<span id="LoadCollectionParam.PartitionTagList"></span>    PartitionTagList []<a href="/pkg/builtin/#string">string</a>
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="MetricType">type <a href="/src/github.com/milvus-io/milvus-sdk-go/milvus/MilvusClient.go?s=916:937#L18">MetricType</a>
+				<a class="permalink" href="#MetricType">&#xb6;</a>
+				
+				
+			</h2>
+			<p>
+MetricType metric type
+</p>
+
+			<pre>type MetricType <a href="/pkg/builtin/#int64">int64</a></pre>
+
+			
+				
+				<pre>const (
+    <span class="comment">// L2 euclidean distance</span>
+    <span id="L2">L2</span> <a href="#MetricType">MetricType</a> = 1
+    <span class="comment">// IP inner product</span>
+    <span id="IP">IP</span> <a href="#MetricType">MetricType</a> = 2
+    <span class="comment">// HAMMING hamming distance</span>
+    <span id="HAMMING">HAMMING</span> <a href="#MetricType">MetricType</a> = 3
+    <span class="comment">// JACCARD jaccard distance</span>
+    <span id="JACCARD">JACCARD</span> <a href="#MetricType">MetricType</a> = 4
+    <span class="comment">// TANIMOTO tanimoto distance</span>
+    <span id="TANIMOTO">TANIMOTO</span> <a href="#MetricType">MetricType</a> = 5
+    <span class="comment">// SUBSTRUCTURE substructure distance</span>
+    <span id="SUBSTRUCTURE">SUBSTRUCTURE</span> <a href="#MetricType">MetricType</a> = 6
+    <span class="comment">// SUPERSTRUCTURE superstructure</span>
+    <span id="SUPERSTRUCTURE">SUPERSTRUCTURE</span> <a href="#MetricType">MetricType</a> = 7
+)</pre>
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="MilvusClient">type <a href="/src/github.com/milvus-io/milvus-sdk-go/milvus/MilvusClient.go?s=5816:11086#L213">MilvusClient</a>
+				<a class="permalink" href="#MilvusClient">&#xb6;</a>
+				
+				
+			</h2>
+			<p>
+MilvusClient SDK main interface
+</p>
+
+			<pre>type MilvusClient interface {
+
+    <span class="comment">// GetClientVersion method</span>
+    <span class="comment">// This method is used to give the client version.</span>
+    <span class="comment">// return Client version.</span>
+    GetClientVersion() <a href="/pkg/builtin/#string">string</a>
+
+    <span class="comment">// Connect method</span>
+    <span class="comment">// Create a connection instance and return it&#39;s shared pointer</span>
+    <span class="comment">// return indicate if connect is successful</span>
+    Connect(connectParam <a href="#ConnectParam">ConnectParam</a>) <a href="/pkg/builtin/#error">error</a>
+
+    <span class="comment">// IsConnected method</span>
+    <span class="comment">// This method is used to test whether server is connected</span>
+    <span class="comment">// return indicate if connection status</span>
+    IsConnected() <a href="/pkg/builtin/#bool">bool</a>
+
+    <span class="comment">// Disconnect method</span>
+    <span class="comment">// This method is used to disconnect server</span>
+    <span class="comment">// return indicate if disconnect is successful</span>
+    Disconnect() <a href="/pkg/builtin/#error">error</a>
+
+    <span class="comment">// CreateCollection method</span>
+    <span class="comment">// This method is used to create collection</span>
+    <span class="comment">// param collectionParam is used to provide collection information to be created.</span>
+    <span class="comment">// return indicate if collection is created successfully</span>
+    CreateCollection(collectionParam <a href="#CollectionParam">CollectionParam</a>) (<a href="#Status">Status</a>, <a href="/pkg/builtin/#error">error</a>)
+
+    <span class="comment">// HasCollection method</span>
+    <span class="comment">// This method is used to create collection.</span>
+    <span class="comment">//return indicate if collection is exist</span>
+    HasCollection(collectionName <a href="/pkg/builtin/#string">string</a>) (<a href="/pkg/builtin/#bool">bool</a>, <a href="#Status">Status</a>, <a href="/pkg/builtin/#error">error</a>)
+
+    <span class="comment">// DropCollection method</span>
+    <span class="comment">// This method is used to drop collection(and its partitions).</span>
+    <span class="comment">// return indicate if collection is drop successfully.</span>
+    DropCollection(collectionName <a href="/pkg/builtin/#string">string</a>) (<a href="#Status">Status</a>, <a href="/pkg/builtin/#error">error</a>)
+
+    <span class="comment">// CreateIndex method</span>
+    <span class="comment">// This method is used to create index for whole collection(and its partitions).</span>
+    <span class="comment">// return indicate if build index successfully.</span>
+    CreateIndex(indexParam *<a href="#IndexParam">IndexParam</a>) (<a href="#Status">Status</a>, <a href="/pkg/builtin/#error">error</a>)
+
+    <span class="comment">// Insert method</span>
+    <span class="comment">// This method is used to query entity in collection.</span>
+    <span class="comment">// return indicate if insert is successful.</span>
+    Insert(insertParam *<a href="#InsertParam">InsertParam</a>) ([]<a href="/pkg/builtin/#int64">int64</a>, <a href="#Status">Status</a>, <a href="/pkg/builtin/#error">error</a>)
+
+    <span class="comment">// GetEntityByID method</span>
+    <span class="comment">// This method is used to get entity by entity id</span>
+    <span class="comment">// return entity data</span>
+    GetEntityByID(collectionName <a href="/pkg/builtin/#string">string</a>, entity_id []<a href="/pkg/builtin/#int64">int64</a>) ([]<a href="#Entity">Entity</a>, <a href="#Status">Status</a>, <a href="/pkg/builtin/#error">error</a>)
+
+    <span class="comment">// ListIDInSegment method</span>
+    <span class="comment">// This method is used to get entity ids</span>
+    <span class="comment">// return entity ids</span>
+    ListIDInSegment(listIDInSegmentParam <a href="#ListIDInSegmentParam">ListIDInSegmentParam</a>) ([]<a href="/pkg/builtin/#int64">int64</a>, <a href="#Status">Status</a>, <a href="/pkg/builtin/#error">error</a>)
+
+    <span class="comment">// Search method</span>
+    <span class="comment">// This method is used to query entity in collection.</span>
+    <span class="comment">// return indicate if query is successful.</span>
+    Search(searchParam <a href="#SearchParam">SearchParam</a>) (<a href="#TopkQueryResult">TopkQueryResult</a>, <a href="#Status">Status</a>, <a href="/pkg/builtin/#error">error</a>)
+
+    <span class="comment">// DeleteEntityByID method</span>
+    <span class="comment">// This method is used to delete entities by ids</span>
+    <span class="comment">// return indicate if delete is successful</span>
+    DeleteEntityByID(collectionName <a href="/pkg/builtin/#string">string</a>, id_array []<a href="/pkg/builtin/#int64">int64</a>) (<a href="#Status">Status</a>, <a href="/pkg/builtin/#error">error</a>)
+
+    <span class="comment">// GetCollectionInfo method</span>
+    <span class="comment">// This method is used to show collection information.</span>
+    <span class="comment">//return indicate if this operation is successful.</span>
+    GetCollectionInfo(collectionName <a href="/pkg/builtin/#string">string</a>) (<a href="#CollectionParam">CollectionParam</a>, <a href="#Status">Status</a>, <a href="/pkg/builtin/#error">error</a>)
+
+    <span class="comment">// CountEntities method</span>
+    <span class="comment">// This method is used to get collection row count.</span>
+    <span class="comment">// return indicate if this operation is successful.</span>
+    CountEntities(collectionName <a href="/pkg/builtin/#string">string</a>) (<a href="/pkg/builtin/#int64">int64</a>, <a href="#Status">Status</a>, <a href="/pkg/builtin/#error">error</a>)
+
+    <span class="comment">// ListCollections method</span>
+    <span class="comment">// This method is used to list all collections.</span>
+    <span class="comment">// return indicate if this operation is successful.</span>
+    ListCollections() ([]<a href="/pkg/builtin/#string">string</a>, <a href="#Status">Status</a>, <a href="/pkg/builtin/#error">error</a>)
+
+    <span class="comment">// GetCollectionStats method</span>
+    <span class="comment">// This method is used to get collection informations</span>
+    <span class="comment">// return collection informations</span>
+    GetCollectionStats(collectionName <a href="/pkg/builtin/#string">string</a>) (<a href="/pkg/builtin/#string">string</a>, <a href="#Status">Status</a>, <a href="/pkg/builtin/#error">error</a>)
+
+    <span class="comment">// ServerVersion method</span>
+    <span class="comment">// This method is used to give the server version.</span>
+    <span class="comment">// return server version.</span>
+    ServerVersion() (<a href="/pkg/builtin/#string">string</a>, <a href="#Status">Status</a>, <a href="/pkg/builtin/#error">error</a>)
+
+    <span class="comment">// ServerStatus method</span>
+    <span class="comment">// This method is used to give the server status.</span>
+    <span class="comment">// return server status.</span>
+    ServerStatus() (<a href="/pkg/builtin/#string">string</a>, <a href="#Status">Status</a>, <a href="/pkg/builtin/#error">error</a>)
+
+    <span class="comment">// LoadCollection method</span>
+    <span class="comment">// This method is used to preload collection</span>
+    <span class="comment">// return indicate if this operation is successful.</span>
+    LoadCollection(param <a href="#LoadCollectionParam">LoadCollectionParam</a>) (<a href="#Status">Status</a>, <a href="/pkg/builtin/#error">error</a>)
+
+    <span class="comment">// GetIndexInfo method</span>
+    <span class="comment">// This method is used to describe index</span>
+    <span class="comment">// return indicate if this operation is successful.</span>
+    GetIndexInfo(collectionName <a href="/pkg/builtin/#string">string</a>) (<a href="#IndexParam">IndexParam</a>, <a href="#Status">Status</a>, <a href="/pkg/builtin/#error">error</a>)
+
+    <span class="comment">// DropIndex method</span>
+    <span class="comment">// This method is used to drop index of collection(and its partitions)</span>
+    <span class="comment">// return indicate if this operation is successful.</span>
+    DropIndex(collectionName <a href="/pkg/builtin/#string">string</a>) (<a href="#Status">Status</a>, <a href="/pkg/builtin/#error">error</a>)
+
+    <span class="comment">// CreatePartition method</span>
+    <span class="comment">// This method is used to create collection partition</span>
+    <span class="comment">// return indicate if partition is created successfully</span>
+    CreatePartition(partitionParam <a href="#PartitionParam">PartitionParam</a>) (<a href="#Status">Status</a>, <a href="/pkg/builtin/#error">error</a>)
+
+    <span class="comment">// ListPartitions method</span>
+    <span class="comment">// This method is used to create collection</span>
+    <span class="comment">// return indicate if this operation is successful</span>
+    ListPartitions(collectionName <a href="/pkg/builtin/#string">string</a>) ([]<a href="#PartitionParam">PartitionParam</a>, <a href="#Status">Status</a>, <a href="/pkg/builtin/#error">error</a>)
+
+    <span class="comment">// DropPartition method</span>
+    <span class="comment">// This method is used to delete collection partition.</span>
+    <span class="comment">// return indicate if partition is delete successfully.</span>
+    DropPartition(partitionParam <a href="#PartitionParam">PartitionParam</a>) (<a href="#Status">Status</a>, <a href="/pkg/builtin/#error">error</a>)
+
+    <span class="comment">// GetConfig</span>
+    <span class="comment">// This method is used to get config</span>
+    <span class="comment">// return indicate if this operation is successful.</span>
+    GetConfig(nodeName <a href="/pkg/builtin/#string">string</a>) (<a href="/pkg/builtin/#string">string</a>, <a href="#Status">Status</a>, <a href="/pkg/builtin/#error">error</a>)
+
+    <span class="comment">// SetConfig</span>
+    <span class="comment">// This method is used to set config</span>
+    <span class="comment">// return indicate if this operation is successful.</span>
+    SetConfig(nodeName <a href="/pkg/builtin/#string">string</a>, value <a href="/pkg/builtin/#string">string</a>) (<a href="#Status">Status</a>, <a href="/pkg/builtin/#error">error</a>)
+
+    <span class="comment">// Flush method</span>
+    <span class="comment">// This method is used to flush collections</span>
+    <span class="comment">// return indicate if flush is successful</span>
+    Flush(collectionNameArray []<a href="/pkg/builtin/#string">string</a>) (<a href="#Status">Status</a>, <a href="/pkg/builtin/#error">error</a>)
+
+    <span class="comment">// Compact method</span>
+    <span class="comment">// This method is used to compact collection</span>
+    <span class="comment">// return indicate if compact is successful</span>
+    Compact(collectionName <a href="/pkg/builtin/#string">string</a>) (<a href="#Status">Status</a>, <a href="/pkg/builtin/#error">error</a>)
+}</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+				
+				<h3 id="NewMilvusClient">func <a href="/src/github.com/milvus-io/milvus-sdk-go/milvus/ClientProxy.go?s=1086:1144#L27">NewMilvusClient</a>
+					<a class="permalink" href="#NewMilvusClient">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func NewMilvusClient(client <a href="#MilvusGrpcClient">MilvusGrpcClient</a>) <a href="#MilvusClient">MilvusClient</a></pre>
+				<p>
+NewMilvusClient is the constructor of MilvusClient
+</p>
+
+				
+				
+			
+
+			
+		
+			
+			
+			<h2 id="MilvusGrpcClient">type <a href="/src/github.com/milvus-io/milvus-sdk-go/milvus/MilvusGrpcClient.go?s=1033:2644#L23">MilvusGrpcClient</a>
+				<a class="permalink" href="#MilvusGrpcClient">&#xb6;</a>
+				
+				
+			</h2>
+			<p>
+MilvusGrpcClient call grpc generated code interface
+</p>
+
+			<pre>type MilvusGrpcClient interface {
+    CreateCollection(collectionSchema <a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/">pb</a>.<a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/#CollectionSchema">CollectionSchema</a>) (<a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/">pb</a>.<a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/#Status">Status</a>, <a href="/pkg/builtin/#error">error</a>)
+
+    HasCollection(collectionName <a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/">pb</a>.<a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/#CollectionName">CollectionName</a>) (<a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/">pb</a>.<a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/#BoolReply">BoolReply</a>, <a href="/pkg/builtin/#error">error</a>)
+
+    DescribeCollection(collectionName <a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/">pb</a>.<a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/#CollectionName">CollectionName</a>) (<a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/">pb</a>.<a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/#CollectionSchema">CollectionSchema</a>, <a href="/pkg/builtin/#error">error</a>)
+
+    CountCollection(collectionName <a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/">pb</a>.<a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/#CollectionName">CollectionName</a>) (<a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/">pb</a>.<a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/#CollectionRowCount">CollectionRowCount</a>, <a href="/pkg/builtin/#error">error</a>)
+
+    ShowCollections() (<a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/">pb</a>.<a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/#CollectionNameList">CollectionNameList</a>, <a href="/pkg/builtin/#error">error</a>)
+
+    ShowCollectionInfo(collectionName <a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/">pb</a>.<a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/#CollectionName">CollectionName</a>) (<a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/">pb</a>.<a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/#CollectionInfo">CollectionInfo</a>, <a href="/pkg/builtin/#error">error</a>)
+
+    DropCollection(collectionName <a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/">pb</a>.<a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/#CollectionName">CollectionName</a>) (<a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/">pb</a>.<a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/#Status">Status</a>, <a href="/pkg/builtin/#error">error</a>)
+
+    CreateIndex(indexParam <a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/">pb</a>.<a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/#IndexParam">IndexParam</a>) (<a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/">pb</a>.<a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/#Status">Status</a>, <a href="/pkg/builtin/#error">error</a>)
+
+    DescribeIndex(collectionName <a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/">pb</a>.<a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/#CollectionName">CollectionName</a>) (<a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/">pb</a>.<a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/#IndexParam">IndexParam</a>, <a href="/pkg/builtin/#error">error</a>)
+
+    DropIndex(collectionName <a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/">pb</a>.<a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/#CollectionName">CollectionName</a>) (<a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/">pb</a>.<a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/#Status">Status</a>, <a href="/pkg/builtin/#error">error</a>)
+
+    CreatePartition(partitionParam <a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/">pb</a>.<a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/#PartitionParam">PartitionParam</a>) (<a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/">pb</a>.<a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/#Status">Status</a>, <a href="/pkg/builtin/#error">error</a>)
+
+    ShowPartitions(collectionName <a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/">pb</a>.<a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/#CollectionName">CollectionName</a>) (<a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/">pb</a>.<a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/#PartitionList">PartitionList</a>, <a href="/pkg/builtin/#error">error</a>)
+
+    DropPartition(partitionParam <a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/">pb</a>.<a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/#PartitionParam">PartitionParam</a>) (<a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/">pb</a>.<a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/#Status">Status</a>, <a href="/pkg/builtin/#error">error</a>)
+
+    Insert(insertParam <a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/">pb</a>.<a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/#InsertParam">InsertParam</a>) (<a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/">pb</a>.<a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/#VectorIds">VectorIds</a>, <a href="/pkg/builtin/#error">error</a>)
+
+    GetVectorsByID(identity <a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/">pb</a>.<a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/#VectorsIdentity">VectorsIdentity</a>) (<a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/">pb</a>.<a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/#VectorsData">VectorsData</a>, <a href="/pkg/builtin/#error">error</a>)
+
+    GetVectorIDs(param <a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/">pb</a>.<a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/#GetVectorIDsParam">GetVectorIDsParam</a>) (<a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/">pb</a>.<a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/#VectorIds">VectorIds</a>, <a href="/pkg/builtin/#error">error</a>)
+
+    Search(searchParam <a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/">pb</a>.<a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/#SearchParam">SearchParam</a>) (*<a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/">pb</a>.<a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/#TopKQueryResult">TopKQueryResult</a>, <a href="/pkg/builtin/#error">error</a>)
+
+    SearchInFiles(searchInFilesParam <a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/">pb</a>.<a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/#SearchInFilesParam">SearchInFilesParam</a>) (*<a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/">pb</a>.<a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/#TopKQueryResult">TopKQueryResult</a>, <a href="/pkg/builtin/#error">error</a>)
+
+    Cmd(command <a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/">pb</a>.<a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/#Command">Command</a>) (<a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/">pb</a>.<a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/#StringReply">StringReply</a>, <a href="/pkg/builtin/#error">error</a>)
+
+    DeleteByID(param <a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/">pb</a>.<a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/#DeleteByIDParam">DeleteByIDParam</a>) (<a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/">pb</a>.<a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/#Status">Status</a>, <a href="/pkg/builtin/#error">error</a>)
+
+    PreloadCollection(preloadCollectionParam <a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/">pb</a>.<a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/#PreloadCollectionParam">PreloadCollectionParam</a>) (<a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/">pb</a>.<a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/#Status">Status</a>, <a href="/pkg/builtin/#error">error</a>)
+
+    Flush(param <a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/">pb</a>.<a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/#FlushParam">FlushParam</a>) (<a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/">pb</a>.<a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/#Status">Status</a>, <a href="/pkg/builtin/#error">error</a>)
+
+    Compact(name <a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/">pb</a>.<a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/#CollectionName">CollectionName</a>) (<a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/">pb</a>.<a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/#Status">Status</a>, <a href="/pkg/builtin/#error">error</a>)
+}</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+				
+				<h3 id="NewMilvusGrpcClient">func <a href="/src/github.com/milvus-io/milvus-sdk-go/milvus/MilvusGrpcClient.go?s=2782:2854#L76">NewMilvusGrpcClient</a>
+					<a class="permalink" href="#NewMilvusGrpcClient">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func NewMilvusGrpcClient(client <a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/">pb</a>.<a href="/pkg/github.com/milvus-io/milvus-sdk-go/milvus/grpc/gen/#MilvusServiceClient">MilvusServiceClient</a>) <a href="#MilvusGrpcClient">MilvusGrpcClient</a></pre>
+				<p>
+NewMilvusGrpcClient is the constructor of MilvusGrpcClient
+</p>
+
+				
+				
+			
+
+			
+		
+			
+			
+			<h2 id="Milvusclient">type <a href="/src/github.com/milvus-io/milvus-sdk-go/milvus/ClientProxy.go?s=975:1030#L22">Milvusclient</a>
+				<a class="permalink" href="#Milvusclient">&#xb6;</a>
+				
+				
+			</h2>
+			
+			<pre>type Milvusclient struct {
+<span id="Milvusclient.Instance"></span>    Instance <a href="#MilvusGrpcClient">MilvusGrpcClient</a>
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+				
+				<h3 id="Milvusclient.Compact">func (*Milvusclient) <a href="/src/github.com/milvus-io/milvus-sdk-go/milvus/ClientProxy.go?s=16796:16870#L419">Compact</a>
+					<a class="permalink" href="#Milvusclient.Compact">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (client *<a href="#Milvusclient">Milvusclient</a>) Compact(collectionName <a href="/pkg/builtin/#string">string</a>) (<a href="#Status">Status</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Milvusclient.Connect">func (*Milvusclient) <a href="/src/github.com/milvus-io/milvus-sdk-go/milvus/ClientProxy.go?s=1261:1329#L35">Connect</a>
+					<a class="permalink" href="#Milvusclient.Connect">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (client *<a href="#Milvusclient">Milvusclient</a>) Connect(connectParam <a href="#ConnectParam">ConnectParam</a>) <a href="/pkg/builtin/#error">error</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Milvusclient.CountEntities">func (*Milvusclient) <a href="/src/github.com/milvus-io/milvus-sdk-go/milvus/ClientProxy.go?s=9691:9778#L246">CountEntities</a>
+					<a class="permalink" href="#Milvusclient.CountEntities">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (client *<a href="#Milvusclient">Milvusclient</a>) CountEntities(collectionName <a href="/pkg/builtin/#string">string</a>) (<a href="/pkg/builtin/#int64">int64</a>, <a href="#Status">Status</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Milvusclient.CreateCollection">func (*Milvusclient) <a href="/src/github.com/milvus-io/milvus-sdk-go/milvus/ClientProxy.go?s=2618:2711#L84">CreateCollection</a>
+					<a class="permalink" href="#Milvusclient.CreateCollection">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (client *<a href="#Milvusclient">Milvusclient</a>) CreateCollection(collectionParam <a href="#CollectionParam">CollectionParam</a>) (<a href="#Status">Status</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Milvusclient.CreateIndex">func (*Milvusclient) <a href="/src/github.com/milvus-io/milvus-sdk-go/milvus/ClientProxy.go?s=3898:3977#L114">CreateIndex</a>
+					<a class="permalink" href="#Milvusclient.CreateIndex">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (client *<a href="#Milvusclient">Milvusclient</a>) CreateIndex(indexParam *<a href="#IndexParam">IndexParam</a>) (<a href="#Status">Status</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Milvusclient.CreatePartition">func (*Milvusclient) <a href="/src/github.com/milvus-io/milvus-sdk-go/milvus/ClientProxy.go?s=13707:13797#L345">CreatePartition</a>
+					<a class="permalink" href="#Milvusclient.CreatePartition">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (client *<a href="#Milvusclient">Milvusclient</a>) CreatePartition(partitionParam <a href="#PartitionParam">PartitionParam</a>) (<a href="#Status">Status</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Milvusclient.DeleteEntityByID">func (*Milvusclient) <a href="/src/github.com/milvus-io/milvus-sdk-go/milvus/ClientProxy.go?s=8570:8671#L223">DeleteEntityByID</a>
+					<a class="permalink" href="#Milvusclient.DeleteEntityByID">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (client *<a href="#Milvusclient">Milvusclient</a>) DeleteEntityByID(collectionName <a href="/pkg/builtin/#string">string</a>, id_array []<a href="/pkg/builtin/#int64">int64</a>) (<a href="#Status">Status</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Milvusclient.Disconnect">func (*Milvusclient) <a href="/src/github.com/milvus-io/milvus-sdk-go/milvus/ClientProxy.go?s=2531:2577#L79">Disconnect</a>
+					<a class="permalink" href="#Milvusclient.Disconnect">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (client *<a href="#Milvusclient">Milvusclient</a>) Disconnect() <a href="/pkg/builtin/#error">error</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Milvusclient.DropCollection">func (*Milvusclient) <a href="/src/github.com/milvus-io/milvus-sdk-go/milvus/ClientProxy.go?s=3533:3614#L104">DropCollection</a>
+					<a class="permalink" href="#Milvusclient.DropCollection">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (client *<a href="#Milvusclient">Milvusclient</a>) DropCollection(collectionName <a href="/pkg/builtin/#string">string</a>) (<a href="#Status">Status</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Milvusclient.DropIndex">func (*Milvusclient) <a href="/src/github.com/milvus-io/milvus-sdk-go/milvus/ClientProxy.go?s=13288:13364#L334">DropIndex</a>
+					<a class="permalink" href="#Milvusclient.DropIndex">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (client *<a href="#Milvusclient">Milvusclient</a>) DropIndex(collectionName <a href="/pkg/builtin/#string">string</a>) (<a href="#Status">Status</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Milvusclient.DropPartition">func (*Milvusclient) <a href="/src/github.com/milvus-io/milvus-sdk-go/milvus/ClientProxy.go?s=15041:15129#L374">DropPartition</a>
+					<a class="permalink" href="#Milvusclient.DropPartition">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (client *<a href="#Milvusclient">Milvusclient</a>) DropPartition(partitionParam <a href="#PartitionParam">PartitionParam</a>) (<a href="#Status">Status</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Milvusclient.Flush">func (*Milvusclient) <a href="/src/github.com/milvus-io/milvus-sdk-go/milvus/ClientProxy.go?s=16395:16474#L408">Flush</a>
+					<a class="permalink" href="#Milvusclient.Flush">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (client *<a href="#Milvusclient">Milvusclient</a>) Flush(collectionNameArray []<a href="/pkg/builtin/#string">string</a>) (<a href="#Status">Status</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Milvusclient.GetClientVersion">func (*Milvusclient) <a href="/src/github.com/milvus-io/milvus-sdk-go/milvus/ClientProxy.go?s=1180:1233#L31">GetClientVersion</a>
+					<a class="permalink" href="#Milvusclient.GetClientVersion">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (client *<a href="#Milvusclient">Milvusclient</a>) GetClientVersion() <a href="/pkg/builtin/#string">string</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Milvusclient.GetCollectionInfo">func (*Milvusclient) <a href="/src/github.com/milvus-io/milvus-sdk-go/milvus/ClientProxy.go?s=9008:9109#L234">GetCollectionInfo</a>
+					<a class="permalink" href="#Milvusclient.GetCollectionInfo">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (client *<a href="#Milvusclient">Milvusclient</a>) GetCollectionInfo(collectionName <a href="/pkg/builtin/#string">string</a>) (<a href="#CollectionParam">CollectionParam</a>, <a href="#Status">Status</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Milvusclient.GetCollectionStats">func (*Milvusclient) <a href="/src/github.com/milvus-io/milvus-sdk-go/milvus/ClientProxy.go?s=10603:10696#L268">GetCollectionStats</a>
+					<a class="permalink" href="#Milvusclient.GetCollectionStats">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (client *<a href="#Milvusclient">Milvusclient</a>) GetCollectionStats(collectionName <a href="/pkg/builtin/#string">string</a>) (<a href="/pkg/builtin/#string">string</a>, <a href="#Status">Status</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Milvusclient.GetConfig">func (*Milvusclient) <a href="/src/github.com/milvus-io/milvus-sdk-go/milvus/ClientProxy.go?s=15517:15595#L386">GetConfig</a>
+					<a class="permalink" href="#Milvusclient.GetConfig">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (client *<a href="#Milvusclient">Milvusclient</a>) GetConfig(nodeName <a href="/pkg/builtin/#string">string</a>) (<a href="/pkg/builtin/#string">string</a>, <a href="#Status">Status</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Milvusclient.GetEntityByID">func (*Milvusclient) <a href="/src/github.com/milvus-io/milvus-sdk-go/milvus/ClientProxy.go?s=5482:5591#L152">GetEntityByID</a>
+					<a class="permalink" href="#Milvusclient.GetEntityByID">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (client *<a href="#Milvusclient">Milvusclient</a>) GetEntityByID(collectionName <a href="/pkg/builtin/#string">string</a>, vector_id []<a href="/pkg/builtin/#int64">int64</a>) ([]<a href="#Entity">Entity</a>, <a href="#Status">Status</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Milvusclient.GetIndexInfo">func (*Milvusclient) <a href="/src/github.com/milvus-io/milvus-sdk-go/milvus/ClientProxy.go?s=12523:12614#L315">GetIndexInfo</a>
+					<a class="permalink" href="#Milvusclient.GetIndexInfo">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (client *<a href="#Milvusclient">Milvusclient</a>) GetIndexInfo(collectionName <a href="/pkg/builtin/#string">string</a>) (<a href="#IndexParam">IndexParam</a>, <a href="#Status">Status</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Milvusclient.HasCollection">func (*Milvusclient) <a href="/src/github.com/milvus-io/milvus-sdk-go/milvus/ClientProxy.go?s=3124:3210#L95">HasCollection</a>
+					<a class="permalink" href="#Milvusclient.HasCollection">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (client *<a href="#Milvusclient">Milvusclient</a>) HasCollection(collectionName <a href="/pkg/builtin/#string">string</a>) (<a href="/pkg/builtin/#bool">bool</a>, <a href="#Status">Status</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Milvusclient.Insert">func (*Milvusclient) <a href="/src/github.com/milvus-io/milvus-sdk-go/milvus/ClientProxy.go?s=4510:4595#L129">Insert</a>
+					<a class="permalink" href="#Milvusclient.Insert">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (client *<a href="#Milvusclient">Milvusclient</a>) Insert(insertParam *<a href="#InsertParam">InsertParam</a>) ([]<a href="/pkg/builtin/#int64">int64</a>, <a href="#Status">Status</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Milvusclient.IsConnected">func (*Milvusclient) <a href="/src/github.com/milvus-io/milvus-sdk-go/milvus/ClientProxy.go?s=2448:2494#L75">IsConnected</a>
+					<a class="permalink" href="#Milvusclient.IsConnected">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (client *<a href="#Milvusclient">Milvusclient</a>) IsConnected() <a href="/pkg/builtin/#bool">bool</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Milvusclient.ListCollections">func (*Milvusclient) <a href="/src/github.com/milvus-io/milvus-sdk-go/milvus/ClientProxy.go?s=10184:10255#L258">ListCollections</a>
+					<a class="permalink" href="#Milvusclient.ListCollections">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (client *<a href="#Milvusclient">Milvusclient</a>) ListCollections() ([]<a href="/pkg/builtin/#string">string</a>, <a href="#Status">Status</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Milvusclient.ListIDInSegment">func (*Milvusclient) <a href="/src/github.com/milvus-io/milvus-sdk-go/milvus/ClientProxy.go?s=6386:6497#L173">ListIDInSegment</a>
+					<a class="permalink" href="#Milvusclient.ListIDInSegment">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (client *<a href="#Milvusclient">Milvusclient</a>) ListIDInSegment(listIDInSegmentParam <a href="#ListIDInSegmentParam">ListIDInSegmentParam</a>) ([]<a href="/pkg/builtin/#int64">int64</a>, <a href="#Status">Status</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Milvusclient.ListPartitions">func (*Milvusclient) <a href="/src/github.com/milvus-io/milvus-sdk-go/milvus/ClientProxy.go?s=14192:14291#L357">ListPartitions</a>
+					<a class="permalink" href="#Milvusclient.ListPartitions">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (client *<a href="#Milvusclient">Milvusclient</a>) ListPartitions(collectionName <a href="/pkg/builtin/#string">string</a>) ([]<a href="#PartitionParam">PartitionParam</a>, <a href="#Status">Status</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Milvusclient.LoadCollection">func (*Milvusclient) <a href="/src/github.com/milvus-io/milvus-sdk-go/milvus/ClientProxy.go?s=12067:12152#L304">LoadCollection</a>
+					<a class="permalink" href="#Milvusclient.LoadCollection">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (client *<a href="#Milvusclient">Milvusclient</a>) LoadCollection(param <a href="#LoadCollectionParam">LoadCollectionParam</a>) (<a href="#Status">Status</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Milvusclient.Search">func (*Milvusclient) <a href="/src/github.com/milvus-io/milvus-sdk-go/milvus/ClientProxy.go?s=6914:7006#L184">Search</a>
+					<a class="permalink" href="#Milvusclient.Search">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (client *<a href="#Milvusclient">Milvusclient</a>) Search(searchParam <a href="#SearchParam">SearchParam</a>) (<a href="#TopkQueryResult">TopkQueryResult</a>, <a href="#Status">Status</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Milvusclient.ServerStatus">func (*Milvusclient) <a href="/src/github.com/milvus-io/milvus-sdk-go/milvus/ClientProxy.go?s=11548:11614#L290">ServerStatus</a>
+					<a class="permalink" href="#Milvusclient.ServerStatus">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (client *<a href="#Milvusclient">Milvusclient</a>) ServerStatus() (<a href="/pkg/builtin/#string">string</a>, <a href="#Status">Status</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Milvusclient.ServerVersion">func (*Milvusclient) <a href="/src/github.com/milvus-io/milvus-sdk-go/milvus/ClientProxy.go?s=11109:11176#L279">ServerVersion</a>
+					<a class="permalink" href="#Milvusclient.ServerVersion">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (client *<a href="#Milvusclient">Milvusclient</a>) ServerVersion() (<a href="/pkg/builtin/#string">string</a>, <a href="#Status">Status</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Milvusclient.SetConfig">func (*Milvusclient) <a href="/src/github.com/milvus-io/milvus-sdk-go/milvus/ClientProxy.go?s=15970:16054#L397">SetConfig</a>
+					<a class="permalink" href="#Milvusclient.SetConfig">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (client *<a href="#Milvusclient">Milvusclient</a>) SetConfig(nodeName <a href="/pkg/builtin/#string">string</a>, value <a href="/pkg/builtin/#string">string</a>) (<a href="#Status">Status</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+				
+				
+				
+				
+			
+		
+			
+			
+			<h2 id="PartitionParam">type <a href="/src/github.com/milvus-io/milvus-sdk-go/milvus/MilvusClient.go?s=5456:5606#L195">PartitionParam</a>
+				<a class="permalink" href="#PartitionParam">&#xb6;</a>
+				
+				
+			</h2>
+			<p>
+PartitionParam partition parameters
+</p>
+
+			<pre>type PartitionParam struct {
+<span id="PartitionParam.CollectionName"></span>    <span class="comment">// CollectionName partition collection name</span>
+    CollectionName <a href="/pkg/builtin/#string">string</a>
+<span id="PartitionParam.PartitionTag"></span>    <span class="comment">// PartitionTag partition tag</span>
+    PartitionTag <a href="/pkg/builtin/#string">string</a>
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="PartitionStat">type <a href="/src/github.com/milvus-io/milvus-sdk-go/milvus/MilvusClient.go?s=2245:2438#L86">PartitionStat</a>
+				<a class="permalink" href="#PartitionStat">&#xb6;</a>
+				
+				
+			</h2>
+			<p>
+PartitionStat
+</p>
+
+			<pre>type PartitionStat struct {
+<span id="PartitionStat.Tag"></span>    <span class="comment">// Tag partition tag</span>
+    Tag <a href="/pkg/builtin/#string">string</a>
+<span id="PartitionStat.RowCount"></span>    <span class="comment">// RowCount row count of partition</span>
+    RowCount <a href="/pkg/builtin/#int64">int64</a>
+<span id="PartitionStat.SegmentsStat"></span>    <span class="comment">// SegmentsStat array of partition&#39;s SegmentStat</span>
+    SegmentsStat []<a href="#SegmentStat">SegmentStat</a>
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="QueryResult">type <a href="/src/github.com/milvus-io/milvus-sdk-go/milvus/MilvusClient.go?s=5169:5276#L181">QueryResult</a>
+				<a class="permalink" href="#QueryResult">&#xb6;</a>
+				
+				
+			</h2>
+			<p>
+QueryResult Query result
+</p>
+
+			<pre>type QueryResult struct {
+<span id="QueryResult.Ids"></span>    <span class="comment">// Ids id array</span>
+    Ids []<a href="/pkg/builtin/#int64">int64</a>
+<span id="QueryResult.Distances"></span>    <span class="comment">// Distances distance array</span>
+    Distances []<a href="/pkg/builtin/#float32">float32</a>
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="Range">type <a href="/src/github.com/milvus-io/milvus-sdk-go/milvus/MilvusClient.go?s=4309:4417#L151">Range</a>
+				<a class="permalink" href="#Range">&#xb6;</a>
+				
+				
+			</h2>
+			<p>
+Range range information, for DATE range, the format is like: &#39;year-month-day&#39;
+</p>
+
+			<pre>type Range struct {
+<span id="Range.StartValue"></span>    <span class="comment">// StartValue Range start</span>
+    StartValue <a href="/pkg/builtin/#string">string</a>
+<span id="Range.EndValue"></span>    <span class="comment">// EndValue Range stop</span>
+    EndValue <a href="/pkg/builtin/#string">string</a>
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="SearchParam">type <a href="/src/github.com/milvus-io/milvus-sdk-go/milvus/MilvusClient.go?s=4452:5140#L159">SearchParam</a>
+				<a class="permalink" href="#SearchParam">&#xb6;</a>
+				
+				
+			</h2>
+			<p>
+SearchParam search parameters
+</p>
+
+			<pre>type SearchParam struct {
+<span id="SearchParam.CollectionName"></span>    <span class="comment">// CollectionName collection name for search</span>
+    CollectionName <a href="/pkg/builtin/#string">string</a>
+<span id="SearchParam.QueryEntities"></span>    <span class="comment">// QueryEntities query entities raw array</span>
+    QueryEntities []<a href="#Entity">Entity</a>
+<span id="SearchParam.Topk"></span>    <span class="comment">// Topk topk</span>
+    Topk <a href="/pkg/builtin/#int64">int64</a>
+<span id="SearchParam.PartitionTag"></span>    <span class="comment">// PartitionTag partition tag array</span>
+    PartitionTag []<a href="/pkg/builtin/#string">string</a>
+<span id="SearchParam.ExtraParams"></span>    <span class="comment">// ExtraParams extra parameters</span>
+    <span class="comment">//  Note: extra_params is extra parameters list, it must be json format, for example:</span>
+    <span class="comment">//	 	  For different index type, parameter list is different accordingly</span>
+    <span class="comment">//		  FLAT/IVFLAT/SQ8/IVFPQ:  &#34;{nprobe: &#39;32&#39;}&#34;</span>
+    <span class="comment">//			  ///&lt; nprobe range:[1,999999]</span>
+    <span class="comment">// 		  NSG:  &#34;{search_length:&#39;100&#39;}</span>
+    <span class="comment">//	 	 	  ///&lt; search_length range:[10, 300]</span>
+    <span class="comment">//		  HNSW  &#34;{ef: &#39;64&#39;}</span>
+    <span class="comment">//		 	  ///&lt; ef range:[k, 4096]</span>
+    ExtraParams <a href="/pkg/builtin/#string">string</a>
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="SegmentStat">type <a href="/src/github.com/milvus-io/milvus-sdk-go/milvus/MilvusClient.go?s=2022:2226#L74">SegmentStat</a>
+				<a class="permalink" href="#SegmentStat">&#xb6;</a>
+				
+				
+			</h2>
+			<p>
+SegmentStat segment statistics
+</p>
+
+			<pre>type SegmentStat struct {
+<span id="SegmentStat.SegmentName"></span>    <span class="comment">// SegmentName segment name</span>
+    SegmentName <a href="/pkg/builtin/#string">string</a>
+<span id="SegmentStat.RowCount"></span>    <span class="comment">// RowCount segment row count</span>
+    RowCount <a href="/pkg/builtin/#int64">int64</a>
+<span id="SegmentStat.IndexName"></span>    <span class="comment">// IndexName index name</span>
+    IndexName <a href="/pkg/builtin/#string">string</a>
+    <span class="comment">//DataSize data size</span>
+<span id="SegmentStat.DataSize"></span>    DataSize <a href="/pkg/builtin/#int64">int64</a>
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="Status">type <a href="/src/github.com/milvus-io/milvus-sdk-go/milvus/Status.go?s=1246:1323#L33">Status</a>
+				<a class="permalink" href="#Status">&#xb6;</a>
+				
+				
+			</h2>
+			<p>
+Status for SDK interface return
+</p>
+
+			<pre>type Status interface {
+    Ok() <a href="/pkg/builtin/#bool">bool</a>
+    GetStatus() status
+    GetMessage() <a href="/pkg/builtin/#string">string</a>
+}</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+				
+				<h3 id="NewStatus">func <a href="/src/github.com/milvus-io/milvus-sdk-go/milvus/Status.go?s=1419:1456#L45">NewStatus</a>
+					<a class="permalink" href="#NewStatus">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func NewStatus(_status status) <a href="#Status">Status</a></pre>
+				<p>
+NewStatus constructor of Status
+</p>
+
+				
+				
+			
+				
+				<h3 id="NewStatus1">func <a href="/src/github.com/milvus-io/milvus-sdk-go/milvus/Status.go?s=1548:1605#L50">NewStatus1</a>
+					<a class="permalink" href="#NewStatus1">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func NewStatus1(errorCode <a href="#ErrorCode">ErrorCode</a>, state <a href="/pkg/builtin/#string">string</a>) <a href="#Status">Status</a></pre>
+				<p>
+NewStatus1 constructor of Status
+</p>
+
+				
+				
+			
+
+			
+		
+			
+			
+			<h2 id="TopkQueryResult">type <a href="/src/github.com/milvus-io/milvus-sdk-go/milvus/MilvusClient.go?s=5315:5415#L189">TopkQueryResult</a>
+				<a class="permalink" href="#TopkQueryResult">&#xb6;</a>
+				
+				
+			</h2>
+			<p>
+TopkQueryResult Topk query result
+</p>
+
+			<pre>type TopkQueryResult struct {
+<span id="TopkQueryResult.QueryResultList"></span>    <span class="comment">// QueryResultList query result list</span>
+    QueryResultList []<a href="#QueryResult">QueryResult</a>
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+	
+
+	
+
+
+
+
+
+	
+	
+		<h2 id="pkg-subdirectories">Subdirectories</h2>
+	
+	<div class="pkg-dir">
+		<table>
+			<tr>
+				<th class="pkg-name">Name</th>
+				<th class="pkg-synopsis">Synopsis</th>
+			</tr>
+
+			
+			<tr>
+				<td colspan="2"><a href="..">..</a></td>
+			</tr>
+			
+
+			
+				<tr>
+				
+					<td class="pkg-name" style="padding-left: 0px;">
+						<a href="grpc/">grpc</a>
+					</td>
+				
+					<td class="pkg-synopsis">
+						
+					</td>
+				</tr>
+			
+				<tr>
+				
+					<td class="pkg-name" style="padding-left: 20px;">
+						<a href="grpc/gen/">gen</a>
+					</td>
+				
+					<td class="pkg-synopsis">
+						
+					</td>
+				</tr>
+			
+		</table>
+	</div>
+
+
+
+<div id="footer">
+Build version go1.16.4.<br>
+Except as <a href="https://developers.google.com/site-policies#restrictions">noted</a>,
+the content of this page is licensed under the
+Creative Commons Attribution 3.0 License,
+and code is licensed under a <a href="/LICENSE">BSD license</a>.<br>
+<a href="https://golang.org/doc/tos.html">Terms of Service</a> |
+<a href="https://www.google.com/intl/en/policies/privacy/">Privacy Policy</a>
+</div>
+
+</div><!-- .container -->
+</div><!-- #page -->
+</body>
+</html>
