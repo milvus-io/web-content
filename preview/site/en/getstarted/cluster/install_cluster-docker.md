@@ -14,7 +14,7 @@ Before moving forward to installation, you must check the eligibility of your ha
 
 <br/>
 
-### Check whether your CPU supports SIMD extension instruction set
+<details><summary>Check whether your CPU supports SIMD extension instruction set</summary>
 
 Milvus' computing operations depend on CPU’s support for SIMD (Single Instruction, Multiple Data) extension instruction set. Whether your CPU supports SIMD extension instruction set is crucial to index building and vector similarity search within Milvus. Ensure that your CPU supports at least one of the following SIMD instruction sets:
 
@@ -28,9 +28,9 @@ Run the lscpu command to check if your CPU supports the SIMD instruction sets me
 ```
 $ lscpu | grep -e sse4_2 -e avx -e avx2 -e avx512
 ```
-<br/>
+</details>
 
-### Check your GPU’s eligibility
+<details><summary>Check your GPU’s eligibility</summary>
 Milvus Cluster supports GPU acceleration on floating vectors. 
 - Supported Nvidia GPU versions are 6.0, 6.1, 7.0, and 7.5.
 
@@ -53,6 +53,7 @@ In the current version, the following vector indices support GPU acceleration:
 
 Learn more about [vector indices](https://www.zilliz.com/blog/Accelerating-Similarity-Search-on-Really-Big-Data-with-Vector-Indexing#flat-good-for-searching-relatively-small-million-scale-datasets-when-100-recall-is-required).
 
+</details>
 
 ## Install Milvus Cluster
 

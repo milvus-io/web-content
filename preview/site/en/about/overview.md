@@ -34,45 +34,52 @@ With over 1,000 enterprise users, 5,000+ stars on GitHub, and an active open-sou
 
 ## Milvus Roadmap
 
-### Milvus 2.0 - Beta version of distributed vector database
+<details>
+  <summary>Milvus 2.0 - Beta version of distributed vector database</summary>
+    <li>Highly available with fully managed failure recovery and service discovery</li>
+    <li>Support for scalar filtering and point query</li>
+    <li>Provides highly abstract ORM-style APIs</li>
+    <li>Offers three levels of tunable consistency: strong, session, consistent prefix</li>
+</details>
 
-- Highly available with fully managed failure recovery and service discovery
-- Support for scalar filtering and point query
-- Provides highly abstract ORM-style APIs
-- Offers three levels of tunable consistency: strong, session, consistent prefix
 
-### Milvus 2.1 - Stable version including complete set of DML functions
+<details>
+  <summary>Milvus 2.1 - Stable version including complete set of DML functions</summary>
+    <li>Supports delete and update operations</li>
+    <li>Supports string and varbinary data types</li>
+    <li>Vector similarity search by distance</li>
+    <li>Segment compaction that saves disk space and optimizes query performance</li>
+    <li>Implements load balancing for Milvus Cluster</li>
+    <li>Kubernetes deployment ready to optimize resource allocation</li>
+    <li>Expands the Milvus ecosystem with support for mainstream extensions such as Apache Spark and Flink connector
+</details>
 
-- Supports delete and update operations
-- Supports string and varbinary data types
-- Vector similarity search by distance
-- Segment compaction that saves disk space and optimizes query performance
-- Implements load balancing for Milvus Cluster
-- Kubernetes deployment ready to optimize resource allocation
-- Expands the Milvus ecosystem with support for mainstream extensions such as Apache Spark and Flink connector
 
-### Milvus 2.2 - A cloud-native vector database
+<details>
+  <summary>Milvus 2.2 - A cloud-native vector database</summary>
+    <li>Adds access control to ensure data security in multi-tenant scenarios</li>
+    <li>Support for query node isolation for exclusive access</li>
+    <li>Supports bulk insert to improve efficiency</li>
+    <li>A cluster protection mechanism featuring traffic control and back pressure</li>
+    <li>Improves observability for failover and failback through distributed tracing and log aggregation</li>
+    <li>Embedded Milvus that runs on laptops and feature out-of-the-box deployment in cloud production environments</li>
+    <li>Integrates stream and batch processing through Kafta/Pulsar connector</li>
+    <li>Multi-machine, multi-site deployment and multi-cloud integration</li>
+    <li>Supports memory replicas for higher availability and optimized computing performance 
+</details>
 
-- Adds access control to ensure data security in multi-tenant scenarios
-- Support for query node isolation for exclusive access
-- Supports bulk insert to improve efficiency
-- A cluster protection mechanism featuring traffic control and back pressure
-- Improves observability for failover and failback through distributed tracing and log aggregation
-- Embedded Milvus that runs on laptops and feature out-of-the-box deployment in cloud production environments
-- Integrates stream and batch processing through Kafta/Pulsar connector
-- Multi-machine, multi-site deployment and multi-cloud integration
-- Supports memory replicas for higher availability and optimized computing performance 
 
-### Long-term Milvus features
-
-- Federated queries across operational databases, data warehouses, and data lakes
-- Supports time travel to any specified point in time
-- Separates hot data storage from cold data storage for more efficient resource allocation
-- Adopts incremental backup to save time and disk space
-- Adopts cost-based query optimization algorithm to improve query efficiency
-- Supports on-disk vector indexing
-- Supports change data capture to facilitate data integration
-- Offers embedding-as-service through data importer/transformer
+<details>
+  <summary>Long-term Milvus features</summary>
+    <li>Federated queries across operational databases, data warehouses, and data lakes</li>
+    <li>Supports time travel to any specified point in time</li>
+    <li>Separates hot data storage from cold data storage for more efficient resource allocation</li>
+    <li>Adopts incremental backup to save time and disk space</li>
+    <li>Adopts cost-based query optimization algorithm to improve query efficiency</li>
+    <li>Supports on-disk vector indexing</li>
+    <li>Supports change data capture to facilitate data integration</li>
+    <li>Offers embedding-as-service through data importer/transformer
+</details>
 
 ## Join Our Community
 
