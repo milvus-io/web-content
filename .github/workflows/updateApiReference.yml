@@ -126,3 +126,30 @@ jobs:
           git commit -m "Update pymilvus-orm"
           git push -f origin master
           echo "=>Completed: Update pymilvus-orm doc repo."
+      - id: update_repo_milvus_sdk_go
+        name: Update milvus_sdk_go doc
+        if: ${{ github.event.inputs.repoName == 'milvus-sdk-go' }}
+        run: |
+          sudo chmod -R 777 ${{ github.event.inputs.repoName }}
+          cd ${{ github.event.inputs.repoName }}
+          sudo apt update
+          sudo apt install golang-doc
+          sudo apt install golang-golang-x-tools
+          godoc -url "/pkg/github.com/milvus-io/milvus-sdk-go/milvus" > milvus.html
+          cd ../${{ github.event.repository.name }}/APIReference/milvus-sdk-go
+          echo "Upcomming tag name: ${{ github.event.inputs.tagName }}"
+          echo "=>List all doc versions"
+          ls -l
+          if [ -d "./${{ github.event.inputs.tagName }}" ]
+          then
+            echo "===tag name exists, remove all under this dir==="
+            sudo rm -fr "./${{ github.event.inputs.tagName }}"
+          else
+            echo "===miss tag name, create this dir==="
+            sudo mkdir "./${{ github.event.inputs.tagName }}"
+          fi
+          sudo cp ../../../milvus-sdk-go/milvus.html "./${{ github.event.inputs.tagName }}"
+          git add .
+          git commit -m "milvus-sdk-go"
+          git push -f origin master
+          echo "=>Completed: Update milvus-sdk-go doc."
