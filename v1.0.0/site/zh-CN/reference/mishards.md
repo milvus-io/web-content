@@ -147,7 +147,7 @@ Mishards 定义了路由策略相关的接口，并通过插件提供扩展。�
 1. 将 Milvus 仓库复制到本地：
 
    ```shell
-   git clone https://github.com/milvus-io/milvus
+   git clone https://github.com/milvus-io/milvus -b 1.0
    ```
 
 2. 安装 Mishards 的依赖库：
@@ -198,7 +198,7 @@ Mishards 定义了路由策略相关的接口，并通过插件提供扩展。�
 2. 将 Milvus 仓库复制到本地：
 
    ```shell
-   $ git clone https://github.com/milvus-io/milvus
+   $ git clone https://github.com/milvus-io/milvus -b 1.0
    $ cd milvus/shards
    ```
 
