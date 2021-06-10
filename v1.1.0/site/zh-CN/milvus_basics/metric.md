@@ -27,7 +27,7 @@ Milvus 基于不同的距离计算方式比较向量间的距离。选择合适�
 <tbody>
   <tr>
     <td class="tg-0pky">欧氏距离 (L2)</td>
-    <td class="tg-0pky" rowspan="2"><ul><li>FLAT</li><li>IVF_FLAT</li><li>IVF_SQ8</li><li>IVF_SQ8H</li><li>IVF_PQ</li><li>RNSG</li><li>HNSW</li><li>ANNOY</li></ul></td>
+    <td class="tg-0pky" rowspan="2"><ul><li>FLAT</li><li>IVF_FLAT</li><li>IVF_SQ8</li><li>IVF_SQ8H</li><li>IVF_PQ</li><li>RNSG</li><li>HNSW</li><li>Annoy</li></ul></td>
   </tr>
   <tr>
     <td class="tg-0pky">内积 (IP)</td>

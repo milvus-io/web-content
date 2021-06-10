@@ -43,7 +43,7 @@ Milvus maps different embedding types with different index types. Click the tab 
 | IVF_PQ   | ✔️                | ✔️                 | ✔️                  | ✔️              |
 | RNSG     | ✔️                | ❌                 | ✔️                  | ❌              |
 | HNSW     | ✔️                | ❌                 | ✔️                  | ❌              |
-| ANNOY    | ✔️                | ❌                 | ✔️                  | ❌              |
+| Annoy    | ✔️                | ❌                 | ✔️                  | ❌              |
 
 
 <div class="alert note">

@@ -37,9 +37,9 @@ This page describes how to configure and start up [Prometheus](https://prometheu
 
     ```yaml
     metric:
-      enable: true       # Set the value to true to enable the Prometheus monitor.
-      address: 127.0.0.1 # Set the IP address of Pushgateway.
-      port: 9091         # Set the port number of Pushgateway.
+      enable: true                 # Set the value to true to enable the Prometheus monitor.
+      address: <your_IP_address>   # Set the IP address of Pushgateway.
+      port: 9091                   # Set the port number of Pushgateway.
     ```
 
     <div class="alert note">

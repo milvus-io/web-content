@@ -220,7 +220,7 @@ id: release_notes.md
 - Milvus reports "illegal instruction" when running on some legacy CPUs. [#2598](https://github.com/milvus-io/milvus/issues/2598)
 - Updated the range of HNSW settings. [#2637](https://github.com/milvus-io/milvus/issues/2637)
 - Milvus processes crash when building an index. [#2642](https://github.com/milvus-io/milvus/issues/2642)
-- The default ANNOY settings do not match the settings specified in the document. [#2649](https://github.com/milvus-io/milvus/issues/2649)
+- The default Annoy settings do not match the settings specified in the document. [#2649](https://github.com/milvus-io/milvus/issues/2649)
 - Milvus does not respond under a stress test. [#2692](https://github.com/milvus-io/milvus/issues/2692)
 - The precision of the returned vectors is incorrect in an HTTP interface. [#2752](https://github.com/milvus-io/milvus/issues/2752)
 - The upper limit of `nprobe` is incorrect on the GPU-enabled Milvus. [#2767](https://github.com/milvus-io/milvus/issues/2767)
@@ -295,7 +295,7 @@ id: release_notes.md
 
 - Refactors log output. [#221](https://github.com/milvus-io/milvus/issues/221)
 - Upgrades OpenBLAS to improve Milvus' performance. [#1796](https://github.com/milvus-io/milvus/issues/1796)
-- Unifies the vector distance calculation algorithms among FAISS, NSG, HNSW, and ANNOY. [#1965](https://github.com/milvus-io/milvus/issues/1965)
+- Unifies the vector distance calculation algorithms among FAISS, NSG, HNSW, and Annoy. [#1965](https://github.com/milvus-io/milvus/issues/1965)
 - Supports SSE4.2 instruction set. [#2039](https://github.com/milvus-io/milvus/issues/2039)
 - Refactors the configuration files. [#2149](https://github.com/milvus-io/milvus/issues/2149) [#2167](https://github.com/milvus-io/milvus/issues/2167)
 - Uses Elkan K-means algorithm to improve the IVF index performance. [#2178](https://github.com/milvus-io/milvus/issues/2178)
@@ -475,15 +475,15 @@ id: release_notes.md
 
 #### New features
 
-- **ANNOY index support**
+- **Annoy index support**
 
-  Added support for ANNOY index type. See [our documentation](index.md) for more information. [#261](https://github.com/milvus-io/milvus/issues/261)
+  Added support for Annoy index type. See [our documentation](index.md) for more information. [#261](https://github.com/milvus-io/milvus/issues/261)
 
 - **Vector deletion**
 
   Added support to delete one or multiple vectors for more index types. [#1655](https://github.com/milvus-io/milvus/issues/1655) [#1660](https://github.com/milvus-io/milvus/issues/1660) [#1661](https://github.com/milvus-io/milvus/issues/1661) [#1849](https://github.com/milvus-io/milvus/issues/1849)
   
-  Including: Flat/IVFlat/IVFPQ/IVFSQ8/IVFSQ8H/NSG/HNSW/ANNOY
+  Including: Flat/IVFlat/IVFPQ/IVFSQ8/IVFSQ8H/NSG/HNSW/Annoy
 
 #### Improvements
 

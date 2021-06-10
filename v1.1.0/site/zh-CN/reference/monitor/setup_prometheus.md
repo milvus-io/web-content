@@ -38,9 +38,9 @@ id: setup_prometheus.md
 
     ```yaml
     metric:
-      enable: true       # 将值设为 true 以开启 Prometheus 监控。
-      address: 127.0.0.1 # 设置 Pushgateway 的 IP 地址。
-      port: 9091         # 设置 Pushgateway 的端口号。
+      enable: true                 # 将值设为 true 以开启 Prometheus 监控。
+      address: <your_IP_address>   # 设置 Pushgateway 的 IP 地址。
+      port: 9091                   # 设置 Pushgateway 的端口号。
     ```
 
     <div class="alert note">
