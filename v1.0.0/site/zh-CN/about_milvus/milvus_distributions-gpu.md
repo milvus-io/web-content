@@ -43,7 +43,7 @@ Milvus 会根据不同的向量类型提供不同的索引支持。请根据你�
 | IVF_PQ   | ✔️                | ✔️            | ✔️                  | ✔️             |
 | RNSG     | ✔️                | ❌            | ✔️                  | ❌              |
 | HNSW     | ✔️                | ❌            | ✔️                  | ❌              |
-| ANNOY    | ✔️                | ❌            | ✔️                  | ❌              |
+| Annoy    | ✔️                | ❌            | ✔️                  | ❌              |
 
 <div class="alert note">
 <ul>

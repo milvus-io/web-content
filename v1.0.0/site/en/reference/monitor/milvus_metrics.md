@@ -3,7 +3,7 @@ id: milvus_metrics.md
 ---
 
 
-# Visualize Metrics in Grafana
+# Milvus Metrics
 
 Milvus outputs detailed time-series metrics during runtime. You can use [Prometheus](https://prometheus.io/), [Grafana](https://grafana.com/), or any visualization tool that you think appropriate to display and render the following metrics:
 

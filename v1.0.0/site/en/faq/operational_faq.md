@@ -15,7 +15,7 @@ id: operational_faq.md
 - [How can I know if Milvus has started successfully?](#How-can-I-know-if-Milvus-has-started-successfully)
 - [Why is the time in the log files different from the system time?](#Why-is-the-time-in-the-log-files-different-from-the-system-time)
 - [How can I know whether my CPU supports Milvus?](#How-can-I-know-whether-my-CPU-supports-Milvus)
-- [Why does Milvus return Illegal instruction during startup?](#Why-does-Milvus-return-Illegal-instruction-during-startup)
+- [Why does Milvus return Illegal instruction during startup?](#Why-does-Milvus-return-illegal-instruction-during-startup)
 - [How can I know whether my GPU is supported by Milvus?](#How-can-I-know-whether-my-GPU-is-supported-by-Milvus)
 - [Where is the script for starting the server in the Milvus Docker container?](#Where-is-the-script-for-starting-the-server-in-the-Milvus-Docker-container)
 - [Besides the configuration file, how can I tell Milvus is using GPU for search?](#Besides-the-configuration-file-how-can-I-tell-Milvus-is-using-GPU-for-search)
@@ -77,7 +77,7 @@ The log files in the Docker container use UTC time by default. If your host mach
 
 The instruction sets that Milvus supports are SSE42, AVX, AVX2, and AVX512. Your CPU must support at least one of them for Milvus to function properly.
 
-#### Why does Milvus return Illegal instruction during startup?
+#### Why does Milvus return `illegal instruction` during startup?
 
 If your CPU does not support SSE42, AVX, AVX2, or AVX512, Milvus cannot start properly. You can use `cat /proc/cpuinfo` to check the supported instruction sets.
 

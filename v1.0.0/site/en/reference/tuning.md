@@ -70,7 +70,7 @@ After the indexes are created (FLAT is not included), the index files require ad
 * The data volume of the IVF_FLAT index is basically equal to the total data volume of its original vectors.
 * The data volume of the IVF\_SQ8 / IVF\_SQ8H index is equivalent to 25% to 30% of the total data volume of the original vectors.
 * The data volume of the IVF_PQ index changes according to its parameters, which is generally lower than 10% of the total data volume of the original vectors.
-* The data volume of HNSW/RNSG/ANNOY index is greater than the total data volume of the original vectors.
+* The data volume of HNSW/RNSG/Annoy index is greater than the total data volume of the original vectors.
 
 <div class="alert note">
 By calling <code>get_collection_stats</code>, you can get the total amount of data required to query a collection.
@@ -124,9 +124,9 @@ In scenario with continuous data insertion, because Milvus does not index segmen
 </div>
 
 
-- HNSW / RNSG / ANNOY index
+- HNSW / RNSG / Annoy index
 
-The index parameters of HNSW, RNSG, and ANNOY have a more complex impact on query performance. For more information, see [Index Introduction](index.md).
+The index parameters of HNSW, RNSG, and Annoy have a more complex impact on query performance. For more information, see [Index Introduction](index.md).
 
 ### Other
 

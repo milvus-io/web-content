@@ -2,7 +2,7 @@
 id: index.md
 ---
 
-# Vector index
+# Vector Index
 
 Vector index is a time-efficient and space-efficient data structure built on vectors through a certain mathematical model. Through the vector index, we can efficiently query several vectors similar to the target vector.
 
@@ -75,7 +75,7 @@ The following table classifies the indexes that Milvus supports:
     <td></td>
   </tr>
   <tr>
-    <td><a href="#ANNOY">ANNOY</a></td>
+    <td><a href="#Annoy">Annoy</a></td>
     <td>Tree-based index</td>
     <td></td>
   </tr>
@@ -88,7 +88,7 @@ To improve query performance, you can specify an index type for each vector fiel
 
 ## Create indexes
 
-When the `create_index` method is called, Milvus synchronously indexes the existing data on this field. Whenever the size of the inserted data reaches the `index_file_size`, Milvus automatically creates an index for it in the background.
+When the `create_index()` method is called, Milvus synchronously indexes the existing data on this field. Whenever the size of the inserted data reaches the `index_file_size`, Milvus automatically creates an index for it in the background.
 
 <div class="alert note">
 When the inserted data segment is less than 4096 rows, Milvus does not index it.
@@ -277,12 +277,12 @@ In order to improve performance, HNSW limits the maximum degree of nodes on each
    | `ef`    | Search scope  | [`top_k`, 32768] |
 
 
-### ANNOY
-<a name="ANNOY"></a>
+### Annoy
+<a name="Annoy"></a>
 
-ANNOY (Approximate Nearest Neighbors Oh Yeah) is an index that uses a hyperplane to divide a high-dimensional space into multiple subspaces, and then stores them in a tree structure.
+Annoy (Approximate Nearest Neighbors Oh Yeah) is an index that uses a hyperplane to divide a high-dimensional space into multiple subspaces, and then stores them in a tree structure.
 
-When searching for vectors, ANNOY follows the tree structure to find subspaces closer to the target vector, and then compares all the vectors in these subspaces (The number of vectors being compared should not be less than `search_k`) to obtain the final result. Obviously, when the target vector is close to the edge of a certain subspace, sometimes it is necessary to greatly increase the number of searched subspaces to obtain a high recall rate. Therefore, ANNOY uses `n_trees` different methods to divide the whole space, and searches all the dividing methods simultaneously to reduce the probability that the target vector is always at the edge of the subspace.
+When searching for vectors, Annoy follows the tree structure to find subspaces closer to the target vector, and then compares all the vectors in these subspaces (The number of vectors being compared should not be less than `search_k`) to obtain the final result. Obviously, when the target vector is close to the edge of a certain subspace, sometimes it is necessary to greatly increase the number of searched subspaces to obtain a high recall rate. Therefore, Annoy uses `n_trees` different methods to divide the whole space, and searches all the dividing methods simultaneously to reduce the probability that the target vector is always at the edge of the subspace.
 
 
 - Index building parameters
@@ -327,4 +327,4 @@ See <a href="https://medium.com/unstructured-data-service/how-to-choose-an-index
 
 - RNSG: <a href="http://www.vldb.org/pvldb/vol12/p461-fu.pdf">Fast Approximate Nearest Neighbor Search With The Navigating Spreading-out Graph</a>
 - HNSW: <a href="https://arxiv.org/abs/1603.09320">Efficient and robust approximate nearest neighbor search using Hierarchical Navigable Small World graphs</a>
-- ANNOY: <a href="https://erikbern.com/2015/10/01/nearest-neighbors-and-vector-models-part-2-how-to-search-in-high-dimensional-spaces.html">Nearest neighbors and vector models – part 2 – algorithms and data structures</a>
+- Annoy: <a href="https://erikbern.com/2015/10/01/nearest-neighbors-and-vector-models-part-2-how-to-search-in-high-dimensional-spaces.html">Nearest neighbors and vector models – part 2 – algorithms and data structures</a>

@@ -6,7 +6,7 @@ id: milvus_config.md
 
 ## Configuration overview
 
-The configurations apply to both single server Milvus and all nodes of a distributed Milvus cluster.
+The configurations apply to both Milvus Standalone and Cluster solutions.
 
 #### Milvus file structure
 

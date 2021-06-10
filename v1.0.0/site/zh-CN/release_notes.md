@@ -182,7 +182,7 @@ id: release_notes.md
 - 修复了一些老的 CPU 上运行时出现 illegal instruction 的问题。[#2598](https://github.com/milvus-io/milvus/issues/2598)
 - 调整了 HNSW 参数范围。[#2637](https://github.com/milvus-io/milvus/issues/2637)
 - 修复了一个构建索引可能会导致 Milvus 进程崩溃退出的问题。[#2642](https://github.com/milvus-io/milvus/issues/2642)
-- 修复了一个 ANNOY 索引默认参数与文档不对应的问题。[#2649](https://github.com/milvus-io/milvus/issues/2649)
+- 修复了一个 Annoy 索引默认参数与文档不对应的问题。[#2649](https://github.com/milvus-io/milvus/issues/2649)
 - 修复了一个压力测试下出现的 Milvus 无响应的问题。[#2692](https://github.com/milvus-io/milvus/issues/2692)
 - 修复了一个 HTTP 接口返回向量精度错误的问题。[#2752](https://github.com/milvus-io/milvus/issues/2752)
 - 修复了一个 GPU 版本中 `nprobe` 上限错误的问题。[#2767](https://github.com/milvus-io/milvus/issues/2767)
@@ -263,7 +263,7 @@ id: release_notes.md
 
 - 重构了日志输出。 [#221](https://github.com/milvus-io/milvus/issues/221)
 - 升级了 OpenBLAS 版本以提高 Milvus 性能。 [#1796](https://github.com/milvus-io/milvus/issues/1796)
-- 统一了 FAISS、NSG、HNSW 和 ANNOY 的向量距离计算方法。[#1965](https://github.com/milvus-io/milvus/issues/1965)
+- 统一了 FAISS、NSG、HNSW 和 Annoy 的向量距离计算方法。[#1965](https://github.com/milvus-io/milvus/issues/1965)
 - 支持 SSE4.2 指令集。 [#2039](https://github.com/milvus-io/milvus/issues/2039)
 - 重构了配置文件。 [#2149](https://github.com/milvus-io/milvus/issues/2149) [#2167](https://github.com/milvus-io/milvus/issues/2167)
 - 采用了 Elkan K-means 算法提高 IVF 索引性能。 [#2178](https://github.com/milvus-io/milvus/issues/2178)
@@ -438,15 +438,15 @@ id: release_notes.md
 
 #### 新增功能
 
-- **ANNOY 索引的支持**
+- **Annoy 索引的支持**
 
-  增加 `ANNOY` 索引类型，关于 `ANNOY` 索引的详细介绍请参考[文档](index.md)。[#261](https://github.com/milvus-io/milvus/issues/261)
+  增加 `Annoy` 索引类型，关于 `Annoy` 索引的详细介绍请参考[文档](index.md)。[#261](https://github.com/milvus-io/milvus/issues/261)
   
 - **向量删除**
 
   新增下列索引类型支持删除操作。[#1655](https://github.com/milvus-io/milvus/issues/1655) [#1660](https://github.com/milvus-io/milvus/issues/1660) [#1661](https://github.com/milvus-io/milvus/issues/1661) [#1849](https://github.com/milvus-io/milvus/issues/1849)
   
-  包括：Flat/IVFlat/IVFPQ/IVFSQ8/IVFSQ8H/NSG/HNSW/ANNOY
+  包括：Flat/IVFlat/IVFPQ/IVFSQ8/IVFSQ8H/NSG/HNSW/Annoy
 
 #### 主要改进
 

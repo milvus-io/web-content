@@ -69,7 +69,7 @@ Milvus 在支持 AVX 指令集的 CPU 上的查询性能较好。
 * IVF_FLAT 索引的数据量和其原始向量总数据量基本相等。
 * IVF\_SQ8 / IVF\_SQ8H 索引的数据量相当于其原始向量总数据量的 25% ～ 30%。
 * IVF_PQ 索引的数据量根据其参数变化，一般低于其原始向量总数据量的 10%。
-* HNSW／RNSG／ANNOY 索引的数据量都大于其原始向量总数据量。
+* HNSW／RNSG／Annoy 索引的数据量都大于其原始向量总数据量。
 
 <div class="alert note">
 通过调用 <code>get_collection_stats</code> 接口，可准确获知查询一个集合所需的数据总量。
@@ -121,9 +121,9 @@ IVF 索引都有两个相同的参数：`nlist` 和 `nprobe`。`nlist` 是建索
 在持续插入数据的场景下，由于对大小未达到 <code>index_file_size</code> 的数据段未建立索引，对其使用的查询方式是暴力搜索。计算量为：目标向量数量 x 该数据段向量总数。
 </div>
 
-- HNSW / RNSG / ANNOY 索引
+- HNSW / RNSG / Annoy 索引
 
-HNSW、RNSG、ANNOY 的索引参数对查询性能的影响较为复杂，建议参考 [索引概览](index.md#索引概览)。
+HNSW、RNSG、Annoy 的索引参数对查询性能的影响较为复杂，建议参考 [索引概览](index.md#索引概览)。
 
 ### 其他
 

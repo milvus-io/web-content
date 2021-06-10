@@ -38,6 +38,6 @@ Milvus 会生成关于系统运行状态的详细时序 metrics。你可以通�
 
 | 指标           | 说明                        |
 | -------------- | --------------------------- |
-| **Data Size**  | Milvus 所存数据总量（GB）。 |
-| **Total File** | Milvus 所存数据文件总个数。 |
+| **Data Size**  | Milvus 所存向量条数。 |
+| **Total File** | Milvus 所存数据总量（GB）。 |
 

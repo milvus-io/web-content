@@ -76,7 +76,7 @@ Milvus 目前支持的向量索引类型大都属于 ANNS（Approximate Nearest 
     <td></td>
   </tr>
   <tr>
-    <td><a href="#ANNOY">ANNOY</a></td>
+    <td><a href="#Annoy">Annoy</a></td>
     <td>基于树的索引</td>
     <td></td>
   </tr>
@@ -91,7 +91,7 @@ Milvus 数据段存储海量数据。在建立索引时，Milvus 为每个数据
 
 ### 用户主动创建索引
 
-调用 `create_index` 接口时，Milvus 会对该字段上的已有数据同步建立索引。每当后续插入的数据的大小达到系统配置的 `index_file_size` 时，Milvus 会为其在后台自动创建索引。
+调用 `create_index()` 接口时，Milvus 会对该字段上的已有数据同步建立索引。每当后续插入的数据的大小达到系统配置的 `index_file_size` 时，Milvus 会为其在后台自动创建索引。
 
 <div class="alert note">
     当插入的数据段少于 4096 行时，Milvus 不会为其建立索引。
@@ -276,12 +276,12 @@ HNSW（Hierarchical Small World Graph）是一种基于图的索引算法。它�
    | `ef`    | 搜索范围  | [`top_k`, 32768] |
 
 
-### ANNOY
-<a name="ANNOY"></a>
+### Annoy
+<a name="Annoy"></a>
 
-ANNOY（Approximate Nearest Neighbors Oh Yeah）是一种用超平面把高维空间分割成多个子空间，并把这些子空间以树型结构存储的索引方式。
+Annoy（Approximate Nearest Neighbors Oh Yeah）是一种用超平面把高维空间分割成多个子空间，并把这些子空间以树型结构存储的索引方式。
 
-在查询时，ANNOY 会顺着树结构找到距离目标向量较近的一些子空间，然后比较这些子空间里的所有向量（要求比较的向量数不少于 `search_k` 个）以获得最终结果。显然，当目标向量靠近某个子空间的边缘时，有时需要大大增加搜索的子空间数以获得高召回率。因此，ANNOY 会使用 `n_trees` 次不同的方法来划分全空间，并同时搜索所有划分方法以减少目标向量总是处于子空间边缘的概率。
+在查询时，Annoy 会顺着树结构找到距离目标向量较近的一些子空间，然后比较这些子空间里的所有向量（要求比较的向量数不少于 `search_k` 个）以获得最终结果。显然，当目标向量靠近某个子空间的边缘时，有时需要大大增加搜索的子空间数以获得高召回率。因此，Annoy 会使用 `n_trees` 次不同的方法来划分全空间，并同时搜索所有划分方法以减少目标向量总是处于子空间边缘的概率。
 
 - 建索引参数
 
@@ -324,4 +324,4 @@ ANNOY（Approximate Nearest Neighbors Oh Yeah）是一种用超平面把高维�
 
 - RNSG：<a href="http://www.vldb.org/pvldb/vol12/p461-fu.pdf">Fast Approximate Nearest Neighbor Search With The Navigating Spreading-out Graph</a>
 - HNSW：<a href="https://arxiv.org/abs/1603.09320">Efficient and robust approximate nearest neighbor search using Hierarchical Navigable Small World graphs</a>
-- ANNOY：<a href="https://erikbern.com/2015/10/01/nearest-neighbors-and-vector-models-part-2-how-to-search-in-high-dimensional-spaces.html">Nearest neighbors and vector models – part 2 – algorithms and data structures</a>
+- Annoy：<a href="https://erikbern.com/2015/10/01/nearest-neighbors-and-vector-models-part-2-how-to-search-in-high-dimensional-spaces.html">Nearest neighbors and vector models – part 2 – algorithms and data structures</a>

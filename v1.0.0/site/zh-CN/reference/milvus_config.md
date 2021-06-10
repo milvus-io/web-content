@@ -24,7 +24,7 @@ id: milvus_config.md
 你可以直接编辑配置文件对配置进行修改。如果修改了配置文件，你必须重启 Milvus 服务来启用新的更改。
 
 ```shell
-$ docker restart <container id>
+$ docker restart <container_id>
 ```
 
 下面以 Milvus 的系统配置文件 **server_config.yaml** 为例，演示如何修改日志级别和日志存储路径：
