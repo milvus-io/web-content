@@ -1,88 +1,98 @@
 {
-    "section1": {
-      "title": "Get Started",
-      "items": [
-        {
-          "title": "Start a Milvus Standalone",
-          "key": "stand-alone",
-          "btnLabel": "Learn to build",
-          "link": "overview_standalone.md"
-        },
-        {
-          "title": "Start a Milvus Cluster",
-          "key": "Cluster",
-          "btnLabel": "Learn to build",
-          "link": "overview_cluster.md"
-        }
-      ]
-    },
-    "section2": {
-      "title": "Introduction",
-      "desc": "Milvus is an open-source vector database that is highly flexible, reliable, and blazing fast. It supports adding, deleting, updating, and near real-time search of vectors on a trillion-byte scale. A comprehensive set of intuitive APIs, and support for multiple widely adopted index libraries (e.g., Faiss, NMSLIB, and Annoy), simplifies the process of choosing the right index type for a given scenario. Additionally, support for scalar data filtering ensures Milvus maintains a high recall rate and remains adaptable."
-    },
-    "section3": {
-      "title": "Recommended articles",
-      "items": [
-        {
-          "label": "Get started",
-          "list": [
-            {
-              "text": "Start a Milvus Standalone",
-              "link": "overview_standalone.md"
-            },
-            {
-              "text": "Start a Milvus Cluster",
-              "link": "overview_cluster.md"
-            }
-          ]
-        },
-        {
-          "label": "Develop",
-          "list": [
-            {
-              "text": "Pymilvus API Reference",
-              "link": "pymilvusapireference.md"
-            }
-          ]
-        },
-        {
-            "label": "FAQs",
-            "list": [
-              {
-                "text": "Milvus Product FAQs",
-                "link": "product_faq.md"
-              },
-              {
-                "text": "Milvus Operational FAQs",
-                "link": "operational_faq.md"
-              },
-              {
-                "text": "Milvus Performance FAQs",
-                "link": "performance_faq.md"
-              },
-              {
-                "text": "Troubleshooting",
-                "link": "troubleshooting.md"
-              },
-              {
-                "text": "Pymilvus FAQs",
-                "link": "pymilvus_faq.md"
-              }
-            ]
+  "section1": {
+    "title": "Get Started",
+    "items": [
+      {
+        "title": "Start a Milvus Standalone",
+        "key": "stand-alone",
+        "btnLabel": "Learn to build",
+        "link": "overview_standalone.md"
+      },
+      {
+        "title": "Start a Milvus Cluster",
+        "key": "Cluster",
+        "btnLabel": "Learn to build",
+        "link": "overview_cluster.md"
+      },
+      {
+        "title": "Milvus Bootcamp",
+        "key": "bootcamps",
+        "btnLabel": "Learn More",
+        "link": "/bootcamp"
+      }
+    ]
+  },
+  "section2": {
+    "title": "Introduction",
+    "desc": "Milvus is an open-source vector database that is highly flexible, reliable, and blazing fast. It supports adding, deleting, updating, and near real-time search of vectors on a trillion-byte scale. A comprehensive set of intuitive APIs, and support for multiple widely adopted index libraries (e.g., Faiss, NMSLIB, and Annoy), simplifies the process of choosing the right index type for a given scenario. Additionally, support for scalar data filtering ensures Milvus maintains a high recall rate and remains adaptable."
+  },
+  "section3": {
+    "title": "Recommended articles",
+    "items": [
+      {
+        "label": "Get started",
+        "list": [
+          {
+            "text": "Start a Milvus Standalone",
+            "link": "overview_standalone.md"
+          },
+          {
+            "text": "Start a Milvus Cluster",
+            "link": "overview_cluster.md"
           }
-      ]
-    },
-    "section4": {
-      "title": "Blog",
-      "items": [
-        {
-          "time": "January 5, 2021",
-          "link": "https://zilliz.com/blog/Vector-Similarity-Search-Hides-in-Plain-View",
-          "title": "Vector Similarity Search Hides in Plain View",
-          "abstract": "Discover what vector similarity search is, its various applications, and the public resources making artificial intelligence more accessible than ever.",
-          "imgSrc": "https://zillizstorage.blob.core.windows.net/zilliz-assets/zilliz-assets/assets/small_plainview_703d8497ca.jpg?38953.77500005998"
-        }
-      ]
+        ]
+      },
+      {
+        "label": "Develop",
+        "list": [
+          {
+            "text": "Pymilvus API Reference",
+            "link": "pymilvusapireference.md"
+          }
+        ]
+      },
+      {
+        "label": "FAQs",
+        "list": [
+          {
+            "text": "Milvus Product FAQs",
+            "link": "product_faq.md"
+          },
+          {
+            "text": "Milvus Operational FAQs",
+            "link": "operational_faq.md"
+          },
+          {
+            "text": "Milvus Performance FAQs",
+            "link": "performance_faq.md"
+          },
+          {
+            "text": "Troubleshooting",
+            "link": "troubleshooting.md"
+          },
+          {
+            "text": "Pymilvus FAQs",
+            "link": "pymilvus_faq.md"
+          }
+        ]
+      }
+    ]
+  },
+  "section4": {
+    "title": "Blog",
+    "items": [
+      {
+        "time": "January 5, 2021",
+        "link": "https://zilliz.com/blog/Vector-Similarity-Search-Hides-in-Plain-View",
+        "title": "Vector Similarity Search Hides in Plain View",
+        "abstract": "Discover what vector similarity search is, its various applications, and the public resources making artificial intelligence more accessible than ever.",
+        "imgSrc": "https://zillizstorage.blob.core.windows.net/zilliz-assets/zilliz-assets/assets/small_plainview_703d8497ca.jpg?38953.77500005998"
+      }
+    ],
+    "loadBtn": {
+      "label": "See More Blogs",
+      "isExternal": true,
+      "link": "https://blog.milvus.io/"
     }
   }
-  
+}
