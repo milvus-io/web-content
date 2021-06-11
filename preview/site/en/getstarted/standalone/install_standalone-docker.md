@@ -86,8 +86,8 @@ $ sudo docker pull milvusdb/milvus:2.0.0-d043021-19c36b
 ```
 $ mkdir -p /home/$USER/milvus
 $ chome/$USER/milvus
-$ wget <https://raw.githubusercontent.com/milvus-io/milvus/v2.0.0/deployments/docker/docker-compose.standalone.yml> -O docker-compose.yml
-$ wget <https://raw.githubusercontent.com/milvus-io/milvus/v2.0.0/deployments/docker/.env>
+$ wget https://raw.githubusercontent.com/milvus-io/milvus/v2.0.0/deployments/docker/docker-compose.standalone.yml -O docker-compose.yml
+$ wget https://raw.githubusercontent.com/milvus-io/milvus/v2.0.0/deployments/docker/.env
 ```
 > The **.env** file contains all variable definitions used in **docker-compose.yml**.
 

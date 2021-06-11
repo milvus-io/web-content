@@ -9,7 +9,7 @@
       "order": 0,
       "isMenu": true
     },
-  {
+    {
       "id": "overview.md",
       "title": "What is Milvus",
       "label1": "about",
@@ -17,7 +17,23 @@
       "label3": null,
       "order": 0
     },
-  {
+    {
+      "id": "key_features.md",
+      "title": "Key Features",
+      "label1": "about",
+      "label2": null,
+      "label3": null,
+      "order": 1
+    },
+    {
+      "id": "roadmap.md",
+      "title": "Milvus Roadmap",
+      "label1": "about",
+      "label2": null,
+      "label3": null,
+      "order": 2
+    },
+    {
       "id": "getstarted",
       "title": "Get Started",
       "label1": "",
@@ -26,7 +42,7 @@
       "order": 1,
       "isMenu": true
     },
-  {
+    {
       "id": "standalone",
       "title": "Milvus Standalone",
       "label1": "getstarted",

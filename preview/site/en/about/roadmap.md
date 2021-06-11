@@ -4,7 +4,7 @@ title: Milvus Roadmap
 ---
 # Milvus Roadmap
 
-#### Milvus 2.0 - Beta version of distributed vector database
+#### Milvus 2.0 - Release Candidate of distributed vector database
 - Highly available with fully managed failure recovery and service discovery
 - Support for scalar filtering and point query
 - Provides highly abstract ORM-style APIs
@@ -12,7 +12,7 @@ title: Milvus Roadmap
 
 
 
-#### Milvus 2.1 - Stable version including complete set of DML functions
+#### Milvus 2.1 - Full-fledged version including complete set of DML functions
 - Supports delete and update operations
 - Supports string and varbinary data types
 - Vector similarity search by distance

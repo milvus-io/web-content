@@ -1,6 +1,6 @@
 {
   "menuList": [
-  {
+    {
       "id": "about",
       "title": "关于 Milvus",
       "label1": "",
@@ -9,7 +9,7 @@
       "order": 0,
       "isMenu": true
     },
-  {
+    {
       "id": "overview.md",
       "title": "Milvus 是什么",
       "label1": "about",
@@ -17,7 +17,23 @@
       "label3": null,
       "order": 0
     },
-  {
+    {
+      "id": "key_features.md",
+      "title": "产品亮点",
+      "label1": "about",
+      "label2": null,
+      "label3": null,
+      "order": 1
+    },
+    {
+      "id": "roadmap.md",
+      "title": "产品路线图",
+      "label1": "about",
+      "label2": null,
+      "label3": null,
+      "order": 2
+    },
+    {
       "id": "getstarted",
       "title": "Get Started",
       "label1": "",
