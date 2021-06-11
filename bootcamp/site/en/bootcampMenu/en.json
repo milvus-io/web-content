@@ -1,0 +1,12 @@
+{
+  "menuList": [
+    {
+      "id": "bootcamp",
+      "title": "Home",
+      "label1": "",
+      "label2": "",
+      "label3": "",
+      "order": 0
+    }
+  ]
+}
