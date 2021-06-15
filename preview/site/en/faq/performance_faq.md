@@ -10,7 +10,7 @@ title: Performance FAQ
 
 <!-- /TOC -->
 
-#### How to set `nlist` and `nprobe` for IVF indices?
+#### How to set `nlist` and `nprobe` for IVF indexes?
 
 Setting `nlist` is scenario-specific. As a rule of thumb, the recommended value of `nlist` is `4 × sqrt(n)`, where `n` is the total number of entities in a segment.
 
@@ -25,7 +25,7 @@ The following charts are results from a test running on the sift50m dataset and 
 
 #### Why do queries sometimes take longer on smaller datasets?
 
-Query operations are conducted on segments. indices reduce the amount of time it takes to query a segment. If a segment has not been indexed, Milvus resorts to brute-force search on the raw data—drastically increasing query time.
+Query operations are conducted on segments. indexes reduce the amount of time it takes to query a segment. If a segment has not been indexed, Milvus resorts to brute-force search on the raw data—drastically increasing query time.
 
 Therefore, it usually takes longer to query on a small dataset (collection) because it has not built index. This is because the sizes of its segments have not reached the index-building threshold set by `master.minSegmentSizeToEnable`. Call `create_index()` to force Milvus to index segments that do not meet the threshold, significantly improving query performance.
 
@@ -42,7 +42,7 @@ You can call `flush()` and then `load_collection()` to ensure inserted data is i
 
 #### What factors impact CPU usage?
 
-CPU usage increases when Milvus is building indices or running queries. In general, index building is CPU intensive except when using Annoy, which runs on a single thread.
+CPU usage increases when Milvus is building indexes or running queries. In general, index building is CPU intensive except when using Annoy, which runs on a single thread.
 
 When running queries, CPU usage is affected by `nq` and `nprobe`. When `nq` and `nprobe` are small, concurrency is low and CPU usage stays low.
 

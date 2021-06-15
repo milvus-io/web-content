@@ -32,7 +32,7 @@ Recall is affected mainly by index type and search parameters.
 
 For FLAT index, Milvus takes an exhaustive scan within a collection, with a 100% return.
 
-For IVF indices, the nprobe parameter determines the scope of a search within the collection. Increasing nprobe increases the proportion of vectors searched and recall, but diminishes query performance.
+For IVF indexes, the nprobe parameter determines the scope of a search within the collection. Increasing nprobe increases the proportion of vectors searched and recall, but diminishes query performance.
 
 For HNSW index, the ef parameter determines the breadth of the graph search. Increasing ef increases the number of points searched on the graph and recall, but diminishes query performance.
 
@@ -71,9 +71,9 @@ Run the lscpu command to check if your CPU supports the SIMD instruction sets me
 $ lscpu | grep -e sse4_2 -e avx -e avx2 -e avx512
 ```
 
-#### Why does Milvus return `Illegal instruction` during startup?
+#### Why does Milvus return `illegal instruction` during startup?
 
-Milvus requires your CPU to support a SIMD instruction set: SSE4.2, AVX, AVX2, or AVX512. CPU must support at least one of these to ensure that Milvus operates normally. An `Illegal instruction` error returned during startup suggests that your CPU does not support any of the above four instruction sets.
+Milvus requires your CPU to support a SIMD instruction set: SSE4.2, AVX, AVX2, or AVX512. CPU must support at least one of these to ensure that Milvus operates normally. An `illegal instruction` error returned during startup suggests that your CPU does not support any of the above four instruction sets.
 
 See [CPU’s support for SIMD Instruction Set](install_standalone-docker.md#cpu_support).
 

@@ -11,7 +11,6 @@ group: standalone
 
 Before moving forward to installation, you must check the eligibility of your hardware in line with Milvus' requirement.
 
-
 <details><summary>Check whether your CPU supports SIMD extension instruction set</summary>
 
 Milvus' computing operations depend on CPU’s support for SIMD (Single Instruction, Multiple Data) extension instruction set. Whether your CPU supports SIMD extension instruction set is crucial to index building and vector similarity search within Milvus. Ensure that your CPU supports at least one of the following SIMD instruction sets:
@@ -42,14 +41,14 @@ You can access <a href="https://developer.nvidia.com/cuda-gpus">Nvidia</a>'s off
 Enabling GPU acceleration in Milvus is optional. You can still run the whole Milvus service even if your server does not have a GPU device.
 </div>
 
-In the current version, the following vector indices support GPU acceleration:
+In the current version, the following vector indexes support GPU acceleration:
 
 - FLAT
 - IVF-FLAT
 - IVF-SQ8
 - IVF-PQ
 
-Learn more about [vector indices](https://www.zilliz.com/blog/Accelerating-Similarity-Search-on-Really-Big-Data-with-Vector-Indexing#flat-good-for-searching-relatively-small-million-scale-datasets-when-100-recall-is-required).
+Learn more about [Vector indexes](https://www.zilliz.com/blog/Accelerating-Similarity-Search-on-Really-Big-Data-with-Vector-Indexing#flat-good-for-searching-relatively-small-million-scale-datasets-when-100-recall-is-required).
 
 </details>
 

@@ -367,7 +367,7 @@ Specific configurations of querynode module
 
 ### Other configurations
 
-Configurations of the default names of partitions and indices in the system
+Configurations of the default names of partitions and indexes in the system
 
 | **Configuration**           | **Description**           |
 | --------------------------- | ------------------------- |

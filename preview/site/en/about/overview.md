@@ -7,15 +7,7 @@ related_key: Milvus Overview
 # What is Milvus
 Milvus is an open-source vector database built to power AI applications and vector similarity search. 
 
-<table id="overview_links">
-    <tr>
-        <td><img src="../../../assets/link_standalone.png" alt="Miluvs Standalone"></td>
-        <td><img src="../../../assets/link_cluster.png" alt="Miluvs Cluster"></td>
-    </tr>
-    <tr>
-        <td><a href="overview_standalone.md">Milvus Standalone</a></td>
-        <td><a href="overview_cluster.md">Milvus Cluster</a></td>
-</table>
+Milvus [Standalone](overview_standalone.md) and Milvus [Cluster](overview_cluster.md) are both available now.
 
 ## Key Concepts
 
@@ -36,7 +28,7 @@ Similarity search refers to the process of comparing a target to a database to f
 Join the Milvus community on [Slack](https://join.slack.com/t/milvusio/shared_invite/zt-e0u4qu3k-bI2GDNys3ZqX1YCJ9OM~GQ) to share your suggestions, advice, and questions with our engineering team. 
 
 <a href="https://join.slack.com/t/milvusio/shared_invite/zt-e0u4qu3k-bI2GDNys3ZqX1YCJ9OM~GQ">
-    <img src="../../../assets/slack.jpg" alt="Miluvs Slack Channel">
+    <img src="../../../assets/slack.jpg" alt="Miluvs Slack Channel" height="200" width="400">
 </a>
 
 You can also check out our [FAQ page](https://milvus.io/docs/v1.0.0/performance_faq.md) to discover solutions or answers to your issues or questions.

@@ -83,19 +83,19 @@ No. Milvus v2.0 has varied behavior. Data must be loaded to memory before search
 - If you do not know the exact partitions, call `load_collection()` before calling `search()`.
 - If you fail to load collections or partitions before searching, Milvus returns an error.
 
-#### Can multiple indices be created for the same field in a collection?
+#### Can multiple indexes be created for the same field in a collection?
 
-Yes. Multiple indices can be built on the same field of a collection. However, each index must be assigned a unique name in the collection. If indices are not given unique names, new ones overwrite old ones. Call `load_index()` to load a specified index to memory so that Milvus searches it.
+Yes. Multiple indexes can be built on the same field of a collection. However, each index must be assigned a unique name in the collection. If indexes are not given unique names, new ones overwrite old ones. Call `load_index()` to load a specified index to memory so that Milvus searches it.
 
-#### Can indices be created after inserting vectors?
+#### Can indexes be created after inserting vectors?
 
 Yes. If `create_index()` is called, Milvus builds an index for subsequently inserted vectors. However, Milvus does not build an index until the newly inserted vectors fill an entire segment and the newly created index file is separate from the previous one.
 
 #### Does recall vary between IVF_SQ8 and IVF_SQ8H?
 
-No. The IVF_SQ8 and IVF_SQ8H indices have the same recall for queries performed on the same dataset.
+No. The IVF_SQ8 and IVF_SQ8H indexes have the same recall for queries performed on the same dataset.
 
-#### How are the FLAT and IVF_FLAT indices different?
+#### How are the FLAT and IVF_FLAT indexes different?
 
 The IVF_FLAT index divides vector space into list clusters. At the default list value of 16,384, Milvus compares the distances between the target vector and the centroids of all 16,384 clusters to return probe nearest clusters. Milvus then compares the distances between the target vector and the vectors in the selected clusters to get the nearest vectors. Unlike IVF_FLAT, FLAT directly compares the distances between the target vector and every other vector.
 
@@ -122,7 +122,7 @@ There is no limit on the number of collections. However, the number of partition
 
 #### Why do I get fewer than k vectors when searching for `topk` vectors?
 
-Among the indices that Milvus supports, IVF_FLAT and IVF_SQ8 implement the k-means clustering method. A data space is divided into `nlist` clusters and the inserted vectors are distributed to these clusters. Milvus then selects the `nprobe` nearest clusters and compares the distances between the target vector and all vectors in the selected clusters to return the final results.
+Among the indexes that Milvus supports, IVF_FLAT and IVF_SQ8 implement the k-means clustering method. A data space is divided into `nlist` clusters and the inserted vectors are distributed to these clusters. Milvus then selects the `nprobe` nearest clusters and compares the distances between the target vector and all vectors in the selected clusters to return the final results.
 
 If `nlist` and `topk` are large and nprobe is small, the number of vectors in the nprobe clusters may be less than `k`. Therefore, when you search for the `topk` nearest vectors, the number of returned vectors is less than `k`.
 
