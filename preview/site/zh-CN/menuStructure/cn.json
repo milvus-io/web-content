@@ -34,6 +34,14 @@
       "order": 2
     },
     {
+      "id": "milvus_adopters.md",
+      "title": "Milvus 用户",
+      "label1": "about",
+      "label2": null,
+      "label3": null,
+      "order": 3
+    },
+    {
       "id": "getstarted",
       "title": "Get Started",
       "label1": "",
