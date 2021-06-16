@@ -73,6 +73,11 @@
       ]
     },
     "section4": {
+      "loadBtn": {
+        "label": "See More Blogs",
+        "isExternal": true,
+        "link": "https://zilliz.com/blog"
+      },
       "title": "Blog",
       "items": [
         {
