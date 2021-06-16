@@ -1,15 +1,24 @@
 ---
-id: install_standalone-source.md
-label: Install from Source Code
+id: install_cluster-helm.md
+label: Install with Helm Chart
 order: 1
-group: standalone
+group: cluster
 ---
 
-# Install Milvus Standalone
+# Install Milvus Cluster
 
 ## Before You Begin
 
 Before moving forward to installation, you must check the eligibility of your hardware in line with Milvus' requirement.
+
+<details><summary>Check your Docker and Docker Compose version</summary>
+
+<div class="alert note">
+Docker Compose is the recommended way to install Milvus.
+</div>
+- Docker version 19.03 or higher is required.
+- Docker Compose version 1.25.1 or higher is required. 
+</details>
 
 <details><summary>Check whether your CPU supports SIMD extension instruction set</summary>
 
@@ -28,7 +37,7 @@ $ lscpu | grep -e sse4_2 -e avx -e avx2 -e avx512
 </details>
 
 <details><summary>Check your GPU’s eligibility</summary>
-Milvus Standalone supports GPU acceleration on floating vectors. 
+Milvus Cluster supports GPU acceleration on floating vectors. 
 - Supported Nvidia GPU versions are 6.0, 6.1, 7.0, and 7.5.
 
 <div class="alert note">
@@ -52,46 +61,7 @@ Learn more about [Vector indexes](https://www.zilliz.com/blog/Accelerating-Simil
 
 </details>
 
-## Install Milvus Standalone
+## Install Milvus Cluster
 
-<div class="tab-wrapper"><a href="install_standalone-docker.md" class=''>Install with Docker</a><a href="install_standalone-source.md" class='active '>Install from Source Code</a></div>
+<div class="tab-wrapper"><a href="install_cluster-docker.md" class=''>Install with Docker</a><a href="install_cluster-helm.md" class='active '>Install with Helm Chart</a></div>
 
-1. Prerequisites
-
-Install the following dependencies before building Milvus Standalone from source code.
-
-- [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) for version control.
-- [Golang](https://golang.org/doc/install) version 1.15 or higher and associated toolkits.
-- [CMake](https://cmake.org/install/) version 3.14 or higher for compilation.
-- [OpenBLAS](https://github.com/xianyi/OpenBLAS/wiki/Installation-Guide) (Basic Linear Algebra Subprograms) library version 0.3.9 or higher for matrix operations.
-
- 2. Compile executable files for Milvus Standalone:
-
- ```
- # Clone github repository
-$ cd /home/$USER/
-$ git clone https://github.com/milvus-io/milvus.git
-
-# Install third-party dependencies
-$ cd /home/$USER/milvus/
-$ ./scripts/install_deps.sh
-
-# Compile Milvus standalone
-$ make singlenode
-```
-
-3. Start Milvus Standalone:
-
-```
-$ unset http_proxy
-$ unset https_proxy
-
-# Start infrastructure service
-$ cd /home/$USER/milvus/deployments/docker
-$ docker-compose down
-$ docker-compose up -d
-
-# Start Milvus Standalone service
-$ cd /home/$USER/milvus
-./bin/singlenode    > /tmp/singlenode.log 2>&1  &
-```

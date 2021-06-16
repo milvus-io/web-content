@@ -12,6 +12,14 @@ group: cluster
 
 Before moving forward to installation, you must check the eligibility of your hardware in line with Milvus' requirement.
 
+<details><summary>Check your Docker and Docker Compose version</summary>
+
+<div class="alert note">
+Docker Compose is the recommended way to install Milvus.
+</div>
+- Docker version 19.03 or higher is required.
+- Docker Compose version 1.25.1 or higher is required. 
+</details>
 
 <details><summary>Check whether your CPU supports SIMD extension instruction set</summary>
 
@@ -56,7 +64,7 @@ Learn more about [Vector indexes](https://www.zilliz.com/blog/Accelerating-Simil
 
 ## Install Milvus Cluster
 
-<div class="tab-wrapper"><a href="install_cluster-docker.md" class='active '>Install with Docker</a><a href="install_cluster-source.md" class=''>Install from Source Code</a></div>
+<div class="tab-wrapper"><a href="install_cluster-docker.md" class='active '>Install with Docker</a><a href="install_cluster-helm.md" class=''>Install with Helm Chart</a></div>
 
 1. Docker version 19.03 or higher is required. Check Docker version:
 
@@ -78,30 +86,20 @@ $ sudo docker-compose version
 
 ```
 $ mkdir -p /home/$USER/milvus
-$ chome/$USER/milvus
+$ cd home/$USER/milvus
 $ wget https://raw.githubusercontent.com/milvus-io/milvus/v2.0.0/deployments/docker/distributed/docker-compose.yml
 ```
-4. Start the infrastructure service and the Milvus service with docker-compose.
-
-Start the infrastructure service and the Milvus service.
+4. Start Docker Compose.
 ```
 $ sudo docker-compose up -d 
 ```
-Stop the infrastructure service and the Milvus service.
-```
-$ sudo docker-compose down
-```
-Check if the infrastructure service and the Milvus service boot successfully.
-```
-$ sudo docker ps
-```
 
-> If Docker Compose boots successfully, 12 running docker containers will appear (nine infrastructure services and three Milvus services):
+*If Docker Compose boots successfully, 12 running docker containers will appear (nine infrastructure services and three Milvus services):*
 
 '''
 $ sudo docker ps 
 
-CONTAINER ID | IMAGE | COMMAND | CREATED |STATUS | PORTS | NAMES
+|CONTAINER ID | IMAGE | COMMAND | CREATED |STATUS | PORTS | NAMES|
 | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- |
 0f9d37d78e0c |  milvusdb/milvus:2.0.0-d043021-19c36b |      "/tini -- /milvus/bi…"  | 7 minutes ago  | Up 7 minutes |  | distributed_querynode_1
 40568c5d5c40 |  milvusdb/milvus:2.0.0-d043021-19c36b |      "/tini -- /milvus/bi…"  | 7 minutes ago  | Up 7 minutes |   | distributed_indexnode_1
@@ -114,5 +112,7 @@ d87fe6b9d731 |  milvusdb/milvus:2.0.0-d043021-19c36b |      "/tini -- /milvus/bi
 7513e26e1ee2 |  milvusdb/milvus:2.0.0-d043021-19c36b  |     "/tini -- /milvus/bi…"  | 7 minutes ago |  Up 7 minutes  |    |  distributed_dataservice_1
 75d4ff2916b7 |  minio/minio:RELEASE.2020-12-03T00-03-10Z |  "/usr/bin/docker-ent…"  | 7 minutes ago  | Up 7 minutes (healthy) |  9000/tcp |distributed_minio_1
 08b81e680c82 |  quay.io/coreos/etcd:latest    |    "etcd -listen-peer-u…" |  7 minutes ago  | Up 7 minutes  | 2379-2380/tcp |distributed_etcd_1
-5622c872ed3e |  apachepulsar/pulsar:latest  |   "bin/pulsar standalo…" |  7 minutes ago  | Up 7 minutes |     |     distributed_pulsar_1
+5622c872ed3e |  apachepulsar/pulsar:latest  |   "bin/pulsar standalo…" |  7 minutes ago  | Up 7 minutes |     |     distributed_pulsar_1|
 '''
+
+> To stop Docker Compose, run ```$ sudo docker-compose down```.

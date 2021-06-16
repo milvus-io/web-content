@@ -10,7 +10,16 @@ group: standalone
 
 ## Before You Begin
 
-Before moving forward to installation, you must check the eligibility of your hardware in line with Milvus' requirement.
+Before moving forward to installation, you must check the eligibility of your Docker, Docker Compose, and hardware in line with Milvus' requirement.
+
+<details><summary>Check your Docker and Docker Compose version</summary>
+
+<div class="alert note">
+Docker Compose is the recommended way to install Milvus.
+</div>
+- Docker version 19.03 or higher is required.
+- Docker Compose version 1.25.1 or higher is required. 
+</details>
 
 <a href="#cpu_support"></a><details><summary>Check whether your CPU supports SIMD extension instruction set</summary>
 
@@ -55,9 +64,9 @@ Learn more about [Vector indexes](https://www.zilliz.com/blog/Accelerating-Simil
 
 ## Install Milvus Standalone
 
-<div class="tab-wrapper"><a href="install_standalone-docker.md" class='active '>Install with Docker</a><a href="install_standalone-source.md" class=''>Install from Source Code</a></div>
+<div class="tab-wrapper"><a href="install_standalone-docker.md" class='active '>Install with Docker</a><a href="install_standalone-helm.md" class=''>Install with Helm Chart</a></div>
 
-1. Docker version 19.03 or higher is required. Check Docker version:
+1. Check Docker version:
 
 ```
 $ sudo docker info
@@ -65,7 +74,7 @@ $ sudo docker info
 
 > Follow [Get Docker](https://docs.docker.com/get-docker/) to install Docker on your system.
 
-2. Docker Compose version 1.25.1 or higher is required. Check Docker Compose version:
+2. Check Docker Compose version:
 
 ```
 $ sudo docker-compose version
@@ -73,7 +82,7 @@ $ sudo docker-compose version
 
 > See [Install Docker Compose](https://docs.docker.com/compose/install/) for Docker Compose installation guide.
 
-3. Pull the docker image:
+3. Pull the Docker image:
 
 ```
 $ sudo docker pull milvusdb/milvus:2.0.0-d043021-19c36b
@@ -83,11 +92,16 @@ $ sudo docker pull milvusdb/milvus:2.0.0-d043021-19c36b
 
 ```
 $ mkdir -p /home/$USER/milvus
-$ chome/$USER/milvus
+$ cd home/$USER/milvus
 $ wget https://raw.githubusercontent.com/milvus-io/milvus/v2.0.0/deployments/docker/docker-compose.standalone.yml -O docker-compose.yml
 $ wget https://raw.githubusercontent.com/milvus-io/milvus/v2.0.0/deployments/docker/.env
 ```
-> The **.env** file contains all variable definitions used in **docker-compose.yml**.
+> The **.env** file contains all variable definitions used in **docker-compose.yml**. Ensure that you set the docker image in `TARGET_DOCKER_IMAGE` to the image defined in the **.env** file.
+```
+TARGET_DOCKER_IMAGE=milvusdb/milvus:2.0.0-d
+```
+
+
 
 | Variable      | Definition |
 | ----------- | ----------- |
@@ -104,31 +118,18 @@ $ wget https://raw.githubusercontent.com/milvus-io/milvus/v2.0.0/deployments/doc
 
 5. Start Docker Compose.
 
-Ensure that you set the docker image in TARGET_DOCKER_IMAGE to the image defined in the **.env** file.
-
-```
-TARGET_DOCKER_IMAGE=milvusdb/milvus:2.0.0-d043021-19c36b
-```
-
-Start Docker Compose:
-
 ```
 $ sudo docker-compose up -d 
 ```
-Stop Docker Compose:
-
-```
-$ sudo docker-compose down
-```
-> If Docker Compose boots successfully, three running docker containers will appear (two infrastructure services and one Milvus service):
+*If Docker Compose boots successfully, three running docker containers will appear (two infrastructure services and one Milvus service):*
 
 ```
 $ docker ps 
 
-CONTAINER ID | IMAGE | COMMAND | CREATED |STATUS | PORTS | NAMES
+|CONTAINER ID | IMAGE | COMMAND | CREATED |STATUS | PORTS | NAMES
 | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- |
 |3baf500700ff | milvusdb/milvus:2.0.0-d043021-19c36b | "/tini -- /milvus-di…" | 3 seconds ago | Up 1 second |   0.0.0.0:19530->19530/tcp | deploy_standalone_1|
 |d807e1e1e9b1 |  quay.io/coreos/etcd:latest | "etcd -listen-peer-u…" |  6 seconds ago  | Up 4 seconds  |  0.0.0.0:2379-2380->2379-2380/tcp, 0.0.0.0:4001->4001/tcp  |deploy_etcd_1 |
 | a103514a959a  | minio/minio:RELEASE.2020-12-03T00-03-10Z |   "/usr/bin/docker-ent…"  | 6 seconds ago  | Up 4 seconds (health: starting) |  0.0.0.0:9000->9000/tcp    | deploy_minio_1|
-
 ```
+> To stop Docker Compose, run ```$ sudo docker-compose down```.
