@@ -7,7 +7,7 @@ group: distribution
 
 # Milvus Distributions
 
-## Overview 
+## Overview
 
 Milvus is available in CPU-only and GPU-enabled distributions:
 

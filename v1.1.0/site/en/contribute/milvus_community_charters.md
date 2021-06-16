@@ -3,7 +3,7 @@ id: milvus_community_charters.md
 ---
 # Milvus Community Charters
 ## About the Milvus community
-Milvus is an open source vector database that is highly flexible, reliable, and blazing fast. Milvus is an incubating project hosted in the LF AI & Data foundation since Mar. 2020. (Project URL: https://lfaidata.foundation/projects/milvus/)
+Milvus is an open-source vector database that is highly flexible, reliable, and blazing fast. In June 2021, [Milvus](https://lfaidata.foundation/projects/milvus/) graduated from the LF AI & Data foundation's incubator program after spending 15 months in the incubation phase.
 
 We, as the Milvus community, want to build a fundamental data serving component so that AI applications could go production much easier. More and more people start to build up their production AI applications upon Milvus. You can find more user stories of Milvus in our [project blog](https://medium.com/unstructured-data-service).
 
