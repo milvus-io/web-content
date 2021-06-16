@@ -1,60 +1,4 @@
 {
-  "heroSection": {
-    "title": "加入社区",
-    "list": [
-      {
-        "title": "Slack Channel",
-        "desc": "To connect with other users and contributors, welcome to join our Slack Channel.",
-        "link": "https://milvusio.slack.com/",
-        "type": "SLACK"
-      },
-      {
-        "title": "Github Discussion",
-        "desc": "To ask questions to the community or request features, welcome to visit our GitHub Discussions.",
-        "link": "https://github.com/milvus-io/milvus/discussions",
-        "type": "GITHUB"
-      }
-    ]
-  },
-  "repoSection": {
-    "title": "Our Repositories",
-    "list": [
-      {
-        "title": "Milvus",
-        "desc": "Vector similarity search",
-        "link": "https://github.com/milvus-io/milvus"
-      },
-      {
-        "title": "Pymilvus-orm",
-        "desc": "Python SDK for Milvus",
-        "link": "https://github.com/milvus-io/pymilvus"
-      },
-      {
-        "title": "Milvus-sdk-java",
-        "desc": "JAVA SDK for Milvus",
-        "link": "https://github.com/milvus-io/milvus-sdk-java"
-      },
-      {
-        "title": "Milvus-helm",
-        "desc": "The helm chart to deploy Milvus",
-        "link": "https://github.com/milvus-io/milvus-helm"
-      },
-      {
-        "title": "www.milvus.io",
-        "desc": "Milvus official website",
-        "link": "https://github.com/milvus-io/www.milvus.io"
-      },
-      {
-        "title": "Milvus-sdk-go",
-        "desc": "Golang SDK for Milvus",
-        "link": "https://github.com/milvus-io/milvus-sdk-go"
-      }
-    ]
-  },
-  "contributeSection": {
-    "title": "How to contribute",
-    "desc": "Contributions are welcomed and greatly appreciated. Please read our contribution guidelines for detailed contribution workflow. This project adheres to the code of conduct of Milvus. By participating, you are expected to uphold this code. We use GitHub issues to track issues and bugs. For general questions and public discussions, please join our community."
-  },
   "mailingSection": {
     "title": "Mailing List",
     "list": [
@@ -72,48 +16,205 @@
       }
     ]
   },
-  "contributorSection": {
-    "title": "Featured Contributors",
+  "aboutSection": {
+    "title": "About the Community",
+    "content": "The Milvus community is comprised of users, contributors, and culture that unite our community and inspire new ideas, collaboration, and mutual learning. Our open-source community files issues and pull requests, attends events, advocates for greater adoption of Milvus, and makes many other valuable contributions. Read on to learn how you can get involved and become part of this amazing community.",
     "list": [
       {
-        "login": "1",
-        "avatar": "../../assets/contributor.png",
-        "link": "https://github.com/"
+        "iconType": "build",
+        "title": "Build",
+        "desc": "Build the cloud-native vector database through community collaboration.",
+        "link": null,
+        "label": null
       },
       {
-        "login": "2",
-        "avatar": "../../assets/contributor.png",
-        "link": "https://github.com/"
+        "iconType": "learn",
+        "title": "Learn",
+        "desc": "Learn knowledge and skills as active community participants.",
+        "link": null,
+        "label": null
       },
       {
-        "login": "3",
-        "avatar": "../../assets/contributor.png",
-        "link": "https://github.com/"
+        "iconType": "grow",
+        "title": "Grow",
+        "desc": "Grow into an expert on all things Milvus in community.",
+        "link": null,
+        "label": null
       },
       {
-        "login": "4",
-        "avatar": "../../assets/contributor.png",
-        "link": "https://github.com/"
+        "iconType": "share",
+        "title": "Share",
+        "desc": "Share best practices and lessons learned with the community at large.",
+        "link": null,
+        "label": null
+      }
+    ]
+  },
+  "recommendSection": {
+    "title": "Recommended Articles",
+    "start": {
+      "title": "Get started",
+      "list": [
+        {
+          "label": "Start a Milvus standalone1",
+          "link": "#"
+        },
+        {
+          "label": "Start a Milvus cluster2",
+          "link": "#"
+        },
+        {
+          "label": "Start a Milvus standalone3",
+          "link": "#"
+        },
+        {
+          "label": "Start a Milvus standalone4",
+          "link": "#"
+        }
+      ]
+    },
+    "develop": {
+      "title": "Develop",
+      "list": [
+        {
+          "label": "Pymilvus API reference5",
+          "link": "#"
+        },
+        {
+          "label": "Sample apps1",
+          "link": "#"
+        },
+        {
+          "label": "Sample apps2",
+          "link": "#"
+        },
+        {
+          "label": "Sample apps3",
+          "link": "#"
+        }
+      ]
+    },
+    "test": {
+      "title": "Test",
+      "list": [
+        {
+          "label": "Pymilvus API reference6",
+          "link": "#"
+        },
+        {
+          "label": "Sample apps4",
+          "link": "#"
+        },
+        {
+          "label": "Sample apps5",
+          "link": "#"
+        },
+        {
+          "label": "Sample apps6",
+          "link": "#"
+        }
+      ]
+    },
+    "deploy": {
+      "title": "Deploy",
+      "list": [
+        {
+          "label": "Kubernetes stand-alone deployment1",
+          "link": "#"
+        },
+        {
+          "label": "Kubernetes cluster deployment2",
+          "link": "#"
+        },
+        {
+          "label": "Kubernetes cluster deployment3",
+          "link": "#"
+        }
+      ]
+    },
+    "ambassador": {
+      "title": "Milvus Ambassador",
+      "desc": "Milvus Ambassor is ...., what you can gain in our communiry....Any member that contributes 3+ pieces of content to the Milvus community within a given calendar year is eligible to become an ",
+      "joinBtn": {
+        "label": "Become a Milvus Ambassador",
+        "link": "#"
+      },
+      "introBtn": {
+        "label": "Ambassador Program Introduction",
+        "link": "#"
+      }
+    }
+  },
+  "joinSection": {
+    "title": "Join the community",
+    "list": [
+      {
+        "label": "Github Discussion",
+        "link": "https://github.com/milvus-io/milvus",
+        "iconType": "github"
       },
       {
-        "login": "5",
-        "avatar": "../../assets/contributor.png",
-        "link": "https://github.com/"
+        "label": "Slack Channel",
+        "link": "https://github.com/milvus-io/milvus",
+        "iconType": "slack"
       },
       {
-        "login": "6",
-        "avatar": "../../assets/contributor.png",
-        "link": "https://github.com/"
+        "label": "Zoom Meeting",
+        "link": "https://github.com/milvus-io/milvus",
+        "iconType": "zoom"
       },
       {
-        "login": "7",
-        "avatar": "../../assets/contributor.png",
-        "link": "https://github.com/"
+        "label": "Social Media",
+        "link": "https://github.com/milvus-io/milvus",
+        "iconType": "twitter"
+      }
+    ]
+  },
+  "resourceSection": {
+    "title": "Resources",
+    "list": [
+      {
+        "iconType": "event",
+        "title": "Event",
+        "desc": "Build the cloud-native vector database through community collaboration.",
+        "link": "#",
+        "label": "MORE EVENTS"
       },
       {
-        "login": "8",
-        "avatar": "../../assets/contributor.png",
-        "link": "https://github.com/"
+        "iconType": "video",
+        "title": "Video",
+        "desc": "Build the cloud-native vector database through community collaboration.",
+        "link": "#",
+        "label": "MORE VIDEOS"
+      }
+    ]
+  },
+  "partnerSection": {
+    "title": "Community Partner",
+    "list": [
+      {
+        "name": "onnx",
+        "alt": "ONNX"
+      },
+      {
+        "name": "paddle",
+        "alt": "PP飞桨"
+      },
+      {
+        "name": "haystack",
+        "alt": "Haystack"
+      },
+      {
+        "name": "pulsar",
+        "alt": "Pulsar"
+      },
+      {
+        "name": "juice",
+        "alt": "JuiceFS"
+      },
+      {
+        "name": "kubesphere",
+        "alt": "KUBESPHERE "
       }
     ]
   }
