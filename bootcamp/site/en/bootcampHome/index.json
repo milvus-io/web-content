@@ -4,6 +4,10 @@
     "Milvus is the world most popular open-source vector database. It aims to help users deal with the challenges that comes with massive-scale, unstructured through the following methods: ",
     "High-performance, high-precision and scalable search of vectors; Similarity search and analysis of unstructured data."
   ],
+  "banner": {
+    "img": "../../assets/banner.jpg",
+    "alt": "milvus community"
+  },
   "section1": {
     "title": "Benchmarks",
     "content": [

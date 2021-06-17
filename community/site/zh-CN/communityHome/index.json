@@ -1,4 +1,8 @@
 {
+  "banner": {
+    "img": "../../assets/banner.png",
+    "alt": "milvus community"
+  },
   "mailingSection": {
     "title": "Mailing List",
     "list": [
@@ -17,7 +21,7 @@
     ]
   },
   "aboutSection": {
-    "title": "About the Community",
+    "title": "关于社区",
     "content": "The Milvus community is comprised of users, contributors, and culture that unite our community and inspire new ideas, collaboration, and mutual learning. Our open-source community files issues and pull requests, attends events, advocates for greater adoption of Milvus, and makes many other valuable contributions. Read on to learn how you can get involved and become part of this amazing community.",
     "list": [
       {
@@ -135,6 +139,7 @@
     "ambassador": {
       "title": "Milvus Ambassador",
       "desc": "Milvus Ambassor is ...., what you can gain in our communiry....Any member that contributes 3+ pieces of content to the Milvus community within a given calendar year is eligible to become an ",
+      "img": "../../assets/ambassador.png",
       "joinBtn": {
         "label": "Become a Milvus Ambassador",
         "link": "#"
@@ -151,22 +156,22 @@
       {
         "label": "Github Discussion",
         "link": "https://github.com/milvus-io/milvus",
-        "iconType": "github"
+        "img": "../../assets/github.png"
       },
       {
         "label": "Slack Channel",
         "link": "https://github.com/milvus-io/milvus",
-        "iconType": "slack"
+        "img": "../../assets/slack.png"
       },
       {
         "label": "Zoom Meeting",
         "link": "https://github.com/milvus-io/milvus",
-        "iconType": "zoom"
+        "img": "../../assets/zoom.png"
       },
       {
         "label": "Social Media",
         "link": "https://github.com/milvus-io/milvus",
-        "iconType": "twitter"
+        "img": "../../assets/twitter.png"
       }
     ]
   },
@@ -193,27 +198,27 @@
     "title": "Community Partner",
     "list": [
       {
-        "name": "onnx",
+        "img": "../../assets/onnx.png",
         "alt": "ONNX"
       },
       {
-        "name": "paddle",
+        "img": "../../assets/paddle.png",
         "alt": "PP飞桨"
       },
       {
-        "name": "haystack",
+        "img": "../../assets/haystack.png",
         "alt": "Haystack"
       },
       {
-        "name": "pulsar",
+        "img": "../../assets/pulsar.png",
         "alt": "Pulsar"
       },
       {
-        "name": "juice",
+        "img": "../../assets/juice.png",
         "alt": "JuiceFS"
       },
       {
-        "name": "kubesphere",
+        "img": "../../assets/kubesphere.png",
         "alt": "KUBESPHERE "
       }
     ]
