@@ -67,7 +67,7 @@ $ python3 hello_pymilvus_orm.py
 *The returned results and query latency show as follows:*
 
 
-![Returned results]({​​​​​​​​{​​​​​​​​images.assets/hello_world.png}​​​​​​​​}​​​​​​​​)
+![Returned results](../../../../assets/hello_world.png)
 
 
 

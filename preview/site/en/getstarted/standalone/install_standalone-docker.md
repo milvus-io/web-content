@@ -18,10 +18,10 @@ Before moving forward to installation, you must check the eligibility of your Do
 Docker Compose is the recommended way to install Milvus.
 </div>
 
-- Docker version 19.03 or higher is required. 
-- Docker Compose version 1.25.1 or higher is required. 
+<li>Docker version 19.03 or higher is required. </li>
+<li>Docker Compose version 1.25.1 or higher is required. </li>
 </details>
-<a href="#cpu_support"></a><details><summary>Check whether your CPU supports SIMD extension instruction set</summary>
+<details><summary>Check whether your CPU supports SIMD extension instruction set</summary>
 
 Milvus' computing operations depend on CPU’s support for SIMD (Single Instruction, Multiple Data) extension instruction set. Whether your CPU supports SIMD extension instruction set is crucial to index building and vector similarity search within Milvus. Ensure that your CPU supports at least one of the following SIMD instruction sets:
 
