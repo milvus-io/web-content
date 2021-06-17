@@ -17,10 +17,10 @@ Before moving forward to installation, you must check the eligibility of your Do
 <div class="alert note">
 Docker Compose is the recommended way to install Milvus.
 </div>
-- Docker version 19.03 or higher is required.
+
+- Docker version 19.03 or higher is required. 
 - Docker Compose version 1.25.1 or higher is required. 
 </details>
-
 <a href="#cpu_support"></a><details><summary>Check whether your CPU supports SIMD extension instruction set</summary>
 
 Milvus' computing operations depend on CPU’s support for SIMD (Single Instruction, Multiple Data) extension instruction set. Whether your CPU supports SIMD extension instruction set is crucial to index building and vector similarity search within Milvus. Ensure that your CPU supports at least one of the following SIMD instruction sets:
@@ -123,13 +123,46 @@ $ sudo docker-compose up -d
 ```
 *If Docker Compose boots successfully, three running docker containers will appear (two infrastructure services and one Milvus service):*
 
-```
+<code>
 $ docker ps 
+<table>
+    <tr>
+        <td>CONTAINER ID</td>
+        <td>Image</td>
+        <td>Command</td>
+        <td>Created</td>
+        <td>Status</td>
+        <td>Ports</td>
+        <td>Names</td>
+    </tr>
+    <tr>
+        <td>3baf500700ff</td>
+        <td>milvusdb/milvus:2.0.0-d043021-19c36b</td>
+        <td>"/tini -- /milvus-di…"</td>
+        <td>3 seconds ago</td>
+        <td>6 seconds ago</td>
+        <td>0.0.0.0:19530-&gt;19530/tcp</td>
+        <td>deploy_standalone_1</td>
+    </tr>
+    <tr>
+        <td>d807e1e1e9b1</td>
+        <td>quay.io/coreos/etcd:latest</td>
+        <td>"etcd -listen-peer-u…"</td>
+        <td>6 seconds ago</td>
+        <td>Up 4 seconds</td>
+        <td>0.0.0.0:2379-2380-&gt;2379-2380/tcp, 0.0.0.0:4001-&gt;4001/tcp</td>
+        <td>deploy_etcd_1</td>
+    </tr>
+    <tr>
+        <td>a103514a959a</td>
+        <td>minio/minio:RELEASE.2020-12-03T00-03-10Z</td>
+        <td>"/usr/bin/docker-ent…"</td>
+        <td>6 seconds ago</td>
+        <td>Up 4 seconds (health: starting)</td>
+        <td>0.0.0.0:9000-&gt;9000/tcp</td>
+        <td>deploy_etcd_1</td>
+    </tr>
+</table>
+</code>
 
-|CONTAINER ID | IMAGE | COMMAND | CREATED |STATUS | PORTS | NAMES
-| ----------- | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- |
-|3baf500700ff | milvusdb/milvus:2.0.0-d043021-19c36b | "/tini -- /milvus-di…" | 3 seconds ago | Up 1 second |   0.0.0.0:19530->19530/tcp | deploy_standalone_1|
-|d807e1e1e9b1 |  quay.io/coreos/etcd:latest | "etcd -listen-peer-u…" |  6 seconds ago  | Up 4 seconds  |  0.0.0.0:2379-2380->2379-2380/tcp, 0.0.0.0:4001->4001/tcp  |deploy_etcd_1 |
-| a103514a959a  | minio/minio:RELEASE.2020-12-03T00-03-10Z |   "/usr/bin/docker-ent…"  | 6 seconds ago  | Up 4 seconds (health: starting) |  0.0.0.0:9000->9000/tcp    | deploy_minio_1|
-```
 > To stop Docker Compose, run ```$ sudo docker-compose down```.

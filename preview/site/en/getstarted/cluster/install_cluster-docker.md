@@ -17,6 +17,7 @@ Before moving forward to installation, you must check the eligibility of your ha
 <div class="alert note">
 Docker Compose is the recommended way to install Milvus.
 </div>
+
 - Docker version 19.03 or higher is required.
 - Docker Compose version 1.25.1 or higher is required. 
 </details>
@@ -96,23 +97,128 @@ $ sudo docker-compose up -d
 
 *If Docker Compose boots successfully, 12 running docker containers will appear (nine infrastructure services and three Milvus services):*
 
-'''
+<code>
 $ sudo docker ps 
 
-|CONTAINER ID | IMAGE | COMMAND | CREATED |STATUS | PORTS | NAMES|
-| ----------- | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- |
-0f9d37d78e0c |  milvusdb/milvus:2.0.0-d043021-19c36b |      "/tini -- /milvus/bi…"  | 7 minutes ago  | Up 7 minutes |  | distributed_querynode_1
-40568c5d5c40 |  milvusdb/milvus:2.0.0-d043021-19c36b |      "/tini -- /milvus/bi…"  | 7 minutes ago  | Up 7 minutes |   | distributed_indexnode_1
-071124ad8e1a |  milvusdb/milvus:2.0.0-d043021-19c36b  |     "/tini -- /milvus/bi…"  | 7 minutes ago |  Up 7 minutes |    |  distributed_datanode_1
-22d4786a6b22  | milvusdb/milvus:2.0.0-d043021-19c36b |      "/tini -- /milvus/bi…"  | 7 minutes ago |  Up 7 minutes       |  0.0.0.0:19530->19530/tcp, :::19530->19530/tcp  | distributed_proxynode_1
-f92daa379628  | milvusdb/milvus:2.0.0-d043021-19c36b  |     "/tini -- /milvus/bi…" |  7 minutes ago |  Up 7 minutes   |   |   distributed_indexservice_1
-5d592010b3aa  | milvusdb/milvus:2.0.0-d043021-19c36b |      "/tini -- /milvus/bi…" |  7 minutes ago  | Up 7 minutes |   | distributed_master_1
-481bae1480ea  | milvusdb/milvus:2.0.0-d043021-19c36b |       "/tini -- /milvus/bi…" |  7 minutes ago |  Up 7 minutes  |    | distributed_queryservice_1
-d87fe6b9d731 |  milvusdb/milvus:2.0.0-d043021-19c36b |      "/tini -- /milvus/bi…" |  7 minutes ago  | Up 7 minutes |    | distributed_proxyservice_1
-7513e26e1ee2 |  milvusdb/milvus:2.0.0-d043021-19c36b  |     "/tini -- /milvus/bi…"  | 7 minutes ago |  Up 7 minutes  |    |  distributed_dataservice_1
-75d4ff2916b7 |  minio/minio:RELEASE.2020-12-03T00-03-10Z |  "/usr/bin/docker-ent…"  | 7 minutes ago  | Up 7 minutes (healthy) |  9000/tcp |distributed_minio_1
-08b81e680c82 |  quay.io/coreos/etcd:latest    |    "etcd -listen-peer-u…" |  7 minutes ago  | Up 7 minutes  | 2379-2380/tcp |distributed_etcd_1
-5622c872ed3e |  apachepulsar/pulsar:latest  |   "bin/pulsar standalo…" |  7 minutes ago  | Up 7 minutes |     |     distributed_pulsar_1|
-'''
+<table>
+    <tr>
+        <td>CONTAINER ID</td>
+        <td>IMAGE</td>
+        <td>COMMAND</td>
+        <td>CREATED</td>
+        <td>STATUS</td>
+        <td>PORTS</td>
+        <td>NAMES</td>
+    </tr>
+    <tr>
+        <td>0f9d37d78e0c</td>
+        <td>milvusdb/milvus:2.0.0-d043021-19c36b</td>
+        <td>"/tini -- /milvus/bi…"</td>
+        <td>7 minutes ago</td>
+        <td>Up 7 minutes</td>
+        <td></td>
+        <td>distributed_querynode_1</td>
+    </tr>
+    <tr>
+        <td>40568c5d5c40</td>
+        <td>milvusdb/milvus:2.0.0-d043021-19c36b</td>
+        <td>"/tini -- /milvus/bi…"</td>
+        <td>7 minutes ago</td>
+        <td>Up 7 minutes</td>
+        <td></td>
+        <td>distributed_indexnode_1</td>
+    </tr>
+    <tr>
+        <td>071124ad8e1a</td>
+        <td>milvusdb/milvus:2.0.0-d043021-19c36b</td>
+        <td>"/tini -- /milvus/bi…"</td>
+        <td>7 minutes ago</td>
+        <td>Up 7 minutes</td>
+        <td></td>
+        <td>distributed_datanode_1</td>
+    </tr>
+    <tr>
+        <td>22d4786a6b22</td>
+        <td>milvusdb/milvus:2.0.0-d043021-19c36b</td>
+        <td>"/tini -- /milvus/bi…"</td>
+        <td>7 minutes ago</td>
+        <td>Up 7 minutes</td>
+        <td>0.0.0.0:19530-&gt;19530/tcp, :::19530-&gt;19530/tcp</td>
+        <td>distributed_proxynode_1</td>
+    </tr>
+    <tr>
+        <td>f92daa379628</td>
+        <td>milvusdb/milvus:2.0.0-d043021-19c36b</td>
+        <td>"/tini -- /milvus/bi…"</td>
+        <td>7 minutes ago</td>
+        <td>Up 7 minutes</td>
+        <td></td>
+        <td>distributed_indexservice_1</td>
+    </tr>
+    <tr>
+        <td>5d592010b3aa</td>
+        <td>milvusdb/milvus:2.0.0-d043021-19c36b</td>
+        <td>"/tini -- /milvus/bi…"</td>
+        <td>7 minutes ago</td>
+        <td>Up 7 minutes</td>
+        <td></td>
+        <td>distributed_master_1</td>
+    </tr>
+    <tr>
+        <td>481bae1480ea</td>
+        <td>milvusdb/milvus:2.0.0-d043021-19c36b</td>
+        <td>"/tini -- /milvus/bi…"</td>
+        <td>7 minutes ago</td>
+        <td>Up 7 minutes</td>
+        <td></td>
+        <td>distributed_queryservice_1</td>
+    </tr>
+    <tr>
+        <td>d87fe6b9d731</td>
+        <td>milvusdb/milvus:2.0.0-d043021-19c36b</td>
+        <td>"/tini -- /milvus/bi…"</td>
+        <td>7 minutes ago</td>
+        <td>Up 7 minutes</td>
+        <td></td>
+        <td>distributed_proxyservice_1</td>
+    </tr>
+    <tr>
+        <td>7513e26e1ee2</td>
+        <td>milvusdb/milvus:2.0.0-d043021-19c36b</td>
+        <td>"/tini -- /milvus/bi…"</td>
+        <td>7 minutes ago</td>
+        <td>Up 7 minutes</td>
+        <td></td>
+        <td>distributed_dataservice_1</td>
+    </tr>
+    <tr>
+        <td>75d4ff2916b7</td>
+        <td>minio/minio:RELEASE.2020-12-03T00-03-10Z</td>
+        <td>"/usr/bin/docker-ent…"</td>
+        <td>7 minutes ago</td>
+        <td>Up 7 minutes (healthy)</td>
+        <td>9000/tcp</td>
+        <td>distributed_minio_1</td>
+    </tr>
+    <tr>
+        <td>08b81e680c82</td>
+        <td>quay.io/coreos/etcd:latest</td>
+        <td>"etcd -listen-peer-u…"</td>
+        <td>7 minutes ago</td>
+        <td>Up 7 minutes</td>
+        <td>2379-2380/tcp</td>
+        <td>distributed_etcd_1</td>
+    </tr>
+    <tr>
+        <td>5622c872ed3e</td>
+        <td>apachepulsar/pulsar:latest</td>
+        <td>"bin/pulsar standalo…"</td>
+        <td>7 minutes ago</td>
+        <td>Up 7 minutes</td>
+        <td></td>
+        <td>distributed_pulsar_1</td>
+    </tr>
+</table>
+</code>
 
 > To stop Docker Compose, run ```$ sudo docker-compose down```.
