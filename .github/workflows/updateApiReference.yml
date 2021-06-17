@@ -73,7 +73,14 @@ jobs:
           cd docs
           sudo apt install make
           make html
-          cd ../../${{ github.event.repository.name }}/APIReference/pymilvus
+          cd build/html
+          sudo mv ../../../../${{ github.event.repository.name }}/pymilvus-fs.md ./pymilvus-fs.js
+          curl -sL https://deb.nodesource.com/setup_14.x | sudo bash -
+          sudo apt -y install nodejs
+          node  -v
+          sudo npm i node-html-parser
+          node ./pymilvus-fs.js
+          cd ../../../../${{ github.event.repository.name }}/APIReference/pymilvus
           echo "Upcomming tag name: ${{ github.event.inputs.tagName }}"
           echo "=>List all doc versions"
           ls -l
@@ -85,7 +92,7 @@ jobs:
             echo "===miss tag name, create this dir==="
             sudo mkdir "./${{ github.event.inputs.tagName }}"
           fi
-          sudo cp ../../../pymilvus/docs/build/html/api.html "./${{ github.event.inputs.tagName }}"
+          sudo cp -r ../../../pymilvus/docs/build/html/output/* "./${{ github.event.inputs.tagName }}"
           git add .
           git commit -m "Update pymilvus"
           git push -f origin master
@@ -109,7 +116,14 @@ jobs:
           export PBR_VERSION=1.2.3 
           sudo apt install make
           make html
-          cd ../../${{ github.event.repository.name }}/APIReference/pymilvus-orm
+          cd build/html
+          sudo mv ../../../../${{ github.event.repository.name }}/pymilvus-fs.md ./pymilvus-fs.js
+          curl -sL https://deb.nodesource.com/setup_14.x | sudo bash -
+          sudo apt -y install nodejs
+          node  -v
+          sudo npm i node-html-parser
+          node ./pymilvus-fs.js
+          cd ../../../../${{ github.event.repository.name }}/APIReference/pymilvus-orm
           echo "Upcomming tag name: ${{ github.event.inputs.tagName }}"
           echo "=>List all doc versions"
           ls -l
@@ -122,7 +136,7 @@ jobs:
             sudo mkdir "./${{ github.event.inputs.tagName }}"
           fi
           sudo rm -fr ../../../pymilvus-orm/docs/build/html/api/api.html
-          sudo cp -r ../../../pymilvus-orm/docs/build/html/api "./${{ github.event.inputs.tagName }}"
+          sudo cp -r ../../../pymilvus-orm/docs/build/html/output/* "./${{ github.event.inputs.tagName }}"
           git add .
           git commit -m "Update pymilvus-orm"
           git push -f origin master
