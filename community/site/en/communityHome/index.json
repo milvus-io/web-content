@@ -1,0 +1,226 @@
+{
+  "banner": {
+    "img": "../../assets/banner.png",
+    "alt": "milvus community"
+  },
+  "mailingSection": {
+    "title": "Mailing List",
+    "list": [
+      {
+        "title": "Milvus Technical Discuss",
+        "link": "https://lists.lfaidata.foundation/g/milvus-technical-discuss"
+      },
+      {
+        "title": "Milvus TSC",
+        "link": "https://lists.lfaidata.foundation/g/milvus-tsc"
+      },
+      {
+        "title": "Milvus Announce",
+        "link": "https://lists.lfaidata.foundation/g/milvus-announce"
+      }
+    ]
+  },
+  "aboutSection": {
+    "title": "About the Community",
+    "content": "The Milvus community is comprised of users, contributors, and culture that unite our community and inspire new ideas, collaboration, and mutual learning. Our open-source community files issues and pull requests, attends events, advocates for greater adoption of Milvus, and makes many other valuable contributions. Read on to learn how you can get involved and become part of this amazing community.",
+    "list": [
+      {
+        "iconType": "build",
+        "title": "Build",
+        "desc": "Build the cloud-native vector database through community collaboration.",
+        "link": null,
+        "label": null
+      },
+      {
+        "iconType": "learn",
+        "title": "Learn",
+        "desc": "Learn knowledge and skills as active community participants.",
+        "link": null,
+        "label": null
+      },
+      {
+        "iconType": "grow",
+        "title": "Grow",
+        "desc": "Grow into an expert on all things Milvus in community.",
+        "link": null,
+        "label": null
+      },
+      {
+        "iconType": "share",
+        "title": "Share",
+        "desc": "Share best practices and lessons learned with the community at large.",
+        "link": null,
+        "label": null
+      }
+    ]
+  },
+  "recommendSection": {
+    "title": "Recommended Articles",
+    "start": {
+      "title": "Get started",
+      "list": [
+        {
+          "label": "Start a Milvus standalone1",
+          "link": "#"
+        },
+        {
+          "label": "Start a Milvus cluster2",
+          "link": "#"
+        },
+        {
+          "label": "Start a Milvus standalone3",
+          "link": "#"
+        },
+        {
+          "label": "Start a Milvus standalone4",
+          "link": "#"
+        }
+      ]
+    },
+    "develop": {
+      "title": "Develop",
+      "list": [
+        {
+          "label": "Pymilvus API reference5",
+          "link": "#"
+        },
+        {
+          "label": "Sample apps1",
+          "link": "#"
+        },
+        {
+          "label": "Sample apps2",
+          "link": "#"
+        },
+        {
+          "label": "Sample apps3",
+          "link": "#"
+        }
+      ]
+    },
+    "test": {
+      "title": "Test",
+      "list": [
+        {
+          "label": "Pymilvus API reference6",
+          "link": "#"
+        },
+        {
+          "label": "Sample apps4",
+          "link": "#"
+        },
+        {
+          "label": "Sample apps5",
+          "link": "#"
+        },
+        {
+          "label": "Sample apps6",
+          "link": "#"
+        }
+      ]
+    },
+    "deploy": {
+      "title": "Deploy",
+      "list": [
+        {
+          "label": "Kubernetes stand-alone deployment1",
+          "link": "#"
+        },
+        {
+          "label": "Kubernetes cluster deployment2",
+          "link": "#"
+        },
+        {
+          "label": "Kubernetes cluster deployment3",
+          "link": "#"
+        }
+      ]
+    },
+    "ambassador": {
+      "title": "Milvus Ambassador",
+      "desc": "Milvus Ambassor is ...., what you can gain in our communiry....Any member that contributes 3+ pieces of content to the Milvus community within a given calendar year is eligible to become an ",
+      "img": "../../assets/ambassador.png",
+      "joinBtn": {
+        "label": "Become a Milvus Ambassador",
+        "link": "#"
+      },
+      "introBtn": {
+        "label": "Ambassador Program Introduction",
+        "link": "#"
+      }
+    }
+  },
+  "joinSection": {
+    "title": "Join the community",
+    "list": [
+      {
+        "label": "Github Discussion",
+        "link": "https://github.com/milvus-io/milvus",
+        "img": "../../assets/github.png"
+      },
+      {
+        "label": "Slack Channel",
+        "link": "https://github.com/milvus-io/milvus",
+        "img": "../../assets/slack.png"
+      },
+      {
+        "label": "Zoom Meeting",
+        "link": "https://github.com/milvus-io/milvus",
+        "img": "../../assets/zoom.png"
+      },
+      {
+        "label": "Social Media",
+        "link": "https://github.com/milvus-io/milvus",
+        "img": "../../assets/twitter.png"
+      }
+    ]
+  },
+  "resourceSection": {
+    "title": "Resources",
+    "list": [
+      {
+        "iconType": "event",
+        "title": "Event",
+        "desc": "Build the cloud-native vector database through community collaboration.",
+        "link": "#",
+        "label": "MORE EVENTS"
+      },
+      {
+        "iconType": "video",
+        "title": "Video",
+        "desc": "Build the cloud-native vector database through community collaboration.",
+        "link": "#",
+        "label": "MORE VIDEOS"
+      }
+    ]
+  },
+  "partnerSection": {
+    "title": "Community Partner",
+    "list": [
+      {
+        "img": "../../assets/onnx.png",
+        "alt": "ONNX"
+      },
+      {
+        "img": "../../assets/paddle.png",
+        "alt": "PP飞桨"
+      },
+      {
+        "img": "../../assets/haystack.png",
+        "alt": "Haystack"
+      },
+      {
+        "img": "../../assets/pulsar.png",
+        "alt": "Pulsar"
+      },
+      {
+        "img": "../../assets/juice.png",
+        "alt": "JuiceFS"
+      },
+      {
+        "img": "../../assets/kubesphere.png",
+        "alt": "KUBESPHERE "
+      }
+    ]
+  }
+}

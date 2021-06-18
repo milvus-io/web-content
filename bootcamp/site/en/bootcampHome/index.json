@@ -1,0 +1,138 @@
+{
+  "title": "About Milvus Bootcamp",
+  "description": [
+    "Milvus is the world most popular open-source vector database. It aims to help users deal with the challenges that comes with massive-scale, unstructured through the following methods: ",
+    "High-performance, high-precision and scalable search of vectors; Similarity search and analysis of unstructured data."
+  ],
+  "banner": {
+    "img": "../../assets/banner.jpg",
+    "alt": "milvus community"
+  },
+  "section1": {
+    "title": "Benchmarks",
+    "content": [
+      {
+        "id": 2,
+        "title": "1 million benchmark testing",
+        "link": "https://milvus.io/docs/benchmarks_azure",
+        "iconType": null,
+        "desc": null
+      },
+      {
+        "id": 3,
+        "title": "100 million benchmark testing",
+        "link": "https://milvus.io/docs/benchmarks_azure",
+        "iconType": null,
+        "desc": null
+      },
+      {
+        "id": 4,
+        "title": "Performance benchmark",
+        "link": "https://milvus.io/docs/benchmarks_azure",
+        "iconType": null,
+        "desc": null
+      }
+    ]
+  },
+  "section2": {
+    "title": "Deployments",
+    "content": [
+      {
+        "id": 12,
+        "title": "Distributed deployment using Mishards",
+        "link": "https://www.baidu.com/",
+        "iconType": null,
+        "desc": "Distributed deployment using Mishards"
+      },
+      {
+        "id": 13,
+        "title": "Distributing Mishards with Kubernetes",
+        "link": "https://www.baidu.com/",
+        "iconType": null,
+        "desc": "Distributing Mishards with Kubernetes"
+      },
+      {
+        "id": 14,
+        "title": "Milvus cloud NFS using JuiceFS",
+        "link": "https://www.baidu.com/",
+        "iconType": null,
+        "desc": "Milvus cloud NFS using JuiceFS"
+      },
+      {
+        "id": 15,
+        "title": "Highly available Milvus using keepalived",
+        "link": "https://www.baidu.com/",
+        "iconType": null,
+        "desc": "Highly available Milvus using keepalived"
+      },
+      {
+        "id": 16,
+        "title": "Load balanced Milvus using nginx",
+        "link": "https://www.baidu.com/",
+        "iconType": null,
+        "desc": "Load balanced Milvus using nginx"
+      },
+      {
+        "id": 17,
+        "title": "Milvus on Google Colab",
+        "link": "https://www.baidu.com/",
+        "iconType": null,
+        "desc": "Milvus on Google Colab"
+      }
+    ]
+  },
+  "section3": {
+    "title": "Solutions",
+    "content": [
+      {
+        "id": 5,
+        "title": "Image Similarity Search",
+        "link": "https://zilliz.com/solutions/image-search",
+        "iconType": "IMAGE_SEARCH",
+        "desc": "image search is one of the core ideas behind many different technologies, mage search is one of the core ideas behind many different technologies,mage search is one of the core ideas behind many different technologies,"
+      },
+      {
+        "id": 6,
+        "title": "Question Answering System",
+        "link": "https://zilliz.com/solutions/image-search",
+        "iconType": "QUESTION_ANSWER",
+        "desc": "image search is one of the core ideas behind many different technologies, from..."
+      },
+      {
+        "id": 7,
+        "title": "Recommendation System",
+        "link": "https://zilliz.com/solutions/image-search",
+        "iconType": "RECOMMENDATION",
+        "desc": "image search is one of the core ideas behind many different technologies, from..."
+      },
+      {
+        "id": 8,
+        "title": "Video Similarity Search",
+        "link": "https://zilliz.com/solutions/image-search",
+        "iconType": "VIDEO_SEARCH",
+        "desc": "mage search is one of the core ideas behind many different technologies, from..."
+      },
+      {
+        "id": 9,
+        "title": "Audio Similarity Search",
+        "link": "https://zilliz.com/solutions/image-search",
+        "iconType": "AUDIO_SEARCH",
+        "desc": "image search is one of the core ideas behind many different technologies, from..."
+      },
+      {
+        "id": 10,
+        "title": "Molecular Similarity Search",
+        "link": "https://zilliz.com/solutions/image-search",
+        "iconType": "MOLECULAR",
+        "desc": "image search is one of the core ideas behind many different technologies, from..."
+      },
+      {
+        "id": 11,
+        "title": "Hybrid Search",
+        "link": "https://zilliz.com/solutions/image-search",
+        "iconType": "HYBRID",
+        "desc": "mage search is one of the core ideas behind many different technologies, from..."
+      }
+    ]
+  }
+}
