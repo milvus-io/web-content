@@ -1,3 +1,7 @@
+---
+id: making_your_first_contributions.md
+---
+
 # Making your First contributions
 
 不知道如何做出你的第一个贡献？这篇文档可以帮助你！
