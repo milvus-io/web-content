@@ -27,7 +27,7 @@ Similarity search is the process of comparing a target to a database to find obj
 
 Join the Milvus community on [Slack](https://join.slack.com/t/milvusio/shared_invite/zt-e0u4qu3k-bI2GDNys3ZqX1YCJ9OM~GQ) to share your suggestions, advice, and questions with our engineering team. 
 
-<a href="https://join.slack.com/t/milvusio/shared_invite/zt-e0u4qu3k-bI2GDNys3ZqX1YCJ9OM~GQ">
+<a href="https://join.slack.com/t/milvusio/shared_invite/zt-e0u4qu3k-bI2GDNys3ZqX1YCJ9OM~GQ" display="block">
     <img src="../../../assets/slack.png" alt="Miluvs Slack Channel" height="150" width="500">
 </a>
 

@@ -13,7 +13,13 @@
           "key": "Cluster",
           "btnLabel": "Learn to build",
           "link": "overview_cluster.md"
-        }
+        },
+          {
+        "title": "Milvus 训练营",
+        "key": "bootcamps",
+        "btnLabel": "了解更多",
+        "link": "/bootcamp"
+      }
       ]
     },
     "section2": {
