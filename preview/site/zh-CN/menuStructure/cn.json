@@ -42,6 +42,14 @@
       "order": 3
     },
     {
+      "id": "comparison.md",
+      "title": "Milvus 2.0 新增功能",
+      "label1": "about",
+      "label2": null,
+      "label3": null,
+      "order": 4
+    },
+    {
       "id": "getstarted",
       "title": "Get Started",
       "label1": "",

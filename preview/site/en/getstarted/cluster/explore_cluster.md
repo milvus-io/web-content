@@ -21,8 +21,8 @@ Type "help", "copyright", "credits" or "license" for more information.
 ## Connect to the Milvus server
 
 ```
->>> from milvus import Milvus, DataType
->>> milvus = Milvus(host='localhost', port='19530')
+>>> from pymilvus_orm import connections
+>>> connections.connect("default", host='localhost', port='19530')
 ```
 
 ## Create a collection
@@ -33,48 +33,46 @@ A collection in Milvus is equivalent to a table in a relational database. Collec
 ```
 >>> collection_name = "example_collection"
 >>> field_name = "example_field"
->>> fields = {"fields":[{
-            "name": field_name,
-            "type": DataType.FLOAT_VECTOR,
-            "metric_type": "L2",
-            "params": {"dim": 8},
-            "indexes": [{"metric_type": "L2"}]
-        }]}
+>>> from pymilvus_orm import Collection, CollectionSchema, FieldSchema, DataType
+>>> field = FieldSchema(name=field_name, dtype=DataType.FLOAT_VECTOR, dim=8)
+>>> schema = CollectionSchema(fields=[field], description="example collection")
 ```
 
 2. Call `create_collection()` provided by the Milvus instance to create a collection:
 ```
->>> milvus.create_collection(collection_name=collection_name, fields=fields)
+>>> collection = Collection(name=collection_name, schema=schema)
 ```
 3. Check if the collection is created successfully:
 ```
->>> milvus.has_collection(collection_name=collection_name)
+>>> import pymilvus_orm
+>>> pymilvus_orm.utility.get_connection().has_collection(collection_name)
+True
 ```
 
-List all created collections:
+4. List all created collections:
 ```
->>> milvus.list_collections()
+>>> pymilvus_orm.utility.get_connection().list_collections()
 ['example_collection']
 ```
-View collection statistics, such as row count:
+5. View collection statistics, such as row count:
 ```
->>> milvus.get_collection_stats(collection_name=collection_name)
-{'row_count': 0}
+>>> collection.num_entities
+0
 ```
 ## Create a partition (optional)
 Search performance worsens as more vectors are inserted into the collection. To help mitigate declining search performance, consider creating collection partitions. Partitioning is logic for separating data. Partition tags narrow a search to a specific number of vectors, improving query performance. To improve search efficiency, divide a collection into several partitions by tag.
 ```
 >>> partition_tag = "example_partition"
->>> milvus.create_partition(collection_name=collection_name,partition_tag=partition_tag)
+>>> partition = collection.create_partition(partition_tag)
 ```
 Milvus creates a default partition tag, `_default`, for new collections. After creating a partition, you have two partition tags, `tag01` and `_default`. Call `list_partitons()` to list all partitions in a collection.
 ```
->>> milvus.list_partitions(collection_name=collection_name)
-['_default', 'example_partition']
+>>> collection.partitions
+[{"name": "_default", "description": "", "num_entities": 0}, {"name": "example_partition", "description": "", "num_entities": 0}]
 ```
 Call `has_partition()` to check if a partition is successfully created.
 ```
->>> milvus.has_partition(collection_name=collection_name,partition_tag=partition_tag)
+>>> collection.has_partition(partition_tag)
 True
 ```
 
@@ -85,32 +83,29 @@ You can insert vectors to a specified partition within a specific collection.
 ```
 >>> import random
 >>> vectors = [[random.random() for _ in range(8)] for _ in range(10)]
->>> entities = [{"name": field_name, "type": DataType.FLOAT_VECTOR, "values": vectors}]
+>>> entities = [vectors]
 ```
 2. Insert the random vectors to the newly created collection. Milvus automatically assigns IDs to the inserted vectors, similar to AutoID in a relational database.
 
 *Milvus returns the assigned vector IDs.*
 
 ```
->>> milvus.insert(collection_name=collection_name, entities=entities)
-[424363819726212428, 424363819726212429, ...]
+>>> collection.insert(entities)
+[425701393273916776, 425701393273916777, ...]
 ```
 
-3. You can also manually define IDs for vector and then insert them.
+3. By specifying partition_tag when calling insert(), you can insert vectors to a specified partition:
+
 ```
->>> ids = [id for id in range(10)]
->>> milvus.insert(collection_name=collection_name, entities=entities, ids=ids)
+>>> collection.insert(data=entities, partition_name=partition_tag)
 ```
-4. By specifying `partition_tag` when calling `insert()`, you can insert vectors to a specified partition:
+4. Milvus temporarily stores the inserted vectors in the memory. Call flush() to flush them to the disk.
 ```
->>> milvus.insert(collection_name=collection_name, entities=entities, partition_tag=partition_tag)
+>>> pymilvus_orm.utility.get_connection().flush([collection_name])
 ```
-5. Milvus temporarily stores the inserted vectors in the memory. Call `flush()` to flush them to the disk.
-```
->>> milvus.flush([collection_name])
-```
+
 ## Build an index
-Create an index for a specified field in a collection to accelerate vector similarity search. See [Vector Index](index.md) for more information about setting index parameters.
+Create an index for a specified field in a collection to accelerate vector similarity search. See [Vector Index](index.md)for more information about setting index parameters.
 
 1.Prepare the index parameters:
 ```
@@ -122,35 +117,28 @@ Create an index for a specified field in a collection to accelerate vector simil
 ```
 2. Build an index.
 ```
->>> milvus.create_index(collection_name, field_name, index_param)
+>>> collection.create_index(field_name=field_name, index_params=index_param)
 Status(code=0, message='')
 ```
 Call `describe_index()` to view more details of the new index:
 ```
->>> milvus.describe_index(collection_name,field_name)
+>>> collection.index().params
 {'metric_type': 'L2', 'index_type': 'IVF_FLAT', 'params': {'nlist': 1024}}
 ```
 ## Conduct a vector similarity search
-1. Create a search DSL.
+1. Create search parameters:
 ```
->>> dsl = {"bool": {"must": [{"vector": {
-                        field_name: {
-                            "metric_type": "L2",
-                            "query": vectors,
-                            "topk": 10,
-                            "params": {"nprobe": 16}
-                        }
-    }}]}}
+>>> search_params = {"metric_type": "L2", "params": {"nprobe": 10}}
 ```
 2. Load the collection to memory before conducting a vector similarity search.
 ```
->>> milvus.load_collection(collection_name=collection_name)
+>>> collection.load()
 ```
 3. Call `search()` with the newly created random vectors query_records:
 
 *Milvus returns the IDs of the most similar vectors and their distances.*
 ```
->>> results = milvus.search(collection_name, dsl)
+>>> results = collection.search(vectors[:5], field_name, param=search_params, limit=10, expr=None)
 >>> results[0].ids
 [424363819726212428, 424363819726212436, ...]
 >>> results[0].distances
@@ -158,11 +146,11 @@ Call `describe_index()` to view more details of the new index:
 ```
 To search in a specific partition or field, set the parameters `partition_tags` and `fields` when calling `search()`.
 ```
->>> milvus.search(collection_name=collection_name, dsl=dsl, partition_tags=[partition_tag],fields=[field_name])
+>>> collection.search(vectors[:5], field_name, param=search_params, limit=10, expr=None, partition_names=[partition_tag])
 ```
 4. Release the collections loaded in Milvus to reduce memory consumption when the search is completed. Query other collections.
 ```
->>> milvus.release_collection(collection_name=collection_name)
+>>> collection.release()
 ```
 
 # Delete operations
@@ -173,24 +161,24 @@ The delete operations affect data already inserted into Milvus. Think twice befo
 ## Drop an index
 Drop the index of a specified field in a specified collection.
 ```
->>> milvus.drop_index(collection_name=collection_name, field_name=field_name)
+>>> collection.drop_index()
 ```
 ## Drop a partition
 The `drop_partition()` method removes a partition and all vectors under it.
 ```
->>> milvus.drop_partition(collection_name=collection_name, partition_tag=partition_tag)
+>>> collection.drop_partition(partition_name=partition_tag)
 ```
 
 ## Drop a collection
 When you no longer need a collection, you can call `drop_collection()` to delete it.
 ```
->>> milvus.drop_collection(collection_name=collection_name)
+>>> collection.drop()
 ```
 ## Close server connection
 When you no longer need Milvus services, you can call `close()` to release all connection resources to the Milvus server:
 
 ```
->>> milvus.close()
+>>> connections.disconnect("default")
 ```
 
 

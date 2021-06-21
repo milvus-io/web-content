@@ -1,7 +1,7 @@
 {
     "release_version": "1.1.1",
-    "cpu_milvus_docker_image_version": "1.1.1-gpu-d061621-330cc6",
-    "gpu_milvus_docker_image_version": "1.1.1-cpu-d061621-330cc6",
+    "cpu_milvus_docker_image_version": "1.1.1-cpu-d061621-330cc6",
+    "gpu_milvus_docker_image_version": "1.1.1-gpu-d061621-330cc6",
     "milvus_python_sdk_version": "1.1.0",
     "milvus_java_sdk_version": "1.1.0",
     "milvus_go_sdk_version": "1.1.0",

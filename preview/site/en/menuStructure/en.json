@@ -42,6 +42,14 @@
       "order": 3
     },
     {
+      "id": "comparison.md",
+      "title": "What is New in Milvus 2.0",
+      "label1": "about",
+      "label2": null,
+      "label3": null,
+      "order": 4
+    },
+    {
       "id": "getstarted",
       "title": "Get Started",
       "label1": "",
