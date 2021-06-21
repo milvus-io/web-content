@@ -7,6 +7,8 @@ group: standalone
 ---
 
 # Install Milvus Standalone
+You can install Milvus Standalone with Docker-Compose or Kubernetes.
+<div class="tab-wrapper"><a href="install_standalone-docker.md" class='active '>Install with Docker</a><a href="install_standalone-helm.md" class=''>Install with Helm Chart</a></div>
 
 ## Before You Begin
 
@@ -64,31 +66,14 @@ Learn more about [Vector indexes](https://www.zilliz.com/blog/Accelerating-Simil
 
 ## Install Milvus Standalone
 
-<div class="tab-wrapper"><a href="install_standalone-docker.md" class='active '>Install with Docker</a><a href="install_standalone-helm.md" class=''>Install with Helm Chart</a></div>
 
-1. Check Docker version:
-
-```
-$ sudo docker info
-```
-
-> Follow [Get Docker](https://docs.docker.com/get-docker/) to install Docker on your system.
-
-2. Check Docker Compose version:
-
-```
-$ sudo docker-compose version
-```
-
-> See [Install Docker Compose](https://docs.docker.com/compose/install/) for Docker Compose installation guide.
-
-3. Pull the Docker image:
+1. Pull the Docker image:
 
 ```
 $ sudo docker pull milvusdb/milvus:2.0.0-d043021-19c36b
 ```
 
-4. Download **docker-compose.standalone.yml** and save it as **docker-compose.yml**:
+2. Download **docker-compose.standalone.yml** and save it as **docker-compose.yml**:
 
 ```
 $ mkdir -p /home/$USER/milvus
@@ -116,7 +101,7 @@ TARGET_DOCKER_IMAGE=milvusdb/milvus:2.0.0-d
 
 <br/>
 
-5. Start Docker Compose.
+3. Start Docker Compose.
 
 ```
 $ sudo docker-compose up -d 

@@ -27,5 +27,5 @@ Milvus 具有故障转移和故障恢复的机制，即使服务中断，也能�
 
 ## 广受社区支持和业界认可
 
-Milvus 项目在 GitHub 上获星超 6,000，拥有逾 1,000 家企业用户，还有活跃的开源社区。Milvus 由 [LF AI & DATA 基金会](https://lfaidata.foundation/) 背书，是该基金会的孵化项目。
+Milvus 项目在 GitHub 上获星超 6,000，拥有逾 1,000 家企业用户，还有活跃的开源社区。Milvus 由 [LF AI & DATA 基金会](https://lfaidata.foundation/) 背书，是该基金会的毕业项目。
 

@@ -18,20 +18,12 @@
       "order": 0
     },
     {
-      "id": "key_features.md",
-      "title": "Key Features",
-      "label1": "about",
-      "label2": null,
-      "label3": null,
-      "order": 1
-    },
-    {
       "id": "roadmap.md",
       "title": "Milvus Roadmap",
       "label1": "about",
       "label2": null,
       "label3": null,
-      "order": 2
+      "order": 3
     },
     {
       "id": "milvus_adopters.md",
@@ -39,7 +31,7 @@
       "label1": "about",
       "label2": null,
       "label3": null,
-      "order": 3
+      "order": 2
     },
     {
       "id": "comparison.md",
@@ -47,7 +39,7 @@
       "label1": "about",
       "label2": null,
       "label3": null,
-      "order": 4
+      "order": 1
     },
     {
       "id": "getstarted",
@@ -58,60 +50,17 @@
       "order": 1,
       "isMenu": true
     },
-    {
-      "id": "standalone",
-      "title": "Milvus Standalone",
+     {
+      "id": "architecture_overview.md",
+      "title": "Architecture Overview",
       "label1": "getstarted",
       "label2": null,
       "label3": null,
-      "order": 0,
-      "isMenu": true
-
-    },
-    {
-      "id": "overview_standalone.md",
-      "title": "Overview",
-      "label1": "getstarted",
-      "label2": "standalone",
-      "label3": null,
       "order": 0
-     
-    },
+    },   
     {
-      "id": "install_standalone-docker.md",
-      "title": "Install Milvus Standalone",
-      "label1": "getstarted",
-      "label2": "standalone",
-      "label3": null,
-      "order": 1
-    },
-    {
-      "id": "helloworld_standalone.md",
-      "title": "Hello Milvus",
-      "label1": "getstarted",
-      "label2": "standalone",
-      "label3": "",
-      "order": 2
-    },
-    {
-      "id": "explore_standalone.md",
-      "title": "Explore Pymilvus",
-      "label1": "getstarted",
-      "label2": "standalone",
-      "label3": "",
-      "order": 3
-    },
-    {
-      "id": "configuration_standalone.md",
-      "title": "System Configuration",
-      "label1": "getstarted",
-      "label2": "standalone",
-      "label3": "",
-      "order": 4
-    },
-    {
-      "id": "cluster",
-      "title": "Milvus Cluster",
+      "id": "installmilvus",
+      "title": "Install Milvus",
       "label1": "getstarted",
       "label2": null,
       "label3": null,
@@ -120,45 +69,62 @@
 
     },
     {
-      "id": "overview_cluster.md",
-      "title": "Overview",
+      "id": "install_standalone-docker.md",
+      "title": "Install Milvus Standalone",
       "label1": "getstarted",
-      "label2": "cluster",
+      "label2": "installmilvus",
       "label3": null,
       "order": 0
-
     },
     {
       "id": "install_cluster-docker.md",
       "title": "Install Milvus Cluster",
       "label1": "getstarted",
-      "label2": "cluster",
+      "label2": "installmilvus",
       "label3": null,
       "order": 1
-    },
+    },    
     {
-      "id": "helloworld_cluster.md",
+      "id": "hellomilvus.md",
       "title": "Hello Milvus",
       "label1": "getstarted",
-      "label2": "cluster",
+      "label2": "",
       "label3": "",
       "order": 2
     },
     {
-      "id": "explore_cluster.md",
-      "title": "Explore Pymilvus",
+      "id": "explore_pymilvus.md",
+      "title": "Explore PyMilvus",
       "label1": "getstarted",
-      "label2": "cluster",
+      "label2": "",
       "label3": "",
       "order": 3
+    },
+    {
+      "id": "systemconfigurations",
+      "title": "System Configurations",
+      "label1": "getstarted",
+      "label2": null,
+      "label3": null,
+      "order": 4,
+      "isMenu": true
+
+    },
+    {
+      "id": "configuration_standalone.md",
+      "title": "System Configuration",
+      "label1": "getstarted",
+      "label2": "systemconfigurations",
+      "label3": "",
+      "order": 0
     },
     {
       "id": "configuration_cluster.md",
       "title": "System Configuration",
       "label1": "getstarted",
-      "label2": "cluster",
+      "label2": "systemconfigurations",
       "label3": "",
-      "order": 4
+      "order": 1
     },
     {
       "id": "develop",
@@ -244,6 +210,14 @@
       "label1": "faq",
       "label2": "",
       "order": 1
+    },
+    {
+      "id": "glossary.md",
+      "title": "Glossary",
+      "label1": "",
+      "label2": "",
+      "label3": "",
+      "order": 4
     }
     
   ]
