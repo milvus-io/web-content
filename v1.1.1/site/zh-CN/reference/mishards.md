@@ -325,12 +325,12 @@ Mishards 依赖共享存储，因此 Kubernetes 集群中必须有可用的 PV�
    $ helm install
       --set cluster.enabled=true     \
       --set persistence.enabled=true \
-      --set mishards.replica=2       \
-      --set readonly.replica=2       \
+      --set mishards.replicas=2       \
+      --set readonly.replicas=2       \
       milvus-release .
    ```
 
-   这里通过 `mishards.replica` 和 `readonly.replica` 控制副本集数量，默认值为 1。
+   这里通过 `mishards.replicas` 和 `readonly.replicas` 控制副本集数量，默认值为 1。
 
    <div class="alert note">
    Mishards 集群中的写节点暂时不支持扩展。
