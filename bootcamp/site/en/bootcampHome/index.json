@@ -1,8 +1,7 @@
 {
   "title": "About Milvus Bootcamp",
   "description": [
-    "Milvus is the world most popular open-source vector database. It aims to help users deal with the challenges that comes with massive-scale, unstructured through the following methods: ",
-    "High-performance, high-precision and scalable search of vectors; Similarity search and analysis of unstructured data."
+    "Milvus bootcamps are designed to expose users to both the simplicity and depth of the vector database. Discover how to run benchmark tests as well as build similarity search applications spanning chatbots, recommendation systems, reverse image search, molecular search, and much more."
   ],
   "banner": {
     "img": "../../assets/banner.jpg",
@@ -14,21 +13,21 @@
       {
         "id": 2,
         "title": "1 million benchmark testing",
-        "link": "https://milvus.io/docs/benchmarks_azure",
+        "link": "https://github.com/milvus-io/bootcamp/blob/master/benchmark_test/lab1_sift1b_1m.md",
         "iconType": null,
         "desc": null
       },
       {
         "id": 3,
         "title": "100 million benchmark testing",
-        "link": "https://milvus.io/docs/benchmarks_azure",
+        "link": "https://github.com/milvus-io/bootcamp/blob/master/benchmark_test/lab2_sift1b_100m.md",
         "iconType": null,
         "desc": null
       },
       {
         "id": 4,
         "title": "Performance benchmark",
-        "link": "https://milvus.io/docs/benchmarks_azure",
+        "link": "https://github.com/milvus-io/bootcamp/blob/master/benchmark_test/performance_benchmark.md",
         "iconType": null,
         "desc": null
       }
@@ -39,45 +38,45 @@
     "content": [
       {
         "id": 12,
-        "title": "Distributed deployment using Mishards",
-        "link": "https://www.baidu.com/",
+        "title": "Distributed deployment with Mishards",
+        "link": "https://github.com/milvus-io/bootcamp/blob/master/deployments/mishards",
         "iconType": null,
-        "desc": "Distributed deployment using Mishards"
+        "desc": "Build a Milvus cluster using Mishards, a sharding middleware."
       },
       {
         "id": 13,
         "title": "Distributing Mishards with Kubernetes",
-        "link": "https://www.baidu.com/",
+        "link": "https://github.com/milvus-io/bootcamp/blob/master/deployments/kubernetes",
         "iconType": null,
-        "desc": "Distributing Mishards with Kubernetes"
+        "desc": "Install shared storage and build a Milvus cluster with Mishards, a sharding middleware, using both Helm and Kubectl."
       },
       {
         "id": 14,
         "title": "Milvus cloud NFS using JuiceFS",
-        "link": "https://www.baidu.com/",
+        "link": "https://github.com/milvus-io/bootcamp/blob/master/deployments/juicefs",
         "iconType": null,
-        "desc": "Milvus cloud NFS using JuiceFS"
+        "desc": "Enable Milvus nodes to share data using JuiceFS, a standard POSIX file system interface."
       },
       {
         "id": 15,
         "title": "Highly available Milvus using keepalived",
-        "link": "https://www.baidu.com/",
+        "link": "https://github.com/milvus-io/bootcamp/blob/master/deployments/highly_available",
         "iconType": null,
-        "desc": "Highly available Milvus using keepalived"
+        "desc": "Deploy a highly available Milvus distribution using Keepalived."
       },
       {
         "id": 16,
         "title": "Load balanced Milvus using nginx",
-        "link": "https://www.baidu.com/",
+        "link": "https://github.com/milvus-io/bootcamp/blob/master/deployments/load_balanced",
         "iconType": null,
-        "desc": "Load balanced Milvus using nginx"
+        "desc": "Deploy a load balanced Milvus distribution using NGINX, which can distribute requests to multiple server nodes."
       },
       {
         "id": 17,
-        "title": "Milvus on Google Colab",
-        "link": "https://www.baidu.com/",
+        "title": "Milvus in Google Colaboratory",
+        "link": "https://github.com/milvus-io/bootcamp/blob/master/deployments/google_colab",
         "iconType": null,
-        "desc": "Milvus on Google Colab"
+        "desc": "Set up Milvus in Google Colab, a free Jupyter notebook environment that runs entirely in the cloud and is especially well suited to machine learning and data analysis."
       }
     ]
   },
@@ -87,51 +86,51 @@
       {
         "id": 5,
         "title": "Image Similarity Search",
-        "link": "https://zilliz.com/solutions/image-search",
+        "link": "https://github.com/milvus-io/bootcamp/blob/master/solutions/image_similarity_search",
         "iconType": "IMAGE_SEARCH",
-        "desc": "image search is one of the core ideas behind many different technologies, mage search is one of the core ideas behind many different technologies,mage search is one of the core ideas behind many different technologies,"
+        "desc": "Build a reverse image search system using Milvus paired with YOLOv3 for object detection and ResNet-50 for feature extraction."
       },
       {
         "id": 6,
         "title": "Question Answering System",
-        "link": "https://zilliz.com/solutions/image-search",
+        "link": "https://github.com/milvus-io/bootcamp/blob/master/solutions/question_answering_system",
         "iconType": "QUESTION_ANSWER",
-        "desc": "image search is one of the core ideas behind many different technologies, from..."
+        "desc": "Build an intelligent chatbot using Milvus and the BERT model for natural language processing (NLP)."
       },
       {
         "id": 7,
         "title": "Recommendation System",
-        "link": "https://zilliz.com/solutions/image-search",
+        "link": "https://github.com/milvus-io/bootcamp/blob/master/solutions/recommendation_system",
         "iconType": "RECOMMENDATION",
-        "desc": "image search is one of the core ideas behind many different technologies, from..."
+        "desc": "Build an AI-powered movie recommendation system using Milvus paired with PaddlePaddle’s deep learning framework."
       },
       {
         "id": 8,
         "title": "Video Similarity Search",
-        "link": "https://zilliz.com/solutions/image-search",
+        "link": "https://github.com/milvus-io/bootcamp/blob/master/solutions/video_similarity_search",
         "iconType": "VIDEO_SEARCH",
-        "desc": "mage search is one of the core ideas behind many different technologies, from..."
+        "desc": "Build a video similarity search engine using Milvus and a VGG neural network."
       },
       {
         "id": 9,
         "title": "Audio Similarity Search",
-        "link": "https://zilliz.com/solutions/image-search",
+        "link": "https://github.com/milvus-io/bootcamp/tree/master/solutions/audio_similarity_search",
         "iconType": "AUDIO_SEARCH",
-        "desc": "image search is one of the core ideas behind many different technologies, from..."
+        "desc": "Build an audio search engine using Milvus paired with PANNs for audio pattern recognition."
       },
       {
         "id": 10,
         "title": "Molecular Similarity Search",
-        "link": "https://zilliz.com/solutions/image-search",
+        "link": "https://github.com/milvus-io/bootcamp/blob/master/solutions/molecular_similarity_search",
         "iconType": "MOLECULAR",
-        "desc": "image search is one of the core ideas behind many different technologies, from..."
+        "desc": "Build a molecule similarity search system using Milvus paired with RDkit for cheminformatics."
       },
       {
         "id": 11,
         "title": "Hybrid Search",
-        "link": "https://zilliz.com/solutions/image-search",
+        "link": "https://github.com/milvus-io/bootcamp/blob/master/solutions/hybrid_search",
         "iconType": "HYBRID",
-        "desc": "mage search is one of the core ideas behind many different technologies, from..."
+        "desc": "Make vector similarity search more granular using Milvus and PostgresQL for scalar field filtering."
       }
     ]
   }
