@@ -329,12 +329,12 @@ You can find all parameters supported by Milvus-Helm at [Milvus Helm Charts](htt
    $ helm install
       --set cluster.enabled=true     \
       --set persistence.enabled=true \
-      --set mishards.replica=2       \
-      --set readonly.replica=2       \
+      --set mishards.replicas=2       \
+      --set readonly.replicas=2       \
       milvus-release .
    ```
 
-   Here, the number of replica sets is controlled by `mishards.replica` and `readonly.replica`. Their default values are 1.
+   Here, the number of replica sets is controlled by `mishards.replicas` and `readonly.replicas`. Their default values are 1.
 
    <div class="alert note">
    Currently, the write nodes in the Mishards cluster cannot be expanded.

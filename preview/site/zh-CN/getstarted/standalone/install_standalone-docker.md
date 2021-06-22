@@ -7,6 +7,9 @@ group: standalone
 ---
 
 # 安装 Milvus 单机版
+你可以使用 Docker-Compose 或 Kubernetes 安装 Milvus 单机版。
+<div class="tab-wrapper"><a href="install_standalone-helm.md" class=''>使用 Kubernetes 安装</a><a href="install_standalone-docker.md" class='active '>使用 Docker 安装</a></div>
+
 
 ## 开始之前
 
@@ -44,12 +47,11 @@ $ lscpu | grep -e sse4_2 -e avx -e avx2 -e avx512
 
 </details>
 
-## 安装 Milvus 单机版本
 
-<div class="tab-wrapper"><a href="install_standalone-docker.md" class='active '>使用 Docker 安装</a><a href="install_standalone-helm.md" class=''>使用 Helm 安装</a></div>
+## 安装 Milvus 单机版
 
-1. 下载 `standalone` 部署模式的 **docker-compose.yml** 文件并保存：
 
+1. 拉取 Milvus 镜像：
 ```
 $ wget https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/docker/standalone/docker-compose.yml -O docker-compose.yml
 ```
