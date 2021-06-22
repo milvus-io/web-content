@@ -12,7 +12,7 @@ When creating a collection, Milvus controls the size of a data segment according
 
 To process massive data, Milvus segments the data and each segment of data has tens or even hundreds of thousands of entities. Milvus separates the data in each segment by fields and stores the data in each field a data file. In the current version, an entity contains only one ID field and one vector field, so each segmented data file mainly includes a UID file and an original vector data file.
 
-The size of a segment is determined by the `index_file_size` (by default 1024 MB) when Milvus is creating the collection.
+The size of a segment is determined by the `index_file_size` (1024 MB by default and 128 GB at most) when Milvus is creating the collection.
 
 When building indexes, Milvus builds an index for each segment in the collection in order and stores the index into a separate file. Index files are independent of each other. Indexing can significantly improve retrieval performance.
 
