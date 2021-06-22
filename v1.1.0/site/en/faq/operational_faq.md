@@ -153,6 +153,15 @@ You receive this warning if the graphics memory required for a request is larger
 
 If you use SQLite to manage Metadata, you receive this error message when write requests occur frequently. We recommend using MySQL for Metadata management. See [Manage Metadata with MySQL](data_manage.md).
 
+#### Got an error `Segmentation Fault` from PyMilvus. What shall I do?
+
+PyMilvus v1.1.0 allows you to download the latest version of the grpcio library. The server of Milvus v1.x is built on a earlier, customized version of gRPC, which is incompatible with the latest grpcio library.  To fix this issue, either upgrade your PyMilvus version from v1.1.0 to v1.1.1 or roll back your grpcio library to 1.37.0: 
+
+```
+pip install grpcio==1.37.0
+pip install grpcio-tools==1.37.0
+```
+
 #### Still have questions?
 
 You can:
