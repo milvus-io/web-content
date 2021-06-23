@@ -156,22 +156,22 @@
       {
         "label": "Github Discussion",
         "link": "https://github.com/milvus-io/milvus",
-        "img": "../../assets/github.png"
+        "img": "../../assets/github.svg"
       },
       {
         "label": "Slack Channel",
         "link": "https://github.com/milvus-io/milvus",
-        "img": "../../assets/slack.png"
+        "img": "../../assets/slack.svg"
       },
       {
         "label": "Zoom Meeting",
         "link": "https://github.com/milvus-io/milvus",
-        "img": "../../assets/zoom.png"
+        "img": "../../assets/zoom.svg"
       },
       {
         "label": "Social Media",
         "link": "https://github.com/milvus-io/milvus",
-        "img": "../../assets/twitter.png"
+        "img": "../../assets/twitter.svg"
       }
     ]
   },
