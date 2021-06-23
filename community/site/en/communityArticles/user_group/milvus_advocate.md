@@ -1,3 +1,7 @@
+---
+id: milvus_advocate.md
+---
+
 # Milvus Advocate 
 
 Milvus Advocates are passionate champions of Milvus who empower other community members through knowledge sharing to increase the ease of use of Milvus. Become a Milvus Advocate to increase your personal influence, meet like-minded people and grow to become a Milvus expert. 
