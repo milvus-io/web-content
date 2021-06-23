@@ -41,6 +41,7 @@ approvers:
 
 labels:
 - component/proxy
+```
 
 这个配置文件意味着：如果一个 PR 修改了这个目录的文件，会自动地被加上 `component/proxy` Label，并且在收到 `reviewers` 列表中用户评论的 `/lgtm` 和 `approvers` 列表中用户评论的 `/approve` 后才可以被自动合并。
 
