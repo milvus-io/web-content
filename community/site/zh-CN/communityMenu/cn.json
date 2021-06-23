@@ -9,24 +9,8 @@
       "order": 0
     },
     {
-      "id": "milvus_community_charters.md",
-      "title": "About Community",
-      "label1": "",
-      "label2": "",
-      "label3": "",
-      "order": 1
-    },
-    {
-      "id": "milvus_community_charters.md",
-      "title": "Community Values",
-      "label1": "",
-      "label2": "",
-      "label3": "",
-      "order": 2
-    },
-    {
       "id": "contributor_group",
-      "title": "Contributor Group",
+      "title": "贡献指南",
       "label1": "",
       "label2": "",
       "label3": "",
@@ -59,7 +43,7 @@
       "isMenu": true
     },
     {
-      "id": "community_resources",
+      "id": "#community_resources",
       "title": "Community Resources",
       "label1": "",
       "label2": "",
@@ -67,15 +51,7 @@
       "order": 5
     },
     {
-      "id": "community_events",
-      "title": "Community Events",
-      "label1": "",
-      "label2": "",
-      "label3": "",
-      "order": 6
-    },
-    {
-      "id": "community_partners",
+      "id": "#community_partners",
       "title": "Community Partners",
       "label1": "",
       "label2": "",
