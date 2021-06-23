@@ -42,6 +42,14 @@
       "order": 0
     },
     {
+      "id": "contributing_to_milvus.md",
+      "title": "Milvus 贡献指南",
+      "label1": "contributor_group",
+      "label2": "",
+      "label3": "",
+      "order": 1
+    },
+    {
       "id": "user_group",
       "title": "User Group",
       "label1": "",

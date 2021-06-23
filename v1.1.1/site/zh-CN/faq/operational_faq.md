@@ -147,6 +147,16 @@ Milvus 是以 Docker 镜像形式发行的，是可以离线部署的：
 
 如果元数据管理用的是 SQLite，在有数据频繁写入的情况下会出现该错误。建议将 SQLite 更换为 MySQL。如何更换请参考文档 [使用 MySQL 管理元数据](data_manage.md)。
 
+#### PyMilvus 返回 `Segmentation Fault` 错误，如何解决？
+
+PyMilvus v1.1.0 允许下载最新版本的 grpcio library，而 Milvus v1.x 的服务端则基于早期的定制版本 gRPC 搭建，该版本 gRPC 与最新版本 grpcio library 不兼容。解决此问题需将 PyMilvus 升级至 v1.1.1 或将 grpcio library 回滚至 1.37.0:
+
+```
+pip install grpcio==1.37.0
+pip install grpcio-tools==1.37.0
+```
+
+
 
 
 #### 仍有问题没有得到解答？

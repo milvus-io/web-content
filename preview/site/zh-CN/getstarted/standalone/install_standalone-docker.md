@@ -7,6 +7,9 @@ group: standalone
 ---
 
 # 安装 Milvus 单机版
+你可以使用 Docker-Compose 或 Kubernetes 安装 Milvus 单机版。
+<div class="tab-wrapper"><a href="install_standalone-helm.md" class=''>使用 Kubernetes 安装</a><a href="install_standalone-docker.md" class='active '>使用 Docker 安装</a></div>
+
 
 ## 开始之前
 
@@ -25,6 +28,7 @@ group: standalone
 - 运行 `$ sudo docker-compose version` 确认 Docker Compose 版本。建议使用 1.25.1 或以上版本。 
 
 > 安装 Docker Compose 步骤见 [Docker Compose 官方安装说明](https://docs.docker.com/compose/install/)。
+
 </details>
 
 <details><summary>检查 CPU 是否支持 SIMD 扩展指令集合：</summary>
@@ -43,69 +47,35 @@ $ lscpu | grep -e sse4_2 -e avx -e avx2 -e avx512
 
 </details>
 
-<details><summary>检查 GPU 的计算能力：</summary>
-Milvus 对于浮点型向量支持 GPU 加速。Milvus 默认支持的 Nvidia GPU 算力版本为 6.0、6.1、7.0、7.5。
-
-> 你可以[根据 GPU 的型号查询对应的算力版本](https://developer.nvidia.com/zh-cn/cuda-gpus#compute)。
-
-Milvus 要求 [CUDA 10.0 或以上版本](https://developer.nvidia.com/cuda-10.0-download-archive)。
-
-> 在 Milvus 中启用 GPU 加速是可选的。如果硬件环境中没有 GPU，你依然可以运行完整的 Milvus 服务。
-
-在当前的 Milvus 版本中，以下索引类型支持 GPU 加速：
-- FLAT
-- IVF_FLAT
-- IVF_SQ8
-- IVF_PQ
-
-更多关于 Milvus 中的索引，详见[向量索引](index.md)。
-</details>
 
 ## 安装 Milvus 单机版
 
-<div class="tab-wrapper"><a href="install_standalone-helm.md" class=''>从源码安装</a><a href="install_standalone-docker.md" class='active '>使用 Docker 安装</a></div>
 
 1. 拉取 Milvus 镜像：
 ```
-$ sudo docker pull milvusdb/milvus:2.0.0-d043021-19c36b
+$ wget https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/docker/standalone/docker-compose.yml -O docker-compose.yml
 ```
-2. 下载 **docker-compose.standalone.yml** 配置文件并保存为 **docker-compose.yml**：
 
+2. 启动 Docker Compose：
 ```
-$ mkdir -p /home/$USER/milvus
-$ cd home/$USER/milvus
-$ wget https://raw.githubusercontent.com/milvus-io/milvus/v2.0.0/deployments/docker/docker-compose.standalone.yml -O docker-compose.yml
-```
-3. 下载 **.env** 文件并定义变量：
-```
-$ wget https://raw.githubusercontent.com/milvus-io/milvus/v2.0.0/deployments/docker/.env
-```
-***.env** 文件包含了在 **docker-compose.yml** 中用到的所有变量定义，详见下表：*
+$ sudo docker-compose up -d
 
-| 变量      | 定义 |
-| ----------- | ----------- |
-| TARGET_DOCKER_IMAGE         | docker 镜像       |
-| ETCD_ADDRESS   | 	etcd 服务地址        |
-| MINIO_ADDRESS      | MinIO 服务地址       |
-| MASTER_ADDRESS   | Milvus 中 Master 的服务地址       |
-| PROXY_SERVICE_ADDRESS      | Milvus 中代理服务的地址    |
-| INDEX_SERVICE_ADDRESS   | Milvus 中索引服务的地址      |
-| DATA_SERVICE_ADDRESS      | Milvus 中数据服务的地址      |
-| QUERY_SERVICE_ADDRESS   | Milvus 中查询服务的地址       |
+Docker Compose is now in the Docker CLI, try `docker compose up`
 
-<br/>
-
-> 请确保将 `TARGET_DOCKER_IMAGE` 变量设置为相应的 Docker 镜像，比如 `TARGET_DOCKER_IMAGE=milvusdb/milvus:2.0.0-d043021-19c36b`。
-
-
-4. 启动 Docker Compose：
-```
-$ sudo docker-compose up -d 
+Creating milvus-etcd  ... done
+Creating milvus-minio ... done
+Creating milvus-standalone ... done
 ```
 
 *如果 Docker Compose 启动正常，可以看到有 3 个 Docker 容器在运行（2 个为基础服务，1 个为 Milvus 服务）：*
 ```
-$ sudo docker ps 
+$ sudo docker-compose ps
+
+      Name                     Command                  State                          Ports
+----------------------------------------------------------------------------------------------------------------
+milvus-etcd         etcd -listen-peer-urls=htt ...   Up (healthy)   2379/tcp, 2380/tcp
+milvus-minio        /usr/bin/docker-entrypoint ...   Up (healthy)   9000/tcp
+milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:19530->19530/tcp,:::19530->19530/tcp
 ```
 
 > 运行 `$ sudo docker-compose down` 停止 Docker Compose。
