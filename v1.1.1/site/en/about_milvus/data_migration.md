@@ -78,7 +78,7 @@ milvusdb/milvus:1.1.1-cpu-d061621-330cc6
 ## Step 5: Install the Python SDK Corresponding to Milvus v1.0.0
 
 ```
-pip3 install pymilvus==1.1.0
+pip3 install pymilvus==1.1.2
 ```
 
 ## Step 6: Verify Data Correctness
