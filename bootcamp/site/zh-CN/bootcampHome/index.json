@@ -1,34 +1,33 @@
 {
   "title": "关于 Milvus 训练营",
   "description": [
-    "近年来，虚拟货币风生水起，引得不少人趋之若鹜。比特币等虚拟货币没有实物，由计算机生成的一串串复杂代码组成，需要根据算法通过计算机运算获得，俗称“挖矿”。用于挖矿的“矿机”一般功率较大，需要消耗大量电力。",
-    "近年来xx，虚拟货币风生水起，引得不少人趋之若鹜。比特币等虚拟货币没有实物，由计算机生成的一串串复杂代码组成，需要根据算法通过计算机运算获得，俗称“挖矿”。用于挖矿的“矿机”一般功率较大，需要消耗大量电力。"
+    "Milvus 训练营能够帮助你了解向量数据库的操作及各种应用场景。通过 Milvus 训练营探索如何进行 Milvus 性能测评，搭建智能问答机器人、推荐系统、以图搜图系统、分子式检索系统等。"
   ],
   "banner": {
     "img": "../../assets/banner.jpg",
     "alt": "milvus community"
   },
   "section1": {
-    "title": "基准",
+    "title": "性能测评",
     "content": [
       {
         "id": 2,
-        "title": "1 你好你好你好你好",
-        "link": "https://milvus.io/docs/benchmarks_azure",
+        "title": "1 百万数据测试",
+        "link": "https://github.com/milvus-io/bootcamp/blob/master/benchmark_test/lab1_sift1b_1m.md",
         "iconType": null,
         "desc": null
       },
       {
         "id": 3,
-        "title": "100 你好你好你好你好",
-        "link": "https://milvus.io/docs/benchmarks_azure",
+        "title": "1 亿数据测试",
+        "link": "https://github.com/milvus-io/bootcamp/blob/master/benchmark_test/lab2_sift1b_100m.md",
         "iconType": null,
         "desc": null
       },
       {
         "id": 4,
-        "title": "你好你好你好你啊",
-        "link": "https://milvus.io/docs/benchmarks_azure",
+        "title": "性能测试结果",
+        "link": "https://github.com/milvus-io/bootcamp/blob/master/benchmark_test/performance_benchmark.md",
         "iconType": null,
         "desc": null
       }
@@ -39,99 +38,99 @@
     "content": [
       {
         "id": 12,
-        "title": "你好你好你好你",
-        "link": "https://www.baidu.com/",
+        "title": "基于 Mishards 搭建分布式 Milvus 系统 ",
+        "link": "https://github.com/milvus-io/bootcamp/blob/master/deployments/mishards",
         "iconType": null,
-        "desc": "是的丝带大舅哦 撒打算"
+        "desc": "使用集群分片中间件 Mishards 搭建分布式 Milvus 系统。 "
       },
       {
         "id": 13,
-        "title": "大大缓解快点哈金葵花卡打",
-        "link": "https://www.baidu.com/",
+        "title": "结合 Mishards 分布式与 Kubernetes",
+        "link": "https://github.com/milvus-io/bootcamp/blob/master/deployments/kubernetes",
         "iconType": null,
-        "desc": "大大缓解快点哈金葵花卡打"
+        "desc": "使用集群分片中间件 Mishards 和 Helm、Kubectl 搭建 Milvus 共享集群，实现共享存储。"
       },
       {
         "id": 14,
-        "title": "Milvus 阿斯顿就啊的叫阿设计大奖",
-        "link": "https://www.baidu.com/",
+        "title": "基于 JuiceFS 搭建Milvus 云端网络文件系统 ",
+        "link": "https://github.com/milvus-io/bootcamp/blob/master/deployments/juicefs",
         "iconType": null,
-        "desc": "Milvus 阿斯顿就啊的叫阿设计大奖"
+        "desc": "使用 JuiceFS 的标准 POSIX（可移植操作系统接口）文件系统实现 Milvus 节点间的数据共享。"
       },
       {
         "id": 15,
-        "title": "大大大大大大玩法大声点",
-        "link": "https://www.baidu.com/",
+        "title": "基于 Keepalived 的 Milvus 高可用方案",
+        "link": "https://github.com/milvus-io/bootcamp/blob/master/deployments/highly_available",
         "iconType": null,
-        "desc": "大大大大大大玩法大声点"
+        "desc": "使用集群管理与监控软件 Keepalived 实现 Milvus 高可用。"
       },
       {
         "id": 16,
-        "title": "是非得失个沙发上发呆是粉色粉色",
-        "link": "https://www.baidu.com/",
+        "title": "使用 NGINX 实现对 Milvus 负载均衡",
+        "link": "https://github.com/milvus-io/bootcamp/blob/master/deployments/load_balanced",
         "iconType": null,
-        "desc": "是非得失个沙发上发呆是粉色粉色"
+        "desc": "使用开源负载均衡器 NGINX 向多个 Milvus 服务节点分配请求，部署负载均衡的 Milvus 分布式系统。"
       },
       {
         "id": 17,
-        "title": "Milvus 对双方都十分舒服",
-        "link": "https://www.baidu.com/",
+        "title": "基于 Google Colaboratory 的 Milvus 使用教程",
+        "link": "https://github.com/milvus-io/bootcamp/blob/master/deployments/google_colab",
         "iconType": null,
-        "desc": "Milvus 对双方都十分舒服"
+        "desc": "使用基于 Jupyter Notebook 开发的免费深度学习云平台  Google Colab 运行 Milvus。"
       }
     ]
   },
   "section3": {
-    "title": "解决方案",
+    "title": "应用场景",
     "content": [
       {
         "id": 5,
-        "title": "是粉色粉色的冯绍峰h",
-        "link": "https://zilliz.com/solutions/image-search",
+        "title": "图片检索系统",
+        "link": "https://github.com/milvus-io/bootcamp/blob/master/solutions/image_similarity_search",
         "iconType": "IMAGE_SEARCH",
-        "desc": "近年来，虚拟货币风生水起，引得不少人趋之若鹜。比特币等虚拟货币没有实物，由计算机生成的一串串复杂代码组成，需要根据算法通过计算机运算获得，俗称“挖矿”。用于挖矿的“矿机”一般功率较大，需要消耗大量电力。"
+        "desc": "结合 Milvus 与目标检测模型  YOLOv3、图像特征提取模型 ResNet-50，搭建以图搜图系统。"
       },
       {
         "id": 6,
-        "title": "是粉色个鬼斧神工是的",
-        "link": "https://zilliz.com/solutions/image-search",
+        "title": "智能问答机器人",
+        "link": "https://github.com/milvus-io/bootcamp/blob/master/solutions/question_answering_system",
         "iconType": "QUESTION_ANSWER",
-        "desc": "近年来，虚拟货币风生水起，引得不少人趋之若鹜。比特币等虚拟货币没有实物，由计算机生成的一串串复杂代码组成，需要根据算法通过计算机运算获得，俗称“挖矿”。用于挖矿的“矿机”一般功率较大，需要消耗大量电力。"
+        "desc": "结合 Milvus 与自然语言处理模型 BERT 搭建智能问答机器人。"
       },
       {
         "id": 7,
-        "title": "撒大大大大大大啊大",
-        "link": "https://zilliz.com/solutions/image-search",
+        "title": "推荐系统",
+        "link": "https://github.com/milvus-io/bootcamp/blob/master/solutions/recommendation_system",
         "iconType": "RECOMMENDATION",
-        "desc": "近年来，虚拟货币风生水起，引得不少人趋之若鹜。比特币等虚拟货币没有实物，由计算机生成的一串串复杂代码组成，需要根据算法通过计算机运算获得，俗称“挖矿”。用于挖矿的“矿机”一般功率较大，需要消耗大量电力。"
+        "desc": "结合 Milvus 与开源深度学习框架 PaddlePaddle 搭建智能电影推荐系统。"
       },
       {
         "id": 8,
-        "title": "撒大大大大大大",
-        "link": "https://zilliz.com/solutions/image-search",
+        "title": "视频相似度检索系统",
+        "link": "https://github.com/milvus-io/bootcamp/blob/master/solutions/video_similarity_search",
         "iconType": "VIDEO_SEARCH",
-        "desc": "近年来，虚拟货币风生水起，引得不少人趋之若鹜。比特币等虚拟货币没有实物，由计算机生成的一串串复杂代码组成，需要根据算法通过计算机运算获得，俗称“挖矿”。用于挖矿的“矿机”一般功率较大，需要消耗大量电力。"
+        "desc": "结合 Milvus 与神经网络 VGG 搭建视频相似度检索系统。"
       },
       {
         "id": 9,
-        "title": "啊大大大大大大啊大",
-        "link": "https://zilliz.com/solutions/image-search",
+        "title": "音频检索系统",
+        "link": "https://github.com/milvus-io/bootcamp/tree/master/solutions/audio_similarity_search",
         "iconType": "AUDIO_SEARCH",
-        "desc": "近年来，虚拟货币风生水起，引得不少人趋之若鹜。比特币等虚拟货币没有实物，由计算机生成的一串串复杂代码组成，需要根据算法通过计算机运算获得，俗称“挖矿”。用于挖矿的“矿机”一般功率较大，需要消耗大量电力。"
+        "desc": "结合 Milvus 与音频特征提取模型 PANNs 搭建音频检索系统。"
       },
       {
         "id": 10,
-        "title": "大大大大大大撒的",
-        "link": "https://zilliz.com/solutions/image-search",
+        "title": "分子式检索系统",
+        "link": "https://github.com/milvus-io/bootcamp/blob/master/solutions/molecular_similarity_search",
         "iconType": "MOLECULAR",
-        "desc": "近年来，虚拟货币风生水起，引得不少人趋之若鹜。比特币等虚拟货币没有实物，由计算机生成的一串串复杂代码组成，需要根据算法通过计算机运算获得，俗称“挖矿”。用于挖矿的“矿机”一般功率较大，需要消耗大量电力。"
+        "desc": "结合 Milvus 与化学信息工具包  RDkit 搭建分子式检索系统，查询相似结构的分子。"
       },
       {
         "id": 11,
-        "title": "啊撒大大大大",
-        "link": "https://zilliz.com/solutions/image-search",
+        "title": "混合查询",
+        "link": "https://github.com/milvus-io/bootcamp/blob/master/solutions/hybrid_search",
         "iconType": "HYBRID",
-        "desc": "近年来，虚拟货币风生水起，引得不少人趋之若鹜。比特币等虚拟货币没有实物，由计算机生成的一串串复杂代码组成，需要根据算法通过计算机运算获得，俗称“挖矿”。用于挖矿的“矿机”一般功率较大，需要消耗大量电力。"
+        "desc": "结合 Milvus 与 数据库管理系统 PostgreSQL 实现特征向量与标量字段的混合过滤。"
       }
     ]
   }
