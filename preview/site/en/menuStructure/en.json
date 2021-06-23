@@ -35,7 +35,7 @@
     },
     {
       "id": "comparison.md",
-      "title": "What is New in Milvus 2.0",
+      "title": "Milvus 2.0 vs. 1.x",
       "label1": "about",
       "label2": null,
       "label3": null,
@@ -50,7 +50,7 @@
       "order": 1,
       "isMenu": true
     },
-     {
+    {
       "id": "architecture_overview.md",
       "title": "Architecture Overview",
       "label1": "getstarted",
@@ -108,11 +108,10 @@
       "label3": null,
       "order": 4,
       "isMenu": true
-
     },
     {
       "id": "configuration_standalone.md",
-      "title": "System Configuration",
+      "title": "Milvus Stanalone",
       "label1": "getstarted",
       "label2": "systemconfigurations",
       "label3": "",
@@ -120,7 +119,7 @@
     },
     {
       "id": "configuration_cluster.md",
-      "title": "System Configuration",
+      "title": "Milvus Cluster",
       "label1": "getstarted",
       "label2": "systemconfigurations",
       "label3": "",
@@ -156,7 +155,7 @@
       "label1": "develop",
       "label2": "",
       "label3": "",
-      "order": 1
+      "order": 2
     },
     {
       "id": "faq",

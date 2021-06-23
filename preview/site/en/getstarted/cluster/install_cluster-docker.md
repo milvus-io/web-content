@@ -1,28 +1,28 @@
 ---
 id: install_cluster-docker.md
 title: Install Milvus Cluster
-label: Install with Docker
+label: Install with Docker Compose
 order: 0
 group: cluster
 ---
 
 # Install Milvus Cluster
 
-You can install Milvus Cluster with Docker-Compose or Kubernetes.
+You can install Milvus Cluster with Docker Compose or Helm.
 
-<div class="tab-wrapper"><a href="install_cluster-docker.md" class='active '>Install with Docker</a><a href="install_cluster-helm.md" class=''>Install with Kubernetes</a></div>
+You can also [build Milvus from source code](https://github.com/milvus-io/milvus).
+
+
+<div class="tab-wrapper"><a href="install_cluster-docker.md" class='active '>Install with Docker Compose</a><a href="install_cluster-helm.md" class=''>Install with Helm</a></div>
+
 ## Before You Begin
 
-Before moving forward to installation, you must check the eligibility of your hardware in line with Milvus' requirement.
+Before moving forward to installation, you must check the eligibility of your Docker, Docker Compose, and hardware in line with Milvus' requirement.
 
 <details><summary>Check your Docker and Docker Compose version</summary>
 
-<div class="alert note">
-Docker Compose is the recommended way to install Milvus.
-</div>
-
-- Docker version 19.03 or higher is required.
-- Docker Compose version 1.25.1 or higher is required. 
+<li>Docker version 19.03 or higher is required. </li>
+<li>Docker Compose version 1.25.1 or higher is required. </li>
 </details>
 
 <details><summary>Check whether your CPU supports SIMD extension instruction set</summary>
@@ -42,25 +42,43 @@ $ lscpu | grep -e sse4_2 -e avx -e avx2 -e avx512
 </details>
 
 
+<div class="alert note">
+Installing Milvus with Docker Compose can only be used for testing and cannot be used in production.
+</div>
+
+
 ## Install Milvus Cluster
 
 
-1. Download **docker-compose.yml**.
+1. Download **docker-compose.yml**:
 
 ```
-$ mkdir -p /home/$USER/milvus
-$ cd home/$USER/milvus
-$ wget https://raw.githubusercontent.com/milvus-io/milvus/v2.0.0/deployments/docker/distributed/docker-compose.yml
-```
-2. Start Docker Compose.
-```
-$ sudo docker-compose up -d 
+$ wget https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/docker/cluster/docker-compose.yml -O docker-compose.yml
 ```
 
-*If Docker Compose boots successfully, 11 running docker containers will appear (eight infrastructure services and three Milvus services):*
+2. Start Milvus Cluster:
+```
+$ sudo docker-compose up -d
+Docker Compose is now in the Docker CLI, try `docker compose up`
+Creating milvus-etcd   ... done
+Creating milvus-minio  ... done
+Creating milvus-pulsar ... done
+Creating milvus-proxy      ... done
+Creating milvus-rootcoord  ... done
+Creating milvus-indexcoord ... done
+Creating milvus-querycoord ... done
+Creating milvus-datacoord  ... done
+Creating milvus-querynode  ... done
+Creating milvus-indexnode  ... done
+Creating milvus-datanode   ... done
+```
+
+*If Milvus Cluster boots successfully, 11 running docker containers appear (three infrastructure services and eight Milvus services):*
 
 ```
 $ sudo docker ps 
 ```
+![Running Docker containers](../../../../assets/install_cluster.png)
 
-> To stop Docker Compose, run ```$ sudo docker-compose down```.
+
+> To stop Milvus Cluster, run ```$ sudo docker-compose down```.

@@ -8,61 +8,61 @@ title: What is New in Milvus 2.0
 <table class="comparison">
 	<tr>
 		<th>&nbsp;</th>
-		<th><b>Milvus 1.x</b></th>
-		<th><b>Milvus 2.0</b></th>
+		<th>Milvus 1.x</th>
+		<th>Milvus 2.0</th>
 	</tr>
 	<tr>
-		<td><b>Architecture</b></td>
+		<th>Architecture</th>
 		<td>Shared storage</td>
 		<td>Cloud native</td>
 	</tr>
 	<tr>
-		<td><b>Scalability</b></td>
+		<th>Scalability</th>
 		<td>1 to 32 read nodes with only one write node</td>
 		<td>500+ nodes</td>
 	</tr>
   	<tr>
-		<td><b>Durability</b></td>
+		<th>Durability</th>
 		<td><li>Local disk</li><li>Network file system (NFS)</li></td>
 		<td><li>Object storage service (OSS)</li><li>Distributed file system (DFS)</li></td>
 	</tr>
   	<tr>
-		<td><b>Availability</b></td>
+		<th>Availability</th>
 		<td>99%</td>
 		<td>99.9%</td>
 	</tr>
 	<tr>
-		<td><b>Data consistency</b></td>
+		<th>Data consistency</th>
 		<td>Eventual consistency</td>
 		<td>Three levels of consistency:<li>Strong</li><li>Session</li><li>Consistent prefix</li></td>
 	</tr>
 	<tr>
-		<td><b>Data types supported</b></td>
+		<th>Data types supported</th>
 		<td>Vectors</td>
 		<td><li>Vectors</li><li>Fixed-length scalars</li><li>String and text (in planning)</li></td>
 	</tr>
 	<tr>
-		<td><b>Basic operations supported</b></td>
+		<th>Basic operations supported</th>
 		<td><li>Data insertion</li><li>Data deletion</li><li>Approximate nearest neighbor (ANN) Search</li></td>
 		<td><li>Data insertion</li><li>Data deletion (in planning)</li><li>Data query</li><li>Approximate nearest neighbor (ANN) Search</li><li>Recurrent neural network (RNN) search (in planning)</li></td>
 	</tr>
 	<tr>
-		<td><b>Advanced features</b></td>
+		<th>Advanced features</th>
 		<td><li>Mishards</li><li>Milvus DM</li></td>
 		<td><li>Scalar filtering</li><li>Time Travel</li><li>Multi-site deployment and multi-cloud integration</li><li>Data management tools</li></td>
 	</tr>
 	<tr>
-		<td><b>Index types and libraries</b></td>
+		<th>Index types and libraries</th>
 		<td><li>Faiss</li><li>Annoy</li><li>Hnswlib</li><li>RNSG</li></td>
 		<td><li>Faiss</li><li>Annoy</li><li>Hnswlib</li><li>RNSG</li><li>ScaNN (in planning)</li><li>On-disk index (in planning)</li></td>
 	</tr>
 	<tr>
-		<td><b>SDKs</b></td>
+		<th>SDKs</th>
 		<td><li>Python</li><li>Java</li><li>Go</li><li>RESTful</li><li>C++</li></td>
 		<td><li>Python</li><li>Go (in planning)</li><li>RESTful (in planning)</li><li>C++ (in planning)</li></td>
 	</tr>
 	<tr>
-		<td><b>Release status</b></td>
+		<th>Release status</th>
 		<td>Long-term support (LTS)</td>
 		<td>Release candidate. A stable version will be released in August.</td>
 	</tr>

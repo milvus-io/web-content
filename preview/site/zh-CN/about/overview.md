@@ -24,9 +24,7 @@ Milvus 提供 [单机版](overview_standalone.md) 与 [分布式版](overview_cl
 
 如果你有任何建议、意见或问题，欢迎加入 Milvus 的 [Slack](https://join.slack.com/t/milvusio/shared_invite/zt-e0u4qu3k-bI2GDNys3ZqX1YCJ9OM~GQ) 社区与我们的工程师团队交流。
 
-<a href="https://join.slack.com/t/milvusio/shared_invite/zt-e0u4qu3k-bI2GDNys3ZqX1YCJ9OM~GQ" display="block">
-    <img src="../../../assets/slack.png" alt="Miluvs Slack Channel" height="150" width="500">
-</a>
+[![Milvus Slack Channel](../../../assets/slack.png)](https://join.slack.com/t/milvusio/shared_invite/zt-e0u4qu3k-bI2GDNys3ZqX1YCJ9OM~GQ)
 
 你也可以访问 [常见问题](https://milvus.io/cn/docs/v1.1.0/performance_faq.md) 页面查看相关问题。
 

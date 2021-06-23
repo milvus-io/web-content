@@ -51,48 +51,22 @@ $ lscpu | grep -e sse4_2 -e avx -e avx2 -e avx512
 1. 下载 Docker Compose 配置文件 **docker-compose.yml**：
 
 ```
-$ wget https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/docker/cluster/docker-compose.yml -O docker-compose.yml
+$ mkdir -p /home/$USER/milvus
+$ cd home/$USER/milvus
+$ wget https://raw.githubusercontent.com/milvus-io/milvus/v2.0.0/deployments/docker/distributed/docker-compose.yml
 ```
 
 
 2. 启动 Docker Compose：
 
 ```
-$ sudo docker-compose up -d
-
-Docker Compose is now in the Docker CLI, try `docker compose up`
-
-Creating milvus-etcd   ... done
-Creating milvus-minio  ... done
-Creating milvus-pulsar ... done
-Creating milvus-proxy      ... done
-Creating milvus-rootcoord  ... done
-Creating milvus-indexcoord ... done
-Creating milvus-querycoord ... done
-Creating milvus-datacoord  ... done
-Creating milvus-querynode  ... done
-Creating milvus-indexnode  ... done
-Creating milvus-datanode   ... done
+$ sudo docker-compose up -d 
 ```
 
-*如果所有服务启动正常，可以看到有 11 个 docker 容器在运行（3 个为基础服务，8 个为 Milvus 服务）*
+*如果所有服务启动正常，可以看到有 11 个 docker 容器在运行（8 个为基础服务，3 个为 Milvus 服务）*
 
 ```
-$ sudo docker ps
-
-      Name                     Command                  State                          Ports
-----------------------------------------------------------------------------------------------------------------
-milvus-datacoord    /tini -- milvus run datacoord    Up
-milvus-datanode     /tini -- milvus run datanode     Up
-milvus-etcd         etcd -listen-peer-urls=htt ...   Up (healthy)   2379/tcp, 2380/tcp
-milvus-indexcoord   /tini -- milvus run indexcoord   Up
-milvus-indexnode    /tini -- milvus run indexnode    Up
-milvus-minio        /usr/bin/docker-entrypoint ...   Up (healthy)   9000/tcp
-milvus-proxy        /tini -- milvus run proxy        Up             0.0.0.0:19530->19530/tcp,:::19530->19530/tcp
-milvus-pulsar       bin/pulsar standalone            Up
-milvus-querycoord   /tini -- milvus run querycoord   Up
-milvus-querynode    /tini -- milvus run querynode    Up
-milvus-rootcoord    /tini -- milvus run rootcoord    Up
+$ sudo docker ps 
 ```
 
 > 运行 `$ sudo docker-compose down` 停止 Docker Compose。
