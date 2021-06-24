@@ -7,64 +7,52 @@
     "title": "Users",
     "list": [
       {
-        "name": "iqiyi",
-        "alt": "iqiyi",
-        "ratio": "40%"
+        "name": "aiqiyi",
+        "alt": "爱奇艺"
       },
       {
-        "name": "alibaba",
-        "alt": "alibaba",
-        "ratio": "40%"
+        "name": "kuaishou",
+        "alt": "快手"
       },
       {
         "name": "xiaomi",
-        "alt": "xiaomi",
-        "ratio": "50%"
+        "alt": "小米"
       },
       {
-        "name": "walmart",
-        "alt": "Walmart",
-        "ratio": "30%"
+        "name": "line",
+        "alt": "line"
       },
       {
         "name": "trend",
-        "alt": "TREND MICRO",
-        "ratio": "40%"
+        "alt": "TREND MICRO"
       },
       {
-        "name": "zs",
-        "alt": "招商银行",
-        "ratio": "50%"
+        "name": "moj",
+        "alt": "moj"
       },
       {
-        "name": "wps",
-        "alt": "WPS",
-        "ratio": "30%"
+        "name": "museum",
+        "alt": "museum"
       },
       {
-        "name": "vipcom",
-        "alt": "唯品会",
-        "ratio": "50%"
+        "name": "smartnew",
+        "alt": "Smart News"
       },
       {
-        "name": "arcelor",
-        "alt": "arcelor Mittal",
-        "ratio": "50%"
-      },
-      {
-        "name": "feishu",
-        "alt": "飞书深诺",
-        "ratio": "50%"
+        "name": "compass",
+        "alt": "Compass"
       },
       {
         "name": "axa",
-        "alt": "axa",
-        "ratio": "50%"
+        "alt": "axa"
       },
       {
-        "name": "dxy",
-        "alt": "丁香园",
-        "ratio": "40%"
+        "name": "dailyhunt",
+        "alt": "Daily Hunt"
+      },
+      {
+        "name": "messagebird",
+        "alt": "Message Bird"
       }
     ]
   }
