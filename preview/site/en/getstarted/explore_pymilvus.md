@@ -69,14 +69,14 @@ True
 ```
 
 ## Create a partition (optional)
-Search performance worsens as more vectors are inserted into the collection. To help mitigate declining search performance, consider creating collection partitions. Partitioning is a way to separate data. Partition tags narrow a search to a specific number of vectors, improving query performance. To improve search efficiency, divide a collection into several partitions by tag.
+Search performance worsens as more vectors are inserted into the collection. To help mitigate declining search performance, consider creating collection partitions. Partitioning is a way to separate data. Partition names narrow a search to a specific number of vectors, improving query performance. To improve search efficiency, divide a collection into several partitions by name.
 
 ```
->>> partition_tag = "example_partition"
->>> partition = collection.create_partition(partition_tag)
+>>> partition_name = "example_partition"
+>>> partition = collection.create_partition(partition_name)
 ```
 
-Milvus creates a default partition tag, `_default`, for new collections. After creating a partition, you have two partition tags,` tag01` and `_default`. Call `list_partitons()` to list all partitions in a collection.
+Milvus creates a default partition name, `_default`, for new collections. After creating a partition, you have two partition names, `example_partition` and `_default`. Call `list_partitons()` to list all partitions in a collection.
 
 ```
 >>> collection.partitions
@@ -86,7 +86,7 @@ Milvus creates a default partition tag, `_default`, for new collections. After c
 Call `has_partition()` to check if a partition is successfully created.
 
 ```
->>> collection.has_partition(partition_tag)
+>>> collection.has_partition(partition_name)
 True
 ```
 
@@ -112,10 +112,10 @@ You can insert vectors to a specified partition within a specific collection.
 [425790736918318406, 425790736918318407, 425790736918318408, ...]
 ```
 
-3. By specifying `partition_tag` when calling `insert()`, you can insert vectors to a specified partition:
+3. By specifying `partition_name` when calling `insert()`, you can insert vectors to a specified partition:
 
 ```
->>> collection.insert(data=entities, partition_name=partition_tag)
+>>> collection.insert(data=entities, partition_name=partition_name)
 ```
 
 4. Milvus temporarily stores the inserted vectors in the memory. Call `flush()` to flush them to the disk.
@@ -173,10 +173,10 @@ Call `describe_index()` to view more details of the new index:
 [0.0, 1.0862197875976562, 1.1029295921325684, ...]
 ```
 
-To search in a specific partition or field, set the parameters `partition_tags` and fields when calling `search()`.
+To search in a specific partition or field, set the parameters `partition_names` and fields when calling `search()`.
 
 ```
->>> collection.search(vectors[:5], field_name, param=search_params, limit=10, expr=None, partition_names=[partition_tag])
+>>> collection.search(vectors[:5], field_name, param=search_params, limit=10, expr=None, partition_names=[partition_name])
 ```
 
 4. Release the collections loaded in Milvus to reduce memory consumption when the search is completed. Query other collections:
@@ -199,7 +199,7 @@ Drop the index of a specified field in a specified collection.
 The `drop_partition()` method removes a partition and all vectors under it.
 
 ```
->>> collection.drop_partition(partition_name=partition_tag)
+>>> collection.drop_partition(partition_name=partition_name)
 ```
 
 ### Drop a collection

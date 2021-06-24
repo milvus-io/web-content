@@ -5,11 +5,14 @@ title: Milvus 2.0 新增功能
 # Milvus 2.0 vs. 1.x
 
 <table class="demo">
+	<thead>
 	<tr>
 		<th>&nbsp;</th>
 		<th>Milvus 1.x</th>
 		<th>Milvus 2.0</th>
 	</tr>
+	</thead>
+	<tbody>
 	<tr>
 		<th>架构</th>
 		<td>共享存储</td>
@@ -33,7 +36,7 @@ title: Milvus 2.0 新增功能
 	<tr>
 		<th>数据一致性</th>
 		<td>最终一致</td>
-		<td>多种一致性<li>Strong</li><li>Session</li><li>Consistent prefix</li></td>
+		<td>多种一致性<li>Strong</li><li>Bounded Staleness</li><li>Session</li><li>Consistent prefix</li></td>
 	</tr>
 	<tr>
 		<th>数据类型支持</th>
@@ -65,4 +68,5 @@ title: Milvus 2.0 新增功能
 		<td>长期支持（LTS）版本</td>
 		<td>预览版本。预计 2021 年 8 月发布稳定版本。</td>
 	</tr>
+	</tbody>
 </table>

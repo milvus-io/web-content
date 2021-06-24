@@ -6,7 +6,7 @@ order: 0
 group: cluster
 ---
 # 安装 Milvus 分布式版
-你可以使用 Docker-Compose 或 Kubernetes 安装 Milvus 分布式版。
+你可以使用 Docker Compose 或 Kubernetes 安装 Milvus 分布式版。
 
 <div class="tab-wrapper"><a href="install_cluster-docker.md" class='active '>使用 Docker 安装</a><a href="install_cluster-helm.md" class=''>使用 Kubernetes 安装</a></div>
 

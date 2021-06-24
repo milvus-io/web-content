@@ -6,6 +6,7 @@ title: What is New in Milvus 2.0
 # What is New in Milvus 2.0
 
 <table class="comparison">
+<thead>
 	<tr>
 		<th>&nbsp;</th>
 		<th>Milvus 1.x</th>
@@ -16,6 +17,8 @@ title: What is New in Milvus 2.0
 		<td>Shared storage</td>
 		<td>Cloud native</td>
 	</tr>
+</thead>
+<tbody>
 	<tr>
 		<th>Scalability</th>
 		<td>1 to 32 read nodes with only one write node</td>
@@ -34,7 +37,7 @@ title: What is New in Milvus 2.0
 	<tr>
 		<th>Data consistency</th>
 		<td>Eventual consistency</td>
-		<td>Three levels of consistency:<li>Strong</li><li>Session</li><li>Consistent prefix</li></td>
+		<td>Three levels of consistency:<li>Strong</li><li>Bounded Staleness</li><li>Session</li><li>Consistent prefix</li></td>
 	</tr>
 	<tr>
 		<th>Data types supported</th>
@@ -66,4 +69,5 @@ title: What is New in Milvus 2.0
 		<td>Long-term support (LTS)</td>
 		<td>Release candidate. A stable version will be released in August.</td>
 	</tr>
+</tbody>
 </table>

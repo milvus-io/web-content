@@ -217,6 +217,14 @@
       "label2": "",
       "label3": "",
       "order": 4
+    },
+    {
+      "id": "release_notes.md",
+      "title": "发版说明",
+      "label1": "",
+      "label2": "",
+      "label3": "",
+      "order": 5
     }
     
   ]

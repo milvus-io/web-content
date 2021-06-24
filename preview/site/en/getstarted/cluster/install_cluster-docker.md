@@ -8,7 +8,7 @@ group: cluster
 
 # Install Milvus Cluster
 
-You can install Milvus Cluster with Docker Compose or Helm.
+You can install Milvus cluster with Docker Compose or Helm.
 
 You can also [build Milvus from source code](https://github.com/milvus-io/milvus).
 
