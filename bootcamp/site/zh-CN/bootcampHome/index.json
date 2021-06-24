@@ -86,7 +86,7 @@
       {
         "id": 5,
         "title": "图片检索系统",
-        "link": "https://github.com/milvus-io/bootcamp/blob/master/solutions/image_similarity_search",
+        "link": "https://github.com/milvus-io/bootcamp/tree/master/solutions/reverse_image_search",
         "iconType": "IMAGE_SEARCH",
         "desc": "结合 Milvus 与目标检测模型  YOLOv3、图像特征提取模型 ResNet-50，搭建以图搜图系统。"
       },
