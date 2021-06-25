@@ -29,6 +29,7 @@ id: operational_faq.md
 - [Milvus 可以通过扩展某些接口 (如 S3 接口或 GlusterFS 接口) 来扩展存储吗？](#Milvus-可以通过扩展某些接口-如-S3-接口或-GlusterFS-接口-来扩展存储吗)
 - [Milvus 日志中为什么会出现这个警告 `WARN: increase temp memory to avoid cudaMalloc, or decrease query/add size (alloc 307200000 B, highwater 0 B)`？](#Milvus-日志中为什么会出现这个警告-WARN-increase-temp-memory-to-avoid-cudaMalloc-or-decrease-queryadd-size-alloc-307200000-B-highwater-0-B)
 - [出现 `database is locked` 的报错怎么解决？](#出现-database-is-locked-的报错怎么解决)
+- [PyMilvus 返回 `Segmentation Fault` 错误，如何解决？](#PyMilvus-返回-Segmentation-Fault-错误如何解决)
 - [仍有问题没有得到解答？](#仍有问题没有得到解答)
 
 <!-- /TOC -->

@@ -29,6 +29,7 @@ id: operational_faq.md
 - [Can I increase my storage by adding interfaces such as S3 or GlusterFS?](#Can-I-increase-my-storage-by-adding-interfaces-such-as-S3-or-GlusterFS)
 - [Why do I see `WARN: increase temp memory to avoid cudaMalloc, or decrease query/add size (alloc 307200000 B, highwater 0 B)` in the log file?](#Why-do-I-see-WARN-increase-temp-memory-to-avoid-cudaMalloc-or-decrease-queryadd-size-alloc-307200000-B-highwater-0-B-in-the-log-file)
 - [Why does Milvus return `database is locked`?](#Why-does-Milvus-return-database-is-locked)
+- [Got an error `Segmentation Fault` from PyMilvus. What shall I do?](#Got-an-error-Segmentation-Fault-from-PyMilvus-What-shall-I-do)
 - [Still have questions?](#Still-have-questions)
 
 <!-- /TOC -->
