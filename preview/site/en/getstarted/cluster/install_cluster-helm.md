@@ -9,7 +9,7 @@ group: cluster
 
 You can install Milvus cluster with Docker Compose or Helm.
 
-You can also [build Milvus from source code](https://github.com/milvus-io/milvus).
+You can also [build Milvus from source code](https://github.com/milvus-io/milvus/blob/master/INSTALL.md).
 
 <div class="tab-wrapper"><a href="install_cluster-docker.md" class=''>Install with Docker Compose</a><a href="install_cluster-helm.md" class='active '>Install with Helm</a></div>
 
@@ -27,24 +27,24 @@ $ minikube start
 ## 2. Start Milvus
 Helm package manager for Kubernetes can be used to simplify this process.
 
-### Add the Milvus chart repository:
+#### Add the Milvus chart repository:
 ```
 $ helm repo add milvus https://milvus-io.github.io/milvus-helm/
 ```
 
-### Update your Milvus chart to the latest version: 
+#### Update your Milvus chart to the latest version: 
 ```
 $ helm repo update
 ```
 
-### Install Milvus Helm chart:
+#### Install Milvus Helm chart:
 Provide a release name for identifying your Milvus deployment.
 
 <div class="alert note">
-This tutorial uses `my-release` as the release name. To use a different release name, adjust the release name in subsequent commands.
+This tutorial uses <code> my-release</code> as the release name. To use a different release name, adjust the release name in subsequent commands.
 </div>
 
-### Install Milvus cluster:
+#### Install Milvus cluster:
 ```
 $ helm install my-release milvus/milvus --set cluster.enabled=true
 ```

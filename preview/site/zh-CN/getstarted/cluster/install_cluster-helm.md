@@ -1,14 +1,20 @@
 ---
 id: install_cluster-helm.md
 title: 安装分布式版 Milvus
-label: 使用 Kubernetes 安装
+label: 使用 Helm 安装
 order: 1
 group: cluster
 ---
 # 安装 Milvus 分布式版
 你可以使用 Docker Compose 或 Kubernetes 安装 Milvus 分布式版。
 
-<div class="tab-wrapper"><a href="install_cluster-docker.md" class=''>使用 Docker 安装</a><a href="install_cluster-helm.md" class='active '>使用 Kubernetes 安装</a></div>
+你也可以[从源代码编译 Milvus](https://github.com/milvus-io/milvus/blob/master/INSTALL.md)。
+
+<div class="alert note">
+Docker Compose 部署方式只用作测试使用，不能用于生产环境。
+</div>
+
+<div class="tab-wrapper"><a href="install_cluster-docker.md" class=''>使用 Docker Compose 安装</a><a href="install_cluster-helm.md" class='active '>使用 Helm 安装</a></div>
 
 ## 安装前提
 - Kubernetes： 1.14.0 或以上。
@@ -27,24 +33,24 @@ $ minikube start
 ## 2. 启动 Milvus
 > 使用 Kubernetes 包管理工具 Helm 能够简化本步骤。
 
-### 使用 Kubernetes 包管理工具 Helm 添加 Milvus chart 仓库：
+#### 使用 Kubernetes 包管理工具 Helm 添加 Milvus chart 仓库：
 ```
 $ helm repo add milvus https://milvus-io.github.io/milvus-helm/
 ```
 
-### 将 Milvus chart 更新至最新版本：
+#### 将 Milvus chart 更新至最新版本：
 ```
 $ helm repo update
 ```
 
-### 安装 Milvus Helm chart：
+#### 安装 Milvus Helm chart：
 设置发布命名（release name）以标记或追踪该 chart 部署。
 
 <div class="alert note">
-本教程使用 my-release 作为 release name。如需使用不同的 release name, 请在以下命令中修改相应的 release name。
+本教程使用 <code> my-release</code> 作为 release name。如需使用不同的 release name, 请在以下命令中修改相应的 release name。
 </div>
 
-### 安装 Milvus 分布式版：
+#### 安装 Milvus 分布式版：
 ```
 $ helm install my-release milvus/milvus
 ```

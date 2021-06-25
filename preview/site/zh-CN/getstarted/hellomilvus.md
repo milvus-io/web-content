@@ -69,6 +69,10 @@ $ python3 hello_milvus.py
 ```
 *运行结果及查询等待时间如下：*
 
-![Returned results](../../../../assets/returned_results_and_query_latency.png)
+![Returned results](../../../assets/returned_results.png)
+
+
+<br/>
+
 
 *恭喜！你已成功启动 Milvus，并完成了在 Milvus上的第一次向量查询。*

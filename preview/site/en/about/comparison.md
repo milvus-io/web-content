@@ -12,12 +12,12 @@ title: What is New in Milvus 2.0
 		<th>Milvus 1.x</th>
 		<th>Milvus 2.0</th>
 	</tr>
+</thead>
 	<tr>
 		<th>Architecture</th>
 		<td>Shared storage</td>
 		<td>Cloud native</td>
 	</tr>
-</thead>
 <tbody>
 	<tr>
 		<th>Scalability</th>

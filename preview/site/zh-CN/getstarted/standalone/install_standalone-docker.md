@@ -1,14 +1,22 @@
 ---
 id: install_standalone-docker.md
 title: 安装单机版 Milvus
-label: 使用 Docker 安装
+label: 使用 Docker Compose 安装
 order: 0
 group: standalone
 ---
 
 # 安装 Milvus 单机版
+
 你可以使用 Docker Compose 或 Kubernetes 安装 Milvus 单机版。
-<div class="tab-wrapper"><a href="install_standalone-helm.md" class=''>使用 Kubernetes 安装</a><a href="install_standalone-docker.md" class='active '>使用 Docker 安装</a></div>
+你也可以[从源代码编译 Milvus](https://github.com/milvus-io/milvus/blob/master/INSTALL.md)。
+
+你可以使用 Docker Compose 或 Helm 安装 Milvus 单机版。
+<div class="alert note">
+Docker Compose 部署方式只用作测试使用，不能用于生产环境。
+</div>
+
+<div class="tab-wrapper"><a href="install_standalone-helm.md" class=''>使用 Helm 安装</a><a href="install_standalone-docker.md" class='active '>使用 Docker Compose 安装</a></div>
 
 
 ## 开始之前
@@ -16,10 +24,6 @@ group: standalone
 请先检查你的 Docker、Docker Compose 及硬件设备是否满足 Milvus 安装要求。
 
 <details><summary>检查 Docker 及 Docker Compose 版本：</summary>
-
-<div class="alert note">
-建议使用 Docker Compose 安装 Milvus 单机版。
-</div>
 
 - 运行 `$ sudo docker info` 确认 Docker 版本。建议使用 19.03 或以上版本。
 
