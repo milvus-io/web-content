@@ -86,7 +86,7 @@
       {
         "id": 5,
         "title": "Image Similarity Search",
-        "link": "https://github.com/milvus-io/bootcamp/blob/master/solutions/image_similarity_search",
+        "link": "https://github.com/milvus-io/bootcamp/tree/master/solutions/reverse_image_search",
         "iconType": "IMAGE_SEARCH",
         "desc": "Build a reverse image search system using Milvus paired with YOLOv3 for object detection and ResNet-50 for feature extraction.",
         "liveDemo": "https://zilliz.com/milvus-demos/reverse-image-search"
