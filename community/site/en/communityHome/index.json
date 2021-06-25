@@ -137,16 +137,16 @@
       ]
     },
     "ambassador": {
-      "title": "Milvus Ambassador",
+      "title": "Become a Milvus Advocate",
       "desc": "Milvus Ambassor is ...., what you can gain in our communiry....Any member that contributes 3+ pieces of content to the Milvus community within a given calendar year is eligible to become an ",
       "img": "../../assets/ambassador.png",
       "joinBtn": {
-        "label": "Become a Milvus Ambassador",
-        "link": "#"
+        "label": "Learn how you can become one",
+        "link": "/community/milvus_advocate.md"
       },
       "introBtn": {
-        "label": "Ambassador Program Introduction",
-        "link": "#"
+        "label": "",
+        "link": ""
       }
     }
   },
