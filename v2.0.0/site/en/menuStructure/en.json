@@ -134,20 +134,12 @@
       "isMenu": true
     },
     {
-      "id": "pymilvusapireference.md",
-      "title": "PyMilvus API Reference",
-      "label1": "develop",
-      "label2": "",
-      "label3": "",
-      "order": 0
-    },
-    {
       "id": "index.md",
       "title": "Vector Index",
       "label1": "develop",
       "label2": "",
       "label3": "",
-      "order": 1
+      "order": 0
     },
     {
       "id": "metric.md",
@@ -155,7 +147,7 @@
       "label1": "develop",
       "label2": "",
       "label3": "",
-      "order": 2
+      "order": 1
     },
     {
       "id": "faq",
