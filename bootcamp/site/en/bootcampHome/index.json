@@ -88,14 +88,16 @@
         "title": "Image Similarity Search",
         "link": "https://github.com/milvus-io/bootcamp/tree/master/solutions/reverse_image_search",
         "iconType": "IMAGE_SEARCH",
-        "desc": "Build a reverse image search system using Milvus paired with YOLOv3 for object detection and ResNet-50 for feature extraction."
+        "desc": "Build a reverse image search system using Milvus paired with YOLOv3 for object detection and ResNet-50 for feature extraction.",
+        "liveDemo": "https://zilliz.com/milvus-demos/reverse-image-search"
       },
       {
         "id": 6,
         "title": "Question Answering System",
         "link": "https://github.com/milvus-io/bootcamp/blob/master/solutions/question_answering_system",
         "iconType": "QUESTION_ANSWER",
-        "desc": "Build an intelligent chatbot using Milvus and the BERT model for natural language processing (NLP)."
+        "desc": "Build an intelligent chatbot using Milvus and the BERT model for natural language processing (NLP).",
+        "liveDemo": "http://35.166.123.214:8005/"
       },
       {
         "id": 7,
@@ -123,7 +125,8 @@
         "title": "Molecular Similarity Search",
         "link": "https://github.com/milvus-io/bootcamp/blob/master/solutions/molecular_similarity_search",
         "iconType": "MOLECULAR",
-        "desc": "Build a molecule similarity search system using Milvus paired with RDkit for cheminformatics."
+        "desc": "Build a molecule similarity search system using Milvus paired with RDkit for cheminformatics.",
+        "liveDemo": "http://35.166.123.214:8002/"
       },
       {
         "id": 11,
@@ -131,6 +134,18 @@
         "link": "https://github.com/milvus-io/bootcamp/blob/master/solutions/hybrid_search",
         "iconType": "HYBRID",
         "desc": "Make vector similarity search more granular using Milvus and PostgresQL for scalar field filtering."
+      }
+    ]
+  },
+  "section4": {
+    "title": "Collaborations",
+    "content": [
+      {
+        "id": 18,
+        "title": "Milvus and ONNX",
+        "link": "https://github.com/milvus-io/bootcamp/tree/master/etc/onnx_and_milvus",
+        "iconType": "test",
+        "desc": "Build a reverse image search system with Milvus using various AI models in collaboration with the Open Neural Network Exchange (ONNX)."
       }
     ]
   }

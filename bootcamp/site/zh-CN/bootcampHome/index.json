@@ -88,14 +88,16 @@
         "title": "图片检索系统",
         "link": "https://github.com/milvus-io/bootcamp/tree/master/solutions/reverse_image_search",
         "iconType": "IMAGE_SEARCH",
-        "desc": "结合 Milvus 与目标检测模型  YOLOv3、图像特征提取模型 ResNet-50，搭建以图搜图系统。"
+        "desc": "结合 Milvus 与目标检测模型  YOLOv3、图像特征提取模型 ResNet-50，搭建以图搜图系统。",
+        "liveDemo": "https://zilliz.com/milvus-demos/reverse-image-search"
       },
       {
         "id": 6,
         "title": "智能问答机器人",
         "link": "https://github.com/milvus-io/bootcamp/blob/master/solutions/question_answering_system",
         "iconType": "QUESTION_ANSWER",
-        "desc": "结合 Milvus 与自然语言处理模型 BERT 搭建智能问答机器人。"
+        "desc": "结合 Milvus 与自然语言处理模型 BERT 搭建智能问答机器人。",
+        "liveDemo": "http://35.166.123.214:8005/"
       },
       {
         "id": 7,
@@ -123,7 +125,8 @@
         "title": "分子式检索系统",
         "link": "https://github.com/milvus-io/bootcamp/blob/master/solutions/molecular_similarity_search",
         "iconType": "MOLECULAR",
-        "desc": "结合 Milvus 与化学信息工具包  RDkit 搭建分子式检索系统，查询相似结构的分子。"
+        "desc": "结合 Milvus 与化学信息工具包  RDkit 搭建分子式检索系统，查询相似结构的分子。",
+        "liveDemo": "http://35.166.123.214:8002/"
       },
       {
         "id": 11,
@@ -131,6 +134,18 @@
         "link": "https://github.com/milvus-io/bootcamp/blob/master/solutions/hybrid_search",
         "iconType": "HYBRID",
         "desc": "结合 Milvus 与 数据库管理系统 PostgreSQL 实现特征向量与标量字段的混合过滤。"
+      }
+    ]
+  },
+  "section4": {
+    "title": "合作项目",
+    "content": [
+      {
+        "id": 18,
+        "title": "结合 Milvus 与 ONNX  ",
+        "link": "https://github.com/milvus-io/bootcamp/tree/master/etc/onnx_and_milvus",
+        "iconType": null,
+        "desc": "结合 Milvus 与开放神经网络交换格式（ONNX）中存储的 AI 模型，搭建以图搜图系统。"
       }
     ]
   }
