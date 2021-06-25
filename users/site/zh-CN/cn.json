@@ -1,10 +1,40 @@
 {
-  "slogan": {
-    "text": "We have literally been unable to kill this thing. No matter what we’ve thrown at it.",
-    "author": "by Mi.Alato"
-  },
+  "slogan": [
+    {
+      "text": "We chose Milvus because it is very user-friendly. Without Milvus, our semantic search wouldn’t have been 10x smarter!",
+      "author": "by Rahul Yadav, Principal Engineer at Tokopedia"
+    },
+    {
+      "text": "Milvus drastically accelerated retrieval of millions of semantic vectors. We saw a near tenfold advancement compared to how things were when we were using other vector similarity search engines.",
+      "author": "by Tingting Wang, NLP algorithm engineer at Sohu"
+    },
+    {
+      "text": "We are looking forward to any future updates from Milvus that could help us further optimize the shopping experience for our users.",
+      "author": "by Jessie Ji, Java Software Engineer at VOVA"
+    },
+    {
+      "text": "The fast similarity search provided by Milvus allows ArtLens AI to match user uploaded photos with visually similar art from the CMA’s massive collection in seconds.",
+      "author": "by Anna Faxon and Haley Kedziora, Digital Project Managers at Cleveland Museum of Art"
+    },
+    {
+      "text": "Without a vector search engine like Milvus, similarity searches would not be feasible across the entire vector space.",
+      "author": "by Elizabeth Edmiston, Senior Software Engineer at Lucidworks"
+    },
+    {
+      "text": "The Milvus community is very active and has an abundance of resources available for its users. This helped us quickly developed a minimum viable product (MVP) and significantly lowered the development costs.",
+      "author": "by Zhaoxing Li, Senior Engineer at Opera"
+    },
+    {
+      "text": "Without Milvus, building our news aggregator wouldn't have been possible. The platform maintains consistent performance levels even in situations with unusually high concurrency.",
+      "author": "by Jie Yuan, Recommendation Algorithm Architect at Xiaomi"
+    },
+    {
+      "text": "Milvus’ flexibility makes it easy to optimize machine learning projects to better fit different scenarios.",
+      "author": "by  Lang Wang, Senior Software Engineer at Kingsoft"
+    }
+  ],
   "user": {
-    "title": "Users",
+    "title": "用户",
     "list": [
       {
         "name": "aiqiyi",
