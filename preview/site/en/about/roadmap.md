@@ -8,7 +8,7 @@ title: Milvus Roadmap
 - Highly available with fully managed failure recovery and service discovery
 - Support for scalar filtering and point query
 - Provides highly abstract ORM-style APIs
-- Offers three levels of tunable consistency: strong, session, consistent prefix
+- Offers four levels of tunable consistency: strong, bounded staleness, session, consistent prefix
 
 
 

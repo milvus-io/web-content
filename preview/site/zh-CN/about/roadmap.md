@@ -10,7 +10,7 @@ title: 产品路线图
 - 全托管式故障转移和服务发现的高可用系统。
 - 支持标量字段过滤和点查询。
 - 提供基于对象关系映射（Obejct Relational Mapping）抽象的 API。
-- 提供三个级别的一致性，分别是：strong、session、consistent prefix。
+- 提供四个级别的一致性，分别是：strong、bounded staleness、session、consistent prefix。
 
 #### Milvus 2.1 - 支持全套数据操纵语言（Data Manipulation Language）函数的稳定版本
 
