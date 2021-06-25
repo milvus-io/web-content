@@ -86,7 +86,7 @@
       {
         "id": 5,
         "title": "Image Similarity Search",
-        "link": "https://github.com/milvus-io/bootcamp/tree/master/solutions/reverse_image_search",
+        "link": "https://github.com/milvus-io/bootcamp/blob/master/solutions/image_similarity_search",
         "iconType": "IMAGE_SEARCH",
         "desc": "Build a reverse image search system using Milvus paired with YOLOv3 for object detection and ResNet-50 for feature extraction."
       },
@@ -131,6 +131,18 @@
         "link": "https://github.com/milvus-io/bootcamp/blob/master/solutions/hybrid_search",
         "iconType": "HYBRID",
         "desc": "Make vector similarity search more granular using Milvus and PostgresQL for scalar field filtering."
+      }
+    ]
+  },
+  "section4": {
+    "title": "Collaborations",
+    "content": [
+      {
+        "id": 18,
+        "title": "Milvus and ONNX",
+        "link": "https://github.com/milvus-io/bootcamp/tree/master/etc/onnx_and_milvus",
+        "iconType": "test",
+        "desc": "Build a reverse image search system with Milvus using various AI models in collaboration with the Open Neural Network Exchange (ONNX)."
       }
     ]
   }
