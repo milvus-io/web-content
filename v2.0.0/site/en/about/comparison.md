@@ -43,7 +43,7 @@ Object relational mapping (ORM) allows users to focus more on the upper-level bu
 
 - Milvus 2.0 uses Prometheus, an open-source time-series database, to store performance and monitoring data, and relies on Grafana for metrics visualization.
 
-## Milvus 2.0 is better than 1.x
+## Milvus 2.0 vs. 1.x: Cloud-native, distributed architecture, highly scalable, and more
 
 <table class="comparison">
 <thead>
