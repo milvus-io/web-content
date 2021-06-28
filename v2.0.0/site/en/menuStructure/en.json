@@ -197,7 +197,7 @@
     },
     {
       "id": "pymilvus_faq.md",
-      "title": "PyMilvus FAQs",
+      "title": "PyMilvus-ORM FAQs",
       "label1": "faq",
       "label2": "",
       "order": 1

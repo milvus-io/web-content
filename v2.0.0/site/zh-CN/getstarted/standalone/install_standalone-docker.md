@@ -19,7 +19,7 @@ group: standalone
 Docker Compose 部署方式只用作测试使用，不能用于生产环境。
 </div>
 
-<div class="tab-wrapper"><a href="install_standalone-docker.md" class='active '>使用 Docker Compose 安装</a><a href="configuration_standalone_basic.md" class=''>Basic Configurations</a><a href="install_standalone-helm.md" class=''>使用 Helm 安装</a><a href="configuration_standalone_advanced.md" class=''>Advanced Configurations</a></div>
+<div class="tab-wrapper"><a href="install_standalone-docker.md" class='active '>使用 Docker Compose 安装</a><a href="install_standalone-helm.md" class=''>使用 Helm 安装</a></div>
 
 
 ## 开始之前

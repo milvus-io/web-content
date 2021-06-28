@@ -3,7 +3,7 @@ id: configuration_standalone_advanced.md
 title: Milvus Standalone System Configurations
 label: Advanced Configurations
 order: 1
-group: standalone
+group: standalone_sys
 ---
 
 # Milvus Standalone System Configurations
@@ -12,7 +12,7 @@ Milvus cluster maintains many system variables that configure the operation. All
 
 
 
-<div class="tab-wrapper"><a href="install_standalone-docker.md" class=''>Install with Docker Compose</a><a href="configuration_standalone_basic.md" class=''>Basic Configurations</a><a href="install_standalone-helm.md" class=''>Install with Helm</a><a href="configuration_standalone_advanced.md" class='active '>Advanced Configurations</a></div>
+<div class="tab-wrapper"><a href="configuration_standalone_basic.md" class=''>Basic Configurations</a><a href="configuration_standalone_advanced.md" class='active '>Advanced Configurations</a></div>
 
 
 

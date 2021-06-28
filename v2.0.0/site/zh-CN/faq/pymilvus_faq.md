@@ -3,7 +3,7 @@ id: pymilvus_faq.md
 title: Pymilvus FAQ
 ---
 
-# PyMilvus FAQ
+# PyMilvus-ORM FAQ
 
 #### gRPC 随机返回 `socket operation on non-socket` 错误，如何解决？
 

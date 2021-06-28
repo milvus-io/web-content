@@ -3,7 +3,7 @@ id: configuration_cluster_basic.md
 title: Milvus Cluster System Configurations
 label: Basic Configurations
 order: 0
-group: cluster
+group: cluster_sys
 ---
 # Milvus Cluster System Configurations
 
@@ -11,7 +11,7 @@ Milvus cluster maintains many system variables that configure the operation. All
 
 
 
-<div class="tab-wrapper"><a href="install_cluster-docker.md" class=''>Install with Docker Compose</a><a href="configuration_cluster_basic.md" class='active '>Basic Configurations</a><a href="install_cluster-helm.md" class=''>Install with Helm</a><a href="configuration_cluster_advanced.md" class=''>Advanced Configurations</a></div>
+<div class="tab-wrapper"><a href="configuration_cluster_basic.md" class='active '>Basic Configurations</a><a href="configuration_cluster_advanced.md" class=''>Advanced Configurations</a></div>
 
 
 If you are an entry-level user of a Milvus Cluster, you only need to change the following two configurations to primarily adapt Milvus to your test / development / production environment.

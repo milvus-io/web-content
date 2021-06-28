@@ -51,7 +51,7 @@
               "link": "hellomilvus.md"
             },
             {
-               "text": "PyMilvus 上手",
+               "text": "PyMilvus-ORM 上手",
               "link": "explore_pymilvus.md"
             }
           ]
@@ -60,7 +60,7 @@
           "label": "开发文档",
           "list": [
             {
-              "text": "PyMilvus API 参考",
+              "text": "PyMilvus-ORM API 参考",
               "link": "/api-reference/pymilvus-orm/{{var.milvus_python_orm_sdk_version}}/install.html"
             },
             {
@@ -93,7 +93,7 @@
                 "link": "troubleshooting.md"
               },
               {
-                "text": "PyMilvus 问题",
+                "text": "PyMilvus-ORM 问题",
                 "link": "pymilvus_faq.md"
               }
             ]

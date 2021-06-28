@@ -11,7 +11,7 @@ You can install Milvus standalone with Docker Compose or Helm.
 
 You can also [build Milvus from source code](https://github.com/milvus-io/milvus/blob/master/INSTALL.md).
 
-<div class="tab-wrapper"><a href="install_standalone-docker.md" class=''>Install with Docker Compose</a><a href="configuration_standalone_basic.md" class=''>Basic Configurations</a><a href="install_standalone-helm.md" class='active '>Install with Helm</a><a href="configuration_standalone_advanced.md" class=''>Advanced Configurations</a></div>
+<div class="tab-wrapper"><a href="install_standalone-docker.md" class=''>Install with Docker Compose</a><a href="install_standalone-helm.md" class='active '>Install with Helm</a></div>
 
 ## Prerequisites
 - Kubernetes version 1.14.0 or higher is required.

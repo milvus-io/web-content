@@ -92,7 +92,7 @@ Milvus 支持两种部署模式，单机模式（standalone）和分布式模式
 ## 关键路径
 
 
-#### 数据写⼊
+### 数据写⼊
 
 用户可以为每个 collection 指定 shard 数量，每个 shard 对应一个虚拟通道 vchannel。在 Milvus2.0 中，shard 是数据的粗粒度划分，每个 shard 进⼀步细分为若⼲个 segments。如下图所示，在 log broker 内，每个 vchanel 被分配了一个对应的物理通道 pchannel，用于处理各类⽇志序列的发布—订阅，当前版本中 vchannel 和 pchannel 是一一对应的。增删请求进入哪个 shard 由 proxy 决定，目前是基于主键哈希来决定的。
 
@@ -115,7 +115,7 @@ Vchannel 由消息存储底层引擎的物理节点承担。每个 channel 在�
 
 上图总结了⽇志序列的写⼊过程。负载主要由 proxy、log broker、data node、object storage 承担。 整体共四部分⼯作：请求的检查与发送、日志序列的发布—订阅、流式⽇志到日志快照的转换、日志快照的持久化存储。在 Milvus 2.0 中，对这四部分⼯作进行了解耦，做到同类型节点之间的对等。面向不同的⼊库负载，特别是大规模⾼波动的流式负载，各环节的系统组件可以做到独⽴的弹性伸缩。 
 
-#### 索引构建
+### 索引构建
 
 构建索引的任务由 index node 执⾏。为了避免数据更新导致的索引频繁重复构建，Milvus 将 collection 分成了更⼩的粒度，即 segment，每个 segment 对应自己的独⽴的索引。 
 
@@ -129,7 +129,7 @@ Milvus 可以对每个向量列、标量列和主键列构建索引。索引构�
 
 同时，Milvus 支持标量过滤和主键查询功能。为了实现高效率的标量查询，Milvus 构建了 Bloom filter index、hash index、tree index 和 inverted index。未来 Milvus 会逐渐完善索引类型，提供bitmap index、rough index 等更多外部索引能力。
 
-#### 数据查询
+### 数据查询
 
 向量的索引本质上是倒排索引。在查询请求中指定⼀个向量 *Q* 与⽬标 collection A，目标是在 A 中找出与 *Q* 最邻近的 *k* 个向量，或者满足距离范围的全部向量，以及对应的 ID 和标量列。 
 

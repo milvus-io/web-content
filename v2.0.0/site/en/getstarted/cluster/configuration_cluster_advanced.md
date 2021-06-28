@@ -3,7 +3,7 @@ id: configuration_cluster_advanced.md
 title: Milvus Cluster System Configurations
 label: Advanced Configurations
 order: 1
-group: cluster
+group: cluster_sys
 ---
 
 # Milvus Cluster System Configurations
@@ -12,7 +12,7 @@ Milvus cluster maintains many system variables that configure the operation. All
 
 
 
-<div class="tab-wrapper"><a href="install_cluster-docker.md" class=''>Install with Docker Compose</a><a href="configuration_cluster_basic.md" class=''>Basic Configurations</a><a href="install_cluster-helm.md" class=''>Install with Helm</a><a href="configuration_cluster_advanced.md" class='active '>Advanced Configurations</a></div>
+<div class="tab-wrapper"><a href="configuration_cluster_basic.md" class=''>Basic Configurations</a><a href="configuration_cluster_advanced.md" class='active '>Advanced Configurations</a></div>
 
 
 If you are an administrator of a Milvus cluster, you may access the following configurations to maintain the cluster operation. You can set these configurations in **milvus.yaml**.
