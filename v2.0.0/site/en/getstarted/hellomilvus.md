@@ -12,8 +12,9 @@ After the Milvus server boots successfully, test the platform using our Python s
 ```
 $ pip install pymilvus-orm
 ```
-
-> Python version 3.6 or higher is required. View [Python documentation](https://wiki.python.org/moin/BeginnersGuide/Download) for information about installing the correct version for your system.
+<div class="alert note">
+Python version 3.6 or higher is required. View [Python documentation](https://wiki.python.org/moin/BeginnersGuide/Download) for information about installing the correct version for your system.
+</div>
 
 2. Download sample code **hello_milvus.py**:
 
@@ -73,7 +74,7 @@ res = collection.search(vectors[-2:], "float_vector", search_params, topK, "coun
 $ python3 hello_pymilvus_orm.py
 ```
 
-*The returned results and query latency show as follows*:
+*The returned results and query latency show as follows:*
 
 
 ![Returned results](../../../assets/returned_results.png)

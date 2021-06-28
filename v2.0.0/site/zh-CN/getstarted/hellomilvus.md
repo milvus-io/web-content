@@ -12,7 +12,9 @@ title: Hello Milvus
 $ pip install pymilvus-orm
 ```
 
-> pymilvus_orm 需要 Python 3.6 版本或以上，详见 [Python 安装指南](https://wiki.python.org/moin/BeginnersGuide/Download)。
+<div class="alert note">
+pymilvus_orm 需要 Python 3.6 版本或以上，详见 [Python 安装指南](https://wiki.python.org/moin/BeginnersGuide/Download)。
+</div>
 
 
 2. 下载 **hello_milvus.py** 示例代码:

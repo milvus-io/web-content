@@ -16,7 +16,11 @@ You can also [build Milvus from source code](https://github.com/milvus-io/milvus
 ## Prerequisites
 - Kubernetes version 1.14.0 or higher is required.
 - [Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/) is required.
-> Installing minikube will also install hypervisor and kubectl. Kubectl is a command-line tool for managing Kubernetes from your local workstation.
+
+<div class="alert note">
+Installing minikube will also install hypervisor and kubectl. Kubectl is a command-line tool for managing Kubernetes from your local workstation.
+</div>
+
 - Helm version 3.0.0 or higher is required. See [Helm docs](https://helm.sh/docs/).
 
 ## 1. Start a local Kubernetes cluster:
@@ -49,7 +53,10 @@ This tutorial uses <code> my-release</code> as the release name. To use a differ
 $ helm install my-release milvus/milvus
 ```
 
-> For more details, see [Milvus Helm charts](https://artifacthub.io/packages/helm/milvus/milvus).
+<div class="alert note">
+For more details, see [Milvus Helm charts](https://artifacthub.io/packages/helm/milvus/milvus).
+</div>
+
 
 *If Milvus boots successfully, each Milvus’ pod shows `1/1` under `READY`:*
 ```
@@ -78,10 +85,9 @@ To shut down the minikube virtual machine but preserve all the resources you’v
 $ minikube stop
 ```
 
-> To restart the cluster:
-```
-minikube start
-```
+<div class="alert note">
+Run <code>minikube start</code> to restart the cluster.
+</div>
 
 ## 6. Delete the cluster
 If you will not need to restart the cluster, run the following command to delete the minikube virtual machine as well as the persistent volume and all the created resources:
@@ -89,4 +95,6 @@ If you will not need to restart the cluster, run the following command to delete
 minikube delete
 ```
 
-> To retain logs,  copy them from each pod's `stderr` before deleting the cluster and all its resources. To access a pod's standard error stream, run `kubectl logs <podname>`.
+<div class="alert note">
+To retain logs,  copy them from each pod's <code>stderr</code> before deleting the cluster and all its resources. To access a pod's standard error stream, run <code>kubectl logs (podname)</code>.
+</div>

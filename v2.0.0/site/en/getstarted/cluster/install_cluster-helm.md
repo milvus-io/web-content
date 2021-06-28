@@ -11,6 +11,10 @@ You can install Milvus cluster with Docker Compose or Helm.
 
 You can also [build Milvus from source code](https://github.com/milvus-io/milvus/blob/master/INSTALL.md).
 
+<div class="alert note">
+Installing Milvus with Docker Compose can only be used for testing and cannot be used in production.
+</div>
+
 <div class="tab-wrapper"><a href="install_cluster-docker.md" class=''>Install with Docker Compose</a><a href="install_cluster-helm.md" class='active '>Install with Helm</a></div>
 
 ## Prerequisites
@@ -48,7 +52,9 @@ This tutorial uses <code> my-release</code> as the release name. To use a differ
 ```
 $ helm install my-release milvus/milvus --set cluster.enabled=true
 ```
-> For more details, see [Milvus Helm charts](https://artifacthub.io/packages/helm/milvus/milvus).
+<div class="alert note"> 
+For more details, see [Milvus Helm charts](https://artifacthub.io/packages/helm/milvus/milvus).
+</div>
 
 *If Milvus boots successfully, each Milvus’ pod shows `1/1` under `READY`:*
 ```
@@ -84,10 +90,9 @@ To shut down the minikube virtual machine but preserve all the resources you’v
 ```
 $ minikube stop
 ```
-> To restart the cluster:
-```
-minikube start
-```
+<div class="alert note">
+Run <code>minikube start</code>to restart the cluster:
+</div>
 
 ## 6. Delete the cluster
 If you will not need to restart the cluster, run the following command to delete the minikube virtual machine as well as the persistent volume and all the created resources:
@@ -95,4 +100,5 @@ If you will not need to restart the cluster, run the following command to delete
 minikube delete
 ```
 
-> To retain logs,  copy them from each pod's `stderr` before deleting the cluster and all its resources. To access a pod's standard error stream, run `kubectl logs <podname>`.
+<div class="alert note">
+To retain logs,  copy them from each pod's <code>stderr</code> before deleting the cluster and all its resources. To access a pod's standard error stream, run <code>kubectl logs (podname)</code>.

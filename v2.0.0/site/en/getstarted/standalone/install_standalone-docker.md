@@ -11,6 +11,10 @@ You can install Milvus standalone with Docker Compose or Helm.
 
 You can also [build Milvus from source code](https://github.com/milvus-io/milvus/blob/master/INSTALL.md).
 
+<div class="alert note">
+Installing Milvus with Docker Compose can only be used for testing and cannot be used in production.
+</div>
+
 <div class="tab-wrapper"><a href="install_standalone-docker.md" class='active '>Install with Docker Compose</a><a href="install_standalone-helm.md" class=''>Install with Helm</a></div>
 
 ## Before You Begin
@@ -40,10 +44,6 @@ $ lscpu | grep -e sse4_2 -e avx -e avx2 -e avx512
 </details>
 
 
-<div class="alert note">
-Installing Milvus with Docker Compose can only be used for testing and cannot be used in production.
-</div>
-
 
 ## Install Milvus Standalone
 
@@ -71,4 +71,6 @@ $ sudo docker-compose ps
 ```
 ![Running Docker containers](../../../../assets/install_standalone.png)
 
-> To stop Milvus Standalone, run ```$ sudo docker-compose down```.
+<div class="alert note">
+To stop Milvus Standalone, run <code> $ sudo docker-compose down</code>.
+</div>

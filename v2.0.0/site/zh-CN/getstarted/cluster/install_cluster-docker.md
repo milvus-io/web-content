@@ -93,5 +93,6 @@ milvus-querycoord   /tini -- milvus run querycoord   Up
 milvus-querynode    /tini -- milvus run querynode    Up
 milvus-rootcoord    /tini -- milvus run rootcoord    Up
 ```
-
-> 运行 `$ sudo docker-compose down` 停止 Milvus 分布式版。
+<div class="alert note">
+运行 <code>$ sudo docker-compose down</code> 停止 Milvus 分布式版。
+</div>
