@@ -1,8 +1,8 @@
 ---
 id: comparison.md
-title: Milvus 2.0 新增功能
+title: Milvus 2.0 概述
 ---
-# Milvus 2.0 新增功能
+# Milvus 2.0 概述
 
 随着新需求的出现，Milvus 2.0 横空出世，与此同时 Milvus 之前版本将逐渐淡出视野。为获得最佳使用体验，我们强烈建议启用最新版本的 Milvus。
 

@@ -114,10 +114,6 @@ Entity ID 必须是非负的 64 位整型。
 
  
 
-#### IVF_SQ8 索引和 IVF_SQ8H 索引在召回率上有区别吗?
-
-对于相同的数据集，IVF_SQ8 和 IVF_SQ8H 的召回率一致。
-
  
 
 #### Milvus 中 FLAT 索引和 IVF_FLAT 索引的原理比较？

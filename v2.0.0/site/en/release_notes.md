@@ -7,7 +7,7 @@ title: Release Notes
 ## v2.0.0-RC1
 
 
-Release date: 2021-06-25
+Release date: 2021-06-28
 
 ### Compatibility
 
@@ -68,13 +68,11 @@ Milvus 2.0 is a cloud-native vector database with storage and computation separa
 
   Time travel allows you to access historical data at any point within a specified time period, making it possible to query data in the past, restore, and backup. 
 
-**Dev**
+**Miscellaneous**
 
 - Supports installing Milvus 2.0 with Helm or Docker-compose.
 
 - Compatibility with Prometheus and Grafana for monitoring and alerts.
-
-**Tools**
 
 - Milvus Insight
 

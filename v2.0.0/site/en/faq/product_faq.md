@@ -91,9 +91,7 @@ Yes. Multiple indexes can be built on the same field of a collection. However, e
 
 Yes. If `create_index()` is called, Milvus builds an index for subsequently inserted vectors. However, Milvus does not build an index until the newly inserted vectors fill an entire segment and the newly created index file is separate from the previous one.
 
-#### Does recall vary between IVF_SQ8 and IVF_SQ8H?
 
-No. The IVF_SQ8 and IVF_SQ8H indexes have the same recall for queries performed on the same dataset.
 
 #### How are the FLAT and IVF_FLAT indexes different?
 

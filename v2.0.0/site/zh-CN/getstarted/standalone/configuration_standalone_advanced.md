@@ -1,74 +1,21 @@
 ---
-id: configuration_cluster.md
-title: Milvus Cluster System Configuration
+id: configuration_standalone_advanced.md
+title: Milvus Standalone System Configurations
+label: Advanced Configurations
+order: 1
+group: standalone
 ---
-# Milvus Cluster System Configurations
+
+# Milvus Standalone System Configurations
 
 Milvus cluster maintains many system variables that configure the operation. All configurations can be set manually before server startup. Each configuration has a default value, which can be used directly.
 
 
 
-<div class="filter">
-<a href="#beginner">Basic Configurations</a> <a href="#admin">Advanced Configurations</a>
-
-</div>
-
-<div class="filter-beginner table-wrapper" markdown="block">
+<div class="tab-wrapper"><a href="install_standalone-docker.md" class=''>使用 Docker Compose 安装</a><a href="configuration_standalone_basic.md" class=''>Basic Configurations</a><a href="install_standalone-helm.md" class=''>使用 Helm 安装</a><a href="configuration_standalone_advanced.md" class='active '>Advanced Configurations</a></div>
 
 
-If you are an entry-level user of a Milvus Cluster, you only need to change the following two configurations to primarily adapt Milvus to your test / development / production environment.
 
-## Log Configurations
-
-This session configures the system log output. Using Milvus generates a collection of logs. By default, Milvus uses logs to record information at `debug` or even higher level for standard output (stdout) and standard error (stderr). You can set these configurations in **milvus.yaml**.
-
-<table id="casual_user">
-<thead>
-  <tr>     
-    <th class="width20">Configuration</th>     
-    <th class="width70">Description</th>     
-    <th class="width10">Default Value</th>   
-  </tr>
-</thead>
-<tbody>
-  <tr>     
-    <td><code>log.level</code></td>
-    <td>
-      <details>
-       <summary>Log level in Milvus</summary>
-        <li>
-           You can configure this parameter as <code>debug</code>, <code>info</code>, <code>warn</code>, <code>error</code>, <code>panic</code>, or <code>fatal</code>.
-        </li> 
-        <li>
-           We recommend using <code>debug</code> level under test and development environments, and <code>info</code> level in production environment.
-         </li>
-      </details>
-    </td>     
-    <td><code>debug</code></td>
-  </tr>
-  <tr>     
-    <td><code>log.file.rootPath</code></td>
-    <td>
-      <details>
-       <summary>Root path to the log files</summary>
-        <li>
-           The default value is set empty, indicating to output log files to standard output (stdout) and standard error (stderr).
-        </li>
-        <li>
-           If this parameter is set to a valid local path, Milvus log will be written and stored in this path.
-        </li>
-        <li>
-           Set this parameter as the path that you have permission to write. We recommend using <b>/tmp/milvus</b>.
-         </li>
-      </details>
-    </td>     
-    <td>""</td>
-  </tr>
-</tbody>
-</table>
-</div>
-
-<div class="filter-admin table-wrapper" markdown="block">
 
 
 If you are an administrator of a Milvus cluster, you may access the following configurations to maintain the cluster operation. You can set these configurations in **milvus.yaml**.
@@ -175,42 +122,6 @@ MinIO is the storage engine supporting Milvus' data persistence for insert log f
 </table>
 
 
-## Pulsar Configurations
-
-Pulsar is the underlying engine supporting Milvus' reliable storage and pub/sub of log streams. You can set these configurations in **milvus.yaml**.
-
-> You do not need to change this session if you use the default **docker-compose.yml** for third-party services.
-
-<table id="pulsar">
-<thead>
-  <tr>     
-    <th class="width20">Configuration</th>     
-    <th class="width70">Description</th>     
-    <th class="width10">Default Value</th>   
-  </tr>
-</thead>
-<tbody>
-  <tr>
-		<td><code>pulsar.address</code></td>
-		<td><details>
-       <summary>IP address of Pulsar</summary>
-       <li>Environment variable: <code>PULSAR_ADDRESS</code></li>
-       <li>Access Pulsar service with <code>pulsar.address</code>. <code>pulsar.address</code> and <code>pulsar.port</code> together generates the valid access to Pulsar. Pulsar preferentially acquires the valid address from the environment variable <code>PULSAR_ADDRESS</code> when Milvus is booted up.</li>
-       <li>The default value applies when Pulsar and Milvus are running on the same network.</li>
-      </details></td>
-		<td>localhost</td>
-	</tr>
-  <tr>
-		<td><code>pulsar.port</code></td>
-		<td><details>
-       <summary>Port of Pulsar</summary>
-       <li>Environment variable: <code>PULSAR_ADDRESS</code></li>
-       <li>Access Pulsar service with <code>pulsar.port</code>. <code>pulsar.address</code> and <code>pulsar.port</code> together generates the valid access to Pulsar. Pulsar preferentially acquires the valid address from the environment variable <code>PULSAR_ADDRESS</code> when Milvus is booted up.</li>
-      </details></td>
-		<td>6650</td>
-	</tr>
-</tbody>
-</table>
 
 
 ## Server Address Configurations
@@ -227,102 +138,12 @@ This session configures the IP address and port of the monitor request from Milv
 </thead>
 <tbody>
   <tr>
-		<td><code>rootCoord.address</code></td>
-		<td><details>
-       <summary>TCP/IP address of root coordinator</summary>
-       <li>If you set this parameter as <code>0.0.0.0</code>, root coordinator monitors all IPv4 addresses.</li>
-       <li>This parameter takes effect only after being configured at startup of Milvus.</li>
-      </details></td>
-		<td>localhost</td>
-	</tr>
-  <tr>
-		<td><code>rootCoord.port</code></td>
-		<td><details>
-       <summary>TCP port of root coordinator</summary>
-       <li>This parameter takes effect only after being configured at startup of Milvus.</li>
-      </details></td>
-		<td>53100</td>
-	</tr>
-  <tr>
 		<td><code>proxy.port</code></td>
 		<td><details>
        <summary>TCP port for monitoring Milvus</summary>
        <li>This parameter takes effect only after being configured at the startup of Milvus.</li>
       </details></td>
 		<td>19530</td>
-	</tr>
-  <tr>
-		<td><code>queryCoord.address</code></td>
-		<td><details>
-       <summary>TCP/IP address of query coordinator</summary>
-       <li>If you set this parameter as <code>0.0.0.0</code>, query coordinator monitors all IPv4 addresses.</li>
-       <li>This parameter takes effect only after being configured at startup of Milvus.</li>
-      </details></td>
-		<td>localhost</td>
-	</tr>
-  <tr>
-		<td><code>queryCoord.port</code></td>
-		<td><details>
-       <summary>TCP port of query coordinator</summary>
-       <li>This parameter takes effect only after being configured at startup of Milvus.</li>
-      </details></td>
-		<td>19531</td>
-	</tr>
-  <tr>
-		<td><code>queryNode.port</code></td>
-		<td><details>
-       <summary>TCP port of query node</summary>
-       <li>This parameter takes effect only after being configured at startup of Milvus.</li>
-      </details></td>
-		<td>21123</td>
-	</tr>
-  <tr>
-		<td><code>indexCoord.address</code></td>
-		<td><details>
-       <summary>TCP/IP address of index coordinator</summary>
-       <li>This parameter takes effect only after being configured at startup of Milvus.</li>
-      </details></td>
-		<td>localhost</td>
-	</tr>
-  <tr>
-		<td><code>indexCoord.port</code></td>
-		<td><details>
-       <summary>TCP port of index coordinator</summary>
-       <li>This parameter takes effect only after being configured at startup of Milvus.</li>
-      </details></td>
-		<td>31000</td>
-	</tr>
-  <tr>
-		<td><code>indexNode.port</code></td>
-		<td><details>
-       <summary>TCP port of index node</summary>
-       <li>This parameter takes effect only after being configured at startup of Milvus.</li>
-      </details></td>
-		<td>21121</td>
-	</tr>
-  <tr>
-		<td><code>dataCoord.address</code></td>
-		<td><details>
-       <summary>TCP/IP address of data coordinator</summary>
-       <li>This parameter takes effect only after being configured at startup of Milvus.</li>
-      </details></td>
-		<td>localhost</td>
-	</tr>
-  <tr>
-		<td><code>dataCoord.port</code></td>
-		<td><details>
-       <summary>TCP port of data coordinator</summary>
-       <li>This parameter takes effect only after being configured at startup of Milvus.</li>
-      </details></td>
-		<td>13333</td>
-	</tr>
-  <tr>
-		<td><code>dataNode.port</code></td>
-		<td><details>
-       <summary>TCP port of data node</summary>
-       <li>This parameter takes effect only after being configured at startup of Milvus.</li>
-      </details></td>
-		<td>21124</td>
 	</tr>
 </tbody>
 </table>
@@ -388,4 +209,3 @@ This session configures the system behaviors of Milvus. You can set these config
 	</tr>
 </tbody>
 </table>
-</div>

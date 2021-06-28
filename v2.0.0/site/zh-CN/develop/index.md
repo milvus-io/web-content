@@ -53,21 +53,8 @@ Milvus 目前支持的向量索引类型大都属于 ANNS（Approximate Nearest 
         </ul></td>
   </tr>
   <tr>
-    <td><a href="#IVF_SQ8H">IVF_SQ8H</a></td>
-    <td>基于量化的索引</td>
-    <td><ul>
-        <li>高速查询，</li>
-        <li>磁盘、内存、显存有限。</li>
-        </ul></td>
-  </tr>
-  <tr>
     <td><a href="#IVF_PQ">IVF_PQ</a></td>
     <td>基于量化的索引</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td><a href="#RNSG">RNSG</a></td>
-    <td>基于图的索引</td>
     <td></td>
   </tr>
   <tr>
@@ -148,18 +135,6 @@ IVF\_SQ8 是在 IVF 的基础上对放入单元里的每条向量做一次标量
 - 建索引参数同 IVF\_FLAT
 - 查询参数同 IVF\_FLAT
 
-### IVF_SQ8H
-<a name="IVF_SQ8H"></a>
-
-IVF\_SQ8H 是一种优化查询执行的 IVF\_SQ8 索引类型。
-
-在不同的 `nq`（Number of queries，查询数量）与系统参数 `gpu_search_threshold` 的关系下，查询方式如下：
-
-- `nq` &ge; `gpu_search_threshold`：整个查询过程都在 GPU 上执行。
-- `nq` < `gpu_search_threshold`：在 GPU 上执行在 IVF 里寻找 `nprobe` 个最近单元的运算，在 CPU 上执行其它运算。
-
-- 建索引参数同 IVF\_FLAT
-- 查询参数同 IVF\_FLAT
 
 ### IVF_PQ
 <a name="IVF_PQ"></a>
@@ -223,34 +198,6 @@ IVF\_PQ 是先对向量做乘积量化，然后进行 IVF 索引聚类。其索�
 
 </div>   
 
-### RNSG
-<a name="RNSG"></a>
-
-RNSG（Refined Navigating Spreading-out Graph）是一种基于图的索引算法。它把全图中心位置设为导航点，然后通过特定的选边策略来控制每个点的出度（小于等于 `out_degree`），使得搜索时既能减少内存使用，又能快速定位到目标位置附近。 
-
-RNSG 的建图流程如下：
-
-1. 为每个点精确寻找 `knng` 个最近邻结点。
-2. 以 `knng` 个最近邻结点为基础迭代至少 `search_length` 次，以选出 `candidate_pool_size` 个可能的最邻近结点。
-3. 在选出的 `candidate_pool_size` 个结点里按择边策略构建每个点的出边。
-
-RNSG 的查询流程与建图流程类似，以导航点为起点至少迭代 `search_length` 次以得到最终结果。
-
-- 建索引参数
-
-   | 参数                 | 说明                | 取值范围   |
-   | ----------------------| ------------------- | -------- |
-   | `out_degree`          | 结点的最大出度        | [5, 300]  |
-   | `candidate_pool_size` | 结点出边候选池 　     | [50, 1000] |
-   | `search_length`       | 查询迭代次数        　| [10, 300] |
-   | `knng`                | 预计算最近邻结点数   　| [5, 300] |
-   
-
-- 查询参数
-
-   | 参数           | 说明        | 取值范围   |
-   | --------------- | ----------- | --------- |
-   | `search_length` | 查询迭代次数  | [10, 300] |
 
 
 ### HNSW
@@ -303,6 +250,6 @@ ANNOY（Approximate Nearest Neighbors Oh Yeah）是一种用超平面把高维�
 
 ## 参考文献
 
-- RNSG：<a href="http://www.vldb.org/pvldb/vol12/p461-fu.pdf">Fast Approximate Nearest Neighbor Search With The Navigating Spreading-out Graph</a>
+
 - HNSW：<a href="https://arxiv.org/abs/1603.09320">Efficient and robust approximate nearest neighbor search using Hierarchical Navigable Small World graphs</a>
 - ANNOY：<a href="https://erikbern.com/2015/10/01/nearest-neighbors-and-vector-models-part-2-how-to-search-in-high-dimensional-spaces.html">Nearest neighbors and vector models – part 2 – algorithms and data structures</a>

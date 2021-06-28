@@ -15,7 +15,7 @@ You can also [build Milvus from source code](https://github.com/milvus-io/milvus
 Installing Milvus with Docker Compose can only be used for testing and cannot be used in production.
 </div>
 
-<div class="tab-wrapper"><a href="install_standalone-docker.md" class='active '>Install with Docker Compose</a><a href="install_standalone-helm.md" class=''>Install with Helm</a></div>
+<div class="tab-wrapper"><a href="install_standalone-docker.md" class='active '>Install with Docker Compose</a><a href="configuration_standalone_basic.md" class=''>Basic Configurations</a><a href="install_standalone-helm.md" class=''>Install with Helm</a><a href="configuration_standalone_advanced.md" class=''>Advanced Configurations</a></div>
 
 ## Before You Begin
 

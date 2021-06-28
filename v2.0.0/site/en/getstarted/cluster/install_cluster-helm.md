@@ -15,7 +15,7 @@ You can also [build Milvus from source code](https://github.com/milvus-io/milvus
 Installing Milvus with Docker Compose can only be used for testing and cannot be used in production.
 </div>
 
-<div class="tab-wrapper"><a href="install_cluster-docker.md" class=''>Install with Docker Compose</a><a href="install_cluster-helm.md" class='active '>Install with Helm</a></div>
+<div class="tab-wrapper"><a href="install_cluster-docker.md" class=''>Install with Docker Compose</a><a href="configuration_cluster_basic.md" class=''>Basic Configurations</a><a href="install_cluster-helm.md" class='active '>Install with Helm</a><a href="configuration_cluster_advanced.md" class=''>Advanced Configurations</a></div>
 
 ## Prerequisites
 - Kubernetes version 1.14.0 or higher is required.

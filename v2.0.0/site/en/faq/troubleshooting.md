@@ -28,7 +28,7 @@ This page lists common issues that may occur when running Milvus, as well as pos
 
   These issues occur during API method calls between the Milvus server and your client. They will be returned to the client synchronously or asynchronously.
 
-  
+<br/>
 
   If you need help solving a problem, feel free to:
 

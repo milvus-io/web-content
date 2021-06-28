@@ -43,21 +43,8 @@ The following table classifies the indexes that Milvus supports:
         </ul></td>
   </tr>
   <tr>
-    <td><a href="#IVF_SQ8H">IVF_SQ8H</a></td>
-    <td>Quantization-based index</td>
-    <td><ul>
-        <li>High-speed query. </li>
-        <li>Limited disk, memory, and graphics memory capacities. </li>
-        </ul></td>
-  </tr>
-  <tr>
     <td><a href="#IVF_PQ">IVF_PQ</a></td>
     <td>Quantization-based index</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td><a href="#RNSG">RNSG</a></td>
-    <td>Graph-based index</td>
     <td></td>
   </tr>
   <tr>
@@ -208,34 +195,6 @@ If the value of <code>nprobe</code> does not fall into the specified range but f
 
 </div>
 
-### RNSG
-<a name="RNSG"></a>
-
-RNSG (Refined Navigating Spreading-out Graph) is a graph-based indexing algorithm. It sets the center position of the whole image as a navigation point, and then uses a specific edge selection strategy to control the out-degree of each point (less than or equal to `out_degree`). Therefore, it can reduce memory usage and quickly locate the target position nearby during searching vectors.
-
-The graph construction process of RNSG is as follows:
-
-1. Find `knng` nearest neighbors for each point.
-2. Iterate at least `search_length` times based on `knng` nearest neighbor nodes to select `candidate_pool_size` possible nearest neighbor nodes.
-3. Construct the out-edge of each point in the selected `candidate_pool_size` nodes according to the edge selection strategy.
-
-The query process is similar to the graph building process. It starts from the navigation point and iterate at least `search_length` times to get the final result. 
-
-- Index building parameters
-
-   | Parameter   | Description     | Range     |
-   | ------- | -------- |----------- |
-   | `out_degree`          | Maximum out-degree of the node        | [5, 300]  |
-   | `candidate_pool_size` | Candidate pool size of the node 　     | [50, 1000] |
-   | `search_length`       | Number of query iterations        　| [10, 300] |
-   | `knng`                | Number of nearest neighbors   　| [5, 300] |
-   
-
-- Search parameters
-
-   | Parameter   | Description     | Range     |
-   | -------- | ----------- | ---------- |
-   | `search_length` | Number of query iterations  | [10, 300] |
 
 
 ### HNSW
@@ -287,32 +246,10 @@ To learn how to choose an appropriate index for your application scenarios, plea
 To learn how to choose an appropriate index for a metric, see [Similarity Metrics](metric.md).
 
 
-## FAQ
-
-<details>
-<summary><font color="#4fc4f9">Does IVF_SQ8 differ from IVF_SQ8H in terms of recall rate?
-</font></summary>
-No, they have the same recall rate for the same dataset.
-</details>
-<details>
-<summary><font color="#4fc4f9">What is the difference between FLAT index and IVF_FLAT index?</font></summary>
-<p>IVF_FLAT index divides a vector space into <code>nlist</code> clusters. If you keep the default value of <code>nlist</code> as 16384, Milvus compares the distances between the target vector and the centers of all 16384 clusters to get <code>nprobe</code> nearest clusters. Then Milvus compares the distances between the target vector and the vectors in the selected clusters to get the nearest vectors. Unlike IVF_FLAT, FLAT directly compares the distances between the target vector and each and every vector.
-</p>
-<p>
-Therefore, when the total number of vectors approximately equals <code>nlist</code>, IVF_FLAT and FLAT has little difference in the way of calculation required and search performance. But as the number of vectors grows to two times, three times, or n times of <code>nlist</code>, IVF_FLAT index begins to show increasingly greater advantages.
-</p>
-<p>
-See <a href="https://zilliz.com/blog/Accelerating-Similarity-Search-on-Really-Big-Data-with-Vector-Indexing">How to Choose an Index in Milvus</a> for more information.
-</p>
-</details>
 
 ## FAQ
 
-<details>
-<summary><font color="#4fc4f9">Does IVF_SQ8 differ from IVF_SQ8H in terms of recall rate?
-</font></summary>
-No, they have the same recall rate for the same dataset.
-</details>
+
 <details>
 <summary><font color="#4fc4f9">What is the difference between FLAT index and IVF_FLAT index?</font></summary>
 <p>IVF_FLAT index divides a vector space into <code>nlist</code> clusters. If you keep the default value of <code>nlist</code> as 16384, Milvus compares the distances between the target vector and the centers of all 16384 clusters to get <code>nprobe</code> nearest clusters. Then Milvus compares the distances between the target vector and the vectors in the selected clusters to get the nearest vectors. Unlike IVF_FLAT, FLAT directly compares the distances between the target vector and each and every vector.
@@ -327,6 +264,5 @@ See <a href="https://medium.com/unstructured-data-service/how-to-choose-an-index
 
 ## Bibliography
 
-- RNSG: <a href="http://www.vldb.org/pvldb/vol12/p461-fu.pdf">Fast Approximate Nearest Neighbor Search With The Navigating Spreading-out Graph</a>
 - HNSW: <a href="https://arxiv.org/abs/1603.09320">Efficient and robust approximate nearest neighbor search using Hierarchical Navigable Small World graphs</a>
 - ANNOY: <a href="https://erikbern.com/2015/10/01/nearest-neighbors-and-vector-models-part-2-how-to-search-in-high-dimensional-spaces.html">Nearest neighbors and vector models – part 2 – algorithms and data structures</a>

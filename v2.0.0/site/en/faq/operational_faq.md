@@ -94,7 +94,7 @@ Milvus is available as a Docker image and allows offline deployment. Taking Milv
 1. Pull the Docker images of MinIO, etcd, and Milvus when you have Internet access.
 2. Run `docker save` to save the images as TAR files.
 3. Save the **.TAR** files locally.
-4. Run ``docker load` to load the file as a Docker image.
+4. Run `docker load` to load the file as a Docker image.
 5. Run `docker-compose` to start Milvus.
 
 For more information about Docker, see [Installing Milvus Standalone](install_standalone-docker.md).

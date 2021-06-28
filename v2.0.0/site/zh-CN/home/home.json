@@ -61,7 +61,7 @@
           "list": [
             {
               "text": "PyMilvus API 参考",
-              "link": "pymilvusapireference.md"
+              "link": "/api-reference/pymilvus-orm/{{var.milvus_python_orm_sdk_version}}/install.html"
             },
             {
               "text": "向量索引",

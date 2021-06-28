@@ -35,7 +35,7 @@
     },
     {
       "id": "comparison.md",
-      "title": "Milvus 2.0 vs. 1.x",
+      "title": "What is New in Milvus 2.0",
       "label1": "about",
       "label2": null,
       "label3": null,
@@ -110,7 +110,7 @@
       "isMenu": true
     },
     {
-      "id": "configuration_standalone.md",
+      "id": "configuration_standalone_basic.md",
       "title": "Milvus Stanalone",
       "label1": "getstarted",
       "label2": "systemconfigurations",
@@ -118,7 +118,7 @@
       "order": 0
     },
     {
-      "id": "configuration_cluster.md",
+      "id": "configuration_cluster_basic.md",
       "title": "Milvus Cluster",
       "label1": "getstarted",
       "label2": "systemconfigurations",
@@ -197,7 +197,7 @@
     },
     {
       "id": "pymilvus_faq.md",
-      "title": "Pymilvus FAQs",
+      "title": "PyMilvus FAQs",
       "label1": "faq",
       "label2": "",
       "order": 1
