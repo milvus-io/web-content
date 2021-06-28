@@ -84,9 +84,21 @@ Creating milvus-datanode   ... done
 *If Milvus Cluster boots successfully, 11 running docker containers appear (three infrastructure services and eight Milvus services):*
 
 ```
-$ sudo docker ps 
+$ sudo docker ps
+      Name                     Command                  State                          Ports
+----------------------------------------------------------------------------------------------------------------
+milvus-datacoord    /tini -- milvus run datacoord    Up
+milvus-datanode     /tini -- milvus run datanode     Up
+milvus-etcd         etcd -listen-peer-urls=htt ...   Up (healthy)   2379/tcp, 2380/tcp
+milvus-indexcoord   /tini -- milvus run indexcoord   Up
+milvus-indexnode    /tini -- milvus run indexnode    Up
+milvus-minio        /usr/bin/docker-entrypoint ...   Up (healthy)   9000/tcp
+milvus-proxy        /tini -- milvus run proxy        Up             0.0.0.0:19530->19530/tcp,:::19530->19530/tcp
+milvus-pulsar       bin/pulsar standalone            Up
+milvus-querycoord   /tini -- milvus run querycoord   Up
+milvus-querynode    /tini -- milvus run querynode    Up
+milvus-rootcoord    /tini -- milvus run rootcoord    Up
 ```
-![Running Docker containers](../../../../assets/install_cluster.png)
 
 <div class="alert note">
 To stop Milvus Cluster, run <code>$ sudo docker-compose down</code>.

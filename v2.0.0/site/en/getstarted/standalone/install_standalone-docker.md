@@ -78,8 +78,13 @@ Creating milvus-standalone ... done
 
 ```
 $ sudo docker-compose ps
+      Name                     Command                  State                          Ports
+----------------------------------------------------------------------------------------------------------------
+milvus-etcd         etcd -listen-peer-urls=htt ...   Up (healthy)   2379/tcp, 2380/tcp
+milvus-minio        /usr/bin/docker-entrypoint ...   Up (healthy)   9000/tcp
+milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:19530->19530/tcp,:::19530->19530/tcp
 ```
-![Running Docker containers](../../../../assets/install_standalone.png)
+
 
 <div class="alert note">
 To stop Milvus Standalone, run <code> $ sudo docker-compose down</code>.
