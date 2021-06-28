@@ -6,30 +6,6 @@ id: operational_faq.md
 
 <!-- TOC -->
 
-- [如果在安装 Milvus 时，从 Docker Hub 拉取镜像总是失败怎么办？](#如果在安装-Milvus-时从-Docker-Hub-拉取镜像总是失败怎么办)
-- [Milvus 只能使用 Docker 部署吗？](#Milvus-只能使用-Docker-部署吗)
-- [为什么 Milvus 返回 `config check error` 的错误？](#为什么-Milvus-返回-config-check-error-的错误)
-- [为什么在导入数据时 Milvus 显示 `no space left on device` 的错误？](#为什么在导入数据时-Milvus-显示-no-space-left-on-device-的错误)
-- [为什么 Milvus 查询召回率一直不理想？](#为什么-Milvus-查询召回率一直不理想)
-- [为什么更新过的设置没有生效？](#为什么更新过的设置没有生效)
-- [如何得知我的 Milvus 已经成功启动？](#如何得知我的-Milvus-已经成功启动)
-- [为什么我的日志文件时间与系统时间不一致？](#为什么我的日志文件时间与系统时间不一致)
-- [如何确认 Milvus 是否支持我的 CPU？](#如何确认-Milvus-是否支持我的-CPU)
-- [为什么 Milvus 在启动时返回 `Illegal instruction`？](#为什么-Milvus-在启动时返回-Illegal-instruction)
-- [如何确认 Milvus 是否支持我的 GPU？](#如何确认-Milvus-是否支持我的-GPU)
-- [Milvus 镜像里面启动 server 的脚本在哪？](#Milvus-镜像里面启动-server-的脚本在哪)
-- [除了配置文件外，怎样可以判断我确实在使用 GPU 做 search？](#除了配置文件外怎样可以判断我确实在使用-GPU-做-search)
-- [可以在 Windows 上安装 Milvus 吗？](#可以在-Windows-上安装-Milvus-吗)
-- [在 Windows 安装 pymilvus 报错，如何解决？](#在-Windows-安装-pymilvus-报错如何解决)
-- [内网环境，即离线方式，能否部署 Milvus 服务？](#内网环境即离线方式能否部署-Milvus-服务)
-- [在多个 Milvus 节点接入 Pushgateway 的情况下如何进行区分数据来源？](#在多个-Milvus-节点接入-Pushgateway-的情况下如何进行区分数据来源)
-- [我应该使用 SQLite 还是 MySQL 进行元数据管理？](#我应该使用-SQLite-还是-MySQL-进行元数据管理)
-- [如何根据数据量计算需要多大的内存？](#如何根据数据量计算需要多大的内存)
-- [Milvus 中如何实现数据迁移？](#Milvus-中如何实现数据迁移)
-- [Milvus 可以通过扩展某些接口 (如 S3 接口或 GlusterFS 接口) 来扩展存储吗？](#Milvus-可以通过扩展某些接口-如-S3-接口或-GlusterFS-接口-来扩展存储吗)
-- [Milvus 日志中为什么会出现这个警告 `WARN: increase temp memory to avoid cudaMalloc, or decrease query/add size (alloc 307200000 B, highwater 0 B)`？](#Milvus-日志中为什么会出现这个警告-WARN-increase-temp-memory-to-avoid-cudaMalloc-or-decrease-queryadd-size-alloc-307200000-B-highwater-0-B)
-- [出现 `database is locked` 的报错怎么解决？](#出现-database-is-locked-的报错怎么解决)
-- [仍有问题没有得到解答？](#仍有问题没有得到解答)
 
 <!-- /TOC -->
 
