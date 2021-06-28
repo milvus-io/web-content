@@ -6,32 +6,6 @@ id: operational_faq.md
 
 <!-- TOC -->
 
-- [What if I failed to pull Milvus Docker image from Docker Hub?](#What-if-I-failed-to-pull-Milvus-Docker-image-from-Docker-Hub)
-- [Is Docker the only way to install and run Milvus?](#Is-Docker-the-only-way-to-install-and-run-Milvus)
-- [Why does Milvus return `config check error`?](#Why-does-Milvus-return-config-check-error)
-- [Why do I get `no space left on device` when importing data to Milvus?](#Why-do-I-get-no-space-left-on-device-when-importing-data-to-Milvus)
-- [Why is my recall rate unsatisfying?](#Why-is-my-recall-rate-unsatisfying)
-- [Why does my updated configuration not work?](#Why-does-my-updated-configuration-not-work)
-- [How can I know if Milvus has started successfully?](#How-can-I-know-if-Milvus-has-started-successfully)
-- [Why is the time in the log files different from the system time?](#Why-is-the-time-in-the-log-files-different-from-the-system-time)
-- [How can I know whether my CPU supports Milvus?](#How-can-I-know-whether-my-CPU-supports-Milvus)
-- [Why does Milvus return `Illegal instruction` during startup?](#Why-does-Milvus-return-illegal-instruction-during-startup)
-- [How can I know whether my GPU is supported by Milvus?](#How-can-I-know-whether-my-GPU-is-supported-by-Milvus)
-- [Where is the script for starting the server in the Milvus Docker container?](#Where-is-the-script-for-starting-the-server-in-the-Milvus-Docker-container)
-- [Besides the configuration file, how can I tell Milvus is using GPU for search?](#Besides-the-configuration-file-how-can-I-tell-Milvus-is-using-GPU-for-search)
-- [Can I install Milvus on Windows?](#Can-I-install-Milvus-on-Windows)
-- [How to fix the error when I install pymilvus on Windows?](#How-to-fix-the-error-when-I-install-pymilvus-on-Windows)
-- [Can I deploy Milvus service in an air-gapped environment?](#Can-I-deploy-Milvus-service-in-an-air-gapped-environment)
-- [How can I differentiate if I have multiple Milvus nodes connected to Pushgateway?](#How-can-I-differentiate-if-I-have-multiple-Milvus-nodes-connected-to-Pushgateway)
-- [Which database system should I use to manage Metadata, SQLite or MySQL?](#Which-database-system-should-I-use-to-manage-Metadata-SQLite-or-MySQL)
-- [How to calculate required memory based on the size of the dataset?](#How-to-calculate-required-memory-based-on-the-size-of-the-dataset)
-- [How to migrate data in Milvus?](#How-to-migrate-data-in-Milvus)
-- [Can I increase my storage by adding interfaces such as S3 or GlusterFS?](#Can-I-increase-my-storage-by-adding-interfaces-such-as-S3-or-GlusterFS)
-- [Why do I see `WARN: increase temp memory to avoid cudaMalloc, or decrease query/add size (alloc 307200000 B, highwater 0 B)` in the log file?](#Why-do-I-see-WARN-increase-temp-memory-to-avoid-cudaMalloc-or-decrease-queryadd-size-alloc-307200000-B-highwater-0-B-in-the-log-file)
-- [Why does Milvus return `database is locked`?](#Why-does-Milvus-return-database-is-locked)
-- [Got an error `Segmentation Fault` from PyMilvus. What shall I do?](#Got-an-error-Segmentation-Fault-from-PyMilvus-What-shall-I-do)
-- [Still have questions?](#Still-have-questions)
-
 <!-- /TOC -->
 
 #### What if I failed to pull Milvus Docker image from Docker Hub?
