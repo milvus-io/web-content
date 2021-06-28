@@ -10,7 +10,7 @@ Milvus cluster maintains many system variables that configure the operation. All
 
 
 <div class="filter">
-<a href="#beginner">For Beginners</a> <a href="#admin">For Database Administrators</a>
+<a href="#beginner">Basic Configurations</a> <a href="#admin">Advanced Configurations</a>
 
 </div>
 

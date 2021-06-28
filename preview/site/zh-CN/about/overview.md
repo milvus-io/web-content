@@ -9,7 +9,7 @@ Milvus 是一款开源向量数据库，赋能 AI 应用和向量相似度搜索
 
 Milvus 提供以下 2 个版本：
 - [Milvus 单机版](install_standalone-docker.md) 
-- [Milvus 分布式版](install_cluster-docker.md)。
+- [Milvus 分布式版](install_cluster-docker.md)
 
 版本兼容: 
 | Milvus 版本 | Python SDK 版本 | Java SDK 版本 | Go SDK 版本 |
@@ -37,8 +37,7 @@ Milvus 2.0 是一款云原生向量数据库，采用存储与计算分离的架
 
 **存储服务（Storage）：** 系统的骨骼，是所有其他功能实现的基础。Milvus 依赖三类存储：元数据存储、消息存储（Log Broker）和对象存储。
 
-![系统架构01](../../../assets/architecture_01.jpg)
-![系统架构02](../../../assets/architecture_02.jpg)
+![系统架构](../../../assets/architecture_02.jpg)
 
 更多系统原理的相关内容详见 [Milvus 2.0 架构](architecture_overview.md)。
 

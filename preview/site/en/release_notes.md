@@ -34,7 +34,7 @@ Milvus 2.0 is a cloud-native vector database with storage and computation separa
 
 **Access layer:** The front layer of the system and endpoint to users.  It comprises peer proxies for forwarding requests and gathering results.
 
-**Coordinator** **s****ervice:** The coordinator service assigns tasks to the worker nodes and functions as the system's brain. It has four coordinator types: root coord, data coord, query coord, and index coord.
+**Coordinator** **service:** The coordinator service assigns tasks to the worker nodes and functions as the system's brain. It has four coordinator types: root coord, data coord, query coord, and index coord.
 
 **Worker nodes:** Worker nodes are dumb executors that follow the instructions from the coordinator service. There are three types of worker nodes, each responsible for a different job: data nodes, query nodes, and index nodes.
 
