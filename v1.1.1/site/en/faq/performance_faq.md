@@ -5,20 +5,7 @@ id: performance_faq.md
 # Performance FAQ
 
 <!-- TOC -->
-- [Why does the first search take a long time after Milvus restarts?](#Why-does-the-first-search-take-a-long-time-after-Milvus-restarts)
-- [Why the search is very slow?](#Why-the-search-is-very-slow)
-- [How do I improve Milvus' performance?](#How-do-I-improve-Milvus-performance)
-- [How to set `nlist` and `nprobe` for IVF indexes?](#How-to-set-nlist-and-nprobe-for-IVF-indexes)
-- [Why sometimes the query time for a small dataset is longer?](#Why-sometimes-the-query-time-for-a-small-dataset-is-longer)
-- [Why is my GPU always idle?](#Why-is-my-GPU-always-idle)
-- [Why my data cannot be searched immediately after insertion?](#Why-my-data-cannot-be-searched-immediately-after-insertion)
-- [Why does my CPU usage stay low?](#Why-does-my-CPU-usage-stay-low)
-- [How can I get the best performance from Milvus through setting `index_file_size`?](#How-can-I-get-the-best-performance-from-Milvus-through-setting-index_file_size)
-- [What is the importing performance of Milvus in practical terms?](#What-is-the-importing-performance-of-Milvus-in-practical-terms)
-- [Does searching while inserting affect the search speed?](#Does-searching-while-inserting-affect-the-search-speed)
-- [Will a batch query benefit from multi-threading?](#Will-a-batch-query-benefit-from-multi-threading)
-- [Why GPU-enabled query is sometimes slower than CPU-only query?](#Why-GPU-enabled-query-is-sometimes-slower-than-CPU-only-query)
-- [Still have questions?](#Still-have-questions)
+
 
 <!-- /TOC -->
 
