@@ -125,7 +125,7 @@ You can insert vectors to a specified partition within a specific collection.
 ```
 
 ## Build an index
-Create an index for a specified field in a collection to accelerate vector similarity search. See [Vector Index] (index.md) for more information about setting index parameters.
+Create an index for a specified field in a collection to accelerate vector similarity search. See [Vector Index](index.md) for more information about setting index parameters.
 
 1. Prepare the index parameters:
 ```
@@ -142,7 +142,7 @@ Create an index for a specified field in a collection to accelerate vector simil
 Status(code=0, message='')
 ```
 
-Call `describe_index()` to view more details of the new index:
+3. Call `describe_index()` to view more details of the new index:
 
 ```
 >>> collection.index().params
@@ -189,20 +189,20 @@ The delete operations affect data already inserted into Milvus. Think twice befo
 
 > The function of deleting specified vectors by ID is currently unavailable.
 
-### Drop an index
+#### Drop an index
 Drop the index of a specified field in a specified collection.
 ```
 >>> collection.drop_index()
 ```
 
-### Drop a partition
+#### Drop a partition
 The `drop_partition()` method removes a partition and all vectors under it.
 
 ```
 >>> collection.drop_partition(partition_name=partition_name)
 ```
 
-### Drop a collection
+#### Drop a collection
 When you no longer need a collection, you can call `drop_collection()` to delete it.
 ```
 >>> collection.drop()

@@ -51,7 +51,7 @@ Installing Milvus with Docker Compose can only be used for testing and cannot be
 1. Pull the Docker image:
 
 ```
-wget https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/docker/standalone/docker-compose.yml -O docker-compose.yml2.Download docker-compose.standalone.yml and save it as docker-compose.yml
+wget https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/docker/standalone/docker-compose.yml -O docker-compose.yml
 ```
 
 2. Start Milvus Standalone:
