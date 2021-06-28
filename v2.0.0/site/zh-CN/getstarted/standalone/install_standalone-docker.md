@@ -30,11 +30,15 @@ Docker Compose 部署方式只用作测试使用，不能用于生产环境。
 
 - 运行 `$ sudo docker info` 确认 Docker 版本。建议使用 19.03 或以上版本。
 
-> 安装 Docker 步骤见 [Docker CE/EE 官方安装说明](https://docs.docker.com/get-docker/)。
+<div class="alert note">
+安装 Docker 步骤见 <a href="https://docs.docker.com/get-docker/">Docker CE/EE</a> 官方安装说明。
+</div>
 
 - 运行 `$ sudo docker-compose version` 确认 Docker Compose 版本。建议使用 1.25.1 或以上版本。 
 
-> 安装 Docker Compose 步骤见 [Docker Compose 官方安装说明](https://docs.docker.com/compose/install/)。
+<div class="alert note">
+安装 Docker Compose 步骤见 <a href="https://docs.docker.com/compose/install/">Docker Compose</a> 官方安装说明。
+</div>
 </details>
 
 <details><summary>检查 CPU 是否支持 SIMD 扩展指令集合：</summary>
@@ -58,14 +62,14 @@ $ lscpu | grep -e sse4_2 -e avx -e avx2 -e avx512
 ## 安装 Milvus 单机版
 
 
-1. 拉取 Milvus 镜像：
+1. 下载 **docker-compose.standalone.yml** 配置文件并保存为 **docker-compose.yml**
 ```
 wget https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/docker/standalone/docker-compose.yml -O docker-compose.yml
 ```
 2. 启动 Milvus 单机版：
 
 ```
-$ sudo docker-compose up -d
+$ docker-compose up -d
 Docker Compose is now in the Docker CLI, try `docker compose up`
 Creating milvus-etcd  ... done
 Creating milvus-minio ... done
@@ -82,4 +86,6 @@ milvus-minio        /usr/bin/docker-entrypoint ...   Up (healthy)   9000/tcp
 milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:19530->19530/tcp,:::19530->19530/tcp
 ```
 
-> 运行 `$ sudo docker-compose down` 停止 Milvus 单机版。
+<div class="alert note">
+运行 <code>$ sudo docker-compose down</code> 停止 Milvus 单机版。
+</div>

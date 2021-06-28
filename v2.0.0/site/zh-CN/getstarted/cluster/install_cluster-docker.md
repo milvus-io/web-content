@@ -24,11 +24,16 @@ Docker Compose 部署方式只用作测试使用，不能用于生产环境。
 
 - 运行 `$ sudo docker info` 确认 Docker 版本。建议使用 19.03 或以上版本。
 
-> 安装 Docker 步骤见 [Docker CE/EE 官方安装说明](https://docs.docker.com/get-docker/)。
+<div class="alert note">
+安装 Docker 步骤见 <a href="https://docs.docker.com/get-docker/">Docker CE/EE</a> 官方安装说明。
+</div>
 
 - 运行 `$ sudo docker-compose version` 确认 Docker Compose 版本。建议使用 1.25.1 或以上版本。 
 
-> 安装 Docker Compose 步骤见 [Docker Compose 官方安装说明](https://docs.docker.com/compose/install/)。
+<div class="alert note">
+安装 Docker Compose 步骤见 <a href="https://docs.docker.com/compose/install/">Docker Compose</a> 官方安装说明。
+</div>
+
 </details>
 
 <details><summary>检查 CPU 是否支持 SIMD 扩展指令集合：</summary>
@@ -60,7 +65,7 @@ $ wget https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/doc
 2. 启动 Milvus 分布式版：
 
 ```
-$ sudo docker-compose up -d
+$ docker-compose up -d
 Docker Compose is now in the Docker CLI, try `docker compose up`
 Creating milvus-etcd   ... done
 Creating milvus-minio  ... done
