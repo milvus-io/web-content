@@ -4,41 +4,62 @@ id: membership.md
 
 # 社区成员
 
-这篇文档描述了 Milvus 贡献者角色的各种职责。
+这篇文档列出了 Milvus 社区的各种角色及其职责。
 
-| 角色             | 职责                     | 要求                                            | 定义                           |
-| ---------------- | ------------------------ | ----------------------------------------------- | ------------------------------ |
-| Member           | 社区中活跃的贡献者       | 做出多次贡献后被 Reviewer 邀请                  | milvus-io GitHub 组织的成员    |
-| Reviewer         | 审查其他成员的 PR        | 在任一仓库多次 Review 和贡献代码                | [OWNERS] 文件中 reviewers 字段 |
-| Approver         | 批准其他成员的 PR        | 经验丰富的 Reviewer，非常清楚地了解某一部分代码 | [OWNERS] 文件中 approvers 字段 |
-| Subproject owner | 为子项目制定方向和优先级 | 对子项目表现出责任感和出色的技术视野            |                                |
-
-
-
-## New Contributor
-
-社区现有成员应当欢迎 New Contributor 加入社区，帮助解决 PR 上遇到的问题，以及引导他到正确的文档和沟通渠道。
+| 角色               | 职责              | 要求                                            | 定义                                                         |
+| ------------------ | ----------------- | ----------------------------------------------- | ------------------------------------------------------------ |
+| Contributor        | 社区的贡献者      | 在 Milvus 项目或子项目做出过一次以上的贡献      | 在 milvus 仓库的 [All contributors 列表](https://github.com/milvus-io/milvus#all-contributors) 中列出 |
+| Active Contributor | 社区活跃的贡献者  | 做出多次贡献后被 Reviewer 邀请                  | milvus-io GitHub 组织的成员                                  |
+| Reviewer           | 审查其他成员的 PR | 在任一仓库多次 Review 和贡献代码                | [OWNERS] 文件中 reviewers 字段                               |
+| Maintainer         | 批准其他成员的 PR | 经验丰富的 Reviewer，非常清楚地了解某一部分代码 | [OWNERS] 文件中 approvers 字段                               |
 
 
 
-## Member
+## Contributor
 
-Member 是社区中继续活跃的贡献者，他们可以被设置成 Issue 和 PR 的负责人。Member 应该持续地为社区做出积极贡献。
+Milvus 社区欢迎各种类型的贡献，包括但不限于改进文档、改进代码、写新功能、为 Milvus 写博客等。无论贡献大小，只要为 Milvus 项目做过任何以上的贡献，就可以成为 Milvus Contributor。社区现有成员应当欢迎新的 Contributor 加入社区，帮助解决 PR 上遇到的问题，以及引导他到正确的文档和沟通渠道。
+
+**定义在**： [All contributors 列表](https://github.com/milvus-io/milvus#all-contributors)
+
+如果你为 Milvus 做了贡献却没有被列出，请[创建一个 Issue](https://github.com/milvus-io/community/issues/new)。
+
+
+
+## Active Contributor
+
+Active Contributor 是社区中继续活跃的贡献者，并因此被邀请加入 milvus-io 组织。Active Contributor 可以成为某一个 Issue 或者 PR 的负责人，可以通过加入 SIG 更加深入地参与 Milvus 的开发。
+
+**定义在**： [milvus-io GitHub 组织成员](https://github.com/orgs/milvus-io/people)
+
+**要求**
+
+-   在 GitHub 上打开账号的两步验证
+-   在 Milvus 项目/社区中做出多次贡献
+-   订阅邮件列表 [milvus-technical-discuss@lists.lfaidata.foundation](mailto:milvus-technical-discuss@lists.lfaidata.foundation)
+-   在一个或多个的子项目持续活跃
 
 
 
 ## Reviewer
 
-Reviewer 负责审查代码质量和正确性，他们需要对负责的代码内容非常清楚。
+Reviewer 负责审查代码质量和正确性，他们需要对负责的代码内容非常了解。
+
+**定义在**：每个仓库的 OWNERS 文件的 reviewers 字段中
+
+**要求**
+
+-   在这个目录下有 30 个以上的 commit 贡献
+-   积极参与这个目录相关的 Code Review
 
 
 
-## Approver
+## Maintainer
 
-Approver 负责审查和批准代码提交，主要考虑代码的依赖关系、前向/后向兼容，API等。
+Maintainer 负责审查和批准代码提交，主要考虑代码的依赖关系、前向/后向兼容，API等。
 
+**定义在**：每个仓库的 OWNERS 文件的 approvers 字段中
 
+**要求**
 
-## Subproject Owner
-
-Subproject Owner 是子项目的完全负责人，他们需要对子项目有足够的责任感以及对子项目的健康程度有良好的判断力。 
+-   这个目录的主要贡献者
+-   积极参与这个目录相关的 Code Review
