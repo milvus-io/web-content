@@ -2,9 +2,9 @@
 id: making_your_first_contributions.md
 ---
 
-# 成为 Milvus 的贡献者
+# 成为 Milvus 贡献者
 
-不知道如何快速地成为 Milvus 的贡献者？请看这篇文档！
+不知道如何快速地成为 Milvus 贡献者？请看这篇文档！
 
 >   如果还没有 GitHub 账号，先[注册](https://github.com/signup)一个。
 
