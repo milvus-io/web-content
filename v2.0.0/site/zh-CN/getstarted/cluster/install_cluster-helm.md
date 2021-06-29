@@ -61,7 +61,7 @@ $ helm install my-release milvus/milvus
 ```
 
 <div class="alert note">
-详见 [Milvus Helm charts](https://artifacthub.io/packages/helm/milvus/milvus)。
+详见 <a href="https://artifacthub.io/packages/helm/milvus/milvus">Milvus Helm charts</a>。
 </div>
 
 *如果启动成功，Milvus pod 将在 `READY` 下显示 `1/1`：*
