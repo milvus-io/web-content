@@ -57,7 +57,7 @@ $ helm repo update
 
 #### 安装 Milvus 分布式版：
 ```
-$ helm install my-release milvus/milvus
+$ helm install my-release milvus/milvus --set cluster.enabled=true
 ```
 
 <div class="alert note">
