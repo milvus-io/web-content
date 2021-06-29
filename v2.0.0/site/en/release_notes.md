@@ -40,7 +40,7 @@ Milvus 2.0 is a cloud-native vector database with storage and computation separa
 
 **Storage:** The cornerstone of the system that all other functions depend on. It has three storage types: meta storage, log broker, and object storage. Kudos to the open-source communities of etcd, Pulsar, MinIO, and RocksDB for building this fast, reliable storage.
 
-> For more information about how the system works, see [Milvus 2.0 Architecture](LINK).
+> For more information about how the system works, see [Milvus 2.0 Architecture](architecture_overview.md).
 
 ### New Features
 

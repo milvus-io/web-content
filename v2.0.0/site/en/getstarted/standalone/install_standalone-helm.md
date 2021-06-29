@@ -9,7 +9,7 @@ group: standalone
 
 You can install Milvus standalone with Docker Compose or Helm.
 
-You can also [build Milvus from source code](https://github.com/milvus-io/milvus/blob/master/INSTALL.md).
+You can also [build Milvus from source code](https://github.com/milvus-io/milvus#to-start-developing-milvus).
 
 <div class="tab-wrapper"><a href="install_standalone-docker.md" class=''>Install with Docker Compose</a><a href="install_standalone-helm.md" class='active '>Install with Helm</a></div>
 
