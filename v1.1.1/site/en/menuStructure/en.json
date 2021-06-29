@@ -86,7 +86,7 @@
     },
     {
       "id": "metric.md",
-      "title": "Distance Metrics",
+      "title": "Similarity Metrics",
       "label1": "milvus_basics",
       "label2": "",
       "label3": "",

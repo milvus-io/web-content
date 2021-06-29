@@ -28,7 +28,7 @@ Milvus supports searching vectors in a collection or partition.
    >>> milvus.search(collection_name='test01', query_records=q_records, top_k=2, params=search_param)
    ```
    <div class="alert note">
-   <ul><li><code>top_k</code> means searching the k vectors most similar to the target vector. It is defined during the search.</li><li>The range of <code>top_k</code> is [1, 16384].</li></ul>
+   <ul><li><code>top_k</code> means searching the k vectors most similar to the target vector. It is defined during the search.</li><li>The range of <code>top_k</code> is [1, 1048576].</li></ul>
    </div>
 
 ## Search Vectors in a Partition

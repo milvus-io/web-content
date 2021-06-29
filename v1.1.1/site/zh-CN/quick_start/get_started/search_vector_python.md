@@ -28,7 +28,7 @@ Milvus 支持在集合或分区中查询向量。
 
    <div class="alert note">
    <ul>
-   <li><code>top_k</code> 指的是向量空间中距离目标向量最近的 k 个向量。</li><li><code>top_k</code> 的范围为：[1, 16384]。</li>
+   <li><code>top_k</code> 指的是向量空间中距离目标向量最近的 k 个向量。</li><li><code>top_k</code> 的范围为：[1, 1048576]。</li>
    </ul>
    </div>
 
