@@ -19,7 +19,7 @@ Python version 3.6 or higher is required. View <a href="https://wiki.python.org/
 2. Download sample code **hello_milvus.py**:
 
 ```
-$ wget https://github.com/milvus-io/pymilvus-orm/blob/main/examples/hello_pymilvus_orm.py
+$ wget https://raw.githubusercontent.com/milvus-io/pymilvus-orm/main/examples/hello_milvus.py
 ```
 
 3. Scan **hello_milvus.py**. This sample code does the following:
