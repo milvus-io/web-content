@@ -9,7 +9,7 @@ title: Hello Milvus
 
 1. 安装 pymilvus_orm 及依赖库:
 ```
-$ pip install pymilvus-orm
+pip install pymilvus-orm==2.0.0rc1
 ```
 
 <div class="alert note">
