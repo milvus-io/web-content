@@ -18,7 +18,7 @@ Here are some things you can do to get started contributing without a technical 
 -   Clarify code, variables, or functions that can be renamed or commented on
 -   Write test coverage
 
-In addition, you can also find an issue with [good-first-issue](https://github.com/milvus-io/milvus/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue %22) label, good-first-issue is a label used to classify Issues suitable for new comtributors. Such Issues contain clear steps and expected output.
+In addition, you can also find an issue with [good-first-issue](https://github.com/milvus-io/milvus/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22) label, good-first-issue is a label used to classify Issues suitable for new comtributors. Such Issues contain clear steps and expected output.
 
 
 
