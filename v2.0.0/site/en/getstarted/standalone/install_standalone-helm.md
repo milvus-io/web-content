@@ -29,7 +29,9 @@ $ minikube start
 ```
 
 ## 2. Start Milvus
+<div class="alert note">
 Helm package manager for Kubernetes can be used to simplify this process.
+</div>
 
 #### Add the Milvus chart repository:
 ```
@@ -54,7 +56,7 @@ $ helm install my-release milvus/milvus
 ```
 
 <div class="alert note">
-For more details, see [Milvus Helm charts](https://artifacthub.io/packages/helm/milvus/milvus).
+For more details, see <a href="https://artifacthub.io/packages/helm/milvus/milvus">Milvus Helm chart</a>.
 </div>
 
 

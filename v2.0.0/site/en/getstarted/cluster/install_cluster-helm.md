@@ -29,7 +29,9 @@ $ minikube start
 ```
 
 ## 2. Start Milvus
+<div class="alert note">
 Helm package manager for Kubernetes can be used to simplify this process.
+</div>
 
 #### Add the Milvus chart repository:
 ```

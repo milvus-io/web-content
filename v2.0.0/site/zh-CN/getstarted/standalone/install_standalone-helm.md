@@ -9,7 +9,6 @@ group: standalone
 你可以使用 Docker Compose 或 Helm 安装 Milvus 单机版。
 
 
-
 你也可以[从源代码编译 Milvus](https://github.com/milvus-io/milvus/blob/master/INSTALL.md)。
 
 <div class="alert note">
@@ -24,7 +23,9 @@ Docker Compose 部署方式只用作测试使用，不能用于生产环境。
 
 - minikube：详见 [minikube 快速开始文档](https://kubernetes.io/docs/tasks/tools/install-minikube/)。
 
-> 安装 minikube 时会自动安装虚拟机监控器（hypervisor）和命令行工具 Kubectl，帮助你从本地工作站管理 Kubernetes。
+<div class="alert note">
+安装 minikube 时会自动安装虚拟机监控器（hypervisor）和命令行工具 Kubectl，帮助你从本地工作站管理 Kubernetes。
+</div>
 
 - Kubernetes 包管理工具 Helm: 3.0.0 或以上。详见 [Helm 官方文档](https://helm.sh/docs/)。
 
@@ -34,7 +35,9 @@ $ minikube start
 ```
 
 ## 2. 启动 Milvus
-> 使用 Kubernetes 包管理工具 Helm 能够简化本步骤。
+<div class="alert note">
+使用 Kubernetes 包管理工具 Helm 能够简化本步骤。
+</div>
 
 #### 使用 Kubernetes 包管理工具 Helm 添加 Milvus chart 仓库：
 ```
@@ -57,8 +60,9 @@ $ helm repo update
 ```
 $ helm install my-release milvus/milvus
 ```
-
-> 详见 [Milvus Helm charts](https://artifacthub.io/packages/helm/milvus/milvus)。
+<div class="alert note">
+详见 <a href="https://artifacthub.io/packages/helm/milvus/milvus">Milvus Helm charts</a>。
+</div>
 
 *如果启动成功，Milvus pod 将在 `READY` 下显示 `1/1`：*
 
@@ -87,11 +91,10 @@ $ helm uninstall my-release
 ```
 $ minikube stop
 ```
-> 如需重新启动集群，请运行命令：
+<div class="alert note">
+如需重新启动集群，请运行命令：<code>minikube start</code>
+</div>
 
-```
-minikube start
-```
 
 ## 6. 删除集群
 
@@ -99,7 +102,7 @@ minikube start
 ```
 minikube delete
 ```
-
-> 如需留存日志，在删除集群前从每个 pod 的 `stderr` 中复制日志及相关资源。运行 `kubectl logs <podname>` 指令获取 pod 标准错误流。
-
+<div class="alert note">
+如需留存日志，在删除集群前从每个 pod 的 <code>stderr</code> 中复制日志及相关资源。运行 <code>kubectl logs (podname)</code> 指令获取 pod 标准错误流。
+</div>
 

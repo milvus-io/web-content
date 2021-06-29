@@ -13,7 +13,7 @@ After the Milvus server boots successfully, test the platform using our Python s
 $ pip install pymilvus-orm
 ```
 <div class="alert note">
-Python version 3.6 or higher is required. View [Python documentation](https://wiki.python.org/moin/BeginnersGuide/Download) for information about installing the correct version for your system.
+Python version 3.6 or higher is required. View <a href="https://wiki.python.org/moin/BeginnersGuide/Download">Python documentation</a> for information about installing the correct version for your system.
 </div>
 
 2. Download sample code **hello_milvus.py**:
