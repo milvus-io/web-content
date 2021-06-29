@@ -4,15 +4,17 @@ id: contributing_to_milvus.md
 
 # Contributing to Milvus
 
-An entrypoint to getting started with contributing to the Milvus project.
-
-We hope that Milvus can be promoted in a community way. If you encounter any unsuccessful situations during the participation process, please let us know.
+An entrypoint to getting started with contributing to the Milvus project. If you encounter problems in participating in the Milvus contribution, please [file an issue](https://github.com/milvus-io/community/issues/new).
 
 
 
 ## Communication
 
-Any problems encountered can be discussed under Issue on GitHub. If this Issue does not exist, create one!
+Here are some discuss platforms:
+
+-   [GitHub Issues](https://github.com/milvus-io/milvus/issues) for tracking issues
+-   [milvus-technical-discuss](https://lists.lfaidata.foundation/g/milvus-technical-discuss) hosts contributor discussions for upstream
+-   [Slack](https://lists.lfaidata.foundation/g/milvus-technical-discuss) to discuss real-time and directly
 
 
 
@@ -26,7 +28,7 @@ In simple words, making changes on a branch that created from the master branch,
 
 ## Create a Pull Request
 
-On GitHub, the code is merged by creating a Pull Request (generally referred to as a PR), and the process is no different from the standard PR process on GitHub. In addition, the Milvus project also integrates a Prow robot (from Kubernetes) to help the operation of the PR process.
+On GitHub, the code is merged by creating a Pull Request (generally referred to as a PR), and the process is no different from the standard PR process on GitHub. In addition, the Milvus project also integrates a prow robot (from Kubernetes) to help the operation of the PR process.
 
 As long as you have created a PR, you will have seen this bot on GitHub, it will automatically add some labels to your PR, and suggest several reviewers. In addition to these automatic actions, you can also do more by using some commands in the comments. For commands, please refer to [Command Reference](https://prow.zilliz.cc/command-help).
 
