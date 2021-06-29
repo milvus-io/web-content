@@ -2,7 +2,7 @@
 id: metric.md
 ---
 
-# Distance Metrics
+# Similarity Metrics
 
 In Milvus, distance metrics are used to measure similarities among vectors. Choosing a good distance metric helps improve the classification and clustering performance significantly.
 
