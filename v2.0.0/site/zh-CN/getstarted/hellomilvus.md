@@ -42,7 +42,7 @@ default_fields = [
     schema.FieldSchema(name="float_vector", dtype=DataType.FLOAT_VECTOR, dim=dim)
 ]
 default_schema = schema.CollectionSchema(fields=default_fields, description="test collection")
-collection = Collection(name="hello_milvus", data=None, schema=default_schema)
+collection = Collection(name="hello_milvus",  schema=default_schema)
 ```
 - 向创建的 collection 中插入数据：
 ```
