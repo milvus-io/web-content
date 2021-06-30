@@ -27,13 +27,18 @@ Milvus 2.0 is a cloud-native vector database with storage and computation separa
 - Worker nodes 
 - Storage 
 
-**Access layer:** The front layer of the system and endpoint to users.  It comprises peer proxies for forwarding requests and gathering results.
+**Access layer:** The interface. The access layer is the front layer of the system and endpoint to users.  It is in charge of forwarding requests and gathering results.
 
-**Coordinator service:** The coordinator service assigns tasks to the worker nodes and functions as the system's brain. It has four coordinator types: root coord, data coord, query coord, and index coord.
+**Coordinator service:** The coordinator service assigns tasks to the worker nodes and functions as the system's brain. There are four coordinator types: root coordinator (root coord), data coordinator (data coord), query coordinator (query coord), and index coordinator (index coord).
 
-**Worker nodes:** Worker nodes are dumb executors that follow the instructions from the coordinator service. There are three types of worker nodes, each responsible for a different job: data nodes, query nodes, and index nodes.
+**Worker nodes:** The arms and legs. Worker nodes are dumb executors that follow the instructions from the coordinator service and respond to the read/write requests from the access layer. There are three types of worker nodes: data nodes, query nodes, and index nodes.
 
-**Storage:** The cornerstone of the system that all other functions depend on. It has three storage types: meta storage, log broker, and object storage. Kudos to the open-source communities of etcd, Pulsar, MinIO, and RocksDB for building this fast, reliable storage.
+**Storage:** The bones. Storage has three types: meta storage, log broker, and object storage. 
+
+- Implemented by etcd, meta storage is used to store metadata such as collection and checkpoint for the coordinator service. 
+- Implemented by Pulsar, log broker is used mainly to store incremental logs and implement reliable asynchronous notifications. 
+- Implemented by MinIO or S3, object storage is used mainly to store log snapshots and index files.
+
 
 ![Architecture](../../../assets/architecture_02.jpg)
 
