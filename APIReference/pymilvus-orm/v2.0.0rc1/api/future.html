@@ -9,7 +9,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Index &mdash; pymilvus 1.0.1 documentation</title>
+  <title>Future &mdash; pymilvus-orm 1.0.1 documentation</title>
   
 
   
@@ -40,8 +40,8 @@
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="SearchResult" href="search.html" />
-    <link rel="prev" title="Partition" href="partition.html" /> 
+    <link rel="next" title="Index" href="../param.html" />
+    <link rel="prev" title="Utility" href="utility.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -55,7 +55,7 @@
           
 
           
-            <a href="../index.html" class="icon icon-home"> pymilvus
+            <a href="../index.html" class="icon icon-home"> pymilvus-orm
           
 
           
@@ -93,16 +93,25 @@
 <li class="toctree-l2"><a class="reference internal" href="collection.html">Collection</a></li>
 <li class="toctree-l2"><a class="reference internal" href="schema.html">Schema</a></li>
 <li class="toctree-l2"><a class="reference internal" href="partition.html">Partition</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Index</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#constructor">Constructor</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#attributes">Attributes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#apis">APIs</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="milvus_index.html">Index</a></li>
 <li class="toctree-l2"><a class="reference internal" href="search.html">SearchResult</a></li>
 <li class="toctree-l2"><a class="reference internal" href="connections.html">Connections</a></li>
 <li class="toctree-l2"><a class="reference internal" href="utility.html">Utility</a></li>
-<li class="toctree-l2"><a class="reference internal" href="future.html">Future</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Future</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#searchfuture">SearchFuture</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#constructor">Constructor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#attributes">Attributes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#apis-references">APIs References</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#mutationfuture">MutationFuture</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id2">Constructor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id4">Attributes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id8">APIs References</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../param.html">Index</a></li>
@@ -125,7 +134,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">pymilvus</a>
+          <a href="../index.html">pymilvus-orm</a>
         
       </nav>
 
@@ -158,13 +167,13 @@
         
           <li><a href="api.html">API Reference</a> &raquo;</li>
         
-      <li>Index</li>
+      <li>Future</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../_sources/api/milvus_index.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/api/future.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -178,23 +187,16 @@
 
            <div itemprop="articleBody">
             
-  <section id="index">
-<span id="id1"></span><h1>Index<a class="headerlink" href="#index" title="Permalink to this headline">¶</a></h1>
-<p>Index .</p>
+  <section id="future">
+<h1>Future<a class="headerlink" href="#future" title="Permalink to this headline">¶</a></h1>
+<section id="searchfuture">
+<h2>SearchFuture<a class="headerlink" href="#searchfuture" title="Permalink to this headline">¶</a></h2>
 <section id="constructor">
-<h2>Constructor<a class="headerlink" href="#constructor" title="Permalink to this headline">¶</a></h2>
-<table class="longtable docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
-<tbody>
-</tbody>
-</table>
+<h3>Constructor<a class="headerlink" href="#constructor" title="Permalink to this headline">¶</a></h3>
 <table class="docutils align-default">
 <colgroup>
-<col style="width: 48%" />
-<col style="width: 52%" />
+<col style="width: 49%" />
+<col style="width: 51%" />
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>Constructor</p></th>
@@ -202,26 +204,18 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><a class="reference external" href="#pymilvus_orm.Index">Index()</a></p></td>
-<td><p>Create index on a specified column according to the index parameters.</p></td>
+<tr class="row-even"><td><p><a class="reference external" href="#pymilvus_orm.SearchFuture">SearchFuture()</a></p></td>
+<td><p>Search future.</p></td>
 </tr>
 </tbody>
 </table>
 </section>
 <section id="attributes">
-<h2>Attributes<a class="headerlink" href="#attributes" title="Permalink to this headline">¶</a></h2>
-<table class="longtable docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
-<tbody>
-</tbody>
-</table>
+<h3>Attributes<a class="headerlink" href="#attributes" title="Permalink to this headline">¶</a></h3>
 <table class="docutils align-default">
 <colgroup>
-<col style="width: 48%" />
-<col style="width: 52%" />
+<col style="width: 49%" />
+<col style="width: 51%" />
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>API</p></th>
@@ -229,86 +223,71 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><a class="reference external" href="#pymilvus_orm.Index.name">name</a></p></td>
-<td><p>Return the index name.</p></td>
+<tr class="row-even"><td><p><a class="reference external" href="#pymilvus_orm.SearchFuture.result">result()</a></p></td>
+<td><p>Return the search result.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference external" href="#pymilvus_orm.Index.params">params</a></p></td>
-<td><p>Return the index params.</p></td>
+<tr class="row-odd"><td><p><a class="reference external" href="#pymilvus_orm.SearchFuture.cancel">cancel()</a></p></td>
+<td><p>Cancel the search request.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference external" href="#pymilvus_orm.Index.collection_name">collection_name</a></p></td>
-<td><p>Return corresponding collection name.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference external" href="#pymilvus_orm.Index.field_name">field_name</a></p></td>
-<td><p>Return corresponding column name.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference external" href="#pymilvus_orm.Index.drop">drop</a></p></td>
-<td><p>Drop index and its corresponding index files.</p></td>
+<tr class="row-even"><td><p><a class="reference external" href="#pymilvus_orm.SearchFuture.done">done()</a></p></td>
+<td><p>Wait for search request done.</p></td>
 </tr>
 </tbody>
 </table>
 </section>
-<section id="apis">
-<h2>APIs<a class="headerlink" href="#apis" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="pymilvus_orm.Index">
-<em class="property">class </em><code class="sig-prename descclassname">pymilvus_orm.</code><code class="sig-name descname">Index</code><span class="sig-paren">(</span><em class="sig-param">collection</em>, <em class="sig-param">field_name</em>, <em class="sig-param">index_params</em>, <em class="sig-param">name=''</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pymilvus_orm/index.html#Index"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymilvus_orm.Index" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="method">
-<dt id="pymilvus_orm.Index.name">
-<em class="property">property </em><code class="sig-name descname">name</code><a class="headerlink" href="#pymilvus_orm.Index.name" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the index name.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Return str</dt>
-<dd class="field-odd"><p>The name of index</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="pymilvus_orm.Index.params">
-<em class="property">property </em><code class="sig-name descname">params</code><a class="headerlink" href="#pymilvus_orm.Index.params" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the index params.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Return dict</dt>
-<dd class="field-odd"><p>Index parameters</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="pymilvus_orm.Index.collection_name">
-<em class="property">property </em><code class="sig-name descname">collection_name</code><a class="headerlink" href="#pymilvus_orm.Index.collection_name" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return corresponding collection name.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Return str</dt>
-<dd class="field-odd"><p>Corresponding collection name</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="pymilvus_orm.Index.field_name">
-<em class="property">property </em><code class="sig-name descname">field_name</code><a class="headerlink" href="#pymilvus_orm.Index.field_name" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return corresponding column name.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Return str</dt>
-<dd class="field-odd"><p>Corresponding column name</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="pymilvus_orm.Index.drop">
-<code class="sig-name descname">drop</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pymilvus_orm/index.html#Index.drop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymilvus_orm.Index.drop" title="Permalink to this definition">¶</a></dt>
-<dd><p>Drop index and its corresponding index files.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Raises</dt>
-<dd class="field-odd"><p><strong>IndexNotExistException</strong> -- If index doesn't exist.</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
+<section id="apis-references">
+<h3>APIs References<a class="headerlink" href="#apis-references" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="mutationfuture">
+<h2>MutationFuture<a class="headerlink" href="#mutationfuture" title="Permalink to this headline">¶</a></h2>
+<section id="id2">
+<h3>Constructor<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 49%" />
+<col style="width: 51%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Constructor</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference external" href="#pymilvus_orm.MutationFuture">MutationFuture()</a></p></td>
+<td><p>Mutationfuture.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id4">
+<h3>Attributes<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 49%" />
+<col style="width: 51%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>API</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference external" href="#pymilvus_orm.MutationFuture.result">result()</a></p></td>
+<td><p>Return the insert result.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="#pymilvus_orm.MutationFuture.cancel">cancel()</a></p></td>
+<td><p>Cancel the insert request.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="#pymilvus_orm.MutationFuture.done">done()</a></p></td>
+<td><p>Wait for insert request done.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id8">
+<h3>APIs References<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+</section>
 </section>
 </section>
 
@@ -324,10 +303,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="search.html" class="btn btn-neutral float-right" title="SearchResult" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../param.html" class="btn btn-neutral float-right" title="Index" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="partition.html" class="btn btn-neutral float-left" title="Partition" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="utility.html" class="btn btn-neutral float-left" title="Utility" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

@@ -9,7 +9,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Search results &mdash; pymilvus 1.0.1 documentation</title>
+  <title>Search results &mdash; pymilvus-orm 1.0.1 documentation</title>
   
 
   
@@ -55,7 +55,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home"> pymilvus
+            <a href="index.html" class="icon icon-home"> pymilvus-orm
           
 
           
@@ -113,7 +113,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">pymilvus</a>
+          <a href="index.html">pymilvus-orm</a>
         
       </nav>
 
@@ -198,7 +198,7 @@ you can invoke like this:</p>
 so you can traverse the results like this:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
 <span class="gp">... </span>    <span class="k">for</span> <span class="nb">id</span><span class="p">,</span> <span class="n">dis</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">ids</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">distances</span><span class="p">):</span>
-<span class="gp">... </span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;id = </span><span class="si">{</span><span class="nb">id</span><span class="si">}</span><span class="s2">, distance = </span><span class="si">{</span><span class="n">dis</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="gp">... </span>        <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;id = </span><span class="si">{id}</span><span class="s2">, distance = </span><span class="si">{dis}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><em>Section author: <a class="reference external" href="https://github.com/dragondriver">dragondriver&#64;milvus</a></em></p>

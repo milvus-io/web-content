@@ -9,7 +9,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>SearchResult &mdash; pymilvus 1.0.1 documentation</title>
+  <title>SearchResult &mdash; pymilvus-orm 1.0.1 documentation</title>
   
 
   
@@ -55,7 +55,7 @@
           
 
           
-            <a href="../index.html" class="icon icon-home"> pymilvus
+            <a href="../index.html" class="icon icon-home"> pymilvus-orm
           
 
           
@@ -140,7 +140,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">pymilvus</a>
+          <a href="../index.html">pymilvus-orm</a>
         
       </nav>
 
@@ -243,39 +243,6 @@
 </section>
 <section id="apis-references">
 <h3>APIs References<a class="headerlink" href="#apis-references" title="Permalink to this headline">¶</a></h3>
-<dl class="class">
-<dt id="pymilvus_orm.SearchResult">
-<em class="property">class </em><code class="sig-prename descclassname">pymilvus_orm.</code><code class="sig-name descname">SearchResult</code><span class="sig-paren">(</span><em class="sig-param">query_result=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pymilvus_orm/search.html#SearchResult"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymilvus_orm.SearchResult" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="method">
-<dt id="pymilvus_orm.SearchResult.__iter__">
-<code class="sig-name descname">iter</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pymilvus_orm/search.html#SearchResult.__iter__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymilvus_orm.SearchResult.__iter__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Iterate the Search Result. Every iteration returns a Hits corresponding to a query.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="pymilvus_orm.SearchResult.__getitem__">
-<span><em>self</em><code class="sig-name descname">[</code><em>item</em><code class="sig-name descname">]</code></span><a class="reference internal" href="../_modules/pymilvus_orm/search.html#SearchResult.__getitem__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymilvus_orm.SearchResult.__getitem__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the Hits corresponding to the nth query.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Return Hits</dt>
-<dd class="field-odd"><p>The hits corresponding to the nth(item) query.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="pymilvus_orm.SearchResult.__len__">
-<code class="sig-name descname">len</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span> &#x2192; int<a class="reference internal" href="../_modules/pymilvus_orm/search.html#SearchResult.__len__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymilvus_orm.SearchResult.__len__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the number of query of Search Result.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Return int</dt>
-<dd class="field-odd"><p>The number of query of search result.</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
 </section>
 </section>
 <section id="hits">
@@ -332,62 +299,6 @@
 </section>
 <section id="id9">
 <h3>APIs References<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
-<dl class="class">
-<dt id="pymilvus_orm.Hits">
-<em class="property">class </em><code class="sig-prename descclassname">pymilvus_orm.</code><code class="sig-name descname">Hits</code><span class="sig-paren">(</span><em class="sig-param">hits</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pymilvus_orm/search.html#Hits"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymilvus_orm.Hits" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="method">
-<dt id="pymilvus_orm.Hits.__iter__">
-<code class="sig-name descname">iter</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pymilvus_orm/search.html#Hits.__iter__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymilvus_orm.Hits.__iter__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Iterate the Hits object. Every iteration returns a Hit which represent a record
-corresponding to the query.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="pymilvus_orm.Hits.__getitem__">
-<span><em>self</em><code class="sig-name descname">[</code><em>item</em><code class="sig-name descname">]</code></span><a class="reference internal" href="../_modules/pymilvus_orm/search.html#Hits.__getitem__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymilvus_orm.Hits.__getitem__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the kth Hit corresponding to the query.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Return Hit</dt>
-<dd class="field-odd"><p>The kth specified by item Hit corresponding to the query.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="pymilvus_orm.Hits.__len__">
-<code class="sig-name descname">len</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span> &#x2192; int<a class="reference internal" href="../_modules/pymilvus_orm/search.html#Hits.__len__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymilvus_orm.Hits.__len__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the number of hit record.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Return int</dt>
-<dd class="field-odd"><p>The number of hit record.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="pymilvus_orm.Hits.ids">
-<em class="property">property </em><code class="sig-name descname">ids</code><a class="headerlink" href="#pymilvus_orm.Hits.ids" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the ids of all hit record.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Return list[int]</dt>
-<dd class="field-odd"><p>The ids of all hit record.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="pymilvus_orm.Hits.distances">
-<em class="property">property </em><code class="sig-name descname">distances</code><a class="headerlink" href="#pymilvus_orm.Hits.distances" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the distances of all hit record.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Return list[float]</dt>
-<dd class="field-odd"><p>The distances of all hit record.</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
 </section>
 </section>
 <section id="hit">
@@ -441,55 +352,6 @@ corresponding to the query.</p>
 </section>
 <section id="id13">
 <h3>APIs References<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h3>
-<dl class="class">
-<dt id="pymilvus_orm.Hit">
-<em class="property">class </em><code class="sig-prename descclassname">pymilvus_orm.</code><code class="sig-name descname">Hit</code><span class="sig-paren">(</span><em class="sig-param">hit</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pymilvus_orm/search.html#Hit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymilvus_orm.Hit" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="method">
-<dt id="pymilvus_orm.Hit.id">
-<em class="property">property </em><code class="sig-name descname">id</code><a class="headerlink" href="#pymilvus_orm.Hit.id" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the id of the hit record.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Return int</dt>
-<dd class="field-odd"><p>The id of the hit record.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="pymilvus_orm.Hit.distance">
-<em class="property">property </em><code class="sig-name descname">distance</code><a class="headerlink" href="#pymilvus_orm.Hit.distance" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the distance between the hit record and the query.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Return float</dt>
-<dd class="field-odd"><p>The distance of the hit record.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="pymilvus_orm.Hit.score">
-<em class="property">property </em><code class="sig-name descname">score</code><a class="headerlink" href="#pymilvus_orm.Hit.score" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the calculated score of the hit record, now the score is equal to distance.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Return float</dt>
-<dd class="field-odd"><p>The score of the hit record.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="pymilvus_orm.Hit.__str__">
-<code class="sig-name descname">str</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pymilvus_orm/search.html#Hit.__str__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymilvus_orm.Hit.__str__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the information of hit record.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Return str</dt>
-<dd class="field-odd"><p>The information of hit record.</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
 </section>
 </section>
 </section>

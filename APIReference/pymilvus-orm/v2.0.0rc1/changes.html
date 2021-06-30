@@ -9,7 +9,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>FAQ &mdash; pymilvus 1.0.1 documentation</title>
+  <title>Changelog &mdash; pymilvus-orm 1.0.1 documentation</title>
   
 
   
@@ -40,8 +40,8 @@
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Contributing" href="contribute.html" />
-    <link rel="prev" title="Changelog" href="changes.html" /> 
+    <link rel="next" title="FAQ" href="faq.html" />
+    <link rel="prev" title="Search results" href="results.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -55,7 +55,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home"> pymilvus
+            <a href="index.html" class="icon icon-home"> pymilvus-orm
           
 
           
@@ -92,12 +92,8 @@
 <li class="toctree-l1"><a class="reference internal" href="api/api.html">API Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="param.html">Index</a></li>
 <li class="toctree-l1"><a class="reference internal" href="results.html">Search results</a></li>
-<li class="toctree-l1"><a class="reference internal" href="changes.html">Changelog</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">FAQ</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#i-m-getting-random-socket-operation-on-non-socket-errors-from-grpc">I'm getting random &quot;socket operation on non-socket&quot; errors from gRPC.</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#how-to-fix-the-error-when-i-install-pymilvus-orm-on-windows">How to fix the error when I install PyMilvus ORM on Windows?</a></li>
-</ul>
-</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="contribute.html">Contributing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="about.html">About this documentation</a></li>
 </ul>
@@ -114,7 +110,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">pymilvus</a>
+          <a href="index.html">pymilvus-orm</a>
         
       </nav>
 
@@ -145,13 +141,13 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>FAQ</li>
+      <li>Changelog</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="_sources/faq.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/changes.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -165,22 +161,13 @@
 
            <div itemprop="articleBody">
             
-  <section id="faq">
-<h1>FAQ<a class="headerlink" href="#faq" title="Permalink to this headline">¶</a></h1>
+  <section id="changelog">
+<h1>Changelog<a class="headerlink" href="#changelog" title="Permalink to this headline">¶</a></h1>
+<p><strong>v0.0.1(Developing)</strong></p>
 <ul class="simple">
-<li><p><a class="reference internal" href="#i-m-getting-random-socket-operation-on-non-socket-errors-from-grpc">I'm getting random &quot;socket operation on non-socket&quot; errors from gRPC.</a></p></li>
-<li><p><a class="reference internal" href="#how-to-fix-the-error-when-i-install-pymilvus-orm-on-windows">How to fix the error when I install PyMilvus ORM on Windows?</a></p></li>
+<li><p>Remove unused hybrid APIs</p></li>
 </ul>
-<section id="i-m-getting-random-socket-operation-on-non-socket-errors-from-grpc">
-<h2>I'm getting random &quot;socket operation on non-socket&quot; errors from gRPC.<a class="headerlink" href="#i-m-getting-random-socket-operation-on-non-socket-errors-from-grpc" title="Permalink to this headline">¶</a></h2>
-<p>Make sure to set the environment variable <code class="docutils literal notranslate"><span class="pre">GRPC_ENABLE_FORK_SUPPORT=1</span></code>.
-For reference, see <a class="reference external" href="https://zhuanlan.zhihu.com/p/136619485">this post</a>.</p>
-</section>
-<section id="how-to-fix-the-error-when-i-install-pymilvus-orm-on-windows">
-<h2>How to fix the error when I install PyMilvus ORM on Windows?<a class="headerlink" href="#how-to-fix-the-error-when-i-install-pymilvus-orm-on-windows" title="Permalink to this headline">¶</a></h2>
-<p>Try installing PyMilvus ORM in a Conda environment.</p>
-<p><em>Section author: <a class="reference external" href="https://github.com/XuanYang-cn">Yangxuan&#64;milvus</a></em></p>
-</section>
+<p><em>Section author: <a class="reference external" href="https://github.com/BossZou">Bosszou&#64;milvus</a></em></p>
 </section>
 
 
@@ -195,10 +182,10 @@ For reference, see <a class="reference external" href="https://zhuanlan.zhihu.co
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="contribute.html" class="btn btn-neutral float-right" title="Contributing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="faq.html" class="btn btn-neutral float-right" title="FAQ" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="changes.html" class="btn btn-neutral float-left" title="Changelog" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="results.html" class="btn btn-neutral float-left" title="Search results" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

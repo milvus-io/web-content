@@ -9,7 +9,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Tutorial &mdash; pymilvus 1.0.1 documentation</title>
+  <title>Tutorial &mdash; pymilvus-orm 1.0.1 documentation</title>
   
 
   
@@ -55,7 +55,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home"> pymilvus
+            <a href="index.html" class="icon icon-home"> pymilvus-orm
           
 
           
@@ -124,7 +124,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">pymilvus</a>
+          <a href="index.html">pymilvus-orm</a>
         
       </nav>
 
@@ -177,11 +177,11 @@
             
   <section id="tutorial">
 <h1>Tutorial<a class="headerlink" href="#tutorial" title="Permalink to this headline">¶</a></h1>
-<p>This is a basic introduction to Milvus by pymilvus-orm.</p>
+<p>This is a basic introduction to Milvus by PyMilvus-ORM.</p>
 <p>For a runnable python script,
-checkout <a class="reference external" href="https://github.com/milvus-io/pymilvus-orm/blob/1.0/examples/example.py">example.py</a> on pymilvus-orm Github,
+checkout <a class="reference external" href="https://github.com/milvus-io/pymilvus-orm/blob/1.0/examples/example.py">example.py</a> on PyMilvus-ORM Github,
 or <a class="reference external" href="https://www.milvus.io/docs/example_code.md">hello milvus</a> on Milvus official website. It's a good recommended
-start to get started with Milvus and pymilvus-orm as well.</p>
+start to get started with Milvus and PyMilvus-ORM as well.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Here we use float vectors as example vector field data, if you want to learn example about binary vectors, see
@@ -193,20 +193,20 @@ start to get started with Milvus and pymilvus-orm as well.</p>
 <p>Make sure that:</p>
 <ul class="simple">
 <li><p>You have a running Milvus instance.</p></li>
-<li><p>pymilvus-orm is correctly <a class="reference internal" href="install.html"><span class="doc">Installation</span></a>.</p></li>
+<li><p>PyMilvus-ORM is correctly <a class="reference internal" href="install.html"><span class="doc">Installation</span></a>.</p></li>
 </ul>
 </section>
 <section id="connect-to-milvus">
 <h2>Connect to Milvus<a class="headerlink" href="#connect-to-milvus" title="Permalink to this headline">¶</a></h2>
-<p>First of all, we need to import pymilvus-orm.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pymilvus_orm</span> <span class="kn">import</span> <span class="n">connections</span>
+<p>First of all, we need to import <cite>pymilvus-orm</cite>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pymilvus_orm</span> <span class="k">import</span> <span class="n">connections</span>
 </pre></div>
 </div>
 <p>Then, we can make connection with Milvus server.
 By default Milvus runs on localhost in port 19530, so you can use default value to connect to Milvus.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">host</span> <span class="o">=</span> <span class="s1">&#39;127.0.0.1&#39;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">port</span> <span class="o">=</span> <span class="s1">&#39;19530&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">connections</span><span class="o">.</span><span class="n">create_connection</span><span class="p">(</span><span class="s2">&quot;default&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="n">host</span><span class="p">,</span> <span class="s2">&quot;port&quot;</span><span class="p">:</span> <span class="n">port</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">connections</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;default&quot;</span><span class="p">,</span> <span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="n">port</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>After connecting, we can communicate with Milvus in the following ways. If you are confused about the
@@ -216,7 +216,7 @@ terminology, see <a class="reference external" href="https://milvus.io/docs/term
 <h2>Collection<a class="headerlink" href="#collection" title="Permalink to this headline">¶</a></h2>
 <p>Now let's create a new collection. Before we start, we can list all the collections already exist. For a brand
 new Milvus running instance, the result should be empty.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pymilvus_orm</span> <span class="kn">import</span> <span class="n">list_collections</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pymilvus_orm</span> <span class="k">import</span> <span class="n">list_collections</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">list_collections</span><span class="p">()</span>
 <span class="go">[]</span>
 </pre></div>
@@ -228,13 +228,13 @@ new Milvus running instance, the result should be empty.</p>
 <p>In this tutorial, we will create a collection with two field: <cite>year</cite> and <cite>embedding</cite>.</p>
 <p>The type of <cite>year</cite> field is <cite>int64</cite>, and the type of <cite>embedding</cite> is <cite>FLOAT_VECTOR</cite> whose <cite>dim</cite> is 128.</p>
 <p>Now we can create a collection:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pymilvus_orm</span> <span class="kn">import</span> <span class="n">Collection</span><span class="p">,</span> <span class="n">DataType</span><span class="p">,</span> <span class="n">FieldSchema</span><span class="p">,</span> <span class="n">CollectionSchema</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pymilvus_orm</span> <span class="k">import</span> <span class="n">Collection</span><span class="p">,</span> <span class="n">DataType</span><span class="p">,</span> <span class="n">FieldSchema</span><span class="p">,</span> <span class="n">CollectionSchema</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dim</span> <span class="o">=</span> <span class="mi">128</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">year_field</span> <span class="o">=</span> <span class="n">FieldSchema</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;year&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;int64&quot;</span><span class="p">,</span> <span class="n">is_primary</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;year&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">embedding_field</span> <span class="o">=</span> <span class="n">FieldSchema</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;embedding&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="n">DataType</span><span class="o">.</span><span class="n">FLOAT_VECTOR</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="n">dim</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">schema</span> <span class="o">=</span> <span class="n">CollectionSchema</span><span class="p">(</span><span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="n">year_field</span><span class="p">,</span> <span class="n">embedding_field</span><span class="p">],</span> <span class="n">auto_id</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">collection_name</span> <span class="o">=</span> <span class="s1">&#39;tutorial&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span> <span class="o">=</span> <span class="n">Collection</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">tutorial</span><span class="p">,</span> <span class="n">schema</span><span class="o">=</span><span class="n">schema</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">year_field</span> <span class="o">=</span> <span class="n">FieldSchema</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;year&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">DataType</span><span class="o">.</span><span class="n">INT64</span><span class="p">,</span> <span class="n">is_primary</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;year&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">embedding_field</span> <span class="o">=</span> <span class="n">FieldSchema</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;embedding&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">DataType</span><span class="o">.</span><span class="n">FLOAT_VECTOR</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="n">dim</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">schema</span> <span class="o">=</span> <span class="n">CollectionSchema</span><span class="p">(</span><span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="n">year_field</span><span class="p">,</span> <span class="n">embedding_field</span><span class="p">],</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;desc of collection&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">collection_name</span> <span class="o">=</span> <span class="s2">&quot;tutorial&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span> <span class="o">=</span> <span class="n">Collection</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">collection_name</span><span class="p">,</span> <span class="n">schema</span><span class="o">=</span><span class="n">schema</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Then you can list collections and 'tutorial' will be in the result.</p>
@@ -260,12 +260,14 @@ chapter of the PyMilvus documentation.</p>
 <h2>Create Partition<a class="headerlink" href="#create-partition" title="Permalink to this headline">¶</a></h2>
 <p>If you don't create a partition, there will be a default one called &quot;<code class="docutils literal notranslate"><span class="pre">_default</span></code>&quot;, all the entities will be
 inserted into the &quot;<code class="docutils literal notranslate"><span class="pre">_default</span></code>&quot; partition. You can check it by <code class="docutils literal notranslate"><span class="pre">Collection.partitions()</span></code></p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span><span class="o">.</span><span class="n">partitions</span><span class="p">()</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span><span class="o">.</span><span class="n">partitions</span>
+<span class="go">[{&quot;name&quot;: &quot;_default&quot;, &quot;description&quot;: &quot;&quot;, &quot;num_entities&quot;: 0}]</span>
 </pre></div>
 </div>
 <p>You can provide a partition name to create a new partition.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span><span class="o">.</span><span class="n">partition</span><span class="p">(</span><span class="s2">&quot;new_partition&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span><span class="o">.</span><span class="n">partitions</span><span class="p">()</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span><span class="o">.</span><span class="n">create_partition</span><span class="p">(</span><span class="s2">&quot;new_partition&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span><span class="o">.</span><span class="n">partitions</span>
+<span class="go">[{&quot;name&quot;: &quot;_default&quot;, &quot;description&quot;: &quot;&quot;, &quot;num_entities&quot;: 0}, {&quot;name&quot;: &quot;new_partition&quot;, &quot;description&quot;: &quot;&quot;, &quot;num_entities&quot;: 0}]</span>
 </pre></div>
 </div>
 </section>
@@ -295,8 +297,12 @@ that are most similar with it.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">search_params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;metric_type&quot;</span><span class="p">:</span> <span class="s2">&quot;L2&quot;</span><span class="p">,</span> <span class="s2">&quot;params&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;nprobe&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">}}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">limit</span> <span class="o">=</span> <span class="mi">2</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">expr</span> <span class="o">=</span> <span class="s2">&quot;year &gt; 20&quot;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">embedding_A</span><span class="p">,</span> <span class="n">anns_field</span><span class="p">,</span> <span class="n">search_params</span><span class="p">,</span> <span class="n">limit</span><span class="p">,</span> <span class="n">expr</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">results</span> <span class="o">=</span> <span class="n">collection</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">embedding_A</span><span class="p">,</span> <span class="n">anns_field</span><span class="p">,</span> <span class="n">search_params</span><span class="p">,</span> <span class="n">limit</span><span class="p">,</span> <span class="n">expr</span><span class="p">)</span>
 </pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For more about the parameter expr, please refer to: <a class="reference external" href="https://github.com/milvus-io/milvus/blob/master/docs/design_docs/query_boolean_expr.md">https://github.com/milvus-io/milvus/blob/master/docs/design_docs/query_boolean_expr.md</a></p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -336,7 +342,7 @@ the film as below. If you want to know how to deal with search result in a bette
 <p class="admonition-title">Danger</p>
 <p>Once you drop a partition, all the data in this partition will be deleted too.</p>
 </div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span><span class="o">.</span><span class="n">drop_partition</span><span class="p">(</span><span class="s2">&quot;partition_to_drop&quot;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span><span class="o">.</span><span class="n">drop_partition</span><span class="p">(</span><span class="s2">&quot;new_partition&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
