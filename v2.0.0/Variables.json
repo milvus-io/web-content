@@ -1,13 +1,4 @@
 {
-  "release_version": "preview",
-  "cpu_milvus_docker_image_version": "1.1.1-gpu-d061621-330cc6",
-  "gpu_milvus_docker_image_version": "1.1.1-cpu-d061621-330cc6",
-  "milvus_python_orm_sdk_version": "2.0.alpha",
-  "github_install_page": "1.1",
-  "github_api_python": "1.1",
-  "github_api_java": "1.1",
-  "github_api_go": "1.1",
-  "github_api_go_tag": "v1.1.0",
-  "github_api_RESTful": "1.1",
-  "github_api_CPP": "1.1"
+  "release_version": "2.0.0",
+  "milvus_python_orm_sdk_version": "v2.0.0rc1"
 }
