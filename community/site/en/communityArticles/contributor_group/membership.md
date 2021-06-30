@@ -9,7 +9,7 @@ This doc outlines the various responsibilities of contributor roles in The Milvu
 | Role          | Responsibilities                        | Requirements                                                 | Defined by                                                   |
 | ------------- | --------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | Contributor   | Contributor in the community            | Made more than one contributions to the Milvus project       | List in [All contributors](https://github.com/milvus-io/milvus#all-contributors) |
-| Active Member | Active contributor in the community     | Invited by reviewer and multiple contributions to the Milvus project | milvus-io GitHub org member                                  |
+| Active Contributor | Active contributor in the community     | Invited by reviewer and multiple contributions to the Milvus project | milvus-io GitHub org member                                  |
 | Reviewer      | Review contributions from other members | History of review and authorship in a subproject             | [OWNERS] file reviewer entry                                 |
 | Maintainer    | Contributions acceptance approval       | Highly experienced active reviewer and contributor to a subproject | [OWNERS] file approver entry                                 |
 
