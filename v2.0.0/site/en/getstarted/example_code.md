@@ -1,38 +1,40 @@
 ---
-id: hellomilvus.md
+id: example_code.md
 title: Hello Milvus
 ---
 
-# 通过 Python 使用 Milvus
+# Run Milvus using Python
 
-成功启动 Milvus 服务端后，通过 Python 示例代码使用 Milvus。
+After the Milvus server boots successfully, test the platform using our Python sample code.
 
-1. 安装 pymilvus_orm 及依赖库:
+1. Install pymilvus_orm and its dependencies:
+
 ```
 pip install pymilvus-orm==2.0.0rc1
 ```
-
 <div class="alert note">
-pymilvus_orm 需要 Python 3.6 版本或以上，详见 <a href="https://wiki.python.org/moin/BeginnersGuide/Download">Python 安装指南</a>。
+Python version 3.6 or higher is required. View <a href="https://wiki.python.org/moin/BeginnersGuide/Download">Python documentation</a> for information about installing the correct version for your system.
 </div>
 
+2. Download sample code **hello_milvus.py**:
 
-2. 下载 **hello_milvus.py** 示例代码:
 ```
 $ wget https://github.com/milvus-io/pymilvus-orm/blob/v2.0.0rc1/examples/hello_milvus.py
 ```
-3. 浏览 **hello_milvus.py**，这个示例程序将：
-- 导入 pymilvus 包
+
+3. Scan **hello_milvus.py**. This sample code does the following:
+
+- Imports the pymilvus package:
 ```
 from pymilvus_orm import *
 ```
 
-- 连接 Milvus 服务端
+- Connects to the Milvus server:
 ```
 connections.connect()
 ```
 
-- 创建一个 collection：
+- Creates a collection:
 ```
 dim = 128
 default_fields = [
@@ -46,7 +48,8 @@ default_schema = schema.CollectionSchema(fields=default_fields, description="tes
 print(f"\nCreate collection...")
 collection = Collection(name="hello_milvus", schema=default_schema)
 ```
-- 向创建的 collection 中插入数据：
+
+- Inserts vectors in the new collection:
 ```
 import random
 nb = 3000
@@ -59,14 +62,15 @@ collection.insert(
     ]
 )
 ```
-- 构建 IVF_FLAT 索引并加载 collection 至内存：
+
+- Builds an IVF_FLAT index and loads the collection to memory:
 ```
 default_index = {"index_type": "IVF_FLAT", "params": {"nlist": 128}, "metric_type": "L2"}
 collection.create_index(field_name="float_vector", index_params=default_index)
 collection.load()
 ```
 
-- 进行向量相似度查询：
+- Conducts a vector similarity search:
 ```
 topK = 5
 search_params = {"metric_type": "L2", "params": {"nprobe": 10}}
@@ -77,16 +81,18 @@ res = collection.search(
 )
 ```
 
-4. 运行 **hello_milvus.py**:
+4. Run **hello_milvus.py**:
 ```
-$ python3 hello_milvus.py
+$ python3 hello_pymilvus_orm.py
 ```
-*运行结果及查询等待时间如下：*
+
+*The returned results and query latency show as follows:*
+
 
 ![Returned results](../../../assets/returned_results.png)
-
 
 <br/>
 
 
-*恭喜！你已成功启动 Milvus，并完成了在 Milvus上的第一次向量查询。*
+*Congratulations! You have successfully booted Milvus Standalone and run your first vector similarity search.*
+

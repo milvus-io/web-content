@@ -30,7 +30,7 @@ title: Milvus Roadmap
 - A cluster protection mechanism featuring traffic control and back pressure
 - Improves observability for failover and failback through distributed tracing and log aggregation
 - Embedded Milvus that runs on laptops and feature out-of-the-box deployment in cloud production environments
-- Integrates stream and batch processing through Kafta/Pulsar connector
+- Integrates stream and batch processing through Kafka/Pulsar connector
 - Multi-machine, multi-site deployment and multi-cloud integration
 - Supports memory replicas for higher availability and optimized computing performance 
 

@@ -48,7 +48,7 @@
             },
             {
               "text": "Hello Milvus",
-              "link": "hellomilvus.md"
+              "link": "example_code.md"
             },
             {
                "text": "PyMilvus-ORM 上手",
@@ -69,7 +69,7 @@
             },
             {
               "text": "相似度计算方式",
-              "link": "metrics.md"
+              "link": "metric.md"
             }
           ]
         },

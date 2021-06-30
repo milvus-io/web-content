@@ -85,7 +85,7 @@
       "order": 1
     },    
     {
-      "id": "hellomilvus.md",
+      "id": "example_code.md",
       "title": "Hello Milvus",
       "label1": "getstarted",
       "label2": "",
@@ -110,7 +110,7 @@
       "isMenu": true
     },
     {
-      "id": "configuration_standalone_basic.md",
+      "id": "configuration_standalone-basic.md",
       "title": "单机版 Milvus",
       "label1": "getstarted",
       "label2": "systemconfigurations",
@@ -118,7 +118,7 @@
       "order": 0
     },
     {
-      "id": "configuration_cluster_basic.md",
+      "id": "configuration_cluster-basic.md",
       "title": "分布式版 Milvus",
       "label1": "getstarted",
       "label2": "systemconfigurations",

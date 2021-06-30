@@ -1,5 +1,5 @@
 ---
-id: configuration_standalone_advanced.md
+id: configuration_standalone-advanced.md
 title: Milvus Standalone System Configurations
 label: Advanced Configurations
 order: 1
@@ -12,7 +12,7 @@ Milvus cluster maintains many system variables that configure the operation. All
 
 
 
-<div class="tab-wrapper"><a href="configuration_standalone_basic.md" class=''>Basic Configurations</a><a href="configuration_standalone_advanced.md" class='active '>Advanced Configurations</a></div>
+<div class="tab-wrapper"><a href="configuration_standalone-basic.md" class=''>Basic Configurations</a><a href="configuration_standalone-advanced.md" class='active '>Advanced Configurations</a></div>
 
 
 

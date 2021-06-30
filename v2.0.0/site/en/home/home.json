@@ -50,7 +50,7 @@
             },
             {
               "text": "Hello Milvus",
-              "link": "hellomilvus.md"
+              "link": "example_code.md"
             },
             {
               "text": "Explore PyMilvus-ORM",
@@ -71,7 +71,7 @@
             },
             {
               "text": "Similarity Metrics",
-              "link": "metrics.md"
+              "link": "metric.md"
             }
           ]
         },
