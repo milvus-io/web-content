@@ -62,7 +62,7 @@ res = collection.search(vectors[-2:], "float_vector", search_params, topK, "coun
 
 4. Run **hello_milvus.py**.
 ```
-$ python3 hello_pymilvus_orm.py
+$ python3 hello_milvus.py
 ```
 *The returned results and query latency show as follows:*
 
