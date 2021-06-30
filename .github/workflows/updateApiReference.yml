@@ -137,10 +137,11 @@ jobs:
           fi
           sudo rm -fr ../../../pymilvus-orm/docs/build/html/api/api.html
           sudo cp -r ../../../pymilvus-orm/docs/build/html/output/* "./${{ github.event.inputs.tagName }}"
+          sudo chmod -R 777 .
           git add .
-          git commit -m "Update pymilvus-orm"
+          git commit -m "Update pymilvus-orm ${{ github.event.inputs.tagName }}"
           git push -f origin master
-          echo "=>Completed: Update pymilvus-orm doc repo."
+          echo "=>Completed: Update pymilvus-orm ${{ github.event.inputs.tagName }} doc repo."
       - id: update_repo_milvus_sdk_go
         name: Update milvus_sdk_go doc
         if: ${{ github.event.inputs.repoName == 'milvus-sdk-go' }}
