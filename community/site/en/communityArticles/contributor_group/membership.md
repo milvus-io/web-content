@@ -12,6 +12,7 @@ This doc outlines the various responsibilities of contributor roles in The Milvu
 | Active Contributor | Active contributor in the community     | Invited by reviewer and multiple contributions to the Milvus project | milvus-io GitHub org member                                  |
 | Reviewer      | Review contributions from other members | History of review and authorship in a subproject             | [OWNERS] file reviewer entry                                 |
 | Maintainer    | Contributions acceptance approval       | Highly experienced active reviewer and contributor to a subproject | [OWNERS] file approver entry                                 |
+| TOC members | Ensure continued health of The Milvus Project | Demonstrated responsibility and excellent technical judgement for The Milvus Project |  |
 
 
 
@@ -50,8 +51,10 @@ Reviewers are able to review code for quality and correctness on some part of a 
 
 **Requirements**
 
--   Have made over 30 commits to the codebase
--   Actively participate in code review
+-   Active contributor for at least 3 months
+-   Review for at least 5 PRs
+-   Have made over 20 commits to the codebase
+-   Nominate by maintainers or TOC members
 
 
 
@@ -63,5 +66,20 @@ Maintainers are able to both review and approve code contributions. While code r
 
 **Requirements**
 
+-   Reviewer of the codebase for at least 3 months
+-   Primary reviewer for at least 10 PRs to the codebase
 -   Main contributor to the codebase
--   Actively participate in code review
+-   Nominated by a maintainer or toc members owner 
+
+
+
+## TOC(technical oversight committee) members
+
+The TOC is elected by the community. The TOC’s work includes: 
+
+-   Ensure continued health of Milvus project
+-   Set technical direction and priorities for the community
+-   Mentor and guide maintainers, reviewers, and contributors to the subproject
+
+**Defined by**: https://github.com/orgs/milvus-io/teams/toc
+

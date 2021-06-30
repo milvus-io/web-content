@@ -6,12 +6,13 @@ id: membership.md
 
 这篇文档列出了 Milvus 社区的各种角色及其职责。
 
-| 角色               | 职责              | 要求                                            | 定义                                                         |
-| ------------------ | ----------------- | ----------------------------------------------- | ------------------------------------------------------------ |
-| Contributor        | 社区的贡献者      | 在 Milvus 项目或子项目做出过一次以上的贡献      | 在 milvus 仓库的 [All contributors 列表](https://github.com/milvus-io/milvus#all-contributors) 中列出 |
-| Active Contributor | 社区活跃的贡献者  | 做出多次贡献后被 Reviewer 邀请                  | milvus-io GitHub 组织的成员                                  |
-| Reviewer           | 审查其他成员的 PR | 在任一仓库多次 Review 和贡献代码                | [OWNERS] 文件中 reviewers 字段                               |
-| Maintainer         | 批准其他成员的 PR | 经验丰富的 Reviewer，非常清楚地了解某一部分代码 | [OWNERS] 文件中 approvers 字段                               |
+| 角色               | 职责                   | 要求                                            | 定义                                                         |
+| ------------------ | ---------------------- | ----------------------------------------------- | ------------------------------------------------------------ |
+| Contributor        | 社区的贡献者           | 在 Milvus 项目或子项目做出过一次以上的贡献      | 在 milvus 仓库的 [All contributors 列表](https://github.com/milvus-io/milvus#all-contributors) 中列出 |
+| Active Contributor | 社区活跃的贡献者       | 做出多次贡献后被 Reviewer 邀请                  | milvus-io GitHub 组织的成员                                  |
+| Reviewer           | 审查其他成员的 PR      | 在任一仓库多次 Review 和贡献代码                | [OWNERS] 文件中 reviewers 字段                               |
+| Maintainer         | 批准其他成员的 PR      | 经验丰富的 Reviewer，非常清楚地了解某一部分代码 | [OWNERS] 文件中 approvers 字段                               |
+| TOC members        | 确保Milvus项目健康发展 | 对 Milvus 项目表现出责任感和出色的技术视野      |                                                              |
 
 
 
@@ -48,8 +49,10 @@ Reviewer 负责审查代码质量和正确性，他们需要对负责的代码�
 
 **要求**
 
--   在这个目录下有 30 个以上的 commit 贡献
--   积极参与这个目录相关的 Code Review
+-   成为 Active Contributor 3 个月以上的时间
+-   参与 5 个以上 PR 的审查
+-   在这个目录下有 20 个以上的 commit 贡献
+-   由 Maintainer 或者 TOC 成员提名
 
 
 
@@ -61,5 +64,19 @@ Maintainer 负责审查和批准代码提交，主要考虑代码的依赖关系
 
 **要求**
 
--   这个目录的主要贡献者
--   积极参与这个目录相关的 Code Review
+-   成为 Reviewer 3 个月以上的时间
+-   作为主要 Reviewer 参与 10 个以上 PR 的审查
+-   这个目录代码的主要贡献者
+-   由 Maintainer 或者 TOC 成员提名
+
+
+
+## TOC(technical oversight committee) members
+
+TOC 成员从社区中投票选出，主要负责以下内容：
+
+-   确保 Milvus 项目健康发展
+-   为社区确定技术方向和事情的优先级
+-   提名以及指导 Maintainer、Reviewer 和其他贡献者
+
+**定义在**：https://github.com/orgs/milvus-io/teams/toc
