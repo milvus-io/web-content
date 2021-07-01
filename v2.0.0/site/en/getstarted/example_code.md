@@ -19,7 +19,7 @@ Python version 3.6 or higher is required. View <a href="https://wiki.python.org/
 2. Download sample code **hello_milvus.py**:
 
 ```
-$ wget https://github.com/milvus-io/pymilvus-orm/blob/v2.0.0rc1/examples/hello_milvus.py
+$ wget https://raw.githubusercontent.com/milvus-io/pymilvus-orm/v2.0.0rc1/examples/hello_milvus.py
 ```
 
 3. Scan **hello_milvus.py**. This sample code does the following:
@@ -36,17 +36,15 @@ connections.connect()
 
 - Creates a collection:
 ```
+from pymilvus_orm import schema, DataType, Collection
 dim = 128
 default_fields = [
     schema.FieldSchema(name="count", dtype=DataType.INT64, is_primary=True),
-    # Change field schema name to distinguish search result score
-    schema.FieldSchema(name="random_value", dtype=DataType.DOUBLE),
+    schema.FieldSchema(name="score", dtype=DataType.FLOAT),
     schema.FieldSchema(name="float_vector", dtype=DataType.FLOAT_VECTOR, dim=dim)
 ]
 default_schema = schema.CollectionSchema(fields=default_fields, description="test collection")
-
-print(f"\nCreate collection...")
-collection = Collection(name="hello_milvus", schema=default_schema)
+collection = Collection(name="hello_milvus", data=None, schema=default_schema)
 ```
 
 - Inserts vectors in the new collection:
