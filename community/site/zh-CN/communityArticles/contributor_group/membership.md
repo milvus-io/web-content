@@ -71,12 +71,12 @@ Maintainer 负责审查和批准代码提交，主要考虑代码的依赖关系
 
 
 
-## TOC(technical oversight committee) members
+## TSC(Technical Steering Committee) members
 
-TOC 成员从社区中投票选出，主要负责以下内容：
+TSC 成员从社区中投票选出，主要负责以下内容：
 
 -   确保 Milvus 项目健康发展
 -   为社区确定技术方向和事情的优先级
 -   提名以及指导 Maintainer、Reviewer 和其他贡献者
 
-**定义在**：https://github.com/orgs/milvus-io/teams/toc
+**定义在**：https://github.com/orgs/milvus-io/teams/tsc

@@ -73,13 +73,13 @@ Maintainers are able to both review and approve code contributions. While code r
 
 
 
-## TOC(technical oversight committee) members
+## TSC(Technical Steering Committee) members
 
-The TOC is elected by the community. The TOC’s work includes: 
+The TSC is elected by the community. The TSC’s work includes: 
 
 -   Ensure continued health of Milvus project
 -   Set technical direction and priorities for the community
--   Mentor and guide maintainers, reviewers, and contributors to the subproject
+-   Mentor and guide maintainers, reviewers, and contributors to the project
 
-**Defined by**: https://github.com/orgs/milvus-io/teams/toc
+**Defined by**: https://github.com/orgs/milvus-io/teams/tsc
 
