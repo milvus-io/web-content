@@ -64,8 +64,11 @@ $ wget https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/doc
 
 2. 启动 Milvus 分布式版：
 
-```
+```Shell
 $ docker-compose up -d
+```
+
+```Text
 Docker Compose is now in the Docker CLI, try `docker compose up`
 Creating milvus-etcd   ... done
 Creating milvus-minio  ... done
