@@ -9,7 +9,6 @@ id: membership.md
 | 角色               | 职责                   | 要求                                            | 定义                                                         |
 | ------------------ | ---------------------- | ----------------------------------------------- | ------------------------------------------------------------ |
 | Contributor        | 社区的贡献者           | 在 Milvus 项目或子项目做出过一次以上的贡献      | 在 milvus 仓库的 [All contributors 列表](https://github.com/milvus-io/milvus#all-contributors) 中列出 |
-| Active Contributor | 社区活跃的贡献者       | 做出多次贡献后被 Reviewer 邀请                  | milvus-io GitHub 组织的成员                                  |
 | Reviewer           | 审查其他成员的 PR      | 在任一仓库多次 Review 和贡献代码                | [OWNERS] 文件中 reviewers 字段                               |
 | Maintainer         | 批准其他成员的 PR      | 经验丰富的 Reviewer，非常清楚地了解某一部分代码 | [OWNERS] 文件中 approvers 字段                               |
 | TOC members        | 确保Milvus项目健康发展 | 对 Milvus 项目表现出责任感和出色的技术视野      |                                                              |
@@ -23,21 +22,6 @@ Milvus 社区欢迎各种类型的贡献，包括但不限于改进文档、改�
 **定义在**： [All contributors 列表](https://github.com/milvus-io/milvus#all-contributors)
 
 如果你为 Milvus 做了贡献却没有被列出，请[创建一个 Issue](https://github.com/milvus-io/community/issues/new)。
-
-
-
-## Active Contributor
-
-Active Contributor 是社区中继续活跃的贡献者，并因此被邀请加入 milvus-io 组织。Active Contributor 可以成为某一个 Issue 或者 PR 的负责人，可以通过加入 SIG 更加深入地参与 Milvus 的开发。
-
-**定义在**： [milvus-io GitHub 组织成员](https://github.com/orgs/milvus-io/people)
-
-**要求**
-
--   在 GitHub 上打开账号的两步验证
--   在 Milvus 项目/社区中做出多次贡献
--   订阅邮件列表 [milvus-technical-discuss@lists.lfaidata.foundation](mailto:milvus-technical-discuss@lists.lfaidata.foundation)
--   在一个或多个的子项目持续活跃
 
 
 
