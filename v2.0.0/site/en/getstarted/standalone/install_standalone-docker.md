@@ -66,8 +66,10 @@ wget https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/docke
 
 2. Start Milvus Standalone:
 
-```
+```shell
 $ docker-compose up -d
+```
+```text
 Docker Compose is now in the Docker CLI, try `docker compose up`
 Creating milvus-etcd  ... done
 Creating milvus-minio ... done

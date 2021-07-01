@@ -66,13 +66,16 @@ wget https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/docke
 ```
 2. 启动 Milvus 单机版：
 
-```
+```shell
 $ docker-compose up -d
+```
+```text
 Docker Compose is now in the Docker CLI, try `docker compose up`
 Creating milvus-etcd  ... done
 Creating milvus-minio ... done
 Creating milvus-standalone ... done
 ```
+
 *如果 Milvus 单机版启动正常，可以看到有 3 个 Docker 容器在运行（2 个为基础服务，1 个为 Milvus 服务）：*
 
 ```

@@ -8,7 +8,7 @@ group: standalone_sys
 
 # Milvus Standalone System Configurations
 
-Milvus cluster maintains many system variables that configure the operation. All configurations can be set manually before server startup. Each configuration has a default value, which can be used directly.
+Milvus standalone maintains many system variables that configure the operation. All configurations can be set manually before server startup. Each configuration has a default value, which can be used directly.
 
 
 
