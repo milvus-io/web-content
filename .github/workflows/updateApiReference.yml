@@ -84,10 +84,15 @@ jobs:
           echo "Upcomming tag name: ${{ github.event.inputs.tagName }}"
           echo "=>List all doc versions"
           ls -l
+          sudo chmod -R 777 .
           if [ -d "./${{ github.event.inputs.tagName }}" ]
           then
             echo "===tag name exists, remove all under this dir==="
             sudo rm -fr "./${{ github.event.inputs.tagName }}"
+            git add .
+            git status
+            git commit -m "clean files under ${{ github.event.inputs.repoName }} ${{ github.event.inputs.tagName }}"
+            sudo mkdir "./${{ github.event.inputs.tagName }}"
           else
             echo "===miss tag name, create this dir==="
             sudo mkdir "./${{ github.event.inputs.tagName }}"
@@ -111,9 +116,10 @@ jobs:
           # tmporarily fix pprint issue
           pip3 install pprint -i https://pypi.doubanio.com/simple/ --trusted-host pypi.douban.com
           pip3 install -r requirements.txt
+          pip3 install --upgrade protobuf
           cd docs
           # tmporarily fix PBR_VERSION issue
-          export PBR_VERSION=1.2.3 
+          export PBR_VERSION=5.6.0
           sudo apt install make
           make html
           cd build/html
@@ -127,10 +133,15 @@ jobs:
           echo "Upcomming tag name: ${{ github.event.inputs.tagName }}"
           echo "=>List all doc versions"
           ls -l
+          sudo chmod -R 777 .
           if [ -d "./${{ github.event.inputs.tagName }}" ]
           then
             echo "===tag name exists, remove all under this dir==="
             sudo rm -fr "./${{ github.event.inputs.tagName }}"
+            git add .
+            git status
+            git commit -m "clean files under ${{ github.event.inputs.repoName }} ${{ github.event.inputs.tagName }}"
+            sudo mkdir "./${{ github.event.inputs.tagName }}"
           else
             echo "===miss tag name, create this dir==="
             sudo mkdir "./${{ github.event.inputs.tagName }}"
@@ -156,10 +167,15 @@ jobs:
           echo "Upcomming tag name: ${{ github.event.inputs.tagName }}"
           echo "=>List all doc versions"
           ls -l
+          sudo chmod -R 777 .
           if [ -d "./${{ github.event.inputs.tagName }}" ]
           then
             echo "===tag name exists, remove all under this dir==="
             sudo rm -fr "./${{ github.event.inputs.tagName }}"
+            git add .
+            git status
+            git commit -m "clean files under ${{ github.event.inputs.repoName }} ${{ github.event.inputs.tagName }}"
+            sudo mkdir "./${{ github.event.inputs.tagName }}"
           else
             echo "===miss tag name, create this dir==="
             sudo mkdir "./${{ github.event.inputs.tagName }}"
@@ -188,10 +204,15 @@ jobs:
           echo "Upcomming tag name: ${{ github.event.inputs.tagName }}"
           echo "=>List all doc versions"
           ls -l
+          sudo chmod -R 777 .
           if [ -d "./${{ github.event.inputs.tagName }}" ]
           then
             echo "===tag name exists, remove all under this dir==="
             sudo rm -fr "./${{ github.event.inputs.tagName }}"
+            git add .
+            git status
+            git commit -m "clean files under ${{ github.event.inputs.repoName }} ${{ github.event.inputs.tagName }}"
+            sudo mkdir "./${{ github.event.inputs.tagName }}"
           else
             echo "===miss tag name, create this dir==="
             sudo mkdir "./${{ github.event.inputs.tagName }}"
