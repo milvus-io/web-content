@@ -111,11 +111,11 @@
       "title": "Blog",
       "items": [
         {
-          "time": "January 5, 2021",
-          "link": "https://zilliz.com/blog/Vector-Similarity-Search-Hides-in-Plain-View",
-          "title": "Vector Similarity Search Hides in Plain View",
-          "abstract": "Discover what vector similarity search is, its various applications, and the public resources making artificial intelligence more accessible than ever.",
-          "imgSrc": "https://zillizstorage.blob.core.windows.net/zilliz-assets/zilliz-assets/assets/small_plainview_703d8497ca.jpg?38953.77500005998"
+          "time": "June 29, 2021",
+          "link": "https://zilliz.com/blog/milvus2.0-redefining-vector-database",
+          "title": "Milvus 2.0: Redefining Vector Database",
+          "abstract": "Milvus 2.0 is available now. This refactored, cloud-native version powers image/video search, chatbots, and many more AI applications.",
+          "imgSrc": "https://zillizstorage.blob.core.windows.net/zilliz-assets/zilliz-assets/assets/2_0_cover_bbc582b347.jpg"
         }
       ]
     }
