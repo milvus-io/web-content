@@ -84,6 +84,7 @@ $ python3 hello_milvus.py
 ![Returned results](../../../assets/returned_results.png)
 
 
+
 <br/>
 
 
