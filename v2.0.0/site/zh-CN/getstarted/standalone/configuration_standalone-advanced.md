@@ -18,7 +18,7 @@ Milvus standalone maintains many system variables that configure the operation. 
 
 
 
-If you are an administrator of a Milvus cluster, you may access the following configurations to maintain the cluster operation. You can set these configurations in **milvus.yaml**.
+If you are an administrator of Milvus, you may access the following configurations to maintain the system operation. You can set these configurations in **milvus.yaml**.
 
 ## etcd Configurations
 

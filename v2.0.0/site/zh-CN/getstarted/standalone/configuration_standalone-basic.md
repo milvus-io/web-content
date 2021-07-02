@@ -15,7 +15,7 @@ Milvus standalone maintains many system variables that configure the operation. 
 <div class="tab-wrapper"><a href="configuration_standalone-basic.md" class='active '>Basic Configurations</a><a href="configuration_standalone-advanced.md" class=''>Advanced Configurations</a></div>
 
 
-If you are an entry-level user of a Milvus Cluster, you only need to change the following two configurations to primarily adapt Milvus to your test / development / production environment.
+If you are an entry-level user of Milvus, you only need to change the following two configurations to primarily adapt Milvus to your test / development / production environment.
 
 ## Log Configurations
 
