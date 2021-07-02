@@ -1,13 +1,13 @@
 ---
 id: install_cluster-helm.md
-label: Install with Kubernetes
+label: Install on Kubernetes
 order: 1
 group: cluster
 ---
 
 # Install Milvus Cluster
 
-You can install Milvus cluster with Docker Compose or Kubernetes.
+You can install Milvus cluster with Docker Compose or on Kubernetes.
 
 You can also [build Milvus from source code](https://github.com/milvus-io/milvus#to-start-developing-milvus).
 
@@ -15,7 +15,7 @@ You can also [build Milvus from source code](https://github.com/milvus-io/milvus
 Installing Milvus with Docker Compose can only be used for testing and cannot be used in production.
 </div>
 
-<div class="tab-wrapper"><a href="install_cluster-docker.md" class=''>Install with Docker Compose</a><a href="install_cluster-helm.md" class='active '>Install with Kubernetes</a></div>
+<div class="tab-wrapper"><a href="install_cluster-docker.md" class=''>Install with Docker Compose</a><a href="install_cluster-helm.md" class='active '>Install on Kubernetes</a></div>
 
 ## Prerequisites
 - Kubernetes version 1.14.0 or higher is required.
