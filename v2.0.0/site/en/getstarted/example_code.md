@@ -39,12 +39,14 @@ connections.connect()
 from pymilvus_orm import schema, DataType, Collection
 dim = 128
 default_fields = [
-    schema.FieldSchema(name="count", dtype=DataType.INT64, is_primary=True),
-    schema.FieldSchema(name="score", dtype=DataType.FLOAT),
-    schema.FieldSchema(name="float_vector", dtype=DataType.FLOAT_VECTOR, dim=dim)
+    FieldSchema(name="count", dtype=DataType.INT64, is_primary=True),
+    FieldSchema(name="random_value", dtype=DataType.DOUBLE),
+    FieldSchema(name="float_vector", dtype=DataType.FLOAT_VECTOR, dim=dim)
 ]
-default_schema = schema.CollectionSchema(fields=default_fields, description="test collection")
-collection = Collection(name="hello_milvus", data=None, schema=default_schema)
+default_schema = CollectionSchema(fields=default_fields, description="test collection")
+
+print(f"\nCreate collection...")
+collection = Collection(name="hello_milvus", schema=default_schema)
 ```
 
 - Inserts vectors in the new collection:
@@ -81,13 +83,13 @@ res = collection.search(
 
 4. Run **hello_milvus.py**:
 ```
-$ python3 hello_pymilvus_orm.py
+$ python3 hello_pymilvus.py
 ```
 
 *The returned results and query latency show as follows:*
 
 
-![Returned results](../../../assets/returned_results.png)
+![Returned results](../../../assets/hello_world.png)
 
 <br/>
 
