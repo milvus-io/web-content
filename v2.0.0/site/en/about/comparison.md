@@ -51,9 +51,9 @@ Object relational mapping (ORM) allows users to focus more on the upper-level bu
 <table class="comparison">
 <thead>
 	<tr>
-		<th>&nbsp;</th>
-		<th>Milvus 2.0</th>
-		<th>Milvus 1.x</th>
+		<th class="width20">&nbsp;</th>
+		<th class="width40">Milvus 2.0</th>
+		<th class="width40">Milvus 1.x</th>
 	</tr>
 </thead>
 	<tr>
@@ -104,7 +104,7 @@ Object relational mapping (ORM) allows users to focus more on the upper-level bu
 	</tr>
 	<tr>
 		<th>SDKs</th>
-		<td><li>Python</li><li>Go (in planning)</li><li>RESTful (in planning)</li><li>C++ (in planning)</li></td>
+		<td><li>Python</li><li>Go (in planning)</li><li>Java (in planning)</li><li>RESTful (in planning)</li><li>C++ (in planning)</li></td>
 		<td><li>Python</li><li>Java</li><li>Go</li><li>RESTful</li><li>C++</li></td>
 	</tr>
 	<tr>
