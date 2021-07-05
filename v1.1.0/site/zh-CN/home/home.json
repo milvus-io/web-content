@@ -1,18 +1,18 @@
 {
         "section1": {
           "order": 0,
-          "title": "Get Started",
+          "title": "快速开始",
           "items": [
             {
               "title": "启动 CPU 版 Milvus",
-              "key": "stand-alone",
-              "btnLabel": "Learn to build",
+              "key": "cpu",
+              "btnLabel": "开始安装",
               "link": "milvus_docker-cpu.md"
             },
             {
               "title": "启动 GPU 版 Milvus",
-              "key": "Cluster",
-              "btnLabel": "Learn to build",
+              "key": "gpu",
+              "btnLabel": "开始安装",
               "link": "milvus_docker-gpu.md"
             },
               {
@@ -36,7 +36,7 @@
           "title": "推荐阅读",
           "items": [
             {
-              "label": "Get started",
+              "label": "快速开始",
               "list": [
                 {
                   "text": "启动 CPU 版 Milvus",
@@ -98,18 +98,18 @@
         },
         "section4": {
           "loadBtn": {
-            "label": "See More Blogs",
+            "label": "更多内容",
             "isExternal": true,
             "link": "https://zilliz.com/blog"
           },
           "title": "博客文章",
           "items": [
             {
-              "time": "January 13, 2021",
-              "link": "https://zilliz.com/blog/Milvus-Is-an-Open-Source-Scalable-Vector-Database",
-              "title": "Milvus Is an Open-Source Scalable Vector Database",
-              "abstract": "Artificial intelligence makes it possible to extract deep insights from massive unstructured datasets. By converting abstract data like video and audio into vectors, a conceptual task becomes a rigorous mathematical one well suited for machines. Milvus is a vector data management platform that is the ideal backbone for your next AI project.",
-              "imgSrc": "https://zillizstorage.blob.core.windows.net/zilliz-assets/zilliz-assets/assets/small_milvus_5b2cdec665.jpg?19189.8199999996.png"
+            "time": "January 5, 2021",
+            "link": "https://zilliz.com/blog/Vector-Similarity-Search-Hides-in-Plain-View",
+            "title": "Vector Similarity Search Hides in Plain View",
+            "abstract": "Discover what vector similarity search is, its various applications, and the public resources making artificial intelligence more accessible than ever.",
+            "imgSrc": "https://zillizstorage.blob.core.windows.net/zilliz-assets/zilliz-assets/assets/small_plainview_703d8497ca.jpg?38953.77500005998"
             }
           ]
         }
