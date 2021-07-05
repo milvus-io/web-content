@@ -1,0 +1,100 @@
+name: Manually triggered workflow(branch event)
+
+on:
+  workflow_dispatch:
+    inputs:
+      branchName:
+        description: 'Branch name'
+        required: true
+      repoName:
+        description: 'Repo name'
+        required: true
+
+jobs:
+  update_branch:
+    runs-on: ubuntu-latest
+    steps:
+      - id: clone_pymilvus_orm_repo
+        name: Git clone pymilvus-orm repo
+        run: |
+          sudo git clone https://.:${{ secrets.GH_TOKEN }}@github.com/milvus-io/${{ github.event.inputs.repoName }}.git
+          git config --global user.email "Milvus-doc-bot@zilliz.com"
+          git config --global user.name "Milvus-doc-bot"
+          sudo chmod -R 777 ${{ github.event.inputs.repoName }}
+          cd ./${{ github.event.inputs.repoName }}
+          git checkout -f ${{ github.event.inputs.branchName }}
+          git status
+          cd ..
+      - id: update_repo_directory
+        name: Git clone and update API reference doc directory
+        run: |
+          sudo git clone https://.:${{ secrets.ACCESS_TOKEN }}@github.com/${{ github.repository }}.git
+          git config --global user.email "zhen.chen@zilliz.com"
+          git config --global user.name "czhen-zilliz" 
+          sudo chmod -R 777 ${{ github.event.repository.name }}
+          cd ${{ github.event.repository.name }}
+          git checkout -f macos
+          if [ ! -d "./APIReference" ]
+          then
+          echo "=>No APIReference directory, create it."
+            mkdir APIReference
+          fi
+          cd APIReference
+          if [ ! -d "./${{ github.event.inputs.repoName }}" ]
+          then
+            echo "=>No ${{ github.event.inputs.repoName }} doc directory, create it."
+            mkdir ${{ github.event.inputs.repoName }}
+          fi
+          cd ../../
+          echo "=>Completed: Git clone and update API reference doc directory."
+      - id: update_repo_pymilvus_orm
+        name: Update pymilvus-orm doc repo
+        if: ${{ github.event.inputs.repoName == 'pymilvus-orm' }}
+        run: |
+          sudo chmod -R 777 ${{ github.event.inputs.repoName }}
+          cd ${{ github.event.inputs.repoName }}
+          sudo apt update
+          sudo apt install python3
+          sudo apt install python3-pip
+          python3 --version
+          pip3 --version
+          # tmporarily fix pprint issue
+          pip3 install pprint -i https://pypi.doubanio.com/simple/ --trusted-host pypi.douban.com
+          pip3 install -r requirements.txt
+          pip3 install --upgrade protobuf
+          cd docs
+          # tmporarily fix PBR_VERSION issue
+          export PBR_VERSION=5.6.0
+          sudo apt install make
+          make html
+          cd build/html
+          sudo mv ../../../../${{ github.event.repository.name }}/pymilvus-fs.md ./pymilvus-fs.js
+          curl -sL https://deb.nodesource.com/setup_14.x | sudo bash -
+          sudo apt -y install nodejs
+          node  -v
+          sudo npm i node-html-parser
+          node ./pymilvus-fs.js
+          cd ../../../../${{ github.event.repository.name }}/APIReference/pymilvus-orm
+          echo "Upcomming tag name: ${{ github.event.inputs.branchName }}"
+          echo "=>List all doc versions"
+          ls -l
+          sudo chmod -R 777 .
+          if [ -d "./${{ github.event.inputs.branchName }}" ]
+          then
+            echo "===tag name exists, remove all under this dir==="
+            sudo rm -fr "./${{ github.event.inputs.branchName }}"
+            git add .
+            git status
+            git commit -m "clean files under ${{ github.event.inputs.repoName }} ${{ github.event.inputs.branchName }}"
+            sudo mkdir "./${{ github.event.inputs.branchName }}"
+          else
+            echo "===miss tag name, create this dir==="
+            sudo mkdir "./${{ github.event.inputs.branchName }}"
+          fi
+          sudo rm -fr ../../../pymilvus-orm/docs/build/html/api/api.html
+          sudo cp -r ../../../pymilvus-orm/docs/build/html/output/* "./${{ github.event.inputs.branchName }}"
+          sudo chmod -R 777 .
+          git add .
+          git commit -m "Update pymilvus-orm ${{ github.event.inputs.branchName }}"
+          git push -f origin master
+          echo "=>Completed: Update pymilvus-orm ${{ github.event.inputs.branchName }} doc repo."
