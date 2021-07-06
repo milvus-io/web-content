@@ -24,7 +24,7 @@ $ wget https://raw.githubusercontent.com/milvus-io/pymilvus-orm/v2.0.0rc1/exampl
 3. 浏览 **hello_milvus.py**，这个示例程序将：
 - 导入 pymilvus 包
 ```
-from pymilvus_orm import *
+from pymilvus_orm import connections, FieldSchema, CollectionSchema, DataType, Collection
 ```
 
 - 连接 Milvus 服务端
@@ -34,7 +34,6 @@ connections.connect()
 
 - 创建一个 collection：
 ```
-from pymilvus_orm import schema, DataType, Collection
 dim = 128
 default_fields = [
     FieldSchema(name="count", dtype=DataType.INT64, is_primary=True),

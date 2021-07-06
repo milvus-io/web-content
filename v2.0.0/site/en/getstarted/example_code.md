@@ -26,7 +26,7 @@ $ wget https://raw.githubusercontent.com/milvus-io/pymilvus-orm/v2.0.0rc1/exampl
 
 - Imports the pymilvus package:
 ```
-from pymilvus_orm import *
+from pymilvus_orm import connections, FieldSchema, CollectionSchema, DataType, Collection
 ```
 
 - Connects to the Milvus server:
@@ -36,7 +36,6 @@ connections.connect()
 
 - Creates a collection:
 ```
-from pymilvus_orm import schema, DataType, Collection
 dim = 128
 default_fields = [
     FieldSchema(name="count", dtype=DataType.INT64, is_primary=True),
