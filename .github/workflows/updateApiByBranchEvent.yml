@@ -28,12 +28,11 @@ jobs:
       - id: update_repo_directory
         name: Git clone and update API reference doc directory
         run: |
-          sudo git clone https://.:${{ secrets.ACCESS_TOKEN }}@github.com/${{ github.repository }}.git
-          git config --global user.email "zhen.chen@zilliz.com"
-          git config --global user.name "czhen-zilliz" 
+          sudo git clone https://.:${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}.git
+          git config --global user.email "Milvus-doc-bot@zilliz.com"
+          git config --global user.name "Milvus-doc-bot"
           sudo chmod -R 777 ${{ github.event.repository.name }}
           cd ${{ github.event.repository.name }}
-          git checkout -f macos
           if [ ! -d "./APIReference" ]
           then
           echo "=>No APIReference directory, create it."
