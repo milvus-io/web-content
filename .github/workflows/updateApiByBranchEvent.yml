@@ -78,22 +78,22 @@ jobs:
           echo "=>List all doc versions"
           ls -l
           sudo chmod -R 777 .
-          if [ -d "./${{ github.event.inputs.branchName }}" ]
+          if [ -d "./v${{ github.event.inputs.branchName }}" ]
           then
             echo "===tag name exists, remove all under this dir==="
-            sudo rm -fr "./${{ github.event.inputs.branchName }}"
+            sudo rm -fr "./v${{ github.event.inputs.branchName }}"
             git add .
             git status
             git commit -m "clean files under ${{ github.event.inputs.repoName }} ${{ github.event.inputs.branchName }}"
-            sudo mkdir "./${{ github.event.inputs.branchName }}"
+            sudo mkdir "./v${{ github.event.inputs.branchName }}"
           else
             echo "===miss tag name, create this dir==="
-            sudo mkdir "./${{ github.event.inputs.branchName }}"
+            sudo mkdir "./v${{ github.event.inputs.branchName }}"
           fi
           sudo rm -fr ../../../pymilvus-orm/docs/build/html/api/api.html
           sudo cp -r ../../../pymilvus-orm/docs/build/html/output/* "./${{ github.event.inputs.branchName }}"
           sudo chmod -R 777 .
           git add .
-          git commit -m "Update pymilvus-orm ${{ github.event.inputs.branchName }}"
+          git commit -m "Update pymilvus-orm v${{ github.event.inputs.branchName }}"
           git push -f origin master
-          echo "=>Completed: Update pymilvus-orm ${{ github.event.inputs.branchName }} doc repo."
+          echo "=>Completed: Update pymilvus-orm v${{ github.event.inputs.branchName }} doc repo."
