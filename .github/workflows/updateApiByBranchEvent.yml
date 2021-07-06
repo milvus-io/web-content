@@ -91,7 +91,7 @@ jobs:
             sudo mkdir "./v${{ github.event.inputs.branchName }}"
           fi
           sudo rm -fr ../../../pymilvus-orm/docs/build/html/api/api.html
-          sudo cp -r ../../../pymilvus-orm/docs/build/html/output/* "./${{ github.event.inputs.branchName }}"
+          sudo cp -r ../../../pymilvus-orm/docs/build/html/output/* "./v${{ github.event.inputs.branchName }}"
           sudo chmod -R 777 .
           git add .
           git commit -m "Update pymilvus-orm v${{ github.event.inputs.branchName }}"
