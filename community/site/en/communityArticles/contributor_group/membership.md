@@ -9,9 +9,9 @@ This doc outlines the various responsibilities of contributor roles in The Milvu
 | Role          | Responsibilities                        | Requirements                                                 | Defined by                                                   |
 | ------------- | --------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | Contributor   | Contributor in the community            | Made more than one contributions to the Milvus project       | List in [All contributors](https://github.com/milvus-io/milvus#all-contributors) |
-| Active Contributor | Active contributor in the community     | Invited by reviewer and multiple contributions to the Milvus project | milvus-io GitHub org member                                  |
 | Reviewer      | Review contributions from other members | History of review and authorship in a subproject             | [OWNERS] file reviewer entry                                 |
 | Maintainer    | Contributions acceptance approval       | Highly experienced active reviewer and contributor to a subproject | [OWNERS] file approver entry                                 |
+| TSC members | Ensure continued health of The Milvus Project | Demonstrated responsibility and excellent technical judgement for The Milvus Project |  |
 
 
 
@@ -27,20 +27,6 @@ If you made contributions but not in this list, please [file an issue](https://g
 
 
 
-## Active Contributor
-
-Members are continuously active contributors in the community. They can have issues and PRs assigned to them, participate in SIGs through GitHub teams, and pre-submit tests are automatically run for their PRs. Members are expected to remain active contributors to the community.
-
-**Defined by**: https://github.com/orgs/milvus-io/people
-
-**Requirements**
-
--   Enabled [two-factor authentication](https://help.github.com/articles/about-two-factor-authentication) on their GitHub account
--   Have made multiple contributions to the project or community
--   Subscribed to [milvus-technical-discuss@lists.lfaidata.foundation](mailto:milvus-technical-discuss@lists.lfaidata.foundation)
--   Actively contributing to 1 or more subprojects
-
-
 
 ## Reviewer
 
@@ -50,8 +36,10 @@ Reviewers are able to review code for quality and correctness on some part of a 
 
 **Requirements**
 
--   Have made over 30 commits to the codebase
--   Actively participate in code review
+-   Active contributor for at least 3 months
+-   Review for at least 5 PRs
+-   Have made over 20 commits to the codebase
+-   Nominate by maintainers or TSC members
 
 
 
@@ -63,5 +51,20 @@ Maintainers are able to both review and approve code contributions. While code r
 
 **Requirements**
 
+-   Reviewer of the codebase for at least 3 months
+-   Primary reviewer for at least 10 PRs to the codebase
 -   Main contributor to the codebase
--   Actively participate in code review
+-   Nominated by a maintainer or tsc members owner 
+
+
+
+## TSC(Technical Steering Committee) members
+
+The TSC is elected by the community. The TSC’s work includes: 
+
+-   Ensure continued health of Milvus project
+-   Set technical direction and priorities for the community
+-   Mentor and guide maintainers, reviewers, and contributors to the project
+
+**Defined by**: https://github.com/orgs/milvus-io/teams/tsc
+
