@@ -14,7 +14,7 @@ It is available in:
 Compatibility: 
 | Milvus version | Python SDK version | Java SDK version | Go SDK version |
 | ----------- | ----------- | -----------  | ----------- |
-| 2.0.0-RC1   | 2.0.0-RC1   | Coming soon  | Coming soon |
+| 2.0.0-RC1   | 2.0.0rc1   | Coming soon  | Coming soon |
 
 Milvus 2.0.0-RC1 is the preview version of 2.0.0. It introduces Golang as the distributed layer development language and a new cloud-native distributed design. The latter brings significant improvements to scalability, elasticity, and functionality. 
 
