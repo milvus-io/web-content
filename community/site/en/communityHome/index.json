@@ -182,14 +182,14 @@
         "iconType": "event",
         "title": "Event",
         "desc": "Build the cloud-native vector database through community collaboration.",
-        "link": "#",
+        "link": "https://zilliz.com/events",
         "label": "MORE EVENTS"
       },
       {
         "iconType": "video",
         "title": "Video",
         "desc": "Build the cloud-native vector database through community collaboration.",
-        "link": "#",
+        "link": "https://www.youtube.com/channel/UCMCo_F7pKjMHBlfyxwOPw-g",
         "label": "MORE VIDEOS"
       }
     ]
