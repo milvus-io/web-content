@@ -1,0 +1,425 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="python" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="python" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Tutorial &mdash; pymilvus-orm 1.0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script type="text/javascript" src="_static/clipboard.min.js"></script>
+        <script type="text/javascript" src="_static/copybutton.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="API Reference" href="api/api.html" />
+    <link rel="prev" title="Installation" href="install.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> pymilvus-orm
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#connect-to-milvus">Connect to Milvus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#collection">Collection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#create-collection">Create Collection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#create-partition">Create Partition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#insert-entities">Insert Entities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#search">Search</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#search-entities-by-vector-similarity">Search Entities by Vector Similarity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#drop-a-partition">Drop a Partition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#drop-a-collection">Drop a Collection</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api/api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="param.html">Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="results.html">Search results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contribute.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About this documentation</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">pymilvus-orm</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Tutorial</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/tutorial.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+
+           <div itemprop="articleBody">
+            
+  <section id="tutorial">
+<h1>Tutorial<a class="headerlink" href="#tutorial" title="Permalink to this headline">¶</a></h1>
+<p>This is a basic introduction to Milvus by PyMilvus-ORM.</p>
+<p>For a runnable python script,
+checkout <a class="reference external" href="https://github.com/milvus-io/pymilvus-orm/blob/main/examples/example.py">example.py</a> on PyMilvus-ORM Github,
+or <a class="reference external" href="https://milvus.io/docs/v2.0.0/example_code.md">hello milvus</a> on Milvus official website. It's a good recommended
+start to get started with Milvus and PyMilvus-ORM as well.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Here we use float vectors as example vector field data, if you want to learn example about binary vectors, see
+<a class="reference external" href="https://github.com/milvus-io/pymilvus-orm/blob/main/examples/collection.py">binary vector example</a>.</p>
+</div>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
+<p>Before we start, there are some prerequisites.</p>
+<p>Make sure that:</p>
+<ul class="simple">
+<li><p>You have a running Milvus instance.</p></li>
+<li><p>PyMilvus-ORM is correctly <a class="reference internal" href="install.html"><span class="doc">Installation</span></a>.</p></li>
+</ul>
+</section>
+<section id="connect-to-milvus">
+<h2>Connect to Milvus<a class="headerlink" href="#connect-to-milvus" title="Permalink to this headline">¶</a></h2>
+<p>First of all, we need to import <cite>pymilvus-orm</cite>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pymilvus_orm</span> <span class="k">import</span> <span class="n">connections</span>
+</pre></div>
+</div>
+<p>Then, we can make connection with Milvus server.
+By default Milvus runs on localhost in port 19530, so you can use default value to connect to Milvus.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">host</span> <span class="o">=</span> <span class="s1">&#39;127.0.0.1&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">port</span> <span class="o">=</span> <span class="s1">&#39;19530&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">connections</span><span class="o">.</span><span class="n">add_connection</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="n">host</span><span class="p">,</span> <span class="s2">&quot;port&quot;</span><span class="p">:</span> <span class="n">port</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">connections</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">alias</span><span class="o">=</span><span class="s1">&#39;default&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>After connecting, we can communicate with Milvus in the following ways. If you are confused about the
+terminology, see <a class="reference external" href="https://milvus.io/docs/v2.0.0/glossary.md">Milvus Terminology</a> for explanations.</p>
+</section>
+<section id="collection">
+<h2>Collection<a class="headerlink" href="#collection" title="Permalink to this headline">¶</a></h2>
+<p>Now let's create a new collection. Before we start, we can list all the collections already exist. For a brand
+new Milvus running instance, the result should be empty.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pymilvus_orm</span> <span class="k">import</span> <span class="n">list_collections</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">list_collections</span><span class="p">()</span>
+<span class="go">[]</span>
+</pre></div>
+</div>
+</section>
+<section id="create-collection">
+<h2>Create Collection<a class="headerlink" href="#create-collection" title="Permalink to this headline">¶</a></h2>
+<p>To create collection, we could provide the schema for it.</p>
+<p>In this tutorial, we will create a collection with three fields: <cite>id</cite>, <cite>year</cite> and <cite>embedding</cite>.</p>
+<p>The type of 'id' field is <cite>int64</cite>, and it is set as primary field.
+The type of <cite>year</cite> field is <cite>int64</cite>, and the type of <cite>embedding</cite> is <cite>FLOAT_VECTOR</cite> whose <cite>dim</cite> is 128.</p>
+<p>Now we can create a collection:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pymilvus_orm</span> <span class="k">import</span> <span class="n">Collection</span><span class="p">,</span> <span class="n">DataType</span><span class="p">,</span> <span class="n">FieldSchema</span><span class="p">,</span> <span class="n">CollectionSchema</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dim</span> <span class="o">=</span> <span class="mi">128</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">id_field</span> <span class="o">=</span> <span class="n">FieldSchema</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">DataType</span><span class="o">.</span><span class="n">INT64</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;primary_field&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">year_field</span> <span class="o">=</span> <span class="n">FieldSchema</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;year&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">DataType</span><span class="o">.</span><span class="n">INT64</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;year&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">embedding_field</span> <span class="o">=</span> <span class="n">FieldSchema</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;embedding&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">DataType</span><span class="o">.</span><span class="n">FLOAT_VECTOR</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="n">dim</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">schema</span> <span class="o">=</span> <span class="n">CollectionSchema</span><span class="p">(</span><span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="n">id_field</span><span class="p">,</span> <span class="n">year_field</span><span class="p">,</span> <span class="n">embedding_field</span><span class="p">],</span> <span class="n">primary_field</span><span class="o">=</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="n">auto_id</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s1">&#39;desc of collection&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">collection_name</span> <span class="o">=</span> <span class="s2">&quot;tutorial&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span> <span class="o">=</span> <span class="n">Collection</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">collection_name</span><span class="p">,</span> <span class="n">schema</span><span class="o">=</span><span class="n">schema</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Then you can list collections and 'tutorial' will be in the result.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">list_collections</span><span class="p">()</span>
+<span class="go">[&#39;tutorial&#39;]</span>
+</pre></div>
+</div>
+<p>You can also get info of the collection.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span><span class="o">.</span><span class="n">description</span>
+<span class="go">&quot;desc of collection&quot;</span>
+</pre></div>
+</div>
+<p>This tutorial is a basic intro tutorial, building index won't be covered by this tutorial.
+If you want to go further into Milvus with indexes, it's recommended to check our
+<a class="reference external" href="https://github.com/milvus-io/pymilvus-orm/blob/main/examples/example_index.py">index examples</a>.</p>
+<p>If you're already known about indexes from <code class="docutils literal notranslate"><span class="pre">index</span> <span class="pre">examples</span></code>, and you want a full lists of params supported
+by PyMilvus-ORM, you check out <a class="reference external" href="https://milvus.io/api-reference/pymilvus-orm/v2.0.0rc1/param.html">Index</a>
+chapter of the PyMilvus-ORM documentation.</p>
+<p>Further more, if you want to get a thorough view of indexes, check our official website for
+<a class="reference external" href="https://milvus.io/docs/index.md">Vector Index</a>.</p>
+</section>
+<section id="create-partition">
+<h2>Create Partition<a class="headerlink" href="#create-partition" title="Permalink to this headline">¶</a></h2>
+<p>If you don't create a partition, there will be a default one called &quot;<code class="docutils literal notranslate"><span class="pre">_default</span></code>&quot;, all the entities will be
+inserted into the &quot;<code class="docutils literal notranslate"><span class="pre">_default</span></code>&quot; partition. You can check it by <code class="docutils literal notranslate"><span class="pre">Collection.partitions()</span></code></p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span><span class="o">.</span><span class="n">partitions</span>
+<span class="go">[{&quot;name&quot;: &quot;_default&quot;, &quot;description&quot;: &quot;&quot;, &quot;num_entities&quot;: 0}]</span>
+</pre></div>
+</div>
+<p>You can provide a partition name to create a new partition.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span><span class="o">.</span><span class="n">create_partition</span><span class="p">(</span><span class="s2">&quot;new_partition&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span><span class="o">.</span><span class="n">partitions</span>
+<span class="go">[{&quot;name&quot;: &quot;_default&quot;, &quot;description&quot;: &quot;&quot;, &quot;num_entities&quot;: 0}, {&quot;name&quot;: &quot;new_partition&quot;, &quot;description&quot;: &quot;&quot;, &quot;num_entities&quot;: 0}]</span>
+</pre></div>
+</div>
+</section>
+<section id="insert-entities">
+<h2>Insert Entities<a class="headerlink" href="#insert-entities" title="Permalink to this headline">¶</a></h2>
+<p>An entity is a group of fields that corresponds to real world objects. In this tutorial, collection has three fields.
+Here is an example of 30 entities structured in list of list.
+.. note:</p>
+<blockquote>
+<div><p>The field <cite>id</cite> was set as primary and auto_id above, so we shall not input the value for it when inserting.</p>
+</div></blockquote>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">random</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nb</span> <span class="o">=</span> <span class="mi">30</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">years</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nb</span><span class="p">)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">embeddings</span> <span class="o">=</span> <span class="p">[[</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dim</span><span class="p">)]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nb</span><span class="p">)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">entities</span> <span class="o">=</span> <span class="p">[</span><span class="n">years</span><span class="p">,</span> <span class="n">embeddings</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">entities</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="search">
+<h2>Search<a class="headerlink" href="#search" title="Permalink to this headline">¶</a></h2>
+<section id="search-entities-by-vector-similarity">
+<h3>Search Entities by Vector Similarity<a class="headerlink" href="#search-entities-by-vector-similarity" title="Permalink to this headline">¶</a></h3>
+<p>You can get entities by vector similarity. Assuming we have a <code class="docutils literal notranslate"><span class="pre">embedding_A</span></code> like below, and we want to get top 2 records whose year is greater than 20
+that are most similar with it.</p>
+<p>In below example, we search the collection on <code class="docutils literal notranslate"><span class="pre">embedding</span></code> field.
+.. note:</p>
+<blockquote>
+<div><p>Before searching, we need to load data into memory.</p>
+</div></blockquote>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nq</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">embedding_A</span> <span class="o">=</span> <span class="p">[[</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dim</span><span class="p">)]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nq</span><span class="p">)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">anns_field</span> <span class="o">=</span> <span class="s2">&quot;embedding&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">search_params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;metric_type&quot;</span><span class="p">:</span> <span class="s2">&quot;L2&quot;</span><span class="p">,</span> <span class="s2">&quot;params&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;nprobe&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">}}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">limit</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">expr</span> <span class="o">=</span> <span class="s2">&quot;year &gt; 20&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">results</span> <span class="o">=</span> <span class="n">collection</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">embedding_A</span><span class="p">,</span> <span class="n">anns_field</span><span class="p">,</span> <span class="n">search_params</span><span class="p">,</span> <span class="n">limit</span><span class="p">,</span> <span class="n">expr</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For more about the parameter expr, please refer to: <a class="reference external" href="https://github.com/milvus-io/milvus/blob/master/docs/design_docs/query_boolean_expr.md">https://github.com/milvus-io/milvus/blob/master/docs/design_docs/query_boolean_expr.md</a></p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If the collection is index-built, user need to specify search param, and pass parameter <cite>search_params</cite> like: <cite>collection.search(..., search_params={...})</cite>.
+You can refer to <a class="reference external" href="https://milvus.io/cn/api-reference/pymilvus-orm/v2.0.0rc1/param.html">Index params</a> for more details.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If parameter <cite>partition_names</cite> is specified, milvus executes search request on these partition instead of whole collection.</p>
+</div>
+<p>The returned <code class="docutils literal notranslate"><span class="pre">results</span></code> is a 2-D like structure, 1 for 1 entity querying, 2 for top 2. For more clarity, we obtain
+the film as below. If you want to know how to deal with search result in a better way, you can refer to
+<a class="reference external" href="https://milvus.io/cn/api-reference/pymilvus-orm/v2.0.0rc1/results.html">search result</a> in PyMilvus-ORM doc.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">embedding_1</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">embedding_2</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Then how do we get ids, distances and fields? It's as below.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Because vectors are randomly generated, so the retrieved vector id and distance may differ.</p>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">embedding_1</span><span class="o">.</span><span class="n">id</span>  <span class="c1"># id</span>
+<span class="go">1615279498011637002</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">embedding_1</span><span class="o">.</span><span class="n">distance</span>  <span class="c1"># distance</span>
+<span class="go">1.0709768533706665</span>
+</pre></div>
+</div>
+</section>
+<section id="drop-a-partition">
+<h3>Drop a Partition<a class="headerlink" href="#drop-a-partition" title="Permalink to this headline">¶</a></h3>
+<p>You can also drop a partition.</p>
+<div class="admonition danger">
+<p class="admonition-title">Danger</p>
+<p>Once you drop a partition, all the data in this partition will be deleted too.</p>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span><span class="o">.</span><span class="n">drop_partition</span><span class="p">(</span><span class="s2">&quot;new_partition&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="drop-a-collection">
+<h3>Drop a Collection<a class="headerlink" href="#drop-a-collection" title="Permalink to this headline">¶</a></h3>
+<p>Finally, you can drop an entire collection.</p>
+<div class="admonition danger">
+<p class="admonition-title">Danger</p>
+<p>Once you drop a collection, all the data in this collection will be deleted too.</p>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span><span class="o">.</span><span class="n">drop</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+           
+          </div>
+    <a href="https://github.com/milvus-io/pymilvus">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://github.blog/wp-content/uploads/2008/12/forkme_right_green_007200.png?resize=149%2C149" class="attachment-full size-full" alt="Fork me on GitHub" data-recalc-dims="1">
+    </a>
+
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="api/api.html" class="btn btn-neutral float-right" title="API Reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="install.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019-2021 Zilliz. All rights reserved.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
