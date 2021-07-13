@@ -6,13 +6,13 @@
         {
           "title": "启动单机版 Milvus",
           "key": "stand-alone",
-          "btnLabel": "Learn to build",
+          "btnLabel": "开始安装",
           "link": "install_standalone-docker.md"
         },
         {
           "title": "启动分布式版 Milvus",
           "key": "Cluster",
-          "btnLabel": "Learn to build",
+          "btnLabel": "开始安装",
           "link": "install_cluster-docker.md"
         },
           {
