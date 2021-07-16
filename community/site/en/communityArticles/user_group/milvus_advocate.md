@@ -12,9 +12,9 @@ Learn how you can become a **Milvus Honored Advocate** and **Milvus Top Advocate
 
 ### Benefits：
 
-| Benefits              | Details      |
-| :-------------------- | ------------ |
-| Community distinction | Milvus Badge |
+| Benefits    | Details                                         |
+| :---------- | ----------------------------------------------- |
+| Milvus swag | Milvus T-shirts, stickers & other limited items |
 
 \*Shipping may be unavailable in some regions due to the ongoing coronavirus pandemic. Electronic gifts may be sent out in lieu of physical gifts in these regions.
 
