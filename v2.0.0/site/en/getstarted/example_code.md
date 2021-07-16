@@ -10,7 +10,7 @@ After the Milvus server boots successfully, test the platform using our Python s
 1. Install pymilvus_orm and its dependencies:
 
 ```
-pip install pymilvus-orm==2.0.0rc1
+pip install pymilvus-orm==2.0.0rc2
 ```
 <div class="alert note">
 Python version 3.6 or higher is required. View <a href="https://wiki.python.org/moin/BeginnersGuide/Download">Python documentation</a> for information about installing the correct version for your system.
@@ -19,7 +19,7 @@ Python version 3.6 or higher is required. View <a href="https://wiki.python.org/
 2. Download sample code **hello_milvus.py**:
 
 ```
-$ wget https://raw.githubusercontent.com/milvus-io/pymilvus-orm/v2.0.0rc1/examples/hello_milvus.py
+$ wget https://raw.githubusercontent.com/milvus-io/pymilvus-orm/v2.0.0rc2/examples/hello_milvus.py
 ```
 
 3. Scan **hello_milvus.py**. This sample code does the following:

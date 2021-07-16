@@ -9,7 +9,7 @@ title: Hello Milvus
 
 1. 安装 pymilvus_orm 及依赖库:
 ```
-pip install pymilvus-orm==2.0.0rc1
+pip install pymilvus-orm==2.0.0rc2
 ```
 
 <div class="alert note">
@@ -19,7 +19,7 @@ pymilvus_orm 需要 Python 3.6 版本或以上，详见 <a href="https://wiki.py
 
 2. 下载 **hello_milvus.py** 示例代码:
 ```
-$ wget https://raw.githubusercontent.com/milvus-io/pymilvus-orm/v2.0.0rc1/examples/hello_milvus.py
+$ wget https://raw.githubusercontent.com/milvus-io/pymilvus-orm/v2.0.0rc2/examples/hello_milvus.py
 ```
 3. 浏览 **hello_milvus.py**，这个示例程序将：
 - 导入 pymilvus 包

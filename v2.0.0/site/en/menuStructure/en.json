@@ -70,7 +70,7 @@
     },
     {
       "id": "install_standalone-docker.md",
-      "title": "Install Milvus Standalone",
+      "title": "Milvus Standalone",
       "label1": "getstarted",
       "label2": "installmilvus",
       "label3": null,
@@ -78,7 +78,7 @@
     },
     {
       "id": "install_cluster-docker.md",
-      "title": "Install Milvus Cluster",
+      "title": "Milvus Cluster",
       "label1": "getstarted",
       "label2": "installmilvus",
       "label3": null,
