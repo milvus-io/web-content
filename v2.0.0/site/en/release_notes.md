@@ -15,7 +15,7 @@ Release date: 2021-06-28
 
 | Milvus version | Python SDK version | Java SDK version | Go SDK version |
 | :------------- | :----------------- | :--------------- | :------------- |
-| 2.0.0-RC1         | 2.0.0-RC1              | Coming soon            | Coming soon          |
+| 2.0.0-RC1 | 2.0.0rc2 | Coming soon            | Coming soon          |
 
 
 

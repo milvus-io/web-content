@@ -45,8 +45,8 @@ Milvus v2.0 暂不支持运行时动态修改配置文件。配置文件更新�
 
 如果通过 Docker Compose 启动 Milvus 服务，可运行 `docker ps` 命令观察运行中的 Docker 容器数量，以此判断 Milvus 服务是否已经启动。
 
-- 对于单机版 Milvus ，应至少有三个 Docker 容器正在运行，其中一个是 Milvus 服务，其余两个是 etcd 管理和存储服务。详见 [安装单机版 Milvus]()。
-- 对于分布式 Milvus ，应至少有 12 个 Docker 容器正在运行，其中 9 个是 Milvus 服务，其余三个是基础服务。详见 [安装分布式 Milvus]()。
+- 对于单机版 Milvus ，应至少有三个 Docker 容器正在运行，其中一个是 Milvus 服务，其余两个是 etcd 管理和存储服务。详见 [安装单机版 Milvus](install_standalone-docker.md)。
+- 对于分布式 Milvus ，应至少有 12 个 Docker 容器正在运行，其中 9 个是 Milvus 服务，其余三个是基础服务。详见 [安装分布式 Milvus](install_cluster-docker.md)。
 
 #### 为什么日志文件时间与系统时间不一致？
 
@@ -72,13 +72,14 @@ Milvus 在构建索引和向量查询时依赖于 CPU 对 SIMD (Single Instructi
 ```
 $ lscpu | grep -e sse4_2 -e avx -e avx2 -e avx512
 ```
- 详见 [CPU 对 SIMD 指令集的支持]()。
+ 
+详见 [CPU 对 SIMD 指令集的支持](install_standalone-docker.md#开始之前)。
 
 #### 为什么 Milvus 在启动时返回 `Illegal instruction`？
 
 要保证 Milvus 的正常运行，你的 CPU 须支持以下至少一种 SIMD 指令集种：SSE4.2、AVX、AVX2 和 AVX512。如果 Milvus 在启动时返回 `Illegal instruction`，说明当前 CPU 不支持以上任何一种指令集。
 
-详见 [CPU 对 SIMD 指令集的支持]()。
+详见 [CPU 对 SIMD 指令集的支持](install_standalone-docker.md#开始之前)。
 
 #### 可以在 Windows 上安装 Milvus 吗？
 
