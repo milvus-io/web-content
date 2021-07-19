@@ -5,6 +5,42 @@ title: 发版说明
 
 # 发版说明
 
+## v2.0.0-RC2
+
+发布时间: 2021-07-13
+
+### 版本兼容
+
+| Milvus 版本 | Python SDK 版本 | Java SDK 版本 | Go SDK 版本 |
+| :------------- | :----------------- | :--------------- | :------------- |
+| 2.0.0-RC2         | 2.0.0rc2              | 即将上线            | 即将上线          |
+
+Milvus 2.0.0-RC2 是 2.0.0 的预览版本。该版本修复了 RC1 版本的稳定性和性能问题，并针对节点和存储管理进行了代码重构。
+
+### 主要改进
+
+- [#6356](https://github.com/milvus-io/milvus/issues/6356) Data coordinator 集群代码重构。
+- [#6300](https://github.com/milvus-io/milvus/issues/6300) Data coordinator 元数据管理代码重构。
+- [#6289](https://github.com/milvus-io/milvus/issues/6289) `SegmentIndexInfo` 新增 `collectionID` 和 `partitionID` 信息。
+- [#6258](https://github.com/milvus-io/milvus/issues/6258) 调用 `releaseCollection()` 方法时清除 proxy 中对应的 `searchMsgStream`。
+- [#6227](https://github.com/milvus-io/milvus/issues/6227) 合并 query node 召回和查询的相关代码。
+- [#6196](https://github.com/milvus-io/milvus/issues/6196) Data coordinator 新增候选管理，用于维护管理 data node 集群。
+- [#6188](https://github.com/milvus-io/milvus/issues/6188) 新增“使用 Docker Compose 安装"的相关技术文档。
+
+### 新增功能
+
+- [#6386](https://github.com/milvus-io/milvus/issues/6386) 支持调用 `fget_object()` 方法从 MinIO 加载文件到本地设备。
+- [#6253](https://github.com/milvus-io/milvus/issues/6253) 支持在 data coordinator 调用 `GetFlushedSegments()` 方法。
+- [#6213](https://github.com/milvus-io/milvus/issues/6213) 新增 `GetIndexStates()` 方法。
+
+### 问题修复
+
+- [#6184](https://github.com/milvus-io/milvus/issues/6184) 数据集规模增加导致查询准确性下降。
+- [#6308](https://github.com/milvus-io/milvus/issues/6308) NSG 索引的 KNNG 参数未达到满值会导致服务器崩溃。
+- [#6212](https://github.com/milvus-io/milvus/issues/6212) Query node 重启后查询操作宕机。
+- [#6265](https://github.com/milvus-io/milvus/issues/6265) 服务器检测到节点在线后不检查节点状态。
+- [#6359](https://github.com/milvus-io/milvus/issues/6359) [#6334](https://github.com/milvus-io/milvus/issues/6334) 在 CentOS 系统上编译 Milvus 出现编译错误。
+
 ## v2.0.0-RC1
 
 发布时间：2021-06-28

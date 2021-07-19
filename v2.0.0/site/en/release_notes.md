@@ -4,6 +4,45 @@ title: Release Notes
 ---
 # Release Notes
 
+## v2.0.0-RC2
+
+Release date: 2021-07-13
+
+### Compatibility
+
+| Milvus version | Python SDK version | Java SDK version | Go SDK version |
+| :------------- | :----------------- | :--------------- | :------------- |
+| 2.0.0-RC2 | 2.0.0rc2 | Coming soon            | Coming soon          |
+
+Milvus 2.0.0-RC2 is a preview version of Milvus 2.0.0. It fixes stability and performance issues and refactors code for node and storage management.
+
+### Improvements
+
+- [#6356](https://github.com/milvus-io/milvus/pull/6356) Refactors code for cluster in data coordinator. 
+- [#6300](https://github.com/milvus-io/milvus/pull/6300) Refactors code for meta management in data coordinator. (#6300)
+- [#6289](https://github.com/milvus-io/milvus/pull/6289) Adds `collectionID` and `partitionID` to `SegmentIndexInfo`. 
+- [#6258](https://github.com/milvus-io/milvus/pull/6258) Clears the corresponding `searchMsgStream` in proxy when calling `releaseCollection()`. 
+- [#6227](https://github.com/milvus-io/milvus/pull/6227) Merges codes relating to retrieve and search in query node. 
+- [#6196](https://github.com/milvus-io/milvus/pull/6196) Adds candidate management for data coordinator to manage data node cluster. 
+- [#6188](https://github.com/milvus-io/milvus/pull/6188) Adds Building Milvus with Docker Docs. (#6188)
+
+### Features
+
+- [#6386](https://github.com/milvus-io/milvus/pull/6386) Adds the `fget_objects()` method for loading files from MinIO to the local device.
+- [#6253](https://github.com/milvus-io/milvus/pull/6253) Adds the `GetFlushedSegments()` method in data coordinator.
+- [#6213](https://github.com/milvus-io/milvus/pull/6213) Adds the `GetIndexStates()` method.
+
+### Bug fixes
+
+- [#6184](https://github.com/milvus-io/milvus/pull/6184) Search accuracy worsens when dataset gets larger.
+- [#6308](https://github.com/milvus-io/milvus/pull/6308) The server crashes if the KNNG in NSG is not full.
+- [#6212](https://github.com/milvus-io/milvus/pull/6212) Search hangs after restarting query nodes. 
+- [#6265](https://github.com/milvus-io/milvus/pull/6265) The server does not check node status when detecting nodes are online. 
+- [#6359](https://github.com/milvus-io/milvus/pull/6359) [#6334](https://github.com/milvus-io/milvus/pull/6334) An error occurs when compiling Milvus on CentOS
+
+
+
+
 ## v2.0.0-RC1
 
 
