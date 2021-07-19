@@ -14,9 +14,9 @@ It is available in:
 Compatibility: 
 | Milvus version | Python SDK version | Java SDK version | Go SDK version |
 | ----------- | ----------- | -----------  | ----------- |
-| 2.0.0-RC1   | 2.0.0rc2   | Coming soon  | Coming soon |
+| 2.0.0-RC2   | 2.0.0rc2   | Coming soon  | Coming soon |
 
-Milvus 2.0.0-RC1 is the preview version of 2.0.0. It introduces Golang as the distributed layer development language and a new cloud-native distributed design. The latter brings significant improvements to scalability, elasticity, and functionality. 
+Milvus 2.0.0-RC2 is the preview version of 2.0.0. It introduces Golang as the distributed layer development language and a new cloud-native distributed design. The latter brings significant improvements to scalability, elasticity, and functionality. 
 
 ## Overall Architecture
 Milvus 2.0 is a cloud-native vector database with storage and computation separated by design. All components in this refactored version of Milvus are stateless to enhance elasticity and flexibility.

@@ -48,6 +48,11 @@ The following table classifies the indexes that Milvus supports:
     <td></td>
   </tr>
   <tr>
+    <td><a href="#RNSG">RNSG</a></td>
+    <td>Graph-based index</td>
+    <td></td>
+  </tr>
+  <tr>
     <td><a href="#HNSW">HNSW</a></td>
     <td>Graph-based index</td>
     <td></td>
@@ -195,6 +200,34 @@ If the value of <code>nprobe</code> does not fall into the specified range but f
 
 </div>
 
+### RNSG
+<a name="RNSG"></a>
+
+RNSG (Refined Navigating Spreading-out Graph) is a graph-based indexing algorithm. It sets the center position of the whole image as a navigation point, and then uses a specific edge selection strategy to control the out-degree of each point (less than or equal to `out_degree`). Therefore, it can reduce memory usage and quickly locate the target position nearby during searching vectors.
+
+The graph construction process of RNSG is as follows:
+
+1. Find `knng` nearest neighbors for each point.
+2. Iterate at least `search_length` times based on `knng` nearest neighbor nodes to select `candidate_pool_size` possible nearest neighbor nodes.
+3. Construct the out-edge of each point in the selected `candidate_pool_size` nodes according to the edge selection strategy.
+
+The query process is similar to the graph building process. It starts from the navigation point and iterate at least `search_length` times to get the final result. 
+
+- Index building parameters
+
+   | Parameter   | Description     | Range     |
+   | ------- | -------- |----------- |
+   | `out_degree`          | Maximum out-degree of the node        | [5, 300]  |
+   | `candidate_pool_size` | Candidate pool size of the node 　     | [50, 1000] |
+   | `search_length`       | Number of query iterations        　| [10, 300] |
+   | `knng`                | Number of nearest neighbors   　| [5, 300] |
+   
+
+- Search parameters
+
+   | Parameter   | Description     | Range     |
+   | -------- | ----------- | ---------- |
+   | `search_length` | Number of query iterations  | [10, 300] |
 
 
 ### HNSW
@@ -263,6 +296,6 @@ See <a href="https://medium.com/unstructured-data-service/how-to-choose-an-index
 </details>
 
 ## Bibliography
-
+- RNSG: <a href="http://www.vldb.org/pvldb/vol12/p461-fu.pdf">Fast Approximate Nearest Neighbor Search With The Navigating Spreading-out Graph</a>
 - HNSW: <a href="https://arxiv.org/abs/1603.09320">Efficient and robust approximate nearest neighbor search using Hierarchical Navigable Small World graphs</a>
 - ANNOY: <a href="https://erikbern.com/2015/10/01/nearest-neighbors-and-vector-models-part-2-how-to-search-in-high-dimensional-spaces.html">Nearest neighbors and vector models – part 2 – algorithms and data structures</a>

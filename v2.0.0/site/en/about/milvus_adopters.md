@@ -11,6 +11,7 @@ Milvus is trusted by over 1,000 organizations worldwide and has applications in 
 | [DXY.cn](https://en.wikipedia.org/wiki/DXY.cn)                                                  | Medical           |                                             |
 |[Deepset.ai](https://deepset.ai/)                                                    | Software         | [Semantic Search with Milvus, Knowledge Graph QA, Web Crawlers and more!](https://medium.com/deepset-ai/semantic-search-with-milvus-knowledge-graph-qa-web-crawlers-and-more-837451eae9fa)                                             |
 | [EnjoyMusic Technology](https://enjoymusic.ai/about)                                                 | Entertainment          |[Item-based Collaborative Filtering for Music Recommender System](https://zilliz.com/blog/music-recommender-system-item-based-collaborative-filtering-milvus)                                          |
+| [Getir](https://getir.com/) | Instant Grocery | |
 | [Hewlett-Packard (HP)](https://en.wikipedia.org/wiki/Hewlett-Packard)   | 	Information technology          |                                        |
 | [Juicedata](https://juicefs.com/aboutus)                                                | Software         |                  |
 | [Kingsoft](https://en.wikipedia.org/wiki/Kingsoft)                                              | Software         | [Building an AI-Powered Writing Assistant for WPS Office](https://zilliz.com/blog/Building-an-AI-Powered-Writing-Assistant-with-WPS-Office)                                              |

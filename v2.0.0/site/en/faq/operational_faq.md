@@ -97,6 +97,10 @@ Milvus is available as a Docker image and allows offline deployment. Taking Milv
 4. Run `docker load` to load the file as a Docker image.
 5. Run `docker-compose` to start Milvus.
 
+#### Where can I find logs of Milvus?
+
+Default log is printed directly to console. you have to change log:file:rootPath: config in milvus.yaml in order to redirect the log a specified directory.
+
 For more information about Docker, see [Installing Milvus Standalone](install_standalone-docker.md).
 
 #### Still have questions?
