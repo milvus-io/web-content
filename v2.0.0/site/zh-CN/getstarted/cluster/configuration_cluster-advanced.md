@@ -1,56 +1,56 @@
 ---
 id: configuration_cluster-advanced.md
 title: Milvus Cluster System Configurations
-label: Advanced Configurations
+label: 分布式 Milvus 系统设置
 order: 1
 group: cluster_sys
 ---
 
-# Milvus Cluster System Configurations
+# Milvus 分布式版系统设置
 
-Milvus cluster maintains many system variables that configure the operation. All configurations can be set manually before server startup. Each configuration has a default value, which can be used directly.
-
-
-
-<div class="tab-wrapper"><a href="configuration_cluster-basic.md" class=''>Basic Configurations</a><a href="configuration_cluster-advanced.md" class='active '>Advanced Configurations</a></div>
+分布式 Milvus 通过系统配置项控制系统运行。所有配置项均可在服务启动前在相应配置文件中手动设置。各配置项的默认值可以直接投入使用。
 
 
-If you are an administrator of a Milvus cluster, you may access the following configurations to maintain the cluster operation. You can set these configurations in **milvus.yaml**.
 
-## etcd Configurations
+<div class="tab-wrapper"><a href="configuration_cluster-basic.md" class=''>基本配置</a><a href="configuration_cluster-advanced.md" class='active '>分布式 Milvus 系统设置</a></div>
 
-etcd is the metadata engine supporting Milvus' metadata storage and access. 
 
-> You do not need to change this session if you use the default **docker-compose.yml** for third-party services.
+Milvus 集群的管理员需要通过更改以下配置项维护集群运行。
+
+## etcd 配置
+
+etcd 是系统的元数据引擎，支撑底层的元数据存储与访问。你可以在 **milvus.yaml** 中设置这些参数。
+
+> 如使用默认 **docker-compose.yml** 文件启动第三方服务，则无需修改该部分参数。
 
 <table id="etcd">
 <thead>
   <tr>     
-    <th class="width20">Configuration</th>     
-    <th class="width70">Description</th>     
-    <th class="width10">Default Value</th>   
+    <th class="width20">参数</th>     
+    <th class="width70">说明</th>     
+    <th class="width10">默认值</th>   
   </tr>
 </thead>
 <tbody>
 	<tr>
 		<td><code>etcd.endpoints</code></td>
 		<td><details>
-       <summary>Endpoints of etcd</summary>
-       <li>Environment variable: <code>ETCD_ENDPOINTS</code></li>
-       <li>Access etcd service with <code>etcd.endpoints</code>.</li>
-       <li>etcd preferentially acquires valid address from environment variable <code>ETCD_ENDPOINTS</code> when Milvus is booted up.</li>
-       <li>You can change this parameter as the endpoints of your own etcd cluster.</li>
+       <summary>etcd 节点</summary>
+       <li>环境变量：<code>ETCD_ENDPOINTS</code></li>
+       <li>etcd 监听请求的有效地址，用于访问 etcd 服务。</li>
+       <li>Milvus 启动时，优先从环境变量 <code>ETCD_ENDPOINTS</code> 获得有效地址。</li>
+       <li>对于已存在的 etcd 集群，请将该参数改为当前 etcd 节点。</li>
       </details></td>
 		<td>localhost:2379</td>
 	</tr>
 	<tr>
 		<td><code>etcd.rootPath</code></td>
 		<td><details>
-       <summary>Root of key prefix to etcd</summary>
-       <li>Milvus stores data in etcd with this root key prefix.</li>
-       <li>Be careful with changing this configuration if you have used Milvus for a period of time. Changes to this configuration will affect your access to old data.</li>
-       <li>We recommend changing this configuration before using Milvus for the first time.</li>
-       <li>Set an easy-to-identify root key prefix for Milvus if etcd already exists. We recommend setting it as "<b>milvus-root</b>".</li>
+       <summary>etcd 存储数据的 key 前缀</summary>
+       <li>Milvus 向 etcd 存储数据使用的 key 前缀</li>
+       <li>在使用 Milvus 一段时间后，请不要轻易更改这个参数。更改之后您将无法正确访问之前的数据。</li>
+       <li>推荐在初次使用 Milvus 前修改这个参数。</li>
+       <li>对于已存在的 etcd 服务，请为 Milvus 设置一个容易辨析的 key 前缀，推荐使用 "<b>milvus-root</b>"。</li>
       </details></td>
 		<td>"by-dev"</td>
 	</tr>
@@ -58,60 +58,60 @@ etcd is the metadata engine supporting Milvus' metadata storage and access.
 </table>
 
 
-## MinIO Configurations
+## MinIO 配置
 
-MinIO is the storage engine supporting Milvus' data persistence for insert log files and index files.  You can set these configurations in **milvus.yaml**.
+minIO 是系统的存储引擎，支撑日志文件与索引文件的持久化存储。你可以在 **milvus.yaml** 中设置这些参数。
 
-> You do not need to change this session if you use the default **docker-compose.yml** for third-party services.
+> 如使用默认 **docker-compose.yml** 文件启动第三方服务，则无需修改该部分参数。
 
 <table id="minio">
 <thead>
   <tr>     
-    <th class="width20">Configuration</th>     
-    <th class="width70">Description</th>     
-    <th class="width10">Default Value</th>   
+    <th class="width20">参数</th>     
+    <th class="width70">说明</th>     
+    <th class="width10">默认值</th>   
   </tr>
 </thead>
 <tbody>
   <tr>
 		<td><code>minio.address</code></td>
 		<td><details>
-       <summary>IP address of MinIO</summary>
-       <li>Environment variable: <code>MINIO_ADDRESS</code></li>
-       <li>Access MinIO service with <code>minio.address</code>. <code>minio.address</code> and <code>minio.port</code> together generates the valid access to MinIO.</li>
-       <li>MinIO preferentially acquires the valid address from the environment variable <code>MINIO_ADDRESS</code> when Milvus is booted up.</li>
-      <li>Default value applies when MinIO and Milvus are running on the same network.</li>
-      <li>Milvus 2.0 uses non-secure mode to access MinIO. Upcoming Milvus versions will support secure access to MinIO.</li>
+       <summary>MinIO 监听请求的 IP 地址</summary>
+       <li>环境变量：<code>MINIO_ADDRESS</code></li>
+       <li>MinIO 监听请求的 IP 地址，用于访问 MinIO 服务。<code>minio.address</code> 和 <code>minio.port</code> 共同组成 MinIO 监听请求的有效地址。</li>
+       <li>Milvus 启动时，优先从环境变量 <code>MINIO_ADDRESS</code> 获得有效 IP 地址。</li>
+      <li>默认值适用于 MinIO 与 Milvus 运行于相同的网络中。</li>
+      <li>Milvus 2.0 使用非安全模式访问 MinIO。后续版本将支持安全模式访问 MinIO。</li>
       </details></td>
 		<td>localhost</td>
 	</tr>
   <tr>
 		<td><code>minio.port</code></td>
 		<td><details>
-       <summary>Port of MinIO</summary>
-       <li>Environment variable: <code>MINIO_ADDRESS</code></li>
-       <li>Access MinIO service with <code>minio.address</code>. <code>minio.address</code> and <code>minio.port</code> together generates the valid access to MinIO.</li>
-       <li>MinIO preferentially acquires the valid port from the environment variable <code>MINIO_ADDRESS</code> when Milvus is booted up.</li>
+       <summary>MinIO 监听请求的端口</summary>
+       <li>环境变量：<code>MINIO_ADDRESS</code></li>
+       <li>MinIO 监听请求的端口，用于访问 MinIO 服务。<code>minio.address</code> 和 <code>minio.port</code> 共同组成 MinIO 监听请求的有效地址。</li>
+       <li>Milvus 启动时，优先从环境变量 <code>MINIO_ADDRESS</code> 获得有效端口。</li>
       </details></td>
 		<td>9000</td>
 	</tr>
   <tr>
 		<td><code>minio.AccessKeyID</code></td>
 		<td><details>
-       <summary>MinIO key ID for authorized user access</summary>
-       <li>Environment variable: <code>MINIO_ACCESS_KEY</code></li>
-       <li>Access key ID that MinIO issued to authorized users. <code>minio.accessKeyID</code> and <code>minio.secretAccessKey</code> together is used for identity authentication to access the MinIO service.</li>
-       <li>This configuration must be set identical to the environment variable <code>MINIO_ACCESS_KEY</code>, which is necessary for booting up MinIO. The default value applies to the MinIO service that booted up with the default <b>docker-compose.yml</b> provided by Milvus.</li>
+       <summary>MinIO 给用户授权访问的密钥 ID</summary>
+       <li>环境变量：<code>MINIO_ACCESS_KEY</code></li>
+       <li>MinIO 颁发给用户的访问服务所需要的密钥 ID，用于做身份认证。<code>minio.accessKeyID</code> 与 <code>minio.secretAccessKey</code> 共同用于访问 MinIO 服务。</li>
+       <li>此配置项需要与 MinIO 服务启动时所需要的环境变量 <code>MINIO_ACCESS_KEY</code>相同。默认值适用于使用默认 <b>docker-compose.yml</b> 文件启动 Milvus。</li>
       </details></td>
 		<td>minioadmin</td>
 	</tr>
   <tr>
 		<td><code>minio.secretAccessKey</code></td>
 		<td><details>
-       <summary>MinIO encryption string</summary>
-       <li>Environment variable: <code>MINIO_SECRET_KEY</code></li>
-       <li>Secret key used to encrypt the signature string and verify the signature string on server. It must be kept strictly confidential and accessible only to the MinIO server and users.</li>
-       <li>This configuration must be set identical to the environment variable <code>MINIO_SECRET_KEY</code>, which is necessary for booting up MinIO. The default value applies to the MinIO service that booted up with the default <b>docker-compose.yml</b> provided by Milvus.</li>
+       <summary>MinIO 加密字符串</summary>
+       <li>环境变量：<code>MINIO_SECRET_KEY</code></li>
+       <li>用于加密签名字符串和服务器端验证签名字符串的密钥，须严格保密，仅用户与 MinIO 服务端可见。</li>
+       <li>此配置项需要与 MinIO 服务启动时所需要的环境变量 <code>MINIO_SECRET_KEY</code>相同。默认值适用于使用默认 <b>docker-compose.yml</b> 文件启动 Milvus。</li>
       </details></td>
 		<td>minioadmin</td>
 	</tr>
@@ -119,37 +119,39 @@ MinIO is the storage engine supporting Milvus' data persistence for insert log f
 </table>
 
 
-## Pulsar Configurations
+## Pulsar 配置
 
-Pulsar is the underlying engine supporting Milvus' reliable storage and pub/sub of log streams. You can set these configurations in **milvus.yaml**.
+Pulsar 是系统的日志流底层引擎，支撑日志流的可靠存储与发布/订阅。你可以在 **milvus.yaml** 中设置这些参数。
 
-> You do not need to change this session if you use the default **docker-compose.yml** for third-party services.
+> 如使用默认 **docker-compose.yml** 文件启动第三方服务，则无需修改该部分参数。
 
 <table id="pulsar">
 <thead>
   <tr>     
-    <th class="width20">Configuration</th>     
-    <th class="width70">Description</th>     
-    <th class="width10">Default Value</th>   
+    <th class="width20">参数</th>     
+    <th class="width70">说明</th>     
+    <th class="width10">默认值</th>   
   </tr>
 </thead>
 <tbody>
   <tr>
 		<td><code>pulsar.address</code></td>
 		<td><details>
-       <summary>IP address of Pulsar</summary>
-       <li>Environment variable: <code>PULSAR_ADDRESS</code></li>
-       <li>Access Pulsar service with <code>pulsar.address</code>. <code>pulsar.address</code> and <code>pulsar.port</code> together generates the valid access to Pulsar. Pulsar preferentially acquires the valid address from the environment variable <code>PULSAR_ADDRESS</code> when Milvus is booted up.</li>
-       <li>The default value applies when Pulsar and Milvus are running on the same network.</li>
+       <summary>Pulsar 监听请求的 IP 地址</summary>
+       <li>环境变量：<code>PULSAR_ADDRESS</code></li>
+      <li>Pulsar 监听请求的 IP 地址，用于访问 MinIO 服务。<code>pulsar.address</code> 与 <code>pulsar.port</code> 共同组成 Pulsar 监听请求的有效地址。</li>
+      <li>Milvus 启动时，优先从环境变量 <code>PULSAR_ADDRESS</code> 获得有效 IP 地址。</li>
+       <li>默认值适用于 Pulsar 与 Milvus 运行于相同的网络中。</li>
       </details></td>
 		<td>localhost</td>
 	</tr>
   <tr>
 		<td><code>pulsar.port</code></td>
 		<td><details>
-       <summary>Port of Pulsar</summary>
-       <li>Environment variable: <code>PULSAR_ADDRESS</code></li>
-       <li>Access Pulsar service with <code>pulsar.port</code>. <code>pulsar.address</code> and <code>pulsar.port</code> together generates the valid access to Pulsar. Pulsar preferentially acquires the valid address from the environment variable <code>PULSAR_ADDRESS</code> when Milvus is booted up.</li>
+       <summary>Pulsar 监听请求的端口</summary>
+       <li>环境变量：<code>PULSAR_ADDRESS</code></li>
+      <li>Pulsar 监听请求的端口，用于访问 MinIO 服务。<code>pulsar.address</code> 与 <code>pulsar.port</code> 共同组成 Pulsar 监听请求的有效地址。</li>
+      <li>Milvus 启动时，优先从环境变量 <code>PULSAR_ADDRESS</code> 获得有效 IP 地址。</li>
       </details></td>
 		<td>6650</td>
 	</tr>
@@ -157,114 +159,114 @@ Pulsar is the underlying engine supporting Milvus' reliable storage and pub/sub 
 </table>
 
 
-## Server Address Configurations
+## 服务地址配置
 
-This session configures the IP address and port of the monitor request from Milvus. You can set these configurations in **milvus.yaml**.
+服务地址配置用于设定 Milvus 服务监听请求的 IP 地址和端口。你可以在 **milvus.yaml** 中设置这些参数。
 
 <table id="server_address">
 <thead>
   <tr>     
-    <th class="width20">Configuration</th>     
-    <th class="width70">Description</th>     
-    <th class="width10">Default Value</th>   
+    <th class="width20">参数</th>     
+    <th class="width70">说明</th>     
+    <th class="width10">默认值</th>   
   </tr>
 </thead>
 <tbody>
   <tr>
 		<td><code>rootCoord.address</code></td>
 		<td><details>
-       <summary>TCP/IP address of root coordinator</summary>
-       <li>If you set this parameter as <code>0.0.0.0</code>, root coordinator monitors all IPv4 addresses.</li>
-       <li>This parameter takes effect only after being configured at startup of Milvus.</li>
+       <summary>root coordinator 的 TCP/IP 地址</summary>
+       <li>如果将该参数设置为 <code>0.0.0.0</code>，root coordinator 将会在所有 IPv4 地址监听。</li>
+       <li>该参数只有在 Milvus 启动时设置生效。</li>
       </details></td>
 		<td>localhost</td>
 	</tr>
   <tr>
 		<td><code>rootCoord.port</code></td>
 		<td><details>
-       <summary>TCP port of root coordinator</summary>
-       <li>This parameter takes effect only after being configured at startup of Milvus.</li>
+       <summary>root coordinator 的 TCP 端口</summary>
+       <li>该参数只有在 Milvus 启动时设置生效。</li>
       </details></td>
 		<td>53100</td>
 	</tr>
   <tr>
 		<td><code>proxy.port</code></td>
 		<td><details>
-       <summary>TCP port for monitoring Milvus</summary>
-       <li>This parameter takes effect only after being configured at the startup of Milvus.</li>
+       <summary>监听 Milvus 的 TCP 端口</summary>
+       <li>该参数只有在 Milvus 启动时设置生效。</li>
       </details></td>
 		<td>19530</td>
 	</tr>
   <tr>
 		<td><code>queryCoord.address</code></td>
 		<td><details>
-       <summary>TCP/IP address of query coordinator</summary>
-       <li>If you set this parameter as <code>0.0.0.0</code>, query coordinator monitors all IPv4 addresses.</li>
-       <li>This parameter takes effect only after being configured at startup of Milvus.</li>
+       <summary>query coordinator 的 TCP/IP 地址</summary>
+       <li>如果将该参数设置为 <code>0.0.0.0</code>，query coordinator 将会在所有 IPv4 地址监听。</li>
+       <li>该参数只有在 Milvus 启动时设置生效。</li>
       </details></td>
 		<td>localhost</td>
 	</tr>
   <tr>
 		<td><code>queryCoord.port</code></td>
 		<td><details>
-       <summary>TCP port of query coordinator</summary>
-       <li>This parameter takes effect only after being configured at startup of Milvus.</li>
+       <summary>query coordinator 的 TCP 端口</summary>
+       <li>该参数只有在 Milvus 启动时设置生效。</li>
       </details></td>
 		<td>19531</td>
 	</tr>
   <tr>
 		<td><code>queryNode.port</code></td>
 		<td><details>
-       <summary>TCP port of query node</summary>
-       <li>This parameter takes effect only after being configured at startup of Milvus.</li>
+       <summary>query node 的 TCP 端口</summary>
+       <li>该参数只有在 Milvus 启动时设置生效。</li>
       </details></td>
 		<td>21123</td>
 	</tr>
   <tr>
 		<td><code>indexCoord.address</code></td>
 		<td><details>
-       <summary>TCP/IP address of index coordinator</summary>
-       <li>This parameter takes effect only after being configured at startup of Milvus.</li>
+       <summary>index coordinator 的 TCP/IP 地址</summary>
+       <li>该参数只有在 Milvus 启动时设置生效。</li>
       </details></td>
 		<td>localhost</td>
 	</tr>
   <tr>
 		<td><code>indexCoord.port</code></td>
 		<td><details>
-       <summary>TCP port of index coordinator</summary>
-       <li>This parameter takes effect only after being configured at startup of Milvus.</li>
+       <summary>index coordinator 的 TCP 端口</summary>
+       <li>该参数只有在 Milvus 启动时设置生效。</li>
       </details></td>
 		<td>31000</td>
 	</tr>
   <tr>
 		<td><code>indexNode.port</code></td>
 		<td><details>
-       <summary>TCP port of index node</summary>
-       <li>This parameter takes effect only after being configured at startup of Milvus.</li>
+       <summary>index node 的 TCP 端口</summary>
+       <li>该参数只有在 Milvus 启动时设置生效。</li>
       </details></td>
 		<td>21121</td>
 	</tr>
   <tr>
 		<td><code>dataCoord.address</code></td>
 		<td><details>
-       <summary>TCP/IP address of data coordinator</summary>
-       <li>This parameter takes effect only after being configured at startup of Milvus.</li>
+       <summary>data coordinator 的 TCP/IP 地址</summary>
+       <li>该参数只有在 Milvus 启动时设置生效。</li>
       </details></td>
 		<td>localhost</td>
 	</tr>
   <tr>
 		<td><code>dataCoord.port</code></td>
 		<td><details>
-       <summary>TCP port of data coordinator</summary>
-       <li>This parameter takes effect only after being configured at startup of Milvus.</li>
+       <summary>data coordinator 的 TCP 端口</summary>
+       <li>该参数只有在 Milvus 启动时设置生效。</li>
       </details></td>
 		<td>13333</td>
 	</tr>
   <tr>
 		<td><code>dataNode.port</code></td>
 		<td><details>
-       <summary>TCP port of data node</summary>
-       <li>This parameter takes effect only after being configured at startup of Milvus.</li>
+       <summary>data node 的 TCP 端口</summary>
+       <li>该参数只有在 Milvus 启动时设置生效。</li>
       </details></td>
 		<td>21124</td>
 	</tr>
@@ -272,64 +274,63 @@ This session configures the IP address and port of the monitor request from Milv
 </table>
 
 
-## System Behavior Configurations
+## 系统行为配置
 
-This session configures the system behaviors of Milvus. You can set these configurations in **milvus.yaml**, **root_coord.yaml**, **data_coord.yaml**, **data_node.yaml**.
+系统行为配置用于设定 Milvus 运行时的系统行为。你可以在 **milvus.yaml**、**root_coord.yaml**、**data_coord.yaml** 以及 **data_node.yaml** 中设置这些参数。
 
 <table id="system_behavior">
 <thead>
   <tr>     
-    <th class="width20">Configuration</th>     
-    <th class="width70">Description</th>     
-    <th class="width10">Default Value</th>   
+    <th class="width20">参数</th>     
+    <th class="width70">说明</th>     
+    <th class="width10">默认值</th>   
   </tr>
 </thead>
 <tbody>
   <tr>
 		<td><code>queryNode.gracefulTime</code></td>
 		<td><details>
-       <summary>Minimum time before the newly inserted data can be searched</summary>
-       <li>Unit: ms</li>
-       <li>Milvus executes this query command directly when the search message timestamp is earlier the query node system time.</li>
-       <li>When the <code>search</code> message timestamp is later than the query node system time, the search message waits for the query node system time to advance until the time difference between them is less than the value set in <code>queryNode.gracefulTime</code>, and then Milvus executes the query demand.</li>
+       <summary>新 insert 数据可被搜索的最短时间</summary>
+       <li>单位：ms</li>
+       <li>当 <code>search</code> 消息时间戳早于 query node 系统时间的时候，Milvus 直接执行此查询命令。</li>
+       <li>当 <code>search</code> 消息时间戳晚于 query node 系统时间的时候，Milvus 会等待 query node 系统时间推进直至两者时间差小于该参数后执行此查询命令。</li>
       </details></td>
 		<td>1000</td>
 	</tr>
   <tr>
 		<td><code>rootcoord.minSegmentSizeToEnableIndex</code></td>
 		<td><details>
-       <summary>The minimum row count in a segment required for creating index</summary>
-       <li>This parameter specifies the minimum row count in a log file required for creating segment index.</li>
+       <summary>Milvus 允许为 segment 创建索引的最小行数</summary>
+       <li>该参数用于设定 Milvus 允许为 segment 创建索引的日志文件最小行数。</li>
       </details></td>
 		<td>1024</td>
 	</tr>
   <tr>
 		<td><code>datacoord.segment.maxSize</code></td>
 		<td><details>
-       <summary>Maximum size of a segment</summary>
-       <li>Unit: MB</li>
-       <li><code>datacoord.segment.maxSize</code> and <code>datacoord.segment.sealProportion</code> together determine if a segment can be sealed. Generally, the segment size ranges from 384 MB to 512 MB.</li>
+       <summary>单个 segment 的大小上限</summary>
+       <li>单位：MB</li>
+       <li><code>datacoord.segment.maxSize</code> 和 <code>datacoord.segment.sealProportion</code> 共同决定一个 segment 可以关闭（sealed）的条件。通常情况下，一个已关闭的（sealed）segment 文件大小大约在 384 至 512 MB 之间。</li>
       </details></td>
 		<td>512</td>
 	</tr>
   <tr>
 		<td><code>datacoord.segment.sealProportion</code></td>
 		<td><details>
-       <summary>Maximum proportion of a segment’s actual size comparing to <code>datacoord.segment.size</code></summary>
-       <li>When actual proportion is greater than the set value, the corresponding segment can be sealed.</li>
+       <summary>单个 segment 的真实数据大小占 <code>datacoord.segment.size</code>的最大比例</summary>
+       <li>当单个 segment 的真实数据大小与 <code>datacoord.segment.size</code>的比例超过该参数，此 segment 可以被关闭（sealed）。</li>
       </details></td>
 		<td>0.75</td>
 	</tr>
   <tr>
 		<td><code>dataNode.flush.insertBufSize</code></td>
 		<td><details>
-       <summary>Maximum row count of a segment buffered in memory</summary>
-       <li>Data node packs all buffered data into a binlog file and stores the file in MinIO/S3 when the row count of the data in memory exceeds this value.</li>
-       <li>Setting this parameter is associated with the data size. If it is set too small, the system stores data in small size too frequently. If it is set too large, the system's demand for memory will increase.</li>
-       <li>The default value applies to most scenarios. For a 128-dimensions floating-point vector, 32000 rows of data generate a binlog file of approximately 16 MB.</li>
+       <summary>内存中一个 segment 缓存 insert 数据的最大行数</summary>
+       <li>当内存中缓存的数据超过这个值时，data node 会将所有的缓存数据打包为 1 组 binlog 文件存储在 MinIO/S3 上。</li>
+       <li>设定该参数与数据量大小相关。如果设定过小，系统会频繁将少量数据存盘，如果设定过大，系统的内存需求会增高。</li>
+       <li>默认值适用于大多数场景。对于 128 维浮点型向量，32000 行数据会生成约 16 MB 的 binlog 文件。</li>
       </details></td>
 		<td>32000</td>
 	</tr>
 </tbody>
 </table>
-</div>
