@@ -4,11 +4,11 @@ id: milvus_advocate.md
 
 # 成为 Milvus 社区大使
 
-**Milvus Advocate（社区大使）**是 Milvus 社区的积极倡导者，他们借由知识分享的方式帮助其他社区成员更简单地使用 Milvus，提高使用的便利性。
+**Milvus Advocate（社区大使）** 是 Milvus 社区的积极倡导者，他们借由知识分享的方式帮助其他社区成员更简单地使用 Milvus，提高使用的便利性。
 
 成为 Milvus Advocate 将可以增加你的个人技术影响力、认识志同道合的人，并成长为 Milvus 专家。
 
-以下是 **MHA (Milvus Honored Advocate)** 和 **MTA（Milvus Top Advocate）**的权益和资格：
+以下是 **MHA (Milvus Honored Advocate)** 和 **MTA（Milvus Top Advocate）** 的权益和资格：
 
 ## Milvus Honored Advocate
 
@@ -27,9 +27,9 @@ id: milvus_advocate.md
 - 以下是几种常见的技术内容类型：
 
   - **Demo 和解决方案**：向 Milvus 用户展示如何在特定场景下使用 Milvus（如音乐推荐系统）。你可以在 Milvus Bootcamp 中找到相关的例子：https://github.com/milvus-io/bootcamp。
-  - **博客文章：**撰写高质量的内容，清晰准确地解释关于 Milvus 或相关技术的细节。
+  - **博客文章：** 撰写高质量的内容，清晰准确地解释关于 Milvus 或相关技术的细节。
   - **技术讲座/直播：** 在线上或线下活动中发表演讲，帮助提高其他人对 Milvus 的认识。
-  - **其他：**任何对 Milvus 及其开源社区的发展起到积极作用的内容都将被纳入考虑。
+  - **其他：** 任何对 Milvus 及其开源社区的发展起到积极作用的内容都将被纳入考虑。
 
 ## Milvus Top Advocate
 
@@ -55,9 +55,9 @@ id: milvus_advocate.md
 - 以下是几种常见的技术内容类型：
 
   - **Demo 和解决方案**：向 Milvus 用户展示如何在特定场景下使用 Milvus（如音乐推荐系统）。你可以在 Milvus Bootcamp 中找到相关的例子：https://github.com/milvus-io/bootcamp。
-  - **博客文章：**撰写高质量的内容，清晰准确地解释关于 Milvus 或相关技术的细节。
+  - **博客文章：** 撰写高质量的内容，清晰准确地解释关于 Milvus 或相关技术的细节。
   - **技术讲座/直播：** 在线上或线下活动中发表演讲，帮助提高其他人对 Milvus 的认识。
-  - **其他：**任何对 Milvus 及其开源社区的发展起到积极作用的内容都将被纳入考虑。
+  - **其他：** 任何对 Milvus 及其开源社区的发展起到积极作用的内容都将被纳入考虑。
 
 ## 联系我们
 
@@ -65,4 +65,3 @@ id: milvus_advocate.md
 
 欢迎与我们联系：community@zilliz.com
 
-![WechatIMG26 1](/Users/zilliz2019/Desktop/WechatIMG26 1.jpeg)
