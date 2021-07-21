@@ -1,18 +1,18 @@
 ---
 id: configuration_cluster-advanced.md
-title: Milvus Cluster System Configurations
-label: 分布式 Milvus 系统设置
+title: Milvus 分布式系统配置
+label: 高级配置
 order: 1
 group: cluster_sys
 ---
 
-# Milvus 分布式版系统设置
+# 分布式版 Milvus 系统配置
 
-分布式 Milvus 通过系统配置项控制系统运行。所有配置项均可在服务启动前在相应配置文件中手动设置。各配置项的默认值可以直接投入使用。
+分布式版 Milvus 通过系统配置项控制系统运行。所有配置项均可在服务启动前在相应配置文件中手动设置。各配置项的默认值可以直接投入使用。
 
 
 
-<div class="tab-wrapper"><a href="configuration_cluster-basic.md" class=''>基本配置</a><a href="configuration_cluster-advanced.md" class='active '>分布式 Milvus 系统设置</a></div>
+<div class="tab-wrapper"><a href="configuration_cluster-basic.md" class=''>基本配置</a><a href="configuration_cluster-advanced.md" class='active '>高级配置</a></div>
 
 
 Milvus 集群的管理员需要通过更改以下配置项维护集群运行。
