@@ -119,44 +119,6 @@ minIO 是系统的存储引擎，支撑日志文件与索引文件的持久化�
 </table>
 
 
-## Pulsar 配置
-
-Pulsar 是系统的日志流底层引擎，支撑日志流的可靠存储与发布/订阅。你可以在 **milvus.yaml** 中设置这些参数。
-
-> 如使用默认 **docker-compose.yml** 文件启动第三方服务，则无需修改该部分参数。
-
-<table id="pulsar">
-<thead>
-  <tr>     
-    <th class="width20">参数</th>     
-    <th class="width70">说明</th>     
-    <th class="width10">默认值</th>   
-  </tr>
-</thead>
-<tbody>
-  <tr>
-		<td><code>pulsar.address</code></td>
-		<td><details>
-       <summary>Pulsar 监听请求的 IP 地址</summary>
-       <li>环境变量：<code>PULSAR_ADDRESS</code></li>
-      <li>Pulsar 监听请求的 IP 地址，用于访问 MinIO 服务。<code>pulsar.address</code> 与 <code>pulsar.port</code> 共同组成 Pulsar 监听请求的有效地址。</li>
-      <li>Milvus 启动时，优先从环境变量 <code>PULSAR_ADDRESS</code> 获得有效 IP 地址。</li>
-       <li>默认值适用于 Pulsar 与 Milvus 运行于相同的网络中。</li>
-      </details></td>
-		<td>localhost</td>
-	</tr>
-  <tr>
-		<td><code>pulsar.port</code></td>
-		<td><details>
-       <summary>Pulsar 监听请求的端口</summary>
-       <li>环境变量：<code>PULSAR_ADDRESS</code></li>
-      <li>Pulsar 监听请求的端口，用于访问 MinIO 服务。<code>pulsar.address</code> 与 <code>pulsar.port</code> 共同组成 Pulsar 监听请求的有效地址。</li>
-      <li>Milvus 启动时，优先从环境变量 <code>PULSAR_ADDRESS</code> 获得有效 IP 地址。</li>
-      </details></td>
-		<td>6650</td>
-	</tr>
-</tbody>
-</table>
 
 
 ## 服务地址配置
@@ -173,102 +135,12 @@ Pulsar 是系统的日志流底层引擎，支撑日志流的可靠存储与发�
 </thead>
 <tbody>
   <tr>
-		<td><code>rootCoord.address</code></td>
-		<td><details>
-       <summary>root coordinator 的 TCP/IP 地址</summary>
-       <li>如果将该参数设置为 <code>0.0.0.0</code>，root coordinator 将会在所有 IPv4 地址监听。</li>
-       <li>该参数只有在 Milvus 启动时设置生效。</li>
-      </details></td>
-		<td>localhost</td>
-	</tr>
-  <tr>
-		<td><code>rootCoord.port</code></td>
-		<td><details>
-       <summary>root coordinator 的 TCP 端口</summary>
-       <li>该参数只有在 Milvus 启动时设置生效。</li>
-      </details></td>
-		<td>53100</td>
-	</tr>
-  <tr>
 		<td><code>proxy.port</code></td>
 		<td><details>
        <summary>监听 Milvus 的 TCP 端口</summary>
        <li>该参数只有在 Milvus 启动时设置生效。</li>
       </details></td>
 		<td>19530</td>
-	</tr>
-  <tr>
-		<td><code>queryCoord.address</code></td>
-		<td><details>
-       <summary>query coordinator 的 TCP/IP 地址</summary>
-       <li>如果将该参数设置为 <code>0.0.0.0</code>，query coordinator 将会在所有 IPv4 地址监听。</li>
-       <li>该参数只有在 Milvus 启动时设置生效。</li>
-      </details></td>
-		<td>localhost</td>
-	</tr>
-  <tr>
-		<td><code>queryCoord.port</code></td>
-		<td><details>
-       <summary>query coordinator 的 TCP 端口</summary>
-       <li>该参数只有在 Milvus 启动时设置生效。</li>
-      </details></td>
-		<td>19531</td>
-	</tr>
-  <tr>
-		<td><code>queryNode.port</code></td>
-		<td><details>
-       <summary>query node 的 TCP 端口</summary>
-       <li>该参数只有在 Milvus 启动时设置生效。</li>
-      </details></td>
-		<td>21123</td>
-	</tr>
-  <tr>
-		<td><code>indexCoord.address</code></td>
-		<td><details>
-       <summary>index coordinator 的 TCP/IP 地址</summary>
-       <li>该参数只有在 Milvus 启动时设置生效。</li>
-      </details></td>
-		<td>localhost</td>
-	</tr>
-  <tr>
-		<td><code>indexCoord.port</code></td>
-		<td><details>
-       <summary>index coordinator 的 TCP 端口</summary>
-       <li>该参数只有在 Milvus 启动时设置生效。</li>
-      </details></td>
-		<td>31000</td>
-	</tr>
-  <tr>
-		<td><code>indexNode.port</code></td>
-		<td><details>
-       <summary>index node 的 TCP 端口</summary>
-       <li>该参数只有在 Milvus 启动时设置生效。</li>
-      </details></td>
-		<td>21121</td>
-	</tr>
-  <tr>
-		<td><code>dataCoord.address</code></td>
-		<td><details>
-       <summary>data coordinator 的 TCP/IP 地址</summary>
-       <li>该参数只有在 Milvus 启动时设置生效。</li>
-      </details></td>
-		<td>localhost</td>
-	</tr>
-  <tr>
-		<td><code>dataCoord.port</code></td>
-		<td><details>
-       <summary>data coordinator 的 TCP 端口</summary>
-       <li>该参数只有在 Milvus 启动时设置生效。</li>
-      </details></td>
-		<td>13333</td>
-	</tr>
-  <tr>
-		<td><code>dataNode.port</code></td>
-		<td><details>
-       <summary>data node 的 TCP 端口</summary>
-       <li>该参数只有在 Milvus 启动时设置生效。</li>
-      </details></td>
-		<td>21124</td>
 	</tr>
 </tbody>
 </table>
