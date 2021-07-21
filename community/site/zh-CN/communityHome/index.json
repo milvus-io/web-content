@@ -4,7 +4,7 @@
     "alt": "milvus community"
   },
   "mailingSection": {
-    "title": "Mailing List",
+    "title": "邮件列表",
     "list": [
       {
         "title": "Milvus Technical Discuss",
@@ -22,33 +22,33 @@
   },
   "aboutSection": {
     "title": "关于社区",
-    "content": "The Milvus community is comprised of users, contributors, and culture that unite our community and inspire new ideas, collaboration, and mutual learning. Our open-source community files issues and pull requests, attends events, advocates for greater adoption of Milvus, and makes many other valuable contributions. Read on to learn how you can get involved and become part of this amazing community.",
+    "content": "Milvus 社区由用户、贡献者和社区独有的文化所组成。他们将我们的社区团结起来，激发了许多新想法的诞生与社区成员间的协作和学习。Milvus 是一个开放且活跃的社区，我们鼓励社区成员提交 issue 和 PR、向外宣传 Milvus，并做出其他有利他人的贡献。请继续往下阅读，了解你可以如何参与并成为 Milvus 社区的一份子。",
     "list": [
       {
         "iconType": "build",
         "title": "Build",
-        "desc": "Build the cloud-native vector database through community collaboration.",
+        "desc": "通过社区协作构建云原生向量数据库。",
         "link": null,
         "label": null
       },
       {
         "iconType": "learn",
         "title": "Learn",
-        "desc": "Learn knowledge and skills as active community participants.",
+        "desc": "学习相关的知识和技能。",
         "link": null,
         "label": null
       },
       {
         "iconType": "grow",
         "title": "Grow",
-        "desc": "Grow into an expert on all things Milvus in community.",
+        "desc": "成长为 Milvus 专家。",
         "link": null,
         "label": null
       },
       {
         "iconType": "share",
         "title": "Share",
-        "desc": "Share best practices and lessons learned with the community at large.",
+        "desc": "与社区分享最佳实践和经验。",
         "link": null,
         "label": null
       }
@@ -137,11 +137,11 @@
       ]
     },
     "ambassador": {
-      "title": "Become a Milvus Advocate",
+      "title": "成为 Milvus 社区大使",
       "desc": "",
       "img": "../../assets/ambassador.png",
       "joinBtn": {
-        "label": "Learn how you can become one",
+        "label": "了解详情",
         "link": "/community/milvus_advocate.md"
       },
       "introBtn": {
@@ -151,7 +151,7 @@
     }
   },
   "joinSection": {
-    "title": "Join the community",
+    "title": "加入社区",
     "list": [
       {
         "label": "Github Discussion",
@@ -176,26 +176,26 @@
     ]
   },
   "resourceSection": {
-    "title": "Resources",
+    "title": "资源",
     "list": [
       {
         "iconType": "event",
-        "title": "Event",
-        "desc": "Build the cloud-native vector database through community collaboration.",
+        "title": "活动",
+        "desc": "我们常常举办活动，来这里看看有没有适合你参加的活动。",
         "link": "https://www.huodongxing.com/people/3672000551325?type=pub",
-        "label": "MORE EVENTS"
+        "label": "报名活动"
       },
       {
         "iconType": "video",
-        "title": "Video",
-        "desc": "Build the cloud-native vector database through community collaboration.",
+        "title": "视频",
+        "desc": "我们常常更新视频内容，来这里看看我们的视频教程、直播回放还有其他的精彩内容。",
         "link": "https://space.bilibili.com/478166626?spm_id_from=333.33.b_73656375726974794f75744c696e6b.1",
-        "label": "MORE VIDEOS"
+        "label": "观看视频"
       }
     ]
   },
   "partnerSection": {
-    "title": "Community Partner",
+    "title": "社区伙伴",
     "list": [
       {
         "img": "../../assets/onnx.png",
