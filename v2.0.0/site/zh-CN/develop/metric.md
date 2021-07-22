@@ -46,11 +46,11 @@ Milvus 基于不同的距离计算方式比较向量间的距离。选择合适�
 <tbody>
   <tr>
     <td class="tg-0pky">杰卡德距离 (Jaccard)<br>谷本距离 (Tanimoto)<br>汉明距离 (Hamming)</td>
-    <td class="tg-0pky"><ul><li>FLAT</li><li>IVF_FLAT</li></ul></td>
+    <td class="tg-0pky"><ul><li>BIN_FLAT</li><li>BIN_IVF_FLAT</li></ul></td>
   </tr>
   <tr>
     <td class="tg-0pky">超结构 (superstructure)<br>子结构 (substructure)</td>
-    <td class="tg-0pky">FLAT</td>
+    <td class="tg-0pky">BIN_FLAT</td>
   </tr>
 </tbody>
 </table>

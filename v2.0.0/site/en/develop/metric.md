@@ -45,11 +45,11 @@ The following table shows how these widely used similarity metrics fit with vari
 <tbody>
   <tr>
     <td class="tg-0pky"><ul><li>Jaccard</li><li>Tanimoto</li><li>Hamming</li></ul></td>
-    <td class="tg-0pky"><ul><li>FLAT</li><li>IVF_FLAT</li></ul></td>
+    <td class="tg-0pky"><ul><li>BIN_FLAT</li><li>BIN_IVF_FLAT</li></ul></td>
   </tr>
   <tr>
     <td class="tg-0pky"><ul><li>Superstructure</li><li>Substructure</li></ul></td>
-    <td class="tg-0pky">FLAT</td>
+    <td class="tg-0pky">BIN_FLAT</td>
   </tr>
 </tbody>
 </table>
