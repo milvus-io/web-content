@@ -4,7 +4,7 @@
     "alt": "milvus community"
   },
   "mailingSection": {
-    "title": "Mailing List",
+    "title": "Mailing Lists",
     "list": [
       {
         "title": "Milvus Technical Discuss",
@@ -195,7 +195,7 @@
     ]
   },
   "partnerSection": {
-    "title": "Community Partner",
+    "title": "Community Partners",
     "list": [
       {
         "img": "../../assets/onnx.png",
