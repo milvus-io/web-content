@@ -103,6 +103,10 @@ Milvus 可以通过 Docker 镜像的形式进行离线部署以单机版 Milvus 
 
 更多 Docker 相关内容，详见 [安装单机版 Milvus]()。
 
+#### Milvus 日志打印在哪里？
+
+Milvus 的日志默认输出在标准输出（standard output）和标准误差（standard error）流中，实际生产中建议用户重定向目录到持久卷已便于问题的排查。重定向日志需要修改 **milvus.yaml**中的 `log.file.rootPath` 参数配置。
+
 #### 仍有问题没有得到解答？
 
 如果仍有其他问题，你可以：
