@@ -39,7 +39,7 @@ Follow <a href="https://docs.docker.com/get-docker/">Get Docker</a> to install D
 See <a href="https://docs.docker.com/compose/install/">Install Docker Compose</a> for Docker Compose installation guide.
 </div>
 
-# Install Docker Desktop 
+## Install Docker Desktop 
 
 | Operating system | Requirements |
 | ---------- | ----------------- | 
