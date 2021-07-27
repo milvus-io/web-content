@@ -1,12 +1,12 @@
 ---
 id: prerequisite-docker.md
-label: prerequisite
+title: Before you Begin
 order: 0
 ---
 
 Before proceeding to installation, you must check the eligibility of your hardware and software.
 
-<div class="tab-wrapper"><a href="prerequisite-docker.md" class='active '>prerequisite</a><a href="prerequisite-helm.md" class=''>prerequisite</a></div>
+<div class="tab-wrapper"></div>
 
 # Check if your CPU supports SIMD extension instruction set
 
