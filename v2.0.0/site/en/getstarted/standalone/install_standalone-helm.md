@@ -17,15 +17,6 @@ Installing Milvus with Docker Compose can only be used for testing and cannot be
 
 <div class="tab-wrapper"><a href="install_standalone-docker.md" class=''>Install with Docker Compose</a><a href="install_standalone-helm.md" class='active '>Install on Kubernetes</a></div>
 
-## Prerequisites
-- Kubernetes version 1.14.0 or higher is required.
-- [Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/) is required.
-
-<div class="alert note">
-Installing minikube will also install hypervisor and kubectl. Kubectl is a command-line tool for managing Kubernetes from your local workstation.
-</div>
-
-- Helm version 3.0.0 or higher is required. See [Helm docs](https://helm.sh/docs/).
 
 ## 1. Start a local Kubernetes cluster:
 ```
