@@ -1,14 +1,17 @@
 ---
 id: prerequisite-helm.md
 title: Before you Begin
+label: Install on Kubernetes
 order: 1
+group: prerequisite
 ---
+# Before you Begin
 
 Before proceeding to installation, you must check the eligibility of your hardware and software.
 
-<div class="tab-wrapper"></div>
+<div class="tab-wrapper"><a href="prerequisite-docker.md" class=''>Install with Docker Compose</a><a href="prerequisite-helm.md" class='active '>Install on Kubernetes</a></div>
 
-# Check if your CPU supports SIMD extension instruction set
+## Check if your CPU supports SIMD extension instruction set
 
 Milvus' computing operations depend on CPU’s support for SIMD (Single Instruction, Multiple Data) extension instruction set. Whether your CPU supports SIMD extension instruction set is crucial to index building and vector similarity search within Milvus. Ensure that your CPU supports at least one of the following SIMD instruction sets:
 
@@ -23,7 +26,7 @@ Run the lscpu command to check if your CPU supports the SIMD instruction sets me
 lscpu | grep -e sse4_2 -e avx -e avx2 -e avx512
 ```
 
-# Check your Kubernetes and Helm version
+## Check your Kubernetes and Helm version
 - Kubernetes version 1.14.0 or higher is required.
 - [Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/) is required.
 

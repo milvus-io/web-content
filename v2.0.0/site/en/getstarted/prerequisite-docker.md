@@ -1,14 +1,16 @@
 ---
 id: prerequisite-docker.md
 title: Before you Begin
+label: Install with Docker Compose
 order: 0
+group: prerequisite
 ---
-
+# Before you Begin
 Before proceeding to installation, you must check the eligibility of your hardware and software.
 
-<div class="tab-wrapper"></div>
+<div class="tab-wrapper"><a href="prerequisite-docker.md" class='active '>Install with Docker Compose</a><a href="prerequisite-helm.md" class=''>Install on Kubernetes</a></div>
 
-# Check if your CPU supports SIMD extension instruction set
+## Check if your CPU supports SIMD extension instruction set
 
 Milvus' computing operations depend on CPU’s support for SIMD (Single Instruction, Multiple Data) extension instruction set. Whether your CPU supports SIMD extension instruction set is crucial to index building and vector similarity search within Milvus. Ensure that your CPU supports at least one of the following SIMD instruction sets:
 
@@ -23,7 +25,7 @@ Run the lscpu command to check if your CPU supports the SIMD instruction sets me
 lscpu | grep -e sse4_2 -e avx -e avx2 -e avx512
 ```
 
-# Check your Docker and Docker Compose version 
+## Check your Docker and Docker Compose version 
 
 - Docker version 19.03 or higher is required.
 
