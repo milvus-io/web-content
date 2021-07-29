@@ -18,11 +18,12 @@ Milvus standalone maintains many system variables that configure the operation. 
 
 
 
-If you are an administrator of Milvus, you may access the following configurations to maintain the system operation. You can set these configurations in **milvus.yaml**.
+If you are an administrator of Milvus, you may access the following configurations to maintain the system operation.
 
 ## etcd Configurations
 
-etcd is the metadata engine supporting Milvus' metadata storage and access. 
+etcd is the metadata engine supporting Milvus' metadata storage and access. You can set these configurations in **milvus.yaml** under **milvus/configs** directory.
+
 
 > You do not need to change this session if you use the default **docker-compose.yml** for third-party services.
 
@@ -63,7 +64,7 @@ etcd is the metadata engine supporting Milvus' metadata storage and access.
 
 ## MinIO Configurations
 
-MinIO is the storage engine supporting Milvus' data persistence for insert log files and index files.  You can set these configurations in **milvus.yaml**.
+MinIO is the storage engine supporting Milvus' data persistence for insert log files and index files.  You can set these configurations in **milvus.yaml** under **milvus/configs** directory.
 
 > You do not need to change this session if you use the default **docker-compose.yml** for third-party services.
 
@@ -126,7 +127,7 @@ MinIO is the storage engine supporting Milvus' data persistence for insert log f
 
 ## Server Address Configurations
 
-This session configures the IP address and port of the monitor request from Milvus. You can set these configurations in **milvus.yaml**.
+This session configures the IP address and port of the monitor request from Milvus. You can set these configurations in **milvus.yaml** under **milvus/configs** directory.
 
 <table id="server_address">
 <thead>
@@ -151,7 +152,7 @@ This session configures the IP address and port of the monitor request from Milv
 
 ## System Behavior Configurations
 
-This session configures the system behaviors of Milvus. You can set these configurations in **milvus.yaml**, **root_coord.yaml**, **data_coord.yaml**, **data_node.yaml**.
+This session configures the system behaviors of Milvus. You can set these configurations in **milvus.yaml** under **milvus/configs** directory, and **root_coord.yaml**, **data_coord.yaml**, **data_node.yaml** under **milvus/configs/advanced** directory.
 
 <table id="system_behavior">
 <thead>

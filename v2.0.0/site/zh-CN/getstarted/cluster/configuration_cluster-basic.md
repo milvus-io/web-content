@@ -18,7 +18,7 @@ group: cluster_sys
 
 ## 日志配置
 
-日志配置用于控制系统的日志输出。Milvus 的服务过程中会产生丰富的日志，默认配置下 Milvus 会将日志输出到标准输出（stdout）和标准错误输出（stderr），日志会记录 `debug` 及以上级别的内容。 你可以在 **milvus.yaml** 中设置这些参数。
+日志配置用于控制系统的日志输出。Milvus 的服务过程中会产生丰富的日志，默认配置下 Milvus 会将日志输出到标准输出（stdout）和标准错误输出（stderr），日志会记录 `debug` 及以上级别的内容。 你可以在 **milvus/configs** 路径下的 **milvus.yaml** 中设置这些参数。
 
 <table id="casual_user">
 <thead>

@@ -15,7 +15,7 @@ Milvus cluster maintains many system variables that configure the operation. All
 <div class="tab-wrapper"><a href="configuration_cluster-basic.md" class=''>Basic Configurations</a><a href="configuration_cluster-advanced.md" class='active '>Advanced Configurations</a></div>
 
 
-If you are an administrator of a Milvus cluster, you may access the following configurations to maintain the cluster operation. You can set these configurations in **milvus.yaml**.
+If you are an administrator of a Milvus cluster, you may access the following configurations to maintain the cluster operation. You can set these configurations in **milvus.yaml** under **milvus/configs** directory.
 
 ## etcd Configurations
 
@@ -60,7 +60,7 @@ etcd is the metadata engine supporting Milvus' metadata storage and access.
 
 ## MinIO Configurations
 
-MinIO is the storage engine supporting Milvus' data persistence for insert log files and index files.  You can set these configurations in **milvus.yaml**.
+MinIO is the storage engine supporting Milvus' data persistence for insert log files and index files.  You can set these configurations in **milvus.yaml** under **milvus/configs** directory.
 
 > You do not need to change this session if you use the default **docker-compose.yml** for third-party services.
 
@@ -121,7 +121,7 @@ MinIO is the storage engine supporting Milvus' data persistence for insert log f
 
 ## Pulsar Configurations
 
-Pulsar is the underlying engine supporting Milvus' reliable storage and pub/sub of log streams. You can set these configurations in **milvus.yaml**.
+Pulsar is the underlying engine supporting Milvus' reliable storage and pub/sub of log streams. You can set these configurations in **milvus.yaml** under **milvus/configs** directory.
 
 > You do not need to change this session if you use the default **docker-compose.yml** for third-party services.
 
@@ -159,7 +159,7 @@ Pulsar is the underlying engine supporting Milvus' reliable storage and pub/sub 
 
 ## Server Address Configurations
 
-This session configures the IP address and port of the monitor request from Milvus. You can set these configurations in **milvus.yaml**.
+This session configures the IP address and port of the monitor request from Milvus. You can set these configurations in **milvus.yaml** under **milvus/configs** directory.
 
 <table id="server_address">
 <thead>
@@ -274,7 +274,7 @@ This session configures the IP address and port of the monitor request from Milv
 
 ## System Behavior Configurations
 
-This session configures the system behaviors of Milvus. You can set these configurations in **milvus.yaml**, **root_coord.yaml**, **data_coord.yaml**, **data_node.yaml**.
+This session configures the system behaviors of Milvus. You can set these configurations in **milvus.yaml** under **milvus/configs** directory, and **root_coord.yaml**, **data_coord.yaml**, **data_node.yaml** under **milvus/configs/advanced** directory.
 
 <table id="system_behavior">
 <thead>
