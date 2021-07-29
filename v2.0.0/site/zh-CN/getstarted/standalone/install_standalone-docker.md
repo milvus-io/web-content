@@ -20,43 +20,6 @@ Docker Compose 部署方式只用作测试使用，不能用于生产环境。
 <div class="tab-wrapper"><a href="install_standalone-docker.md" class='active '>使用 Docker Compose 安装</a><a href="install_standalone-helm.md" class=''>使用 Kubernetes 安装</a></div>
 
 
-## 开始之前
-
-请先检查你的 Docker、Docker Compose 及硬件设备是否满足 Milvus 安装要求。
-
-<details><summary>检查 Docker 及 Docker Compose 版本：</summary>
-
-- 运行 `$ sudo docker info` 确认 Docker 版本。建议使用 19.03 或以上版本。
-
-<div class="alert note">
-安装 Docker 步骤见 <a href="https://docs.docker.com/get-docker/">Docker CE/EE</a> 官方安装说明。
-</div>
-
-- 运行 `$ sudo docker-compose version` 确认 Docker Compose 版本。建议使用 1.25.1 或以上版本。 
-
-<div class="alert note">
-安装 Docker Compose 步骤见 <a href="https://docs.docker.com/compose/install/">Docker Compose</a> 官方安装说明。
-</div>
-</details>
-
-<details><summary>检查 CPU 是否支持 SIMD 扩展指令集合：</summary>
-
-Milvus 在构建索引和查询向量时依赖 CPU 对 SIMD (Single Instruction Multiple Data) 扩展指令集合的支持。请确保运行 Milvus 的 CPU 至少支持以下一种 SIMD 指令集合：
-
-- SSE4.2
-- AVX
-- AVX2
-- AVX512
-
-使用 lscpu 命令以检查 CPU 是否支持特定 SIMD 指令集合：
-```
-$ lscpu | grep -e sse4_2 -e avx -e avx2 -e avx512
-```
-
-</details>
-
-
-
 ## 安装 Milvus 单机版
 
 
