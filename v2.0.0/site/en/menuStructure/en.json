@@ -167,11 +167,27 @@
       "order": 1
     },
     {
+      "id": "deploy_and_maintain",
+      "title": "Deploy and Maintain",
+      "label1": "",
+      "label2": "",
+      "order": 3,
+      "isMenu": true
+    },
+    {
+      "id": "scaleout.md",
+      "title": "Scale Out Guide",
+      "label1": "deploy_and_maintain",
+      "label2": "",
+      "label3": "",
+      "order": 0
+    },
+    {
       "id": "migrate",
       "title": "Migrate",
       "label1": "",
       "label2": "",
-      "order": 3,
+      "order": 4,
       "isMenu": true
     },
     {
@@ -208,7 +224,7 @@
     },
     {
       "id": "m2h.md",
-      "title": "Migrate from HDF5 to Milvus",
+      "title": "Migrate from Milvus to HDF5",
       "label1": "migrate",
       "label2": "",
       "label3": "",
@@ -219,7 +235,7 @@
       "title": "FAQs",
       "label1": "",
       "label2": "",
-      "order": 4,
+      "order": 5,
       "isMenu": true
     },
     {
@@ -273,7 +289,7 @@
       "label1": "",
       "label2": "",
       "label3": "",
-      "order": 5
+      "order": 6
     },
     {
       "id": "tools",
@@ -281,7 +297,7 @@
       "label1": "",
       "label2": null,
       "label3": null,
-      "order": 6,
+      "order": 7,
       "isMenu": true
     },
     {
@@ -307,7 +323,7 @@
       "title": "Release",
       "label1": null,
       "label2": null,
-      "order": 7,
+      "order": 8,
       "isMenu": true
     },
     {
