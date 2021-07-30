@@ -36,7 +36,6 @@ F2M:
     dimension: 256
     index_file_size: 1024
     metric_type: 'L2'
-Copy
 ```
 
 3. Run MilvusDM:

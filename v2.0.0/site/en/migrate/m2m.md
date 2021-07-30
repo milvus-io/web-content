@@ -44,7 +44,6 @@ M2M:
   dest_host: '127.0.0.1'
   dest_port: 19530
   mode: 'skip' # 'skip/append/overwrite'
-Copy
 ```
 
 3. Run MilvusDM:
@@ -60,7 +59,6 @@ $ milvusdm --yaml M2M.yaml
 ```
 collection_parameter, _ = milvus_meta.get_collection_info(collection_name)
 r_vectors, r_ids, r_rows = milvusdb.read_milvus_file(self.milvus_meta, collection_name, partition_tag) 
-Copy
 ```
 
 2. Insert the retrieved vectors and the corresponding IDs into a target Milvus.

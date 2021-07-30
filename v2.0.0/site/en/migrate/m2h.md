@@ -31,7 +31,6 @@ M2H:
       - 'partition_1'
       - 'partition_2'
   data_dir: '/home/user/data'
-Copy
 ```
 
 3. Run MilvusDM:
@@ -45,7 +44,6 @@ $ milvusdm --yaml M2H.yaml
 ```
 collection_parameter, version = milvus_meta.get_collection_info(collection_name)
 r_vectors, r_ids, r_rows = milvusdb.read_milvus_file(self.milvus_meta, collection_name, partition_tag)
-Copy
 ```
 
 2. Save the retrieved data as HDF5 files:
