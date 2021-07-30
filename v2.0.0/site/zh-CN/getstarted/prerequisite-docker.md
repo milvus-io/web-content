@@ -8,7 +8,7 @@ group: prerequisite
 # 安装前提
 安装前请先检查你的软件及硬件设备是否满足 Milvus 安装要求。
 
-<div class="tab-wrapper"><a href="prerequisite-docker.md" class='active '>Install with Docker Compose</a></div>
+<div class="tab-wrapper"><a href="prerequisite-docker.md" class='active '>Install with Docker Compose</a><a href="prerequisite-helm.md" class=''>Install on Kubernetes</a></div>
 
 ## 检查 CPU 是否支持 SIMD 扩展指令集合：
 
