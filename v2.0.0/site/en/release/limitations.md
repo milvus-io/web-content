@@ -60,4 +60,4 @@ VARCHAR will be supported in the 2.0 stable version. More string types will be s
 | **Params**      | **Maximum number** |
 | ----------- | ----------- |
 | Top K      | 16384       |
-| nq    | 163840       |
+| nq    | 16384       |
