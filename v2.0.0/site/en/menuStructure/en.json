@@ -2,7 +2,7 @@
   "menuList": [
   {
       "id": "about",
-      "title": "About",
+      "title": "About Milvus",
       "label1": "",
       "label2": null,
       "label3": null,
@@ -24,6 +24,15 @@
       "label2": null,
       "label3": null,
       "order": 3
+    },
+    {
+      "id": "enhancementproposals",
+      "title": "Enhancement Proposals",
+      "label1": "about",
+      "label2": "",
+      "label3": "",
+      "order": 4,
+      "outLink": "https://wiki.lfaidata.foundation/pages/viewpage.action?pageId=43287103"
     },
     {
       "id": "milvus_adopters.md",
