@@ -208,12 +208,39 @@
       "order": 1
     },
     {
+      "id": "tools",
+      "title": "Tools",
+      "label1": "develop",
+      "label2": null,
+      "label3": null,
+      "order": 6,
+      "isMenu": true
+    },
+    {
+      "id": "milvus_insight",
+      "title": "Milvus Insight",
+      "label1": "develop",
+      "label2": "tools",
+      "label3": "",
+      "order": 0,
+      "outLink": "https://github.com/milvus-io/milvus-insight"
+    },
+    {
+      "id": "sizing",
+      "title": "Milvus Sizing Tool",
+      "label1": "develop",
+      "label2": "tools",
+      "label3": "",
+      "order": 1,
+      "outLink": "https://zilliz.com/sizing-tool"
+    },
+    {
       "id": "index.md",
       "title": "Vector Index",
       "label1": "develop",
       "label2": "",
       "label3": "",
-      "order": 6
+      "order": 7
     },
     {
       "id": "metric.md",
@@ -221,7 +248,7 @@
       "label1": "develop",
       "label2": "",
       "label3": "",
-      "order": 7
+      "order": 8
     },
     {
       "id": "deploy_and_maintain",
@@ -349,38 +376,11 @@
       "order": 6
     },
     {
-      "id": "tools",
-      "title": "Tools",
-      "label1": "",
-      "label2": null,
-      "label3": null,
-      "order": 7,
-      "isMenu": true
-    },
-    {
-      "id": "milvus_insight",
-      "title": "Milvus Insight",
-      "label1": "tools",
-      "label2": "",
-      "label3": "",
-      "order": 0,
-      "outLink": "https://github.com/milvus-io/milvus-insight"
-    },
-    {
-      "id": "sizing",
-      "title": "Milvus Sizing Tool",
-      "label1": "tools",
-      "label2": "",
-      "label3": "",
-      "order": 1,
-      "outLink": "https://zilliz.com/sizing-tool"
-    },
-    {
       "id": "release",
       "title": "Release",
       "label1": null,
       "label2": null,
-      "order": 8,
+      "order": 7,
       "isMenu": true
     },
     {

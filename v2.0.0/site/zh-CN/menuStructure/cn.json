@@ -144,11 +144,95 @@
     },
     {
       "id": "develop",
-      "title": "开发文档",
+      "title": "开发",
       "label1": "",
       "label2": "",
       "order": 2,
       "isMenu": true
+    },
+    {
+      "id": "connect.md",
+      "title": "连接服务器",
+      "label1": "develop",
+      "label2": "",
+      "label3": "",
+      "order": 0
+    },
+    {
+      "id": "create.md",
+      "title": "创建 Collection、Partition",
+      "label1": "develop",
+      "label2": "",
+      "label3": "",
+      "order": 1
+    },
+    {
+      "id": "insert.md",
+      "title": "插入数据",
+      "label1": "develop",
+      "label2": "",
+      "label3": "",
+      "order": 2
+    },
+    {
+      "id": "delete.md",
+      "title": "删除操作",
+      "label1": "develop",
+      "label2": "",
+      "label3": "",
+      "order": 3
+    },
+    {
+      "id": "build.md",
+      "title": "创建索引",
+      "label1": "develop",
+      "label2": "",
+      "label3": "",
+      "order": 4
+    },
+    {
+      "id": "search",
+      "title": "查询向量",
+      "label1": "develop",
+      "label2": "",
+      "label3": "",
+      "order": 5,
+      "isMenu": true
+    },
+    {
+      "id": "search.md",
+      "title": "查询向量",
+      "label1": "develop",
+      "label2": "search",
+      "label3": "",
+      "order": 0
+    },
+    {
+      "id": "tools",
+      "title": "开发工具",
+      "label1": "develop",
+      "label2": null,
+      "label3": null,
+      "order": 6,
+      "isMenu": true
+    },
+    {
+      "id": "milvus_insight",
+      "title": "Milvus Insight",
+      "label1": "develop",
+      "label2": "tools",
+      "label3": "",
+      "order": 0,
+      "outLink": "https://github.com/milvus-io/milvus-insight"
+    },
+    {
+      "id": "sizing",
+      "title": "Milvus Sizing Tool",
+      "label1": "develop",
+      "label2": "tools",
+      "label3": "",
+      "order": 1,
+      "outLink": "https://zilliz.com/sizing-tool"
     },
     {
       "id": "index.md",
@@ -156,7 +240,7 @@
       "label1": "develop",
       "label2": "",
       "label3": "",
-      "order": 0
+      "order": 7
     },
     {
       "id": "metric.md",
@@ -164,11 +248,11 @@
       "label1": "develop",
       "label2": "",
       "label3": "",
-      "order": 1
+      "order": 8
     },
     {
       "id": "migrate",
-      "title": "Migrate",
+      "title": "数据迁移",
       "label1": "",
       "label2": "",
       "order": 3,
@@ -274,33 +358,6 @@
       "label2": "",
       "label3": "",
       "order": 5
-    },
-    {
-      "id": "tools",
-      "title": "开发工具",
-      "label1": "",
-      "label2": null,
-      "label3": null,
-      "order": 6,
-      "isMenu": true
-    },
-    {
-      "id": "milvus_insight",
-      "title": "Milvus Insight",
-      "label1": "tools",
-      "label2": "",
-      "label3": "",
-      "order": 0,
-      "outLink": "https://github.com/milvus-io/milvus-insight"
-    },
-    {
-      "id": "sizing",
-      "title": "Milvus Sizing Tool",
-      "label1": "tools",
-      "label2": "",
-      "label3": "",
-      "order": 1,
-      "outLink": "https://zilliz.com/sizing-tool"
     },
     {
       "id": "release",
