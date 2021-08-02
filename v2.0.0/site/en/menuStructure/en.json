@@ -183,29 +183,56 @@
       "order": 4
     },
     {
-      "id": "search.md",
+      "id": "search",
       "title": "Search",
       "label1": "develop",
       "label2": "",
       "label3": "",
-      "order": 5
+      "order": 5,
       "isMenu": true
     },
     {
       "id": "search.md",
       "title": "Conduct a Search",
-      "label1": "search",
-      "label2": "",
+      "label1": "develop",
+      "label2": "search",
       "label3": "",
       "order": 0
     },
     {
       "id": "expression.md",
       "title": "Predicate Expressions",
-      "label1": "search",
-      "label2": "",
+      "label1": "develop",
+      "label2": "search",
       "label3": "",
       "order": 1
+    },
+    {
+      "id": "tools",
+      "title": "Tools",
+      "label1": "develop",
+      "label2": null,
+      "label3": null,
+      "order": 6,
+      "isMenu": true
+    },
+    {
+      "id": "milvus_insight",
+      "title": "Milvus Insight",
+      "label1": "develop",
+      "label2": "tools",
+      "label3": "",
+      "order": 0,
+      "outLink": "https://github.com/milvus-io/milvus-insight"
+    },
+    {
+      "id": "sizing",
+      "title": "Milvus Sizing Tool",
+      "label1": "develop",
+      "label2": "tools",
+      "label3": "",
+      "order": 1,
+      "outLink": "https://zilliz.com/sizing-tool"
     },
     {
       "id": "index.md",
@@ -213,7 +240,7 @@
       "label1": "develop",
       "label2": "",
       "label3": "",
-      "order": 6
+      "order": 7
     },
     {
       "id": "metric.md",
@@ -221,7 +248,7 @@
       "label1": "develop",
       "label2": "",
       "label3": "",
-      "order": 7
+      "order": 8
     },
     {
       "id": "deploy_and_maintain",
@@ -288,11 +315,40 @@
       "order": 4
     },
     {
+      "id": "reference",
+      "title": "Reference",
+      "label1": "",
+      "label2": "",
+      "order": 5,
+      "isMenu": true
+    },
+    {
+      "id": "metric.md",
+      "title": "Similarity Metrics",
+      "label1": "reference",
+      "label2": "",
+      "order": 0
+    },
+    {
+      "id": "index.md",
+      "title": "Vector Index",
+      "label1": "reference",
+      "label2": "",
+      "order": 1
+    },
+    {
+      "id": "glossary.md",
+      "title": "Glossary",
+      "label1": "reference",
+      "label2": "",
+      "order": 2
+    },
+    {
       "id": "faq",
       "title": "FAQs",
       "label1": "",
       "label2": "",
-      "order": 5,
+      "order": 6,
       "isMenu": true
     },
     {
@@ -341,46 +397,11 @@
       "order": 1
     },
     {
-      "id": "glossary.md",
-      "title": "Glossary",
-      "label1": "",
-      "label2": "",
-      "label3": "",
-      "order": 6
-    },
-    {
-      "id": "tools",
-      "title": "Tools",
-      "label1": "",
-      "label2": null,
-      "label3": null,
-      "order": 7,
-      "isMenu": true
-    },
-    {
-      "id": "milvus_insight",
-      "title": "Milvus Insight",
-      "label1": "tools",
-      "label2": "",
-      "label3": "",
-      "order": 0,
-      "outLink": "https://github.com/milvus-io/milvus-insight"
-    },
-    {
-      "id": "sizing",
-      "title": "Milvus Sizing Tool",
-      "label1": "tools",
-      "label2": "",
-      "label3": "",
-      "order": 1,
-      "outLink": "https://zilliz.com/sizing-tool"
-    },
-    {
       "id": "release",
       "title": "Release",
       "label1": null,
       "label2": null,
-      "order": 8,
+      "order": 7,
       "isMenu": true
     },
     {
