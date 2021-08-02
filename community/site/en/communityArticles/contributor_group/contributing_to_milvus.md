@@ -42,7 +42,7 @@ Eligible reviewers will be assigned to your PR once it is opened for a thorough 
 
 > If your PR does not get a response, you can find corresponding reviewers in the [#pr-reviews](https://milvusio.slack.com/messages/pr-reviews) channel on Slack.
 
-### Style reference
+### Style Reference
 
 Keeping a consistent style for code, code comments, commit messages, and PR descriptions will greatly accelerate your PR review process. We highly recommend you refer to and comply to the following style guides when you put together your pull requests:
 
