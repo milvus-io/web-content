@@ -4,141 +4,122 @@ id: making_your_first_contributions.md
 
 # 成为 Milvus 贡献者
 
-不知道如何快速地成为 Milvus 贡献者？请看这篇文档！
+感谢大家关注 Milvus 并加入开源社区，我们欢迎每一位贡献者。
 
->   如果还没有 GitHub 账号，先[注册](https://github.com/signup)一个。
+本篇文档旨在帮助社区新成员熟悉 GitHub 贡献流程。
 
+## 选择贡献内容
 
+第一步，你需要了解自己可以哪些方向做出贡献。
 
-## 找到可以做的内容
+作为你贡献的开始，你可以选择一些不需要深厚技术背景的问题着手：
 
-第一步，找到可以改进的地方。Milvus 社区欢迎各种形式的贡献，再小的贡献都是好的！
+- 为代码加注释
 
-这里有一些事情不需要你有很强的技术背景，可以作为你贡献的开始：
+- 报告代码中的错误
 
--   帮助改进 Milvus 的文档
--   给代码加些注释
--   写一个单元测试
+- 帮助改进 Milvus 的文档
 
-另外，还可以在设置了 [good-first-issue](https://github.com/milvus-io/milvus/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22) 标签的 Issue 中找到你感兴趣的。good-first-issue 标签下的 Issue 都包含明确的步骤和预期产出，适合第一次做贡献的开发者。
+在开始贡献之前，你需要 [发起 issue](https://github.com/milvus-io/milvus/issues/new/choose) 说明问题。另外，还可以在设置了 [good-first-issue](https://github.com/milvus-io/milvus/issues?q=is:open+is:issue+label:"good+first+issue") 标签的 issue 中找到你感兴趣的。good-first-issue 标签下的 issue 都包含明确的步骤和预期产出，适合第一次做贡献的开发者。
 
+## 分配 Issue
 
+第二步，当你找到了一个合适的 issue，你需要将 issue 分配给你自己，并留言表示接下来你将着手解决这个 issue。
 
-## 在 GitHub 上将 Issue 分配给自己
+在 issue 页面下方的留言栏中回复 `/assign` 或 `/assign @your-github-id`，该 issue 就会由机器人自动分配至你的名下。你可以在页面右上方 *Assignees* 栏中找到自己的 GitHub ID。
 
-第二步，当你找到了一个合适的 Issue，你需要将 Issue 分配给你自己，让他人知道你打算解决这个 Issue。
+## 安装 Git
 
--   在 Issue 下回复 `/assign @yourself`（yourself 换成你的 GitHub 用户名）
--   机器人会自动地将这个 Issue 分配给你
--   你的名字将会出现在 `Assignees` 中
+为了在本地设备上使用 Git 命令，你需要为自己的操作系统 [安装 Git]()。
 
+> 如果这是你第一次使用Git，你需要先在 Git 中配置 GitHub ID 和邮箱地址，Git在提交修改时会使用这两个字段作为作者信息。
 
+```
+git config --global user.name "<your-github-id>"
 
-## 解决这个 Issue，并且提交一个 Pull Request
+git config --global user.email <your-email@example.com>
+```
 
-第三步，你需要把项目下载到本地进行修改，然后提交给 Milvus 项目。这一步需要你本地装有 Git，以及一点命令行的使用经验。
+## Fork 仓库
 
->   如果还没有安装 Git，请看[这里](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)。
-
-
-
-### Fork 仓库
-
-在 Milvus 仓库的页面上，点击右上角的Fork按钮。这会在你的账户中创建一个这个仓库的副本。
+在 [Milvus 仓库](https://github.com/milvus-io/milvus) 的页面中，点击右上角的 **Fork** 按钮，在你的账户中创建一个这个仓库的副本。
 
 <img src="fork.png" alt="image-20210618153043823" style="zoom:50%;" />
 
-### Clone 仓库
+## Clone 仓库
 
-在你的账户中找到这个仓库的副本，点击 Code 按钮，在弹出的页面点击 *复制到剪贴板* 按键。
+进入你创建的仓库副本，点击 *Code* 按钮，在弹出的页面点击 *复制到剪贴板* 按钮。
 
 <img src="clone.png" alt="image-20210618153215652" style="zoom:50%;" />
 
 打开终端并运行以下命令：
 
-```shell
-$ git clone <剪贴板内容>
+```
+git clone <剪贴板内容>
 ```
 
 例如：
 
-```shell
-$ git clone https://github.com/yourself/milvus.git
+```
+git clone https://github.com/<your-github-id>/milvus.git
 ```
 
-这时，一个名为 `milvus` 的仓库会下载到你的电脑上。
+此处 `<your-github-id>` 代表你的 GitHub ID。此命令会将一个名为 `milvus` 的仓库会下载至你的本地设备上。
 
-### 创建分支
+## 创建分支
 
-进入到代码仓库的目录：
+进入到代码仓库的本地目录：
 
-```shell
-$ cd milvus
+```
+cd milvus
 ```
 
-现在，使用 `git checkout` 命令创建一个分支：
+使用 `git checkout` 命令创建一个新分支：
 
-```shell
-$ git checkout -b <your-new-branch-name>
+```
+git checkout -b <your-new-branch-name>
 ```
 
-`<your-new-branch-name>` 换成你的分支名（分支名最好能够表示你要做什么事情）。
+将 `<your-new-branch-name>` 换成你的新分支名（分支名应当说明你即将进行的工作）。
 
-### 修改和提交
+## 修改和提交
 
 现在，开始你的修改，在修改完之后记得保存文件。
 
-
-
->   如果第一次使用 Git，需要先配置自己的名字和邮箱，提交内容时 Git 会将这两个字段作为作者的信息
->
->   ```shell
->   $ git config --global user.name "John Doe"
->   $ git config --global user.email johndoe@example.com
->   ```
-
-
-
 使用 `git add` 命令选中刚才修改的文件：
 
-```shell
-$ git add <filename>
+```
+git add <filename>
 ```
 
 需要将 `<filename>` 替换成刚才修改的文件。
 
-
-
 然后，使用 `git commit` 提交选中的文件：
 
-```shell
-$ git commit -m "<commit-message>" -s
+```
+git commit -m "<commit-message>" -s
 ```
 
-把 `<commit-message>` 改为这次修改内容的简述。
+把 `<commit-message>` 改为这次修改内容的简述。了解更多关于 [Commit message 格式]()。
+
+> `-s` 代表为你的 commit message 添加 Sign-off 信息。
 
 ### 将修改上传到 GitHub
 
 现在，需要使用 `git push` 命令将本地的改动上传到 GitHub：
 
-```shell
-$ git push origin <your-branch-name>
+```
+git push origin <your-branch-name>
 ```
 
-将 `<your-branch-name>` 替换成上面创建的分支名。
+将 `<your-branch-name>` 替换成先前创建的分支名。
 
 ### 将改动提交到 Milvus 仓库
 
-回到 GitHub 上自己的仓库页面，会看到一个提示，点击 *Compare & pull request* 创建 Pull Request，然后等待 review 和合并。
+上传完成后回到 GitHub 上自己的仓库页面，你会看到一个提示，点击 *Compare & pull request* 创建 pull request，然后等待 review 和合并。
 
 <img src="pr.png" alt="image-20210618154611749" style="zoom:50%;" />
-
-
 
 ## 改进这篇文档
 
 如果你在这篇文档中遇到了问题，也可以[在 GitHub 上修改它](https://github.com/milvus-io/docs/edit/master/community/site/zh-CN/communityArticles/contributor_group/making_your_first_contributions.md)！
-
-<br>
-<br>
-<br>

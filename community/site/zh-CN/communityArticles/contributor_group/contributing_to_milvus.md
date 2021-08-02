@@ -2,81 +2,92 @@
 id: contributing_to_milvus.md
 ---
 
-# Milvus 贡献指南
+贡献代码
 
-这里是 Milvus 项目贡献指南，如果你在参与 Milvus 的贡献中遇到了问题，请 [创建一个 Issue](https://github.com/milvus-io/community/issues/new) 反馈给我们。
+Milvus 是一个开源项目，我们欢迎每一位贡献者，也希望所有贡献者都遵守我们的 [行为准则](code_of_conduct.md)。
 
+本篇文档详细说明了开发工作流程中的惯例、提交消息格式、最佳实践以及在向 Milvus 贡献代码时可能需要的其他资源。 如果在参与 Milvus 贡献时遇到任何问题，欢迎 [提交 GitHub Issue](https://github.com/milvus-io/community/issues/new) 或通过 [Slack](https://join.slack.com/t/milvusio/shared_invite/zt-e0u4qu3k-bI2GDNys3ZqX1YCJ9OM~GQ) 联系我们的工程师团队。
 
+## 开始之前/快速开始
 
-## 交流
+关于搭建开发环境，参见 [Milvus Development Guide](https://github.com/milvus-io/milvus/blob/master/DEVELOPMENT.md)。
 
-我们的交流平台如下：
+## GitHub 工作流程
 
--   [GitHub Issues](https://github.com/milvus-io/milvus/issues)：用于记录 Milvus 项目的功能和 BUG，与之有关的内容都可以在 Issue 下讨论
--   [Milvus Technical-Discuss 邮件列表](https://lists.lfaidata.foundation/g/milvus-technical-discuss)：用于 Milvus 项目的技术讨论，这里有所有的技术讨论
--   [Slack Channels](https://join.slack.com/t/milvusio/shared_invite/zt-e0u4qu3k-bI2GDNys3ZqX1YCJ9OM~GQ)：实时交流的平台
+一般情况下，我们遵循 "fork-and-pull" 工作流程。
 
+1. 将 GitHub 上的 Milvus 公有库 [Fork](https://docs.github.com/en/free-pro-team@latest/github/getting-started-with-github/fork-a-repo) 至自己的账户中；
+2. 在私有库中新建分支，并在其中 [提交更改](https://docs.github.com/en/free-pro-team@latest/github/collaborating-with-issues-and-pull-requests/committing-changes-to-a-pull-request-branch-created-from-a-fork)；
+3. 提交 [pull request（PR）](https://docs.github.com/en/free-pro-team@latest/github/collaborating-with-issues-and-pull-requests/about-pull-requests)，等待审阅以及合并。
 
+> *在向上游提交建议的更改之前*，[同步](https://docs.github.com/en/free-pro-team@latest/github/getting-started-with-github/fork-a-repo#keep-your-fork-synced) 你的私有 Milvus 库。
 
-## GitHub flow
+更多指引，参考 [成为 Milvus 贡献者]()。
 
-为了能够更好地进行多人的协作，我们约定在 Milvus 项目上以 [GitHub flow](https://docs.github.com/en/get-started/quickstart/github-flow) 的方式修改和提交内容。简单的说，以分支的方式面向主分支开发。当你要做任何修改的时候，先从主分支创建出一个分支，修改提交后在 GitHub 上创建合并请求，通过合并请求将代码集成到 Milvus 的主分支上。
+### prow 机器人
 
+为了管理 GitHub PR 标准流程，Milvus 项目集成了一个 prow 机器人（基于 Kubernetes 的 CI/CD 系统）。它会自动为你的 PR 添加标签并分配审阅者。 你还可以在注释中使用命令行来管理该过程。 详细信息见 [命令参考](https://prow.zilliz.cc/command-help)。
 
+### PR 常见疑难解答
 
-## 创建合并请求（Pull Request）
+以下是在 PR 中可能遇到的常见问题以及相应的解决方案：
 
-在 GitHub 上，代码的合并是通过创建 Pull Request（一般简称为 PR）实现的，流程上与 GitHub 上标准的 PR 流程无异。在这个基础上，Milvus 项目还集成了一个 prow 机器人，用于帮助 PR 流程的运转。
+- DCO 检查失败：请参阅 [DCO 页面](https://github.com/apps/dco) 以解决问题。
 
-只要你创建过 PR，你就会在 GitHub 上见过这个机器人，它会自动地给你的 PR 设置标签和 Reviewer。除了设置标签和 Reviewer，你还可以通过在评论里使用一些命令来做更多事情，命令请参阅 [命令参考文档](https://prow.zilliz.cc/command-help) 。
+- 测试用例失败：调整代码以通过测试用例。如果测试用例与你引入的代码更改无关，则通过 *re-run jobs* 以解决问题。
 
-新贡献者 PR 中常遇到的问题：
+## 代码审查
 
--   DCO检查失败，请参考 [DCO页面](https://github.com/apps/dco) 以解决问题
--   测试运行失败，若与你的修改无关，通过 re-run 以解决问题
--   在 git commit message 中包含@（如@person）或者可以关闭 Issue 的[关键字](https://help.github.com/en/articles/closing-issues-using-keywords)（例如 fixes #xxxx）
+PR 开启后，将会有审阅者对你的代码进行全面检查，检查内容涵盖思路正确性、bug、改进可能性、文档和注释，以及代码风格等方面。
 
+> 如果你的 PR 长时间未得到回应，你可以在 Slack 的 [#pr-reviews](https://milvusio.slack.com/messages/pr-reviews) 频道中联系相关 reviwer。
 
+### 风格参考
 
-## 代码审查（Code Review）
+保持代码、注释、commit message 和 PR 描述的风格一致可以大大加快你的 PR 审查流程。我们强烈建议你在开启 PR 时参考并遵守以下风格指南：
 
-代码审查是 PR 的一个必经步骤，目的是保证代码背后的想法是合理的，并且修改是正确且完整的。
+- 代码风格：参考 [Effictive Go Style Guide](https://golang.org/doc/effective_go)
 
-为了让你的 PR 更快地被接收，你需要：
+- 注释风格：do we need one? we do not have one for now
 
--   代码风格遵循 Effictive Go，参考：https://golang.org/doc/effective_go
--   编写良好的 commit message，参考：https://chris.beams.io/posts/git-commit
--   将大的修改分解成一系列小的修改，每个小的修改解决一小部分问题从而在总体上来解决更大的问题
--   给 PR 加上合适的标签
+- Commit message 和 PR 描述的风格： 参考 [good commit messages](https://chris.beams.io/posts/git-commit)
 
-注意：如果你的 PR 没有得到及时的回复，你可以在 Slack 上的 [#pr-reviews](https://milvusio.slack.com/messages/pr-reviews) 频道来寻找 Reviewer。
+### 最佳实践
 
+以下，我们列出了一些向 Milvus 贡献代码时可以用到的技巧：
 
+- 将一个大的改动分成一系列的小改动，每个小改动都是一个易于理解的部分。
 
-## 最佳实践
+- 合并所有 commit，帮助我们维持清晰的 Git 历史记录。
 
--   编写清晰且有意义的 git commit message。
--   如果 PR 将“完全”修复某一个 Issue，请在创建 PR 时将 `fixes #123` 加入 PR 正文中（其中 123 是 PR 将修复的 Issue 编号，这将在 PR 合并时自动关闭该问题）。
--   确保你的 git commit message 中没有包含 `@mentions` 或 `fixes` 关键字，这些应该包含在 PR 正文中。
--   请压缩（squash）你的提交，以便我们可以维护更清晰的 git 历史记录。
--   确保 PR 包含清晰详细的描述，解释更改的原因，让 Reviewer 了解你的 PR。
+- 保持 commit message 简明扼要。
 
+- 不要在提交消息中包含 `@someone` 或 `fixes #<issue-number>` 等关键词。 应当在 PR 描述中说明它们。
 
+- 编写清晰详细的 PR 描述，解释代码更改的原因，并确保有足够的信息供审阅者了解你的 PR。
+
+- 如果你的 PR 完全修复了某个问题，请在 PR 正文中填写 `fix #<issue-number>` 关键词。 这将在 PR 合并时自动关闭你提到的问题。
+
+- 在 PR 页面中机器人的引导下，为你的 PR 分配合适的审阅者。
 
 ## 测试
 
-贡献者需要确保提交的代码通过测试，如果遇到了问题，可以在 GitHub 评论中 @milvus-io/sig-testing 获得帮助。
+贡献者有责任确保提交的代码更改通过测试。 如果遇到问题，在评论中联系 @milvus-io/sig-testing 寻求帮助。
 
-Milvus 中包含多种测试，不同类型的测试用例的测试目标也不一样：
+贡献给 Milvus 的代码需要通过多种测试，每个测试都有不同的目标：
 
--   单元测试：用于验证某一个单元的功能按照预期运行。通过在 Golang 文件中导入 testing 这个包来进行单元测试。每一个 PR 都需要通过所有的单元测试，才能够被合并进入主分支。单元测试代码在每个 Golang 文件旁，例如：`milvus/internal/allocator/global_id.go` 中的函数将在 `milvus/internal/allocator/global_id_test.go` 中进行测试。
--   集成测试：关键的功能测试，旨在保证 PR 一定程度正确性的情况下能够更快地被合并到主分支上。这部分测试使用 Python 编写，存储在 `milvus/tests/python_test` 和 `milvus/tests20/python_client` 目录下，可通过 `pytest --tags=smoke .` 运行。
--   端到端测试：完整的功能性测试用例。这部分测试使用 Python 编写，存储在 `milvus/tests/python_test` 和 `milvus/tests20/python_client` 目录下，可通过 `pytest .` 运行。
+- 单元测试：用以验证功能是否按预期运行。 Golang 包含通过 [testing](https://golang.org/pkg/testing/) package 进行单元测试的内置功能。 每个 PR 必须通过所有单元测试才能合并。 每个单元测试代码都和对应的 Golang 文件一起存放，例如：**milvus/internal/allocator/global_id.go** 中的功能会在**milvus/internal/allocator/global_id_test.go** 中进行测试。
 
-CI 将会在 PR 上运行单元测试和集成测试，结果会更新在 GitHub Pull Request Status 上，任何测试的失败都会导致代码无法合并进入主分支。
+- 集成测试：端对端测试的一个子集，用以确保 PR 可以高效合并。 这些测试是用 Python 编写的，存储在 **milvus/tests/python_test** 和 **milvus/tests20/python_client** 目录下。 运行集成测试：
 
+```
+pytest --tags=smoke .
+```
 
+- 端对端测试：完整的功能测试用例。 这些测试是用 Python 编写的，存储在 **milvus/tests/python_test** 和 **milvus/tests20/python_client** 目录下。 运行端对端测试：
 
-## 问题管理或分类
+```
+pytest .
+```
 
-你可能会注意到 Milvus 仓库有很多未解决的 Issue，帮助管理或分类这些未解决的问题可能是一项巨大的贡献，也是了解项目各个领域的绝佳机会。我们使用各类的 Label 来标记 Issue，从而更快地让合适的人看到。
+持续集成（Continuous integration，即 CI）将在 PR 上运行单元测试和集成测试，其结果将在 GitHub Pull Request 状态中更新。 任何测试失败都会阻止代码合并。
