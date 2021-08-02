@@ -2,93 +2,92 @@
 id: contributing_to_milvus.md
 ---
 
-# Contributing to Milvus
+# Contributing Code
 
-An entrypoint to getting started with contributing to the Milvus project. If you encounter problems in participating in the Milvus contribution, please [file an issue](https://github.com/milvus-io/community/issues/new).
+Milvus is an open source project and we welcome every contributor. Contributions to Milvus are expected to adhere to our [Code of Conduct](code_of_conduct.md).
 
+This document outlines the conventions about development workflow, commit message formatting, best practices, and other resources you may need while contributing code to Milvus.  [File an issue](https://github.com/milvus-io/community/issues/new) or reach out to our engineering team at [Slack]() if you encounter any problem in participating in contribution to Milvus.
 
+## Before You Start/Quick Start
 
-## Communication
+For more instruction on setting up your development environment, refer to [Milvus Development Guide](https://github.com/milvus-io/milvus/blob/master/DEVELOPMENT.md).
 
-Here are some discuss platforms:
+## GitHub Workflow
 
--   [GitHub Issues](https://github.com/milvus-io/milvus/issues) for tracking issues
--   [milvus-technical-discuss](https://lists.lfaidata.foundation/g/milvus-technical-discuss) hosts contributor discussions for upstream
--   [Slack](https://lists.lfaidata.foundation/g/milvus-technical-discuss) to discuss real-time and directly
+Generally, we follow the "fork-and-pull" GitHub workflow.
 
+1. [Fork](https://docs.github.com/en/free-pro-team@latest/github/getting-started-with-github/fork-a-repo) the repo on GitHub;
+2. [Commit](https://docs.github.com/en/free-pro-team@latest/github/collaborating-with-issues-and-pull-requests/committing-changes-to-a-pull-request-branch-created-from-a-fork) changes to your own branch;
+3. Submit a [pull request (PR)](https://docs.github.com/en/free-pro-team@latest/github/collaborating-with-issues-and-pull-requests/about-pull-requests) so that we can review your changes.
 
+> Remember to [sync your forked repository](https://docs.github.com/en/free-pro-team@latest/github/getting-started-with-github/fork-a-repo#keep-your-fork-synced) *before* submitting proposed changes upstream.
 
-## GitHub flow
+See [Make Your First Contribution](making_your_first_contributions.md) for detailed instructions.
 
-To check out code to work on, please refer to [the GitHub Workflow Guide](https://www.kubernetes.dev/docs/guide/github-workflow).
+### Prow robot
 
-In simple words, making changes on a branch that created from the master branch, create a pull request on GitHub, and then these changes will be integrate into Milvus if pull request be merged.
+To manage the stadard GitHub PR process, the Milvus project integrates a prow robot (a Kubernetes-based CI/CD system), which will automatically add labels and assign reviewers to your PR. You may also use commands in comment to manage the process. See [Command Reference](https://prow.zilliz.cc/command-help) for more information.
 
+### PR Troubleshooting
 
+Below are the common issues you may encounter in a PR and the corresponding solutions:
 
-## Create a Pull Request
+- DCO check failed - See [DCO page](https://github.com/apps/dco) to troubleshoot the problem.
 
-On GitHub, the code is merged by creating a Pull Request (generally referred to as a PR), and the process is no different from the standard PR process on GitHub. In addition, the Milvus project also integrates a prow robot (from Kubernetes) to help the operation of the PR process.
-
-As long as you have created a PR, you will have seen this bot on GitHub, it will automatically add some labels to your PR, and suggest several reviewers. In addition to these automatic actions, you can also do more by using some commands in the comments. For commands, please refer to [Command Reference](https://prow.zilliz.cc/command-help).
-
-Common new contributor PR issues are:
-
--   DCO check failed. See the [DCO page](https://github.com/apps/dco) to troubleshooting help
-
--   Dealing with test cases which fail on your PR, unrelated to the changes you introduce. Sse re-run to solve the problem
--   Include mentions (like @person) and [keywords](https://help.github.com/en/articles/closing-issues-using-keywords) which could close the issue (like fixes #xxxx) in commit messages
-
-
+- Test cases failed - Deal with the test cases that fail on your PR, or re-run jobs to solve the problem if the test cases are irrelevant to the changes you introduced.
 
 ## Code Review
 
-Code review is a necessary step of PR, the purpose is to ensure that the idea behind the code is reasonable, and the modification is correct and complete.
+Eligible reviewers will be assigned to your PR once it is opened for a thorough code review, looking at correctness, bugs, opportunities for improvement, documentation and comments, and style.
 
-To make it easier for your PR to receive reviews, consider the reviewers will need you to:
+> If your PR does not get a response, you can find corresponding reviewers in the [#pr-reviews](https://milvusio.slack.com/messages/pr-reviews) channel on Slack.
 
--   follow the [Effictive Go](https://golang.org/doc/effective_go)
+### Style Reference
 
--   write [good commit message](https://chris.beams.io/posts/git-commit)
+Keeping a consistent style for code, code comments, commit messages, and PR descriptions will greatly accelerate your PR review process. We highly recommend you refer to and comply to the following style guides when you put together your pull requests:
 
--   break large changes into a logical series of smaller patches which individually make easily understandable changes, and in aggregate solve a broader issue
+- Coding style: refer to the [Effictive Go Style Guide](https://golang.org/doc/effective_go)
 
--   label PRs with appropriate reviewers: to do this read the messages the bot sends you to guide you through the PR process
+- Commit message and PR description style: refer to [good commit messages](https://chris.beams.io/posts/git-commit)
 
-Note: If your PR does not get a response, you can find Reviewer in the [#pr-reviews](https://milvusio.slack.com/messages/pr-reviews) channel on Slack.
+### Best Practices
 
+Below, we listed some tips for you while contributing code to Milvus:
 
+- Divide a large change into a logical series of smaller ones, each of which is an easily understandable patch.
 
-## Best Practice
+- Squash your commits to help us maintain a clearer Git history.
 
--   Write clear and meaningful git commit messages
+- Write clear and meaningful Git commit messages.
 
--   If the PR will *completely* fix a specific issue, include `fixes #123` in the PR body (where 123 is the specific issue number the PR will fix. This will automatically close the issue when the PR is merged
--   Make sure you don’t include `@mentions` or `fixes` keywords in your git commit messages. These should be included in the PR body instead
+- Do not include `@someone` or `fixes #<issue-number>` keywords in your commit messages. State them in the PR description instead.
 
--   Please squash your commits so that we can maintain a clearer git history
+- Compile a clear and detailed PR description explaining the reasons for the changes, and ensure that there is sufficient information for the reviewer to understand your PR.
 
--   Make sure you include a clear and detailed PR description explaining the reasons for the changes, and ensuring there is sufficient information for the reviewer to understand your PR
+- If your PR *completely* fixes a specific issue, include `fixes #<issue-number>` in the PR body. This will automatically close the issue you mentioned when the PR is merged.
 
-
+- Assign appropriate reviewers to your PR under the guidance of the robot in your PR page.
 
 ## Testing
 
-It is the responsibility of the contributor to ensure that the submitted code changes pass the test. If you encounter a problem, you can contact @milvus-io/sig-testing for help.
+It is contributors' responsibility to ensure that the submitted code changes pass the tests. Contact @milvus-io/sig-testing in comment for help if you encounter a problem.
 
-Milvus contains a variety of tests, and different types of test cases have different test objectives:
+Code contributed to Milvus will need to complete a variety of tests, each of which has a different objective:
 
--   Unit test: Used to verify that functions operates as expected. Golang includes a native ability for unit testing via the [testing](https://golang.org/pkg/testing/) package. Each PR needs to pass all unit tests before it can be merged into the master branch. The unit test code is next to each Golang file, for example: the functions in `milvus/internal/allocator/global_id.go` will be tested in `milvus/internal/allocator/global_id_test.go`.
+- Unit tests: Verifies if functions operate as expected. Golang includes an in-built ability for unit testing via [testing](https://golang.org/pkg/testing/) package. Each PR has to pass all unit tests before it can be merged. Each unit test code is stored together with the corresponding Golang file, for example: the functions in **milvus/internal/allocator/global_id.go** will be tested in **milvus/internal/allocator/global_id_test.go**.
 
--   Integration test: These are a subset of the end-to-end test, which aims to ensure that the PR can be merged into the mater branch more quickly. These tests is written in Python, stored in the `milvus/tests/python_test` and `milvus/tests20/python_client` directories, and can be run through `pytest --tags=smoke .`.
+- Integration tests: A subset of the end-to-end test to ensure that the PR can be merged with efficiency. These tests are written in Python, stored under the **milvus/tests/python_test** and **milvus/tests20/python_client** directories. Run integration tests:
 
--   End-to-end testing: complete functional test cases. These tests is written in Python, stored in the `milvus/tests/python_test` and `milvus/tests20/python_client` directories, and can be run by `pytest .` .
+```
+pytest --tags=smoke .
+```
 
-Continuous integration will run unit tests and integration tests on PRs, and the results will be updated in PR. Any failure will block the code merging.
+- End-to-end tests: The complete functional test cases. These tests are written in Python, stored under the **milvus/tests/python_test** and **milvus/tests20/python_client** directories. Run end-to-end tests:
 
+```
+pytest .
+```
 
+Continuous integration will run unit tests and integration tests on PRs, and the results will be updated in GitHub Pull Request status. Any failure will block the code merging.
 
-## Issue triage
-
-You may notice that there are many [open issues](https://github.com/milvus-io/milvus/issues) in the Milvus repository. Helping to manage or triage these issues can be a great contribution and an great opportunity to learn about various areas of the project. Triaging is the word we use to describe the process of adding multiple types of descriptive labels to GitHub issues, in order to speed up routing issues to the right folks.
 

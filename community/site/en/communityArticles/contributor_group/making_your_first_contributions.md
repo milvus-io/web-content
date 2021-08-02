@@ -2,126 +2,123 @@
 id: making_your_first_contributions.md
 ---
 
-# Making your First contributions
+# Make Your First Contribution
 
-Not sure where to make your first contribution? This document can help you get started!
+Thank you for your interest in contributing to Milvus. Contributions are welcome from everyone.
 
+This document will help you get started on your first contribution to Milvus.
 
+## How to Contribute?
 
-## Find something to work on
+Before setting about contribution, you need figure out that in what area you can help us.
 
-The first step to getting starting contributing to Milvus is to find something to work on. Help is always welcome, and no contribution is too small!
+As your first-ever contribution, it can be selected from the following catoegories, which require little technical background of the contributor:
 
-Here are some things you can do to get started contributing without a technical background:
+- To clarify code, variables, or functions
 
--   Help improve the Milvus documentation
--   Clarify code, variables, or functions that can be renamed or commented on
--   Write test coverage
+- To report a bug in the code
 
-In addition, you can also find an issue with [good-first-issue](https://github.com/milvus-io/milvus/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22) label, good-first-issue is a label used to classify Issues suitable for new comtributors. Such Issues contain clear steps and expected output.
+- To improve the Milvus documentation
 
+[File an issue](https://github.com/milvus-io/milvus/issues/new/choose) to describe the problem before working on it. In addition, you will also find issues labelled with [good-first-issue](https://github.com/milvus-io/milvus/issues?q=is:open+is:issue+label:"good+first+issue"), which represents issues suitable for new contributors. Such Issues contain clear steps and expected output. You may start your first contribution based on these issues.
 
+## Assign Your Issue
 
-## Issue Assignment in GitHub
+Having found a suitable issue to work on, you should assign the issue to yourself and leave a comment to inform others that you intend to solve the issue.
 
-In the second step, when you find a suitable issue, you can assign the issue to yourself and let others know that you intend to solve the issue.
+By commenting`/assign` or `/assign ``@your_github_id` on the issue you would like to work on, you will be automatically assigned to the issue. You can then find yourself listed under *Assignees* section.
 
--   Reply with`/assign` or `/assign @yourself` on the issue you'd like to work on
--   The robot will automatically assign this Issue to you
--   Your name will then be listed under, `Assignees`.
+## Install Git on Your Operating System
 
+You must [install Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) that suits your operating system to enable Git command.
 
+> If you use Git for the first time, you will need to configure your GitHub ID and email address first, and Git will use these two fields as the author's information when submitting changes.
 
-## Solve this issue and submit a Pull Request
+```
+git config --global user.name "<your-github-id>"
 
-In the third step, you need to download the project locally to modify it, and then submit it to the Milvus project. This step requires you to have Git installed locally and a little command line experience.
+git config --global user.email <your-email@example.com>
+```
 
->   There are different ways to install Git on different operating systems：https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
+## Fork Milvus Repository
 
-
-
-### Fork this repository
-
-Fork milvus repository by clicking on the fork button on the top of [this page](https://github.com/milvus-io/milvus). This will create a copy of this repository in your account.
+Fork [Milvus repository](https://github.com/milvus-io/milvus) by clicking on the *Fork* button on the top right of the page. This will create a copy of this repository in your account.
 
 <img src="fork.png" alt="image-20210618153043823" style="zoom:50%;" />
 
-### Clone this repository
+## Clone This Repository
 
-Go to your GitHub account, open the forked repository, click on the code button and then click the *copy to clipboard* icon.
+Check your GitHub account and open the repository you forked from Milvus. Click on the *Code* button and then the *Copy to Clipboard* icon.
 
 <img src="clone.png" alt="image-20210618153215652" style="zoom:50%;" />
 
-Open a terminal and run the following git command:
+Launch your terminal and run the following Git command:
 
-```shell
-git clone "url you just copied"
+```
+git clone <url-you-just-copied>
 ```
 
 For example：
 
-```shell
-git clone https://github.com/username/milvus.git
+```
+git clone https://github.com/<your-github-id>/milvus.git
 ```
 
-where `username` is your GitHub username. Here you're copying the contents of the milvus repository on GitHub to your computer.
+Here `<your-github-id>` is the ID you signed in at GitHub. This Git command downloads the content of Milvus repository you forked on GitHub to your local device.
 
-### Create a branch
+## Create a Branch
 
-Change to the repository directory on your computer (if you are not already there):
+Switch to the local directory of the repository that you have just downloaded if you are not yet there:
 
-```shell
+```
 cd milvus
 ```
 
-Now create a branch using the `git checkout` command:
+Create a branch using the `git checkout` command:
 
-```shell
-git checkout -b <your-new-branch-name>
+```
+git checkout -b <your-branch-name>
 ```
 
-Replace `<your-new-branch-name>` with your branch name (Branch name should best indicate what you want to do).
+Replace `<your-branch-name>` with a new branch name, which should best indicate your intention.
 
-### Make changes and commit those changes
+## Make and Commit Changes to Your Branch
 
-Now, you can start to modify. Open the editor, modify the content and save the file.
+Now you can start to work on your issue in the branch you have created. 
 
->   If you use Git for the first time, you need to configure your name and email address first, and git will use these two fields as the author's information when submitting content
->
->   ```shell
->   git config --global user.name "John Doe"
->   git config --global user.email johndoe@example.com
->   ```
+Having completed your modification, add the files you just modified using the `git add` command:
 
-Add the files you just modified using the `git add` command:
-
-```shell
+```
 git add <filename1> <filename2>
 ```
 
-You need to replace `<filenameN>` with the file you just modified.
+You need to replace `<filenameN>` with the names of the files you just modified.
 
 Then, commit those changes using the `git commit` command:
 
-```shell
+```
 git commit -m "<commit-message>" -s
 ```
 
-Change `<commit-message>` to a brief description of this modification.
+Make a brief description of your modification in the place of `<commit-message>`. Learn more about [Commit message formatting]().
 
-### Push changes to GitHub
+> `-s` adds your sign-off message to your commit message.
 
-Now, you need to use the `git push` command to push the local changes to GitHub:
+## Push the Changes to GitHub
 
-```shell
+Push the your local branch with commits to GitHub using the `git push` command:
+
+```
 git push origin <your-branch-name>
 ```
 
-Replace `<your-branch-name>` with the branch name created above.
+Replace `<your-branch-name>` with the branch name you created previously.
 
-### Submit your changes to the Milvus repository
+> Remember to [sync your forked repository](https://docs.github.com/en/free-pro-team@latest/github/getting-started-with-github/fork-a-repo#keep-your-fork-synced) *before* submitting proposed changes upstream.
 
-Go back to your own repository page on GitHub, you will see a prompt, click *Compare & pull request* to create a Pull Request, and then wait for review and merge.
+## Create a Pull Request
+
+Having pushed your changes, you will see a prompt on your own repository page on GitHub, click *Compare & pull request* to create a pull request for your modification to the Milvus repository. Your modification will soon be merged if approved.
 
 <img src="pr.png" alt="image-20210618154611749" style="zoom:50%;" />
 
