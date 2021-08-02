@@ -23,61 +23,13 @@
         "link": "https://github.com/milvus-io/bootcamp/blob/master/benchmark_test/lab2_sift1b_100m.md",
         "iconType": null,
         "desc": null
-      },
-      {
-        "id": 4,
-        "title": "性能测试结果",
-        "link": "https://github.com/milvus-io/bootcamp/blob/master/benchmark_test/performance_benchmark.md",
-        "iconType": null,
-        "desc": null
       }
     ]
   },
   "section2": {
     "title": "部署",
     "content": [
-      {
-        "id": 12,
-        "title": "基于 Mishards 搭建分布式 Milvus 系统 ",
-        "link": "https://github.com/milvus-io/bootcamp/blob/master/deployments/mishards",
-        "iconType": null,
-        "desc": "使用集群分片中间件 Mishards 搭建分布式 Milvus 系统。 "
-      },
-      {
-        "id": 13,
-        "title": "结合 Mishards 分布式与 Kubernetes",
-        "link": "https://github.com/milvus-io/bootcamp/blob/master/deployments/kubernetes",
-        "iconType": null,
-        "desc": "使用集群分片中间件 Mishards 和 Helm、Kubectl 搭建 Milvus 共享集群，实现共享存储。"
-      },
-      {
-        "id": 14,
-        "title": "基于 JuiceFS 搭建Milvus 云端网络文件系统 ",
-        "link": "https://github.com/milvus-io/bootcamp/blob/master/deployments/juicefs",
-        "iconType": null,
-        "desc": "使用 JuiceFS 的标准 POSIX（可移植操作系统接口）文件系统实现 Milvus 节点间的数据共享。"
-      },
-      {
-        "id": 15,
-        "title": "基于 Keepalived 的 Milvus 高可用方案",
-        "link": "https://github.com/milvus-io/bootcamp/blob/master/deployments/highly_available",
-        "iconType": null,
-        "desc": "使用集群管理与监控软件 Keepalived 实现 Milvus 高可用。"
-      },
-      {
-        "id": 16,
-        "title": "使用 NGINX 实现对 Milvus 负载均衡",
-        "link": "https://github.com/milvus-io/bootcamp/blob/master/deployments/load_balanced",
-        "iconType": null,
-        "desc": "使用开源负载均衡器 NGINX 向多个 Milvus 服务节点分配请求，部署负载均衡的 Milvus 分布式系统。"
-      },
-      {
-        "id": 17,
-        "title": "基于 Google Colaboratory 的 Milvus 使用教程",
-        "link": "https://github.com/milvus-io/bootcamp/blob/master/deployments/google_colab",
-        "iconType": null,
-        "desc": "使用基于 Jupyter Notebook 开发的免费深度学习云平台  Google Colab 运行 Milvus。"
-      }
+      
     ]
   },
   "section3": {

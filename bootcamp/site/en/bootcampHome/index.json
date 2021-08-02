@@ -23,61 +23,13 @@
         "link": "https://github.com/milvus-io/bootcamp/blob/master/benchmark_test/lab2_sift1b_100m.md",
         "iconType": null,
         "desc": null
-      },
-      {
-        "id": 4,
-        "title": "Performance benchmark",
-        "link": "https://github.com/milvus-io/bootcamp/blob/master/benchmark_test/performance_benchmark.md",
-        "iconType": null,
-        "desc": null
       }
     ]
   },
   "section2": {
-    "title": "Deployments",
+    "title": "",
     "content": [
-      {
-        "id": 12,
-        "title": "Distributed deployment with Mishards",
-        "link": "https://github.com/milvus-io/bootcamp/blob/master/deployments/mishards",
-        "iconType": null,
-        "desc": "Build a Milvus cluster using Mishards, a sharding middleware."
-      },
-      {
-        "id": 13,
-        "title": "Distributing Mishards with Kubernetes",
-        "link": "https://github.com/milvus-io/bootcamp/blob/master/deployments/kubernetes",
-        "iconType": null,
-        "desc": "Install shared storage and build a Milvus cluster with Mishards, a sharding middleware, using both Helm and Kubectl."
-      },
-      {
-        "id": 14,
-        "title": "Milvus cloud NFS using JuiceFS",
-        "link": "https://github.com/milvus-io/bootcamp/blob/master/deployments/juicefs",
-        "iconType": null,
-        "desc": "Enable Milvus nodes to share data using JuiceFS, a standard POSIX file system interface."
-      },
-      {
-        "id": 15,
-        "title": "Highly available Milvus using keepalived",
-        "link": "https://github.com/milvus-io/bootcamp/blob/master/deployments/highly_available",
-        "iconType": null,
-        "desc": "Deploy a highly available Milvus distribution using Keepalived."
-      },
-      {
-        "id": 16,
-        "title": "Load balanced Milvus using nginx",
-        "link": "https://github.com/milvus-io/bootcamp/blob/master/deployments/load_balanced",
-        "iconType": null,
-        "desc": "Deploy a load balanced Milvus distribution using NGINX, which can distribute requests to multiple server nodes."
-      },
-      {
-        "id": 17,
-        "title": "Milvus in Google Colaboratory",
-        "link": "https://github.com/milvus-io/bootcamp/blob/master/deployments/google_colab",
-        "iconType": null,
-        "desc": "Set up Milvus in Google Colab, a free Jupyter notebook environment that runs entirely in the cloud and is especially well suited to machine learning and data analysis."
-      }
+    
     ]
   },
   "section3": {
