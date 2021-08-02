@@ -119,8 +119,7 @@ python3 -W ignore -m pytest <test_file_name>
 
 
 **模块调用关系图**
-
-![img](https://zilliverse.feishu.cn/space/api/box/stream/download/asynccode/?code=YjkwZmZjNmY1ZDY4NjI3NWY4ZmNkNzNhMTI1OTg5Nzhfdk94UVB6QmY0Zm1qQ1J2d3VYSnBpU0lGUElmOGJ2dGNfVG9rZW46Ym94Y25IcVFldkhoeXdMaUR4TnJQWUQ5cjNiXzE2Mjc4OTk1ODM6MTYyNzkwMzE4M19WNA)
+![module](module.jpeg)
 
 ### 工作目录以及文件介绍
 
