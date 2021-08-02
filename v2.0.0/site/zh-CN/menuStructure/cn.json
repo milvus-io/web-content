@@ -58,15 +58,7 @@
       "label3": null,
       "order": 1,
       "isMenu": true
-    },
-    {
-      "id": "architecture_overview.md",
-      "title": "系统架构",
-      "label1": "getstarted",
-      "label2": null,
-      "label3": null,
-      "order": 0
-    },   
+    },  
     {
       "id": "prerequisite-docker.md",
       "title": "安装前提",
@@ -274,12 +266,20 @@
       "isMenu": true
     },
     {
+      "id": "architecture_overview.md",
+      "title": "系统架构",
+      "label1": "reference",
+      "label2": null,
+      "label3": null,
+      "order": 0
+    }, 
+    {
       "id": "systemconfigurations",
       "title": "系统配置",
       "label1": "reference",
       "label2": null,
       "label3": null,
-      "order": 0,
+      "order": 1,
       "isMenu": true
     },
     {
@@ -303,21 +303,21 @@
       "title": "距离计算方式",
       "label1": "reference",
       "label2": "",
-      "order": 1
+      "order": 2
     },
     {
       "id": "index.md",
       "title": "向量索引",
       "label1": "",
       "label2": "",
-      "order": 2
+      "order": 3
     },
     {
       "id": "glossary.md",
       "title": "Milvus 术语",
       "label1": "",
       "label2": "",
-      "order": 3
+      "order": 4
     },
     {
       "id": "milvusfaq",
