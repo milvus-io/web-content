@@ -1,3 +1,7 @@
+---
+id: why_contributing.md
+---
+
 # Why Contribute to the Milvus Community
 Since 2019, people have been more concerned about how to move AI from labs to production. The biggest challenge was the lack of tools for AI application lifecycle management. The new buzzword MLOps (machine learning operations) came out since then.
 
