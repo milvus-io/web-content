@@ -1,6 +1,6 @@
 {
   "menuList": [
-  {
+    {
       "id": "about",
       "title": "About Milvus",
       "label1": "",
@@ -66,7 +66,7 @@
       "label2": null,
       "label3": null,
       "order": 0
-    },   
+    },
     {
       "id": "prerequisite-docker.md",
       "title": "Before you Begin",
@@ -74,7 +74,7 @@
       "label2": null,
       "label3": null,
       "order": 1
-    },  
+    },
     {
       "id": "installmilvus",
       "title": "Install Milvus",
@@ -83,7 +83,6 @@
       "label3": null,
       "order": 2,
       "isMenu": true
-
     },
     {
       "id": "install_standalone-docker.md",
@@ -100,7 +99,7 @@
       "label2": "installmilvus",
       "label3": null,
       "order": 1
-    },    
+    },
     {
       "id": "example_code.md",
       "title": "Hello Milvus",
@@ -188,7 +187,7 @@
       "label1": "develop",
       "label2": "",
       "label3": "",
-      "order": 5
+      "order": 5,
       "isMenu": true
     },
     {
@@ -399,6 +398,5 @@
       "label3": "",
       "order": 1
     }
-    
   ]
 }
