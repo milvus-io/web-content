@@ -315,11 +315,40 @@
       "order": 4
     },
     {
+      "id": "reference",
+      "title": "Reference",
+      "label1": "",
+      "label2": "",
+      "order": 5,
+      "isMenu": true
+    },
+    {
+      "id": "metric.md",
+      "title": "Similarity Metrics",
+      "label1": "reference",
+      "label2": "",
+      "order": 0
+    },
+    {
+      "id": "index.md",
+      "title": "Vector Index",
+      "label1": "reference",
+      "label2": "",
+      "order": 1
+    },
+    {
+      "id": "glossary.md",
+      "title": "Glossary",
+      "label1": "reference",
+      "label2": "",
+      "order": 2
+    },
+    {
       "id": "faq",
       "title": "FAQs",
       "label1": "",
       "label2": "",
-      "order": 5,
+      "order": 6,
       "isMenu": true
     },
     {
@@ -366,14 +395,6 @@
       "label1": "faq",
       "label2": "",
       "order": 1
-    },
-    {
-      "id": "glossary.md",
-      "title": "Glossary",
-      "label1": "",
-      "label2": "",
-      "label3": "",
-      "order": 6
     },
     {
       "id": "release",
