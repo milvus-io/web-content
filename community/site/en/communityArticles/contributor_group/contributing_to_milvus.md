@@ -6,7 +6,7 @@ id: contributing_to_milvus.md
 
 Milvus is an open source project and we welcome every contributor. Contributions to Milvus are expected to adhere to our [Code of Conduct](code_of_conduct.md).
 
-This document outlines the conventions about development workflow, commit message formatting, best practices, and other resources you may need while contributing code to Milvus.  [File an issue](https://github.com/milvus-io/community/issues/new) or reach out to our engineering team at [Slack]() if you encounter any problem in participating in contribution to Milvus.
+This document outlines the conventions about development workflow, commit message formatting, best practices, and other resources you may need while contributing code to Milvus.  [File an issue](https://github.com/milvus-io/community/issues/new) or reach out to our engineering team at [Slack](https://join.slack.com/t/milvusio/shared_invite/zt-e0u4qu3k-bI2GDNys3ZqX1YCJ9OM~GQ) if you encounter any problem in participating in contribution to Milvus.
 
 ## Before You Start/Quick Start
 
