@@ -110,31 +110,6 @@
       "order": 3
     },
     {
-      "id": "systemconfigurations",
-      "title": "System Configurations",
-      "label1": "getstarted",
-      "label2": null,
-      "label3": null,
-      "order": 4,
-      "isMenu": true
-    },
-    {
-      "id": "configuration_standalone-basic.md",
-      "title": "Milvus Stanalone",
-      "label1": "getstarted",
-      "label2": "systemconfigurations",
-      "label3": "",
-      "order": 0
-    },
-    {
-      "id": "configuration_cluster-basic.md",
-      "title": "Milvus Cluster",
-      "label1": "getstarted",
-      "label2": "systemconfigurations",
-      "label3": "",
-      "order": 1
-    },
-    {
       "id": "develop",
       "title": "Develop",
       "label1": "",
@@ -323,25 +298,50 @@
       "isMenu": true
     },
     {
+      "id": "systemconfigurations",
+      "title": "System Configurations",
+      "label1": "reference",
+      "label2": null,
+      "label3": null,
+      "order": 0,
+      "isMenu": true
+    },
+    {
+      "id": "configuration_standalone-basic.md",
+      "title": "Milvus Stanalone",
+      "label1": "reference",
+      "label2": "systemconfigurations",
+      "label3": "",
+      "order": 0
+    },
+    {
+      "id": "configuration_cluster-basic.md",
+      "title": "Milvus Cluster",
+      "label1": "reference",
+      "label2": "systemconfigurations",
+      "label3": "",
+      "order": 1
+    },
+    {
       "id": "metric.md",
       "title": "Similarity Metrics",
       "label1": "reference",
       "label2": "",
-      "order": 0
+      "order": 1
     },
     {
       "id": "index.md",
       "title": "Vector Index",
       "label1": "reference",
       "label2": "",
-      "order": 1
+      "order": 2
     },
     {
       "id": "glossary.md",
       "title": "Glossary",
       "label1": "reference",
       "label2": "",
-      "order": 2
+      "order": 3
     },
     {
       "id": "faq",
