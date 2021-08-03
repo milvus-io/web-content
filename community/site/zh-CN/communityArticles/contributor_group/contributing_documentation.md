@@ -2,57 +2,58 @@
 id: contributing_documentation.md
 ---
 
-# Contributing to Milvus Documentation
-Contributions to the Milvus documentation are welcome from everyone. The Milvus community strives to make the contribution process simple and straightforward. To do that, we create this page to walk you through the whole process step by step.
+# 贡献文档
 
-## Contribute to Technical Documentation
+欢迎大家对 Milvus 文档做出贡献。 Milvus 社区努力使贡献过程简单明了。为此，我们创建了此页面，以逐步引导你完成整个过程。
 
-Technical documentation for Milvus is stored on [GitHub](https://github.com/milvus-io/milvus-docs). Each branch corresponds to a Milvus release by name. We've set the branch of the latest Milvus release as the default branch. For documentation of a different Milvus release, switch to the corresponding branch. 
+## 贡献技术文档
 
-### Before you start
+Milvus 的技术文档存储在 [GitHub](https://github.com/milvus-io/milvus-docs)，每个分支按名称对应一个 Milvus 版本，主页默认分支是最新发布的 Milvus 版本分支。如需获取 Milvus 早期版本的相关文档，请切换到相应的分支。
 
-Before you contribute please take a minute to familiarize yourself with basic [Markdown](https://www.markdownguide.org/basic-syntax/) syntax and have a look at our [Code of Conduct](code_of_conduct.md) and the [Google Developer Documentation Style Guide](https://developers.google.com/style/) for some guidance on how to write accessible, consistent and inclusive documentation.
+### 开始之前
 
-Below list the web components used in Milvus documentation:
-- *Images* are housed under the **/assets** folder and can be referenced with **{{images.Assets/image-name.jpg/png}}**.
+在贡献之前，你需要熟悉一些基本的 [Markdown](https://www.markdownguide.org/basic-syntax/) 语法，并查看我们的 [行为准则](http://code_of_conduct.md) 和 [Google 开发者文档样式指南](https://developers.google.com/style/) 了解有关如何编写易于理解、一致且包容的文档。
 
-- *Fragments* let you split the markdown into independent, reusable pieces and are defined in the **site/en/fragments** and **site/zh-CN/fragments** folders. Use the **{{fragments/xxx.md}}** syntax to reference a specific fragment.
+下面列出 Milvus 文档中使用的组件：
 
-- *Variables* are used to store version information to be referenced in code or paths. They are defined in **Variables.json** and can be used in Markdown (**.md**) files, fragments, and templates. 
+- *图片*位于 **/assets** 文件夹下，可以使用 `{{images.Assets/<image-file-name>}}` 引用。
 
-> The defined variables implement within the current folder and its subfolders. The **en** and **Zh-CN** folders each contains a Variables.json file.
+- *Fragments* 允许你将 Markdown（**.md**）文档拆分为独立的、可重复使用的片段，并在 **site/en/fragments** 和 **site/zh-CN/fragments** 文件夹中定义。使用 `{{fragments/<fragment-file-name>}}` 来引用特定片段。
 
-- *Link* within the Milvus technical documentation section can be cited using its file name, for instance, `[What is Milvus](overview.md)`. Otherwise, use the full link of the cited page.
+- *Variables* 用于存储要在代码或路径中引用的版本信息。它们在 **Variables.json** 中定义，可以在 Markdown 文件、片段和模板中使用。
 
-### Contribution workflow
+> 定义的变量在只在当前文件夹及其子文件夹中实现。 **en** 和 **Zh-CN** 文件夹都包含一个 **Variables.json** 文件。
 
-If you are just correcting a typo or grammatical error, feel free to go ahead and [create a pull request](https://github.com/milvus-io/milvus-docs/pulls). 
+- Milvus.io Documentation 内部的链接可以直接使用其文件名引用，例如，`[什么是 Milvus](overview.md)`。其他页面需要使用引用页面的完整链接。
 
-For more substantial changes, please follow the following steps:
+### 贡献工作流
 
-1. [File an issue](https://github.com/milvus-io/milvus-docs/issues/new/choose) and assign it to yourself by commenting`/assign` or `/assign <your_github_id>`.
-2. Fork the [milvus-docs repository](https://github.com/milvus-io/milvus-docs) to your own GitHub account.
-3. Fetch to make sure your local branch is up-to-date.
-4. Once you complete your changes, create a pull request. Your changes will be reviewed by a technical writer as soon as possible.
+如果只需更正拼写错误或语法错误，欢迎直接 [创建 PR](https://github.com/milvus-io/milvus-docs/pulls) 或在错误页面右上方通过 *编辑* 按钮修改。
 
-For detailed information on this workflow, see [Make Your First Contribution](making_your_first_contributions.md).
+如需添加更实质性的内容，请按照以下步骤操作：
 
+1. [提交问题](https://github.com/milvus-io/milvus-docs/issues/new/choose) 并通过在评论栏回复`/assign` 或`/assign <your_github_id>` 将其分配给自己。
+2. Fork [milvus-docs 仓库](https://github.com/milvus-io/milvus-docs) 到你自己的 GitHub 账户。
+3. Fetch 上游仓库以确保你的本地分支维持最新。
+4. 完成更改后，创建 PR。技术作家会尽快审核你提供的内容。
 
+有关此流程的详细信息，参考 [成为 Milvus 贡献者](http://making_your_first_contributions.md)。
 
-## Contribute a blog article
+## 贡献一篇博客文章
 
-If you would like to write an article for our [blog](https://medium.com/unstructured-data-service), please [file an issue](https://github.com/milvus-io/community/issues/new) in the [Milvus community repository](https://github.com/milvus-io/community) or send it to community@zilliz.com. Feel free to submit either a completed draft or article ideas. All submissions will be reviewed as quickly as possible. If your article or idea seems like a good fit for the blog, we will reach out to you directly.
+如果你想为我们的 [博客](https://medium.com/unstructured-data-service) 撰写文章，请在 [Milvus 社区仓库](https://github.com/milvus-io/community) [提交问题](https://github.com/milvus-io/community/ issue/new)  或发送至 community@zilliz.com。欢迎提交已完成的草稿或文章想法。所有提交的内容将被尽快审核。如果你的文章或想法适合我们的博客，我们将直接与你联系。
 
-> In your title/subject line, please put in [blog submission] to make sure your email does not get buried.
+> 请在标题或主题中添加 [博客文章] 以确保你的电子邮件被我们及时发现。
 
-## Contribute to API references
+## 贡献 API 参考
 
-To make contributions to the Milvus SDK reference documentation, visit the programming language specific repositories listed below:
+如需为 Milvus SDK 参考文档做出贡献，访问以下特定于编程语言的仓库：
 
 - [Python ORM](https://github.com/milvus-io/pymilvus-orm)
 
 - [GoLang](https://github.com/milvus-io/milvus-sdk-go)
 
-## Community documentation
+## 社区文档
 
-To make contributions to the Milvus community documentation, visit the [community *documentation* repository](https://github.com/milvus-io/web-content).
+为 Milvus 社区文档做出贡献，请访问 [社区文档库](https://github.com/milvus-io/web-content)。
+
