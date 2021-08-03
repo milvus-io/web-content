@@ -292,14 +292,14 @@
     {
       "id": "index.md",
       "title": "向量索引",
-      "label1": "",
+      "label1": "reference",
       "label2": "",
       "order": 3
     },
     {
       "id": "glossary.md",
       "title": "Milvus 术语",
-      "label1": "",
+      "label1": "reference",
       "label2": "",
       "order": 4
     },
