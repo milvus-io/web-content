@@ -119,7 +119,7 @@ python3 -W ignore -m pytest <test_file_name>
 
 
 **模块调用关系图**
-![module](module.jpeg)
+{{images.Assets/pr.png}}
 
 ### 工作目录以及文件介绍
 
