@@ -2,7 +2,7 @@
 id: contributing_to_milvus.md
 ---
 
-贡献代码
+# 贡献代码
 
 Milvus 是一个开源项目，我们欢迎每一位贡献者，也希望所有贡献者都遵守我们的 [行为准则](code_of_conduct.md)。
 
