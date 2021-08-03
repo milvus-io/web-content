@@ -26,7 +26,7 @@ Currently, we maintain the following versions of Milvus documentation in differe
 
 ## Documentation structure
 
-{{images.Assets/folder-structure.png}}
+![Folders](assets/folder-structure.png)
 
 In general, the folder structure of the milvus-docs repository aligns with the menu structure of Milvus documentation on [milvus.io](https://milvus.io/).
 
