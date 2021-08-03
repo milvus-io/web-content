@@ -44,13 +44,13 @@ git config --global user.email <your-email@example.com>
 
 在 [Milvus 仓库](https://github.com/milvus-io/milvus) 的页面中，点击右上角的 **Fork** 按钮，在你的账户中创建一个这个仓库的副本。
 
-{{images.Assets/fork.png}}
+![fork](../../../assets/fork.png)
 
 ## Clone 仓库
 
 进入你创建的仓库副本，点击 *Code* 按钮，在弹出的页面点击 *复制到剪贴板* 按钮。
 
-{{images.Assets/clone.png}}
+![clone](../../../assets/clone.png)
 
 打开终端并运行以下命令：
 
@@ -118,7 +118,7 @@ git push origin <your-branch-name>
 
 上传完成后回到 GitHub 上自己的仓库页面，你会看到一个提示，点击 *Compare & pull request* 创建 pull request，然后等待 review 和合并。
 
-{{images.Assets/pr.png}}
+![pr](../../../assets/pr.png)
 
 ## 改进这篇文档
 
