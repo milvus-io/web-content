@@ -115,7 +115,7 @@ python3 -W ignore -m pytest <test_file_name>
 
 Module Overview
 
-![module](module.jpeg)
+![module](../../../assets/module.jpeg)
 
 ### Working directories and files
 
