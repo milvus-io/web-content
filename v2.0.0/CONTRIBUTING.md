@@ -1,45 +1,49 @@
 # Contributing to Milvus Documentation
 
-Contributions to the technical documentation of Milvus are welcome from everyone. We strive to make the contribution process simple and straightforward. Up-to-date technical documentation can be found at [milvus.io](https://www.milvus.io/).
+Contributions to the Milvus documentation are welcome from everyone. The Milvus community strives to make the contribution process simple and straightforward. To do that, we create this page to walk you through the whole process step by step.
 
-### Workflow 
 
-Generally, we follow the "fork-and-pull" Git workflow.
 
-1. [**Fork**](https://docs.github.com/en/free-pro-team@latest/github/getting-started-with-github/fork-a-repo) the repo on Github
-2. [**Commit**](https://docs.github.com/en/free-pro-team@latest/github/collaborating-with-issues-and-pull-requests/committing-changes-to-a-pull-request-branch-created-from-a-fork) changes to your own branch
-3. Submit a [**pull request**](https://docs.github.com/en/free-pro-team@latest/github/collaborating-with-issues-and-pull-requests/about-pull-requests) so that we can review your changes
+> Up-to-date technical documentation can be found at [milvus.io](https://www.milvus.io/).
 
-Remember to [sync your forked repository](https://docs.github.com/en/free-pro-team@latest/github/getting-started-with-github/fork-a-repo#keep-your-fork-synced) *before* submitting proposed changes upstream. Quickly fork repositories and start making contributions directly from [milvus.io](https://www.milvus.io/docs/install_milvus.md) using the *Edit* button located in the top right corner of most pages.
 
-### Issues
 
-Flag issues and request improvements using the links below:
+# What contributions can I make?
 
-- [Make change requests, report errors, or submit questions about this repository.](https://github.com/milvus-io/docs/issues/new/choose) 
-- [File a technical documentation issue or request new technical documentation for Milvus.](https://github.com/milvus-io/milvus/issues/new?assignees=&labels=&template=documentation-request.md&title=[DOC])
+Basically anything you can think of to improve our documentation and make it more user friendly! Below are some straighforward exmaples:
 
-### Writing style
+- Fix a typo or a grammatical error.
+- Translate English content into other languages (currently only to Chinese).
+- Update or extend existing documentation.
+- Add new pages to Milvus documentation.
 
-Technical documentation for Milvus is written in [Markdown](https://commonmark.org/help/). In general, we adhere to the [Google Developer Documentation Style Guide](https://developers.google.com/style/).
+## Contribution Guidelines
 
-### Contributing to the Milvus blog
+Before you contribute please take a minute to familiarize yourself with basic [Markdown](https://www.markdownguide.org/basic-syntax/) syntax and have a look at our [Code of Conduct](CODE_OF_CONDUCT.md) and the [Google Developer Documentation Style Guide](https://developers.google.com/style/) for some guidance on how to write accessible, consistent and inclusive documentation.
 
-Articles published on the Milvus blog [*Unstructured Data Service*](https://medium.com/unstructured-data-service) are generated from source materials located in [this folder](https://github.com/milvus-io/community/tree/master/blog).  
+## Contribute to tech docs
 
-If you would like to write an article for the blog, please [open an issue](https://github.com/milvus-io/community/issues/new) in the [Milvus community repository](https://github.com/milvus-io/community). Feel free to submit article ideas or completed drafts. All submissions will be reviewed as quickly as possible. If an article or idea seems like a good fit for the blog we will reach out to you directly.
+If you are just correcting a typo or grammatical error, feel free to go ahead and [create a pull request](https://github.com/milvus-io/milvus-docs/pulls). 
 
-### Contributing to SDK reference documentation
+For more substantial changes, please follow the following steps:
+
+1. [File an issue](https://github.com/milvus-io/milvus-docs/issues/new/choose) and assign it to yourself by commenting`/assign` or `/assign @your_github_id`. We recommend adding the `kind/documentation` label to the issue to grab our attention!
+2. Fork the [milvus-docs repository](https://github.com/milvus-io/milvus-docs) to your own GitHub account.
+3. Fetch to make sure your local branch is up-to-date.
+4. Once you complete your changes, create a pull request. Your changes will be reviewed by a technical writer as soon as possible.
+
+For detailed information on this workflow, see [Make Your First Contribution](https://milvus.io/community/making_your_first_contributions.md).
+
+## Contribute a blog article
+
+If you would like to write an article for our [blog](https://medium.com/unstructured-data-service), please [file an issue](https://github.com/milvus-io/community/issues/new) in the [Milvus community repository](https://github.com/milvus-io/community) or send it to community@zilliz.com. Feel free to submit either a completed draft or article ideas. All submissions will be reviewed as quickly as possible. If your article or idea seems like a good fit for the blog, we will reach out to you directly.
+
+> In your title/subject line, please put in [blog submission] to make sure your email does not get buried.
+
+## Contribute to API references
 
 To make contributions to the Milvus SDK reference documentation, visit the programming language specific repositories listed below:
 
-- [Python SDK repository for Milvus.](https://github.com/milvus-io/pymilvus)
-- [Java SDK repository for Milvus.](https://github.com/milvus-io/milvus-sdk-java)
+- [Python ORM](https://github.com/milvus-io/pymilvus-orm)
 
-Next, follow the [Python SDK](https://github.com/milvus-io/pymilvus/blob/master/CONTRIBUTING.md) or [Java SDK](https://github.com/milvus-io/milvus-sdk-java/blob/master/CONTRIBUTING.md) guidelines for contributing.
-
-### Notes
-
-The SDK reference documentation for Milvus is generated from the source code located in the [pymilvus](https://github.com/milvus-io/pymilvus) and [milvus-sdk-java](https://github.com/milvus-io/milvus-sdk-java) repositories.
-
-Not all documentation on [milvus.io](https://www.milvus.io/) exists in this repository. Some projects have their own separate repositories and project-specific documentation.
+- (Coming August 5) [GoLang](https://github.com/milvus-io/milvus-sdk-go)
