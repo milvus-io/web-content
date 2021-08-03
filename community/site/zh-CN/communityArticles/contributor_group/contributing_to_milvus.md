@@ -2,7 +2,7 @@
 id: contributing_to_milvus.md
 ---
 
-贡献代码
+# 贡献代码
 
 Milvus 是一个开源项目，我们欢迎每一位贡献者，也希望所有贡献者都遵守我们的 [行为准则](code_of_conduct.md)。
 
@@ -22,7 +22,7 @@ Milvus 是一个开源项目，我们欢迎每一位贡献者，也希望所有�
 
 > *在向上游提交建议的更改之前*，[同步](https://docs.github.com/en/free-pro-team@latest/github/getting-started-with-github/fork-a-repo#keep-your-fork-synced) 你的私有 Milvus 库。
 
-更多指引，参考 [成为 Milvus 贡献者]()。
+更多指引，参考 [成为 Milvus 贡献者](making_your_first_contributions.md)。
 
 ### prow 机器人
 

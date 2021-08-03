@@ -44,13 +44,13 @@ git config --global user.email <your-email@example.com>
 
 Fork [Milvus repository](https://github.com/milvus-io/milvus) by clicking on the *Fork* button on the top right of the page. This will create a copy of this repository in your account.
 
-<img src="fork.png" alt="image-20210618153043823" style="zoom:50%;" />
+![fork](../../../assets/fork.png)
 
 ## Clone This Repository
 
 Check your GitHub account and open the repository you forked from Milvus. Click on the *Code* button and then the *Copy to Clipboard* icon.
 
-<img src="clone.png" alt="image-20210618153215652" style="zoom:50%;" />
+![clone](../../../assets/clone.png)
 
 Launch your terminal and run the following Git command:
 
@@ -120,5 +120,5 @@ Replace `<your-branch-name>` with the branch name you created previously.
 
 Having pushed your changes, you will see a prompt on your own repository page on GitHub, click *Compare & pull request* to create a pull request for your modification to the Milvus repository. Your modification will soon be merged if approved.
 
-<img src="pr.png" alt="image-20210618154611749" style="zoom:50%;" />
+![pr](../../../assets/pr.png)
 
