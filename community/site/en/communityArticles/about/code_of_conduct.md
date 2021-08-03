@@ -3,6 +3,7 @@ id: code_of_conduct.md
 ---
 # Milvus Code of Conduct
 
+## Our Pledge
 In the interest of fostering an open and welcoming environment, we as contributors and maintainers pledge to making participation in our project and our community a harassment-free experience for everyone, regardless of age, body size, disability, ethnicity, gender identity and expression, level of experience, nationality, personal appearance, race, religion, or sexual identity and orientation.
 
 ## Our Standards
@@ -45,7 +46,7 @@ Project maintainers who do not follow or enforce the Code of Conduct in good fai
 
 ## Attribution
 
-This Code of Conduct is adapted from the [Contributor Covenant](https://www.contributor-covenant.org/), version 1.4, available at https://www.contributor-covenant.org/version/1/4/code-of-conduct.html
+This Code of Conduct is adapted from the [Contributor Covenant](https://www.contributor-covenant.org/), version 1.4, [view a copy of it]( https://www.contributor-covenant.org/version/1/4/code-of-conduct.html).
 
-For answers to common questions about this code of conduct, see https://www.contributor-covenant.org/faq
+For answers to common questions about this code of conduct, see [Contributor Covenant FAQ](https://www.contributor-covenant.org/faq).
 
