@@ -14,9 +14,9 @@ Technical documentation for Milvus is stored on [GitHub](https://github.com/milv
 Before you contribute please take a minute to familiarize yourself with basic [Markdown](https://www.markdownguide.org/basic-syntax/) syntax and have a look at our [Code of Conduct](code_of_conduct.md) and the [Google Developer Documentation Style Guide](https://developers.google.com/style/) for some guidance on how to write accessible, consistent and inclusive documentation.
 
 Below list the web components used in Milvus documentation:
-- *Images* are housed under the **/assets** folder and can be referenced with `{{images.Assets/image-name.jpg/png}}`.
+- *Images* are housed under the **/assets** folder and can be referenced with `{{images.Assets/<image-file-name>}}`.
 
-- *Fragments* let you split the markdown into independent, reusable pieces and are defined in the **site/en/fragments** and **site/zh-CN/fragments** folders. Use the `{{fragments/xxx.md}}` syntax to reference a specific fragment.
+- *Fragments* let you split the markdown into independent, reusable pieces and are defined in the **site/en/fragments** and **site/zh-CN/fragments** folders. Use the `{{fragments/<file-name>}}` syntax to reference a specific fragment.
 
 - *Variables* are used to store version information to be referenced in code or paths. They are defined in **Variables.json** and can be used in Markdown (**.md**) files, fragments, and templates. 
 
