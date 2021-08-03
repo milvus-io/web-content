@@ -1,51 +1,61 @@
 ---
 id: code_of_conduct.md
 ---
-# Milvus Code of Conduct
+# Milvus 行为准则
 
-In the interest of fostering an open and welcoming environment, we as contributors and maintainers pledge to making participation in our project and our community a harassment-free experience for everyone, regardless of age, body size, disability, ethnicity, gender identity and expression, level of experience, nationality, personal appearance, race, religion, or sexual identity and orientation.
+## 我们的承诺
 
-## Our Standards
+为了营造一个开放和热情的环境，我们作为贡献者和维护者承诺，无论年龄、种族、民族、性别认同和表达、体型、残疾、经验水平、国籍、个人表现、宗教或性别取向，参与我们的项目和我们的社区的每个人都将获得无骚扰的体验。
 
-Examples of behavior that contributes to creating a positive environment include:
+## 我们的标准
 
--   Using welcoming and inclusive language.
--   Being respectful of differing viewpoints and experiences.
--   Gracefully accepting constructive criticism.
--   Focusing on what is best for the community.
--   Showing empathy towards other community members.
+有助于创造积极环境的行为示例包括：
 
-Examples of unacceptable behavior by participants include:
+- 使用开放和包容的语言
 
--   The use of sexualized language or imagery and unwelcome sexual attention or advances.
--   Trolling, insulting/derogatory comments, and personal or political attacks.
--   Public or private harassment.
--   Publishing others' private information, such as a physical or electronic address, without explicit permission.
--   Conduct which could reasonably be considered inappropriate for the forum in which it occurs.
+- 尊重不同的观点和经验
 
-All Milvus forums and spaces are meant for professional interactions, and any behavior which could reasonably be considered inappropriate in a professional setting is unacceptable.
+- 优雅地接受建设性的批评
 
-## Our Responsibilities
+- 专注于对社区最有利的事情
 
-Project maintainers are responsible for clarifying the standards of acceptable behavior and are expected to take appropriate and fair corrective action in response to any instances of unacceptable behavior.
+- 对其他社区成员表示友善
 
-Project maintainers have the right and responsibility to remove, edit, or reject comments, commits, code, wiki edits, issues, and other contributions that are not aligned to this Code of Conduct, or to ban temporarily or permanently any contributor for other behaviors that they deem inappropriate, threatening, offensive, or harmful.
+参与者不可接受的行为示例包括：
 
-## Scope
+- 使用与性相关的语言或图像，以及不受欢迎的性骚扰
 
-This Code of Conduct applies to all content on milvus.io, Milvus’s GitHub organization, or any other official Milvus web presence allowing for community interactions, as well as at all official Milvus events, whether offline or online.
+- 挑衅、侮辱或贬损评论以及人身攻击或政治攻击
 
-The Code of Conduct also applies within all project spaces and in public spaces whenever an individual is representing Milvus or its community. Examples of representing a project or community include using an official project e-mail address, posting via an official social media account, or acting as an appointed or de facto representative at an online or offline event. Representation of Milvus may be further defined and clarified by project maintainers.
+- 公开或非公开骚扰
 
-## Enforcement
+- 未经明确许可，发布他人的私人信息，例如物理地址或电子地址
 
-Instances of abusive, harassing, or otherwise unacceptable behavior may be reported by contacting the project team at conduct@lfai.foundation. All complaints will be reviewed and investigated and will result in a response that is deemed necessary and appropriate to the circumstances. The project team is obligated to maintain confidentiality with regard to the reporter of an incident. Further details of specific enforcement policies may be posted separately.
+- 论坛中其他可以被合理地认定为不恰当的行为
 
-Project maintainers who do not follow or enforce the Code of Conduct in good faith may face temporary or permanent repercussions as determined by other members of the project's leadership.
+所有 Milvus 论坛和空间的目的在于专业互动，任何在专业环境中被合理认为不合适的行为都是不可接受的。
 
-## Attribution
+## 我们的责任
 
-This Code of Conduct is adapted from the [Contributor Covenant](https://www.contributor-covenant.org/), version 1.4, available at https://www.contributor-covenant.org/version/1/4/code-of-conduct.html
+项目维护者有责任为可接受行为的标准做出诠释，并对已发生的不可接受行为的实例采取适当且公平的纠正措施。
 
-For answers to common questions about this code of conduct, see https://www.contributor-covenant.org/faq
+项目维护者有权利和责任删除、编辑或拒绝违背本行为准则的评论、提交、代码、wiki 编辑、问题（issue）和其他贡献，以及对有其他不恰当、威胁、冒犯或有害行为的贡献者采取暂时或永久禁止措施。
+
+## 适用范围
+
+本行为准则适用于 milvus.io、Milvus 的 GitHub 组织或其他任何包含 Milvus 官方的社交网站上的所有内容，以及所有 Milvus 官方线上或线下活动。
+
+当个人代表 Milvus 或其社区时，行为准则也适用于所有项目空间和公共空间。代表项目或社区的示例包括使用官方项目电子邮件地址、通过官方社交媒体帐户发帖或在线上或线下活动中担任指定或事实上的代表。 Milvus 的代表可能会由项目维护者进一步定义和澄清。
+
+## 强制执行
+
+可以通过发送电子邮件至 conduct@lfai.foundation 联系项目团队举报辱骂、骚扰或其他不可接受的行为。所有投诉都将受到审核和调查，并将收到被认为必要且适合的具体回应。项目团队有义务为事件报告者保密。具体执行政策的经一步细节可能会单独发布。
+
+没有真诚遵守或是执行本行为准则的项目维护者，可能会因项目领导人或是其他成员的决定，被暂时或是永久的取消身份。
+
+## 来源
+
+本行为准则改编自 [贡献者公约](https://www.contributor-covenant.org/)，版本 1.4，[点此查看](https://www.contributor-covenant.org/zh-tw/version/1/4/code-of-conduct.html)。
+
+有关此行为准则的常见问题的答案，请参阅 [贡献者公约常见问题](https://www.contributor-covenant.org/faq)。
 
