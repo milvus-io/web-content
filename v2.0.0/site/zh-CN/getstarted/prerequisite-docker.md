@@ -43,7 +43,7 @@ lscpu | grep -e sse4_2 -e avx -e avx2 -e avx512
 
 | **操作系统** | **安装要求** |
 | ---------- | ----------------- | 
-| **macOS**      | 安装 Mac 版本 Docker，详见[安装说明](https://docs.docker.com/docker-for-mac/). <br/> **注意：** 我们推荐在 Docker 虚拟机中至少设置 2 个虚拟 CPU 及 8 GB 初始内存，否则安装可能失败。              | 
+| **macOS**      | 安装 Mac 版本 Docker，详见[安装说明](https://docs.docker.com/docker-for-mac/). <br/> **注意：** 我们推荐在 Docker 虚拟机中至少设置 2 个虚拟 CPU 及 8 GB 初始内存，否则安装可能失败。<br/> **注意：** Milvus 暂不支持 Apple M1 CPU.            | 
 | **Linux 系统本地安装 Docker**    |安装 Linux 版本 Docker，详见[安装说明](https://docs.docker.com/installation/#installation)。              |
 | **Windows 系统安装 Docker Desktop WSL2 后台**    | 安装 Windows 版本 Docker，详见[安装说明](https://docs.docker.com/docker-for-windows/wsl-tech-preview/)。 <br/> <div class="alert note"> 源码必须保存在本地 Linux 文件系统中，而非 Windows 挂载远程文件系统 <code>/mnt/c</code> 中。 </div>              | 
 

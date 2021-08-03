@@ -202,22 +202,6 @@
       "outLink": "https://zilliz.com/sizing-tool"
     },
     {
-      "id": "index.md",
-      "title": "Vector Index",
-      "label1": "develop",
-      "label2": "",
-      "label3": "",
-      "order": 7
-    },
-    {
-      "id": "metric.md",
-      "title": "Similarity Metrics",
-      "label1": "develop",
-      "label2": "",
-      "label3": "",
-      "order": 8
-    },
-    {
       "id": "deploy_and_maintain",
       "title": "Deploy and Maintain",
       "label1": "",

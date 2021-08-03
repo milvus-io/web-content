@@ -43,7 +43,7 @@ See <a href="https://docs.docker.com/compose/install/">Install Docker Compose</a
 
 | **Operating system** | **Requirements** |
 | ---------- | ----------------- | 
-| **macOS**      | Install Docker for Mac. See [installation instructions](https://docs.docker.com/docker-for-mac/). <br/> **Note:** Set the Docker virtual machine (VM) to have at least 2 vCPU (virtual CPU) and 8 GB of initial memory. Otherwise, installation may fail.              | 
+| **macOS**      | Install Docker for Mac. See [installation instructions](https://docs.docker.com/docker-for-mac/). <br/> **Note:** Set the Docker virtual machine (VM) to have at least 2 vCPU (virtual CPU) and 8 GB of initial memory. Otherwise, installation may fail. <br/> **Note:** Milvus contemporarily does not support Apple M1 CPU.             | 
 | **Linux with local Docker**    |Install Docker according to the [instructions](https://docs.docker.com/installation/#installation) for your operating system.              |
 | **Windows with Docker Desktop WSL2 backend**    | Install Docker according to the [instructions](https://docs.docker.com/docker-for-windows/wsl-tech-preview/). <br/> <div class="alert note"> Store sources in the local Linux file system, not in the Windows remote mount at <code>/mnt/c</code>.  </div>              | 
 
