@@ -150,38 +150,22 @@ This section specifies references while adding new test cases or framework tools
 
 - Test categories: test files fall into two categories
 
-  - ```
-    TestObjectParams
-    ```
-
-    :
-
+  - TestObjectParams:
     - Indicates the parameter test of corresponding interface. For instance, `TestPartitionParams` represents the parameter test for Partition interface.
     - Tests the target category/method under different parameter inputs. The parameter test will cover `default`, `empty`, `none`, `datatype`,  `maxsize`, etc.
 
-  - ```
-    TestObjectOperations
-    ```
-
-    :
+  - TestObjectOperations:
 
     - Indicates the function/operation test of corresponding interface. For instance, `TestPartitionOperations` represents the function/operation test for Partition interface.
     - Tests the target category/method with legit parameter inputs and interaction with other interfaces.
 
 - Testcase naming
 
-  - ```
-    TestObjectParams
-    ```
-
-    :
+  - TestObjectParams:
 
     - Name after the parameter input of the test case. For instance, `test_partition_empty_name()` represents test on performance with the empty string as the `name` parameter input.
 
-  - ```
-    TestObjectOperations
-    ```
-
+  - TestObjectOperations:
     - Name after the operation procedure of the test case. For instance, `test_partition_drop_partition_twice()` represents the test on the performance when dropping partitions twice consecutively.
     - Name after assertions. For instance, `test_partition_maximum_partitions()` represents test on the maximum number of partitions that can be created.
 
