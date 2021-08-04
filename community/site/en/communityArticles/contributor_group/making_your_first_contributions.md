@@ -100,7 +100,7 @@ Then, commit those changes using the `git commit` command:
 git commit -m "<commit-message>" -s
 ```
 
-Make a brief description of your modification in the place of `<commit-message>`. Learn more about [Commit message formatting]().
+Make a brief description of your modification in the place of `<commit-message>`. Learn more about [Commit message formatting](contributing_to_milvus.md#style-reference).
 
 > `-s` adds your sign-off message to your commit message.
 
