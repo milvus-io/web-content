@@ -48,8 +48,6 @@ PR 开启后，将会有审阅者对你的代码进行全面检查，检查内�
 
 - 代码风格：参考 [Effictive Go Style Guide](https://golang.org/doc/effective_go)
 
-- 注释风格：do we need one? we do not have one for now
-
 - Commit message 和 PR 描述的风格： 参考 [good commit messages](https://chris.beams.io/posts/git-commit)
 
 ### 最佳实践

@@ -10,9 +10,9 @@ id: making_your_first_contributions.md
 
 ## 选择贡献内容
 
-第一步，你需要了解自己可以哪些方向做出贡献。
+首先，你需要了解自己可以哪些方向做出贡献。
 
-作为你贡献的开始，你可以选择一些不需要深厚技术背景的问题着手：
+如果是初次做贡献，你可以选择一些不需要深厚技术背景的问题着手，比如：
 
 - 为代码加注释
 
@@ -20,17 +20,17 @@ id: making_your_first_contributions.md
 
 - 帮助改进 Milvus 的文档
 
-在开始贡献之前，你需要 [发起 issue](https://github.com/milvus-io/milvus/issues/new/choose) 说明问题。另外，还可以在设置了 [good-first-issue](https://github.com/milvus-io/milvus/issues?q=is:open+is:issue+label:"good+first+issue") 标签的 issue 中找到你感兴趣的。good-first-issue 标签下的 issue 都包含明确的步骤和预期产出，适合第一次做贡献的开发者。
+在开始贡献之前，你需要 [创建 issue](https://github.com/milvus-io/milvus/issues/new/choose) 说明问题。另外，还可以在设置了 [good-first-issue](https://github.com/milvus-io/milvus/issues?q=is:open+is:issue+label:"good+first+issue") 标签的 issue 中找到你感兴趣的。good-first-issue 标签下的 issue 都包含明确的步骤和预期产出，适合第一次做贡献的开发者。
 
 ## 分配 Issue
 
-第二步，当你找到了一个合适的 issue，你需要将 issue 分配给你自己，并留言表示接下来你将着手解决这个 issue。
+当你找到了一个合适的 issue，你需要将 issue 分配给你自己，并留言表示接下来你将着手解决这个 issue。
 
 在 issue 页面下方的留言栏中回复 `/assign` 或 `/assign @your-github-id`，该 issue 就会由机器人自动分配至你的名下。你可以在页面右上方 *Assignees* 栏中找到自己的 GitHub ID。
 
 ## 安装 Git
 
-为了在本地设备上使用 Git 命令，你需要为自己的操作系统 [安装 Git]()。
+为了在本地设备上使用 Git 命令，你需要为自己的操作系统 [安装 Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)。
 
 > 如果这是你第一次使用Git，你需要先在 Git 中配置 GitHub ID 和邮箱地址，Git在提交修改时会使用这两个字段作为作者信息。
 
@@ -100,7 +100,7 @@ git add <filename>
 git commit -m "<commit-message>" -s
 ```
 
-把 `<commit-message>` 改为这次修改内容的简述。了解更多关于 [Commit message 格式]()。
+把 `<commit-message>` 改为这次修改内容的简述。了解更多关于 [Commit message 格式](contributing_to_milvus.md#风格参考)。
 
 > `-s` 代表为你的 commit message 添加 Sign-off 信息。
 

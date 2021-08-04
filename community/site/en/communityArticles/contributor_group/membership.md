@@ -19,7 +19,7 @@ The Milvus community welcomes all types of contributions. You can become a Milvu
 
 Existing members ought to welcome new members, help them with their PR workflow, and direct them to relevant documents and communication channels.
 
-**Defined by**: **[All contributors](https://github.com/milvus-io/milvus#all-contributors)**
+**Defined by**: [All contributors](https://github.com/milvus-io/milvus#all-contributors)
 
 > If you made contributions but not on this list, [file an issue](https://github.com/milvus-io/community/issues/new) to inform us.
 
