@@ -18,7 +18,7 @@ To accommodate the variety of requirements, Milvus offers as much as four deploy
 2. Install with Docker Compose 
 - [standalone](https://milvus.io/docs/install_standalone-docker.md)
 - [cluster](https://milvus.io/docs/v2.0.0/install_cluster-docker.md)
-3. Install on Kunernetes 
+3. Install on Kubernetes 
 - [standalone](https://milvus.io/docs/install_standalone-helm.md)
 - [cluster](https://milvus.io/docs/v2.0.0/install_cluster-helm.md)
 4. Install with KinD
