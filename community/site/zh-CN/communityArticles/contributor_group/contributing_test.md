@@ -21,7 +21,7 @@ Milvus 支持四种部署方式，你可以根据需求选择部署方式。PyMi
 - [单机版](https://milvus.io/docs/install_standalone-docker.md)
 - [分布式版](https://milvus.io/docs/v2.0.0/install_cluster-docker.md)
 
-3. Kunernetes 部署
+3. Kubernetes 部署
 
 - [单机版](https://milvus.io/docs/install_standalone-helm.md)
 - [分布式版](https://milvus.io/docs/v2.0.0/install_cluster-helm.md)
@@ -150,16 +150,16 @@ python3 -W ignore -m pytest <test_file_name>
 
 - test 文件：每个 SDK 类对应一个 test 文件，`load` 和 `search` 单独对应一个 test 文件。
 - test 类：每个 test 文件中分两类
-  - TestObjectParams:
+  - `TestObjectParams`:
     - 指目标接口参数检查测试用例类。如 `TestPartitionParams` 表示 partition 接口的针对不同参数输入的表现的测试。
     - 此类检查在不同输入参数条件下，目标类/方法的表现。编写时注意参数应覆盖 `default`、`empty`、`none`、`datatype` 以及 `maxsize` 边界值等。
-  - TestObjectOperations:
+  - `TestObjectOperations`:
     - 指目标接口方法或操作测试用例类。如 `TestPartitionOperations` 表示 partition 接口针对不同方法或操作的返回和表现的测试。
     - 此类检查在合法输入参数，且与其他接口有一定交互的条件下，目标类/方法的返回和表现。
 - testcase 命名
-  - TestObjectParams:
+  - `TestObjectParams`:
     - 以 testcase 输入参数区分命名。如 `test_partition_empty_name()` 表示验证空字符串作为 `name` 参数输入的表现。
-  - TestObjectOperations:
+  - `TestObjectOperations`:
     - 以 testcase 操作步骤区分命名。如 `test_partition_drop_partition_twice()` 表示验证连续 `drop` 两次 partition 的表现。
     - 以 testcase 验证点区分命名，如 `test_partition_maximum_partitions()` 表示验证创建  partition 的最大数量。
 
@@ -172,7 +172,14 @@ python3 -W ignore -m pytest <test_file_name>
 > 当需要创建多个 partition 对象时，调用方法 `self.init_partition_wrap()`，该方法返回新生成的 partition 对象。若无需创建多个对象，直接调用 `self.partition_wrap`。
 
 ```
-# create partition  -Call the default initialization methodpartition_w = self.init_partition_wrap()assert partition_w.is_empty# create partition    -Directly call the encapsulated objectself.partition_wrap.init_partition(collection=collection_name, name=partition_name)assert self.partition_wrap.is_empty
+# create partition  -Call the default initialization method
+partition_w = self.init_partition_wrap()
+assert partition_w.is_empty
+```
+```
+# create partition    -Directly call the encapsulated object
+self.partition_wrap.init_partition(collection=collection_name, name=partition_name)
+assert self.partition_wrap.is_empty
 ```
 
 - 验证接口返回错误或异常
@@ -180,7 +187,8 @@ python3 -W ignore -m pytest <test_file_name>
   - 输入期望的错误码和错误信息。
 
 ```
-# create partition with collection is Noneself.partition_wrap.init_partition(collection=None, name=partition_name, check_task=CheckTasks.err_res, check_items={ct.err_code: 1, ct.err_msg: "'NoneType' object has no attribute"})
+# create partition with collection is None
+self.partition_wrap.init_partition(collection=None, name=partition_name, check_task=CheckTasks.err_res, check_items={ct.err_code: 1, ct.err_msg: "'NoneType' object has no attribute"})
 ```
 
 - 验证接口返回正常返回值
@@ -188,7 +196,8 @@ python3 -W ignore -m pytest <test_file_name>
   - 输入期望的结果，供校验方法使用。
 
 ```
-# create partitionpartition_w = self.init_partition_wrap(collection_w, partition_name, check_task=CheckTasks.check_partition_property, check_items={"name": partition_name, "description": description, "is_empty": True, "num_entities": 0})
+# create partition
+partition_w = self.init_partition_wrap(collection_w, partition_name, check_task=CheckTasks.check_partition_property, check_items={"name": partition_name, "description": description, "is_empty": True, "num_entities": 0})
 ```
 
 3. 添加测试用例
@@ -197,7 +206,22 @@ python3 -W ignore -m pytest <test_file_name>
 - 在 **testcases** 文件夹下与被测接口对应的测试文件添加用例。如下所示，全部测试用例可直接参考 testcases 目录下的所有 test 文件：
 
 ```
-    @pytest.mark.tags(CaseLabel.L1)    @pytest.mark.parametrize("partition_name", [cf.gen_unique_str(prefix)])    def test_partition_dropped_collection(self, partition_name):        """        target: verify create partition against a dropped collection        method: 1. create collection1                2. drop collection1                3. create partition in collection1        expected: 1. raise exception        """                # create collection        collection_w = self.init_collection_wrap()        # drop collection        collection_w.drop()        # create partition failed        self.partition_wrap.init_partition(collection_w.collection, partition_name, check_task=CheckTasks.err_res, check_items={ct.err_code: 1, ct.err_msg: "can't find collection"})
+@pytest.mark.tags(CaseLabel.L1)
+@pytest.mark.parametrize("partition_name", [cf.gen_unique_str(prefix)])
+def test_partition_dropped_collection(self, partition_name):
+    """
+    target: verify create partition against a dropped collection
+    method: 1. create collection1
+            2. drop collection1
+            3. create partition in collection1
+    expected: 1. raise exception
+    """
+    # create collection
+    collection_w = self.init_collection_wrap()
+    # drop collection
+    collection_w.drop()
+    # create partition failed
+    self.partition_wrap.init_partition(collection_w.collection, partition_name, check_task=CheckTasks.err_res, check_items={ct.err_code: 1, ct.err_msg: "can't find collection"})
 ```
 
 - Tips
@@ -206,17 +230,11 @@ python3 -W ignore -m pytest <test_file_name>
 
   ```
   self.connection_wrap = ApiConnectionsWrapper()
-
   self.utility_wrap = ApiUtilityWrapper()
-
   self.collection_wrap = ApiCollectionWrapper()
-
   self.partition_wrap = ApiPartitionWrapper()
-
   self.index_wrap = ApiIndexWrapper()
-
   self.collection_schema_wrap = ApiCollectionSchemaWrapper()
-
   self.field_schema_wrap = ApiFieldSchemaWrapper()
   ```
 
