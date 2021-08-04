@@ -14,7 +14,7 @@ Learn how you can become a **Milvus Honored Advocate** (**MHA**) and **Milvus To
 
 | **Benefit**           | **Detail**  |
 | --------------------- | ------------ |
-| Community distinction | Milvus Badge |
+| Milvus swag | Milvus T-shirts, stickers & other limited items   |
 
 *Shipping may be unavailable in some regions due to the ongoing covid-19 pandemic. Electronic gifts may be sent out in lieu of physical gifts in these regions.
 
