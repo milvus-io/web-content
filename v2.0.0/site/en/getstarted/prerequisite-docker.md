@@ -47,5 +47,3 @@ See <a href="https://docs.docker.com/compose/install/">Install Docker Compose</a
 | **Linux with local Docker**    |Install Docker according to the [instructions](https://docs.docker.com/installation/#installation) for your operating system.              |
 | **Windows with Docker Desktop WSL2 backend**    | Install Docker according to the [instructions](https://docs.docker.com/docker-for-windows/wsl-tech-preview/). <br/> <div class="alert note"> Store sources in the local Linux file system, not in the Windows remote mount at <code>/mnt/c</code>.  </div>              | 
 
-## Miscellaneous
-If you wish to upload your release to Google Cloud Storage, install and configure [Google Cloud SDK](https://developers.google.com/cloud/sdk/).
