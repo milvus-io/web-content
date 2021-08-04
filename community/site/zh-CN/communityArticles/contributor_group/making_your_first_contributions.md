@@ -30,7 +30,7 @@ id: making_your_first_contributions.md
 
 ## 安装 Git
 
-为了在本地设备上使用 Git 命令，你需要为自己的操作系统 [安装 Git]()。
+为了在本地设备上使用 Git 命令，你需要为自己的操作系统 [安装 Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)。
 
 > 如果这是你第一次使用Git，你需要先在 Git 中配置 GitHub ID 和邮箱地址，Git在提交修改时会使用这两个字段作为作者信息。
 
@@ -100,7 +100,7 @@ git add <filename>
 git commit -m "<commit-message>" -s
 ```
 
-把 `<commit-message>` 改为这次修改内容的简述。了解更多关于 [Commit message 格式]()。
+把 `<commit-message>` 改为这次修改内容的简述。了解更多关于 [Commit message 格式](contributing_to_milvus.md#风格参考)。
 
 > `-s` 代表为你的 commit message 添加 Sign-off 信息。
 
