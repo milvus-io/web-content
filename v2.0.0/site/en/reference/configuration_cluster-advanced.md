@@ -10,7 +10,9 @@ group: cluster_sys
 
 Milvus cluster maintains many system variables that configure the operation. All configurations can be set manually before server startup. Each configuration has a default value, which can be used directly.
 
-
+<div class="alert note">
+All parameters take effect only after being configured at the startup of Milvus.
+</div>
 
 <div class="tab-wrapper"><a href="configuration_cluster-basic.md" class=''>Basic Configurations</a><a href="configuration_cluster-advanced.md" class='active '>Advanced Configurations</a></div>
 
@@ -174,98 +176,66 @@ This session configures the IP address and port of the monitor request from Milv
 		<td><code>rootCoord.address</code></td>
 		<td><details>
        <summary>TCP/IP address of root coordinator</summary>
-       <li>If you set this parameter as <code>0.0.0.0</code>, root coordinator monitors all IPv4 addresses.</li>
-       <li>This parameter takes effect only after being configured at startup of Milvus.</li>
+       If you set this parameter as <code>0.0.0.0</code>, root coordinator monitors all IPv4 addresses.
       </details></td>
 		<td>localhost</td>
 	</tr>
   <tr>
 		<td><code>rootCoord.port</code></td>
-		<td><details>
-       <summary>TCP port of root coordinator</summary>
-       <li>This parameter takes effect only after being configured at startup of Milvus.</li>
-      </details></td>
+		<td>TCP port of root coordinator</td>
 		<td>53100</td>
 	</tr>
   <tr>
 		<td><code>proxy.port</code></td>
-		<td><details>
-       <summary>TCP port for monitoring Milvus</summary>
-       <li>This parameter takes effect only after being configured at the startup of Milvus.</li>
-      </details></td>
+		<td>TCP port for monitoring Milvus</td>
 		<td>19530</td>
 	</tr>
   <tr>
 		<td><code>queryCoord.address</code></td>
 		<td><details>
        <summary>TCP/IP address of query coordinator</summary>
-       <li>If you set this parameter as <code>0.0.0.0</code>, query coordinator monitors all IPv4 addresses.</li>
-       <li>This parameter takes effect only after being configured at startup of Milvus.</li>
+       If you set this parameter as <code>0.0.0.0</code>, query coordinator monitors all IPv4 addresses.
       </details></td>
 		<td>localhost</td>
 	</tr>
   <tr>
 		<td><code>queryCoord.port</code></td>
-		<td><details>
-       <summary>TCP port of query coordinator</summary>
-       <li>This parameter takes effect only after being configured at startup of Milvus.</li>
-      </details></td>
+		<td>TCP port of query coordinator</td>
 		<td>19531</td>
 	</tr>
   <tr>
 		<td><code>queryNode.port</code></td>
-		<td><details>
-       <summary>TCP port of query node</summary>
-       <li>This parameter takes effect only after being configured at startup of Milvus.</li>
-      </details></td>
+		<td>TCP port of query node</td>
 		<td>21123</td>
 	</tr>
   <tr>
 		<td><code>indexCoord.address</code></td>
-		<td><details>
-       <summary>TCP/IP address of index coordinator</summary>
-       <li>This parameter takes effect only after being configured at startup of Milvus.</li>
-      </details></td>
+		<td>TCP/IP address of index coordinator</td>
 		<td>localhost</td>
 	</tr>
   <tr>
 		<td><code>indexCoord.port</code></td>
-		<td><details>
-       <summary>TCP port of index coordinator</summary>
-       <li>This parameter takes effect only after being configured at startup of Milvus.</li>
-      </details></td>
+		<td>TCP port of index coordinator</td>
 		<td>31000</td>
 	</tr>
   <tr>
 		<td><code>indexNode.port</code></td>
-		<td><details>
-       <summary>TCP port of index node</summary>
-       <li>This parameter takes effect only after being configured at startup of Milvus.</li>
-      </details></td>
+		<td>TCP port of index node</td>
 		<td>21121</td>
 	</tr>
   <tr>
 		<td><code>dataCoord.address</code></td>
-		<td><details>
-       <summary>TCP/IP address of data coordinator</summary>
-       <li>This parameter takes effect only after being configured at startup of Milvus.</li>
-      </details></td>
+		<td>TCP/IP address of data coordinator</td>
 		<td>localhost</td>
 	</tr>
   <tr>
 		<td><code>dataCoord.port</code></td>
-		<td><details>
-       <summary>TCP port of data coordinator</summary>
-       <li>This parameter takes effect only after being configured at startup of Milvus.</li>
-      </details></td>
+		<td>TCP port of data coordinator</td>
 		<td>13333</td>
 	</tr>
   <tr>
 		<td><code>dataNode.port</code></td>
-		<td><details>
-       <summary>TCP port of data node</summary>
-       <li>This parameter takes effect only after being configured at startup of Milvus.</li>
-      </details></td>
+		<td>TCP port of data node</td>
 		<td>21124</td>
 	</tr>
 </tbody>

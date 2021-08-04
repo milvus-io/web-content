@@ -9,6 +9,9 @@ group: cluster_sys
 
 Milvus cluster maintains many system variables that configure the operation. All configurations can be set manually before server startup. Each configuration has a default value, which can be used directly.
 
+<div class="alert note">
+All parameters take effect only after being configured at the startup of Milvus.
+</div>
 
 
 <div class="tab-wrapper"><a href="configuration_cluster-basic.md" class='active '>Basic Configurations</a><a href="configuration_cluster-advanced.md" class=''>Advanced Configurations</a></div>
