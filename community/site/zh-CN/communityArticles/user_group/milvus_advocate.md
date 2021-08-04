@@ -10,17 +10,21 @@ id: milvus_advocate.md
 
 根据贡献程度，社区大使可分为 **Milvus Honored Advocate**（**MHA**）以及 **Milvus Top Advocate**（**MTA**）。
 
-## Milvus Honored Advocate
+## Milvus Honored Advocate （MHA）
 
 ### 权益
 
-权益细节Milvus 周边限定礼包Milvus T 恤、贴纸和其他限量版产品
+| 权益                              | 描述                                                |
+| --------------------------------- | --------------------------------------------------- |
+| Milvus 周边限定礼包               | Milvus T 恤、贴纸和其他限量版产品                   |
+
+
 
 ### 资格
 
-任何在自然年内为 Milvus 社区贡献一篇技术内容的会员都有资格成为 **MHA**。
+任何在指定自然年内为 Milvus 社区贡献一篇或以上技术内容的会员有资格成为本年的 **MHA**。
 
-内容的贡献可以包括 Milvus 的文章、教程、技术讲座、直播等。
+贡献形式包括关于 Milvus 的文章、教程、技术讲座、直播等。
 
 - 以下是几种常见的技术内容类型：
   - **Demo 和解决方案**：向 Milvus 用户展示如何在特定场景下使用 Milvus（如音乐推荐系统）。你可以在 [Milvus Bootcamp](https://github.com/milvus-io/bootcamp) 中找到相关的例子。
@@ -29,19 +33,29 @@ id: milvus_advocate.md
 
 - **技术讲座/直播**：在线上或线下活动中发表演讲，帮助提高其他人对 Milvus 的认识。
 
-- **其他**：任何对 Milvus 及其开源社区的发展起到积极作用的内容都将被纳入考虑。
+- **其他**：任何对 Milvus 及其开源社区的发展起到积极作用的内容都将纳入考虑范畴。
 
-## Milvus Top Advocate
+## Milvus Top Advocate （MTA）
 
 ### 权益
 
-权益细节社区荣誉社区贡献者徽章Milvus 周边限定礼包Milvus T 恤、贴纸和其他限量版产品Milvus 社区节日关怀职业发展与人际拓展Milvus meetup、Milvus conference 等活动优先参与资格与 Milvus 的核心贡献者一对一会面个人影响力塑造个人资料更新至 Milvus 官网官方渠道介绍和推广以文章或视频等形式与社区分享 MTA 的贡献内容在 Milvus 活动和会议中以贵宾身份出席
+| 权益                              | 描述                                                |
+| --------------------------------- | --------------------------------------------------- |
+| 社区荣誉                          | 社区贡献者徽章                                      |
+| Milvus 周边限定礼包               | Milvus T 恤、贴纸和其他限量版产品                   |
+| Milvus 社区节日关怀               |                                                     |
+| 职业发展与人际拓展                | Milvus meetup、Milvus conference 等活动优先参与资格 |
+| 与 Milvus 的核心贡献者一对一会面  |                                                     |
+| 个人影响力塑造                    | 个人资料更新至 Milvus 官网                          |
+| 官方渠道介绍和推广                | 以文章或视频等形式与社区分享 MTA 的贡献内容         |
+| 以 VIP 身份出席 Milvus 活动和会议 |                                                     |
+
+
 
 ### 资格
+任何在指定自然年内为 Milvus 社区贡献三篇或以上技术内容的会员有资格成为本年的 **MTA**。
 
-任何在自然年内为 Milvus 社区贡献三篇或以上的内容将有资格成为 **MTA**。
-
-技术内容的贡献可以包括 Milvus 的文章、教程、技术讲座、直播等。
+贡献形式包括关于 Milvus 的文章、教程、技术讲座、直播等。
 
 - 以下是几种常见的技术内容类型：
   - **Demo 和解决方案**：向 Milvus 用户展示如何在特定场景下使用 Milvus（如音乐推荐系统）。你可以在 [Milvus Bootcamp](https://github.com/milvus-io/bootcamp) 中找到相关的例子。
@@ -54,7 +68,5 @@ id: milvus_advocate.md
 
 ## 联系我们
 
-有不错的内容想贡献给社区吗？或是你希望能在 Milvus 接下来的活动中做分享吗？
-
-欢迎与我们联系：[community@zilliz.com](mailto:community@zilliz.com)
+如果你希望为社区贡献优质的内容或在接下来的 Milvus 活动中分享你的见解，欢迎与我们联系：[community@zilliz.com](mailto:community@zilliz.com)
 
