@@ -150,22 +150,22 @@ This section specifies references while adding new test cases or framework tools
 
 - Test categories: test files fall into two categories
 
-  - TestObjectParams:
+  - `TestObjectParams`:
     - Indicates the parameter test of corresponding interface. For instance, `TestPartitionParams` represents the parameter test for Partition interface.
     - Tests the target category/method under different parameter inputs. The parameter test will cover `default`, `empty`, `none`, `datatype`,  `maxsize`, etc.
 
-  - TestObjectOperations:
+  - `TestObjectOperations`:
 
     - Indicates the function/operation test of corresponding interface. For instance, `TestPartitionOperations` represents the function/operation test for Partition interface.
     - Tests the target category/method with legit parameter inputs and interaction with other interfaces.
 
 - Testcase naming
 
-  - TestObjectParams:
+  - `TestObjectParams`:
 
     - Name after the parameter input of the test case. For instance, `test_partition_empty_name()` represents test on performance with the empty string as the `name` parameter input.
 
-  - TestObjectOperations:
+  - `TestObjectOperations`:
     - Name after the operation procedure of the test case. For instance, `test_partition_drop_partition_twice()` represents the test on the performance when dropping partitions twice consecutively.
     - Name after assertions. For instance, `test_partition_maximum_partitions()` represents test on the maximum number of partitions that can be created.
 
@@ -179,36 +179,30 @@ This section specifies references while adding new test cases or framework tools
 
 ```
 # create partition  -Call the default initialization method
-
 partition_w = self.init_partition_wrap()
-
 assert partition_w.is_empty
+```
+```
 # create partition    -Directly call the encapsulated object
-
 self.partition_wrap.init_partition(collection=collection_name, name=partition_name)
-
 assert self.partition_wrap.is_empty
 ```
 
 - To test on the error or exception returned from interfaces:
   - Call `check_task=CheckTasks.err_res`.
-
-- Input the expected error ID and message.
+  - Input the expected error ID and message.
 
 ```
 # create partition with collection is None
-
 self.partition_wrap.init_partition(collection=None, name=partition_name, check_task=CheckTasks.err_res, check_items={ct.err_code: 1, ct.err_msg: "'NoneType' object has no attribute"})
 ```
 
 - To test on the normal value returned from interfaces:
   - Call `check_task=CheckTasks.check_partition_property`. You can build new test methods in `CheckTasks` for invocation in test cases.
-
-- Input the expected result for test methods.
+  - Input the expected result for test methods.
 
 ```
 # create partition
-
 partition_w = self.init_partition_wrap(collection_w, partition_name, check_task=CheckTasks.check_partition_property, check_items={"name": partition_name, "description": description, "is_empty": True, "num_entities": 0})
 ```
 
@@ -218,23 +212,22 @@ partition_w = self.init_partition_wrap(collection_w, partition_name, check_task=
 - Add the test cases in the corresponding test file of the tested interface in **testcases** folder. You can refer to all test files under this directory to create your own test cases as shown below:
 
 ```
-    @pytest.mark.tags(CaseLabel.L1)
-    @pytest.mark.parametrize("partition_name", [cf.gen_unique_str(prefix)])
-    def test_partition_dropped_collection(self, partition_name):
-        """
-        target: verify create partition against a dropped collection
-        method: 1. create collection1
-                2. drop collection1
-                3. create partition in collection1
-        expected: 1. raise exception
-        """
-        
-        # create collection
-        collection_w = self.init_collection_wrap()
-        # drop collection
-        collection_w.drop()
-        # create partition failed
-        self.partition_wrap.init_partition(collection_w.collection, partition_name, check_task=CheckTasks.err_res, check_items={ct.err_code: 1, ct.err_msg: "can't find collection"})
+@pytest.mark.tags(CaseLabel.L1)
+@pytest.mark.parametrize("partition_name", [cf.gen_unique_str(prefix)])
+def test_partition_dropped_collection(self, partition_name):
+    """
+    target: verify create partition against a dropped collection
+    method: 1. create collection1
+            2. drop collection1
+            3. create partition in collection1
+    expected: 1. raise exception
+    """
+    # create collection
+    collection_w = self.init_collection_wrap()
+    # drop collection
+    collection_w.drop()
+    # create partition failed
+    self.partition_wrap.init_partition(collection_w.collection, partition_name, check_task=CheckTasks.err_res, check_items={ct.err_code: 1, ct.err_msg: "can't find collection"})
 ```
 
 - Tips
