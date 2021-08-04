@@ -3,7 +3,7 @@ id: contributing_test.md
 ---
 # 贡献测试案例
 
-本篇文档将为您介绍基于 pytest 编写的 PyMilvus ORM 的测试框架以及测试用例的贡献指南。
+本篇文档将为您介绍基于 [Pytest](https://docs.pytest.org/en/6.2.x/) 编写的 PyMilvus ORM 的测试框架以及测试用例的贡献指南。
 
 > 测试代码已在 [GitHub](https://github.com/milvus-io/milvus/tree/master/tests20/python_client) 上开源。
 
@@ -82,7 +82,7 @@ kind export logs .
 
 > 注意：如选择 KinD 部署方式，以下步骤会自动完成。
 
-1. 安装测试所需的 python 包，进入代码目录 ***/milvus/tests20/python_client/**，执行命令：
+1. 安装测试所需的 Python 包，进入代码目录 ***/milvus/tests20/python_client/**，执行命令：
 
 ```
 pip install -r requirements.txt
@@ -108,7 +108,7 @@ addopts = --host *.*.*.*  --html=/tmp/ci_logs/report.html
 
 其中 `host` 为所需要设置的 Milvus 服务的 IP 地址，`*.html` 为测试生成的 **report**。
 
-4. 进入 **testcases** 目录，命令与 [pytest](https://docs.pytest.org/en/6.2.x/) 框架的执行命令一致。运行以下命令执行测试用例：
+4. 进入 **testcases** 目录，命令与 Pytest 框架的执行命令一致。运行以下命令执行测试用例：
 
 ```
 python3 -W ignore -m pytest <test_file_name>
@@ -123,7 +123,7 @@ python3 -W ignore -m pytest <test_file_name>
 
 ### 工作目录以及文件介绍
 
-- **base**：存放已封装好的 **PyMilvus ORM 模块文件**，以及 pytest 框架的 setup 和 teardown 处理等。
+- **base**：存放已封装好的 **PyMilvus ORM 模块文件**，以及 Pytest 框架的 setup 和 teardown 处理等。
 - **check**：存放接口返回结果的**检查模块**。
 - **common**：存放测试用例**通用的方法和参数**。
 - **config**：存放**基础配置**文件。
@@ -131,13 +131,13 @@ python3 -W ignore -m pytest <test_file_name>
 - **utils**：存放**通用程序**，如可用于全局的日志类、或者环境检查的方法等。
 - **requirements.txt**：指定执行测试文件所**依赖的 Python 包**。
 - **conftest.py**：可在其中编写**装饰器函数**或**本地插件**，作用范围为该文件存放的目录及其子目录。
-- **pytest.ini**：pytest 的**主配置文件**。
+- **pytest.ini**：Pytest 的**主配置文件**。
 
 ### 主要设计思路
 
 - **base/\*_wrapper.py** 模块**封装被测接口**，统一处理接口请求，提取接口请求的返回结果，并传入 **check/func_check.py** 模块进行结果检查。
 - **check/func_check.py** 模块下编写各接口返回结果的检查方法，供测试用例调用。
-- **base/client_base.py** 模块使用pytest框架，进行相应的 setup/teardown 方法处理。
+- **base/client_base.py** 模块使用 Pytest 框架，进行相应的 setup/teardown 方法处理。
 - **testcases** 目录下编写测试文件。测试用例应继承 **base/client_base.py** 中 **TestcaseBase** 模块。用例里用到的通用参数和数据处理方法，应写入 **common** 模块供用例调用。
 - **config** 目录下加入全局配置，如日志的路径。
 - **utils**  目录下加入负责实现全局的方法，如全局可用的日志模块。
