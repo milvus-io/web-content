@@ -1,18 +1,20 @@
 ---
-id: configuration_standalone-advanced.md
-title: 单机版 Milvus 系统配置
+id: configuration_cluster-advanced.md
+title: Milvus 分布式系统配置
 label: 高级配置
 order: 1
-group: standalone_sys
+group: cluster_sys
 ---
 
-# 单机版 Milvus 系统配置
+# 分布式版 Milvus 系统配置
 
-单机版 Milvus 通过系统配置项控制系统运行。所有配置项均可在服务启动前在相应配置文件中手动设置。各配置项的默认值可以直接投入使用。
+分布式版 Milvus 通过系统配置项控制系统运行。所有配置项均可在服务启动前在相应配置文件中手动设置。各配置项的默认值可以直接投入使用。
 
+<div class="alert note">
+所有参数只有在 Milvus 启动时设置生效。
+</div>
 
-
-<div class="tab-wrapper"><a href="configuration_standalone-basic.md" class=''>基本配置</a><a href="configuration_standalone-advanced.md" class='active '>高级配置</a></div>
+<div class="tab-wrapper"><a href="configuration_cluster-basic.md" class=''>基本配置</a><a href="configuration_cluster-advanced.md" class='active '>高级配置</a></div>
 
 
 Milvus 集群的管理员需要通过更改以下配置项维护集群运行。
@@ -119,6 +121,44 @@ minIO 是系统的存储引擎，支撑日志文件与索引文件的持久化�
 </table>
 
 
+## Pulsar 配置
+
+Pulsar 是系统的日志流底层引擎，支撑日志流的可靠存储与发布/订阅。你可以在 **milvus/configs** 路径下的 **milvus.yaml** 中设置这些参数。
+
+> 如使用默认 **docker-compose.yml** 文件启动第三方服务，则无需修改该部分参数。
+
+<table id="pulsar">
+<thead>
+  <tr>     
+    <th class="width20">参数</th>     
+    <th class="width70">说明</th>     
+    <th class="width10">默认值</th>   
+  </tr>
+</thead>
+<tbody>
+  <tr>
+		<td><code>pulsar.address</code></td>
+		<td><details>
+       <summary>Pulsar 监听请求的 IP 地址</summary>
+       <li>环境变量：<code>PULSAR_ADDRESS</code></li>
+      <li>Pulsar 监听请求的 IP 地址，用于访问 MinIO 服务。<code>pulsar.address</code> 与 <code>pulsar.port</code> 共同组成 Pulsar 监听请求的有效地址。</li>
+      <li>Milvus 启动时，优先从环境变量 <code>PULSAR_ADDRESS</code> 获得有效 IP 地址。</li>
+       <li>默认值适用于 Pulsar 与 Milvus 运行于相同的网络中。</li>
+      </details></td>
+		<td>localhost</td>
+	</tr>
+  <tr>
+		<td><code>pulsar.port</code></td>
+		<td><details>
+       <summary>Pulsar 监听请求的端口</summary>
+       <li>环境变量：<code>PULSAR_ADDRESS</code></li>
+      <li>Pulsar 监听请求的端口，用于访问 MinIO 服务。<code>pulsar.address</code> 与 <code>pulsar.port</code> 共同组成 Pulsar 监听请求的有效地址。</li>
+      <li>Milvus 启动时，优先从环境变量 <code>PULSAR_ADDRESS</code> 获得有效 IP 地址。</li>
+      </details></td>
+		<td>6650</td>
+	</tr>
+</tbody>
+</table>
 
 
 ## 服务地址配置
@@ -135,12 +175,70 @@ minIO 是系统的存储引擎，支撑日志文件与索引文件的持久化�
 </thead>
 <tbody>
   <tr>
-		<td><code>proxy.port</code></td>
+		<td><code>rootCoord.address</code></td>
 		<td><details>
-       <summary>监听 Milvus 的 TCP 端口</summary>
-       <li>该参数只有在 Milvus 启动时设置生效。</li>
+       <summary>root coordinator 的 TCP/IP 地址</summary>
+       如果将该参数设置为 <code>0.0.0.0</code>，root coordinator 将会在所有 IPv4 地址监听。
       </details></td>
+		<td>localhost</td>
+	</tr>
+  <tr>
+		<td><code>rootCoord.port</code></td>
+		<td>root coordinator 的 TCP 端口</td>
+		<td>53100</td>
+	</tr>
+  <tr>
+		<td><code>proxy.port</code></td>
+		<td>监听 Milvus 的 TCP 端口</td>
 		<td>19530</td>
+	</tr>
+  <tr>
+		<td><code>queryCoord.address</code></td>
+		<td><details>
+       <summary>query coordinator 的 TCP/IP 地址</summary>
+       如果将该参数设置为 <code>0.0.0.0</code>，query coordinator 将会在所有 IPv4 地址监听。
+      </details></td>
+		<td>localhost</td>
+	</tr>
+  <tr>
+		<td><code>queryCoord.port</code></td>
+		<td>query coordinator 的 TCP 端口</td>
+		<td>19531</td>
+	</tr>
+  <tr>
+		<td><code>queryNode.port</code></td>
+		<td>query node 的 TCP 端口</td>
+		<td>21123</td>
+	</tr>
+  <tr>
+		<td><code>indexCoord.address</code></td>
+		<td>index coordinator 的 TCP/IP 地址</td>
+		<td>localhost</td>
+	</tr>
+  <tr>
+		<td><code>indexCoord.port</code></td>
+		<td>index coordinator 的 TCP 端口</td>
+		<td>31000</td>
+	</tr>
+  <tr>
+		<td><code>indexNode.port</code></td>
+		<td>index node 的 TCP 端口</td>
+		<td>21121</td>
+	</tr>
+  <tr>
+		<td><code>dataCoord.address</code></td>
+		<td>data coordinator 的 TCP/IP 地址</td>
+		<td>localhost</td>
+	</tr>
+  <tr>
+		<td><code>dataCoord.port</code></td>
+		<td>data coordinator 的 TCP 端口</td>
+		<td>13333</td>
+	</tr>
+  <tr>
+		<td><code>dataNode.port</code></td>
+		<td>data node 的 TCP 端口</td>
+		<td>21124</td>
 	</tr>
 </tbody>
 </table>
@@ -148,7 +246,7 @@ minIO 是系统的存储引擎，支撑日志文件与索引文件的持久化�
 
 ## 系统行为配置
 
-系统行为配置用于设定 Milvus 运行时的系统行为。你可以在 **milvus/configs** 路径下的 **milvus.yaml** 以及  **milvus/configs/advaced** 路径下的**root_coord.yaml**、**data_coord.yaml**、**data_node.yaml** 中设置这些参数。
+系统行为配置用于设定 Milvus 运行时的系统行为。你可以在 **milvus/configs** 路径下的 **milvus.yaml**，以及 **milvus/configs/advanced** 路径下的 **root_coord.yaml**、**data_coord.yaml**、 **data_node.yaml** 中设置这些参数。
 
 <table id="system_behavior">
 <thead>

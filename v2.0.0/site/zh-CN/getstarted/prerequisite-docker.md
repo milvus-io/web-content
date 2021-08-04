@@ -47,5 +47,3 @@ lscpu | grep -e sse4_2 -e avx -e avx2 -e avx512
 | **Linux 系统本地安装 Docker**    |安装 Linux 版本 Docker，详见[安装说明](https://docs.docker.com/installation/#installation)。              |
 | **Windows 系统安装 Docker Desktop WSL2 后台**    | 安装 Windows 版本 Docker，详见[安装说明](https://docs.docker.com/docker-for-windows/wsl-tech-preview/)。 <br/> <div class="alert note"> 源码必须保存在本地 Linux 文件系统中，而非 Windows 挂载远程文件系统 <code>/mnt/c</code> 中。 </div>              | 
 
-## 其他
-如需将资源上传至 Google Cloud Storage，安装并配置 [Google Cloud SDK](https://developers.google.com/cloud/sdk/)。

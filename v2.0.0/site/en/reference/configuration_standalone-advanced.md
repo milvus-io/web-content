@@ -10,7 +10,9 @@ group: standalone_sys
 
 Milvus standalone maintains many system variables that configure the operation. All configurations can be set manually before server startup. Each configuration has a default value, which can be used directly.
 
-
+<div class="alert note">
+All parameters take effect only after being configured at the startup of Milvus.
+</div>
 
 <div class="tab-wrapper"><a href="configuration_standalone-basic.md" class=''>Basic Configurations</a><a href="configuration_standalone-advanced.md" class='active '>Advanced Configurations</a></div>
 
@@ -140,10 +142,7 @@ This session configures the IP address and port of the monitor request from Milv
 <tbody>
   <tr>
 		<td><code>proxy.port</code></td>
-		<td><details>
-       <summary>TCP port for monitoring Milvus</summary>
-       <li>This parameter takes effect only after being configured at the startup of Milvus.</li>
-      </details></td>
+		<td>TCP port for monitoring Milvus</td>
 		<td>19530</td>
 	</tr>
 </tbody>
