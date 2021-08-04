@@ -41,7 +41,7 @@ Milvus 支持四种部署方式，你可以根据需求选择部署方式。PyMi
 
 #### 脚本安装
 
-1. 进入代码目录 ***/milvus/tests/scripts/**
+1. 进入代码目录 **/milvus/tests/scripts/**
 2. 新建 KinD 环境，并自动执行 CI Regression 测试用例：
 
 ```
@@ -82,7 +82,7 @@ kind export logs .
 
 > 注意：如选择 KinD 部署方式，以下步骤会自动完成。
 
-1. 安装测试所需的 Python 包，进入代码目录 ***/milvus/tests20/python_client/**，执行命令：
+1. 安装测试所需的 Python 包，进入代码目录 **/milvus/tests20/python_client/**，执行命令：
 
 ```
 pip install -r requirements.txt
@@ -135,7 +135,7 @@ python3 -W ignore -m pytest <test_file_name>
 
 ### 主要设计思路
 
-- **base/\*_wrapper.py** 模块**封装被测接口**，统一处理接口请求，提取接口请求的返回结果，并传入 **check/func_check.py** 模块进行结果检查。
+- **base/\_wrapper.py** 模块**封装被测接口**，统一处理接口请求，提取接口请求的返回结果，并传入 **check/func_check.py** 模块进行结果检查。
 - **check/func_check.py** 模块下编写各接口返回结果的检查方法，供测试用例调用。
 - **base/client_base.py** 模块使用 Pytest 框架，进行相应的 setup/teardown 方法处理。
 - **testcases** 目录下编写测试文件。测试用例应继承 **base/client_base.py** 中 **TestcaseBase** 模块。用例里用到的通用参数和数据处理方法，应写入 **common** 模块供用例调用。
@@ -149,45 +149,19 @@ python3 -W ignore -m pytest <test_file_name>
 1. 测试编码风格
 
 - test 文件：每个 SDK 类对应一个 test 文件，`load` 和 `search` 单独对应一个 test 文件。
-
 - test 类：每个 test 文件中分两类
-
-  - ```
-    TestObjectParams
-    ```
-
-    :
-
+  - TestObjectParams:
     - 指目标接口参数检查测试用例类。如 `TestPartitionParams` 表示 partition 接口的针对不同参数输入的表现的测试。
     - 此类检查在不同输入参数条件下，目标类/方法的表现。编写时注意参数应覆盖 `default`、`empty`、`none`、`datatype` 以及 `maxsize` 边界值等。
-
-  - ```
-    TestObjectOperations
-    ```
-
-    :
-
+  - TestObjectOperations:
     - 指目标接口方法或操作测试用例类。如 `TestPartitionOperations` 表示 partition 接口针对不同方法或操作的返回和表现的测试。
-
-- 此类检查在合法输入参数，且与其他接口有一定交互的条件下，目标类/方法的返回和表现。
-
+    - 此类检查在合法输入参数，且与其他接口有一定交互的条件下，目标类/方法的返回和表现。
 - testcase 命名
-
-  - ```
-    TestObjectParams
-    ```
-
-    :
-
+  - TestObjectParams:
     - 以 testcase 输入参数区分命名。如 `test_partition_empty_name()` 表示验证空字符串作为 `name` 参数输入的表现。
-
-  - ```
-    TestObjectOperations
-    ```
-
+  - TestObjectOperations:
     - 以 testcase 操作步骤区分命名。如 `test_partition_drop_partition_twice()` 表示验证连续 `drop` 两次 partition 的表现。
-
-- 以 testcase 验证点区分命名，如 `test_partition_maximum_partitions()` 表示验证创建  partition 的最大数量。
+    - 以 testcase 验证点区分命名，如 `test_partition_maximum_partitions()` 表示验证创建  partition 的最大数量。
 
 2. 编码注意事项
 
