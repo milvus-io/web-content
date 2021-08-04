@@ -25,7 +25,7 @@ $ wget https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/doc
 ```
 
 <div class="alert note">
-如果你使用原始 **docker-compose.yml** 文件安装 Milvus, 数据将会被存储在 **./volume** 路径下。如需修改映射路径，你可以直接修改 **docker-compose.yml** 文件，或运行 <code>$ export DOCKER_VOLUME_DIRECTORY=</path/to/your/directory></code>。
+如果你使用原始 <b>docker-compose.yml</b> 文件安装 Milvus, 数据将会被存储在 <b>./volume</b> 路径下。如需修改映射路径，你可以直接修改 <b>docker-compose.yml</b> 文件，或运行 <code>$ export DOCKER_VOLUME_DIRECTORY=</code>。
 </div>
 
 2. 启动 Milvus 分布式版：
