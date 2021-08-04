@@ -178,7 +178,7 @@ This section specifies references while adding new test cases or framework tools
 > To create multiple partitions objects, call `self.init_partition_wrap()`, which returns the newly created partition objects. Call `self.partition_wrap` instead when you do not need multiple objects.
 
 ```
-# create partition  -Call the default initialization method
+# create partition    -Call the default initialization method
 partition_w = self.init_partition_wrap()
 assert partition_w.is_empty
 ```
