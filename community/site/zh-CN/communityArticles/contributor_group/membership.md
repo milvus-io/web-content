@@ -20,7 +20,7 @@ Milvus 社区欢迎各种类型的贡献，包括但不限于改进文档、改�
 
 社区现有成员应当欢迎新的 Contributor 加入社区，帮助解决 PR 上遇到的问题，以及引导他到正确的文档和沟通渠道。
 
-**定义在**： **[All contributors](https://github.com/milvus-io/milvus#all-contributors)**[ ](https://github.com/milvus-io/milvus#all-contributors)列表
+**定义在**： [All contributors](https://github.com/milvus-io/milvus#all-contributors)列表
 
 > 如果你为 Milvus 做了贡献却没有被列出，[创建 Issue](https://github.com/milvus-io/community/issues/new) 通知我们。
 
