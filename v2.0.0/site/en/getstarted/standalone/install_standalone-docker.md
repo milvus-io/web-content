@@ -28,7 +28,7 @@ wget https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/docke
 ```
 
 <div class="alert note">
-If you install your Milvus standalone with the original **docker-compose.yml** file, the data will be stored under **./volume** directory. To change the mapped directory, you can either change it directly in the **docker-compose.yml** file, or run <code>$ export DOCKER_VOLUME_DIRECTORY=</path/to/your/directory></code>.
+If you install your Milvus standalone with the original <b>docker-compose.yml</b> file, the data will be stored under <b>./volume</b> directory. To change the mapped directory, you can either change it directly in the <b>docker-compose.yml</b> file, or run <code>$ export DOCKER_VOLUME_DIRECTORY=</code>.
 </div>
 
 2. Start Milvus Standalone:
