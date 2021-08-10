@@ -218,6 +218,14 @@
       "order": 0
     },
     {
+      "id": "monitor.md",
+      "title": "Monitor",
+      "label1": "deploy_and_maintain",
+      "label2": "",
+      "label3": "",
+      "order": 1
+    },
+    {
       "id": "migrate",
       "title": "Migrate",
       "label1": "",

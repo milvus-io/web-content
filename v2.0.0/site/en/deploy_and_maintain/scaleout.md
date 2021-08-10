@@ -1,6 +1,6 @@
 ---
 id: scaleout.md
-title: Scale Out Guide
+title: Scale 
 ---
 
 # Scale Guide for Milvus Cluster
