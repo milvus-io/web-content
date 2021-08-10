@@ -60,9 +60,9 @@ etcd 是系统的元数据引擎，支撑底层的元数据存储与访问。你
 </table>
 
 
-## MinIO 配置
+## MinIO/S3 配置
 
-minIO 是系统的存储引擎，支撑日志文件与索引文件的持久化存储。你可以在 **milvus/configs** 路径下的 **milvus.yaml** 中设置这些参数。
+Milvus 支持 MinIO 以及 Amazon S3 作为系统的存储引擎，支撑日志文件与索引文件的持久化存储。由于 MinIO 兼容 S3，你可以将以下配置项直接修改为你的 S3 服务配置。你可以在 **milvus/configs** 路径下的 **milvus.yaml** 中设置这些参数。
 
 > 如使用默认 **docker-compose.yml** 文件启动第三方服务，则无需修改该部分参数。
 
@@ -78,11 +78,11 @@ minIO 是系统的存储引擎，支撑日志文件与索引文件的持久化�
   <tr>
 		<td><code>minio.address</code></td>
 		<td><details>
-       <summary>MinIO 监听请求的 IP 地址</summary>
+       <summary>MinIO/S3 监听请求的 IP 地址</summary>
        <li>环境变量：<code>MINIO_ADDRESS</code></li>
-       <li>MinIO 监听请求的 IP 地址，用于访问 MinIO 服务。<code>minio.address</code> 和 <code>minio.port</code> 共同组成 MinIO 监听请求的有效地址。</li>
+       <li>MinIO/S3 监听请求的 IP 地址，用于访问 MinIO/S3 服务。<code>minio.address</code> 和 <code>minio.port</code> 共同组成 MinIO/S3 监听请求的有效地址。</li>
        <li>Milvus 启动时，优先从环境变量 <code>MINIO_ADDRESS</code> 获得有效 IP 地址。</li>
-      <li>默认值适用于 MinIO 与 Milvus 运行于相同的网络中。</li>
+      <li>默认值适用于 MinIO/S3 与 Milvus 运行于相同的网络中。</li>
       <li>Milvus 2.0 使用非安全模式访问 MinIO。后续版本将支持安全模式访问 MinIO。</li>
       </details></td>
 		<td>localhost</td>
@@ -90,9 +90,9 @@ minIO 是系统的存储引擎，支撑日志文件与索引文件的持久化�
   <tr>
 		<td><code>minio.port</code></td>
 		<td><details>
-       <summary>MinIO 监听请求的端口</summary>
+       <summary>MinIO/S3 监听请求的端口</summary>
        <li>环境变量：<code>MINIO_ADDRESS</code></li>
-       <li>MinIO 监听请求的端口，用于访问 MinIO 服务。<code>minio.address</code> 和 <code>minio.port</code> 共同组成 MinIO 监听请求的有效地址。</li>
+       <li>MinIO/S3 监听请求的端口，用于访问 MinIO 服务。<code>minio.address</code> 和 <code>minio.port</code> 共同组成 MinIO/S3 监听请求的有效地址。</li>
        <li>Milvus 启动时，优先从环境变量 <code>MINIO_ADDRESS</code> 获得有效端口。</li>
       </details></td>
 		<td>9000</td>
@@ -100,20 +100,20 @@ minIO 是系统的存储引擎，支撑日志文件与索引文件的持久化�
   <tr>
 		<td><code>minio.AccessKeyID</code></td>
 		<td><details>
-       <summary>MinIO 给用户授权访问的密钥 ID</summary>
+       <summary>MinIO/S3 给用户授权访问的密钥 ID</summary>
        <li>环境变量：<code>MINIO_ACCESS_KEY</code></li>
-       <li>MinIO 颁发给用户的访问服务所需要的密钥 ID，用于做身份认证。<code>minio.accessKeyID</code> 与 <code>minio.secretAccessKey</code> 共同用于访问 MinIO 服务。</li>
-       <li>此配置项需要与 MinIO 服务启动时所需要的环境变量 <code>MINIO_ACCESS_KEY</code>相同。默认值适用于使用默认 <b>docker-compose.yml</b> 文件启动 Milvus。</li>
+       <li>MinIO/S3 颁发给用户的访问服务所需要的密钥 ID，用于做身份认证。<code>minio.accessKeyID</code> 与 <code>minio.secretAccessKey</code> 共同用于访问 MinIO/S3 服务。</li>
+       <li>此配置项需要与 MinIO/S3 服务启动时所需要的环境变量 <code>MINIO_ACCESS_KEY</code>相同。默认值适用于使用默认 <b>docker-compose.yml</b> 文件启动 Milvus。</li>
       </details></td>
 		<td>minioadmin</td>
 	</tr>
   <tr>
 		<td><code>minio.secretAccessKey</code></td>
 		<td><details>
-       <summary>MinIO 加密字符串</summary>
+       <summary>MinIO/S3 加密字符串</summary>
        <li>环境变量：<code>MINIO_SECRET_KEY</code></li>
-       <li>用于加密签名字符串和服务器端验证签名字符串的密钥，须严格保密，仅用户与 MinIO 服务端可见。</li>
-       <li>此配置项需要与 MinIO 服务启动时所需要的环境变量 <code>MINIO_SECRET_KEY</code>相同。默认值适用于使用默认 <b>docker-compose.yml</b> 文件启动 Milvus。</li>
+       <li>用于加密签名字符串和服务器端验证签名字符串的密钥，须严格保密，仅用户与 MinIO/S3 服务端可见。</li>
+       <li>此配置项需要与 MinIO/S3 服务启动时所需要的环境变量 <code>MINIO_SECRET_KEY</code>相同。默认值适用于使用默认 <b>docker-compose.yml</b> 文件启动 Milvus。</li>
       </details></td>
 		<td>minioadmin</td>
 	</tr>
