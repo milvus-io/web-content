@@ -9,7 +9,7 @@ Milvus cluster includes eight microservice components and three third-party infr
 
 ![Cluster](../../../assets/cluster.png)
 
-Due to the separation of storage and computation, we can scale out the Milvus cluster easily. There are 4 types of nodes which are stateless:
+Due to the separation of storage and computation, you can scale out the Milvus cluster easily. There are 4 types of nodes which are stateless:
 
 - Query node
 - Data node
