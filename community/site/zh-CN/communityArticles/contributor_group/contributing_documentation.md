@@ -12,42 +12,42 @@ Milvus 的技术文档存储在 [GitHub](https://github.com/milvus-io/milvus-doc
 
 ### 开始之前
 
-在贡献之前，你需要熟悉一些基本的 [Markdown](https://www.markdownguide.org/basic-syntax/) 语法，并查看我们的 [行为准则](http://code_of_conduct.md) 和 [Google 开发者文档样式指南](https://developers.google.com/style/) 了解有关如何编写易于理解、一致且包容的文档。
+在贡献之前，你需要熟悉一些基本的 [Markdown](https://www.markdownguide.org/basic-syntax/) 语法，并查看我们的 [行为准则](http://code_of_conduct.md) 和 [Google 开发者文档样式指南](https://developers.google.com/style/) 了解如何编写易于理解、一致且包容的文档。
 
-下面列出 Milvus 文档中使用的组件：
+以下是 Milvus 文档中使用的组件：
 
 - *图片*位于 **/assets** 文件夹下，可以使用 `{{images.Assets/<image-file-name>}}` 引用。
 
 - *Fragments* 允许你将 Markdown（**.md**）文档拆分为独立的、可重复使用的片段，并在 **site/en/fragments** 和 **site/zh-CN/fragments** 文件夹中定义。使用 `{{fragments/<fragment-file-name>}}` 来引用特定片段。
 
-- *Variables* 用于存储要在代码或路径中引用的版本信息。它们在 **Variables.json** 中定义，可以在 Markdown 文件、片段和模板中使用。
+- *Variables* 用于存储要在代码或路径中引用的版本信息，通过 **Variables.json** 文件定义，可以在 Markdown 文件、片段和模板中使用。
 
-> 定义的变量在只在当前文件夹及其子文件夹中实现。 **en** 和 **Zh-CN** 文件夹都包含一个 **Variables.json** 文件。
+> 变量的作用域仅限于当前文件夹及其子文件夹。 **en** 和 **Zh-CN** 文件夹都包含一个 **Variables.json** 文件。
 
-- Milvus.io Documentation 内部的链接可以直接使用其文件名引用，例如，`[什么是 Milvus](overview.md)`。其他页面需要使用引用页面的完整链接。
+- [Milvus Documentation](https://milvus.io/docs/home) 下页面可直接通过其文件名引用，例如，`[什么是 Milvus](overview.md)`。其他页面需要使用引用页面的完整链接。
 
 ### 贡献工作流
 
 如果只需更正拼写错误或语法错误，欢迎直接 [创建 PR](https://github.com/milvus-io/milvus-docs/pulls) 或在错误页面右上方通过 *编辑* 按钮修改。
 
-如需添加更实质性的内容，请按照以下步骤操作：
+对于更大的文档改动，请按照以下步骤操作：
 
 1. [提交问题](https://github.com/milvus-io/milvus-docs/issues/new/choose) 并通过在评论栏回复`/assign` 或`/assign <your_github_id>` 将其分配给自己。
 2. Fork [milvus-docs 仓库](https://github.com/milvus-io/milvus-docs) 到你自己的 GitHub 账户。
-3. Fetch 上游仓库以确保你的本地分支维持最新。
+3. Fetch 上游仓库以确保你的本地分支为最新版本。
 4. 完成更改后，创建 PR。技术作家会尽快审核你提供的内容。
 
 有关此流程的详细信息，参考 [成为 Milvus 贡献者](http://making_your_first_contributions.md)。
 
 ## 贡献一篇博客文章
 
-如果你想为我们的 [博客](https://medium.com/unstructured-data-service) 撰写文章，请在 [Milvus 社区仓库](https://github.com/milvus-io/community) [提交问题](https://github.com/milvus-io/community/ issue/new)  或发送至 community@zilliz.com。欢迎提交已完成的草稿或文章想法。所有提交的内容将被尽快审核。如果你的文章或想法适合我们的博客，我们将直接与你联系。
+如果你想为我们的 [博客](https://medium.com/unstructured-data-service) 撰写文章，无论是已经完稿或只是初步的想法，都欢迎你在 [Milvus 社区仓库](https://github.com/milvus-io/community) [提交 issue](https://github.com/milvus-io/community/issue/new)  或发送邮件至 community@zilliz.com。所有提交的内容将被尽快审核。如果你的文章或想法适合我们的博客，我们将直接与你联系。
 
-> 请在标题或主题中添加 [博客文章] 以确保你的电子邮件被我们及时发现。
+> 请在标题或主题中添加 [博客文章] 以确保你的电子邮件被我们及时看到。
 
 ## 贡献 API 参考
 
-如需为 Milvus SDK 参考文档做出贡献，访问以下特定于编程语言的仓库：
+如需为 Milvus SDK 参考文档做出贡献，请访问其特定编程语言的仓库。
 
 - [Python ORM](https://github.com/milvus-io/pymilvus-orm)
 
