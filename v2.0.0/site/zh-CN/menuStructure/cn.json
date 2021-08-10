@@ -194,6 +194,22 @@
       "outLink": "https://zilliz.com/sizing-tool"
     },
     {
+      "id": "deploy_and_maintain",
+      "title": "部署与运维",
+      "label1": "",
+      "label2": "",
+      "order": 3,
+      "isMenu": true
+    },
+    {
+      "id": "scaleout.md",
+      "title": "扩缩容",
+      "label1": "deploy_and_maintain",
+      "label2": "",
+      "label3": "",
+      "order": 0
+    },
+    {
       "id": "migrate",
       "title": "数据迁移",
       "label1": "",
