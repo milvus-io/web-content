@@ -9,7 +9,7 @@ Milvus cluster includes eight microservice components and three third-party infr
 
 ![Cluster](../../../assets/cluster.png)
 
-Due to the separation of storage and computation, we can scale out the Milvus cluster easily. There are 4 types of nodes which are stateless:
+Due to the separation of storage and computation, you can scale out the Milvus cluster easily. There are 4 types of nodes which are stateless:
 
 - Query node
 - Data node
@@ -20,7 +20,7 @@ Due to the separation of storage and computation, we can scale out the Milvus cl
 Milvus does not support scaling out the coordinator components.
 </div>
 
-## Install a Milvus cluster with helm:
+## Install a Milvus cluster with Helm:
 ```
 helm repo add milvus https://milvus-io.github.io/milvus-helm/
 helm repo update
@@ -44,7 +44,7 @@ my-release-milvus-rootcoord-75585dc57b-cjh87    1/1     Running      0          
 my-release-minio-5564fbbddc-9sbgv               1/1     Running      0          1m
 ```
 
-## Scale out worker nodes for Milvus cluster
+## Scale out worker nodes in a Milvus cluster
 
 ### Scale out query node
 ```
@@ -140,4 +140,4 @@ my-release-milvus-rootcoord-75585dc57b-cjh87    1/1     Running   0          13m
 my-release-minio-5564fbbddc-9sbgv               1/1     Running   0          13m
 ```
 
-You can see proxy node pods running.
+You can see proxy pods running.
