@@ -140,4 +140,4 @@ my-release-milvus-rootcoord-75585dc57b-cjh87    1/1     Running   0          13m
 my-release-minio-5564fbbddc-9sbgv               1/1     Running   0          13m
 ```
 
-You can see proxy node pods running.
+You can see proxy pods running.
