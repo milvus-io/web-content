@@ -290,13 +290,38 @@
       "isMenu": true
     },
     {
-      "id": "architecture_overview.md",
-      "title": "Architecture Overview",
+      "id": "architecture",
+      "title": "Architecture",
       "label1": "reference",
       "label2": null,
       "label3": null,
+      "order": 0,
+      "isMenu": true
+    },
+    {
+      "id": "architecture_overview.md",
+      "title": "Overview",
+      "label1": "reference",
+      "label2": "architecture",
+      "label3": "",
       "order": 0
-    },  
+    },
+    {
+      "id": "four_layers.md",
+      "title": "Storage/Computing",
+      "label1": "reference",
+      "label2": "architecture",
+      "label3": "",
+      "order": 1
+    },
+    {
+      "id": "main_components.md",
+      "title": "Main Components",
+      "label1": "reference",
+      "label2": "architecture",
+      "label3": "",
+      "order": 2
+    },
     {
       "id": "systemconfigurations",
       "title": "System Configurations",
