@@ -17,7 +17,7 @@ There are two modes for running Milvus: Standalone and Cluster. These two modes 
 
 - **MinIO:** The storage engine, which is responsible for data persistence for Milvus.
 
-![Standalone_architecture](../../../assets/standalone_architecture.jpeg)
+![Standalone_architecture](../../../assets/standalone_architecture.jpg)
 
 ## Milvus cluster
 
