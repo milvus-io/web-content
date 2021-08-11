@@ -43,7 +43,7 @@ Below are S3 configurations for Helm Charts installation:
 | externalS3.bucketName | S3 bucket name                       |                                      |
 | minio.enabled         | Enable or disable MinIO              | <code>true</code>/<code>false</code> |
 
-### Set up S3 using command line at startup
+#### Set up S3 using command line at startup
 
 To deploy S3 for Milvus at the startup, run:
 
@@ -51,7 +51,7 @@ To deploy S3 for Milvus at the startup, run:
 helm install <your_release_name> milvus/milvus --set cluster.enabled=true --set externalS3.enabled=true --set externalS3.host='<your_s3_endpoint>' --set externalS3.port=<your_s3_port> --set externalS3.accessKey=<your_s3_access_key_id> --set externalS3.secretKey=<your_s3_secret_key> --set externalS3.bucketName=<your_bucket_name> --set minio.enabled=false
 ```
 
-### Set up S3 via configuring **values.yaml**
+#### Set up S3 via configuring **values.yaml**
 
 Configure the `minio` section in the **values.yaml** file as follow:
 
