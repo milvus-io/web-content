@@ -211,7 +211,7 @@
     },
     {
       "id": "deploy_s3.md",
-      "title": "Deploy S3 Storage",
+      "title": "Set Up S3 Storage",
       "label1": "deploy_and_maintain",
       "label2": "",
       "label3": "",
