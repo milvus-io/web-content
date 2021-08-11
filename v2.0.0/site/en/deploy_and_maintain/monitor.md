@@ -48,7 +48,7 @@ The ServiceMonitor is not enabled for Miluvs Helm by default. After installing P
 helm install my-release milvus/milvus --set cluster.enabled=true --set metrics.serviceMonitor.enabled=true
 ```
 
-When Helm installation completes, use kubectl to check the ServiceMonitor resource.
+When Helm installation completes, use `kubectl` to check the ServiceMonitor resource.
 
 ```
 kubectl get servicemonitor
