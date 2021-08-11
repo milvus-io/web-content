@@ -1,0 +1,648 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="python" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="python" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Partition &mdash; pymilvus-orm 1.0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/clipboard.min.js"></script>
+        <script type="text/javascript" src="../_static/copybutton.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Index" href="milvus_index.html" />
+    <link rel="prev" title="Schema" href="schema.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> pymilvus-orm
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="api.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="collection.html">Collection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="schema.html">Schema</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Partition</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#constructor">Constructor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#attributes">Attributes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#methods">Methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#api-refereences">API Refereences</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="milvus_index.html">Index</a></li>
+<li class="toctree-l2"><a class="reference internal" href="search.html">SearchResult</a></li>
+<li class="toctree-l2"><a class="reference internal" href="connections.html">Connections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utility.html">Utility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="future.html">Future</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../param.html">Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../results.html">Search results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About this documentation</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">pymilvus-orm</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="api.html">API Reference</a> &raquo;</li>
+        
+      <li>Partition</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/api/partition.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+
+           <div itemprop="articleBody">
+            
+  <section id="partition">
+<h1>Partition<a class="headerlink" href="#partition" title="Permalink to this headline">¶</a></h1>
+<p>A partition is a group of entities in one collection with the same label. Entities inserted without a label
+will be tagged a default label by milvus.</p>
+<p>Partition is managable, which means managing a group of entities with the same label in one collection.</p>
+<section id="constructor">
+<h2>Constructor<a class="headerlink" href="#constructor" title="Permalink to this headline">¶</a></h2>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 49%" />
+<col style="width: 51%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Constructor</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference external" href="#pymilvus_orm.Partition">Partition()</a></p></td>
+<td><p>Milvus partition.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="attributes">
+<h2>Attributes<a class="headerlink" href="#attributes" title="Permalink to this headline">¶</a></h2>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 49%" />
+<col style="width: 51%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>API</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference external" href="#pymilvus_orm.Partition.description">description</a></p></td>
+<td><p>Return the description text.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="#pymilvus_orm.Partition.name">name</a></p></td>
+<td><p>Return the partition name.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="#pymilvus_orm.Partition.is_empty">is_empty</a></p></td>
+<td><p>Return whether the Partition is empty.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="#pymilvus_orm.Partition.num_entities">num_entities</a></p></td>
+<td><p>Return the number of entities.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="methods">
+<h2>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="api-refereences">
+<h2>API Refereences<a class="headerlink" href="#api-refereences" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="pymilvus_orm.Partition">
+<em class="property">class </em><code class="sig-prename descclassname">pymilvus_orm.</code><code class="sig-name descname">Partition</code><span class="sig-paren">(</span><em class="sig-param">collection</em>, <em class="sig-param">name</em>, <em class="sig-param">description=''</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pymilvus_orm/partition.html#Partition"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymilvus_orm.Partition" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="pymilvus_orm.Partition.description">
+<em class="property">property </em><code class="sig-name descname">description</code><a class="headerlink" href="#pymilvus_orm.Partition.description" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the description text.</p>
+<dl class="field-list">
+<dt class="field-odd">Return str</dt>
+<dd class="field-odd"><p>Partition description text, return when operation is successful</p>
+</dd>
+<dt class="field-even">Example</dt>
+<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pymilvus_orm</span> <span class="k">import</span> <span class="n">connections</span><span class="p">,</span> <span class="n">Collection</span><span class="p">,</span> <span class="n">Partition</span><span class="p">,</span> <span class="n">FieldSchema</span><span class="p">,</span> <span class="n">CollectionSchema</span><span class="p">,</span> <span class="n">DataType</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">connections</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">schema</span> <span class="o">=</span> <span class="n">CollectionSchema</span><span class="p">([</span>
+<span class="gp">... </span>    <span class="n">FieldSchema</span><span class="p">(</span><span class="s2">&quot;film_id&quot;</span><span class="p">,</span> <span class="n">DataType</span><span class="o">.</span><span class="n">INT64</span><span class="p">,</span> <span class="n">is_primary</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="n">FieldSchema</span><span class="p">(</span><span class="s2">&quot;films&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">DataType</span><span class="o">.</span><span class="n">FLOAT_VECTOR</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">... </span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span> <span class="o">=</span> <span class="n">Collection</span><span class="p">(</span><span class="s2">&quot;test_partition_description&quot;</span><span class="p">,</span> <span class="n">schema</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">partition</span> <span class="o">=</span> <span class="n">Partition</span><span class="p">(</span><span class="n">collection</span><span class="p">,</span> <span class="s2">&quot;comedy&quot;</span><span class="p">,</span> <span class="s2">&quot;comedy films&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">partition</span><span class="o">.</span><span class="n">description</span>
+<span class="go">&#39;comedy films&#39;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymilvus_orm.Partition.name">
+<em class="property">property </em><code class="sig-name descname">name</code><a class="headerlink" href="#pymilvus_orm.Partition.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the partition name.</p>
+<dl class="field-list">
+<dt class="field-odd">Return str</dt>
+<dd class="field-odd"><p>Partition name, return when operation is successful</p>
+</dd>
+<dt class="field-even">Example</dt>
+<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pymilvus_orm</span> <span class="k">import</span> <span class="n">connections</span><span class="p">,</span> <span class="n">Collection</span><span class="p">,</span> <span class="n">Partition</span><span class="p">,</span> <span class="n">FieldSchema</span><span class="p">,</span> <span class="n">CollectionSchema</span><span class="p">,</span> <span class="n">DataType</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">connections</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">schema</span> <span class="o">=</span> <span class="n">CollectionSchema</span><span class="p">([</span>
+<span class="gp">... </span>    <span class="n">FieldSchema</span><span class="p">(</span><span class="s2">&quot;film_id&quot;</span><span class="p">,</span> <span class="n">DataType</span><span class="o">.</span><span class="n">INT64</span><span class="p">,</span> <span class="n">is_primary</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="n">FieldSchema</span><span class="p">(</span><span class="s2">&quot;films&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">DataType</span><span class="o">.</span><span class="n">FLOAT_VECTOR</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">... </span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span> <span class="o">=</span> <span class="n">Collection</span><span class="p">(</span><span class="s2">&quot;test_partition_name&quot;</span><span class="p">,</span> <span class="n">schema</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">partition</span> <span class="o">=</span> <span class="n">Partition</span><span class="p">(</span><span class="n">collection</span><span class="p">,</span> <span class="s2">&quot;comedy&quot;</span><span class="p">,</span> <span class="s2">&quot;comedy films&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">partition</span><span class="o">.</span><span class="n">name</span>
+<span class="go">&#39;comedy&#39;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymilvus_orm.Partition.is_empty">
+<em class="property">property </em><code class="sig-name descname">is_empty</code><a class="headerlink" href="#pymilvus_orm.Partition.is_empty" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns whether the partition is empty</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return bool</dt>
+<dd class="field-odd"><p>Whether the partition is empty</p>
+</dd>
+</dl>
+<ul class="simple">
+<li><p>True: The partition is empty.</p></li>
+<li><p>False: The partition is not empty.</p></li>
+</ul>
+<dl class="field-list">
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pymilvus_orm</span> <span class="k">import</span> <span class="n">connections</span><span class="p">,</span> <span class="n">Collection</span><span class="p">,</span> <span class="n">Partition</span><span class="p">,</span> <span class="n">FieldSchema</span><span class="p">,</span> <span class="n">CollectionSchema</span><span class="p">,</span> <span class="n">DataType</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">connections</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">schema</span> <span class="o">=</span> <span class="n">CollectionSchema</span><span class="p">([</span>
+<span class="gp">... </span>    <span class="n">FieldSchema</span><span class="p">(</span><span class="s2">&quot;film_id&quot;</span><span class="p">,</span> <span class="n">DataType</span><span class="o">.</span><span class="n">INT64</span><span class="p">,</span> <span class="n">is_primary</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="n">FieldSchema</span><span class="p">(</span><span class="s2">&quot;films&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">DataType</span><span class="o">.</span><span class="n">FLOAT_VECTOR</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">... </span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span> <span class="o">=</span> <span class="n">Collection</span><span class="p">(</span><span class="s2">&quot;test_partition_is_empty&quot;</span><span class="p">,</span> <span class="n">schema</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">partition</span> <span class="o">=</span> <span class="n">Partition</span><span class="p">(</span><span class="n">collection</span><span class="p">,</span> <span class="s2">&quot;comedy&quot;</span><span class="p">,</span> <span class="s2">&quot;comedy films&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">partition</span><span class="o">.</span><span class="n">is_empty</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymilvus_orm.Partition.num_entities">
+<em class="property">property </em><code class="sig-name descname">num_entities</code><a class="headerlink" href="#pymilvus_orm.Partition.num_entities" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the number of entities.</p>
+<dl class="field-list">
+<dt class="field-odd">Return int</dt>
+<dd class="field-odd"><p>Number of entities in this partition.</p>
+</dd>
+<dt class="field-even">Example</dt>
+<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pymilvus_orm</span> <span class="k">import</span> <span class="n">connections</span><span class="p">,</span> <span class="n">Collection</span><span class="p">,</span> <span class="n">Partition</span><span class="p">,</span> <span class="n">FieldSchema</span><span class="p">,</span> <span class="n">CollectionSchema</span><span class="p">,</span> <span class="n">DataType</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">connections</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">schema</span> <span class="o">=</span> <span class="n">CollectionSchema</span><span class="p">([</span>
+<span class="gp">... </span>    <span class="n">FieldSchema</span><span class="p">(</span><span class="s2">&quot;film_id&quot;</span><span class="p">,</span> <span class="n">DataType</span><span class="o">.</span><span class="n">INT64</span><span class="p">,</span> <span class="n">is_primary</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="n">FieldSchema</span><span class="p">(</span><span class="s2">&quot;films&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">DataType</span><span class="o">.</span><span class="n">FLOAT_VECTOR</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">... </span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span> <span class="o">=</span> <span class="n">Collection</span><span class="p">(</span><span class="s2">&quot;test_partition_num_entities&quot;</span><span class="p">,</span> <span class="n">schema</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">partition</span> <span class="o">=</span> <span class="n">Partition</span><span class="p">(</span><span class="n">collection</span><span class="p">,</span> <span class="s2">&quot;comedy&quot;</span><span class="p">,</span> <span class="s2">&quot;comedy films&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="p">[</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)],</span>
+<span class="gp">... </span>    <span class="p">[[</span><span class="nb">float</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">)]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)],</span>
+<span class="gp">... </span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">partition</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">partition</span><span class="o">.</span><span class="n">num_entities</span>
+<span class="go">10</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymilvus_orm.Partition.drop">
+<code class="sig-name descname">drop</code><span class="sig-paren">(</span><em class="sig-param">timeout=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pymilvus_orm/partition.html#Partition.drop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymilvus_orm.Partition.drop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Drop the partition, as well as its corresponding index files.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>timeout</strong> (<em>float</em>) -- An optional duration of time in seconds to allow for the RPC. When timeout
+is set to None, client waits until server response or error occur</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>PartitionNotExistException</strong> -- When partitoin does not exist</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pymilvus_orm</span> <span class="k">import</span> <span class="n">connections</span><span class="p">,</span> <span class="n">Collection</span><span class="p">,</span> <span class="n">Partition</span><span class="p">,</span> <span class="n">FieldSchema</span><span class="p">,</span> <span class="n">CollectionSchema</span><span class="p">,</span> <span class="n">DataType</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">connections</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">schema</span> <span class="o">=</span> <span class="n">CollectionSchema</span><span class="p">([</span>
+<span class="gp">... </span>    <span class="n">FieldSchema</span><span class="p">(</span><span class="s2">&quot;film_id&quot;</span><span class="p">,</span> <span class="n">DataType</span><span class="o">.</span><span class="n">INT64</span><span class="p">,</span> <span class="n">is_primary</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="n">FieldSchema</span><span class="p">(</span><span class="s2">&quot;films&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">DataType</span><span class="o">.</span><span class="n">FLOAT_VECTOR</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">... </span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span> <span class="o">=</span> <span class="n">Collection</span><span class="p">(</span><span class="s2">&quot;test_partition_drop&quot;</span><span class="p">,</span> <span class="n">schema</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">partition</span> <span class="o">=</span> <span class="n">Partition</span><span class="p">(</span><span class="n">collection</span><span class="p">,</span> <span class="s2">&quot;comedy&quot;</span><span class="p">,</span> <span class="s2">&quot;comedy films&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">partition</span><span class="o">.</span><span class="n">drop</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymilvus_orm.Partition.load">
+<code class="sig-name descname">load</code><span class="sig-paren">(</span><em class="sig-param">timeout=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pymilvus_orm/partition.html#Partition.load"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymilvus_orm.Partition.load" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load the partition from disk to memory.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>timeout</strong> (<em>float</em>) -- An optional duration of time in seconds to allow for the RPC. When timeout
+is set to None, client waits until server response or error occur</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>InvalidArgumentException</strong> -- If argument is not valid</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pymilvus_orm</span> <span class="k">import</span> <span class="n">connections</span><span class="p">,</span> <span class="n">Collection</span><span class="p">,</span> <span class="n">Partition</span><span class="p">,</span> <span class="n">FieldSchema</span><span class="p">,</span> <span class="n">CollectionSchema</span><span class="p">,</span> <span class="n">DataType</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">connections</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">schema</span> <span class="o">=</span> <span class="n">CollectionSchema</span><span class="p">([</span>
+<span class="gp">... </span>    <span class="n">FieldSchema</span><span class="p">(</span><span class="s2">&quot;film_id&quot;</span><span class="p">,</span> <span class="n">DataType</span><span class="o">.</span><span class="n">INT64</span><span class="p">,</span> <span class="n">is_primary</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="n">FieldSchema</span><span class="p">(</span><span class="s2">&quot;films&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">DataType</span><span class="o">.</span><span class="n">FLOAT_VECTOR</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">... </span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span> <span class="o">=</span> <span class="n">Collection</span><span class="p">(</span><span class="s2">&quot;test_partition_load&quot;</span><span class="p">,</span> <span class="n">schema</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">partition</span> <span class="o">=</span> <span class="n">Partition</span><span class="p">(</span><span class="n">collection</span><span class="p">,</span> <span class="s2">&quot;comedy&quot;</span><span class="p">,</span> <span class="s2">&quot;comedy films&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">partition</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymilvus_orm.Partition.release">
+<code class="sig-name descname">release</code><span class="sig-paren">(</span><em class="sig-param">timeout=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pymilvus_orm/partition.html#Partition.release"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymilvus_orm.Partition.release" title="Permalink to this definition">¶</a></dt>
+<dd><p>Release the partition from memory.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>timeout</strong> (<em>float</em>) -- An optional duration of time in seconds to allow for the RPC. When timeout
+is set to None, client waits until server response or error occur</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>PartitionNotExistException</strong> -- When partitoin does not exist</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pymilvus_orm</span> <span class="k">import</span> <span class="n">connections</span><span class="p">,</span> <span class="n">Collection</span><span class="p">,</span> <span class="n">Partition</span><span class="p">,</span> <span class="n">FieldSchema</span><span class="p">,</span> <span class="n">CollectionSchema</span><span class="p">,</span> <span class="n">DataType</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">connections</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">schema</span> <span class="o">=</span> <span class="n">CollectionSchema</span><span class="p">([</span>
+<span class="gp">... </span>    <span class="n">FieldSchema</span><span class="p">(</span><span class="s2">&quot;film_id&quot;</span><span class="p">,</span> <span class="n">DataType</span><span class="o">.</span><span class="n">INT64</span><span class="p">,</span> <span class="n">is_primary</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="n">FieldSchema</span><span class="p">(</span><span class="s2">&quot;films&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">DataType</span><span class="o">.</span><span class="n">FLOAT_VECTOR</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">... </span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span> <span class="o">=</span> <span class="n">Collection</span><span class="p">(</span><span class="s2">&quot;test_partition_release&quot;</span><span class="p">,</span> <span class="n">schema</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">partition</span> <span class="o">=</span> <span class="n">Partition</span><span class="p">(</span><span class="n">collection</span><span class="p">,</span> <span class="s2">&quot;comedy&quot;</span><span class="p">,</span> <span class="s2">&quot;comedy films&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">partition</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">partition</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymilvus_orm.Partition.insert">
+<code class="sig-name descname">insert</code><span class="sig-paren">(</span><em class="sig-param">data</em>, <em class="sig-param">timeout=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pymilvus_orm/partition.html#Partition.insert"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymilvus_orm.Partition.insert" title="Permalink to this definition">¶</a></dt>
+<dd><p>Insert data into partition.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>list-like</em><em>(</em><em>list</em><em>, </em><em>tuple</em><em>) </em><em>object</em><em> or </em><em>pandas.DataFrame</em>) -- The specified data to insert, the dimension of data needs to align with column
+number</p></li>
+<li><p><strong>timeout</strong> (<em>float</em>) -- An optional duration of time in seconds to allow for the RPC. When timeout
+is set to None, client waits until server response or error occur</p></li>
+<li><p><strong>kwargs</strong> -- <ul>
+<li><p><em>timeout</em> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) --
+An optional duration of time in seconds to allow for the RPC. When timeout
+is set to None, client waits until server response or error occur.</p></li>
+</ul>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>PartitionNotExistException</strong> -- When partitoin does not exist</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pymilvus_orm</span> <span class="k">import</span> <span class="n">connections</span><span class="p">,</span> <span class="n">Collection</span><span class="p">,</span> <span class="n">Partition</span><span class="p">,</span> <span class="n">FieldSchema</span><span class="p">,</span> <span class="n">CollectionSchema</span><span class="p">,</span> <span class="n">DataType</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">connections</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">schema</span> <span class="o">=</span> <span class="n">CollectionSchema</span><span class="p">([</span>
+<span class="gp">... </span>    <span class="n">FieldSchema</span><span class="p">(</span><span class="s2">&quot;film_id&quot;</span><span class="p">,</span> <span class="n">DataType</span><span class="o">.</span><span class="n">INT64</span><span class="p">,</span> <span class="n">is_primary</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="n">FieldSchema</span><span class="p">(</span><span class="s2">&quot;films&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">DataType</span><span class="o">.</span><span class="n">FLOAT_VECTOR</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">... </span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span> <span class="o">=</span> <span class="n">Collection</span><span class="p">(</span><span class="s2">&quot;test_partition_insert&quot;</span><span class="p">,</span> <span class="n">schema</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">partition</span> <span class="o">=</span> <span class="n">Partition</span><span class="p">(</span><span class="n">collection</span><span class="p">,</span> <span class="s2">&quot;comedy&quot;</span><span class="p">,</span> <span class="s2">&quot;comedy films&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="p">[</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)],</span>
+<span class="gp">... </span>    <span class="p">[[</span><span class="nb">float</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">)]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)],</span>
+<span class="gp">... </span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">partition</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">partition</span><span class="o">.</span><span class="n">num_entities</span>
+<span class="go">10</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymilvus_orm.Partition.search">
+<code class="sig-name descname">search</code><span class="sig-paren">(</span><em class="sig-param">data</em>, <em class="sig-param">anns_field</em>, <em class="sig-param">param</em>, <em class="sig-param">limit</em>, <em class="sig-param">expr=None</em>, <em class="sig-param">output_fields=None</em>, <em class="sig-param">timeout=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pymilvus_orm/partition.html#Partition.search"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymilvus_orm.Partition.search" title="Permalink to this definition">¶</a></dt>
+<dd><p>Vector similarity search with an optional boolean expression as filters.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>list</em><em>[</em><em>list</em><em>[</em><em>float</em><em>]</em><em>]</em>) -- The vectors of search data, the length of data is number of query (nq), the
+dim of every vector in data must be equal to vector field's of collection.</p></li>
+<li><p><strong>anns_field</strong> (<em>str</em>) -- The vector field used to search of collection.</p></li>
+<li><p><strong>param</strong> (<em>dict</em>) -- The parameters of search, such as nprobe, etc.</p></li>
+<li><p><strong>limit</strong> (<em>int</em>) -- The max number of returned record, we also called this parameter as topk.</p></li>
+<li><p><strong>expr</strong> (<em>str</em>) -- The boolean expression used to filter attribute.</p></li>
+<li><p><strong>output_fields</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) -- The fields to return in the search result, not supported now.</p></li>
+<li><p><strong>timeout</strong> (<em>float</em>) -- An optional duration of time in seconds to allow for the RPC. When timeout
+is set to None, client waits until server response or error occur.</p></li>
+<li><p><strong>kwargs</strong> -- <ul>
+<li><p><em>_async</em> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>) --
+Indicate if invoke asynchronously. When value is true, method returns a
+SearchFuture object; otherwise, method returns results from server directly.</p></li>
+<li><p><em>_callback</em> (<code class="docutils literal notranslate"><span class="pre">function</span></code>) --
+The callback function which is invoked after server response successfully. It only
+takes effect when _async is set to True.</p></li>
+</ul>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>SearchResult:
+SearchResult is iterable and is a 2d-array-like class, the first dimension is
+the number of vectors to query (nq), the second dimension is the number of limit(topk).</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="search.html#pymilvus_orm.SearchResult" title="pymilvus_orm.SearchResult">SearchResult</a></p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>RpcError</strong> -- If gRPC encounter an error.</p></li>
+<li><p><strong>ParamError</strong> -- If parameters are invalid.</p></li>
+<li><p><strong>BaseException</strong> -- If the return result from server is not ok.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pymilvus_orm</span> <span class="k">import</span> <span class="n">connections</span><span class="p">,</span> <span class="n">Collection</span><span class="p">,</span> <span class="n">FieldSchema</span><span class="p">,</span> <span class="n">CollectionSchema</span><span class="p">,</span> <span class="n">DataType</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">random</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">connections</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+<span class="go">&lt;pymilvus.client.stub.Milvus object at 0x7f8579002dc0&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">schema</span> <span class="o">=</span> <span class="n">CollectionSchema</span><span class="p">([</span>
+<span class="gp">... </span>    <span class="n">FieldSchema</span><span class="p">(</span><span class="s2">&quot;film_id&quot;</span><span class="p">,</span> <span class="n">DataType</span><span class="o">.</span><span class="n">INT64</span><span class="p">,</span> <span class="n">is_primary</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="n">FieldSchema</span><span class="p">(</span><span class="s2">&quot;films&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">DataType</span><span class="o">.</span><span class="n">FLOAT_VECTOR</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">... </span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span> <span class="o">=</span> <span class="n">Collection</span><span class="p">(</span><span class="s2">&quot;test_collection_search&quot;</span><span class="p">,</span> <span class="n">schema</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">partition</span> <span class="o">=</span> <span class="n">Partition</span><span class="p">(</span><span class="n">collection</span><span class="p">,</span> <span class="s2">&quot;comedy&quot;</span><span class="p">,</span> <span class="s2">&quot;comedy films&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># insert</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="p">[</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)],</span>
+<span class="gp">... </span>    <span class="p">[[</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">)]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)],</span>
+<span class="gp">... </span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">partition</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">partition</span><span class="o">.</span><span class="n">num_entities</span>
+<span class="go">10</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">partition</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># search</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">search_param</span> <span class="o">=</span> <span class="p">{</span>
+<span class="gp">... </span>    <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]],</span>
+<span class="gp">... </span>    <span class="s2">&quot;anns_field&quot;</span><span class="p">:</span> <span class="s2">&quot;films&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">&quot;param&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;metric_type&quot;</span><span class="p">:</span> <span class="s2">&quot;L2&quot;</span><span class="p">},</span>
+<span class="gp">... </span>    <span class="s2">&quot;limit&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">&quot;expr&quot;</span><span class="p">:</span> <span class="s2">&quot;film_id &gt; 0&quot;</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">res</span> <span class="o">=</span> <span class="n">partition</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="o">**</span><span class="n">search_param</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hits</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">hits</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;- Total hits: {len(hits)}, hits ids: </span><span class="si">{hits.ids}</span><span class="s2"> &quot;</span><span class="p">)</span>
+<span class="go">- Total hits: 2, hits ids: [8, 5]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;- Top1 hit id: </span><span class="si">{hits[0].id}</span><span class="s2">, distance: </span><span class="si">{hits[0].distance}</span><span class="s2">, score: </span><span class="si">{hits[0].score}</span><span class="s2"> &quot;</span><span class="p">)</span>
+<span class="go">- Top1 hit id: 8, distance: 0.10143111646175385, score: 0.10143111646175385</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymilvus_orm.Partition.query">
+<code class="sig-name descname">query</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">output_fields=None</em>, <em class="sig-param">timeout=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pymilvus_orm/partition.html#Partition.query"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymilvus_orm.Partition.query" title="Permalink to this definition">¶</a></dt>
+<dd><p>Query with a set of criteria, and results in a list of records that match the query exactly.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>expr</strong> (<em>str</em>) -- The query expression</p></li>
+<li><p><strong>output_fields</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) -- A list of fields to return</p></li>
+<li><p><strong>timeout</strong> (<em>float</em>) -- An optional duration of time in seconds to allow for the RPC. When timeout
+is set to None, client waits until server response or error occur</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A list that contains all results</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p>RpcError: If gRPC encounter an error
+ParamError: If parameters are invalid
+BaseException: If the return result from server is not ok</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+           
+          </div>
+    <a href="https://github.com/milvus-io/pymilvus">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://github.blog/wp-content/uploads/2008/12/forkme_right_green_007200.png?resize=149%2C149" class="attachment-full size-full" alt="Fork me on GitHub" data-recalc-dims="1">
+    </a>
+
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="milvus_index.html" class="btn btn-neutral float-right" title="Index" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="schema.html" class="btn btn-neutral float-left" title="Schema" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019-2021 Zilliz. All rights reserved.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
