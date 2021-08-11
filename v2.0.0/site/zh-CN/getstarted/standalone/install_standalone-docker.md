@@ -25,7 +25,7 @@ Docker Compose 部署方式只用作测试使用，不能用于生产环境。
 
 1. 下载 **docker-compose.standalone.yml** 配置文件并保存为 **docker-compose.yml**
 ```
-wget https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/docker/standalone/docker-compose.yml -O docker-compose.yml
+wget https://raw.githubusercontent.com/milvus-io/milvus/fd84cf7c55fb63e66a066052897b1bd6d6e73830/deployments/docker/standalone/docker-compose.yml -O docker-compose.yml
 ```
 <div class="alert note">
 如果你使用原始 <b>docker-compose.yml</b> 文件安装 Milvus, 数据将会被存储在 <b>./volume</b> 路径下。如需修改映射路径，你可以直接修改 <b>docker-compose.yml</b> 文件，或运行 <code>$ export DOCKER_VOLUME_DIRECTORY=</code>。
