@@ -135,7 +135,7 @@ python3 -W ignore -m pytest <test_file_name>
 
 ### 主要设计思路
 
-- **base/\_wrapper.py** 模块**封装被测接口**，统一处理接口请求，提取接口请求的返回结果，并传入 **check/func_check.py** 模块进行结果检查。
+- **base/\*_wrapper.py** 模块**封装被测接口**，统一处理接口请求，提取接口请求的返回结果，并传入 **check/func_check.py** 模块进行结果检查。
 - **check/func_check.py** 模块下编写各接口返回结果的检查方法，供测试用例调用。
 - **base/client_base.py** 模块使用 Pytest 框架，进行相应的 setup/teardown 方法处理。
 - **testcases** 目录下编写测试文件。测试用例应继承 **base/client_base.py** 中 **TestcaseBase** 模块。用例里用到的通用参数和数据处理方法，应写入 **common** 模块供用例调用。
