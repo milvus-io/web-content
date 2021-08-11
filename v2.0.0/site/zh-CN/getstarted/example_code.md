@@ -29,7 +29,7 @@ from pymilvus_orm import connections, FieldSchema, CollectionSchema, DataType, C
 
 - 连接 Milvus 服务端
 ```
-connections.connect()
+connections.connect(host='localhost', port='19530')
 ```
 
 - 创建一个 collection：

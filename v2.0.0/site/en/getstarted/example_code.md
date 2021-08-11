@@ -31,7 +31,7 @@ from pymilvus_orm import connections, FieldSchema, CollectionSchema, DataType, C
 
 - Connects to the Milvus server:
 ```
-connections.connect()
+connections.connect(host='localhost', port='19530')
 ```
 
 - Creates a collection:
