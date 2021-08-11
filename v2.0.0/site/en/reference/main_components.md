@@ -40,4 +40,4 @@ There are two modes for running Milvus: Standalone and Cluster. These two modes 
 - **MinIO:**  Responsible for data persistence of large files in the cluster, such as index and binary log files. 
 - **Pulsar:** Manages logs of recent mutation operations, outputs streaming log, and provides log publish-subscribe services.
 
-![Distributed_architecture](../../../assets/distributed_architecture.jpeg)
+![Distributed_architecture](../../../assets/distributed_architecture.jpg)
