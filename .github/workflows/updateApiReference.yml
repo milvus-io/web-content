@@ -202,24 +202,27 @@ jobs:
           yarn doc
           cd ../${{ github.event.repository.name }}/APIReference/milvus-sdk-node
           echo "Upcomming tag name: ${{ github.event.inputs.tagName }}"
+          export originTag="${{ github.event.inputs.tagName }}"
+          export tag=${originTag##*-}
+          echo "Tag name without prefix: ${tag}"
           echo "=>List all doc versions"
           ls -l
           sudo chmod -R 777 .
-          if [ -d "./${{ github.event.inputs.tagName }}" ]
+          if [ -d "./${tag}" ]
           then
             echo "===tag name exists, remove all under this dir==="
-            sudo rm -fr "./${{ github.event.inputs.tagName }}"
+            sudo rm -fr "./${tag}"
             git add .
             git status
-            git commit -m "clean files under ${{ github.event.inputs.repoName }} ${{ github.event.inputs.tagName }}"
-            sudo mkdir "./${{ github.event.inputs.tagName }}"
+            git commit -m "clean files under ${{ github.event.inputs.repoName }} ${tag}"
+            sudo mkdir "./${tag}"
           else
             echo "===miss tag name, create this dir==="
-            sudo mkdir "./${{ github.event.inputs.tagName }}"
+            sudo mkdir "./${tag}"
           fi
           rm -fr ../../../milvus-sdk-node/docs/index.html
           rm -fr ../../../milvus-sdk-node/docs/assets
-          sudo cp -r ../../../milvus-sdk-node/docs/* "./${{ github.event.inputs.tagName }}"
+          sudo cp -r ../../../milvus-sdk-node/docs/* "./${tag}"
           git add .
           git commit -m "milvus-sdk-node"
           git push -f origin master
