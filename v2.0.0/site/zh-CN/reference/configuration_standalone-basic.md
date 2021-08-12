@@ -11,7 +11,7 @@ group: standalone_sys
 Milvus 单机版通过系统配置项控制系统运行。所有配置项均可在服务启动前在相应配置文件中手动设置。各配置项的默认值可以直接投入使用。
 
 <div class="alert note">
-所有参数只有在 Milvus 启动时设置生效。
+所有参数设置在 Milvus 启动时生效。
 </div>
 
 <div class="tab-wrapper"><a href="configuration_standalone-basic.md" class='active '>基本配置</a><a href="configuration_standalone-advanced.md" class=''>高级配置</a></div>

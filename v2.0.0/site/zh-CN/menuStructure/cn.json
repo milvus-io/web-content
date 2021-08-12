@@ -167,6 +167,14 @@
       "order": 0
     },
     {
+      "id": "expression.md",
+      "title": "表达式",
+      "label1": "develop",
+      "label2": "search",
+      "label3": "",
+      "order": 1
+    },
+    {
       "id": "tools",
       "title": "开发工具",
       "label1": "develop",
@@ -202,19 +210,27 @@
       "isMenu": true
     },
     {
-      "id": "scaleout.md",
-      "title": "扩缩容",
+      "id": "deploy_s3.md",
+      "title": "配置 S3 存储",
       "label1": "deploy_and_maintain",
       "label2": "",
       "label3": "",
       "order": 0
     },
     {
+      "id": "scaleout.md",
+      "title": "扩缩容",
+      "label1": "deploy_and_maintain",
+      "label2": "",
+      "label3": "",
+      "order": 1
+    },
+    {
       "id": "migrate",
       "title": "数据迁移",
       "label1": "",
       "label2": "",
-      "order": 3,
+      "order": 4,
       "isMenu": true
     },
     {
@@ -262,7 +278,7 @@
       "title": "参考手册",
       "label1": "",
       "label2": "",
-      "order": 4,
+      "order": 5,
       "isMenu": true
     },
     {
@@ -324,7 +340,7 @@
       "title": "Milvus 常见问题",
       "label1": "faq",
       "label2": "",
-      "order": 5,
+      "order": 6,
       "isMenu": true
     },
     {
@@ -369,7 +385,7 @@
       "title": "发版",
       "label1": null,
       "label2": null,
-      "order": 6,
+      "order": 7,
       "isMenu": true
     },
     {
