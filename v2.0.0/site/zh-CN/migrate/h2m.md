@@ -24,7 +24,7 @@ $ wget https://raw.githubusercontent.com/milvus-io/milvus-tools/main/yamls/H2M.y
 - `collection_parameter`：collection 相关信息，包括向量维度、索引文件大小、相似度计算方式等。
 
 <div class="alert note">
-`data_path` 参数可指定多个文件路径，`data_dir` 参数指定文件目录。两个参数只能配置一个。
+  <code>data_path</code> 参数可指定多个文件路径，<code>data_dir</code> 参数指定文件目录。两个参数只能配置一个。
 </div>
 
 ```
@@ -52,7 +52,7 @@ $ milvusdm --yaml H2M.yaml
 
 ## 示例代码
 
-读取 HDF5 格式的文件，返回特征向量和对应的 ids 并导入 Milvus。
+读取 HDF5 格式的文件，返回特征向量和对应的 ID 并导入 Milvus。
 
 ```
 vectors, ids = self.file.read_hdf5_data()

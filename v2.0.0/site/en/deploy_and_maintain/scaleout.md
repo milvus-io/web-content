@@ -5,9 +5,9 @@ title: Scale
 
 # Scale Guide for Milvus Cluster
 
-A Milvus cluster includes eight microservice components and three third-party infrastructure service components. 
+A Milvus cluster includes eight microservice components and three third-party dependencies. 
 
-![Cluster](../../../assets/cluster.png)
+![Distributed_architecture](../../../assets/distributed_architecture.jpg)
 
 Due to the separation of storage and computation, you can scale out the Milvus cluster easily. There are 4 types of nodes which are stateless:
 

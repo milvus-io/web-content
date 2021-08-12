@@ -3,13 +3,13 @@ id: scaleout.md
 title: 扩缩容
 ---
 
-# Milvus 分布式版扩缩容指南
+# 分布式版 Milvus 扩缩容指南
 
-Milvus 分布式版中包含 8 个微服务组件和 3 个第三方基础服务组件。
+分布式版 Milvus 中包含 8 个微服务组件和 3 个第三方依赖。
 
-![Cluster](../../../assets/cluster.png)
+![Distributed_architecture](../../../assets/distributed_architecture.jpg)
 
-Milvus 分布式版采用了存储与计算分离的架构设计，所有组件均为无状态组件，极大地增强了系统弹性和灵活性。你可轻松对 Milvus 以下 4 种无状态节点进行扩容。
+分布式版 Milvus 采用了存储与计算分离的架构设计，所有组件均为无状态组件，极大地增强了系统弹性和灵活性。你可轻松对 Milvus 以下 4 种无状态节点进行扩容。
 
 - Query node
 - Data node
@@ -17,7 +17,7 @@ Milvus 分布式版采用了存储与计算分离的架构设计，所有组件�
 - Proxy
 
 <div class="alert note">
-Milvus 不支持对 Query coord、Data coord、Index coord 和 Root coord 进行扩容。
+Milvus 不支持对 query coord、data coord、index coord 和 root coord 进行扩容。
 </div>
 
 ## 使用 Helm 安装 Milvus
@@ -26,7 +26,7 @@ helm repo add milvus https://milvus-io.github.io/milvus-helm/
 helm repo update
 helm install my-release milvus/milvus --set cluster.enabled=true
 ```
-如果 Milvus 分布式版成功启动，每个Milvus pod 都将在 `READY` 下显示 `1/1`：
+如果分布式版 Milvus 成功启动，每个 Milvus pod 都将在 `READY` 下显示 `1/1`：
 
 ```
 kubectl get pods
@@ -44,7 +44,7 @@ my-release-milvus-rootcoord-75585dc57b-cjh87    1/1     Running      0          
 my-release-minio-5564fbbddc-9sbgv               1/1     Running      0          1m
 ```
 
-## 扩容 Milvus 分布式版执行节点
+## 对分布式版 Milvus 执行节点进行扩容
 
 ### 扩容 query node
 ```
@@ -65,7 +65,7 @@ my-release-milvus-rootcoord-75585dc57b-cjh87    1/1     Running   0          2m
 my-release-minio-5564fbbddc-9sbgv               1/1     Running   0          2m
 ```
 
-可以看到有 3 个 query node pods 在运行。
+可以看到有 3 个 query node pod 在运行。
 
 ### 扩容 data node
 ```
@@ -88,7 +88,7 @@ my-release-milvus-rootcoord-75585dc57b-cjh87    1/1     Running   0          5m
 my-release-minio-5564fbbddc-9sbgv               1/1     Running   0          5m
 ```
 
-可以看到有 3 个 data node pods 在运行。
+可以看到有 3 个 data node pod 在运行。
 
 
 ### 扩容 index node
@@ -114,7 +114,7 @@ my-release-milvus-rootcoord-75585dc57b-cjh87    1/1     Running   0          10m
 my-release-minio-5564fbbddc-9sbgv               1/1     Running   0          10m
 ```
 
-可以看到有 3 个 index node pods 在运行。
+可以看到有 3 个 index node pod 在运行。
 
 ### 扩容 proxy
 ```
@@ -141,9 +141,9 @@ my-release-milvus-rootcoord-75585dc57b-cjh87    1/1     Running   0          13m
 my-release-minio-5564fbbddc-9sbgv               1/1     Running   0          13m
 ```
 
-可以看到有 3 个 proxy pods 在运行。
+可以看到有 3 个 proxy pod 在运行。
 
-## 缩容 Milvus 分布式版执行节点
+## 对分布式版 Milvus 执行节点进行缩容
 ### 缩容 query node
 
 ```
