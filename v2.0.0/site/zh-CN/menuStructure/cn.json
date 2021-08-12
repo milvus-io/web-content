@@ -282,13 +282,38 @@
       "isMenu": true
     },
     {
-      "id": "architecture_overview.md",
+      "id": "architecture",
       "title": "系统架构",
       "label1": "reference",
       "label2": null,
       "label3": null,
-      "order": 0
+      "order": 0,
+      "isMenu": true
     }, 
+    {
+      "id": "architecture_overview.md",
+      "title": "概述",
+      "label1": "reference",
+      "label2": "architecture",
+      "label3": null,
+      "order": 0
+    },
+    {
+      "id": "four_layers.md",
+      "title": "存储计算分离",
+      "label1": "reference",
+      "label2": "architecture",
+      "label3": null,
+      "order": 1
+    },
+    {
+      "id": "main_components.md",
+      "title": "主要组件",
+      "label1": "reference",
+      "label2": "architecture",
+      "label3": null,
+      "order": 2
+    },
     {
       "id": "systemconfigurations",
       "title": "系统配置",
