@@ -5,7 +5,7 @@ title: Milvus to Milvus
 
 
 
-# Migrate from Milvus to Milvus
+# Milvus to Milvus
 
 <div class="alert note">
 MilvusDM 不支持将数据从 Milvus 2.0 单机版迁移至 Milvus 2.0 分布式版。
