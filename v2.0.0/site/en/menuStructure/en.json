@@ -226,12 +226,29 @@
       "order": 1
     },
     {
+      "id": "cloud",
+      "title": "Deploy on Clouds",
+      "label1": "deploy_and_maintain",
+      "label2": "",
+      "label3": "",
+      "order": 2,
+      "isMenu": true
+    },
+    {
+      "id": "aws.md",
+      "title": "Deploy Terraform-Ansible on AWS",
+      "label1": "deploy_and_maintain",
+      "label2": "cloud",
+      "label3": "",
+      "order": 0
+    },
+    {
       "id": "monitor.md",
       "title": "Monitor",
       "label1": "deploy_and_maintain",
       "label2": "",
       "label3": "",
-      "order": 2
+      "order": 3
     },
     {
       "id": "migrate",
