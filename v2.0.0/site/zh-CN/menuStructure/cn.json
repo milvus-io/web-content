@@ -369,11 +369,19 @@
       "order": 4
     },
     {
+      "id": "faq",
+      "title": "FAQs",
+      "label1": "",
+      "label2": "",
+      "order": 6,
+      "isMenu": true
+    },
+    {
       "id": "milvusfaq",
       "title": "Milvus 常见问题",
       "label1": "faq",
       "label2": "",
-      "order": 6,
+      "order": 0,
       "isMenu": true
     },
     {
