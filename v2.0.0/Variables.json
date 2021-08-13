@@ -1,6 +1,6 @@
 {
-  "milvus_release_version": "2.0.0-RC1",
-  "milvus_python_orm_sdk_version": "2.0.0rc2",
-  "cpu_milvus_docker_image_version": "1.1.1-cpu-d061621-330cc6",
+  "milvus_release_version": "2.0.0-RC4",
+  "milvus_python_orm_sdk_version": "2.0.0rc4",
+  "cpu_milvus_docker_image_version": "fd84cf7c55fb63e66a066052897b1bd6d6e73830",
   "gpu_milvus_docker_image_version": ""
 }

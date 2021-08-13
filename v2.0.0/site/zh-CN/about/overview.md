@@ -12,11 +12,27 @@ Milvus 提供以下 2 个版本：
 - [Milvus 分布式版](install_cluster-docker.md)
 
 版本兼容: 
-| Milvus 版本 | Python SDK 版本 | Java SDK 版本 | Go SDK 版本 |
-| ----------- | ----------- | -----------  | ----------- |
-| 2.0.0-RC1 | 2.0.0rc2   | 即将上线  | 即将上线 |
 
-Milvus 2.0.0-RC1 是 2.0.0 的预览版本。 该版本引入 Go 语言搭建分布式系统，并采用了新的云原生分布式设计。 后者大大提高了系统扩展性和系统弹性。
+<table class="version">
+	<thead>
+	<tr>
+		<th>Milvus 版本</th>
+		<th>Python SDK 版本</th>
+		<th>Java SDK 版本</th>
+		<th>Go SDK 版本</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td><a href="install_standalone-docker.md">2.0.0-RC4</a></td>
+		<td><a href="explore_pymilvus.md">2.0.0rc4</a></td>
+		<td>即将上线</td>
+		<td>即将上线</td>
+	</tr>
+	</tbody>
+</table>
+
+Milvus 2.0.0-RC4 是 2.0.0 的预览版本。 该版本引入 Go 语言搭建分布式系统，并采用了新的云原生分布式设计。 后者大大提高了系统扩展性和系统弹性。
 
 ## 系统架构
 

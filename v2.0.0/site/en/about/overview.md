@@ -12,11 +12,26 @@ It is available in:
 - [Milvus cluster](install_cluster-docker.md)
 
 Compatibility: 
-| Milvus version | Python SDK version | Java SDK version | Go SDK version |
-| ----------- | ----------- | -----------  | ----------- |
-| 2.0.0-RC2   | 2.0.0rc2   | Coming soon  | Coming soon |
 
-Milvus 2.0.0-RC2 is the preview version of 2.0.0. It introduces Golang as the distributed layer development language and a new cloud-native distributed design. The latter brings significant improvements to scalability, elasticity, and functionality. 
+<table class="version">
+	<thead>
+	<tr>
+		<th>Milvus version</th>
+		<th>Python SDK version</th>
+		<th>Java SDK version</th>
+		<th>Go SDK version</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td><a href="install_standalone-docker.md">2.0.0-RC4</a></td>
+		<td><a href="explore_pymilvus.md">2.0.0rc4</a></td>
+		<td>Coming soon</td>
+		<td>Coming soon</td>
+	</tr>
+	</tbody>
+</table>
+Milvus 2.0.0-RC4 is the preview version of 2.0.0. It introduces Golang as the distributed layer development language and a new cloud-native distributed design. The latter brings significant improvements to scalability, elasticity, and functionality. 
 
 ## Overall Architecture
 Milvus 2.0 is a cloud-native vector database with storage and computation separated by design. All components in this refactored version of Milvus are stateless to enhance elasticity and flexibility.
