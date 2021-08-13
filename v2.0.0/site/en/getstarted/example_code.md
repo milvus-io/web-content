@@ -87,8 +87,20 @@ $ python3 hello_pymilvus.py
 
 *The returned results and query latency show as follows:*
 
-
-![Returned results](../../../assets/hello_world.png)
+```
+Search...
+(distance: 0.0, id: 2998) -20.0
+(distance: 13.2614107131958, id: 989) -11.0
+(distance: 14.489648818969727, id: 1763) -19.0
+(distance: 15.295698165893555, id: 968) -20.0
+(distance: 15.34445571899414, id: 2049) -19.0
+(distance: 0.0, id: 2999) -12.0
+(distance: 14.63361930847168, id: 1259) -13.0
+(distance: 15.421361923217773, id: 2530) -15.0
+(distance: 15.427900314331055, id: 600) -14.0
+(distance: 15.538337707519531, id: 637) -19.0
+search latency = 0.0549s
+```
 
 <br/>
 
