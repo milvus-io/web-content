@@ -226,6 +226,14 @@
       "order": 1
     },
     {
+      "id": "monitor.md",
+      "title": "监控",
+      "label1": "deploy_and_maintain",
+      "label2": "",
+      "label3": "",
+      "order": 2
+    },
+    {
       "id": "migrate",
       "title": "数据迁移",
       "label1": "",
