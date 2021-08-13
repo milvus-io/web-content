@@ -48,7 +48,7 @@ Milvus 单机版中包含 3 个组件：
 - etcd
 - MinIO
 
-Milvus 分布式版中包含 8 个微服务组件和 3 个第三方基础服务组件。
+Milvus 分布式版中包含 8 个微服务组件和 3 个第三方依赖。
 
 微服务组件：
 
@@ -133,7 +133,7 @@ Milvus 项目在 GitHub 上获星超 6,000，拥有逾 1,000 家企业用户，�
 [Milvus Insight](https://github.com/milvus-io/milvus-insight) 是 Milvus 图形化管理工具，包含了集群状态可视化、元数据管理、数据查询等实用功能。Milvus Insight 源码未来也会作为独立项目开源。
 
 #### Milvus DM 数据迁移工具
-Milvus 数据迁移工具将尽快上线。
+[Milvus 数据迁移工具](migrate_overview.md)现已上线。
 
 ## 加入开发者社区
 

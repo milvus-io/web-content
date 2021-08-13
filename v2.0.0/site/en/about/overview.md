@@ -51,7 +51,7 @@ A Milvus standalone includes three components:
 - etcd
 - MinIO
 
-A Milvus cluster includes eight microservice components and three third-party infrastructure service components.
+A Milvus cluster includes eight microservice components and three third-party dependencies.
 Microservice components:
 
 - Root coord
@@ -143,7 +143,7 @@ Similarity search is the process of comparing a target to a database to find obj
 [Milvus Insight](https://github.com/milvus-io/milvus-insight) is a graphical management system for Milvus. It features visualization of cluster states, meta management, data queries and more. Milvus Insight will eventually be open sourced.
 
 #### Milvus DM
-Data migration tool for Milvus 2.0 will be made available as soon as possible.
+[Data migration tool](migrate_overview.md) for Milvus 2.0 is now available.
 
 
 ## Join Our Community

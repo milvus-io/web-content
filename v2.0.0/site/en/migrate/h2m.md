@@ -1,8 +1,8 @@
 ---
 id: h2m.md
-title: Migrate from HDF5 to Milvus
+title: HDF5 to Milvus
 ---
-# Migrate from HDF5 to Milvus
+# HDF5 to Milvus
 
 1. Download **H2M.yaml**:
 
@@ -11,22 +11,23 @@ $ wget https://raw.githubusercontent.com/milvus-io/milvus-tools/main/yamls/H2M.y
 ```
 
 2. Set the following parameters:
-- `data_path`: Path to the HDF5 files.
-- `data_dir`: Directory holding the HDF5 files.
+- `data_path`: Path to the HDF5 file.
+- `data_dir`: Directory of the HDF5 files.
 - `dest_host`: Milvus server address.
 - `dest_port`: Milvus server port.
-- `mode`: The migration mode:
+- `mode`: Mode of migration
   - `Skip`: Skip data migration if the specified collection or partition already exists.
   - `Append`: Append data if the specified collection or partition already exists.
   - `Overwrite`: Delete existing data before insertion if the specified collection or partition already exists.
 - `dest_collection_name`: Name of the collection to import data to.
 - `dest_partition_name`: Name of the partition to import data to.
-- `collection_parameter`: Collection-specific information such as vector dimension, index file size, and distance metric.
+- `collection_parameter`: Collection-specific information such as vector dimension, index file size, and similarity metric.
 
-<div class="alert note">
-Set either <code>data_path</code> or <code>data_dir</code>. Do <b>not</b> set both. Use <code>data_path</code> to specify multiple file paths, or <code>data_dir</code> to  specify the directory holding your data file.
+<div class="alert warning">
+Set either <code>data_path</code> or <code>data_dir</code>. Do <b>not</b> set both. Use <code>data_path</code> to specify multiple file paths, or <code>data_dir</code> to specify the directory holding your HDF5 files.
 </div>
 
+Example:
 ```
 H2M:
   milvus-version: 2.x
@@ -63,9 +64,3 @@ vectors, ids = self.file.read_hdf5_data()
 ```
 ids = insert_milvus.insert_data(vectors, self.c_name, self.c_param, self.mode, ids,self.p_name)
 ```
-
-
-<br/>
-
-
-The Milvusdm project is open sourced on [Github](https://github.com/milvus-io/milvus-tools). Any contribution to the project is welcome. Give it a star 🌟, and feel free to file an [issue](https://github.com/milvus-io/milvus-tools/issues) or submit your own code! 

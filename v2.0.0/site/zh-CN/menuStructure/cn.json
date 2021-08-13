@@ -243,7 +243,7 @@
     },
     {
       "id": "migrate_overview.md",
-      "title": "概述",
+      "title": "MivusDM",
       "label1": "migrate",
       "label2": "",
       "label3": "",
@@ -251,7 +251,7 @@
     },
     {
       "id": "m2m.md",
-      "title": "Milvus to Milvus",
+      "title": "Milvus 至 Milvus",
       "label1": "migrate",
       "label2": "",
       "label3": "",
@@ -259,7 +259,7 @@
     },
     {
       "id": "f2m.md",
-      "title": "Faiss to Milvus",
+      "title": "Faiss 至 Milvus",
       "label1": "migrate",
       "label2": "",
       "label3": "",
@@ -267,7 +267,7 @@
     },
     {
       "id": "h2m.md",
-      "title": "HDF5 to Milvus",
+      "title": "HDF5 至 Milvus",
       "label1": "migrate",
       "label2": "",
       "label3": "",
@@ -275,7 +275,7 @@
     },
     {
       "id": "m2h.md",
-      "title": "Milvus to HDF5",
+      "title": "Milvus 至 HDF5",
       "label1": "migrate",
       "label2": "",
       "label3": "",

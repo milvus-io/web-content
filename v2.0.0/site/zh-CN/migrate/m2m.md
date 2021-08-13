@@ -1,11 +1,11 @@
 ---
 id: m2m.md
-title: Milvus to Milvus
+title: Milvus 至 Milvus
 ---
 
 
 
-# Milvus to Milvus
+# Milvus 至 Milvus
 
 <div class="alert note">
 MilvusDM 不支持将数据从 Milvus 2.0 单机版迁移至 Milvus 2.0 分布式版。
@@ -29,6 +29,7 @@ $ wget https://raw.githubusercontent.com/milvus-io/milvus-tools/main/yamls/M2M.y
   - `Append`：若指定 collection 或 partition 已存在，添加数据。
   - `Overwrite`：若指定 collection 或 partition 已存在，在插入数据前删除已有数据。
 
+示例：
 ```
 M2M:
   milvus_version: 2.x
@@ -56,24 +57,11 @@ $ milvusdm --yaml M2M.yaml
 
 ## 示例代码
 
-读取指定集合或分区的 meta 信息，根据 meta 信息读取本地 milvus/db 下的数据文件，返回特征向量和对应的 ids 并导入 Milvus：
+读取指定集合或分区的元数据，根据元数据读取本地 **milvus/db** 下的数据文件，返回特征向量和对应的 ID 并导入 Milvus：
 
 ```
 collection_parameter, _ = milvus_meta.get_collection_info(collection_name)
 r_vectors, r_ids, r_rows = milvusdb.read_milvus_file(self.milvus_meta, collection_name, partition_tag) 
 milvus_insert.insert_data(r_vectors, collection_name, collection_parameter, self.mode, r_ids, partition_tag)
 ```
-
-
-<br/>
-
-
-我们十分欢迎大家为开源项目 MilvusDM 贡献代码。你可以通过代码文件结构了解 MilvusDM 工具的设计构思。如有新的数据迁移需求，你还可以通过修改源码，为社区贡献代码。
-
-<div class="alert note">
-MilvusDM 项目地址：https://github.com/milvus-io/milvus-tools
-
-欢迎贡献代码👏，也请给本项目点 star 🌟
-</div>
-
 

@@ -11,11 +11,12 @@ $ wget https://raw.githubusercontent.com/milvus-io/milvus-tools/main/yamls/M2H.y
 ```
 
 2. Set the following parameters:
-- `source_milvus_path`: Work path of the source Milvus. 
-- `mysql_parameter`: MySQL settings for the source Milvus. If MySQL is not used, set `mysql_parameter` as ''.
-- `source_collection`: Names of the collection and its partitions in the source Milvus.
-- `data_dir`: Directory holding the saved HDF5 files.
+- `source_milvus_path`: Working directory of Milvus. 
+- `mysql_parameter`: MySQL settings for Milvus. If MySQL is not used, set this parameter as ''.
+- `source_collection`: Names of the collection and its partitions in Milvus.
+- `data_dir`: Directory to save HDF5 files.
 
+Example:
 ```
 M2H:
   milvus_version: 2.x
@@ -39,7 +40,7 @@ $ milvusdm --yaml M2H.yaml
 ```
 
 ## Sample Code
-1. Read the data files under **milvus/db** on your local drive, and retrieve vectors and their corresponding IDs from the source Milvus according to the metadata of the specified collection or partitions:
+1. Read the data under **milvus/db** on your local drive, and retrieve vectors and their corresponding IDs from Milvus according to the metadata of the specified collection or partitions:
 
 ```
 collection_parameter, version = milvus_meta.get_collection_info(collection_name)
@@ -52,6 +53,3 @@ r_vectors, r_ids, r_rows = milvusdb.read_milvus_file(self.milvus_meta, collectio
 data_save.save_yaml(collection_name, partition_tag, collection_parameter, version, save_hdf5_name)
 ```
 
-<br/>
-
-The Milvusdm project is open sourced on [Github](https://github.com/milvus-io/milvus-tools). Any contribution to the project is welcome. Give it a star 🌟, and feel free to file an [issue](https://github.com/milvus-io/milvus-tools/issues) or submit your own code! 
