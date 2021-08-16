@@ -10,7 +10,7 @@ Before proceeding to installation, you must check the eligibility of your hardwa
 
 <div class="tab-wrapper"><a href="prerequisite-docker.md" class='active '>Install with Docker Compose</a><a href="prerequisite-helm.md" class=''>Install on Kubernetes</a></div>
 
-## Check if your CPU supports SIMD extension instruction set
+## CPU support
 
 Milvus' computing operations depend on CPU’s support for SIMD (Single Instruction, Multiple Data) extension instruction set. Whether your CPU supports SIMD extension instruction set is crucial to index building and vector similarity search within Milvus. Ensure that your CPU supports at least one of the following SIMD instruction sets:
 
@@ -24,6 +24,8 @@ Run the lscpu command to check if your CPU supports the SIMD instruction sets me
 ```
 lscpu | grep -e sse4_2 -e avx -e avx2 -e avx512
 ```
+
+Check Wikipedia [CPU with AVX](https://en.wikipedia.org/wiki/Advanced_Vector_Extensions#CPUs_with_AVX) for more details.
 
 ## Check your Docker and Docker Compose version 
 

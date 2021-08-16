@@ -10,7 +10,7 @@ group: prerequisite
 
 <div class="tab-wrapper"><a href="prerequisite-docker.md" class='active '>Install with Docker Compose</a><a href="prerequisite-helm.md" class=''>Install on Kubernetes</a></div>
 
-## 检查 CPU 是否支持 SIMD 扩展指令集合：
+## CPU 支持
 
 Milvus 在构建索引和查询向量时依赖 CPU 对 SIMD (Single Instruction Multiple Data) 扩展指令集合的支持。请确保运行 Milvus 的 CPU 至少支持以下一种 SIMD 指令集合：
 
@@ -24,6 +24,8 @@ Milvus 在构建索引和查询向量时依赖 CPU 对 SIMD (Single Instruction 
 ```
 lscpu | grep -e sse4_2 -e avx -e avx2 -e avx512
 ```
+
+参考 Wikipedia [AVX 指令集](https://zh.wikipedia.org/wiki/AVX%E6%8C%87%E4%BB%A4%E9%9B%86) 了解更多细节。
 
 ## 检查 Docker 及 Docker Compose 版本： 
 
