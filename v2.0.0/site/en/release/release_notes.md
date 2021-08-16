@@ -81,7 +81,7 @@ Milvus 2.0.0-RC4 is a preview version of Milvus 2.0.0. It mainly focuses on fixi
 
 - [#6515](https://github.com/milvus-io/milvus/issues/6515) [#6567](https://github.com/milvus-io/milvus/issues/6567) [#6552](https://github.com/milvus-io/milvus/issues/6552) [#6483](https://github.com/milvus-io/milvus/pull/6551) Data node BackGroundGC does not work and causes memory leak.
 
-- [#6943](https://github.com/milvus-io/milvus/pull/6944) The MinioKV `GetObject` method does not close client and causes goroutine leaking per call.
+- [#6943](https://github.com/milvus-io/milvus/pull/6944) The MinIOKV `GetObject` method does not close client and causes goroutine leaking per call.
 
 - [#6370](https://github.com/milvus-io/milvus/pull/6935) Search is stuck due to wrong semantics offered by load partition.
 
@@ -105,7 +105,7 @@ Milvus 2.0.0-RC4 is a preview version of Milvus 2.0.0. It mainly focuses on fixi
 
 - [#6501](https://github.com/milvus-io/milvus/pull/6545) Channels are lost after data node crashes.
 
-- [#6527](https://github.com/milvus-io/milvus/pull/6568) Task info of watchQueryChannels can't be deleted from etcd.
+- [#6527](https://github.com/milvus-io/milvus/pull/6568) Task info of `watchQueryChannels` can't be deleted from etcd.
 
 - [#6576](https://github.com/milvus-io/milvus/issues/6576) [#6526](https://github.com/milvus-io/milvus/pull/6577) Duplicate primary field IDs are added when retrieving entities.
 
@@ -123,7 +123,7 @@ Milvus 2.0.0-RC4 is a preview version of Milvus 2.0.0. It mainly focuses on fixi
 
 - [#6436](https://github.com/milvus-io/milvus/issues/6436) [#6573](https://github.com/milvus-io/milvus/issues/6573) [#6507](https://github.com/milvus-io/milvus/pull/6814) Incorrect handling of time synchronization.
 
-- [#6732](https://github.com/milvus-io/milvus/pull/6871) Failure to create IVF-PQ index.
+- [#6732](https://github.com/milvus-io/milvus/pull/6871) Failure to create IVF_PQ index.
 
 
 
