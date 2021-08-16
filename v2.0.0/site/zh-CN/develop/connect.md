@@ -3,9 +3,9 @@ id: connect.md
 title: 连接服务器
 ---
 
-# 概述
+# 连接服务器
 
-通过本文档，你将在 Python 交互式编程环境下学习Milvus 使用中的各种基本操作。
+通过本章节文档，你将在 Python 交互式编程环境下学习 Milvus 使用中的各种基本操作。
 
 命令行输入 `python3` 进入Python 交互式模式。本文以 Python3.9.1 为例：
 ```
