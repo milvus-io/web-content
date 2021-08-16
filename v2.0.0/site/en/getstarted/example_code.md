@@ -9,7 +9,7 @@ After the Milvus server boots successfully, test the platform using our Python s
 
 1. Install pymilvus_orm and its dependencies:
 
-```
+```Python
 pip install pymilvus-orm==2.0.0rc4
 ```
 <div class="alert note">
@@ -18,24 +18,24 @@ Python version 3.6 or higher is required. View <a href="https://wiki.python.org/
 
 2. Download sample code **hello_milvus.py**:
 
-```
+```Python
 $ wget https://raw.githubusercontent.com/milvus-io/pymilvus-orm/v2.0.0rc4/examples/hello_milvus.py
 ```
 
 3. Scan **hello_milvus.py**. This sample code does the following:
 
 - Imports the pymilvus package:
-```
+```Python
 from pymilvus_orm import connections, FieldSchema, CollectionSchema, DataType, Collection
 ```
 
 - Connects to the Milvus server:
-```
+```Python
 connections.connect(host='localhost', port='19530')
 ```
 
 - Creates a collection:
-```
+```Python
 dim = 128
 default_fields = [
     FieldSchema(name="count", dtype=DataType.INT64, is_primary=True),
@@ -49,7 +49,7 @@ collection = Collection(name="hello_milvus", schema=default_schema)
 ```
 
 - Inserts vectors in the new collection:
-```
+```Python
 import random
 nb = 3000
 vectors = [[random.random() for _ in range(dim)] for _ in range(nb)]
@@ -63,14 +63,14 @@ collection.insert(
 ```
 
 - Builds an IVF_FLAT index and loads the collection to memory:
-```
+```Python
 default_index = {"index_type": "IVF_FLAT", "params": {"nlist": 128}, "metric_type": "L2"}
 collection.create_index(field_name="float_vector", index_params=default_index)
 collection.load()
 ```
 
 - Conducts a vector similarity search:
-```
+```Python
 topK = 5
 search_params = {"metric_type": "L2", "params": {"nprobe": 10}}
 # define output_fields of search result
@@ -80,8 +80,50 @@ res = collection.search(
 )
 ```
 
-4. Run **hello_milvus.py**:
+- Conducts a hybrid search：
+<div class="alert note">
+The example below only performs approximate search on entities whose `film_id` is in [2,4,6,8]
+</div>
+
+```Python
+from pymilvus_orm import connections, Collection, FieldSchema, CollectionSchema, DataType
+>>> import random
+>>> connections.connect()
+>>> schema = CollectionSchema([
+...     FieldSchema("film_id", DataType.INT64, is_primary=True),
+...     FieldSchema("films", dtype=DataType.FLOAT_VECTOR, dim=2)
+... ])
+>>> collection = Collection("test_collection_search", schema)
+>>> # insert
+>>> data = [
+...     [i for i in range(10)],
+...     [[random.random() for _ in range(2)] for _ in range(10)],
+... ]
+>>> collection.insert(data)
+>>> collection.num_entities
+10
+>>> collection.load()
+>>> # search
+>>> search_param = {
+...     "data": [[1.0, 1.0]],
+...     "anns_field": "films",
+...     "param": {"metric_type": "L2"},
+...     "limit": 2,
+...     "expr": "film_id in [2,4,6,8]",
+... }
+>>> res = collection.search(**search_param)
+>>> assert len(res) == 1
+>>> hits = res[0]
+>>> assert len(hits) == 2
+>>> print(f"- Total hits: {len(hits)}, hits ids: {hits.ids} ")
+- Total hits: 2, hits ids: [2, 4]
+>>> print(f"- Top1 hit id: {hits[0].id}, distance: {hits[0].distance}, score: {hits[0].score} ")
+- Top1 hit id: 2, distance: 0.10143111646175385, score: 0.101431116461
+
 ```
+
+4. Run **hello_milvus.py**:
+```Python
 $ python3 hello_pymilvus.py
 ```
 
