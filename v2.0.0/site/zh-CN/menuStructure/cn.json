@@ -236,7 +236,7 @@
     },
     {
       "id": "aws.md",
-      "title": "使用 Terraform 及 Ansible 在 AWS 上部署集群",
+      "title": "AWS",
       "label1": "deploy_and_maintain",
       "label2": "cloud",
       "label3": "",

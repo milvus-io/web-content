@@ -236,7 +236,7 @@
     },
     {
       "id": "aws.md",
-      "title": "Deploy Terraform-Ansible on AWS",
+      "title": "AWS",
       "label1": "deploy_and_maintain",
       "label2": "cloud",
       "label3": "",
