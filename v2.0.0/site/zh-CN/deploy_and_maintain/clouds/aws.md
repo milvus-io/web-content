@@ -63,9 +63,11 @@ variable "my_ip" {
 ```
 
 **output.tf 及 inventory.tmpl** 
+
 **output.tf** 及 **inventory.tmpl** 文件用于展示所创建集群的元数据以及将原数据传输给 Ansible。本文中需要获取的原数据包括 `public_ips`、`private_ips`以及所有 AWS 资源 ID。上述原数据将被添加至模版数据文件中，便于 Ansible 读取。
 
 **main.tf**
+
 **main.tf** 文件用于储存主要部署逻辑。集群部署涉及到众多相互连接的组件，但是 Terraform 可以执行排序及部署任务。先设置供应商及地区。本文使用 AWS 美国东部（俄亥俄）（us-east-2 AWS）区域。
 
 ```Nginx
@@ -196,13 +198,17 @@ resource "aws_instance" "minio_node" {
 使用 Ansible 在 Terraform 创建的设备上启用 Milvus 集群。
 
 ### 文件
+
 **inventory**
+
 Inventory 文件仅会在集群创建后出现。该文件会随着集群被删除而消失。Inventory 文件包含集群所有节点的外部及内部 IP 地址。Ansible 需要通过 inventory 文件来了解服务器及其对应地址，从而使用 SSH 来修改并运行正确的脚本。
 
 **yaml_files**
+
 **yaml_files** 目录下包含各类型节点的 **.j2** Docker Compose 文件。Ansible 使用Jinja2 模版，因此所有文件格式均为 **.j2** 及 **.yaml**。由于在运行期间需要根据节点 IP 地址更新文件，因此本文使用模版文件。
 
 **playbook.yaml**
+
 **playbook.yaml** 文件用于协调所有节点运行脚本。运行脚本时，系统将在集群所有机器上安装 Docker 及 Docker Compose。
 
 ```Yaml
