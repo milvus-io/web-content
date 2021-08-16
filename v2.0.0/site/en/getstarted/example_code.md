@@ -82,7 +82,7 @@ res = collection.search(
 
 - Conducts a hybrid search：
 <div class="alert note">
-The example below only performs approximate search on entities whose `film_id` is in [2,4,6,8]
+    The example below only performs approximate search on entities whose <code>film_id</code> is in [2,4,6,8]
 </div>
 
 ```Python
