@@ -41,3 +41,5 @@ There are two modes for running Milvus: Standalone and Cluster. These two modes 
 - **Pulsar:** Manages logs of recent mutation operations, outputs streaming log, and provides log publish-subscribe services.
 
 ![Distributed_architecture](../../../assets/distributed_architecture.jpg)
+
+For more details about Milvus' architecture, see [Computing/Storage Disaggregation](four_layers.md).

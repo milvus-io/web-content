@@ -75,3 +75,6 @@ Milvus is built around log broker and follows the "log as data" principle, so Mi
 ![Log_mechanism](../../../assets/log_mechanism.png)
 
 The log broker is the backbone of Milvus 2.0. It is responsible for data persistence and read-write disaggregation, thanks to its innate pub-sub mechanism. The above illustration shows a simplified depiction of the mechanism, where the system is divided into two roles, log broker (for maintaining the log sequence) and log subscriber. The former records all operations that change collection states; the latter subscribes to the log sequence to update the local data and provides services in the form of read-only copies. The pub-sub mechanism also makes room for system extendability in terms of change data capture (CDC) and globally-distributed deployment. 
+
+
+For more details about Milvus' architecture, see [Main Components](main_components.md).

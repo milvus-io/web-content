@@ -43,3 +43,8 @@ Milvus 支持两种部署模式，单机模式（standalone）和分布式模式
 - **Pulsar** 负责管理近期更改操作的日志，输出流式日志及提供日志订阅服务。
 
 ![Distributed_architecture](../../../assets/distributed_architecture.jpg)
+
+
+
+
+更多 Milvus 架构细节，参考 [存储计算分离](four_layers.md)。
