@@ -226,12 +226,29 @@
       "order": 1
     },
     {
+      "id": "cloud",
+      "title": "云端部署",
+      "label1": "deploy_and_maintain",
+      "label2": "",
+      "label3": "",
+      "order": 2,
+      "isMenu": true
+    },
+    {
+      "id": "aws.md",
+      "title": "使用 Terraform 及 Ansible 在 AWS 上部署集群",
+      "label1": "deploy_and_maintain",
+      "label2": "cloud",
+      "label3": "",
+      "order": 0
+    },
+    {
       "id": "monitor.md",
       "title": "监控",
       "label1": "deploy_and_maintain",
       "label2": "",
       "label3": "",
-      "order": 2
+      "order": 3
     },
     {
       "id": "migrate",
