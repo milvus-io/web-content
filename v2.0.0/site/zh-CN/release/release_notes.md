@@ -23,7 +23,7 @@ Milvus 2.0.0-RC4 是 2.0.0 的预览版本。该版本主要修复了稳定性�
 
 - [#6859](https://github.com/milvus-io/milvus/pull/6861) 提升 gRPC 客户端 `MaxCallRecvMsgSize` 和 `MaxCallSendMsgSize` 的上限。
 
-- [#6796](https://github.com/milvus-io/milvus/pull/6807) 修复 MsgStream 指数重试。
+- [#6796](https://github.com/milvus-io/milvus/pull/6807) 修复 MsgStream 指数重试策略。
 
 - [#6897](https://github.com/milvus-io/milvus/pull/6897) [#6899](https://github.com/milvus-io/milvus/pull/6899) [#6681](https://github.com/milvus-io/milvus/pull/6899) [#6766](https://github.com/milvus-io/milvus/pull/6766) [#6768](https://github.com/milvus-io/milvus/pull/6768) [#6597](https://github.com/milvus-io/milvus/pull/6597) [#6501](https://github.com/milvus-io/milvus/pull/6501) [#6477](https://github.com/milvus-io/milvus/pull/6477) [#6478](https://github.com/milvus-io/milvus/pull/6478) [#6935](https://github.com/milvus-io/milvus/pull/6935) [#6871](https://github.com/milvus-io/milvus/pull/6871) [#6671](https://github.com/milvus-io/milvus/pull/6671) [#6682](https://github.com/milvus-io/milvus/pull/6682) 优化日志系统。
 
@@ -33,19 +33,19 @@ Milvus 2.0.0-RC4 是 2.0.0 的预览版本。该版本主要修复了稳定性�
 
 - [#6466](https://github.com/milvus-io/milvus/pull/6467) 区分 query 和 search 的概念和使用。
 
-- [#6505](https://github.com/milvus-io/milvus/pull/6506) 将 RetrieveRequest 中  `output_fields` 修改为  `out_fields_id` 。
+- [#6505](https://github.com/milvus-io/milvus/pull/6506) 将 RetrieveRequest 中  `output_fields` 修改为 `out_fields_id` 。
 
 - [#6427](https://github.com/milvus-io/milvus/pull/6328) 重构 index coord 的任务分配逻辑。
 
 - [#6529](https://github.com/milvus-io/milvus/pull/6543) [#6599](https://github.com/milvus-io/milvus/pull/6600) 重构时间戳统计的快照。
 
-- [#6692](https://github.com/milvus-io/milvus/issues/6692) [#6343](https://github.com/milvus-io/milvus/pull/6700) 显示/描述具有创建时间戳的 collection/partition。
+- [#6692](https://github.com/milvus-io/milvus/issues/6692) [#6343](https://github.com/milvus-io/milvus/pull/6700) 创建 collection/partition 记录时间信息。
 
 - [#6629](https://github.com/milvus-io/milvus/pull/6663) 为 etcdKV 添加 `WatchWithVersion` 接口。
 
-- [#6666](https://github.com/milvus-io/milvus/pull/6667) 重构 expression executor 以使用单个位集。
+- [#6666](https://github.com/milvus-io/milvus/pull/6667) 重构 expression executor 以使用单个 bitset。
 
-- [#6664](https://github.com/milvus-io/milvus/pull/6665) 当分配的行超过每个段的最大行数时，自动创建新 segment。
+- [#6664](https://github.com/milvus-io/milvus/pull/6665) 当分配的行数超过每个 segment 的最大行数时，自动创建新 segment。
 
 - [#6786](https://github.com/milvus-io/milvus/pull/6786) 重构 `RangeExpr` 和 `CompareExpr`.
 
@@ -59,7 +59,7 @@ Milvus 2.0.0-RC4 是 2.0.0 的预览版本。该版本主要修复了稳定性�
 
 - [#5210](https://github.com/milvus-io/milvus/pull/6460) 扩展布尔表达式的语法。
 
-- [#6411](https://github.com/milvus-io/milvus/pull/6510) [#6650](https://github.com/milvus-io/milvus/pull/6671) 支持搜索/查询输出字段上的通配符和通配符匹配。
+- [#6411](https://github.com/milvus-io/milvus/pull/6510) [#6650](https://github.com/milvus-io/milvus/pull/6671) 搜索/查询输出 field 支持通配符和通配符匹配。
 
 - [#6464](https://github.com/milvus-io/milvus/pull/6613) 添加向量 chunk manager 以支持向量文件本地存储。
 
@@ -71,7 +71,7 @@ Milvus 2.0.0-RC4 是 2.0.0 的预览版本。该版本主要修复了稳定性�
 
 - [#5443](https://github.com/milvus-io/milvus/pull/6976) 从 collection 中获取向量时，`CalcDistance` 返回错误的结果。
 
-- [#7004](https://github.com/milvus-io/milvus/pull/7004) Pulsar 消耗者导致 goroutine 泄漏。
+- [#7004](https://github.com/milvus-io/milvus/pull/7004) Pulsar 消费者导致 goroutine 泄漏。
 
 - [#6946](https://github.com/milvus-io/milvus/pull/6946) 当 Flow Graph 在 `start()` 之后立即 `close()` 时，会发生数据竞争。
 
@@ -83,7 +83,7 @@ Milvus 2.0.0-RC4 是 2.0.0 的预览版本。该版本主要修复了稳定性�
 
 - [#6515](https://github.com/milvus-io/milvus/issues/6515) [#6567](https://github.com/milvus-io/milvus/issues/6567) [#6552](https://github.com/milvus-io/milvus/issues/6552) [#6483](https://github.com/milvus-io/milvus/pull/6551) Data node BackGroundGC 不运作并导致内存泄漏。
 
-- [#6943](https://github.com/milvus-io/milvus/pull/6944) MinIOKV `GetObject` 方法不会关闭客户端并导致每次调用 goroutine 泄漏。
+- [#6943](https://github.com/milvus-io/milvus/pull/6944) MinIOKV `GetObject` 方法不会关闭客户端并导致每次调用产生 goroutine 泄漏。
 
 - [#6370](https://github.com/milvus-io/milvus/pull/6935) 因加载 partition 提供的错误语义导致搜索卡住。
 
@@ -93,9 +93,9 @@ Milvus 2.0.0-RC4 是 2.0.0 的预览版本。该版本主要修复了稳定性�
 
 - [#6693](https://github.com/milvus-io/milvus/pull/6870) 因超时引起的 segment 竞争情况。
 
-- [#6097](https://github.com/milvus-io/milvus/pull/6351) 短时间内频繁重启 query node 后，负载挂起。
+- [#6097](https://github.com/milvus-io/milvus/pull/6351) 短时间内频繁重启 query node 后导致加载卡住。
 
-- [#6464](https://github.com/milvus-io/milvus/pull/6465) Data sorter 边界情况。
+- [#6464](https://github.com/milvus-io/milvus/pull/6465) 处理 Data sorter 边界情况。
 
 - [#6419](https://github.com/milvus-io/milvus/pull/6439) Milvus 在插入空向量时崩溃。
 
@@ -105,7 +105,7 @@ Milvus 2.0.0-RC4 是 2.0.0 的预览版本。该版本主要修复了稳定性�
 
 - [#6499](https://github.com/milvus-io/milvus/pull/6500) TSO 分配错误的时间戳。
 
-- [#6501](https://github.com/milvus-io/milvus/pull/6545) Data node 崩溃后通道丢失。
+- [#6501](https://github.com/milvus-io/milvus/pull/6545) Data node 崩溃后 channel 丢失。
 
 - [#6527](https://github.com/milvus-io/milvus/pull/6568) 无法从 etcd 中删除 `watchQueryChannels` 的任务信息。
 
