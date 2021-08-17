@@ -101,7 +101,7 @@ Milvus 2.0.0-RC4 是 2.0.0 的预览版本。该版本主要修复了稳定性�
 
 - [#6477](https://github.com/milvus-io/milvus/pull/6477) 不同的组件在 MinIO 中重复创建桶。
 
-- [#6377](https://github.com/milvus-io/milvus/pull/6377) 查询结果从 etcd 得到不正确的全局 sealed segment。
+- [#6377](https://github.com/milvus-io/milvus/pull/6377) 在部署了多个 query node 的情况下，由于从 etcd 获取的 globalSealedSegment 信息不正确导致 Milvus 集群查询结果返回不完整。
 
 - [#6499](https://github.com/milvus-io/milvus/pull/6500) TSO 分配错误的时间戳。
 
