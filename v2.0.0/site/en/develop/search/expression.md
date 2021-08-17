@@ -3,7 +3,7 @@ id: expression.md
 ---
 
 # Predicate Expressions
-A predicate is an expression optputs a boolean value. Milvus conducts scalar filtering by searching with predicates. A predicate expression, when evaluated, returns either TRUE or FALSE.
+A predicate is an expression outputs a boolean value. Milvus conducts scalar filtering by searching with predicates. A predicate expression, when evaluated, returns either TRUE or FALSE.
 View [Python SDK API Reference](/api-reference/pymilvus-orm/2.0.0rc4/api/collection.html) for instruction on using predicate expressions.
 ## Predicate Syntax
 An expression can be either NONE or a logical expression.
@@ -66,3 +66,6 @@ The order in which the Milvus evaluates predicate expressions follows the table 
 2. Not operators
 3. Or operators
 4. And Operators
+
+
+Learn more about [Boolean Expression Rules](hybrid.md#Boolean-Expression-Rules).
