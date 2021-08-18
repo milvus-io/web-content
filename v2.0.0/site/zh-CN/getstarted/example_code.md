@@ -124,8 +124,7 @@ $ python3 hello_milvus.py
 *运行结果及查询等待时间如下：*
 
 
-<pre>
-<code>
+<div class='result-bock'>
 <p>Search...</p>
 <p>(distance: 0.0, id: 2998) -20.0</p>
 <p>(distance: 13.2614107131958, id: 989) -11.0</p>
@@ -138,8 +137,7 @@ $ python3 hello_milvus.py
 <p>(distance: 15.427900314331055, id: 600) -14.0</p>
 <p>(distance: 15.538337707519531, id: 637) -19.0</p>
 <p>search latency = 0.0549s</p>
-</code>
-</pre>
+</div>
 
 
 <br/>
