@@ -129,8 +129,7 @@ $ python3 hello_pymilvus.py
 
 *The returned results and query latency show as follows:*
 
-<pre>
-<code>
+<div class='result-bock'>
 <p>Search...</p>
 <p>(distance: 0.0, id: 2998) -20.0</p>
 <p>(distance: 13.2614107131958, id: 989) -11.0</p>
@@ -143,8 +142,8 @@ $ python3 hello_pymilvus.py
 <p>(distance: 15.427900314331055, id: 600) -14.0</p>
 <p>(distance: 15.538337707519531, id: 637) -19.0</p>
 <p>search latency = 0.0549s</p>
-</code>
-</pre>
+</div>
+
 
 
 <br/>
