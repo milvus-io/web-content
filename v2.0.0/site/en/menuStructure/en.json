@@ -402,8 +402,8 @@
       "order": 1
     },
     {
-      "id": "hybrid.md",
-      "title": "Hybrid Search",
+      "id": "boolean.md",
+      "title": "Boolean Expression Rules",
       "label1": "reference",
       "label2": "",
       "order": 4

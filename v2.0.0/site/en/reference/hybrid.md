@@ -1,57 +1,10 @@
 ---
-id: hybrid.md
-title: Hybrid Search
+id: boolean.md
+title: Boolean Expression Rules
 ---
 
-# Hybrid Search 
+# Boolean Expression Rules
 
-## Introduction
-In addition to vectors, Milvus supports data types such as boolean, integers, floating-point numbers, and more. A collection in Milvus can hold multiple fields for accommodating different data features or properties. Milvus pairs scalar filtering with powerful vector similarity search to offer a modern, flexible platform for analyzing unstructured data. 
-
-A hybrid search is a vector similarity search, during which you can filter the scalar data by specifying a boolean expression.
-
-This article begins with a sample code, and then moves on to introduce the boolean expression rules.
-
-## Sample code
-Use the sample code of a hybrid search below to carry out vector similarity search on entities whose `film_id` is in  [2,4,6,8].
-
-```Python
-from pymilvus_orm import connections, Collection, FieldSchema, CollectionSchema, DataType
->>> import random
->>> connections.connect()
->>> schema = CollectionSchema([
-...     FieldSchema("film_id", DataType.INT64, is_primary=True),
-...     FieldSchema("films", dtype=DataType.FLOAT_VECTOR, dim=2)
-... ])
->>> collection = Collection("test_collection_search", schema)
->>> # insert
->>> data = [
-...     [i for i in range(10)],
-...     [[random.random() for _ in range(2)] for _ in range(10)],
-... ]
->>> collection.insert(data)
->>> collection.num_entities
-10
->>> collection.load()
->>> # search
->>> search_param = {
-...     "data": [[1.0, 1.0]],
-...     "anns_field": "films",
-...     "param": {"metric_type": "L2"},
-...     "limit": 2,
-...     "expr": "film_id in [2,4,6,8]",
-... }
->>> res = collection.search(**search_param)
->>> assert len(res) == 1
->>> hits = res[0]
->>> assert len(hits) == 2
->>> print(f"- Total hits: {len(hits)}, hits ids: {hits.ids} ")
-- Total hits: 2, hits ids: [2, 4]
->>> print(f"- Top1 hit id: {hits[0].id}, distance: {hits[0].distance}, score: {hits[0].score} ")
-- Top1 hit id: 2, distance: 0.10143111646175385, score: 0.101431116461
-```
-
-## Boolean Expression Rules
 [EBNF](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form) grammar rules describes boolean expressions rules. Boolean expression rules are as follows:
 
 ```
@@ -124,9 +77,9 @@ The following table lists the description of each symbol in the above Boolean ex
 | LogicalExpr      | Logical expression. LogicalExpr can be a BinaryLogicalOp on two LogicalExprs, or an UnaryLogicalOp on a single LogicalExpr or a grouped LogicalExpr or a SingleExpr. It is defined recursively.       |
 | Expr   | Abbreviation of expression. Expr can be LogicalExpr or NIL.        |
 
-### Operators
+## Operators
 
-**Logical operators:** 
+### Logical operators:
 
 <table>
     <tr>
@@ -149,7 +102,7 @@ The following table lists the description of each symbol in the above Boolean ex
     </tr>
 </table>
 
-**Binary arithmetic operators:** 
+### Binary arithmetic operators:
 
 | **Symbol**| **Operation** | **Example** | **Description**           |
 | ----------| ------------- | ----------- | ------------------------- |
@@ -161,7 +114,7 @@ The following table lists the description of each symbol in the above Boolean ex
 | %         | Modulo        | a % b       | Divide the first operand by the second operand and yield the remainder portion.    |
 
 
-**Relational operators:**
+### Relational operators:
 
 | **Symbol**| **Operation** | **Example** | **Description**           |
 | ----------| ------------- | ----------- | ------------------------- |
@@ -173,7 +126,7 @@ The following table lists the description of each symbol in the above Boolean ex
 | >=        | Greater than or equal         | a >= b      | True if a is greater than or equal to b.    |
 
 
-### Operator precedence and associativity
+## Operator precedence and associativity
 
 The following table lists the precedence and associativity of operators. Operators are listed top to bottom, in descending precedence.
 
