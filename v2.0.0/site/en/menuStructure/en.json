@@ -372,11 +372,26 @@
       "order": 2
     },
     {
-      "id": "index.md",
+      "id": "index",
       "title": "Vector Index",
       "label1": "reference",
       "label2": "",
-      "order": 3
+      "order": 3,
+      "isMenu": true
+    },
+    {
+      "id": "index.md",
+      "title": "Vector Index",
+      "label1": "reference",
+      "label2": "index",
+      "order": 0
+    },
+    {
+      "id": "index_selection.md",
+      "title": "Select an Index",
+      "label1": "reference",
+      "label2": "index",
+      "order": 1
     },
     {
       "id": "hybrid.md",

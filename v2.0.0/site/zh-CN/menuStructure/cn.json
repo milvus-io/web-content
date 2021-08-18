@@ -372,11 +372,26 @@
       "order": 2
     },
     {
-      "id": "index.md",
+      "id": "index",
       "title": "向量索引",
       "label1": "reference",
       "label2": "",
-      "order": 3
+      "order": 3,
+      "isMenu": true
+    },
+    {
+      "id": "index.md",
+      "title": "索引概述",
+      "label1": "reference",
+      "label2": "index",
+      "order": 0
+    },
+    {
+      "id": "index_selection.md",
+      "title": "选择索引",
+      "label1": "reference",
+      "label2": "index",
+      "order": 1
     },
     {
       "id": "glossary.md",
