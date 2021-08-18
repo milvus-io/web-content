@@ -26,13 +26,30 @@
       "order": 3
     },
     {
+      "id": "limitations.md",
+      "title": "Milvus Limitations",
+      "label1": "about",
+      "label2": "",
+      "label3": "",
+      "order": 4
+    },
+    {
       "id": "enhancementproposals",
       "title": "Enhancement Proposals",
       "label1": "about",
       "label2": "",
       "label3": "",
-      "order": 4,
+      "order": 5,
       "outLink": "https://wiki.lfaidata.foundation/pages/viewpage.action?pageId=43287103"
+    },
+    {
+      "id": "bootcamp",
+      "title": "Bootcamp",
+      "label1": "about",
+      "label2": "",
+      "label3": "",
+      "order": 6,
+      "outLink": "https://milvus.io/bootcamp"
     },
     {
       "id": "milvus_adopters.md",
@@ -102,8 +119,8 @@
       "order": 2
     },
     {
-      "id": "develop",
-      "title": "Develop",
+      "id": "userguide",
+      "title": "User Guide",
       "label1": "",
       "label2": "",
       "order": 2,
@@ -112,7 +129,7 @@
     {
       "id": "connect.md",
       "title": "Connect",
-      "label1": "develop",
+      "label1": "userguide",
       "label2": "",
       "label3": "",
       "order": 0
@@ -120,7 +137,7 @@
     {
       "id": "create.md",
       "title": "Create",
-      "label1": "develop",
+      "label1": "userguide",
       "label2": "",
       "label3": "",
       "order": 1
@@ -128,7 +145,7 @@
     {
       "id": "insert.md",
       "title": "Insert",
-      "label1": "develop",
+      "label1": "userguide",
       "label2": "",
       "label3": "",
       "order": 2
@@ -136,7 +153,7 @@
     {
       "id": "delete.md",
       "title": "Delete",
-      "label1": "develop",
+      "label1": "userguide",
       "label2": "",
       "label3": "",
       "order": 3
@@ -144,7 +161,7 @@
     {
       "id": "build.md",
       "title": "Build an Index",
-      "label1": "develop",
+      "label1": "userguide",
       "label2": "",
       "label3": "",
       "order": 4
@@ -152,7 +169,7 @@
     {
       "id": "search",
       "title": "Search",
-      "label1": "develop",
+      "label1": "userguide",
       "label2": "",
       "label3": "",
       "order": 5,
@@ -161,7 +178,7 @@
     {
       "id": "search.md",
       "title": "Conduct a Search",
-      "label1": "develop",
+      "label1": "userguide",
       "label2": "search",
       "label3": "",
       "order": 0
@@ -169,7 +186,7 @@
     {
       "id": "hybridsearch.md",
       "title": "Conduct a Hybrid Search",
-      "label1": "develop",
+      "label1": "userguide",
       "label2": "search",
       "label3": "",
       "order": 1
@@ -177,7 +194,7 @@
     {
       "id": "expression.md",
       "title": "Predicate Expressions",
-      "label1": "develop",
+      "label1": "userguide",
       "label2": "search",
       "label3": "",
       "order": 2
@@ -185,7 +202,7 @@
     {
       "id": "tools",
       "title": "Tools",
-      "label1": "develop",
+      "label1": "userguide",
       "label2": null,
       "label3": null,
       "order": 6,
@@ -194,7 +211,7 @@
     {
       "id": "milvus_insight",
       "title": "Milvus Insight",
-      "label1": "develop",
+      "label1": "userguide",
       "label2": "tools",
       "label3": "",
       "order": 0,
@@ -203,15 +220,24 @@
     {
       "id": "sizing",
       "title": "Milvus Sizing Tool",
-      "label1": "develop",
+      "label1": "userguide",
       "label2": "tools",
       "label3": "",
       "order": 1,
       "outLink": "https://zilliz.com/sizing-tool"
     },
     {
-      "id": "deploy_and_maintain",
-      "title": "Deploy and Maintain",
+      "id": "bootcamp",
+      "title": "Bootcamp",
+      "label1": "userguide",
+      "label2": null,
+      "label3": null,
+      "order": 7,
+      "outLink": "https://milvus.io/bootcamp"
+    },
+    {
+      "id": "admin_guide",
+      "title": "Administration Guide",
       "label1": "",
       "label2": "",
       "order": 3,
@@ -220,7 +246,7 @@
     {
       "id": "deploy_s3.md",
       "title": "Set Up S3 Storage",
-      "label1": "deploy_and_maintain",
+      "label1": "admin_guide",
       "label2": "",
       "label3": "",
       "order": 0
@@ -228,7 +254,7 @@
     {
       "id": "scaleout.md",
       "title": "Scale",
-      "label1": "deploy_and_maintain",
+      "label1": "admin_guide",
       "label2": "",
       "label3": "",
       "order": 1
@@ -236,7 +262,7 @@
     {
       "id": "cloud",
       "title": "Deploy on Clouds",
-      "label1": "deploy_and_maintain",
+      "label1": "admin_guide",
       "label2": "",
       "label3": "",
       "order": 2,
@@ -245,7 +271,7 @@
     {
       "id": "aws.md",
       "title": "AWS",
-      "label1": "deploy_and_maintain",
+      "label1": "admin_guide",
       "label2": "cloud",
       "label3": "",
       "order": 0
@@ -253,10 +279,43 @@
     {
       "id": "monitor.md",
       "title": "Monitor and Alert",
-      "label1": "deploy_and_maintain",
+      "label1": "admin_guide",
       "label2": "",
       "label3": "",
       "order": 3
+    },
+    {
+      "id": "backup",
+      "title": "Backup",
+      "label1": "admin_guide",
+      "label2": "",
+      "label3": "",
+      "order": 4,
+      "isMenu": true
+    },
+    {
+      "id": "h2m.md",
+      "title": "Data Import",
+      "label1": "admin_guide",
+      "label2": "backup",
+      "label3": "",
+      "order": 1
+    },
+    {
+      "id": "m2h.md",
+      "title": "Data Export",
+      "label1": "admin_guide",
+      "label2": "backup",
+      "label3": "",
+      "order": 0
+    },
+    {
+      "id": "m2m.md",
+      "title": "Version Migration",
+      "label1": "admin_guide",
+      "label2": "",
+      "label3": "",
+      "order": 5
     },
     {
       "id": "migrate",
@@ -275,36 +334,12 @@
       "order": 0
     },
     {
-      "id": "m2m.md",
-      "title": "Migrate from Milvus to Milvus",
-      "label1": "migrate",
-      "label2": "",
-      "label3": "",
-      "order": 1
-    },
-    {
       "id": "f2m.md",
       "title": "Migrate from Faiss to Milvus",
       "label1": "migrate",
       "label2": "",
       "label3": "",
-      "order": 2
-    },
-    {
-      "id": "h2m.md",
-      "title": "Migrate from HDF5 to Milvus",
-      "label1": "migrate",
-      "label2": "",
-      "label3": "",
-      "order": 3
-    },
-    {
-      "id": "m2h.md",
-      "title": "Migrate from Milvus to HDF5",
-      "label1": "migrate",
-      "label2": "",
-      "label3": "",
-      "order": 4
+      "order": 1
     },
     {
       "id": "reference",
@@ -469,28 +504,11 @@
       "order": 1
     },
     {
-      "id": "release",
-      "title": "Release",
-      "label1": null,
-      "label2": null,
-      "order": 7,
-      "isMenu": true
-    },
-    {
       "id": "release_notes.md",
       "title": "Release Notes",
-      "label1": "release",
+      "label1": "",
       "label2": "",
-      "label3": "",
-      "order": 0
-    },
-    {
-      "id": "limitations.md",
-      "title": "Milvus Limitations",
-      "label1": "release",
-      "label2": "",
-      "label3": "",
-      "order": 1
+      "order": 7
     }
     
   ]
