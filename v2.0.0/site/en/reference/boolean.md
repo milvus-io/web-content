@@ -81,26 +81,14 @@ The following table lists the description of each symbol in the above Boolean ex
 
 ### Logical operators:
 
-<table>
-    <tr>
-        <td><b>Symbol</b></td>
-        <td><b>Operation</b></td>
-        <td><b>Example</b></td>
-        <td><b>Description</b></td>
-    </tr>
-    <tr>
-        <td>'and' &amp;&amp;</td>
-        <td>and</td>
-        <td>expr1 &amp;&amp; expr2</td>
-        <td>True if both expr1 and expr2 are true.</td>
-    </tr>
-    <tr>
-        <td>'or' ||</td>
-        <td>or</td>
-        <td>expr1 || expr2</td>
-        <td>True if either expr1 or expr2 are true. </td>
-    </tr>
-</table>
+
+| **Symbol**| **Operation** | **Example** | **Description**           |
+| ----------| ------------- | ----------- | ------------------------- |
+| 'and' &&  | and           | expr1 && expr2   | True if both expr1 and expr2 are true. |
+| 'or' \|\|  | or           | expr1 \|\| expr2     | True if either expr1 or expr2 are true.  |
+
+
+
 
 ### Binary arithmetic operators:
 
@@ -130,68 +118,19 @@ The following table lists the description of each symbol in the above Boolean ex
 
 The following table lists the precedence and associativity of operators. Operators are listed top to bottom, in descending precedence.
 
-<table>
-    <tr>
-        <td><b>Precedence</b></td>
-        <td><b>Operator</b></td>
-        <td><b>Description</b></td>
-        <td><b>Associativity</b></td>
-    </tr>
-    <tr>
-        <td>1</td>
-        <td>+ -  </td>
-        <td>UnaryArithOp</td>
-        <td>Left-to-right</td>
-    </tr>
-    <tr>
-        <td>2</td>
-        <td>not</td>
-        <td>UnaryLogicOp</td>
-        <td>Right-to-left</td>
-    </tr>
-    <tr>
-        <td>3</td>
-        <td>**</td>
-        <td>BinaryArithOp</td>
-        <td>Left-to-right</td>
-    </tr>
-    <tr>
-        <td>4</td>
-        <td>* / %</td>
-        <td>BinaryArithOp</td>
-        <td>Left-to-right</td>
-    </tr>
-    <tr>
-        <td>5</td>
-        <td>+ -</td>
-        <td>BinaryArithOp</td>
-        <td>Left-to-right</td>
-    </tr>
-    <tr>
-        <td>6</td>
-        <td>&lt; &lt;= &gt; &gt;= </td>
-        <td>CmpOp</td>
-        <td>Left-to-right</td>
-    </tr>
-    <tr>
-        <td>7</td>
-        <td>== != </td>
-        <td>CmpOp</td>
-        <td>Left-to-right</td>
-    </tr>
-    <tr>
-        <td>8</td>
-        <td>&amp;&amp; and </td>
-        <td>BinaryLogicOp</td>
-        <td>Left-to-right</td>
-    </tr>
-    <tr>
-        <td>9</td>
-        <td>|| or  </td>
-        <td>BinaryLogicOp</td>
-        <td>Left-to-right</td>
-    </tr>
-</table>
+
+| Precedence | Operator  | Description   | Associativity |
+|------------|-----------|---------------|---------------|
+| 1          | + -       | UnaryArithOp  | Left-to-right |
+| 2          | not       | UnaryLogicOp  | Right-to-left |
+| 3          | **        | BinaryArithOp | Left-to-right |
+| 4          | * / %     | BinaryArithOp | Left-to-right |
+| 5          | + -       | BinaryArithOp | Left-to-right |
+| 6          | < <= > >= | CmpOp         | Left-to-right |
+| 7          | == !=     | CmpOp         | Left-to-right |
+| 8          | && and    | BinaryLogicOp | Left-to-right |
+| 9          | \|\| or     | BinaryLogicOp | Left-to-right |
+
 
 Expressions are normally evaluated from left to right. Complex expressions are evaluated one at a time. The order in which the expressions are evaluated is determined by the precedence of the operators used. 
 
