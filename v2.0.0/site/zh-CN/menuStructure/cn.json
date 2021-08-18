@@ -167,12 +167,20 @@
       "order": 0
     },
     {
+      "id": "hybridsearch.md",
+      "title": "混合查询",
+      "label1": "develop",
+      "label2": "search",
+      "label3": "",
+      "order": 1
+    },
+    {
       "id": "expression.md",
       "title": "表达式",
       "label1": "develop",
       "label2": "search",
       "label3": "",
-      "order": 1
+      "order": 2
     },
     {
       "id": "tools",
