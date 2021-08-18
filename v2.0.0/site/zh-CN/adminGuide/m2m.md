@@ -1,11 +1,11 @@
 ---
 id: m2m.md
-title: Milvus 至 Milvus
+title: 版本迁移
 ---
 
 
 
-# Milvus 至 Milvus
+# 版本迁移
 
 <div class="alert note">
 MilvusDM 不支持将数据从 Milvus 2.0 单机版迁移至 Milvus 2.0 分布式版。

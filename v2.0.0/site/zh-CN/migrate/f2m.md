@@ -3,7 +3,7 @@ id: f2m.md
 title: Faiss 至 Milvus
 ---
 
-# Faiss 至 Milvus
+# 数据迁移：Faiss 至 Milvus
 
 1. 下载 **F2M.yaml**:
 

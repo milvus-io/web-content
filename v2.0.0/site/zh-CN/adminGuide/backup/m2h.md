@@ -1,23 +1,23 @@
 ---
 id: m2h.md
-title: Migrate from Milvus to HDF5
+title: Milvus to HDF5
 ---
-# Migrate from Milvus to HDF5
+# 数据迁移：Milvus 至 HDF5
 
-1. Download **M2H.yaml**:
+1. 下载 **M2H.yaml**:
 
 ```
 $ wget https://raw.githubusercontent.com/milvus-io/milvus-tools/main/yamls/M2H.yaml
 ```
 
-2. Set the following parameters:
-- `source_milvus_path`: Working directory of Milvus. 
-- `mysql_parameter`: MySQL settings for Milvus. If MySQL is not used, set this parameter as ''.
-- `source_collection`: Names of the collection and its partitions in Milvus.
-- `data_dir`: Directory to save HDF5 files.
+2. 配置参数：
+- `source_milvus_path`：Milvus 工作路径。
+- `mysql_parameter`：Milvus 的 MySQL 配置。如未使用 MySQL，将该参数设置为 ''。
+- `source_collection`：Milvus 中 collection 与 partition 名称。
+- `data_dir`：导出的 HDF5 文件保存目录。
 
-Example:
-```
+示例：
+```Yaml
 M2H:
   milvus_version: 2.x
   source_milvus_path: '/home/user/milvus'
@@ -34,22 +34,17 @@ M2H:
   data_dir: '/home/user/data'
 ```
 
-3. Run MilvusDM:
+3. 运行 MilvusDM:
 ```
 $ milvusdm --yaml M2H.yaml
 ```
 
-## Sample Code
-1. Read the data under **milvus/db** on your local drive, and retrieve vectors and their corresponding IDs from Milvus according to the metadata of the specified collection or partitions:
+## 示例代码
+
+读取指定集合或分区的元数据，根据元数据读取本地 **milvus/db** 下的数据文件，返回特征向量和对应的 ID 并存为本地的 HDF5 文件：
 
 ```
 collection_parameter, version = milvus_meta.get_collection_info(collection_name)
 r_vectors, r_ids, r_rows = milvusdb.read_milvus_file(self.milvus_meta, collection_name, partition_tag)
-```
-
-2. Save the retrieved data as HDF5 files:
-
-```
 data_save.save_yaml(collection_name, partition_tag, collection_parameter, version, save_hdf5_name)
 ```
-

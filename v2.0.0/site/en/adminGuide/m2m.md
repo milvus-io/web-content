@@ -1,9 +1,9 @@
 ---
 id: m2m.md
-title: Migrate from Milvus to Milvus
+title: Version Migration
 ---
 
-# Migrate from Milvus to Milvus
+# Version Migration
 
 <div class="alert note">
 MilvusDM does not support migrating data from Milvus 2.0 standalone to Milvus 2.0 cluster.

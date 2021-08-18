@@ -2,7 +2,7 @@
 id: h2m.md
 title: HDF5 to Milvus
 ---
-# HDF5 to Milvus
+# Migrate Data from HDF5 to Milvus
 
 1. Download **H2M.yaml**:
 
