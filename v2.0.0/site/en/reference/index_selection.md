@@ -30,46 +30,60 @@ The following table classifies the indexes that Milvus supports:
     <td><a href="#FLAT">FLAT</a></td>
     <td>N/A</td>
     <td><ul>
-        <li>Has a relatively small dataset.</li>
-        <li>Requires a 100% recall rate. </li>
+        <li>Relatively small dataset</li>
+        <li>Requires a 100% recall rate</li>
         </ul></td>
   </tr>
   <tr>
     <td><a href="#IVF_FLAT">IVF_FLAT</a></td>
     <td>Quantization-based index</td>
     <td><ul>
-        <li>High-speed query.</li>
-        <li>Requires a recall rate as high as possible.</li>
+        <li>High-speed query</li>
+        <li>Requires a recall rate as high as possible</li>
         </ul></td>
   </tr>
   <tr>
     <td><a href="#IVF_SQ8">IVF_SQ8</a></td>
     <td>Quantization-based index</td>
     <td><ul>
-        <li>High-speed query.</li>
-        <li>Requires a recall rate as high as possible.</li>
-        <li>Limited memory resources.</li>
+        <li>High-speed query</li>
+        <li>Limited memory resources</li>
+        <li>Accepts minor compromise in recall rate</li>
         </ul></td>
   </tr>  
   <tr>
     <td><a href="#IVF_PQ">IVF_PQ</a></td>
     <td>Quantization-based index</td>
-    <td></td>
+    <td><ul>
+        <li>Very high-speed query</li>
+        <li>Limited memory resources</li>
+        <li>Accepts substantial compromise in recall rate</li>
+        </ul></td>
   </tr>
   <tr>
     <td><a href="#RNSG">RNSG</a></td>
     <td>Graph-based index</td>
-    <td></td>
+    <td><ul>
+        <li>High-speed query</li>
+        <li>Requires a recall rate as high as possible</li>
+        <li>Accpets long indexing time</li>
+        </ul></td>
   </tr>
   <tr>
     <td><a href="#HNSW">HNSW</a></td>
     <td>Graph-based index</td>
-    <td></td>
+    <td><ul>
+        <li>High-speed query</li>
+        <li>Requires a recall rate as high as possible</li>
+        <li>Large memory resources</li>
+        </ul></td>
   </tr>
   <tr>
     <td><a href="#ANNOY">ANNOY</a></td>
     <td>Tree-based index</td>
-    <td></td>
+    <td><ul>
+        <li>Low dimension vectors</li>
+        </ul></td>
   </tr>
 </tbody>
 </table>
