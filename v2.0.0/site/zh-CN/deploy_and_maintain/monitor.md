@@ -1,6 +1,6 @@
 ---
 id: monitor.md
-title: 监控
+title: 监控与报警
 ---
 
 # 监控
@@ -79,3 +79,24 @@ wget https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/monit
 下图为 Milvus 组件面板界面。
 
 ![Grafana_panel](../../../assets/grafana_panel.png)
+
+
+### 在 Grafana 中添加报警
+
+如需为 Milvus 组件内存使用情况添加报警，先编辑 `Memory` 面板，新增查询请求并使用指标`process_resident_memory_bytes{app_kubernetes_io_name="milvus", app_kubernetes_io_instance=~"my-release", namespace="default"}`:
+
+![Alert_metric](../../../assets/alert_metric.png)
+
+保存可视化面板设置，报警界面将在几分钟后出现。
+
+![Alert_dashboard](../../../assets/alert_dashboard.png)
+
+<div class="alert note">
+
+1. Grafana 报警查询请求不支持使用模版变量。因此，在新增第二个请求并重命名为 `A` 时，标签中不应该包含任何模版变量。
+
+![Alert_query](../../../assets/alert_query.png)
+
+2. 添加 `notification channel`，并在 `Send to` 一栏中标明相应通知渠道，以接收报警消息。
+
+</div>
