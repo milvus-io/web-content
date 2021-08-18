@@ -61,5 +61,5 @@ Milvus 2.0 稳定版将支持 VARCHAR。Milvus 将在未来支持更多字符串
 | nq    | 16384       |
 
 <div class="alert note">
-由于 Pulsar 对于日志传输文件大小的限制 (100 MB), Milvus 2.0.0-RC4 版本在高维向量搜索中暂不支持将 `TopK` 设为最大值（16384）。Milvus 2.0.0 正式版将解除这一限制。
+  由于 Pulsar 对于日志传输文件大小的限制 (100 MB), Milvus 2.0.0-RC4 版本在高维向量搜索中暂不支持将 <code>TopK</code> 设为最大值（16384）。Milvus 2.0.0 正式版将解除这一限制。
 </div>
