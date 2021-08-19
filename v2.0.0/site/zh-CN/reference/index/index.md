@@ -6,7 +6,7 @@ related_key: index
 
 # Vector Index
 
-Indexing, a process of oragnizing data, is a huge component of what makes it possible to efficiently query the million-, billion-, or even trillion-vector datasets that vector databases rely on. 
+Indexing, a process of organizing data, is a huge component of what makes it possible to efficiently query the million-, billion-, or even trillion-vector datasets that vector databases rely on. 
 
 ## **How does vector indexing work?**
 
