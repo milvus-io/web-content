@@ -19,7 +19,7 @@ Type "help", "copyright", "credits" or "license" for more information.
 
 ## Connect to the Milvus server
 
-<div class="mutipleCode">
+<div class="multipleCode">
   <a href="?python">Python </a>
   <a href="?javascript">Node</a>
 </div>
@@ -39,7 +39,7 @@ const milvusClient = new MilvusClient("localhost:19530");
 
 When you no longer need Milvus services, you can call `close()` to release all connection resources to the Milvus server:
 
-<div class="mutipleCode">
+<div class="multipleCode">
   <a href="?python">Python </a>
   <a href="?javascript">Node</a>
 </div>

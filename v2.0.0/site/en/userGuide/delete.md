@@ -13,7 +13,7 @@ The delete operations affect data already inserted into Milvus. Think twice befo
 
 Drop the index of a specified field in a specified collection.
 
-<div class="mutipleCode">
+<div class="multipleCode">
   <a href="?python">Python </a>
   <a href="?javascript">Node</a>
 </div>
@@ -33,7 +33,7 @@ await milvusClient.indexManager.dropIndex({
 
 The `drop_partition()` method removes a partition and all vectors under it.
 
-<div class="mutipleCode">
+<div class="multipleCode">
   <a href="?python">Python </a>
   <a href="?javascript">Node</a>
 </div>
@@ -54,7 +54,7 @@ await milvusClient.partitionManager.dropPartition({
 
 When you no longer need a collection, you can call `drop_collection()` to delete it.
 
-<div class="mutipleCode">
+<div class="multipleCode">
   <a href="?python">Python </a>
   <a href="?javascript">Node</a>
 </div>

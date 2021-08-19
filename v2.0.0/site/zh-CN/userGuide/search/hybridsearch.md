@@ -11,12 +11,34 @@ title: 混合查询
 
 1. 连接至 Milvus 服务器：
 
+
+<div class="multipleCode">
+
+  <a href="?python">Python </a>
+  <a href="?javascript">Node</a>
+</div>
+
+
+
 ```python
 from pymilvus_orm import connections
 connections.connect("default", host='localhost', port='19530')
 ```
 
+```javascript
+import { MilvusClient } from "@zilliz/milvus2-sdk-node";
+const milvusClient = new MilvusClient("localhost:19530");
+```
+
 2. 准备 collection 参数并创建 collection：
+
+
+<div class="multipleCode">
+
+  <a href="?python">Python </a>
+  <a href="?javascript">Node</a>
+</div>
+
 
 ```python
 >>> from pymilvus_orm import Collection, FieldSchema, CollectionSchema, DataType
@@ -28,7 +50,43 @@ connections.connect("default", host='localhost', port='19530')
 >>> collection = Collection(collection_name, schema)
 ```
 
+```javascript
+const COLLECTION_NAME = 'test_collection_search'
+milvusClient.collectionManager.createCollection({
+  collection_name: COLLECTION_NAME",
+  fields: [
+    {
+      name: "films",
+      description: "vector field",
+      data_type: DataType.FloatVector,
+      type_params: [
+        {
+          key: "dim",
+          value: "2",
+        },
+      ],
+    },
+    {
+      name: "film_id",
+      data_type: DataType.Int64,
+      autoID: false,
+      is_primary_key: true,
+      description: "",
+    },
+  ],
+});
+```
+
 3. 随机生成向量数据并插入新建 collection 中：
+
+
+<div class="multipleCode">
+
+  <a href="?python">Python </a>
+  <a href="?javascript">Node</a>
+</div>
+
+
 
 ```python
 >>> import random
@@ -41,7 +99,29 @@ connections.connect("default", host='localhost', port='19530')
 10
 ```
 
+```javascript
+let id = 1;
+const entities = Array.from({ length: 10 }, () => ({
+  films: Array.from({ length: 2 }, () => Math.random() * 10),
+  film_id: id++,
+}));
+
+await milvusClient.collectionManager.insert({
+  collection_name: COLLECTION_NAME,
+  fields_data: entities,
+});
+```
+
 4. 将集合加载到内存中并进行向量相似度检索：
+
+
+<div class="multipleCode">
+
+  <a href="?python">Python </a>
+  <a href="?javascript">Node</a>
+</div>
+
+
 
 ```python
 >>> collection.load()
@@ -55,7 +135,35 @@ connections.connect("default", host='localhost', port='19530')
 >>> res = collection.search(**search_param)
 ```
 
+```javascript
+await milvusClient.collectionManager.loadCollection({
+  collection_name: COLLECTION_NAME,
+});
+await milvusClient.dataManager.search({
+  collection_name: COLLECTION_NAME,
+  // partition_names: [],
+  expr: "film_id in [1,4,6,8]",
+  vectors: [entities[0].films],
+  search_params: [
+    { key: "anns_field", value: "films" },
+    { key: "topk", value: "2" },
+    { key: "metric_type", value: "L2" },
+    { key: "params", value: JSON.stringify({ nprobe: 10 }) },
+  ],
+  vector_type: 100, // float vector -> 100
+});
+```
+
 5. 检查返回结果：
+
+
+<div class="multipleCode">
+
+  <a href="?python">Python </a>
+  <a href="?javascript">Node</a>
+</div>
+
+
 
 ```python
 >>> assert len(res) == 1
@@ -65,4 +173,18 @@ connections.connect("default", host='localhost', port='19530')
 - Total hits: 2, hits ids: [2, 4]
 >>> print(f"- Top1 hit id: {hits[0].id}, distance: {hits[0].distance}, score: {hits[0].score} ")
 - Top1 hit id: 2, distance: 0.10143111646175385, score: 0.101431116461
+```
+
+
+```javascript
+// search result will be like:
+{
+  status: { error_code: 'Success', reason: '' },
+  results: [
+    { score: 0, id: '1' },
+    { score: 9.266796112060547, id: '4' },
+    { score: 28.263811111450195, id: '8' },
+    { score: 41.055686950683594, id: '6' }
+  ]
+}
 ```

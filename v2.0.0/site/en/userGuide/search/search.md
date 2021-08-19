@@ -7,7 +7,7 @@ title: Conduct a Search
 
 1. Create search parameters:
 
-<div class="mutipleCode">
+<div class="multipleCode">
   <a href="?python">Python </a>
   <a href="?javascript">Node</a>
 </div>
@@ -28,7 +28,7 @@ const searchParams = [
 
 2. Load the collection to memory before conducting a vector similarity search:
 
-<div class="mutipleCode">
+<div class="multipleCode">
   <a href="?python">Python </a>
   <a href="?javascript">Node</a>
 </div>
@@ -48,7 +48,7 @@ await milvusClient.collectionManager.loadCollection({
 
 _Milvus returns the IDs of the most similar vectors and their distances._
 
-<div class="mutipleCode">
+<div class="multipleCode">
   <a href="?python">Python </a>
   <a href="?javascript">Node</a>
 </div>
@@ -75,7 +75,7 @@ await milvusClient.dataManager.search({
 
 To search in a specific partition or field, set the parameters `partition_names` and fields when calling `search()`.
 
-<div class="mutipleCode">
+<div class="multipleCode">
   <a href="?python">Python </a>
   <a href="?javascript">Node</a>
 </div>
@@ -98,7 +98,7 @@ await milvusClient.dataManager.search({
 
 4. Release the collections loaded in Milvus to reduce memory consumption when the search is completed. Query other collections:
 
-<div class="mutipleCode">
+<div class="multipleCode">
   <a href="?python">Python </a>
   <a href="?javascript">Node</a>
 </div>

@@ -13,7 +13,7 @@ The created collection must contain a primary key field. Int64 is the only suppo
 
 1. Prepare collection parameters, including collection name and field parameters. See [API document](https://pymilvus-orm.readthedocs.io/en/latest/) for a detailed description of these parameters.
 
-<div class="mutipleCode">
+<div class="multipleCode">
   <a href="?python">Python </a>
   <a href="?javascript">Node</a>
 </div>
@@ -60,7 +60,7 @@ const params = {
 
 2. Call `create_collection()` provided by the Milvus instance to create a collection:
 
-<div class="mutipleCode">
+<div class="multipleCode">
   <a href="?python">Python </a>
   <a href="?javascript">Node</a>
 </div>
@@ -76,7 +76,7 @@ await milvusClient.collectionManager.createCollection(params);
 
 3. Check if the collection is created successfully:
 
-<div class="mutipleCode">
+<div class="multipleCode">
   <a href="?python">Python </a>
   <a href="?javascript">Node</a>
 </div>
@@ -96,7 +96,7 @@ await milvusClient.collectionManager.hasCollection({
 
 4. List all created collections:
 
-<div class="mutipleCode">
+<div class="multipleCode">
   <a href="?python">Python </a>
   <a href="?javascript">Node</a>
 </div>
@@ -113,16 +113,30 @@ await milvusClient.collectionManager.showCollections();
 
 5. View collection statistics, such as row count:
 
-```
+
+<div class="multipleCode">
+  <a href="?python">Python </a>
+  <a href="?javascript">Node</a>
+</div>
+
+
+
+```python
 >>> collection.num_entities
 0
+```
+
+```javascript
+await milvusClient.collectionManager.getCollectionStatistics({
+  collection_name: COLLECTION_NAME,
+});
 ```
 
 # Create a partition (optional)
 
 Search performance worsens as more vectors are inserted into the collection. To help mitigate declining search performance, consider creating collection partitions. Partitioning is a way to separate data. Partition names narrow a search to a specific number of vectors, improving query performance. To improve search efficiency, divide a collection into several partitions by name.
 
-<div class="mutipleCode">
+<div class="multipleCode">
   <a href="?python">Python </a>
   <a href="?javascript">Node</a>
 </div>
@@ -142,7 +156,7 @@ await milvusClient.partitionManager.createPartition({
 
 Milvus creates a default partition name, `_default`, for new collections. After creating a partition, you have two partition names, `example_partition` and `_default`. Call `list_partitons()` to list all partitions in a collection.
 
-<div class="mutipleCode">
+<div class="multipleCode">
   <a href="?python">Python </a>
   <a href="?javascript">Node</a>
 </div>
@@ -161,7 +175,7 @@ await milvusClient.partitionManager.showPartitions({
 
 Call `has_partition()` to check if a partition is successfully created.
 
-<div class="mutipleCode">
+<div class="multipleCode">
   <a href="?python">Python </a>
   <a href="?javascript">Node</a>
 </div>

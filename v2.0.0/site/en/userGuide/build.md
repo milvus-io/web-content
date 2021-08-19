@@ -9,7 +9,7 @@ Create an index for a specified field in a collection to accelerate vector simil
 
 1. Prepare the index parameters:
 
-<div class="mutipleCode">
+<div class="multipleCode">
   <a href="?python">Python </a>
   <a href="?javascript">Node</a>
 </div>
@@ -42,7 +42,7 @@ const index_param = [
 
 2. Build an index:
 
-<div class="mutipleCode">
+<div class="multipleCode">
   <a href="?python">Python </a>
   <a href="?javascript">Node</a>
 </div>
@@ -63,7 +63,7 @@ await milvusClient.indexManager.createIndex({
 
 3. Call `describe_index()` to view more details of the new index:
 
-<div class="mutipleCode">
+<div class="multipleCode">
   <a href="?python">Python </a>
   <a href="?javascript">Node</a>
 </div>

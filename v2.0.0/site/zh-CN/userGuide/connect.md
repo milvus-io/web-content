@@ -17,13 +17,42 @@ Type "help", "copyright", "credits" or "license" for more information.
 ```
 
 ## 连接 Milvus 服务器
-```
+
+<div class="multipleCode">
+
+  <a href="?python">Python </a>
+  <a href="?javascript">Node</a>
+</div>
+
+
+
+```python
 >>> from pymilvus_orm import connections
 >>> connections.connect("default", host='localhost', port='19530')
 ```
 
+```javascript
+import { MilvusClient } from "@zilliz/milvus2-sdk-node";
+const milvusClient = new MilvusClient("localhost:19530");
+```
+
+
 ## 断开与服务器的连接
 使用完 Milvus 的服务之后，可以断开与 Milvus 服务器的连接以释放资源：
-```
+
+
+<div class="multipleCode">
+
+  <a href="?python">Python </a>
+  <a href="?javascript">Node</a>
+</div>
+
+
+
+```python
 >>> connections.disconnect("default")
+```
+
+```javascript
+await milvusClient.closeConnection();
 ```

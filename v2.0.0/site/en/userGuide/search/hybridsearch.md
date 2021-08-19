@@ -13,7 +13,7 @@ A hybrid search is a vector similarity search, during which you can filter the s
 
 1. Connect to the Milvus server:
 
-<div class="mutipleCode">
+<div class="multipleCode">
   <a href="?python">Python </a>
   <a href="?javascript">Node</a>
 </div>
@@ -31,7 +31,7 @@ const milvusClient = new MilvusClient("localhost:19530");
 
 2. Prepare collection parameters and create a collection:
 
-<div class="mutipleCode">
+<div class="multipleCode">
   <a href="?python">Python </a>
   <a href="?javascript">Node</a>
 </div>
@@ -76,7 +76,7 @@ milvusClient.collectionManager.createCollection({
 
 3. Insert the random vectors to the newly created collection:
 
-<div class="mutipleCode">
+<div class="multipleCode">
   <a href="?python">Python </a>
   <a href="?javascript">Node</a>
 </div>
@@ -108,7 +108,7 @@ await milvusClient.collectionManager.insert({
 
 4. Load the collection to memory and conduct a vector similarity search:
 
-<div class="mutipleCode">
+<div class="multipleCode">
   <a href="?python">Python </a>
   <a href="?javascript">Node</a>
 </div>
@@ -147,7 +147,7 @@ await milvusClient.dataManager.search({
 
 5. Check the returned results:
 
-<div class="mutipleCode">
+<div class="multipleCode">
   <a href="?python">Python </a>
   <a href="?javascript">Node</a>
 </div>

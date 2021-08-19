@@ -9,7 +9,7 @@ You can insert vectors to a specified partition within a specific collection.
 
 1. Generate random vectors:
 
-<div class="mutipleCode">
+<div class="multipleCode">
   <a href="?python">Python </a>
   <a href="?javascript">Node</a>
 </div>
@@ -31,7 +31,7 @@ const entities = Array.from({ length: 10 }, () => ({
 
 _Milvus returns the value of MutationResult, which contains the corresponding primary_keys of the inserted vectors._
 
-<div class="mutipleCode">
+<div class="multipleCode">
   <a href="?python">Python </a>
   <a href="?javascript">Node</a>
 </div>
@@ -53,7 +53,7 @@ await milvusClient.dataManager.insert({{
 
 3. By specifying `partition_name` when calling `insert()`, you can insert vectors to a specified partition:
 
-<div class="mutipleCode">
+<div class="multipleCode">
   <a href="?python">Python </a>
   <a href="?javascript">Node</a>
 </div>
@@ -73,7 +73,7 @@ await milvusClient.dataManager.insert({{
 
 4. Milvus temporarily stores the inserted vectors in the memory. Call `flush()` to flush them to the disk.
 
-<div class="mutipleCode">
+<div class="multipleCode">
   <a href="?python">Python </a>
   <a href="?javascript">Node</a>
 </div>
