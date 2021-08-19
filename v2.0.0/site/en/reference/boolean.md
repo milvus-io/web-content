@@ -119,7 +119,7 @@ The following table lists the description of each symbol in the above Boolean ex
 The following table lists the precedence and associativity of operators. Operators are listed top to bottom, in descending precedence.
 
 
-| Precedence | Operator  | Description   | Associativity |
+| **Precedence** | **Operator**  | **Description***   | **Associativity** |
 |------------|-----------|---------------|---------------|
 | 1          | + -       | UnaryArithOp  | Left-to-right |
 | 2          | not       | UnaryLogicOp  | Right-to-left |

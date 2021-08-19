@@ -437,6 +437,13 @@
       "order": 1
     },
     {
+      "id": "boolean.md",
+      "title": "布尔表达式语法规则",
+      "label1": "reference",
+      "label2": "",
+      "order": 5
+    },
+    {
       "id": "glossary.md",
       "title": "Milvus 术语",
       "label1": "reference",
