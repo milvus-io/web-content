@@ -2,17 +2,19 @@
 id: hybridsearch.md
 title: 混合查询
 ---
+
 # 混合查询
 
 1. 连接至 Milvus 服务器：
-```Python
+
+```python
 from pymilvus_orm import connections
 connections.connect("default", host='localhost', port='19530')
 ```
 
-
 2. 准备 collection 参数并创建 collection：
-```Python
+
+```python
 >>> from pymilvus_orm import Collection, FieldSchema, CollectionSchema, DataType
 >>> collection_name = "test_collection_search"
 >>> schema = CollectionSchema([
@@ -23,7 +25,8 @@ connections.connect("default", host='localhost', port='19530')
 ```
 
 3. 随机生成向量数据并插入新建 collection 中：
-```Python
+
+```python
 >>> import random
 >>> data = [
 ...     [i for i in range(10)],
@@ -35,7 +38,8 @@ connections.connect("default", host='localhost', port='19530')
 ```
 
 4. 将集合加载到内存中并进行向量相似度检索：
-```Python
+
+```python
 >>> collection.load()
 >>> search_param = {
 ...     "data": [[1.0, 1.0]],
@@ -48,7 +52,8 @@ connections.connect("default", host='localhost', port='19530')
 ```
 
 5. 检查返回结果：
-```Python
+
+```python
 >>> assert len(res) == 1
 >>> hits = res[0]
 >>> assert len(hits) == 2
