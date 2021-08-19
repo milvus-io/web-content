@@ -122,21 +122,59 @@ await milvusClient.collectionManager.showCollections();
 
 Search performance worsens as more vectors are inserted into the collection. To help mitigate declining search performance, consider creating collection partitions. Partitioning is a way to separate data. Partition names narrow a search to a specific number of vectors, improving query performance. To improve search efficiency, divide a collection into several partitions by name.
 
-```
+<div class="mutipleCode">
+  <a href="?python">Python </a>
+  <a href="?javascript">Node</a>
+</div>
+
+
+```python
 >>> partition_name = "example_partition"
 >>> partition = collection.create_partition(partition_name)
 ```
 
+```javascript
+await milvusClient.partitionManager.createPartition({
+  collection_name: COLLECTION_NAME,
+  partition_name: "example_partition",
+});
+```
+
 Milvus creates a default partition name, `_default`, for new collections. After creating a partition, you have two partition names, `example_partition` and `_default`. Call `list_partitons()` to list all partitions in a collection.
 
-```
+<div class="mutipleCode">
+  <a href="?python">Python </a>
+  <a href="?javascript">Node</a>
+</div>
+
+
+```python
 >>> collection.partitions
 [{"name": "_default", "description": "", "num_entities": 0}, {"name": "example_partition", "description": "", "num_entities": 0}]
 ```
 
+```javascript
+await milvusClient.partitionManager.showPartitions({
+  collection_name: COLLECTION_NAME,
+});
+```
+
 Call `has_partition()` to check if a partition is successfully created.
 
-```
+<div class="mutipleCode">
+  <a href="?python">Python </a>
+  <a href="?javascript">Node</a>
+</div>
+
+
+```python
 >>> collection.has_partition(partition_name)
 True
+```
+
+```javascript
+await milvusClient.partitionManager.hasPartition({
+  collection_name: COLLECTION_NAME,
+  partition_name: "example_partition",
+});
 ```
