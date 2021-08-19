@@ -53,7 +53,7 @@ const milvusClient = new MilvusClient("localhost:19530");
 ```javascript
 const COLLECTION_NAME = 'test_collection_search'
 milvusClient.collectionManager.createCollection({
-  collection_name: COLLECTION_NAME",
+  collection_name: COLLECTION_NAME,
   fields: [
     {
       name: "films",
