@@ -70,4 +70,6 @@ milvus-rootcoord    /tini -- milvus run rootcoord    Up
 ```
 <div class="alert note">
 运行 <code>$ sudo docker-compose down</code> 停止 Milvus 分布式版。
+
+如果你想在停止Milvus后清理数据，运行 <code>$ sudo rm -rf  volume</code>。
 </div>

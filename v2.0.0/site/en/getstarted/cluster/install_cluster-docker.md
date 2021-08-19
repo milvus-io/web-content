@@ -74,4 +74,8 @@ milvus-rootcoord    /tini -- milvus run rootcoord    Up
 
 <div class="alert note">
 To stop Milvus Cluster, run <code>$ sudo docker-compose down</code>.
+
+
+If you want to clean up data after stopping Milvus, run <code> $ sudo rm -rf  volume</code>.
+
 </div>
