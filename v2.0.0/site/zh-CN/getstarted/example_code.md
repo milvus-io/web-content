@@ -140,7 +140,6 @@ $ python3 hello_milvus.py
 </div>
 
 
-
 <br/>
 
 

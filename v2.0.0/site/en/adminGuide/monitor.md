@@ -102,7 +102,6 @@ Save the dashboard, and wait a few minutes to see the alert.
 
 <div class="alert note">
 
-
 1. Grafana alert query does not support template variables. Therefore, you should add a second query without any template variables in the labels and rename the second query as `A`.
 
 ![Alert_query](../../../assets/alert_query.png)

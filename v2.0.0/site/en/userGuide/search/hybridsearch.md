@@ -5,7 +5,7 @@ title: Conduct a Hybrid Search
 
 # Conduct a Hybrid Search
 
-In addition to vectors, Milvus supports data types such as boolean, integers, floating-point numbers, and more. A collection in Milvus can hold multiple fields for accommodating different data features or properties. Milvus pairs scalar filtering with powerful vector similarity search to offer a modern, flexible platform for analyzing unstructured data. 
+In addition to vectors, Milvus supports data types such as boolean, integers, floating-point numbers, and more. A collection in Milvus can hold multiple fields for accommodating different data features or properties. Milvus pairs scalar filtering with powerful vector similarity search to open up new possibilities for unstructured data processing. 
 
 A hybrid search is a vector similarity search, during which you can filter the scalar data by specifying a [boolean expression](boolean.md).
 
