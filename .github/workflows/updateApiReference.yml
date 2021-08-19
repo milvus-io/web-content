@@ -220,8 +220,7 @@ jobs:
             echo "===miss tag name, create this dir==="
             sudo mkdir "./${tag}"
           fi
-          rm -fr ../../../milvus-sdk-node/docs/index.html
-          rm -fr ../../../milvus-sdk-node/docs/assets
+          sudo rm -fr ../../../milvus-sdk-node/docs/assets
           sudo cp -r ../../../milvus-sdk-node/docs/* "./${tag}"
           git add .
           git commit -m "milvus-sdk-node"
