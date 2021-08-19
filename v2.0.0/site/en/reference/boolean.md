@@ -61,24 +61,20 @@ The following table lists the description of each symbol in the above Boolean ex
 | FLOAT   | Float nubmers such as 1.0, 2.0.        |
 | CONST      | Integers or float numbers.       |
 | IDENTIFIER   | Identifier. In Milvus, the IDENTIFIER represents the field name.        |
-
 | LogicalOp      | A LogicalOp is a logical operator that supports combining more than one relational operation in one comparison. Returned value of a LogicalOp is either TRUE (1) or FALSE (0). There are two types of LogicalOps, including BinaryLogicalOps and UnaryLogicalOps.    |
 | UnaryLogicalOp   | UnaryLogicalOp refers to the unary logical operator "not".        |
 | BinaryLogicalOp   |  Binary logical operators that perform actions on two operands. In a complex expression with two or more operands, the order of evaluation depends on precedence rules.       |
 | ArithmeticOp   | An ArithmeticOp, namely an arithmetic operator, performs mathematical operations such as addition and subtraction on operands.         |
 | UnaryArithOp      | A UnaryArithOp is an arithmetic operator that performs an operation on a single operand. The negative UnaryArithOp changes a positive expression into a negative one, or the other way round.      |
-
 | BinaryArithOp   | A BinaryArithOp, namely a binary operator, performs operations on two operands. In a complex expression with two or more operands, the order of evaluation depends on precedence rules.        |
 | CmpOp   | CmpOp is a relational operator that perform actions on two operands.        |
 | CmpOpRestricted      |  CmpOpRestricted is restricted to "Less than" and "Equal".       |
-| ConstantExpr   | ConstantExpr can be a Constant or a BinaryArithop on two ConstExpr or a UnaryArithOp on a single ConstantExpr. It is defined recursively.        |
+| ConstantExpr   | ConstantExpr can be a Constant or a BinaryArithop on two ConstExprs or a UnaryArithOp on a single ConstantExpr. It is defined recursively.        |
 | ConstantArray      | ConstantArray is wrapped by square brackets, and ConstantExpr can be repeated in the square brackets. ConstArray must include at least one ConstantExpr.       |
 | TermExpr   | TermExpr is used to check whether the value of an IDENTIFIER appears in a ConstantArray. TermExpr is represented by "in".        |
-| CompareExpr      | ACompareExpr, namely comparison expression can be relational operations on two IDENTIFIERs, or relational operations on one IDENTIFIER and one ConstantExpr, or ternary operation on two ConstantExprs and one IDENTIFIER.       |
+| CompareExpr      | A CompareExpr, namely comparison expression can be relational operations on two IDENTIFIERs, or relational operations on one IDENTIFIER and one ConstantExpr, or ternary operation on two ConstantExprs and one IDENTIFIER.       |
 | SingleExpr   |  SingleExpr, namely single expression, can be either a TermExpr or a CompareExpr.      |
-
 | LogicalExpr      | A LogicalExpr can be a BinaryLogicalOp on two LogicalExprs, or a UnaryLogicalOp on a single LogicalExpr, or a LogicalExpr grouped within parentheses, or a SingleExpr. The LogicalExpr is defined recursively.    |
-
 | Expr   | Expr, an abbreviation meaning expression, can be LogicalExpr or NIL. |
 
 ## Operators
