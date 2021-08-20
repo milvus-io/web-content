@@ -150,6 +150,41 @@
       }
     }
   },
+  "contributorSection":{
+    "title": "Contributors",
+    "list":[
+    {
+      "avatar": "../../assets/gq_huang.png",
+      "name": "Guoqin Huang",
+      "company": "Vip.com",
+      "jobTitle": "Software Developer"
+    },
+    {
+      "avatar": "../../assets/tt_wang.png",
+      "name": "Tingting Wang",
+      "company": "Sohu",
+      "jobTitle": "NLP engineer"
+    },
+    {
+      "avatar": "../../assets/y_li.png",
+      "name": "Yang Li",
+      "company": "Focus Technology",
+      "jobTitle": "Software Developer"
+    },
+    {
+      "avatar": "../../assets/wei_huang.png",
+      "name": "Wei Huang",
+      "company": "TrendMicro",
+      "jobTitle": "Software Developer"
+    },
+    {
+      "avatar": "../../assets/az_wen.png",
+      "name": "Anzhe Wen",
+      "company": "Qichacha",
+      "jobTitle": "Software Developer"
+    }
+  ]
+  },
   "joinSection": {
     "title": "Join the community",
     "list": [
@@ -165,11 +200,11 @@
       },
       {
         "label": "Zoom Meeting",
-        "link": "#",
-        "img": "../../assets/zoom.svg"
+        "link": "https://www.reddit.com/r/vectordatabase/",
+        "img": "../../assets/reddit.svg"
       },
       {
-        "label": "Social Media",
+        "label": "Reddit",
         "link": "https://twitter.com/milvusio",
         "img": "../../assets/twitter.svg"
       }
