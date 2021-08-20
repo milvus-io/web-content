@@ -68,4 +68,4 @@ The order in which the Milvus evaluates predicate expressions follows the table 
 4. And Operators
 
 
-Learn more about [Boolean Expression Rules](hybrid.md#Boolean-Expression-Rules).
+Learn more about [Boolean Expression Rules](boolean.md).
