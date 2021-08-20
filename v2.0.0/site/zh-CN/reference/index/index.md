@@ -1,42 +1,40 @@
 ---
 id: index.md
 related_key: index
-
 ---
 
-# Vector Index
+# 索引概述
 
-Indexing, a process of organizing data, is a huge component of what makes it possible to efficiently query the million-, billion-, or even trillion-vector datasets that vector databases rely on. 
+创建索引是一个组织数据的过程，是向量数据库实现快速查询百万、十亿、甚至万亿级数据集所依赖的一个巨大组成部分。
 
-## **How does vector indexing work?**
+## 加速向量查询
 
-Similarity search engines work by comparing an input to a database to find objects that are most similar to the input. Indexing is the process of efficiently organizing data, and it plays a major role in making similarity search useful by dramatically accelerating time-consuming queries on large datasets. After a massive vector dataset is indexed, queries can be routed to clusters, or subsets of data, that are most likely to contain vectors similar to an input query. In practice, this means a certain degree of accuracy is sacrificed to speed up queries on really big vector data.
+相似性搜索引擎的工作原理是将输入的对象与数据库中的对象进行比较，找出与输入最相似的对象。索引是有效组织数据的过程，极大地加速了对大型数据集的查询，在相似性搜索的实现中起着重要作用。对一个大规模向量数据集创建索引后，查询可以被路由到最有可能包含与输入查询相似的向量的集群或数据子集。在实践中，这意味着要牺牲一定程度的准确性来加快对真正的大规模向量数据集的查询。
 
+为提高查询性能，你可以为每个向量字段指定一种 [索引类型](index_selection.md)。目前，一个向量字段仅支持一种索引类型。切换索引类型时，Milvus 自动删除之前的索引。
 
-## Vector field and index
+## 索引创建机制
 
-To improve query performance, you can specify an [index type](index_selection.md) for each vector field. Currently, a vector field only supports one index type, Milvus will automatically delete the old index when switching the index type.
+当 `create_index` 方法被调用时，Milvus 会同步为这个字段的现有数据创建索引。
 
-## Create indexes
+当插入的数据段少于 4096 行时，Milvus 不对其创建索引。
 
-When the `create_index` method is called, Milvus synchronously indexes the existing data on this field. 
+### 数据段建索引
 
-<div class="alert note">
-When the inserted data segment is less than 4,096 rows, Milvus does not index it.
-</div>
+Milvus 数据段存储海量数据。在建立索引时，Milvus 为每个数据段单独创建索引。
 
+### 用户主动创建索引
 
+调用 `create_index` 接口时，Milvus 会对该字段上的已有数据同步建立索引。每当后续插入的数据的大小达到系统配置的 `index_file_size` 时，Milvus 会为其在后台自动创建索引。
 
-### Index by segment
+当插入的数据段少于 4096 行时，Milvus 不会为其建立索引。
 
-Milvus stores massive data in sections. When indexing, Milvus creates an index for each data segment separately.
+### 闲时建索引
 
-### Build indexes during free time
+众所周知，建索引是一个比较消耗计算资源和时间的工作。当查询任务和后台建索引任务并发时，Milvus 通常把计算资源优先分配给查询任务，即用户发起的任何查询命令都会打断后台正在执行的建索引任务。之后仅当用户持续 5 秒不再发起查询任务，Milvus 才会恢复执行后台建索引任务。此外，如果查询命令指定的数据段尚未建成指定索引，Milvus 会直接在段内做全量搜索。
 
-It is known that indexing is a resource-consuming and time-consuming task. When the query task and indexing task are concurrent, Milvus preferentially allocates computing resources to the query task, that is, any query command will interrupt the indexing task being executed in the background. After that, only when the user does not send the query task for 5 seconds, Milvus resumes the indexing task in the background. Besides, if the data segment specified by the query command has not been built into the specified index, Milvus will do an exhaustive search directly within the segment.
+## 选择索引和距离计算方式
 
-## How to choose an index
+若要为你的使用场景选择合适的索引，请参阅 [如何选择索引类型](index_selection.md)。
 
-To learn about the index types supported by Milvus and how to choose an appropriate index for your application scenarios, please read [How to Select an Index in Milvus](index_selection.md).
-
-To learn how to choose an appropriate index for a metric, see [Similarity Metrics](metric.md).
+关于索引和向量距离计算方法的选择，请访问 [距离计算方式](https://zilliverse.feishu.cn/docs/metric.md)。

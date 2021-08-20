@@ -7,12 +7,9 @@ related_key: index
 
 Indexing, a process of organizing data, is a huge component of what makes it possible to efficiently query the million-, billion-, or even trillion-vector datasets that vector databases rely on. 
 
-## **How does vector indexing work?**
+## Accelerating vector similarity search
 
 Similarity search engines work by comparing an input to the objects in a database to find those that are most similar to the input. Indexing is the process of efficiently organizing data, and it plays a major role in making similarity search useful by dramatically accelerating time-consuming queries on large datasets. After a massive vector dataset is indexed, queries can be routed to clusters, or subsets of data, that are most likely to contain vectors similar to an input query. In practice, this means a certain degree of accuracy is sacrificed to speed up queries on really large vector datasets.
-
-
-## Vector field and index
 
 To improve query performance, you can specify an [index type](index_selection.md) for each vector field. Currently, a vector field only supports one index type. Milvus automatically deletes the old index when switching the index type.
 
