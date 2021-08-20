@@ -199,9 +199,9 @@
         "img": "../../assets/slack.svg"
       },
       {
-        "label": "Zoom Meeting",
-        "link": "#",
-        "img": "../../assets/zoom.svg"
+        "label": "Reddit",
+        "link": "https://www.reddit.com/r/vectordatabase/",
+        "img": "../../assets/reddit.svg"
       },
       {
         "label": "Social Media",
