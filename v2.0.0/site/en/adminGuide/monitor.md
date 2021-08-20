@@ -47,7 +47,7 @@ kubectl --namespace monitoring port-forward svc/grafana 3000
 
 Now you can access Prometheus via http://localhost:9090, and Grafana via http://localhost:3000. You can also access Grafana using the default Grafana user:password of `admin:admin`. 
 
-## Enable ServiceMonitor with Miluvs Helm Chart
+## Enable ServiceMonitor with Milvus Helm Chart
 
 The ServiceMonitor is not enabled for Miluvs Helm by default. After installing Prometheus Operator in the Kubernetes cluster, you can enable it by adding `metrics.serviceMontior.enabled=true` parameter.
 
@@ -60,14 +60,7 @@ When Helm installation completes, use `kubectl` to check the ServiceMonitor reso
 ```
 kubectl get servicemonitor
 NAME                           AGE
-my-release-milvus-datacoord    54s
-my-release-milvus-datanode     54s
-my-release-milvus-indexcoord   54s
-my-release-milvus-indexnode    54s
-my-release-milvus-proxy        54s
-my-release-milvus-querycoord   54s
-my-release-milvus-querynode    54s
-my-release-milvus-rootcoord    54s
+my-release-milvus              54s
 ```
 
 ## Visualize metrics in Grafana

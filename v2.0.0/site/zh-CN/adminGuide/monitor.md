@@ -53,14 +53,7 @@ Helm 安装完成后，使用 `kubectl` 检查 ServiceMonitor 资源。
 ```Shell
 kubectl get servicemonitor
 NAME                           AGE
-my-release-milvus-datacoord    54s
-my-release-milvus-datanode     54s
-my-release-milvus-indexcoord   54s
-my-release-milvus-indexnode    54s
-my-release-milvus-proxy        54s
-my-release-milvus-querycoord   54s
-my-release-milvus-querynode    54s
-my-release-milvus-rootcoord    54s
+my-release-milvus              54s
 ```
 
 ## 使用 Grafana 展示监控指标
