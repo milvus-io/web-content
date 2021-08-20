@@ -1,28 +1,30 @@
 ---
 id: index_selection.md
 related_key: IVF
-
 ---
 
-# Selecting an Index Best Suited for Your Scenario
+# 根据应用场景选择索引
 
-Most of the vector index types supported by Milvus use approximate nearest neighbors search (ANNS). Compared with accurate retrieval, which is usually very time-consuming, the core idea of ANNS is no longer limited to returning the most accurate result, but only searching for neighbors of the target. ANNS improves retrieval efficiency by sacrificing accuracy within an acceptable range.
+Milvus 目前支持的向量索引类型大都属于 ANNS（Approximate Nearest Neighbors Search，近似最近邻搜索）。ANNS 的核心思想是不再局限于只返回最精确的结果项，而是仅搜索可能是近邻的数据项，即以牺牲可接受范围内的精度的方式提高检索效率。
 
-According to the implementation methods, the ANNS vector index can be divided into four categories:
+根据实现方式，ANNS 向量索引可分为四大类：
 
-- Tree-based index
-- Graph-based index
-- Hash-based index
-- Quantization-based index
+- 基于树的索引
 
-The following table classifies the indexes that Milvus supports:
+- 基于图的索引
+
+- 基于哈希的索引
+
+- 基于量化的索引
+
+下表将目前 Milvus 支持的索引进行了归类：
 
 <table>
 <thead>
   <tr>
-    <th>Supported index</th>
-    <th>Classification</th>
-    <th>Scenario</th>
+    <th>Milvus 支持的索引</th>
+    <th>索引分类</th>
+    <th>适用场景</th>
   </tr>
 </thead>
 <tbody>
@@ -30,265 +32,228 @@ The following table classifies the indexes that Milvus supports:
     <td><a href="#FLAT">FLAT</a></td>
     <td>N/A</td>
     <td><ul>
-        <li>Has a relatively small dataset.</li>
-        <li>Requires a 100% recall rate. </li>
+        <li>查询数据规模小</li>
+        <li>需要 100% 的召回率。</li>
         </ul></td>
   </tr>
   <tr>
     <td><a href="#IVF_FLAT">IVF_FLAT</a></td>
-    <td>Quantization-based index</td>
+    <td>基于量化的索引</td>
     <td><ul>
-        <li>High-speed query.</li>
-        <li>Requires a recall rate as high as possible.</li>
+        <li>高速查询</li>
+        <li>要求高召回率</li>
         </ul></td>
   </tr>
   <tr>
     <td><a href="#IVF_SQ8">IVF_SQ8</a></td>
-    <td>Quantization-based index</td>
+    <td>基于量化的索引</td>
     <td><ul>
-        <li>High-speed query.</li>
-        <li>Requires a recall rate as high as possible.</li>
-        <li>Limited memory resources.</li>
+        <li>高速查询</li>
+        <li>磁盘和内存资源有限</li>
+        <li>查询召回率低于 IVF_FLAT</li>
         </ul></td>
-  </tr>  
+  </tr>
   <tr>
     <td><a href="#IVF_PQ">IVF_PQ</a></td>
-    <td>Quantization-based index</td>
-    <td></td>
+    <td>基于量化的索引</td>
+    <td><ul>
+        <li>超高速查询</li>
+        <li>磁盘和内存资源有限</li>
+        <li>可以介绍偏低的查询召回率</li>
+        </ul></td>
   </tr>
   <tr>
     <td><a href="#RNSG">RNSG</a></td>
-    <td>Graph-based index</td>
-    <td></td>
+    <td>基于图的索引</td>
+    <td><ul>
+        <li>高速查询</li>
+        <li>要求尽可能高的召回率</li>
+        <li>建索引耗时长</li>
+        </ul></td>
   </tr>
   <tr>
     <td><a href="#HNSW">HNSW</a></td>
-    <td>Graph-based index</td>
-    <td></td>
+    <td>基于图的索引</td>
+    <td><ul>
+        <li>高速查询</li>
+        <li>要求尽可能高的召回率</li>
+        <li>内存空间大</li>
+        </ul></td>
   </tr>
   <tr>
     <td><a href="#ANNOY">ANNOY</a></td>
-    <td>Tree-based index</td>
-    <td></td>
+    <td>基于树的索引</td>
+    <td><ul>
+        <li>低维向量空间</li>
+        </ul></td>
   </tr>
 </tbody>
 </table>
 
-
-
-
-## Supported vector indexes
+## 索引概览
 
 ### FLAT
 
 <a name="FLAT"></a>
 
-For vector similarity search applications that require perfect accuracy and depend on relatively small (million-scale) datasets, the FLAT index is a good choice. FLAT does not compress vectors, and is the only index that can guarantee exact search results. Results from FLAT can also be used as a point of comparison for results produced by other indexes that have less than 100% recall.
+对于需要 100% 召回率且数据规模相对较小（百万级）的向量相似性搜索应用，FLAT 索引是一个很好的选择。FLAT 是指对向量进行原始文件存储，是唯一可以保证精确的检索结果的索引。FLAT 的结果也可以用于对照其他召回率低于 100% 的索引产生的结果。
 
-FLAT is accurate because it takes an exhaustive approach to search, which means for each query the target input is compared to every vector in a dataset. This makes FLAT the slowest index on our list, and poorly suited for querying massive vector data. There are no parameters for the FLAT index in Milvus, and using it does not require data training or additional storage.
+FLAT 之所以精准是因为它采取了详尽查询的方法，即对于每个查询，目标输入都要与数据集中的每个向量进行比较。因此 FLAT 是列表中查询速度最慢的，而且不适合查询大量的向量数据。Milvus 中没有 FLAT 索引的参数，使用它不需要数据训练，也不需要占用额外的磁盘空间。
 
-- Search parameters
+- 查询参数
 
-  | Parameter     | Description                            | Range                               |
-  | ------------- | -------------------------------------- | ----------------------------------- |
-  | `metric_type` | [Optional] The chosen distance metric. | See [Supported Metrics](metric.md). |
+  | 参数          | 说明                | 取值范围                                   |
+  | ------------- | ------------------- | ------------------------------------------ |
+  | `metric_type` | [可选] 距离计算方式 | 详见 [目前支持的距离计算方式](metric.md)。 |
 
 ### IVF_FLAT
 
-<a name="IVF_FLAT"></a>
+<a name="IVF_FLAT"></a>​
 
-IVF_FLAT divides vector data into `nlist` cluster units, and then compares distances between the target input vector and the center of each cluster. Depending on the number of clusters the system is set to query (`nprobe`), similarity search results are returned based on comparisons between the target input and the vectors in the most similar cluster(s) only — drastically reducing query time.
+IVF_FLAT 它通过聚类方法把空间里的点划分至 `nlist` 个单元，然后比较目标向量与所有单元中心的距离，选出 `nprobe` 个最近单元。然后比较这些被选中单元里的所有向量，得到最终的结果，极大地缩短了查询时间。 
 
-By adjusting `nprobe`, an ideal balance between accuracy and speed can be found for a given scenario. Results from our IVF_FLAT performance test demonstrate that query time increases sharply as both the number of target input vectors (`nq`), and the number of clusters to search (`nprobe`), increase. IVF_FLAT does not compress vector data however, index files include metadata that marginally increases storage requirements compared to the raw non-indexed vector dataset.
+通过调整 `nprobe`，可以找到特定场景下查询准确性和查询速度之间的理想平衡。IVF_FLAT 性能测试结果表明，随着目标输入向量的数量（`nq`）和需要检索的集群数量（`nprobe`）的增加，查询时间也急剧增加。
 
+IVF_FLAT 是最基础的 IVF 索引，存储在各个单元中的数据编码与原始数据一致。
 
- - Index building parameters
+- 建索引参数
 
-   | Parameter | Description             | Range      |
-   | --------- | ----------------------- | ---------- |
-   | `nlist`   | Number of cluster units | [1, 65536] |
+   | 参数   | 说明     | 取值范围     |
+   | ------- | -------- |----------- |
+   | `nlist` | 聚类单元数 |[1, 65536] |
+   
 
+- 查询参数
 
-- Search parameters
-
-  | Parameter | Description              | Range                                           |
-  | --------- | ------------------------ | ----------------------------------------------- |
-  | `nprobe`  | Number of units to query | CPU: [1, nlist] <br> GPU: [1, min(2048, nlist)] |
+   | 参数     | 说明        | 取值范围    |
+   | -------- | ----------- | ---------- |
+   | `nprobe` | 查询取的单元数 | [1, 65536] |
 
 ### IVF_SQ8
 
-<a name="IVF_SQ8"></a>
+<a name="IVF_SQ8"></a>​
 
-IVF_FLAT does not perform any compression, so the index files it produces are roughly the same size as the original, raw non-indexed vector data. For example, if the original 1B SIFT dataset is 476 GB, its IVF_FLAT index files will be slightly larger (~470 GB). Loading all the index files into memory will consume 470 GB of storage.
+由于 IVF_FLAT 未对原始的向量数据做任何压缩，IVF_FLAT 索引文件的大小与原始数据文件大小相当。例如 sift-1b 数据集原始数据文件的大小为 476 GB，生成的 IVF_FLAT 索引文件大小有 470 GB 左右，若将全部索引文件加载进内存，就需要 470 GB 的内存资源。
 
-When disk, CPU, or GPU memory resources are limited, IVF_SQ8 is a better option than IVF_FLAT. This index type can convert each FLOAT (4 bytes) to UINT8 (1 byte) by performing scalar quantization. This reduces disk, CPU, and GPU memory consumption by 70–75%. For the 1B SIFT dataset, the IVF_SQ8 index files require just 140 GB of storage.
+当磁盘或内存、显存资源有限时，IVF_SQ8 是一个更好的选择。它通过对向量进行标量量化（scalar quantization），能把原始向量中每个FLOAT（4 字节）转为UINT8（1 字节），从而可以把磁盘及内存、显存资源的消耗量减少为原来的 1/4 至 1/3。同样以 sift-1b 数据集为例，生成的 IVF_SQ8 索引文件只有 140 GB。
 
+- 建索引参数
 
- - Index building parameters
+   | 参数   | 说明     | 取值范围     |
+   | ------- | -------- |----------- |
+   | `nlist` | 聚类单元数 |[1, 65536] |
+   
 
-   | Parameter | Description             | Range      |
-   | --------- | ----------------------- | ---------- |
-   | `nlist`   | Number of cluster units | [1, 65536] |
+- 查询参数
 
-
-- Search parameters
-
-  | Parameter | Description              | Range                                           |
-  | --------- | ------------------------ | ----------------------------------------------- |
-  | `nprobe`  | Number of units to query | CPU: [1, nlist] <br> GPU: [1, min(2048, nlist)] |
-
+   | 参数     | 说明        | 取值范围    |
+   | -------- | ----------- | ---------- |
+   | `nprobe` | 查询取的单元数 | [1, nlist] |
+   
 ### IVF_PQ
 
 <a name="IVF_PQ"></a>
 
-`PQ` (Product Quantization) uniformly decomposes the original high-dimensional vector space into Cartesian products of `m` low-dimensional vector spaces, and then quantizes the decomposed low-dimensional vector spaces. Instead of calculating the distances between the target vector and the center of all the units, product quantization enables the calculation of distances between the target vector and the clustering center of each low-dimensional space and greatly reduces the time complexity and space complexity of the algorithm.
+`PQ`（Product Quantization，乘积量化）会将原来的高维向量空间均匀分解成 `m` 个低维向量空间的笛卡尔积，然后对分解得到的低维向量空间分别做矢量量化。最终每条向量会存储在 `m` × `nbits` 个 bit 位里。乘积量化能将全样本的距离计算转化为到各低维空间聚类中心的距离计算，从而大大降低算法的时间复杂度。
 
-IVF\_PQ performs IVF index clustering before quantizing the product of vectors. Its index file is even smaller than IVF\_SQ8, but it also causes a loss of accuracy during searching vectors.
-
-<div class="alert note">
-Index building parameters and search parameters vary with Milvus distribution. Select your Milvus distribution first.
-</div>
-
-
-
-<div class="filter">
-<a href="#CPU">CPU-only Milvus</a> <a href="#GPU">GPU-enabled Milvus </a>
-</div>
-
-
-
-<div class="filter-CPU" markdown="block">
-
-
-
-- Index building parameters
-
-  | Parameter | Description                               | Range           |
-  | --------- | ----------------------------------------- | --------------- |
-  | `nlist`   | Number of cluster units                   | [1, 65536]      |
-  | `m`       | Number of factors of product quantization | dim ≡ 0 (mod m) |
-
-- Search parameters
-
-  | Parameter | Description              | Range      |
-  | --------- | ------------------------ | ---------- |
-  | `nprobe`  | Number of units to query | [1, nlist] |
-
-</div>
-
-
-<div class="filter-GPU" markdown="block">
-
-
-
-- Index building parameters
-
-  | Parameter | Description                               | Range                                                        |
-  | --------- | ----------------------------------------- | ------------------------------------------------------------ |
-  | `nlist`   | Number of cluster units                   | [1, 65536]                                                   |
-  | `m`       | Number of factors of product quantization | `m` ∈ {1, 2, 3, 4, 8, 12, 16, 20, 24, 28, 32, 40, 48, 56, 64, 96}, and (dim / m) ∈ {1, 2, 3, 4, 6, 8, 10, 12, 16, 20, 24, 28, 32}.<br>(`m` x 1024) &ge; `MaxSharedMemPerBlock` of your graphics card. |
+IVF_PQ 是先对向量做乘积量化，然后进行 IVF 索引聚类。其索引文件甚至可以比 IVF_SQ8 更小，不过同样地也会导致查询时的精度损失。
 
 <div class="alert note">
-If the value of <code>m</code> does not fall into the specified range for GPU indexing but falls into the range of CPU indexing, Milvus switches to using CPU to build the index (click the button above to view the range supported by CPU-enabled Milvus).
-</div>
 
-
-
-- Search parameters
-
-  | Parameter | Description              | Range                 |
-  | --------- | ------------------------ | --------------------- |
-  | `nprobe`  | Number of units to query | [1, min(2048, nlist)] |
-
-<div class="alert note">
-If the value of <code>nprobe</code> does not fall into the specified range but falls into the range for CPU search, Milvus switches to CPU search (click the button above to view the range supported by CPU-enabled Milvus).
-</div>
-
-
+不同版本的建索引参数和查询参数设置不同，请根据使用的 Milvus 版本查看相应的参数信息。
 
 </div>
 
+- 建索引参数
+
+   | 参数   | 说明          | 取值范围     |
+   | --------| ------------- | ----------- |
+   | `nlist` | 聚类单元数　    | [1, 65536] |
+   | `m`     | 乘积量化因子个数 | dim ≡ 0 (mod m) |
+   | `nbits` | 分解后每个低维向量的存储位数 (可选) | [1, 16]（默认 8）|
+
+- 查询参数
+
+   | 参数   | 说明          | 取值范围     |
+   | -------- | ----------- | ---------- |
+   | `nprobe` | 查询取的单元数 | [1, nlist] |
+  
 ### RNSG
-
 <a name="RNSG"></a>
 
-RNSG (Refined Navigating Spreading-out Graph) is a graph-based indexing algorithm. It sets the center position of the whole image as a navigation point, and then uses a specific edge selection strategy to control the out-degree of each point (less than or equal to `out_degree`). Therefore, it can reduce memory usage and quickly locate the target position nearby during searching vectors.
+RNSG（Refined Navigating Spreading-out Graph）是一种基于图的索引算法。它把全图中心位置设为导航点，然后通过特定的选边策略来控制每个点的出度（小于等于 `out_degree`），使得搜索时既能减少内存使用，又能快速定位到目标位置附近。 
 
-The graph construction process of RNSG is as follows:
+RNSG 的建图流程如下：
 
-1. Find `knng` nearest neighbors for each point.
-2. Iterate at least `search_length` times based on `knng` nearest neighbor nodes to select `candidate_pool_size` possible nearest neighbor nodes.
-3. Construct the out-edge of each point in the selected `candidate_pool_size` nodes according to the edge selection strategy.
+1. 为每个点精确寻找 `knng` 个最近邻结点。
+2. 以 `knng` 个最近邻结点为基础迭代至少 `search_length` 次，以选出 `candidate_pool_size` 个可能的最邻近结点。
+3. 在选出的 `candidate_pool_size` 个结点里按择边策略构建每个点的出边。
 
-The query process is similar to the graph building process. It starts from the navigation point and iterate at least `search_length` times to get the final result. 
+RNSG 的查询流程与建图流程类似，以导航点为起点至少迭代 `search_length` 次以得到最终结果。
 
-- Index building parameters
+- 建索引参数
 
-  | Parameter             | Description                     | Range      |
-  | --------------------- | ------------------------------- | ---------- |
-  | `out_degree`          | Maximum out-degree of the node  | [5, 300]   |
-  | `candidate_pool_size` | Candidate pool size of the node | [50, 1000] |
-  | `search_length`       | Number of query iterations      | [10, 300]  |
-  | `knng`                | Number of nearest neighbors     | [5, 300]   |
+   | 参数                 | 说明                | 取值范围   |
+   | ----------------------| ------------------- | -------- |
+   | `out_degree`          | 结点的最大出度        | [5, 300]  |
+   | `candidate_pool_size` | 结点出边候选池 　     | [50, 1000] |
+   | `search_length`       | 查询迭代次数        　| [10, 300] |
+   | `knng`                | 预计算最近邻结点数   　| [5, 300] |
+   
 
-- Search parameters
+- 查询参数
 
-  | Parameter       | Description                | Range     |
-  | --------------- | -------------------------- | --------- |
-  | `search_length` | Number of query iterations | [10, 300] |
+   | 参数           | 说明        | 取值范围   |
+   | --------------- | ----------- | --------- |
+   | `search_length` | 查询迭代次数  | [10, 300] |
 
 
 ### HNSW
-
 <a name="HNSW"></a>
 
-HNSW (Hierarchical Navigable Small World Graph) is a graph-based indexing algorithm. It builds a multi-layer navigation structure for an image according to certain rules. In this structure, the upper layers are more sparse and the distances between nodes are farther; the lower layers are denser and the distances between nodes are closer. The search starts from the uppermost layer, finds the node closest to the target in this layer, and then enters the next layer to begin another search. After multiple iterations, it can quickly approach the target position.
-
-In order to improve performance, HNSW limits the maximum degree of nodes on each layer of the graph to `M`. In addition, you can use `efConstruction` (when building index) or `ef` (when searching targets) to specify a search range.
-
-- Index building parameters
-
-  | Parameter        | Description                | Range    |
-  | ---------------- | -------------------------- | -------- |
-  | `M`              | Maximum degree of the node | [4, 64]  |
-  | `efConstruction` | Search scope               | [8, 512] |
-
-
-- Search parameters
-
-  | Parameter | Description  | Range            |
-  | --------- | ------------ | ---------------- |
-  | `ef`      | Search scope | [`top_k`, 32768] |
-
-
-### ANNOY
-
-<a name="ANNOY"></a>
-
-ANNOY (Approximate Nearest Neighbors Oh Yeah) is an index that uses a hyperplane to divide a high-dimensional space into multiple subspaces, and then stores them in a tree structure.
-
-When searching for vectors, ANNOY follows the tree structure to find subspaces closer to the target vector, and then compares all the vectors in these subspaces (The number of vectors being compared should not be less than `search_k`) to obtain the final result. Obviously, when the target vector is close to the edge of a certain subspace, sometimes it is necessary to greatly increase the number of searched subspaces to obtain a high recall rate. Therefore, ANNOY uses `n_trees` different methods to divide the whole space, and searches all the dividing methods simultaneously to reduce the probability that the target vector is always at the edge of the subspace.
-
-
-- Index building parameters
-
-  | Parameter | Description                              | Range     |
-  | --------- | ---------------------------------------- | --------- |
-  | `n_trees` | The number of methods of space division. | [1, 1024] |
-
-- Search parameters
-
-  | Parameter  | Description                                                  | Range                           |
-  | ---------- | ------------------------------------------------------------ | ------------------------------- |
-  | `search_k` | The number of nodes to search. -1 means 5% of the whole data. | {-1} ∪ [`top_k`, n × `n_trees`] |
+HNSW（Hierarchical Small World Graph）是一种基于图的索引算法。它会为一张图按规则建成多层导航图，并让越上层的图越稀疏，结点间的距离越远；越下层的图越稠密，结点间的距离越近。搜索时从最上层开始，找到本层距离目标最近的结点后进入下一层再查找。如此迭代，快速逼近目标位置。
+  
+为了提高性能，HNSW 限定了每层图上结点的最大度数 `M` 。此外，建索引时可以用 `efConstruction`，查询时可以用 `ef` 来指定搜索范围。
 
 
 
-## FAQ
+- 建索引参数
 
+   | 参数            | 说明                | 取值范围   |
+   | ---------------- | ------------------ | --------- |
+   | `M`              | 结点的最大度数        | [4, 64]  |
+   | `efConstruction` | 搜索范围      | [8, 512] |
+
+- 查询参数
+
+   | 参数   | 说明            | 取值范围      |
+   | --------|--------------- | ------------ |
+   | `ef`    | 搜索范围  | [`top_k`, 32768] |
+
+
+### Annoy
+<a name="Annoy"></a>
+
+Annoy（Approximate Nearest Neighbors Oh Yeah）是一种用超平面把高维空间分割成多个子空间，并把这些子空间以树型结构存储的索引方式。
+
+在查询时，Annoy 会顺着树结构找到距离目标向量较近的一些子空间，然后比较这些子空间里的所有向量（要求比较的向量数不少于 `search_k` 个）以获得最终结果。显然，当目标向量靠近某个子空间的边缘时，有时需要大大增加搜索的子空间数以获得高召回率。因此，Annoy 会使用 `n_trees` 次不同的方法来划分全空间，并同时搜索所有划分方法以减少目标向量总是处于子空间边缘的概率。
+
+- 建索引参数
+
+   | 参数     | 说明     　    | 取值范围  |
+   | --------- |-------------- | -------- |
+   | `n_trees` | 空间划分的方法数 | [1, 1024] |
+
+- 查询参数
+
+   | 参数      | 说明                              | 取值范围          |
+   | -----------|--------------------------------- | ---------------- |
+   | `search_k` | 搜索的结点数。`-1` 表示用全数据量的 5% | {-1} ∪ [`top_k`, n × `n_trees`] |
+   
+## 常见问题
 
 <details>
-<summary><font color="#4fc4f9">What is the difference between FLAT index and IVF_FLAT index?</font></summary>
+<summary><font color="#4fc4f9">Milvus 中 FLAT 索引和 IVF_FLAT 索引的原理比较？</font></summary>
 <p>把 FLAT 和 IVF_FLAT 做比较，可以这么估算：</p>
 <p>
 已知 IVF_FLAT 索引是把向量分成 <code>nlist</code> 个单元。假设用默认的 <code>nlist</code> = 16384，搜索的时候是先用目标向量和这 16384 个中心点计算距离，得到最近的 <code>nprobe</code> 个单元，再在单元里计算最近向量。而 FLAT 是每条向量和目标向量计算距离。
@@ -300,10 +265,8 @@ When searching for vectors, ANNOY follows the tree structure to find subspaces c
 </p>
 </details>
 
+## 参考文献
 
-
-## Bibliography
-
-- RNSG: <a href="http://www.vldb.org/pvldb/vol12/p461-fu.pdf">Fast Approximate Nearest Neighbor Search With The Navigating Spreading-out Graph</a>
-- HNSW: <a href="https://arxiv.org/abs/1603.09320">Efficient and robust approximate nearest neighbor search using Hierarchical Navigable Small World graphs</a>
-- ANNOY: <a href="https://erikbern.com/2015/10/01/nearest-neighbors-and-vector-models-part-2-how-to-search-in-high-dimensional-spaces.html">Nearest neighbors and vector models – part 2 – algorithms and data structures</a>
+- RNSG：<a href="http://www.vldb.org/pvldb/vol12/p461-fu.pdf">Fast Approximate Nearest Neighbor Search With The Navigating Spreading-out Graph</a>
+- HNSW：<a href="https://arxiv.org/abs/1603.09320">Efficient and robust approximate nearest neighbor search using Hierarchical Navigable Small World graphs</a>
+- Annoy：<a href="https://erikbern.com/2015/10/01/nearest-neighbors-and-vector-models-part-2-how-to-search-in-high-dimensional-spaces.html">Nearest neighbors and vector models – part 2 – algorithms and data structures</a>
