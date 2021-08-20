@@ -222,7 +222,7 @@
       "title": "Overview",
       "label1": "userguide",
       "label2": "tools",
-      "label3": "insight",
+      "label3": "milvus_insight",
       "order": 0
     },
     {
@@ -230,7 +230,7 @@
       "title": "Install Milvus Insight",
       "label1": "userguide",
       "label2": "tools",
-      "label3": "insight",
+      "label3": "milvus_insight",
       "order": 1
     },
     {
