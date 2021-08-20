@@ -4,7 +4,7 @@
     "alt": "milvus community"
   },
   "mailingSection": {
-    "title": "Mailing Lists",
+    "title": "Mailing List",
     "list": [
       {
         "title": "Milvus Technical Discuss",
@@ -155,25 +155,60 @@
     "list": [
       {
         "label": "Github Discussion",
-        "link": "https://github.com/milvus-io/milvus/discussions",
+        "link": "https://github.com/milvus-io/milvus",
         "img": "../../assets/github.svg"
       },
       {
         "label": "Slack Channel",
-        "link": "https://slack.milvus.io/",
+        "link": "https://github.com/milvus-io/milvus",
         "img": "../../assets/slack.svg"
       },
       {
         "label": "Zoom Meeting",
-        "link": "#",
+        "link": "https://github.com/milvus-io/milvus",
         "img": "../../assets/zoom.svg"
       },
       {
         "label": "Social Media",
-        "link": "https://twitter.com/milvusio",
+        "link": "https://github.com/milvus-io/milvus",
         "img": "../../assets/twitter.svg"
       }
     ]
+  },
+  "contributorSection":{
+    "title": "Contributors",
+    "list":[
+    {
+      "avatar": "../../assets/gq_huang.png",
+      "name": "Guoqin Huang",
+      "company": "Vip.com",
+      "jobTitle": "Software Developer"
+    },
+    {
+      "avatar": "../../assets/tt_wang.png",
+      "name": "Tingting Wang",
+      "company": "Sohu",
+      "jobTitle": "NLP engineer"
+    },
+    {
+      "avatar": "../../assets/y_li.png",
+      "name": "Yang Li",
+      "company": "Focus Technology",
+      "jobTitle": "Software Developer"
+    },
+    {
+      "avatar": "../../assets/wei_huang.png",
+      "name": "Wei Huang",
+      "company": "TrendMicro",
+      "jobTitle": "Software Developer"
+    },
+    {
+      "avatar": "../../assets/az_wen.png",
+      "name": "Anzhe Wen",
+      "company": "Qichacha",
+      "jobTitle": "Software Developer"
+    }
+  ]
   },
   "resourceSection": {
     "title": "Resources",
@@ -181,21 +216,21 @@
       {
         "iconType": "event",
         "title": "Event",
-        "desc": "We host events, often. Click to find out the upcoming events near you.",
-        "link": "https://zilliz.com/events",
+        "desc": "Build the cloud-native vector database through community collaboration.",
+        "link": "#",
         "label": "MORE EVENTS"
       },
       {
         "iconType": "video",
         "title": "Video",
-        "desc": "We upload videos, often. Click to watch the video tutorials，webinar replays and other video contents.",
-        "link": "https://www.youtube.com/channel/UCMCo_F7pKjMHBlfyxwOPw-g",
+        "desc": "Build the cloud-native vector database through community collaboration.",
+        "link": "#",
         "label": "MORE VIDEOS"
       }
     ]
   },
   "partnerSection": {
-    "title": "Community Partners",
+    "title": "Community Partner",
     "list": [
       {
         "img": "../../assets/onnx.png",
