@@ -49,7 +49,7 @@ Now you can access Prometheus via http://localhost:9090, and Grafana via http://
 
 ## Enable ServiceMonitor with Milvus Helm Chart
 
-The ServiceMonitor is not enabled for Miluvs Helm by default. After installing Prometheus Operator in the Kubernetes cluster, you can enable it by adding `metrics.serviceMontior.enabled=true` parameter.
+The ServiceMonitor is not enabled for Milvus Helm by default. After installing Prometheus Operator in the Kubernetes cluster, you can enable it by adding `metrics.serviceMontior.enabled=true` parameter.
 
 ```
 helm install my-release milvus/milvus --set cluster.enabled=true --set metrics.serviceMonitor.enabled=true
