@@ -16,9 +16,9 @@ related_key: index
 ## 索引创建机制
 
 当 `create_index` 方法被调用时，Milvus 会同步为这个字段的现有数据创建索引。
-
+<div class="alert note">
 当插入的数据段少于 4096 行时，Milvus 不对其创建索引。
-
+</div>
 ### 数据段建索引
 
 Milvus 数据段存储海量数据。在建立索引时，Milvus 为每个数据段单独创建索引。
