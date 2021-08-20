@@ -35,9 +35,9 @@ import { MilvusClient } from "@zilliz/milvus2-sdk-node";
 const milvusClient = new MilvusClient("localhost:19530");
 ```
 
-## Close server connection
+## Disconnect from the Milvus server
 
-When you no longer need Milvus services, you can call `close()` to release all connection resources to the Milvus server:
+When you no longer need Milvus services, you can call `disconnect()` to release all connection resources to the Milvus server:
 
 <div class="multipleCode">
   <a href="?python">Python </a>

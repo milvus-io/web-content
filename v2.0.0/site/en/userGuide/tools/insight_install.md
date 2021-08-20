@@ -13,7 +13,11 @@ Ensure you have Milvus installed on [your server](https://milvus.io/docs/install
 Milvus Insight only supports Milvus 2.x.
 </div>
 
+<<<<<<< HEAD
+##  Start a Milvus insight instance
+=======
 ##  Start a Milvus Insight instance
+>>>>>>> f6eecb35b31137fbf58eb524b96f0a045f7ef3e1
 
 ```Apache
 docker run -p 8000:3000 -e HOST_URL=http://{ your machine IP }:8000 -e MILVUS_URL={your machine IP}:19530 milvusdb/milvus-insight:latest
