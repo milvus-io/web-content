@@ -196,6 +196,18 @@ collection 数量没有限制。每个 collection 内的 partition 总数不能�
 #### Milvus 支持的向量维度的最大值是多少？
 Milvus 最多能够支持 32,768 向量维度。
 
+#### 为什么 Milvus 对单次可插入的数据大小设置了 256MB 的上限？
+
+插入 Milvus 中的数据会被先写入内存。 这个限制是为了避免插入操作过度占用内存资源。
+
+#### Milvus 会批量合并多线程查询请求。 如何取消这个机制？
+
+你可以将以下内容添加至配置文件 **server_config.yaml** 中：
+
+```yaml
+engine_config:
+  search_combine_nq: 1
+```
 
 #### 仍有问题没有得到解答？
 
