@@ -3,7 +3,7 @@ id: build.md
 title: Build an Index for
 ---
 
-## Build an index
+# Build an index
 
 Create an index for a specified field in a collection to accelerate vector similarity search. See [Vector Index](index.md) for more information about setting index parameters.
 
