@@ -164,6 +164,34 @@ Milvus 对 collection 数量没有限制，但每个 collection 内的 partition
 
 Milvus 最多支持 32768 维向量。
 
+#### Milvus 是否支持 Apple M1 CPU？
+
+当前版本 Milvus 暂不支持 Apple M1 CPU。
+
+#### Milvus 支持何种 ID field 数据类型？
+
+在当前版本中，Milvus 仅支持 INT64 数据型。未来的 2.0 正式版将会同时支持 INT64 和 string 数据型。
+
+#### Milvus 支持扩缩容吗？
+
+支持。你可以通过 Helm Chart 在 Kubernetes 上部署多节点 Milvus 集群。更多相关说明，参考 [扩缩容指南](https://zilliverse.feishu.cn/docs/scaleout.md)。
+
+#### 查询是否在内存中执行？ 什么是增量数据和历史数据？
+
+是的。当收到查询请求时，Milvus 会将增量数据和历史数据共同加载至内存后进行搜索。增量数据来自尚未达到持久化阈值而缓存在内存中的 growing segment，而历史数据则来自已经持久化在对象存储中的 sealed segment。增量数据和历史数据共同构成了要搜索的整个数据集。
+
+#### Milvus 2.0 支持并行搜索吗？
+
+支持。 对于同一个集合上的查询，Milvus 会并行查询增量数据和历史数据，而对不同集合上的查询则是串行的。但由于历史数据可能是一个非常庞大的数据集，对历史数据的搜索相对更耗时，所以本质上是串行的。 Milvus 2.0 的正式版将改进这个问题。
+
+#### 为什么在对应的集合被删除后仍然保留 MinIO 中的数据？
+
+为了方便数据回滚，MinIO 中的数据被设计为保留一定时间。
+
+#### Milvus 是否支持 Pulsar 以外的消息引擎？
+
+未来 Milvus 2.0 将支持 Kafka。
+
 #### 仍有问题没有得到解答？
 
 如果仍有其他问题，你可以：
