@@ -82,7 +82,7 @@ The following table classifies the indexes that Milvus supports:
     <td><a href="#ANNOY">ANNOY</a></td>
     <td>Tree-based index</td>
     <td><ul>
-        <li>Low dimension vectors</li>
+        <li>Low-dimensional vectors</li>
         </ul></td>
   </tr>
 </tbody>
