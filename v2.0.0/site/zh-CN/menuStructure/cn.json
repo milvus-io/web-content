@@ -43,7 +43,7 @@
       "outLink": "https://wiki.lfaidata.foundation/pages/viewpage.action?pageId=43287103"
     },
     {
-      "id": "bootcamp",
+      "id": "bootcamp_about",
       "title": "训练营",
       "label1": "about",
       "label2": "",
@@ -227,7 +227,7 @@
       "outLink": "https://zilliz.com/sizing-tool"
     },
     {
-      "id": "bootcamp",
+      "id": "bootcamp_userguide",
       "title": "训练营",
       "label1": "userguide",
       "label2": "",
