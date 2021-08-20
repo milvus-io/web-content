@@ -4,7 +4,7 @@
     "alt": "milvus community"
   },
   "mailingSection": {
-    "title": "Mailing List",
+    "title": "Mailing Lists",
     "list": [
       {
         "title": "Milvus Technical Discuss",
@@ -150,31 +150,6 @@
       }
     }
   },
-  "joinSection": {
-    "title": "Join the community",
-    "list": [
-      {
-        "label": "Github Discussion",
-        "link": "https://github.com/milvus-io/milvus",
-        "img": "../../assets/github.svg"
-      },
-      {
-        "label": "Slack Channel",
-        "link": "https://github.com/milvus-io/milvus",
-        "img": "../../assets/slack.svg"
-      },
-      {
-        "label": "Zoom Meeting",
-        "link": "https://github.com/milvus-io/milvus",
-        "img": "../../assets/zoom.svg"
-      },
-      {
-        "label": "Social Media",
-        "link": "https://github.com/milvus-io/milvus",
-        "img": "../../assets/twitter.svg"
-      }
-    ]
-  },
   "contributorSection":{
     "title": "Contributors",
     "list":[
@@ -210,27 +185,52 @@
     }
   ]
   },
+  "joinSection": {
+    "title": "Join the community",
+    "list": [
+      {
+        "label": "Github Discussion",
+        "link": "https://github.com/milvus-io/milvus/discussions",
+        "img": "../../assets/github.svg"
+      },
+      {
+        "label": "Slack Channel",
+        "link": "https://slack.milvus.io/",
+        "img": "../../assets/slack.svg"
+      },
+      {
+        "label": "Zoom Meeting",
+        "link": "#",
+        "img": "../../assets/zoom.svg"
+      },
+      {
+        "label": "Social Media",
+        "link": "https://twitter.com/milvusio",
+        "img": "../../assets/twitter.svg"
+      }
+    ]
+  },
   "resourceSection": {
     "title": "Resources",
     "list": [
       {
         "iconType": "event",
         "title": "Event",
-        "desc": "Build the cloud-native vector database through community collaboration.",
-        "link": "#",
+        "desc": "We host events, often. Click to find out the upcoming events near you.",
+        "link": "https://zilliz.com/events",
         "label": "MORE EVENTS"
       },
       {
         "iconType": "video",
         "title": "Video",
-        "desc": "Build the cloud-native vector database through community collaboration.",
-        "link": "#",
+        "desc": "We upload videos, often. Click to watch the video tutorials，webinar replays and other video contents.",
+        "link": "https://www.youtube.com/channel/UCMCo_F7pKjMHBlfyxwOPw-g",
         "label": "MORE VIDEOS"
       }
     ]
   },
   "partnerSection": {
-    "title": "Community Partner",
+    "title": "Community Partners",
     "list": [
       {
         "img": "../../assets/onnx.png",
