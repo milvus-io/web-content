@@ -83,9 +83,6 @@ No. Milvus v2.0 has varied behavior. Data must be loaded to memory before search
 - If you do not know the exact partitions, call `load_collection()` before calling `search()`.
 - If you fail to load collections or partitions before searching, Milvus returns an error.
 
-#### Can multiple indexes be created for the same field in a collection?
-
-Yes. Multiple indexes can be built on the same field of a collection. However, each index must be assigned a unique name in the collection. If indexes are not given unique names, new ones overwrite old ones. Call `load_index()` to load a specified index to memory so that Milvus searches it.
 
 #### Can indexes be created after inserting vectors?
 

@@ -100,10 +100,6 @@ Entity ID 必须是非负的 64 位整型。
 - 如果不确定数据所在 partition，那么在调用 `search()` 方法前需先调用 `load_collection()` 方法。
 - 如果未在查询前加载 collection 或 partition 数据，Milvus 会报错。
 
-#### Milvus 支持在同一 collection 的同一字段上创建多个不同索引吗？
-
-支持。Milvus 支持在 collection 中的同一字段上创建多个索引，但必须给每个索引指定 collection 内唯一的索引名。如果出现索引重名的情况，后建的索引会覆盖之前构建的同名索引。调用 `load_index()` 方法可加载指定索引 ，在该索引上进行查询操作。
-
  
 
 #### Milvus 支持新增向量后再建索引吗？
@@ -162,7 +158,7 @@ Milvus 对 collection 数量没有限制，但每个 collection 内的 partition
 
 想要避免这种情况，可以尝试将 `nprobe` 设置为更大值，或者把 `nlist` 和 `topk` 设置为更小值。
 
-详见 [索引类型]()。
+详见 [索引类型](index.md)。
 
 #### Milvus 支持的向量维度的最大值是多少？
 
