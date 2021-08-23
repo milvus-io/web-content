@@ -39,7 +39,7 @@ Milvus Insight 提供以下功能：
 
 ![code_mode](../../../../assets/code_mode.png)
 
-了解如何 [安装 Milvus Insight](insight_install.md).
+了解如何 [安装 Milvus Insight](insight_install.md)。
 
 
 

@@ -18,7 +18,7 @@ Milvus Insight 仅支持 Milvus 2.0 或以上版本。
 docker run -p 8000:3000 -e HOST_URL=http://{ your machine IP }:8000 -e MILVUS_URL={your machine IP}:19530 milvusdb/milvus-insight:latest
 ```
 
-启动 Docker 后，打开浏览器并输入地址 *http://{ your machine IP }:8000* 以访问 Milvus Insight。
+启动 Docker 后，打开浏览器并输入地址 <i>http://{ your machine IP }:8000</i> 以访问 Milvus Insight。
 
 ![Insight_install](../../../../assets/insight_install.png)
 
