@@ -383,6 +383,14 @@
       "order": 2
     },
     {
+      "id": "data_processing.md",
+      "title": "关键路径",
+      "label1": "reference",
+      "label2": "architecture",
+      "label3": "",
+      "order": 3
+    },
+    {
       "id": "systemconfigurations",
       "title": "系统配置",
       "label1": "reference",

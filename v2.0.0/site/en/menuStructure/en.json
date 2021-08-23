@@ -399,6 +399,14 @@
       "order": 2
     },
     {
+      "id": "data_processing.md",
+      "title": "Data Processing",
+      "label1": "reference",
+      "label2": "architecture",
+      "label3": "",
+      "order": 3
+    },
+    {
       "id": "systemconfigurations",
       "title": "System Configurations",
       "label1": "reference",
