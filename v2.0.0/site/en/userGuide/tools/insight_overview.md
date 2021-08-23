@@ -11,6 +11,7 @@ title: Overview
 
 ## Features
 Milvus Insight is under rapid development and new features are added on a weekly basis. We will release a new version every time when a new feature is ready. 
+
 Below is the features we have to offer:
 
 - View milvus cluster statistics in a glance. (TBD)

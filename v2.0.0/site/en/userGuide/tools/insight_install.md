@@ -13,7 +13,6 @@ Ensure you have Milvus installed on [your server](https://milvus.io/docs/install
 Milvus Insight only supports Milvus 2.x.
 </div>
 
-
 ##  Start a Milvus Insight instance
 
 ```Apache

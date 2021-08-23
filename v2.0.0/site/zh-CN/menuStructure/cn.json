@@ -215,7 +215,23 @@
       "label2": "tools",
       "label3": "",
       "order": 0,
-      "outLink": "https://github.com/milvus-io/milvus-insight"
+      "isMenu": true
+    },
+    {
+      "id": "insight_overview.md",
+      "title": "简介",
+      "label1": "userguide",
+      "label2": "tools",
+      "label3": "milvus_insight",
+      "order": 0
+    },
+    {
+      "id": "insight_install.md",
+      "title": "安装 Milvus Insight",
+      "label1": "userguide",
+      "label2": "tools",
+      "label3": "milvus_insight",
+      "order": 1
     },
     {
       "id": "sizing",
