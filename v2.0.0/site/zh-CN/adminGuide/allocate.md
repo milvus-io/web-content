@@ -8,6 +8,7 @@ Generally, the resources you allocate to a Milvus cluster in production should b
 
 <div class="alert note">
 Run <code>kubectl describe nodes</code> to view the available resources on the instances that you have provisioned.
+</div>
 
 ## Allocate memory and CPU resources
 
