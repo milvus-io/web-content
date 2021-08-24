@@ -170,7 +170,7 @@
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Create partition in milvus collection</p>
+									<p>Create a partition in a collection.</p>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -188,13 +188,13 @@
 											</thead>
 											<tbody><tr>
 													<td align="left">collection_name</td>
-													<td align="left">string</td>
-													<td align="left">collection name</td>
+													<td align="left">String</td>
+													<td align="left">Collection name</td>
 												</tr>
 												<tr>
 													<td align="left">partition_name</td>
-													<td align="left">string</td>
-													<td align="left">partition name</td>
+													<td align="left">String</td>
+													<td align="left">Partition name</td>
 												</tr>
 										</tbody></table>
 									</div>
@@ -210,17 +210,17 @@
 								</thead>
 								<tbody><tr>
 										<td align="left">error_code</td>
-										<td align="left">error code number</td>
+										<td align="left">Error code number</td>
 									</tr>
 									<tr>
 										<td align="left">reason</td>
-										<td align="left">reason</td>
+										<td align="left">Error cause</td>
 									</tr>
 							</tbody></table>
 							<a href="#example" id="example" style="color: inherit; text-decoration: none;">
-								<h3>Example</h3>
+								<h4>Example</h4>
 							</a>
-							<pre><code><span style="color: #000000"> </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">milvusClient</span><span style="color: #000000">(</span><span style="color: #0070C1">MILUVS_IP</span><span style="color: #000000">).</span><span style="color: #001080">partitionManager</span><span style="color: #000000">.</span><span style="color: #795E26">createPartition</span><span style="color: #000000">({</span>
+							<pre><code><span style="color: #000000"> </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">milvusClient</span><span style="color: #000000">(</span><span style="color: #0070C1">MILUVS_ADDRESS</span><span style="color: #000000">).</span><span style="color: #001080">partitionManager</span><span style="color: #000000">.</span><span style="color: #795E26">createPartition</span><span style="color: #000000">({</span>
 <span style="color: #000000">    </span><span style="color: #001080">collection_name:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;my_collection&#039;</span><span style="color: #000000">,</span>
 <span style="color: #000000">    </span><span style="color: #001080">partition_name:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;my_partition&#039;</span><span style="color: #000000">,</span>
 <span style="color: #000000"> });</span>
@@ -243,7 +243,7 @@
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Drop partition will drop all data in this partition and the _default partition can not dropped.</p>
+									<p>To drop a partition will drop all data in this partition and the <code>_default</code> partition cannot be dropped.</p>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -261,13 +261,13 @@
 											</thead>
 											<tbody><tr>
 													<td align="left">collection_name</td>
-													<td align="left">string</td>
-													<td align="left">collection name</td>
+													<td align="left">String</td>
+													<td align="left">Collection name</td>
 												</tr>
 												<tr>
 													<td align="left">partition_name</td>
-													<td align="left">string</td>
-													<td align="left">partition name</td>
+													<td align="left">String</td>
+													<td align="left">Partition name</td>
 												</tr>
 										</tbody></table>
 									</div>
@@ -283,17 +283,17 @@
 								</thead>
 								<tbody><tr>
 										<td align="left">error_code</td>
-										<td align="left">error code number</td>
+										<td align="left">Error code number</td>
 									</tr>
 									<tr>
 										<td align="left">reason</td>
-										<td align="left">reason</td>
+										<td align="left">Error cause</td>
 									</tr>
 							</tbody></table>
 							<a href="#example" id="example" style="color: inherit; text-decoration: none;">
-								<h3>Example</h3>
+								<h4>Example</h4>
 							</a>
-							<pre><code><span style="color: #000000"> </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">milvusClient</span><span style="color: #000000">(</span><span style="color: #0070C1">MILUVS_IP</span><span style="color: #000000">).</span><span style="color: #001080">partitionManager</span><span style="color: #000000">.</span><span style="color: #795E26">dropPartition</span><span style="color: #000000">({</span>
+							<pre><code><span style="color: #000000"> </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">milvusClient</span><span style="color: #000000">(</span><span style="color: #0070C1">MILUVS_ADDRESS</span><span style="color: #000000">).</span><span style="color: #001080">partitionManager</span><span style="color: #000000">.</span><span style="color: #795E26">dropPartition</span><span style="color: #000000">({</span>
 <span style="color: #000000">    </span><span style="color: #001080">collection_name:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;my_collection&#039;</span><span style="color: #000000">,</span>
 <span style="color: #000000">    </span><span style="color: #001080">partition_name:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;my_partition&#039;</span><span style="color: #000000">,</span>
 <span style="color: #000000"> });</span>
@@ -316,7 +316,7 @@
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Get partition statistics for one partition.</p>
+									<p>Show the statistics information of a partition.</p>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -334,13 +334,13 @@
 											</thead>
 											<tbody><tr>
 													<td align="left">collection_name</td>
-													<td align="left">string</td>
-													<td align="left">collection name</td>
+													<td align="left">String</td>
+													<td align="left">Collection name</td>
 												</tr>
 												<tr>
 													<td align="left">partition_name</td>
-													<td align="left">string</td>
-													<td align="left">partition name</td>
+													<td align="left">String</td>
+													<td align="left">Partition name</td>
 												</tr>
 										</tbody></table>
 									</div>
@@ -356,21 +356,21 @@
 								</thead>
 								<tbody><tr>
 										<td align="left">status</td>
-										<td align="left">{ error_code: number,reason:string }</td>
+										<td align="left">{ error_code: number, reason: string }</td>
 									</tr>
 									<tr>
 										<td align="left">stats</td>
-										<td align="left">[{key: string,value:string}]</td>
+										<td align="left">[{key: string, value: string}]</td>
 									</tr>
 									<tr>
 										<td align="left">data</td>
-										<td align="left">transform <strong>stats</strong> to { row_count: 0 }</td>
+										<td align="left">{ row_count: 0 } transformed from <strong>stats</strong></td>
 									</tr>
 							</tbody></table>
 							<a href="#example" id="example" style="color: inherit; text-decoration: none;">
-								<h3>Example</h3>
+								<h4>Example</h4>
 							</a>
-							<pre><code><span style="color: #000000"> </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">milvusClient</span><span style="color: #000000">(</span><span style="color: #0070C1">MILUVS_IP</span><span style="color: #000000">).</span><span style="color: #001080">partitionManager</span><span style="color: #000000">.</span><span style="color: #795E26">getPartitionStatistics</span><span style="color: #000000">({</span>
+							<pre><code><span style="color: #000000"> </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">milvusClient</span><span style="color: #000000">(</span><span style="color: #0070C1">MILUVS_ADDRESS</span><span style="color: #000000">).</span><span style="color: #001080">partitionManager</span><span style="color: #000000">.</span><span style="color: #795E26">getPartitionStatistics</span><span style="color: #000000">({</span>
 <span style="color: #000000">    </span><span style="color: #001080">collection_name:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;my_collection&#039;</span><span style="color: #000000">,</span>
 <span style="color: #000000">    </span><span style="color: #001080">partition_name:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;_default&quot;</span><span style="color: #000000">,</span>
 <span style="color: #000000"> });</span>
@@ -393,7 +393,7 @@
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Check partition exist or not in one collection</p>
+									<p>Check if a partition exists in a collection.</p>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -412,12 +412,12 @@
 											<tbody><tr>
 													<td align="left">collection_name</td>
 													<td align="left">string</td>
-													<td align="left">collection name</td>
+													<td align="left">Collection name</td>
 												</tr>
 												<tr>
 													<td align="left">partition_name</td>
 													<td align="left">string</td>
-													<td align="left">parititon name</td>
+													<td align="left">Parititon name</td>
 												</tr>
 										</tbody></table>
 									</div>
@@ -437,13 +437,13 @@
 									</tr>
 									<tr>
 										<td align="left">value</td>
-										<td align="left">true or false</td>
+										<td align="left"><code>true</code> or <code>false</code></td>
 									</tr>
 							</tbody></table>
 							<a href="#example" id="example" style="color: inherit; text-decoration: none;">
-								<h3>Example</h3>
+								<h4>Example</h4>
 							</a>
-							<pre><code><span style="color: #000000"> </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">milvusClient</span><span style="color: #000000">(</span><span style="color: #0070C1">MILUVS_IP</span><span style="color: #000000">).</span><span style="color: #001080">partitionManager</span><span style="color: #000000">.</span><span style="color: #795E26">hasPartition</span><span style="color: #000000">({</span>
+							<pre><code><span style="color: #000000"> </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">milvusClient</span><span style="color: #000000">(</span><span style="color: #0070C1">MILUVS_ADDRESS</span><span style="color: #000000">).</span><span style="color: #001080">partitionManager</span><span style="color: #000000">.</span><span style="color: #795E26">hasPartition</span><span style="color: #000000">({</span>
 <span style="color: #000000">    </span><span style="color: #001080">collection_name:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;my_collection&#039;</span><span style="color: #000000">,</span>
 <span style="color: #000000">    </span><span style="color: #001080">partition_name:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;my_partition&#039;</span><span style="color: #000000">,</span>
 <span style="color: #000000"> });</span>
@@ -466,7 +466,7 @@
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Load partition data into cache</p>
+									<p>Load a partition into cache.</p>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -484,13 +484,13 @@
 											</thead>
 											<tbody><tr>
 													<td align="left">collection_name</td>
-													<td align="left">string</td>
-													<td align="left">collection name</td>
+													<td align="left">String</td>
+													<td align="left">Collection name</td>
 												</tr>
 												<tr>
 													<td align="left">partition_names</td>
-													<td align="left">string[]</td>
-													<td align="left">partition name array</td>
+													<td align="left">String[]</td>
+													<td align="left">Array of partition names</td>
 												</tr>
 										</tbody></table>
 									</div>
@@ -506,17 +506,17 @@
 								</thead>
 								<tbody><tr>
 										<td align="left">error_code</td>
-										<td align="left">error code number</td>
+										<td align="left">Error code number</td>
 									</tr>
 									<tr>
 										<td align="left">reason</td>
-										<td align="left">reason</td>
+										<td align="left">Error cause</td>
 									</tr>
 							</tbody></table>
 							<a href="#example" id="example" style="color: inherit; text-decoration: none;">
-								<h3>Example</h3>
+								<h4>Example</h4>
 							</a>
-							<pre><code><span style="color: #000000"> </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">milvusClient</span><span style="color: #000000">(</span><span style="color: #0070C1">MILUVS_IP</span><span style="color: #000000">).</span><span style="color: #001080">partitionManager</span><span style="color: #000000">.</span><span style="color: #795E26">loadPartitions</span><span style="color: #000000">({</span>
+							<pre><code><span style="color: #000000"> </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">milvusClient</span><span style="color: #000000">(</span><span style="color: #0070C1">MILUVS_ADDRESS</span><span style="color: #000000">).</span><span style="color: #001080">partitionManager</span><span style="color: #000000">.</span><span style="color: #795E26">loadPartitions</span><span style="color: #000000">({</span>
 <span style="color: #000000">    </span><span style="color: #001080">collection_name:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;my_collection&#039;</span><span style="color: #000000">,</span>
 <span style="color: #000000">    </span><span style="color: #001080">partition_names:</span><span style="color: #000000"> [</span><span style="color: #A31515">&#039;my_partition&#039;</span><span style="color: #000000">],</span>
 <span style="color: #000000"> });</span>
@@ -539,7 +539,7 @@
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Release partition data into cache</p>
+									<p>Release a partition from cache.</p>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -557,13 +557,13 @@
 											</thead>
 											<tbody><tr>
 													<td align="left">collection_name</td>
-													<td align="left">string</td>
-													<td align="left">collection name</td>
+													<td align="left">String</td>
+													<td align="left">Collection name</td>
 												</tr>
 												<tr>
 													<td align="left">partition_names</td>
-													<td align="left">string[]</td>
-													<td align="left">partition name array</td>
+													<td align="left">String[]</td>
+													<td align="left">Array of partition names</td>
 												</tr>
 										</tbody></table>
 									</div>
@@ -579,17 +579,17 @@
 								</thead>
 								<tbody><tr>
 										<td align="left">error_code</td>
-										<td align="left">error code number</td>
+										<td align="left">Error code number</td>
 									</tr>
 									<tr>
 										<td align="left">reason</td>
-										<td align="left">reason</td>
+										<td align="left">Error cause</td>
 									</tr>
 							</tbody></table>
 							<a href="#example" id="example" style="color: inherit; text-decoration: none;">
-								<h3>Example</h3>
+								<h4>Example</h4>
 							</a>
-							<pre><code><span style="color: #000000"> </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">milvusClient</span><span style="color: #000000">(</span><span style="color: #0070C1">MILUVS_IP</span><span style="color: #000000">).</span><span style="color: #001080">partitionManager</span><span style="color: #000000">.</span><span style="color: #795E26">releasePartitions</span><span style="color: #000000">({</span>
+							<pre><code><span style="color: #000000"> </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">milvusClient</span><span style="color: #000000">(</span><span style="color: #0070C1">MILUVS_ADDRESS</span><span style="color: #000000">).</span><span style="color: #001080">partitionManager</span><span style="color: #000000">.</span><span style="color: #795E26">releasePartitions</span><span style="color: #000000">({</span>
 <span style="color: #000000">    </span><span style="color: #001080">collection_name:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;my_collection&#039;</span><span style="color: #000000">,</span>
 <span style="color: #000000">    </span><span style="color: #001080">partition_names:</span><span style="color: #000000"> [</span><span style="color: #A31515">&#039;my_partition&#039;</span><span style="color: #000000">],</span>
 <span style="color: #000000"> });</span>
@@ -612,7 +612,7 @@
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Show all partitions in one collection</p>
+									<p>Show all partitions in a collection.</p>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -630,8 +630,8 @@
 											</thead>
 											<tbody><tr>
 													<td align="left">collection_name</td>
-													<td align="left">string</td>
-													<td align="left">collection name</td>
+													<td align="left">String</td>
+													<td align="left">Collection name</td>
 												</tr>
 										</tbody></table>
 									</div>
@@ -647,21 +647,21 @@
 								</thead>
 								<tbody><tr>
 										<td align="left">status</td>
-										<td align="left">{ error_code: number,reason:string }</td>
+										<td align="left">{ error_code: number, reason: string }</td>
 									</tr>
 									<tr>
 										<td align="left">partition_names</td>
-										<td align="left">partition name array</td>
+										<td align="left">Array of partition names</td>
 									</tr>
 									<tr>
 										<td align="left">partitionIDs</td>
-										<td align="left">partition id array</td>
+										<td align="left">Array of partition IDs</td>
 									</tr>
 							</tbody></table>
 							<a href="#example" id="example" style="color: inherit; text-decoration: none;">
-								<h3>Example</h3>
+								<h4>Example</h4>
 							</a>
-							<pre><code><span style="color: #000000"> </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">milvusClient</span><span style="color: #000000">(</span><span style="color: #0070C1">MILUVS_IP</span><span style="color: #000000">).</span><span style="color: #001080">partitionManager</span><span style="color: #000000">.</span><span style="color: #795E26">showPartitions</span><span style="color: #000000">({</span>
+							<pre><code><span style="color: #000000"> </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">milvusClient</span><span style="color: #000000">(</span><span style="color: #0070C1">MILUVS_ADDRESS</span><span style="color: #000000">).</span><span style="color: #001080">partitionManager</span><span style="color: #000000">.</span><span style="color: #795E26">showPartitions</span><span style="color: #000000">({</span>
 <span style="color: #000000">    </span><span style="color: #001080">collection_name:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;my_collection&#039;</span><span style="color: #000000">,</span>
 <span style="color: #000000"> });</span>
 </code></pre>

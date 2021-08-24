@@ -163,12 +163,12 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in MilvusIndex.ts:59</li>
+									<li>Defined in MilvusIndex.ts:50</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Create index on vector field, it will be async progress.</p>
+									<p>Create an index on a vector field. Note that index building is an async progress.</p>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -186,18 +186,18 @@
 											</thead>
 											<tbody><tr>
 													<td align="left">collection_name</td>
-													<td align="left">string</td>
-													<td align="left">collection name</td>
+													<td align="left">String</td>
+													<td align="left">Collection name</td>
 												</tr>
 												<tr>
 													<td align="left">field_name</td>
-													<td align="left">string</td>
-													<td align="left">field name</td>
+													<td align="left">String</td>
+													<td align="left">Field name</td>
 												</tr>
 												<tr>
 													<td align="left">extra_params</td>
-													<td align="left">CreateIndexParam[]</td>
-													<td align="left">parameters: {key: &quot;index_type&quot; | &quot;metric_type&quot; | &quot;params&quot;;value:string}</td>
+													<td align="left">Object</td>
+													<td align="left">Parameters: { index_type: string; metric_type: string; params: string; };</td>
 												</tr>
 										</tbody></table>
 									</div>
@@ -213,35 +213,25 @@
 								</thead>
 								<tbody><tr>
 										<td align="left">error_code</td>
-										<td align="left">error code number</td>
+										<td align="left">Error code number</td>
 									</tr>
 									<tr>
 										<td align="left">reason</td>
-										<td align="left">reason</td>
+										<td align="left">Error cause</td>
 									</tr>
 							</tbody></table>
 							<a href="#example" id="example" style="color: inherit; text-decoration: none;">
-								<h3>Example</h3>
+								<h4>Example</h4>
 							</a>
-							<pre><code><span style="color: #000000"> </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">milvusClient</span><span style="color: #000000">(</span><span style="color: #0070C1">MILUVS_IP</span><span style="color: #000000">).</span><span style="color: #001080">collectionManager</span><span style="color: #000000">.</span><span style="color: #795E26">createIndex</span><span style="color: #000000">({</span>
+							<pre><code><span style="color: #000000"> </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">milvusClient</span><span style="color: #000000">(</span><span style="color: #0070C1">MILUVS_ADDRESS</span><span style="color: #000000">).</span><span style="color: #001080">collectionManager</span><span style="color: #000000">.</span><span style="color: #795E26">createIndex</span><span style="color: #000000">({</span>
 <span style="color: #000000">    </span><span style="color: #001080">collection_name:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;my_collection&#039;</span><span style="color: #000000">,</span>
 <span style="color: #000000">    </span><span style="color: #001080">field_name:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;vector_01&quot;</span><span style="color: #000000">,</span>
-
-<span style="color: #000000">    </span><span style="color: #001080">extra_params:</span><span style="color: #000000"> [</span>
-<span style="color: #000000">      {</span>
-<span style="color: #000000">        </span><span style="color: #001080">key:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;index_type&quot;</span><span style="color: #000000">,</span>
-<span style="color: #000000">        </span><span style="color: #001080">value:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;BIN_IVF_FLAT&quot;</span><span style="color: #000000">,</span>
-<span style="color: #000000">      },</span>
-<span style="color: #000000">      {</span>
-<span style="color: #000000">        </span><span style="color: #001080">key:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;metric_type&quot;</span><span style="color: #000000">,</span>
-<span style="color: #000000">        </span><span style="color: #001080">value:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;HAMMING&quot;</span><span style="color: #000000">,</span>
-<span style="color: #000000">      },</span>
-<span style="color: #000000">      {</span>
-<span style="color: #000000">        </span><span style="color: #001080">key:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;params&quot;</span><span style="color: #000000">,</span>
-<span style="color: #000000">        </span><span style="color: #001080">value:</span><span style="color: #000000"> </span><span style="color: #267F99">JSON</span><span style="color: #000000">.</span><span style="color: #795E26">stringify</span><span style="color: #000000">({ </span><span style="color: #001080">nlist:</span><span style="color: #000000"> </span><span style="color: #098658">1024</span><span style="color: #000000"> }),</span>
-<span style="color: #000000">      },</span>
-<span style="color: #000000">    ],</span>
-<span style="color: #000000">  });</span>
+<span style="color: #000000">    </span><span style="color: #001080">extra_params:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">      </span><span style="color: #001080">index_type:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;IVF_FLAT&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">      </span><span style="color: #001080">metric_type:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;IP&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">      </span><span style="color: #001080">params:</span><span style="color: #000000"> </span><span style="color: #267F99">JSON</span><span style="color: #000000">.</span><span style="color: #795E26">stringify</span><span style="color: #000000">({ </span><span style="color: #001080">nlist:</span><span style="color: #000000"> </span><span style="color: #098658">10</span><span style="color: #000000"> }),</span>
+<span style="color: #000000">    },</span>
+<span style="color: #000000"> });</span>
 </code></pre>
 						</li>
 					</ul>
@@ -256,12 +246,12 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in MilvusIndex.ts:87</li>
+									<li>Defined in MilvusIndex.ts:82</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Get index information, only get latest index for now.</p>
+									<p>Show index information. Current release of Milvus only supports showing latest built index.</p>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -279,8 +269,8 @@
 											</thead>
 											<tbody><tr>
 													<td align="left">collection_name</td>
-													<td align="left">string</td>
-													<td align="left">collection name</td>
+													<td align="left">String</td>
+													<td align="left">Collection name</td>
 												</tr>
 										</tbody></table>
 									</div>
@@ -296,17 +286,17 @@
 								</thead>
 								<tbody><tr>
 										<td align="left">status</td>
-										<td align="left">{ error_code: number,reason:string }</td>
+										<td align="left">{ error_code: number, reason: string }</td>
 									</tr>
 									<tr>
 										<td align="left">index_descriptions</td>
-										<td align="left">index information</td>
+										<td align="left">Index information</td>
 									</tr>
 							</tbody></table>
 							<a href="#example" id="example" style="color: inherit; text-decoration: none;">
-								<h3>Example</h3>
+								<h4>Example</h4>
 							</a>
-							<pre><code><span style="color: #000000"> </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">milvusClient</span><span style="color: #000000">(</span><span style="color: #0070C1">MILUVS_IP</span><span style="color: #000000">).</span><span style="color: #001080">indexManager</span><span style="color: #000000">.</span><span style="color: #795E26">describeIndex</span><span style="color: #000000">({</span>
+							<pre><code><span style="color: #000000"> </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">milvusClient</span><span style="color: #000000">(</span><span style="color: #0070C1">MILUVS_ADDRESS</span><span style="color: #000000">).</span><span style="color: #001080">indexManager</span><span style="color: #000000">.</span><span style="color: #795E26">describeIndex</span><span style="color: #000000">({</span>
 <span style="color: #000000">    </span><span style="color: #001080">collection_name:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;my_collection&#039;</span><span style="color: #000000">,</span>
 <span style="color: #000000"> });</span>
 </code></pre>
@@ -323,12 +313,12 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in MilvusIndex.ts:178</li>
+									<li>Defined in MilvusIndex.ts:173</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Drop index</p>
+									<p>Drop an index.</p>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -346,8 +336,8 @@
 											</thead>
 											<tbody><tr>
 													<td align="left">collection_name</td>
-													<td align="left">string</td>
-													<td align="left">collection name</td>
+													<td align="left">String</td>
+													<td align="left">Collection name</td>
 												</tr>
 										</tbody></table>
 									</div>
@@ -363,17 +353,17 @@
 								</thead>
 								<tbody><tr>
 										<td align="left">error_code</td>
-										<td align="left">error code number</td>
+										<td align="left">Error code number</td>
 									</tr>
 									<tr>
 										<td align="left">reason</td>
-										<td align="left">reason</td>
+										<td align="left">Error cause</td>
 									</tr>
 							</tbody></table>
 							<a href="#example" id="example" style="color: inherit; text-decoration: none;">
-								<h3>Example</h3>
+								<h4>Example</h4>
 							</a>
-							<pre><code><span style="color: #000000"> </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">milvusClient</span><span style="color: #000000">(</span><span style="color: #0070C1">MILUVS_IP</span><span style="color: #000000">).</span><span style="color: #001080">indexManager</span><span style="color: #000000">.</span><span style="color: #795E26">dropIndex</span><span style="color: #000000">({</span>
+							<pre><code><span style="color: #000000"> </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">milvusClient</span><span style="color: #000000">(</span><span style="color: #0070C1">MILUVS_ADDRESS</span><span style="color: #000000">).</span><span style="color: #001080">indexManager</span><span style="color: #000000">.</span><span style="color: #795E26">dropIndex</span><span style="color: #000000">({</span>
 <span style="color: #000000">    </span><span style="color: #001080">collection_name:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;my_collection&#039;</span><span style="color: #000000">,</span>
 <span style="color: #000000"> });</span>
 </code></pre>
@@ -390,12 +380,12 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in MilvusIndex.ts:146</li>
+									<li>Defined in MilvusIndex.ts:141</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Get index building progress.</p>
+									<p>Show index building progress.</p>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -413,8 +403,8 @@
 											</thead>
 											<tbody><tr>
 													<td align="left">collection_name</td>
-													<td align="left">string</td>
-													<td align="left">collection name</td>
+													<td align="left">String</td>
+													<td align="left">Collection name</td>
 												</tr>
 										</tbody></table>
 									</div>
@@ -430,21 +420,21 @@
 								</thead>
 								<tbody><tr>
 										<td align="left">status</td>
-										<td align="left">{ error_code: number,reason:string }</td>
+										<td align="left">{ error_code: number, reason: string }</td>
 									</tr>
 									<tr>
 										<td align="left">indexed_rows</td>
-										<td align="left">building index success row count</td>
+										<td align="left">Row count that successfully built with index</td>
 									</tr>
 									<tr>
 										<td align="left">total_rows</td>
-										<td align="left">total row count</td>
+										<td align="left">Total row count</td>
 									</tr>
 							</tbody></table>
 							<a href="#example" id="example" style="color: inherit; text-decoration: none;">
-								<h3>Example</h3>
+								<h4>Example</h4>
 							</a>
-							<pre><code><span style="color: #000000"> </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">milvusClient</span><span style="color: #000000">(</span><span style="color: #0070C1">MILUVS_IP</span><span style="color: #000000">).</span><span style="color: #001080">indexManager</span><span style="color: #000000">.</span><span style="color: #795E26">getIndexBuildProgress</span><span style="color: #000000">({</span>
+							<pre><code><span style="color: #000000"> </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">milvusClient</span><span style="color: #000000">(</span><span style="color: #0070C1">MILUVS_ADDRESS</span><span style="color: #000000">).</span><span style="color: #001080">indexManager</span><span style="color: #000000">.</span><span style="color: #795E26">getIndexBuildProgress</span><span style="color: #000000">({</span>
 <span style="color: #000000">    </span><span style="color: #001080">collection_name:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;my_collection&#039;</span><span style="color: #000000">,</span>
 <span style="color: #000000"> });</span>
 </code></pre>
@@ -461,12 +451,12 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in MilvusIndex.ts:115</li>
+									<li>Defined in MilvusIndex.ts:110</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Get index building state</p>
+									<p>Show index building state.</p>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -485,7 +475,7 @@
 											<tbody><tr>
 													<td align="left">collection_name</td>
 													<td align="left">string</td>
-													<td align="left">collection name</td>
+													<td align="left">Collection name</td>
 												</tr>
 										</tbody></table>
 									</div>
@@ -501,17 +491,17 @@
 								</thead>
 								<tbody><tr>
 										<td align="left">status</td>
-										<td align="left">{ error_code: number,reason:string }</td>
+										<td align="left">{ error_code: number, reason: string }</td>
 									</tr>
 									<tr>
 										<td align="left">state</td>
-										<td align="left">index building state</td>
+										<td align="left">Index building state</td>
 									</tr>
 							</tbody></table>
 							<a href="#example" id="example" style="color: inherit; text-decoration: none;">
-								<h3>Example</h3>
+								<h4>Example</h4>
 							</a>
-							<pre><code><span style="color: #000000"> </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">milvusClient</span><span style="color: #000000">(</span><span style="color: #0070C1">MILUVS_IP</span><span style="color: #000000">).</span><span style="color: #001080">indexManager</span><span style="color: #000000">.</span><span style="color: #795E26">getIndexState</span><span style="color: #000000">({</span>
+							<pre><code><span style="color: #000000"> </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">milvusClient</span><span style="color: #000000">(</span><span style="color: #0070C1">MILUVS_ADDRESS</span><span style="color: #000000">).</span><span style="color: #001080">indexManager</span><span style="color: #000000">.</span><span style="color: #795E26">getIndexState</span><span style="color: #000000">({</span>
 <span style="color: #000000">    </span><span style="color: #001080">collection_name:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;my_collection&#039;</span><span style="color: #000000">,</span>
 <span style="color: #000000"> });</span>
 </code></pre>

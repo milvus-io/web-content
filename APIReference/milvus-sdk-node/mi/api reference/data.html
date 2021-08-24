@@ -124,7 +124,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides Client.constructor</p>
 								<ul>
-									<li>Defined in Data.ts:28</li>
+									<li>Defined in Data.ts:29</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -160,7 +160,7 @@
 					<div class="tsd-signature tsd-kind-icon">collection<wbr>Manager<span class="tsd-signature-symbol">:</span> <a href="collection.collection-1.html" class="tsd-signature-type" data-tsd-kind="Class">Collection</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in Data.ts:28</li>
+							<li>Defined in Data.ts:29</li>
 						</ul>
 					</aside>
 				</section>
@@ -170,7 +170,7 @@
 					<div class="tsd-signature tsd-kind-icon">vector<wbr>Types<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in Data.ts:27</li>
+							<li>Defined in Data.ts:28</li>
 						</ul>
 					</aside>
 				</section>
@@ -187,12 +187,12 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in Data.ts:355</li>
+									<li>Defined in Data.ts:356</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Milvus temporarily stores the inserted vectors in the memory. Call flush() to flush them to the disk.</p>
+									<p>Milvus temporarily buffers the newly inserted vectors in the cache. Call <code>flush()</code> to persist them to the object storage.</p>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -210,8 +210,8 @@
 											</thead>
 											<tbody><tr>
 													<td align="left">collection_names</td>
-													<td align="left">string[]</td>
-													<td align="left">collection name array</td>
+													<td align="left">String[]</td>
+													<td align="left">Array of collection names</td>
 												</tr>
 										</tbody></table>
 									</div>
@@ -227,13 +227,13 @@
 								</thead>
 								<tbody><tr>
 										<td align="left">status</td>
-										<td align="left">{ error_code: number,reason:string }</td>
+										<td align="left">{ error_code: number, reason: string }</td>
 									</tr>
 							</tbody></table>
 							<a href="#example" id="example" style="color: inherit; text-decoration: none;">
-								<h3>Example</h3>
+								<h4>Example</h4>
 							</a>
-							<pre><code><span style="color: #000000"> </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">milvusClient</span><span style="color: #000000">(</span><span style="color: #0070C1">MILUVS_IP</span><span style="color: #000000">).</span><span style="color: #001080">dataManager</span><span style="color: #000000">.</span><span style="color: #795E26">flush</span><span style="color: #000000">({</span>
+							<pre><code><span style="color: #000000"> </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">milvusClient</span><span style="color: #000000">(</span><span style="color: #0070C1">MILUVS_ADDRESS</span><span style="color: #000000">).</span><span style="color: #001080">dataManager</span><span style="color: #000000">.</span><span style="color: #795E26">flush</span><span style="color: #000000">({</span>
 <span style="color: #000000">    </span><span style="color: #001080">collection_names:</span><span style="color: #000000"> [</span><span style="color: #A31515">&#039;my_collection&#039;</span><span style="color: #000000">],</span>
 <span style="color: #000000"> });</span>
 </code></pre>
@@ -250,12 +250,12 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in Data.ts:68</li>
+									<li>Defined in Data.ts:69</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Insert data into milvus.</p>
+									<p>Insert data into Milvus.</p>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -273,23 +273,23 @@
 											</thead>
 											<tbody><tr>
 													<td align="left">collection_name</td>
-													<td align="left">string</td>
-													<td align="left">collection name</td>
+													<td align="left">String</td>
+													<td align="left">Collection name</td>
 												</tr>
 												<tr>
 													<td align="left">partition_name(optional)</td>
-													<td align="left">string</td>
-													<td align="left">partition name</td>
+													<td align="left">String</td>
+													<td align="left">Partition name</td>
 												</tr>
 												<tr>
 													<td align="left">fields_data</td>
 													<td align="left">{ [x: string]: any }[]</td>
-													<td align="left">field type is binary, the vector data length need to be dimension / 8query</td>
+													<td align="left">If the field type is binary, the vector data length needs to be dimension / 8</td>
 												</tr>
 												<tr>
 													<td align="left">hash_keys(optional)</td>
 													<td align="left">Number[]</td>
-													<td align="left">It&#39;s hash value depend on primarykey value</td>
+													<td align="left">The hash value depends on the primarykey value</td>
 												</tr>
 										</tbody></table>
 									</div>
@@ -305,25 +305,25 @@
 								</thead>
 								<tbody><tr>
 										<td align="left">status</td>
-										<td align="left">{ error_code: number,reason:string }</td>
+										<td align="left">{ error_code: number, reason: string }</td>
 									</tr>
 									<tr>
 										<td align="left">succ_index</td>
-										<td align="left">Insert successful index array</td>
+										<td align="left">Index array of the successfully inserted data</td>
 									</tr>
 									<tr>
 										<td align="left">err_index</td>
-										<td align="left">Insert failed index array</td>
+										<td align="left">Index array of the unsuccessfully inserted data</td>
 									</tr>
 									<tr>
 										<td align="left">IDs</td>
-										<td align="left">Insert successful id array</td>
+										<td align="left">ID array of the successfully inserted data</td>
 									</tr>
 							</tbody></table>
 							<a href="#example" id="example" style="color: inherit; text-decoration: none;">
-								<h3>Example</h3>
+								<h4>Example</h4>
 							</a>
-							<pre><code><span style="color: #000000"> </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">milvusClient</span><span style="color: #000000">(</span><span style="color: #0070C1">MILUVS_IP</span><span style="color: #000000">).</span><span style="color: #001080">dataManager</span><span style="color: #000000">.</span><span style="color: #795E26">insert</span><span style="color: #000000">({</span>
+							<pre><code><span style="color: #000000"> </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">milvusClient</span><span style="color: #000000">(</span><span style="color: #0070C1">MILUVS_ADDRESS</span><span style="color: #000000">).</span><span style="color: #001080">dataManager</span><span style="color: #000000">.</span><span style="color: #795E26">insert</span><span style="color: #000000">({</span>
 <span style="color: #000000">   </span><span style="color: #001080">collection_name:</span><span style="color: #000000"> </span><span style="color: #0070C1">COLLECTION_NAME</span><span style="color: #000000">,</span>
 <span style="color: #000000">   </span><span style="color: #001080">fields_data:</span><span style="color: #000000"> [{</span>
 <span style="color: #000000">     </span><span style="color: #001080">vector_field:</span><span style="color: #000000"> [</span><span style="color: #098658">1</span><span style="color: #000000">,</span><span style="color: #098658">2</span><span style="color: #000000">,</span><span style="color: #098658">2</span><span style="color: #000000">,</span><span style="color: #098658">4</span><span style="color: #000000">],</span>
@@ -338,18 +338,18 @@
 					<a name="query" class="tsd-anchor"></a>
 					<h3>query</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">query<span class="tsd-signature-symbol">(</span>data<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">QueryReq</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">QueryResult</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">query<span class="tsd-signature-symbol">(</span>data<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">QueryReq</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">QueryResults</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in Data.ts:390</li>
+									<li>Defined in Data.ts:391</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Query milvus data. Now we only support like: fieldname in [id1,id2,id3]</p>
+									<p>Query vector data in Milvus. Current release of Milvus only supports expression as fieldname in [id1,id2,id3]</p>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -367,29 +367,29 @@
 											</thead>
 											<tbody><tr>
 													<td align="left">collection_name</td>
-													<td align="left">string</td>
-													<td align="left">collection name</td>
+													<td align="left">String</td>
+													<td align="left">Collection name</td>
 												</tr>
 												<tr>
 													<td align="left">expr</td>
-													<td align="left">string</td>
-													<td align="left">scalar fields filter expression</td>
+													<td align="left">String</td>
+													<td align="left">Scalar field filter expression</td>
 												</tr>
 												<tr>
 													<td align="left">partitions_names(optional)</td>
-													<td align="left">string[]</td>
-													<td align="left">partition name array</td>
+													<td align="left">String[]</td>
+													<td align="left">Array of partition names</td>
 												</tr>
 												<tr>
 													<td align="left">output_fields</td>
-													<td align="left">string[]</td>
-													<td align="left">collection fields you want to return</td>
+													<td align="left">String[]</td>
+													<td align="left">Vector or scalar field to be returned</td>
 												</tr>
 										</tbody></table>
 									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">QueryResult</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">QueryResults</span><span class="tsd-signature-symbol">&gt;</span></h4>
 							<table>
 								<thead>
 									<tr>
@@ -402,14 +402,14 @@
 										<td align="left">{ error_code: number,reason:string }</td>
 									</tr>
 									<tr>
-										<td align="left">fields_data</td>
-										<td align="left">all fields data you defined in output_fields</td>
+										<td align="left">data</td>
+										<td align="left">Data of all fields that you defined in <code>output_fields</code>, {field_name: value}[]</td>
 									</tr>
 							</tbody></table>
 							<a href="#example" id="example" style="color: inherit; text-decoration: none;">
-								<h3>Example</h3>
+								<h4>Example</h4>
 							</a>
-							<pre><code><span style="color: #000000"> </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">milvusClient</span><span style="color: #000000">(</span><span style="color: #0070C1">MILUVS_IP</span><span style="color: #000000">).</span><span style="color: #001080">dataManager</span><span style="color: #000000">.</span><span style="color: #795E26">query</span><span style="color: #000000">({</span>
+							<pre><code><span style="color: #000000"> </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">milvusClient</span><span style="color: #000000">(</span><span style="color: #0070C1">MILUVS_ADDRESS</span><span style="color: #000000">).</span><span style="color: #001080">dataManager</span><span style="color: #000000">.</span><span style="color: #795E26">query</span><span style="color: #000000">({</span>
 <span style="color: #000000">   </span><span style="color: #001080">collection_name:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;my_collection&#039;</span><span style="color: #000000">,</span>
 <span style="color: #000000">   </span><span style="color: #001080">expr:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;age in [1,2,3,4,5,6,7,8]&quot;</span><span style="color: #000000">,</span>
 <span style="color: #000000">   </span><span style="color: #001080">output_fields:</span><span style="color: #000000"> [</span><span style="color: #A31515">&quot;age&quot;</span><span style="color: #000000">],</span>
@@ -428,12 +428,12 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in Data.ts:228</li>
+									<li>Defined in Data.ts:229</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>vector similarity search</p>
+									<p>Perform vector similarity search.</p>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -451,33 +451,33 @@
 											</thead>
 											<tbody><tr>
 													<td align="left">collection_name</td>
-													<td align="left">string</td>
-													<td align="left">collection name</td>
+													<td align="left">String</td>
+													<td align="left">Collection name</td>
 												</tr>
 												<tr>
 													<td align="left">partition_names(optional)</td>
-													<td align="left">string[]</td>
-													<td align="left">partition name array</td>
+													<td align="left">String[]</td>
+													<td align="left">Array of partition names</td>
 												</tr>
 												<tr>
 													<td align="left">expr(optional)</td>
-													<td align="left">string</td>
-													<td align="left">scalar field filter</td>
+													<td align="left">String</td>
+													<td align="left">Scalar field filter expression</td>
 												</tr>
 												<tr>
 													<td align="left">search_params</td>
-													<td align="left">SearchParam[]</td>
-													<td align="left">search Params:  {key: &quot;anns_field&quot; | &quot;topk&quot; | &quot;metric_type&quot; | &quot;params&quot;;value: string;}</td>
+													<td align="left">Object</td>
+													<td align="left">anns_field: vector field name <br/> topk: search result counts <br/> <a href="https://milvus.io/docs/v2.0.0/metric.md#floating#Similarity-Metrics">metric_type</a> <br/>params: search params</td>
 												</tr>
 												<tr>
 													<td align="left">vectors</td>
-													<td align="left">number[][]</td>
-													<td align="left">the vector value you want to search</td>
+													<td align="left">Number[][]</td>
+													<td align="left">Original vector to search with</td>
 												</tr>
 												<tr>
 													<td align="left">output_fields(optional)</td>
-													<td align="left">string[]</td>
-													<td align="left">define function will return which fields data</td>
+													<td align="left">String[]</td>
+													<td align="left">Support scalar field</td>
 												</tr>
 												<tr>
 													<td align="left">vector_type</td>
@@ -498,7 +498,7 @@
 								</thead>
 								<tbody><tr>
 										<td align="left">status</td>
-										<td align="left">{ error_code: number,reason:string }</td>
+										<td align="left">{ error_code: number, reason: string }</td>
 									</tr>
 									<tr>
 										<td align="left">succ_index</td>
@@ -514,18 +514,18 @@
 									</tr>
 							</tbody></table>
 							<a href="#example" id="example" style="color: inherit; text-decoration: none;">
-								<h3>Example</h3>
+								<h4>Example</h4>
 							</a>
-							<pre><code><span style="color: #000000"> </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">milvusClient</span><span style="color: #000000">(</span><span style="color: #0070C1">MILUVS_IP</span><span style="color: #000000">).</span><span style="color: #001080">dataManager</span><span style="color: #000000">.</span><span style="color: #795E26">search</span><span style="color: #000000">({</span>
+							<pre><code><span style="color: #000000"> </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">milvusClient</span><span style="color: #000000">(</span><span style="color: #0070C1">MILUVS_ADDRESS</span><span style="color: #000000">).</span><span style="color: #001080">dataManager</span><span style="color: #000000">.</span><span style="color: #795E26">search</span><span style="color: #000000">({</span>
 <span style="color: #000000">  </span><span style="color: #001080">collection_name:</span><span style="color: #000000"> </span><span style="color: #0070C1">COLLECTION_NAME</span><span style="color: #000000">,</span>
 <span style="color: #000000">  </span><span style="color: #001080">expr:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;&quot;</span><span style="color: #000000">,</span>
 <span style="color: #000000">  </span><span style="color: #001080">vectors:</span><span style="color: #000000"> [[</span><span style="color: #098658">1</span><span style="color: #000000">, </span><span style="color: #098658">2</span><span style="color: #000000">, </span><span style="color: #098658">3</span><span style="color: #000000">, </span><span style="color: #098658">4</span><span style="color: #000000">]],</span>
-<span style="color: #000000">  </span><span style="color: #001080">search_params:</span><span style="color: #000000"> [</span>
-<span style="color: #000000">    { </span><span style="color: #001080">key:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;anns_field&quot;</span><span style="color: #000000">, </span><span style="color: #001080">value:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;float_vector&quot;</span><span style="color: #000000"> },</span>
-<span style="color: #000000">    { </span><span style="color: #001080">key:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;topk&quot;</span><span style="color: #000000">, </span><span style="color: #001080">value:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;4&quot;</span><span style="color: #000000"> },</span>
-<span style="color: #000000">    { </span><span style="color: #001080">key:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;metric_type&quot;</span><span style="color: #000000">, </span><span style="color: #001080">value:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;IP&quot;</span><span style="color: #000000"> },</span>
-<span style="color: #000000">    { </span><span style="color: #001080">key:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;params&quot;</span><span style="color: #000000">, </span><span style="color: #001080">value:</span><span style="color: #000000"> </span><span style="color: #267F99">JSON</span><span style="color: #000000">.</span><span style="color: #795E26">stringify</span><span style="color: #000000">({ </span><span style="color: #001080">nprobe:</span><span style="color: #000000"> </span><span style="color: #098658">1024</span><span style="color: #000000"> }) },</span>
-<span style="color: #000000">  ],</span>
+<span style="color: #000000">  </span><span style="color: #001080">search_params:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #001080">anns_field:</span><span style="color: #000000"> </span><span style="color: #0070C1">VECTOR_FIELD_NAME</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">topk:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;4&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">metric_type:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;L2&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">params:</span><span style="color: #000000"> </span><span style="color: #267F99">JSON</span><span style="color: #000000">.</span><span style="color: #795E26">stringify</span><span style="color: #000000">({ </span><span style="color: #001080">nprobe:</span><span style="color: #000000"> </span><span style="color: #098658">1024</span><span style="color: #000000"> }),</span>
+<span style="color: #000000">  },</span>
 <span style="color: #000000">  </span><span style="color: #001080">output_fields:</span><span style="color: #000000"> [</span><span style="color: #A31515">&quot;age&quot;</span><span style="color: #000000">, </span><span style="color: #A31515">&quot;time&quot;</span><span style="color: #000000">],</span>
 <span style="color: #000000">  </span><span style="color: #001080">vector_type:</span><span style="color: #000000"> </span><span style="color: #098658">100</span><span style="color: #000000">,</span>
 <span style="color: #000000"> });</span>
