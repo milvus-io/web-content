@@ -22,7 +22,7 @@ Using Helm to upgrade resources will cause the running pods to perform rolling u
 You need to set the resource variables for each Milvus component if you use `--set` to update the resource configurations. 
 
 <div class="filter">
-<a href="#standalone">Milvus standalone</a> <a href="#cluter">Milvus cluster</a>
+<a href="#standalone">Milvus standalone</a> <a href="#cluster">Milvus cluster</a>
 </div>
 
 <div class="table-wrapper filter-standalone" markdown="block">
