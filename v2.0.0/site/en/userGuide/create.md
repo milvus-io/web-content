@@ -58,7 +58,7 @@ const params = {
 };
 ```
 
-2. Call `create_collection()` provided by the Milvus instance to create a collection:
+2. Call `Collection()` provided by the Milvus instance to create a collection:
 
 <div class="multipleCode">
   <a href="?python">Python </a>

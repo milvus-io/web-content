@@ -1,6 +1,5 @@
 ---
 id: insight_overview.md
-title: 简介
 ---
 
 

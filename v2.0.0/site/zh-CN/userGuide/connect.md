@@ -1,6 +1,5 @@
 ---
 id: connect.md
-title: 连接服务器
 ---
 
 # 连接服务器

@@ -1,6 +1,5 @@
 ---
 id: main_components.md
-title: 主要组件
 ---
 
 # 主要组件

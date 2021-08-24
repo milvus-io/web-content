@@ -1,6 +1,5 @@
 ---
 id: search.md
-title: 查询向量
 ---
 
 # 查询向量

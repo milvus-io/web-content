@@ -1,6 +1,5 @@
 ---
 id: overview.md
-title: Milvus 是什么
 ---
 
 # Milvus 是什么

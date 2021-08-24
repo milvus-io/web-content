@@ -1,6 +1,5 @@
 ---
 id: monitor.md
-title: 监控与报警
 ---
 
 # 监控

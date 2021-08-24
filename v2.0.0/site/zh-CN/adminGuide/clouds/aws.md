@@ -1,6 +1,5 @@
 ---
 id: aws.md
-title: 使用 Terraform 及 Ansible 在 AWS 上部署集群
 ---
 
 # 使用 Terraform 及 Ansible 在 AWS 上部署集群

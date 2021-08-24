@@ -1,6 +1,5 @@
 ---
 id: prerequisite-docker.md
-title: 安装前提
 label: Install with Docker Compose
 order: 0
 group: prerequisite

@@ -1,6 +1,5 @@
 ---
 id: build.md
-title: 创建索引
 ---
 
 # 创建索引

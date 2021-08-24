@@ -1,6 +1,5 @@
 ---
 id: comparison.md
-title: Milvus 2.0 概述
 ---
 # Milvus 2.0 概述
 

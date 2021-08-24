@@ -1,6 +1,5 @@
 ---
 id: hybridsearch.md
-title: 混合查询
 ---
 
 # 混合查询

@@ -1,6 +1,5 @@
 ---
 id: insight_install.md
-title: 安装 Milvus Insight
 ---
 
 # 安装 Milvus Insight
