@@ -150,40 +150,40 @@
       }
     }
   },
-  "contributorSection":{
-    "titlie": "Milvus Top Advocates",
-    "list":[
-    {
-      "avatar": "../../assets/gq_huang.png",
-      "name": "黄国钦",
-      "company": "唯品会",
-      "jobTitle": "软件工程师"
-    },
-    {
-      "avatar": "../../assets/tt_wang.png",
-      "name": "王婷婷",
-      "company": "搜狐",
-      "jobTitle": "NLP 算法工程师"
-    },
-    {
-      "avatar": "../../assets/y_li.png",
-      "name": "黎阳",
-      "company": "焦点科技",
-      "jobTitle": "软件工程师"
-    },
-    {
-      "avatar": "../../assets/wei_huang.png",
-      "name": "黄伟",
-      "company": "趋势科技",
-      "jobTitle": "软件工程师"
-    },
-    {
-      "avatar": "../../assets/az_wen.png",
-      "name": "文安哲",
-      "company": "企查查",
-      "jobTitle": "软件工程师"
-    }
-  ]
+  "contributorSection": {
+    "title": "Milvus Top Advocates",
+    "list": [
+      {
+        "avatar": "../../assets/gq_huang.png",
+        "name": "黄国钦",
+        "company": "唯品会",
+        "jobTitle": "软件工程师"
+      },
+      {
+        "avatar": "../../assets/tt_wang.png",
+        "name": "王婷婷",
+        "company": "搜狐",
+        "jobTitle": "NLP 算法工程师"
+      },
+      {
+        "avatar": "../../assets/y_li.png",
+        "name": "黎阳",
+        "company": "焦点科技",
+        "jobTitle": "软件工程师"
+      },
+      {
+        "avatar": "../../assets/wei_huang.png",
+        "name": "黄伟",
+        "company": "趋势科技",
+        "jobTitle": "软件工程师"
+      },
+      {
+        "avatar": "../../assets/az_wen.png",
+        "name": "文安哲",
+        "company": "企查查",
+        "jobTitle": "软件工程师"
+      }
+    ]
   },
   "joinSection": {
     "title": "加入社区",
