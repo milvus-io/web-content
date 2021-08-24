@@ -68,7 +68,7 @@ queryNode:
 helm upgrade my-release milvus/milvus --reuse-values -f resources.yaml
 ```
 <div class="alert note">
-If `resources.limits` is not specified, the pods will consume all the CPU and memory resources available. Therefore, please specify `resources.requests` and `resources.limits` to avoid overallocation of resources when there are other tasks on the same instance that require more memory consumption.
+If <code>resources.limits</code> is not specified, the pods will consume all the CPU and memory resources available. Therefore, please specify <code>resources.requests</code> and <code>resources.limits</code> to avoid overallocation of resources when there are other tasks on the same instance that require more memory consumption.
 </div>
  
  

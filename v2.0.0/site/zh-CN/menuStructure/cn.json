@@ -311,7 +311,7 @@
     },
     {
       "id": "allocate.md",
-      "title": "资源分配",
+      "title": "配置集群资源",
       "label1": "admin_guide",
       "label2": "",
       "label3": "",

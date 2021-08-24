@@ -2,27 +2,27 @@
 id: allocate.md
 ---
 
-# Allocate resources on Kubernetes
+# 配置 Kubernetes 集群资源
 
-Generally, the resources you allocate to a Milvus cluster in production should be proportionate to the machine workload. You should also consider the machine type when allocating resources. Although you can update the configurations when the cluster is running, we recommend you to set the values before deploying the cluster.
+在生产环境中，通常应当依据机器工作量及机器类型相应为 Milvus 集群配置资源。你可以在集群运行时更新资源配置，但我们建议在部署集群前先设置参数。
 
 <div class="alert note">
-Run <code>kubectl describe nodes</code> to view the available resources on the instances that you have provisioned.
+运行指令 <code>kubectl describe nodes</code> 查看整个 Kubernetes 集群可为已创建实例分配的资源。
 </div>
 
-## Allocate memory and CPU resources
+## 配置内存与 CPU 资源
 
-Use Helm to allocate CPU and memory resources to Milvus components.
+使用 Helm 为 Milvus 集群组件分配内存与 CPU 资源。
 
 <div class="alert warning">
-Using Helm to upgrade resources will cause the running pods to perform rolling update.
+使用 Helm 升级资源配置时，正在运行的 pod 将执行滚动更新。
 </div>
 
 
-You need to set the resource variables for each Milvus component if you use `--set` to update the resource configurations. 
+如使用 `--set` 指令更新资源配置，必须配置每一个 Milvus 组件的资源变量。
 
 <div class="filter">
-<a href="#standalone">Milvus standalone</a> <a href="#cluster">Milvus cluster</a>
+<a href="#standalone">单机版 Milvus</a> <a href="#cluster"> 分布式版 Milvus</a>
 </div>
 
 <div class="table-wrapper filter-standalone" markdown="block">
@@ -41,7 +41,7 @@ helm upgrade my-release milvus/milvus --reuse-values --set dataNode.resources.li
 
 </div>
 
-You can also allocate CPU and memory resources by specifying the parameters `resources.requests` and `resources.limits` in the **resources.yaml** file:
+你也可以通过在 **resources.yaml** 文件中设置 `resources.requests` 及 `resources.limits` 两个参数来分配内存与 CPU 资源：
 
 ```Yaml
 dataNode:
@@ -62,13 +62,13 @@ queryNode:
       memory: "4Gi"
 ```
 
-## Apply the new configuration to the cluster
+## 在集群中应用新配置
 
 ```Shell
 helm upgrade my-release milvus/milvus --reuse-values -f resources.yaml
 ```
 <div class="alert note">
-If `resources.limits` is not specified, the pods will consume all the CPU and memory resources available. Therefore, please specify `resources.requests` and `resources.limits` to avoid overallocation of resources when there are other tasks on the same instance that require more memory consumption.
+如未设置 <code>resources.limits</code> 参数，pod 会消耗所有可用 CPU 及内存资源。因此，为避免资源过度配置的状况，请设置好 <cocde>resources.requests</code> 及 <code>resources.limits</code> 参数。
 </div>
  
  
