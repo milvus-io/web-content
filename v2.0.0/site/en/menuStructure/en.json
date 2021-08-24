@@ -310,12 +310,20 @@
       "order": 3
     },
     {
+      "id": "allocate.md",
+      "title": "Allocate resources on Kubernetes",
+      "label1": "admin_guide",
+      "label2": "",
+      "label3": "",
+      "order": 4
+    },
+    {
       "id": "backup",
       "title": "Backup",
       "label1": "admin_guide",
       "label2": "",
       "label3": "",
-      "order": 4,
+      "order": 5,
       "isMenu": true
     },
     {
