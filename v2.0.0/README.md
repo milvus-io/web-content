@@ -32,7 +32,7 @@ In general, the folder structure of the milvus-docs repository aligns with the m
 
 ### Documentation directory
 
-*Images* are housed under the **/assets** folder and can be referenced with **{{images.Assets/image-name.jpg/png}}**.
+*Images* are housed under the **/assets** folder and can be referenced with `![ImageName]({{images.assets/ImageName.jpg/png}})`.
 
 *Fragments* let you split the markdown into independent, reusable pieces and are defined in the **site/en/fragments** and **site/zh-CN/fragments** folders. Use the **{{fragments/xxx.md}}** syntax to reference a specific fragment.
 
@@ -48,7 +48,8 @@ All documentation is originally written in English and translated into other lan
 
 To make contributions to the Milvus SDK reference documentation, visit the programming language specific repositories listed below:
 
-- [PyMilvus ORM](https://github.com/milvus-io/pymilvus-orm)
+- [PyMilvus](https://github.com/milvus-io/pymilvus)
+- [Node.js](https://github.com/milvus-io/milvus-sdk-node)
 - (Coming soon) [GoLang](https://github.com/milvus-io/milvus-sdk-go)
 
 
