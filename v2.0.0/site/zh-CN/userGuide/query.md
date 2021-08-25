@@ -58,12 +58,9 @@ const params = {
       description: "vector field",
       data_type: DataType.FloatVector,
 
-      type_params: [
-        {
-          key: "dim",
-          value: "8",
-        },
-      ],
+      type_params: {
+        dim: "8",
+      },
     },
     {
       name: "film_id",

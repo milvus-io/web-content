@@ -4,19 +4,17 @@ id: hybridsearch.md
 
 # 混合查询
 
-除了向量以外，Milvus还支持布尔值、整型、浮点等数据类型。在 Milvus 中，一个 collection 可以包含多个字段来代表数据特征或属性。Milvus 是一款灵活的向量数据库，还支持在向量相似度检索过程中进行标量字段过滤。
+除了向量以外，Milvus 还支持布尔值、整型、浮点等数据类型。在 Milvus 中，一个 collection 可以包含多个字段来代表数据特征或属性。Milvus 是一款灵活的向量数据库，还支持在向量相似度检索过程中进行标量字段过滤。
 
 混合查询是一种向量相似度检索。在混合查询时，你可以通过使用[布尔表达式（boolean expression）](boolean.md)进行标量字段过滤。
 
 1. 连接至 Milvus 服务器：
-
 
 <div class="multipleCode">
 
   <a href="?python">Python </a>
   <a href="?javascript">Node</a>
 </div>
-
 
 
 ```python
@@ -30,7 +28,6 @@ const milvusClient = new MilvusClient("localhost:19530");
 ```
 
 2. 准备 collection 参数并创建 collection：
-
 
 <div class="multipleCode">
 
@@ -58,12 +55,9 @@ milvusClient.collectionManager.createCollection({
       name: "films",
       description: "vector field",
       data_type: DataType.FloatVector,
-      type_params: [
-        {
-          key: "dim",
-          value: "2",
-        },
-      ],
+      type_params: {
+        dim:"2
+      }
     },
     {
       name: "film_id",
@@ -78,13 +72,11 @@ milvusClient.collectionManager.createCollection({
 
 3. 随机生成向量数据并插入新建 collection 中：
 
-
 <div class="multipleCode">
 
   <a href="?python">Python </a>
   <a href="?javascript">Node</a>
 </div>
-
 
 
 ```python
@@ -113,13 +105,11 @@ await milvusClient.collectionManager.insert({
 
 4. 将集合加载到内存中并进行向量相似度检索：
 
-
 <div class="multipleCode">
 
   <a href="?python">Python </a>
   <a href="?javascript">Node</a>
 </div>
-
 
 
 ```python
@@ -143,25 +133,23 @@ await milvusClient.dataManager.search({
   // partition_names: [],
   expr: "film_id in [1,4,6,8]",
   vectors: [entities[0].films],
-  search_params: [
-    { key: "anns_field", value: "films" },
-    { key: "topk", value: "2" },
-    { key: "metric_type", value: "L2" },
-    { key: "params", value: JSON.stringify({ nprobe: 10 }) },
-  ],
+  search_params: {
+    anns_field: "films",
+    topk: "4",
+    metric_type: "L2",
+    params: JSON.stringify({ nprobe: 10 }),
+  },
   vector_type: 100, // float vector -> 100
 });
 ```
 
 5. 检查返回结果：
 
-
 <div class="multipleCode">
 
   <a href="?python">Python </a>
   <a href="?javascript">Node</a>
 </div>
-
 
 
 ```python
@@ -173,7 +161,6 @@ await milvusClient.dataManager.search({
 >>> print(f"- Top1 hit id: {hits[0].id}, distance: {hits[0].distance}, score: {hits[0].score} ")
 - Top1 hit id: 2, distance: 0.10143111646175385, score: 0.101431116461
 ```
-
 
 ```javascript
 // search result will be like:

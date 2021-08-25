@@ -24,20 +24,11 @@ Create an index for a specified field in a collection to accelerate vector simil
 ```
 
 ```javascript
-const index_param = [
-  {
-    key: "index_type",
-    value: "IVF_FLAT",
-  },
-  {
-    key: "metric_type",
-    value: "L2",
-  },
-  {
-    key: "params",
-    value: JSON.stringify({ nlist: 1024 }),
-  },
-];
+const index_param = {
+  metric_type: "L2",
+  index_type: "IVF_FLAT",
+  params: JSON.stringify({ nlist: 1024 }),
+};
 ```
 
 2. Build an index:

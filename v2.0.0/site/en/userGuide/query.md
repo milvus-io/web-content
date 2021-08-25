@@ -4,10 +4,9 @@ id: query.md
 
 # Query
 
-In addition to vectors, Milvus supports data types such as boolean, integers, floating-point numbers, and more. 
+In addition to vectors, Milvus supports data types such as boolean, integers, floating-point numbers, and more.
 
-A query is a search on all existing data. In Milvus, you can run a query which will return all the results that meet your specified requirements. Use [boolean expression](boolean.md) to specify the requirements. 
-
+A query is a search on all existing data. In Milvus, you can run a query which will return all the results that meet your specified requirements. Use [boolean expression](boolean.md) to specify the requirements.
 
 1. Connect to the Milvus server:
 
@@ -58,12 +57,9 @@ const params = {
       description: "vector field",
       data_type: DataType.FloatVector,
 
-      type_params: [
-        {
-          key: "dim",
-          value: "8",
-        },
-      ],
+      type_params: {
+        dim: "8",
+      },
     },
     {
       name: "film_id",
