@@ -1,15 +1,13 @@
 ---
-id: hybridsearch.md
-title: Conduct a Hybrid Search
+id: query.md
 ---
 
-# Conduct a Hybrid Search
+# Query
 
+In addition to vectors, Milvus supports data types such as boolean, integers, floating-point numbers, and more. 
 
-In addition to vectors, Milvus supports data types such as boolean, integers, floating-point numbers, and more. A collection in Milvus can hold multiple fields for accommodating different data features or properties. Milvus is a flexible vector database that pairs scalar filtering with powerful vector similarity search.
+A query is a search on all existing data. In Milvus, you can run a query which will return all the results that meet your specified requirements. Use [boolean expression](boolean.md) to specify the requirements. 
 
-
-A hybrid search is a vector similarity search, during which you can filter the scalar data by specifying a [boolean expression](boolean.md).
 
 1. Connect to the Milvus server:
 
@@ -20,8 +18,8 @@ A hybrid search is a vector similarity search, during which you can filter the s
 
 
 ```python
-from pymilvus_orm import connections
-connections.connect("default", host='localhost', port='19530')
+>>> from pymilvus_orm import connections
+>>> connections.connect("default", host='localhost', port='19530')
 ```
 
 ```javascript
@@ -42,24 +40,28 @@ const milvusClient = new MilvusClient("localhost:19530");
 >>> collection_name = "test_collection_search"
 >>> schema = CollectionSchema([
 ...     FieldSchema("film_id", DataType.INT64, is_primary=True),
+...     FieldSchema("film_date", DataType.INT64),
 ...     FieldSchema("films", dtype=DataType.FLOAT_VECTOR, dim=2)
 ... ])
 >>> collection = Collection(collection_name, schema)
 ```
 
 ```javascript
-const COLLECTION_NAME = "test_collection_search";
-milvusClient.collectionManager.createCollection({
+const COLLECTION_NAME = "example_collection";
+const FIELD_NAME = "example_field";
+
+const params = {
   collection_name: COLLECTION_NAME,
   fields: [
     {
       name: "films",
       description: "vector field",
       data_type: DataType.FloatVector,
+
       type_params: [
         {
           key: "dim",
-          value: "2",
+          value: "8",
         },
       ],
     },
@@ -71,7 +73,9 @@ milvusClient.collectionManager.createCollection({
       description: "",
     },
   ],
-});
+};
+
+await milvusClient.collectionManager.createCollection(params);
 ```
 
 3. Insert random vectors to the newly created collection:
@@ -86,6 +90,7 @@ milvusClient.collectionManager.createCollection({
 >>> import random
 >>> data = [
 ...     [i for i in range(10)],
+...     [1990 + i for i in range(10)],
 ...     [[random.random() for _ in range(2)] for _ in range(10)],
 ... ]
 >>> collection.insert(data)
@@ -100,13 +105,13 @@ const entities = Array.from({ length: 10 }, () => ({
   film_id: id++,
 }));
 
-await milvusClient.collectionManager.insert({
+await milvusClient.dataManager.insert({{
   collection_name: COLLECTION_NAME,
   fields_data: entities,
 });
 ```
 
-4. Load the collection to memory and conduct a vector similarity search:
+4. Load the collection to memory and run a query:
 
 <div class="multipleCode">
   <a href="?python">Python </a>
@@ -116,32 +121,20 @@ await milvusClient.collectionManager.insert({
 
 ```python
 >>> collection.load()
->>> search_param = {
-...     "data": [[1.0, 1.0]],
-...     "anns_field": "films",
-...     "param": {"metric_type": "L2"},
-...     "limit": 2,
-...     "expr": "film_id in [2,4,6,8]",
-... }
->>> res = collection.search(**search_param)
+>>> expr = "film_id in [2,4,6,8]"
+>>> output_fields = ["film_id", "film_date"]
+>>> res = collection.query(expr, output_fields)
 ```
 
 ```javascript
 await milvusClient.collectionManager.loadCollection({
   collection_name: COLLECTION_NAME,
 });
-await milvusClient.dataManager.search({
+
+await milvusClient.dataManager.query({
   collection_name: COLLECTION_NAME,
-  // partition_names: [],
-  expr: "film_id in [1,4,6,8]",
-  vectors: [entities[0].films],
-  search_params: [
-    { key: "anns_field", value: "films" },
-    { key: "topk", value: "2" },
-    { key: "metric_type", value: "L2" },
-    { key: "params", value: JSON.stringify({ nprobe: 10 }) },
-  ],
-  vector_type: 100, // float vector -> 100
+  expr: "film_id in [2,4,6,8]",
+  output_fields: ["film_id"],
 });
 ```
 
@@ -154,24 +147,15 @@ await milvusClient.dataManager.search({
 
 
 ```python
->>> assert len(res) == 1
->>> hits = res[0]
->>> assert len(hits) == 2
->>> print(f"- Total hits: {len(hits)}, hits ids: {hits.ids} ")
-- Total hits: 2, hits ids: [2, 4]
->>> print(f"- Top1 hit id: {hits[0].id}, distance: {hits[0].distance}, score: {hits[0].score} ")
-- Top1 hit id: 2, distance: 0.10143111646175385, score: 0.101431116461
+>>> sorted_res = sorted(res, key=lambda k: k['film_id'])
+>>> sorted_res
+[{'film_id': 2, 'film_date': 1992},
+ {'film_id': 4, 'film_date': 1994},
+ {'film_id': 6, 'film_date': 1996},
+ {'film_id': 8, 'film_date': 1998}]
 ```
 
 ```javascript
-// search result will be like:
-{
-  status: { error_code: 'Success', reason: '' },
-  results: [
-    { score: 0, id: '1' },
-    { score: 9.266796112060547, id: '4' },
-    { score: 28.263811111450195, id: '8' },
-    { score: 41.055686950683594, id: '6' }
-  ]
-}
+// query result
+[{ film_id: "2" }, { film_id: "4" }, { film_id: "6" }, { film_id: "8" }];
 ```

@@ -168,7 +168,7 @@
     },
     {
       "id": "search",
-      "title": "查询",
+      "title": "搜索与结构化匹配",
       "label1": "userguide",
       "label2": "",
       "label3": "",
@@ -177,7 +177,7 @@
     },
     {
       "id": "search.md",
-      "title": "查询向量",
+      "title": "向量搜索",
       "label1": "userguide",
       "label2": "search",
       "label3": "",
@@ -185,7 +185,7 @@
     },
     {
       "id": "hybridsearch.md",
-      "title": "混合查询",
+      "title": "混合搜索",
       "label1": "userguide",
       "label2": "search",
       "label3": "",
@@ -198,6 +198,14 @@
       "label2": "search",
       "label3": "",
       "order": 2
+    },
+    {
+      "id": "query.md",
+      "title": "结构化匹配",
+      "label1": "userguide",
+      "label2": "search",
+      "label3": "",
+      "order": 3
     },
     {
       "id": "tools",
