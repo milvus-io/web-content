@@ -5,17 +5,10 @@ title: Connect
 
 # Overview
 
-This section covers fundamentals and basic Milvus operations in Python interactive mode.
+This section covers fundamentals and basic Milvus operations.
 
-Type `python3` in your terminal to enter Python interactive mode. Here we take Python 3.9.1 as an example:
+If you choose to operate in the Python interactive mode, type `python3` in your terminal.
 
-```
-➜  ~ python3
-Python 3.9.1 (default, Feb  3 2021, 07:38:02)
-[Clang 12.0.0 (clang-1200.0.32.29)] on darwin
-Type "help", "copyright", "credits" or "license" for more information.
->>>
-```
 
 ## Connect to the Milvus server
 

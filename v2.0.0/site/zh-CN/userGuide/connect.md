@@ -4,16 +4,10 @@ id: connect.md
 
 # 连接服务器
 
-通过本章节文档，你将在 Python 交互式编程环境下学习 Milvus 使用中的各种基本操作。
+通过本章节文档，你将了解 Milvus 使用中的各种基本操作。
 
-命令行输入 `python3` 进入Python 交互式模式。本文以 Python3.9.1 为例：
-```
-➜  ~ python3
-Python 3.9.1 (default, Feb  3 2021, 07:38:02)
-[Clang 12.0.0 (clang-1200.0.32.29)] on darwin
-Type "help", "copyright", "credits" or "license" for more information.
->>>
-```
+如果你选择在 Python 交互式编程环境下学习基本操作，在命令行输入 `python3`。
+
 
 ## 连接 Milvus 服务器
 
