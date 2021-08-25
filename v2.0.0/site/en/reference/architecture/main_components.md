@@ -13,7 +13,7 @@ There are two modes for running Milvus: Standalone and Cluster. These two modes 
 
 - **Milvus:** The core functional component. 
 
-- **etcd:** The metadata engine, which accesses and stores metadata of Milvus' internal components, including proxy nodes, index nodes, and more. 
+- **etcd:** The metadata engine, which accesses and stores metadata of Milvus' internal components, including proxies, index nodes, and more. 
 
 - **MinIO:** The storage engine, which is responsible for data persistence for Milvus.
 

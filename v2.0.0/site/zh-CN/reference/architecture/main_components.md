@@ -12,7 +12,7 @@ Milvus 支持两种部署模式，单机模式（standalone）和分布式模式
 
 - **Milvus** 负责提供系统的核心功能。
 
-- **Etcd** 是元数据引擎，用于管理 Milvus 内部组件的元数据访问和存储，例如 proxy node、index node 等。 
+- **Etcd** 是元数据引擎，用于管理 Milvus 内部组件的元数据访问和存储，例如 proxy、index node 等。 
 
 - **MinIO** 是存储引擎，负责维护 Milvus 的数据持久化。
 
