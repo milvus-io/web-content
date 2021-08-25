@@ -3,7 +3,9 @@ id: create.md
 title: Create
 ---
 
-# Create a collection
+# Create a Collection or Partition
+
+## Create a collection
 
 Collections can only be created after successfully connecting to the Milvus server.
 
@@ -132,7 +134,7 @@ await milvusClient.collectionManager.getCollectionStatistics({
 });
 ```
 
-# Create a partition (optional)
+## Create a partition 
 
 Search performance worsens as more vectors are inserted into the collection. To help mitigate declining search performance, consider creating collection partitions. Partitioning is a way to separate data. Partition names narrow a search to a specific number of vectors, improving query performance. To improve search efficiency, divide a collection into several partitions by name.
 

@@ -73,3 +73,7 @@ await milvusClient.collectionManager.dropCollection({
   collection_name: COLLECTION_NAME,
 });
 ```
+
+## 删除 entities
+
+该功能正在开发中，将跟随 Milvus 2.0 稳定版一同发布。
