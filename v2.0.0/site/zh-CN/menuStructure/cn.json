@@ -109,7 +109,15 @@
       "label2": "installmilvus",
       "label3": null,
       "order": 1
-    },    
+    }, 
+    {
+      "id": "install_offline-docker.md",
+      "title": "离线安装",
+      "label1": "getstarted",
+      "label2": "installmilvus",
+      "label3": null,
+      "order": 2
+    }, 
     {
       "id": "example_code.md",
       "title": "Hello Milvus",
