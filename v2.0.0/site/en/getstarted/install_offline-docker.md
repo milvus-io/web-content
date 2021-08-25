@@ -21,19 +21,19 @@ Installation of Milvus may fail when images are not properly loaded from public 
   <a href="?cluster">Cluster</a>
 </div>
 		<div class="multipleCode-standalone" markdown="block">
-```bash
+```
 wget https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/docker/standalone/docker-compose.yml -O docker-compose.yml
 ```
 		</div>
 		<div class="multipleCode-cluster" markdown="block">
-```bash
+```
 wget https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/docker/cluster/docker-compose.yml -O docker-compose.yml
 ```
 		</div>
 
 2. Pull and save the Docker images:
 
-```bash
+```
 pip3 install -r requirements.txt
 python3 save_image.py --manifest docker-compose.yml
 ```
@@ -44,7 +44,7 @@ The Docker images will be stored under images directory.
 
 3. Load the Docker images:
 
-```bash
+```
 cd images/for image in $(find . -type f -name "*.tar.gz") ; do gunzip -c $image | docker load; done
 ```
 
@@ -52,7 +52,7 @@ cd images/for image in $(find . -type f -name "*.tar.gz") ; do gunzip -c $image 
 
 To install Milvus offline, run:
 
-```bash
+```
 docker-compose -f docker-compose.yml up -d
 ```
 
@@ -60,7 +60,7 @@ docker-compose -f docker-compose.yml up -d
 
 To Uninstall Milvus, run:
 
-```bash
+```
 docker-compose -f docker-compose.yml down
 ```
 
