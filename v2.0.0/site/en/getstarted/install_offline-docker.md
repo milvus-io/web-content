@@ -16,16 +16,16 @@ Installation of Milvus may fail when images are not properly loaded from public 
 
 1. Download Milvus **docker-compose.yml**:
 
-<div class="mutipleCode">
+<div class="multipleCode">
   <a href="?standalone">Standalone</a>
   <a href="?cluster">Cluster</a>
 </div>
-		<div class="mutipleCode-standalone" markdown="block">
+		<div class="multipleCode-standalone" markdown="block">
 ```bash
 wget https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/docker/standalone/docker-compose.yml -O docker-compose.yml
 ```
 		</div>
-		<div class="mutipleCode-cluster" markdown="block">
+		<div class="multipleCode-cluster" markdown="block">
 ```bash
 wget https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/docker/cluster/docker-compose.yml -O docker-compose.yml
 ```
