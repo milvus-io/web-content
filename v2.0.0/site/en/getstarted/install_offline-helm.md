@@ -23,16 +23,16 @@ helm repo update
 
 2. Get Kubernetes manifest of Milvus:
 
-<div class="mutipleCode">
+<div class="multipleCode">
   <a href="?standalone">Standalone</a>
   <a href="?cluster">Cluster</a>
 </div>
-		<div class="mutipleCode-standalone" markdown="block">
+		<div class="multipleCode-standalone" markdown="block">
 ```bash
 helm template my-release milvus/milvus > milvus_manifest.yaml
 ```
 		</div>
-		<div class="mutipleCode-cluster" markdown="block">
+		<div class="multipleCode-cluster" markdown="block">
 ```bash
 helm template --set cluster.enabled=true my-release milvus/milvus > milvus_manifest.yaml
 ```
