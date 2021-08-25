@@ -16,7 +16,7 @@ Installation of Milvus may fail when images are not properly loaded from public 
 
 1. Update Helm Repository:
 
-```bash
+```
 helm repo add milvus https://milvus-io.github.io/milvus-helm/
 helm repo update
 ```
@@ -28,19 +28,19 @@ helm repo update
   <a href="?cluster">Cluster</a>
 </div>
 		<div class="multipleCode-standalone" markdown="block">
-```bash
+```
 helm template my-release milvus/milvus > milvus_manifest.yaml
 ```
 		</div>
 		<div class="multipleCode-cluster" markdown="block">
-```bash
+```
 helm template --set cluster.enabled=true my-release milvus/milvus > milvus_manifest.yaml
 ```
 		</div>
 
 3. Pull and save the Docker images:
 
-```bash
+```
 pip3 install -r requirements.txt
 python3 save_image.py --manifest milvus_manifest.yaml
 ```
@@ -51,7 +51,7 @@ The Docker images will be stored under images directory.
 
 4. Load the Docker images:
 
-```bash
+```
 cd images/for image in $(find . -type f -name "*.tar.gz") ; do gunzip -c $image | docker load; done
 ```
 
@@ -59,7 +59,7 @@ cd images/for image in $(find . -type f -name "*.tar.gz") ; do gunzip -c $image 
 
 To install Milvus offline, run:
 
-```bash
+```
 kubectl apply -f milvus_manifest.yaml
 ```
 
@@ -67,7 +67,7 @@ kubectl apply -f milvus_manifest.yaml
 
 To Uninstall Milvus, run:
 
-```bash
+```
 kubectl delete -f milvus_manifest.yaml
 ```
 
