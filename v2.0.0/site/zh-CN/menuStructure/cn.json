@@ -318,6 +318,14 @@
       "order": 0
     },
     {
+      "id": "eks.md",
+      "title": "EKS",
+      "label1": "admin_guide",
+      "label2": "cloud",
+      "label3": "",
+      "order": 1
+    },
+    {
       "id": "monitor.md",
       "title": "监控与报警",
       "label1": "admin_guide",

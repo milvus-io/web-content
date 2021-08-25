@@ -3,7 +3,7 @@ id: aws.md
 title: Deploy Terraform-Ansible on AWS
 ---
 
-# Guide to Deploying Terraform-Ansible on AWS
+# Deploy Terraform-Ansible on AWS
 
 This guide includes instructions for deploying Terraform-Ansible on Amazon Web Services (AWS). Terraform and Ansible are useful open-source tools that simplify updating and configuring cloud deployments. This guide covers provisioning resources with Terraform and starting services with Ansible.
 
@@ -284,5 +284,5 @@ Once all the nodes have docker-compose setup, the script launches the correspond
 <br/>
 
 <div class="alert note">
-Files for this instruction are available at https://drive.google.com/file/d/1jLQV0YkseOVj5X0exj17x9dWQjLCP7-1/view?usp=sharing.
+Files for this instruction are available at <link>https://drive.google.com/file/d/1jLQV0YkseOVj5X0exj17x9dWQjLCP7-1/view?usp=sharing</link>.
 </div>
