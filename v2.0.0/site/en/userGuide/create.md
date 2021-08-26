@@ -68,10 +68,7 @@ const params = {
 ```python
 >>> collection = Collection(name=collection_name, schema=schema)
 ```
-You can also get an existing collection by its name:
-```
-collection=Collection(name=collection_name)
-```
+You can also run `collection=Collection(name=collection_name)` to get an existing collection by its name.
 
 ```javascript
 await milvusClient.collectionManager.createCollection(params);
@@ -132,9 +129,6 @@ await milvusClient.collectionManager.getCollectionStatistics({
   collection_name: COLLECTION_NAME,
 });
 ```
-
-
-
 
 ## Create a partition
 
