@@ -23,14 +23,13 @@ helm repo update
 
 2. Get Kubernetes manifest of Milvus:
 
-<div class="multipleCode">
-  <a href="?standalone">Standalone</a>
-  <a href="?cluster">Cluster</a>
-</div>
+- For Milvus Standalone
 
-```standalone
+```
 helm template my-release milvus/milvus > milvus_manifest.yaml
 ```
+
+- For Milvus Cluster
 
 ```cluster
 helm template --set cluster.enabled=true my-release milvus/milvus > milvus_manifest.yaml
@@ -44,7 +43,7 @@ python3 save_image.py --manifest milvus_manifest.yaml
 ```
 
 <div class="alert note">
-The Docker images will be stored under images directory.
+The Docker images will be stored under **images** directory.
 </div>
 
 4. Load the Docker images:
