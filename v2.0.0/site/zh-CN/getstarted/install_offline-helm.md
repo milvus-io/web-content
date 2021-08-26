@@ -26,7 +26,7 @@ helm repo update
 <div class="multipleCode">
   <a href="?standalone">Standalone</a>
   <a href="?cluster">Cluster</a>
-
+</div>
 ```standalone
 helm template my-release milvus/milvus > milvus_manifest.yaml
 ```
