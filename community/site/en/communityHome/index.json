@@ -150,40 +150,40 @@
       }
     }
   },
-  "contributorSection":{
+  "contributorSection": {
     "title": "Milvus Top Advocates",
-    "list":[
-    {
-      "avatar": "../../assets/gq_huang.png",
-      "name": "Guoqin Huang",
-      "company": "Vip.com",
-      "jobTitle": "Software Developer"
-    },
-    {
-      "avatar": "../../assets/tt_wang.png",
-      "name": "Tingting Wang",
-      "company": "Sohu",
-      "jobTitle": "NLP engineer"
-    },
-    {
-      "avatar": "../../assets/y_li.png",
-      "name": "Yang Li",
-      "company": "Focus Technology",
-      "jobTitle": "Software Developer"
-    },
-    {
-      "avatar": "../../assets/wei_huang.png",
-      "name": "Wei Huang",
-      "company": "TrendMicro",
-      "jobTitle": "Software Developer"
-    },
-    {
-      "avatar": "../../assets/az_wen.png",
-      "name": "Anzhe Wen",
-      "company": "Qichacha",
-      "jobTitle": "Software Developer"
-    }
-  ]
+    "list": [
+      {
+        "avatar": "../../assets/gq_huang.png",
+        "name": "Guoqin Huang",
+        "company": "Vip.com",
+        "jobTitle": "Software Developer"
+      },
+      {
+        "avatar": "../../assets/tt_wang.png",
+        "name": "Tingting Wang",
+        "company": "Sohu",
+        "jobTitle": "NLP engineer"
+      },
+      {
+        "avatar": "../../assets/y_li.png",
+        "name": "Yang Li",
+        "company": "Focus Technology",
+        "jobTitle": "Software Developer"
+      },
+      {
+        "avatar": "../../assets/wei_huang.png",
+        "name": "Wei Huang",
+        "company": "TrendMicro",
+        "jobTitle": "Software Developer"
+      },
+      {
+        "avatar": "../../assets/az_wen.png",
+        "name": "Anzhe Wen",
+        "company": "Qichacha",
+        "jobTitle": "Software Developer"
+      }
+    ]
   },
   "joinSection": {
     "title": "Join the community",
@@ -199,12 +199,12 @@
         "img": "../../assets/slack.svg"
       },
       {
-        "label": "Zoom Meeting",
+        "label": "Reddit",
         "link": "https://www.reddit.com/r/vectordatabase/",
         "img": "../../assets/reddit.svg"
       },
       {
-        "label": "Reddit",
+        "label": "Social Media",
         "link": "https://twitter.com/milvusio",
         "img": "../../assets/twitter.svg"
       }
@@ -213,6 +213,13 @@
   "resourceSection": {
     "title": "Resources",
     "list": [
+      {
+        "iconType": "meeting",
+        "title": "Technical Meeting",
+        "desc": "We host events, often. Find out about our upcoming webinars, meetups,hackathons and more.",
+        "link": "https://zilliz.com/events",
+        "label": "LEARN MORE"
+      },
       {
         "iconType": "event",
         "title": "Event",

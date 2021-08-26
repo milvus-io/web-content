@@ -214,6 +214,13 @@
     "title": "资源",
     "list": [
       {
+        "iconType": "meeting",
+        "title": "Technical Meeting",
+        "desc": "We host events, often. Find out about our upcoming webinars, meetups,hackathons and more.",
+        "link": "https://zilliz.com/events",
+        "label": "LEARN MORE"
+      },
+      {
         "iconType": "event",
         "title": "活动",
         "desc": "我们常常举办活动，来这里看看有没有适合你参加的活动。",
