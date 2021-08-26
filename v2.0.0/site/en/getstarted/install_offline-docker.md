@@ -21,12 +21,12 @@ Installation of Milvus may fail when images are not properly loaded from public 
   <a href="?cluster">Cluster</a>
 </div>
 		<div class="multipleCode-standalone" markdown="block">
-```
+```standalone
 wget https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/docker/standalone/docker-compose.yml -O docker-compose.yml
 ```
 		</div>
 		<div class="multipleCode-cluster" markdown="block">
-```
+```cluster
 wget https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/docker/cluster/docker-compose.yml -O docker-compose.yml
 ```
 		</div>
