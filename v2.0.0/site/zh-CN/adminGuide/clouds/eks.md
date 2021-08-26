@@ -49,7 +49,7 @@ kubernetes       ClusterIP   172.20.0.1    <none>                               
 helm upgrade --install --set cluster.enabled=true --set externalS3.enabled=true --set externalS3.host='s3.us-east-2.amazonaws.com' --set externalS3.port=80 --set externalS3.accessKey=${access-key} --set externalS3.secretKey=${secret-key} --set externalS3.bucketName=${bucket-name} --set minio.enabled=False --set service.type=LoadBalancer milvus milvus/milvus
 ```
 
-6. 再次运行指令 ·kubectl get svc·，查找负载均衡器的外部地址，并将其用作 Milvus 集群地址。
+6. 再次运行指令 `kubectl get svc`，查找负载均衡器的外部地址，并将其用作 Milvus 集群地址。
 
 <div class="alert note">
 输入指令 <code>kubectl get pods</code> 来查看当前正在运行的 pod。
