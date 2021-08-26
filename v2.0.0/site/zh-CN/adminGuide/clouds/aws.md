@@ -276,9 +276,9 @@ Inventory 文件仅会在集群创建后出现。该文件会随着集群被删�
 2. 运行指令 `terraform destroy` 并接受提示。
 3. 脚本运行完毕后，系统将删除所有此前分配的资源。
 
-<br/>
+## 资源
 
-<div class="alert note">
+
 所有本指南中提到的文件均可通过以下网址获取。
-<link>https://drive.google.com/file/d/1jLQV0YkseOVj5X0exj17x9dWQjLCP7-1/view?usp=sharing</link>.
-</div>
+https://drive.google.com/file/d/1jLQV0YkseOVj5X0exj17x9dWQjLCP7-1/view?usp=sharing.
+

@@ -281,8 +281,6 @@ Once all the nodes have docker-compose setup, the script launches the correspond
 2. Run `terraform destroy` and accept the prompt.
 3. Once script finishes running, all allocated resources will be destroyed. 
 
-<br/>
+## Resources
 
-<div class="alert note">
-Files for this instruction are available at <link>https://drive.google.com/file/d/1jLQV0YkseOVj5X0exj17x9dWQjLCP7-1/view?usp=sharing</link>.
-</div>
+Files for this instruction are available at https://drive.google.com/file/d/1jLQV0YkseOVj5X0exj17x9dWQjLCP7-1/view?usp=sharing.

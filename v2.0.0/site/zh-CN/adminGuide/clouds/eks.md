@@ -71,8 +71,8 @@ helm upgrade --install --set cluster.enabled=true --set dataNode.replicas=1 --se
 
 Once the script is run, you can call `kubectl get pods` to view the new nodes.
 
-<br/>
+## Resources
 
-<div class="alert note">
-Files for this instruction are available at <link>https://drive.google.com/file/d/1B5VKa5NqnkvBL1ynJySkQtwzM_f1-MwP/view?usp=sharing</link>.
-</div>
+
+Files for this instruction are available at https://drive.google.com/file/d/1B5VKa5NqnkvBL1ynJySkQtwzM_f1-MwP/view?usp=sharing.
+
