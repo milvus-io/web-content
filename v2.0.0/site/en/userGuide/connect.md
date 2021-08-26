@@ -9,6 +9,29 @@ This section covers fundamentals and basic Milvus operations in Python interacti
 
 Type `python3` in your terminal to enter Python interactive mode. Here we take Python 3.9.1 as an example:
 
+<div class="mutipleCode">
+<a href="?node">Nodejs</a> <a href="?py">Python </a>
+</div>
+
+<div class="mutipleCode-node" markdown="block">
+
+```js
+const express = require("express");
+const app = express();
+const port = 3000;
+
+app.get("/", (req, res) => {
+  res.send("Hello World!");
+});
+
+app.listen(port, () => {
+  console.log(`Example app listening at http://localhost:${port}`);
+});
+```
+
+</div>
+<div class="mutipleCode-py" markdown="block">
+
 ```
 ➜  ~ python3
 Python 3.9.1 (default, Feb  3 2021, 07:38:02)
@@ -16,6 +39,8 @@ Python 3.9.1 (default, Feb  3 2021, 07:38:02)
 Type "help", "copyright", "credits" or "license" for more information.
 >>>
 ```
+
+</div>
 
 ## Connect to the Milvus server
 

@@ -215,10 +215,10 @@
     "list": [
       {
         "iconType": "meeting",
-        "title": "Technical Meeting",
-        "desc": "We host events, often. Find out about our upcoming webinars, meetups,hackathons and more.",
-        "link": "https://zilliz.com/events",
-        "label": "LEARN MORE"
+        "title": "Milvus Technical Meeting ",
+        "desc": "Join our next meeting to be involved in the discussion and decision making of Milvus‘ latest features and development timeline.",
+        "link": "https://wiki.lfaidata.foundation/pages/viewpage.action?pageId=43287098",
+        "label": "FIND OUT MORE"
       },
       {
         "iconType": "event",
