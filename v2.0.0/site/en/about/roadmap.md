@@ -81,7 +81,7 @@ title: Milvus Roadmap
 | 2.0.0-rc   | Python SDK test        |         | done        |         |
 | 2.0      | Chaos test       |   yanliang567     | pending       |        |
 | 2.0   | Pressure test        | del-zhenwu        | pending        |         |
-| 2.1      | Supports segment in memory replicas       |        | done       |        |
+| 2.1      | Supports segment in memory replicas       |        | pending       |        |
 | 2.1   | Flow control && back pressure support        |         | pending        |         |
 | 2.2      | 	Query node resource isolation       |        | pending       |        |
 
