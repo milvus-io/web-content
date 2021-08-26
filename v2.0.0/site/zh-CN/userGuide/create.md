@@ -71,6 +71,7 @@ const params = {
 collection=Collection(name=collection_name)
 ```
 
+
 ```javascript
 await milvusClient.collectionManager.createCollection(params);
 ```

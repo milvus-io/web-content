@@ -14,7 +14,7 @@ Prometheus is an open-source toolkit for monitoring Kubernetes implementations. 
 
 [Prometheus Operator](https://github.com/prometheus-operator/prometheus-operator) is an extension to Kubernetes for automated and effective management of  Prometheus monitoring instances. Using Prometheus Operator saves you the trouble of manually adding metric targets and service providers.
 
-### Overall architecture:
+**Overall architecture**
 
 The ServiceMonitor Custom Resource Definition (CRD) allows you to declaratively define how a dynamic set of services should be monitored, and select which services to monitor with the desired configuration using label selections. With Prometheus Operator, you can introduce conventions around how metrics are exposed. New services can be automatically discovered following the convention you set without the need for manual reconfiguration.
 
@@ -24,7 +24,7 @@ The ServiceMonitor Custom Resource Definition (CRD) allows you to declaratively 
 
 [Kube-prometheus](https://github.com/prometheus-operator/kube-prometheus) collects Kubernetes manifests, [Grafana](http://grafana.com/) dashboards, and [Prometheus rules](https://prometheus.io/docs/prometheus/latest/configuration/recording_rules/) combined with documentation and scripts to provide easy to operate end-to-end Kubernetes cluster monitoring with [Prometheus](https://prometheus.io/) using the Prometheus Operator.
 
-### Create a monitoring stack using the config in the manifests directory
+**Create a monitoring stack using the config in the manifests directory:**
 
 ``` 
 git clone https://github.com/prometheus-operator/kube-prometheus.git
@@ -32,13 +32,13 @@ kubectl create -f manifests/setupuntil kubectl get servicemonitors --all-namespa
 kubectl create -f manifests/
 ```
 
-### Teardown the stack
+**Teardown the stack:**
 
 ```
 kubectl delete --ignore-not-found=true -f manifests/ -f manifests/setup
 ```
 
-### Access the dashboards
+**Access the dashboards:**
 
 ```
 kubectl --namespace monitoring port-forward svc/prometheus-k8s 9090
@@ -67,7 +67,7 @@ my-release-milvus              54s
 
 While Prometheus shows metrics in a graph, Grafana is a more powerful visualization tool that can be easily integrated with Prometheus. 
 
-### Download and import Milvus dashboard from json
+**Download and import Milvus dashboard from json:**
 
 ```
 wget https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/monitor/grafana/milvus-dashboard.json
@@ -75,7 +75,7 @@ wget https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/monit
 
 ![Download_and_import](../../../assets/import_dashboard.png)
 
-### Select Milvus instance
+**Select Milvus instance:**
 
 ![Select_instance](../../../assets/grafana_select.png)
 
@@ -83,7 +83,7 @@ You can see the Milvus components panel.
 
 ![Grafana_panel](../../../assets/grafana_panel.png)
 
-### Add an alert in Grafana
+**Add an alert in Grafana:**
 
 To add an alert for the memory usage of Milvus components, edit the `Memory` panel, and add a new query with the following metric `process_resident_memory_bytes{app_kubernetes_io_name="milvus", app_kubernetes_io_instance=~"my-release", namespace="default"}`:
 

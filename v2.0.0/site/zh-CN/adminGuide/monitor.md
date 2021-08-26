@@ -11,7 +11,8 @@ Prometheus 是一款开源的 Kubernetes 监控工具。你可以使用 Promethe
 ## Prometheus Operator
 [Prometheus Operator](https://github.com/prometheus-operator/prometheus-operator) 以扩展 Kubernetes API 的形式实现自动化的方式高效管理 Prometheus 监控实例。使用 Prometheus Operator 后，你无需手动添加目标指标和服务器。
 
-Prometheus Operator 架构
+**Prometheus Operator 架构**
+
 ServiceMonitor 的自定义资源（CRD）支持声明式定义动态服务的监控方式以及通过配置标签选择需要监控的服务。你可以使用 Prometheus Operator 设置监控指标暴露规则。系统将根据设置的规则自动发现新服务，你无需再手动重新设定配置。
 
 ![Prometheus架构](../../../assets/prometheus_architecture.png)
