@@ -1,6 +1,5 @@
 ---
 id: limitations.md
-title: Milvus Limitations
 ---
 # Milvus 使用限制
 

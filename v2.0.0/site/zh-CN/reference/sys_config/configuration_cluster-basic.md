@@ -1,6 +1,5 @@
 ---
 id: configuration_cluster-basic.md
-title: 分布式版 Milvus 系统配置
 label: 基本配置
 order: 0
 group: cluster_sys

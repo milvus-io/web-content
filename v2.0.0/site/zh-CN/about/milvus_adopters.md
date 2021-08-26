@@ -1,6 +1,5 @@
 ---
 id: milvus_adopters.md
-title: Milvus 用户
 ---
 
 # Milvus 用户

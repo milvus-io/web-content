@@ -1,6 +1,5 @@
 ---
 id: operational_faq.md
-title: Operational FAQ
 ---
 
 # 操作常见问题
@@ -101,11 +100,15 @@ Milvus 可以通过 Docker 镜像的形式进行离线部署以单机版 Milvus 
 4. 运行 `docker load` 命令将该文件导入为镜像；
 5. 运行 `docker-compose` 命令启动 Milvus 服务。
 
-更多 Docker 相关内容，详见 [安装单机版 Milvus]()。
+更多 Docker 相关内容，详见 [安装单机版 Milvus](install_standalone-docker.md)。
 
 #### Milvus 日志打印在哪里？
 
 Milvus 的日志默认输出在标准输出（standard output）和标准误差（standard error）流中，实际生产中建议用户重定向目录到持久卷已便于问题的排查。重定向日志需要修改 **milvus.yaml**中的 `log.file.rootPath` 参数配置。
+
+#### Milvus 是否支持先建索引再插入数据？
+
+支持。但我们推荐分批次插入数据，每次插入数据量不超过 256 MB，插入完成后统一创建索引。
 
 #### 仍有问题没有得到解答？
 

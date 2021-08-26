@@ -18,12 +18,12 @@ title: Conduct a Search
 ```
 
 ```javascript
-const searchParams = [
-  { key: "anns_field", value: "example_field" },
-  { key: "topk", value: "4" },
-  { key: "metric_type", value: "L2" },
-  { key: "params", value: JSON.stringify({ nprobe: 10 }) },
-];
+const searchParams = {
+  anns_field: "example_field",
+  topk: "4",
+  metric_type: "L2",
+  params: JSON.stringify({ nprobe: 10 }),
+};
 ```
 
 2. Load the collection to memory before conducting a vector similarity search:

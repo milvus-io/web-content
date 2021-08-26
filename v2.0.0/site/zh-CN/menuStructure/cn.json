@@ -109,7 +109,15 @@
       "label2": "installmilvus",
       "label3": null,
       "order": 1
-    },    
+    }, 
+    {
+      "id": "install_offline-docker.md",
+      "title": "离线安装",
+      "label1": "getstarted",
+      "label2": "installmilvus",
+      "label3": null,
+      "order": 2
+    }, 
     {
       "id": "example_code.md",
       "title": "Hello Milvus",
@@ -168,7 +176,7 @@
     },
     {
       "id": "search",
-      "title": "查询",
+      "title": "搜索与结构化匹配",
       "label1": "userguide",
       "label2": "",
       "label3": "",
@@ -177,7 +185,7 @@
     },
     {
       "id": "search.md",
-      "title": "查询向量",
+      "title": "向量搜索",
       "label1": "userguide",
       "label2": "search",
       "label3": "",
@@ -185,7 +193,7 @@
     },
     {
       "id": "hybridsearch.md",
-      "title": "混合查询",
+      "title": "混合搜索",
       "label1": "userguide",
       "label2": "search",
       "label3": "",
@@ -198,6 +206,14 @@
       "label2": "search",
       "label3": "",
       "order": 2
+    },
+    {
+      "id": "query.md",
+      "title": "结构化匹配",
+      "label1": "userguide",
+      "label2": "search",
+      "label3": "",
+      "order": 3
     },
     {
       "id": "tools",
@@ -215,7 +231,23 @@
       "label2": "tools",
       "label3": "",
       "order": 0,
-      "outLink": "https://github.com/milvus-io/milvus-insight"
+      "isMenu": true
+    },
+    {
+      "id": "insight_overview.md",
+      "title": "简介",
+      "label1": "userguide",
+      "label2": "tools",
+      "label3": "milvus_insight",
+      "order": 0
+    },
+    {
+      "id": "insight_install.md",
+      "title": "安装 Milvus Insight",
+      "label1": "userguide",
+      "label2": "tools",
+      "label3": "milvus_insight",
+      "order": 1
     },
     {
       "id": "sizing",
@@ -225,6 +257,15 @@
       "label3": "",
       "order": 1,
       "outLink": "https://zilliz.com/sizing-tool"
+    },
+    {
+      "id": "cli",
+      "title": "Milvus CLI",
+      "label1": "userguide",
+      "label2": "tools",
+      "label3": "",
+      "order": 2,
+      "outLink": "https://github.com/milvus-io/milvus_cli#overview"
     },
     {
       "id": "bootcamp_userguide",
@@ -277,6 +318,14 @@
       "order": 0
     },
     {
+      "id": "eks.md",
+      "title": "EKS",
+      "label1": "admin_guide",
+      "label2": "cloud",
+      "label3": "",
+      "order": 1
+    },
+    {
       "id": "monitor.md",
       "title": "监控与报警",
       "label1": "admin_guide",
@@ -284,13 +333,21 @@
       "label3": "",
       "order": 3
     },
+    {
+      "id": "allocate.md",
+      "title": "配置集群资源",
+      "label1": "admin_guide",
+      "label2": "",
+      "label3": "",
+      "order": 4
+    },
      {
       "id": "backup",
       "title": "数据备份",
       "label1": "admin_guide",
       "label2": "",
       "label3": "",
-      "order": 4,
+      "order": 5,
       "isMenu": true
     },
     {
@@ -322,7 +379,7 @@
       "title": "数据迁移",
       "label1": "",
       "label2": "",
-      "order": 4,
+      "order": 5,
       "isMenu": true
     },
     {
@@ -381,6 +438,14 @@
       "label2": "architecture",
       "label3": null,
       "order": 2
+    },
+    {
+      "id": "data_processing.md",
+      "title": "关键路径",
+      "label1": "reference",
+      "label2": "architecture",
+      "label3": "",
+      "order": 3
     },
     {
       "id": "systemconfigurations",

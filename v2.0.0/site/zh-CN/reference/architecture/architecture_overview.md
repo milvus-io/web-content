@@ -1,6 +1,5 @@
 ---
 id: architecture_overview.md
-title: 概述
 ---
 
 # Milvus 系统架构概述

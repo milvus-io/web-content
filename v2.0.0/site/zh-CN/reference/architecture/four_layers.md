@@ -1,6 +1,5 @@
 ---
 id: four_layers.md
-title: 存储/计算
 ---
 
 # 存储/计算分离

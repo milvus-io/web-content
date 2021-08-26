@@ -123,11 +123,39 @@ If `nlist` and `topk` are large and nprobe is small, the number of vectors in th
 
 To avoid this, try setting `nprobe` larger and `nlist` and `k` smaller.
 
-See [Index](index.md) for more information.
+See [Index Overview](index.md) for more information.
 
 #### What is the maximum vector dimension supported in Milvus?
 
 Milvus can manage vectors with up to 32,768 dimensions.
+
+#### Does Milvus support Apple M1 CPU?
+
+Current Milvus release does not support Apple M1 CPU.
+
+#### What data types does Milvus support on the ID field?
+
+In current release, Milvus only support INT64 on ID field. Both INT64 and string will be supported in the fomal release of Milvus 2.0.0.
+
+#### Is Milvus scalable?
+
+Yes. You can deploy Milvus cluster with multiple nodes via Helm Chart on Kubernetes. Refer to [Scale Guide](https://zilliverse.feishu.cn/docs/scaleout.md) for more instruction.
+
+#### Does the query perform in memory? What are incremental data and historical data?
+
+Yes. When a query request comes, Milvus searches both incremental data and historical data by loading them into memory. Incremental data are data in the growing segments, which are buffered in memory before they reach the threshold to be persisted in storage engine, while historical data are from the sealed segments that are stored in the object storage. Incremental data and historical data together constitute the whole dataset to search.
+
+#### Is Milvus 2.0 available for concurrent search?
+
+Yes. For queries on the same collection, Milvus concurrently searches the incremental and historical data. However, queries on different collections are conducted in series. Whereas the historical data can be an extremely huge dataset, searches on the historical data are relatively more time-consuming and essentially performed in series. The formal release of Milvus 2.0 will improve this issue.
+
+#### Why does the data in MinIO remain after the corrisponding collection is dropped?
+
+Data in MinIO is designed to remain for a certain period of time for the convenience of data rollback.
+
+#### Does Milvus support message engines other than Pulsar?
+
+Future release of Milvus 2.0 will support Kafka.
 
 #### Still have questions?
 

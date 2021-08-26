@@ -5,9 +5,7 @@ title: Conduct a Hybrid Search
 
 # Conduct a Hybrid Search
 
-
 In addition to vectors, Milvus supports data types such as boolean, integers, floating-point numbers, and more. A collection in Milvus can hold multiple fields for accommodating different data features or properties. Milvus is a flexible vector database that pairs scalar filtering with powerful vector similarity search.
-
 
 A hybrid search is a vector similarity search, during which you can filter the scalar data by specifying a [boolean expression](boolean.md).
 
@@ -56,12 +54,9 @@ milvusClient.collectionManager.createCollection({
       name: "films",
       description: "vector field",
       data_type: DataType.FloatVector,
-      type_params: [
-        {
-          key: "dim",
-          value: "2",
-        },
-      ],
+      type_params: {
+        dim: "2",
+      },
     },
     {
       name: "film_id",
@@ -74,7 +69,7 @@ milvusClient.collectionManager.createCollection({
 });
 ```
 
-3. Insert the random vectors to the newly created collection:
+3. Insert random vectors to the newly created collection:
 
 <div class="multipleCode">
   <a href="?python">Python </a>
@@ -135,12 +130,12 @@ await milvusClient.dataManager.search({
   // partition_names: [],
   expr: "film_id in [1,4,6,8]",
   vectors: [entities[0].films],
-  search_params: [
-    { key: "anns_field", value: "films" },
-    { key: "topk", value: "2" },
-    { key: "metric_type", value: "L2" },
-    { key: "params", value: JSON.stringify({ nprobe: 10 }) },
-  ],
+  search_params: {
+    anns_field: "films",
+    topk: "4",
+    metric_type: "L2",
+    params: JSON.stringify({ nprobe: 10 }),
+  },
   vector_type: 100, // float vector -> 100
 });
 ```

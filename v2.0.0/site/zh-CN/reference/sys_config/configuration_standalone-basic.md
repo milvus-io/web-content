@@ -1,6 +1,5 @@
 ---
 id: configuration_standalone-basic.md
-title: Milvus 单机版系统配置
 label: 基本配置
 order: 0
 group: standalone_sys

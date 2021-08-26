@@ -1,6 +1,5 @@
 ---
 id: delete.md
-title: 删除操作
 ---
 # 删除操作
 删除操作会影响已经插入 Milvus 系统的数据，请谨慎操作。
@@ -74,3 +73,7 @@ await milvusClient.collectionManager.dropCollection({
   collection_name: COLLECTION_NAME,
 });
 ```
+
+## 删除 entities
+
+该功能正在开发中，将跟随 Milvus 2.0 稳定版一同发布。

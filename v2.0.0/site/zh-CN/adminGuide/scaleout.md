@@ -1,6 +1,5 @@
 ---
 id: scaleout.md
-title: 扩缩容
 ---
 
 # 分布式版 Milvus 扩缩容指南

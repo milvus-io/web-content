@@ -1,6 +1,5 @@
 ---
 id: monitor.md
-title: 监控与报警
 ---
 
 # 监控
@@ -12,7 +11,8 @@ Prometheus 是一款开源的 Kubernetes 监控工具。你可以使用 Promethe
 ## Prometheus Operator
 [Prometheus Operator](https://github.com/prometheus-operator/prometheus-operator) 以扩展 Kubernetes API 的形式实现自动化的方式高效管理 Prometheus 监控实例。使用 Prometheus Operator 后，你无需手动添加目标指标和服务器。
 
-Prometheus Operator 架构
+**Prometheus Operator 架构**
+
 ServiceMonitor 的自定义资源（CRD）支持声明式定义动态服务的监控方式以及通过配置标签选择需要监控的服务。你可以使用 Prometheus Operator 设置监控指标暴露规则。系统将根据设置的规则自动发现新服务，你无需再手动重新设定配置。
 
 ![Prometheus架构](../../../assets/prometheus_architecture.png)
@@ -53,14 +53,7 @@ Helm 安装完成后，使用 `kubectl` 检查 ServiceMonitor 资源。
 ```Shell
 kubectl get servicemonitor
 NAME                           AGE
-my-release-milvus-datacoord    54s
-my-release-milvus-datanode     54s
-my-release-milvus-indexcoord   54s
-my-release-milvus-indexnode    54s
-my-release-milvus-proxy        54s
-my-release-milvus-querycoord   54s
-my-release-milvus-querynode    54s
-my-release-milvus-rootcoord    54s
+my-release-milvus              54s
 ```
 
 ## 使用 Grafana 展示监控指标

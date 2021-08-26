@@ -1,6 +1,5 @@
 ---
 id: example_code.md
-title: Hello Milvus
 ---
 
 # 通过 Python 使用 Milvus
