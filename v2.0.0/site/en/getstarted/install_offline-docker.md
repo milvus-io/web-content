@@ -37,7 +37,7 @@ python3 save_image.py --manifest docker-compose.yml
 ```
 
 <div class="alert note">
-The Docker images will be stored under **images** directory.
+The Docker images will be stored under <b>images</b> directory.
 </div>
 
 3. Load the Docker images:
