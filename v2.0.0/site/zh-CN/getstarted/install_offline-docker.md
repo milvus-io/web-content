@@ -36,11 +36,11 @@ python3 save_image.py --manifest docker-compose.yml
 ```
 
 <div class="alert note">
-Docker 镜像文件将存储在 **images** 路径下。
+  Docker 镜像文件将存储在 <b>images</b> 路径下。
 </div>
 
 
-3. 加载 Docker 镜像：
+3. 加载 Docker 镜像
 
 ```
 cd images/for image in $(find . -type f -name "*.tar.gz") ; do gunzip -c $image | docker load; done
