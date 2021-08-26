@@ -43,7 +43,7 @@ python3 save_image.py --manifest milvus_manifest.yaml
 ```
 
 <div class="alert note">
-The Docker images will be stored under **images** directory.
+The Docker images will be stored under <b>images</b> directory.
 </div>
 
 4. Load the Docker images:
