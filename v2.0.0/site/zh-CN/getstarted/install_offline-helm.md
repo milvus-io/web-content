@@ -43,7 +43,7 @@ python3 save_image.py --manifest milvus_manifest.yaml
 ```
 
 <div class="alert note">
-Docker 镜像文件将存储在 **images** 路径下。
+Docker 镜像文件将存储在 <b>images</b> 路径下。
 </div>
 
 
