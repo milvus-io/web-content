@@ -9,14 +9,12 @@ This section covers fundamentals and basic Milvus operations.
 
 If you choose to operate in the Python interactive mode, type `python3` in your terminal.
 
-
 ## Connect to the Milvus server
 
 <div class="multipleCode">
   <a href="?python">Python </a>
   <a href="?javascript">Node</a>
 </div>
-
 
 ```python
 >>> from pymilvus_orm import connections
@@ -36,7 +34,6 @@ When you no longer need Milvus services, you can call `disconnect()` to release 
   <a href="?python">Python </a>
   <a href="?javascript">Node</a>
 </div>
-
 
 ```python
 >>> connections.disconnect("default")

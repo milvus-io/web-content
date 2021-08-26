@@ -214,6 +214,13 @@
     "title": "资源",
     "list": [
       {
+        "iconType": "meeting",
+        "title": "Milvus Office Hours ",
+        "desc": "Milvus Office Hours 是 Milvus 社区的线上交流活动，主要目的是通过线上互动交流的形式，解答用户疑问、介绍和演示 Milvus 新特性和相关技术交流等。",
+        "link": "https://docs.qq.com/doc/DTWtOUVN0WndQUVhH",
+        "label": "报名活动"
+      },
+      {
         "iconType": "event",
         "title": "活动",
         "desc": "我们常常举办活动，来这里看看有没有适合你参加的活动。",
