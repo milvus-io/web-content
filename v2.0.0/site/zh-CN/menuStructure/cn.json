@@ -311,7 +311,7 @@
     },
     {
       "id": "aws.md",
-      "title": "AWS",
+      "title": "Amazon EC2",
       "label1": "admin_guide",
       "label2": "cloud",
       "label3": "",
@@ -319,7 +319,7 @@
     },
     {
       "id": "eks.md",
-      "title": "EKS",
+      "title": "Amazon EKS",
       "label1": "admin_guide",
       "label2": "cloud",
       "label3": "",
