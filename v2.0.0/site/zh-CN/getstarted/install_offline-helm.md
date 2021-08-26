@@ -26,17 +26,15 @@ helm repo update
 <div class="multipleCode">
   <a href="?standalone">Standalone</a>
   <a href="?cluster">Cluster</a>
-</div>
-		<div class="multipleCode-standalone" markdown="block">
+
 ```standalone
 helm template my-release milvus/milvus > milvus_manifest.yaml
 ```
-		</div>
-		<div class="multipleCode-cluster" markdown="block">
+
 ```cluster
 helm template --set cluster.enabled=true my-release milvus/milvus > milvus_manifest.yaml
 ```
-		</div>
+
 
 3. Pull and save the Docker images:
 
