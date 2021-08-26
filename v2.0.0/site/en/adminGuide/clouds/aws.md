@@ -3,7 +3,7 @@ id: aws.md
 title: Deploy Terraform-Ansible on AWS
 ---
 
-# Deploy Terraform-Ansible on AWS
+# Deploy Milvus on AWS with Terraform and Ansible
 
 This guide includes instructions for deploying Terraform-Ansible on Amazon Web Services (AWS). Terraform and Ansible are useful open-source tools that simplify updating and configuring cloud deployments. This guide covers provisioning resources with Terraform and starting services with Ansible.
 
@@ -198,7 +198,7 @@ resource "aws_instance" "minio_node" {
 5. The output returned at the end includes which IPs to use to connect to each instance type.
 
 
-## Starting services with Ansible 
+## Starting Milvus services with Ansible 
 Use Ansible to start running the Milvus cluster with the machines provisioned by Terraform.
 
 ### Files

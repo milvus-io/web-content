@@ -2,7 +2,7 @@
 id: aws.md
 ---
 
-# 使用 Terraform 及 Ansible 在 AWS 上部署集群
+# 使用 Terraform 及 Ansible 在 AWS 上部署 Milvus 集群
 
 本文将介绍如何使用 Terraform 及 Ansible 在 Amazon Web Services (AWS) 上部署 Milvus 集群。使用开源工具 Terraform 及 Ansible 能够简化在云端部署集群的流程。本文主要内容包括：
 
@@ -193,7 +193,7 @@ resource "aws_instance" "minio_node" {
 5. 最终返回结果包含了连接使用的 IP 地址以及每个节点的类型等信息。
 
 
-## 使用 Ansible 启用集群
+## 使用 Ansible 启用 Milvus 集群
 使用 Ansible 在 Terraform 创建的设备上启用 Milvus 集群。
 
 ### 文件
