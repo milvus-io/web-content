@@ -23,13 +23,13 @@ This guide introduces how to run Milvus on an AWS Elastic Kubernetes service (EK
 
 ## Launch the EKS Cluster
 
-1. Edit the terraform variables to match your working environment.
+1. Edit the Terraform variables to match your working environment.
 
 The variables that need to be edited are found in the **variables.tf** file and contain information such as the AWS key, your IP address, where to run the cluster, and the cluster parameters.
 
 2. With the parameters setup, you can start creating the resources. 
 
-Begin by running a command line in the terraform files directory. Run `terraform init` and `terraform apply`. Type yes to the confirmation prompt. 
+Begin by running a command line in the Terraform files directory. Run `terraform init` and `terraform apply`. Type yes to the confirmation prompt. 
 
 3. When the cluster is created using Terraform, run the following command in the same command line with `${aws-region}` as the region of the cluster and  `${cluster-name}` as the name assigned to the cluster. 
 
