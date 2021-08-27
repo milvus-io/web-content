@@ -157,6 +157,9 @@ Similarity search is the process of comparing a target to a database to find obj
 #### Milvus Insight
 [Milvus Insight](https://github.com/milvus-io/milvus-insight) is a graphical management system for Milvus. It features visualization of cluster states, meta management, data queries and more. Milvus Insight will eventually be open sourced.
 
+#### Milvus CLI
+[Milvus CLI](https://github.com/milvus-io/milvus_cli#overview) is Milvus' command-line interface based on [Milvus Python SDK](https://github.com/milvus-io/pymilvus), supporting database connection, data operations, and data export/import.
+
 #### Milvus DM
 [Data migration tool](migrate_overview.md) for Milvus 2.0 is now available.
 

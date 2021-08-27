@@ -147,6 +147,10 @@ Milvus 项目在 GitHub 上获星超 6,000，拥有逾 1,000 家企业用户，�
 
 [Milvus Insight](https://github.com/milvus-io/milvus-insight) 是 Milvus 图形化管理工具，包含了集群状态可视化、元数据管理、数据查询等实用功能。Milvus Insight 源码未来也会作为独立项目开源。
 
+#### Milvus CLI
+
+[Milvus CLI](https://github.com/milvus-io/milvus_cli#overview) 是基于 [PyMilvus](https://github.com/milvus-io/pymilvus) 的 Milvus 命令行界面，支持连接服务器、数据操作和数据导出/导入。
+
 #### Milvus DM 数据迁移工具
 [Milvus 数据迁移工具](migrate_overview.md)现已上线。
 
