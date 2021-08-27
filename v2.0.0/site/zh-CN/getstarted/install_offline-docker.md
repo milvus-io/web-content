@@ -6,7 +6,7 @@ group: offline
 ---
 # 离线安装 Milvus
 
-本篇文档将展示如何在离线环境中部署 Milvus。
+本篇文档将展示如何在离线环境中部署 Milvus。相关文件可在 [GitHub](https://github.com/milvus-io/milvus/tree/master/deployments/offline) 下载。
 
 <div class="tab-wrapper"><a href="install_offline-docker.md" class='active '>使用 Docker Compose 安装</a><a href="install_offline-helm.md" class=''>使用 Kubernetes 安装</a></div>
 

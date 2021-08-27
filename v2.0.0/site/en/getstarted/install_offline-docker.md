@@ -6,7 +6,7 @@ group: offline
 ---
 # Install Milvus Offline
 
-This page will show you how to install Milvus in offline environment.
+This page will show you how to install Milvus in offline environment. Relevant files can be downloaded at [GitHub](https://github.com/milvus-io/milvus/tree/master/deployments/offline).
 
 <div class="tab-wrapper"><a href="install_offline-docker.md" class='active '>Install with Docker Compose</a><a href="install_offline-helm.md" class=''>Install on Kubernetes</a></div>
 
