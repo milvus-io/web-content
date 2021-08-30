@@ -8,7 +8,7 @@ title: Monitor and Alert
 
 ## Prometheus endpoint
 
-Prometheus is an open-source toolkit for monitoring Kubernetes implementations. Prometheus exports metrics of each Milvus 2.0 component at *http://<component-host>:9091/metrics*. Use Prometheus to pull data from endpoints set by exporters.
+Prometheus is an open-source toolkit for monitoring Kubernetes implementations. Prometheus exports metrics of each Milvus 2.0 component at `http://<component-host>:9091/metrics`. Use Prometheus to pull data from endpoints set by exporters.
 
 ## Prometheus Operator
 
