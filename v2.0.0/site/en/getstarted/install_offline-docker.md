@@ -16,13 +16,13 @@ Installation of Milvus may fail when images are not properly loaded from public 
 
 1. Download Milvus **docker-compose.yml**:
 
-- For Milvus Standalone
+- For Milvus standalone
 
 ```
 wget https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/docker/standalone/docker-compose.yml -O docker-compose.yml
 ```
 
-- For Milvus Cluster
+- For Milvus cluster
 
 ```
 wget https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/docker/cluster/docker-compose.yml -O docker-compose.yml

@@ -23,13 +23,13 @@ helm repo update
 
 2. Get Kubernetes manifest of Milvus:
 
-- For Milvus Standalone
+- For Milvus standalone
 
 ```
 helm template my-release milvus/milvus > milvus_manifest.yaml
 ```
 
-- For Milvus Cluster
+- For Milvus cluster
 
 ```cluster
 helm template --set cluster.enabled=true my-release milvus/milvus > milvus_manifest.yaml

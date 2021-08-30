@@ -46,7 +46,7 @@ Milvus v2.0 does not support modification to configuration files during runtime.
 
 If Milvus is started using Docker Compose, run `docker ps` to observe how many Docker containers are running and check if Milvus services started correctly.
 
-- For Milvus Standalone, you should be able to observe at least three running Docker containers, one being the Milvus service and the other two being etcd management and storage service. For more information, see [Installing Milvus Standalone](install_standalone-docker.md).
+- For Milvus standalone, you should be able to observe at least three running Docker containers, one being the Milvus service and the other two being etcd management and storage service. For more information, see [Installing Milvus Standalone](install_standalone-docker.md).
 - For Milvus Cluster, you should be able to observe at least twelve running Docker containers, nine for the Milvus service and three for basic services. For more information, see [Installing Milvus Cluster](install_cluster-docker.md).
 
 #### Why is the time in the log files different from the system time?
@@ -89,7 +89,7 @@ It is not recommended to install pymilvus on Windows. Try installing it in a Con
 
 #### Can I deploy Milvus when disconnected from the Internet?
 
-Milvus is available as a Docker image and allows offline deployment. Taking Milvus Standalone as an example:
+Milvus is available as a Docker image and allows offline deployment. Taking Milvus standalone as an example:
 
 1. Pull the Docker images of MinIO, etcd, and Milvus when you have Internet access.
 2. Run `docker save` to save the images as TAR files.

@@ -46,7 +46,7 @@ Creating milvus-minio ... done
 Creating milvus-standalone ... done
 ```
 
-*If Milvus Standalone boots successfully, three running docker containers appear (two infrastructure services and one Milvus service):* 
+*If Milvus standalone boots successfully, three running docker containers appear (two infrastructure services and one Milvus service):* 
 
 ```
 $ sudo docker-compose ps
@@ -59,7 +59,7 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
 
 
 <div class="alert note">
-To stop Milvus Standalone, run <code> $ sudo docker-compose down</code>.
+To stop Milvus standalone, run <code> $ sudo docker-compose down</code>.
 
 If you want to clean up data after stopping Milvus, run <code> $ sudo rm -rf  volume</code>.
 
