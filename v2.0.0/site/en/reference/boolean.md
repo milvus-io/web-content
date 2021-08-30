@@ -45,7 +45,7 @@ CmpOpRestricted = "<" | "<=";
 CmpOp = ">" | ">=" | "<" | "<=" | "=="| "!=";
 ```
 
-The following table lists the description of each symbol in the above Boolean expression rules.
+The following table lists the description of each symbol mentioned in the above Boolean expression rules.
 
 
 | **Notation**      | **Description** |
@@ -53,7 +53,7 @@ The following table lists the description of each symbol in the above Boolean ex
 | =      | Definition.       |
 | ,      | Concatenation.       |
 | ;      | Termination.        |
-| |      | Alternation.       |
+| \|      | Alternation.       |
 | {...}   | Repetition.        |
 | (...)      | Grouping.       |
 | NIL   | Empty. The expression can be an empty string.        |
