@@ -176,7 +176,7 @@
     },
     {
       "id": "search",
-      "title": "Search and query",
+      "title": "Search and Query",
       "label1": "userguide",
       "label2": "",
       "label3": "",
@@ -335,7 +335,7 @@
     },
     {
       "id": "allocate.md",
-      "title": "Allocate resources on Kubernetes",
+      "title": "Allocate Resources on Kubernetes",
       "label1": "admin_guide",
       "label2": "",
       "label3": "",
