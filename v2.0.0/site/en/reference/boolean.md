@@ -5,7 +5,7 @@ title: Boolean Expression Rules
 
 # Boolean Expression Rules
 
-[EBNF](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form) grammar rules describes boolean expressions rules. Boolean expression rules are as follows:
+[EBNF](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form) grammar rules describe boolean expressions rules. Boolean expression rules are as follows:
 
 ```
 Expr = LogicalExpr | NIL
