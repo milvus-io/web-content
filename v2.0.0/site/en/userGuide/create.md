@@ -154,7 +154,7 @@ await milvusClient.partitionManager.createPartition({
 });
 ```
 
-Milvus creates a default partition name, `_default`, for new collections. After creating a partition, you have two partition names, `example_partition` and `_default`. Call `list_partitons()` to list all partitions in a collection.
+Milvus creates a default partition name, `_default`, for new collections. After creating a partition, you have two partition names, `example_partition` and `_default`. List all partitions in a collection:
 
 <div class="multipleCode">
   <a href="?python">Python </a>
@@ -173,7 +173,7 @@ await milvusClient.partitionManager.showPartitions({
 });
 ```
 
-Call `has_partition()` to check if a partition is successfully created.
+Check if a partition is successfully created:
 
 <div class="multipleCode">
   <a href="?python">Python </a>

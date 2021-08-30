@@ -52,7 +52,7 @@ await milvusClient.indexManager.createIndex({
 });
 ```
 
-3. View Index details:
+3. View index details:
 
 <div class="multipleCode">
   <a href="?python">Python </a>
