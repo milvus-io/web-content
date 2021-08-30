@@ -20,7 +20,7 @@ Docker Compose 部署方式只用作测试使用，不能用于生产环境。
 1. 下载 Docker Compose 配置文件 **docker-compose.yml**：
 
 ```
-$ wget https://raw.githubusercontent.com/milvus-io/milvus/ecfebff801291934a3e6c5955e53637b993ab41a/deployments/docker/cluster/docker-compose.yml -O docker-compose.yml
+$ wget https://github.com/milvus-io/milvus/releases/download/v2.0.0-rc5/milvus-cluster-docker-compose.yml  -O docker-compose.yml
 ```
 > 你可以在 GitHub 直接 [下载](https://raw.githubusercontent.com/milvus-io/milvus/ecfebff801291934a3e6c5955e53637b993ab41a/deployments/docker/cluster/docker-compose.yml) **docker-compose.yml**。
 

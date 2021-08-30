@@ -7,7 +7,7 @@ id: expression.md
 
 Milvus 通过表达式搜索实现标量过滤。表达式是一种布尔值函数，取值为 `true` 或 `false`。
 
-查看 [Python SDK API Reference](/api-reference/pymilvus-orm/2.0.0rc4/api/collection.html) 以了解表达式使用说明。
+查看 [Python SDK API Reference](/api-reference/pymilvus-orm/2.0.0rc5/api/collection.html) 以了解表达式使用说明。
 
 ## 表达式语法
 
