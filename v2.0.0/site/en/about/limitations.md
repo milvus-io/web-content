@@ -63,5 +63,5 @@ VARCHAR will be supported in the 2.0 stable version. More string types will be s
 | nq    | 16384       |
 
 <div class="alert note">
-Due to Pulsar's limitation on the log transmission size (100 MB), Milvus does not support <code>TopK</code> of 16384 on high-dimension vector search in current RC4 version. Milvus 2.0.0 will fully support <code>TopK</code> of 16384.
+Due to Pulsar's limitation on the log transmission size (100 MB), Milvus does not support <code>TopK</code> of 16384 on high-dimension vector search in current version. Milvus 2.0.0 will fully support <code>TopK</code> of 16384.
 </div>
