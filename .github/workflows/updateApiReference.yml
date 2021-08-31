@@ -71,6 +71,8 @@ jobs:
           pip3 install pprint -i https://pypi.doubanio.com/simple/ --trusted-host pypi.douban.com
           pip3 install -r requirements.txt
           cd docs
+          # tmporarily fix PBR_VERSION issue
+          export PBR_VERSION=5.6.0
           sudo apt install make
           make html
           cd build/html
@@ -102,57 +104,6 @@ jobs:
           git commit -m "Update pymilvus"
           git push -f origin master
           echo "=>Completed: Update pymilvus doc repo."
-      - id: update_repo_pymilvus_orm
-        name: Update pymilvus-orm doc repo
-        if: ${{ github.event.inputs.repoName == 'pymilvus-orm' }}
-        run: |
-          sudo chmod -R 777 ${{ github.event.inputs.repoName }}
-          cd ${{ github.event.inputs.repoName }}
-          sudo apt update
-          sudo apt install python3
-          sudo apt install python3-pip
-          python3 --version
-          pip3 --version
-          # tmporarily fix pprint issue
-          pip3 install pprint -i https://pypi.doubanio.com/simple/ --trusted-host pypi.douban.com
-          pip3 install -r requirements.txt
-          pip3 install --upgrade protobuf
-          cd docs
-          # tmporarily fix PBR_VERSION issue
-          export PBR_VERSION=5.6.0
-          sudo apt install make
-          make html
-          cd build/html
-          sudo mv ../../../../${{ github.event.repository.name }}/pymilvus-fs.md ./pymilvus-fs.js
-          curl -sL https://deb.nodesource.com/setup_14.x | sudo bash -
-          sudo apt -y install nodejs
-          node  -v
-          sudo npm i node-html-parser
-          node ./pymilvus-fs.js
-          cd ../../../../${{ github.event.repository.name }}/APIReference/pymilvus-orm
-          echo "Upcomming tag name: ${{ github.event.inputs.tagName }}"
-          echo "=>List all doc versions"
-          ls -l
-          sudo chmod -R 777 .
-          if [ -d "./${{ github.event.inputs.tagName }}" ]
-          then
-            echo "===tag name exists, remove all under this dir==="
-            sudo rm -fr "./${{ github.event.inputs.tagName }}"
-            git add .
-            git status
-            git commit -m "clean files under ${{ github.event.inputs.repoName }} ${{ github.event.inputs.tagName }}"
-            sudo mkdir "./${{ github.event.inputs.tagName }}"
-          else
-            echo "===miss tag name, create this dir==="
-            sudo mkdir "./${{ github.event.inputs.tagName }}"
-          fi
-          sudo rm -fr ../../../pymilvus-orm/docs/build/html/api/api.html
-          sudo cp -r ../../../pymilvus-orm/docs/build/html/output/* "./${{ github.event.inputs.tagName }}"
-          sudo chmod -R 777 .
-          git add .
-          git commit -m "Update pymilvus-orm ${{ github.event.inputs.tagName }}"
-          git push -f origin master
-          echo "=>Completed: Update pymilvus-orm ${{ github.event.inputs.tagName }} doc repo."
       - id: update_repo_milvus_sdk_go
         name: Update milvus_sdk_go doc
         if: ${{ github.event.inputs.repoName == 'milvus-sdk-go' }}
