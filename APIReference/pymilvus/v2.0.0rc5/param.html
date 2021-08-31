@@ -5,10 +5,11 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="python" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Index &mdash; pymilvus 1.1.0 documentation</title>
+  <title>Index &mdash; pymilvus 2.0.0rc4 documentation</title>
   
 
   
@@ -40,7 +41,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Search results" href="results.html" />
-    <link rel="prev" title="API reference" href="api.html" /> 
+    <link rel="prev" title="Future" href="api/future.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -84,27 +85,25 @@
               
             
             
-              <p class="caption"><span class="caption-text">Table of Contents</span></p>
+              <p><span class="caption-text">Table of Contents</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="api.html">API reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/api.html">API Reference</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Index</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#vector-index">Vector Index</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#flat">FLAT</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#ivf-flat">IVF_FLAT</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#ivf-pq">IVF_PQ</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#ivf-sq8">IVF_SQ8</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#ivf-sq8-h">IVF_SQ8_H</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#annoy">ANNOY</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#hnsw">HNSW</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#rnsg">RNSG</a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="results.html">Search results</a></li>
-<li class="toctree-l1"><a class="reference internal" href="changes.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changes.html">Changes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="contribute.html">Contributing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="about.html">About this documentation</a></li>
@@ -173,54 +172,43 @@
 
            <div itemprop="articleBody">
             
-  <div class="section" id="index">
+  <section id="index">
 <h1>Index<a class="headerlink" href="#index" title="Permalink to this headline">¶</a></h1>
 <p><a class="reference external" href="https://github.com/milvus-io">Milvus</a> support to create index to accelerate vector approximate search.</p>
-<p>To learn how to create an index by python client, see method <a class="reference external" href="api.html#milvus.Milvus.create_index">create_index()</a> and
-<a class="reference external" href="https://github.com/milvus-io/pymilvus/tree/1.0/examples">index example</a> .</p>
+<p>To learn how to create an index by python client, see method <a class="reference external" href="api/collection.html#pymilvus.Collection.create_index">create_index()</a> and
+<a class="reference external" href="https://github.com/milvus-io/pymilvus/tree/main/examples">index example</a> .</p>
 <p>For more detailed information about indexes, please refer to <a class="reference external" href="https://milvus.io/docs/index.md">Milvus documentation index chapter.</a></p>
 <p>To learn how to choose an appropriate index for your application scenarios, please read <a class="reference external" href="https://medium.com/&#64;milvusio/how-to-choose-an-index-in-milvus-4f3d15259212">How to Select an Index in Milvus</a>.</p>
 <p>To learn how to choose an appropriate index for a metric, see <a class="reference external" href="https://www.milvus.io/docs/metric.md">Distance Metrics</a>.</p>
-<div class="section" id="vector-index">
+<section id="vector-index">
 <h2>Vector Index<a class="headerlink" href="#vector-index" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="#flat">FLAT</a></p></li>
 <li><p><a class="reference internal" href="#ivf-flat">IVF_FLAT</a></p></li>
 <li><p><a class="reference internal" href="#ivf-sq8">IVF_SQ8</a></p></li>
-<li><p><a class="reference internal" href="#ivf-sq8-h">IVF_SQ8_H</a></p></li>
 <li><p><a class="reference internal" href="#ivf-pq">IVF_PQ</a></p></li>
 <li><p><a class="reference internal" href="#hnsw">HNSW</a></p></li>
 <li><p><a class="reference internal" href="#annoy">ANNOY</a></p></li>
-<li><p><a class="reference internal" href="#rnsg">RNSG</a></p></li>
 </ul>
-<div class="section" id="flat">
+<section id="flat">
 <h3>FLAT<a class="headerlink" href="#flat" title="Permalink to this headline">¶</a></h3>
 <p>If FLAT index is used, the vectors are stored in an array of float/binary data without any compression. during
 searching vectors, all indexed vectors are decoded sequentially and compared to the query vectors.</p>
 <p>FLAT index provides 100% query recall rate. Compared to other indexes, it is the most efficient indexing method
 when the number of queries is small.</p>
 <p>The inserted and index-inbuilt vectors and index-dropped vectors are regard as built with <code class="docutils literal notranslate"><span class="pre">FLAT</span></code>.</p>
-<ul class="simple">
-<li><p>building parameters:
-<strong>N/A</strong></p></li>
-</ul>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># FLAT</span>
-<span class="n">client</span><span class="o">.</span><span class="n">create_index</span><span class="p">(</span><span class="n">collection_name</span><span class="p">,</span> <span class="n">IndexType</span><span class="o">.</span><span class="n">FLAT</span><span class="p">)</span>
-</pre></div>
-</div>
+<p>FLAT is the default index type in the server, so it's not necessary to create an FLAT index. When you search a
+collection without creating an index before, in fact you search a collection with FLAT index.</p>
 <ul class="simple">
 <li><p>search parameters:
 <strong>N/A</strong></p></li>
 </ul>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># FLAT</span>
-<span class="n">client</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">collection_name</span><span class="p">,</span>
-              <span class="mi">1</span><span class="p">,</span>
-              <span class="n">query_vectors</span>
-<span class="p">)</span>
+<span class="n">collection</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">anns_field</span><span class="p">,</span> <span class="n">search_params</span><span class="p">,</span> <span class="n">topK</span><span class="p">,</span> <span class="n">expression</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="ivf-flat">
+</section>
+<section id="ivf-flat">
 <h3>IVF_FLAT<a class="headerlink" href="#ivf-flat" title="Permalink to this headline">¶</a></h3>
 <p><strong>IVF</strong> (<em>Inverted File</em>) is an index type based on quantization. It divides the points in space into <code class="docutils literal notranslate"><span class="pre">nlist</span></code>
 units by clustering method. During searching vectors, it compares the distances between the target vector
@@ -233,9 +221,12 @@ in these selected cells to get the final result.</p>
 </li>
 </ul>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># IVF_FLAT</span>
-<span class="n">client</span><span class="o">.</span><span class="n">create_index</span><span class="p">(</span><span class="n">collection_name</span><span class="p">,</span> <span class="n">IndexType</span><span class="o">.</span><span class="n">IVF_FLAT</span><span class="p">,</span> <span class="p">{</span>
-    <span class="s2">&quot;nlist&quot;</span><span class="p">:</span> <span class="mi">100</span>      <span class="c1"># int. 1~65536</span>
-<span class="p">})</span>
+<span class="n">collection</span><span class="o">.</span><span class="n">create_index</span><span class="p">(</span><span class="n">field_name</span><span class="o">=</span><span class="n">field_name</span><span class="p">,</span>
+                        <span class="n">index_params</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;index_type&#39;</span><span class="p">:</span> <span class="s1">&#39;IVF_FLAT&#39;</span><span class="p">,</span>
+                                      <span class="s1">&#39;metric_type&#39;</span><span class="p">:</span> <span class="s1">&#39;L2&#39;</span><span class="p">,</span>
+                                      <span class="s1">&#39;params&#39;</span><span class="p">:</span> <span class="p">{</span>
+                                        <span class="s1">&#39;nlist&#39;</span><span class="p">:</span> <span class="mi">100</span>      <span class="c1"># int. 1~65536</span>
+                                      <span class="p">}})</span>
 </pre></div>
 </div>
 <ul>
@@ -244,17 +235,13 @@ in these selected cells to get the final result.</p>
 </li>
 </ul>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># IVF_FLAT</span>
-<span class="n">client</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">collection_name</span><span class="p">,</span>
-              <span class="mi">1</span><span class="p">,</span>
-              <span class="n">query_vectors</span><span class="p">,</span>
-              <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+<span class="n">collection</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">anns_field</span><span class="p">,</span> <span class="p">{</span>
                 <span class="s2">&quot;nprobe&quot;</span><span class="p">:</span> <span class="mi">8</span> <span class="c1"># int. 1~nlist(cpu), 1~min[2048, nlist](gpu)</span>
-              <span class="p">}</span>
-<span class="p">)</span>
+              <span class="p">},</span> <span class="n">topK</span><span class="p">,</span> <span class="n">expression</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="ivf-pq">
+</section>
+<section id="ivf-pq">
 <h3>IVF_PQ<a class="headerlink" href="#ivf-pq" title="Permalink to this headline">¶</a></h3>
 <p><strong>PQ</strong> (<em>Product Quantization</em>) uniformly decomposes the original high-dimensional vector space into
 Cartesian products of <code class="docutils literal notranslate"><span class="pre">m</span></code> low-dimensional vector spaces, and then quantizes the decomposed low-dimensional
@@ -272,13 +259,13 @@ smaller than IVF_SQ8, but it also causes a loss of accuracy during searching.</p
 </li>
 </ul>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># IVF_PQ</span>
-<span class="n">client</span><span class="o">.</span><span class="n">create_index</span><span class="p">(</span><span class="n">collection_name</span><span class="p">,</span>
-                    <span class="n">IndexType</span><span class="o">.</span><span class="n">IVF_PQ</span><span class="p">,</span>
-                    <span class="p">{</span>
-                      <span class="s2">&quot;nlist&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>     <span class="c1"># int. 1~65536</span>
-                      <span class="s2">&quot;m&quot;</span><span class="p">:</span> <span class="mi">8</span>            <span class="c1"># int. 1~16. 8 by default</span>
-                    <span class="p">}</span>
-<span class="p">)</span>
+<span class="n">collection</span><span class="o">.</span><span class="n">create_index</span><span class="p">(</span><span class="n">field_name</span><span class="o">=</span><span class="n">field_name</span><span class="p">,</span>
+                        <span class="n">index_params</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;index_type&#39;</span><span class="p">:</span> <span class="s1">&#39;IVF_PQ&#39;</span><span class="p">,</span>
+                                      <span class="s1">&#39;metric_type&#39;</span><span class="p">:</span> <span class="s1">&#39;L2&#39;</span><span class="p">,</span>
+                                      <span class="s1">&#39;params&#39;</span><span class="p">:</span> <span class="p">{</span>
+                                        <span class="s1">&#39;nlist&#39;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>     <span class="c1"># int. 1~65536</span>
+                                        <span class="s2">&quot;m&quot;</span><span class="p">:</span> <span class="mi">8</span>            <span class="c1"># int. 1~16. 8 by default</span>
+                                      <span class="p">}})</span>
 </pre></div>
 </div>
 <ul>
@@ -287,17 +274,13 @@ smaller than IVF_SQ8, but it also causes a loss of accuracy during searching.</p
 </li>
 </ul>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># IVF_PQ</span>
-<span class="n">client</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">collection_name</span><span class="p">,</span>
-              <span class="mi">1</span><span class="p">,</span>
-              <span class="n">query_vectors</span><span class="p">,</span>
-              <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+<span class="n">collection</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">anns_field</span><span class="p">,</span> <span class="p">{</span>
                 <span class="s2">&quot;nprobe&quot;</span><span class="p">:</span> <span class="mi">8</span> <span class="c1"># int. 1~nlist(cpu), 1~min[2048, nlist](gpu)</span>
-              <span class="p">}</span>
-<span class="p">)</span>
+              <span class="p">},</span> <span class="n">topK</span><span class="p">,</span> <span class="n">expression</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="ivf-sq8">
+</section>
+<section id="ivf-sq8">
 <h3>IVF_SQ8<a class="headerlink" href="#ivf-sq8" title="Permalink to this headline">¶</a></h3>
 <p><strong>IVF_SQ8</strong> does scalar quantization for each vector placed in the unit based on IVF. Scalar quantization
 converts each dimension of the original vector from a 4-byte floating-point number to a 1-byte unsigned integer,
@@ -309,12 +292,12 @@ However, scalar quantization results in a loss of accuracy during searching vect
 </li>
 </ul>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># IVF_SQ8</span>
-<span class="n">client</span><span class="o">.</span><span class="n">create_index</span><span class="p">(</span><span class="n">collection_name</span><span class="p">,</span>
-                    <span class="n">IndexType</span><span class="o">.</span><span class="n">IVF_SQ8</span><span class="p">,</span>
-                    <span class="p">{</span>
-                      <span class="s2">&quot;nlist&quot;</span><span class="p">:</span> <span class="mi">100</span>      <span class="c1"># int. 1~65536</span>
-                    <span class="p">}</span>
-<span class="p">)</span>
+<span class="n">collection</span><span class="o">.</span><span class="n">create_index</span><span class="p">(</span><span class="n">field_name</span><span class="o">=</span><span class="n">field_name</span><span class="p">,</span>
+                        <span class="n">index_params</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;index_type&#39;</span><span class="p">:</span> <span class="s1">&#39;IVF_SQ8&#39;</span><span class="p">,</span>
+                                      <span class="s1">&#39;metric_type&#39;</span><span class="p">:</span> <span class="s1">&#39;L2&#39;</span><span class="p">,</span>
+                                      <span class="s1">&#39;params&#39;</span><span class="p">:</span> <span class="p">{</span>
+                                        <span class="s1">&#39;nlist&#39;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>     <span class="c1"># int. 1~65536</span>
+                                      <span class="p">}})</span>
 </pre></div>
 </div>
 <ul>
@@ -323,56 +306,13 @@ However, scalar quantization results in a loss of accuracy during searching vect
 </li>
 </ul>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># IVF_SQ8</span>
-<span class="n">client</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">collection_name</span><span class="p">,</span>
-              <span class="mi">1</span><span class="p">,</span>
-              <span class="n">query_vectors</span><span class="p">,</span>
-              <span class="n">params</span><span class="o">=</span><span class="p">{</span>
-                <span class="s2">&quot;nprobe&quot;</span><span class="p">:</span> <span class="mi">8</span>       <span class="c1"># int. 1~nlist(cpu), 1~min[2048, nlist](gpu)</span>
-              <span class="p">}</span>
-<span class="p">)</span>
+<span class="n">collection</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">anns_field</span><span class="p">,</span> <span class="p">{</span>
+                <span class="s2">&quot;nprobe&quot;</span><span class="p">:</span> <span class="mi">8</span> <span class="c1"># int. 1~nlist(cpu), 1~min[2048, nlist](gpu)</span>
+              <span class="p">},</span> <span class="n">topK</span><span class="p">,</span> <span class="n">expression</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="ivf-sq8-h">
-<h3>IVF_SQ8_H<a class="headerlink" href="#ivf-sq8-h" title="Permalink to this headline">¶</a></h3>
-<p>Optimized version of IVF_SQ8 that requires both CPU and GPU to work. Unlike IVF_SQ8, IVF_SQ8_H uses a GPU-based
-coarse quantizer, which greatly reduces time to quantize.</p>
-<p>IVF_SQ8H is an IVF_SQ8 index that optimizes query execution.</p>
-<p>The query method is as follows:</p>
-<ul>
-<li><p>If <code class="docutils literal notranslate"><span class="pre">nq</span></code> ≥ <code class="docutils literal notranslate"><span class="pre">gpu_search_threshold</span></code>, GPU handles the entire query task.</p></li>
-<li><p>If <code class="docutils literal notranslate"><span class="pre">nq</span></code> &lt; <code class="docutils literal notranslate"><span class="pre">gpu_search_threshold</span></code>, GPU handles the task of retrieving the <code class="docutils literal notranslate"><span class="pre">nprobe</span></code> nearest unit in the IVF
-index file, and CPU handles the rest.</p></li>
-<li><p>building parameters:</p>
-<p><strong>nlist</strong>: Number of cluster units.</p>
-</li>
-</ul>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># IVF_SQ8_H</span>
-<span class="n">client</span><span class="o">.</span><span class="n">create_index</span><span class="p">(</span><span class="n">collection_name</span><span class="p">,</span>
-                    <span class="n">IndexType</span><span class="o">.</span><span class="n">IVF_SQ8_H</span><span class="p">,</span>
-                    <span class="p">{</span>
-                      <span class="s2">&quot;nlist&quot;</span><span class="p">:</span> <span class="mi">100</span>      <span class="c1"># int. 1~65536</span>
-                    <span class="p">}</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-<ul>
-<li><p>search parameters:</p>
-<p><strong>nprobe</strong>: Number of inverted file cell to probe.</p>
-</li>
-</ul>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># IVF_SQ8_H</span>
-<span class="n">client</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">collection_name</span><span class="p">,</span>
-              <span class="mi">1</span><span class="p">,</span>
-              <span class="n">query_vectors</span><span class="p">,</span>
-              <span class="n">params</span><span class="o">=</span><span class="p">{</span>
-                <span class="s2">&quot;nprobe&quot;</span><span class="p">:</span> <span class="mi">8</span>       <span class="c1"># int. 1~nlist(cpu), 1~min[2048, nlist](gpu)</span>
-              <span class="p">}</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="annoy">
+</section>
+<section id="annoy">
 <h3>ANNOY<a class="headerlink" href="#annoy" title="Permalink to this headline">¶</a></h3>
 <p><strong>ANNOY</strong> (<em>Approximate Nearest Neighbors Oh Yeah</em>) is an index that uses a hyperplane to divide a
 high-dimensional space into multiple subspaces, and then stores them in a tree structure.</p>
@@ -388,12 +328,12 @@ all the dividing methods simultaneously to reduce the probability that the targe
 </li>
 </ul>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ANNOY</span>
-<span class="n">client</span><span class="o">.</span><span class="n">create_index</span><span class="p">(</span><span class="n">collection_name</span><span class="p">,</span>
-                    <span class="n">IndexType</span><span class="o">.</span><span class="n">ANNOY</span><span class="p">,</span>
-                    <span class="p">{</span>
-                      <span class="s2">&quot;n_trees&quot;</span><span class="p">:</span> <span class="mi">8</span>      <span class="c1"># int. 1~1024</span>
-                    <span class="p">}</span>
-<span class="p">)</span>
+<span class="n">collection</span><span class="o">.</span><span class="n">create_index</span><span class="p">(</span><span class="n">field_name</span><span class="o">=</span><span class="n">field_name</span><span class="p">,</span>
+                        <span class="n">index_params</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;index_type&#39;</span><span class="p">:</span> <span class="s1">&#39;ANNOY&#39;</span><span class="p">,</span>
+                                      <span class="s1">&#39;metric_type&#39;</span><span class="p">:</span> <span class="s1">&#39;L2&#39;</span><span class="p">,</span>
+                                      <span class="s1">&#39;params&#39;</span><span class="p">:</span> <span class="p">{</span>
+                                        <span class="s2">&quot;n_trees&quot;</span><span class="p">:</span> <span class="mi">8</span>      <span class="c1"># int. 1~1024</span>
+                                      <span class="p">}})</span>
 </pre></div>
 </div>
 <ul>
@@ -402,17 +342,13 @@ all the dividing methods simultaneously to reduce the probability that the targe
 </li>
 </ul>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ANNOY</span>
-<span class="n">client</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">collection_name</span><span class="p">,</span>
-              <span class="mi">1</span><span class="p">,</span>
-              <span class="n">query_vectors</span><span class="p">,</span>
-              <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+<span class="n">collection</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">anns_field</span><span class="p">,</span> <span class="p">{</span>
                 <span class="s2">&quot;search_k&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span>    <span class="c1"># int. {-1} U [top_k, n*n_trees], n represents vectors count.</span>
-              <span class="p">}</span>
-<span class="p">)</span>
+              <span class="p">},</span> <span class="n">topK</span><span class="p">,</span> <span class="n">expression</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="hnsw">
+</section>
+<section id="hnsw">
 <h3>HNSW<a class="headerlink" href="#hnsw" title="Permalink to this headline">¶</a></h3>
 <p><strong>HNSW</strong> (<em>Hierarchical Navigable Small World Graph</em>) is a graph-based indexing algorithm. It builds a
 multi-layer navigation structure for an image according to certain rules. In this structure, the upper
@@ -429,13 +365,13 @@ In addition, you can use <code class="docutils literal notranslate"><span class=
 </li>
 </ul>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># HNSW</span>
-<span class="n">client</span><span class="o">.</span><span class="n">create_index</span><span class="p">(</span><span class="n">collection_name</span><span class="p">,</span>
-                    <span class="n">IndexType</span><span class="o">.</span><span class="n">HNSW</span><span class="p">,</span>
-                    <span class="p">{</span>
-                      <span class="s2">&quot;M&quot;</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>              <span class="c1"># int. 4~64</span>
-                      <span class="s2">&quot;efConstruction&quot;</span><span class="p">:</span> <span class="mi">40</span>  <span class="c1"># int. 8~512</span>
-                    <span class="p">}</span>
-<span class="p">)</span>
+<span class="n">collection</span><span class="o">.</span><span class="n">create_index</span><span class="p">(</span><span class="n">field_name</span><span class="o">=</span><span class="n">field_name</span><span class="p">,</span>
+                        <span class="n">index_params</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;index_type&#39;</span><span class="p">:</span> <span class="s1">&#39;HNSW&#39;</span><span class="p">,</span>
+                                      <span class="s1">&#39;metric_type&#39;</span><span class="p">:</span> <span class="s1">&#39;L2&#39;</span><span class="p">,</span>
+                                      <span class="s1">&#39;params&#39;</span><span class="p">:</span> <span class="p">{</span>
+                                        <span class="s2">&quot;M&quot;</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>              <span class="c1"># int. 4~64</span>
+                                        <span class="s2">&quot;efConstruction&quot;</span><span class="p">:</span> <span class="mi">40</span>  <span class="c1"># int. 8~512</span>
+                                      <span class="p">}})</span>
 </pre></div>
 </div>
 <ul>
@@ -444,70 +380,14 @@ In addition, you can use <code class="docutils literal notranslate"><span class=
 </li>
 </ul>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># HNSW</span>
-<span class="n">client</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">collection_name</span><span class="p">,</span>
-              <span class="mi">1</span><span class="p">,</span>
-              <span class="n">query_vectors</span><span class="p">,</span>
-              <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+<span class="n">collection</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">anns_field</span><span class="p">,</span> <span class="p">{</span>
                 <span class="s2">&quot;ef&quot;</span><span class="p">:</span> <span class="mi">64</span>          <span class="c1"># int. top_k~32768</span>
-              <span class="p">}</span>
-<span class="p">)</span>
+              <span class="p">},</span> <span class="n">topK</span><span class="p">,</span> <span class="n">expression</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="rnsg">
-<h3>RNSG<a class="headerlink" href="#rnsg" title="Permalink to this headline">¶</a></h3>
-<p><strong>RNSG</strong> (<em>Refined Navigating Spreading-out Graph</em>) is a graph-based indexing algorithm. It sets the center
-position of the whole image as a navigation point, and then uses a specific edge selection strategy to control
-the out-degree of each point (less than or equal to <code class="docutils literal notranslate"><span class="pre">out_degree</span></code>). Therefore, it can reduce memory usage and
-quickly locate the target position nearby during searching vectors.</p>
-<p>The graph construction process of NSG is as follows:</p>
-<ol class="arabic simple">
-<li><p>Find <code class="docutils literal notranslate"><span class="pre">knng</span></code> nearest neighbors for each point.</p></li>
-<li><p>Iterate at least <code class="docutils literal notranslate"><span class="pre">search_length</span></code> times based on <code class="docutils literal notranslate"><span class="pre">knng</span></code> nearest neighbor nodes to select <code class="docutils literal notranslate"><span class="pre">candidate_pool_size</span></code> possible nearest neighbor nodes.</p></li>
-<li><p>Construct the out-edge of each point in the selected <code class="docutils literal notranslate"><span class="pre">candidate_pool_size</span></code> nodes according to the edge selection strategy.</p></li>
-</ol>
-<p>The query process is similar to the graph building process. It starts from the navigation point and iterates at least <code class="docutils literal notranslate"><span class="pre">search_length</span></code> times to get the final result.</p>
-<ul>
-<li><p>building parameters:</p>
-<p><strong>search_length</strong>: Number of query iterations.</p>
-<p><strong>out_degree</strong>: Maximum out-degree of the node.</p>
-<p><strong>candidate_pool_size</strong>: Candidate pool size of the node.</p>
-<p><strong>knng</strong>: Number of nearest neighbors</p>
-</li>
-</ul>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># RNSG</span>
-<span class="n">client</span><span class="o">.</span><span class="n">create_index</span><span class="p">(</span><span class="n">collection_name</span><span class="p">,</span>
-                    <span class="n">IndexType</span><span class="o">.</span><span class="n">RNSG</span><span class="p">,</span>
-                    <span class="p">{</span>
-                      <span class="s2">&quot;search_length&quot;</span><span class="p">:</span> <span class="mi">60</span><span class="p">,</span>         <span class="c1"># int. 10~300</span>
-                      <span class="s2">&quot;out_degree&quot;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>            <span class="c1"># int. 5~300</span>
-                      <span class="s2">&quot;candidate_pool_size&quot;</span><span class="p">:</span> <span class="mi">300</span><span class="p">,</span>  <span class="c1"># int. 50~1000</span>
-                      <span class="s2">&quot;knng&quot;</span><span class="p">:</span> <span class="mi">50</span>                   <span class="c1"># int. 5~300</span>
-                    <span class="p">}</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-<ul>
-<li><p>search parameters:</p>
-<blockquote>
-<div><p><strong>search_length</strong>: Number of query iterations</p>
-</div></blockquote>
-</li>
-</ul>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># RNSG</span>
-<span class="n">client</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">collection_name</span><span class="p">,</span>
-              <span class="mi">1</span><span class="p">,</span>
-              <span class="n">query_vectors</span><span class="p">,</span>
-              <span class="n">params</span><span class="o">=</span><span class="p">{</span>
-                <span class="s2">&quot;search_length&quot;</span><span class="p">:</span> <span class="mi">100</span>  <span class="c1"># int. 10~300</span>
-              <span class="p">}</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-<p><em>Section author: <a class="reference external" href="https://github.com/godchen0212">Godchen&#64;milvus</a></em></p>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
            </div>
@@ -524,7 +404,7 @@ quickly locate the target position nearby during searching vectors.</p>
         <a href="results.html" class="btn btn-neutral float-right" title="Search results" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="api.html" class="btn btn-neutral float-left" title="API reference" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="api/future.html" class="btn btn-neutral float-left" title="Future" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

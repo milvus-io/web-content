@@ -5,10 +5,11 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="python" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Contributing &mdash; pymilvus 1.1.0 documentation</title>
+  <title>Contributing &mdash; pymilvus 2.0.0rc4 documentation</title>
   
 
   
@@ -84,14 +85,14 @@
               
             
             
-              <p class="caption"><span class="caption-text">Table of Contents</span></p>
+              <p><span class="caption-text">Table of Contents</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="api.html">API reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/api.html">API Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="param.html">Index</a></li>
 <li class="toctree-l1"><a class="reference internal" href="results.html">Search results</a></li>
-<li class="toctree-l1"><a class="reference internal" href="changes.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changes.html">Changes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Contributing</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#open-issues">Open Issues</a></li>
@@ -166,7 +167,7 @@
 
            <div itemprop="articleBody">
             
-  <div class="section" id="contributing">
+  <section id="contributing">
 <h1>Contributing<a class="headerlink" href="#contributing" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
 <li><p><a class="reference internal" href="#open-issues">Open Issues</a></p></li>
@@ -174,9 +175,9 @@
 <li><p><a class="reference internal" href="#github-workflow">Github workflow</a></p></li>
 <li><p><a class="reference internal" href="#contribution-guideline">Contribution Guideline</a></p></li>
 </ul>
-<p>Contributing is warmly welcomed. You can contribute to PyMilvus project by opening issues and submitting pull
+<p>Contributing is warmly welcomed. You can contribute to PyMilvus ORM project by opening issues and submitting pull
 requests on <a class="reference external" href="https://github.com/milvus-io/pymilvus">PyMilvus Github page</a>.</p>
-<div class="section" id="open-issues">
+<section id="open-issues">
 <h2>Open Issues<a class="headerlink" href="#open-issues" title="Permalink to this headline">¶</a></h2>
 <p>To request a new feature, report a bug or ask a question, it's recommended for you to <strong>open an issue</strong>.</p>
 <dl class="simple">
@@ -188,22 +189,22 @@ also welcomed for you to open an issue with your PR as a solution.</p>
 <a class="reference external" href="https://github.com/milvus-io/pymilvus/issues/new?assignees=&amp;labels=&amp;template=bug_report.md&amp;title=%5BBUG%5D">bug report template</a>.
 With information, we can reproduce the bug easily and solve it later.</p>
 </dd>
-<dt>For a question</dt><dd><p>It's welcomed to ask any questions about PyMilvus and Milvus, we are pleased to communicate with you.</p>
+<dt>For a question</dt><dd><p>It's welcomed to ask any questions about PyMilvus ORM and Milvus, we are pleased to communicate with you.</p>
 </dd>
 </dl>
-</div>
-<div class="section" id="submit-pull-requests">
+</section>
+<section id="submit-pull-requests">
 <h2>Submit Pull Requests<a class="headerlink" href="#submit-pull-requests" title="Permalink to this headline">¶</a></h2>
-<p>If you have improvements to PyMilvus, please submit pull requests(PR) to master, see workflow below.</p>
+<p>If you have improvements to PyMilvus ORM, please submit pull requests(PR) to master, see workflow below.</p>
 <p><strong>PR for codes</strong>, you need to tell us why we need it, mentioning an existing issue would be better.</p>
 <p><strong>PR for docs</strong>, you also need to tell us why we need it.</p>
 <p>Your PRs will be reviewed and checked, merged into our project if approved.</p>
-</div>
-<div class="section" id="github-workflow">
+</section>
+<section id="github-workflow">
 <h2>Github workflow<a class="headerlink" href="#github-workflow" title="Permalink to this headline">¶</a></h2>
 <p>This is a brief instruction of Github workflow for beginners.</p>
 <ul class="simple">
-<li><p><strong>Fork</strong> the <a class="reference external" href="https://github.com/milvus-io/pymilvus">PyMilvus repository</a> on Github.</p></li>
+<li><p><strong>Fork</strong> the <a class="reference external" href="https://github.com/milvus-io/pymilvus">PyMilvus ORM repository</a> on Github.</p></li>
 <li><p><strong>Clone</strong> your fork to your local machine with <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span> <span class="pre">git&#64;github.com:&lt;your_user_name&gt;/pymilvus.git</span></code>.</p></li>
 <li><p>Create a new branch with <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">-b</span> <span class="pre">my_working_branch</span></code>.</p></li>
 <li><p>Make your changes, commit, then push to your forked repository.</p></li>
@@ -211,13 +212,13 @@ With information, we can reproduce the bug easily and solve it later.</p>
 </ul>
 <p>If you already have an existing local repository, always update it before you start to make changes like below:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$ git remote add upstream git@github.com:milvus-io/pymilvus.git
-$ git checkout master
+$ git checkout main
 $ git pull upstream master
 $ git checkout -b my_working_branch
 </pre></div>
 </div>
-</div>
-<div class="section" id="contribution-guideline">
+</section>
+<section id="contribution-guideline">
 <h2>Contribution guideline<a class="headerlink" href="#contribution-guideline" title="Permalink to this headline">¶</a></h2>
 <p><strong>1. Update CHANGELOG.md</strong></p>
 <p>If any improvement or feature being added, you are recommended to open a new issue(if not exist) then
@@ -225,15 +226,14 @@ record your change in file <cite>CHANGELOG.md</cite>. The format is:
 <cite>- #{GitHub issue number} - {Brief description for your change}</cite></p>
 <p><strong>2. Add unit tests for your codes</strong></p>
 <p>To run unit test in github action, you need make sure the last commit message of PR starts with &quot;[ci]&quot;.
-If you want to run unit test locally, under root folder of Pymilvus project run <cite>pytest --ip=${IP} --port=${PORT}</cite>.</p>
+If you want to run unit test locally, under root folder of PyMilvus ORM project run <cite>pytest --ip=${IP} --port=${PORT}</cite>.</p>
 <p><strong>3. Pass pylint check</strong></p>
-<p>In the root directory, run <code class="docutils literal notranslate"><span class="pre">pylint</span> <span class="pre">--rcfile=pylint.conf</span> <span class="pre">milvus/client</span></code> to make sure the rate is 10.</p>
+<p>In the root directory, run <code class="docutils literal notranslate"><span class="pre">pylint</span> <span class="pre">--rcfile=pylint.conf</span> <span class="pre">pymilvus</span></code> to make sure the rate is 10.</p>
 <p><strong>4. For documentations</strong></p>
 <p>You need to enter the <code class="docutils literal notranslate"><span class="pre">doc</span></code> directory and run <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">html</span></code>, please refer to
-<a class="reference external" href="https://pymilvus.readthedocs.io/en/latest/about.html">About this documentations</a>.</p>
-<p><em>Section author: <a class="reference external" href="https://github.com/XuanYang-cn">Yangxuan&#64;milvus</a></em></p>
-</div>
-</div>
+<a class="reference external" href="https://milvus.io/api-reference/pymilvus/v2.0.0rc4/about.html">About this documentations</a>.</p>
+</section>
+</section>
 
 
            </div>

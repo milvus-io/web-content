@@ -5,10 +5,11 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="python" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Installation &mdash; pymilvus 1.1.0 documentation</title>
+  <title>Installation &mdash; pymilvus 2.0.0rc4 documentation</title>
   
 
   
@@ -84,7 +85,7 @@
               
             
             
-              <p class="caption"><span class="caption-text">Table of Contents</span></p>
+              <p><span class="caption-text">Table of Contents</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#installing-via-pip">Installing via pip</a></li>
@@ -95,10 +96,10 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="api.html">API reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/api.html">API Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="param.html">Index</a></li>
 <li class="toctree-l1"><a class="reference internal" href="results.html">Search results</a></li>
-<li class="toctree-l1"><a class="reference internal" href="changes.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changes.html">Changes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="contribute.html">Contributing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="about.html">About this documentation</a></li>
@@ -167,17 +168,17 @@
 
            <div itemprop="articleBody">
             
-  <div class="section" id="installation">
+  <section id="installation">
 <h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="installing-via-pip">
+<section id="installing-via-pip">
 <h2>Installing via pip<a class="headerlink" href="#installing-via-pip" title="Permalink to this headline">¶</a></h2>
 <p>PyMilvus is in the <a class="reference external" href="https://pypi.org/project/pymilvus/">Python Package Index</a>.</p>
 <p>PyMilvus only support python3(&gt;= 3.6), usually, it's ok to install PyMilvus like below.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$ python3 -m pip install pymilvus
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$ python3 -m pip install <span class="nv">pymilvus</span><span class="o">==</span><span class="m">2</span>.0.0rc4
 </pre></div>
 </div>
-</div>
-<div class="section" id="installing-in-a-virtual-environment">
+</section>
+<section id="installing-in-a-virtual-environment">
 <h2>Installing in a virtual environment<a class="headerlink" href="#installing-in-a-virtual-environment" title="Permalink to this headline">¶</a></h2>
 <p>It's recommended to use PyMilvus in a virtual environment, using virtual environment allows you to avoid
 installing Python packages globally which could break system tools or other projects.
@@ -186,7 +187,7 @@ See <a class="reference external" href="https://virtualenv.pypa.io/en/latest/">v
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$ python3 -m pip install virtualenv
 $ virtualenv venv
 $ <span class="nb">source</span> venv/bin/activate
-<span class="o">(</span>venv<span class="o">)</span> $ pip install pymilvus
+<span class="o">(</span>venv<span class="o">)</span> $ pip install <span class="nv">pymilvus</span><span class="o">==</span><span class="m">2</span>.0.0rc4
 </pre></div>
 </div>
 <p>If you want to exit the virtualenv <code class="docutils literal notranslate"><span class="pre">venv</span></code>, you can use <code class="docutils literal notranslate"><span class="pre">deactivate</span></code>.</p>
@@ -194,36 +195,35 @@ $ <span class="nb">source</span> venv/bin/activate
 $
 </pre></div>
 </div>
-</div>
-<div class="section" id="installing-a-specific-pymilvus-version">
+</section>
+<section id="installing-a-specific-pymilvus-version">
 <h2>Installing a specific PyMilvus version<a class="headerlink" href="#installing-a-specific-pymilvus-version" title="Permalink to this headline">¶</a></h2>
 <p>Here we assume you are already in a virtual environment.</p>
 <p>Suitable PyMilvus version depends on Milvus version you are using. See <a class="reference external" href="https://github.com/milvus-io/pymilvus#install-pymilvus">install pymilvus</a> for recommended pymilvus version.</p>
 <p>If you want to install a specific version of PyMilvus:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>venv<span class="o">)</span> $ pip install <span class="nv">pymilvus</span><span class="o">==</span><span class="m">1</span>.1.0
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>venv<span class="o">)</span> $ pip install <span class="nv">pymilvus</span><span class="o">==</span><span class="m">2</span>.0.0rc4
 </pre></div>
 </div>
 <p>If you want to upgrade PyMilvus into the latest version published:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>venv<span class="o">)</span> $ pip install --upgrade pymilvus
 </pre></div>
 </div>
-</div>
-<div class="section" id="installing-from-source">
+</section>
+<section id="installing-from-source">
 <h2>Installing from source<a class="headerlink" href="#installing-from-source" title="Permalink to this headline">¶</a></h2>
 <p>This will install the latest PyMilvus into your virtual environment.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>venv<span class="o">)</span> $ pip install git+https://github.com/milvus-io/pymilvus.git
 </pre></div>
 </div>
-</div>
-<div class="section" id="verifying-installation">
+</section>
+<section id="verifying-installation">
 <h2>Verifying installation<a class="headerlink" href="#verifying-installation" title="Permalink to this headline">¶</a></h2>
 <p>Your installation is correct if the following command in the Python shell doesn't raise an exception.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>venv<span class="o">)</span> $ python -c <span class="s2">&quot;from milvus import Milvus, DataType&quot;</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>venv<span class="o">)</span> $ python -c <span class="s2">&quot;from pymilvus import Collection&quot;</span>
 </pre></div>
 </div>
-<p><em>Section author: <a class="reference external" href="https://github.com/XuanYang-cn">Yangxuan&#64;milvus</a></em></p>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
