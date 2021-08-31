@@ -32,10 +32,10 @@ title: Milvus Roadmap
 | **Version** | **Feature** | **Owner**   | **Status**  | **Comment** |
 | ----------- | ----------- | ----------- | ----------- | ----------- |
 | 2.0.0-rc      | Supports scalar filtering       |        | done       |        |
-| 2.0.0-rc   | Supports for query by id        |         | done        |         |
+| 2.0.0-rc   | Supports for query by ID        |         | done        |         |
 | 2.0   | Supports query by expression        | fishpenguin        | in progress        |         |
-| 2.0   | Supports delete by id        |         | pending        |         |
-| 2.1   | Supports search by id        |         | pending        |         |
+| 2.0   | Supports delete by ID        |     scsven    | in progress        |         |
+| 2.1   | Supports search by ID        |         | pending        |         |
 | 2.1   | Vector similarity search by distance        |         | pending        |         |
 | 2.2   | Supports search/query result pagination	        |         | pending        |         |
 | 2.2   | Supports upsert/primary key deduplication        |         | pending        |         |
@@ -47,10 +47,10 @@ title: Milvus Roadmap
 | ----------- | ----------- | ----------- | ----------- | ----------- |
 | 2.0.0-rc      | Supports time travel to any specified point in time	       |        | done       |        |
 | 2.0.0-rc   | Offers three levels of tunable consistency: strong, session, consistent prefix        |         | done        |         |
-| 2.0      | Segment compaction       | sunby       | pending       |        |
-| 2.0   | Implements dynamic load balancing        | sunby, xige-16        | pending        |         |
-| 2.0      | mplements dynamic handoff       | xige-16, bigsheeper       | pending       |        |
-| 2.0   | Calculate distance between embeddings        | yhmo        | in progress	        |         |
+| 2.0      | Segment compaction       | sunby       | in progress       |        |
+| 2.0   | Implements dynamic load balancing        | sunby, xige-16        | in progress        |         |
+| 2.0      | mplements dynamic handoff       | xige-16, bigsheeper       | in progress       |        |
+| 2.0   | Calculate distance between embeddings        |         | done	        |         |
 | 2.1      | Multi tenant support and access control       |        | pending       |        |
 | 2.2   | Change data capture        |         | pending        |         |
 | Long Term      | Adopts incremental backup       |        | pending       |        |
@@ -62,7 +62,7 @@ title: Milvus Roadmap
 
 | **Version** | **Feature** | **Owner**   | **Status**  | **Comment** |
 | ----------- | ----------- | ----------- | ----------- | ----------- |
-| 2.0      | Milvus 2.0 performance benchmark and tuning       | czs007, dragondriver	       | pending       |        |
+| 2.0      | Milvus 2.0 performance benchmark and tuning       | czs007, dragondriver	       | in progress       |        |
 | 2.1   | Supports GPU Index building and embedding retrieval        | shengjun1985        | pending        |         |
 | 2.1      | Data bulkload       |        | pending       |        |
 | 2.1   | Adopts cost-based query optimization algorithm to improve hybrid search efficiency        |         | pending        |         |
@@ -94,7 +94,7 @@ title: Milvus Roadmap
 | 2.0.0-rc    | Helm installation       |        | done       |        |
 | 2.0.0-rc    | Support of Milvus Insight, a Milvus visual management tool        |         | in progress        |         |
 | 2.0      | Prometheus, Grafana and Jaeger support       | 	zwd1208       | in progress       |        |
-| 2.0   | Milvus k8s operator        | 	zwd1208, jeffoverflow        | pending        |         |
+| 2.0   | Milvus Kuberbetes operator        | 	zwd1208, jeffoverflow        | pending        |         |
 | 2.1      | Multi datacenter deployment and multi-cloud integration       |        | pending       |        |
 | 2.2   | Embedded Milvus that runs on laptops	        |         | pending        |         |
 | Long Term      | Dynamic cluster expansion/shrink       |        | pending      |      |
@@ -107,9 +107,9 @@ title: Milvus Roadmap
 | **Version** | **Feature** | **Owner**   | **Status**  | **Comment** |
 | ----------- | ----------- | ----------- | ----------- | ----------- |
 | 2.0.0-rc      | Python ORM-style APIs	       |        | done       |        |
-| 2.0   | Merge Pymilvus ORM and Pymilvus        | XuanYang-cn        | done        |         |
-| 2.0      | Supports NodeJs APIs       | nameczz,shanghaikid       | in progress       | SDK is ready to use, and We will keep updating it. <br/>  https://github.com/milvus-io/milvus-sdk-node       |
-| 2.0   | Supports Java SDK        |         | pending         |         |
+| 2.0   | Merge Pymilvus ORM and Pymilvus        |         | done        |         |
+| 2.0      | Supports NodeJs APIs       |        | done       |     |
+| 2.0   | Supports Java SDK        |     xiaofan-luan    | in progress         |         |
 | 2.0      | Supports Go SDK       | congqixia       | in progress       |        |
 | 2.1   | Supports Restful APIs        |         | pending        |         |
 | 2.1      | Supports C++ SDK       |        | pending        |        |

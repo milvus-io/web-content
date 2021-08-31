@@ -33,8 +33,8 @@ id: roadmap.md
 | ----------- | ----------- | ----------- | ----------- | ----------- |
 | 2.0.0-rc      | 支持标量字段过滤       |        | 已完成       |        |
 | 2.0.0-rc   | 支持根据 ID 查询数据        |         | 已完成        |         |
-| 2.0   | 支持根据表达式（predicate expression）查询数据       | fishpenguin/FluorineDog        | in progress        |         |
-| 2.0   | 支持根据 ID 删除数据       |         | 待指派        |         |
+| 2.0   | 支持根据表达式（predicate expression）查询数据       | fishpenguin/FluorineDog        | 开发中        |         |
+| 2.0   | 支持根据 ID 删除数据       |    scsven     |    开发中     |         |
 | 2.1   | 支持根据 ID 查询数据       |         | 待指派         |         |
 | 2.1   | 返回符合距离限制的全部向量。       |         | 待指派          |         |
 | 2.2   | 对检索或查询结果进行分页	        |         | 待指派        |         |
@@ -49,13 +49,13 @@ id: roadmap.md
 | 2.0.0-rc   | 提供四个级别的一致性，分别是：strong、bounded staleness、session、consistent prefix。       |         | 已完成        |         |
 | 2.0      | Segment compaction       | sunby       | 开发中       |        |
 | 2.0   | 实现动态负载均衡        | sunby, xige-16        | 开发中        |         |
-| 2.0      | 增量Segment到存量Segment的动态切换       | xige-16, bigsheeper       | 开发中       |        |
-| 2.0   | 向量距离计算      | yhmo        | 开发中	        |         |
+| 2.0      | 增量 Segment 到存量 Segment 的动态切换       | xige-16, bigsheeper       | 开发中       |        |
+| 2.0   | 向量距离计算      |         | 已完成	        |         |
 | 2.1      | 提供用户自定义的embedding服务      |        | 待指派       |        |
 | 2.2   | 支持变更数据捕获      |         | 待指派        |         |
 | 长期      | 采用增量备份      |        | 待指派       |        |
 | 长期   | 支持静态数据加密      |         | 待指派        |         |
-| 长期      | 通过数据导入及转换实现 embedding-as-service 服务|  待指派       |       |        |
+| 长期      | 通过数据导入及转换实现 embedding-as-service 服务|         |    待指派   |        |
 
 
 #### 性能
@@ -82,7 +82,7 @@ id: roadmap.md
 | 2.0.0-rc   | Python SDK 测试        |         | 已完成        |         |
 | 2.0      | 混沌测试       |   yanliang567     | 开发中       |        |
 | 2.0   | 压力测试       | del-zhenwu        | 开发中        |         |
-| 2.1      | 支持 Segment 多内存副本      |        | 已完成       |        |
+| 2.1      | 支持 Segment 多内存副本      |        |  待指派      |        |
 | 2.1   | 支持流控及背压        |         | 待指派        |         |
 | 2.2      | 	查询节点资源隔离     |        | 待指派       |        |
 
@@ -108,9 +108,9 @@ id: roadmap.md
 | **版本** | **功能** | **Owner**   | **进度**  | **备注** |
 | ----------- | ----------- | ----------- | ----------- | ----------- |
 | 2.0.0-rc      | 提供基于对象关系映射（Obejct Relational Mapping）抽象的 API       |        | 已完成       |        |
-| 2.0   | 合并 PyMilvus ORM 及 PyMilvus        | XuanYang-cn        | 已完成     |         |
-| 2.0      | 支持 NodeJs 语言的 SDK        | nameczz,shanghaikid       | 开发中      | 当前SDK可用，并将支持更新 <br/>  https://github.com/milvus-io/milvus-sdk-node       |
-| 2.0   | 支持 Java 语言的 SDK        |         | 待指派         |         |
+| 2.0   | 合并 PyMilvus ORM 及 PyMilvus        |         | 已完成     |         |
+| 2.0      | 支持 NodeJs 语言的 SDK        |        | 已完成      |      |
+| 2.0   | 支持 Java 语言的 SDK        |    xiaofan-luan     | 开发中         |         |
 | 2.0      | 支持 Go 语言的 SDK       | congqixia       |  开发中       |        |
 | 2.1   | 支持 Restful 语言的 API        |         | 待指派        |         |
 | 2.1      | 支持 C++ 语言的 SDK       |        | 待指派        |        |
