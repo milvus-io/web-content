@@ -107,7 +107,7 @@ title: Milvus Roadmap
 | **Version** | **Feature** | **Owner**   | **Status**  | **Comment** |
 | ----------- | ----------- | ----------- | ----------- | ----------- |
 | 2.0.0-rc      | Python ORM-style APIs	       |        | done       |        |
-| 2.0   | Merge Pymilvus ORM and Pymilvus        | XuanYang-cn        | in progress        |         |
+| 2.0   | Merge Pymilvus ORM and Pymilvus        | XuanYang-cn        | done        |         |
 | 2.0      | Supports NodeJs APIs       | nameczz,shanghaikid       | in progress       | SDK is ready to use, and We will keep updating it. <br/>  https://github.com/milvus-io/milvus-sdk-node       |
 | 2.0   | Supports Java SDK        |         | pending         |         |
 | 2.0      | Supports Go SDK       | congqixia       | in progress       |        |

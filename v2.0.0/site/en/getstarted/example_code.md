@@ -7,10 +7,10 @@ title: Hello Milvus
 
 After the Milvus server boots successfully, test the platform using our Python sample code.
 
-1. Install pymilvus_orm and its dependencies:
+1. Install PyMilvus and its dependencies:
 
 ```Python
-pip install pymilvus-orm==2.0.0rc5
+pip install pymilvus==2.0.0rc5
 ```
 <div class="alert note">
 Python version 3.6 or higher is required. View <a href="https://wiki.python.org/moin/BeginnersGuide/Download">Python documentation</a> for information about installing the correct version for your system.
@@ -19,14 +19,14 @@ Python version 3.6 or higher is required. View <a href="https://wiki.python.org/
 2. Download sample code **hello_milvus.py**:
 
 ```Python
-$ wget https://raw.githubusercontent.com/milvus-io/pymilvus-orm/v2.0.0rc5/examples/hello_milvus.py
+$ wget https://raw.githubusercontent.com/milvus-io/pymilvus/v2.0.0rc5/examples/hello_milvus.py
 ```
 
 3. Scan **hello_milvus.py**. This sample code does the following:
 
 - Imports the pymilvus package:
 ```Python
-from pymilvus_orm import connections, FieldSchema, CollectionSchema, DataType, Collection
+from pymilvus import connections, FieldSchema, CollectionSchema, DataType, Collection
 ```
 
 - Connects to the Milvus server:
@@ -86,7 +86,7 @@ res = collection.search(
 </div>
 
 ```Python
-from pymilvus_orm import connections, Collection, FieldSchema, CollectionSchema, DataType
+from pymilvus import connections, Collection, FieldSchema, CollectionSchema, DataType
 >>> import random
 >>> connections.connect()
 >>> schema = CollectionSchema([

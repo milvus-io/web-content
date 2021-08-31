@@ -310,7 +310,7 @@ Milvus 2.0 is a cloud-native vector database with storage and computation separa
 
 - Object-relational mapping (ORM) PyMilvus
 
-  The PyMilvus-ORM APIs operate directly on collections, partitions, and indexes, helping users focus on the building of an effective data model rather than the detailed implementation. 
+  The PyMilvus APIs operate directly on collections, partitions, and indexes, helping users focus on the building of an effective data model rather than the detailed implementation. 
 
 **Core Features**
 

@@ -13,7 +13,7 @@ Collections can only be created after successfully connecting to the Milvus serv
 The created collection must contain a primary key field. Int64 is the only supported data type for the primary key field for now.
 </div>
 
-1. Prepare collection parameters, including collection name and field parameters. See [API document](https://pymilvus-orm.readthedocs.io/en/latest/) for a detailed description of these parameters.
+1. Prepare collection parameters, including collection name and field parameters. See [API document](https://pymilvus.readthedocs.io/en/latest/) for a detailed description of these parameters.
 
 <div class="multipleCode">
   <a href="?python">Python </a>
@@ -24,7 +24,7 @@ The created collection must contain a primary key field. Int64 is the only suppo
 ````python
 >>> collection_name = "example_collection"
 >>> field_name = "example_field"
->>> from pymilvus_orm import Collection, CollectionSchema, FieldSchema, DataType
+>>> from pymilvus import Collection, CollectionSchema, FieldSchema, DataType
 >>> pk = FieldSchema(name="pk", dtype=DataType.INT64, is_primary=True, auto_id=True)
 >>> field = FieldSchema(name=field_name, dtype=DataType.FLOAT_VECTOR, dim=8)
 >>> schema = CollectionSchema(fields=[pk,field], description="example collection")```
@@ -85,8 +85,8 @@ await milvusClient.collectionManager.createCollection(params);
 
 
 ```python
->>> import pymilvus_orm
->>> pymilvus_orm.utility.get_connection().has_collection(collection_name)
+>>> import pymilvus
+>>> pymilvus.utility.get_connection().has_collection(collection_name)
 True
 ```
 
@@ -105,7 +105,7 @@ await milvusClient.collectionManager.hasCollection({
 
 
 ```python
->>> pymilvus_orm.utility.get_connection().list_collections()
+>>> pymilvus.utility.get_connection().list_collections()
 ['example_collection']
 ```
 

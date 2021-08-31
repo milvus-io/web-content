@@ -44,6 +44,6 @@ If you would like to write an article for our [blog](https://medium.com/unstruct
 
 To make contributions to the Milvus SDK reference documentation, visit the programming language specific repositories listed below:
 
-- [Python ORM](https://github.com/milvus-io/pymilvus-orm)
+- [Python](https://github.com/milvus-io/pymilvus)
 
-- (Coming August 5) [GoLang](https://github.com/milvus-io/milvus-sdk-go)
+- (Coming soon) [GoLang](https://github.com/milvus-io/milvus-sdk-go)

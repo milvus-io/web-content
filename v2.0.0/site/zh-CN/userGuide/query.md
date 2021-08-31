@@ -17,7 +17,7 @@ Milvus 除了支持存储向量数据外，还支持存储 bool、int、float �
 
 
 ```python
->>> from pymilvus_orm import connections
+>>> from pymilvus import connections
 >>> connections.connect("default", host='localhost', port='19530')
 ```
 
@@ -36,7 +36,7 @@ const milvusClient = new MilvusClient("localhost:19530");
 
 
 ```python
->>> from pymilvus_orm import Collection, FieldSchema, CollectionSchema, DataType
+>>> from pymilvus import Collection, FieldSchema, CollectionSchema, DataType
 >>> collection_name = "test_collection_search"
 >>> schema = CollectionSchema([
 ...     FieldSchema("film_id", DataType.INT64, is_primary=True),

@@ -108,7 +108,7 @@ id: roadmap.md
 | **版本** | **功能** | **Owner**   | **进度**  | **备注** |
 | ----------- | ----------- | ----------- | ----------- | ----------- |
 | 2.0.0-rc      | 提供基于对象关系映射（Obejct Relational Mapping）抽象的 API       |        | 已完成       |        |
-| 2.0   | 合并 Pymilvus ORM 及 Pymilvus        | XuanYang-cn        | 开发中     |         |
+| 2.0   | 合并 PyMilvus ORM 及 PyMilvus        | XuanYang-cn        | 已完成     |         |
 | 2.0      | 支持 NodeJs 语言的 SDK        | nameczz,shanghaikid       | 开发中      | 当前SDK可用，并将支持更新 <br/>  https://github.com/milvus-io/milvus-sdk-node       |
 | 2.0   | 支持 Java 语言的 SDK        |         | 待指派         |         |
 | 2.0      | 支持 Go 语言的 SDK       | congqixia       |  开发中       |        |

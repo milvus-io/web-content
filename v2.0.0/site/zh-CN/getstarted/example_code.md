@@ -6,24 +6,24 @@ id: example_code.md
 
 成功启动 Milvus 服务端后，通过 Python 示例代码使用 Milvus。
 
-1. 安装 pymilvus_orm 及依赖库:
+1. 安装 PyMilvus 及依赖库:
 ```Python
-pip install pymilvus-orm==2.0.0rc5
+pip install pymilvus==2.0.0rc5
 ```
 
 <div class="alert note">
-pymilvus_orm 需要 Python 3.6 版本或以上，详见 <a href="https://wiki.python.org/moin/BeginnersGuide/Download">Python 安装指南</a>。
+PyMilvus 需要 Python 3.6 版本或以上，详见 <a href="https://wiki.python.org/moin/BeginnersGuide/Download">Python 安装指南</a>。
 </div>
 
 
 2. 下载 **hello_milvus.py** 示例代码:
 ```Python
-$ wget https://raw.githubusercontent.com/milvus-io/pymilvus-orm/v2.0.0rc5/examples/hello_milvus.py
+$ wget https://raw.githubusercontent.com/milvus-io/pymilvus/v2.0.0rc5/examples/hello_milvus.py
 ```
 3. 浏览 **hello_milvus.py**，这个示例程序将：
 - 导入 pymilvus 包
 ```Python
-from pymilvus_orm import connections, FieldSchema, CollectionSchema, DataType, Collection
+from pymilvus import connections, FieldSchema, CollectionSchema, DataType, Collection
 ```
 
 - 连接 Milvus 服务端
@@ -81,7 +81,7 @@ res = collection.search(
 </div>
 
 ```Python
-from pymilvus_orm import connections, Collection, FieldSchema, CollectionSchema, DataType
+from pymilvus import connections, Collection, FieldSchema, CollectionSchema, DataType
 >>> import random
 >>> connections.connect()
 >>> schema = CollectionSchema([

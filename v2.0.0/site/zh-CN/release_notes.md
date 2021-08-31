@@ -301,9 +301,9 @@ Milvus 2.0 是一款云原生向量数据库，采用存储与计算分离的架
 
 **SDK**
 
-- PyMilvus-ORM
+- PyMilvus
 
-  PyMilvus-ORM API 直接在 collection、partion 和 index 对象上进行操作。用户可专注于搭建业务数据模型，而不必担心具体实现。
+  PyMilvus API 直接在 collection、partion 和 index 对象上进行操作。用户可专注于搭建业务数据模型，而不必担心具体实现。
 
 **核心功能**
 
@@ -343,7 +343,7 @@ Milvus 2.0 使用的编程语言、数据格式以及分布式架构都与之前
 
 - 暂不支持删除和更新操作。
 
-- PyMilvus-ORM 不支持 force flush。
+- PyMilvus 不支持 force flush。
 
 - 数据格式与之前版本不兼容。
 

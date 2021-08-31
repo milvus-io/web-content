@@ -53,7 +53,7 @@
               "link": "example_code.md"
             },
             {
-              "text": "Explore PyMilvus-ORM",
+              "text": "Explore PyMilvus",
               "link": "example_code.md"
             }
           ]
@@ -62,8 +62,8 @@
           "label": "Develop",
           "list": [
             {
-              "text": "PyMilvus-ORM API Reference",
-              "link": "/api-reference/pymilvus-orm/{{var.milvus_python_orm_sdk_version}}/install.html"
+              "text": "PyMilvus API Reference",
+              "link": "/api-reference/pymilvus/{{var.milvus_python_sdk_version}}/install.html"
             },
             {
               "text": "Vector Index",
@@ -95,7 +95,7 @@
                 "link": "troubleshooting.md"
               },
               {
-                "text": "PyMilvus-ORM FAQs",
+                "text": "PyMilvus FAQs",
                 "link": "pymilvus_faq.md"
               }
             ]
