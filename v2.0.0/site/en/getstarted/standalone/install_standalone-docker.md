@@ -24,10 +24,10 @@ Installing Milvus with Docker Compose can only be used for testing and cannot be
 1. Download and save **docker-compose.standalone.yml** as **docker-compose.yml**:
 
 ```
-wget https://github.com/milvus-io/milvus/releases/download/v2.0.0-rc5/milvus-standalone-docker-compose.yml -O docker-compose.yml
+wget https://github.com/milvus-io/milvus/releases/download/v{var.cpu_milvus_docker_image_version}}/milvus-standalone-docker-compose.yml -O docker-compose.yml
 ```
 
-> You can also [download **docker-compose.yml** on GitHub](https://github.com/milvus-io/milvus/releases/download/v2.0.0-rc5/milvus-standalone-docker-compose.yml).
+> You can also [download **docker-compose.yml** on GitHub](https://github.com/milvus-io/milvus/releases/download/v{var.cpu_milvus_docker_image_version}}/milvus-standalone-docker-compose.yml).
 
 <div class="alert note">
 If you install your Milvus standalone with the original <b>docker-compose.yml</b> file, the data will be stored under <b>./volume</b> directory. To change the mapped directory, you can either change it directly in the <b>docker-compose.yml</b> file, or run <code>$ export DOCKER_VOLUME_DIRECTORY=</code>.

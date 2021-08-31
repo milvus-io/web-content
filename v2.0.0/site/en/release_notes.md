@@ -9,9 +9,26 @@ Release date: 2021-08-30
 
 ### Compatibility
 
-| **Milvus version** | **Python SDK version**                | **Java SDK version** | **Go SDK version** | Node SDK version                |
-| ------------------ | ------------------------------------- | -------------------- | ------------------ | ------------------------------- |
-| 2.0.0-RC5          |  |
+<table class="version">
+	<thead>
+	<tr>
+		<th>Milvus version</th>
+		<th>Python SDK version</th>
+		<th>Java SDK version</th>
+		<th>Go SDK version</th>
+		<th>Node SDK version</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>2.0.0-RC5</td>
+		<td>2.0.0rc5</td>
+		<td>Coming soon</td>
+		<td>Coming soon</td>
+		<td>1.0.16</td>
+	</tr>
+	</tbody>
+</table>
 
 Milvus 2.0.0-RC5 is a preview version of Milvus 2.0.0. It supports message queue data retention mechanism and etcd data cleanup,  exposes cluster metrics through API, and prepares for delete operation support. RC5 also made great progress on system stability. We fixed a series of resource leakage, operation hang and the misconfiguration of standalone Pulsar under Milvus cluster.
 

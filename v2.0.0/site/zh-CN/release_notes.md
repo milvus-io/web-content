@@ -10,9 +10,26 @@ id: release_notes.md
 
 ### 版本兼容
 
-| **Milvus 版本** | **Python SDK 版本**                   | **Java SDK 版本** | **Go SDK 版本** | Node SDK 版本                   |
-| --------------- | ------------------------------------- | ----------------- | --------------- | ------------------------------- |
-| 2.0.0-RC5       |  |
+<table class="version">
+	<thead>
+	<tr>
+		<th>Milvus 版本</th>
+		<th>Python SDK 版本</th>
+		<th>Java SDK 版本</th>
+		<th>Go SDK 版本</th>
+		<th>Node SDK 版本</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>2.0.0-RC5</td>
+		<td>2.0.0rc5</td>
+		<td>即将上线</td>
+		<td>即将上线</td>
+		<td>1.0.16</td>
+	</tr>
+	</tbody>
+</table>
 
 Milvus 2.0.0-RC5 是 2.0.0 的预览版本。该版本支持 message queue 数据保留机制和 etcd 数据清理，通过 API 暴露分布式版指标，并为后续支持删除操作做准备。 RC5 在系统稳定性方面也取得了很大的进步。 该版本修复了一系列资源泄露、操作卡死、 以及 Milvus 集群下单机 Pulsar 的配置错误等问题。
 
