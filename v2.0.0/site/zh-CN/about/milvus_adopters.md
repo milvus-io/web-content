@@ -34,3 +34,8 @@ Milvus 的全球企业用户超过 1000，应用领域十分广泛。以下是�
 | [魔橙互联](https://baike.baidu.com/item/%E9%AD%94%E6%A9%99%E4%BA%92%E8%81%94%EF%BC%88%E5%8C%97%E4%BA%AC%EF%BC%89%E7%A7%91%E6%8A%80)                                                  | 游戏     |                     |
 | [飞书深诺集团](https://www.meetsocial.com/company.html)                                                    | 营销     |                   |
 | [妙医佳健康科技集团](https://www.miao.cn/)| 健康科技        |                                              |
+| [思必驰](https://baike.baidu.com/item/%E6%80%9D%E5%BF%85%E9%A9%B0%E7%A7%91%E6%8A%80%E8%82%A1%E4%BB%BD%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8/56726045)| 科技        |    
+| [美的](https://baike.baidu.com/item/%E7%BE%8E%E7%9A%84%E9%9B%86%E5%9B%A2/9590056)| 消费电器        |                                                 |
+| [有赞](https://baike.baidu.com/item/%E6%9C%89%E8%B5%9E/16844636)| 零售科技        |                                                 |
+| [陌陌](https://baike.baidu.com/item/%E9%99%8C%E9%99%8C/7079670)| 社交        |  
+| [涂鸦智能](https://baike.baidu.com/item/%E6%9D%AD%E5%B7%9E%E6%B6%82%E9%B8%A6%E4%BF%A1%E6%81%AF%E6%8A%80%E6%9C%AF%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8/22672666)| 软件        |            

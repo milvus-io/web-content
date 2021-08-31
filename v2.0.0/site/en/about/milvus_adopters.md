@@ -29,3 +29,9 @@ Milvus is trusted by over 1,000 organizations worldwide and has applications in 
 | [Vova](https://m.vova.com/en/about-us.html)                                               | Online Retail        | [Building a Search by Image Shopping Experience with VOVA and Milvus](https://zilliz.com/blog/building-a-search-by-image-shopping-experience-with-vova-and-milvus)                                             |
 | [Xiaomi](https://en.wikipedia.org/wiki/Xiaomi)                                                 | Consumer electronics          | [Making with Milvus: AI-Powered News Recommendation Inside Xiaomi's Mobile Browser](https://zilliz.com/blog/Making-with-Milvus-AI-Powered-News-Recommendation-Inside-Xiaomi-Mobile-Browser)                                |
 | [iYUNDONG](http://yundong.ai/)                                                 | Sports        | [Extracting Event Highlights Using iYUNDONG Sports App](https://zilliz.com/blog/Extracting-Events-Highlights-Using-iYUNDONG-Sports-App)                                          |
+| [eBay](https://en.wikipedia.org/wiki/EBay) | Online Retail| |
+| [Smartnews](https://about.smartnews.com/en/) |  Media| |
+| [Shopee](https://en.wikipedia.org/wiki/Shopee) |  Online Retail| |
+| [Walmart](https://en.wikipedia.org/wiki/Walmart) |  Retail| |
+| [Line Plus](https://linecorp.com/en/company/info) |  Technology, Software| |
+| [ambeRoad](https://amberoad.de/?lang=en) |  Software| |
