@@ -81,7 +81,7 @@ jobs:
           sudo apt -y install nodejs
           node  -v
           sudo npm i node-html-parser
-          node ./pymilvus-fs.js
+          sudo node ./pymilvus-fs.js
           cd ../../../../${{ github.event.repository.name }}/APIReference/pymilvus
           echo "Upcomming tag name: ${{ github.event.inputs.tagName }}"
           echo "=>List all doc versions"
@@ -99,7 +99,9 @@ jobs:
             echo "===miss tag name, create this dir==="
             sudo mkdir "./${{ github.event.inputs.tagName }}"
           fi
+          sudo rm -fr ../../../pymilvus/docs/build/html/api/api.html
           sudo cp -r ../../../pymilvus/docs/build/html/output/* "./${{ github.event.inputs.tagName }}"
+          sudo chmod -R 777 .
           git add .
           git commit -m "Update pymilvus"
           git push -f origin master
