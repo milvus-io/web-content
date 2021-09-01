@@ -524,13 +524,12 @@
       "isMenu": true
     },
     {
-      "id": "image_similarity_search",
+      "id": "image_similarity_search.md",
       "title": "图片检索系统",
       "label1": "tutorials",
       "label2": "",
       "label3": "",
-      "order": 0,
-      "outLink": "https://github.com/milvus-io/bootcamp/tree/master/solutions/reverse_image_search"
+      "order": 0
     },
     {
       "id": "question_answering_system",
@@ -542,13 +541,12 @@
       "outLink": "https://github.com/milvus-io/bootcamp/tree/master/solutions/question_answering_system"
     },
     {
-      "id": "recommendation_system",
+      "id": "recommendation_system.md",
       "title": "推荐系统",
       "label1": "tutorials",
       "label2": "",
       "label3": "",
-      "order": 2,
-      "outLink": "https://github.com/milvus-io/bootcamp/tree/master/solutions/recommendation_system"
+      "order": 2
     },
     {
       "id": "video_similarity_search",
