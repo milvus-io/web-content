@@ -14,7 +14,8 @@ Audio retrieval can be used to search and monitor online media in real-time to c
 
 <br/>
 
-Visit the [github repo](https://github.com/milvus-io/bootcamp/tree/master/solutions/audio_similarity_search) to learn how to build a video similarity search engine using Milvus and a VGG neural network.
+Visit the [github repo](https://github.com/milvus-io/bootcamp/tree/master/solutions/audio_similarity_search) to learn how to build an audio similarity search engine using Milvus paired with PANNs for audio pattern recognition.
+
 
 <br/>
 
