@@ -549,13 +549,12 @@
       "order": 2
     },
     {
-      "id": "video_similarity_search",
+      "id": "video_similarity_search.md",
       "title": "Video Similarity Search",
       "label1": "tutorials",
       "label2": "",
       "label3": "",
-      "order": 3,
-      "outLink": "https://github.com/milvus-io/bootcamp/tree/master/solutions/video_similarity_search"
+      "order": 3
     },
     {
       "id": "audio_similarity_search",
