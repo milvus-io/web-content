@@ -14,8 +14,8 @@ jobs:
   update_branch:
     runs-on: ubuntu-latest
     steps:
-      - id: clone_pymilvus_orm_repo
-        name: Git clone pymilvus-orm repo
+      - id: clone_pymilvus_repo
+        name: Git clone pymilvus repo
         run: |
           sudo git clone https://.:${{ secrets.GH_TOKEN }}@github.com/milvus-io/${{ github.event.inputs.repoName }}.git
           git config --global user.email "Milvus-doc-bot@zilliz.com"
@@ -97,3 +97,54 @@ jobs:
           git commit -m "Update pymilvus-orm v${{ github.event.inputs.branchName }}"
           git push -f origin master
           echo "=>Completed: Update pymilvus-orm v${{ github.event.inputs.branchName }} doc repo."
+      - id: update_repo_pymilvus
+        name: Update pymilvus doc repo
+        if: ${{ github.event.inputs.repoName == 'pymilvus' }}
+        run: |
+          sudo chmod -R 777 ${{ github.event.inputs.repoName }}
+          cd ${{ github.event.inputs.repoName }}
+          sudo apt update
+          sudo apt install python3
+          sudo apt install python3-pip
+          python3 --version
+          pip3 --version
+          # tmporarily fix pprint issue
+          pip3 install pprint -i https://pypi.doubanio.com/simple/ --trusted-host pypi.douban.com
+          pip3 install -r requirements.txt
+          pip3 install --upgrade protobuf
+          cd docs
+          # tmporarily fix PBR_VERSION issue
+          export PBR_VERSION=5.6.0
+          sudo apt install make
+          make html
+          cd build/html
+          sudo mv ../../../../${{ github.event.repository.name }}/pymilvus-fs.md ./pymilvus-fs.js
+          curl -sL https://deb.nodesource.com/setup_14.x | sudo bash -
+          sudo apt -y install nodejs
+          node  -v
+          sudo npm i node-html-parser
+          node ./pymilvus-fs.js
+          cd ../../../../${{ github.event.repository.name }}/APIReference/pymilvus
+          echo "Upcomming tag name: ${{ github.event.inputs.branchName }}"
+          echo "=>List all doc versions"
+          ls -l
+          sudo chmod -R 777 .
+          if [ -d "./v${{ github.event.inputs.branchName }}" ]
+          then
+            echo "===tag name exists, remove all under this dir==="
+            sudo rm -fr "./v${{ github.event.inputs.branchName }}"
+            git add .
+            git status
+            git commit -m "clean files under ${{ github.event.inputs.repoName }} ${{ github.event.inputs.branchName }}"
+            sudo mkdir "./v${{ github.event.inputs.branchName }}"
+          else
+            echo "===miss tag name, create this dir==="
+            sudo mkdir "./v${{ github.event.inputs.branchName }}"
+          fi
+          sudo rm -fr ../../../pymilvus/docs/build/html/api/api.html
+          sudo cp -r ../../../pymilvus/docs/build/html/output/* "./v${{ github.event.inputs.branchName }}"
+          sudo chmod -R 777 .
+          git add .
+          git commit -m "Update pymilvus v${{ github.event.inputs.branchName }}"
+          git push -f origin master
+          echo "=>Completed: Update pymilvus v${{ github.event.inputs.branchName }} doc repo."
