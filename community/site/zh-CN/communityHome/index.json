@@ -150,6 +150,41 @@
       }
     }
   },
+  "contributorSection": {
+    "title": "Milvus Top Advocates",
+    "list": [
+      {
+        "avatar": "../../assets/gq_huang.png",
+        "name": "黄国钦",
+        "company": "唯品会",
+        "jobTitle": "软件工程师"
+      },
+      {
+        "avatar": "../../assets/tt_wang.png",
+        "name": "王婷婷",
+        "company": "搜狐",
+        "jobTitle": "NLP 算法工程师"
+      },
+      {
+        "avatar": "../../assets/y_li.png",
+        "name": "黎阳",
+        "company": "焦点科技",
+        "jobTitle": "软件工程师"
+      },
+      {
+        "avatar": "../../assets/wei_huang.png",
+        "name": "黄伟",
+        "company": "趋势科技",
+        "jobTitle": "软件工程师"
+      },
+      {
+        "avatar": "../../assets/az_wen.png",
+        "name": "文安哲",
+        "company": "企查查",
+        "jobTitle": "软件工程师"
+      }
+    ]
+  },
   "joinSection": {
     "title": "加入社区",
     "list": [
@@ -160,13 +195,13 @@
       },
       {
         "label": "Slack Channel",
-        "link": "https://join.slack.com/t/milvusio/shared_invite/zt-e0u4qu3k-bI2GDNys3ZqX1YCJ9OM~GQ",
+        "link": "https://slack.milvus.io/",
         "img": "../../assets/slack.svg"
       },
       {
-        "label": "Zoom Meeting",
-        "link": "#",
-        "img": "../../assets/zoom.svg"
+        "label": "Reddit",
+        "link": "https://www.reddit.com/r/vectordatabase/",
+        "img": "../../assets/reddit.svg"
       },
       {
         "label": "Social Media",
@@ -178,6 +213,13 @@
   "resourceSection": {
     "title": "资源",
     "list": [
+      {
+        "iconType": "meeting",
+        "title": "Milvus Office Hours ",
+        "desc": "Milvus Office Hours 是 Milvus 社区的线上交流活动，主要目的是通过线上互动交流的形式，解答用户疑问、介绍和演示 Milvus 新特性和相关技术交流等。",
+        "link": "https://docs.qq.com/doc/DTWtOUVN0WndQUVhH",
+        "label": "报名活动"
+      },
       {
         "iconType": "event",
         "title": "活动",

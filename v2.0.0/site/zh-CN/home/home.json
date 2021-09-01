@@ -51,8 +51,8 @@
               "link": "example_code.md"
             },
             {
-               "text": "PyMilvus-ORM 上手",
-              "link": "explore_pymilvus.md"
+               "text": "PyMilvus 上手",
+              "link": "example_code.md"
             }
           ]
         },
@@ -60,8 +60,8 @@
           "label": "开发文档",
           "list": [
             {
-              "text": "PyMilvus-ORM API 参考",
-              "link": "/api-reference/pymilvus-orm/{{var.milvus_python_orm_sdk_version}}/install.html"
+              "text": "PyMilvus API 参考",
+              "link": "/api-reference/pymilvus/{{var.milvus_python_sdk_version}}/install.html"
             },
             {
               "text": "向量索引",
@@ -93,7 +93,7 @@
                 "link": "troubleshooting.md"
               },
               {
-                "text": "PyMilvus-ORM 问题",
+                "text": "PyMilvus 问题",
                 "link": "pymilvus_faq.md"
               }
             ]
@@ -113,7 +113,7 @@
           "link": "https://medium.com/@xiaofan.luan/milvus-2-0-redefining-vector-database-438479a7dd6e",
           "title": "Milvus 2.0: Redefining Vector Database",
           "abstract": "Milvus 2.0 is available now. This refactored, cloud-native version powers image/video search, chatbots, and many more AI applications.",
-          "imgSrc": "https://zillizstorage.blob.core.windows.net/zilliz-assets/zilliz-assets/assets/2_0_cover_bbc582b347.jpg"
+          "imgSrc": "https://zilliz-cms.s3.us-west-2.amazonaws.com/2_0_cover_bbc582b347.jpg"
         }
       ]
     }

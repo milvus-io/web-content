@@ -1,6 +1,5 @@
 ---
 id: overview.md
-title: Milvus 是什么
 ---
 
 # Milvus 是什么
@@ -12,11 +11,29 @@ Milvus 提供以下 2 个版本：
 - [Milvus 分布式版](install_cluster-docker.md)
 
 版本兼容: 
-| Milvus 版本 | Python SDK 版本 | Java SDK 版本 | Go SDK 版本 |
-| ----------- | ----------- | -----------  | ----------- |
-| 2.0.0-RC1 | 2.0.0rc2   | 即将上线  | 即将上线 |
 
-Milvus 2.0.0-RC1 是 2.0.0 的预览版本。 该版本引入 Go 语言搭建分布式系统，并采用了新的云原生分布式设计。 后者大大提高了系统扩展性和系统弹性。
+<table class="version">
+	<thead>
+	<tr>
+		<th>Milvus 版本</th>
+		<th>Python SDK 版本</th>
+		<th>Java SDK 版本</th>
+		<th>Go SDK 版本</th>
+		<th>Node SDK 版本</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td><a href="install_standalone-docker.md">2.0.0-RC5</a></td>
+		<td><a href="example_code.md">2.0.0rc5</a></td>
+		<td>即将上线</td>
+		<td>即将上线</td>
+		<td><a href="https://github.com/milvus-io/milvus-sdk-node">1.0.16</a></td>
+	</tr>
+	</tbody>
+</table>
+
+Milvus 2.0.0-RC5 是 2.0.0 的预览版本。 该版本引入 Go 语言搭建分布式系统，并采用了新的云原生分布式设计。 后者大大提高了系统扩展性和系统弹性。
 
 ## 系统架构
 
@@ -48,7 +65,7 @@ Milvus 单机版中包含 3 个组件：
 - etcd
 - MinIO
 
-Milvus 分布式版中包含 8 个微服务组件和 3 个第三方基础服务组件。
+Milvus 分布式版中包含 8 个微服务组件和 3 个第三方依赖。
 
 微服务组件：
 
@@ -132,8 +149,12 @@ Milvus 项目在 GitHub 上获星超 6,000，拥有逾 1,000 家企业用户，�
 
 [Milvus Insight](https://github.com/milvus-io/milvus-insight) 是 Milvus 图形化管理工具，包含了集群状态可视化、元数据管理、数据查询等实用功能。Milvus Insight 源码未来也会作为独立项目开源。
 
+#### Milvus CLI
+
+[Milvus CLI](https://github.com/milvus-io/milvus_cli#overview) 是基于 [PyMilvus](https://github.com/milvus-io/pymilvus) 的 Milvus 命令行界面，支持连接服务器、数据操作和数据导出/导入。
+
 #### Milvus DM 数据迁移工具
-Milvus 数据迁移工具将尽快上线。
+[Milvus 数据迁移工具](migrate_overview.md)现已上线。
 
 ## 加入开发者社区
 

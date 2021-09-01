@@ -1,6 +1,5 @@
 ---
 id: install_standalone-docker.md
-title: 安装单机版 Milvus
 label: 使用 Docker Compose 安装
 order: 0
 group: standalone
@@ -25,8 +24,14 @@ Docker Compose 部署方式只用作测试使用，不能用于生产环境。
 
 1. 下载 **docker-compose.standalone.yml** 配置文件并保存为 **docker-compose.yml**
 ```
-wget https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/docker/standalone/docker-compose.yml -O docker-compose.yml
+wget https://github.com/milvus-io/milvus/releases/download/v2.0.0-rc5/milvus-standalone-docker-compose.yml -O docker-compose.yml
 ```
+> 你可以在 GitHub 直接 [下载](https://github.com/milvus-io/milvus/releases/download/v2.0.0-rc5/milvus-standalone-docker-compose.yml) **docker-compose.yml**。
+
+<div class="alert note">
+如果你使用原始 <b>docker-compose.yml</b> 文件安装 Milvus, 数据将会被存储在 <b>./volume</b> 路径下。如需修改映射路径，你可以直接修改 <b>docker-compose.yml</b> 文件，或运行 <code>$ export DOCKER_VOLUME_DIRECTORY=</code>。
+</div>
+
 2. 启动 Milvus 单机版：
 
 ```shell
@@ -53,4 +58,7 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
 
 <div class="alert note">
 运行 <code>$ sudo docker-compose down</code> 停止 Milvus 单机版。
+
+如果你想在停止Milvus后清理数据，运行 <code>$ sudo rm -rf  volume</code>。
+
 </div>

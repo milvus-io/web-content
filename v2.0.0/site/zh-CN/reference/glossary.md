@@ -1,6 +1,5 @@
 ---
 id: glossary.md
-title: 术语表
 ---
 
 # 术语表

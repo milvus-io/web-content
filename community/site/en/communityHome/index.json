@@ -150,6 +150,41 @@
       }
     }
   },
+  "contributorSection": {
+    "title": "Milvus Top Advocates",
+    "list": [
+      {
+        "avatar": "../../assets/gq_huang.png",
+        "name": "Guoqin Huang",
+        "company": "Vip.com",
+        "jobTitle": "Software Developer"
+      },
+      {
+        "avatar": "../../assets/tt_wang.png",
+        "name": "Tingting Wang",
+        "company": "Sohu",
+        "jobTitle": "NLP engineer"
+      },
+      {
+        "avatar": "../../assets/y_li.png",
+        "name": "Yang Li",
+        "company": "Focus Technology",
+        "jobTitle": "Software Developer"
+      },
+      {
+        "avatar": "../../assets/wei_huang.png",
+        "name": "Wei Huang",
+        "company": "TrendMicro",
+        "jobTitle": "Software Developer"
+      },
+      {
+        "avatar": "../../assets/az_wen.png",
+        "name": "Anzhe Wen",
+        "company": "Qichacha",
+        "jobTitle": "Software Developer"
+      }
+    ]
+  },
   "joinSection": {
     "title": "Join the community",
     "list": [
@@ -160,13 +195,13 @@
       },
       {
         "label": "Slack Channel",
-        "link": "https://join.slack.com/t/milvusio/shared_invite/zt-e0u4qu3k-bI2GDNys3ZqX1YCJ9OM~GQ",
+        "link": "https://slack.milvus.io/",
         "img": "../../assets/slack.svg"
       },
       {
-        "label": "Zoom Meeting",
-        "link": "#",
-        "img": "../../assets/zoom.svg"
+        "label": "Reddit",
+        "link": "https://www.reddit.com/r/vectordatabase/",
+        "img": "../../assets/reddit.svg"
       },
       {
         "label": "Social Media",
@@ -178,6 +213,13 @@
   "resourceSection": {
     "title": "Resources",
     "list": [
+      {
+        "iconType": "meeting",
+        "title": "Milvus Technical Meeting ",
+        "desc": "Join our next meeting to be involved in the discussion and decision making of Milvus‘ latest features and development timeline.",
+        "link": "https://wiki.lfaidata.foundation/pages/viewpage.action?pageId=43287098",
+        "label": "FIND OUT MORE"
+      },
       {
         "iconType": "event",
         "title": "Event",

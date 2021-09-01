@@ -1,6 +1,5 @@
 ---
 id: troubleshooting.md
-title: 故障诊断
 ---
 
 # 故障诊断问题

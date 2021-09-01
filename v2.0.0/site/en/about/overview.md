@@ -12,11 +12,28 @@ It is available in:
 - [Milvus cluster](install_cluster-docker.md)
 
 Compatibility: 
-| Milvus version | Python SDK version | Java SDK version | Go SDK version |
-| ----------- | ----------- | -----------  | ----------- |
-| 2.0.0-RC2   | 2.0.0rc2   | Coming soon  | Coming soon |
 
-Milvus 2.0.0-RC2 is the preview version of 2.0.0. It introduces Golang as the distributed layer development language and a new cloud-native distributed design. The latter brings significant improvements to scalability, elasticity, and functionality. 
+<table class="version">
+	<thead>
+	<tr>
+		<th>Milvus version</th>
+		<th>Python SDK version</th>
+		<th>Java SDK version</th>
+		<th>Go SDK version</th>
+		<th>Node SDK version</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td><a href="install_standalone-docker.md">2.0.0-RC5</a></td>
+		<td><a href="example_code.md">2.0.0rc5</a></td>
+		<td>Coming soon</td>
+		<td>Coming soon</td>
+		<td><a href="https://github.com/milvus-io/milvus-sdk-node">1.0.16</a></td>
+	</tr>
+	</tbody>
+</table>
+Milvus 2.0.0-RC5 is the preview version of 2.0.0. It introduces Golang as the distributed layer development language and a new cloud-native distributed design. The latter brings significant improvements to scalability, elasticity, and functionality. 
 
 ## Overall Architecture
 Milvus 2.0 is a cloud-native vector database with storage and computation separated by design. All components in this refactored version of Milvus are stateless to enhance elasticity and flexibility.
@@ -51,7 +68,7 @@ A Milvus standalone includes three components:
 - etcd
 - MinIO
 
-A Milvus cluster includes eight microservice components and three third-party infrastructure service components.
+A Milvus cluster includes eight microservice components and three third-party dependencies.
 Microservice components:
 
 - Root coord
@@ -142,8 +159,11 @@ Similarity search is the process of comparing a target to a database to find obj
 #### Milvus Insight
 [Milvus Insight](https://github.com/milvus-io/milvus-insight) is a graphical management system for Milvus. It features visualization of cluster states, meta management, data queries and more. Milvus Insight will eventually be open sourced.
 
+#### Milvus CLI
+[Milvus CLI](https://github.com/milvus-io/milvus_cli#overview) is Milvus' command-line interface based on [Milvus Python SDK](https://github.com/milvus-io/pymilvus), supporting database connection, data operations, and data export/import.
+
 #### Milvus DM
-Data migration tool for Milvus 2.0 will be made available as soon as possible.
+[Data migration tool](migrate_overview.md) for Milvus 2.0 is now available.
 
 
 ## Join Our Community

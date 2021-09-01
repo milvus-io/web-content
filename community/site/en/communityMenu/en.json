@@ -9,17 +9,50 @@
       "order": 0
     },
     {
+      "id": "about",
+      "title": "About Milvus Community",
+      "label1": "",
+      "label2": "",
+      "label3": "",
+      "order": 1,
+      "isMenu": true
+    },
+    {
+      "id": "why_contributing.md",
+      "title": "Why Contribute to the Milvus",
+      "label1": "about",
+      "label2": "",
+      "label3": "",
+      "order": 0
+    },
+    {
+      "id": "how_can_i_contribute.md",
+      "title": "How Can I Contribute",
+      "label1": "about",
+      "label2": "",
+      "label3": "",
+      "order": 1
+    },
+    {
+      "id": "code_of_conduct.md",
+      "title": "Code of Conduct",
+      "label1": "about",
+      "label2": "",
+      "label3": "",
+      "order": 2
+    },
+    {
       "id": "contributor_group",
       "title": "How To Contribute",
       "label1": "",
       "label2": "",
       "label3": "",
-      "order": 3,
+      "order": 2,
       "isMenu": true
     },
     {
       "id": "making_your_first_contributions.md",
-      "title": "Making your First contributions",
+      "title": "Make your First contributions",
       "label1": "contributor_group",
       "label2": "",
       "label3": "",
@@ -27,11 +60,27 @@
     },
     {
       "id": "contributing_to_milvus.md",
-      "title": "Contributing to Milvus",
+      "title": "Contributing Code",
       "label1": "contributor_group",
       "label2": "",
       "label3": "",
       "order": 1
+    },
+    {
+      "id": "contributing_test.md",
+      "title": "Contributing Test Cases",
+      "label1": "contributor_group",
+      "label2": "",
+      "label3": "",
+      "order": 2
+    },
+    {
+      "id": "contributing_documentation.md",
+      "title": "Contributing Documentation",
+      "label1": "contributor_group",
+      "label2": "",
+      "label3": "",
+      "order": 3
     },
     {
       "id": "owners.md",
@@ -39,7 +88,7 @@
       "label1": "contributor_group",
       "label2": "",
       "label3": "",
-      "order": 2
+      "order": 5
     },
     {
       "id": "membership.md",
@@ -47,7 +96,7 @@
       "label1": "contributor_group",
       "label2": "",
       "label3": "",
-      "order": 3
+      "order": 4
     },
     {
       "id": "user_group",
@@ -55,7 +104,7 @@
       "label1": "",
       "label2": "",
       "label3": "",
-      "order": 4,
+      "order": 3,
       "isMenu": true
     },
     {
@@ -72,7 +121,7 @@
       "label1": "",
       "label2": "",
       "label3": "",
-      "order": 5
+      "order": 4
     },
     {
       "id": "#community_partners",
@@ -80,7 +129,7 @@
       "label1": "",
       "label2": "",
       "label3": "",
-      "order": 7
+      "order": 5
     }
   ]
 }

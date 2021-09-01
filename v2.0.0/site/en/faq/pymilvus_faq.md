@@ -2,7 +2,7 @@
 id: pymilvus_faq.md
 title: Pymilvus FAQ
 ---
-# PyMilvus-ORM FAQ
+# PyMilvus FAQ
 
 #### I got random errors `socket operation on non-socket`  from gRPC. What shall I do?
 
