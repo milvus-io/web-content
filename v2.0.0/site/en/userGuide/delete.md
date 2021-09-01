@@ -12,7 +12,9 @@ The delete operations affect data already inserted into Milvus. Think twice befo
 ## Drop an index
 
 Drop the index of a specified field in a specified collection:
-
+<div class="alert note">
+Current release of Milvus only supports building and dropping index on vector field. Future version of Milvus will supports these operations on scalar field.
+</div>
 <div class="multipleCode">
   <a href="?python">Python </a>
   <a href="?javascript">Node</a>

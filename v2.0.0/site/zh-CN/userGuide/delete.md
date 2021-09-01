@@ -8,7 +8,9 @@ id: delete.md
 
 ## 删除索引
 调用 `drop_index()` 函数删除指定 collection 指定列的索引：
-
+<div class="alert note">
+  当前版本 Milvus 仅支持于向量 field 上创建或删除索引。未来版本 Milvus 将支持于标量 field 上创建或删除索引。
+</div>
 
 <div class="multipleCode">
 
