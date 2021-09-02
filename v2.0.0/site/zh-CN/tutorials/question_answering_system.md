@@ -13,7 +13,9 @@ Milvus, the open-source vector database, can be used to build question answering
 
 <br/>
 
-Try out the [demo](http://35.166.123.214:8005/) or visit the [github repo]https://github.com/milvus-io/bootcamp/tree/master/solutions/question_answering_system) to learn how to build an intelligent question answering system using Milvus and the BERT model for natural language processing. 
+
+Try out the [demo](http://35.166.123.214:8005/) or visit the [github repo](https://github.com/milvus-io/bootcamp/tree/master/solutions/question_answering_system) to learn how to build an intelligent question answering system using Milvus and the BERT model for natural language processing. 
+
 
 <br/>
 
