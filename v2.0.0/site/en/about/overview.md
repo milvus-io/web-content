@@ -69,22 +69,22 @@ A Milvus standalone includes three components:
 - MinIO
 
 A Milvus cluster includes eight microservice components and three third-party dependencies.
-Microservice components:
+- Microservice components:
 
-- Root coord
-- Proxy
-- Query coord
-- Query node
-- Index coord 
-- Index node
-- Data coord
-- Data node
+	- Root coord
+	- Proxy
+	- Query coord
+	- Query node
+	- Index coord 
+	- Index node
+	- Data coord
+	- Data node
 
-Third-party infrastructure components:
+- Third-party dependencies:
 
-- etcd
-- MinIO
-- Pulsar
+	- etcd
+	- MinIO
+	- Pulsar
 
 ## Key features
 

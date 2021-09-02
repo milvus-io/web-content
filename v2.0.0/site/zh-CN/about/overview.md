@@ -67,22 +67,22 @@ Milvus 单机版中包含 3 个组件：
 
 Milvus 分布式版中包含 8 个微服务组件和 3 个第三方依赖。
 
-微服务组件：
+- 微服务组件：
 
-- Root coord
-- Proxy
-- Query coord
-- Query node
-- Index coord 
-- Index node
-- Data coord
-- Data node
+	- Root coord
+	- Proxy
+	- Query coord
+	- Query node
+	- Index coord 
+	- Index node
+	- Data coord
+	- Data node
 
-第三方基础服务组件：
+- 第三方依赖：
 
-- etcd
-- MinIO
-- Pulsar
+	- etcd
+	- MinIO
+	- Pulsar
 
 ## 产品亮点
 
