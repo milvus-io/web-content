@@ -24,10 +24,10 @@ If you are an administrator of Milvus, you may access the following configuratio
 
 ## etcd Configurations
 
-etcd is the metadata engine supporting Milvus' metadata storage and access. You can set these configurations in **milvus.yaml** under **milvus/configs** directory.
+etcd is the metadata engine supporting Milvus' metadata storage and access. You can set these configurations in [**milvus.yaml**](https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml).
 
 
-> You do not need to change this session if you use the default **docker-compose.yml** for third-party services.
+> You do not need to change this session if you use the default [**milvus-standalone-docker-compose.yml**](https://github.com/milvus-io/milvus/releases/download/v2.0.0-rc5-hotfix1/milvus-standalone-docker-compose.yml) for third-party services.
 
 <table id="etcd">
 <thead>
@@ -68,7 +68,7 @@ etcd is the metadata engine supporting Milvus' metadata storage and access. You 
 
 Milvus supports MinIO and Amazon S3 as the storage engine for data persistence of insert log files and index files. Whereas MinIO is the de facto standard for S3 compatibility, you can configure S3 parameters directly under `MinIO` section. You can set these configurations in **milvus.yaml** under **milvus/configs** directory.
 
-> You do not need to change this session if you use the default **docker-compose.yml** for third-party services.
+> You do not need to change this session if you use the default [**milvus-standalone-docker-compose.yml**](https://github.com/milvus-io/milvus/releases/download/v2.0.0-rc5-hotfix1/milvus-standalone-docker-compose.yml) for third-party services.
 
 <table id="minio">
 <thead>
@@ -129,7 +129,7 @@ Milvus supports MinIO and Amazon S3 as the storage engine for data persistence o
 
 ## Server Address Configurations
 
-This session configures the IP address and port of the monitor request from Milvus. You can set these configurations in **milvus.yaml** under **milvus/configs** directory.
+This session configures the IP address and port of the monitor request from Milvus. You can set these configurations in [**milvus.yaml**](https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml).
 
 <table id="server_address">
 <thead>
@@ -151,7 +151,7 @@ This session configures the IP address and port of the monitor request from Milv
 
 ## System Behavior Configurations
 
-This session configures the system behaviors of Milvus. You can set these configurations in **milvus.yaml** under **milvus/configs** directory, and **root_coord.yaml**, **data_coord.yaml**, **data_node.yaml** under **milvus/configs/advanced** directory.
+This session configures the system behaviors of Milvus. You can set these configurations in [**milvus.yaml**](https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml), [**root_coord.yaml**](https://github.com/milvus-io/milvus/blob/master/configs/advanced/root_coord.yaml), [**data_coord.yaml**](https://github.com/milvus-io/milvus/blob/master/configs/advanced/data_coord.yaml), and [**data_node.yaml**](https://github.com/milvus-io/milvus/blob/master/configs/advanced/data_node.yaml).
 
 <table id="system_behavior">
 <thead>

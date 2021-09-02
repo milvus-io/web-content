@@ -21,7 +21,7 @@ If you are an entry-level user of a Milvus Cluster, you only need to change the 
 
 ## Log Configurations
 
-This session configures the system log output. Using Milvus generates a collection of logs. By default, Milvus uses logs to record information at `debug` or even higher level for standard output (stdout) and standard error (stderr). You can set these configurations in **milvus.yaml** under **milvus/configs** directory.
+This session configures the system log output. Using Milvus generates a collection of logs. By default, Milvus uses logs to record information at `debug` or even higher level for standard output (stdout) and standard error (stderr). You can set these configurations in [**milvus.yaml**](https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml).
 
 <table id="casual_user">
 <thead>
