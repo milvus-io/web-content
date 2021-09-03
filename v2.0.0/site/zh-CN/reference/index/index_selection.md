@@ -59,7 +59,7 @@ Milvus 目前支持的向量索引类型大都属于 ANNS（Approximate Nearest 
     <td><ul>
         <li>超高速查询</li>
         <li>磁盘和内存资源有限</li>
-        <li>可以介绍偏低的查询召回率</li>
+        <li>可以接受偏低的查询召回率</li>
         </ul></td>
   </tr>
   <tr>
