@@ -142,7 +142,7 @@ $ kubectl create secret generic mysecret --from-literal=accesskey=minioadmin --f
 ```
 
 <div class="alert note">
-If you choose `accesskey` and `secretkey` values other than the default `minioadmin/minioadmin`, you need to update the `minio.accessKey` and `minio.secretKey` metadata variables as well.
+If you choose <code>accesskey</code> and <code>secretkey</code> values other than the default <code>minioadmin/minioadmin</code>, you need to update the <code>minio.accessKey</code> and <code>minio.secretKey</code> metadata variables as well.
 </div>
 
 
