@@ -13,7 +13,7 @@ Collections can only be created after successfully connecting to the Milvus serv
 The created collection must contain a primary key field. Int64 is the only supported data type for the primary key field for now.
 </div>
 
-1. Prepare collection parameters, including collection name and field parameters. See [API document](https://pymilvus.readthedocs.io/en/latest/) for a detailed description of these parameters.
+1. Prepare collection parameters, including collection name and field parameters. See [API document](https://milvus.io/api-reference/pymilvus/v2.0.0rc5/api/collection.html) for a detailed description of these parameters.
 
 <div class="multipleCode">
   <a href="?python">Python </a>

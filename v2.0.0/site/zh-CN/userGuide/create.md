@@ -10,7 +10,7 @@ id: create.md
 
 > 创建 collection 必须包含一列主键字段，目前主键字段只支持 int64 类型。
 
-1. 准备 collection 参数，包括 collection 名字、collection 字段参数等。具体参数详见 [API 文档](https://pymilvus.readthedocs.io/en/latest/)。
+1. 准备 collection 参数，包括 collection 名字、collection 字段参数等。具体参数详见 [API 文档](https://milvus.io/cn/api-reference/pymilvus/v2.0.0rc5/api/collection.html)。
 
 <div class="multipleCode">
 
