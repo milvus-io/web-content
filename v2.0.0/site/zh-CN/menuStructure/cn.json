@@ -310,16 +310,33 @@
       "isMenu": true
     },
     {
+      "id": "aws",
+      "title": "AWS 部署",
+      "label1": "admin_guide",
+      "label2": "cloud",
+      "label3": "",
+      "order": 0,
+      "isMenu": true
+    },
+    {
       "id": "aws.md",
       "title": "Amazon EC2",
       "label1": "admin_guide",
       "label2": "cloud",
-      "label3": "",
+      "label3": "aws",
       "order": 0
     },
     {
       "id": "eks.md",
       "title": "Amazon EKS",
+      "label1": "admin_guide",
+      "label2": "cloud",
+      "label3": "aws",
+      "order": 1
+    },
+    {
+      "id": "gcp.md",
+      "title": "GCP 部署",
       "label1": "admin_guide",
       "label2": "cloud",
       "label3": "",
