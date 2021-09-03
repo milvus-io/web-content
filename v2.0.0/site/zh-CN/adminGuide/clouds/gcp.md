@@ -108,7 +108,9 @@ helm install my-release milvus/milvus --set cluster.enabled=true --set service.t
 
 Allow several minutes for pods to start up, run <code>kubectl get services</code> to check on the services. If the services are successfully booted, you can see a set of services listed out. 
 
-![GCP](../../../../../assets/gcp.png)
+
+![GCP](../../../../assets/gcp.png)
+
 
 <div class="alert note">
 Note the IP listed under the <code>EXTERNAL-IP</code> column for the load blanacer. This is the IP for connecting to Milvus.
