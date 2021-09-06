@@ -8,9 +8,23 @@ Milvus 是一个开源项目，我们欢迎每一位贡献者，也希望所有�
 
 本篇文档详细说明了开发工作流程中的惯例、提交消息格式、最佳实践以及在向 Milvus 贡献代码时可能需要的其他资源。 如果在参与 Milvus 贡献时遇到任何问题，欢迎 [提交 GitHub Issue](https://github.com/milvus-io/community/issues/new) 或通过 [Slack](https://join.slack.com/t/milvusio/shared_invite/zt-e0u4qu3k-bI2GDNys3ZqX1YCJ9OM~GQ) 联系我们的工程师团队。
 
-## 开始之前/快速开始
+## 开始之前
 
 关于搭建开发环境，参见 [Milvus Development Guide](https://github.com/milvus-io/milvus/blob/master/DEVELOPMENT.md)。
+
+## 工作目录以及文件介绍
+**/build**：存放在容器内编译 Milvus 并运行 E2E 测试的文件。
+**/cmd**：存放 Milvus 服务的入口模块和一些实用小工具。
+**/configs**：存放 Milvus 所需要的配置文件。
+**/deployments**：存放部署 Milvus 清单文件。
+**/docs**：存放 Milvus 的设计文档，开发者指引以及监控文档。
+**/internal**：存放 Milvus 源码，包括 Golang 和 CPP 的所有代码。
+**/scripts**：存放用来编译、安装、代码检查、测试的实用脚本。
+**/tests**：存放 Milvus 的 E2E，smoke 测试文件。
+**CONTRIBUTING.md**：Milvus 代码贡献指南。
+**DEVELOPMENT.md**：从源码编译 Milvus 指南。
+**Makefile**：使用 **/scripts** 目录里脚本的入口，用以编译、测试、以及代码检查。
+**LICENSE**：Milvus 项目的许可证。
 
 ## GitHub 工作流程
 
