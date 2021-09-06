@@ -42,9 +42,7 @@ Currently, we maintain the following versions of Milvus documentation in differe
 | `v1.0.0` branch | 1.0.0 version (first with long-term support)  |
 
 > **Note:**
-
 > The latest branch is set as the default working branch. 
-
 > Milvus releases prior to v1.0.0 are no longer supported, but you can still find their documentation in the corresponding branch.
 
 ## Other contributing channels
@@ -71,7 +69,7 @@ Reference to cite when you use Milvus in a research paper:
 
 
 
-\```
+```
 
 @inproceedings{2021milvus,
 
@@ -87,7 +85,7 @@ Reference to cite when you use Milvus in a research paper:
 
 }
 
-\```
+```
 
 
 
@@ -109,11 +107,11 @@ Subscribe to Milvus mailing lists:
 
 
 
-\- [Technical Steering Committee](https://lists.lfai.foundation/g/milvus-tsc)
+- [Technical Steering Committee](https://lists.lfai.foundation/g/milvus-tsc)
 
-\- [Technical Discussions](https://lists.lfai.foundation/g/milvus-technical-discuss)
+- [Technical Discussions](https://lists.lfai.foundation/g/milvus-technical-discuss)
 
-\- [Announcement](https://lists.lfai.foundation/g/milvus-announce)
+- [Announcement](https://lists.lfai.foundation/g/milvus-announce)
 
 
 
@@ -121,6 +119,6 @@ Follow Milvus on social media:
 
 
 
-\- [Medium](https://medium.com/@milvusio)
+- [Medium](https://medium.com/@milvusio)
 
-\- [Twitter](https://twitter.com/milvusio)https://twitter.com/milvusio)
+- [Twitter](https://twitter.com/milvusio)https://twitter.com/milvusio)
