@@ -8,7 +8,28 @@ This repository contains technical documentation for [Milvus](https://github.com
 
 Each branch corresponds to a Milvus release by name. We've set the branch of the latest Milvus release as the default branch. For documentation of a different Milvus release, switch to the corresponding branch. 
 
-Note that not all documentation rendered on [milvus.io](https://milvus.io/docs/home) is hosted in this repository. 
+## Index
+
+- [Suggest changes](#suggest-changes)
+
+- [Contribute to Milvus docs](#contribute-to-milvus-docs)
+
+- [Active Milvus releases](#active-milvus-releases)
+
+- [Other contributing channels](#other-contributing-channels)
+
+- [Reference](#reference)
+
+- [Get in touch](#get-in-touch)
+
+
+## Suggest changes
+
+Think of a new topic to be included in the docs? Need additional instructions or clarifications? Spot a broken link? Please [open an issue](https://github.com/milvus-io/milvus-docs/issues/new/choose).
+
+## Contribute to Milvus docs
+
+Want to write the docs yourself? See [CONTRIBUTING](CONTRIBUTING.md) for details about setting yourself up and getting started.
 
 ## Active Milvus releases
 
@@ -21,64 +42,36 @@ Currently, we maintain the following versions of Milvus documentation in differe
 | `v1.0.0` branch | 1.0.0 version (first with long-term support)  |
 
 > **Note:**
+
 > The latest branch is set as the default working branch. 
+
 > Milvus releases prior to v1.0.0 are no longer supported, but you can still find their documentation in the corresponding branch.
 
-## Documentation structure
+## Other contributing channels
 
-![Folders](assets/folder-structure.png)
+Not all content rendered on [milvus.io](https://milvus.io/docs/home) is hosted in this repository. 
 
-In general, the folder structure of the milvus-docs repository aligns with the menu structure of Milvus documentation on [milvus.io](https://milvus.io/).
-
-### Documentation directory
-
-*Images* are housed under the **/assets** folder and can be referenced with `![ImageName]({{images.assets/ImageName.jpg/png}})`.
-
-*Fragments* let you split the markdown into independent, reusable pieces and are defined in the **site/en/fragments** and **site/zh-CN/fragments** folders. Use the **{{fragments/xxx.md}}** syntax to reference a specific fragment.
-
-*Variables* are used to store version information to be referenced in code or paths. They are defined in **Variables.json** and can be used in Markdown (**.md**) files, fragments, and templates. 
-
-> The defined variables implement within the current folder and its subfolders. The **en** and **Zh-CN** folders each contains a Variables.json file.
-
-### Languages
-
-All documentation is originally written in English and translated into other language(s). Currently we only support two language versions: English and Chinese, stored in their corresponding folders in each branch. Nevertheless, you are more than welcome to make a huge contribution to the community by translating the documentation into other languages you know!
-
-## API references
+### Contribute to API docs
 
 To make contributions to the Milvus SDK reference documentation, visit the programming language specific repositories listed below:
 
-- [PyMilvus](https://github.com/milvus-io/pymilvus)
-- [Node.js](https://github.com/milvus-io/milvus-sdk-node)
+- [PyMilvus ORM](https://github.com/milvus-io/pymilvus-orm)
+- [Node.js](https://github.com/milvus-io/milvus-sdk-node) (released and under continuous development)
 - (Coming soon) [GoLang](https://github.com/milvus-io/milvus-sdk-go)
 
+### Contribute to community content
 
+If you would like to write an article for our [blog](https://medium.com/unstructured-data-service), please [file an issue](https://github.com/milvus-io/community/issues/new) in the [Milvus community repository](https://github.com/milvus-io/community) or send it to community@zilliz.com. Feel free to submit either a completed draft or article ideas. All submissions will be reviewed as quickly as possible. If your article or idea seems like a good fit for the blog, we will reach out to you directly.
 
-## Community documentation
-
-
-
-To make contributions to the Milvus community, visit the [community *documentation* repository](https://github.com/milvus-io/web-content).
-
-
-
-## Contributing
-
-
-
-If you encounter any documentation issues, such as typos, missing content, or inappropriate translation, feel free to [file an issue](https://github.com/milvus-io/milvus-docs/issues/new/choose) to let us know and, if you feel confident making the changes yourself, directly assign the issue to your own GitHub account and [submit a pull request](https://github.com/milvus-io/milvus-docs/pulls) to help fix or update it.
-
-
-
-See [Contributing Guide](CONTRIBUTING.md) for details.
-
-
+> In your title/subject line, please put in [blog submission] to make sure your email does not get buried.
 
 ## Reference
 
 Reference to cite when you use Milvus in a research paper:
 
-```
+
+
+\```
 
 @inproceedings{2021milvus,
 
@@ -94,7 +87,7 @@ Reference to cite when you use Milvus in a research paper:
 
 }
 
-```
+\```
 
 
 
@@ -112,19 +105,15 @@ Join the Milvus community on [Slack](https://join.slack.com/t/milvusio/shared_in
 
 
 
-You can also check out our [FAQ page](https://milvus.io/docs/v2.0.0/performance_faq.md) to discover solutions or answers to your issues or questions.
-
-
-
 Subscribe to Milvus mailing lists:
 
 
 
-- [Technical Steering Committee](https://lists.lfai.foundation/g/milvus-tsc)
+\- [Technical Steering Committee](https://lists.lfai.foundation/g/milvus-tsc)
 
-- [Technical Discussions](https://lists.lfai.foundation/g/milvus-technical-discuss)
+\- [Technical Discussions](https://lists.lfai.foundation/g/milvus-technical-discuss)
 
-- [Announcement](https://lists.lfai.foundation/g/milvus-announce)
+\- [Announcement](https://lists.lfai.foundation/g/milvus-announce)
 
 
 
@@ -132,6 +121,6 @@ Follow Milvus on social media:
 
 
 
-- [Medium](https://medium.com/@milvusio)
+\- [Medium](https://medium.com/@milvusio)
 
-- [Twitter](https://twitter.com/milvusio)
+\- [Twitter](https://twitter.com/milvusio)https://twitter.com/milvusio)
