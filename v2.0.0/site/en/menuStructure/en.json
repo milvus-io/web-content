@@ -119,12 +119,20 @@
       "order": 2
     }, 
     {
+      "id": "install_macos.md",
+      "title": "Install on macOS",
+      "label1": "getstarted",
+      "label2": "",
+      "label3": "",
+      "order": 3
+    },
+    {
       "id": "example_code.md",
       "title": "Hello Milvus",
       "label1": "getstarted",
       "label2": "",
       "label3": "",
-      "order": 2
+      "order": 4
     },
     {
       "id": "userguide",
