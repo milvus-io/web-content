@@ -1,6 +1,7 @@
 ---
 id: comparison.md
 title: What is New in Milvus 2.0
+summary: Learn about the design concepts and latest features for the most recent version of Milvus. 
 ---
 
 # What is New in Milvus 2.0

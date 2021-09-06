@@ -1,6 +1,7 @@
 ---
 id: milvus_adopters.md
 title: Milvus Adopters
+summary: Learn about companies that have adopted Milvus in production applications. 
 ---
 # Milvus Adopters
 Milvus is trusted by over 1,000 organizations worldwide and has applications in almost every industry. What follows is a list of Milvus users that have adopted the software in production.
