@@ -12,6 +12,31 @@ This document outlines the conventions about development workflow, commit messag
 
 For more instruction on setting up your development environment, refer to [Milvus Development Guide](https://github.com/milvus-io/milvus/blob/master/DEVELOPMENT.md).
 
+## Working Directories and Files
+**/build**: Stores the files to compile Milvus in container and run E2E test.
+
+**/cmd**: Stores entry module of Milvus service and some toolkits.
+
+**/configs**: Stores configuration files of Milvus.
+
+**/deployments**: Stores checklists to deploy Milvus.
+
+**/docs**: Stores design docs, developing guide, and monitoring docs of Milvus.
+
+**/internal**: Stores source code of Milvus, including all Golang and CPP codes.
+
+**/scripts**: Stores scripts for compilation, installation, code check, and test of Milvus.
+
+**/tests**: Stores E2E and smoke tests for Milvus.
+
+**CONTRIBUTING.md**: Contains code contribution guideline.
+
+**DEVELOPMENT.md**: Contains guideline to build Milvus from source code.
+
+**Makefile**: Entry to run scripts stored under **/scripts** directory for compilation, test, and code check.
+
+**LICENSE**: License of the Milvus project.
+
 ## GitHub Workflow
 
 Generally, we follow the "fork-and-pull" GitHub workflow.
