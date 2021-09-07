@@ -19,15 +19,10 @@ related_key: index
 <div class="alert note">
 当插入的数据段少于 4096 行时，Milvus 不对其创建索引。
 </div>
+
 ### 数据段建索引
 
 Milvus 数据段存储海量数据。在建立索引时，Milvus 为每个数据段单独创建索引。
-
-### 用户主动创建索引
-
-调用 `create_index` 接口时，Milvus 会对该字段上的已有数据同步建立索引。每当后续插入的数据的大小达到系统配置的 `index_file_size` 时，Milvus 会为其在后台自动创建索引。
-
-当插入的数据段少于 4096 行时，Milvus 不会为其建立索引。
 
 ### 闲时建索引
 
@@ -37,4 +32,4 @@ Milvus 数据段存储海量数据。在建立索引时，Milvus 为每个数据
 
 若要为你的使用场景选择合适的索引，请参阅 [如何选择索引类型](index_selection.md)。
 
-关于索引和向量距离计算方法的选择，请访问 [距离计算方式](https://zilliverse.feishu.cn/docs/metric.md)。
+关于索引和向量距离计算方法的选择，请访问 [距离计算方式](metric.md)。
