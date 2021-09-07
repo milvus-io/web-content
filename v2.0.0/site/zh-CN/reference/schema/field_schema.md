@@ -1,8 +1,6 @@
-\---
-
+---
 id: field_schema.md
-
-\---
+---
 
 # Field Schema
 

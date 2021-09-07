@@ -1,8 +1,6 @@
-\---
-
+---
 id: collection_schema.md
-
-\---
+---
 
 # Collection Schema
 
