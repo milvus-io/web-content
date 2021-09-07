@@ -124,7 +124,7 @@ from pymilvus import connections, Collection, FieldSchema, CollectionSchema, Dat
 
 4. Run **hello_milvus.py**:
 ```Python
-$ python3 hello_pymilvus.py
+$ python3 hello_milvus.py
 ```
 
 *The returned results and query latency show as follows:*
