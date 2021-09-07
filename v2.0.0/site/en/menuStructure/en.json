@@ -528,18 +528,40 @@
       "order": 1
     },
     {
+      "id": "schema",
+      "title": "Schema",
+      "label1": "reference",
+      "label2": "",
+      "order": 4,
+      "isMenu": true
+    },
+    {
+      "id": "field_schema.md",
+      "title": "Field Schema",
+      "label1": "reference",
+      "label2": "schema",
+      "order": 0
+    },
+    {
+      "id": "collection_schema.md",
+      "title": "Collection Schema",
+      "label1": "reference",
+      "label2": "schema",
+      "order": 1
+    },
+    {
       "id": "boolean.md",
       "title": "Boolean Expression Rules",
       "label1": "reference",
       "label2": "",
-      "order": 4
+      "order": 5
     },
     {
       "id": "glossary.md",
       "title": "Glossary",
       "label1": "reference",
       "label2": "",
-      "order": 5
+      "order": 6
     },
     {
       "id": "tutorials",
