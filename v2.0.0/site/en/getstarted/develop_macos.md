@@ -1,9 +1,9 @@
 ---
-id: install_macos.md
-title: Install Milvus 2.0 on macOs
+id: develop_macos.md
+title: Develop Milvus 2.0 on macOs
 ---
 
-# Install Milvus 2.0 on macOs
+# Develop Milvus 2.0 on macOs
 
 ## Prerequisites
 |**Operating system**|**Requirements**|
@@ -50,9 +50,9 @@ CPython version: 3.7.5
 OpenSSL version: OpenSSL 1.1.1f 31 Mar 2020 
 ```
 
-## Install Milvus 2.0 on macOs
+## Develop Milvus 2.0 on macOs
 
-There are 2 ways to install Milvus 2.0 on macOS. You can choose to either use Visual Studio Code (VS Code) with Docker or start Dev Container directly. However, using VS Code is the recommended way of installation.
+There are 2 ways to develop Milvus 2.0 on macOS. You can choose to either use Visual Studio Code (VS Code) with Docker or start Dev Container directly. However, using VS Code is the recommended way of development.
 
 <div class="filter">
 <a href="#vscode">Use VS Code with Docker</a> <a href="#devcontainer">Start Dev Container</a>
