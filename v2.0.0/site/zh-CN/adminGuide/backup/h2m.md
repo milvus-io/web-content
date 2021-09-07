@@ -3,6 +3,8 @@ id: h2m.md
 ---
 # 数据迁移：HDF5 至 Milvus
 
+你可以使用 [MilvusDM](migrate_overview.md) 将 HDF5 文件导入 Milvus。
+
 1. 下载 **H2M.yaml**:
 
 ```

@@ -4,6 +4,8 @@ id: f2m.md
 
 # 数据迁移：Faiss 至 Milvus
 
+你可以使用 [MilvusDM](migrate_overview.md) 将 Faiss 数据件导入 Milvus。
+
 1. 下载 **F2M.yaml**:
 
 ```

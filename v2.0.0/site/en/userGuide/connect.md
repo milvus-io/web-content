@@ -3,7 +3,7 @@ id: connect.md
 title: Connect
 ---
 
-# Overview
+# Connect to Milvus Server
 
 This section covers fundamentals and basic Milvus operations.
 

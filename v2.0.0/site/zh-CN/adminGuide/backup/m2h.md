@@ -3,6 +3,8 @@ id: m2h.md
 ---
 # 数据迁移：Milvus 至 HDF5
 
+你可以使用 [MilvusDM](migrate_overview.md) 将 Milvus 数据存储为 HDF5 文件。
+
 1. 下载 **M2H.yaml**:
 
 ```

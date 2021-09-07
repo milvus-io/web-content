@@ -3,7 +3,8 @@ id: search.md
 title: Conduct a Search
 ---
 
-# Conduct a vector similarity search
+# Conduct a Vector Similarity Search
+This page will show you how to conduct a similarity search in Milvus.
 
 1. Create search parameters:
 

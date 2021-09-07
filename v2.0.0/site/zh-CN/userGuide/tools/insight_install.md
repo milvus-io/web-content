@@ -3,6 +3,7 @@ id: insight_install.md
 ---
 
 # 安装 Milvus Insight
+Milvus Insight 是一款专为 Milvus 开发的开源工具，可用于高效管理 Milvus 数据库。
 
 ## 安装前提
 安装 Milvus Insight 前，请先确保你已安装[单机版 Milvus](install_standalone-docker.md) 或[分布式版 Milvus](install_cluster-docker.md)。

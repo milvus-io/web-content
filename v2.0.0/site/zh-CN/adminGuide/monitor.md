@@ -4,9 +4,11 @@ id: monitor.md
 
 # 监控
 
+Prometheus 是一款开源的 Kubernetes 监控工具。
+
 ## Prometheus 端点
 
-Prometheus 是一款开源的 Kubernetes 监控工具。你可以使用 Prometheus 从端点拉取数据，并在 `http://<component-host>:9091/metrics` 暴露出每个 Milvus 2.0 集群组件的监控指标。
+你可以使用 Prometheus 从端点拉取数据，并在 `http://<component-host>:9091/metrics` 暴露出每个 Milvus 2.0 集群组件的监控指标。
 
 ## Prometheus Operator
 [Prometheus Operator](https://github.com/prometheus-operator/prometheus-operator) 以扩展 Kubernetes API 的形式实现自动化的方式高效管理 Prometheus 监控实例。使用 Prometheus Operator 后，你无需手动添加目标指标和服务器。

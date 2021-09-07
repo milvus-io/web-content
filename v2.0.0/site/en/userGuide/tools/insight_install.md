@@ -5,6 +5,8 @@ title: Install Milvus Insight
 
 # Install Milvus Insight
 
+Milvus Insight is an efficient open-source management tool for Milvus. This page will show you how to install Milvus Insight to manage your Milvus service.
+
 ## Before you begin
 
 Ensure you have Milvus installed on [your server](https://milvus.io/docs/install_standalone-docker.md) or [cluster](https://milvus.io/docs/install_cluster-docker.md).

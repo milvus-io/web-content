@@ -4,6 +4,7 @@ title: Version Migration
 ---
 
 # Version Migration
+You can use [MilvusDM](migrate_overview.md) for version migration.
 
 <div class="alert note">
 MilvusDM does not support migrating data from Milvus 2.0 standalone to Milvus 2.0 cluster.

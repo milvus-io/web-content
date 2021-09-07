@@ -5,7 +5,6 @@ title: Deploy Milvus on Amazon EKS with Terraform
 
 # Deploy Milvus on Amazon EKS with Terraform
 
-## Overview
 This guide introduces how to run Milvus on an AWS Elastic Kubernetes service (EKS) cluster using Terraform. Before getting started, we recommend you to get familiar with AWS account management. Please ensure you have access to all the required permissions to run EKS, manage networks and security groups, and spin up instances and volumes.  
 
 ## Required Software

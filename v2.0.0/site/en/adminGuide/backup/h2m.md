@@ -4,6 +4,8 @@ title: HDF5 to Milvus
 ---
 # Migrate Data from HDF5 to Milvus
 
+You can migrate HDF5 files to Milvus using [MilvusDM](migrate_overview.md).
+
 1. Download **H2M.yaml**:
 
 ```

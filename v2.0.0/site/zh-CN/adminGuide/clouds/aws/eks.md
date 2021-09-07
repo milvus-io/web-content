@@ -5,7 +5,6 @@ title: Deploy on an EKS cluster with Terraform
 
 # 使用 Terraform 在 EKS 上部署 Milvus
 
-## 概述
 
 本文将介绍如何使用 Terraform 在 EKS 集群上部署 Milvus。建议你在开始前先熟悉如何管理 AWS 账户。请确保你已获取运行 EKS、管理安全组和网络、启动实例、添加卷等操作的权限。
 

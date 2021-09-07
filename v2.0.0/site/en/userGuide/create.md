@@ -5,6 +5,8 @@ title: Create
 
 # Create a Collection or Partition
 
+This page will show you how to create a collection or a partition in Milvus.
+
 ## Create a collection
 
 Collections can only be created after successfully connecting to the Milvus server.

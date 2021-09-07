@@ -2,7 +2,7 @@
 id: allocate.md
 ---
 
-# Allocate resources on Kubernetes
+# Allocate Resources on Kubernetes
 
 Generally, the resources you allocate to a Milvus cluster in production should be proportionate to the machine workload. You should also consider the machine type when allocating resources. Although you can update the configurations when the cluster is running, we recommend you to set the values before deploying the cluster.
 

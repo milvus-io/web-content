@@ -3,6 +3,7 @@ id: create.md
 ---
 
 # 创建 collection 或 partition
+通过本章节文档，你将了解如何在 Milvus 中创建collection 和 partition。
 
 ## 创建 collection
 
