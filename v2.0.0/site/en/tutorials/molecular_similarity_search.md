@@ -11,9 +11,13 @@ Drug discovery is an important part of new medicine research and development. Th
 
 In order to discover available compounds from billion-scale compound libraries, chemical fingerprint is usually retrieved for substructure search and molecule similarity search.
 
+![molecular](../../../assets/molecular.png)
+
 <br/>
 
 Try out the [demo](http://35.166.123.214:8002/) or visit the [github repo](https://github.com/milvus-io/bootcamp/tree/master/solutions/molecular_similarity_search) to learn how to build a molecular similarity search system using Milvus paired with RDkit for cheminfomatics.
+
+![molecular](../../../assets/molecular_demo.jpeg)
 
 <br/>
 

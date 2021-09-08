@@ -11,11 +11,14 @@ Question answering system is a common real world application that belongs to the
 
 Milvus, the open-source vector database, can be used to build question answering systems, especially chatbots that use natural language processing (NLP) to simulate a live operator, answer questions, route users to relevant information, and reduce labor costs. By combining Milvus with BERT, a machine learning (ML) model developed for NLP pre-training, chatbots can understand semantic language.
 
+![Qa_chatbot](../../../assets/qa_chatbot.png)
+
 <br/>
 
 
 Try out the [demo](http://35.166.123.214:8005/) or visit the [github repo](https://github.com/milvus-io/bootcamp/tree/master/solutions/question_answering_system) to learn how to build an intelligent question answering system using Milvus and the BERT model for natural language processing. 
 
+![QA_chatbot_demo](../../../assets/qa_chatbot_demo.png)
 
 <br/>
 

@@ -11,6 +11,8 @@ DNA sequence is a popular concept in both academic research and real world appli
 
 Milvus, the open-source vector database is capable of handling massive data and can store vectors of nucleic acid sequences and perform high-efficiency retrieval. It can also help reduce the cost of production or research. The DNA sequence classification system built on Milvus can manage gene classification in milliseconds with high accuracy. 
 
+![dna](../../../assets/dna.png)
+
 <br/>
 
 Visit the [github repo](https://github.com/milvus-io/bootcamp/tree/master/solutions/dna_sequence_classification) to learn how to build a DNA sequence classification system using Milvus paired with CountVectorizer.
