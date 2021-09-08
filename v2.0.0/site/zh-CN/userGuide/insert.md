@@ -43,7 +43,7 @@ const entities = Array.from({ length: 10 }, () => ({
 
 ```python
 >>> mr = collection.insert(entities)
-<pymilvus.search.MutationResult object at 0x7fcfe8255550>
+# 输出 `MutationResult` 的主键列
 >>> mr.primary_keys
 [425790736918318406, 425790736918318407, 425790736918318408, ...]
 ```

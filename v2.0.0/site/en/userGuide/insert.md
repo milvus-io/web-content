@@ -39,7 +39,7 @@ _Milvus returns the value of MutationResult, which contains the corresponding pr
 
 ```python
 >>> mr = collection.insert(entities)
-<pymilvus.search.MutationResult object at 0x7fcfe8255550>
+# Get the primary keys of the `MutationResult`
 >>> mr.primary_keys
 [425790736918318406, 425790736918318407, 425790736918318408, ...]
 ```
