@@ -103,3 +103,9 @@ minikube delete
 </div>
 
 
+</br>
+
+<div class="alert note">
+阅读[升级指南](upgrade.md) 了解如何升级 Milvus 2.0 版本。
+</div>
+

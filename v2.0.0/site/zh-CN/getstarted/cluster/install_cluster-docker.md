@@ -72,3 +72,7 @@ milvus-rootcoord    /tini -- milvus run rootcoord    Up
 
 如果你想在停止Milvus后清理数据，运行 <code>$ sudo rm -rf  volume</code>。
 </div>
+
+<div class="alert note">
+阅读[升级指南](upgrade.md) 了解如何升级 Milvus 2.0 版本。
+</div>

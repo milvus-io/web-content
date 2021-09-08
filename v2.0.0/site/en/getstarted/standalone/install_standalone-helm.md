@@ -95,3 +95,9 @@ minikube delete
 <div class="alert note">
 To retain logs,  copy them from each pod's <code>stderr</code> before deleting the cluster and all its resources. To access a pod's standard error stream, run <code>kubectl logs (podname)</code>.
 </div>
+
+<br/>
+
+<div class="alert note">
+If you want to upgrade your Milvus 2.0 version, please refer to [Upgrade Milvus 2.0](upgrade.md)
+</div>

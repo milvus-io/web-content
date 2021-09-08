@@ -79,3 +79,7 @@ To stop Milvus Cluster, run <code>$ sudo docker-compose down</code>.
 If you want to clean up data after stopping Milvus, run <code> $ sudo rm -rf  volume</code>.
 
 </div>
+
+<div class="alert note">
+If you want to upgrade your Milvus 2.0 version, please refer to [Upgrade Milvus 2.0](upgrade.md)
+</div>

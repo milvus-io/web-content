@@ -95,3 +95,9 @@ minikube delete
 如需留存日志，在删除集群前从每个 pod 的 <code>stderr</code> 中复制日志及相关资源。运行 <code>kubectl logs (podname)</code> 指令获取 pod 标准错误流。
 </div>
 
+
+</br>
+
+<div class="alert note">
+阅读[升级指南](upgrade.md) 了解如何升级 Milvus 2.0 版本。
+</div>
