@@ -118,7 +118,7 @@ FLAT 则计算每条向量和目标向量之间的距离。
 
 当向量总条数约等于 `nlist` 时，两者的计算量相当，无明显性能差距。然而，随着向量条数达到 `nlist` 的 2 倍、3 倍、n 倍之后，IVF_FLAT 的性能优势就越来越突出。
 
-可参阅 [如何选择索引类型](https://milvus.io/cn/blogs/2019-12-03-select-index.md)。
+可参阅 [如何选择索引类型](https://milvus.io/cn/blog/2019-12-03-select-index.md)。
 
  
 
