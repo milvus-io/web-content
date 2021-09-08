@@ -392,6 +392,14 @@
       "order": 5
     },
     {
+      "id": "upgrade.md",
+      "title": "升级 Milvus 2.0",
+      "label1": "admin_guide",
+      "label2": "",
+      "label3": "",
+      "order": 6
+    },
+    {
       "id": "migrate",
       "title": "数据迁移",
       "label1": "",
