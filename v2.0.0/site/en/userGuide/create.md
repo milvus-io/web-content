@@ -23,14 +23,14 @@ The created collection must contain a primary key field. Int64 is the only suppo
 </div>
 
 
-````python
+```python
 >>> collection_name = "example_collection"
 >>> field_name = "example_field"
 >>> from pymilvus import Collection, CollectionSchema, FieldSchema, DataType
 >>> pk = FieldSchema(name="pk", dtype=DataType.INT64, is_primary=True, auto_id=True)
 >>> field = FieldSchema(name=field_name, dtype=DataType.FLOAT_VECTOR, dim=8)
->>> schema = CollectionSchema(fields=[pk,field], description="example collection")```
-````
+>>> schema = CollectionSchema(fields=[pk,field], description="example collection")
+```
 
 ```javascript
 const COLLECTION_NAME = "example_collection";
