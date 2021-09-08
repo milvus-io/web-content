@@ -24,7 +24,7 @@ $ wget https://raw.githubusercontent.com/milvus-io/pymilvus/v2.0.0rc5/examples/h
 
 3. Scan **hello_milvus.py**. This sample code does the following:
 
-- Imports the pymilvus package:
+- Imports the PyMilvus package:
 ```Python
 from pymilvus import connections, FieldSchema, CollectionSchema, DataType, Collection
 ```
@@ -79,6 +79,14 @@ res = collection.search(
     "count > 100", output_fields=["count", "random_value"]
 )
 ```
+To print the search results by IDs and distances:
+```Python
+for raw_result in res:
+    for result in raw_result:
+        id = result.id  # result id
+        distance = result.distance
+```
+Refer to [API Reference](/api-reference/pymilvus/2.0.0rc5/results.html) for more details.
 
 - Conducts a hybrid search：
 <div class="alert note">

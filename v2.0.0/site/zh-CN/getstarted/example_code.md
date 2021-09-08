@@ -75,6 +75,15 @@ res = collection.search(
 )
 ```
 
+根据 ID 和相似度输出搜索结果:
+```Python
+for raw_result in res:
+    for result in raw_result:
+        id = result.id  # result id
+        distance = result.distance
+```
+更多详情，参考 [API Reference](/api-reference/pymilvus/2.0.0rc5/results.html)。
+
 - 进行混合查询：
 <div class="alert note">
 以下示例中，仅对 <code>film_id</code> 在 [2,4, 6, 8]中的 entity 进行向量相似度查询
