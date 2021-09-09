@@ -10,7 +10,7 @@ After the Milvus server boots successfully, test the platform using our Python s
 1. Install PyMilvus and its dependencies:
 
 ```Python
-pip install pymilvus==2.0.0rc5
+pip3 install pymilvus==2.0.0rc5
 ```
 <div class="alert note">
 Python version 3.6 or higher is required. View <a href="https://wiki.python.org/moin/BeginnersGuide/Download">Python documentation</a> for information about installing the correct version for your system.

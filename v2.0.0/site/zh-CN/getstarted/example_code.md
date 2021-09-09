@@ -8,7 +8,7 @@ id: example_code.md
 
 1. 安装 PyMilvus 及依赖库:
 ```Python
-pip install pymilvus==2.0.0rc5
+pip3 install pymilvus==2.0.0rc5
 ```
 
 <div class="alert note">
