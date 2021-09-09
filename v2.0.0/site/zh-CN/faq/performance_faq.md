@@ -12,7 +12,7 @@ id: performance_faq.md
 
 IVF 索引的 `nlist` 值应根据具体使用情况设置。一般来说，建议值为 `4 × sqrt(n)`，其中 `n` 指 segment 最多包含的 entity 条数。
 
-每个 segment 的大小由参数 `dataservice.segment.size` 决定，默认为 512 MB。Segment 内的 entity 条数可通过将 dataservice.segment.size 除以每条 entity 的大小估算得出。
+每个 segment 的大小由参数 `datacoord.segment.maxSize` 决定，默认为 512 MB。Segment 内的 entity 条数可通过将 `datacoord.segment.maxSize` 除以每条 entity 的大小估算得出。
 
 `nprobe` 值的选取需要根据数据总量和实际场景在查询性能和准确率之间进行取舍。建议通过多次实验确定合理取值。
 
@@ -30,7 +30,7 @@ IVF 索引的 `nlist` 值应根据具体使用情况设置。一般来说，建�
 
 查询操作在 segment 上进行，有索引时查询性能更高。如果 segment 尚未构建索引，Milvus 将对原始数据进行暴力搜索，大大增加查询时长。
 
-因此，当小数据集（collection）尚未创建索引时，就有可能出现查询时间更长的情况。这是因为其 segment 的大小没有达到 `master.minSegmentSizeToEnableIndex` 所设定的索引构建阈值。调用 `create_index()` 方法可对已达到该阈值但没有构建索引的 segment 强制构建索引以加快查询速度。
+因此，当小数据集（collection）尚未创建索引时，就有可能出现查询时间更长的情况。这是因为其 segment 的大小没有达到 `rootcoord.minSegmentSizeToEnableIndex` 所设定的索引构建阈值。调用 `create_index()` 方法可对已达到该阈值但没有构建索引的 segment 强制构建索引以加快查询速度。
 
  
 
@@ -52,7 +52,7 @@ Milvus 构建索引和执行查询操作时，CPU 利用率提高。一般来说
 
 数据插入本身并不是一个 CPU 密集型操作，但是由于新插入的数据所在 segment 的大小可能还未达到自动创建索引的阈值，在查询时只能对其采用暴搜的方式，查询性能就会降低。
 
- 参数 `dataservice.segment.size` 决定了 segment 自动构建索引的阈值，默认值为 512 MB。
+ 参数 `datacoord.segment.maxSize` 决定了 segment 自动构建索引的阈值，默认值为 512 MB。
 
 #### 仍有问题没有得到解答？
 

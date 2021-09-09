@@ -286,7 +286,7 @@ This session configures the system behaviors of Milvus. You can set these config
   <tr>
 		<td><code>datacoord.segment.sealProportion</code></td>
 		<td><details>
-       <summary>Maximum proportion of a segment’s actual size comparing to <code>datacoord.segment.size</code></summary>
+       <summary>Maximum proportion of a segment’s actual size comparing to <code>datacoord.segment.maxSize</code></summary>
        <li>When actual proportion is greater than the set value, the corresponding segment can be sealed.</li>
       </details></td>
 		<td>0.75</td>

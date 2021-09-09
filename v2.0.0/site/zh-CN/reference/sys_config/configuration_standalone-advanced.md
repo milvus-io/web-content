@@ -187,8 +187,8 @@ Milvus 支持 MinIO 以及 Amazon S3 作为系统的存储引擎，支撑日志�
   <tr>
 		<td><code>datacoord.segment.sealProportion</code></td>
 		<td><details>
-       <summary>单个 segment 的真实数据大小占 <code>datacoord.segment.size</code>的最大比例</summary>
-       <li>当单个 segment 的真实数据大小与 <code>datacoord.segment.size</code>的比例超过该参数，此 segment 可以被关闭（sealed）。</li>
+       <summary>单个 segment 的真实数据大小占 <code>datacoord.segment.maxSize</code>的最大比例</summary>
+       <li>当单个 segment 的真实数据大小与 <code>datacoord.segment.maxSize</code>的比例超过该参数，此 segment 可以被关闭（sealed）。</li>
       </details></td>
 		<td>0.75</td>
 	</tr>

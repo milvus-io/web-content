@@ -14,7 +14,7 @@ summary: Find answers to frequently asked questions about search performance, pe
 
 Setting `nlist` is scenario-specific. As a rule of thumb, the recommended value of `nlist` is `4 × sqrt(n)`, where `n` is the total number of entities in a segment.
 
-The size of each segment is determined by the `dataCoord.segment.size` parameter, which is set to 512 MB by default. The total number of entities in a segment n can be estimated by dividing `dataCoord.segment.size` by the size of each entity.
+The size of each segment is determined by the `datacoord.segment.maxSize` parameter, which is set to 512 MB by default. The total number of entities in a segment n can be estimated by dividing `datacoord.segment.maxSize` by the size of each entity.
 
 Setting `nprobe` is specific to the dataset and scenario, and involves a trade-off between accuracy and query performance. We recommend finding the ideal value through repeated experimentation.
 
@@ -40,7 +40,7 @@ When running queries, CPU usage is affected by `nq` and `nprobe`. When `nq` and 
 
 Insert operations are not CPU intensive. However, because new segments may not have reached the threshold for index building, Milvus resorts to brute-force search—significantly impacting query performance.
 
-The `dataCoord.segment.size` parameter determines the index-building threshold for a segment, and is set to 512 MB by default.
+The `datacoord.segment.maxSize` parameter determines the index-building threshold for a segment, and is set to 512 MB by default.
 
 #### Still have questions?
 
