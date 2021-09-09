@@ -64,5 +64,5 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
 </div>
 
 <div class="alert note">
-阅读[升级指南](upgrade.md) 了解如何升级 Milvus 2.0 版本。
+阅读 <a href="upgrade.md">升级指南 2.0</a> 了解如何升级 Milvus 2.0 版本。
 </div>
