@@ -1,6 +1,6 @@
 ---
 id: create.md
-title: Create
+summary: Learn how to create a collection in Milvus.
 ---
 
 # Create a Collection or Partition

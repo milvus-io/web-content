@@ -1,6 +1,6 @@
 ---
 id: hybridsearch.md
-title: Conduct a Hybrid Search
+summary: Conduct a Hybrid Search with Milvus.
 ---
 
 # Conduct a Hybrid Search

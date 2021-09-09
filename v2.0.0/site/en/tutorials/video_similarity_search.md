@@ -1,6 +1,6 @@
 ---
 id: video_similarity_search.md
-title: Video Similarity Search
+summary: Build a video similarity search system with Milvus. 
 ---
 
 # Video Similarity Search

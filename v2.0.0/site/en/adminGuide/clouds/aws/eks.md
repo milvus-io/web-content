@@ -1,6 +1,7 @@
 ---
 id: eks.md
 title: Deploy Milvus on Amazon EKS with Terraform
+summary: Learn how to deploy Milvus on EKS.
 ---
 
 # Deploy Milvus on Amazon EKS with Terraform

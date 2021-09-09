@@ -1,6 +1,6 @@
 ---
 id: scaleout.md
-title: Scale 
+summary: Learn how to scale out a Milvus cluster.
 ---
 
 # Scale Guide for Milvus Cluster

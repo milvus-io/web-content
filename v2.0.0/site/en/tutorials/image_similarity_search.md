@@ -1,6 +1,6 @@
 ---
 id: image_similarity_search.md
-title: Image Similarity Search
+summary: Build an image similarity search system with Milvus.
 ---
 
 # Image Similarity Search 

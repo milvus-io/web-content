@@ -1,6 +1,6 @@
 ---
 id: insight_overview.md
-title: Overview
+summary: Milvus Insight, an intuitive GUI for Milvus service management.
 ---
 
 # Overview

@@ -1,6 +1,6 @@
 ---
 id: example_code.md
-title: Hello Milvus
+summary: Get started with Milvus faster using this Python example code.
 ---
 
 # Run Milvus using Python

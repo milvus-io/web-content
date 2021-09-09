@@ -1,6 +1,6 @@
 ---
 id: troubleshooting.md
-title: Troubleshooting
+summary: Learn about common issues you may encounter with Milvus and how to overcome them.
 ---
 # Troubleshooting
 This page lists common issues that may occur when running Milvus, as well as possible troubleshooting tips. Issues on this page fall into the following categories:

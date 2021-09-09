@@ -4,6 +4,7 @@ title: Milvus Cluster System Configurations
 label: Advanced Configurations
 order: 1
 group: cluster_sys
+summary: Learn about basic and advanced Milvus cluster configurations.
 ---
 
 # Milvus Cluster System Configurations

@@ -1,5 +1,6 @@
 ---
 id: expression.md
+summary: learn about predicate expression rules in Milvus.
 ---
 
 # Predicate Expressions

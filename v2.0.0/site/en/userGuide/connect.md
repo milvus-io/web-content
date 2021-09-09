@@ -1,6 +1,6 @@
 ---
 id: connect.md
-title: Connect
+summary: Learn how to connect Milvus server.
 ---
 
 # Connect to Milvus Server

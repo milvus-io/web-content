@@ -4,6 +4,7 @@ title: Before you Begin
 label: Install on Kubernetes
 order: 1
 group: prerequisite
+summary: Learn the necessary preparations before installing Milvus.
 ---
 # Before you Begin
 

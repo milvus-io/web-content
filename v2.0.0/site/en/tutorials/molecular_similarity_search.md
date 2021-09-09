@@ -1,6 +1,6 @@
 ---
 id: molecular_similarity_search.md
-title: Molecular Similarity Search 
+summary: Build a molecular similarity search system with Milvus. 
 ---
 
 # Molecular Similarity Search 

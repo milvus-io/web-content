@@ -2,6 +2,7 @@
 id: overview.md
 title: What is Milvus
 related_key: Milvus Overview
+summary: Milvus is an open-source vector database designed specifically for AI application development, embeddings similarity search, and MLOps.
 ---
 
 # What is Milvus

@@ -1,6 +1,6 @@
 ---
 id: release_notes.md
-title: Release Notes
+summary: Milvus Release Notes
 ---
 # Release Notes
 ## v2.0.0-RC5

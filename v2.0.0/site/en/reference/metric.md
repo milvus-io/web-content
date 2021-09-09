@@ -1,5 +1,6 @@
 ---
 id: metric.md
+summary: Milvus supports a variety of similarity metrics including Euclidean distance, inner product, Jaccard, etc.
 ---
 
 # Similarity Metrics

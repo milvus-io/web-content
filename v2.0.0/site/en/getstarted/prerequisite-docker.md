@@ -4,6 +4,7 @@ title: Before you Begin
 label: Install with Docker Compose
 order: 0
 group: prerequisite
+summary: Learn the necessary preparations before installing Milvus.
 ---
 # Before you Begin
 Before proceeding to installation, you must check the eligibility of your hardware and software.

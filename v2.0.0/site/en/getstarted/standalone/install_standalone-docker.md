@@ -4,6 +4,7 @@ title: Install Milvus Standalone
 label: Install with Docker Compose
 order: 0
 group: standalone
+summary: Installation instructions for the standalone version of Milvus.
 ---
 
 # Install Milvus Standalone

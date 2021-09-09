@@ -1,5 +1,6 @@
 ---
 id: query.md
+summary: Learn how to query vectors in Milvus.
 ---
 
 # Query

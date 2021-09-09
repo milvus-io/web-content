@@ -1,6 +1,6 @@
 ---
 id: data_processing.md
-title: Data Processing
+summary: Learn about the data processing procedure in Milvus.
 ---
 
 # Data Processing

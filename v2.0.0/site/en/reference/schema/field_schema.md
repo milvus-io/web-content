@@ -1,5 +1,6 @@
 ---
 id: field_schema.md
+summary: Learn how to define a field schema in Milvus.
 ---
 
 # Field Schema

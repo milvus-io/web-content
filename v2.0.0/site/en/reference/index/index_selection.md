@@ -1,7 +1,7 @@
 ---
 id: index_selection.md
 related_key: IVF
-
+summary: Milvus supports a variety of efficient vector index types including FLAT, IVF_FLAT, IVF_SQ8, IVF_SQ8H, IVF_PQ, RNSG, HNSW, and ANNOY.
 ---
 
 # Selecting an Index Best Suited for Your Scenario

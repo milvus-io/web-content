@@ -3,6 +3,7 @@ id: install_offline-docker.md
 label: Install with Docker Compose
 order: 0
 group: offline
+summary: Learn how to install Milvus offline.
 ---
 # Install Milvus Offline
 

@@ -1,6 +1,7 @@
 ---
 id: index.md
 related_key: index
+summary: Index mechanism in Milvus.
 ---
 
 # Vector Index

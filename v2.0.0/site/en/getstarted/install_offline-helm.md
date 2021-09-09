@@ -3,6 +3,7 @@ id: install_offline-helm.md
 label: Install on Kubernetes
 order: 1
 group: offline
+summary: Learn how to install Milvus offline.
 ---
 # Install Milvus Offline
 

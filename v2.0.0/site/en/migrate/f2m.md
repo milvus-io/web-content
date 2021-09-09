@@ -1,6 +1,7 @@
 ---
 id: f2m.md
 title: Migrate from Faiss to Milvus
+summary: Learn how to migrate Faiss data to Milvus.
 ---
 
 # Migrate from Faiss to Milvus

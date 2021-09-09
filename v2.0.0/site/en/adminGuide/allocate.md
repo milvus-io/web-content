@@ -1,5 +1,6 @@
 ---
 id: allocate.md
+summary: Learn how to allocate resources to Milvus on Kubernetes.
 ---
 
 # Allocate Resources on Kubernetes

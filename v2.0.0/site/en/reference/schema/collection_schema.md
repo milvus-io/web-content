@@ -1,5 +1,6 @@
 ---
 id: collection_schema.md
+summary: Learn how to define a collection schema in Milvus.
 ---
 
 # Collection Schema

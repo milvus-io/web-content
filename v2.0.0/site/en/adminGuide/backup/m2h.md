@@ -1,10 +1,11 @@
 ---
 id: m2h.md
 title: Migrate from Milvus to HDF5
+summary: Save Milvus data as HDF5 files.
 ---
 # Migrate Data from Milvus to HDF5
 
-You can  save data in Milvus as HDF5 files using [MilvusDM](migrate_overview.md).
+You can save data in Milvus as HDF5 files using [MilvusDM](migrate_overview.md).
 
 1. Download **M2H.yaml**:
 

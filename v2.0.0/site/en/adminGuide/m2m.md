@@ -1,6 +1,7 @@
 ---
 id: m2m.md
 title: Version Migration
+summary: Use MilvusDM for version migration.
 ---
 
 # Version Migration

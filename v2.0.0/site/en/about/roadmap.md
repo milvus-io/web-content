@@ -1,6 +1,7 @@
 ---
 id: roadmap.md
 title: Milvus Roadmap
+summary: Roadmap and enhancement plan of Milvus.
 ---
 # Milvus Roadmap
 

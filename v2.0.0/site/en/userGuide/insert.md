@@ -1,6 +1,6 @@
 ---
 id: insert.md
-title: Insert
+summary: Learn how to insert data to Milvus.
 ---
 
 # Insert vectors

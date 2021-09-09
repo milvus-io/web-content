@@ -1,6 +1,6 @@
 ---
 id: product_faq.md
-title: Product FAQ
+summary: Find answers to frequently asked questions about the world's most advanced vector database.
 ---
 
 # Product FAQ

@@ -1,6 +1,6 @@
 ---
 id: search.md
-title: Conduct a Search
+summary: Conduct a vector similarity search with Milvus.
 ---
 
 # Conduct a Vector Similarity Search

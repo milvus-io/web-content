@@ -1,6 +1,6 @@
 ---
 id: pymilvus_faq.md
-title: Pymilvus FAQ
+summary: Learn about common issues you may encounter with PyMilvus ORM and how to overcome them.
 ---
 # PyMilvus FAQ
 

@@ -1,5 +1,6 @@
 ---
 id: deploy_s3.md
+summary: Learn how to set up S3 storage for Milvus.
 ---
 
 # Set up S3 Storage for Milvus

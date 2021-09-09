@@ -4,6 +4,7 @@ title: Milvus Standalone System Configurations
 label: Basic Configurations
 order: 0
 group: standalone_sys
+summary: Learn about basic and advanced Milvus standalone configurations.
 ---
 
 # Milvus Standalone System Configurations

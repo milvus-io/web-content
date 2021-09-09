@@ -1,10 +1,10 @@
 ---
 id: monitor.md
 title: Monitor and Alert
-
+summary: Learn how to monitor Milvus 2.0 with Prometheus.
 ---
 
-# Monitor Milvus2.0 with Prometheus Operator on Kubernetes
+# Monitor Milvus 2.0 with Prometheus Operator on Kubernetes
 
 Prometheus is an open-source toolkit for monitoring Kubernetes implementations. 
 
