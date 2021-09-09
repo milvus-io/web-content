@@ -35,4 +35,8 @@ lscpu | grep -e sse4_2 -e avx -e avx2 -e avx512
 Installing minikube will also install hypervisor and kubectl. Kubectl is a command-line tool for managing Kubernetes from your local workstation.
 </div>
 
+<div class="alert note">
+  Minikube requires <a href="https://docs.docker.com/get-docker/">Docker</a> as a dependency. Make sure install Docker before deploying Milvus using Helm.
+</div>
+
 - Helm version 3.0.0 or higher is required. See [Helm docs](https://helm.sh/docs/).
