@@ -5,7 +5,7 @@ summary: Learn how to upgrade Milvus.
 
 # Upgrade Milvus Using Helm Chart
 
-You can easily upgrade Milvus 2.0 with Helm Chart. This guide uses the example of upgrading from Milvus v2.0.0-rc4 to v2.0.0-rc6.
+You can easily upgrade Milvus 2.0 with Helm Chart. This guide uses the example of upgrading from Milvus v2.0.0-rc4 to v2.0.0-rc5-hotfix1.
 
 <div class="alert note">
 Helm Chart does not support upgrading from Milvus 2.0 standalone to Milvus 2.0 cluster or vice versa.
@@ -63,7 +63,7 @@ milvus/milvus        2.1.2                2.0.0-rc.2                Milvus is an
 
 You can see there are several new versions after **v2.0.0-rc4**. 
 
-5. Upgrade to **v2.0.0-rc6**:
+5. Upgrade to **v2.0.0-rc5-hotfix1**:
 
 ```
 helm repo update
@@ -87,11 +87,11 @@ my-release-minio-744dd9586f-drjnr               1/1     Running   0          31m
 To upgrade Milvus standalone, old pods first will be deleted first. Therefore, the service may be offline for a short period of time.
 </div>
 
-6. Check the image version and you can see it is **v2.0.0-rc6**.
+6. Check the image version and you can see it is **v2.0.0-rc5-hotfix1**.
 
 ```
 kubectl get pods my-release-milvus-standalone-546649bcdf-xqjd5 -o=jsonpath='{$.spec.containers[0].image}'
-milvusdb/milvus:v2.0.0-rc6-20210901-9e0b2cc
+milvusdb/milvus:v2.0.0-rc5-hotfix1-20210901-9e0b2cc
 ```
 
 
@@ -157,7 +157,7 @@ milvus/milvus        2.1.2                2.0.0-rc.2                Milvus is an
 
 You can see there are several new versions after **2.0.0-rc4**. 
 
-5. Upgrade to **v2.0.0-rc6**:
+5. Upgrade to **v2.0.0-rc5-hotfix1**:
 
 ```
 helm repo update
@@ -183,9 +183,9 @@ my-release-milvus-rootcoord-79cd9cf4c5-tnxdk    1/1     Running   0          78s
 my-release-minio-744dd9586f-gdxwj               1/1     Running   0          6m13s
 ```
 
-6. Check the image version and you can see it is **v2.0.0-rc6**.
+6. Check the image version and you can see it is **v2.0.0-rc5**.
 
 ```
 kubectl get pods my-release-milvus-proxy-99fb7bc58-r4xpf -o=jsonpath='{$.spec.containers[0].image}'
-milvusdb/milvus:v2.0.0-rc6-20210901-9e0b2cc
+milvusdb/milvus:v2.0.0-rc5-hotfix1-20210901-9e0b2cc
 ```
