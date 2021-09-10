@@ -24,8 +24,8 @@ Milvus 提供以下 2 个版本：
 	</thead>
 	<tbody>
 	<tr>
-		<td><a href="install_standalone-docker.md">2.0.0-RC5</a></td>
-		<td><a href="example_code.md">2.0.0rc5</a></td>
+		<td><a href="install_standalone-docker.md">2.0.0-RC6</a></td>
+		<td><a href="example_code.md">2.0.0rc6</a></td>
 		<td>即将上线</td>
 		<td>即将上线</td>
 		<td><a href="https://github.com/milvus-io/milvus-sdk-node">1.0.16</a></td>
@@ -33,7 +33,7 @@ Milvus 提供以下 2 个版本：
 	</tbody>
 </table>
 
-Milvus 2.0.0-RC5 是 2.0.0 的预览版本。 该版本引入 Go 语言搭建分布式系统，并采用了新的云原生分布式设计。 后者大大提高了系统扩展性和系统弹性。
+Milvus 2.0.0-RC6 是 2.0.0 的预览版本。 该版本引入 Go 语言搭建分布式系统，并采用了新的云原生分布式设计。 后者大大提高了系统扩展性和系统弹性。
 
 ## 系统架构
 

@@ -3,6 +3,69 @@ id: release_notes.md
 summary: Milvus Release Notes
 ---
 # Release Notes
+
+## v2.0.0-RC6
+
+Release date: 2021-09-10
+
+### Compatibility
+
+<table class="version">
+	<thead>
+	<tr>
+		<th>Milvus version</th>
+		<th>Python SDK version</th>
+		<th>Java SDK version</th>
+		<th>Go SDK version</th>
+		<th>Node SDK version</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>2.0.0-RC6</td>
+		<td>2.0.0rc6</td>
+		<td>Coming soon</td>
+		<td>Coming soon</td>
+		<td>1.0.16</td>
+	</tr>
+	</tbody>
+</table>
+
+
+Milvus 2.0.0-RC6 is a preview version of Milvus 2.0.0. It supports specifying shard number when creating collections, and query by expression. It exposes more cluster metrics through API. In RC6 we inceases the unit test coverage to 80%. We also fixed a series of issues involving resource leakage, system panic, etc.
+
+### Improvements
+
+- Increases unit test coverage to 80%.
+
+### Features
+
+- [#7482](https://github.com/milvus-io/milvus/pull/7482) Supports specifying shard number when creating a collection.
+- [#7386](https://github.com/milvus-io/milvus/pull/7386) Supports query by expression.
+- Exposes system metrics through API:
+  - [#7400](https://github.com/milvus-io/milvus/pull/7400) Proxy metrics integrate with other coordinators.
+  - [#7177](https://github.com/milvus-io/milvus/pull/7177) Exposes metrics of data node and data coord.
+  - [#7228](https://github.com/milvus-io/milvus/pull/7228) Exposes metrics of root coord.
+  - [#7472](https://github.com/milvus-io/milvus/pull/7472) Exposes more detailed metrics information.
+  - [#7436](https://github.com/milvus-io/milvus/pull/7436) Supports caching the system information metrics.
+
+### Bug Fixes
+
+- [#7434](https://github.com/milvus-io/milvus/pull/7434) Query node OOM if loading a collection that beyond the memory limit.
+- [#7678](https://github.com/milvus-io/milvus/pull/7678) Standalone OOM when recovering from existing storage.
+- [#7636](https://github.com/milvus-io/milvus/pull/7636) Standalone panic when sending message to a closed channel.
+- [#7631](https://github.com/milvus-io/milvus/pull/7631) Milvus panic when closing flowgraph.
+- [#7605](https://github.com/milvus-io/milvus/pull/7605) Milvus crashed with panic when running nightly CI tests.
+- [#7596](https://github.com/milvus-io/milvus/pull/7596) Nightly cases failed because rootcoord disconnected with etcd.
+- [#7557](https://github.com/milvus-io/milvus/pull/7557) Wrong search result returned when the term content in expression is not in order.
+- [#7536](https://github.com/milvus-io/milvus/pull/7536) Incorrect `MqMsgStream` Seek logic.
+- [#7527](https://github.com/milvus-io/milvus/pull/7527) Dataset's memory leak in `knowhere` when searching.
+- [#7444](https://github.com/milvus-io/milvus/pull/7444) Deadlock of channels time ticker.
+- [#7428](https://github.com/milvus-io/milvus/pull/7428) Possible deadlock when `MqMsgStream` broadcast fails.
+- [#7715](https://github.com/milvus-io/milvus/pull/7715) Query request overwritten by concurrent operations on the same slice.
+
+
+
 ## v2.0.0-RC5
 
 Release date: 2021-08-30
@@ -22,7 +85,7 @@ Release date: 2021-08-30
 	<tbody>
 	<tr>
 		<td>2.0.0-RC5</td>
-		<td>2.0.0rc5</td>
+		<td>2.0.0rc6</td>
 		<td>Coming soon</td>
 		<td>Coming soon</td>
 		<td>1.0.16</td>
@@ -110,7 +173,7 @@ Release date: 2021-08-13
 
 | **Milvus version** | **Python SDK version**                | **Java SDK version** | **Go SDK version** |
 | ------------------ | ------------------------------------- | -------------------- | ------------------ |
-| 2.0.0-RC4          | 2.0.0rc5 | Coming soon          | Coming soon        |
+| 2.0.0-RC4          | 2.0.0rc6 | Coming soon          | Coming soon        |
 
 Milvus 2.0.0-RC4 is a preview version of Milvus 2.0.0. It mainly focuses on fixing stability issues, it also offers functionalities to retrieve vector data from object storage and specify output field by wildcard matching.
 
@@ -235,7 +298,7 @@ Release date: 2021-07-13
 
 | Milvus version | Python SDK version | Java SDK version | Go SDK version |
 | :------------- | :----------------- | :--------------- | :------------- |
-| 2.0.0-RC2 | 2.0.0rc5 | Coming soon            | Coming soon          |
+| 2.0.0-RC2 | 2.0.0rc6 | Coming soon            | Coming soon          |
 
 Milvus 2.0.0-RC2 is a preview version of Milvus 2.0.0. It fixes stability and performance issues and refactors code for node and storage management.
 
@@ -277,7 +340,7 @@ Release date: 2021-06-28
 
 | Milvus version | Python SDK version | Java SDK version | Go SDK version |
 | :------------- | :----------------- | :--------------- | :------------- |
-| 2.0.0-RC1 | 2.0.0rc5 | Coming soon            | Coming soon          |
+| 2.0.0-RC1 | 2.0.0rc6 | Coming soon            | Coming soon          |
 
 
 

@@ -26,15 +26,15 @@ Compatibility:
 	</thead>
 	<tbody>
 	<tr>
-		<td><a href="install_standalone-docker.md">2.0.0-RC5</a></td>
-		<td><a href="example_code.md">2.0.0rc5</a></td>
+		<td><a href="install_standalone-docker.md">2.0.0-RC6</a></td>
+		<td><a href="example_code.md">2.0.0rc6</a></td>
 		<td>Coming soon</td>
 		<td>Coming soon</td>
 		<td><a href="https://github.com/milvus-io/milvus-sdk-node">1.0.16</a></td>
 	</tr>
 	</tbody>
 </table>
-Milvus 2.0.0-RC5 is the preview version of 2.0.0. It introduces Golang as the distributed layer development language and a new cloud-native distributed design. The latter brings significant improvements to scalability, elasticity, and functionality. 
+Milvus 2.0.0-RC6 is the preview version of 2.0.0. It introduces Golang as the distributed layer development language and a new cloud-native distributed design. The latter brings significant improvements to scalability, elasticity, and functionality. 
 
 ## Overall Architecture
 Milvus 2.0 is a cloud-native vector database with storage and computation separated by design. All components in this refactored version of Milvus are stateless to enhance elasticity and flexibility.

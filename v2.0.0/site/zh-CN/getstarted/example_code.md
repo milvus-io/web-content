@@ -8,7 +8,7 @@ id: example_code.md
 
 1. 安装 PyMilvus 及依赖库:
 ```Python
-pip3 install pymilvus==2.0.0rc5
+pip3 install pymilvus==2.0.0rc6
 ```
 
 <div class="alert note">
@@ -18,7 +18,7 @@ PyMilvus 需要 Python 3.6 版本或以上，详见 <a href="https://wiki.python
 
 2. 下载 **hello_milvus.py** 示例代码:
 ```Python
-$ wget https://raw.githubusercontent.com/milvus-io/pymilvus/v2.0.0rc5/examples/hello_milvus.py
+$ wget https://raw.githubusercontent.com/milvus-io/pymilvus/v2.0.0rc6/examples/hello_milvus.py
 ```
 3. 浏览 **hello_milvus.py**，这个示例程序将：
 - 导入 pymilvus 包
@@ -83,7 +83,7 @@ for raw_result in res:
         distance = result.distance
         print(id, distance)
 ```
-更多详情，参考 [API Reference](/api-reference/pymilvus/2.0.0rc5/results.html)。
+更多详情，参考 [API Reference](/api-reference/pymilvus/2.0.0rc6/results.html)。
 
 - 进行混合查询：
 <div class="alert note">

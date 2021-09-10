@@ -10,7 +10,7 @@ After the Milvus server boots successfully, test the platform using our Python s
 1. Install PyMilvus and its dependencies:
 
 ```Python
-pip3 install pymilvus==2.0.0rc5
+pip3 install pymilvus==2.0.0rc6
 ```
 <div class="alert note">
 Python version 3.6 or higher is required. View <a href="https://wiki.python.org/moin/BeginnersGuide/Download">Python documentation</a> for information about installing the correct version for your system.
@@ -19,7 +19,7 @@ Python version 3.6 or higher is required. View <a href="https://wiki.python.org/
 2. Download sample code **hello_milvus.py**:
 
 ```Python
-$ wget https://raw.githubusercontent.com/milvus-io/pymilvus/v2.0.0rc5/examples/hello_milvus.py
+$ wget https://raw.githubusercontent.com/milvus-io/pymilvus/v2.0.0rc6/examples/hello_milvus.py
 ```
 
 3. Scan **hello_milvus.py**. This sample code does the following:
@@ -87,7 +87,7 @@ for raw_result in res:
         distance = result.distance
         print(id, distance)
 ```
-Refer to [API Reference](/api-reference/pymilvus/2.0.0rc5/results.html) for more details.
+Refer to [API Reference](/api-reference/pymilvus/2.0.0rc6/results.html) for more details.
 
 - Conducts a hybrid search：
 <div class="alert note">
