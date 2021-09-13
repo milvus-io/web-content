@@ -79,6 +79,13 @@
         "iconType": "MOLECULAR",
         "desc": "结合 Milvus 与化学信息工具包  RDkit 搭建分子式检索系统，查询相似结构的分子。",
         "liveDemo": "http://35.166.123.214:8002/"
+      },
+      {
+        "id": 11,
+        "title": "DNA 序列分类",
+        "link": "https://github.com/shiyu22/bootcamp/tree/master/solutions/dna_sequence_classification/quick_deploy",
+        "iconType": "DNA_CLASS",
+        "desc": "使用 Milvus 与 CountVectorizer 搭建 DNA 序列分类模型。"
       }
     ]
   },
