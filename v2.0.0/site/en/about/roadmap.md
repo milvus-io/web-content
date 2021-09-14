@@ -18,7 +18,7 @@ summary: Roadmap and enhancement plan of Milvus.
 #### DDL
 | **Version** | **Feature** | **Owner**   | **Status**  | **Comment** |
 | ----------- | ----------- | ----------- | ----------- | ----------- | 
-| 2.0.0-rc      | Supports numerical scalar data types	       |        | done       |        |
+| 2.0.0-RC      | Supports numerical scalar data types	       |        | done       |        |
 | 2.0   | Supports string data types        | czs007, dragondriver	     | in progress       |        |
 | 2.0   | Collection alias        | lsgrep       | in progress       |        |
 | 2.1   | Supports Scalar bitmap/inverted Index for string and numeric data types        |        | pending       |        |
@@ -32,8 +32,8 @@ summary: Roadmap and enhancement plan of Milvus.
 
 | **Version** | **Feature** | **Owner**   | **Status**  | **Comment** |
 | ----------- | ----------- | ----------- | ----------- | ----------- |
-| 2.0.0-rc      | Supports scalar filtering       |        | done       |        |
-| 2.0.0-rc   | Supports for query by ID        |         | done        |         |
+| 2.0.RC      | Supports scalar filtering       |        | done       |        |
+| 2.0.0-RC   | Supports for query by ID        |         | done        |         |
 | 2.0   | Supports query by expression        | fishpenguin        | in progress        |         |
 | 2.0   | Supports delete by ID        |     scsven    | in progress        |         |
 | 2.1   | Supports search by ID        |         | pending        |         |
@@ -46,8 +46,8 @@ summary: Roadmap and enhancement plan of Milvus.
 
 | **Version** | **Feature** | **Owner**   | **Status**  | **Comment** |
 | ----------- | ----------- | ----------- | ----------- | ----------- |
-| 2.0.0-rc      | Supports time travel to any specified point in time	       |        | done       |        |
-| 2.0.0-rc   | Offers three levels of tunable consistency: strong, session, consistent prefix        |         | done        |         |
+| 2.0.0-RC      | Supports time travel to any specified point in time	       |        | done       |        |
+| 2.0.0-RC   | Offers three levels of tunable consistency: strong, session, consistent prefix        |         | done        |         |
 | 2.0      | Segment compaction       | sunby       | in progress       |        |
 | 2.0   | Implements dynamic load balancing        | sunby, xige-16        | in progress        |         |
 | 2.0      | mplements dynamic handoff       | xige-16, bigsheeper       | in progress       |        |
@@ -78,8 +78,8 @@ summary: Roadmap and enhancement plan of Milvus.
 
 | **Version** | **Feature** | **Owner**   | **Status**  | **Comment** |
 | ----------- | ----------- | ----------- | ----------- | ----------- |
-| 2.0.0-rc      | Fully managed failure recovery and service discovery       |        | done       |        |
-| 2.0.0-rc   | Python SDK test        |         | done        |         |
+| 2.0.0-RC      | Fully managed failure recovery and service discovery       |        | done       |        |
+| 2.0.0-RC   | Python SDK test        |         | done        |         |
 | 2.0      | Chaos test       |   yanliang567     | pending       |        |
 | 2.0   | Pressure test        | del-zhenwu        | pending        |         |
 | 2.1      | Supports segment in memory replicas       |        | pending       |        |
@@ -92,8 +92,8 @@ summary: Roadmap and enhancement plan of Milvus.
 
 | **Version** | **Feature** | **Owner**   | **Status**  | **Comment** |
 | ----------- | ----------- | ----------- | ----------- | ----------- |
-| 2.0.0-rc    | Helm installation       |        | done       |        |
-| 2.0.0-rc    | Support of Milvus Insight, a Milvus visual management tool        |         | in progress        |         |
+| 2.0.0-RC    | Helm installation       |        | done       |        |
+| 2.0.0-RC    | Support of Milvus Insight, a Milvus visual management tool        |         | in progress        |         |
 | 2.0      | Prometheus, Grafana and Jaeger support       | 	zwd1208       | in progress       |        |
 | 2.0   | Milvus Kuberbetes operator        | 	zwd1208, jeffoverflow        | pending        |         |
 | 2.1      | Multi datacenter deployment and multi-cloud integration       |        | pending       |        |
@@ -107,7 +107,7 @@ summary: Roadmap and enhancement plan of Milvus.
 
 | **Version** | **Feature** | **Owner**   | **Status**  | **Comment** |
 | ----------- | ----------- | ----------- | ----------- | ----------- |
-| 2.0.0-rc      | Python ORM-style APIs	       |        | done       |        |
+| 2.0.0-RC     | Python ORM-style APIs	       |        | done       |        |
 | 2.0   | Merge Pymilvus ORM and Pymilvus        |         | done        |         |
 | 2.0      | Supports NodeJs APIs       |        | done       |     |
 | 2.0   | Supports Java SDK        |     xiaofan-luan    | in progress         |         |

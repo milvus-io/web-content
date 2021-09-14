@@ -17,7 +17,7 @@ id: roadmap.md
 #### 数据定义语言 (Data definition language，DDL)
 | **版本** | **功能** | **Owner**   | **进度**  | **备注** |
 | ----------- | ----------- | ----------- | ----------- | ----------- | 
-| 2.0.0-rc      | 支持数字类型的标量数据	       |        | 已完成       |        |
+| 2.0.0-RC      | 支持数字类型的标量数据	       |        | 已完成       |        |
 | 2.0   | 增加字符串数据类型         | czs007, dragondriver	     | 开发中       |        |
 | 2.0   | Collection 别名        | lsgrep       | 开发中       |        |
 | 2.1   | 对于字符串及数字的数据类型支持倒排索引或标量比特图        |        | 待指派       |        |
@@ -31,8 +31,8 @@ id: roadmap.md
 
 | **版本** | **功能** | **Owner**   | **进度**  | **备注** |
 | ----------- | ----------- | ----------- | ----------- | ----------- |
-| 2.0.0-rc      | 支持标量字段过滤       |        | 已完成       |        |
-| 2.0.0-rc   | 支持根据 ID 查询数据        |         | 已完成        |         |
+| 2.0.0-RC      | 支持标量字段过滤       |        | 已完成       |        |
+| 2.0.0-RC   | 支持根据 ID 查询数据        |         | 已完成        |         |
 | 2.0   | 支持根据表达式（predicate expression）查询数据       | fishpenguin/FluorineDog        | 开发中        |         |
 | 2.0   | 支持根据 ID 删除数据       |    scsven     |    开发中     |         |
 | 2.1   | 支持根据 ID 查询数据       |         | 待指派         |         |
@@ -45,8 +45,8 @@ id: roadmap.md
 
 | **版本** | **功能** | **Owner**   | **进度**  | **备注** |
 | ----------- | ----------- | ----------- | ----------- | ----------- |
-| 2.0.0-rc      | 支持回溯（time travel）访问历史数据。	       |        | 已完成       |        |
-| 2.0.0-rc   | 提供四个级别的一致性，分别是：strong、bounded staleness、session、consistent prefix。       |         | 已完成        |         |
+| 2.0.0-RC      | 支持回溯（time travel）访问历史数据。	       |        | 已完成       |        |
+| 2.0.0-RC   | 提供四个级别的一致性，分别是：strong、bounded staleness、session、consistent prefix。       |         | 已完成        |         |
 | 2.0      | Segment compaction       | sunby       | 开发中       |        |
 | 2.0   | 实现动态负载均衡        | sunby, xige-16        | 开发中        |         |
 | 2.0      | 增量 Segment 到存量 Segment 的动态切换       | xige-16, bigsheeper       | 开发中       |        |
@@ -78,8 +78,8 @@ id: roadmap.md
 
 | **版本** | **功能** | **Owner**   | **进度**  | **备注** |
 | ----------- | ----------- | ----------- | ----------- | ----------- |
-| 2.0.0-rc      | 全托管故障恢复及服务发现       |        | 已完成       |        |
-| 2.0.0-rc   | Python SDK 测试        |         | 已完成        |         |
+| 2.0.0-RC      | 全托管故障恢复及服务发现       |        | 已完成       |        |
+| 2.0.0-RC   | Python SDK 测试        |         | 已完成        |         |
 | 2.0      | 混沌测试       |   yanliang567     | 开发中       |        |
 | 2.0   | 压力测试       | del-zhenwu        | 开发中        |         |
 | 2.1      | 支持 Segment 多内存副本      |        |  待指派      |        |
@@ -92,8 +92,8 @@ id: roadmap.md
 
 | **版本** | **功能** | **Owner**   | **进度**  | **备注** |
 | ----------- | ----------- | ----------- | ----------- | ----------- |
-| 2.0.0-rc    | 使用 Helm 安装 Milvus      |        | 已完成       |        |
-| 2.0.0-rc    | 提供 Milvus 可视化管理工具 Milvus Insight     |         | 优化中        |         |
+| 2.0.0-RC    | 使用 Helm 安装 Milvus      |        | 已完成       |        |
+| 2.0.0-RC    | 提供 Milvus 可视化管理工具 Milvus Insight     |         | 优化中        |         |
 | 2.0      | 支持 Prometheus、Grafana 及 Jaeger        | 	zwd1208       | 文档编写中      |        |
 | 2.0   | Milvus Kubernetes Operator       | 	zwd1208, jeffoverflow        | 开发中        |         |
 | 2.1      | 多机房多地部署，多云融合      |        | 待指派       |        |
@@ -107,7 +107,7 @@ id: roadmap.md
 
 | **版本** | **功能** | **Owner**   | **进度**  | **备注** |
 | ----------- | ----------- | ----------- | ----------- | ----------- |
-| 2.0.0-rc      | 提供基于对象关系映射（Obejct Relational Mapping）抽象的 API       |        | 已完成       |        |
+| 2.0.0-RC      | 提供基于对象关系映射（Obejct Relational Mapping）抽象的 API       |        | 已完成       |        |
 | 2.0   | 合并 PyMilvus ORM 及 PyMilvus        |         | 已完成     |         |
 | 2.0      | 支持 NodeJs 语言的 SDK        |        | 已完成      |      |
 | 2.0   | 支持 Java 语言的 SDK        |    xiaofan-luan     | 开发中         |         |
