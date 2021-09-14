@@ -68,7 +68,7 @@ const params = {
 
 
 ```python
->>> collection = Collection(name=collection_name, schema=schema)
+>>> collection = Collection(name=collection_name, schema=schema, using='default', shards_num=2)
 
 # Get an existing collection by its name.
 collection=Collection(name=collection_name)

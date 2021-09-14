@@ -28,9 +28,13 @@ Create a collection with the schema specified:
 ```python
 from pymilvus import Collection
 collection_name1 = "tutorial_1"
-collection1 = Collection(name=collection_name1, schema=schema)
+collection1 = Collection(name=collection_name1, schema=schema, using='default', shards_num=2)
 ```
-
+<div class="alert note">
+  You can define the shard number with <code>shards_num</code> and in which Milvus server you wish to create a collection by specifying the alias in <code>using</code>.
+  </div>
+  
+<br/>
 You can also create a collection with `Collection.construct_from_dataframe`, which automatically generates a collction schema from DataFrame and creates a collection.
 
 ```python
