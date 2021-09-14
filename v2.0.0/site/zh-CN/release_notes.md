@@ -6,63 +6,64 @@ id: release_notes.md
 
 ## v2.0.0-RC6
 
-Release date: 2021-09-10
+发布时间：2021-09-10
 
-### Compatibility
+### 版本兼容
 
 <table class="version">
 	<thead>
 	<tr>
-		<th>Milvus version</th>
-		<th>Python SDK version</th>
-		<th>Java SDK version</th>
-		<th>Go SDK version</th>
-		<th>Node SDK version</th>
+		<th>Milvus 版本</th>
+		<th>Python SDK 版本</th>
+		<th>Java SDK 版本</th>
+		<th>Go SDK 版本</th>
+		<th>Node SDK 版本</th>
 	</tr>
 	</thead>
 	<tbody>
 	<tr>
 		<td>2.0.0-RC6</td>
 		<td>2.0.0rc6</td>
-		<td>Coming soon</td>
-		<td>Coming soon</td>
+		<td>即将上线</td>
+		<td>即将上线</td>
 		<td>1.0.16</td>
 	</tr>
 	</tbody>
 </table>
 
+Milvus 2.0.0-RC6 是 2.0.0 的预览版本。该版本支持创建 collection 时设定 shard 数量，以及通过表达式进行结构性匹配。 RC5 通过 API 进一步暴露分布式版指标。 在该版本我们增加单元测试覆盖率至 80%，并修复了一系列资源泄露、系统错误等问题。
 
-Milvus 2.0.0-RC6 is a preview version of Milvus 2.0.0. It supports specifying shard number when creating collections, and query by expression. It exposes more cluster metrics through API. In RC6 we inceases the unit test coverage to 80%. We also fixed a series of issues involving resource leakage, system panic, etc.
+### 主要改进
 
-### Improvements
+- 增加单元测试覆盖率至 80%。
 
-- Increases unit test coverage to 80%.
+### 新增功能
 
-### Features
+- [#7482](https://github.com/milvus-io/milvus/pull/7482) 支持创建 collection 时设定 shard 数量。
+- [#7386](https://github.com/milvus-io/milvus/pull/7386) 支持通过表达式进行结构性匹配。
+- 通过 API 暴露系统指标
+  - [#7400](https://github.com/milvus-io/milvus/pull/7400) Proxy 指标与其他 coordinator 集成。
+  - [#7177](https://github.com/milvus-io/milvus/pull/7177) 暴露 data node 以及 data coord 指标。
+  - [#7228](https://github.com/milvus-io/milvus/pull/7228) 暴露 root coord 指标。
+  - [#7472](https://github.com/milvus-io/milvus/pull/7472) 暴露更多详细指标信息。
+  - [#7436](https://github.com/milvus-io/milvus/pull/7436) 支持缓存系统信息指标。
 
-- [#7482](https://github.com/milvus-io/milvus/pull/7482) Supports specifying shard number when creating a collection.
-- [#7386](https://github.com/milvus-io/milvus/pull/7386) Supports query by expression.
-- Exposes system metrics through API:
-  - [#7400](https://github.com/milvus-io/milvus/pull/7400) Proxy metrics integrate with other coordinators.
-  - [#7177](https://github.com/milvus-io/milvus/pull/7177) Exposes metrics of data node and data coord.
-  - [#7228](https://github.com/milvus-io/milvus/pull/7228) Exposes metrics of root coord.
-  - [#7472](https://github.com/milvus-io/milvus/pull/7472) Exposes more detailed metrics information.
-  - [#7436](https://github.com/milvus-io/milvus/pull/7436) Supports caching the system information metrics.
+### 问题修复
 
-### Bug Fixes
+- [#7434](https://github.com/milvus-io/milvus/pull/7434) 加载超过内存上限的 collection 导致 Query node 内存不足。
+- [#7678](https://github.com/milvus-io/milvus/pull/7678) 从现有存储中恢复导致单机版 Milvus 内存不足。
+- [#7636](https://github.com/milvus-io/milvus/pull/7636) 向已关闭的 channel 发送消息导致单机版 Milvus 发生错误。
+- [#7631](https://github.com/milvus-io/milvus/pull/7631) 关闭 flowgraph 导致 Milvus 发生错误。
+- [#7605](https://github.com/milvus-io/milvus/pull/7605) 运行每日 CI 测试时 Milvus 报错崩溃。
+- [#7596](https://github.com/milvus-io/milvus/pull/7596) Root coord 与 etcd 断联导致每日测试失败。
+- [#7557](https://github.com/milvus-io/milvus/pull/7557) 表达式中内容顺序错误导致系统返回错误结果。
+- [#7536](https://github.com/milvus-io/milvus/pull/7536) `MqMsgStream` 查找逻辑错误。
+- [#7527](https://github.com/milvus-io/milvus/pull/7527) 搜索时 `knowhere` 中数据集内存泄漏。
+- [#7444](https://github.com/milvus-io/milvus/pull/7444) Channels time ticker 死锁。
+- [#7428](https://github.com/milvus-io/milvus/pull/7428) `MqMsgStream` 广播失败时可能出现死锁。
+- [#7715](https://github.com/milvus-io/milvus/pull/7715) 结构性匹配请求被同一 slice 上并发操作覆盖。
 
-- [#7434](https://github.com/milvus-io/milvus/pull/7434) Query node OOM if loading a collection that beyond the memory limit.
-- [#7678](https://github.com/milvus-io/milvus/pull/7678) Standalone OOM when recovering from existing storage.
-- [#7636](https://github.com/milvus-io/milvus/pull/7636) Standalone panic when sending message to a closed channel.
-- [#7631](https://github.com/milvus-io/milvus/pull/7631) Milvus panic when closing flowgraph.
-- [#7605](https://github.com/milvus-io/milvus/pull/7605) Milvus crashed with panic when running nightly CI tests.
-- [#7596](https://github.com/milvus-io/milvus/pull/7596) Nightly cases failed because rootcoord disconnected with etcd.
-- [#7557](https://github.com/milvus-io/milvus/pull/7557) Wrong search result returned when the term content in expression is not in order.
-- [#7536](https://github.com/milvus-io/milvus/pull/7536) Incorrect `MqMsgStream` Seek logic.
-- [#7527](https://github.com/milvus-io/milvus/pull/7527) Dataset's memory leak in `knowhere` when searching.
-- [#7444](https://github.com/milvus-io/milvus/pull/7444) Deadlock of channels time ticker.
-- [#7428](https://github.com/milvus-io/milvus/pull/7428) Possible deadlock when `MqMsgStream` broadcast fails.
-- [#7715](https://github.com/milvus-io/milvus/pull/7715) Query request overwritten by concurrent operations on the same slice.
+
 
 
 
