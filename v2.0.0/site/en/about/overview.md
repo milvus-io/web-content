@@ -48,7 +48,7 @@ Milvus 2.0.0-RC6 is the preview version of 2.0.0. It introduces Golang as the di
     </td>
     <td width="30%">
 <a href="https://zilliz.com/milvus-demos">
-<img src="https://zilliz-cms.s3.us-west-2.amazonaws.com/small_chatbot_UI_0f4a7655d4.png?78061.70000004768" />
+<img src="https://zilliz-cms.s3.us-west-2.amazonaws.com/2021_09_14_16_18_29_2abb89952d.png?3565470.7000000477" />
 </a>
     </td>
     <td width="30%">
