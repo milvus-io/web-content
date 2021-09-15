@@ -14,7 +14,7 @@ Learn how you can become a **Milvus Honored Advocate** (**MHA**) and **Milvus To
 
 | **Benefit**           | **Detail**  |
 | --------------------- | ------------ |
-| Milvus swag | Milvus T-shirts, stickers & other limited items   |
+| Milvus swag | Milvus T-shirts, stickers & other limited edition items   |
 
 *Shipping may be unavailable in some regions due to the ongoing covid-19 pandemic. Electronic gifts may be sent out in lieu of physical gifts in these regions.
 
@@ -24,13 +24,9 @@ Any member that contributes one piece of content to the Milvus community within 
 
 Technical content contributions can include Milvus articles, tutorials, tech talks, live broadcasts, and more.
 
-- The following types of technical content contribute to 
+The following types of technical content contribute to **Milvus Honored Advocate** eligibility:
 
-  Milvus Honored Advocate
-
-   eligibility:
-
-  - **Demos and solutions:** Show Milvus users how to leverage the platform in specific scenarios (e.g. music recommendation system). Examples are available in the [Milvus Bootcamp](https://github.com/milvus-io/bootcamp).
+- **Demos and solutions:** Show Milvus users how to leverage the platform in specific scenarios (e.g. music recommendation system). Examples are available in the [Milvus Bootcamp](https://github.com/milvus-io/bootcamp).
 
 - **Blog articles, user stories, or whitepapers:** Write high-quality content that clearly and accurately explains technical details about Milvus.
 
@@ -48,7 +44,7 @@ Technical content contributions can include Milvus articles, tutorials, tech tal
 | Milvus swag                                                  | Milvus T-shirts, stickers & other limited items   |
 | Milvus holiday greetings                                     |                                                   |
 | Expand your network                                          | Priority access to Milvus meetups and conferences |
-| Meet one on one with core Milvus contributors                |                                                   |
+| One-on-one meeting with core Milvus contributors             |                                                   |
 | Build your brand                                             | Featured profile page on Milvus.io                |
 | Exposure to the Milvus community through articles and other content |                                                   |
 | VIP status at Milvus events and conferences                  |                                                   |
@@ -61,7 +57,7 @@ Any member that contributes three or more pieces of content to the Milvus commun
 
 Technical content contributions can include Milvus articles, tutorials, tech talks, live broadcasts, and more.
 
-- The following types of technical content contribute to **Milvus Top Advocate** eligibility:
+The following types of technical content contribute to **Milvus Top Advocate** eligibility:
 
 - **Demos and solutions:** Show Milvus users how to leverage the platform in specific scenarios (e.g. music recommendation system). Examples are available in the [Milvus Bootcamp](https://github.com/milvus-io/bootcamp).
 
