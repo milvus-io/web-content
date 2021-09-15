@@ -627,6 +627,14 @@
       "order": 6
     },
     {
+      "id": "text_search_engine.md",
+      "title": "文本搜索引擎",
+      "label1": "tutorials",
+      "label2": "",
+      "label3": "",
+      "order": 7
+    },
+    {
       "id": "faq",
       "title": "FAQs",
       "label1": "",
