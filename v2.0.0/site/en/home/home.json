@@ -1,29 +1,30 @@
 {
   "section1": {
     "order": 0,
-    "title": "Get Started",
-    "items": [
-      {
-        "title": "Start a Milvus Standalone",
-        "key": "stand-alone",
-        "btnLabel": "Learn to build",
-        "link": "install_standalone-docker.md"
-      },
-
-      {
-        "title": "Start a Milvus Cluster",
-        "key": "Cluster",
-        "btnLabel": "Learn to build",
-        "link": "install_cluster-docker.md"
-      },
-      {
+      "title": "Get Started",
+      "items": [
+        {
+          "title": "Start a Milvus Standalone",
+          "key": "stand-alone",
+          "btnLabel": "Learn to build",
+          "link": "install_standalone-docker.md"
+        },
+    
+  
+        {
+          "title": "Start a Milvus Cluster",
+          "key": "Cluster",
+          "btnLabel": "Learn to build",
+          "link": "install_cluster-docker.md"
+        },
+        {
         "title": "Milvus Bootcamp",
         "key": "bootcamps",
         "btnLabel": "Learn More",
         "link": "/bootcamp"
       }
-    ]
-  },
+      ]
+    },
   "section2": {
     "order": -1,
     "title": "Introduction",
@@ -34,88 +35,89 @@
     ]
   },
   "section3": {
-    "title": "Recommended articles",
-    "items": [
-      {
-        "label": "Get started",
-        "list": [
-          {
-            "text": "Start a Milvus Standlone",
-            "link": "install_standalone-docker.md"
-          },
-          {
-            "text": "Start a Milvus Cluster",
-            "link": "install_cluster-docker.md"
-          },
-          {
-            "text": "Hello Milvus",
-            "link": "example_code.md"
-          },
-          {
-            "text": "Explore PyMilvus",
-            "link": "example_code.md"
+      "title": "Recommended articles",
+      "items": [
+        {
+          "label": "Get started",
+          "list": [
+            {
+              "text": "Start a Milvus Standlone",
+              "link": "install_standalone-docker.md"
+            },
+            {
+              "text": "Start a Milvus Cluster",
+              "link": "install_cluster-docker.md"
+            },
+            {
+              "text": "Hello Milvus",
+              "link": "example_code.md"
+            },
+            {
+              "text": "Explore PyMilvus",
+              "link": "example_code.md"
+            }
+          ]
+        },
+        {
+          "label": "Develop",
+          "list": [
+            {
+              "text": "PyMilvus API Reference",
+              "link": "/api-reference/pymilvus/{{var.milvus_python_sdk_version}}/install.html"
+            },
+            {
+              "text": "Vector Index",
+              "link": "index.md"
+            },
+            {
+              "text": "Similarity Metrics",
+              "link": "metric.md"
+            }
+          ]
+        },
+        {
+            "label": "FAQs",
+            "list": [
+              {
+                "text": "Milvus Product FAQs",
+                "link": "product_faq.md"
+              },
+              {
+                "text": "Milvus Operational FAQs",
+                "link": "operational_faq.md"
+              },
+              {
+                "text": "Milvus Performance FAQs",
+                "link": "performance_faq.md"
+              },
+              {
+                "text": "Troubleshooting",
+                "link": "troubleshooting.md"
+              },
+              {
+                "text": "PyMilvus FAQs",
+                "link": "pymilvus_faq.md"
+              }
+            ]
           }
-        ]
-      },
-      {
-        "label": "Develop",
-        "list": [
-          {
-            "text": "PyMilvus API Reference",
-            "link": "/api-reference/pymilvus/{{var.milvus_python_sdk_version}}/install.html"
-          },
-          {
-            "text": "Vector Index",
-            "link": "index.md"
-          },
-          {
-            "text": "Similarity Metrics",
-            "link": "metric.md"
-          }
-        ]
-      },
-      {
-        "label": "FAQs",
-        "list": [
-          {
-            "text": "Milvus Product FAQs",
-            "link": "product_faq.md"
-          },
-          {
-            "text": "Milvus Operational FAQs",
-            "link": "operational_faq.md"
-          },
-          {
-            "text": "Milvus Performance FAQs",
-            "link": "performance_faq.md"
-          },
-          {
-            "text": "Troubleshooting",
-            "link": "troubleshooting.md"
-          },
-          {
-            "text": "PyMilvus FAQs",
-            "link": "pymilvus_faq.md"
-          }
-        ]
-      }
-    ]
-  },
-  "section4": {
-    "loadBtn": {
-      "label": "See More Blogs",
-      "isExternal": true,
-      "link": "/blog"
+      ]
     },
-    "title": "Blog",
-    "items": [
-      {
-        "time": "June 29, 2021",
-        "link": "https://medium.com/@xiaofan.luan/milvus-2-0-redefining-vector-database-438479a7dd6e",
-        "title": "Milvus 2.0: Redefining Vector Database",
-        "abstract": "Milvus 2.0 is available now. This refactored, cloud-native version powers image/video search, chatbots, and many more AI applications.",
-        "imgSrc": "https://zilliz-cms.s3.us-west-2.amazonaws.com/2_0_cover_bbc582b347.jpg"
-      }
-    ]
+    "section4": {
+      "loadBtn": {
+        "label": "See More Blogs",
+        "isExternal": true,
+        "link": "https://zilliz.com/blog"
+      },
+      "title": "Blog",
+      "items": [
+        {
+          "time": "June 29, 2021",
+          "link": "https://medium.com/@xiaofan.luan/milvus-2-0-redefining-vector-database-438479a7dd6e",
+          "title": "Milvus 2.0: Redefining Vector Database",
+          "abstract": "Milvus 2.0 is available now. This refactored, cloud-native version powers image/video search, chatbots, and many more AI applications.",
+          "imgSrc": "https://zilliz-cms.s3.us-west-2.amazonaws.com/2_0_cover_bbc582b347.jpg"
+        }
+      ]
+    }
   }
-}
+  

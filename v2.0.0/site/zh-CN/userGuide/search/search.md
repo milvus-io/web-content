@@ -62,7 +62,7 @@ await milvusClient.collectionManager.loadCollection({
 [424363819726212428, 424363819726212436, ...]
 >>> results[0].distances
 [0.0, 1.0862197875976562, 1.1029295921325684, ...]
-````
+```
 
 ```javascript
 await milvusClient.dataManager.search({
