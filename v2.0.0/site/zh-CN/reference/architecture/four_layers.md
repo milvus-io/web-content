@@ -53,7 +53,7 @@ Index node 负责执行索引构建任务。Index node不需要常驻于内存�
 
 ## 存储服务
 
-存储服务是系统的骨骼，负责 Milvus 数据的持久化**，**分为元数据存储（meta store）、消息存储（log broker）和对象存储（object storage）三个部分。
+存储服务是系统的骨骼，负责 Milvus 数据的持久化，分为元数据存储（meta store）、消息存储（log broker）和对象存储（object storage）三个部分。
 
 ### 元数据存储
 
