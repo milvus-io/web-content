@@ -1,12 +1,10 @@
-
-
 # Milvus Documentation
 
 Welcome to Milvus documentation!
 
-This repository contains technical documentation for [Milvus](https://github.com/milvus-io/milvus), the world's most advanced open-source vector database. 
+This repository contains technical documentation for [Milvus](https://github.com/milvus-io/milvus), the world's most advanced open-source vector database.
 
-Each branch corresponds to a Milvus release by name. We've set the branch of the latest Milvus release as the default branch. For documentation of a different Milvus release, switch to the corresponding branch. 
+Each branch corresponds to a Milvus release by name. We've set the branch of the latest Milvus release as the default branch. For documentation of a different Milvus release, switch to the corresponding branch.
 
 ## Index
 
@@ -21,7 +19,6 @@ Each branch corresponds to a Milvus release by name. We've set the branch of the
 - [Reference](#reference)
 
 - [Get in touch](#get-in-touch)
-
 
 ## Suggest changes
 
@@ -42,12 +39,12 @@ Currently, we maintain the following versions of Milvus documentation in differe
 | `v1.0.0` branch | 1.0.0 version (first with long-term support)  |
 
 > **Note:**
-> The latest branch is set as the default working branch. 
+> The latest branch is set as the default working branch.
 > Milvus releases prior to v1.0.0 are no longer supported, but you can still find their documentation in the corresponding branch.
 
 ## Other contributing channels
 
-Not all content rendered on [milvus.io](https://milvus.io/docs/home) is hosted in this repository. 
+Not all content rendered on [milvus.io](https://milvus.io/docs) is hosted in this repository.
 
 ### Contribute to API docs
 
@@ -67,8 +64,6 @@ If you would like to write an article for our [blog](https://medium.com/unstruct
 
 Reference to cite when you use Milvus in a research paper:
 
-
-
 ```
 
 @inproceedings{2021milvus,
@@ -87,25 +82,17 @@ Reference to cite when you use Milvus in a research paper:
 
 ```
 
-
-
 ## Get in touch
 
-Join the Milvus community on [Slack](https://join.slack.com/t/milvusio/shared_invite/zt-e0u4qu3k-bI2GDNys3ZqX1YCJ9OM~GQ) to share your suggestions, advice, and questions with our engineering team. 
-
-
+Join the Milvus community on [Slack](https://join.slack.com/t/milvusio/shared_invite/zt-e0u4qu3k-bI2GDNys3ZqX1YCJ9OM~GQ) to share your suggestions, advice, and questions with our engineering team.
 
 <a href="https://join.slack.com/t/milvusio/shared_invite/zt-e0u4qu3k-bI2GDNys3ZqX1YCJ9OM~GQ">
 
-​    <img src="https://zillizstorage.blob.core.windows.net/zilliz-assets/zilliz-assets/assets/readme_slack_4a07c4c92f.png" alt="Miluvs Slack Channel"  height="150" width="500">
+​ <img src="https://zillizstorage.blob.core.windows.net/zilliz-assets/zilliz-assets/assets/readme_slack_4a07c4c92f.png" alt="Miluvs Slack Channel"  height="150" width="500">
 
 </a>
 
-
-
 Subscribe to Milvus mailing lists:
-
-
 
 - [Technical Steering Committee](https://lists.lfai.foundation/g/milvus-tsc)
 
@@ -113,11 +100,7 @@ Subscribe to Milvus mailing lists:
 
 - [Announcement](https://lists.lfai.foundation/g/milvus-announce)
 
-
-
 Follow Milvus on social media:
-
-
 
 - [Medium](https://medium.com/@milvusio)
 
