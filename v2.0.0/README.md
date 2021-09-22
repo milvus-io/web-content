@@ -88,7 +88,7 @@ Join the Milvus community on [Slack](https://join.slack.com/t/milvusio/shared_in
 
 <a href="https://join.slack.com/t/milvusio/shared_invite/zt-e0u4qu3k-bI2GDNys3ZqX1YCJ9OM~GQ">
 
-​ <img src="https://zillizstorage.blob.core.windows.net/zilliz-assets/zilliz-assets/assets/readme_slack_4a07c4c92f.png" alt="Miluvs Slack Channel"  height="150" width="500">
+​ <img src="https://a.slack-edge.com/bv1-9/slack_logo-ebd02d1.svg" alt="Miluvs Slack Channel"  height="150" width="500">
 
 </a>
 
