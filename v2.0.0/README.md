@@ -1,3 +1,7 @@
+<a href="https://milvus.io/hacktoberfest-2021">
+    <img src="https://zilliz-cms.s3.us-west-2.amazonaws.com/milvus_hacktoberfest_15ba8e5083.jpeg" alt="Join Hacktoberfest with Milvus">
+</a>
+
 # Milvus Documentation
 
 Welcome to Milvus documentation!
