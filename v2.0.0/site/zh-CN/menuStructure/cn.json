@@ -342,8 +342,8 @@
     {
       "id": "f2m.md",
       "title": "Faiss 至 Milvus",
-      "label1": "migrate",
-      "label2": "",
+      "label1": "admin_guide",
+      "label2": "migrate",
       "label3": "",
       "order": 2
     },
@@ -373,12 +373,29 @@
       "isMenu": true
     },
     {
+      "id": "cli",
+      "title": "Milvus CLI",
+      "label1": "admin_guide",
+      "label2": "tools",
+      "label3": "",
+      "order": 0,
+      "outLink": "https://github.com/milvus-io/milvus_cli#overview"
+    },
+    {
+      "id": "migrate_overview.md",
+      "title": "MilvusDM",
+      "label1": "admin_guide",
+      "label2": "tools",
+      "label3": "",
+      "order": 1
+    }, 
+    {
       "id": "milvus_insight",
       "title": "Milvus Insight",
       "label1": "admin_guide",
       "label2": "tools",
       "label3": "",
-      "order": 0,
+      "order": 2,
       "isMenu": true
     },
     {
@@ -403,17 +420,8 @@
       "label1": "admin_guide",
       "label2": "tools",
       "label3": "",
-      "order": 1,
+      "order": 3,
       "outLink": "https://zilliz.com/sizing-tool"
-    },
-    {
-      "id": "cli",
-      "title": "Milvus CLI",
-      "label1": "admin_guide",
-      "label2": "tools",
-      "label3": "",
-      "order": 2,
-      "outLink": "https://github.com/milvus-io/milvus_cli#overview"
     },
     {
       "id": "reference",
