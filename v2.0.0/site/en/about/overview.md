@@ -124,7 +124,7 @@ For more information, see [Architecture Overview](architecture_overview.md).
 ![Architecture](../../../assets/architecture_02.jpg)
 
 
-A Milvus standalone includers three components: Milvus, etcd, MinIO.
+A Milvus standalone includes three components: Milvus, etcd, MinIO.
 
 ![Standalone Architecture](../../../assets/standalone_architecture.jpg)
 
