@@ -27,7 +27,7 @@
       "order": -1, 
       "title": "Milvus 是什么",
       "desc": [
-          "Milvus 是一款基于云原生架构开发的开源向量数据库，支持查询和管理由机器学习模型或神经网络生成的向量数据。Milvus 在一流的近似最近邻（ANN）搜索库（例如 Faiss、NMSLIB、Annoy）的功能基础上进行扩展，具有按需扩展和高可用等特点。 Milvus 致力于简化非结构化数据管理，并在不同的部署环境中提供一致的用户体验。Milvus 广泛应用于多种 <a href=\"docs/v2.0.0/overview.md#应用场景\">场景</a>，在全球范围内拥有 1000 多个 <a href=\"docs/v2.0.0/milvus_adopters.md\">企业用户</a>。",
+          "Milvus 是一款基于云原生架构开发的开源向量数据库，支持查询和管理由机器学习模型或神经网络生成的向量数据。Milvus 在一流的近似最近邻（ANN）搜索库（例如 Faiss、NMSLIB、Annoy）的功能基础上进行扩展，具有按需扩展和高可用等特点。 Milvus 致力于简化非结构化数据管理，并在不同的部署环境中提供一致的用户体验。Milvus 广泛应用于多种 <a href=\"/docs/v2.0.0/overview.md#应用场景\">场景</a>，在全球范围内拥有 1000 多个 <a href=\"/docs/v2.0.0/milvus_adopters.md\">企业用户</a>。",
           "Milvus 基于 Apache 2 License 协议发布，于 2019 年 10 月正式开源，是 <a href=\"https://lfaidata.foundation\">LF AI & DATA 基金会</a> 的毕业项目。Milvus 的源代码被托管于 <a href=\"https://github.com/milvus-io/milvus\">GitHub</a>。"
       ]
     },
