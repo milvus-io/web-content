@@ -299,6 +299,14 @@
       "order": 1
     },
     {
+      "id": "azure.md",
+      "title": "Azure",
+      "label1": "admin_guide",
+      "label2": "cloud",
+      "label3": "",
+      "order": 2
+    },
+    {
       "id": "monitor.md",
       "title": "Monitor and Alert",
       "label1": "admin_guide",

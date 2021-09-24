@@ -299,6 +299,14 @@
       "order": 1
     },
     {
+      "id": "azure.md",
+      "title": "Azure 部署",
+      "label1": "admin_guide",
+      "label2": "cloud",
+      "label3": "",
+      "order": 2
+    },
+    {
       "id": "monitor.md",
       "title": "监控与报警",
       "label1": "admin_guide",
