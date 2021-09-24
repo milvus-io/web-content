@@ -15,7 +15,10 @@ Collections can only be created after successfully connecting to the Milvus serv
 The created collection must contain a primary key field. Int64 is the only supported data type for the primary key field for now.
 </div>
 
-1. Prepare collection parameters, including collection name and field parameters. See [API document](https://milvus.io/api-reference/pymilvus/v2.0.0rc5/api/collection.html) for a detailed description of these parameters.
+> Parameters marked with `*` are specific to Python SDK, and those marked with `**` are specific to Node.js SDK.
+
+
+1. Prepare collection parameters, including collection name and field parameters. Refer to API documents for respective languages for a detailed description of these parameters.
 
 <div class="multipleCode">
   <a href="?python">Python </a>
@@ -24,12 +27,12 @@ The created collection must contain a primary key field. Int64 is the only suppo
 
 
 ```python
->>> collection_name = "example_collection"
->>> field_name = "example_field"
->>> from pymilvus import Collection, CollectionSchema, FieldSchema, DataType
->>> pk = FieldSchema(name="pk", dtype=DataType.INT64, is_primary=True, auto_id=True)
->>> field = FieldSchema(name=field_name, dtype=DataType.FLOAT_VECTOR, dim=8)
->>> schema = CollectionSchema(fields=[pk,field], description="example collection")
+collection_name = "example_collection"
+field_name = "example_field"
+from pymilvus import Collection, CollectionSchema, FieldSchema, DataType
+pk = FieldSchema(name="pk", dtype=DataType.INT64, is_primary=True, auto_id=True)
+field = FieldSchema(name=field_name, dtype=DataType.FLOAT_VECTOR, dim=8)
+schema = CollectionSchema(fields=[pk,field], description="example collection")
 ```
 
 ```javascript
@@ -59,7 +62,42 @@ const params = {
 };
 ```
 
-2. Call `Collection()` provided by the Milvus instance to create a collection:
+<details>
+  <summary><b>Detailed Description</b></summary>
+<table class="params">
+	<thead>
+	<tr>
+		<th>Parameter</td>
+		<th>Description</th>
+		<th>Note</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>collection_name</td>
+		<td>Name of the collection to create</td>
+		<td>Data type: String</td>
+	</tr>
+	<tr>
+		<td>field_name</td>
+		<td>Name of the field in the collection</td>
+		<td>Data type: String</td>
+	</tr>
+	<tr>
+		<td>Schema</td>
+		<td>Schema used to create a collection and the fields within. Refer to <a href="field_schema.md">field schema</a> and <a href="collection_schema.md">collection schema</a> for detailed description. </td>
+		<td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td>description</td>
+		<td>Description of the collection</td>
+		<td>Data type: String</td>
+	</tr>
+	</tbody>
+</table>
+</details>
+
+2. Create a collection:
 
 <div class="multipleCode">
   <a href="?python">Python </a>
@@ -77,6 +115,31 @@ collection=Collection(name=collection_name)
 ```javascript
 await milvusClient.collectionManager.createCollection(params);
 ```
+
+<details>
+  <summary><b>Detailed Description</b></summary>
+<table class="params">
+	<thead>
+	<tr>
+		<th>Parameter</td>
+		<th>Description</th>
+		<th>Note</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>using*</td>
+		<td>By specifying the srever alias here, you can decide in which Milvus server you create a collection.</td>
+		<td>Optional</td>
+	</tr>
+	<tr>
+		<td>shards_num*</td>
+		<td>Number of the shards for the collection to create</td>
+		<td>Optional</td>
+	</tr>
+	</tbody>
+</table>
+</details>
 
 3. Check if the collection is created successfully:
 
@@ -156,7 +219,29 @@ await milvusClient.partitionManager.createPartition({
 });
 ```
 
-Milvus creates a default partition name, `_default`, for new collections. After creating a partition, you have two partition names, `example_partition` and `_default`. List all partitions in a collection:
+<details>
+  <summary><b>Detailed Description</b></summary>
+<table class="params">
+	<thead>
+	<tr>
+		<th>Parameter</td>
+		<th>Description</th>
+		<th>Note</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>partition_name</td>
+		<td>Name of the partition to create</td>
+		<td>Data type: String</td>
+	</tr>
+	</tbody>
+</table>
+</details>
+
+Milvus creates a default partition name, `_default`, for new collections. After creating a partition, you have two partition names, `example_partition` and `_default`. 
+
+List all partitions in a collection:
 
 <div class="multipleCode">
   <a href="?python">Python </a>
@@ -194,3 +279,4 @@ await milvusClient.partitionManager.hasPartition({
   partition_name: "example_partition",
 });
 ```
+

@@ -1,11 +1,14 @@
 ---
 id: insert.md
 summary: Learn how to insert data to Milvus.
+
 ---
 
-# Insert vectors
+# Insert Vectors
 
-You can insert vectors to a specified partition within a specific collection.
+You can insert vectors to a specific collection or a specified partition within the collection.
+
+> Parameters marked with `*` are specific to Python SDK, and those marked with `**` are specific to Node.js SDK.
 
 1. Generate random vectors:
 
@@ -51,7 +54,37 @@ await milvusClient.dataManager.insert({{
 });
 ```
 
-3. By specifying `partition_name` when calling `insert()`, you can insert vectors to a specified partition:
+<details>
+  <summary><b>Detailed Description</b></summary>
+<table class="params">
+	<thead>
+	<tr>
+		<th>Parameter</td>
+		<th>Description</th>
+		<th>Note</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>data</td>
+		<td>Data to insert into Milvus</td>
+		<td>Mandatory</td>
+	</tr>
+ 	<tr>
+		<td>collection_name**</td>
+		<td>Name of the collection to insert data into</td>
+		<td>Mandatory</td>
+	</tr>
+	<tr>
+		<td>partition_name</td>
+		<td>Name of the partition to insert data into</td>
+		<td>Optional</td>
+	</tr>
+	</tbody>
+</table>
+</details>
+
+3. By specifying `partition_name` when inserting, you can insert vectors to a specified partition:
 
 <div class="multipleCode">
   <a href="?python">Python </a>
@@ -71,7 +104,7 @@ await milvusClient.dataManager.insert({{
 });
 ```
 
-4. Milvus temporarily stores the inserted vectors in the memory. Call `flush()` to flush them to the disk.
+4. Milvus temporarily stores the inserted vectors in the memory. To flush them to the disk, run:
 
 <div class="multipleCode">
   <a href="?python">Python </a>
@@ -86,3 +119,24 @@ await milvusClient.dataManager.insert({{
 ```javascript
 await milvusClient.dataManager.flush({ collection_names: [COLLECTION_NAME] });
 ```
+
+<details>
+  <summary><b>Detailed Description</b></summary>
+<table class="params">
+	<thead>
+	<tr>
+		<th>Parameter</td>
+		<th>Description</th>
+		<th>Note</th>
+	</tr>
+	</thead>
+	<tbody>
+ 	<tr>
+		<td>collection_name</td>
+		<td>Name of the collection to flush</td>
+		<td>Mandatory</td>
+	</tr>
+	</tbody>
+</table>
+</details>
+

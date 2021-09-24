@@ -1,6 +1,7 @@
 ---
 id: query.md
 summary: Learn how to query vectors in Milvus.
+
 ---
 
 # Query
@@ -8,6 +9,8 @@ summary: Learn how to query vectors in Milvus.
 In addition to vectors, Milvus supports data types such as boolean, integers, floating-point numbers, and more. 
 
 A query is a search on all existing data. In Milvus, you can run a query which will return all the results that meet your specified requirements. Use [boolean expression](boolean.md) to specify the requirements. 
+
+> Parameters marked with `*` are specific to Python SDK, and those marked with `**` are specific to Node.js SDK.
 
 
 1. Connect to the Milvus server:
@@ -28,6 +31,41 @@ import { MilvusClient } from "@zilliz/milvus2-sdk-node";
 const milvusClient = new MilvusClient("localhost:19530");
 ```
 
+<details>
+  <summary><b>Detailed Description</b></summary>
+<table class="params">
+	<thead>
+	<tr>
+		<th>Parameter</td>
+		<th>Description</th>
+		<th>Note</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>alias*</td>
+		<td>Alias for the Milvus server</td>
+    <td>Data type: String<br/>Mandatory</td>
+	</tr>
+	<tr>
+		<td>host*</td>
+		<td>IP address of the Milvus server</td>
+		<td>Mandatory</td>
+	</tr>
+	<tr>
+		<td>port*</td>
+		<td>Port of the Milvus server</td>
+		<td>Mandatory</td>
+	</tr>
+    <tr>
+		<td>address**</td>
+		<td>Address of the Milvus server.</td>
+		<td><code>"server_IP:server_port"</code><br/>Mandatory</td>
+	</tr>
+	</tbody>
+</table>
+</details>
+
 2. Prepare collection parameters and create a collection:
 
 <div class="multipleCode">
@@ -44,7 +82,7 @@ const milvusClient = new MilvusClient("localhost:19530");
 ...     FieldSchema("film_date", DataType.INT64),
 ...     FieldSchema("films", dtype=DataType.FLOAT_VECTOR, dim=2)
 ... ])
->>> collection = Collection(collection_name, schema)
+>>> collection = Collection(collection_name, schema, using='default', shards_num=2)
 ```
 
 ```javascript
@@ -75,6 +113,51 @@ const params = {
 
 await milvusClient.collectionManager.createCollection(params);
 ```
+
+<details>
+  <summary><b>Detailed Description</b></summary>
+<table class="params">
+	<thead>
+	<tr>
+		<th>Parameter</td>
+		<th>Description</th>
+		<th>Note</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>collection_name</td>
+		<td>Name of the collection to create</td>
+		<td>Data type: String</td>
+	</tr>
+	<tr>
+		<td>field_name</td>
+		<td>Name of the field in the collection</td>
+		<td>Data type: String</td>
+	</tr>
+	<tr>
+		<td>Schema</td>
+		<td>Schema used to create a collection and the fields within. Refer to <a href="field_schema.md">field schema</a> and <a href="collection_schema.md">collection schema</a> for detailed description. </td>
+		<td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td>description</td>
+		<td>Description of the collection</td>
+		<td>Data type: String</td>
+	</tr>
+  	<tr>
+		<td>using*</td>
+		<td>By specifying the srever alias here, you can decide in which Milvus server you create a collection.</td>
+		<td>Optional</td>
+	</tr>
+	<tr>
+		<td>shards_num*</td>
+		<td>Number of the shards for the collection to create</td>
+		<td>Optional</td>
+	</tr>
+	</tbody>
+</table>
+</details>
 
 3. Insert random vectors to the newly created collection:
 
@@ -109,6 +192,36 @@ await milvusClient.dataManager.insert({{
 });
 ```
 
+<details>
+  <summary><b>Detailed Description</b></summary>
+<table class="params">
+	<thead>
+	<tr>
+		<th>Parameter</td>
+		<th>Description</th>
+		<th>Note</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>data</td>
+		<td>Data to insert into Milvus</td>
+		<td>Mandatory</td>
+	</tr>
+	<tr>
+		<td>partition_name</td>
+		<td>Name of the partition to insert data into</td>
+		<td>Optional</td>
+	</tr>
+	<tr>
+		<td>timeout*</td>
+		<td>Timeout (in seconds) to allow for RPC. Clients wait until server responds or error occurs when it is set to None.</td>
+		<td>Optional</td>
+	</tr>
+	</tbody>
+</table>
+</details>
+
 4. Load the collection to memory and run a query:
 
 <div class="multipleCode">
@@ -136,6 +249,36 @@ await milvusClient.dataManager.query({
 });
 ```
 
+<details>
+  <summary><b>Detailed Description</b></summary>
+<table class="params">
+	<thead>
+	<tr>
+		<th>Parameter</td>
+		<th>Description</th>
+		<th>Note</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>collection_name**</td>
+		<td>Name of the collection to load and query</td>
+		<td>Mandatory</td>
+	</tr>
+  <tr>
+		<td>expr</td>
+		<td>Boolean expression used to filter attribute</td>
+		<td>Find more expression details in <a href="expression.md">Predicate Expressions</a>.<br/>Optional</td>
+	</tr>
+  <tr>
+		<td>output_fields</td>
+		<td>Name of the field to return (vector field not support in current release)</td>
+		<td>Mandatory</td>
+	</tr>
+	</tbody>
+</table>
+</details>
+
 5. Check the returned results:
 
 <div class="multipleCode">
@@ -157,3 +300,4 @@ await milvusClient.dataManager.query({
 // query result
 [{ film_id: "2" }, { film_id: "4" }, { film_id: "6" }, { film_id: "8" }];
 ```
+
