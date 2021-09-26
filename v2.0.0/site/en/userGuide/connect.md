@@ -69,7 +69,7 @@ const milvusClient = new MilvusClient("localhost:19530");
 
 ## Disconnect from the Milvus server
 
-When you no longer need Milvus services, you can release all connection resources of the Milvus server:
+When you no longer need Milvus services, you can disconnect from Milvus server:
 
 <div class="multipleCode">
   <a href="?python">Python </a>
