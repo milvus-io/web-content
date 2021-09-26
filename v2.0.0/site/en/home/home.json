@@ -49,7 +49,7 @@
             },
             {
               "text": "PyMilvus API Reference",
-              "link": "/api-reference/pymilvus/{{var.milvus_python_sdk_version}}/install.html"
+              "link": "/api-reference/pymilvus/v{{var.milvus_python_sdk_version}}/install.html"
             }
           ]
         },
