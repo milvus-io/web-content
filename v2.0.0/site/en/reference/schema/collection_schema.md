@@ -7,7 +7,35 @@ summary: Learn how to define a collection schema in Milvus.
 
 A collection schema is the logical definition of a collection. Usually you need to define the [field schema](field_schema.md) before defining a collection schema and [creating a collection](create.md). 
 
-A collection schema defines all the fields of a collection consists of, automatic ID allocation enablement, and collection description.
+
+## Field schema properties
+
+<table class="properties">
+	<thead>
+	<tr>
+		<th>Poperties</td>
+		<th>Description</th>
+		<th>Note</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>field</td>
+		<td>Fields in the collection to create</td>
+		<td>Mandatory</td>
+	</tr>
+    <tr>
+		<td>description</td>
+		<td>Description of the collection</td>
+		<td>Data type: String.<br/>Optional</td>
+	</tr>
+    <tr>
+		<td>auto_id</td>
+		<td>Whether to enable Automatic ID allocation or not</td>
+		<td>Data type: Boolean (<code>true</code> or <code>false</code>).<br/>Optional</td>
+	</tr>
+	</tbody>
+</table>
 
 ## Create a collection schema
 
@@ -20,7 +48,7 @@ from pymilvus import FieldSchema, CollectionSchema
 id_field = FieldSchema(name="id", dtype=DataType.INT64, is_primary=True, description="primary id")
 age_field = FieldSchema(name="age", dtype=DataType.INT64, description="age")
 embedding_field = FieldSchema(name="embedding", dtype=DataType.FLOAT_VECTOR, dim=128, description="vector")
-schema = CollectionSchema(fields=[id_field, age_field, embedding_field], auto_id=False,description="desc of a collection")
+schema = CollectionSchema(fields=[id_field, age_field, embedding_field], auto_id=False, description="desc of a collection")
 ```
 
 Create a collection with the schema specified:
