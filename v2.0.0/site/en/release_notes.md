@@ -32,7 +32,7 @@ Release date: 2021-09-10
 </table>
 
 
-Milvus 2.0.0-RC6 is a preview version of Milvus 2.0.0. It supports specifying shard number when creating collections, and query by expression. It exposes more cluster metrics through API. In RC6 we inceases the unit test coverage to 80%. We also fixed a series of issues involving resource leakage, system panic, etc.
+Milvus 2.0.0-RC6 is a preview version of Milvus 2.0.0. It supports specifying shard number when creating collections, and query by expression. It exposes more cluster metrics through API. In RC6 we increase the unit test coverage to 80%. We also fixed a series of issues involving resource leakage, system panic, etc.
 
 ### Improvements
 
