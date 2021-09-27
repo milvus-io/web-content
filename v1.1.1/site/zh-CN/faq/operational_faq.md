@@ -35,7 +35,7 @@ Milvus 和服务端配置文件的版本不对应。
 
 #### 为什么 Milvus 查询召回率一直不理想？
 
-在调用 SDK 进行向量搜索时，可以增大函数中 `nprobe` 参数的值。值越大，结果越精确，但耗时也越久。详见 [如何设置 Milvus 客户端参数](https://www.milvus.io/cn/blogs/2020-2-16-api-setting.md)。
+在调用 SDK 进行向量搜索时，可以增大函数中 `nprobe` 参数的值。值越大，结果越精确，但耗时也越久。详见 [如何设置 Milvus 客户端参数](https://www.milvus.io/cn/blog/2020-2-16-api-setting.md)。
 
 #### 为什么更新过的设置没有生效？
 

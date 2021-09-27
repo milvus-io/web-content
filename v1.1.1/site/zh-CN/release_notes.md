@@ -598,7 +598,7 @@ id: release_notes.md
 
 - **HNSW 索引的支持**
 
-  新增了对 HNSW 索引类型的支持。关于 HNSW 的详细介绍请参考[向量索引算法 HNSW 和 NSG 的比较](https://milvus.io/cn/blogs/2020-01-16-hnsw-nsg-comparison.md)。[#853](https://github.com/milvus-io/milvus/issues/853)
+  新增了对 HNSW 索引类型的支持。关于 HNSW 的详细介绍请参考[向量索引算法 HNSW 和 NSG 的比较](https://milvus.io/cn/blog/2020-01-16-hnsw-nsg-comparison.md)。[#853](https://github.com/milvus-io/milvus/issues/853)
 
 - **Jaccard/Hamming/Tanimoto 距离的支持**
 

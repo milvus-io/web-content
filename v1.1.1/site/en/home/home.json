@@ -62,10 +62,6 @@
             "label": "Develop",
             "list": [
               {
-                "text": "PyMilvus-ORM API Reference",
-                "link": "/api-reference/pymilvus-orm/{{var.milvus_python_orm_sdk_version}}/install.html"
-              },
-              {
                 "text": "Vector Index",
                 "link": "index.md"
               },
