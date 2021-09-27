@@ -129,6 +129,10 @@ You receive this warning if the graphics memory required for a request is larger
 
 If you use SQLite to manage Metadata, you receive this error message when write requests occur frequently. We recommend using MySQL for Metadata management. See [Manage Metadata with MySQL](data_manage.md).
 
+#### Can I specify the timeout for `Milvus()`?
+
+Yes, PyMilvus v1.1.2 supports specifying the server connection timeout.
+
 #### Still have questions?
 
 You can:

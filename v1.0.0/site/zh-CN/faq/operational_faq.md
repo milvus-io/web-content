@@ -36,7 +36,7 @@ Milvus 和服务端配置文件的版本不对应。
 
 #### 为什么 Milvus 查询召回率一直不理想？
 
-在调用 SDK 进行向量搜索时，可以增大函数中 `nprobe` 参数的值。值越大，结果越精确，但耗时也越久。详见 [如何设置 Milvus 客户端参数](https://www.milvus.io/cn/blogs/2020-2-16-api-setting.md)。
+在调用 SDK 进行向量搜索时，可以增大函数中 `nprobe` 参数的值。值越大，结果越精确，但耗时也越久。详见 [如何设置 Milvus 客户端参数](https://www.milvus.io/cn/blog/2020-2-16-api-setting.md)。
 
 #### 为什么更新过的设置没有生效？
 
@@ -123,7 +123,9 @@ Milvus 是以 Docker 镜像形式发行的，是可以离线部署的：
 
 如果元数据管理用的是 SQLite，在有数据频繁写入的情况下会出现该错误。建议将 SQLite 更换为 MySQL。如何更换请参考文档 [使用 MySQL 管理元数据](data_manage.md)。
 
+#### 是否可以指定 `Milvus()` 接口的超时时间？
 
+PyMilvus v1.1.2 已支持指定服务器连接超时时间。
 
 #### 仍有问题没有得到解答？
 

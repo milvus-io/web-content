@@ -190,6 +190,19 @@ See [Index Types](index.md) for more information.
 
 Milvus can support vectors with up to 32,768 dimensions.  
 
+#### Why does Milvus set an upper limit of 256 MB for the data that can be inserted at a time?
+
+Data inserted to Milvus is first written into memory. This limit is to avoid over-occupation of memory resources.
+
+#### Milvus merges multi-thread query requests in one batch. How to cancel this mechanism?
+
+You can add the following section to the configuration file **server_config.yaml**:
+
+```yaml
+engine_config:
+  search_combine_nq: 1
+```
+
 #### Still have questions?
 
 You can:

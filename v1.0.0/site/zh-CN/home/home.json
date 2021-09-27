@@ -60,10 +60,6 @@
           "label": "开发文档",
           "list": [
             {
-              "text": "PyMilvus-ORM API 参考",
-              "link": "/api-reference/pymilvus-orm/{{var.milvus_python_orm_sdk_version}}/install.html"
-            },
-            {
               "text": "向量索引",
               "link": "index.md"
             },
@@ -109,7 +105,7 @@
           "link": "https://zilliz.com/blog/Milvus-Is-an-Open-Source-Scalable-Vector-Database",
           "title": "Milvus Is an Open-Source Scalable Vector Database",
           "abstract": "Artificial intelligence makes it possible to extract deep insights from massive unstructured datasets. By converting abstract data like video and audio into vectors, a conceptual task becomes a rigorous mathematical one well suited for machines. Milvus is a vector data management platform that is the ideal backbone for your next AI project.",
-          "imgSrc": "https://zillizstorage.blob.core.windows.net/zilliz-assets/zilliz-assets/assets/small_milvus_5b2cdec665.jpg?19189.8199999996.png"
+          "imgSrc": "https://zilliz-cms.s3.us-west-2.amazonaws.com/small_milvus_5b2cdec665.jpg?19189.8199999996.png"
         }
       ]
     }

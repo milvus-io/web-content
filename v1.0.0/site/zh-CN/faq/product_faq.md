@@ -108,7 +108,7 @@ ID 类型是非负的 64 位整型。
 
 #### Milvus 中如何选择向量索引的类型？
 
-索引需要根据具体场景和需求去选择。详见 [如何选择索引类型](https://milvus.io/cn/blogs/2019-12-03-select-index.md)。
+索引需要根据具体场景和需求去选择。详见 [如何选择索引类型](https://milvus.io/cn/blog/2019-12-03-select-index.md)。
 
 #### Milvus 可以在同一个集合中的不同分区上建立不同索引吗？
 
@@ -132,7 +132,7 @@ ID 类型是非负的 64 位整型。
 
 所以当总的向量条数约等于 `nlist` 时，两者的计算量相当，性能也差不多。而随着向量条数达到 `nlist` 的 2 倍、3 倍、n 倍之后，IVF_FLAT 的优势就越来越大。
 
-可参阅 [如何选择索引类型](https://milvus.io/cn/blogs/2019-12-03-select-index.md)。
+可参阅 [如何选择索引类型](https://milvus.io/cn/blog/2019-12-03-select-index.md)。
 
 #### 创建索引立即查询，为什么内存会突然增长？
 
@@ -196,6 +196,18 @@ collection 数量没有限制。每个 collection 内的 partition 总数不能�
 #### Milvus 支持的向量维度的最大值是多少？
 Milvus 最多能够支持 32,768 向量维度。
 
+#### 为什么 Milvus 对单次可插入的数据大小设置了 256MB 的上限？
+
+插入 Milvus 中的数据会被先写入内存。 这个限制是为了避免插入操作过度占用内存资源。
+
+#### Milvus 会批量合并多线程查询请求。 如何取消这个机制？
+
+你可以将以下内容添加至配置文件 **server_config.yaml** 中：
+
+```yaml
+engine_config:
+  search_combine_nq: 1
+```
 
 #### 仍有问题没有得到解答？
 
