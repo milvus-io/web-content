@@ -82,7 +82,7 @@ IVF 索引的 <code>nlist</code> 值需要根据具体的使用情况去设置�
 
 如果向集合中导入数据的频率不高，建议将 `index_file_size` 的值设为 1024 MB 或者 2048 MB。如果后续会持续地向集合中导入增量数据，为了避免查询时未建立索引的数据文件过大，建议这种情况下将该值设置为 256 MB 或者 512 MB。
 
-可参阅 [如何设置 Milvus 客户端参数](https://www.milvus.io/cn/blogs/2020-2-16-api-setting.md)。
+可参阅 [如何设置 Milvus 客户端参数](https://www.milvus.io/cn/blog/2020-2-16-api-setting.md)。
 
 #### Milvus 的导入性能如何？
 
