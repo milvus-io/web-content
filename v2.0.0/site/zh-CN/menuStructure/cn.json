@@ -208,14 +208,6 @@
       "order": 1
     },
     {
-      "id": "expression.md",
-      "title": "表达式",
-      "label1": "userguide",
-      "label2": "search",
-      "label3": "",
-      "order": 2
-    },
-    {
       "id": "query.md",
       "title": "结构化匹配",
       "label1": "userguide",

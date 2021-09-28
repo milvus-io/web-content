@@ -291,7 +291,7 @@ await milvusClient.dataManager.search({
   <tr>
 		<td>expr</td>
 		<td>Boolean expression used to filter attribute</td>
-		<td>Find more expression details in <a href="expression.md">Predicate Expressions</a>.<br/>Optional</td>
+		<td>Find more expression details in <a href="boolean.md">Boolean Expression Rules</a>.<br/>Optional</td>
 	</tr>
   <tr>
 		<td>partition_names</td>

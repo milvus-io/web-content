@@ -5,7 +5,11 @@ summary: Learn about boolean expression rules in Milvus.
 
 # Boolean Expression Rules
 
-[EBNF](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form) grammar rules describe boolean expressions rules. Boolean expression rules are as follows:
+## Overview
+
+A predicate expression outputs a boolean value. Milvus conducts scalar filtering by searching with predicates. A predicate expression, when evaluated, returns either TRUE or FALSE. View [Python SDK API Reference]((/api-reference/pymilvus/v2.0.0rc6/api/collection.html) ) for instruction on using predicate expressions.
+
+[EBNF](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form) grammar rules describe boolean expressions rules:
 
 ```
 Expr = LogicalExpr | NIL
@@ -48,7 +52,7 @@ CmpOp = ">" | ">=" | "<" | "<=" | "=="| "!=";
 The following table lists the description of each symbol mentioned in the above Boolean expression rules.
 
 
-| **Notation**      | **Description** |
+| Notation      | Description |
 | ----------- | ----------- |
 | =      | Definition.       |
 | ,      | Concatenation.       |
@@ -81,8 +85,9 @@ The following table lists the description of each symbol mentioned in the above 
 
 ### Logical operators:
 
+Logical operators perform a comparison between two expressions. 
 
-| **Symbol**| **Operation** | **Example** | **Description**           |
+| Symbol| Operation | Example | Description          |
 | ----------| ------------- | ----------- | ------------------------- |
 | 'and' &&  | and           | expr1 && expr2   | True if both expr1 and expr2 are true. |
 | 'or' \|\|  | or           | expr1 \|\| expr2     | True if either expr1 or expr2 are true.  |
@@ -92,7 +97,9 @@ The following table lists the description of each symbol mentioned in the above 
 
 ### Binary arithmetic operators:
 
-| **Symbol**| **Operation** | **Example** | **Description**           |
+Binary arithmetic operators contain two operands and can perform basic arithmetic operations and return the corresponding result. 
+
+| Symbol| Operation | Example | Description          |
 | ----------| ------------- | ----------- | ------------------------- |
 | +         | Addition      | a + b       | Add the two operands.     |
 | -         | Subtraction   | a - b       | Subtract the second operand from the first operand.  |
@@ -104,7 +111,9 @@ The following table lists the description of each symbol mentioned in the above 
 
 ### Relational operators:
 
-| **Symbol**| **Operation** | **Example** | **Description**           |
+Relational operators use symbols to check for equality, inequality, or relative order between two expressions. 
+
+| Symbol| Operation | Example | Description         |
 | ----------| ------------- | ----------- | ------------------------- |
 | <         | Less than      | a < b      | True if a is less than b.     |
 | >         | Greater than   | a > b       | True if a is greater than b.  |
@@ -119,7 +128,7 @@ The following table lists the description of each symbol mentioned in the above 
 The following table lists the precedence and associativity of operators. Operators are listed top to bottom, in descending precedence.
 
 
-| **Precedence** | **Operator**  | **Description***   | **Associativity** |
+| Precedence | Operator  | Description  | Associativity |
 |------------|-----------|---------------|---------------|
 | 1          | + -       | UnaryArithOp  | Left-to-right |
 | 2          | not       | UnaryLogicOp  | Right-to-left |
