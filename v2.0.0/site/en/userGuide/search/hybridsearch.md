@@ -8,7 +8,10 @@ summary: Conduct a Hybrid Search with Milvus.
 
 In addition to vectors, Milvus supports data types such as boolean, integers, floating-point numbers, and more. A collection in Milvus can hold multiple fields for accommodating different data features or properties. Milvus is a flexible vector database that pairs scalar filtering with powerful vector similarity search.
 
-> Parameters marked with `*` are specific to Python SDK, and those marked with `**` are specific to Node.js SDK.
+<div class="alert note">
+Parameters marked with `*` are specific to Python SDK, and those marked with `**` are specific to Node.js SDK.
+</div>
+
 
 A hybrid search is a vector similarity search, during which you can filter the scalar data by specifying a [boolean expression](boolean.md).
 

@@ -10,7 +10,9 @@ In addition to vectors, Milvus supports data types such as boolean, integers, fl
 
 A query is a search on all existing data. In Milvus, you can run a query which will return all the results that meet your specified requirements. Use [boolean expression](boolean.md) to specify the requirements. 
 
-> Parameters marked with `*` are specific to Python SDK, and those marked with `**` are specific to Node.js SDK.
+<div class="alert note">
+Parameters marked with `*` are specific to Python SDK, and those marked with `**` are specific to Node.js SDK.
+</div>
 
 
 1. Connect to the Milvus server:

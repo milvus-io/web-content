@@ -8,7 +8,9 @@ summary: Learn how to drop index, partition, and collection in Milvus.
 
 The delete operations affect data already inserted into Milvus. Think twice before you delete.
 
-> Parameters marked with `*` are specific to Python SDK, and those marked with `**` are specific to Node.js SDK.
+<div class="alert note">
+Parameters marked with `*` are specific to Python SDK, and those marked with `**` are specific to Node.js SDK.
+</div>
 
 ## Drop an index
 

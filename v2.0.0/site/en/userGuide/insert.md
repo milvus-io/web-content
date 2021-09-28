@@ -8,7 +8,9 @@ summary: Learn how to insert data to Milvus.
 
 You can insert vectors to a specific collection or a specified partition within the collection.
 
-> Parameters marked with `*` are specific to Python SDK, and those marked with `**` are specific to Node.js SDK.
+<div class="alert note">
+Parameters marked with `*` are specific to Python SDK, and those marked with `**` are specific to Node.js SDK.
+</div>
 
 1. Generate random vectors:
 

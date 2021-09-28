@@ -8,7 +8,9 @@ summary: Conduct a vector similarity search with Milvus.
 
 This page will show you how to conduct a similarity search in Milvus.
 
+<div class="alert note">
 Parameters marked with `*` are specific to Python SDK, and those marked with `**` are specific to Node.js SDK.
+</div>
 
 1. Create search parameters:
 
