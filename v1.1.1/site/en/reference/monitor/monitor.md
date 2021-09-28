@@ -22,6 +22,6 @@ Milvus uses the following monitoring and alerting solutions:
 
 Milvus collects monitoring data and pushes it to Pushgateway. At the same time, the Prometheus server periodically pulls data from Pushgateway and saves it to its time-series database. The following graph shows how Prometheus works in Milvus:
 
-![proxy](https://milvus.io/static/3d68d75d595d1af1c1f3acd780cb7044/8c557/monitoring.png)
+![proxy](../../../../assets/monitoring/monitoring.png)
 
 

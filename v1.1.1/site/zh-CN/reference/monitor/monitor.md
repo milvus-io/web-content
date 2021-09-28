@@ -23,7 +23,7 @@ Milvus 使用的监控与报警方案如下：
 
 Milvus 会收集监控数据并将其推送到 Pushgateway。同时，Prometheus 服务器会定期从 Pushgateway 中拉取数据并将其保存到它的时序数据库。具体工作流程如下：
 
-![proxy](https://milvus.io/static/3d68d75d595d1af1c1f3acd780cb7044/8c557/monitoring.png)
+![proxy](../../../../assets/monitoring/monitoring.png)
 
 
 
