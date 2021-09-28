@@ -46,6 +46,10 @@
             {
               "text": "Hello Milvus",
               "link": "example_code.md"
+            },
+            {
+              "text": "PyMilvus API Reference",
+              "link": "/api-reference/pymilvus/{{python_version}}/install.html"
             }
           ]
         },
