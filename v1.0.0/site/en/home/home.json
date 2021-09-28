@@ -68,6 +68,10 @@
               {
                 "text": "Similarity Metrics",
                 "link": "metric.md"
+              },
+              {
+              "text": "PyMilvus API Reference",
+              "link": "/api-reference/pymilvus/{{python_version}}/install.html"
               }
             ]
           },

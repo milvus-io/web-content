@@ -66,6 +66,10 @@
             {
               "text": "相似度计算方式",
               "link": "metric.md"
+            },
+            {
+              "text": "PyMilvus API 参考",
+              "link": "/api-reference/pymilvus/{{python_version}}/install.html"
             }
           ]
         },
