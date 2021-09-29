@@ -101,7 +101,7 @@
       "loadBtn": {
         "label": "See More Blogs",
         "isExternal": true,
-        "link": "https://zilliz.com/blog"
+        "link": "/blog"
       },
       "title": "Blog",
       "items": [

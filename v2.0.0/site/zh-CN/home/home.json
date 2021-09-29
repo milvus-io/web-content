@@ -103,7 +103,7 @@
       "loadBtn": {
         "label": "See More Blogs",
         "isExternal": true,
-        "link": "https://zilliz.com/blog"
+        "link": "/blog"
       },
       "title": "博客文章",
       "items": [
