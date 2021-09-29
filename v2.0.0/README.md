@@ -106,4 +106,4 @@ Follow Milvus on social media:
 
 - [Medium](https://medium.com/@milvusio)
 
-- [Twitter](https://twitter.com/milvusio)https://twitter.com/milvusio)
+- [Twitter](https://twitter.com/milvusio)
