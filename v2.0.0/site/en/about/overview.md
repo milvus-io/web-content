@@ -34,6 +34,7 @@ Compatibility:
 	</tr>
 	</tbody>
 </table>
+
 Milvus 2.0.0-RC6 is the preview version of 2.0.0. It introduces Golang as the distributed layer development language and a new cloud-native distributed design. The latter brings significant improvements to scalability, elasticity, and functionality. 
 
 
