@@ -135,6 +135,26 @@ pip install grpcio-tools==1.37.0
 #### 是否可以指定 `Milvus()` 接口的超时时间？
 PyMilvus v1.1.2 已支持指定服务器连接超时时间。
 
+#### 如何为建立索引和检索分配GPU？
+
+在/home/$USER/milvus/conf路径下的**server_config.yaml**文件中，你可以为建立索引以及检索分配GPU。如下代码所示：
+
+```
+gpu:
+  enable: true
+  cache_size: 10GB
+  gpu_search_threshold: 0
+  search_devices:
+    - gpu0
+    - gpu1
+  build_index_devices:
+    - gpu2
+    - gpu3
+```
+<div class="alert note">
+gpu0, 1, 2, 3是分配给Docker容器的GPU中的前四个。
+</div>
+
 #### 仍有问题没有得到解答？
 
 如果仍有其他问题，你可以：

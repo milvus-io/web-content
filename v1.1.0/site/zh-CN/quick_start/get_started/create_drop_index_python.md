@@ -33,6 +33,10 @@ id: create_drop_index_python.md
    >>> milvus.create_index('test01', IndexType.IVF_FLAT, ivf_param)
    ```
 
+ <div class="alert note">
+使用<code>IVF_SQ8H</code>建索引或查询时必须启用 GPU。
+</div>
+
 ## 删除索引
 
 删除索引后，集合再次使用默认索引类型 FLAT。
