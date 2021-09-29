@@ -143,7 +143,7 @@ pip install grpcio-tools==1.37.0
 Yes, PyMilvus v1.1.2 supports specifying the server connection timeout.
 
 #### How to assign GPU devices to index/search?
-In **server_config.yaml** file under /home/$USER/milvus/conf, you can assign GPU devices to index/search. See example:
+In <b>server_config.yaml</b> file under /home/$USER/milvus/conf, you can assign GPU devices to index/search. See example:
 
 ```
 gpu:
@@ -161,6 +161,7 @@ gpu:
 <div class="alert note">
 GPU 0,1,2,3 are first 4 GPUs from the list of GPU devices assigned to the docker container.
 </div>
+
 
 
 #### Still have questions?
