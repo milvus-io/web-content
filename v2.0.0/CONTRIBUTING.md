@@ -1,6 +1,5 @@
 
 
-
 # Contributing to Milvus Documentation
 
 The Milvus docs are open-source just like the database itself and welcome contributions from everyone in the Milvus community.
@@ -9,7 +8,7 @@ The Milvus docs are open-source just like the database itself and welcome contri
 
 ## What contributions can I make?
 
-Basically anything you can think of to improve our documentation and make it more user-friendly! Below are some straightforward examples:
+Basically anything you can think of to improve our documentation and make it more user friendly! Below are some straighforward exmaples:
 
 - Fix a typo or a grammatical error.
 
@@ -55,7 +54,7 @@ All documentation is originally written in English and translated into other lan
 
 We provide documentation for each major version of Milvus. The pages for each version are found in a directory named for the version. For example, docs for Milvus v2.0.0 are in the `v2.0.0` directory, whereas docs for Milvus v1.1.0 are in the `v1.1.0` directory.
 
-Within each version directory, each page must be a **.md** file written in Markdown. File names should be lowercase with an underscore between words and should be brief but descriptive.
+Within each version directory, each page must be an **.md** file written in Markdown. File names should be lowercase with an underscore between words, and should be brief but descriptive.
 
 Example:
 
@@ -70,7 +69,7 @@ id: page_id.md
 
 title: Title of Page
 
-summary: Short description of the page for SEO
+summary: Short description of page for SEO
 
 related_key: keyword
 
@@ -124,9 +123,9 @@ In the JSON file for a version's sidebar, there are six possible fields:
 | `id` | String | The unique ID (within en/zh-CN folder)  given to a page (defined in the front-matter of the corresponding Markdown file) or a section. |
 | `title` | String | This field defines the title for a section of the sidenav, e.g., "Get Started", for a subsection, e.g., "Install Milvus", or for a page, e.g., "Milvus Standalone". See the [JSON Example](#json-example) below for more clarity. |
 | `label<n>` (e.g., label1, label2, label3) | String | This field defines the hierarchical structure of pages and sections.  |
-| `order` | Integer | The sorting order of pages and sections under the current label, starting from 0. |
+| `order` | Integar | The sorting order of pages and sections under current label, starting from 0. |
 | `isMenu` | Boolean | This field defines whether it is a section/subsection of the sidenav. |
-| `outlink` | Array of strings | The URL of a page that is not rendered by any Markdown file in the **milvus-docs** repository. |
+| `outlink` | Array of strings | The URL of a page that is not rendered by any Markdown file in the **milvus-docs** respository. |
 
 
 
@@ -269,3 +268,4 @@ This example shows some of the "Get Started" section of the sidenav:
 }
 
 \```
+
