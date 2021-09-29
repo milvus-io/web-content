@@ -189,7 +189,7 @@ Key takeaways: When `nlist` is 4096 and `nprobe` 128, Milvus shows the best 
 
 <details>
 <summary><font color="#4fc4f9">How to assign GPU devices to index/search?</font></summary>
-In **server_config.yaml** file under /home/$USER/milvus/conf, you can assign GPU devices to index/search. See example:
+In <b>server_config.yaml</b> file under /home/$USER/milvus/conf, you can assign GPU devices to index/search. See example:
 
 ```
 gpu:

@@ -144,7 +144,7 @@ Yes, PyMilvus v1.1.2 supports specifying the server connection timeout.
 
 #### How to assign GPU devices to index/search?
 
-In **server_config.yaml** file under /home/$USER/milvus/conf, you can assign GPU devices to index/search. See example:
+In <b>server_config.yaml</b> file under /home/$USER/milvus/conf, you can assign GPU devices to index/search. See example:
 
 ```
 gpu:
