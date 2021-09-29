@@ -32,6 +32,10 @@ Currently, a collection only supports one index type. When you change the index 
    >>> milvus.create_index('test01', IndexType.IVF_FLAT, ivf_param)
    ```
 
+<div class="alert note">
+Ensure you enable GPU when indexing and searching with <code>IVF_SQ8H</code>.
+</div>
+
 ## Drop an Index
 
 After deleting the index, the collection uses the default index type FLAT again.
