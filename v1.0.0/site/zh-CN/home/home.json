@@ -69,7 +69,7 @@
             },
             {
               "text": "PyMilvus API 参考",
-              "link": "/api-reference/pymilvus/{{python_version}}/install.html"
+              "link": "/api-reference/pymilvus/{{pymilvus_version}}/install.html"
             }
           ]
         },
