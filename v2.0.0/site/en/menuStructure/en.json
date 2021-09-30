@@ -193,7 +193,7 @@
     },
     {
       "id": "search.md",
-      "title": "Conduct a Search",
+      "title": "Search",
       "label1": "userguide",
       "label2": "search",
       "label3": "",
@@ -201,7 +201,7 @@
     },
     {
       "id": "hybridsearch.md",
-      "title": "Conduct a Hybrid Search",
+      "title": "Hybrid Search",
       "label1": "userguide",
       "label2": "search",
       "label3": "",
