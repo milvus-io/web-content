@@ -7,7 +7,7 @@ summary: Learn about boolean expression rules in Milvus.
 
 ## Overview
 
-A predicate expression outputs a boolean value. Milvus conducts scalar filtering by searching with predicates. A predicate expression, when evaluated, returns either TRUE or FALSE. View [Python SDK API Reference]((/api-reference/pymilvus/2.0.0rc6/api/collection.html) ) for instruction on using predicate expressions.
+A predicate expression outputs a boolean value. Milvus conducts scalar filtering by searching with predicates. A predicate expression, when evaluated, returns either TRUE or FALSE. View [Python SDK API Reference](/api-reference/pymilvus/v2.0.0rc6/api/collection.html) for instruction on using predicate expressions.
 
 [EBNF](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form) grammar rules describe boolean expressions rules:
 
