@@ -6,7 +6,7 @@ id: milvus_adopters.md
 
 Milvus 的全球企业用户超过 1000，应用领域十分广泛。以下是在开发中使用了 Milvus 的用户列表。
 
-| **公司**                                                     | **行业**             | **用户案例**                                                 |
+| 公司                                                   | 行业             | 用户案例                                                 |
 | ------------------------------------------------------------ | -------------------- | ------------------------------------------------------------ |
 | [百度飞桨 (PaddlePaddle) ](https://www.paddlepaddle.org.cn/) | 深度学习             | [强强联手！Milvus 与 PaddlePaddle 深度整合，赋能工业级 AI 应用](https://mp.weixin.qq.com/s?__biz=MzUzMDI5OTA5NQ==&mid=2247488460&idx=1&sn=6ef8475a8cae27c2017d2da7e9b6e40e&chksm=fa52b274cd253b62ac53a5ada257b438509398611ba43288043c2340b1570eead10488894f6e&scene=178&cur_album_id=1652686485898231817#rd) |
 | [Vova](https://www.vova.com/about-us.html)                   | 跨境电商             | [基于 Milvus 的 VOVA 拍照购实践](https://mp.weixin.qq.com/s?__biz=MzUzMDI5OTA5NQ==&mid=2247488314&idx=1&sn=fb2c866cb0dc27fc17ad249fb9b920b8&chksm=fa52b282cd253b945d8ecb0b3a8af72134d5f6e9050516d045115c2ed3320c3ef6ac87e89729&scene=178&cur_album_id=1652686485898231817#rd) |

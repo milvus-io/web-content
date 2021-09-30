@@ -7,7 +7,7 @@ summary: Learn about the limitations while using Milvus.
 
 ## Limitations on the length of an identifier
 
-| **Identifier type**      | **Maximum length (number of characters allowed)** |
+| Identifier type      | Maximum length (number of characters allowed) |
 | ----------- | ----------- |
 | Collection      | 255       |
 | Field   | 255        |
@@ -20,14 +20,14 @@ The name of an identifier can only contain numbers, letters, dollar signs ($), a
 
 ## Limitations on the number of collections and connections
 
-| **Identifier type**      | **Maximum number** |
+| Identifier type      | Maximum number |
 | ----------- | ----------- |
 | Collections      | 65536       |
 | Connections / proxy   | 65536        |
 
 ## Limitations on a single collection
 
-| **Type**      | **Maximum number** |
+| Type      | Maximum number |
 | ----------- | ----------- |
 | Partitions      | 4096       |
 | Shards   | 256        |
@@ -36,7 +36,7 @@ The name of an identifier can only contain numbers, letters, dollar signs ($), a
 | Entities   | unlimited        |
 
 ## Limitations on strings 
-| **Type**      | **Upper limit (characters)** |
+| Type      | Upper limit (characters) |
 | ----------- | ----------- |
 | VARCHAR      | 65535       |
 
@@ -46,19 +46,19 @@ VARCHAR will be supported in the 2.0 stable version. More string types will be s
 
 
 ## Limitations on vector data
-| **Property**      | **Maximum number** |
+| Property      | Maximum number |
 | ----------- | ----------- |
 | Dimensions      | 32768       |
 
 ## Limitations on  data size per RPC
-| **Operation**      | **Data Size (MB)** |
+| Operation      | Data Size (MB) |
 | ----------- | ----------- |
 | Insert      | 512       |
 | Search   | 512        |
 | Query   | 512        |
 
 ## Limitations on search params
-| **Params**      | **Maximum number** |
+| Params      | Maximum number |
 | ----------- | ----------- |
 | Top K      | 16384       |
 | nq    | 16384       |

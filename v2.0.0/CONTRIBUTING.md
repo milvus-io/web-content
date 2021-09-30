@@ -76,7 +76,7 @@ related_key: keyword
 ---
 ```
 
-| **Field**                | **Description**                                              |
+| Field                | Description                                              |
 | ------------------------ | ------------------------------------------------------------ |
 | `id`                     | The unique ID assigned to each page.                         |
 | `title` (optional)       | Used as the h1 header and written in title-case.             |

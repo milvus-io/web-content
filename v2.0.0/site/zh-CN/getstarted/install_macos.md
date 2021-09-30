@@ -6,7 +6,7 @@ title: Install Milvus 2.0 on macOs
 # Install Milvus 2.0 on macOs
 
 ## Prerequisites
-|**Operating system**|**Requirements**|
+|Operating system|Requirements|
 | -------------------|----------------|
 |CentOS              |Version 7.5 or higher|
 |Ubuntu LTS          |Version 16.04 or higher|
@@ -14,7 +14,7 @@ title: Install Milvus 2.0 on macOs
 
 </br>
 
-|**Hardware**|**Recommended**|
+|Hardware|Recommended|
 | -------------------|----------------|
 |CPU              | x86_64 </br> >= Intel CPU Sandy Bridge </br> CPU Instruction set:</br> - SSE42</br> - AVX</br> - AVX2</br> -AVX512 |
 |Memory         |At least 16 GB |

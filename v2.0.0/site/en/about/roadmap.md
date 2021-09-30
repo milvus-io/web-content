@@ -16,7 +16,7 @@ summary: Roadmap and enhancement plan of Milvus.
 
 ### Roadmap features
 #### DDL
-| **Version** | **Feature** | **Owner**   | **Status**  | **Comment** |
+| Version | Feature | Owner   | Status  | Comment |
 | ----------- | ----------- | ----------- | ----------- | ----------- | 
 | 2.0.0-RC      | Supports numerical scalar data types	       |        | done       |        |
 | 2.0   | Supports string data types        | czs007, dragondriver	     | in progress       |        |
@@ -30,7 +30,7 @@ summary: Roadmap and enhancement plan of Milvus.
 
 #### DML
 
-| **Version** | **Feature** | **Owner**   | **Status**  | **Comment** |
+| Version | Feature | Owner   | Status  | Comment |
 | ----------- | ----------- | ----------- | ----------- | ----------- |
 | 2.0.RC      | Supports scalar filtering       |        | done       |        |
 | 2.0.0-RC   | Supports for query by ID        |         | done        |         |
@@ -44,7 +44,7 @@ summary: Roadmap and enhancement plan of Milvus.
 
 #### Features
 
-| **Version** | **Feature** | **Owner**   | **Status**  | **Comment** |
+| Version | Feature | Owner   | Status  | Comment |
 | ----------- | ----------- | ----------- | ----------- | ----------- |
 | 2.0.0-RC      | Supports time travel to any specified point in time	       |        | done       |        |
 | 2.0.0-RC   | Offers three levels of tunable consistency: strong, session, consistent prefix        |         | done        |         |
@@ -61,7 +61,7 @@ summary: Roadmap and enhancement plan of Milvus.
 
 #### Performance/Cost
 
-| **Version** | **Feature** | **Owner**   | **Status**  | **Comment** |
+| Version | Feature | Owner   | Status  | Comment |
 | ----------- | ----------- | ----------- | ----------- | ----------- |
 | 2.0      | Milvus 2.0 performance benchmark and tuning       | czs007, dragondriver	       | in progress       |        |
 | 2.1   | Supports GPU Index building and embedding retrieval        | shengjun1985        | pending        |         |
@@ -76,7 +76,7 @@ summary: Roadmap and enhancement plan of Milvus.
 
 #### Stability
 
-| **Version** | **Feature** | **Owner**   | **Status**  | **Comment** |
+| Version | Feature | Owner   | Status  | Comment |
 | ----------- | ----------- | ----------- | ----------- | ----------- |
 | 2.0.0-RC      | Fully managed failure recovery and service discovery       |        | done       |        |
 | 2.0.0-RC   | Python SDK test        |         | done        |         |
@@ -90,7 +90,7 @@ summary: Roadmap and enhancement plan of Milvus.
 
 #### Ease Of Use
 
-| **Version** | **Feature** | **Owner**   | **Status**  | **Comment** |
+| Version | Feature | Owner   | Status  | Comment |
 | ----------- | ----------- | ----------- | ----------- | ----------- |
 | 2.0.0-RC    | Helm installation       |        | done       |        |
 | 2.0.0-RC    | Support of Milvus Insight, a Milvus visual management tool        |         | in progress        |         |
@@ -105,7 +105,7 @@ summary: Roadmap and enhancement plan of Milvus.
 #### SDK
 
 
-| **Version** | **Feature** | **Owner**   | **Status**  | **Comment** |
+| Version | Feature | Owner   | Status  | Comment |
 | ----------- | ----------- | ----------- | ----------- | ----------- |
 | 2.0.0-RC     | Python ORM-style APIs	       |        | done       |        |
 | 2.0   | Merge Pymilvus ORM and Pymilvus        |         | done        |         |
@@ -119,7 +119,7 @@ summary: Roadmap and enhancement plan of Milvus.
 
 #### Integration
 
-| **Version** | **Feature** | **Owner**   | **Status**  | **Comment** |
+| Version | Feature | Owner   | Status  | Comment |
 | ----------- | ----------- | ----------- | ----------- | ----------- |
 | 2.0      | Integrates S3	       |        | done       |        |
 | 2.1  | Integrates Kafka       |       | pending        |         |

@@ -42,7 +42,7 @@ lscpu | grep -e sse4_2 -e avx -e avx2 -e avx512
 
 ## 安装 Docker Desktop  
 
-| **操作系统** | **安装要求** |
+| 操作系统 | 安装要求 |
 | ---------- | ----------------- | 
 | **macOS**      | 安装 Mac 版本 Docker，详见[安装说明](https://docs.docker.com/docker-for-mac/). <br/> **注意：** 我们推荐在 Docker 虚拟机中至少设置 2 个虚拟 CPU 及 8 GB 初始内存，否则安装可能失败。<br/> **注意：** Milvus 暂不支持 Apple M1 CPU.            | 
 | **Linux 系统本地安装 Docker**    |安装 Linux 版本 Docker，详见[安装说明](https://docs.docker.com/installation/#installation)。              |
