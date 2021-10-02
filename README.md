@@ -1,8 +1,8 @@
 # Milvus Website
 
-This repository contains technical documentation, blog articles, bootcamp resources, and community pages in [milvus.io](https://www.milvus.io/). [Milvus](https://github.com/milvus-io/milvus) is an open-source vector database powering AI applications.
+This repository contains technical documentation, blog articles, bootcamp resources and community pages in [milvus.io](https://www.milvus.io/). [Milvus](https://github.com/milvus-io/milvus) is an open-source vector database powering AI applications.
 
-Please note that despite all documentation rendered on the website is stored in this repository, some projects have their own seperate repositories to maintain their project-specific documentation.
+Please note that, despite all documentation rendered on the website is stored in this repository, some projects have their own separate repositories to maintain their project-specific documentation.
 
 ### Contributions are welcome from everyone
 
