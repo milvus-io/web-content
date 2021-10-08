@@ -7,7 +7,7 @@ summary: Learn how to insert data to Milvus.
 
 # Insert Vectors
 
-You can insert vectors to a specific collection or a specified partition within the collection.
+This topic describes how to insert vectors into a collection or partition.
 
 <div class="alert note">
 Parameters marked with `*` are specific to Python SDK, and those marked with `**` are specific to Node.js SDK.

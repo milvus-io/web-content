@@ -7,7 +7,7 @@ summary: Learn how to build an index for vectors in Milvus.
 
 # Build an Index
 
-This page will show you how to create an index for a specified field in a collection to accelerate vector similarity search. See [Vector Index](index.md) for more information about setting index parameters.
+This topic describes how to build an index for a field. See [Vector Index](index.md) for more information about setting index parameters.
 
 <div class="alert note">
 Parameters marked with `*` are specific to Python SDK, and those marked with `**` are specific to Node.js SDK.

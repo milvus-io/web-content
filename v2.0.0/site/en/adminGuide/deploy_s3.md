@@ -7,7 +7,7 @@ summary: Learn how to set up S3 storage for Milvus.
 
 # Set up S3 Storage for Milvus
 
-Milvus supports Amazon Simple Storage Service (S3) for data persistence of insert log files and index files. This page shows you how to set up S3 storage for Milvus. 
+Milvus supports Amazon Simple Storage Service (S3) for data persistence of insert log files and index files. This topic describes how to set up S3 for Milvus. 
 
 ## Set Up S3 with Docker Compose
 

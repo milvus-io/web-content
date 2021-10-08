@@ -7,6 +7,8 @@ summary: Learn how to query vectors in Milvus.
 
 # Query
 
+This topic describes how to conduct a query.
+
 In addition to vectors, Milvus supports data types such as boolean, integers, floating-point numbers, and more. 
 
 A query is a search on all existing data. In Milvus, you can run a query which will return all the results that meet your specified requirements. Use [boolean expression](boolean.md) to specify the requirements. 
