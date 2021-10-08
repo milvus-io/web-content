@@ -1,6 +1,4 @@
 
-
-
 # Contributing to Milvus Documentation
 
 The Milvus docs are open-source just like the database itself and welcome contributions from everyone in the Milvus community.
@@ -8,7 +6,6 @@ The Milvus docs are open-source just like the database itself and welcome contri
 > Up-to-date technical documentation can be found at [milvus.io](https://www.milvus.io/).
 
 ## What contributions can I make?
-
 
 Basically anything you can think of to improve our documentation and make it more user friendly! Below are some straightforward examples:
 
@@ -36,7 +33,7 @@ For more substantial changes, please follow the following steps:
 2. Fork the [milvus-docs repository](https://github.com/milvus-io/milvus-docs) to your own GitHub account.
 
 3. Fetch to make sure your local branch is up-to-date.
- 
+ 
 4. Once you complete your changes, create a pull request. Your changes will be reviewed by a technical writer as soon as possible.
 
 For detailed information on this workflow, see [Make Your First Contribution](https://milvus.io/community/making_your_first_contributions.md).
@@ -51,7 +48,7 @@ For detailed information on this workflow, see [Make Your First Contribution](ht
 
 ### Languages
 
-All documentation is originally written in English and translated into other language(s). Currently the official website only supports two language versions: English and Chinese, stored in their corresponding **site/en** and **site/zh-CN** directories in each branch. Nevertheless, you are more than welcome to make a huge contribution to the community by translating the documentation into other languages you know! 
+All documentation is originally written in English and translated into other language(s). Currently, the official website only supports two language versions: English and Chinese, stored in their corresponding **site/en** and **site/zh-CN** directories in each branch. Nevertheless, you are more than welcome to make a huge contribution to the community by translating the documentation into other languages you know! 
 
 ### Pages
 
@@ -80,11 +77,11 @@ related_key: keyword
 ---
 ```
 
-| Field                | Description                                              |
+| Field                | Description                                              |
 | ------------------------ | ------------------------------------------------------------ |
-| `id`                     | The unique ID assigned to each page.                         |
-| `title` (optional)       | Used as the h1 header and written in title-case.             |
-| `summary` (optional)     | Used as the page's `meta description` for SEO. Keep this under 143 characters. Consider using the first sentence of the page, or something similar. |
+| `id`                     | The unique ID assigned to each page.                         |
+| `title` (optional)       | Used as the h1 header and written in title-case.             |
+| `summary` (optional)     | Used as the page's `meta description` for SEO. Keep this under 143 characters. Consider using the first sentence of the page, or something similar. |
 | `related_key` (optional) | Used as the keyword to pull related questions from the FAQ database to show at the bottom of the page. |
 
 #### Templates 
@@ -96,7 +93,7 @@ In general there are four types of documentation:
 - [Reference docs](reference-doc-template.md)
 - [Tutorials](tutorial-doc-template.md)
 
-When drafting a document, you should follow these type definitions with a degree of flexibility, as there is some amount of cross-over between them. 
+When drafting a document, you should follow these types of definitions with a degree of flexibility, as there is some amount of cross-over between them. 
 
 #### Images
 
@@ -110,11 +107,11 @@ When drafting a document, you should follow these type definitions with a degree
 
 *Variables* are used to store version information to be referenced in code or paths. They are defined in **Variables.json** and can be used in Markdown (**.md**) files, fragments, and templates. 
 
-> The defined variables implement within the current folder and its subfolders. The **en** and **Zh-CN** folders each contains a Variables.json file.
+> The defined variables implement within the current folder and its subfolders. The **en** and **Zh-CN** folders each contain a Variables.json file.
 
 ### Sidebar
 
-For each documented version of Milvus, the JSON file in the **menuStructure** directory defines the pages that appear in the docs sidebar. 
+For each documented version of Milvus, the JSON file in the **menuStructure** directory defines the pages that appear in the Docs sidebar. 
 
 If you're adding a page that you think should appear in the sidebar, please mention this in your pull request. Please follow the established practice when changing this file.
 
@@ -124,10 +121,10 @@ In the JSON file for a version's sidebar, there are six possible fields:
 
 | Field | Type | Description |
 | ------|------|------------ |
-| `id` | String | The unique ID (within en/zh-CN folder)  given to a page (defined in the front-matter of the corresponding Markdown file) or a section. |
+| `id` | String | The unique ID (within en/zh-CN folder) is given to a page (defined in the front-matter of the corresponding Markdown file) or a section. |
 | `title` | String | This field defines the title for a section of the sidenav, e.g., "Get Started", for a subsection, e.g., "Install Milvus", or for a page, e.g., "Milvus Standalone". See the [JSON Example](#json-example) below for more clarity. |
-| `label<n>` (e.g., label1, label2, label3) | String | This field defines the hierarchical structure of pages and sections.  |
-| `order` | Integer | The sorting order of pages and sections under the current label, starting from 0. |
+| `label<n>` (e.g., label1, label2, label3) | String | This field defines the hierarchical structure of pages and sections.  |
+| `order` | Integar | The sorting order of pages and sections under the current label, starting from 0. |
 | `isMenu` | Boolean | This field defines whether it is a section/subsection of the sidenav. |
 | `outlink` | Array of strings | The URL of a page that is not rendered by any Markdown file in the **milvus-docs** repository. |
 
@@ -143,131 +140,131 @@ This example shows some of the "Get Started" section of the sidenav:
 
 {
 
-​     "menuList": [
+     "menuList": [
 
-​     ...,
+     ...,
 
-​     {
+     {
 
-​      "id": "getstarted",
+      "id": "getstarted",
 
-​      "title": "Get Started",
+      "title": "Get Started",
 
-​      "label1": "",
+      "label1": "",
 
-​      "label2": null,
+      "label2": null,
 
-​      "label3": null,
+      "label3": null,
 
-​      "order": 1,
+      "order": 1,
 
-​      "isMenu": true
+      "isMenu": true
 
 },
 
-​     {
+     {
 
-​       "id": "prerequisite-docker.md",
+       "id": "prerequisite-docker.md",
 
-​       "title": "Before you Begin",
+       "title": "Before you Begin",
 
-​       "label1": "getstarted",
+       "label1": "getstarted",
 
-​       "label2": null,
+       "label2": null,
 
-​       "label3": null,
+       "label3": null,
 
-​       "order": 0
+       "order": 0
 
-​     },  
+     },  
 
-​     {
+     {
 
-​      "id": "installmilvus",
+      "id": "installmilvus",
 
-​      "title": "Install Milvus",
+      "title": "Install Milvus",
 
-​      "label1": "getstarted",
+      "label1": "getstarted",
 
-​      "label2": null,
+      "label2": null,
 
-​      "label3": null,
+      "label3": null,
 
-​      "order": 1,
+      "order": 1,
 
-​      "isMenu": true
+      "isMenu": true
 
 
 
-​    },
+    },
 
-​    {
+    {
 
-​      "id": "install_standalone-docker.md",
+      "id": "install_standalone-docker.md",
 
-​      "title": "Milvus Standalone",
+      "title": "Milvus Standalone",
 
-​      "label1": "getstarted",
+      "label1": "getstarted",
 
-​      "label2": "installmilvus",
+      "label2": "installmilvus",
 
-​      "label3": null,
+      "label3": null,
 
-​      "order": 0
+      "order": 0
 
-​    },
+    },
 
-​    {
+    {
 
-​      "id": "install_cluster-docker.md",
+      "id": "install_cluster-docker.md",
 
-​      "title": "Milvus Cluster",
+      "title": "Milvus Cluster",
 
-​      "label1": "getstarted",
+      "label1": "getstarted",
 
-​      "label2": "installmilvus",
+      "label2": "installmilvus",
 
-​      "label3": null,
+      "label3": null,
 
-​      "order": 1
+      "order": 1
 
-​    }, 
+    }, 
 
-​    {
+    {
 
-​      "id": "install_offline-docker.md",
+      "id": "install_offline-docker.md",
 
-​      "title": "Install Offline",
+      "title": "Install Offline",
 
-​      "label1": "getstarted",
+      "label1": "getstarted",
 
-​      "label2": "installmilvus",
+      "label2": "installmilvus",
 
-​      "label3": null,
+      "label3": null,
 
-​      "order": 2
+      "order": 2
 
-​    }, 
+    }, 
 
-​    {
+    {
 
-​      "id": "example_code.md",
+      "id": "example_code.md",
 
-​      "title": "Hello Milvus",
+      "title": "Hello Milvus",
 
-​      "label1": "getstarted",
+      "label1": "getstarted",
 
-​      "label2": "",
+      "label2": "",
 
-​      "label3": "",
+      "label3": "",
 
-​      "order": 2
+      "order": 2
 
-​    },
+    },
 
-​     ...
+     ...
 
-​     ]
+     ]
 
 }
 
