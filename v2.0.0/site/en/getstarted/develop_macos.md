@@ -70,7 +70,7 @@ By using VS Code, you can mount the local file system to the workspace inside th
 
 Taking the Milvus project as an example, there is a file named **.devcontainer.json** in the root directory of the project. This file describes how VS Code accesses or creates a development container environment and defines the container environment, working directory, extension tool set, and more.
 
-**Preprequisites**
+**Prerequisites**
 
 - Install [Visual Studio Code](https://code.visualstudio.com/).
 - Install [Remote Development extension pack](https://aka.ms/vscode-remote/download/extension).
