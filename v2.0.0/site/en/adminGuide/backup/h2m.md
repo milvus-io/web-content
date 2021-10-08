@@ -1,6 +1,7 @@
 ---
 id: h2m.md
 title: HDF5 to Milvus
+related_key: HDF5 to Milvus
 summary: Migrate HDF5 files to Milvus.
 ---
 # Migrate Data from HDF5 to Milvus

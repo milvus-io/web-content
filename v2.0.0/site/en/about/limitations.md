@@ -1,6 +1,7 @@
 ---
 id: limitations.md
 title: Milvus Limitations
+related_key: Limitations
 summary: Learn about the limitations while using Milvus.
 ---
 # Milvus limitations

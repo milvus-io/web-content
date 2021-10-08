@@ -1,5 +1,6 @@
 ---
 id: connect.md
+related_key: connect Milvus
 summary: Learn how to connect Milvus server.
 ---
 

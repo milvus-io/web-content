@@ -1,5 +1,6 @@
 ---
 id: insert.md
+related_key: insert data to Milvus
 summary: Learn how to insert data to Milvus.
 
 ---

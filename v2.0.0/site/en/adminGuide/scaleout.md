@@ -1,5 +1,6 @@
 ---
 id: scaleout.md
+related_key: scale Milvus cluster
 summary: Learn how to scale out a Milvus cluster.
 ---
 

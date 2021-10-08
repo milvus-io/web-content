@@ -1,6 +1,7 @@
 ---
 id: milvus_adopters.md
 title: Milvus Adopters
+related_key: Milvus adopters
 summary: Learn about companies that have adopted Milvus in production applications. 
 ---
 # Milvus Adopters

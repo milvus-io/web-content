@@ -1,5 +1,6 @@
 ---
 id: hybridsearch.md
+related_key: filter
 summary: Conduct a Hybrid Search with Milvus.
 
 ---

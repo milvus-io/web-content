@@ -1,5 +1,6 @@
 ---
 id: search.md
+related_key: search
 summary: Conduct a vector similarity search with Milvus.
 
 ---

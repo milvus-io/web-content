@@ -1,5 +1,7 @@
 ---
 id: deploy_s3.md
+title: Set up S3 Storage for Milvus
+related_key: S3 storage for Milvus
 summary: Learn how to set up S3 storage for Milvus.
 ---
 

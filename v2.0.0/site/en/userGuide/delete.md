@@ -1,5 +1,6 @@
 ---
 id: delete.md
+related_key: delete
 summary: Learn how to drop index, partition, and collection in Milvus.
 
 ---

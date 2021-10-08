@@ -1,5 +1,6 @@
 ---
 id: build.md
+related_key: create index
 summary: Learn how to build an index for vectors in Milvus.
 
 ---

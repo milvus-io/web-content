@@ -1,5 +1,6 @@
 ---
 id: example_code.md
+related_key: pymilvus
 summary: Get started with Milvus faster using this Python example code.
 ---
 

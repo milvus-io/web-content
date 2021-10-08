@@ -1,5 +1,6 @@
 ---
 id: insight_install.md
+related_key: insight
 summary: Learn how to install Milvus Insight to manage your Milvus service.
 ---
 

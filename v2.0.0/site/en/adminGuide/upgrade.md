@@ -1,5 +1,6 @@
 ---
 id: upgrade.md
+related_key: upgrade Milvus
 summary: Learn how to upgrade Milvus.
 ---
 

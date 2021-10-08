@@ -1,6 +1,7 @@
 ---
 id: monitor.md
 title: Monitor and Alert
+related_key: monitor Milvus with Prometheus
 summary: Learn how to monitor Milvus 2.0 with Prometheus.
 ---
 

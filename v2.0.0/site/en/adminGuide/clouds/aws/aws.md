@@ -1,6 +1,7 @@
 ---
 id: aws.md
 title: Deploy Terraform-Ansible on AWS
+related_key: Deploy Milvus on AWS
 summary: Learn how to deploy Milvus on AWS.
 ---
 

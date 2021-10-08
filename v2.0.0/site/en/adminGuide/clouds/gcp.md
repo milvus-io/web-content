@@ -1,6 +1,7 @@
 ---
 id: gcp.md
 title: Deploy Milvus Cluster on GCP with Kubernetes
+related_key: Deploy Milvus cluster on GCP
 summary: Learn how to deploy Milvus cluster on GCP.
 ---
 
