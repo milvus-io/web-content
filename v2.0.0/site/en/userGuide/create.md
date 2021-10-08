@@ -8,6 +8,10 @@ summary: Learn how to create a collection in Milvus.
 
 This page will show you how to create a collection or a partition in Milvus.
 
+<div class="alert note">
+Parameters marked with `*` are specific to Python SDK, and those marked with `**` are specific to Node.js SDK.
+</div>
+
 ## Create a collection
 
 Collections can only be created after successfully connecting to the Milvus server.
@@ -15,11 +19,6 @@ Collections can only be created after successfully connecting to the Milvus serv
 <div class="alert note">
 The created collection must contain a primary key field. Int64 is the only supported data type for the primary key field for now.
 </div>
-
-<div class="alert note">
-Parameters marked with `*` are specific to Python SDK, and those marked with `**` are specific to Node.js SDK.
-</div>
-
 
 1. Prepare collection parameters, including collection name and field parameters. Refer to API documents for respective languages for a detailed description of these parameters.
 
