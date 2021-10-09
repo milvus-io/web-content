@@ -34,7 +34,7 @@ $ wget https://github.com/milvus-io/milvus/releases/download/v2.0.0-rc6/milvus-c
 If you install your Milvus cluster with the original <b>docker-compose.yml</b> file, the data will be stored under <b>./volume</b> directory. To change the mapped directory, you can either change it directly in the <b>docker-compose.yml</b> file, or run <code>$ export DOCKER_VOLUME_DIRECTORY=</code>.
 </div>
 
-## 2. Start Milvus Cluster:
+## 2. Start Milvus
 ```Shell
 $ docker-compose up -d
 ```
