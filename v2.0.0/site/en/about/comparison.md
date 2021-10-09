@@ -6,7 +6,7 @@ summary: Learn about the design concepts and latest features for the most recent
 
 # What is New in Milvus 2.0
 
-We recommend you trying out Milvus 2.0. Here is why: 
+We recommend that you try out Milvus 2.0. Here is why: 
 
 ## Design concepts
 As our next-generation cloud-native vector database, Milvus 2.0 is built around the following three principles:
