@@ -90,10 +90,10 @@ related_key: keyword
 
 In general there are four types of documentation: 
 
-- [How-to docs](site/how-to-doc-template.md)
-- [Conceptual docs](site/conceptual-doc-template.md)
-- [Reference docs](site/reference-doc-template.md)
-- [Tutorials](site/tutorial-doc-template.md)
+- [How-to docs](site/template/how-to-doc-template.md)
+- [Conceptual docs](site/template/conceptual-doc-template.md)
+- [Reference docs](site/template/reference-doc-template.md)
+- [Tutorials](site/template/tutorial-doc-template.md)
 
 When drafting a document, you should follow these types of definitions with a degree of flexibility, as there is some amount of cross-over between them. 
 
