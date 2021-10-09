@@ -20,10 +20,10 @@ Installing Milvus with Docker Compose can only be used for testing and cannot be
 <div class="tab-wrapper"><a href="install_cluster-docker.md" class='active '>Install with Docker Compose</a><a href="install_cluster-helm.md" class=''>Install on Kubernetes</a></div>
 
 
-## Install Milvus Cluster
+## 1. Download **milvus-cluster-docker-compose.yml**
 
 
-1. Download **docker-compose.yml**:
+Download and save **milvus-cluster-docker-compose.yml** as **docker-compose.yml**:
 
 ```
 $ wget https://github.com/milvus-io/milvus/releases/download/v2.0.0-rc6/milvus-cluster-docker-compose.yml -O docker-compose.yml
@@ -34,7 +34,7 @@ $ wget https://github.com/milvus-io/milvus/releases/download/v2.0.0-rc6/milvus-c
 If you install your Milvus cluster with the original <b>docker-compose.yml</b> file, the data will be stored under <b>./volume</b> directory. To change the mapped directory, you can either change it directly in the <b>docker-compose.yml</b> file, or run <code>$ export DOCKER_VOLUME_DIRECTORY=</code>.
 </div>
 
-2. Start Milvus Cluster:
+##2. Start Milvus Cluster:
 ```Shell
 $ docker-compose up -d
 ```
@@ -72,14 +72,11 @@ milvus-querycoord   /tini -- milvus run querycoord   Up
 milvus-querynode    /tini -- milvus run querynode    Up
 milvus-rootcoord    /tini -- milvus run rootcoord    Up
 ```
+## 3. Stop Milvus
 
-<div class="alert note">
-To stop Milvus Cluster, run <code>$ sudo docker-compose down</code>.
-
+To stop Milvus standalone, run <code> $ sudo docker-compose down</code>.
 
 If you want to clean up data after stopping Milvus, run <code> $ sudo rm -rf  volume</code>.
-
-</div>
 
 <div class="alert note">
 If you want to upgrade your Milvus 2.0 version, please refer to <a href="upgrade.md">Upgrade Milvus 2.0</a>.
