@@ -13,6 +13,7 @@ The ML model and third-party software used include:
 - MySQL
 
 <br/>
+
 DNA sequence is a popular concept in gene traceability, species identification, disease diagnosis, and many more areas. Whereas all industries starve for a more intelligent and efficient research method, artificial intelligence has attracted much attention especially from biological and medical domains. More and more scientists and researchers are contributing to machine learning and deep learning in the field of bioinformatics. To make experimental results more convincing, one common option is to increase sample size. The collaboration with big data in genomics brings more possibilities of application in reality. However, the traditional sequence alignment has limitations, making it unsuitable for large datasets. In order to make less trade-off in reality, vectorization is a good choice for a large dataset of DNA sequences. 
 
 <br/>
