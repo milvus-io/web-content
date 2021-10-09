@@ -19,11 +19,9 @@ Installing Milvus with Docker Compose can only be used for testing and cannot be
 
 <div class="tab-wrapper"><a href="install_standalone-docker.md" class='active '>Install with Docker Compose</a><a href="install_standalone-helm.md" class=''>Install on Kubernetes</a></div>
 
+## 1. Download **docker-compose.standalone.yml**
 
-## Install Milvus Standalone with Docker Compose
-
-
-1. Download and save **docker-compose.standalone.yml** as **docker-compose.yml**:
+Download and save **docker-compose.standalone.yml** as **docker-compose.yml**.
 
 ```
 wget https://github.com/milvus-io/milvus/releases/download/v2.0.0-rc6/milvus-standalone-docker-compose.yml -O docker-compose.yml
@@ -35,7 +33,7 @@ wget https://github.com/milvus-io/milvus/releases/download/v2.0.0-rc6/milvus-sta
 If you install your Milvus standalone with the original <b>docker-compose.yml</b> file, the data will be stored under <b>./volume</b> directory. To change the mapped directory, you can either change it directly in the <b>docker-compose.yml</b> file, or run <code>$ export DOCKER_VOLUME_DIRECTORY=</code>.
 </div>
 
-2. Start Milvus Standalone:
+## 2. Start Milvus
 
 ```shell
 $ docker-compose up -d
@@ -48,7 +46,7 @@ Creating milvus-minio ... done
 Creating milvus-standalone ... done
 ```
 
-*If Milvus standalone boots successfully, three running docker containers appear (two infrastructure services and one Milvus service):* 
+*If Milvus standalone starts successfully, three running docker containers appear (two infrastructure services and one Milvus service):* 
 
 ```
 $ sudo docker-compose ps
@@ -59,15 +57,14 @@ milvus-minio        /usr/bin/docker-entrypoint ...   Up (healthy)   9000/tcp
 milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:19530->19530/tcp,:::19530->19530/tcp
 ```
 
+## 3. Stop Milvus
 
-<div class="alert note">
 To stop Milvus standalone, run <code> $ sudo docker-compose down</code>.
 
 If you want to clean up data after stopping Milvus, run <code> $ sudo rm -rf  volume</code>.
 
-</div>
 
 
 <div class="alert note">
-If you want to upgrade your Milvus 2.0 version, please refer to <a href="upgrade.md">Upgrade Milvus 2.0</a>.
+To learn about upgrading your Milvus (v2.0.0-RC1 and above), see <a href="upgrade.md">Upgrade Milvus 2.0</a>.
 </div>
