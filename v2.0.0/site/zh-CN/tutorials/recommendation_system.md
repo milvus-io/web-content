@@ -5,14 +5,22 @@ title: Recommendation System
 
 # Recommender System 
 
-The recommendation system is a subset of the information filtering system, which can be used in various scenarios including movie, music, product, and feed stream recommendations. The recommender system discovers the user’s personalized needs and interests by analyzing and mining user behaviors, and recommends information or products that may be of interest to the user. Unlike search engines, recommender system do not require users to accurately describe their needs, but model their historical behavior to proactively provide information that meets user interests and needs.
+This tutorial demonstrates how to use Milvus, the open-source vector database, to build a recommendation system.
+- [Open Jupyter notebook](https://github.com/milvus-io/bootcamp/blob/master/solutions/recommender_system/recommender_system.ipynb)
+- [Quick deploy](https://github.com/milvus-io/bootcamp/blob/master/solutions/recommender_system/quick_deploy)
+
+The ML Model and third-party software used include:
+- PaddlePaddle
+- Redis or MySQL
+
+</br>
+
+The recommender system is a subset of the information filtering system, which can be used in various scenarios including personalized movie, music, product, and feed stream recommendation. Unlike search engines, recommender systems do not require users to accurately describe their needs but discover users' needs and interests by analyzing user behaviors.
+
+</br>
+
+In this tutorial, you will learn how to build a movie recommender system that can suggest movies meeting user interests. To build such a recommender system, first download a movie-related dataset. This tutorial uses MovieLens 1M. Alternatively, you can prepare your own datasets, which should include such information as users' ratings of movies, users' demographic characteristics, and movie description. Use PaddlePaddle to combine user IDs and features and convert them into 256-dimensional vectors. Convert movie IDs and features into vectors in a similar way. Store the movie vectors in Milvus and use user vectors for similarity search. If the user vector is similar to a movie vector, Milvus will return the movie vector and its ID as the recommendation result. Then query movie information using the movie vector ID stored in Redis or MySQL.
+
+</br>
 
 ![recommender_system](../../../assets/recommendation_system.png)
-
-<br/>
-
-Visit the [github repo](https://github.com/milvus-io/bootcamp/tree/master/solutions/recommendation_system) to learn how to build an AI-powered movie recommender system using Milvus paired with PaddlePaddle's deep learning framework.
-
-<br/>
-
-You can also learn more about how to use Milvus to build other systems for various application scenarios in our [bootcamp repo](https://github.com/milvus-io/bootcamp) on Github.
