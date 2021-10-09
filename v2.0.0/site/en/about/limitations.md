@@ -4,66 +4,66 @@ title: Milvus Limitations
 related_key: Limitations
 summary: Learn about the limitations while using Milvus.
 ---
-# Milvus limitations
+# Milvus Limits
 
-## Limitations on the length of an identifier
+## Length of a resource name
 
-| Identifier type      | Maximum length (number of characters allowed) |
+| Resource      | Limit  |
 | ----------- | ----------- |
-| Collection      | 255       |
-| Field   | 255        |
-| Index   | 255        |
-| Partition   | 255        |
+| Collection      | 255 characters      |
+| Field   | 255 characters        |
+| Index   | 255 characters       |
+| Partition   | 255  characters      |
 
-## Rules on naming identifiers
+## Naming rules
 
-The name of an identifier can only contain numbers, letters, dollar signs ($), and underscores (__). The first character in an identifier must be a letter or the underscore sign.
+The name of a resource can contain numbers, letters, dollar signs ($), and underscores (\_). A resource name must start with a letter or an underscore (_).
 
-## Limitations on the number of collections and connections
+## Number of resources
 
-| Identifier type      | Maximum number |
+| Resource      | Limit |
 | ----------- | ----------- |
-| Collections      | 65536       |
-| Connections / proxy   | 65536        |
+| Collection     | 65,536       |
+| Connection / proxy   | 65,536        |
 
-## Limitations on a single collection
+## Number of resources in a collection
 
-| Type      | Maximum number |
+| Resource     | Limit|
 | ----------- | ----------- |
-| Partitions      | 4096       |
-| Shards   | 256        |
-| Fields   | 256        |
-| Indexes   | 65536        |
-| Entities   | unlimited        |
+| Partition      | 4,096       |
+| Shard   | 256        |
+| Field   | 256        |
+| Index   | 65,536        |
+| Entity   | unlimited        |
 
-## Limitations on strings 
-| Type      | Upper limit (characters) |
+## Length of a string 
+| Data type      | Limit  |
 | ----------- | ----------- |
-| VARCHAR      | 65535       |
+| VARCHAR      | 65,535 characters       |
 
 <div class="alert note">
-VARCHAR will be supported in the 2.0 stable version. More string types will be supported in the future.
+VARCHAR will be supported in the 2.0 stable version. More string data types will be supported.
 </div>
 
 
-## Limitations on vector data
-| Property      | Maximum number |
+## Dimensions of a vector
+| Property      | Limit |
 | ----------- | ----------- |
-| Dimensions      | 32768       |
+| Dimension      | 32,768       |
 
-## Limitations on  data size per RPC
-| Operation      | Data Size (MB) |
+## Input per remote procedure call (RPC)
+| Operation      | Limit |
 | ----------- | ----------- |
-| Insert      | 512       |
-| Search   | 512        |
-| Query   | 512        |
+| Insert      | 512 MB    |
+| Search   | 512 MB     |
+| Query   | 512 MB      |
 
-## Limitations on search params
-| Params      | Maximum number |
+## Search limits
+| Vectors      | Limit |
 | ----------- | ----------- |
-| Top K      | 16384       |
-| nq    | 16384       |
+| Output per input    | 16,384       |
+| Input    | 16,384       |
 
 <div class="alert note">
-Due to Pulsar's limitation on the log transmission size (100 MB), Milvus does not support <code>TopK</code> of 16384 on high-dimension vector search in current version. Milvus 2.0.0 will fully support <code>TopK</code> of 16384.
+Due to Pulsar's limits on the log transmission size (100 MB), Milvus does not support 16,384 output vectors per input vector on high-dimensional vector searches in the current version. Milvus 2.0.0-GA will support it.
 </div>
