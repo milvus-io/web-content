@@ -1,19 +1,52 @@
 ---
 id: field_schema.md
+summary: Learn how to define a field schema in Milvus.
 ---
 
 # Field Schema
 
 A field schema is the logical definition of a field. It is the first thing you need to define before defining a [collection schema](collection_schema.md) and [creating a collection](create.md). 
 
-A field schema defines the name, data type, and other properties of a field.
+Milvus 2.0 supports a primary key field, a scalar field, and a vector field in a collection.
 
-- For primary key field, you need to specfy the name, data type, primary key setting, and the description of the field.
+## Field schema properties
 
-- For scalar field,  you need to specfy the name, data type, and the description of the field.
-
-- For vector field, you need to specfy the name, data type, vector dimension, and the description of the field.
-
+<table class="properties">
+	<thead>
+	<tr>
+		<th>Poperties</td>
+		<th>Description</th>
+		<th>Note</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>name</td>
+		<td>Name of the field in the collection to create</td>
+		<td>Data type: String.<br/>Mandatory</td>
+	</tr>
+	<tr>
+		<td>dtype</td>
+		<td>Data type of the field</td>
+		<td>Mandatory</td>
+	</tr>
+    <tr>
+		<td>description</td>
+		<td>Description of the field</td>
+		<td>Data type: String.<br/>Optional</td>
+	</tr>
+    <tr>
+		<td>is_primary</td>
+		<td>Whether to set the field as the primary key field or not</td>
+		<td>Data type: Boolean (<code>true</code> or <code>false</code>).<br/>Mandatory for the primary key field</td>
+	</tr>
+	<tr>
+		<td>dim</td>
+		<td>Dimension of the vector</td>
+    <td>Data type: Integer &isin;[1, 32768].<br/>Mandatory for the vector field</td>
+	</tr>
+	</tbody>
+</table>
 
 
 ## Create a field schema
