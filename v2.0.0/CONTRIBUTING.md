@@ -138,136 +138,69 @@ This example shows some of the "Get Started" section of the sidenav:
 
 
 
-\``` json
-
+```
 {
-
      "menuList": [
-
      ...,
-
      {
-
       "id": "getstarted",
-
       "title": "Get Started",
-
       "label1": "",
-
       "label2": null,
-
       "label3": null,
-
       "order": 1,
-
       "isMenu": true
-
-},
-
+     },
      {
-
        "id": "prerequisite-docker.md",
-
        "title": "Before you Begin",
-
        "label1": "getstarted",
-
        "label2": null,
-
        "label3": null,
-
        "order": 0
-
      },  
-
      {
-
       "id": "installmilvus",
-
       "title": "Install Milvus",
-
       "label1": "getstarted",
-
       "label2": null,
-
       "label3": null,
-
       "order": 1,
-
       "isMenu": true
-
-
-
     },
-
     {
-
       "id": "install_standalone-docker.md",
-
       "title": "Milvus Standalone",
-
       "label1": "getstarted",
-
       "label2": "installmilvus",
-
       "label3": null,
-
       "order": 0
-
     },
-
     {
-
       "id": "install_cluster-docker.md",
-
       "title": "Milvus Cluster",
-
       "label1": "getstarted",
-
       "label2": "installmilvus",
-
       "label3": null,
-
       "order": 1
-
     }, 
-
     {
-
       "id": "install_offline-docker.md",
-
       "title": "Install Offline",
-
       "label1": "getstarted",
-
       "label2": "installmilvus",
-
       "label3": null,
-
       "order": 2
-
     }, 
-
     {
-
       "id": "example_code.md",
-
       "title": "Hello Milvus",
-
       "label1": "getstarted",
-
       "label2": "",
-
       "label3": "",
-
       "order": 2
-
     },
-
      ...
-
      ]
-
 }
-
-\```
+```
