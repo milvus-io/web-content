@@ -2,7 +2,7 @@
 id: migrate_overview.md
 ---
 
-# MilvusDM
+# MilvusDM 简介
 [MilvusDM](https://github.com/milvus-io/milvus-tools) 是一款针对 Milvus 研发的开源数据迁移工具，支持 Milvus 数据传输以及数据文件的导入与导出。开发者使用 MilvusDM 可以提升数据管理效率，降低运维成本。MilvusDM 可以通过指定 Milvus 中的集合或分区，帮助用户更智能地迁移所需数据。
 
 MilvusDM 目前支持以下数据传输通道：
