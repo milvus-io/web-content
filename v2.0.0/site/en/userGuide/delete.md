@@ -12,7 +12,7 @@ This topic describes how to delete an index, partition, collection, or entity.
 The delete operations affect data already inserted into Milvus. Think twice before you delete.
 
 <div class="alert note">
-Parameters marked with `*` are specific to Python SDK, and those marked with `**` are specific to Node.js SDK.
+Parameters marked with <code>*</code> are specific to Python SDK, and those marked with <code>**</code> are specific to Node.js SDK.
 </div>
 
 ## Drop an index

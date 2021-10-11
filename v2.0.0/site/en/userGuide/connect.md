@@ -11,7 +11,7 @@ This topic describes how to connect to and disconnect from a Milvus server.
 If you choose to operate in the Python interactive mode, type `python3` in your terminal.
  
 <div class="alert note">
-Parameters marked with `*` are specific to Python SDK, and those marked with `**` are specific to Node.js SDK.
+Parameters marked with <code>*</code> are specific to Python SDK, and those marked with <code>**</code> are specific to Node.js SDK.
 </div>
 
 ## Connect to the Milvus server

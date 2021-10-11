@@ -10,7 +10,7 @@ summary: Learn how to build an index for vectors in Milvus.
 This topic describes how to build an index for a field. See [Vector Index](index.md) for more information about setting index parameters.
 
 <div class="alert note">
-Parameters marked with `*` are specific to Python SDK, and those marked with `**` are specific to Node.js SDK.
+Parameters marked with <code>*</code> are specific to Python SDK, and those marked with <code>**</code> are specific to Node.js SDK.
 </div>
 
 1. Prepare the index parameters:
