@@ -88,7 +88,7 @@ for raw_result in res:
         distance = result.distance
         print(id, distance)
 ```
-Refer to [API Reference](/api-reference/pymilvus/2.0.0rc6/results.html) for more details.
+Refer to [API Reference](/api-reference/pymilvus/v2.0.0rc6/results.html) for more details.
 
 - Conducts a hybrid search：
 <div class="alert note">
