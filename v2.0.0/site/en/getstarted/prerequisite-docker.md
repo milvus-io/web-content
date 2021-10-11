@@ -14,20 +14,20 @@ Before you install Milvus, check hardware and software requirements.
 
 ## CPU support
 
-Milvus' computing operations depend on the CPU’s support for SIMD (Single Instruction, Multiple Data) extension instruction set. Whether your CPU supports the SIMD extension instruction set is crucial to index building and vector similarity search within Milvus. Ensure that your CPU supports at least one of the following SIMD instruction sets:
+Milvus's computing relies on single instruction, multiple data (SIMD) extension instruction sets. Similarity search with vector indexing using Milvus requires the support of SIMD extensions. Ensure that the CPU supports at least one of the following SIMD extensions:
 
 - SSE4.2
 - AVX
 - AVX2
-- AVX512
+- AVX-512
 
-Run the lscpu command to check if your CPU supports the SIMD instruction sets mentioned above:
+Run the lscpu command to view supported instruction sets:
 
 ```
 lscpu | grep -e sse4_2 -e avx -e avx2 -e avx512
 ```
 
-See [CPU with AVX](https://en.wikipedia.org/wiki/Advanced_Vector_Extensions#CPUs_with_AVX) for more information.
+See [CPUs with AVX](https://en.wikipedia.org/wiki/Advanced_Vector_Extensions#CPUs_with_AVX) for more information.
 
 ## Check the Docker version 
 
@@ -47,7 +47,7 @@ See <a href="https://docs.docker.com/compose/install/">Install Docker Compose</a
 
 | Operating system | Notes |
 | ---------- | ----------------- | 
-| **macOS**      | See [Docker Desktop for Mac user manual](https://docs.docker.com/docker-for-mac/) for more information. <br/> **Note:** Set the Docker virtual machine (VM) to have at least 2 vCPU (virtual CPU) and 8 GB of initial memory. Otherwise, installation may fail. <br/> Currently, Milvus does not support Apple M1 CPUs.           | 
+| **macOS**      | See [Docker Desktop for Mac user manual](https://docs.docker.com/docker-for-mac/) for more information. <br/> **Note:** Set the Docker virtual machine (VM) to use a minimum of 2 virtual CPUs (vCPUs) and 8 GB of initial memory. Otherwise, installation might fail. <br/> Currently, Milvus does not support Apple M1 CPUs.           | 
 | **Linux**    |See [Get Docker](https://docs.docker.com/installation/#installation) for more information.      |
 | **Windows with WSL 2 enabled**    |See [Docker Desktop WSL 2 backend](https://docs.docker.com/docker-for-windows/wsl-tech-preview/) for more information. <br/> <div class="alert note"> We recommend that you store source code and other data bind-mounted into Linux containers in the Linux file system instead of the Windows file system.</div>              | 
 
