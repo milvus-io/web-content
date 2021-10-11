@@ -69,17 +69,17 @@ await milvusClient.dataManager.insert({{
 	</thead>
 	<tbody>
 	<tr>
-		<td>data</td>
+		<td><code>data</code></td>
 		<td>Data to insert into Milvus</td>
 		<td>Mandatory</td>
 	</tr>
  	<tr>
-		<td>collection_name**</td>
+		<td><code>collection_name**</code></td>
 		<td>Name of the collection to insert data into</td>
 		<td>Mandatory</td>
 	</tr>
 	<tr>
-		<td>partition_name</td>
+		<td><code>partition_name</code></td>
 		<td>Name of the partition to insert data into</td>
 		<td>Optional</td>
 	</tr>

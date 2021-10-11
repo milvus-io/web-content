@@ -76,22 +76,22 @@ const params = {
 	</thead>
 	<tbody>
 	<tr>
-		<td>collection_name</td>
+		<td><code>collection_name</code></td>
 		<td>Name of the collection to create</td>
 		<td>Data type: String</td>
 	</tr>
 	<tr>
-		<td>field_name</td>
+		<td><code>field_name</code></td>
 		<td>Name of the field in the collection</td>
 		<td>Data type: String</td>
 	</tr>
 	<tr>
-		<td>Schema</td>
+		<td><code>Schema</code></td>
 		<td>Schema used to create a collection and the fields within. Refer to <a href="field_schema.md">field schema</a> and <a href="collection_schema.md">collection schema</a> for detailed description. </td>
 		<td>&nbsp;</td>
 	</tr>
 	<tr>
-		<td>description</td>
+		<td><code>description</code></td>
 		<td>Description of the collection</td>
 		<td>Data type: String</td>
 	</tr>

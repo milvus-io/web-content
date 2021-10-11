@@ -51,7 +51,7 @@ await milvusClient.indexManager.dropIndex({
 	</thead>
 	<tbody>
  	<tr>
-		<td>collection_name**</td>
+		<td><code>collection_name**</code></td>
 		<td>Name of the collection to drop index from</td>
 		<td>Mandatory</td>
 	</tr>

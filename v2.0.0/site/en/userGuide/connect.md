@@ -46,22 +46,22 @@ const milvusClient = new MilvusClient("localhost:19530");
 	</thead>
 	<tbody>
 	<tr>
-		<td>alias*</td>
+		<td><code>alias*</code></td>
 		<td>Alias for the Milvus server</td>
     <td>Data type: String<br/>Mandatory</td>
 	</tr>
 	<tr>
-		<td>host*</td>
+		<td><code>host*</code></td>
 		<td>IP address of the Milvus server</td>
 		<td>Mandatory</td>
 	</tr>
 	<tr>
-		<td>port*</td>
+		<td><code>port*</code></td>
 		<td>Port of the Milvus server</td>
 		<td>Mandatory</td>
 	</tr>
     <tr>
-		<td>address**</td>
+		<td><code>address**</code></td>
 		<td>Address of the Milvus server.</td>
 		<td><code>"server_IP:server_port"</code><br/>Mandatory</td>
 	</tr>

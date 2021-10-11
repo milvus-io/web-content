@@ -49,17 +49,17 @@ const index_param = {
 	</thead>
 	<tbody>
 	<tr>
-		<td>metric_type</td>
+		<td><code>metric_type</code></td>
 		<td>Metrics used to measure similarity of vectors</td>
 		<td>Find more options in <a href="metric.md">Simlarity Metrics</a>.<br/>Mandatory</td>
 	</tr>
 	<tr>
-		<td>index_type</td>
+		<td><code>index_type</code></td>
 		<td>Type of index used to accelerate the vector search</td>
 		<td>Find more options in <a href="index_selection.md">Index Selection</a>.<br/>Mandatory</td>
 	</tr>
 	<tr>
-		<td>params</td>
+		<td><code>params</code></td>
 		<td>Building parameter(s) specific to the index</td>
 		<td>Find more parameter details of different indexes in <a href="index_selection.md">Index Selection</a>.<br/>Mandatory</td>
 	</tr>
