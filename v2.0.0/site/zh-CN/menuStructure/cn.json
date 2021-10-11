@@ -382,11 +382,28 @@
       "outLink": "https://github.com/milvus-io/milvus_cli#overview"
     },
     {
-      "id": "migrate_overview.md",
+      "id": "milvusdm",
       "title": "MilvusDM",
       "label1": "admin_guide",
       "label2": "tools",
       "label3": "",
+      "order": 1,
+      "isMenu": true
+    },
+    {
+      "id": "migrate_overview.md",
+      "title": "MilvusDM 简介",
+      "label1": "admin_guide",
+      "label2": "tools",
+      "label3": "milvusdm",
+      "order": 0
+    }, 
+    {
+      "id": "milvusdm_install.md",
+      "title": "安装 MilvusDM",
+      "label1": "admin_guide",
+      "label2": "tools",
+      "label3": "milvusdm",
       "order": 1
     }, 
     {
