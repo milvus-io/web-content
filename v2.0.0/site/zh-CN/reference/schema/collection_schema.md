@@ -1,46 +1,46 @@
 ---
 id: collection_schema.md
-summary: Learn how to define a collection schema in Milvus.
----
+summary: 学习如何在 Milvus 中定义 collection schema。
+
 
 # Collection Schema
 
-A collection schema is the logical definition of a collection. Usually you need to define the [field schema](field_schema.md) before defining a collection schema and [creating a collection](create.md). 
+Collection schema 是 collection 的逻辑定义。通常你需要在定义 collection schema 和 [创建 collection](create.md) 之前定义 [field schema](field_schema.md)。
 
 
-## Collection schema properties
+## Collection schema 属性
 
 <table class="properties">
 	<thead>
 	<tr>
-		<th>Poperties</td>
-		<th>Description</th>
-		<th>Note</th>
+		<th>属性</td>
+		<th>描述</th>
+		<th>备注</th>
 	</tr>
 	</thead>
 	<tbody>
 	<tr>
 		<td>field</td>
-		<td>Fields in the collection to create</td>
-		<td>Mandatory</td>
+		<td>要创建的 collection 中的 field</td>
+		<td>强制</td>
 	</tr>
     <tr>
 		<td>description</td>
-		<td>Description of the collection</td>
-		<td>Data type: String.<br/>Optional</td>
+		<td>collection 描述</td>
+		<td>数据类型：String。<br/>可选</td>
 	</tr>
     <tr>
 		<td>auto_id</td>
-		<td>Whether to enable Automatic ID allocation or not</td>
-		<td>Data type: Boolean (<code>true</code> or <code>false</code>).<br/>Optional</td>
+		<td>是否启用自动分配 ID</td>
+		<td>数据类型：Boolean (<code>true</code> 或 <code>false</code>)。<br/>可选</td>
 	</tr>
 	</tbody>
 </table>
 
-## Create a collection schema
+## 创建 collection schema
 
 <div class="alert note">
-  Define the field schemas before defining a collection schema.
+  先定义 field schema，再定义 collection schema。
 </div>
 
 ```python
@@ -51,7 +51,7 @@ embedding_field = FieldSchema(name="embedding", dtype=DataType.FLOAT_VECTOR, dim
 schema = CollectionSchema(fields=[id_field, age_field, embedding_field], auto_id=False, description="desc of a collection")
 ```
 
-Create a collection with the schema specified:
+使用指定的 schema 创建 collection：
 
 ```python
 from pymilvus import Collection
@@ -59,11 +59,14 @@ collection_name1 = "tutorial_1"
 collection1 = Collection(name=collection_name1, schema=schema, using='default', shards_num=2)
 ```
 <div class="alert note">
-  You can define the shard number with <code>shards_num</code> and in which Milvus server you wish to create a collection by specifying the alias in <code>using</code>.
-  </div>
-  
+  你可以使用 <code>shards_num</code> 参数定义分片编号，并在 <code>using</code> 中指定 alias 来定义在哪个 Milvus server 中创建 collection。
+</div>
+
 <br/>
-You can also create a collection with `Collection.construct_from_dataframe`, which automatically generates a collction schema from DataFrame and creates a collection.
+
+
+你也可以使用 `Collection.construct_from_dataframe` 自动从 DataFrame 生成一个 collection schema 并创建一个 collection。
+
 
 ```python
 import pandas as pd
