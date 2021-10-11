@@ -3,7 +3,7 @@ id: migrate_overview.md
 summary: MilvusDM allows data migration between Milvus and many other sources of data.
 ---
 
-# MilvusDM
+# Overview
 [MilvusDM](https://github.com/milvus-io/milvus-tools) (Milvus Data Migration) is an open-source tool designed specifically for importing and exporting data with Milvus. MilvusDM allows you to migrate data in a specific collection or partition. To substantially improve data management efficiency and reduce DevOps costs, MilvusDM supports the following migration channels: 
 
 - [Milvus to Milvus](m2m.md): Migrates data between instances of Milvus.
