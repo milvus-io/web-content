@@ -6,6 +6,8 @@ summary: Learn about the limits while using Milvus.
 ---
 # Milvus Limits
 
+Milvus is committed to providing the best vector databases to power AI applications and vector similarity search. However, the team is continuously working to bring in more features and the best utilities to enhance user experience. This page lists out some known limitations that the users may encounter when using Milvus.
+
 ## Length of a resource name
 
 | Resource      | Limit  |
