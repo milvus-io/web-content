@@ -1,7 +1,7 @@
 ---
 id: collection_schema.md
 summary: 学习如何在 Milvus 中定义 collection schema。
-
+---
 
 # Collection Schema
 
