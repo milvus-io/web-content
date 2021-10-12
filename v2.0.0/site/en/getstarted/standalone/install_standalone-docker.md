@@ -11,26 +11,26 @@ summary: Installation instructions for the standalone version of Milvus.
 
 This topic describes how to install Milvus standalone with Docker Compose or on Kubernetes.
 
-You can also [build Milvus from source code](https://github.com/milvus-io/milvus#to-start-developing-milvus).
+You can also build Milvus from source code at [Github](https://github.com/milvus-io/milvus#to-start-developing-milvus).
 
 <div class="alert note">
-Installing Milvus with Docker Compose can only be used for testing and cannot be used in production.
+Installing Milvus with Docker Compose is for testing purposes only.
 </div>
 
 <div class="tab-wrapper"><a href="install_standalone-docker.md" class='active '>Install with Docker Compose</a><a href="install_standalone-helm.md" class=''>Install on Kubernetes</a></div>
 
-## 1. Download **docker-compose.standalone.yml**
+## 1. Download an installation file
 
-Download and save **docker-compose.standalone.yml** as **docker-compose.yml**.
+Run the following command to download **milvus-standalone-docker-compose.yml** and save it as **docker-compose.yml**.
 
 ```
 wget https://github.com/milvus-io/milvus/releases/download/v2.0.0-rc6/milvus-standalone-docker-compose.yml -O docker-compose.yml
 ```
 
-> You can also [download **docker-compose.yml** on GitHub](https://github.com/milvus-io/milvus/releases/download/v2.0.0-rc6/milvus-standalone-docker-compose.yml).
+> You can also click [here](https://github.com/milvus-io/milvus/releases/download/v2.0.0-rc6/milvus-standalone-docker-compose.yml) to download the file.
 
 <div class="alert note">
-If you install your Milvus standalone with the original <b>docker-compose.yml</b> file, the data will be stored under <b>./volume</b> directory. To change the mapped directory, you can either change it directly in the <b>docker-compose.yml</b> file, or run <code>$ export DOCKER_VOLUME_DIRECTORY=</code>.
+Data is stored in the <b>volumes</b> folder according to the default configuration in <b>milvus-standalone-docker-compose.yml</b>. To change the folder to store data, edit <b>docker-compose.yml</b> or run <code>$ export DOCKER_VOLUME_DIRECTORY=</code>.
 </div>
 
 ## 2. Start Milvus
@@ -46,7 +46,7 @@ Creating milvus-minio ... done
 Creating milvus-standalone ... done
 ```
 
-*If Milvus standalone starts successfully, three running docker containers appear (two infrastructure services and one Milvus service):* 
+*After Milvus standalone starts, three running docker containers appear including two infrastructure services and one Milvus service.* 
 
 ```
 $ sudo docker-compose ps
@@ -61,10 +61,10 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
 
 To stop Milvus standalone, run <code> $ sudo docker-compose down</code>.
 
-If you want to clean up data after stopping Milvus, run <code> $ sudo rm -rf  volume</code>.
+To delete data after stopping Milvus, run <code> $ sudo rm -rf  volumes</code>.
 
 
 
 <div class="alert note">
-To learn about upgrading your Milvus (v2.0.0-RC1 and above), see <a href="upgrade.md">Upgrade Milvus 2.0</a>.
+ See <a href="upgrade.md">Upgrade Milvus Using Helm Chart</a> for more information about upgrading Milvus.
 </div>
