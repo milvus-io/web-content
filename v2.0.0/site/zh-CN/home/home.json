@@ -67,8 +67,8 @@
               "link": "build.md"
             },
             {
-              "text": "删除操作",
-              "link": "delete.md"
+              "text": "删除 Collection 或索引",
+              "link": "drop.md"
             },
             {
               "text": "扩缩容",

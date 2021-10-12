@@ -65,8 +65,8 @@
               "link": "build.md"
             },
             {
-              "text": "Delete Operations",
-              "link": "delete.md"
+              "text": "Drop a Collection or an Index",
+              "link": "drop.md"
             },
             {
               "text": "Scale a Milvus Cluster",
