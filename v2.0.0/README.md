@@ -56,7 +56,7 @@ To make contributions to the Milvus SDK reference documentation, visit the progr
 
 - [PyMilvus ORM](https://github.com/milvus-io/pymilvus-orm)
 - [Node.js](https://github.com/milvus-io/milvus-sdk-node) (released and under continuous development)
-- (Coming soon) [GoLang](https://github.com/milvus-io/milvus-sdk-go)
+- [GoLang](https://github.com/milvus-io/milvus-sdk-go)
 
 ### Contribute to community content
 
