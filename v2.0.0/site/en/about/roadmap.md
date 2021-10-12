@@ -6,6 +6,8 @@ summary: Roadmap and enhancement plan of Milvus.
 ---
 # Milvus Roadmap
 
+The Milvus roadmap shares an overview of new benefits and feature upgrades we hope to provide for users in our upcoming releases, as well as our long-term goals. It is driven by user priorities and may change as their requirement or demand changes.
+
 ![Roadmap](../../../assets/roadmap.jpg)
 
 
