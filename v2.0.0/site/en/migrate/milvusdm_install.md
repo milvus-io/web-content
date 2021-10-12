@@ -47,7 +47,7 @@ export LOGS_NUM=0
 $ source ~/.bashrc
 ```
 
-3. Install milvusdm with `pip`:
+3. Install MilvusDM with `pip`:
 
 ```shell
 $ pip3 install pymilvusdm==2.0
