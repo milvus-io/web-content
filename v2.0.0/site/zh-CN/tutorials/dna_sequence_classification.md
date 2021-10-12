@@ -1,25 +1,26 @@
 ---
 id: dna_sequence_classification.md
-title: DNA Sequence Classification
+summary: 使用 Milvus 搭建 DNA 序列分类系统。
 ---
 
-# DNA Sequence Classification 
+# DNA 序列分类
 
-This tutorial demonstrates how to use Milvus, the open-source vector database, to build a DNA sequence classification model.
-- [Open Jupyter notebook](https://github.com/milvus-io/bootcamp/blob/master/solutions/dna_sequence_classification/dna_sequence_classification.ipynb)
-- [Quick deploy](https://github.com/milvus-io/bootcamp/blob/master/solutions/text_search_engine/quick_deploy)
-The ML model and third-party software used include:
+本教程将介绍如何使用开源向量数据库 Milvus 搭建 DNA 序列分类模型。
+- [打开 Jupyter notebook](https://github.com/milvus-io/bootcamp/blob/master/solutions/dna_sequence_classification/dna_sequence_classification.ipynb)
+- [快速部署](https://github.com/milvus-io/bootcamp/blob/master/solutions/text_search_engine/quick_deploy)
+本教程中使用到的 ML 模型及第三方软件包括：
 - CountVectorizer
 - MySQL
 
 <br/>
-DNA sequence is a popular concept in gene traceability, species identification, disease diagnosis, and many more areas. Whereas all industries starve for a more intelligent and efficient research method, artificial intelligence has attracted much attention especially from biological and medical domains. More and more scientists and researchers are contributing to machine learning and deep learning in the field of bioinformatics. To make experimental results more convincing, one common option is to increase sample size. The collaboration with big data in genomics brings more possibilities of application in reality. However, the traditional sequence alignment has limitations, making it unsuitable for large datasets. In order to make less trade-off in reality, vectorization is a good choice for a large dataset of DNA sequences. 
+
+DNA 序列是基因溯源、物种鉴定、疾病诊断等领域内的流行概念。各行各业都渴望发现更智能、更高效的研究方法。因此，人工智能的运用在生物和医学领域内备受关注。越来越多的科学家和研究人员开始做出贡献，努力推动机器学习（machine learning）和深度学习（deep learning）在生物信息学领域内的应用。通常，科学家和研究人员会通过增加样本量来提高实验结果的说服力。将基因组学与大数据相结合能够拓展实际应用场景。然而，传统的序列比对存在局限性，不适用于大型数据集的比对。为解决这一问题，可以选择将大型 DNA 序列数据向量化。
 
 <br/>
 
-In this tutorial, you will learn how to build a DNA sequence classification model. This tutorial uses CountVectorizer to extract features of DNA sequences and convert them into vectors. Then, these vectors are stored in Milvus and their corresponding DNA classes are stored in MySQL. Users can conduct a vector similarity search in Milvus and recall the corresponding DNA classification from MySQL.
+通过本教程，你将学习到如何搭建 DNA 序列分类系统。首先，使用 CountVectorizer 模型提取 DNA 序列特征并转化为向量。然后，将向量存储在 Milvus 中，将向量与 DNA 分类信息的对应关系存储在 MySQL 中。使用 Milvus 进行向量相似度搜索，并从 MySQL 中获取对应的 DNA 分类。
 
 <br/>
- 
+
 ![dna](../../../assets/dna.png)
 
