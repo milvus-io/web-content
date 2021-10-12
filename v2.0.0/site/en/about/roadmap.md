@@ -53,7 +53,7 @@ The Milvus roadmap shares an overview of new benefits and feature upgrades we ho
 | 2.0.0-RC   | Offers three levels of tunable consistency: strong, session, consistent prefix        |         | done        |         |
 | 2.0      | Segment compaction       | sunby       | in progress       |        |
 | 2.0   | Implements dynamic load balancing        | sunby, xige-16        | in progress        |         |
-| 2.0      | mplements dynamic handoff       | xige-16, bigsheeper       | in progress       |        |
+| 2.0      | Implements dynamic handoff       | xige-16, bigsheeper       | in progress       |        |
 | 2.0   | Calculate distance between embeddings        |         | done	        |         |
 | 2.1      | Multi tenant support and access control       |        | pending       |        |
 | 2.2   | Change data capture        |         | pending        |         |
