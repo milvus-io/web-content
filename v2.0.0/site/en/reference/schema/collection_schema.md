@@ -13,7 +13,7 @@ A collection schema is the logical definition of a collection. Usually you need 
 <table class="properties">
 	<thead>
 	<tr>
-		<th>Poperties</td>
+		<th>Properties</td>
 		<th>Description</th>
 		<th>Note</th>
 	</tr>
@@ -63,7 +63,7 @@ collection1 = Collection(name=collection_name1, schema=schema, using='default', 
   </div>
   
 <br/>
-You can also create a collection with `Collection.construct_from_dataframe`, which automatically generates a collction schema from DataFrame and creates a collection.
+You can also create a collection with <code>Collection.construct_from_dataframe</code>, which automatically generates a collction schema from DataFrame and creates a collection.
 
 ```python
 import pandas as pd

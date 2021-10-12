@@ -14,7 +14,7 @@ Milvus 2.0 supports a primary key field, a scalar field, and a vector field in a
 <table class="properties">
 	<thead>
 	<tr>
-		<th>Poperties</td>
+		<th>Properties</td>
 		<th>Description</th>
 		<th>Note</th>
 	</tr>
