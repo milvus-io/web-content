@@ -27,12 +27,6 @@
     ]
   },
   "section2": {
-    "title": "部署",
-    "content": [
-      
-    ]
-  },
-  "section3": {
     "title": "应用场景",
     "content": [
       {
@@ -89,7 +83,7 @@
       }
     ]
   },
-  "section4": {
+  "section3": {
     "title": "合作项目",
     "content": [
       {
