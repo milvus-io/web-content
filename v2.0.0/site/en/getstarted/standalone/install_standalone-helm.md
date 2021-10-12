@@ -19,7 +19,7 @@ Installing Milvus with Docker Compose is for testing purposes only.
 <div class="tab-wrapper"><a href="install_standalone-docker.md" class=''>Install with Docker Compose</a><a href="install_standalone-helm.md" class='active '>Install on Kubernetes</a></div>
 
 
-## 1. Start a cluster:
+## 1. Start a cluster
 ```
 $ minikube start
 ```
