@@ -44,10 +44,15 @@ This tutorial uses <code> my-release</code> as the release name. To use a differ
 
 #### Install Milvus cluster:
 ```
-$ helm install my-release milvus/milvus --set cluster.enabled=true
+$ helm install my-release milvus/milvus
 ```
-<div class="alert note"> 
+
+<div class="alert note">
+The default command line installs cluster version of Milvus while installing with Helm. No further setting is needed.
+For more details, see <a href="https://artifacthub.io/packages/helm/milvus/milvus">Milvus Helm charts</a>.
+
 See <a href="https://artifacthub.io/packages/helm/milvus/milvus">Milvus Helm Chart</a> for more information.
+
 </div>
 
 *After Milvus starts, the `READY` column displays `1/1` for all pods.*

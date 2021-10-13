@@ -109,7 +109,7 @@ await milvusClient.dataManager.insert({{
 });
 ```
 
-4. 将集合加载到内存中并进行结构化匹配：
+4. 将 collection 加载到内存中并进行结构化匹配：
 
 <div class="multipleCode">
 
@@ -136,6 +136,9 @@ await milvusClient.dataManager.query({
   output_fields: ["film_id"],
 });
 ```
+<div class="alert warning">
+在当前版本中，加载数据最大值不能超过所有 query node 内存总量的 70%，从而为执行引擎预留内存资源。
+</div>
 
 5. 检查返回结果：
 

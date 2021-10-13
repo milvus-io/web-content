@@ -22,7 +22,7 @@ Milvus 集群的管理员需要通过更改以下配置项维护集群运行。
 
 etcd 是系统的元数据引擎，支撑底层的元数据存储与访问。你可以在 [**milvus.yaml**](https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml) 中设置这些参数。
 
-> 如使用默认 [**milvus-standalone-docker-compose.yml**](https://github.com/milvus-io/milvus/releases/download/v2.0.0-rc6/milvus-standalone-docker-compose.yml) 文件启动第三方服务，则无需修改该部分参数。
+> 如使用默认 [**milvus-standalone-docker-compose.yml**](https://github.com/milvus-io/milvus/releases/download/v2.0.0-rc7/milvus-standalone-docker-compose.yml) 文件启动第三方服务，则无需修改该部分参数。
 
 <table id="etcd">
 <thead>
@@ -63,7 +63,7 @@ etcd 是系统的元数据引擎，支撑底层的元数据存储与访问。你
 
 Milvus 支持 MinIO 以及 Amazon S3 作为系统的存储引擎，支撑日志文件与索引文件的持久化存储。由于 MinIO 兼容 S3，你可以将以下配置项直接修改为你的 S3 服务配置。你可以在 [**milvus.yaml**](https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml) 中设置这些参数。
 
-> 如使用默认 [**milvus-standalone-docker-compose.yml**](https://github.com/milvus-io/milvus/releases/download/v2.0.0-rc6/milvus-standalone-docker-compose.yml) 文件启动第三方服务，则无需修改该部分参数。
+> 如使用默认 [**milvus-standalone-docker-compose.yml**](https://github.com/milvus-io/milvus/releases/download/v2.0.0-rc7/milvus-standalone-docker-compose.yml) 文件启动第三方服务，则无需修改该部分参数。
 
 <table id="minio">
 <thead>

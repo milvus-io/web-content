@@ -42,10 +42,11 @@ $ helm repo update
 
 #### 安装 Milvus 分布式版：
 ```
-$ helm install my-release milvus/milvus --set cluster.enabled=true
+$ helm install my-release milvus/milvus
 ```
 
 <div class="alert note">
+使用 Helm 安装时，默认设定为安装分布式版 Milvus，无需修改命令行。
 详见 <a href="https://artifacthub.io/packages/helm/milvus/milvus">Milvus Helm charts</a>。
 </div>
 

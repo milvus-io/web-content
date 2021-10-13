@@ -104,13 +104,17 @@ await milvusClient.collectionManager.loadCollection({
 	</thead>
 	<tbody>
 	<tr>
-		<td>collection_name**</td>
+		<td><code>collection_name</code>**</td>
 		<td>Name of the collection to load</td>
 		<td>Mandatory</td>
 	</tr>
 	</tbody>
 </table>
 </details>
+
+<div class="alert warning">
+In current release, data to be load must be under 70% of the total memory resources of all query nodes to reserve memory resources for execution engine.
+</div>
 
 3. Search with newly created random vectors:
 
@@ -153,7 +157,7 @@ await milvusClient.dataManager.search({
 	</thead>
 	<tbody>
 	<tr>
-		<td>collection_name**</td>
+		<td><code>collection_name</code>**</td>
 		<td>Name of the collection to search</td>
 		<td>Mandatory</td>
 	</tr>
@@ -163,44 +167,49 @@ await milvusClient.dataManager.search({
 		<td>Mandatory</td>
 	</tr>
 	<tr>
-		<td>anns_field</td>
+		<td><code>anns_field</code></td>
 		<td>Name of the field to search on</td>
 		<td>Mandatory</td>
 	</tr>
     <tr>
-		<td>params*</td>
+		<td><code>params</code>*</td>
 		<td>Search parameter(s) specific to the index</td>
 		<td>Find more parameter details of different indexes in <a href="index_selection.md">Index Selection</a>.<br/>Mandatory</td>
 	</tr>
 	<tr>
-		<td>limit*</td>
+		<td><code>limit</code>*</td>
 		<td>Number of the most similar results to return</td>
 		<td>Mandatory</td>
 	</tr>
   <tr>
-		<td>expr</td>
+		<td><code>expr</code></td>
 		<td>Boolean expression used to filter attribute</td>
 		<td>Find more expression details in <a href="boolean.md">Boolean Expression Rules</a>.<br/>Optional</td>
 	</tr>
   <tr>
-		<td>partition_names</td>
+		<td><code>partition_names</code></td>
 		<td>Name of the partition to search on</td>
 		<td>Optional</td>
 	</tr>
   <tr>
-		<td>output_fields</td>
+		<td><code>output_fields</code></td>
 		<td>Name of the field to return (vector field not support in current release)</td>
 		<td>Optional</td>
 	</tr>
   <tr>
-		<td>timeout</td>
+		<td><code>timeout</code></td>
 		<td>Timeout (in seconds) to allow for RPC. Clients wait until server responds or error occurs when it is set to None.</td>
 		<td>Optional</td>
 	</tr>
   <tr>
-		<td>vector_type**</td>
+		<td><code>vector_type</code>**</td>
 		<td>Pre-check of binary/float vectors. <code>100</code> for binary vectors and <code>101</code> for float vectors.</td>
 		<td>Mandatory</td>
+	</tr>
+  <tr>
+		<td><code>round_decimal</code>**</td>
+		<td>Number of decimal places of returned distance</td>
+		<td>Data type: Integer<br/>Optional</td>
 	</tr>
 	</tbody>
 </table>
@@ -257,7 +266,7 @@ await milvusClient.collectionManager.releaseCollection({  collection_name: COLLE
 	</thead>
 	<tbody>
 	<tr>
-		<td>collection_name**</td>
+		<td><code>collection_name</code>**</td>
 		<td>Name of the collection to release</td>
 		<td>Mandatory</td>
 	</tr>

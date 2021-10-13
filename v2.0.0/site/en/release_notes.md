@@ -6,6 +6,193 @@ summary: Milvus Release Notes
 
 Find out what’s new in Milvus! This page summarizes information about new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.0.0-RC1 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.0.0-RC7
+
+Release date: 2021-10-11
+
+### Compatibility
+
+<table class="version">
+	<thead>
+	<tr>
+		<th>Milvus version</th>
+		<th>Python SDK version</th>
+		<th>Java SDK version</th>
+		<th>Go SDK version</th>
+		<th>Node SDK version</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>2.0.0-RC7</td>
+		<td>2.0.0rc7</td>
+		<td>Coming soon</td>
+		<td>Coming soon</td>
+		<td>1.0.16</td>
+	</tr>
+	</tbody>
+</table>
+
+
+
+Milvus 2.0.0-RC7 is a preview version of Milvus 2.0.0-GA. It supports collection alias, shares `msgstream` on physical channel, and changes the default MinIO and Pulsar dependencies to cluster version. Several resource leaks and deadlocks were fixed. 
+
+It should be noted that Milvus 2.0.0-RC7 is NOT compatible with previous versions of Milvus 2.0.0 because some changes made to storage format are incompatible. 
+
+### Improvements
+
+- [#8215](https://github.com/milvus-io/milvus/pull/8215) Adds max number of retries for `interTask` in query coord.
+
+- [#9459](https://github.com/milvus-io/milvus/pull/9459) Applies collection start position.
+
+- [#8721](https://github.com/milvus-io/milvus/pull/8721) Adds Node ID to Log Name. 
+
+- [#8940](https://github.com/milvus-io/milvus/pull/8940) Adds streaming segments memory to used memory in `checkLoadMemory`.
+
+- [#8542](https://github.com/milvus-io/milvus/pull/8542) Replaces `proto.MarshalTextString` with `proto.Marshal`. 
+
+- [#8770](https://github.com/milvus-io/milvus/pull/8770) Refactors flowgraph and related invocation.
+
+- [#8666](https://github.com/milvus-io/milvus/pull/8666) Changes CMake version.
+
+- [#8653](https://github.com/milvus-io/milvus/pull/8653) Updates `getCompareOpType`.
+
+- [#8697](https://github.com/milvus-io/milvus/pull/8697) [#8682](https://github.com/milvus-io/milvus/pull/8682) [#8657](https://github.com/milvus-io/milvus/pull/8657) Applies collection start position when opening segment.
+
+- [#8608](https://github.com/milvus-io/milvus/pull/8608) Changes segment replica structure.
+
+- [#8565](https://github.com/milvus-io/milvus/pull/8565) Refactors buffer size calculation.  
+
+- [#8262](https://github.com/milvus-io/milvus/pull/8262) Adds `segcore` logger.
+
+- [#8138](https://github.com/milvus-io/milvus/pull/8138) Adds `BufferData` in `insertBufferNode`.
+
+- [#7738](https://github.com/milvus-io/milvus/pull/7738) Implements allocating `msgstream` from pool when creating collections.
+
+- [#8054](https://github.com/milvus-io/milvus/pull/8054) Improves codes in `insertBufferNode`.
+
+- [#7909](https://github.com/milvus-io/milvus/pull/7909) Upgrades `pulsar-client-go` to 0.6.0.
+
+- [#7913](https://github.com/milvus-io/milvus/pull/7913) Moves segcore rows_per_chunk configuration to query_node.yaml.
+
+- [#7792](https://github.com/milvus-io/milvus/pull/7792) Removes `ctx` from `LongTermChecker`.
+
+- [#9269](https://github.com/milvus-io/milvus/pull/9269) Changes `==` to `is` when comparing to None in expression.
+
+- [#8159](https://github.com/milvus-io/milvus/pull/8159) Make `FlushSegments` async.
+
+- [#8278](https://github.com/milvus-io/milvus/pull/8278) Refactor rocksmq close logic and improve codecov.
+
+- [#7797](https://github.com/milvus-io/milvus/pull/7797) Uses definitional type instead of raw type.
+
+### Features
+
+- [#9579](https://github.com/milvus-io/milvus/pull/9579) Uses replica memory size and `cacheSize` in `getSystemInfoMetrics`.
+
+- [#9556](https://github.com/milvus-io/milvus/pull/9556) Adds `ProduceMark` interface to return message ID.
+
+- [#9554](https://github.com/milvus-io/milvus/pull/9554) Supports `LoadPartial` interface for DataKV.
+
+- [#9471](https://github.com/milvus-io/milvus/pull/9471) Supports `DescribeCollection` by collection ID.
+
+- [#9451](https://github.com/milvus-io/milvus/pull/9451) Stores index parameters to descriptor event.
+
+- [#8574](https://github.com/milvus-io/milvus/pull/8574) Adds a `round_decimal` parameter for precision control to search function.
+
+- [#8947](https://github.com/milvus-io/milvus/pull/8947) Rocksmq supports `SubscriptionPositionLatest`.
+
+- [#8919](https://github.com/milvus-io/milvus/pull/8919) Splits blob into several string rows when index file is large.
+
+- [#8914](https://github.com/milvus-io/milvus/pull/8914) Binlog parser tool supports index files.
+
+- [#8514](https://github.com/milvus-io/milvus/pull/8514) Refactors the index file format.
+
+- [#8765](https://github.com/milvus-io/milvus/pull/8765) Adds `cacheSize` to prevent OOM in query node.
+
+- [#8673](https://github.com/milvus-io/milvus/pull/8673) [#8420](https://github.com/milvus-io/milvus/pull/8420) [#8212](https://github.com/milvus-io/milvus/pull/8212) [#8272](https://github.com/milvus-io/milvus/pull/8272) [#8166](https://github.com/milvus-io/milvus/pull/8166) Supports multiple Milvus clusters sharing Pulsar and MinIO. 
+
+- [#8654](https://github.com/milvus-io/milvus/pull/8654) Adds `BroadcastMark` for `Msgstream` returning Message IDs.
+
+- [#8586](https://github.com/milvus-io/milvus/pull/8586) Adds Message ID return value into producers.
+
+- [#8408](https://github.com/milvus-io/milvus/pull/8408) [#8363](https://github.com/milvus-io/milvus/pull/8363) [#8454](https://github.com/milvus-io/milvus/pull/8454) [#8064](https://github.com/milvus-io/milvus/pull/8064) [#8480](https://github.com/milvus-io/milvus/pull/8480) Adds session liveness check.
+
+- [#8264](https://github.com/milvus-io/milvus/pull/8264) Adds description event extras.
+
+- [#8341](https://github.com/milvus-io/milvus/pull/8341) Replaces `MarshalTextString` with `Marshal` in root coord.
+
+- [#8228](https://github.com/milvus-io/milvus/pull/8228) Supports healthz check API.
+
+- [#8276](https://github.com/milvus-io/milvus/pull/8276) Initializes the SIMD type when initializing an index node.
+
+- [#7967](https://github.com/milvus-io/milvus/pull/7967) Adds knowhere.yaml to support knowhere configuration. 
+
+- [#7974](https://github.com/milvus-io/milvus/pull/7974) Supports setting max task number of task queue.
+
+- [#7948](https://github.com/milvus-io/milvus/pull/7948) [#7975](https://github.com/milvus-io/milvus/pull/7975) Adds `suffixSnapshot` to implement SnapshotKV.
+
+- [#7942](https://github.com/milvus-io/milvus/pull/7942) Supports configuring SIMD type.
+
+- [#7814](https://github.com/milvus-io/milvus/pull/7814) Supports bool field filter in search and query expression.
+
+- [#7635](https://github.com/milvus-io/milvus/pull/7635) Supports setting segcore rows_per_chunk via configuration file.
+
+### Bug Fixes
+
+- [#9572](https://github.com/milvus-io/milvus/pull/9572) Rocksdb does not delete the end key after `DeleteRange` is called.
+
+- [#8735](https://github.com/milvus-io/milvus/pull/8735) Acked infomation takes up memory resources.
+
+- [#9454](https://github.com/milvus-io/milvus/pull/9454) Data race in query service.
+
+- [#8850](https://github.com/milvus-io/milvus/pull/8850) SDK raises error with a message about index when dropping collection by alias.
+
+- [#8930](https://github.com/milvus-io/milvus/pull/8930) Flush occasionally gets stuck when `SaveBinlogPath` fails due to instant buffer removal from `insertBuf`.
+
+- [#8868](https://github.com/milvus-io/milvus/pull/8868) Trace log catches the wrong file name and line number.
+
+- [#8844](https://github.com/milvus-io/milvus/pull/8844) `SearchTask` result is nil.
+
+- [#8835](https://github.com/milvus-io/milvus/pull/8835) Root coord crashes because of bug in pulsar-client-go.
+
+- [#8780](https://github.com/milvus-io/milvus/pull/8780) [#8268](https://github.com/milvus-io/milvus/pull/8268) [#7255](https://github.com/milvus-io/milvus/pull/7255) Collection alias-related issues.
+
+- [#8744](https://github.com/milvus-io/milvus/pull/8744) Rocksdb_kv error process.
+
+- [#8752](https://github.com/milvus-io/milvus/pull/8752) Data race in mqconsumer.
+
+- [#8686](https://github.com/milvus-io/milvus/pull/8686) Flush after auto-flush will not finish.
+
+- [#8564](https://github.com/milvus-io/milvus/pull/8564) [#8405](https://github.com/milvus-io/milvus/pull/8405) [#8743](https://github.com/milvus-io/milvus/pull/8743) [#8798](https://github.com/milvus-io/milvus/pull/8798) [#9509](https://github.com/milvus-io/milvus/pull/9509) [#8884](https://github.com/milvus-io/milvus/pull/8884) rocksdb memory leak.
+
+- [#8671](https://github.com/milvus-io/milvus/pull/8671) Objects are not removed in MinIO when dropped.
+
+- [#8050](https://github.com/milvus-io/milvus/pull/8050) [#8545](https://github.com/milvus-io/milvus/pull/8545) [#8567](https://github.com/milvus-io/milvus/pull/8567) [#8582](https://github.com/milvus-io/milvus/pull/8582) [#8562](https://github.com/milvus-io/milvus/pull/8562) tsafe-related issues.
+
+- [#8137](https://github.com/milvus-io/milvus/pull/8137) Time goes backward because TSO does not load last timestamp.
+
+- [#8461](https://github.com/milvus-io/milvus/pull/8461) Potential data race in data coord.
+
+- [#8386](https://github.com/milvus-io/milvus/pull/8386) Incomplete logic when allocating dm channel to data node.
+
+- [#8206](https://github.com/milvus-io/milvus/pull/8206) Incorrect reduce algorithm in proxy search task. 
+
+- [#8120](https://github.com/milvus-io/milvus/pull/8120) Potential data race in root coord.
+
+- [#8068](https://github.com/milvus-io/milvus/pull/8068) Query node crashes when query result is empty and optional `retrieve_ret_` is not initialized.
+
+- [#8060](https://github.com/milvus-io/milvus/pull/8060) Query task panicking.
+
+- [#8091](https://github.com/milvus-io/milvus/pull/8091) Data race in proxy gRPC client.
+
+- [#8078](https://github.com/milvus-io/milvus/pull/8078) Data race in root coord gRPC client.
+
+- [#7730](https://github.com/milvus-io/milvus/pull/7730) Topic and ConsumerGroup remain after `CloseRocksMQ`.
+
+- [#8188](https://github.com/milvus-io/milvus/pull/8188) Logic error in releasing collections.
+
+
+
 ## v2.0.0-RC6
 
 Release date: 2021-09-10
@@ -25,7 +212,7 @@ Release date: 2021-09-10
 	<tbody>
 	<tr>
 		<td>2.0.0-RC6</td>
-		<td>2.0.0rc6</td>
+		<td>2.0.0rc7</td>
 		<td>Coming soon</td>
 		<td>Coming soon</td>
 		<td>1.0.16</td>
@@ -87,7 +274,7 @@ Release date: 2021-08-30
 	<tbody>
 	<tr>
 		<td>2.0.0-RC5</td>
-		<td>2.0.0rc6</td>
+		<td>2.0.0rc7</td>
 		<td>Coming soon</td>
 		<td>Coming soon</td>
 		<td>1.0.16</td>
@@ -175,7 +362,7 @@ Release date: 2021-08-13
 
 | Milvus version | Python SDK version                | Java SDK version | Go SDK version |
 | ------------------ | ------------------------------------- | -------------------- | ------------------ |
-| 2.0.0-RC4          | 2.0.0rc6 | Coming soon          | Coming soon        |
+| 2.0.0-RC4          | 2.0.0rc7 | Coming soon          | Coming soon        |
 
 Milvus 2.0.0-RC4 is a preview version of Milvus 2.0.0. It mainly focuses on fixing stability issues, it also offers functionalities to retrieve vector data from object storage and specify output field by wildcard matching.
 
@@ -300,7 +487,7 @@ Release date: 2021-07-13
 
 | Milvus version | Python SDK version | Java SDK version | Go SDK version |
 | :------------- | :----------------- | :--------------- | :------------- |
-| 2.0.0-RC2 | 2.0.0rc6 | Coming soon            | Coming soon          |
+| 2.0.0-RC2 | 2.0.0rc7 | Coming soon            | Coming soon          |
 
 Milvus 2.0.0-RC2 is a preview version of Milvus 2.0.0. It fixes stability and performance issues and refactors code for node and storage management.
 
@@ -342,7 +529,7 @@ Release date: 2021-06-28
 
 | Milvus version | Python SDK version | Java SDK version | Go SDK version |
 | :------------- | :----------------- | :--------------- | :------------- |
-| 2.0.0-RC1 | 2.0.0rc6 | Coming soon            | Coming soon          |
+| 2.0.0-RC1 | 2.0.0rc7 | Coming soon            | Coming soon          |
 
 
 

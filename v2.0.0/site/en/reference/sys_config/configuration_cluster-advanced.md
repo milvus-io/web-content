@@ -24,7 +24,7 @@ If you are an administrator of a Milvus cluster, you may access the following co
 
 etcd is the metadata engine supporting Milvus' metadata storage and access. 
 
-> You do not need to change this session if you use the default [**milvus-cluster-docker-compose.yml**](https://github.com/milvus-io/milvus/releases/download/v2.0.0-rc6/milvus-cluster-docker-compose.yml) for third-party services.
+> You do not need to change this session if you use the default [**milvus-cluster-docker-compose.yml**](https://github.com/milvus-io/milvus/releases/download/v2.0.0-rc7/milvus-cluster-docker-compose.yml) for third-party services.
 
 <table id="etcd">
 <thead>
@@ -65,7 +65,7 @@ etcd is the metadata engine supporting Milvus' metadata storage and access.
 
 Milvus supports MinIO and Amazon S3 as the storage engine for data persistence of insert log files and index files. Whereas MinIO is the de facto standard for S3 compatibility, you can configure S3 parameters directly under `MinIO` section. You can set these configurations in [**milvus.yaml**](https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml).
 
-> You do not need to change this session if you use the default [**milvus-cluster-docker-compose.yml**](https://github.com/milvus-io/milvus/releases/download/v2.0.0-rc6/milvus-cluster-docker-compose.yml) for third-party services.
+> You do not need to change this session if you use the default [**milvus-cluster-docker-compose.yml**](https://github.com/milvus-io/milvus/releases/download/v2.0.0-rc7/milvus-cluster-docker-compose.yml) for third-party services.
 
 <table id="minio">
 <thead>
@@ -126,7 +126,7 @@ Milvus supports MinIO and Amazon S3 as the storage engine for data persistence o
 
 Pulsar is the underlying engine supporting Milvus' reliable storage and pub/sub of log streams. You can set these configurations in [**milvus.yaml**](https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml).
 
-> You do not need to change this session if you use the default [**milvus-cluster-docker-compose.yml**](https://github.com/milvus-io/milvus/releases/download/v2.0.0-rc6/milvus-cluster-docker-compose.yml) for third-party services.
+> You do not need to change this session if you use the default [**milvus-cluster-docker-compose.yml**](https://github.com/milvus-io/milvus/releases/download/v2.0.0-rc7/milvus-cluster-docker-compose.yml) for third-party services.
 
 <table id="pulsar">
 <thead>

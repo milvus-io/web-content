@@ -23,9 +23,9 @@ You can also build Milvus from source code at [GitHub](https://github.com/milvus
 Run the following command to download **milvus-cluster-docker-compose.yml** and save it as **docker-compose.yml**.
 
 ```
-$ wget https://github.com/milvus-io/milvus/releases/download/v2.0.0-rc6/milvus-cluster-docker-compose.yml -O docker-compose.yml
+$ wget https://github.com/milvus-io/milvus/releases/download/v2.0.0-rc7/milvus-cluster-docker-compose.yml -O docker-compose.yml
 ```
-> You can also click [here](https://github.com/milvus-io/milvus/releases/download/v2.0.0-rc6/milvus-cluster-docker-compose.yml) to download the file.
+> You can also click [here](https://github.com/milvus-io/milvus/releases/download/v2.0.0-rc7/milvus-cluster-docker-compose.yml) to download the file.
 
 <div class="alert note">
 Data is stored in the <b>volumes</b> folder according to the default configuration in <b>milvus-cluster-docker-compose.yml</b>. To change the folder to store data, edit <b>docker-compose.yml</b> or run <code>$ export DOCKER_VOLUME_DIRECTORY=</code>.

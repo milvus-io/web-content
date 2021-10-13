@@ -10,6 +10,7 @@ You can easily upgrade Milvus 2.0 with Helm Chart. This guide uses the example o
 
 <div class="alert note">
 Helm Chart does not support upgrading from Milvus 2.0 standalone to Milvus 2.0 cluster or vice versa.
+Versions prior to v2.0.0-rc7 does not support upgrading to v2.0.0-rc7.
 </div>
 
 ## Upgrade Milvus standalone

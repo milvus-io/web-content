@@ -323,6 +323,10 @@ await milvusClient.dataManager.search({
 </table>
 </details>
 
+<div class="alert warning">
+In current release, data to be load must be under 70% of the total memory resources of all query nodes to reserve memory resources for execution engine.
+</div>
+
 5. Check the returned results:
 
 <div class="multipleCode">
