@@ -7,7 +7,7 @@ group: cluster
 summary: Installation instructions for the cluster version of Milvus.
 ---
 
-# Install Milvus
+# Install Milvus Cluster
 
 This topic describes how to install Milvus cluster with Docker Compose or on Kubernetes.
 
