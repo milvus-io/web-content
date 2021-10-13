@@ -9,9 +9,6 @@ group: cluster
 
 你也可以[从源代码编译 Milvus](https://github.com/milvus-io/milvus#to-start-developing-milvus)。
 
-<div class="alert note">
-Docker Compose 部署方式只用作测试使用，不能用于生产环境。
-</div>
 
 <div class="tab-wrapper"><a href="install_cluster-docker.md" class='active '>使用 Docker Compose 安装</a><a href="install_cluster-helm.md" class=''>使用 Kubernetes 安装</a></div>
 
