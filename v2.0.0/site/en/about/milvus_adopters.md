@@ -18,7 +18,7 @@ Trusted by over 1,000 organizations worldwide, Milvus is used in almost all indu
 | [Getir](https://getir.com/) | Instant grocery | |
 | [Hewlett-Packard (HP)](https://en.wikipedia.org/wiki/Hewlett-Packard)   | 	Information technology          |                                        |
 | [iYUNDONG](http://yundong.ai/)                                                 | Sports        | [Extracting Event Highlights Using iYUNDONG Sports App](https://milvus.io/blog/Extracting-Events-Highlights-Using-iYUNDONG-Sports-App.md)                                          |
-| [Juicedata](https://juicefs.com/aboutus)                                                | Software         |                  |
+| [Juicedata](https://juicefs.com/aboutus)                                                | Software         |[Building a Milvus Cluster Based on JuiceFS](https://milvus.io/blog/building-a-milvus-cluster-based-on-juicefs.md)                  |
 | [Kingsoft](https://en.wikipedia.org/wiki/Kingsoft)                                              | Software         | [Building an AI-Powered Writing Assistant for WPS Office](https://milvus.io/blog/Building-an-AI-Powered-Writing-Assistant-with-WPS-Office.md)                                              |
 | [Line Plus](https://linecorp.com/en/company/info) |  Technology, software| |
 | [Lucidworks](https://en.wikipedia.org/wiki/Lucidworks)                                                 | Software         | [Build Semantic Search at Speed](https://milvus.io/blog/build-semantic-search-at-speed-milvus-lucidworks.md)                                             |
