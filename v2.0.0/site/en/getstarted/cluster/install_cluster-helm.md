@@ -10,40 +10,40 @@ summary: Installation instructions for the cluster version of Milvus.
 
 You can install Milvus cluster with Docker Compose or on Kubernetes.
 
-You can also [build Milvus from source code](https://github.com/milvus-io/milvus#to-start-developing-milvus).
+You can also build Milvus from source code at [Github](https://github.com/milvus-io/milvus#to-start-developing-milvus).
 
 <div class="alert note">
-Installing Milvus with Docker Compose can only be used for testing and cannot be used in production.
+Installing Milvus with Docker Compose is for testing purposes only.
 </div>
 
 <div class="tab-wrapper"><a href="install_cluster-docker.md" class=''>Install with Docker Compose</a><a href="install_cluster-helm.md" class='active '>Install on Kubernetes</a></div>
 
 
-## 1. Start a local Kubernetes cluster:
+## 1. Start a cluster
 ```
 $ minikube start
 ```
 
 ## 2. Start Milvus
 <div class="alert note">
-Helm package manager for Kubernetes can be used to simplify this process.
+Helm, the package manager for K8s, helps you to quickly start Milvus.
 </div>
 
-#### Add the Milvus chart repository:
+#### AAdd a chart repository:
 ```
 $ helm repo add milvus https://milvus-io.github.io/milvus-helm/
 ```
 
-#### Update your Milvus chart to the latest version: 
+#### Update charts locally: 
 ```
 $ helm repo update
 ```
 
-#### Install Milvus Helm chart:
-Provide a release name for identifying your Milvus deployment.
+#### Install the chart:
+Choose a release name for the chart instance.
 
 <div class="alert note">
-This tutorial uses <code> my-release</code> as the release name. To use a different release name, adjust the release name in subsequent commands.
+This tutorial uses <code> my-release</code> as the release name. To use a different release name, replace <code> my-release</code> in the following command.
 </div>
 
 #### Install Milvus cluster:
@@ -54,7 +54,7 @@ $ helm install my-release milvus/milvus --set cluster.enabled=true
 For more details, see <a href="https://artifacthub.io/packages/helm/milvus/milvus">Milvus Helm charts</a>.
 </div>
 
-*If Milvus starts successfully, each Milvus’ pod shows `1/1` under `READY`:*
+*After Milvus starts, the `READY` column displays `1/1` for all pods.*
 ```
 $ kubectl get pods
 NAME                                              READY   STATUS    RESTARTS   AGE
@@ -72,7 +72,7 @@ my-release-minio-68bbbf8459-2qxwv                 1/1     Running   0          3
 ```
 
 ## 3. Connect to Milvus
-In a new terminal, port-forward your Milvus service to your local machine:
+Open a new terminal and run the following command to forward the local port to the port that Milvus uses.
 ```
 $ kubectl port-forward service/my-release-milvus 19530
 Forwarding from 127.0.0.1:19530 -> 19530
@@ -84,26 +84,26 @@ $ helm uninstall my-release
 ```
 
 ## 5. Stop the cluster
-To shut down the minikube virtual machine but preserve all the resources you’ve created, run the following command to stop the cluster:
+Run the following command to stop the cluster and the minikube VM without deleting created resources.
 ```
 $ minikube stop
 ```
 <div class="alert note">
-Run <code>minikube start</code>to restart the cluster:
+Run <code>minikube start</code> to restart the cluster:
 </div>
 
 ## 6. Delete the cluster
-If you will not need to restart the cluster, run the following command to delete the minikube virtual machine as well as the persistent volume and all the created resources:
+Run the following command to delete the cluster, the minikube VM, and all created resources including persistent volumes.
 ```
 minikube delete
 ```
 
 <div class="alert note">
-To retain logs,  copy them from each pod's <code>stderr</code> before deleting the cluster and all its resources. To access a pod's standard error stream, run <code>kubectl logs (podname)</code>.
+Save required logs from the <code>stderr</code> before deleting the cluster and all resources. Run <code>kubectl logs (podname)</code> to get the <code>stderr</code> of the pods.
 
 
 </br>
 
 <div class="alert note">
-If you want to upgrade your Milvus 2.0 version, please refer to <a href="upgrade.md">Upgrade Milvus 2.0</a>.
+See <a href="upgrade.md">Upgrade Milvus Using Helm Chart</a> for more information about upgrading Milvus.
 </div>
