@@ -12,11 +12,11 @@ This topic describes how to install Milvus in an offline environment. You can do
 
 <div class="tab-wrapper"><a href="install_offline-docker.md" class='active '>Install with Docker Compose</a><a href="install_offline-helm.md" class=''>Install on Kubernetes</a></div>
 
-## Download Docker Images
+## Download images
 
-Installation of Milvus may fail when images are not properly loaded from public Docker registries. To install Milvus offline, you need to pull all images and save them into a directory that can be moved to the target host and loaded manually.
+Installation of Milvus might fail due to image loading errors. To install Milvus offline, pull and save all images, transfer them to the target host, and load them manually.
 
-1. Download Milvus **docker-compose.yml**:
+1. Download an installation file:
 
 - For Milvus standalone
 
@@ -31,7 +31,7 @@ wget https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/docke
 ```
 
 
-2. Pull and save the Docker images:
+2. Pull and save images:
 
 ```
 pip3 install -r requirements.txt
@@ -40,11 +40,11 @@ python3 save_image.py --manifest docker-compose.yml
 
 <div class="alert note">
 
-The Docker images will be stored in the <b>images</b> directory.
+The images are stored in the <b>images</b> folder.
 
 </div>
 
-3. Load the Docker images:
+3. Load the images:
 
 ```
 cd images/for image in $(find . -type f -name "*.tar.gz") ; do gunzip -c $image | docker load; done
@@ -52,7 +52,7 @@ cd images/for image in $(find . -type f -name "*.tar.gz") ; do gunzip -c $image 
 
 ## Install Milvus
 
-To install Milvus offline, run:
+To install Milvus offline, run the following command.
 
 ```
 docker-compose -f docker-compose.yml up -d
@@ -60,8 +60,7 @@ docker-compose -f docker-compose.yml up -d
 
 ## Uninstall Milvus
 
-To Uninstall Milvus, run:
-
+To Uninstall Milvus, run the following command.
 ```
 docker-compose -f docker-compose.yml down
 ```
