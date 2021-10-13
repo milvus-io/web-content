@@ -29,7 +29,7 @@ $ minikube start
 Helm, the package manager for K8s, helps you to quickly start Milvus.
 </div>
 
-#### AAdd a chart repository:
+#### Add a chart repository:
 ```
 $ helm repo add milvus https://milvus-io.github.io/milvus-helm/
 ```
