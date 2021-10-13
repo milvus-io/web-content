@@ -22,6 +22,7 @@ Basically anything you can think of to improve our documentation and make it mor
 
 Before you contribute please take a minute to familiarize yourself with basic [Markdown](https://www.markdownguide.org/basic-syntax/) syntax and have a look at our [Code of Conduct](https://github.com/milvus-io/milvus/blob/master/CODE_OF_CONDUCT.md) and the [Google Developer Documentation Style Guide](https://developers.google.com/style/) for some guidance on how to write accessible, consistent and inclusive documentation.
 
+
 ## Get started
 
 If you are just correcting a typo or grammatical error, feel free to go ahead and [create a pull request](https://github.com/milvus-io/milvus-docs/pulls). 
@@ -57,7 +58,8 @@ All documentation is originally written in English and translated into other lan
 We provide documentation for each major version of Milvus. The pages for each version are found in a directory named for the version. For example, docs for Milvus v2.0.0 are in the `v2.0.0` directory, whereas docs for Milvus v1.1.0 are in the `v1.1.0` directory.
 
 
-Within each version directory, each page must be a **.md** file written in Markdown. File names should be lowercase with an underscore between words, and should be brief but descriptive.
+Within each version directory, each page must be an **.md** file written in Markdown. File names should be lowercase with an underscore between words and should be brief but descriptive.
+
 
 Example:
 
@@ -88,7 +90,7 @@ related_key: keyword
 
 #### Templates 
 
-In general there are four types of documentation: 
+In general, there are four types of documentation: 
 
 - [How-to docs](site/template/how-to-doc-template.md)
 - [Conceptual docs](site/template/conceptual-doc-template.md)
@@ -109,7 +111,9 @@ When drafting a document, you should follow these types of definitions with a de
 
 *Variables* are used to store version information to be referenced in code or paths. They are defined in **Variables.json** and can be used in Markdown (**.md**) files, fragments, and templates. 
 
+
 > The defined variables are implemented within the current folder and its subfolders. The **en** and **Zh-CN** folders each contain a Variables.json file.
+
 
 ### Sidebar
 
