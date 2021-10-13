@@ -5,9 +5,9 @@ related_key: Milvus adopters
 summary: Learn about companies that have adopted Milvus in production applications. 
 ---
 # Milvus Adopters
-Milvus is trusted by over 1,000 organizations worldwide and has applications in almost every industry. What follows is a list of Milvus users that have adopted the software in production.
+Trusted by over 1,000 organizations worldwide, Milvus is used in almost all industries. The following table lists companies that have adopted Milvus in production.
 
-| Company                                                 | Industry          | User Story                                             |
+| Company                                                 | Industry          | User story                                             |
 | ------------------------------------------------------------ | ---------------------- | ------------------------------------------------------------ |
 | [ambeRoad](https://amberoad.de/?lang=en) |  Software| |
 | [Beike](https://investors.ke.com/about-us/default.aspx)                                                | Real estate           | [Making With Milvus: AI-Infused Proptech for Personalized Real Estate Search](https://milvus.io/blog/Making-With-Milvus-AI-Infused-Proptech-for-Personalized-Real-Estate-Search.md)                                              |                                             |
