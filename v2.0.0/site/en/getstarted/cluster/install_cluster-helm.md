@@ -51,7 +51,7 @@ This tutorial uses <code> my-release</code> as the release name. To use a differ
 $ helm install my-release milvus/milvus --set cluster.enabled=true
 ```
 <div class="alert note"> 
-For more details, see <a href="https://artifacthub.io/packages/helm/milvus/milvus">Milvus Helm charts</a>.
+See <a href="https://artifacthub.io/packages/helm/milvus/milvus">Milvus Helm Chart</a> for more information.
 </div>
 
 *After Milvus starts, the `READY` column displays `1/1` for all pods.*
