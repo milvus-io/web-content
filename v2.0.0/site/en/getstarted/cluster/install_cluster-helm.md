@@ -12,10 +12,6 @@ You can install Milvus cluster with Docker Compose or on Kubernetes.
 
 You can also build Milvus from source code at [GitHub](https://github.com/milvus-io/milvus#to-start-developing-milvus).
 
-<div class="alert note">
-Installing Milvus with Docker Compose is for testing purposes only.
-</div>
-
 <div class="tab-wrapper"><a href="install_cluster-docker.md" class=''>Install with Docker Compose</a><a href="install_cluster-helm.md" class='active '>Install on Kubernetes</a></div>
 
 
