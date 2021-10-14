@@ -1,7 +1,7 @@
 ---
 id: index_selection.md
 related_key: IVF
-summary: Milvus supports a variety of efficient vector index types including FLAT, IVF_FLAT, IVF_SQ8, IVF_SQ8H, IVF_PQ, RNSG, HNSW, and ANNOY.
+summary: Milvus supports a variety of efficient vector index types including FLAT, IVF_FLAT, IVF_SQ8, IVF_SQ8H, IVF_PQ, HNSW, and ANNOY.
 ---
 
 # Selecting an Index Best Suited for Your Scenario
@@ -58,15 +58,6 @@ The following table classifies the indexes that Milvus supports:
         <li>Very high-speed query</li>
         <li>Limited memory resources</li>
         <li>Accepts substantial compromise in recall rate</li>
-        </ul></td>
-  </tr>
-  <tr>
-    <td><a href="#RNSG">RNSG</a></td>
-    <td>Graph-based index</td>
-    <td><ul>
-        <li>High-speed query</li>
-        <li>Requires a recall rate as high as possible</li>
-        <li>Accpets long indexing time</li>
         </ul></td>
   </tr>
   <tr>
@@ -178,35 +169,6 @@ Index building parameters and search parameters vary with Milvus distribution. S
   | `nprobe`  | Number of units to query | [1, nlist] |
 
 
-### RNSG
-
-<a name="RNSG"></a>
-
-RNSG (Refined Navigating Spreading-out Graph) is a graph-based indexing algorithm. It sets the center position of the whole image as a navigation point, and then uses a specific edge selection strategy to control the out-degree of each point (less than or equal to `out_degree`). Therefore, it can reduce memory usage and quickly locate the target position nearby during searching vectors.
-
-The graph construction process of RNSG is as follows:
-
-1. Find `knng` nearest neighbors for each point.
-2. Iterate at least `search_length` times based on `knng` nearest neighbor nodes to select `candidate_pool_size` possible nearest neighbor nodes.
-3. Construct the out-edge of each point in the selected `candidate_pool_size` nodes according to the edge selection strategy.
-
-The query process is similar to the graph building process. It starts from the navigation point and iterate at least `search_length` times to get the final result. 
-
-- Index building parameters
-
-  | Parameter             | Description                     | Range      |
-  | --------------------- | ------------------------------- | ---------- |
-  | `out_degree`          | Maximum out-degree of the node  | [5, 300]   |
-  | `candidate_pool_size` | Candidate pool size of the node | [50, 1000] |
-  | `search_length`       | Number of query iterations      | [10, 300]  |
-  | `knng`                | Number of nearest neighbors     | [5, 300]   |
-
-- Search parameters
-
-  | Parameter       | Description                | Range     |
-  | --------------- | -------------------------- | --------- |
-  | `search_length` | Number of query iterations | [10, 300] |
-
 
 ### HNSW
 
@@ -272,7 +234,6 @@ See <a href="https://medium.com/unstructured-data-service/how-to-choose-an-index
 
 ## Bibliography
 
-- RNSG: <a href="http://www.vldb.org/pvldb/vol12/p461-fu.pdf">Fast Approximate Nearest Neighbor Search With The Navigating Spreading-out Graph</a>
 - HNSW: <a href="https://arxiv.org/abs/1603.09320">Efficient and robust approximate nearest neighbor search using Hierarchical Navigable Small World graphs</a>
 - ANNOY: <a href="https://erikbern.com/2015/10/01/nearest-neighbors-and-vector-models-part-2-how-to-search-in-high-dimensional-spaces.html">Nearest neighbors and vector models – part 2 – algorithms and data structures</a>
 
