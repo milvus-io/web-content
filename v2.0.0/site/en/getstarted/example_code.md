@@ -8,29 +8,30 @@ summary: Get started with Milvus faster using this Python example code.
 
 This topic describes how to run Milvus using Python.
 
-1. Install PyMilvus and its dependencies:
+## 1. Install PyMilvus
 
 ```Python
 pip3 install pymilvus==2.0.0rc7
 ```
 <div class="alert note">
-Python version 3.6 or higher is required. View <a href="https://wiki.python.org/moin/BeginnersGuide/Download">Python documentation</a> for information about installing the correct version for your system.
+Python 3.6 or later is required. See <a href="https://wiki.python.org/moin/BeginnersGuide/Download">Downloading Python</a> for more information.
 </div>
 
-2. Download sample code **hello_milvus.py**:
+## 2. Download a code sample
 
 ```Python
 $ wget https://raw.githubusercontent.com/milvus-io/pymilvus/v2.0.0rc7/examples/hello_milvus.py
 ```
 
-3. Scan **hello_milvus.py**. This sample code does the following:
+## 3. Scan the sample
+The sample code performs the following steps.
 
-- Imports the PyMilvus package:
+- Imports a PyMilvus package:
 ```Python
 from pymilvus import connections, FieldSchema, CollectionSchema, DataType, Collection
 ```
 
-- Connects to the Milvus server:
+- Connects to a server:
 ```Python
 connections.connect(host='localhost', port='19530')
 ```
@@ -49,7 +50,7 @@ print(f"\nCreate collection...")
 collection = Collection(name="hello_milvus", schema=default_schema)
 ```
 
-- Inserts vectors in the new collection:
+- Inserts vectors in the collection:
 ```Python
 import random
 nb = 3000
@@ -63,14 +64,14 @@ collection.insert(
 )
 ```
 
-- Builds an IVF_FLAT index and loads the collection to memory:
+- Builds indexes and loads the collection:
 ```Python
 default_index = {"index_type": "IVF_FLAT", "params": {"nlist": 128}, "metric_type": "L2"}
 collection.create_index(field_name="float_vector", index_params=default_index)
 collection.load()
 ```
 
-- Conducts a vector similarity search:
+- Performs a vector similarity search:
 ```Python
 topK = 5
 search_params = {"metric_type": "L2", "params": {"nprobe": 10}}
@@ -80,7 +81,7 @@ res = collection.search(
     "count > 100", output_fields=["count", "random_value"]
 )
 ```
-To print the search results by IDs and distances:
+To print the search results by ID and distance, run the following command.
 ```Python
 for raw_result in res:
     for result in raw_result:
@@ -88,12 +89,12 @@ for raw_result in res:
         distance = result.distance
         print(id, distance)
 ```
-Refer to [API Reference](/api-reference/pymilvus/v2.0.0rc7/results.html) for more details.
+See [API Reference](/api-reference/pymilvus/v2.0.0rc7/results.html) for more information.
 
-- Conducts a hybrid search：
+- Performs a hybrid search：
 <div class="alert note">
-    The example below only performs approximate search on entities whose <code>film_id</code> is in [2,4,6,8]
-</div>
+    The following example performs an approximate search on entities with <code>film_id</code> ranged in [2,4,6,8].
+    </div>
 
 ```Python
 from pymilvus import connections, Collection, FieldSchema, CollectionSchema, DataType
@@ -132,12 +133,12 @@ from pymilvus import connections, Collection, FieldSchema, CollectionSchema, Dat
 
 ```
 
-4. Run **hello_milvus.py**:
+## 4. Run the sample
 ```Python
 $ python3 hello_milvus.py
 ```
 
-*The returned results and query latency show as follows:*
+*The returned results and query latency are shown as follows:*
 
 <div class='result-bock'>
 <p>Search...</p>
@@ -158,5 +159,5 @@ $ python3 hello_milvus.py
 <br/>
 
 
-*Congratulations! You have successfully booted Milvus Standalone and run your first vector similarity search.*
+*Congratulations! You have started Milvus standalone and performed your first vector similarity search.*
 
