@@ -8,7 +8,7 @@ summary: Roadmap and enhancement plan of Milvus.
 
 This page provides an overview of new benefits and feature upgrades we hope to provide for users in our upcoming releases, as well as our long-term goals. It is driven by user priorities and may change as their requirement or demand changes.
 
-![Roadmap](../../../assets/roadmap.jpg)
+![Roadmap](../../../assets/new_roadmap.jpg)
 
 
 ## Milvus 2.0 time schedule
