@@ -8,22 +8,22 @@ summary: Learn how to install Milvus offline.
 ---
 # Install Milvus Offline
 
-This page will show you how to install Milvus in offline environment. Relevant files can be downloaded at [GitHub](https://github.com/milvus-io/milvus/tree/master/deployments/offline).
+This topic describes how to install Milvus in an offline environment. You can download relevant files at [GitHub](https://github.com/milvus-io/milvus/tree/master/deployments/offline).
 
 <div class="tab-wrapper"><a href="install_offline-docker.md" class=''>Install with Docker Compose</a><a href="install_offline-helm.md" class='active '>Install on Kubernetes</a></div>
 
-## Download Docker Images
+## 1. Download images
 
-Installation of Milvus may fail when images are not properly loaded from public Docker registries. To install Milvus offline, you need to pull all images and save them into a directory that can be moved to the target host and loaded manually.
+Installation of Milvus might fail due to image loading errors. To install Milvus offline, pull and save all images, transfer them to the target host, and load them manually.
 
-1. Update Helm Repository:
+#### Add a chart repository:
 
 ```
 helm repo add milvus https://milvus-io.github.io/milvus-helm/
 helm repo update
 ```
 
-2. Get Kubernetes manifest of Milvus:
+#### Get a K8s manifest:
 
 - For Milvus standalone
 
@@ -37,7 +37,7 @@ helm template my-release milvus/milvus > milvus_manifest.yaml
 helm template --set cluster.enabled=true my-release milvus/milvus > milvus_manifest.yaml
 ```
 
-3. Pull and save the Docker images:
+#### Pull and save images:
 
 ```
 pip3 install -r requirements.txt
@@ -45,26 +45,26 @@ python3 save_image.py --manifest milvus_manifest.yaml
 ```
 
 <div class="alert note">
-The Docker images will be stored under <b>images</b> directory.
+The images are stored in the <b>images</b> folder.
 </div>
 
-4. Load the Docker images:
+#### Load the images:
 
 ```
 cd images/for image in $(find . -type f -name "*.tar.gz") ; do gunzip -c $image | docker load; done
 ```
 
-## Install Milvus
+## 2. Install Milvus
 
-To install Milvus offline, run:
+To install Milvus offline, run the following command.
 
 ```
 kubectl apply -f milvus_manifest.yaml
 ```
 
-## Uninstall Milvus
+## 3. Uninstall Milvus
 
-To Uninstall Milvus, run:
+To Uninstall Milvus, run the following command.
 
 ```
 kubectl delete -f milvus_manifest.yaml
