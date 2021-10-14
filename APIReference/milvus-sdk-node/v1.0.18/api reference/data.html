@@ -103,6 +103,7 @@
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="data.data-1.html#flush" class="tsd-kind-icon">flush</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="data.data-1.html#flushsync" class="tsd-kind-icon">flush<wbr>Sync</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="data.data-1.html#insert" class="tsd-kind-icon">insert</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="data.data-1.html#query" class="tsd-kind-icon">query</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="data.data-1.html#search" class="tsd-kind-icon">search</a></li>
@@ -124,7 +125,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides Client.constructor</p>
 								<ul>
-									<li>Defined in Data.ts:29</li>
+									<li>Defined in Data.ts:36</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -160,7 +161,7 @@
 					<div class="tsd-signature tsd-kind-icon">collection<wbr>Manager<span class="tsd-signature-symbol">:</span> <a href="collection.collection-1.html" class="tsd-signature-type" data-tsd-kind="Class">Collection</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in Data.ts:29</li>
+							<li>Defined in Data.ts:36</li>
 						</ul>
 					</aside>
 				</section>
@@ -170,7 +171,7 @@
 					<div class="tsd-signature tsd-kind-icon">vector<wbr>Types<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in Data.ts:28</li>
+							<li>Defined in Data.ts:35</li>
 						</ul>
 					</aside>
 				</section>
@@ -187,12 +188,13 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in Data.ts:356</li>
+									<li>Defined in Data.ts:375</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Milvus temporarily buffers the newly inserted vectors in the cache. Call <code>flush()</code> to persist them to the object storage.</p>
+									<p>Milvus temporarily buffers the newly inserted vectors in the cache. Call <code>flush()</code> to persist them to the object storage.
+									It&#39;s async function, so it&#39;s will take some times to excute.</p>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -241,6 +243,70 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="flushsync" class="tsd-anchor"></a>
+					<h3>flush<wbr>Sync</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">flush<wbr>Sync<span class="tsd-signature-symbol">(</span>data<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">FlushReq</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">FlushResult</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Data.ts:402</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>It&#39;s same function as flush. But flushSync is sync function.
+									So you can ensure it&#39;s flushed after function return the result.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>data: <span class="tsd-signature-type">FlushReq</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<table>
+											<thead>
+												<tr>
+													<th align="left">Property</th>
+													<th align="left">Type</th>
+													<th align="left">Description</th>
+												</tr>
+											</thead>
+											<tbody><tr>
+													<td align="left">collection_names</td>
+													<td align="left">String[]</td>
+													<td align="left">Array of collection names</td>
+												</tr>
+										</tbody></table>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">FlushResult</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<table>
+								<thead>
+									<tr>
+										<th align="left">Property</th>
+										<th align="left">Description</th>
+									</tr>
+								</thead>
+								<tbody><tr>
+										<td align="left">status</td>
+										<td align="left">{ error_code: number, reason: string }</td>
+									</tr>
+							</tbody></table>
+							<a href="#example" id="example" style="color: inherit; text-decoration: none;">
+								<h4>Example</h4>
+							</a>
+							<pre><code><span style="color: #000000"> </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">milvusClient</span><span style="color: #000000">(</span><span style="color: #0070C1">MILUVS_ADDRESS</span><span style="color: #000000">).</span><span style="color: #001080">dataManager</span><span style="color: #000000">.</span><span style="color: #795E26">flushSync</span><span style="color: #000000">({</span>
+<span style="color: #000000">    </span><span style="color: #001080">collection_names:</span><span style="color: #000000"> [</span><span style="color: #A31515">&#039;my_collection&#039;</span><span style="color: #000000">],</span>
+<span style="color: #000000"> });</span>
+</code></pre>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="insert" class="tsd-anchor"></a>
 					<h3>insert</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -250,7 +316,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in Data.ts:69</li>
+									<li>Defined in Data.ts:76</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -344,7 +410,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in Data.ts:391</li>
+									<li>Defined in Data.ts:468</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -428,7 +494,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in Data.ts:229</li>
+									<li>Defined in Data.ts:236</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -576,6 +642,9 @@
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="data.data-1.html#flush" class="tsd-kind-icon">flush</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="data.data-1.html#flushsync" class="tsd-kind-icon">flush<wbr>Sync</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="data.data-1.html#insert" class="tsd-kind-icon">insert</a>
