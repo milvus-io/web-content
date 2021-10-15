@@ -4,13 +4,13 @@ related_key: scale Milvus cluster
 summary: Learn how to scale out a Milvus cluster.
 ---
 
-# Scale Guide for Milvus Cluster
+# Scale a Milvus Cluster
 
 A Milvus cluster includes eight microservice components and three third-party dependencies. 
 
 ![Distributed_architecture](../../../assets/distributed_architecture.jpg)
 
-Due to the separation of storage and computation, you can scale out the Milvus cluster easily. There are 4 types of nodes which are stateless:
+Due to the separation of storage and computation, you can scale out a Milvus cluster easily by adding pods for the following stateless nodes.
 
 - Query node
 - Data node
@@ -18,16 +18,16 @@ Due to the separation of storage and computation, you can scale out the Milvus c
 - Proxy
 
 <div class="alert note">
-Milvus does not support scaling out the coordinator components.
+Milvus does not support adding the coordinator components.
 </div>
 
-## Install a Milvus cluster with Helm
+## Deploy a Milvus cluster with Helm
 ```
 helm repo add milvus https://milvus-io.github.io/milvus-helm/
 helm repo update
 helm install my-release milvus/milvus --set cluster.enabled=true
 ```
-If Milvus boots successfully, each Milvus' pod shows `1/1 `under `READY`:
+After Milvus starts, the `READY` column displays `1/1` for all pods.
 
 ```
 kubectl get pods
@@ -45,9 +45,9 @@ my-release-milvus-rootcoord-75585dc57b-cjh87    1/1     Running      0          
 my-release-minio-5564fbbddc-9sbgv               1/1     Running      0          1m
 ```
 
-## Scale out worker nodes in a Milvus cluster
+## Scale out a worker node
 
-### Scale out query node
+### Scale out the query node
 ```
 helm upgrade my-release milvus/milvus --set queryNode.replicas=3 --reuse-values
 NAME                                            READY   STATUS    RESTARTS   AGE
@@ -66,9 +66,10 @@ my-release-milvus-rootcoord-75585dc57b-cjh87    1/1     Running   0          2m
 my-release-minio-5564fbbddc-9sbgv               1/1     Running   0          2m
 ```
 
-You can see three query node pods running.
+If successful, three running pods on the query node are added as shown in the preceding example.
 
-### Scale out data node
+
+### Scale out the data node
 ```
 helm upgrade my-release milvus/milvus --set dataNode.replicas=3 --reuse-values
 NAME                                            READY   STATUS    RESTARTS   AGE
@@ -89,9 +90,9 @@ my-release-milvus-rootcoord-75585dc57b-cjh87    1/1     Running   0          5m
 my-release-minio-5564fbbddc-9sbgv               1/1     Running   0          5m
 ```
 
-You can see three data node pods running.
+If successful, three running pods on the data node are added as shown in the preceding example.
 
-### Scale out index node
+### Scale out the index node
 ```
 helm upgrade my-release milvus/milvus --set indexNode.replicas=3 --reuse-values
 NAME                                            READY   STATUS    RESTARTS   AGE
@@ -114,9 +115,9 @@ my-release-milvus-rootcoord-75585dc57b-cjh87    1/1     Running   0          10m
 my-release-minio-5564fbbddc-9sbgv               1/1     Running   0          10m
 ```
 
-You can see three index node pods running.
+If successful, three running pods on the index node are added as shown in the preceding example.
 
-### Scale out proxy
+### Scale out the proxy
 ```
 helm upgrade my-release milvus/milvus --set proxy.replicas=3 --reuse-values
 NAME                                            READY   STATUS    RESTARTS   AGE
@@ -141,28 +142,28 @@ my-release-milvus-rootcoord-75585dc57b-cjh87    1/1     Running   0          13m
 my-release-minio-5564fbbddc-9sbgv               1/1     Running   0          13m
 ```
 
-You can see proxy pods running.
+If successful, three running pods on the proxy are added as shown in the preceding example.
 
-## Scale in worker nodes in a Milvus cluster
+## Scale in a worker node
 
-### Scale in query node
+### Scale in the query node
 
 ```
 helm upgrade my-release milvus/milvus --set queryNode.replicas=1 --reuse-values
 ```
 
-### Scale in data node
+### Scale in the data node
 
 ```
 helm upgrade my-release milvus/milvus --set dataNode.replicas=1 --reuse-values
 ```
 
-### Scale in index node
+### Scale in the index node
 ```
 helm upgrade my-release milvus/milvus --set indexNode.replicas=1 --reuse-values
 ```
 
-### Scale in proxy
+### Scale in the proxy
 
 ```
 helm upgrade my-release milvus/milvus --set proxy.replicas=1 --reuse-values

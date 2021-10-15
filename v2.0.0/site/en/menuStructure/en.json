@@ -242,7 +242,7 @@
     },
     {
       "id": "deploy_s3.md",
-      "title": "Set Up S3 Storage",
+      "title": "Set Up S3",
       "label1": "admin_guide",
       "label2": "",
       "label3": "",
@@ -250,7 +250,7 @@
     },
     {
       "id": "scaleout.md",
-      "title": "Scale",
+      "title": "Scale a Milvus Cluster",
       "label1": "admin_guide",
       "label2": "",
       "label3": "",
