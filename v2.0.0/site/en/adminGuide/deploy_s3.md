@@ -5,15 +5,15 @@ related_key: S3 storage for Milvus
 summary: Learn how to set up S3 storage for Milvus.
 ---
 
-# Set up S3 Storage for Milvus
+# Set up S3
 
-Milvus supports Amazon Simple Storage Service (S3) for data persistence of insert log files and index files. This topic describes how to set up S3 for Milvus. 
+Milvus supports using Amazon Simple Storage Service (S3) as persistent storage for log and index files. This topic describes how to set up S3 for Milvus. 
 
-## Set Up S3 with Docker Compose
+## Set up S3 with Docker Compose
 
-To set up S3 for Milvus with Docker Compose, you need to change the MinIO/S3 configurations in the **milvus.yaml** under **milvus/configs** directory.
+To set up S3 with Docker Compose, change the configurations of MinIO or S3 in the **milvus.yaml** file on the **milvus/configs** path.
 
-Whereas MinIO is the de facto standard for S3 compatibility, you can configure S3 parameters directly under MinIO section.
+MinIO is compatible with S3. To configure S3, modify the minio dictionary. 
 
 ```yaml
 minio:
@@ -24,19 +24,19 @@ minio:
   useSSL: <true/false>
   bucketName: "<your_bucket_name>"
 ```
-> For more details, see [MinIO/S3 Configurations](configuration_standalone-advanced.md#MinIOS3-Configurations).
+> See [MinIO/S3 Configurations](configuration_standalone-advanced.md#MinIOS3-Configurations) for more information.
 
 <div class="alert note">
-All parameters take effect only after being configured at the startup of Milvus.
+All parameters take effect after Milvus starts.
 </div>
 
-## Set up S3 on Kubernetes
+## Set up S3 on K8s
 
-For Milvus cluster on Kubernetes, you can either configure the parameters in command line while booting up Milvus or in the **values.yml** file under **/charts/milvus** directory of [milvus-helm](https://github.com/milvus-io/milvus-helm) repository before Milvus startup.
+For K8s clusters, you can configure parameters by using the same command to start Milvus. Or you can configure parameters with the **values.yml** file on the **/charts/milvus** path in the [milvus-helm](https://github.com/milvus-io/milvus-helm) repository before you start Milvus.
 
-Below are S3 configurations for Helm Charts installation:
 
-| Parameter             | Description                          | Note                                 |
+ The following table lists the keys to configure S3.
+| Key             | Description                          | Value                                 |
 | --------------------- | ------------------------------------ | ------------------------------------ |
 | externalS3.enabled    | Enable or disable external S3        | <code>true</code>/<code>false</code> |
 | externalS3.host       | Endpoint of the external S3          |                                      |
@@ -46,24 +46,24 @@ Below are S3 configurations for Helm Charts installation:
 | externalS3.bucketName | S3 bucket name                       |                                      |
 | minio.enabled         | Enable or disable MinIO              | <code>true</code>/<code>false</code> |
 
-### Set up S3 using command line at startup
+### Using commands
 
-To set up S3 for Milvus at the startup, run:
+To start Milvus and set up S3, run the following command.
 
 ```shell
 helm install <your_release_name> milvus/milvus --set cluster.enabled=true --set externalS3.enabled=true --set externalS3.host='<your_s3_endpoint>' --set externalS3.port=<your_s3_port> --set externalS3.accessKey=<your_s3_access_key_id> --set externalS3.secretKey=<your_s3_secret_key> --set externalS3.bucketName=<your_bucket_name> --set minio.enabled=false
 ```
 
-### Set up S3 via configuring **values.yaml**
+### Using **values.yaml**
 
-Configure the `minio` section in the **values.yaml** file as follow:
+Configure the `minio` dictionary in the **values.yaml** file as follows.
 
 ```yaml
 minio:
   enabled: false
 ```
 
-Configure the `externalS3` section in the **values.yaml** file as follow:
+Configure the `externalS3` dictionary in the **values.yaml** file as follows.
 
 ```yaml
 externalS3:
@@ -76,7 +76,7 @@ externalS3:
   bucketName: "<your_bucket_name>"
 ```
 
-Having configured the above section, you can run:
+After configuring the preceding dictionaries, run the following command.
 
 ```shell
 helm install <your_release_name> milvus/milvus -f values.yaml
