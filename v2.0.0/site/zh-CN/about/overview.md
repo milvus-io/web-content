@@ -28,7 +28,7 @@ Milvus 提供以下 2 个版本：
 		<td><a href="example_code.md">2.0.0rc7</a></td>
 		<td>即将上线</td>
 		<td>即将上线</td>
-		<td><a href="https://github.com/milvus-io/milvus-sdk-node">1.0.16</a></td>
+		<td><a href="https://github.com/milvus-io/milvus-sdk-node">1.0.18</a></td>
 	</tr>
 	</tbody>
 </table>

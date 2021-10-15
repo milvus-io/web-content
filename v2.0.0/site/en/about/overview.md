@@ -30,7 +30,7 @@ Compatibility:
 		<td><a href="example_code.md">2.0.0rc7</a></td>
 		<td>Coming soon</td>
 		<td>Coming soon</td>
-		<td><a href="https://github.com/milvus-io/milvus-sdk-node">1.0.16</a></td>
+		<td><a href="https://github.com/milvus-io/milvus-sdk-node">1.0.18</a></td>
 	</tr>
 	</tbody>
 </table>

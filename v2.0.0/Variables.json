@@ -1,7 +1,7 @@
 {
   "milvus_release_version": "2.0.0-RC7",
   "milvus_python_sdk_version": "2.0.0rc7",
-  "milvus_node_sdk_version": "1.0.16",
+  "milvus_node_sdk_version": "1.0.18",
   "cpu_milvus_docker_image_version": "2.0.0-rc7",
   "gpu_milvus_docker_image_version": ""
 }

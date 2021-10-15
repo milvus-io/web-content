@@ -26,7 +26,7 @@ id: release_notes.md
 		<td>2.0.0rc7</td>
 		<td>即将上线</td>
 		<td>即将上线</td>
-		<td>1.0.16</td>
+		<td>1.0.18</td>
 	</tr>
 	</tbody>
 </table>
@@ -89,7 +89,7 @@ Milvus 2.0.0-RC6 是 2.0.0 的预览版本。该版本支持创建 collection �
 		<td>2.0.0rc7</td>
 		<td>即将上线</td>
 		<td>即将上线</td>
-		<td>1.0.16</td>
+		<td>1.0.18</td>
 	</tr>
 	</tbody>
 </table>

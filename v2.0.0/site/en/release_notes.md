@@ -28,7 +28,7 @@ Release date: 2021-10-11
 		<td>2.0.0rc7</td>
 		<td>Coming soon</td>
 		<td>Coming soon</td>
-		<td>1.0.16</td>
+		<td>1.0.18</td>
 	</tr>
 	</tbody>
 </table>
@@ -215,7 +215,7 @@ Release date: 2021-09-10
 		<td>2.0.0rc7</td>
 		<td>Coming soon</td>
 		<td>Coming soon</td>
-		<td>1.0.16</td>
+		<td>1.0.18</td>
 	</tr>
 	</tbody>
 </table>
@@ -277,7 +277,7 @@ Release date: 2021-08-30
 		<td>2.0.0rc7</td>
 		<td>Coming soon</td>
 		<td>Coming soon</td>
-		<td>1.0.16</td>
+		<td>1.0.18</td>
 	</tr>
 	</tbody>
 </table>
