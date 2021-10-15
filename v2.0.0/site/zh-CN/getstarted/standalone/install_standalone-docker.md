@@ -12,6 +12,7 @@ group: standalone
 你也可以[从源代码编译 Milvus](https://github.com/milvus-io/milvus#to-start-developing-milvus)。
 
 
+
 <div class="tab-wrapper"><a href="install_standalone-docker.md" class='active '>使用 Docker Compose 安装</a><a href="install_standalone-helm.md" class=''>使用 Kubernetes 安装</a></div>
 
 
