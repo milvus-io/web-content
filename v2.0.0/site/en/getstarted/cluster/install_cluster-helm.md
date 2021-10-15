@@ -15,7 +15,7 @@ You can also build Milvus from source code at [GitHub](https://github.com/milvus
 <div class="tab-wrapper"><a href="install_cluster-docker.md" class=''>Install with Docker Compose</a><a href="install_cluster-helm.md" class='active '>Install on Kubernetes</a></div>
 
 
-## 1. Start a cluster
+## 1. Start a K8s cluster
 ```
 $ minikube start
 ```
@@ -84,7 +84,7 @@ Forwarding from 127.0.0.1:19530 -> 19530
 $ helm uninstall my-release
 ```
 
-## 5. Stop the cluster
+## 5. Stop the K8s cluster
 Run the following command to stop the cluster and the minikube VM without deleting created resources.
 ```
 $ minikube stop
@@ -93,7 +93,7 @@ $ minikube stop
 Run <code>minikube start</code> to restart the cluster:
 </div>
 
-## 6. Delete the cluster
+## 6. Delete the K8s cluster
 Run the following command to delete the cluster, the minikube VM, and all created resources including persistent volumes.
 ```
 minikube delete
