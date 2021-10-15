@@ -4,6 +4,191 @@ id: release_notes.md
 
 # 发版说明
 
+## v2.0.0-RC7
+
+发布时间：2021-10-11
+
+### 版本兼容
+
+<table class="version">
+	<thead>
+	<tr>
+		<th>Milvus 版本</th>
+		<th>Python SDK 版本</th>
+		<th>Java SDK 版本</th>
+		<th>Go SDK 版本</th>
+		<th>Node SDK 版本</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>2.0.0-RC7</td>
+		<td>2.0.0rc7</td>
+		<td>即将上线</td>
+		<td>即将上线</td>
+		<td>1.0.18</td>
+	</tr>
+	</tbody>
+</table>
+
+
+
+Milvus 2.0.0-RC7 是 2.0.0-GA 的预览版本。该版本支持 collection 别名，PChannel 共享 `msgstream`，将默认 MinIO 与 Pulsar 依赖更改为分布式版本，并修复了一系列资源泄露、死锁等问题。
+
+由于对存储格式进行了一些更改，Milvus 2.0.0-RC7 与早先的 RC 版本不兼容。
+
+### **Improvements**
+
+- [#8215](https://github.com/milvus-io/milvus/pull/8215) 为 query coord 中 `interTask` 添加最大重试次数。
+
+- [#9459](https://github.com/milvus-io/milvus/pull/9459) 实现 collection 起始位置。
+
+- [#8721](https://github.com/milvus-io/milvus/pull/8721) 为日志名称添加节点 ID。
+
+- [#8940](https://github.com/milvus-io/milvus/pull/8940) 将流式 segment 内存添加到 `checkLoadMemory` 中的已用内存。
+
+- [#8542](https://github.com/milvus-io/milvus/pull/8542) 使用 `proto.Marshal` 替换 `proto.MarshalTextString`。
+
+- [#8770](https://github.com/milvus-io/milvus/pull/8770) 重构 flowgraph 以及相关调用。
+
+- [#8666](https://github.com/milvus-io/milvus/pull/8666) 更改 CMake 版本。
+
+- [#8653](https://github.com/milvus-io/milvus/pull/8653) 更新 `getCompareOpType`。
+
+- [#8697](https://github.com/milvus-io/milvus/pull/8697) [#8682](https://github.com/milvus-io/milvus/pull/8682) [#8657](https://github.com/milvus-io/milvus/pull/8657) 开启 segment 时实现 collection 起始位置。
+
+- [#8608](https://github.com/milvus-io/milvus/pull/8608) 更改 segment 副本结构。
+
+- [#8565](https://github.com/milvus-io/milvus/pull/8565) 重构缓存大小计算。 
+
+- [#8262](https://github.com/milvus-io/milvus/pull/8262) 添加 `segcore` 日志记录器。
+
+- [#8138](https://github.com/milvus-io/milvus/pull/8138) 在 `insertBufferNode` 中添加 `BufferData`。
+
+- [#7738](https://github.com/milvus-io/milvus/pull/7738) 实现通过 `msgstream` 池为创建 collection 分配 `msgstream`。
+
+- [#8054](https://github.com/milvus-io/milvus/pull/8054) 优化 `insertBufferNode` 代码。
+
+- [#7909](https://github.com/milvus-io/milvus/pull/7909) 升级 `pulsar-client-go` 至 0.6.0 版本。
+
+- [#7913](https://github.com/milvus-io/milvus/pull/7913) 转移 segcore rows_per_chunk 配置项至 query_node.yaml。
+
+- [#7792](https://github.com/milvus-io/milvus/pull/7792) 从 `LongTermChecker` 中删除 `ctx`。
+
+- [#9269](https://github.com/milvus-io/milvus/pull/9269) 优化表达式写法。
+
+- [#8159](https://github.com/milvus-io/milvus/pull/8159) 修改 `FlushSegments` 为异步。
+
+- [#8278](https://github.com/milvus-io/milvus/pull/8278) 重构 rocksmq 关闭逻辑并优化代码覆盖率。
+
+- [#7797](https://github.com/milvus-io/milvus/pull/7797) 标注代码参数类型。
+
+### **Features**
+
+- [#9579](https://github.com/milvus-io/milvus/pull/9579) 在 `getSystemInfoMetrics` 中添加副本缓存大小以及 `cacheSize` 。
+
+- [#9556](https://github.com/milvus-io/milvus/pull/9556) 添加 `ProduceMark` 接口以返回 message ID。
+
+- [#9554](https://github.com/milvus-io/milvus/pull/9554) 添加 `LoadPartial` 接口以支持 DataKV。
+
+- [#9471](https://github.com/milvus-io/milvus/pull/9471) 支持通过 collection ID 调用 `DescribeCollection`。
+
+- [#9451](https://github.com/milvus-io/milvus/pull/9451) 将 index 参数存储至 descriptor event。
+
+- [#8574](https://github.com/milvus-io/milvus/pull/8574) 为搜索功能添加 `round_decimal` 参数以控制精度。
+
+- [#8947](https://github.com/milvus-io/milvus/pull/8947) Rocksmq 支持 `SubscriptionPositionLatest`。
+
+- [#8919](https://github.com/milvus-io/milvus/pull/8919) 索引文件过大时，拆分为多行字符串。
+
+- [#8914](https://github.com/milvus-io/milvus/pull/8914) Binlog 解析器工具支持索引文件。
+
+- [#8514](https://github.com/milvus-io/milvus/pull/8514) 重构索引文件格式。
+
+- [#8765](https://github.com/milvus-io/milvus/pull/8765) 添加 `cacheSize` 以防止 query node 内存资源不足。
+
+- [#8673](https://github.com/milvus-io/milvus/pull/8673) [#8420](https://github.com/milvus-io/milvus/pull/8420) [#8212](https://github.com/milvus-io/milvus/pull/8212) [#8272](https://github.com/milvus-io/milvus/pull/8272) [#8166](https://github.com/milvus-io/milvus/pull/8166) 支持多个 Milvus 集群共享 Pulsar 以及 MinIO。
+
+- [#8654](https://github.com/milvus-io/milvus/pull/8654) 为 `Msgstream` 添加 `BroadcastMark` 以返回 Message ID。
+
+- [#8586](https://github.com/milvus-io/milvus/pull/8586) 将 message ID 返回值添加至 producer 中。
+
+- [#8408](https://github.com/milvus-io/milvus/pull/8408) [#8363](https://github.com/milvus-io/milvus/pull/8363) [#8454](https://github.com/milvus-io/milvus/pull/8454) [#8064](https://github.com/milvus-io/milvus/pull/8064) [#8480](https://github.com/milvus-io/milvus/pull/8480) 添加 session 存活检测。
+
+- [#8264](https://github.com/milvus-io/milvus/pull/8264) 添加 description event 附加内容。
+
+- [#8341](https://github.com/milvus-io/milvus/pull/8341) 在 root coord 中使用 `Marshal` 替代 `MarshalTextString`。
+
+- [#8228](https://github.com/milvus-io/milvus/pull/8228) 支持 healthz 检测 API。
+
+- [#8276](https://github.com/milvus-io/milvus/pull/8276) 初始化 index node 时初始化 SIMD 类型。
+
+- [#7967](https://github.com/milvus-io/milvus/pull/7967) 添加 knowhere.yaml 以支持配置 knowhere。
+
+- [#7974](https://github.com/milvus-io/milvus/pull/7974) 支持设定任务队列最大任务数。
+
+- [#7948](https://github.com/milvus-io/milvus/pull/7948) [#7975](https://github.com/milvus-io/milvus/pull/7975) 添加 `suffixSnapshot` 以实现 SnapshotKV。
+
+- [#7942](https://github.com/milvus-io/milvus/pull/7942) 支持配置 SIMD 类型。 
+
+- [#7814](https://github.com/milvus-io/milvus/pull/7814) 在搜索以及结构化匹配中支持布尔值过滤器。
+
+- [#7635](https://github.com/milvus-io/milvus/pull/7635) 支持通过配置文件设定 segcore rows_per_chunk。
+
+### **Bug Fixes**
+
+- [#9572](https://github.com/milvus-io/milvus/pull/9572) 调用 `DeleteRange` 后 Rocksdb 不删除 end key。
+
+- [#8735](https://github.com/milvus-io/milvus/pull/8735) Acked 信息占用内存资源。
+
+- [#9454](https://github.com/milvus-io/milvus/pull/9454) Query service 发生数据竞争。
+
+- [#8850](https://github.com/milvus-io/milvus/pull/8850) 使用别名删除 collection 时，SDK 报错。
+
+- [#8930](https://github.com/milvus-io/milvus/pull/8930) 由于从 `insertBuf` 中即时删除缓冲，导致当 `SaveBinlogPath` 调用失败时，flush 偶尔会卡住。
+
+- [#8868](https://github.com/milvus-io/milvus/pull/8868) 跟踪日志捕获错误的文件名和行号。
+
+- [#8844](https://github.com/milvus-io/milvus/pull/8844) `SearchTask` 返回结果为空。
+
+- [#8835](https://github.com/milvus-io/milvus/pull/8835) 应 pulsar-client-go 存在 bug 导致 Root coord 崩溃。
+
+- [#8780](https://github.com/milvus-io/milvus/pull/8780) [#8268](https://github.com/milvus-io/milvus/pull/8268) [#7255](https://github.com/milvus-io/milvus/pull/7255) 集合别名相关问题。
+
+- [#8744](https://github.com/milvus-io/milvus/pull/8744) Rocksdb_kv 错误进程。
+
+- [#8752](https://github.com/milvus-io/milvus/pull/8752) mqconsumer 中发生数据竞争。
+
+- [#8686](https://github.com/milvus-io/milvus/pull/8686) Auto-flush 之后 flush 无法完成。
+
+- [#8564](https://github.com/milvus-io/milvus/pull/8564) [#8405](https://github.com/milvus-io/milvus/pull/8405) [#8743](https://github.com/milvus-io/milvus/pull/8743) [#8798](https://github.com/milvus-io/milvus/pull/8798) [#9509](https://github.com/milvus-io/milvus/pull/9509) [#8884](https://github.com/milvus-io/milvus/pull/8884) Rocksdb 内存泄漏。
+
+- [#8671](https://github.com/milvus-io/milvus/pull/8671) 调用删除之后对象没有被从 MinIO 中删除。
+
+- [#8050](https://github.com/milvus-io/milvus/pull/8050) [#8545](https://github.com/milvus-io/milvus/pull/8545) [#8567](https://github.com/milvus-io/milvus/pull/8567) [#8582](https://github.com/milvus-io/milvus/pull/8582) [#8562](https://github.com/milvus-io/milvus/pull/8562) tsafe 相关问题。
+
+- [#8137](https://github.com/milvus-io/milvus/pull/8137) 因为 TSO 没有加载最新时间戳导致时间倒退。
+
+- [#8461](https://github.com/milvus-io/milvus/pull/8461) Data coord 中可能发生数据竞争。
+
+- [#8386](https://github.com/milvus-io/milvus/pull/8386) 为 data node 分配 dm channel 的逻辑不完整。
+
+- [#8206](https://github.com/milvus-io/milvus/pull/8206) Proxy 搜索任务中结果合并算法错误。
+
+- [#8120](https://github.com/milvus-io/milvus/pull/8120) Root coord 中可能发生数据竞争。
+
+- [#8068](https://github.com/milvus-io/milvus/pull/8068) 当查询结果为空且 `retrieve_ret_` 未被初始化时，query node 崩溃。
+
+- [#8060](https://github.com/milvus-io/milvus/pull/8060) 查询任务崩溃。
+
+- [#8091](https://github.com/milvus-io/milvus/pull/8091) Proxy gRPC 客户端发生数据竞争。
+
+- [#8078](https://github.com/milvus-io/milvus/pull/8078) Root coord gRPC 客户端发生数据竞争。
+
+- [#7730](https://github.com/milvus-io/milvus/pull/7730) `CloseRocksMQ` 后 topic 和 ConsumerGroup 仍然存在。
+
+- [#8188](https://github.com/milvus-io/milvus/pull/8188) 释放 collection 逻辑错误。
+
 ## v2.0.0-RC6
 
 发布时间：2021-09-10
