@@ -27,7 +27,7 @@ lscpu | grep -e sse4_2 -e avx -e avx2 -e avx512
 
 ## 检查 Kubernetes 及 Helm 版本 
 - Kubernetes： 1.14.0 或以上。
-- Minikube：详见[minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/)快速开始文档。
+- Minikube：详见 [minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/) 快速开始文档。
 
 <div class="alert note">
 安装 minikube 时会自动安装虚拟机监控器（hypervisor）和命令行工具 Kubectl，帮助你从本地工作站管理 Kubernetes。
