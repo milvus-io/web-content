@@ -5,7 +5,7 @@ related_key: S3 storage for Milvus
 summary: Learn how to set up S3 storage for Milvus.
 ---
 
-# Set up S3
+# Set Up S3
 
 Milvus supports using Amazon Simple Storage Service (S3) as persistent storage for log and index files. This topic describes how to set up S3 for Milvus. 
 
