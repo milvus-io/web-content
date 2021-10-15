@@ -37,7 +37,7 @@ Release date: 2021-10-11
 
 Milvus 2.0.0-RC7 is a preview version of Milvus 2.0.0-GA. It supports collection alias, shares `msgstream` on physical channel, and changes the default MinIO and Pulsar dependencies to cluster version. Several resource leaks and deadlocks were fixed. 
 
-It should be noted that Milvus 2.0.0-RC7 is NOT compatible with previous versions of Milvus 2.0.0 because some changes made to storage format are incompatible. 
+It should be noted that Milvus 2.0.0-RC7 is NOT compatible with previous versions of Milvus 2.0.0 because of some changes made to storage format. 
 
 ### Improvements
 
