@@ -86,7 +86,7 @@ my-release-minio-744dd9586f-drjnr               1/1     Running   0          31m
 ```
 
 <div class="alert note">
-To upgrade Milvus standalone, old pods first will be deleted first. Therefore, the service may be offline for a short period of time.
+To upgrade Milvus standalone, old pods will be deleted first. Therefore, the service may be offline for a short period of time.
 </div>
 
 6. Check the image version and you can see it is **v2.0.0-rc5-hotfix1**.
