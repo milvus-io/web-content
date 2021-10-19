@@ -64,7 +64,7 @@ const milvusClient = new MilvusClient("localhost:19530");
 	</tr>
     <tr>
 		<td><code>address**</code></td>
-		<td>Address of the Milvus server.</td>
+		<td>Address of the Milvus server</td>
 		<td><code>"server_IP:server_port"</code><br/>Mandatory</td>
 	</tr>
 	</tbody>
@@ -136,7 +136,7 @@ milvusClient.collectionManager.createCollection({
 	</tr>
 	<tr>
 		<td>Schema</td>
-		<td>Schema used to create a collection and the fields within. Refer to <a href="field_schema.md">field schema</a> and <a href="collection_schema.md">collection schema</a> for detailed description. </td>
+		<td>Schema used to create a collection and the fields within. Refer to <a href="field_schema.md">field schema</a> and <a href="collection_schema.md">collection schema</a> for detailed description</td>
 		<td>&nbsp;</td>
 	</tr>
 	<tr>
@@ -146,7 +146,7 @@ milvusClient.collectionManager.createCollection({
 	</tr>
   	<tr>
 		<td>using*</td>
-		<td>By specifying the srever alias here, you can decide in which Milvus server you create a collection.</td>
+		<td>By specifying the srever alias here, you can decide in which Milvus server you create a collection</td>
 		<td>Optional</td>
 	</tr>
 	<tr>
@@ -213,7 +213,7 @@ await milvusClient.collectionManager.insert({
 	</tr>
 	<tr>
 		<td>timeout*</td>
-		<td>Timeout (in seconds) to allow for RPC. Clients wait until server responds or error occurs when it is set to None.</td>
+		<td>Timeout (in seconds) to allow for RPC. Clients wait until server responds or error occurs when it is set to None</td>
 		<td>Optional</td>
 	</tr>
 	</tbody>
@@ -277,7 +277,7 @@ await milvusClient.dataManager.search({
 	</tr>
     <tr>
 		<td>vectors</td>
-		<td>Vectors to search with. Lehgth of the data represents the number of query <code>nq</code>.</td>
+		<td>Vectors to search with. Lehgth of the data represents the number of query <code>nq</code></td>
 		<td>Mandatory</td>
 	</tr>
 	<tr>
@@ -311,12 +311,12 @@ await milvusClient.dataManager.search({
 	</tr>
   <tr>
 		<td>timeout*</td>
-		<td>Timeout (in seconds) to allow for RPC. Clients wait until server responds or error occurs when it is set to None.</td>
+		<td>Timeout (in seconds) to allow for RPC. Clients wait until server responds or error occurs when it is set to None</td>
 		<td>Optional</td>
 	</tr>
   <tr>
 		<td>vector_type**</td>
-		<td>Pre-check of binary/float vectors. <code>100</code> for binary vectors and <code>101</code> for float vectors.</td>
+		<td>Pre-check of binary/float vectors. <code>100</code> for binary vectors and <code>101</code> for float vectors</td>
 		<td>Mandatory</td>
 	</tr>
 	</tbody>

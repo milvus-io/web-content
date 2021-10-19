@@ -62,7 +62,7 @@ const milvusClient = new MilvusClient("localhost:19530");
 	</tr>
     <tr>
 		<td><code>address**</code></td>
-		<td>Address of the Milvus server.</td>
+		<td>Address of the Milvus server</td>
 		<td><code>"server_IP:server_port"</code><br/>Mandatory</td>
 	</tr>
 	</tbody>

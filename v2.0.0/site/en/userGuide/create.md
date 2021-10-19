@@ -87,7 +87,7 @@ const params = {
 	</tr>
 	<tr>
 		<td><code>Schema</code></td>
-		<td>Schema used to create a collection and the fields within. Refer to <a href="field_schema.md">field schema</a> and <a href="collection_schema.md">collection schema</a> for detailed description. </td>
+		<td>Schema used to create a collection and the fields within. Refer to <a href="field_schema.md">field schema</a> and <a href="collection_schema.md">collection schema</a> for detailed description</td>
 		<td>&nbsp;</td>
 	</tr>
 	<tr>
@@ -131,7 +131,7 @@ await milvusClient.collectionManager.createCollection(params);
 	<tbody>
 	<tr>
 		<td>using*</td>
-		<td>By specifying the srever alias here, you can decide in which Milvus server you create a collection.</td>
+		<td>By specifying the srever alias here, you can decide in which Milvus server you create a collection</td>
 		<td>Optional</td>
 	</tr>
 	<tr>

@@ -17,9 +17,9 @@ Expr := LogicalExpr | NIL
 
 | Operator     | Description                                | Examples                                   |
 | ---------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| Relational operators | Relational operators use symbols to check for equality, inequality, or relative order between two expressions. Relational operators include `>`, `>=`, `<`, `<=`, `==`, and `!=`. | <ul><li>A > 1</li><li>B >= 2</li><li>C < 3</li><li>D <= 4</li><li>E == 5</li><li>F != 6</li></ul> |
-| Logical operators | Logical operators perform a comparison between two expressions. The supported logical operators are: AND, && OR, ||, and NOT. | <ul><li>A > 3 && A < 4</li><li>NOT (A == 1)</li></ul>        |
-| IN operator  | The IN condition is satisfied when the expression to the left of the keyword IN is included in the list of items. | <ul><li>FloatCol in [1.0, 2, 3.0]</li><li>Int64Col in [1, 2, 3]</li></ul> |
+| Relational operators | Relational operators use symbols to check for equality, inequality, or relative order between two expressions. Relational operators include `>`, `>=`, `<`, `<=`, `==`, and `!=` | <ul><li>A > 1</li><li>B >= 2</li><li>C < 3</li><li>D <= 4</li><li>E == 5</li><li>F != 6</li></ul> |
+| Logical operators | Logical operators perform a comparison between two expressions. The supported logical operators are: AND, && OR, ||, and NOT | <ul><li>A > 3 && A < 4</li><li>NOT (A == 1)</li></ul>        |
+| IN operator  | The IN condition is satisfied when the expression to the left of the keyword IN is included in the list of items | <ul><li>FloatCol in [1.0, 2, 3.0]</li><li>Int64Col in [1, 2, 3]</li></ul> |
 
 ## Relational Operators
 
