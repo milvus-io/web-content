@@ -2,21 +2,19 @@
 id: query.md
 related_key: query vectors
 summary: Learn how to query vectors in Milvus.
-
 ---
 
 # Query
 
 This topic describes how to conduct a query.
 
-In addition to vectors, Milvus supports data types such as boolean, integers, floating-point numbers, and more. 
+In addition to vectors, Milvus supports data types such as boolean, integers, floating-point numbers, and more.
 
-A query is a search on all existing data. In Milvus, you can run a query which will return all the results that meet your specified requirements. Use [boolean expression](boolean.md) to specify the requirements. 
+A query is a search on all existing data. In Milvus, you can run a query which will return all the results that meet your specified requirements. Use [boolean expression](boolean.md) to specify the requirements.
 
 <div class="alert note">
 Parameters marked with <code>*</code> are specific to Python SDK, and those marked with <code>**</code> are specific to Node.js SDK.
 </div>
-
 
 1. Connect to the Milvus server:
 
@@ -270,12 +268,12 @@ await milvusClient.dataManager.query({
 		<td>Name of the collection to load and query</td>
 		<td>Mandatory</td>
 	</tr>
-  <tr>
+	<tr>
 		<td>expr</td>
 		<td>Boolean expression used to filter attribute</td>
 		<td>Find more expression details in <a href="boolean.md">Boolean Expression Rules</a>.<br/>Optional</td>
 	</tr>
-  <tr>
+	<tr>
 		<td>output_fields</td>
 		<td>Name of the field to return (vector field not support in current release)</td>
 		<td>Mandatory</td>
@@ -309,4 +307,3 @@ In current release, data to be load must be under 70% of the total memory resour
 // query result
 [{ film_id: "2" }, { film_id: "4" }, { film_id: "6" }, { film_id: "8" }];
 ```
-

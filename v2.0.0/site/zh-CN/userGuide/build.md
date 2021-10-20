@@ -31,6 +31,36 @@ const index_param = {
 };
 ```
 
+<details>
+  <summary><b>详细资讯</b></summary>
+<table class="params">
+	<thead>
+	<tr>
+		<th>参数</td>
+		<th>说明</th>
+		<th>备注</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td><code>metric_type</code></td>
+		<td>用于评估向量相似性的计算方式</td>
+		<td>可在 <a href="metric.md">距离计算方式</a>中查看其他选项。<br/>必填项</td>
+	</tr>
+	<tr>
+		<td><code>index_type</code></td>
+		<td>用于加速向量搜寻的索引类型</td>
+		<td>可在<a href="index_selection.md">选择索引</a>中查看其他选项。<br/>必填项</td>
+	</tr>
+	<tr>
+		<td><code>params</code></td>
+		<td>建立索引的参数</td>
+		<td>可在<a href="index_selection.md">选择索引</a>中查看不同索引的更多参数详细资讯。<br/>必填项</td>
+	</tr>
+	</tbody>
+</table>
+</details>
+
 2. 创建索引：
 
 <div class="multipleCode">

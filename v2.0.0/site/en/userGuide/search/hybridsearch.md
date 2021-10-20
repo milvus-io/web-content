@@ -2,7 +2,6 @@
 id: hybridsearch.md
 related_key: filter
 summary: Conduct a Hybrid Search with Milvus.
-
 ---
 
 # Conduct a Hybrid Search
@@ -14,7 +13,6 @@ In addition to vectors, Milvus supports data types such as boolean, integers, fl
 <div class="alert note">
 Parameters marked with <code>*</code> are specific to Python SDK, and those marked with <code>**</code> are specific to Node.js SDK.
 </div>
-
 
 A hybrid search is a vector similarity search, during which you can filter the scalar data by specifying a [boolean expression](boolean.md).
 
@@ -277,7 +275,7 @@ await milvusClient.dataManager.search({
 	</tr>
     <tr>
 		<td>vectors</td>
-		<td>Vectors to search with. Lehgth of the data represents the number of query <code>nq</code></td>
+		<td>Vectors to search with. Length of the data represents the number of query <code>nq</code>.</td>
 		<td>Mandatory</td>
 	</tr>
 	<tr>

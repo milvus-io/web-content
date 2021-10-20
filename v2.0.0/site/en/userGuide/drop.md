@@ -49,7 +49,7 @@ await milvusClient.indexManager.dropIndex({
 	</tr>
 	</thead>
 	<tbody>
- 	<tr>
+	<tr>
 		<td><code>collection_name**</code></td>
 		<td>Name of the collection to drop index from</td>
 		<td>Mandatory</td>
@@ -95,7 +95,7 @@ await milvusClient.partitionManager.dropPartition({
 		<td>Name of the partition to drop</td>
 		<td>Mandatory</td>
 	</tr>
-  <tr>
+	<tr>
 		<td>collection_name**</td>
 		<td>Name of the collection to drop partition from</td>
 		<td>Mandatory</td>
@@ -135,7 +135,7 @@ await milvusClient.collectionManager.dropCollection({
 	</tr>
 	</thead>
 	<tbody>
-  <tr>
+	<tr>
 		<td>collection_name**</td>
 		<td>Name of the collection to drop</td>
 		<td>Mandatory</td>

@@ -163,7 +163,7 @@ await milvusClient.dataManager.search({
 	</tr>
     <tr>
 		<td>vectors</td>
-		<td>Vectors to search with. Lehgth of the data represents the number of query <code>nq</code>.</td>
+		<td>Vectors to search with. Length of the data represents the number of query <code>nq</code>.</td>
 		<td>Mandatory</td>
 	</tr>
 	<tr>

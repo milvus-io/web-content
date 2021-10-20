@@ -26,6 +26,41 @@ import { MilvusClient } from "@zilliz/milvus2-sdk-node";
 const milvusClient = new MilvusClient("localhost:19530");
 ```
 
+<details>
+  <summary><b>详细资讯</b></summary>
+<table class="params">
+	<thead>
+	<tr>
+		<th>参数</td>
+		<th>说明</th>
+		<th>备注</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td><code>alias*</code></td>
+		<td>Milvus 服务器的名称</td>
+		<td>数据类型: String<br/>必填项</td>
+	</tr>
+	<tr>
+		<td><code>host*</code></td>
+		<td>Milvus 服务器的 IP</td>
+		<td>必填项</td>
+	</tr>
+	<tr>
+		<td><code>port*</code></td>
+		<td>Milvus 服务器的端口</td>
+		<td>必填项</td>
+	</tr>
+	<tr>
+		<td><code>address**</code></td>
+		<td>Milvus 服务器的地址</td>
+		<td><code>"server_IP:server_port"</code><br/>必填项</td>
+	</tr>
+	</tbody>
+</table>
+</details>
+
 2. 准备 collection 参数并创建 collection：
 
 <div class="multipleCode">
@@ -75,6 +110,51 @@ const params = {
 await milvusClient.collectionManager.createCollection(params);
 ```
 
+<details>
+  <summary><b>详细资讯</b></summary>
+<table class="params">
+	<thead>
+	<tr>
+		<th>参数</td>
+		<th>说明</th>
+		<th>备注</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td><code>collection_name</code></td>
+		<td>要建立的 collection 名称</td>
+		<td>数据类型: String</td>
+	</tr>
+	<tr>
+		<td><code>field_name</code></td>
+		<td>collection 中的字段名称</td>
+		<td>数据类型: String</td>
+	</tr>
+	<tr>
+		<td><code>Schema</code></td>
+		<td>用于建立 collection 及其中字段。详细说明请参考 <a href="field_schema.md">field schema</a> and <a href="collection_schema.md">collection schema</a>。</td>
+		<td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td><code>description</code></td>
+		<td>collection 的说明</td>
+		<td>数据类型: String</td>
+	</tr>
+	<tr>
+		<td>using*</td>
+		<td>在此处标明服务器名称，以指定要建立 collection 的 Milvus 服务器。</td>
+		<td>选填项</td>
+	</tr>
+	<tr>
+		<td>shards_num*</td>
+		<td>指定 collection 要建立的 shards 数目</td>
+		<td>选填项</td>
+	</tr>
+	</tbody>
+</table>
+</details>
+
 3. 随机生成向量数据并插入新建 collection 中：
 
 <div class="multipleCode">
@@ -109,6 +189,36 @@ await milvusClient.dataManager.insert({{
 });
 ```
 
+<details>
+  <summary><b>详细资讯</b></summary>
+<table class="params">
+	<thead>
+	<tr>
+		<th>参数</td>
+		<th>说明</th>
+		<th>备注</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>data</td>
+		<td>要插入 Milvus 的数据</td>
+		<td>必填项</td>
+	</tr>
+	<tr>
+		<td>partition_name</td>
+		<td>要将数据插入的 partition 名称</td>
+		<td>选填项</td>
+	</tr>
+	<tr>
+		<td>timeout*</td>
+		<td>RPC 允许的时限（秒钟数）。设定成空值时，客户端会等待服务器回应或产生错误。</td>
+		<td>选填项</td>
+	</tr>
+	</tbody>
+</table>
+</details>
+
 4. 将 collection 加载到内存中并进行结构化匹配：
 
 <div class="multipleCode">
@@ -136,6 +246,37 @@ await milvusClient.dataManager.query({
   output_fields: ["film_id"],
 });
 ```
+
+<details>
+  <summary><b>详细资讯</b></summary>
+<table class="params">
+	<thead>
+	<tr>
+		<th>参数</td>
+		<th>说明</th>
+		<th>备注</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>collection_name**</td>
+		<td>要载入并查询的 collection 名称</td>
+		<td>必填项</td>
+	</tr>
+	<tr>
+		<td>expr</td>
+		<td>筛选属性用的布林表达式</td>
+		<td>在<a href="boolean.md">布林表达式规则</a>中查询其他表达式资讯。<br/>选填项</td>
+	</tr>
+	<tr>
+		<td>output_fields</td>
+		<td>要传回的 field 名称（向量 field 在目前版本不支持）</td>
+		<td>必填项</td>
+	</tr>
+	</tbody>
+</table>
+</details>
+
 <div class="alert warning">
 在当前版本中，加载数据最大值不能超过所有 query node 内存总量的 70%，从而为执行引擎预留内存资源。
 </div>
