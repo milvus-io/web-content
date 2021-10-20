@@ -62,18 +62,29 @@ See <a href="https://artifacthub.io/packages/helm/milvus/milvus">Milvus Helm Cha
 *After Milvus starts, the `READY` column displays `1/1` for all pods.*
 ```
 $ kubectl get pods
-NAME                                              READY   STATUS    RESTARTS   AGE
-my-release-etcd-0                                 1/1     Running   0          33s
-my-release-milvus-datacoord-574b99bbb7-t898f      1/1     Running   0          33s
-my-release-milvus-datanode-54568fc948-9rwbk       1/1     Running   0          33s
-my-release-milvus-indexcoord-576b44d56-wh6vk      1/1     Running   0          33s
-my-release-milvus-indexnode-67ff57745f-7lml8      1/1     Running   0          33s
-my-release-milvus-proxy-55f98ffbbb-r68qt          1/1     Running   0          33s
-my-release-milvus-pulsar-6475b86778-68r4l         1/1     Running   0          33s
-my-release-milvus-querycoord-74d8895985-m5sdr     1/1     Running   0          33s
-my-release-milvus-querynode-68486d847c-q5fg7      1/1     Running   0          33s
-my-release-milvus-rootcoord-746d8b5b99-2strx      1/1     Running   0          33s
-my-release-minio-68bbbf8459-2qxwv                 1/1     Running   0          33s
+NAME                                             READY  STATUS   RESTARTS  AGE
+my-release-etcd-0                                1/1    Running   0        3m23s
+my-release-etcd-1                                1/1    Running   0        3m23s
+my-release-etcd-2                                1/1    Running   0        3m23s
+my-release-milvus-datacoord-6fd4bd885c-gkzwx     1/1    Running   0        3m23s
+my-release-milvus-datanode-68cb87dcbd-4khpm      1/1    Running   0        3m23s
+my-release-milvus-indexcoord-5bfcf6bdd8-nmh5l    1/1    Running   0        3m23s
+my-release-milvus-indexnode-5c5f7b5bd9-l8hjg     1/1    Running   0        3m24s
+my-release-milvus-proxy-6bd7f5587-ds2xv          1/1    Running   0        3m24s
+my-release-milvus-querycoord-579cd79455-xht5n    1/1    Running   0        3m24s
+my-release-milvus-querynode-5cd8fff495-k6gtg     1/1    Running   0        3m24s
+my-release-milvus-rootcoord-7fb9488465-dmbbj     1/1    Running   0        3m23s
+my-release-minio-0                               1/1    Running   0        3m23s
+my-release-minio-1                               1/1    Running   0        3m23s
+my-release-minio-2                               1/1    Running   0        3m23s
+my-release-minio-3                               1/1    Running   0        3m23s
+my-release-pulsar-autorecovery-86f5dbdf77-lchpc  1/1    Running   0        3m24s
+my-release-pulsar-bookkeeper-0                   1/1    Running   0        3m23s
+my-release-pulsar-bookkeeper-1                   1/1    Running   0        98s
+my-release-pulsar-broker-556ff89d4c-2m29m        1/1    Running   0        3m23s
+my-release-pulsar-proxy-6fbd75db75-nhg4v         1/1    Running   0        3m23s
+my-release-pulsar-zookeeper-0                    1/1    Running   0        3m23s
+my-release-pulsar-zookeeper-metadata-98zbr       0/1   Completed  0        3m24s
 ```
 
 ## 3. Connect to Milvus
