@@ -16,13 +16,14 @@ Versions prior to v2.0.0-rc7 does not support upgrading to v2.0.0-rc7.
 ## Upgrade Milvus standalone
 
 1. Run the following command to check your Milvus version:
+
 ```
 helm list
 NAME              NAMESPACE        REVISION        UPDATED                                     STATUS          CHART               APP VERSION
 my-release        default          1               2021-09-06 14:46:33.920893 +0800 CST        deployed        milvus-2.1.5        2.0.0-rc.4
 ```
 
-You can see the `APP VERSION` is **2.0.0-rc4**. 
+You can see the `APP VERSION` is **2.0.0-rc4**.
 
 2. Check the running pods:
 
@@ -63,7 +64,7 @@ milvus/milvus        2.1.3                2.0.0-rc.3                Milvus is an
 milvus/milvus        2.1.2                2.0.0-rc.2                Milvus is an open-source vector database built ...
 ```
 
-You can see there are several new versions after **v2.0.0-rc4**. 
+You can see there are several new versions after **v2.0.0-rc4**.
 
 5. Upgrade to **v2.0.0-rc5-hotfix1**:
 
@@ -96,7 +97,6 @@ kubectl get pods my-release-milvus-standalone-546649bcdf-xqjd5 -o=jsonpath='{$.s
 milvusdb/milvus:v2.0.0-rc5-hotfix1-20210901-9e0b2cc
 ```
 
-
 ## Upgrade Milvus cluster
 
 1. Run the following command to check your Milvus version:
@@ -107,13 +107,12 @@ NAME              NAMESPACE        REVISION        UPDATED                      
 my-release        default              1               2021-09-06 15:54:26.352545 +0800 CST        deployed        milvus-2.1.5        2.0.0-rc.4
 ```
 
-You can see the `APP VERSION` is **2.0.0-rc4**. 
-
+You can see the `APP VERSION` is **2.0.0-rc4**.
 
 2. Check the running pods:
 
 ```
-kubectl get pods 
+kubectl get pods
 NAME                                            READY   STATUS    RESTARTS   AGE
 my-release-etcd-0                               1/1     Running   0          45s
 my-release-milvus-datacoord-7bb8dff5d4-927mg    1/1     Running   0          45s
@@ -157,7 +156,7 @@ milvus/milvus        2.1.3                2.0.0-rc.3                Milvus is an
 milvus/milvus        2.1.2                2.0.0-rc.2                Milvus is an open-source vector database built ...
 ```
 
-You can see there are several new versions after **2.0.0-rc4**. 
+You can see there are several new versions after **2.0.0-rc4**.
 
 5. Upgrade to **v2.0.0-rc5-hotfix1**:
 
