@@ -22,7 +22,7 @@ pip3 install pymilvus==2.0.0rc7
 Python 3.6 or later is required. See <a href="https://wiki.python.org/moin/BeginnersGuide/Download">Downloading Python</a> for more information.
 </div>
 
-## 2. Download sampel code
+## 2. Download sample code
 
 ```Python
 $ wget https://raw.githubusercontent.com/milvus-io/pymilvus/v2.0.0rc7/examples/hello_milvus.py
