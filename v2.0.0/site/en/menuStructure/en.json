@@ -386,8 +386,32 @@
       "label1": "admin_guide",
       "label2": "tools",
       "label3": "",
-      "order": 0,
-      "outLink": "https://github.com/milvus-io/milvus_cli#overview"
+      "order":0,
+      "isMenu": true
+    },
+    {
+      "id": "cli_overview.md",
+      "title":"Overview",
+      "label1":"admin_guide",
+      "label2":"tools",
+      "label3": "cli",
+      "order":0
+    },
+    {
+      "id": "install_cli.md",
+      "title":"Overview",
+      "label1":"admin_guide",
+      "label2":"tools",
+      "label3": "cli",
+      "order":1
+    },
+    {
+      "id": "cli_commands.md",
+      "title":"Overview",
+      "label1":"admin_guide",
+      "label2":"tools",
+      "label3": "cli",
+      "order":2
     },
     {
       "id": "milvusdm",
