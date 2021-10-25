@@ -45,7 +45,7 @@ kubectl --namespace monitoring port-forward svc/grafana 3000
 
 ## 使用 Milvus Helm Chart 启用 ServiceMonitor
 
-默认情况下，需要使用 Milvus Helm Chart 手动启用 ServiceMonitor。在 Kubernetes 集群中安装 Prometheus Operator 后可通过添加参数 `metrics.serviceMontior.enabled=true` 来启用 ServiceMonitor。
+默认情况下，需要使用 Milvus Helm Chart 手动启用 ServiceMonitor。在 Kubernetes 集群中安装 Prometheus Operator 后可通过添加参数 `metrics.serviceMonitor.enabled=true` 来启用 ServiceMonitor。
 
 ```
 helm install my-release milvus/milvus --set cluster.enabled=true --set metrics.serviceMonitor.enabled=true

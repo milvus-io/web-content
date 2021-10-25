@@ -116,7 +116,7 @@ Milvus 2.0 is a cloud-native vector database with storage and computation separa
  The system breaks down into four levels: 
 - **Access layer**: The access layer is composed of a group of stateless proxies and serves as the front layer of the system and endpoint to users.
 - **Coordinator service**: The coordinator service assigns tasks to the worker nodes and functions as the system's brain.
-- **Worker nodes**: The worker nodes function as arms and legs and are dumb executors that follow instructions from the coordinator service and execute user-triggerd DML/DDL commands.
+- **Worker nodes**: The worker nodes function as arms and legs and are dumb executors that follow instructions from the coordinator service and execute user-triggered DML/DDL commands.
 - **Storage**: Storage is the bone of the system, and is responsible for data persistence. It comprises meta storage, log broker, and object storage. 
 
 

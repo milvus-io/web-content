@@ -135,7 +135,7 @@ Current Milvus release does not support Apple M1 CPU.
 
 #### What data types does Milvus support on the ID field?
 
-In current release, Milvus only support INT64 on ID field. Both INT64 and string will be supported in the fomal release of Milvus 2.0.0.
+In current release, Milvus only support INT64 on ID field. Both INT64 and string will be supported in the formal release of Milvus 2.0.0.
 
 #### Is Milvus scalable?
 
@@ -149,7 +149,7 @@ Yes. When a query request comes, Milvus searches both incremental data and histo
 
 Yes. For queries on the same collection, Milvus concurrently searches the incremental and historical data. However, queries on different collections are conducted in series. Whereas the historical data can be an extremely huge dataset, searches on the historical data are relatively more time-consuming and essentially performed in series. The formal release of Milvus 2.0 will improve this issue.
 
-#### Why does the data in MinIO remain after the corrisponding collection is dropped?
+#### Why does the data in MinIO remain after the corresponding collection is dropped?
 
 Data in MinIO is designed to remain for a certain period of time for the convenience of data rollback.
 

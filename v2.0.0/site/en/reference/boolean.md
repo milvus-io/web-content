@@ -27,7 +27,7 @@ SingleExpr = TermExpr | CompareExpr;
 
 TermExpr = IDENTIFIER "in" ConstantArray;
 
-Constant = INTERGER | FLOAT
+Constant = INTEGER | FLOAT
 
 ConstantExpr = Constant
                | ConstantExpr BinaryArithOp ConstantExpr
@@ -62,7 +62,7 @@ The following table lists the description of each symbol mentioned in the above 
 | (...)      | Grouping.       |
 | NIL   | Empty. The expression can be an empty string.        |
 | INTEGER      | Integers such as 1, 2, 3.       |
-| FLOAT   | Float nubmers such as 1.0, 2.0.        |
+| FLOAT   | Float numbers such as 1.0, 2.0.        |
 | CONST      | Integers or float numbers.       |
 | IDENTIFIER   | Identifier. In Milvus, the IDENTIFIER represents the field name.        |
 | LogicalOp      | A LogicalOp is a logical operator that supports combining more than one relational operation in one comparison. Returned value of a LogicalOp is either TRUE (1) or FALSE (0). There are two types of LogicalOps, including BinaryLogicalOps and UnaryLogicalOps.    |
@@ -73,7 +73,7 @@ The following table lists the description of each symbol mentioned in the above 
 | BinaryArithOp   | A BinaryArithOp, namely a binary operator, performs operations on two operands. In a complex expression with two or more operands, the order of evaluation depends on precedence rules.        |
 | CmpOp   | CmpOp is a relational operator that perform actions on two operands.        |
 | CmpOpRestricted      |  CmpOpRestricted is restricted to "Less than" and "Equal".       |
-| ConstantExpr   | ConstantExpr can be a Constant or a BinaryArithop on two ConstExprs or a UnaryArithOp on a single ConstantExpr. It is defined recursively.        |
+| ConstantExpr   | ConstantExpr can be a Constant or a BinaryArithOp on two ConstExprs or a UnaryArithOp on a single ConstantExpr. It is defined recursively.        |
 | ConstantArray      | ConstantArray is wrapped by square brackets, and ConstantExpr can be repeated in the square brackets. ConstArray must include at least one ConstantExpr.       |
 | TermExpr   | TermExpr is used to check whether the value of an IDENTIFIER appears in a ConstantArray. TermExpr is represented by "in".        |
 | CompareExpr      | A CompareExpr, namely comparison expression can be relational operations on two IDENTIFIERs, or relational operations on one IDENTIFIER and one ConstantExpr, or ternary operation on two ConstantExprs and one IDENTIFIER.       |

@@ -123,7 +123,7 @@ Allow several minutes for the pods to start up. Run `kubectl get services` to ch
 ![Results](../../../../assets/azure_results.png)
 
 <div class="alert note">
-Note that the IP listed under the EXTERNAL-IP column for the load blanacer is the IP for connecting to Milvus. The default Milvus port is 19530. 
+Note that the IP listed under the EXTERNAL-IP column for the load balancer is the IP for connecting to Milvus. The default Milvus port is 19530. 
 </div>
 
 ## Use Azure Blob Storage

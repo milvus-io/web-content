@@ -115,7 +115,7 @@ Allow several minutes for pods to start up, run <code>kubectl get services</code
 
 
 <div class="alert note">
-Note the IP listed under the <code>EXTERNAL-IP</code> column for the load blanacer. This is the IP for connecting to Milvus.
+Note the IP listed under the <code>EXTERNAL-IP</code> column for the load balancer. This is the IP for connecting to Milvus.
 </div>
 
 ## Use Google Cloud Storage
