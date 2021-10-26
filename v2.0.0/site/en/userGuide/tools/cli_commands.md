@@ -230,12 +230,14 @@ delete partition -c (text) -p (text) [-t (float)]
 |-t|--timeout|(Optional) The maximum allowed duration in seconds of an RPC call. Not passing this option indicates that the client keeps waiting until the server responds or an error occurs.|
 |-p|--partition|The name of the partition to be deleted.|
 |--help|n/a|Displays help for using the command.|
+
 ### Example
 ```shell
 milvus_cli > delete partition -c car -p new_partition
 ```
 ## delete index
 Deletes an index and the corresponding index files.
+
 <div class="alert note"> Currently, a collection supports a maximum of one index.</div>
 
 ### Syntax
