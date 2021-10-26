@@ -235,6 +235,7 @@ delete partition -c (text) -p (text) [-t (float)]
 ```shell
 milvus_cli > delete partition -c car -p new_partition
 ```
+
 ## delete index
 Deletes an index and the corresponding index files.
 
@@ -244,12 +245,14 @@ Deletes an index and the corresponding index files.
 ```shell
 delete index -c (text) [-t (float)]
 ```
+
 ### Options
 |Option|Full name|Description
 |:---|:---|:---|
 |-c|--collection|The collection name.|
 |-t|--timeout|(Optional) The maximum allowed duration in seconds of an RPC call. Not passing this option indicates that the client keeps waiting until the server responds or an error occurs.|
 |--help|n/a|Displays help for using the command.|
+
 ### Example
 ```shell
 milvus_cli > delete index -c car
@@ -258,10 +261,10 @@ milvus_cli > delete index -c car
 Deletes entities.
 
 ### Syntax
-
-```
+``` shell
 delete entities -c (text) [-p (text)] [-t (float)]
 ```
+
 ### Options
 |Option|Full name|Description
 |:---|:---|:---|
@@ -269,7 +272,9 @@ delete entities -c (text) [-p (text)] [-t (float)]
 |-p|--partition|(Optional) The name of the partition that the entities belong to.|
 |-t|--timeout|(Optional) The maximum allowed duration in seconds of an RPC call. Not passing this option indicates that the client keeps waiting until the server responds or an error occurs.|
 |--help|n/a|Displays help for using the command.|
+
 ### Example
+
 ```shell
 milvus_cli > delete entities -c car
 
