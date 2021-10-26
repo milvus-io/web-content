@@ -10,7 +10,7 @@ The current version of Milvus CLI is 0.1.7. To find your installed version and s
   - Install [Python 3.8.5](https://www.python.org/downloads/release/python-385/) or later
   - Install [pip](https://pip.pypa.io/en/stable/installation/)
 ## Install 
-You can install Milvus CLI from [PyPI](https://pypi.org/project/milvus-cli/) or source code. We recommend that you install Milvus CLI from [PyPI](https://pypi.org/project/milvus-cli/).
+You can install Milvus CLI from [PyPI](https://pypi.org/project/milvus-cli/) or source code. We recommend that you install Milvus CLI from PyPI.
 
 ### Install from PyPI
 
