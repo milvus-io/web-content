@@ -380,14 +380,38 @@
       "order": 7,
       "isMenu": true
     },
-    {
+{
       "id": "cli",
       "title": "Milvus CLI",
       "label1": "admin_guide",
       "label2": "tools",
       "label3": "",
-      "order": 0,
-      "outLink": "https://github.com/milvus-io/milvus_cli#overview"
+      "order":0,
+      "isMenu": true
+    },
+    {
+      "id": "cli_overview.md",
+      "title":"简介",
+      "label1":"admin_guide",
+      "label2":"tools",
+      "label3": "cli",
+      "order":0
+    },
+    {
+      "id": "install_cli.md",
+      "title":"安装",
+      "label1":"admin_guide",
+      "label2":"tools",
+      "label3": "cli",
+      "order":1
+    },
+    {
+      "id": "cli_commands.md",
+      "title":"命令",
+      "label1":"admin_guide",
+      "label2":"tools",
+      "label3": "cli",
+      "order":2
     },
     {
       "id": "milvusdm",
