@@ -399,7 +399,7 @@
     },
     {
       "id": "install_cli.md",
-      "title":"Install Milvus CLI",
+      "title":"Installation",
       "label1":"admin_guide",
       "label2":"tools",
       "label3": "cli",
@@ -407,7 +407,7 @@
     },
     {
       "id": "cli_commands.md",
-      "title":"Command Reference",
+      "title":"Commands",
       "label1":"admin_guide",
       "label2":"tools",
       "label3": "cli",
@@ -432,7 +432,7 @@
     }, 
     {
       "id": "milvusdm_install.md",
-      "title": "Install MilvusDM",
+      "title": "Installation",
       "label1": "admin_guide",
       "label2": "tools",
       "label3": "milvusdm",
@@ -457,7 +457,7 @@
     },
     {
       "id": "insight_install.md",
-      "title": "Install Milvus Insight",
+      "title": "Installation",
       "label1": "admin_guide",
       "label2": "tools",
       "label3": "milvus_insight",
