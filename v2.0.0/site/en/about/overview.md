@@ -37,7 +37,7 @@ Vector similarity search is the process of comparing a vector to a database to f
 
 ## Why Milvus?
 
-- High performance when conducting vector search a massive datasets.
+- High performance when conducting vector search on massive datasets.
 - A developer-first community that offers multi-language support and toolchain.
 - Cloud scalability and high reliability even in the event of a disruption.
 - Hybrid search achieved by pairing scalar filtering with vector similarity search.
