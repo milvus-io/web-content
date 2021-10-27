@@ -46,7 +46,7 @@ $ helm repo update
 
 #### 安装 Milvus 单机版：
 ```
-$ helm install my-release milvus/milvus
+$ helm install my-release milvus/milvus --set cluster.enabled=false --set etcd.replicaCount=1 --set minio.mode=standalone --set pulsar.enabled=false
 ```
 <div class="alert note">
 详见 <a href="https://artifacthub.io/packages/helm/milvus/milvus">Milvus Helm charts</a>。
