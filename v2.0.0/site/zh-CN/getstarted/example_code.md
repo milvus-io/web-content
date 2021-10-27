@@ -1,6 +1,11 @@
 ---
 id: example_code.md
+label: Python
+order: 0
+group: example
 ---
+
+<div class="tab-wrapper"><a href="example_code.md" class='active '>Python</a><a href="example_code_node.md" class=''>Node.js</a></div>
 
 # 通过 Python 使用 Milvus
 
