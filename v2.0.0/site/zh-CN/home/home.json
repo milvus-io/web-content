@@ -1,120 +1,121 @@
 {
-    "section1": {
-      "order": 0,
-      "title": "Get Started",
-      "items": [
-        {
-          "title": "启动单机版 Milvus",
-          "key": "stand-alone",
-          "btnLabel": "开始安装",
-          "link": "install_standalone-docker.md"
-        },
-        {
-          "title": "启动分布式版 Milvus",
-          "key": "Cluster",
-          "btnLabel": "开始安装",
-          "link": "install_cluster-docker.md"
-        },
-          {
+  "section1": {
+    "order": 0,
+    "title": "Get Started",
+    "items": [{
+        "title": "启动单机版 Milvus",
+        "key": "stand-alone",
+        "btnLabel": "开始安装",
+        "link": "install_standalone-docker.md"
+      },
+      {
+        "title": "启动分布式版 Milvus",
+        "key": "Cluster",
+        "btnLabel": "开始安装",
+        "link": "install_cluster-docker.md"
+      },
+      {
         "title": "Milvus 训练营",
         "key": "bootcamps",
         "btnLabel": "了解更多",
         "link": "/bootcamp"
       }
-      ]
-    },
-    "section2": {
-      "order": -1, 
-      "title": "Milvus 是什么",
-      "desc": [
-          "Milvus 是一款基于云原生架构开发的开源向量数据库，支持查询和管理由机器学习模型或神经网络生成的向量数据。Milvus 在一流的近似最近邻（ANN）搜索库（例如 Faiss、NMSLIB、Annoy）的功能基础上进行扩展，具有按需扩展和高可用等特点。 Milvus 致力于简化非结构化数据管理，并在不同的部署环境中提供一致的用户体验。Milvus 广泛应用于多种 <a href=\"/docs/v2.0.0/overview.md#应用场景\">场景</a>，在全球范围内拥有 1000 多个 <a href=\"/docs/v2.0.0/milvus_adopters.md\">企业用户</a>。",
-          "Milvus 基于 Apache 2 License 协议发布，于 2019 年 10 月正式开源，是 <a href=\"https://lfaidata.foundation\">LF AI & DATA 基金会</a> 的毕业项目。Milvus 的源代码被托管于 <a href=\"https://github.com/milvus-io/milvus\">GitHub</a>。"
-      ]
-    },
-    "section3": {
-      "title": "推荐阅读",
-      "items": [
-        {
-          "label": "Get started",
-          "list": [
-            {
-              "text": "安装前提",
-              "link": "prerequisite-docker.md"
-            },
-            {
-              "text": "启动分布式版 Milvus",
-              "link": "install_cluster-docker.md"
-            },
-            {
-              "text": "Hello Milvus",
-              "link": "example_code.md"
-            },
-            {
-              "text": "PyMilvus API 参考",
-              "link": "/api-reference/pymilvus/{{pymilvus_version}}/install.html"
-            }
-          ]
-        },
-        {
-          "label": "开发与部署",
-          "list": [
-            {
-              "text": "创建 Collection",
-              "link": "create.md"
-            },
-            {
-              "text": "建立索引",
-              "link": "build.md"
-            },
-            {
-              "text": "删除 Collection 或索引",
-              "link": "drop.md"
-            },
-            {
-              "text": "扩缩容",
-              "link": "scaleout.md"
-            },
-            {
-              "text": "监控与报警",
-              "link": "monitor.md"
-            }
-          ]
-        },
-        {
-            "label": "参考文档",
-            "list": [
-              {
-                "text": "系统架构",
-                "link": "architecture_overview.md"
-              },
-              {
-                "text": "向量索引",
-                "link": "index_selection.md"
-              },
-              {
-                "text": "相似度计算方式",
-                "link": "metric.md"
-              }
-            ]
+    ]
+  },
+  "section2": {
+    "order": -1,
+    "title": "Milvus 是什么",
+    "desc": [
+      "Milvus 是一款基于云原生架构开发的开源向量数据库，支持查询和管理由机器学习模型或神经网络生成的向量数据。Milvus 在一流的近似最近邻（ANN）搜索库（例如 Faiss、NMSLIB、Annoy）的功能基础上进行扩展，具有按需扩展和高可用等特点。 Milvus 致力于简化非结构化数据管理，并在不同的部署环境中提供一致的用户体验。Milvus 广泛应用于多种 <a href=\"/docs/v2.0.0/overview.md#应用场景\">场景</a>，在全球范围内拥有 1000 多个 <a href=\"/docs/v2.0.0/milvus_adopters.md\">企业用户</a>。",
+      "Milvus 基于 Apache 2 License 协议发布，于 2019 年 10 月正式开源，是 <a href=\"https://lfaidata.foundation\">LF AI & DATA 基金会</a> 的毕业项目。Milvus 的源代码被托管于 <a href=\"https://github.com/milvus-io/milvus\">GitHub</a>。"
+    ]
+  },
+  "section3": {
+    "title": "推荐阅读",
+    "items": [{
+        "label": "Get started",
+        "list": [{
+            "text": "安装前提",
+            "link": "prerequisite-docker.md"
+          },
+          {
+            "text": "启动分布式版 Milvus",
+            "link": "install_cluster-docker.md"
+          },
+          {
+            "text": "Hello Milvus",
+            "link": "example_code.md"
+          },
+          {
+            "text": "PyMilvus API 参考",
+            "link": "/api-reference/pymilvus/{{pymilvus_version}}/install.html"
           }
-      ]
-    },
-    "section4": {
-      "loadBtn": {
-        "label": "See More Blogs",
-        "isExternal": true,
-        "link": "/blog"
+        ]
       },
-      "title": "博客文章",
-      "items": [
-        {          
-          "time": "June 29, 2021",
-          "link": "https://medium.com/@xiaofan.luan/milvus-2-0-redefining-vector-database-438479a7dd6e",
-          "title": "Milvus 2.0: Redefining Vector Database",
-          "abstract": "Milvus 2.0 is available now. This refactored, cloud-native version powers image/video search, chatbots, and many more AI applications.",
-          "imgSrc": "https://zilliz-cms.s3.us-west-2.amazonaws.com/2_0_cover_bbc582b347.jpg"
-        }
-      ]
-    }
+      {
+        "label": "开发与部署",
+        "list": [{
+            "text": "创建 Collection",
+            "link": "create.md"
+          },
+          {
+            "text": "建立索引",
+            "link": "build.md"
+          },
+          {
+            "text": "删除 Collection 或索引",
+            "link": "drop.md"
+          },
+          {
+            "text": "扩缩容",
+            "link": "scaleout.md"
+          },
+          {
+            "text": "监控与报警",
+            "link": "monitor.md"
+          }
+        ]
+      },
+      {
+        "label": "参考文档",
+        "list": [{
+            "text": "系统架构",
+            "link": "architecture_overview.md"
+          },
+          {
+            "text": "向量索引",
+            "link": "index_selection.md"
+          },
+          {
+            "text": "相似度计算方式",
+            "link": "metric.md"
+          }
+        ]
+      }
+    ]
+  },
+  "section4": {
+    "loadBtn": {
+      "label": "See More Blogs",
+      "isExternal": true,
+      "link": "/blog"
+    },
+    "title": "博客文章",
+    "items": [{
+      "time": "June 29, 2021",
+      "link": "https://medium.com/@xiaofan.luan/milvus-2-0-redefining-vector-database-438479a7dd6e",
+      "title": "Milvus 2.0: Redefining Vector Database",
+      "abstract": "Milvus 2.0 is available now. This refactored, cloud-native version powers image/video search, chatbots, and many more AI applications.",
+      "imgSrc": "https://zilliz-cms.s3.us-west-2.amazonaws.com/2_0_cover_bbc582b347.jpg"
+    }]
+  },
+  "section5": {
+    "title": "What's new in docs",
+    "date": "Oct 2021",
+    "list": [
+      "With the release of Milvus 2.0-RC7, we've made a number of compatibility and performance updates. Check out the [Release Notes](release_notes.md) for details. **Note that RC7 is NOT compatible with previous versions of Milvus 2.0.0 due to changes made to storage format.**",
+      "<a href='/docs/v2.0.0/image_similarity_search.md'>Tutorials</a> are updated with direct links to Jupyter notebook, GitHub repos, and online demos. Read the latest tutorial about how to use Milvus to build a <a href='/blog/dna_sequence_classification.md'>DNA sequence classification model</a>.",
+      "The list of <a href='/docs/v2.0.0/milvus_adopters.md'>Milvus adoptors</a> is further extended with more use cases added to the <a href='https://milvus.io/blog'>blog</a>. <a href='https://github.com/milvus-io/milvus-docs/issues/new?assignees=&labels=&template=--error-report.yaml&title=v2.0.0%20Milvus%20Adopters%20(milvus_adopters.md)%20Doc%20Update'>Let us know</a> if your organization also uses Milvus and would like to be mentioned as well."
+    ]
   }
-  
+}
