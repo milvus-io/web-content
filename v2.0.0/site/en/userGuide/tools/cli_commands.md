@@ -3,7 +3,11 @@ id: cli_commands.md
 summary: Interact with Milvus using commands.
 ---
 # Milvus CLI Command Reference
-Milvus Command-Line Interface (CLI) is a command-line tool that supports database connection, data operations, and import and export of data. <br>This topic introduces all supported commands and the corresponding options. Some examples are also included for your reference.
+
+Milvus Command-Line Interface (CLI) is a command-line tool that supports database connection, data operations, and import and export of data. 
+
+This topic introduces all supported commands and the corresponding options. Some examples are also included for your reference.
+
 ## calc
 Calculates the distance between two vector arrays.
 ### Syntax
