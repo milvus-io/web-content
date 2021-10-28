@@ -4,8 +4,8 @@
       "id": "about",
       "title": "About Milvus",
       "label1": "",
-      "label2": null,
-      "label3": null,
+      "label2": "",
+      "label3": "",
       "order": 0,
       "isMenu": true
     },
@@ -13,32 +13,32 @@
       "id": "overview.md",
       "title": "What is Milvus",
       "label1": "about",
-      "label2": null,
-      "label3": null,
+      "label2": "",
+      "label3": "",
       "order": 0
     },
     {
       "id": "comparison.md",
       "title": "What is New in Milvus 2.0",
       "label1": "about",
-      "label2": null,
-      "label3": null,
+      "label2": "",
+      "label3": "",
       "order": 1
     },
     {
       "id": "milvus_adopters.md",
       "title": "Milvus Adopters",
       "label1": "about",
-      "label2": null,
-      "label3": null,
+      "label2": "",
+      "label3": "",
       "order": 2
     },
     {
       "id": "roadmap.md",
       "title": "Milvus Roadmap",
       "label1": "about",
-      "label2": null,
-      "label3": null,
+      "label2": "",
+      "label3": "",
       "order": 3
     },
     {
@@ -79,8 +79,8 @@
       "id": "getstarted",
       "title": "Get Started",
       "label1": "",
-      "label2": null,
-      "label3": null,
+      "label2": "",
+      "label3": "",
       "order": 1,
       "isMenu": true
     }, 
@@ -88,16 +88,16 @@
       "id": "prerequisite-docker.md",
       "title": "Before you Begin",
       "label1": "getstarted",
-      "label2": null,
-      "label3": null,
+      "label2": "",
+      "label3": "",
       "order": 0
     },  
     {
       "id": "installmilvus",
       "title": "Install Milvus",
       "label1": "getstarted",
-      "label2": null,
-      "label3": null,
+      "label2": "",
+      "label3": "",
       "order": 1,
       "isMenu": true
 
@@ -107,7 +107,7 @@
       "title": "Milvus Standalone",
       "label1": "getstarted",
       "label2": "installmilvus",
-      "label3": null,
+      "label3": "",
       "order": 0
     },
     {
@@ -115,7 +115,7 @@
       "title": "Milvus Cluster",
       "label1": "getstarted",
       "label2": "installmilvus",
-      "label3": null,
+      "label3": "",
       "order": 1
     }, 
     {
@@ -123,7 +123,7 @@
       "title": "Install Offline",
       "label1": "getstarted",
       "label2": "installmilvus",
-      "label3": null,
+      "label3": "",
       "order": 2
     }, 
     {
@@ -227,8 +227,8 @@
       "id": "bootcamp_userguide",
       "title": "Bootcamp",
       "label1": "userguide",
-      "label2": null,
-      "label3": null,
+      "label2": "",
+      "label3": "",
       "order": 6,
       "outLink": "https://milvus.io/bootcamp"
     },
@@ -375,8 +375,8 @@
       "id": "tools",
       "title": "Tools",
       "label1": "admin_guide",
-      "label2": null,
-      "label3": null,
+      "label2": "",
+      "label3": "",
       "order": 7,
       "isMenu": true
     },
@@ -484,8 +484,8 @@
       "id": "architecture",
       "title": "Architecture",
       "label1": "reference",
-      "label2": null,
-      "label3": null,
+      "label2": "",
+      "label3": "",
       "order": 0,
       "isMenu": true
     },
@@ -525,8 +525,8 @@
       "id": "systemconfigurations",
       "title": "System Configurations",
       "label1": "reference",
-      "label2": null,
-      "label3": null,
+      "label2": "",
+      "label3": "",
       "order": 1,
       "isMenu": true
     },
