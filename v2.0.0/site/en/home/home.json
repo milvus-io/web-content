@@ -129,7 +129,7 @@
     "list": [
       "With the release of Milvus 2.0-RC7, we've made a number of compatibility and performance updates. Check out the <a href='release_notes.md'>Release Notes</a> for details. Note that RC7 is <i>not compatible</i> with previous versions of Milvus 2.0.0 due to changes made to storage format.",
       "<a href='/docs/v2.0.0/image_similarity_search.md'>Tutorials</a> are updated with direct links to Jupyter notebook, GitHub repos, and online demos. Read the latest tutorial about how to use Milvus to build a <a href='/blog/dna_sequence_classification.md'>DNA sequence classification model</a>.",
-      "The list of <a href='/docs/v2.0.0/milvus_adopters.md'>Milvus adoptors</a> is further extended with more use cases added to the <a href='https://milvus.io/blog'>blog</a>. <a href='https://github.com/milvus-io/milvus-docs/issues/new?assignees=&labels=&template=--error-report.yaml&title=v2.0.0%20Milvus%20Adopters%20(milvus_adopters.md)%20Doc%20Update'>Let us know</a> if your organization also uses Milvus and would like to be mentioned as well."
+      "The list of <a href='/docs/v2.0.0/milvus_adopters.md'>Milvus adopters</a> is further extended with more use cases added to the <a href='https://milvus.io/blog'>blog</a>. <a href='https://github.com/milvus-io/milvus-docs/issues/new?assignees=&labels=&template=--error-report.yaml&title=v2.0.0%20Milvus%20Adopters%20(milvus_adopters.md)%20Doc%20Update'>Let us know</a> if your organization also uses Milvus and would like to be mentioned as well."
     ]
   }
 }
