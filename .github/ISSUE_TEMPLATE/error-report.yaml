@@ -1,0 +1,39 @@
+name: Error report
+description: Typos, grammatical errors, terminology misuse, ambiguity, etc.
+labels: []
+assignees:
+  
+body:
+- type: markdown
+  attributes:
+    value: |
+      Thanks for taking the time to request a feature for MindsDB! Please fill the form in English!
+      
+- type: checkboxes
+  attributes:
+    label: Is there an existing issue for this?
+    description: Please search to see if an issue related to this feature request already exists.
+    options:
+    - label: I have searched the existing issues
+      required: true
+      
+- type: textarea
+  attributes:
+    label: Where is the error.
+    description: What is the URL/path of the document related to this issue?
+  validations:
+    required: true
+    
+- type: textarea
+  attributes:
+    label: How would you like to improve it.
+  validations:
+    required: false
+    
+- type: textarea
+  attributes:
+    label: Screenshots
+    description: If applicable, add screenshots to help explain your problem.
+  validations:
+    required: false
+    
