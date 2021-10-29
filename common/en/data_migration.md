@@ -14,13 +14,13 @@ This version is <i>incompatible</i> with v0.11.0.
 
 1. Stop the current version of Milvus:
 
-    ```
+    ```console
     docker stop [Your_milvus_container_id]
     ```
 
 2. Delete **/conf**, **/logs,** and **/wal** under **/milvus**: 
 
-    ```
+    ```console
     cd ~/milvus
     sudo rm -rf ./conf
     sudo rm -rf ./logs
@@ -35,7 +35,7 @@ This version is <i>incompatible</i> with v0.11.0.
 
 Create a **conf** directory and download the v0.10.6 configuration file:
 
-```
+```console
 mkdir conf
 cd conf
 wget https://raw.githubusercontent.com/milvus-io/milvus/0.10.6/core/conf/demo/server_config.yaml
@@ -47,13 +47,13 @@ If the download is unsuccessful, you can open the download URL with the web page
 
 ## Step 3: Update the server address of MySQL/SQLite 
 
-```
+```console
 vim ./server_config.yaml
 ```
 
 Ensure that the MySQL/SQLite server address specified in `general.meta_uri` matches the server address specified in `db_config.backend_url`. If you use MySQL to manage metadata, the configuration information appears as follows:
 
-```
+```console
  general:
   timezone:UTC+8
   meta_uri: mysql://root:123456@<MySQL_server_host IP>:3306/milvus
@@ -63,14 +63,14 @@ Ensure that the MySQL/SQLite server address specified in `general.meta_uri` matc
 
 Download and run a Milvus v0.10.6 docker image using the same mapping path settings as in the current version:
 
-```
+```console
 docker pull milvusdb/milvus:0.10.6-cpu-d022221-64ddc2
 docker run -it -d -p 19530:19530 -v ~/milvus/db:/var/lib/milvus/db -v ~/milvus/conf:/var/lib/milvus/conf -v ~/milvus/logs:/var/lib/milvus/logs -v ~/milvus/wal:/var/lib/milvus/wal milvusdb/milvus:0.10.6-cpu-d022221-64ddc2
 ```
 
 ## Step 5: Install the Python SDK corresponding to Milvus v0.10.6
 
-```
+```console
 pip3 install pymilvus==0.4.0
 ```
 
