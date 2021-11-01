@@ -47,7 +47,7 @@ Save the dashboard, and wait for a few minutes to see the alert.
 
 ![Alert_dashboard](../../../../assets/alert_dashboard.png)
 
-Grafana alert query does not support template variables. Therefore, you should add a second query without any template variables in the labels. The second query is  named as "A" by default. You can rename it by clicking on the dropdown.
+Grafana alert query does not support template variables. Therefore, you should add a second query without any template variables in the labels. The second query is named as "A" by default. You can rename it by clicking on the dropdown.
 
 ![Alert_query](../../../../assets/alert_query.png)
 
