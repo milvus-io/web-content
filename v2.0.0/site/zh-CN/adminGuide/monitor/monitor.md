@@ -17,7 +17,7 @@ Prometheus 是一款开源的 Kubernetes 监控工具。
 
 ServiceMonitor 的自定义资源（CRD）支持声明式定义动态服务的监控方式以及通过配置标签选择需要监控的服务。你可以使用 Prometheus Operator 设置监控指标暴露规则。系统将根据设置的规则自动发现新服务，你无需再手动重新设定配置。
 
-![Prometheus架构](../../../assets/prometheus_architecture.png)
+![Prometheus架构](../../../../assets/prometheus_architecture.png)
 
 ## Kube-prometheus
 
@@ -58,40 +58,3 @@ NAME                           AGE
 my-release-milvus              54s
 ```
 
-## 使用 Grafana 展示监控指标
-除了使用 Prometheus 以图形化的方式展示监控指标以外，还可以使用可视化工具 Grafana。Grafana 能够轻松对接 Prometheus。
-
-**下载并导入 Milvus-dashboard.json**
-```Shell
-wget https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/monitor/grafana/milvus-dashboard.json
-```
-![下载并倒入](../../../assets/import_dashboard.png)
-
-**选择 Milvus 实例**
-
-![选择实例](../../../assets/grafana_select.png)
-
-下图为 Milvus 组件面板界面。
-
-![Grafana_panel](../../../assets/grafana_panel.png)
-
-
-### 在 Grafana 中添加报警
-
-如需为 Milvus 组件内存使用情况添加报警，先编辑 `Memory` 面板，新增查询请求并使用指标`process_resident_memory_bytes{app_kubernetes_io_name="milvus", app_kubernetes_io_instance=~"my-release", namespace="default"}`:
-
-![Alert_metric](../../../assets/alert_metric.png)
-
-保存可视化面板设置，报警界面将在几分钟后出现。
-
-![Alert_dashboard](../../../assets/alert_dashboard.png)
-
-<div class="alert note">
-
-1. Grafana 报警查询请求不支持使用模版变量。因此，在新增第二个请求并重命名为 `A` 时，标签中不应该包含任何模版变量。
-
-![Alert_query](../../../assets/alert_query.png)
-
-2. 添加 `notification channel`，并在 `Send to` 一栏中标明相应通知渠道，以接收报警消息。
-
-</div>
