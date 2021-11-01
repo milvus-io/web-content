@@ -4,40 +4,50 @@ label: Install on Kubernetes
 order: 1
 group: offline
 related_key: offline
-summary: Learn how to install Milvus offline.
+summary: Learn how to install Milvus on Kubernetes offline.
 ---
+
 # Install Milvus Offline
 
-This topic describes how to install Milvus in an offline environment. You can download relevant files at [GitHub](https://github.com/milvus-io/milvus/tree/master/deployments/offline).
+This topic describes how to install Milvus in an offline environment. 
+
+Installation of Milvus might fail due to image loading errors. You can install Milvus in an offline environment to avoid such problem.
 
 <div class="tab-wrapper"><a href="install_offline-docker.md" class=''>Install with Docker Compose</a><a href="install_offline-helm.md" class='active '>Install on Kubernetes</a></div>
 
-## 1. Download images
+## Download files and images
 
-Installation of Milvus might fail due to image loading errors. To install Milvus offline, pull and save all images, transfer them to the target host, and load them manually.
+To install Milvus offline, you need to pull and save all images in an online environment first, and then transfer them to the target host and load them manually.
 
-#### Add a chart repository:
+1. Add and update Milvus Helm repository locally.
 
 ```
 helm repo add milvus https://milvus-io.github.io/milvus-helm/
 helm repo update
 ```
 
-#### Get a K8s manifest:
+2. Get a Kubernetes manifest.
 
-- For Milvus standalone
+- For Milvus standalone:
 
 ```
+helm template my-release --set cluster.enabled=true --set etcd.replicaCount=1 --set minio.mode=standalone --set pulsar.enabled=false milvus/milvus > milvus_manifest.yaml
+```
+
+- For Milvus cluster:
+
+```cluster
 helm template my-release milvus/milvus > milvus_manifest.yaml
 ```
 
-- For Milvus cluster
+3. Download requirement and script files.
 
-```cluster
-helm template --set cluster.enabled=true my-release milvus/milvus > milvus_manifest.yaml
+```
+$ wget https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/offline/requirements.txt
+$ wget https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/offline/save_image.py
 ```
 
-#### Pull and save images:
+4. Pull and save images.
 
 ```
 pip3 install -r requirements.txt
@@ -45,28 +55,43 @@ python3 save_image.py --manifest milvus_manifest.yaml
 ```
 
 <div class="alert note">
-The images are stored in the <b>images</b> folder.
+The images are stored in the <code>/images</code> folder.
 </div>
 
-#### Load the images:
+5. Load the images.
 
 ```
 cd images/for image in $(find . -type f -name "*.tar.gz") ; do gunzip -c $image | docker load; done
 ```
 
-## 2. Install Milvus
+## Install Milvus offline
 
-To install Milvus offline, run the following command.
+Having transferred the images to the target host, run the following command to install Milvus offline.
 
 ```
 kubectl apply -f milvus_manifest.yaml
 ```
 
-## 3. Uninstall Milvus
+## Uninstall Milvus
 
-To Uninstall Milvus, run the following command.
+To uninstall Milvus, run the following command.
 
 ```
 kubectl delete -f milvus_manifest.yaml
 ```
 
+## What's next
+
+Having installed Milvus, you can:
+
+- Check [Hello Milvus](example_code.md) to run an example code with different SDKs to see what Milvus can do.
+
+- Learn the basic operations of Milvus:
+  - [Connect to Milvus server](connect.md)
+  - [Conduct a vector search](search.md)
+  - [Conduct a hybrid search](hybridsearch.md)
+
+- [Upgrade Milvus Using Helm Chart](upgrade.md).
+- [Scale your Milvus cluster](scaleout.md).
+- Explore [MilvusDM](migrate_overview.md), an open-source tool designed for importing and exporting data in Milvus.
+- [Monitor Milvus with Prometheus](monitor.md).

@@ -4,34 +4,45 @@ label: Install with Docker Compose
 order: 0
 group: offline
 related_key: offline
-summary: Learn how to install Milvus offline.
+summary: Learn how to install Milvus with Docker Compose offline.
 ---
+
 # Install Milvus Offline
 
-This topic describes how to install Milvus in an offline environment. You can download relevant files at [GitHub](https://github.com/milvus-io/milvus/tree/master/deployments/offline).
+This topic describes how to install Milvus in an offline environment. 
+
+Installation of Milvus might fail due to image loading errors. You can install Milvus in an offline environment to avoid such problem.
 
 <div class="tab-wrapper"><a href="install_offline-docker.md" class='active '>Install with Docker Compose</a><a href="install_offline-helm.md" class=''>Install on Kubernetes</a></div>
 
-## 1. Download images
+## Download files and images
 
-Installation of Milvus might fail due to image loading errors. To install Milvus offline, pull and save all images, transfer them to the target host, and load them manually.
+To install Milvus offline, you need to pull and save all images in an online environment first, and then transfer them to the target host and load them manually.
 
-Download an installation file:
+1. Download an installation file.
 
-- For Milvus standalone
+- For Milvus standalone:
 
-```bash
-wget https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/docker/standalone/docker-compose.yml -O docker-compose.yml
+```
+$ wget https://github.com/milvus-io/milvus/releases/download/v2.0.0-rc7/milvus-standalone-docker-compose.yml -O docker-compose.yml
+
 ```
 
-- For Milvus cluster
+- For Milvus cluster:
 
-```bash
-wget https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/docker/cluster/docker-compose.yml -O docker-compose.yml
+```
+$ wget https://github.com/milvus-io/milvus/releases/download/v2.0.0-rc7/milvus-cluster-docker-compose.yml -O docker-compose.yml
+
 ```
 
+2. Download requirement and script files.
 
-Pull and save images:
+```
+$ wget https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/offline/requirements.txt
+$ wget https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/offline/save_image.py
+```
+
+3. Pull and save images.
 
 ```bash
 pip3 install -r requirements.txt
@@ -39,32 +50,43 @@ python3 save_image.py --manifest docker-compose.yml
 ```
 
 <div class="alert note">
+  The images are stored in the <code>/images</code> folder.
+  </div>
 
-The images are stored in the <b>images</b> folder.
 
-</div>
-
-Load the images:
+4. Load the images.
 
 ```bash
 cd images/for image in $(find . -type f -name "*.tar.gz") ; do gunzip -c $image | docker load; done
 ```
 
-## 2. Install Milvus
+## Install Milvus offline
 
-To install Milvus offline, run the following command.
+Having transferred the images to the target host, run the following command to install Milvus offline.
 
 ```bash
 docker-compose -f docker-compose.yml up -d
 ```
 
-## 3. Uninstall Milvus
+## Uninstall Milvus
 
-To Uninstall Milvus, run the following command.
+To uninstall Milvus, run the following command.
 
 ```bash
 docker-compose -f docker-compose.yml down
 ```
 
+## What's next
 
+Having installed Milvus, you can:
 
+- Check [Hello Milvus](example_code.md) to run an example code with different SDKs to see what Milvus can do.
+
+- Learn the basic operations of Milvus:
+  - [Connect to Milvus server](connect.md)
+  - [Conduct a vector search](search.md)
+  - [Conduct a hybrid search](hybridsearch.md)
+
+- [Scale your Milvus cluster](scaleout.md).
+- Explore [MilvusDM](migrate_overview.md), an open-source tool designed for importing and exporting data in Milvus.
+- [Monitor Milvus with Prometheus](monitor.md).

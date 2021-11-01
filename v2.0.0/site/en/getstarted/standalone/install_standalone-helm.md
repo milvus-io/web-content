@@ -3,12 +3,16 @@ id: install_standalone-helm.md
 label: Install on Kubernetes 
 order: 1
 group: standalone
-summary: Installation instructions for the standalone version of Milvus.
+summary: Learn how to install Milvus stanalone on Kubernetes.
 ---
 
 # Install Milvus Standalone
 
-This topic describes how to install Milvus standalone with Docker Compose or on Kubernetes. We recommend reading [Before you Begin](prerequisite-docker.md) prior to your installation. 
+This topic describes how to install Milvus standalone with Docker Compose or on Kubernetes. 
+
+[Check the requirements for hardware and software](prerequisite-docker.md) prior to your installation. 
+
+If you run into image loading errors while installing, you can [Install Milvus Offline](install_offline-docker.md).
 
 You can also build Milvus from source code at [GitHub](https://github.com/milvus-io/milvus#to-start-developing-milvus).
 
@@ -16,95 +20,124 @@ You can also build Milvus from source code at [GitHub](https://github.com/milvus
 
 <div class="tab-wrapper"><a href="install_standalone-docker.md" class=''>Install with Docker Compose</a><a href="install_standalone-helm.md" class='active '>Install on Kubernetes</a></div>
 
-We recommend using minikube to install Milvus on Kubernetes. Minikube has a dependency on default storageclass when installed (see screenshot below). Installation in other methods requires manual configuration of the storageclass. See [Change the Default Storageclass](https://kubernetes.io/docs/tasks/administer-cluster/change-default-storage-class/) for more information.
+We recommend installing Milvus on Kubernetes with minikube. minikube has a dependency on default storageclass when installed. Check the dependency by running the following command. Other installation methods requires manual configuration of the storageclass. See [Change the Default Storageclass](https://kubernetes.io/docs/tasks/administer-cluster/change-default-storage-class/) for more information.
 
-![Storageclass](../../../../assets/storageclass.png)
+```
+$ kubectl get sc
+```
+```
+NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDINGMODE    ALLOWVOLUMEEXPANSION     AGE
+standard (default)    k8s.io/minikube-hostpath     Delete           Immediate             false                    3m36s
+```
 
-## 1. Start a K8s cluster
+
+## Start a K8s cluster
+
+minikube is a tool that allows you to run Kubernetes locally.
+
 ```
 $ minikube start
 ```
 
-## 2. Start Milvus
-<div class="alert note">
-Helm, the package manager for K8s, helps you to quickly start Milvus.
-</div>
+## Install Helm Chart for Milvus
 
-#### Add a chart repository:
+Helm is a Kubernetes package manager that can help you deploy Milvus quickly.
+
+1. Add Milvus Helm repository.
+
 ```
 $ helm repo add milvus https://milvus-io.github.io/milvus-helm/
 ```
 
-#### Update charts locally: 
+2. Update charts locally.
+
 ```
 $ helm repo update
 ```
 
-#### Install the chart:
-Choose a release name for the chart instance.
+## Configure and start Milvus
 
-<div class="alert note">
-This tutorial uses <code> my-release</code> as the release name. To use a different release name, replace <code> my-release</code> in the following command.
-</div>
+Start Milvus with Helm by specifying the release name, the chart, and parameters you expect to change. This topic uses <code>my-release</code> as the release name. To use a different release name, replace <code>my-release</code> in the command.
 
-#### Install Milvus standalone:
+By running `helm show values milvus/milvus`, you can check the parameters that can be modified directly with Chart. You can configure these parameters by adding `--values` or `--set` in the command for installation. For more information, see [Milvus Standalone System Configurations](configuration_standalone-basic.md).
+
 ```
 $ helm install my-release milvus/milvus --set cluster.enabled=false --set etcd.replicaCount=1 --set minio.mode=standalone --set pulsar.enabled=false
 ```
 
 <div class="alert note">
-
-The default command line installs cluster version of Milvus while installing with Helm. Further setting is needed while installing Milvus standalone.
-For more details, see <a href="https://artifacthub.io/packages/helm/milvus/milvus">Milvus Helm chart</a>.
-
-See <a href="https://artifacthub.io/packages/helm/milvus/milvus">Milvus Helm Chart</a> for more information.
-
+See <a href="https://artifacthub.io/packages/helm/milvus/milvus">Milvus Helm Chart</a> and <a href="https://helm.sh/docs/">Helm</a> for more information.
 </div>
 
+Check the status of the running pods.
 
-*After Milvus starts, the `READY` column displays `1/1` for all pods.*
 ```
 $ kubectl get pods
+```
+
+After Milvus starts, the `READY` column displays `1/1` for all pods.
+
+```
 NAME                                               READY   STATUS      RESTARTS   AGE
 my-release-etcd-0                                  1/1     Running     0          30s
 my-release-milvus-standalone-54c4f88cb9-f84pf      1/1     Running     0          30s
 my-release-minio-5564fbbddc-mz7f5                  1/1     Running     0          30s
 ```
 
-## 3. Connect to Milvus
+## Connect to Milvus
+
 Open a new terminal and run the following command to forward the local port to the port that Milvus uses.
+
 ```
 $ kubectl port-forward service/my-release-milvus 19530
+```
+
+```
 Forwarding from 127.0.0.1:19530 -> 19530
 ```
 
-## 4. Uninstall Milvus
+## Uninstall Milvus
+
+Run the following command to uninstall Milvus.
+
 ```
 $ helm uninstall my-release
 ```
 
-## 5. Stop the K8s cluster
+## Stop the K8s cluster
 
-Run the following command to stop the cluster and the minikube VM without deleting created resources.
+Stop the cluster and the minikube VM without deleting the resources you created.
+
 ```
 $ minikube stop
 ```
 
+Run `minikube start` to restart the cluster.
+
+
+## Delete the K8s cluster
+
+Delete the cluster, the minikube VM, and all resources you created including persistent volumes.
+
+```
+$ minikube delete
+```
+
 <div class="alert note">
-Run <code>minikube start</code> to restart the cluster.
+Run <code>$ kubectl logs `pod_name`</code> to get the <code>stderr</code> log of the pod before deleting the cluster and all resources.
 </div>
 
-## 6. Delete the K8s cluster
+## What's next
 
-Run the following command to delete the cluster, the minikube VM, and all created resources including persistent volumes.
-```
-minikube delete
-```
+Having installed Milvus, you can:
 
-<div class="alert note">
-<ul>
-<li>
-Save required logs from the <code>stderr</code> before deleting the cluster and all resources. Run <code>kubectl logs (podname)</code> to get the <code>stderr</code> of the pods.</li>
-<li>See <a href="upgrade.md">Upgrade Milvus Using Helm Chart</a> for more information about upgrading Milvus.</li></ul>
-</div>
+- Check [Hello Milvus](example_code.md) to run an example code with different SDKs to see what Milvus can do.
 
+- Learn the basic operations of Milvus:
+  - [Connect to Milvus server](connect.md)
+  - [Conduct a vector search](search.md)
+  - [Conduct a hybrid search](hybridsearch.md)
+
+- [Upgrade Milvus Using Helm Chart](upgrade.md).
+- Explore [MilvusDM](migrate_overview.md), an open-source tool designed for importing and exporting data in Milvus.
+- [Monitor Milvus with Prometheus](monitor.md).
