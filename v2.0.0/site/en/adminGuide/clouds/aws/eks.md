@@ -52,7 +52,7 @@ helm upgrade --install --set cluster.enabled=true --set externalS3.enabled=true 
 
 5. Run ```kubectl get svc ``` again to retrieve the IP address of the load balancer and use it as the IP address of the Milvus cluster.
 
-<div class="alert note"> Run <code>kubectl get pods</code> to view the running pods on the cluster.<div>
+<div class="alert note"> Run <code>kubectl get pods</code> to view the running pods on the cluster.</div>
 
 ## Scale the Milvus cluster
 
