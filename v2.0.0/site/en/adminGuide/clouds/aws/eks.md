@@ -1,79 +1,74 @@
 ---
 id: eks.md
-title: Deploy Milvus on Amazon EKS with Terraform
-related_key: Deploy Milvus on EKS
-summary: Learn how to deploy Milvus on EKS.
+title: Deploy a Milvus Cluster on EKS
+related_key: cluster
+summary: Learn how to deploy a Milvus cluster on EKS
 ---
 
-# Deploy Milvus on Amazon EKS with Terraform
+# Deploy a Milvus Cluster on EKS
 
-This guide introduces how to run Milvus on an AWS Elastic Kubernetes service (EKS) cluster using Terraform. Before getting started, we recommend you to get familiar with AWS account management. Please ensure you have access to all the required permissions to run EKS, manage networks and security groups, and spin up instances and volumes.  
+This topic describes how to deploy a Milvus cluster on [Amazon EKS](https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html). 
 
-## Required Software
+<div class="alert note">This topic assumes that you have a basic understanding of AWS access management. If you're not familiar with it, see <a href=https://docs.aws.amazon.com/iam/?id=docs_gateway>AWS Identity and Access Management Documentation</a>.</div>
+
+## Prerequisites
+
+### Software requirements
 
 - [Terraform](https://learn.hashicorp.com/tutorials/terraform/install-cli)
 - [Helm](https://helm.sh/docs/intro/install/)
-- [Kubectl](https://kubernetes.io/docs/tasks/tools/)
-- [AWS CLI v2](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html)
+- [kubectl](https://kubernetes.io/docs/tasks/tools/)
+- [AWS CLI version 2](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html)
 
-## AWS Requirements 
+### Cloud security
 
-- [Access to EKS, EC2, S3](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html)
-- [Security Key Pair](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html)
-- [Access Key](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html)
+- Access to EKS, EC2, and S3
+- Access key ID
+- Security access key
 
-## Launch the EKS Cluster
+## Deploy a Milvus cluster
 
-1. Edit the Terraform variables to match your working environment.
+You can download template configuration files at [Google Drive](https://drive.google.com/file/d/1jLQV0YkseOVj5X0exj17x9dWQjLCP7-1/view).
 
-The variables that need to be edited are found in the **variables.tf** file and contain information such as the AWS key, your IP address, where to run the cluster, and the cluster parameters.
+1. Provision a Milvus cluster. See [Provision a Milvus cluster](https://milvus.io/docs/v2.0.0/aws.md#provision-a-milvus-cluster) for more information.
 
-2. With the parameters setup, you can start creating the resources. 
+2. After a Milvus cluster is provisioned, run the following command with a region and name for the cluster.
 
-Begin by running a command line in the Terraform files directory. Run `terraform init` and `terraform apply`. Type yes to the confirmation prompt. 
+   ```shell
+   aws eks --region ${aws-region} update-kubeconfig --name ${cluster-name}
+   ```
+3. Create a kubeconfig file and run ```kubectl get svc```.  If successful, a cluster appears in the output.
 
-3. When the cluster is created using Terraform, run the following command in the same command line with `${aws-region}` as the region of the cluster and  `${cluster-name}` as the name assigned to the cluster. 
+   ```shell
+   NAME          TYPE      CLUSTER-IP    EXTERNAL-IP                                PORT(S)             AGE
+   kubernetes       ClusterIP   172.20.0.1    <none>                                  443/TCP             106m
+   ```
 
-```
-terraform_eks % aws eks --region ${aws-region} update-kubeconfig --name ${cluster-name}
-```
+4. Run the following command to start the Milvus cluster that you have provisioned. The access key and an S3 bucket are required to use S3 as storage.
 
-4. Create a kubeconfig to allow kubectl to interact with the EKS cluster. To check if this command is working, run `kubectl get svc` and check if there is a cluster in the output. 
-
-```bash
-NAME          TYPE      CLUSTER-IP    EXTERNAL-IP                                PORT(S)             AGE
-kubernetes       ClusterIP   172.20.0.1    <none>                                  443/TCP             106m
-```
-
-5. Deploy the Helm chart. To use S3 for storage, you need an AWS access key and an existing bucket for the data.
-
-```Bash
+```shell
 helm upgrade --install --set cluster.enabled=true --set externalS3.enabled=true --set externalS3.host='s3.us-east-2.amazonaws.com' --set externalS3.port=80 --set externalS3.accessKey=${access-key} --set externalS3.secretKey=${secret-key} --set externalS3.bucketName=${bucket-name} --set minio.enabled=False --set service.type=LoadBalancer milvus milvus/milvus
 ```
 
+5. Run ```kubectl get svc ``` again to retrieve the IP address of the load balancer and use it as the IP address of the Milvus cluster.
 
-6. Run `kubectl get svc` again to find the external address of the load balancer and use that as the Milvus address. 
+<div class="alert note"> Run <code>kubectl get pods</code> to view the running pods on the cluster.<div>
 
-<div class="alert note">
-To view what pods are currently running in the cluster, run <code>kubectl get pods</code>.
-</div>
+## Scale the Milvus cluster
 
-## Scaling
+Currently, a Milvus cluster can only be scaled manually. Run the following command to modify the numbers of node instances with different types.
 
-Milvus Kubernetes pods can only be scaled manually at this time. You can update the counts of each type of worker node by changing the values in this script. 
+<div class ="alert note">See <a href="https://milvus.io/docs/v2.0.0/four_layers.md#StorageComputing-Disaggregation">Storage/Computing Disaggregation</a> for more information about the data node, index node, query node, and proxy.
 
-<div class="alert note">
-Data nodes are responsible for the insert process, index nodes for indexing, query nodes for searches or queries, and proxy nodes for client connections. 
-</div>
-
-```bash
+```shell
 helm upgrade --install --set cluster.enabled=true --set dataNode.replicas=1 --set indexNode.replicas=1 --set queryNode.replicas=1 --set proxy.replicas=1 --set externalS3.enabled=true --set externalS3.host='s3.us-east-2.amazonaws.com' --set externalS3.port=80 --set externalS3.accessKey=${access-key} --set externalS3.secretKey=${secret-key} --set externalS3.bucketName=${bucket-name} --set minio.enabled=False --set service.type=LoadBalancer milvus milvus/milvus
 ```
 
-Once the script is run, you can call `kubectl get pods` to view the new nodes.
+After running the preceding command, you can run ```kubectl get pods``` to view the newly created node instances.
 
-## Resources
+## What's next
 
-
-Files for this instruction are available at https://drive.google.com/file/d/1B5VKa5NqnkvBL1ynJySkQtwzM_f1-MwP/view?usp=sharing.
-
+If you want to learn how to deploy Milvus on other clouds:
+- [Deploy a Milvus Cluster on EC2](https://milvus.io/docs/v2.0.0/aws.md)
+- [Deploy Milvus Cluster on GCP with Kubernetes](https://milvus.io/docs/v2.0.0/gcp.md)
+- [Guide to Deploying Milvus on Microsoft Azure With Kubernetes](https://milvus.io/docs/v2.0.0/azure.md)
