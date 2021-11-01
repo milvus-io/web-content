@@ -315,12 +315,37 @@
       "order": 2
     },
     {
-      "id": "monitor.md",
+      "id": "monitor",
       "title": "Monitor and Alert",
       "label1": "admin_guide",
       "label2": "",
       "label3": "",
-      "order": 3
+      "order": 3,
+      "isMenu": true
+    },
+    {
+      "id": "monitor.md",
+      "title": "Deploy Monitoring Services",
+      "label1": "admin_guide",
+      "label2": "monitor",
+      "label3": "",
+      "order": 0
+    },
+    {
+      "id": "visualize.md",
+      "title": "Visualize Milvus Metrics",
+      "label1": "admin_guide",
+      "label2": "monitor",
+      "label3": "",
+      "order": 1
+    },
+    {
+      "id": "alert.md",
+      "title": "Create an Alert",
+      "label1": "admin_guide",
+      "label2": "monitor",
+      "label3": "",
+      "order": 2
     },
     {
       "id": "allocate.md",
