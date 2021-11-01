@@ -1,7 +1,7 @@
 ---
 id: deploy_s3.md
-title: Set up S3 Storage for Milvus
-related_key: S3 storage for Milvus
+title: Set up Storage
+related_key: S3, storage
 summary: Learn how to set up S3 storage for Milvus.
 ---
 
@@ -14,7 +14,7 @@ You can set up S3 with [Docker Compose](https://docs.docker.com/get-started/over
 ## Set up with Docker Compose
 
 ### 1. Configure S3
-[MinIO](https://min.io/product/overview) is compatible with S3. To set up S3 with Docker Compose, provide appropriate values for the **minio** service in the **milvus.yaml** file on the **milvus/configs** path.
+[MinIO](https://min.io/product/overview) is compatible with S3. To set up S3 with Docker Compose, provide your values for the <code>minio</code> section in the <code>milvus.yaml</code> file on the milvus/configs path.
 
 ```yaml
 minio:
@@ -37,30 +37,30 @@ docker-compose up
 
 ## Set up on K8s
 
-For Milvus clusters on K8s, you can configure S3 in the same command that starts Milvus. Alternatively, you can configure S3 using the **values.yml** file on the **/charts/milvus** path in the [milvus-helm](https://github.com/milvus-io/milvus-helm) repository before you start Milvus.
+For Milvus clusters on K8s, you can configure S3 in the same command that starts Milvus. Alternatively, you can configure S3 using the <code>values.yml</code> file on the /charts/milvus path in the [milvus-helm](https://github.com/milvus-io/milvus-helm) repository before you start Milvus.
 
  The following table lists the keys for configuring S3 in the YAML file.
 | Key             | Description                          | Value                                 |
 | --------------------- | ------------------------------------ | ------------------------------------ |
-| externalS3.enabled    | Enables or disables S3.     | true/false |
-| externalS3.host       | The endpoint to access S3.    |                                      |
-| externalS3.port       | The port to access S3.     |                                      |
-| externalS3.accessKey  | The access key ID for S3. |                                      |
-| externalS3.secretKey  | The secret access key for S3.            |                                      |
-| externalS3.bucketName | The name of the S3 bucket.                  |                                      |
-| minio.enabled         | Enables or disables MinIO.       |  true/false |
+| <code>externalS3.enabled</code>    | Enables or disables S3.     | <code>true</code>/<code>false</code> |
+| <code>externalS3.host</code>       | The endpoint to access S3.    |                                      |
+| <code>externalS3.port</code>       | The port to access S3.     |                                      |
+| <code>externalS3.accessKey</code>  | The access key ID for S3. |                                      |
+| <code>externalS3.secretKey</code>  | The secret access key for S3.            |                                      |
+| <code>externalS3.bucketName</code> | The name of the S3 bucket.                  |                                      |
+| <code>minio.enabled</code>         | Enables or disables MinIO.       |  <code>true</code>/<code>false</code> |
 
 
 ### Using the YAML file
 
-1. Configure the **minio** service in the **values.yaml** file.
+1. Configure the <code>minio</code> section in the <code>values.yaml</code> file.
 
 ```yaml
 minio:
   enabled: false
 ```
 
-2. Configure the **externalS3** service using appropriate values in the **values.yaml** file.
+2. Configure the <code>externalS3</code> section using your values in the <code>values.yaml</code> file.
 
 ```yaml
 externalS3:
@@ -73,14 +73,14 @@ externalS3:
   bucketName: "<your_bucket_name>"
 ```
 
-3. After configuring the preceding services and saving the **values.yaml** file, run the following command to install Milvus that uses the S3 configurations.
+3. After configuring the preceding sections and saving the <code>values.yaml</code> file, run the following command to install Milvus that uses the S3 configurations.
 
 ```shell
 helm install <your_release_name> milvus/milvus -f values.yaml
 ```
 ### Using a command
 
-To install Milvus and configure S3, run the following command using appropriate values.
+To install Milvus and configure S3, run the following command using your values.
 
 ```shell
 helm install <your_release_name> milvus/milvus --set cluster.enabled=true --set externalS3.enabled=true --set externalS3.host='<your_s3_endpoint>' --set externalS3.port=<your_s3_port> --set externalS3.accessKey=<your_s3_access_key_id> --set externalS3.secretKey=<your_s3_secret_key> --set externalS3.bucketName=<your_bucket_name> --set minio.enabled=false
