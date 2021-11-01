@@ -1,288 +1,340 @@
 ---
 id: aws.md
-title: Deploy Terraform-Ansible on AWS
-related_key: Deploy Milvus on AWS
-summary: Learn how to deploy Milvus on AWS.
+title: Deploy a Milvus Cluster on EC2
+related_key: cluster
+summary: Learn how to deploy a Milvus cluster on AWS EC2.
 ---
 
-# Deploy Milvus on AWS with Terraform and Ansible
+# Deploy a Milvus Cluster on EC2
 
-This guide includes instructions for deploying Terraform-Ansible on Amazon Web Services (AWS). Terraform and Ansible are useful open-source tools that simplify updating and configuring cloud deployments. This guide covers provisioning resources with Terraform and starting services with Ansible.
+This topic describes how to deploy a Milvus cluster on [Amazon EC2](https://docs.aws.amazon.com/ec2/) with Terraform and Ansible.
 
+##  Provision a Milvus cluster
 
-## What are Terraform and Ansible?
+This section describes how to use Terraform to provision a Milvus cluster. 
 
-Terraform and Ansible are key open-source tools used in sync for cloud deployments. Terraform is used for quickly provisioning and updating application infrastructure, while Ansible is used to configure machines and start applications. These popular command line tools help reduce complexity and accelerate DevOps.
+[Terraform](https://www.terraform.io/) is an infrastructure as code (IaC) software tool. With Terraform, you can provision infrastructure by using declarative configuration files.
 
-## Provisioning resources with Terraform
+### Prerequisites
 
-Begin by using Terraform to provision resources for the cluster on AWS. With Terraform, resources and their configurations are declared, then the tool maps out dependencies and builds everything.
+- Install and configure [Terraform](https://www.terraform.io/downloads.html)
 
-### Files
+- Install and configure [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html)
 
-**variables.tf**
-- **inventory.tf**: Includes quick edit variables for setting up or updating the cluster.
-- **Node Count**: State how many of each node to include in the cluster.
+### Prepare configuration
 
-<div class="alert note">
-Value must be greater than or equal to 1.
-</div>
+You can download template configuration files at [Google Drive](https://drive.google.com/file/d/1jLQV0YkseOVj5X0exj17x9dWQjLCP7-1/view).
 
-- **Node Types**: State which instances to use for each node.
-- **Personal**: Personal details for AWS access. Set my_ip to your IP address.
+- ```main.tf```
 
-```YAML
-# ------------------------------------- Node Count ------------------------------------- #
-variable "index_count" {
-  description = "Amount of index instances to run"
-  type        = number
-  default     = 5
-}
+  This file contains the configuration for provisioning a Milvus cluster.
 
-...
+- ```variables.tf```
 
-# ------------------------------------- NODE TYPES ------------------------------------- #
-variable "index_ec2_type" {
-  description = "Which server type"
-  type        = string
-  default     = "c5.2xlarge"
-}
+  This file allows quick editing of variables used to set up or update a Milvus cluster.
 
-...
+- ```output.tf``` and ```inventory.tmpl```
 
-# ------------------------------------- PERSONAL ------------------------------------- #
+  These files store the metadata of a Milvus cluster. The metadata used in this topic is the ```public_ip``` for each node instance, ```private_ip``` for each node instance, and all EC2 instance IDs. 
 
-variable "key_name" {
-  description = "Which aws key to use for accessing the instances, needs to already be created"
-  type        = string
-  default     = "Example_Key"
-}
-variable "my_ip" {
-  description = "Your IP for security group. Set to allow Terraform and Ansible to SSH into instances"
-  type        = string
-  default     = "x.x.x.x/32"
+#### Prepare variables.tf
 
-}
-```
+This section describes the configuration that a ```variables.tf``` file that contains.
 
-**output.tf and inventory.tmpl**
+- Number of nodes
 
-The **output.tf** and **inventory.tmpl** are used to show the resulting metadata of the created cluster, and also to pass metadata to Ansible. The metadata we need to access in this example includes `public_ips`, `private_ips`, and all AWS resource IDs. These values are plugged into a template that formats the data file in a way that is easily read by Ansible.
+  The following template declares an ```index_count``` variable used to set the number of index nodes.
 
-**main.tf**
+  <div class="alert note">The value of <code>index_count</code> must be greater than or equal to one.</div>
 
-The **main.tf** file is where the main deployment logic happens. Deploying a cluster involves many interconnected parts, but Terraform handles ordering and actual deployment. Start by setting the provider and region. This example uses the us-east-2 AWS zone. 
-
-```
-provider "aws" {
-  profile = "default"
-  region  = "us-east-2"
-}
-```
-
-Next create the security group for this cluster. In this example, the group can only allow communication between `my_ip` and the machines that are within that security group. 
-
-```
-resource "aws_security_group" "cluster_sg" {
-  name        = "cluster_sg"
-  description = "Allows only me to access"
-  vpc_id      = aws_vpc.cluster_vpc.id
-
-  ingress {
-    description      = "All ports from my IP"
-    from_port        = 0
-    to_port          = 65535
-    protocol         = "tcp"
-    cidr_blocks      = [var.my_ip]
+  ```variables.tf
+  variable "index_count" {
+    description = "Amount of index instances to run"
+    type        = number
+    default     = 5
   }
+  ```
 
-  ingress {
-    description      = "Full subnet communication"
-    from_port        = 0
-    to_port          = 65535
-    protocol         = "all"
-    self             = true
+- Instance type for a node type
+
+  The following template declares an ```index_ec2_type``` variable used to set the [instance type](https://aws.amazon.com/ec2/instance-types/) for index nodes.
+
+  ```variables.tf
+  variable "index_ec2_type" {
+    description = "Which server type"
+    type        = string
+    default     = "c5.2xlarge"
   }
+  ```
 
-  egress {
-    from_port        = 0
-    to_port          = 0
-    protocol         = "-1"
-    cidr_blocks      = ["0.0.0.0/0"]
-    ipv6_cidr_blocks = ["::/0"]
-  }
+- Access permission
 
-  tags = {
-    Name = "cluster_sg"
-  }
-}
-```
+  The following template declares a ```key_name``` variable and a ```my_ip``` variable. The ```key_name``` variable represents the AWS access key. The ```my_ip``` variable represents the IP address range for a security group.
 
-After creating the security group, a network must be created for all the machines. First, create a VPC (virtual private cloud) to hold the machines. This example uses the 10.0.0.0/24 block of addresses. To create an external access point, we also attach an internet gateway. 
-
-
-```
-resource "aws_vpc" "cluster_vpc" {
-  cidr_block = "10.0.0.0/24"
-  tags = {
-    Name = "cluster_vpc"
-  }
-}
-
-resource "aws_internet_gateway" "cluster_gateway" {
-  vpc_id = aws_vpc.cluster_vpc.id
-
-  tags = {
-    Name = "cluster_gateway"
-  }
-}
-```
-
-This example takes advantage of a subnet. Although not required, it is typically good practice to route internode traffic through private addresses. In this case, we take the full range of addresses available within the VPC. In order for these machines to be accessible, external routing must be provided to them from the internet gateway. To accomplish this, a route from the gateway is associated with all the available routes in the subnet. 
-
-```
-resource "aws_subnet" "cluster_subnet" {
-  vpc_id                  = aws_vpc.cluster_vpc.id
-  cidr_block              = "10.0.0.0/24"
-  map_public_ip_on_launch = true
-
-  tags = {
-    Name = "cluster_subnet"
-  }
-}
-
-resource "aws_route_table" "cluster_subnet_gateway_route" {
-  vpc_id       = aws_vpc.cluster_vpc.id
-
-  route {
-    cidr_block = "0.0.0.0/0"
-    gateway_id = aws_internet_gateway.cluster_gateway.id
-  }
-
-  tags = {
-    Name = "cluster_subnet_gateway_route"
-  }
-}
-
-resource "aws_route_table_association" "cluster_subnet_add_gateway" {
-  subnet_id      = aws_subnet.cluster_subnet.id
-  route_table_id = aws_route_table.cluster_subnet_gateway_route.id
-}
-```
-
-Last, create all the required instances — 11 different types in this case. To create an instance, specify the amount, Amazon Machine Image (AMI), machine type, access key, subnet location, and security group. Most of these were defined in the steps above, so we only need to use the variables created for them.  For some of the instances you will also notice the `root_block_device`, which signifies an increase in machine storage space. 
-
-```
-resource "aws_instance" "minio_node" {
-  count         = var.minio_count
-  ami           = "ami-0d8d212151031f51c"
-  instance_type = var.minio_ec2_type
-  key_name      = var.key_name
-  subnet_id     = aws_subnet.cluster_subnet.id
-  vpc_security_group_ids = [aws_security_group.cluster_sg.id]
-
-  root_block_device {
-    volume_type = "gp2"
-    volume_size = 1000
+  ```variables.tf
+  variable "key_name" {
+    description = "Which aws key to use for access into instances, needs to be uploaded already"
+    type        = string
+    default     = ""
   }
   
-  tags = {
-    Name = "minio-${count.index + 1}"
+  variable "my_ip" {
+    description = "my_ip for security group. used so that ansible and terraform can ssh in"
+    type        = string
+    default     = "x.x.x.x/32"
   }
-}
-```
+  ```
 
-### Running Terraform
-1. Begin by installing and configuring [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html) and [Terraform](https://learn.hashicorp.com/tutorials/terraform/install-cli). 
-2. Once both are setup, open a command line in the directory where **main.tf** is located.
-3. Type `terraform init` in the command line to setup the workspace.
-4. Type `terraform apply` and accept the prompt to start the cluster.
-5. The output returned at the end includes which IPs to use to connect to each instance type.
+#### Prepare main.tf
 
+This section describes the configurations that a ```main.tf``` file that contains.
 
-## Starting Milvus services with Ansible 
-Use Ansible to start running the Milvus cluster with the machines provisioned by Terraform.
+- Cloud provider and region
 
-### Files
+  The following template uses the ```us-east-2``` region. See [Available Regions](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-available-regions) for more information.
 
-**inventory**
+  ```main.tf
+  provider "aws" {
+    profile = "default"
+    region  = "us-east-2"
+  }
+  ```
 
-The inventory file only exists after a cluster is created and will disappear once the cluster is destroyed. This file includes all the public and private addresses of the nodes in the cluster. Ansible needs this file to know the server and its corresponding address in order to ssh into them, modify, and run the correct script. 
+- Security group
 
-**yaml_files**
+  The following template declares a security group that allows incoming traffic from the CIDR address range represented by ```my_ip``` declared in ```variables.tf```.
 
-The **yaml_files** directory holds **.j2** docker-compose files for each type of node. They are **.j2** and **.yaml** files because Ansible uses Jinja2 for templating. This example uses templating files because the files need to be updated with the IPs of the nodes at runtime.
+  ```main.tf
+  resource "aws_security_group" "cluster_sg" {
+    name        = "cluster_sg"
+    description = "Allows only me to access"
+    vpc_id      = aws_vpc.cluster_vpc.id
+  
+    ingress {
+      description      = "All ports from my IP"
+      from_port        = 0
+      to_port          = 65535
+      protocol         = "tcp"
+      cidr_blocks      = [var.my_ip]
+    }
+  
+    ingress {
+      description      = "Full subnet communication"
+      from_port        = 0
+      to_port          = 65535
+      protocol         = "all"
+      self             = true
+    }
+  
+    egress {
+      from_port        = 0
+      to_port          = 0
+      protocol         = "-1"
+      cidr_blocks      = ["0.0.0.0/0"]
+      ipv6_cidr_blocks = ["::/0"]
+    }
+  
+    tags = {
+      Name = "cluster_sg"
+    }
+  }
+  ```
 
-**playbook.yaml** 
+- VPC
 
-The **playbook.yaml** file is the coordinator for running all the scripts in all the nodes. The script first begins by installing docker and Docker Compose on all the machines in the cluster.
+  The following template specifies a VPC with the 10.0.0.0/24 CIDR block on a Milvus cluster.
 
-```Yaml
-- name: All Servers
-  hosts: etcd_ips_public:pulsar_ips_public:minio_ips_public:data_ips_public:index_ips_public:query_ips_public:proxy_ips_public:root_coordinator_ips_public:data_coordinator_ips_public:query_coordinator_ips_public:index_coordinator_ips_public
-  remote_user: ec2-user
-  become: true
-  tags:
-    - start
-  tasks:
-  - name: Install docker
-    ansible.builtin.yum:
-      name: docker
-      state: present
-  - name: Run docker
-    ansible.builtin.service:
-      name: docker
-      state: started
+  ```main.tf
+  resource "aws_vpc" "cluster_vpc" {
+    cidr_block = "10.0.0.0/24"
+    tags = {
+      Name = "cluster_vpc"
+    }
+  }
+  
+  resource "aws_internet_gateway" "cluster_gateway" {
+    vpc_id = aws_vpc.cluster_vpc.id
+  
+    tags = {
+      Name = "cluster_gateway"
+    }
+  }
+  ```
 
-  - name: Install or upgrade docker-compose
-    get_url: 
-      url : "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-Linux-x86_64"
-      dest: /usr/local/bin/docker-compose
-      mode: 'a+x'
-      force: yes
-  - name: Create symbolic link for docker-compose
-    file:
-      src: "/usr/local/bin/docker-compose"
-      dest: "/usr/bin/docker-compose"
-      state: link
-```
+- Subnets (Optional)
 
-Once all the nodes have docker-compose setup, the script launches the corresponding docker container for each node one by one. To do this, the script copies over the **.j2** files with the variables filled in and runs it using compose. 
+  The following template declares a subnet whose traffic is routed to an internet gateway. In this case, the size of the subnet's CIDR block is the same as the VPC's CIDR block.
 
-```Yaml
-- name: etcd
-  hosts: etcd_ips_public
-  remote_user: ec2-user
-  become: true
-  tags:
-    - start
+  ```main.tf
+  resource "aws_subnet" "cluster_subnet" {
+    vpc_id                  = aws_vpc.cluster_vpc.id
+    cidr_block              = "10.0.0.0/24"
+    map_public_ip_on_launch = true
+  
+    tags = {
+      Name = "cluster_subnet"
+    }
+  }
+  
+  resource "aws_route_table" "cluster_subnet_gateway_route" {
+    vpc_id       = aws_vpc.cluster_vpc.id
+  
+    route {
+      cidr_block = "0.0.0.0/0"
+      gateway_id = aws_internet_gateway.cluster_gateway.id
+    }
+  
+    tags = {
+      Name = "cluster_subnet_gateway_route"
+    }
+  }
+  
+  resource "aws_route_table_association" "cluster_subnet_add_gateway" {
+    subnet_id      = aws_subnet.cluster_subnet.id
+    route_table_id = aws_route_table.cluster_subnet_gateway_route.id
+  }
+  
+  ```
 
-  tasks:
-  - name: Copy etcd config
-    ansible.builtin.template:
-      src: ./yaml_files/etcd.j2
-      dest: /home/ec2-user/docker-compose.yml
-      owner: ec2-user
-      group: wheel
-      mode: '0644'
+- Node instances (Nodes)
 
-  - name: Run etcd node
-    shell: docker-compose up -d
-    args:
-      chdir: /home/ec2-user/
-```
+  The following template declares a MinIO node instance. The ```main.tf``` template file declares nodes of 11 node types. For some node types, you need to set ```root_block_device```. See [EBS, Ephemeral, and Root Block Devices](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance#ebs-ephemeral-and-root-block-devices) for more information.
 
-### Running Ansible
-1. Install and configure [Ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html).
-2. Open a command line in the **playbook.yaml** directory.
-3. Run `ansible-playbook  -i inventory playbook.yaml -tags "start"` .
-4. Once finished, the service is up and running.
+  ```main.tf
+  resource "aws_instance" "minio_node" {
+    count         = var.minio_count
+    ami           = "ami-0d8d212151031f51c"
+    instance_type = var.minio_ec2_type
+    key_name      = var.key_name
+    subnet_id     = aws_subnet.cluster_subnet.id 
+    vpc_security_group_ids = [aws_security_group.cluster_sg.id]
+  
+    root_block_device {
+      volume_type = "gp2"
+      volume_size = 1000
+    }
+    
+    tags = {
+      Name = "minio-${count.index + 1}"
+    }
+  }
+  ```
 
-## Shutting down the Milvus cluster
-1. Open a command line in the Terraform directory that was used to launch the cluster.
-2. Run `terraform destroy` and accept the prompt.
-3. Once script finishes running, all allocated resources will be destroyed. 
+### Apply the configuration
 
-## Resources
+1. Open a terminal and navigate to the folder that stores ```main.tf```.
 
-Files for this instruction are available at https://drive.google.com/file/d/1jLQV0YkseOVj5X0exj17x9dWQjLCP7-1/view?usp=sharing.
+2. To initialize the configuration, run ```terraform init```.
+
+3. To apply the configuration, run ```terraform apply``` and enter ```yes``` when prompted.
+
+You have now provisioned a Milvus cluster with Terraform.
+
+## Start the Milvus cluster
+
+This section describes how to use Ansible to start the Milvus cluster that you have provisioned.
+
+[Ansible](https://www.ansible.com/overview/how-ansible-works) is a configuration management tool used to automate cloud provisioning and configuration management.
+
+### Prerequisites 
+
+- Install and configure [Ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html)
+
+### Prepare configuration
+
+You can download template configuration files at [Google Drive](https://drive.google.com/file/d/1jLQV0YkseOVj5X0exj17x9dWQjLCP7-1/view).
+
+- Files in the ```yaml_files``` folder
+
+  This folder stores Jinja2 files for each node type. Ansible uses Jinja2 templating. See [Introduction](https://jinja2docs.readthedocs.io/en/stable/intro.html) for more information about Jinja2.
+
+- ```playbook.yaml```
+
+  This file performs a set of tasks on specific sets of nodes. The template begins with installing Docker and Docker Compose on all node instances on the Milvus cluster.
+
+  <div class="alert note">A playbook runs in sequence from top to bottom. Within each play, tasks also run in sequence from top to bottom.</div>
+  
+  ```playbook.yaml
+  - name: All Servers
+    hosts: etcd_ips_public:pulsar_ips_public:minio_ips_public:data_ips_public:index_ips_public:query_ips_public:proxy_ips_public:root_coordinator_ips_public:data_coordinator_ips_public:query_coordinator_ips_public:index_coordinator_ips_public
+    remote_user: ec2-user
+    become: true
+    tags:
+      - start
+    tasks:
+    - name: Install docker
+      ansible.builtin.yum:
+        name: docker
+        state: present
+    - name: Run docker
+      ansible.builtin.service:
+        name: docker
+        state: started
+  
+    - name: Install or upgrade docker-compose
+      get_url: 
+        url : "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-Linux-x86_64"
+        dest: /usr/local/bin/docker-compose
+        mode: 'a+x'
+        force: yes
+    - name: Create symbolic link for docker-compose
+      file:
+        src: "/usr/local/bin/docker-compose"
+        dest: "/usr/bin/docker-compose"
+        state: link
+   
+  ```
+
+  After Docker and Docker Compose are installed on all node instances,  ```playbook.yaml``` starts containers for all node instances in sequence.
+  
+  ```playbook.yaml
+  - name: etcd
+    hosts: etcd_ips_public
+    remote_user: ec2-user
+    become: true
+    tags:
+      - start
+  
+    tasks:
+    - name: Copy etcd config
+      ansible.builtin.template:
+        src: ./yaml_files/etcd.j2
+        dest: /home/ec2-user/docker-compose.yml
+        owner: ec2-user
+        group: wheel
+        mode: '0644'
+  
+    - name: Run etcd node
+      shell: docker-compose up -d
+      args:
+        chdir: /home/ec2-user/
+       
+  ```
+
+### Apply the configuration
+
+1. Open a terminal and navigate to the folder that stores ```playbook.yaml```.
+
+2. Run ```ansible-playbook -i inventory playbook.yaml --tags "start"```. 
+
+3. If successful, all node instances start.
+
+You have now started a Milvus cluster with Ansible.
+
+## Stop nodes
+
+You can stop all nodes after you do not need a Milvus cluster any longer.
+
+<div class="alert note"> Ensure that the <code>terraform</code> binary is available on your <code>PATH</code>. </div>
+
+1. Run ```terraform destroy``` and enter ```yes``` when prompted.
+
+2. If successful, all node instances are stopped. 
+
+## What's next
+
+If you want to learn how to deploy Milvus on other clouds:
+- [Deploy a Milvus Cluster on EKS](https://milvus.io/docs/v2.0.0/eks.md)
+- [Deploy Milvus Cluster on GCP with Kubernetes](https://milvus.io/docs/v2.0.0/gcp.md)
+- [Guide to Deploying Milvus on Microsoft Azure With Kubernetes](https://milvus.io/docs/v2.0.0/azure.md)
+
