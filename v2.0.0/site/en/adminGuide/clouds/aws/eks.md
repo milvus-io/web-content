@@ -58,7 +58,7 @@ helm upgrade --install --set cluster.enabled=true --set externalS3.enabled=true 
 
 Currently, a Milvus cluster can only be scaled manually. Run the following command to modify the numbers of node instances with different types.
 
-<div class ="alert note">See <a href="https://milvus.io/docs/v2.0.0/four_layers.md#StorageComputing-Disaggregation">Storage/Computing Disaggregation</a> for more information about the data node, index node, query node, and proxy.
+<div class ="alert note">See <a href="https://milvus.io/docs/v2.0.0/four_layers.md#StorageComputing-Disaggregation">Storage/Computing Disaggregation</a> for more information about the data node, index node, query node, and proxy.</div>
 
 ```shell
 helm upgrade --install --set cluster.enabled=true --set dataNode.replicas=1 --set indexNode.replicas=1 --set queryNode.replicas=1 --set proxy.replicas=1 --set externalS3.enabled=true --set externalS3.host='s3.us-east-2.amazonaws.com' --set externalS3.port=80 --set externalS3.accessKey=${access-key} --set externalS3.secretKey=${secret-key} --set externalS3.bucketName=${bucket-name} --set minio.enabled=False --set service.type=LoadBalancer milvus milvus/milvus
