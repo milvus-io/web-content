@@ -1,34 +1,54 @@
 ---
 id: scaleout.md
+related_key: scale Milvus cluster
+summary: Learn how to manually or automatically scale out and scale in a Milvus cluster.
 ---
 
-# 分布式版 Milvus 扩缩容指南
+# Scale a Milvus Cluster
 
-分布式版 Milvus 中包含 8 个微服务组件和 3 个第三方依赖。
+Milvus supports horizontal scaling of its components. This means you can either increase or decrease  the number of worker nodes of each type according to your own need. 
 
-![Distributed_architecture](../../../assets/distributed_architecture.jpg)
+This topic describes how to scale out and scale in a Milvus cluster. We assume that you have already [installed a Milvus cluster](install_cluster-helm.md) before scaling. Also, we recommend familiarizing yourself with the [Milvus architecture](architecture_overview.md) before you begin.  
 
-分布式版 Milvus 采用了存储与计算分离的架构设计，所有组件均为无状态组件，极大地增强了系统弹性和灵活性。你可轻松对 Milvus 以下 4 种无状态节点进行扩容。
+This tutorial takes scaling out three query nodes as an example. To scale out other types of nodes, replace queryNode with the corresponding node type in the command line.
 
-- Query node
-- Data node
-- Index node
-- Proxy
+## What is horizontal scaling?
+
+Horizontal scaling includes scaling out and scaling in.
+
+### Scale out 
+Scaling out refers to increasing the number of nodes in a cluster. Unlike scaling up, scaling out does not require you to allocate more resources to one node in the cluster. Instead, scaling out expands the cluster horizontally by adding more nodes. 
+
+![Scaleout](../../../assets/scale_out.jpg)
+
+![Scaleup](../../../assets/scale_up.jpg)
+
+According to the [Milvus architecture](architecture_overview.md), stateless worker nodes include query node, data node, index node, and proxy. Therefore, you can scale out these type of nodes to suit your business needs and application scenarios. You can either scale out the Milvus cluster manually or automatically.
+
+Generally, you will need to scale out the Milvus cluster you created if it is over-utilized. Below are some typical situations where you may need to scale out the Milvus cluster:
+- The CPU and memory utilization is high for a period of time.
+- The query throughput becomes higher.
+- Higher speed for indexing is required.
+- Massive volumes of large datasets need to be processed.
+- High availability of the Milvus service needs to be ensured.
+
+
+### Scale in
+Scaling in refers to decreasing the number of nodes in a cluster. Generally, you will need to scale in the Milvus cluster you created if it is under-utilized. Below are some typical situations where you need to scale in the Milvus cluster:
+- The CPU and memory utilization is low for a period of time.
+- The query throughput becomes lower.
+- Higher speed for indexing is not required.
+- The size of the dataset to be processed is small.
 
 <div class="alert note">
-Milvus 不支持对 query coord、data coord、index coord 和 root coord 进行扩容。
+We do not recommend reducing the number of workers nodes dramatically. For example, if there are five data nodes in the cluster, we recommend reducing one data node at a time to ensure service availability. If the service is available after the first attempt of scaling in, you can continue to further reduce the number of the data node.
 </div>
 
-## 使用 Helm 安装 Milvus
-```
-helm repo add milvus https://milvus-io.github.io/milvus-helm/
-helm repo update
-helm install my-release milvus/milvus --set cluster.enabled=true
-```
-如果分布式版 Milvus 成功启动，每个 Milvus pod 都将在 `READY` 下显示 `1/1`：
+## Prerequisites
+
+Run kubectl get pods to get a list of the components and their working status in the Milvus cluster you created.
 
 ```
-kubectl get pods
 NAME                                            READY   STATUS       RESTARTS   AGE
 my-release-etcd-0                               1/1     Running      0          1m
 my-release-milvus-datacoord-7b5d84d8c6-rzjml    1/1     Running      0          1m
@@ -40,14 +60,26 @@ my-release-milvus-pulsar-6b9754c64d-4tg4m       1/1     Running      0          
 my-release-milvus-querycoord-75f6c789f8-j28bg   1/1     Running      0          1m
 my-release-milvus-querynode-7c7779c6f8-pnjzh    1/1     Running      0          1m
 my-release-milvus-rootcoord-75585dc57b-cjh87    1/1     Running      0          1m
-my-release-minio-5564fbbddc-9sbgv               1/1     Running      0          1m
+my-release-minio-5564fbbddc-9sbgv               1/1     Running      0          1m 
 ```
 
-## 对分布式版 Milvus 执行节点进行扩容
+<div class="alert note">
+Milvus only supports adding the worker nodes and does not support adding the coordinator components.
+</div>
 
-### 扩容 query node
+## Scaling 
+
+You can scale in your Milvus cluster either manually or automatically. If autoscaling is enabled, the Milvus cluster will shrink or expand automatically when CPU and memory resources consumption reaches the value you have set.  
+
+### Manual scaling
+
+#### Scaling out
+
+Run `helm upgrade my-release milvus/milvus --set queryNode.replicas=3 --reuse-values` to manually scale out the query node.
+
+If successful, three running pods on the query node are added as shown in the following example.
+
 ```
-helm upgrade my-release milvus/milvus --set queryNode.replicas=3 --reuse-values
 NAME                                            READY   STATUS    RESTARTS   AGE
 my-release-etcd-0                               1/1     Running   0          2m
 my-release-milvus-datacoord-7b5d84d8c6-rzjml    1/1     Running   0          2m
@@ -64,104 +96,46 @@ my-release-milvus-rootcoord-75585dc57b-cjh87    1/1     Running   0          2m
 my-release-minio-5564fbbddc-9sbgv               1/1     Running   0          2m
 ```
 
-可以看到有 3 个 query node pod 在运行。
+#### Scaling in
 
-### 扩容 data node
+Run `helm upgrade my-release milvus/milvus --set queryNode.replicas=1 --reuse-values` to scale in the query node.
+
+If successful, three running pods on the query node are reduced to one as shown in the following example.
+
 ```
-helm upgrade my-release milvus/milvus --set dataNode.replicas=3 --reuse-values
 NAME                                            READY   STATUS    RESTARTS   AGE
-my-release-etcd-0                               1/1     Running   0          5m
-my-release-milvus-datacoord-7b5d84d8c6-rzjml    1/1     Running   0          5m
-my-release-milvus-datanode-665d4586b9-525pm     1/1     Running   0          5m
-my-release-milvus-datanode-665d4586b9-7rjqp     1/1     Running   0          5s
-my-release-milvus-datanode-665d4586b9-jwd8w     1/1     Running   0          5s
-my-release-milvus-indexcoord-9669d5989-kr5cm    1/1     Running   0          5m
-my-release-milvus-indexnode-b89cc5756-xbpbn     1/1     Running   0          5m
-my-release-milvus-proxy-7cbcc8ffbc-4jn8d        1/1     Running   0          5m
-my-release-milvus-pulsar-6b9754c64d-4tg4m       1/1     Running   0          5m
-my-release-milvus-querycoord-75f6c789f8-j28bg   1/1     Running   0          5m
-my-release-milvus-querynode-7c7779c6f8-czq9f    1/1     Running   0          2m55s
-my-release-milvus-querynode-7c7779c6f8-jcdcn    1/1     Running   0          2m55s
-my-release-milvus-querynode-7c7779c6f8-pnjzh    1/1     Running   0          5m
-my-release-milvus-rootcoord-75585dc57b-cjh87    1/1     Running   0          5m
-my-release-minio-5564fbbddc-9sbgv               1/1     Running   0          5m
+my-release-etcd-0                               1/1     Running   0          2m
+my-release-milvus-datacoord-7b5d84d8c6-rzjml    1/1     Running   0          2m
+my-release-milvus-datanode-665d4586b9-525pm     1/1     Running   0          2m
+my-release-milvus-indexcoord-9669d5989-kr5cm    1/1     Running   0          2m
+my-release-milvus-indexnode-b89cc5756-xbpbn     1/1     Running   0          2m
+my-release-milvus-proxy-7cbcc8ffbc-4jn8d        1/1     Running   0          2m
+my-release-milvus-pulsar-6b9754c64d-4tg4m       1/1     Running   0          2m
+my-release-milvus-querycoord-75f6c789f8-j28bg   1/1     Running   0          2m
+my-release-milvus-querynode-7c7779c6f8-pnjzh    1/1     Running   0          2m
+my-release-milvus-rootcoord-75585dc57b-cjh87    1/1     Running   0          2m
+my-release-minio-5564fbbddc-9sbgv               1/1     Running   0          2m
 ```
 
-可以看到有 3 个 data node pod 在运行。
+### Autoscaling
 
-
-### 扩容 index node
-```
-helm upgrade my-release milvus/milvus --set indexNode.replicas=3 --reuse-values
-NAME                                            READY   STATUS    RESTARTS   AGE
-my-release-etcd-0                               1/1     Running   0          10m
-my-release-milvus-datacoord-7b5d84d8c6-rzjml    1/1     Running   0          10m
-my-release-milvus-datanode-665d4586b9-525pm     1/1     Running   0          10m
-my-release-milvus-datanode-665d4586b9-7rjqp     1/1     Running   0          3m45s
-my-release-milvus-datanode-665d4586b9-jwd8w     1/1     Running   0          3m45s
-my-release-milvus-indexcoord-9669d5989-kr5cm    1/1     Running   0          10m
-my-release-milvus-indexnode-b89cc5756-7vp5h     1/1     Running   0          5s
-my-release-milvus-indexnode-b89cc5756-r74kd     1/1     Running   0          5s
-my-release-milvus-indexnode-b89cc5756-xbpbn     1/1     Running   0          10m
-my-release-milvus-proxy-7cbcc8ffbc-4jn8d        1/1     Running   0          10m
-my-release-milvus-pulsar-6b9754c64d-4tg4m       1/1     Running   0          10m
-my-release-milvus-querycoord-75f6c789f8-j28bg   1/1     Running   0          10m
-my-release-milvus-querynode-7c7779c6f8-czq9f    1/1     Running   0          7m35s
-my-release-milvus-querynode-7c7779c6f8-jcdcn    1/1     Running   0          7m35s
-my-release-milvus-querynode-7c7779c6f8-pnjzh    1/1     Running   0          10m
-my-release-milvus-rootcoord-75585dc57b-cjh87    1/1     Running   0          10m
-my-release-minio-5564fbbddc-9sbgv               1/1     Running   0          10m
-```
-
-可以看到有 3 个 index node pod 在运行。
-
-### 扩容 proxy
-```
-helm upgrade my-release milvus/milvus --set proxy.replicas=3 --reuse-values
-NAME                                            READY   STATUS    RESTARTS   AGE
-my-release-etcd-0                               1/1     Running   0          13m
-my-release-milvus-datacoord-7b5d84d8c6-rzjml    1/1     Running   0          13m
-my-release-milvus-datanode-665d4586b9-525pm     1/1     Running   0          13m
-my-release-milvus-datanode-665d4586b9-7rjqp     1/1     Running   0          7m29s
-my-release-milvus-datanode-665d4586b9-jwd8w     1/1     Running   0          7m29s
-my-release-milvus-indexcoord-9669d5989-kr5cm    1/1     Running   0          13m
-my-release-milvus-indexnode-b89cc5756-7vp5h     1/1     Running   0          3m49s
-my-release-milvus-indexnode-b89cc5756-r74kd     1/1     Running   0          3m49s
-my-release-milvus-indexnode-b89cc5756-xbpbn     1/1     Running   0          13m
-my-release-milvus-proxy-7cbcc8ffbc-4jn8d        1/1     Running   0          13m
-my-release-milvus-proxy-7cbcc8ffbc-67vkd        1/1     Running   0          5s
-my-release-milvus-proxy-7cbcc8ffbc-7bkj2        1/1     Running   0          5s
-my-release-milvus-pulsar-6b9754c64d-4tg4m       1/1     Running   0          13m
-my-release-milvus-querycoord-75f6c789f8-j28bg   1/1     Running   0          13m
-my-release-milvus-querynode-7c7779c6f8-czq9f    1/1     Running   0          11m
-my-release-milvus-querynode-7c7779c6f8-jcdcn    1/1     Running   0          11m
-my-release-milvus-querynode-7c7779c6f8-pnjzh    1/1     Running   0          13m
-my-release-milvus-rootcoord-75585dc57b-cjh87    1/1     Running   0          13m
-my-release-minio-5564fbbddc-9sbgv               1/1     Running   0          13m
-```
-
-可以看到有 3 个 proxy pod 在运行。
-
-## 对分布式版 Milvus 执行节点进行缩容
-### 缩容 query node
+Run the following command to enable autoscaling for query node. You also need to configure the value for CPU and memory resource to trigger autoscaling.
 
 ```
-helm upgrade my-release milvus/milvus --set queryNode.replicas=1 --reuse-values
+helm upgrade my-release milvus/milvus --set queryNode.autoscaling.enabled=true --reuse-values
 ```
 
-### 缩容 data node
+## What's next
 
-```
-helm upgrade my-release milvus/milvus --set dataNode.replicas=1 --reuse-values
-```
+- If you want to learn how to monitor the Milvus services and create alerts:
+  - Learn [Monitor Milvus 2.0 with Prometheus Operator on Kubernetes](monitor.md)
 
-### 缩容 index node
-```
-helm upgrade my-release milvus/milvus --set indexNode.replicas=1 --reuse-values
-```
+- If you are ready to deploy your cluster on clouds:
+  - Learn how to [Deploy Milvus on AWS with Terraform and Ansible](aws.md)
+  - Learn how to [Deploy Milvus on Amazon EKS with Terraform](eks.md)
+  - Learn how to [Deploy Milvus Cluster on GCP with Kubernetes](gcp.md)
+  - Learn how to [Deploy Milvus on Microsoft Azure With Kubernetes](azure.md)
 
-### 缩容 proxy
+- If you are looking for instructions on how to allocate resources:
+  - [Allocate Resources on Kubernetes](allocate.md#standalone)
 
-```
-helm upgrade my-release milvus/milvus --set proxy.replicas=1 --reuse-values
-```
