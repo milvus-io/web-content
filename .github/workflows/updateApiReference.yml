@@ -70,6 +70,8 @@ jobs:
           # tmporarily fix pprint issue
           pip3 install pprint -i https://pypi.doubanio.com/simple/ --trusted-host pypi.douban.com
           pip3 install -r requirements.txt
+          # tmporarily fix docutils issue
+          pip3 install docutils==0.16
           cd docs
           # tmporarily fix PBR_VERSION issue
           export PBR_VERSION=5.6.0
