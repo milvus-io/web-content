@@ -10,13 +10,13 @@ Milvus supports horizontal scaling of its components. This means you can either 
 
 This topic describes how to scale out and scale in a Milvus cluster. We assume that you have already [installed a Milvus cluster](install_cluster-helm.md) before scaling. Also, we recommend familiarizing yourself with the [Milvus architecture](architecture_overview.md) before you begin.  
 
-This tutorial takes scaling out three query nodes as an example. To scale out other types of nodes, replace queryNode with the corresponding node type in the command line.
+This tutorial takes scaling out three query nodes as an example. To scale out other types of nodes, replace `queryNode` with the corresponding node type in the command line.
 
 ## What is horizontal scaling?
 
 Horizontal scaling includes scaling out and scaling in.
 
-### Scale out 
+### Scaling out 
 Scaling out refers to increasing the number of nodes in a cluster. Unlike scaling up, scaling out does not require you to allocate more resources to one node in the cluster. Instead, scaling out expands the cluster horizontally by adding more nodes. 
 
 ![Scaleout](../../../assets/scale_out.jpg)
@@ -33,7 +33,7 @@ Generally, you will need to scale out the Milvus cluster you created if it is ov
 - High availability of the Milvus service needs to be ensured.
 
 
-### Scale in
+### Scaling in
 Scaling in refers to decreasing the number of nodes in a cluster. Generally, you will need to scale in the Milvus cluster you created if it is under-utilized. Below are some typical situations where you need to scale in the Milvus cluster:
 - The CPU and memory utilization is low for a period of time.
 - The query throughput becomes lower.
@@ -67,7 +67,7 @@ my-release-minio-5564fbbddc-9sbgv               1/1     Running      0          
 Milvus only supports adding the worker nodes and does not support adding the coordinator components.
 </div>
 
-## Scaling 
+## Scale a Milvus cluster 
 
 You can scale in your Milvus cluster either manually or automatically. If autoscaling is enabled, the Milvus cluster will shrink or expand automatically when CPU and memory resources consumption reaches the value you have set.  
 
