@@ -85,3 +85,8 @@ To install Milvus and configure S3, run the following command using your values.
 ```shell
 helm install <your_release_name> milvus/milvus --set cluster.enabled=true --set externalS3.enabled=true --set externalS3.host='<your_s3_endpoint>' --set externalS3.port=<your_s3_port> --set externalS3.accessKey=<your_s3_access_key_id> --set externalS3.secretKey=<your_s3_secret_key> --set externalS3.bucketName=<your_bucket_name> --set minio.enabled=false
 ```
+## What's next
+
+If you want to learn how to use storage from other cloud providers:
+- [Use Google Cloud Storage](https://milvus.io/docs/v2.0.0/gcp.md#Use-Google-Cloud-Storage)
+- [Use Azure Blob Storage](https://milvus.io/docs/v2.0.0/azure.md#Use-Azure-Blob-Storage)
