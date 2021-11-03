@@ -128,6 +128,39 @@ connect [-h (text)] [-p (int)] [-a (text)]
 ```shell
 milvus_cli > connect -h 127.0.0.1 -p 19530 -a default
 ```
+## create alias
+Specifies unique aliases for a collection.
+<div class="alert note">A collection can have multiple aliases. However, an alias corresponds to a maximum of one collection.</div>
+
+## Syntax
+```shell
+create alias -c (text) -a (text) [-A] [-t (float)]
+```
+
+### Options
+|Option|Full name|Description
+|:---|:---|:---|
+|-c|--collection-name|The name of the collection.|
+|-a|--alias-name|The alias.|
+|-A|--alter|(Optional) Flag to transfer the alias to a specified collection.|
+|-t|--timeout|(Optional) The maximum allowed duration in seconds of an RPC call. Not passing this option indicates that the client keeps waiting until the server responds or an error occurs.|
+|--help|n/a|Displays help for using the command.|
+
+### Examples
+#### Example 1
+
+The following example creates the <code>carAlias1</code> and <code>carAlias2</code> aliases for the <code>car</code> collection.
+```shell
+milvus_cli > create alias -c car -a carAlias1 -a carAlias2
+```
+#### Example 2
+
+<div class="alert note">Example 2 is based on Example 1.</div>
+
+The following example transfers the <code>carAlias1</code> and <code>carAlias2</code> aliases from the <code>car</code> collection to the <code>car2</code> collection.
+```shell
+milvus_cli > create alias -c car2 -A -a carAlias -a carAlias2
+```
 
 ## create collection
 Creates a collection.
@@ -138,7 +171,7 @@ create collection -c (text) -f (text) -p (text) [-a] [-d (text)]
 ### Options
 |Option|Full name|Description
 |:---|:---|:---|
-|-c|--collection-name|The collection name.|
+|-c|--collection-name|The nam of the collection.|
 |-f|--schema-field|(Multiple) The field schema in the    ```<fieldName>:<dataType>:<dimOfVector/desc>``` format.|
 |-p|--schema-primary-field|The name of the primary key field.|
 |-a|--schema-auto-id|(Optional) Flag to generate IDs automatically.|
@@ -160,7 +193,7 @@ create partition -c (text) -p (text) [-d (text)]
 ### Options
 |Option|Full name|Description
 |:---|:---|:---|
-|-c|--collection|The collection name.|
+|-c|--collection-name|The name of the collection.|
 |-p|--partition|The partition name.|
 |-d|--description|(Optional) The description of the partition.|
 |--help|n/a|Displays help for using the command.|
@@ -202,6 +235,21 @@ Index params nlist: 2
 
 Timeout []:
 ```
+## delete alias
+Deletes an alias for a collection.
+### Syntax
+```shell
+delete alias -c (text) -a (text) [-t (float)]
+```
+### Options
+|Option|Full name|Description
+|:---|:---|:---|
+|-c|--collection-name|The name of the collection.|
+|-a|--alias-name|The alias.|
+|-t|--timeout|(Optional) The maximum allowed duration in seconds of an RPC call. Not passing this option indicates that the client keeps waiting until the server responds or an error occurs.|
+|--help|n/a|Displays help for using the command.|
+
+
 ## delete collection
 Deletes a collection.
 ### Syntax
@@ -211,7 +259,7 @@ delete collection -c (text) [-t (float)]
 ### Options
 |Option|Full name|Description
 |:---|:---|:---|
-|-c|--collection|The name of the collection to be deleted.|
+|-c|--collection-name|The name of the collection to be deleted.|
 |-t|--timeout|(Optional) The maximum allowed duration in seconds of an RPC call. Not passing this option indicates that the client keeps waiting until the server responds or an error occurs.|
 |--help|n/a|Displays help for using the command.|
 
@@ -230,7 +278,7 @@ delete partition -c (text) -p (text) [-t (float)]
 ### Options
 |Option|Full name|Description
 |:---|:---|:---|
-|-c|--collection|The name of the collection that the partition to be deleted belongs to.|
+|-c|--collection-name|The name of the collection that the partition to be deleted belongs to.|
 |-t|--timeout|(Optional) The maximum allowed duration in seconds of an RPC call. Not passing this option indicates that the client keeps waiting until the server responds or an error occurs.|
 |-p|--partition|The name of the partition to be deleted.|
 |--help|n/a|Displays help for using the command.|
@@ -253,7 +301,7 @@ delete index -c (text) [-t (float)]
 ### Options
 |Option|Full name|Description
 |:---|:---|:---|
-|-c|--collection|The collection name.|
+|-c|--collection-name|The name of the collection.|
 |-t|--timeout|(Optional) The maximum allowed duration in seconds of an RPC call. Not passing this option indicates that the client keeps waiting until the server responds or an error occurs.|
 |--help|n/a|Displays help for using the command.|
 
@@ -272,7 +320,7 @@ delete entities -c (text) [-p (text)] [-t (float)]
 ### Options
 |Option|Full name|Description
 |:---|:---|:---|
-|-c|--collection|The collection name.|
+|-c|--collection-name|The name of the collection.|
 |-p|--partition|(Optional) The name of the partition that the entities belong to.|
 |-t|--timeout|(Optional) The maximum allowed duration in seconds of an RPC call. Not passing this option indicates that the client keeps waiting until the server responds or an error occurs.|
 |--help|n/a|Displays help for using the command.|
@@ -299,7 +347,7 @@ describe collection -c (text)
 ### Options
 |Option|Full name|Description
 |:---|:---|:---|
-|-c|--collection|The name of the collection.|
+|-c|--collection-name|The name of the collection.|
 |--help|n/a|Displays help for using the command.|
 
 ### Example
@@ -316,7 +364,7 @@ describe partition -c (text) -p (text)
 ### Options
 |Option|Full name|Description
 |:---|:---|:---|
-|-c|--collection|The name of the collection that the partition belongs to.|
+|-c|--collection-name|The name of the collection that the partition belongs to.|
 |-p|--partition|The name of the partition.|
 |--help|n/a|Displays help for using the command.|
 
@@ -336,7 +384,7 @@ describe index -c (text)
 ### Options
 |Option|Full name|Description
 |:---|:---|:---|
-|-c|--collection|The name of the collection.|
+|-c|--collection-name|The name of the collection.|
 |--help|n/a|Displays help for using the command.|
 
 ## exit
@@ -364,8 +412,8 @@ help <command>
 |calc|Calculates the distance between two vector arrays.|
 |clear|Clears the screen.|
 |connect|Connects to Milvus.|
-|create|Creates a collection, partition, or index.|
-|delete|Deletes a collection, partition, index, or entity.|
+|create|Creates a collection, partition, index, or alias.|
+|delete|Deletes a collection, partition, index, entity, or alias.|
 |describe|Describes a collection, partition, or index.|
 |exit|Closes the command line window.|
 |help|Displays help for using a command. |
@@ -375,7 +423,7 @@ help <command>
 |query|Shows query results that match all the criteria that you enter.|
 |release|Releases a collection or partition.|
 |search|Performs a vector similarity search or hybrid search.|
-|show|Shows the current collection, progress of entity loading, or progress of entity indexing. |
+|show|Shows the current collection, progress of entity loading, progress of entity indexing, or segment information. |
 |version|Shows the version of Milvus CLI.|
 
 ## import
@@ -389,7 +437,7 @@ import -c (text)[-p (text)][-t (float)] <file_path>
 ### Options
 |Option|Full name|Description
 |:---|:---|:---|
-|-c|--collection|The name of the collection that the data is inserted into.|
+|-c|--collection-name|The name of the collection that the data is inserted into.|
 |-p|--partition|(Optional) The name of the partition that the data is inserted into. Not passing this partition option indicates choosing the "_default" partition.|
 |-t|--timeout|(Optional) The maximum allowed duration in seconds of an RPC call. Not passing this option indicates that the client keeps waiting until the server responds or an error occurs.|
 |--help|n/a|Displays help for using the command.|
@@ -404,7 +452,14 @@ Column names are ['vector', 'color', 'brand']
 
 Processed 50001 lines.
 
-Import successfully.
+Inserting ...
+
+Insert successfully.
+--------------------------  ------------------
+Total insert entities:                   50000
+Total collection entities:              150000
+Milvus timestamp:           428849214449254403
+--------------------------  ------------------
 ```
 ## list collections
 Lists all collections.
@@ -431,7 +486,7 @@ list indexes -c (text)
 ### Options
 |Option|Full name|Description
 |:---|:---|:---|
-|-c|--collection|The name of the collection.|
+|-c|--collection-name|The name of the collection.|
 |--help|n/a|Displays help for using the command.|
 
 ## list partitions
@@ -443,7 +498,7 @@ list partitions -c (text)
 ### Options
 |Option|Full name|Description
 |:---|:---|:---|
-|-c|--collection|The name of the collection.|
+|-c|--collection-name|The name of the collection.|
 |--help|n/a|Displays help for using the command.|
 
 ## load
@@ -455,7 +510,7 @@ load -c (text) [-p (text)]
 ### Options
 |Option|Full name|Description
 |:---|:---|:---|
-|-c|--collection|The name of the collection that the partition belongs to.|
+|-c|--collection-name|The name of the collection that the partition belongs to.|
 |-p|--partition|(Optional/Multiple) The name of the partition.|
 |--help|n/a|Displays help for using the command.|
 
@@ -494,7 +549,7 @@ release -c (text) [-p (text)]
 ### Options
 |Option|Full name|Description
 |:---|:---|:---|
-|-c|--collection|The name of the collection that the partition belongs to.|
+|-c|--collection-name|The name of the collection that the partition belongs to.|
 |-p|--partition|(Optional/Multiple) The name of the partition.|
 |--help|n/a|Displays help for using the command.|
 
@@ -531,6 +586,12 @@ The max number of returned record, also known as topk: 2
 The boolean expression used to filter attribute []: id > 0
 
 The names of partitions to search (split by "," if multiple) ['_default'] []: _default
+
+timeout []:
+
+Guarantee Timestamp(It instructs Milvus to see all operations performed before a provided timestamp. If no such timestamp is provided, then Milvus will search all operations performed to date) [0]: 
+
+Travel Timestamp(Specify a timestamp in a search to get results based on a data view) [0]:
 ```
 #### Example 2
 To perform a search on an indexed collection and be prompted for the required input:
@@ -568,6 +629,10 @@ The boolean expression used to filter attribute []: id > 0
 The names of partitions to search (split by "," if multiple) ['_default'] []: _default
 
 timeout []:
+
+Guarantee Timestamp(It instructs Milvus to see all operations performed before a provided timestamp. If no such timestamp is provided, then Milvus will search all operations performed to date) [0]: 
+
+Travel Timestamp(Specify a timestamp in a search to get results based on a data view) [0]:
 ```
 #### Example 3
 To perform a search on a non-indexed collection and be prompted for the required input:
@@ -589,6 +654,10 @@ The boolean expression used to filter attribute []:
 The names of partitions to search (split by "," if multiple) ['_default'] []:
 
 Timeout []:
+
+Guarantee Timestamp(It instructs Milvus to see all operations performed before a provided timestamp. If no such timestamp is provided, then Milvus will search all operations performed to date) [0]: 
+
+Travel Timestamp(Specify a timestamp in a search to get results based on a data view) [0]:
 ```
 ## show connection
 Shows the current connection.
@@ -611,7 +680,7 @@ show index_progress -c (text) [-i (text)]
 ### Options
 |Option|Full name|Description
 |:---|:---|:---|
-|-c|--collection|The name of the collection that the entities belong to.|
+|-c|--collection-name|The name of the collection that the entities belong to.|
 |-i|--index|(Optional) The name of the index.|
 |--help|n/a|Displays help for using the command.|
 
@@ -624,8 +693,21 @@ show loading_progress -c (text) [-p (text)]
 ### Options
 |Option|Full name|Description
 |:---|:---|:---|
-|-c|--collection|The name of the collection that the entities belong to.|
+|-c|--collection-name|The name of the collection that the entities belong to.|
 |-p|--partition|(Optional/Multiple) The name of the loading partition.|
+|--help|n/a|Displays help for using the command.|
+
+## show query_segment
+Shows the segment information of a collection.
+### Syntax
+```shell
+show query_segment -c (text) [-t (float)]
+```
+### Options
+|Option|Full name|Description
+|:---|:---|:---|
+|-c|--collection-name|The name of the collection.|
+|-t|--timeout|(Optional) The maximum allowed duration in seconds of an RPC call. Not passing this option indicates that the client keeps waiting until the server responds or an error occurs.|
 |--help|n/a|Displays help for using the command.|
 
 ## version
