@@ -86,7 +86,7 @@
     }, 
     {
       "id": "prerequisite-docker.md",
-      "title": "Before you Begin",
+      "title": "Prerequisites",
       "label1": "getstarted",
       "label2": "",
       "label3": "",
@@ -646,7 +646,7 @@
     },
     {
       "id": "tutorials",
-      "title": "Tutorials",
+      "title": "Example Applications",
       "label1": "",
       "label2": "",
       "order": 6,
