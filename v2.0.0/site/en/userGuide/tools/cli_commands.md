@@ -132,7 +132,7 @@ milvus_cli > connect -h 127.0.0.1 -p 19530 -a default
 Specifies unique aliases for a collection.
 <div class="alert note">A collection can have multiple aliases. However, an alias corresponds to a maximum of one collection.</div>
 
-## Syntax
+### Syntax
 ```shell
 create alias -c (text) -a (text) [-A] [-t (float)]
 ```
@@ -653,7 +653,7 @@ The boolean expression used to filter attribute []:
 
 The names of partitions to search (split by "," if multiple) ['_default'] []:
 
-Timeout []:
+timeout []:
 
 Guarantee Timestamp(It instructs Milvus to see all operations performed before a provided timestamp. If no such timestamp is provided, then Milvus will search all operations performed to date) [0]: 
 
