@@ -101,22 +101,28 @@ Result:
 ```
 ## clear
 Clears the screen.
-### Syntax
+
+<h2 id="clear">Syntax</h2>
+
 ```shell
 clear
 ```
-### Options
+<h2 id="clear">Options</h2>
+
 |Option|Full name|Description|
 |:---|:---|:---|
 |--help|n/a|Displays help for using the command.|
 
 ## connect 
 Connects to Milvus.
-### Syntax
+
+<h2 id="connect">Syntax</h2>
+
 ```shell
 connect [-h (text)] [-p (int)] [-a (text)]
 ```
-### Options
+<h2 id="connect">Options</h2>
+
 |Option|Full name|Description
 |:---|:---|:---|
 |-h|--host|(Optional) The host name. The default is "127.0.0.1".
@@ -124,7 +130,8 @@ connect [-h (text)] [-p (int)] [-a (text)]
 |-a|--alias|(Optional) The alias name of the Milvus link. The default is "default".|
 |--help|n/a|Displays help for using the command.|
 
-### Example
+<h2 id="connect"> Example</h2>
+
 ```shell
 milvus_cli > connect -h 127.0.0.1 -p 19530 -a default
 ```
