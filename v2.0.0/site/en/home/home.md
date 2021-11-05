@@ -28,7 +28,7 @@ You can start by browsing the recomended contents below or using the search box 
 
 <div class="start_card_container">
   <a href="/bootcamp">
-    <img  src="../../../assets/bootcamps.png" alt="icon" />
+    <img  src="../../../assets/bootcamps.svg" alt="icon" />
     <p class="link-btn">Bootcamp <i class="fas fa-chevron-circle-right"></i></p>
   </a>
   <p>
