@@ -26,7 +26,7 @@ Alternatively, you can use [Cloud Shell](https://cloud.google.com/shell) which h
 
 Ensure that you create a virtual private cloud (VPC) before creating a firewall rule for Milvus.
 <br>
-If you already have a VPC that you want to use, proceed to [Create a firewall rule for Milvus ](gcp.md#Create-a-Firewall-Rule-for-Milvus).</div>
+If you already have a VPC that you want to use, proceed to [Create a firewall rule for Milvus ](gcp.md#Create-a-firewall-rule-for-Milvus).
 
 
 ### Create a VPC
