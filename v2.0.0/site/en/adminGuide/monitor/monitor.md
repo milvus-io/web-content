@@ -1,68 +1,78 @@
 ---
 id: monitor.md
-title: Monitor and Alert
-related_key: monitor Milvus with Prometheus
-summary: Learn how to monitor Milvus 2.0 with Prometheus.
+title: Deploy Monitoring Services
+related_key: monitor, alert
+summary: Learn how to deploy monitoring services for a Milvus cluster using Prometheus.
 ---
 
-# Monitor Milvus 2.0 with Prometheus Operator on Kubernetes
+# Deploying Monitoring Services on Kubernetes
 
-Prometheus is an open-source toolkit for monitoring Kubernetes implementations. 
+This topic describes how to use Prometheus to deploy monitoring services for a Milvus cluster on Kubernetes.
 
-## Prometheus endpoint
+## Monitor metrics with Prometheus
+Metrics are indicators providing information about the running status of your system. For example, with metrics, you can understand how much memory or CPU resources are consumed by a data node in Milvus. Being aware of the performance and status of the components in your Milvus cluster makes you well-informed and hence making better decisions and adjusting resource allocation in a more timely manner.
 
-Prometheus exports metrics of each Milvus 2.0 component at `http://<component-host>:9091/metrics`. Use Prometheus to pull data from endpoints set by exporters.
+Generally, metrics are stored in a time series database (TSDB), like [Prometheus](https://prometheus.io/), and the metrics are recorded with a timestamp. In the case of monitoring Milvus services, you can use Prometheus to pull data from endpoints set by exporters. Prometheus then exports metrics of each Milvus component at `http://<component-host>:9091/metrics`. 
 
-## Prometheus Operator
+However, you might have several replicas for one component, which makes manual configuration of Prometheus too complicated. Therefore, you can use [Prometheus Operator](https://github.com/prometheus-operator/prometheus-operator), an extension to Kubernetes, for automated and effective management of Prometheus monitoring instances. Using Prometheus Operator saves you the trouble of manually adding metric targets and service providers.
 
-[Prometheus Operator](https://github.com/prometheus-operator/prometheus-operator) is an extension to Kubernetes for automated and effective management of  Prometheus monitoring instances. Using Prometheus Operator saves you the trouble of manually adding metric targets and service providers.
+The ServiceMonitor Custom Resource Definition (CRD) enables you to declaratively define how a dynamic set of services are monitored. It also allows selecting which services to monitor with the desired configuration using label selections. With Prometheus Operator, you can introduce conventions specifying how metrics are exposed. New services can be automatically discovered following the convention you set without the need for manual reconfiguration.
 
-**Overall architecture**
-
-The ServiceMonitor Custom Resource Definition (CRD) allows you to declaratively define how a dynamic set of services should be monitored, and select which services to monitor with the desired configuration using label selections. With Prometheus Operator, you can introduce conventions around how metrics are exposed. New services can be automatically discovered following the convention you set without the need for manual reconfiguration.
+The following image illustrates Prometheus workflow.
 
 ![Prometheus_architecture](../../../../assets/prometheus_architecture.png)
 
-## Kube-prometheus
+## Prerequisites
 
-[Kube-prometheus](https://github.com/prometheus-operator/kube-prometheus) collects Kubernetes manifests, [Grafana](http://grafana.com/) dashboards, and [Prometheus rules](https://prometheus.io/docs/prometheus/latest/configuration/recording_rules/) combined with documentation and scripts to provide easy to operate end-to-end Kubernetes cluster monitoring with [Prometheus](https://prometheus.io/) using the Prometheus Operator.
+This tutorial uses [kube-prometheus](https://github.com/prometheus-operator/kube-prometheus) to save you the trouble of installing and manually configuring each monitoring and alerting component.
 
-**Create a monitoring stack using the config in the manifests directory:**
+Kube-prometheus collects Kubernetes manifests, [Grafana](http://grafana.com/) dashboards, and [Prometheus rules](https://prometheus.io/docs/prometheus/latest/configuration/recording_rules/) combined with documentation and scripts.
 
-``` 
+Before deploying monitoring services, you need to create a monitoring stack by using the configuration in the kube-prometheus manifests directory.
+
+```
 git clone https://github.com/prometheus-operator/kube-prometheus.git
 kubectl create -f manifests/setupuntil kubectl get servicemonitors --all-namespaces ; do date; sleep 1; echo ""; done
 kubectl create -f manifests/
 ```
 
-**Teardown the stack:**
+To delete a stack, run `kubectl delete --ignore-not-found=true -f manifests/ -f manifests/setup`.
 
-```
-kubectl delete --ignore-not-found=true -f manifests/ -f manifests/setup
-```
+## Deploy monitoring services on Kubernetes
 
-**Access the dashboards:**
+### 1. Access the dashboards
+
+You can access Prometheus via `http://localhost:9090`.
 
 ```
 kubectl --namespace monitoring port-forward svc/prometheus-k8s 9090
-kubectl --namespace monitoring port-forward svc/grafana 3000
 ```
 
-Now you can access Prometheus via http://localhost:9090, and Grafana via http://localhost:3000. You can also access Grafana using the default Grafana user:password of `admin:admin`. 
+### 2. Enable ServiceMonitor
 
-## Enable ServiceMonitor with Milvus Helm Chart
-
-The ServiceMonitor is not enabled for Milvus Helm by default. After installing Prometheus Operator in the Kubernetes cluster, you can enable it by adding `metrics.serviceMonitor.enabled=true` parameter.
+The ServiceMonitor is not enabled for Milvus Helm by default. After installing the Prometheus Operator in the Kubernetes cluster, you can enable it by adding the parameter `metrics.serviceMontior.enabled=true`.
 
 ```
-helm install my-release milvus/milvus --set cluster.enabled=true --set metrics.serviceMonitor.enabled=true
+helm install my-release milvus/milvus --set metrics.serviceMonitor.enabled=true
 ```
 
-When Helm installation completes, use `kubectl` to check the ServiceMonitor resource.
+When the installation completes, use `kubectl` to check the ServiceMonitor resource.
 
 ```
 kubectl get servicemonitor
+```
+```
 NAME                           AGE
 my-release-milvus              54s
 ```
 
+## What's next
+
+- If you have deployed monitoring services for the Milvus cluster, you might also want to learn to:
+  - [Visualize Milvus metrics in Grafana](visualize.md)
+  - [Create an Alert for Milvus Services](alert.md)
+  - Adjust your [resource allocation](allocate.md)
+- If you are looking for information about how to scale a Milvus cluster:
+  - Learn [scale a Milvus cluster](scaleout.md)
+- If you are interested in upgrading the Milvus 2.0 version,
+  - Read the [upgrading guide](upgrade.md)
