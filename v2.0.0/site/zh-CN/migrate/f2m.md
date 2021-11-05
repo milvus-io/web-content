@@ -1,37 +1,53 @@
 ---
 id: f2m.md
+title: Migrate from Faiss to Milvus
+related_key: Faiss, migrate, import
+summary: Learn how to migrate Faiss data to Milvus.
 ---
 
-# 数据迁移：Faiss 至 Milvus
+# Migrate Data from Faiss to Milvus
 
-你可以使用 [MilvusDM](migrate_overview.md) 将 Faiss 数据件导入 Milvus。
+This topic describes how to import data from Faiss to Milvus using [MilvusDM](migrate_overview.md), an open-source tool specifically designed for Milvus data migration. 
 
-1. 下载 **F2M.yaml**:
+## Prerequisites
+
+You need to [install MilvusDM](milvusdm_install.md) before migrating Milvus data.
+
+## 1. Download YAML file
+
+Download the `F2M.yaml` file.
 
 ```
 $ wget https://raw.githubusercontent.com/milvus-io/milvus-tools/main/yamls/F2M.yaml
 ```
 
-2. 配置参数：
-- `data_path`：Faiss 中数据路径。
-- `dest_host`：目标 Milvus 服务器地址。
-- `dest_port`：目标 Milvus 服务器端口。
-- `mode`：数据迁移模式
-  - `Skip`：若指定 collection 或 partition 已存在，跳过数据迁移。
-  - `Append`：若指定 collection 或 partition 已存在，添加数据。
-  - `Overwrite`：若指定 collection 或 partition 已存在，在插入数据前删除已有数据。
-- `dest_collection_name`：导入数据的 collection 名称。
-- `dest_partition_name`：导入数据的 partition 名称。
-- `collection_parameter`：collection 相关信息，包括向量维度、索引文件大小、相似度计算方式等。
+## 2. Set the parameters
 
-示例：
+Configuration parameters include:
+
+| Parameter                 | Description                               | Example                      |
+| ------------------------- | ----------------------------------------- | ---------------------------- |
+| `milvus_version`          |  Version of Milvus.                       | 2.0.0                     |
+| `data_path`               | Path to the data in Faiss.                   | '/home/user/data/faiss.index'                   |
+| `data_dir`         |  Directory of the HDF5 files. Set either `data_path` or `data_dir`.                      | '/Users/zilliz/Desktop/HDF5_data'                     |
+| `dest_host`          |  Milvus server address.                      | '127.0.0.1'     |
+| `dest_port`          |  Milvus server port.                       | 19530                      |
+| `mode`         |  Mode of migration, including `skip`, `append`, and `overwrite`. This parameter works only when the specified collection name exists in the Milvus library. <br/> <li>`skip` refers to skipping data migration if the specified collection or partition already exists.</li> <li>`append` refers to appending data if the specified collection or partition already exists.</li> <li>`overwrite` refers to deleting existing data before insertion if the specified collection or partition already exists.</li>                    | 'append'                     |
+| `dest_collection_name`          | Name of the collection to import data to.                      | 'test'                       |
+| `dest_partition_name` (optional)        |  Name of the partition to import data to.                   | 'partition'                 |
+| `collection_parameter`         |  Collection-specific information including vector dimension, index file size, and similarity metric.                      | "dimension: 512 <br/> index_file_size: 1024 <br/> metric_type: 'HAMMING'"                     |
+
+### Example 
+
+The following example of configuration is for your reference. 
+
 ```
 F2M:
-  milvus_version: 2.x
-  data_path: '/home/data/faiss.index'
+  milvus_version: 2.0.0
+  data_path: '/home/data/faiss1.index'
   dest_host: '127.0.0.1'
   dest_port: 19530
-  mode: 'append'        # 'skip/append/overwrite'
+  mode: 'append'
   dest_collection_name: 'test'
   dest_partition_name: ''
   collection_parameter:
@@ -40,18 +56,21 @@ F2M:
     metric_type: 'L2'
 ```
 
-3. 运行 MilvusDM:
+
+## 3. Migrate data from HDF5 to Milvus
+
+Run MilvusDM to import data from Faiss to Milvus with the following command.
 
 ```
 $ milvusdm --yaml F2M.yaml
 ```
 
-## 示例代码
 
-读取指定集合或分区的元数据，根据元数据读取本地 **milvus/db** 下的数据文件，返回特征向量和对应的 ID 并存入本地的 HDF5 文件中。
 
-```
-ids, vectors = faiss_data.read_faiss_data()
-insert_milvus.insert_data(vectors, self.dest_collection_name, self.collection_parameter, self.mode, ids, self.dest_partition_name)
-```
-
+## What's next
+- If you are interested in migrating data in other forms into Milvus,
+  - Learn how to [Migrate Data from HDF5 to Milvus](h2m.md).
+- If you are looking for information about how migrate data from Milvus 1.x to Milvus 2.0,
+  - Learn [version migration](m2m.md).
+- If you are interested in learning more about the data migration tool,
+  - Read the overview of [MilvusDM](migrate_overview.md).
