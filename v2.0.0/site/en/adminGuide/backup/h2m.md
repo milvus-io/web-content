@@ -1,40 +1,50 @@
 ---
 id: h2m.md
 title: HDF5 to Milvus
-related_key: HDF5 to Milvus
-summary: Migrate HDF5 files to Milvus.
+related_key: HDF5, migrate, import
+summary: Import HDF5 files to Milvus.
 ---
+
 # Migrate Data from HDF5 to Milvus
 
-You can migrate HDF5 files to Milvus using [MilvusDM](migrate_overview.md).
+This topic describes how to import data in HDF5 files into Milvus using [MilvusDM](migrate_overview.md), an open-source tool specifically designed for Milvus data migration. 
 
-1. Download **H2M.yaml**:
+## Prerequisites
+
+You need to [install MilvusDM](milvusdm_install.md) before migrating Milvus data.
+
+## 1. Download YAML file
+
+Download the `M2H.yaml` file.
 
 ```
-$ wget https://raw.githubusercontent.com/milvus-io/milvus-tools/main/yamls/H2M.yaml
+$ wget https://raw.githubusercontent.com/milvus-io/milvus-tools/main/yamls/M2H.yaml
 ```
 
-2. Set the following parameters:
-- `data_path`: Path to the HDF5 file.
-- `data_dir`: Directory of the HDF5 files.
-- `dest_host`: Milvus server address.
-- `dest_port`: Milvus server port.
-- `mode`: Mode of migration
-  - `Skip`: Skip data migration if the specified collection or partition already exists.
-  - `Append`: Append data if the specified collection or partition already exists.
-  - `Overwrite`: Delete existing data before insertion if the specified collection or partition already exists.
-- `dest_collection_name`: Name of the collection to import data to.
-- `dest_partition_name`: Name of the partition to import data to.
-- `collection_parameter`: Collection-specific information such as vector dimension, index file size, and similarity metric.
+## 2. Set the parameters
 
-<div class="alert warning">
-Set either <code>data_path</code> or <code>data_dir</code>. Do <b>not</b> set both. Use <code>data_path</code> to specify multiple file paths, or <code>data_dir</code> to specify the directory holding your HDF5 files.
-</div>
+Configuration parameters include:
 
-Example:
+| Parameter                 | Description                               | Example                      |
+| ------------------------- | ----------------------------------------- | ---------------------------- |
+| `milvus_version`          |  Version of Milvus.                       | 2.0.0                       |
+| `data_path`               |  Path to the HDF5 files. Set either `data_path` or `data_dir`.                      | - /Users/zilliz/float_1.h5 <br/> - /Users/zilliz/float_2.h5                   |
+| `data_dir`         |  Directory of the HDF5 files. Set either `data_path` or `data_dir`.                      | '/Users/zilliz/Desktop/HDF5_data'                     |
+| `dest_host`          |  Milvus server address.                      | '127.0.0.1'     |
+| `dest_port`          |  Milvus server port.                       | 19530                      |
+| `mode`         |  Mode of migration, including `skip`, `append`, and `overwrite`. This parameter works only when the specified collection name exists in the Milvus library. <br/> <li>`skip` refers to skipping data migration if the specified collection or partition already exists.</li> <li>`append` refers to appending data if the specified collection or partition already exists.</li> <li>`overwrite` refers to deleting existing data before insertion if the specified collection or partition already exists.</li>                    | 'append'                     |
+| `dest_collection_name`          | Name of the collection to import data to.                      | 'test_float'                       |
+| `dest_partition_name` (optional)        |  Name of the partition to import data to.                   | 'partition_1'                 |
+| `collection_parameter`         |  Collection-specific information including vector dimension, index file size, and similarity metric.                      | "dimension: 512 <br/> index_file_size: 1024 <br/> metric_type: 'HAMMING'"                     |
+
+
+The following two examples of configuration are for your reference. The first example sets the parameter `data_path` while the second sets `data_dir`. You can set either `data_path` or `data_dir` according to your need.
+
+### Example 1
+
 ```
 H2M:
-  milvus-version: 2.x
+  milvus-version: 2.0.0
   data_path:
     - /Users/zilliz/float_1.h5
     - /Users/zilliz/float_2.h5
@@ -50,21 +60,38 @@ H2M:
     metric_type: 'L2'
 ```
 
-3. Run MilvusDM:
+### Example 2
+
+```
+H2M:
+  milvus_version: 2.0.0
+  data_path:
+  data_dir: '/Users/zilliz/HDF5_data'
+  dest_host: '127.0.0.1'
+  dest_port: 19530
+  mode: 'append'        # 'skip/append/overwrite'
+  dest_collection_name: 'test_binary'
+  dest_partition_name: 
+  collection_parameter:
+    dimension: 512
+    index_file_size: 1024
+    metric_type: 'HAMMING'
+```
+
+## 3. Migrate data from HDF5 to Milvus
+
+Run MilvusDM to import data in HDF5 files into Milvus with the following command.
+
 ```
 $ milvusdm --yaml H2M.yaml
 ```
 
-## Sample Code
 
-1. Read the HDF5 files to retrieve vectors and their corresponding IDs:
 
-```
-vectors, ids = self.file.read_hdf5_data()
-```
-
-2. Insert the retrieved data into Milvus:
-
-```
-ids = insert_milvus.insert_data(vectors, self.c_name, self.c_param, self.mode, ids,self.p_name)
-```
+## What's next
+- If you are interested in migrating data in other forms into Milvus,
+  - Learn how to [Migrate Data from Faiss to Milvus](f2m.md).
+- If you are looking for information about how migrate data from Milvus 1.x to Milvus 2.0,
+  - Learn [version migration](m2m.md).
+- If you are interested in learning more about the data migration tool,
+  - Read the overview of [MilvusDM](migrate_overview.md).
