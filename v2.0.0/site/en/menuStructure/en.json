@@ -324,12 +324,20 @@
       "isMenu": true
     },
     {
+      "id": "monitor_overview.md",
+      "title": "Overview",
+      "label1": "admin_guide",
+      "label2": "monitor",
+      "label3": "",
+      "order": 0
+    },
+    {
       "id": "monitor.md",
       "title": "Deploy Monitoring Services",
       "label1": "admin_guide",
       "label2": "monitor",
       "label3": "",
-      "order": 0
+      "order": 1
     },
     {
       "id": "visualize.md",
@@ -337,7 +345,7 @@
       "label1": "admin_guide",
       "label2": "monitor",
       "label3": "",
-      "order": 1
+      "order": 2
     },
     {
       "id": "alert.md",
@@ -345,7 +353,7 @@
       "label1": "admin_guide",
       "label2": "monitor",
       "label3": "",
-      "order": 2
+      "order": 3
     },
     {
       "id": "allocate.md",
