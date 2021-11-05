@@ -21,7 +21,7 @@ You can start by browsing the recomended contents below or using the search box 
 <div class="start_card_container">
   <a href="example_code.md">
     <img  src="../../../assets/start.svg" alt="icon" />
-    <p class="link-btn">Install Milvus <i class="fas fa-chevron-circle-right"></i></p>
+    <p class="link-btn">Quick Start <i class="fas fa-chevron-circle-right"></i></p>
   </a>
   <p>Learn how to quickly run Milvus with sample code."</p>
 </div>
