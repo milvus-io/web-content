@@ -30,7 +30,7 @@ Milvus was released under the open-source Apache License 2.0 in October 2019, an
 
 <div class="start_card_container">
   <a href="/bootcamp">
-    <img  src="../../../assets/bootcamps.png" alt="icon" />
+    <img  src="../../../assets/bootcamps.svg" alt="icon" />
     <p class="link-btn">Bootcamp <i class="fas fa-chevron-circle-right"></i></p>
   </a>
   <p>
