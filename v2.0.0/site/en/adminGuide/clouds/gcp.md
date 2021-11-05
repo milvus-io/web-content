@@ -129,6 +129,7 @@ Starting pods might take several minutes. Run <code>kubectl get services</code> 
 </div>
 
 ## Use Google Cloud Storage
+Google Cloud Storage (GCS) is Google Cloud's version of AWS Simple Storage Service (S3).
 
 MinIO GCS Gateway allows accessing GCS. Essentially, MinIO GCS Gateway translates and forwards all connections to GCS by using APIs. You can use MinIO GCS Gateway instead of a MinIO server.
 
@@ -144,7 +145,7 @@ To access GCS resources, MinIO GCS Gateway requires both GCP service account cre
 - `secretkey`: The MinIO secret key.
 - `gcs_key.json`: The GCP service account credentials file.
 
-##### Example
+#### Example
 
 ```shell
 $ kubectl create secret generic mysecret --from-literal=accesskey=minioadmin --from-literal=secretkey=minioadmin --from-file=gcs_key.json=/home/credentials.json
@@ -175,7 +176,7 @@ If you choose <code>accesskey</code> and <code>secretkey</code> values other tha
 
 Continue to use all normal MinIO metadata variables.
 
-##### Example
+#### Example
 ```shell
 $ helm install my-release milvus/milvus --set minio.existingSecret=mysecret --set minio.gcsgateway.enabled=true --set minio.gcsgateway.projectId=milvus-testing-nonprod --set externalGcs.bucketName=milvus-bucket-example
 ```
@@ -185,4 +186,4 @@ $ helm install my-release milvus/milvus --set minio.existingSecret=mysecret --se
 If you want to learn how to deploy Milvus on other clouds:
 - [Deploy a Milvus Cluster on EC2](https://milvus.io/docs/v2.0.0/aws.md)
 - [Deploy a Milvus Cluster on EKS](https://milvus.io/docs/v2.0.0/eks.md)
-- [Guide to Deploying Milvus on Microsoft Azure With Kubernetes](https://milvus.io/docs/v2.0.0/azure.md)
+- [Deploy a Milvus Cluster on Azure](https://milvus.io/docs/v2.0.0/azure.md)
