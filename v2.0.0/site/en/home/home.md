@@ -43,33 +43,33 @@ You can start by browsing the recomended contents below or using the search box 
 <div class="doc-home-recommend-section">
 
 <div class="recomment-item">
-  <p>Get started</p>
+  <p>Use</p>
 
 - [Create a Collection](create.md)
+- [Insert Data](insert.md)
 - [Build an Index](build.md)
-- [Drop a Collection or an Index](drop.md)
-- [Scale a Milvus Cluster](scaleout.md)
-- [Monitor and Alert](monitor.md)
+- [Vector Similarity Search](search.md)
+- [Query](query.md)
 </div>
 
 <div class="recomment-item">
-  <p>Get started</p>
+  <p>Deploy</p>
 
-- [Create a Collection](create.md)
-- [Build an Index](build.md)
-- [Drop a Collection or an Index](drop.md)
+- [Deploy on Clouds](aws.md)
 - [Scale a Milvus Cluster](scaleout.md)
-- [Monitor and Alert](monitor.md)
+- [Set up storage](deploy_s3.md)
+- [Monitor and Alert](monitor_overview.md)
+- [Upgrade](upgrade.md)
 </div>
 
 <div class="recomment-item">
-  <p>Get started</p>
+  <p>Learn</p>
 
-- [Create a Collection](create.md)
-- [Build an Index](build.md)
-- [Drop a Collection or an Index](drop.md)
-- [Scale a Milvus Cluster](scaleout.md)
-- [Monitor and Alert](monitor.md)
+- [System Configurations](configuration_standalone-basic.md)
+- [Architecture Overview](architecture_overview.md)
+- [Vector Index](index_selection.md)
+- [Similarity Metrics](metric.md)
+- [Glossary](glossary.md)
 </div>
 
 </div>
