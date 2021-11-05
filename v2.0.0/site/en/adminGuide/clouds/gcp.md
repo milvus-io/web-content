@@ -180,7 +180,7 @@ Continue to use all normal MinIO metadata variables.
 $ helm install my-release milvus/milvus --set minio.existingSecret=mysecret --set minio.gcsgateway.enabled=true --set minio.gcsgateway.projectId=milvus-testing-nonprod --set externalGcs.bucketName=milvus-bucket-example
 ```
 
-### What's next
+## What's next
 
 If you want to learn how to deploy Milvus on other clouds:
 - [Deploy a Milvus Cluster on EC2](https://milvus.io/docs/v2.0.0/aws.md)
