@@ -14,7 +14,7 @@ Milvus 基于 Apache 2 License 协议发布，于 2019 年 10 月正式开源，
 
 <div class="start_card_container">
   <a href="milvus_docker-cpu.md">
-    <img  src="../../../assets/cpu_only.svg" alt="icon" />
+    <img  src="../../../assets/cpu.svg" alt="icon" />
     <p class="link-btn">启动 CPU 版 Milvus <i class="fas fa-chevron-circle-right"></i></p>
   </a>
   <p>开始安装。</p>
@@ -22,7 +22,7 @@ Milvus 基于 Apache 2 License 协议发布，于 2019 年 10 月正式开源，
 
 <div class="start_card_container">
   <a href="example_code.md">
-    <img  src="../../../assets/gpu_enabled.svg" alt="icon" />
+    <img  src="../../../assets/gpu.svg" alt="icon" />
     <p class="link-btn">启动 GPU 版 Milvus <i class="fas fa-chevron-circle-right"></i></p>
   </a>
   <p>开始安装。</p>
@@ -30,7 +30,7 @@ Milvus 基于 Apache 2 License 协议发布，于 2019 年 10 月正式开源，
 
 <div class="start_card_container">
   <a href="/bootcamp">
-    <img  src="../../../assets/bootcamps.png" alt="icon" />
+    <img  src="../../../assets/bootcamps.svg" alt="icon" />
     <p class="link-btn">Milvus 训练营 <i class="fas fa-chevron-circle-right"></i></p>
   </a>
   <p>
