@@ -365,20 +365,12 @@
         "isMenu": true
       },
       {
-        "id": "m2h.md",
-        "title": "Milvus 至 HDF5",
-        "label1": "admin_guide",
-        "label2": "migrate",
-        "label3": "",
-        "order": 0
-      },
-      {
         "id": "h2m.md",
         "title": "HDF5 至 Milvus",
         "label1": "admin_guide",
         "label2": "migrate",
         "label3": "",
-        "order": 1
+        "order": 0
       },
       {
         "id": "f2m.md",
@@ -386,7 +378,7 @@
         "label1": "admin_guide",
         "label2": "migrate",
         "label3": "",
-        "order": 2
+        "order": 1
       },
       {
         "id": "m2m.md",
@@ -394,7 +386,7 @@
         "label1": "admin_guide",
         "label2": "migrate",
         "label3": "",
-        "order": 3
+        "order": 2
       },
       {
         "id": "upgrade.md",
