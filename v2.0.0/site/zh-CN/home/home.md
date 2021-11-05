@@ -28,7 +28,7 @@ id: home.md
 
 <div class="start_card_container">
   <a href="/bootcamp">
-    <img  src="../../../assets/bootcamps.png" alt="icon" />
+    <img  src="../../../assets/bootcamps.svg" alt="icon" />
     <p class="link-btn">Milvus 训练营 <i class="fas fa-chevron-circle-right"></i></p>
   </a>
   <p>
