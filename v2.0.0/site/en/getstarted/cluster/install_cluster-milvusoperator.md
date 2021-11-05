@@ -1,6 +1,6 @@
 ---
 id: install_cluster-milvusoperator.md
-label: Milvus Operator on Kubernetes
+label: Milvus Operator
 related_key: Kubernetes
 order: 2
 group: cluster
@@ -18,7 +18,7 @@ If you run into image loading errors while installing, you can [Install Milvus O
 You can also build Milvus from source code at [GitHub](https://github.com/milvus-io/milvus#to-start-developing-milvus).
 
 
-<div class="tab-wrapper"><a href="install_cluster-docker.md" class=''>Docker Compose</a><a href="install_cluster-helm.md" class=''>Helm on Kubernetes</a><a href="install_cluster-milvusoperator.md" class='active '>Milvus Operator on Kubernetes</a></div>
+<div class="tab-wrapper"><a href="install_cluster-docker.md" class=''>Docker Compose</a><a href="install_cluster-helm.md" class=''>Helm on Kubernetes</a><a href="install_cluster-milvusoperator.md" class='active '>Milvus Operator</a></div>
 
 ## Create a Kubernetes Cluster
 
