@@ -22,18 +22,18 @@ You can also build Milvus from source code at [GitHub](https://github.com/milvus
 
 ## Download an installation file
 
-[Download](https://github.com/milvus-io/milvus/releases/download/v2.0.0-rc7/milvus-standalone-docker-compose.yml) `milvus-standalone-docker-compose.yml` directly or with the following command, and save it as `docker-compose.yml`.
+[Download](https://github.com/milvus-io/milvus/releases/download/v2.0.0-rc8/milvus-standalone-docker-compose.yml) `milvus-standalone-docker-compose.yml` directly or with the following command, and save it as `docker-compose.yml`.
 
 ```
-$ wget https://github.com/milvus-io/milvus/releases/download/v2.0.0-rc7/milvus-standalone-docker-compose.yml -O docker-compose.yml
+$ wget https://github.com/milvus-io/milvus/releases/download/v2.0.0-rc8/milvus-standalone-docker-compose.yml -O docker-compose.yml
 ```
 
 ## Configure Milvus (optional)
 
-[Download](https://raw.githubusercontent.com/milvus-io/milvus/v2.0.0-rc7/configs/milvus.yaml) `milvus.yaml` directly or with the following command.
+[Download](https://raw.githubusercontent.com/milvus-io/milvus/v2.0.0-rc8/configs/milvus.yaml) `milvus.yaml` directly or with the following command.
 
 ```
-$ wget https://raw.githubusercontent.com/milvus-io/milvus/v2.0.0-rc7/configs/milvus.yaml
+$ wget https://raw.githubusercontent.com/milvus-io/milvus/v2.0.0-rc8/configs/milvus.yaml
 ```
 
 Modify the configurations to suit your needs. See [Milvus Standalone System Configurations](configuration_standalone-basic.md) for more information.

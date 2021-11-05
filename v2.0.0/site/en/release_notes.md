@@ -212,7 +212,7 @@ Release date: 2021-09-10
 	<tbody>
 	<tr>
 		<td>2.0.0-RC6</td>
-		<td>2.0.0rc7</td>
+		<td>2.0.0rc6</td>
 		<td>Coming soon</td>
 		<td>Coming soon</td>
 		<td>1.0.18</td>
@@ -274,7 +274,7 @@ Release date: 2021-08-30
 	<tbody>
 	<tr>
 		<td>2.0.0-RC5</td>
-		<td>2.0.0rc7</td>
+		<td>2.0.0rc5</td>
 		<td>Coming soon</td>
 		<td>Coming soon</td>
 		<td>1.0.18</td>
@@ -362,7 +362,7 @@ Release date: 2021-08-13
 
 | Milvus version | Python SDK version                | Java SDK version | Go SDK version |
 | ------------------ | ------------------------------------- | -------------------- | ------------------ |
-| 2.0.0-RC4          | 2.0.0rc7 | Coming soon          | Coming soon        |
+| 2.0.0-RC4          | 2.0.0rc4 | Coming soon          | Coming soon        |
 
 Milvus 2.0.0-RC4 is a preview version of Milvus 2.0.0. It mainly focuses on fixing stability issues, it also offers functionalities to retrieve vector data from object storage and specify output field by wildcard matching.
 
@@ -487,7 +487,7 @@ Release date: 2021-07-13
 
 | Milvus version | Python SDK version | Java SDK version | Go SDK version |
 | :------------- | :----------------- | :--------------- | :------------- |
-| 2.0.0-RC2 | 2.0.0rc7 | Coming soon            | Coming soon          |
+| 2.0.0-RC2 | 2.0.0rc2 | Coming soon            | Coming soon          |
 
 Milvus 2.0.0-RC2 is a preview version of Milvus 2.0.0. It fixes stability and performance issues and refactors code for node and storage management.
 
@@ -529,7 +529,7 @@ Release date: 2021-06-28
 
 | Milvus version | Python SDK version | Java SDK version | Go SDK version |
 | :------------- | :----------------- | :--------------- | :------------- |
-| 2.0.0-RC1 | 2.0.0rc7 | Coming soon            | Coming soon          |
+| 2.0.0-RC1 | 2.0.0rc1 | Coming soon            | Coming soon          |
 
 
 
