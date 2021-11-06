@@ -6,6 +6,169 @@ summary: Milvus Release Notes
 
 Find out what’s new in Milvus! This page summarizes information about new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.0.0-RC1 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.0.0-RC8
+
+Release date: 2021-11-5
+
+### Compatibility
+
+<table class="version">
+	<thead>
+	<tr>
+		<th>Milvus version</th>
+		<th>Python SDK version</th>
+		<th>Java SDK version</th>
+		<th>Go SDK version</th>
+		<th>Node SDK version</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>2.0.0-RC8</td>
+		<td>2.0.0rc8</td>
+		<td>Coming soon</td>
+		<td>Coming soon</td>
+		<td>1.0.18</td>
+	</tr>
+	</tbody>
+</table>
+
+
+
+Milvus 2.0.0-RC8 is the last release candidate of Milvus 2.0.0-GA. It supports handoff task, primary key deduplication and search by Time Travel functionalities. The mean time to recovery (MTTR) has also been greatly reduced with the enhancement of timetick mechanism. We had run stress test on 2.0.0-RC8 with 10M datasets, and both standalone and distributed cluster survived for 84 hours.
+
+
+
+### Improvements
+
+- Failure Recovery speed:
+  - [#10737](https://github.com/milvus-io/milvus/pull/10737) Fixes Session checker for proxy.
+  - [#10723](https://github.com/milvus-io/milvus/pull/10723 ) Fixes seek query channel error.
+  - [#10907](https://github.com/milvus-io/milvus/pull/10907) Fixes `LatestPosition` option conflict with earliest patch.
+  - [#10616](https://github.com/milvus-io/milvus/pull/10616) Removes Common YAML.
+  - [#10771](https://github.com/milvus-io/milvus/pull/10771) Changes `SeekPosition` to the earliest of all segments.
+  - [#10651](https://github.com/milvus-io/milvus/pull/10651) Fixes query coord set seek position error.
+  - [#9543](https://github.com/milvus-io/milvus/pull/9543) Initializes global sealed segments and seek query channel when `AddQueryChannel`.
+  - [#9684](https://github.com/milvus-io/milvus/pull/9684) Skips re-consuming timetick MsgStream when data coord restarts.
+
+- Refactor meta snapshot:
+  - [#10288](https://github.com/milvus-io/milvus/pull/10288) Reduces information saved in `SnapshotMeta`.
+  - [#10703](https://github.com/milvus-io/milvus/pull/10703 ) Fixes failure when creating meta table because of compatibility issue.
+  - [#9778](https://github.com/milvus-io/milvus/pull/9778) Simplifies `meta_snapshot` interface.
+
+- [#10563](https://github.com/milvus-io/milvus/pull/10563) Changes default balance policy.
+
+- [#10730](https://github.com/milvus-io/milvus/pull/10730) Returns segment state when getting query segment information.
+
+- [#10534](https://github.com/milvus-io/milvus/pull/10534) Supports reading MinIO configuration from environment variables.
+
+- [#10114](https://github.com/milvus-io/milvus/pull/10114) Sets default `gracefulTime` to `0`.
+
+- [#9860](https://github.com/milvus-io/milvus/pull/9860) Hides `liveChn` into `sessionutil` and fix liveness initialization order.
+
+- [#7115](https://github.com/milvus-io/milvus/pull/7115) Uses etcd to watch channel on data node.
+
+- [#7606](https://github.com/milvus-io/milvus/pull/7606) Makes `knowhere` compile independently.
+
+### Features
+
+- Handoff:   
+
+  - [#10330](https://github.com/milvus-io/milvus/pull/10330) Adds `handoffTask`.
+
+  - [#10084](https://github.com/milvus-io/milvus/pull/10084) Broadcasts `sealedSegmentChangeInfo` to `queryChannel`.
+  - [#10619](https://github.com/milvus-io/milvus/pull/10619) Fixes removing segment when query node receives `segmentChangeInfo`.
+  - [#10045](https://github.com/milvus-io/milvus/pull/10045) Watches `changeInfo` in query node.
+  - [#10011](https://github.com/milvus-io/milvus/pull/10011) Updates excluded segments info when receiving `changeInfo`.
+  - [#9606](https://github.com/milvus-io/milvus/pull/9606) Adds initialization information for `AddQueryChannelRequest`.
+  - [#10619](https://github.com/milvus-io/milvus/pull/10619) Fixes removing segment when query node receives `segmentChangeInfo`.
+
+- Primary Deduplication:
+  - [#10834](https://github.com/milvus-io/milvus/pull/10834) Removes primary key duplicated query result in query node.
+  - [#10355](https://github.com/milvus-io/milvus/pull/10355) Removes duplicated search results in proxy.
+  - [#10117](https://github.com/milvus-io/milvus/pull/10117) Removes duplicated search results in segcore reduce.
+  - [#10949](https://github.com/milvus-io/milvus/pull/10949) Uses primary key only to check search result duplication.
+  - [#10967](https://github.com/milvus-io/milvus/pull/10967) Removes primary key duplicated query result in proxy.
+
+- Auto-flush:
+  - [#10659](https://github.com/milvus-io/milvus/pull/10659) Adds `injectFlush` method for `flushManager` interface.
+  - [#10580](https://github.com/milvus-io/milvus/pull/10580) Adds injection logic for `FlushManager`.
+  - [#10550](https://github.com/milvus-io/milvus/pull/10550) Merges automatic and manual flush with same segment ID.
+  - [#10539](https://github.com/milvus-io/milvus/pull/10539) Allows flushed segments to trigger flush process.
+  - [#10197](https://github.com/milvus-io/milvus/pull/10197) Adds a timed flush trigger mechanism.
+  - [#10142](https://github.com/milvus-io/milvus/pull/10142) Applies flush manager logic in data node.
+  - [#10075](https://github.com/milvus-io/milvus/pull/10075) Uses single signal channel to notify flush.
+  - [#9986](https://github.com/milvus-io/milvus/pull/9986) Adds flush manager structure.
+
+- [#10173](https://github.com/milvus-io/milvus/pull/10173) Adds binlog iterators.
+
+- [#10193](https://github.com/milvus-io/milvus/pull/10193) Changes bloom filter use primary key.
+
+- [#9782](https://github.com/milvus-io/milvus/pull/9782) Adds `allocIDBatch` for data node allocator.
+
+### Bug Fixes
+
+- Incorrect collection loading behavior if there is not enough memory:
+  - [#10796](https://github.com/milvus-io/milvus/pull/10796) Fixes get container mem usage.
+  - [#10800](https://github.com/milvus-io/milvus/pull/10800) Uses `TotalInactiveFile` in `GetContainerMemUsed`.
+  - [#10603](https://github.com/milvus-io/milvus/pull/10603) Increases compatibility for `EstimateMemorySize` interface.
+  - [#10363](https://github.com/milvus-io/milvus/pull/10363) Adds `cgroups` to get container memory and check index memory in segment loader.
+  - [#10294](https://github.com/milvus-io/milvus/pull/10294) Uses proto size to calculate request size.
+  - [#9688](https://github.com/milvus-io/milvus/pull/9688) Estimates memory size with descriptor event.
+  - [#9681](https://github.com/milvus-io/milvus/pull/9681) Fixes the way that binlog stores the original memory size.
+  - [#9628](https://github.com/milvus-io/milvus/pull/9628) Stores original memory size of binlog file to extra information.
+
+- Size of etcd-related request is too large:
+  - [#10909](https://github.com/milvus-io/milvus/pull/10909) Fixes too many operations in `txn` request when saving `segmentInfo`.
+  - [#10812](https://github.com/milvus-io/milvus/pull/10812) Fixes too large request when loading segment.
+  - [#10768](https://github.com/milvus-io/milvus/pull/10768) Fixes too large request when loading collection.
+  - [#10655](https://github.com/milvus-io/milvus/pull/10655) Splits watch operations into many transactions.
+  - [#10587](https://github.com/milvus-io/milvus/pull/10587) Compacts `multiSegmentChangeInfo` to a single info.
+  - [#10425](https://github.com/milvus-io/milvus/pull/10425) Trims `segmentinfo` binlog for `VChaninfo` usage.
+  - [#10340](https://github.com/milvus-io/milvus/pull/10340) Fixes `multiSave` `childTask` failed to etcd.
+  - [#10310](https://github.com/milvus-io/milvus/pull/10310) Fixes error when assigning load segment request.
+  - [#10125](https://github.com/milvus-io/milvus/pull/10125) Splits large `loadSegmentReq` to multiple small requests.
+
+- System panics:
+  - [#10832](https://github.com/milvus-io/milvus/pull/10832) Adds query `mutex` to fix crash with panic.
+  - [#10821](https://github.com/milvus-io/milvus/pull/10821) Index node finishes the task before index coord changed the meta.
+  - [#10182](https://github.com/milvus-io/milvus/pull/10182) Fixes panic when flushing segment.
+  - [#10681](https://github.com/milvus-io/milvus/pull/10681) Fixes query coord panic when upgrading `querychannelInfo`.
+
+- RocksMQ-related issues:
+  - [#10367](https://github.com/milvus-io/milvus/pull/10367) Stops retention gracefully.
+  - [#9828](https://github.com/milvus-io/milvus/pull/9828) Fixes retention data race.
+  - [#9933](https://github.com/milvus-io/milvus/pull/9933) Changes retention ticker time to 10 minutes.
+  - [#9694](https://github.com/milvus-io/milvus/pull/9694) Deletes messages before deleting metadata in rocksmq retention.
+  - [#11029](https://github.com/milvus-io/milvus/pull/11029) Fixes rocksmq `SeekToLatest`.
+  - [#11057](https://github.com/milvus-io/milvus/pull/11057) Fixes `SeekToLatest` memory leakage and remove redundant logic.
+  - [#11081](https://github.com/milvus-io/milvus/pull/11081) Fixes rocksdb retention ts not set.
+  - [#11083](https://github.com/milvus-io/milvus/pull/11083) Adds topic lock for rocksmq `Seek`.
+  - [#11076](https://github.com/milvus-io/milvus/pull/11076) Moves topic lock to the front of final delete in retention expired cleanup.
+
+- [#10751](https://github.com/milvus-io/milvus/pull/10751) `loadIndex` keep retrying when `indexFilePathInfo` gets empty list.
+
+- [#10583](https://github.com/milvus-io/milvus/pull/10583) `ParseHybridTs` returns type to INT64.
+
+- [#10599](https://github.com/milvus-io/milvus/pull/10599) Delete message hash error.
+
+- [#10314](https://github.com/milvus-io/milvus/pull/10314) Index building task mistakenly canceled by index coord by mistake.
+
+- [#9701](https://github.com/milvus-io/milvus/pull/9701) Incorrect `CreateAlias/DropAlias/AlterAlias` implementation.
+
+- [#9573](https://github.com/milvus-io/milvus/pull/9573) Timeout when data coord saves binlog.
+
+- [#9788](https://github.com/milvus-io/milvus/pull/9788) Watch Channel canceled due to revision compacted.
+
+- [#10994](https://github.com/milvus-io/milvus/pull/10994) Index node does not balances load.
+
+- [#11152](https://github.com/milvus-io/milvus/pull/11152) Search is wrong when using Time Travel without filtering condition and call `num_entities`.
+
+- [#11249](https://github.com/milvus-io/milvus/pull/11249) [#11277](https://github.com/milvus-io/milvus/pull/11277) Release collection block in query node.
+
+- [#11222](https://github.com/milvus-io/milvus/pull/11222) Incorrect empty retrieve result handling.
+
+
 ## v2.0.0-RC7
 
 Release date: 2021-10-11
