@@ -514,18 +514,18 @@ If you use kind to install the K8s cluster, run $ kind delete cluster --name myk
 ## What's next
 
 Having installed Milvus, you can:
-- Check Hello Milvus to run an example code with different SDKs to see what Milvus can do.
+- Check [Hello Milvus](example_code.md) to run an example code with different SDKs to see what Milvus can do.
 - Learn the basic operations of Milvus:
-  - Connect to Milvus server
-  - Conduct a vector search
-  - Conduct a hybrid search
-- Upgrade Milvus Using Helm Chart.
-- Scale your Milvus cluster.
+  - [Connect to Milvus server](connect.md)
+  - [Conduct a vector search](search.md)
+  - [Conduct a hybrid search](hybridsearch.md)
+- [Upgrade Milvus Using Helm Chart](upgrade.md).
+- [Scale your Milvus cluster](scaleout.md).
 - Deploy your Milvu cluster on clouds:
-  - Amazon EC2
-  - Amazon EKS
-- Explore MilvusDM, an open-source tool designed for importing and exporting data in Milvus.
-- Monitor Milvus with Prometheus.
+  - [Amazon EC2](aws.md)
+  - [Amazon EKS](eks.md)
+- Explore [MilvusDM](migrate_overview.md), an open-source tool designed for importing and exporting data in Milvus.
+- [Monitor Milvus with Prometheus](monitor.md).
 
 
   
