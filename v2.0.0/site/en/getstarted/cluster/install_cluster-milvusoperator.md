@@ -139,11 +139,11 @@ CoreDNS is running at https://127.0.0.1:55668/api/v1/namespaces/kube-system/serv
 To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
 ```
 
-### Deploy Milvus Operator
+## Deploy Milvus Operator
 
 Milvus Operator is a solution that helps you deploy and manage a full Milvus service stack to target K8s clusters. The stack includes all Milvus components and relevant dependencies like etcd, Pulsar and MinIO. Milvus Operator defines a Milvus cluster custom resources on top of [Kubernetes Custom Resources](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/). When the custom resources are defined, you can use Kubernetes APIs in a declarative way and manage Milvus deployment stack to ensure its scalability and high-availability.
 
-#### Prerequisites
+### Prerequisites
 
 - Ensure that you can access the K8s cluster via `kubectl`. 
 - Ensure the StorageClass dependency is installed as Milvus clusters depend on Default StorageClass for data persistence. Both minikube and kind have a dependency on Default storageclass when installed. Check the dependency by running the command `kubectl get sc`. If StorageClass is installed, you will see the following output. If not, see [Change the Default Storageclass](https://kubernetes.io/docs/tasks/administer-cluster/change-default-storage-class/) for more information.
@@ -153,7 +153,7 @@ NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDI
 standard (default)    k8s.io/minikube-hostpath     Delete           Immediate             false                    3m36s
 ```
 
-#### 1. Install cert-manager
+### 1. Install cert-manager
 
 Milvus Operator uses [cert-manager](https://cert-manager.io/docs/installation/supported-releases/) to provide certificate for webhook server. Run the following command to install cert-manager.
 
@@ -224,7 +224,7 @@ cert-manager-cainjector-54f4cc6b5-dpj84   1/1     Running   0          70s
 cert-manager-webhook-7c9588c76-tqncn      1/1     Running   0          70s
 ```
 
-#### 2. Install Milvus Operator
+### 2. Install Milvus Operator
 
 Run the following command to install Milvus Operator.
 
@@ -262,11 +262,11 @@ NAME                                                  READY   STATUS    RESTARTS
 milvus-operator-controller-manager-698fc7dc8d-rlmtk   1/1     Running   0          46s
 ```
 
-### Install a Milvus cluster
+## Install a Milvus cluster
 
 This tutorial uses the default configuration to install a Milvus cluster. All Milvus cluster components are enabled with multiple replicas, which consumes many resources. If you have very limited local resources, you can install a Milvus cluster [using the minimum configuration](https://github.com/milvus-io/milvus-operator/blob/main/config/samples/milvuscluster_minimum.yaml).
 
-#### 1. Deploy a Milvus cluster
+### 1. Deploy a Milvus cluster
 
 When Milvus Operator starts, run the following command to deploy a Milvus cluster.
 
@@ -280,7 +280,7 @@ When the cluster is deployed, you can see the following output.
 milvuscluster.milvus.io/my-release created
 ```
 
-#### 2. Check the Milvus cluster status
+### 2. Check the Milvus cluster status
 
 Run the following command to check the status of the Milvus cluster you just deployed.
 
@@ -351,7 +351,7 @@ my-release-pulsar-zookeeper-0         0/1     Pending             0          16s
 ```
 
 
-#### 3. Enable Milvus components
+### 3. Enable Milvus components
 
 Milvus Operator first creates all dependencies like etcd, Pulsar, and MinIO, and then continues to create Milvus components. Therefore, you can only see the pods of etcd, Pulsar, and MinIO now.  Once all denependencies are enabled, Milvus Operator will start all Milvus components. The status of the Milvus cluster is shown as in the following output.
 
@@ -487,7 +487,7 @@ my-release-pulsar-zookeeper-2                   1/1     Running     0          1
 
 When the Milvus cluster is installed, you can learn how to [Connect to Milvus server](connect.md)
 
-### Uninstall the Milvus cluster
+## Uninstall the Milvus cluster
 
 Run the following command to uninstall the Milvus cluster.
 
@@ -502,7 +502,7 @@ $ kubectl delete mc my-release
 </div>
 
 
-### Delete the K8s cluster
+## Delete the K8s cluster
 
 When you no longer need the K8s cluster in the testing environment, you can delete it.
 
