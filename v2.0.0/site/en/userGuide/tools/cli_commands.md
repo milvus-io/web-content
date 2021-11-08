@@ -10,16 +10,20 @@ This topic introduces all supported commands and the corresponding options. Some
 
 ## calc
 Calculates the distance between two vector arrays.
-### Syntax
+
+<h3 id="calc">Syntax</h3>
+
 ```shell
 calc
 ```
-### Options
+<h3 id="calc">Options</h3>
+
 |Option|Full name|Description|
 |:---|:---|:---|
 |--help|n/a|Displays help for using the command.|
 
-### Example
+<h3 id="calc">Example</h3>
+
 To calculate the distance between two vector arrays and be prompted for the required input:
 ```shell
 milvus_cli > calc
@@ -102,12 +106,12 @@ Result:
 ## clear
 Clears the screen.
 
-<h2 id="clear">Syntax</h2>
+<h3 id="clear">Syntax</h3>
 
 ```shell
 clear
 ```
-<h2 id="clear">Options</h2>
+<h3 id="clear">Options</h3>
 
 |Option|Full name|Description|
 |:---|:---|:---|
@@ -116,12 +120,12 @@ clear
 ## connect 
 Connects to Milvus.
 
-<h2 id="connect">Syntax</h2>
+<h3 id="connect">Syntax</h3>
 
 ```shell
 connect [-h (text)] [-p (int)] [-a (text)]
 ```
-<h2 id="connect">Options</h2>
+<h3 id="connect">Options</h3>
 
 |Option|Full name|Description
 |:---|:---|:---|
@@ -130,7 +134,7 @@ connect [-h (text)] [-p (int)] [-a (text)]
 |-a|--alias|(Optional) The alias name of the Milvus link. The default is "default".|
 |--help|n/a|Displays help for using the command.|
 
-<h2 id="connect"> Example</h2>
+<h3 id="connect">Example</h3>
 
 ```shell
 milvus_cli > connect -h 127.0.0.1 -p 19530 -a default
@@ -139,12 +143,14 @@ milvus_cli > connect -h 127.0.0.1 -p 19530 -a default
 Specifies unique aliases for a collection.
 <div class="alert note">A collection can have multiple aliases. However, an alias corresponds to a maximum of one collection.</div>
 
-### Syntax
+<h3 id="create-alias">Syntax</h3>
+
 ```shell
 create alias -c (text) -a (text) [-A] [-t (float)]
 ```
 
-### Options
+<h3 id="create-alias">Options</h3>
+
 |Option|Full name|Description
 |:---|:---|:---|
 |-c|--collection-name|The name of the collection.|
@@ -153,14 +159,15 @@ create alias -c (text) -a (text) [-A] [-t (float)]
 |-t|--timeout|(Optional) The maximum allowed duration in seconds of an RPC call. Not passing this option indicates that the client keeps waiting until the server responds or an error occurs.|
 |--help|n/a|Displays help for using the command.|
 
-### Examples
-#### Example 1
+<h3 id="create-alias">Examples</h3>
+
+<h4 id="create-alias">Example 1</h4>
 
 The following example creates the <code>carAlias1</code> and <code>carAlias2</code> aliases for the <code>car</code> collection.
 ```shell
 milvus_cli > create alias -c car -a carAlias1 -a carAlias2
 ```
-#### Example 2
+<h4 id="create-alias">Example 2</h4>
 
 <div class="alert note">Example 2 is based on Example 1.</div>
 
@@ -171,11 +178,14 @@ milvus_cli > create alias -c car2 -A -a carAlias -a carAlias2
 
 ## create collection
 Creates a collection.
-### Syntax
+
+<h3 id="create-collection">Syntax</h3>
+
 ```shell
 create collection -c (text) -f (text) -p (text) [-a] [-d (text)]
 ```
-### Options
+<h3 id="create-collection">Options</h3>
+
 |Option|Full name|Description
 |:---|:---|:---|
 |-c|--collection-name|The nam of the collection.|
@@ -185,19 +195,23 @@ create collection -c (text) -f (text) -p (text) [-a] [-d (text)]
 |-d|--schema-description|(Optional) The description of the collection.|
 |--help|n/a|Displays help for using the command.
 
+<h3 id="create-collection">Example</h3>
 
-### Example
 ```shell
 milvus_cli > create collection -c car -f id:INT64:primary_field -f vector:FLOAT_VECTOR:128 -f color:INT64:color -f brand:INT64:brand -p id -a -d 'car_collection'
 ```
 
 ## create partition
 Creates a partition.
-### Syntax
+
+<h3 id="creat-partition">Syntax</h3>
+
+
 ```shell
 create partition -c (text) -p (text) [-d (text)]
 ```
-### Options
+<h3 id="creat-partition">Options</h3>
+
 |Option|Full name|Description
 |:---|:---|:---|
 |-c|--collection-name|The name of the collection.|
@@ -205,8 +219,8 @@ create partition -c (text) -p (text) [-d (text)]
 |-d|--description|(Optional) The description of the partition.|
 |--help|n/a|Displays help for using the command.|
 
+<h3 id="creat-partition">Example</h3>
 
-### Example
 ```shell
 milvus_cli > create partition -c car -p new_partition -d test_add_partition
 ```
@@ -216,16 +230,19 @@ Creates an index for a field.
 
 <div class="alert note"> Currently, a collection supports a maximum of one index.</div>
 
-### Syntax
+<h3 id="creat-index">Syntax</h3>
+
 ```shell
 create index
 ```
-### Options
+<h3 id="creat-index">Options</h3>
+
 |Option|Full name|Description
 |:---|:---|:---|
 |--help|n/a|Displays help for using the command.|
 
-### Example
+<h3 id="creat-index">Example</h3>
+
 To create an index for a field and be prompted for the required input:
 ```shell
 milvus_cli > create index
@@ -244,11 +261,14 @@ Timeout []:
 ```
 ## delete alias
 Deletes an alias for a collection.
-### Syntax
+
+<h3 id="delete-alias">Syntax</h3>
+
 ```shell
 delete alias -c (text) -a (text) [-t (float)]
 ```
-### Options
+<h3 id="delete-alias">Options</h3>
+
 |Option|Full name|Description
 |:---|:---|:---|
 |-c|--collection-name|The name of the collection.|
@@ -259,18 +279,22 @@ delete alias -c (text) -a (text) [-t (float)]
 
 ## delete collection
 Deletes a collection.
-### Syntax
+
+<h3 id="delete-collection">Syntax</h3>
+
 ```shell
 delete collection -c (text) [-t (float)]
 ```
-### Options
+<h3 id="delete-collection">Options</h3>
+
 |Option|Full name|Description
 |:---|:---|:---|
 |-c|--collection-name|The name of the collection to be deleted.|
 |-t|--timeout|(Optional) The maximum allowed duration in seconds of an RPC call. Not passing this option indicates that the client keeps waiting until the server responds or an error occurs.|
 |--help|n/a|Displays help for using the command.|
 
-### Example
+<h3 id="delete-collection">Example</h3>
+
 ```shell
 milvus_cli > delete collection -c car
 ```
@@ -278,11 +302,14 @@ milvus_cli > delete collection -c car
 ## delete partition
 Deletes a partition.
 
-### Syntax
+<h3 id="delete-partition">Syntax</h3>
+
+
 ```shell
 delete partition -c (text) -p (text) [-t (float)]
 ```
-### Options
+<h3 id="delete-partition">Options</h3>
+
 |Option|Full name|Description
 |:---|:---|:---|
 |-c|--collection-name|The name of the collection that the partition to be deleted belongs to.|
@@ -290,7 +317,8 @@ delete partition -c (text) -p (text) [-t (float)]
 |-p|--partition|The name of the partition to be deleted.|
 |--help|n/a|Displays help for using the command.|
 
-### Example
+<h3 id="delete-partition">Example</h3>s
+
 ```shell
 milvus_cli > delete partition -c car -p new_partition
 ```
@@ -300,31 +328,34 @@ Deletes an index and the corresponding index files.
 
 <div class="alert note"> Currently, a collection supports a maximum of one index.</div>
 
-### Syntax
+<h3 id="delete-index">Syntax</h3>
+
 ```shell
 delete index -c (text) [-t (float)]
 ```
+<h3 id="delete-index">Options</h3>
 
-### Options
 |Option|Full name|Description
 |:---|:---|:---|
 |-c|--collection-name|The name of the collection.|
 |-t|--timeout|(Optional) The maximum allowed duration in seconds of an RPC call. Not passing this option indicates that the client keeps waiting until the server responds or an error occurs.|
 |--help|n/a|Displays help for using the command.|
 
-### Example
+<h3 id="delete-index">Example</h3>
+
 ```shell
 milvus_cli > delete index -c car
 ```
 ## delete entities (available in Milvus 2.0.0-GA)
 Deletes entities.
 
-### Syntax
+<h3 id="delete-entities">Syntax</h3>
+
 ``` shell
 delete entities -c (text) [-p (text)] [-t (float)]
 ```
+<h3 id="delete-entities">Options</h3>
 
-### Options
 |Option|Full name|Description
 |:---|:---|:---|
 |-c|--collection-name|The name of the collection.|
@@ -332,7 +363,7 @@ delete entities -c (text) [-p (text)] [-t (float)]
 |-t|--timeout|(Optional) The maximum allowed duration in seconds of an RPC call. Not passing this option indicates that the client keeps waiting until the server responds or an error occurs.|
 |--help|n/a|Displays help for using the command.|
 
-### Example
+<h3 id="delete-entities">Example</h3>
 
 ```shell
 milvus_cli > delete entities -c car
@@ -347,48 +378,58 @@ Do you want to continue? [y/N]: y
 ## describe collection
 Shows the detailed information of a collection.
 
-### Syntax
+<h3 id="describe-collection">Syntax</h3>
+
 ```shell
 describe collection -c (text)
 ```
-### Options
+<h3 id="describe-collection">Options</h3>
+
 |Option|Full name|Description
 |:---|:---|:---|
 |-c|--collection-name|The name of the collection.|
 |--help|n/a|Displays help for using the command.|
 
-### Example
+<h3 id="describe-collection">Example</h3>
+
 ```shell
 milvus_cli > describe collection -c test_collection_insert
 ```
 ## describe  partition
 Shows the detailed information of a partition.
 
-### Syntax
+<h3 id="describe-partition">Syntax</h3>
+
 ```shell
 describe partition -c (text) -p (text)
 ```
-### Options
+<h3 id="describe-partition">Options</h3>
+
+
 |Option|Full name|Description
 |:---|:---|:---|
 |-c|--collection-name|The name of the collection that the partition belongs to.|
 |-p|--partition|The name of the partition.|
 |--help|n/a|Displays help for using the command.|
 
-### Example
+<h3 id="describe-partition">Example</h3>
+
 ```shell
 milvus_cli > describe partition -c test_collection_insert -p _default
 ```
 ## describe index
 Shows the detailed information of an index.
+
 <div class="alert note">Currently, a collection supports a maximum of one index.</div>
 
-### Syntax
+<h3 id="describe-index">Syntax</h3>
+
 ```shell
 describe index -c (text)
 ```
 
-### Options
+<h3 id="describe-index">Options</h3>
+
 |Option|Full name|Description
 |:---|:---|:---|
 |-c|--collection-name|The name of the collection.|
@@ -397,11 +438,13 @@ describe index -c (text)
 ## exit
 Closes the command line window.
 
-### Syntax
+<h3 id="exit">Syntax</h3>
+
 ```shell
 exit
 ```
-### Options
+<h3 id="exit">Options</h3>
+
 |Option|Full name|Description
 |:---|:---|:---|
 |--help|n/a|Displays help for using the command.|
@@ -409,11 +452,14 @@ exit
 ## help
 Displays help for using a command.
 
-### Syntax
+<h3 id="help">Syntax</h3>
+
 ```shell
 help <command>
 ```
-### Commands
+
+<h3 id="help">Commands</h3>
+
 |Command|Description
 |:---|:---|
 |calc|Calculates the distance between two vector arrays.|
@@ -436,12 +482,14 @@ help <command>
 ## import
 Imports data into a partition.
 
-### Syntax
+<h3 id="import">Syntax</h3>
+
 ```shell
 import -c (text)[-p (text)][-t (float)] <file_path>
 ```
 
-### Options
+<h3 id="import">Options</h3>
+
 |Option|Full name|Description
 |:---|:---|:---|
 |-c|--collection-name|The name of the collection that the data is inserted into.|
@@ -449,7 +497,9 @@ import -c (text)[-p (text)][-t (float)] <file_path>
 |-t|--timeout|(Optional) The maximum allowed duration in seconds of an RPC call. Not passing this option indicates that the client keeps waiting until the server responds or an error occurs.|
 |--help|n/a|Displays help for using the command.|
 
-### Example
+
+<h3 id="import">Example</h3>
+
 ```shell
 milvus_cli > import -c car 'examples/import_csv/vectors.csv'
 
@@ -471,26 +521,33 @@ Milvus timestamp:           428849214449254403
 ## list collections
 Lists all collections.
 
-### Syntax
+<h3 id="list-collections">Syntax<h3>
+
 ```shell
 list collections [-t (float)][-l (boolean)]
 ```
-### Options
+<h3 id="list-collections">Options<h3>
+
 |Option|Full name|Description
 |:---|:---|:---|
 |-t|--timeout|(Optional) The maximum allowed duration in seconds of an RPC call. Not passing this option indicates that the client keeps waiting until the server responds or an error occurs.|
 |-l|--show-loaded|(Optional) Shows the loaded collections only.|
 |--help|n/a|Displays help for using the command.|
 
+
 ## list indexes
+
 Lists all indexes for a collection.
 <div class="alert note"> Currently, a collection supports a maximum of one index. </div>
 
-### Syntax
+<h3 id="list-indexes">Syntax</h3>
+
 ```shell
 list indexes -c (text)
 ```
-### Options
+
+<h3 id="list-indexes">Options</h3>
+
 |Option|Full name|Description
 |:---|:---|:---|
 |-c|--collection-name|The name of the collection.|
@@ -498,11 +555,15 @@ list indexes -c (text)
 
 ## list partitions
 Lists all partitions of a collection.
-### Syntax
+
+<h3 id="list-partitions">Syntax</h3>
+
 ```shell
 list partitions -c (text)
 ```
-### Options
+
+<h3 id="list-partitions">Options</h3>
+
 |Option|Full name|Description
 |:---|:---|:---|
 |-c|--collection-name|The name of the collection.|
@@ -510,11 +571,14 @@ list partitions -c (text)
 
 ## load
 Loads a collection or partition from hard drive space into RAM.
-### Syntax
+
+<h3 id="load">Syntax</h3>
+
 ```shell
 load -c (text) [-p (text)]
 ```
-### Options
+<h3 id="load">Options</h3>
+
 |Option|Full name|Description
 |:---|:---|:---|
 |-c|--collection-name|The name of the collection that the partition belongs to.|
@@ -525,17 +589,22 @@ load -c (text) [-p (text)]
 ## query
 
 Shows query results that match all the criteria that you enter.
-### Syntax
+
+<h3 id="query">Syntax</h3>
+
 ```shell
 query
 ```
-### Options
+<h3 id="query">Options</h3>
+
 |Option|Full name|Description
 |:---|:---|:---|
 |--help|n/a|Displays help for using the command.|
 
-### Example
+<h3 id="query">Example</h3>
+
 To perform a query and be prompted for the required input:
+
 ```shell
 milvus_cli > query
 
@@ -549,11 +618,15 @@ A list of fields to return(split by "," if multiple) []: color, brand
 ```
 ## release
 Releases a collection or partition from RAM.
-### Syntax
+
+<h3 id="release">Syntax</h3>
+
 ```shell
 release -c (text) [-p (text)]
 ```
-### Options
+
+<h3 id="release">Options</h3>
+
 |Option|Full name|Description
 |:---|:---|:---|
 |-c|--collection-name|The name of the collection that the partition belongs to.|
@@ -562,17 +635,21 @@ release -c (text) [-p (text)]
 
 ## search
 Performs a vector similarity search or hybrid search.
-### Syntax
+
+<h3 id="search">Syntax</h3>
+
 ```shell
 search
 ```
-### Options
+<h3 id="search">Options</h3>
+
 |Option|Full name|Description
 |:---|:---|:---|
 |--help|n/a|Displays help for using the command.|
 
-### Examples
-#### Example 1
+<h3 id="search">Examples</h3>
+<h4 id="search">Example 1</h4>
+
 To perform a search on a csv file and be prompted for the required input:
 ```shell
 milvus_cli > search
@@ -600,7 +677,8 @@ Guarantee Timestamp(It instructs Milvus to see all operations performed before a
 
 Travel Timestamp(Specify a timestamp in a search to get results based on a data view) [0]:
 ```
-#### Example 2
+<h4 id="search">Example 2</h4>
+
 To perform a search on an indexed collection and be prompted for the required input:
 ```shell
 milvus_cli > search
@@ -641,7 +719,8 @@ Guarantee Timestamp(It instructs Milvus to see all operations performed before a
 
 Travel Timestamp(Specify a timestamp in a search to get results based on a data view) [0]:
 ```
-#### Example 3
+<h4 id="search">Example 3</h4>
+
 To perform a search on a non-indexed collection and be prompted for the required input:
 ```shell
 milvus_cli > search
@@ -668,11 +747,15 @@ Travel Timestamp(Specify a timestamp in a search to get results based on a data 
 ```
 ## show connection
 Shows the current connection.
-### Syntax
+
+<h3 id="show-connection">Syntax</h3>
+
 ```shell
 show connection [-a]
 ```
-### Options
+
+<h3 id="show-connection">Options</h3>
+
 |Option|Full name|Description
 |:---|:---|:---|
 |-a|--all|（Optional) Flag to show all connections.|
@@ -680,11 +763,14 @@ show connection [-a]
 
 ## show index_progress
 Shows the progress of entity indexing.
-### Syntax
+
+<h3 id="show-index-progress">Syntax</h3>
+
 ```shell
 show index_progress -c (text) [-i (text)]
 ```
-### Options
+<h3 id="show-index-progress">Options</h3>
+
 |Option|Full name|Description
 |:---|:---|:---|
 |-c|--collection-name|The name of the collection that the entities belong to.|
@@ -693,11 +779,14 @@ show index_progress -c (text) [-i (text)]
 
 ## show loading_progress
 Shows the progress of entity loading.
-### Syntax
+
+<h3 id="show-loading-progress">Syntax</h3>
+ 
 ```shell
 show loading_progress -c (text) [-p (text)]
 ```
-### Options
+<h3 id="show-loading-progress">Options</h3>
+ 
 |Option|Full name|Description
 |:---|:---|:---|
 |-c|--collection-name|The name of the collection that the entities belong to.|
@@ -706,11 +795,14 @@ show loading_progress -c (text) [-p (text)]
 
 ## show query_segment
 Shows the segment information of a collection.
-### Syntax
+
+<h3 id="show-query-segment">Syntax</h3>
+
 ```shell
 show query_segment -c (text) [-t (float)]
 ```
-### Options
+<h3 id="show-query-segment">Options</h3>
+ 
 |Option|Full name|Description
 |:---|:---|:---|
 |-c|--collection-name|The name of the collection.|
@@ -720,18 +812,21 @@ show query_segment -c (text) [-t (float)]
 ## version
 Shows the version of Milvus CLI.
 
-### Syntax
+<h3 id="version">Syntax</h3>
+ 
 ```shell
 version
 ```
-### Options
+<h3 id="version">Options</h3>
+ 
 |Option|Full name|Description
 |:---|:---|:---|
 |--help|n/a|Displays help for using the command.|
 
 <div class="alert note"> You can also check the version of Milvus CLI in a shell as shown in the following example. In this case, <code>milvus_cli --version</code> acts as a command.</div>
 
-### Example
+<h3 id="version">Example</h3>
+
 ```shell
 $ milvus_cli --version
 Milvus Cli v0.1.7
