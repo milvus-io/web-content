@@ -14,7 +14,7 @@ summary: Learn how to install Milvus cluster on Kubernetes using Milvus Operator
 你也可以[从源代码编译 Milvus](https://github.com/milvus-io/milvus#to-start-developing-milvus)。
 
 
-<div class="tab-wrapper"><a href="install_cluster-docker.md" class=''>使用 Docker Compose 安装</a><a href="install_cluster-helm.md" class=''>使用 Kubernetes 安装</a><a href="install_cluster-milvusoperator.md" class='active '>使用 Milvus Operator 安装</a></div>
+<div class="tab-wrapper"><a href="install_cluster-docker.md" class=''>使用 Docker Compose 安装</a><a href="install_cluster-helm.md" class=''>使用 Helm 安装</a><a href="install_cluster-milvusoperator.md" class='active '>使用 Milvus Operator 安装</a></div>
 
 ## Create a Kubernetes Cluster
 
