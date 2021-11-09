@@ -82,7 +82,7 @@ L2
 
 sqrt [False]: True
 
-Timeout（可选） []:
+Timeout(optional) []:
 
 ======
 Return type:
@@ -477,6 +477,7 @@ help <command>
 将数据导入分区。
 
 <h3 id="import">语法</h3>
+
 ```shell
 import -c (text)[-p (text)][-t (float)] <file_path>
 ```
@@ -501,8 +502,15 @@ Column names are ['vector', 'color', 'brand']
 
 Processed 50001 lines.
 
-Import successfully.
+Insert successfully.
+
+      --------------------------  ------------------
+      Total insert entities:                   50000
+      Total collection entities:              150000
+      Milvus timestamp:           428849214449254403
+      --------------------------  ------------------
 ```
+
 ## list collections
 Lists all collections.
 
