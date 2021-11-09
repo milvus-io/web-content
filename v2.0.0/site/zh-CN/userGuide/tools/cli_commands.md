@@ -8,16 +8,19 @@ Milvus命令行接口(CLI)是一个支持数据库连接、数据操作、以及
 ## calc
 
 计算两个向量数组之间的距离。
-### 语法
+
+<h3 id="calc">语法</h3>
+
 ```shell
 calc
 ```
-### 
+<h3 id="calc">参数</h3>
+
 |参数|全名|描述|
 |:---|:---|:---|
 |--help|n/a|显示用法信息。|
 
-### 示例
+<h3 id="calc">示例</h3>
 
 根据提示输入需要的信息，计算两个向量数组之间的距离。
 ```shell
@@ -100,22 +103,26 @@ Result:
 ```
 ## clear
 清除屏幕。
-### 语法
+<h3 id="clear">语法</h3>
+
 ```shell
 clear
 ```
-### 参数
+<h3 id="clear">参数</h3>
+
 |参数|全名|描述|
 |:---|:---|:---|
 |--help|n/a|显示用法信息。|
 
 ## connect 
 连接Milvus。
-### 语法
+<h3 id="connect">语法</h3>
+
 ```shell
 connect [-h (text)] [-p (int)] [-a (text)]
 ```
-### 参数
+<h3 id="connect">参数</h3>
+
 |参数|全名|描述
 |:---|:---|:---|
 |-h|--host|（可选） 主机名。默认是 "127.0.0.1"。
@@ -123,18 +130,56 @@ connect [-h (text)] [-p (int)] [-a (text)]
 |-a|--alias|（可选）Milvus链接的别名。默认是"default"。|
 |--help|n/a|显示用法信息。|
 
-### 示例
+<h3 id="connect">示例</h3>
+
 ```shell
 milvus_cli > connect -h 127.0.0.1 -p 19530 -a default
 ```
+## create alias
+指定集合的唯一别名。
+<div class="alert note">集合可以有多个别名。但是，别名最多只能对应一个集合。</div>
 
+<h3 id="create-alias">语法</h3>
+
+```shell
+create alias -c (text) -a (text) [-A] [-t (float)]
+```
+
+<h3 id="create-alias">参数</h3>
+
+|参数 |全名|描述
+|:---|:---|:---|
+|-c|--collection-name|集合的名称。|
+|-a|--alias-name|别名。|
+|-A|--alter|（可选）将别名转移到指定的集合的开关。|
+|-t|--timeout|（可选）允许的远程过程调用的最大持续时间(以秒为单位)。如果不传递此参数，客户端将一直等待直到服务器响应或发生错误。|
+|--help|n/a|显示用法信息。|
+
+<h3 id="create-alias">示例</h3>
+
+<h4 id="create-alias">示例 1</h4>
+
+为<code>car</code>集合创建<code>carAlias1</code>和<code>carAlias2</code>别名。
+```shell
+milvus_cli > create alias -c car -a carAlias1 -a carAlias2
+```
+<h4 id="create-alias">示例 2</h4>
+
+<div class="alert note">示例 2基于示例 1。</div>
+
+将<code>carAlias1</code>和<code>carAlias2</code>别名从<code>car</code>集合转移到<code>car2</code>集合。
+```shell
+milvus_cli > create alias -c car2 -A -a carAlias -a carAlias2
+```
 ## create collection
 创建一个集合。
-### 语法
+<h3 id="create-collection">语法</h3>
+
 ```shell
 create collection -c (text) -f (text) -p (text) [-a] [-d (text)]
 ```
-### 参数
+<h3 id="create-collection">参数</h3>
+
 |参数|全名|描述
 |:---|:---|:---|
 |-c|--collection-name|集合的名称。|
@@ -144,19 +189,22 @@ create collection -c (text) -f (text) -p (text) [-a] [-d (text)]
 |-d|--schema-描述|（可选）集合的描述。|
 |--help|n/a|显示用法信息。|
 
+<h3 id="create-collection">示例</h3>
 
-### 示例
 ```shell
 milvus_cli > create collection -c car -f id:INT64:primary_field -f vector:FLOAT_VECTOR:128 -f color:INT64:color -f brand:INT64:brand -p id -a -d 'car_collection'
 ```
 
 ## create partition
 创建一个分区。
-### 语法
+
+<h3 id="creat-partition">语法</h3>
+
 ```shell
 create partition -c (text) -p (text) [-d (text)]
 ```
-### 参数
+<h3 id="creat-partition">参数</h3>
+
 |参数|全名|描述
 |:---|:---|:---|
 |-c|--collection|集合的名称。|
@@ -165,7 +213,8 @@ create partition -c (text) -p (text) [-d (text)]
 |--help|n/a|显示用法信息。|
 
 
-### 示例
+<h3 id="creat-partition">示例</h3>
+
 ```shell
 milvus_cli > create partition -c car -p new_partition -d test_add_partition
 ```
@@ -177,16 +226,19 @@ milvus_cli > create partition -c car -p new_partition -d test_add_partition
 <div class="alert note">
 目前，一个集合最多支持一个索引。</div>
 
-### 语法
+<h3 id="creat-index">语法</h3>
+
 ```shell
 create index
 ```
-### 参数
+<h3 id="creat-index">参数</h3>
+
 |参数|全名|描述
 |:---|:---|:---|
 |--help|n/a|显示用法信息。|
 
-### 示例
+<h3 id="creat-index">示例</h3>
+
 根据提示输入需要的信息，为字段创建索引。
 ```shell
 milvus_cli > create index
@@ -203,20 +255,42 @@ Index params nlist: 2
 
 Timeout []:
 ```
+## delete alias
+删除集合的别名。
+
+<h3 id="delete-alias">语法</h3>
+
+```shell
+delete alias -c (text) -a (text) [-t (float)]
+```
+<h3 id="delete-alias">参数</h3>
+
+|参数|全名|描述
+|:---|:---|:---|
+|-c|--collection-name|集合的名称。|
+|-a|--alias-name|别名。|
+|-t|--timeout|（可选）允许的远程过程调用的最大持续时间(以秒为单位)。如果不传递此参数，客户端将一直等待直到服务器响应或发生错误。|
+|--help|n/a|显示用法信息。|
+
+
 ## delete collection
 删除集合。
-### 语法
+
+<h3 id="delete-collection">语法</h3>
+
 ```shell
 delete collection -c (text) [-t (float)]
 ```
-### 参数
+<h3 id="delete-collection">参数</h3>
+
 |参数|全名|描述
 |:---|:---|:---|
 |-c|--collection|待删除集合的名称。|
 |-t|--timeout|（可选）允许的远程过程调用的最大持续时间(以秒为单位)。如果不传递此参数，客户端将一直等待直到服务器响应或发生错误。|
 |--help|n/a|显示用法信息。|
 
-### 示例
+<h3 id="delete-collection">示例</h3>
+
 ```shell
 milvus_cli > delete collection -c car
 ```
@@ -224,11 +298,13 @@ milvus_cli > delete collection -c car
 ## delete partition
 删除分区。
 
-### 语法
+<h3 id="delete-partition">语法</h3>
+
 ```shell
 delete partition -c (text) -p (text) [-t (float)]
 ```
-### 参数
+<h3 id="delete-partition">参数</h3>
+
 |参数|全名|描述
 |:---|:---|:---|
 |-c|--collection|待删除分区所属集合的名称。|
@@ -236,7 +312,8 @@ delete partition -c (text) -p (text) [-t (float)]
 |-p|--partition|待删除分区的名称。|
 |--help|n/a|显示用法信息。|
 
-### 示例
+<h3 id="delete-partition">示例</h3>
+
 ```shell
 milvus_cli > delete partition -c car -p new_partition
 ```
@@ -246,31 +323,36 @@ milvus_cli > delete partition -c car -p new_partition
 
 <div class="alert note"> 目前，一个集合最多支持一个索引。</div>
 
-### 语法
+<h3 id="delete-index">语法</h3>
+
 ```shell
 delete index -c (text) [-t (float)]
 ```
 
-### 参数
+<h3 id="delete-index">参数</h3>
+
 |参数|全名|描述
 |:---|:---|:---|
 |-c|--collection|集合的名称。|
 |-t|--timeout|（可选）允许的远程过程调用的最大持续时间(以秒为单位)。如果不传递此参数，客户端将一直等待直到服务器响应或发生错误。|
 |--help|n/a|显示用法信息。|
 
-### 示例
+<h3 id="delete-index">示例</h3>
+
 ```shell
 milvus_cli > delete index -c car
 ```
 ## delete entities (Milvus 2.0.0-GA支持)
 删除实体。
 
-### 语法
+<h3 id="delete-entities">语法</h3>
+
 ``` shell
 delete entities -c (text) [-p (text)] [-t (float)]
 ```
 
-### 参数
+<h3 id="delete-entities">参数</h3>
+
 |参数|全名|描述
 |:---|:---|:---|
 |-c|--collection|集合的名称。|
@@ -278,7 +360,7 @@ delete entities -c (text) [-p (text)] [-t (float)]
 |-t|--timeout|（可选）允许的远程过程调用的最大持续时间(以秒为单位)。如果不传递此参数，客户端将一直等待直到服务器响应或发生错误。|
 |--help|n/a|显示用法信息。|
 
-### 示例
+<h3 id="delete-entities">示例</h3>
 
 ```shell
 milvus_cli > delete entities -c car
@@ -293,11 +375,13 @@ Do you want to continue? [y/N]: y
 ## describe collection
 显示集合的详细信息。
 
-### 语法
+<h3 id="describe-collection">语法</h3>
+
 ```shell
 describe collection -c (text)
 ```
-### 参数
+<h3 id="describe-collection">参数</h3>
+
 |参数|全名|描述
 |:---|:---|:---|
 |-c|--collection|集合的名称。|
@@ -310,18 +394,21 @@ milvus_cli > describe collection -c test_collection_insert
 ## describe  partition
 显示分区的详细信息。
 
-### 语法
+<h3 id="describe-partition">语法</h3>
+
 ```shell
 describe partition -c (text) -p (text)
 ```
-### 参数
+<h3 id="describe-partition">参数</h3>
+
 |参数|全名|描述
 |:---|:---|:---|
 |-c|--collection|分区所属的集合的名称。|
 |-p|--partition|分区的名称。|
 |--help|n/a|显示用法信息。|
 
-### 示例
+<h3 id="describe-partition">示例</h3>
+
 ```shell
 milvus_cli > describe partition -c test_collection_insert -p _default
 ```
@@ -329,12 +416,14 @@ milvus_cli > describe partition -c test_collection_insert -p _default
 显示索引的详细信息。
 <div class="alert note">目前，一个集合最多支持一个索引。</div>
 
-### 语法
+<h3 id="describe-index">语法</h3>
+
 ```shell
 describe index -c (text)
 ```
 
-### 参数
+<h3 id="describe-index">参数</h3>
+
 |参数|全名|描述
 |:---|:---|:---|
 |-c|--collection|集合的名称。|
@@ -343,11 +432,13 @@ describe index -c (text)
 ## exit
 关闭命令行窗口。
 
-### 语法
+<h3 id="exit">语法</h3>
+
 ```shell
 exit
 ```
-### 参数
+<h3 id="exit">参数</h3>
+
 |参数|全名|描述
 |:---|:---|:---|
 |--help|n/a|显示用法信息。|
@@ -355,18 +446,20 @@ exit
 ## help
 显示命令的用法信息。
 
-### 语法
+<h3 id="help">语法</h3>
+
 ```shell
 help <command>
 ```
-### Commands
-|Command|描述
+<h3 id="help">命令</h3>
+
+|命令|描述
 |:---|:---|
 |calc|计算两个向量数组之间的距离。|
 |clear|清除屏幕。|
 |connect|连接到Milvus。|
-|create|创建集合、分区或索引。|
-|delete|删除集合、分区、索引或实体。|
+|create|创建集合、分区、索引或别名。|
+|delete|删除集合、分区、索引、实体或别名。|
 |describe|描述集合、分区或索引。|
 |exit|关闭命令行窗口。|
 |help|显示命令的用法信息。 |
@@ -376,18 +469,19 @@ help <command>
 |query|显示与您输入的所有条件匹配的查询结果。|
 |release|释放集合或分区。|
 |search|执行向量相似搜索或混合搜索。|
-|show|显示当前集合、实体加载的进度或实体索引的进度。 |
-|version|Milvus CLI的版本信息。|
+|show|显示当前集合、实体加载的进度、实体索引的进度或段信息。 |
+|version|显示Milvus CLI的版本信息。|
 
 ## import
 将数据导入分区。
 
-### 语法
+<h3 id="import">语法</h3>
 ```shell
 import -c (text)[-p (text)][-t (float)] <file_path>
 ```
 
-### 参数
+<h3 id="import">参数</h3>
+
 |参数|全名|描述
 |:---|:---|:---|
 |-c|--collection|将数据插入到的集合的名称。|
@@ -395,9 +489,10 @@ import -c (text)[-p (text)][-t (float)] <file_path>
 |-t|--timeout|（可选）允许的远程过程调用的最大持续时间(以秒为单位)。如果不传递此参数，客户端将一直等待直到服务器响应或发生错误。|
 |--help|n/a|显示用法信息。|
 
-### 示例
+<h3 id="import">示例</h3>
+
 ```shell
-milvus_cli > import -c car '示例s/import_csv/vectors.csv'
+milvus_cli > import -c car 'examples/import_csv/vectors.csv'
 
 Reading csv file...  [####################################]  100%
 
@@ -410,11 +505,13 @@ Import successfully.
 ## list collections
 Lists all collections.
 
-### 语法
+<h3 id="list-collections">语法<h3>
+
 ```shell
 list collections [-t (float)][-l (boolean)]
 ```
-### 参数
+<h3 id="list-collections">参数<h3>
+
 |参数|全名|描述
 |:---|:---|:---|
 |-t|--timeout|（可选）允许的远程过程调用的最大持续时间(以秒为单位)。如果不传递此参数，客户端将一直等待直到服务器响应或发生错误。|
@@ -425,11 +522,13 @@ list collections [-t (float)][-l (boolean)]
 列出集合的所有索引。
 <div class="alert note"> 目前，一个集合最多支持一个索引。 </div>
 
-### 语法
+<h3 id="list-indexes">语法</h3>
+
 ```shell
 list indexes -c (text)
 ```
-### 参数
+<h3 id="list-indexes">参数</h3>
+
 |参数|全名|描述
 |:---|:---|:---|
 |-c|--collection|集合的名称。|
@@ -437,11 +536,13 @@ list indexes -c (text)
 
 ## list partitions
 列出集合的所有分区。
-### 语法
+<h3 id="list-partitions">语法</h3>
+
 ```shell
 list partitions -c (text)
 ```
-### 参数
+<h3 id="list-collections">参数<h3>
+
 |参数|全名|描述
 |:---|:---|:---|
 |-c|--collection|集合的名称。|
@@ -450,11 +551,13 @@ list partitions -c (text)
 ## load
 
 将集合或分区从硬盘加载到内存中。
-### 语法
+<h3 id="load">语法</h3>
+
 ```shell
 load -c (text) [-p (text)]
 ```
-### 参数
+<h3 id="load">参数</h3>
+
 |参数|全名|描述
 |:---|:---|:---|
 |-c|--collection|分区所属的集合的名称。|
@@ -464,16 +567,18 @@ load -c (text) [-p (text)]
 
 ## query
 显示与您输入的所有条件匹配的查询结果。
-### 语法
+<h3 id="query">语法</h3>
+
 ```shell
 query
 ```
-### 参数
+<h3 id="query">参数</h3>
+
 |参数|全名|描述
 |:---|:---|:---|
 |--help|n/a|显示用法信息。|
 
-### 示例
+<h3 id="query">示例</h3>
 
 根据提示输入需要的信息，执行查询。
 ```shell
@@ -489,11 +594,13 @@ A list of fields to return(split by "," if multiple) []: color, brand
 ```
 ## release
 从内存释放集合或分区。
-### 语法
+<h3 id="release">语法</h3>
+
 ```shell
 release -c (text) [-p (text)]
 ```
-### 参数
+<h3 id="release">参数</h3>
+
 |参数|全名|描述
 |:---|:---|:---|
 |-c|--collection|分区所属的集合的名称。|
@@ -502,17 +609,19 @@ release -c (text) [-p (text)]
 
 ## search
 执行向量相似搜索或混合搜索。
-### 语法
+<h3 id="search">语法</h3>
+
 ```shell
 search
 ```
-### 参数
+<h3 id="search">参数</h3>
+
 |参数|全名|描述
 |:---|:---|:---|
 |--help|n/a|显示用法信息。|
 
-### 示例s
-#### 示例 1
+<h3 id="search">示例</h3>
+<h4 id="search">示例 1</h4>
 
 根据提示输入需要的信息，在CSV文件上执行搜索。
 ```shell
@@ -534,8 +643,14 @@ The max number of returned record, also known as topk: 2
 The boolean expression used to filter attribute []: id > 0
 
 The names of partitions to search (split by "," if multiple) ['_default'] []: _default
+
+timeout []:
+
+Guarantee Timestamp(It instructs Milvus to see all operations performed before a provided timestamp. If no such timestamp is provided, then Milvus will search all operations performed to date) [0]: 
+
+Travel Timestamp(Specify a timestamp in a search to get results based on a data view) [0]:
 ```
-#### 示例 2
+<h4 id="search">示例 2</h4>
 
 根据提示输入需要的信息，在被索引的集合上执行搜索。
 ```shell
@@ -572,8 +687,12 @@ The boolean expression used to filter attribute []: id > 0
 The names of partitions to search (split by "," if multiple) ['_default'] []: _default
 
 timeout []:
+
+Guarantee Timestamp(It instructs Milvus to see all operations performed before a provided timestamp. If no such timestamp is provided, then Milvus will search all operations performed to date) [0]: 
+
+Travel Timestamp(Specify a timestamp in a search to get results based on a data view) [0]:
 ```
-#### 示例 3
+<h4 id="search">示例 3</h4>
 
 根据提示输入需要的信息，在未被索引的集合上执行搜索。
 
@@ -594,15 +713,21 @@ The boolean expression used to filter attribute []:
 
 The names of partitions to search (split by "," if multiple) ['_default'] []:
 
-Timeout []:
+timeout []:
+
+Guarantee Timestamp(It instructs Milvus to see all operations performed before a provided timestamp. If no such timestamp is provided, then Milvus will search all operations performed to date) [0]: 
+
+Travel Timestamp(Specify a timestamp in a search to get results based on a data view) [0]:
 ```
 ## show connection
 显示当前连接。
-### 语法
+<h3 id="show-connection">语法</h3>
+
 ```shell
 show connection [-a]
 ```
-### 参数
+<h3 id="show-connection">参数</h3>
+
 |参数|全名|描述
 |:---|:---|:---|
 |-a|--all|（可选）显示所有连接的开关。|
@@ -610,11 +735,13 @@ show connection [-a]
 
 ## show index_progress
 显示为实体索引的进度。
-### 语法
+<h3 id="show-index-progress">语法</h3>
+
 ```shell
 show index_progress -c (text) [-i (text)]
 ```
-### 参数
+<h3 id="show-index-progress">参数</h3>
+
 |参数|全名|描述
 |:---|:---|:---|
 |-c|--collection|实体所属的集合的名称。|
@@ -623,33 +750,55 @@ show index_progress -c (text) [-i (text)]
 
 ## show loading_progress
 显示实体加载的进度。
-### 语法
+
+<h3 id="show-loading-progress">语法</h3>
+
 ```shell
 show loading_progress -c (text) [-p (text)]
 ```
-### 参数
+<h3 id="show-loading-progress">参数</h3>
+
 |参数|全名|描述
 |:---|:---|:---|
 |-c|--collection|实体所属的集合的名称。|
 |-p|--partition|（可选/多个）加载分区的名称。|
 |--help|n/a|显示用法信息。|
 
+## show query_segment
+显示集合的段信息。
+
+<h3 id="show-query-segment">语法</h3>
+
+```shell
+show query_segment -c (text) [-t (float)]
+```
+<h3 id="show-query-segment">参数</h3>
+ 
+|参数 |全名|描述
+|:---|:---|:---|
+|-c|--collection-name|集合的名称。|
+|-t|--timeout|（可选）允许的远程过程调用的最大持续时间(以秒为单位)。如果不传递此参数，客户端将一直等待直到服务器响应或发生错误。|
+|--help|n/a|显示用法信息。|
+
 ## version
 显示Milvus CLI的版本信息。
 
-### 语法
+<h3 id="version">语法</h3>
+ 
 ```shell
 version
 ```
-### 参数
+<h3 id="version">参数</h3>
+
 |参数|全名|描述
 |:---|:---|:---|
 |--help|n/a|显示用法信息。|
 
 <div class="alert note"> 
-你可以直接在shell中检查Milvus CLI的版本，示例如下。在本例中，<code>milvus cli——version</code>作为命令。</div>
+你可以直接在终端中检查Milvus CLI的版本，示例如下。在本例中，<code>milvus cli——version</code>作为命令。</div>
 
-### 示例
+<h3 id="version">示例</h3>
+
 ```shell
 $ milvus_cli --version
 Milvus Cli v0.1.7
