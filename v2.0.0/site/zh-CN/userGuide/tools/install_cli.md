@@ -2,37 +2,41 @@
 id: install_cli.md
 summary: Learn how to install Milvus CLI.
 ---
-# Install Milvus CLI
-The current version of Milvus CLI is 0.1.7. To find your installed version and see if you need to update, run ```shell milvus_cli --version```.
+# 如何安装Milvus CLI
+Milvus CLI的当前版本是0.1.7。
+如果想查找已安装的版本，并查看是否需要更新，请运行```shell milvus_cli --version```命令。
 
-## Prerequisites
 
-  - Install [Python 3.8.5](https://www.python.org/downloads/release/python-385/) or later
-  - Install [pip](https://pip.pypa.io/en/stable/installation/)
-## Install 
-You can install Milvus CLI from [PyPI](https://pypi.org/project/milvus-cli/) or source code. We recommend that you install Milvus CLI from PyPI.
+## 先决条件
 
-### Install from PyPI
+  - 安装[Python 3.8.5](https://www.python.org/downloads/release/python-385/)或更高版本
+  - 安装[pip](https://pip.pypa.io/en/stable/installation/)
+## 安装
 
-Run the following command to install Milvus CLI.
+我们建议你从[PyPI](https://pypi.org/project/milvus-cli/)安装Milvus CLI。
+
+### 从PyPI安装
+
+安装Milvus CLI。
+
 ```shell
 pip install milvus-cli
 ```
-### Install from source code
+### 从源代码安装
 
-1. Run the following command to download an installation package.
+1. 下载安装包。
 
 ```shell
 git clone https://github.com/milvus-io/milvus_cli.git
 ```
-<div class ="alert note">You can also download it at <a href="https://github.com/milvus-io/milvus_cli/releases"> GitHub</a>. </div>
+<div class ="alert note">你也可以从<a href="https://github.com/milvus-io/milvus_cli/releases"> GitHub</a>下载. </div>
 
-2. Run the following command to enter the milvus_cli folder.
+2. 进入milvus_cli文件夹。
 
 ```shell
 cd milvus_cli
 ```
-3. Run the following command to install Milvus CLI.
+3. 安装Milvus。
 
 ```shell
 python -m pip install --editable .

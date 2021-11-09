@@ -2,21 +2,24 @@
 id: cli_commands.md
 summary: Interact with Milvus using commands.
 ---
-# Milvus CLI Command Reference
-Milvus Command-Line Interface (CLI) is a command-line tool that supports database connection, data operations, and import and export of data. <br>This topic introduces all supported commands and the corresponding options. Some examples are also included for your reference.
+# Milvus CLI命令参考
+
+Milvus命令行接口(CLI)是一个支持数据库连接、数据操作、以及数据导入和导出的命令行工具。基于[Milvus Python SDK](https://github.com/milvus-io/pymilvus)，它允许使用交互式命令行提示符通过终端执行命令。本文介绍了所有支持的命令及其参数，还包括了一些示例供你参考。
 ## calc
-Calculates the distance between two vector arrays.
-### Syntax
+
+计算两个向量数组之间的距离。
+### 语法
 ```shell
 calc
 ```
-### Options
-|Option|Full name|Description|
+### 
+|参数|全名|描述|
 |:---|:---|:---|
-|--help|n/a|Displays help for using the command.|
+|--help|n/a|显示用法信息。|
 
-### Example
-To calculate the distance between two vector arrays and be prompted for the required input:
+### 示例
+
+根据提示输入需要的信息，计算两个向量数组之间的距离。
 ```shell
 milvus_cli > calc
 
@@ -76,7 +79,7 @@ L2
 
 sqrt [False]: True
 
-Timeout(optional) []:
+Timeout（可选） []:
 
 ======
 Return type:
@@ -96,93 +99,95 @@ Result:
 [[3.625464916229248, 3.234992742538452, 3.568333148956299, 3.694913148880005], [2.556027889251709, 2.8901233673095703, 3.385758399963379, 3.3239054679870605]]
 ```
 ## clear
-Clears the screen.
-### Syntax
+清除屏幕。
+### 语法
 ```shell
 clear
 ```
-### Options
-|Option|Full name|Description|
+### 参数
+|参数|全名|描述|
 |:---|:---|:---|
-|--help|n/a|Displays help for using the command.|
+|--help|n/a|显示用法信息。|
 
 ## connect 
-Connects to Milvus.
-### Syntax
+连接Milvus。
+### 语法
 ```shell
 connect [-h (text)] [-p (int)] [-a (text)]
 ```
-### Options
-|Option|Full name|Description
+### 参数
+|参数|全名|描述
 |:---|:---|:---|
-|-h|--host|(Optional) The host name. The default is "127.0.0.1".
-|-p|--port|(Optional) The port number. The default is "19530".|
-|-a|--alias|(Optional) The alias name of the Milvus link. The default is "default".|
-|--help|n/a|Displays help for using the command.|
+|-h|--host|（可选） 主机名。默认是 "127.0.0.1"。
+|-p|--port|（可选） 端口号。默认是"19530"。|
+|-a|--alias|（可选）Milvus链接的别名。默认是"default"。|
+|--help|n/a|显示用法信息。|
 
-### Example
+### 示例
 ```shell
 milvus_cli > connect -h 127.0.0.1 -p 19530 -a default
 ```
 
 ## create collection
-Creates a collection.
-### Syntax
+创建一个集合。
+### 语法
 ```shell
 create collection -c (text) -f (text) -p (text) [-a] [-d (text)]
 ```
-### Options
-|Option|Full name|Description
+### 参数
+|参数|全名|描述
 |:---|:---|:---|
-|-c|--collection-name|The collection name.|
-|-f|--schema-field|(Multiple) The field schema in the    ```<fieldName>:<dataType>:<dimOfVector/desc>``` format.|
-|-p|--schema-primary-field|The name of the primary key field.|
-|-a|--schema-auto-id|(Optional) Flag to generate IDs automatically.|
-|-d|--schema-description|(Optional) The description of the collection.|
-|--help|n/a|Displays help for using the command.
+|-c|--collection-name|集合的名称。|
+|-f|--schema-field|（多个）使用```<fieldName>:<dataType>:<dimOfVector/desc>``` 格式表示的字段规范。|
+|-p|--schema-primary-field|主键字段的名称。|
+|-a|--schema-auto-id|（可选）自动生成ID的开关。|
+|-d|--schema-描述|（可选）集合的描述。|
+|--help|n/a|显示用法信息。|
 
 
-### Example
+### 示例
 ```shell
 milvus_cli > create collection -c car -f id:INT64:primary_field -f vector:FLOAT_VECTOR:128 -f color:INT64:color -f brand:INT64:brand -p id -a -d 'car_collection'
 ```
 
 ## create partition
-Creates a partition.
-### Syntax
+创建一个分区。
+### 语法
 ```shell
 create partition -c (text) -p (text) [-d (text)]
 ```
-### Options
-|Option|Full name|Description
+### 参数
+|参数|全名|描述
 |:---|:---|:---|
-|-c|--collection|The collection name.|
-|-p|--partition|The partition name.|
-|-d|--description|(Optional) The description of the partition.|
-|--help|n/a|Displays help for using the command.|
+|-c|--collection|集合的名称。|
+|-p|--partition|分区的名称。|
+|-d|--description|（可选）分区的描述。|
+|--help|n/a|显示用法信息。|
 
 
-### Example
+### 示例
 ```shell
 milvus_cli > create partition -c car -p new_partition -d test_add_partition
 ```
 
 ## create index
-Creates an index for a field.
 
-<div class="alert note"> Currently, a collection supports a maximum of one index.</div>
+为字段创建一个索引。
 
-### Syntax
+<div class="alert note">
+目前，一个集合最多支持一个索引。</div>
+
+### 语法
 ```shell
 create index
 ```
-### Options
-|Option|Full name|Description
+### 参数
+|参数|全名|描述
 |:---|:---|:---|
-|--help|n/a|Displays help for using the command.|
+|--help|n/a|显示用法信息。|
 
-### Example
-To create an index for a field and be prompted for the required input:
+### 示例
+根据提示输入需要的信息，为字段创建索引。
 ```shell
 milvus_cli > create index
 
@@ -199,81 +204,81 @@ Index params nlist: 2
 Timeout []:
 ```
 ## delete collection
-Deletes a collection.
-### Syntax
+删除集合。
+### 语法
 ```shell
 delete collection -c (text) [-t (float)]
 ```
-### Options
-|Option|Full name|Description
+### 参数
+|参数|全名|描述
 |:---|:---|:---|
-|-c|--collection|The name of the collection to be deleted.|
-|-t|--timeout|(Optional) The maximum allowed duration in seconds of an RPC call. Not passing this option indicates that the client keeps waiting until the server responds or an error occurs.|
-|--help|n/a|Displays help for using the command.|
+|-c|--collection|待删除集合的名称。|
+|-t|--timeout|（可选）允许的远程过程调用的最大持续时间(以秒为单位)。如果不传递此参数，客户端将一直等待直到服务器响应或发生错误。|
+|--help|n/a|显示用法信息。|
 
-### Example
+### 示例
 ```shell
 milvus_cli > delete collection -c car
 ```
 
 ## delete partition
-Deletes a partition.
+删除分区。
 
-### Syntax
+### 语法
 ```shell
 delete partition -c (text) -p (text) [-t (float)]
 ```
-### Options
-|Option|Full name|Description
+### 参数
+|参数|全名|描述
 |:---|:---|:---|
-|-c|--collection|The name of the collection that the partition to be deleted belongs to.|
-|-t|--timeout|(Optional) The maximum allowed duration in seconds of an RPC call. Not passing this option indicates that the client keeps waiting until the server responds or an error occurs.|
-|-p|--partition|The name of the partition to be deleted.|
-|--help|n/a|Displays help for using the command.|
+|-c|--collection|待删除分区所属集合的名称。|
+|-t|--timeout|（可选）允许的远程过程调用的最大持续时间(以秒为单位)。如果不传递此参数，客户端将一直等待直到服务器响应或发生错误。|
+|-p|--partition|待删除分区的名称。|
+|--help|n/a|显示用法信息。|
 
-### Example
+### 示例
 ```shell
 milvus_cli > delete partition -c car -p new_partition
 ```
 
 ## delete index
-Deletes an index and the corresponding index files.
+删除索引和相应的索引文件。
 
-<div class="alert note"> Currently, a collection supports a maximum of one index.</div>
+<div class="alert note"> 目前，一个集合最多支持一个索引。</div>
 
-### Syntax
+### 语法
 ```shell
 delete index -c (text) [-t (float)]
 ```
 
-### Options
-|Option|Full name|Description
+### 参数
+|参数|全名|描述
 |:---|:---|:---|
-|-c|--collection|The collection name.|
-|-t|--timeout|(Optional) The maximum allowed duration in seconds of an RPC call. Not passing this option indicates that the client keeps waiting until the server responds or an error occurs.|
-|--help|n/a|Displays help for using the command.|
+|-c|--collection|集合的名称。|
+|-t|--timeout|（可选）允许的远程过程调用的最大持续时间(以秒为单位)。如果不传递此参数，客户端将一直等待直到服务器响应或发生错误。|
+|--help|n/a|显示用法信息。|
 
-### Example
+### 示例
 ```shell
 milvus_cli > delete index -c car
 ```
-## delete entities (available in Milvus 2.0.0-GA)
-Deletes entities.
+## delete entities (Milvus 2.0.0-GA支持)
+删除实体。
 
-### Syntax
+### 语法
 ``` shell
 delete entities -c (text) [-p (text)] [-t (float)]
 ```
 
-### Options
-|Option|Full name|Description
+### 参数
+|参数|全名|描述
 |:---|:---|:---|
-|-c|--collection|The collection name.|
-|-p|--partition|(Optional) The name of the partition that the entities belong to.|
-|-t|--timeout|(Optional) The maximum allowed duration in seconds of an RPC call. Not passing this option indicates that the client keeps waiting until the server responds or an error occurs.|
-|--help|n/a|Displays help for using the command.|
+|-c|--collection|集合的名称。|
+|-p|--partition|（可选）实体所属的分区的名称。|
+|-t|--timeout|（可选）允许的远程过程调用的最大持续时间(以秒为单位)。如果不传递此参数，客户端将一直等待直到服务器响应或发生错误。|
+|--help|n/a|显示用法信息。|
 
-### Example
+### 示例
 
 ```shell
 milvus_cli > delete entities -c car
@@ -286,113 +291,113 @@ Do you want to continue? [y/N]: y
 ```
 
 ## describe collection
-Shows the detailed information of a collection.
+显示集合的详细信息。
 
-### Syntax
+### 语法
 ```shell
 describe collection -c (text)
 ```
-### Options
-|Option|Full name|Description
+### 参数
+|参数|全名|描述
 |:---|:---|:---|
-|-c|--collection|The name of the collection.|
-|--help|n/a|Displays help for using the command.|
+|-c|--collection|集合的名称。|
+|--help|n/a|显示用法信息。|
 
-### Example
+### 示例
 ```shell
 milvus_cli > describe collection -c test_collection_insert
 ```
 ## describe  partition
-Shows the detailed information of a partition.
+显示分区的详细信息。
 
-### Syntax
+### 语法
 ```shell
 describe partition -c (text) -p (text)
 ```
-### Options
-|Option|Full name|Description
+### 参数
+|参数|全名|描述
 |:---|:---|:---|
-|-c|--collection|The name of the collection that the partition belongs to.|
-|-p|--partition|The name of the partition.|
-|--help|n/a|Displays help for using the command.|
+|-c|--collection|分区所属的集合的名称。|
+|-p|--partition|分区的名称。|
+|--help|n/a|显示用法信息。|
 
-### Example
+### 示例
 ```shell
 milvus_cli > describe partition -c test_collection_insert -p _default
 ```
 ## describe index
-Shows the detailed information of an index.
-<div class="alert note">Currently, a collection supports a maximum of one index.</div>
+显示索引的详细信息。
+<div class="alert note">目前，一个集合最多支持一个索引。</div>
 
-### Syntax
+### 语法
 ```shell
 describe index -c (text)
 ```
 
-### Options
-|Option|Full name|Description
+### 参数
+|参数|全名|描述
 |:---|:---|:---|
-|-c|--collection|The name of the collection.|
-|--help|n/a|Displays help for using the command.|
+|-c|--collection|集合的名称。|
+|--help|n/a|显示用法信息。|
 
 ## exit
-Closes the command line window.
+关闭命令行窗口。
 
-### Syntax
+### 语法
 ```shell
 exit
 ```
-### Options
-|Option|Full name|Description
+### 参数
+|参数|全名|描述
 |:---|:---|:---|
-|--help|n/a|Displays help for using the command.|
+|--help|n/a|显示用法信息。|
 
 ## help
-Displays help for using a command.
+显示命令的用法信息。
 
-### Syntax
+### 语法
 ```shell
 help <command>
 ```
 ### Commands
-|Command|Description
+|Command|描述
 |:---|:---|
-|calc|Calculates the distance between two vector arrays.|
-|clear|Clears the screen.|
-|connect|Connects to Milvus.|
-|create|Creates a collection, partition, or index.|
-|delete|Deletes a collection, partition, index, or entity.|
-|describe|Describes a collection, partition, or index.|
-|exit|Closes the command line window.|
-|help|Displays help for using a command. |
-|import|Imports data into a partition.|
-|list|Lists collections, partitions, or indexes.|
-|load|Loads a collection or partition.|
-|query|Shows query results that match all the criteria that you enter.|
-|release|Releases a collection or partition.|
-|search|Performs a vector similarity search or hybrid search.|
-|show|Shows the current collection, progress of entity loading, or progress of entity indexing. |
-|version|Shows the version of Milvus CLI.|
+|calc|计算两个向量数组之间的距离。|
+|clear|清除屏幕。|
+|connect|连接到Milvus。|
+|create|创建集合、分区或索引。|
+|delete|删除集合、分区、索引或实体。|
+|describe|描述集合、分区或索引。|
+|exit|关闭命令行窗口。|
+|help|显示命令的用法信息。 |
+|import|将数据导入分区。|
+|list|列出集合、分区或索引。|
+|load|加载集合或分区。|
+|query|显示与您输入的所有条件匹配的查询结果。|
+|release|释放集合或分区。|
+|search|执行向量相似搜索或混合搜索。|
+|show|显示当前集合、实体加载的进度或实体索引的进度。 |
+|version|Milvus CLI的版本信息。|
 
 ## import
-Imports data into a partition.
+将数据导入分区。
 
-### Syntax
+### 语法
 ```shell
 import -c (text)[-p (text)][-t (float)] <file_path>
 ```
 
-### Options
-|Option|Full name|Description
+### 参数
+|参数|全名|描述
 |:---|:---|:---|
-|-c|--collection|The name of the collection that the data is inserted into.|
-|-p|--partition|(Optional) The name of the partition that the data is inserted into. Not passing this partition option indicates choosing the "_default" partition.|
-|-t|--timeout|(Optional) The maximum allowed duration in seconds of an RPC call. Not passing this option indicates that the client keeps waiting until the server responds or an error occurs.|
-|--help|n/a|Displays help for using the command.|
+|-c|--collection|将数据插入到的集合的名称。|
+|-p|--partition|（可选）将数据插入到的分区的名称。不传递这个参数表示选择“_default”分区。|
+|-t|--timeout|（可选）允许的远程过程调用的最大持续时间(以秒为单位)。如果不传递此参数，客户端将一直等待直到服务器响应或发生错误。|
+|--help|n/a|显示用法信息。|
 
-### Example
+### 示例
 ```shell
-milvus_cli > import -c car 'examples/import_csv/vectors.csv'
+milvus_cli > import -c car '示例s/import_csv/vectors.csv'
 
 Reading csv file...  [####################################]  100%
 
@@ -405,71 +410,72 @@ Import successfully.
 ## list collections
 Lists all collections.
 
-### Syntax
+### 语法
 ```shell
 list collections [-t (float)][-l (boolean)]
 ```
-### Options
-|Option|Full name|Description
+### 参数
+|参数|全名|描述
 |:---|:---|:---|
-|-t|--timeout|(Optional) The maximum allowed duration in seconds of an RPC call. Not passing this option indicates that the client keeps waiting until the server responds or an error occurs.|
-|-l|--show-loaded|(Optional) Shows the loaded collections only.|
-|--help|n/a|Displays help for using the command.|
+|-t|--timeout|（可选）允许的远程过程调用的最大持续时间(以秒为单位)。如果不传递此参数，客户端将一直等待直到服务器响应或发生错误。|
+|-l|--show-loaded|（可选）仅显示已加载的集合。|
+|--help|n/a|显示用法信息。|
 
 ## list indexes
-Lists all indexes for a collection.
-<div class="alert note"> Currently, a collection supports a maximum of one index. </div>
+列出集合的所有索引。
+<div class="alert note"> 目前，一个集合最多支持一个索引。 </div>
 
-### Syntax
+### 语法
 ```shell
 list indexes -c (text)
 ```
-### Options
-|Option|Full name|Description
+### 参数
+|参数|全名|描述
 |:---|:---|:---|
-|-c|--collection|The name of the collection.|
-|--help|n/a|Displays help for using the command.|
+|-c|--collection|集合的名称。|
+|--help|n/a|显示用法信息。|
 
 ## list partitions
-Lists all partitions of a collection.
-### Syntax
+列出集合的所有分区。
+### 语法
 ```shell
 list partitions -c (text)
 ```
-### Options
-|Option|Full name|Description
+### 参数
+|参数|全名|描述
 |:---|:---|:---|
-|-c|--collection|The name of the collection.|
-|--help|n/a|Displays help for using the command.|
+|-c|--collection|集合的名称。|
+|--help|n/a|显示用法信息。|
 
 ## load
-Loads a collection or partition from hard drive space into RAM.
-### Syntax
+
+将集合或分区从硬盘加载到内存中。
+### 语法
 ```shell
 load -c (text) [-p (text)]
 ```
-### Options
-|Option|Full name|Description
+### 参数
+|参数|全名|描述
 |:---|:---|:---|
-|-c|--collection|The name of the collection that the partition belongs to.|
-|-p|--partition|(Optional/Multiple) The name of the partition.|
-|--help|n/a|Displays help for using the command.|
+|-c|--collection|分区所属的集合的名称。|
+|-p|--partition|(可选/多个) 分区的名称。|
+|--help|n/a|显示用法信息。|
 
 
 ## query
-
-Shows query results that match all the criteria that you enter.
-### Syntax
+显示与您输入的所有条件匹配的查询结果。
+### 语法
 ```shell
 query
 ```
-### Options
-|Option|Full name|Description
+### 参数
+|参数|全名|描述
 |:---|:---|:---|
-|--help|n/a|Displays help for using the command.|
+|--help|n/a|显示用法信息。|
 
-### Example
-To perform a query and be prompted for the required input:
+### 示例
+
+根据提示输入需要的信息，执行查询。
 ```shell
 milvus_cli > query
 
@@ -482,32 +488,33 @@ Name of partitions that contain entities(split by "," if multiple) []: default
 A list of fields to return(split by "," if multiple) []: color, brand
 ```
 ## release
-Releases a collection or partition from RAM.
-### Syntax
+从内存释放集合或分区。
+### 语法
 ```shell
 release -c (text) [-p (text)]
 ```
-### Options
-|Option|Full name|Description
+### 参数
+|参数|全名|描述
 |:---|:---|:---|
-|-c|--collection|The name of the collection that the partition belongs to.|
-|-p|--partition|(Optional/Multiple) The name of the partition.|
-|--help|n/a|Displays help for using the command.|
+|-c|--collection|分区所属的集合的名称。|
+|-p|--partition|(多选/多个)分区的名称。|
+|--help|n/a|显示用法信息。|
 
 ## search
-Performs a vector similarity search or hybrid search.
-### Syntax
+执行向量相似搜索或混合搜索。
+### 语法
 ```shell
 search
 ```
-### Options
-|Option|Full name|Description
+### 参数
+|参数|全名|描述
 |:---|:---|:---|
-|--help|n/a|Displays help for using the command.|
+|--help|n/a|显示用法信息。|
 
-### Examples
-#### Example 1
-To perform a search on a csv file and be prompted for the required input:
+### 示例s
+#### 示例 1
+
+根据提示输入需要的信息，在CSV文件上执行搜索。
 ```shell
 milvus_cli > search
 
@@ -528,8 +535,9 @@ The boolean expression used to filter attribute []: id > 0
 
 The names of partitions to search (split by "," if multiple) ['_default'] []: _default
 ```
-#### Example 2
-To perform a search on an indexed collection and be prompted for the required input:
+#### 示例 2
+
+根据提示输入需要的信息，在被索引的集合上执行搜索。
 ```shell
 milvus_cli > search
 
@@ -565,8 +573,10 @@ The names of partitions to search (split by "," if multiple) ['_default'] []: _d
 
 timeout []:
 ```
-#### Example 3
-To perform a search on a non-indexed collection and be prompted for the required input:
+#### 示例 3
+
+根据提示输入需要的信息，在未被索引的集合上执行搜索。
+
 ```shell
 milvus_cli > search
 
@@ -587,58 +597,59 @@ The names of partitions to search (split by "," if multiple) ['_default'] []:
 Timeout []:
 ```
 ## show connection
-Shows the current connection.
-### Syntax
+显示当前连接。
+### 语法
 ```shell
 show connection [-a]
 ```
-### Options
-|Option|Full name|Description
+### 参数
+|参数|全名|描述
 |:---|:---|:---|
-|-a|--all|（Optional) Flag to show all connections.|
-|--help|n/a|Displays help for using the command.|
+|-a|--all|（可选）显示所有连接的开关。|
+|--help|n/a|显示用法信息。|
 
 ## show index_progress
-Shows the progress of entity indexing.
-### Syntax
+显示为实体索引的进度。
+### 语法
 ```shell
 show index_progress -c (text) [-i (text)]
 ```
-### Options
-|Option|Full name|Description
+### 参数
+|参数|全名|描述
 |:---|:---|:---|
-|-c|--collection|The name of the collection that the entities belong to.|
-|-i|--index|(Optional) The name of the index.|
-|--help|n/a|Displays help for using the command.|
+|-c|--collection|实体所属的集合的名称。|
+|-i|--index|（可选）索引的名称。|
+|--help|n/a|显示用法信息。|
 
 ## show loading_progress
-Shows the progress of entity loading.
-### Syntax
+显示实体加载的进度。
+### 语法
 ```shell
 show loading_progress -c (text) [-p (text)]
 ```
-### Options
-|Option|Full name|Description
+### 参数
+|参数|全名|描述
 |:---|:---|:---|
-|-c|--collection|The name of the collection that the entities belong to.|
-|-p|--partition|(Optional/Multiple) The name of the loading partition.|
-|--help|n/a|Displays help for using the command.|
+|-c|--collection|实体所属的集合的名称。|
+|-p|--partition|（可选/多个）加载分区的名称。|
+|--help|n/a|显示用法信息。|
 
 ## version
-Shows the version of Milvus CLI.
+显示Milvus CLI的版本信息。
 
-### Syntax
+### 语法
 ```shell
 version
 ```
-### Options
-|Option|Full name|Description
+### 参数
+|参数|全名|描述
 |:---|:---|:---|
-|--help|n/a|Displays help for using the command.|
+|--help|n/a|显示用法信息。|
 
-<div class="alert note"> You can also check the version of Milvus CLI in a shell as shown in the following example. In this case, <code>milvus_cli --version</code> acts as a command.</div>
+<div class="alert note"> 
+你可以直接在shell中检查Milvus CLI的版本，示例如下。在本例中，<code>milvus cli——version</code>作为命令。</div>
 
-### Example
+### 示例
 ```shell
 $ milvus_cli --version
 Milvus Cli v0.1.7
