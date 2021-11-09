@@ -387,7 +387,8 @@ describe collection -c (text)
 |-c|--collection|集合的名称。|
 |--help|n/a|显示用法信息。|
 
-### 示例
+<h3 id="describe-collection">示例</h3>
+
 ```shell
 milvus_cli > describe collection -c test_collection_insert
 ```
