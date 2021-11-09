@@ -4,7 +4,7 @@ id: home.md
 
 # 欢迎阅读 Milvus 文档！ 
 
-在 Milvus 文档页，你可以了解 [什么是 Milvus](overview.md)，如何 [安装](install_standalone-docker.md)、[使用](connect.md)、[部署](aws.md) Milvus，以及 [根据场景需求使用 Milvus 搭建应用系统的教程](image_similarity_search.md)。 你还可以在这里找到常见问题 [FAQs](performance_faq.md) 及 [API 参考](https://milvus.io/api-reference/pymilvus/v2.0.0rc7/api/collection.html)。
+在 Milvus 文档页，你可以了解 [什么是 Milvus](overview.md)，如何 [安装](install_standalone-docker.md)、[使用](connect.md)、[部署](aws.md) Milvus，以及 [根据场景需求使用 Milvus 搭建应用系统的教程](image_similarity_search.md)。 你还可以在这里找到常见问题 [FAQs](performance_faq.md) 及 [API 参考](https://milvus.io/api-reference/pymilvus/v2.0.0rc8/api/collection.html)。
 
 你可以先浏览推荐阅读下的内容，或者在左上角的搜索框内输入关键字寻找所需文档。如未能找到所需信息，你可以向页面右下角的 _MilMil_![MilMil](../../../assets/icon_bird.svg) 提问，或者通过任意文档页右上角的选项反馈文档问题。
 
