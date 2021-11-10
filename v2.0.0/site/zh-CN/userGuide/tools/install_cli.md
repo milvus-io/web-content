@@ -24,14 +24,14 @@ pip install milvus-cli
 ```
 ### 从源代码安装
 
-1. 下载安装包。
+1. 下载`milvus_cli`仓库到本地。
 
 ```shell
 git clone https://github.com/milvus-io/milvus_cli.git
 ```
-<div class ="alert note">你也可以从<a href="https://github.com/milvus-io/milvus_cli/releases"> GitHub</a>下载. </div>
 
-2. 进入milvus_cli文件夹。
+
+2. 进入`milvus_cli`文件夹。
 
 ```shell
 cd milvus_cli
@@ -42,3 +42,8 @@ cd milvus_cli
 python -m pip install --editable .
 ```
 
+你也可以从<a href="https://github.com/milvus-io/milvus_cli/releases">这里</a>下载包含源代码的tarball压缩文件并运行如下命令来安装Milvus CLI。
+
+```shell
+python -m pip install milvus_cli-<version>.tar.gz
+```
