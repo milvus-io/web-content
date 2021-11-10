@@ -588,6 +588,7 @@ query
 |--help|n/a|显示用法信息。|
 
 <h3 id="query">示例</h3>
+<h4 id="query">示例 1</h4>
 
 根据提示输入需要的信息，执行查询。
 ```shell
@@ -595,12 +596,36 @@ milvus_cli > query
 
 Collection name: car
 
-The query expression(field_name in [x,y]): id in [ 427284660842954108, 427284660842954199 ]
+The query expression: id in [ 428960801420883491, 428960801420883492,
+428960801420883493 ]
 
-Name of partitions that contain entities(split by "," if multiple) []: default
+Name of partitions that contain entities(split by "," if multiple) []:
+default
 
 A list of fields to return(split by "," if multiple) []: color, brand
+
+timeout []:
 ```
+<h4 id="query">示例 2</h4>
+
+根据提示输入需要的信息，执行查询。
+
+```shell
+milvus_cli > query
+
+Collection name: car
+
+The query expression: id > 428960801420883491
+
+Name of partitions that contain entities(split by "," if multiple) []:
+default
+
+A list of fields to return(split by "," if multiple) []: id, color,
+brand
+
+timeout []:
+```
+
 ## release
 从内存释放集合或分区。
 <h3 id="release">语法</h3>
