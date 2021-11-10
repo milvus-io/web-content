@@ -20,14 +20,13 @@ pip install milvus-cli
 ```
 ### Install from source code
 
-1. Run the following command to download an installation package.
+1. Run the following command to download a `milvus_cli` repository.
 
 ```shell
 git clone https://github.com/milvus-io/milvus_cli.git
 ```
-<div class ="alert note">You can also download it at <a href="https://github.com/milvus-io/milvus_cli/releases"> GitHub</a>. </div>
 
-2. Run the following command to enter the milvus_cli folder.
+2. Run the following command to enter the `milvus_cli` folder.
 
 ```shell
 cd milvus_cli
@@ -38,3 +37,4 @@ cd milvus_cli
 python -m pip install --editable .
 ```
 
+Alternatively, you can install Milvus CLI from a compressed tarball (`.tar.gz` file). Download a tarball at <a href="https://github.com/milvus-io/milvus_cli/releases"> GitHub</a> and run `python -m pip install milvus_cli-<version>.tar.gz`.
