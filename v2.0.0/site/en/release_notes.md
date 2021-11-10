@@ -36,8 +36,8 @@ Release date: 2021-11-5
 
 
 Milvus 2.0.0-RC8 is the last release candidate of Milvus 2.0.0-GA. It supports handoff task, primary key deduplication and search by Time Travel functionalities. The mean time to recovery (MTTR) has also been greatly reduced with the enhancement of timetick mechanism. We had run stress test on 2.0.0-RC8 with 10M datasets, and both standalone and distributed cluster survived for 84 hours.
-
-
+<br>
+Current deduplication feature does not guarantee overwriting the old data copies when data with duplicate primary keys (`pk`) are inserted. Therefore, which data copy will return when queried remains unknown behavior. This limitation will be fixed in future releases. 
 
 ### Improvements
 
