@@ -602,6 +602,7 @@ query
 |--help|n/a|Displays help for using the command.|
 
 <h3 id="query">Example</h3>
+<h4 id="query">Example 1</h4>
 
 To perform a query and be prompted for the required input:
 
@@ -610,12 +611,37 @@ milvus_cli > query
 
 Collection name: car
 
-The query expression(field_name in [x,y]): id in [ 427284660842954108, 427284660842954199 ]
+The query expression: id in [ 428960801420883491, 428960801420883492,
+428960801420883493 ]
 
-Name of partitions that contain entities(split by "," if multiple) []: default
+Name of partitions that contain entities(split by "," if multiple) []:
+default
 
 A list of fields to return(split by "," if multiple) []: color, brand
+
+timeout []:
 ```
+
+<h4 id="query">Example 2</h4>
+
+To perform a query and be prompted for the required input:
+
+```shell
+milvus_cli > query
+
+Collection name: car
+
+The query expression: id > 428960801420883491
+
+Name of partitions that contain entities(split by "," if multiple) []:
+default
+
+A list of fields to return(split by "," if multiple) []: id, color,
+brand
+
+timeout []:
+```
+
 ## release
 Releases a collection or partition from RAM.
 
