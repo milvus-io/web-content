@@ -10,7 +10,7 @@ id: data_processing.md
 
 用户可以为每个 collection 指定 shard 数量，每个 shard 对应一个虚拟通道 _vchannel_。如下图所示，在 log broker 内，每个 _vchanel_ 被分配了一个对应的物理通道 _pchannel_。Proxy 基于主键哈希决定输入的增删请求进入哪个 shard。
 
-由于没有复杂事务，DML 的检查与确认⼯作被提前至 proxy。对于所有的增删请求，proxy 会先通过请求位于 root coord 的 TSO 中心授时模块获取时间戳。这个时间戳决定了数据最终可见和相互覆盖的顺序。除了分配时间戳，proxy 也为每行数据分配全局唯一的 rowID。RowID 以及 entity 所处的 segmentID 均从 data coord 批量获取，批量有助于提升系统的吞吐，降低 data coord 的负载。
+由于没有复杂事务，DML 的检查与确认⼯作被提前至 proxy。对于所有的增删请求，proxy 会先通过请求位于 root coord 的 TSO 中心授时模块获取时间戳。这个时间戳决定了数据最终可见和相互覆盖的顺序。除了分配时间戳，proxy 也为每行数据分配全局唯一的 primary key。Primary key 以及 entity 所处的 segmentID 均从 data coord 批量获取，批量有助于提升系统的吞吐，降低 data coord 的负载。
 
 ![Channels 1](../../../../assets/channels_1.jpg)
 

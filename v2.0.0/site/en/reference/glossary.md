@@ -12,10 +12,10 @@ A collection in Milvus is equivalent to a table in a relational database managem
 A dependency is a program that another program relies on to work. Milvus' dependencies include etcd (stores meta data), MinIO or S3 (object storage), and Pulsar (manages snapshot logs).
 
 ## Entity
-An entity consists of a group of fields that represent real world objects. Each entity in Milvus is represented by a unique row ID.
+An entity consists of a group of fields that represent real world objects. Each entity in Milvus is represented by a unique primary key.
 
 <div class="alert note">
-You can customize row IDs. If you do not configure manually, Milvus automatically assigns row IDs to entities. If you choose to configure your own customized row IDs, note that Milvus does not support row ID de-duplication for now. Therefore, there can be duplicate row IDs in the same collection.
+You can customize primary keys. If you do not configure manually, Milvus automatically assigns primary keys to entities. If you choose to configure your own customized primary keys, note that Milvus does not support primary key de-duplication for now. Therefore, there can be duplicate primary keys in the same collection.
 </div>
 
 ## Field
