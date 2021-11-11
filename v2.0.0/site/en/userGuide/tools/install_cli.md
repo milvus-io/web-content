@@ -3,7 +3,7 @@ id: install_cli.md
 summary: Learn how to install Milvus CLI.
 ---
 # Install Milvus CLI
-The current version of Milvus CLI is 0.1.7. To find your installed version and see if you need to update, run ```shell milvus_cli --version```.
+The current version of Milvus CLI is 0.1.8. To find your installed version and see if you need to update, run ```shell milvus_cli --version```.
 
 ## Prerequisites
 
