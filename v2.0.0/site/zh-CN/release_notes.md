@@ -32,7 +32,7 @@ id: release_notes.md
 </table>
 
 Milvus 2.0.0-RC8 是 2.0.0-GA 的最后一个预览版本。在该版本中，Milvus 支持 Handoff 任务，Primary Key 去重，以及 Time Travel 搜索功能。随着 Timetick 机制的增强，系统的平均修复时间 （mean time to recovery, MTTR）也大幅减少。在针对该版本的千万级数据集的压力测试中，单机版与分布式版 Milvus 都运行超过 84 小时。
-<br>
+
 目前，Primary Key（`pk`）去重功能无法保证插入新数据会覆盖与其 `pk` 相同的旧数据。因此，当前版本中基于相同 `pk` 的结构化匹配的返回结果为未知行为。该限制将在未来版本中修复。
 
 ### 主要改进
