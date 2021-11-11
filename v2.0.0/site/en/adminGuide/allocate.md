@@ -6,20 +6,29 @@ summary: Learn how to allocate resources to Milvus on Kubernetes.
 
 # Allocate Resources on Kubernetes
 
-Generally, the resources you allocate to a Milvus cluster in production should be proportionate to the machine workload. You should also consider the machine type when allocating resources. Although you can update the configurations when the cluster is running, we recommend you to set the values before deploying the cluster.
+This topic describes how to allocate resources to a Milvus cluster on Kubernetes.
 
-<div class="alert note">
-Run <code>kubectl describe nodes</code> to view the available resources on the instances that you have provisioned.
-</div>
+Generally, the resources you allocate to a Milvus cluster in production should be proportionate to the machine workload. You should also consider the machine type when allocating resources. Although you can update the configurations when the cluster is running, we recommend setting the values before [deploying the cluster](install_cluster-helm.md).
 
-## Allocate memory and CPU resources
+## 1. View available resources
+
+Run `kubectl describe nodes` to view the available resources on the instances that you have provisioned.
+
+## 2. Allocate resources
 
 Use Helm to allocate CPU and memory resources to Milvus components.
 
-<div class="alert warning">
+<div class="alert note">
 Using Helm to upgrade resources will cause the running pods to perform rolling update.
 </div>
 
+There are two ways to allocate resources:
+
+- [Use the commands](allocate.md#Allocate-resources-with-commands)
+- [Set the parameters in the `YAML` file](allocate.md#Allocate-resources-by-setting-configuration-file )
+
+
+### Allocate resources with commands
 
 You need to set the resource variables for each Milvus component if you use `--set` to update the resource configurations. 
 
@@ -43,7 +52,9 @@ helm upgrade my-release milvus/milvus --reuse-values --set dataNode.resources.li
 
 </div>
 
-You can also allocate CPU and memory resources by specifying the parameters `resources.requests` and `resources.limits` in the **resources.yaml** file:
+### Allocate resources by setting configuration file 
+
+You can also allocate CPU and memory resources by specifying the parameters `resources.requests` and `resources.limits` in the `resources.yaml` file.
 
 ```Yaml
 dataNode:
@@ -64,13 +75,27 @@ queryNode:
       memory: "4Gi"
 ```
 
-## Apply the new configuration to the cluster
+## 3. Apply configurations
+
+Run the following command to apply the new configurations to your Milvus cluster.
 
 ```Shell
 helm upgrade my-release milvus/milvus --reuse-values -f resources.yaml
 ```
 <div class="alert note">
-If <code>resources.limits</code> is not specified, the pods will consume all the CPU and memory resources available. Therefore, please specify <code>resources.requests</code> and <code>resources.limits</code> to avoid overallocation of resources when there are other tasks on the same instance that require more memory consumption.
+If <code>resources.limits</code> is not specified, the pods will consume all the CPU and memory resources available. Therefore, ensure to specify <code>resources.requests</code> and <code>resources.limits</code> to avoid overallocation of resources when other running tasks on the same instance require more memory consumption.
 </div>
+
+See [Kubernetes documentation](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/) for more information about managing resources.
  
- 
+
+## What's next
+
+- You might also want to learn how to:
+  - [Scale a Milvus cluster](scaleout.md)
+  - [Upgrade](upgrade.md) your Milvus instance
+- If you are ready to deploy your cluster on clouds:
+  - Learn how to [Deploy Milvus on AWS with Terraform and Ansible](aws.md)
+  - Learn how to [Deploy Milvus on Amazon EKS with Terraform](eks.md)
+  - Learn how to [Deploy Milvus Cluster on GCP with Kubernetes](gcp.md)
+  - Learn how to [Deploy Milvus on Microsoft Azure With Kubernetes](azure.md)
