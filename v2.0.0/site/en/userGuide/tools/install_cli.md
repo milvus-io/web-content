@@ -37,4 +37,4 @@ cd milvus_cli
 python -m pip install --editable .
 ```
 
-Alternatively, you can install Milvus CLI from a compressed tarball (`.tar.gz` file). Download a tarball at <a href="https://github.com/milvus-io/milvus_cli/releases"> GitHub</a> and run `python -m pip install milvus_cli-<version>.tar.gz`.
+Alternatively, you can install Milvus CLI from a compressed tarball (`.tar.gz` file). Download a [tarball](https://github.com/milvus-io/milvus_cli/releases) and run `python -m pip install milvus_cli-<version>.tar.gz`.
