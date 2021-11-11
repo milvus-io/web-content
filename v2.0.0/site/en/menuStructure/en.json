@@ -249,20 +249,12 @@
       "isMenu": true
     },
     {
-      "id": "deploy_s3.md",
-      "title": "Storage",
+      "id": "allocate.md",
+      "title": "Allocate Resources",
       "label1": "admin_guide",
       "label2": "",
       "label3": "",
       "order": 0
-    },
-    {
-      "id": "scaleout.md",
-      "title": "Scale a Milvus Cluster",
-      "label1": "admin_guide",
-      "label2": "",
-      "label3": "",
-      "order": 1
     },
     {
       "id": "cloud",
@@ -270,7 +262,7 @@
       "label1": "admin_guide",
       "label2": "",
       "label3": "",
-      "order": 2,
+      "order": 1,
       "isMenu": true
     },
     {
@@ -315,12 +307,36 @@
       "order": 2
     },
     {
+      "id": "deploy_s3.md",
+      "title": "Storage",
+      "label1": "admin_guide",
+      "label2": "",
+      "label3": "",
+      "order": 2
+    },
+    {
+      "id": "scaleout.md",
+      "title": "Scale a Milvus Cluster",
+      "label1": "admin_guide",
+      "label2": "",
+      "label3": "",
+      "order": 3
+    },
+    {
+      "id": "upgrade.md",
+      "title": "Upgrade",
+      "label1": "admin_guide",
+      "label2": "",
+      "label3": "",
+      "order": 4
+    },
+    {
       "id": "monitor",
       "title": "Monitor and Alert",
       "label1": "admin_guide",
       "label2": "",
       "label3": "",
-      "order": 3,
+      "order": 5,
       "isMenu": true
     },
     {
@@ -356,20 +372,12 @@
       "order": 3
     },
     {
-      "id": "allocate.md",
-      "title": "Allocate Resources",
-      "label1": "admin_guide",
-      "label2": "",
-      "label3": "",
-      "order": 4
-    },
-    {
       "id": "migrate",
       "title": "Migrate",
       "label1": "admin_guide",
       "label2": "",
       "label3": "",
-      "order": 5,
+      "order": 6,
       "isMenu": true
     },
     {
@@ -395,14 +403,6 @@
       "label2": "migrate",
       "label3": "",
       "order": 2
-    },
-    {
-      "id": "upgrade.md",
-      "title": "Upgrade",
-      "label1": "admin_guide",
-      "label2": "",
-      "label3": "",
-      "order": 6
     },
     {
       "id": "tools",
