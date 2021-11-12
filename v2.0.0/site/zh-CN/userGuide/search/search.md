@@ -18,6 +18,13 @@ The following example code demonstrates the steps prior to a search.
 
 If you work with your own dataset in an existing Milvus instance, you can move forward to the next step.
 
+<div class="multipleCode">
+
+  <a href="?python">Python </a>
+  <a href="?javascript">Node</a>
+</div>
+
+
 ```python
 >>> from pymilvus import connections, Collection, FieldSchema, CollectionSchema, DataType
 >>> connections.connect("default", host='localhost', port='19530')
