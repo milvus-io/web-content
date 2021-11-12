@@ -213,7 +213,7 @@
         "label1": "userguide",
         "label2": "search",
         "label3": "",
-        "order": 1
+        "order": 2
       },
       {
         "id": "query.md",
@@ -221,7 +221,7 @@
         "label1": "userguide",
         "label2": "search",
         "label3": "",
-        "order": 2
+        "order": 1
       },
       {
         "id": "timetravel.md",
