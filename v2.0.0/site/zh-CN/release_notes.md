@@ -180,7 +180,7 @@ Milvus 2.0.0-RC8 是 2.0.0-GA 的最后一个预览版本。在该版本中，Mi
 		<td>2.0.0rc7</td>
 		<td>即将上线</td>
 		<td>即将上线</td>
-		<td>1.0.18</td>
+		<td>1.0.19</td>
 	</tr>
 	</tbody>
 </table>
@@ -365,7 +365,7 @@ Milvus 2.0.0-RC7 是 2.0.0-GA 的预览版本。该版本支持 collection 别�
 		<td>2.0.0rc6</td>
 		<td>即将上线</td>
 		<td>即将上线</td>
-		<td>1.0.18</td>
+		<td>1.0.19</td>
 	</tr>
 	</tbody>
 </table>
@@ -428,7 +428,7 @@ Milvus 2.0.0-RC6 是 2.0.0 的预览版本。该版本支持创建 collection �
 		<td>2.0.0rc5</td>
 		<td>即将上线</td>
 		<td>即将上线</td>
-		<td>1.0.18</td>
+		<td>1.0.19</td>
 	</tr>
 	</tbody>
 </table>

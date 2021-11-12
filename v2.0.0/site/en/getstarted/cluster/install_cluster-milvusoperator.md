@@ -485,7 +485,7 @@ my-release-pulsar-zookeeper-1                   1/1     Running     0          1
 my-release-pulsar-zookeeper-2                   1/1     Running     0          13m
 ```
 
-When the Milvus cluster is installed, you can learn how to [Connect to Milvus server](connect.md)
+When the Milvus cluster is installed, you can learn how to [Connect to Milvus server](manage_connection.md)
 
 ## Uninstall the Milvus cluster
 
@@ -516,7 +516,7 @@ If you use kind to install the K8s cluster, run $ kind delete cluster --name myk
 Having installed Milvus, you can:
 - Check [Hello Milvus](example_code.md) to run an example code with different SDKs to see what Milvus can do.
 - Learn the basic operations of Milvus:
-  - [Connect to Milvus server](connect.md)
+  - [Connect to Milvus server](manage_connection.md)
   - [Conduct a vector search](search.md)
   - [Conduct a hybrid search](hybridsearch.md)
 - [Upgrade Milvus Using Helm Chart](upgrade.md).

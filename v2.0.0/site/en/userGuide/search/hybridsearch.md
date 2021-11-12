@@ -8,155 +8,92 @@ summary: Conduct a Hybrid Search with Milvus.
 
 This topic describes how to conduct a hybrid search.
 
-In addition to vectors, Milvus supports data types such as boolean, integers, floating-point numbers, and more. A collection in Milvus can hold multiple fields for accommodating different data features or properties. Milvus is a flexible vector database that pairs scalar filtering with powerful vector similarity search.
+A hybrid search is essentially a vector search with boolean filtering. By specifying [boolean expressions](boolean.md) that filter the scalar fields or the primary key field, you can limit your search with certain conditions.
 
-<div class="alert note">
-Parameters marked with <code>*</code> are specific to Python SDK, and those marked with <code>**</code> are specific to Node.js SDK.
-</div>
+The following example shows how to perform a hybrid search on the basis of a regular [vector search](search.md). Suppose you want to search for certain books based on their vectorized introductions, but you only want those within a specific range of word count. You can then specify the boolean expression to filter the `word_count` field in the search parameters. Milvus will search for similar vectors only among those entities that match the expression.
 
-A hybrid search is a vector similarity search, during which you can filter the scalar data by specifying a [boolean expression](boolean.md).
+## Preparations
 
-1. Connect to the Milvus server:
+The following example code demonstrates the steps prior to a search.
 
-<div class="multipleCode">
-  <a href="?python">Python </a>
-  <a href="?javascript">Node</a>
-</div>
-
+If you work with your own dataset in an existing Milvus instance, you can move forward to the next step.
 
 ```python
-from pymilvus import connections
-connections.connect("default", host='localhost', port='19530')
-```
-
-```javascript
-import { MilvusClient } from "@zilliz/milvus2-sdk-node";
-const milvusClient = new MilvusClient("localhost:19530");
-```
-
-<details>
-  <summary><b>Detailed Description</b></summary>
-<table class="params">
-	<thead>
-	<tr>
-		<th>Parameter</td>
-		<th>Description</th>
-		<th>Note</th>
-	</tr>
-	</thead>
-	<tbody>
-	<tr>
-		<td><code>alias*</code></td>
-		<td>Alias for the Milvus server</td>
-    <td>Data type: String<br/>Mandatory</td>
-	</tr>
-	<tr>
-		<td><code>host*</code></td>
-		<td>IP address of the Milvus server</td>
-		<td>Mandatory</td>
-	</tr>
-	<tr>
-		<td><code>port*</code></td>
-		<td>Port of the Milvus server</td>
-		<td>Mandatory</td>
-	</tr>
-    <tr>
-		<td><code>address**</code></td>
-		<td>Address of the Milvus server</td>
-		<td><code>"server_IP:server_port"</code><br/>Mandatory</td>
-	</tr>
-	</tbody>
-</table>
-</details>
-
-2. Prepare collection parameters and create a collection:
-
-<div class="multipleCode">
-  <a href="?python">Python </a>
-  <a href="?javascript">Node</a>
-</div>
-
-
-```python
->>> from pymilvus import Collection, FieldSchema, CollectionSchema, DataType
->>> collection_name = "test_collection_search"
+>>> from pymilvus import connections, Collection, FieldSchema, CollectionSchema, DataType
+>>> connections.connect("default", host='localhost', port='19530')
 >>> schema = CollectionSchema([
-...     FieldSchema("film_id", DataType.INT64, is_primary=True),
-...     FieldSchema("films", dtype=DataType.FLOAT_VECTOR, dim=2)
-... ])
->>> collection = Collection(collection_name, schema, using='default', shards_num=2)
+    		FieldSchema("book_id", DataType.INT64, is_primary=True),
+			FieldSchema("word_count", DataType.INT64),
+    		FieldSchema("book_intro", dtype=DataType.FLOAT_VECTOR, dim=2)
+		])
+>>> collection = Collection("test_book_search", schema, using='default', shards_num=2)
+>>> import random
+>>> data = [
+    		[i for i in range(2000)],
+			[i for i in range(10000, 12000)],
+    		[[random.random() for _ in range(2)] for _ in range(2000)],
+		]
+>>> collection.insert(data)
+>>> index_params = {
+        "metric_type":"L2",
+        "index_type":"IVF_FLAT",
+        "params":{"nlist":1024}
+    }
+>>> collection.create_index("book_intro", index_params=index_params)
 ```
 
 ```javascript
-const COLLECTION_NAME = "test_collection_search";
-milvusClient.collectionManager.createCollection({
-  collection_name: COLLECTION_NAME,
+const { MilvusClient } =require("@zilliz/milvus2-sdk-node");
+const milvusClient = new MilvusClient("localhost:19530");
+const params = {
+  collection_name: "test_book_search",
   fields: [
     {
-      name: "films",
-      description: "vector field",
-      data_type: DataType.FloatVector,
+      name: "book_intro",
+      description: "",
+      data_type: 101,  // DataType.FloatVector
       type_params: {
         dim: "2",
       },
     },
-    {
-      name: "film_id",
-      data_type: DataType.Int64,
-      autoID: false,
+	{
+      name: "book_id",
+      data_type: 5,   // DataType.Int64
       is_primary_key: true,
       description: "",
     },
+    {
+      name: "word_count",
+      data_type: 5,    //DataType.Int64
+      description: "",
+    },
   ],
+};
+await milvusClient.collectionManager.createCollection(params);
+const entities = Array.from({ length: 2000 }, (v,k) => ({
+  "book_intro": Array.from({ length: 2 }, () => Math.random()),
+  "book_id": k,
+  "word_count": k+10000,
+}));
+await milvusClient.dataManager.insert({
+  collection_name: "test_book_search",
+  fields_data: entities,
+});
+const index_params = {
+  metric_type: "L2",
+  index_type: "IVF_FLAT",
+  params: JSON.stringify({ nlist: 1024 }),
+};
+await milvusClient.indexManager.createIndex({
+  collection_name: "test_book_search",
+  field_name: "book_intro",
+  extra_params: index_params,
 });
 ```
 
-<details>
-  <summary><b>Detailed Description</b></summary>
-<table class="params">
-	<thead>
-	<tr>
-		<th>Parameter</td>
-		<th>Description</th>
-		<th>Note</th>
-	</tr>
-	</thead>
-	<tbody>
-	<tr>
-		<td>collection_name</td>
-		<td>Name of the collection to create</td>
-		<td>Data type: String</td>
-	</tr>
-	<tr>
-		<td>field_name</td>
-		<td>Name of the field in the collection</td>
-		<td>Data type: String</td>
-	</tr>
-	<tr>
-		<td>Schema</td>
-		<td>Schema used to create a collection and the fields within. Refer to <a href="field_schema.md">field schema</a> and <a href="collection_schema.md">collection schema</a> for detailed description</td>
-		<td>&nbsp;</td>
-	</tr>
-	<tr>
-		<td>description</td>
-		<td>Description of the collection</td>
-		<td>Data type: String</td>
-	</tr>
-  	<tr>
-		<td>using*</td>
-		<td>By specifying the srever alias here, you can decide in which Milvus server you create a collection</td>
-		<td>Optional</td>
-	</tr>
-	<tr>
-		<td>shards_num*</td>
-		<td>Number of the shards for the collection to create</td>
-		<td>Optional</td>
-	</tr>
-	</tbody>
-</table>
-</details>
+## Load collection
 
-3. Insert random vectors to the newly created collection:
+All CRUD operations within Milvus are executed in memory. Load the collection to memory before conducting a vector query.
 
 <div class="multipleCode">
   <a href="?python">Python </a>
@@ -165,60 +102,25 @@ milvusClient.collectionManager.createCollection({
 
 
 ```python
->>> import random
->>> data = [
-...     [i for i in range(10)],
-...     [[random.random() for _ in range(2)] for _ in range(10)],
-... ]
->>> collection.insert(data)
->>> collection.num_entities
-10
+>>> from pymilvus import Collection
+>>> collection = Collection("test_book_search")      # Get an existing collection.
+>>> collection.load()
 ```
 
 ```javascript
-let id = 1;
-const entities = Array.from({ length: 10 }, () => ({
-  films: Array.from({ length: 2 }, () => Math.random() * 10),
-  film_id: id++,
-}));
-
-await milvusClient.collectionManager.insert({
-  collection_name: COLLECTION_NAME,
-  fields_data: entities,
+await milvusClient.collectionManager.loadCollection({
+  collection_name: "test_book_search",
 });
 ```
 
-<details>
-  <summary><b>Detailed Description</b></summary>
-<table class="params">
-	<thead>
-	<tr>
-		<th>Parameter</td>
-		<th>Description</th>
-		<th>Note</th>
-	</tr>
-	</thead>
-	<tbody>
-	<tr>
-		<td>data</td>
-		<td>Data to insert into Milvus</td>
-		<td>Mandatory</td>
-	</tr>
-	<tr>
-		<td>partition_name</td>
-		<td>Name of the partition to insert data into</td>
-		<td>Optional</td>
-	</tr>
-	<tr>
-		<td>timeout*</td>
-		<td>Timeout (in seconds) to allow for RPC. Clients wait until server responds or error occurs when it is set to None</td>
-		<td>Optional</td>
-	</tr>
-	</tbody>
-</table>
-</details>
 
-4. Load the collection to memory and conduct a vector similarity search:
+<div class="alert warning">
+In current release, volume of the data to load must be under 70% of the total memory resources of all query nodes to reserve memory resources for execution engine.
+</div>
+
+## Conduct a hybrid vector search
+
+By specifying the boolean expression, you can filter the scalar field of the entities during the vector search. The following example limits the scale of search to the vectors within a specified `word_count` value range.
 
 <div class="multipleCode">
   <a href="?python">Python </a>
@@ -227,105 +129,118 @@ await milvusClient.collectionManager.insert({
 
 
 ```python
->>> collection.load()
 >>> search_param = {
-...     "data": [[1.0, 1.0]],
-...     "anns_field": "films",
-...     "param": {"metric_type": "L2"},
+...     "data": [[0.1, 0.2]],
+...     "anns_field": "book_intro",
+...     "param": {"metric_type": "L2", "params": {"nprobe": 10}},
 ...     "limit": 2,
-...     "expr": "film_id in [2,4,6,8]",
+...     "expr": "word_count <= 11000",
 ... }
 >>> res = collection.search(**search_param)
 ```
 
 ```javascript
-await milvusClient.collectionManager.loadCollection({
-  collection_name: COLLECTION_NAME,
-});
-await milvusClient.dataManager.search({
-  collection_name: COLLECTION_NAME,
-  // partition_names: [],
-  expr: "film_id in [1,4,6,8]",
-  vectors: [entities[0].films],
+const results = await milvusClient.dataManager.search({
+  collection_name: "test_book_search",
+  expr: "word_count <= 11000",
+  vectors: [[0.1, 0.2]],
   search_params: {
-    anns_field: "films",
-    topk: "4",
+    anns_field: "book_intro",
+    topk: "2",
     metric_type: "L2",
     params: JSON.stringify({ nprobe: 10 }),
   },
-  vector_type: 100, // float vector -> 100
+  vector_type: 101,    // DataType.FloatVector,
 });
 ```
 
-<details>
-  <summary><b>Detailed Description</b></summary>
-<table class="params">
+<table class="language-python">
 	<thead>
 	<tr>
-		<th>Parameter</td>
+		<th>Parameter</th>
 		<th>Description</th>
-		<th>Note</th>
+	</tr>
+	</thead>
+	<tbody>
+    <tr>
+		<td><code>data</code></td>
+		<td>Vectors to search with.</td>
+	</tr>
+	<tr>
+		<td><code>anns_field</code></td>
+		<td>Name of the field to search on.</td>
+	</tr>
+  <tr>
+		<td><code>params</code></td>
+		<td>Search parameter(s) specific to the index. See <a href="index_selection.md">Index Selection</a> for more information.</td>
+	</tr>
+	<tr>
+		<td><code>limit</code></td>
+		<td>Number of the most similar results to return.</td>
+	</tr>
+  <tr>
+		<td><code>expr</code></td>
+		<td>Boolean expression used to filter attribute. See <a href="boolean.md">Boolean Expression Rules</a> for more information.</td>
+	</tr>
+  <tr>
+		<td><code>partition_names</code> (optional)</td>
+		<td>List of names of the partition to search in.</td>
+	</tr>
+  <tr>
+		<td><code>output_fields</code> (optional)</td>
+		<td>Name of the field to return. Vector field is not supported in current release.</td>
+	</tr>
+  <tr>
+		<td><code>timeout</code> (optional)</td>
+		<td>A duration of time in seconds to allow for RPC. Clients wait until server responds or error occurs when it is set to None.</td>
+	</tr>
+  <tr>
+		<td><code>round_decimal</code> (optional)</td>
+		<td>Number of decimal places of returned distance.</td>
+	</tr>
+	</tbody>
+</table>
+
+<table class="language-javascript">
+	<thead>
+	<tr>
+		<th>Parameter</th>
+		<th>Description</th>
 	</tr>
 	</thead>
 	<tbody>
 	<tr>
-		<td>collection_name**</td>
-		<td>Name of the collection to load and search</td>
-		<td>Mandatory</td>
-	</tr>
-    <tr>
-		<td>vectors</td>
-		<td>Vectors to search with. Length of the data represents the number of query <code>nq</code>.</td>
-		<td>Mandatory</td>
+		<td><code>collection_name</code></td>
+		<td>Name of the collection to search in.</td>
 	</tr>
 	<tr>
-		<td>anns_field</td>
-		<td>Name of the field to search on</td>
-		<td>Mandatory</td>
+    <td><code>search_params</code></td>
+    <td>Parameters (as an object) used for search.</td>
+  </tr>
+	<tr>
+    <td><code>vectors</code></td>
+    <td>Vectors to search with.</td>
+  </tr>
+  <tr>
+		<td><code>vector_type</code></td>
+		<td>Pre-check of binary or float vectors. <code>100</code> for binary vectors and <code>101</code> for float vectors.</td>
+	</tr>
+  <tr>
+		<td><code>partition_names</code> (optional)</td>
+		<td>List of names of the partition to search in.</td>
 	</tr>
     <tr>
-		<td>params*</td>
-		<td>Search parameter(s) specific to the index</td>
-		<td>Find more parameter details of different indexes in <a href="index_selection.md">Index Selection</a>.<br/>Mandatory</td>
-	<tr>
-		<td>limit*</td>
-		<td>Number of the most similar results to return</td>
-		<td>Mandatory</td>
+		<td><code>expr</code> (optional)</td>
+		<td>Boolean expression used to filter attribute. See <a href="boolean.md">Boolean Expression Rules</a> for more information.</td>
 	</tr>
   <tr>
-		<td>expr</td>
-		<td>Boolean expression used to filter attribute</td>
-		<td>Find more expression details in <a href="boolean.md">Boolean Expression Rules</a>.<br/>Optional</td>
-	</tr>
-  <tr>
-		<td>partition_names</td>
-		<td>Name of the partition to search on</td>
-		<td>Optional</td>
-	</tr>
-  <tr>
-		<td>output_fields</td>
-		<td>Name of the field to return (vector field not support in current release)</td>
-		<td>Optional</td>
-	</tr>
-  <tr>
-		<td>timeout*</td>
-		<td>Timeout (in seconds) to allow for RPC. Clients wait until server responds or error occurs when it is set to None</td>
-		<td>Optional</td>
-	</tr>
-  <tr>
-		<td>vector_type**</td>
-		<td>Pre-check of binary/float vectors. <code>100</code> for binary vectors and <code>101</code> for float vectors</td>
-		<td>Mandatory</td>
+		<td><code>output_fields</code> (optional)</td>
+		<td>Name of the field to return. Vector field not support in current release.</td>
 	</tr>
 	</tbody>
 </table>
-</details>
 
-<div class="alert warning">
-In current release, data to be load must be under 70% of the total memory resources of all query nodes to reserve memory resources for execution engine.
-</div>
-
-5. Check the returned results:
+Check the returned results:
 
 <div class="multipleCode">
   <a href="?python">Python </a>
@@ -334,9 +249,20 @@ In current release, data to be load must be under 70% of the total memory resour
 
 
 ```python
->>> assert len(res) == 1>>> hits = res[0]>>> assert len(hits) == 2>>> print(f"- Total hits: {len(hits)}, hits ids: {hits.ids} ")- Total hits: 2, hits ids: [2, 4]>>> print(f"- Top1 hit id: {hits[0].id}, distance: {hits[0].distance}, score: {hits[0].score} ")- Top1 hit id: 2, distance: 0.10143111646175385, score: 0.101431116461
+>>> assert len(res) == 1
+>>> hits = res[0]
+>>> assert len(hits) == 2
+>>> print(f"- Total hits: {len(hits)}, hits ids: {hits.ids} ")
+>>> print(f"- Top1 hit id: {hits[0].id}, distance: {hits[0].distance}, score: {hits[0].score} ")
 ```
 
 ```javascript
-// search result will be like:{  status: { error_code: 'Success', reason: '' },  results: [    { score: 0, id: '1' },    { score: 9.266796112060547, id: '4' },    { score: 28.263811111450195, id: '8' },    { score: 41.055686950683594, id: '6' }  ]}
+console.log(results.results)
 ```
+## What's next
+
+- Learn more basic operations of Milvus:
+  - [Search with Time Travel](timetravel.md)
+- Explore API references for Milvus SDKs:
+  - [PyMilvus API reference](/api-reference/pymilvus/v2.0.0rc8/tutorial.html)
+  - [Node.js API reference](/api-reference/node/v1.0.19/tutorial.html)

@@ -5,7 +5,7 @@ summary: 学习如何在 Milvus 中定义 collection schema。
 
 # Collection Schema
 
-Collection schema 是 collection 的逻辑定义。通常你需要在定义 collection schema 和 [创建 collection](create.md) 之前定义 [field schema](field_schema.md)。
+Collection schema 是 collection 的逻辑定义。通常你需要在定义 collection schema 和 [创建 collection](manage_collection.md) 之前定义 [field schema](field_schema.md)。
 
 
 ## Collection schema 属性

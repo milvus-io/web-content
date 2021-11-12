@@ -1,156 +1,99 @@
 ---
 id: hybridsearch.md
+related_key: filter
+summary: Conduct a Hybrid Search with Milvus.
 ---
 
-# 混合搜索
+# Conduct a Hybrid Search
 
-除了向量以外，Milvus 还支持布尔值、整型、浮点等数据类型。在 Milvus 中，一个 collection 可以包含多个字段来代表数据特征或属性。Milvus 是一款灵活的向量数据库，还支持在向量相似度检索过程中进行标量字段过滤。
+This topic describes how to conduct a hybrid search.
 
-混合搜索是一种向量相似度检索。在混合搜索时，你可以通过使用[布尔表达式（boolean expression）](boolean.md)进行标量字段过滤。
+A hybrid search is essentially a vector search with boolean filtering. By specifying [boolean expressions](boolean.md) that filter the scalar fields or the primary key field, you can limit your search with certain conditions.
 
-1. 连接至 Milvus 服务器：
+The following example shows how to perform a hybrid search on the basis of a regular [vector search](search.md). Suppose you want to search for certain books based on their vectorized introductions, but you only want those within a specific range of word count. You can then specify the boolean expression to filter the `word_count` field in the search parameters. Milvus will search for similar vectors only among those entities that match the expression.
 
-<div class="multipleCode">
+## Preparations
 
-  <a href="?python">Python </a>
-  <a href="?javascript">Node</a>
-</div>
+The following example code demonstrates the steps prior to a search.
 
-
-```python
-from pymilvus import connections
-connections.connect("default", host='localhost', port='19530')
-```
-
-```javascript
-import { MilvusClient } from "@zilliz/milvus2-sdk-node";
-const milvusClient = new MilvusClient("localhost:19530");
-```
-
-<details>
-  <summary><b>详细资讯</b></summary>
-<table class="params">
-	<thead>
-	<tr>
-		<th>参数</td>
-		<th>说明</th>
-		<th>备注</th>
-	</tr>
-	</thead>
-	<tbody>
-	<tr>
-		<td><code>alias*</code></td>
-		<td>Milvus 服务器的名称</td>
-		<td>数据类型: String<br/>必填项</td>
-	</tr>
-	<tr>
-		<td><code>host*</code></td>
-		<td>Milvus 服务器的 IP</td>
-		<td>必填项</td>
-	</tr>
-	<tr>
-		<td><code>port*</code></td>
-		<td>Milvus 服务器的端口</td>
-		<td>必填项</td>
-	</tr>
-	<tr>
-		<td><code>address**</code></td>
-		<td>Milvus 服务器的地址</td>
-		<td><code>"server_IP:server_port"</code><br/>必填项</td>
-	</tr>
-	</tbody>
-</table>
-</details>
-
-2. 准备 collection 参数并创建 collection：
-
-<div class="multipleCode">
-
-  <a href="?python">Python </a>
-  <a href="?javascript">Node</a>
-</div>
-
+If you work with your own dataset in an existing Milvus instance, you can move forward to the next step.
 
 ```python
->>> from pymilvus import Collection, FieldSchema, CollectionSchema, DataType
->>> collection_name = "test_collection_search"
+>>> from pymilvus import connections, Collection, FieldSchema, CollectionSchema, DataType
+>>> connections.connect("default", host='localhost', port='19530')
 >>> schema = CollectionSchema([
-...     FieldSchema("film_id", DataType.INT64, is_primary=True),
-...     FieldSchema("films", dtype=DataType.FLOAT_VECTOR, dim=2)
-... ])
->>> collection = Collection(collection_name, schema)
+    		FieldSchema("book_id", DataType.INT64, is_primary=True),
+			FieldSchema("word_count", DataType.INT64),
+    		FieldSchema("book_intro", dtype=DataType.FLOAT_VECTOR, dim=2)
+		])
+>>> collection = Collection("test_book_search", schema, using='default', shards_num=2)
+>>> import random
+>>> data = [
+    		[i for i in range(2000)],
+			[i for i in range(10000, 12000)],
+    		[[random.random() for _ in range(2)] for _ in range(2000)],
+		]
+>>> collection.insert(data)
+>>> index_params = {
+        "metric_type":"L2",
+        "index_type":"IVF_FLAT",
+        "params":{"nlist":1024}
+    }
+>>> collection.create_index("book_intro", index_params=index_params)
 ```
 
 ```javascript
-const COLLECTION_NAME = 'test_collection_search'
-milvusClient.collectionManager.createCollection({
-  collection_name: COLLECTION_NAME,
+const { MilvusClient } =require("@zilliz/milvus2-sdk-node");
+const milvusClient = new MilvusClient("localhost:19530");
+const params = {
+  collection_name: "test_book_search",
   fields: [
     {
-      name: "films",
-      description: "vector field",
-      data_type: DataType.FloatVector,
+      name: "book_intro",
+      description: "",
+      data_type: 101,  // DataType.FloatVector
       type_params: {
-        dim:"2
-      }
+        dim: "2",
+      },
     },
-    {
-      name: "film_id",
-      data_type: DataType.Int64,
-      autoID: false,
+	{
+      name: "book_id",
+      data_type: 5,   // DataType.Int64
       is_primary_key: true,
       description: "",
     },
+    {
+      name: "word_count",
+      data_type: 5,    //DataType.Int64
+      description: "",
+    },
   ],
+};
+await milvusClient.collectionManager.createCollection(params);
+const entities = Array.from({ length: 2000 }, (v,k) => ({
+  "book_intro": Array.from({ length: 2 }, () => Math.random()),
+  "book_id": k,
+  "word_count": k+10000,
+}));
+await milvusClient.dataManager.insert({
+  collection_name: "test_book_search",
+  fields_data: entities,
+});
+const index_params = {
+  metric_type: "L2",
+  index_type: "IVF_FLAT",
+  params: JSON.stringify({ nlist: 1024 }),
+};
+await milvusClient.indexManager.createIndex({
+  collection_name: "test_book_search",
+  field_name: "book_intro",
+  extra_params: index_params,
 });
 ```
 
-<details>
-  <summary><b>详细资讯</b></summary>
-<table class="params">
-	<thead>
-	<tr>
-		<th>参数</td>
-		<th>说明</th>
-		<th>备注</th>
-	</tr>
-	</thead>
-	<tbody>
-	<tr>
-		<td><code>collection_name</code></td>
-		<td>要建立的 collection 名称</td>
-		<td>数据类型: String</td>
-	</tr>
-	<tr>
-		<td><code>field_name</code></td>
-		<td>collection 中的 field 名称</td>
-		<td>数据类型: String</td>
-	</tr>
-	<tr>
-		<td><code>Schema</code></td>
-		<td>用于建立 collection 及其中的 field。详细说明请参考 <a href="field_schema.md">field schema</a> and <a href="collection_schema.md">collection schema</a>。</td>
-		<td>&nbsp;</td>
-	</tr>
-	<tr>
-		<td><code>description</code></td>
-		<td>collection 的说明</td>
-		<td>数据类型: String</td>
-	</tr>
-	<tr>
-		<td>using*</td>
-		<td>在此处标明服务器名称，以指定要建立 collection 的 Milvus 服务器。</td>
-		<td>选填项</td>
-	</tr>
-	<tr>
-		<td>shards_num*</td>
-		<td>指定 collection 要建立的 shards 数目</td>
-		<td>选填项</td>
-	</tr>
-	</tbody>
-</table>
-</details>
+## Load collection
 
-3. 随机生成向量数据并插入新建 collection 中：
+All CRUD operations within Milvus are executed in memory. Load the collection to memory before conducting a vector query.
 
 <div class="multipleCode">
 
@@ -160,60 +103,25 @@ milvusClient.collectionManager.createCollection({
 
 
 ```python
->>> import random
->>> data = [
-...     [i for i in range(10)],
-...     [[random.random() for _ in range(2)] for _ in range(10)],
-... ]
->>> collection.insert(data)
->>> collection.num_entities
-10
+>>> from pymilvus import Collection
+>>> collection = Collection("test_book_search")      # Get an existing collection.
+>>> collection.load()
 ```
 
 ```javascript
-let id = 1;
-const entities = Array.from({ length: 10 }, () => ({
-  films: Array.from({ length: 2 }, () => Math.random() * 10),
-  film_id: id++,
-}));
-
-await milvusClient.collectionManager.insert({
-  collection_name: COLLECTION_NAME,
-  fields_data: entities,
+await milvusClient.collectionManager.loadCollection({
+  collection_name: "test_book_search",
 });
 ```
 
-<details>
-  <summary><b>详细资讯</b></summary>
-<table class="params">
-	<thead>
-	<tr>
-		<th>参数</td>
-		<th>说明</th>
-		<th>备注</th>
-	</tr>
-	</thead>
-	<tbody>
-	<tr>
-		<td>data</td>
-		<td>要插入 Milvus 的数据</td>
-		<td>必填项</td>
-	</tr>
-	<tr>
-		<td>partition_name</td>
-		<td>要将数据插入的 partition 名称</td>
-		<td>选填项</td>
-	</tr>
-	<tr>
-		<td>timeout*</td>
-		<td>RPC 允许的时限（秒钟数）。设定成空值时，客户端会等待服务器回应或产生错误。</td>
-		<td>选填项</td>
-	</tr>
-	</tbody>
-</table>
-</details>
 
-4. 将集合加载到内存中并进行向量相似度检索：
+<div class="alert warning">
+In current release, volume of the data to load must be under 70% of the total memory resources of all query nodes to reserve memory resources for execution engine.
+</div>
+
+## Conduct a hybrid vector search
+
+By specifying the boolean expression, you can filter the scalar field of the entities during the vector search. The following example limits the scale of search to the vectors within a specified `word_count` value range.
 
 <div class="multipleCode">
 
@@ -223,105 +131,118 @@ await milvusClient.collectionManager.insert({
 
 
 ```python
->>> collection.load()
 >>> search_param = {
-...     "data": [[1.0, 1.0]],
-...     "anns_field": "films",
-...     "param": {"metric_type": "L2"},
+...     "data": [[0.1, 0.2]],
+...     "anns_field": "book_intro",
+...     "param": {"metric_type": "L2", "params": {"nprobe": 10}},
 ...     "limit": 2,
-...     "expr": "film_id in [2,4,6,8]",
+...     "expr": "word_count <= 11000",
 ... }
 >>> res = collection.search(**search_param)
 ```
 
 ```javascript
-await milvusClient.collectionManager.loadCollection({
-  collection_name: COLLECTION_NAME,
-});
-await milvusClient.dataManager.search({
-  collection_name: COLLECTION_NAME,
-  // partition_names: [],
-  expr: "film_id in [1,4,6,8]",
-  vectors: [entities[0].films],
+const results = await milvusClient.dataManager.search({
+  collection_name: "test_book_search",
+  expr: "word_count <= 11000",
+  vectors: [[0.1, 0.2]],
   search_params: {
-    anns_field: "films",
-    topk: "4",
+    anns_field: "book_intro",
+    topk: "2",
     metric_type: "L2",
     params: JSON.stringify({ nprobe: 10 }),
   },
-  vector_type: 100, // float vector -> 100
+  vector_type: 101,    // DataType.FloatVector,
 });
 ```
 
-<details>
-  <summary><b>详细资讯</b></summary>
-<table class="params">
+<table class="language-python">
 	<thead>
 	<tr>
-		<th>参数</td>
-		<th>说明</th>
-		<th>备注</th>
+		<th>Parameter</th>
+		<th>Description</th>
+	</tr>
+	</thead>
+	<tbody>
+    <tr>
+		<td><code>data</code></td>
+		<td>Vectors to search with.</td>
+	</tr>
+	<tr>
+		<td><code>anns_field</code></td>
+		<td>Name of the field to search on.</td>
+	</tr>
+  <tr>
+		<td><code>params</code></td>
+		<td>Search parameter(s) specific to the index. See <a href="index_selection.md">Index Selection</a> for more information.</td>
+	</tr>
+	<tr>
+		<td><code>limit</code></td>
+		<td>Number of the most similar results to return.</td>
+	</tr>
+  <tr>
+		<td><code>expr</code></td>
+		<td>Boolean expression used to filter attribute. See <a href="boolean.md">Boolean Expression Rules</a> for more information.</td>
+	</tr>
+  <tr>
+		<td><code>partition_names</code> (optional)</td>
+		<td>List of names of the partition to search in.</td>
+	</tr>
+  <tr>
+		<td><code>output_fields</code> (optional)</td>
+		<td>Name of the field to return. Vector field is not supported in current release.</td>
+	</tr>
+  <tr>
+		<td><code>timeout</code> (optional)</td>
+		<td>A duration of time in seconds to allow for RPC. Clients wait until server responds or error occurs when it is set to None.</td>
+	</tr>
+  <tr>
+		<td><code>round_decimal</code> (optional)</td>
+		<td>Number of decimal places of returned distance.</td>
+	</tr>
+	</tbody>
+</table>
+
+<table class="language-javascript">
+	<thead>
+	<tr>
+		<th>Parameter</th>
+		<th>Description</th>
 	</tr>
 	</thead>
 	<tbody>
 	<tr>
-		<td>collection_name**</td>
-		<td>要载入并查询的 collection 名称</td>
-		<td>必填项</td>
+		<td><code>collection_name</code></td>
+		<td>Name of the collection to search in.</td>
 	</tr>
 	<tr>
-		<td>vectors</td>
-		<td>要查询的向量。数据的数目表示查询数量 <code>nq</code>。</td>
-		<td>必填项</td>
+    <td><code>search_params</code></td>
+    <td>Parameters (as an object) used for search.</td>
+  </tr>
+	<tr>
+    <td><code>vectors</code></td>
+    <td>Vectors to search with.</td>
+  </tr>
+  <tr>
+		<td><code>vector_type</code></td>
+		<td>Pre-check of binary or float vectors. <code>100</code> for binary vectors and <code>101</code> for float vectors.</td>
 	</tr>
-	<tr>
-		<td>anns_field</td>
-		<td>要查询的字段名称</td>
-		<td>必填项</td>
+  <tr>
+		<td><code>partition_names</code> (optional)</td>
+		<td>List of names of the partition to search in.</td>
 	</tr>
-	<tr>
-		<td>params*</td>
-		<td>查询索引的参数</td>
-		<td>可在<a href="index_selection.md">选择索引</a>中查看不同索引的更多参数详细资讯。<br/>必填项</td>
-	<tr>
-		<td>limit*</td>
-		<td>传回多少条最接近的结果</td>
-		<td>必填项</td>
+    <tr>
+		<td><code>expr</code> (optional)</td>
+		<td>Boolean expression used to filter attribute. See <a href="boolean.md">Boolean Expression Rules</a> for more information.</td>
 	</tr>
-	<tr>
-		<td>expr</td>
-		<td>筛选属性用的布林表达式</td>
-		<td>在<a href="boolean.md">布林表达式规则</a>中查询其他表达式资讯。<br/>选填项</td>
-	</tr>
-	<tr>
-		<td>partition_names</td>
-		<td>要查询的 partition 名称</td>
-		<td>选填项</td>
-	</tr>
-	<tr>
-		<td>output_fields</td>
-		<td>要传回的字段名称（向量字段在目前版本不支持）</td>
-		<td>必填项</td>
-	</tr>
-	<tr>
-		<td>timeout*</td>
-		<td>RPC 允许的时限（秒钟数）。设定成空值时，客户端会等待服务器回应或产生错误。</td>
-		<td>选填项</td>
-	</tr>
-	<tr>
-		<td>vector_type**</td>
-		<td>预先检查二进制或浮点数向量。二进制为 <code>100</code> 而浮点数为 <code>101</code>。</td>
-		<td>必填项</td>
+  <tr>
+		<td><code>output_fields</code> (optional)</td>
+		<td>Name of the field to return. Vector field not support in current release.</td>
 	</tr>
 	</tbody>
 </table>
-</details>
 
-<div class="alert warning">
-在当前版本中，加载数据最大值不能超过所有 query node 内存总量的 70%，从而为执行引擎预留内存资源。
-</div>
-
-5. 检查返回结果：
+Check the returned results:
 
 <div class="multipleCode">
 
@@ -335,20 +256,16 @@ await milvusClient.dataManager.search({
 >>> hits = res[0]
 >>> assert len(hits) == 2
 >>> print(f"- Total hits: {len(hits)}, hits ids: {hits.ids} ")
-- Total hits: 2, hits ids: [2, 4]
 >>> print(f"- Top1 hit id: {hits[0].id}, distance: {hits[0].distance}, score: {hits[0].score} ")
-- Top1 hit id: 2, distance: 0.10143111646175385, score: 0.101431116461
 ```
 
 ```javascript
-// search result will be like:
-{
-  status: { error_code: 'Success', reason: '' },
-  results: [
-    { score: 0, id: '1' },
-    { score: 9.266796112060547, id: '4' },
-    { score: 28.263811111450195, id: '8' },
-    { score: 41.055686950683594, id: '6' }
-  ]
-}
+console.log(results.results)
 ```
+## What's next
+
+- Learn more basic operations of Milvus:
+  - [Search with Time Travel](timetravel.md)
+- Explore API references for Milvus SDKs:
+  - [PyMilvus API reference](/api-reference/pymilvus/v2.0.0rc8/tutorial.html)
+  - [Node.js API reference](/api-reference/node/v1.0.19/tutorial.html)

@@ -4,7 +4,9 @@ id: home.md
 
 # Welcome to Milvus Docs!
 
-Here you will learn about [what Milvus is](overview.md), and how to [install](install_standalone-docker.md), [use](connect.md), and [deploy](aws.md) Milvus to build an [application](image_similarity_search.md) according to your business need. You will also find [FAQs](performance_faq.md) and [API references](https://milvus.io/api-reference/pymilvus/v2.0.0rc8/api/collection.html) here.
+
+Here you will learn about [what Milvus is](overview.md), and how to [install](install_standalone-docker.md), [use](manage_connection.md), and [deploy](aws.md) Milvus to build an [application](image_similarity_search.md) according to your business need. You will also find [FAQs](performance_faq.md) and [API references](https://milvus.io/api-reference/pymilvus/v2.0.0rc8/api/collection.html) here.
+
 
 You can start by browsing the recomended contents below or using the search box at the top left to search across the documentation. If you do not find the information you are looking for, feel free to ask _MilMil_![MilMil](../../../assets/icon_bird.svg) at the bottom right or submit an issue via GitHub by using the buttons at the top right of each page.
 
@@ -45,9 +47,9 @@ You can start by browsing the recomended contents below or using the search box 
 <div class="recomment-item">
   <p>Use</p>
 
-- [Create a Collection](create.md)
-- [Insert Data](insert.md)
-- [Build an Index](build.md)
+- [Create a Collection](manage_collection.md)
+- [Insert Data](manage_data.md)
+- [Build an Index](manage_index.md)
 - [Vector Similarity Search](search.md)
 - [Query](query.md)
 </div>

@@ -32,9 +32,9 @@ $ npm install @zilliz/milvus2-sdk-node
 Having installed Milvus Node.js SDK, you can:
 
 - Learn the basic operations of Milvus:
-  - [Connect to Milvus server](connect.md)
+  - [Connect to Milvus server](manage_connection.md)
   - [Conduct a vector search](search.md)
   - [Conduct a hybrid search](hybridsearch.md)
 
-- Explore [Milvus Node.js API reference](/api-reference/node/v1.0.18/tutorial.html)
+- Explore [Milvus Node.js API reference](/api-reference/node/v1.0.19/tutorial.html)
 

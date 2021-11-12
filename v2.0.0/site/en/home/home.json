@@ -28,7 +28,7 @@
     "order": -1,
     "title": "Welcome to Milvus Documentation! ",
     "desc": [
-      "Here you will learn about <a href='overview.md'>what Milvus is</a>, and how to <a href='install_standalone-docker.md'>install</a>, <a href='connect.md'>use</a>, and <a href='aws.md'>deploy</a> Milvus to build an <a href='image_similarity_search.md'>application</a> according to your business need. You will also find <a href='performance_faq.md'>FAQs</a> and <a href='api-reference/pymilvus/v2.0.0rc6/api/collection.html'>API references</a> here.",
+      "Here you will learn about <a href='overview.md'>what Milvus is</a>, and how to <a href='install_standalone-docker.md'>install</a>, <a href='manage_connection.md'>use</a>, and <a href='aws.md'>deploy</a> Milvus to build an <a href='image_similarity_search.md'>application</a> according to your business need. You will also find <a href='performance_faq.md'>FAQs</a> and <a href='api-reference/pymilvus/v2.0.0rc6/api/collection.html'>API references</a> here.",
       "You can start by browsing the recomended contents below or using the search box at the top left to search across the documentation. If you do not find the information you are looking for, feel free to ask <i>MilMil</i> at the bottom right or submit an issue via GitHub by using the buttons at the top right of each page."
     ]
   },
@@ -38,15 +38,15 @@
         "label": "Use",
         "list": [{
             "text": "Create a Collection",
-            "link": "create.md"
+            "link": "manage_collection.md"
           },
           {
             "text": "Insert Data",
-            "link": "insert.md"
+            "link": "manage_data.md"
           },
           {
             "text": "Build an Index",
-            "link": "build.md"
+            "link": "manage_index.md"
           },
           {
             "text": "Vector Similarity Search",
