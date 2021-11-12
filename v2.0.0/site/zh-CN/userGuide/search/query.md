@@ -26,27 +26,27 @@ If you work with your own dataset in an existing Milvus server, you can move for
 
 
 ```python
->>> from pymilvus import connections, Collection, FieldSchema, CollectionSchema, DataType
->>> connections.connect("default", host='localhost', port='19530')
->>> schema = CollectionSchema([
+from pymilvus import connections, Collection, FieldSchema, CollectionSchema, DataType
+connections.connect("default", host='localhost', port='19530')
+schema = CollectionSchema([
     		FieldSchema("book_id", DataType.INT64, is_primary=True),
 			FieldSchema("word_count", DataType.INT64),
     		FieldSchema("book_intro", dtype=DataType.FLOAT_VECTOR, dim=2)
 		])
->>> collection = Collection("test_book_search", schema, using='default', shards_num=2)
->>> import random
->>> data = [
+collection = Collection("test_book_search", schema, using='default', shards_num=2)
+import random
+data = [
     		[i for i in range(2000)],
 			[i for i in range(10000, 12000)],
     		[[random.random() for _ in range(2)] for _ in range(2000)],
 		]
->>> collection.insert(data)
->>> index_params = {
+collection.insert(data)
+index_params = {
         "metric_type":"L2",
         "index_type":"IVF_FLAT",
         "params":{"nlist":1024}
     }
->>> collection.create_index("book_intro", index_params=index_params)
+collection.create_index("book_intro", index_params=index_params)
 ```
 
 ```javascript
@@ -110,9 +110,9 @@ All CRUD operations within Milvus are executed in memory. Load the collection to
 
 
 ```python
->>> from pymilvus import Collection
->>> collection = Collection("test_book_search")      # Get an existing collection.
->>> collection.load()
+from pymilvus import Collection
+collection = Collection("test_book_search")      # Get an existing collection.
+collection.load()
 ```
 
 ```javascript
@@ -138,7 +138,7 @@ The following example filters the vectors with certain `book_id` values, and ret
 
 
 ```python
->>> res = collection.query(expr = "book_id in [2,4,6,8]", output_fields = ["book_id", "book_intro"])
+res = collection.query(expr = "book_id in [2,4,6,8]", output_fields = ["book_id", "book_intro"])
 ```
 
 ```javascript
@@ -210,8 +210,8 @@ Check the returned results.
 
 
 ```python
->>> sorted_res = sorted(res, key=lambda k: k['book_id'])
->>> sorted_res
+sorted_res = sorted(res, key=lambda k: k['book_id'])
+sorted_res
 ```
 
 ```javascript

@@ -98,37 +98,37 @@ for raw_result in res:
 
 ```Python
 from pymilvus import connections, Collection, FieldSchema, CollectionSchema, DataType
->>> import random
->>> connections.connect()
->>> schema = CollectionSchema([
-...     FieldSchema("film_id", DataType.INT64, is_primary=True),
-...     FieldSchema("films", dtype=DataType.FLOAT_VECTOR, dim=2)
-... ])
->>> collection = Collection("test_collection_search", schema)
->>> # insert
->>> data = [
-...     [i for i in range(10)],
-...     [[random.random() for _ in range(2)] for _ in range(10)],
-... ]
->>> collection.insert(data)
->>> collection.num_entities
+import random
+connections.connect()
+schema = CollectionSchema([
+    FieldSchema("film_id", DataType.INT64, is_primary=True),
+    FieldSchema("films", dtype=DataType.FLOAT_VECTOR, dim=2)
+])
+collection = Collection("test_collection_search", schema)
+# insert
+data = [
+    [i for i in range(10)],
+    [[random.random() for _ in range(2)] for _ in range(10)],
+]
+collection.insert(data)
+collection.num_entities
 10
->>> collection.load()
->>> # search
->>> search_param = {
-...     "data": [[1.0, 1.0]],
-...     "anns_field": "films",
-...     "param": {"metric_type": "L2"},
-...     "limit": 2,
-...     "expr": "film_id in [2,4,6,8]",
-... }
->>> res = collection.search(**search_param)
->>> assert len(res) == 1
->>> hits = res[0]
->>> assert len(hits) == 2
->>> print(f"- Total hits: {len(hits)}, hits ids: {hits.ids} ")
+collection.load()
+# search
+search_param = {
+    "data": [[1.0, 1.0]],
+    "anns_field": "films",
+    "param": {"metric_type": "L2"},
+    "limit": 2,
+    "expr": "film_id in [2,4,6,8]",
+}
+res = collection.search(**search_param)
+assert len(res) == 1
+hits = res[0]
+assert len(hits) == 2
+print(f"- Total hits: {len(hits)}, hits ids: {hits.ids} ")
 - Total hits: 2, hits ids: [2, 4]
->>> print(f"- Top1 hit id: {hits[0].id}, distance: {hits[0].distance}, score: {hits[0].score} ")
+print(f"- Top1 hit id: {hits[0].id}, distance: {hits[0].distance}, score: {hits[0].score} ")
 - Top1 hit id: 2, distance: 0.10143111646175385, score: 0.101431116461
 
 ```

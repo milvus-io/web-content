@@ -22,9 +22,9 @@ This topic inserts randomly generated 2,000 rows of eight-dimensional vector dat
 
 
 ```python
->>> import random
->>> vectors = [[random.random() for _ in range(8)] for _ in range(2000)]
->>> entities = [vectors]
+import random
+vectors = [[random.random() for _ in range(8)] for _ in range(2000)]
+entities = [vectors]
 ```
 
 ```javascript
@@ -45,9 +45,9 @@ With the collection schema `auto_id` enabled, Milvus automatically assigns an ID
 
 
 ```python
->>> from pymilvus import collection
->>> collection = Collection("example_collection")      # Get an existing collection.
->>> mr = collection.insert(entities)
+from pymilvus import collection
+collection = Collection("example_collection")      # Get an existing collection.
+mr = collection.insert(entities)
 ```
 
 ```javascript
@@ -115,7 +115,7 @@ After the data are inserted, Milvus returns `MutationResult` as an object. You c
 
 
 ```python
->>> mr.primary_keys
+mr.primary_keys
 ```
 
 ```javascript
@@ -150,9 +150,9 @@ All CRUD operations within Milvus are executed in memory. Before deleting, load 
 
 
 ```python
->>> from pymilvus import collection
->>> collection = Collection("example_collection")      # Get an existing collection.
->>> collection.load()
+from pymilvus import collection
+collection = Collection("example_collection")      # Get an existing collection.
+collection.load()
 ```
 
 ```javascript
@@ -175,7 +175,7 @@ The following example filters data with primary key values of `42579073691831840
 
 
 ```python
->>> expr = "pk in [425790736918318406,425790736918318407]"
+expr = "pk in [425790736918318406,425790736918318407]"
 ```
 
 ```javascript
@@ -193,7 +193,7 @@ Delete the entities with the boolean expression you created. By specifying `part
 
 
 ```python
->>> collection.delete(expr)
+collection.delete(expr)
 ```
 
 ```javascript
@@ -229,7 +229,7 @@ await milvusClient.dataManager.deleteEntities({
 You can verify the delete operation by checking the number of entities after deleting.
 
 ```python
->>> collection.num_entities
+collection.num_entities
 1998
 ```
 

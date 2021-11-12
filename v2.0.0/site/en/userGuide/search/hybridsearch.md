@@ -25,27 +25,27 @@ If you work with your own dataset in an existing Milvus instance, you can move f
 
 
 ```python
->>> from pymilvus import connections, Collection, FieldSchema, CollectionSchema, DataType
->>> connections.connect("default", host='localhost', port='19530')
->>> schema = CollectionSchema([
+from pymilvus import connections, Collection, FieldSchema, CollectionSchema, DataType
+connections.connect("default", host='localhost', port='19530')
+schema = CollectionSchema([
     		FieldSchema("book_id", DataType.INT64, is_primary=True),
 			FieldSchema("word_count", DataType.INT64),
     		FieldSchema("book_intro", dtype=DataType.FLOAT_VECTOR, dim=2)
 		])
->>> collection = Collection("test_book_search", schema, using='default', shards_num=2)
->>> import random
->>> data = [
+collection = Collection("test_book_search", schema, using='default', shards_num=2)
+import random
+data = [
     		[i for i in range(2000)],
 			[i for i in range(10000, 12000)],
     		[[random.random() for _ in range(2)] for _ in range(2000)],
 		]
->>> collection.insert(data)
->>> index_params = {
+collection.insert(data)
+index_params = {
         "metric_type":"L2",
         "index_type":"IVF_FLAT",
         "params":{"nlist":1024}
     }
->>> collection.create_index("book_intro", index_params=index_params)
+collection.create_index("book_intro", index_params=index_params)
 ```
 
 ```javascript
@@ -108,9 +108,9 @@ All CRUD operations within Milvus are executed in memory. Load the collection to
 
 
 ```python
->>> from pymilvus import Collection
->>> collection = Collection("test_book_search")      # Get an existing collection.
->>> collection.load()
+from pymilvus import Collection
+collection = Collection("test_book_search")      # Get an existing collection.
+collection.load()
 ```
 
 ```javascript
@@ -135,14 +135,14 @@ By specifying the boolean expression, you can filter the scalar field of the ent
 
 
 ```python
->>> search_param = {
-...     "data": [[0.1, 0.2]],
-...     "anns_field": "book_intro",
-...     "param": {"metric_type": "L2", "params": {"nprobe": 10}},
-...     "limit": 2,
-...     "expr": "word_count <= 11000",
-... }
->>> res = collection.search(**search_param)
+search_param = {
+    "data": [[0.1, 0.2]],
+    "anns_field": "book_intro",
+    "param": {"metric_type": "L2", "params": {"nprobe": 10}},
+    "limit": 2,
+    "expr": "word_count <= 11000",
+}
+res = collection.search(**search_param)
 ```
 
 ```javascript
@@ -255,11 +255,11 @@ Check the returned results:
 
 
 ```python
->>> assert len(res) == 1
->>> hits = res[0]
->>> assert len(hits) == 2
->>> print(f"- Total hits: {len(hits)}, hits ids: {hits.ids} ")
->>> print(f"- Top1 hit id: {hits[0].id}, distance: {hits[0].distance}, score: {hits[0].score} ")
+assert len(res) == 1
+hits = res[0]
+assert len(hits) == 2
+print(f"- Total hits: {len(hits)}, hits ids: {hits.ids} ")
+print(f"- Top1 hit id: {hits[0].id}, distance: {hits[0].distance}, score: {hits[0].score} ")
 ```
 
 ```javascript

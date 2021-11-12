@@ -20,13 +20,13 @@ connections.connect("default", host='localhost', port='19530')
 ## Prepare parameters and create a collection
 
 ```python
->>> from pymilvus import Collection, FieldSchema, CollectionSchema, DataType
->>> collection_name = "test_time_travel"
->>> schema = CollectionSchema([
-...     FieldSchema("pk", DataType.INT64, is_primary=True),
-...     FieldSchema("example_field", dtype=DataType.FLOAT_VECTOR, dim=2)
-... ])
->>> collection = Collection(collection_name, schema)
+from pymilvus import Collection, FieldSchema, CollectionSchema, DataType
+collection_name = "test_time_travel"
+schema = CollectionSchema([
+    FieldSchema("pk", DataType.INT64, is_primary=True),
+    FieldSchema("example_field", dtype=DataType.FLOAT_VECTOR, dim=2)
+])
+collection = Collection(collection_name, schema)
 ```
 
 ## Insert first batch of data
@@ -34,12 +34,12 @@ connections.connect("default", host='localhost', port='19530')
 Insert random data to simulate the original data.
 
 ```python
->>> import random
->>> data = [
-...     [i for i in range(10)],
-...     [[random.random() for _ in range(2)] for _ in range(10)],
-... ]
->>> batch1 = collection.insert(data)
+import random
+data = [
+    [i for i in range(10)],
+    [[random.random() for _ in range(2)] for _ in range(10)],
+]
+batch1 = collection.insert(data)
 ```
 
 ## Check the timestamp of the first data batch
@@ -47,7 +47,7 @@ Insert random data to simulate the original data.
 Check the timepstamp of the first data batch for search with Time Travel. Data inserted within the same batch share an identical timestamp.
 
 ```python
->>> batch1.timestamp
+batch1.timestamp
 ```
 
 ```python
@@ -65,12 +65,12 @@ Check the timepstamp of the first data batch for search with Time Travel. Data i
 Insert the second batch of data to simulate the dirty data, among which a piece of data with primary key value `19` and vector value `[1.0,1.0]` is appended as the target data to search with in the following step.
 
 ```python
->>> data = [
-...     [i for i in range(10, 20)],
-...     [[random.random() for _ in range(2)] for _ in range(9)],
-... ]
->>> data[1].append([1.0,1.0])
->>> batch2 = collection.insert(data)
+data = [
+    [i for i in range(10, 20)],
+    [[random.random() for _ in range(2)] for _ in range(9)],
+]
+data[1].append([1.0,1.0])
+batch2 = collection.insert(data)
 ```
 
 ## Search with Time Travel
@@ -78,16 +78,16 @@ Insert the second batch of data to simulate the dirty data, among which a piece 
 Load the collection and search the target data with the timestamp of the first data batch. With the timestamp specified, Milvus only retrieves the data view at the point of time the timestamp indicates.
 
 ```python
->>> collection.load()
->>> search_param = {
-...     "data": [[1.0, 1.0]],
-...     "anns_field": "example_field",
-...     "param": {"metric_type": "L2"},
-...     "limit": 10,
-...     "travel_timestamp": batch1.timestamp,
-... }
->>> res = collection.search(**search_param)
->>> res[0].ids
+collection.load()
+search_param = {
+    "data": [[1.0, 1.0]],
+    "anns_field": "example_field",
+    "param": {"metric_type": "L2"},
+    "limit": 10,
+    "travel_timestamp": batch1.timestamp,
+}
+res = collection.search(**search_param)
+res[0].ids
 ```
 
 As shown below, the target data itself and other data inserted later are not returned as results.
@@ -99,17 +99,17 @@ As shown below, the target data itself and other data inserted later are not ret
 If you do not specify the timestamp or specify it with the timestamp of the second data batch, Milvus will return the results from both batches.
 
 ```python
->>> batch2.timestamp
+batch2.timestamp
 428828283406123011
->>> search_param = {
-...     "data": [[1.0, 1.0]],
-...     "anns_field": "example_field",
-...     "param": {"metric_type": "L2"},
-...     "limit": 10,
-...     "travel_timestamp": batch2.timestamp,
-... }
->>> res = collection.search(**search_param)
->>> res[0].ids
+search_param = {
+    "data": [[1.0, 1.0]],
+    "anns_field": "example_field",
+    "param": {"metric_type": "L2"},
+    "limit": 10,
+    "travel_timestamp": batch2.timestamp,
+}
+res = collection.search(**search_param)
+res[0].ids
 [19, 10, 8, 7, 4, 17, 2, 5, 13, 15]
 ```
 

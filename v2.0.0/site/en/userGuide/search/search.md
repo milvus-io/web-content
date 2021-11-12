@@ -25,27 +25,27 @@ If you work with your own dataset in an existing Milvus instance, you can move f
 
 
 ```python
->>> from pymilvus import connections, Collection, FieldSchema, CollectionSchema, DataType
->>> connections.connect("default", host='localhost', port='19530')
->>> schema = CollectionSchema([
+from pymilvus import connections, Collection, FieldSchema, CollectionSchema, DataType
+connections.connect("default", host='localhost', port='19530')
+schema = CollectionSchema([
     		FieldSchema("book_id", DataType.INT64, is_primary=True),
 			FieldSchema("word_count", DataType.INT64),
     		FieldSchema("book_intro", dtype=DataType.FLOAT_VECTOR, dim=2)
 		])
->>> collection = Collection("test_book_search", schema, using='default', shards_num=2)
->>> import random
->>> data = [
+collection = Collection("test_book_search", schema, using='default', shards_num=2)
+import random
+data = [
     		[i for i in range(2000)],
 			[i for i in range(10000, 12000)],
     		[[random.random() for _ in range(2)] for _ in range(2000)],
 		]
->>> collection.insert(data)
->>> index_params = {
+collection.insert(data)
+index_params = {
         "metric_type":"L2",
         "index_type":"IVF_FLAT",
         "params":{"nlist":1024}
     }
->>> collection.create_index("book_intro", index_params=index_params)
+collection.create_index("book_intro", index_params=index_params)
 ```
 
 ```javascript
@@ -108,9 +108,9 @@ All CRUD operations within Milvus are executed in memory. Load the collection to
 
 
 ```python
->>> from pymilvus import Collection
->>> collection = Collection("test_book_search")      # Get an existing collection.
->>> collection.load()
+from pymilvus import Collection
+collection = Collection("test_book_search")      # Get an existing collection.
+collection.load()
 ```
 
 ```javascript
@@ -135,7 +135,7 @@ Prepare the parameters that suit your search scenario. The following example def
 
 
 ```python
->>> search_params = {"metric_type": "L2", "params": {"nprobe": 10}}
+search_params = {"metric_type": "L2", "params": {"nprobe": 10}}
 ```
 
 ```javascript
@@ -205,7 +205,7 @@ Search vectors with Milvus. To search in a specific [partition](manage_partition
 
 
 ```python
->>> results = collection.search(data=[[0.1, 0.2]], anns_field="book_intro", param=search_params, limit=10, expr=None)
+results = collection.search(data=[[0.1, 0.2]], anns_field="book_intro", param=search_params, limit=10, expr=None)
 ```
 
 ```javascript
@@ -314,8 +314,8 @@ Check the primary key values of the most similar vectors and their distances.
 
 
 ```python
->>> results[0].ids
->>> results[0].distances
+results[0].ids
+results[0].distances
 ```
 
 ```javascript
@@ -331,7 +331,7 @@ Release the collection loaded in Milvus to reduce memory consumption when the se
 
 
 ```python
->>> collection.release()
+collection.release()
 ```
 
 ```javascript

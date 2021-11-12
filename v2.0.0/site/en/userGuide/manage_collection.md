@@ -32,11 +32,11 @@ First, prepare necessary parameters, including field schema, collection schema, 
 
 
 ```python
->>> from pymilvus import CollectionSchema, FieldSchema, DataType
->>> pk = FieldSchema(name="pk", dtype=DataType.INT64, is_primary=True, auto_id=True)
->>> field = FieldSchema(name="example_field", dtype=DataType.FLOAT_VECTOR, dim=8)
->>> schema = CollectionSchema(fields=[pk,field], description="example collection")
->>> collection_name = "example_collection"
+from pymilvus import CollectionSchema, FieldSchema, DataType
+pk = FieldSchema(name="pk", dtype=DataType.INT64, is_primary=True, auto_id=True)
+field = FieldSchema(name="example_field", dtype=DataType.FLOAT_VECTOR, dim=8)
+schema = CollectionSchema(fields=[pk,field], description="example collection")
+collection_name = "example_collection"
 ```
 
 ```javascript
@@ -123,8 +123,8 @@ Then, create a collection with the parameters you created above.
 
 
 ```python
->>> from pymilvus import Collection
->>> collection = Collection(name=collection_name, schema=schema, using='default', shards_num=2)
+from pymilvus import Collection
+collection = Collection(name=collection_name, schema=schema, using='default', shards_num=2)
 ```
 
 ```javascript
@@ -162,8 +162,8 @@ await milvusClient.collectionManager.createCollection(params);
 
 
 ```python
->>> from pymilvus import utility
->>> utility.has_collection("example_collection")
+from pymilvus import utility
+utility.has_collection("example_collection")
 ```
 
 ```javascript
@@ -183,8 +183,8 @@ await milvusClient.collectionManager.hasCollection({
 
 
 ```python
->>> from pymilvus import utility
->>> utility.list_collections()
+from pymilvus import utility
+utility.list_collections()
 ```
 
 ```javascript
@@ -200,9 +200,9 @@ await milvusClient.collectionManager.showCollections();
 
 
 ```python
->>> from pymilvus import Collection
->>> collection = Collection("example_collection")      # Get an existing collection.
->>> collection.num_entities
+from pymilvus import Collection
+collection = Collection("example_collection")      # Get an existing collection.
+collection.num_entities
 ```
 
 ```javascript
@@ -221,9 +221,9 @@ All CRUD operations within Milvus are executed in memory. Load the collection to
 
 
 ```python
->>> from pymilvus import Collection
->>> collection = Collection("example_collection")      # Get an existing collection.
->>> collection.load()
+from pymilvus import Collection
+collection = Collection("example_collection")      # Get an existing collection.
+collection.load()
 ```
 
 ```javascript
@@ -278,7 +278,7 @@ The drop operation is irreversible. Dropping a collection deletes all data withi
 
 
 ```python
->>> collection.drop("example_collection")
+collection.drop("example_collection")
 ```
 
 ```javascript

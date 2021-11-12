@@ -29,7 +29,7 @@ Prepare the index parameters.
 
 
 ```python
->>> index_params = {
+index_params = {
         "metric_type":"L2",
         "index_type":"IVF_FLAT",
         "params":{"nlist":1024}
@@ -77,9 +77,9 @@ Build the index by specifying the vector field name and index parameters.
 
 
 ```python
->>> from pymilvus import collection
->>> collection = Collection("example_collection")      # Get an existing collection.
->>> collection.create_index(field_name="example_field", index_params=index_params)
+from pymilvus import collection
+collection = Collection("example_collection")      # Get an existing collection.
+collection.create_index(field_name="example_field", index_params=index_params)
 ```
 
 ```python
@@ -105,9 +105,9 @@ await milvusClient.indexManager.createIndex({
 
 
 ```python
->>> from pymilvus import collection
->>> collection = Collection("example_collection")      # Get an existing collection.
->>> collection.index().params
+from pymilvus import collection
+collection = Collection("example_collection")      # Get an existing collection.
+collection.index().params
 ```
 
 ```python
@@ -138,9 +138,9 @@ The drop operation is irreversible. Dropping an index removes all corresponding 
 
 
 ```python
->>> from pymilvus import collection
->>> collection = Collection("example_collection")      # Get an existing collection.
->>> collection.drop_index()
+from pymilvus import collection
+collection = Collection("example_collection")      # Get an existing collection.
+collection.drop_index()
 ```
 
 ```javascript

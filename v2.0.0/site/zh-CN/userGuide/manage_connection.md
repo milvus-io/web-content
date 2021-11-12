@@ -28,8 +28,8 @@ Construct a Milvus connection. Ensure to connect to Milvus server before any ope
 
 ```python
 # Run `python3` in your terminal to operate in the Python interactive mode.
->>> from pymilvus import connections
->>> connections.connect(alias="default", host='localhost', port='19530')
+from pymilvus import connections
+connections.connect(alias="default", host='localhost', port='19530')
 ```
 
 ```javascript
@@ -88,7 +88,7 @@ Disconnect from a Milvus server.
 
 
 ```python
->>> connections.disconnect("default")
+connections.disconnect("default")
 ```
 
 
