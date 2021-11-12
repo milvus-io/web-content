@@ -34,7 +34,8 @@ Construct a Milvus connection. Ensure to connect to Milvus server before any ope
 
 ```javascript
 import { MilvusClient } from "@zilliz/milvus2-sdk-node";
-const milvusClient = new MilvusClient("localhost:19530");
+const address = "localhost:19530";
+const milvusClient = new MilvusClient(address);
 ```
 
 <table class="language-python">
@@ -68,8 +69,8 @@ const milvusClient = new MilvusClient("localhost:19530");
 	</tr>
 	</thead>
 	<tbody>
-    <tr>
-		<td><code>address</code></td>
+    	<tr>
+	    	<td><code>address</code></td>
 		<td>Address of the Milvus connection to construct.</td>
 	</tr>
 	</tbody>
