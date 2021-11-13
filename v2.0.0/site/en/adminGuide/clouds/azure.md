@@ -20,7 +20,7 @@ Ensure that your Azure project has been set up properly and you have access to t
 
 Alternatively, you can use the [Cloud Shell](https://shell.azure.com.) which has the Azure CLI, kubectl, and Helm preinstalled.
 
-<div class="alert note">After you install the Azure CLI, ensure that you are properly authenticated.
+<div class="alert note">After you install the Azure CLI, ensure that you are properly authenticated. </div>
 
 ## Provision a Kubernetes cluster
 
