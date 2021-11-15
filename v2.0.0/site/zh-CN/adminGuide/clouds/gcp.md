@@ -26,7 +26,7 @@ summary: Learn how to deploy a Milvus cluster on GCP.
 
 在为 Milvus 创建防火墙规则之前，需要先创建 VPC 网络。
 
-如果已经创建了 VPC 网络，请直接阅读[为 Milvus 创建防火墙规则](gcp.md#Create-a-firewall-rule-for Milvus)。
+如果已经创建了 VPC 网络，请直接阅读[为 Milvus 创建防火墙规则](gcp.md#为-Milvus-创建防火墙规则)。
 
 ### 创建 VPC
 
