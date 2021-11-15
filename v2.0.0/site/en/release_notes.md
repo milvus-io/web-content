@@ -10,7 +10,7 @@ Find out what’s new in Milvus! This page summarizes information about new feat
 
 Release date: 2021-11-5
 
-### Compatibility
+<h3 id="v2.0.0-RC8">Compatibility</h3>
 
 <table class="version">
 	<thead>
@@ -39,7 +39,7 @@ Milvus 2.0.0-RC8 is the last release candidate of Milvus 2.0.0-GA. It supports h
 
 Current deduplication feature does not guarantee overwriting the old data copies when data with duplicate primary keys (`pk`) are inserted. Therefore, which data copy will return when queried remains unknown behavior. This limitation will be fixed in future releases. 
 
-### Improvements
+<h3 id="v2.0.0-RC8">Improvements</h3>
 
 - Failure Recovery speed:
   - [#10737](https://github.com/milvus-io/milvus/pull/10737) Fixes Session checker for proxy.
@@ -70,7 +70,7 @@ Current deduplication feature does not guarantee overwriting the old data copies
 
 - [#7606](https://github.com/milvus-io/milvus/pull/7606) Makes `knowhere` compile independently.
 
-### Features
+<h3 id="v2.0.0-RC8">Features</h3>
 
 - Handoff:   
 
@@ -106,7 +106,7 @@ Current deduplication feature does not guarantee overwriting the old data copies
 
 - [#9782](https://github.com/milvus-io/milvus/pull/9782) Adds `allocIDBatch` for data node allocator.
 
-### Bug Fixes
+<h3 id="v2.0.0-RC8">Bug fixes</h3>
 
 - Incorrect collection loading behavior if there is not enough memory:
   - [#10796](https://github.com/milvus-io/milvus/pull/10796) Fixes get container mem usage.
@@ -173,7 +173,7 @@ Current deduplication feature does not guarantee overwriting the old data copies
 
 Release date: 2021-10-11
 
-### Compatibility
+<h3 id="v2.0.0-RC7">Compatibility</h3>
 
 <table class="version">
 	<thead>
@@ -202,7 +202,7 @@ Milvus 2.0.0-RC7 is a preview version of Milvus 2.0.0-GA. It supports collection
 
 It should be noted that Milvus 2.0.0-RC7 is NOT compatible with previous versions of Milvus 2.0.0 because of some changes made to storage format. 
 
-### Improvements
+<h3 id="v2.0.0-RC7">Improvements</h3>
 
 - [#8215](https://github.com/milvus-io/milvus/pull/8215) Adds max number of retries for `interTask` in query coord.
 
@@ -248,7 +248,7 @@ It should be noted that Milvus 2.0.0-RC7 is NOT compatible with previous version
 
 - [#7797](https://github.com/milvus-io/milvus/pull/7797) Uses definitional type instead of raw type.
 
-### Features
+<h3 id="v2.0.0-RC7">Features</h3>
 
 - [#9579](https://github.com/milvus-io/milvus/pull/9579) Uses replica memory size and `cacheSize` in `getSystemInfoMetrics`.
 
@@ -300,7 +300,7 @@ It should be noted that Milvus 2.0.0-RC7 is NOT compatible with previous version
 
 - [#7635](https://github.com/milvus-io/milvus/pull/7635) Supports setting segcore rows_per_chunk via configuration file.
 
-### Bug Fixes
+<h3 id="v2.0.0-RC7">Bug fixes</h3>
 
 - [#9572](https://github.com/milvus-io/milvus/pull/9572) Rocksdb does not delete the end key after `DeleteRange` is called.
 
@@ -360,7 +360,7 @@ It should be noted that Milvus 2.0.0-RC7 is NOT compatible with previous version
 
 Release date: 2021-09-10
 
-### Compatibility
+<h3 id="v2.0.0-RC6">Compatibility</h3>
 
 <table class="version">
 	<thead>
@@ -386,11 +386,11 @@ Release date: 2021-09-10
 
 Milvus 2.0.0-RC6 is a preview version of Milvus 2.0.0. It supports specifying shard number when creating collections, and query by expression. It exposes more cluster metrics through API. In RC6 we increase the unit test coverage to 80%. We also fixed a series of issues involving resource leakage, system panic, etc.
 
-### Improvements
+<h3 id="v2.0.0-RC6">Improvements</h3>
 
 - Increases unit test coverage to 80%.
 
-### Features
+<h3 id="v2.0.0-RC6">Features</h3>
 
 - [#7482](https://github.com/milvus-io/milvus/pull/7482) Supports specifying shard number when creating a collection.
 - [#7386](https://github.com/milvus-io/milvus/pull/7386) Supports query by expression.
@@ -401,7 +401,7 @@ Milvus 2.0.0-RC6 is a preview version of Milvus 2.0.0. It supports specifying sh
   - [#7472](https://github.com/milvus-io/milvus/pull/7472) Exposes more detailed metrics information.
   - [#7436](https://github.com/milvus-io/milvus/pull/7436) Supports caching the system information metrics.
 
-### Bug Fixes
+<h3 id="v2.0.0-RC6">Bug fixes</h3>
 
 - [#7434](https://github.com/milvus-io/milvus/pull/7434) Query node OOM if loading a collection that beyond the memory limit.
 - [#7678](https://github.com/milvus-io/milvus/pull/7678) Standalone OOM when recovering from existing storage.
@@ -422,7 +422,7 @@ Milvus 2.0.0-RC6 is a preview version of Milvus 2.0.0. It supports specifying sh
 
 Release date: 2021-08-30
 
-### Compatibility
+<h3 id="v2.0.0-RC5">Compatibility</h3>
 
 <table class="version">
 	<thead>
@@ -447,7 +447,7 @@ Release date: 2021-08-30
 
 Milvus 2.0.0-RC5 is a preview version of Milvus 2.0.0. It supports message queue data retention mechanism and etcd data cleanup,  exposes cluster metrics through API, and prepares for delete operation support. RC5 also made great progress on system stability. We fixed a series of resource leakage, operation hang and the misconfiguration of standalone Pulsar under Milvus cluster.
 
-### Improvements
+<h3 id="v2.0.0-RC5">Improvements</h3>
 
 - [#7226](https://github.com/milvus-io/milvus/pull/7226) Refactors data coord allocator.
 - [#6867](https://github.com/milvus-io/milvus/pull/6867) Adds connection manager.
@@ -465,7 +465,7 @@ Milvus 2.0.0-RC5 is a preview version of Milvus 2.0.0. It supports message queue
 - [#7278](https://github.com/milvus-io/milvus/pull/7278) Enables etcd auto compaction for every 1000 revision.
 - [#7355](https://github.com/milvus-io/milvus/pull/7355) Clean `fmt.Println `in util/flowgraph.
 
-### Features
+<h3 id="v2.0.0-RC5">Features</h3>
 
 - [#7112](https://github.com/milvus-io/milvus/pull/7112) [#7174](https://github.com/milvus-io/milvus/pull/7174) Imports an embedded etcdKV (part 1).
 - [#7231](https://github.com/milvus-io/milvus/pull/7231) Adds a segment filter interface.
@@ -479,7 +479,7 @@ Milvus 2.0.0-RC5 is a preview version of Milvus 2.0.0. It supports message queue
 - [#7261](https://github.com/milvus-io/milvus/pull/7261) Adds delete node.
 - [#7268](https://github.com/milvus-io/milvus/pull/7268) Constructs Bloom filter when inserting.
 
-### Bug Fixes
+<h3 id="v2.0.0-RC5">Bug fixes</h3>
 
 - [#7272](https://github.com/milvus-io/milvus/pull/7272) [#7352](https://github.com/milvus-io/milvus/pull/7352) [#7335](https://github.com/milvus-io/milvus/pull/7335) Failure to start new docker container with existing volumes if index was created: proxy is not healthy.
 - [#7243](https://github.com/milvus-io/milvus/pull/7243) Failure to create index in a new version of Milvus for data that were inserted in an old version.
@@ -521,7 +521,7 @@ Milvus 2.0.0-RC5 is a preview version of Milvus 2.0.0. It supports message queue
 
 Release date: 2021-08-13
 
-### Compatibility
+<h3 id="v2.0.0-RC4">Compatibility</h3>
 
 | Milvus version | Python SDK version                | Java SDK version | Go SDK version |
 | ------------------ | ------------------------------------- | -------------------- | ------------------ |
@@ -529,7 +529,7 @@ Release date: 2021-08-13
 
 Milvus 2.0.0-RC4 is a preview version of Milvus 2.0.0. It mainly focuses on fixing stability issues, it also offers functionalities to retrieve vector data from object storage and specify output field by wildcard matching.
 
-### Improvements
+<h3 id="v2.0.0-RC4">Improvements</h3>
 
 - [#6984](https://github.com/milvus-io/milvus/issues/6984) [#6772](https://github.com/milvus-io/milvus/issues/6772) [#6704](https://github.com/milvus-io/milvus/issues/6704) [#6652](https://github.com/milvus-io/milvus/issues/6652) [#6536](https://github.com/milvus-io/milvus/issues/6536) [#6522](https://github.com/milvus-io/milvus/issues/6522) Unit test improvements.
 
@@ -563,7 +563,7 @@ Milvus 2.0.0-RC4 is a preview version of Milvus 2.0.0. It mainly focuses on fixi
 
 - [#6497](https://github.com/milvus-io/milvus/pull/6503) Looses the lower limit of dimension when searching on a binary vector field.
 
-### Features
+<h3 id="v2.0.0-RC4">Features</h3>
 
 - [#6706](https://github.com/milvus-io/milvus/pull/6707) Supports reading vectors from disk.
 
@@ -579,7 +579,7 @@ Milvus 2.0.0-RC4 is a preview version of Milvus 2.0.0. It mainly focuses on fixi
 
 - [#6767](https://github.com/milvus-io/milvus/pull/6770) Adds a Grafana dashboard .json file for Milvus.
 
-### Bug fixes
+<h3 id="v2.0.0-RC4">Bug fixes</h3>
 
 - [#5443](https://github.com/milvus-io/milvus/pull/6976) `CalcDistance` returns wrong results when fetching vectors from collection.
 
@@ -646,7 +646,7 @@ Milvus 2.0.0-RC4 is a preview version of Milvus 2.0.0. It mainly focuses on fixi
 
 Release date: 2021-07-13
 
-### Compatibility
+<h3 id="v2.0.0-RC2">Compatibility</h3>
 
 | Milvus version | Python SDK version | Java SDK version | Go SDK version |
 | :------------- | :----------------- | :--------------- | :------------- |
@@ -654,7 +654,7 @@ Release date: 2021-07-13
 
 Milvus 2.0.0-RC2 is a preview version of Milvus 2.0.0. It fixes stability and performance issues and refactors code for node and storage management.
 
-### Improvements
+<h3 id="v2.0.0-RC2">Improvements</h3>
 
 - [#6356](https://github.com/milvus-io/milvus/pull/6356) Refactors code for cluster in data coordinator. 
 - [#6300](https://github.com/milvus-io/milvus/pull/6300) Refactors code for meta management in data coordinator. (#6300)
@@ -664,13 +664,13 @@ Milvus 2.0.0-RC2 is a preview version of Milvus 2.0.0. It fixes stability and pe
 - [#6196](https://github.com/milvus-io/milvus/pull/6196) Adds candidate management for data coordinator to manage data node cluster. 
 - [#6188](https://github.com/milvus-io/milvus/pull/6188) Adds Building Milvus with Docker Docs. (#6188)
 
-### Features
+<h3 id="v2.0.0-RC2">Features</h3>
 
 - [#6386](https://github.com/milvus-io/milvus/pull/6386) Adds the `fget_objects()` method for loading files from MinIO to the local device.
 - [#6253](https://github.com/milvus-io/milvus/pull/6253) Adds the `GetFlushedSegments()` method in data coordinator.
 - [#6213](https://github.com/milvus-io/milvus/pull/6213) Adds the `GetIndexStates()` method.
 
-### Bug fixes
+<h3 id="v2.0.0-RC2">Bug fixes</h3>
 
 - [#6184](https://github.com/milvus-io/milvus/pull/6184) Search accuracy worsens when dataset gets larger.
 - [#6308](https://github.com/milvus-io/milvus/pull/6308) The server crashes if the KNNG in NSG is not full.
@@ -686,7 +686,7 @@ Milvus 2.0.0-RC2 is a preview version of Milvus 2.0.0. It fixes stability and pe
 
 Release date: 2021-06-28
 
-### Compatibility
+<h3 id="v2.0.0-RC1">Compatibility</h3>
 
 
 
