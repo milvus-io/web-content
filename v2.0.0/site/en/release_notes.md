@@ -698,7 +698,8 @@ Release date: 2021-06-28
 
 Milvus 2.0.0-RC1 is the preview version of 2.0.0. It introduces Golang as the distributed layer development language and a new cloud-native distributed design. The latter brings significant improvements to scalability, elasticity, and functionality. 
 
-### Architecture
+
+<h3 id="v2.0.0-RC1">Architecture</h3>
 
 Milvus 2.0 is a cloud-native vector database with storage and computation separated by design. All components in this refactored version of Milvus are stateless to enhance elasticity and flexibility.
 
@@ -719,7 +720,8 @@ Milvus 2.0 is a cloud-native vector database with storage and computation separa
 
 > For more information about how the system works, see [Milvus 2.0 Architecture](architecture_overview.md).
 
-### New Features
+
+<h3 id="v2.0.0-RC1">New Features</h3>
 
 **SDK**
 
@@ -755,7 +757,8 @@ Milvus 2.0 is a cloud-native vector database with storage and computation separa
 
   Milvus Insight is a graphical management system for Milvus. It features visualization of cluster states, meta management, data queries and more. Milvus Insight will eventually be open sourced.
 
-### Breaking Changes
+
+<h3 id="v2.0.0-RC1">Breaking Changes</h3>
 
 Milvus 2.0 uses an entirely different programming language, data format, and distributed architecture compared with previous versions. This means prior versions of Milvus cannot be upgraded to 2.x. However, Milvus 1.x is receiving long-term support and data migration tools will be made available as soon as possible. 
 
