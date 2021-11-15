@@ -8,7 +8,9 @@ id: release_notes.md
 
 发布时间：2021-11-5
 
-### 版本兼容
+
+<h3 id="v2.0.0-RC8">版本兼容</h3>
+
 
 <table class="version">
 	<thead>
@@ -35,7 +37,7 @@ Milvus 2.0.0-RC8 是 2.0.0-GA 的最后一个预览版本。在该版本中，Mi
 
 目前，Primary Key（`pk`）去重功能无法保证插入新数据会覆盖与其 `pk` 相同的旧数据。因此，当前版本中基于相同 `pk` 的结构化匹配的返回结果为未知行为。该限制将在未来版本中修复。
 
-### 主要改进
+<h3 id="v2.0.0-RC8">主要改进</h3>
 
 - 故障恢复速度：
   - [#10737](https://github.com/milvus-io/milvus/pull/10737) 实现 Proxy Session Checker。
@@ -66,7 +68,7 @@ Milvus 2.0.0-RC8 是 2.0.0-GA 的最后一个预览版本。在该版本中，Mi
 
 - [#7606](https://github.com/milvus-io/milvus/pull/7606) 使 `knowhere` 独立编译。
 
-### 新增功能
+<h3 id="v2.0.0-RC8">新增功能</h3>
 
 - Handoff:   
 
@@ -94,7 +96,7 @@ Milvus 2.0.0-RC8 是 2.0.0-GA 的最后一个预览版本。在该版本中，Mi
 - [#10193](https://github.com/milvus-io/milvus/pull/10193) 更改 bloom filter 使用 primary key。
 - [#9782](https://github.com/milvus-io/milvus/pull/9782) 为 data node allocator 添加 `allocIDBatch`。
 
-### 问题修复
+<h3 id="v2.0.0-RC8">问题修复</h3>
 
 - 当内存资源不足时 collection 加载行为错误：
   - [#10796](https://github.com/milvus-io/milvus/pull/10796) 修复获取 container 内存使用问题。
@@ -162,7 +164,7 @@ Milvus 2.0.0-RC8 是 2.0.0-GA 的最后一个预览版本。在该版本中，Mi
 
 发布时间：2021-10-11
 
-### 版本兼容
+<h3 id="v2.0.0-RC7">版本兼容</h3>
 
 <table class="version">
 	<thead>
@@ -191,7 +193,7 @@ Milvus 2.0.0-RC7 是 2.0.0-GA 的预览版本。该版本支持 collection 别�
 
 由于对存储格式进行了一些更改，Milvus 2.0.0-RC7 与早先的 RC 版本不兼容。
 
-### **Improvements**
+<h3 id="v2.0.0-RC7">主要改进</h3>
 
 - [#8215](https://github.com/milvus-io/milvus/pull/8215) 为 query coord 中 `interTask` 添加最大重试次数。
 
@@ -237,7 +239,7 @@ Milvus 2.0.0-RC7 是 2.0.0-GA 的预览版本。该版本支持 collection 别�
 
 - [#7797](https://github.com/milvus-io/milvus/pull/7797) 标注代码参数类型。
 
-### **Features**
+<h3 id="v2.0.0-RC7">新增功能</h3>
 
 - [#9579](https://github.com/milvus-io/milvus/pull/9579) 在 `getSystemInfoMetrics` 中添加副本缓存大小以及 `cacheSize` 。
 
@@ -289,7 +291,7 @@ Milvus 2.0.0-RC7 是 2.0.0-GA 的预览版本。该版本支持 collection 别�
 
 - [#7635](https://github.com/milvus-io/milvus/pull/7635) 支持通过配置文件设定 segcore rows_per_chunk。
 
-### **Bug Fixes**
+<h3 id="v2.0.0-RC7">问题修复</h3>
 
 - [#9572](https://github.com/milvus-io/milvus/pull/9572) 调用 `DeleteRange` 后 Rocksdb 不删除 end key。
 
@@ -347,7 +349,7 @@ Milvus 2.0.0-RC7 是 2.0.0-GA 的预览版本。该版本支持 collection 别�
 
 发布时间：2021-09-10
 
-### 版本兼容
+<h3 id="v2.0.0-RC6">版本兼容</h3>
 
 <table class="version">
 	<thead>
@@ -372,11 +374,11 @@ Milvus 2.0.0-RC7 是 2.0.0-GA 的预览版本。该版本支持 collection 别�
 
 Milvus 2.0.0-RC6 是 2.0.0 的预览版本。该版本支持创建 collection 时设定 shard 数量，以及通过表达式进行结构性匹配。 RC5 通过 API 进一步暴露分布式版指标。 在该版本我们增加单元测试覆盖率至 80%，并修复了一系列资源泄露、系统错误等问题。
 
-### 主要改进
+<h3 id="v2.0.0-RC6">主要改进</h3>
 
 - 增加单元测试覆盖率至 80%。
 
-### 新增功能
+<h3 id="v2.0.0-RC6">新增功能</h3>
 
 - [#7482](https://github.com/milvus-io/milvus/pull/7482) 支持创建 collection 时设定 shard 数量。
 - [#7386](https://github.com/milvus-io/milvus/pull/7386) 支持通过表达式进行结构性匹配。
@@ -387,7 +389,7 @@ Milvus 2.0.0-RC6 是 2.0.0 的预览版本。该版本支持创建 collection �
   - [#7472](https://github.com/milvus-io/milvus/pull/7472) 暴露更多详细指标信息。
   - [#7436](https://github.com/milvus-io/milvus/pull/7436) 支持缓存系统信息指标。
 
-### 问题修复
+<h3 id="v2.0.0-RC6">问题修复</h3>
 
 - [#7434](https://github.com/milvus-io/milvus/pull/7434) 加载超过内存上限的 collection 导致 Query node 内存不足。
 - [#7678](https://github.com/milvus-io/milvus/pull/7678) 从现有存储中恢复导致单机版 Milvus 内存不足。
@@ -410,7 +412,7 @@ Milvus 2.0.0-RC6 是 2.0.0 的预览版本。该版本支持创建 collection �
 
 发布时间：2021-08-30
 
-### 版本兼容
+<h3 id="v2.0.0-RC5">版本兼容</h3>
 
 <table class="version">
 	<thead>
@@ -435,7 +437,7 @@ Milvus 2.0.0-RC6 是 2.0.0 的预览版本。该版本支持创建 collection �
 
 Milvus 2.0.0-RC5 是 2.0.0 的预览版本。该版本支持 message queue 数据保留机制和 etcd 数据清理，通过 API 暴露分布式版指标，并为后续支持删除操作做准备。 RC5 在系统稳定性方面也取得了很大的进步。 该版本修复了一系列资源泄露、操作卡死、 以及 Milvus 集群下单机 Pulsar 的配置错误等问题。
 
-### 主要改进
+<h3 id="v2.0.0-RC5">主要改进</h3>
 
 - [#7226](https://github.com/milvus-io/milvus/pull/7226) 重构 data coord allocator。
 - [#6867](https://github.com/milvus-io/milvus/pull/6867) 添加 connection manager。
@@ -453,7 +455,7 @@ Milvus 2.0.0-RC5 是 2.0.0 的预览版本。该版本支持 message queue 数�
 - [#7278](https://github.com/milvus-io/milvus/pull/7278) 每 1000 次修订后启用 etcd 自动压缩。
 - [#7355](https://github.com/milvus-io/milvus/pull/7355) 从 util/flowgraph 中清除 `fmt.Println `。
 
-### 新增功能
+<h3 id="v2.0.0-RC5">新增功能</h3>
 
 - [#7112](https://github.com/milvus-io/milvus/pull/7112) [#7174](https://github.com/milvus-io/milvus/pull/7174) 引入嵌入式 etcdKV（第一阶段完成）。
 - [#7231](https://github.com/milvus-io/milvus/pull/7231) 添加 segment filter 接口。
@@ -467,7 +469,7 @@ Milvus 2.0.0-RC5 是 2.0.0 的预览版本。该版本支持 message queue 数�
 - [#7261](https://github.com/milvus-io/milvus/pull/7261) 添加 delete node。
 - [#7268](https://github.com/milvus-io/milvus/pull/7268) 插入数据时搭建 Bloom filter。
 
-### 问题修复
+<h3 id="v2.0.0-RC5">问题修复</h3>
 
 - [#7272](https://github.com/milvus-io/milvus/pull/7272) [#7352](https://github.com/milvus-io/milvus/pull/7352) [#7335](https://github.com/milvus-io/milvus/pull/7335) 若已创建索引，则无法使用现有 volume 启动新的 Docker 容器：proxy 不健康。
 - [#7243](https://github.com/milvus-io/milvus/pull/7243) 旧版本插入的数据在新版本 Milvus 中创建索引失败。
@@ -509,7 +511,7 @@ Milvus 2.0.0-RC5 是 2.0.0 的预览版本。该版本支持 message queue 数�
 
 发布时间：2021-08-13
 
-### 版本兼容
+<h3 id="v2.0.0-RC4">版本兼容</h3>
 
 | Milvus 版本 | Python SDK 版本                   | Java SDK 版本 | Go SDK 版本 |
 | --------------- | ------------------------------------- | ----------------- | --------------- |
@@ -517,7 +519,7 @@ Milvus 2.0.0-RC5 是 2.0.0 的预览版本。该版本支持 message queue 数�
 
 Milvus 2.0.0-RC4 是 2.0.0 的预览版本。该版本主要修复了稳定性问题，并新增从对象存储中检索向量数据以及通过通配符匹配指定输出 field 的功能。
 
-### 主要改进
+<h3 id="v2.0.0-RC4">主要改进</h3>
 
 - [#6984](https://github.com/milvus-io/milvus/issues/6984) [#6772](https://github.com/milvus-io/milvus/issues/6772) [#6704](https://github.com/milvus-io/milvus/issues/6704) [#6652](https://github.com/milvus-io/milvus/issues/6652) [#6536](https://github.com/milvus-io/milvus/issues/6536) [#6522](https://github.com/milvus-io/milvus/issues/6522) 优化单元测试。
 
@@ -551,7 +553,7 @@ Milvus 2.0.0-RC4 是 2.0.0 的预览版本。该版本主要修复了稳定性�
 
 - [#6497](https://github.com/milvus-io/milvus/pull/6503) 放宽二元向量 field 搜索时的维度下限。
 
-### 新增功能
+<h3 id="v2.0.0-RC4">新增功能</h3>
 
 - [#6706](https://github.com/milvus-io/milvus/pull/6707) 支持从磁盘读取向量。
 
@@ -567,7 +569,7 @@ Milvus 2.0.0-RC4 是 2.0.0 的预览版本。该版本主要修复了稳定性�
 
 - [#6767](https://github.com/milvus-io/milvus/pull/6770) 为 Milvus 添加 Grafana 仪表盘 **.json** 文件。
 
-### 问题修复
+<h3 id="v2.0.0-RC4">问题修复</h3>
 
 - [#5443](https://github.com/milvus-io/milvus/pull/6976) 从 collection 中获取向量时，`CalcDistance` 返回错误的结果。
 
@@ -631,7 +633,7 @@ Milvus 2.0.0-RC4 是 2.0.0 的预览版本。该版本主要修复了稳定性�
 
 发布时间: 2021-07-13
 
-### 版本兼容
+<h3 id="v2.0.0-RC2">版本兼容</h3>
 
 | Milvus 版本 | Python SDK 版本 | Java SDK 版本 | Go SDK 版本 |
 | :------------- | :----------------- | :--------------- | :------------- |
@@ -639,7 +641,7 @@ Milvus 2.0.0-RC4 是 2.0.0 的预览版本。该版本主要修复了稳定性�
 
 Milvus 2.0.0-RC2 是 2.0.0 的预览版本。该版本修复了 RC1 版本的稳定性和性能问题，并针对节点和存储管理进行了代码重构。
 
-### 主要改进
+<h3 id="v2.0.0-RC2">主要改进</h3>
 
 - [#6356](https://github.com/milvus-io/milvus/issues/6356) Data coordinator 集群代码重构。
 - [#6300](https://github.com/milvus-io/milvus/issues/6300) Data coordinator 元数据管理代码重构。
@@ -649,13 +651,13 @@ Milvus 2.0.0-RC2 是 2.0.0 的预览版本。该版本修复了 RC1 版本的稳
 - [#6196](https://github.com/milvus-io/milvus/issues/6196) Data coordinator 新增候选管理，用于维护管理 data node 集群。
 - [#6188](https://github.com/milvus-io/milvus/issues/6188) 新增“使用 Docker Compose 安装"的相关技术文档。
 
-### 新增功能
+<h3 id="v2.0.0-RC2">新增功能</h3>
 
 - [#6386](https://github.com/milvus-io/milvus/issues/6386) 支持调用 `fget_object()` 方法从 MinIO 加载文件到本地设备。
 - [#6253](https://github.com/milvus-io/milvus/issues/6253) 支持在 data coordinator 调用 `GetFlushedSegments()` 方法。
 - [#6213](https://github.com/milvus-io/milvus/issues/6213) 新增 `GetIndexStates()` 方法。
 
-### 问题修复
+<h3 id="v2.0.0-RC2">问题修复</h3>
 
 - [#6184](https://github.com/milvus-io/milvus/issues/6184) 数据集规模增加导致查询准确性下降。
 - [#6308](https://github.com/milvus-io/milvus/issues/6308) NSG 索引的 KNNG 参数未达到满值会导致服务器崩溃。
@@ -667,7 +669,7 @@ Milvus 2.0.0-RC2 是 2.0.0 的预览版本。该版本修复了 RC1 版本的稳
 
 发布时间：2021-06-28
 
-### 版本兼容
+<h3 id="v2.0.0-RC1">版本兼容</h3>
 
 
 | Milvus 版本 | Python SDK 版本 | Java SDK 版本 | Go SDK 版本 |
@@ -699,7 +701,7 @@ Milvus 2.0 是一款云原生向量数据库，采用存储与计算分离的架
 > 更多系统原理的相关内容详见 [Milvus 2.0 架构](architecture_overview.md)。
 
 
-### 新增功能
+<h3 id="v2.0.0-RC1">新增功能</h3>
 
 **SDK**
 
