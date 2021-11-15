@@ -2,12 +2,12 @@
 id: cli_overview.md
 summary: Milvus Command-Line Interface (CLI) is a command-line tool that supports database connection, data operations, and import and export of data.
 ---
-# 什么是Milvus CLI？
+# 什么是 Milvus CLI？
 
-Milvus命令行接口(CLI)是一个支持数据库连接、数据操作、以及数据导入和导出的命令行工具。基于[Milvus Python SDK](https://github.com/milvus-io/pymilvus)，它允许使用交互式命令行提示符通过终端执行命令。
+Milvus 命令行接口(CLI)是一个支持数据库连接、数据操作、以及数据导入和导出的命令行工具。基于 [Milvus Python SDK](https://github.com/milvus-io/pymilvus)，它允许使用交互式命令行提示符通过终端执行命令。
 ## 推荐版本
 
-在下面的表格中，你可以找到根据你正在使用的Milvus版本推荐的PyMilvus和Milvus版本。
+在下面的表格中，你可以找到根据你正在使用的 Milvus 版本推荐的 PyMilvus 和 Milvus 版本。
 
 |Milvus| PyMilvus| Milvus CLI|
 |:----:|:----:|:----:|
@@ -25,6 +25,6 @@ Milvus命令行接口(CLI)是一个支持数据库连接、数据操作、以及
 
 ## 当前版本
 
-Milvus CLI的当前版本是0.1.8。
-如果想查找已安装的版本，并查看是否需要更新，请运行```shell milvus_cli --version```命令。
+Milvus CLI 的当前版本是0.1.8。
+如果想查找已安装的版本，并查看是否需要更新，请运行 ```shell milvus_cli --version``` 命令。
 
