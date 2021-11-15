@@ -1,38 +1,49 @@
 ---
 id: gcp.md
-title: Deploy Milvus Cluster on GCP with Kubernetes
+title: Deploy a Milvus Cluster on GCP
+related_key: cluster
+summary: Learn how to deploy a Milvus cluster on GCP.
 ---
 
-# Deploy Milvus Cluster on GCP with Kubernetes
+# 在 GCP 部署 Milvus 集群
 
-This guide is a set of instructions for deploying Milvus cluster on Google Cloud Platform (GCP). 
+本文介绍在[谷歌云端平台](https://console.cloud.google.com/) (GCP) 上部署 Milvus 集群的操作步骤。
 
-## Before you begin
-Before getting started, confirm which GCP project you will work under. If you are not sure which project to use, contact your GCP administrators and ask them to [set one up](https://cloud.google.com/resource-manager/docs/creating-managing-projects) for you. A project named **"milvus-testing-nonprod"** is used in this guide. If your project is named differently, you need to reword the commands accordingly.
+## 先决条件
 
-Next, [install the GCP SDK](https://cloud.google.com/sdk/docs/quickstart#installing_the_latest_version) and confirm that you are properly authenticated. Install [kubectl](http://gcloud%20container%20clusters%20get-credentials%20hello-cluster/) and [helm](http://gcloud%20container%20clusters%20get-credentials%20hello-cluster/). Alternatively, you can use the [Google Cloud Shell](https://cloud.google.com/shell) from your browser, which has the GCP SDK, kubectl, and helm pre-installed. 
+确定您想要使用的项目。如果您不确定要使用哪一个，联系你的 GCP 管理员创建一个新的项目。更多信息请参见[创建和管理项目](https://cloud.google.com/resource-manager/docs/creating-managing-projects)。本文中使用的项目名为 <code>milvus-testing-nonprod</code>。在命令中用你的项目名称替换它。
 
-## Set up the Network
+### 所需软件
+- [Cloud SDK](https://cloud.google.com/sdk/docs/quickstart#installing_the_latest_version)
+- [kubectl](https://kubernetes.io/docs/tasks/tools/)
+- [Helm](https://helm.sh/docs/intro/install/)
 
-If you have an existing virtual private cloud (VPC) network you would like to make use of, you can directly proceed to [create a firewall rule for Milvus](gcp.md#Create-a-Firewall-Rule-for-Milvus).
+你也可以使用 [Cloud Shell](https://cloud.google.com/shell)，它预装了 GCP SDK、kubectl和Helm。
 
-If you do not have an existing VPC network or would like to make a new one, create a new VPC network first before creating a firewall rule for Milvus.
+<div class="alert note">安装完 Cloud SDK 后，请确保您的身份验证是正确的。</div>
 
-### Create a new VPC Network
+## 设置网络
 
-Open up your CLI and create a new VPC. 
+在为 Milvus 创建防火墙规则之前，需要先创建 VPC 网络。
+
+如果已经创建了 VPC 网络，请直接阅读[为 Milvus 创建防火墙规则](gcp.md#Create-a-firewall-rule-for Milvus)。
+
+### 创建 VPC
+
+打开终端，执行如下命令创建 VPC 网络。
 
 <div class="alert note">
-Replace <b>milvus-testing-nonprod</b> with the name of your project.
+用你的项目名称替换 <code>milvus-testing-nonprod</code> 。
 </div>
 
-```Apache
+
+```shell
 gcloud compute networks create milvus-network --project=milvus-testing-nonprod --subnet-mode=auto --mtu=1460 --bgp-routing-mode=regional
 ```
 
-Next, create a set of basic firewall rules to allow traffic such as internal communication, ssh connections, icmp, and rdp.
+执行如下命令创建允许 ICMP、内部、RDP 和 SSH 流量的防火墙规则。
 
-```Apache
+```shell
 gcloud compute firewall-rules create milvus-network-allow-icmp --project=milvus-testing-nonprod --network=projects/milvus-testing-nonprod/global/networks/milvus-network --description=Allows\ ICMP\ connections\ from\ any\ source\ to\ any\ instance\ on\ the\ network. --direction=INGRESS --priority=65534 --source-ranges=0.0.0.0/0 --action=ALLOW --rules=icmp
 
 gcloud compute firewall-rules create milvus-network-allow-internal --project=milvus-testing-nonprod --network=projects/milvus-testing-nonprod/global/networks/milvus-network --description=Allows\ connections\ from\ any\ source\ in\ the\ network\ IP\ range\ to\ any\ instance\ on\ the\ network\ using\ all\ protocols. --direction=INGRESS --priority=65534 --source-ranges=10.128.0.0/9 --action=ALLOW --rules=all
@@ -42,134 +53,135 @@ gcloud compute firewall-rules create milvus-network-allow-rdp --project=milvus-t
 gcloud compute firewall-rules create milvus-network-allow-ssh --project=milvus-testing-nonprod --network=projects/milvus-testing-nonprod/global/networks/milvus-network --description=Allows\ TCP\ connections\ from\ any\ source\ to\ any\ instance\ on\ the\ network\ using\ port\ 22. --direction=INGRESS --priority=65534 --source-ranges=0.0.0.0/0 --action=ALLOW --rules=tcp:22
 ```
 
-### Create a Firewall Rule for Milvus 
+### 为 Milvus 创建防火墙规则
 
-Create a firewall rule to allow external ingress on port 19530, which is the port used by Milvus.
+创建防火墙规则以允许被 Milvus 使用的`19530`端口上的传入流量。
 
 ```Apache
 gcloud compute --project=milvus-testing-nonprod firewall-rules create allow-milvus-in --description="Allow ingress traffic for Milvus on port 19530" --direction=INGRESS --priority=1000 --network=projects/milvus-testing-nonprod/global/networks/milvus-network --action=ALLOW --rules=tcp:19530 --source-ranges=0.0.0.0/0
 ```
 
-## Provision a Kubernetes Cluster with GKE
-We use GKE Standard to provision a Kubernetes cluster. In this guide, we create a cluster with 2 nodes, in zone `us-west1-a`, with machine type `e2-standard-4` running image-type `COS_CONTAINERD`.
+## 预置 Kubernetes 集群
+
+我们使用 Google Kubernetes Engine (GKE) 来提供一个 K8s 集群。在本文中，我们将创建一个具有两个节点的集群。节点位于 `use-west1-a` 地区，使用 `e2-standard-4` 机器类型，并使用 ` cos_containerd` 节点映像。
 
 <div class="alert note">
-You can change the above options to suit your cluster needs.
+根据需要修改以上选项。
 </div>
 
-### Choice of machine type
+### 选择机器类型
 
-In this guide, we use a machine type of `e2-standard-4`, which has 4 vCPU and 16GB memory, for worker nodes. 
+在本文中，我们使用 `e2-standard-4` 机器类型，它有四个 vCPU 和16GB 内存。
 
 <div class="alert note">
-You may select different machine types to better suit your work case, but we strongly recommend that worker nodes all have at least 16GB of memory to ensure minimum stable operation.
+你可以根据需要选择机器类型。但是，我们建议选择至少有 16GB 内存的机器类型，以确保稳定性。
 </div>
 
-```Apache
+```shell
 gcloud beta container --project "milvus-testing-nonprod" clusters create "milvus-cluster-1" --zone "us-west1-a" --no-enable-basic-auth --cluster-version "1.20.8-gke.900" --release-channel "regular" --machine-type "e2-standard-4" --image-type "COS_CONTAINERD" --disk-type "pd-standard" --disk-size "100" --max-pods-per-node "110" --num-nodes "2" --enable-stackdriver-kubernetes --enable-ip-alias --network "projects/milvus-testing-nonprod/global/networks/milvus-network" --subnetwork "projects/milvus-testing-nonprod/regions/us-west1/subnetworks/milvus-network"
 ```
 
-It may take several minutes for your cluster to spin up. After creating your cluster, get the authentication credentials for the cluster. 
+创建集群可能需要几分钟。创建集群后，运行以下命令获取集群的凭据。
 
-```Apache
+```shell
 gcloud container clusters get-credentials milvus-cluster-1
 ```
 
-This configures **kubectl** to use the cluster.
+上述命令指向集群中的 `kubectl`。
 
+## 部署 Milvus
 
-## Deploy Milvus with Helm
+集群准备完成后，可以安装 Milvus。如果您切换到另一个终端，请再次运行以下命令获取凭据。
 
-After setting up the cluster, we can now deploy Milvus. If you have used a different shell in the previous step, get the credentials again.
-
-```Apache
+```shell
 gcloud container clusters get-credentials milvus-cluster-1
 ```
 
-1. Add the Milvus chart repository.
-```Apache
+1. 运行以下命令添加 Milvus 的 Helm chart 仓库。
+   
+```shell
 helm repo add milvus https://milvus-io.github.io/milvus-helm/
 ```
 
-2. Update your Milvus chart.
+2. 运行以下命令更新 Milvus 的 Helm chart。
 ```Apache
 helm repo update
 ```
 
-3. Run helm to deploy Milvus. 
+3. 运行以下命令安装 Milvus。
 
 <div class="alert note">
-In this guide, we pick the name <code>my-release</code>, but you can change the name.
+本节使用 <code>my-release</code> 发布版本名称。将其替换为你的发布版本名称。
 </div>
 
-```Thrift
-helm install my-release milvus/milvus --set cluster.enabled=true --set service.type=LoadBalancer
+```shell
+helm install my-release milvus/milvus --set service.type=LoadBalancer
 ```
 
-Allow several minutes for pods to start up, run <code>kubectl get services</code> to check on the services. If the services are successfully booted, you can see a set of services listed out. 
-
+启动 Pod 可能需要几分钟。执行 <code>kubectl get services</code> 查看服务。如果成功，服务列表如下所示。
 
 ![GCP](../../../../assets/gcp.png)
 
-
-<div class="alert note">
-Note the IP listed under the <code>EXTERNAL-IP</code> column for the load blanacer. This is the IP for connecting to Milvus.
+<div class="alert note"><code>EXTERNAL-IP</code> 列中的<code>34.145.26.89</code>为负载均衡器的 IP 地址。该 IP 地址用于连接 Milvus。
 </div>
 
-## Use Google Cloud Storage
+## 使用 Google 云端存储
+Google 云端存储 (GCS) 是 Google Cloud 版本的 Amazon S3。
 
-### Overview
+MinIO GCS 网关允许访问 GCS。本质上，MinIO GCS 网关通过使用 API 转换和转发所有到 GCS 的连接。你可以使用 MinIO GCS 网关代替 MinIO 服务器。
 
-Google Cloud Storage (GCS) is the Google Cloud Platform equivalent of AWS's S3 storage.
-The GCS gateway node is an alternative running method for the MinIO server which behaves the same from the client's perspective, but translates and forwards all connections to GCS with the according GCS connection API.
+### 设置变量
 
-### How to use
-
-Using the GCS gateway node requires setting a number of variables. Some of the variables have been set to appropriate defaults, but others must be altered by the user.
+在使用 MinIO GCS Gateway 之前设置变量。根据需要修改默认值。
 
 #### Secrets
 
-The MinIO GCS Gateway node requires a set of valid GCP service account credentials in order to connect to GCS. These credentials must be stored in a Kubernetes secret to be distributed. The Kubernetes secret must contain three types of data:
+MinIO GCS Gateway 需要 GCS 服务账户凭据和 MinIO 服务账户凭据才能访问 GCS 资源。将账户凭据存储在 K8s Secret 中。 Secret 必须包含以下数据。
 
-- `accesskey`: MinIO access key; string literal.
-- `secretkey`: MinIO secret key; string literal.
-- `gcs_key.json`: GCP service account credentials; json file.
+- `accesskey`: MinIO 服务账户的访问密钥 。
+- `secretkey`: MinIO  服务账户的秘密访问密钥。
+- `gcs_key.json`: 包含 GCS 服务帐户凭据的 JSON 文件。
 
-Example secret creation:
+下面的示例创建一个名为 `mysecret` 的 Secret，其中包含 `accesskey=minioadmin`、`secretkey=minioadmin` 和 `gcs_key.json=/home/credentials.json`。
 
 ```shell
 $ kubectl create secret generic mysecret --from-literal=accesskey=minioadmin --from-literal=secretkey=minioadmin --from-file=gcs_key.json=/home/credentials.json
 ```
 
 <div class="alert note">
-If you choose <code>accesskey</code> and <code>secretkey</code> values other than the default <code>minioadmin/minioadmin</code>, you need to update the <code>minio.accessKey</code> and <code>minio.secretKey</code> metadata variables as well.
+  如果你选择的 <code>accesskey</code> 和 <code>secretkey</code> 值不是默认的 <code>minioadmin/minioadmin</code>，你需要更新 <code>minio.accessKey</code> 和 <code>minio.secretKey</code> 的元数据变量。
 </div>
 
+#### 元数据
 
-#### Metadata 
+下表列出了可以配置的元数据。
+|选项|描述|默认值|
+|:---|:---|:---|
+|`minio.gcsgateway.enabled`|设置值为 `true` 启用 MinIO GCS 网关。|`false`|
+|`minio.gcsgateway.projectId`|GCP 项目的 ID。|`""`|
+|`minio.existingSecret`|先前定义的 Secret 的名称。|`""`|
+|`externalGcs.bucketName`|要使用的 GCS 存储桶的名称。与 S3/MinIO bucket 不同，GCS 存储桶必须是全局唯一的。|`""`|
 
-**Metadata that must be set by user:**
+下表列出了您可能希望保留为默认值的元数据。
 
-- `minio.gcsgateway.enabled`: Must be set to "true" to enable operation.
-  -  Default is false. 
-- `minio.gcsgateway.projectId`: ID of the GCP Project corresponding to the service account and bucket.
-  - Default is unset.
-- `minio.existingSecret`: Name of the previously defined secret. 
-  - Default is unset
-- `externalGcs.bucketName`: Name of the GCS storage bucket to use. Unlike S3/MinIO buckets, GCS buckets must be **globally** unique. Therefore the default value is unset.
-  - Default is unset.
+|选项|描述|默认值|
+|:---|:---|:---|
+|`minio.gcsgateway.replicas`|用于网关的复制节点的数量。建议使用一个，因为 MinIO 不能很好地支持多个副本。|`1`|
+|`minio.gcsgateway.gcsKeyJson`|GCS 服务帐户凭据的文件路径。不要修改默认值。|`/etc/credentials/gcs_key.json`|
 
-**Metadata that should be left as default:**
+继续使用所有预定义的 MinIO 元数据变量。
 
-- `minio.gcsgateway.replicas`: Number of replica nodes to use for the GCS gateway. We highly recommended you to only use one because MinIO does not have good support for higher numbers. 
-  - Default is 1.
-- `minio.gcsgateway.gcsKeyJson`: Path to GCS service account access credentials file. You should not change the default value.
-  - Default is `/etc/credentials/gcs_key.json`.
-- You should also inherit all of the normal MinIO metadata variables.
+下面的例子安装了一个名为 `my-release` 的 chart。
 
-Example helm install:
 ```shell
-$ helm install my-release milvus/milvus --set cluster.enabled=true --set minio.existingSecret=mysecret --set minio.gcsgateway.enabled=true --set minio.gcsgateway.projectId=milvus-testing-nonprod --set externalGcs.bucketName=milvus-bucket-example
+$ helm install my-release milvus/milvus --set minio.existingSecret=mysecret --set minio.gcsgateway.enabled=true --set minio.gcsgateway.projectId=milvus-testing-nonprod --set externalGcs.bucketName=milvus-bucket-example
 ```
+
+## 更多内容
+
+如果你想学习如何在其他云上部署 Milvus 集群:
+- [在 EC2 上部署 Milvus 集群](https://milvus.io/docs/v2.0.0/aws.md)
+- [在 EKS 上部署 Milvus 集群](https://milvus.io/docs/v2.0.0/eks.md)
+- [在 Azure 上部署 Milvus 集群](https://milvus.io/docs/v2.0.0/azure.md)
 
 
