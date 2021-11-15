@@ -4,7 +4,7 @@ summary: Interact with Milvus using commands.
 ---
 # Milvus CLI命令参考
 
-Milvus命令行接口(CLI)是一个支持数据库连接、数据操作、以及数据导入和导出的命令行工具。基于[Milvus Python SDK](https://github.com/milvus-io/pymilvus)，它允许使用交互式命令行提示符通过终端执行命令。本文介绍了所有支持的命令及其参数，还包括了一些示例供你参考。
+Milvus 命令行接口(CLI)是一个支持数据库连接、数据操作、以及数据导入和导出的命令行工具。基于 [Milvus Python SDK](https://github.com/milvus-io/pymilvus)，它允许使用交互式命令行提示符通过终端执行命令。本文介绍了所有支持的命令及其参数，还包括了一些示例供你参考。
 ## calc
 
 计算两个向量数组之间的距离。
@@ -115,7 +115,7 @@ clear
 |--help|n/a|显示用法信息。|
 
 ## connect 
-连接Milvus。
+连接 Milvus。
 <h3 id="connect">语法</h3>
 
 ```shell
@@ -127,7 +127,7 @@ connect [-h (text)] [-p (int)] [-a (text)]
 |:---|:---|:---|
 |-h|--host|（可选） 主机名。默认是 "127.0.0.1"。
 |-p|--port|（可选） 端口号。默认是"19530"。|
-|-a|--alias|（可选）Milvus链接的别名。默认是"default"。|
+|-a|--alias|（可选）Milvus 链接的别名。默认是"default"。|
 |--help|n/a|显示用法信息。|
 
 <h3 id="connect">示例</h3>
@@ -167,7 +167,7 @@ milvus_cli > create alias -c car -a carAlias1 -a carAlias2
 
 <div class="alert note">示例 2基于示例 1。</div>
 
-将<code>carAlias1</code>和<code>carAlias2</code>别名从<code>car</code>集合转移到<code>car2</code>集合。
+将 <code>carAlias1</code> 和 <code>carAlias2</code> 别名从 <code>car</code> 集合转移到 <code>car2</code> 集合。
 ```shell
 milvus_cli > create alias -c car2 -A -a carAlias -a carAlias2
 ```
@@ -342,7 +342,7 @@ delete index -c (text) [-t (float)]
 ```shell
 milvus_cli > delete index -c car
 ```
-## delete entities (Milvus 2.0.0-GA支持)
+## delete entities (Milvus 2.0.0-GA 支持)
 删除实体。
 
 <h3 id="delete-entities">语法</h3>
@@ -458,7 +458,7 @@ help <command>
 |:---|:---|
 |calc|计算两个向量数组之间的距离。|
 |clear|清除屏幕。|
-|connect|连接到Milvus。|
+|connect|连接到 Milvus。|
 |create|创建集合、分区、索引或别名。|
 |delete|删除集合、分区、索引、实体或别名。|
 |describe|描述集合、分区或索引。|
@@ -471,7 +471,7 @@ help <command>
 |release|释放集合或分区。|
 |search|执行向量相似搜索或混合搜索。|
 |show|显示当前集合、实体加载的进度、实体索引的进度或段信息。 |
-|version|显示Milvus CLI的版本信息。|
+|version|显示 Milvus CLI 的版本信息。|
 
 ## import
 将数据导入分区。
@@ -512,7 +512,8 @@ Insert successfully.
 ```
 
 ## list collections
-Lists all collections.
+
+列出所有的集合。
 
 <h3 id="list-collections">语法<h3>
 
@@ -528,6 +529,7 @@ list collections [-t (float)][-l (boolean)]
 |--help|n/a|显示用法信息。|
 
 ## list indexes
+    
 列出集合的所有索引。
 <div class="alert note"> 目前，一个集合最多支持一个索引。 </div>
 
@@ -815,7 +817,7 @@ show query_segment -c (text) [-t (float)]
 |--help|n/a|显示用法信息。|
 
 ## version
-显示Milvus CLI的版本信息。
+显示 Milvus CLI 的版本信息。
 
 <h3 id="version">语法</h3>
  
@@ -829,7 +831,7 @@ version
 |--help|n/a|显示用法信息。|
 
 <div class="alert note"> 
-你可以直接在终端中检查Milvus CLI的版本，示例如下。在本例中，<code>milvus cli——version</code>作为命令。</div>
+你可以直接在终端中检查 Milvus CLI 的版本，示例如下。在本例中，<code>milvus cli——version</code>作为命令。</div>
 
 <h3 id="version">示例</h3>
 
