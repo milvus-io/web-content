@@ -39,7 +39,7 @@ The K8s cluster created by minikube and kind are for testing only.  Do <b>not</b
 
 See [Prerequisites](prerequisite-helm.md#Software-requirements) for more information.
 
-#### 2. Start a K8s cluster using minukube
+#### 2. Start a K8s cluster using minikube
 
 After installing minikube, run the following command to start a K8s cluster.
 
