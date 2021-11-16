@@ -73,7 +73,7 @@ data[1].append([1.0,1.0])
 batch2 = collection.insert(data)
 ```
 
-## Search with Time Travel
+## Search with a specified timestamp
 
 Load the collection and search the target data with the timestamp of the first data batch. With the timestamp specified, Milvus only retrieves the data view at the point of time the timestamp indicates.
 
@@ -112,6 +112,4 @@ res = collection.search(**search_param)
 res[0].ids
 [19, 10, 8, 7, 4, 17, 2, 5, 13, 15]
 ```
-
-
 
