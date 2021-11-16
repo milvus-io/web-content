@@ -40,7 +40,7 @@ When running queries, CPU usage is affected by `nq` and `nprobe`. When `nq` and 
 
 Insert operations are not CPU intensive. However, because new segments may not have reached the threshold for index building, Milvus resorts to brute-force search—significantly impacting query performance.
 
-The `datacoord.segment.maxSize` parameter determines the index-building threshold for a segment, and is set to 512 MB by default.
+The `rootcoord.minSegmentSizeToEnableIndex` parameter determines the index-building threshold for a segment, and is set to 1024 rows by default. See [System Configurations](https://milvus.io/docs/v2.0.0/configuration_cluster-advanced.md#System-Behavior-Configurations) for more information.
 
 #### Still have questions?
 
