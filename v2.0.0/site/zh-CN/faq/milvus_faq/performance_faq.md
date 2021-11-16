@@ -18,11 +18,11 @@ IVF 索引的 `nlist` 值应根据具体使用情况设置。一般来说，建�
 
 以下是使用公开测试数据集 sift50m 针对 `nlist` 和 `nprobe` 的一个测试。以索引类型 IVF_SQ8 为例，测试对比了不同 `nlist`/`nprobe` 组合的搜索时间和召回率。
 
-![accuracy_nlist_nprobe.png](../../../assets/accuracy_nlist_nprobe.png)
+![accuracy_nlist_nprobe.png](../../../../assets/accuracy_nlist_nprobe.png)
 
 测试显示，召回率与 `nlist`/`nprobe` 值呈正相关。
 
-![performance_nlist_nprobe.png](../../../assets/performance_nlist_nprobe.png)
+![performance_nlist_nprobe.png](../../../../assets/performance_nlist_nprobe.png)
 
  
 
