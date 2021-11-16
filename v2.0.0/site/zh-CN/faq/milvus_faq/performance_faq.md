@@ -52,7 +52,7 @@ Milvus 构建索引和执行查询操作时，CPU 利用率提高。一般来说
 
 数据插入本身并不是一个 CPU 密集型操作，但是由于新插入的数据所在 segment 的大小可能还未达到自动创建索引的阈值，在查询时只能对其采用暴搜的方式，查询性能就会降低。
 
- 参数 `datacoord.segment.maxSize` 决定了 segment 自动构建索引的阈值，默认值为 512 MB。
+ 参数 `rootcoord.minSegmentSizeToEnableIndex` 决定了 segment 自动构建索引的阈值，默认值为 1024。更多详情，请见[系统配置](configuration_cluster-advanced.md#系统行为配置)。
 
 #### 仍有问题没有得到解答？
 
