@@ -506,9 +506,9 @@ $ kubectl delete mc my-release
 
 When you no longer need the K8s cluster in the testing environment, you can delete it.
 
-If you use minikube to install the K8s cluster, run $ minikube delete.
+If you use minikube to install the K8s cluster, run `$ minikube delete`.
 
-If you use kind to install the K8s cluster, run $ kind delete cluster --name myk8s
+If you use kind to install the K8s cluster, run `$ kind delete cluster --name myk8s`.
 
 
 ## What's next
