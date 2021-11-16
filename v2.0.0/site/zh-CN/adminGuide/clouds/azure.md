@@ -31,7 +31,7 @@ summary: Learn how to deploy a Milvus cluster on Azure.
 
 - **项目详细信息：**
   - **订阅：** 联系你组织的 Azure 管理员，以确定你应该使用哪个订阅。
-  - **资源组：** 请与组织的 Azure 管理员联系，以确定应该使用哪个资源组。
+  - **资源组：** 联系你组织的 Azure 管理员，以确定应该使用哪个资源组。
   
 - **群集详细信息：**
   - **Kubernetes 集群名称：** 输入集群名称。
@@ -48,7 +48,7 @@ summary: Learn how to deploy a Milvus cluster on Azure.
   - **节点数范围：** 选择节点数范围。
   
 - **节点池**:
-  - **启用虚拟节点:** 选中复选框启用虚拟节点。
+  - **启用虚拟节点：** 选中复选框启用虚拟节点。
   
   - **启动虚拟机规模集：** 我们建议你选择“启用”。
   
@@ -58,9 +58,8 @@ summary: Learn how to deploy a Milvus cluster on Azure.
   - **DNS 前缀：** 输入 DNS 名称前缀。
   
   - **流量路由：**
-  - **负载平衡器：** `Standard`
-    
-  - **HTTP 应用程序路由：** 不需要。
+    - **负载平衡器：** `Standard`
+    - **HTTP 应用程序路由：** 不需要。
 
 
 5. 验证完成后，依次单击“查看 + 创建”、“创建”。创建 AKS 群集需要几分钟时间。
