@@ -118,7 +118,7 @@ FLAT 则计算每条向量和目标向量之间的距离。
 
 当向量总条数约等于 `nlist` 时，两者的计算量相当，无明显性能差距。然而，随着向量条数达到 `nlist` 的 2 倍、3 倍、n 倍之后，IVF_FLAT 的性能优势就越来越突出。
 
-可参阅 [如何选择索引类型](https://milvus.io/cn/blog/2019-12-03-select-index.md)。
+可参阅 [如何选择索引类型](index_selection.md)。
 
  
 
@@ -156,7 +156,7 @@ Milvus 对 collection 数量没有限制，但每个 collection 内的 partition
 
 想要避免这种情况，可以尝试将 `nprobe` 设置为更大值，或者把 `nlist` 和 `topk` 设置为更小值。
 
-详见 [索引类型](index.md)。
+详见 [索引类型](index_selection.md)。
 
 #### Milvus 支持的向量维度的最大值是多少？
 
@@ -172,7 +172,7 @@ Milvus 最多支持 32768 维向量。
 
 #### Milvus 支持扩缩容吗？
 
-支持。你可以通过 Helm Chart 在 Kubernetes 上部署多节点 Milvus 集群。更多相关说明，参考 [扩缩容指南](https://zilliverse.feishu.cn/docs/scaleout.md)。
+支持。你可以通过 Helm Chart 在 Kubernetes 上部署多节点 Milvus 集群。更多相关说明，参考 [扩缩容指南](scaleout.md)。
 
 #### 查询是否在内存中执行？ 什么是增量数据和历史数据？
 

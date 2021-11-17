@@ -96,7 +96,7 @@ The IVF_FLAT index divides vector space into list clusters. At the default list 
 
 When the total number of vectors approximately equals nlist, there is little distance between IVF_FLAT and FLAT in terms of calculation requirements and search performance. However, as the number of vectors exceeds nlist by a factor of two or more, IVF_FLAT begins to demonstrate performance advantages.
 
-See [How to Choose an Index in Milvus](https://zilliz.com/blog/Accelerating-Similarity-Search-on-Really-Big-Data-with-Vector-Indexing) for more information.
+See [How to Choose an Index in Milvus](index_selection.md) for more information.
 
 #### How does Milvus flush data?
 
@@ -123,7 +123,7 @@ If `nlist` and `topk` are large and nprobe is small, the number of vectors in th
 
 To avoid this, try setting `nprobe` larger and `nlist` and `k` smaller.
 
-See [Index Overview](index.md) for more information.
+See [Indexes](index_selection.md) for more information.
 
 #### What is the maximum vector dimension supported in Milvus?
 
@@ -139,7 +139,7 @@ In current release, Milvus only support INT64 on ID field. Both INT64 and string
 
 #### Is Milvus scalable?
 
-Yes. You can deploy Milvus cluster with multiple nodes via Helm Chart on Kubernetes. Refer to [Scale Guide](https://zilliverse.feishu.cn/docs/scaleout.md) for more instruction.
+Yes. You can deploy Milvus cluster with multiple nodes via Helm Chart on Kubernetes. Refer to [Scale Guide](scaleout.md) for more instruction.
 
 #### Does the query perform in memory? What are incremental data and historical data?
 
