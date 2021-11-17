@@ -61,7 +61,7 @@ Yes. Milvus does not check if vector IDs are duplicates.
 
 No. Milvus does not currently support update operations and does not check if entity IDs are duplicates. You are responsible for ensuring entity IDs are unique, and if they aren't Milvus may contain multiple entities with duplicate IDs.
 
-If this occurs, duplicate IDs may be returned from a search, causing confusion.
+If this occurs, which data copy will return when queried remains an unknown behavior. This limitation will be fixed in future releases.
 
 #### What is the maximum length of self-defined entity IDs?
 
