@@ -4,10 +4,10 @@ label: Milvus Operator
 related_key: Kubernetes
 order: 2
 group: cluster
-summary: Learn how to install Milvus cluster on Kubernetes using Milvus Operator
+summary: 了解如何使用 Milvus Operator 在 Kubernetes 上安装 Milvus 集群
 ---
 
-# Install Milvus Cluster
+# 安装分布式版 Milvus
 
 你可以使用 Docker Compose 或 Kubernetes 安装 Milvus 分布式版。安装前，请先阅读[安装前提](prerequisite-docker.md)。
 
@@ -16,35 +16,37 @@ summary: Learn how to install Milvus cluster on Kubernetes using Milvus Operator
 
 <div class="tab-wrapper"><a href="install_cluster-docker.md" class=''>Docker Compose</a><a href="install_cluster-helm.md" class=''>Helm</a><a href="install_cluster-milvusoperator.md" class='active '>Milvus Operator</a></div>
 
-## Create a Kubernetes Cluster
+## 创建 Kubernetes 集群
 
-If you have already deployed a K8s cluster for production, you can skip this step and proceed directly to [deploy Milvus Operator](install_cluster-milvusoperator.md#Deploy-Milvus-Operator). If not, you can follow the following steps to quickly create a K8s for testing, and then use it to install a Milvus cluster with Milvus Operator. This tutorial introduces two ways to create a Kubernetes cluster:
+如果已经在生产环境中创建了 K8s 集群，你可以跳过此步骤，直接开始[部署 Milvus Operator](install_cluster-milvusoperator.md#部署-Milvus-Operator)。如未创建 K8s 集群，你可以根据以下步骤快速创建一个用于测试的 K8s 集群，并使用其安装分布式版 Milvus。本文将介绍两种创建 K8s 集群的方法：
 
-- Use minikube to create a Kubernetes cluster in a virtual machine (VM).
-- Use kind to create a Kubernetes cluster in docker.
+- 使用 minikube 在虚拟机中创建 Kubernetes 集群
+- 使用 kind 在 docker 中创建 Kubernetes 集群
 
 <div class="alert note">
-The K8s cluster created by minikube and kind are for testing only.  Do <b>not</b> use it in production.
+使用 minikube 及 kind 创建的集群只可用于测试，<b>不可以</b>用在生产环境中。
 </div>
 
-### Create a K8s cluster with minikube
+### 使用 minikube 在虚拟机中创建 K8s 集群
 
-[minikube](https://minikube.sigs.k8s.io/docs/) is a tool that allows you to run Kubernetes locally.
+[minikube](https://minikube.sigs.k8s.io/docs/) 是一种可以让你在本地轻松运行 Kubernetes 的工具。
 
-#### 1. Install minikube
 
-See [Prerequisites](prerequisite-helm.md#Software-requirements) for more information.
+#### 1. 安装 minikube
 
-#### 2. Start a K8s cluster using minukube
 
-After installing minikube, run the following command to start a K8s cluster.
+更多细节参考 [安装前提](prerequisite-helm.md#Software-requirements)。
+
+#### 2. 使用 minikube 启用 K8s 集群
+
+安装 minikube 后，运行如下指令，启用 K8s 集群。
 
 
 ```
 $ minikube start
 ```
 
-After the K8s cluster starts, you can see the following output. But it may vary according to your operating system and your hypervisor.
+成功启用 K8s 集群后，你可以看到如下结果。输出结果可能根据你的操作系统和虚拟机监控器会有所不同。
 
 ```
 😄  minikube v1.21.0 on Darwin 11.4
@@ -67,9 +69,9 @@ After the K8s cluster starts, you can see the following output. But it may vary 
 🏄  Done! kubectl is now configured to use "minikube" cluster and "default" namespace by default
 ```
 
-#### 3. Check the K8s cluster status
+#### 3. 检查 K8s 集群状态
 
-Run `$ kubectl cluster-info` to check the status of the K8s cluster you just created. Ensure that you can access the K8s cluster via `kubectl`. You should see the following expected output.
+运行命令 `$ kubectl cluster-info` ，检查你所创建的 K8s 集群状态。确保你可以使用 `kubectl` 访问 K8s 集群。输出结果如下：
 
 ```
 Kubernetes control plane is running at https://127.0.0.1:63754
@@ -77,13 +79,13 @@ KubeDNS is running at https://127.0.0.1:63754/api/v1/namespaces/kube-system/serv
 To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
 ```
 
-### Create a K8s cluster with kind
+### 使用 kind 创建 K8s 集群
 
-[kind](https://kind.sigs.k8s.io/) is a tool for running local Kubernetes clusters using Docker container “nodes”.
+[kind](https://kind.sigs.k8s.io/) 是一种使用 Docker 容器作为 node 节点，运行本地Kubernetes 集群的工具。
 
-#### 1. Create a configuration file 
+#### 1. 创建配置文件
 
-Create the `kind.yaml` configuration file as follows.
+创建 `kind.yaml` 配置文件。
 
 ```
 kind: Cluster
@@ -95,15 +97,15 @@ nodes:
 - role: worker
 ```
 
-#### 2. Create a K8s cluster
+#### 2. 创建 K8s 集群
 
-Create a K8s cluster using the `kind.yaml` configuration file.
+使用 `kind.yaml` 配置文件创建 K8s 集群。
 
 ```
 $ kind create cluster --name myk8s --config kind.yaml
 ```
 
-After the K8s cluster starts, you can see the following output. 
+成功启动 K8s 集群后，可以看到如下结果： 
 
 ```
 Creating cluster "myk8s" ...
@@ -120,9 +122,9 @@ kubectl cluster-info --context kind-myk8s
 Not sure what to do next? 😅  Check out https://kind.sigs.k8s.io/docs/user/quick-start/
 ```
 
-#### 3. Check the K8s cluster status
+#### 3. 检查 K8s 集群状态
 
-Run `$ kubectl cluster-info` to check the status of the K8s cluster you just created. Ensure that you can access the K8s cluster via `kubectl`. You should see the following expected output.
+运行指令 `$ kubectl cluster-info`，检查你所创建的 K8s 集群状态。确保你可以使用 `kubectl` 访问 K8s 集群。输出结果如下：
 
 ```
 Kubernetes control plane is running at https://127.0.0.1:55668
@@ -130,29 +132,30 @@ CoreDNS is running at https://127.0.0.1:55668/api/v1/namespaces/kube-system/serv
 To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
 ```
 
-## Deploy Milvus Operator
+## 部署 Milvus Operator
 
-Milvus Operator is a solution that helps you deploy and manage a full Milvus service stack to target K8s clusters. The stack includes all Milvus components and relevant dependencies like etcd, Pulsar and MinIO. Milvus Operator defines a Milvus cluster custom resources on top of [Kubernetes Custom Resources](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/). When the custom resources are defined, you can use Kubernetes APIs in a declarative way and manage Milvus deployment stack to ensure its scalability and high-availability.
+Milvus Operator 解决方案能够帮助你在目标 K8s 集群上部署 Milvus 服务栈，包含所有 Milvus 组件及 etcd、Pulsar、MinIO 等相关第三方组件。Milvus Operator 会在 [Kubernetes 自定义资源](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/) 基础上定义 Milvus 集群的自定义资源。定义资源后，你可以声明式使用 K8s API 并管理 Milvus 部署栈以确保服务可扩展和高可用。
 
-### Prerequisites
 
-- Ensure that you can access the K8s cluster via `kubectl`. 
-- Ensure the StorageClass dependency is installed as Milvus clusters depend on Default StorageClass for data persistence. Both minikube and kind have a dependency on Default storageclass when installed. Check the dependency by running the command `kubectl get sc`. If StorageClass is installed, you will see the following output. If not, see [Change the Default Storageclass](https://kubernetes.io/docs/tasks/administer-cluster/change-default-storage-class/) for more information.
+### 部署前提
+
+- 确保你可以使用 `kubectl` 访问 K8s 集群。
+- 确保已经安装 StorageClass 组件。minikube 及 kind 默认安装 Storageclass 组件。 运行指令 `kubectl get sc`，检查是否已安装 Storageclass 组件。如已安装，你可以看到如下结果。如未安装，请手动配置 sStorageclass。 详见[改变默认 StorageClass](https://kubernetes.io/docs/tasks/administer-cluster/change-default-storage-class/)。
 
 ```
 NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDINGMODE    ALLOWVOLUMEEXPANSION     AGE
 standard (default)    k8s.io/minikube-hostpath     Delete           Immediate             false                    3m36s
 ```
 
-### 1. Install cert-manager
+### 1. 安装 cert-manager
 
-Milvus Operator uses [cert-manager](https://cert-manager.io/docs/installation/supported-releases/) to provide certificate for webhook server. Run the following command to install cert-manager.
+Milvus Operator 使用 [cert-manager](https://cert-manager.io/docs/installation/supported-releases/) 为 webhook 服务生成证书。运行如下指令，安装 cert-manager。
 
 ```
 $ kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.5.3/cert-manager.yaml
 ```
 
-If cert-manager is installed, you can see the following output.
+安装成功后，你可以看到如下结果： 
 
 ```
 customresourcedefinition.apiextensions.k8s.io/certificaterequests.cert-manager.io created
@@ -203,10 +206,10 @@ validatingwebhookconfiguration.admissionregistration.k8s.io/cert-manager-webhook
 ```
 
 <div class="alert note">
-cert-manager version 1.13 or later is required.
+需要安装 cert-manager 1.13 或以上版本。
 </div>
 
-Run `$ kubectl get pods -n cert-manager` to check if cert-manager is running. If so, you can see all the pods are running, as shown in the following output.
+运行指令 `$ kubectl get pods -n cert-manager`，检查 cert-manager 是否正在运行。如果正在运行，你可以看到所有 pods 都在运行中，如下所示：
 
 ```
 NAME                                      READY   STATUS    RESTARTS   AGE
@@ -215,15 +218,15 @@ cert-manager-cainjector-54f4cc6b5-dpj84   1/1     Running   0          70s
 cert-manager-webhook-7c9588c76-tqncn      1/1     Running   0          70s
 ```
 
-### 2. Install Milvus Operator
+### 2. 安装 Milvus Operator
 
-Run the following command to install Milvus Operator.
+运行如下指令，安装 Milvus Operator。
 
 ```
 $ kubectl apply -f https://raw.githubusercontent.com/milvus-io/milvus-operator/main/deploy/manifests/deployment.yaml
 ```
 
-If Milvus Operator is installed, you can see the following output.
+安装成功后，你可以看到如下结果： 
 
 ```
 namespace/milvus-operator created
@@ -246,40 +249,40 @@ mutatingwebhookconfiguration.admissionregistration.k8s.io/milvus-operator-mutati
 validatingwebhookconfiguration.admissionregistration.k8s.io/milvus-operator-validating-webhook-configuration created
 ```
 
-Run `$ kubectl get pods -n milvus-operator` to check if Milvus Operator is running. If so, you can see the Milvus Operator pod running as shown in the following output.
+运行指令 `$ kubectl get pods -n milvus-operator`，检查 Milvus Operator 是否正在运行。如果正在运行中，你可以看到 Milvus Operator 的 pod 正在运行中，如下所示：
 
 ```
 NAME                                                  READY   STATUS    RESTARTS   AGE
 milvus-operator-controller-manager-698fc7dc8d-rlmtk   1/1     Running   0          46s
 ```
 
-## Install a Milvus cluster
+## 安装分布式版 Milvus 
 
-This tutorial uses the default configuration to install a Milvus cluster. All Milvus cluster components are enabled with multiple replicas, which consumes many resources. If you have very limited local resources, you can install a Milvus cluster [using the minimum configuration](https://github.com/milvus-io/milvus-operator/blob/main/config/samples/milvuscluster_minimum.yaml).
+本文在安装分布式版 Milvus 时使用了默认配置。所有 Milvus 组件均启用了多个副本，这会消耗大量资源。本地资源有限时，你可以 [使用最低配置](https://github.com/milvus-io/milvus-operator/blob/main/config/samples/milvuscluster_minimum.yaml) 安装分布式版 Milvus。 
 
-### 1. Deploy a Milvus cluster
+### 1. 部署 Milvus 集群
 
-When Milvus Operator starts, run the following command to deploy a Milvus cluster.
+启用 Milvus Operator 后，运行如下指令，部署 Milvus 集群。
 
 ```
 $ kubectl apply -f https://raw.githubusercontent.com/milvus-io/milvus-operator/main/config/samples/milvuscluster_default.yaml
 ```
 
-When the cluster is deployed, you can see the following output.
+部署完毕后，你可以看到如下结果： 
 
 ```
 milvuscluster.milvus.io/my-release created
 ```
 
-### 2. Check the Milvus cluster status
+### 2. 检查 Milvus 集群状态
 
-Run the following command to check the status of the Milvus cluster you just deployed.
+运行如下指令，检查 Milvus 集群状态。
 
 ```
 $ kubectl get mc my-release -o yaml
 ```
 
-You can confirm the current status of Milvus cluster from the `status` field in the output. When the Milvus cluster is still under creation, the `status` shows `Unhealthy`.
+你可以通过输出结果中 `status` 一栏确认 Milvus 集群的当前状态。如果 Milvus 集群还在创建中，`status` 一栏会显示 `Unhealthy`。
 
 ```
 apiVersion: milvus.io/v1alpha1
@@ -313,7 +316,7 @@ status:
   status: Unhealthy
 ```
   
-Run the following command to check the current status of Milvus pods.
+运行如下指令，检查 Milvus pod 当前状态。
 
 ```
 $ kubectl get pods
@@ -342,10 +345,9 @@ my-release-pulsar-zookeeper-0         0/1     Pending             0          16s
 ```
 
 
-### 3. Enable Milvus components
+### 3. 启用 Milvus 组件
 
-Milvus Operator first creates all dependencies like etcd, Pulsar, and MinIO, and then continues to create Milvus components. Therefore, you can only see the pods of etcd, Pulsar, and MinIO now.  Once all denependencies are enabled, Milvus Operator will start all Milvus components. The status of the Milvus cluster is shown as in the following output.
-
+Milvus Operator 会先创建 etcd、Pulsar、MinIO 等第三方组件，随后再创建 Milvus 组件。因此，目前你仅能看到 etcd、Pulsar 及 MinIO 的 pod。Milvus Operator 会在所有第三方组件启用后启动 Milvus 组件。Milvus 集群状态如下所示： 
 ```
 ...
 status:
@@ -374,7 +376,7 @@ status:
   status: Unhealthy
 ```
 
-Check the status of the Milvus Pods again.
+再次检查 Milvus Pods 状态。
 
 ```
 $ kubectl get pods
@@ -412,7 +414,7 @@ my-release-pulsar-zookeeper-1                   1/1     Running             0   
 my-release-pulsar-zookeeper-2                   1/1     Running             0          6m26s
 ```
 
-When all components are enabled, the `status` of the Milvus cluster is shown as `Healthy`.
+所有组建启用后，Milvus 集群的 `status` 显示为 `Healthy`。
 
 ```
 ...
@@ -441,10 +443,13 @@ status:
   status: Healthy
 ```
 
-Check the status of the Milvus pods again. You can see all the pods are running now.
+再次检查 Milvus pod 状态。你可以看到所有 pod 都在运行中。 
 
 ```
 $ kubectl get pods
+```
+
+```
 NAME                                            READY   STATUS      RESTARTS   AGE
 my-release-etcd-0                               1/1     Running     0          14m
 my-release-etcd-1                               1/1     Running     0          14m
@@ -476,44 +481,44 @@ my-release-pulsar-zookeeper-1                   1/1     Running     0          1
 my-release-pulsar-zookeeper-2                   1/1     Running     0          13m
 ```
 
-When the Milvus cluster is installed, you can learn how to [Connect to Milvus server](manage_connection.md)
+安装分布式版 Milvus 后，你可以学习如何 [管理 Milvus 连接](manage_connection.md)
 
-## Uninstall the Milvus cluster
+## 卸载分布式版 Milvus
 
-Run the following command to uninstall the Milvus cluster.
+运行如下指令，卸载分布式版 Milvus。
 
 ```
 $ kubectl delete mc my-release
 ```
 
 <div class="alert note">
-<li>When you delete the Milvus cluster using the default configuration, dependencies like etcd, Pulsar, and MinIO are not deleted. Therefore, next time when you install the same Milvus cluster instance, these dependencies will be used again. </li>
-<li>To delete the dependencies and private virtual clouds (PVCs) along with the Milvus cluster, see [configuration file](https://github.com/milvus-io/milvus-operator/blob/main/config/samples/milvuscluster_deletion.yaml).</li>
+<li>使用默认配置删除 Milvus 实例时，不会一同删除 etcd、Pulsar、MinIO 等其他第三方组件。因此，下次安装 Milvus 实例时，可再次使用上述第三方组件。. </li>
+<li>如需同时在虚拟私有云（PVC）中删除第三方组件，详见 [配置文件](https://github.com/milvus-io/milvus-operator/blob/main/config/samples/milvuscluster_deletion.yaml).</li>
 
 </div>
 
 
-## Delete the K8s cluster
+## 删除 K8s 集群
 
-When you no longer need the K8s cluster in the testing environment, you can delete it.
+无需再使用测试环境中的 K8s 集群时，你可以删除集群。
 
-If you use minikube to install the K8s cluster, run $ minikube delete.
+如果你使用 minikube 安装 K8s 集群，运行指令 `$ minikube delete`。
 
-If you use kind to install the K8s cluster, run $ kind delete cluster --name myk8s
+如果你使用 kind 安装 K8s 集群，运行指令 `$ kind delete cluster --name myk8s`。
 
 
-## What's next
+## 更多内容
 
-Having installed Milvus, you can:
-- Check [Hello Milvus](example_code.md) to run an example code with different SDKs to see what Milvus can do.
-- Learn the basic operations of Milvus:
-  - [Connect to Milvus server](manage_connection.md)
-  - [Conduct a vector search](search.md)
-  - [Conduct a hybrid search](hybridsearch.md)
-- [Upgrade Milvus Using Helm Chart](upgrade.md).
-- [Scale your Milvus cluster](scaleout.md).
-- Deploy your Milvu cluster on clouds:
+安装 Milvus 后，你可以：
+- 阅读 [Hello Milvus](example_code.md)，使用不同语言的 SDK 运行示例代码，探索 Milvus 功能。
+- 学习 Milvus 基本操作:
+  - [管理 Milvus 连接](manage_connection.md)
+  - [向量搜索](search.md)
+  - [混合搜索](hybridsearch.md)
+- [使用 Helm Chart 升级 Milvus2.0 版本](upgrade.md).
+- [对 Milvus 集群进行扩所容](scaleout.md).
+- 在云端部署 Milvus 集群：
   - [Amazon EC2](aws.md)
   - [Amazon EKS](eks.md)
-- Explore [MilvusDM](migrate_overview.md), an open-source tool designed for importing and exporting data in Milvus.
-- [Monitor Milvus with Prometheus](monitor.md).
+- 了解如何使用开源工具 [MilvusDM](migrate_overview.md)将数据导入或导出 Milvus。
+- [部署监控](monitor.md).
