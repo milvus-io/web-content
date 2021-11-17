@@ -180,8 +180,8 @@ $ helm install my-release milvus/milvus --set minio.existingSecret=mysecret --se
 ## 更多内容
 
 如果你想学习如何在其他云上部署 Milvus 集群:
-- [在 EC2 上部署 Milvus 集群](https://milvus.io/docs/v2.0.0/aws.md)
-- [在 EKS 上部署 Milvus 集群](https://milvus.io/docs/v2.0.0/eks.md)
-- [在 Azure 上部署 Milvus 集群](https://milvus.io/docs/v2.0.0/azure.md)
+- [在 EC2 上部署 Milvus 集群](https://milvus.io/cn/docs/v2.0.0/aws.md)
+- [在 EKS 上部署 Milvus 集群](https://milvus.io/cn/docs/v2.0.0/eks.md)
+- [在 Azure 上部署 Milvus 集群](https://milvus.io/cn/docs/v2.0.0/azure.md)
 
 
