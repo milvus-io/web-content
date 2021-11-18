@@ -17,7 +17,7 @@ Current version of Milvus supports SDKs in Python and Node.js.
 
 ## Requirement
 
-Python 3 (3.6 or later) is required.
+Python 3 (3.71 or later) is required.
 
 ## Install PyMilvus via pip
 
