@@ -11,8 +11,7 @@ summary: Learn how to deploy a Milvus cluster on AWS EC2.
 
 ##  预置集群
 
-介绍如何使用 Terraform 预置 Milvus 集群。
-[Terraform](https://www.terraform.io/) 是一个基础架构即代码 (IaC) 软件工具。使用 Terraform ，你可以通过使用声明性配置文件来预置基础设施。
+介绍如何使用 Terraform 预置 Milvus 集群。[Terraform](https://www.terraform.io/) 是一个基础架构即代码 (IaC) 软件工具。使用 Terraform ，你可以通过使用声明性配置文件来预置基础设施。
 
 ### 先决条件
 
@@ -30,7 +29,7 @@ summary: Learn how to deploy a Milvus cluster on AWS EC2.
 - `variables.tf`
 	这个文件允许快速编辑用于设置或更新Milvus集群的变量。
 
-- `output.tf` and `inventory.tmpl`
+- `output.tf` 和 `inventory.tmpl`
 	
 	这些文件存储 Milvus 集群的元数据。本问中使用的元数据是每个节点实例的 `public_ip`，每个节点实例的 `private_ip` 和所有 EC2 实例 ID。
 
@@ -52,7 +51,7 @@ summary: Learn how to deploy a Milvus cluster on AWS EC2.
   }
   ```
 - 节点类型的实例类型
-- 
+
   下面的模板声明了一个 `index_ec2_type` 变量，用于设置索引节点的[实例类型](https://aws.amazon.com/ec2/instance-types/)。
 
   ```variables.tf
@@ -64,7 +63,7 @@ summary: Learn how to deploy a Milvus cluster on AWS EC2.
   ```
 - 访问权限
 
-  下面的模板声明一个 `key_name` 变量和一个 `my_ip` 变量。` key_name` 变量表示 AWS 访问密钥。变量 `my_ip` 表示安全组的 IP 地址范围。
+  下面的模板声明一个 `key_name` 变量和一个 `my_ip` 变量。` key_name` 变量表示 AWS 访问密钥。`my_ip` 变量表示安全组的 IP 地址范围。
 
   ```variables.tf
   variable "key_name" {
@@ -84,7 +83,7 @@ summary: Learn how to deploy a Milvus cluster on AWS EC2.
 
 本节描述 `main. txt` 文件包含的配置。
 
--  云提供商和区域
+- 云提供商和区域
 
   下面的模板使用 `us-east-2 ` 区域。更多信息请参见[可用区域](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-available-regions)。
 
@@ -235,15 +234,15 @@ summary: Learn how to deploy a Milvus cluster on AWS EC2.
 
 你可以在 [Google 云端硬盘](https://drive.google.com/file/d/1jLQV0YkseOVj5X0exj17x9dWQjLCP7-1/view)下载模板配置文件。
 
--  `yaml_files` 文件夹中的文件
+- `yaml_files` 文件夹中的文件
 
-  这个文件夹存储每个节点类型的 Jinja2 文件。Ansible 使用了 Jinja2 模板。有关 Jinja2 的更多信息请参见[介绍](https://jinja2docs.readthedocs.io/en/stable/intro.html)。
+这个文件夹存储每个节点类型的 Jinja2 文件。Ansible 使用了 Jinja2 模板。有关 Jinja2 的更多信息请参见[介绍](https://jinja2docs.readthedocs.io/en/stable/intro.html)。
 
 - `playbook.yaml`
 
-  该文件在特定的节点集上执行一组任务。该模板首先在 Milvus 集群的所有节点实例上安装 Docker 和 Docker Compose。
+该文件在特定的节点集上执行一组任务。该模板首先在 Milvus 集群的所有节点实例上安装 Docker 和 Docker Compose。
 
-  <div class="alert note">Playbook 是按照从上到下的顺序运行的。在每个 Play 中，任务也从上到下依次运行。</div>
+<div class="alert note">Playbook 是按照从上到下的顺序运行的。在每个 Play 中，任务也从上到下依次运行。</div>
   
   ```playbook.yaml
   - name: All Servers
