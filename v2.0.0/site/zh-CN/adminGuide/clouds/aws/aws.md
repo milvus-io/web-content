@@ -322,6 +322,6 @@ summary: Learn how to deploy a Milvus cluster on AWS EC2.
 ## 更多内容
 
 如果你想学习如何在其他云上部署 Milvus:
-- [在 EKS 部署 Milvus 集群](https://milvus.io/docs/v2.0.0/eks.md)
-- [在 GCP 部署 Milvus 集群](https://milvus.io/docs/v2.0.0/gcp.md)
-- [在 Azure 部署 Milvus 集群](https://milvus.io/docs/v2.0.0/azure.md)
+- [在 EKS 部署 Milvus 集群](https://milvus.io/cn/docs/v2.0.0/eks.md)
+- [在 GCP 部署 Milvus 集群](https://milvus.io/cn/docs/v2.0.0/gcp.md)
+- [在 Azure 部署 Milvus 集群](https://milvus.io/cn/docs/v2.0.0/azure.md)
