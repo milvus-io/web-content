@@ -1,31 +1,31 @@
 ---
 id: upgrade.md
 related_key: upgrade Milvus
-summary: Learn how to upgrade Milvus.
+summary: 了解如何升级 Milvus 2.0 版本
 ---
 
-# Upgrade Milvus Using Helm Chart
+# 使用 Helm Chart 升级 Milvus 2.0 版本
 
-This topic describes how to upgrade Milvus 2.0 with Helm Chart using the example of upgrading from Milvus 2.0.0-RC7 to 2.0.0-RC8.
+本文将介绍如何使用 Helm Chart 升级 Milvus 2.0 版本。本文以 Milvus 2.0.0-RC7 升级至 2.0.0-RC8 为例。
 
 <div class="alert note">
-Helm Chart does not support upgrading from Milvus 2.0 standalone to Milvus 2.0 cluster or vice versa. Milvus 2.0.0-RC7 is not compatible with earlier RC versions. Therefore, you cannot upgrade from prior versions to 2.0.0-RC7.
+目前，暂不暂不支持使用 Helm Chart 实现单机版 Milvus 与分布式版 Milvus 之间的升级转换。Milvus 2.0.0-RC7 与此前版本不兼容，因此不支持从此前版本升级至 2.0.0-RC7 版本。
 </div>
 
-## Upgrade Milvus standalone
+## 升级单机版 Milvus
 
-### Step 1. Check the Milvus version
+### 步骤 1. 查看 Milvus 版本
 
-Run `$ helm list` to check your Milvus app version. You can see the `APP VERSION` is 2.0.0-rc7. 
+运行指令 `$ helm list`，查看 Milvus app 版本. 你可以看到返回结果中显示 Milvus `APP VERSION` 为 2.0.0-rc7。
 
 ```
 NAME              NAMESPACE        REVISION        UPDATED                                     STATUS          CHART               APP VERSION
 my-release        default          1               2021-11-08 17:12:44.678247 +0800 CST        deployed        milvus-2.2.4        2.0.0-rc.7
 ```
 
-### Step 2. Check the running pods
+### 步骤 2. 查看运行中的 pod
 
-Run `$ kubectl get pods` to check the running pods. You can see the following output.
+运行指令 `$ kubectl get pods`，查看运行中的 pod。 你可以看到如下结果：
 
 ```
 NAME                                            READY   STATUS    RESTARTS   AGE
@@ -34,9 +34,9 @@ my-release-milvus-standalone-75c599fffc-6rwlj   1/1     Running   0          84s
 my-release-minio-744dd9586f-qngzv               1/1     Running   0          84s
 ```
 
-### Step 3. Check the image tag
+### 步骤 3. 查看 image tag
 
-Check the image tag for the pod `my-release-milvus-standalone-75c599fffc-6rwlj`. You can see the release of your Milvus standalone is 2.0.0-RC7.
+查看 `my-release-milvus-standalone-75c599fffc-6rwlj` pod 的 image tag。可以看到你所使用的单机版 Milvus 版本为 2.0.0-RC7。
 
 ```
 $ kubectl get pods my-release-milvus-standalone-75c599fffc-6rwlj -o=jsonpath='{$.spec.containers[0].image}'
@@ -47,9 +47,9 @@ milvusdb/milvus:v2.0.0-rc7-20211011-d567b21
 ```
 
 
-### Step 4. Check available app versions
+### 步骤 4. 检查所有可用 app 版本
 
-Run the following commands to see all available app versions.
+运行如下指令，检查所有可用 app 版本。
 
 ```
 $ helm repo update
@@ -71,23 +71,23 @@ milvus/milvus        2.2.1                2.0.0-rc.6                Milvus is an
 milvus/milvus        2.2.0                2.0.0-rc.6                Milvus is an open-source vector database built ...
 ```
 
-### Step 5. Upgrade
+### 步骤 5. 升级单机版 Milvus
 
-1. Run the following commands to upgrade your Milvus standalone from 2.0.0-RC7 to 2.0.0-RC8.
+1. 运行如下指令，将单机版 Milvus 2.0.0-RC7 升级至 2.0.0-RC8。
 
 ```
 $ helm repo update
 $ helm upgrade my-release milvus/milvus --set cluster.enabled=false --set etcd.replicaCount=1 --set minio.mode=standalone --set pulsar.enabled=false 
 ```
 
-2. Run `$ helm list` again to check your Milvus app version. You can see your Milvus standalone has been upgraded to 2.0.0-RC8.
+2. 再次运行指令 `$ helm list`，查看当前 Milvus app 版本。可以看到当前单机版 Milvus 已升级至 2.0.0-RC8。
 
 ```
 NAME              NAMESPACE        REVISION        UPDATED                                     STATUS          CHART               APP VERSION
 my-release        default          2               2021-11-08 17:15:46.530627 +0800 CST        deployed        milvus-2.3.3        2.0.0-rc.8
 ```
 
-3. Run `$ kubectl get pods` to check the new pods. You can see the following output.
+3. 运行指令 `$ kubectl get pods`，查看当前运行中的 pod。你可以看到如下结果：
 
 ```
 NAME                                            READY   STATUS    RESTARTS   AGE
@@ -97,10 +97,10 @@ my-release-minio-744dd9586f-qngzv               1/1     Running   0          3m3
 ```
 
 <div class="alert note">
-When upgrading your Milvus standalone, old pods will be deleted. Therefore, the service may be offline for a short period of time.
+升级单机版 Milvus 时，原有的 pod 将被删除。因此，Milvus 服务可能会暂时中断。
 </div>
 
-4. Run the following command to check the new image version. You can see it is v2.0.0-rc8 now.
+4. 运行如下指令，查看当前 image tag 版本。可以看到，当前版本为 v2.0.0-rc8。
 
 ```
 $ kubectl get pods my-release-milvus-standalone-6967454987-72r55 -o=jsonpath='{$.spec.containers[0].image}'
@@ -110,20 +110,20 @@ $ kubectl get pods my-release-milvus-standalone-6967454987-72r55 -o=jsonpath='{$
 milvusdb/milvus:v2.0.0-rc8-20211104-d1f4106
 ```
 
-## Upgrade Milvus cluster
+## 升级分布式版 Milvus 
 
-### Step 1. Check the Milvus version
+### 步骤 1. 查看 Milvus 版本
 
-Run `$ helm list` to check your Milvus app version. You can see the `APP VERSION` is 2.0.0-rc7. 
+运行指令 `$ helm list`，查看 Milvus app 版本. 你可以看到返回结果中显示 Milvus `APP VERSION` 为 2.0.0-rc7。
 
 ```
 NAME              NAMESPACE        REVISION        UPDATED                                     STATUS          CHART               APP VERSION
 my-release        default          1               2021-11-08 17:21:13.511069 +0800 CST        deployed        milvus-2.2.4        2.0.0-rc.7
 ```
 
-### Step 2. Check the running pods
+### 步骤 2. 查看运行中的 pod
 
-Run `$ kubectl get pods` to check the running pods. You can see the following output.
+运行指令 `$ kubectl get pods`，查看运行中的 pod。 你可以看到如下结果：
 
 ```
 NAME                                              READY   STATUS      RESTARTS   AGE
@@ -154,9 +154,9 @@ my-release-pulsar-zookeeper-2                     1/1     Running     0         
 my-release-pulsar-zookeeper-metadata-hw5xt        0/1     Completed   0          5m40s
 ```
 
-### Step 3. Check the image tag
+### 步骤 3. 查看 image tag
 
-Check the image tag for the pod `my-release-milvus-proxy-6664d564f9-pwqn9`. You can see the release of your Milvus cluster is 2.0.0-RC7.
+查看 `my-release-milvus-proxy-6664d564f9-pwqn9` pod 的 image tag。可以看到你所使用的分布式版 Milvus 版本为 2.0.0-RC7。
 
 ```
 $ kubectl get pods my-release-milvus-proxy-6664d564f9-pwqn9 -o=jsonpath='{$.spec.containers[0].image}'
@@ -166,9 +166,9 @@ $ kubectl get pods my-release-milvus-proxy-6664d564f9-pwqn9 -o=jsonpath='{$.spec
 milvusdb/milvus:v2.0.0-rc7-20211011-d567b21
 ```
 
-### Step 4. Check available app versions
+### 步骤 4. 检查所有可用 app 版本
 
-Run the following commands to see all available app versions. 
+运行如下指令，检查所有可用 app 版本。
 
 ```
 $ helm repo update
@@ -190,23 +190,23 @@ milvus/milvus        2.2.1                2.0.0-rc.6                Milvus is an
 milvus/milvus        2.2.0                2.0.0-rc.6                Milvus is an open-source vector database built ...
 ```
 
-### Step 5. Upgrade
+### 步骤 5. 升级分布式版 Milvus
 
-1. Run the following commands to upgrade your Milvus cluster from 2.0.0-RC7 to 2.0.0-RC8.
+1. 运行如下指令，将分布式版 Milvus 2.0.0-RC7 升级至 2.0.0-RC8。
 
 ```
 $ helm repo update
 $ helm upgrade my-release milvus/milvus
 ```
 
-2. Run `$ helm list` again to check your Milvus version. You can see your Milvus cluster has been upgraded to 2.0.0-RC8.
+2. 再次运行指令 `$ helm list`，查看当前 Milvus app 版本。可以看到当前单机版 Milvus 已升级至 2.0.0-RC8。
 
 ```
 NAME              NAMESPACE        REVISION        UPDATED                                     STATUS          CHART               APP VERSION
 my-release        default          2               2021-11-08 17:29:07.815765 +0800 CST        deployed        milvus-2.3.3        2.0.0-rc.8
 ```
 
-3. Run `$ kubectl get pods` to check the new pods. You can see the following output.
+3. 行指令 `$ kubectl get pods`，查看当前运行中的 pod。你可以看到如下结果：
 
 ```
 NAME                                              READY   STATUS    RESTARTS   AGE
@@ -236,7 +236,7 @@ my-release-pulsar-zookeeper-1                     1/1     Running   0          1
 my-release-pulsar-zookeeper-2                     1/1     Running   0          11m
 ```
 
-4. Run the following command to check the new image version. You can see it is v2.0.0-rc8 now.
+4. 运行如下指令，查看当前 image tag 版本。可以看到，当前版本为 v2.0.0-rc8。
 
 ```
 $ kubectl get pods my-release-milvus-proxy-5685bbc546-v6scq -o=jsonpath='{$.spec.containers[0].image}'
@@ -247,11 +247,11 @@ milvusdb/milvus:v2.0.0-rc8-20211104-d1f4106
 ```
 
 
-## What's next
-- You might also want to learn how to:
-  - [Scale a Milvus cluster](scaleout.md)
-- If you are ready to deploy your cluster on clouds:
-  - Learn how to [Deploy Milvus on AWS with Terraform and Ansible](aws.md)
-  - Learn how to [Deploy Milvus on Amazon EKS with Terraform](eks.md)
-  - Learn how to [Deploy Milvus Cluster on GCP with Kubernetes](gcp.md)
-  - Learn how to [Deploy Milvus on Microsoft Azure With Kubernetes](azure.md)
+## 更多内容
+- 你可能还想了解：
+  - [对 Milvus 集群进行扩缩容](scaleout.md)
+- 如果你想要在云端部署分布式版 Milvus：
+  - [使用 Terraform 及 Ansible 在 AWS 上部署 Milvus](aws.md)
+  - [使用 Terraform 在 Amazon EKS 上部署 Milvus](eks.md)
+  - [使用 Kubernetes 在 GCP 上部署 Milvus](gcp.md)
+  - [使用 Kubernentes 在 Microsoft Azure 上部署 Milvus](azure.md)
