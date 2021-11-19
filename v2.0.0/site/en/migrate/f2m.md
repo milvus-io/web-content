@@ -57,7 +57,7 @@ F2M:
 ```
 
 
-## 3. Migrate data from HDF5 to Milvus
+## 3. Migrate data from Faiss to Milvus
 
 Run MilvusDM to import data from Faiss to Milvus with the following command.
 
