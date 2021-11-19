@@ -70,7 +70,7 @@ $ milvusdm --yaml F2M.yaml
 ## What's next
 - If you are interested in migrating data in other forms into Milvus,
   - Learn how to [Migrate Data from HDF5 to Milvus](h2m.md).
-- If you are looking for information about how migrate data from Milvus 1.x to Milvus 2.0,
+- If you are looking for information about how to migrate data from Milvus 1.x to Milvus 2.0,
   - Learn [version migration](m2m.md).
 - If you are interested in learning more about the data migration tool,
   - Read the overview of [MilvusDM](migrate_overview.md).
