@@ -82,9 +82,9 @@ $ lscpu | grep -e sse4_2 -e avx -e avx2 -e avx512
 
 #### 可以在 Windows 上安装 Milvus 吗？
 
-如果使用 Docker 部署 Milvus，目前仅支持在 [Windows Docker Desktop WSL 2 backend](https://docs.docker.com/docker-for-windows/wsl/) 上进行部署。
+可以。你可以通过源码编译或下载编译完成的二进制在 Windows 上安装 Milvus。
 
-暂不支持在 Windows 或 macOS 系统上以源码编译部署 Milvus，目前仅支持在 Ubuntu 系统（内核版本 18.04 或以上）或 CentOS 系统（内核版本 7 或以上）上以源码编译部署 Milvus。
+阅读 [在 Windows 上运行 Milvus 2.0](https://mp.weixin.qq.com/s?__biz=MzUzMDI5OTA5NQ==&mid=2247490199&idx=2&sn=4ade84a5b8b4dad8e4e772a0085e4d40&chksm=fa52bb2fcd2532392bb5aa55ecebb58bf61af2128ddf03d02ef8102563e80691903d61e92f34&token=1691140882&lang=zh_CN#rd) 学习如何在 Windows 上安装 Milvus。
 
 #### 在 Windows 安装 PyMilvus 报错，如何解决？
 
