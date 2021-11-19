@@ -2,49 +2,51 @@
 id: m2m.md
 title: Version Migration
 related_key: version migration
-summary: Use MilvusDM for version migration.
+summary: Milvus 版本迁移
 ---
 
-# Version Migration
-This topic describes how to migrate data from Milvus 1.x to Milvus 2.0 using [MilvusDM](migrate_overview.md), an open-source tool specifically designed for Milvus data migration. 
+# Milvus 版本迁移
+
+本文将介绍如何使用开源工具 [MilvusDM](migrate_overview.md) 将 Milvus 1.x 数据导入 Milvus 2.0，实现版本迁移。
 
 <div class="alert note">
-MilvusDM does not support migrating data from Milvus 2.0 standalone to Milvus 2.0 cluster.
+MilvusDM 不支持将数据从单机版 Milvus 迁移至分布式版 Milvus。
 </div>
 
 
-## Prerequisites
+## 数据迁移前提
 
-You need to [install MilvusDM](milvusdm_install.md) before migrating Milvus data.
+在迁移 Milvus 版本前，你需要先 [安装 MilvusDM](milvusdm_install.md)。
 
-## 1. Download YAML file
+## 1. 下载 YAML 文件
 
-Download the `M2M.yaml` file.
+下载 `M2M.yaml` 文件。
 
 ```
 $ wget https://raw.githubusercontent.com/milvus-io/milvus-tools/main/yamls/M2M.yaml
 ```
 
-## 2. Set the parameters
+## 2. 设置参数
 
-Configuration parameters include:
+需要设置的参数包括：
 
-| Parameter                 | Description                               | Example                      |
+| 参数                 | 说明                               | 示例                      |
 | ------------------------- | ----------------------------------------- | ---------------------------- |
-| `milvus_version`          |  Version of Milvus.                       | 2.0.0                       |
-| `data_path`               |  Path to the HDF5 files. Set either `data_path` or `data_dir`.                      | - /Users/zilliz/float_1.h5 <br/> - /Users/zilliz/float_2.h5                   |
-| `data_dir`         |  Directory of the HDF5 files. Set either `data_path` or `data_dir`.                      | '/Users/zilliz/Desktop/HDF5_data'                     |
-| `dest_host`          |  Milvus server address.                      | '127.0.0.1'     |
-| `dest_port`          |  Milvus server port.                       | 19530                      |
-| `mode`         |  Mode of migration, including `skip`, `append`, and `overwrite`. This parameter works only when the specified collection name exists in the Milvus library. <br/> <li>`skip` refers to skipping data migration if the specified collection or partition already exists.</li> <li>`append` refers to appending data if the specified collection or partition already exists.</li> <li>`overwrite` refers to deleting existing data before insertion if the specified collection or partition already exists.</li>                    | 'append'                     |
-| `dest_collection_name`          | Name of the collection to import data to.                      | 'test_float'                       |
-| `dest_partition_name` (optional)         |  Name of the partition to import data to.                  | 'partition_1'                 |
-| `collection_parameter`         |  Collection-specific information including vector dimension, index file size, and similarity metric.                      | "dimension: 512 <br/> index_file_size: 1024 <br/> metric_type: 'HAMMING'"                     |
+| `milvus_version`          |  Milvus 版本。                        | 2.0.0                       |
+| `data_path`               |  HDF5 文件路径。`data_path` 及 `data_dir` 两个参数中只能配置一个。                    | - /Users/zilliz/float_1.h5 <br/> - /Users/zilliz/float_2.h5                   |
+| `data_dir`         |  HDF5 文件目录。`data_path` 及 `data_dir` 两个参数中只能配置一个。                      | '/Users/zilliz/Desktop/HDF5_data'                     |
+| `dest_host`          |  目标 Milvus 服务器地址。                      | '127.0.0.1'     |
+| `dest_port`          | 目标 Milvus 服务器端口。                   | 19530                      |
+| `mode`         |  数据迁移模式，包括 `skip`、`append` 及 `overwrite`。该参数仅在指定 collction 名称存在于 Milvus中时生效。 <br/> <li>`skip`：若指定 collection 或 partition 已存在，跳过数据迁移。 </li> <li>`append`：若指定 collection 或 partition 已存在，添加数据。</li> <li>`overwrite`：若指定 collection 或 partition 已存在，在插入数据前删除已有数据。</li>                           | 'append'                     |
+| `dest_collection_name`          | 导入数据的 collection 名称。                        | 'test_float'                       |
+| `dest_partition_name` (optional)         |  导入数据的 partition 名称。               | 'partition_1'                 |
+| `collection_parameter`         |  collection 相关信息，包括向量维度、索引文件大小、相似度计算方式等。                                | "dimension: 512 <br/> index_file_size: 1024 <br/> metric_type: 'HAMMING'"                     |
 
 
-The following two examples of configuration are for your reference. The first example involves setting `mysql_parameter`. If you do not use MySQL for managing vector IDs in Milvus 1.x, refer to the second example.
+如下两个参数配置示例仅供参考。示例 1 中设置了 `mysql_parameter` 参数。如未在 Milvus 1.x 版本中使用 MySQL 管理向量 ID，参考示例 2。
 
-### Example 1
+
+### 示例 1
 
 ```
 M2M:
@@ -65,7 +67,7 @@ M2M:
   mode: 'skip' # 'skip/append/overwrite'
 ```
 
-### Example 2
+### 示例 2
 
 ```
 M2M:
@@ -79,19 +81,18 @@ M2M:
   mode: 'skip' # 'skip/append/overwrite'
 ```
 
-## 3. Migrate data from Milvus to Milvus
+## 3. 将 Milvus 1.x 数据导入 Milvus 2.0
 
-Run MilvusDM to import data from Milvus 1.x to Milvus 2.0 with the following command.
+运行 MilvusDM， 通过如下指令将 Milvus 1.x 数据导入 Milvus 2.0。
 
 ```
 $ milvusdm --yaml M2M.yaml
 ```
 
 
-
-## What's next
-- If you are interested in migrating data in other forms into Milvus,
-  - Learn how to [Migrate Data from Faiss to Milvus](f2m.md).
-  - Learn how to [Migrate from HDF5 to Milvus](h2m.md).
-- If you are interested in learning more about the data migration tool,
-  - Read the overview of [MilvusDM](migrate_overview.md).
+## 更多内容
+- 如果你想要将其他格式的数据导入 Milvus，你可以：
+  - 了解如何 [将 Faiss 数据导入 Milvus](f2m.md)。
+  - 了解如何 [将 HDF5 文件数据导入 Milvus](h2m.md)。
+- 如果你想要了解更多有关数据迁移工具详情，
+  - 阅读 [MilvusDM](migrate_overview.md) 简介。
