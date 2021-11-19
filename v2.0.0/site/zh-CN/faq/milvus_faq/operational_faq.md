@@ -88,19 +88,13 @@ $ lscpu | grep -e sse4_2 -e avx -e avx2 -e avx512
 
 #### 在 Windows 安装 PyMilvus 报错，如何解决？
 
-不建议在 Windows 安装 pymilvus。可以尝试在 Conda 环境下安装。
+不建议在 Windows 安装 PyMilvus。如果必须在 Windows 安装 PyMilvus 且系统报错，你可以尝试在 Conda 环境下安装。阅读[安装 SDK](install-pymilvus.md) 了解如何安装 PyMilvus。
 
 #### 能否在内网离线环境中部署 Milvus 服务？
 
-Milvus 可以通过 Docker 镜像的形式进行离线部署以单机版 Milvus 为例:
+可以。你可以离线部署 Milvus 服务。阅读 [离线安装 Milvus
+](install_offline-docker.md) 了解如何在离线环境中部署 Milvus。
 
-1. 在有网的环境中拉取 MinIO、etcd 及 Milvus 的Docker 镜像；
-2. 运行 `docker save` 命令将各个镜像保存为 **.TAR** 文件；
-3. 将 **.TAR** 文件保存至本地；
-4. 运行 `docker load` 命令将该文件导入为镜像；
-5. 运行 `docker-compose` 命令启动 Milvus 服务。
-
-更多 Docker 相关内容，详见 [安装单机版 Milvus](install_standalone-docker.md)。
 
 #### Milvus 日志打印在哪里？
 
@@ -115,4 +109,4 @@ Milvus 的日志默认输出在标准输出（standard output）和标准误差�
 如果仍有其他问题，你可以：
 
 - 访问我们的 [GitHub 主页](https://github.com/milvus-io/milvus/issues)，与我们分享你的问题和想法，或帮助其他用户。
-- 加入我们的 [Slack 社区](https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk)，参与开源社区的讨论交流。
+- 加入我们的 [Milvus Forum](https://discuss.milvus.io/) 或 [Slack 社区](https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk)，参与开源社区的讨论交流。
