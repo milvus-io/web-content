@@ -79,9 +79,9 @@ See [CPU’s support for SIMD Instruction Set](install_standalone-docker.md#befo
 
 #### Can I install Milvus on Windows?
 
-If you try to deploy Milvus with Docker, Milvus only supports the deployment on [Windows Docker Desktop WSL 2 backend](https://docs.docker.com/docker-for-windows/wsl/).
+Yes. You can install Milvus on Windows either by compiling from source code or from a binary package. 
 
-Milvus cannot be built from source code on Windows or macOS. Use Ubuntu (18.04 or higher) or CentOS (7 or higher) to build Milvus from source code.
+See [Run Milvus 2.0 on Windows](https://milvus.io/blog/2021-11-19-run-milvus-2.0-on-windows.md?page=1#all) to learn how to install Milvus on Windows.
 
 #### I got an error when installing pymilvus on Windows. What shall I do?
 
