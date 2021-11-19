@@ -80,7 +80,7 @@ H2M:
 
 ## 3. 将 HDF5 文件数据导入 Milvus
 
-运行 MilvusDM， 通过如下指令将HDF5 文件数据导入 Milvus。
+运行 MilvusDM， 通过如下指令将 HDF5 文件数据导入 Milvus。
 
 ```
 $ milvusdm --yaml H2M.yaml
