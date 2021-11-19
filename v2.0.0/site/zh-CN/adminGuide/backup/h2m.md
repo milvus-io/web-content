@@ -27,7 +27,7 @@ $ wget https://raw.githubusercontent.com/milvus-io/milvus-tools/main/yamls/M2H.y
 
 | 参数                 | 说明                               | 示例                      |
 | ------------------------- | ----------------------------------------- | ---------------------------- |
-| `milvus_version`          |  Milvus 版本                       | 2.0.0                       |
+| `milvus_version`          |  Milvus 版本。                       | 2.0.0                       |
 | `data_path`               |  HDF5 文件路径。`data_path` 及 `data_dir` 两个参数中只能配置一个。                 | - /Users/zilliz/float_1.h5 <br/> - /Users/zilliz/float_2.h5                   |
 | `data_dir`         |  HDF5 文件目录。`data_path` 及 `data_dir` 两个参数中只能配置一个。                      | '/Users/zilliz/Desktop/HDF5_data'                     |
 | `dest_host`          |  目标 Milvus 服务器地址。                    | '127.0.0.1'     |
