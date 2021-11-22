@@ -7,11 +7,11 @@ summary: Learn how to deploy a Milvus cluster on AWS EC2.
 
 # 在 EC2 部署 Milvus 集群
 
-本文介绍如何使用 Terraform 和 Ansible 在 [Amazon EC2 ](https://docs.aws.amazon.com/ec2/)上部署 Milvus 集群。
+本文介绍如何使用 [Terraform](https://www.terraform.io/) 和 [Ansible](https://www.ansible.com/overview/how-ansible-works) 在 [Amazon EC2 ](https://docs.aws.amazon.com/ec2/)上部署 Milvus 集群。
 
 ##  预置集群
 
-介绍如何使用 Terraform 预置 Milvus 集群。[Terraform](https://www.terraform.io/) 是一个基础架构即代码 (IaC) 软件工具。使用 Terraform ，你可以通过使用声明性配置文件来预置基础设施。
+介绍如何使用 Terraform 预置 Milvus 集群。Terraform 是一个基础架构即代码 (IaC) 软件工具。使用 Terraform ，你可以通过使用声明性配置文件来预置基础设施。
 
 ### 先决条件
 
@@ -24,10 +24,10 @@ summary: Learn how to deploy a Milvus cluster on AWS EC2.
 你可以在 [Google 云端硬盘](https://drive.google.com/file/d/1jLQV0YkseOVj5X0exj17x9dWQjLCP7-1/view) 下载模板配置文件。
 
 - `main.tf`
-	这个文件包含了一个Milvus集群的配置。
+	这个文件包含了用于预置 Milvus 集群的配置。
 
 - `variables.tf`
-	这个文件允许快速编辑用于设置或更新Milvus集群的变量。
+	这个文件允许快速编辑用于设置或更新 Milvus 集群的变量。
 
 - `output.tf` 和 `inventory.tmpl`
 	
@@ -224,7 +224,7 @@ summary: Learn how to deploy a Milvus cluster on AWS EC2.
 
 ## 启动集群
 
-本节描述如何使用 Ansible 启动你已经准备好的 Milvus 集群。[Ansible](https://www.ansible.com/overview/how-ansible-works) 是一个配置管理工具，用于自动化云配置和配置管理。
+本节描述如何使用 Ansible 启动你预置完的 Milvus 集群。Ansible 是一个配置管理工具，用于自动化云配置和配置管理。
 
 ### 先决条件
 
