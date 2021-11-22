@@ -32,7 +32,8 @@ Before deploying monitoring services, you need to create a monitoring stack by u
 
 ```
 git clone https://github.com/prometheus-operator/kube-prometheus.git
-kubectl create -f manifests/setupuntil kubectl get servicemonitors --all-namespaces ; do date; sleep 1; echo ""; done
+kubectl create -f manifests/setup
+until kubectl get servicemonitors --all-namespaces ; do date; sleep 1; echo ""; done
 kubectl create -f manifests/
 ```
 
