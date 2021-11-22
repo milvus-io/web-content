@@ -11,7 +11,7 @@ summary: Learn how to deploy a Milvus cluster on EKS
 本文介绍在 [Amazon EKS](https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html) 上部署 Milvus 集群的操作步骤。
 
 <div class="alert note">
-本文假设您对 AWS 访问管理有基本的了解。如果您不熟悉它，请参阅 <a href=https://docs.aws.amazon.com/iam/?id=docs_gateway>AWS Identity and Access Management 文档</a>。</div>
+本文假设你对 AWS 访问管理有基本的了解。如果你不熟悉它，请参阅 <a href=https://docs.aws.amazon.com/iam/?id=docs_gateway>AWS Identity and Access Management 文档</a>。</div>
 
 ## 先决条件
 
@@ -30,7 +30,7 @@ summary: Learn how to deploy a Milvus cluster on EKS
 
 ## 部署集群
 
-您可以在 [Google 云端硬盘](https://drive.google.com/file/d/1jLQV0YkseOVj5X0exj17x9dWQjLCP7-1/view)下载模板配置文件。
+你可以在 [Google 云端硬盘](https://drive.google.com/file/d/1jLQV0YkseOVj5X0exj17x9dWQjLCP7-1/view)下载模板配置文件。
 
 1. 预置 Milvus 集群。更多信息请参见[预置 Milvus 集群](https://milvus.io/docs/v2.0.0/aws.md#provision-a-milvus-cluster)。
 
