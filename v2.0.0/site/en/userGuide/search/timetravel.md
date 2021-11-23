@@ -23,9 +23,8 @@ If you work with your own dataset in an existing Milvus instance, you can move f
 
 
 ```python
-from pymilvus import connections
+from pymilvus import connections, Collection, FieldSchema, CollectionSchema, DataType
 connections.connect("default", host='localhost', port='19530')
-from pymilvus import Collection, FieldSchema, CollectionSchema, DataType
 collection_name = "test_time_travel"
 schema = CollectionSchema([
     FieldSchema("pk", DataType.INT64, is_primary=True),
@@ -35,6 +34,8 @@ collection = Collection(collection_name, schema)
 ```
 
 ```javascript
+const { MilvusClient } =require("@zilliz/milvus2-sdk-node");
+const milvusClient = new MilvusClient("localhost:19530");
 const params = {
   collection_name: "test_time_travel",
   fields: [{
