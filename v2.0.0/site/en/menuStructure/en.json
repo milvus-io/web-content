@@ -638,11 +638,18 @@
       "order": 5
     },
     {
+      "id": "timetravel_ref.md",
+      "title": "Time Travel",
+      "label1": "reference",
+      "label2": "",
+      "order": 6
+    },
+    {
       "id": "glossary.md",
       "title": "Glossary",
       "label1": "reference",
       "label2": "",
-      "order": 6
+      "order": 7
     },
     {
       "id": "tutorials",
