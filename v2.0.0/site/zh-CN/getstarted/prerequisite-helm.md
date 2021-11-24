@@ -1,6 +1,6 @@
 ---
 id: prerequisite-helm.md
-label: Install on Kubernetes
+label: 使用 Kubernetes 安装
 order: 1
 group: prerequisite
 ---
@@ -8,7 +8,7 @@ group: prerequisite
 
 安装前请先检查你的软件及硬件设备是否满足 Milvus 安装要求。
 
-<div class="tab-wrapper"><a href="prerequisite-docker.md" class=''>Install with Docker Compose</a><a href="prerequisite-helm.md" class='active '>Install on Kubernetes</a></div>
+<div class="tab-wrapper"><a href="prerequisite-docker.md" class=''>使用 Docker Compose 安装</a><a href="prerequisite-helm.md" class='active '>使用 Kubernetes 安装</a></div>
 
 ## 检查 CPU 是否支持 SIMD 扩展指令集合：
 

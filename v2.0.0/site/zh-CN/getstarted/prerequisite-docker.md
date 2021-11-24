@@ -1,13 +1,13 @@
 ---
 id: prerequisite-docker.md
-label: Install with Docker Compose
+label: 使用 Docker Compose 安装
 order: 0
 group: prerequisite
 ---
 # 安装前提
 安装前请先检查你的软件及硬件设备是否满足 Milvus 安装要求。
 
-<div class="tab-wrapper"><a href="prerequisite-docker.md" class='active '>Install with Docker Compose</a><a href="prerequisite-helm.md" class=''>Install on Kubernetes</a></div>
+<div class="tab-wrapper"><a href="prerequisite-docker.md" class='active '>使用 Docker Compose 安装</a><a href="prerequisite-helm.md" class=''>使用 Kubernetes 安装</a></div>
 
 ## CPU 支持
 
