@@ -46,7 +46,7 @@ We do not recommend reducing the number of workers nodes dramatically. For examp
 
 ## Prerequisites
 
-Run kubectl get pods to get a list of the components and their working status in the Milvus cluster you created.
+Run `kubectl get pods` to get a list of the components and their working status in the Milvus cluster you created.
 
 ```
 NAME                                            READY   STATUS       RESTARTS   AGE
