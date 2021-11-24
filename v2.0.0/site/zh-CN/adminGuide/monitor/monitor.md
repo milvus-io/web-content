@@ -43,10 +43,11 @@ To delete a stack, run `kubectl delete --ignore-not-found=true -f manifests/ -f 
 
 ### 1. Access the dashboards
 
-You can access Prometheus via `http://localhost:9090`.
+You can access Prometheus via `http://localhost:9090`, and Grafana at `http://localhost:3000`.
 
 ```
 kubectl --namespace monitoring port-forward svc/prometheus-k8s 9090
+kubectl --namespace monitoring port-forward svc/grafana 3000
 ```
 
 ### 2. Enable ServiceMonitor
