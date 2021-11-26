@@ -2,9 +2,9 @@
 id: cli_commands.md
 summary: Interact with Milvus using commands.
 ---
-# Milvus CLI命令参考
+# Milvus CLI 命令参考
 
-Milvus 命令行接口(CLI)是一个支持数据库连接、数据操作、以及数据导入和导出的命令行工具。基于 [Milvus Python SDK](https://github.com/milvus-io/pymilvus)，它允许使用交互式命令行提示符通过终端执行命令。本文介绍了所有支持的命令及其参数，还包括了一些示例供你参考。
+Milvus 命令行接口 (CLI) 是一个支持数据库连接、数据操作、以及数据导入和导出的命令行工具。基于 [Milvus Python SDK](https://github.com/milvus-io/pymilvus)，它允许使用交互式命令行提示符通过终端执行命令。本文介绍了所有支持的命令及其参数，还包括了一些示例供你参考。
 ## calc
 
 计算两个向量数组之间的距离。
