@@ -9,11 +9,11 @@ Milvus CLI 的当前版本是0.1.8。
 
 ## 先决条件
 
-  - 安装 [Python 3.8.5](https://www.python.org/downloads/release/python-385/)或更高版本
+  - 安装 [Python 3.8.5](https://www.python.org/downloads/release/python-385/) 或更高版本
   - 安装 [pip](https://pip.pypa.io/en/stable/installation/)
 ## 安装
 
-我们建议你从 [PyPI](https://pypi.org/project/milvus-cli/)安装Milvus CLI。
+我们建议你从 [PyPI](https://pypi.org/project/milvus-cli/) 安装 Milvus CLI。
 
 ### 从 PyPI 安装
 
