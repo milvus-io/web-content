@@ -31,7 +31,7 @@ A collection schema is the logical definition of a collection. Usually you need 
 	</tr>
     <tr>
 		<td>auto_id</td>
-		<td>Whether to enable Automatic ID allocation or not</td>
+		<td>Whether to enable Automatic ID (primary key) allocation or not</td>
 		<td>Data type: Boolean (<code>true</code> or <code>false</code>).<br/>Optional</td>
 	</tr>
 	</tbody>

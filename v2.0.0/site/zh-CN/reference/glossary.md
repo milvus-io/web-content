@@ -11,7 +11,7 @@ id: glossary.md
 包含一组 field。field 与实际对象相对应。field 可以是代表对象属性的结构化数据，也可以是代表对象特征的向量。primary key 是用于指代一个 entity 的唯一值。
 
 <div class="alert note">
-你可以自定义 primary key，否则 Milvus 将会自动生成 primary key。请注意，目前 Milvus 不支持 ID 去重，因此有可能在一个 collection 内出现 ID 相同的 entity。
+你可以自定义 primary key，否则 Milvus 将会自动生成 primary key。请注意，目前 Milvus 不支持 primary key 去重，因此有可能在一个 collection 内出现 primary key 相同的 entity。
 </div>
 
 ## Field

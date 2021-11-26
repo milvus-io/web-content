@@ -737,7 +737,7 @@ Milvus 2.0 is a cloud-native vector database with storage and computation separa
 
 - Match query
 
-  Unlike the search operation, which returns similar results, the match query operation returns exact matches. Match query can be used to retrieve vectors by ID or by condition. 
+  Unlike the search operation, which returns similar results, the match query operation returns exact matches. Match query can be used to retrieve vectors by primary keys or by condition. 
 
 - Tunable consistency
 

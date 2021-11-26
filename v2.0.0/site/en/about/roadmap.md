@@ -37,10 +37,10 @@ This page provides an overview of new benefits and feature upgrades we hope to p
 | Version | Feature | Owner   | Status  | Comment |
 | ----------- | ----------- | ----------- | ----------- | ----------- |
 | 2.0.RC      | Supports scalar filtering       |        | done       |        |
-| 2.0.0-RC   | Supports for query by ID        |         | done        |         |
+| 2.0.0-RC   | Supports for query by primary key        |         | done        |         |
 | 2.0   | Supports query by expression        | fishpenguin        | in progress        |         |
-| 2.0   | Supports delete by ID        |     scsven    | in progress        |         |
-| 2.1   | Supports search by ID        |         | pending        |         |
+| 2.0   | Supports delete by primary key        |     scsven    | in progress        |         |
+| 2.1   | Supports search by primary key        |         | pending        |         |
 | 2.1   | Vector similarity search by distance        |         | pending        |         |
 | 2.2   | Supports search/query result pagination	        |         | pending        |         |
 | 2.2   | Supports upsert/primary key deduplication        |         | pending        |         |

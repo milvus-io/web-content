@@ -31,7 +31,7 @@ Collection schema 是 collection 的逻辑定义。通常你需要在定义 coll
 	</tr>
     <tr>
 		<td>auto_id</td>
-		<td>是否启用自动分配 ID</td>
+		<td>是否启用自动分配 ID (即 primary key）</td>
 		<td>数据类型：Boolean (<code>true</code> 或 <code>false</code>)。<br/>可选</td>
 	</tr>
 	</tbody>

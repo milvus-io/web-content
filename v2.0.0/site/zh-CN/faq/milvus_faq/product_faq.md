@@ -62,16 +62,16 @@ Milvus v0.9.0 及更高版本对应的 Python SDK 有连接池。连接池的连
 
 #### Milvus 允许插入重复 ID 的向量吗？
 
-允许，Milvus 不会对向量 ID （即 primary key `pk`）进行去重。
+允许，Milvus 不会对向量 ID（即 primary key）进行去重。
 
-#### 如果插入重复 `pk` 的向量，Milvus 是否会将其作为数据更新处理？
+#### 如果插入重复 ID（即 primary key）的向量，Milvus 是否会将其作为数据更新处理？
 
 目前，Milvus 的去重功能无法保证插入新数据会覆盖与其 `pk` 相同的旧数据。因此，当前版本中基于相同 `pk` 的结构化匹配的返回结果为未知行为。该限制将在未来版本中修复。
  
 
-#### Milvus 中自定义 ID 有没有长度限制？
+#### Milvus 中自定义 ID （即 primary key）有没有长度限制？
 
-Entity ID 必须是非负的 64 位整型。
+Entity ID （即 primary key）必须是非负的 64 位整型。
 
  
 
@@ -163,7 +163,7 @@ Milvus 最多支持 32768 维向量。
 
 当前版本 Milvus 暂不支持 Apple M1 CPU。
 
-#### Milvus 支持何种 ID field 数据类型？
+#### Milvus 支持何种 ID （即 primary key）field 数据类型？
 
 在当前版本中，Milvus 仅支持 INT64 数据型。未来的 2.0 正式版将会同时支持 INT64 和 string 数据型。
 
@@ -186,6 +186,10 @@ Milvus 最多支持 32768 维向量。
 #### Milvus 是否支持 Pulsar 以外的消息引擎？
 
 未来 Milvus 2.0 将支持 Kafka。
+
+#### 相似性搜索与结构性匹配有何区别？
+
+在 Milvus 中，向量相似度搜索是通过计算向量相似度以及向量索引的加速来检索向量。与搜索不同，向量结构性匹配是通过标量过滤来匹配检索向量。布尔表达式通过过滤标量 field 或 primary key field，检索并返回所有与之匹配的结果。 结构性匹配不涉及相似性计算以及向量索引。
 
 #### 仍有问题没有得到解答？
 

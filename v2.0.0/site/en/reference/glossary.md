@@ -50,7 +50,7 @@ A partition is a division of a collection. Milvus supports dividing collection d
 PChannel stands for physical channel. Each PChannel corresponds to a topic for log storage.  A group of 64 PChannels by default will be assigned to store logs that record data insertion, deletion, and update when the Milvus cluster is started.
 
 ## Schema
-Schema is the meta information that defines data type and data property. Each collection has its own collection schema that defines all the fields of a collection, automatic ID allocation enablement, and collection description. Also included in collection schemas are field schemas that defines the name, data type, and other properties of a field. 
+Schema is the meta information that defines data type and data property. Each collection has its own collection schema that defines all the fields of a collection, automatic ID (primary key) allocation enablement, and collection description. Also included in collection schemas are field schemas that defines the name, data type, and other properties of a field. 
 
 ## Segment
 A segment is a data file automatically created by Milvus for holding inserted data. A collection can have multiple segments and a segment can have multiple entities. During vector similarity search, Milvus scans each segment and returns the search results.

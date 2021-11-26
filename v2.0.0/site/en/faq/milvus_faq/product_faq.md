@@ -53,19 +53,19 @@ Python SDKs for Milvus v0.9.0 or higher have a connection pool. The number of co
 
 Yes. Insert operations and query operations are handled by two separate modules that are mutually independent. From the client’s perspective, an insert operation is complete when the inserted data enters the message queue. However, inserted data is unsearchable until it is loaded to the query node. If the segment size does not reach the index-building threshold (512 MB by default), Milvus resorts to brute-force search and query performance may be diminished.
 
-#### Can vectors with duplicate IDs be inserted into Milvus?
+#### Can vectors with duplicate primary keys be inserted into Milvus?
 
-Yes. Milvus does not check if vector IDs are duplicates.
+Yes. Milvus does not check if vector primary keys are duplicates.
 
-#### When vectors with duplicate IDs are inserted, does Milvus treat it as an update operation?
+#### When vectors with duplicate primary keys are inserted, does Milvus treat it as an update operation?
 
-No. Milvus does not currently support update operations and does not check if entity IDs are duplicates. You are responsible for ensuring entity IDs are unique, and if they aren't Milvus may contain multiple entities with duplicate IDs.
+No. Milvus does not currently support update operations and does not check if entity primary keys are duplicates. You are responsible for ensuring entity primary keys are unique, and if they aren't Milvus may contain multiple entities with duplicate primary keys.
 
 If this occurs, which data copy will return when queried remains an unknown behavior. This limitation will be fixed in future releases.
 
-#### What is the maximum length of self-defined entity IDs?
+#### What is the maximum length of self-defined entity primary keys?
 
-Entity IDs must be non-negative 64-bit integers.
+Entity primary keys must be non-negative 64-bit integers.
 
 #### What is the maximum amount of data that can be added per insert operation?
 
@@ -133,9 +133,9 @@ Milvus can manage vectors with up to 32,768 dimensions.
 
 Current Milvus release does not support Apple M1 CPU.
 
-#### What data types does Milvus support on the ID field?
+#### What data types does Milvus support on the primary key field?
 
-In current release, Milvus only support INT64 on ID field. Both INT64 and string will be supported in the formal release of Milvus 2.0.0.
+In current release, Milvus only support INT64 on primary key field. Both INT64 and string will be supported in the formal release of Milvus 2.0.0.
 
 #### Is Milvus scalable?
 
@@ -156,6 +156,10 @@ Data in MinIO is designed to remain for a certain period of time for the conveni
 #### Does Milvus support message engines other than Pulsar?
 
 Future release of Milvus 2.0 will support Kafka.
+
+#### What's the diference between a search and a query?
+
+In Milvus, a vector similarity search retrieves vectors based on similarity calculation and vector index acceleration. Unlike a vector similarity search, a vector query retrieves vectors via scalar filtering based on boolean expression. The boolean expression filters on scalar fields or the primary key field, and it retrieves all results that match the filters. In a query, neither similarity metrics nor vector index is involved.
 
 #### Still have questions?
 
