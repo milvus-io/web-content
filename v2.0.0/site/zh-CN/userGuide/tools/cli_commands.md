@@ -159,7 +159,7 @@ create alias -c (text) -a (text) [-A] [-t (float)]
 
 <h4 id="create-alias">示例 1</h4>
 
-为<code>car</code>集合创建<code>carAlias1</code>和<code>carAlias2</code>别名。
+为<code>car</code>集合创建 <code>carAlias1</code> 和 <code>carAlias2</code> 别名。
 ```shell
 milvus_cli > create alias -c car -a carAlias1 -a carAlias2
 ```
@@ -185,7 +185,7 @@ create collection -c (text) -f (text) -p (text) [-a] [-d (text)]
 |-c|--collection-name|集合的名称。|
 |-f|--schema-field|（多个）使用```<fieldName>:<dataType>:<dimOfVector/desc>``` 格式表示的字段规范。|
 |-p|--schema-primary-field|主键字段的名称。|
-|-a|--schema-auto-id|（可选）自动生成ID的开关。|
+|-a|--schema-auto-id|（可选）自动生成 ID 的开关。|
 |-d|--schema-描述|（可选）集合的描述。|
 |--help|n/a|显示用法信息。|
 
@@ -659,7 +659,7 @@ search
 <h3 id="search">示例</h3>
 <h4 id="search">示例 1</h4>
 
-根据提示输入需要的信息，在CSV文件上执行搜索。
+根据提示输入需要的信息，在 CSV 文件上执行搜索。
 ```shell
 milvus_cli > search
 
