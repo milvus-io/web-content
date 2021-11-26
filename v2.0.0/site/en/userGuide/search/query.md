@@ -18,6 +18,8 @@ The following example code demonstrates the steps prior to a query.
 
 If you work with your own dataset in an existing Milvus server, you can move forward to the next step.
 
+1.  Connect to the Milvus server. See [Manage Connection](manage_connection.md) for more instruction.
+
 <div class="multipleCode">
   <a href="?python">Python </a>
   <a href="?javascript">Node</a>
@@ -25,32 +27,33 @@ If you work with your own dataset in an existing Milvus server, you can move for
 
 
 ```python
-from pymilvus import connections, Collection, FieldSchema, CollectionSchema, DataType
+from pymilvus import connections
 connections.connect("default", host='localhost', port='19530')
+```
+
+```javascript
+const { MilvusClient } =require("@zilliz/milvus2-sdk-node");
+const milvusClient = new MilvusClient("localhost:19530");
+```
+
+2. Create a collection. See [Manage Collection](manage_collection.md) for more instruction.
+
+<div class="multipleCode">
+  <a href="?python">Python </a>
+  <a href="?javascript">Node</a>
+</div>
+
+
+```python
 schema = CollectionSchema([
     		FieldSchema("book_id", DataType.INT64, is_primary=True),
 			FieldSchema("word_count", DataType.INT64),
     		FieldSchema("book_intro", dtype=DataType.FLOAT_VECTOR, dim=2)
 		])
 collection = Collection("test_book_search", schema, using='default', shards_num=2)
-import random
-data = [
-    		[i for i in range(2000)],
-			[i for i in range(10000, 12000)],
-    		[[random.random() for _ in range(2)] for _ in range(2000)],
-		]
-collection.insert(data)
-index_params = {
-        "metric_type":"L2",
-        "index_type":"IVF_FLAT",
-        "params":{"nlist":1024}
-    }
-collection.create_index("book_intro", index_params=index_params)
 ```
 
 ```javascript
-const { MilvusClient } =require("@zilliz/milvus2-sdk-node");
-const milvusClient = new MilvusClient("localhost:19530");
 const params = {
   collection_name: "test_book_search",
   fields: [
@@ -64,7 +67,7 @@ const params = {
     },
 	{
       name: "book_id",
-      data_type: 5,   // DataType.Int64
+      data_type: 5,   //DataType.Int64
       is_primary_key: true,
       description: "",
     },
@@ -76,6 +79,27 @@ const params = {
   ],
 };
 await milvusClient.collectionManager.createCollection(params);
+```
+
+3. Insert data into the collection. See [Manage Data](manage_data.md) for more instruction.
+
+<div class="multipleCode">
+  <a href="?python">Python </a>
+  <a href="?javascript">Node</a>
+</div>
+
+
+```python
+import random
+data = [
+    		[i for i in range(2000)],
+			[i for i in range(10000, 12000)],
+    		[[random.random() for _ in range(2)] for _ in range(2000)],
+		]
+collection.insert(data)
+```
+
+```javascript
 const entities = Array.from({ length: 2000 }, (v,k) => ({
   "book_intro": Array.from({ length: 2 }, () => Math.random()),
   "book_id": k,
@@ -85,6 +109,26 @@ await milvusClient.dataManager.insert({
   collection_name: "test_book_search",
   fields_data: entities,
 });
+```
+
+4. Create an index for the vector field. See [Manage Index](manage_index.md) for more instruction.
+
+<div class="multipleCode">
+  <a href="?python">Python </a>
+  <a href="?javascript">Node</a>
+</div>
+
+
+```python
+index_params = {
+        "metric_type":"L2",
+        "index_type":"IVF_FLAT",
+        "params":{"nlist":1024}
+    }
+collection.create_index("book_intro", index_params=index_params)
+```
+
+```javascript
 const index_params = {
   metric_type: "L2",
   index_type: "IVF_FLAT",
@@ -96,6 +140,7 @@ await milvusClient.indexManager.createIndex({
   extra_params: index_params,
 });
 ```
+
 
 ## Load collection
 
