@@ -416,7 +416,7 @@
   {
         "id": "cli",
         "title": "Milvus CLI",
-        "label1": "admin_guide",
+        "label1": "tools",
         "label2": "",
         "label3": "",
         "order":0,
