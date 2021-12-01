@@ -119,7 +119,7 @@ clear
 <h3 id="connect">语法</h3>
 
 ```shell
-connect [-h (text)] [-p (int)] [-a (text)]
+connect [-h (text)] [-p (int)] [-a (text)] [-D]
 ```
 <h3 id="connect">参数</h3>
 
@@ -128,6 +128,7 @@ connect [-h (text)] [-p (int)] [-a (text)]
 |-h|--host|（可选） 主机名。默认是 "127.0.0.1"。
 |-p|--port|（可选） 端口号。默认是"19530"。|
 |-a|--alias|（可选）Milvus 链接的别名。默认是"default"。|
+|-D|--disconnect|（可选）从别名指定的 Milvus 服务器断开连接的开关。默认别名为"default"。|
 |--help|n/a|显示用法信息。|
 
 <h3 id="connect">示例</h3>
@@ -474,7 +475,7 @@ help <command>
 |version|显示 Milvus CLI 的版本信息。|
 
 ## import
-将数据导入分区。
+将本地或者远程数据导入分区。
 
 <h3 id="import">语法</h3>
 
@@ -491,7 +492,9 @@ import -c (text)[-p (text)][-t (float)] <file_path>
 |-t|--timeout|（可选）允许的远程过程调用的最大持续时间(以秒为单位)。如果不传递此参数，客户端将一直等待直到服务器响应或发生错误。|
 |--help|n/a|显示用法信息。|
 
-<h3 id="import">示例</h3>
+<h3 id="import">示例 1</h3>
+
+以导入本地 CSV 文件为例。
 
 ```shell
 milvus_cli > import -c car 'examples/import_csv/vectors.csv'
@@ -509,6 +512,32 @@ Insert successfully.
       Total collection entities:              150000
       Milvus timestamp:           428849214449254403
       --------------------------  ------------------
+```
+<h3 id="import">示例 2</h3>
+
+以导入远程 CSV 文件为例。
+
+```shell
+milvus_cli > import -c car 'https://raw.githubusercontent.com/milvus-
+io/milvus_cli/main/examples/import_csv/vectors.csv'
+
+Reading file from remote URL.
+
+Reading csv file...  [####################################]  100%
+
+Column names are ['vector', 'color', 'brand']
+
+Processed 50001 lines.
+
+Inserting ...
+
+Insert successfully.
+
+--------------------------  ------------------
+Total insert entities:                   50000
+Total collection entities:              150000
+Milvus timestamp:           428849214449254403
+--------------------------  ------------------
 ```
 
 ## list collections
