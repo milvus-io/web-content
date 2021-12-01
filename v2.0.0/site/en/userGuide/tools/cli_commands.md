@@ -132,6 +132,7 @@ connect [-h (text)] [-p (int)] [-a (text)]
 |-h|--host|(Optional) The host name. The default is "127.0.0.1".
 |-p|--port|(Optional) The port number. The default is "19530".|
 |-a|--alias|(Optional) The alias name of the Milvus link. The default is "default".|
+|-D|--disconnect|(Optional) Flag to disconnect from the Milvus server specified by an alias. The default alias is "default".|
 |--help|n/a|Displays help for using the command.|
 
 <h3 id="connect">Example</h3>
@@ -480,7 +481,7 @@ help <command>
 |version|Shows the version of Milvus CLI.|
 
 ## import
-Imports data into a partition.
+Imports local or remote data into a partition.
 
 <h3 id="import">Syntax</h3>
 
@@ -498,7 +499,8 @@ import -c (text)[-p (text)][-t (float)] <file_path>
 |--help|n/a|Displays help for using the command.|
 
 
-<h3 id="import">Example</h3>
+<h3 id="import">Example 1</h3>
+The following example imports a local CSV file.
 
 ```shell
 milvus_cli > import -c car 'examples/import_csv/vectors.csv'
@@ -518,6 +520,35 @@ Total collection entities:              150000
 Milvus timestamp:           428849214449254403
 --------------------------  ------------------
 ```
+
+<h3 id="import">Example 2</h3>
+The following example imports a remote CSV file.
+
+```shell
+milvus_cli > import -c car 'https://raw.githubusercontent.com/milvus-
+io/milvus_cli/main/examples/import_csv/vectors.csv'
+
+Reading file from remote URL.
+
+Reading csv file...  [####################################]  100%
+
+Column names are ['vector', 'color', 'brand']
+
+Processed 50001 lines.
+
+Inserting ...
+
+Insert successfully.
+
+--------------------------  ------------------
+Total insert entities:                   50000
+Total collection entities:              150000
+Milvus timestamp:           428849214449254403
+--------------------------  ------------------
+```
+
+
+
 ## list collections
 Lists all collections.
 
