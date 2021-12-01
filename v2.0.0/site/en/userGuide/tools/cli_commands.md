@@ -123,7 +123,7 @@ Connects to Milvus.
 <h3 id="connect">Syntax</h3>
 
 ```shell
-connect [-h (text)] [-p (int)] [-a (text)]
+connect [-h (text)] [-p (int)] [-a (text)] [-D]
 ```
 <h3 id="connect">Options</h3>
 
