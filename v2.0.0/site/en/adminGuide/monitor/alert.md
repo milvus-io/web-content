@@ -13,7 +13,7 @@ By creating alerts, you can receive notifications when the value of a specific m
 
 For example, you create an alert and set 80 MB as the maximum value for memory usage by Milvus components. If the actual usage exceeds the predefined number, you will receive alerts reminding you that the memory usage by Milvus component surpasses 80 MB. Upon the alert, you can then adjust the allocation of resources accordingly and timely to ensure service availability.
 
-## Scenarios for creating alerts.
+## Scenarios for creating alerts
 
 Below are some common scenarios where you need to create an alert for.
 
