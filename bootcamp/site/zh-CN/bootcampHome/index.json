@@ -54,7 +54,7 @@
       {
         "id": 7,
         "title": "推荐系统",
-        "link": "https://github.com/milvus-io/bootcamp/blob/master/solutions/recommendation_system",
+        "link": "https://github.com/milvus-io/bootcamp/blob/master/solutions/recommender_system",
         "iconType": "RECOMMENDATION",
         "desc": "结合 Milvus 与开源深度学习框架 PaddlePaddle 搭建智能电影推荐系统。"
       },
