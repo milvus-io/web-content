@@ -58,7 +58,7 @@ Most of the vector index types supported by Milvus use approximate nearest neigh
 - **IVF_SQ8**: IVF_SQ8 is a quantization-based index and is best suited for scenarios that seeks a significant reduction on disk, CPU, and GPU memory consumption as these resources are very limited.
 - **IVF_PQ**: IVF_PQ is a quantization-based index and is best suited for scenarios that seeks high query speed even at the cost of accuracy. 
 - **HNSW**: HNSQ is a graph-based index and is best suited for scenarios that has a high demand for search efficiency.
-- **ANNOY**: ANNOY is a tree based index and is best suited for scenarios that seeks a high recall rate.
+- **ANNOY**: ANNOY is a tree-based index and is best suited for scenarios that seeks a high recall rate.
 
 See [Selecting an Index Best Suited for Your Scenario](index_selection.md) for more details.
 
