@@ -54,7 +54,7 @@
       {
         "id": 7,
         "title": "Recommendation System",
-        "link": "https://github.com/milvus-io/bootcamp/blob/master/solutions/recommendation_system",
+        "link": "https://github.com/milvus-io/bootcamp/blob/master/solutions/recommender_system",
         "iconType": "RECOMMENDATION",
         "desc": "Build an AI-powered movie recommendation system using Milvus paired with PaddlePaddle’s deep learning framework."
       },
