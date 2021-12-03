@@ -493,8 +493,7 @@ $ kubectl delete mc my-release
 
 <div class="alert note">
 <li>使用默认配置删除 Milvus 实例时，不会一同删除 etcd、Pulsar、MinIO 等其他第三方组件。因此，下次安装 Milvus 实例时，可再次使用上述第三方组件。. </li>
-<li>如需同时在虚拟私有云（PVC）中删除第三方组件，详见 [配置文件](https://github.com/milvus-io/milvus-operator/blob/main/config/samples/milvuscluster_deletion.yaml).</li>
-
+<li>如需同时在虚拟私有云（PVC）中删除第三方组件，详见 <a href="https://github.com/milvus-io/milvus-operator/blob/main/config/samples/milvuscluster_deletion.yaml">配置文件</a>。</li>
 </div>
 
 
