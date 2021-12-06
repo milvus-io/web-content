@@ -18,9 +18,9 @@ The following example is based on a partition `example_partition` in the collect
 ## Create a partition
 
 <div class="multipleCode">
-
   <a href="?python">Python </a>
   <a href="?javascript">Node</a>
+  <a href="?cli">CLI</a>
 </div>
 
 
@@ -36,6 +36,11 @@ await milvusClient.partitionManager.createPartition({
   partition_name: "example_partition",
 });
 ```
+
+```cli
+create partition -c example_collection -p example_partition
+```
+
 
 <table class="language-python">
 	<thead>
@@ -79,9 +84,9 @@ await milvusClient.partitionManager.createPartition({
 ## List all partitions
 
 <div class="multipleCode">
-
   <a href="?python">Python </a>
   <a href="?javascript">Node</a>
+  <a href="?cli">CLI</a>
 </div>
 
 
@@ -97,14 +102,17 @@ await milvusClient.partitionManager.showPartitions({
 });
 ```
 
+```cli
+list partitions -c example_collection
+```
 
 
 ## Verify if a partition exist
 
 <div class="multipleCode">
-
   <a href="?python">Python </a>
   <a href="?javascript">Node</a>
+  <a href="?cli">CLI</a>
 </div>
 
 
@@ -120,6 +128,10 @@ await milvusClient.partitionManager.hasPartition({
 });
 ```
 
+```cli
+describe partition -c example_collection -p example_partition
+```
+
 
 ## Drop a partition
 
@@ -131,9 +143,9 @@ The drop operation is irreversible. Dropping a partition deletes all data within
 
 
 <div class="multipleCode">
-
   <a href="?python">Python </a>
   <a href="?javascript">Node</a>
+  <a href="?cli">CLI</a>
 </div>
 
 
@@ -147,6 +159,10 @@ await milvusClient.partitionManager.dropPartition({
   collection_name: "example_collection",
   partition_name: "example_partition",
 });
+```
+
+```cli
+delete partition -c example_collection -p example_partition
 ```
 
 ## What's next

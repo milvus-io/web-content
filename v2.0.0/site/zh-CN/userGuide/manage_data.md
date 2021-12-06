@@ -12,12 +12,12 @@ This topic describes how to insert and delete data in Milvus.
 
 First, prepare the data to insert.
 
-This topic inserts randomly generated 2,000 rows of eight-dimensional vector data as the example data. Real applications will likely use much higher dimensional vectors than this. You can prepare your own data to replace the example.
+This topic inserts randomly generated 2,000 rows of eight-dimensional vector data as the example data (Milvus CLI example uses a pre-built, remote CSV file containing similar data). Real applications will likely use much higher dimensional vectors than this. You can prepare your own data to replace the example.
 
 <div class="multipleCode">
-
   <a href="?python">Python </a>
   <a href="?javascript">Node</a>
+  <a href="?cli">CLI</a>
 </div>
 
 
@@ -33,14 +33,18 @@ const entities = Array.from({ length: 2000 }, () => ({
 }));
 ```
 
+```cli
+import -c example_collection 'https://raw.githubusercontent.com/milvus-io/milvus_cli/main/examples/user_guide/manage_data.csv'
+```
+
 Insert the data to the collection. By specifying `partition_name`, you can decide to which partition to insert the data.
 
 With the collection schema `auto_id` enabled, Milvus automatically assigns an ID (primary key value) to each inserted data.
 
 <div class="multipleCode">
-
   <a href="?python">Python </a>
   <a href="?javascript">Node</a>
+  <a href="?cli">CLI</a>
 </div>
 
 
@@ -55,6 +59,10 @@ const mr = await milvusClient.dataManager.insert({{
   collection_name: "example_collection",
   fields_data: entities,
 });
+```
+
+```cli
+# See the previous step.
 ```
 
 <table class="language-python">
@@ -105,12 +113,12 @@ const mr = await milvusClient.dataManager.insert({{
 </table>
 
 
-After the data are inserted, Milvus returns `MutationResult` as an object. You can check the value of `MutationResult`, which contains the corresponding primary keys of the inserted data.
+After the data are inserted, Milvus returns `MutationResult` as an object. You can check the value of `MutationResult`, which contains the corresponding primary keys of the inserted data. As for Milvus CLI, it automatically returns the row count of the successfully inserted data after the data is inserted.
 
 <div class="multipleCode">
-
   <a href="?python">Python </a>
   <a href="?javascript">Node</a>
+  <a href="?cli">CLI</a>
 </div>
 
 
@@ -120,6 +128,26 @@ mr.primary_keys
 
 ```javascript
 console.log(mr.IDs) 
+```
+
+```cli
+Reading file from remote URL.
+
+Reading csv file...  [####################################]  100%
+
+Column names are ['pk', 'example_field']
+
+Processed 2001 lines.
+
+Inserting ...
+
+Insert successfully.
+
+--------------------------  ------------------
+Total insert entities:                    2000
+Total collection entities:                2000
+Milvus timestamp:           425790736918318406
+--------------------------  ------------------
 ```
 
 ```
@@ -143,9 +171,9 @@ Milvus supports deleting entities by primary key specified with boolean expressi
 All CRUD operations within Milvus are executed in memory. Before deleting, load the collection that contains the entities you expect to delete to memory.
 
 <div class="multipleCode">
-
   <a href="?python">Python </a>
   <a href="?javascript">Node</a>
+  <a href="?cli">CLI</a>
 </div>
 
 
@@ -161,6 +189,9 @@ await milvusClient.collectionManager.loadCollection({
 });
 ```
 
+```cli
+load -c example_collection
+```
 
 
 Prepare the boolean expression that filters the entities to delete. See [Boolean Expression Rules](boolean.md) for more information.
@@ -168,9 +199,9 @@ Prepare the boolean expression that filters the entities to delete. See [Boolean
 The following example filters data with primary key values of `425790736918318406` and `425790736918318407`.
 
 <div class="multipleCode">
-
   <a href="?python">Python </a>
   <a href="?javascript">Node</a>
+  <a href="?cli">CLI</a>
 </div>
 
 
@@ -182,13 +213,19 @@ expr = "pk in [425790736918318406,425790736918318407]"
 const expr = "pk in [425790736918318406,425790736918318407]";
 ```
 
+```cli
+delete entities -c example_collection
+The expression to specify entities to be deleted： pk in [425790736918318406,425790736918318407]
+```
+
+
 
 Delete the entities with the boolean expression you created. By specifying `partition_name`, you can decide from which partition to delete the entities and thus save the resources.
 
 <div class="multipleCode">
-
   <a href="?python">Python </a>
   <a href="?javascript">Node</a>
+  <a href="?cli">CLI</a>
 </div>
 
 
@@ -203,6 +240,10 @@ await milvusClient.dataManager.deleteEntities({
 });
 ```
 
+```cli
+You are trying to delete the entities of collection. This action cannot be undone!
+Do you want to continue? [y/N]: y
+```
 
 <table class="language-python">
 	<thead>
@@ -240,6 +281,9 @@ const res = await collectionManager.getCollectionStatistics({
 console.log(res.data.row_count);
 ```
 
+```cli
+# Milvus CLI automatically returns the row count of the successfully deleted data.
+```
 
 ## What's next
 

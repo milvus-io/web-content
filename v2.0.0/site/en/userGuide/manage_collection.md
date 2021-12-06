@@ -28,6 +28,7 @@ First, prepare necessary parameters, including field schema, collection schema, 
 <div class="multipleCode">
   <a href="?python">Python </a>
   <a href="?javascript">Node</a>
+  <a href="?cli">CLI</a>
 </div>
 
 
@@ -119,6 +120,7 @@ Then, create a collection with the parameters you created above.
 <div class="multipleCode">
   <a href="?python">Python </a>
   <a href="?javascript">Node</a>
+  <a href="?cli">CLI</a>
 </div>
 
 
@@ -129,6 +131,10 @@ collection = Collection(name=collection_name, schema=schema, using='default', sh
 
 ```javascript
 await milvusClient.collectionManager.createCollection(params);
+```
+
+```cli
+create collection -c example_collection -f pk:INT64 -f vector:FLOAT_VECTOR:8 -p pk
 ```
 
 <table class="language-python">
@@ -158,6 +164,7 @@ await milvusClient.collectionManager.createCollection(params);
 <div class="multipleCode">
   <a href="?python">Python </a>
   <a href="?javascript">Node</a>
+  <a href="?cli">CLI</a>
 </div>
 
 
@@ -172,6 +179,9 @@ await milvusClient.collectionManager.hasCollection({
 });
 ```
 
+```cli
+describe collection -c example_collection
+```
 
 
 ## List all collections
@@ -179,6 +189,7 @@ await milvusClient.collectionManager.hasCollection({
 <div class="multipleCode">
   <a href="?python">Python </a>
   <a href="?javascript">Node</a>
+  <a href="?cli">CLI</a>
 </div>
 
 
@@ -191,11 +202,16 @@ utility.list_collections()
 await milvusClient.collectionManager.showCollections();
 ```
 
+```cli
+list collections
+```
+
 ## View collection statistics
 
 <div class="multipleCode">
   <a href="?python">Python </a>
   <a href="?javascript">Node</a>
+  <a href="?cli">CLI</a>
 </div>
 
 
@@ -209,6 +225,10 @@ collection.num_entities
 await milvusClient.collectionManager.getCollectionStatistics({  collection_name: "example_collection",});
 ```
 
+```cli
+describe collection -c example_collection
+```
+
 
 ## Load a collection
 
@@ -217,6 +237,7 @@ All CRUD operations within Milvus are executed in memory. Load the collection to
 <div class="multipleCode">
   <a href="?python">Python </a>
   <a href="?javascript">Node</a>
+  <a href="?cli">CLI</a>
 </div>
 
 
@@ -230,6 +251,10 @@ collection.load()
 await milvusClient.collectionManager.loadCollection({
   collection_name: "example_collection",
 });
+```
+
+```cli
+load -c example_collection
 ```
 
 <table class="language-python">
@@ -274,6 +299,7 @@ The drop operation is irreversible. Dropping a collection deletes all data withi
 <div class="multipleCode">
   <a href="?python">Python </a>
   <a href="?javascript">Node</a>
+  <a href="?cli">CLI</a>
 </div>
 
 
@@ -285,6 +311,10 @@ collection.drop()
 
 ```javascript
 await milvusClient.collectionManager.dropCollection({  collection_name: "example_collection",});
+```
+
+```cli
+delete collection -c example_collection
 ```
 
 ## What's next

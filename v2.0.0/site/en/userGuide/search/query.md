@@ -23,6 +23,7 @@ If you work with your own dataset in an existing Milvus server, you can move for
 <div class="multipleCode">
   <a href="?python">Python </a>
   <a href="?javascript">Node</a>
+  <a href="?cli">CLI</a>
 </div>
 
 
@@ -36,11 +37,16 @@ const { MilvusClient } =require("@zilliz/milvus2-sdk-node");
 const milvusClient = new MilvusClient("localhost:19530");
 ```
 
+```cli
+connect -h localhost -p 19530 -a default
+```
+
 2. Create a collection. See [Manage Collection](manage_collection.md) for more instruction.
 
 <div class="multipleCode">
   <a href="?python">Python </a>
   <a href="?javascript">Node</a>
+  <a href="?cli">CLI</a>
 </div>
 
 
@@ -81,11 +87,16 @@ const params = {
 await milvusClient.collectionManager.createCollection(params);
 ```
 
-3. Insert data into the collection. See [Manage Data](manage_data.md) for more instruction.
+```cli
+create collection -c test_book_search -f book_intro:FLOAT_VECTOR:2 -f book_id:INT64 book_id -f word_count:INT64 word_count -p book_id
+```
+
+3. Insert data into the collection (Milvus CLI example uses a pre-built, remote CSV file containing similar data). See [Manage Data](manage_data.md) for more instruction.
 
 <div class="multipleCode">
   <a href="?python">Python </a>
   <a href="?javascript">Node</a>
+  <a href="?cli">CLI</a>
 </div>
 
 
@@ -111,11 +122,16 @@ await milvusClient.dataManager.insert({
 });
 ```
 
+```cli
+import -c test_book_search 'https://raw.githubusercontent.com/milvus-io/milvus_cli/main/examples/user_guide/search.csv'
+```
+
 4. Create an index for the vector field. See [Manage Index](manage_index.md) for more instruction.
 
 <div class="multipleCode">
   <a href="?python">Python </a>
   <a href="?javascript">Node</a>
+  <a href="?cli">CLI</a>
 </div>
 
 
@@ -141,6 +157,22 @@ await milvusClient.indexManager.createIndex({
 });
 ```
 
+```cli
+create index
+
+Collection name (test_book_search): test_book_search
+
+The name of the field to create an index for (book_intro): book_intro
+
+Index type (FLAT, IVF_FLAT, IVF_SQ8, IVF_PQ, RNSG, HNSW, ANNOY): IVF_FLAT
+
+Index metric type (L2, IP, HAMMING, TANIMOTO): L2
+
+Index params nlist: 1024
+
+Timeout []:
+```
+
 
 ## Load collection
 
@@ -149,6 +181,7 @@ All CRUD operations within Milvus are executed in memory. Load the collection to
 <div class="multipleCode">
   <a href="?python">Python </a>
   <a href="?javascript">Node</a>
+  <a href="?cli">CLI</a>
 </div>
 
 
@@ -164,6 +197,9 @@ await milvusClient.collectionManager.loadCollection({
 });
 ```
 
+```cli
+load -c test_book_search
+```
 
 <div class="alert warning">
 In current release, volume of the data to load must be under 70% of the total memory resources of all query nodes to reserve memory resources for execution engine.
@@ -176,6 +212,7 @@ The following example filters the vectors with certain `book_id` values, and ret
 <div class="multipleCode">
   <a href="?python">Python </a>
   <a href="?javascript">Node</a>
+  <a href="?cli">CLI</a>
 </div>
 
 
@@ -189,6 +226,20 @@ const results = await milvusClient.dataManager.query({
   expr: "book_id in [2,4,6,8]",
   output_fields: ["book_id", "book_intro"],
 });
+```
+
+```cli
+query
+
+collection_name: test_book_search
+
+The query expression: book_id in [2,4,6,8]
+
+Name of partitions that contain entities(split by "," if multiple) []:
+
+A list of fields to return(split by "," if multiple) []: book_id, book_intro
+
+timeout []:
 ```
 
 <table class="language-python">
@@ -247,6 +298,7 @@ Check the returned results.
 <div class="multipleCode">
   <a href="?python">Python </a>
   <a href="?javascript">Node</a>
+  <a href="?cli">CLI</a>
 </div>
 
 
@@ -257,6 +309,10 @@ sorted_res
 
 ```javascript
 console.log(results.data)
+```
+
+```cli
+# Milvus CLI automatically returns the entities with the pre-defined output fields.
 ```
 
 ## What's next

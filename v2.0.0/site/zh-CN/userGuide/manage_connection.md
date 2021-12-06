@@ -20,9 +20,9 @@ Below example connects to a Milvus server with host as `localhost` and port as `
 Construct a Milvus connection. Ensure to connect to Milvus server before any operations.
 
 <div class="multipleCode">
-
   <a href="?python">Python </a>
   <a href="?javascript">Node</a>
+  <a href="?cli">CLI</a>
 </div>
 
 
@@ -36,6 +36,10 @@ connections.connect(alias="default", host='localhost', port='19530')
 import { MilvusClient } from "@zilliz/milvus2-sdk-node";
 const address = "localhost:19530";
 const milvusClient = new MilvusClient(address);
+```
+
+```cli
+connect -h localhost -p 19530 -a default
 ```
 
 <table class="language-python">
@@ -81,9 +85,9 @@ const milvusClient = new MilvusClient(address);
 Disconnect from a Milvus server.
 
 <div class="multipleCode">
-
   <a href="?python">Python </a>
   <a href="?javascript">Node</a>
+  <a href="?cli">CLI</a>
 </div>
 
 
@@ -94,6 +98,10 @@ connections.disconnect("default")
 
 ```javascript
 await milvusClient.closeConnection();
+```
+
+```cli
+connect -D
 ```
 
 <table class="language-python">

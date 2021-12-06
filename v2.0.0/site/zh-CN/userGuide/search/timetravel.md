@@ -17,9 +17,9 @@ The following example code demonstrates the steps prior to inserting data.
 If you work with your own dataset in an existing Milvus instance, you can move forward to the next step.
 
 <div class="multipleCode">
-
   <a href="?python">Python </a>
   <a href="?javascript">Node</a>
+  <a href="?cli">CLI</a>
 </div>
 
 
@@ -63,9 +63,9 @@ await milvusClient.collectionManager.createCollection(params);
 Insert random data to simulate the original data.
 
 <div class="multipleCode">
-
   <a href="?python">Python </a>
   <a href="?javascript">Node</a>
+  <a href="?cli">CLI</a>
 </div>
 
 
@@ -112,9 +112,9 @@ batch1.timestamp
 Insert the second batch of data to simulate the dirty data, among which a piece of data with primary key value `19` and vector value `[1.0,1.0]` is appended as the target data to search with in the following step.
 
 <div class="multipleCode">
-
   <a href="?python">Python </a>
   <a href="?javascript">Node</a>
+  <a href="?cli">CLI</a>
 </div>
 
 
@@ -151,9 +151,9 @@ const batch2 = await milvusClient.dataManager.insert({
 Load the collection and search the target data with the timestamp of the first data batch. With the timestamp specified, Milvus only retrieves the data view at the point of time the timestamp indicates.
 
 <div class="multipleCode">
-
   <a href="?python">Python </a>
   <a href="?javascript">Node</a>
+  <a href="?cli">CLI</a>
 </div>
 
 
@@ -202,9 +202,9 @@ As shown below, the target data itself and other data inserted later are not ret
 If you do not specify the timestamp or specify it with the timestamp of the second data batch, Milvus will return the results from both batches.
 
 <div class="multipleCode">
-
   <a href="?python">Python </a>
   <a href="?javascript">Node</a>
+  <a href="?cli">CLI</a>
 </div>
 
 

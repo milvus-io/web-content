@@ -23,6 +23,7 @@ If you work with your own dataset in an existing Milvus instance, you can move f
 <div class="multipleCode">
   <a href="?python">Python </a>
   <a href="?javascript">Node</a>
+  <a href="?cli">CLI</a>
 </div>
 
 
@@ -36,11 +37,16 @@ const { MilvusClient } =require("@zilliz/milvus2-sdk-node");
 const milvusClient = new MilvusClient("localhost:19530");
 ```
 
+```cli
+connect -h localhost -p 19530 -a default
+```
+
 2. Create a collection. See [Manage Collection](manage_collection.md) for more instruction.
 
 <div class="multipleCode">
   <a href="?python">Python </a>
   <a href="?javascript">Node</a>
+  <a href="?cli">CLI</a>
 </div>
 
 
@@ -81,11 +87,16 @@ const params = {
 await milvusClient.collectionManager.createCollection(params);
 ```
 
-3. Insert data into the collection. See [Manage Data](manage_data.md) for more instruction.
+```cli
+create collection -c test_book_search -f book_intro:FLOAT_VECTOR:2 -f book_id:INT64 book_id -f word_count:INT64 word_count -p book_id
+```
+
+3. Insert data into the collection (Milvus CLI example uses a pre-built, remote CSV file containing similar data). See [Manage Data](manage_data.md) for more instruction.
 
 <div class="multipleCode">
   <a href="?python">Python </a>
   <a href="?javascript">Node</a>
+  <a href="?cli">CLI</a>
 </div>
 
 
@@ -111,11 +122,16 @@ await milvusClient.dataManager.insert({
 });
 ```
 
+```cli
+import -c test_book_search 'https://raw.githubusercontent.com/milvus-io/milvus_cli/main/examples/user_guide/search.csv'
+```
+
 4. Create an index for the vector field. See [Manage Index](manage_index.md) for more instruction.
 
 <div class="multipleCode">
   <a href="?python">Python </a>
   <a href="?javascript">Node</a>
+  <a href="?cli">CLI</a>
 </div>
 
 
@@ -141,6 +157,22 @@ await milvusClient.indexManager.createIndex({
 });
 ```
 
+```cli
+create index
+
+Collection name (test_book_search): test_book_search
+
+The name of the field to create an index for (book_intro): book_intro
+
+Index type (FLAT, IVF_FLAT, IVF_SQ8, IVF_PQ, RNSG, HNSW, ANNOY): IVF_FLAT
+
+Index metric type (L2, IP, HAMMING, TANIMOTO): L2
+
+Index params nlist: 1024
+
+Timeout []:
+```
+
 
 ## Load collection
 
@@ -149,6 +181,7 @@ All CRUD operations within Milvus are executed in memory. Load the collection to
 <div class="multipleCode">
   <a href="?python">Python </a>
   <a href="?javascript">Node</a>
+  <a href="?cli">CLI</a>
 </div>
 
 
@@ -164,6 +197,10 @@ await milvusClient.collectionManager.loadCollection({
 });
 ```
 
+```cli
+load -c test_book_search
+```
+
 
 <div class="alert warning">
 In current release, volume of the data to load must be under 70% of the total memory resources of all query nodes to reserve memory resources for execution engine.
@@ -176,6 +213,7 @@ By specifying the boolean expression, you can filter the scalar field of the ent
 <div class="multipleCode">
   <a href="?python">Python </a>
   <a href="?javascript">Node</a>
+  <a href="?cli">CLI</a>
 </div>
 
 
@@ -203,6 +241,32 @@ const results = await milvusClient.dataManager.search({
   },
   vector_type: 101,    // DataType.FloatVector,
 });
+```
+
+```cli
+search
+
+Collection name (test_book_search): test_book_search
+
+The vectors of search data(the length of data is number of query (nq), the dim of every vector in data must be equal to vector field’s of collection. You can also import a csv file without headers): [[0.1, 0.2]]
+
+The vector field used to search of collection (book_intro): book_intro
+
+Metric type: L2
+
+Search parameter nprobe's value: 10
+
+The max number of returned record, also known as topk: 2
+
+The boolean expression used to filter attribute []: word_count <= 11000
+
+The names of partitions to search (split by "," if multiple) ['_default'] []: 
+
+timeout []:
+
+Guarantee Timestamp(It instructs Milvus to see all operations performed before a provided timestamp. If no such timestamp is provided, then Milvus will search all operations performed to date) [0]: 
+
+Travel Timestamp(Specify a timestamp in a search to get results based on a data view) [0]:
 ```
 
 <table class="language-python">
@@ -296,6 +360,7 @@ Check the returned results:
 <div class="multipleCode">
   <a href="?python">Python </a>
   <a href="?javascript">Node</a>
+  <a href="?cli">CLI</a>
 </div>
 
 
@@ -309,6 +374,10 @@ print(f"- Top1 hit id: {hits[0].id}, distance: {hits[0].distance}, score: {hits[
 
 ```javascript
 console.log(results.results)
+```
+
+```cli
+# Milvus CLI automatically returns the primary key values of the most similar vectors and their distances.
 ```
 ## What's next
 

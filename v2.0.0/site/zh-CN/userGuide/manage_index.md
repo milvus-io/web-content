@@ -23,9 +23,9 @@ The following example builds a 1024-cluster IVF_FLAT index with Euclidean distan
 Prepare the index parameters.
 
 <div class="multipleCode">
-
   <a href="?python">Python </a>
   <a href="?javascript">Node</a>
+  <a href="?cli">CLI</a>
 </div>
 
 
@@ -43,6 +43,22 @@ const index_params = {
   index_type: "IVF_FLAT",
   params: JSON.stringify({ nlist: 1024 }),
 };
+```
+
+```cli
+create index
+
+Collection name (example_collection): example_collection
+
+The name of the field to create an index for (example_field): example_field
+
+Index type (FLAT, IVF_FLAT, IVF_SQ8, IVF_PQ, RNSG, HNSW, ANNOY): IVF_FLAT
+
+Index metric type (L2, IP, HAMMING, TANIMOTO): L2
+
+Index params nlist: 1024
+
+Timeout []:
 ```
 
 <table class="params">
@@ -72,9 +88,9 @@ const index_params = {
 Build the index by specifying the vector field name and index parameters.
 
 <div class="multipleCode">
-
   <a href="?python">Python </a>
   <a href="?javascript">Node</a>
+  <a href="?cli">CLI</a>
 </div>
 
 
@@ -96,14 +112,17 @@ await milvusClient.indexManager.createIndex({
 });
 ```
 
+```cli
+# See the previous step.
+```
 
 
 ## View index details
 
 <div class="multipleCode">
-
   <a href="?python">Python </a>
   <a href="?javascript">Node</a>
+  <a href="?cli">CLI</a>
 </div>
 
 
@@ -123,6 +142,10 @@ await milvusClient.indexManager.describeIndex({
 });
 ```
 
+```cli
+describe index -c example_collection
+```
+
 
 ## Drop an index
 
@@ -135,9 +158,9 @@ The drop operation is irreversible. Dropping an index removes all corresponding 
 
 
 <div class="multipleCode">
-
   <a href="?python">Python </a>
   <a href="?javascript">Node</a>
+  <a href="?cli">CLI</a>
 </div>
 
 
@@ -151,6 +174,10 @@ collection.drop_index()
 await milvusClient.indexManager.dropIndex({
   collection_name: "example_collection",
 });
+```
+
+```cli
+delete index -c example_collection
 ```
 
 ## What's next
