@@ -53,7 +53,7 @@ VARCHAR will be supported in the 2.0 stable version. More string data types will
 | ----------- | ----------- |
 | Dimension      | 32,768       |
 
-## Input per remote procedure call (RPC)
+## Input and Output per RPC
 | Operation      | Limit |
 | ----------- | ----------- |
 | Insert      | 512 MB    |
@@ -66,8 +66,8 @@ In current release, data to be load must be under 70% of the total memory resour
 ## Search limits
 | Vectors      | Limit |
 | ----------- | ----------- |
-| Output per input    | 16,384       |
-| Input    | 16,384       |
+| topk   | 16,384       |
+| target input vectors    | 16,384       |
 
 <div class="alert note">
 Due to Pulsar's limits on the log transmission size (100 MB), Milvus does not support 16,384 output vectors per input vector on high-dimensional vector searches in the current version. Milvus 2.0.0-GA will support it.
