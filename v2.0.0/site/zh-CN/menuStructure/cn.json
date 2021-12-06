@@ -481,7 +481,7 @@
         "isMenu": true
       },
       {
-        "id": "insight_overview.md",
+        "id": "insight.md",
         "title": "简介",
         "label1": "tools",
         "label2": "milvus_insight",
@@ -489,12 +489,84 @@
         "order": 0
       },
       {
-        "id": "insight_install.md",
+        "id": "insight_install-docker.md",
         "title": "安装 Milvus Insight",
         "label1": "tools",
         "label2": "milvus_insight",
         "label3": "",
         "order": 1
+      },
+      {
+        "id": "insight_overview.md",
+        "title": "Insight Overview 页面",
+        "label1": "tools",
+        "label2": "milvus_insight",
+        "label3": "",
+        "order": 2
+      },
+      {
+        "id": "insight_collection.md",
+        "title": "管理 Collection",
+        "label1": "tools",
+        "label2": "milvus_insight",
+        "label3": "",
+        "order": 3
+      },
+      {
+        "id": "insight_partition.md",
+        "title": "管理 Partition",
+        "label1": "tools",
+        "label2": "milvus_insight",
+        "label3": "",
+        "order": 4
+      },
+      {
+        "id": "insight_data.md",
+        "title": "管理数据",
+        "label1": "tools",
+        "label2": "milvus_insight",
+        "label3": "",
+        "order": 5
+      },
+      {
+        "id": "insight_index.md",
+        "title": "管理索引",
+        "label1": "tools",
+        "label2": "milvus_insight",
+        "label3": "",
+        "order": 6
+      },
+      {
+        "id": "insight_query.md",
+        "title": "结构化匹配",
+        "label1": "tools",
+        "label2": "milvus_insight",
+        "label3": "",
+        "order": 7
+      },
+      {
+        "id": "insight_search.md",
+        "title": "搜索数据",
+        "label1": "tools",
+        "label2": "milvus_insight",
+        "label3": "",
+        "order": 8
+      },
+      {
+        "id": "insight_system.md",
+        "title": "系统状态",
+        "label1": "tools",
+        "label2": "milvus_insight",
+        "label3": "",
+        "order": 9
+      },
+      {
+        "id": "insight_faq.md",
+        "title": "Insight FAQ",
+        "label1": "tools",
+        "label2": "milvus_insight",
+        "label3": "",
+        "order": 10
       },
       {
         "id": "sizing",

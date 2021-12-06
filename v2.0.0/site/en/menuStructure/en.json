@@ -481,7 +481,7 @@
       "isMenu": true
     },
     {
-      "id": "insight_overview.md",
+      "id": "insight.md",
       "title": "Overview",
       "label1": "tools",
       "label2": "milvus_insight",
@@ -489,12 +489,84 @@
       "order": 0
     },
     {
-      "id": "insight_install.md",
+      "id": "insight_install-docker.md",
       "title": "Installation",
       "label1": "tools",
       "label2": "milvus_insight",
       "label3": "",
       "order": 1
+    },
+    {
+      "id": "insight_overview.md",
+      "title": "Insight Overview Page",
+      "label1": "tools",
+      "label2": "milvus_insight",
+      "label3": "",
+      "order": 2
+    },
+    {
+      "id": "insight_collection.md",
+      "title": "Manage Collections",
+      "label1": "tools",
+      "label2": "milvus_insight",
+      "label3": "",
+      "order": 3
+    },
+    {
+      "id": "insight_partition.md",
+      "title": "Manage Partitions",
+      "label1": "tools",
+      "label2": "milvus_insight",
+      "label3": "",
+      "order": 4
+    },
+    {
+      "id": "insight_data.md",
+      "title": "Manage Data",
+      "label1": "tools",
+      "label2": "milvus_insight",
+      "label3": "",
+      "order": 5
+    },
+    {
+      "id": "insight_index.md",
+      "title": "Manage Index",
+      "label1": "tools",
+      "label2": "milvus_insight",
+      "label3": "",
+      "order": 6
+    },
+    {
+      "id": "insight_query.md",
+      "title": "Query Data",
+      "label1": "tools",
+      "label2": "milvus_insight",
+      "label3": "",
+      "order": 7
+    },
+    {
+      "id": "insight_search.md",
+      "title": "Search Data",
+      "label1": "tools",
+      "label2": "milvus_insight",
+      "label3": "",
+      "order": 8
+    },
+    {
+      "id": "insight_system.md",
+      "title": "System Status",
+      "label1": "tools",
+      "label2": "milvus_insight",
+      "label3": "",
+      "order": 9
+    },
+    {
+      "id": "insight_faq.md",
+      "title": "Insight FAQ",
+      "label1": "tools",
+      "label2": "milvus_insight",
+      "label3": "",
+      "order": 10
     },
     {
       "id": "sizing",
