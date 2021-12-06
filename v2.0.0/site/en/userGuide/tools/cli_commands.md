@@ -318,7 +318,7 @@ delete partition -c (text) -p (text) [-t (float)]
 |-p|--partition|The name of the partition to be deleted.|
 |--help|n/a|Displays help for using the command.|
 
-<h3 id="delete-partition">Example</h3>s
+<h3 id="delete-partition">Example</h3>
 
 ```shell
 milvus_cli > delete partition -c car -p new_partition
