@@ -156,7 +156,3 @@ kubectl port-forward service/my-release-milvus-insight 3000
 Milvus Insight is an open-source project. All contributions are welcome. Please read our [Contribute guide](https://github.com/milvus-io/milvus-insight#-building-and-running-milvus-insight-andor-contributing-code) before making contributions.
 
 If you find a bug or want to request a new feature, please create a [GitHub Issue](https://github.com/milvus-io/milvus-insight/issues/new/choose), and make sure that the same issue has not been created by someone else.
-
-
-## What's next
-

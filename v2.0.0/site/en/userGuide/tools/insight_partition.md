@@ -17,7 +17,13 @@ Milvus creates a partition automatically after a collection is created, which ca
 3. In the **Create Partition** dialog box, enter the new partition name in the **Name** field.
 4. Click **Create** to create a partition.
 
+
+![Create Partition](../../../../assets/insight_partition1.png)
+
 If successful, the new partition appears on the **Partitions** tab page.
+
+![Create Partition](../../../../assets/insight_partition2.png)
+
 
 Choose the Default partition or the newly created partition to store imported data as needed. Release or load partitions to specify a search range.
 
@@ -27,4 +33,6 @@ Choose the Default partition or the newly created partition to store imported da
 2. Click the **Trash** icon and the **Delete Partition** dialog box appears as shown below.
 3. Type `delete` to confirm the deletion.
 4. Click **Delete** to delete the partition.
+
+![Delete Partition](../../../../assets/insight_partition3.png)
 

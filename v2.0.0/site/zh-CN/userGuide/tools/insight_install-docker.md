@@ -36,5 +36,3 @@ Milvus Insight is an open-source project. All contributions are welcome. Please 
 
 If you find a bug or want to request a new feature, please create a [GitHub Issue](https://github.com/milvus-io/milvus-insight/issues/new/choose), and make sure that the same issue has not been created by someone else.
 
-## What's next
-
