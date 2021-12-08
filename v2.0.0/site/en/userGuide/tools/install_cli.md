@@ -10,7 +10,7 @@ The current version of Milvus CLI is 0.1.8. To find your installed version and s
   - Install [Python 3.8.5](https://www.python.org/downloads/release/python-385/) or later
   - Install [pip](https://pip.pypa.io/en/stable/installation/)
 ## Install 
-You can install Milvus CLI from [PyPI](https://pypi.org/project/milvus-cli/) or source code. We recommend that you install Milvus CLI from PyPI.
+You can install Milvus CLI from [PyPI](https://pypi.org/project/milvus-cli/), source code, or an .exe file. We recommend that you install Milvus CLI from PyPI.
 
 ### Install from PyPI
 
@@ -38,3 +38,13 @@ python -m pip install --editable .
 ```
 
 Alternatively, you can install Milvus CLI from a compressed tarball (`.tar.gz` file). Download a [tarball](https://github.com/milvus-io/milvus_cli/releases) and run `python -m pip install milvus_cli-<version>.tar.gz`.
+
+### Install from an .exe file
+
+<div class="alert note"> This installation method only applies to Windows. </div>
+
+Download an .exe file from [GitHub](https://github.com/milvus-io/milvus_cli/releases) and run it to install Milvus CLI.
+If successful, `milvus_cli-<version>.exe` pops up as shown in the following figure.
+
+![Milvus CLI](../../../../assets/milvus_cli_exe.png)
+
