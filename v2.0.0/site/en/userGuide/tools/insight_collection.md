@@ -64,7 +64,7 @@ Deleting a collection is irreversible.
 
 ## View the schema of a collection
 
-1. Click the entry of the collection that you want to view the schema of, and the corresponding detail page appears.
+1. Click the name of the collection that you want to view the schema of, and the corresponding detail page appears.
 2. Click **Schema** on the detail page, which lists the information of all fields. 
 
 Attributes of a schema include:
