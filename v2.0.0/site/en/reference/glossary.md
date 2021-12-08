@@ -53,7 +53,7 @@ PChannel stands for physical channel. Each PChannel corresponds to a topic for l
 Schema is the meta information that defines data type and data property. Each collection has its own collection schema that defines all the fields of a collection, automatic ID (primary key) allocation enablement, and collection description. Also included in collection schemas are field schemas that defines the name, data type, and other properties of a field. 
 
 ## Segment
-A segment is a data file automatically created by Milvus for holding inserted data. A collection can have multiple segments and a segment can have multiple entities. During vector similarity search, Milvus scans each segment and returns the search results.
+A segment is a data file automatically created by Milvus for holding inserted data. A collection can have multiple segments and a segment can have multiple entities. During vector similarity search, Milvus scans each segment and returns the search results. A segment can be either growing or sealed. A growing segment keeps receiving the newly inserted data till it is sealed. A sealed segment no longer receives any new data, and will be flushed to the object storage, leaving new data to be inserted into a freshly created growing segment. A growing segment will be sealed either because the number of entities it holds reaches the pre-defined threshold, or because the span of "growing" status exceeds the specified limit.
 
 ## Sharding
 Sharding refers to distributing write operations to different nodes to make the most of the parallel computing potential of a Milvus cluster for writing data. By default, a single collection contains two shards. Milvus adopts a sharding method based on primary key hashing. Milvus' development roadmap includes supporting more flexible sharding methods such as random and custom sharding.
@@ -69,14 +69,8 @@ Unstructured data, including images, video, audio, and natural language, is info
 VChannel stands for logical channel. Each collection will be assigned a group of VChannels for recording data insertion, deletion, and update. VChannels are logically separated but physically share resources.
 
 
-## Vector
-A vector represents the features of unstructured data. It is usually converted by an AI or ML model. A vector comes in the form of a numeric array of high dimensions. Each vector represents an object.
-
-> Each entity can only contain one vector in the current version of Milvus.
-
-## Vector embedding
-A vector embedding is a feature abstraction of unstructured data. Mathematically speaking, a vector embedding is an array of floating-point numbers or binaries. Modern embedding techniques are used to convert unstructured data to vector embeddings. 
-
+## Embedding Vector
+An embedding vector is a feature abstraction of unstructured data, such as emails, IoT sensor data, Instagram photos, protein structures, and much more. Mathematically speaking, an embedding vector is an array of floating-point numbers or binaries. Modern embedding techniques are used to convert unstructured data to embedding vectors.
 
 ## Vector index
 A vector index is a reorganized data structure derived from raw data that can greatly accelerate the process of vector similarity search. Milvus supports several [vector index types](index_selection.md).
