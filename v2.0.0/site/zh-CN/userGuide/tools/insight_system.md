@@ -4,40 +4,38 @@ related_key: insight
 summary: Milvus Insight, an intuitive GUI for Milvus service management.
 ---
 
-# Monitor System with Insight
+# 使用 Insight 监控系统状态
 
-This topic describes how to monitor your Milvus system with Insight.
+此话题讨论如何使用 Insight 监控 Milvus 系统。
 
-## System view
+## 系统视图
 
-Click the **System View** icon on the left-side navigation pane to visit the System View page.
-
-
-![System View](../../../../assets/insight_system1.png)
+点击左侧导航面板上的**系统视图**图标进入系统视图页面。
 
 
-The System View dashboard consists of the following tiles:
-- **Disk**: Shows the usage of storage space.
-- **Memory**: Shows the usage of memory.
-- **Qps**: Shows the last 10 monitored QPS. Each node represents a time point. Hover on a node to view the QPS monitored at the time point.
-- **Latency**: Shows the last 10 monitored latency. Each node represents a time point. Hover on a node to view the latency monitored at the time point.
+![系统视图](../../../../assets/insight_system1.png)
+
+系统视图仪表盘由以下卡片组成：
+
+- **磁盘**： 展示存储空间占用情况。
+- **内存**： 展示内存占用情况。
+- **Qps**： 展示最近 10 次 QPS。每个节点代表一个时间节点。鼠标悬浮上节点可以查看时间节点上QPS详情。
+- **延迟**: 展示最近 10 次延迟。每个节点代表一个时间节点。鼠标悬浮上节点可以查看时间节点上延迟详情。
 
 
-![System View](../../../../assets/insight_system2.png)
-![System View](../../../../assets/insight_system3.png)
+![系统视图](../../../../assets/insight_system2.png)
+![系统视图](../../../../assets/insight_system3.png)
 
 
-- **Topology**: Shows the structure of your Milvus instance. Click Milvus node or a coordinator node and the corresponding information appears in the Info tile on the right.
-- **Info**: Shows the hardware, system, and configuration information of the selected node.
+- **拓扑图**： 展示当前运行 Milvus 实例系统结构。点击 Milvus 节点或者 Coordinator 节点后，右侧信息卡片会展示选中节点相关信息。
+- **信息**： 展示选中节点的硬件，系统，配置信息。
 
-## Node list view
+## 节点列表视图
 
-All nodes managed by their parent coordinator node are listed in the table. You can sort the nodes by metrics including **CPU Core Count**, **CPU Core Usage**, **Disk Usage**, and **Memory Usage**.
+所有被同一父层 Coordinator 节点下管理的子节点都将出现在列表中。子节点可以通过  **CPU 核心数**、**CPU 内核使用**、**磁盘使用**及**内存使用**衡量指标排序。
 
+![节点列表视图](../../../../assets/insight_system4.png)
 
-![Node List View](../../../../assets/insight_system4.png)
+列表右侧是一张迷你版的拓扑图展示算中节点和父层 Coordinator 节点关系。迷你拓扑图下方是相关信息卡片。
 
-
-Right to the table is a mini topology showing the selected node and its coordinator node. Under the mini topology is a tile showing relevant information.
-
-Click the down arrow to collapse rows in the table.
+点击向下箭头收起节点列表视图。

@@ -4,11 +4,11 @@ related_key: insight
 summary: Milvus Insight, an intuitive GUI for Milvus service management.
 ---
 
-# Manage Collections with Insight
+# Manage Partitions with Insight
 
-This topic describes how to manage collections with Insight.
+This topic describes how to manage partitions with Insight.
 
-Milvus creates a partition automatically after a collection is created, which cannot be deleted. A newly created collection has no entity because no data has been imported to the collection.
+Milvus creates a partition automatically after a collection is created, which cannot be deleted.
 
 ## Create a partition
 
@@ -17,15 +17,13 @@ Milvus creates a partition automatically after a collection is created, which ca
 3. In the **Create Partition** dialog box, enter the new partition name in the **Name** field.
 4. Click **Create** to create a partition.
 
-
 ![Create Partition](../../../../assets/insight_partition1.png)
 
 If successful, the new partition appears on the **Partitions** tab page.
 
 ![Create Partition](../../../../assets/insight_partition2.png)
 
-
-Choose the Default partition or the newly created partition to store imported data as needed. Release or load partitions to specify a search range.
+Choose the Default partition or the newly created partition to store imported data as needed.
 
 ## Delete a partition
 
@@ -35,4 +33,3 @@ Choose the Default partition or the newly created partition to store imported da
 4. Click **Delete** to delete the partition.
 
 ![Delete Partition](../../../../assets/insight_partition3.png)
-

@@ -4,61 +4,58 @@ related_key: insight
 summary: Milvus Insight, an intuitive GUI for Milvus service management.
 ---
 
-# Manage Data with Insight
+# 使用 Insight 管理数据
 
-This topic describes how to manage data with Insight.
+这片文章将会描述如何使用 Insight 管理数据。
 
-## Import data
+## 导入数据
 
-This example imports 20,000 rows of data. Importing data appends data instead of overwriting data.
+这个例子将导入 20,000 行数据。导入数据是追加数据，而不是覆盖数据。
 
-
-1. Click **Import Data** on the **Collection** page. The **Import Data** dialog box appears as shown below.
+1. 在 **Collection** 页面，点击 **Import Data** 按钮。如下图所示，将会出现 **Import Data** 对话框。
 
 ![Import Data](../../../../assets/insight_data1.png)
 
+2. 在 **Collection** 下拉列表框中，选择需要的 collection 来导入数据。
+3. 在 **Partition** 下拉列表框中，选择需要的 partition 来导入数据。
+4. 点击 **Choose CSV File** 选择 CSV 文件。
 
-2. Select the collection you want to import data to in the **Collection** dropdown list.
-3. Select the partition you want to import data to in the **Partition** dropdown list.
-4. Click **Choose CSV File** and choose a CSV file.
-
-<div class="alert note"> Ensure that the CSV file meets the following criteria:
+<div class="alert note">
+ 需要保证 CSV 文件符合以下条件：
 <ul>
-<li>Column names are the same as the field names specified in the schema;</li>
-<li>The file is smaller than 5MB and the row count is less than 100,000.</li>
+<li>
+列名与 collection 中 schema 的字段名完全一致。
+</li>
+<li>
+上传的 CSV 文件需要小于 150MB，以及行的总数小于 100,000。
+</li>
 </ul>
 </div>
 
-5. After a legal CSV file is selected, you can then proceed by clicking **Next**.
-
+5. 上传了一个合法的 CSV 文件以后，便可以点击 **Next**。
 
 ![Import Data](../../../../assets/insight_data2.png)
 
-
-6. On the new dialog box, you can match the field names by clicking the corresponding cells in the dropdown lists.
+6. 在新的对话框中，你可以选择在下拉列表框中选择列名。
 
 <div class="alert note">
-We recommend making the headers (column names) as the first row in your CSV file.
+我们推荐在 CSV 文件的首行设置你的列名。
 </div>
-
 
 ![Import Data](../../../../assets/insight_data3.png)
 
-7. After confirming the column names corresponding to the field names, click **Import Data** to import the CSV file into Milvus. Importing data might take a while.
+7. 在确认完列名与 collection 的字段一致后，点击 **Import Data** 将会导入 CSV 文件中的数据至 Milvus。 导入数据可能需要一段时间。
 
 ![Import Data](../../../../assets/insight_data4.png)
 
-8. If successful, the row count status updates in the Entity Count column of the collection. On the corresponding Partition tab page, the row count status updates in the Entity Count column of the  partition your imported data in. It might take a while for the entity count to update.
+8. 导入成功后，collection 的 Entity Count 列将会更新为导入数据的总数。同时在 Partition 页面，导入数据时选择的 partition 的 Entity Count 列也会相应的更新。 这个更新可能会需要一些时间。
 
 ![Import Data](../../../../assets/insight_data5.png)
 
+## 导出数据
 
-## Export Data
+1. 在 **Collection** 页面， 点击 **Data Query** 页签。进入 **Data Query** 页面， 输入你需要的 query 条件，然后点击 **Query** 就能得到符合条件的所有数据。
 
-1. Click **Data Query** on the **Collection** page. On the **Data Query** tab page, enter query conditions in the field and then click **Query** to retrieve all query results that match your query conditions.
-
-
-2. Click the **Download** icon to download the query results as a CSV file.
+2. 点击 **Download** 图标，将会下载这些数据, 作为 CSV 文件保存到本地。
 
 ![Export Data](../../../../assets/insight_data6.png)
-

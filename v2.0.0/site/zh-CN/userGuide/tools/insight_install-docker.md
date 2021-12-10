@@ -7,32 +7,34 @@ related_key: insight
 summary: Learn how to install Milvus Insight with Docker Compose to manage your Milvus service.
 ---
 
-# Install Milvus Insight
+# 安装 Insight
 
-This topic describes how to install Insight, an efficient open-source management tool for Milvus.
+这篇文章将描述如何安装 Insight - 一个开源的 MIlvus 管理工具。
 
 <div class="tab-wrapper"><a href="insight_install-docker.md" class='active '>Install with Docker Compose</a><a href="insight_install-helm.md" class=''>Install with Helm Chart</a></div>
 
-## Prerequisites
-- Milvus installed on [your local device](install_standalone-docker.md) or [cluster](install_cluster-docker.md).
-- Docker 19.03 or later
+## 先决条件
+
+- 已安装 Milvus [单机版](install_standalone-docker.md) 或者 [分布式版](install_cluster-docker.md)。
+- Docker 版本 19.03 或者更新的版本。
 
 <div class="alert note">
-Milvus Insight only supports Milvus 2.x.
+Milvus Insight 只支持 Milvus 2.x。
 </div>
 
-##  Start a Milvus Insight instance
+## 运行 Insight
 
 ```Apache
 docker run -p 8000:3000 -e HOST_URL=http://{ your machine IP }:8000 -e MILVUS_URL={your machine IP}:19530 milvusdb/milvus-insight:latest
 ```
 
-Once you start the docker, visit `http://{ your machine IP }:8000` in your browser, and click **Connect** to enter the Insight service.
+一旦你成功运行了 Insight docker, 在浏览器输入 `http://{ your machine IP }:8000`，
+然后点击 **Connect** 按钮连接 Milvus。
 
 ![Insight_install](../../../../assets/insight_install.png)
 
-## Contribution
-Milvus Insight is an open-source project. All contributions are welcome. Please read our [Contribute guide](https://github.com/milvus-io/milvus-insight#-building-and-running-milvus-insight-andor-contributing-code) before making contributions.
+## 欢迎成为贡献者
 
-If you find a bug or want to request a new feature, please create a [GitHub Issue](https://github.com/milvus-io/milvus-insight/issues/new/choose), and make sure that the same issue has not been created by someone else.
+Milvus Insight 是一个开源项目。所有人都欢迎成为贡献者。在提交代码前，可以参考[贡献导读](https://github.com/milvus-io/milvus-insight#-building-and-running-milvus-insight-andor-contributing-code)。
 
+如果你发现一个 bug 或者想添加新功能，请创建一个 [GitHub Issue](https://github.com/milvus-io/milvus-insight/issues/new/choose)，同时请确认仓库中不存在类似的 issue。

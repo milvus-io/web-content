@@ -4,36 +4,32 @@ related_key: insight
 summary: Milvus Insight, an intuitive GUI for Milvus service management.
 ---
 
-# Manage Collections with Insight
+# 使用 Insight 管理 Partitions
 
-This topic describes how to manage collections with Insight.
+这个篇文章将描述 Milvus Insight 如何管理 partition。
 
-Milvus creates a partition automatically after a collection is created, which cannot be deleted. A newly created collection has no entity because no data has been imported to the collection.
+Milvus 会在创建 collection 成功以后，自动创建一个默认的，不可删除的 partition。
 
-## Create a partition
+## 创建 partition
 
-1. Click **Partitions** tab on the **Collection** page.
-2. Click **Create Partition** on the **Partitions** tab page, and the **Create Partition** dialog box appears as shown below.
-3. In the **Create Partition** dialog box, enter the new partition name in the **Name** field.
-4. Click **Create** to create a partition.
-
+1. 在 **Collection** 详情页面，点击 **Partitions** 页签。
+2. 在 **Partitions** 页签，点击 **Create Partition** ，如下图所示，将会出现 **Create Partition** 对话框。
+3. 在 **Create Partition** 对话框中，在 **Name** 输入框内，输入新的 partition 名称。
+4. 点击 **Create** 按钮，创建一个 partition。
 
 ![Create Partition](../../../../assets/insight_partition1.png)
 
-If successful, the new partition appears on the **Partitions** tab page.
+如果创建成功，新的 partition 会出现在 **Partitions** 页面中。
 
 ![Create Partition](../../../../assets/insight_partition2.png)
 
+这样就可以选择任意一个 partition 来存储数据。
 
-Choose the Default partition or the newly created partition to store imported data as needed. Release or load partitions to specify a search range.
+## 删除 partition
 
-## Delete a partition
-
-1. Tick the partition you want to delete.
-2. Click the **Trash** icon and the **Delete Partition** dialog box appears as shown below.
-3. Type `delete` to confirm the deletion.
-4. Click **Delete** to delete the partition.
-
+1. 选择需要删除的 partition。
+2. 点击 **Trash** 图标，如下图所示，将会出现 **Delete Partition** 对话框。
+3. 输入`delete` 确认删除操作。
+4. 点击 **Delete** 删除 partition。
 
 ![Delete Partition](../../../../assets/insight_partition3.png)
-

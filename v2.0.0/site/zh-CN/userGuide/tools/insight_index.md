@@ -4,37 +4,33 @@ related_key: insight
 summary: Milvus Insight, an intuitive GUI for Milvus service management.
 ---
 
-# Manage Index with Insight
+# 使用 Insight 管理索引
 
-This topic describes how to manage an index with Insight.
+这片文章将会描述如何使用 Insight 管理索引。
 
-## Create indexes
+## 创建索引
 
-This example builds an IVF_FLAT index with Euclidean distance as the similarity metrics and an `nlist` value of `1024`.
+这个例子将会创建 IVF_FLAT 索引，使用 Euclidean 距离作为相似性度量，以及 `nlist` 值为 `1024`。
 
-1. Click **Schema** on the **Collection** page. On the **Schema** tab page, click **CREATE INDEX** and the **Create Index** dialog box appears.
+1. 在 **Collection** 页面，点击 **Schema** 页签。 然后在 **Schema** 页面，点击 **CREATE INDEX**，将会出现 **Create Index** 对话框。
 
-2. In the **Create Index** dialog box, select **IVF_FLAT** from the **Index Type** dropdown list, select **L2** from the **Metric Type** dropdown list, and enter `1024` in the `nlist` field.
+2. 在 **Create Index** 对话框中，在 **Index Type** 下拉列表框中，选择 **IVF_FLAT**， 在 **Metric Type** 下拉列表框中，选择 **L2**，最后在 `nlist` 输入框中输入 `1024`。
 
-3. (Optional) Turn on **View Code** and the **Code View** page appears. You can check the code in Python or Node.js as you want.
+3. 你可以点击 **View Code** 开关，将会看到 **Code View** 页面。你可以在这个页面中看到相应的 Python 或者 Node.js 代码。
 
-4. Click **Create** to create the index.
+4. 点击 **Create** 创建索引。
 
-If successful, the type of the index you created appears in the **Index Type** column for the vector field.
-
+如果创建成功，你创建的索引类型将会出现在向量字段的 **Index Type** 列中。
 
 ![Create Index](../../../../assets/insight_index1.png)
 
 ![Create Index](../../../../assets/insight_index2.png)
 
+## 删除索引
 
-## Delete indexes
+1. 点击 **Index Type** 列中的 **Trash** 图标，将会出现 **Delete Index** 对话框。
+2. 输入 `delete` 来确认删除操作，然后点击 **Delete** 来删除索引。
 
-1. Click the **Trash** icon in the **Index Type** column and the **Delete Index** dialog box appears.
-2. Enter `delete` to confirm the deletion and click **Delete** to delete the indexes.
-
-If successful, **CREATE INDEX** button appears in the Index Type column.
-
+如果删除成功，**CREATE INDEX** 按钮将会出现在 **Index Type** 列中。
 
 ![Delete Index](../../../../assets/insight_index3.png)
-

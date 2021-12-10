@@ -7,94 +7,97 @@ related_key: insight
 summary: Learn how to install Milvus Insight with Helm Chart to manage your Milvus service.
 ---
 
-# Install Milvus Insight
+# 安装 Milvus Insight
 
-This topic describes how to install Insight, an efficient open-source management tool for Milvus.
+
+本文介绍如何安装 Insight 工具。Insight 是 Milvus 的高效开源管理工具。
 
 <div class="tab-wrapper"><a href="insight_install-docker.md" class=''>Install with Docker Compose</a><a href="insight_install-helm.md" class='active '>Install with Helm Chart</a></div>
 
-## Prerequisites
-- Kubernetes 1.16 or later
-- Helm 3.0.0 or later
+## 先决条件
+- Kubernetes 1.16 或更高版本
+- Helm 3.0.0 或更高版本
 
 <div class="alert note">
-Milvus Insight only supports Milvus 2.x.
+Milvus Insight 只支持 Milvus 2.x。
 </div>
 
-## Install Helm Chart for Milvus
-Helm is a Kubernetes package manager that can help you deploy Milvus quickly.
+## 为 Milvus 安装 Helm Chart
+Helm 是一个 Kubernetes 包管理器，可以帮助您快速部署 Milvus。
 
-1. Add Milvus Helm repository.
+1. 添加 Milvus Helm 存储库。
 ```
 $ helm repo add milvus https://milvus-io.github.io/milvus-helm/
 ```
 
-2. Update charts locally.
+2. 在本地更新图表。
 
 ```
 $ helm repo update
 ```
 
-## Install Insight while installing Milvus
+## 在安装 Milvus 时安装 Insight
 
-Start Milvus and Insight with Helm by specifying the release name, the chart, and the parameters that indicate the installation and service mode of Insight. This topic uses `my-release` as the release name. To use a different release name, replace `my-release` in the command.
+通过指定版本名称、图表和参数来启动 Milvus 和 Insight，这些参数表明 Insight 的安装和服务模式。本主题使用 `my-release` 作为发布名称。要使用不同的发布名称，请在命令中替换 `my-release`。
 
-Insight provides services in the following three modes among which you can select to suit your scenario. It is recommended to use Ingress mode. Port-forward mode is suggested to be used in test environment only.
+Insight 提供以下三种服务模式，您可以根据自己的场景选择其中一种。建议使用 Ingress 模式。端口转发模式建议仅在测试环境中使用。
 
-- [Ingress mode](#Ingress-mode)
-- [LoadBalancer mode](#LoadBalancer-mode)
-- [Port-forward mode](#Port-forward-mode)
+- [Ingress 模式](#Ingress-mode)
+- [LoadBalancer 模式](#LoadBalancer-mode)
+- [Port-forward 模式](#Port-forward-mode)
 
-### Ingress mode
+### Ingress 模式
 
-Ensure that you have integrated Ingress controller in your Kubernetes cluster.
 
-1. Install Milvus and Insight.
+确保在 Kubernetes 集群中集成了 Ingress 控制器。
+
+1. 安装 Milvus 和 Insight。
 
 ```
 helm install my-release milvus/milvus --set insight.enabled=true
 ```
 
-2. Check the established Ingress.
+2. 检查已建立的 Ingress。
 
 ```
 kubectl get ingress
 ```
 
-3. Check the addresses that correspond to `my-release-milvus-insight` in the returned result.
+3. 检查返回结果中对应于 `my-release-milvus-insight` 的地址。
 
 ```
 NAME                          CLASS    HOSTS                  ADDRESS                               PORTS   AGE
 my-release-milvus-insight    <none>   milvus-insight.local   10.100.32.1,10.100.32.2,10.100.32.3   80      22h
 ```
 
-4. Configure DNS on the device that requires the Insight service by mapping the path `milvus-insight.local` onto any of the addresses returned above in the system file `/etc/hosts`.
+4. 通过将路径 `milvus-insight.local` 映射到系统文件 `/etc/hosts` 中返回的任何地址，在需要 Insight 服务的设备上配置 DNS。
 
 ```
 10.100.32.1     milvus-insight.local
 ```
 
-5. Visit `http://milvus-insight.local` in your browser, and click **Connect** to enter the Insight service.
+5. 访问 `http://milvus-insight.local`，然后单击 **Connect** 进入 Insight 服务。
 
 ![Insight_install](../../../../assets/insight_install.png)
 
-### LoadBalancer mode
+### LoadBalancer 模式
 
-Ensure that you have integrated LoadBalancer in your Kubernetes cluster.
+确保在 Kubernetes 集群中集成了 LoadBalancer。
 
-1. Install Milvus and Insight.
+1. 安装 Milvus and Insight。
 
 ```
 helm install my-release milvus/milvus --set insight.enabled=true --set insight.service.type=LoadBalancer --set insight.ingress.enabled=false
 ```
 
-2. Check the Insight service.
+2. 检查 Insight 服务。
 
 ```
 kubectl get svc
 ```
 
-3. Check the external IP of the service `my-release-milvus-insight` in the returned results.
+
+3. 在返回的结果中检查服务 `my-release-milvus-insight` 的外部IP。
 
 ```
 NAME                                    TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)
@@ -118,41 +121,41 @@ my-release-pulsar-zookeeper            ClusterIP      None            <none>    
 my-release-pulsar-zookeeper-ca         ClusterIP      10.96.100.254   <none>        2888/TCP,3888/TCP,2181/TCP            117s
 ```
 
-4. Configure DNS on the device that requires the Insight service by mapping the path `my-release-milvus-insight` onto its external IP returned above in the system file `/etc/hosts`.
+   
+4. 通过将路径 `my-release-milvus-insight` 映射到系统文件 `/etc/hosts` 中返回的外部 IP 上，在需要 Insight 服务的设备上配置 DNS。
 
 ```
 10.98.0.16 my-release-milvus-insight
 ```
 
-5. Visit `http://my-release-milvus-insight:3000/connect` in your browser, and click **Connect** to enter the Insight service.
+5. 在您的浏览器中访问 `http://my-release-milvus-insight:3000/connect`，然后单击**连接**进入 Insight 服务。
 
 ![Insight_install](../../../../assets/insight_install.png)
 
-### Port-forward mode
+### Port-forward 模式
 
-1. Install Milvus and Insight.
+1. 安装 Milvus 和 Insight。
 ```
 helm install my-release milvus/milvus --set insight.enabled=true  --set insight.ingress.enabled=false
 ```
 
-2. Forward the Insight service to local port `3000`.
+2. 将 Insight 服务转发到本地端口 `3000`。
 
 ```
 kubectl port-forward service/my-release-milvus-insight 3000
 ```
 
-3. Configure DNS on the device that forwards the Insight service by mapping the path `my-release-milvus-insight` onto `127.0.0.1` in the system file `/etc/hosts`.
+3. 在转发 Insight 服务的设备上配置 DNS，将路径 `my-release-milvus-insight` 映射到系统文件 `/etc/hosts` 中的 `127.0.0.1`。
 
 ```
 127.0.01 my-release-milvus-insight
 ```
 
-4. Visit `http://my-release-milvus-insight:3000/connect` in your browser, and click **Connect** to enter the Insight service.
+4. 在您的浏览器中访问 `http://my-release-milvus-insight:3000/connect`，然后单击**连接**进入 Insight 服务。
 
 ![Insight_install](../../../../assets/insight_install.png)
 
+## 贡献
+Milvus Insight 是一个开源项目。欢迎所有贡献。投稿前请先阅读我们的[投稿指南](https://github.com/milvus-io/milvus-insight#-building-and-running-milvus-insight-andor-contributing-code)。
 
-## Contribution
-Milvus Insight is an open-source project. All contributions are welcome. Please read our [Contribute guide](https://github.com/milvus-io/milvus-insight#-building-and-running-milvus-insight-andor-contributing-code) before making contributions.
-
-If you find a bug or want to request a new feature, please create a [GitHub Issue](https://github.com/milvus-io/milvus-insight/issues/new/choose), and make sure that the same issue has not been created by someone else.
+如果你发现一个 bug 或者想请求一个新特性，请创建一个 [GitHub Issue](https://github.com/milvus-io/milvus-insight/issues/new/choose)，并确保相同的问题没有由其他人创建。
