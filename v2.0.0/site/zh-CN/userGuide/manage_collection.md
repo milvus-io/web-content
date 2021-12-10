@@ -64,6 +64,10 @@ const params = {
 };
 ```
 
+```cli
+create collection -c example_collection -f pk:INT64 -f vector:FLOAT_VECTOR:8 -p pk
+```
+
 <table class="language-python">
 	<thead>
 	<tr>
@@ -176,7 +180,7 @@ await milvusClient.collectionManager.createCollection(params);
 ```
 
 ```cli
-create collection -c example_collection -f pk:INT64 -f vector:FLOAT_VECTOR:8 -p pk
+# See the previous step.
 ```
 
 <table class="language-python">
