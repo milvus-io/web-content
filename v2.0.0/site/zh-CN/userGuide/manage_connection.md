@@ -83,9 +83,9 @@ connect -h localhost -p 19530 -a default
 <table class="language-cli">
     <thead>
         <tr>
-            <td>Option</td>
-            <td>Full name</td>
-            <td>Description</td>
+            <th>Option</th>
+            <th>Full name</th>
+            <th>Description</th>
         </tr>
     </thead>
     <tbody>

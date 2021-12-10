@@ -40,9 +40,9 @@ import -c example_collection 'https://raw.githubusercontent.com/milvus-io/milvus
 <table class="language-cli">
     <thead>
         <tr>
-            <td>Option</td>
-            <td>Full name</td>
-            <td>Description</td>
+            <th>Option</th>
+            <th>Full name</th>
+            <th>Description</th>
         </tr>
     </thead>
     <tbody>
@@ -228,9 +228,9 @@ load -c example_collection
 <table class="language-cli">
     <thead>
         <tr>
-            <td>Option</td>
-            <td>Full name</td>
-            <td>Description</td>
+            <th>Option</th>
+            <th>Full name</th>
+            <th>Description</th>
         </tr>
     </thead>
     <tbody>
@@ -280,9 +280,9 @@ The expression to specify entities to be deleted： pk in [425790736918318406,42
 <table class="language-cli">
     <thead>
         <tr>
-            <td>Option</td>
-            <td>Full name</td>
-            <td>Description</td>
+            <th>Option</th>
+            <th>Full name</th>
+            <th>Description</th>
         </tr>
     </thead>
     <tbody>

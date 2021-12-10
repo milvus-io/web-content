@@ -118,9 +118,9 @@ const params = {
 <table class="language-cli">
     <thead>
         <tr>
-            <td>Option</td>
-            <td>Full name</td>
-            <td>Description</td>
+            <th>Option</th>
+            <th>Full name</th>
+            <th>Description</th>
         </tr>
     </thead>
     <tbody>
@@ -228,9 +228,9 @@ describe collection -c example_collection
 <table class="language-cli">
     <thead>
         <tr>
-            <td>Option</td>
-            <td>Full name</td>
-            <td>Description</td>
+            <th>Option</th>
+            <th>Full name</th>
+            <th>Description</th>
         </tr>
     </thead>
     <tbody>
@@ -273,9 +273,9 @@ list collections
 <table class="language-cli">
     <thead>
         <tr>
-            <td>Option</td>
-            <td>Full name</td>
-            <td>Description</td>
+            <th>Option</th>
+            <th>Full name</th>
+            <th>Description</th>
         </tr>
     </thead>
     <tbody>
@@ -382,9 +382,9 @@ load -c example_collection
 <table class="language-cli">
     <thead>
         <tr>
-            <td>Option</td>
-            <td>Full name</td>
-            <td>Description</td>
+            <th>Option</th>
+            <th>Full name</th>
+            <th>Description</th>
         </tr>
     </thead>
     <tbody>
@@ -438,9 +438,9 @@ delete collection -c example_collection
 <table class="language-cli">
     <thead>
         <tr>
-            <td>Option</td>
-            <td>Full name</td>
-            <td>Description</td>
+            <th>Option</th>
+            <th>Full name</th>
+            <th>Description</th>
         </tr>
     </thead>
     <tbody>
