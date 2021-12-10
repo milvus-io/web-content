@@ -61,7 +61,7 @@ Index params nlist: 1024
 Timeout []:
 ```
 
-<table class="params">
+<table class="language-python">
 	<thead>
 	<tr>
 		<th>Parameter</th>
@@ -82,6 +82,47 @@ Timeout []:
 		<td>Building parameter(s) specific to the index. See <a href="index_selection.md">Index Selection</a> for more information.</td>
 	</tr>
 	</tbody>
+</table>
+
+<table class="language-javascript">
+	<thead>
+	<tr>
+		<th>Parameter</th>
+		<th>Description</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td><code>metric_type</code></td>
+		<td>Type of metrics used to measure similarity of vectors. Find more options in <a href="metric.md">Simlarity Metrics</a>.</td>
+	</tr>
+	<tr>
+		<td><code>index_type</code></td>
+		<td>Type of index used to accelerate the vector search. Find more options in <a href="index_selection.md">Index Selection</a>.</td>
+	</tr>
+	<tr>
+		<td><code>params</code></td>
+		<td>Building parameter(s) specific to the index. See <a href="index_selection.md">Index Selection</a> for more information.</td>
+	</tr>
+	</tbody>
+</table>
+
+
+<table class="language-cli">
+    <thead>
+        <tr>
+            <td>Option</td>
+            <td>Full name</td>
+            <td>Description</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>--help</td>
+            <td>n/a</td>
+            <td>Displays help for using the command.</td>
+        </tr>
+    </tbody>
 </table>
 
 
@@ -146,6 +187,27 @@ await milvusClient.indexManager.describeIndex({
 describe index -c example_collection
 ```
 
+<table class="language-cli">
+    <thead>
+        <tr>
+            <td>Option</td>
+            <td>Full name</td>
+            <td>Description</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>-c</td>
+            <td>--collection-name</td>
+            <td>The name of the collection.</td>
+        </tr>
+        <tr>
+            <td>--help</td>
+            <td>n/a</td>
+            <td>Displays help for using the command.</td>
+        </tr>
+    </tbody>
+</table>
 
 ## Drop an index
 
@@ -179,6 +241,33 @@ await milvusClient.indexManager.dropIndex({
 ```cli
 delete index -c example_collection
 ```
+
+<table class="language-cli">
+    <thead>
+        <tr>
+            <td>Option</td>
+            <td>Full name</td>
+            <td>Description</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>-c</td>
+            <td>--collection-name</td>
+            <td>The name of the collection.</td>
+        </tr>
+        <tr>
+            <td>-t</td>
+            <td>--timeout</td>
+            <td>(Optional) The maximum allowed duration in seconds of an RPC call. Not passing this option indicates that the client keeps waiting until the server responds or an error occurs.</td>
+        </tr>
+        <tr>
+            <td>--help</td>
+            <td>n/a</td>
+            <td>Displays help for using the command.</td>
+        </tr>
+    </tbody>
+</table>
 
 ## What's next
 

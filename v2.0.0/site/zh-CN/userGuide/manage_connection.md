@@ -80,6 +80,43 @@ connect -h localhost -p 19530 -a default
 	</tbody>
 </table>
 
+<table class="language-cli">
+    <thead>
+        <tr>
+            <td>Option</td>
+            <td>Full name</td>
+            <td>Description</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>-h</td>
+            <td>--host</td>
+            <td>(Optional) The host name. The default is "127.0.0.1".</td>
+        </tr>
+        <tr>
+            <td>-p</td>
+            <td>--port</td>
+            <td>(Optional) The port number. The default is "19530".</td>
+        </tr>
+        <tr>
+            <td>-a</td>
+            <td>--alias</td>
+            <td>(Optional) The alias name of the Milvus link. The default is "default".</td>
+        </tr>
+        <tr>
+            <td>-D</td>
+            <td>--disconnect</td>
+            <td>(Optional) Flag to disconnect from the Milvus server specified by an alias. The default alias is "default".</td>
+        </tr>
+        <tr>
+            <td>--help</td>
+            <td>n/a</td>
+            <td>Displays help for using the command.</td>
+        </tr>
+    </tbody>
+</table>
+
 ## Disconnect from a Milvus server
 
 Disconnect from a Milvus server.

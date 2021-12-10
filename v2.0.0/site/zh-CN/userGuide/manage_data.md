@@ -37,6 +37,38 @@ const entities = Array.from({ length: 2000 }, () => ({
 import -c example_collection 'https://raw.githubusercontent.com/milvus-io/milvus_cli/main/examples/user_guide/manage_data.csv'
 ```
 
+<table class="language-cli">
+    <thead>
+        <tr>
+            <td>Option</td>
+            <td>Full name</td>
+            <td>Description</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>-c</td>
+            <td>--collection-name</td>
+            <td>The name of the collection that the data is inserted into.</td>
+        </tr>
+        <tr>
+            <td>-p</td>
+            <td>--partition</td>
+            <td>(Optional) The name of the partition that the data is inserted into. Not passing this partition option indicates choosing the "_default" partition.</td>
+        </tr>
+        <tr>
+            <td>-t</td>
+            <td>--timeout</td>
+            <td>(Optional) The maximum allowed duration in seconds of an RPC call. Not passing this option indicates that the client keeps waiting until the server responds or an error occurs.</td>
+        </tr>
+        <tr>
+            <td>--help</td>
+            <td>n/a</td>
+            <td>Displays help for using the command.</td>
+        </tr>
+    </tbody>
+</table>
+
 Insert the data to the collection. By specifying `partition_name`, you can decide to which partition to insert the data.
 
 With the collection schema `auto_id` enabled, Milvus automatically assigns an ID (primary key value) to each inserted data.
@@ -193,6 +225,33 @@ await milvusClient.collectionManager.loadCollection({
 load -c example_collection
 ```
 
+<table class="language-cli">
+    <thead>
+        <tr>
+            <td>Option</td>
+            <td>Full name</td>
+            <td>Description</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>-c</td>
+            <td>--collection-name</td>
+            <td>The name of the collection that the partition belongs to.</td>
+        </tr>
+        <tr>
+            <td>-p</td>
+            <td>--partition</td>
+            <td>(Optional/Multiple) The name of the partition.</td>
+        </tr>
+        <tr>
+            <td>--help</td>
+            <td>n/a</td>
+            <td>Displays help for using the command.</td>
+        </tr>
+    </tbody>
+</table>
+
 
 Prepare the boolean expression that filters the entities to delete. See [Boolean Expression Rules](boolean.md) for more information.
 
@@ -218,7 +277,37 @@ delete entities -c example_collection
 The expression to specify entities to be deleted： pk in [425790736918318406,425790736918318407]
 ```
 
-
+<table class="language-cli">
+    <thead>
+        <tr>
+            <td>Option</td>
+            <td>Full name</td>
+            <td>Description</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>-c</td>
+            <td>--collection-name</td>
+            <td>The name of the collection.</td>
+        </tr>
+        <tr>
+            <td>-p</td>
+            <td>--partition</td>
+            <td>(Optional) The name of the partition that the entities belong to.</td>
+        </tr>
+        <tr>
+            <td>-t</td>
+            <td>--timeout</td>
+            <td>(Optional) The maximum allowed duration in seconds of an RPC call. Not passing this option indicates that the client keeps waiting until the server responds or an error occurs.</td>
+        </tr>
+        <tr>
+            <td>--help</td>
+            <td>n/a</td>
+            <td>Displays help for using the command.</td>
+        </tr>
+    </tbody>
+</table>
 
 Delete the entities with the boolean expression you created. By specifying `partition_name`, you can decide from which partition to delete the entities and thus save the resources.
 

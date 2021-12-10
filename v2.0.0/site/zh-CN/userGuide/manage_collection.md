@@ -115,6 +115,48 @@ const params = {
 	</tbody>
 </table>
 
+<table class="language-cli">
+    <thead>
+        <tr>
+            <td>Option</td>
+            <td>Full name</td>
+            <td>Description</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>-c</td>
+            <td>--collection-name</td>
+            <td>The nam of the collection.</td>
+        </tr>
+        <tr>
+            <td>-f</td>
+            <td>--schema-field</td>
+            <td>(Multiple) The field schema in the    ```<fieldName>:<dataType>:<dimOfVector/desc>``` format.</td>
+        </tr>
+        <tr>
+            <td>-p</td>
+            <td>--schema-primary-field</td>
+            <td>The name of the primary key field.</td>
+        </tr>
+        <tr>
+            <td>-a</td>
+            <td>--schema-auto-id</td>
+            <td>(Optional) Flag to generate IDs automatically.</td>
+        </tr>
+        <tr>
+            <td>-d</td>
+            <td>--schema-description</td>
+            <td>(Optional) The description of the collection.</td>
+        </tr>
+        <tr>
+            <td>--help</td>
+            <td>n/a</td>
+            <td>Displays help for using the command.</td>
+        </tr>
+    </tbody>
+</table>
+
 Then, create a collection with the parameters you created above.
 
 <div class="multipleCode">
@@ -183,6 +225,28 @@ await milvusClient.collectionManager.hasCollection({
 describe collection -c example_collection
 ```
 
+<table class="language-cli">
+    <thead>
+        <tr>
+            <td>Option</td>
+            <td>Full name</td>
+            <td>Description</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>-c</td>
+            <td>--collection-name</td>
+            <td>The name of the collection.</td>
+        </tr>
+        <tr>
+            <td>--help</td>
+            <td>n/a</td>
+            <td>Displays help for using the command.</td>
+        </tr>
+    </tbody>
+</table>
+
 
 ## List all collections
 
@@ -205,6 +269,33 @@ await milvusClient.collectionManager.showCollections();
 ```cli
 list collections
 ```
+
+<table class="language-cli">
+    <thead>
+        <tr>
+            <td>Option</td>
+            <td>Full name</td>
+            <td>Description</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>-t</td>
+            <td>--timeout</td>
+            <td>(Optional) The maximum allowed duration in seconds of an RPC call. Not passing this option indicates that the client keeps waiting until the server responds or an error occurs.</td>
+        </tr>
+        <tr>
+            <td>-l</td>
+            <td>--show-loaded</td>
+            <td>(Optional) Shows the loaded collections only.</td>
+        </tr>
+        <tr>
+            <td>--help</td>
+            <td>n/a</td>
+            <td>Displays help for using the command.</td>
+        </tr>
+    </tbody>
+</table>
 
 ## View collection statistics
 
@@ -287,6 +378,34 @@ load -c example_collection
 	</tbody>
 </table>
 
+
+<table class="language-cli">
+    <thead>
+        <tr>
+            <td>Option</td>
+            <td>Full name</td>
+            <td>Description</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>-c</td>
+            <td>--collection-name</td>
+            <td>The name of the collection that the partition belongs to.</td>
+        </tr>
+        <tr>
+            <td>-p</td>
+            <td>--partition</td>
+            <td>(Optional/Multiple) The name of the partition.</td>
+        </tr>
+        <tr>
+            <td>--help</td>
+            <td>n/a</td>
+            <td>Displays help for using the command.</td>
+        </tr>
+    </tbody>
+</table>
+
 ## Drop a collection
 
 Remove a collection and the data within.
@@ -316,6 +435,33 @@ await milvusClient.collectionManager.dropCollection({  collection_name: "example
 ```cli
 delete collection -c example_collection
 ```
+<table class="language-cli">
+    <thead>
+        <tr>
+            <td>Option</td>
+            <td>Full name</td>
+            <td>Description</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>-c</td>
+            <td>--collection-name</td>
+            <td>The name of the collection to be deleted.</td>
+        </tr>
+        <tr>
+            <td>-t</td>
+            <td>--timeout</td>
+            <td>(Optional) The maximum allowed duration in seconds of an RPC call. Not passing this option indicates that the client keeps waiting until the server responds or an error occurs.</td>
+        </tr>
+        <tr>
+            <td>--help</td>
+            <td>n/a</td>
+            <td>Displays help for using the command.</td>
+        </tr>
+    </tbody>
+</table>
+
 
 ## What's next
 
