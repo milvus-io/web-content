@@ -18,7 +18,7 @@ id: milvusdm.md
 
 开发者使用 MilvusDM 可以提升数据管理效率，降低运维成本。
 
-![milvusdm blog 1.png](https://zillizstorage.blob.core.windows.net/zilliz-assets/zilliz-assets/assets/milvusdm_blog_1_199cbdebe7.png)
+![milvusdm blog 1.png](https://assets.zilliz.com/milvusdm_blog_1_199cbdebe7.png)
 
 ## 功能介绍
 在之前发布的文章[《Milvus 迁移升级攻略》](https://zilliz.blog.csdn.net/article/details/108525869)中，我们介绍了如何将 Milvus 数据从有网环境迁移到无网环境以及不同版本 Milvus 之间的数据迁移。数据迁移工具 MilvusDM 可以通过指定 Milvus 中的集合或分区，帮助用户更智能地迁移所需数据。MilvusDM 十分易于使用，只需要运行一句 ```pip3 install pymilvusdm``` 指令即可快速安装。此外，您还可在 [github](https://github.com/milvus-io/milvus-tools) 上获取本项目的开源代码。本文将介绍 MilvusDM 工具的使用方法：
@@ -213,7 +213,7 @@ insert_milvus.insert_data(vectors, self.dest_collection_name, self.collection_pa
 
 使用 MilvusDM 时会根据传入的 yaml 文件执行对应的任务，如下图所示：
 
-![milvusdm blog 2.png](https://zillizstorage.blob.core.windows.net/zilliz-assets/zilliz-assets/assets/milvusdm_blog_2_7824b16e5e.png)
+![milvusdm blog 2.png](https://assets.zilliz.com/milvusdm_blog_2_7824b16e5e.png)
 
 - pymilvusdm
 

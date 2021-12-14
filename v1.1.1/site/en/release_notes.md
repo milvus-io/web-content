@@ -12,7 +12,7 @@ id: release_notes.md
 
 | Milvus version | Python SDK version | Java SDK version | Go SDK version |
 | :------------- | :----------------- | :--------------- | :------------- |
-| 1.1.1         | 1.1.0             | 1.1.0            | 1.1.0          |
+| 1.1.1         | 1.1.0             | 1.1.1            | 1.1.0          |
 
 #### New Features
 

@@ -14,7 +14,7 @@ id: milvusdm.md
 
 - [Milvus to HDF5](#Milvus-to-HDF5): Saves the data in Milvus as HDF5 files.
 
-![milvusdm blog 1.png](https://zillizstorage.blob.core.windows.net/zilliz-assets/zilliz-assets/assets/milvusdm_blog_1_199cbdebe7.png)
+![milvusdm blog 1.png](https://assets.zilliz.com/milvusdm_blog_1_199cbdebe7.png)
 
 MilvusDM is hosted on Github and can be easily installed by running the command line ```pip3 install``` pymilvusdm. MilvusDM allows you to migrate data in a specific collection or partition. In the following sections, we will explain how to use each data migration type. 
 
@@ -258,7 +258,7 @@ r_vectors, r_ids, r_rows = milvusdb.read_milvus_file(self.milvus_meta, collectio
 
 The flow chart below shows how MilvusDM performs different tasks according to the YAML file it receives:
 
-![milvusdm blog 2.png](https://zillizstorage.blob.core.windows.net/zilliz-assets/zilliz-assets/assets/milvusdm_blog_2_7824b16e5e.png)
+![milvusdm blog 2.png](https://assets.zilliz.com/milvusdm_blog_2_7824b16e5e.png)
 
 MilvusDM file structure:
 
