@@ -19,7 +19,7 @@ id: release_notes.md
 		<th>Python SDK 版本</th>
 		<th>Java SDK 版本</th>
 		<th>Go SDK 版本</th>
-		<th>Node SDK 版本</th>
+		<th>Node.js SDK 版本</th>
 	</tr>
 	</thead>
 	<tbody>
@@ -173,7 +173,7 @@ Milvus 2.0.0-RC8 是 2.0.0-GA 的最后一个预览版本。在该版本中，Mi
 		<th>Python SDK 版本</th>
 		<th>Java SDK 版本</th>
 		<th>Go SDK 版本</th>
-		<th>Node SDK 版本</th>
+		<th>Node.js SDK 版本</th>
 	</tr>
 	</thead>
 	<tbody>
@@ -358,7 +358,7 @@ Milvus 2.0.0-RC7 是 2.0.0-GA 的预览版本。该版本支持 collection 别�
 		<th>Python SDK 版本</th>
 		<th>Java SDK 版本</th>
 		<th>Go SDK 版本</th>
-		<th>Node SDK 版本</th>
+		<th>Node.js SDK 版本</th>
 	</tr>
 	</thead>
 	<tbody>
@@ -421,7 +421,7 @@ Milvus 2.0.0-RC6 是 2.0.0 的预览版本。该版本支持创建 collection �
 		<th>Python SDK 版本</th>
 		<th>Java SDK 版本</th>
 		<th>Go SDK 版本</th>
-		<th>Node SDK 版本</th>
+		<th>Nodejs SDK 版本</th>
 	</tr>
 	</thead>
 	<tbody>

@@ -19,7 +19,7 @@ Release date: 2021-11-5
 		<th>Python SDK version</th>
 		<th>Java SDK version</th>
 		<th>Go SDK version</th>
-		<th>Node SDK version</th>
+		<th>Node.js SDK version</th>
 	</tr>
 	</thead>
 	<tbody>
@@ -182,7 +182,7 @@ Release date: 2021-10-11
 		<th>Python SDK version</th>
 		<th>Java SDK version</th>
 		<th>Go SDK version</th>
-		<th>Node SDK version</th>
+		<th>Node.js SDK version</th>
 	</tr>
 	</thead>
 	<tbody>
@@ -369,7 +369,7 @@ Release date: 2021-09-10
 		<th>Python SDK version</th>
 		<th>Java SDK version</th>
 		<th>Go SDK version</th>
-		<th>Node SDK version</th>
+		<th>Node.js SDK version</th>
 	</tr>
 	</thead>
 	<tbody>
@@ -431,7 +431,7 @@ Release date: 2021-08-30
 		<th>Python SDK version</th>
 		<th>Java SDK version</th>
 		<th>Go SDK version</th>
-		<th>Node SDK version</th>
+		<th>Node.js SDK version</th>
 	</tr>
 	</thead>
 	<tbody>

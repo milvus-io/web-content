@@ -38,15 +38,15 @@
         "label": "Use",
         "list": [{
             "text": "Create a Collection",
-            "link": "manage_collection.md"
+            "link": "create_collection.md"
           },
           {
             "text": "Insert Data",
-            "link": "manage_data.md"
+            "link": "insert_data.md"
           },
           {
             "text": "Build an Index",
-            "link": "manage_index.md"
+            "link": "build_index.md"
           },
           {
             "text": "Vector Similarity Search",

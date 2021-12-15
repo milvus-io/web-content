@@ -47,9 +47,9 @@ You can start by browsing the recomended contents below or using the search box 
 <div class="recomment-item">
   <p>Use</p>
 
-- [Create a Collection](manage_collection.md)
-- [Insert Data](manage_data.md)
-- [Build an Index](manage_index.md)
+- [Create a Collection](create_collection.md)
+- [Insert Data](insert_data.md)
+- [Build an Index](build_index.md)
 - [Vector Similarity Search](search.md)
 - [Query](query.md)
 </div>
@@ -86,7 +86,7 @@ _Nov 2021_
 - Added guidance on installation a Milvus cluster on Kubernetes with [Milvus Operator](install_cluster-milvusoperator.md).
 - Added documentation about the newly released Milvus ecosystem tool, [Milvus CLI](cli_overview.md).  Learn what Milvus CLI is, and how to [install](install_cli.md) and [use](cli_commands.md) it.
 - Added the [installation guide](milvusdm_install.md) for MilvusDM. Learn how to install the data migration tool and import data from [Faiss](f2m.md), [HDF5 files](h2m.md), and [Milvus 1.x](m2m.md) to Milvus 2.0.
-- Reorganized topics under User Guide based on objects, such as [collections](manage_collection.md), [partitions](manage_partition.md), [indexes](manage_index.md), [data](manage_data.md), and more.
+
 
 _Oct 2021_
 

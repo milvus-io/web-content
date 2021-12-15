@@ -5,7 +5,7 @@ summary: Learn how to define a collection schema in Milvus.
 
 # Collection Schema
 
-A collection schema is the logical definition of a collection. Usually you need to define the [field schema](field_schema.md) before defining a collection schema and [creating a collection](manage_collection.md). 
+A collection schema is the logical definition of a collection. Usually you need to define the [field schema](field_schema.md) before defining a collection schema and [creating a collection](create_collection.md). 
 
 
 ## Collection schema properties

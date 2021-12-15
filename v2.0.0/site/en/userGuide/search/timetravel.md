@@ -18,7 +18,7 @@ If you work with your own dataset in an existing Milvus instance, you can move f
 
 <div class="multipleCode">
   <a href="?python">Python </a>
-  <a href="?javascript">Node</a>
+  <a href="?javascript">Node.js</a>
   <a href="?cli">CLI</a>
 </div>
 
@@ -64,7 +64,7 @@ Insert random data to simulate the original data.
 
 <div class="multipleCode">
   <a href="?python">Python </a>
-  <a href="?javascript">Node</a>
+  <a href="?javascript">Node.js</a>
   <a href="?cli">CLI</a>
 </div>
 
@@ -113,7 +113,7 @@ Insert the second batch of data to simulate the dirty data, among which a piece 
 
 <div class="multipleCode">
   <a href="?python">Python </a>
-  <a href="?javascript">Node</a>
+  <a href="?javascript">Node.js</a>
   <a href="?cli">CLI</a>
 </div>
 
@@ -152,7 +152,7 @@ Load the collection and search the target data with the timestamp of the first d
 
 <div class="multipleCode">
   <a href="?python">Python </a>
-  <a href="?javascript">Node</a>
+  <a href="?javascript">Node.js</a>
   <a href="?cli">CLI</a>
 </div>
 
@@ -203,7 +203,7 @@ If you do not specify the timestamp or specify it with the timestamp of the seco
 
 <div class="multipleCode">
   <a href="?python">Python </a>
-  <a href="?javascript">Node</a>
+  <a href="?javascript">Node.js</a>
   <a href="?cli">CLI</a>
 </div>
 

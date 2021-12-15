@@ -22,7 +22,7 @@ If you work with your own dataset in an existing Milvus instance, you can move f
 
 <div class="multipleCode">
   <a href="?python">Python </a>
-  <a href="?javascript">Node</a>
+  <a href="?javascript">Node.js</a>
   <a href="?cli">CLI</a>
 </div>
 
@@ -41,11 +41,11 @@ const milvusClient = new MilvusClient("localhost:19530");
 connect -h localhost -p 19530 -a default
 ```
 
-2. Create a collection. See [Manage Collection](manage_collection.md) for more instruction.
+2. Create a collection. See [Create a Collection](create_collection.md) for more instruction.
 
 <div class="multipleCode">
   <a href="?python">Python </a>
-  <a href="?javascript">Node</a>
+  <a href="?javascript">Node.js</a>
   <a href="?cli">CLI</a>
 </div>
 
@@ -91,11 +91,11 @@ await milvusClient.collectionManager.createCollection(params);
 create collection -c test_book_search -f book_intro:FLOAT_VECTOR:2 -f book_id:INT64 book_id -f word_count:INT64 word_count -p book_id
 ```
 
-3. Insert data into the collection (Milvus CLI example uses a pre-built, remote CSV file containing similar data). See [Manage Data](manage_data.md) for more instruction.
+3. Insert data into the collection (Milvus CLI example uses a pre-built, remote CSV file containing similar data). See [Insert Data](insert_data.md) for more instruction.
 
 <div class="multipleCode">
   <a href="?python">Python </a>
-  <a href="?javascript">Node</a>
+  <a href="?javascript">Node.js</a>
   <a href="?cli">CLI</a>
 </div>
 
@@ -126,11 +126,11 @@ await milvusClient.dataManager.insert({
 import -c test_book_search 'https://raw.githubusercontent.com/milvus-io/milvus_cli/main/examples/user_guide/search.csv'
 ```
 
-4. Create an index for the vector field. See [Manage Index](manage_index.md) for more instruction.
+4. Create an index for the vector field. See [Build Index](build_index.md) for more instruction.
 
 <div class="multipleCode">
   <a href="?python">Python </a>
-  <a href="?javascript">Node</a>
+  <a href="?javascript">Node.js</a>
   <a href="?cli">CLI</a>
 </div>
 
@@ -179,7 +179,7 @@ All CRUD operations within Milvus are executed in memory. Load the collection to
 
 <div class="multipleCode">
   <a href="?python">Python </a>
-  <a href="?javascript">Node</a>
+  <a href="?javascript">Node.js</a>
   <a href="?cli">CLI</a>
 </div>
 
@@ -211,7 +211,7 @@ Prepare the parameters that suit your search scenario. The following example def
 
 <div class="multipleCode">
   <a href="?python">Python </a>
-  <a href="?javascript">Node</a>
+  <a href="?javascript">Node.js</a>
   <a href="?cli">CLI</a>
 </div>
 
@@ -321,11 +321,11 @@ Travel Timestamp(Specify a timestamp in a search to get results based on a data 
 
 ## Conduct a vector search
 
-Search vectors with Milvus. To search in a specific [partition](manage_partition.md), specify the list of partition names. 
+Search vectors with Milvus. To search in a specific [partition](glossary.md#Partition), specify the list of partition names. 
 
 <div class="multipleCode">
   <a href="?python">Python </a>
-  <a href="?javascript">Node</a>
+  <a href="?javascript">Node.js</a>
   <a href="?cli">CLI</a>
 </div>
 
@@ -439,7 +439,7 @@ Check the primary key values of the most similar vectors and their distances.
 
 <div class="multipleCode">
   <a href="?python">Python </a>
-  <a href="?javascript">Node</a>
+  <a href="?javascript">Node.js</a>
   <a href="?cli">CLI</a>
 </div>
 
@@ -461,7 +461,7 @@ Release the collection loaded in Milvus to reduce memory consumption when the se
 
 <div class="multipleCode">
   <a href="?python">Python </a>
-  <a href="?javascript">Node</a>
+  <a href="?javascript">Node.js</a>
   <a href="?cli">CLI</a>
 </div>
 

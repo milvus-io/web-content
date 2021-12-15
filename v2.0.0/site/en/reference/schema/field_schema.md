@@ -5,7 +5,7 @@ summary: Learn how to define a field schema in Milvus.
 
 # Field Schema
 
-A field schema is the logical definition of a field. It is the first thing you need to define before defining a [collection schema](collection_schema.md) and [creating a collection](manage_collection.md). 
+A field schema is the logical definition of a field. It is the first thing you need to define before defining a [collection schema](collection_schema.md) and [creating a collection](create_collection.md). 
 
 Milvus 2.0 supports only one primary key field in a collection.
 

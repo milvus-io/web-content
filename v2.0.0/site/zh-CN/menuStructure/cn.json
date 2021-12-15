@@ -159,36 +159,128 @@
         "order": 0
       },
       {
-        "id": "manage_collection.md",
-        "title": "管理 Collection",
+        "id": "manage_collection",
+        "title": "Manage Collections",
         "label1": "userguide",
         "label2": "",
+        "label3": "",
+        "order": 1,
+        "isMenu": true
+      },
+      {
+        "id": "create_collection.md",
+        "title": "创建 Collection",
+        "label1": "userguide",
+        "label2": "manage_collection",
+        "label3": "",
+        "order": 0
+      },
+      {
+        "id": "check_collection.md",
+        "title": "查看 Collection 信息",
+        "label1": "userguide",
+        "label2": "manage_collection",
         "label3": "",
         "order": 1
       },
       {
-        "id": "manage_partition.md",
-        "title": "管理 Partition",
+        "id": "drop_collection.md",
+        "title": "删除 Collection",
         "label1": "userguide",
-        "label2": "",
+        "label2": "manage_collection",
         "label3": "",
         "order": 2
       },
       {
-        "id": "manage_data.md",
+        "id": "collection_alias.md",
+        "title": "管理 Collection 别名",
+        "label1": "userguide",
+        "label2": "manage_collection",
+        "label3": "",
+        "order": 2
+      },
+      {
+        "id": "manage_partition",
+        "title": "Manage Partitions",
+        "label1": "userguide",
+        "label2": "",
+        "label3": "",
+        "order": 2,
+        "isMenu": true
+      },
+      {
+        "id": "create_partition.md",
+        "title": "创建 Partition",
+        "label1": "userguide",
+        "label2": "manage_partition",
+        "label3": "",
+        "order": 0
+      },
+      {
+        "id": "check_partition.md",
+        "title": "查看 Partition 信息",
+        "label1": "userguide",
+        "label2": "manage_partition",
+        "label3": "",
+        "order": 1
+      },
+      {
+        "id": "drop_partition.md",
+        "title": "删除 Partition",
+        "label1": "userguide",
+        "label2": "manage_partition",
+        "label3": "",
+        "order": 2
+      },
+      {
+        "id": "manage_data",
         "title": "管理数据",
         "label1": "userguide",
         "label2": "",
         "label3": "",
-        "order": 3
+        "order": 3,
+        "isMenu": true
       },
       {
-        "id": "manage_index.md",
+        "id": "insert_data.md",
+        "title": "插入数据",
+        "label1": "userguide",
+        "label2": "manage_data",
+        "label3": "",
+        "order": 0
+      },
+      {
+        "id": "delete_data.md",
+        "title": "删除数据",
+        "label1": "userguide",
+        "label2": "manage_data",
+        "label3": "",
+        "order": 1
+      },
+      {
+        "id": "manage_index",
         "title": "管理索引",
         "label1": "userguide",
         "label2": "",
         "label3": "",
-        "order": 4
+        "order": 4,
+        "isMenu": true
+      },
+      {
+        "id": "build_index.md",
+        "title": "创建索引",
+        "label1": "userguide",
+        "label2": "manage_index",
+        "label3": "",
+        "order": 0
+      },
+      {
+        "id": "drop_index.md",
+        "title": "删除索引",
+        "label1": "userguide",
+        "label2": "manage_index",
+        "label3": "",
+        "order": 1
       },
       {
         "id": "search",

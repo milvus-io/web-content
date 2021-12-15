@@ -46,9 +46,9 @@ id: home.md
 <div class="recomment-item">
   <p>基本操作</p>
 
-- [创建 Collection](manage_collection.md)
-- [插入数据](manage_data.md)
-- [创建索引](manage_index.md)
+- [创建 Collection](create_collection.md)
+- [插入数据](insert_data.md)
+- [创建索引](build_index.md)
 - [向量搜索](search.)
 - [结构化匹配](query.md)
 </div>
@@ -84,7 +84,6 @@ _2021 年 11 月_
 - 新增安装指南：使用 [Milvus Operator](install_cluster-milvusoperator.md) 在 Kubernetes 集群上安装分布式版 Milvus。
 - Milvus 生态系统新增 CLI 工具，[点击阅读](cli_overview.md) 了解如何安装和使用 Milvus CLI。
 - 新增 [MilvusDM 安装指南](milvusdm_install.md)。了解如何安装并使用数据迁移工具 MilvusDM 将 [Faiss](f2m.md) 数据、[HDF5 文件](h2m.md) 以及 [Milvus 1.x](m2m.md) 数据导入至 Milvus 2.0。
-- 操作指南文档基于 [collection](manage_collection.md)、[partition](manage_partition.md)、[索引](manage_index.md) 和 [向量数据](manage_data.md) 等对象进行了重构。
 
 
 _2021 年 10 月_

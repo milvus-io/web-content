@@ -38,15 +38,15 @@
         "label": "基本操作",
         "list": [{
             "text": "创建 Collection",
-            "link": "manage_collection.md"
+            "link": "create_collection.md"
           },
           {
             "text": "插入数据",
-            "link": "manage_data.md"
+            "link": "insert_data.md"
           },
           {
             "text": "创建索引",
-            "link": "manage_index.md"
+            "link": "build_index.md"
           },
           {
             "text": "向量搜索",
