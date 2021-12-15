@@ -160,7 +160,7 @@
       },
       {
         "id": "manage_collection",
-        "title": "Manage Collections",
+        "title": "管理 Collection",
         "label1": "userguide",
         "label2": "",
         "label3": "",
@@ -209,7 +209,7 @@
       },
       {
         "id": "manage_partition",
-        "title": "Manage Partitions",
+        "title": "管理 Partition",
         "label1": "userguide",
         "label2": "",
         "label3": "",
