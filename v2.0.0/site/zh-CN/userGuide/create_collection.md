@@ -10,15 +10,15 @@ This topic describes how to create a collection in Milvus.
 
 A collection consists of one or more partitions. While creating a new collection, Milvus creates a default partition `_default`. See [Glossary - Collection](glossary.md#Collection) for more information.
 
-The following example is based on a two-shard collection named `example_collection` with an eight-dimensional float vector field, and an INT64, `auto_id` enabled primary key field.
+The following example builds a two-[shard](glossary.md#Shard) collection named `book`, with a primary key field named `book_id`, an `INT64` scalar field named `word_count`, and a two-dimensional floating point vector field named `book_intro`. Real applications will likely use much higher dimensional vectors than the example.
 
 
 ## Prepare Schema
 
 <div class="alert note">
     <ul>
-        <li>You can create collections only after <a href="manage_connection.md">connecting to Milvus server</a>.</li>
-        <li>The collection to create must contain a primary key field. INT64 is the only supported data type for the primary key field in current release of Milvus.</li>
+        <li><a href="manage_connection.md">Connecting to Milvus server</a> before any operation.</li>
+        <li>The collection to create must contain a primary key field and a vector field. INT64 is the only supported data type for the primary key field in current release of Milvus.</li>
     </ul>
 </div>
 
@@ -34,42 +34,48 @@ First, prepare necessary parameters, including field schema, collection schema, 
 
 ```python
 from pymilvus import CollectionSchema, FieldSchema, DataType
-pk = FieldSchema(
-    name="pk", 
+book_id = FieldSchema(
+    name="book_id", 
     dtype=DataType.INT64, 
     is_primary=True, 
-    auto_id=True
     )
-field = FieldSchema(
-    name="example_field", 
+word_count = FieldSchema(
+    name="word_count", 
+    dtype=DataType.INT64,  
+    )
+book_intro = FieldSchema(
+    name="book_intro", 
     dtype=DataType.FLOAT_VECTOR, 
-    dim=8
+    dim=2
     )
 schema = CollectionSchema(
-    fields=[pk,field], 
-    description="example collection"
+    fields=[book_id, word_count, book_intro], 
+    description="Test book search"
     )
-collection_name = "example_collection"
+collection_name = "book"
 ```
 
 ```javascript
 const params = {
-  collection_name: "example_collection",
-  description: "example collection",
+  collection_name: "book",
   fields: [
     {
-      name: "example_field",
+      name: "book_intro",
       description: "",
-      data_type: 101,     // DataType.FloatVector
+      data_type: 101,  // DataType.FloatVector
       type_params: {
-        dim: "8",
+        dim: "2",
       },
     },
-    {
-      name: "pk",
-      data_type: 5,       // DataType.Int64
-      autoID: true,
+	{
+      name: "book_id",
+      data_type: 5,   //DataType.Int64
       is_primary_key: true,
+      description: "",
+    },
+    {
+      name: "word_count",
+      data_type: 5,    //DataType.Int64
       description: "",
     },
   ],
@@ -77,7 +83,7 @@ const params = {
 ```
 
 ```cli
-create collection -c example_collection -f pk:INT64 -f vector:FLOAT_VECTOR:8 -p pk
+create collection -c book -f book_id:INT64 -f word_count:INT64 -f book_intro:FLOAT_VECTOR:2 -p book_id
 ```
 
 <table class="language-python">
@@ -104,14 +110,14 @@ create collection -c example_collection -f pk:INT64 -f vector:FLOAT_VECTOR:8 -p 
             <td>Data type of the field to create.</td>
             <td>For primary key field:
                 <ul>
-                    <li><code>INT64</code> (numpy.int64)</li>
+                    <li><code>DataType.INT64</code> (numpy.int64)</li>
                 </ul>
                 For scalar field:
                 <ul>
-                    <li><code>BOOL</code> (Boolean)</li>
-                    <li><code>INT64</code> (numpy.int64)</li>
-                    <li><code>FLOAT</code> (numpy.float32)</li>
-                    <li><code>DOUBLE</code> (numpy.double)</li>
+                    <li><code>DataType.BOOL</code> (Boolean)</li>
+                    <li><code>DataType.INT64</code> (numpy.int64)</li>
+                    <li><code>DataType.FLOAT</code> (numpy.float32)</li>
+                    <li><code>DataType.DOUBLE</code> (numpy.double)</li>
                 </ul>
                 For vector field:
                 <ul>
@@ -246,7 +252,7 @@ create collection -c example_collection -f pk:INT64 -f vector:FLOAT_VECTOR:8 -p 
 
 ## Create a collection with the schema
 
-Then, create a collection with the schema you created above.
+Then, create a collection with the schema you specified above.
 
 <div class="multipleCode">
   <a href="?python">Python </a>

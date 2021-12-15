@@ -8,6 +8,10 @@ summary: Learn how to search with Time Travel in Milvus.
 
 This topic describes how to use the Time Travel feature during vector search.
 
+<div class="alert note">
+This feature is still under active development, and will be optimized with the release of Milvus 2.0.0-GA.
+</div>
+
 Milvus maintains a timeline for all data insert and delete operations. It allows users to specify a timestamp in a search to retrieve a data view at a specified point in time, without spending tremendously on maintenance for data rollback.
 
 ## Preparations

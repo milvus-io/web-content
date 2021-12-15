@@ -21,18 +21,18 @@ Dropping an index irreversibly removes all corresponding index files.
 
 ```python
 from pymilvus import collection
-collection = Collection("example_collection")      # Get an existing collection.
+collection = Collection("book")      # Get an existing collection.
 collection.drop_index()
 ```
 
 ```javascript
 await milvusClient.indexManager.dropIndex({
-  collection_name: "example_collection",
+  collection_name: "book",
 });
 ```
 
 ```cli
-delete index -c example_collection
+delete index -c book
 ```
 
 <table class="language-python">

@@ -23,18 +23,18 @@ Dropping a partition irreversibly deletes all data within it.
 
 ```python
 from pymilvus import Collection
-collection.drop_partition("example_partition")
+collection.drop_partition("novel")
 ```
 
 ```javascript
 await milvusClient.partitionManager.dropPartition({
-  collection_name: "example_collection",
-  partition_name: "example_partition",
+  collection_name: "book",
+  partition_name: "novel",
 });
 ```
 
 ```cli
-delete partition -c example_collection -p example_partition
+delete partition -c book -p novel
 ```
 
 <table class="language-python">

@@ -12,7 +12,7 @@ Milvus allows you to divide the bulk of vector data into a small number of parti
 
 A collection consists of one or more partitions. While creating a new collection, Milvus creates a default partition `_default`. See [Glossary - Partition](glossary.md#Partition) for more information.
 
-The following example builds a partition `example_partition` in the collection `example_collection`.
+The following example builds a partition `novel` in the collection `book`.
 
 
 <div class="multipleCode">
@@ -24,19 +24,19 @@ The following example builds a partition `example_partition` in the collection `
 
 ```python
 from pymilvus import Collection
-collection = Collection("example_collection")      # Get an existing collection.
-partition = collection.create_partition("example_partition")
+collection = Collection("book")      # Get an existing collection.
+collection.create_partition("novel")
 ```
 
 ```javascript
 await milvusClient.partitionManager.createPartition({
-  collection_name: "example_collection",
-  partition_name: "example_partition",
+  collection_name: "book",
+  partition_name: "novel",
 });
 ```
 
 ```cli
-create partition -c example_collection -p example_partition
+create partition -c book -p novel
 ```
 
 

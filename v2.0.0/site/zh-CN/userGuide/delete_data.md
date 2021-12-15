@@ -13,7 +13,8 @@ Milvus supports deleting entities by primary key filtered with boolean expressio
 
 <div class="alert caution">
     <ul>
-        <li>Entities deleted beyond the pre-specified span of time for Time Travel cannot be retrieved again.</li>
+        <li>This feature is still under active development, and will be optimized with the release of Milvus 2.0.0-GA.</li>
+		<li>Entities deleted beyond the pre-specified span of time for Time Travel cannot be retrieved again.</li>
         <li>Frequent deletion operations will impact the system performance.</li>
     </ul>
 </div>
@@ -31,25 +32,25 @@ All CRUD operations within Milvus are executed in memory, hence before deletion,
 
 ```python
 from pymilvus import collection
-collection = Collection("example_collection")      # Get an existing collection.
+collection = Collection("book")      # Get an existing collection.
 collection.load()
 ```
 
 ```javascript
 await milvusClient.collectionManager.loadCollection({
-  collection_name: "example_collection",
+  collection_name: "book",
 });
 ```
 
 ```cli
-load -c example_collection
+load -c book
 ```
 
 ## Prepare boolean expression
 
 Prepare the boolean expression that filters the entities to delete. See [Boolean Expression Rules](boolean.md) for more information.
 
-The following example filters data with primary key values of `425790736918318406` and `425790736918318407`.
+The following example filters data with primary key values of `0` and `1`.
 
 <div class="multipleCode">
   <a href="?python">Python </a>
@@ -59,16 +60,16 @@ The following example filters data with primary key values of `42579073691831840
 
 
 ```python
-expr = "pk in [425790736918318406,425790736918318407]"
+expr = "pk in [0,1]"
 ```
 
 ```javascript
-const expr = "pk in [425790736918318406,425790736918318407]";
+const expr = "pk in [0,1]";
 ```
 
 ```cli
-delete entities -c example_collection
-The expression to specify entities to be deleted： pk in [425790736918318406,425790736918318407]
+delete entities -c book
+The expression to specify entities to be deleted： pk in [0,1]
 ```
 
 <table class="language-cli">
@@ -105,12 +106,14 @@ By specifying `partition_name`, you can decide from which partition to delete th
 
 
 ```python
+from pymilvus import collection
+collection = Collection("book")      # Get an existing collection.
 collection.delete(expr)
 ```
 
 ```javascript
 await milvusClient.dataManager.deleteEntities({
-  collection_name: "example_collection",
+  collection_name: "book",
   expr: expr,
 });
 ```
@@ -167,13 +170,15 @@ Do you want to continue? [y/N]: y
 You can verify the delete operation by checking the number of entities after deleting.
 
 ```python
+from pymilvus import collection
+collection = Collection("book")      # Get an existing collection.
 collection.num_entities
 1998
 ```
 
 ```javascript
 const res = await collectionManager.getCollectionStatistics({
-  collection_name: "example_collection",
+  collection_name: "book",
 });
 console.log(res.data.row_count);
 ```
@@ -181,6 +186,21 @@ console.log(res.data.row_count);
 ```cli
 # Milvus CLI automatically returns the row count of the successfully deleted data.
 ```
+
+<table class="language-javascript">
+	<thead>
+	<tr>
+		<th>Parameter</th>
+		<th>Description</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td><code>collection_name</code></td>
+		<td>Name of the collection to check entities in.</td>
+	</tr>
+	</tbody>
+</table>
 
 ## What's next
 

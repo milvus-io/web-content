@@ -15,10 +15,10 @@ See [Vector Index](index.md) and [Index Selection](index_selection.md) for more 
 <div class="alert note">
 <ul>
 <li>Current release of Milvus only supports index on vector field. Future releases will support index on scalar field.</li>
-<li>By default, Milvus does not index a segment with less than 1,024 rows. To change this parameter, configure <a href="configuration_standalone-advanced.md#System-Behavior-Configurations"><code>minSegmentSizeToEnableIndex</code></a> in <code>root_coord.yaml</code>.</li>
+<li>By default, Milvus does not index a segment with less than 1,024 rows. To change this parameter, configure <a href="configuration_standalone-advanced.md#System-Behavior-Configurations"><code>minSegmentSizeToEnableIndex</code></a> in <code>milvus.yaml</code>.</li>
 </div>
 
-The following example builds a 1024-cluster IVF_FLAT index with Euclidean distance (L2) as the similarity metrics. You can choose the index and metric that suit your scenario.
+The following example builds a 1024-cluster IVF_FLAT index with Euclidean distance (L2) as the similarity metrics. You can choose the index and metrics that suit your scenario. See [Similarity Metrics](metric.md) for more information.
 
 ## Prepare index parameter
 
@@ -50,9 +50,9 @@ const index_params = {
 ```cli
 create index
 
-Collection name (example_collection): example_collection
+Collection name (book): book
 
-The name of the field to create an index for (example_field): example_field
+The name of the field to create an index for (book_intro): book_intro
 
 Index type (FLAT, IVF_FLAT, IVF_SQ8, IVF_PQ, RNSG, HNSW, ANNOY): IVF_FLAT
 
@@ -182,14 +182,12 @@ Timeout []:
     <thead>
         <tr>
             <th>Option</th>
-            <th>Full name</th>
             <th>Description</th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td>--help</td>
-            <td>n/a</td>
             <td>Displays help for using the command.</td>
         </tr>
     </tbody>
@@ -208,8 +206,11 @@ Build the index by specifying the vector field name and index parameters.
 
 ```python
 from pymilvus import collection
-collection = Collection("example_collection")      # Get an existing collection.
-collection.create_index(field_name="example_field", index_params=index_params)
+collection = Collection("book")      # Get an existing collection.
+collection.create_index(
+    field_name="book_intro", 
+    index_params=index_params
+    )
 ```
 
 ```python
@@ -218,8 +219,8 @@ Status(code=0, message='')
 
 ```javascript
 await milvusClient.indexManager.createIndex({
-  collection_name: "example_collection",
-  field_name: "example_field",
+  collection_name: "book",
+  field_name: "book_intro",
   extra_params: index_params,
 });
 ```
@@ -271,20 +272,6 @@ await milvusClient.indexManager.createIndex({
 	</tbody>
 </table>
 
-<table class="language-cli">
-    <thead>
-        <tr>
-            <th>Option</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>-c</td>
-            <td>Name of the collection to check.</td>
-        </tr>
-    </tbody>
-</table>
 
 
 ## What's next

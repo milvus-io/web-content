@@ -12,6 +12,7 @@ Milvus supports specifying a unique alias for a collection.
 A collection alias is globally unique, hence you cannot assign the same alias to different collections. However, you can assign multiple aliases to one collection.
 </div>
 
+The following example is based on the alias `publication`.
 
 ## Create a collection alias
 
@@ -26,19 +27,19 @@ Specify an an alias for a collection.
 
 ```python
 from pymilvus import Collection
-collection = Collection("example_collection")      # Get an existing collection.
-collection.create_alias("example_alias")
+collection = Collection("book")      # Get an existing collection.
+collection.create_alias("publication")
 ```
 
 ```javascript
 await milvusClient.collectionManager.createAlias({
-  collection_name: "example_collection",
-  alias: "example_alias",
+  collection_name: "book",
+  alias: "publication",
 });
 ```
 
 ```cli
-create alias -c example_collection -a example_alias
+create alias -c book -a publication
 ```
 
 <table class="language-python">
@@ -118,17 +119,17 @@ Drop a specified alias.
 
 ```python
 from pymilvus import Collection
-collection.drop_alias("example_alias")
+collection.drop_alias("publication")
 ```
 
 ```javascript
 await milvusClient.collectionManager.dropAlias({
-  alias: "example_alias",
+  alias: "publication",
 });
 ```
 
 ```cli
-delete alias -c example_collection -a example_alias
+delete alias -c book -a publication
 ```
 
 <table class="language-python">
@@ -195,19 +196,19 @@ Alter an existing alias to another collection.
 
 ```python
 from pymilvus import Collection
-collection = Collection("example_collection")      # Get an existing collection.
-collection.alter_alias("example_alias")
+collection = Collection("book")      # Get an existing collection.
+collection.alter_alias("publication")
 ```
 
 ```javascript
 await milvusClient.collectionManager.alterAlias({
-  collection_name: "example_collection",
-  alias: "example_alias",
+  collection_name: "book",
+  alias: "publication",
 });
 ```
 
 ```cli
-create alias -c example_collection -A -a example_alias
+create alias -c book -A -a publication
 ```
 
 <table class="language-python">

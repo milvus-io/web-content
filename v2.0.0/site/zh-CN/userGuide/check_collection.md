@@ -21,17 +21,17 @@ Verify if a collection exists in Milvus.
 
 ```python
 from pymilvus import utility
-utility.has_collection("example_collection")
+utility.has_collection("book")
 ```
 
 ```javascript
 await milvusClient.collectionManager.hasCollection({
-  collection_name: "example_collection",
+  collection_name: "book",
 });
 ```
 
 ```cli
-describe collection -c example_collection
+describe collection -c book
 ```
 
 <table class="language-python">
@@ -93,7 +93,7 @@ Check the details of a collection.
 
 ```python
 from pymilvus import Collection
-collection = Collection("example_collection")      # Get an existing collection.
+collection = Collection("book")      # Get an existing collection.
 
 collection.schema                                  # Return the schema.CollectionSchema of the collection.
 collection.description                             # Return the description of the collection.
@@ -107,16 +107,16 @@ collection.indexes                                 # Return the list[Index] obje
 
 ```javascript
 await milvusClient.collectionManager.describeCollection({          // Return the name and schema of the collection.
-  collection_name: "example_collection",
+  collection_name: "book",
 });
 
 await milvusClient.collectionManager.getCollectionStatistics({     // Return the statistics information of the collection.
-  collection_name: "example_collection",
+  collection_name: "book",
 });
 ```
 
 ```cli
-describe collection -c example_collection
+describe collection -c book
 ```
 
 <table class="language-javascript">

@@ -10,11 +10,11 @@ This topic describes how to insert data in Milvus via client.
 
 You can also migrate data to Milvus with [MilvusDM](migrate_overview.md), an open-source tool designed specifically for importing and exporting data with Milvus.
 
-The following example inserts randomly generated 2,000 rows of eight-dimensional vector data as the example data (Milvus CLI example uses a pre-built, remote CSV file containing similar data). Real applications will likely use much higher dimensional vectors than this. You can prepare your own data to replace the example.
+The following example inserts 2,000 rows of randomly generated data as the example data (Milvus CLI example uses a pre-built, remote CSV file containing similar data). Real applications will likely use much higher dimensional vectors than the example. You can prepare your own data to replace the example.
 
 ## Prepare data
 
-First, prepare the data to insert.
+First, prepare the data to insert.  Data type of the data to insert must match the schema of the collection, otherwise Milvus will raise exception.
 
 <div class="multipleCode">
   <a href="?python">Python </a>
@@ -25,13 +25,18 @@ First, prepare the data to insert.
 
 ```python
 import random
-vectors = [[random.random() for _ in range(8)] for _ in range(2000)]
-entities = [vectors]
+data = [
+    		[i for i in range(2000)],
+			[i for i in range(10000, 12000)],
+    		[[random.random() for _ in range(2)] for _ in range(2000)],
+		]
 ```
 
 ```javascript
-const entities = Array.from({ length: 2000 }, () => ({
-  ["example_field"]: Array.from({ length: 8 }, () => Math.random()),
+const data = Array.from({ length: 2000 }, (v,k) => ({
+  "book_id": k,
+  "word_count": k+10000,
+  "book_intro": Array.from({ length: 2 }, () => Math.random()),
 }));
 ```
 
@@ -44,9 +49,7 @@ const entities = Array.from({ length: 2000 }, () => ({
 
 Insert the data to the collection.
 
-By specifying `partition_name`, you can decide to which partition to insert the data.
-
-With the collection schema `auto_id` enabled, Milvus automatically assigns an ID (primary key value) to each inserted data.
+By specifying `partition_name`, you can optionally decide to which partition to insert the data.
 
 <div class="multipleCode">
   <a href="?python">Python </a>
@@ -57,19 +60,19 @@ With the collection schema `auto_id` enabled, Milvus automatically assigns an ID
 
 ```python
 from pymilvus import collection
-collection = Collection("example_collection")      # Get an existing collection.
-mr = collection.insert(entities)
+collection = Collection("book")      # Get an existing collection.
+mr = collection.insert(data)
 ```
 
 ```javascript
 const mr = await milvusClient.dataManager.insert({{
-  collection_name: "example_collection",
-  fields_data: entities,
+  collection_name: "book",
+  fields_data: data,
 });
 ```
 
 ```cli
-import -c example_collection 'https://raw.githubusercontent.com/milvus-io/milvus_cli/main/examples/user_guide/manage_data.csv'
+import -c book 'https://raw.githubusercontent.com/milvus-io/milvus_cli/main/examples/user_guide/search.csv'
 ```
 
 <table class="language-python">
@@ -135,7 +138,7 @@ import -c example_collection 'https://raw.githubusercontent.com/milvus-io/milvus
 </table>
 
 
-After the data are inserted, Milvus returns `MutationResult` as an object. You can check the value of `MutationResult`, which contains the corresponding primary keys of the inserted data. As for Milvus CLI, it automatically returns the row count of the successfully inserted data after the data is inserted.
+After the data are inserted, Milvus returns the `MutationResult` as an object. You can check the value of the `MutationResult`, which contains the corresponding primary keys of the inserted data. As for Milvus CLI, it automatically returns the row count of the successfully inserted data after the data is inserted.
 
 <div class="multipleCode">
   <a href="?python">Python </a>
@@ -172,9 +175,6 @@ Milvus timestamp:           425790736918318406
 --------------------------  ------------------
 ```
 
-```
-[425790736918318406, 425790736918318407, 425790736918318408, ...]
-```
 
 
 ## What's next

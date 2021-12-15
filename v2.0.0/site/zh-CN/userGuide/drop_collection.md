@@ -22,16 +22,16 @@ Dropping a collection irreversibly deletes all data within it.
 
 ```python
 from pymilvus import Collection
-collection = Collection("example_collection")      # Get an existing collection.
+collection = Collection("book")      # Get an existing collection.
 collection.drop()
 ```
 
 ```javascript
-await milvusClient.collectionManager.dropCollection({  collection_name: "example_collection",});
+await milvusClient.collectionManager.dropCollection({  collection_name: "book",});
 ```
 
 ```cli
-delete collection -c example_collection
+delete collection -c book
 ```
 
 <table class="language-javascript">

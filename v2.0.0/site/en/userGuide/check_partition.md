@@ -21,19 +21,19 @@ Verify if a partition exists in the specified collection.
 
 ```python
 from pymilvus import Collection
-collection = Collection("example_collection")      # Get an existing collection.
-collection.has_partition("example_partition")
+collection = Collection("book")      # Get an existing collection.
+collection.has_partition("novel")
 ```
 
 ```javascript
 await milvusClient.partitionManager.hasPartition({
-  collection_name: "example_collection",
-  partition_name: "example_partition",
+  collection_name: "book",
+  partition_name: "novel",
 });
 ```
 
 ```cli
-describe partition -c example_collection -p example_partition
+describe partition -c book -p novel
 ```
 
 <table class="language-python">
@@ -102,18 +102,18 @@ describe partition -c example_collection -p example_partition
 
 ```python
 from pymilvus import Collection
-collection = Collection("example_collection")      # Get an existing collection.
+collection = Collection("book")      # Get an existing collection.
 collection.partitions
 ```
 
 ```javascript
 await milvusClient.partitionManager.showPartitions({
-  collection_name: "example_collection",
+  collection_name: "book",
 });
 ```
 
 ```cli
-list partitions -c example_collection
+list partitions -c book
 ```
 
 <table class="language-javascript">

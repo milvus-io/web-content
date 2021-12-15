@@ -17,18 +17,18 @@ All CRUD operations within Milvus are executed in memory. Load the collection to
 
 ```python
 from pymilvus import Collection
-collection = Collection("example_collection")      # Get an existing collection.
+collection = Collection("book")      # Get an existing collection.
 collection.load()
 ```
 
 ```javascript
 await milvusClient.collectionManager.loadCollection({
-  collection_name: "example_collection",
+  collection_name: "book",
 });
 ```
 
 ```cli
-load -c example_collection
+load -c book
 ```
 
 <table class="language-python">
