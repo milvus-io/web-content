@@ -197,7 +197,15 @@
       "label1": "userguide",
       "label2": "manage_collection",
       "label3": "",
-      "order": 2
+      "order": 3
+    },
+    {
+      "id": "load_collection.md",
+      "title": "Load Collection",
+      "label1": "userguide",
+      "label2": "manage_collection",
+      "label3": "",
+      "order": 4
     },
     {
       "id": "manage_partition",
