@@ -35,7 +35,7 @@ Milvus 2.0 是基于消息存储构建的分布式数据库，遵循 PACELC 定�
 ![ORM_Python_SDK](../../../assets/python_orm.png)
 
 #### 丰富的周边支持：
-- **Milvus Insight** 是 Milvus 图形化管理界面，包含了集群状态可视化、元数据管理、数据查询等实用功能。Milvus Insight 源码也会作为独立项目开源，期待有更多感兴趣的人加入共同建设。
+- **Milvus Attu** 是 Milvus 图形化管理界面，包含了集群状态可视化、元数据管理、数据查询等实用功能。Milvus Attu 源码也会作为独立项目开源，期待有更多感兴趣的人加入共同建设。
 
 - **Milvus CLI** 是基于 [PyMilvus](https://github.com/milvus-io/pymilvus) 的 Milvus 命令行界面，支持连接服务器、数据操作和数据导出/导入。
 
