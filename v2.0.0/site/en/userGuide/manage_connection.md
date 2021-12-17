@@ -120,12 +120,19 @@ connect -h localhost -p 19530 -a default
 
 <div class="language-python">
 
+### Return Milvus
+
+A milvus connection created by the passed parameters.
+
+### Raises
+
 <ul>
   <li><b>NotImplementedError</b>: If handler in connection parameters is not GRPC.</li>
   <li><b>ParamError</b>: If pool in connection parameters is not supported.</li>
   <li><b>Exception</b>: If server specified in parameters is not ready, we cannot connect to server.</li>
 </ul>  
 
+### 
 </div>
 
 
@@ -167,14 +174,6 @@ connect -D
 	</tr>
 	</tbody>
 </table>
-
-<h3 class="language-python">Raises</h3>
-
-<ul class ="language-python">
-  <li><b>NotImplementedError</b>: If handler in connection parameters is not GRPC.</li>
-  <li><b>ParamError</b>: If pool in connection parameters is not supported.</li>
-  <li><b>Exception</b>: If server specified in parameters is not ready, we cannot connect to server.</li>
-</ul>  
 
 ## What's next
 
