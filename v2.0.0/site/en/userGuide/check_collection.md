@@ -119,6 +119,54 @@ await milvusClient.collectionManager.getCollectionStatistics({     // Return the
 describe collection -c book
 ```
 
+<table class="language-python">
+    <thead>
+        <tr>
+            <th>Property</th>
+            <th>Return</th>
+            <th>Exception</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>schema</td>
+            <td>The schema of the collection.</td>
+        </tr>
+        <tr>
+            <td>description</td>
+            <td>The description of the collection.</td>
+        </tr>
+        <tr>
+            <td>name</td>
+            <td>The name of the collection.</td>
+        </tr>
+        <tr>
+            <td>is_empty</td>
+            <td>A boolean value that indicates whether the collection is empty.</td>
+        </tr>
+        <tr>
+            <td>num_entities</td>
+            <td>The number of entities in the collection.</td>
+            <td><code>CollectionNotExistException</code> is raised if the collection does not exist.</td>
+        </tr>
+        <tr>
+            <td>primary_field</td>
+            <td>The primary field of the collection.</td>
+        </tr>
+        <tr>
+            <td>partitions</td>
+            <td>A list of all partitions.</td>
+            <td><code>CollectionNotExistException</code> is raised if the collection does not exist.</td>
+        </tr>
+        <tr>
+            <td>indexes</td>
+            <td>A list of all indexes.</td>
+            <td><code>CollectionNotExistException</code> is raised if the collection does not exist.</td>
+        </tr>
+    </tbody>
+</table>
+
+
 <table class="language-javascript">
 	<thead>
         <tr>
@@ -130,6 +178,29 @@ describe collection -c book
         <tr>
             <td><code>collection_name</code></td>
             <td>Name of the collection to check.</td>
+        </tr>
+	</tbody>
+</table>
+
+
+<table class="language-javascript">
+	<thead>
+        <tr>
+            <th>Property</th>
+            <th>Description</th>
+        </tr>
+	</thead>
+	<tbody>
+        <tr>
+            <td><code>status</code></td>
+            <td>{ error_code: number, reason: string }</td>
+        </tr>
+        <tr>
+            <td><code>schema</code></td>
+            <td>Information of all fields in this collection</td>
+        <tr>
+            <td><code>collectionID</code></td>
+            <td> collectionID</td>
         </tr>
 	</tbody>
 </table>
