@@ -175,6 +175,10 @@ connect -D
 	</tbody>
 </table>
 
+## Limits
+
+The maximum number of connections is 65,536.
+
 ## What's next
 
 Having connected to a Milvus server, you can:
