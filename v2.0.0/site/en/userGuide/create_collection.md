@@ -293,6 +293,14 @@ await milvusClient.collectionManager.createCollection(params);
     </tbody>
 </table>
 
+## Limits
+|Feature|Maximum limit|
+|---|---|
+|Length of a collection name|255 characters|
+|Number of partitions in a collection|4,096|
+|Number of fields in a collection|256|
+|Number of shards in a collection|256|
+
 
 ## What's next
 
