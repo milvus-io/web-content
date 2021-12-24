@@ -478,6 +478,18 @@ await milvusClient.collectionManager.releaseCollection({  collection_name: "book
 release -c book
 ```
 
+## Limits
+|Feature|Maximum limit|
+|---|---|
+|Length of a collection name|255 characters|
+|Number of partitions in a collection|4,096|
+|Number of fields in a collection|256|
+|Number of shards in a collection|256|
+|Dimensions of a vector|32,768|
+|Top K|16,384|
+|Target input vectors|16,384|
+
+
 ## What's next
 
 - Learn more basic operations of Milvus:
