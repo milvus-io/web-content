@@ -74,7 +74,7 @@ The metrics that are widely used for binary embeddings include:
 - **Hamming**: This metric is generally used in the field of natural language processing (NLP).
 - **Jaccard**: This metric is generally used in the field of molecular similarity search.
 - **Tanimoto**: This metric is generally used in the field of molecular similarity search.
-- **Superstructure**: This metric is generally used to search for similar supersturcture of a molecule.
+- **Superstructure**: This metric is generally used to search for similar superstructure of a molecule.
 - **Substructure**: This metric is generally used  to search for similar substructure of a molecule.
 
 See [Similarity Metrics](metric.md#floating) for more information.
