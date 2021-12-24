@@ -175,7 +175,11 @@ Milvus timestamp:           425790736918318406
 --------------------------  ------------------
 ```
 
+## Limits
 
+|Feature|Maximum limit|
+|---|---|
+|Dimensions of a vector|32,768|
 
 ## What's next
 
