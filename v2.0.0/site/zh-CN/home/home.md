@@ -49,7 +49,7 @@ id: home.md
 - [创建 Collection](create_collection.md)
 - [插入数据](insert_data.md)
 - [创建索引](build_index.md)
-- [向量搜索](search.)
+- [向量搜索](search.md)
 - [结构化匹配](query.md)
 </div>
 
