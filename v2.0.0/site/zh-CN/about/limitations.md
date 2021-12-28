@@ -30,7 +30,7 @@ Milvus 致力于为用户提供性能最佳的向量数据库，方便用户将�
 | Partitions      | 4096       |
 | Shards   | 256        |
 | Fields   | 256        |
-| Indexes   | 65536        |
+| Indexes   | 1        |
 | Entities   | unlimited        |
 
 ## 字符串限制
@@ -57,7 +57,7 @@ Milvus 2.0 稳定版将支持 VARCHAR。Milvus 将在未来支持更多字符串
 
 ## 加载数据限制
 
-在当前版本中，加载数据最大值不能超过所有 query node 内存总量的 70%，从而为执行引擎预留内存资源。
+在当前版本中，加载数据最大值不能超过所有 query node 内存总量的 90%，从而为执行引擎预留内存资源。
 
 
 ## 检索参数限制
