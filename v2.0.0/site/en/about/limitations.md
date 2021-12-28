@@ -35,7 +35,7 @@ The name of a resource can contain numbers, letters, dollar signs ($), and under
 | Partition      | 4,096       |
 | Shard   | 256        |
 | Field   | 256        |
-| Index   | 65,536        |
+| Index   | 1        |
 | Entity   | unlimited        |
 
 ## Length of a string 
@@ -61,7 +61,7 @@ VARCHAR will be supported in the 2.0 stable version. More string data types will
 | Query   | 512 MB      |
 
 ## Load limits
-In current release, data to be load must be under 70% of the total memory resources of all query nodes to reserve memory resources for execution engine.
+In current release, data to be load must be under 90% of the total memory resources of all query nodes to reserve memory resources for execution engine.
 
 ## Search limits
 | Vectors      | Limit |
