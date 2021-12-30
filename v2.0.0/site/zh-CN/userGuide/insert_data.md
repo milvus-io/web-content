@@ -27,7 +27,7 @@ First, prepare the data to insert.  Data type of the data to insert must match t
 import random
 data = [
     		[i for i in range(2000)],
-			[i for i in range(10000, 12000)],
+		[i for i in range(10000, 12000)],
     		[[random.random() for _ in range(2)] for _ in range(2000)],
 		]
 ```
@@ -59,7 +59,7 @@ By specifying `partition_name`, you can optionally decide to which partition to 
 
 
 ```python
-from pymilvus import collection
+from pymilvus import Collection
 collection = Collection("book")      # Get an existing collection.
 mr = collection.insert(data)
 ```
