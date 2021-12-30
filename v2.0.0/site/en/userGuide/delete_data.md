@@ -14,37 +14,11 @@ Milvus supports deleting entities by primary key filtered with boolean expressio
 <div class="alert caution">
     <ul>
         <li>This feature is still under active development, and will be optimized with the release of Milvus 2.0.0-GA.</li>
-		<li>Entities deleted beyond the pre-specified span of time for Time Travel cannot be retrieved again.</li>
+	<li>Entities deleted beyond the pre-specified span of time for Time Travel cannot be retrieved again.</li>
         <li>Frequent deletion operations will impact the system performance.</li>
     </ul>
 </div>
 
-## Load the collection
-
-All CRUD operations within Milvus are executed in memory, hence before deletion, load the collection that contains the entities you expect to delete.
-
-<div class="multipleCode">
-  <a href="?python">Python </a>
-  <a href="?javascript">Node.js</a>
-  <a href="?cli">CLI</a>
-</div>
-
-
-```python
-from pymilvus import Collection
-collection = Collection("book")      # Get an existing collection.
-collection.load()
-```
-
-```javascript
-await milvusClient.collectionManager.loadCollection({
-  collection_name: "book",
-});
-```
-
-```cli
-load -c book
-```
 
 ## Prepare boolean expression
 
@@ -94,7 +68,7 @@ The expression to specify entities to be deleted： pk in [0,1]
 
 ## Delete entities
 
-Delete the entities with the boolean expression you created.
+Delete the entities with the boolean expression you created. Milvus returns the ID list of the deleted entities.
 
 By specifying `partition_name`, you can decide from which partition to delete the entities and thus save the resources.
 
@@ -166,41 +140,6 @@ Do you want to continue? [y/N]: y
 </table>
 
 
-
-You can verify the delete operation by checking the number of entities after deleting.
-
-```python
-from pymilvus import Collection
-collection = Collection("book")      # Get an existing collection.
-collection.num_entities
-1998
-```
-
-```javascript
-const res = await collectionManager.getCollectionStatistics({
-  collection_name: "book",
-});
-console.log(res.data.row_count);
-```
-
-```cli
-# Milvus CLI automatically returns the row count of the successfully deleted data.
-```
-
-<table class="language-javascript">
-	<thead>
-	<tr>
-		<th>Parameter</th>
-		<th>Description</th>
-	</tr>
-	</thead>
-	<tbody>
-	<tr>
-		<td><code>collection_name</code></td>
-		<td>Name of the collection to check entities in.</td>
-	</tr>
-	</tbody>
-</table>
 
 ## What's next
 
