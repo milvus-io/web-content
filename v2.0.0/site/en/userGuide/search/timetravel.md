@@ -8,11 +8,11 @@ summary: Learn how to search with Time Travel in Milvus.
 
 This topic describes how to use the Time Travel feature during vector search.
 
-<div class="alert note">
-This feature is still under active development, and will be optimized with the release of Milvus 2.0.0-GA.
-</div>
-
 Milvus maintains a timeline for all data insert and delete operations. It allows users to specify a timestamp in a search to retrieve a data view at a specified point in time, without spending tremendously on maintenance for data rollback.
+
+<div class="alert note">
+By default, Milvus allows Time Travel span of 432,000 seconds (120h0m0s). You can configure this parameter in <code>common.retentionDuration</code>.
+</div>
 
 ## Preparations
 
@@ -248,6 +248,109 @@ const res2 = await milvusClient.dataManager.search({
 });
 console.log(res2.results)
 ```
+
+## Generate a timestamp for search
+
+In the case that the previous timestamp is not recorded, Milvus allows you to generate a timestamp using an existing timestamp, Unix Epoch time, or date time.
+
+The following example simulates an unwanted deletion operation and shows how to generate a timestamp prior to the deletion and search with it.
+
+Generate a timestamp based on the date time prior to the deletion.
+
+```python
+import datetime
+datetime = datetime.datetime.now()
+from pymilvus import utility
+pre_del_timestamp = utility.mkts_from_datetime(datetime)
+```
+
+```javascript
+const {  datetimeToHybrids } = require("@zilliz/milvus2-sdk-node/milvus/utils/Format");
+const datetime = new Date().getTime()
+const pre_del_timestamp = datetimeToHybrids(datetime)
+```
+
+Delete part of the data to simulate an accidental deletion operation.
+
+```python
+expr = "pk in [0, 2, 4, 6, 8, 10, 12, 14, 16, 18]"
+collection.delete(expr)
+```
+
+```javascript
+const expr = "pk in [0, 2, 4, 6, 8, 10, 12, 14, 16, 18]"
+await milvusClient.dataManager.deleteEntities({
+  collection_name: "test_time_travel",
+  expr: expr,
+});
+```
+
+As shown below, the deleted entities are not returned in the results if you search without specifying the timestamp.
+
+```python
+search_param = {
+    "data": [[1.0, 1.0]],
+    "anns_field": "example_field",
+    "param": {"metric_type": "L2"},
+    "limit": 10,
+}
+res = collection.search(**search_param)
+res[0].ids
+```
+
+```javascript
+const res3 = await milvusClient.dataManager.search({
+  collection_name: "test_time_travel",
+  vectors: [
+    [1.0, 1.0]
+  ],
+  search_params: {
+    anns_field: "example_field",
+    topk: "10",
+    metric_type: "L2",
+    params: JSON.stringify({
+      nprobe: 10
+    }),
+  },
+  vector_type: 101, // DataType.FloatVector,
+});
+console.log(res3.results)
+```
+
+Search with the prior-to-deletion timestamp. Milvus retrieves entities from the data before the deletion.
+
+```python
+search_param = {
+    "data": [[1.0, 1.0]],
+    "anns_field": "example_field",
+    "param": {"metric_type": "L2"},
+    "limit": 10,
+    "travel_timestamp": pre_del_timestamp,
+}
+res = collection.search(**search_param)
+res[0].ids
+```
+
+```javascript
+const res4 = await milvusClient.dataManager.search({
+  collection_name: "test_time_travel",
+  vectors: [
+    [1.0, 1.0]
+  ],
+  travel_timestamp: pre_del_timestamp,
+  search_params: {
+    anns_field: "example_field",
+    topk: "10",
+    metric_type: "L2",
+    params: JSON.stringify({
+      nprobe: 10
+    }),
+  },
+  vector_type: 101, // DataType.FloatVector,
+});
+console.log(res4.results)
+```
+
 ## What's next
 
 - Learn more basic operations of Milvus:
