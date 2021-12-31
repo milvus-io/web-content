@@ -26,9 +26,11 @@ Specify an an alias for a collection.
 
 
 ```python
-from pymilvus import Collection
-collection = Collection("book")      # Get an existing collection.
-collection.create_alias("publication")
+from pymilvus import utility
+utility.create_alias(
+collection_name = "book",
+alias = "publication"
+)
 ```
 
 ```javascript
@@ -118,8 +120,10 @@ Drop a specified alias.
 
 
 ```python
-from pymilvus import Collection
-collection.drop_alias("publication")
+from pymilvus import utility
+utility.drop_alias(
+alias = "publication"
+)
 ```
 
 ```javascript
@@ -195,9 +199,11 @@ Alter an existing alias to another collection.
 
 
 ```python
-from pymilvus import Collection
-collection = Collection("book")      # Get an existing collection.
-collection.alter_alias("publication")
+from pymilvus import utility
+utility.alter_alias(
+collection_name = "book",
+alias = "publication"
+)
 ```
 
 ```javascript

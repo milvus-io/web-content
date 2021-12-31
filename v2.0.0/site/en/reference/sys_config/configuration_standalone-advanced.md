@@ -171,7 +171,7 @@ This session configures the system behaviors of Milvus. You can set these config
        <li>Milvus executes this query command directly when the search message timestamp is earlier the query node system time.</li>
        <li>When the <code>search</code> message timestamp is later than the query node system time, the search message waits for the query node system time to advance until the time difference between them is less than the value set in <code>queryNode.gracefulTime</code>, and then Milvus executes the query demand.</li>
       </details></td>
-		<td>1000</td>
+		<td>0</td>
 	</tr>
   <tr>
 		<td><code>rootcoord.minSegmentSizeToEnableIndex</code></td>
@@ -202,11 +202,12 @@ This session configures the system behaviors of Milvus. You can set these config
 		<td><code>dataNode.flush.insertBufSize</code></td>
 		<td><details>
        <summary>Maximum row count of a segment buffered in memory</summary>
+	<li>Unit: Byte.</li>
        <li>Data node packs all buffered data into a binlog file and stores the file in MinIO/S3 when the row count of the data in memory exceeds this value.</li>
        <li>Setting this parameter is associated with the data size. If it is set too small, the system stores data in small size too frequently. If it is set too large, the system's demand for memory will increase.</li>
        <li>The default value applies to most scenarios. For a 128-dimensions floating-point vector, 32000 rows of data generate a binlog file of approximately 16 MB.</li>
       </details></td>
-		<td>32000</td>
+		<td>16777216</td>
 	</tr>
 </tbody>
 </table>
