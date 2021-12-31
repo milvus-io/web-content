@@ -6,6 +6,78 @@ summary: Milvus Release Notes
 
 Find out what’s new in Milvus! This page summarizes information about new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.0.0-RC1 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.0.0-PreGA
+
+Release date: 2021-12-31
+
+<h3 id="v2.0.0-PreGA">Compatibility</h3>
+
+<table class="version">
+	<thead>
+	<tr>
+		<th>Milvus version</th>
+		<th>Python SDK version</th>
+		<th>Java SDK version</th>
+		<th>Go SDK version</th>
+		<th>Node.js SDK version</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>2.0.0-PreGA</td>
+		<td>2.0.0rc9</td>
+		<td>2.0.0</td>
+		<td>Coming soon</td>
+		<td>1.0.20</td>
+	</tr>
+	</tbody>
+</table>
+
+
+
+Milvus 2.0.0-PreGA is the preview release of Milvus 2.0.0-GA. It now supports entity deletion by primary key and data compaction to purge deleted data. We also introduce a load balancing mechanism into Milvus to distribute the memory usage of each query node evenly. Some critical issues are fixed in this release, including cleanup of dropped collection data, wrong distance calculation of Jaccard distance, and several bugs that cause system hang and memory leakage.
+
+It should be noted that Milvus 2.0.0-PreGA is NOT compatible with previous versions of Milvus 2.0.0 because of some changes made to data codec format and RocksMQ data format.
+
+<h3 id="v2.0.0-PreGA">Features</h3>
+
+- Deleting entity: Milvus now supports deleting entities through primary keys. Whereas Milvus relies on append-only storage, it only supports logical deletion, id est, Milvus inserts a deletion mark on the entities to cover actual data so that no search or query will return the marked entities. Therefore, it should be noted that overusing deletion may cause search performance plummeting and storage usage surging. See [Delete entities](delete_data.md) for more instruction.
+
+- Compaction: Compaction mechanism purges the deleted or expired entities in binlogs to save storage space. It is a background task that is triggered by data coord and executed by data node.
+
+- Automatic Loadbalance/Handoff [#9481](https://github.com/milvus-io/milvus/issues/9481)：Loadbalance mechanism distributes segments evenly across query nodes to balance the memory usage of the cluster. It can be triggered either automatically or by users. Handoff mechanism refers to that, when a growing segment is sealed, query node waits until the segment is built with index by index node and then loads the segment into memory for search or query.
+
+<h3 id="v2.0.0-PreGA">Improvements</h3>
+
+- [#12199](https://github.com/milvus-io/milvus/pull/12199) Parallelizes executions between segments to improve the search performance.
+- [#11373](https://github.com/milvus-io/milvus/pull/11373) Allows batch consumption of messages in RocksMQ internal loop to improve the system efficiency.
+- [#11665](https://github.com/milvus-io/milvus/pull/11665) Postpones the execution of handoff until index creation is completed.
+
+<h3 id="v2.0.0-PreGA">Bug fixes</h3>
+
+- Data is not cleared on etcd, Pulsar, and MinIO when a collection is dropped:
+  - [#12191](https://github.com/milvus-io/milvus/pull/12191) Clears the metadata of the dropped segment on etcd.
+  - [#11554](https://github.com/milvus-io/milvus/pull/11554) Adds garbage collector for data coord.
+  - [#11552](https://github.com/milvus-io/milvus/pull/11552) Completes procedure of dropping collection in data node.
+  - [#12227](https://github.com/milvus-io/milvus/pull/12227) Removes all index when dropping collection.
+  - [#11436](https://github.com/milvus-io/milvus/pull/11436) Changes the default retentionSizeInMB to 8192 (8GB).
+- [#11901](https://github.com/milvus-io/milvus/pull/11901) Wrong distances calculation caused by properties of different metric types.
+- [#12511](https://github.com/milvus-io/milvus/pull/12511) Wrong similarity correlation caused by properties of different metric types.
+- [#12225](https://github.com/milvus-io/milvus/pull/12225) RocksMQ produce hang when do search repeatedly
+- [#12255](https://github.com/milvus-io/milvus/pull/12255) RocksMQ server does not close when standalone exits.
+- [#12281](https://github.com/milvus-io/milvus/pull/12281) Error when dropping alias.
+- [#11769](https://github.com/milvus-io/milvus/pull/11769) Update serviceableTime incorrectly.
+- [#11325](https://github.com/milvus-io/milvus/pull/11325) Panic when reducing search results.
+- [#11248](https://github.com/milvus-io/milvus/pull/11248) Parameter guarantee_timestamp is not working.
+
+<h3 id="v2.0.0-PreGA">Other Enhancements</h3>
+
+- [#12351](https://github.com/milvus-io/milvus/pull/12351) Changes proxy default RPC transfer limitation.
+- [#12055](https://github.com/milvus-io/milvus/pull/12055) Reduces memory cost when loading from MinIO.
+- [#12248](https://github.com/milvus-io/milvus/pull/12248) Supports more deployment metrics.
+- [#11247](https://github.com/milvus-io/milvus/pull/11247) Adds getNodeInfoByID and getSegmentInfoByNode function for cluster.
+- [#11181](https://github.com/milvus-io/milvus/pull/11181) Refactors segment allocate policy on query coord.
+
 ## v2.0.0-RC8
 
 Release date: 2021-11-5
@@ -28,7 +100,7 @@ Release date: 2021-11-5
 		<td>2.0.0rc8</td>
 		<td>Coming soon</td>
 		<td>Coming soon</td>
-		<td>1.0.19</td>
+		<td>1.0.20</td>
 	</tr>
 	</tbody>
 </table>
@@ -191,7 +263,7 @@ Release date: 2021-10-11
 		<td>2.0.0rc7</td>
 		<td>Coming soon</td>
 		<td>Coming soon</td>
-		<td>1.0.19</td>
+		<td>1.0.20</td>
 	</tr>
 	</tbody>
 </table>
@@ -378,7 +450,7 @@ Release date: 2021-09-10
 		<td>2.0.0rc6</td>
 		<td>Coming soon</td>
 		<td>Coming soon</td>
-		<td>1.0.19</td>
+		<td>1.0.20</td>
 	</tr>
 	</tbody>
 </table>
@@ -440,7 +512,7 @@ Release date: 2021-08-30
 		<td>2.0.0rc5</td>
 		<td>Coming soon</td>
 		<td>Coming soon</td>
-		<td>1.0.19</td>
+		<td>1.0.20</td>
 	</tr>
 	</tbody>
 </table>

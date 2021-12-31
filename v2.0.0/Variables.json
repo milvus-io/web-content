@@ -1,10 +1,10 @@
 {
-  "milvus_release_version": "2.0.0-RC8",
-  "milvus_python_sdk_version": "2.0.0rc8",
-  "milvus_node_sdk_version": "1.0.19",
-  "cpu_milvus_docker_image_version": "2.0.0-rc8",
+  "milvus_release_version": "2.0.0-PreGA",
+  "milvus_python_sdk_version": "2.0.0rc9",
+  "milvus_node_sdk_version": "1.0.20",
+  "milvus_java_sdk_version": "2.0.0",
+  "cpu_milvus_docker_image_version": "2.0.0-pre-ga",
   "gpu_milvus_docker_image_version": "",
   "max_insert_size": "256 MB",
   "index_building_threshold": "1024"
-
 }

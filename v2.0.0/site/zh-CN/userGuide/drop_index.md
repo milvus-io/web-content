@@ -89,6 +89,6 @@ delete index -c book
   - [Conduct a hybrid search](hybridsearch.md)
   - [Search with Time Travel](timetravel.md)
 - Explore API references for Milvus SDKs:
-  - [PyMilvus API reference](/api-reference/pymilvus/v2.0.0rc8/tutorial.html)
-  - [Node.js API reference](/api-reference/node/v1.0.19/tutorial.html)
+  - [PyMilvus API reference](/api-reference/pymilvus/v2.0.0rc9/tutorial.html)
+  - [Node.js API reference](/api-reference/node/v1.0.20/tutorial.html)
 

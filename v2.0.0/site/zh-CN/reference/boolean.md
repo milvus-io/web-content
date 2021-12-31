@@ -3,7 +3,7 @@ id: boolean.md
 ---
 # 布尔表达式语法规则
 
-表达式计算结果将输出布尔值——真（TRUE）或假（False）。在搜索向量时，Milvus 通过表达式进行标量过滤。查看 [Python SDK API](/api-reference/pymilvus/2.0.0rc8/api/collection.html) 参考以了解表达式使用说明。
+表达式计算结果将输出布尔值——真（TRUE）或假（False）。在搜索向量时，Milvus 通过表达式进行标量过滤。查看 [Python SDK API](/api-reference/pymilvus/2.0.0rc9/api/collection.html) 参考以了解表达式使用说明。
 
 [扩展巴科斯范式（EBNF）](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form)语法规则中定义了布尔表达式的语法规则。布尔表达式的语法规则如下所示：
 
