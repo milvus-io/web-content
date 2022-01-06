@@ -7,14 +7,14 @@ summary: Interact with Milvus using commands.
 
 Milvus 命令行接口 (CLI) 是一个支持数据库连接、数据操作、以及数据导入和导出的命令行工具。基于 [Milvus Python SDK](https://github.com/milvus-io/pymilvus)，它允许使用交互式命令行提示符通过终端执行命令。本文介绍了所有支持的命令及其参数，还包括了一些示例供你参考。
 
-## calc
+## calc distance
 
 计算两个向量数组之间的距离。
 
 <h3 id="calc">语法</h3>
 
 ```shell
-calc
+calc distance
 ```
 
 <h3 id="calc">参数</h3>
@@ -28,7 +28,7 @@ calc
 根据提示输入需要的信息，计算两个向量数组之间的距离。
 
 ```shell
-milvus_cli > calc
+milvus_cli > calc distance
 
 Import left operator vectors from existing collection? [y/N]: n
 
@@ -105,6 +105,58 @@ Result:
 
 [[3.625464916229248, 3.234992742538452, 3.568333148956299, 3.694913148880005], [2.556027889251709, 2.8901233673095703, 3.385758399963379, 3.3239054679870605]]
 ```
+## calc mkts_from_hybridts
+
+根据现有的混合时间戳、timedelta 和增量时间间隔生成混合时间戳。
+
+<h3 id="calc-mkts_from_hybridts">语法</h3>
+
+```shell
+calc mkts_from_hybridts -h (int) -m (float)
+```
+
+<h3 id="calc-mkts_from_hybridts">参数</h3>
+
+|参数|全名|描述|
+|:---|:---|:---|
+|-h|--hybridts|用于生成新的混合时间戳的原始混合时间戳。非负整数，取值范围为 0 ~ 18446744073709551615。|
+|-m|--milliseconds|增量间隔，以毫秒为单位。|
+|--help|n/a|显示使用命令的帮助。|
+
+
+## calc mkts_from_unixtime
+
+根据Unix Epoch时间、timedelta和增量时间间隔生成混合时间戳。
+
+<h3 id="calc-mkts_from_unixtime">语法</h3>
+
+```shell
+calc mkts_from_unixtime -e (float) -m (float)
+```
+<h3 id="calc-mkts_from_unixtime">参数</h3>
+
+|参数|全名|描述|
+|:---|:---|:---|
+|-e|--epoch|用于生成混合时间戳的已知 Unix 时间戳。Unix epoch 是自 1970 年 1 月 1 日（UTC/GMT 午夜）以来经过的秒数。|
+|-m|--milliseconds|增量间隔，以毫秒为单位。|
+|--help|n/a|显示使用命令的帮助。|
+
+
+## calc hybridts_to_unixtime
+
+将混合时间戳转换为 UNIX 时间戳，忽略逻辑部分。
+
+<h3 id="calc-hybridts_to_unixtime">语法</h3>
+
+```shell
+calc hybridts_to_unixtime -h (int)
+```
+<h3 id="calc-hybridts_to_unixtime">参数</h3>
+
+|参数|全名|描述|
+|:---|:---|:---|
+|-h|--hybridts|要转换为 UNIX 时间戳的已知混合时间戳。非负整数，取值范围为 0 ~ 18446744073709551615。|
+|--help|n/a|显示使用命令的帮助。|
 
 ## clear
 
@@ -283,20 +335,19 @@ Timeout []:
 
 ## delete alias
 
-删除集合的别名。
+删除别名。
 
 <h3 id="delete-alias">语法</h3>
 
 ```shell
-delete alias -c (text) -a (text) [-t (float)]
+delete alias -a (text) [-t (float)]
 ```
 
 <h3 id="delete-alias">参数</h3>
 
-| 参数   | 全名              | 描述                                                                                                               |
-| :----- | :---------------- | :----------------------------------------------------------------------------------------------------------------- |
-| -c     | --collection-name | 集合的名称。                                                                                                       |
-| -a     | --alias-name      | 别名。                                                                                                             |
+|参数|全名|描述|
+| :--- | :--- | :--- |
+| -a | --alias-name | 别名。|
 | -t     | --timeout         | （可选）允许的远程过程调用的最大持续时间(以秒为单位)。如果不传递此参数，客户端将一直等待直到服务器响应或发生错误。 |
 | --help | n/a               | 显示用法信息。                                                                                                     |
 
@@ -322,6 +373,37 @@ delete collection -c (text) [-t (float)]
 
 ```shell
 milvus_cli > delete collection -c car
+```
+
+## delete entities
+
+删除实体。
+
+<h3 id="delete-entities">语法</h3>
+
+```shell
+delete entities -c (text) [-p (text)] [-t (float)]
+```
+
+<h3 id="delete-entities">参数</h3>
+
+| 参数   | 全名         | 描述                                                                                                               |
+| :----- | :----------- | :----------------------------------------------------------------------------------------------------------------- |
+| -c     | --collection | 集合的名称。                                                                                                       |
+| -p     | --partition  | （可选）实体所属的分区的名称。                                                                                     |
+| -t     | --timeout    | （可选）允许的远程过程调用的最大持续时间(以秒为单位)。如果不传递此参数，客户端将一直等待直到服务器响应或发生错误。 |
+| --help | n/a          | 显示用法信息。                                                                                                     |
+
+<h3 id="delete-entities">示例</h3>
+
+```shell
+milvus_cli > delete entities -c car
+
+The expression to specify entities to be deleted, such as "film_id in [0, 1 ]": film_id in [ 0, 1 ]
+
+You are trying to delete the entities of collection. This action cannot be undone!
+
+Do you want to continue? [y/N]: y
 ```
 
 ## delete partition
@@ -375,36 +457,7 @@ delete index -c (text) [-t (float)]
 milvus_cli > delete index -c car
 ```
 
-## delete entities (Milvus 2.0.0-GA 支持)
 
-删除实体。
-
-<h3 id="delete-entities">语法</h3>
-
-```shell
-delete entities -c (text) [-p (text)] [-t (float)]
-```
-
-<h3 id="delete-entities">参数</h3>
-
-| 参数   | 全名         | 描述                                                                                                               |
-| :----- | :----------- | :----------------------------------------------------------------------------------------------------------------- |
-| -c     | --collection | 集合的名称。                                                                                                       |
-| -p     | --partition  | （可选）实体所属的分区的名称。                                                                                     |
-| -t     | --timeout    | （可选）允许的远程过程调用的最大持续时间(以秒为单位)。如果不传递此参数，客户端将一直等待直到服务器响应或发生错误。 |
-| --help | n/a          | 显示用法信息。                                                                                                     |
-
-<h3 id="delete-entities">示例</h3>
-
-```shell
-milvus_cli > delete entities -c car
-
-The expression to specify entities to be deleted, such as "film_id in [0, 1 ]": film_id in [ 0, 1 ]
-
-You are trying to delete the entities of collection. This action cannot be undone!
-
-Do you want to continue? [y/N]: y
-```
 
 ## describe collection
 
@@ -502,7 +555,7 @@ help <command>
 
 | 命令     | 描述                                                   |
 | :------- | :----------------------------------------------------- |
-| calc     | 计算两个向量数组之间的距离。                           |
+| calc     | 计算两个向量数组之间的距离、mkts_from_hybridts、mkts_from_unixtime、或 hybridts_to_unixtime。                           |
 | clear    | 清除屏幕。                                             |
 | connect  | 连接到 Milvus。                                        |
 | create   | 创建集合、分区、索引或别名。                           |
@@ -513,6 +566,7 @@ help <command>
 | import   | 将数据导入分区。                                       |
 | list     | 列出集合、分区或索引。                                 |
 | load     | 加载集合或分区。                                       |
+|load_balance|在查询节点上执行负载均衡。|
 | query    | 显示与您输入的所有条件匹配的查询结果。                 |
 | release  | 释放集合或分区。                                       |
 | search   | 执行向量相似搜索或混合搜索。                           |
@@ -659,6 +713,27 @@ load -c (text) [-p (text)]
 | -p     | --partition  | (可选/多个) 分区的名称。 |
 | --help | n/a          | 显示用法信息。           |
 
+## load_balance
+
+
+通过从源查询节点向目的查询节点转移 segment 实现负载均衡。
+
+<h3 id="load_balance">语法</h3>
+
+```shell
+load_balance -s (int) -d (int) -ss (int) [-t (int)]
+```
+
+<h3 id="load_balance">参数</h3>
+
+|参数|全名|描述|
+|:---|:---|:---|
+|-s|--src-node-id|要均衡的源查询节点 ID。|
+|-d|--dst-node-id|（多个）要转移 segment 的目的查询节点 ID。|
+|-ss|--sealed-segment-ids|（多个）要转移的密封 segment 的ID。|
+|-t|--timeout|（可选）超时时间，单位为秒。|
+| --help | n/a | 显示用法信息。  |
+
 ## query
 
 显示与您输入的所有条件匹配的查询结果。
@@ -694,6 +769,11 @@ default
 A list of fields to return(split by "," if multiple) []: color, brand
 
 timeout []:
+
+Guarantee timestamp. This instructs Milvus to see all operations performed before a provided timestamp. If no such timestamp is provided, then Milvus will search all operations performed to date. [0]:
+Graceful time. Only used in bounded consistency level. If graceful_time is set, PyMilvus will use current timestamp minus the graceful_time as the guarantee_timestamp. This option is 5s by default if not set. [5]:
+Travel timestamp. Users can specify a timestamp in a search to get results based on a data view at a specified point in time. [0]: 428960801420883491
+
 ```
 
 <h4 id="query">示例 2</h4>
@@ -714,6 +794,10 @@ A list of fields to return(split by "," if multiple) []: id, color,
 brand
 
 timeout []:
+
+Guarantee timestamp. This instructs Milvus to see all operations performed before a provided timestamp. If no such timestamp is provided, then Milvus will search all operations performed to date. [0]:
+Graceful time. Only used in bounded consistency level. If graceful_time is set, PyMilvus will use current timestamp minus the graceful_time as the guarantee_timestamp. This option is 5s by default if not set. [5]:
+Travel timestamp. Users can specify a timestamp in a search to get results based on a data view at a specified point in time. [0]: 428960801420883491
 ```
 
 ## release

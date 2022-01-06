@@ -9,14 +9,14 @@ Milvus Command-Line Interface (CLI) is a command-line tool that supports databas
 
 This topic introduces all supported commands and the corresponding options. Some examples are also included for your reference.
 
-## calc
+## calc distance
 
 Calculates the distance between two vector arrays.
 
 <h3 id="calc">Syntax</h3>
 
 ```shell
-calc
+calc distance
 ```
 
 <h3 id="calc">Options</h3>
@@ -30,7 +30,7 @@ calc
 To calculate the distance between two vector arrays and be prompted for the required input:
 
 ```shell
-milvus_cli > calc
+milvus_cli > calc distance
 
 Import left operator vectors from existing collection? [y/N]: n
 
@@ -107,6 +107,58 @@ Result:
 
 [[3.625464916229248, 3.234992742538452, 3.568333148956299, 3.694913148880005], [2.556027889251709, 2.8901233673095703, 3.385758399963379, 3.3239054679870605]]
 ```
+## calc mkts_from_hybridts
+
+Generates a hybrid timestamp based on an existing hybrid timestamp, timedelta, and incremental time interval.
+
+<h3 id="calc-mkts_from_hybridts">Syntax</h3>
+
+```shell
+calc mkts_from_hybridts -h (int) -m (float)
+```
+
+<h3 id="calc-mkts_from_hybridts">Options</h3>
+
+|Option|Full name|Description|
+|:---|:---|:---|
+|-h|--hybridts|The original hybrid timestamp used to generate a new hybrid timestamp. A non-negative integer that ranges from 0 to 18446744073709551615.|
+|-m|--milliseconds|The incremental interval in milliseconds.|
+|--help|n/a|Displays help for using the command.|
+
+
+## calc mkts_from_unixtime
+
+Generates a hybrid timestamp based on the Unix Epoch time, timedelta, and incremental time interval.
+
+<h3 id="calc-mkts_from_unixtime">Syntax</h3>
+
+```shell
+calc mkts_from_unixtime -e (float) -m (float)
+```
+<h3 id="calc-mkts_from_unixtime">Options</h3>
+
+|Option|Full name|Description|
+|:---|:---|:---|
+|-e|--epoch|The known Unix timestamp used to generate a hybrid timestamp. The Unix epoch is the number of seconds that have elapsed since January 1, 1970 (midnight UTC/GMT).|
+|-m|--milliseconds|The incremental interval in milliseconds.|
+|--help|n/a|Displays help for using the command.|
+
+
+## calc hybridts_to_unixtime
+
+Converts a hybrid timestamp to the UNIX timestamp ignoring the logic part.
+
+<h3 id="calc-hybridts_to_unixtime">Syntax</h3>
+
+```shell
+calc hybridts_to_unixtime -h (int)
+```
+<h3 id="calc-hybridts_to_unixtime">Options</h3>
+
+|Option|Full name|Description|
+|:---|:---|:---|
+|-h|--hybridts|The known hybrid timestamp to be converted to a UNIX timestamp. A non-negative integer that ranges from 0 to 18446744073709551615.|
+|--help|n/a|Displays help for using the command.|
 
 ## clear
 
@@ -284,22 +336,21 @@ Timeout []:
 
 ## delete alias
 
-Deletes an alias for a collection.
+Deletes an alias.
 
 <h3 id="delete-alias">Syntax</h3>
 
 ```shell
-delete alias -c (text) -a (text) [-t (float)]
+delete alias -a (text) [-t (float)]
 ```
 
 <h3 id="delete-alias">Options</h3>
 
-| Option | Full name         | Description                                                                                                                                                                      |
-| :----- | :---------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| -c     | --collection-name | The name of the collection.                                                                                                                                                      |
-| -a     | --alias-name      | The alias.                                                                                                                                                                       |
-| -t     | --timeout         | (Optional) The maximum allowed duration in seconds of an RPC call. Not passing this option indicates that the client keeps waiting until the server responds or an error occurs. |
-| --help | n/a               | Displays help for using the command.                                                                                                                                             |
+|Option|Full name|Description|
+|:---| :---| :---|
+|-a|--alias-name| The alias.|
+|-t| --timeout| (Optional) The maximum allowed duration in seconds of an RPC call. Not passing this option indicates that the client keeps waiting until the server responds or an error occurs. |
+| --help | n/a| Displays help for using the command.                                                                                                                                             |
 
 ## delete collection
 
@@ -323,6 +374,37 @@ delete collection -c (text) [-t (float)]
 
 ```shell
 milvus_cli > delete collection -c car
+```
+
+## delete entities
+
+Deletes entities.
+
+<h3 id="delete-entities">Syntax</h3>
+
+```
+delete entities -c (text) -p (text) [-t (float)]
+```
+
+<h3 id="delete-entities">Options</h3>
+
+|Option|Full name|Description|
+|:---|:---|:---|
+|-c|--collection-name|The name of the collection that entities to be deleted belongs to.|
+|-p| --partition|(Optional) The name of the partition to be deleted.|
+|-t|--timeout| (Optional) The maximum allowed duration in seconds of an RPC call. Not passing this option indicates that the client keeps waiting until the server responds or an error occurs. |
+|--help|n/a|Displays help for using the command.|
+
+<h3 id="delete-entities">Example</h3>
+
+```
+milvus_cli > delete entities -c car
+
+The expression to specify entities to be deleted, such as "film_id in [ 0, 1 ]": film_id in [ 0, 1 ]
+
+You are trying to delete the entities of collection. This action cannot be undone!
+
+Do you want to continue? [y/N]: y
 ```
 
 ## delete partition
@@ -374,37 +456,6 @@ delete index -c (text) [-t (float)]
 
 ```shell
 milvus_cli > delete index -c car
-```
-
-## delete entities (available in Milvus 2.0.0-GA)
-
-Deletes entities.
-
-<h3 id="delete-entities">Syntax</h3>
-
-```shell
-delete entities -c (text) [-p (text)] [-t (float)]
-```
-
-<h3 id="delete-entities">Options</h3>
-
-| Option | Full name         | Description                                                                                                                                                                      |
-| :----- | :---------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| -c     | --collection-name | The name of the collection.                                                                                                                                                      |
-| -p     | --partition       | (Optional) The name of the partition that the entities belong to.                                                                                                                |
-| -t     | --timeout         | (Optional) The maximum allowed duration in seconds of an RPC call. Not passing this option indicates that the client keeps waiting until the server responds or an error occurs. |
-| --help | n/a               | Displays help for using the command.                                                                                                                                             |
-
-<h3 id="delete-entities">Example</h3>
-
-```shell
-milvus_cli > delete entities -c car
-
-The expression to specify entities to be deleted, such as "film_id in [0, 1 ]": film_id in [ 0, 1 ]
-
-You are trying to delete the entities of collection. This action cannot be undone!
-
-Do you want to continue? [y/N]: y
 ```
 
 ## describe collection
@@ -503,7 +554,7 @@ help <command>
 
 | Command  | Description                                                                                                    |
 | :------- | :------------------------------------------------------------------------------------------------------------- |
-| calc     | Calculates the distance between two vector arrays.                                                             |
+| calc     | Calculates the distance between two vector arrays, mkts_from_hybridts, mkts_from_unixtime, or hybridts_to_unixtime.                                                             |
 | clear    | Clears the screen.                                                                                             |
 | connect  | Connects to Milvus.                                                                                            |
 | create   | Creates a collection, partition, index, or alias.                                                              |
@@ -514,6 +565,7 @@ help <command>
 | import   | Imports data into a partition.                                                                                 |
 | list     | Lists collections, partitions, or indexes.                                                                     |
 | load     | Loads a collection or partition.                                                                               |
+|load_balance| Performs load balancing on a query node.|
 | query    | Shows query results that match all the criteria that you enter.                                                |
 | release  | Releases a collection or partition.                                                                            |
 | search   | Performs a vector similarity search or hybrid search.                                                          |
@@ -641,6 +693,8 @@ list partitions -c (text)
 | -c     | --collection-name | The name of the collection.          |
 | --help | n/a               | Displays help for using the command. |
 
+
+
 ## load
 
 Loads a collection or partition from hard drive space into RAM.
@@ -658,6 +712,26 @@ load -c (text) [-p (text)]
 | -c     | --collection-name | The name of the collection that the partition belongs to. |
 | -p     | --partition       | (Optional/Multiple) The name of the partition.            |
 | --help | n/a               | Displays help for using the command.                      |
+
+## load_balance
+
+Performs load balancing by transferring segments from a source query node to a destination one.
+
+<h3 id="load_balance">Syntax</h3>
+
+```shell
+load_balance -s (int) -d (int) -ss (int) [-t (int)]
+```
+<h3 id="load_balance">Options</h3>
+
+|Option|Full name|Description|
+|:---|:---|:---|
+|-s|--src-node-id|The ID of the source query node to be balanced.|
+|-d|--dst-node-id|(Multiple) The ID of the destination query node to transfer segments to.|
+|-ss|--sealed-segment-ids|(Multiple) The ID of the sealed segment to be transferred.|
+|-t|--timeout|(Optional) The timeout in seconds.|
+| --help | n/a       | Displays help for using the command. |
+
 
 ## query
 
@@ -694,6 +768,10 @@ default
 A list of fields to return(split by "," if multiple) []: color, brand
 
 timeout []:
+
+Guarantee timestamp. This instructs Milvus to see all operations performed before a provided timestamp. If no such timestamp is provided, then Milvus will search all operations performed to date. [0]:
+Graceful time. Only used in bounded consistency level. If graceful_time is set, PyMilvus will use current timestamp minus the graceful_time as the guarantee_timestamp. This option is 5s by default if not set. [5]:
+Travel timestamp. Users can specify a timestamp in a search to get results based on a data view at a specified point in time. [0]: 428960801420883491
 ```
 
 <h4 id="query">Example 2</h4>
@@ -714,6 +792,10 @@ A list of fields to return(split by "," if multiple) []: id, color,
 brand
 
 timeout []:
+
+Guarantee timestamp. This instructs Milvus to see all operations performed before a provided timestamp. If no such timestamp is provided, then Milvus will search all operations performed to date. [0]:
+Graceful time. Only used in bounded consistency level. If graceful_time is set, PyMilvus will use current timestamp minus the graceful_time as the guarantee_timestamp. This option is 5s by default if not set. [5]:
+Travel timestamp. Users can specify a timestamp in a search to get results based on a data view at a specified point in time. [0]: 428960801420883491
 ```
 
 ## release
