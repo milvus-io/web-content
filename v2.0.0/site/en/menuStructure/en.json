@@ -580,8 +580,8 @@
       "order": 1
     },  
     {
-      "id": "milvus_insight",
-      "title": "Milvus Insight",
+      "id": "milvus_attu",
+      "title": "Milvus Attu",
       "label1": "tools",
       "label2": "",
       "label3": "",
@@ -589,90 +589,90 @@
       "isMenu": true
     },
     {
-      "id": "insight.md",
+      "id": "attu.md",
       "title": "Overview",
       "label1": "tools",
-      "label2": "milvus_insight",
+      "label2": "milvus_attu",
       "label3": "",
       "order": 0
     },
     {
-      "id": "insight_install-docker.md",
+      "id": "attu_install-docker.md",
       "title": "Installation",
       "label1": "tools",
-      "label2": "milvus_insight",
+      "label2": "milvus_attu",
       "label3": "",
       "order": 1
     },
     {
-      "id": "insight_overview.md",
-      "title": "Insight Overview Page",
+      "id": "attu_overview.md",
+      "title": "Attu Overview Page",
       "label1": "tools",
-      "label2": "milvus_insight",
+      "label2": "milvus_attu",
       "label3": "",
       "order": 2
     },
     {
-      "id": "insight_collection.md",
+      "id": "attu_collection.md",
       "title": "Manage Collections",
       "label1": "tools",
-      "label2": "milvus_insight",
+      "label2": "milvus_attu",
       "label3": "",
       "order": 3
     },
     {
-      "id": "insight_partition.md",
+      "id": "attu_partition.md",
       "title": "Manage Partitions",
       "label1": "tools",
-      "label2": "milvus_insight",
+      "label2": "milvus_attu",
       "label3": "",
       "order": 4
     },
     {
-      "id": "insight_data.md",
+      "id": "attu_data.md",
       "title": "Manage Data",
       "label1": "tools",
-      "label2": "milvus_insight",
+      "label2": "milvus_attu",
       "label3": "",
       "order": 5
     },
     {
-      "id": "insight_index.md",
+      "id": "attu_index.md",
       "title": "Manage Index",
       "label1": "tools",
-      "label2": "milvus_insight",
+      "label2": "milvus_attu",
       "label3": "",
       "order": 6
     },
     {
-      "id": "insight_query.md",
+      "id": "attu_query.md",
       "title": "Query Data",
       "label1": "tools",
-      "label2": "milvus_insight",
+      "label2": "milvus_attu",
       "label3": "",
       "order": 7
     },
     {
-      "id": "insight_search.md",
+      "id": "attu_search.md",
       "title": "Search Data",
       "label1": "tools",
-      "label2": "milvus_insight",
+      "label2": "milvus_attu",
       "label3": "",
       "order": 8
     },
     {
-      "id": "insight_system.md",
+      "id": "attu_system.md",
       "title": "System Status",
       "label1": "tools",
-      "label2": "milvus_insight",
+      "label2": "milvus_attu",
       "label3": "",
       "order": 9
     },
     {
-      "id": "insight_faq.md",
-      "title": "Insight FAQ",
+      "id": "attu_faq.md",
+      "title": "Attu FAQ",
       "label1": "tools",
-      "label2": "milvus_insight",
+      "label2": "milvus_attu",
       "label3": "",
       "order": 10
     },

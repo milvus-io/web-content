@@ -581,8 +581,8 @@
         "order": 1
       }, 
       {
-        "id": "milvus_insight",
-        "title": "Milvus Insight",
+        "id": "milvus_attu",
+        "title": "Milvus Attu",
         "label1": "tools",
         "label2": "",
         "label3": "",
@@ -590,90 +590,90 @@
         "isMenu": true
       },
       {
-        "id": "insight.md",
+        "id": "attu.md",
         "title": "简介",
         "label1": "tools",
-        "label2": "milvus_insight",
+        "label2": "milvus_attu",
         "label3": "",
         "order": 0
       },
       {
-        "id": "insight_install-docker.md",
-        "title": "安装 Milvus Insight",
+        "id": "attu_install-docker.md",
+        "title": "安装 Milvus Attu",
         "label1": "tools",
-        "label2": "milvus_insight",
+        "label2": "milvus_attu",
         "label3": "",
         "order": 1
       },
       {
-        "id": "insight_overview.md",
-        "title": "Insight Overview 页面",
+        "id": "attu_overview.md",
+        "title": "Attu Overview 页面",
         "label1": "tools",
-        "label2": "milvus_insight",
+        "label2": "milvus_attu",
         "label3": "",
         "order": 2
       },
       {
-        "id": "insight_collection.md",
+        "id": "attu_collection.md",
         "title": "管理 Collection",
         "label1": "tools",
-        "label2": "milvus_insight",
+        "label2": "milvus_attu",
         "label3": "",
         "order": 3
       },
       {
-        "id": "insight_partition.md",
+        "id": "attu_partition.md",
         "title": "管理 Partition",
         "label1": "tools",
-        "label2": "milvus_insight",
+        "label2": "milvus_attu",
         "label3": "",
         "order": 4
       },
       {
-        "id": "insight_data.md",
+        "id": "attu_data.md",
         "title": "管理数据",
         "label1": "tools",
-        "label2": "milvus_insight",
+        "label2": "milvus_attu",
         "label3": "",
         "order": 5
       },
       {
-        "id": "insight_index.md",
+        "id": "attu_index.md",
         "title": "管理索引",
         "label1": "tools",
-        "label2": "milvus_insight",
+        "label2": "milvus_attu",
         "label3": "",
         "order": 6
       },
       {
-        "id": "insight_query.md",
+        "id": "attu_query.md",
         "title": "结构化匹配",
         "label1": "tools",
-        "label2": "milvus_insight",
+        "label2": "milvus_attu",
         "label3": "",
         "order": 7
       },
       {
-        "id": "insight_search.md",
+        "id": "attu_search.md",
         "title": "搜索数据",
         "label1": "tools",
-        "label2": "milvus_insight",
+        "label2": "milvus_attu",
         "label3": "",
         "order": 8
       },
       {
-        "id": "insight_system.md",
+        "id": "attu_system.md",
         "title": "系统状态",
         "label1": "tools",
-        "label2": "milvus_insight",
+        "label2": "milvus_attu",
         "label3": "",
         "order": 9
       },
       {
-        "id": "insight_faq.md",
-        "title": "Insight FAQ",
+        "id": "attu_faq.md",
+        "title": "Attu FAQ",
         "label1": "tools",
-        "label2": "milvus_insight",
+        "label2": "milvus_attu",
         "label3": "",
         "order": 10
       },

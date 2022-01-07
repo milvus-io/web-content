@@ -132,7 +132,7 @@ Milvus 客户端库对 Milvus API 进行了封装。你可以使用 Milvus 客�
 Milvus 生态系统提供多种强大的工具，包括：
 
 - [Milvus CLI](https://github.com/milvus-io/milvus_cli#overview)
-- [Milvus Insight](https://github.com/milvus-io/milvus-insight)：图形化管理系统。
+- [Milvus Attu](https://github.com/zilliztech/attu)：图形化管理系统。
 - [MilvusDM](https://milvus.io/docs/v2.0.0/migrate_overview.md)：用于导入或导出 Milvus 数据
 - [Milvus sizing tool](https://zilliz.com/sizing-tool)：用于根据向量数据量及索引类型估算所需的原始文件大小、内存大小及稳定硬盘大小。
 

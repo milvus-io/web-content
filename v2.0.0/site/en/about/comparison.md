@@ -41,7 +41,7 @@ Object-relational mapping (ORM) allows users to focus more on the upper-level bu
 ![ORM_Python_SDK](../../../assets/python_orm.png)
 
 #### Support tools
-- [**Milvus Insight**](insight.md) is Milvus' graphical user interface offering practical functionalities such as cluster state management, meta management, and data query. The source code of Milvus Insight will also be open sourced as an independent project. We are looking for more contributors to join this effort.
+- [**Milvus Attu**](attu.md) is Milvus' graphical user interface offering practical functionalities such as cluster state management, meta management, and data query. The source code of Milvus Attu will also be open sourced as an independent project. We are looking for more contributors to join this effort.
 
 - [**Milvus CLI**](https://github.com/milvus-io/milvus_cli#overview) is Milvus' command-line interface based on [Milvus Python SDK](https://github.com/milvus-io/pymilvus), supporting database connection, data operations, and data export/import.
 

@@ -97,7 +97,7 @@ This page provides an overview of new benefits and feature upgrades we hope to p
 | Version | Feature | Owner   | Status  | Comment |
 | ----------- | ----------- | ----------- | ----------- | ----------- |
 | 2.0.0-RC    | Helm installation       |        | done       |        |
-| 2.0.0-RC    | Support of Milvus Insight, a Milvus visual management tool        |         | in progress        |         |
+| 2.0.0-RC    | Support of Milvus Attu, a Milvus visual management tool        |         | in progress        |         |
 | 2.0      | Prometheus, Grafana and Jaeger support       | 	zwd1208       | in progress       |        |
 | 2.0   | Milvus Kubernetes operator        | 	zwd1208, jeffoverflow        | pending        |         |
 | 2.1      | Multi datacenter deployment and multi-cloud integration       |        | pending       |        |
