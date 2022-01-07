@@ -1,142 +1,133 @@
 ---
 id: example_code.md
+related_key: pymilvus
 label: Python
 order: 0
 group: example
+summary: Get started with Milvus faster using this Python example code.
 ---
 
 <div class="tab-wrapper"><a href="example_code.md" class='active '>Python</a><a href="example_code_node.md" class=''>Node.js</a></div>
 
-# 通过 Python 使用 Milvus
+# Run Milvus using Python
 
-成功启动 Milvus 服务端后，通过 Python 示例代码使用 Milvus。
+This topic describes how to run Milvus using Python.
 
-1. 安装 PyMilvus 及依赖库:
-```Python
-pip3 install pymilvus==2.0.0rc9
-```
+Through running the example code we provided, you will have a primary understanding of what Milvus is capable of.
 
-<div class="alert note">
-PyMilvus 需要 Python 3.6 版本或以上，详见 <a href="https://wiki.python.org/moin/BeginnersGuide/Download">Python 安装指南</a>。
-</div>
+## Preparations
+
+Before running this example code, you will need to install [Milvus](install_standalone-docker.md) and [PyMilvus](install-pymilvus.md) on your device.
 
 
-2. 下载 **hello_milvus.py** 示例代码:
+## Download example code
+
+[Download](https://raw.githubusercontent.com/milvus-io/pymilvus/v2.0.0rc9/examples/hello_milvus.py) `hello_milvus.py` directly or with the following command.
+
 ```Python
 $ wget https://raw.githubusercontent.com/milvus-io/pymilvus/v2.0.0rc9/examples/hello_milvus.py
 ```
-3. 浏览 **hello_milvus.py**，这个示例程序将：
-- 导入 pymilvus 包
-```Python
-from pymilvus import connections, FieldSchema, CollectionSchema, DataType, Collection
-```
 
-- 连接 Milvus 服务端
-```Python
-connections.connect(host='localhost', port='19530')
-```
 
-- 创建一个 collection：
-```Python
-dim = 128
-default_fields = [
-    FieldSchema(name="count", dtype=DataType.INT64, is_primary=True),
-    FieldSchema(name="random_value", dtype=DataType.DOUBLE),
-    FieldSchema(name="float_vector", dtype=DataType.FLOAT_VECTOR, dim=dim)
-]
-default_schema = CollectionSchema(fields=default_fields, description="test collection")
+## Scan the example code
 
-print(f"\nCreate collection...")
-collection = Collection(name="hello_milvus", schema=default_schema)
-```
-- 向创建的 collection 中插入数据：
-```Python
-import random
-nb = 3000
-vectors = [[random.random() for _ in range(dim)] for _ in range(nb)]
-collection.insert(
-    [
-        [i for i in range(nb)],
-        [float(random.randrange(-20,-10)) for _ in range(nb)],
-        vectors
-    ]
-)
-```
-- 构建 IVF_FLAT 索引并加载 collection 至内存：
-```Python
-default_index = {"index_type": "IVF_FLAT", "params": {"nlist": 128}, "metric_type": "L2"}
-collection.create_index(field_name="float_vector", index_params=default_index)
-collection.load()
-```
+The example code performs the following steps.
 
-- 进行向量相似度查询：
+- Imports a PyMilvus package:
 ```Python
-topK = 5
-search_params = {"metric_type": "L2", "params": {"nprobe": 10}}
-# define output_fields of search result
-res = collection.search(
-    vectors[-2:], "float_vector", search_params, topK,
-    "count > 100", output_fields=["count", "random_value"]
+from pymilvus import (
+    connections,
+    utility,
+    FieldSchema,
+    CollectionSchema,
+    DataType,
+    Collection,
 )
 ```
 
-根据 ID 和相似度输出搜索结果:
+- Connects to a server:
 ```Python
-for raw_result in res:
-    for result in raw_result:
-        id = result.id  # result id
-        distance = result.distance
-        print(id, distance)
+connections.connect("default", host="localhost", port="19530")
 ```
-更多详情，参考 [API Reference](/api-reference/pymilvus/2.0.0rc9/results.html)。
 
-- 进行混合查询：
-<div class="alert note">
-以下示例中，仅对 <code>film_id</code> 在 [2,4, 6, 8]中的 entity 进行向量相似度查询
-</div>
-
+- Creates a collection:
 ```Python
-from pymilvus import connections, Collection, FieldSchema, CollectionSchema, DataType
-import random
-connections.connect()
-schema = CollectionSchema([
-    FieldSchema("film_id", DataType.INT64, is_primary=True),
-    FieldSchema("films", dtype=DataType.FLOAT_VECTOR, dim=2)
-])
-collection = Collection("test_collection_search", schema)
-# insert
-data = [
-    [i for i in range(10)],
-    [[random.random() for _ in range(2)] for _ in range(10)],
+fields = [
+    FieldSchema(name="pk", dtype=DataType.INT64, is_primary=True, auto_id=False),
+    FieldSchema(name="random", dtype=DataType.DOUBLE),
+    FieldSchema(name="embeddings", dtype=DataType.FLOAT_VECTOR, dim=8)
 ]
-collection.insert(data)
-collection.num_entities
-10
-collection.load()
-# search
-search_param = {
-    "data": [[1.0, 1.0]],
-    "anns_field": "films",
-    "param": {"metric_type": "L2"},
-    "limit": 2,
-    "expr": "film_id in [2,4,6,8]",
+schema = CollectionSchema(fields, "hello_milvus is the simplest demo to introduce the APIs")
+hello_milvus = Collection("hello_milvus", schema)
+```
+
+- Inserts vectors in the collection:
+```Python
+import random
+entities = [
+    [i for i in range(3000)],  # field pk
+    [float(random.randrange(-20, -10)) for _ in range(3000)],  # field random
+    [[random.random() for _ in range(8)] for _ in range(3000)],  # field embeddings
+]
+insert_result = hello_milvus.insert(entities)
+```
+
+- Builds indexes on the entities:
+```Python
+index = {
+    "index_type": "IVF_FLAT",
+    "metric_type": "L2",
+    "params": {"nlist": 128},
 }
-res = collection.search(**search_param)
-assert len(res) == 1
-hits = res[0]
-assert len(hits) == 2
-print(f"- Total hits: {len(hits)}, hits ids: {hits.ids} ")
-- Total hits: 2, hits ids: [2, 4]
-print(f"- Top1 hit id: {hits[0].id}, distance: {hits[0].distance}, score: {hits[0].score} ")
-- Top1 hit id: 2, distance: 0.10143111646175385, score: 0.101431116461
+hello_milvus.create_index("embeddings", index)
 ```
 
-4. 运行 **hello_milvus.py**:
+- Loads the collection to memory and performs a vector similarity search:
+```Python
+hello_milvus.load()
+vectors_to_search = entities[-1][-2:]
+search_params = {
+    "metric_type": "l2",
+    "params": {"nprobe": 10},
+}
+result = hello_milvus.search(vectors_to_search, "embeddings", search_params, limit=3, output_fields=["random"])
+```
+
+
+- Performs a vector query:
+
+```Python
+result = hello_milvus.query(expr="random > -14", output_fields=["random", "embeddings"])
+```
+
+- Performs a hybrid search:
+
+```Python
+result = hello_milvus.search(vectors_to_search, "embeddings", search_params, limit=3, expr="random > -12", output_fields=["random"])
+```
+
+- Deletes entities by their primary keys:
+
+```Python
+expr = f"pk in [{ids[0]}, {ids[1]}]"
+hello_milvus.delete(expr)
+```
+
+- Drops the collection:
+
+```Python
+utility.drop_collection("hello_milvus")
+```
+
+## Run the example code
+
+Execute the following command to run the example code.
+
 ```Python
 $ python3 hello_milvus.py
 ```
-*运行结果及查询等待时间如下：*
 
+*The returned results and query latency are shown as follows:*
 
 <div class='result-bock'>
 <p>Search...</p>
@@ -157,4 +148,5 @@ $ python3 hello_milvus.py
 <br/>
 
 
-*恭喜！你已成功启动 Milvus，并完成了在 Milvus上的第一次向量查询。*
+*Congratulations! You have started Milvus standalone and performed your first vector similarity search.*
+
