@@ -2,19 +2,13 @@
 id: home.md
 ---
 
-<div class="doc-h1-wrapper">
+# Welcome to Milvus Docs!
 
-  <div class="title">
-    Welcome to Milvus Docs!
-  </div>
 
-  <div class="sub-title">
-    Here you will learn about what Milvus is, and how to install, use, and deploy Milvus to build an application according to your business need.
-  </div>
+Here you will learn about [what Milvus is](overview.md), and how to [install](install_standalone-docker.md), [use](manage_connection.md), and [deploy](aws.md) Milvus to build an [application](image_similarity_search.md) according to your business need. You will also find [FAQs](performance_faq.md) and [API references](https://milvus.io/api-reference/pymilvus/v2.0.0rc8/api/collection.html) here.
 
-</div>
 
-## Get Started
+You can start by browsing the recomended contents below or using the search box at the top left to search across the documentation. If you do not find the information you are looking for, feel free to ask _MilMil_![MilMil](../../../assets/icon_bird.svg) at the bottom right or submit an issue via GitHub by using the buttons at the top right of each page.
 
 <div class="card-wrapper">
 
@@ -44,13 +38,6 @@ id: home.md
   </p>
 </div>
 
-</div>
-
-<div class="milmi-tip">
-  <p>
-    Feel free to ask MilMi at the bottom right or submit an issue via GitHub by using the buttons at the top right of each page.
-  </p>
-  <img  src="../../../assets/MilMil.svg" alt="MilMil" />
 </div>
 
 ## Recommended articles
@@ -92,13 +79,14 @@ id: home.md
 <div class="doc-home-what-is-new">
 
 ## What's new in docs
-
+  
 _Nov 2021_
-
+  
 - With the release of [Milvus 2.0-RC8](release_notes.md), we have published a new documentation introducing the new feature [Time Travel](timetravel.md).
 - Added guidance on installation a Milvus cluster on Kubernetes with [Milvus Operator](install_cluster-milvusoperator.md).
-- Added documentation about the newly released Milvus ecosystem tool, [Milvus CLI](cli_overview.md). Learn what Milvus CLI is, and how to [install](install_cli.md) and [use](cli_commands.md) it.
+- Added documentation about the newly released Milvus ecosystem tool, [Milvus CLI](cli_overview.md).  Learn what Milvus CLI is, and how to [install](install_cli.md) and [use](cli_commands.md) it.
 - Added the [installation guide](milvusdm_install.md) for MilvusDM. Learn how to install the data migration tool and import data from [Faiss](f2m.md), [HDF5 files](h2m.md), and [Milvus 1.x](m2m.md) to Milvus 2.0.
+
 
 _Oct 2021_
 
