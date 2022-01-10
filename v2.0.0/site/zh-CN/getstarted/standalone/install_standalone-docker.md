@@ -13,13 +13,13 @@ group: standalone
 
 
 
-<div class="tab-wrapper"><a href="install_standalone-docker.md" class='active '>使用 Docker Compose 安装</a><a href="install_standalone-helm.md" class=''>使用 Kubernetes 安装</a></div>
+<div class="tab-wrapper"><a href="install_standalone-docker.md" class='active '>使用 Docker Compose 安装</a><a href="install_standalone-helm.md" class=''>使用 Kubernetes 安装</a><a href="install_standalone-aptyum.md" class=''>使用 APT 或 YUM 安装</a></div>
 
 
 ## 安装 Milvus 单机版
 
 
-1. 下载 **docker-compose.standalone.yml** 配置文件并保存为 **docker-compose.yml**
+1. 下载 **milvus-standalone-docker-compose.yml** 配置文件并保存为 **docker-compose.yml**
 ```
 wget https://github.com/milvus-io/milvus/releases/download/v2.0.0-pre-ga/milvus-standalone-docker-compose.yml -O docker-compose.yml
 ```

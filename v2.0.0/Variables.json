@@ -1,10 +1,9 @@
 {
   "milvus_release_version": "2.0.0-PreGA",
+  "milvus_release_tag": "2.0.0-pre-ga",
+  "milvus_deb_name": "milvus_2.0.0-preGA_1-1_amd64",
+  "milvus_rpm_name": "milvus-2.0.0-preGA.1.el7.x86_64",
   "milvus_python_sdk_version": "2.0.0rc9",
   "milvus_node_sdk_version": "1.0.20",
-  "milvus_java_sdk_version": "2.0.0",
-  "cpu_milvus_docker_image_version": "2.0.0-pre-ga",
-  "gpu_milvus_docker_image_version": "",
-  "max_insert_size": "256 MB",
-  "index_building_threshold": "1024"
+  "milvus_java_sdk_version": "2.0.0"
 }

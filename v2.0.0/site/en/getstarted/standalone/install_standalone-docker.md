@@ -18,7 +18,7 @@ If you run into image loading errors while installing, you can [Install Milvus O
 You can also build Milvus from source code at [GitHub](https://github.com/milvus-io/milvus#to-start-developing-milvus).
 
 
-<div class="tab-wrapper"><a href="install_standalone-docker.md" class='active '>Install with Docker Compose</a><a href="install_standalone-helm.md" class=''>Install on Kubernetes</a></div>
+<div class="tab-wrapper"><a href="install_standalone-docker.md" class='active '>Install with Docker Compose</a><a href="install_standalone-helm.md" class=''>Install on Kubernetes</a><a href="install_standalone-aptyum.md" class=''>Install with APT or YUM</a></div>
 
 ## Download an installation file
 
