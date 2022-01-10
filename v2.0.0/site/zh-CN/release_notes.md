@@ -41,7 +41,9 @@ Milvus 2.0.0-PreGA 是 2.0.0-GA 的预览版。它现在支持通过 primary key
 
 - Compaction 机制：通过 Compaction 机制，清理 binlog 中删除或过期的 entity，节省存储空间。该机制为 data coord 触发，data node 执行的后台任务。
 
-- 自动 Loadbalance/Handoff [#9481](https://github.com/milvus-io/milvus/issues/9481)：Loadbalance 机制将 segment 均匀地分布在 query node 上，以平衡集群的内存使用。它可以自动触发，也可以由用户触发。Handoff 机制是指当一个 growing segment 转化为 sealed segment 时，query node 等待至该 segment 被 index node 构建索引后，将该 segment 加载到内存中进行搜索或查询。
+- 自动 Loadbalance [#9481](https://github.com/milvus-io/milvus/issues/9481)：Loadbalance 机制将 segment 均匀地分布在 query node 上，以平衡集群的内存使用。它可以自动触发，也可以由用户触发。
+
+- Handoff [#9481](https://github.com/milvus-io/milvus/issues/9481)：Handoff 机制是指当一个 growing segment 转化为 sealed segment 时，query node 等待至该 segment 被 index node 构建索引后，将该 segment 加载到内存中进行搜索或查询。
 
 <h3 id="v2.0.0-PreGA">主要改进</h3>
 

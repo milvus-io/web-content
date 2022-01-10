@@ -41,11 +41,13 @@ It should be noted that Milvus 2.0.0-PreGA is NOT compatible with previous versi
 
 <h3 id="v2.0.0-PreGA">Features</h3>
 
-- Deleting entity: Milvus now supports deleting entities through primary keys. Whereas Milvus relies on append-only storage, it only supports logical deletion, id est, Milvus inserts a deletion mark on the entities to cover actual data so that no search or query will return the marked entities. Therefore, it should be noted that overusing deletion may cause search performance plummeting and storage usage surging. See [Delete entities](delete_data.md) for more instruction.
+- Deleting entity: Milvus now supports deleting entities through primary keys. Whereas Milvus relies on append-only storage, it only supports logical deletion, id est, Milvus inserts a deletion mark on the entities to cover actual data so that no search or query will return the marked entities. Therefore, it should be noted that overusing deletion may cause search performance to plummet and storage usage to surge. See [Delete entities](delete_data.md) for more instruction.
 
 - Compaction: Compaction mechanism purges the deleted or expired entities in binlogs to save storage space. It is a background task that is triggered by data coord and executed by data node.
 
-- Automatic Loadbalance/Handoff [#9481](https://github.com/milvus-io/milvus/issues/9481)：Loadbalance mechanism distributes segments evenly across query nodes to balance the memory usage of the cluster. It can be triggered either automatically or by users. Handoff mechanism refers to that, when a growing segment is sealed, query node waits until the segment is built with index by index node and then loads the segment into memory for search or query.
+- Automatic Loadbalance [#9481](https://github.com/milvus-io/milvus/issues/9481)：Loadbalance mechanism distributes segments evenly across query nodes to balance the memory usage of the cluster. It can be triggered either automatically or by users.
+
+- Handoff [#9481](https://github.com/milvus-io/milvus/issues/9481)：Handoff mechanism refers to that, when a growing segment is sealed, query node waits until the segment is built with index by index node and then loads the segment into memory for search or query.
 
 <h3 id="v2.0.0-PreGA">Improvements</h3>
 
