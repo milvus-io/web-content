@@ -22,7 +22,7 @@ This topic describes how to install Attu, an efficient open-source management to
 Attu only supports Milvus 2.x.
 </div>
 
-## Start a Attu instance
+## Start an Attu instance
 
 ```Apache
 docker run -p 8000:3000 -e HOST_URL=http://{ your machine IP }:8000 -e MILVUS_URL={your machine IP}:19530 zilliz/attu:latest
