@@ -79,7 +79,17 @@ You can start by browsing the recomended contents below or using the search box 
 <div class="doc-home-what-is-new">
 
 ## What's new in docs
-  
+
+
+_Dec 2021_
+
+- With the release of [Milvus 2.0-PreGA](release_notes.md), we have published new user guides concerning the new features of [Data Deletion](delete_data.md) and [Collection Alias](collection_alias.md).
+- Updated [Search with Time Travel](timetravel.md) by introducing how to [generate a timestamp](timetravel.md#Generate-a-timestamp-for-search) based on an existing timestamp, Unix Epoch time, or date time.
+- Added documentation about the newly released Milvus ecosystem tool, [Milvus Attu](attu.md). Learn what Milvus Attu is, and how to [install](attu_install-docker.md) and [use](attu_overview.md) it.
+- Remade [Hello Milvus](example_code.md) to demonstrate the new features of Data Deletion and LoadBalance.
+- Added a reference documentation explaining the mechanism of [Time Travel](timetravel_ref.md) in Milvus.
+
+
 _Nov 2021_
   
 - With the release of [Milvus 2.0-RC8](release_notes.md), we have published a new documentation introducing the new feature [Time Travel](timetravel.md).
@@ -87,11 +97,5 @@ _Nov 2021_
 - Added documentation about the newly released Milvus ecosystem tool, [Milvus CLI](cli_overview.md).  Learn what Milvus CLI is, and how to [install](install_cli.md) and [use](cli_commands.md) it.
 - Added the [installation guide](milvusdm_install.md) for MilvusDM. Learn how to install the data migration tool and import data from [Faiss](f2m.md), [HDF5 files](h2m.md), and [Milvus 1.x](m2m.md) to Milvus 2.0.
 
-
-_Oct 2021_
-
-- With the release of Milvus 2.0-RC7, we've made a number of compatibility and performance updates. Check out the [Release Notes](release_notes.md) for details. Note that RC7 is _not compatible_ with previous versions of Milvus 2.0.0 due to changes made to storage format.
-- [Tutorials](image_similarity_search.md) are updated with direct links to Jupyter notebook, GitHub repos, and online demos. Read the latest tutorial about how to use Milvus to build a [DNA sequence classification model](dna_sequence_classification.md).
-- The list of [Milvus adoptors](milvus_adopters.md) is further extended with more use cases added to the [blog](https://milvus.io/blog). [Let us know](<https://github.com/milvus-io/milvus-docs/issues/new?assignees=&labels=&template=--error-report.yaml&title=v2.0.0%20Milvus%20Adopters%20(milvus_adopters.md)%20Doc%20Update>) if your organization also uses Milvus and would like to be mentioned as well.
 
 </div>
