@@ -1,8 +1,8 @@
 {
   "banner": {
-    "img": "../../assets/hackthon.jpg",
+    "img": "../../assets/banner.png",
     "alt": "milvus community",
-    "href": "https://tidb.io/events/hackathon2021"
+    "href": ""
   },
   "mailingSection": {
     "title": "邮件列表",
