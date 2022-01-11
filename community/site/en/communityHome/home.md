@@ -164,7 +164,7 @@ The Milvus community is comprised of users, contributors, and culture that unite
     <p class="label">Milvus Technical Meeting</p>
     <p class="content">Join our next meeting to be involved in the discussion and decision making of Milvus‘ latest features and development timeline.</p>
     <a href="https://wiki.lfaidata.foundation/pages/viewpage.action?pageId=43287098">
-      Learn More
+      Learn More ->
     </a>
   </div>
 
@@ -173,7 +173,7 @@ The Milvus community is comprised of users, contributors, and culture that unite
     <p class="label">Event</p>
     <p class="content">We host events, often. Click to find out the upcoming events near you.</p>
     <a href="https://zilliz.com/events">
-      More Events
+      More Events ->
     </a>
   </div>
 
@@ -182,7 +182,7 @@ The Milvus community is comprised of users, contributors, and culture that unite
     <p class="label">Video</p>
     <p class="content">We upload videos, often. Click to watch the video tutorials，webinar replays and other video contents.</p>
     <a href="https://www.youtube.com/zillizchannel">
-      More Videos
+      More Videos ->
     </a>
   </div>
 
