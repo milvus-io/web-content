@@ -20,7 +20,7 @@ id: home_v3.md
 
 <div class="start_card_container">
   <a href="install_standalone-docker.md">
-    <img  src="../../../assets/home_bootcamp.svg" alt="icon" />
+    <img  src="../../../assets/home_install.svg" alt="icon" />
     <p class="link-btn">安装 Milvus <i class="fas fa-chevron-right"></i></p>
   </a>
   <p>了解如何使用 Docker Compose 或 Kubernetes 安装 Milvus。</p>
