@@ -120,9 +120,7 @@ Milvus 社区由用户、贡献者和社区独有的文化所组成。他们将�
 <div class="join-wrapper">
 
   <div class="join-card-container">
-    <div class="img-container">
-      <img src="../../assets/github.png" alt="avatar" />
-    </div>
+    <img src="../../assets/github.svg" alt="avatar" />
     <p class="label">Github Discussion</p>
     <a href="https://github.com/milvus-io/milvus/discussions" class="secondaryBtnSm">
       Join now
