@@ -20,7 +20,7 @@ id: home_v3.md
 
 <div class="start_card_container">
   <a href="install_standalone-docker.md">
-    <img  src="../../../assets/standalone.svg" alt="icon" />
+    <img  src="../../../assets/home_bootcamp.svg" alt="icon" />
     <p class="link-btn">安装 Milvus <i class="fas fa-chevron-right"></i></p>
   </a>
   <p>了解如何使用 Docker Compose 或 Kubernetes 安装 Milvus。</p>
@@ -28,7 +28,7 @@ id: home_v3.md
 
 <div class="start_card_container">
   <a href="example_code.md">
-    <img  src="../../../assets/start.svg" alt="icon" />
+    <img  src="../../../assets/home_quick_start.svg" alt="icon" />
     <p class="link-btn">快速开始 <i class="fas fa-chevron-right"></i></p>
   </a>
   <p>通过示例代码快速上手 Milvus。</p>
@@ -36,7 +36,7 @@ id: home_v3.md
 
 <div class="start_card_container">
   <a href="/bootcamp">
-    <img  src="../../../assets/bootcamps.svg" alt="icon" />
+    <img  src="../../../assets/home_bootcamp.svg" alt="icon" />
     <p class="link-btn">Milvus 训练营 <i class="fas fa-chevron-right"></i></p>
   </a>
   <p>
