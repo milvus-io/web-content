@@ -14,7 +14,7 @@ id: home.md
 
 </div>
 
-## About the Community
+<h2 class="about-title">About the Community</h2>
 
 The Milvus community is comprised of users, contributors, and culture that unite our community and inspire new ideas, collaboration, and mutual learning. Our open-source community files issues and pull requests, attends events, advocates for greater adoption of Milvus, and makes many other valuable contributions. Read on to learn how you can get involved and become part of this amazing community.
 
@@ -162,7 +162,7 @@ The Milvus community is comprised of users, contributors, and culture that unite
     <p class="label">Milvus Technical Meeting</p>
     <p class="content">Join our next meeting to be involved in the discussion and decision making of Milvus‘ latest features and development timeline.</p>
     <a href="https://wiki.lfaidata.foundation/pages/viewpage.action?pageId=43287098">
-      Learn More ->
+      Learn More <img src="../../assets/arrow-right.svg" alt='icon' />
     </a>
   </div>
 
@@ -171,7 +171,7 @@ The Milvus community is comprised of users, contributors, and culture that unite
     <p class="label">Event</p>
     <p class="content">We host events, often. Click to find out the upcoming events near you.</p>
     <a href="https://zilliz.com/events">
-      More Events ->
+      More Events <img src="../../assets/arrow-right.svg" alt='icon' />
     </a>
   </div>
 
@@ -180,7 +180,7 @@ The Milvus community is comprised of users, contributors, and culture that unite
     <p class="label">Video</p>
     <p class="content">We upload videos, often. Click to watch the video tutorials，webinar replays and other video contents.</p>
     <a href="https://www.youtube.com/zillizchannel">
-      More Videos ->
+      More Videos <img src="../../assets/arrow-right.svg" alt='icon' />
     </a>
   </div>
 

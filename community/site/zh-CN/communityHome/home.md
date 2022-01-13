@@ -14,7 +14,7 @@ id: home.md
 
 </div>
 
-## 关于社区
+<h2 class="about-title">关于社区</h2>
 
 Milvus 社区由用户、贡献者和社区独有的文化所组成。他们将我们的社区团结起来，激发了许多新想法的诞生与社区成员间的协作和学习。Milvus 是一个开放且活跃的社区，我们鼓励社区成员提交 issue 和 PR、向外宣传 Milvus，并做出其他有利他人的贡献。请继续往下阅读，了解你可以如何参与并成为 Milvus 社区的一份子。
 
@@ -162,7 +162,7 @@ Milvus 社区由用户、贡献者和社区独有的文化所组成。他们将�
     <p class="label">Milvus Office Hours</p>
     <p class="content">Milvus Office Hours 是 Milvus 社区的线上交流活动，主要目的是通过线上互动交流的形式，解答用户疑问、介绍和演示 Milvus 新特性和相关技术交流等。</p>
     <a href="https://docs.qq.com/doc/DTWtOUVN0WndQUVhH">
-      报名活动 ->
+      报名活动 <img src="../../assets/arrow-right.svg" alt='icon' />
     </a>
   </div>
 
@@ -171,7 +171,7 @@ Milvus 社区由用户、贡献者和社区独有的文化所组成。他们将�
     <p class="label">活动</p>
     <p class="content">我们常常举办活动，来这里看看有没有适合你参加的活动。</p>
     <a href="https://www.huodongxing.com/people/3672000551325?type=pub">
-      报名活动 ->
+      报名活动 <img src="../../assets/arrow-right.svg" alt='icon' />
     </a>
   </div>
 
@@ -180,7 +180,7 @@ Milvus 社区由用户、贡献者和社区独有的文化所组成。他们将�
     <p class="label">视频</p>
     <p class="content">我们常常更新视频内容，来这里看看我们的视频教程、直播回放还有其他的精彩内容。</p>
     <a href="https://space.bilibili.com/478166626?spm_id_from=333.33.b_73656375726974794f75744c696e6b.1">
-      观看视频 ->
+      观看视频 <img src="../../assets/arrow-right.svg" alt='icon' />
     </a>
   </div>
 
