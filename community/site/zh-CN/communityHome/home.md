@@ -120,9 +120,7 @@ Milvus 社区由用户、贡献者和社区独有的文化所组成。他们将�
 <div class="join-wrapper">
 
   <div class="join-card-container">
-    <div class="img-container">
-      <img src="../../assets/github.png" alt="avatar" />
-    </div>
+   <img src="../../assets/github-v3.svg" alt="avatar" />
     <p class="label">Github Discussion</p>
     <a href="https://github.com/milvus-io/milvus/discussions" class="secondaryBtnSm">
       Join now
@@ -130,7 +128,7 @@ Milvus 社区由用户、贡献者和社区独有的文化所组成。他们将�
   </div>
 
   <div class="join-card-container">
-    <img src="../../assets/slack.svg" alt="avatar" />
+    <img src="../../assets/slack-v3.svg" alt="avatar" />
     <p class="label">Slack Channel</p>
     <a href="https://slack.milvus.io/" class="secondaryBtnSm">
       Join now
@@ -138,7 +136,7 @@ Milvus 社区由用户、贡献者和社区独有的文化所组成。他们将�
   </div>
 
   <div class="join-card-container">
-    <img src="../../assets/reddit.svg" alt="avatar" />
+    <img src="../../assets/reddit-v3.svg" alt="avatar" />
     <p class="label">Reddit</p>
     <a href="https://www.reddit.com/r/vectordatabase/" class="secondaryBtnSm">
       Join now
@@ -146,7 +144,7 @@ Milvus 社区由用户、贡献者和社区独有的文化所组成。他们将�
   </div>
 
   <div class="join-card-container">
-    <img src="../../assets/twitter.svg" alt="avatar" />
+    <img src="../../assets/twitter-v3.svg" alt="avatar" />
     <p class="label">Social Media</p>
     <a href="https://twitter.com/milvusio" class="secondaryBtnSm">
       Join now

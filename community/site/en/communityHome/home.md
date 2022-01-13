@@ -120,9 +120,7 @@ The Milvus community is comprised of users, contributors, and culture that unite
 <div class="join-wrapper">
 
   <div class="join-card-container">
-    <div class="img-container">
-      <img src="../../assets/github-v3.svg" alt="avatar" />
-    </div>
+    <img src="../../assets/github-v3.svg" alt="avatar" />
     <p class="label">Github Discussion</p>
     <a href="https://github.com/milvus-io/milvus/discussions" class="secondaryBtnSm">
       Join now
