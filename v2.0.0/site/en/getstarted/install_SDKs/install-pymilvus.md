@@ -37,7 +37,7 @@ $ python3 -m pip install pymilvus==2.0.0rc9
 If PyMilvus is correctly installed, no exception will be raised when you run the following command.
 
 ```
-$ python -c "from pymilvus import Collection"
+$ python3 -c "from pymilvus import Collection"
 ```
 
 
