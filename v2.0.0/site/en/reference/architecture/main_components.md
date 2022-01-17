@@ -17,7 +17,7 @@ There are two modes for running Milvus: Standalone and Cluster. These two modes 
 
 - **MinIO:** The storage engine, which is responsible for data persistence for Milvus.
 
-![Standalone_architecture](../../../../assets/standalone_architecture.jpg)
+![Standalone_architecture](../../../../assets/standalone_architecture.jpg "Milvus standalone architecture.")
 
 ## Milvus cluster
 
@@ -40,6 +40,6 @@ There are two modes for running Milvus: Standalone and Cluster. These two modes 
 - **MinIO:**  Responsible for data persistence of large files in the cluster, such as index and binary log files. 
 - **Pulsar:** Manages logs of recent mutation operations, outputs streaming log, and provides log publish-subscribe services.
 
-![Distributed_architecture](../../../../assets/distributed_architecture.jpg)
+![Distributed_architecture](../../../../assets/distributed_architecture.jpg "Milvus cluster architecture.")
 
 For more details about Milvus' architecture, see [Computing/Storage Disaggregation](four_layers.md).

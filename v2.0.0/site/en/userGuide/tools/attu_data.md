@@ -14,7 +14,7 @@ This example imports 20,000 rows of data. Importing data appends data instead of
 
 1. Click **Import Data** on the **Collection** page. The **Import Data** dialog box appears as shown below.
 
-![Import Data](../../../../assets/attu/insight_data1.png)
+![Import Data](../../../../assets/attu/insight_data1.png "The Import Data dialogue box.")
 
 2. Select the collection you want to import data to in the **Collection** dropdown list.
 3. Select the partition you want to import data to in the **Partition** dropdown list.
@@ -29,7 +29,7 @@ This example imports 20,000 rows of data. Importing data appends data instead of
 
 5. After a legal CSV file is selected, you can then proceed by clicking **Next**.
 
-![Import Data](../../../../assets/attu/insight_data2.png)
+![Import Data](../../../../assets/attu/insight_data2.png "Click Next.")
 
 6. On the new dialog box, you can match the field names by clicking the corresponding cells in the dropdown lists.
 
@@ -37,15 +37,15 @@ This example imports 20,000 rows of data. Importing data appends data instead of
 We recommend making the headers (column names) as the first row in your CSV file.
 </div>
 
-![Import Data](../../../../assets/attu/insight_data3.png)
+![Import Data](../../../../assets/attu/insight_data3.png "Match the field names.")
 
 7. After confirming the column names corresponding to the field names, click **Import Data** to import the CSV file into Milvus. Importing data might take a while.
 
-![Import Data](../../../../assets/attu/insight_data4.png)
+![Import Data](../../../../assets/attu/insight_data4.png "Import Data.")
 
 8. If successful, the row count status updates in the Entity Count column of the collection. On the corresponding Partition tab page, the row count status updates in the Entity Count column of the partition your imported data in. It might take a while for the entity count to update.
 
-![Import Data](../../../../assets/attu/insight_data5.png)
+![Import Data](../../../../assets/attu/insight_data5.png "Data import is successful.")
 
 ## Export Data
 
@@ -53,4 +53,4 @@ We recommend making the headers (column names) as the first row in your CSV file
 
 2. Click the **Download** icon to download the query results as a CSV file.
 
-![Export Data](../../../../assets/attu/insight_data6.png)
+![Export Data](../../../../assets/attu/insight_data6.png "Click the Download icon.")

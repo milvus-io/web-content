@@ -12,15 +12,15 @@ summary: Attu, an intuitive GUI for Milvus service management.
 
 1. 点击左侧导航的 **Collection** 标签，然后点击 **Create Collection**。如下图所示，将会出现 **Create Collection** 对话框。
 
-![Create Collection dialog box](../../../../assets/attu/create_collection_dialog_box1.png)
+![Create Collection dialog box](../../../../assets/attu/create_collection_dialog_box1.png "Create Collection 对话框。")
 
 2. 填写相应表单，这个例子将创建名为 test 的 collection，这个 collection 有一个主键字段，一个向量字段，一个标量字段。你也可以继续添加需要的标量字段。
 
-![Create Collection dialog box](../../../../assets/attu/create_collection_dialog_box2.png)
+![Create Collection dialog box](../../../../assets/attu/create_collection_dialog_box2.png "填写相应表单。")
 
 3. 点击 **Create** 就可以创建我们第一个 collection。
 
-![Create Collection dialog box](../../../../assets/attu/create_collection_dialog_box3.png)
+![Create Collection dialog box](../../../../assets/attu/create_collection_dialog_box3.png "创建 collection。")
 
 ## 删除 collection
 
@@ -33,34 +33,34 @@ summary: Attu, an intuitive GUI for Milvus service management.
 删除操作是不可回滚的。
 </div>
 
-![Delete Collection dialog box](../../../../assets/attu/delete_collection.png)
+![Delete Collection dialog box](../../../../assets/attu/delete_collection.png "删除 collection。")
 
 ## 加载 collection
 
 1. 鼠标悬浮在需要加载的 collection 行上，**Load** 图标将会出现在该行末尾。
 
-![Load Collection](../../../../assets/attu/load_collection1.png)
+![Load Collection](../../../../assets/attu/load_collection1.png "Load 图标。")
 
 2. 点击 **Load** 图标，将会出现 **Load Collection** 对话框。
 3. 点击对话框中的 **Load** 按钮。
 
-![Load Collection](../../../../assets/attu/load_collection2.png)
+![Load Collection](../../../../assets/attu/load_collection2.png "点击 Load 按钮。")
 
 4. 加载 collection 数据到缓存中可能需要一些时间。当加载完成后，**Status** 列将会显示 **Loaded For Search**。
 
-![Load Collection](../../../../assets/attu/load_collection3.png)
+![Load Collection](../../../../assets/attu/load_collection3.png "加载完成。")
 
 ## 释放 collection
 
 1. 鼠标悬浮在需要加载的 collection 行上，**Release** 图标将会出现在该行末尾。
 
-![Release Collection](../../../../assets/attu/release_collection1.png)
+![Release Collection](../../../../assets/attu/release_collection1.png "Release 图标。")
 
 2. 点击 **Release** 图标，将会出现 **Release Collection** 对话框。
 3. 点击对话框中的 **Release** 按钮以释放 collection。
 4. 如果释放成功，**Status** 列将显示 **Unloaded**。
 
-![Release Collection](../../../../assets/attu/release_collection2.png)
+![Release Collection](../../../../assets/attu/release_collection2.png "Release 完成。")
 
 ## 查看 collection 的 schema
 
@@ -76,4 +76,4 @@ schema 的属性包含：
 - Index Parameters (适用于向量字段)
 - Description
 
-![Collection Schema](../../../../assets/attu/collection_schema.png)
+![Collection Schema](../../../../assets/attu/collection_schema.png "查看 collection 的 schema。")

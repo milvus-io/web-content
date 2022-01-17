@@ -120,7 +120,7 @@ helm install my-release milvus/milvus --set service.type=LoadBalancer
 Starting pods might take several minutes. Run <code>kubectl get services</code> to view services. If successful, a list of services is shown as follows.
 
 
-![GCP](../../../../assets/gcp.png)
+![GCP](../../../../assets/gcp.png "Result screenshot.")
 
 
 <div class="alert note">

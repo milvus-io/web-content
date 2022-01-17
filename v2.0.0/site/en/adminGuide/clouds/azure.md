@@ -81,7 +81,7 @@ After the cluster is created, install Milvus on the cluster with Helm.
 1. Navigate to the cluster that you have created in Kubernetes services and click it.
 2. On the left-side navigation pane, click `Overview`.
 3. On the **Overview** page that appears, click **Connect** to view the resource group and subscription.
-![Azure](../../../../assets/azure.png)
+![Azure](../../../../assets/azure.png "The Azure overview page.")
 
 ### Set a subscription and credentials
 
@@ -128,7 +128,7 @@ helm install my-release milvus/milvus --set service.type=LoadBalancer
 
 Starting pods might take several minutes. Run `kubectl get services` to view services. If successful, a list of services is shown as follows.
 
-![Results](../../../../assets/azure_results.png)
+![Results](../../../../assets/azure_results.png "Result screenshot.")
 
 <div class="alert note">
 <code>20.81.111.155</code> in the the <code>EXTERNAL-IP</code> column is the IP address of the load balancer. The default Milvus port is <code>19530</code>.

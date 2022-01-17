@@ -17,4 +17,4 @@ The Overview page lists the following information:
 3. Data: the total number of entities.
 4. **Loaded For Search** card: an interactive shortcut panel that allows you to perform a [vector search](attu_search.md) on or [release the collection](attu_collection.md).
 
-![Attu Overview](../../../../assets/attu/insight_overview_page.png)
+![Attu Overview](../../../../assets/attu/insight_overview_page.png "Attu overview page.")

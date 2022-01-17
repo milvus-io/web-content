@@ -22,5 +22,5 @@ In this tutorial, you will learn how to build an audio similarity search system 
 
 <br/>
 
-![Audio_search](../../../assets/audio_search.png)
-![Audio_search_demo](../../../assets/audio_search_demo.png)
+![Audio_search](../../../assets/audio_search.png "Workflow of an audio similarity search system.")
+![Audio_search_demo](../../../assets/audio_search_demo.png "Demo of an audio similarity search system.")

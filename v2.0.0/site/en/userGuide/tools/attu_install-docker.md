@@ -30,7 +30,7 @@ docker run -p 8000:3000 -e HOST_URL=http://{ your machine IP }:8000 -e MILVUS_UR
 
 Once you start the docker, visit `http://{ your machine IP }:8000` in your browser, and click **Connect** to enter the Attu service.
 
-![Attu_install](../../../../assets/attu/insight_install.png)
+![Attu_install](../../../../assets/attu/insight_install.png "Connect to the Attu service.")
 
 ## Contribution
 

@@ -65,7 +65,7 @@ Essentially, Euclidean distance measures the length of a segment that connects 2
 
 The formula for Euclidean distance is as follows:
 
-![euclidean](../../../assets/euclidean_metric.png)
+![euclidean](../../../assets/euclidean_metric.png "Euclidean distance.")
 
 where **a** = (a1, a2,..., an) and **b** = (b1, b2,..., bn) are two points in n-dimensional Euclidean space
 
@@ -75,7 +75,7 @@ It's the most commonly used distance metric and is very useful when the data is 
 
 The IP distance between two embeddings are defined as follows: 
 
-![ip](../../../assets/IP_formula.png)
+![ip](../../../assets/IP_formula.png "Inner product.")
 
 Where A and B are embeddings, `||A||` and `||B||` are the norms of A and B.
 
@@ -88,33 +88,33 @@ IP is more useful if you are more interested in measuring the orientation but no
 
 Suppose X' is normalized from embedding X: 
 
-![normalize](../../../assets/normalize_formula.png)
+![normalize](../../../assets/normalize_formula.png "Normalize.")
 
 The correlation between the two embeddings is as follows: 
 
-![normalization](../../../assets/normalization_formula.png)
+![normalization](../../../assets/normalization_formula.png "Normalization.")
 
 ### Jaccard distance
 
 Jaccard similarity coefficient measures the similarity between two sample sets and is defined as the cardinality of the intersection of the defined sets divided by the cardinality of the union of them. It can only be applied to finite sample sets.
 
-![Jaccard similarity coefficient](../../../assets/jaccard_coeff.png)
+![Jaccard similarity coefficient](../../../assets/jaccard_coeff.png "Jaccard similarity coefficient.")
 
 Jaccard distance measures the dissimilarity between data sets and is obtained by subtracting the Jaccard similarity coefficient from 1. For binary variables, Jaccard distance is equivalent to the Tanimoto coefficient.
 
-![Jaccard distance](../../../assets/jaccard_dist.png)
+![Jaccard distance](../../../assets/jaccard_dist.png "Jaccard distance.")
 
 ### Tanimoto distance
 
 For binary variables, the Tanimoto coefficient is equivalent to Jaccard distance:
 
-![tanimoto coefficient](../../../assets/tanimoto_coeff.png)
+![tanimoto coefficient](../../../assets/tanimoto_coeff.png "Tanimoto coefficient.")
 
 In Milvus, the Tanimoto coefficient is only applicable for a binary variable, and for binary variables, the Tanimoto coefficient ranges from 0 to +1 (where +1 is the highest similarity).
 
 For binary variables, the formula of Tanimoto distance is:
 
-![tanimoto distance](../../../assets/tanimoto_dist.png)
+![tanimoto distance](../../../assets/tanimoto_dist.png "Tanimoto distance.")
 
 The value ranges from 0 to +infinity.
 
@@ -132,7 +132,7 @@ The Superstructure is used to measure the similarity of a chemical structure and
 
 Superstructure similarity can be measured by:
 
-![superstructure](../../../assets/superstructure.png)
+![superstructure](../../../assets/superstructure.png "Superstructure.")
 
 Where
 
@@ -147,7 +147,7 @@ The Substructure is used to measure the similarity of a chemical structure and i
 
 Substructure similarity can be measured by:
 
-![substructure](../../../assets/substructure.png)
+![substructure](../../../assets/substructure.png "Substructure.")
 
 Where
 

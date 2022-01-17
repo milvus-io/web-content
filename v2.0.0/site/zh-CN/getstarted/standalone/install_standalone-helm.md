@@ -15,7 +15,7 @@ group: standalone
 
 我们推荐使用 minikube 在 Kubernetes 上安装 Milvus。 如下图所示，Minikube 默认安装 storageclass 组件。 如需使用其他方式安装 Milvus，请手动配置 storageclass。 详见[改变默认 StorageClass](https://kubernetes.io/zh/docs/tasks/administer-cluster/change-default-storage-class/)。
 
-![Storageclass](../../../../assets/storageclass.png)
+![Storageclass](../../../../assets/storageclass.png "Storageclass。")
 
 ## 1.启动本地 Kubernetes 集群
 ```

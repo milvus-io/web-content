@@ -79,7 +79,7 @@ my-release-milvus-insight    <none>   milvus-insight.local   10.100.32.1,10.100.
 
 5. Visit `http://milvus-insight.local` in your browser, and click **Connect** to enter the Attu service.
 
-![Attu_install](../../../../assets/attu/insight_install.png)
+![Attu_install](../../../../assets/attu/insight_install.png "Connect to the Attu service in Ingress mode.")
 
 ### LoadBalancer mode
 
@@ -129,7 +129,7 @@ my-release-pulsar-zookeeper-ca         ClusterIP      10.96.100.254   <none>    
 
 5. Visit `http://my-release-milvus-insight:3000/connect` in your browser, and click **Connect** to enter the Attu service.
 
-![Attu_install](../../../../assets/attu/insight_install.png)
+![Attu_install](../../../../assets/attu/insight_install.png "Connect to the Attu service in LoadBalancer mode.")
 
 ### Port-forward mode
 
@@ -153,7 +153,7 @@ kubectl port-forward service/my-release-milvus-insight 3000
 
 4. Visit `http://my-release-milvus-insight:3000/connect` in your browser, and click **Connect** to enter the Attu service.
 
-![Attu_install](../../../../assets/attu/insight_install.png)
+![Attu_install](../../../../assets/attu/insight_install.png "Connect to the Attu service in port-forward mode.")
 
 ## Contribution
 

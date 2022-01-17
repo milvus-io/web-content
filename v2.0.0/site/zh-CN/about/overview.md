@@ -17,7 +17,7 @@ Milvus 向量数据库专为向量查询与检索设计，能够为万亿级向�
 
 随着互联网不断发展，电子邮件、论文、物联网传感数据、社交媒体照片、蛋白质分子结构等非结构化数据已经变得越来越普遍。如果想要使用计算机来处理这些数据，需要使用 embedding 技术将这些数据转化为向量。随后，Milvus 会存储这些向量，并为其建立索引。Milvus 能够根据两个向量之间的距离来分析他们的相关性。如果两个向量十分相似，这说明向量所代表的源数据也十分相似。
 
-![Workflow](../../../assets/milvus_workflow.jpeg)
+![Workflow](../../../assets/milvus_workflow.jpeg "Milvus 数据流程。")
 
 ## 重要概念
 
@@ -109,7 +109,7 @@ Milvus 2.0 是一款云原生向量数据库，采用存储与计算分离的架
 更多系统原理的相关内容详见 [系统架构](architecture_overview.md)。
 
 
-![Architecture](../../../assets/architecture_02.jpg)
+![Architecture](../../../assets/architecture_02.jpg "Milvus 系统架构。")
 
 ## 开发者工具
 

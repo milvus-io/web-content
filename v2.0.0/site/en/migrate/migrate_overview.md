@@ -11,7 +11,7 @@ summary: MilvusDM allows data migration between Milvus and many other sources of
 - [HDF5 to Milvus](h2m.md): Imports HDF5 files into Milvus.
 - [Milvus to HDF5](m2h.md): Saves the data in Milvus as HDF5 files.
 
-![MilvusDM](../../../assets/milvusdm.jpeg)
+![MilvusDM](../../../assets/milvusdm.jpeg "MilvusDM.")
 
 MilvusDM is hosted on GitHub. To install MilvusDM, run: 
 ```
@@ -21,7 +21,7 @@ pip3 install pymilvusdm
 ## MilvusDM File Structure
 The flow chart below shows how MilvusDM performs different tasks according to the .yaml file it receives:
 
-![File structure](../../../assets/file_structure.png)
+![File structure](../../../assets/file_structure.png "MilvusDM file structure.")
 
 MilvusDM file structure:
 

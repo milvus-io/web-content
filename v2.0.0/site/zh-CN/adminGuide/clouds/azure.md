@@ -74,7 +74,7 @@ summary: Learn how to deploy a Milvus cluster on Azure.
 1. 导航到你在 Kubernetes 服务中创建的集群，并单击它。
 2. 在左侧导航窗格中，单击“概述”。
 3. 在弹出的“概述”页面中，单击“连接”，查看资源组和订阅。
-![Azure](../../../../assets/azure.png)
+![Azure](../../../../assets/azure.png "Azure 概述页面。")
 
 ### 设置订阅和凭据
 
@@ -123,7 +123,7 @@ helm install my-release milvus/milvus --set service.type=LoadBalancer
 
 启动 Pod 可能需要几分钟。执行 `kubectl get services` 命令查看服务。如果成功，服务列表如下所示。
 
-![Results](../../../../assets/azure_results.png)
+![Results](../../../../assets/azure_results.png "执行结果。")
 
 <div class="alert note">
  <code>EXTERNAL-IP</code> 下的<code>20.81.111.155</code>的为负载均衡器的IP地址。默认 Milvus 端口为<code>19530</code>。

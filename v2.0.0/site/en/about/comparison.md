@@ -38,7 +38,7 @@ Data engineers often need to do data rollback to fix dirty data and code bugs. T
 #### ORM Python SDK：
 Object-relational mapping (ORM) allows users to focus more on the upper-level business model than on the underlying data model, making it easier for developers to manage relations between collections, fields, and programs. To close the gap between proof of concept (PoC) for AI algorithms and production deployment, we engineered the object-relational mapping PyMilvus APIs, which can work with an embedded library, a standalone deployment, a distributed cluster, or even a cloud service. With a unified set of APIs, we provide users with a consistent user experience and reduce code migration or adaptation costs.
 
-![ORM_Python_SDK](../../../assets/python_orm.png)
+![ORM_Python_SDK](../../../assets/python_orm.png "Python ORM.")
 
 #### Support tools
 - [**Milvus Attu**](attu.md) is Milvus' graphical user interface offering practical functionalities such as cluster state management, meta management, and data query. The source code of Milvus Attu will also be open sourced as an independent project. We are looking for more contributors to join this effort.

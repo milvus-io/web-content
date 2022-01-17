@@ -14,11 +14,11 @@ summary: Attu, an intuitive GUI for Milvus service management.
 2. 在 **Data Query** 页面，点击 **Filter** 标签，将会出现 **Advanced Filter** 对话框。
 3. 通过表单，选择你需要的筛选条件，例如 **color > 10 && color < 20**。 点击 **Apply** 确认筛选条件。
 
-![Query Data](../../../../assets/attu/insight_query1.png)
+![Query Data](../../../../assets/attu/insight_query1.png "选择筛选条件。")
 
 1. 点击 **Query**，获取所有符合条件的数据。
 
-![Query Data](../../../../assets/attu/insight_query2.png)
+![Query Data](../../../../assets/attu/insight_query2.png "获取所有符合条件的数据。")
 
 ## 删除数据
 
@@ -26,8 +26,8 @@ summary: Attu, an intuitive GUI for Milvus service management.
 2. 在 **Delete entities** 对话框中，输入 `delete` 确认删除操作。
 3. 点击 **Delete** 删除选中的数据。
 
-![Delete Data](../../../../assets/attu/insight_query3.png)
+![Delete Data](../../../../assets/attu/insight_query3.png "删除选中的数据。")
 
 删除成功后，通过 **Query** 获取已删除的数据，结果将不会包含已删除的数据。
 
-![Delete Data](../../../../assets/attu/insight_query4.png)
+![Delete Data](../../../../assets/attu/insight_query4.png "Query 结果不包含已删除的数据。")

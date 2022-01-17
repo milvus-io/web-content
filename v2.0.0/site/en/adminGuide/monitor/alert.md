@@ -40,29 +40,29 @@ This tutorial assumes that you have Grafana installed and configured. If not, we
 ### 1. Add a new query
 To add an alert for the memory usage of Milvus components, edit the Memory panel. Then, add a new query with the metric: `process_resident_memory_bytes{app_kubernetes_io_name="milvus", app_kubernetes_io_instance=~"my-release", namespace="default"}`
 
-![Alert_metric](../../../../assets/alert_metric.png)
+![Alert_metric](../../../../assets/alert_metric.png "Add an alert.")
 
 ### 2. Save the dashboard
 Save the dashboard, and wait for a few minutes to see the alert.
 
-![Alert_dashboard](../../../../assets/alert_dashboard.png)
+![Alert_dashboard](../../../../assets/alert_dashboard.png "Save the dashboard.")
 
 Grafana alert query does not support template variables. Therefore, you should add a second query without any template variables in the labels. The second query is named as "A" by default. You can rename it by clicking on the dropdown.
 
-![Alert_query](../../../../assets/alert_query.png)
+![Alert_query](../../../../assets/alert_query.png "The newly added query.")
 
 ### 3. Add alert notifications
 To receive alert notifications, add a "notification channel". Then, specify the channel in the field "Send to".
 
-![Alert_notification](../../../../assets/alert_notification.png)
+![Alert_notification](../../../../assets/alert_notification.png "Specify the notification channel.")
 
 If the alert is successfully created and triggered, you will receive the notification as shown in the screenshot below.
 
-![Notification_message](../../../../assets/notification_message.png)
+![Notification_message](../../../../assets/notification_message.png "The alert is created and triggered.")
 
 To delete an alert, go to the "Alert" panel and click the delete button.
 
-![Delete_alert](../../../../assets/delete_alert.png)
+![Delete_alert](../../../../assets/delete_alert.png "Delete an alert.")
 
 ## What's next
 

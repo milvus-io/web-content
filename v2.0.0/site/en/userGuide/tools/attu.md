@@ -8,7 +8,7 @@ summary: Attu, an intuitive GUI for Milvus service management.
 
 [Attu](https://github.com/zilliztech/attu) is an efficient open-source management tool for Milvus. It features an intuitive graphical user interface (GUI), allowing you to easily interact with your databases. With just a few clicks, you can visualize your cluster status, manage metadata, perform data queries, and much more.
 
-![Attu_overview](../../../../assets/attu/insight_overview.png)
+![Attu_overview](../../../../assets/attu/insight_overview.png "Attu overview.")
 
 ## Features
 
@@ -18,27 +18,27 @@ Below is the features we have to offer:
 
 - View milvus cluster statistics in a glance. (TBD)
 
-![view_cluster_statistics](../../../../assets/attu/view_cluster_statistics.png)
+![view_cluster_statistics](../../../../assets/attu/view_cluster_statistics.png "View cluster statistics.")
 
 - Browse, query, and manage collections in a simple and straightforward way.
 
-![manage_collections](../../../../assets/attu/manage_collections.png)
+![manage_collections](../../../../assets/attu/manage_collections.png "Manage collections.")
 
 - Perform CRUD or bulk operations with just a few clicks.
 
-![attu_operations](../../../../assets/attu/insight_operations.png)
+![attu_operations](../../../../assets/attu/insight_operations.png "CRUD or bulk operations.")
 
 - Create vector index instantly.
 
-![attu_create_index](../../../../assets/attu/insight_create_index.png)
+![attu_create_index](../../../../assets/attu/insight_create_index.png "Create vector index.")
 
 - Conduct vector searches in a brand new way.
 
-![attu_conduct_search](../../../../assets/attu/insight_conduct_search.png)
+![attu_conduct_search](../../../../assets/attu/insight_conduct_search.png "Conduct vector search.")
 
 - New code-mode provides a better user experience for you.
 
-![code_mode](../../../../assets/attu/code_mode.png)
+![code_mode](../../../../assets/attu/code_mode.png "New code-mode.")
 
 Learn more about how to [install Attu](attu_install-docker.md).
 

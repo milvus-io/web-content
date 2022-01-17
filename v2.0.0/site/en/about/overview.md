@@ -18,7 +18,7 @@ As a database specifically designed to handle queries over input vectors, it is 
 As the Internet grew and evolved, unstructured data became more and more common, including emails, papers, IoT sensor data, Facebook photos, protein structures, and much more. In order for computers to understand and process unstructured data, these are converted into vectors using embedding techniques. Milvus stores and indexes these vectors. Milvus is able to analyze the correlation between two vectors by calculating their similarity distance. If the two embedding vectors are very similar, it means that the original data sources are similar as well.
 
 
-![Workflow](../../../assets/milvus_workflow.jpeg)
+![Workflow](../../../assets/milvus_workflow.jpeg "Milvus workflow.")
 
 ## Key concepts
 
@@ -108,7 +108,7 @@ The system breaks down into four levels:
 For more information, see [Architecture Overview](architecture_overview.md).
 
 
-![Architecture](../../../assets/architecture_02.jpg)
+![Architecture](../../../assets/architecture_02.jpg "Milvus architecure.")
 
 ## Developer tools
 

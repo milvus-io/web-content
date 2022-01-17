@@ -53,4 +53,4 @@ Alternatively, you can install Milvus_CLI from a compressed tarball (`.tar.gz` f
 Download an .exe file from [GitHub](https://github.com/zilliztech/milvus_cli/releases) and run it to install Milvus_CLI.
 If successful, `milvus_cli-<version>.exe` pops up as shown in the following figure.
 
-![Milvus_CLI](../../../../assets/milvus_cli_exe.png)
+![Milvus_CLI](../../../../assets/milvus_cli_exe.png "Successful installation of Milvus_CLI.")

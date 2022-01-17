@@ -22,5 +22,5 @@ In this tutorial, you will learn how to build a DNA sequence classification mode
 
 <br/>
 
-![dna](../../../assets/dna.png)
+![dna](../../../assets/dna.png "Workflow of a DNA sequence classification model.")
 

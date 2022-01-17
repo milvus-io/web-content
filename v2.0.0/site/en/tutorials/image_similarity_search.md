@@ -24,6 +24,6 @@ In this tutorial, you will learn how to build a reverse image search system that
 
 </br>
 
-![image_search](../../../assets/image_search.png)
+![image_search](../../../assets/image_search.png "Workflow of a reverse image search system.")
 
-![image_search_demo](../../../assets/image_search_demo.jpeg)
+![image_search_demo](../../../assets/image_search_demo.jpeg "Demo of a reverse image search system.")

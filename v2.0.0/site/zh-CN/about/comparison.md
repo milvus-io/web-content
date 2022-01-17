@@ -32,7 +32,7 @@ Milvus 2.0 是基于消息存储构建的分布式数据库，遵循 PACELC 定�
 #### ORM Python SDK：
 对象关系映射（object relational mapping，ORM）技术使用户更加关注于业务模型而非底层的数据模型，便于开发者维护表、字段与程序之间的关联关系。为了弥补 AI 算法概念验证（Proof of concept）到实际生产部署之间的缺口，我们设计了对象关系映射 Python Milvus API，而其背后的实现可以是通过嵌入式的 library、单机部署、分布式集群，也可能是云服务。通过统一的 API 提供一致的使用体验，避免云端两侧重复开发、测试与上线效果不一致等问题。
 
-![ORM_Python_SDK](../../../assets/python_orm.png)
+![ORM_Python_SDK](../../../assets/python_orm.png "Python ORM。")
 
 #### 丰富的周边支持：
 - **Milvus Attu** 是 Milvus 图形化管理界面，包含了集群状态可视化、元数据管理、数据查询等实用功能。Milvus Attu 源码也会作为独立项目开源，期待有更多感兴趣的人加入共同建设。

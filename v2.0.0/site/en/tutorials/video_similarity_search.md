@@ -23,5 +23,5 @@ In this tutorial, you will learn how to build a video similarity search system. 
 
 <br/>
 
-![video_search](../../../assets/video_search.png)
-![video_search_demo](../../../assets/video_search_demo.gif)
+![video_search](../../../assets/video_search.png "Workflow of a video similarity search system.")
+![video_search_demo](../../../assets/video_search_demo.gif "Demo of a video similarity search system.")

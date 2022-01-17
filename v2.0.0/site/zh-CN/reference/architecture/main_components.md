@@ -16,7 +16,7 @@ Milvus 支持两种部署模式，单机模式（standalone）和分布式模式
 
 - **MinIO** 是存储引擎，负责维护 Milvus 的数据持久化。
 
-![Standalone_architecture](../../../../assets/standalone_architecture.jpg)
+![Standalone_architecture](../../../../assets/standalone_architecture.jpg "单机版 Milvus 架构。")
 
 ## 分布式版 Milvus
 
@@ -41,7 +41,7 @@ Milvus 支持两种部署模式，单机模式（standalone）和分布式模式
 
 - **Pulsar** 负责管理近期更改操作的日志，输出流式日志及提供日志订阅服务。
 
-![Distributed_architecture](../../../../assets/distributed_architecture.jpg)
+![Distributed_architecture](../../../../assets/distributed_architecture.jpg "分布式版 Milvus 架构。")
 
 
 

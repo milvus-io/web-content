@@ -31,7 +31,7 @@ docker run -p 8000:3000 -e HOST_URL=http://{ your machine IP }:8000 -e MILVUS_UR
 一旦你成功运行了 Attu docker, 在浏览器输入 `http://{ your machine IP }:8000`，
 然后点击 **Connect** 按钮连接 Milvus。
 
-![Attu_install](../../../../assets/attu/insight_install.png)
+![Attu_install](../../../../assets/attu/insight_install.png "运行 Attu。")
 
 ## 欢迎成为贡献者
 

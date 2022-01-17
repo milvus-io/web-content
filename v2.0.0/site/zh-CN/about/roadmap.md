@@ -6,7 +6,7 @@ id: roadmap.md
 
 本页介绍了未来发布的 Milvus 版本将提供的新增功能和优化升级以及 Milvus 项目的长期目标。本页内容由用户优先级驱动，并可能随着他们的要求或需求的变化而变化。
 
-![Roadmap](../../../assets/new_roadmap.jpg)
+![Roadmap](../../../assets/new_roadmap.jpg "Milvus 产品路线图。")
 
 
 ## Milvus 2.0 时间表

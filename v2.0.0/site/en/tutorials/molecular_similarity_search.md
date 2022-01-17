@@ -23,6 +23,6 @@ In this tutorial, you will learn how to build a molecular similarity search syst
 
 <br/>
 
-![molecular](../../../assets/molecular.png)
-![molecular](../../../assets/molecular_demo.jpeg)
+![molecular](../../../assets/molecular.png "Workflow of a molecular similarity search system.")
+![molecular](../../../assets/molecular_demo.jpeg "Demo of a molded similarity search system.")
 

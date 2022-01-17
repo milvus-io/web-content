@@ -19,9 +19,9 @@ Horizontal scaling includes scaling out and scaling in.
 ### Scaling out 
 Scaling out refers to increasing the number of nodes in a cluster. Unlike scaling up, scaling out does not require you to allocate more resources to one node in the cluster. Instead, scaling out expands the cluster horizontally by adding more nodes. 
 
-![Scaleout](../../../assets/scale_out.jpg)
+![Scaleout](../../../assets/scale_out.jpg "Scaleout illustration.")
 
-![Scaleup](../../../assets/scale_up.jpg)
+![Scaleup](../../../assets/scale_up.jpg "Scaleup illustration.")
 
 According to the [Milvus architecture](architecture_overview.md), stateless worker nodes include query node, data node, index node, and proxy. Therefore, you can scale out these type of nodes to suit your business needs and application scenarios. You can either scale out the Milvus cluster manually or automatically.
 

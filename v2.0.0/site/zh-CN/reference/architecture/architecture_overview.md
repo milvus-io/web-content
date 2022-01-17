@@ -14,7 +14,7 @@ Milvus 采用共享存储架构，存储计算完全分离，计算节点支持�
 
 从架构上来看，Milvus 遵循数据流和控制流分离，整体分为了 [四个层次](four_layers.md)，分别为接入层（access layer）、协调服务（coordinator service）、执行节点（worker node）和存储层（storage）。各个层次相互独立，独立扩展和容灾。
 
-![Architecture_diagram](../../../../assets/architecture_diagram.png)
+![Architecture_diagram](../../../../assets/architecture_diagram.png "Milvus 系统架构。")
 
 
 更多 Milvus 架构细节，参考 [存储计算分离](four_layers.md) 以及 [主要组件](main_components.md)。

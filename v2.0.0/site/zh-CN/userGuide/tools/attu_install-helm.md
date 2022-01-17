@@ -79,7 +79,7 @@ my-release-milvus-insight    <none>   milvus-insight.local   10.100.32.1,10.100.
 
 5. 访问 `http://milvus-insight.local`，然后单击 **Connect** 进入 Attu 服务。
 
-![Attu_install](../../../../assets/attu/insight_install.png)
+![Attu_install](../../../../assets/attu/insight_install.png "使用 Ingress 模式进入 Attu 服务。")
 
 ### LoadBalancer 模式
 
@@ -129,7 +129,7 @@ my-release-pulsar-zookeeper-ca         ClusterIP      10.96.100.254   <none>    
 
 5. 在您的浏览器中访问 `http://my-release-milvus-insight:3000/connect`，然后单击**连接**进入 Attu 服务。
 
-![Attu_install](../../../../assets/attu/insight_install.png)
+![Attu_install](../../../../assets/attu/insight_install.png "使用 LoadBalancer 模式进入 Attu 服务。")
 
 ### Port-forward 模式
 
@@ -153,7 +153,7 @@ kubectl port-forward service/my-release-milvus-insight 3000
 
 4. 在您的浏览器中访问 `http://my-release-milvus-insight:3000/connect`，然后单击**连接**进入 Attu 服务。
 
-![Attu_install](../../../../assets/attu/insight_install.png)
+![Attu_install](../../../../assets/attu/insight_install.png "使用 port-forwards 模式进入 Attu 服务。")
 
 ## 贡献
 

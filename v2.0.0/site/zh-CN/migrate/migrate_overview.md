@@ -12,7 +12,7 @@ MilvusDM 目前支持以下数据传输通道：
 - [HDF5 至 Milvus](h2m.md): 将 HDF5 格式的文件导入 Milvus
 - [Milvus 至 HDF5](m2h.md): 将 Milvus 数据批量备份为 HDF5 格式的本地文件
 
-![MilvusDM](../../../assets/milvusdm.jpeg)
+![MilvusDM](../../../assets/milvusdm.jpeg "MilvusDM 简介。")
 
 
 如需安装 MilvusDM，运行：
@@ -24,7 +24,7 @@ pip3 install pymilvusdm
 ## MilvusDM 文件结构
 使用 MilvusDM 时会根据传入的 .yaml 文件执行对应的任务，如下图所示：
 
-![File structure](../../../assets/file_structure.png)
+![File structure](../../../assets/file_structure.png "MilvusDM 文件结构。")
 
 MilvusDM 文件结构：
 

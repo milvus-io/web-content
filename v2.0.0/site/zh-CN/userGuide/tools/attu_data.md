@@ -14,7 +14,7 @@ summary: Attu, an intuitive GUI for Milvus service management.
 
 1. 在 **Collection** 页面，点击 **Import Data** 按钮。如下图所示，将会出现 **Import Data** 对话框。
 
-![Import Data](../../../../assets/attu/insight_data1.png)
+![Import Data](../../../../assets/attu/insight_data1.png "Import Data 对话框。")
 
 2. 在 **Collection** 下拉列表框中，选择需要的 collection 来导入数据。
 3. 在 **Partition** 下拉列表框中，选择需要的 partition 来导入数据。
@@ -34,7 +34,7 @@ summary: Attu, an intuitive GUI for Milvus service management.
 
 5. 上传了一个合法的 CSV 文件以后，便可以点击 **Next**。
 
-![Import Data](../../../../assets/attu/insight_data2.png)
+![Import Data](../../../../assets/attu/insight_data2.png "点击 Next。")
 
 6. 在新的对话框中，你可以选择在下拉列表框中选择列名。
 
@@ -42,15 +42,15 @@ summary: Attu, an intuitive GUI for Milvus service management.
 我们推荐在 CSV 文件的首行设置你的列名。
 </div>
 
-![Import Data](../../../../assets/attu/insight_data3.png)
+![Import Data](../../../../assets/attu/insight_data3.png "选择列名。")
 
 7. 在确认完列名与 collection 的字段一致后，点击 **Import Data** 将会导入 CSV 文件中的数据至 Milvus。 导入数据可能需要一段时间。
 
-![Import Data](../../../../assets/attu/insight_data4.png)
+![Import Data](../../../../assets/attu/insight_data4.png "导入数据。")
 
 8. 导入成功后，collection 的 Entity Count 列将会更新为导入数据的总数。同时在 Partition 页面，导入数据时选择的 partition 的 Entity Count 列也会相应的更新。 这个更新可能会需要一些时间。
 
-![Import Data](../../../../assets/attu/insight_data5.png)
+![Import Data](../../../../assets/attu/insight_data5.png "成功导入数据。")
 
 ## 导出数据
 
@@ -58,4 +58,4 @@ summary: Attu, an intuitive GUI for Milvus service management.
 
 2. 点击 **Download** 图标，将会下载这些数据, 作为 CSV 文件保存到本地。
 
-![Export Data](../../../../assets/attu/insight_data6.png)
+![Export Data](../../../../assets/attu/insight_data6.png "导出数据。")

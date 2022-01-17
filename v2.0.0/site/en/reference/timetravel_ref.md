@@ -41,7 +41,7 @@ When you search with Time Travel, Milvus first filters the sealed segment accord
 - If the value you set for `travel_timestamp` is smaller than the smallest timestamp of the segment, this means the data in this segment does not meet the requirement. Therefore, the bitmap of the data in this segment is marked as 0.
 - If the value you set for `travel_timestamp` is between the largest and the smallest timestamp of the segment, Milvus compares the timestamps in the segment one by one, and generates a bitmap accordingly. In the bitmap, if the data meet the requirement, they are marked with 1, and 0 if they do not. 
 
-![Time_travel](../../../assets/time_travel.png)
+![Time_travel](../../../assets/time_travel.png "Time Travel illustration.")
 
 ### Growing segment
 

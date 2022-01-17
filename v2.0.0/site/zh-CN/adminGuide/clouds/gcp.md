@@ -120,7 +120,7 @@ helm install my-release milvus/milvus --set service.type=LoadBalancer
 
 启动 Pod 可能需要几分钟。执行 <code>kubectl get services</code> 查看服务。如果成功，服务列表如下所示。
 
-![GCP](../../../../assets/gcp.png)
+![GCP](../../../../assets/gcp.png "查看服务列表。")
 
 <div class="alert note"><code>EXTERNAL-IP</code> 列中的<code>34.145.26.89</code>为负载均衡器的 IP 地址。该 IP 地址用于连接 Milvus。
 </div>

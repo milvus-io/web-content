@@ -25,8 +25,8 @@ In this tutorial, you will learn how to build a QA system that can link new user
 
 <br/>
 
-![Qa_chatbot](../../../assets/qa_chatbot.png)
+![Qa_chatbot](../../../assets/qa_chatbot.png "Workflow of a QA chatbot.")
 
-![QA_chatbot_demo](../../../assets/qa_chatbot_demo.png)
+![QA_chatbot_demo](../../../assets/qa_chatbot_demo.png "Demo of a QA chatbot.")
 
 

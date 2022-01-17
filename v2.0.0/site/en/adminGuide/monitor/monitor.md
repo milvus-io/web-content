@@ -20,7 +20,7 @@ The ServiceMonitor Custom Resource Definition (CRD) enables you to declaratively
 
 The following image illustrates Prometheus workflow.
 
-![Prometheus_architecture](../../../../assets/prometheus_architecture.png)
+![Prometheus_architecture](../../../../assets/prometheus_architecture.png "The Prometheus architecture.")
 
 ## Prerequisites
 

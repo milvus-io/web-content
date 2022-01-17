@@ -22,9 +22,9 @@ summary: Attu, an intuitive GUI for Milvus service management.
 
 如果创建成功，你创建的索引类型将会出现在向量字段的 **Index Type** 列中。
 
-![Create Index](../../../../assets/attu/insight_index1.png)
+![Create Index](../../../../assets/attu/insight_index1.png "创建索引。")
 
-![Create Index](../../../../assets/attu/insight_index2.png)
+![Create Index](../../../../assets/attu/insight_index2.png "索引类型。")
 
 ## 删除索引
 
@@ -33,4 +33,4 @@ summary: Attu, an intuitive GUI for Milvus service management.
 
 如果删除成功，**CREATE INDEX** 按钮将会出现在 **Index Type** 列中。
 
-![Delete Index](../../../../assets/attu/insight_index3.png)
+![Delete Index](../../../../assets/attu/insight_index3.png "删除索引。")
