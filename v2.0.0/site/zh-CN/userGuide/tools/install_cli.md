@@ -3,21 +3,22 @@ id: install_cli.md
 summary: Learn how to install Milvus_CLI.
 ---
 
-# 如何安装 Milvus_CLI
+# 安装 Milvus_CLI
 
-Milvus_CLI 的当前版本是 0.1.9。
-如果想查找已安装的版本，并查看是否需要更新，请运行 `milvus_cli --version` 命令。
+本文将介绍如何安装 Milvus_CLI。
 
-## 先决条件
+
+## 通过 PyPI 安装
+
+我们建议你从 [PyPI](https://pypi.org/project/milvus-cli/) 安装 Milvus_CLI。
+
+
+### 安装前提
 
 - 安装 [Python 3.8.5](https://www.python.org/downloads/release/python-385/) 或更高版本
 - 安装 [pip](https://pip.pypa.io/en/stable/installation/)
 
-## 安装
-
-我们建议你从 [PyPI](https://pypi.org/project/milvus-cli/) 安装 Milvus_CLI。
-
-### 从 PyPI 安装
+### 使用 pip 安装
 
 安装 Milvus_CLI。
 
@@ -25,7 +26,21 @@ Milvus_CLI 的当前版本是 0.1.9。
 pip install milvus-cli
 ```
 
-### 从源代码安装
+## 使用 Docker 安装
+
+你也可以使用Docker 安装 Milvus_CLI。
+
+### 安装前提
+
+需要 Docker 19.03 或更高版本。
+
+### 通过 Docker 镜像安装
+
+```shell
+$ docker run -it zilliz/milvus_cli:latest
+```
+
+## 从源代码安装
 
 1. 下载 `milvus_cli` 仓库到本地。
 
