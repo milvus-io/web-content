@@ -14,6 +14,7 @@ Milvus supports deleting entities by primary key filtered with boolean expressio
 <div class="alert caution">
     <ul>
         <li>This feature is still under active development, and will be optimized with the release of Milvus 2.0.0-GA.</li>
+	<li>Deleted entities can still be retrieved immediately after the deletion if the consistency level is set lower than <code>Strong</code>.</li>
 	<li>Entities deleted beyond the pre-specified span of time for Time Travel cannot be retrieved again.</li>
         <li>Frequent deletion operations will impact the system performance.</li>
     </ul>
@@ -69,8 +70,6 @@ The expression to specify entities to be deleted： pk in [0,1]
 ## Delete entities
 
 Delete the entities with the boolean expression you created. Milvus returns the ID list of the deleted entities.
-
-By specifying `partition_name`, you can decide from which partition to delete the entities and thus save the resources.
 
 <div class="multipleCode">
   <a href="?python">Python </a>
