@@ -129,20 +129,61 @@ $ python3 hello_milvus.py
 
 *The returned results and query latency are shown as follows:*
 
-<div class='result-bock'>
-<p>Search...</p>
-<p>(distance: 0.0, id: 2998) -20.0</p>
-<p>(distance: 13.2614107131958, id: 989) -11.0</p>
-<p>(distance: 14.489648818969727, id: 1763) -19.0</p>
-<p>(distance: 15.295698165893555, id: 968) -20.0</p>
-<p>(distance: 15.34445571899414, id: 2049) -19.0</p>
-<p>(distance: 0.0, id: 2999) -12.0</p>
-<p>(distance: 14.63361930847168, id: 1259) -13.0</p>
-<p>(distance: 15.421361923217773, id: 2530) -15.0</p>
-<p>(distance: 15.427900314331055, id: 600) -14.0</p>
-<p>(distance: 15.538337707519531, id: 637) -19.0</p>
-<p>search latency = 0.0549s</p>
-</div>
+```
+=== start connecting to Milvus     ===
+
+Does collection hello_milvus exist in Milvus: False
+
+=== Create collection `hello_milvus` ===
+
+
+=== Start inserting entities       ===
+
+Number of entities in Milvus: 3000
+
+=== Start Creating index IVF_FLAT  ===
+
+
+=== Start loading                  ===
+
+
+=== Start searching based on vector similarity ===
+
+hit: (distance: 0.0, id: 2998), random field: -11.0
+hit: (distance: 0.11455299705266953, id: 1581), random field: -18.0
+hit: (distance: 0.1232629269361496, id: 2647), random field: -13.0
+hit: (distance: 0.0, id: 2999), random field: -11.0
+hit: (distance: 0.10560893267393112, id: 2430), random field: -18.0
+hit: (distance: 0.13938161730766296, id: 377), random field: -14.0
+search latency = 0.2796s
+
+=== Start querying with `random > -14` ===
+
+query result:
+-{'pk': 9, 'random': -13.0, 'embeddings': [0.298433, 0.931987, 0.949756, 0.598713, 0.290125, 0.094323, 0.064444, 0.306993]}
+search latency = 0.2970s
+
+=== Start hybrid searching with `random > -12` ===
+
+hit: (distance: 0.0, id: 2998), random field: -11.0
+hit: (distance: 0.15773043036460876, id: 472), random field: -11.0
+hit: (distance: 0.3273330628871918, id: 2146), random field: -11.0
+hit: (distance: 0.0, id: 2999), random field: -11.0
+hit: (distance: 0.15844076871871948, id: 2218), random field: -11.0
+hit: (distance: 0.1622171700000763, id: 1403), random field: -11.0
+search latency = 0.3028s
+
+=== Start deleting with expr `pk in [0, 1]` ===
+
+query before delete by expr=`pk in [0, 1]` -> result: 
+-{'pk': 0, 'random': -18.0, 'embeddings': [0.142279, 0.414248, 0.378628, 0.971863, 0.535941, 0.107011, 0.207052, 0.98182]}
+-{'pk': 1, 'random': -15.0, 'embeddings': [0.57512, 0.358512, 0.439131, 0.862369, 0.083284, 0.294493, 0.004961, 0.180082]}
+
+query after delete by expr=`pk in [0, 1]` -> result: []
+
+
+=== Drop collection `hello_milvus` ===
+```
 
 
 <br/>
