@@ -25,7 +25,7 @@ Python 3 (3.71 or later) is required.
 PyMilvus is available in [Python Package Index](https://pypi.org/project/pymilvus/).
 
 <div class="alert note">
-It is recommended to install a PyMilvus version that matches the version of the Milvus server you installed. For example, install PyMilvus v2.0.0rc7 for Milvus 2.0.0-RC7.
+It is recommended to install a PyMilvus version that matches the version of the Milvus server you installed. For more information, see <a href="release_notes.md">Release Notes</a>.
 </div>
 
 ```
