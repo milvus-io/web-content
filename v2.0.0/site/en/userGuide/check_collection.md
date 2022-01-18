@@ -93,16 +93,16 @@ Check the details of a collection.
 
 ```python
 from pymilvus import Collection
-collection = Collection("book")      # Get an existing collection.
+collection = Collection("book")  # Get an existing collection.
 
-collection.schema                                  # Return the schema.CollectionSchema of the collection.
-collection.description                             # Return the description of the collection.
-collection.name                                    # Return the name of the collection.
-collection.is_empty                                # Return the boolean value that indicates if the collection is empty.
-collection.num_entities                            # Return the number of entities in the collection.
-collection.primary_field                           # Return the schema.FieldSchema of the primary key field.
-collection.partitions                              # Return the list[Partition] object.
-collection.indexes                                 # Return the list[Index] object.
+collection.schema                # Return the schema.CollectionSchema of the collection.
+collection.description           # Return the description of the collection.
+collection.name                  # Return the name of the collection.
+collection.is_empty              # Return the boolean value that indicates if the collection is empty.
+collection.num_entities          # Return the number of entities in the collection.
+collection.primary_field         # Return the schema.FieldSchema of the primary key field.
+collection.partitions            # Return the list[Partition] object.
+collection.indexes               # Return the list[Index] object.
 ```
 
 ```javascript
