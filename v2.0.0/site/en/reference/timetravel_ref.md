@@ -20,13 +20,13 @@ During a search, if the search request received by the proxy contains the parame
 
 ## Search implementation
 
-Searches with filtering in [knowhere](https://github.com/milvus-io/milvus/blob/master/docs/design_docs/knowhere_design.md) is achieved by bitmap. Bitmap can be applied in the following three aspects:
+Searches with filtering in [knowhere](https://github.com/milvus-io/milvus/blob/master/docs/design_docs/knowhere_design.md) is achieved by bitset. Bitset can be applied in the following three aspects:
 
 - Delete data
 - Timestamp
 - Attribute filtering
 
-When searching in segcore, you can obtain a bitmap indicating if the timestamp meets the condition. Then, the segcore combines the timestamp bitmap with the other two types of bitmaps, data deletion bitmap and attribute filtering bitmap. Finally, a bitmap containing all deletion, attribute filtering, and timestamp information is generated. Then Milvus judges the range of data to query or search based on this bitmap.
+When searching in segcore, you can obtain a bitset indicating if the timestamp meets the condition. Then, the segcore combines the timestamp bitset with the other two types of bitsets, data deletion bitset and attribute filtering bitset. Finally, a bitset containing all deletion, attribute filtering, and timestamp information is generated. Then Milvus judges the range of data to query or search based on this bitset.
 
 All CRUD operations within Milvus are executed in memory. Therefore, you need to [load collection from disk to memory](search.md#Load-collection) before searching with Time Travel.
 
@@ -37,9 +37,9 @@ For sealed segments, you need to call `collection.load()` to load the collection
 
 When you search with Time Travel, Milvus first filters the sealed segment according to the smallest and largest timestamp in the `TimestampIndex`:
 
-- If the value you set for `travel_timestamp` is greater than the largest timestamp of the segment, this means all the data in this segment meets the requirement. Therefore, the bitmap of the data in this segment is marked as 1. 
-- If the value you set for `travel_timestamp` is smaller than the smallest timestamp of the segment, this means the data in this segment does not meet the requirement. Therefore, the bitmap of the data in this segment is marked as 0.
-- If the value you set for `travel_timestamp` is between the largest and the smallest timestamp of the segment, Milvus compares the timestamps in the segment one by one, and generates a bitmap accordingly. In the bitmap, if the data meet the requirement, they are marked with 1, and 0 if they do not. 
+- If the value you set for `travel_timestamp` is greater than the largest timestamp of the segment, this means all the data in this segment meets the requirement. Therefore, the bitset of the data in this segment is marked as 1. 
+- If the value you set for `travel_timestamp` is smaller than the smallest timestamp of the segment, this means the data in this segment does not meet the requirement. Therefore, the bitset of the data in this segment is marked as 0.
+- If the value you set for `travel_timestamp` is between the largest and the smallest timestamp of the segment, Milvus compares the timestamps in the segment one by one, and generates a bitset accordingly. In the bitset, if the data meet the requirement, they are marked with 1, and 0 if they do not. 
 
 ![Time_travel](../../../assets/time_travel.png "Time Travel illustration.")
 
