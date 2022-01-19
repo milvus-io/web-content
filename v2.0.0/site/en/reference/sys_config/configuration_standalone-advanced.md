@@ -3,7 +3,7 @@ id: configuration_standalone-advanced.md
 title: Milvus Standalone System Configurations
 label: Advanced Configurations
 order: 1
-group: standalone_sys
+group: configuration_standalone-basic.md
 summary: Learn about basic and advanced Milvus standalone configurations.
 ---
 

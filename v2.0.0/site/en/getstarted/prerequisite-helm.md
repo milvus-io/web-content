@@ -3,7 +3,7 @@ id: prerequisite-helm.md
 label: Install on Kubernetes
 related_key: Kubernetes
 order: 1
-group: prerequisite
+group: prerequisite-docker.md
 summary: Learn the necessary preparations before installing Milvus.
 ---
 

@@ -1,9 +1,9 @@
 ---
 id: install_standalone-aptyum.md
-label: 使用 APT 或 YUM 安装
+label: APT 或 YUM 安装
 related_key: Install
 order: 2
-group: standalone
+group: install_standalone-docker.md
 summary: Learn how to install Milvus stanalone with APT or YUM.
 ---
 
@@ -21,7 +21,7 @@ summary: Learn how to install Milvus stanalone with APT or YUM.
 你也可以[从源代码编译 Milvus](https://github.com/milvus-io/milvus#to-start-developing-milvus)。
 
 
-<div class="tab-wrapper"><a href="install_standalone-docker.md" class=''>使用 Docker Compose 安装</a><a href="install_standalone-helm.md" class=''>使用 Kubernetes 安装</a><a href="install_standalone-aptyum.md" class='active '>使用 APT 或 YUM 安装</a></div>
+<div class="tab-wrapper"><a href="install_standalone-docker.md" class=''>Docker Compose 安装</a><a href="install_standalone-helm.md" class=''>Helm 安装</a><a href="install_standalone-aptyum.md" class='active '>APT 或 YUM 安装</a></div>
 
 ## Install Milvus with APT on Ubuntu
 

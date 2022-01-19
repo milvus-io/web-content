@@ -3,7 +3,7 @@ id: install_cluster-helm.md
 label: Helm 
 related_key: Kubernetes
 order: 1
-group: cluster
+group: install_cluster-docker.md
 summary: Learn how to install Milvus cluster on Kubernetes.
 ---
 

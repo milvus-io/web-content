@@ -3,7 +3,7 @@ id: example_code.md
 related_key: pymilvus
 label: Python
 order: 0
-group: example
+group: example_code.md
 summary: Get started with Milvus faster using this Python example code.
 ---
 

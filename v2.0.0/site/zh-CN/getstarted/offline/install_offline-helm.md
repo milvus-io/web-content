@@ -2,7 +2,7 @@
 id: install_offline-helm.md
 label: 使用 Kubernetes 安装
 order: 1
-group: offline
+group: install_offline-docker.md
 ---
 # Install Milvus Offline
 

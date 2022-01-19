@@ -2,7 +2,7 @@
 id: install_offline-docker.md
 label: 使用 Docker Compose 安装
 order: 0
-group: offline
+group: install_offline-docker.md
 ---
 # 离线安装 Milvus
 

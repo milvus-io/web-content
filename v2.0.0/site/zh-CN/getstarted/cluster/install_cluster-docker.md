@@ -2,7 +2,7 @@
 id: install_cluster-docker.md
 label: Docker Compose
 order: 0
-group: cluster
+group: install_cluster-docker.md
 ---
 # 安装 Milvus 分布式版
 

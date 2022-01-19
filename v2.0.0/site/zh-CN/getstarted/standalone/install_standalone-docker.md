@@ -1,8 +1,8 @@
 ---
 id: install_standalone-docker.md
-label: 使用 Docker Compose 安装
+label: Docker Compose 安装
 order: 0
-group: standalone
+group: install_standalone-docker.md
 ---
 
 # 安装 Milvus 单机版
@@ -13,7 +13,7 @@ group: standalone
 
 
 
-<div class="tab-wrapper"><a href="install_standalone-docker.md" class='active '>使用 Docker Compose 安装</a><a href="install_standalone-helm.md" class=''>使用 Kubernetes 安装</a><a href="install_standalone-aptyum.md" class=''>使用 APT 或 YUM 安装</a></div>
+<div class="tab-wrapper"><a href="install_standalone-docker.md" class='active '>Docker Compose 安装</a><a href="install_standalone-helm.md" class=''>Helm 安装</a><a href="install_standalone-aptyum.md" class=''>APT 或 YUM 安装</a></div>
 
 
 ## 安装 Milvus 单机版

@@ -2,7 +2,7 @@
 id: configuration_standalone-basic.md
 label: 基本配置
 order: 0
-group: standalone_sys
+group: configuration_standalone-basic.md
 ---
 
 # Milvus 单机版系统配置

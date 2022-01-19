@@ -2,7 +2,7 @@
 id: configuration_cluster-advanced.md
 label: 高级配置
 order: 1
-group: cluster_sys
+group: configuration_cluster-basic.md
 ---
 
 # 分布式版 Milvus 系统配置

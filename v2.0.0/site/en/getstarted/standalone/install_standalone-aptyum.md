@@ -1,9 +1,9 @@
 ---
 id: install_standalone-aptyum.md
-label: Install with APT or YUM
+label: APT or YUM
 related_key: Install
 order: 2
-group: standalone
+group: install_standalone-docker.md
 summary: Learn how to install Milvus stanalone with APT or YUM.
 ---
 
@@ -18,7 +18,7 @@ If you run into image loading errors while installing, you can [Install Milvus O
 You can also build Milvus from source code at [GitHub](https://github.com/milvus-io/milvus#to-start-developing-milvus).
 
 
-<div class="tab-wrapper"><a href="install_standalone-docker.md" class=''>Install with Docker Compose</a><a href="install_standalone-helm.md" class=''>Install on Kubernetes</a><a href="install_standalone-aptyum.md" class='active '>Install with APT or YUM</a></div>
+<div class="tab-wrapper"><a href="install_standalone-docker.md" class=''>Docker Compose</a><a href="install_standalone-helm.md" class=''>Helm</a><a href="install_standalone-aptyum.md" class='active '>APT or YUM</a></div>
 
 ## Install Milvus with APT on Ubuntu
 

@@ -1,8 +1,8 @@
 ---
 id: install_standalone-helm.md
-label: 使用 Kubernetes 安装
+label: Helm 安装
 order: 1
-group: standalone
+group: install_standalone-docker.md
 ---
 # 安装 Milvus 单机版
 
@@ -11,7 +11,7 @@ group: standalone
 你也可以[从源代码编译 Milvus](https://github.com/milvus-io/milvus#to-start-developing-milvus)。
 
 
-<div class="tab-wrapper"><a href="install_standalone-docker.md" class=''>使用 Docker Compose 安装</a><a href="install_standalone-helm.md" class='active '>使用 Kubernetes 安装</a><a href="install_standalone-aptyum.md" class=''>使用 APT 或 YUM 安装</a></div>
+<div class="tab-wrapper"><a href="install_standalone-docker.md" class=''>Docker Compose 安装</a><a href="install_standalone-helm.md" class='active '>Helm 安装</a><a href="install_standalone-aptyum.md" class=''>APT 或 YUM 安装</a></div>
 
 我们推荐使用 minikube 在 Kubernetes 上安装 Milvus。 如下图所示，Minikube 默认安装 storageclass 组件。 如需使用其他方式安装 Milvus，请手动配置 storageclass。 详见[改变默认 StorageClass](https://kubernetes.io/zh/docs/tasks/administer-cluster/change-default-storage-class/)。
 

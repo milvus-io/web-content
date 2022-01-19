@@ -3,7 +3,7 @@ id: install-pymilvus.md
 label: Install PyMilvus
 related_key: SDK
 order: 0
-group: sdk
+group: install-pymilvus.md
 summary: Learn how to install the Python SDK of Milvus.
 ---
 

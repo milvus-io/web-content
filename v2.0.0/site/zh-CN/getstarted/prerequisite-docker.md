@@ -2,7 +2,7 @@
 id: prerequisite-docker.md
 label: 使用 Docker Compose 安装
 order: 0
-group: prerequisite
+group: prerequisite-docker.md
 ---
 # 安装前提
 安装前请先检查你的软件及硬件设备是否满足 Milvus 安装要求。

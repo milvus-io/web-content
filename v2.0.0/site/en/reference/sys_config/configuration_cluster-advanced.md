@@ -3,7 +3,7 @@ id: configuration_cluster-advanced.md
 title: Milvus Cluster System Configurations
 label: Advanced Configurations
 order: 1
-group: cluster_sys
+group: configuration_cluster-basic.md
 summary: Learn about basic and advanced Milvus cluster configurations.
 ---
 

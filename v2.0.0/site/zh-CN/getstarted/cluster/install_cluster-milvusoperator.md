@@ -3,7 +3,7 @@ id: install_cluster-milvusoperator.md
 label: Milvus Operator
 related_key: Kubernetes
 order: 2
-group: cluster
+group: install_cluster-docker.md
 summary: 了解如何使用 Milvus Operator 在 Kubernetes 上安装 Milvus 集群
 ---
 

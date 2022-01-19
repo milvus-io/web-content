@@ -2,7 +2,7 @@
 id: attu_install-helm.md
 label: Install with Helm Chart
 order: 1
-group: attu
+group: attu_install-docker.md
 related_key: attu
 summary: Learn how to install Attu with Helm Chart to manage your Milvus service.
 ---

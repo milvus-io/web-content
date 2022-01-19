@@ -2,7 +2,7 @@
 id: configuration_standalone-advanced.md
 label: 高级配置
 order: 1
-group: standalone_sys
+group: configuration_standalone-basic.md
 ---
 
 # 单机版 Milvus 系统配置
