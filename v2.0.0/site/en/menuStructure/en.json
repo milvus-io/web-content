@@ -349,14 +349,21 @@
       "order": 3,
       "isMenu": true
     },
-
+    {
+      "id": "configure-docker.md",
+      "title": "Configure Milvus",
+      "label1": "admin_guide",
+      "label2": "",
+      "label3": "",
+      "order": 0
+    },
     {
       "id": "allocate.md",
       "title": "Allocate Resources",
       "label1": "admin_guide",
       "label2": "",
       "label3": "",
-      "order": 0
+      "order": 1
     },
     {
       "id": "cloud",
@@ -364,7 +371,7 @@
       "label1": "admin_guide",
       "label2": "",
       "label3": "",
-      "order": 1,
+      "order": 2,
       "isMenu": true
     },
     {
@@ -414,7 +421,7 @@
       "label1": "admin_guide",
       "label2": "",
       "label3": "",
-      "order": 2
+      "order": 3
     },
     {
       "id": "operator.md",
@@ -422,7 +429,7 @@
       "label1": "admin_guide",
       "label2": "",
       "label3": "",
-      "order": 3
+      "order": 4
     },
     {
       "id": "scaleout.md",
@@ -430,7 +437,7 @@
       "label1": "admin_guide",
       "label2": "",
       "label3": "",
-      "order": 4
+      "order": 5
     },
     {
       "id": "upgrade.md",
@@ -438,7 +445,7 @@
       "label1": "admin_guide",
       "label2": "",
       "label3": "",
-      "order": 5
+      "order": 6
     },
     {
       "id": "monitor",
@@ -446,7 +453,7 @@
       "label1": "admin_guide",
       "label2": "",
       "label3": "",
-      "order": 6,
+      "order": 7,
       "isMenu": true
     },
     {
@@ -487,7 +494,7 @@
       "label1": "admin_guide",
       "label2": "",
       "label3": "",
-      "order": 7,
+      "order": 8,
       "isMenu": true
     },
     {
@@ -734,31 +741,6 @@
       "label2": "architecture",
       "label3": "",
       "order": 3
-    },
-    {
-      "id": "systemconfigurations",
-      "title": "System Configurations",
-      "label1": "reference",
-      "label2": "",
-      "label3": "",
-      "order": 1,
-      "isMenu": true
-    },
-    {
-      "id": "configuration_standalone-basic.md",
-      "title": "Milvus Stanalone",
-      "label1": "reference",
-      "label2": "systemconfigurations",
-      "label3": "",
-      "order": 0
-    },
-    {
-      "id": "configuration_cluster-basic.md",
-      "title": "Milvus Cluster",
-      "label1": "reference",
-      "label2": "systemconfigurations",
-      "label3": "",
-      "order": 1
     },
     {
       "id": "metric.md",

@@ -5,7 +5,7 @@ related_key: monitor, alert
 summary: Learn how to visualize Milvus metrics in Grafana.
 ---
 
-# Visualize Milvus metrics in Grafana
+# Visualize Milvus Metrics in Grafana
 
 This topic describes how to visualize Milvus metrics using Grafana.
 
