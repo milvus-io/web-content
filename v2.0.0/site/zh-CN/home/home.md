@@ -84,7 +84,7 @@ _2021 年 12 月_
 - 随着 [Milvus 2.0-PreGA](release_notes.md) 版本的发布，Milvus 文档新增了 [数据删除](delete_data.md) 以及 [Collection 别名](collection_alias.md) 功能使用说明。
 - 更新 [Time Travel](timetravel.md) 功能文档，添加 [生成时间戳](timetravel.md#Generate-a-timestamp-for-search) 功能介绍。
 - Milvus 生态系统新增工具 [Milvus Attu](attu.md)。了解如何 [安装](attu_install-docker.md) 以及 [使用](attu_overview.md) Milvus Attu。
-- 重制 [Hello Milvus](example_code.md)，新增数据删除以及 LoadBalance 功能展示。
+- 重制 [Hello Milvus](example_code.md)，新增数据删除功能展示。
 - 添加 [Time Travel 原理](timetravel_ref.md) 文档。
 
 _2021 年 11 月_
