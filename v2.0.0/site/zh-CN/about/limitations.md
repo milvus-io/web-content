@@ -39,7 +39,7 @@ Milvus 致力于为用户提供性能最佳的向量数据库，方便用户将�
 | VARCHAR      | 65535       |
 
 <div class="alert note">
-Milvus 2.0 稳定版将支持 VARCHAR。Milvus 将在未来支持更多字符串类型。 
+未来版本 Milvus 将支持 VARCHAR 以及更多字符串类型。 
 </div>
 
 
@@ -63,8 +63,8 @@ Milvus 2.0 稳定版将支持 VARCHAR。Milvus 将在未来支持更多字符串
 ## 检索参数限制
 | 参数      | 最大值 |
 | ----------- | ----------- |
-| Top K      | 16384       |
-| 目标输入向量   | 16384       |
+| <code>topk</code>（输出向量结果数）     | 16384       |
+| <code>nq</code>（目标输入向量数）  | 16384       |
 
 <div class="alert note">
   由于 Pulsar 对于日志传输文件大小的限制 (100 MB), 目前版本 Milvus 在高维向量搜索中暂不支持将 <code>TopK</code> 设为最大值（16384）。Milvus 2.0.0 正式版将解除这一限制。
