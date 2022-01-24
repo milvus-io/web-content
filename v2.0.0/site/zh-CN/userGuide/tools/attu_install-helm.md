@@ -11,7 +11,7 @@ summary: Learn how to install Attu with Helm Chart to manage your Milvus service
 
 本文介绍如何安装 Attu 工具。Attu 是 Milvus 的高效开源管理工具。
 
-<div class="tab-wrapper"><a href="attu_install-docker.md" class=''>Docker Compose 安装</a><a href="attu_install-helm.md" class='active '>Helm 安装</a></div>
+<div class="tab-wrapper"><a href="attu_install-docker.md" class=''>Docker Compose 安装</a><a href="attu_install-helm.md" class='active '>Helm 安装</a><a href="attu_install-package.md" class=''>安装包安装</a></div>
 
 ## 先决条件
 
