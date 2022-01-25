@@ -18,6 +18,8 @@ The following example builds a partition `novel` in the collection `book`.
 <div class="multipleCode">
   <a href="?python">Python </a>
   <a href="?javascript">Node.js</a>
+  <a href="?go">GO</a>
+  <a href="?java">Java</a>
   <a href="?cli">CLI</a>
 </div>
 
@@ -33,6 +35,25 @@ await milvusClient.partitionManager.createPartition({
   collection_name: "book",
   partition_name: "novel",
 });
+```
+
+```go
+err := milvusClient.CreatePartition(
+    context.Background(),   // ctx
+    "book",                 // CollectionName
+    "novel"                 // partitionName
+)
+if err != nil {
+    log.Fatal("failed to create partition:", err.Error())
+}
+```
+
+```java
+milvusClient.createPartition(
+        CreatePartitionParam.newBuilder()
+                .withCollectionName("book")
+                .withPartitionName("novel")
+                .build());
 ```
 
 ```cli
@@ -62,21 +83,63 @@ create partition -c book -p novel
 
 <table class="language-javascript">
 	<thead>
-	<tr>
-		<th>Parameter</th>
-		<th>Description</th>
-	</tr>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+    </tr>
 	</thead>
 	<tbody>
-  <tr>
-		<td><code>collection_name</code></td>
-		<td>Name of the collection to create a partition in.</td>
-	</tr>
-  <tr>
-		<td><code>partition_name</code></td>
-		<td>Name of the partition to create.</td>
-	</tr>
+    <tr>
+      <td><code>collection_name</code></td>
+      <td>Name of the collection to create a partition in.</td>
+    </tr>
+    <tr>
+      <td><code>partition_name</code></td>
+      <td>Name of the partition to create.</td>
+    </tr>
 	</tbody>
+</table>
+
+<table class="language-go">
+	<thead>
+    <tr>
+        <th>Parameter</th>
+        <th>Description</th>
+    </tr>
+	</thead>
+	<tbody>
+    <tr>
+        <td><code>ctx</code></td>
+        <td>Context to control API invocation process.</td>
+    </tr>
+    <tr>
+        <td><code>CollectionName</code></td>
+        <td>Name of the collection to create a partition in.</td>
+    </tr>
+    <tr>
+        <td><code>partitionName</code></td>
+        <td>Name of the partition to create.</td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="language-java">
+	<thead>
+    <tr>
+        <th>Parameter</th>
+        <th>Description</th>
+    </tr>
+	</thead>
+	<tbody>
+    <tr>
+        <td><code>CollectionName</code></td>
+        <td>Name of the collection to create a partition in.</td>
+    </tr>
+    <tr>
+        <td><code>PartitionName</code></td>
+        <td>Name of the partition to create.</td>
+    </tr>
+  </tbody>
 </table>
 
 <table class="language-cli">

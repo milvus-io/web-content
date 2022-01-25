@@ -1,12 +1,12 @@
 ---
-id: load_collection.md
-related_key: load collection
-summary: Learn how to load a collection into memory for CRUD operations in Milvus.
+id: release_collection.md
+related_key: release collection
+summary: Learn how to release a collection from memory in Milvus.
 ---
 
-# Load a collection
+# Release a collection
 
-This topic describes how to load the collection to memory before a search or a query. All search and query operations within Milvus are executed in memory. 
+This topic describes how to release a collection from memory after a search or a query to reduce memory usage.
 
 <div class="multipleCode">
   <a href="?python">Python </a>
@@ -20,35 +20,35 @@ This topic describes how to load the collection to memory before a search or a q
 ```python
 from pymilvus import Collection
 collection = Collection("book")      # Get an existing collection.
-collection.load()
+collection.release()
 ```
 
 ```javascript
-await milvusClient.collectionManager.loadCollection({
+await milvusClient.collectionManager.releaseCollection({
   collection_name: "book",
 });
 ```
 
 ```go
-err := milvusClient.LoadCollection(
-    context.Background(),   // ctx
-    "book",                 // CollectionName
-    false                   // async
+err := milvusClient.ReleaseCollection(
+    context.Background(),                            // ctx
+    "book",                                          // CollectionName
     )
 if err != nil {
-    log.Fatal("failed to load collection:", err.Error())
+    log.Fatal("failed to release collection:", err.Error())
 }
 ```
 
+
 ```java
-milvusClient.loadCollection(
-        LoadCollectionParam.newBuilder()
+milvusClient.releaseCollection(
+        ReleaseCollectionParam.newBuilder()
                 .withCollectionName("book")
                 .build());
 ```
 
 ```cli
-load -c book
+release -c book
 ```
 
 <table class="language-python">
@@ -61,7 +61,7 @@ load -c book
 	<tbody>
 	<tr>
 		<td><code>partition_name</code> (optional)</td>
-		<td>Name of the partition to load.</td>
+		<td>Name of the partition to release.</td>
 	</tr>
 	</tbody>
 </table>
@@ -76,7 +76,7 @@ load -c book
 	<tbody>
 	<tr>
 		<td><code>collection_name</code></td>
-		<td>Name of the collection to load.</td>
+		<td>Name of the collection to release.</td>
 	</tr>
 	</tbody>
 </table>
@@ -95,11 +95,7 @@ load -c book
         </tr>
         <tr>
             <td><code>CollectionName</code></td>
-            <td>Name of the collection to load.</td>
-        </tr>
-        <tr>
-            <td><code>async</code></td>
-            <td>Switch to control sync/async behavior. The deadline of context is not applied in sync load.</td>
+            <td>Name of the collection to release.</td>
         </tr>
     </tbody>
 </table>
@@ -114,7 +110,7 @@ load -c book
 	<tbody>
         <tr>
             <td><code>CollectionName</code></td>
-            <td>Name of the collection to load.</td>
+            <td>Name of the collection to release.</td>
         </tr>
     </tbody>
 </table>
@@ -129,11 +125,11 @@ load -c book
     <tbody>
         <tr>
             <td>-c</td>
-            <td>Name of the collection to load.</td>
+            <td>Name of the collection to release.</td>
         </tr>
         <tr>
             <td>-p (Optional/Multiple)</td>
-            <td>The name of the partition to load.</td>
+            <td>The name of the partition to release.</td>
         </tr>
     </tbody>
 </table>

@@ -209,6 +209,14 @@
       "order": 4
     },
     {
+      "id": "release_collection.md",
+      "title": "Release Collection",
+      "label1": "userguide",
+      "label2": "manage_collection",
+      "label3": "",
+      "order": 5
+    },
+    {
       "id": "manage_partition",
       "title": "Manage Partitions",
       "label1": "userguide",

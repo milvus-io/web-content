@@ -23,6 +23,8 @@ If you work with your own dataset in an existing Milvus instance, you can move f
 <div class="multipleCode">
   <a href="?python">Python </a>
   <a href="?javascript">Node.js</a>
+  <a href="?go">GO</a>
+  <a href="?java">Java</a>
   <a href="?cli">CLI</a>
 </div>
 
@@ -62,6 +64,14 @@ const params = {
 await milvusClient.collectionManager.createCollection(params);
 ```
 
+```go
+// This function is under active development on the GO client.
+```
+
+```java
+// Java User Guide will be ready soon.
+```
+
 ```cli
 connect -h localhost -p 19530 -a default
 create collection -c test_time_travel -f pk:INT64:primary_field -f example_field:FLOAT_VECTOR:2 -p pk
@@ -74,6 +84,8 @@ Insert random data to simulate the original data (Milvus CLI example uses a pre-
 <div class="multipleCode">
   <a href="?python">Python </a>
   <a href="?javascript">Node.js</a>
+  <a href="?go">GO</a>
+  <a href="?java">Java</a>
   <a href="?cli">CLI</a>
 </div>
 
@@ -96,6 +108,14 @@ const batch1 = milvusClient.dataManager.insert({
   collection_name: "test_time_travel",
   fields_data: entities1,
 });
+```
+
+```go
+// This function is under active development on the GO client.
+```
+
+```java
+// Java User Guide will be ready soon.
 ```
 
 ```cli
@@ -128,6 +148,14 @@ batch1.timestamp
 428828271234252802
 ```
 
+```go
+// This function is under active development on the GO client.
+```
+
+```java
+// Java User Guide will be ready soon.
+```
+
 ```cli
 # Milvus CLI automatically returns the timestamp as shown in the previous step.
 ```
@@ -145,6 +173,8 @@ Insert the second batch of data to simulate the dirty data, among which a piece 
 <div class="multipleCode">
   <a href="?python">Python </a>
   <a href="?javascript">Node.js</a>
+  <a href="?go">GO</a>
+  <a href="?java">Java</a>
   <a href="?cli">CLI</a>
 </div>
 
@@ -177,6 +207,15 @@ const batch2 = await milvusClient.dataManager.insert({
 });
 ```
 
+```go
+// This function is under active development on the GO client.
+```
+
+```java
+// Java User Guide will be ready soon.
+```
+
+
 ```cli
 import -c test_time_travel https://raw.githubusercontent.com/zilliztech/milvus_cli/main/examples/user_guide/search_with_timetravel_2.csv
 Reading file from remote URL.
@@ -200,6 +239,8 @@ Load the collection and search the target data with the timestamp of the first d
 <div class="multipleCode">
   <a href="?python">Python </a>
   <a href="?javascript">Node.js</a>
+  <a href="?go">GO</a>
+  <a href="?java">Java</a>
   <a href="?cli">CLI</a>
 </div>
 
@@ -240,6 +281,14 @@ const res = await milvusClient.dataManager.search({
 console.log(res1.results)
 ```
 
+```go
+// This function is under active development on the GO client.
+```
+
+```java
+// Java User Guide will be ready soon.
+```
+
 ```cli
 search
 Collection name (test_collection_query, test_time_travel): test_time_travel
@@ -263,6 +312,15 @@ As shown below, the target data itself and other data inserted later are not ret
 ```javascript
 [8, 7, 4, 2, 5, 6, 9, 3, 0, 1]
 ```
+
+```go
+// This function is under active development on the GO client.
+```
+
+```java
+// Java User Guide will be ready soon.
+```
+
 
 ```cli
 Search results:
@@ -298,6 +356,8 @@ If you do not specify the timestamp or specify it with the timestamp of the seco
 <div class="multipleCode">
   <a href="?python">Python </a>
   <a href="?javascript">Node.js</a>
+  <a href="?go">GO</a>
+  <a href="?java">Java</a>
   <a href="?cli">CLI</a>
 </div>
 
@@ -337,6 +397,14 @@ const res2 = await milvusClient.dataManager.search({
   vector_type: 101, // DataType.FloatVector,
 });
 console.log(res2.results)
+```
+
+```go
+// This function is under active development on the GO client.
+```
+
+```java
+// Java User Guide will be ready soon.
 ```
 
 ```cli
@@ -400,6 +468,14 @@ const datetime = new Date().getTime()
 const pre_del_timestamp = datetimeToHybrids(datetime)
 ```
 
+```go
+// This function is under active development on the GO client.
+```
+
+```java
+// Java User Guide will be ready soon.
+```
+
 ```cli
 calc mkts_from_unixtime -e 1641809375
 430390476800000000
@@ -418,6 +494,14 @@ await milvusClient.dataManager.deleteEntities({
   collection_name: "test_time_travel",
   expr: expr,
 });
+```
+
+```go
+// This function is under active development on the GO client.
+```
+
+```java
+// Java User Guide will be ready soon.
 ```
 
 ```cli
@@ -459,6 +543,14 @@ const res3 = await milvusClient.dataManager.search({
   vector_type: 101, // DataType.FloatVector,
 });
 console.log(res3.results)
+```
+
+```go
+// This function is under active development on the GO client.
+```
+
+```java
+// Java User Guide will be ready soon.
 ```
 
 ```cli
@@ -533,6 +625,14 @@ const res4 = await milvusClient.dataManager.search({
   vector_type: 101, // DataType.FloatVector,
 });
 console.log(res4.results)
+```
+
+```go
+// This function is under active development on the GO client.
+```
+
+```java
+// Java User Guide will be ready soon.
 ```
 
 ```cli

@@ -209,6 +209,14 @@
         "order": 4
       },
       {
+        "id": "release_collection.md",
+        "title": "释放 Collection",
+        "label1": "userguide",
+        "label2": "manage_collection",
+        "label3": "",
+        "order": 5
+      },
+      {
         "id": "manage_partition",
         "title": "管理 Partition",
         "label1": "userguide",

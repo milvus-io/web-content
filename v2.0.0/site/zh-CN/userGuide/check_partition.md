@@ -22,6 +22,8 @@ Verify if a partition exists in the specified collection.
 <div class="multipleCode">
   <a href="?python">Python </a>
   <a href="?javascript">Node.js</a>
+  <a href="?go">GO</a>
+  <a href="?java">Java</a>
   <a href="?cli">CLI</a>
 </div>
 
@@ -37,6 +39,29 @@ await milvusClient.partitionManager.hasPartition({
   collection_name: "book",
   partition_name: "novel",
 });
+```
+
+```go
+hasPar, err := milvusClient.HasPartition(
+    context.Background(),   // ctx
+    "book",                 // CollectionName
+    "novel",                // partitionName
+    )
+if err != nil {
+    log.Fatal("failed to check the partition:", err.Error())
+}
+log.Println(hasPar)
+```
+
+```java
+R<Boolean> respHasPartition = milvusClient.hasPartition(
+        HasPartitionParam.newBuilder()
+                .withCollectionName("book")
+                .withPartitionName("novel")
+                .build());
+if (respHasCollection.getData() == Boolean.TRUE) {
+    System.out.println("Partition exists.");
+}
 ```
 
 ```cli
@@ -78,6 +103,29 @@ describe partition -c book -p novel
 	</tbody>
 </table>
 
+<table class="language-go">
+	<thead>
+    <tr>
+        <th>Parameter</th>
+        <th>Description</th>
+    </tr>
+	</thead>
+	<tbody>
+    <tr>
+        <td><code>ctx</code></td>
+        <td>Context to control API invocation process.</td>
+    </tr>
+    <tr>
+        <td><code>CollectionName</code></td>
+        <td>Name of the collection to check.</td>
+    </tr>
+    <tr>
+        <td><code>partitionName</code></td>
+        <td>Name of the partition to check.</td>
+    </tr>
+  </tbody>
+</table>
+
 <table class="language-cli">
     <thead>
         <tr>
@@ -103,6 +151,8 @@ describe partition -c book -p novel
 <div class="multipleCode">
   <a href="?python">Python </a>
   <a href="?javascript">Node.js</a>
+  <a href="?go">GO</a>
+  <a href="?java">Java</a>
   <a href="?cli">CLI</a>
 </div>
 
@@ -117,6 +167,25 @@ collection.partitions
 await milvusClient.partitionManager.showPartitions({
   collection_name: "book",
 });
+```
+
+```go
+partitions, err := milvusClient.ShowPartitions(
+    context.Background(),   // ctx
+    "book",                 // CollectionName
+    )
+if err != nil {
+    log.Fatal("failed to list partitions:", err.Error())
+}
+log.Println(listPar)
+```
+
+```java
+R<ShowPartitionsResponse> respShowPartitions = milvusClient.showPartitions(
+        ShowPartitionsParam.newBuilder()
+                .withCollectionName("book")
+                .build());
+System.out.println(respShowPartitions);
 ```
 
 ```cli
@@ -136,6 +205,40 @@ list partitions -c book
             <td>Name of the collection to check.</td>
         </tr>
 	</tbody>
+</table>
+
+<table class="language-go">
+	<thead>
+    <tr>
+        <th>Parameter</th>
+        <th>Description</th>
+    </tr>
+	</thead>
+	<tbody>
+    <tr>
+        <td><code>ctx</code></td>
+        <td>Context to control API invocation process.</td>
+    </tr>
+    <tr>
+        <td><code>CollectionName</code></td>
+        <td>Name of the collection to check.</td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="language-java">
+	<thead>
+    <tr>
+        <th>Parameter</th>
+        <th>Description</th>
+    </tr>
+	</thead>
+	<tbody>
+    <tr>
+        <td><code>CollectionName</code></td>
+        <td>Name of the collection to check.</td>
+    </tr>
+  </tbody>
 </table>
 
 <table class="language-cli">

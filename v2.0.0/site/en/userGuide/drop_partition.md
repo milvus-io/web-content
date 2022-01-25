@@ -17,6 +17,8 @@ Dropping a partition irreversibly deletes all data within it.
 <div class="multipleCode">
   <a href="?python">Python </a>
   <a href="?javascript">Node.js</a>
+  <a href="?go">GO</a>
+  <a href="?java">Java</a>
   <a href="?cli">CLI</a>
 </div>
 
@@ -31,6 +33,25 @@ await milvusClient.partitionManager.dropPartition({
   collection_name: "book",
   partition_name: "novel",
 });
+```
+
+```go
+err := milvusClient.DropPartition(
+    context.Background(),   // ctx
+    "book",                 // CollectionName
+    "novel",                // partitionName
+    )
+if err != nil {
+    log.Fatal("fail to drop partition:", err.Error())
+}
+```
+
+```java
+milvusClient.dropPartition(
+        DropPartitionParam.newBuilder()
+                .withCollectionName("book")
+                .withPartitionName("novel")
+                .build());
 ```
 
 ```cli
@@ -70,6 +91,48 @@ delete partition -c book -p novel
             <td>Name of the partition to drop.</td>
         </tr>
 	</tbody>
+</table>
+
+<table class="language-go">
+	<thead>
+    <tr>
+        <th>Parameter</th>
+        <th>Description</th>
+    </tr>
+	</thead>
+	<tbody>
+    <tr>
+        <td><code>ctx</code></td>
+        <td>Context to control API invocation process.</td>
+    </tr>
+    <tr>
+        <td><code>CollectionName</code></td>
+        <td>Name of the collection to drop a partition in.</td>
+    </tr>
+    <tr>
+        <td><code>partitionName</code></td>
+        <td>Name of the partition to drop.</td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="language-java">
+	<thead>
+    <tr>
+        <th>Parameter</th>
+        <th>Description</th>
+    </tr>
+	</thead>
+	<tbody>
+    <tr>
+        <td><code>CollectionName</code></td>
+        <td>Name of the collection to drop a partition in.</td>
+    </tr>
+    <tr>
+        <td><code>PartitionName</code></td>
+        <td>Name of the partition to drop.</td>
+    </tr>
+  </tbody>
 </table>
 
 <table class="language-cli">

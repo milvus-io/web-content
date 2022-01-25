@@ -1,12 +1,19 @@
 ---
-id: load_collection.md
-related_key: load collection
-summary: Learn how to load a collection into memory for CRUD operations in Milvus.
+id: release_collection.md
+related_key: release collection
+summary: Learn how to release a collection from memory in Milvus.
 ---
 
-# Load a collection
+# Release a collection
 
-This topic describes how to load the collection to memory before a search or a query. All search and query operations within Milvus are executed in memory. 
+<div class="alert note">
+<h3>Milvus Docs 需要你的帮助</h3>
+本文档暂时没有中文版本，欢迎你成为社区贡献者，协助中文技术文档的翻译。<br>
+你可以通过页面右边的 <b>编辑</b> 按钮直接贡献你的翻译。更多详情，参考 <a href="https://github.com/milvus-io/milvus-docs/blob/v2.0.0/CONTRIBUTING.md">贡献指南</a>。如需帮助，你可以 <a href="https://github.com/milvus-io/milvus-docs/issues/new/choose">提交 GitHub Issue</a>。
+</div>
+
+
+This topic describes how to release a collection from memory after a search or a query to reduce memory usage.
 
 <div class="multipleCode">
   <a href="?python">Python </a>
@@ -20,35 +27,35 @@ This topic describes how to load the collection to memory before a search or a q
 ```python
 from pymilvus import Collection
 collection = Collection("book")      # Get an existing collection.
-collection.load()
+collection.release()
 ```
 
 ```javascript
-await milvusClient.collectionManager.loadCollection({
+await milvusClient.collectionManager.releaseCollection({
   collection_name: "book",
 });
 ```
 
 ```go
-err := milvusClient.LoadCollection(
-    context.Background(),   // ctx
-    "book",                 // CollectionName
-    false                   // async
+err := milvusClient.ReleaseCollection(
+    context.Background(),                            // ctx
+    "book",                                          // CollectionName
     )
 if err != nil {
-    log.Fatal("failed to load collection:", err.Error())
+    log.Fatal("failed to release collection:", err.Error())
 }
 ```
 
+
 ```java
-milvusClient.loadCollection(
-        LoadCollectionParam.newBuilder()
+milvusClient.releaseCollection(
+        ReleaseCollectionParam.newBuilder()
                 .withCollectionName("book")
                 .build());
 ```
 
 ```cli
-load -c book
+release -c book
 ```
 
 <table class="language-python">
@@ -61,7 +68,7 @@ load -c book
 	<tbody>
 	<tr>
 		<td><code>partition_name</code> (optional)</td>
-		<td>Name of the partition to load.</td>
+		<td>Name of the partition to release.</td>
 	</tr>
 	</tbody>
 </table>
@@ -76,7 +83,7 @@ load -c book
 	<tbody>
 	<tr>
 		<td><code>collection_name</code></td>
-		<td>Name of the collection to load.</td>
+		<td>Name of the collection to release.</td>
 	</tr>
 	</tbody>
 </table>
@@ -95,11 +102,7 @@ load -c book
         </tr>
         <tr>
             <td><code>CollectionName</code></td>
-            <td>Name of the collection to load.</td>
-        </tr>
-        <tr>
-            <td><code>async</code></td>
-            <td>Switch to control sync/async behavior. The deadline of context is not applied in sync load.</td>
+            <td>Name of the collection to release.</td>
         </tr>
     </tbody>
 </table>
@@ -114,7 +117,7 @@ load -c book
 	<tbody>
         <tr>
             <td><code>CollectionName</code></td>
-            <td>Name of the collection to load.</td>
+            <td>Name of the collection to release.</td>
         </tr>
     </tbody>
 </table>
@@ -129,11 +132,11 @@ load -c book
     <tbody>
         <tr>
             <td>-c</td>
-            <td>Name of the collection to load.</td>
+            <td>Name of the collection to release.</td>
         </tr>
         <tr>
             <td>-p (Optional/Multiple)</td>
-            <td>The name of the partition to load.</td>
+            <td>The name of the partition to release.</td>
         </tr>
     </tbody>
 </table>

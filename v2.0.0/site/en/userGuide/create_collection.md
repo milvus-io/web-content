@@ -28,6 +28,8 @@ First, prepare necessary parameters, including field schema, collection schema, 
 <div class="multipleCode">
   <a href="?python">Python </a>
   <a href="?javascript">Node.js</a>
+  <a href="?go">GO</a>
+  <a href="?java">Java</a>
   <a href="?cli">CLI</a>
 </div>
 
@@ -58,6 +60,7 @@ collection_name = "book"
 ```javascript
 const params = {
   collection_name: "book",
+  description: "Test book search"
   fields: [
     {
       name: "book_intro",
@@ -80,6 +83,63 @@ const params = {
     },
   ],
 };
+```
+
+```go
+var (
+		collectionName = "book"
+	)
+schema := &entity.Schema{
+    CollectionName: collectionName,
+    Description:    "Test book search",
+    Fields: []*entity.Field{
+        {
+            Name:       "book_id",
+            DataType:   entity.FieldTypeInt64,
+            PrimaryKey: true,
+            AutoID:     false,
+        },
+        {
+            Name:       "word_count",
+            DataType:   entity.FieldTypeInt64,
+            PrimaryKey: false,
+            AutoID:     false,
+        },
+        {
+            Name:     "book_intro",
+            DataType: entity.FieldTypeFloatVector,
+            TypeParams: map[string]string{
+                "dim": "2",
+            },
+        },
+    },
+}
+```
+
+```java
+FieldType fieldType1 = FieldType.newBuilder()
+        .withName("book_id")
+        .withDataType(DataType.Int64)
+        .withPrimaryKey(true)
+        .withAutoID(false)
+        .build();
+FieldType fieldType2 = FieldType.newBuilder()
+        .withName("word_count")
+        .withDataType(DataType.Int64)
+        .build();
+FieldType fieldType3 = FieldType.newBuilder()
+        .withName("book_intro")
+        .withDataType(DataType.FloatVector)
+        .withDimension(2)
+        .build();
+CreateCollectionParam createCollectionReq = CreateCollectionParam.newBuilder()
+        .withCollectionName("book")
+        .withDescription("Test book search")
+        .withShardsNum(2)
+        .addFieldType(fieldType1)
+        .addFieldType(fieldType2)
+        .addFieldType(fieldType3)
+        .build();
 ```
 
 ```cli
@@ -132,7 +192,7 @@ create collection -c book -f book_id:INT64 -f word_count:INT64 -f book_intro:FLO
             <td><code>True</code> or <code>False</code></td>
         </tr>
         <tr>
-            <td><code>auto_id</code></td>
+            <td><code>auto_id</code> (Mandatory for primary key field)</td>
             <td>Switch to enable or disable Automatic ID (primary key) allocation.</td>
             <td><code>True</code> or <code>False</code></td>
         </tr>
@@ -149,10 +209,12 @@ create collection -c book -f book_id:INT64 -f word_count:INT64 -f book_intro:FLO
         <tr>
             <td><code>CollectionSchema</code></td>
         <td>Schema of the collection to create. Refer to <a href="collection_schema.md">Collection Schema</a> for more information.</td>
+        <td>N/A</td>
         </tr>
         <tr>
             <td><code>fields</code></td>
             <td>Fields of the collection to create.</td>
+            <td>N/A</td>
         </tr>
         <tr>
             <td><code>description</code> (Optional)</td>
@@ -162,6 +224,75 @@ create collection -c book -f book_id:INT64 -f word_count:INT64 -f book_intro:FLO
         <tr>
             <td><code>collection_name</code></td>
             <td>Name of the collection to create.</td>
+            <td>N/A</td>
+        </tr>
+	</tbody>
+</table>
+
+<table class="language-go">
+	<thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Option</th>
+        </tr>
+	</thead>
+	<tbody>
+        <tr>
+            <td><code>collectionName</code></td>
+            <td>Name of the collection to create.</td>
+            <td>N/A</td>
+        </tr>
+        <tr>
+            <td><code>description</code></td>
+            <td>Description of the collection to create.</td>
+            <td>N/A</td>
+        </tr>
+        <tr>
+            <td><code>Fields</code></td>
+            <td>Schema of the fields within the collection to create. Refer to <a href="field_schema.md">Field Schema</a> for more information.</td>
+            <td>N/A</td>
+        </tr>
+        <tr>
+            <td><code>Name</code></td>
+            <td>Name of the field to create.</td>
+            <td>N/A</td>
+        </tr>
+        <tr>
+            <td><code>DataType</code></td>
+            <td>Data type of the field to create.</td>
+            <td>For primary key field:
+                <ul>
+                    <li><code>entity.FieldTypeInt64</code> (numpy.int64)</li>
+                </ul>
+                For scalar field:
+                <ul>
+                    <li><code>entity.FieldTypeBool</code> (Boolean)</li>
+                    <li><code>entity.FieldTypeInt64</code> (numpy.int64)</li>
+                    <li><code>entity.FieldTypeFloat</code> (numpy.float32)</li>
+                    <li><code>entity.FieldTypeDouble</code> (numpy.double)</li>
+                </ul>
+                For vector field:
+                <ul>
+                    <li><code>entity.FieldTypeBinaryVector</code> (Binary vector)</li>
+                    <li><code>entity.FieldTypeFloatVector</code> (Float vector)</li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td><code>PrimaryKey</code> (Mandatory for primary key field)</td>
+            <td>Switch to control if the field is primary key field.</td>
+            <td><code>True</code> or <code>False</code></td>
+        </tr>
+        <tr>
+            <td><code>AutoID</code> (Mandatory for primary key field)</td>
+            <td>Switch to enable or disable Automatic ID (primary key) allocation.</td>
+            <td><code>True</code> or <code>False</code></td>
+        </tr>
+        <tr>
+            <td><code>dim</code> (Mandatory for vector field)</td>
+            <td>Dimension of the vector.</td>
+            <td>[1, 32768]</td>
         </tr>
 	</tbody>
 </table>
@@ -209,12 +340,85 @@ create collection -c book -f book_id:INT64 -f word_count:INT64 -f book_intro:FLO
         <tr>
             <td><code>dim</code> (Mandatory for vector field)</td>
             <td>Dimension of the vector.</td>
-            <td>[1, 32,768]</td>
+            <td>[1, 32768]</td>
         </tr>
         <tr>
             <td><code>description</code> (Optional)</td>
             <td>Description of the field.</td>
             <td>N/A</td>
+        </tr>
+	</tbody>
+</table>
+
+<table class="language-java">
+	<thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Option</th>
+        </tr>
+	</thead>
+	<tbody>
+        <tr>
+            <td><code>Name</code></td>
+            <td>Name of the field to create.</td>
+            <td>N/A</td>
+        </tr>
+        <tr>
+            <td><code>Description</code></td>
+            <td>Description of the field to create.</td>
+            <td>N/A</td>
+        </tr>
+        <tr>
+            <td><code>DataType</code></td>
+            <td>Data type of the field to create.</td>
+            <td>For primary key field:
+                <ul>
+                    <li><code>entity.FieldTypeInt64</code> (numpy.int64)</li>
+                </ul>
+                For scalar field:
+                <ul>
+                    <li><code>entity.FieldTypeBool</code> (Boolean)</li>
+                    <li><code>entity.FieldTypeInt64</code> (numpy.int64)</li>
+                    <li><code>entity.FieldTypeFloat</code> (numpy.float32)</li>
+                    <li><code>entity.FieldTypeDouble</code> (numpy.double)</li>
+                </ul>
+                For vector field:
+                <ul>
+                    <li><code>entity.FieldTypeBinaryVector</code> (Binary vector)</li>
+                    <li><code>entity.FieldTypeFloatVector</code> (Float vector)</li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td><code>PrimaryKey</code> (Mandatory for primary key field)</td>
+            <td>Switch to control if the field is primary key field.</td>
+            <td><code>True</code> or <code>False</code></td>
+        </tr>
+        <tr>
+            <td><code>AutoID</code></td>
+            <td>Switch to enable or disable Automatic ID (primary key) allocation.</td>
+            <td><code>True</code> or <code>False</code></td>
+        </tr>
+        <tr>
+            <td><code>Dimension</code> (Mandatory for vector field)</td>
+            <td>Dimension of the vector.</td>
+            <td>[1, 32768]</td>
+        </tr>
+        <tr>
+            <td><code>CollectionName</code></td>
+            <td>Name of the collection to create.</td>
+            <td>N/A</td>
+        </tr>
+        <tr>
+            <td><code>Description</code> (Optional)</td>
+            <td>Description of the collection to create.</td>
+            <td>N/A</td>
+        </tr>
+        <tr>
+            <td><code>ShardsNum</code></td>
+            <td>Number of the shards for the collection to create.</td>
+            <td>[1,256]</td>
         </tr>
 	</tbody>
 </table>
@@ -257,17 +461,39 @@ Then, create a collection with the schema you specified above.
 <div class="multipleCode">
   <a href="?python">Python </a>
   <a href="?javascript">Node.js</a>
+  <a href="?go">GO</a>
+  <a href="?java">Java</a>
   <a href="?cli">CLI</a>
 </div>
 
 
 ```python
 from pymilvus import Collection
-collection = Collection(name=collection_name, schema=schema, using='default', shards_num=2)
+collection = Collection(
+    name=collection_name, 
+    schema=schema, 
+    using='default', 
+    shards_num=2
+    )
 ```
 
 ```javascript
 await milvusClient.collectionManager.createCollection(params);
+```
+
+```go
+err = milvusClient.CreateCollection(
+    context.Background(), // ctx
+    schema,
+    2, // shardNum
+)
+if err != nil {
+    log.Fatal("failed to create collection:", err.Error())
+}
+```
+
+```java
+milvusClient.createCollection(createCollectionReq);
 ```
 
 ```cli
@@ -279,19 +505,46 @@ await milvusClient.collectionManager.createCollection(params);
         <tr>
             <th>Parameter</th>
             <th>Description</th>
+            <th>Option</th>
         </tr>
 	</thead>
 	<tbody>
         <tr>
             <td><code>using</code> (optional)</td>
             <td>By specifying the server alias here, you can choose in which Milvus server you create a collection.</td>
+            <td>N/A</td>
         </tr>
         <tr>
             <td><code>shards_num</code> (optional)</td>
             <td>Number of the shards for the collection to create.</td>
+            <td>[1,256]</td>
         </tr>
     </tbody>
 </table>
+
+<table class="language-go">
+	<thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Option</th>
+        </tr>
+	</thead>
+	<tbody>
+        <tr>
+            <td><code>ctx</code></td>
+            <td>Context to control API invocation process.</td>
+            <td>N/A</td>
+        </tr>
+        <tr>
+            <td><code>shardNum</code></td>
+            <td>Number of the shards for the collection to create.</td>
+            <td>[1,256]</td>
+        </tr>
+    </tbody>
+</table>
+
+
 
 ## Limits
 |Feature|Maximum limit|
@@ -300,6 +553,7 @@ await milvusClient.collectionManager.createCollection(params);
 |Number of partitions in a collection|4,096|
 |Number of fields in a collection|256|
 |Number of shards in a collection|256|
+
 
 
 ## What's next

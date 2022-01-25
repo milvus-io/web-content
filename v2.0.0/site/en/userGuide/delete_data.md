@@ -13,12 +13,12 @@ Milvus supports deleting entities by primary key filtered with boolean expressio
 
 <div class="alert caution">
     <ul>
-        <li>This feature is still under active development, and will be optimized with the release of Milvus 2.0.0-GA.</li>
-	<li>Deleted entities can still be retrieved immediately after the deletion if the consistency level is set lower than <code>Strong</code>.</li>
-	<li>Entities deleted beyond the pre-specified span of time for Time Travel cannot be retrieved again.</li>
+	      <li>Deleted entities can still be retrieved immediately after the deletion if the consistency level is set lower than <code>Strong</code>.</li>
+	      <li>Entities deleted beyond the pre-specified span of time for Time Travel cannot be retrieved again.</li>
         <li>Frequent deletion operations will impact the system performance.</li>
     </ul>
 </div>
+
 
 
 ## Prepare boolean expression
@@ -30,6 +30,8 @@ The following example filters data with primary key values of `0` and `1`.
 <div class="multipleCode">
   <a href="?python">Python </a>
   <a href="?javascript">Node.js</a>
+  <a href="?go">GO</a>
+  <a href="?java">Java</a>
   <a href="?cli">CLI</a>
 </div>
 
@@ -42,9 +44,13 @@ expr = "book_id in [0,1]"
 const expr = "book_id in [0,1]";
 ```
 
+```java
+private static final String DELETE_EXPR = "book_id in [0,1]";
+```
+
 ```cli
 delete entities -c book
-The expression to specify entities to be deleted： pk in [0,1]
+The expression to specify entities to be deleted： book_id in [0,1]
 ```
 
 <table class="language-cli">
@@ -74,6 +80,8 @@ Delete the entities with the boolean expression you created. Milvus returns the 
 <div class="multipleCode">
   <a href="?python">Python </a>
   <a href="?javascript">Node.js</a>
+  <a href="?go">GO</a>
+  <a href="?java">Java</a>
   <a href="?cli">CLI</a>
 </div>
 
@@ -89,6 +97,18 @@ await milvusClient.dataManager.deleteEntities({
   collection_name: "book",
   expr: expr,
 });
+```
+
+```go
+// This function is under active development on the GO client.
+```
+
+```java
+milvusClient.delete(
+		DeleteParam.newBuilder()
+				.withCollectionName("book")
+				.withExpr(DELETE_EXPR)
+				.build());
 ```
 
 ```cli
@@ -138,6 +158,28 @@ Do you want to continue? [y/N]: y
 	</tbody>
 </table>
 
+<table class="language-java">
+	<thead>
+	<tr>
+		<th>Parameter</th>
+		<th>Description</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td><code>CollectionName</code></td>
+		<td>Name of the collection to delete entities from.</td>
+	</tr>
+    <tr>
+		<td><code>expr</code></td>
+		<td>Boolean expression that specifies the entities to delete.</td>
+	</tr>
+    <tr>
+		<td><code>PartitionName</code> (optional)</td>
+		<td>Name of the partition to delete entities from.</td>
+	</tr>
+	</tbody>
+</table>
 
 
 ## What's next
