@@ -11,9 +11,9 @@ summary: Learn how to install the Node.js SDK of Milvus.
 
 This topic describes how to install Milvus SDK for Milvus.
 
-Current version of Milvus supports SDKs in Python and Node.js.
+Current version of Milvus supports SDKs in Python, Node.js, GO, and Java.
 
-<div class="tab-wrapper"><a href="install-pymilvus.md" class=''>Install PyMilvus</a><a href="install-node.md" class='active '>Install Node.js SDK</a></div>
+<div class="tab-wrapper"><a href="install-pymilvus.md" class=''>Install PyMilvus</a><a href="install-node.md" class='active '>Install Node.js SDK</a><a href="install-go.md" class=''>Install GO SDK</a><a href="install-java.md" class=''>Install Java SDK</a></div>
 
 ## Requirement
 

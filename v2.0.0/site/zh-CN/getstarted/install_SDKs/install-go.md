@@ -1,10 +1,10 @@
 ---
-id: install-node.md
-label: Install Node.js SDK
+id: install-go.md
+label: Install GO SDK
 related_key: SDK
-order: 1
+order: 2
 group: install-pymilvus.md
-summary: Learn how to install the Node.js SDK of Milvus.
+summary: Learn how to install the GO SDK of Milvus.
 ---
 
 # Install Milvus SDK
@@ -16,32 +16,33 @@ summary: Learn how to install the Node.js SDK of Milvus.
 </div>
 
 
+
 This topic describes how to install Milvus SDK for Milvus.
 
 Current version of Milvus supports SDKs in Python, Node.js, GO, and Java.
 
-<div class="tab-wrapper"><a href="install-pymilvus.md" class=''>Install PyMilvus</a><a href="install-node.md" class='active '>Install Node.js SDK</a><a href="install-go.md" class=''>Install GO SDK</a><a href="install-java.md" class=''>Install Java SDK</a></div>
+<div class="tab-wrapper"><a href="install-pymilvus.md" class=''>Install PyMilvus</a><a href="install-node.md" class=''>Install Node.js SDK</a><a href="install-go.md" class='active '>Install GO SDK</a><a href="install-java.md" class=''>Install Java SDK</a></div>
 
 ## Requirement
 
-Node.js (12.0.0 or later) is required.
+GO (1.15 or later) is required.
 
-## Install Milvus Node.js SDK
+## Install Milvus GO SDK
 
-Run the following command to install Milvus Node.js SDK.
+Install the Milvus GO SDK and dependencies via `go get`.
 
-```
-$ npm install @zilliz/milvus2-sdk-node
+```bash
+$ go get -u github.com/milvus-io/milvus-sdk-go/v2
 ```
 
 ## What's next
 
-Having installed Milvus Node.js SDK, you can:
+Having installed Milvus GO SDK, you can:
 
 - Learn the basic operations of Milvus:
   - [Connect to Milvus server](manage_connection.md)
   - [Conduct a vector search](search.md)
   - [Conduct a hybrid search](hybridsearch.md)
 
-- Explore [Milvus Node.js API reference](/api-reference/node/v1.0.20/tutorial.html)
+- Explore [Milvus GO API reference](/api-reference/node/v/tutorial.html)
 

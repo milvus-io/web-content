@@ -18,13 +18,14 @@ summary: Learn how to install the Python SDK of Milvus.
 
 This topic describes how to install Milvus SDK for Milvus.
 
-Current version of Milvus supports SDKs in Python and Node.js.
+Current version of Milvus supports SDKs in Python, Node.js, GO, and Java.
 
-<div class="tab-wrapper"><a href="install-pymilvus.md" class='active '>Install PyMilvus</a><a href="install-node.md" class=''>Install Node.js SDK</a></div>
+<div class="tab-wrapper"><a href="install-pymilvus.md" class='active '>Install PyMilvus</a><a href="install-node.md" class=''>Install Node.js SDK</a><a href="install-go.md" class=''>Install GO SDK</a><a href="install-java.md" class=''>Install Java SDK</a></div>
 
 ## Requirement
 
 Python 3 (3.71 or later) is required.
+
 
 ## Install PyMilvus via pip
 
@@ -38,7 +39,7 @@ It is recommended to install a PyMilvus version that matches the version of the 
 $ python3 -m pip install pymilvus==2.0.0rc9
 ```
 
-## Verify Installation
+## Verify installation
 
 If PyMilvus is correctly installed, no exception will be raised when you run the following command.
 
@@ -50,7 +51,7 @@ $ python3 -c "from pymilvus import Collection"
 
 ## What's next
 
-Having installed PyMilvus, You can:
+Having installed PyMilvus, you can:
 
 - Learn the basic operations of Milvus:
   - [Connect to Milvus server](manage_connection.md)
@@ -58,4 +59,3 @@ Having installed PyMilvus, You can:
   - [Conduct a hybrid search](hybridsearch.md)
 
 - Explore [PyMilvus API reference](/api-reference/pymilvus/v2.0.0rc9/tutorial.html)
-
