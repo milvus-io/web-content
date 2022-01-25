@@ -70,7 +70,3 @@ In current release, data to be load must be under 90% of the total memory resour
 | <code>nq</code> (number of the search requests)    | 16,384       |
 
 
-
-<div class="alert note">
-Due to Pulsar's limits on the log transmission size (100 MB), Milvus does not support 16,384 output vectors per input vector on high-dimensional vector searches in the current version. Milvus 2.0.0-GA will support it.
-</div>

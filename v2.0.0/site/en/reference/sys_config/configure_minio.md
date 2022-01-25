@@ -29,7 +29,7 @@ Under this section, you can configure MinIO or S3 address, relevant access keys,
         <li><code>minio.address</code> and <code>minio.port</code> together generate the valid access to MinIO or S3 service.</li>
         <li>MinIO preferentially acquires the valid IP address from the environment variable <code>MINIO_ADDRESS</code> when Milvus is started.</li>
         <li>Default value applies when MinIO or S3 is running on the same network with Milvus.</li>
-        <li>Milvus 2.0.0 does not support secure access to MinIO or S3 service. Future releases will support secure access to MinIO.</li>
+        <li>Milvus 2.0 does not support secure access to MinIO or S3 service. Future releases will support secure access to MinIO.</li>
       </td>
       <td>localhost</td>
     </tr>

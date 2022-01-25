@@ -26,9 +26,9 @@ All search and query operations within Milvus are executed in memory. Load the c
 
 <div class="multipleCode">
   <a href="?python">Python </a>
-  <a href="?javascript">Node.js</a>
-  <a href="?go">GO</a>
   <a href="?java">Java</a>
+  <a href="?go">GO</a>
+  <a href="?javascript">Node.js</a>
   <a href="?cli">CLI</a>
 </div>
 
@@ -77,9 +77,9 @@ The following example filters the vectors with certain `book_id` values, and ret
 
 <div class="multipleCode">
   <a href="?python">Python </a>
-  <a href="?javascript">Node.js</a>
-  <a href="?go">GO</a>
   <a href="?java">Java</a>
+  <a href="?go">GO</a>
+  <a href="?javascript">Node.js</a>
   <a href="?cli">CLI</a>
 </div>
 
@@ -262,9 +262,9 @@ Check the returned results.
 
 <div class="multipleCode">
   <a href="?python">Python </a>
-  <a href="?javascript">Node.js</a>
-  <a href="?go">GO</a>
   <a href="?java">Java</a>
+  <a href="?go">GO</a>
+  <a href="?javascript">Node.js</a>
   <a href="?cli">CLI</a>
 </div>
 
@@ -299,5 +299,5 @@ System.out.println(wrapperQuery.getFieldWrapper("word_count").getFieldData());
   - [Conduct a hybrid search](hybridsearch.md)
   - [Search with Time Travel](timetravel.md)
 - Explore API references for Milvus SDKs:
-  - [PyMilvus API reference](/api-reference/pymilvus/v2.0.0rc9/tutorial.html)
-  - [Node.js API reference](/api-reference/node/v1.0.20/tutorial.html)
+  - [PyMilvus API reference](/api-reference/pymilvus/v2.0.0/tutorial.html)
+  - [Node.js API reference](/api-reference/node/v2.0.0/tutorial.html)

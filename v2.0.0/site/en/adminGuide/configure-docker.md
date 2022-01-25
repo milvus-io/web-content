@@ -14,10 +14,10 @@ This topic describes how to configure your Milvus.
 
 ## Download a configuration file
 
-[Download](https://raw.githubusercontent.com/milvus-io/milvus/v2.0.0-pre-ga/configs/milvus.yaml) `milvus.yaml` directly or with the following command.
+[Download](https://raw.githubusercontent.com/milvus-io/milvus/v2.0.0/configs/milvus.yaml) `milvus.yaml` directly or with the following command.
 
 ```
-$ wget https://raw.githubusercontent.com/milvus-io/milvus/v2.0.0-pre-ga/configs/milvus.yaml
+$ wget https://raw.githubusercontent.com/milvus-io/milvus/v2.0.0/configs/milvus.yaml
 ```
 
 ## Modify the configuration file
@@ -131,18 +131,18 @@ Sorted by:
 
 ## Download an installation file
 
-Download the installation file for Milvus [standalone](https://github.com/milvus-io/milvus/releases/download/v2.0.0-pre-ga/milvus-standalone-docker-compose.yml) or [cluster](https://github.com/milvus-io/milvus/releases/download/v2.0.0-pre-ga/milvus-cluster-docker-compose.yml), and save it as `docker-compose.yml`.
+Download the installation file for Milvus [standalone](https://github.com/milvus-io/milvus/releases/download/v2.0.0/milvus-standalone-docker-compose.yml) or [cluster](https://github.com/milvus-io/milvus/releases/download/v2.0.0/milvus-cluster-docker-compose.yml), and save it as `docker-compose.yml`.
 
 You can also simply run the following command.
 
 ```
 # For Milvus standalone
-$ wget https://github.com/milvus-io/milvus/releases/download/v2.0.0-pre-ga/milvus-standalone-docker-compose.yml -O docker-compose.yml
+$ wget https://github.com/milvus-io/milvus/releases/download/v2.0.0/milvus-standalone-docker-compose.yml -O docker-compose.yml
 ```
 
 ```
 # For Milvus cluster
-$ wget https://github.com/milvus-io/milvus/releases/download/v2.0.0-pre-ga/milvus-cluster-docker-compose.yml -O docker-compose.yml
+$ wget https://github.com/milvus-io/milvus/releases/download/v2.0.0/milvus-cluster-docker-compose.yml -O docker-compose.yml
 ```
 
 ## Modify the installation file

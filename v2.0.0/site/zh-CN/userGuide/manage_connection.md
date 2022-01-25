@@ -28,9 +28,9 @@ Construct a Milvus connection. Ensure to connect to Milvus server before any ope
 
 <div class="multipleCode">
   <a href="?python">Python </a>
-  <a href="?javascript">Node.js</a>
-  <a href="?go">GO</a>
   <a href="?java">Java</a>
+  <a href="?go">GO</a>
+  <a href="?javascript">Node.js</a>
   <a href="?cli">CLI</a>
 </div>
 
@@ -200,9 +200,9 @@ Disconnect from a Milvus server.
 
 <div class="multipleCode">
   <a href="?python">Python </a>
-  <a href="?javascript">Node.js</a>
-  <a href="?go">GO</a>
   <a href="?java">Java</a>
+  <a href="?go">GO</a>
+  <a href="?javascript">Node.js</a>
   <a href="?cli">CLI</a>
 </div>
 
@@ -259,6 +259,6 @@ Having connected to a Milvus server, you can:
 
 For advanced operations, check:
 
-- [PyMilvus API reference](/api-reference/pymilvus/v2.0.0rc9/tutorial.html)
-- [Node.js API reference](/api-reference/node/v1.0.20/tutorial.html)
+- [PyMilvus API reference](/api-reference/pymilvus/v2.0.0/tutorial.html)
+- [Node.js API reference](/api-reference/node/v2.0.0/tutorial.html)
 

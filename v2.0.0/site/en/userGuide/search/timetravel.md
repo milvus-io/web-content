@@ -22,9 +22,9 @@ If you work with your own dataset in an existing Milvus instance, you can move f
 
 <div class="multipleCode">
   <a href="?python">Python </a>
-  <a href="?javascript">Node.js</a>
-  <a href="?go">GO</a>
   <a href="?java">Java</a>
+  <a href="?go">GO</a>
+  <a href="?javascript">Node.js</a>
   <a href="?cli">CLI</a>
 </div>
 
@@ -83,9 +83,9 @@ Insert random data to simulate the original data (Milvus CLI example uses a pre-
 
 <div class="multipleCode">
   <a href="?python">Python </a>
-  <a href="?javascript">Node.js</a>
-  <a href="?go">GO</a>
   <a href="?java">Java</a>
+  <a href="?go">GO</a>
+  <a href="?javascript">Node.js</a>
   <a href="?cli">CLI</a>
 </div>
 
@@ -172,9 +172,9 @@ Insert the second batch of data to simulate the dirty data, among which a piece 
 
 <div class="multipleCode">
   <a href="?python">Python </a>
-  <a href="?javascript">Node.js</a>
-  <a href="?go">GO</a>
   <a href="?java">Java</a>
+  <a href="?go">GO</a>
+  <a href="?javascript">Node.js</a>
   <a href="?cli">CLI</a>
 </div>
 
@@ -238,9 +238,9 @@ Load the collection and search the target data with the timestamp of the first d
 
 <div class="multipleCode">
   <a href="?python">Python </a>
-  <a href="?javascript">Node.js</a>
-  <a href="?go">GO</a>
   <a href="?java">Java</a>
+  <a href="?go">GO</a>
+  <a href="?javascript">Node.js</a>
   <a href="?cli">CLI</a>
 </div>
 
@@ -355,9 +355,9 @@ If you do not specify the timestamp or specify it with the timestamp of the seco
 
 <div class="multipleCode">
   <a href="?python">Python </a>
-  <a href="?javascript">Node.js</a>
-  <a href="?go">GO</a>
   <a href="?java">Java</a>
+  <a href="?go">GO</a>
+  <a href="?javascript">Node.js</a>
   <a href="?cli">CLI</a>
 </div>
 
@@ -681,5 +681,5 @@ No.1:
   - [Query vectors](query.md)
   - [Conduct a hybrid search](hybridsearch.md)
 - Explore API references for Milvus SDKs:
-  - [PyMilvus API reference](/api-reference/pymilvus/v2.0.0rc9/tutorial.html)
-  - [Node.js API reference](/api-reference/node/v1.0.20/tutorial.html)
+  - [PyMilvus API reference](/api-reference/pymilvus/v2.0.0/tutorial.html)
+  - [Node.js API reference](/api-reference/node/v2.0.0/tutorial.html)

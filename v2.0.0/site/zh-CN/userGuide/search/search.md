@@ -26,9 +26,9 @@ All search and query operations within Milvus are executed in memory. Load the c
 
 <div class="multipleCode">
   <a href="?python">Python </a>
-  <a href="?javascript">Node.js</a>
-  <a href="?go">GO</a>
   <a href="?java">Java</a>
+  <a href="?go">GO</a>
+  <a href="?javascript">Node.js</a>
   <a href="?cli">CLI</a>
 </div>
 
@@ -78,9 +78,9 @@ Prepare the parameters that suit your search scenario. The following example def
 
 <div class="multipleCode">
   <a href="?python">Python </a>
-  <a href="?javascript">Node.js</a>
-  <a href="?go">GO</a>
   <a href="?java">Java</a>
+  <a href="?go">GO</a>
+  <a href="?javascript">Node.js</a>
   <a href="?cli">CLI</a>
 </div>
 
@@ -268,9 +268,9 @@ Search vectors with Milvus. To search in a specific [partition](glossary.md#Part
 
 <div class="multipleCode">
   <a href="?python">Python </a>
-  <a href="?javascript">Node.js</a>
-  <a href="?go">GO</a>
   <a href="?java">Java</a>
+  <a href="?go">GO</a>
+  <a href="?javascript">Node.js</a>
   <a href="?cli">CLI</a>
 </div>
 
@@ -524,9 +524,9 @@ Check the primary key values of the most similar vectors and their distances.
 
 <div class="multipleCode">
   <a href="?python">Python </a>
-  <a href="?javascript">Node.js</a>
-  <a href="?go">GO</a>
   <a href="?java">Java</a>
+  <a href="?go">GO</a>
+  <a href="?javascript">Node.js</a>
   <a href="?cli">CLI</a>
 </div>
 
@@ -548,9 +548,9 @@ Release the collection loaded in Milvus to reduce memory consumption when the se
 
 <div class="multipleCode">
   <a href="?python">Python </a>
-  <a href="?javascript">Node.js</a>
-  <a href="?go">GO</a>
   <a href="?java">Java</a>
+  <a href="?go">GO</a>
+  <a href="?javascript">Node.js</a>
   <a href="?cli">CLI</a>
 </div>
 
@@ -601,5 +601,5 @@ release -c book
   - [Conduct a hybrid search](hybridsearch.md)
   - [Search with Time Travel](timetravel.md)
 - Explore API references for Milvus SDKs:
-  - [PyMilvus API reference](/api-reference/pymilvus/v2.0.0rc9/tutorial.html)
-  - [Node.js API reference](/api-reference/node/v1.0.20/tutorial.html)
+  - [PyMilvus API reference](/api-reference/pymilvus/v2.0.0/tutorial.html)
+  - [Node.js API reference](/api-reference/node/v2.0.0/tutorial.html)

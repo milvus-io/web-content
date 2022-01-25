@@ -30,14 +30,14 @@ Run the following command to install Milvus Java SDK.
 <dependency>
     <groupId>io.milvus</groupId>
     <artifactId>milvus-sdk-java</artifactId>
-    <version>2.0.0</version>
+    <version>2.0.2</version>
 </dependency>
 ```
 
 - Gradle/Grails
 
 ```
-compile 'io.milvus:milvus-sdk-java:2.0.0'
+compile 'io.milvus:milvus-sdk-java:2.0.2'
 ```
 
 ## What's next
@@ -49,5 +49,5 @@ Having installed Milvus Java SDK, you can:
   - [Conduct a vector search](search.md)
   - [Conduct a hybrid search](hybridsearch.md)
 
-- Explore [Milvus Java API reference](/api-reference/node/v2.0.0/tutorial.html)
+- Explore [Milvus Java API reference](/api-reference/java/v2.0.2/index.html)
 

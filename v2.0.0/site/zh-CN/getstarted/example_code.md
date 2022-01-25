@@ -29,10 +29,10 @@ Before running this example code, you will need to install [Milvus](install_stan
 
 ## Download example code
 
-[Download](https://raw.githubusercontent.com/milvus-io/pymilvus/v2.0.0rc9/examples/hello_milvus.py) `hello_milvus.py` directly or with the following command.
+[Download](https://raw.githubusercontent.com/milvus-io/pymilvus/v2.0.0/examples/hello_milvus.py) `hello_milvus.py` directly or with the following command.
 
 ```Python
-$ wget https://raw.githubusercontent.com/milvus-io/pymilvus/v2.0.0rc9/examples/hello_milvus.py
+$ wget https://raw.githubusercontent.com/milvus-io/pymilvus/v2.0.0/examples/hello_milvus.py
 ```
 
 

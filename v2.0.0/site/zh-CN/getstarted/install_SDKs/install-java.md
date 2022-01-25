@@ -57,5 +57,5 @@ Having installed Milvus Java SDK, you can:
   - [Conduct a vector search](search.md)
   - [Conduct a hybrid search](hybridsearch.md)
 
-- Explore [Milvus Java API reference](/api-reference/node/v2.0.0/tutorial.html)
+- Explore [Milvus Java API reference](/api-reference/java/v2.0.2/index.html)
 

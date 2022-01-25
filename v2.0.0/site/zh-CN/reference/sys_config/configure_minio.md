@@ -36,7 +36,7 @@ Under this section, you can configure MinIO or S3 address, relevant access keys,
         <li><code>minio.address</code> and <code>minio.port</code> together generate the valid access to MinIO or S3 service.</li>
         <li>MinIO preferentially acquires the valid IP address from the environment variable <code>MINIO_ADDRESS</code> when Milvus is started.</li>
         <li>Default value applies when MinIO or S3 is running on the same network with Milvus.</li>
-        <li>Milvus 2.0.0 does not support secure access to MinIO or S3 service. Future releases will support secure access to MinIO.</li>
+        <li>Milvus 2.0 does not support secure access to MinIO or S3 service. Future releases will support secure access to MinIO.</li>
       </td>
       <td>localhost</td>
     </tr>
@@ -126,7 +126,7 @@ Under this section, you can configure MinIO or S3 address, relevant access keys,
     <tr>
       <td>
         <li>Switch value to control if to access the MinIO or S3 service through SSL.</li>
-        <li>Milvus 2.0.0 does not support secure access to MinIO or S3 service. Future releases will support secure access to MinIO.</li>
+        <li>Milvus 2.0 does not support secure access to MinIO or S3 service. Future releases will support secure access to MinIO.</li>
       </td>
       <td>false</td>
     </tr>
@@ -147,7 +147,7 @@ Under this section, you can configure MinIO or S3 address, relevant access keys,
     <tr>
       <td>
         <li>Name of the bucket where Milvus stores data in MinIO or S3.</li>
-        <li>Milvus 2.0.0 does not support storing data in multiple buckets.</li>
+        <li>Milvus 2.0 does not support storing data in multiple buckets.</li>
         <li>Bucket with this name will be created if it does not exist. If the bucket already exists and is accessible, it will be used directly. Otherwise, there will be an error.</li>
         <li>The data will be stored in the local Docker if Docker is used to start the MinIO service locally. Ensure that there is sufficient storage space.</li>
         <li>A bucket name is globally unique in one MinIO or S3 instance.</li>

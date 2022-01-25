@@ -14,9 +14,9 @@ Verify if a collection exists in Milvus.
 
 <div class="multipleCode">
   <a href="?python">Python </a>
-  <a href="?javascript">Node.js</a>
-  <a href="?go">GO</a>
   <a href="?java">Java</a>
+  <a href="?go">GO</a>
+  <a href="?javascript">Node.js</a>
   <a href="?cli">CLI</a>
 </div>
 
@@ -144,9 +144,9 @@ Check the details of a collection.
 
 <div class="multipleCode">
   <a href="?python">Python </a>
-  <a href="?javascript">Node.js</a>
-  <a href="?go">GO</a>
   <a href="?java">Java</a>
+  <a href="?go">GO</a>
+  <a href="?javascript">Node.js</a>
   <a href="?cli">CLI</a>
 </div>
 
@@ -352,9 +352,9 @@ List all collections in this Milvus Instance.
 
 <div class="multipleCode">
   <a href="?python">Python </a>
-  <a href="?javascript">Node.js</a>
-  <a href="?go">GO</a>
   <a href="?java">Java</a>
+  <a href="?go">GO</a>
+  <a href="?javascript">Node.js</a>
   <a href="?cli">CLI</a>
 </div>
 
@@ -413,6 +413,6 @@ list collections
   - [Conduct a vector search](search.md)
   - [Conduct a hybrid search](hybridsearch.md)
 - Explore API references for Milvus SDKs:
-  - [PyMilvus API reference](/api-reference/pymilvus/v2.0.0rc9/tutorial.html)
-  - [Node.js API reference](/api-reference/node/v1.0.20/tutorial.html)
+  - [PyMilvus API reference](/api-reference/pymilvus/v2.0.0/tutorial.html)
+  - [Node.js API reference](/api-reference/node/v2.0.0/tutorial.html)
 

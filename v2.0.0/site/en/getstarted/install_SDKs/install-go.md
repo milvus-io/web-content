@@ -36,5 +36,4 @@ Having installed Milvus GO SDK, you can:
   - [Conduct a vector search](search.md)
   - [Conduct a hybrid search](hybridsearch.md)
 
-- Explore [Milvus GO API reference](/api-reference/node/v/tutorial.html)
 
