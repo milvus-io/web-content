@@ -66,6 +66,22 @@
 					<h1>Milvus2-sdk-node</h1>
 				</a>
 				<p>This is node sdk for <a href="https://github.com/milvus-io/milvus">Milvus</a>.</p>
+				<a href="#compatibility" id="compatibility" style="color: inherit; text-decoration: none;">
+					<h2>Compatibility</h2>
+				</a>
+				<p>The following collection shows Milvus versions and recommended @zilliz/milvus2-sdk-node versions:</p>
+				<table>
+					<thead>
+						<tr>
+							<th align="center">Milvus version</th>
+							<th align="center">Recommended @zilliz/milvus2-sdk-node version</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td align="center">2.0.0</td>
+							<td align="center">2.0.0</td>
+						</tr>
+				</tbody></table>
 				<a href="#dependencies" id="dependencies" style="color: inherit; text-decoration: none;">
 					<h2>Dependencies</h2>
 				</a>
@@ -76,8 +92,8 @@
 				</a>
 				<pre><code class="language-javascript"><span style="color: #000000">   </span><span style="color: #001080">npm</span><span style="color: #000000"> </span><span style="color: #001080">install</span><span style="color: #000000"> @</span><span style="color: #001080">zilliz</span><span style="color: #000000">/</span><span style="color: #001080">milvus2</span><span style="color: #000000">-</span><span style="color: #001080">sdk</span><span style="color: #000000">-</span><span style="color: #001080">node</span>
 </code></pre>
-				<a href="#api" id="api" style="color: inherit; text-decoration: none;">
-					<h2>API</h2>
+				<a href="#api-support" id="api-support" style="color: inherit; text-decoration: none;">
+					<h2>API Support</h2>
 				</a>
 				<table>
 					<thead>
@@ -199,19 +215,35 @@
 						</tr>
 						<tr>
 							<td align="left">flush</td>
-							<td align="left">false</td>
+							<td align="left">true</td>
 							<td align="center">Flush Data</td>
+						</tr>
+						<tr>
+							<td align="left">flushSync</td>
+							<td align="left">false</td>
+							<td align="center">Flush Data Sync</td>
 						</tr>
 						<tr>
 							<td align="left">query</td>
 							<td align="left">false</td>
 							<td align="center">Get data by expr</td>
 						</tr>
+						<tr>
+							<td align="left">compact</td>
+							<td align="left">true</td>
+							<td align="center">Do compaction for the collection</td>
+						</tr>
+						<tr>
+							<td align="left">getCompactionState</td>
+							<td align="left">true</td>
+							<td align="center">Get compaction states by compact id</td>
+						</tr>
 				</tbody></table>
 				<a href="#example" id="example" style="color: inherit; text-decoration: none;">
 					<h2>Example</h2>
 				</a>
 				<ol>
+					<li><a href="https://github.com/milvus-io/milvus-sdk-node/blob/main/example/HelloMilvus.ts">Hello World</a></li>
 					<li><a href="https://github.com/milvus-io/milvus-sdk-node/blob/main/example/Collection.ts">How to operate collection</a></li>
 					<li><a href="https://github.com/milvus-io/milvus-sdk-node/blob/main/example/Insert.ts">How to insert data</a></li>
 					<li><a href="https://github.com/milvus-io/milvus-sdk-node/blob/main/example/Search.ts">Vector similarity search on float field</a></li>
