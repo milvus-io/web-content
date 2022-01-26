@@ -70,17 +70,16 @@ id: home.md
 <div class="recomment-item">
   <p>Deploy</p>
 
+- [Configure Milvus](configure-docker.md)
 - [Deploy on Clouds](aws.md)
 - [Scale a Milvus Cluster](scaleout.md)
 - [Set up storage](deploy_s3.md)
 - [Monitor and Alert](monitor_overview.md)
-- [Upgrade](upgrade.md)
 </div>
 
 <div class="recomment-item">
   <p>Learn</p>
 
-- [System Configurations](configuration_standalone-basic.md)
 - [Architecture Overview](architecture_overview.md)
 - [Vector Index](index_selection.md)
 - [Similarity Metrics](metric.md)
@@ -93,6 +92,14 @@ id: home.md
 
 ## What's new in docs
 
+_Jan 2022_
+
+- Milvus announced its general availability release [Milvus 2.0.0](release_notes.md).
+- Added guidance on installing a Milvus standalone with [APT or YUM](install_standalone-aptyum.md).
+- Added documentation on how to [configure Milvus](configure-docker.md).
+- Added the installation guide for Milvus [GO SDK](install-go.md) and [Java SDk](install-java.md).
+- Add sample code in GO and Java in User Guide.
+
 _Dec 2021_
 
 - With the release of [Milvus 2.0-PreGA](release_notes.md), we have published new user guides concerning the new features of [Data Deletion](delete_data.md) and [Collection Alias](collection_alias.md).
@@ -100,12 +107,5 @@ _Dec 2021_
 - Added documentation about the newly released Milvus ecosystem tool, [Attu](attu.md). Learn what Attu is, and how to [install](attu_install-docker.md) and [use](attu_overview.md) it.
 - Remade [Hello Milvus](example_code.md) to demonstrate the new feature of Data Deletion.
 - Added a reference documentation explaining the mechanism of [Time Travel](timetravel_ref.md) in Milvus.
-
-_Nov 2021_
-
-- With the release of [Milvus 2.0-RC8](release_notes.md), we have published a new documentation introducing the new feature [Time Travel](timetravel.md).
-- Added guidance on installation a Milvus cluster on Kubernetes with [Milvus Operator](install_cluster-milvusoperator.md).
-- Added documentation about the newly released Milvus ecosystem tool, [Milvus CLI](cli_overview.md). Learn what Milvus CLI is, and how to [install](install_cli.md) and [use](cli_commands.md) it.
-- Added the [installation guide](milvusdm_install.md) for MilvusDM. Learn how to install the data migration tool and import data from [Faiss](f2m.md), [HDF5 files](h2m.md), and [Milvus 1.x](m2m.md) to Milvus 2.0.
 
 </div>

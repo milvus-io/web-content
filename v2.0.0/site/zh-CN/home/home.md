@@ -93,6 +93,14 @@ id: home.md
 
 ## 文档动态
 
+_2022 年 01 月_
+
+- Milvus 发布了其正式版本 [Milvus 2.0.0](release_notes.md)。
+- 添加使用 [APT 或 YUM](install_standalone-aptyum.md) 安装 Milvus 单机版指南。
+- 添加 [Milvus 配置指南](configure-docker.md)。
+- 添加安装 Milvus [GO SDK](install-go.md) 以及 [Java SDk](install-java.md) 指南。
+- 在操作指南中添加 GO 以及 Java 语言示例代码。
+
 _2021 年 12 月_
 
 - 随着 [Milvus 2.0-PreGA](release_notes.md) 版本的发布，Milvus 文档新增了 [数据删除](delete_data.md) 以及 [Collection 别名](collection_alias.md) 功能使用说明。
@@ -101,11 +109,5 @@ _2021 年 12 月_
 - 重制 [Hello Milvus](example_code.md)，新增数据删除功能展示。
 - 添加 [Time Travel 原理](timetravel_ref.md) 文档。
 
-_2021 年 11 月_
-
-- 随着 [Milvus 2.0-RC8](release_notes.md) 版本的发布，Milvus 文档新增了 [Time Travel](timetravel.md) 功能使用说明。
-- 新增安装指南：使用 [Milvus Operator](install_cluster-milvusoperator.md) 在 Kubernetes 集群上安装分布式版 Milvus。
-- Milvus 生态系统新增 CLI 工具，[点击阅读](cli_overview.md) 了解如何安装和使用 Milvus CLI。
-- 新增 [MilvusDM 安装指南](milvusdm_install.md)。了解如何安装并使用数据迁移工具 MilvusDM 将 [Faiss](f2m.md) 数据、[HDF5 文件](h2m.md) 以及 [Milvus 1.x](m2m.md) 数据导入至 Milvus 2.0。
 
 </div>
