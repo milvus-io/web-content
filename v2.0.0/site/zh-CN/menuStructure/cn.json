@@ -599,7 +599,7 @@
       }, 
       {
         "id": "milvus_attu",
-        "title": "Milvus Attu",
+        "title": "Attu",
         "label1": "tools",
         "label2": "",
         "label3": "",
@@ -616,7 +616,7 @@
       },
       {
         "id": "attu_install-docker.md",
-        "title": "安装 Milvus Attu",
+        "title": "安装 Attu",
         "label1": "tools",
         "label2": "milvus_attu",
         "label3": "",

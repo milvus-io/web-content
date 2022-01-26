@@ -98,7 +98,7 @@ id: roadmap.md
 | 版本 | 功能 | Owner   | 进度  | 备注 |
 | ----------- | ----------- | ----------- | ----------- | ----------- |
 | 2.0.0-RC    | 使用 Helm 安装 Milvus      |        | 已完成       |        |
-| 2.0.0-RC    | 提供 Milvus 可视化管理工具 Milvus Attu     |         | 优化中        |         |
+| 2.0.0-RC    | 提供 Milvus 可视化管理工具 Attu     |         | 优化中        |         |
 | 2.0      | 支持 Prometheus、Grafana 及 Jaeger        | 	zwd1208       | 文档编写中      |        |
 | 2.0   | Milvus Kubernetes Operator       | 	zwd1208, jeffoverflow        | 开发中        |         |
 | 2.1      | 多机房多地部署，多云融合      |        | 待指派       |        |

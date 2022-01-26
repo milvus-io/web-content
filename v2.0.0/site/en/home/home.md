@@ -97,7 +97,7 @@ _Dec 2021_
 
 - With the release of [Milvus 2.0-PreGA](release_notes.md), we have published new user guides concerning the new features of [Data Deletion](delete_data.md) and [Collection Alias](collection_alias.md).
 - Updated [Search with Time Travel](timetravel.md) by introducing how to [generate a timestamp](timetravel.md#Generate-a-timestamp-for-search) based on an existing timestamp, Unix Epoch time, or date time.
-- Added documentation about the newly released Milvus ecosystem tool, [Milvus Attu](attu.md). Learn what Milvus Attu is, and how to [install](attu_install-docker.md) and [use](attu_overview.md) it.
+- Added documentation about the newly released Milvus ecosystem tool, [Attu](attu.md). Learn what Attu is, and how to [install](attu_install-docker.md) and [use](attu_overview.md) it.
 - Remade [Hello Milvus](example_code.md) to demonstrate the new feature of Data Deletion.
 - Added a reference documentation explaining the mechanism of [Time Travel](timetravel_ref.md) in Milvus.
 
