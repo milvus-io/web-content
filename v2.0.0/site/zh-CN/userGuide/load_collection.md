@@ -21,7 +21,7 @@ This topic describes how to load the collection to memory before a search or a q
   <a href="?java">Java</a>
   <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
-  <a href="?cli">CLI</a>
+  <a href="?shell">CLI</a>
 </div>
 
 
@@ -55,7 +55,7 @@ milvusClient.loadCollection(
                 .build());
 ```
 
-```cli
+```shell
 load -c book
 ```
 

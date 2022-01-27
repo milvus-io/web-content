@@ -22,7 +22,7 @@ All search and query operations within Milvus are executed in memory. Load the c
   <a href="?java">Java</a>
   <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
-  <a href="?cli">CLI</a>
+  <a href="?shell">CLI</a>
 </div>
 
 
@@ -56,7 +56,7 @@ milvusClient.loadCollection(
                 .build());
 ```
 
-```cli
+```shell
 load -c book
 ```
 
@@ -74,7 +74,7 @@ By specifying the boolean expression, you can filter the scalar field of the ent
   <a href="?java">Java</a>
   <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
-  <a href="?cli">CLI</a>
+  <a href="?shell">CLI</a>
 </div>
 
 
@@ -144,7 +144,7 @@ SearchParam searchParam = SearchParam.newBuilder()
 R<SearchResults> respSearch = milvusClient.search(searchParam);
 ```
 
-```cli
+```shell
 search
 
 Collection name (book): book
@@ -422,7 +422,7 @@ Check the returned results.
   <a href="?java">Java</a>
   <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
-  <a href="?cli">CLI</a>
+  <a href="?shell">CLI</a>
 </div>
 
 
@@ -452,7 +452,7 @@ System.out.println(wrapperSearch.getIDScore(0));
 System.out.println(wrapperSearch.getFieldData("book_id", 0));
 ```
 
-```cli
+```shell
 # Milvus CLI automatically returns the primary key values of the most similar vectors and their distances.
 ```
 ## What's next

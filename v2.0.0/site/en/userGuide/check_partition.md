@@ -17,7 +17,7 @@ Verify if a partition exists in the specified collection.
   <a href="?java">Java</a>
   <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
-  <a href="?cli">CLI</a>
+  <a href="?shell">CLI</a>
 </div>
 
 
@@ -57,7 +57,7 @@ if (respHasCollection.getData() == Boolean.TRUE) {
 }
 ```
 
-```cli
+```shell
 describe partition -c book -p novel
 ```
 
@@ -146,7 +146,7 @@ describe partition -c book -p novel
   <a href="?java">Java</a>
   <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
-  <a href="?cli">CLI</a>
+  <a href="?shell">CLI</a>
 </div>
 
 
@@ -181,7 +181,7 @@ R<ShowPartitionsResponse> respShowPartitions = milvusClient.showPartitions(
 System.out.println(respShowPartitions);
 ```
 
-```cli
+```shell
 list partitions -c book
 ```
 

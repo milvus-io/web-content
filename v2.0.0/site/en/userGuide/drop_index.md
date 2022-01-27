@@ -17,7 +17,7 @@ Dropping an index irreversibly removes all corresponding index files.
   <a href="?java">Java</a>
   <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
-  <a href="?cli">CLI</a>
+  <a href="?shell">CLI</a>
 </div>
 
 
@@ -52,7 +52,7 @@ milvusClient.dropIndex(
                 .build());
 ```
 
-```cli
+```shell
 delete index -c book
 ```
 

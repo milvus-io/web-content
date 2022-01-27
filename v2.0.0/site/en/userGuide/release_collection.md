@@ -13,7 +13,7 @@ This topic describes how to release a collection from memory after a search or a
   <a href="?java">Java</a>
   <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
-  <a href="?cli">CLI</a>
+  <a href="?shell">CLI</a>
 </div>
 
 
@@ -47,7 +47,7 @@ milvusClient.releaseCollection(
                 .build());
 ```
 
-```cli
+```shell
 release -c book
 ```
 

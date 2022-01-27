@@ -25,7 +25,7 @@ Dropping a collection irreversibly deletes all data within it.
   <a href="?java">Java</a>
   <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
-  <a href="?cli">CLI</a>
+  <a href="?shell">CLI</a>
 </div>
 
 
@@ -55,7 +55,7 @@ milvusClient.dropCollection(
                 .build());
 ```
 
-```cli
+```shell
 delete collection -c book
 ```
 

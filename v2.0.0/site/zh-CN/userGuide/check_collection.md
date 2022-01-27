@@ -24,7 +24,7 @@ Verify if a collection exists in Milvus.
   <a href="?java">Java</a>
   <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
-  <a href="?cli">CLI</a>
+  <a href="?shell">CLI</a>
 </div>
 
 
@@ -60,7 +60,7 @@ if (respHasCollection.getData() == Boolean.TRUE) {
 }
 ```
 
-```cli
+```shell
 describe collection -c book
 ```
 
@@ -154,7 +154,7 @@ Check the details of a collection.
   <a href="?java">Java</a>
   <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
-  <a href="?cli">CLI</a>
+  <a href="?shell">CLI</a>
 </div>
 
 
@@ -217,7 +217,7 @@ GetCollStatResponseWrapper wrapperCollectionStatistics = new GetCollStatResponse
 System.out.println("Collection row count: " + wrapperCollectionStatistics.getRowCount());
 ```
 
-```cli
+```shell
 describe collection -c book
 ```
 
@@ -362,7 +362,7 @@ List all collections in this Milvus Instance.
   <a href="?java">Java</a>
   <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
-  <a href="?cli">CLI</a>
+  <a href="?shell">CLI</a>
 </div>
 
 
@@ -392,7 +392,7 @@ R<ShowCollectionsResponse> respShowCollections = milvusClient.showCollections(
 System.out.println(respShowCollections);
 ```
 
-```cli
+```shell
 list collections
 ```
 

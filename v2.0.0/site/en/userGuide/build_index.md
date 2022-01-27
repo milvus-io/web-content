@@ -29,7 +29,7 @@ Prepare the index parameters.
   <a href="?java">Java</a>
   <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
-  <a href="?cli">CLI</a>
+  <a href="?shell">CLI</a>
 </div>
 
 
@@ -64,7 +64,7 @@ final IndexType INDEX_TYPE = IndexType.IVF_FLAT;   // IndexType
 final String INDEX_PARAM = "{\"nlist\":1024}";     // ExtraParam
 ```
 
-```cli
+```shell
 create index
 
 Collection name (book): book
@@ -315,7 +315,7 @@ Build the index by specifying the vector field name and index parameters.
   <a href="?java">Java</a>
   <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
-  <a href="?cli">CLI</a>
+  <a href="?shell">CLI</a>
 </div>
 
 
@@ -365,7 +365,7 @@ milvusClient.createIndex(
                 .build());
 ```
 
-```cli
+```shell
 # Follow the previous step.
 ```
 

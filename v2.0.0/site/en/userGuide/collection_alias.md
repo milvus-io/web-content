@@ -23,7 +23,7 @@ Specify an an alias for a collection.
   <a href="?java">Java</a>
   <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
-  <a href="?cli">CLI</a>
+  <a href="?shell">CLI</a>
 </div>
 
 
@@ -54,7 +54,7 @@ milvusClient.createAlias(
     .build());
 ```
 
-```cli
+```shell
 create alias -c book -a publication
 ```
 
@@ -150,7 +150,7 @@ Drop a specified alias.
   <a href="?java">Java</a>
   <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
-  <a href="?cli">CLI</a>
+  <a href="?shell">CLI</a>
 </div>
 
 
@@ -178,7 +178,7 @@ milvusClient.dropAlias(
     .build());
 ```
 
-```cli
+```shell
 delete alias -c book -a publication
 ```
 
@@ -257,7 +257,7 @@ Alter an existing alias to another collection. The following example is based on
   <a href="?java">Java</a>
   <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
-  <a href="?cli">CLI</a>
+  <a href="?shell">CLI</a>
 </div>
 
 
@@ -288,7 +288,7 @@ milvusClient.alterAlias(
     .build());
 ```
 
-```cli
+```shell
 create alias -c book -A -a publication
 ```
 

@@ -28,7 +28,7 @@ First, prepare the data to insert.  Data type of the data to insert must match t
   <a href="?java">Java</a>
   <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
-  <a href="?cli">CLI</a>
+  <a href="?shell">CLI</a>
 </div>
 
 
@@ -83,7 +83,7 @@ for (long i = 0L; i < 2000; ++i) {
 }
 ```
 
-```cli
+```shell
 # Prepare your data in a CSV file. Milvus CLI only supports importing data from local or remote files.
 ```
 
@@ -99,7 +99,7 @@ By specifying `partition_name`, you can optionally decide to which partition to 
   <a href="?java">Java</a>
   <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
-  <a href="?cli">CLI</a>
+  <a href="?shell">CLI</a>
 </div>
 
 
@@ -144,7 +144,7 @@ InsertParam insertParam = InsertParam.newBuilder()
 milvusClient.insert(insertParam);
 ```
 
-```cli
+```shell
 import -c book 'https://raw.githubusercontent.com/milvus-io/milvus_cli/main/examples/user_guide/search.csv'
 ```
 

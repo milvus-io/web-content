@@ -29,7 +29,7 @@ All search and query operations within Milvus are executed in memory. Load the c
   <a href="?java">Java</a>
   <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
-  <a href="?cli">CLI</a>
+  <a href="?shell">CLI</a>
 </div>
 
 
@@ -63,7 +63,7 @@ milvusClient.loadCollection(
                 .build());
 ```
 
-```cli
+```shell
 load -c book
 ```
 
@@ -80,7 +80,7 @@ The following example filters the vectors with certain `book_id` values, and ret
   <a href="?java">Java</a>
   <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
-  <a href="?cli">CLI</a>
+  <a href="?shell">CLI</a>
 </div>
 
 
@@ -110,7 +110,7 @@ QueryParam queryParam = QueryParam.newBuilder()
 R<QueryResults> respQuery = milvusClient.query(queryParam);
 ```
 
-```cli
+```shell
 query
 
 collection_name: book
@@ -265,7 +265,7 @@ Check the returned results.
   <a href="?java">Java</a>
   <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
-  <a href="?cli">CLI</a>
+  <a href="?shell">CLI</a>
 </div>
 
 
@@ -288,7 +288,7 @@ System.out.println(wrapperQuery.getFieldWrapper("book_id").getFieldData());
 System.out.println(wrapperQuery.getFieldWrapper("word_count").getFieldData());
 ```
 
-```cli
+```shell
 # Milvus CLI automatically returns the entities with the pre-defined output fields.
 ```
 

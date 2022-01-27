@@ -38,7 +38,7 @@ The following example filters data with primary key values of `0` and `1`.
   <a href="?java">Java</a>
   <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
-  <a href="?cli">CLI</a>
+  <a href="?shell">CLI</a>
 </div>
 
 
@@ -54,7 +54,7 @@ const expr = "book_id in [0,1]";
 private static final String DELETE_EXPR = "book_id in [0,1]";
 ```
 
-```cli
+```shell
 delete entities -c book
 The expression to specify entities to be deleted： book_id in [0,1]
 ```
@@ -88,7 +88,7 @@ Delete the entities with the boolean expression you created. Milvus returns the 
   <a href="?java">Java</a>
   <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
-  <a href="?cli">CLI</a>
+  <a href="?shell">CLI</a>
 </div>
 
 
@@ -117,7 +117,7 @@ milvusClient.delete(
 				.build());
 ```
 
-```cli
+```shell
 You are trying to delete the entities of collection. This action cannot be undone!
 Do you want to continue? [y/N]: y
 ```

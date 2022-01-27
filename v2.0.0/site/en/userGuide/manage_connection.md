@@ -24,7 +24,7 @@ Construct a Milvus connection. Ensure to connect to Milvus server before any ope
   <a href="?java">Java</a>
   <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
-  <a href="?cli">CLI</a>
+  <a href="?shell">CLI</a>
 </div>
 
 
@@ -62,7 +62,7 @@ final MilvusServiceClient milvusClient = new MilvusServiceClient(
 				.build());
 ```
 
-```cli
+```shell
 connect -h localhost -p 19530 -a default
 ```
 
@@ -196,7 +196,7 @@ Disconnect from a Milvus server.
   <a href="?java">Java</a>
   <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
-  <a href="?cli">CLI</a>
+  <a href="?shell">CLI</a>
 </div>
 
 
@@ -217,7 +217,7 @@ milvusClient.Close()
 milvusClient.close()
 ```
 
-```cli
+```shell
 connect -D
 ```
 

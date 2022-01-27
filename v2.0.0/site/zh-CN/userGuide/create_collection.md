@@ -37,7 +37,7 @@ First, prepare necessary parameters, including field schema, collection schema, 
   <a href="?java">Java</a>
   <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
-  <a href="?cli">CLI</a>
+  <a href="?shell">CLI</a>
 </div>
 
 
@@ -149,7 +149,7 @@ CreateCollectionParam createCollectionReq = CreateCollectionParam.newBuilder()
         .build();
 ```
 
-```cli
+```shell
 create collection -c book -f book_id:INT64 -f word_count:INT64 -f book_intro:FLOAT_VECTOR:2 -p book_id
 ```
 
@@ -470,7 +470,7 @@ Then, create a collection with the schema you specified above.
   <a href="?java">Java</a>
   <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
-  <a href="?cli">CLI</a>
+  <a href="?shell">CLI</a>
 </div>
 
 
@@ -503,7 +503,7 @@ if err != nil {
 milvusClient.createCollection(createCollectionReq);
 ```
 
-```cli
+```shell
 # Follow the previous step.
 ```
 

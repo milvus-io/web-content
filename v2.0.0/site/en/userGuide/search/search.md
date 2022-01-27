@@ -22,7 +22,7 @@ All search and query operations within Milvus are executed in memory. Load the c
   <a href="?java">Java</a>
   <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
-  <a href="?cli">CLI</a>
+  <a href="?shell">CLI</a>
 </div>
 
 
@@ -56,7 +56,7 @@ milvusClient.loadCollection(
                 .build());
 ```
 
-```cli
+```shell
 load -c book
 ```
 
@@ -74,7 +74,7 @@ Prepare the parameters that suit your search scenario. The following example def
   <a href="?java">Java</a>
   <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
-  <a href="?cli">CLI</a>
+  <a href="?shell">CLI</a>
 </div>
 
 
@@ -102,7 +102,7 @@ final Integer SEARCH_K = 2;                       // TopK
 final String SEARCH_PARAM = "{\"nprobe\":10}";    // Params
 ```
 
-```cli
+```shell
 search
 
 Collection name (book): book
@@ -264,7 +264,7 @@ Search vectors with Milvus. To search in a specific [partition](glossary.md#Part
   <a href="?java">Java</a>
   <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
-  <a href="?cli">CLI</a>
+  <a href="?shell">CLI</a>
 </div>
 
 
@@ -317,7 +317,7 @@ SearchParam searchParam = SearchParam.newBuilder()
 R<SearchResults> respSearch = milvusClient.search(searchParam);
 ```
 
-```cli
+```shell
 
 ```
 
@@ -520,7 +520,7 @@ Check the primary key values of the most similar vectors and their distances.
   <a href="?java">Java</a>
   <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
-  <a href="?cli">CLI</a>
+  <a href="?shell">CLI</a>
 </div>
 
 
@@ -533,7 +533,7 @@ results[0].distances
 console.log(results.results)
 ```
 
-```cli
+```shell
 # Milvus CLI automatically returns the primary key values of the most similar vectors and their distances.
 ```
 
@@ -544,7 +544,7 @@ Release the collection loaded in Milvus to reduce memory consumption when the se
   <a href="?java">Java</a>
   <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
-  <a href="?cli">CLI</a>
+  <a href="?shell">CLI</a>
 </div>
 
 
@@ -571,7 +571,7 @@ milvusClient.releaseCollection(
                 .build());
 ```
 
-```cli
+```shell
 release -c book
 ```
 
