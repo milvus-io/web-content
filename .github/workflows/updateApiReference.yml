@@ -182,3 +182,32 @@ jobs:
           git commit -m "milvus-sdk-node"
           git push -f origin master
           echo "=>Completed: Update milvus-sdk-node doc."
+      - id: update_repo_java
+        name: Update java doc repo
+        if: ${{ github.event.inputs.repoName == 'milvus-sdk-java' }}
+        run: |
+          sudo chmod -R 777 ${{ github.event.inputs.repoName }}
+          cd ${{ github.event.repository.name }}/APIReference/milvus-sdk-java
+          echo "Upcomming tag name: ${{ github.event.inputs.tagName }}"
+          echo "=>List all doc versions"
+          ls -l
+          sudo chmod -R 777 .
+          if [ -d "./${{ github.event.inputs.tagName }}" ]
+          then
+            echo "===tag name exists, remove all under this dir==="
+            sudo rm -fr "./${{ github.event.inputs.tagName }}"
+            git add .
+            git status
+            git commit -m "clean files under ${{ github.event.inputs.repoName }} ${{ github.event.inputs.tagName }}"
+            sudo mkdir "./${{ github.event.inputs.tagName }}"
+          else
+            echo "===miss tag name, create this dir==="
+            sudo mkdir "./${{ github.event.inputs.tagName }}"
+          fi
+          sudo cp -r ../../../${{ github.event.inputs.repoName }}/doc/io "./${{ github.event.inputs.tagName }}"
+          sudo cp -r ../../../${{ github.event.inputs.repoName }}/doc/index.html "./${{ github.event.inputs.tagName }}"
+          sudo chmod -R 777 .
+          git add .
+          git commit -m "Update java sdk doc"
+          git push -f origin master
+          echo "=>Completed: Update java sdk doc."
