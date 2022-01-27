@@ -43,5 +43,5 @@ This is an ordered list:
 
 ## Use graphs, charts, and pictures when words are insufficient to explain
 
-`![an explanatory image](path/name.jpg)`
+`![an explanatory image](path/name.jpg "this is a caption")`
 
