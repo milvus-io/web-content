@@ -40,7 +40,7 @@ When running queries, CPU usage is affected by `nq` and `nprobe`. When `nq` and 
 
 Insert operations are not CPU intensive. However, because new segments may not have reached the threshold for index building, Milvus resorts to brute-force search—significantly impacting query performance.
 
-The `rootcoord.minSegmentSizeToEnableIndex` parameter determines the index-building threshold for a segment, and is set to 1024 rows by default. See [System Configurations](configuration_cluster-advanced.md#System-Behavior-Configurations) for more information.
+The `rootcoord.minSegmentSizeToEnableIndex` parameter determines the index-building threshold for a segment, and is set to 1024 rows by default. See [System Configuration](system_configuration.md) for more information.
 
 #### Still have questions?
 

@@ -42,4 +42,4 @@ minikube is required when running Kubernetes cluster locally. minikube requires 
   - [Install Milvus standalone on Kubernetes](install_standalone-helm.md)
   - [Install Milvus cluster on Kubernetes](install_cluster-helm.md)
 
-- See [System Configuration](configuration_cluster-basic.md) for parameters you can set while installing Milvus.
+- See [System Configuration](system_configuration.md) for parameters you can set while installing Milvus.

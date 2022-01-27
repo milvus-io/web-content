@@ -17,7 +17,7 @@ related_key: index
 
 当 `create_index` 方法被调用时，Milvus 会同步为这个字段的现有数据创建索引。
 <div class="alert note">
-  默认设定下，Milvus 不会对插入的数据少于 1024 行的 segment 创建索引。如修改此项参数，需修改 <code>root_coord.yaml</code> 中的 <a href="configuration_standalone-advanced.md#System-Behavior-Configurations"><code>minSegmentSizeToEnableIndex</code></a> 配置项。
+  默认设定下，Milvus 不会对插入的数据少于 1024 行的 segment 创建索引。如修改此项参数，需修改 <code>milvus.yaml</code> 中的 <a href="configure_rootcoord.md#rootCoord.minSegmentSizeToEnableIndex"><code>rootCoord.minSegmentSizeToEnableIndex</code></a> 配置项。
 </div>
 
 ### 数据段建索引

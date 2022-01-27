@@ -35,4 +35,4 @@ Before you install Milvus, check your hardware and software to see if they meet 
   - [Install Milvus standalone with Docker Compose](install_standalone-docker.md)
   - [Install Milvus cluster with Docker Compose](install_cluster-docker.md)
 
-- See [System Configuration](configuration_standalone-basic.md) for parameters you can set while installing Milvus.
+- See [System Configuration](system_configuration.md) for parameters you can set while installing Milvus.

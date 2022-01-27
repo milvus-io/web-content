@@ -19,7 +19,7 @@ To improve query performance, you can specify an [index type](index_selection.md
 When the `create_index` method is called, Milvus synchronously indexes the existing data on this field. 
 
 <div class="alert note">
-By default, Milvus does not index a segment with less than 1,024 rows. To change this parameter, configure <a href="configuration_standalone-advanced.md#System-Behavior-Configurations"><code>minSegmentSizeToEnableIndex</code></a> in <code>root_coord.yaml</code>.
+By default, Milvus does not index a segment with less than 1,024 rows. To change this parameter, configure <a href="configure_rootcoord.md#rootCoord.minSegmentSizeToEnableIndex"><code>rootCoord.minSegmentSizeToEnableIndex</code></a> in <code>milvus.yaml</code>.
 </div>
 
 

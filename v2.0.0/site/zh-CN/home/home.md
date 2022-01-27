@@ -80,7 +80,7 @@ id: home.md
 <div class="recomment-item">
   <p>参考指南</p>
 
-- [系统配置](configuration_standalone-basic.md)
+- [系统配置](system_configuration.md)
 - [系统架构](architecture_overview.md)
 - [向量索引](index_selection.md)
 - [距离计算方式](metric.md)

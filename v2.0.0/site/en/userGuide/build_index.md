@@ -15,7 +15,7 @@ See [Vector Index](index.md) and [Index Selection](index_selection.md) for more 
 <div class="alert note">
 <ul>
 <li>Current release of Milvus only supports index on vector field. Future releases will support index on scalar field.</li>
-<li>By default, Milvus does not index a segment with less than 1,024 rows. To change this parameter, configure <a href="configuration_standalone-advanced.md#System-Behavior-Configurations"><code>minSegmentSizeToEnableIndex</code></a> in <code>milvus.yaml</code>.</li>
+<li>By default, Milvus does not index a segment with less than 1,024 rows. To change this parameter, configure <a href="configure_rootcoord.md#rootCoord.minSegmentSizeToEnableIndex"><code>rootCoord.minSegmentSizeToEnableIndex</code></a> in <code>milvus.yaml</code>.</li>
 </div>
 
 The following example builds a 1024-cluster IVF_FLAT index with Euclidean distance (L2) as the similarity metrics. You can choose the index and metrics that suit your scenario. See [Similarity Metrics](metric.md) for more information.

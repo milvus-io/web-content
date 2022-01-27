@@ -25,7 +25,7 @@ minio:
   useSSL: <true/false>
   bucketName: "<your_bucket_name>"
 ```
-See [MinIO/S3 Configurations](configuration_standalone-advanced.md#MinIOS3-Configurations) for more information.
+See [MinIO/S3 Configurations](configure_minio.md) for more information.
 
 
 ### 2. Run Milvus

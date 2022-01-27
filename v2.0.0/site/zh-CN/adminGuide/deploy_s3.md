@@ -22,7 +22,7 @@ minio:
   bucketName: "<your_bucket_name>"
 ```
 
-> 更多细节参考 [MinIO/S3 配置](configuration_standalone-advanced.md#MinIOS3-配置)。
+更多细节参考 [MinIO 或 S3 配置](configure_minio.md)。
 
 <div class="alert note">
 所有参数设置在 Milvus 启动时生效。
