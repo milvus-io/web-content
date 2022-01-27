@@ -3,6 +3,7 @@ id: configure-helm.md
 label: Helm
 related_key: configure
 group: configure-docker.md
+order: 1
 summary: Learn how to configure your Milvus.
 ---
 
@@ -10,7 +11,11 @@ summary: Learn how to configure your Milvus.
 
 This topic describes how to configure your Milvus.
 
-<div class="tab-wrapper"><a href="configure-helm.md" class='active '>Helm</a><a href="configure-docker.md" class=''>Docker Compose</a></div>
+<div class="alert note">
+In current release, all parameters take effect only after being configured at the startup of Milvus.
+</div>
+
+<div class="tab-wrapper"><a href="configure-docker.md" class=''>Docker Compose</a><a href="configure-helm.md" class='active '>Helm</a></div>
 
 ## Install Helm Chart for Milvus
 
@@ -43,8 +48,8 @@ Sorted by:
 <table id="component">
 <thead>
   <tr>
-    <th class="width20">Dependencies</th>
-    <th class="width80">Components</th>
+    <th">Dependencies</th>
+    <th">Components</th>
   </tr>
 </thead>
 <tbody>
@@ -85,8 +90,8 @@ Sorted by:
 <table id="purpose">
 <thead>
   <tr>
-    <th class="width20">Purpose</th>
-    <th class="width80">Parameters</th>
+    <th">Purpose</th>
+    <th">Parameters</th>
   </tr>
 </thead>
 <tbody>

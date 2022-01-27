@@ -4,7 +4,7 @@ related_key: configure
 summary: Learn how to configure common parameters of Milvus.
 ---
 
-# Common Configurations
+# Knowhere-related Configurations
 
 <div class="alert note">
 <h3>Milvus Docs 需要你的帮助</h3>

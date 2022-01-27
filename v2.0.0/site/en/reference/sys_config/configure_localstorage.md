@@ -8,7 +8,7 @@ summary: Learn how to configure local storage of Milvus.
 
 This topic introduces the local storage-related configurations of Milvus.
 
-Milvus stores the vector data in local storage during search or query to avoid repetitve access to MinIO or S3 service.
+Milvus stores the vector data in local storage during search or query to avoid repetitive access to MinIO or S3 service.
 
 Under this section, you can enable local storage, and configure the path, etc.
 

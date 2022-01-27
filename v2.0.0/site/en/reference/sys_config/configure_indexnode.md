@@ -8,7 +8,7 @@ summary: Learn how to configure index node of Milvus.
 
 This topic introduces the index node-related configurations of Milvus.
 
-Index node builds indexes.
+Index node builds indexes for vectors.
 
 Under this section, you can configure index node port, etc.
 
