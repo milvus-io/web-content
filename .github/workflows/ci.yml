@@ -20,7 +20,7 @@ jobs:
         run: |
           mv word-count.md word-count.js
           yarn
-          node wordCount.js
+          node word-count.js
 
       - name: Trigger milvus.io
         env:
