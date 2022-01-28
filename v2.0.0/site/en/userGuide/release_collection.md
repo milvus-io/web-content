@@ -134,6 +134,13 @@ release -c book
     </tbody>
 </table>
 
+## Constraints
+
+- Releasing the collection that is successfully loaded is allowed.
+- Releasing the collection is allowed when its partition(s) are loaded.
+- Error will be returned at the attempt to release partition(s) when the parent collection is already loaded. Future releases will support releasing partitions from a loaded collection, and loading the collection when its partition(s) are released.
+
+
 
 ## What's next
 
