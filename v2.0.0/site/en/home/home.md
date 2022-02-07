@@ -79,6 +79,7 @@ id: home.md
 
 <div class="recomment-item">
   <p>Learn</p>
+
 - [System Configuration](system_configuration.md)
 - [Architecture Overview](architecture_overview.md)
 - [Vector Index](index_selection.md)
