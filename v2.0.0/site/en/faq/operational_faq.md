@@ -95,6 +95,8 @@ Yes. You can install Milvus in an offline environment. See [Install Milvus Offli
 
 The Milvus log is printed to stout (standard output) and stderr (standard error) by default, however we highly recommend redirecting your log to a persistent volume in production. To do so, update `log.file.rootPath` in **milvus.yaml**. 
 
+If you didn't change the config, using kubectl logs <pod-name> or docker logs CONTAINER can also help you to find the log.
+
 
 #### Can I create index for a segment before inserting data into it?
 
