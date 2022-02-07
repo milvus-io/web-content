@@ -1,0 +1,18 @@
+{
+  "about.html": { "title": "About this documentation", "order": 8 },
+  "api/collection.html": { "title": "Collection", "order": 0 },
+  "api/connections.html": { "title": "Connections", "order": 5 },
+  "api/future.html": { "title": "Future", "order": 7 },
+  "api/milvus_index.html": { "title": "Index", "order": 3 },
+  "api/partition.html": { "title": "Partition", "order": 2 },
+  "api/schema.html": { "title": "Schema", "order": 1 },
+  "api/search.html": { "title": "SearchResult", "order": 4 },
+  "api/utility.html": { "title": "Utility", "order": 6 },
+  "changes.html": { "title": "Changes", "order": 5 },
+  "contribute.html": { "title": "Contributing", "order": 7 },
+  "faq.html": { "title": "FAQ", "order": 6 },
+  "install.html": { "title": "Installation", "order": 0 },
+  "param.html": { "title": "Index", "order": 3 },
+  "results.html": { "title": "Search results", "order": 4 },
+  "tutorial.html": { "title": "Tutorial", "order": 1 }
+}
