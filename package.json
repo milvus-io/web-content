@@ -1,6 +1,9 @@
 {
   "dependencies": {
     "axios": "^0.25.0",
-    "html-word-count": "^2.0.0"
+    "fs": "^0.0.1-security",
+    "html-word-count": "^2.0.0",
+    "node-html-parser": "^5.2.0",
+    "path": "^0.12.7"
   }
 }

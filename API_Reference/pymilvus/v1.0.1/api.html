@@ -1,0 +1,427 @@
+
+<h1>API reference<a class="headerlink" href="#api-reference" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="client">
+<h2>Client<a class="headerlink" href="#client" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="constructor">
+<h3>Constructor<a class="headerlink" href="#constructor" title="Permalink to this headline">¶</a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 36%" >
+<col style="width: 64%" >
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Constructor</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference external" href="#milvus.Milvus">Milvus()</a></p></td>
+<td><p>Milvus client</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="methods">
+<h3>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="apis">
+<h3>APIs<a class="headerlink" href="#apis" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="milvus.Milvus">
+<em class="property">class </em><code class="sig-prename descclassname">milvus.</code><code class="sig-name descname">Milvus</code><span class="sig-paren">(</span><em class="sig-param">host=None</em>, <em class="sig-param">port=None</em>, <em class="sig-param">handler='GRPC'</em>, <em class="sig-param">pool='SingletonThread'</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#milvus.Milvus" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="milvus.Milvus.compact">
+<code class="sig-name descname">compact</code><span class="sig-paren">(</span><em class="sig-param">collection_name</em>, <em class="sig-param">timeout=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#milvus.Milvus.compact" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compacts segments in a collection. This function is recommended after deleting vectors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>collection_name</strong> (<em>str</em>) -- Name of the collections to compact.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="milvus.Milvus.count_entities">
+<code class="sig-name descname">count_entities</code><span class="sig-paren">(</span><em class="sig-param">collection_name</em>, <em class="sig-param">timeout=30</em><span class="sig-paren">)</span><a class="headerlink" href="#milvus.Milvus.count_entities" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the number of vectors in a collection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>collection_name</strong> (<em>str</em>) -- target table name.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p><p>Status: indicate if operation is successful</p>
+<p>res: int, table row count</p>
+
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="milvus.Milvus.create_collection">
+<code class="sig-name descname">create_collection</code><span class="sig-paren">(</span><em class="sig-param">param</em>, <em class="sig-param">timeout=30</em><span class="sig-paren">)</span><a class="headerlink" href="#milvus.Milvus.create_collection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a collection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>param</strong> (<em>dict</em>) -- </p><p>Information needed to create a collection.</p>
+<dl class="simple">
+<dt><a href="#id1"><span class="problematic" id="id2">`</span></a>param={'collection_name': 'name',</dt><dd><p>'dimension': 16,
+'index_file_size': 1024 (default)，
+'metric_type': Metric_type.L2 (default)
+}`</p>
+</dd>
+</dl>
+</li>
+<li><p><strong>timeout</strong> (<em>double</em>) -- Timeout in seconds.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Whether the operation is successful.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Status</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="milvus.Milvus.create_index">
+<code class="sig-name descname">create_index</code><span class="sig-paren">(</span><em class="sig-param">collection_name</em>, <em class="sig-param">index_type=None</em>, <em class="sig-param">params=None</em>, <em class="sig-param">timeout=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#milvus.Milvus.create_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates index for a collection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>collection_name</strong> (<em>str</em>) -- Collection used to create index.</p></li>
+<li><p><strong>index</strong> -- index params</p></li>
+<li><p><strong>timeout</strong> (<em>int</em>) -- </p><p>grpc request timeout.</p>
+<p>if <cite>timeout</cite> = -1, method invoke a synchronous call, waiting util grpc response
+else method invoke a asynchronous call, timeout work here</p>
+</li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Whether the operation is successful.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="milvus.Milvus.create_partition">
+<code class="sig-name descname">create_partition</code><span class="sig-paren">(</span><em class="sig-param">collection_name</em>, <em class="sig-param">partition_tag</em>, <em class="sig-param">timeout=30</em><span class="sig-paren">)</span><a class="headerlink" href="#milvus.Milvus.create_partition" title="Permalink to this definition">¶</a></dt>
+<dd><p>create a partition for a collection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>collection_name</strong> (<em>str</em>) -- Name of the collection.</p></li>
+<li><p><strong>partition_name</strong> (<em>str</em>) -- Name of the partition.</p></li>
+<li><p><strong>partition_tag</strong> (<em>str</em>) -- Name of the partition tag.</p></li>
+<li><p><strong>timeout</strong> (<em>int</em>) -- time waiting for response.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Status: Whether the operation is successful.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="milvus.Milvus.delete_entity_by_id">
+<code class="sig-name descname">delete_entity_by_id</code><span class="sig-paren">(</span><em class="sig-param">collection_name</em>, <em class="sig-param">id_array</em>, <em class="sig-param">timeout=None</em><span class="sig-paren">)</span><a class="headerlink" href="#milvus.Milvus.delete_entity_by_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deletes vectors in a collection by vector ID.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>collection_name</strong> (<em>str</em>) -- Name of the collection.</p></li>
+<li><p><strong>id_array</strong> (<em>list</em><em>[</em><em>int</em><em>]</em>) -- list of vector id</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Status: Whether the operation is successful.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="milvus.Milvus.drop_collection">
+<code class="sig-name descname">drop_collection</code><span class="sig-paren">(</span><em class="sig-param">collection_name</em>, <em class="sig-param">timeout=30</em><span class="sig-paren">)</span><a class="headerlink" href="#milvus.Milvus.drop_collection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deletes a collection by name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>collection_name</strong> (<em>str</em>) -- Name of the collection being deleted</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Status, indicate if operation is successful</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Status</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="milvus.Milvus.drop_index">
+<code class="sig-name descname">drop_index</code><span class="sig-paren">(</span><em class="sig-param">collection_name</em>, <em class="sig-param">timeout=30</em><span class="sig-paren">)</span><a class="headerlink" href="#milvus.Milvus.drop_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes an index.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>collection_name</strong> (<em>str</em>) -- target collection name.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Status: Whether the operation is successful.</p>
+</dd>
+</dl>
+<p>：:rtype: Status</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="milvus.Milvus.drop_partition">
+<code class="sig-name descname">drop_partition</code><span class="sig-paren">(</span><em class="sig-param">collection_name</em>, <em class="sig-param">partition_tag</em>, <em class="sig-param">timeout=30</em><span class="sig-paren">)</span><a class="headerlink" href="#milvus.Milvus.drop_partition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deletes a partition in a collection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>collection_name</strong> (<em>str</em>) -- Collection name.</p></li>
+<li><p><strong>partition_tag</strong> (<em>str</em>) -- Partition name.</p></li>
+<li><p><strong>timeout</strong> (<em>int</em>) -- time waiting for response.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Status: Whether the operation is successful.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="milvus.Milvus.flush">
+<code class="sig-name descname">flush</code><span class="sig-paren">(</span><em class="sig-param">collection_name_array=None</em>, <em class="sig-param">timeout=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#milvus.Milvus.flush" title="Permalink to this definition">¶</a></dt>
+<dd><p>Flushes vector data in one collection or multiple collections to disk.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>collection_name</strong> -- Name of one or multiple collections to flush.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="milvus.Milvus.get_collection_info">
+<code class="sig-name descname">get_collection_info</code><span class="sig-paren">(</span><em class="sig-param">collection_name</em>, <em class="sig-param">timeout=30</em><span class="sig-paren">)</span><a class="headerlink" href="#milvus.Milvus.get_collection_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns information of a collection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>collection_name</strong> (<em>str</em>) -- Name of the collection to describe.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>(Status, table_schema)
+Status: indicate if query is successful
+table_schema: return when operation is successful</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>(Status, TableSchema)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="milvus.Milvus.get_collection_stats">
+<code class="sig-name descname">get_collection_stats</code><span class="sig-paren">(</span><em class="sig-param">collection_name</em>, <em class="sig-param">timeout=30</em><span class="sig-paren">)</span><a class="headerlink" href="#milvus.Milvus.get_collection_stats" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns collection statistics information</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p><p>Status: indicate if this operation is successful</p>
+<p>statistics: statistics information</p>
+
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>(Status, dict)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="milvus.Milvus.get_entity_by_id">
+<code class="sig-name descname">get_entity_by_id</code><span class="sig-paren">(</span><em class="sig-param">collection_name</em>, <em class="sig-param">ids</em>, <em class="sig-param">timeout=None</em><span class="sig-paren">)</span><a class="headerlink" href="#milvus.Milvus.get_entity_by_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns raw vectors according to ids.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>collection_name</strong> (<em>str</em>) -- Name of the collection</p></li>
+<li><p><strong>ids</strong> (<em>list</em>) -- list of vector id</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Status: indicate if invoke is successful</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="milvus.Milvus.has_collection">
+<code class="sig-name descname">has_collection</code><span class="sig-paren">(</span><em class="sig-param">collection_name</em>, <em class="sig-param">timeout=30</em><span class="sig-paren">)</span><a class="headerlink" href="#milvus.Milvus.has_collection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks whether a collection exists.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>collection_name</strong> (<em>str</em>) -- Name of the collection to check.</p></li>
+<li><p><strong>timeout</strong> (<em>int</em>) -- Timeout in seconds.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Status: indicate whether the operation is successful.
+bool if given collection_name exists</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="milvus.Milvus.has_partition">
+<code class="sig-name descname">has_partition</code><span class="sig-paren">(</span><em class="sig-param">collection_name</em>, <em class="sig-param">partition_tag</em><span class="sig-paren">)</span><a class="headerlink" href="#milvus.Milvus.has_partition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if specified partition exists.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>collection_name</strong> (<em>str</em>) -- target table name.</p></li>
+<li><p><strong>partition_tag</strong> (<em>str</em>) -- partition tag.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Status: Whether the operation is successful.
+exists: If specified partition exists</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="milvus.Milvus.insert">
+<code class="sig-name descname">insert</code><span class="sig-paren">(</span><em class="sig-param">collection_name</em>, <em class="sig-param">records</em>, <em class="sig-param">ids=None</em>, <em class="sig-param">partition_tag=None</em>, <em class="sig-param">params=None</em>, <em class="sig-param">timeout=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#milvus.Milvus.insert" title="Permalink to this definition">¶</a></dt>
+<dd><p>Insert vectors to a collection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ids</strong> (<em>list</em><em>[</em><em>int</em><em>]</em>) -- list of id</p></li>
+<li><p><strong>collection_name</strong> (<em>str</em>) -- Name of the collection to insert vectors to.</p></li>
+<li><p><strong>records</strong> -- List of vectors to insert.</p></li>
+<li><p><strong>partition_tag</strong> (<em>str</em><em> or </em><em>None.
+If partition_tag is None</em><em>, </em><em>vectors will be inserted to the collection rather than partitions.</em>) -- Tag of a partition.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Status: Whether vectors are inserted successfully.
+ids: IDs of the inserted vectors.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>(Status, list(int))</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="milvus.Milvus.list_collections">
+<code class="sig-name descname">list_collections</code><span class="sig-paren">(</span><em class="sig-param">timeout=30</em><span class="sig-paren">)</span><a class="headerlink" href="#milvus.Milvus.list_collections" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns collection list.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p><p>Status: indicate if this operation is successful</p>
+<dl class="simple">
+<dt>collections: list of collection names, return when operation</dt><dd><p>is successful</p>
+</dd>
+</dl>
+
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>(Status, list[str])</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="milvus.Milvus.list_partitions">
+<code class="sig-name descname">list_partitions</code><span class="sig-paren">(</span><em class="sig-param">collection_name</em>, <em class="sig-param">timeout=30</em><span class="sig-paren">)</span><a class="headerlink" href="#milvus.Milvus.list_partitions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Show all partitions in a collection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>collection_name</strong> (<em>str</em>) -- target table name.</p></li>
+<li><p><strong>timeout</strong> (<em>int</em>) -- time waiting for response.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Status: Whether the operation is successful.
+partition_list:</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="milvus.Milvus.load_collection">
+<code class="sig-name descname">load_collection</code><span class="sig-paren">(</span><em class="sig-param">collection_name</em>, <em class="sig-param">partition_tags=None</em>, <em class="sig-param">timeout=None</em><span class="sig-paren">)</span><a class="headerlink" href="#milvus.Milvus.load_collection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loads a collection for caching.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>collection_name</strong> (<em>str</em>) -- collection to load</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Status:  indicate if invoke is successful</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="milvus.Milvus.search">
+<code class="sig-name descname">search</code><span class="sig-paren">(</span><em class="sig-param">collection_name</em>, <em class="sig-param">top_k</em>, <em class="sig-param">query_records</em>, <em class="sig-param">partition_tags=None</em>, <em class="sig-param">params=None</em>, <em class="sig-param">timeout=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#milvus.Milvus.search" title="Permalink to this definition">¶</a></dt>
+<dd><p>Search vectors in a collection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>collection_name</strong> (<em>str</em>) -- Name of the collection.</p></li>
+<li><p><strong>top_k</strong> (<em>int</em>) -- number of vertors which is most similar with query vectors</p></li>
+<li><p><strong>nprobe</strong> (<em>int</em>) -- cell number of probe</p></li>
+<li><p><strong>query_records</strong> (<em>list</em><em>[</em><em>list</em><em>[</em><em>float32</em><em>]</em><em>]</em>) -- vectors to query</p></li>
+<li><p><strong>partition_tags</strong> (<em>list</em>) -- tags to search</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple">
+<dt>:return</dt><dd><p>Status: Whether the operation is successful.
+result: query result</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>(Status, TopKQueryResult)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="milvus.Milvus.search_in_segment">
+<code class="sig-name descname">search_in_segment</code><span class="sig-paren">(</span><em class="sig-param">collection_name</em>, <em class="sig-param">file_ids</em>, <em class="sig-param">query_records</em>, <em class="sig-param">top_k</em>, <em class="sig-param">params=None</em>, <em class="sig-param">timeout=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#milvus.Milvus.search_in_segment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Searches for vectors in specific segments of a collection.</p>
+<p>The Milvus server stores vector data into multiple files. Searching for vectors in specific files is a
+method used in Mishards. Obtain more detail about Mishards, see
+&lt;a href=&quot;<a class="reference external" href="https://github.com/milvus-io/milvus/tree/master/shards">https://github.com/milvus-io/milvus/tree/master/shards</a>&quot;&gt;</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>collection_name</strong> (<em>str</em>) -- table name been queried</p></li>
+<li><p><strong>file_ids</strong> (<em>list</em><em>[</em><em>str</em><em>] or </em><em>list</em><em>[</em><em>int</em><em>]</em>) -- Specified files id array</p></li>
+<li><p><strong>query_records</strong> (<em>list</em><em>[</em><em>list</em><em>[</em><em>float</em><em>]</em><em>]</em>) -- all vectors going to be queried</p></li>
+<li><p><strong>query_ranges</strong> -- </p><p>Optional ranges for conditional search.</p>
+<p>If not specified, search in the whole table</p>
+</li>
+<li><p><strong>top_k</strong> (<em>int</em>) -- how many similar vectors will be searched</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Status:  indicate if query is successful
+results: query result</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>(Status, TopKQueryResult)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
