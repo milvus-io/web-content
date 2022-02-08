@@ -17,7 +17,9 @@ Through running the example code we provided, you will have a primary understand
 
 ## Preparations
 
-Before running this example code, you will need to install [Milvus](install_standalone-docker.md) and [PyMilvus](install-pymilvus.md) on your device.
+- [Milvus 2.0.0](install_standalone-docker.md)
+- Python 3 (3.71 or later)
+- [PyMilvus 2.0.0](install-pymilvus.md)
 
 
 ## Download example code
