@@ -29,52 +29,107 @@ The following table classifies the indexes that Milvus supports:
   <tr>
     <td><a href="#FLAT">FLAT</a></td>
     <td>N/A</td>
-    <td><ul>
+    <td>
+      <ul>
         <li>Relatively small dataset</li>
         <li>Requires a 100% recall rate</li>
-        </ul></td>
+      </ul>
+    </td>
   </tr>
   <tr>
     <td><a href="#IVF_FLAT">IVF_FLAT</a></td>
     <td>Quantization-based index</td>
-    <td><ul>
+    <td>
+      <ul>
         <li>High-speed query</li>
         <li>Requires a recall rate as high as possible</li>
-        </ul></td>
+      </ul>
+    </td>
   </tr>
   <tr>
     <td><a href="#IVF_SQ8">IVF_SQ8</a></td>
     <td>Quantization-based index</td>
-    <td><ul>
+    <td>
+      <ul>
         <li>High-speed query</li>
         <li>Limited memory resources</li>
         <li>Accepts minor compromise in recall rate</li>
-        </ul></td>
+      </ul>
+    </td>
   </tr>  
   <tr>
     <td><a href="#IVF_PQ">IVF_PQ</a></td>
     <td>Quantization-based index</td>
-    <td><ul>
+    <td>
+      <ul>
         <li>Very high-speed query</li>
         <li>Limited memory resources</li>
         <li>Accepts substantial compromise in recall rate</li>
-        </ul></td>
+      </ul>
+    </td>
   </tr>
   <tr>
     <td><a href="#HNSW">HNSW</a></td>
     <td>Graph-based index</td>
-    <td><ul>
+    <td>
+      <ul>
         <li>High-speed query</li>
         <li>Requires a recall rate as high as possible</li>
         <li>Large memory resources</li>
-        </ul></td>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td><a href="#IVF_HNSW">IVF_HNSW</a></td>
+    <td>Quantization-and-graph-based index</td>
+    <td>
+      <ul>
+        <li>High-speed query</li>
+        <li>Requires a recall rate as high as possible</li>
+        <li>Large memory resources</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td><a href="#RHNSW_FLAT">RHNSW_FLAT</a></td>
+    <td>Quantization-and-graph-based index</td>
+    <td>
+      <ul>
+        <li>High-speed query</li>
+        <li>Requires a recall rate as high as possible</li>
+        <li>Large memory resources</li>
+      </ul>
+    </td>
+  <tr>
+    <td><a href="#RHNSW_SQ">RHNSW_SQ</a></td>
+    <td>Quantization-and-graph-based index</td>
+    <td>
+      <ul>
+        <li>High-speed query</li>
+        <li>Limited memory resources</li>
+        <li>Accepts minor compromise in recall rate</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td><a href="#RHNSW_PQ">RHNSW_PQ</a></td>
+    <td>Quantization-and-graph-based index</td>
+    <td>
+      <ul>
+        <li>Very high-speed query</li>
+        <li>Limited memory resources</li>
+        <li>Accepts substantial compromise in recall rate</li>
+      </ul>
+    </td>
   </tr>
   <tr>
     <td><a href="#ANNOY">ANNOY</a></td>
     <td>Tree-based index</td>
-    <td><ul>
+    <td>
+      <ul>
         <li>Low-dimensional vectors</li>
-        </ul></td>
+      </ul>
+    </td>
   </tr>
 </tbody>
 </table>
@@ -156,10 +211,10 @@ Index building parameters and search parameters vary with Milvus distribution. S
 
 - Index building parameters
 
-  | Parameter | Description                               | Range           |
-  | --------- | ----------------------------------------- | --------------- |
-  | `nlist`   | Number of cluster units                   | [1, 65536]      |
-  | `m`       | Number of factors of product quantization | dim ≡ 0 (mod m) |
+  | Parameter | Description                               | Range               |
+  | --------- | ----------------------------------------- | ------------------- |
+  | `nlist`   | Number of cluster units                   | [1, 65536]          |
+  | `m`       | Number of factors of product quantization | `dim` ≡ 0 (mod `m`) |
   | `nbits`   | [Optional] Number of bits in which each low-dimensional vector is stored. | [1, 16] (8 by default) |
 
 - Search parameters
@@ -192,6 +247,88 @@ In order to improve performance, HNSW limits the maximum degree of nodes on each
   | --------- | ------------ | ---------------- |
   | `ef`      | Search scope | [`top_k`, 32768] |
 
+### IVF_HNSW
+
+<a name="IVF_HNSW"></a>
+
+IVF_HNSW is an indexing algorithm based on IVF_FLAT and HNSW. Using HNSW indexing algorithm as quantizer, this index type builds the multi-layer navigation structure with the `nlist` cluster units divided by IVF_FLAT indexing algorithm, so that it can approach the target position quickly.
+
+
+- Index building parameters
+
+  | Parameter        | Description                | Range      |
+  | ---------------- | -------------------------- | ---------- |
+  | `nlist`          | Number of cluster units    | [1, 65536] |
+  | `M`              | Maximum degree of the node | [4, 64]    |
+  | `efConstruction` | Search scope               | [8, 512]   |
+
+- Search parameters
+
+  | Parameter | Description                | Range            |
+  | --------- | -------------------------- | ---------------- |
+  | `nprobe`  | Number of units to query   | [1, nlist]       |
+  | `ef`      | Search scope               | [`top_k`, 32768] |
+
+### RHNSW_FLAT
+
+<a name="RHNSW_FLAT"></a>
+
+RHNSW_FLAT (Refined Hierarchical Small World Graph) is a refined indexing algorithm based on HNSW. This index type optimizes the data storage solution of HNSW and thereby reduces the storage consumption.
+
+- Index building parameters
+
+  | Parameter        | Description                | Range    |
+  | ---------------- | -------------------------- | -------- |
+  | `M`              | Maximum degree of the node | [4, 64]  |
+  | `efConstruction` | Search scope               | [8, 512] |
+
+
+- Search parameters
+
+  | Parameter | Description  | Range            |
+  | --------- | ------------ | ---------------- |
+  | `ef`      | Search scope | [`top_k`, 32768] |
+
+### RHNSW_SQ
+
+<a name="RHNSW_SQ"></a>
+
+RHNSW_SQ (Refined Hierarchical Small World Graph and Scalar Quantization) is a refined indexing algorithm based on HNSW. This index type performs scalar quantization on vector data on the basis of HNSW and thereby substantially reduces the storage consumption.
+
+- Index building parameters
+
+  | Parameter        | Description                | Range    |
+  | ---------------- | -------------------------- | -------- |
+  | `M`              | Maximum degree of the node | [4, 64]  |
+  | `efConstruction` | Search scope               | [8, 512] |
+
+
+- Search parameters
+
+  | Parameter | Description  | Range            |
+  | --------- | ------------ | ---------------- |
+  | `ef`      | Search scope | [`top_k`, 32768] |
+
+### RHNSW_PQ
+
+<a name="RHNSW_PQ"></a>
+
+RHNSW_SQ (Refined Hierarchical Small World Graph and Product Quantization) is a refined indexing algorithm based on HNSW. This index type performs product quantization on vector data on the basis of HNSW and thereby significantly reduces the storage consumption.
+
+- Index building parameters
+
+  | Parameter        | Description                               | Range               |
+  | ---------------- | ----------------------------------------- | ------------------- |
+  | `M`              | Maximum degree of the node                | [4, 64]             |
+  | `efConstruction` | Search scope                              | [8, 512]            |
+  | `PQM`            | Number of factors of product quantization | dim ≡ 0 (mod `PQM`) |
+
+
+- Search parameters
+
+  | Parameter | Description  | Range            |
+  | --------- | ------------ | ---------------- |
+  | `ef`      | Search scope | [`top_k`, 32768] |
 
 ### ANNOY
 

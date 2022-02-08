@@ -1,6 +1,7 @@
 ---
 id: configure_localstorage.md
 related_key: configure
+group: system_configuration.md
 summary: Learn how to configure local storage of Milvus.
 ---
 

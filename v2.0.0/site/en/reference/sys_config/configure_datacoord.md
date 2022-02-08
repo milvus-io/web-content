@@ -1,6 +1,7 @@
 ---
 id: configure_datacoord.md
 related_key: configure
+group: system_configuration.md
 summary: Learn how to configure data coordinator of Milvus.
 ---
 
