@@ -126,4 +126,4 @@ const countDocsWords = (versionPath) => {
 
 };
 walkDocsFiles('./');
-walkApiReferenceFile('APIReference');
+walkApiReferenceFile('API_Reference');
