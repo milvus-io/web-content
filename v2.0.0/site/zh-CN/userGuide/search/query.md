@@ -97,7 +97,16 @@ const results = await milvusClient.dataManager.query({
 ```
 
 ```go
-// This function is under active development on the GO client.
+queryResult, err := milvusClient.Query(
+	context.Background(),                                   // ctx
+	"book",                                                 // CollectionName
+	"",                                                     // PartitionName
+	entity.NewColumnInt64("book_id", []int64{2,4,6,8}),     // expr
+	[]string{"book_id", "book_intro"}                       // OutputFields
+)
+if err != nil {
+	log.Fatal("fail to query collection:", err.Error())
+}
 ```
 
 ```java
@@ -195,7 +204,7 @@ timeout []:
     <td>N/A</td>
   </tr>
   <tr>
-    <td><code>partitionNames</code></td>
+    <td><code>partitionName</code></td>
     <td>List of names of the partitions to load. All partitions will be queried if it is left empty.</td>
     <td>N/A</td>
   </tr>
@@ -204,10 +213,10 @@ timeout []:
 		<td>Boolean expression used to filter attribute.</td>
     <td>See <a href="boolean.md">Boolean Expression Rules</a> for more information.</td>
 	</tr>
-  <tr>
-		<td><code>output_fields</code></td>
+    <tr>
+		<td><code>OutputFields</code></td>
 		<td>Name of the field to return.</td>
-    <td>Vector field is not supported in current release.</td>
+    	<td>Vector field is not supported in current release.</td>
 	</tr>
 	</tbody>
 </table>
@@ -279,7 +288,10 @@ console.log(results.data)
 ```
 
 ```go
-// This function is under active development on the GO client.
+fmt.Printf("%#v\n", queryResult)
+for _, qr := range queryResult {
+	fmt.Println(qr.IDs)
+}
 ```
 
 ```java

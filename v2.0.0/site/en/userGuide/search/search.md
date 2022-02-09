@@ -533,6 +533,20 @@ results[0].distances
 console.log(results.results)
 ```
 
+```go
+fmt.Printf("%#v\n", searchResult)
+for _, sr := range searchResult {
+	fmt.Println(sr.IDs)
+	fmt.Println(sr.Scores)
+}
+```
+
+```java
+SearchResultsWrapper wrapperSearch = new SearchResultsWrapper(respSearch.getData().getResults());
+System.out.println(wrapperSearch.getIDScore(0));
+System.out.println(wrapperSearch.getFieldData("book_id", 0));
+```
+
 ```shell
 # Milvus CLI automatically returns the primary key values of the most similar vectors and their distances.
 ```
@@ -557,10 +571,12 @@ await milvusClient.collectionManager.releaseCollection({  collection_name: "book
 ```
 
 ```go
-fmt.Printf("%#v\n", searchResult)
-for _, sr := range searchResult {
-	fmt.Println(sr.IDs)
-	fmt.Println(sr.Scores)
+err := milvusClient.ReleaseCollection(
+    context.Background(),                            // ctx
+    "book",                                          // CollectionName
+)
+if err != nil {
+    log.Fatal("failed to release collection:", err.Error())
 }
 ```
 
