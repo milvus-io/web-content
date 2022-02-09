@@ -55,8 +55,8 @@ Sorted by:
 <table id="component">
 <thead>
   <tr>
-    <th">Dependencies</th>
-    <th">Components</th>
+    <th>Dependencies</th>
+    <th>Components</th>
   </tr>
 </thead>
 <tbody>
@@ -97,8 +97,8 @@ Sorted by:
 <table id="purpose">
 <thead>
   <tr>
-    <th">Purpose</th>
-    <th">Parameters</th>
+    <th>Purpose</th>
+    <th>Parameters</th>
   </tr>
 </thead>
 <tbody>
