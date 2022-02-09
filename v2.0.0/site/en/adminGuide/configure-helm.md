@@ -48,8 +48,8 @@ Sorted by:
 <table id="component">
 <thead>
   <tr>
-    <th">Dependencies</th>
-    <th">Components</th>
+    <th>Dependencies</th>
+    <th>Components</th>
   </tr>
 </thead>
 <tbody>
