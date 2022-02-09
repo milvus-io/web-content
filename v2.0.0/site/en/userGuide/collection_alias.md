@@ -116,7 +116,7 @@ create alias -c book -a publication
 	</tbody>
 </table>
 
-<table class="language-cli">
+<table class="language-shell">
     <thead>
         <tr>
             <th>Option</th>
@@ -228,7 +228,7 @@ delete alias -c book -a publication
 	</tbody>
 </table>
 
-<table class="language-cli">
+<table class="language-shell">
     <thead>
         <tr>
             <th>Option</th>
@@ -350,7 +350,7 @@ create alias -c book -A -a publication
 	</tbody>
 </table>
 
-<table class="language-cli">
+<table class="language-shell">
     <thead>
         <tr>
             <th>Option</th>

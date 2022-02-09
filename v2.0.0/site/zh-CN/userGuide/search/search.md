@@ -244,7 +244,7 @@ Travel Timestamp(Specify a timestamp in a search to get results based on a data 
 </table>
 
 
-<table class="language-cli">
+<table class="language-shell">
     <thead>
         <tr>
             <th>Option</th>

@@ -115,7 +115,7 @@ release -c book
     </tbody>
 </table>
 
-<table class="language-cli">
+<table class="language-shell">
     <thead>
         <tr>
             <th>Option</th>

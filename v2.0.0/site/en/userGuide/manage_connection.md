@@ -143,7 +143,7 @@ connect -h localhost -p 19530 -a default
 	</tbody>
 </table>
 
-<table class="language-cli">
+<table class="language-shell">
     <thead>
         <tr>
             <th>Option</th>

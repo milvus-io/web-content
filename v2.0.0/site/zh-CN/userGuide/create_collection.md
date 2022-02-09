@@ -430,7 +430,7 @@ create collection -c book -f book_id:INT64 -f word_count:INT64 -f book_intro:FLO
 	</tbody>
 </table>
 
-<table class="language-cli">
+<table class="language-shell">
     <thead>
         <tr>
             <th>Option</th>

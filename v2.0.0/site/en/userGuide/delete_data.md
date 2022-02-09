@@ -53,7 +53,7 @@ delete entities -c book
 The expression to specify entities to be deleted： book_id in [0,1]
 ```
 
-<table class="language-cli">
+<table class="language-shell">
     <thead>
         <tr>
             <th>Option</th>
