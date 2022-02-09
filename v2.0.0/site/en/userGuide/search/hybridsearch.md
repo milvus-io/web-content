@@ -61,10 +61,6 @@ load -c book
 ```
 
 
-<div class="alert warning">
-In current release, volume of the data to load must be under 70% of the total memory resources of all query nodes to reserve memory resources for execution engine.
-</div>
-
 ## Conduct a hybrid vector search
 
 By specifying the boolean expression, you can filter the scalar field of the entities during the vector search. The following example limits the scale of search to the vectors within a specified `word_count` value range.

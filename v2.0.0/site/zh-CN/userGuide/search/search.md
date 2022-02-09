@@ -68,9 +68,6 @@ load -c book
 ```
 
 
-<div class="alert warning">
-In current release, volume of the data to load must be under 70% of the total memory resources of all query nodes to reserve memory resources for execution engine.
-</div>
 
 ## Prepare search parameters
 

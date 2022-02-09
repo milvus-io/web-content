@@ -8,6 +8,10 @@ summary: Learn how to load a collection into memory for CRUD operations in Milvu
 
 This topic describes how to load the collection to memory before a search or a query. All search and query operations within Milvus are executed in memory. 
 
+<div class="alert warning">
+In current release, volume of the data to load must be under 90% of the total memory resources of all query nodes to reserve memory resources for execution engine.
+</div>
+
 <div class="multipleCode">
   <a href="?python">Python </a>
   <a href="?java">Java</a>

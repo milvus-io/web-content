@@ -67,10 +67,6 @@ milvusClient.loadCollection(
 load -c book
 ```
 
-<div class="alert warning">
-In current release, volume of the data to load must be under 70% of the total memory resources of all query nodes to reserve memory resources for execution engine.
-</div>
-
 ## Conduct a vector query
 
 The following example filters the vectors with certain `book_id` values, and returns the `book_id` field and `book_intro` of the results.
