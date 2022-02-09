@@ -59,9 +59,15 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
 
 ## Stop Milvus
 
-To stop Milvus standalone, run <code>$ sudo docker-compose down</code>.
+To stop Milvus standalone, run:
+```
+sudo docker-compose down
+```
 
-To delete data after stopping Milvus, run <code>$ sudo rm -rf  volumes</code>.
+To delete data after stopping Milvus, run:
+```
+sudo rm -rf  volumes
+```
 
 ## What's next
 
