@@ -134,9 +134,9 @@ Under this section, you can configure the system log output.
     <tr>
       <td>
         <li>Milvus log format.</li>
-        <li>Option: <code>text<code> and <code>JSON<code></li>
+        <li>Option: <code>text<code> and <code>JSON</code></li>
       </td>
-      <td><code>text<code></td>
+      <td><code>text</code></td>
     </tr>
   </tbody>
 </table>
