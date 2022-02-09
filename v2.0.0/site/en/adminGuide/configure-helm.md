@@ -90,8 +90,8 @@ Sorted by:
 <table id="purpose">
 <thead>
   <tr>
-    <th">Purpose</th>
-    <th">Parameters</th>
+    <th>Purpose</th>
+    <th>Parameters</th>
   </tr>
 </thead>
 <tbody>
