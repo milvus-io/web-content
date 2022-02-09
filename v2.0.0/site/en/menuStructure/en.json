@@ -275,6 +275,14 @@
       "order": 1
     },
     {
+      "id": "compact_data.md",
+      "title": "Compact Data",
+      "label1": "userguide",
+      "label2": "manage_data",
+      "label3": "",
+      "order": 2
+    },
+    {
       "id": "manage_index",
       "title": "Manage Indexes",
       "label1": "userguide",
@@ -341,12 +349,20 @@
       "order": 3
     },
     {
+      "id": "load_balance.md",
+      "title": "Load Balance",
+      "label1": "userguide",
+      "label2": "",
+      "label3": "",
+      "order": 6
+    },
+    {
       "id": "bootcamp_userguide",
       "title": "Bootcamp",
       "label1": "userguide",
       "label2": "",
       "label3": "",
-      "order": 6,
+      "order": 7,
       "outLink": "https://milvus.io/bootcamp"
     },
     {

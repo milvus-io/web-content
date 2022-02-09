@@ -275,6 +275,14 @@
         "order": 1
       },
       {
+        "id": "compact_data.md",
+        "title": "清理数据",
+        "label1": "userguide",
+        "label2": "manage_data",
+        "label3": "",
+        "order": 2
+      },
+      {
         "id": "manage_index",
         "title": "管理索引",
         "label1": "userguide",
@@ -341,12 +349,20 @@
         "order": 3
       },
       {
+        "id": "load_balance.md",
+        "title": "负载平衡",
+        "label1": "userguide",
+        "label2": "",
+        "label3": "",
+        "order": 6
+      },
+      {
         "id": "bootcamp_userguide",
         "title": "训练营",
         "label1": "userguide",
         "label2": "",
         "label3": "",
-        "order": 6,
+        "order": 7,
         "outLink": "https://milvus.io/cn/bootcamp"
       },
       {
