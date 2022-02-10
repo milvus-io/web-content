@@ -278,7 +278,7 @@
       "label1": "reference",
       "label2": "monitor",
       "label3": "",
-      "order": 2
+      "order": 3
     },
     {
       "id": "tuning.md",
@@ -449,7 +449,7 @@
       "label1": "",
       "label2": "",
       "label3": "",
-      "order": 7,
+      "order": 8,
       "isMenu": true
 
     },
