@@ -98,7 +98,7 @@ $ lscpu | grep -e sse4_2 -e avx -e avx2 -e avx512
 
 #### Milvus 日志打印在哪里？
 
-Milvus 的日志默认输出在标准输出（standard output）和标准误差（standard error）流中，实际生产中建议用户重定向目录到持久卷已便于问题的排查。重定向日志需要修改 **milvus.yaml**中的 `log.file.rootPath` 参数配置。
+Milvus 的日志默认输出在标准输出（standard output）和标准误差（standard error）流中，实际生产中建议用户重定向目录到持久卷已便于问题的排查。重定向日志需要修改 **milvus.yaml**中的 `log.file.rootPath` 参数配置。 如果你通过 `milvus-helm` chart 部署 Milvus，需要首先通过在安装时设定 `--set log.persistence.enabled=true` 以启用日志持久化。
 
 #### Milvus 是否支持先建索引再插入数据？
 
