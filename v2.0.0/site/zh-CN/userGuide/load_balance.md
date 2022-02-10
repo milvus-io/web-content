@@ -210,6 +210,29 @@ load_balance -s 3 -d 4 -ss 431067441441538050
 	</tbody>
 </table>
 
+<table class="language-java">
+	<thead>
+	<tr>
+		<th>Parameter</th>
+		<th>Description</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td><code>SourceNodeID</code></td>
+		<td>ID of the query node you want to transfer segment(s) from.</td>
+	</tr>
+	<tr>
+		<td><code>DestinationNodeID</code> (Optional)</td>
+		<td>ID(s) of the query node(s) you want to transfer segment(s) to. Milvus transfers segment(s) to other query nodes automatically if this parameter is left blank.</td>
+	</tr>
+	<tr>
+		<td><code>SegmentID</code> (Optional)</td>
+		<td>ID(s) of the segment(s) you want to transfer. Milvus transfers all sealed segment(s) in the source query node to other query nodes automatically if this parameter is left blank.</td>
+	</tr>
+	</tbody>
+</table>
+
 <table class="language-shell">
 	<thead>
 	<tr>
