@@ -1,11 +1,10 @@
-
 # Milvus Documentation
 
 Welcome to Milvus documentation!
 
-This repository contains technical documentation for [Milvus](https://github.com/milvus-io/milvus), the world's most advanced open-source vector database.
+This repository contains technical documentation for [Milvus](https://github.com/milvus-io/milvus), the world's most advanced open-source vector database. 
 
-This repository is for Milvus technical documentation update and maintenance. Visit [Milvus.io](milvus.io) or [Web content repo](https://github.com/milvus-io/web-content) for fully rendered documents.
+Please note that this repository is for Milvus technical documentation update and maintenance. Visit [Milvus.io](milvus.io) or [Web content repo](https://github.com/milvus-io/web-content) for fully rendered documents.
 
 Each branch corresponds to a Milvus release by name. We've set the branch of the latest Milvus release as the default branch. For documentation of a different Milvus release, switch to the corresponding branch.
 
@@ -53,9 +52,11 @@ Not all content rendered on [milvus.io](https://milvus.io/docs) is hosted in thi
 
 To make contributions to the Milvus SDK reference documentation, visit the programming language specific repositories listed below:
 
-- [PyMilvus ORM](https://github.com/milvus-io/pymilvus-orm)
-- [Node.js](https://github.com/milvus-io/milvus-sdk-node) (released and under continuous development)
-- [GoLang](https://github.com/milvus-io/milvus-sdk-go)
+- [PyMilvus](https://github.com/milvus-io/pymilvus)
+- [GO](https://github.com/milvus-io/milvus-sdk-go)
+- [Java](https://github.com/milvus-io/milvus-sdk-java)
+- [Node.js](https://github.com/milvus-io/milvus-sdk-node)
+
 
 ### Contribute to community content
 
