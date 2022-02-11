@@ -27,9 +27,7 @@ By default, Milvus does not index a segment with less than 1,024 rows. To change
 
 Milvus stores massive data in segments. When indexing, Milvus creates an index for each data segment separately.
 
-### Build indexes during free time
 
-It is known that indexing is a resource-consuming and time-consuming task. When the query task and indexing task are concurrent, Milvus preferentially allocates computing resources to the query task, that is, any query command will interrupt the indexing task being executed in the background. After that, only when the user does not send the query task for 5 seconds, Milvus resumes the indexing task in the background. Besides, if the data segment specified by the query command has not been built into the specified index, Milvus will do an exhaustive search directly within the segment.
 
 ## How to choose an index
 
