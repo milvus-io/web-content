@@ -6,13 +6,6 @@ summary: Learn how to connect to a Milvus server.
 
 # 管理Milvus连接
 
-<div class="alert note">
-<h3>Milvus Docs 需要你的帮助</h3>
-本文档暂时没有中文版本，欢迎你成为社区贡献者，协助中文技术文档的翻译。<br>
-你可以通过页面右边的 <b>编辑</b> 按钮直接贡献你的翻译。更多详情，参考 <a href="https://github.com/milvus-io/milvus-docs/blob/v2.0.0/CONTRIBUTING.md">贡献指南</a>。如需帮助，你可以 <a href="https://github.com/milvus-io/milvus-docs/issues/new/choose">提交 GitHub Issue</a>。
-</div>
-
-
 当前主题介绍怎么连接、断开 Milvus 服务器。
 
 <div class="alert note">
@@ -107,7 +100,7 @@ connect -h localhost -p 19530 -a default
 	<tbody>
     	<tr>
 	    	<td><code>address</code></td>
-			<td>Milvus 链接地址。</td>
+			<td>Milvus 连接地址。</td>
 		</tr>
 	</tbody>
 </table>
@@ -126,7 +119,7 @@ connect -h localhost -p 19530 -a default
 		</tr>
 		<tr>
 	    	<td><code>addr</code></td>
-			<td>Milvus 链接地址。</td>
+			<td>Milvus 连接地址。</td>
 		</tr>
 	</tbody>
 </table>
@@ -172,12 +165,12 @@ connect -h localhost -p 19530 -a default
         <tr>
             <td>-a</td>
             <td>--alias</td>
-            <td>(可选) Milvus 链接别名。默认为 "default"。</td>
+            <td>(可选) Milvus 连接别名。默认为 "default"。</td>
         </tr>
         <tr>
             <td>-D</td>
             <td>--disconnect</td>
-            <td>(可选) 使用别名断开链接的标记。默认别名为  "default".</td>
+            <td>(可选) 使用别名断开连接的标记。默认别名为  "default".</td>
         </tr>
         <tr>
             <td>--help</td>
@@ -238,11 +231,11 @@ connect -D
 	</tbody>
 </table>
 
-## Limits
+## 使用限制
 
-The maximum number of connections is 65,536.
+最大连接数为 65536。
 
-## What's next
+## 更多内容
 
 链接 Milvus 后，还可以：
 
