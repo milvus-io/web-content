@@ -150,7 +150,7 @@ kubectl port-forward service/my-release-milvus-attu 3000
 3. Configure DNS on the device that forwards the Attu service by mapping the path `my-release-milvus-attu` onto `127.0.0.1` in the system file `/etc/hosts`.
 
 ```
-127.0.01 my-release-milvus-attu
+127.0.0.1 my-release-milvus-attu
 ```
 
 4. Visit `http://my-release-milvus-attu:3000/connect` in your browser, and click **Connect** to enter the Attu service.
