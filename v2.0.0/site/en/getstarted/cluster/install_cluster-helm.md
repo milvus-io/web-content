@@ -66,7 +66,8 @@ $ helm install my-release milvus/milvus
 ```
 
 <div class="alert note">
-	<ul>
+  <ul>
+    <li>The release name should only contain letters, numbers and dashes. Dots are not allowed in the release name.</li>
     <li>The default command line installs cluster version of Milvus while installing Milvus with Helm. Further setting is needed while installing Milvus standalone.</li>
     <li>See <a href="https://artifacthub.io/packages/helm/milvus/milvus">Milvus Helm Chart</a> and <a href="https://helm.sh/docs/">Helm</a> for more information.</li>
   </ul>
