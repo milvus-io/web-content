@@ -150,7 +150,7 @@ kubectl port-forward service/my-release-milvus-attu 3000
 3. 在转发 Attu 服务的设备上配置 DNS，将路径 `my-release-milvus-attu` 映射到系统文件 `/etc/hosts` 中的 `127.0.0.1`。
 
 ```
-127.0.01 my-release-milvus-attu
+127.0.0.1 my-release-milvus-attu
 ```
 
 4. 在您的浏览器中访问 `http://my-release-milvus-attu:3000/connect`，然后单击**连接**进入 Attu 服务。
