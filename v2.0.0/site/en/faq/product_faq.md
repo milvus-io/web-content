@@ -96,7 +96,7 @@ The IVF_FLAT index divides vector space into list clusters. At the default list 
 
 When the total number of vectors approximately equals nlist, there is little distance between IVF_FLAT and FLAT in terms of calculation requirements and search performance. However, as the number of vectors exceeds nlist by a factor of two or more, IVF_FLAT begins to demonstrate performance advantages.
 
-See [How to Choose an Index in Milvus](index_selection.md) for more information.
+See [Vector Index](index.md) for more information.
 
 #### How does Milvus flush data?
 
@@ -123,7 +123,7 @@ If `nlist` and `topk` are large and nprobe is small, the number of vectors in th
 
 To avoid this, try setting `nprobe` larger and `nlist` and `k` smaller.
 
-See [Indexes](index_selection.md) for more information.
+See [Vector Index](index.md) for more information.
 
 #### What is the maximum vector dimension supported in Milvus?
 

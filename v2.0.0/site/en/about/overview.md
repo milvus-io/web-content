@@ -60,7 +60,7 @@ Most of the vector index types supported by Milvus use approximate nearest neigh
 - **HNSW**: HNSQ is a graph-based index and is best suited for scenarios that has a high demand for search efficiency.
 - **ANNOY**: ANNOY is a tree-based index and is best suited for scenarios that seeks a high recall rate.
 
-See [Selecting an Index Best Suited for Your Scenario](index_selection.md) for more details.
+See [Vector Index](index.md) for more details.
 
 ### Similarity metrics
 

@@ -60,7 +60,7 @@ Milvus 目前支持的向量索引类型大都属于 ANNS（Approximate Nearest 
 - **HNSW**：基于图的索引，适用于追求高查询效率的场景。
 - **ANNOY**：基于树的索引，适用于追求高召回率的场景。 
 
-更多内容详见[根据应用场景选择索引](index_selection.md)。
+更多内容详见[向量索引](index.md)。
 
 
 ### 距离计算公式

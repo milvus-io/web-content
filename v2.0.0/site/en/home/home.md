@@ -82,7 +82,7 @@ id: home.md
 
 - [System Configuration](system_configuration.md)
 - [Architecture Overview](architecture_overview.md)
-- [Vector Index](index_selection.md)
+- [Vector Index](index.md)
 - [Similarity Metrics](metric.md)
 - [Glossary](glossary.md)
 </div>

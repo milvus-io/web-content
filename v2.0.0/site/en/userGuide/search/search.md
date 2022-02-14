@@ -137,7 +137,7 @@ Travel Timestamp(Specify a timestamp in a search to get results based on a data 
 	</tr>
     <tr>
 		<td><code>params</code></td>
-		<td>Search parameter(s) specific to the index. See <a href="index_selection.md">Index Selection</a> for more information.</td>
+		<td>Search parameter(s) specific to the index. See <a href="index.md">Vector Index</a> for more information.</td>
 	</tr>
 	</tbody>
 </table>
@@ -164,7 +164,7 @@ Travel Timestamp(Specify a timestamp in a search to get results based on a data 
 	</tr>
     <tr>
 		<td><code>params</code></td>
-		<td>Search parameter(s) specific to the index. See <a href="index_selection.md">Index Selection</a> for more information.</td>
+		<td>Search parameter(s) specific to the index. See <a href="index.md">Vector Index</a> for more information.</td>
 	</tr>
 	</tbody>
 </table>
@@ -204,7 +204,7 @@ Travel Timestamp(Specify a timestamp in a search to get results based on a data 
 	<tr>
 		<td><code>searchParam</code></td>
 		<td>Search parameter(s) specific to the index.</td>
-    <td>See <a href="index_selection.md">Index Selection</a> for more information.</td>
+    <td>See <a href="index.md">Vector Index</a> for more information.</td>
 	</tr>
 	</tbody>
 </table>
@@ -226,7 +226,7 @@ Travel Timestamp(Specify a timestamp in a search to get results based on a data 
   <tr>
 		<td><code>Params</code></td>
 		<td>Search parameter(s) specific to the index.</td>
-    <td>See <a href="index_selection.md">Index Selection</a> for more information.</td>
+    <td>See <a href="index.md">Vector Index</a> for more information.</td>
 	</tr>
 	</tbody>
 </table>
@@ -334,7 +334,7 @@ R<SearchResults> respSearch = milvusClient.search(searchParam);
 	</tr>
   <tr>
 		<td><code>params</code></td>
-		<td>Search parameter(s) specific to the index. See <a href="index_selection.md">Index Selection</a> for more information.</td>
+		<td>Search parameter(s) specific to the index. See <a href="index.md">Vector Index</a> for more information.</td>
 	</tr>
 	<tr>
 		<td><code>limit</code></td>

@@ -82,7 +82,7 @@ id: home.md
 
 - [系统配置](system_configuration.md)
 - [系统架构](architecture_overview.md)
-- [向量索引](index_selection.md)
+- [向量索引](index.md)
 - [距离计算方式](metric.md)
 - [Milvus 术语](glossary.md)
 </div>

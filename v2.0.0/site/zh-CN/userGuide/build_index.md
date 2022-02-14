@@ -17,7 +17,7 @@ This topic describes how to build an index for vectors in Milvus.
 
 Vector indexes are an organizational unit of metadata used to accelerate [vector similarity search](search.md). Without index built on vectors, Milvus will perform a brute-force search by default.
 
-See [Vector Index](index.md) and [Index Selection](index_selection.md) for more information about mechanism and varieties of vector indexes.
+See [Vector Index](index.md) for more information about mechanism and varieties of vector indexes.
 
 <div class="alert note">
 <ul>
@@ -139,7 +139,7 @@ Timeout []:
 	<tr>
 		<td><code>params</code></td>
 		<td>Building parameter(s) specific to the index.</td>
-        <td>See <a href="index_selection.md">Index Selection</a> for more information.</td>
+        <td>See <a href="index.md">Vector Index</a> for more information.</td>
 	</tr>
 	</tbody>
 </table>
@@ -196,7 +196,7 @@ Timeout []:
 	<tr>
 		<td><code>params</code></td>
 		<td>Building parameter(s) specific to the index.</td>
-        <td>See <a href="index_selection.md">Index Selection</a> for more information.</td>
+        <td>See <a href="index.md">Vector Index</a> for more information.</td>
 	</tr>
 	</tbody>
 </table>
@@ -254,7 +254,7 @@ Timeout []:
 	<tr>
 		<td><code>ConstructParams</code></td>
 		<td>Building parameter(s) specific to the index.</td>
-        <td>See <a href="index_selection.md">Index Selection</a> for more information.</td>
+        <td>See <a href="index.md">Vector Index</a> for more information.</td>
 	</tr>
 	</tbody>
 </table>
@@ -293,7 +293,7 @@ Timeout []:
 	<tr>
 		<td><code>ExtraParam</code></td>
 		<td>Building parameter(s) specific to the index.</td>
-        <td>See <a href="index_selection.md">Index Selection</a> for more information.</td>
+        <td>See <a href="index.md">Vector Index</a> for more information.</td>
 	</tr>
 	</tbody>
 </table>

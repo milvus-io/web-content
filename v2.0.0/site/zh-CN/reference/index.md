@@ -1,9 +1,9 @@
 ---
-id: index_selection.md
-related_key: IVF
+id: index.md
+related_key: index
 ---
 
-# 根据应用场景选择索引
+# 索引概述
 
 <div class="alert note">
 <h3>Milvus Docs 需要你的帮助</h3>
@@ -12,7 +12,29 @@ related_key: IVF
 </div>
 
 
+创建索引是一个组织数据的过程，是向量数据库实现快速查询百万、十亿、甚至万亿级数据集所依赖的一个巨大组成部分。
+
+## 加速向量查询
+
+相似性搜索引擎的工作原理是将输入的对象与数据库中的对象进行比较，找出与输入最相似的对象。索引是有效组织数据的过程，极大地加速了对大型数据集的查询，在相似性搜索的实现中起着重要作用。对一个大规模向量数据集创建索引后，查询可以被路由到最有可能包含与输入查询相似的向量的集群或数据子集。在实践中，这意味着要牺牲一定程度的准确性来加快对真正的大规模向量数据集的查询。
+
+为提高查询性能，你可以为每个向量字段指定一种索引类型。目前，一个向量字段仅支持一种索引类型。切换索引类型时，Milvus 自动删除之前的索引。
+
+## 索引创建机制
+
+当 `create_index` 方法被调用时，Milvus 会同步为这个字段的现有数据创建索引。Segment 是 Milvus 中储存数据的最小单位。在建立索引时，Milvus 为每个 Segment 单独创建索引文件。
+
+<div class="alert note">
+  默认设定下，Milvus 不会对插入的数据少于 1024 行的 segment 创建索引。如修改此项参数，需修改 <code>milvus.yaml</code> 中的 <a href="configure_rootcoord.md#rootCoord.minSegmentSizeToEnableIndex"><code>rootCoord.minSegmentSizeToEnableIndex</code></a> 配置项。
+</div>
+
+
+## 根据应用场景选择索引
+
+
 Milvus 目前支持的向量索引类型大都属于 ANNS（Approximate Nearest Neighbors Search，近似最近邻搜索）。ANNS 的核心思想是不再局限于只返回最精确的结果项，而是仅搜索可能是近邻的数据项，即以牺牲可接受范围内的精度的方式提高检索效率。
+
+关于索引和向量距离计算方法的选择，请访问 [距离计算方式](metric.md)。
 
 根据实现方式，ANNS 向量索引可分为四大类：
 
@@ -131,9 +153,9 @@ Milvus 目前支持的向量索引类型大都属于 ANNS（Approximate Nearest 
 </tbody>
 </table>
 
-## 索引概览
+### 索引概览
 
-### FLAT
+#### FLAT
 
 <a name="FLAT"></a>
 
@@ -147,7 +169,7 @@ FLAT 之所以精准是因为它采取了详尽查询的方法，即对于每个
   | ------------- | ------------------- | ------------------------------------------ |
   | `metric_type` | [可选] 距离计算方式 | 详见 [目前支持的距离计算方式](metric.md)。 |
 
-### IVF_FLAT
+#### IVF_FLAT
 
 <a name="IVF_FLAT"></a>​
 
@@ -170,7 +192,7 @@ IVF_FLAT 是最基础的 IVF 索引，存储在各个单元中的数据编码与
    | -------- | ----------- | ---------- |
    | `nprobe` | 查询取的单元数 | [1, 65536] |
 
-### IVF_SQ8
+#### IVF_SQ8
 
 <a name="IVF_SQ8"></a>​
 
@@ -191,7 +213,7 @@ IVF_FLAT 是最基础的 IVF 索引，存储在各个单元中的数据编码与
    | -------- | ----------- | ---------- |
    | `nprobe` | 查询取的单元数 | [1, nlist] |
    
-### IVF_PQ
+#### IVF_PQ
 
 <a name="IVF_PQ"></a>
 
@@ -220,7 +242,7 @@ IVF_PQ 是先对向量做乘积量化，然后进行 IVF 索引聚类。其索�
    | `nprobe` | 查询取的单元数 | [1, nlist] |
 
 
-### HNSW
+#### HNSW
 <a name="HNSW"></a>
 
 HNSW（Hierarchical Small World Graph）是一种基于图的索引算法。它会为一张图按规则建成多层导航图，并让越上层的图越稀疏，结点间的距离越远；越下层的图越稠密，结点间的距离越近。搜索时从最上层开始，找到本层距离目标最近的结点后进入下一层再查找。如此迭代，快速逼近目标位置。
@@ -242,7 +264,7 @@ HNSW（Hierarchical Small World Graph）是一种基于图的索引算法。它�
    | --------|--------------- | ------------ |
    | `ef`    | 搜索范围  | [`top_k`, 32768] |
 
-### IVF_HNSW
+#### IVF_HNSW
 
 <a name="IVF_HNSW"></a>
 
@@ -264,7 +286,7 @@ IVF_HNSW is an indexing algorithm based on IVF_FLAT and HNSW. Using HNSW indexin
   | `nprobe`  | Number of units to query   | [1, nlist]       |
   | `ef`      | Search scope               | [`top_k`, 32768] |
 
-### RHNSW_FLAT
+#### RHNSW_FLAT
 
 <a name="RHNSW_FLAT"></a>
 
@@ -284,7 +306,7 @@ RHNSW_FLAT (Refined Hierarchical Small World Graph) is a refined indexing algori
   | --------- | ------------ | ---------------- |
   | `ef`      | Search scope | [`top_k`, 32768] |
 
-### RHNSW_SQ
+#### RHNSW_SQ
 
 <a name="RHNSW_SQ"></a>
 
@@ -304,7 +326,7 @@ RHNSW_SQ (Refined Hierarchical Small World Graph and Scalar Quantization) is a r
   | --------- | ------------ | ---------------- |
   | `ef`      | Search scope | [`top_k`, 32768] |
 
-### RHNSW_PQ
+#### RHNSW_PQ
 
 <a name="RHNSW_PQ"></a>
 
@@ -326,7 +348,7 @@ RHNSW_SQ (Refined Hierarchical Small World Graph and Product Quantization) is a 
   | `ef`      | Search scope | [`top_k`, 32768] |
 
 
-### Annoy
+#### Annoy
 <a name="Annoy"></a>
 
 Annoy（Approximate Nearest Neighbors Oh Yeah）是一种用超平面把高维空间分割成多个子空间，并把这些子空间以树型结构存储的索引方式。
