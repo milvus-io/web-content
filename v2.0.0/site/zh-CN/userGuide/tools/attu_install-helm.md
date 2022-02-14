@@ -50,12 +50,14 @@ Attu 提供以下三种服务模式，您可以根据自己的场景选择其中
 
 ### Ingress 模式
 
+<div class="alert note">
 确保在 Kubernetes 集群中集成了 Ingress 控制器。
+</div>
 
 1. 安装 Milvus 和 Attu。
 
 ```
-helm install my-release milvus/milvus --set insight.enabled=true
+helm install my-release milvus/milvus --set attu.enabled=true
 ```
 
 2. 检查已建立的 Ingress。
@@ -64,20 +66,20 @@ helm install my-release milvus/milvus --set insight.enabled=true
 kubectl get ingress
 ```
 
-3. 检查返回结果中对应于 `my-release-milvus-insight` 的地址。
+3. 检查返回结果中对应于 `my-release-milvus-attu` 的地址。
 
 ```
 NAME                          CLASS    HOSTS                  ADDRESS                               PORTS   AGE
-my-release-milvus-insight    <none>   milvus-insight.local   10.100.32.1,10.100.32.2,10.100.32.3   80      22h
+my-release-milvus-attu.       <none>   milvus-attu.local      10.100.32.1,10.100.32.2,10.100.32.3   80      22h
 ```
 
-4. 通过将路径 `milvus-insight.local` 映射到系统文件 `/etc/hosts` 中返回的任何地址，在需要 Attu 服务的设备上配置 DNS。
+4. 通过将路径 `milvus-attu.local` 映射到系统文件 `/etc/hosts` 中返回的任何地址，在需要 Attu 服务的设备上配置 DNS。
 
 ```
-10.100.32.1     milvus-insight.local
+10.100.32.1     milvus-attu.local
 ```
 
-5. 访问 `http://milvus-insight.local`，然后单击 **Connect** 进入 Attu 服务。
+5. 访问 `http://milvus-attu.local`，然后单击 **Connect** 进入 Attu 服务。
 
 ![Attu_install](../../../../assets/attu/insight_install.png "使用 Ingress 模式进入 Attu 服务。")
 
@@ -88,7 +90,7 @@ my-release-milvus-insight    <none>   milvus-insight.local   10.100.32.1,10.100.
 1. 安装 Milvus and Attu。
 
 ```
-helm install my-release milvus/milvus --set insight.enabled=true --set insight.service.type=LoadBalancer --set insight.ingress.enabled=false
+helm install my-release milvus/milvus --set attu.enabled=true --set attu.service.type=LoadBalancer --set attu.ingress.enabled=false
 ```
 
 2. 检查 Attu 服务。
@@ -97,7 +99,7 @@ helm install my-release milvus/milvus --set insight.enabled=true --set insight.s
 kubectl get svc
 ```
 
-3. 在返回的结果中检查服务 `my-release-milvus-insight` 的外部 IP。
+3. 在返回的结果中检查服务 `my-release-milvus-attu` 的外部 IP。
 
 ```
 NAME                                    TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)
@@ -108,7 +110,7 @@ my-release-milvus-datacoord            ClusterIP      10.96.75.27     <none>    
 my-release-milvus-datanode             ClusterIP      None            <none>        9091/TCP                              117s
 my-release-milvus-indexcoord           ClusterIP      10.96.183.151   <none>        31000/TCP,9091/TCP                    117s
 my-release-milvus-indexnode            ClusterIP      None            <none>        9091/TCP                              117s
-my-release-milvus-insight              LoadBalancer   10.96.79.103    10.98.0.16    3000:30413/TCP                        117s
+my-release-milvus-attu                 LoadBalancer   10.96.79.103    10.98.0.16    3000:30413/TCP                        117s
 my-release-milvus-querycoord           ClusterIP      10.96.204.140   <none>        19531/TCP,9091/TCP                    117s
 my-release-milvus-querynode            ClusterIP      None            <none>        9091/TCP                              117s
 my-release-milvus-rootcoord            ClusterIP      10.96.142.19    <none>        53100/TCP,9091/TCP                    117s
@@ -121,13 +123,13 @@ my-release-pulsar-zookeeper            ClusterIP      None            <none>    
 my-release-pulsar-zookeeper-ca         ClusterIP      10.96.100.254   <none>        2888/TCP,3888/TCP,2181/TCP            117s
 ```
 
-4. 通过将路径 `my-release-milvus-insight` 映射到系统文件 `/etc/hosts` 中返回的外部 IP 上，在需要 Attu 服务的设备上配置 DNS。
+4. 通过将路径 `my-release-milvus-attu` 映射到系统文件 `/etc/hosts` 中返回的外部 IP 上，在需要 Attu 服务的设备上配置 DNS。
 
 ```
-10.98.0.16 my-release-milvus-insight
+10.98.0.16 my-release-milvus-attu
 ```
 
-5. 在您的浏览器中访问 `http://my-release-milvus-insight:3000/connect`，然后单击**连接**进入 Attu 服务。
+5. 在您的浏览器中访问 `http://my-release-milvus-attu:3000/connect`，然后单击**连接**进入 Attu 服务。
 
 ![Attu_install](../../../../assets/attu/insight_install.png "使用 LoadBalancer 模式进入 Attu 服务。")
 
@@ -136,22 +138,22 @@ my-release-pulsar-zookeeper-ca         ClusterIP      10.96.100.254   <none>    
 1. 安装 Milvus 和 Attu。
 
 ```
-helm install my-release milvus/milvus --set insight.enabled=true  --set insight.ingress.enabled=false
+helm install my-release milvus/milvus --set attu.enabled=true  --set attu.ingress.enabled=false
 ```
 
 2. 将 Attu 服务转发到本地端口 `3000`。
 
 ```
-kubectl port-forward service/my-release-milvus-insight 3000
+kubectl port-forward service/my-release-milvus-attu 3000
 ```
 
-3. 在转发 Attu 服务的设备上配置 DNS，将路径 `my-release-milvus-insight` 映射到系统文件 `/etc/hosts` 中的 `127.0.0.1`。
+3. 在转发 Attu 服务的设备上配置 DNS，将路径 `my-release-milvus-attu` 映射到系统文件 `/etc/hosts` 中的 `127.0.0.1`。
 
 ```
-127.0.01 my-release-milvus-insight
+127.0.01 my-release-milvus-attu
 ```
 
-4. 在您的浏览器中访问 `http://my-release-milvus-insight:3000/connect`，然后单击**连接**进入 Attu 服务。
+4. 在您的浏览器中访问 `http://my-release-milvus-attu:3000/connect`，然后单击**连接**进入 Attu 服务。
 
 ![Attu_install](../../../../assets/attu/insight_install.png "使用 port-forwards 模式进入 Attu 服务。")
 
