@@ -61,10 +61,10 @@ id: home.md
   <p>Use</p>
 
 - [Create a Collection](create_collection.md)
-- [Insert Data](insert_data.md)
+- [Manage Data](insert_data.md)
 - [Build an Index](build_index.md)
-- [Vector Similarity Search](search.md)
-- [Query](query.md)
+- [Search and query](search.md)
+- [Load Balance](load_balance.md)
 </div>
 
 <div class="recomment-item">
@@ -93,6 +93,13 @@ id: home.md
 
 ## What's new in docs
 
+_Feb 2022_
+
+- Now you can [compile Milvus on Mac](https://github.com/milvus-io/milvus/blob/master/DEVELOPMENT.md).
+- Added guidance on [load balance](load_balance.md).
+- Added documentation on how to [compact data](compact_data.md).
+- Added new [vector index](index.md) supported by Milvus.
+
 _Jan 2022_
 
 - Milvus announced its general availability release [Milvus 2.0.0](release_notes.md).
@@ -101,12 +108,5 @@ _Jan 2022_
 - Added the installation guide for Milvus [GO SDK](install-go.md) and [Java SDk](install-java.md).
 - Add sample code in GO and Java in User Guide.
 
-_Dec 2021_
-
-- With the release of [Milvus 2.0-PreGA](release_notes.md), we have published new user guides concerning the new features of [Data Deletion](delete_data.md) and [Collection Alias](collection_alias.md).
-- Updated [Search with Time Travel](timetravel.md) by introducing how to [generate a timestamp](timetravel.md#Generate-a-timestamp-for-search) based on an existing timestamp, Unix Epoch time, or date time.
-- Added documentation about the newly released Milvus ecosystem tool, [Attu](attu.md). Learn what Attu is, and how to [install](attu_install-docker.md) and [use](attu_overview.md) it.
-- Remade [Hello Milvus](example_code.md) to demonstrate the new feature of Data Deletion.
-- Added a reference documentation explaining the mechanism of [Time Travel](timetravel_ref.md) in Milvus.
 
 </div>
