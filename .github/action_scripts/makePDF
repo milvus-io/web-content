@@ -1,0 +1,212 @@
+const fs = require('fs');
+const path = require('path');
+const { execSync } = require('child_process');
+const docPath = process.cwd();
+const vReg = /v([0-9].){2}[0-9]/;
+const tReg = /#{1,4} /g;
+const idReg = /---$(.*\n){1,10}---$/gm;
+
+let menuPaths = [];
+let labelKeys;
+
+//pdf destination path
+const pdfPath = path.join(__dirname, "../..", 'export_pdf');
+if (!fs.existsSync(pdfPath)) {
+  fs.mkdirSync(pdfPath);  
+}
+
+//released version
+const versions = fs.readdirSync(docPath).filter(v => {
+  if(vReg.test(v)) {
+    const versionPath = path.join(docPath, v);
+    const versionInfoPath = path.join(versionPath, "version.json");
+    let versionInfo;
+    try {
+      versionInfo = fs.readFileSync(versionInfoPath);
+      const info = JSON.parse(versionInfo.toString());
+      if(info.released === 'yes') {
+        setMenuPaths(versionPath, menuPaths);
+        return true;
+      }
+    } catch (e) {
+      console.log(`${versionInfoPath} read file error ${e.message}`);
+      return false;
+    }
+  }
+  return false;
+});
+
+menuPaths = menuPaths.flat();
+
+console.log("versions",versions);
+console.log("menuPaths",menuPaths);
+
+menuPaths.forEach(fileRoute => {
+  const fRoutes = fileRoute.split("/");
+  fRoutes.pop();
+  fRoutes.pop();
+  const rootPath = fRoutes.join("/");
+  const lang = fRoutes.pop();
+  fRoutes.pop();
+  const version = fRoutes.pop();
+
+  const markdownPaths = [];
+  const menuCotent = fs.readFileSync(fileRoute);
+  const menuObj = JSON.parse(menuCotent.toString()).menuList.filter(m => !m.outLink);
+  const formattedMenu = [];
+
+  // get all label keys
+  if (labelKeys === undefined) {
+    labelKeys =
+      menuObj.length > 0
+        ? Object.keys(menuObj[0])
+          .filter(v => v.includes('label'))
+          .sort((a, b) => a[a.length - 1] - b[b.length - 1])
+        : [];
+  }
+  // extract root menu 
+  for (let i = 0; i < menuObj.length; i++) {
+    if (menuObj[i][labelKeys[0]] == '') {
+      formattedMenu.push(menuObj[i]);
+      menuObj.splice(i, 1);
+      i--;
+    }
+  }
+
+  // order root menu item by order
+  formattedMenu.sort((a, b) => {
+    if (a.order < b.order) {
+      return -1;
+    }
+    if (a.order > b.order) {
+      return 1;
+    }
+    throw new Error(`set correct order in ${fileRoute} ${a.id}, ${b.id}`);
+  });
+
+  // order sub menu item by label1, lable2, label3 and order
+  menuObj.sort((a, b) => {
+    for (const key of labelKeys.concat('order')) {
+      if (a[key] < b[key]) {
+        return -1;
+      }
+      if (a[key] > b[key]) {
+        return 1;
+      }
+    }
+    throw new Error(`set correct order in ${fileRoute} ${a.id}, ${b.id}`);
+  });
+
+  // set submenu
+  menuObj.forEach(subMenu => {
+    setSubmenu(formattedMenu, subMenu, 0);
+  });
+
+  // set markdown path
+  setMarkDownPath(rootPath, markdownPaths);
+
+  // generate doc
+  const res = [];
+  generateDoc(formattedMenu, markdownPaths, res, 1);
+
+  const mdFileName = `doc_milvus_${version}_${lang}`;
+  const mdPath = path.join(rootPath, 'export');
+  if (!fs.existsSync(mdPath)) {
+     fs.mkdirSync(mdPath);
+  } 
+  const mdFile = path.join(mdPath, `${mdFileName}.md`);
+  fs.writeFileSync(mdFile, res.join('\n'));
+  console.log("mdPath", mdPath);
+
+  const pandoccmd = `pandoc --toc --toc-depth=2 -s --resource-path=${mdPath} -f markdown+link_attributes -V geometry:"left=2cm, top=2cm, right=2cm, bottom=2cm" -V title="Milvus ${version}" -V mainfont="Symbola" -V CJKmainfont="AR PL SungtiL GB"  --pdf-engine=xelatex -o  ${pdfPath}/${mdFileName}.pdf ${mdFile}`
+  const std  = execSync(pandoccmd);
+  console.log(`stdout:\n${std}`);
+  console.log(`${mdFile} file transfered to pdf`);
+});
+
+function generateDoc(menu, paths, res, level) {
+  menu.forEach(m => {
+    res.push(`${"#".repeat(level)} ${m.title}  `)
+    if (m.id.endsWith('.md')) {
+      const filePath = paths.filter(p => p.endsWith(m.id))[0];
+      if (filePath === undefined) {
+        const fRoutes = paths[0].split("/");
+        fRoutes.pop();
+        fRoutes.pop();
+        throw new Error(`menu item ${JSON.stringify(m)} not found in ${fRoutes.join('/')}`);
+      }
+      const fileContent = fs.readFileSync(filePath).toString();
+      res.push(replacetitle(fileContent, m.title));
+    }
+    if (m?.child?.length > 0) {
+      generateDoc(m.child, paths, res, level + 1)
+    }
+  });
+}
+
+function replacetitle(content, title) {
+  const titleReg = new RegExp(`#{1,2} ${title}( *)\n`);
+  // remove all main title since we already generate title by toc
+  content = content.replace(titleReg, '');
+
+  // remove all code so that they can be shown properly
+  // content = content.replace(/```/g, '');
+
+  content = content.replace(/f"\\n/g, 'f"');
+
+  // replace all sub title h1,h2,h3 by h3 to avoid them appear in toc
+  content = content.replace(tReg, "### ");
+
+  // remove all custom keys
+  content = content.replace(idReg, "");
+  return content;
+}
+
+function setMarkDownPath(dirPath, list) {
+  let filesList = fs.readdirSync(dirPath);
+  for (let i = 0; i < filesList.length; i++) {
+    let filePath = path.join(dirPath, filesList[i]);
+    if (filePath.endsWith('.md') && !filePath.includes("export_pdf")) {
+      list.push(filePath);
+    } else {
+      let stats = fs.statSync(filePath);
+      if (stats.isDirectory()) {
+        setMarkDownPath(filePath, list);
+      }
+    }
+  }
+}
+
+function setSubmenu(parents, child, level) {
+  const parent1 = parents.filter(p => p.id === child[labelKeys[level]]);
+  const parent = parent1[0];
+  if (!parent) {
+    return;
+  }
+  if (!child[labelKeys[level + 1]]) {
+    if (parent.child === undefined) {
+      parent.child = [];
+    }
+    parent.child.push(child);
+    return;
+  }
+  if (!labelKeys[level + 1]) {
+    return;
+  }
+  setSubmenu(parent.child, child, level + 1);
+}
+
+function setMenuPaths(dirPath, list) {
+  let filesList = fs.readdirSync(dirPath);
+  for (let i = 0; i < filesList.length; i++) {
+    let filePath = path.join(dirPath, filesList[i]);
+    if (filePath.endsWith('menuStructure')) {
+      list.push(fs.readdirSync(filePath).map(f => path.join(filePath, f)));
+    } else {
+      let stats = fs.statSync(filePath);
+      if (stats.isDirectory()) {
+        setMenuPaths(filePath, list);
+      }
+    }
+  }
+}

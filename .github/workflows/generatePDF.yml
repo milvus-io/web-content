@@ -1,0 +1,50 @@
+name: build pdf doc for milvus
+defaults:
+  run:
+    shell: bash -ieo pipefail {0}
+on:
+  push:
+    branches:
+      - master
+# on:
+#   schedule:
+#     # * is a special character in YAML so you have to quote this string
+#     #         ┌───────────── minute (0 - 59)
+#     #         │  ┌───────────── hour (0 - 23)
+#     #         │  │   ┌───────────── day of the month (1 - 31)
+#     #         │  │   │ ┌───────────── month (1 - 12 or JAN-DEC)
+#     #         │  │   │ │ ┌───────────── day of the week (0 - 6 or SUN-SAT)
+#     #         │  │   │ │ │
+#     #         │  │   │ │ │
+#     #         │  │   │ │ │
+#     - cron: "0 0,12 * * *"
+
+jobs:
+  build:
+    runs-on: "ubuntu-latest"
+    container:
+      image: xiaohongczh/xelatex:latest
+
+    steps:
+      - name: update git
+        run: |
+          sudo apt-get update
+          sudo apt-get upgrade -yq
+          sudo apt-get install -yq git
+
+      - uses: actions/checkout@v2
+
+      - name: build pdf docs
+        run: |
+          source /root/.bashrc
+          echo $PATH
+          /root/.fnm/aliases/default/bin/node .github/action_scripts/makePDF
+
+      - name: commit pdf
+        env:
+          GH_TOKEN: ${{secrets.GH_TOKEN}}
+        run: |
+          git config --global user.email "Milvus-doc-bot@zilliz.com"
+          git config --global user.name "Milvus-doc-bot"
+          git add --verbose ./export_pdf
+          git diff-index --cached --quiet HEAD || (git commit -s -m 'update pdf docs' && git push)
