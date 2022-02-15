@@ -11,10 +11,9 @@ let labelKeys;
 
 //pdf destination path
 const pdfPath = path.join(__dirname, "../..", 'export_pdf');
-if (fs.existsSync(pdfPath)) {
-  fs.rmSync(pdfPath, { recursive: true, force: true });
-} 
-fs.mkdirSync(pdfPath);
+if (!fs.existsSync(pdfPath)) {
+  fs.mkdirSync(pdfPath);  
+}
 
 //released version
 const versions = fs.readdirSync(docPath).filter(v => {
