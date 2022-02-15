@@ -38,7 +38,7 @@ jobs:
         run: |
           source /root/.bashrc
           echo $PATH
-          /root/.fnm/aliases/default/bin/node .github/actions_scripts/makePDF
+          /root/.fnm/aliases/default/bin/node .github/action_scripts/makePDF
 
       - name: commit pdf
         run: |
