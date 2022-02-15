@@ -1,12 +1,6 @@
 const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
-// const md = require('markdown-it')({
-//   html: true,
-//   linkify: true,
-//   typographer: true
-// });
-
 const docPath = process.cwd();
 const vReg = /v([0-9].){2}[0-9]/;
 const tReg = /#{1,4} /g;
@@ -15,24 +9,14 @@ const idReg = /---$(.*\n){1,10}---$/gm;
 let menuPaths = [];
 let labelKeys;
 
+//pdf destination path
 const pdfPath = path.join(__dirname, "../..", 'export_pdf');
 if (fs.existsSync(pdfPath)) {
   fs.rmSync(pdfPath, { recursive: true, force: true });
 } 
 fs.mkdirSync(pdfPath);
 
-// execSync('ls -lh', (error, stdout, stderr) => {
-//   if (error) {
-//     console.error(`error: ${error.message}`);
-//     return;
-//   }
-//   if (stderr) {
-//     console.error(`stderr: ${stderr}`);
-//     return;
-//   }
-//   console.log(`stdout:\n${stdout}`);
-// });
-
+//released version
 const versions = fs.readdirSync(docPath).filter(v => {
   if(vReg.test(v)) {
     const versionPath = path.join(docPath, v);
@@ -66,7 +50,6 @@ menuPaths.forEach(fileRoute => {
   const lang = fRoutes.pop();
   fRoutes.pop();
   const version = fRoutes.pop();
-  // const prod = fRoutes.pop();
 
   const markdownPaths = [];
   const menuCotent = fs.readFileSync(fileRoute);
@@ -127,7 +110,6 @@ menuPaths.forEach(fileRoute => {
   const res = [];
   generateDoc(formattedMenu, markdownPaths, res, 1);
 
-  // fs.writeFileSync(`${rootPath}/test.html`, md.render(res.join('\n')));
   const mdFileName = `doc_milvus_${version}_${lang}`;
   const mdPath = path.join(rootPath, 'export');
   if (!fs.existsSync(mdPath)) {
@@ -135,17 +117,13 @@ menuPaths.forEach(fileRoute => {
   } 
   const mdFile = path.join(mdPath, `${mdFileName}.md`);
   fs.writeFileSync(mdFile, res.join('\n'));
-  // fs.writeFileSync(`${pdfPath}/doc_${prod}_${version}_${lang}.html`, md.render(res.join('\n')));
-
   console.log("mdPath", mdPath);
-
 
   const pandoccmd = `pandoc --toc --toc-depth=2 -s --resource-path=${mdPath} -f markdown+link_attributes -V geometry:"left=2cm, top=2cm, right=2cm, bottom=2cm" -V title="Milvus ${version}" -V mainfont="Symbola" -V CJKmainfont="AR PL SungtiL GB"  --pdf-engine=xelatex -o  ${pdfPath}/${mdFileName}.pdf ${mdFile}`
   const std  = execSync(pandoccmd);
   console.log(`stdout:\n${std}`);
   console.log(`${mdFile} file transfered to pdf`);
 });
-
 
 function generateDoc(menu, paths, res, level) {
   menu.forEach(m => {
