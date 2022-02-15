@@ -41,8 +41,10 @@ jobs:
           /root/.fnm/aliases/default/bin/node .github/action_scripts/makePDF
 
       - name: commit pdf
+        env:
+          GH_TOKEN: ${{secrets.GH_TOKEN}}
         run: |
-          git config --global user.email "zhuanghong.chen@zilliz.com"
-          git config --global user.name "sutcalag"
+          git config --global user.email "Milvus-doc-bot@zilliz.com"
+          git config --global user.name "Milvus-doc-bot"
           git add --verbose ./export_pdf
           git diff-index --cached --quiet HEAD || (git commit -s -m 'update pdf docs' && git push)
