@@ -6,6 +6,8 @@ on:
   push:
     branches:
       - master
+    paths-ignore:
+      - 'export_pdf/**'
 # on:
 #   schedule:
 #     # * is a special character in YAML so you have to quote this string
