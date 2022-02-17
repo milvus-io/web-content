@@ -19,27 +19,26 @@ summary: Learn how to configure your Milvus.
 This topic describes how to configure your Milvus.
 
 <div class="alert note">
-In current release, all parameters take effect only after being configured at the startup of Milvus.
+In current release, all parameters take effect only after Milvus restarts.
 </div>
 
 <div class="tab-wrapper"><a href="configure-docker.md" class=''>Docker Compose</a><a href="configure-helm.md" class='active '>Helm</a></div>
 
-## Install Helm Chart for Milvus
+## Configure Milvus via configuration file
 
-Add Milvus Helm repository and update charts locally.
+You can configure Milvus with a configuration file `values.yaml`.
 
-```
-$ helm repo add milvus https://milvus-io.github.io/milvus-helm/
-$ helm repo update
-```
+### Download a configuration file
 
-## Check the configurable parameters
-
-You can modify Milvus configurations directly with the Helm installation command. Before installation, you can check the configurable parameters with Helm charts.
+[Download](https://raw.githubusercontent.com/milvus-io/milvus-helm/master/charts/milvus/values.yaml) `values.yaml` directly or with the following command.
 
 ```
-$ helm show values milvus/milvus
+$ wget https://raw.githubusercontent.com/milvus-io/milvus-helm/master/charts/milvus/values.yaml
 ```
+
+### Modify the configuration file
+
+Configure your Milvus instance to suit your application scenarios by adjusting corresponding parameters in `values.yaml`.
 
 Check the following links for more information about each parameter.
 
@@ -148,13 +147,33 @@ Sorted by:
 
 For other parameters specifically to Kubernetes installation, See [Milvus Helm Chart Configuration](https://github.com/milvus-io/milvus-helm/tree/master/charts/milvus#configuration).
 
-## Start Milvus
+### Start Milvus
 
-Configure and start Milvus by adding `--values` or `--set` in the command for installation.
+Having finished modifying the configuration file, you can then start Milvus with the file.
 
 ```
-# For instance, start a Milvus cluster with compaction disabled
-$ helm install my-release milvus/milvus --set dataCoord.enableCompaction=false
+$ helm upgrade my-release milvus/milvus -f values.yaml
+```
+
+## Configure Milvus via command line
+
+Alternatively, you can upgrade Milvus configurations directly with the Helm command.
+
+### Check the configurable parameters
+
+Before upgrade, you can check the configurable parameters with Helm charts.
+
+```
+$ helm show values milvus/milvus
+```
+
+### Start Milvus
+
+Configure and start Milvus by adding `--values` or `--set` in the command for upgrade.
+
+```
+# For instance, upgrade the Milvus cluster with compaction disabled
+$ helm upgrade my-release milvus/milvus --set dataCoord.enableCompaction=false
 ```
 
 ## What's next
