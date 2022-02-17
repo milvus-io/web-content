@@ -1,16 +1,13 @@
 ---
-id: load_collection.md
-related_key: load collection
-summary: Learn how to load a collection into memory for CRUD operations in Milvus.
+id: release_partition.md
+related_key: release partition
+summary: Learn how to release a partition into memory for search or query in Milvus.
 ---
 
-# Load a Collection
+# Load a Partition
 
-This topic describes how to load the collection to memory before a search or a query. All search and query operations within Milvus are executed in memory. 
+This topic describes how to release a partition from memory after a search or a query to reduce memory usage.
 
-<div class="alert warning">
-In current release, volume of the data to load must be under 90% of the total memory resources of all query nodes to reserve memory resources for execution engine.
-</div>
 
 <div class="multipleCode">
   <a href="?python">Python </a>
@@ -22,37 +19,39 @@ In current release, volume of the data to load must be under 90% of the total me
 
 
 ```python
-from pymilvus import Collection
-collection = Collection("book")      # Get an existing collection.
-collection.load()
+from pymilvus import Partition
+partition = Partition("novel")       # Get an existing partition.
+partition.release()
 ```
 
 ```javascript
-await milvusClient.collectionManager.loadCollection({
-  collection_name: "book",
-});
+await milvusClient.partitionManager.releasePartitions({
+    collection_name: "book",
+    partition_names: ["novel"],
+ });
 ```
 
 ```go
-err := milvusClient.LoadCollection(
+err := milvusClient.ReleasePartitions(
     context.Background(),   // ctx
     "book",                 // CollectionName
-    false                   // async
+    []string{"novel"}       // partitionNames
     )
 if err != nil {
-    log.Fatal("failed to load collection:", err.Error())
+    log.Fatal("failed to release partitions:", err.Error())
 }
 ```
 
 ```java
-milvusClient.loadCollection(
-        LoadCollectionParam.newBuilder()
+milvusClient.releasePartitions(
+        ReleasePartitionsParam.newBuilder()
                 .withCollectionName("book")
+                .withPartitionNames(["novel"])
                 .build());
 ```
 
 ```shell
-load -c book
+release -c book -p novel
 ```
 
 <table class="language-python">
@@ -64,8 +63,8 @@ load -c book
 	</thead>
 	<tbody>
 	<tr>
-		<td><code>partition_name</code> (optional)</td>
-		<td>Name of the partition to load.</td>
+		<td><code>partition_name</code></td>
+		<td>Name of the partition.</td>
 	</tr>
 	</tbody>
 </table>
@@ -80,7 +79,11 @@ load -c book
 	<tbody>
 	<tr>
 		<td><code>collection_name</code></td>
-		<td>Name of the collection to load.</td>
+		<td>Name of the collection to release partitions.</td>
+	</tr>
+    <tr>
+		<td><code>partition_names</code></td>
+		<td>List of names of the partitions to load.</td>
 	</tr>
 	</tbody>
 </table>
@@ -99,11 +102,11 @@ load -c book
         </tr>
         <tr>
             <td><code>CollectionName</code></td>
-            <td>Name of the collection to load.</td>
+            <td>Name of the collection to release partitions.</td>
         </tr>
         <tr>
-            <td><code>async</code></td>
-            <td>Switch to control sync/async behavior. The deadline of context is not applied in sync load.</td>
+            <td><code>partitionNames</code></td>
+            <td>List of names of the partitions to release.</td>
         </tr>
     </tbody>
 </table>
@@ -118,7 +121,11 @@ load -c book
 	<tbody>
         <tr>
             <td><code>CollectionName</code></td>
-            <td>Name of the collection to load.</td>
+            <td>Name of the collection to release partition.</td>
+        </tr>
+        <tr>
+            <td><code>PartitionNames</code></td>
+            <td>List of names of the partitions to release.</td>
         </tr>
     </tbody>
 </table>
@@ -133,11 +140,11 @@ load -c book
     <tbody>
         <tr>
             <td>-c</td>
-            <td>Name of the collection to load.</td>
+            <td>Name of the collection to release partition.</td>
         </tr>
         <tr>
-            <td>-p (Optional/Multiple)</td>
-            <td>The name of the partition to load.</td>
+            <td>-p (Multiple)</td>
+            <td>The name of the partition to release.</td>
         </tr>
     </tbody>
 </table>
@@ -154,7 +161,6 @@ load -c book
 
 - Learn more basic operations of Milvus:
   - [Insert data into Milvus](insert_data.md)
-  - [Create a partition](create_partition.md)
   - [Build an index for vectors](build_index.md)
   - [Conduct a vector search](search.md)
   - [Conduct a hybrid search](hybridsearch.md)

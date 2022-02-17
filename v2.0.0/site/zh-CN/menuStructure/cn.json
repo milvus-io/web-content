@@ -250,6 +250,22 @@
         "order": 2
       },
       {
+        "id": "load_partition.md",
+        "title": "加载 Partition",
+        "label1": "userguide",
+        "label2": "manage_partition",
+        "label3": "",
+        "order": 3
+      },
+      {
+        "id": "release_partition.md",
+        "title": "释放 Partition",
+        "label1": "userguide",
+        "label2": "manage_partition",
+        "label3": "",
+        "order": 4
+      },
+      {
         "id": "manage_data",
         "title": "管理数据",
         "label1": "userguide",

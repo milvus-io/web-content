@@ -250,6 +250,22 @@
       "order": 2
     },
     {
+      "id": "load_partition.md",
+      "title": "Load a Partition",
+      "label1": "userguide",
+      "label2": "manage_partition",
+      "label3": "",
+      "order": 3
+    },
+    {
+      "id": "release_partition.md",
+      "title": "Release a Partition",
+      "label1": "userguide",
+      "label2": "manage_partition",
+      "label3": "",
+      "order": 4
+    },
+    {
       "id": "manage_data",
       "title": "Manage Data",
       "label1": "userguide",
