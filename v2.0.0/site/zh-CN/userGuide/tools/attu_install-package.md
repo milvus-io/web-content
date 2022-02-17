@@ -28,15 +28,15 @@ summary: Learn how to install Attu with package to manage your Milvus service.
 	<tbody>
         <tr>
             <td><code>Linux</code></td>
-            <td><a href="https://github.com/zilliztech/attu/releases/download/v0.1.11/attu_0.1.11_amd64.deb">Linux 安装包</a></td>
+            <td><a href="https://github.com/zilliztech/attu/releases/download/v2.0.1/attu_2.0.1_amd64.deb">Linux 安装包</a></td>
         </tr>
         <tr>
             <td><code>macOS</code></td>
-            <td><a href="https://github.com/zilliztech/attu/releases/download/v0.1.11/attu-0.1.11.dmg">macOS 安装包</a></td>
+            <td><a href="https://github.com/zilliztech/attu/releases/download/v2.0.1/attu-2.0.1.dmg">macOS 安装包</a></td>
         </tr>
         <tr>
             <td><code>Windows</code></td>
-            <td><a href="https://github.com/zilliztech/attu/releases/download/v0.1.11/attu-Setup-0.1.11.exe">Windows 安装包</a></td>
+            <td><a href="https://github.com/zilliztech/attu/releases/download/v2.0.1/attu-Setup-2.0.1.exe">Windows 安装包</a></td>
         </tr>
 	</tbody>
 </table>
