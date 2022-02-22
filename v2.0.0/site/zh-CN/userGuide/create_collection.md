@@ -532,7 +532,15 @@ milvusClient.createCollection(createCollectionReq);
         <tr>
             <td><code>consistency_level</code> (optional)</td>
             <td>Consistency level of the collection to create.</td>
-            <td><code>strong</code><code>eventual</code><code>bounded</code><code>session</code></td>
+            <td>
+                <ul>
+                    <li><code>Strong</code></li>
+                    <li><code>Bounded</code></li>
+                    <li><code>Session</code></li>
+                    <li><code>Eventually</code></li>
+                    <li><code>Customized</code></li>
+                </ul>
+            </td>
         </tr>
     </tbody>
 </table>

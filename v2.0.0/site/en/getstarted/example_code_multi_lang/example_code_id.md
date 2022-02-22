@@ -17,7 +17,7 @@ Python 3.6 atau yang lebih baru dibutuhkan. Lihat <a href="https://wiki.python.o
 
 ## 2. Unduh kode sampel
 
-```Python
+```bash
 $ wget https://raw.githubusercontent.com/milvus-io/pymilvus/v2.0.0/examples/hello_milvus.py
 ```
 

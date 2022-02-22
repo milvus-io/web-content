@@ -17,7 +17,7 @@ Python 3.6 of later is vereist. Zie <a href="https://wiki.python.org/moin/Beginn
 
 ## 2. Download voorbeeld code
 
-```Python
+```bash
 $ wget https://raw.githubusercontent.com/milvus-io/pymilvus/v2.0.0/examples/hello_milvus.py
 ```
 

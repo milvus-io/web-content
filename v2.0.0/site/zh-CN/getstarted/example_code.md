@@ -34,7 +34,7 @@ summary: Get started with Milvus faster using this Python example code.
 
 使用下面的命令 [下载](https://raw.githubusercontent.com/milvus-io/pymilvus/v2.0.0/examples/hello_milvus.py) `hello_milvus.py` 
 
-```Python
+```bash
 $ wget https://raw.githubusercontent.com/milvus-io/pymilvus/v2.0.0/examples/hello_milvus.py
 ```
 

@@ -17,7 +17,7 @@ Il est nécessaire d'utiliser la version 3.6 ou une version plus récente de Pyt
 
 ## 2. Télécharger un exemple code source
 
-```Python
+```bash
 $ wget https://raw.githubusercontent.com/milvus-io/pymilvus/v2.0.0/examples/hello_milvus.py
 ```
 

@@ -17,7 +17,7 @@ Python 3.6 oder höher ist erforderlich. Siehe <a href="https://wiki.python.org/
 
 ## 2. Laden Sie den Beispielcode herunter
 
-```Python
+```bash
 $ wget https://raw.githubusercontent.com/milvus-io/pymilvus/v2.0.0/examples/hello_milvus.py
 ```
 

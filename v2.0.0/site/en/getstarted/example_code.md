@@ -26,7 +26,7 @@ Through running the example code we provided, you will have a primary understand
 
 [Download](https://raw.githubusercontent.com/milvus-io/pymilvus/v2.0.0/examples/hello_milvus.py) `hello_milvus.py` directly or with the following command.
 
-```Python
+```bash
 $ wget https://raw.githubusercontent.com/milvus-io/pymilvus/v2.0.0/examples/hello_milvus.py
 ```
 
