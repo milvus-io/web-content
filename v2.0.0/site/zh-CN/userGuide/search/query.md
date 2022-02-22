@@ -71,6 +71,8 @@ load -c book
 
 The following example filters the vectors with certain `book_id` values, and returns the `book_id` field and `book_intro` of the results.
 
+Milvus supports setting consistency level specifically for a search or query. The consistency level set in the search or query requests overwrites the one set while creating the collection. In this example, the consistency level of the search request is set as "strong", meaning Milvus will read the most updated data view at the exact time point when a search or query request comes. Without specifying the consistency level during a search or query, Milvus adopts the original consistency level of the collection.
+
 <div class="multipleCode">
   <a href="?python">Python </a>
   <a href="?java">Java</a>
@@ -81,7 +83,11 @@ The following example filters the vectors with certain `book_id` values, and ret
 
 
 ```python
-res = collection.query(expr = "book_id in [2,4,6,8]", output_fields = ["book_id", "book_intro"])
+res = collection.query(
+	expr = "book_id in [2,4,6,8]", 
+	output_fields = ["book_id", "book_intro"],
+	consistency_level="strong"
+)
 ```
 
 ```javascript
@@ -148,6 +154,10 @@ timeout []:
 	<tr>
 		<td><code>partition_names</code> (optional)</td>
 		<td>List of names of the partitions to query on.</td>
+	</tr>
+	<tr>
+		<td><code>consistency_level</code> (optional)</td>
+		<td>Consistency level of the query.</td>
 	</tr>
 	</tbody>
 </table>
