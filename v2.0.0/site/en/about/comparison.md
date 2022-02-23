@@ -92,7 +92,7 @@ Object-relational mapping (ORM) allows users to focus more on the upper-level bu
 	</tr>
 	<tr>
 		<th>Basic operations supported</th>
-		<td><li>Data insertion</li><li>Data deletion (in planning)</li><li>Data query</li><li>Approximate nearest neighbor (ANN) Search</li><li>Recurrent neural network (RNN) search (in planning)</li></td>
+		<td><li>Data insertion</li><li>Data deletion</li><li>Data query</li><li>Approximate nearest neighbor (ANN) Search</li><li>Recurrent neural network (RNN) search (in planning)</li></td>
 		<td><li>Data insertion</li><li>Data deletion</li><li>Approximate nearest neighbor (ANN) Search</li></td>
 	</tr>
 	<tr>
@@ -107,7 +107,7 @@ Object-relational mapping (ORM) allows users to focus more on the upper-level bu
 	</tr>
 	<tr>
 		<th>SDKs</th>
-		<td><li>Python</li><li>Node.js</li><li>Go (in planning)</li><li>Java (in planning)</li><li>C++ (in planning)</li></td>
+		<td><li>Python</li><li>Node.js</li><li>Go</li><li>Java</li><li>C++ (testing)</li></td>
 		<td><li>Python</li><li>Java</li><li>Go</li><li>RESTful</li><li>C++</li></td>
 	</tr>
 	<tr>
