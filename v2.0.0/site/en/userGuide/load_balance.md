@@ -36,9 +36,10 @@ utility.get_query_segment_info("book")
 
 ```java
 milvusClient.getQuerySegmentInfo(
-    GetQuerySegmentInfoParam.newBuilder()
-        .withCollectionName("book")
-        .build());
+  GetQuerySegmentInfoParam.newBuilder()
+    .withCollectionName("book")
+    .build()
+);
 ```
 
 ```javascript
@@ -127,9 +128,9 @@ Transfer the sealed segment(s) with the `segmentID` and the `nodeID` of the curr
 
 ```python
 utility.load_balance(
-    src_node_id=3, 
-    dst_node_ids=[4], 
-    sealed_segment_ids=[431067441441538050]
+  src_node_id=3, 
+  dst_node_ids=[4], 
+  sealed_segment_ids=[431067441441538050]
 )
 ```
 
@@ -138,18 +139,20 @@ utility.load_balance(
 ```
 
 ```java
-milvusClient.loadBalance(LoadBalanceParam.newBuilder()
-                .withSourceNodeID(3L)
-                .addDestinationNodeID(4L)
-                .addSegmentID(431067441441538050L)
-                .build());
+milvusClient.loadBalance(
+  LoadBalanceParam.newBuilder()
+    .withSourceNodeID(3L)
+    .addDestinationNodeID(4L)
+    .addSegmentID(431067441441538050L)
+    .build()
+);
 ```
 
 ```javascript
 await dataManager.loadBalance({
-    src_nodeID: 3,
-    dst_nodeIDs: [4],
-    sealed_segmentIDs: [431067441441538050]
+  src_nodeID: 3,
+  dst_nodeIDs: [4],
+  sealed_segmentIDs: [431067441441538050]
 });
 ```
 

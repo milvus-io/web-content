@@ -35,21 +35,22 @@ await milvusClient.indexManager.dropIndex({
 
 ```go
 err = milvusClient.DropIndex(
-    context.Background(),     // ctx
-    "book",                   // CollectionName
-    "book_intro",             // fieldName
+  context.Background(),     // ctx
+  "book",                   // CollectionName
+  "book_intro",             // fieldName
 )
 if err != nil {
-    log.Fatal("fail to drop index:", err.Error())
+  log.Fatal("fail to drop index:", err.Error())
 }
 ```
 
 ```java
 milvusClient.dropIndex(
-        DropIndexParam.newBuilder()
-                .withCollectionName("book")
-                .withFieldName("book_intro")
-                .build());
+  DropIndexParam.newBuilder()
+    .withCollectionName("book")
+    .withFieldName("book_intro")
+    .build()
+);
 ```
 
 ```shell

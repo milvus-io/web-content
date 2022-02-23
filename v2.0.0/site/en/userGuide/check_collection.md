@@ -34,22 +34,23 @@ await milvusClient.collectionManager.hasCollection({
 
 ```go
 hasColl, err := milvusClient.HasCollection(
-    context.Background(), // ctx
-    collectionName,       // CollectionName
+  context.Background(), // ctx
+  collectionName,       // CollectionName
 )
 if err != nil {
-    log.Fatal("failed to check whether collection exists:", err.Error())
+  log.Fatal("failed to check whether collection exists:", err.Error())
 }
 log.Println(hasColl)
 ```
 
 ```java
 R<Boolean> respHasCollection = milvusClient.hasCollection(
-        HasCollectionParam.newBuilder()
-                .withCollectionName("book")
-                .build());
+  HasCollectionParam.newBuilder()
+    .withCollectionName("book")
+    .build()
+);
 if (respHasCollection.getData() == Boolean.TRUE) {
-    System.out.println("Collection exists.");
+  System.out.println("Collection exists.");
 }
 ```
 
@@ -177,35 +178,39 @@ await milvusClient.collectionManager.getCollectionStatistics({     // Return the
 
 ```go
 collDesc, err := milvusClient.DescribeCollection(               // Return the name and schema of the collection.
-    context.Background(),   // ctx
-    "book",                 // CollectionName
+  context.Background(),   // ctx
+  "book",                 // CollectionName
 )
 if err != nil {
-    log.Fatal("failed to check collection schema:", err.Error())
+  log.Fatal("failed to check collection schema:", err.Error())
 }
 log.Printf("%v\n", collDesc)
 
 collStat, err := milvusClient.GetCollectionStatistics(          // Return the statistics information of the collection.
-    context.Background(),   // ctx
-    "book",                 // CollectionName
+  context.Background(),   // ctx
+  "book",                 // CollectionName
 )
 if err != nil {
-log.Fatal("failed to check collection statistics:", err.Error())
+  log.Fatal("failed to check collection statistics:", err.Error())
 }
 ```
 
 ```java
-R<DescribeCollectionResponse> respDescribeCollection = milvusClient.describeCollection(          // Return the name and schema of the collection.
-        DescribeCollectionParam.newBuilder()
-                .withCollectionName("book")
-                .build());
+R<DescribeCollectionResponse> respDescribeCollection = milvusClient.describeCollection(
+  // Return the name and schema of the collection.
+  DescribeCollectionParam.newBuilder()
+    .withCollectionName("book")
+    .build()
+);
 DescCollResponseWrapper wrapperDescribeCollection = new DescCollResponseWrapper(respDescribeCollection.getData());
 System.out.println(wrapperDescribeCollection);
 
-R<GetCollectionStatisticsResponse> respCollectionStatistics = milvusClient.getCollectionStatistics(   // Return the statistics information of the collection.
-        GetCollectionStatisticsParam.newBuilder()
-                .withCollectionName("book")
-                .build());
+R<GetCollectionStatisticsResponse> respCollectionStatistics = milvusClient.getCollectionStatistics(
+  // Return the statistics information of the collection.
+  GetCollectionStatisticsParam.newBuilder()
+    .withCollectionName("book")
+    .build()
+  );
 GetCollStatResponseWrapper wrapperCollectionStatistics = new GetCollStatResponseWrapper(respCollectionStatistics.getData());
 System.out.println("Collection row count: " + wrapperCollectionStatistics.getRowCount());
 ```
@@ -337,18 +342,18 @@ await milvusClient.collectionManager.showCollections();
 
 ```go
 listColl, err := milvusClient.ListCollection(
-    context.Background(),   // ctx
-    )
+  context.Background(),   // ctx
+)
 if err != nil {
-		log.Fatal("failed to list all collections:", err.Error())
-    }
+  log.Fatal("failed to list all collections:", err.Error())
+}
 log.Println(listColl)
 ```
 
 ```java
 R<ShowCollectionsResponse> respShowCollections = milvusClient.showCollections(
-        ShowCollectionsParam.newBuilder()
-                .build());
+    ShowCollectionsParam.newBuilder().build()
+  );
 System.out.println(respShowCollections);
 ```
 

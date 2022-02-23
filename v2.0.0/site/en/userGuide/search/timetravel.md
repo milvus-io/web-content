@@ -34,8 +34,8 @@ from pymilvus import connections, Collection, FieldSchema, CollectionSchema, Dat
 connections.connect("default", host='localhost', port='19530')
 collection_name = "test_time_travel"
 schema = CollectionSchema([
-    FieldSchema("pk", DataType.INT64, is_primary=True),
-    FieldSchema("example_field", dtype=DataType.FLOAT_VECTOR, dim=2)
+  FieldSchema("pk", DataType.INT64, is_primary=True),
+  FieldSchema("example_field", dtype=DataType.FLOAT_VECTOR, dim=2)
 ])
 collection = Collection(collection_name, schema)
 ```
@@ -93,8 +93,8 @@ Insert random data to simulate the original data (Milvus CLI example uses a pre-
 ```python
 import random
 data = [
-    [i for i in range(10)],
-    [[random.random() for _ in range(2)] for _ in range(10)],
+  [i for i in range(10)],
+  [[random.random() for _ in range(2)] for _ in range(10)],
 ]
 batch1 = collection.insert(data)
 ```
@@ -181,8 +181,8 @@ Insert the second batch of data to simulate the dirty data, among which a piece 
 
 ```python
 data = [
-    [i for i in range(10, 20)],
-    [[random.random() for _ in range(2)] for _ in range(9)],
+  [i for i in range(10, 20)],
+  [[random.random() for _ in range(2)] for _ in range(9)],
 ]
 data[1].append([1.0,1.0])
 batch2 = collection.insert(data)
@@ -248,11 +248,11 @@ Load the collection and search the target data with the timestamp of the first d
 ```python
 collection.load()
 search_param = {
-    "data": [[1.0, 1.0]],
-    "anns_field": "example_field",
-    "param": {"metric_type": "L2"},
-    "limit": 10,
-    "travel_timestamp": batch1.timestamp,
+  "data": [[1.0, 1.0]],
+  "anns_field": "example_field",
+  "param": {"metric_type": "L2"},
+  "limit": 10,
+  "travel_timestamp": batch1.timestamp,
 }
 res = collection.search(**search_param)
 res[0].ids

@@ -35,10 +35,10 @@ Prepare the index parameters.
 
 ```python
 index_params = {
-        "metric_type":"L2",
-        "index_type":"IVF_FLAT",
-        "params":{"nlist":1024}
-    }
+  "metric_type":"L2",
+  "index_type":"IVF_FLAT",
+  "params":{"nlist":1024}
+}
 ```
 
 ```javascript
@@ -55,7 +55,7 @@ idx, err := entity.NewIndexIvfFlat(   // NewIndex func
     1024,                             // ConstructParams
 )
 if err != nil {
-    log.Fatal("fail to create ivf flat index parameter:", err.Error())
+  log.Fatal("fail to create ivf flat index parameter:", err.Error())
 }
 ```
 
@@ -323,9 +323,9 @@ Build the index by specifying the vector field name and index parameters.
 from pymilvus import Collection
 collection = Collection("book")      # Get an existing collection.
 collection.create_index(
-    field_name="book_intro", 
-    index_params=index_params
-    )
+  field_name="book_intro", 
+  index_params=index_params
+)
 ```
 
 ```python
@@ -342,27 +342,28 @@ await milvusClient.indexManager.createIndex({
 
 ```go
 err = milvusClient.CreateIndex(
-    context.Background(),        // ctx
-    "book",                      // CollectionName
-    "book_intro",                // fieldName
-    idx,                         // entity.Index
-    false,                       // async
+  context.Background(),        // ctx
+  "book",                      // CollectionName
+  "book_intro",                // fieldName
+  idx,                         // entity.Index
+  false,                       // async
 )
 if err != nil {
-    log.Fatal("fail to create index:", err.Error())
+  log.Fatal("fail to create index:", err.Error())
 }
 ```
 
 ```java
 milvusClient.createIndex(
-        CreateIndexParam.newBuilder()
-                .withCollectionName("book")
-                .withFieldName("book_intro")
-                .withIndexType(INDEX_TYPE)
-                .withMetricType(MetricType.L2)
-                .withExtraParam(INDEX_PARAM)
-                .withSyncMode(Boolean.FALSE)
-                .build());
+  CreateIndexParam.newBuilder()
+    .withCollectionName("book")
+    .withFieldName("book_intro")
+    .withIndexType(INDEX_TYPE)
+    .withMetricType(MetricType.L2)
+    .withExtraParam(INDEX_PARAM)
+    .withSyncMode(Boolean.FALSE)
+    .build()
+);
 ```
 
 ```shell

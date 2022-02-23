@@ -40,20 +40,21 @@ await milvusClient.collectionManager.loadCollection({
 
 ```go
 err := milvusClient.LoadCollection(
-    context.Background(),   // ctx
-    "book",                 // CollectionName
-    false                   // async
-    )
+  context.Background(),   // ctx
+  "book",                 // CollectionName
+  false                   // async
+)
 if err != nil {
-    log.Fatal("failed to load collection:", err.Error())
+  log.Fatal("failed to load collection:", err.Error())
 }
 ```
 
 ```java
 milvusClient.loadCollection(
-        LoadCollectionParam.newBuilder()
-                .withCollectionName("book")
-                .build());
+  LoadCollectionParam.newBuilder()
+    .withCollectionName("book")
+    .build()
+);
 ```
 
 ```shell
@@ -77,9 +78,9 @@ Milvus supports setting consistency level specifically for a search or query  (o
 
 ```python
 res = collection.query(
-	expr = "book_id in [2,4,6,8]", 
-	output_fields = ["book_id", "book_intro"],
-	consistency_level="strong"
+  expr = "book_id in [2,4,6,8]", 
+  output_fields = ["book_id", "book_intro"],
+  consistency_level="strong"
 )
 ```
 
@@ -107,10 +108,10 @@ if err != nil {
 ```java
 List<String> query_output_fields = Arrays.asList("book_id", "word_count");
 QueryParam queryParam = QueryParam.newBuilder()
-        .withCollectionName("book")
-        .withExpr("book_id in [2,4,6,8]")
-        .withOutFields(query_output_fields)
-        .build();
+  .withCollectionName("book")
+  .withExpr("book_id in [2,4,6,8]")
+  .withOutFields(query_output_fields)
+  .build();
 R<QueryResults> respQuery = milvusClient.query(queryParam);
 ```
 

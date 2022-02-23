@@ -39,23 +39,23 @@ First, prepare necessary parameters, including field schema, collection schema, 
 ```python
 from pymilvus import CollectionSchema, FieldSchema, DataType
 book_id = FieldSchema(
-    name="book_id", 
-    dtype=DataType.INT64, 
-    is_primary=True, 
-    )
+  name="book_id", 
+  dtype=DataType.INT64, 
+  is_primary=True, 
+)
 word_count = FieldSchema(
-    name="word_count", 
-    dtype=DataType.INT64,  
-    )
+  name="word_count", 
+  dtype=DataType.INT64,  
+)
 book_intro = FieldSchema(
-    name="book_intro", 
-    dtype=DataType.FLOAT_VECTOR, 
-    dim=2
-    )
+  name="book_intro", 
+  dtype=DataType.FLOAT_VECTOR, 
+  dim=2
+)
 schema = CollectionSchema(
-    fields=[book_id, word_count, book_intro], 
-    description="Test book search"
-    )
+  fields=[book_id, word_count, book_intro], 
+  description="Test book search"
+)
 collection_name = "book"
 ```
 
@@ -92,29 +92,29 @@ var (
 		collectionName = "book"
 	)
 schema := &entity.Schema{
-    CollectionName: collectionName,
-    Description:    "Test book search",
-    Fields: []*entity.Field{
-        {
-            Name:       "book_id",
-            DataType:   entity.FieldTypeInt64,
-            PrimaryKey: true,
-            AutoID:     false,
-        },
-        {
-            Name:       "word_count",
-            DataType:   entity.FieldTypeInt64,
-            PrimaryKey: false,
-            AutoID:     false,
-        },
-        {
-            Name:     "book_intro",
-            DataType: entity.FieldTypeFloatVector,
-            TypeParams: map[string]string{
-                "dim": "2",
-            },
-        },
+  CollectionName: collectionName,
+  Description:    "Test book search",
+  Fields: []*entity.Field{
+    {
+      Name:       "book_id",
+      DataType:   entity.FieldTypeInt64,
+      PrimaryKey: true,
+      AutoID:     false,
     },
+    {
+      Name:       "word_count",
+      DataType:   entity.FieldTypeInt64,
+      PrimaryKey: false,
+      AutoID:     false,
+    },
+    {
+      Name:     "book_intro",
+      DataType: entity.FieldTypeFloatVector,
+      TypeParams: map[string]string{
+          "dim": "2",
+      },
+    },
+  },
 }
 ```
 

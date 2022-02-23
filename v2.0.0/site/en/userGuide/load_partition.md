@@ -34,29 +34,30 @@ partition.load()
 
 ```javascript
 await milvusClient.partitionManager.loadPartitions({
-    collection_name: "book",
-    partition_names: ["novel"],
- });
+  collection_name: "book",
+  partition_names: ["novel"],
+});
 ```
 
 ```go
 err := milvusClient.LoadPartitions(
-    context.Background(),   // ctx
-    "book",                 // CollectionName
-    []string{"novel"},      // partitionNames
-    false                   // async
-    )
+  context.Background(),   // ctx
+  "book",                 // CollectionName
+  []string{"novel"},      // partitionNames
+  false                   // async
+)
 if err != nil {
-    log.Fatal("failed to load partitions:", err.Error())
+  log.Fatal("failed to load partitions:", err.Error())
 }
 ```
 
 ```java
 milvusClient.loadPartitions(
-        LoadPartitionsParam.newBuilder()
-                .withCollectionName("book")
-                .withPartitionNames(["novel"])
-                .build());
+  LoadPartitionsParam.newBuilder()
+          .withCollectionName("book")
+          .withPartitionNames(["novel"])
+          .build()
+);
 ```
 
 ```shell

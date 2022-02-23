@@ -40,20 +40,21 @@ await milvusClient.collectionManager.loadCollection({
 
 ```go
 err := milvusClient.LoadCollection(
-    context.Background(),   // ctx
-    "book",                 // CollectionName
-    false                   // async
-    )
+  context.Background(),   // ctx
+  "book",                 // CollectionName
+  false                   // async
+)
 if err != nil {
-    log.Fatal("failed to load collection:", err.Error())
+  log.Fatal("failed to load collection:", err.Error())
 }
 ```
 
 ```java
 milvusClient.loadCollection(
-        LoadCollectionParam.newBuilder()
-                .withCollectionName("book")
-                .build());
+  LoadCollectionParam.newBuilder()
+          .withCollectionName("book")
+          .build()
+);
 ```
 
 ```shell

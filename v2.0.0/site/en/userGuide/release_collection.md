@@ -31,20 +31,21 @@ await milvusClient.collectionManager.releaseCollection({
 
 ```go
 err := milvusClient.ReleaseCollection(
-    context.Background(),                            // ctx
-    "book",                                          // CollectionName
-    )
+  context.Background(),                            // ctx
+  "book",                                          // CollectionName
+)
 if err != nil {
-    log.Fatal("failed to release collection:", err.Error())
+  log.Fatal("failed to release collection:", err.Error())
 }
 ```
 
 
 ```java
 milvusClient.releaseCollection(
-        ReleaseCollectionParam.newBuilder()
-                .withCollectionName("book")
-                .build());
+  ReleaseCollectionParam.newBuilder()
+    .withCollectionName("book")
+    .build()
+);
 ```
 
 ```shell

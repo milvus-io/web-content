@@ -30,8 +30,8 @@ Specify an an alias for a collection.
 ```python
 from pymilvus import utility
 utility.create_alias(
-collection_name = "book",
-alias = "publication"
+  collection_name = "book",
+  alias = "publication"
 )
 ```
 
@@ -48,10 +48,11 @@ await milvusClient.collectionManager.createAlias({
 
 ```java
 milvusClient.createAlias(
-    CreateAliasParam.newBuilder()
+  CreateAliasParam.newBuilder()
     .withCollectionName("book")
     .withAlias("publication")
-    .build());
+    .build()
+);
 ```
 
 ```shell
@@ -156,9 +157,7 @@ Drop a specified alias.
 
 ```python
 from pymilvus import utility
-utility.drop_alias(
-alias = "publication"
-)
+utility.drop_alias(alias = "publication")
 ```
 
 ```javascript
@@ -173,9 +172,10 @@ await milvusClient.collectionManager.dropAlias({
 
 ```java
 milvusClient.dropAlias(
-    DropAliasParam.newBuilder()
+  DropAliasParam.newBuilder()
     .withAlias("publication")
-    .build());
+    .build()
+);
 ```
 
 ```shell
@@ -264,8 +264,8 @@ Alter an existing alias to another collection. The following example is based on
 ```python
 from pymilvus import utility
 utility.alter_alias(
-collection_name = "book",
-alias = "publication"
+  collection_name = "book",
+  alias = "publication"
 )
 ```
 
@@ -282,10 +282,11 @@ await milvusClient.collectionManager.alterAlias({
 
 ```java
 milvusClient.alterAlias(
-    AlterAliasParam.newBuilder()
+  AlterAliasParam.newBuilder()
     .withCollectionName("book")
     .withAlias("publication")
-    .build());
+    .build()
+);
 ```
 
 ```shell

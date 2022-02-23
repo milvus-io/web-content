@@ -33,21 +33,22 @@ await milvusClient.partitionManager.releasePartitions({
 
 ```go
 err := milvusClient.ReleasePartitions(
-    context.Background(),   // ctx
-    "book",                 // CollectionName
-    []string{"novel"}       // partitionNames
-    )
+  context.Background(),   // ctx
+  "book",                 // CollectionName
+  []string{"novel"}       // partitionNames
+)
 if err != nil {
-    log.Fatal("failed to release partitions:", err.Error())
+  log.Fatal("failed to release partitions:", err.Error())
 }
 ```
 
 ```java
 milvusClient.releasePartitions(
-        ReleasePartitionsParam.newBuilder()
-                .withCollectionName("book")
-                .withPartitionNames(["novel"])
-                .build());
+  ReleasePartitionsParam.newBuilder()
+    .withCollectionName("book")
+    .withPartitionNames(["novel"])
+    .build()
+);
 ```
 
 ```shell

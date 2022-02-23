@@ -28,10 +28,10 @@ First, prepare the data to insert.  Data type of the data to insert must match t
 ```python
 import random
 data = [
-    		[i for i in range(2000)],
-		[i for i in range(10000, 12000)],
-    		[[random.random() for _ in range(2)] for _ in range(2000)],
-		]
+  [i for i in range(2000)],
+  [i for i in range(10000, 12000)],
+  [[random.random() for _ in range(2)] for _ in range(2000)],
+]
 ```
 
 ```javascript
@@ -130,10 +130,10 @@ fields.add(new InsertParam.Field("word_count", DataType.Int64, word_count_array)
 fields.add(new InsertParam.Field("book_intro", DataType.FloatVector, book_intro_array));
 
 InsertParam insertParam = InsertParam.newBuilder()
-		.withCollectionName("book")
-		.withPartitionName("novel")
-		.withFields(fields)
-		.build();
+  .withCollectionName("book")
+  .withPartitionName("novel")
+  .withFields(fields)
+  .build();
 milvusClient.insert(insertParam);
 ```
 

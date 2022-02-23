@@ -32,10 +32,10 @@ Construct a Milvus connection. Ensure to connect to Milvus server before any ope
 # Run `python3` in your terminal to operate in the Python interactive mode.
 from pymilvus import connections
 connections.connect(
-	alias="default", 
-	host='localhost', 
-	port='19530'
-	)
+  alias="default", 
+  host='localhost', 
+  port='19530'
+)
 ```
 
 ```javascript
@@ -45,21 +45,22 @@ const milvusClient = new MilvusClient(address);
 ```
 
 ```go
-	milvusClient, err := client.NewGrpcClient(
-		context.Background(), // ctx
-		"localhost:19530",    // addr
-	)
-	if err != nil {
-		log.Fatal("failed to connect to Milvus:", err.Error())
-	}
+milvusClient, err := client.NewGrpcClient(
+  context.Background(), // ctx
+  "localhost:19530",    // addr
+)
+if err != nil {
+  log.Fatal("failed to connect to Milvus:", err.Error())
+}
 ```
 
 ```java
 final MilvusServiceClient milvusClient = new MilvusServiceClient(
-		ConnectParam.newBuilder()
-				.withHost("localhost")
-				.withPort(19530)
-				.build());
+  ConnectParam.newBuilder()
+    .withHost("localhost")
+    .withPort(19530)
+    .build()
+);
 ```
 
 ```shell

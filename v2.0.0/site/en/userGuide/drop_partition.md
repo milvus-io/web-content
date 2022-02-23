@@ -37,21 +37,22 @@ await milvusClient.partitionManager.dropPartition({
 
 ```go
 err := milvusClient.DropPartition(
-    context.Background(),   // ctx
-    "book",                 // CollectionName
-    "novel",                // partitionName
-    )
+  context.Background(),   // ctx
+  "book",                 // CollectionName
+  "novel",                // partitionName
+)
 if err != nil {
-    log.Fatal("fail to drop partition:", err.Error())
+  log.Fatal("fail to drop partition:", err.Error())
 }
 ```
 
 ```java
 milvusClient.dropPartition(
-        DropPartitionParam.newBuilder()
-                .withCollectionName("book")
-                .withPartitionName("novel")
-                .build());
+  DropPartitionParam.newBuilder()
+    .withCollectionName("book")
+    .withPartitionName("novel")
+    .build()
+);
 ```
 
 ```shell

@@ -36,24 +36,25 @@ await milvusClient.partitionManager.hasPartition({
 
 ```go
 hasPar, err := milvusClient.HasPartition(
-    context.Background(),   // ctx
-    "book",                 // CollectionName
-    "novel",                // partitionName
-    )
+  context.Background(),   // ctx
+  "book",                 // CollectionName
+  "novel",                // partitionName
+)
 if err != nil {
-    log.Fatal("failed to check the partition:", err.Error())
+  log.Fatal("failed to check the partition:", err.Error())
 }
 log.Println(hasPar)
 ```
 
 ```java
 R<Boolean> respHasPartition = milvusClient.hasPartition(
-        HasPartitionParam.newBuilder()
-                .withCollectionName("book")
-                .withPartitionName("novel")
-                .build());
+  HasPartitionParam.newBuilder()
+    .withCollectionName("book")
+    .withPartitionName("novel")
+    .build()
+);
 if (respHasCollection.getData() == Boolean.TRUE) {
-    System.out.println("Partition exists.");
+  System.out.println("Partition exists.");
 }
 ```
 
@@ -164,20 +165,21 @@ await milvusClient.partitionManager.showPartitions({
 
 ```go
 partitions, err := milvusClient.ShowPartitions(
-    context.Background(),   // ctx
-    "book",                 // CollectionName
-    )
+  context.Background(),   // ctx
+  "book",                 // CollectionName
+)
 if err != nil {
-    log.Fatal("failed to list partitions:", err.Error())
+  log.Fatal("failed to list partitions:", err.Error())
 }
 log.Println(listPar)
 ```
 
 ```java
 R<ShowPartitionsResponse> respShowPartitions = milvusClient.showPartitions(
-        ShowPartitionsParam.newBuilder()
-                .withCollectionName("book")
-                .build());
+  ShowPartitionsParam.newBuilder()
+          .withCollectionName("book")
+          .build()
+);
 System.out.println(respShowPartitions);
 ```
 

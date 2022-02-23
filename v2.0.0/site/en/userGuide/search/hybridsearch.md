@@ -40,20 +40,21 @@ await milvusClient.collectionManager.loadCollection({
 
 ```go
 err := milvusClient.LoadCollection(
-    context.Background(),   // ctx
-    "book",                 // CollectionName
-    false                   // async
-    )
+  context.Background(),   // ctx
+  "book",                 // CollectionName
+  false                   // async
+)
 if err != nil {
-    log.Fatal("failed to load collection:", err.Error())
+  log.Fatal("failed to load collection:", err.Error())
 }
 ```
 
 ```java
 milvusClient.loadCollection(
-        LoadCollectionParam.newBuilder()
-                .withCollectionName("book")
-                .build());
+  LoadCollectionParam.newBuilder()
+    .withCollectionName("book")
+    .build()
+);
 ```
 
 ```shell
@@ -76,11 +77,11 @@ By specifying the boolean expression, you can filter the scalar field of the ent
 
 ```python
 search_param = {
-    "data": [[0.1, 0.2]],
-    "anns_field": "book_intro",
-    "param": {"metric_type": "L2", "params": {"nprobe": 10}},
-    "limit": 2,
-    "expr": "word_count <= 11000",
+  "data": [[0.1, 0.2]],
+  "anns_field": "book_intro",
+  "param": {"metric_type": "L2", "params": {"nprobe": 10}},
+  "limit": 2,
+  "expr": "word_count <= 11000",
 }
 res = collection.search(**search_param)
 ```
@@ -128,15 +129,15 @@ List<String> search_output_fields = Arrays.asList("book_id");
 List<List<Float>> search_vectors = Arrays.asList(Arrays.asList(0.1f, 0.2f));
 
 SearchParam searchParam = SearchParam.newBuilder()
-        .withCollectionName("book")
-        .withMetricType(MetricType.L2)
-        .withOutFields(search_output_fields)
-        .withTopK(SEARCH_K)
-        .withVectors(search_vectors)
-        .withVectorFieldName("book_intro")
-        .withExpr("word_count <= 11000")
-        .withParams(SEARCH_PARAM)
-        .build();
+  .withCollectionName("book")
+  .withMetricType(MetricType.L2)
+  .withOutFields(search_output_fields)
+  .withTopK(SEARCH_K)
+  .withVectors(search_vectors)
+  .withVectorFieldName("book_intro")
+  .withExpr("word_count <= 11000")
+  .withParams(SEARCH_PARAM)
+  .build();
 R<SearchResults> respSearch = milvusClient.search(searchParam);
 ```
 
