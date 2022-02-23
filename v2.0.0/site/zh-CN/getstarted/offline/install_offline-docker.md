@@ -19,7 +19,7 @@ group: install_offline-docker.md
 - 单机版 Milvus
 
 ```
-$ wget https://github.com/milvus-io/milvus/releases/download/v2.0.0/milvus-standalone-docker-compose.yml -O docker-compose.yml
+$ wget https://github.com/milvus-io/milvus/releases/download/v2.0.1/milvus-standalone-docker-compose.yml -O docker-compose.yml
 $ wget https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/offline/requirements.txt
 $ wget https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/offline/save_image.py
 ```

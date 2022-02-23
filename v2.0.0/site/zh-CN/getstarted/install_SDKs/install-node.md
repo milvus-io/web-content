@@ -43,5 +43,5 @@ Having installed Milvus Node.js SDK, you can:
   - [Conduct a vector search](search.md)
   - [Conduct a hybrid search](hybridsearch.md)
 
-- Explore [Milvus Node.js API reference](/api-reference/node/v2.0.0/tutorial.html)
+- Explore [Milvus Node.js API reference](/api-reference/node/v2.0.1/tutorial.html)
 

@@ -4,6 +4,67 @@ id: release_notes.md
 
 # 发版说明
 
+## v2.0.1
+
+Release date: 2022-02-23
+
+<h3 id="v2.0.0">Compatibility</h3>
+
+<table class="version">
+	<thead>
+	<tr>
+		<th>Milvus version</th>
+		<th>Python SDK version</th>
+		<th>Java SDK version</th>
+		<th>Go SDK version</th>
+		<th>Node.js SDK version</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>2.0.1</td>
+		<td>2.0.1</td>
+		<td>2.0.4</td>
+		<td>2.0.0</td>
+		<td>2.0.1</td>
+	</tr>
+	</tbody>
+</table>
+
+
+Milvus 2.0.1 is a minor bug-fix version of Milvus 2.0. The key progress of Milvus 2.0.1 includes that, first, the execution engine of Milvus `knowhere` was separated from the Milvus repository and moved to a new one - [milvus-io/knowhere](https://github.com/milvus-io/knowhere), and, second, supports were enabled for Milvus to be compiled across multiple platforms. We fixed a few critical issues that cause query node crash, index building failure, and server hang. The default dependency of Golang is upgraded to solve memory usage issues. We also upgrade the default dependency of Pulsar to solve the `log4j` security issue.
+
+<h3 id="v2.0.1">Improvements</h3>
+
+- [#15491](https://github.com/milvus-io/milvus/pull/15491) Supports compiling and running Milvus on Mac.
+- [#15453](https://github.com/milvus-io/milvus/pull/15453) Adds log when removing keys in garbage collector. 
+- [#15551](https://github.com/milvus-io/milvus/pull/15551) Avoids copying while converting C bytes to Go bytes.
+- [#15377](https://github.com/milvus-io/milvus/pull/15377) Adds `collectionID` to the return of `SearchResults` and `QueryResults`. 
+
+<h3 id="v2.0.1">Features</h3>
+
+- [#14418](https://github.com/milvus-io/milvus/pull/14418) Implements automatic item expiration on compaction.
+- [#15542](https://github.com/milvus-io/milvus/pull/15542) Implements mixed compaction logic.
+
+<h3 id="v2.0.1">Bug fixes</h3>
+
+- [#15702](https://github.com/milvus-io/milvus/pull/15702) Data coord panics if message queue service quits before it closes.
+- [#15663](https://github.com/milvus-io/milvus/pull/15663) Query node crashes on concurrent search.
+- [#15580](https://github.com/milvus-io/milvus/pull/15580) Data node panics when compacting empty segment.
+- [#15626](https://github.com/milvus-io/milvus/pull/15626) Failed to create index when segment size is set to large than 2GB.
+- [#15497](https://github.com/milvus-io/milvus/pull/15497) `SessionWatcher` quits if not re-watch logic is provided when meeting `ErrCompacted`.
+- [#15530](https://github.com/milvus-io/milvus/pull/15530) Segments under Flushing status are not treated as Flushed segment.
+- [#15436](https://github.com/milvus-io/milvus/pull/15436) Watch DML channel failed because of no collection meta, causing load collection failure.
+- [#15455](https://github.com/milvus-io/milvus/pull/15455) `SegmentIDs` is not respected when `querynode.GetSegmentInfo` is called.
+- [#15482](https://github.com/milvus-io/milvus/pull/15482) `EntriesNum` of delta logs is not recorded correctly in segment meta.
+
+<h3 id="v2.0.1">Dependency Upgrade</h3>
+
+- [#11393](https://github.com/milvus-io/milvus/pull/11393) Upgrades Golang from 1.15.2 to 1.16.9.
+- [#15603](https://github.com/milvus-io/milvus/pull/15603) Upgrades `Knowhere` to 1.0.1.
+- [#15580](https://github.com/milvus-io/milvus/pull/15580) Upgrades Pulsar from 2.7.3 to 2.8.2.
+
+
 ## v2.0.0
 
 Release date: 2022-01-25
@@ -342,7 +403,7 @@ Milvus 2.0.0-RC8 是 2.0 的最后一个预览版本。在该版本中，Milvus 
 		<td>2.0.0rc7</td>
 		<td>即将上线</td>
 		<td>即将上线</td>
-		<td>2.0.0</td>
+		<td>2.0.1</td>
 	</tr>
 	</tbody>
 </table>
@@ -527,7 +588,7 @@ Milvus 2.0.0-RC7 是 2.0 的预览版本。该版本支持 collection 别名，P
 		<td>2.0.0rc6</td>
 		<td>即将上线</td>
 		<td>即将上线</td>
-		<td>2.0.0</td>
+		<td>2.0.1</td>
 	</tr>
 	</tbody>
 </table>
@@ -590,7 +651,7 @@ Milvus 2.0.0-RC6 是 2.0 的预览版本。该版本支持创建 collection 时�
 		<td>2.0.0rc5</td>
 		<td>即将上线</td>
 		<td>即将上线</td>
-		<td>2.0.0</td>
+		<td>2.0.1</td>
 	</tr>
 	</tbody>
 </table>
