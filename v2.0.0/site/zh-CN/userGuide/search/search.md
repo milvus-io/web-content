@@ -4,25 +4,20 @@ related_key: search
 summary: Conduct a vector similarity search with Milvus.
 ---
 
-# Conduct a Vector Similarity Search
-
-<div class="alert note">
-<h3>Milvus Docs 需要你的帮助</h3>
-本文档暂时没有中文版本，欢迎你成为社区贡献者，协助中文技术文档的翻译。<br>
-你可以通过页面右边的 <b>编辑</b> 按钮直接贡献你的翻译。更多详情，参考 <a href="https://github.com/milvus-io/milvus-docs/blob/v2.0.0/CONTRIBUTING.md">贡献指南</a>。如需帮助，你可以 <a href="https://github.com/milvus-io/milvus-docs/issues/new/choose">提交 GitHub Issue</a>。
-</div>
+# 进行向量相似性搜索
 
 
-This topic describes how to search entities with Milvus.
 
-A vector similarity search in Milvus calculates the distance between query vector(s) and vectors in the collection with specified similarity metrics, and returns the most similar results. By specifying a [boolean expression](boolean.md) that filters the scalar field or the primary key field, you can perform a [hybrid search](hybridsearch.md) or even a search with [Time Travel](timetravel.md).
+本主题介绍如何使用 Milvus 搜索 entities 。
 
-The following example shows how to perform a vector similarity search on a 2000-row dataset of book ID (primary key), word count (scalar field), and book introduction (vector field), simulating the situation that you search for certain books based on their vectorized introductions. Milvus will return the most similar results according to the query vector and search parameters you have defined. 
+Milvus 中的向量相似度搜索计算查询向量与 collection 中具有指定相似度度量的向量之间的距离，并返回最相似的结果。通过指定过滤标量 field 或者主键 field 的 [布尔表达式](boolean.md) ，你可以执行 [混合搜索](hybridsearch.md)，甚至使用 [Time Travel](timetravel.md)来进行搜索。
+
+下面的例子展示了如何对一个拥有 2000 行数据的数据集进行向量相似度搜索，模拟你基于书籍介绍的特征向量搜索某些书籍的情况。该数据集包含 book ID (primary key) 、 word count (标量 field) 和 book introduction (向量 field)。 Milvus 会根据你定义的查询向量和搜索参数返回最相似的结果。
 
 
-## Load collection
+## 加载 collection
 
-All search and query operations within Milvus are executed in memory. Load the collection to memory before conducting a vector similarity search.
+Milvus 中的所有搜索和查询操作都在内存中执行。在执行向量相似性搜索之前将 collection 加载到内存中。
 
 <div class="multipleCode">
   <a href="?python">Python </a>
@@ -67,9 +62,11 @@ milvusClient.loadCollection(
 load -c book
 ```
 
-## Prepare search parameters
 
-Prepare the parameters that suit your search scenario. The following example defines that the search will calculate the distance with Euclidean distance, and retrieve vectors from ten closest clusters built by the IVF_FLAT index.
+## 准备搜索参数
+
+
+准备适合你的搜索场景的参数。下面的示例定义了搜索将使用欧式距离计算，并从 IVF_FLAT 索引构建的十个最近的聚类中检索向量。
 
 <div class="multipleCode">
   <a href="?python">Python </a>
@@ -133,18 +130,18 @@ Travel Timestamp(Specify a timestamp in a search to get results based on a data 
 <table class="language-python">
 	<thead>
 	<tr>
-		<th>Parameter</th>
-		<th>Description</th>
+		<th>参数</th>
+		<th>说明</th>
 	</tr>
 	</thead>
 	<tbody>
 	<tr>
 		<td><code>metric_type</code></td>
-		<td>Metrics used to measure similarity of vectors. See <a href="metric.md">Simlarity Metrics</a> for more information.</td>
+		<td>用于衡量向量相似性的指标。详细信息请参考 <a href="metric.md">距离计算方式</a>。 </td>
 	</tr>
     <tr>
 		<td><code>params</code></td>
-		<td>Search parameter(s) specific to the index. See <a href="index.md">Vector Index</a> for more information.</td>
+		<td>该索引特有的搜索参数。详细信息请参考 <a href="index.md">向量索引</a> 。</td>
 	</tr>
 	</tbody>
 </table>
@@ -152,26 +149,26 @@ Travel Timestamp(Specify a timestamp in a search to get results based on a data 
 <table class="language-javascript">
 	<thead>
 	<tr>
-		<th>Parameter</th>
-		<th>Description</th>
+		<th>参数</th>
+		<th>说明</th>
 	</tr>
 	</thead>
 	<tbody>
     <tr>
 		<td><code>anns_field</code></td>
-		<td>Name of the field to search on.</td>
+		<td>要搜索的 field 名称。</td>
 	</tr>
 	<tr>
 		<td><code>topk</code></td>
-		<td>Number of the most similar results to return.</td>
+		<td>输出向量结果数。</td>
 	</tr>
 	<tr>
 		<td><code>metric_type</code></td>
-		<td>Metrics used to measure similarity of vectors. See <a href="metric.md">Simlarity Metrics</a> for more information.</td>
+		<td>用于衡量向量相似性的指标。详细信息请参考 <a href="metric.md">距离计算方式</a>。</td>
 	</tr>
     <tr>
 		<td><code>params</code></td>
-		<td>Search parameter(s) specific to the index. See <a href="index.md">Vector Index</a> for more information.</td>
+		<td>该索引特有的搜索参数。详细信息请参考 <a href="index.md">向量索引</a> 。</td>
 	</tr>
 	</tbody>
 </table>
@@ -179,16 +176,16 @@ Travel Timestamp(Specify a timestamp in a search to get results based on a data 
 <table class="language-go">
 	<thead>
 	<tr>
-		<th>Parameter</th>
-		<th>Description</th>
-    <th>Options</th>
+		<th>参数</th>
+		<th>说明</th>
+    <th>选项</th>
 	</tr>
 	</thead>
 	<tbody>
 	<tr>
 		<td><code>NewIndex*SearchParam func</code></td>
-		<td>Function to create entity.SearchParam according to different index types.</td>
-        <td>For floating point vectors:
+		<td>根据不同的索引类型创建 entity.SearchParam 的函数。</td>
+        <td>浮点型向量：
             <ul>
                 <li><code>NewIndexFlatSearchParam</code> (FLAT)</li>
                 <li><code>NewIndexIvfFlatSearchParam</code> (IVF_FLAT)</li>
@@ -201,7 +198,7 @@ Travel Timestamp(Specify a timestamp in a search to get results based on a data 
                 <li><code>NewIndexRHNSW_PQSearchParam</code> (RHNSW_PQ)</li>
                 <li><code>NewIndexRHNSW_SQSearchParam</code> (RHNSW_SQ)</li>
             </ul>
-            For binary vectors:
+            二进制型向量：
             <ul>
                 <li><code>NewIndexBinFlatSearchParam</code> (BIN_FLAT)</li>
                 <li><code>NewIndexBinIvfFlatSearchParam</code> (BIN_IVF_FLAT)</li>
@@ -210,8 +207,8 @@ Travel Timestamp(Specify a timestamp in a search to get results based on a data 
 	</tr>
 	<tr>
 		<td><code>searchParam</code></td>
-		<td>Search parameter(s) specific to the index.</td>
-    <td>See <a href="index.md">Vector Index</a> for more information.</td>
+		<td>该索引特有的搜索参数。</td>
+    <td>详细信息请参考 <a href="index.md">向量索引</a> 。</td>
 	</tr>
 	</tbody>
 </table>
@@ -219,21 +216,21 @@ Travel Timestamp(Specify a timestamp in a search to get results based on a data 
 <table class="language-java">
 	<thead>
 	<tr>
-		<th>Parameter</th>
-		<th>Description</th>
-    	<th>Options</th>
+		<th>参数</th>
+		<th>说明</th>
+    	<th>选项</th>
 	</tr>
 	</thead>
 	<tbody>
   <tr>
 		<td><code>TopK</code></td>
-		<td>Number of the most similar results to return.</td>
+		<td>输出向量结果数。</td>
     <td>N/A</td>
 	</tr>
   <tr>
 		<td><code>Params</code></td>
-		<td>Search parameter(s) specific to the index.</td>
-    <td>See <a href="index.md">Vector Index</a> for more information.</td>
+		<td>该索引特有的搜索参数。</td>
+    <td>详细信息请参考 <a href="index.md">向量索引</a> 。</td>
 	</tr>
 	</tbody>
 </table>
@@ -242,24 +239,24 @@ Travel Timestamp(Specify a timestamp in a search to get results based on a data 
 <table class="language-shell">
     <thead>
         <tr>
-            <th>Option</th>
-            <th>Full name</th>
-            <th>Description</th>
+            <th>选项</th>
+            <th>全称</th>
+            <th>说明</th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td>--help</td>
             <td>n/a</td>
-            <td>Displays help for using the command.</td>
+            <td>显示使用命令的帮助。</td>
         </tr>
     </tbody>
 </table>
 
 
-## Conduct a vector search
+## 进行向量搜索
 
-Search vectors with Milvus. To search in a specific [partition](glossary.md#Partition), specify the list of partition names. 
+使用 Milvus 搜索向量。要在特定的[partition](glossary.md#Partition)中搜索，请指定 partition 名称列表。 
 
 Milvus supports setting consistency level specifically for a search or query  (only on PyMilvus currently). The consistency level set in the search or query requests overwrites the one set while creating the collection. In this example, the consistency level of the search request is set as "strong", meaning Milvus will read the most updated data view at the exact time point when a search or query request comes. Without specifying the consistency level during a search or query, Milvus adopts the original consistency level of the collection.
 
@@ -335,46 +332,46 @@ R<SearchResults> respSearch = milvusClient.search(searchParam);
 <table class="language-python">
 	<thead>
 	<tr>
-		<th>Parameter</th>
-		<th>Description</th>
+		<th>参数</th>
+		<th>说明</th>
 	</tr>
 	</thead>
 	<tbody>
     <tr>
 		<td><code>data</code></td>
-		<td>Vectors to search with.</td>
+		<td>用于搜索的向量。</td>
 	</tr>
 	<tr>
 		<td><code>anns_field</code></td>
-		<td>Name of the field to search on.</td>
+		<td>要搜索的 field 名称。</td>
 	</tr>
   <tr>
 		<td><code>params</code></td>
-		<td>Search parameter(s) specific to the index. See <a href="index.md">Vector Index</a> for more information.</td>
+		<td>该索引特有的搜索参数。详细信息请参考 <a href="index.md">向量索引</a> 。</td>
 	</tr>
 	<tr>
 		<td><code>limit</code></td>
-		<td>Number of the most similar results to return.</td>
+		<td>输出向量结果数。</td>
 	</tr>
   <tr>
 		<td><code>expr</code></td>
-		<td>Boolean expression used to filter attribute. See <a href="boolean.md">Boolean Expression Rules</a> for more information.</td>
+		<td>用于过滤属性的布尔表达式。有关详细信息，请参考 <a href="boolean.md">布尔表达式规则</a>。</td>
 	</tr>
   <tr>
 		<td><code>partition_names</code> (optional)</td>
-		<td>List of names of the partition to search in.</td>
+		<td>要搜索的 partition 名称列表</td>
 	</tr>
   <tr>
 		<td><code>output_fields</code> (optional)</td>
-		<td>Name of the field to return. Vector field is not supported in current release.</td>
+		<td>返回的 field 名称。当前版本不支持 Vector filed 。</td>
 	</tr>
   <tr>
 		<td><code>timeout</code> (optional)</td>
-		<td>A duration of time in seconds to allow for RPC. Clients wait until server responds or error occurs when it is set to None.</td>
+		<td>允许 RPC 的持续时间（以秒为单位）。当设置为 None 时，客户端等待服务器响应或者发生错误。</td>
 	</tr>
   <tr>
 		<td><code>round_decimal</code> (optional)</td>
-		<td>Number of decimal places of returned distance.</td>
+		<td>返回距离的小数位数。</td>
 	</tr>
 	<tr>
 		<td><code>consistency_level</code> (optional)</td>
@@ -386,38 +383,38 @@ R<SearchResults> respSearch = milvusClient.search(searchParam);
 <table class="language-javascript">
 	<thead>
 	<tr>
-		<th>Parameter</th>
-		<th>Description</th>
+		<th>参数</th>
+		<th>说明</th>
 	</tr>
 	</thead>
 	<tbody>
 	<tr>
 		<td><code>collection_name</code></td>
-		<td>Name of the collection to search in.</td>
+		<td>要搜索的 collection 名称。</td>
 	</tr>
 	<tr>
     <td><code>search_params</code></td>
-    <td>Parameters (as an object) used for search.</td>
+    <td>用于搜索的参数（作为对象）。</td>
   </tr>
 	<tr>
     <td><code>vectors</code></td>
-    <td>Vectors to search with.</td>
+    <td>用于搜索的向量。</td>
   </tr>
   <tr>
 		<td><code>vector_type</code></td>
-		<td>Pre-check of binary or float vectors. <code>100</code> for binary vectors and <code>101</code> for float vectors.</td>
+		<td>二进制型或浮点型向量的预检查。二进制型向量为<code>100</code> ，浮点型向量为<code>101</code>。</td>
 	</tr>
   <tr>
 		<td><code>partition_names</code> (optional)</td>
-		<td>List of names of the partition to search in.</td>
+		<td>要搜索的 partition 名称列表。</td>
 	</tr>
     <tr>
 		<td><code>expr</code> (optional)</td>
-		<td>Boolean expression used to filter attribute. See <a href="boolean.md">Boolean Expression Rules</a> for more information.</td>
+		<td>用于过滤属性的布尔表达式。有关详细信息，请参考 <a href="boolean.md">布尔表达式规则</a>。</td>
 	</tr>
   <tr>
 		<td><code>output_fields</code> (optional)</td>
-		<td>Name of the field to return. Vector field is not supported in current release.</td>
+		<td>返回的 field 名称。当前版本不支持 Vector field 。</td>
 	</tr>
 	</tbody>
 </table>
@@ -425,60 +422,60 @@ R<SearchResults> respSearch = milvusClient.search(searchParam);
 <table class="language-go">
 	<thead>
 	<tr>
-		<th>Parameter</th>
-		<th>Description</th>
-    <th>Options</th>
+		<th>参数</th>
+		<th>说明</th>
+    <th>选项</th>
 	</tr>
 	</thead>
 	<tbody>
   <tr>
     <td><code>ctx</code></td>
-    <td>Context to control API invocation process.</td>
+    <td>控制 API 调用过程的 Context 。</td>
     <td>N/A</td>
   </tr>
   <tr>
     <td><code>CollectionName</code></td>
-    <td>Name of the collection to load.</td>
+    <td>要加载的 collection 名称。</td>
     <td>N/A</td>
   </tr>
   <tr>
     <td><code>partitionNames</code></td>
-    <td>List of names of the partitions to load. All partitions will be searched if it is left empty.</td>
+    <td>要加载的 partition 名称列表。如果将其置空，将搜索所有的 partition 。</td>
     <td>N/A</td>
   </tr>
   <tr>
 		<td><code>expr</code></td>
 		<td>Boolean expression used to filter attribute.</td>
-    <td>See <a href="boolean.md">Boolean Expression Rules</a> for more information.</td>
+    <td>有关详细信息，请参考 <a href="boolean.md">布尔表达式规则</a>。</td>
 	</tr>
   <tr>
 		<td><code>output_fields</code></td>
-		<td>Name of the field to return.</td>
-    <td>Vector field is not supported in current release.</td>
+		<td>要返回的 field 名称。</td>
+    <td>当前版本不支持 Vector field 。</td>
 	</tr>
   <tr>
     <td><code>vectors</code></td>
-    <td>Vectors to search with.</td>
+    <td>用于搜索的向量。</td>
     <td>N/A</td>
   </tr>
   <tr>
 		<td><code>vectorField</code></td>
-		<td>Name of the field to search on.</td>
+		<td>要搜索的 filed 名称。</td>
     <td>N/A</td>
 	</tr>
   <tr>
 		<td><code>metricType</code></td>
-		<td>Metric type used for search.</td>
-    <td>This parameter must be set identical to the metric type used for index building.</td>
+		<td>用于搜索的指标类型。</td>
+    <td>此参数必须设置为与用于索引构建的指标类型相同。</td>
 	</tr>
   <tr>
 		<td><code>topK</code></td>
-		<td>Number of the most similar results to return.</td>
+		<td>输出向量结果数。</td>
     <td>N/A</td>
 	</tr>
   <tr>
 		<td><code>sp</code></td>
-		<td>entity.SearchParam specific to the index.</td>
+		<td>该索引特有的搜索参数 entity.SearchParam 。</td>
     <td>N/A</td>
 	</tr>
 	</tbody>
@@ -487,48 +484,48 @@ R<SearchResults> respSearch = milvusClient.search(searchParam);
 <table class="language-java">
 	<thead>
 	<tr>
-		<th>Parameter</th>
-		<th>Description</th>
-    <th>Options</th>
+		<th>参数</th>
+		<th>说明</th>
+    <th>选项</th>
 	</tr>
 	</thead>
 	<tbody>
 	<tr>
     <td><code>CollectionName</code></td>
-    <td>Name of the collection to load.</td>
+    <td>要加载的 collection 名称。</td>
     <td>N/A</td>
   </tr>
   <tr>
 		<td><code>MetricType</code></td>
-		<td>Metric type used for search.</td>
-    <td>This parameter must be set identical to the metric type used for index building.</td>
+		<td>距离计算方式</td>
+    <td>此参数必须设置为与用于索引构建的指标类型相同。</td>
 	</tr>
   <tr>
 		<td><code>OutFields</code></td>
-		<td>Name of the field to return.</td>
-    <td>Vector field is not supported in current release.</td>
+		<td>要返回的 field 名称。.</td>
+    <td>当前版本不支持 Vector field 。</td>
 	</tr>
   <tr>
     <td><code>Vectors</code></td>
-    <td>Vectors to search with.</td>
+    <td>用于搜索的向量。</td>
     <td>N/A</td>
   </tr>
 <tr>
 		<td><code>VectorFieldName</code></td>
-		<td>Name of the field to search on.</td>
+		<td>要搜索的 field 名称。</td>
     <td>N/A</td>
 	</tr>
   <tr>
 		<td><code>Expr</code></td>
-		<td>Boolean expression used to filter attribute.</td>
-    <td>See <a href="boolean.md">Boolean Expression Rules</a> for more information.</td>
+		<td>用于过滤属性的布尔表达式。</td>
+    <td>有关详细信息，请参考 <a href="boolean.md">布尔表达式规则</a>。</td>
 	</tr>
 	</tbody>
 </table>
 
 
 
-Check the primary key values of the most similar vectors and their distances.
+查看最相似向量的 primary key 及其距离值。
 
 <div class="multipleCode">
   <a href="?python">Python </a>
@@ -566,7 +563,7 @@ System.out.println(wrapperSearch.getFieldData("book_id", 0));
 # Milvus CLI automatically returns the primary key values of the most similar vectors and their distances.
 ```
 
-Release the collection loaded in Milvus to reduce memory consumption when the search is completed.
+搜索完成时释放 Milvus 中加载的 collection 以减少内存消耗。
 
 <div class="multipleCode">
   <a href="?python">Python </a>
@@ -606,24 +603,24 @@ milvusClient.releaseCollection(
 release -c book
 ```
 
-## Limits
-|Feature|Maximum limit|
+## 限制
+|特性|最大限制|
 |---|---|
-|Length of a collection name|255 characters|
-|Number of partitions in a collection|4,096|
-|Number of fields in a collection|256|
-|Number of shards in a collection|256|
-|Dimensions of a vector|32,768|
+|collection 的名称长度|255 characters|
+|collection 中的 partition 数量|4,096|
+|collection 中的 field 数量|256|
+|collection 中的 shard 数|256|
+|向量维度|32,768|
 |Top K|16,384|
-|Target input vectors|16,384|
+|目标输入向量数|16,384|
 
 
-## What's next
+## 更多内容
 
-- Learn more basic operations of Milvus:
-  - [Query vectors](query.md)
-  - [Conduct a hybrid search](hybridsearch.md)
-  - [Search with Time Travel](timetravel.md)
-- Explore API references for Milvus SDKs:
-  - [PyMilvus API reference](/api-reference/pymilvus/v2.0.0/tutorial.html)
-  - [Node.js API reference](/api-reference/node/v2.0.0/tutorial.html)
+- 了解更多关于 Milvus 的基本操作:
+  - [查询向量](query.md)
+  - [进行混合搜索](hybridsearch.md)
+  - [使用 Time Travel 搜索](timetravel.md)
+- 探索 Milvus SDKs 的 API 参考:
+  - [PyMilvus API 参考](/api-reference/pymilvus/v2.0.0/tutorial.html)
+  - [Node.js API 参考](/api-reference/node/v2.0.0/tutorial.html)
