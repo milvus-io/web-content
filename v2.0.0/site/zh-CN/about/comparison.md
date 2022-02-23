@@ -87,7 +87,7 @@ Milvus 2.0 是基于消息存储构建的分布式数据库，遵循 PACELC 定�
 	</tr>
 	<tr>
 		<th>基本操作</th>
-		<td><li>插入数据</li><li>删除数据 (开发中)</li><li>数据查询</li><li>相似最邻近（ANN）搜索</li><li>基于半径的最近邻算法（RNN） (开发中)</li></td>
+		<td><li>插入数据</li><li>删除数据</li><li>数据查询</li><li>相似最邻近（ANN）搜索</li><li>基于半径的最近邻算法（RNN） (开发中)</li></td>
 		<td><li>插入数据</li><li>删除数据</li><li>相似最邻近（ANN）搜索</li></td>
 	</tr>
 	<tr>
@@ -102,7 +102,7 @@ Milvus 2.0 是基于消息存储构建的分布式数据库，遵循 PACELC 定�
 	</tr>
 	<tr>
 		<th>SDK</th>
-		<td><li>Python</li><li>Node.js</li><li>Go (开发中)</li><li>Java (开发中)</li><li>C++ (开发中)</li></td>
+		<td><li>Python</li><li>Node.js</li><li>Go</li><li>Java</li><li>C++ (开发中)</li></td>
 		<td><li>Python</li><li>Java</li><li>Go</li><li>RESTful</li><li>C++</li></td>
 	</tr>
 	<tr>
