@@ -483,7 +483,7 @@ collection = Collection(
     schema=schema, 
     using='default', 
     shards_num=2,
-    consistency_level="strong"
+    consistency_level="Strong"
     )
 ```
 
