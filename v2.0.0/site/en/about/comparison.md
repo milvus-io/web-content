@@ -112,7 +112,7 @@ Object-relational mapping (ORM) allows users to focus more on the upper-level bu
 	</tr>
 	<tr>
 		<th>Release status</th>
-		<td>Release candidate. A stable version will be released in August.</td>
+		<td>General available release</td>
 		<td>Long-term support (LTS)</td>
 	</tr>
 </tbody>
