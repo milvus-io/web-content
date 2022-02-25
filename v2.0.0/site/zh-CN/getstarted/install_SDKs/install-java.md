@@ -7,30 +7,25 @@ group: install-pymilvus.md
 summary: Learn how to install the Java SDK of Milvus.
 ---
 
-# Install Milvus SDK
-
-<div class="alert note">
-<h3>Milvus Docs 需要你的帮助</h3>
-本文档暂时没有中文版本，欢迎你成为社区贡献者，协助中文技术文档的翻译。<br>
-你可以通过页面右边的 <b>编辑</b> 按钮直接贡献你的翻译。更多详情，参考 <a href="https://github.com/milvus-io/milvus-docs/blob/v2.0.0/CONTRIBUTING.md">贡献指南</a>。如需帮助，你可以 <a href="https://github.com/milvus-io/milvus-docs/issues/new/choose">提交 GitHub Issue</a>。
-</div>
+# 安装 Milvus SDK
 
 
 
-This topic describes how to install Milvus SDK for Milvus.
 
-Current version of Milvus supports SDKs in Python, Node.js, GO, and Java.
+本主题介绍如何为 Milvus 安装 Milvus SDK。
+
+当前版本的 Milvus 支持 Python、Node.js、GO 和 Java 的 SDK。
 
 <div class="tab-wrapper"><a href="install-pymilvus.md" class=''>Install PyMilvus</a><a href="install-node.md" class=''>Install Node.js SDK</a><a href="install-go.md" class=''>Install GO SDK</a><a href="install-java.md" class='active '>Install Java SDK</a></div>
 
-## Requirement
+## 安装前提
 
-- Java (8 or later)
-- Apache Maven or Gradle/Grails
+- Java （8 或更高版本）
+- Apache Maven 或者 Gradle/Grails
 
-## Install Milvus Java SDK
+## 安装 Milvus Java SDK
 
-Run the following command to install Milvus Java SDK.
+运行以下命令安装 Milvus Java SDK。
 
 - Apache Maven
 
@@ -48,14 +43,14 @@ Run the following command to install Milvus Java SDK.
 compile 'io.milvus:milvus-sdk-java:2.0.0'
 ```
 
-## What's next
+## 更多内容
 
-Having installed Milvus Java SDK, you can:
+安装 Milvus Java SDK 后，你可以：
 
-- Learn the basic operations of Milvus:
-  - [Connect to Milvus server](manage_connection.md)
-  - [Conduct a vector search](search.md)
-  - [Conduct a hybrid search](hybridsearch.md)
+- 了解更多 Milvus 的基本操作：
+  - [连接 Milvus 服务器](manage_connection.md)
+  - [进行向量搜索](search.md)
+  - [进行混合搜索](hybridsearch.md)
 
-- Explore [Milvus Java API reference](/api-reference/java/v2.0.4/index.html)
+- 探索 [Milvus Java API 参考](/api-reference/java/v2.0.4/index.html)
 
