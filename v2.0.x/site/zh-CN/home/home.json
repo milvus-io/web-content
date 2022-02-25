@@ -1,0 +1,135 @@
+{
+  "section1": {
+    "order": 0,
+    "title": "",
+    "items": [{
+        "title": "安装 Milvus",
+        "key": "stand-alone",
+        "btnLabel": "开始安装",
+        "link": "install_standalone-docker.md"
+      },
+
+
+      {
+        "title": "快速开始",
+        "key": "Cluster",
+        "btnLabel": "快速上手",
+        "link": "example_code.md"
+      },
+      {
+        "title": "Milvus 训练营",
+        "key": "bootcamps",
+        "btnLabel": "了解更多",
+        "link": "/bootcamp"
+      }
+    ]
+  },
+  "section2": {
+    "order": -1,
+    "title": "欢迎阅读 Milvus 文档！ ",
+    "desc": [
+      "在 Milvus 文档页，你可以了解 <a href='overview.md'>什么是 Milvus</a>，如何 <a href='install_standalone-docker.md'>安装</a>, <a href='manage_connection.md'>使用</a>, and <a href='aws.md'>部署</a> Milvus，以及根据场景需求使用 Milvus 搭建应用系统的 <a href='image_similarity_search.md'>教程</a>。 你还可以在这里找到常见问题 <a href='performance_faq.md'>FAQs</a> 及  <a href='api-reference/pymilvus/v2.0.0rc6/api/collection.html'>API 参考</a>。",
+      "你可以先浏览推荐阅读下的内容，或者在左上角的搜索框内输入关键字寻找所需文档。如未能找到所需信息，你可以向页面右下角的 <i>MilMil</i> 提问，或者通过任意文档页右上角的选项反馈文档问题。"
+    ]
+  },
+  "section3": {
+    "title": "推荐阅读",
+    "items": [{
+        "label": "基本操作",
+        "list": [{
+            "text": "创建 Collection",
+            "link": "create_collection.md"
+          },
+          {
+            "text": "插入数据",
+            "link": "insert_data.md"
+          },
+          {
+            "text": "创建索引",
+            "link": "build_index.md"
+          },
+          {
+            "text": "向量搜索",
+            "link": "search.md"
+          },
+          {
+            "text": "结构化匹配",
+            "link": "query.md"
+          }
+        ]
+      },
+      {
+        "label": "部署运维",
+        "list": [{
+            "text": "云端部署",
+            "link": "aws.md"
+          },
+          {
+            "text": "扩缩容",
+            "link": "scaleout.md"
+          },
+          {
+            "text": "配置 S3 存储",
+            "link": "deploy_s3.md"
+          },
+          {
+            "text": "监控与报警",
+            "link": "monitor.md"
+          },
+          {
+            "text": "升级 Milvus 2.0",
+            "link": "upgrade.md"
+          }
+        ]
+      },
+      {
+        "label": "参考指南",
+        "list": [{
+            "text": "系统配置",
+            "link": "configuration_standalone-basic.md"
+          },
+          {
+            "text": "系统架构",
+            "link": "architecture_overview.md"
+          },
+          {
+            "text": "向量索引",
+            "link": "index_selection.md"
+          },
+          {
+            "text": "距离计算方式",
+            "link": "metric.md"
+          },
+          {
+            "text": "Milvus 术语",
+            "link": "glossary.md"
+          }
+        ]
+      }
+    ]
+  },
+  "section4": {
+    "loadBtn": {
+      "label": "See More Blogs",
+      "isExternal": true,
+      "link": "/blog"
+    },
+    "title": "Blog",
+    "items": [{
+      "time": "June 29, 2021",
+      "link": "https://medium.com/@xiaofan.luan/milvus-2-0-redefining-vector-database-438479a7dd6e",
+      "title": "Milvus 2.0: Redefining Vector Database",
+      "abstract": "Milvus 2.0 is available now. This refactored, cloud-native version powers image/video search, chatbots, and many more AI applications.",
+      "imgSrc": "https://zilliz-cms.s3.us-west-2.amazonaws.com/2_0_cover_bbc582b347.jpg"
+    }]
+  },
+  "section5": {
+    "title": "文档动态",
+    "date": "2021 年 10 月",
+    "list": [
+      "随着 Milvus 2.0-RC7 版本的发布，Milvus 文档更新了兼容性及性能相关信息。更多内容详见 <a href='release_notes.md'>发版说明</a>。注意：由于 Milvus 的存储形式发生改变，RC7 与此前发布的所有 Milvus 2.0.0 RC 版本均<i>不兼容</i>。",
+      "<a href='/docs/v2.0.0/image_similarity_search.md'>Milvus 系统搭建教程</a> 中新增了 Jupyter Notebook、GitHub 仓库及在线 demo 的链接。阅读最新教程，了解如何使用 Milvus 轻松搭建 <a href='/blog/dna_sequence_classification.md'>DNA 序列分类系统</a>。",
+      "我们更新了 <a href='/docs/v2.0.0/milvus_adopters.md'>Milvus 用户</a> 名单。相应用户案例也在 <a href='https://milvus.io/blog'>博客</a> 板块中更新。如果你所在公司也是 Milvus 用户但不在名单上，请 <a href='https://github.com/milvus-io/milvus-docs/issues/new?assignees=&labels=&template=--error-report.yaml&title=v2.0.0%20Milvus%20Adopters%20(milvus_adopters.md)%20Doc%20Update'>联系我们</a>。"
+    ]
+  }
+}
