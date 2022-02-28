@@ -4,6 +4,10 @@ id: glossary.md
 
 # 术语表
 
+## Binlog
+
+A binlog is a binary log, or a smaller unit in segment, that records and handles the updates and changes made to data in the Milvus vector database. Data from a segment is persisted in multiple binlogs. There are three types of binlogs in Milvus: InsertBinlog, DeleteBinlog, and DDLBinlog.
+
 ## Collection
 包含一组 entity，可以等价于关系型数据库系统（RDBMS）中的表。
 
