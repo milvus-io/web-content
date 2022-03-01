@@ -62,7 +62,6 @@ vectors_right = {"float_vectors": external_vectors}
 	<tr>
 		<th>Parameter</th>
 		<th>Description</th>
-        <th>Options</th>
 	</tr>
 	</thead>
 	<tbody>
