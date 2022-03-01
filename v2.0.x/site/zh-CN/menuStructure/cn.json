@@ -365,12 +365,20 @@
         "order": 3
       },
       {
+        "id": "calculate_distance.md",
+        "title": "计算向量距离",
+        "label1": "userguide",
+        "label2": "",
+        "label3": "",
+        "order": 6
+      },
+      {
         "id": "load_balance.md",
         "title": "负载平衡",
         "label1": "userguide",
         "label2": "",
         "label3": "",
-        "order": 6
+        "order": 7
       },
       {
         "id": "bootcamp_userguide",
