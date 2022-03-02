@@ -4,20 +4,15 @@ related_key: collection
 summary: Learn how to check collection information in Milvus.
 ---
 
-# Check Collection Information
-
-<div class="alert note">
-<h3>Milvus Docs 需要你的帮助</h3>
-本文档暂时没有中文版本，欢迎你成为社区贡献者，协助中文技术文档的翻译。<br>
-你可以通过页面右边的 <b>编辑</b> 按钮直接贡献你的翻译。更多详情，参考 <a href="https://github.com/milvus-io/milvus-docs/blob/v2.0.0/CONTRIBUTING.md">贡献指南</a>。如需帮助，你可以 <a href="https://github.com/milvus-io/milvus-docs/issues/new/choose">提交 GitHub Issue</a>。
-</div>
+# 查看 Collection 信息
 
 
-This topic describes how to check the information of the collection in Milvus.
 
-## Check if a collection exists
+当前主题介绍如何在 Milvus 中查看 collection 信息。
 
-Verify if a collection exists in Milvus.
+## 查看 collection 是否存在
+
+验证 Milvus 中是否存在输入的 collection。
 
 <div class="multipleCode">
   <a href="?python">Python </a>
@@ -67,14 +62,14 @@ describe collection -c book
 <table class="language-python">
 	<thead>
         <tr>
-            <th>Parameter</th>
-            <th>Description</th>
+            <th>参数</th>
+            <th>描述</th>
         </tr>
 	</thead>
 	<tbody>
         <tr>
             <td><code>collection_name</code></td>
-            <td>Name of the collection to check.</td>
+            <td>要查看的 collection 名称。</td>
         </tr>
 	</tbody>
 </table>
@@ -83,14 +78,14 @@ describe collection -c book
 <table class="language-javascript">
 	<thead>
         <tr>
-            <th>Parameter</th>
-            <th>Description</th>
+            <th>参数</th>
+            <th>描述</th>
         </tr>
 	</thead>
 	<tbody>
         <tr>
             <td><code>collection_name</code></td>
-            <td>Name of the collection to check.</td>
+            <td>要查看的 collection 名称。</td>
         </tr>
 	</tbody>
 </table>
@@ -98,18 +93,18 @@ describe collection -c book
 <table class="language-go">
 	<thead>
         <tr>
-            <th>Parameter</th>
-            <th>Description</th>
+            <th>参数</th>
+            <th>描述</th>
         </tr>
 	</thead>
 	<tbody>
         <tr>
             <td><code>ctx</code></td>
-            <td>Context to control API invocation process.</td>
+            <td>控制调用 API 的 Context。</td>
         </tr>
         <tr>
             <td><code>CollectionName</code></td>
-            <td>Name of the collection to check.</td>
+            <td>要查看的 collection 名称。</td>
         </tr>
     </tbody>
 </table>
@@ -118,14 +113,14 @@ describe collection -c book
 <table class="language-java">
 	<thead>
         <tr>
-            <th>Parameter</th>
-            <th>Description</th>
+            <th>参数</th>
+            <th>描述</th>
         </tr>
 	</thead>
 	<tbody>
         <tr>
             <td><code>CollectionName</code></td>
-            <td>Name of the collection to check.</td>
+            <td>要查看的 collection 名称。</td>
         </tr>
     </tbody>
 </table>
@@ -133,21 +128,21 @@ describe collection -c book
 <table class="language-shell">
     <thead>
         <tr>
-            <th>Option</th>
-            <th>Description</th>
+            <th>选项</th>
+            <th>描述</th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td>-c</td>
-            <td>Name of the collection to check.</td>
+            <td>要查看的 collection 名称。</td>
         </tr>
     </tbody>
 </table>
 
-## Check collection details
+## 查看 collection 详细信息
 
-Check the details of a collection.
+查看输入 collection 的详细信息
 
 <div class="multipleCode">
   <a href="?python">Python </a>
@@ -224,46 +219,46 @@ describe collection -c book
 <table class="language-python">
     <thead>
         <tr>
-            <th>Property</th>
-            <th>Return</th>
-            <th>Exception</th>
+            <th>属性</th>
+            <th>返回</th>
+            <th>异常</th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td>schema</td>
-            <td>The schema of the collection.</td>
+            <td>collection 的 schema 信息。</td>
         </tr>
         <tr>
             <td>description</td>
-            <td>The description of the collection.</td>
+            <td>collection 的描述信息。</td>
         </tr>
         <tr>
             <td>name</td>
-            <td>The name of the collection.</td>
+            <td>collection 的名称。</td>
         </tr>
         <tr>
             <td>is_empty</td>
-            <td>A boolean value that indicates whether the collection is empty.</td>
+            <td>表示 collection 是否为空的布尔值。</td>
         </tr>
         <tr>
             <td>num_entities</td>
-            <td>The number of entities in the collection.</td>
-            <td><code>CollectionNotExistException</code> is raised if the collection does not exist.</td>
+            <td>collection 中的 entity 数</td>
+            <td>如果 collection 不存在，触发<code>CollectionNotExistException</code>。 </td>
         </tr>
         <tr>
             <td>primary_field</td>
-            <td>The primary field of the collection.</td>
+            <td>collection 的 primary field。</td>
         </tr>
         <tr>
             <td>partitions</td>
-            <td>A list of all partitions.</td>
-            <td><code>CollectionNotExistException</code> is raised if the collection does not exist.</td>
+            <td>包含所有 partition 的列表</td>
+            <td>如果 collection 不存在，触发<code>CollectionNotExistException</code>。</td>
         </tr>
         <tr>
             <td>indexes</td>
-            <td>A list of all indexes.</td>
-            <td><code>CollectionNotExistException</code> is raised if the collection does not exist.</td>
+            <td>包含所有索引的列表</td>
+            <td>如果 collection 不存在，触发<code>CollectionNotExistException</code> 。</td>
         </tr>
     </tbody>
 </table>
@@ -272,14 +267,14 @@ describe collection -c book
 <table class="language-javascript">
 	<thead>
         <tr>
-            <th>Parameter</th>
-            <th>Description</th>
+            <th>参数</th>
+            <th>说明</th>
         </tr>
 	</thead>
 	<tbody>
         <tr>
             <td><code>collection_name</code></td>
-            <td>Name of the collection to check.</td>
+            <td>要查看的 collection 名称。</td>
         </tr>
 	</tbody>
 </table>
@@ -312,13 +307,13 @@ describe collection -c book
 <table class="language-go">
 	<thead>
         <tr>
-            <th>Parameter</th>
+            <th>参数</th>
             <td><code>ctx</code></td>
-            <td>Context to control API invocation process.</td>
+            <td>控制调用 API 的 Context。</td>
         </tr>
         <tr>
             <td><code>CollectionName</code></td>
-            <td>Name of the collection to check.</td>
+            <td>要查看的 collection 名称。</td>
         </tr>
     </tbody>
 </table>
@@ -326,36 +321,36 @@ describe collection -c book
 <table class="language-java">
 	<thead>
         <tr>
-            <th>Parameter</th>
-            <th>Description</th>
+            <th>参数</th>
+            <th>说明</th>
         </tr>
 	</thead>
 	<tbody>
         <tr>
             <td><code>CollectionName</code></td>
-            <td>Name of the collection to check.</td>
+            <td>要查看的 collection 名称。</td>
         </tr>
     </tbody>
 
 <table class="language-shell">
     <thead>
         <tr>
-            <th>Option</th>
-            <th>Description</th>
+            <th>选项</th>
+            <th>描述</th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td>-c</td>
-            <td>Name of the collection to check.</td>
+            <td>要查看的 collection 名称。</td>
         </tr>
     </tbody>
 </table>
 
 
-## List all collections
+## 列出所有 collection
 
-List all collections in this Milvus Instance.
+列出当前 Milvus 实例中的所有 collection。
 
 <div class="multipleCode">
   <a href="?python">Python </a>
@@ -399,27 +394,26 @@ list collections
 <table class="language-go">
 	<thead>
         <tr>
-            <th>Parameter</th>
-            <th>Description</th>
+            <th>参数</th>
+            <th>描述</th>
         </tr>
 	</thead>
 	<tbody>
         <tr>
             <td><code>ctx</code></td>
-            <td>Context to control API invocation process.</td>
+            <td>控制调用 API 的 Context。</td>
         </tr>
     </tbody>
 </table>
 
-## What's next
+## 更多内容
 
-- Learn more basic operations of Milvus:
-  - [Insert data into Milvus](insert_data.md)
-  - [Create a partition](create_partition.md)
-  - [Build an index for vectors](build_index.md)
-  - [Conduct a vector search](search.md)
-  - [Conduct a hybrid search](hybridsearch.md)
-- Explore API references for Milvus SDKs:
+- 了解更多 Milvus 的基本操作：
+  - [插入数据](insert_data.md)
+  - [创建 partition](create_partition.md)
+  - [创建索引](build_index.md)
+  - [进行向量搜索](search.md)
+  - [进行混合搜索](hybridsearch.md)
+- 探索 Milvus SDK 的 API 参考：
   - [PyMilvus API reference](/api-reference/pymilvus/v2.0.1/tutorial.html)
   - [Node.js API reference](/api-reference/node/v2.0.1/tutorial.html)
-
