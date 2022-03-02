@@ -86,7 +86,7 @@ vectors_right = {"float_vectors": external_vectors}
 		<td>Name of the vector field in the collection.</td>
 	</tr>
     <tr>
-		<td><code>"float_vectors" or "bin_vectors"</code></td>
+		<td><code>"float_vectors"</code> or <code>"bin_vectors"</code></td>
 		<td>Type of the vectors.</td>
 	</tr>
 	</tbody>
