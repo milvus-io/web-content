@@ -33,7 +33,7 @@ id: four_layers.md
 
 ### Index coordinator (index coord）
 
-负责管理 index node 的拓扑结构，构建索引构和维护索引元信息。
+负责管理 index node 的拓扑结构，构建索引和维护索引元信息。
 
 ## 执行节点
 
