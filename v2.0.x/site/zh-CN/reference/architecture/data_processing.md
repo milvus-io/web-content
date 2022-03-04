@@ -8,33 +8,33 @@ id: data_processing.md
 
 ## 数据写入
 
-用户可以为每个 collection 指定 shard 数量，每个 shard 对应一个虚拟通道 _vchannel_。如下图所示，在 log broker 内，每个 _vchanel_ 被分配了一个对应的物理通道 _pchannel_。Proxy 基于主键哈希决定输入的增删请求进入哪个 shard。
+用户可以为每个 collection 指定 shard 数量，每个 shard 对应一个虚拟通道 _vchannel_。如下图所示，在 log broker 内，每个 _vchannel_ 被分配了一个对应的物理通道 _pchannel_。Proxy 基于主键哈希决定输入的增删请求进入哪个 shard。
 
-由于没有复杂事务，DML 的检查与确认⼯作被提前至 proxy。对于所有的增删请求，proxy 会先通过请求位于 root coord 的 TSO 中心授时模块获取时间戳。这个时间戳决定了数据最终可见和相互覆盖的顺序。除了分配时间戳，proxy 也为每行数据分配全局唯一的 primary key。Primary key 以及 entity 所处的 segmentID 均从 data coord 批量获取，批量有助于提升系统的吞吐，降低 data coord 的负载。
+由于没有复杂事务，DML 的检查与确认工作被提前至 proxy。对于所有的增删请求，proxy 会先通过请求位于 root coord 的 TSO 中心授时模块获取时间戳。这个时间戳决定了数据最终可见和相互覆盖的顺序。除了分配时间戳，proxy 也为每行数据分配全局唯一的 primary key。Primary key 以及 entity 所处的 segmentID 均从 data coord 批量获取，批量有助于提升系统的吞吐，降低 data coord 的负载。
 
-![Channels 1](../../../../assets/channels_1.jpg "个 shard 对应一个虚拟通道 vchannel。")
+![Channels 1](../../../../assets/channels_1.jpg "每个 shard 对应一个虚拟通道 vchannel。")
 
-除增删类操作之外，数据定义类操作也会写⼊⽇志序列。由于数据定义类操作出现的频率很低，系统只为其分配⼀路 channel。
+除增删类操作之外，数据定义类操作也会写⼊⽇志序列。由于数据定义类操作出现的频率很低，系统只为其分配一路 channel。
 
 ![Channels 2](../../../../assets/channels_2.jpg "Log broker 节点。")
 
-_Vchannel_ 由消息存储底层引擎的物理节点承担。不同 _vchannel_ 可以被调度到不同的物理节点，但每个 channel 在物理上不再进⼀步拆分，因此单个 _vchannel_ 不会跨多个物理节点。 当 collection 写入出现瓶颈时，通常需要关注两个问题：一是 log broker 节点负载是否过高，需要扩容；二是 shard 是否足够多，保证每个 log broker 的负载足够均衡。
+_Vchannel_ 由消息存储底层引擎的物理节点承担。不同 _vchannel_ 可以被调度到不同的物理节点，但每个 channel 在物理上不再进一步拆分，因此单个 _vchannel_ 不会跨多个物理节点。 当 collection 写入出现瓶颈时，通常需要关注两个问题：一是 log broker 节点负载是否过高，需要扩容；二是 shard 是否足够多，保证每个 log broker 的负载足够均衡。
 
 ![Write log sequence](../../../../assets/write_log_sequence.jpg "⽇志序列的写⼊过程。")
 
-上图总结了⽇志序列的写⼊过程中涉及的四个组件：proxy、log broker、data node 和对象存储。 整体共四部分⼯作：DML 请求的检查与确认、日志序列的发布—订阅、流式⽇志到日志快照的转换、日志快照的持久化存储。在 Milvus 2.0 中，对这四部分⼯作进行了解耦，做到同类型节点之间的对等。面向不同的⼊库负载，特别是大规模⾼波动的流式负载，各环节的系统组件可以做到独⽴的弹性伸缩。
+上图总结了日志序列的写⼊过程中涉及的四个组件：proxy、log broker、data node 和对象存储。 整体共四部分工作：DML 请求的检查与确认、日志序列的发布—订阅、流式日志到日志快照的转换、日志快照的持久化存储。在 Milvus 2.0 中，对这四部分工作进行了解耦，做到同类型节点之间的对等。面向不同的⼊库负载，特别是大规模⾼波动的流式负载，各环节的系统组件可以做到独立的弹性伸缩。
 
 ## 索引构建
 
-构建索引的任务由 index node 执⾏。为了避免数据更新导致的索引频繁重复构建，Milvus 将 collection 分成了更⼩的粒度，即 segment，每个 segment 对应自己的独⽴的索引。
+构建索引的任务由 index node 执⾏。为了避免数据更新导致的索引频繁重复构建，Milvus 将 collection 分成了更⼩的粒度，即 segment，每个 segment 对应自己的独立的索引。
 
 ![Index building](../../../../assets/index_building.jpg "索引构建。")
 
 Milvus 可以对每个向量列、标量列和主键列构建索引。索引构建任务的输⼊与输出都是对象存储。Index node 拉取 segment 中需要构建索引的日志快照，在内存中进⾏数据与元信息的反序列化，构建索引。索引构建完成后，将索引结构序列化并写回对象存储。
 
-对向量构建索引的过程属于计算密集、访存密集的负载类型，主要操作是向量运算与矩阵运算。由于被索引的数据维度过高，难以通过传统的树形结构进⾏高效索引。目前较为成熟的技术是基于聚类或图来表示⾼维稠密向量的近邻关系。无论哪种索引类型，都涉及到大规模向量数据的多次迭代计算，如寻找聚类、图遍历的收敛状态。
+对向量构建索引的过程属于计算密集、访存密集的负载类型，主要操作是向量运算与矩阵运算。由于被索引的数据维度过高，难以通过传统的树形结构进行高效索引。目前较为成熟的技术是基于聚类或图来表示高维稠密向量的近邻关系。无论哪种索引类型，都涉及到大规模向量数据的多次迭代计算，如寻找聚类、图遍历的收敛状态。
 
-与传统的索引操作相比，向量计算需要充分利⽤ SIMD 加速。⽬前，Milvus 内置的引擎⽀持 SSE、AVX2、AVX512 等 SIMD 指令。向量索引任务具备突发性、高资源消耗等特点，其弹性能力对于成本格外重要。未来 Milvus 会继续探索异构计算和 serverless 架构，持续优化索引构建的成本。
+与传统的索引操作相比，向量计算需要充分利⽤ SIMD 加速。目前，Milvus 内置的引擎支持 SSE、AVX2、AVX512 等 SIMD 指令。向量索引任务具备突发性、高资源消耗等特点，其弹性能力对于成本格外重要。未来 Milvus 会继续探索异构计算和 serverless 架构，持续优化索引构建的成本。
 
 同时，Milvus 支持标量过滤和主键查询功能。为了实现高效率的标量查询，Milvus 构建了 Bloom filter index、hash index、tree index 和 inverted index。未来 Milvus 会逐渐完善索引类型，提供 bitmap index、rough index 等更多外部索引能力。
 
