@@ -4,46 +4,41 @@ label: 使用 Kubernetes 安装
 order: 1
 group: prerequisite-docker.md
 ---
-# Environment Checklist
-
-<div class="alert note">
-<h3>Milvus Docs 需要你的帮助</h3>
-本文档暂时没有中文版本，欢迎你成为社区贡献者，协助中文技术文档的翻译。<br>
-你可以通过页面右边的 <b>编辑</b> 按钮直接贡献你的翻译。更多详情，参考 <a href="https://github.com/milvus-io/milvus-docs/blob/v2.0.0/CONTRIBUTING.md">贡献指南</a>。如需帮助，你可以 <a href="https://github.com/milvus-io/milvus-docs/issues/new/choose">提交 GitHub Issue</a>。
-</div>
+# 安装前提
 
 
-Before you install Milvus, check your hardware and software to see if they meet the requirements.
+
+在安装 Milvus 之前，请检查你的硬件和软件是否满足要求。
 
 <div class="tab-wrapper"><a href="prerequisite-docker.md" class=''>使用 Docker Compose 安装</a><a href="prerequisite-helm.md" class='active '>使用 Kubernetes 安装</a></div>
 
-## Hardware requirements
+## 硬件要求
 
-| Component           | Requirement                                                  |Recommendation| Note                                                         |
+| 硬件           | 要求                                                  |建议配置| 说明                                                         |
 | ------------------- | ------------------------------------------------------------ |--------------| ------------------------------------------------------------ |
-| CPU                 | Intel CPU Sandy Bridge or later                              |<ul><li>standalone: 8 core or more</li><li>cluster: 16 core or more</li></ul>| Current version of Milvus does not support AMD and Apple M1 CPUs. |
-| CPU instruction set | <ul><li>SSE4.2</li><li>AVX</li><li>AVX2</li><li>AVX-512</li></ul> |<ul><li>SSE4.2</li><li>AVX</li><li>AVX2</li><li>AVX-512</li></ul> |  Vector similarity search and index building within Milvus require CPU's support of single instruction, multiple data (SIMD) extension sets. Ensure that the CPU supports at least one of the SIMD extensions listed. See [CPUs with AVX](https://en.wikipedia.org/wiki/Advanced_Vector_Extensions#CPUs_with_AVX) for more information.                           |
-| RAM                 | <ul><li>standalone: 16G</li><li>cluster: 64G</li></ul>       |<ul><li>standalone: 32G</li><li>cluster: 128G</li></ul>        | The size of RAM depends on the data volume.                  |
-| Hard drive          | SATA 3.0 SSD or higher                                       |SATA 3.0 SSD or higher | The size of hard drive depends on the data volume.           |
+| CPU                 | Intel CPU Sandy Bridge 或以上                              |<ul><li>单机版：8 核或更多</li><li>分布式版：16 核或更多</li></ul>| 当前版本的 Milvus 不支持 AMD 和 Apple M1 CPU。 |
+| CPU 指令集 | <ul><li>SSE4.2</li><li>AVX</li><li>AVX2</li><li>AVX-512</li></ul> |<ul><li>SSE4.2</li><li>AVX</li><li>AVX2</li><li>AVX-512</li></ul> |  Milvus 中的向量相似度搜索和索引构建需要 CPU 支持单指令多数据 (SIMD) 扩展集。 请确保 CPU 至少支持一个列出的 SIMD 扩展集。 有关更多信息，请参阅 [CPUs with AVX](https://en.wikipedia.org/wiki/Advanced_Vector_Extensions#CPUs_with_AVX)。                           |
+| RAM                 | <ul><li>单机版： 16G</li><li>分布式版： 64G</li></ul>       |<ul><li>单机版： 32G</li><li>分布式版： 128G</li></ul>        | RAM 的大小取决于数据量。                  |
+| 硬盘          | SATA 3.0 SSD 或以上                                       |SATA 3.0 SSD 或以上 | 硬盘的大小取决于数据量。           |
 
 
-## Software requirements
+## 软件要求
 
-It is recommended that you run the Kubernetes cluster on Linux platforms. 
+建议你在 Linux 平台上运行 Kubernetes 集群。
 
-kubectl is the command-line tool for Kubernetes. Use a kubectl version that is within one minor version difference of your cluster. Using the latest version of kubectl helps avoid unforeseen issues.
+kubectl 是 Kubernetes 的命令行工具。使用与集群一个次要版本差异内的 kubectl 版本。使用最新版本的 kubectl 有助于避免不可预见的问题。
 
-minikube is required when running Kubernetes cluster locally. minikube requires Docker as a dependency. Ensure that you install Docker before installing Milvus using Helm. See <a href="https://docs.docker.com/get-docker">Get Docker</a> for more information.
+在本地运行 Kubernetes 集群时需要安装 minikube。 minikube 需要 Docker 作为依赖项。确保在使用 Helm 安装 Milvus 之前安装 Docker。有关更多信息，请参阅 <a href="https://docs.docker.com/get-docker">Get Docker</a>。
 
 
 
-| Operating system | Software                                                     | Note                                                         |
+| 操作系统 | 软件                                                     | 说明                                                         |
 | ---------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| Linux platforms  | <ul><li>Kubernetes 1.16 or later</li><li>kubectl</li><li>Helm 3.0.0 or later</li><li>minikube (for Milvus standalone)</li><li>Docker 19.03 or later (for Milvus standalone)</li></ul> | See [Helm Docs](https://helm.sh/docs/) for more information. |
+| Linux 发行版  | <ul><li>Kubernetes 1.16 或以上</li><li>kubectl</li><li>Helm 3.0.0 或以上</li><li>minikube (Milvus 单机版)</li><li>Docker 19.03 或以上 (Milvus 单机版)</li></ul> | 有关更多信息，请参阅 [Helm Docs](https://helm.sh/docs/)。|
 
-## What's next
-- If your hardware and software meet the requirements, you can:
-  - [Install Milvus standalone on Kubernetes](install_standalone-helm.md)
-  - [Install Milvus cluster on Kubernetes](install_cluster-helm.md)
+## 更多内容
+- 如果你的硬件和软件满足要求，你可以：
+  - [Install Milvus standalone with Docker Compose](install_standalone-docker.md)
+  - [Install Milvus cluster with Docker Compose](install_cluster-docker.md)
 
-- See [System Configuration](system_configuration.md) for parameters you can set while installing Milvus.
+- 安装 Milvus 时可设置的参数，可以参阅 [系统配置](system_configuration.md)。
