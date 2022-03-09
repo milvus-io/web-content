@@ -123,7 +123,6 @@ dataNode:
     limits:
         memory: 32Gi
         cpu: 8.0
-        </code>
 ```
 
 </details>
@@ -168,7 +167,6 @@ indexNode:
         limits:
             memory: 32Gi
             cpu: 8.0
-        </code>
 ```
 
 </details>
@@ -246,7 +244,6 @@ queryNode:
         limits:
             memory: 32Gi
             cpu: 8.0
-        </code>
 ```
 
 </details>
@@ -336,7 +333,6 @@ queryNode:
         limits:
             memory: 32Gi
             cpu: 8.0
-        </code>
 ```
 
 </details>
@@ -426,7 +422,6 @@ queryNode:
         limits:
             memory: 32Gi
             cpu: 8.0
-        </code>
 ```
 
 </details>
@@ -440,7 +435,6 @@ standalone:
         limits:
             memory: 64Gi
             cpu: 16.0
-        </code>
 ```
 
 </details>
@@ -511,7 +505,6 @@ queryNode:
         limits:
             memory: 32Gi
             cpu: 8.0
-        </code>
 ```
 
 </details>
@@ -582,7 +575,6 @@ queryNode:
         limits:
             memory: 32Gi
             cpu: 8.0
-        </code>
 ```
 
 </details>
