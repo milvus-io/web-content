@@ -69,7 +69,7 @@ All tests are performed under the following environments.
 | -------- | ----------------------------------------- |
 | CPU      | Intel(R) Xeon(R) Gold 6226R CPU @ 2.90GHz |
 | Memory   | DDR-4, 2933 MT/s                          |
-| SSD      | SATA 6 GB/s                               |
+| SSD      | SATA 6 Gbps                               |
 
 ### Software environment
 
@@ -82,7 +82,7 @@ All tests are performed under the following environments.
 
 - Milvus instance (standalone or cluster) in each test is deployed via [Helm](https://milvus.io/docs/v2.0.x/install_standalone-helm.md) on a Kubernetes cluster based on physical or virtual machines.
 - Configurations of the tested Milvus instances merely vary in the number of CPU cores, the size of memory, and the number of replicas (worker nodes), which only applies to Milvus cluster.
-- Unspecified configurations are [default configurations](https://github.com/milvus-io/milvus-helm/blob/master/charts/milvus/values.yaml)
+- Unspecified configurations are [default configurations](https://github.com/milvus-io/milvus-helm/blob/master/charts/milvus/values.yaml).
 - Milvus dependencies (MinIO, Pulsar, and etcd) store data on the local SSD in each node.
 - PyMilvus is deployed on client end to send Python interface requests to the Milvus instances.
 
