@@ -128,7 +128,7 @@ dataNode:
 </details>
 
 
-![NB & RT](nb_rt.png "Correlation between NB and RT of data inserting")
+![NB & RT](../../../assets/nb_rt.png "Correlation between NB and RT of data inserting")
 
 **Conclusion**
 
@@ -193,7 +193,7 @@ indexNode:
     </table>
 </details>
 
-![Index node and time](index_node_time.png "Correlation between index building time and the number of the index nodes")
+![Index node and time](../../../assets/index_node_time.png "Correlation between index building time and the number of the index nodes")
 
 **Conclusion**
 
@@ -282,9 +282,9 @@ queryNode:
     </table>
 </details>
 
-![nq & RT in 1m with 1 node](nq_rt_1_1.png "RT of search on one million vectors with one query node")
-![nq & RT in 50m with 4 nodes](nq_rt_50_4.png "RT of search on fifty million vectors with four query nodes")
-![nq & RT in 50m with 8 nodes](nq_rt_50_8.png "RT of search on fifty million vectors with eight query nodes")
+![nq & RT in 1m with 1 node](../../../assets/nq_rt_1_1.png "RT of search on one million vectors with one query node")
+![nq & RT in 50m with 4 nodes](../../../assets/nq_rt_50_4.png "RT of search on fifty million vectors with four query nodes")
+![nq & RT in 50m with 8 nodes](../../../assets/nq_rt_50_8.png "RT of search on fifty million vectors with eight query nodes")
 
 **Conclusion**
 
@@ -371,9 +371,9 @@ queryNode:
     </table>
 </details>
 
-![nq & VPS in 1m with 1 node](nq_vps_1_1.png "VPS of search on one million vectors with one query node")
-![nq & VPS in 50m with 4 nodes](nq_vps_50_4.png "VPS of search on fifty million vectors with four query nodes")
-![nq & VPS in 50m with 8 nodes](nq_vps_50_8.png "VPS of search on fifty million vectors with eight query nodes")
+![nq & VPS in 1m with 1 node](../../../assets/nq_vps_1_1.png "VPS of search on one million vectors with one query node")
+![nq & VPS in 50m with 4 nodes](../../../assets/nq_vps_50_4.png "VPS of search on fifty million vectors with four query nodes")
+![nq & VPS in 50m with 8 nodes](../../../assets/nq_vps_50_8.png "VPS of search on fifty million vectors with eight query nodes")
 
 **Conclusion**
 
@@ -459,7 +459,7 @@ standalone:
     </table>
 </details>
 
-![RT & QPS](rt_qps.png "Correlation between RT and QPS of concurrent searches on Milvus standalone and cluster")
+![RT & QPS](../../../assets/rt_qps.png "Correlation between RT and QPS of concurrent searches on Milvus standalone and cluster")
 
 **Conclusion**
 
@@ -529,7 +529,7 @@ queryNode:
     </table>
 </details>
 
-![QN & RT/QPS](qn_rt_qps.png "Correlation between query node number and RT/QPS")
+![QN & RT/QPS](../../../assets/qn_rt_qps.png "Correlation between query node number and RT/QPS")
 
 **Conclusion**
 
@@ -614,10 +614,10 @@ queryNode:
     </table>
 </details>
 
-![Recall & RT on SIFT with HNSW](recall_rt_s_h.png "Recall and RT of search with HNSW index on SIFT data set")
-![Recall & RT on SIFT with IVF_FLAT](recall_rt_s_f.png "Recall and RT of search with IVF_FLAT index on SIFT data set")
-![Recall & RT on SIFT with IVF_SQ8](recall_rt_s_s.png "Recall and RT of search with IVF_SQ8 index on SIFT data set")
-![Recall & RT on GloVe with IVF_FLAT](recall_rt_g_f.png "Recall and RT of search with IVF_FLAT index on GloVe data set")
+![Recall & RT on SIFT with HNSW](../../../assets/recall_rt_s_h.png "Recall and RT of search with HNSW index on SIFT data set")
+![Recall & RT on SIFT with IVF_FLAT](../../../assets/recall_rt_s_f.png "Recall and RT of search with IVF_FLAT index on SIFT data set")
+![Recall & RT on SIFT with IVF_SQ8](../../../assets/recall_rt_s_s.png "Recall and RT of search with IVF_SQ8 index on SIFT data set")
+![Recall & RT on GloVe with IVF_FLAT](../../../assets/recall_rt_g_f.png "Recall and RT of search with IVF_FLAT index on GloVe data set")
 
 **Conclusion**
 
@@ -633,7 +633,7 @@ With the same data set and index type, as the nprobe/ef increases, the Recall gr
 
 This test observes the Recall and RT of search with different index types on the same data set.
 
-![Recall & RT on SIFT with HNSW, IVF_FLAT, and IVF_SQ8](recall_rt_s.png "Recall and RT of search with different indexes on SIFT data set")
+![Recall & RT on SIFT with HNSW, IVF_FLAT, and IVF_SQ8](../../../assets/recall_rt_s.png "Recall and RT of search with different indexes on SIFT data set")
 
 **Conclusion**
 
