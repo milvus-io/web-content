@@ -857,6 +857,13 @@
         "order": 7
       },
       {
+        "id": "benchmark.md",
+        "title": "性能测试报告",
+        "label1": "reference",
+        "label2": "",
+        "order": 8
+      },
+      {
         "id": "tutorials",
         "title": "Milvus 系统搭建教程",
         "label1": "",
