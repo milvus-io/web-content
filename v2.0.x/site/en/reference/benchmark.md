@@ -437,8 +437,8 @@ indexNode:
 
 </template>
 
-<template id="config"></template>
-
+<template id="config">
+    
 {
   "width": 1000,
   "height": 400,
@@ -507,6 +507,8 @@ indexNode:
     "labelFontSize": 10
   }
 }
+    
+</template>
 
 </div>
 
