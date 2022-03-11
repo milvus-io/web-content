@@ -258,7 +258,7 @@ Travel Timestamp(Specify a timestamp in a search to get results based on a data 
 
 使用 Milvus 搜索向量。要在特定的[partition](glossary.md#Partition)中搜索，请指定 partition 名称列表。 
 
-Milvus supports setting consistency level specifically for a search or query  (only on PyMilvus currently). The consistency level set in the search or query requests overwrites the one set while creating the collection. In this example, the consistency level of the search request is set as "strong", meaning Milvus will read the most updated data view at the exact time point when a search or query request comes. Without specifying the consistency level during a search or query, Milvus adopts the original consistency level of the collection.
+Milvus supports setting consistency level specifically for a search or query  (only on PyMilvus currently). The consistency level set in the search or query requests overwrites the one set while creating the collection. In this example, the consistency level of the search request is set as "Strong", meaning Milvus will read the most updated data view at the exact time point when a search or query request comes. Without specifying the consistency level during a search or query, Milvus adopts the original consistency level of the collection.
 
 <div class="multipleCode">
   <a href="?python">Python </a>
@@ -276,7 +276,7 @@ results = collection.search(
 	param=search_params, 
 	limit=10, 
 	expr=None,
-	consistency_level="strong"
+	consistency_level="Strong"
 )
 ```
 
