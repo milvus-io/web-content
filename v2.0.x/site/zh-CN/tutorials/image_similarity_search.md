@@ -9,7 +9,7 @@ title: 图片相似度检索
 
 - [打开 Jupyter notebook](https://github.com/milvus-io/bootcamp/blob/master/solutions/reverse_image_search/reverse_image_search.ipynb)
 - [快速部署](https://github.com/milvus-io/bootcamp/blob/master/solutions/reverse_image_search/quick_deploy)
-- [在线体验](https://zilliz.com/milvus-demos/reverse-image-search)
+- [在线体验](https://milvus.io/milvus-demos/)
 本教程中使用到的 ML 模型及第三方软件包括：
 - YOLOv3
 - ResNet-50
