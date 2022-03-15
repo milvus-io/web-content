@@ -19,7 +19,7 @@ summary: Learn how to install the Python SDK of Milvus.
 
 ## 安装前提
 
-要求 Python 3（3.71 或更高版本）。
+要求 Python 3（3.7.1 或更高版本）。
 
 
 ## 通过 pip 安装 PyMilvus
