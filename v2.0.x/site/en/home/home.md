@@ -93,20 +93,17 @@ id: home.md
 
 ## What's new in docs
 
+_Mar 2022_
+
+- Added guidance on [distance calculation](calculate_distance.md).
+- Added documentation on how to [load](load_partition.md) and [release](release_partition.md) a partition.
+- Added Milvus [benchmark](benchmark.md) report.
+
 _Feb 2022_
 
 - Now you can [compile Milvus on Mac](https://github.com/milvus-io/milvus/blob/master/DEVELOPMENT.md).
 - Added guidance on [load balance](load_balance.md).
 - Added documentation on how to [compact data](compact_data.md).
 - Added new [vector index](index.md) supported by Milvus.
-
-_Jan 2022_
-
-- Milvus announced its general availability release [Milvus 2.0.0](release_notes.md).
-- Added guidance on installing a Milvus standalone with [APT or YUM](install_standalone-aptyum.md).
-- Added documentation on how to [configure Milvus](configure-docker.md).
-- Added the installation guide for Milvus [GO SDK](install-go.md) and [Java SDk](install-java.md).
-- Add sample code in GO and Java in User Guide.
-
 
 </div>

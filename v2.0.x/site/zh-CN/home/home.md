@@ -93,29 +93,17 @@ id: home.md
 
 ## 文档动态
 
+_2022 年 03 月_
+
+- 添加 [距离计算](calculate_distance.md) 指南。
+- 添加 [加载](load_partition.md) and [释放](release_partition.md) partition 指南。
+- 添加 Milvus [benchmark](benchmark.md) 报告。
+
 _2022 年 02 月_
 
 - 现已支持 [在 Mac 上编译 Milvus](https://github.com/milvus-io/milvus/blob/master/DEVELOPMENT.md)。
 - 添加 [负载平衡](load_balance.md) 指南。
 - 添加 [清理数据](compact_data.md) 指南。
 - 在 [向量索引](index.md) 中添加新增支持的 IVF_HNSW、RHNSW_FLAT、RHNSW_SQ、RHNSW_PQ 等索引的描述。
-
-
-_2022 年 01 月_
-
-- Milvus 发布了其正式版本 [Milvus 2.0.0](release_notes.md)。
-- 添加使用 [APT 或 YUM](install_standalone-aptyum.md) 安装 Milvus 单机版指南。
-- 添加 [Milvus 配置指南](configure-docker.md)。
-- 添加安装 Milvus [GO SDK](install-go.md) 以及 [Java SDk](install-java.md) 指南。
-- 在操作指南中添加 GO 以及 Java 语言示例代码。
-
-_2021 年 12 月_
-
-- 随着 [Milvus 2.0-PreGA](release_notes.md) 版本的发布，Milvus 文档新增了 [数据删除](delete_data.md) 以及 [Collection 别名](collection_alias.md) 功能使用说明。
-- 更新 [Time Travel](timetravel.md) 功能文档，添加 [生成时间戳](timetravel.md#Generate-a-timestamp-for-search) 功能介绍。
-- Milvus 生态系统新增工具 [Attu](attu.md)。了解如何 [安装](attu_install-docker.md) 以及 [使用](attu_overview.md) Attu。
-- 重制 [Hello Milvus](example_code.md)，新增数据删除功能展示。
-- 添加 [Time Travel 原理](timetravel_ref.md) 文档。
-
 
 </div>
