@@ -7,7 +7,7 @@ summary: Learn how to define a schema in Milvus.
 
 Schema 用于定义 Collection 以及其 Field 的属性。
 
-## Field Schema
+## Field schema
 
 Field schema 是 Field 的逻辑定义。通常你需要在定义 [Collection schema](#Collection-schema) 和 [创建 collection](create_collection.md) 之前定义 Field schema。
 
@@ -85,7 +85,7 @@ embedding_field = FieldSchema(name="embedding", dtype=DataType.FLOAT_VECTOR, dim
   - BINARY_VECTOR: Binary vector
   - FLOAT_VECTOR: Float vector
 
-## Collection Schema
+## Collection schema
 
 Collection schema 是 collection 的逻辑定义。通常你需要在定义 collection schema 和 [创建 collection](create_collection.md) 之前定义 [field schema](#Field-schema)。
 

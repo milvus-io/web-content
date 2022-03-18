@@ -8,7 +8,7 @@ summary: Learn how to define a schema in Milvus.
 This topic introduces schema in Milvus. Schema is used to define the properties of a collection and the fields within.
 
 
-## Field Schema
+## Field schema
 
 A field schema is the logical definition of a field. It is the first thing you need to define before defining a [collection schema](#Collection-schema) and [creating a collection](create_collection.md). 
 
@@ -86,7 +86,7 @@ embedding_field = FieldSchema(name="embedding", dtype=DataType.FLOAT_VECTOR, dim
   - BINARY_VECTOR: Binary vector
   - FLOAT_VECTOR: Float vector
 
-## Collection Schema
+## Collection schema
 
 A collection schema is the logical definition of a collection. Usually you need to define the [field schema](#Field-schema) before defining a collection schema and [creating a collection](create_collection.md). 
 

@@ -97,7 +97,7 @@ _2022 年 03 月_
 
 - 添加 [距离计算](calculate_distance.md) 指南。
 - 添加 [加载](load_partition.md) and [释放](release_partition.md) partition 指南。
-- 添加 Milvus [benchmark](benchmark.md) 报告。
+- 添加 Milvus [性能测试报告](benchmark.md)。
 
 _2022 年 02 月_
 
