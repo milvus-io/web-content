@@ -4,20 +4,20 @@ related_key: search
 summary: Conduct a vector similarity search with Milvus.
 ---
 
-# 进行向量相似性搜索
+# 向量相似性搜索
 
 
 
 本主题介绍如何使用 Milvus 搜索 entities 。
 
-Milvus 中的向量相似度搜索计算查询向量与 collection 中具有指定相似度度量的向量之间的距离，并返回最相似的结果。通过指定过滤标量 field 或者主键 field 的 [布尔表达式](boolean.md) ，你可以执行 [混合搜索](hybridsearch.md)，甚至使用 [Time Travel](timetravel.md)来进行搜索。
+Milvus 中的向量相似度搜索计算查询向量与 collection 中具有指定相似度度量的向量之间的距离，并返回最相似的结果。通过指定过滤标量 field 或者 primary key field 的 [布尔表达式](boolean.md) ，你可以执行 [混合搜索](hybridsearch.md)，甚至使用 [Time Travel](timetravel.md) 来进行搜索。
 
-下面的例子展示了如何对一个拥有 2000 行数据的数据集进行向量相似度搜索，模拟你基于书籍介绍的特征向量搜索某些书籍的情况。该数据集包含 book ID (primary key) 、 word count (标量 field) 和 book introduction (向量 field)。 Milvus 会根据你定义的查询向量和搜索参数返回最相似的结果。
+下面的例子展示了如何对一个拥有 2000 行数据的数据集进行向量相似度搜索，模拟你基于书籍介绍的特征向量搜索某些书籍的情况。该数据集包含 book ID (primary key) 、 word count (scalar field) 和 book introduction (vector field)。 Milvus 会根据你定义的查询向量和搜索参数返回最相似的结果。
 
 
 ## 加载 collection
 
-Milvus 中的所有搜索和查询操作都在内存中执行。在执行向量相似性搜索之前将 collection 加载到内存中。
+Milvus 中的所有搜索和结构化匹配操作都在内存中执行。在执行向量相似性搜索之前将 collection 加载到内存中。
 
 <div class="multipleCode">
   <a href="?python">Python </a>
@@ -258,7 +258,7 @@ Travel Timestamp(Specify a timestamp in a search to get results based on a data 
 
 使用 Milvus 搜索向量。要在特定的[partition](glossary.md#Partition)中搜索，请指定 partition 名称列表。 
 
-Milvus supports setting consistency level specifically for a search or query  (only on PyMilvus currently). The consistency level set in the search or query requests overwrites the one set while creating the collection. In this example, the consistency level of the search request is set as "Strong", meaning Milvus will read the most updated data view at the exact time point when a search or query request comes. Without specifying the consistency level during a search or query, Milvus adopts the original consistency level of the collection.
+Milvus 支持专门为搜索或结构化匹配设置一致性级别（目前仅在 PyMilvus 上）。在创建 collection 时，搜索或结构化匹配请求中设置的一致性级别将覆盖设置的一致性级别。在本例中，搜索请求的一致性级别设置为 "Strong"，这意味着 Milvus 将在搜索或结构化匹配请求出现的确切时间点读取最新的数据视图。如果在搜索或结构化匹配期间不指定一致性级别，Milvus 将采用创建 collection 的原始一致性级别。
 
 <div class="multipleCode">
   <a href="?python">Python </a>
@@ -375,7 +375,7 @@ R<SearchResults> respSearch = milvusClient.search(searchParam);
 	</tr>
 	<tr>
 		<td><code>consistency_level</code> (optional)</td>
-		<td>Consistency level of the search.</td>
+		<td>搜索的一致性级别。</td>
 	</tr>
 	</tbody>
 </table>
@@ -430,7 +430,7 @@ R<SearchResults> respSearch = milvusClient.search(searchParam);
 	<tbody>
   <tr>
     <td><code>ctx</code></td>
-    <td>控制 API 调用过程的 Context 。</td>
+    <td>控制调用 API 的 Context。</td>
     <td>N/A</td>
   </tr>
   <tr>
@@ -451,7 +451,7 @@ R<SearchResults> respSearch = milvusClient.search(searchParam);
   <tr>
 		<td><code>output_fields</code></td>
 		<td>要返回的 field 名称。</td>
-    <td>当前版本不支持 Vector field 。</td>
+    <td>当前版本不支持 vector field 。</td>
 	</tr>
   <tr>
     <td><code>vectors</code></td>
@@ -503,7 +503,7 @@ R<SearchResults> respSearch = milvusClient.search(searchParam);
   <tr>
 		<td><code>OutFields</code></td>
 		<td>要返回的 field 名称。.</td>
-    <td>当前版本不支持 Vector field 。</td>
+    <td>当前版本不支持 vector field 。</td>
 	</tr>
   <tr>
     <td><code>Vectors</code></td>
