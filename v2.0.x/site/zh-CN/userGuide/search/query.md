@@ -4,25 +4,20 @@ related_key: query vectors
 summary: Learn how to query vectors in Milvus.
 ---
 
-# Conduct a Vector Query
-
-<div class="alert note">
-<h3>Milvus Docs 需要你的帮助</h3>
-本文档暂时没有中文版本，欢迎你成为社区贡献者，协助中文技术文档的翻译。<br>
-你可以通过页面右边的 <b>编辑</b> 按钮直接贡献你的翻译。更多详情，参考 <a href="https://github.com/milvus-io/milvus-docs/blob/v2.0.0/CONTRIBUTING.md">贡献指南</a>。如需帮助，你可以 <a href="https://github.com/milvus-io/milvus-docs/issues/new/choose">提交 GitHub Issue</a>。
-</div>
+# 结构化匹配
 
 
-This topic describes how to conduct a vector query.
 
-Unlike a vector similarity search, a vector query retrieves vectors via scalar filtering based on [boolean expression](boolean.md). Milvus supports many data types in the scalar fields and a variety of boolean expressions. The boolean expression filters on scalar fields or the primary key field, and it retrieves all results that match the filters.
+当前主题介绍如何进行向量结构化匹配。
 
-The following example shows how to perform a vector query on a 2000-row dataset of book ID (primary key), word count (scalar field), and book introduction (vector field), simulating the situation where you query for certain books based on their IDs.
+与向量相似性搜索不同，向量结构化匹配通过基于[布尔表达式](boolean.md) 的标量过滤来检索向量。 Milvus 支持标量 field 中的多种数据类型和多种布尔表达式。布尔表达式过滤标量 field 或者 primary key field，并检索与过滤器匹配的所有结果。
+
+下面的例子展示了如何对一个拥有 2000 行数据的数据集进行向量结构化匹配，模拟你基于书籍 ID 结构化匹配某些书籍的情况。该数据集包含 book ID (primary key)、word count (scalar field) 和 book introduction (vector field)。
 
 
-## Load collection
+## 加载 collection
 
-All search and query operations within Milvus are executed in memory. Load the collection to memory before conducting a vector query.
+Milvus 中的所有搜索和结构化匹配操作都在内存中执行。在执行向量结构化匹配之前将 collection 加载到内存中。
 
 <div class="multipleCode">
   <a href="?python">Python </a>
@@ -67,11 +62,11 @@ milvusClient.loadCollection(
 load -c book
 ```
 
-## Conduct a vector query
+## 向量结构化匹配
 
-The following example filters the vectors with certain `book_id` values, and returns the `book_id` field and `book_intro` of the results.
+下面的示例过滤具有特定 `book_id` 的向量，并返回结果的 `book_id` field 和 `book_intro` field。
 
-Milvus supports setting consistency level specifically for a search or query  (only on PyMilvus currently). The consistency level set in the search or query requests overwrites the one set while creating the collection. In this example, the consistency level of the search request is set as "Strong", meaning Milvus will read the most updated data view at the exact time point when a search or query request comes. Without specifying the consistency level during a search or query, Milvus adopts the original consistency level of the collection.
+Milvus 支持专门为搜索或结构化匹配设置一致性级别（目前仅在 PyMilvus 上）。在创建 collection 时，搜索或结构化匹配请求中设置的一致性级别将覆盖设置的一致性级别。在本例中，搜索请求的一致性级别设置为 "Strong"，这意味着 Milvus 将在搜索或结构化匹配请求出现的确切时间点读取最新的数据视图。如果在搜索或结构化匹配期间不指定一致性级别，Milvus 将采用创建 collection 的原始一致性级别。
 
 <div class="multipleCode">
   <a href="?python">Python </a>
@@ -138,26 +133,26 @@ timeout []:
 <table class="language-python">
 	<thead>
 	<tr>
-		<th>Parameter</th>
-		<th>Description</th>
+		<th>参数</th>
+		<th>说明</th>
 	</tr>
 	</thead>
 	<tbody>
 	<tr>
 		<td><code>expr</code></td>
-		<td>Boolean expression used to filter attribute. Find more expression details in <a href="boolean.md">Boolean Expression Rules</a>.</td>
+		<td>用于过滤属性的布尔表达式。可在<a href="boolean.md">布尔表达式规则</a>中查找更多关于布尔表达式的详细信息。</td>
 	</tr>
 	<tr>
 		<td><code>output_fields</code> (optional)</td>
-		<td>List of names of the field to return.</td>
+		<td>要返回的 field 名称列表。</td>
 	</tr>
 	<tr>
 		<td><code>partition_names</code> (optional)</td>
-		<td>List of names of the partitions to query on.</td>
+		<td>要查询的 partition 名称列表。</td>
 	</tr>
 	<tr>
 		<td><code>consistency_level</code> (optional)</td>
-		<td>Consistency level of the query.</td>
+		<td>查询的一致性级别。</td>
 	</tr>
 	</tbody>
 </table>
@@ -166,26 +161,26 @@ timeout []:
 <table class="language-javascript">
 	<thead>
 	<tr>
-		<th>Parameter</th>
-		<th>Description</th>
+		<th>参数</th>
+		<th>说明</th>
 	</tr>
 	</thead>
 	<tbody>
 	<tr>
 		<td><code>collection_name</code></td>
-		<td>Name of the collection to query.</td>
+		<td>要查询的 collection 的名称。</td>
 	</tr>
 	<tr>
 		<td><code>expr</code></td>
-		<td>Boolean expression used to filter attribute. Find more expression details in <a href="boolean.md">Boolean Expression Rules</a>.</td>
+		<td>用于过滤属性的布尔表达式。可在<a href="boolean.md">布尔表达式规则</a>中查找更多关于布尔表达式的详细信息。</td>
 	</tr>
 	<tr>
 		<td><code>output_fields</code> (optional)</td>
-		<td>List of names of the field to return.</td>
+		<td>要返回的 field 名称列表。</td>
 	</tr>
 	<tr>
 		<td><code>partition_names</code> (optional)</td>
-		<td>List of names of the partitions to query on.</td>
+		<td>要查询的 partition 名称列表。</td>
 	</tr>
 	</tbody>
 </table>
@@ -193,36 +188,36 @@ timeout []:
 <table class="language-go">
 	<thead>
 	<tr>
-		<th>Parameter</th>
-		<th>Description</th>
-    <th>Options</th>
+		<th>参数</th>
+		<th>说明</th>
+    <th>选项</th>
 	</tr>
 	</thead>
 	<tbody>
   <tr>
     <td><code>ctx</code></td>
-    <td>Context to control API invocation process.</td>
+    <td>控制调用 API 的 Context。</td>
     <td>N/A</td>
   </tr>
   <tr>
     <td><code>CollectionName</code></td>
-    <td>Name of the collection to query.</td>
+    <td>要查询的 collection 的名称。</td>
     <td>N/A</td>
   </tr>
   <tr>
     <td><code>partitionName</code></td>
-    <td>List of names of the partitions to load. All partitions will be queried if it is left empty.</td>
+    <td>要加载的 partition 的名称列表。如果为空，将查询所有 partition。</td>
     <td>N/A</td>
   </tr>
   <tr>
 		<td><code>expr</code></td>
-		<td>Boolean expression used to filter attribute.</td>
-    <td>See <a href="boolean.md">Boolean Expression Rules</a> for more information.</td>
+		<td>用于过滤属性的布尔表达式。</td>
+    <td>有关详细信息，请参考 <a href="boolean.md">布尔表达式规则</a>。</td>
 	</tr>
     <tr>
 		<td><code>OutputFields</code></td>
-		<td>Name of the field to return.</td>
-    	<td>Vector field is not supported in current release.</td>
+		<td>要返回的 field 名称。</td>
+    	<td>当前版本不支持 vector field。</td>
 	</tr>
 	</tbody>
 </table>
@@ -230,26 +225,26 @@ timeout []:
 <table class="language-java">
 	<thead>
 	<tr>
-		<th>Parameter</th>
-		<th>Description</th>
-    <th>Options</th>
+		<th>参数</th>
+		<th>说明</th>
+    <th>选项</th>
 	</tr>
 	</thead>
 	<tbody>
 	<tr>
     <td><code>CollectionName</code></td>
-    <td>Name of the collection to load.</td>
+    <td>要加载的 collection 名称。</td>
     <td>N/A</td>
   </tr>
   <tr>
 		<td><code>OutFields</code></td>
-		<td>Name of the field to return.</td>
-    <td>Vector field is not supported in current release.</td>
+		<td>要返回的 field 名称。</td>
+    <td>当前版本不支持 vector field 。</td>
 	</tr>
   <tr>
 		<td><code>Expr</code></td>
-		<td>Boolean expression used to filter attribute.</td>
-    <td>See <a href="boolean.md">Boolean Expression Rules</a> for more information.</td>
+		<td>用于过滤属性的布尔表达式。</td>
+    <td>有关详细信息，请参考 <a href="boolean.md">布尔表达式规则</a>。</td>
 	</tr>
 	</tbody>
 </table>
@@ -258,22 +253,22 @@ timeout []:
 <table class="language-shell">
     <thead>
         <tr>
-            <th>Option</th>
-            <th>Full name</th>
-            <th>Description</th>
+            <th>选项</th>
+            <th>全称</th>
+            <th>说明</th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td>--help</td>
             <td>n/a</td>
-            <td>Displays help for using the command.</td>
+            <td>显示使用命令的帮助。</td>
         </tr>
     </tbody>
 </table>
 
 
-Check the returned results. 
+查看返回的结果。
 
 <div class="multipleCode">
   <a href="?python">Python </a>
@@ -310,12 +305,12 @@ System.out.println(wrapperQuery.getFieldWrapper("word_count").getFieldData());
 # Milvus CLI automatically returns the entities with the pre-defined output fields.
 ```
 
-## What's next
+## 更多内容
 
-- Learn more basic operations of Milvus:
+- 了解更多关于 Milvus 的基本操作：
   - [Conduct a vector search](search.md)
   - [Conduct a hybrid search](hybridsearch.md)
   - [Search with Time Travel](timetravel.md)
-- Explore API references for Milvus SDKs:
+- 探索 Milvus SDKs 的 API 参考：
   - [PyMilvus API reference](/api-reference/pymilvus/v2.0.1/tutorial.html)
   - [Node.js API reference](/api-reference/node/v2.0.1/tutorial.html)
