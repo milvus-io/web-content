@@ -1,13 +1,15 @@
 ---
 id: comparison.md
+title: Milvus 2.0 概述
+summary: 了解新版 Milvus 的设计理念及新增功能。
 ---
 # Milvus 2.0 概述
 
 为获得最佳使用体验，我们强烈建议启用最新版本的 Milvus。
 
-## Milvus 2.0：性能更优、功能更强
+## Milvus 2.0 和 1.x 主要差异：云原生、分布式架构、高可扩展性
 
-<table class="demo">
+<table class="comparison">
 	<thead>
 	<tr>
 		<th class="width20">&nbsp;</th>
@@ -24,7 +26,7 @@ id: comparison.md
 	<tr>
 		<th>可扩展性</th>
 		<td>500+ 个节点</td>
-		<td>1 - 32 个读节点，1 个写节点</td>
+		<td>1 ～ 32 个只读节点搭配 1 个可写入节点</td>
 	</tr>
   	<tr>
 		<th>持久性</th>
@@ -53,7 +55,7 @@ id: comparison.md
 	</tr>
 	<tr>
 		<th>高级功能</th>
-		<td><li>标量字段过滤</li><li>Time Travel</li><li>多云/地域部署</li><li>数据管理工具</li></td>
+		<td><li>标量字段过滤</li><li>时间旅行（Time Travel）</li><li>多站点部署以及多云部署</li><li>数据管理工具</li></td>
 		<td><li>Mishards</li><li>Milvus DM 数据迁移工具</li></td>
 	</tr>
 	<tr>

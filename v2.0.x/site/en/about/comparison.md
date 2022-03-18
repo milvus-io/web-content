@@ -41,7 +41,7 @@ We recommend that you try out Milvus 2.0. Here is why:
 	</tr>
 	<tr>
 		<th>Data consistency</th>
-		<td>Three levels of consistency:<li>Strong</li><li>Bounded Staleness</li><li>Session</li><li>Consistent prefix</li></td>
+		<td>Four levels of consistency:<li>Strong</li><li>Bounded Staleness</li><li>Session</li><li>Consistent prefix</li></td>
 		<td>Eventual consistency</td>
 	</tr>
 	<tr>
