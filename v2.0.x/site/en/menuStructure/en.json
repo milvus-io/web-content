@@ -812,26 +812,11 @@
       "order": 3
     },
     {
-      "id": "schema",
+      "id": "schema.md",
       "title": "Schema",
       "label1": "reference",
       "label2": "",
-      "order": 4,
-      "isMenu": true
-    },
-    {
-      "id": "field_schema.md",
-      "title": "Field Schema",
-      "label1": "reference",
-      "label2": "schema",
-      "order": 0
-    },
-    {
-      "id": "collection_schema.md",
-      "title": "Collection Schema",
-      "label1": "reference",
-      "label2": "schema",
-      "order": 1
+      "order": 4
     },
     {
       "id": "boolean.md",
