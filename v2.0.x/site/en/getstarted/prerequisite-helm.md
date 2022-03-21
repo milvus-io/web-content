@@ -37,6 +37,12 @@ minikube is required when running Kubernetes cluster locally. minikube requires 
 | ---------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | Linux platforms  | <ul><li>Kubernetes 1.16 or later</li><li>kubectl</li><li>Helm 3.0.0 or later</li><li>minikube (for Milvus standalone)</li><li>Docker 19.03 or later (for Milvus standalone)</li></ul> | See [Helm Docs](https://helm.sh/docs/) for more information. |
 
+| Software | Version                       |
+| -------- | ----------------------------- |
+| etcd     | 3.5.0                         |
+| MinIO    |  RELEASE.2020-11-06T23-17-07Z |
+| Pulsar   | 2.8.2                         |
+
 ## What's next
 - If your hardware and software meet the requirements, you can:
   - [Install Milvus standalone on Kubernetes](install_standalone-helm.md)
