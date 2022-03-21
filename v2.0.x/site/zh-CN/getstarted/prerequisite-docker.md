@@ -29,6 +29,12 @@ group: prerequisite-docker.md
 | Linux 发行版            | <ul><li>Docker 19.03 或以上</li><li>Docker Compose 1.25.1 或以上</li></ul> | 有关更多信息，请参阅 [Install Docker Engine](https://docs.docker.com/engine/install/) 和 [Install Docker Compose](https://docs.docker.com/compose/install/)。|
 | 启用 WSL 2 的 Windows | Docker 桌面版                                               | 我们建议你将源代码和其他数据绑定存储到 Linux 文件系统中的 Linux 容器中，而不是 Windows 文件系统。<br/>有关更多信息，请参阅 [Install Docker Desktop on Windows with WSL 2 backend](https://docs.docker.com/desktop/windows/install/#wsl-2-backend)。 |
 
+| 软件      | 版本                          |
+| -------- | ----------------------------- |
+| etcd     | 3.5.0                         |
+| MinIO    |  RELEASE.2020-11-06T23-17-07Z |
+| Pulsar   | 2.8.2                         |
+
 ## 更多内容
 - 如果你的硬件和软件满足要求，你可以：
   - [Install Milvus standalone with Docker Compose](install_standalone-docker.md)
