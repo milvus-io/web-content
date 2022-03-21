@@ -36,6 +36,12 @@ kubectl 是 Kubernetes 的命令行工具。使用与集群一个次要版本差
 | ---------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | Linux 发行版  | <ul><li>Kubernetes 1.16 或以上</li><li>kubectl</li><li>Helm 3.0.0 或以上</li><li>minikube (Milvus 单机版)</li><li>Docker 19.03 或以上 (Milvus 单机版)</li></ul> | 有关更多信息，请参阅 [Helm Docs](https://helm.sh/docs/)。|
 
+| 软件      | 版本                          |
+| -------- | ----------------------------- |
+| etcd     | 3.5.0                         |
+| MinIO    |  RELEASE.2020-11-06T23-17-07Z |
+| Pulsar   | 2.8.2                         |
+
 ## 更多内容
 - 如果你的硬件和软件满足要求，你可以：
   - [Install Milvus standalone with Docker Compose](install_standalone-docker.md)
