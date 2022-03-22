@@ -6,11 +6,6 @@ summary: Learn how to drop an index in Milvus.
 
 # 删除索引
 
-<div class="alert note">
-<h3>Milvus Docs 需要你的帮助</h3>
-本文档暂时没有中文版本，欢迎你成为社区贡献者，协助中文技术文档的翻译。<br>
-你可以通过页面右边的 <b>编辑</b> 按钮直接贡献你的翻译。更多详情，参考 <a href="https://github.com/milvus-io/milvus-docs/blob/v2.0.0/CONTRIBUTING.md">贡献指南</a>。如需帮助，你可以 <a href="https://github.com/milvus-io/milvus-docs/issues/new/choose">提交 GitHub Issue</a>。
-</div>
 
 
 当前主题介绍如何在 Milvus 中删除索引。
@@ -144,6 +139,6 @@ delete index -c book
   - [进行混合搜索](hybridsearch.md)
   - [使用 Time Travel 搜索](timetravel.md)
 - 探索 Milvus SDK 的 API 参考:
-  - [PyMilvus API 参考](/api-reference/pymilvus/v2.0.1/tutorial.html)
-  - [Node.js API 参考](/api-reference/node/v2.0.1/tutorial.html)
+  - [PyMilvus API reference](/api-reference/pymilvus/v2.0.1/tutorial.html)
+  - [Node.js API reference](/api-reference/node/v2.0.1/tutorial.html)
 

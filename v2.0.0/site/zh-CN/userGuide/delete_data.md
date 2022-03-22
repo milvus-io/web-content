@@ -17,7 +17,6 @@ This topic describes how to delete entities in Milvus.
 
 Milvus supports deleting entities by primary key filtered with boolean expression.
 
-
 <div class="alert caution">
     <ul>
 	      <li>Deleted entities can still be retrieved immediately after the deletion if the consistency level is set lower than <code>Strong</code>.</li>
@@ -30,9 +29,7 @@ Milvus supports deleting entities by primary key filtered with boolean expressio
 
 ## Prepare boolean expression
 
-Prepare the boolean expression that filters the entities to delete. 
-
-Milvus only supports deleting entities with clearly specified primary keys, which can be achieved merely with the term expression `in`. Other operators can be used only in query or scalar filtering in vector search. See [Boolean Expression Rules](boolean.md) for more information.
+Prepare the boolean expression that filters the entities to delete. See [Boolean Expression Rules](boolean.md) for more information.
 
 The following example filters data with primary key values of `0` and `1`.
 
@@ -114,11 +111,10 @@ await milvusClient.dataManager.deleteEntities({
 
 ```java
 milvusClient.delete(
-  DeleteParam.newBuilder()
-    .withCollectionName("book")
-    .withExpr(DELETE_EXPR)
-    .build()
-);
+		DeleteParam.newBuilder()
+				.withCollectionName("book")
+				.withExpr(DELETE_EXPR)
+				.build());
 ```
 
 ```shell

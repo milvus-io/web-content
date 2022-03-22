@@ -273,7 +273,7 @@ results = collection.search(
 	param=search_params, 
 	limit=10, 
 	expr=None,
-	consistency_level="Strong"
+	consistency_level="strong"
 )
 ```
 
@@ -343,7 +343,7 @@ R<SearchResults> respSearch = milvusClient.search(searchParam);
 		<td>Name of the field to search on.</td>
 	</tr>
   <tr>
-		<td><code>param</code></td>
+		<td><code>params</code></td>
 		<td>Search parameter(s) specific to the index. See <a href="index.md">Vector Index</a> for more information.</td>
 	</tr>
 	<tr>

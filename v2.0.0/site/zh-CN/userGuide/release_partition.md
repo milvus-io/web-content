@@ -4,7 +4,7 @@ related_key: release partition
 summary: Learn how to release a partition into memory for search or query in Milvus.
 ---
 
-# Release a Partition
+# Load a Partition
 
 This topic describes how to release a partition from memory after a search or a query to reduce memory usage.
 

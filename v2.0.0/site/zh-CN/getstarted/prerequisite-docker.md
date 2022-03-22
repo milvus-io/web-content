@@ -4,34 +4,39 @@ label: 使用 Docker Compose 安装
 order: 0
 group: prerequisite-docker.md
 ---
-# 安装前提
+# Environment Checklist
+
+<div class="alert note">
+<h3>Milvus Docs 需要你的帮助</h3>
+本文档暂时没有中文版本，欢迎你成为社区贡献者，协助中文技术文档的翻译。<br>
+你可以通过页面右边的 <b>编辑</b> 按钮直接贡献你的翻译。更多详情，参考 <a href="https://github.com/milvus-io/milvus-docs/blob/v2.0.0/CONTRIBUTING.md">贡献指南</a>。如需帮助，你可以 <a href="https://github.com/milvus-io/milvus-docs/issues/new/choose">提交 GitHub Issue</a>。
+</div>
 
 
-
-在安装 Milvus 之前，请检查你的硬件和软件是否满足要求。
+Before you install Milvus, check your hardware and software to see if they meet the requirements.
 
 <div class="tab-wrapper"><a href="prerequisite-docker.md" class='active '>使用 Docker Compose 安装</a><a href="prerequisite-helm.md" class=''>使用 Kubernetes 安装</a></div>
 
-## 硬件要求
+## Hardware requirements
 
-|硬件           | 要求                                                  |建议配置| 说明                                                         |
+| Component           | Requirement                                                  |Recommendation| Note                                                         |
 | ------------------- | ------------------------------------------------------------ |--------------| ------------------------------------------------------------ |
-| CPU                 | Intel CPU Sandy Bridge 或以上                              |<ul><li>单机版： 8 核或更多</li><li>分布式版： 16 核或更多</li></ul>| 当前版本的 Milvus 不支持 AMD 和 Apple M1 CPU。 |
-| CPU 指令集 | <ul><li>SSE4.2</li><li>AVX</li><li>AVX2</li><li>AVX-512</li></ul> |<ul><li>SSE4.2</li><li>AVX</li><li>AVX2</li><li>AVX-512</li></ul> |  Milvus 中的向量相似度搜索和索引构建需要 CPU 支持单指令多数据 (SIMD) 扩展集。 请确保 CPU 至少支持一个列出的 SIMD 扩展集。 有关更多信息，请参阅 [CPUs with AVX](https://en.wikipedia.org/wiki/Advanced_Vector_Extensions#CPUs_with_AVX)。                         |
-| RAM                 | <ul><li>单机版：16G</li><li>分布式版： 64G</li></ul>       |<ul><li>单机版：32G</li><li>分布式版：128G</li></ul>        | RAM 的大小取决于数据量。                 |
-| 硬盘          | SATA 3.0 SSD 或以上                                       |SATA 3.0 SSD 或以上 | 硬盘的大小取决于数据量。          |
+| CPU                 | Intel CPU Sandy Bridge or later                              |<ul><li>standalone: 8 core or more</li><li>cluster: 16 core or more</li></ul>| Current version of Milvus does not support AMD and Apple M1 CPUs. |
+| CPU instruction set | <ul><li>SSE4.2</li><li>AVX</li><li>AVX2</li><li>AVX-512</li></ul> |<ul><li>SSE4.2</li><li>AVX</li><li>AVX2</li><li>AVX-512</li></ul> |  Vector similarity search and index building within Milvus require CPU's support of single instruction, multiple data (SIMD) extension sets. Ensure that the CPU supports at least one of the SIMD extensions listed. See [CPUs with AVX](https://en.wikipedia.org/wiki/Advanced_Vector_Extensions#CPUs_with_AVX) for more information.                           |
+| RAM                 | <ul><li>standalone: 16G</li><li>cluster: 64G</li></ul>       |<ul><li>standalone: 32G</li><li>cluster: 128G</li></ul>        | The size of RAM depends on the data volume.                  |
+| Hard drive          | SATA 3.0 SSD or higher                                       |SATA 3.0 SSD or higher | The size of hard drive depends on the data volume.           |
 
-## 软件要求
+## Software requirements
 
-| 操作系统           | 软件                                                     | 说明                                                         |
+| Operating system           | Software                                                     | Note                                                         |
 | -------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| macOS 10.14 或以上       | Docker 桌面版                                               | Docker 虚拟机 (VM) 运行配置至少 2 个虚拟 CPU (vCPU) 和 8 GB 初始内存。否则，安装可能会失败。<br/>有关更多信息，请参阅 [Install Docker Desktop on Mac](https://docs.docker.com/desktop/mac/install/)。|
-| Linux 发行版            | <ul><li>Docker 19.03 或以上</li><li>Docker Compose 1.25.1 或以上</li></ul> | 有关更多信息，请参阅 [Install Docker Engine](https://docs.docker.com/engine/install/) 和 [Install Docker Compose](https://docs.docker.com/compose/install/)。|
-| 启用 WSL 2 的 Windows | Docker 桌面版                                               | 我们建议你将源代码和其他数据绑定存储到 Linux 文件系统中的 Linux 容器中，而不是 Windows 文件系统。<br/>有关更多信息，请参阅 [Install Docker Desktop on Windows with WSL 2 backend](https://docs.docker.com/desktop/windows/install/#wsl-2-backend)。 |
+| macOS 10.14 or later       | Docker Desktop                                               | Set the Docker virtual machine (VM) to use a minimum of 2 virtual CPUs (vCPUs) and 8 GB of initial memory. Otherwise, installation might fail. <br/>See [Install Docker Desktop on Mac](https://docs.docker.com/desktop/mac/install/) for more information. |
+| Linux platforms            | <ul><li>Docker 19.03 or later</li><li>Docker Compose 1.25.1 or later</li></ul> | See [Install Docker Engine](https://docs.docker.com/engine/install/) and [Install Docker Compose](https://docs.docker.com/compose/install/) for more information. |
+| Windows with WSL 2 enabled | Docker Desktop                                               | We recommend that you store source code and other data bind-mounted into Linux containers in the Linux file system instead of the Windows file system.<br/>See [Install Docker Desktop on Windows with WSL 2 backend](https://docs.docker.com/desktop/windows/install/#wsl-2-backend) for more information. |
 
-## 更多内容
-- 如果你的硬件和软件满足要求，你可以：
+## What's next
+- If your hardware and software meet the requirements, you can:
   - [Install Milvus standalone with Docker Compose](install_standalone-docker.md)
   - [Install Milvus cluster with Docker Compose](install_cluster-docker.md)
 
-- 安装 Milvus 时可设置的参数，可以参阅 [系统配置](system_configuration.md)。
+- See [System Configuration](system_configuration.md) for parameters you can set while installing Milvus.

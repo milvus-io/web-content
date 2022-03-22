@@ -5,31 +5,36 @@ group: system_configuration.md
 summary: Learn how to configure etcd for Milvus.
 ---
 
-# etcd 相关配置
+# etcd-related Configurations
+
+<div class="alert note">
+<h3>Milvus Docs 需要你的帮助</h3>
+本文档暂时没有中文版本，欢迎你成为社区贡献者，协助中文技术文档的翻译。<br>
+你可以通过页面右边的 <b>编辑</b> 按钮直接贡献你的翻译。更多详情，参考 <a href="https://github.com/milvus-io/milvus-docs/blob/v2.0.0/CONTRIBUTING.md">贡献指南</a>。如需帮助，你可以 <a href="https://github.com/milvus-io/milvus-docs/issues/new/choose">提交 GitHub Issue</a>。
+</div>
 
 
+This topic introduces the etcd-related configurations of Milvus.
 
-当前主题介绍 Milvus 中 etcd 的相关配置。
+etcd is the metadata engine supporting Milvus' metadata storage and access. 
 
-etcd 是支持 Milvus 元数据存储和访问的元数据引擎。
-
-在本节中，你可以配置 etcd 端点、相关键前缀等。
+Under this section, you can configure etcd endpoints, relevant key prefixes, etc.
 
 ## `etcd.endpoints`
 
 <table id="etcd.endpoints">
   <thead>
     <tr>
-      <th class="width80">描述</th>
-      <th class="width20">默认值</th> 
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>用以访问 etcd 服务的端点。你可以将此参数更改为你自己的 etcd 集群的端点。</li>
-        <li>环境变量： <code>ETCD_ENDPOINTS</code></li>
-        <li>当 Milvus 启动时，etcd 优先从环境变量 <code>ETCD_ENDPOINTS</code> 获取有效地址。</li>
+        <li>Endpoints used to access etcd service with. You can change this parameter as the endpoints of your own etcd cluster.</li>
+        <li>Environment variable: <code>ETCD_ENDPOINTS</code></li>
+        <li>etcd preferentially acquires valid address from environment variable <code>ETCD_ENDPOINTS</code> when Milvus is started.</li>
       </td>
       <td>localhost:2379</td>
     </tr>
@@ -42,17 +47,17 @@ etcd 是支持 Milvus 元数据存储和访问的元数据引擎。
 <table id="etcd.rootPath">
   <thead>
     <tr>
-      <th class="width80">描述</th>
-      <th class="width20">默认值</th> 
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Milvus 在 etcd 中存储数据的键的根前缀。</li>
-        <li>注意：使用 Milvus 一段时间后更改此参数会影响对旧数据的访问。</li>
-        <li>建议在首次启动 Milvus 之前更改此参数。</li>
-        <li>如果 etcd 服务已经存在，则为 Milvus 设置一个易于识别的前缀。</li>
+        <li>Root prefix of the key to where Milvus stores data in etcd.</li>
+        <li>Caution: Changing this parameter after using Milvus for a period of time will affect your access to old data.</li>
+        <li>It is recommended to change this parameter before starting Milvus for the first time.</li>
+        <li>Set an easy-to-identify root key prefix for Milvus if etcd service already exists.</li>
       </td>
       <td>by-dev</td>
     </tr>
@@ -64,16 +69,16 @@ etcd 是支持 Milvus 元数据存储和访问的元数据引擎。
 <table id="etcd.metaSubPath">
   <thead>
     <tr>
-      <th class="width80">描述</th>
-      <th class="width20">默认值</th> 
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Milvus 在 etcd 中存储元数据相关信息的键的次前缀。</li>
-        <li>注意：使用 Milvus 一段时间后更改此参数会影响对旧数据的访问。</li>
-        <li>建议在首次启动 Milvus 之前更改此参数。</li>
+        <li>Sub-prefix of the key to where Milvus stores metadata-related information in etcd.</li>
+        <li>Caution: Changing this parameter after using Milvus for a period of time will affect your access to old data.</li>
+        <li>It is recommended to change this parameter before starting Milvus for the first time.</li>
       </td>
       <td>meta</td>
     </tr>
@@ -86,16 +91,16 @@ etcd 是支持 Milvus 元数据存储和访问的元数据引擎。
 <table id="etcd.kvSubPath">
   <thead>
     <tr>
-      <th class="width80">描述</th>
-      <th class="width20">默认值</th> 
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Milvus 在 etcd 中存储时间戳的键的次前缀。</li>
-        <li>注意：使用 Milvus 一段时间后更改此参数会影响对旧数据的访问。</li>
-        <li>如无特殊原因，建议不要更改此参数。</li>
+        <li>Sub-prefix of the key to where Milvus stores timestamps in etcd.</li>
+        <li>Caution: Changing this parameter after using Milvus for a period of time will affect your access to old data.</li>
+        <li>It is recommended not to change this parameter if there is no specific reason.</li>
       </td>
       <td>kv</td>
     </tr>
