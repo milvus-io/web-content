@@ -4,24 +4,19 @@ related_key: insert
 summary: Learn how to insert data in Milvus.
 ---
 
-# Insert Data
-
-<div class="alert note">
-<h3>Milvus Docs 需要你的帮助</h3>
-本文档暂时没有中文版本，欢迎你成为社区贡献者，协助中文技术文档的翻译。<br>
-你可以通过页面右边的 <b>编辑</b> 按钮直接贡献你的翻译。更多详情，参考 <a href="https://github.com/milvus-io/milvus-docs/blob/v2.0.0/CONTRIBUTING.md">贡献指南</a>。如需帮助，你可以 <a href="https://github.com/milvus-io/milvus-docs/issues/new/choose">提交 GitHub Issue</a>。
-</div>
+# 插入数据
 
 
-This topic describes how to insert data in Milvus via client.
 
-You can also migrate data to Milvus with [MilvusDM](migrate_overview.md), an open-source tool designed specifically for importing and exporting data with Milvus.
+当前主题介绍如何通过客户端向 Milvus 中插入数据。
 
-The following example inserts 2,000 rows of randomly generated data as the example data (Milvus CLI example uses a pre-built, remote CSV file containing similar data). Real applications will likely use much higher dimensional vectors than the example. You can prepare your own data to replace the example.
+你还可以使用 [MilvusDM](migrate_overview.md) 将数据迁移到 Milvus，这是一款专门用于使用 Milvus 导入和导出数据而设计的开源工具。
 
-## Prepare data
+以下示例插入 2000 行随机生成的数据作为示例数据（Milvus CLI 示例使用包含类似数据的预构建远程 CSV 文件）。实际应用程序可能会使用比示例更高维度的向量。你可以准备自己的数据来替换示例。
 
-First, prepare the data to insert.  Data type of the data to insert must match the schema of the collection, otherwise Milvus will raise exception.
+## 准备数据
+
+首先，准备要插入的数据。插入数据的数据类型必须与 collection 的 schema 匹配，否则 Milvus 会抛出异常。
 
 <div class="multipleCode">
   <a href="?python">Python </a>
@@ -88,11 +83,11 @@ for (long i = 0L; i < 2000; ++i) {
 ```
 
 
-## Insert data to Milvus
+## 向 Milvus 插入数据
 
-Insert the data to the collection.
+将数据插入到 collection 中。
 
-By specifying `partition_name`, you can optionally decide to which partition to insert the data.
+通过指定 `partition_name`，可以选择将数据插入到指定的 partition 中。
 
 <div class="multipleCode">
   <a href="?python">Python </a>
@@ -151,18 +146,18 @@ import -c book 'https://raw.githubusercontent.com/milvus-io/milvus_cli/main/exam
 <table class="language-python">
 	<thead>
 	<tr>
-		<th>Parameter</th>
-		<th>Description</th>
+		<th>参数</th>
+		<th>说明</th>
 	</tr>
 	</thead>
 	<tbody>
     <tr>
 		<td><code>data</code></td>
-		<td>Data to insert into Milvus.</td>
+		<td>准备插入 Milvus 的数据。</td>
 	</tr>
 	<tr>
 		<td><code>partition_name</code> (optional)</td>
-		<td>Name of the partition to insert data into.</td>
+		<td>要插入数据的 partition 名称。</td>
 	</tr>
 	</tbody>
 </table>
@@ -171,22 +166,22 @@ import -c book 'https://raw.githubusercontent.com/milvus-io/milvus_cli/main/exam
 <table class="language-javascript">
 	<thead>
 	<tr>
-		<th>Parameter</th>
-		<th>Description</th>
+		<th>参数</th>
+		<th>说明</th>
 	</tr>
 	</thead>
 	<tbody>
 	<tr>
 		<td><code>collection_name</code></td>
-		<td>Name of the collection to insert data into.</td>
+		<td>要插入数据的 collection 名称。</td>
 	</tr>
   <tr>
 		<td><code>partition_name</code> (optional)</td>
-		<td>Name of the partition to insert data into.</td>
+		<td>要插入数据的 partition 名称。</td>
 	</tr>
   <tr>
 		<td><code>fields_data</code></td>
-		<td>Data to insert into Milvus.</td>
+		<td>准备插入 Milvus 的数据。</td>
 	</tr>
 	</tbody>
 </table>
@@ -194,26 +189,26 @@ import -c book 'https://raw.githubusercontent.com/milvus-io/milvus_cli/main/exam
 <table class="language-go">
 	<thead>
     <tr>
-        <th>Parameter</th>
-        <th>Description</th>
+        <th>参数</th>
+        <th>说明</th>
     </tr>
 	</thead>
 	<tbody>
     <tr>
         <td><code>ctx</code></td>
-        <td>Context to control API invocation process.</td>
+        <td>控制 API 调用过程的 Context 。</td>
     </tr>
     <tr>
         <td><code>CollectionName</code></td>
-        <td>Name of the collection to insert data in.</td>
+        <td>要插入数据的 collection 名称。</td>
     </tr>
     <tr>
         <td><code>partitionName</code></td>
-        <td>Name of the partition to insert data in. Data will be inserted in the default partition if left blank.</td>
+        <td>要插入数据的 partition 名称。如果为空，数据将插入默认的 partition。</td>
     </tr>
 	<tr>
         <td><code>columnarData</code></td>
-        <td>Data to insert into each field.</td>
+        <td>要插入每个 field 的数据。</td>
     </tr>
   </tbody>
 </table>
@@ -221,30 +216,30 @@ import -c book 'https://raw.githubusercontent.com/milvus-io/milvus_cli/main/exam
 <table class="language-java">
 	<thead>
 	<tr>
-		<th>Parameter</th>
-		<th>Description</th>
+		<th>参数</th>
+		<th>说明</th>
 	</tr>
 	</thead>
 	<tbody>
 	<tr>
 		<td><code>fieldName</code></td>
-		<td>Name of the field to insert data in.</td>
+		<td>要插入数据的 field 名称。</td>
 	</tr>
 	<tr>
 		<td><code>DataType</code></td>
-		<td>Data type of the field to insert data in.</td>
+		<td>要插入数据的 field 数据类型。</td>
 	</tr>
     <tr>
 		<td><code>data</code></td>
-		<td>Data to insert into each field.</td>
+		<td>要插入每个 field 的数据。</td>
 	</tr>
 		<tr>
 		<td><code>CollectionName</code></td>
-		<td>Name of the collection to insert data into.</td>
+		<td>要插入数据的 collection 名称。</td>
 	</tr>
 	<tr>
 		<td><code>PartitionName</code> (optional)</td>
-		<td>Name of the partition to insert data into.</td>
+		<td>要插入数据的 partition 名称。</td>
 	</tr>
 	</tbody>
 </table>
@@ -252,36 +247,36 @@ import -c book 'https://raw.githubusercontent.com/milvus-io/milvus_cli/main/exam
 <table class="language-shell">
     <thead>
         <tr>
-            <th>Option</th>
-            <th>Description</th>
+            <th>选项</th>
+            <th>说明</th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td>-c</td>
-            <td>Name of the collection to insert data into.</td>
+            <td>要插入数据的 collection 名称。</td>
         </tr>
         <tr>
             <td>-p (Optional)</td>
-            <td>Name of the partition to insert data into.</td>
+            <td>要插入数据的 partition 名称。</td>
         </tr>
     </tbody>
 </table>
 
 
-## Limits
+## 限制
 
-|Feature|Maximum limit|
+|属性|最大限制|
 |---|---|
-|Dimensions of a vector|32,768|
+|向量维度|32,768|
 
-## What's next
+## 更多内容
 
-- Learn more basic operations of Milvus:
-  - [Build an index for vectors](build_index.md)
-  - [Conduct a vector search](search.md)
-  - [Conduct a hybrid search](hybridsearch.md)
-- Explore API references for Milvus SDKs:
+- 了解更多关于 Milvus 的基本操作:
+  - [创建向量索引](build_index.md)
+  - [进行向量搜索](search.md)
+  - [进行混合搜索](hybridsearch.md)
+- 探索 Milvus SDK 的 API 参考:
   - [PyMilvus API reference](/api-reference/pymilvus/v2.0.1/tutorial.html)
   - [Node.js API reference](/api-reference/node/v2.0.1/tutorial.html)
 
