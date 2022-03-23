@@ -170,7 +170,7 @@ await milvusClient.partitionManager.showPartitions({
 ```
 
 ```go
-partitions, err := milvusClient.ShowPartitions(
+listPar, err := milvusClient.ShowPartitions(
     context.Background(),   // ctx
     "book",                 // CollectionName
     )
