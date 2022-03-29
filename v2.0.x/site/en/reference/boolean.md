@@ -157,3 +157,56 @@ For example, 30 / 2 + 8. This is normally evaluated as 30 divided by 2 then 8 ad
 
 
 Parentheses can be nested within expressions. Innermost parenthetical expressions are evaluated first.
+
+
+## Usage
+
+Samples of all available boolean expression usage in Milvus are listed as follows (`int64` represents the scalar field that contains data of INT64 type, and `float` represents the scalar field that contains data of floating-point type):
+
+1. CmpOp
+
+```
+"int64 > 0"
+```
+
+```
+"0 < int64 < 400"
+```
+
+```
+"500 <= int64 < 1000"
+```
+
+2. BinaryLogicalOp and parentheses
+
+```
+"(int64 > 0 && int64 < 400) or (int64 > 500 && int64 < 1000)"
+```
+
+3. TermExpr and UnaryLogicOp
+
+<div class="alert note">
+Milvus only supports deleting entities with clearly specified primary keys, which can be achieved merely with the term expression <code>in</code>.
+</div>
+
+```
+"int64 not in [1, 2, 3]"
+```
+
+4. TermExpr, BinaryLogicalOp, and CmpOp (on different fields)
+
+```
+"int64 in [1, 2, 3] and float != 2"
+```
+
+5. BinaryLogicalOp and CmpOp
+
+```
+"int64 == 0 || int64 == 1 || int64 == 2"
+```
+
+6. CmpOp and UnaryArithOp or BinaryArithOp
+
+```
+"200+300 < int64 <= 500+500"
+```
