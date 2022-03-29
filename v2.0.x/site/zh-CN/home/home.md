@@ -46,12 +46,6 @@ id: home.md
 
 </div>
 
-<div class="milmi-tip">
-  <p>
-    你可以向页面右下角的 _MilMil_!提问，或者通过任意文档页右上角的选项反馈文档问题。
-  </p>
-  <img  src="../../../assets/MilMil.svg" alt="MilMil" />
-</div>
 
 ## 推荐阅读
 

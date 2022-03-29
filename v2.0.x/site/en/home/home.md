@@ -46,12 +46,6 @@ id: home.md
 
 </div>
 
-<div class="milmi-tip">
-  <p>
-    Feel free to ask MilMi at the bottom right or submit an issue via GitHub by using the buttons at the top right of each page.
-  </p>
-  <img  src="../../../assets/MilMil.svg" alt="MilMil" />
-</div>
 
 ## Recommended articles
 
