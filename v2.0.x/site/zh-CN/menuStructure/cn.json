@@ -373,14 +373,6 @@
         "order": 6
       },
       {
-        "id": "load_balance.md",
-        "title": "负载平衡",
-        "label1": "userguide",
-        "label2": "",
-        "label3": "",
-        "order": 7
-      },
-      {
         "id": "bootcamp_userguide",
         "title": "训练营",
         "label1": "userguide",

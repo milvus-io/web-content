@@ -57,8 +57,8 @@ id: home.md
 - [Create a Collection](create_collection.md)
 - [Manage Data](insert_data.md)
 - [Build an Index](build_index.md)
-- [Search and query](search.md)
-- [Load Balance](load_balance.md)
+- [Search](search.md)
+- [Query](query.md)
 </div>
 
 <div class="recomment-item">
@@ -96,7 +96,6 @@ _Mar 2022_
 _Feb 2022_
 
 - Now you can [compile Milvus on Mac](https://github.com/milvus-io/milvus/blob/master/DEVELOPMENT.md).
-- Added guidance on [load balance](load_balance.md).
 - Added documentation on how to [compact data](compact_data.md).
 - Added new [vector index](index.md) supported by Milvus.
 

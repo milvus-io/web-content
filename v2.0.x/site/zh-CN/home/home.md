@@ -57,8 +57,8 @@ id: home.md
 - [创建 Collection](create_collection.md)
 - [管理数据](insert_data.md)
 - [创建索引](build_index.md)
-- [向量搜索与结构化匹配](search.md)
-- [负载平衡](load_balance.md)
+- [向量搜索](search.md)
+- [结构化匹配](query.md)
 </div>
 
 <div class="recomment-item">
@@ -96,7 +96,6 @@ _2022 年 03 月_
 _2022 年 02 月_
 
 - 现已支持 [在 Mac 上编译 Milvus](https://github.com/milvus-io/milvus/blob/master/DEVELOPMENT.md)。
-- 添加 [负载平衡](load_balance.md) 指南。
 - 添加 [清理数据](compact_data.md) 指南。
 - 在 [向量索引](index.md) 中添加新增支持的 IVF_HNSW、RHNSW_FLAT、RHNSW_SQ、RHNSW_PQ 等索引的描述。
 
