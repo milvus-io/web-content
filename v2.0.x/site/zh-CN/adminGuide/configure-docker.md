@@ -7,41 +7,36 @@ order: 0
 summary: Learn how to configure your Milvus.
 ---
 
-# Configure Milvus
+# 配置 Milvus
+
+
+
+当前主题介绍如何配置 Milvus。
 
 <div class="alert note">
-<h3>Milvus Docs 需要你的帮助</h3>
-本文档暂时没有中文版本，欢迎你成为社区贡献者，协助中文技术文档的翻译。<br>
-你可以通过页面右边的 <b>编辑</b> 按钮直接贡献你的翻译。更多详情，参考 <a href="https://github.com/milvus-io/milvus-docs/blob/v2.0.0/CONTRIBUTING.md">贡献指南</a>。如需帮助，你可以 <a href="https://github.com/milvus-io/milvus-docs/issues/new/choose">提交 GitHub Issue</a>。
-</div>
-
-
-This topic describes how to configure your Milvus.
-
-<div class="alert note">
-In current release, all parameters take effect only after being configured at the startup of Milvus.
+在当前版本中，所有参数只有在 Milvus 启动时配置后才会生效。
 </div>
 
 <div class="tab-wrapper"><a href="configure-docker.md" class='active '>Docker Compose</a><a href="configure-helm.md" class=''>Helm</a></div>
 
-## Download a configuration file
+## 下载配置文件
 
-[Download](https://raw.githubusercontent.com/milvus-io/milvus/v2.0.1/configs/milvus.yaml) `milvus.yaml` directly or with the following command.
+直接[下载](https://raw.githubusercontent.com/milvus-io/milvus/v2.0.1/configs/milvus.yaml) `milvus.yaml` 或者使用以下命令。
 
 ```
 $ wget https://raw.githubusercontent.com/milvus-io/milvus/v2.0.1/configs/milvus.yaml
 ```
 
-## Modify the configuration file
+## 修改配置文件
 
-Configure your Milvus instance to suit your application scenarios by adjusting corresponding parameters in `milvus.yaml`.
+通过修改 `milvus.yaml` 中的相应参数，配置 Milvus 实例以适应你的应用场景。
 
-Check the following links for more information about each parameter.
+有关每个参数的更多信息，请查看以下链接。
 
-Sorted by:
+排序：
 
 <div class="filter">
-<a href="#component">Components or dependencies</a> <a href="#purpose">Configuration purposes</a> 
+<a href="#component">组件或依赖</a> <a href="#purpose">配置目的</a> 
 
 </div>
 
@@ -50,8 +45,8 @@ Sorted by:
 <table id="component">
 <thead>
   <tr>
-    <th>Dependencies</th>
-    <th>Components</th>
+    <th>依赖</th>
+    <th>组件</th>
   </tr>
 </thead>
 <tbody>
@@ -92,13 +87,13 @@ Sorted by:
 <table id="purpose">
 <thead>
   <tr>
-    <th>Purpose</th>
-    <th>Parameters</th>
+    <th>目的</th>
+    <th>参数</th>
   </tr>
 </thead>
 <tbody>
   <tr>
-    <td>Performance tuning</td>
+    <td>性能调优</td>
     <td>
         <ul>
             <li><a href="configure_querynode.md#queryNode.gracefulTime"><code>queryNode.gracefulTime</code></a></li>
@@ -113,7 +108,7 @@ Sorted by:
     </td>
   </tr>
   <tr>
-    <td>Data and meta</td>
+    <td>数据和元数据</td>
     <td>
         <ul>
             <li><a href="configure_common.md#common.retentionDuration"><code>common.retentionDuration</code></a></li>
@@ -125,7 +120,7 @@ Sorted by:
     </td>
   </tr>
   <tr>
-    <td>Administration</td>
+    <td>集群管理</td>
     <td>
         <ul>
             <li><a href="configure_log.md#log.level"><code>log.level</code></a></li>
@@ -141,11 +136,11 @@ Sorted by:
 
 </div>
 
-## Download an installation file
+## 下载安装文件
 
-Download the installation file for Milvus [standalone](https://github.com/milvus-io/milvus/releases/download/v2.0.1/milvus-standalone-docker-compose.yml) or [cluster](https://github.com/milvus-io/milvus/releases/download/v2.0.1/milvus-cluster-docker-compose.yml), and save it as `docker-compose.yml`.
+下载 Milvus [单机版](https://github.com/milvus-io/milvus/releases/download/v2.0.1/milvus-standalone-docker-compose.yml) 或[分布式版](https://github.com/milvus-io/milvus/releases/download/v2.0.1/milvus-cluster-docker-compose.yml) 的安装文件，并保存为 `docker-compose.yml`。
 
-You can also simply run the following command.
+你也可以简单地运行以下命令。
 
 ```
 # For Milvus standalone
@@ -157,11 +152,11 @@ $ wget https://github.com/milvus-io/milvus/releases/download/v2.0.1/milvus-stand
 $ wget https://github.com/milvus-io/milvus/releases/download/v2.0.1/milvus-cluster-docker-compose.yml -O docker-compose.yml
 ```
 
-## Modify the installation file
+## 修改安装文件
 
-In `docker-compose.yml`, add a `volumes` section under each Milvus component, i.e. root coord, data coord, data node, query coord, query node, index coord, index node, and proxy. 
+在 `docker-compose.yml` 中，在每个 Milvus 组件下添加 `volumes` 部分，即 root coord, data coord, data node, query coord, query node, index coord, index node 和 proxy。
 
-Map the local path to your `milvus.yaml` file onto the corresponding docker container paths to the configuration files `/milvus/configs/milvus.yaml` under all `volumes` sections.
+将你的 `milvus.yaml` 文件的本地路径映射到所有 `volumes` 部分下的配置文件 `/milvus/configs/milvus.yaml` 的相应 docker 容器路径。
 
 ```yaml
 ...
@@ -181,20 +176,20 @@ proxy:
 ```
 
 <div class="alert note">
-Data is stored in the <code>/volumes</code> folder according to the default configuration in <code>docker-compose.yml</code>. To change the folder to store data, edit <code>docker-compose.yml</code> or run <code>$ export DOCKER_VOLUME_DIRECTORY=</code>.
+根据 <code>docker-compose.yml</code> 中的默认配置，数据存储在 <code>/volumes</code> 目录中。要更改目录以存储数据，请编辑 <code>docker-compose.yml</code> 或者运行 <code>$ export DOCKER_VOLUME_DIRECTORY=</code>。
 </div>
 
-## Start Milvus
+## 启动 Milvus
 
-Having finished modifying the configuration file and installation file, you can then start Milvus.
+修改完配置文件和安装文件后，即可启动 Milvus。
 
 ```
 $ sudo docker-compose up -d
 ```
 
-## What's next
+## 更多内容
 
-- If you want to learn how to monitor the Milvus services and create alerts:
+- 如果你想了解如何监控 Milvus 服务并创建警报：
   - Learn [Monitor Milvus 2.0 with Prometheus Operator on Kubernetes](monitor.md)
   - Learn [Visualize Milvus Metrics in Grafana](visualize.md).
 
