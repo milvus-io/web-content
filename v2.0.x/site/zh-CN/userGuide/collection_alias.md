@@ -390,6 +390,6 @@ create alias -c book -A -a publication
   - [进行向量搜索](search.md)
   - [进行混合搜索](hybridsearch.md)
 - 探索 Milvus SDK 的 API 参考：
-  - [PyMilvus API reference](/api-reference/pymilvus/v2.0.1/tutorial.html)
+  - [PyMilvus API reference](/api-reference/pymilvus/v2.0.2/tutorial.html)
   - [Node.js API reference](/api-reference/node/v2.0.1/tutorial.html)
 

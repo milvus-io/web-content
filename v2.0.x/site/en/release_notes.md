@@ -6,11 +6,73 @@ summary: Milvus Release Notes
 
 Find out what’s new in Milvus! This page summarizes information about new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.0.0-RC1 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.0.2
+
+Release date: 2022-04-02
+
+<h3 id="v2.0.2">Compatibility</h3>
+
+<table class="version">
+	<thead>
+	<tr>
+		<th>Milvus version</th>
+		<th>Python SDK version</th>
+		<th>Java SDK version</th>
+		<th>Go SDK version</th>
+		<th>Node.js SDK version</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>2.0.2</td>
+		<td>2.0.2</td>
+		<td>2.0.4</td>
+		<td>2.0.0</td>
+		<td>2.0.2</td>
+	</tr>
+	</tbody>
+</table>
+
+
+Milvus 2.0.2 is a minor bug-fix version of Milvus 2.0. We fixed multiple critical issues of collection load failure and server crash. We've also greatly boosted the query by ID performance by utilizing primary key index. The Prometheus metrics is redesigned in this version and we highly recommend you to deploy the monitoring system in production environment.
+
+<h3 id="v2.0.2">Bug fixes</h3>
+
+- [#16338](https://github.com/milvus-io/milvus/pull/16338) Data coord uses VChannel when when unsubscribing to data node.
+- [#16178](https://github.com/milvus-io/milvus/pull/16178) [#15725](https://github.com/milvus-io/milvus/pull/15725) Query node crashes.
+- [#16035](https://github.com/milvus-io/milvus/pull/16035) [#16063](https://github.com/milvus-io/milvus/pull/16063) [#16066](https://github.com/milvus-io/milvus/pull/16066) Collection load error.
+- [#15932](https://github.com/milvus-io/milvus/pull/15932) Compaction runtime error.
+- [#15823](https://github.com/milvus-io/milvus/pull/15823) `DescribeCollection` RPC fails in data node failover.
+- [#15783](https://github.com/milvus-io/milvus/pull/15783) Recall drops after compaction.
+- [#15790](https://github.com/milvus-io/milvus/pull/15790) Shallow copy of `typeutil.AppendFieldData`.
+- [#15728](https://github.com/milvus-io/milvus/pull/15728) Query coord sets wrong `watchDmchannelInfo` when one partition is empty.
+- [#15712](https://github.com/milvus-io/milvus/pull/15712) `DEPLOY_MODE` is got or used before set.
+- [#15702](https://github.com/milvus-io/milvus/pull/15702) Data coord panics if message queue service quits before it.
+- [#15707](https://github.com/milvus-io/milvus/pull/15707) Compaction generates empty segment.
+
+<h3 id="v2.0.2">Performance</h3>
+
+- [#16327](https://github.com/milvus-io/milvus/pull/16327) Accelerates query speed in sealed segments.
+- [#15732](https://github.com/milvus-io/milvus/pull/15732) [#15738](https://github.com/milvus-io/milvus/pull/15738) [#15774](https://github.com/milvus-io/milvus/pull/15774) [#15749](https://github.com/milvus-io/milvus/pull/15749) [#15614](https://github.com/milvus-io/milvus/pull/15614) Avoids memory copy for `kv` interface && GGO.
+
+<h3 id="v2.0.2">Improvements</h3>
+
+- [#16244](https://github.com/milvus-io/milvus/pull/16244) [#16243](https://github.com/milvus-io/milvus/pull/16243) [#16245](https://github.com/milvus-io/milvus/pull/16245) Extends `DataCluster` Watch information via etcd.
+- [#15760](https://github.com/milvus-io/milvus/pull/15760) [#15787](https://github.com/milvus-io/milvus/pull/15787) [#16252](https://github.com/milvus-io/milvus/pull/16252) Fixes CentOS build.
+- [#15759](https://github.com/milvus-io/milvus/pull/15759) Refines code of data node `binlogIO`.
+
+<h3 id="v2.0.2">Features</h3>
+
+- [#15540](https://github.com/milvus-io/milvus/pull/15540) Adds and implements `chunkManager` interface.
+- [#16072](https://github.com/milvus-io/milvus/pull/16072) [#15839](https://github.com/milvus-io/milvus/pull/15839) [#15684](https://github.com/milvus-io/milvus/pull/15684) [#15640](https://github.com/milvus-io/milvus/pull/15640) [#15582](https://github.com/milvus-io/milvus/pull/15582) [#15649](https://github.com/milvus-io/milvus/pull/15649) [#15650](https://github.com/milvus-io/milvus/pull/15650) [#15606](https://github.com/milvus-io/milvus/pull/15606) Refines Prometheus metrics.
+
+
+
 ## v2.0.1
 
 Release date: 2022-02-23
 
-<h3 id="v2.0.0">Compatibility</h3>
+<h3 id="v2.0.1">Compatibility</h3>
 
 <table class="version">
 	<thead>

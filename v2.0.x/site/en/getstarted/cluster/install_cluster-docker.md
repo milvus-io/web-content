@@ -23,10 +23,10 @@ You can also build Milvus from source code at [GitHub](https://github.com/milvus
 
 ## Download an installation file
 
-[Download](https://github.com/milvus-io/milvus/releases/download/v2.0.1/milvus-cluster-docker-compose.yml) `milvus-cluster-docker-compose.yml` directly or with the following command, and save it as `docker-compose.yml`.
+[Download](https://github.com/milvus-io/milvus/releases/download/v2.0.2/milvus-cluster-docker-compose.yml) `milvus-cluster-docker-compose.yml` directly or with the following command, and save it as `docker-compose.yml`.
 
 ```
-$ wget https://github.com/milvus-io/milvus/releases/download/v2.0.1/milvus-cluster-docker-compose.yml -O docker-compose.yml
+$ wget https://github.com/milvus-io/milvus/releases/download/v2.0.2/milvus-cluster-docker-compose.yml -O docker-compose.yml
 ```
 
 

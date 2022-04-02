@@ -312,5 +312,5 @@ System.out.println(wrapperQuery.getFieldWrapper("word_count").getFieldData());
   - [Conduct a hybrid search](hybridsearch.md)
   - [Search with Time Travel](timetravel.md)
 - 探索 Milvus SDKs 的 API 参考：
-  - [PyMilvus API reference](/api-reference/pymilvus/v2.0.1/tutorial.html)
+  - [PyMilvus API reference](/api-reference/pymilvus/v2.0.2/tutorial.html)
   - [Node.js API reference](/api-reference/node/v2.0.1/tutorial.html)

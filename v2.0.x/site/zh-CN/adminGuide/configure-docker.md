@@ -21,10 +21,10 @@ summary: Learn how to configure your Milvus.
 
 ## 下载配置文件
 
-直接[下载](https://raw.githubusercontent.com/milvus-io/milvus/v2.0.1/configs/milvus.yaml) `milvus.yaml` 或者使用以下命令。
+直接[下载](https://raw.githubusercontent.com/milvus-io/milvus/v2.0.2/configs/milvus.yaml) `milvus.yaml` 或者使用以下命令。
 
 ```
-$ wget https://raw.githubusercontent.com/milvus-io/milvus/v2.0.1/configs/milvus.yaml
+$ wget https://raw.githubusercontent.com/milvus-io/milvus/v2.0.2/configs/milvus.yaml
 ```
 
 ## 修改配置文件
@@ -138,18 +138,18 @@ $ wget https://raw.githubusercontent.com/milvus-io/milvus/v2.0.1/configs/milvus.
 
 ## 下载安装文件
 
-下载 Milvus [单机版](https://github.com/milvus-io/milvus/releases/download/v2.0.1/milvus-standalone-docker-compose.yml) 或[分布式版](https://github.com/milvus-io/milvus/releases/download/v2.0.1/milvus-cluster-docker-compose.yml) 的安装文件，并保存为 `docker-compose.yml`。
+下载 Milvus [单机版](https://github.com/milvus-io/milvus/releases/download/v2.0.2/milvus-standalone-docker-compose.yml) 或[分布式版](https://github.com/milvus-io/milvus/releases/download/v2.0.2/milvus-cluster-docker-compose.yml) 的安装文件，并保存为 `docker-compose.yml`。
 
 你也可以简单地运行以下命令。
 
 ```
 # For Milvus standalone
-$ wget https://github.com/milvus-io/milvus/releases/download/v2.0.1/milvus-standalone-docker-compose.yml -O docker-compose.yml
+$ wget https://github.com/milvus-io/milvus/releases/download/v2.0.2/milvus-standalone-docker-compose.yml -O docker-compose.yml
 ```
 
 ```
 # For Milvus cluster
-$ wget https://github.com/milvus-io/milvus/releases/download/v2.0.1/milvus-cluster-docker-compose.yml -O docker-compose.yml
+$ wget https://github.com/milvus-io/milvus/releases/download/v2.0.2/milvus-cluster-docker-compose.yml -O docker-compose.yml
 ```
 
 ## 修改安装文件

@@ -27,10 +27,10 @@ summary: Get started with Milvus faster using this Python example code.
 
 ## 下载示例代码
 
-使用下面的命令 [下载](https://raw.githubusercontent.com/milvus-io/pymilvus/v2.0.1/examples/hello_milvus.py) `hello_milvus.py` 
+使用下面的命令 [下载](https://raw.githubusercontent.com/milvus-io/pymilvus/v2.0.2/examples/hello_milvus.py) `hello_milvus.py` 
 
 ```bash
-$ wget https://raw.githubusercontent.com/milvus-io/pymilvus/v2.0.1/examples/hello_milvus.py
+$ wget https://raw.githubusercontent.com/milvus-io/pymilvus/v2.0.2/examples/hello_milvus.py
 ```
 
 
