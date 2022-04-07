@@ -73,7 +73,7 @@ embedding_field = FieldSchema(name="embedding", dtype=DataType.FLOAT_VECTOR, dim
   - INT16: numpy.int16
   - INT32: numpy.int32
   - INT64: numpy.int64
-- 标亮 field 支持:
+- 标量 field 支持:
   - BOOL: Boolean (`true` 或 `false`)
   - INT8: numpy.int8
   - INT16: numpy.int16
