@@ -4,9 +4,16 @@ id: glossary.md
 
 # 术语表
 
-## Binlog
+<div class="alert note">
+<h3>Milvus Docs 需要你的帮助</h3>
+本文档暂时没有中文版本，欢迎你成为社区贡献者，协助中文技术文档的翻译。<br>
+你可以通过页面右边的 <b>编辑</b> 按钮直接贡献你的翻译。更多详情，参考 <a href="https://github.com/milvus-io/milvus-docs/blob/v2.0.0/CONTRIBUTING.md">贡献指南</a>。如需帮助，你可以 <a href="https://github.com/milvus-io/milvus-docs/issues/new/choose">提交 GitHub Issue</a>。
+</div>
 
-A binlog is a binary log, or a smaller unit in segment, that records and handles the updates and changes made to data in the Milvus vector database. Data from a segment is persisted in multiple binlogs. There are three types of binlogs in Milvus: InsertBinlog, DeleteBinlog, and DDLBinlog.
+
+## Channel
+
+There are two different channels in Milvus. They are [PChannel](#PChannel) and [VChannel](#VChannel). Each PChannel corresponds to a topic for log storage. While each VChannel corresponds a shard in a collection. 
 
 ## Collection
 包含一组 entity，可以等价于关系型数据库系统（RDBMS）中的表。
@@ -49,7 +56,7 @@ Partition 的意义在于通过划定分区减少数据读取，而shard 的意�
 </div>
 
 ## VChannel
-VChannel 表示逻辑通道。每个集合将分配一组 VChannels，用于记录数据的插入、删除和更新。VChannels 在逻辑上是分开的，但在物理上共享资源。
+VChannel 表示逻辑通道。每个 VChannel 对应一个 shard。每个集合将分配一组 VChannels，用于记录数据的插入、删除和更新。VChannels 在逻辑上是分开的，但在物理上共享资源。
 
 
 ## 单机部署
@@ -73,6 +80,13 @@ VChannel 表示逻辑通道。每个集合将分配一组 VChannels，用于记�
 ## 日志序列
 日志序列记录了在 Milvus 中更改集合状态的所有操作。
 
+## Log snapshot
+
+A log snapshot is a binary log, a smaller unit in segment that records and handles the updates and changes made to data in the Milvus vector database. Data from a segment is persisted in multiple binlogs. There are three types of binlogs in Milvus: InsertBinlog, DeleteBinlog, and DDLBinlog.
+
+## Message storage
+
+Message storage is the log storage engine of Milvus. 
 
 ## 索引
 索引基于原始数据构建，可以提高对 collection 数据搜索的速度。Milvus 支持多种[索引类型](index.md)。

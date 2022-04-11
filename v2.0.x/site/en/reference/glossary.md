@@ -5,9 +5,9 @@ title: Glossary
 
 # Glossary
 
-## Binlog
+## Channel
 
-A binlog is a binary log, or a smaller unit in segment, that records and handles the updates and changes made to data in the Milvus vector database. Data from a segment is persisted in multiple binlogs. There are three types of binlogs in Milvus: InsertBinlog, DeleteBinlog, and DDLBinlog.
+There are two different channels in Milvus. They are [PChannel](#PChannel) and [VChannel](#VChannel). Each PChannel corresponds to a topic for log storage. While each VChannel corresponds a shard in a collection. 
 
 ## Collection
 A collection in Milvus is equivalent to a table in a relational database management system (RDBMS). In Milvus, collections are used to store and manage entities.
@@ -35,8 +35,16 @@ The log broker is a publish-subscribe system that supports playback. It is respo
 ## Log sequence
 The log sequence records all operations that change collection states in Milvus.
 
+## Log snapshot
+
+A log snapshot is a binary log, a smaller unit in segment that records and handles the updates and changes made to data in the Milvus vector database. Data from a segment is persisted in multiple binlogs. There are three types of binlogs in Milvus: InsertBinlog, DeleteBinlog, and DDLBinlog.
+
 ## Log subscriber
 Log subscribers subscribe to the log sequence to update the local data and provides services in the form of read-only copies.
+
+## Message storage
+
+Message storage is the log storage engine of Milvus. 
 
 ## Milvus cluster
 In a cluster deployment of Milvus, services are provided by a group of nodes to achieve high availability and easy scalability.
@@ -51,7 +59,7 @@ Normalization refers to the process of converting an embedding (vector) so that 
 A partition is a division of a collection. Milvus supports dividing collection data into multiple parts on physical storage. This process is called partitioning, and each partition can contain multiple segments.
 
 ## PChannel
-PChannel stands for physical channel. Each PChannel corresponds to a topic for log storage.  A group of 256 PChannels by default will be assigned to store logs that record data insertion, deletion, and update when the Milvus cluster is started.
+PChannel stands for physical channel. Each PChannel corresponds to a topic for log storage. A group of 256 PChannels by default will be assigned to store logs that record data insertion, deletion, and update when the Milvus cluster is started.
 
 ## Schema
 Schema is the meta information that defines data type and data property. Each collection has its own collection schema that defines all the fields of a collection, automatic ID (primary key) allocation enablement, and collection description. Also included in collection schemas are field schemas that defines the name, data type, and other properties of a field. 
@@ -70,7 +78,7 @@ Partitioning works to reduce read load by specifying a partition name, while sha
 Unstructured data, including images, video, audio, and natural language, is information that doesn't follow a predefined model or manner of organization. This data type accounts for ~80% of the world's data, and can be converted into vectors using various artificial intelligence (AI) and machine learning (ML) models.
 
 ## VChannel
-VChannel stands for logical channel. Each collection will be assigned a group of VChannels for recording data insertion, deletion, and update. VChannels are logically separated but physically share resources.
+VChannel stands for logical channel. Each VChannel represents a shard in a collection. Each collection will be assigned a group of VChannels for recording data insertion, deletion, and update. VChannels are logically separated but physically share resources.
 
 
 ## Embedding Vector
