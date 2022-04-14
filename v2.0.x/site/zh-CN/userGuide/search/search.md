@@ -319,7 +319,6 @@ SearchParam searchParam = SearchParam.newBuilder()
 		.withTopK(SEARCH_K)
 		.withVectors(search_vectors)
 		.withVectorFieldName("book_intro")
-		.withExpr()
 		.withParams(SEARCH_PARAM)
 		.build();
 R<SearchResults> respSearch = milvusClient.search(searchParam);
