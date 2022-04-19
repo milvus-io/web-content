@@ -14,7 +14,7 @@ summary: 了解如何使用 Milvus Operator 在 Kubernetes 上安装 Milvus 集�
 你也可以[从源代码编译 Milvus](https://github.com/milvus-io/milvus#to-start-developing-milvus)。
 
 
-<div class="tab-wrapper"><a href="install_cluster-docker.md" class=''>Docker Compose</a><a href="install_cluster-helm.md" class=''>Helm</a><a href="install_cluster-milvusoperator.md" class='active '>Milvus Operator</a><a href="install_cluster-ansible.md" class=''>Ansible Controller</a></div>
+<div class="tab-wrapper"><a href="install_cluster-docker.md" class=''>Docker Compose</a><a href="install_cluster-helm.md" class=''>Helm</a><a href="install_cluster-milvusoperator.md" class='active '>Milvus Operator</a><a href="install_cluster-ansible.md" class=''>Ansible</a></div>
 
 ## 创建 Kubernetes 集群
 

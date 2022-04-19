@@ -1,6 +1,6 @@
 ---
 id: install_cluster-ansible.md
-label: Ansible Controller
+label: Ansible
 related_key: Docker
 order: 4
 group: install_cluster-docker.md
@@ -18,14 +18,14 @@ If you run into image loading errors while installing, you can [Install Milvus O
 You can also build Milvus from source code at [GitHub](https://github.com/milvus-io/milvus#to-start-developing-milvus).
 
 
-<div class="tab-wrapper"><a href="install_cluster-docker.md" class=''>Docker Compose</a><a href="install_cluster-helm.md" class=''>Helm</a><a href="install_cluster-milvusoperator.md" class=''>Milvus Operator</a><a href="install_cluster-ansible.md" class='active '>Ansible Controller</a></div>
+<div class="tab-wrapper"><a href="install_cluster-docker.md" class=''>Docker Compose</a><a href="install_cluster-helm.md" class=''>Helm</a><a href="install_cluster-milvusoperator.md" class=''>Milvus Operator</a><a href="install_cluster-ansible.md" class='active '>Ansible</a></div>
 
 
 ## Prerequisites
 
 - Hardware: Three virtual machines each with four cores of CPU and 8 GB of RAM or more
 - Operating system: Ubuntu 20.04 LTS
-- Software: Ansible Controller
+- Software: [Ansible Controller](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html)
 
 ## Download Ansible Milvus node deployment Playbook
 
