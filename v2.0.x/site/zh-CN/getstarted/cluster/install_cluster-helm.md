@@ -12,7 +12,7 @@ group: install_cluster-docker.md
 
 
 
-<div class="tab-wrapper"><a href="install_cluster-docker.md" class=''>Docker Compose</a><a href="install_cluster-helm.md" class='active '>Helm</a><a href="install_cluster-milvusoperator.md" class=''>Milvus Operator</a></div>
+<div class="tab-wrapper"><a href="install_cluster-docker.md" class=''>Docker Compose</a><a href="install_cluster-helm.md" class='active '>Helm</a><a href="install_cluster-milvusoperator.md" class=''>Milvus Operator</a><a href="install_cluster-ansible.md" class=''>Ansible Controller</a></div>
 
 我们推荐使用 minikube 在 Kubernetes 上安装 Milvus。 如下图所示，Minikube 默认安装 storageclass 组件。 如需使用其他方式安装 Milvus，请手动配置 storageclass。 详见[改变默认 StorageClass](https://kubernetes.io/zh/docs/tasks/administer-cluster/change-default-storage-class/)。
 

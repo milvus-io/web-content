@@ -18,7 +18,7 @@ If you run into image loading errors while installing, you can [Install Milvus O
 You can also build Milvus from source code at [GitHub](https://github.com/milvus-io/milvus#to-start-developing-milvus).
 
 
-<div class="tab-wrapper"><a href="install_cluster-docker.md" class=''>Docker Compose</a><a href="install_cluster-helm.md" class='active '>Helm</a><a href="install_cluster-milvusoperator.md" class=''>Milvus Operator</a></div>
+<div class="tab-wrapper"><a href="install_cluster-docker.md" class=''>Docker Compose</a><a href="install_cluster-helm.md" class='active '>Helm</a><a href="install_cluster-milvusoperator.md" class=''>Milvus Operator</a><a href="install_cluster-ansible.md" class=''>Ansible Controller</a></div>
 
 We recommend installing Milvus on Kubernetes with minikube. minikube has a dependency on default storageclass when installed. Check the dependency by running the following command. Other installation methods requires manual configuration of the storageclass. See [Change the Default Storageclass](https://kubernetes.io/docs/tasks/administer-cluster/change-default-storage-class/) for more information.
 
