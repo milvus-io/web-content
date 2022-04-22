@@ -682,4 +682,4 @@ No.1:
   - [Conduct a hybrid search](hybridsearch.md)
 - Explore API references for Milvus SDKs:
   - [PyMilvus API reference](/api-reference/pymilvus/v2.0.2/tutorial.html)
-  - [Node.js API reference](/api-reference/node/v2.0.1/tutorial.html)
+  - [Node.js API reference](/api-reference/node/v2.0.2/tutorial.html)

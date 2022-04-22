@@ -140,5 +140,5 @@ delete index -c book
   - [使用 Time Travel 搜索](timetravel.md)
 - 探索 Milvus SDK 的 API 参考:
   - [PyMilvus API reference](/api-reference/pymilvus/v2.0.2/tutorial.html)
-  - [Node.js API reference](/api-reference/node/v2.0.1/tutorial.html)
+  - [Node.js API reference](/api-reference/node/v2.0.2/tutorial.html)
 

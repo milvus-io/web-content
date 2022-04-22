@@ -619,4 +619,4 @@ release -c book
   - [Search with Time Travel](timetravel.md)
 - Explore API references for Milvus SDKs:
   - [PyMilvus API reference](/api-reference/pymilvus/v2.0.2/tutorial.html)
-  - [Node.js API reference](/api-reference/node/v2.0.1/tutorial.html)
+  - [Node.js API reference](/api-reference/node/v2.0.2/tutorial.html)

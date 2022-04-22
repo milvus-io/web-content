@@ -459,4 +459,4 @@ System.out.println(wrapperSearch.getFieldData("book_id", 0));
   - [Search with Time Travel](timetravel.md)
 - 探索 Milvus SDKs 的 API 参考：
   - [PyMilvus API reference](/api-reference/pymilvus/v2.0.2/tutorial.html)
-  - [Node.js API reference](/api-reference/node/v2.0.1/tutorial.html)
+  - [Node.js API reference](/api-reference/node/v2.0.2/tutorial.html)

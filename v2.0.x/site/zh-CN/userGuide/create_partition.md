@@ -186,5 +186,5 @@ create partition -c book -p novel
   - [混合检索](hybridsearch.md)
 - 探索 Milvus SDKs 中的 API：
   - [PyMilvus API reference](/api-reference/pymilvus/v2.0.2/tutorial.html)
-  - [Node.js API reference](/api-reference/node/v2.0.1/tutorial.html)
+  - [Node.js API reference](/api-reference/node/v2.0.2/tutorial.html)
 

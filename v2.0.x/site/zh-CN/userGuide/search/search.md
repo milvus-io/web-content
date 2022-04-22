@@ -622,4 +622,4 @@ release -c book
   - [使用 Time Travel 搜索](timetravel.md)
 - 探索 Milvus SDKs 的 API 参考:
   - [PyMilvus API 参考](/api-reference/pymilvus/v2.0.2/tutorial.html)
-  - [Node.js API 参考](/api-reference/node/v2.0.1/tutorial.html)
+  - [Node.js API 参考](/api-reference/node/v2.0.2/tutorial.html)

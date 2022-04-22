@@ -261,5 +261,5 @@ load_balance -s 3 -d 4 -ss 431067441441538050
   - [进行混合搜索](hybridsearch.md)
 - 探索 Milvus SDK 的 API 参考：
   - [PyMilvus API 参考](/api-reference/pymilvus/v2.0.2/tutorial.html)
-  - [Node.js API 参考](/api-reference/node/v2.0.1/tutorial.html)
+  - [Node.js API 参考](/api-reference/node/v2.0.2/tutorial.html)
 
