@@ -107,3 +107,5 @@ Follow Milvus on social media:
 - [Medium](https://medium.com/@milvusio)
 
 - [Twitter](https://twitter.com/milvusio)
+
+- [LinkedIn](https://www.linkedin.com/company/the-milvus-project)
