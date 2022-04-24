@@ -6,24 +6,18 @@ summary: Index mechanism in Milvus.
 
 # Vector Index
 
-Indexing, a process of organizing data, is a huge component of what makes it possible to efficiently query the million-, billion-, or even trillion-vector datasets that vector databases rely on. 
+This topic lists various types of indexes Milvus supports, scenarios each of them best suits, and parameters user can configure to achieve better search performance.
 
-## Accelerating vector similarity search
+Indexing is the process of efficiently organizing data, and it plays a major role in making similarity search useful by dramatically accelerating time-consuming queries on large datasets. 
 
-Similarity search engines work by comparing an input to the objects in a database to find those that are most similar to the input. Indexing is the process of efficiently organizing data, and it plays a major role in making similarity search useful by dramatically accelerating time-consuming queries on large datasets. After a massive vector dataset is indexed, queries can be routed to clusters, or subsets of data, that are most likely to contain vectors similar to an input query. In practice, this means a certain degree of accuracy is sacrificed to speed up queries on really large vector datasets.
+To improve query performance, you can [specify an index type](build_index.md) for each vector field. 
 
-To improve query performance, you can specify an index type for each vector field. Currently, a vector field only supports one index type. Milvus automatically deletes the old index when switching the index type.
-
-## Create indexes
-
-When the `create_index` method is called, Milvus synchronously indexes the existing data on vector field. Whereas Milvus stores massive data in segments, it creates an index file for each data segment separately when indexing.
-
-<div class="alert note">
-By default, Milvus does not index a segment with less than 1,024 rows. To change this parameter, configure <a href="configure_rootcoord.md#rootCoord.minSegmentSizeToEnableIndex"><code>rootCoord.minSegmentSizeToEnableIndex</code></a> in <code>milvus.yaml</code>.
+<div class="alert note"> 
+Currently, a vector field only supports one index type. Milvus automatically deletes the old index when switching the index type.
 </div>
 
 
-## Selecting an Index Best Suited for Your Scenario
+## ANNS vector indexes
 
 Most of the vector index types supported by Milvus use approximate nearest neighbors search (ANNS). Compared with accurate retrieval, which is usually very time-consuming, the core idea of ANNS is no longer limited to returning the most accurate result, but only searching for neighbors of the target. ANNS improves retrieval efficiency by sacrificing accuracy within an acceptable range.
 
@@ -35,6 +29,8 @@ According to the implementation methods, the ANNS vector index can be divided in
 - Graph-based index
 - Hash-based index
 - Quantization-based index
+
+### Indexes supported in Milvus
 
 The following table classifies the indexes that Milvus supports:
 
@@ -156,10 +152,7 @@ The following table classifies the indexes that Milvus supports:
 </table>
 
 
-
-### Supported vector indexes
-
-#### FLAT
+### FLAT
 
 <a name="FLAT"></a>
 
@@ -173,7 +166,7 @@ FLAT is accurate because it takes an exhaustive approach to search, which means 
   | ------------- | -------------------------------------- | ----------------------------------- |
   | `metric_type` | [Optional] The chosen distance metric. | See [Supported Metrics](metric.md). |
 
-#### IVF_FLAT
+### IVF_FLAT
 
 <a name="IVF_FLAT"></a>
 
@@ -196,7 +189,7 @@ IVF_FLAT is the most basic IVF index, and the encoded data stored in each unit i
   | --------- | ------------------------ | ----------------------------------------------- |
   | `nprobe`  | Number of units to query | CPU: [1, nlist] <br> GPU: [1, min(2048, nlist)] |
 
-#### IVF_SQ8
+### IVF_SQ8
 
 <a name="IVF_SQ8"></a>
 
@@ -218,7 +211,7 @@ When disk, CPU, or GPU memory resources are limited, IVF_SQ8 is a better option 
   | --------- | ------------------------ | ----------------------------------------------- |
   | `nprobe`  | Number of units to query | CPU: [1, nlist] <br> GPU: [1, min(2048, nlist)] |
 
-#### IVF_PQ
+### IVF_PQ
 
 <a name="IVF_PQ"></a>
 
@@ -246,7 +239,7 @@ Index building parameters and search parameters vary with Milvus distribution. S
 
 
 
-#### HNSW
+### HNSW
 
 <a name="HNSW"></a>
 
@@ -268,7 +261,7 @@ In order to improve performance, HNSW limits the maximum degree of nodes on each
   | --------- | ------------ | ---------------- |
   | `ef`      | Search scope | [`top_k`, 32768] |
 
-#### IVF_HNSW
+### IVF_HNSW
 
 <a name="IVF_HNSW"></a>
 
@@ -290,7 +283,7 @@ IVF_HNSW is an indexing algorithm based on IVF_FLAT and HNSW. Using HNSW indexin
   | `nprobe`  | Number of units to query   | [1, nlist]       |
   | `ef`      | Search scope               | [`top_k`, 32768] |
 
-#### RHNSW_FLAT
+### RHNSW_FLAT
 
 <a name="RHNSW_FLAT"></a>
 
@@ -310,7 +303,7 @@ RHNSW_FLAT (Refined Hierarchical Small World Graph) is a refined indexing algori
   | --------- | ------------ | ---------------- |
   | `ef`      | Search scope | [`top_k`, 32768] |
 
-#### RHNSW_SQ
+### RHNSW_SQ
 
 <a name="RHNSW_SQ"></a>
 
@@ -330,7 +323,7 @@ RHNSW_SQ (Refined Hierarchical Small World Graph and Scalar Quantization) is a r
   | --------- | ------------ | ---------------- |
   | `ef`      | Search scope | [`top_k`, 32768] |
 
-#### RHNSW_PQ
+### RHNSW_PQ
 
 <a name="RHNSW_PQ"></a>
 
@@ -351,7 +344,7 @@ RHNSW_SQ (Refined Hierarchical Small World Graph and Product Quantization) is a 
   | --------- | ------------ | ---------------- |
   | `ef`      | Search scope | [`top_k`, 32768] |
 
-#### ANNOY
+### ANNOY
 
 <a name="ANNOY"></a>
 
