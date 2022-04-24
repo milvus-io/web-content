@@ -87,16 +87,15 @@ id: home.md
 
 ## What's new in docs
 
+_Apr 2022_
+
+- Added Milvus cluster installation guidance with [Ansible](install_cluster-ansible.md).
+- Remade API Reference of [PyMilvus](https://milvus.io/api-reference/pymilvus/v2.0.2/About.md) and [Milvus GO SDK](https://milvus.io/api-reference/go/v2.0.0/About.md).
+
 _Mar 2022_
 
 - Added guidance on [distance calculation](calculate_distance.md).
 - Added documentation on how to [load](load_partition.md) and [release](release_partition.md) a partition.
 - Added Milvus [benchmark](benchmark.md) report.
-
-_Feb 2022_
-
-- Now you can [compile Milvus on Mac](https://github.com/milvus-io/milvus/blob/master/DEVELOPMENT.md).
-- Added documentation on how to [compact data](compact_data.md).
-- Added new [vector index](index.md) supported by Milvus.
 
 </div>

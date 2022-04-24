@@ -87,16 +87,17 @@ id: home.md
 
 ## 文档动态
 
+_2022 年 04 月_
+
+- 添加 [Ansible](install_cluster-ansible.md) 安装分布式版 Milvus 指南。
+- 重制 [PyMilvus](https://milvus.io/api-reference/pymilvus/v2.0.2/About.md) 以及 [Milvus GO SDK](https://milvus.io/api-reference/go/v2.0.0/About.md) API 参考文档。
+
+
 _2022 年 03 月_
 
 - 添加 [距离计算](calculate_distance.md) 指南。
 - 添加 [加载](load_partition.md) and [释放](release_partition.md) partition 指南。
 - 添加 Milvus [性能测试报告](benchmark.md)。
 
-_2022 年 02 月_
-
-- 现已支持 [在 Mac 上编译 Milvus](https://github.com/milvus-io/milvus/blob/master/DEVELOPMENT.md)。
-- 添加 [清理数据](compact_data.md) 指南。
-- 在 [向量索引](index.md) 中添加新增支持的 IVF_HNSW、RHNSW_FLAT、RHNSW_SQ、RHNSW_PQ 等索引的描述。
 
 </div>
