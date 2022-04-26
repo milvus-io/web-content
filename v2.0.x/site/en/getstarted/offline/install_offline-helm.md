@@ -31,13 +31,20 @@ helm repo update
 - For Milvus standalone:
 
 ```
-helm template my-release --set cluster.enabled=true --set etcd.replicaCount=1 --set minio.mode=standalone --set pulsar.enabled=false milvus/milvus > milvus_manifest.yaml
+helm template my-release --set cluster.enabled=false --set etcd.replicaCount=1 --set minio.mode=standalone --set pulsar.enabled=false milvus/milvus > milvus_manifest.yaml
 ```
 
 - For Milvus cluster:
 
 ```cluster
 helm template my-release milvus/milvus > milvus_manifest.yaml
+```
+
+If you want to change multiple configurations, you can download a [`value.yaml`](https://github.com/milvus-io/milvus-helm/blob/master/charts/milvus/values.yaml) file, specify configurations in it, and generate a manifest based on it.
+
+```bash
+wget https://raw.githubusercontent.com/milvus-io/milvus-helm/master/charts/milvus/values.yaml
+helm template -f values.yaml my-release milvus/milvus > milvus_manifest.yaml
 ```
 
 3. Download requirement and script files.
