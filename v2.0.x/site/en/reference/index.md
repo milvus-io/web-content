@@ -30,7 +30,7 @@ According to the implementation methods, the ANNS vector index can be divided in
 - Hash-based index
 - Quantization-based index
 
-### Indexes supported in Milvus
+## Indexes supported in Milvus
 
 The following table classifies the indexes that Milvus supports:
 
@@ -381,10 +381,4 @@ Therefore, when the total number of vectors approximately equals <code>nlist</co
 See <a href="https://medium.com/unstructured-data-service/how-to-choose-an-index-in-milvus-4f3d15259212">How to Choose an Index in Milvus</a> for more information.
 </p>
 </details>
-
-
-## Bibliography
-
-- HNSW: <a href="https://arxiv.org/abs/1603.09320">Efficient and robust approximate nearest neighbor search using Hierarchical Navigable Small World graphs</a>
-- ANNOY: <a href="https://erikbern.com/2015/10/01/nearest-neighbors-and-vector-models-part-2-how-to-search-in-high-dimensional-spaces.html">Nearest neighbors and vector models – part 2 – algorithms and data structures</a>
 
