@@ -308,6 +308,11 @@ describe collection -c book
 	<thead>
         <tr>
             <th>参数</th>
+            <th>描述</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
             <td><code>ctx</code></td>
             <td>控制调用 API 的 Context。</td>
         </tr>
