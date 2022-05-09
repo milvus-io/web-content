@@ -24,7 +24,7 @@ Users from Mainland China can add the URL "https://registry.docker-cn.com" to th
 
 #### Is Docker the only way to install and run Milvus?
 
-Docker is an efficient way to deploy Milvus, but not the only way. You can also deploy Milvus from source code. This requires Ubuntu (18.04 or higher) or CentOS (7 or higher). See [Building Milvus from Source Code](https://github.com/milvus-io/milvus/blob/master/INSTALL.md) for more information.
+Docker is an efficient way to deploy Milvus, but not the only way. You can also deploy Milvus from source code. This requires Ubuntu (18.04 or higher) or CentOS (7 or higher). See [Building Milvus from Source Code](https://github.com/milvus-io/milvus#build-milvus-from-source-code) for more information.
 
 #### What are the main factors affecting recall?
 
