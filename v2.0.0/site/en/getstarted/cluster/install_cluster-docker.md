@@ -23,12 +23,46 @@ You can also build Milvus from source code at [GitHub](https://github.com/milvus
 
 ## Download an installation file
 
-[Download](https://github.com/milvus-io/milvus/releases/download/v2.0.1/milvus-cluster-docker-compose.yml) `milvus-cluster-docker-compose.yml` directly or with the following command, and save it as `docker-compose.yml`.
+[Download](https://github.com/milvus-io/milvus/releases/download/v2.0.0-pre-ga/milvus-cluster-docker-compose.yml) `milvus-cluster-docker-compose.yml` directly or with the following command, and save it as `docker-compose.yml`.
 
 ```
-$ wget https://github.com/milvus-io/milvus/releases/download/v2.0.1/milvus-cluster-docker-compose.yml -O docker-compose.yml
+$ wget https://github.com/milvus-io/milvus/releases/download/v2.0.0-pre-ga/milvus-cluster-docker-compose.yml -O docker-compose.yml
 ```
 
+## Configure Milvus (optional)
+
+[Download](https://raw.githubusercontent.com/milvus-io/milvus/v2.0.0-pre-ga/configs/milvus.yaml) `milvus.yaml` directly or with the following command. 
+
+```
+$ wget https://raw.githubusercontent.com/milvus-io/milvus/v2.0.0-pre-ga/configs/milvus.yaml
+```
+
+Modify the configurations to suit your needs. See [Milvus Cluster System Configurations](configuration_cluster-basic.md) for more information.
+
+In `docker-compose.yml`, add a `volumes` section under each Milvus component, i.e. root coord, data coord, data node, query coord, query node, index coord, index node, and proxy. 
+
+Map the local path to your `milvus.yaml` file onto the corresponding docker container paths to the configuration files `/milvus/configs/milvus.yaml` under all `volumes` sections.
+
+```yaml
+...
+proxy:
+    container_name: milvus-proxy
+    image: milvusdb/milvus:v2.0.0-rc7-20211011-d567b21
+    command: ["milvus", "run", "proxy"]
+    volumes:       # Add a volumes section.
+      - /local/path/to/your/file:/milvus/configs/milvus.yaml   # Map the local path to the container path
+    environment:
+      ETCD_ENDPOINTS: etcd:2379
+      MINIO_ADDRESS: minio:9000
+      PULSAR_ADDRESS: pulsar://pulsar:6650
+    ports:
+      - "19530:19530"
+...
+```
+
+<div class="alert note">
+Data is stored in the <code>/volumes</code> folder according to the default configuration in <code>docker-compose.yml</code>. To change the folder to store data, edit <code>docker-compose.yml</code> or run <code>$ export DOCKER_VOLUME_DIRECTORY=</code>.
+</div>
 
 ## Start Milvus
 

@@ -11,9 +11,9 @@ summary: Milvus is an open-source vector database designed specifically for AI a
 
 ## 什么是 Milvus 向量数据库？
 
-Milvus 于 2019 年开源，致力于存储、索引和管理由深度神经网络学习与其他机器学习模型生成的海量 Embedding 向量。
+Milvus 于 2019 年开源，主要用于存储、索引和管理通过深度神经网络和机器学习模型产生的海量向量数据。
 
-Milvus 向量数据库专为向量查询与检索设计，能够为万亿级向量数据建立索引。与现有的主要用作处理结构化数据的关系型数据库不同，Milvus 在底层设计上就是为了处理由各种非结构化数据转换而来的 Embedding 向量而生。
+Milvus 向量数据库专为向量查询与检索设计，能够为万亿级向量数据建立索引。与传统关系型数据库不同，Milvus 主要用于自下而上地处理非结构化数据向量。非结构化数据没有统一的预定义模型，因此可以转化为向量。
 
 随着互联网不断发展，电子邮件、论文、物联网传感数据、社交媒体照片、蛋白质分子结构等非结构化数据已经变得越来越普遍。如果想要使用计算机来处理这些数据，需要使用 embedding 技术将这些数据转化为向量。随后，Milvus 会存储这些向量，并为其建立索引。Milvus 能够根据两个向量之间的距离来分析他们的相关性。如果两个向量十分相似，这说明向量所代表的源数据也十分相似。
 
@@ -31,7 +31,7 @@ Milvus 向量数据库专为向量查询与检索设计，能够为万亿级向�
 
 ### 特征向量
 
-向量又称为 embedding vector，是指由 embedding 技术从离散变量（如图片、视频、音频、自然语言等等各种非结构化数据）转变而来的连续向量。在数学表示上，向量是一个由浮点数或者二值型数据组成的 n 维数组。通过现代的向量转化技术，比如各种人工智能（AI）或者机器学习（ML）模型，可以将非结构化数据抽象为 n 维特征向量空间的向量。这样就可以采用最近邻算法（ANN）计算非结构化数据之间的相似度。
+向量又称为 embedding vector，是指由embedding技术从离散变量（如xxx等各种非结构化数据）转变而来的连续向量。在数学表示上，向量是一个由浮点数或者二值型数据组成的 n 维数组。通过现代的向量转化技术，比如各种人工智能（AI）或者机器学习（ML）模型，可以将非结构化数据抽象为 n 维特征向量空间的向量。这样就可以采用最近邻算法（ANN）计算非结构化数据之间的相似度。
 
 
 ### 向量相似度检索
@@ -60,7 +60,7 @@ Milvus 目前支持的向量索引类型大都属于 ANNS（Approximate Nearest 
 - **HNSW**：基于图的索引，适用于追求高查询效率的场景。
 - **ANNOY**：基于树的索引，适用于追求高召回率的场景。 
 
-更多内容详见[向量索引](index.md)。
+更多内容详见[根据应用场景选择索引](index_selection.md)。
 
 
 ### 距离计算公式
@@ -101,7 +101,7 @@ Milvus 2.0 是一款云原生向量数据库，采用存储与计算分离的架
 
 整个系统分为四个层面：
 
-- 接入层（Access Layer）：系统的门面，由一组无状态 proxy 组成。对外提供用户连接的 endpoint，负责验证客户端请求并合并返回结果。
+- 接入层（Access Layer）：系统的门面，由一组无状态 proxy 组成。对外提供用户连接的 endpoint，负责验证客户端请求并减少返回结果。
 - 协调服务（Coordinator Service）：系统的大脑，负责分配任务给执行节点。协调服务共有四种角色，分别为 root coord、data coord、query coord 和 index coord。
 - 执行节点（Worker Node）：系统的四肢，负责完成协调服务下发的指令和 proxy 发起的数据操作语言（DML）命令。执行节点分为三种角色，分别为 data node、query node 和 index node。
 - 存储服务 （Storage）： 系统的骨骼，负责 Milvus 数据的持久化，分为元数据存储（meta store）、消息存储（log broker）和对象存储（object storage）三个部分。
@@ -132,9 +132,9 @@ Milvus 客户端库对 Milvus API 进行了封装。你可以使用 Milvus 客�
 Milvus 生态系统提供多种强大的工具，包括：
 
 - [Milvus CLI](https://github.com/milvus-io/milvus_cli#overview)
-- [Attu](https://github.com/zilliztech/attu)：图形化管理系统。
+- [Milvus Attu](https://github.com/zilliztech/attu)：图形化管理系统。
 - [MilvusDM](https://milvus.io/docs/v2.0.0/migrate_overview.md)：用于导入或导出 Milvus 数据
-- [Milvus sizing tool](https://milvus.io/tools/sizing/)：用于根据向量数据量及索引类型估算所需的原始文件大小、内存大小及固态硬盘大小。
+- [Milvus sizing tool](https://zilliz.com/sizing-tool)：用于根据向量数据量及索引类型估算所需的原始文件大小、内存大小及固态硬盘大小。
 
 ## 更多资源
 

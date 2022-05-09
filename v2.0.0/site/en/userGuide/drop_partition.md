@@ -16,10 +16,8 @@ Dropping a partition irreversibly deletes all data within it.
 
 <div class="multipleCode">
   <a href="?python">Python </a>
-  <a href="?java">Java</a>
-  <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
-  <a href="?shell">CLI</a>
+  <a href="?cli">CLI</a>
 </div>
 
 
@@ -35,27 +33,7 @@ await milvusClient.partitionManager.dropPartition({
 });
 ```
 
-```go
-err := milvusClient.DropPartition(
-  context.Background(),   // ctx
-  "book",                 // CollectionName
-  "novel",                // partitionName
-)
-if err != nil {
-  log.Fatal("fail to drop partition:", err.Error())
-}
-```
-
-```java
-milvusClient.dropPartition(
-  DropPartitionParam.newBuilder()
-    .withCollectionName("book")
-    .withPartitionName("novel")
-    .build()
-);
-```
-
-```shell
+```cli
 delete partition -c book -p novel
 ```
 
@@ -94,49 +72,7 @@ delete partition -c book -p novel
 	</tbody>
 </table>
 
-<table class="language-go">
-	<thead>
-    <tr>
-        <th>Parameter</th>
-        <th>Description</th>
-    </tr>
-	</thead>
-	<tbody>
-    <tr>
-        <td><code>ctx</code></td>
-        <td>Context to control API invocation process.</td>
-    </tr>
-    <tr>
-        <td><code>CollectionName</code></td>
-        <td>Name of the collection to drop a partition in.</td>
-    </tr>
-    <tr>
-        <td><code>partitionName</code></td>
-        <td>Name of the partition to drop.</td>
-    </tr>
-  </tbody>
-</table>
-
-<table class="language-java">
-	<thead>
-    <tr>
-        <th>Parameter</th>
-        <th>Description</th>
-    </tr>
-	</thead>
-	<tbody>
-    <tr>
-        <td><code>CollectionName</code></td>
-        <td>Name of the collection to drop a partition in.</td>
-    </tr>
-    <tr>
-        <td><code>PartitionName</code></td>
-        <td>Name of the partition to drop.</td>
-    </tr>
-  </tbody>
-</table>
-
-<table class="language-shell">
+<table class="language-cli">
     <thead>
         <tr>
             <th>Option</th>
@@ -163,6 +99,6 @@ delete partition -c book -p novel
   - [Conduct a vector search](search.md)
   - [Conduct a hybrid search](hybridsearch.md)
 - Explore API references for Milvus SDKs:
-  - [PyMilvus API reference](/api-reference/pymilvus/v2.0.1/tutorial.html)
-  - [Node.js API reference](/api-reference/node/v2.0.1/tutorial.html)
+  - [PyMilvus API reference](/api-reference/pymilvus/v2.0.0rc9/tutorial.html)
+  - [Node.js API reference](/api-reference/node/v1.0.20/tutorial.html)
 

@@ -57,17 +57,18 @@ $ helm repo add milvus https://milvus-io.github.io/milvus-helm/
 $ helm repo update
 ```
 
-## Start Milvus
+## Configure and start Milvus
 
 Start Milvus with Helm by specifying the release name, the chart, and parameters you expect to change. This topic uses <code>my-release</code> as the release name. To use a different release name, replace <code>my-release</code> in the command.
+
+By running `helm show values milvus/milvus`, you can check the parameters that can be modified directly with Chart. You can configure these parameters by adding `--values` or `--set` in the command for installation. For more information, see [Milvus Cluster System Configurations](configuration_cluster-basic.md).
 
 ```
 $ helm install my-release milvus/milvus
 ```
 
 <div class="alert note">
-  <ul>
-    <li>The release name should only contain letters, numbers and dashes. Dots are not allowed in the release name.</li>
+	<ul>
     <li>The default command line installs cluster version of Milvus while installing Milvus with Helm. Further setting is needed while installing Milvus standalone.</li>
     <li>See <a href="https://artifacthub.io/packages/helm/milvus/milvus">Milvus Helm Chart</a> and <a href="https://helm.sh/docs/">Helm</a> for more information.</li>
   </ul>

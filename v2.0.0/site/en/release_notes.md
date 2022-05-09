@@ -6,152 +6,6 @@ summary: Milvus Release Notes
 
 Find out what’s new in Milvus! This page summarizes information about new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.0.0-RC1 in this section. We suggest that you regularly visit this page to learn about updates.
 
-## v2.0.1
-
-Release date: 2022-02-23
-
-<h3 id="v2.0.0">Compatibility</h3>
-
-<table class="version">
-	<thead>
-	<tr>
-		<th>Milvus version</th>
-		<th>Python SDK version</th>
-		<th>Java SDK version</th>
-		<th>Go SDK version</th>
-		<th>Node.js SDK version</th>
-	</tr>
-	</thead>
-	<tbody>
-	<tr>
-		<td>2.0.1</td>
-		<td>2.0.1</td>
-		<td>2.0.4</td>
-		<td>2.0.0</td>
-		<td>2.0.1</td>
-	</tr>
-	</tbody>
-</table>
-
-
-Milvus 2.0.1 is a minor bug-fix version of Milvus 2.0. The key progress of Milvus 2.0.1 includes that, first, the execution engine of Milvus `knowhere` was separated from the Milvus repository and moved to a new one - [milvus-io/knowhere](https://github.com/milvus-io/knowhere), and, second, supports were enabled for Milvus to be compiled across multiple platforms. We fixed a few critical issues that cause query node crash, index building failure, and server hang. The default dependency of Golang is upgraded to solve memory usage issues. We also upgrade the default dependency of Pulsar to solve the `log4j` security issue.
-
-<h3 id="v2.0.1">Improvements</h3>
-
-- [#15491](https://github.com/milvus-io/milvus/pull/15491) Supports compiling and running Milvus on Mac.
-- [#15453](https://github.com/milvus-io/milvus/pull/15453) Adds log when removing keys in garbage collector. 
-- [#15551](https://github.com/milvus-io/milvus/pull/15551) Avoids copying while converting C bytes to Go bytes.
-- [#15377](https://github.com/milvus-io/milvus/pull/15377) Adds `collectionID` to the return of `SearchResults` and `QueryResults`. 
-
-<h3 id="v2.0.1">Features</h3>
-
-- [#14418](https://github.com/milvus-io/milvus/pull/14418) Implements automatic item expiration on compaction.
-- [#15542](https://github.com/milvus-io/milvus/pull/15542) Implements mixed compaction logic.
-
-<h3 id="v2.0.1">Bug fixes</h3>
-
-- [#15702](https://github.com/milvus-io/milvus/pull/15702) Data coord panics if message queue service quits before it closes.
-- [#15663](https://github.com/milvus-io/milvus/pull/15663) Query node crashes on concurrent search.
-- [#15580](https://github.com/milvus-io/milvus/pull/15580) Data node panics when compacting empty segment.
-- [#15626](https://github.com/milvus-io/milvus/pull/15626) Failed to create index when segment size is set to large than 2GB.
-- [#15497](https://github.com/milvus-io/milvus/pull/15497) `SessionWatcher` quits if not re-watch logic is provided when meeting `ErrCompacted`.
-- [#15530](https://github.com/milvus-io/milvus/pull/15530) Segments under Flushing status are not treated as Flushed segment.
-- [#15436](https://github.com/milvus-io/milvus/pull/15436) Watch DML channel failed because of no collection meta, causing load collection failure.
-- [#15455](https://github.com/milvus-io/milvus/pull/15455) `SegmentIDs` is not respected when `querynode.GetSegmentInfo` is called.
-- [#15482](https://github.com/milvus-io/milvus/pull/15482) `EntriesNum` of delta logs is not recorded correctly in segment meta.
-
-<h3 id="v2.0.1">Dependency Upgrade</h3>
-
-- [#11393](https://github.com/milvus-io/milvus/pull/11393) Upgrades Golang from 1.15.2 to 1.16.9.
-- [#15603](https://github.com/milvus-io/milvus/pull/15603) Upgrades `Knowhere` to 1.0.1.
-- [#15580](https://github.com/milvus-io/milvus/pull/15580) Upgrades Pulsar from 2.7.3 to 2.8.2.
-
-
-## v2.0.0
-
-Release date: 2022-01-25
-
-<h3 id="v2.0.0">Compatibility</h3>
-
-<table class="version">
-	<thead>
-	<tr>
-		<th>Milvus version</th>
-		<th>Python SDK version</th>
-		<th>Java SDK version</th>
-		<th>Go SDK version</th>
-		<th>Node.js SDK version</th>
-	</tr>
-	</thead>
-	<tbody>
-	<tr>
-		<td>2.0.0</td>
-		<td>2.0.0</td>
-		<td>2.0.2</td>
-		<td>2.0.0</td>
-		<td>2.0.0</td>
-	</tr>
-	</tbody>
-</table>
-
-
-We are excited to announce the general release of Milvus 2.0 and it is now considered as production ready. Without changing the existing functionality released in the PreGA release, we fixed several critical bugs reported by users. We sincerely encourage all users to upgrade your Milvus to 2.0.0 release for better stability and performance.
-
-<h3 id="v2.0.0">Improvements</h3>
-
-- Changes the default consistency level to Bounded Staleness:
-		If consistency level Strong is adopted during a search, Milvus waits until data is synchronized before the search, thus spending longer even on a small dataset. Under the the default consistency level of Bounded Staleness, newly inserted data remain invisible for a could of seconds before they can be retrieved. For more information, see [Guarantee Timestamp in Search Requests](https://github.com/milvus-io/milvus/blob/master/docs/developer_guides/how-guarantee-ts-works.md).
-
-- [#15223](https://github.com/milvus-io/milvus/pull/15223) Makes query nodes send search or query results by RPC.
-
-<h3 id="v2.0.0">Bug fixes</h3>
-
-- Writing blocked by message storage quota exceed exception:
-	- [#15221](https://github.com/milvus-io/milvus/pull/15221) Unsubscribes channel when closing Pulsar consumer.
-	- [#15230](https://github.com/milvus-io/milvus/pull/15230) Unsubscribes channel after query node is down.
-	- [#15284](https://github.com/milvus-io/milvus/pull/15284) Adds retry logic when pulsar consumer unsubscribes channel.
-	- [#15353](https://github.com/milvus-io/milvus/pull/15353) Unsubscribes topic in data coord.
-
-- Resource leakage:
-	- [#15303](https://github.com/milvus-io/milvus/pull/15303) Cleans flow graph if failed to `watchChannel`.
-	- [#15237](https://github.com/milvus-io/milvus/pull/15237) Calls for releasing memory in case that error occurs.
-	- [#15013](https://github.com/milvus-io/milvus/pull/15013) Closes payload writer when error occurs.
-	- [#14630](https://github.com/milvus-io/milvus/pull/14630) Checks leakage of index CGO object.
-	- [#14543](https://github.com/milvus-io/milvus/pull/14543) Fixes that Pulsar reader is not close.
-	- [#15068](https://github.com/milvus-io/milvus/pull/15068) Fixes that file is not close when `ReadAll` returns error in local chunk manager.
-	- [#15305](https://github.com/milvus-io/milvus/pull/15305) Fixes query node search exceptions will cause memory leak.
-	
-- High memory usage:
-	- [#15196](https://github.com/milvus-io/milvus/pull/15196) Releases memory to OS after index is built.
-	- [#15180](https://github.com/milvus-io/milvus/pull/15180) Refactors flush manager injection to reduce goroutine number.
-	- [#15100](https://github.com/milvus-io/milvus/pull/15100) Fixes storage memory leak caused by `runtime.SetFinalizer`.
-
-
-- Cluster hang:
-	- [#15181](https://github.com/milvus-io/milvus/pull/15181) Stops handoff if the segment has been compacted.
-	- [#15189](https://github.com/milvus-io/milvus/pull/15189) Retains `nodeInfo` when query coord panic at `loadBalanceTask`. 
-	- [#15250](https://github.com/milvus-io/milvus/pull/15250) Fixes `collectResultLoop` hang after search timeout.
-	- [#15102](https://github.com/milvus-io/milvus/pull/15102) Adds flow graph manager and event manager.
-	- [#15161](https://github.com/milvus-io/milvus/pull/15161) Panic when recover query node failed.
-	- [#15347](https://github.com/milvus-io/milvus/pull/15347) Makes index node panic when failed to save meta to `MetaKV`.
-	- [#15343](https://github.com/milvus-io/milvus/pull/15343) Fixes Pulsar client bug.
-	- [#15370](https://github.com/milvus-io/milvus/pull/15370) Releases collection first when drop collection.
-
-- Incorrect returned data:
-	- [#15177](https://github.com/milvus-io/milvus/pull/15177) Removes global sealed segments in historical.
-	- [#14758](https://github.com/milvus-io/milvus/pull/14758) Fixes that deleted data returned when handoff is done for the segment.
-
-<h3 id="v2.0.0">Known issues</h3>
-
-- [#14077](https://github.com/milvus-io/milvus/issues/14077) Core dump happens under certain workload and it is still under reproducing.
- 	Solution: The system will be recovered automatically.
-- [#15283](https://github.com/milvus-io/milvus/issues/15283) Cluster fails to recover because Pulsar's failure to create consumer [Pulsar #13920](https://github.com/apache/pulsar/issues/13920).
- 	Solution: Restart pulsar cluster.
-- The default dependency Pulsar use old log4j2 version and contains security vulnerability.
- 	Solution: Upgrade pulsar dependency to 2.8.2. We will soon release a minor version to upgrade Pulsar to newer releases.
-- [#15371](https://github.com/milvus-io/milvus/issues/15371) Data coord may fail to cleanup channel subscription if balance and node crash happens at same time.
- 	Solution: Remove the channel subscription with Pulsar admin.
-
 ## v2.0.0-PreGA
 
 Release date: 2021-12-31
@@ -181,9 +35,9 @@ Release date: 2021-12-31
 
 
 
-Milvus 2.0.0-PreGA is the preview release of Milvus 2.0. It now supports entity deletion by primary key and data compaction to purge deleted data. We also introduce a load balancing mechanism into Milvus to distribute the memory usage of each query node evenly. Some critical issues are fixed in this release, including cleanup of dropped collection data, wrong distance calculation of Jaccard distance, and several bugs that cause system hang and memory leakage.
+Milvus 2.0.0-PreGA is the preview release of Milvus 2.0.0-GA. It now supports entity deletion by primary key and data compaction to purge deleted data. We also introduce a load balancing mechanism into Milvus to distribute the memory usage of each query node evenly. Some critical issues are fixed in this release, including cleanup of dropped collection data, wrong distance calculation of Jaccard distance, and several bugs that cause system hang and memory leakage.
 
-It should be noted that Milvus 2.0.0-PreGA is NOT compatible with previous versions of Milvus 2.0 because of some changes made to data codec format and RocksMQ data format.
+It should be noted that Milvus 2.0.0-PreGA is NOT compatible with previous versions of Milvus 2.0.0 because of some changes made to data codec format and RocksMQ data format.
 
 <h3 id="v2.0.0-PreGA">Features</h3>
 
@@ -248,14 +102,14 @@ Release date: 2021-11-5
 		<td>2.0.0rc8</td>
 		<td>Coming soon</td>
 		<td>Coming soon</td>
-		<td>2.0.1</td>
+		<td>1.0.20</td>
 	</tr>
 	</tbody>
 </table>
 
 
 
-Milvus 2.0.0-RC8 is the last release candidate of Milvus 2.0. It supports handoff task, primary key deduplication and search by Time Travel functionalities. The mean time to recovery (MTTR) has also been greatly reduced with the enhancement of timetick mechanism. We had run stress test on 2.0.0-RC8 with 10M datasets, and both standalone and distributed cluster survived for 84 hours.
+Milvus 2.0.0-RC8 is the last release candidate of Milvus 2.0.0-GA. It supports handoff task, primary key deduplication and search by Time Travel functionalities. The mean time to recovery (MTTR) has also been greatly reduced with the enhancement of timetick mechanism. We had run stress test on 2.0.0-RC8 with 10M datasets, and both standalone and distributed cluster survived for 84 hours.
 
 Current deduplication feature does not guarantee overwriting the old data copies when data with duplicate primary keys (`pk`) are inserted. Therefore, which data copy will return when queried remains unknown behavior. This limitation will be fixed in future releases. 
 
@@ -411,16 +265,16 @@ Release date: 2021-10-11
 		<td>2.0.0rc7</td>
 		<td>Coming soon</td>
 		<td>Coming soon</td>
-		<td>2.0.1</td>
+		<td>1.0.20</td>
 	</tr>
 	</tbody>
 </table>
 
 
 
-Milvus 2.0.0-RC7 is a preview version of Milvus 2.0. It supports collection alias, shares `msgstream` on physical channel, and changes the default MinIO and Pulsar dependencies to cluster version. Several resource leaks and deadlocks were fixed. 
+Milvus 2.0.0-RC7 is a preview version of Milvus 2.0.0-GA. It supports collection alias, shares `msgstream` on physical channel, and changes the default MinIO and Pulsar dependencies to cluster version. Several resource leaks and deadlocks were fixed. 
 
-It should be noted that Milvus 2.0.0-RC7 is NOT compatible with previous versions of Milvus 2.0 because of some changes made to storage format. 
+It should be noted that Milvus 2.0.0-RC7 is NOT compatible with previous versions of Milvus 2.0.0 because of some changes made to storage format. 
 
 <h3 id="v2.0.0-RC7">Improvements</h3>
 
@@ -598,13 +452,13 @@ Release date: 2021-09-10
 		<td>2.0.0rc6</td>
 		<td>Coming soon</td>
 		<td>Coming soon</td>
-		<td>2.0.1</td>
+		<td>1.0.20</td>
 	</tr>
 	</tbody>
 </table>
 
 
-Milvus 2.0.0-RC6 is a preview version of Milvus 2.0. It supports specifying shard number when creating collections, and query by expression. It exposes more cluster metrics through API. In RC6 we increase the unit test coverage to 80%. We also fixed a series of issues involving resource leakage, system panic, etc.
+Milvus 2.0.0-RC6 is a preview version of Milvus 2.0.0. It supports specifying shard number when creating collections, and query by expression. It exposes more cluster metrics through API. In RC6 we increase the unit test coverage to 80%. We also fixed a series of issues involving resource leakage, system panic, etc.
 
 <h3 id="v2.0.0-RC6">Improvements</h3>
 
@@ -660,12 +514,12 @@ Release date: 2021-08-30
 		<td>2.0.0rc5</td>
 		<td>Coming soon</td>
 		<td>Coming soon</td>
-		<td>2.0.1</td>
+		<td>1.0.20</td>
 	</tr>
 	</tbody>
 </table>
 
-Milvus 2.0.0-RC5 is a preview version of Milvus 2.0. It supports message queue data retention mechanism and etcd data cleanup,  exposes cluster metrics through API, and prepares for delete operation support. RC5 also made great progress on system stability. We fixed a series of resource leakage, operation hang and the misconfiguration of standalone Pulsar under Milvus cluster.
+Milvus 2.0.0-RC5 is a preview version of Milvus 2.0.0. It supports message queue data retention mechanism and etcd data cleanup,  exposes cluster metrics through API, and prepares for delete operation support. RC5 also made great progress on system stability. We fixed a series of resource leakage, operation hang and the misconfiguration of standalone Pulsar under Milvus cluster.
 
 <h3 id="v2.0.0-RC5">Improvements</h3>
 
@@ -747,7 +601,7 @@ Release date: 2021-08-13
 | ------------------ | ------------------------------------- | -------------------- | ------------------ |
 | 2.0.0-RC4          | 2.0.0rc4 | Coming soon          | Coming soon        |
 
-Milvus 2.0.0-RC4 is a preview version of Milvus 2.0. It mainly focuses on fixing stability issues, it also offers functionalities to retrieve vector data from object storage and specify output field by wildcard matching.
+Milvus 2.0.0-RC4 is a preview version of Milvus 2.0.0. It mainly focuses on fixing stability issues, it also offers functionalities to retrieve vector data from object storage and specify output field by wildcard matching.
 
 <h3 id="v2.0.0-RC4">Improvements</h3>
 
@@ -872,17 +726,17 @@ Release date: 2021-07-13
 | :------------- | :----------------- | :--------------- | :------------- |
 | 2.0.0-RC2 | 2.0.0rc2 | Coming soon            | Coming soon          |
 
-Milvus 2.0.0-RC2 is a preview version of Milvus 2.0. It fixes stability and performance issues and refactors code for node and storage management.
+Milvus 2.0.0-RC2 is a preview version of Milvus 2.0.0. It fixes stability and performance issues and refactors code for node and storage management.
 
 <h3 id="v2.0.0-RC2">Improvements</h3>
 
 - [#6356](https://github.com/milvus-io/milvus/pull/6356) Refactors code for cluster in data coordinator. 
-- [#6300](https://github.com/milvus-io/milvus/pull/6300) Refactors code for meta management in data coordinator. 
+- [#6300](https://github.com/milvus-io/milvus/pull/6300) Refactors code for meta management in data coordinator. (#6300)
 - [#6289](https://github.com/milvus-io/milvus/pull/6289) Adds `collectionID` and `partitionID` to `SegmentIndexInfo`. 
 - [#6258](https://github.com/milvus-io/milvus/pull/6258) Clears the corresponding `searchMsgStream` in proxy when calling `releaseCollection()`. 
 - [#6227](https://github.com/milvus-io/milvus/pull/6227) Merges codes relating to retrieve and search in query node. 
 - [#6196](https://github.com/milvus-io/milvus/pull/6196) Adds candidate management for data coordinator to manage data node cluster. 
-- [#6188](https://github.com/milvus-io/milvus/pull/6188) Adds Building Milvus with Docker Docs. 
+- [#6188](https://github.com/milvus-io/milvus/pull/6188) Adds Building Milvus with Docker Docs. (#6188)
 
 <h3 id="v2.0.0-RC2">Features</h3>
 
@@ -916,7 +770,7 @@ Release date: 2021-06-28
 
 
 
-Milvus 2.0.0-RC1 is the preview version of 2.0. It introduces Golang as the distributed layer development language and a new cloud-native distributed design. The latter brings significant improvements to scalability, elasticity, and functionality. 
+Milvus 2.0.0-RC1 is the preview version of 2.0.0. It introduces Golang as the distributed layer development language and a new cloud-native distributed design. The latter brings significant improvements to scalability, elasticity, and functionality. 
 
 
 <h3 id="v2.0.0-RC1">Architecture</h3>

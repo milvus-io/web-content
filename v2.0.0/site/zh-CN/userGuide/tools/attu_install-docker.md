@@ -11,7 +11,7 @@ summary: Learn how to install Attu with Docker Compose to manage your Milvus ser
 
 这篇文章将描述如何安装 Attu - 一个开源的 MIlvus 管理工具。
 
-<div class="tab-wrapper"><a href="attu_install-docker.md" class='active '>Docker Compose 安装</a><a href="attu_install-helm.md" class=''>Helm 安装</a><a href="attu_install-package.md" class=''>安装包安装</a></div>
+<div class="tab-wrapper"><a href="attu_install-docker.md" class='active '>Docker Compose 安装</a><a href="attu_install-helm.md" class=''>Helm 安装</a></div>
 
 ## 先决条件
 

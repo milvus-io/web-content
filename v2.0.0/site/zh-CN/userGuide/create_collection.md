@@ -19,8 +19,6 @@ A collection consists of one or more partitions. While creating a new collection
 
 The following example builds a two-[shard](glossary.md#Sharding) collection named `book`, with a primary key field named `book_id`, an `INT64` scalar field named `word_count`, and a two-dimensional floating point vector field named `book_intro`. Real applications will likely use much higher dimensional vectors than the example.
 
-Milvus supports setting consistency level while creating a collection (only on PyMilvus currently). In this example, the consistency level of the collection is set as "strong", meaning Milvus will read the most updated data view at the exact time point when a search or query request comes. By default, a collection created without specifying the consistency level is set with bounded consistency level, under which Milvus reads a less updated data view (usually several seconds earlier) when a search or query request comes. Besides collection creation, you can also set the consistency level specifically for [search](search.md) or [query](query.md)  (only on PyMilvus currently). For other consistency level supported by Milvus, see [Guarantee Timestamp in Search Requests](https://github.com/milvus-io/milvus/blob/master/docs/developer_guides/how-guarantee-ts-works.md). 
-
 
 ## Prepare Schema
 
@@ -36,10 +34,8 @@ First, prepare necessary parameters, including field schema, collection schema, 
 
 <div class="multipleCode">
   <a href="?python">Python </a>
-  <a href="?java">Java</a>
-  <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
-  <a href="?shell">CLI</a>
+  <a href="?cli">CLI</a>
 </div>
 
 
@@ -69,7 +65,6 @@ collection_name = "book"
 ```javascript
 const params = {
   collection_name: "book",
-  description: "Test book search"
   fields: [
     {
       name: "book_intro",
@@ -94,64 +89,7 @@ const params = {
 };
 ```
 
-```go
-var (
-		collectionName = "book"
-	)
-schema := &entity.Schema{
-    CollectionName: collectionName,
-    Description:    "Test book search",
-    Fields: []*entity.Field{
-        {
-            Name:       "book_id",
-            DataType:   entity.FieldTypeInt64,
-            PrimaryKey: true,
-            AutoID:     false,
-        },
-        {
-            Name:       "word_count",
-            DataType:   entity.FieldTypeInt64,
-            PrimaryKey: false,
-            AutoID:     false,
-        },
-        {
-            Name:     "book_intro",
-            DataType: entity.FieldTypeFloatVector,
-            TypeParams: map[string]string{
-                "dim": "2",
-            },
-        },
-    },
-}
-```
-
-```java
-FieldType fieldType1 = FieldType.newBuilder()
-        .withName("book_id")
-        .withDataType(DataType.Int64)
-        .withPrimaryKey(true)
-        .withAutoID(false)
-        .build();
-FieldType fieldType2 = FieldType.newBuilder()
-        .withName("word_count")
-        .withDataType(DataType.Int64)
-        .build();
-FieldType fieldType3 = FieldType.newBuilder()
-        .withName("book_intro")
-        .withDataType(DataType.FloatVector)
-        .withDimension(2)
-        .build();
-CreateCollectionParam createCollectionReq = CreateCollectionParam.newBuilder()
-        .withCollectionName("book")
-        .withDescription("Test book search")
-        .withShardsNum(2)
-        .addFieldType(fieldType1)
-        .addFieldType(fieldType2)
-        .addFieldType(fieldType3)
-        .build();
-```
-
-```shell
+```cli
 create collection -c book -f book_id:INT64 -f word_count:INT64 -f book_intro:FLOAT_VECTOR:2 -p book_id
 ```
 
@@ -201,7 +139,7 @@ create collection -c book -f book_id:INT64 -f word_count:INT64 -f book_intro:FLO
             <td><code>True</code> or <code>False</code></td>
         </tr>
         <tr>
-            <td><code>auto_id</code> (Mandatory for primary key field)</td>
+            <td><code>auto_id</code></td>
             <td>Switch to enable or disable Automatic ID (primary key) allocation.</td>
             <td><code>True</code> or <code>False</code></td>
         </tr>
@@ -218,12 +156,10 @@ create collection -c book -f book_id:INT64 -f word_count:INT64 -f book_intro:FLO
         <tr>
             <td><code>CollectionSchema</code></td>
         <td>Schema of the collection to create. Refer to <a href="collection_schema.md">Collection Schema</a> for more information.</td>
-        <td>N/A</td>
         </tr>
         <tr>
             <td><code>fields</code></td>
             <td>Fields of the collection to create.</td>
-            <td>N/A</td>
         </tr>
         <tr>
             <td><code>description</code> (Optional)</td>
@@ -233,75 +169,6 @@ create collection -c book -f book_id:INT64 -f word_count:INT64 -f book_intro:FLO
         <tr>
             <td><code>collection_name</code></td>
             <td>Name of the collection to create.</td>
-            <td>N/A</td>
-        </tr>
-	</tbody>
-</table>
-
-<table class="language-go">
-	<thead>
-        <tr>
-            <th>Parameter</th>
-            <th>Description</th>
-            <th>Option</th>
-        </tr>
-	</thead>
-	<tbody>
-        <tr>
-            <td><code>collectionName</code></td>
-            <td>Name of the collection to create.</td>
-            <td>N/A</td>
-        </tr>
-        <tr>
-            <td><code>description</code></td>
-            <td>Description of the collection to create.</td>
-            <td>N/A</td>
-        </tr>
-        <tr>
-            <td><code>Fields</code></td>
-            <td>Schema of the fields within the collection to create. Refer to <a href="field_schema.md">Field Schema</a> for more information.</td>
-            <td>N/A</td>
-        </tr>
-        <tr>
-            <td><code>Name</code></td>
-            <td>Name of the field to create.</td>
-            <td>N/A</td>
-        </tr>
-        <tr>
-            <td><code>DataType</code></td>
-            <td>Data type of the field to create.</td>
-            <td>For primary key field:
-                <ul>
-                    <li><code>entity.FieldTypeInt64</code> (numpy.int64)</li>
-                </ul>
-                For scalar field:
-                <ul>
-                    <li><code>entity.FieldTypeBool</code> (Boolean)</li>
-                    <li><code>entity.FieldTypeInt64</code> (numpy.int64)</li>
-                    <li><code>entity.FieldTypeFloat</code> (numpy.float32)</li>
-                    <li><code>entity.FieldTypeDouble</code> (numpy.double)</li>
-                </ul>
-                For vector field:
-                <ul>
-                    <li><code>entity.FieldTypeBinaryVector</code> (Binary vector)</li>
-                    <li><code>entity.FieldTypeFloatVector</code> (Float vector)</li>
-                </ul>
-            </td>
-        </tr>
-        <tr>
-            <td><code>PrimaryKey</code> (Mandatory for primary key field)</td>
-            <td>Switch to control if the field is primary key field.</td>
-            <td><code>True</code> or <code>False</code></td>
-        </tr>
-        <tr>
-            <td><code>AutoID</code> (Mandatory for primary key field)</td>
-            <td>Switch to enable or disable Automatic ID (primary key) allocation.</td>
-            <td><code>True</code> or <code>False</code></td>
-        </tr>
-        <tr>
-            <td><code>dim</code> (Mandatory for vector field)</td>
-            <td>Dimension of the vector.</td>
-            <td>[1, 32768]</td>
         </tr>
 	</tbody>
 </table>
@@ -349,7 +216,7 @@ create collection -c book -f book_id:INT64 -f word_count:INT64 -f book_intro:FLO
         <tr>
             <td><code>dim</code> (Mandatory for vector field)</td>
             <td>Dimension of the vector.</td>
-            <td>[1, 32768]</td>
+            <td>[1, 32,768]</td>
         </tr>
         <tr>
             <td><code>description</code> (Optional)</td>
@@ -359,80 +226,7 @@ create collection -c book -f book_id:INT64 -f word_count:INT64 -f book_intro:FLO
 	</tbody>
 </table>
 
-<table class="language-java">
-	<thead>
-        <tr>
-            <th>Parameter</th>
-            <th>Description</th>
-            <th>Option</th>
-        </tr>
-	</thead>
-	<tbody>
-        <tr>
-            <td><code>Name</code></td>
-            <td>Name of the field to create.</td>
-            <td>N/A</td>
-        </tr>
-        <tr>
-            <td><code>Description</code></td>
-            <td>Description of the field to create.</td>
-            <td>N/A</td>
-        </tr>
-        <tr>
-            <td><code>DataType</code></td>
-            <td>Data type of the field to create.</td>
-            <td>For primary key field:
-                <ul>
-                    <li><code>entity.FieldTypeInt64</code> (numpy.int64)</li>
-                </ul>
-                For scalar field:
-                <ul>
-                    <li><code>entity.FieldTypeBool</code> (Boolean)</li>
-                    <li><code>entity.FieldTypeInt64</code> (numpy.int64)</li>
-                    <li><code>entity.FieldTypeFloat</code> (numpy.float32)</li>
-                    <li><code>entity.FieldTypeDouble</code> (numpy.double)</li>
-                </ul>
-                For vector field:
-                <ul>
-                    <li><code>entity.FieldTypeBinaryVector</code> (Binary vector)</li>
-                    <li><code>entity.FieldTypeFloatVector</code> (Float vector)</li>
-                </ul>
-            </td>
-        </tr>
-        <tr>
-            <td><code>PrimaryKey</code> (Mandatory for primary key field)</td>
-            <td>Switch to control if the field is primary key field.</td>
-            <td><code>True</code> or <code>False</code></td>
-        </tr>
-        <tr>
-            <td><code>AutoID</code></td>
-            <td>Switch to enable or disable Automatic ID (primary key) allocation.</td>
-            <td><code>True</code> or <code>False</code></td>
-        </tr>
-        <tr>
-            <td><code>Dimension</code> (Mandatory for vector field)</td>
-            <td>Dimension of the vector.</td>
-            <td>[1, 32768]</td>
-        </tr>
-        <tr>
-            <td><code>CollectionName</code></td>
-            <td>Name of the collection to create.</td>
-            <td>N/A</td>
-        </tr>
-        <tr>
-            <td><code>Description</code> (Optional)</td>
-            <td>Description of the collection to create.</td>
-            <td>N/A</td>
-        </tr>
-        <tr>
-            <td><code>ShardsNum</code></td>
-            <td>Number of the shards for the collection to create.</td>
-            <td>[1,256]</td>
-        </tr>
-	</tbody>
-</table>
-
-<table class="language-shell">
+<table class="language-cli">
     <thead>
         <tr>
             <th>Option</th>
@@ -465,48 +259,25 @@ create collection -c book -f book_id:INT64 -f word_count:INT64 -f book_intro:FLO
 
 ## Create a collection with the schema
 
-Then, create a collection with strong consistency level and the schema you specified above.
+Then, create a collection with the schema you specified above.
 
 <div class="multipleCode">
   <a href="?python">Python </a>
-  <a href="?java">Java</a>
-  <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
-  <a href="?shell">CLI</a>
+  <a href="?cli">CLI</a>
 </div>
 
 
 ```python
 from pymilvus import Collection
-collection = Collection(
-    name=collection_name, 
-    schema=schema, 
-    using='default', 
-    shards_num=2,
-    consistency_level="Strong"
-    )
+collection = Collection(name=collection_name, schema=schema, using='default', shards_num=2)
 ```
 
 ```javascript
 await milvusClient.collectionManager.createCollection(params);
 ```
 
-```go
-err = milvusClient.CreateCollection(
-    context.Background(), // ctx
-    schema,
-    2, // shardNum
-)
-if err != nil {
-    log.Fatal("failed to create collection:", err.Error())
-}
-```
-
-```java
-milvusClient.createCollection(createCollectionReq);
-```
-
-```shell
+```cli
 # Follow the previous step.
 ```
 
@@ -515,68 +286,19 @@ milvusClient.createCollection(createCollectionReq);
         <tr>
             <th>Parameter</th>
             <th>Description</th>
-            <th>Option</th>
         </tr>
 	</thead>
 	<tbody>
         <tr>
             <td><code>using</code> (optional)</td>
             <td>By specifying the server alias here, you can choose in which Milvus server you create a collection.</td>
-            <td>N/A</td>
         </tr>
         <tr>
             <td><code>shards_num</code> (optional)</td>
             <td>Number of the shards for the collection to create.</td>
-            <td>[1,256]</td>
-        </tr>
-        <tr>
-            <td><code>consistency_level</code> (optional)</td>
-            <td>Consistency level of the collection to create.</td>
-            <td>
-                <ul>
-                    <li><code>Strong</code></li>
-                    <li><code>Bounded</code></li>
-                    <li><code>Session</code></li>
-                    <li><code>Eventually</code></li>
-                    <li><code>Customized</code></li>
-                </ul>
-            </td>
         </tr>
     </tbody>
 </table>
-
-<table class="language-go">
-	<thead>
-        <tr>
-            <th>Parameter</th>
-            <th>Description</th>
-            <th>Option</th>
-        </tr>
-	</thead>
-	<tbody>
-        <tr>
-            <td><code>ctx</code></td>
-            <td>Context to control API invocation process.</td>
-            <td>N/A</td>
-        </tr>
-        <tr>
-            <td><code>shardNum</code></td>
-            <td>Number of the shards for the collection to create.</td>
-            <td>[1,256]</td>
-        </tr>
-    </tbody>
-</table>
-
-
-
-## Limits
-|Feature|Maximum limit|
-|---|---|
-|Length of a collection name|255 characters|
-|Number of partitions in a collection|4,096|
-|Number of fields in a collection|256|
-|Number of shards in a collection|256|
-
 
 
 ## What's next
@@ -588,6 +310,6 @@ milvusClient.createCollection(createCollectionReq);
   - [Conduct a vector search](search.md)
   - [Conduct a hybrid search](hybridsearch.md)
 - Explore API references for Milvus SDKs:
-  - [PyMilvus API reference](/api-reference/pymilvus/v2.0.1/tutorial.html)
-  - [Node.js API reference](/api-reference/node/v2.0.1/tutorial.html)
+  - [PyMilvus API reference](/api-reference/pymilvus/v2.0.0rc9/tutorial.html)
+  - [Node.js API reference](/api-reference/node/v1.0.20/tutorial.html)
 

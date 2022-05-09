@@ -3,24 +3,30 @@ id: molecular_similarity_search.md
 title: 分子式检索系统 
 ---
 
-# 分子式检索系统
+# Molecular Similarity Search 
 
-本教程将介绍如何使用开源向量数据库 Milvus 搭建分子式检索系统。
+<div class="alert note">
+<h3>Milvus Docs 需要你的帮助</h3>
+本文档暂时没有中文版本，欢迎你成为社区贡献者，协助中文技术文档的翻译。<br>
+你可以通过页面右边的 <b>编辑</b> 按钮直接贡献你的翻译。更多详情，参考 <a href="https://github.com/milvus-io/milvus-docs/blob/v2.0.0/CONTRIBUTING.md">贡献指南</a>。如需帮助，你可以 <a href="https://github.com/milvus-io/milvus-docs/issues/new/choose">提交 GitHub Issue</a>。
+</div>
 
-- [打开 Jupyter notebook](https://github.com/milvus-io/bootcamp/blob/master/solutions/molecular_similarity_search/molecular_search.ipynb)
-- [快速部署](https://github.com/milvus-io/bootcamp/blob/master/solutions/molecular_similarity_search/quick_deploy)
-- [在线体验](http://35.166.123.214:8002/)
-本教程中使用到的 ML 模型及第三方软件包括：
+
+This tutorial demonstrates how to use Milvus, the open-source vector database, to build a molecular similarity search system.
+- [Open Jupyter notebook](https://github.com/milvus-io/bootcamp/blob/master/solutions/molecular_similarity_search/molecular_search.ipynb)
+- [Quick deploy](https://github.com/milvus-io/bootcamp/blob/master/solutions/molecular_similarity_search/quick_deploy)
+- [Try demo](http://35.166.123.214:8002/)
+The third-party software used include:
 - RDKit
 - MySQL
 
 <br/>
 
-药物发现是新药研发中的重要一环。药物发现过程包括了靶点选择和确认。当发现片段或先导化合物时，研究人员通常会在内部或商业化合物库中搜索类似的化合物，以发现构效关系 (SAR) 和化合物的可用性。最终，他们将评估先导化合物成为候选化合物的潜力。 为了从十亿规模的化合物库中发现可用的化合物，通常检索化学指纹以进行子结构搜索和分子相似性搜索。
+Drug discovery is an important part of new medicine research and development. The process of drug discovery includes target selection and confirmation. When fragments or lead compounds are discovered, researchers usually search for similar compounds in internal or commercial compound libraries in order to discover structure-activity relationship (SAR), compound availability. Ultimately, they will evaluate the potential of the lead compounds to be optimized to candidate compounds. In order to discover available compounds from billion-scale compound libraries, chemical fingerprint is usually retrieved for substructure search and molecule similarity search.
 
 <br/>
 
-通过本教程，你将学习到如何搭建分子式检索系统，该系统可以检索特定分子的子结构，超结构，和相似结构。RDKit 是一个开源化学信息学软件，可以将分子结构转换为向量。 然后，向量存储在 Milvus 中，Milvus 可以对向量进行相似度搜索。 Milvus 还会自动为每个向量生成一个唯一的 ID。 向量 ID 和分子结构的映射存储在 MySQL 中。
+In this tutorial, you will learn how to build a molecular similarity search system that can retrieve the substructure, superstructure, and similar structure of a particular molecule. RDKit is an open-source cheminformatics software that can convert molecule structures into vectors. Then, the vectors are stored in Milvus and Milvus can perform similarity search on vectors. Milvus also automatically generates a unique ID for each vector. The mapping of vector IDs and structure of molecules are stored in MySQL.
 
 <br/>
 

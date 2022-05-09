@@ -19,7 +19,7 @@
     },
     {
       "id": "comparison.md",
-      "title": "Release Comparison",
+      "title": "What is New in Milvus 2.0",
       "label1": "about",
       "label2": "",
       "label3": "",
@@ -34,13 +34,12 @@
       "order": 2
     },
     {
-      "id": "roadmap",
+      "id": "roadmap.md",
       "title": "Milvus Roadmap",
       "label1": "about",
       "label2": "",
       "label3": "",
-      "order": 3,
-      "outLink": "https://wiki.lfaidata.foundation/display/MIL/Milvus+2.X+Roadmap+and+Time+schedule"
+      "order": 3
     },
     {
       "id": "limitations.md",
@@ -209,14 +208,6 @@
       "order": 4
     },
     {
-      "id": "release_collection.md",
-      "title": "Release Collection",
-      "label1": "userguide",
-      "label2": "manage_collection",
-      "label3": "",
-      "order": 5
-    },
-    {
       "id": "manage_partition",
       "title": "Manage Partitions",
       "label1": "userguide",
@@ -250,22 +241,6 @@
       "order": 2
     },
     {
-      "id": "load_partition.md",
-      "title": "Load a Partition",
-      "label1": "userguide",
-      "label2": "manage_partition",
-      "label3": "",
-      "order": 3
-    },
-    {
-      "id": "release_partition.md",
-      "title": "Release a Partition",
-      "label1": "userguide",
-      "label2": "manage_partition",
-      "label3": "",
-      "order": 4
-    },
-    {
       "id": "manage_data",
       "title": "Manage Data",
       "label1": "userguide",
@@ -289,14 +264,6 @@
       "label2": "manage_data",
       "label3": "",
       "order": 1
-    },
-    {
-      "id": "compact_data.md",
-      "title": "Compact Data",
-      "label1": "userguide",
-      "label2": "manage_data",
-      "label3": "",
-      "order": 2
     },
     {
       "id": "manage_index",
@@ -365,20 +332,12 @@
       "order": 3
     },
     {
-      "id": "load_balance.md",
-      "title": "Load Balance",
-      "label1": "userguide",
-      "label2": "",
-      "label3": "",
-      "order": 6
-    },
-    {
       "id": "bootcamp_userguide",
       "title": "Bootcamp",
       "label1": "userguide",
       "label2": "",
       "label3": "",
-      "order": 7,
+      "order": 6,
       "outLink": "https://milvus.io/bootcamp"
     },
     {
@@ -389,21 +348,14 @@
       "order": 3,
       "isMenu": true
     },
-    {
-      "id": "configure-docker.md",
-      "title": "Configure Milvus",
-      "label1": "admin_guide",
-      "label2": "",
-      "label3": "",
-      "order": 0
-    },
+
     {
       "id": "allocate.md",
       "title": "Allocate Resources",
       "label1": "admin_guide",
       "label2": "",
       "label3": "",
-      "order": 1
+      "order": 0
     },
     {
       "id": "cloud",
@@ -411,7 +363,7 @@
       "label1": "admin_guide",
       "label2": "",
       "label3": "",
-      "order": 2,
+      "order": 1,
       "isMenu": true
     },
     {
@@ -461,7 +413,7 @@
       "label1": "admin_guide",
       "label2": "",
       "label3": "",
-      "order": 3
+      "order": 2
     },
     {
       "id": "operator.md",
@@ -469,7 +421,7 @@
       "label1": "admin_guide",
       "label2": "",
       "label3": "",
-      "order": 4
+      "order": 3
     },
     {
       "id": "scaleout.md",
@@ -477,7 +429,7 @@
       "label1": "admin_guide",
       "label2": "",
       "label3": "",
-      "order": 5
+      "order": 4
     },
     {
       "id": "upgrade.md",
@@ -485,7 +437,7 @@
       "label1": "admin_guide",
       "label2": "",
       "label3": "",
-      "order": 6
+      "order": 5
     },
     {
       "id": "monitor",
@@ -493,7 +445,7 @@
       "label1": "admin_guide",
       "label2": "",
       "label3": "",
-      "order": 7,
+      "order": 6,
       "isMenu": true
     },
     {
@@ -534,7 +486,7 @@
       "label1": "admin_guide",
       "label2": "",
       "label3": "",
-      "order": 8,
+      "order": 7,
       "isMenu": true
     },
     {
@@ -629,7 +581,7 @@
     },  
     {
       "id": "milvus_attu",
-      "title": "Attu",
+      "title": "Milvus Attu",
       "label1": "tools",
       "label2": "",
       "label3": "",
@@ -783,10 +735,28 @@
       "order": 3
     },
     {
-      "id": "system_configuration.md",
+      "id": "systemconfigurations",
       "title": "System Configurations",
       "label1": "reference",
       "label2": "",
+      "label3": "",
+      "order": 1,
+      "isMenu": true
+    },
+    {
+      "id": "configuration_standalone-basic.md",
+      "title": "Milvus Stanalone",
+      "label1": "reference",
+      "label2": "systemconfigurations",
+      "label3": "",
+      "order": 0
+    },
+    {
+      "id": "configuration_cluster-basic.md",
+      "title": "Milvus Cluster",
+      "label1": "reference",
+      "label2": "systemconfigurations",
+      "label3": "",
       "order": 1
     },
     {
@@ -797,11 +767,26 @@
       "order": 2
     },
     {
-      "id": "index.md",
+      "id": "index",
       "title": "Vector Index",
       "label1": "reference",
       "label2": "",
-      "order": 3
+      "order": 3,
+      "isMenu": true
+    },
+    {
+      "id": "index.md",
+      "title": "Vector Index",
+      "label1": "reference",
+      "label2": "index",
+      "order": 0
+    },
+    {
+      "id": "index_selection.md",
+      "title": "Select an Index",
+      "label1": "reference",
+      "label2": "index",
+      "order": 1
     },
     {
       "id": "schema",

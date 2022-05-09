@@ -9,36 +9,38 @@ summary: Get started with Milvus faster using this Python example code.
 
 <div class="tab-wrapper"><a href="example_code.md" class='active '>Python</a><a href="example_code_node.md" class=''>Node.js</a></div>
 
-# 使用 Python 运行Milvus
+# Run Milvus using Python
+
+<div class="alert note">
+<h3>Milvus Docs 需要你的帮助</h3>
+本文档暂时没有中文版本，欢迎你成为社区贡献者，协助中文技术文档的翻译。<br>
+你可以通过页面右边的 <b>编辑</b> 按钮直接贡献你的翻译。更多详情，参考 <a href="https://github.com/milvus-io/milvus-docs/blob/v2.0.0/CONTRIBUTING.md">贡献指南</a>。如需帮助，你可以 <a href="https://github.com/milvus-io/milvus-docs/issues/new/choose">提交 GitHub Issue</a>。
+</div>
 
 
+This topic describes how to run Milvus using Python.
 
-该篇文章介绍了如何使用 Python 运行 Milvus.
+Through running the example code we provided, you will have a primary understanding of what Milvus is capable of.
 
-通过运行我们提供的示例代码，您将初步了解 Milvus 的功能。
+## Preparations
+
+Before running this example code, you will need to install [Milvus](install_standalone-docker.md) and [PyMilvus](install-pymilvus.md) on your device.
 
 
+## Download example code
 
-## 准备工作
+[Download](https://raw.githubusercontent.com/milvus-io/pymilvus/v2.0.0rc9/examples/hello_milvus.py) `hello_milvus.py` directly or with the following command.
 
-- [Milvus 2.0.0](install_standalone-docker.md)
-- Python 3 (3.71 或者更高版本)
-- [PyMilvus 2.0.0](install-pymilvus.md)
-
-## 下载示例代码
-
-使用下面的命令 [下载](https://raw.githubusercontent.com/milvus-io/pymilvus/v2.0.1/examples/hello_milvus.py) `hello_milvus.py` 
-
-```bash
-$ wget https://raw.githubusercontent.com/milvus-io/pymilvus/v2.0.1/examples/hello_milvus.py
+```Python
+$ wget https://raw.githubusercontent.com/milvus-io/pymilvus/v2.0.0rc9/examples/hello_milvus.py
 ```
 
 
-## 代码详解
+## Scan the example code
 
-示例代码将执行以下步骤：
+The example code performs the following steps.
 
-- 导入 PyMilvus 包:
+- Imports a PyMilvus package:
 ```Python
 from pymilvus import (
     connections,
@@ -50,12 +52,12 @@ from pymilvus import (
 )
 ```
 
-- 连接服务:
+- Connects to a server:
 ```Python
 connections.connect("default", host="localhost", port="19530")
 ```
 
-- 创建一个 Collection:
+- Creates a collection:
 ```Python
 fields = [
     FieldSchema(name="pk", dtype=DataType.INT64, is_primary=True, auto_id=False),
@@ -66,7 +68,7 @@ schema = CollectionSchema(fields, "hello_milvus is the simplest demo to introduc
 hello_milvus = Collection("hello_milvus", schema)
 ```
 
-- 在创建好的 Collection 中插入向量:
+- Inserts vectors in the collection:
 ```Python
 import random
 entities = [
@@ -77,7 +79,7 @@ entities = [
 insert_result = hello_milvus.insert(entities)
 ```
 
-- 在数据上构建索引：
+- Builds indexes on the entities:
 ```Python
 index = {
     "index_type": "IVF_FLAT",
@@ -87,7 +89,7 @@ index = {
 hello_milvus.create_index("embeddings", index)
 ```
 
-- 将 Collection 加载到内存并执行相似搜索：
+- Loads the collection to memory and performs a vector similarity search:
 ```Python
 hello_milvus.load()
 vectors_to_search = entities[-1][-2:]
@@ -99,40 +101,40 @@ result = hello_milvus.search(vectors_to_search, "embeddings", search_params, lim
 ```
 
 
-- 执行结构化查询：
+- Performs a vector query:
 
 ```Python
 result = hello_milvus.query(expr="random > -14", output_fields=["random", "embeddings"])
 ```
 
-- 执行混合查询：
+- Performs a hybrid search:
 
 ```Python
 result = hello_milvus.search(vectors_to_search, "embeddings", search_params, limit=3, expr="random > -12", output_fields=["random"])
 ```
 
-- 根据 pk 删除数据：
+- Deletes entities by their primary keys:
 
 ```Python
 expr = f"pk in [{ids[0]}, {ids[1]}]"
 hello_milvus.delete(expr)
 ```
 
-- 删除 Collection：
+- Drops the collection:
 
 ```Python
 utility.drop_collection("hello_milvus")
 ```
 
-## 运行示例代码
+## Run the example code
 
-执行以下命令，运行示例代码：
+Execute the following command to run the example code.
 
 ```Python
 $ python3 hello_milvus.py
 ```
 
-*运行结果如下所示：*
+*The returned results and query latency are shown as follows:*
 
 ```
 === start connecting to Milvus     ===
@@ -190,4 +192,9 @@ query after delete by expr=`pk in [0, 1]` -> result: []
 === Drop collection `hello_milvus` ===
 ```
 
-恭喜！您已经启动了 Milvus 单机版，并执行了第一次结构化查询。
+
+<br/>
+
+
+*Congratulations! You have started Milvus standalone and performed your first vector similarity search.*
+

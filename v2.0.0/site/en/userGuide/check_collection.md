@@ -14,10 +14,8 @@ Verify if a collection exists in Milvus.
 
 <div class="multipleCode">
   <a href="?python">Python </a>
-  <a href="?java">Java</a>
-  <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
-  <a href="?shell">CLI</a>
+  <a href="?cli">CLI</a>
 </div>
 
 
@@ -32,29 +30,7 @@ await milvusClient.collectionManager.hasCollection({
 });
 ```
 
-```go
-hasColl, err := milvusClient.HasCollection(
-  context.Background(), // ctx
-  collectionName,       // CollectionName
-)
-if err != nil {
-  log.Fatal("failed to check whether collection exists:", err.Error())
-}
-log.Println(hasColl)
-```
-
-```java
-R<Boolean> respHasCollection = milvusClient.hasCollection(
-  HasCollectionParam.newBuilder()
-    .withCollectionName("book")
-    .build()
-);
-if (respHasCollection.getData() == Boolean.TRUE) {
-  System.out.println("Collection exists.");
-}
-```
-
-```shell
+```cli
 describe collection -c book
 ```
 
@@ -89,42 +65,7 @@ describe collection -c book
 	</tbody>
 </table>
 
-<table class="language-go">
-	<thead>
-        <tr>
-            <th>Parameter</th>
-            <th>Description</th>
-        </tr>
-	</thead>
-	<tbody>
-        <tr>
-            <td><code>ctx</code></td>
-            <td>Context to control API invocation process.</td>
-        </tr>
-        <tr>
-            <td><code>CollectionName</code></td>
-            <td>Name of the collection to check.</td>
-        </tr>
-    </tbody>
-</table>
-
-
-<table class="language-java">
-	<thead>
-        <tr>
-            <th>Parameter</th>
-            <th>Description</th>
-        </tr>
-	</thead>
-	<tbody>
-        <tr>
-            <td><code>CollectionName</code></td>
-            <td>Name of the collection to check.</td>
-        </tr>
-    </tbody>
-</table>
-
-<table class="language-shell">
+<table class="language-cli">
     <thead>
         <tr>
             <th>Option</th>
@@ -145,10 +86,8 @@ Check the details of a collection.
 
 <div class="multipleCode">
   <a href="?python">Python </a>
-  <a href="?java">Java</a>
-  <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
-  <a href="?shell">CLI</a>
+  <a href="?cli">CLI</a>
 </div>
 
 
@@ -176,54 +115,16 @@ await milvusClient.collectionManager.getCollectionStatistics({     // Return the
 });
 ```
 
-```go
-collDesc, err := milvusClient.DescribeCollection(               // Return the name and schema of the collection.
-  context.Background(),   // ctx
-  "book",                 // CollectionName
-)
-if err != nil {
-  log.Fatal("failed to check collection schema:", err.Error())
-}
-log.Printf("%v\n", collDesc)
-
-collStat, err := milvusClient.GetCollectionStatistics(          // Return the statistics information of the collection.
-  context.Background(),   // ctx
-  "book",                 // CollectionName
-)
-if err != nil {
-  log.Fatal("failed to check collection statistics:", err.Error())
-}
-```
-
-```java
-R<DescribeCollectionResponse> respDescribeCollection = milvusClient.describeCollection(
-  // Return the name and schema of the collection.
-  DescribeCollectionParam.newBuilder()
-    .withCollectionName("book")
-    .build()
-);
-DescCollResponseWrapper wrapperDescribeCollection = new DescCollResponseWrapper(respDescribeCollection.getData());
-System.out.println(wrapperDescribeCollection);
-
-R<GetCollectionStatisticsResponse> respCollectionStatistics = milvusClient.getCollectionStatistics(
-  // Return the statistics information of the collection.
-  GetCollectionStatisticsParam.newBuilder()
-    .withCollectionName("book")
-    .build()
-  );
-GetCollStatResponseWrapper wrapperCollectionStatistics = new GetCollStatResponseWrapper(respCollectionStatistics.getData());
-System.out.println("Collection row count: " + wrapperCollectionStatistics.getRowCount());
-```
-
-```shell
+```cli
 describe collection -c book
 ```
 
 <table class="language-python">
     <thead>
         <tr>
-            <th>Parameter</th>
-            <th>Description</th>
+            <th>Property</th>
+            <th>Return</th>
+            <th>Exception</th>
         </tr>
     </thead>
     <tbody>
@@ -246,10 +147,21 @@ describe collection -c book
         <tr>
             <td>num_entities</td>
             <td>The number of entities in the collection.</td>
+            <td><code>CollectionNotExistException</code> is raised if the collection does not exist.</td>
         </tr>
         <tr>
             <td>primary_field</td>
             <td>The primary field of the collection.</td>
+        </tr>
+        <tr>
+            <td>partitions</td>
+            <td>A list of all partitions.</td>
+            <td><code>CollectionNotExistException</code> is raised if the collection does not exist.</td>
+        </tr>
+        <tr>
+            <td>indexes</td>
+            <td>A list of all indexes.</td>
+            <td><code>CollectionNotExistException</code> is raised if the collection does not exist.</td>
         </tr>
     </tbody>
 </table>
@@ -270,39 +182,30 @@ describe collection -c book
 	</tbody>
 </table>
 
-<table class="language-go">
+
+<table class="language-javascript">
 	<thead>
         <tr>
-            <th>Parameter</th>
-	    <th>Description</th>
-	</tr>
-	<tr>
-            <td><code>ctx</code></td>
-            <td>Context to control API invocation process.</td>
-        </tr>
-        <tr>
-            <td><code>CollectionName</code></td>
-            <td>Name of the collection to check.</td>
-        </tr>
-    </tbody>
-</table>
-
-<table class="language-java">
-    <thead>
-        <tr>
-            <th>Parameter</th>
+            <th>Property</th>
             <th>Description</th>
         </tr>
-    </thead>
+	</thead>
 	<tbody>
         <tr>
-            <td><code>CollectionName</code></td>
-            <td>Name of the collection to check.</td>
+            <td><code>status</code></td>
+            <td>{ error_code: number, reason: string }</td>
         </tr>
-    </tbody>
+        <tr>
+            <td><code>schema</code></td>
+            <td>Information of all fields in this collection</td>
+        <tr>
+            <td><code>collectionID</code></td>
+            <td> collectionID</td>
+        </tr>
+	</tbody>
 </table>
 
-<table class="language-shell">
+<table class="language-cli">
     <thead>
         <tr>
             <th>Option</th>
@@ -324,10 +227,8 @@ List all collections in this Milvus Instance.
 
 <div class="multipleCode">
   <a href="?python">Python </a>
-  <a href="?java">Java</a>
-  <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
-  <a href="?shell">CLI</a>
+  <a href="?cli">CLI</a>
 </div>
 
 
@@ -340,41 +241,9 @@ utility.list_collections()
 await milvusClient.collectionManager.showCollections();
 ```
 
-```go
-listColl, err := milvusClient.ListCollection(
-  context.Background(),   // ctx
-)
-if err != nil {
-  log.Fatal("failed to list all collections:", err.Error())
-}
-log.Println(listColl)
-```
-
-```java
-R<ShowCollectionsResponse> respShowCollections = milvusClient.showCollections(
-    ShowCollectionsParam.newBuilder().build()
-  );
-System.out.println(respShowCollections);
-```
-
-```shell
+```cli
 list collections
 ```
-
-<table class="language-go">
-	<thead>
-        <tr>
-            <th>Parameter</th>
-            <th>Description</th>
-        </tr>
-	</thead>
-	<tbody>
-        <tr>
-            <td><code>ctx</code></td>
-            <td>Context to control API invocation process.</td>
-        </tr>
-    </tbody>
-</table>
 
 ## What's next
 
@@ -385,6 +254,6 @@ list collections
   - [Conduct a vector search](search.md)
   - [Conduct a hybrid search](hybridsearch.md)
 - Explore API references for Milvus SDKs:
-  - [PyMilvus API reference](/api-reference/pymilvus/v2.0.1/tutorial.html)
-  - [Node.js API reference](/api-reference/node/v2.0.1/tutorial.html)
+  - [PyMilvus API reference](/api-reference/pymilvus/v2.0.0rc9/tutorial.html)
+  - [Node.js API reference](/api-reference/node/v1.0.20/tutorial.html)
 

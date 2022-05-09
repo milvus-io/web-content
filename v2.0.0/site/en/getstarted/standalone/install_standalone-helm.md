@@ -55,10 +55,11 @@ $ helm repo add milvus https://milvus-io.github.io/milvus-helm/
 $ helm repo update
 ```
 
-## Start Milvus
+## Configure and start Milvus
 
 Start Milvus with Helm by specifying the release name, the chart, and parameters you expect to change. This topic uses <code>my-release</code> as the release name. To use a different release name, replace <code>my-release</code> in the command.
 
+By running `helm show values milvus/milvus`, you can check the parameters that can be modified directly with Chart. You can configure these parameters by adding `--values` or `--set` in the command for installation. For more information, see [Milvus Standalone System Configurations](configuration_standalone-basic.md).
 
 ```
 $ helm install my-release milvus/milvus --set cluster.enabled=false --set etcd.replicaCount=1 --set minio.mode=standalone --set pulsar.enabled=false

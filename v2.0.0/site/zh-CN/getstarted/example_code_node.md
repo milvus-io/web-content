@@ -9,54 +9,59 @@ summary: Get started with Milvus faster using this Node.js example code.
 
 <div class="tab-wrapper"><a href="example_code.md" class=''>Python</a><a href="example_code_node.md" class='active '>Node.js</a></div>
 
-# 使用 Node.js 运行 Milvus
+# Run Milvus using Node.js
+
+<div class="alert note">
+<h3>Milvus Docs 需要你的帮助</h3>
+本文档暂时没有中文版本，欢迎你成为社区贡献者，协助中文技术文档的翻译。<br>
+你可以通过页面右边的 <b>编辑</b> 按钮直接贡献你的翻译。更多详情，参考 <a href="https://github.com/milvus-io/milvus-docs/blob/v2.0.0/CONTRIBUTING.md">贡献指南</a>。如需帮助，你可以 <a href="https://github.com/milvus-io/milvus-docs/issues/new/choose">提交 GitHub Issue</a>。
+</div>
 
 
+This topic describes how to run Milvus using Node.js.
 
-本主题介绍如何使用 Node.js 运行 Milvus。
 
-
-## 1.  初始化 Node.js 项目
+## 1.  Initialize a Node.js Project
 ```bash
    npm init
 ```  
 
 <div class="alert note">
-要求 Node.js 12 或者更高版本。查看<a href="https://www.cloudbees.com/blog/node-js-tutorial">Node.js 初学者指南</a>获取有关如何在你的系统上安装正确版本的信息。
+Node.js version 12 or later is required. View <a href="https://www.cloudbees.com/blog/node-js-tutorial">Node.js Beginners Guide</a> for information about installing the correct version for your system.
 </div>
 
 
 
-## 2.  安装 TypeScript 和 Node Milvus SDK 及其依赖
+## 2.  Install TypeScript and Node Milvus SDK and its dependencies
 
 ```bash
    npm install @zilliz/milvus2-sdk-node typescript --save
 ```
 
 
-## 3. 下载示例代码 HelloMilvus.ts
+## 3. Download sample code HelloMilvus.ts
 ```bash
 $ wget https://raw.githubusercontent.com/milvus-io/milvus-sdk-node/main/example/HelloMilvus.ts
 ```
 
-## 4. HelloMilvus.ts 代码详解
+## 4. Scan HelloMilvus.ts
 
-此示例代码将执行以下操作：
+This sample code does the following:
 
-- 导入 Node.js SDK 包：
+- Imports the Node.js SDK package:
 ```ts
 import { MilvusClient } from "@zilliz/milvus2-sdk-node"
 import { DataType } from "@zilliz/milvus2-sdk-node/dist/milvus/types/Common";
 import { InsertReq } from "@zilliz/milvus2-sdk-node/dist/milvus/types/Insert";
 ```
 
-- 连接服务器：
+- Connects to the Milvus server:
 ```ts
 const milvusClient = new MilvusClient("localhost:19530");
 const collectionManager = milvusClient.collectionManager;
 ```
 
-- 创建一个 collection：
+- Creates a collection:
 ```ts
 const collectionName = "hello_milvus";
     const dim = "4";
@@ -92,7 +97,7 @@ const collectionName = "hello_milvus";
 ```
 
 
-- 在创建好的 collection 中插入向量：
+- Inserts vectors in the new collection:
 ```ts
 const generateInsertData = function generateInsertData(
   fields: { isVector: boolean; dim?: number; name: string; isBool?: boolean }[],
@@ -140,7 +145,7 @@ const generateInsertData = function generateInsertData(
     console.log("--- Insert Data to Collection ---");
 ```
 
-- 将 collection 加载到内存并构建索引：
+- Loads the collection and builds index on it:
 ``` ts
     await milvusClient.indexManager.createIndex({
       collection_name: collectionName,
@@ -154,7 +159,7 @@ const generateInsertData = function generateInsertData(
     console.log("--- Create Index in Collection ---");
 ```
 
-- 在 collection 中执行搜索操作
+- Searches the collection:
 ```ts
         // need load collection before search
     const loadCollectionRes = await collectionManager.loadCollectionSync({
@@ -180,7 +185,7 @@ const generateInsertData = function generateInsertData(
     console.log("--- Search collection (" + collectionName + ") ---", result);
 ```
 
-- 从内存中释放 collection：
+- Releases the collection:
 ```ts
     const releaseRes = await collectionManager.releaseCollection({
       collection_name: collectionName,
@@ -188,7 +193,7 @@ const generateInsertData = function generateInsertData(
     console.log("--- Release Collection ---", releaseRes);
 ``` 
 
-- 删除 collection：
+- Drops the collection:
 ```tw
     const dropRes = await collectionManager.dropCollection({
       collection_name: collectionName,
@@ -196,13 +201,13 @@ const generateInsertData = function generateInsertData(
     console.log("--- Drop Collection ---", dropRes);
 ```
 
-## 5. 编译文件
+## 5. Compile the file
 ```bash
     tsc MilvusHello.ts
 ```
 
 
-## 6. 运行示例代码
+## 6. Run the example
 ```bash
     node MilvusHello.ts
 ```
@@ -211,4 +216,4 @@ const generateInsertData = function generateInsertData(
 <br/>
 
 
-*恭喜！你已成功启动了 Milvus 单机版并创建了你的第一个 collection。*
+*Congratulations! You have successfully booted Milvus Standalone and created your first collection.*

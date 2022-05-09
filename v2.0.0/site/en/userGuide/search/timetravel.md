@@ -22,10 +22,8 @@ If you work with your own dataset in an existing Milvus instance, you can move f
 
 <div class="multipleCode">
   <a href="?python">Python </a>
-  <a href="?java">Java</a>
-  <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
-  <a href="?shell">CLI</a>
+  <a href="?cli">CLI</a>
 </div>
 
 
@@ -34,8 +32,8 @@ from pymilvus import connections, Collection, FieldSchema, CollectionSchema, Dat
 connections.connect("default", host='localhost', port='19530')
 collection_name = "test_time_travel"
 schema = CollectionSchema([
-  FieldSchema("pk", DataType.INT64, is_primary=True),
-  FieldSchema("example_field", dtype=DataType.FLOAT_VECTOR, dim=2)
+    FieldSchema("pk", DataType.INT64, is_primary=True),
+    FieldSchema("example_field", dtype=DataType.FLOAT_VECTOR, dim=2)
 ])
 collection = Collection(collection_name, schema)
 ```
@@ -64,15 +62,7 @@ const params = {
 await milvusClient.collectionManager.createCollection(params);
 ```
 
-```go
-// This function is under active development on the GO client.
-```
-
-```java
-// Java User Guide will be ready soon.
-```
-
-```shell
+```cli
 connect -h localhost -p 19530 -a default
 create collection -c test_time_travel -f pk:INT64:primary_field -f example_field:FLOAT_VECTOR:2 -p pk
 ```
@@ -83,18 +73,16 @@ Insert random data to simulate the original data (Milvus CLI example uses a pre-
 
 <div class="multipleCode">
   <a href="?python">Python </a>
-  <a href="?java">Java</a>
-  <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
-  <a href="?shell">CLI</a>
+  <a href="?cli">CLI</a>
 </div>
 
 
 ```python
 import random
 data = [
-  [i for i in range(10)],
-  [[random.random() for _ in range(2)] for _ in range(10)],
+    [i for i in range(10)],
+    [[random.random() for _ in range(2)] for _ in range(10)],
 ]
 batch1 = collection.insert(data)
 ```
@@ -110,15 +98,7 @@ const batch1 = milvusClient.dataManager.insert({
 });
 ```
 
-```go
-// This function is under active development on the GO client.
-```
-
-```java
-// Java User Guide will be ready soon.
-```
-
-```shell
+```cli
 import -c test_time_travel https://raw.githubusercontent.com/zilliztech/milvus_cli/main/examples/user_guide/search_with_timetravel_1.csv
 Reading file from remote URL.
 Reading csv rows...  [####################################]  100%
@@ -148,15 +128,7 @@ batch1.timestamp
 428828271234252802
 ```
 
-```go
-// This function is under active development on the GO client.
-```
-
-```java
-// Java User Guide will be ready soon.
-```
-
-```shell
+```cli
 # Milvus CLI automatically returns the timestamp as shown in the previous step.
 ```
 
@@ -172,17 +144,15 @@ Insert the second batch of data to simulate the dirty data, among which a piece 
 
 <div class="multipleCode">
   <a href="?python">Python </a>
-  <a href="?java">Java</a>
-  <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
-  <a href="?shell">CLI</a>
+  <a href="?cli">CLI</a>
 </div>
 
 
 ```python
 data = [
-  [i for i in range(10, 20)],
-  [[random.random() for _ in range(2)] for _ in range(9)],
+    [i for i in range(10, 20)],
+    [[random.random() for _ in range(2)] for _ in range(9)],
 ]
 data[1].append([1.0,1.0])
 batch2 = collection.insert(data)
@@ -207,16 +177,7 @@ const batch2 = await milvusClient.dataManager.insert({
 });
 ```
 
-```go
-// This function is under active development on the GO client.
-```
-
-```java
-// Java User Guide will be ready soon.
-```
-
-
-```shell
+```cli
 import -c test_time_travel https://raw.githubusercontent.com/zilliztech/milvus_cli/main/examples/user_guide/search_with_timetravel_2.csv
 Reading file from remote URL.
 Reading csv rows...  [####################################]  100%
@@ -238,21 +199,19 @@ Load the collection and search the target data with the timestamp of the first d
 
 <div class="multipleCode">
   <a href="?python">Python </a>
-  <a href="?java">Java</a>
-  <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
-  <a href="?shell">CLI</a>
+  <a href="?cli">CLI</a>
 </div>
 
 
 ```python
 collection.load()
 search_param = {
-  "data": [[1.0, 1.0]],
-  "anns_field": "example_field",
-  "param": {"metric_type": "L2"},
-  "limit": 10,
-  "travel_timestamp": batch1.timestamp,
+    "data": [[1.0, 1.0]],
+    "anns_field": "example_field",
+    "param": {"metric_type": "L2"},
+    "limit": 10,
+    "travel_timestamp": batch1.timestamp,
 }
 res = collection.search(**search_param)
 res[0].ids
@@ -281,15 +240,7 @@ const res = await milvusClient.dataManager.search({
 console.log(res1.results)
 ```
 
-```go
-// This function is under active development on the GO client.
-```
-
-```java
-// Java User Guide will be ready soon.
-```
-
-```shell
+```cli
 search
 Collection name (test_collection_query, test_time_travel): test_time_travel
 The vectors of search data (the length of data is number of query (nq), the dim of every vector in data must be equal to vector field’s of collection. You can also import a CSV file without headers): [[1.0, 1.0]]
@@ -313,16 +264,7 @@ As shown below, the target data itself and other data inserted later are not ret
 [8, 7, 4, 2, 5, 6, 9, 3, 0, 1]
 ```
 
-```go
-// This function is under active development on the GO client.
-```
-
-```java
-// Java User Guide will be ready soon.
-```
-
-
-```shell
+```cli
 Search results:
 
 No.1:
@@ -355,10 +297,8 @@ If you do not specify the timestamp or specify it with the timestamp of the seco
 
 <div class="multipleCode">
   <a href="?python">Python </a>
-  <a href="?java">Java</a>
-  <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
-  <a href="?shell">CLI</a>
+  <a href="?cli">CLI</a>
 </div>
 
 
@@ -399,15 +339,7 @@ const res2 = await milvusClient.dataManager.search({
 console.log(res2.results)
 ```
 
-```go
-// This function is under active development on the GO client.
-```
-
-```java
-// Java User Guide will be ready soon.
-```
-
-```shell
+```cli
 search 
 Collection name (test_collection_query, test_time_travel): test_time_travel
 The vectors of search data (the length of data is number of query (nq), the dim of every vector in data must be equal to vector field’s of collection. You can also import a CSV file without headers): [[1.0, 1.0]]
@@ -468,15 +400,7 @@ const datetime = new Date().getTime()
 const pre_del_timestamp = datetimeToHybrids(datetime)
 ```
 
-```go
-// This function is under active development on the GO client.
-```
-
-```java
-// Java User Guide will be ready soon.
-```
-
-```shell
+```cli
 calc mkts_from_unixtime -e 1641809375
 430390476800000000
 ```
@@ -496,15 +420,7 @@ await milvusClient.dataManager.deleteEntities({
 });
 ```
 
-```go
-// This function is under active development on the GO client.
-```
-
-```java
-// Java User Guide will be ready soon.
-```
-
-```shell
+```cli
 delete entities -c test_time_travel
 The expression to specify entities to be deleted, such as "film_id in [ 0, 1 ]": pk in [0, 2, 4, 6, 8, 10, 12, 14, 16, 18]
 You are trying to delete the entities of collection. This action cannot be undone!
@@ -545,15 +461,7 @@ const res3 = await milvusClient.dataManager.search({
 console.log(res3.results)
 ```
 
-```go
-// This function is under active development on the GO client.
-```
-
-```java
-// Java User Guide will be ready soon.
-```
-
-```shell
+```cli
 search 
 Collection name (test_collection_query, test_time_travel): test_time_travel
 The vectors of search data (the length of data is number of query (nq), the dim of every vector in data must be equal to vector field’s of collection. You can also import a CSV file without headers): [[1.0, 1.0]]
@@ -627,15 +535,7 @@ const res4 = await milvusClient.dataManager.search({
 console.log(res4.results)
 ```
 
-```go
-// This function is under active development on the GO client.
-```
-
-```java
-// Java User Guide will be ready soon.
-```
-
-```shell
+```cli
 search 
 Collection name (test_collection_query, test_time_travel): test_time_travel
 The vectors of search data (the length of data is number of query (nq), the dim of every vector in data must be equal to vector field’s of collection. You can also import a CSV file without headers): [[1.0, 1.0]]
@@ -681,5 +581,5 @@ No.1:
   - [Query vectors](query.md)
   - [Conduct a hybrid search](hybridsearch.md)
 - Explore API references for Milvus SDKs:
-  - [PyMilvus API reference](/api-reference/pymilvus/v2.0.1/tutorial.html)
-  - [Node.js API reference](/api-reference/node/v2.0.1/tutorial.html)
+  - [PyMilvus API reference](/api-reference/pymilvus/v2.0.0rc9/tutorial.html)
+  - [Node.js API reference](/api-reference/node/v1.0.20/tutorial.html)

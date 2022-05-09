@@ -57,10 +57,10 @@ Most of the vector index types supported by Milvus use approximate nearest neigh
 - **IVF_FLAT**: IVF_FLAT is a quantization-based index and is best suited for scenarios that seeks an ideal balance between accuracy and query speed.
 - **IVF_SQ8**: IVF_SQ8 is a quantization-based index and is best suited for scenarios that seeks a significant reduction on disk, CPU, and GPU memory consumption as these resources are very limited.
 - **IVF_PQ**: IVF_PQ is a quantization-based index and is best suited for scenarios that seeks high query speed even at the cost of accuracy. 
-- **HNSW**: HNSW is a graph-based index and is best suited for scenarios that has a high demand for search efficiency.
+- **HNSW**: HNSQ is a graph-based index and is best suited for scenarios that has a high demand for search efficiency.
 - **ANNOY**: ANNOY is a tree-based index and is best suited for scenarios that seeks a high recall rate.
 
-See [Vector Index](index.md) for more details.
+See [Selecting an Index Best Suited for Your Scenario](index_selection.md) for more details.
 
 ### Similarity metrics
 
@@ -129,9 +129,9 @@ We are working on enabling more new client libraries. If you would like to contr
 The Milvus ecosystem provides helpful tools including:
 
 - [Milvus CLI](https://github.com/milvus-io/milvus_cli#overview)
-- [Attu](https://github.com/zilliztech/attu), a graphical management system for Milvus. 
+- [Milvus Attu](https://github.com/zilliztech/attu), a graphical management system for Milvus. 
 - [MilvusDM](https://milvus.io/docs/v2.0.0/migrate_overview.md) (Milvus Data Migration), an open-source tool designed specifically for importing and exporting data with Milvus.
-- [Milvus sizing tool](https://milvus.io/tools/sizing/), which helps you estimate the raw file size, memory size, and stable disk size needed for a specified number of vectors with various index types.
+- [Milvus sizing tool](https://zilliz.com/sizing-tool), which helps you estimate the raw file size, memory size, and stable disk size needed for a specified number of vectors with various index types.
 
 ## What's next
 
