@@ -251,8 +251,3 @@ Having connected to a Milvus server, you can:
 - [Conduct a vector search](search.md)
 - [Conduct a hybrid search](hybridsearch.md)
 
-For advanced operations, check:
-
-- [PyMilvus API reference](/api-reference/pymilvus/v2.0.2/tutorial.html)
-- [Node.js API reference](/api-reference/node/v2.0.2/tutorial.html)
-

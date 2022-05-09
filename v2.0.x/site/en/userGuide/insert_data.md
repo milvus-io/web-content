@@ -274,7 +274,4 @@ import -c book 'https://raw.githubusercontent.com/milvus-io/milvus_cli/main/exam
   - [Build an index for vectors](build_index.md)
   - [Conduct a vector search](search.md)
   - [Conduct a hybrid search](hybridsearch.md)
-- Explore API references for Milvus SDKs:
-  - [PyMilvus API reference](/api-reference/pymilvus/v2.0.2/tutorial.html)
-  - [Node.js API reference](/api-reference/node/v2.0.2/tutorial.html)
 
