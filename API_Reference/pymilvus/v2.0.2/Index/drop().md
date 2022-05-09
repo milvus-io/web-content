@@ -26,7 +26,8 @@ No return.
 ## Example
 
 ```python
-from pymilvus import Collection
-collection = Collection("book")      # Get an existing collection.
+from pymilvus import Index
+index_params = {"index_type": "IVF_FLAT", "metric_type": "L2", "params": {"nlist": 1024}}
+index = Index("book", "book_intro", index_params)
 index.drop()
 ```
