@@ -376,7 +376,7 @@ await milvusClient.collectionManager.showCollections();
 ```
 
 ```go
-listColl, err := milvusClient.ListCollection(
+listColl, err := milvusClient.ListCollections(
     context.Background(),   // ctx
     )
 if err != nil {
