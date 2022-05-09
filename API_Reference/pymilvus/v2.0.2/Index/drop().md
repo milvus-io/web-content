@@ -28,5 +28,5 @@ No return.
 ```python
 from pymilvus import Collection
 collection = Collection("book")      # Get an existing collection.
-collection.drop_index()
+index.drop()
 ```
