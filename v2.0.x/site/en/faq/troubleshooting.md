@@ -8,6 +8,7 @@ This page lists common issues that may occur when running Milvus, as well as pos
 - [Boot issues](#boot_issues)
 - [Runtime issues](#runtime_issues)
 - [API issues](#api_issues)
+- [etcd crash issues](#etcd_crash_issues)
 
 <a href="#boot_issues"></a>
   ## Boot issues
@@ -27,6 +28,42 @@ This page lists common issues that may occur when running Milvus, as well as pos
   ## API issues
 
   These issues occur during API method calls between the Milvus server and your client. They will be returned to the client synchronously or asynchronously.
+  
+<a href="#etcd_crash_issues"></a>
+  ## etcd crash issues
+  
+  ### 1. etcd pod pending
+
+  The etcd cluster uses pvc by default. Storageclass needs to be preconfigured for the Kubernetes cluster.
+
+  ### 2. etcd pod crash
+
+  When an etcd pod crashes with `Error: bad member ID arg (strconv.ParseUint: parsing "": invalid syntax), expecting ID in Hex`, you can log into this pod and delete the `/bitnami/etcd/data/member_id` file.
+
+  ### 3. Multiple pods keep crashing while `etcd-0` is still running
+
+  You can run the following code if multiple pods keeps crashing while `etcd-0` is still running.
+  
+  ```
+  kubectl scale sts <etcd-sts> --replicas=1
+  # delete the pvc for etcd-1 and etcd-2
+  kubectl scale sts <etcd-sts> --replicas=3
+  ```
+  
+  ### 4. All pods crash
+  
+  When all pods crash, try copying the `/bitnami/etcd/data/member/snap/db` file. Use `https://github.com/etcd-io/bbolt` to modify database data.
+
+  All Milvus metadata are kept in the `key` bucket. Back up the data in this bucket and run the following commands. Note that the prefix data in the `by-dev/meta/session` file does not require a backup.
+  
+  ```
+  kubectl kubectl scale sts <etcd-sts> --replicas=0
+  # delete the pvc for etcd-0, etcd-1, etcd-2
+  kubectl kubectl scale sts <etcd-sts> --replicas=1
+  # restore the backup data
+  ```
+
+
 
 <br/>
 
