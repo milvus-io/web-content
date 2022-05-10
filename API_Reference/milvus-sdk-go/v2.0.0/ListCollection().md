@@ -1,11 +1,11 @@
-# ListCollection()
+# ListCollections()
 
 This method lists all collections in the connected Milvus instance.
 
 ## Invocation
 
 ```go
-client.ListCollection(ctx)
+client.ListCollections(ctx)
 ```
 
 ## Parameters
@@ -28,7 +28,7 @@ A array of entity.Collection that represents the collections in the Milvus insta
 ## Example
 
 ```go
-listColl, err := milvusClient.ListCollection(
+listColl, err := milvusClient.ListCollections(
   context.Background(),
 )
 if err != nil {
