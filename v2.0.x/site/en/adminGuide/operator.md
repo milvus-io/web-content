@@ -11,7 +11,7 @@ Milvus cluster depends on components including object storage, etcd, and Pulsar.
 
 This topic assumes that you have deployed Milvus Operator.
 
-<div class="alert note">See <a href="https://milvus.io/docs/v2.0.0/install_cluster-milvusoperator.md#Deploy-Milvus-Operator">Deploy Milvus Operator</a> for more information. </div>
+<div class="alert note">See <a href="https://milvus.io/docs/v2.0.x/install_cluster-milvusoperator.md">Deploy Milvus Operator</a> for more information. </div>
 
 You need to specify a configuration file for using Milvus Operator to start a Milvus cluster.
 
