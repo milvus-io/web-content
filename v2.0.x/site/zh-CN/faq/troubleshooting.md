@@ -13,6 +13,7 @@ id: troubleshooting.md
 - [服务启动问题](#服务启动问题)
 - [服务运行问题](#服务运行问题)
 - [API 问题](#API-问题)
+- [etcd cluster 部署问题](#etcd-cluster-部署问题)
 
 #### 服务启动问题
 
@@ -31,6 +32,41 @@ id: troubleshooting.md
 #### API 问题
 
 在 Milvus 服务端和客户端之间调用 API 方法时发生的故障。这类错误信息将以同步或异步的方式返回给客户端。
+
+#### etcd cluster 部署问题
+
+**1. etcd pod pending**
+
+Etcd cluster 默认使用 pvc。 需要在 kubernetes 集群配置默认的 storageclass。
+
+**2. 某个 pod crash, 报错 `Error: bad member ID arg (strconv.ParseUint: parsing "": invalid syntax), expecting ID in Hex`**
+
+登录到该 pod，并删除文件 `/bitnami/etcd/data/member_id`。
+
+**3. 多个 pod 一直 crash，且 `etcd-0` 还处于运行状态
+
+运行以下指令：
+```
+kubectl scale sts <etcd-sts> --replicas=1
+# delete the pvc for etcd-1 and etcd-2
+kubectl scale sts <etcd-sts> --replicas=3
+```
+
+**4. 所有 pod 都 crash**
+
+尝试拷贝 `/bitnami/etcd/data/member/snap/db` 文件。使用 `https://github.com/etcd-io/bbolt` 可以修改db 的数据。
+
+Milvus 的元数据存放在 `key` bucket 中，可以备份这个 bucket 的数据。注意 `by-dev/meta/session` 文件中的 prefix 数据不需要备份。
+
+备份后，运行以下指令：
+
+```
+kubectl kubectl scale sts <etcd-sts> --replicas=0
+# delete the pvc for etcd-0, etcd-1, etcd-2
+kubectl kubectl scale sts <etcd-sts> --replicas=1
+# restore the backup data
+```
+
 
 <br/>
 
