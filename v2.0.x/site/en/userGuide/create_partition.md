@@ -4,7 +4,7 @@ related_key: Partition
 summary: Learn how to create a partition in Milvus.
 ---
 
-# Create a Partitions
+# Create a Partition
 
 This topic describes how to create a partition in Milvus.
 
