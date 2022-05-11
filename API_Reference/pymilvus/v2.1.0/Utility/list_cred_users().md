@@ -1,4 +1,4 @@
-# reset_password()
+# list_cred_users()
 
 This method lists all authenticated user access.
 
