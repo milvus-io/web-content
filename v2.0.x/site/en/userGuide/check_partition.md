@@ -53,7 +53,7 @@ R<Boolean> respHasPartition = milvusClient.hasPartition(
     .withPartitionName("novel")
     .build()
 );
-if (respHasCollection.getData() == Boolean.TRUE) {
+if (respHasPartition.getData() == Boolean.TRUE) {
   System.out.println("Partition exists.");
 }
 ```
