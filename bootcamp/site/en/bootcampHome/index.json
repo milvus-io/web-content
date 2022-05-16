@@ -41,7 +41,7 @@
         "link": "https://github.com/milvus-io/bootcamp/tree/master/solutions/reverse_image_search",
         "iconType": "IMAGE_SEARCH",
         "desc": "Build a reverse image search system using Milvus paired with YOLOv3 for object detection and ResNet-50 for feature extraction.",
-        "liveDemo": "https://zilliz.com/milvus-demos/reverse-image-search"
+        "liveDemo": "https://milvus.io/milvus-demos/reverse-image-search/"
       },
       {
         "id": 6,
@@ -49,7 +49,7 @@
         "link": "https://github.com/milvus-io/bootcamp/blob/master/solutions/question_answering_system",
         "iconType": "QUESTION_ANSWER",
         "desc": "Build an intelligent chatbot using Milvus and the BERT model for natural language processing (NLP).",
-        "liveDemo": "http://35.166.123.214:8005/"
+        "liveDemo": "https://chatbot.milvus.io/"
       },
       {
         "id": 7,
@@ -78,7 +78,7 @@
         "link": "https://github.com/milvus-io/bootcamp/blob/master/solutions/molecular_similarity_search",
         "iconType": "MOLECULAR",
         "desc": "Build a molecule similarity search system using Milvus paired with RDkit for cheminformatics.",
-        "liveDemo": "http://35.166.123.214:8002/"
+        "liveDemo": "https://molsearch.milvus.io/"
       },
       {
         "id": 11,
