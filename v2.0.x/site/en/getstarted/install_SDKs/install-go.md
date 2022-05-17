@@ -33,7 +33,9 @@ Having installed Milvus GO SDK, you can:
 
 - Learn the basic operations of Milvus:
   - [Connect to Milvus server](manage_connection.md)
+  - [Create a collection](create_collection.md)
+  - [Create a partition](create_partition.md)
+  - [Insert data](insert_data.md)
   - [Conduct a vector search](search.md)
-  - [Conduct a hybrid search](hybridsearch.md)
 
 

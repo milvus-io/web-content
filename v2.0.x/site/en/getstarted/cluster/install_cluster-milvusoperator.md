@@ -517,15 +517,17 @@ Having installed Milvus, you can:
 - Check [Hello Milvus](example_code.md) to run an example code with different SDKs to see what Milvus can do.
 - Learn the basic operations of Milvus:
   - [Connect to Milvus server](manage_connection.md)
+  - [Create a collection](create_collection.md)
+  - [Create a partition](create_partition.md)
+  - [Insert data](insert_data.md)
   - [Conduct a vector search](search.md)
-  - [Conduct a hybrid search](hybridsearch.md)
-- [Upgrade Milvus Using Helm Chart](upgrade.md).
-- [Scale your Milvus cluster](scaleout.md).
+- [Upgrade Milvus Using Helm Chart](upgrade.md)
+- [Scale your Milvus cluster](scaleout.md)
 - Deploy your Milvu cluster on clouds:
   - [Amazon EC2](aws.md)
   - [Amazon EKS](eks.md)
 - Explore [MilvusDM](migrate_overview.md), an open-source tool designed for importing and exporting data in Milvus.
-- [Monitor Milvus with Prometheus](monitor.md).
+- [Monitor Milvus with Prometheus](monitor.md)
 
 
   

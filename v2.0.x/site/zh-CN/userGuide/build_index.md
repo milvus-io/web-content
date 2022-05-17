@@ -457,7 +457,10 @@ milvusClient.createIndex(
   - [Conduct a vector search](search.md)
   - [Conduct a hybrid search](hybridsearch.md)
   - [Search with Time Travel](timetravel.md)
+
 - Explore API references for Milvus SDKs:
-  - [PyMilvus API reference](/api-reference/pymilvus/v2.0.2/tutorial.html)
-  - [Node.js API reference](/api-reference/node/v2.0.2/tutorial.html)
+  - [PyMilvus API reference](/api-reference/pymilvus/v2.0.2/About.html)
+  - [Node.js API reference](/api-reference/node/v2.0.2/About.html)
+  - [Go API reference](/api-reference/go/v2.0.0/About.html)
+  - [Java API reference](/api-reference/java/v2.0.4/tutorial.html)
 

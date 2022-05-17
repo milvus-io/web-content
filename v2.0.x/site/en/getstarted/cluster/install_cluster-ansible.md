@@ -20,12 +20,17 @@ You can also build Milvus from source code at [GitHub](https://github.com/milvus
 
 <div class="tab-wrapper"><a href="install_cluster-docker.md" class=''>Docker Compose</a><a href="install_cluster-helm.md" class=''>Helm</a><a href="install_cluster-milvusoperator.md" class=''>Milvus Operator</a><a href="install_cluster-ansible.md" class='active '>Ansible</a></div>
 
+This topic introduces how to deploy a Milvus cluster. We provide the Docker Host for creating an Ansible playbook and the Container for running the Milvus cluster. The script in this topic is only for running on Ubuntu 20.04 LTS systems. Modify the script commands and parameters if you want to run the Milvus cluster on other versions of operating systems.
 
 ## Prerequisites
 
-- Hardware: Three virtual machines each with four cores of CPU and 8 GB of RAM or more
+- - Hardware: Four servers including three Docker hosts, each with at least four cores of CPU and 8GB of RAM, and one Ansible controller
 - Operating system: Ubuntu 20.04 LTS
 - Software: [Ansible Controller](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html)
+
+## Set up Ansible admin controller
+
+We recommend creating a new Ansible controller on the Ubuntu operating system. Make sure  system resources are sufficient for running Ansible tasks. See [Installing Ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html) for more information.
 
 ## Download Ansible Milvus node deployment Playbook
 
@@ -37,35 +42,37 @@ $ git clone https://github.com/milvus-io/milvus.git
 
 ## Configure installation files
 
+The `inventory.ini` and `ansible.cfg` files are used to control the environment variables and log-in verification methods in Ansible playbook. In the `inventory.ini` file, the `dockernodes` section defines all the servers of docker engines. The `ansible.cfg` section defines all the servers of Milvus coordinators. The `node` section defines all the servers of Milvus nodes.
+
 Enter the local path to the Playbook and configure the installation files.
 
 ```shell
 $ cd ./milvus/deployments/docker/cluster-distributed-deployment
 ```
 
-### Configure `inventory.ini`
+#### `inventory.ini`
 
 Configure `inventory.ini` to divide hosts in groups in accordance with their roles in the Milvus system.
 
 Add host names, and define `docker` group and `vars`.
 
 ```
-[dockernodes]
+[dockernodes] #Add docker host names.
 dockernode01
 dockernode02
 dockernode03
 
-[admin]
+[admin] #Add Ansible controller name.
 ansible-controller
 
-[coords]
+[coords] #Add the host names of Milvus coordinators.
 ; Take note the IP of this host VM, and replace 10.170.0.17 with it.
 dockernode01
 
-[nodes]
+[nodes] #Add the host names of Milvus nodes.
 dockernode02
 
-[dependencies]
+[dependencies] #Add the host names of Milvus dependencies.
 ; dependencies node will host etcd, minio, pulsar, these 3 roles are the foundation of Milvus. 
 ; Take note the IP of this host VM, and replace 10.170.0.19 with it.
 dockernode03
@@ -105,9 +112,10 @@ ROOT_COORD_ADDRESS= {{coords_ip}}:53100
 INDEX_COORD_ADDRESS= {{coords_ip}}:31000
 ```
 
-### Configure `ansible.cfg`
+#### `ansible.cfg`
 
-`ansible.cfg` controls the action of the Playbook, for example, SSH key, etc.
+`ansible.cfg` controls the action of the playbook, for example, SSH key, etc. Do not set up passphrase via the SSH key on docker hosts. Otherwise, the Ansible SSH connection will fail. We recommend setting up the same username and SSH key on the three hosts and setting up the new user account to execute sudo without a password. Otherwise, you will receive errors that the user name does not match the password or you are not granted elevated privileges when running Ansible playbook.
+
 
 ```
 [defaults]
@@ -116,7 +124,7 @@ inventory = inventory.ini # Specify the Inventory file
 private_key_file=~/.my_ssh_keys/gpc_sshkey # Specify the SSH key that Ansible uses to access Docker host
 ```
 
-### Configure `deploy-docker.yml`
+#### `deploy-docker.yml`
 
 `deploy-docker.yml` defines the tasks during the installation of Docker. See the code comments in the file for details.
 
@@ -247,7 +255,7 @@ Check the running status of the containers.
 $ docker ps
 ```
 
-## Check the Syntax of `deploy-milvus.yml`
+## Check the Syntax
 
 Check the Syntax of `deploy-milvus.yml`.
 
@@ -328,6 +336,32 @@ dockernode03               : ok=4    changed=3    unreachable=0    failed=0    s
 
 Now you have Milvus deployed on the three hosts.
 
+## Scale out Milvus nodes and coordinators
+
+If you need to scale out Milvus nodes and coordinators, you can follow the steps below to add new docker hosts directly in Ansible playbook.
+
+1. Prepare host resources as requested in the prerequisites.
+2. Ensure connectivity to the network and host names can be resolved.
+3. Add the new host to the corresponding section in the inventory.ini file. More specifically, add the host name of the new node in the node section as shown in the example below. 
+
+```
+[nodes] #Add host names of Milvus nodes.
+dockernode02
+dockernode04 #This is the host name of the new node.
+```
+
+
+<div class="alert note">
+The new configuration is automatically applied when running the playbook and does not affect the original host configurations. Ansible playbook records all deployments, and when a new host is introduced, a new deployment is made on the new host in order not to affect the original deployment.
+</div>
+
+4. After deployment, run the following command to check the running status of the new host. 
+
+```
+Docker ps -a
+```
+
+
 ## What's next
 
 Having installed Milvus, you can:
@@ -336,8 +370,10 @@ Having installed Milvus, you can:
 
 - Learn the basic operations of Milvus:
   - [Connect to Milvus server](manage_connection.md)
+  - [Create a collection](create_collection.md)
+  - [Create a partition](create_partition.md)
+  - [Insert data](insert_data.md)
   - [Conduct a vector search](search.md)
-  - [Conduct a hybrid search](hybridsearch.md)
 
 - Explore [MilvusDM](migrate_overview.md), an open-source tool designed for importing and exporting data in Milvus.
 - [Monitor Milvus with Prometheus](monitor.md).

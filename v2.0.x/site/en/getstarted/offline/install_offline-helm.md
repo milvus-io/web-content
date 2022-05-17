@@ -95,8 +95,10 @@ Having installed Milvus, you can:
 
 - Learn the basic operations of Milvus:
   - [Connect to Milvus server](manage_connection.md)
+  - [Create a collection](create_collection.md)
+  - [Create a partition](create_partition.md)
+  - [Insert data](insert_data.md)
   - [Conduct a vector search](search.md)
-  - [Conduct a hybrid search](hybridsearch.md)
 
 - [Upgrade Milvus Using Helm Chart](upgrade.md).
 - [Scale your Milvus cluster](scaleout.md).
