@@ -24,7 +24,7 @@ This topic introduces how to deploy a Milvus cluster. We provide the Docker Host
 
 ## Prerequisites
 
-- - Hardware: Four servers including three Docker hosts, each with at least four cores of CPU and 8GB of RAM, and one Ansible controller
+- Hardware: Four servers including three Docker hosts, each with at least four cores of CPU and 8GB of RAM, and one Ansible controller
 - Operating system: Ubuntu 20.04 LTS
 - Software: [Ansible Controller](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html)
 
@@ -354,6 +354,7 @@ dockernode04 #This is the host name of the new node.
 <div class="alert note">
 The new configuration is automatically applied when running the playbook and does not affect the original host configurations. Ansible playbook records all deployments, and when a new host is introduced, a new deployment is made on the new host in order not to affect the original deployment.
 </div>
+
 
 4. After deployment, run the following command to check the running status of the new host. 
 
