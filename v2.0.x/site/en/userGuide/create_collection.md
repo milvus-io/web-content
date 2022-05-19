@@ -252,7 +252,7 @@ create collection -c book -f book_id:INT64 -f word_count:INT64 -f book_intro:FLO
         </tr>
         <tr>
             <td><code>Fields</code></td>
-            <td>Schema of the fields within the collection to create. Refer to <a href="chema.md">Schema</a> for more information.</td>
+            <td>Schema of the fields within the collection to create. Refer to <a href="schema.md">Schema</a> for more information.</td>
             <td>N/A</td>
         </tr>
         <tr>
