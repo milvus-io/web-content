@@ -128,7 +128,7 @@ For example, suppose there are two strings, 1101 1001 and 1001 1101.
 
 ### Superstructure
 
-The Superstructure is used to measure the similarity of a chemical structure and its superstructure. The less the value, the more similar the structure is to its superstructure. Only the vectors whose distance equals to 0 can be found now.
+The Superstructure is used to measure the similarity of a chemical structure and its superstructure. When the value equals 0, this means the chemical structure in the database is the superstructure of the target chemical structure.
 
 Superstructure similarity can be measured by:
 
@@ -143,7 +143,7 @@ Where
 
 ### Substructure
 
-The Substructure is used to measure the similarity of a chemical structure and its substructure. The less the value, the more similar the structure is to its substructure. Only the vectors whose distance equals to 0 can be found now.
+The Substructure is used to measure the similarity of a chemical structure and its substructure. When the value equals 0, this means the chemical structure in the database is the substructure of the target chemical structure.
 
 Substructure similarity can be measured by:
 
