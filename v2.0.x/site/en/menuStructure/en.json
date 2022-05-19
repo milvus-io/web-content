@@ -360,9 +360,9 @@
       "id": "timetravel.md",
       "title": "Search with Time Travel",
       "label1": "userguide",
-      "label2": "search",
+      "label2": "",
       "label3": "",
-      "order": 3
+      "order": 6
     },
     {
       "id": "calculate_distance.md",
@@ -370,7 +370,7 @@
       "label1": "userguide",
       "label2": "",
       "label3": "",
-      "order": 6
+      "order": 7
     },
     {
       "id": "bootcamp_userguide",
@@ -378,7 +378,7 @@
       "label1": "userguide",
       "label2": "",
       "label3": "",
-      "order": 7,
+      "order": 8,
       "outLink": "https://milvus.io/bootcamp"
     },
     {
@@ -653,20 +653,12 @@
       "order": 1
     },
     {
-      "id": "attu_overview.md",
-      "title": "Attu Overview Page",
-      "label1": "tools",
-      "label2": "milvus_attu",
-      "label3": "",
-      "order": 2
-    },
-    {
       "id": "attu_collection.md",
       "title": "Manage Collections",
       "label1": "tools",
       "label2": "milvus_attu",
       "label3": "",
-      "order": 3
+      "order": 2
     },
     {
       "id": "attu_partition.md",
@@ -674,7 +666,7 @@
       "label1": "tools",
       "label2": "milvus_attu",
       "label3": "",
-      "order": 4
+      "order": 3
     },
     {
       "id": "attu_data.md",
@@ -682,7 +674,7 @@
       "label1": "tools",
       "label2": "milvus_attu",
       "label3": "",
-      "order": 5
+      "order": 4
     },
     {
       "id": "attu_index.md",
@@ -690,7 +682,7 @@
       "label1": "tools",
       "label2": "milvus_attu",
       "label3": "",
-      "order": 6
+      "order": 5
     },
     {
       "id": "attu_query.md",
@@ -698,7 +690,7 @@
       "label1": "tools",
       "label2": "milvus_attu",
       "label3": "",
-      "order": 7
+      "order": 6
     },
     {
       "id": "attu_search.md",
@@ -706,7 +698,7 @@
       "label1": "tools",
       "label2": "milvus_attu",
       "label3": "",
-      "order": 8
+      "order": 7
     },
     {
       "id": "attu_system.md",
@@ -714,7 +706,7 @@
       "label1": "tools",
       "label2": "milvus_attu",
       "label3": "",
-      "order": 9
+      "order": 8
     },
     {
       "id": "attu_faq.md",
@@ -722,7 +714,7 @@
       "label1": "tools",
       "label2": "milvus_attu",
       "label3": "",
-      "order": 10
+      "order": 9
     },
     {
       "id": "sizing",
