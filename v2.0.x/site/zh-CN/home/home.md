@@ -4,13 +4,13 @@ id: home.md
 
 <div class="doc-h1-wrapper">
 
-  <div class="title">
+  <h1 class="title">
     欢迎阅读 Milvus 文档！ 
-  </div>
+  </h2>
 
-  <div class="sub-title">
+  <h2 class="sub-title">
     在 Milvus 文档页，你可以了解什么是 Milvus，如何安装、使用、部署 Milvus，以及根据场景需求使用 Milvus 搭建应用系统的教程。
-  </div>
+  </h2>
 
 </div>
 
