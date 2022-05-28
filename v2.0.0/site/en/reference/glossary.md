@@ -5,6 +5,10 @@ title: Glossary
 
 # Glossary
 
+## Binlog
+
+A binlog is a binary log, or a smaller unit in segment, that records and handles the updates and changes made to data in the Milvus vector database. Data from a segment is persisted in multiple binlogs. There are three types of binlogs in Milvus: InsertBinlog, DeleteBinlog, and DDLBinlog.
+
 ## Collection
 A collection in Milvus is equivalent to a table in a relational database management system (RDBMS). In Milvus, collections are used to store and manage entities.
 
@@ -47,7 +51,7 @@ Normalization refers to the process of converting an embedding (vector) so that 
 A partition is a division of a collection. Milvus supports dividing collection data into multiple parts on physical storage. This process is called partitioning, and each partition can contain multiple segments.
 
 ## PChannel
-PChannel stands for physical channel. Each PChannel corresponds to a topic for log storage.  A group of 64 PChannels by default will be assigned to store logs that record data insertion, deletion, and update when the Milvus cluster is started.
+PChannel stands for physical channel. Each PChannel corresponds to a topic for log storage.  A group of 256 PChannels by default will be assigned to store logs that record data insertion, deletion, and update when the Milvus cluster is started.
 
 ## Schema
 Schema is the meta information that defines data type and data property. Each collection has its own collection schema that defines all the fields of a collection, automatic ID (primary key) allocation enablement, and collection description. Also included in collection schemas are field schemas that defines the name, data type, and other properties of a field. 
@@ -73,7 +77,7 @@ VChannel stands for logical channel. Each collection will be assigned a group of
 An embedding vector is a feature abstraction of unstructured data, such as emails, IoT sensor data, Instagram photos, protein structures, and much more. Mathematically speaking, an embedding vector is an array of floating-point numbers or binaries. Modern embedding techniques are used to convert unstructured data to embedding vectors.
 
 ## Vector index
-A vector index is a reorganized data structure derived from raw data that can greatly accelerate the process of vector similarity search. Milvus supports several [vector index types](index_selection.md).
+A vector index is a reorganized data structure derived from raw data that can greatly accelerate the process of vector similarity search. Milvus supports several [vector index types](index.md).
 
 ## Vector similarity search
 Vector similarity search is the process of comparing a vector to a database to find vectors that are most similar to the target search vector. Approximate nearest neighbor (ANN) search algorithms are used to calculate [similarity](metric.md) between vectors. 

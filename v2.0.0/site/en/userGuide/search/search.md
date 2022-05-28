@@ -12,175 +12,17 @@ A vector similarity search in Milvus calculates the distance between query vecto
 
 The following example shows how to perform a vector similarity search on a 2000-row dataset of book ID (primary key), word count (scalar field), and book introduction (vector field), simulating the situation that you search for certain books based on their vectorized introductions. Milvus will return the most similar results according to the query vector and search parameters you have defined. 
 
-## Preparations
-
-The following example code demonstrates the steps prior to a search.
-
-If you work with your own dataset in an existing Milvus instance, you can move forward to the next step.
-
-1.  Connect to the Milvus server. See [Manage Connection](manage_connection.md) for more instruction.
-
-<div class="multipleCode">
-  <a href="?python">Python </a>
-  <a href="?javascript">Node.js</a>
-  <a href="?cli">CLI</a>
-</div>
-
-
-```python
-from pymilvus import connections
-connections.connect("default", host='localhost', port='19530')
-```
-
-```javascript
-const { MilvusClient } =require("@zilliz/milvus2-sdk-node");
-const milvusClient = new MilvusClient("localhost:19530");
-```
-
-```cli
-connect -h localhost -p 19530 -a default
-```
-
-2. Create a collection. See [Create a Collection](create_collection.md) for more instruction.
-
-<div class="multipleCode">
-  <a href="?python">Python </a>
-  <a href="?javascript">Node.js</a>
-  <a href="?cli">CLI</a>
-</div>
-
-
-```python
-schema = CollectionSchema([
-    		FieldSchema("book_id", DataType.INT64, is_primary=True),
-			FieldSchema("word_count", DataType.INT64),
-    		FieldSchema("book_intro", dtype=DataType.FLOAT_VECTOR, dim=2)
-		])
-collection = Collection("book", schema, using='default', shards_num=2)
-```
-
-```javascript
-const params = {
-  collection_name: "book",
-  fields: [
-    {
-      name: "book_intro",
-      description: "",
-      data_type: 101,  // DataType.FloatVector
-      type_params: {
-        dim: "2",
-      },
-    },
-	{
-      name: "book_id",
-      data_type: 5,   //DataType.Int64
-      is_primary_key: true,
-      description: "",
-    },
-    {
-      name: "word_count",
-      data_type: 5,    //DataType.Int64
-      description: "",
-    },
-  ],
-};
-await milvusClient.collectionManager.createCollection(params);
-```
-
-```cli
-create collection -c book -f book_intro:FLOAT_VECTOR:2 -f book_id:INT64 book_id -f word_count:INT64 word_count -p book_id
-```
-
-3. Insert data into the collection (Milvus CLI example uses a pre-built, remote CSV file containing similar data). See [Insert Data](insert_data.md) for more instruction.
-
-<div class="multipleCode">
-  <a href="?python">Python </a>
-  <a href="?javascript">Node.js</a>
-  <a href="?cli">CLI</a>
-</div>
-
-
-```python
-import random
-data = [
-    		[i for i in range(2000)],
-			[i for i in range(10000, 12000)],
-    		[[random.random() for _ in range(2)] for _ in range(2000)],
-		]
-collection.insert(data)
-```
-
-```javascript
-const data = Array.from({ length: 2000 }, (v,k) => ({
-  "book_intro": Array.from({ length: 2 }, () => Math.random()),
-  "book_id": k,
-  "word_count": k+10000,
-}));
-await milvusClient.dataManager.insert({
-  collection_name: "book",
-  fields_data: entities,
-});
-```
-
-```cli
-import -c book 'https://raw.githubusercontent.com/milvus-io/milvus_cli/main/examples/user_guide/search.csv'
-```
-
-4. Create an index for the vector field. See [Build Index](build_index.md) for more instruction.
-
-<div class="multipleCode">
-  <a href="?python">Python </a>
-  <a href="?javascript">Node.js</a>
-  <a href="?cli">CLI</a>
-</div>
-
-
-```python
-index_params = {
-        "metric_type":"L2",
-        "index_type":"IVF_FLAT",
-        "params":{"nlist":1024}
-    }
-collection.create_index("book_intro", index_params=index_params)
-```
-
-```javascript
-const index_params = {
-  metric_type: "L2",
-  index_type: "IVF_FLAT",
-  params: JSON.stringify({ nlist: 1024 }),
-};
-await milvusClient.indexManager.createIndex({
-  collection_name: "book",
-  field_name: "book_intro",
-  extra_params: index_params,
-});
-```
-
-```cli
-create index
-
-Collection name (book): book
-
-The name of the field to create an index for (book_intro): book_intro
-
-Index type (FLAT, IVF_FLAT, IVF_SQ8, IVF_PQ, RNSG, HNSW, ANNOY): IVF_FLAT
-
-Index metric type (L2, IP, HAMMING, TANIMOTO): L2
-
-Index params nlist: 1024
-
-Timeout []:
-```
 
 ## Load collection
 
-All CRUD operations within Milvus are executed in memory. Load the collection to memory before conducting a vector similarity search.
+All search and query operations within Milvus are executed in memory. Load the collection to memory before conducting a vector similarity search.
 
 <div class="multipleCode">
   <a href="?python">Python </a>
+  <a href="?java">Java</a>
+  <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
-  <a href="?cli">CLI</a>
+  <a href="?shell">CLI</a>
 </div>
 
 
@@ -196,14 +38,28 @@ await milvusClient.collectionManager.loadCollection({
 });
 ```
 
-```cli
-load -c book
+```go
+err := milvusClient.LoadCollection(
+  context.Background(),   // ctx
+  "book",                 // CollectionName
+  false                   // async
+)
+if err != nil {
+  log.Fatal("failed to load collection:", err.Error())
+}
 ```
 
+```java
+milvusClient.loadCollection(
+  LoadCollectionParam.newBuilder()
+          .withCollectionName("book")
+          .build()
+);
+```
 
-<div class="alert warning">
-In current release, volume of the data to load must be under 70% of the total memory resources of all query nodes to reserve memory resources for execution engine.
-</div>
+```shell
+load -c book
+```
 
 ## Prepare search parameters
 
@@ -211,8 +67,10 @@ Prepare the parameters that suit your search scenario. The following example def
 
 <div class="multipleCode">
   <a href="?python">Python </a>
+  <a href="?java">Java</a>
+  <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
-  <a href="?cli">CLI</a>
+  <a href="?shell">CLI</a>
 </div>
 
 
@@ -223,13 +81,24 @@ search_params = {"metric_type": "L2", "params": {"nprobe": 10}}
 ```javascript
 const searchParams = {
   anns_field: "book_intro",
-  topk: "10",
+  topk: "2",
   metric_type: "L2",
   params: JSON.stringify({ nprobe: 10 }),
 };
 ```
 
-```cli
+```go
+sp, _ := entity.NewIndexFlatSearchParam( // NewIndex*SearchParam func
+	10,                                  // searchParam
+)
+```
+
+```java
+final Integer SEARCH_K = 2;                       // TopK
+final String SEARCH_PARAM = "{\"nprobe\":10}";    // Params
+```
+
+```shell
 search
 
 Collection name (book): book
@@ -269,7 +138,7 @@ Travel Timestamp(Specify a timestamp in a search to get results based on a data 
 	</tr>
     <tr>
 		<td><code>params</code></td>
-		<td>Search parameter(s) specific to the index. See <a href="index_selection.md">Index Selection</a> for more information.</td>
+		<td>Search parameter(s) specific to the index. See <a href="index.md">Vector Index</a> for more information.</td>
 	</tr>
 	</tbody>
 </table>
@@ -296,12 +165,75 @@ Travel Timestamp(Specify a timestamp in a search to get results based on a data 
 	</tr>
     <tr>
 		<td><code>params</code></td>
-		<td>Search parameter(s) specific to the index. See <a href="index_selection.md">Index Selection</a> for more information.</td>
+		<td>Search parameter(s) specific to the index. See <a href="index.md">Vector Index</a> for more information.</td>
 	</tr>
 	</tbody>
 </table>
 
-<table class="language-cli">
+<table class="language-go">
+	<thead>
+	<tr>
+		<th>Parameter</th>
+		<th>Description</th>
+    <th>Options</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td><code>NewIndex*SearchParam func</code></td>
+		<td>Function to create entity.SearchParam according to different index types.</td>
+        <td>For floating point vectors:
+            <ul>
+                <li><code>NewIndexFlatSearchParam</code> (FLAT)</li>
+                <li><code>NewIndexIvfFlatSearchParam</code> (IVF_FLAT)</li>
+                <li><code>NewIndexIvfSQ8SearchParam</code> (IVF_SQ8)</li>
+                <li><code>NewIndexIvfPQSearchParam</code> (RNSG)</li>
+                <li><code>NewIndexRNSGSearchParam</code> (HNSW)</li>
+                <li><code>NewIndexHNSWSearchParam</code> (HNSW)</li>
+                <li><code>NewIndexANNOYSearchParam</code> (ANNOY)</li>
+                <li><code>NewIndexRHNSWFlatSearchParam</code> (RHNSW_FLAT)</li>
+                <li><code>NewIndexRHNSW_PQSearchParam</code> (RHNSW_PQ)</li>
+                <li><code>NewIndexRHNSW_SQSearchParam</code> (RHNSW_SQ)</li>
+            </ul>
+            For binary vectors:
+            <ul>
+                <li><code>NewIndexBinFlatSearchParam</code> (BIN_FLAT)</li>
+                <li><code>NewIndexBinIvfFlatSearchParam</code> (BIN_IVF_FLAT)</li>
+            </ul>
+        </td>
+	</tr>
+	<tr>
+		<td><code>searchParam</code></td>
+		<td>Search parameter(s) specific to the index.</td>
+    <td>See <a href="index.md">Vector Index</a> for more information.</td>
+	</tr>
+	</tbody>
+</table>
+
+<table class="language-java">
+	<thead>
+	<tr>
+		<th>Parameter</th>
+		<th>Description</th>
+    	<th>Options</th>
+	</tr>
+	</thead>
+	<tbody>
+  <tr>
+		<td><code>TopK</code></td>
+		<td>Number of the most similar results to return.</td>
+    <td>N/A</td>
+	</tr>
+  <tr>
+		<td><code>Params</code></td>
+		<td>Search parameter(s) specific to the index.</td>
+    <td>See <a href="index.md">Vector Index</a> for more information.</td>
+	</tr>
+	</tbody>
+</table>
+
+
+<table class="language-shell">
     <thead>
         <tr>
             <th>Option</th>
@@ -323,15 +255,26 @@ Travel Timestamp(Specify a timestamp in a search to get results based on a data 
 
 Search vectors with Milvus. To search in a specific [partition](glossary.md#Partition), specify the list of partition names. 
 
+Milvus supports setting consistency level specifically for a search or query  (only on PyMilvus currently). The consistency level set in the search or query requests overwrites the one set while creating the collection. In this example, the consistency level of the search request is set as "strong", meaning Milvus will read the most updated data view at the exact time point when a search or query request comes. Without specifying the consistency level during a search or query, Milvus adopts the original consistency level of the collection.
+
 <div class="multipleCode">
   <a href="?python">Python </a>
+  <a href="?java">Java</a>
+  <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
-  <a href="?cli">CLI</a>
+  <a href="?shell">CLI</a>
 </div>
 
 
 ```python
-results = collection.search(data=[[0.1, 0.2]], anns_field="book_intro", param=search_params, limit=10, expr=None)
+results = collection.search(
+	data=[[0.1, 0.2]], 
+	anns_field="book_intro", 
+	param=search_params, 
+	limit=10, 
+	expr=None,
+	consistency_level="strong"
+)
 ```
 
 ```javascript
@@ -344,8 +287,43 @@ const results = await milvusClient.dataManager.search({
 });
 ```
 
-```cli
+```go
+searchResult, err := milvusClient.Search(
+	context.Background(),                    // ctx
+	"book",                                  // CollectionName
+	[]string{},                              // partitionNames
+	"",                                      // expr
+	[]string{"book_id"},                     // outputFields
+	[]entity.Vector{entity.FloatVector([]float32{0.1, 0.2})}, // vectors
+	"book_intro",                            // vectorField
+	entity.L2,                               // metricType
+	2,                                       // topK
+	sp,                                      // sp
+)
+if err != nil {
+	log.Fatal("fail to search collection:", err.Error())
+}
+```
 
+```java
+List<String> search_output_fields = Arrays.asList("book_id");
+List<List<Float>> search_vectors = Arrays.asList(Arrays.asList(0.1f, 0.2f));
+
+SearchParam searchParam = SearchParam.newBuilder()
+		.withCollectionName("book")
+		.withMetricType(MetricType.L2)
+		.withOutFields(search_output_fields)
+		.withTopK(SEARCH_K)
+		.withVectors(search_vectors)
+		.withVectorFieldName("book_intro")
+		.withExpr()
+		.withParams(SEARCH_PARAM)
+		.build();
+R<SearchResults> respSearch = milvusClient.search(searchParam);
+```
+
+```shell
+# Follow the previous step.
 ```
 
 <table class="language-python">
@@ -366,7 +344,7 @@ const results = await milvusClient.dataManager.search({
 	</tr>
   <tr>
 		<td><code>params</code></td>
-		<td>Search parameter(s) specific to the index. See <a href="index_selection.md">Index Selection</a> for more information.</td>
+		<td>Search parameter(s) specific to the index. See <a href="index.md">Vector Index</a> for more information.</td>
 	</tr>
 	<tr>
 		<td><code>limit</code></td>
@@ -391,6 +369,10 @@ const results = await milvusClient.dataManager.search({
   <tr>
 		<td><code>round_decimal</code> (optional)</td>
 		<td>Number of decimal places of returned distance.</td>
+	</tr>
+	<tr>
+		<td><code>consistency_level</code> (optional)</td>
+		<td>Consistency level of the search.</td>
 	</tr>
 	</tbody>
 </table>
@@ -434,13 +416,120 @@ const results = await milvusClient.dataManager.search({
 	</tbody>
 </table>
 
+<table class="language-go">
+	<thead>
+	<tr>
+		<th>Parameter</th>
+		<th>Description</th>
+    <th>Options</th>
+	</tr>
+	</thead>
+	<tbody>
+  <tr>
+    <td><code>ctx</code></td>
+    <td>Context to control API invocation process.</td>
+    <td>N/A</td>
+  </tr>
+  <tr>
+    <td><code>CollectionName</code></td>
+    <td>Name of the collection to load.</td>
+    <td>N/A</td>
+  </tr>
+  <tr>
+    <td><code>partitionNames</code></td>
+    <td>List of names of the partitions to load. All partitions will be searched if it is left empty.</td>
+    <td>N/A</td>
+  </tr>
+  <tr>
+		<td><code>expr</code></td>
+		<td>Boolean expression used to filter attribute.</td>
+    <td>See <a href="boolean.md">Boolean Expression Rules</a> for more information.</td>
+	</tr>
+  <tr>
+		<td><code>output_fields</code></td>
+		<td>Name of the field to return.</td>
+    <td>Vector field is not supported in current release.</td>
+	</tr>
+  <tr>
+    <td><code>vectors</code></td>
+    <td>Vectors to search with.</td>
+    <td>N/A</td>
+  </tr>
+  <tr>
+		<td><code>vectorField</code></td>
+		<td>Name of the field to search on.</td>
+    <td>N/A</td>
+	</tr>
+  <tr>
+		<td><code>metricType</code></td>
+		<td>Metric type used for search.</td>
+    <td>This parameter must be set identical to the metric type used for index building.</td>
+	</tr>
+  <tr>
+		<td><code>topK</code></td>
+		<td>Number of the most similar results to return.</td>
+    <td>N/A</td>
+	</tr>
+  <tr>
+		<td><code>sp</code></td>
+		<td>entity.SearchParam specific to the index.</td>
+    <td>N/A</td>
+	</tr>
+	</tbody>
+</table>
+
+<table class="language-java">
+	<thead>
+	<tr>
+		<th>Parameter</th>
+		<th>Description</th>
+    <th>Options</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+    <td><code>CollectionName</code></td>
+    <td>Name of the collection to load.</td>
+    <td>N/A</td>
+  </tr>
+  <tr>
+		<td><code>MetricType</code></td>
+		<td>Metric type used for search.</td>
+    <td>This parameter must be set identical to the metric type used for index building.</td>
+	</tr>
+  <tr>
+		<td><code>OutFields</code></td>
+		<td>Name of the field to return.</td>
+    <td>Vector field is not supported in current release.</td>
+	</tr>
+  <tr>
+    <td><code>Vectors</code></td>
+    <td>Vectors to search with.</td>
+    <td>N/A</td>
+  </tr>
+<tr>
+		<td><code>VectorFieldName</code></td>
+		<td>Name of the field to search on.</td>
+    <td>N/A</td>
+	</tr>
+  <tr>
+		<td><code>Expr</code></td>
+		<td>Boolean expression used to filter attribute.</td>
+    <td>See <a href="boolean.md">Boolean Expression Rules</a> for more information.</td>
+	</tr>
+	</tbody>
+</table>
+
+
 
 Check the primary key values of the most similar vectors and their distances.
 
 <div class="multipleCode">
   <a href="?python">Python </a>
+  <a href="?java">Java</a>
+  <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
-  <a href="?cli">CLI</a>
+  <a href="?shell">CLI</a>
 </div>
 
 
@@ -453,7 +542,21 @@ results[0].distances
 console.log(results.results)
 ```
 
-```cli
+```go
+fmt.Printf("%#v\n", searchResult)
+for _, sr := range searchResult {
+	fmt.Println(sr.IDs)
+	fmt.Println(sr.Scores)
+}
+```
+
+```java
+SearchResultsWrapper wrapperSearch = new SearchResultsWrapper(respSearch.getData().getResults());
+System.out.println(wrapperSearch.getIDScore(0));
+System.out.println(wrapperSearch.getFieldData("book_id", 0));
+```
+
+```shell
 # Milvus CLI automatically returns the primary key values of the most similar vectors and their distances.
 ```
 
@@ -461,8 +564,10 @@ Release the collection loaded in Milvus to reduce memory consumption when the se
 
 <div class="multipleCode">
   <a href="?python">Python </a>
+  <a href="?java">Java</a>
+  <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
-  <a href="?cli">CLI</a>
+  <a href="?shell">CLI</a>
 </div>
 
 
@@ -474,7 +579,24 @@ collection.release()
 await milvusClient.collectionManager.releaseCollection({  collection_name: "book",});
 ```
 
-```cli
+```go
+err := milvusClient.ReleaseCollection(
+    context.Background(),                            // ctx
+    "book",                                          // CollectionName
+)
+if err != nil {
+    log.Fatal("failed to release collection:", err.Error())
+}
+```
+
+```java
+milvusClient.releaseCollection(
+		ReleaseCollectionParam.newBuilder()
+                .withCollectionName("book")
+                .build());
+```
+
+```shell
 release -c book
 ```
 
@@ -497,5 +619,5 @@ release -c book
   - [Conduct a hybrid search](hybridsearch.md)
   - [Search with Time Travel](timetravel.md)
 - Explore API references for Milvus SDKs:
-  - [PyMilvus API reference](/api-reference/pymilvus/v2.0.0rc9/tutorial.html)
-  - [Node.js API reference](/api-reference/node/v1.0.20/tutorial.html)
+  - [PyMilvus API reference](/api-reference/pymilvus/v2.0.1/tutorial.html)
+  - [Node.js API reference](/api-reference/node/v2.0.1/tutorial.html)

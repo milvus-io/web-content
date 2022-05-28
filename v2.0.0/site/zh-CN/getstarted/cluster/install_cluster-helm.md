@@ -43,7 +43,10 @@ $ helm repo update
 设置发布命名（release name）以标记或追踪该 chart 部署。
 
 <div class="alert note">
-本教程使用 <code> my-release</code> 作为 release name。如需使用不同的 release name, 请在以下命令中修改相应的 release name。
+  <ul>
+    <li>本教程使用 <code> my-release</code> 作为 release name。如需使用不同的 release name, 请在以下命令中修改相应的 release name。</li>
+    <li>Release name 中只能包含字母、数字以及下划线，不能包含点。</li>
+  </ul>
 </div>
 
 #### 安装 Milvus 分布式版：

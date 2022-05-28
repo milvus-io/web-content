@@ -34,7 +34,7 @@ Currently, Milvus supports installation via Launchpad PPA only on Ubuntu 18.04.
 
 ```bash
 $ sudo apt install software-properties-common
-$ sudo add-apt-repository ppa:milvusdb/milvus-standalone
+$ sudo add-apt-repository ppa:milvusdb/milvus
 $ sudo apt update
 $ sudo apt install milvus
 ```
@@ -44,9 +44,9 @@ $ sudo apt install milvus
 Alternatively, you can download the Debian software package and install Milvus standalone.
 
 ```bash
-$ wget https://github.com/milvus-io/milvus/releases/download/v2.0.0-pre-ga/milvus_2.0.0-preGA_1-1_amd64.deb
+$ wget https://github.com/milvus-io/milvus/releases/download/v2.0.1/milvus_2.0.1-1_amd64.deb
 $ sudo apt-get update
-$ sudo dpkg -i milvus_2.0.0-preGA_1-1_amd64.deb
+$ sudo dpkg -i milvus_2.0.1-1_amd64.deb
 $ sudo apt-get -f install
 ```
 
@@ -55,7 +55,7 @@ $ sudo apt-get -f install
 You can install Milvus standalone with YUM.
 
 ```bash
-$ sudo yum install https://github.com/milvus-io/milvus/releases/download/v2.0.0-pre-ga/milvus-2.0.0-preGA.1.el7.x86_64.rpm
+Coming soon.
 ```
 
 
@@ -67,14 +67,6 @@ After installation, Milvus standalone and its dependencies, i.e. etcd and MinIO,
 $ sudo systemctl status milvus
 $ sudo systemctl status milvus-etcd
 $ sudo systemctl status milvus-minio
-```
-
-## Configure Milvus (optional)
-
-To configure your Milvus service, make changes to the Milvus configuration file `milvus.yaml` under `/etc/milvus/configs/` in your local device after installation, and restart Milvus standalone.
-
-```bash
-$ sudo systemctl restart milvus
 ```
 
 ## What's next

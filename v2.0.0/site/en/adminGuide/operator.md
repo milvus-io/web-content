@@ -422,7 +422,4 @@ kubectl apply -f milvuscluster.yaml
 
 ## What's next
 
-If you want to learn how to configure dependencies with `milvus.yaml`:
-- [Milvus Standalone System Configurations](https://milvus.io/docs/v2.0.0/configuration_standalone-advanced.md)
-- [Milvus Cluster System Configurations](https://milvus.io/docs/v2.0.0/configuration_cluster-advanced.md)
-
+If you want to learn how to configure dependencies with `milvus.yaml`, see [System Configuration](system_configuration.md).

@@ -21,8 +21,10 @@ Verify if a partition exists in the specified collection.
 
 <div class="multipleCode">
   <a href="?python">Python </a>
+  <a href="?java">Java</a>
+  <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
-  <a href="?cli">CLI</a>
+  <a href="?shell">CLI</a>
 </div>
 
 
@@ -39,7 +41,30 @@ await milvusClient.partitionManager.hasPartition({
 });
 ```
 
-```cli
+```go
+hasPar, err := milvusClient.HasPartition(
+    context.Background(),   // ctx
+    "book",                 // CollectionName
+    "novel",                // partitionName
+    )
+if err != nil {
+    log.Fatal("failed to check the partition:", err.Error())
+}
+log.Println(hasPar)
+```
+
+```java
+R<Boolean> respHasPartition = milvusClient.hasPartition(
+        HasPartitionParam.newBuilder()
+                .withCollectionName("book")
+                .withPartitionName("novel")
+                .build());
+if (respHasCollection.getData() == Boolean.TRUE) {
+    System.out.println("Partition exists.");
+}
+```
+
+```shell
 describe partition -c book -p novel
 ```
 
@@ -78,7 +103,30 @@ describe partition -c book -p novel
 	</tbody>
 </table>
 
-<table class="language-cli">
+<table class="language-go">
+	<thead>
+    <tr>
+        <th>Parameter</th>
+        <th>Description</th>
+    </tr>
+	</thead>
+	<tbody>
+    <tr>
+        <td><code>ctx</code></td>
+        <td>Context to control API invocation process.</td>
+    </tr>
+    <tr>
+        <td><code>CollectionName</code></td>
+        <td>Name of the collection to check.</td>
+    </tr>
+    <tr>
+        <td><code>partitionName</code></td>
+        <td>Name of the partition to check.</td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="language-shell">
     <thead>
         <tr>
             <th>Option</th>
@@ -102,8 +150,10 @@ describe partition -c book -p novel
 
 <div class="multipleCode">
   <a href="?python">Python </a>
+  <a href="?java">Java</a>
+  <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
-  <a href="?cli">CLI</a>
+  <a href="?shell">CLI</a>
 </div>
 
 
@@ -119,7 +169,26 @@ await milvusClient.partitionManager.showPartitions({
 });
 ```
 
-```cli
+```go
+partitions, err := milvusClient.ShowPartitions(
+    context.Background(),   // ctx
+    "book",                 // CollectionName
+    )
+if err != nil {
+    log.Fatal("failed to list partitions:", err.Error())
+}
+log.Println(listPar)
+```
+
+```java
+R<ShowPartitionsResponse> respShowPartitions = milvusClient.showPartitions(
+        ShowPartitionsParam.newBuilder()
+                .withCollectionName("book")
+                .build());
+System.out.println(respShowPartitions);
+```
+
+```shell
 list partitions -c book
 ```
 
@@ -138,7 +207,41 @@ list partitions -c book
 	</tbody>
 </table>
 
-<table class="language-cli">
+<table class="language-go">
+	<thead>
+    <tr>
+        <th>Parameter</th>
+        <th>Description</th>
+    </tr>
+	</thead>
+	<tbody>
+    <tr>
+        <td><code>ctx</code></td>
+        <td>Context to control API invocation process.</td>
+    </tr>
+    <tr>
+        <td><code>CollectionName</code></td>
+        <td>Name of the collection to check.</td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="language-java">
+	<thead>
+    <tr>
+        <th>Parameter</th>
+        <th>Description</th>
+    </tr>
+	</thead>
+	<tbody>
+    <tr>
+        <td><code>CollectionName</code></td>
+        <td>Name of the collection to check.</td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="language-shell">
     <thead>
         <tr>
             <th>Option</th>
@@ -162,6 +265,6 @@ list partitions -c book
   - [Conduct a vector search](search.md)
   - [Conduct a hybrid search](hybridsearch.md)
 - Explore API references for Milvus SDKs:
-  - [PyMilvus API reference](/api-reference/pymilvus/v2.0.0rc9/tutorial.html)
-  - [Node.js API reference](/api-reference/node/v1.0.20/tutorial.html)
+  - [PyMilvus API reference](/api-reference/pymilvus/v2.0.1/tutorial.html)
+  - [Node.js API reference](/api-reference/node/v2.0.1/tutorial.html)
 

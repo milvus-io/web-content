@@ -8,6 +8,8 @@ summary: Attu, an intuitive GUI for Milvus service management.
 
 [Attu](https://github.com/zilliztech/attu) is an efficient open-source management tool for Milvus. It features an intuitive graphical user interface (GUI), allowing you to easily interact with your databases. With just a few clicks, you can visualize your cluster status, manage metadata, perform data queries, and much more.
 
+Attu is an open source project of [Zilliz](https://zilliz.com/).
+
 ![Attu_overview](../../../../assets/attu/insight_overview.png "Attu overview.")
 
 ## Features

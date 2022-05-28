@@ -12,176 +12,17 @@ Unlike a vector similarity search, a vector query retrieves vectors via scalar f
 
 The following example shows how to perform a vector query on a 2000-row dataset of book ID (primary key), word count (scalar field), and book introduction (vector field), simulating the situation where you query for certain books based on their IDs.
 
-## Preparations
-
-The following example code demonstrates the steps prior to a query.
-
-If you work with your own dataset in an existing Milvus server, you can move forward to the next step.
-
-1.  Connect to the Milvus server. See [Manage Connection](manage_connection.md) for more instruction.
-
-<div class="multipleCode">
-  <a href="?python">Python </a>
-  <a href="?javascript">Node.js</a>
-  <a href="?cli">CLI</a>
-</div>
-
-
-```python
-from pymilvus import connections
-connections.connect("default", host='localhost', port='19530')
-```
-
-```javascript
-const { MilvusClient } =require("@zilliz/milvus2-sdk-node");
-const milvusClient = new MilvusClient("localhost:19530");
-```
-
-```cli
-connect -h localhost -p 19530 -a default
-```
-
-2. Create a collection. See [Create a Collection](create_collection.md) for more instruction.
-
-<div class="multipleCode">
-  <a href="?python">Python </a>
-  <a href="?javascript">Node.js</a>
-  <a href="?cli">CLI</a>
-</div>
-
-
-```python
-schema = CollectionSchema([
-    		FieldSchema("book_id", DataType.INT64, is_primary=True),
-			FieldSchema("word_count", DataType.INT64),
-    		FieldSchema("book_intro", dtype=DataType.FLOAT_VECTOR, dim=2)
-		])
-collection = Collection("book", schema, using='default', shards_num=2)
-```
-
-```javascript
-const params = {
-  collection_name: "book",
-  fields: [
-    {
-      name: "book_intro",
-      description: "",
-      data_type: 101,  // DataType.FloatVector
-      type_params: {
-        dim: "2",
-      },
-    },
-	{
-      name: "book_id",
-      data_type: 5,   //DataType.Int64
-      is_primary_key: true,
-      description: "",
-    },
-    {
-      name: "word_count",
-      data_type: 5,    //DataType.Int64
-      description: "",
-    },
-  ],
-};
-await milvusClient.collectionManager.createCollection(params);
-```
-
-```cli
-create collection -c book -f book_intro:FLOAT_VECTOR:2 -f book_id:INT64 book_id -f word_count:INT64 word_count -p book_id
-```
-
-3. Insert data into the collection (Milvus CLI example uses a pre-built, remote CSV file containing similar data). See [Insert Data](insert_data.md) for more instruction.
-
-<div class="multipleCode">
-  <a href="?python">Python </a>
-  <a href="?javascript">Node.js</a>
-  <a href="?cli">CLI</a>
-</div>
-
-
-```python
-import random
-data = [
-    		[i for i in range(2000)],
-			[i for i in range(10000, 12000)],
-    		[[random.random() for _ in range(2)] for _ in range(2000)],
-		]
-collection.insert(data)
-```
-
-```javascript
-const data = Array.from({ length: 2000 }, (v,k) => ({
-  "book_intro": Array.from({ length: 2 }, () => Math.random()),
-  "book_id": k,
-  "word_count": k+10000,
-}));
-await milvusClient.dataManager.insert({
-  collection_name: "book",
-  fields_data: entities,
-});
-```
-
-```cli
-import -c book 'https://raw.githubusercontent.com/milvus-io/milvus_cli/main/examples/user_guide/search.csv'
-```
-
-4. Create an index for the vector field. See [Build Index](build_index.md) for more instruction.
-
-<div class="multipleCode">
-  <a href="?python">Python </a>
-  <a href="?javascript">Node.js</a>
-  <a href="?cli">CLI</a>
-</div>
-
-
-```python
-index_params = {
-        "metric_type":"L2",
-        "index_type":"IVF_FLAT",
-        "params":{"nlist":1024}
-    }
-collection.create_index("book_intro", index_params=index_params)
-```
-
-```javascript
-const index_params = {
-  metric_type: "L2",
-  index_type: "IVF_FLAT",
-  params: JSON.stringify({ nlist: 1024 }),
-};
-await milvusClient.indexManager.createIndex({
-  collection_name: "book",
-  field_name: "book_intro",
-  extra_params: index_params,
-});
-```
-
-```cli
-create index
-
-Collection name (book): book
-
-The name of the field to create an index for (book_intro): book_intro
-
-Index type (FLAT, IVF_FLAT, IVF_SQ8, IVF_PQ, RNSG, HNSW, ANNOY): IVF_FLAT
-
-Index metric type (L2, IP, HAMMING, TANIMOTO): L2
-
-Index params nlist: 1024
-
-Timeout []:
-```
-
 
 ## Load collection
 
-All CRUD operations within Milvus are executed in memory. Load the collection to memory before conducting a vector query.
+All search and query operations within Milvus are executed in memory. Load the collection to memory before conducting a vector query.
 
 <div class="multipleCode">
   <a href="?python">Python </a>
+  <a href="?java">Java</a>
+  <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
-  <a href="?cli">CLI</a>
+  <a href="?shell">CLI</a>
 </div>
 
 
@@ -197,27 +38,50 @@ await milvusClient.collectionManager.loadCollection({
 });
 ```
 
-```cli
-load -c book
+```go
+err := milvusClient.LoadCollection(
+  context.Background(),   // ctx
+  "book",                 // CollectionName
+  false                   // async
+)
+if err != nil {
+  log.Fatal("failed to load collection:", err.Error())
+}
 ```
 
-<div class="alert warning">
-In current release, volume of the data to load must be under 70% of the total memory resources of all query nodes to reserve memory resources for execution engine.
-</div>
+```java
+milvusClient.loadCollection(
+  LoadCollectionParam.newBuilder()
+    .withCollectionName("book")
+    .build()
+);
+```
+
+```shell
+load -c book
+```
 
 ## Conduct a vector query
 
 The following example filters the vectors with certain `book_id` values, and returns the `book_id` field and `book_intro` of the results.
 
+Milvus supports setting consistency level specifically for a search or query  (only on PyMilvus currently). The consistency level set in the search or query requests overwrites the one set while creating the collection. In this example, the consistency level of the search request is set as "strong", meaning Milvus will read the most updated data view at the exact time point when a search or query request comes. Without specifying the consistency level during a search or query, Milvus adopts the original consistency level of the collection.
+
 <div class="multipleCode">
   <a href="?python">Python </a>
+  <a href="?java">Java</a>
+  <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
-  <a href="?cli">CLI</a>
+  <a href="?shell">CLI</a>
 </div>
 
 
 ```python
-res = collection.query(expr = "book_id in [2,4,6,8]", output_fields = ["book_id", "book_intro"])
+res = collection.query(
+  expr = "book_id in [2,4,6,8]", 
+  output_fields = ["book_id", "book_intro"],
+  consistency_level="strong"
+)
 ```
 
 ```javascript
@@ -228,7 +92,30 @@ const results = await milvusClient.dataManager.query({
 });
 ```
 
-```cli
+```go
+queryResult, err := milvusClient.Query(
+	context.Background(),                                   // ctx
+	"book",                                                 // CollectionName
+	"",                                                     // PartitionName
+	entity.NewColumnInt64("book_id", []int64{2,4,6,8}),     // expr
+	[]string{"book_id", "book_intro"}                       // OutputFields
+)
+if err != nil {
+	log.Fatal("fail to query collection:", err.Error())
+}
+```
+
+```java
+List<String> query_output_fields = Arrays.asList("book_id", "word_count");
+QueryParam queryParam = QueryParam.newBuilder()
+  .withCollectionName("book")
+  .withExpr("book_id in [2,4,6,8]")
+  .withOutFields(query_output_fields)
+  .build();
+R<QueryResults> respQuery = milvusClient.query(queryParam);
+```
+
+```shell
 query
 
 collection_name: book
@@ -262,6 +149,10 @@ timeout []:
 		<td><code>partition_names</code> (optional)</td>
 		<td>List of names of the partitions to query on.</td>
 	</tr>
+	<tr>
+		<td><code>consistency_level</code> (optional)</td>
+		<td>Consistency level of the query.</td>
+	</tr>
 	</tbody>
 </table>
 
@@ -293,7 +184,72 @@ timeout []:
 	</tbody>
 </table>
 
-<table class="language-cli">
+<table class="language-go">
+	<thead>
+	<tr>
+		<th>Parameter</th>
+		<th>Description</th>
+    <th>Options</th>
+	</tr>
+	</thead>
+	<tbody>
+  <tr>
+    <td><code>ctx</code></td>
+    <td>Context to control API invocation process.</td>
+    <td>N/A</td>
+  </tr>
+  <tr>
+    <td><code>CollectionName</code></td>
+    <td>Name of the collection to query.</td>
+    <td>N/A</td>
+  </tr>
+  <tr>
+    <td><code>partitionName</code></td>
+    <td>List of names of the partitions to load. All partitions will be queried if it is left empty.</td>
+    <td>N/A</td>
+  </tr>
+  <tr>
+		<td><code>expr</code></td>
+		<td>Boolean expression used to filter attribute.</td>
+    <td>See <a href="boolean.md">Boolean Expression Rules</a> for more information.</td>
+	</tr>
+    <tr>
+		<td><code>OutputFields</code></td>
+		<td>Name of the field to return.</td>
+    	<td>Vector field is not supported in current release.</td>
+	</tr>
+	</tbody>
+</table>
+
+<table class="language-java">
+	<thead>
+	<tr>
+		<th>Parameter</th>
+		<th>Description</th>
+    <th>Options</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+    <td><code>CollectionName</code></td>
+    <td>Name of the collection to load.</td>
+    <td>N/A</td>
+  </tr>
+  <tr>
+		<td><code>OutFields</code></td>
+		<td>Name of the field to return.</td>
+    <td>Vector field is not supported in current release.</td>
+	</tr>
+  <tr>
+		<td><code>Expr</code></td>
+		<td>Boolean expression used to filter attribute.</td>
+    <td>See <a href="boolean.md">Boolean Expression Rules</a> for more information.</td>
+	</tr>
+	</tbody>
+</table>
+
+
+<table class="language-shell">
     <thead>
         <tr>
             <th>Option</th>
@@ -315,8 +271,10 @@ Check the returned results.
 
 <div class="multipleCode">
   <a href="?python">Python </a>
+  <a href="?java">Java</a>
+  <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
-  <a href="?cli">CLI</a>
+  <a href="?shell">CLI</a>
 </div>
 
 
@@ -329,7 +287,20 @@ sorted_res
 console.log(results.data)
 ```
 
-```cli
+```go
+fmt.Printf("%#v\n", queryResult)
+for _, qr := range queryResult {
+	fmt.Println(qr.IDs)
+}
+```
+
+```java
+QueryResultsWrapper wrapperQuery = new QueryResultsWrapper(respQuery.getData());
+System.out.println(wrapperQuery.getFieldWrapper("book_id").getFieldData());
+System.out.println(wrapperQuery.getFieldWrapper("word_count").getFieldData());
+```
+
+```shell
 # Milvus CLI automatically returns the entities with the pre-defined output fields.
 ```
 
@@ -340,5 +311,5 @@ console.log(results.data)
   - [Conduct a hybrid search](hybridsearch.md)
   - [Search with Time Travel](timetravel.md)
 - Explore API references for Milvus SDKs:
-  - [PyMilvus API reference](/api-reference/pymilvus/v2.0.0rc9/tutorial.html)
-  - [Node.js API reference](/api-reference/node/v1.0.20/tutorial.html)
+  - [PyMilvus API reference](/api-reference/pymilvus/v2.0.1/tutorial.html)
+  - [Node.js API reference](/api-reference/node/v2.0.1/tutorial.html)

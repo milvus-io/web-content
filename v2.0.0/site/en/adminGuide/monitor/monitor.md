@@ -31,10 +31,11 @@ Kube-prometheus collects Kubernetes manifests, [Grafana](http://grafana.com/) da
 Before deploying monitoring services, you need to create a monitoring stack by using the configuration in the kube-prometheus manifests directory.
 
 ```
-git clone https://github.com/prometheus-operator/kube-prometheus.git
-kubectl create -f manifests/setup
-until kubectl get servicemonitors --all-namespaces ; do date; sleep 1; echo ""; done
-kubectl create -f manifests/
+$ git clone https://github.com/prometheus-operator/kube-prometheus.git
+$ cd # to the local path of the repo
+$ kubectl create -f manifests/setup
+$ until kubectl get servicemonitors --all-namespaces ; do date; sleep 1; echo ""; done
+$ kubectl create -f manifests/
 ```
 
 To delete a stack, run `kubectl delete --ignore-not-found=true -f manifests/ -f manifests/setup`.
@@ -46,8 +47,8 @@ To delete a stack, run `kubectl delete --ignore-not-found=true -f manifests/ -f 
 You can access Prometheus via `http://localhost:9090`, and Grafana at `http://localhost:3000`.
 
 ```
-kubectl --namespace monitoring port-forward svc/prometheus-k8s 9090
-kubectl --namespace monitoring port-forward svc/grafana 3000
+$ kubectl --namespace monitoring port-forward svc/prometheus-k8s 9090
+$ kubectl --namespace monitoring port-forward svc/grafana 3000
 ```
 
 ### 2. Enable ServiceMonitor
@@ -55,13 +56,13 @@ kubectl --namespace monitoring port-forward svc/grafana 3000
 The ServiceMonitor is not enabled for Milvus Helm by default. After installing the Prometheus Operator in the Kubernetes cluster, you can enable it by adding the parameter `metrics.serviceMontior.enabled=true`.
 
 ```
-helm install my-release milvus/milvus --set metrics.serviceMonitor.enabled=true
+$ helm install my-release milvus/milvus --set metrics.serviceMonitor.enabled=true
 ```
 
 When the installation completes, use `kubectl` to check the ServiceMonitor resource.
 
 ```
-kubectl get servicemonitor
+$ kubectl get servicemonitor
 ```
 ```
 NAME                           AGE

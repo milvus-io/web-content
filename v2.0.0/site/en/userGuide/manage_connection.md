@@ -21,15 +21,21 @@ Construct a Milvus connection. Ensure to connect to Milvus server before any ope
 
 <div class="multipleCode">
   <a href="?python">Python </a>
+  <a href="?java">Java</a>
+  <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
-  <a href="?cli">CLI</a>
+  <a href="?shell">CLI</a>
 </div>
 
 
 ```python
 # Run `python3` in your terminal to operate in the Python interactive mode.
 from pymilvus import connections
-connections.connect(alias="default", host='localhost', port='19530')
+connections.connect(
+  alias="default", 
+  host='localhost', 
+  port='19530'
+)
 ```
 
 ```javascript
@@ -38,7 +44,26 @@ const address = "localhost:19530";
 const milvusClient = new MilvusClient(address);
 ```
 
-```cli
+```go
+milvusClient, err := client.NewGrpcClient(
+  context.Background(), // ctx
+  "localhost:19530",    // addr
+)
+if err != nil {
+  log.Fatal("failed to connect to Milvus:", err.Error())
+}
+```
+
+```java
+final MilvusServiceClient milvusClient = new MilvusServiceClient(
+  ConnectParam.newBuilder()
+    .withHost("localhost")
+    .withPort(19530)
+    .build()
+);
+```
+
+```shell
 connect -h localhost -p 19530 -a default
 ```
 
@@ -68,52 +93,80 @@ connect -h localhost -p 19530 -a default
 
 <table class="language-javascript">
 	<thead>
+		<tr>
+			<th>Parameter</th>
+			<th>Description</th>
+		</tr>
+	</thead>
+	<tbody>
+    	<tr>
+	    	<td><code>address</code></td>
+			<td>Address of the Milvus connection to construct.</td>
+		</tr>
+	</tbody>
+</table>
+
+<table class="language-go">
+	<thead>
+		<tr>
+			<th>Parameter</th>
+			<th>Description</th>
+		</tr>
+	</thead>
+	<tbody>
+    	<tr>
+	    	<td><code>ctx</code></td>
+			<td>Context to control API invocation process.</td>
+		</tr>
+		<tr>
+	    	<td><code>addr</code></td>
+			<td>Address of the Milvus connection to construct.</td>
+		</tr>
+	</tbody>
+</table>
+
+<table class="language-java">
+	<thead>
 	<tr>
 		<th>Parameter</th>
 		<th>Description</th>
 	</tr>
 	</thead>
 	<tbody>
-    	<tr>
-	    	<td><code>address</code></td>
-		<td>Address of the Milvus connection to construct.</td>
+	<tr>
+		<td><code>Host</code></td>
+		<td>IP address of the Milvus server.</td>
+	</tr>
+	<tr>
+		<td><code>Port</code></td>
+		<td>Port of the Milvus server.</td>
 	</tr>
 	</tbody>
 </table>
 
-<table class="language-cli">
+<table class="language-shell">
     <thead>
         <tr>
             <th>Option</th>
-            <th>Full name</th>
             <th>Description</th>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td>-h</td>
-            <td>--host</td>
-            <td>(Optional) The host name. The default is "127.0.0.1".</td>
+            <td>-h (Optional)</td>
+            <td>The host name. The default is "127.0.0.1".</td>
         </tr>
         <tr>
-            <td>-p</td>
-            <td>--port</td>
-            <td>(Optional) The port number. The default is "19530".</td>
+            <td>-p (Optional)</td>
+            <td>The port number. The default is "19530".</td>
         </tr>
         <tr>
-            <td>-a</td>
-            <td>--alias</td>
-            <td>(Optional) The alias name of the Milvus link. The default is "default".</td>
+            <td>-a (Optional)</td>
+            <td>The alias name of the Milvus link. The default is "default".</td>
         </tr>
         <tr>
-            <td>-D</td>
-            <td>--disconnect</td>
-            <td>(Optional) Flag to disconnect from the Milvus server specified by an alias. The default alias is "default".</td>
-        </tr>
-        <tr>
-            <td>--help</td>
-            <td>n/a</td>
-            <td>Displays help for using the command.</td>
+            <td>-D (Optional)</td>
+            <td>Flag to disconnect from the Milvus server specified by an alias. The default alias is "default".</td>
         </tr>
     </tbody>
 </table>
@@ -122,7 +175,7 @@ connect -h localhost -p 19530 -a default
 
 ### Return
 
-A milvus connection created by the passed parameters.
+A Milvus connection created by the passed parameters.
 
 ### Raises
 
@@ -132,7 +185,6 @@ A milvus connection created by the passed parameters.
   <li><b>Exception</b>: If server specified in parameters is not ready, we cannot connect to server.</li>
 </ul>  
 
-### 
 </div>
 
 
@@ -142,8 +194,10 @@ Disconnect from a Milvus server.
 
 <div class="multipleCode">
   <a href="?python">Python </a>
+  <a href="?java">Java</a>
+  <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
-  <a href="?cli">CLI</a>
+  <a href="?shell">CLI</a>
 </div>
 
 
@@ -156,7 +210,15 @@ connections.disconnect("default")
 await milvusClient.closeConnection();
 ```
 
-```cli
+```go
+milvusClient.Close()
+```
+
+```java
+milvusClient.close()
+```
+
+```shell
 connect -D
 ```
 
@@ -191,6 +253,6 @@ Having connected to a Milvus server, you can:
 
 For advanced operations, check:
 
-- [PyMilvus API reference](/api-reference/pymilvus/v2.0.0rc9/tutorial.html)
-- [Node.js API reference](/api-reference/node/v1.0.20/tutorial.html)
+- [PyMilvus API reference](/api-reference/pymilvus/v2.0.1/tutorial.html)
+- [Node.js API reference](/api-reference/node/v2.0.1/tutorial.html)
 

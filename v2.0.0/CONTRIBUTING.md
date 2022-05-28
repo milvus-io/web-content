@@ -1,9 +1,8 @@
-
 # Contributing to Milvus Documentation
 
 The Milvus docs are open-source just like the database itself and welcome contributions from everyone in the Milvus community.
 
-> Up-to-date technical documentation can be found at [milvus.io](https://www.milvus.io/).
+> Please note that this repository is for Milvus technical documentation update and maintenance. Up-to-date, fully rendered technical documentation can be found at [milvus.io](https://www.milvus.io/) and [Web content repo](https://github.com/milvus-io/web-content).
 
 ## What contributions can I make?
 
@@ -12,7 +11,7 @@ Basically anything you can think of to improve our documentation and make it mor
 
 - Fix a typo or a grammatical error.
 
-- Translate English content into other languages.
+- Translate English content into Chinese or other languages.
 
 - Update or extend existing documentation.
 
@@ -20,18 +19,22 @@ Basically anything you can think of to improve our documentation and make it mor
 
 ## Before you start
 
-Before you contribute please take a minute to familiarize yourself with basic [Markdown](https://www.markdownguide.org/basic-syntax/) syntax and have a look at our [Code of Conduct](https://github.com/milvus-io/milvus/blob/master/CODE_OF_CONDUCT.md) and the [Google Developer Documentation Style Guide](https://developers.google.com/style/) for some guidance on how to write accessible, consistent and inclusive documentation.
+Before you contribute please take a minute to familiarize yourself with basic [Markdown](https://www.markdownguide.org/basic-syntax/) syntax and have a look at our [Code of Conduct](https://github.com/milvus-io/milvus/blob/master/CODE_OF_CONDUCT.md).
+
+[Google Developer Documentation Style Guide](https://developers.google.com/style/) is **strongly recommended** before you want to make some substantial contributions, giving you some guidance on how to write accessible, consistent and inclusive documentation.
+
+For contributions concerning translation to other language, unedited machine translation will not be accepted. 
 
 
 ## Get started
 
-If you are just correcting a typo or grammatical error, feel free to go ahead and [create a pull request](https://github.com/milvus-io/milvus-docs/pulls). 
+If you are just correcting a typo or grammatical error, feel free to edit the page and [create a pull request](https://github.com/milvus-io/milvus-docs/pulls). 
 
 For more substantial changes, please follow the following steps:
 
-1. [File an issue](https://github.com/milvus-io/milvus-docs/issues/new/choose) and assign it to yourself by commenting `/assign` or `/assign @your_github_id`. 
+1. [File an issue](https://github.com/milvus-io/milvus-docs/issues/new/choose) and assign it to yourself. 
    
-   Or, if you want to fix an existing issue then go to [Issues](https://github.com/milvus-io/milvus-docs/issues), choose one issue and assign it to yourself by commenting `/assign` or `/assign @your_github_id`.
+   Or, if you want to fix an existing issue then go to [Issues](https://github.com/milvus-io/milvus-docs/issues), choose one issue and assign it to yourself.
 
 2. Fork the [milvus-docs repository](https://github.com/milvus-io/milvus-docs) to your own GitHub account.
 
@@ -78,6 +81,8 @@ summary: Short description of the page for SEO
 
 related_key: keyword
 
+group: major_page.md
+
 ---
 ```
 
@@ -87,6 +92,7 @@ related_key: keyword
 | `title` (optional)       | Used as the h1 header and written in title-case.             |
 | `summary` (optional)     | Used as the page's `meta description` for SEO. Keep this under 143 characters. Consider using the first sentence of the page, or something similar. |
 | `related_key` (optional) | Used as the keyword to pull related questions from the FAQ database to show at the bottom of the page. |
+| `group` (optional) | Add the leading page appeared on the sidenav if this page is a part of a page group. |
 
 #### Templates 
 
@@ -101,7 +107,7 @@ When drafting a document, you should follow these types of definitions with a de
 
 #### Images
 
-*Images* are housed under the **/assets** folder and can be referenced with `![ImageName]({{images.assets/ImageName.jpg/png}})`.
+*Images* are housed under the **/assets** folder and can be referenced with `![ImageName]({{images.assets/ImageName.jpg/png "This is a caption"}})`.
 
 #### Fragments
 
@@ -112,7 +118,7 @@ When drafting a document, you should follow these types of definitions with a de
 *Variables* are used to store version information to be referenced in code or paths. They are defined in **Variables.json** and can be used in Markdown (**.md**) files, fragments, and templates. 
 
 
-> The defined variables are implemented within the current folder and its subfolders. The **en** and **Zh-CN** folders each contain a Variables.json file.
+> The defined variables are implemented within the current folder and its subfolders. The **en** and **Zh-CN** folders each contain a **Variables.json** file.
 
 
 ### Sidebar

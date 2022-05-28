@@ -44,7 +44,7 @@ The name of a resource can contain numbers, letters, dollar signs ($), and under
 | VARCHAR      | 65,535 characters       |
 
 <div class="alert note">
-VARCHAR will be supported in the 2.0 stable version. More string data types will be supported.
+VARCHAR and more string data types will be supported in future releases of Milvus.
 </div>
 
 
@@ -66,9 +66,7 @@ In current release, data to be load must be under 90% of the total memory resour
 ## Search limits
 | Vectors      | Limit |
 | ----------- | ----------- |
-| topk   | 16,384       |
-| target input vectors    | 16,384       |
+| <code>topk</code> (number of the most similar result to return)   | 16,384       |
+| <code>nq</code> (number of the search requests)    | 16,384       |
 
-<div class="alert note">
-Due to Pulsar's limits on the log transmission size (100 MB), Milvus does not support 16,384 output vectors per input vector on high-dimensional vector searches in the current version. Milvus 2.0.0-GA will support it.
-</div>
+
