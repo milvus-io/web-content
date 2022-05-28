@@ -4,13 +4,13 @@ id: home.md
 
 <div class="community-h1-wrapper">
 
-  <div class="title">
+  <h1 class="title">
     Reinvent data science Together.
-  </div>
+  </h1>
 
-  <div class="sub-title">
+  <h2 class="sub-title">
     Join the Milvus community to stay connected, get help, and contribute!
-  </div>
+  </h2>
 
 </div>
 

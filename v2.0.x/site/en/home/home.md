@@ -4,13 +4,13 @@ id: home.md
 
 <div class="doc-h1-wrapper">
 
-  <div class="title">
+  <h1 class="title">
     Welcome to Milvus Docs!
-  </div>
+  </h1>
 
-  <div class="sub-title">
+  <h2 class="sub-title">
     Here you will learn about what Milvus is, and how to install, use, and deploy Milvus to build an application according to your business need.
-  </div>
+  </h2>
 
 </div>
 
