@@ -28,6 +28,11 @@ book_id = FieldSchema(
   dtype=DataType.INT64, 
   is_primary=True, 
 )
+book_name = FieldSchema(
+  name="book_name", 
+  dtype=DataType.VARCHAR, 
+  max_length_per_row=200, #max_length_per_row must be specified to limit the max length of VARCHAR. The value should be in (0, 65535].
+)
 word_count = FieldSchema(
   name="word_count", 
   dtype=DataType.INT64,  
@@ -48,9 +53,6 @@ schema = CollectionSchema(
 `DataType` defines the kind of data a field contains. Different fields support different data types.
 
 Primary key field supports:
-- INT8: numpy.int8
-- INT16: numpy.int16
-- INT32: numpy.int32
 - INT64: numpy.int64
 - VARCHAR: VARCHAR
 
