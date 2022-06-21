@@ -14,7 +14,7 @@ create_index(field_name, index_params, timeout=None, **kwargs)
 | ----------------- | ------------------------------------------------------------ | ------------------------------- | -------- |
 | `field_name`      | Name of the field to create index on                         | String                          | True     |
 | `index_params`    | Parameters of the index to create                            | Dict                            | True     |
-| `index_name`      | Name of the index to create                                  | String                          | False    |
+| `index_name`      | Name of the index to create. If not specified, the default value of `index_name` is `"_default_idx_"`.                                 | String                          | False    |
 | `timeout`         | An optional duration of time in seconds to allow for the RPC. If it is set to None, the client keeps waiting until the server responds or error occurs.                                               | Float                           | False    |
 
 ## Return
@@ -41,6 +41,7 @@ collection = Collection("book")      # Get an existing collection.
 collection.create_index(
   field_name="book_intro", 
   index_params=index_params
+  index_name="vec_index"
 )
 ```
 
@@ -48,4 +49,4 @@ collection.create_index(
 
 - The `index_names` of different indexes in the same collection must be different, so there can be at most one index whose name is `_default_idx_` in a collection.
 - Using the same `field_name`, `index_params`, `index_name` to create the same index repeatedly will return success directly.
-- Indexes can be built for scalar fields. In this case, `index_params` can be omitted. Milvus will then build default dictionary tree indexes for fields of type VARCHAR, and sort fields data of other data types in ascending order.
+- Indexes can be built for scalar fields. In this case, `index_params` can be omitted. Milvus will then build default dictionary tree indexes for fields of type VARCHAR. For integer or floating-point fields, the default index type is sort.
