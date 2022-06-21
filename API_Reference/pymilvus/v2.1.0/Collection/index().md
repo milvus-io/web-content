@@ -8,6 +8,11 @@ This method gets the index object in the collection.
 index()
 ```
 
+## Parameters
+
+| Parameter         | Description                                                  | Type                            | Required |
+| ----------------- | ------------------------------------------------------------ | ------------------------------- | -------- |
+| `index_name`    | If not specified, the default value of `index_name` is `"_default_idx_"`.        | String          | False    |
 
 ## Return
 
@@ -23,5 +28,5 @@ The index object.
 ```python
 from pymilvus import Collection
 collection = Collection("book")      # Get an existing collection.
-collection.index()
+collection.index(index_name="vec_index")
 ```
