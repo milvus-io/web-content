@@ -271,8 +271,7 @@ This tutorial uses the default configuration to install a Milvus cluster. All Mi
 When Milvus Operator starts, run the following command to deploy a Milvus cluster.
 
 ```
-$ kubectl apply -f https://raw.githubusercontent.com/milvus-io/milvus-operator/main/config/samples/milvuscluster_default.yaml
-```
+$ kubectl apply -f https://raw.githubusercontent.com/milvus-io/milvus-operator/main/config/samples/milvus_cluster_default.yaml
 
 When the cluster is deployed, you can see the following output.
 
