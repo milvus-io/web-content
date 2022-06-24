@@ -15,7 +15,6 @@ This topic describes how to deploy a Milvus cluster on [Amazon EKS](https://docs
 
 ### Software requirements
 
-- [Terraform](https://learn.hashicorp.com/tutorials/terraform/install-cli)
 - [Helm](https://helm.sh/docs/intro/install/)
 - [kubectl](https://kubernetes.io/docs/tasks/tools/)
 - [AWS CLI version 2](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html)
@@ -28,9 +27,18 @@ This topic describes how to deploy a Milvus cluster on [Amazon EKS](https://docs
 
 ## Deploy a Milvus cluster
 
-You can download template configuration files at [Google Drive](https://drive.google.com/file/d/1jLQV0YkseOVj5X0exj17x9dWQjLCP7-1/view).
+1. Run the following command to create an EKS cluster. The example in this topic uses `my-cluster` as the cluster name. You can replace it with your own value. See [Getting started with Amazon EKS](https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html) for more information.
 
-1. Provision a Milvus cluster. See [Provision a Milvus cluster](https://milvus.io/docs/v2.0.0/aws.md#provision-a-milvus-cluster) for more information.
+```
+eksctl create cluster --name my-cluster --region region-code --fargate
+```
+
+You will see the following output if the EKS cluster is created.
+
+```
+...
+[✓]  EKS cluster "my-cluster" in "region-code" region is ready
+```
 
 2. After a Milvus cluster is provisioned, run the following command with a region and name for the cluster.
 
