@@ -163,6 +163,7 @@ If you choose <code>accesskey</code> and <code>secretkey</code> values other tha
  The following table lists the metadata that you can configure.
 |Option|Description|Default|
 |:---|:---|:---|
+|`minio.mode`|Set the value to ```standalone``` to enable MinIO GCS Gateway.|`distributed`|
 |`minio.gcsgateway.enabled`|Set the value to ```true``` to enable MinIO GCS Gateway.|`false`|
 |`minio.gcsgateway.projectId`|The ID of the GCP project.|`""`|
 |`minio.existingSecret`|The name of the previously defined secret.|`""`|
@@ -179,7 +180,7 @@ Continue to use all normal MinIO metadata variables.
 The following example installs a chart named `my-release`.
 
 ```shell
-$ helm install my-release milvus/milvus --set minio.existingSecret=mysecret --set minio.gcsgateway.enabled=true --set minio.gcsgateway.projectId=milvus-testing-nonprod --set externalGcs.bucketName=milvus-bucket-example
+$ helm install my-release milvus/milvus --set minio.existingSecret=mysecret --set minio.gcsgateway.enabled=true --set minio.gcsgateway.projectId=milvus-testing-nonprod --set externalGcs.bucketName=milvus-bucket-example --set minio.mode=standalone
 ```
 
 ## What's next
