@@ -336,13 +336,13 @@ dockernode03               : ok=4    changed=3    unreachable=0    failed=0    s
 
 Now you have Milvus deployed on the three hosts.
 
-## Scale out Milvus nodes and coordinators
+## Scale out Milvus nodes
 
-If you need to scale out Milvus nodes and coordinators, you can follow the steps below to add new docker hosts directly in Ansible playbook.
+If you need to scale out Milvus nodes, you can follow the steps below to add new docker hosts directly in Ansible playbook.
 
 1. Prepare host resources as requested in the prerequisites.
 2. Ensure connectivity to the network and host names can be resolved.
-3. Add the new host to the corresponding section in the inventory.ini file. More specifically, add the host name of the new node in the node section as shown in the example below. 
+3. Add the new host to the corresponding section in the `inventory.ini` file. More specifically, add the host name of the new node in the node section as shown in the example below. 
 
 ```
 [nodes] #Add host names of Milvus nodes.
