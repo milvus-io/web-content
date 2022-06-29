@@ -460,4 +460,5 @@ System.out.println(wrapperSearch.getFieldData("book_id", 0));
   - [PyMilvus API reference](/api-reference/pymilvus/v2.0.2/About.md)
   - [Node.js API reference](/api-reference/node/v2.0.2/About.md)
   - [Go API reference](/api-reference/go/v2.0.0/About.md)
-  - [Java API reference](/api-reference/java/v2.0.4/tutorial.html)
+  - [Java API reference](/api-reference/java/v2.0.4/index.html)
+
