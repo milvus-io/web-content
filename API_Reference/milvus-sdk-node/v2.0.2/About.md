@@ -17,4 +17,4 @@ Milvus-sdk-node is a node.js SDK of Milvus. Its source code is open-sourced and 
 
 ## Contributing
 
-We are committed to building a collaborative, exuberant open-source community for milvus-sdk-node. Therefore, contributions to milvus-sdk-node are welcome from everyone. Refer to [Contributing Guideline](https://github.com/milvus-io/milvus-sdk-node/blob/master/CONTRIBUTING.md) before making contributions to this project. You can [file an issue](https://github.com/milvus-io/milvus-sdk-node/issues/new/choose) or contact us on [Slack](https://github.com/milvus-io/milvus-sdk-node#readme) if you need any assistance or want to propose your ideas about milvus-sdk-node.
+We are committed to building a collaborative, exuberant open-source community for milvus-sdk-node. Therefore, contributions to milvus-sdk-node are welcome from everyone. You can [file an issue](https://github.com/milvus-io/milvus-sdk-node/issues/new/choose) or contact us on [Slack](https://github.com/milvus-io/milvus-sdk-node#readme) if you need any assistance or want to propose your ideas about milvus-sdk-node.
