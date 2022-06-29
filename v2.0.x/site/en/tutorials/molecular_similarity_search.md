@@ -8,7 +8,7 @@ summary: Build a molecular similarity search system with Milvus.
 This tutorial demonstrates how to use Milvus, the open-source vector database, to build a molecular similarity search system.
 - [Open Jupyter notebook](https://github.com/milvus-io/bootcamp/blob/master/solutions/molecular_similarity_search/molecular_search.ipynb)
 - [Quick deploy](https://github.com/milvus-io/bootcamp/blob/master/solutions/molecular_similarity_search/quick_deploy)
-- [Try demo](http://35.166.123.214:8002/)
+- [Try demo](https://milvus.io/milvus-demos/)
 The third-party software used include:
 - RDKit
 - MySQL

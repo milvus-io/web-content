@@ -10,7 +10,7 @@ This page lists common issues that may occur when running Milvus, as well as pos
 - [API issues](#api_issues)
 - [etcd crash issues](#etcd_crash_issues)
 
-<a href="#boot_issues"></a>
+
   ## Boot issues
 
   Boot errors are usually fatal. Run the following command to view error details:
@@ -19,17 +19,17 @@ This page lists common issues that may occur when running Milvus, as well as pos
   $ docker logs <your milvus container id>
   ```
 
-<a href="#runtime_issues"></a>
+
   ## Runtime issues
 
   Errors that occur during runtime may cause service breakdown. To troubleshoot this issue, check compatibility between the server and your client before moving forward.
 
-<a href="#api_issues"></a>
+
   ## API issues
 
   These issues occur during API method calls between the Milvus server and your client. They will be returned to the client synchronously or asynchronously.
   
-<a href="#etcd_crash_issues"></a>
+
   ## etcd crash issues
   
   ### 1. etcd pod pending
