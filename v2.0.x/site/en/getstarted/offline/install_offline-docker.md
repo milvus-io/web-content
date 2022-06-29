@@ -56,7 +56,7 @@ python3 save_image.py --manifest docker-compose.yml
 4. Load the images.
 
 ```bash
-cd images/for image in $(find . -type f -name "*.tar.gz") ; do gunzip -c $image | docker load; done
+cd images/; for image in $(find . -type f -name "*.tar.gz") ; do gunzip -c $image | docker load; done
 ```
 
 ## Install Milvus offline
