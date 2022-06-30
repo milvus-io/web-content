@@ -21,7 +21,12 @@ search(data, anns_field, param, limit, expr=None, partition_names=None, output_f
 | `output_fields`   | List of names of fields to output                             | list[String]       | False    |
 | `timeout`         | An optional duration of time in seconds to allow for the RPC. If it is set to None, the client keeps waiting until the server responds or error occurs.                                  | Float              | False    |
 | `round_decimal`   | Number of the decimal places of the returned distance         | Integer            | False    |
-| `kwargs` <ul><li>_async</li><li>_callback</li><li>consistency_level</li><li>guarantee_timestamp</li><li>graceful_time</li><li>travel_timestamp</li></ul> | <br/><ul><li>Boolean value to indicate if to invoke asynchronously</li><li>Function that will be invoked after server responds successfully. It takes effect only if `_async` is set to `True`.</li><li>Consistency level used in the search</li><li>Milvus searches on the data view before this timestamp when it is provided. Otherwise, it searches the most updated data view. It can be only used in Customized level of consistency.</li><li>PyMilvus will use current timestamp minus the graceful_time as the guarantee_timestamp for search. It can be only used in Bounded level of consistency.</li><li>Timestamp that is used for Time Travel. Users can specify a timestamp in a search to get results based on a data view at a specified point in time.</li></ul> | <br/><ul><li>Bool</li><li>Function</li><li>String/Integer</li><li>Integer</li><li>Integer</li><li>Integer</li></ul>    | False    |
+| `kwargs`: `_async`| Boolean value to indicate if to invoke asynchronously. | Bool   | False    |
+| `kwargs`: `_callback`| Function that will be invoked after server responds successfully. It takes effect only if `_async` is set to `True`. | Function   | False    |
+| `kwargs`: `consistency_level`| Consistency level used in the search. | String/Integer   | False    |
+| `kwargs`: `guarantee_timestamp`| Milvus searches on the data view before this timestamp when it is provided. Otherwise, it searches the most updated data view. It can be only used in `Customized` level of consistency. | Integer   | False    |
+| `kwargs`: `graceful_time`| PyMilvus will use current timestamp minus the `graceful_time` as the `guarantee_timestamp` for search. It can be only used in `Bounded` level of consistency. | Integer   | False    |
+| `kwargs`: `travel_timestamp`| Timestamp that is used for Time Travel. Users can specify a timestamp in a search to get results based on a data view at a specified point in time. | Integer   | False    |
 
 ## Return
 

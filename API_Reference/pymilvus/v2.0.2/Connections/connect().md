@@ -13,7 +13,8 @@ connect(alias, **kwargs)
 | Parameter    | Description                                                  | Type                            | Required |
 | ------------ | ------------------------------------------------------------ | ------------------------------- | -------- |
 | `alias`      | Connection alias                                             | String                          | True     |
-| `kwargs` <ul><li>host</li><li>port</li></ul>     | <br/><ul><li>IP address of the Milvus connection</li><li>Port of the Milvus connection</li></ul> | <br/><ul><li>String</li><li>Integer</li></ul>                  | <br/><ul><li>True</li><li>True</li></ul>    |
+| `kwargs`: `host`     | IP address of the Milvus connection.| String          | True  |
+| `kwargs`: `port`     | Port of the Milvus connection.| Integer          | True  |
 
 ## Return
 
