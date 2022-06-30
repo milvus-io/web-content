@@ -20,6 +20,9 @@ You can also build Milvus from source code at [GitHub](https://github.com/milvus
 
 <div class="tab-wrapper"><a href="install_cluster-docker.md" class='active '>Docker Compose</a><a href="install_cluster-helm.md" class=''>Helm</a><a href="install_cluster-milvusoperator.md" class=''>Milvus Operator</a><a href="install_cluster-ansible.md" class=''>Ansible</a></div>
 
+<div class="alert note">
+Docker-compose cannot deploy Milvus distributed clusters across machines, and can only be used in test environments. It is not recommended that users deploy Milvus distributed clusters in this way in production environments.
+</div>
 
 ## Download an installation file
 
@@ -78,10 +81,6 @@ milvus-rootcoord    /tini -- milvus run rootcoord    Up
 To stop Milvus cluster, run <code>$ sudo docker-compose down</code>.
 
 To delete data after stopping Milvus, run <code>$ sudo rm -rf  volumes</code>.
-
-<div class="alert note">
-Docker-compose cannot deploy Milvus distributed clusters across machines, and can only be used in test environments. It is not recommended that users deploy Milvus distributed clusters in this way in production environments.
-</div>
 
 ## What's next
 
