@@ -1,5 +1,5 @@
 ---
-id: about_Milvus.md
+id: about_milvus.md
 title: About Milvus
 summary: Milvus is an open-source vector database specializing in scalable similarity search.
 ---
