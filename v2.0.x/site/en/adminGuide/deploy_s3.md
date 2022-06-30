@@ -33,7 +33,7 @@ Run the following command to start Milvus that uses the S3 configurations.
 ```shell
 docker-compose up
 ```
-<div class="alert note">Configurations only take effect after Milvus starts. See <a herf=https://milvus.io/docs/v2.0.2/install_cluster-docker.md#2-Start-Milvus>Start Milvus</a> for more information.</div>
+<div class="alert note">Configurations only take effect after Milvus starts. See <a herf=https://milvus.io/docs/v2.0.2/install_cluster-docker.md#Start-Milvus>Start Milvus</a> for more information.</div>
 
 ## Set up on K8s
 

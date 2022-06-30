@@ -324,7 +324,7 @@
       "order": 1
     },
     {
-      "id": "searchandquery.md",
+      "id": "search",
       "title": "Search and Query",
       "label1": "userguide",
       "label2": "",
@@ -336,7 +336,7 @@
       "id": "search.md",
       "title": "Search",
       "label1": "userguide",
-      "label2": "searchandquery.md",
+      "label2": "search",
       "label3": "",
       "order": 0
     },
@@ -344,7 +344,7 @@
       "id": "hybridsearch.md",
       "title": "Hybrid Search",
       "label1": "userguide",
-      "label2": "searchandquery.md",
+      "label2": "search",
       "label3": "",
       "order": 2
     },
@@ -352,7 +352,7 @@
       "id": "query.md",
       "title": "Query",
       "label1": "userguide",
-      "label2": "searchandquery.md",
+      "label2": "search",
       "label3": "",
       "order": 1
     },

@@ -5,10 +5,10 @@ summary: Learn about common issues you may encounter with Milvus and how to over
 # Troubleshooting
 This page lists common issues that may occur when running Milvus, as well as possible troubleshooting tips. Issues on this page fall into the following categories:
 
-- [Boot issues](#boot_issues)
-- [Runtime issues](#runtime_issues)
-- [API issues](#api_issues)
-- [etcd crash issues](#etcd_crash_issues)
+- [Boot issues](troubleshooting.md#Boot-issues)
+- [Runtime issues](troubleshooting.md#Runtime-issues)
+- [API issues](troubleshooting.md#API-issues)
+- [etcd crash issues](troubleshooting.md#etcd-crash-issues)
 
 
   ## Boot issues
