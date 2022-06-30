@@ -4,7 +4,7 @@ related_key: filter
 summary: Learn how to conduct a vector similarity search, a hybrid search, or a vector query in Milvus.
 ---
 
-#Search and Query
+# Search and Query
 
 Learn how to conduct a vector similarity search, a hybrid search, or a vector query in Milvus.
 
