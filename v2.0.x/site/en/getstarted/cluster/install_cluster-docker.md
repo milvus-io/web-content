@@ -79,6 +79,10 @@ To stop Milvus cluster, run <code>$ sudo docker-compose down</code>.
 
 To delete data after stopping Milvus, run <code>$ sudo rm -rf  volumes</code>.
 
+<div class="alert note">
+Docker-compose cannot deploy Milvus distributed clusters across machines, and can only be used in test environments. It is not recommended that users deploy Milvus distributed clusters in this way in production environments.
+</div>
+
 ## What's next
 
 Having installed Milvus, you can:
