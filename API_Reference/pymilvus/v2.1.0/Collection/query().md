@@ -16,7 +16,10 @@ query(expr, output_fields=None, partition_names=None, timeout=None, **kwargs)
 | `partition_names` | List of names of the partitions to search on. </br>All partition will be searched if it is left empty.                                                                              | list[String]       | False    |
 | `output_fields`   | List of names of fields to output                             | list[String]       | False    |
 | `timeout`         | An optional duration of time in seconds to allow for the RPC. If it is set to None, the client keeps waiting until the server responds or error occurs.                                                | Float              | False    |
-| `kwargs` <ul><li>consistency_level</li><li>guarantee_timestamp</li><li>graceful_time</li><li>travel_timestamp</li></ul> | <br/><ul><li>Consistency level used in the search</li><li>Milvus searches on the data view before this timestamp when it is provided. Otherwise, it searches the most updated data view. It can be only used in Customized level of consistency.</li><li>PyMilvus will use current timestamp minus the graceful_time as the guarantee_timestamp for search. It can be only used in Bounded level of consistency.</li><li>Timestamp that is used for Time Travel. Users can specify a timestamp in a search to get results based on a data view at a specified point in time.</li></ul> | <br/><ul><li>String/Integer</li><li>Integer</li><li>Integer</li><li>Integer</li></ul>    | False    |
+| `kwargs`: `consistency_level`|Consistency level used in the search. | String/Integer              | False    |
+| `kwargs`: `guarantee_timestamp`|Milvus searches on the data view before this timestamp when it is provided. Otherwise, it searches the most updated data view. It can be only used in Customized level of consistency. | Integer              | False    |
+| `kwargs`: `graceful_time`|PyMilvus will use current timestamp minus the `graceful_time` as the `guarantee_timestamp` for search. It can be only used in Bounded level of consistency. | Integer              | False    |
+| `kwargs`: `travel_timestamp`|Timestamp that is used for Time Travel. Users can specify a timestamp in a search to get results based on a data view at a specified point in time.| Integer              | False    |
 
 ## Return
 
