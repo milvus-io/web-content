@@ -16,7 +16,7 @@ Collection(name, schema=None, using='default', shards_num=2, **kwargs)
 | `schema`     | Schema of the collection to create                           | class *schema.CollectionSchema* | False    |
 | `using`      | Milvus Connection used to create the collection              | String                          | False    |
 | `shards_num` | Shard number of the collection to create. <br/>It corresponds to the number of data nodes used to insert data. | INT32   | False    |
-| `kwargs` <ul><li>consistency_level</li></ul>     | <br/><ul><li>With which <a href="https://github.com/milvus-io/milvus/blob/master/docs/developer_guides/how-guarantee-ts-works.md">consistency level</a> to create the collection</li></ul> | String/Integer                  | False    |
+| `kwargs`: `consistency_level`    | <br/><ul><li>With which <a href="https://github.com/milvus-io/milvus/blob/master/docs/developer_guides/how-guarantee-ts-works.md">consistency level</a> to create the collection</li></ul> | String/Integer                  | False    |
 
 A schema specifies the properties of a collection and the fields within. See [Schema](https://milvus.io/docs/v2.0.x/schema.md) for more information.
 
