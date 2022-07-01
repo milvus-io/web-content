@@ -258,7 +258,7 @@ Travel Timestamp(Specify a timestamp in a search to get results based on a data 
 
 使用 Milvus 搜索向量。要在特定的[partition](glossary.md#Partition)中搜索，请指定 partition 名称列表。 
 
-Milvus 支持专门为搜索或结构化匹配设置一致性级别（目前仅在 PyMilvus 上）。在创建 collection 时，搜索或结构化匹配请求中设置的一致性级别将覆盖设置的一致性级别。在本例中，搜索请求的一致性级别设置为 "Strong"，这意味着 Milvus 将在搜索或结构化匹配请求出现的确切时间点读取最新的数据视图。如果在搜索或结构化匹配期间不指定一致性级别，Milvus 将采用创建 collection 的原始一致性级别。
+Milvus 支持专门为搜索或结构化匹配设置一致性级别（目前仅在 PyMilvus 上）。在创建 collection 时，搜索或结构化匹配请求中设置的一致性级别将覆盖设置的一致性级别。Milvus 中，一致性级别默认为 `Bounded`，本例将搜索请求的一致性级别设置为 "Strong"，这意味着 Milvus 将在搜索或结构化匹配请求出现的确切时间点读取最新的数据视图。如果在搜索或结构化匹配期间不指定一致性级别，Milvus 将采用创建 collection 的原始一致性级别。
 
 <div class="multipleCode">
   <a href="?python">Python </a>
