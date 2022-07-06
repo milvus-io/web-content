@@ -1,5 +1,5 @@
 # getCollectionStatistics()
-Drop a collection. It will delete all data in the collection.
+Get collection row count.
 
 # Invocation 
 ```javascript
