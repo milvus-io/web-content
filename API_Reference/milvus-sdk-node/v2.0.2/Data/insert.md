@@ -7,7 +7,7 @@ new milvusClient(MILUVS_ADDRESS).dataManager.insert(InsertReq);
 ```
 
 ## Parameter
-### getQuerySegmentInfoReq
+### InsertReq
 | Parameter                | Description                               | type                   | required |
 | ------------------------ | ----------------------------------------- | ---------------------- | -------- |
 | collection_name          | Collection name                           | String                 | true     |
@@ -30,5 +30,5 @@ new milvusClient(MILUVS_ADDRESS).dataManager.insert({
 ```
 ## Return
 ```javascript
-// getQuerySegmentInfo return
+// insert return
 ```
