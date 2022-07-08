@@ -32,7 +32,7 @@ Before you install Milvus, check your hardware and software to see if they meet 
 
 | Software | Version                       | Note |
 | -------- | ----------------------------- | ---- |
-| etcd     | 3.5.0                         |  See [additional disk requirements](###-additional-disk-requirements). |
+| etcd     | 3.5.0                         |  See [additional disk requirements](#Additional-disk-requirements). |
 | MinIO    |  RELEASE.2020-11-06T23-17-07Z | |
 | Pulsar   | 2.8.2                         | |
 
