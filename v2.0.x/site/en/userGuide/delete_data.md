@@ -46,6 +46,10 @@ expr = "book_id in [0,1]"
 const expr = "book_id in [0,1]";
 ```
 
+```go
+// This function is under active development on the GO client.
+```
+
 ```java
 private static final String DELETE_EXPR = "book_id in [0,1]";
 ```
