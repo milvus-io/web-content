@@ -20,132 +20,27 @@ You can also build Milvus from source code at [GitHub](https://github.com/milvus
 
 <div class="tab-wrapper"><a href="install_cluster-docker.md" class=''>Docker Compose</a><a href="install_cluster-helm.md" class=''>Helm</a><a href="install_cluster-milvusoperator.md" class='active '>Milvus Operator</a><a href="install_cluster-ansible.md" class=''>Ansible</a></div>
 
-## Create a Kubernetes Cluster
-
-If you have already deployed a K8s cluster for production, you can skip this step and proceed directly to [deploy Milvus Operator](install_cluster-milvusoperator.md#Deploy-Milvus-Operator). If not, you can follow the following steps to quickly create a K8s for testing, and then use it to install a Milvus cluster with Milvus Operator. This tutorial introduces two ways to create a Kubernetes cluster:
-
-- Use minikube to create a Kubernetes cluster in a virtual machine (VM).
-- Use kind to create a Kubernetes cluster in docker.
-
-<div class="alert note">
-The K8s cluster created by minikube and kind are for testing only.  Do <b>not</b> use it in production.
-</div>
-
-### Create a K8s cluster with minikube
-
-[minikube](https://minikube.sigs.k8s.io/docs/) is a tool that allows you to run Kubernetes locally.
-
-#### 1. Install minikube
-
-See [Prerequisites](prerequisite-helm.md#Software-requirements) for more information.
-
-#### 2. Start a K8s cluster using minikube
-
-After installing minikube, run the following command to start a K8s cluster.
-
+## Start a K8s cluster
 
 ```
 $ minikube start
 ```
 
-After the K8s cluster starts, you can see the following output. But it may vary according to your operating system and your hypervisor.
+<div class="alert note">
+This topic uses a local Kubernetes cluster based on minikube. You can deploy a Milvus cluster on your own Kubernetes cluster.
+</div>
 
-```
-😄  minikube v1.21.0 on Darwin 11.4
-🎉  minikube 1.23.2 is available! Download it: https://github.com/kubernetes/minikube/releases/tag/v1.23.2
-💡  To disable this notice, run: 'minikube config set WantUpdateNotification false'
 
-✨  Automatically selected the docker driver. Other choices：hyperkit, ssh
-👍  Starting control plane node minikube in cluster minikube
-🚜  Pulling base image ...
-❗  minikube was unable to download gcr.io/k8s-minikube/kicbase:v0.0.23, but successfully downloaded kicbase/stable:v0.0.23 as a fallback image
-🔥  Creating docker container (CPUs=2, Memory=8100MB) ...
-❗  This container is having trouble accessing https://k8s.gcr.io
-💡  To pull new external images, you may need to configure a proxy: https://minikube.sigs.k8s.io/docs/reference/networking/proxy/
-🐳  Preparing Kubernetes v1.20.7 on Docker 20.10.7…
-    ▪ Generating certificates and keys ...
-    ▪ Booting up control plane ...
-    ▪ Configuring RBAC rules ...
-🔎  Verifying Kubernetes components...
-    ▪ Using image gcr.io/k8s-minikube/storage-provisioner:v5
-🌟  Enabled addons: storage-provisioner, default-storageclass
-🏄  Done! kubectl is now configured to use "minikube" cluster and "default" namespace by default
-```
-
-#### 3. Check the K8s cluster status
-
-Run `$ kubectl cluster-info` to check the status of the K8s cluster you just created. Ensure that you can access the K8s cluster via `kubectl`. You should see the following expected output.
-
-```
-Kubernetes control plane is running at https://127.0.0.1:63754
-KubeDNS is running at https://127.0.0.1:63754/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
-
-To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
-```
-
-### Create a K8s cluster with kind
-
-[kind](https://kind.sigs.k8s.io/) is a tool for running local Kubernetes clusters using Docker container “nodes”.
-
-#### 1. Create a configuration file 
-
-Create the `kind.yaml` configuration file as follows.
-
-```
-kind: Cluster
-apiVersion: kind.x-k8s.io/v1alpha4
-nodes:
-- role: control-plane
-- role: worker
-- role: worker
-- role: worker
-```
-
-#### 2. Create a K8s cluster
-
-Create a K8s cluster using the `kind.yaml` configuration file.
-
-```
-$ kind create cluster --name myk8s --config kind.yaml
-```
-
-After the K8s cluster starts, you can see the following output. 
-
-```
-Creating cluster "myk8s" ...
- ✓ Ensuring node image (kindest/node:v1.21.1) 🖼
- ✓ Preparing nodes 📦 📦 📦 📦
- ✓ Writing configuration 📜
- ✓ Starting control-plane 🕹️
- ✓ Installing CNI 🔌
- ✓ Installing StorageClass 💾
- ✓ Joining worker nodes 🚜
-Set kubectl context to "kind-myk8s"
-You can now use your cluster with:
-
-kubectl cluster-info --context kind-myk8s
-
-Not sure what to do next? 😅  Check out https://kind.sigs.k8s.io/docs/user/quick-start/
-```
-
-#### 3. Check the K8s cluster status
-
-Run `$ kubectl cluster-info` to check the status of the K8s cluster you just created. Ensure that you can access the K8s cluster via `kubectl`. You should see the following expected output.
-
-```
-Kubernetes control plane is running at https://127.0.0.1:55668
-CoreDNS is running at https://127.0.0.1:55668/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
-
-To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
-```
 
 ## Deploy Milvus Operator
 
-Milvus Operator is a solution that helps you deploy and manage a full Milvus service stack to target K8s clusters. The stack includes all Milvus components and relevant dependencies like etcd, Pulsar and MinIO. Milvus Operator defines a Milvus cluster custom resources on top of [Kubernetes Custom Resources](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/). When the custom resources are defined, you can use Kubernetes APIs in a declarative way and manage Milvus deployment stack to ensure its scalability and high-availability.
+Milvus Operator allows you to deploy and manage a full Milvus service stack to a target K8s cluster. The stack includes all Milvus components and relevant dependencies like etcd, Pulsar, and MinIO. 
+
+Milvus Operator defines a Milvus cluster custom resources on top of [Kubernetes Custom Resources](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/). When the custom resources are defined, you can use Kubernetes APIs in a declarative way and manage the Milvus deployment stack to ensure its scalability and high availability.
 
 ### Prerequisites
 
-- Ensure that you can access the K8s cluster via `kubectl`. 
+- Ensure that you can access the K8s cluster via `kubectl` or `helm`. 
 - Ensure the StorageClass dependency is installed as Milvus clusters depend on Default StorageClass for data persistence. Both minikube and kind have a dependency on Default storageclass when installed. Check the dependency by running the command `kubectl get sc`. If StorageClass is installed, you will see the following output. If not, see [Change the Default Storageclass](https://kubernetes.io/docs/tasks/administer-cluster/change-default-storage-class/) for more information.
 
 ```
@@ -153,83 +48,43 @@ NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDI
 standard (default)    k8s.io/minikube-hostpath     Delete           Immediate             false                    3m36s
 ```
 
-### 1. Install cert-manager
+### Install Milvus Operator
 
-Milvus Operator uses [cert-manager](https://cert-manager.io/docs/installation/supported-releases/) to provide certificate for webhook server. Run the following command to install cert-manager.
+There are two ways to install Milvus Operator in the Kubernetes: 
 
-```
-$ kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.5.3/cert-manager.yaml
-```
+- with helm chart
+- with `kubectl` command directly with raw manifests
 
-If cert-manager is installed, you can see the following output.
-
-```
-customresourcedefinition.apiextensions.k8s.io/certificaterequests.cert-manager.io created
-customresourcedefinition.apiextensions.k8s.io/certificates.cert-manager.io created
-customresourcedefinition.apiextensions.k8s.io/challenges.acme.cert-manager.io created
-customresourcedefinition.apiextensions.k8s.io/clusterissuers.cert-manager.io created
-customresourcedefinition.apiextensions.k8s.io/issuers.cert-manager.io created
-customresourcedefinition.apiextensions.k8s.io/orders.acme.cert-manager.io created
-namespace/cert-manager created
-serviceaccount/cert-manager-cainjector created
-serviceaccount/cert-manager created
-serviceaccount/cert-manager-webhook created
-clusterrole.rbac.authorization.k8s.io/cert-manager-cainjector created
-clusterrole.rbac.authorization.k8s.io/cert-manager-controller-issuers created
-clusterrole.rbac.authorization.k8s.io/cert-manager-controller-clusterissuers created
-clusterrole.rbac.authorization.k8s.io/cert-manager-controller-certificates created
-clusterrole.rbac.authorization.k8s.io/cert-manager-controller-orders created
-clusterrole.rbac.authorization.k8s.io/cert-manager-controller-challenges created
-clusterrole.rbac.authorization.k8s.io/cert-manager-controller-ingress-shim created
-clusterrole.rbac.authorization.k8s.io/cert-manager-view created
-clusterrole.rbac.authorization.k8s.io/cert-manager-edit created
-clusterrole.rbac.authorization.k8s.io/cert-manager-controller-approve:cert-manager-io created
-clusterrole.rbac.authorization.k8s.io/cert-manager-controller-certificatesigningrequests created
-clusterrole.rbac.authorization.k8s.io/cert-manager-webhook:subjectaccessreviews created
-clusterrolebinding.rbac.authorization.k8s.io/cert-manager-cainjector created
-clusterrolebinding.rbac.authorization.k8s.io/cert-manager-controller-issuers created
-clusterrolebinding.rbac.authorization.k8s.io/cert-manager-controller-clusterissuers created
-clusterrolebinding.rbac.authorization.k8s.io/cert-manager-controller-certificates created
-clusterrolebinding.rbac.authorization.k8s.io/cert-manager-controller-orders created
-clusterrolebinding.rbac.authorization.k8s.io/cert-manager-controller-challenges created
-clusterrolebinding.rbac.authorization.k8s.io/cert-manager-controller-ingress-shim created
-clusterrolebinding.rbac.authorization.k8s.io/cert-manager-controller-approve:cert-manager-io created
-clusterrolebinding.rbac.authorization.k8s.io/cert-manager-controller-certificatesigningrequests created
-clusterrolebinding.rbac.authorization.k8s.io/cert-manager-webhook:subjectaccessreviews created
-role.rbac.authorization.k8s.io/cert-manager-cainjector:leaderelection created
-role.rbac.authorization.k8s.io/cert-manager:leaderelection created
-role.rbac.authorization.k8s.io/cert-manager-webhook:dynamic-serving created
-rolebinding.rbac.authorization.k8s.io/cert-manager-cainjector:leaderelection created
-rolebinding.rbac.authorization.k8s.io/cert-manager:leaderelection created
-rolebinding.rbac.authorization.k8s.io/cert-manager-webhook:dynamic-serving created
-service/cert-manager created
-service/cert-manager-webhook created
-deployment.apps/cert-manager-cainjector created
-deployment.apps/cert-manager created
-deployment.apps/cert-manager-webhook created
-mutatingwebhookconfiguration.admissionregistration.k8s.io/cert-manager-webhook created
-validatingwebhookconfiguration.admissionregistration.k8s.io/cert-manager-webhook created
-```
-
-<div class="alert note">
-cert-manager version 1.13 or later is required.
-</div>
-
-Run `$ kubectl get pods -n cert-manager` to check if cert-manager is running. If so, you can see all the pods are running, as shown in the following output.
+#### 1. Install by helm command
 
 ```
-NAME                                      READY   STATUS    RESTARTS   AGE
-cert-manager-848f547974-gccz8             1/1     Running   0          70s
-cert-manager-cainjector-54f4cc6b5-dpj84   1/1     Running   0          70s
-cert-manager-webhook-7c9588c76-tqncn      1/1     Running   0          70s
+helm install milvus-operator \
+  -n milvus-operator --create-namespace \
+  --wait --wait-for-jobs \
+  https://github.com/milvus-io/milvus-operator/releases/download/v0.5.0/milvus-operator-0.5.0.tgz
 ```
 
-### 2. Install Milvus Operator
+If Milvus Operator is installed, you can see the following output.
+```
+NAME: milvus-operator
+LAST DEPLOYED: Thu Jul  7 13:18:40 2022
+NAMESPACE: milvus-operator
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
+NOTES:
+Milvus Operator Is Starting, use `kubectl get -n milvus-operator deploy/milvus-operator` to check if its successfully installed
+If Operator not started successfully, check the checker's log with `kubectl -n milvus-operator logs job/milvus-operator-checker`
+Full Installation doc can be found in https://github.com/milvus-io/milvus-operator/blob/main/docs/installation/installation.md
+Quick start with `kubectl apply -f https://raw.githubusercontent.com/milvus-io/milvus-operator/main/config/samples/milvus_minimum.yaml`
+More samples can be found in https://github.com/milvus-io/milvus-operator/tree/main/config/samples
+CRD Documentation can be found in https://github.com/milvus-io/milvus-operator/tree/main/docs/CRD
+```
 
-Run the following command to install Milvus Operator.
+#### 2. Install by kubectl command
 
 ```
-$ kubectl apply -f https://raw.githubusercontent.com/milvus-io/milvus-operator/main/deploy/manifests/deployment.yaml
+$ kubectl apply -f https://raw.githubusercontent.com/milvus-io/milvus-operator/v0.5.0/deploy/manifests/deployment.yaml
 ```
 
 If Milvus Operator is installed, you can see the following output.
@@ -255,11 +110,13 @@ mutatingwebhookconfiguration.admissionregistration.k8s.io/milvus-operator-mutati
 validatingwebhookconfiguration.admissionregistration.k8s.io/milvus-operator-validating-webhook-configuration created
 ```
 
-Run `$ kubectl get pods -n milvus-operator` to check if Milvus Operator is running. If so, you can see the Milvus Operator pod running as shown in the following output.
+### Check milvus-operator status
+
+Run `$ kubectl get -n milvus-operator deploy/milvus-operator` to check if Milvus Operator is running. If so, you can see the Milvus Operator deploy running as shown in the following output.
 
 ```
-NAME                                                  READY   STATUS    RESTARTS   AGE
-milvus-operator-controller-manager-698fc7dc8d-rlmtk   1/1     Running   0          46s
+NAME              READY   UP-TO-DATE   AVAILABLE   AGE
+milvus-operator   1/1     1            1           32s
 ```
 
 ## Install a Milvus cluster
@@ -291,8 +148,8 @@ $ kubectl get mc my-release -o yaml
 You can confirm the current status of Milvus cluster from the `status` field in the output. When the Milvus cluster is still under creation, the `status` shows `Unhealthy`.
 
 ```
-apiVersion: milvus.io/v1alpha1
-kind: MilvusCluster
+apiVersion: milvus.io/v1beta1
+kind: Milvus
 metadata:
 ...
 status:
@@ -305,9 +162,9 @@ status:
     type: StorageReady
   - lastTransitionTime: "2021-11-02T02:52:04Z"
     message: connection error
-    reason: PulsarNotReady
+    reason: MsgStreamNotReady
     status: "False"
-    type: PulsarReady
+    type: MsgStreamReady
   - lastTransitionTime: "2021-11-02T02:52:04Z"
     message: All etcd endpoints are unhealthy
     reason: EtcdNotReady
@@ -492,7 +349,7 @@ When the Milvus cluster is installed, you can learn how to [Connect to Milvus se
 Run the following command to uninstall the Milvus cluster.
 
 ```
-$ kubectl delete mc my-release
+$ kubectl delete milvus my-release
 ```
 
 <div class="alert note">
@@ -500,6 +357,24 @@ $ kubectl delete mc my-release
 <li>To delete the dependencies and private virtual clouds (PVCs) along with the Milvus cluster, see <a href="https://github.com/milvus-io/milvus-operator/blob/main/config/samples/milvus_deletion.yaml">configuration file</a>.</li>
 
 </div>
+
+## Uninstall the Milvus Operator
+
+Run the following command to uninstall the Milvus Operator.
+
+### Uninstall the Milvus Operator by helm command
+
+```
+$ helm -n milvus-operator uninstall milvus-operator
+```
+
+Run the following command to uninstall the Milvus Operator.
+
+### Uninstall the Milvus Operator by kubectl command
+
+```
+$ kubectl delete -f https://raw.githubusercontent.com/milvus-io/milvus-operator/v0.5.0/deploy/manifests/deployment.yaml
+```
 
 
 ## Delete the K8s cluster
