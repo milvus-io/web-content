@@ -1,15 +1,15 @@
 ---
 id: load_partition.md
 related_key: load partition
-summary: Learn how to load a partition into memory for search or query in Milvus.
+summary: 了解如何将 Partition 加载到内存中，以便在 Milvus 中进行搜索或查询。
 ---
 
-# Load a Partition
+# 加载 Partition
 
-This topic describes how to load a partition to memory. Loading partitions instead of the whole collection to memory can significantly reduce the memory usage. All search and query operations within Milvus are executed in memory. 
+本章介绍如何将 partition 加载到内存中。将 partition 而不是整个 collection 加载到内存可以显着减少内存使用量。 Milvus 中的所有搜索和查询操作都在内存中执行。
 
 <div class="alert warning">
-In current release, volume of the data to load must be under 90% of the total memory resources of all query nodes to reserve memory resources for execution engine.
+在当前版本中，要加载的数据量必须低于所有查询节点总内存资源的 90%，以便为执行引擎预留内存资源。
 </div>
 
 <div class="multipleCode">
@@ -23,12 +23,12 @@ In current release, volume of the data to load must be under 90% of the total me
 
 ```python
 from pymilvus import Collection
-collection = Collection("book")      # Get an existing collection.
+collection = Collection("book")      # 获取已存在的collection。
 collection.load(["novel"])
 
 # Or you can load a partition with the partition as an object
 from pymilvus import Partition
-partition = Partition("novel")       # Get an existing partition.
+partition = Partition("novel")       # 获取已存在的collection。
 partition.load()
 ```
 
@@ -66,14 +66,14 @@ load -c book -p novel
 <table class="language-python">
 	<thead>
 	<tr>
-		<th>Parameter</th>
-		<th>Description</th>
+		<th>参数</th>
+		<th>描述</th>
 	</tr>
 	</thead>
 	<tbody>
 	<tr>
 		<td><code>partition_name</code></td>
-		<td>Name of the partition.</td>
+		<td>partition 的名称。</td>
 	</tr>
 	</tbody>
 </table>
@@ -81,18 +81,18 @@ load -c book -p novel
 <table class="language-javascript">
 	<thead>
 	<tr>
-		<th>Parameter</th>
-		<th>Description</th>
+		<th>参数</th>
+		<th>描述</th>
 	</tr>
 	</thead>
 	<tbody>
 	<tr>
 		<td><code>collection_name</code></td>
-		<td>Name of the collection to load partitions from.</td>
+		<td>partition 所属 collection 的名称。</td>
 	</tr>
     <tr>
 		<td><code>partition_names</code></td>
-		<td>List of names of the partitions to load.</td>
+		<td>待加载的 partition 列表。</td>
 	</tr>
 	</tbody>
 </table>
@@ -100,22 +100,22 @@ load -c book -p novel
 <table class="language-go">
 	<thead>
         <tr>
-            <th>Parameter</th>
-            <th>Description</th>
+            <th>参数</th>
+            <th>描述</th>
         </tr>
 	</thead>
 	<tbody>
         <tr>
             <td><code>ctx</code></td>
-            <td>Context to control API invocation process.</td>
+            <td>控制 API 调用过程的上下文。</td>
         </tr>
         <tr>
             <td><code>CollectionName</code></td>
-            <td>Name of the collection to load partitions from.</td>
+            <td>partition 所属 collection 的名称。</td>
         </tr>
         <tr>
             <td><code>partitionNames</code></td>
-            <td>List of names of the partitions to load.</td>
+            <td>待加载的 partition 列表。</td>
         </tr>
         <tr>
             <td><code>async</code></td>
@@ -127,18 +127,18 @@ load -c book -p novel
 <table class="language-java">
 	<thead>
         <tr>
-            <th>Parameter</th>
-            <th>Description</th>
+            <th>参数</th>
+            <th>描述</th>
         </tr>
 	</thead>
 	<tbody>
         <tr>
             <td><code>CollectionName</code></td>
-            <td>Name of the collection to load partitions from.</td>
+            <td>partition 所属 collection 的名称。</td>
         </tr>
         <tr>
             <td><code>PartitionNames</code></td>
-            <td>List of names of the partitions to load.</td>
+            <td>待加载的 partition 列表。</td>
         </tr>
     </tbody>
 </table>
@@ -146,38 +146,38 @@ load -c book -p novel
 <table class="language-shell">
     <thead>
         <tr>
-            <th>Option</th>
-            <th>Description</th>
+            <th>参数</th>
+            <th>描述</th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td>-c</td>
-            <td>Name of the collection to load partitions from.</td>
+            <td>partition 所属 collection 的名称。</td>
         </tr>
         <tr>
             <td>-p (Multiple)</td>
-            <td>The name of the partition to load.</td>
+            <td>待加载的 partition</td>
         </tr>
     </tbody>
 </table>
 
-## Constraints
+## 使用限制
 
-- Error will be returned at the attempt to load partition(s) when the parent collection is already loaded. Future releases will support releasing partitions from a loaded collection, and (if needed) then loading some other partition(s).
-- "Load successfully" will be returned at the attempt to load the collection that is already loaded.
-- Error will be returned at the attempt to load the collection when the child partition(s) is/are already loaded. Future releases will support loading the collection when some of its partitions are already loaded.
-- Loading different partitions in a same collection via separate RPCs is not allowed.
+- 当 collection 已加载时，尝试加载 该collection 中的 partition 将返回错误。未来的版本将支持从已加载的 collection 中释放 partitions，然后（如果需要）加载其他一些分区。
+- 尝试加载已加载的 collection 时将返回“加载成功”。
+- 当 partition 已加载时，尝试加载 collection 时将返回错误。未来版本将支持在其某些 partition 已加载时加载 collection。
+- 不允许通过多个 RPC 加载同一个 collection 的不同 partition。
 
 
 ## What's next
 
-- Learn more basic operations of Milvus:
-  - [Insert data into Milvus](insert_data.md)
-  - [Build an index for vectors](build_index.md)
-  - [Conduct a vector search](search.md)
-  - [Conduct a hybrid search](hybridsearch.md)
-- Explore API references for Milvus SDKs:
+- 学习 Milvus 更多基础操作：
+  - [在 Milvus 中插入数据](insert_data.md)
+  - [创建向量索引](build_index.md)
+  - [向量检索](search.md)
+  - [混合检索](hybridsearch.md)
+- 探索 Milvus SDKs 中的 API：
   - [PyMilvus API reference](/api-reference/pymilvus/v2.0.2/tutorial.html)
   - [Node.js API reference](/api-reference/node/v2.0.2/tutorial.html)
 
