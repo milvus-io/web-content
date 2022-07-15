@@ -70,23 +70,23 @@ vectors_right = {"float_vectors": external_vectors}
 		<td>Vectors on the left and right side of the operator. Dict type that can be represented as <code>{"ids": [primary_key_1, primary_key_2, ... primary_key_n], "collection": "collection_name", "partition": "partition_name", "field": "vector_field_name"}</code>, <code>{"float_vectors": [[1.0, 2.0], [3.0, 4.0], ... [9.0, 10.0]]}</code>, or <code>{"bin_vectors": [b'', b'N', ... b'Ê']}</code>.</td>
 	</tr>
     <tr>
-		<td><code>"ids"</code></td>
+		<td><code>ids</code></td>
 		<td>List of primary key of entities that in the collection.</td>
 	</tr>
     <tr>
-		<td><code>"collection"</code></td>
+		<td><code>collection</code></td>
 		<td>Name of the collection that holds the entities.</td>
 	</tr>
     <tr>
-		<td><code>"partition"</code></td>
+		<td><code>partition</code></td>
 		<td>Name of the partition that holds the entities.</td>
 	</tr>
     <tr>
-		<td><code>"field"</code></td>
+		<td><code>field</code></td>
 		<td>Name of the vector field in the collection.</td>
 	</tr>
     <tr>
-		<td><code>"float_vectors"</code> or <code>"bin_vectors"</code></td>
+		<td><code>float_vectors</code> or <code>bin_vectors</code></td>
 		<td>Type of the vectors.</td>
 	</tr>
 	</tbody>
@@ -144,7 +144,7 @@ params = {
             <td>N/A</td>
         </tr>
         <tr>
-            <td><code>"metric"</code></td>
+            <td><code>metric</code></td>
             <td>Metric types used for calculation.</td>
             <td>For floating point vectors:
                 <ul>
@@ -162,7 +162,7 @@ params = {
             </td>
         </tr>
         <tr>
-            <td><code>"dim"</code></td>
+            <td><code>dim</code></td>
             <td>Dimension of the vector.</td>
             <td>N/A</td>
         </tr>
