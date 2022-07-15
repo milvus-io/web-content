@@ -11,7 +11,7 @@ summary: Learn the necessary preparations before installing Milvus.
 
 Before you install Milvus, check your hardware and software to see if they meet the requirements.
 
-- <div class="tab-wrapper"><a href="prerequisite-docker.md" class=''>Install with Docker Compose</a><a href="prerequisite-helm.md" class='active '>Install on Kubernetes</a></div>
+<div class="tab-wrapper"><a href="prerequisite-docker.md" class=''>Install with Docker Compose</a><a href="prerequisite-helm.md" class='active '>Install on Kubernetes</a></div>
 
 ## Hardware requirements
 
