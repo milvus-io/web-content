@@ -66,7 +66,7 @@ See [Vector Index](index.md) for more details.
 
 In Milvus, similarity metrics are used to measure similarities among vectors. Choosing a good distance metric helps improve classification and clustering performance significantly. Depending on the input data forms, specific similarity metric is selected for optimal performance.
 
-The metrics that are widely used for floating point embeddings include:
+The metrics that are widely used for floating-point embeddings include:
 
 - **Euclidean distance (L2)**: This metric is generally used in the field of computer vision (CV).
 - **Inner product (IP)**: This metric is generally used in the field of natural language processing (NLP).
