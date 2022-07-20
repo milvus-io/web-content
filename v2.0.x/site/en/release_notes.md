@@ -38,7 +38,7 @@ Milvus 2.0.2 is a minor bug-fix version of Milvus 2.0. We fixed multiple critica
 
 <h3 id="v2.0.2">Bug fixes</h3>
 
-- [#16338](https://github.com/milvus-io/milvus/pull/16338) Data coord uses VChannel when when unsubscribing to data node.
+- [#16338](https://github.com/milvus-io/milvus/pull/16338) Data coord uses VChannel when unsubscribing to data node.
 - [#16178](https://github.com/milvus-io/milvus/pull/16178) [#15725](https://github.com/milvus-io/milvus/pull/15725) Query node crashes.
 - [#16035](https://github.com/milvus-io/milvus/pull/16035) [#16063](https://github.com/milvus-io/milvus/pull/16063) [#16066](https://github.com/milvus-io/milvus/pull/16066) Collection load error.
 - [#15932](https://github.com/milvus-io/milvus/pull/15932) Compaction runtime error.
