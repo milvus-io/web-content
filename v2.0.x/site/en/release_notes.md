@@ -1031,7 +1031,7 @@ Milvus 2.0 is a cloud-native vector database with storage and computation separa
 
 **Miscellaneous**
 
-- Supports installing Milvus 2.0 with Helm or Docker-compose.
+- Supports installing Milvus 2.0 with Helm or Docker Compose.
 
 - Compatibility with Prometheus and Grafana for monitoring and alerts.
 

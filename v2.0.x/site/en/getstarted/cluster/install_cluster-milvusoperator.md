@@ -1,61 +1,54 @@
 ---
 id: install_cluster-milvusoperator.md
-label: Milvus Operator
+label: Install Milvus Cluster with Milvus Operator
 related_key: Kubernetes
 order: 2
 group: install_cluster-docker.md
 summary: Learn how to install Milvus cluster on Kubernetes using Milvus Operator
 ---
 
-# Install Milvus Cluster
+<div class="tab-wrapper"><a href="install_cluster-docker.md" class=''>Install Milvus Cluster with Docker Compose</a><a href="install_cluster-helm.md" class=''>Install Milvus Cluster with Helm</a><a href="install_cluster-milvusoperator.md" class='active '>Install Milvus Cluster with Milvus Operator</a><a href="install_cluster-ansible.md" class=''>Install Milvus Cluster with Ansible</a></div>
 
-This topic describes how to install Milvus cluster with Docker Compose or on Kubernetes. 
+# Install Milvus Cluster with Milvus Operator
 
-[Check the requirements for hardware and software](prerequisite-docker.md) prior to your installation. 
-
-If you run into image loading errors while installing, you can [Install Milvus Offline](install_offline-docker.md).
-
-You can also build Milvus from source code at [GitHub](https://github.com/milvus-io/milvus#to-start-developing-milvus).
-
-
-<div class="tab-wrapper"><a href="install_cluster-docker.md" class=''>Docker Compose</a><a href="install_cluster-helm.md" class=''>Helm</a><a href="install_cluster-milvusoperator.md" class='active '>Milvus Operator</a><a href="install_cluster-ansible.md" class=''>Ansible</a></div>
-
-## Start a K8s cluster
-
-```
-$ minikube start
-```
-
-<div class="alert note">
-This topic uses a local Kubernetes cluster based on minikube. You can deploy a Milvus cluster on your own Kubernetes cluster.
-</div>
-
-
-
-## Deploy Milvus Operator
+This topic introduces how to deploy a Milvus cluster with Milvus Operator on Kubernetes.
 
 Milvus Operator allows you to deploy and manage a full Milvus service stack to a target K8s cluster. The stack includes all Milvus components and relevant dependencies like etcd, Pulsar, and MinIO. 
 
 Milvus Operator defines a Milvus cluster custom resources on top of [Kubernetes Custom Resources](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/). When the custom resources are defined, you can use Kubernetes APIs in a declarative way and manage the Milvus deployment stack to ensure its scalability and high availability.
 
-### Prerequisites
-
+## Prerequisites
+- [Check the requirements for hardware and software](prerequisite-helm.md) prior to your installation.
 - Ensure that you can access the K8s cluster via `kubectl` or `helm`. 
-- Ensure the StorageClass dependency is installed as Milvus clusters depend on Default StorageClass for data persistence. Both minikube and kind have a dependency on Default storageclass when installed. Check the dependency by running the command `kubectl get sc`. If StorageClass is installed, you will see the following output. If not, see [Change the Default Storageclass](https://kubernetes.io/docs/tasks/administer-cluster/change-default-storage-class/) for more information.
+- Ensure the StorageClass dependency is installed as Milvus clusters depend on Default StorageClass for data persistence. minikube has a dependency on default StorageClass when installed. Check the dependency by running the following command. If StorageClass is installed, you will see the following output. If not, see [Change the default StorageClass](https://kubernetes.io/docs/tasks/administer-cluster/change-default-storage-class/) for more information.
+
+```
+$ kubectl get sc
+```
 
 ```
 NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDINGMODE    ALLOWVOLUMEEXPANSION     AGE
 standard (default)    k8s.io/minikube-hostpath     Delete           Immediate             false                    3m36s
+``` 
+
+## Start a K8s cluster
+
+<div class="alert note">
+This topic uses a local Kubernetes cluster based on minikube. minikube can only be used in test environments. You can deploy a Milvus cluster on your own Kubernetes cluster.
+</div>
+
+```
+$ minikube start
 ```
 
-### Install Milvus Operator
+## Install Milvus Operator
 
-There are two ways to install Milvus Operator in the Kubernetes: 
+There are two ways to install Milvus Operator on Kubernetes: 
 
 - with helm chart
 - with `kubectl` command directly with raw manifests
 
-#### 1. Install by helm command
+### 1. Install by helm command
 
 ```
 helm install milvus-operator \
@@ -81,7 +74,7 @@ More samples can be found in https://github.com/milvus-io/milvus-operator/tree/m
 CRD Documentation can be found in https://github.com/milvus-io/milvus-operator/tree/main/docs/CRD
 ```
 
-#### 2. Install by kubectl command
+### 2. Install by `kubectl` command
 
 ```
 $ kubectl apply -f https://raw.githubusercontent.com/milvus-io/milvus-operator/v0.5.0/deploy/manifests/deployment.yaml
@@ -110,9 +103,9 @@ mutatingwebhookconfiguration.admissionregistration.k8s.io/milvus-operator-mutati
 validatingwebhookconfiguration.admissionregistration.k8s.io/milvus-operator-validating-webhook-configuration created
 ```
 
-### Check milvus-operator status
+## Check Milvus Operator status
 
-Run `$ kubectl get -n milvus-operator deploy/milvus-operator` to check if Milvus Operator is running. If so, you can see the Milvus Operator deploy running as shown in the following output.
+Run `$ kubectl get -n milvus-operator deploy/milvus-operator` to check if Milvus Operator is running. You can see the following output if Milvus Operator is running.
 
 ```
 NAME              READY   UP-TO-DATE   AVAILABLE   AGE
@@ -139,7 +132,7 @@ milvuscluster.milvus.io/my-release created
 
 ### 2. Check the Milvus cluster status
 
-Run the following command to check the status of the Milvus cluster you just deployed.
+Run the following command to check the status of the Milvus cluster you have just deployed.
 
 ```
 $ kubectl get mc my-release -o yaml
@@ -210,7 +203,7 @@ my-release-pulsar-zookeeper-0         0/1     Pending             0          16s
 
 ### 3. Enable Milvus components
 
-Milvus Operator first creates all dependencies like etcd, Pulsar, and MinIO, and then continues to create Milvus components. Therefore, you can only see the pods of etcd, Pulsar, and MinIO now.  Once all denependencies are enabled, Milvus Operator will start all Milvus components. The status of the Milvus cluster is shown as in the following output.
+Milvus Operator first creates all dependencies like etcd, Pulsar, and MinIO, and then continues to create Milvus components. Therefore, you can only see the pods of etcd, Pulsar, and MinIO now. Once all dependencies are enabled, Milvus Operator will start all Milvus components. The status of the Milvus cluster is shown in the following output.
 
 ```
 ...
@@ -240,7 +233,7 @@ status:
   status: Unhealthy
 ```
 
-Check the status of the Milvus Pods again.
+Check the status of the Milvus pods again.
 
 ```
 $ kubectl get pods
@@ -278,7 +271,7 @@ my-release-pulsar-zookeeper-1                   1/1     Running             0   
 my-release-pulsar-zookeeper-2                   1/1     Running             0          6m26s
 ```
 
-When all components are enabled, the `status` of the Milvus cluster is shown as `Healthy`.
+When all components are enabled, the `status` of the Milvus cluster shows `Healthy`.
 
 ```
 ...
@@ -342,7 +335,7 @@ my-release-pulsar-zookeeper-1                   1/1     Running     0          1
 my-release-pulsar-zookeeper-2                   1/1     Running     0          13m
 ```
 
-When the Milvus cluster is installed, you can learn how to [Connect to Milvus server](manage_connection.md)
+When the Milvus cluster is installed, you can learn how to [Connect to Milvus server](manage_connection.md).
 
 ## Uninstall the Milvus cluster
 
@@ -358,19 +351,17 @@ $ kubectl delete milvus my-release
 
 </div>
 
-## Uninstall the Milvus Operator
+## Uninstall Milvus Operator
 
-Run the following command to uninstall the Milvus Operator.
+Run the following command to uninstall Milvus Operator.
 
-### Uninstall the Milvus Operator by helm command
+### Uninstall Milvus Operator by helm command
 
 ```
 $ helm -n milvus-operator uninstall milvus-operator
 ```
 
-Run the following command to uninstall the Milvus Operator.
-
-### Uninstall the Milvus Operator by kubectl command
+### Uninstall Milvus Operator by `kubectl` command
 
 ```
 $ kubectl delete -f https://raw.githubusercontent.com/milvus-io/milvus-operator/v0.5.0/deploy/manifests/deployment.yaml
@@ -379,11 +370,7 @@ $ kubectl delete -f https://raw.githubusercontent.com/milvus-io/milvus-operator/
 
 ## Delete the K8s cluster
 
-When you no longer need the K8s cluster in the testing environment, you can delete it.
-
-If you use minikube to install the K8s cluster, run `$ minikube delete`.
-
-If you use kind to install the K8s cluster, run `$ kind delete cluster --name myk8s`.
+When you no longer need the K8s cluster in the test environment, you can delete it, run `$ minikube delete` to delete it.
 
 
 ## What's next

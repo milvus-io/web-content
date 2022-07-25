@@ -34,7 +34,7 @@ This page lists common issues that may occur when running Milvus, as well as pos
   
   ### 1. etcd pod pending
 
-  The etcd cluster uses pvc by default. Storageclass needs to be preconfigured for the Kubernetes cluster.
+  The etcd cluster uses pvc by default. StorageClass needs to be preconfigured for the Kubernetes cluster.
 
   ### 2. etcd pod crash
 
