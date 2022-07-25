@@ -8,23 +8,15 @@ summary: Learn how to install Milvus stanalone on Kubernetes.
 
 <div class="tab-wrapper"><a href="install_standalone-docker.md" class=''>Docker Compose</a><a href="install_standalone-helm.md" class='active '>Helm</a><a href="install_standalone-aptyum.md" class=''>APT or YUM</a></div>
 
-# Install Milvus Standalone with Kubernetes
+# Install Milvus Standalone with Helm
 
-This topic describes how to install Milvus standalone using Kubernetes.
+This topic describes how to install Milvus standalone with Helm on Kubernetes (K8s).
 
 ## Prerequisites
 
 Check [the requirements](prerequisite-helm.md)  for hardware and software prior to your installation.
 
-We recommend installing Milvus on Kubernetes (K8s) with minikube, which is a tool that allows you to run Kubernetes locally.
-
-minikube has a dependency on default StorageClass when installed. Check the dependency by running the following command. Other installation methods requires manual configuration of the StorageClass. See [Change the Default StorageClass](https://kubernetes.io/docs/tasks/administer-cluster/change-default-storage-class/) for more information.
-
-```bash
-$ kubectl get sc
-NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDINGMODE    ALLOWVOLUMEEXPANSION     AGE
-standard (default)    k8s.io/minikube-hostpath     Delete           Immediate             false                    3m36s
-```
+We recommend installing Milvus on K8s with minikube, a tool that allows you to run K8s locally.
 
 ## Start a K8s cluster
 
@@ -32,9 +24,17 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 $ minikube start
 ```
 
+minikube has a dependency on default StorageClass when installed. Check the dependency by running the following command. Other installation methods require manual configuration of the StorageClass. See [Change the Default StorageClass](https://kubernetes.io/docs/tasks/administer-cluster/change-default-storage-class/) for more information.
+
+```bash
+$ kubectl get sc
+NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDINGMODE    ALLOWVOLUMEEXPANSION     AGE
+standard (default)    k8s.io/minikube-hostpath     Delete           Immediate             false                    3m36s
+```
+
 ## Install Helm Chart for Milvus
 
-Helm is a Kubernetes package manager that can help you deploy Milvus quickly.
+Helm is a K8s package manager that can help you deploy Milvus quickly.
 
 1. Add Milvus to Helm's repository.
 
