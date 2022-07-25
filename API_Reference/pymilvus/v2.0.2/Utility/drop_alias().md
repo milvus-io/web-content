@@ -1,6 +1,6 @@
 # drop_alias()
 
-This method alters an alias of a collection to another.
+This method drops an alias of a collection.
 
 ## Invocation
 

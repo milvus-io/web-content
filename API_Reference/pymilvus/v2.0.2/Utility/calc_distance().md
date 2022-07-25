@@ -1,6 +1,6 @@
 # calc_distance()
 
-This method calculate distance between vectors.
+This method calculates the distance between vectors.
 
 ## Invocation
 
