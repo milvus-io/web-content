@@ -1,26 +1,22 @@
 ---
 id: install_cluster-helm.md
-label: Helm 
+label: Helm
 related_key: Kubernetes
 order: 1
 group: install_cluster-docker.md
 summary: Learn how to install Milvus cluster on Kubernetes.
 ---
 
-# Install Milvus Cluster
-
-This topic describes how to install Milvus cluster with Docker Compose or on Kubernetes. 
-
-[Check the requirements for hardware and software](prerequisite-docker.md) prior to your installation. 
-
-If you run into image loading errors while installing, you can [Install Milvus Offline](install_offline-docker.md).
-
-You can also build Milvus from source code at [GitHub](https://github.com/milvus-io/milvus#to-start-developing-milvus).
-
-
 <div class="tab-wrapper"><a href="install_cluster-docker.md" class=''>Docker Compose</a><a href="install_cluster-helm.md" class='active '>Helm</a><a href="install_cluster-milvusoperator.md" class=''>Milvus Operator</a><a href="install_cluster-ansible.md" class=''>Ansible</a></div>
 
-We recommend installing Milvus on Kubernetes with minikube. minikube has a dependency on default storageclass when installed. Check the dependency by running the following command. Other installation methods requires manual configuration of the storageclass. See [Change the Default Storageclass](https://kubernetes.io/docs/tasks/administer-cluster/change-default-storage-class/) for more information.
+# Install Milvus Cluster with Helm
+
+This topic introduces how to deploy a Milvus cluster with Helm on Kubernetes.
+
+## Prerequisites
+[Check the requirements for hardware and software](prerequisite-helm.md) prior to your installation. 
+
+We recommend installing Milvus on Kubernetes with minikube. minikube has a dependency on default StorageClass when installed. Check the dependency by running the following command. Other installation methods requires manual configuration of the StorageClass. See [Change the default StorageClass](https://kubernetes.io/docs/tasks/administer-cluster/change-default-storage-class/) for more information.
 
 ```
 $ kubectl get sc
@@ -34,7 +30,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 ## Start a K8s cluster
 
 <div class="alert note">
-This topic uses a local Kubernetes cluster based on minikube. You can deploy a Milvus cluster on your own Kubernetes cluster.
+This topic uses a local Kubernetes cluster based on minikube. minikube can only be used in test environments. You can deploy a Milvus cluster on your own Kubernetes cluster.
 </div>
 
 ```

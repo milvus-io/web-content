@@ -7,23 +7,19 @@ group: install_cluster-docker.md
 summary: Learn how to install Milvus cluster with Ansible Controller.
 ---
 
-# Install Milvus Cluster
-
-This topic describes how to install Milvus cluster with Docker Compose or on Kubernetes. 
-
-[Check the requirements for hardware and software](prerequisite-docker.md) prior to your installation. 
-
-If you run into image loading errors while installing, you can [Install Milvus Offline](install_offline-docker.md).
-
-You can also build Milvus from source code at [GitHub](https://github.com/milvus-io/milvus#to-start-developing-milvus).
-
-
 <div class="tab-wrapper"><a href="install_cluster-docker.md" class=''>Docker Compose</a><a href="install_cluster-helm.md" class=''>Helm</a><a href="install_cluster-milvusoperator.md" class=''>Milvus Operator</a><a href="install_cluster-ansible.md" class='active '>Ansible</a></div>
 
-This topic introduces how to deploy a Milvus cluster. We provide the Docker Host for creating an Ansible playbook and the Container for running the Milvus cluster. The script in this topic is only for running on Ubuntu 20.04 LTS systems. Modify the script commands and parameters if you want to run the Milvus cluster on other versions of operating systems.
+# Install Milvus Cluster with Ansible
+
+This topic introduces how to deploy a Milvus cluster with Ansible. We provide the Docker Host for creating an Ansible playbook and the Container for running the Milvus cluster. The script in this topic is only for running on Ubuntu 20.04 LTS systems. Modify the script commands and parameters if you want to run the Milvus cluster on other versions of operating systems.
+
+<div class="alert note">
+Ansible can only be used in test environments. It is not recommended that you deploy Milvus distributed clusters in this way in production environments.
+</div>
 
 ## Prerequisites
 
+- Ensure that your CPU and RAM meet the requirements in [Environment Checklist](prerequisite-docker.md). 
 - Hardware: Four servers including three Docker hosts, each with at least four cores of CPU and 8GB of RAM, and one Ansible controller
 - Operating system: Ubuntu 20.04 LTS
 - Software: [Ansible Controller](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html)

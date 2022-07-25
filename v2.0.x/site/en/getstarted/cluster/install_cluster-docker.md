@@ -7,22 +7,18 @@ group: install_cluster-docker.md
 summary: Learn how to install Milvus cluster with Docker Compose.
 ---
 
-# Install Milvus Cluster
-
-This topic describes how to install Milvus cluster with Docker Compose or on Kubernetes. 
-
-[Check the requirements for hardware and software](prerequisite-docker.md) prior to your installation. 
-
-If you run into image loading errors while installing, you can [Install Milvus Offline](install_offline-docker.md).
-
-You can also build Milvus from source code at [GitHub](https://github.com/milvus-io/milvus#to-start-developing-milvus).
-
-
 <div class="tab-wrapper"><a href="install_cluster-docker.md" class='active '>Docker Compose</a><a href="install_cluster-helm.md" class=''>Helm</a><a href="install_cluster-milvusoperator.md" class=''>Milvus Operator</a><a href="install_cluster-ansible.md" class=''>Ansible</a></div>
 
+# Install Milvus Cluster with Docker Compose
+
+This topic introduces how to deploy a Milvus cluster with Docker Compose.
+
 <div class="alert note">
-Docker-compose cannot deploy Milvus distributed clusters across machines, and can only be used in test environments. It is not recommended that users deploy Milvus distributed clusters in this way in production environments.
+Docker Compose cannot deploy Milvus distributed clusters across machines, and can only be used in test environments. It is not recommended that you deploy Milvus distributed clusters in this way in production environments.
 </div>
+
+## Prerequisites
+[Check the requirements for hardware and software](prerequisite-docker.md) prior to your installation. 
 
 ## Download an installation file
 
