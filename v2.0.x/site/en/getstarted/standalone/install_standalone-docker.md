@@ -9,7 +9,7 @@ summary: Learn how to install Milvus stanalone with Docker Compose.
 
 <div class="tab-wrapper"><a href="install_standalone-docker.md" class='active '>Docker Compose</a><a href="install_standalone-helm.md" class=''>Helm</a><a href="install_standalone-aptyum.md" class=''>APT or YUM</a></div>
 
-# Install Milvus Standalone
+# Install Milvus Standalone with Docker Compose
 
 This topic describes how to install Milvus standalone using Docker Compose.
 
