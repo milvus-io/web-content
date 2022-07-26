@@ -1,6 +1,6 @@
 # query()
 
-Conducts a vector query.
+This method conducts a vector query.
 
 ## Invocation
 
@@ -8,16 +8,16 @@ Conducts a vector query.
 new milvusClient(MILUVS_ADDRESS).dataManager.query(QueryReq);
 ```
 
-## Parameter
+## Parameters
 
 ### QueryReq
 
-| Parameter                  | Description                           | type     | required |
+| Parameter                  | Description                           | Type     | Required |
 | -------------------------- | ------------------------------------- | -------- | -------- |
-| collection_name            | Collection name                       | String   | True     |
+| collection_name            | Name of the collection to search on                       | String   | True     |
 | output_fields              | Vector or scalar field to be returned | String[] | True     |
-| expr(optional)             | Scalar field filter expression        | String   | False    |
-| partitions_names(optional) | Array of partition names              | String[] | Talse    |
+| expr(optional)             | Boolean expression to filter the data         | String   | False    |
+| partitions_names(optional) | An array of the names of the partitions to search on.       | String[] | Talse    |
 
 ## Example
 
