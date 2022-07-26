@@ -1,17 +1,17 @@
 # createPartition()
-Create a partition in a collection.
+This method creates a partition in a specified collection.
 
 ## Invocation 
 ```javascript
 new milvusClient(MILUVS_ADDRESS).partitionManager.createPartition(CreatePartitionReq);
 ```
 
-## Parameter
+## Parameters
 ### CreatePartitionReq
-| Parameter       | Description     | type   | required |
+| Parameter       | Description     | Type   | Required |
 | --------------- | --------------- | ------ | -------- |
-| collection_name | Collection name | String | true     |
-| partition_name  | Partition name  | String | true     |
+| collection_name | Name of the collection to create a partition in  | String | True     |
+| partition_name  | Name of the partition to create | String | True     |
 
 ## Example
 ```javascript
