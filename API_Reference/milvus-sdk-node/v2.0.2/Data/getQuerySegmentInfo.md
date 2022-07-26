@@ -10,7 +10,7 @@ new milvusClient(MILUVS_ADDRESS).dataManager.getQuerySegmentInfo(getQuerySegment
 ### getQuerySegmentInfoReq
 | Parameter       | Description     | type   | required |
 | --------------- | --------------- | ------ | -------- |
-| collection_name | Collection name | String | true     |
+| collectionName  | Collection name | String | true     |
 
 ## Example
 ```javascript
@@ -21,4 +21,5 @@ new milvusClient(MILUVS_ADDRESS).dataManager.getQuerySegmentInfo({
 ## Return
 ```javascript
 // getQuerySegmentInfo return
+{ status: { error_code: 'Success', reason: '' }, infos: [] }
 ```

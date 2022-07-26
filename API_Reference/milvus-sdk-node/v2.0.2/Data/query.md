@@ -24,7 +24,7 @@ new milvusClient(MILUVS_ADDRESS).dataManager.query(QueryReq);
 ```javascript
 new milvusClient(MILUVS_ADDRESS).dataManager.query({
   collection_name: "my_collection",
-  expr: "age in [1,2,3,4,5,6,7,8]",
+  expr: "age > 0",
   output_fields: ["age"],
 });
 ```
@@ -33,4 +33,11 @@ new milvusClient(MILUVS_ADDRESS).dataManager.query({
 
 ```javascript
 // query return
+{
+  status: { error_code: 'Success', reason: '' },
+  data: [
+    { age: '434848878802248081' },
+    ...999 more items,
+  ]
+}
 ```

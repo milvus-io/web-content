@@ -20,12 +20,13 @@ new milvusClient(MILUVS_ADDRESS).dataManager.search(SearchReq);
 | expr(optional)             | Scalar field filter expression                          | String       | false    |
 
 ### SearchParams(object)
-| Parameter   | Description          | type        | required |
-| ----------- | -------------------- | ----------- | -------- |
-| anns_field  | vector field name    | String      | true     |
-| topk        | search result counts | string[]    | false    |
-| metric_type | metric type          | MetricTypes | false    |
-| params      | special parameters   | SearchParam | true     |
+| Parameter     | Description          | type        | required |
+| -----------   | -------------------- | ----------- | -------- |
+| anns_field    | vector field name    | String      | true     |
+| topk          | search result counts | string      | false    |
+| metric_type   | metric type          | MetricTypes | false    |
+| params        | special parameters   | SearchParam | true     |
+| round_decimal | special parameters   | Number      | false     |
 
 ### MetricTypes(string)
 | Value          | Description        |
@@ -50,16 +51,16 @@ Please refer https://milvus.io/docs/index.md
 ## Example
 ```javascript
 new milvusClient(MILUVS_ADDRESS).dataManager.search({
-  collection_name: 'my-collection-name',
+  collection_name: 'my_collection',
   expr: "",
   vectors: [[1, 2, 3, 4]],
   search_params: {
-    anns_field: 'my-vector-field-name',
+    anns_field: 'vector_01',
     topk: 4,
     metric_type: "L2",
     params: JSON.stringify({ nprobe: 1024 }),
   },
-  output_fields: ["age", "time"],
+  output_fields: ["age"],
   vector_type: 100,
 });
 
@@ -67,4 +68,13 @@ new milvusClient(MILUVS_ADDRESS).dataManager.search({
 ### Return
 ```javascript
 // search return
+{
+  status: { error_code: 'Success', reason: '' },
+  results: [
+    { score: 22, age: '434848878802251176' },
+    { score: 22, age: '434848878802251181' },
+    { score: 23, age: '434848878802251173' },
+    { score: 25, age: '434848878802251179' }
+  ]
+}
 ```

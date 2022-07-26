@@ -21,4 +21,5 @@ new milvusClient(MILUVS_ADDRESS).dataManager.getFlushState({
 ## Return
 ```javascript
 // getFlushState return
+{ status: { error_code: 'Success', reason: '' }, flushed: true }
 ```
