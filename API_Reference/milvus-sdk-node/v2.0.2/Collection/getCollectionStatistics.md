@@ -1,16 +1,16 @@
 # getCollectionStatistics()
-Get collection row count.
+This method checks the row count of a specified collection.
 
 ## Invocation 
 ```javascript
 new milvusClient(MILUVS_ADDRESS).collectionManager.getCollectionStatistics(GetCollectionStatisticsReq);
 ```
 
-## Parameter
+## Parameters
 ### GetCollectionStatisticsReq
-| Parameter       | Description     | type   | required |
+| Parameter       | Description     | Type   | Required |
 | --------------- | --------------- | ------ | -------- |
-| collection_name | Collection name | String | true     |
+| collection_name | Name of the collection to check | String | True     |
 
 
 ## Example
