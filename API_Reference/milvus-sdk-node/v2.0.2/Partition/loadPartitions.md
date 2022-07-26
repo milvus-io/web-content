@@ -1,17 +1,17 @@
 # loadPartitions()
-Load some partitions into cache.
+This method loads the specified partition to memory (for search or query).
 
 ## Invocation 
 ```javascript
 new milvusClient(MILUVS_ADDRESS).partitionManager.loadPartitions(LoadPartitionsReq);
 ```
 
-## Parameter
+## Parameters
 ### LoadPartitionsReq
-| Parameter       | Description              | type     | required |
+| Parameter       | Description              | Type     | Required |
 | --------------- | ------------------------ | -------- | -------- |
-| collection_name | Collection name          | String   | true     |
-| partition_names | Array of Partition names | String[] | true     |
+| collection_name | Name of the collection in which the partition to load exists          | String   | True     |
+| partition_names | An array of the names of the partitions to load | String[] | True     |
 
 ## Example
 ```javascript
