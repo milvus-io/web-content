@@ -1,16 +1,16 @@
 # dropCollection()
-Drop a collection. It will delete all data in the collection.
+This method drops a collection and all data within this specified collection.
 
 ## Invocation 
 ```javascript
 new milvusClient(MILUVS_ADDRESS).collectionManager.dropCollection(DropCollectionReq);
 ```
 
-## Parameter
+## Parameters
 ### DropCollectionReq
-| Parameter       | Description     | type   | required |
+| Parameter       | Description     | Type   | Required |
 | --------------- | --------------- | ------ | -------- |
-| collection_name | Collection name | String | true     |
+| collection_name | Name of the collection to drop | String | True     |
 
 ## Example
 ```javascript
@@ -21,4 +21,5 @@ new milvusClient(MILUVS_ADDRESS).collectionManager.dropCollection({
 ## Return
 ```javascript
 // dropCollection return
+{ error_code: 'Success', reason: '' }
 ```

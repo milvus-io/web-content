@@ -1,35 +1,30 @@
 # createIndex()
-Create an index on a vector field. Note that index building is an async progress.
+This method creates an index on a vector field. Note that the index building process is an asynchronous.
 
 ## Invocation 
 ```javascript
 new milvusClient(MILUVS_ADDRESS).collectionManager.createIndex(CreateIndexReq);
 ```
 
-## Parameter
+## Parameters
 ### CreateIndexReq
-| Parameter       | Description      | type                | required    |
+| Parameter       | Description      | Type                | Required    |
 | --------------- | ---------------- | ------------------- | ----------- |
-| collection_name | Collection name  | String              | true        |
-| field_name      | Filed name       | string              | true        |
-| extra_params    | index parameters | ShowCollectionsType | IndexParams |
+| collection_name | Collection name  | String              | True        |
+| field_name      | Name of the field to create index on       | String              | True        |
+| index_name      | Name of the index to create      | String              | False       |
+| extra_params    | Extra index parameters (see the table below)  | IndexParams     | False       |
 
-### IndexParams
-| Parameter   | Description      | type   | required |
+#### IndexParams
+| Parameter   | Description      | Type   | Required |
 | ----------- | ---------------- | ------ | -------- |
-| index_type  | index type       | String | true     |
-| metric_type | metric type      | string | true     |
-| params      | index parameters | Json   | true     |
-
-### ShowCollectionsType
-| value | Description | type   | required |
-| ----- | ----------- | ------ | -------- |
-| 0     | All         | number | false    |
-| 1     | Loaded      | number | false    |
+| index_type  | Index type       | String | True     |
+| metric_type | Metric type      | String | True     |
+| params      | Index parameters | Json   | True     |
 
 ## Example
 ```javascript
-new milvusClient(MILUVS_ADDRESS).collectionManager.createIndex({
+new milvusClient(MILUVS_ADDRESS).indexManager.createIndex({
   collection_name: 'my_collection',
   field_name: "vector_01",
   extra_params: {
@@ -41,5 +36,6 @@ new milvusClient(MILUVS_ADDRESS).collectionManager.createIndex({
 ```
 ## Return
 ```javascript
-// showCollections return
+// createIndex return
+{ error_code: 'Success', reason: '' }
 ```
