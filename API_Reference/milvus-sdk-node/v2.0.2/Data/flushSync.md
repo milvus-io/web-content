@@ -1,16 +1,16 @@
 # flushSync()
-It's same function as flush. But flushSync is sync function. So you can ensure it's flushed after function return the result.
+This synchronous method is the same as the asynchronous method `flush()`. The difference is that this method ensures that data is flushed when the function result is returned. 
 
 ## Invocation 
 ```javascript
 new milvusClient(MILUVS_ADDRESS).collectionManager.flushSync(FlushReq);
 ```
 
-## Parameter
+## Parameters
 ### FlushReq
 | Parameter        | Description                 | type     | required |
 | ---------------- | --------------------------- | -------- | -------- |
-| collection_names | An array of Collection name | String[] | True     |
+| collection_names | An array of the names of the collections to flush | String[] | True     |
 
 ## Example
 ```javascript
