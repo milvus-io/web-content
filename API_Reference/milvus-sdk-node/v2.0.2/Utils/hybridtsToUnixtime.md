@@ -18,5 +18,6 @@ hybridtsToUnixtime("429642767925248000");
 
 ## Return
 ```javascript
+// The UNIX Epoch time
 1638957092
 ```
