@@ -1,12 +1,12 @@
 # closeConnection()
-Close the connection to the milvus, make sure you close the connection when you are done.
+This method closes the connection to Milvus. Make sure you close the connection only when you are done.
 
 # Invocation 
 ```javascript
 milvusClient.closeConnection();
 ```
 
-# Parameter
+# Parameters
 None.
 
 # Example
