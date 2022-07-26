@@ -13,7 +13,7 @@ new milvusClient(MILUVS_ADDRESS).collectionManager.createIndex(CreateIndexReq);
 | collection_name | Collection name  | String              | True        |
 | field_name      | Field name       | String              | True        |
 | index_name      | Index name       | String              | False       |
-| extra_params    | Extra index parameters | IndexParams (see the table below)         | False       |
+| extra_params    | Extra index parameters (see the table below)  | IndexParams     | False       |
 
 #### IndexParams
 | Parameter   | Description      | Type   | Required |
