@@ -10,9 +10,9 @@ new milvusClient(MILUVS_ADDRESS).dataManager.deleteEntities(DeleteEntitiesReq);
 ### DeleteEntitiesReq
 | Parameter                | Description                                  | type   | required |
 | ------------------------ | -------------------------------------------- | ------ | -------- |
-| collection_name          | Collection name                              | String | true     |
-| expr                     | Boolean expression used to filter attribute. | String | true     |
-| partition_name(optional) | partition name                               | String | false    |
+| collection_name          | Collection name                              | String | True     |
+| expr                     | Boolean expression used to filter attribute. | String | True     |
+| partition_name(optional) | partition name                               | String | False    |
 
 ## Example
 ```javascript

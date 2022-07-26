@@ -10,7 +10,7 @@ new milvusClient(MILUVS_ADDRESS).dataManager.getQuerySegmentInfo(getQuerySegment
 ### getQuerySegmentInfoReq
 | Parameter       | Description     | type   | required |
 | --------------- | --------------- | ------ | -------- |
-| collectionName  | Collection name | String | true     |
+| collectionName  | Collection name | String | True     |
 
 ## Example
 ```javascript

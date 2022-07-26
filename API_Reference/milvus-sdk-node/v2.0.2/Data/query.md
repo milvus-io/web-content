@@ -14,10 +14,10 @@ new milvusClient(MILUVS_ADDRESS).dataManager.query(QueryReq);
 
 | Parameter                  | Description                           | type     | required |
 | -------------------------- | ------------------------------------- | -------- | -------- |
-| collection_name            | Collection name                       | String   | true     |
-| output_fields              | Vector or scalar field to be returned | String[] | true     |
-| expr(optional)             | Scalar field filter expression        | String   | false    |
-| partitions_names(optional) | Array of partition names              | string[] | false    |
+| collection_name            | Collection name                       | String   | True     |
+| output_fields              | Vector or scalar field to be returned | String[] | True     |
+| expr(optional)             | Scalar field filter expression        | String   | False    |
+| partitions_names(optional) | Array of partition names              | String[] | Talse    |
 
 ## Example
 

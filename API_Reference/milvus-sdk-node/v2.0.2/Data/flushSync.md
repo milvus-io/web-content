@@ -10,7 +10,7 @@ new milvusClient(MILUVS_ADDRESS).collectionManager.flushSync(FlushReq);
 ### FlushReq
 | Parameter        | Description                 | type     | required |
 | ---------------- | --------------------------- | -------- | -------- |
-| collection_names | An array of Collection name | String[] | true     |
+| collection_names | An array of Collection name | String[] | True     |
 
 ## Example
 ```javascript

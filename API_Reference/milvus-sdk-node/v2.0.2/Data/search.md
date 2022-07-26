@@ -22,11 +22,11 @@ new milvusClient(MILUVS_ADDRESS).dataManager.search(SearchReq);
 ### SearchParams(object)
 | Parameter     | Description          | type        | required |
 | -----------   | -------------------- | ----------- | -------- |
-| anns_field    | vector field name    | String      | true     |
-| topk          | search result counts | string      | false    |
-| metric_type   | metric type          | MetricTypes | false    |
-| params        | special parameters   | SearchParam | true     |
-| round_decimal | special parameters   | Number      | false     |
+| anns_field    | vector field name    | String      | True     |
+| topk          | search result counts | String      | False    |
+| metric_type   | metric type          | MetricTypes | False    |
+| params        | special parameters   | SearchParam | True     |
+| round_decimal | special parameters   | Number      | False     |
 
 ### MetricTypes(string)
 | Value          | Description        |

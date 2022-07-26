@@ -10,7 +10,7 @@ new milvusClient(MILUVS_ADDRESS).dataManager.getFlushState(GetFlushStateReq);
 ### GetFlushStateReq
 | Parameter  | Description             | type     | required |
 | ---------- | ----------------------- | -------- | -------- |
-| segmentIDs | An array of segments ID | String[] | true     |
+| segmentIDs | An array of segments ID | String[] | True     |
 
 ## Example
 ```javascript
