@@ -1,18 +1,18 @@
 # describeIndex()
-List all collections or get collection loading status.
+This method lists all collections or gets the loading status of a specified collection.
 
 ## Invocation 
 ```javascript
 new milvusClient(MILUVS_ADDRESS).collectionManager.describeIndex(DescribeIndexReq);
 ```
 
-## Parameter
+## Parameters
 ### DescribeIndexReq
-| Parameter       | Description     | type   | required |
+| Parameter       | Description     | Type   | Required |
 | --------------- | --------------- | ------ | -------- |
-| collection_name | Collection name | String | true     |
-| field_name      | Feild name      | String | false    |
-| index_name      | Index name      | String | false    |
+| collection_name | Name of the collection to check | String | True     |
+| field_name      | Name of the field to check      | String | False    |
+| index_name      | Name of the index to check     | String | False    |
 
 ## Example
 ```javascript
