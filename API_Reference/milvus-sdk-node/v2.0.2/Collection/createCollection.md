@@ -46,7 +46,7 @@ new milvusClient(MILUVS_ADDRESS).collectionManager.createCollection({
     {
       name: "vector_01",
       description: "vector field",
-      data_type: DataType.FloatVect,
+      data_type: DataType.FloatVector,
       type_params: {
         dim: "8"
       }
@@ -65,4 +65,5 @@ new milvusClient(MILUVS_ADDRESS).collectionManager.createCollection({
 ## Return
 ```javascript
 // create collection return
+{ error_code: 'Success', reason: '' }
 ```

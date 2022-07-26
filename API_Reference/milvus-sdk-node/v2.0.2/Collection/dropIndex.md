@@ -3,7 +3,7 @@ List all collections or get collection loading status.
 
 ## Invocation 
 ```javascript
-new milvusClient(MILUVS_ADDRESS).collectionManager.dropIndex(DropIndexReq);
+new milvusClient(MILUVS_ADDRESS).indexManager.dropIndex(DropIndexReq);
 ```
 
 ## Parameter
@@ -11,6 +11,8 @@ new milvusClient(MILUVS_ADDRESS).collectionManager.dropIndex(DropIndexReq);
 | Parameter       | Description     | type   | required |
 | --------------- | --------------- | ------ | -------- |
 | collection_name | Collection name | String | true     |
+| field_name      | Feild name      | String | true     |
+| index_name      | Index name      | String | false    |
 
 ## Example
 ```javascript

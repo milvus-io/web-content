@@ -11,7 +11,8 @@ new milvusClient(MILUVS_ADDRESS).collectionManager.createIndex(CreateIndexReq);
 | Parameter       | Description      | type                | required    |
 | --------------- | ---------------- | ------------------- | ----------- |
 | collection_name | Collection name  | String              | true        |
-| field_name      | Filed name       | string              | true        |
+| field_name      | Filed name       | String              | true        |
+| index_name      | Index name       | String              | false       |
 | extra_params    | index parameters | ShowCollectionsType | IndexParams |
 
 ### IndexParams
@@ -29,7 +30,7 @@ new milvusClient(MILUVS_ADDRESS).collectionManager.createIndex(CreateIndexReq);
 
 ## Example
 ```javascript
-new milvusClient(MILUVS_ADDRESS).collectionManager.createIndex({
+new milvusClient(MILUVS_ADDRESS).indexManager.createIndex({
   collection_name: 'my_collection',
   field_name: "vector_01",
   extra_params: {
@@ -41,5 +42,6 @@ new milvusClient(MILUVS_ADDRESS).collectionManager.createIndex({
 ```
 ## Return
 ```javascript
-// showCollections return
+// createIndex return
+{ error_code: 'Success', reason: '' }
 ```

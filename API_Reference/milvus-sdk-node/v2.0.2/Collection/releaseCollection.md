@@ -22,4 +22,5 @@ new milvusClient(MILUVS_ADDRESS).collectionManager.releaseCollection({
 ## Return
 ```javascript
 // releaseCollection return
+{ error_code: 'Success', reason: '' }
 ```

@@ -11,6 +11,8 @@ new milvusClient(MILUVS_ADDRESS).collectionManager.getIndexState(GetIndexStateRe
 | Parameter       | Description     | type   | required |
 | --------------- | --------------- | ------ | -------- |
 | collection_name | Collection name | String | true     |
+| field_name      | Feild name      | String | false    |
+| index_name      | Index name      | String | false    |
 
 ## Example
 ```javascript
@@ -22,4 +24,9 @@ new milvusClient(MILUVS_ADDRESS).collectionManager.getIndexState({
 ## Return
 ```javascript
 // getIndexState return
+{
+  status: { error_code: 'Success', reason: '' },
+  state: 'Finished',
+  fail_reason: ''
+}
 ```
