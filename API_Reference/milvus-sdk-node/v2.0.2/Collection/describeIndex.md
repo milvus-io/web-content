@@ -1,5 +1,5 @@
 # describeIndex()
-This method lists all collections or gets the loading status of a specified collection.
+This method gets the index information in a collection.
 
 ## Invocation 
 ```javascript
