@@ -1,22 +1,22 @@
 # insert()
-Insert data into collection.
+This method inserts data into a specified collection.
 
 ## Invocation 
 ```javascript
 new milvusClient(MILUVS_ADDRESS).dataManager.insert(InsertReq);
 ```
 
-## Parameter
+## Parameters
 ### InsertReq
-| Parameter                | Description                               | type                   | required |
+| Parameter                | Description                               | Type                   | Required |
 | ------------------------ | ----------------------------------------- | ---------------------- | -------- |
-| collection_name          | Collection name                           | String                 | True     |
-| partition_name(optional) | Partition name                            | String                 | False    |
-| fields_data              | vector data                               | { [x: string]: any }[] | True    |
-| hash_keys(optional)      | The hash value depends on the primary key | Number[]               | False    |
+| collection_name          | Name of the collection to insert data into                           | String                 | True     |
+| partition_name(optional) | Name of the partition to insert data into                        | String                 | False    |
+| fields_data              | Vector data                               | { [x: string]: any }[] | True    |
+| hash_keys(optional)      | The hash value determined by primary key | Number[]               | False    |
 
 ### note 
-If the field type is binary, the vector data length needs to be dimension / 8
+If the field type is binary, the vector data length needs to be dimension / 8.
 
 ## Example
 ```javascript
