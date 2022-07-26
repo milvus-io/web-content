@@ -1,16 +1,16 @@
 # loadCollectionSync()
-Loads the collection to memory (for search or query). It's sync function. Help to ensure this collection is loaded.
+This method loads the specified collection to memory (for search or query) synchronously and ensures that this collection is loaded. 
 
 ## Invocation 
 ```javascript
 new milvusClient(MILUVS_ADDRESS).collectionManager.loadCollectionSync(LoadCollectionReq);
 ```
 
-## Parameter
+## Parameters
 ### LoadCollectionReq
-| Parameter       | Description     | type   | required |
+| Parameter       | Description     | Type   | Required |
 | --------------- | --------------- | ------ | -------- |
-| collection_name | Collection name | String | true     |
+| collection_name | Name of the collection to load. | String | True     |
 
 ## Example
 ```javascript
