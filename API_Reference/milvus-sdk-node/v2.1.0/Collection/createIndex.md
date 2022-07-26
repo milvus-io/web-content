@@ -1,21 +1,26 @@
 # createIndex()
+
 This method creates an index on a vector field. Note that the index building process is an asynchronous.
 
-## Invocation 
+## Invocation
+
 ```javascript
 new milvusClient(MILUVS_ADDRESS).collectionManager.createIndex(CreateIndexReq);
 ```
 
 ## Parameters
+
 ### CreateIndexReq
-| Parameter       | Description      | Type                | Required    |
-| --------------- | ---------------- | ------------------- | ----------- |
-| collection_name | Collection name  | String              | True        |
-| field_name      | Name of the field to create index on       | String              | True        |
-| index_name      | Name of the index to create      | String              | False       |
-| extra_params    | Extra index parameters (see the table below)  | IndexParams     | False       |
+
+| Parameter       | Description                                  | Type        | Required |
+| --------------- | -------------------------------------------- | ----------- | -------- |
+| collection_name | Collection name                              | String      | True     |
+| field_name      | Name of the field to create index on         | String      | True     |
+| index_name      | Name of the index to create                  | String      | False    |
+| extra_params    | Extra index parameters (see the table below) | IndexParams | False    |
 
 #### IndexParams
+
 | Parameter   | Description      | Type   | Required |
 | ----------- | ---------------- | ------ | -------- |
 | index_type  | Index type       | String | True     |
@@ -23,10 +28,12 @@ new milvusClient(MILUVS_ADDRESS).collectionManager.createIndex(CreateIndexReq);
 | params      | Index parameters | Json   | True     |
 
 ## Example
+
 ```javascript
 new milvusClient(MILUVS_ADDRESS).indexManager.createIndex({
-  collection_name: 'my_collection',
+  collection_name: "my_collection",
   field_name: "vector_01",
+  index_name: "index_name",
   extra_params: {
     index_type: "IVF_FLAT",
     metric_type: "IP",
@@ -34,7 +41,9 @@ new milvusClient(MILUVS_ADDRESS).indexManager.createIndex({
   },
 });
 ```
+
 ## Return
+
 ```javascript
 // createIndex return
 { error_code: 'Success', reason: '' }
