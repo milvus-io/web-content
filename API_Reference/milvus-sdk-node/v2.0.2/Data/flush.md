@@ -1,16 +1,16 @@
 # flush()
-Milvus temporarily buffers the newly inserted vectors in the cache. Call ```flush()``` to persist them to the object storage. It's async function, so it's will take some times to excute.
+Milvus temporarily buffers newly inserted vectors in cache. This method is asynchronous and persists inserted entities to object storage. After calling this method, you need to wait for a period of time for the data to be flushed.
 
 ## Invocation 
 ```javascript
 new milvusClient(MILUVS_ADDRESS).dataManager.flush(FlushReq);
 ```
 
-## Parameter
+## Parameters
 ### FlushReq
-| Parameter        | Description                 | type     | required |
+| Parameter        | Description                 | Type     | Required |
 | ---------------- | --------------------------- | -------- | -------- |
-| collection_names | An array of Collection name | String[] | True     |
+| collection_names | An array of the names of collections that contain the data to flush | String array | True     |
 
 ## Example
 ```javascript
