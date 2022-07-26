@@ -1,16 +1,16 @@
 # showPartitions()
-Show all partitions in a collection.
+This method lists all the partitions in a specified collection.
 
 ## Invocation 
 ```javascript
 new milvusClient(MILUVS_ADDRESS).partitionManager.showPartitions(ShowPartitionsReq);
 ```
 
-## Parameter
+## Parameters
 ### ShowPartitionsReq
-| Parameter       | Description     | type   | required |
+| Parameter       | Description     | Type   | Required |
 | --------------- | --------------- | ------ | -------- |
-| collection_name | Collection name | String | true     |
+| collection_name | Name of the collection to list all the partitions within | String | True     |
 
 ## Example
 ```javascript
