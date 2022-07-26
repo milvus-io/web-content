@@ -1,26 +1,26 @@
 # createIndex()
-Create an index on a vector field. Note that index building is an async progress.
+This method creates an index on a vector field. Note that the index building process is an asynchronous.
 
 ## Invocation 
 ```javascript
 new milvusClient(MILUVS_ADDRESS).collectionManager.createIndex(CreateIndexReq);
 ```
 
-## Parameter
+## Parameters
 ### CreateIndexReq
-| Parameter       | Description      | type                | required    |
+| Parameter       | Description      | Type                | Required    |
 | --------------- | ---------------- | ------------------- | ----------- |
-| collection_name | Collection name  | String              | true        |
-| field_name      | Filed name       | String              | true        |
-| index_name      | Index name       | String              | false       |
-| extra_params    | index parameters | IndexParams         | false       |
+| collection_name | Collection name  | String              | True        |
+| field_name      | Field name       | String              | True        |
+| index_name      | Index name       | String              | False       |
+| extra_params    | Extra index parameters | IndexParams (see the table below)         | False       |
 
-### IndexParams
-| Parameter   | Description      | type   | required |
+#### IndexParams
+| Parameter   | Description      | Type   | Required |
 | ----------- | ---------------- | ------ | -------- |
-| index_type  | index type       | String | true     |
-| metric_type | metric type      | string | true     |
-| params      | index parameters | Json   | true     |
+| index_type  | Index type       | String | True     |
+| metric_type | Metric type      | String | True     |
+| params      | Index parameters | Json   | True     |
 
 ## Example
 ```javascript
