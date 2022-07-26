@@ -23,5 +23,5 @@ new milvusClient(MILUVS_ADDRESS).partitionManager.dropPartition({
 
 ## Return
 ```javascript
-// drop partition return
+{ error_code: 'Success', reason: '' }
 ```

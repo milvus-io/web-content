@@ -23,5 +23,5 @@ new milvusClient(MILUVS_ADDRESS).partitionManager.createPartition({
 
 ## Return
 ```javascript
-// create partition return
+{ error_code: 'Success', reason: '' }
 ```
