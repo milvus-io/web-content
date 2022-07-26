@@ -1,5 +1,5 @@
 # getIndexBuildProgress()
-This method checks the progress of index building.
+This method checks the progress of index building and shows the total number of rows and the number of index rows.
 
 ## Invocation 
 ```javascript
@@ -11,8 +11,8 @@ new milvusClient(MILUVS_ADDRESS).collectionManager.getIndexBuildProgress(GetInde
 | Parameter       | Description     | Type   | Required |
 | --------------- | --------------- | ------ | -------- |
 | collection_name | Collection name | String | True     |
-| field_name      | Field name      | String | False    |
-| index_name      | Index name      | String | False    |
+| field_name      | Name of the field to build index on      | String | False    |
+| index_name      | Name of the index to check      | String | False    |
 
 ## Example
 ```javascript
