@@ -13,10 +13,10 @@ datetimeToHybrids(HybridTimetamp);
 
 ## Example
 ```javascript
-datetimeToHybrids("429642767925248000");
+datetimeToHybrids(new Date(1638957092 * 1000));
 ```
 
 ## Return
 ```javascript
-// datetimeToHybrids return
+429642767925248000
 ```

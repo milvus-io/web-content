@@ -18,5 +18,5 @@ hybridtsToUnixtime("429642767925248000");
 
 ## Return
 ```javascript
-// hybridtsToUnixtime return
+1638957092
 ```
