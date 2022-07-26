@@ -23,7 +23,7 @@ If the field type is binary, the vector data length needs to be dimension / 8.
 
 const vectorsData = Array.from({ length: 10 }).map(() => ({
     vector_01: Array.from({ length: 4 }).map(() =>
-      Math.floor(Math.random() * 100000)
+      Math.floor(Math.random() * 10)
     ),
   }));
 
@@ -36,12 +36,12 @@ new milvusClient(MILUVS_ADDRESS).dataManager.insert({
 ```javascript
 // insert return
 {
+  status: { error_code: 'Success', reason: '' },
   succ_index: [
      0,  1,  2,  3,  4,  5,  6,  7,  8,  9,
     ... 990 more items
   ],
   err_index: [],
-  status: { error_code: 'Success', reason: '' },
   acknowledged: false,
   insert_cnt: '1',
   delete_cnt: '0',
