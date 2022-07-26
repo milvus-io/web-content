@@ -1,34 +1,34 @@
 # search()
-Conducts a vector search.
+This method conducts a vector similarity search.
 
 ## Invocation 
 ```javascript
 new milvusClient(MILUVS_ADDRESS).dataManager.search(SearchReq);
 ```
 
-## Parameter
+## Parameters
 ### SearchReq(object)
-| Parameter                  | Description                                             | type         | required |
+| Parameter                  | Description                                             | Type         | Required |
 | -------------------------- | ------------------------------------------------------- | ------------ | -------- |
-| collection_name            | Collection name                                         | String       | true     |
-| search_params              | Search parameters                                       | SearchParams | true     |
-| vectors                    | Original vector to search with                          | Number[][]   | true     |
-| vector_type                | Search parameters                                       | VectorTypes  | true     |
-| output_fields(optional)    | Vector or scalar field to be returned                   | String[]     | false    |
-| travel_timestamp(optional) | Use this timestamp we can time travel in vector search. | number       | false    |
-| partitions_names(optional) | Array of partition names                                | string[]     | false    |
-| expr(optional)             | Scalar field filter expression                          | String       | false    |
+| collection_name            | Name of the collection to search on                                         | String       | True     |
+| search_params              | Search parameters                                       | SearchParams (see the table below) | True     |
+| vectors                    | Original vector to search with                          | Number[][]   | True     |
+| vector_type                | Search parameters                                       | VectorTypes (see the table below)  | True     |
+| output_fields(optional)    | Vector or scalar field to be returned                   | String[]     | False    |
+| travel_timestamp(optional) | Timestamp that is used for Time Travel. Users can specify a timestamp in a search to get results based on a data view at a specified point in time. | Number       | False    |
+| partitions_names(optional) | An array of the names of the partitions to search on                                | String[]     | False    |
+| expr(optional)             | Boolean expression to filter the data                            | String       | False    |
 
-### SearchParams(object)
-| Parameter     | Description          | type        | required |
+#### SearchParams(object)
+| Parameter     | Description          | Type        | Required |
 | -----------   | -------------------- | ----------- | -------- |
-| anns_field    | vector field name    | String      | True     |
-| topk          | search result counts | String      | False    |
-| metric_type   | metric type          | MetricTypes | False    |
-| params        | special parameters   | SearchParam | True     |
-| round_decimal | special parameters   | Number      | False     |
+| anns_field    | Vector field name    | String      | True     |
+| topk          | Search result counts | String      | False    |
+| metric_type   | Metric type          | MetricTypes | False    |
+| params        | Special parameters   | SearchParam | True     |
+| round_decimal | Special parameters   | Number      | False     |
 
-### MetricTypes(string)
+#### MetricTypes(string)
 | Value          | Description        |
 | -------------- | ------------------ |
 | L2             | Euclidean distance |
@@ -39,13 +39,13 @@ new milvusClient(MILUVS_ADDRESS).dataManager.search(SearchReq);
 | SUBSTRUCTURE   | Superstructure     |
 | SUPERSTRUCTURE | Substructure       |
 
-### VectorTypes
+#### VectorTypes
 | Value | Description |
 | ----- | ----------- |
 | 100   | Binary      |
 | 101   | Float       |
 
-### SearchParam
+#### SearchParam
 Please refer https://milvus.io/docs/index.md
 
 ## Example
