@@ -18,5 +18,5 @@ datetimeToHybrids(new Date(1638957092 * 1000));
 
 ## Return
 ```javascript
-429642767925248000
+429642767925248000 //The hybrid timestamp
 ```
