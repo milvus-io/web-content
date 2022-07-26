@@ -24,17 +24,35 @@ new milvusClient(MILUVS_ADDRESS).collectionManager.describeCollection({
 {
   status: { error_code: 'Success', reason: '' },
   schema: {
-    fields: [ [Object], [Object] ],
+    fields: [ {
+    type_params: [ 
+      {
+        dim: 8
+      } 
+    ],
+    index_params: [],
+    fieldID: '100',
+    name: 'vector_01',
+    is_primary_key: false,
+    description: 'vector field',
+    data_type: 'FloatVector',
+    autoID: false
+  },
+  {
+    type_params: [],
+    index_params: [],
+    fieldID: '101',
+    name: 'age',
+    is_primary_key: true,
+    description: '',
+    data_type: 'Int64',
+    autoID: true
+  } ],
     name: 'my_collection',
     description: '',
     autoID: false
   },
   collectionID: '434827658485039105',
   consistency_level: 'Session',
-  virtual_channel_names: [
-    'by-dev-rootcoord-dml_6_434827658485039105v0',
-    'by-dev-rootcoord-dml_7_434827658485039105v1'
-  ],
-  physical_channel_names: [ 'by-dev-rootcoord-dml_6', 'by-dev-rootcoord-dml_7' ],
 }
 ```

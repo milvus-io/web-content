@@ -13,7 +13,7 @@ new milvusClient(MILUVS_ADDRESS).collectionManager.createIndex(CreateIndexReq);
 | collection_name | Collection name  | String              | true        |
 | field_name      | Filed name       | String              | true        |
 | index_name      | Index name       | String              | false       |
-| extra_params    | index parameters | ShowCollectionsType | IndexParams |
+| extra_params    | index parameters | IndexParams         | false       |
 
 ### IndexParams
 | Parameter   | Description      | type   | required |
@@ -21,12 +21,6 @@ new milvusClient(MILUVS_ADDRESS).collectionManager.createIndex(CreateIndexReq);
 | index_type  | index type       | String | true     |
 | metric_type | metric type      | string | true     |
 | params      | index parameters | Json   | true     |
-
-### ShowCollectionsType
-| value | Description | type   | required |
-| ----- | ----------- | ------ | -------- |
-| 0     | All         | number | false    |
-| 1     | Loaded      | number | false    |
 
 ## Example
 ```javascript
