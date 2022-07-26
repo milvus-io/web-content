@@ -1,17 +1,17 @@
 # getPartitionStatistics()
-Show the statistics information of a partition.
+This method checks the statistics of a specified partition.
 
 ## Invocation 
 ```javascript
 new milvusClient(MILUVS_ADDRESS).partitionManager.getPartitionStatistics(GetPartitionStatisticsReq);
 ```
 
-## Parameter
+## Parameters
 ### GetPartitionStatisticsReq
-| Parameter       | Description     | type   | required |
+| Parameter       | Description     | Type   | Required |
 | --------------- | --------------- | ------ | -------- |
-| collection_name | Collection name | String | true     |
-| partition_name  | Partition name  | String | true     |
+| collection_name | Name of the collection in which the partition to check exists | String | True     |
+| partition_name  | Name of the partition to check  | String | True     |
 
 ## Example
 ```javascript
