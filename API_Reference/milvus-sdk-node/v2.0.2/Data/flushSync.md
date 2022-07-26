@@ -1,5 +1,6 @@
 # flushSync()
-This synchronous method is the same as the asynchronous method `flush()`. The difference is that this method ensures that data is flushed when the function result is returned. 
+This synchronous method is the same as the asynchronous [`flush()` method](API_Reference/milvus-sdk-node/v2.0.2/Data/flush.md
+). The difference is that this method ensures that data is flushed when the function result is returned. 
 
 ## Invocation 
 ```javascript
