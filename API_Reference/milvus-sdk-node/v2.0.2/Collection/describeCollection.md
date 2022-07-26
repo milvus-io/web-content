@@ -1,16 +1,16 @@
 # describeCollection()
-Show the details of a collection, e.g. name, schema.
+This method checks the details of a collection, including collection name, schema, and more.
 
 ## Invocation 
 ```javascript
 new milvusClient(MILUVS_ADDRESS).collectionManager.describeCollection(DescribeCollectionReq);
 ```
 
-## Parameter
+## Parameters
 ### DescribeCollectionReq
-| Parameter       | Description     | type   | required |
+| Parameter       | Description     | Type   | Required |
 | --------------- | --------------- | ------ | -------- |
-| collection_name | Collection name | String | true     |
+| collection_name | Name of the collection to check | String | True     |
 
 ## Example
 ```javascript
