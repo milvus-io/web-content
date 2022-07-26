@@ -1,18 +1,18 @@
 # getIndexBuildProgress()
-Get index building progress.
+This method checks the progress of index building.
 
 ## Invocation 
 ```javascript
 new milvusClient(MILUVS_ADDRESS).collectionManager.getIndexBuildProgress(GetIndexBuildProgressReq);
 ```
 
-## Parameter
+## Parameters
 ### GetIndexBuildProgressReq
-| Parameter       | Description     | type   | required |
+| Parameter       | Description     | Type   | Required |
 | --------------- | --------------- | ------ | -------- |
-| collection_name | Collection name | String | true     |
-| field_name      | Feild name      | String | false    |
-| index_name      | Index name      | String | false    |
+| collection_name | Collection name | String | True     |
+| field_name      | Field name      | String | False    |
+| index_name      | Index name      | String | False    |
 
 ## Example
 ```javascript
