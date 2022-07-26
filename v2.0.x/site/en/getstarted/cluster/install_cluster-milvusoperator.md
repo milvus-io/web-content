@@ -18,11 +18,11 @@ Milvus Operator is a solution that helps you deploy and manage a full Milvus ser
 
 ## Create a K8s Cluster
 
-If you have already deployed a K8s cluster for production, you can skip this step and proceed directly to [deploy Milvus Operator](install_cluster-milvusoperator.md#Deploy-Milvus-Operator). If not, you can follow the steps below to quickly create a K8s for testing, and then use it to install a Milvus cluster with Milvus Operator. 
+If you have already deployed a K8s cluster for production, you can skip this step and proceed directly to [deploy Milvus Operator](install_cluster-milvusoperator.md#Deploy-Milvus-Operator). If not, you can follow the steps below to quickly create a K8s for testing, and then use it to deploy a Milvus cluster with Milvus Operator. 
 
-### Create a K8s cluster with minikube
+### Create a K8s cluster using minikube
 
-[minikube](https://minikube.sigs.k8s.io/docs/) is a tool that allows you to run K8s locally.
+We recommend installing Milvus on K8s with [minikube](https://minikube.sigs.k8s.io/docs/), a tool that allows you to run K8s locally.
 
 <div class="alert note">
 minikube can only be used in test environments. It is not recommended that you deploy Milvus distributed clusters in this way in production environments.
@@ -43,6 +43,7 @@ $ minikube start
 #### 3. Check the K8s cluster status
 
 Run `$ kubectl cluster-info` to check the status of the K8s cluster you just created. Ensure that you can access the K8s cluster via `kubectl`. If you have not installed `kubectl` locally, see [Use kubectl inside minikube](https://minikube.sigs.k8s.io/docs/handbook/kubectl/).
+
 
 ## Deploy Milvus Operator
 
