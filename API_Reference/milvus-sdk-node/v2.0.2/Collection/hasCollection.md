@@ -1,16 +1,16 @@
 # hasCollection()
-Check if the collection exists.
+This method checks if a specified collection exists.
 
 ## Invocation 
 ```javascript
 new milvusClient(MILUVS_ADDRESS).collectionManager.hasCollection(HasCollectionReq);
 ```
 
-## Parameter
+## Parameters
 ### HasCollectionReq
-| Parameter       | Description     | type   | required |
+| Parameter       | Description     | Type   | Required |
 | --------------- | --------------- | ------ | -------- |
-| collection_name | Collection name | String | true     |
+| collection_name | Name of the collection to check | String | True     |
 
 ## Example
 ```javascript
