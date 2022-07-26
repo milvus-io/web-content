@@ -11,8 +11,8 @@ new milvusClient(MILUVS_ADDRESS).collectionManager.createIndex(CreateIndexReq);
 | Parameter       | Description      | Type                | Required    |
 | --------------- | ---------------- | ------------------- | ----------- |
 | collection_name | Collection name  | String              | True        |
-| field_name      | Field name       | String              | True        |
-| index_name      | Index name       | String              | False       |
+| field_name      | Name of the field to create index on       | String              | True        |
+| index_name      | Name of the index to create      | String              | False       |
 | extra_params    | Extra index parameters (see the table below)  | IndexParams     | False       |
 
 #### IndexParams
