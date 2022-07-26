@@ -1,5 +1,5 @@
 # getIndexState()
-Get index building progress.
+This method checks if the index building is completed or not.
 
 ## Invocation 
 ```javascript
@@ -8,11 +8,11 @@ new milvusClient(MILUVS_ADDRESS).collectionManager.getIndexState(GetIndexStateRe
 
 ## Parameter
 ### GetIndexStateReq
-| Parameter       | Description     | type   | required |
+| Parameter       | Description     | Type   | Required |
 | --------------- | --------------- | ------ | -------- |
-| collection_name | Collection name | String | true     |
-| field_name      | Feild name      | String | false    |
-| index_name      | Index name      | String | false    |
+| collection_name | Collection name | String | True     |
+| field_name      | Name of the field to build index on      | String | False    |
+| index_name      | Name of the index to check      | String | False    |
 
 ## Example
 ```javascript
