@@ -1,18 +1,18 @@
 # deleteEntities()
-Delete entities in a collection
+This method deletes entities from a specified collection.
 
 ## Invocation 
 ```javascript
 new milvusClient(MILUVS_ADDRESS).dataManager.deleteEntities(DeleteEntitiesReq);
 ```
 
-## Parameter
+## Parameters
 ### DeleteEntitiesReq
-| Parameter                | Description                                  | type   | required |
+| Parameter                | Description                                  | Type   | Required |
 | ------------------------ | -------------------------------------------- | ------ | -------- |
-| collection_name          | Collection name                              | String | True     |
-| expr                     | Boolean expression used to filter attribute. | String | True     |
-| partition_name(optional) | partition name                               | String | False    |
+| collection_name          | Name of the collection to delete entities from                              | String | True     |
+| expr                     | Boolean expression used for attibute filtering | String | True     |
+| partition_name(optional) | Name of the partition to deleted entities from                              | String | False    |
 
 ## Example
 ```javascript
