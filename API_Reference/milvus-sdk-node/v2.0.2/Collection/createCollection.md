@@ -6,11 +6,11 @@ This method creates a collection with the specified schema.
 new milvusClient(MILUVS_ADDRESS).collectionManager.createCollection(CreateCollectionReq);
 ```
 
-## Parameter
+## Parameters
 ### CreateCollectionReq(object)
 | Parameter       | Description      | Type   | Required |
 | --------------- | ---------------- | ------ | -------- |
-| collection_name | Collection name  | String | True     |
+| collection_name | Name of the collection to create  | String | True     |
 | fields          | Schema of the collection to create | Field | True     |
 
 ### Fields(object)
