@@ -1,27 +1,27 @@
 # releasePartitions()
-Release partitions from cache.
+This method releases the specified partition from memory.
 
 ## Invocation 
 ```javascript
 new milvusClient(MILUVS_ADDRESS).partitionManager.releasePartitions(ReleasePartitionsReq);
 ```
 
-## Parameter
+## Parameters
 ### ReleasePartitionsReq
-| Parameter       | Description              | type     | required |
+| Parameter       | Description              | Type     | Required |
 | --------------- | ------------------------ | -------- | -------- |
-| collection_name | Collection name          | String   | true     |
-| partition_names | Array of Partition names | String[] | true     |
+| collection_name | Name of the collection in which the partition to release exists          | String   | True     |
+| partition_names | An array of the name of the partitions to release | String array | True     |
 
 ## Example
 ```javascript
 new milvusClient(MILUVS_ADDRESS).partitionManager.releasePartitions({
   collection_name: 'my_collection',
-  partition_name: ['my_partition'],
+  partition_names: ['my_partition'],
 });
 ```
 
 ## Return
 ```javascript
-// releasePartitions return
+{ error_code: 'Success', reason: '' }
 ```
