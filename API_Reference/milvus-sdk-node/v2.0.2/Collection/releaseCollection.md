@@ -1,16 +1,16 @@
 # releaseCollection()
- Releases the collection from memory.
+This method releases the specified collection from memory.
  
 ## Invocation 
 ```javascript
 new milvusClient(MILUVS_ADDRESS).collectionManager.releaseCollection(ReleaseCollectionReq);
 ```
 
-## Parameter
+## Parameters
 ### ReleaseCollectionReq
-| Parameter       | Description     | type   | required |
+| Parameter       | Description     | Type   | Required |
 | --------------- | --------------- | ------ | -------- |
-| collection_name | Collection name | String | true     |
+| collection_name | Name of the collection to release | String | True     |
 
 ## Example
 ```javascript
