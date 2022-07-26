@@ -1,5 +1,5 @@
 # hasPartition()
-Check if a partition exists in a collection.
+This method verifies if a partition exists in the specified collection.
 
 ## Invocation 
 
@@ -7,12 +7,12 @@ Check if a partition exists in a collection.
 new milvusClient(MILUVS_ADDRESS).partitionManager.hasPartition(HasPartitionReq);
 ```
 
-## Parameter
+## Parameters
 ### HasPartitionReq
-| Parameter       | Description     | type   | required |
+| Parameter       | Description     | Type   | Required |
 | --------------- | --------------- | ------ | -------- |
-| collection_name | Collection name | String | true     |
-| partition_name  | Partition name  | String | true     |
+| collection_name | Name of the collection in which the partition to verify exists | String | True     |
+| partition_name  | Name of the partition to verify  | String | True     |
 
 ## Example
 ```javascript
