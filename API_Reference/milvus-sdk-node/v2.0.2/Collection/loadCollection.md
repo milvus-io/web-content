@@ -1,16 +1,16 @@
 # loadCollection()
-Loads the collection to memory (for search or query).
+This method loads the specified collection to memory (for search or query).
 
 ## Invocation 
 ```javascript
 new milvusClient(MILUVS_ADDRESS).collectionManager.loadCollection(LoadCollectionReq);
 ```
 
-## Parameter
+## Parameters
 ### LoadCollectionReq
-| Parameter       | Description     | type   | required |
+| Parameter       | Description     | Type   | Required |
 | --------------- | --------------- | ------ | -------- |
-| collection_name | Collection name | String | true     |
+| collection_name | Name of the collection to load | String | True     |
 
 ## Example
 ```javascript
