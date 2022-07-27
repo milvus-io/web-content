@@ -16,8 +16,8 @@ A FieldSchema object.
 
 | Property             | Description                                                                  |
 | -------------------- | ---------------------------------------------------------------------------- |
-| `name`               | Name of the field                                                            |
-| `is_primary`         | Boolean value that indicates if the field is the primary key field           |
+| `name`               | Name of the field.                                                            |
+| `is_primary`         | Boolean value that indicates if the field is the primary key field.           |
 
 ## Example
 
