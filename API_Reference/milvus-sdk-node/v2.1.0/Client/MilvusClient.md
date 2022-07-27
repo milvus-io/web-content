@@ -1,6 +1,6 @@
 # MilvusClient()
 
-A class to initialize a milvus client instance, once connected, you can perform operations from this client.
+This is a class to initialize a Milvus client instance. Once connected to the Milvus instance, you can perform operations from this client.
 
 # Invocation
 
@@ -10,12 +10,12 @@ const milvusClient = new MilvusClient(MILUVS_ADDRESS);
 
 # Parameter
 
-| Parameter | type    | required | example             | Description                       |
-| --------- | ------- | -------- | ------------------- | --------------------------------- |
-| address   | String  | true     | '192.168.0.1:19530' | milvus ip address                 |
-| ssl       | Boolean | false    | false               | ssl connection , default is false |
-| username  | String  | false    | milvus              | milvus username                   |
-| address   | String  | false    | milvus              | milvus password                   |
+| Parameter | Description                       |Type    | Required | Example             | 
+| --------- | --------------------------------- |------- | -------- | ------------------- |
+| address   | The Milvus IP address             |String  | True     | '192.168.0.1:19530' |
+| ssl       | SSL connection. It is false by default. |Boolean | False    | false               |
+| username  | The username used to connect to Milvus                 |String  | False    | milvus              |
+| address   | The password used to connect to Milvus                  |String  | False    | milvus              | 
 
 # Example
 
