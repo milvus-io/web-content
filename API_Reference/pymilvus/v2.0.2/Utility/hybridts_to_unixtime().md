@@ -12,7 +12,7 @@ hybridts_to_unixtime(hybridts)
 
 | Parameter       | Description                                    | Type               | Required |
 | --------------- | ---------------------------------------------- | ------------------ | -------- |
-| `hybridts`      | Hybrid timestamp                               | Integer            | True     |
+| `hybridts`      | Hybrid timestamp.                               | Integer            | True     |
 
 ## Return
 
