@@ -12,9 +12,9 @@ Index(collection, field_name, index_params, **kwargs)
 
 | Parameter      | Description                                                  | Type                            | Required |
 | -------------- | ------------------------------------------------------------ | ------------------------------- | -------- |
-| `collection`   | Name of the collection                                       | String                          | True     |
-| `field_name`   | Name of the field to build index on                          | String                          | True     |
-| `index_params` | Milvus Connection used to create the collection              | Dict                            | True     |
+| `collection`   | Name of the collection.                                       | String                          | True     |
+| `field_name`   | Name of the field to build index on.                          | String                          | True     |
+| `index_params` | Milvus Connection used to create the collection.             | Dict                            | True     |
 
 
 ## Return
@@ -25,9 +25,9 @@ A new index object created with the specified parameters.
 
 | Property          | Description                                                  | Type                            |
 | ----------------- | ------------------------------------------------------------ | ------------------------------- |
-| `params`          | Index parameters                                             | Dict                            |
-| `collection_name` | Name of the collection                                       | String                          |
-| `field_name`      | Name of the indexed field                                    | String                          |
+| `params`          | Index parameters.                                             | Dict                            |
+| `collection_name` | Name of the collection.                                       | String                          |
+| `field_name`      | Name of the indexed field.                                    | String                          |
 
 
 ## Example
