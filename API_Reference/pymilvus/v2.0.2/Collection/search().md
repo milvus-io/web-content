@@ -21,7 +21,7 @@ search(data, anns_field, param, limit, expr=None, partition_names=None, output_f
 | `output_fields`   | List of names of fields to output.                             | list[String]       | False    |
 | `timeout`         | An optional duration of time in seconds to allow for the RPC. If it is set to None, the client keeps waiting until the server responds or error occurs.                                  | Float              | False    |
 | `round_decimal`   | Number of the decimal places of the returned distance.         | Integer            | False    |
-| `kwargs`: `_async`| Boolean value to indicate if to invoke asynchronously. | Bool   | False    |
+| `kwargs`: `_async`| Boolean value to indicate if to invoke this method asynchronously. | Bool   | False    |
 | `kwargs`: `_callback`| Function that will be invoked after server responds successfully. It takes effect only if `_async` is set to `True`. | Function   | False    |
 | `kwargs`: `consistency_level`| Consistency level used in the search. | String/Integer   | False    |
 | `kwargs`: `guarantee_timestamp`| Milvus searches on the data view before this timestamp when it is provided. Otherwise, it searches the most updated data view. It can only be used in `Customized` level of consistency. | Integer   | False    |
