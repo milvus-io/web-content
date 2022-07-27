@@ -14,7 +14,7 @@ Index(collection, field_name, index_params, **kwargs)
 | -------------- | ------------------------------------------------------------ | ------------------------------- | -------- |
 | `collection`   | Name of the collection.                                       | String                          | True     |
 | `field_name`   | Name of the field to build index on.                          | String                          | True     |
-| `index_params` | Milvus Connection used to create the collection.             | Dict                            | True     |
+| `index_params` | Parameters of the index to build.             | Dict                            | True     |
 
 
 ## Return
