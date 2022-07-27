@@ -12,7 +12,7 @@ delete(expr, timeout=None, **kwargs)
 
 | Parameter         | Description                                                  | Type                            | Required |
 | ----------------- | ------------------------------------------------------------ | ------------------------------- | -------- |
-| `expr`            | Boolean expression that specifies the primary keys of the entities to delete | String          | True     |
+| `expr`            | Boolean expression that specifies the primary keys of the entities to delete. | String          | True     |
 | `timeout`         | An optional duration of time in seconds to allow for the RPC. If it is set to None, the client keeps waiting until the server responds or error occurs.                                 | Float                           | False    |
 
 ## Return
@@ -23,7 +23,7 @@ A MutationResult object.
 
 | Property        | Description                                                  | Type                            |
 | --------------- | ------------------------------------------------------------ | ------------------------------- |
-| `delete_count`  | Number of the entities to delete                             | Integer                         |
+| `delete_count`  | Number of the entities to delete.                             | Integer                         |
 
 ## Raises
 

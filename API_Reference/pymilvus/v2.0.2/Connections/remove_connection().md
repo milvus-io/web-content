@@ -12,7 +12,7 @@ remove_connection(alias)
 
 | Parameter    | Description                                                  | Type                            | Required |
 | ------------ | ------------------------------------------------------------ | ------------------------------- | -------- |
-| `alias`      | Alias of the connection to remove                            | String                          | True     |
+| `alias`      | Alias of the connection to remove.                            | String                          | True     |
 
 ## Return
 
@@ -20,7 +20,7 @@ No return.
 
 ## Raises
 
-
+None.
 
 ## Example
 

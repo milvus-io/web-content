@@ -12,10 +12,10 @@ wait_for_loading_complete(collection_name, partition_names=None, timeout=None, u
 
 | Parameter         | Description                                                  | Type                            | Required |
 | ----------------- | ------------------------------------------------------------ | ------------------------------- | -------- |
-| `collection_name` | Name of the collection to load                               | String                          | True     |
-| `partition_names` | Name of the partition(s) to load                             | list[String]                    | False    |
+| `collection_name` | Name of the collection to load.                               | String                          | True     |
+| `partition_names` | Name of the partition(s) to load.                             | list[String]                    | False    |
 | `timeout`         | An optional duration of time in seconds to allow for the RPC. If it is set to None, the client keeps waiting until the server responds or error occurs.                                               | Float                           | False    |
-| `using`           | Milvus Connection used to load the collection                | String                          | False    |
+| `using`           | Milvus connection used to load the collection.                | String                          | False    |
 
 ## Return
 

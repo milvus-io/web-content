@@ -12,7 +12,7 @@ insert(data, timeout=None, **kwargs)
 
 | Parameter         | Description                                                  | Type                            | Required |
 | ----------------- | ------------------------------------------------------------ | ------------------------------- | -------- |
-| `data`            | Data to insert                                               | list-like(list, tuple)          | True     |
+| `data`            | Data to insert.                                              | list-like(list, tuple)          | True     |
 | `timeout`         | An optional duration of time in seconds to allow for the RPC. If it is set to None, the client keeps waiting until the server responds or error occurs.                                               | Float                           | False    |
 
 ## Return
@@ -23,8 +23,8 @@ A MutationResult object.
 
 | Property        | Description                                                  | Type                            |
 | --------------- | ------------------------------------------------------------ | ------------------------------- |
-| `insert_count`  | Number of the inserted entities                              | Integer                         |
-| `primary_keys`  | List of the primary keys of the inserted entities            | list[String]                    |
+| `insert_count`  | Number of the inserted entities.                              | Integer                         |
+| `primary_keys`  | List of the primary keys of the inserted entities.            | list[String]                    |
 
 ## Raises
 
