@@ -1,6 +1,6 @@
 # create_partition()
 
-This method creates a partition with the specified name.
+This method creates a partition with a specified name.
 
 ## Invocation
 

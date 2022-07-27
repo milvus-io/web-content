@@ -1,6 +1,6 @@
 # create_index()
 
-This method creates an index with the specified index parameter.
+This method creates an index with specified index parameters.
 
 ## Invocation
 
