@@ -17,7 +17,7 @@ query(expr, output_fields=None, timeout=None, **kwargs)
 | `timeout`         | An optional duration of time in seconds to allow for the RPC. If it is set to None, the client keeps waiting until the server responds or error occurs.                                                | Float              | False    |
 | `kwargs`: `consistency_level`|Consistency level used in the search. | String/Integer              | False    |
 | `kwargs`: `guarantee_timestamp`| Milvus searches on the data view before this timestamp when it is provided. Otherwise, Milvus searches on the most updated data view. This parameter can only be used in the `Customized` level of consistency.  | Integer              | False    |
-| `kwargs`: `graceful_time`| PyMilvus will use current timestamp minus the `graceful_time` as the `guarantee_timestamp` for search. It can only be used in `Bounded` level of consistency. | Integer              | False    |
+| `kwargs`: `graceful_time`| Milvus will use current timestamp minus the `graceful_time` as the `guarantee_timestamp` for search. This parameter can only be used in the `Bounded` level of consistency. | Integer              | False    |
 | `kwargs`: `travel_timestamp`| Timestamp that is used for Time Travel. Users can specify a timestamp in a search to get results based on a data view at a specified point in time.| Integer              | False    |
 
 
