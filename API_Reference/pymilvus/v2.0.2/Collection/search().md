@@ -24,7 +24,7 @@ search(data, anns_field, param, limit, expr=None, partition_names=None, output_f
 | `kwargs`: `_async`| Boolean value to indicate if to invoke this method asynchronously. | Bool   | False    |
 | `kwargs`: `_callback`| Function that will be invoked after server responds successfully. It takes effect only if `_async` is set to `True`. | Function   | False    |
 | `kwargs`: `consistency_level`| Consistency level used in the search. | String/Integer   | False    |
-| `kwargs`: `guarantee_timestamp`| Milvus searches on the data view before this timestamp when it is provided. Otherwise, it searches the most updated data view. It can only be used in `Customized` level of consistency. | Integer   | False    |
+| `kwargs`: `guarantee_timestamp`| Milvus searches on the data view before this timestamp when it is provided. Otherwise, Milvus searches on the most updated data view. This parameter can only be used in the `Customized` level of consistency. | Integer   | False    |
 | `kwargs`: `graceful_time`| PyMilvus will use current timestamp minus the `graceful_time` as the `guarantee_timestamp` for search. It can only be used in `Bounded` level of consistency. | Integer   | False    |
 | `kwargs`: `travel_timestamp`| Timestamp that is used for Time Travel. Users can specify a timestamp in a search to get results based on a data view at a specified point in time. | Integer   | False    |
 
