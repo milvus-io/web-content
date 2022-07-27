@@ -12,7 +12,7 @@ disconnect(alias)
 
 | Parameter    | Description                                                  | Type                            | Required |
 | ------------ | ------------------------------------------------------------ | ------------------------------- | -------- |
-| `alias`      | Alias of the connection to disconnect from                   | String                          | True     |
+| `alias`      | Alias of the connection to disconnect from.                   | String                          | True     |
 
 ## Return
 
@@ -20,7 +20,7 @@ No return.
 
 ## Raises
 
-
+None.
 
 ## Example
 
