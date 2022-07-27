@@ -15,7 +15,7 @@ search(data, anns_field, param, limit, expr=None, partition_names=None, output_f
 | `data`            | Data to search with.                                          | list[list[Float]]  | True     |
 | `anns_field`      | Name of the vector field to search on.                        | String             | True     |
 | `param`           | Specific search parameter(s) of the index on the vector field. | Dict               | True     |
-| `limit`           | Number of nearest records to return.                          | Integer            | True     |
+| `limit`           | Number of the nearest records to return.                          | Integer            | True     |
 | `expr`            | Boolean expression to filter the data.                        | String             | False    |
 | `partition_names` | List of names of the partitions to search on. </br>All partitions will be searched if it is left empty.                         | list[String]            | False    |
 | `output_fields`   | List of names of fields to output.                             | list[String]       | False    |
