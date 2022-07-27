@@ -16,7 +16,7 @@ We recommend reading [Milvus monitoring framework overview](monitor_overview.md)
 
 <details><summary>Proxy</summary>
 
-  | Panel    | Panel description  | PromQL (Prometheus query language)  | The Milvus metrics used  | Milvus metrics description  |
+| Panel    | Panel description  | PromQL (Prometheus query language)  | The Milvus metrics used  | Milvus metrics description  |
 |---|---|---|---|---|
 | Search Vector Count Rate  | The average number of vectors queried per minute by each proxy within the past two minutes.  | ```  sum(increase(milvus_proxy_search_vectors_count{app_kubernetes_io_instance=~"$instance", app_kubernetes_io_name="$app_name", namespace="$namespace"}[2m])/2) by (pod, node_id)  ```  | `milvus_proxy_search_vectors_count`    | The accumulated number of vectors queried.  |
 | Insert Vector Count Rate  | The average number of vectors inserted per minute by each proxy within the past two minutes.  | ```  sum(increase(milvus_proxy_insert_vectors_count{app_kubernetes_io_instance=~"$instance", app_kubernetes_io_name="$app_name", namespace="$namespace"}[2m])/2) by (pod, node_id)  ```  | `milvus_proxy_insert_vectors_count`    | The accumulated number of vectors inserted.  |
@@ -40,6 +40,7 @@ We recommend reading [Milvus monitoring framework overview](monitor_overview.md)
 | DDL Request Latency  | The 99th percentile of the latency of successfully receiving DDL requests by each proxy in the past two minutes.   | ```  histogram_quantile(0.99, sum by (le, function_name, pod, node_id) (rate(milvus_proxy_ddl_req_latency_bucket{app_kubernetes_io_instance=~"$instance", app_kubernetes_io_name="$app_name", namespace="$namespace"}[2m])))  ```  | `milvus_proxy_ddl_req_latency`  | The latency of successful DDL requests.    |
 | Insert/Delete Request Byte Rate  | The number of bytes of insert and delete requests received per minute by proxy within the past two minutes.  | ``` sum(increase(milvus_proxy_receive_bytes_count{app_kubernetes_io_instance=~"$instance", app_kubernetes_io_name="$app_name", namespace="$namespace"}[2m])/2) by(pod, node_id) ```  | `milvus_proxy_receive_bytes_count` <br>  | The count of insert and delete requests.  |
 | Send Byte Rate  | The number of bytes per minute sent back to the client while each proxy is responding to search and query requests within the past two minutes.  | ```sum(increase(milvus_proxy_send_bytes_count{app_kubernetes_io_instance=~"$instance", app_kubernetes_io_name="$app_name", namespace="$namespace"}[2m])/2) by(pod, node_id) ```  | `milvus_proxy_send_bytes_count`  | The number of bytes sent back to the client while each proxy  is responding to search and query requests.  |
+
 </details>
 
 
