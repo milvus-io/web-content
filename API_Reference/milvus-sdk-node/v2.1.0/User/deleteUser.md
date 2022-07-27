@@ -1,6 +1,6 @@
 # deleteUser()
 
-This method delete a user in Milvus
+This method deletes a user in Milvus.
 
 ## Invocation
 
@@ -16,7 +16,7 @@ new milvusClient(MILUVS_ADDRESS).userManager.deleteUser({
 
 | Parameter | Description                        | Type   | Required |
 | --------- | ---------------------------------- | ------ | -------- |
-| username  | The username you created in Mivlus | String | True     |
+| username  | The username created in Milvus     | String | True     |
 
 ## Example
 
