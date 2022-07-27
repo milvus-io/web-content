@@ -18,6 +18,6 @@ A Hits object.
 | -------------------- | ---------------------------------------------------------------------------------------------------------- |
 | `iter(self)`         | Iterate the Hits object. Each iteration returns a Hit which represent a record corresponding to the query. |
 | `self[item]`         | Return the kth Hit corresponding to the query.                                                              |
-| `len(self)`          | Return the number of hit record.                                                                            |
+| `len(self)`          | Return the number of Hit record.                                                                            |
 | `ids`                | Return the primary keys of all search results.                                                              |
-| `distances`          | Return the distances of all hit record.                                                                     |
+| `distances`          | Return the distances of all Hit records.                                                                     |
