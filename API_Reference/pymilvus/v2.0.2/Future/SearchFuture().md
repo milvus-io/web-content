@@ -17,6 +17,6 @@ A SearchFuture object.
 | Property             | Description                                                  |
 | -------------------- | ------------------------------------------------------------ |
 | `cancel()`           | Cancel the search request.                                    |
-| `done()`             | Wait until search request done.                               |
+| `done()`             | Wait until the search request is completed.                               |
 | `result(**kwargs)`   | Return the search result. It is a synchronous interface, and will wait until server respond or timeout occurs (if specified).                                     |
 
