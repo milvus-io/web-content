@@ -14,7 +14,7 @@ The time unit in this topic is millisecond. And "99th percentile" in this topic 
 We recommend reading [Milvus monitoring framework overview](monitor_overview.md) to understand Prometheus metrics first.
 
 
-<details><summary><h2>Proxy</h2></summary>
+<details><summary>Proxy</summary>
 
   | Panel    | Panel description  | PromQL (Prometheus query language)  | The Milvus metrics used  | Milvus metrics description  |
 |---|---|---|---|---|
@@ -43,7 +43,7 @@ We recommend reading [Milvus monitoring framework overview](monitor_overview.md)
 </details>
 
 
-<details><summary><h2> Root coordinator</h2></summary>
+<details><summary>Root coordinator</summary>
   
   
 | Panel  | Panel description  | PromQL (Prometheus query language)  | The Milvus metrics used  | Milvus metrics description  |
@@ -64,7 +64,7 @@ We recommend reading [Milvus monitoring framework overview](monitor_overview.md)
   
 </details>
 
-<details><summary><h2>Query coordinator</h2></summary>
+<details><summary>Query coordinator</summary>
   
   | Panel  | Panel description  | PromQL (Prometheus query language)  | The Milvus metrics used  | Milvus metrics description  |
 |---|---|---|---|---|
@@ -82,7 +82,7 @@ We recommend reading [Milvus monitoring framework overview](monitor_overview.md)
 </details>
 
 
-<details><summary><h2>Query node</h2></summary>
+<details><summary>Query node</summary>
   
   | Panel  | Panel description  | PromQL (Prometheus query language)  | The Milvus metrics used  | Milvus metrics description  |
 |---|---|---|---|---|
@@ -115,7 +115,7 @@ We recommend reading [Milvus monitoring framework overview](monitor_overview.md)
 </details>
 
 
-<details><summary><h2>Data coordinator</h2></summary>
+<details><summary>Data coordinator</summary>
   
   | Panel  | Panel description  | PromQL (Prometheus query language)  | The Milvus metrics used  | Milvus metrics description  |
 |---|---|---|---|---|
@@ -128,7 +128,7 @@ We recommend reading [Milvus monitoring framework overview](monitor_overview.md)
   
 </details>
 
-<details><summary><h2>Data node</h2></summary>
+<details><summary>Data node</summary>
   
   | Panel    | Panel description  | PromQL (Prometheus query language)  | The Milvus metrics used  | Milvus metrics description  |
 |---|---|---|---|---|
@@ -148,7 +148,7 @@ We recommend reading [Milvus monitoring framework overview](monitor_overview.md)
   
 </details>
 
-<details><summary><h2>Index coordinator</h2></summary>
+<details><summary>Index coordinator</summary>
   
   
 | Panel  | Panel description  | PromQL (Prometheus query language)  | The Milvus metrics used  | Milvus metrics description  |
@@ -159,7 +159,7 @@ We recommend reading [Milvus monitoring framework overview](monitor_overview.md)
   
 </details>
 
-<details><summary><h2>Index node</h2></summary>
+<details><summary>Index node</summary>
   
   | Panel  | Panel description  | PromQL (Prometheus query language)  | The Milvus metrics used  | Milvus metrics description  |
 |---|---|---|---|---|
