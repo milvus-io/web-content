@@ -12,11 +12,11 @@ calc_distance(vectors_left, vectors_right, params=None, timeout=None, using='def
 
 | Parameter         | Description                                                  | Type                            | Required |
 | ----------------- | ------------------------------------------------------------ | ------------------------------- | -------- |
-| `vectors_left`    | Vectors on the left to the operator                          | Dict                            | True     |
-| `vectors_right`   | Vectors on the right to the operator                         | Dict                            | True     |
-| `params`          | Parameters used for calculation. Key-value pair parameters: Key: "metric_type"/"metric"; Value: "L2"/"IP"/"HAMMING"/"TANIMOTO", default is "L2". Key: "sqrt"; Value: `true` or `false`, default is false - only for "L2" distance. Key: "dim"; Value: Integer - set this value if dimension is not a multiple of 8, otherwise the dimension will be calculated by list length - only for "HAMMING" and "TANIMOTO".                                                                        | Dict                            | True     |
+| `vectors_left`    | Vectors on the left of the operator.                          | Dict                            | True     |
+| `vectors_right`   | Vectors on the right of the operator.                         | Dict                            | True     |
+| `params`          | Parameters used for calculation. </br>Key-value pair parameters: </br>Key: "metric_type"/"metric"; Value: "L2"/"IP"/"HAMMING"/"TANIMOTO", default is "L2". </br>Key: "sqrt"; Value: `true` or `false`, default is false - only for "L2" distance. </br>Key: "dim"; Value: Integer - set this value if dimension is not a multiple of 8, otherwise the dimension will be calculated by list length - only for "HAMMING" and "TANIMOTO".                                                                        | Dict                            | True     |
 | `timeout`         | An optional duration of time in seconds to allow for the RPC. If it is set to None, the client keeps waiting until the server responds or error occurs.                                               | Float                           | False    |
-| `using`           | Milvus Connection used to drop the collection                | String                          | False    |
+| `using`           | Milvus connection used to drop the collection.                | String                          | False    |
 
 ### Vector example
 
