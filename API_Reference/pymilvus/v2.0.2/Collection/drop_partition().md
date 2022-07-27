@@ -12,7 +12,7 @@ drop_partition(partition_name, timeout=None, **kwargs)
 
 | Parameter         | Description                                                  | Type                            | Required |
 | ----------------- | ------------------------------------------------------------ | ------------------------------- | -------- |
-| `partition_name`  | Name of the partition to drop                                | String                          | True     |
+| `partition_name`  | Name of the partition to drop.                               | String                          | True     |
 | `timeout`         | An optional duration of time in seconds to allow for the RPC. If it is set to None, the client keeps waiting until the server responds or error occurs.                                               | Float                           | False    |
 
 

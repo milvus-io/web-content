@@ -1,6 +1,6 @@
 # Collection()
 
-This is the constructor method to create a collection with a specified schema or to get an existing collection with the name.
+This is the constructor method to create a collection with the specified schema or to get an existing collection with the name.
 
 ## Invocation
 

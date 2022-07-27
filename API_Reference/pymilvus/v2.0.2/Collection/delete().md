@@ -1,6 +1,6 @@
 # delete()
 
-This method deletes entities from a specified collection.
+This method deletes entities from the specified collection.
 
 ## Invocation
 
