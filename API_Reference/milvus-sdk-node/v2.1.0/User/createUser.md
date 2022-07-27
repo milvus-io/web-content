@@ -1,6 +1,6 @@
 # createUser()
 
-This method creates a user in Milvus
+This method creates a user in Milvus.
 
 ## Invocation
 
@@ -15,10 +15,10 @@ new milvusClient(MILUVS_ADDRESS).userManager.createUser({
 
 ### CreateUserReq
 
-| Parameter | Description                                | Type   | Required |
-| --------- | ------------------------------------------ | ------ | -------- |
-| username  | The username of user can log in Mivlus     | String | True     |
-| password  | The username of password can log in Mivlus | String | True     |
+| Parameter | Description                              | Type   | Required |
+| --------- | -----------------------------------------| ------ | -------- |
+| username  | The username used to log into Milvus     | String | True     |
+| password  | The password used to log into Milvus.    | String | True     |
 
 ## Example
 
