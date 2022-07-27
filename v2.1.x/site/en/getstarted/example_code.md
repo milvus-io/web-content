@@ -22,14 +22,6 @@ Through running the example code we provided, you will have a primary understand
 - [PyMilvus 2.1.0](install-pymilvus.md)
 
 
-## Install and run embedded Milvus
-
-Run the following command to install and run embedded Milvus. Note that you should not use embedded Milvus in production environment.
-
-```
-docker run --name=milvus -p19530:19530 milvusdb/milvus:v2.0.2 milvus run embedded
-```
-
 ## Download example code
 
 [Download](https://raw.githubusercontent.com/milvus-io/pymilvus/v2.1.0/examples/hello_milvus.py) `hello_milvus.py` directly or with the following command.
