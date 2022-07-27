@@ -15,7 +15,7 @@ alter_alias(collection_name, alias, timeout=None, using='default')
 | `collection_name` | Name of the collection to alter alias to.                     | String                          | True     |
 | `alias`           | Alias to alter.                                               | String                          | True     |
 | `timeout`         | An optional duration of time in seconds to allow for the RPC. If it is set to None, the client keeps waiting until the server responds or error occurs.                                               | Float                           | False    |
-| `using`           | Milvus connection used to check the segments.                 | String                          | False    |
+| `using`           | Milvus connection used to alter the alias.                 | String                          | False    |
 
 
 ## Return
