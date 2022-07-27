@@ -1,12 +1,15 @@
 # listUsers()
 
-Show all user informations in Milvus
+This method lists all users in Milvus.
 
 ## Invocation
 
 ```javascript
 new milvusClient(MILUVS_ADDRESS).userManager.listUsers();
 ```
+
+## Parameters
+None.
 
 ## Example
 
