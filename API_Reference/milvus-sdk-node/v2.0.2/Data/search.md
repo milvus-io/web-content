@@ -26,7 +26,7 @@ new milvusClient(MILUVS_ADDRESS).dataManager.search(SearchReq);
 | topk          | Search result counts | String      | False    |
 | metric_type   | Metric type          | MetricTypes | False    |
 | params        | Special parameters   | SearchParam | True     |
-| round_decimal | Special parameters   | Number      | False     |
+| round_decimal | Special parameters   | Number      | False    |
 
 #### MetricTypes(string)
 | Value          | Description        |
