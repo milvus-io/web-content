@@ -8,13 +8,6 @@ Show all user informations in Milvus
 new milvusClient(MILUVS_ADDRESS).userManager.listUsers();
 ```
 
-## Parameters
-
-### ListUserReq
-
-| Parameter | Description | Type | Required |
-| --------- | ----------- | ---- | -------- |
-
 ## Example
 
 ```javascript

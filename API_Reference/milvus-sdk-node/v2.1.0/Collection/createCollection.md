@@ -32,20 +32,20 @@ new milvusClient(MILUVS_ADDRESS).collectionManager.createCollection(
 
 #### DataType
 
-| Value | Description   |
-| ----- | ------------- |
-| 0     | None          |
-| 1     | Bool          |
-| 2     | Int8          |
-| 3     | Int16         |
-| 4     | Int32         |
-| 5     | Int64         |
-| 10    | Float         |
-| 11    | Double        |
-| 20    | String        |
-| 21    | Varchar       |
-| 100   | Binary vector |
-| 101   | Float vector  |
+| Value | Description               |
+| ----- | ------------------------- |
+| 0     | None                      |
+| 1     | Bool                      |
+| 2     | Int8                      |
+| 3     | Int16                     |
+| 4     | Int32                     |
+| 5     | Int64                     |
+| 10    | Float                     |
+| 11    | Double                    |
+| 20    | String(Not supported yet) |
+| 21    | Varchar                   |
+| 100   | Binary vector             |
+| 101   | Float vector              |
 
 ## Example
 
