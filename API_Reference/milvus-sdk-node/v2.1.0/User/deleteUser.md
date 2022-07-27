@@ -16,7 +16,7 @@ new milvusClient(MILUVS_ADDRESS).userManager.deleteUser({
 
 | Parameter | Description                        | Type   | Required |
 | --------- | ---------------------------------- | ------ | -------- |
-| username  | The username created in Milvus     | String | True     |
+| username  | The existing username in Milvus to delete    | String | True     |
 
 ## Example
 
