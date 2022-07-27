@@ -12,9 +12,9 @@ mkts_from_hybridts(hybridts, milliseconds=0.0, delta=None)
 
 | Parameter       | Description                                    | Type               | Required |
 | --------------- | ---------------------------------------------- | ------------------ | -------- |
-| `hybridts`      | The original hybrid timestamp                  | Non-negative integer range from 0 to 18446744073709551615                                                                    | True     |
-| `milliseconds`  | Incremental time interval. Unit: milliseconds  | Float              | False    |
-| `delta`         | A duration indicates the difference between two pieces of date, time, or datetime instances to microsecond resolution                                                         | datetime.timedelta | False    |
+| `hybridts`      | The original hybrid timestamp.                  | Non-negative integer range from 0 to 18446744073709551615                                                                    | True     |
+| `milliseconds`  | Incremental time interval. Unit: milliseconds.  | Float              | False    |
+| `delta`         | A duration indicates the difference between two pieces of date, time, or datetime instances to microsecond. resolution                                                         | datetime.timedelta | False    |
 
 ## Return
 
