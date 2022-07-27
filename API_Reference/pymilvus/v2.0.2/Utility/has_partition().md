@@ -14,7 +14,7 @@ has_partition(collection_name, partition_name, using='default')
 | ----------------- | ------------------------------------------------------------ | ------------------------------- | -------- |
 | `collection_name` | Name of the collection to check the partition in.                | String                          | True     |
 | `partition_name`  | Name of the partition to check.                               | String                          | True     |
-| `using`           | Milvus connection used to check the collection.               | String                          | False    |
+| `using`           | Milvus connection used to check the partition.               | String                          | False    |
 
 ## Return
 
