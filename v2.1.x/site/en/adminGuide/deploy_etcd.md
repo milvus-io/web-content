@@ -1,11 +1,11 @@
 ---
 id: deploy_etcd.md
-title: Configure Meta Storage with Docker Compose/Helm
+title: Configure Meta Storage with Docker Compose or Helm
 related_key: S3, storage
 summary: Learn how to configure meta storage for Milvus with Docker Compose/Helm.
 ---
 
-# Configure Meta Storage with Docker Compose/Helm
+# Configure Meta Storage with Docker Compose or Helm
 
 Milvus uses etcd for storing metadata. This topic introduces how to configure etcd with Docker Compose or Helm.
 

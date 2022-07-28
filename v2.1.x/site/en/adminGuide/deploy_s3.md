@@ -1,11 +1,11 @@
 ---
 id: deploy_s3.md
-title: Configure Object Storage with Docker Compose/Helm
+title: Configure Object Storage with Docker Compose or Helm
 related_key: S3, storage
-summary: Learn how to set up S3 storage for Milvus with Docker Compose/Helm.
+summary: Learn how to set up S3 storage for Milvus with Docker Compose or Helm.
 ---
 
-# Configure Object Storage with Docker Compose/Helm
+# Configure Object Storage with Docker Compose or Helm
 
 Milvus uses MinIO for object storage by default, but it also supports using [Amazon Simple Storage Service (S3)](https://aws.amazon.com/s3/) as persistent object storage for log and index files. This topic describes how to configure S3 for Milvus. You can skip this topic if you are satisfied with MinIO.
 

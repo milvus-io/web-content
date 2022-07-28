@@ -423,7 +423,7 @@
     },
     {
       "id": "docker_helm_dependencies",
-      "title": "With Docker/Helm",
+      "title": "With Docker or Helm",
       "label1": "admin_guide",
       "label2": "manage_dependencies",
       "label3": "",

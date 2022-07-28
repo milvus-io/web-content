@@ -1,11 +1,11 @@
 ---
 id: deploy_pulsar.md
-title: Configure Message Storage with Docker Compose/Helm
+title: Configure Message Storage with Docker Compose or Helm
 related_key: Pulsar, storage
-summary: Learn how to configure message storage with Docker Compose/Helm.
+summary: Learn how to configure message storage with Docker Compose or Helm.
 ---
 
-# Configure Message Storage with Docker Compose/Helm
+# Configure Message Storage with Docker Compose or Helm
 
 Milvus uses Pulsar or Kafka for managing logs of recent changes, outputting stream logs, and providing log subscriptions. Pulsar is the default message storage system. This topic introduces how to configure message storage with Docker Compose or Helm.
 
