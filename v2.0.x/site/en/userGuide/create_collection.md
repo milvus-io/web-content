@@ -195,7 +195,7 @@ create collection -c book -f book_id:INT64 -f word_count:INT64 -f book_intro:FLO
         </tr>
         <tr>
             <td><code>auto_id</code> (Mandatory for primary key field)</td>
-            <td>Switch to enable or disable Automatic ID (primary key) allocation.</td>
+            <td>Switch to enable or disable automatic ID (primary key) allocation.</td>
             <td><code>True</code> or <code>False</code></td>
         </tr>
         <tr>
