@@ -1,18 +1,32 @@
 # MilvusClient()
-A class to initialize a milvus client instance, once connected, you can perform operations from this client.
+
+This is a class to initialize a Milvus client instance. Once connected to the Milvus instance, you can perform operations from this client.
 
 # Invocation
+
 ```javascript
 const milvusClient = new MilvusClient(MILUVS_ADDRESS);
 ```
 
 # Parameter
-| Parameter      | Description       | type   | example           |
-| -------------- | ----------------- | ------ | ----------------- |
-| MILUVS_ADDRESS | milvus ip address | String | 'localhost:19530' |
+
+| Parameter | Description                       |Type    | Required | Example             | 
+| --------- | --------------------------------- |------- | -------- | ------------------- |
+| address   | The Milvus IP address             |String  | True     | '192.168.0.1:19530' |
+| ssl       | SSL connection. It is false by default. |Boolean | False    | false               |
+| username  | The username used to connect to Milvus                 |String  | False    | milvus              |
+| address   | The password used to connect to Milvus                  |String  | False    | milvus              | 
 
 # Example
+
 ```javascript
-const milvusAddress = `192.168.0.1`;
+const milvusAddress = `192.168.0.1:19530`;
 const milvusClient = new MilvusClien(MILUVS_ADDRESS);
+// if you have a user, username and password both is milvus, you can
+const milvusClient2 = new MilvusClien(
+  MILUVS_ADDRESS,
+  false,
+  "milvus",
+  "milvus"
+);
 ```
