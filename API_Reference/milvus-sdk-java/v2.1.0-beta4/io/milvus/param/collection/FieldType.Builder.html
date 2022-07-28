@@ -1,0 +1,263 @@
+
+<h1 class="title">Class FieldType.Builder</h1>
+<div class="contentContainer">
+<ul class="inheritance">
+<li>java.lang.Object</li>
+<li>
+<ul class="inheritance">
+<li>io.milvus.param.collection.FieldType.Builder</li>
+</ul>
+</li>
+</ul>
+<div class="description">
+<ul class="blockList">
+<li class="blockList">
+<dl>
+<dt>Enclosing class:</dt>
+<dd><a href="FieldType.html" title="class in io.milvus.param.collection">FieldType</a></dd>
+</dl>
+<hr>
+<pre><code>public static final class FieldType.Builder
+extends java.lang.Object</code></pre>
+<div class="block">Builder for <a href="FieldType.html" title="class in io.milvus.param.collection"><code>FieldType</code></a> class.</div>
+</li>
+</ul>
+</div>
+<div class="summary">
+<ul class="blockList">
+<li class="blockList">
+
+<section role="region">
+<ul class="blockList">
+<li class="blockList">
+<h3>Method Summary</h3>
+<table class="memberSummary">
+
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colSecond" scope="col">Method</th>
+<th class="colLast" scope="col">Description</th>
+</tr>
+<tr id="i0" class="altColor">
+<td class="colFirst"><code><a href="FieldType.Builder.html" title="class in io.milvus.param.collection">FieldType.Builder</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#addTypeParam(java.lang.String,java.lang.String)">addTypeParam</a></span>&#8203;(@NonNull java.lang.String&nbsp;key,
+            @NonNull java.lang.String&nbsp;value)</code></th>
+<td class="colLast">
+<div class="block">Adds a parameter pair for the field.</div>
+</td>
+</tr>
+<tr id="i1" class="rowColor">
+<td class="colFirst"><code><a href="FieldType.html" title="class in io.milvus.param.collection">FieldType</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#build()">build</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Verifies parameters and creates a new <a href="FieldType.html" title="class in io.milvus.param.collection"><code>FieldType</code></a> instance.</div>
+</td>
+</tr>
+<tr id="i2" class="altColor">
+<td class="colFirst"><code><a href="FieldType.Builder.html" title="class in io.milvus.param.collection">FieldType.Builder</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#withAutoID(boolean)">withAutoID</a></span>&#8203;(boolean&nbsp;autoID)</code></th>
+<td class="colLast">
+<div class="block">Enables auto-id function for the field.</div>
+</td>
+</tr>
+<tr id="i3" class="rowColor">
+<td class="colFirst"><code><a href="FieldType.Builder.html" title="class in io.milvus.param.collection">FieldType.Builder</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#withDataType(io.milvus.grpc.DataType)">withDataType</a></span>&#8203;(@NonNull io.milvus.grpc.DataType&nbsp;dataType)</code></th>
+<td class="colLast">
+<div class="block">Sets the data type for the field.</div>
+</td>
+</tr>
+<tr id="i4" class="altColor">
+<td class="colFirst"><code><a href="FieldType.Builder.html" title="class in io.milvus.param.collection">FieldType.Builder</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#withDescription(java.lang.String)">withDescription</a></span>&#8203;(@NonNull java.lang.String&nbsp;description)</code></th>
+<td class="colLast">
+<div class="block">Sets the field description.</div>
+</td>
+</tr>
+<tr id="i5" class="rowColor">
+<td class="colFirst"><code><a href="FieldType.Builder.html" title="class in io.milvus.param.collection">FieldType.Builder</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#withDimension(java.lang.Integer)">withDimension</a></span>&#8203;(@NonNull java.lang.Integer&nbsp;dimension)</code></th>
+<td class="colLast">
+<div class="block">Sets the dimension of a vector field.</div>
+</td>
+</tr>
+<tr id="i6" class="altColor">
+<td class="colFirst"><code><a href="FieldType.Builder.html" title="class in io.milvus.param.collection">FieldType.Builder</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#withName(java.lang.String)">withName</a></span>&#8203;(@NonNull java.lang.String&nbsp;name)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i7" class="rowColor">
+<td class="colFirst"><code><a href="FieldType.Builder.html" title="class in io.milvus.param.collection">FieldType.Builder</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#withPrimaryKey(boolean)">withPrimaryKey</a></span>&#8203;(boolean&nbsp;primaryKey)</code></th>
+<td class="colLast">
+<div class="block">Sets the field as the primary key field.</div>
+</td>
+</tr>
+<tr id="i8" class="altColor">
+<td class="colFirst"><code><a href="FieldType.Builder.html" title="class in io.milvus.param.collection">FieldType.Builder</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#withTypeParams(java.util.Map)">withTypeParams</a></span>&#8203;(@NonNull java.util.Map&lt;java.lang.String,&#8203;java.lang.String&gt;&nbsp;typeParams)</code></th>
+<td class="colLast">
+<div class="block">Sets more parameters for the field.</div>
+</td>
+</tr>
+</table>
+<ul class="blockList">
+<li class="blockList">
+<h3>Methods inherited from class&nbsp;java.lang.Object</h3>
+<code>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</code></li>
+</ul>
+</li>
+</ul>
+</section>
+</li>
+</ul>
+</div>
+<div class="details">
+<ul class="blockList">
+<li class="blockList">
+
+<section role="region">
+<ul class="blockList">
+<li class="blockList">
+<h3>Method Detail</h3>
+
+<ul class="blockList">
+<li class="blockList">
+<h4>withName</h4>
+<pre class="methodSignature"><code>public&nbsp;FieldType.Builder&nbsp;withName&#8203;(@NonNull
+                                  @NonNull java.lang.String&nbsp;name)</code></pre>
+</li>
+</ul>
+
+<ul class="blockList">
+<li class="blockList">
+<h4>withPrimaryKey</h4>
+<pre class="methodSignature"><code>public&nbsp;FieldType.Builder&nbsp;withPrimaryKey&#8203;(boolean&nbsp;primaryKey)</code></pre>
+<div class="block">Sets the field as the primary key field.
+ Note that the current release of Milvus only support <code>Long</code> data type as primary key.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>primaryKey</code> - true is primary key, false is not</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd><code>Builder</code></dd>
+</dl>
+</li>
+</ul>
+
+<ul class="blockList">
+<li class="blockList">
+<h4>withDescription</h4>
+<pre class="methodSignature"><code>public&nbsp;FieldType.Builder&nbsp;withDescription&#8203;(@NonNull
+                                         @NonNull java.lang.String&nbsp;description)</code></pre>
+<div class="block">Sets the field description. The description can be empty. The default is "".</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>description</code> - description of the field</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd><code>Builder</code></dd>
+</dl>
+</li>
+</ul>
+
+<ul class="blockList">
+<li class="blockList">
+<h4>withDataType</h4>
+<pre class="methodSignature"><code>public&nbsp;FieldType.Builder&nbsp;withDataType&#8203;(@NonNull
+                                      @NonNull io.milvus.grpc.DataType&nbsp;dataType)</code></pre>
+<div class="block">Sets the data type for the field.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>dataType</code> - data type of the field</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd><code>Builder</code></dd>
+</dl>
+</li>
+</ul>
+
+<ul class="blockList">
+<li class="blockList">
+<h4>addTypeParam</h4>
+<pre class="methodSignature"><code>public&nbsp;FieldType.Builder&nbsp;addTypeParam&#8203;(@NonNull
+                                      @NonNull java.lang.String&nbsp;key,
+                                      @NonNull
+                                      @NonNull java.lang.String&nbsp;value)</code></pre>
+<div class="block">Adds a parameter pair for the field.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>key</code> - parameter key</dd>
+<dd><code>value</code> - parameter value</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd><code>Builder</code></dd>
+</dl>
+</li>
+</ul>
+
+<ul class="blockList">
+<li class="blockList">
+<h4>withTypeParams</h4>
+<pre class="methodSignature"><code>public&nbsp;FieldType.Builder&nbsp;withTypeParams&#8203;(@NonNull
+                                        @NonNull java.util.Map&lt;java.lang.String,&#8203;java.lang.String&gt;&nbsp;typeParams)</code></pre>
+<div class="block">Sets more parameters for the field.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>typeParams</code> - parameters of the field</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd><code>Builder</code></dd>
+</dl>
+</li>
+</ul>
+
+<ul class="blockList">
+<li class="blockList">
+<h4>withDimension</h4>
+<pre class="methodSignature"><code>public&nbsp;FieldType.Builder&nbsp;withDimension&#8203;(@NonNull
+                                       @NonNull java.lang.Integer&nbsp;dimension)</code></pre>
+<div class="block">Sets the dimension of a vector field. Dimension value must be greater than zero.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>dimension</code> - dimension of the field</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd><code>Builder</code></dd>
+</dl>
+</li>
+</ul>
+
+<ul class="blockList">
+<li class="blockList">
+<h4>withAutoID</h4>
+<pre class="methodSignature"><code>public&nbsp;FieldType.Builder&nbsp;withAutoID&#8203;(boolean&nbsp;autoID)</code></pre>
+<div class="block">Enables auto-id function for the field. Note that the auto-id function can only be enabled on primary key field.
+ If auto-id function is enabled, Milvus will automatically generate unique ID for each entity,
+ thus you do not need to provide values for the primary key field when inserting.
+
+ If auto-id is disabled, you need to provide values for the primary key field when inserting.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>autoID</code> - true enable auto-id, false disable auto-id</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd><code>Builder</code></dd>
+</dl>
+</li>
+</ul>
+
+<ul class="blockListLast">
+<li class="blockList">
+<h4>build</h4>
+<pre class="methodSignature"><code>public&nbsp;FieldType&nbsp;build()
+                throws ParamException</code></pre>
+<div class="block">Verifies parameters and creates a new <a href="FieldType.html" title="class in io.milvus.param.collection"><code>FieldType</code></a> instance.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd><a href="FieldType.html" title="class in io.milvus.param.collection"><code>FieldType</code></a></dd>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code><a href="../../exception/ParamException.html" title="class in io.milvus.exception">ParamException</a></code></dd>
+</dl>
+</li>
+</ul>
+</li>
+</ul>
+</section>
+</li>
+</ul>
+</div>
+</div>
