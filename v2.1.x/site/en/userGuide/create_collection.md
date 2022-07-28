@@ -198,13 +198,13 @@ create collection -c book -f book_id:INT64 -f word_count:INT64 -f book_intro:FLO
         </tr>
         <tr>
             <td><code>auto_id</code> (Mandatory for primary key field)</td>
-            <td>Switch to enable or disable Automatic ID (primary key) allocation.</td>
+            <td>Switch to enable or disable automatic ID (primary key) allocation.</td>
             <td><code>True</code> or <code>False</code></td>
         </tr>
         <tr>
             <td><code>max_length_per_row</code> (Mandatory for VARCHAR field)</td>
             <td>Maximum length of strings allowed to be inserted.</td>
-            <td>[1, 65535]</td>
+            <td>[1, 65,535]</td>
         </tr>
         <tr>
             <td><code>dim</code> (Mandatory for vector field)</td>
