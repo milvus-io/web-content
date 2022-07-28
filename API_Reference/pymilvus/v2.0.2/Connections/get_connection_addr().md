@@ -12,15 +12,15 @@ get_connection_addr(alias)
 
 | Parameter    | Description                                                  | Type                            | Required |
 | ------------ | ------------------------------------------------------------ | ------------------------------- | -------- |
-| `alias`      | Alias of the connection to retrieve                          | String                          | True     |
+| `alias`      | Alias of the connection to retrieve.                          | String                          | True     |
 
 ## Return
 
-The configuration of the specified Milvus connection
+The configuration of the specified Milvus connection.
 
 ## Raises
 
-
+None.
 
 ## Example
 

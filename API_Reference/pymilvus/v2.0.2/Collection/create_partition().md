@@ -12,8 +12,8 @@ create_partition(partition_name, description="")
 
 | Parameter         | Description                                                  | Type                            | Required |
 | ----------------- | ------------------------------------------------------------ | ------------------------------- | -------- |
-| `partition_name`  | Name of the partition to create                              | String                          | True     |
-| `description`     | Description of the partition to create                       | String                          | False    |
+| `partition_name`  | Name of the partition to create.                              | String                          | True     |
+| `description`     | Description of the partition to create.                       | String                          | False    |
 
 ## Return
 

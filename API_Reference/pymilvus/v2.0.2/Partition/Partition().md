@@ -12,9 +12,9 @@ Partition(collection, name, description='', **kwargs)
 
 | Parameter    | Description                                                  | Type                            | Required |
 | ------------ | ------------------------------------------------------------ | ------------------------------- | -------- |
-| `collection` | Name of the collection                                       | String                          | True     |
-| `name`       | Name of the partition to create                              | String                          | True     |
-| `description`   | Description of the collection                             | String                          | False    |
+| `collection` | Name of the collection.                                       | String                          | True     |
+| `name`       | Name of the partition to create.                              | String                          | True     |
+| `description`   | Description of the collection.                             | String                          | False    |
 
 ## Return
 
@@ -24,10 +24,10 @@ A new partition object created with the specified name.
 
 | Property        | Description                                                  | Type                            |
 | --------------- | ------------------------------------------------------------ | ------------------------------- |
-| `name`          | Name of the partition                                        | String                          |
-| `description`   | Description of the collection                                | String                          |
-| `is_empty`      | Boolean value to indicate if the partition is empty          | Bool                            |
-| `num_entities`  | Number of entities in the partition                          | Integer                         |
+| `name`          | Name of the partition.                                        | String                          |
+| `description`   | Description of the collection.                               | String                          |
+| `is_empty`      | Boolean value to indicate if the partition is empty.          | Bool                            |
+| `num_entities`  | Number of entities in the partition.                          | Integer                         |
 
 
 ## Example

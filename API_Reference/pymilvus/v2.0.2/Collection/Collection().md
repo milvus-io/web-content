@@ -12,13 +12,11 @@ Collection(name, schema=None, using='default', shards_num=2, **kwargs)
 
 | Parameter    | Description                                                  | Type                            | Required |
 | ------------ | ------------------------------------------------------------ | ------------------------------- | -------- |
-| `name`       | Name of the collection                                       | String                          | True     |
-| `schema`     | Schema of the collection to create                           | class *schema.CollectionSchema* | False    |
-| `using`      | Milvus Connection used to create the collection              | String                          | False    |
+| `name`       | Name of the collection.                                      | String                          | True     |
+| `schema`     | Schema of the collection to create. A schema specifies the properties of a collection and the fields within. See [Schema](https://milvus.io/docs/v2.0.x/schema.md) for more information.                        | class *schema.CollectionSchema* | False    |
+| `using`      | Milvus connection used to create the collection.             | String                          | False    |
 | `shards_num` | Shard number of the collection to create. <br/>It corresponds to the number of data nodes used to insert data. | INT32   | False    |
-| `kwargs`: `consistency_level`    | <br/><ul><li>With which <a href="https://github.com/milvus-io/milvus/blob/master/docs/developer_guides/how-guarantee-ts-works.md">consistency level</a> to create the collection</li></ul> | String/Integer                  | False    |
-
-A schema specifies the properties of a collection and the fields within. See [Schema](https://milvus.io/docs/v2.0.x/schema.md) for more information.
+| `kwargs`: `consistency_level`    | <a href="https://github.com/milvus-io/milvus/blob/master/docs/developer_guides/how-guarantee-ts-works.md">Consistency level</a> used to create the collection. | String/Integer                  | False    |
 
 ## Return
 
@@ -28,14 +26,14 @@ A new collection object created with the specified schema or an existing collect
 
 | Property        | Description                                                  | Type                            |
 | --------------- | ------------------------------------------------------------ | ------------------------------- |
-| `name`          | Name of the collection                                       | String                          |
-| `schema`        | Schema of the collection                                     | class *schema.CollectionSchema* |
-| `description`   | Description of the collection                                | String                          |
-| `is_empty`      | Boolean value to indicate if the collection is empty         | Bool                            |
-| `num_entities`  | Number of entities in the collection                         | Integer                         |
-| `primary_field` | Schema of the primary field in the collection                | class *schema.FieldSchema*      |
-| `partitions`    | List of all partitions in the collection                     | list[String]                    |
-| `indexes`       | List of all indexes in the collection                        | list[String]                    |
+| `name`          | Name of the collection.                                      | String                          |
+| `schema`        | Schema of the collection.                                  | class *schema.CollectionSchema* |
+| `description`   | Description of the collection.                             | String                          |
+| `is_empty`      | Boolean value to indicate if the collection is empty.        | Bool                            |
+| `num_entities`  | Number of entities in the collection.                       | Integer                         |
+| `primary_field` | Schema of the primary field in the collection.               | class *schema.FieldSchema*      |
+| `partitions`    | List of all partitions in the collection.                  | list[String]                    |
+| `indexes`       | List of all indexes in the collection.                   | list[String]                    |
 
 ## Raises
 

@@ -13,8 +13,8 @@ add_connection(**kwargs)
 | Parameter    | Description                                                  | Type                            | Required |
 | ------------ | ------------------------------------------------------------ | ------------------------------- | -------- |
 | `kwargs`: `alias`    | Connection alias. | String          | True   |
-| `kwargs`: `host`    | IP address of the Milvus connection | String          | True   |
-| `kwargs`: `port`    | Port of the Milvus connection | Integer          | True   |
+| `kwargs`: `host`    | IP address of the Milvus connection. | String          | True   |
+| `kwargs`: `port`    | Port of the Milvus connection.| Integer          | True   |
 
 ## Return
 
@@ -22,7 +22,7 @@ No return.
 
 ## Raises
 
-
+None.
 
 ## Example
 

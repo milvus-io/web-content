@@ -12,9 +12,9 @@ load(partition_names=None, timeout=None, **kwargs)
 
 | Parameter         | Description                                                  | Type                            | Required |
 | ----------------- | ------------------------------------------------------------ | ------------------------------- | -------- |
-| `partition_names` | Name of the partition(s) to load                             | list[String]                    | False    |
+| `partition_names` | Name of the partition(s) to load.                             | list[String]                    | False    |
 | `timeout`         | An optional duration of time in seconds to allow for the RPC. If it is set to None, the client keeps waiting until the server responds or error occurs.                                 | Float                           | False    |
-| `kwargs`: `_async` | <br/><ul><li>Boolean value to indicate if to invoke asynchronously</li></ul> | Bool | False    |
+| `kwargs`: `_async` | Boolean value to indicate if to invoke this method asynchronously. | Bool | False    |
 
 ## Return
 

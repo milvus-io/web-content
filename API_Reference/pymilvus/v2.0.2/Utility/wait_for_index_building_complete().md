@@ -12,10 +12,10 @@ wait_for_index_building_complete(collection_name, index_name='', timeout=None, u
 
 | Parameter         | Description                                                  | Type                            | Required |
 | ----------------- | ------------------------------------------------------------ | ------------------------------- | -------- |
-| `collection_name` | Name of the collection to load                               | String                          | True     |
+| `collection_name` | Name of the collection to load.                               | String                          | True     |
 | `index_name`      | Name of the index to build. Default index will be checked if it is left blank. | String        | False    |
 | `timeout`         | An optional duration of time in seconds to allow for the RPC. If it is set to None, the client keeps waiting until the server responds or error occurs.                                               | Float                           | False    |
-| `using`           | Milvus Connection used to load the collection                | String                          | False    |
+| `using`           | Milvus connection used to load the collection.                | String                          | False    |
 
 ## Return
 

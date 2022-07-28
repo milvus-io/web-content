@@ -10,6 +10,7 @@ list_connections()
 
 ## Parameters
 
+None.
 
 ## Return
 
@@ -17,7 +18,7 @@ A list of names of all Milvus connections.
 
 ## Raises
 
-
+None.
 
 ## Example
 
