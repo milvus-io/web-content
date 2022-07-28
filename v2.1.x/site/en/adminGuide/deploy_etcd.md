@@ -19,7 +19,7 @@ To configure etcd with Docker Compose, provide your values for the `etcd` sectio
 etcd:
   endpoints:
     - localhost:2379
-  rootPath: by-dev # The root path where data is stored in etcd
+  rootPath: by-dev # The root path where data are stored in etcd
   metaSubPath: meta # metaRootPath = rootPath + '/' + metaSubPath
   kvSubPath: kv # kvRootPath = rootPath + '/' + kvSubPath
   log:

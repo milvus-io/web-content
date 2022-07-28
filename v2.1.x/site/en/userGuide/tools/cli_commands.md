@@ -549,8 +549,8 @@ import -c (text)[-p (text)][-t (float)] <file_path>
 
 | Option | Full name         | Description                                                                                                                                                                      |
 | :----- | :---------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| -c     | --collection-name | The name of the collection that the data is inserted into.                                                                                                                       |
-| -p     | --partition       | (Optional) The name of the partition that the data is inserted into. Not passing this partition option indicates choosing the "\_default" partition.                             |
+| -c     | --collection-name | The name of the collection that the data are inserted into.                                                                                                                       |
+| -p     | --partition       | (Optional) The name of the partition that the data are inserted into. Not passing this partition option indicates choosing the "\_default" partition.                             |
 | -t     | --timeout         | (Optional) The maximum allowed duration in seconds of an RPC call. Not passing this option indicates that the client keeps waiting until the server responds or an error occurs. |
 | --help | n/a               | Displays help for using the command.                                                                                                                                             |
 

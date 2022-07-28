@@ -69,7 +69,7 @@ The formula for Euclidean distance is as follows:
 
 where **a** = (a1, a2,..., an) and **b** = (b1, b2,..., bn) are two points in n-dimensional Euclidean space
 
-It's the most commonly used distance metric and is very useful when the data is continuous.
+It's the most commonly used distance metric and is very useful when the data are continuous.
 
 ### Inner product (IP)
 
