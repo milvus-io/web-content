@@ -6,7 +6,7 @@ summary: Learn how to upgrade Milvus.
 
 # Upgrade Milvus Using Helm Chart
 
-This topic describes how to upgrade Milvus 2.0 with Helm Chart using the example of upgrading from Milvus 2.0.0-RC7 to 2.0.0-RC8.
+This topic describes how to upgrade Milvus 2.x with Helm Chart using the example of upgrading from Milvus v2.0.2 to v2.1.0.
 
 <div class="alert note">
 Helm Chart does not support upgrading from Milvus 2.0 standalone to Milvus 2.0 cluster or vice versa. Milvus 2.0.0-RC7 is not compatible with earlier RC versions. Therefore, you cannot upgrade from prior versions to 2.0.0-RC7.
@@ -16,11 +16,11 @@ Helm Chart does not support upgrading from Milvus 2.0 standalone to Milvus 2.0 c
 
 ### Step 1. Check the Milvus version
 
-Run `$ helm list` to check your Milvus app version. You can see the `APP VERSION` is 2.0.0-rc7. 
+Run `$ helm list` to check your Milvus app version. You can see the `APP VERSION` is 2.0.2. 
 
 ```
 NAME              NAMESPACE        REVISION        UPDATED                                     STATUS          CHART               APP VERSION
-my-release        default          1               2021-11-08 17:12:44.678247 +0800 CST        deployed        milvus-2.2.4        2.0.0-rc.7
+my-release        default          1               2022-07-28 15:28:12.32068 +0800 CST          deployed        milvus-3.0.29        2.0.2
 ```
 
 ### Step 2. Check the running pods
@@ -36,20 +36,20 @@ my-release-minio-744dd9586f-qngzv               1/1     Running   0          84s
 
 ### Step 3. Check the image tag
 
-Check the image tag for the pod `my-release-milvus-standalone-75c599fffc-6rwlj`. You can see the release of your Milvus standalone is 2.0.0-RC7.
+Check the image tag for the pod `my-release-milvus-standalone-75c599fffc-6rwlj`. You can see the release of your Milvus standalone is v2.0.2.
 
 ```
 $ kubectl get pods my-release-milvus-standalone-75c599fffc-6rwlj -o=jsonpath='{$.spec.containers[0].image}'
 ```
 
 ```
-milvusdb/milvus:v2.0.0-rc7-20211011-d567b21
+milvusdb/milvus:v2.0.2
 ```
 
 
-### Step 4. Check available app versions
+### Step 4. Check new Milvus standalone versions
 
-Run the following commands to see all available app versions.
+Run the following commands to check new Milvus versions. You can see there are several new versions after v2.0.2. 
 
 ```
 $ helm repo update
@@ -58,33 +58,36 @@ $ helm search repo milvus --versions
 
 ```
 NAME                 CHART VERSION        APP VERSION               DESCRIPTION
-milvus/milvus        2.3.3                2.0.0-rc.8                Milvus is an open-source vector database built ...
-milvus/milvus        2.3.2                2.0.0-rc.8                Milvus is an open-source vector database built ...
-milvus/milvus        2.3.1                2.0.0-rc.8                Milvus is an open-source vector database built ...
-milvus/milvus        2.3.0                2.0.0-rc.8                Milvus is an open-source vector database built ...
-milvus/milvus        2.2.6                2.0.0-rc.7                Milvus is an open-source vector database built ...
-milvus/milvus        2.2.5                2.0.0-rc.7                Milvus is an open-source vector database built ...
-milvus/milvus        2.2.4                2.0.0-rc.7                Milvus is an open-source vector database built ...
-milvus/milvus        2.2.3                2.0.0-rc.7                Milvus is an open-source vector database built ...
-milvus/milvus        2.2.2                2.0.0-rc.7                Milvus is an open-source vector database built ...
-milvus/milvus        2.2.1                2.0.0-rc.6                Milvus is an open-source vector database built ...
-milvus/milvus        2.2.0                2.0.0-rc.6                Milvus is an open-source vector database built ...
+milvus/milvus        3.1.2                2.1.0                     Milvus is an open-source vector database built ...
+milvus/milvus        3.1.1                2.1.0                     Milvus is an open-source vector database built ...
+milvus/milvus        3.1.0                2.1.0                     Milvus is an open-source vector database built ...
+milvus/milvus        3.0.29               2.0.2                     Milvus is an open-source vector database built ...
+milvus/milvus        3.0.28               2.0.2                     Milvus is an open-source vector database built ...
+milvus/milvus        3.0.27               2.0.2                     Milvus is an open-source vector database built ...
+milvus/milvus        3.0.26               2.0.2                     Milvus is an open-source vector database built ...
+milvus/milvus        3.0.25               2.0.2                     Milvus is an open-source vector database built ...
+milvus/milvus        3.0.24               2.0.2                     Milvus is an open-source vector database built ...
+milvus/milvus        3.0.23               2.0.2                     Milvus is an open-source vector database built ...
+milvus/milvus        3.0.21               2.0.2                     Milvus is an open-source vector database built ...
+milvus/milvus        3.0.20               2.0.2                     Milvus is an open-source vector database built ...
+milvus/milvus        3.0.19               2.0.2                     Milvus is an open-source vector database built ...
+milvus/milvus        3.0.18               2.0.2                     Milvus is an open-source vector database built ...
 ```
 
 ### Step 5. Upgrade
 
-1. Run the following commands to upgrade your Milvus standalone from 2.0.0-RC7 to 2.0.0-RC8.
+1. Run the following commands to upgrade your Milvus standalone from  v2.0.2 to v2.1.0.
 
 ```
 $ helm repo update
 $ helm upgrade my-release milvus/milvus --set cluster.enabled=false --set etcd.replicaCount=1 --set minio.mode=standalone --set pulsar.enabled=false 
 ```
 
-2. Run `$ helm list` again to check your Milvus app version. You can see your Milvus standalone has been upgraded to 2.0.0-RC8.
+2. Run `$ helm list` again to check your Milvus app version. You can see your Milvus standalone has been upgraded to v2.1.0.
 
 ```
 NAME              NAMESPACE        REVISION        UPDATED                                     STATUS          CHART               APP VERSION
-my-release        default          2               2021-11-08 17:15:46.530627 +0800 CST        deployed        milvus-2.3.3        2.0.0-rc.8
+my-release        default          2               2022-07-28 15:40:18.22437 +0800 CST        deployed        milvus-3.1.2        2.1.0
 ```
 
 3. Run `$ kubectl get pods` to check the new pods. You can see the following output.
@@ -107,18 +110,18 @@ $ kubectl get pods my-release-milvus-standalone-6967454987-72r55 -o=jsonpath='{$
 ```
 
 ```
-milvusdb/milvus:v2.0.0-rc8-20211104-d1f4106
+milvusdb/milvus:v2.1.0
 ```
 
 ## Upgrade Milvus cluster
 
 ### Step 1. Check the Milvus version
 
-Run `$ helm list` to check your Milvus app version. You can see the `APP VERSION` is 2.0.0-rc7. 
+Run `$ helm list` to check your Milvus app version. You can see the `APP VERSION` is 2.0.2. 
 
 ```
 NAME              NAMESPACE        REVISION        UPDATED                                     STATUS          CHART               APP VERSION
-my-release        default          1               2021-11-08 17:21:13.511069 +0800 CST        deployed        milvus-2.2.4        2.0.0-rc.7
+my-release        default          1               2022-07-28 15:50:43.21188 +0800 CST          deployed        milvus-3.0.29        2.0.2
 ```
 
 ### Step 2. Check the running pods
@@ -156,19 +159,19 @@ my-release-pulsar-zookeeper-metadata-hw5xt        0/1     Completed   0         
 
 ### Step 3. Check the image tag
 
-Check the image tag for the pod `my-release-milvus-proxy-6664d564f9-pwqn9`. You can see the release of your Milvus cluster is 2.0.0-RC7.
+Check the image tag for the pod `my-release-milvus-proxy-6664d564f9-pwqn9`. You can see the release of your Milvus cluster is v2.0.2.
 
 ```
 $ kubectl get pods my-release-milvus-proxy-6664d564f9-pwqn9 -o=jsonpath='{$.spec.containers[0].image}'
 ```
 
 ```
-milvusdb/milvus:v2.0.0-rc7-20211011-d567b21
+milvusdb/milvus:v2.0.2
 ```
 
-### Step 4. Check available app versions
+### Step 4. Check new Milvus cluster versions
 
-Run the following commands to see all available app versions. 
+Run the following commands to check new Milvus versions. You can see there are several new versions after 2.0.2. 
 
 ```
 $ helm repo update
@@ -177,33 +180,36 @@ $ helm search repo milvus --versions
 
 ```
 NAME                 CHART VERSION        APP VERSION               DESCRIPTION
-milvus/milvus        2.3.3                2.0.0-rc.8                Milvus is an open-source vector database built ...
-milvus/milvus        2.3.2                2.0.0-rc.8                Milvus is an open-source vector database built ...
-milvus/milvus        2.3.1                2.0.0-rc.8                Milvus is an open-source vector database built ...
-milvus/milvus        2.3.0                2.0.0-rc.8                Milvus is an open-source vector database built ...
-milvus/milvus        2.2.6                2.0.0-rc.7                Milvus is an open-source vector database built ...
-milvus/milvus        2.2.5                2.0.0-rc.7                Milvus is an open-source vector database built ...
-milvus/milvus        2.2.4                2.0.0-rc.7                Milvus is an open-source vector database built ...
-milvus/milvus        2.2.3                2.0.0-rc.7                Milvus is an open-source vector database built ...
-milvus/milvus        2.2.2                2.0.0-rc.7                Milvus is an open-source vector database built ...
-milvus/milvus        2.2.1                2.0.0-rc.6                Milvus is an open-source vector database built ...
-milvus/milvus        2.2.0                2.0.0-rc.6                Milvus is an open-source vector database built ...
+milvus/milvus        3.1.2                2.1.0                     Milvus is an open-source vector database built ...
+milvus/milvus        3.1.1                2.1.0                     Milvus is an open-source vector database built ...
+milvus/milvus        3.1.0                2.1.0                     Milvus is an open-source vector database built ...
+milvus/milvus        3.0.29               2.0.2                     Milvus is an open-source vector database built ...
+milvus/milvus        3.0.28               2.0.2                     Milvus is an open-source vector database built ...
+milvus/milvus        3.0.27               2.0.2                     Milvus is an open-source vector database built ...
+milvus/milvus        3.0.26               2.0.2                     Milvus is an open-source vector database built ...
+milvus/milvus        3.0.25               2.0.2                     Milvus is an open-source vector database built ...
+milvus/milvus        3.0.24               2.0.2                     Milvus is an open-source vector database built ...
+milvus/milvus        3.0.23               2.0.2                     Milvus is an open-source vector database built ...
+milvus/milvus        3.0.21               2.0.2                     Milvus is an open-source vector database built ...
+milvus/milvus        3.0.20               2.0.2                     Milvus is an open-source vector database built ...
+milvus/milvus        3.0.19               2.0.2                     Milvus is an open-source vector database built ...
+milvus/milvus        3.0.18               2.0.2                     Milvus is an open-source vector database built ...
 ```
 
 ### Step 5. Upgrade
 
-1. Run the following commands to upgrade your Milvus cluster from 2.0.0-RC7 to 2.0.0-RC8.
+1. Run the following commands to upgrade your Milvus cluster from v2.0.2 to v2.1.0.
 
 ```
 $ helm repo update
 $ helm upgrade my-release milvus/milvus
 ```
 
-2. Run `$ helm list` again to check your Milvus version. You can see your Milvus cluster has been upgraded to 2.0.0-RC8.
+2. Run `$ helm list` again to check your Milvus version. You can see your Milvus cluster has been upgraded to v2.1.0.
 
 ```
 NAME              NAMESPACE        REVISION        UPDATED                                     STATUS          CHART               APP VERSION
-my-release        default          2               2021-11-08 17:29:07.815765 +0800 CST        deployed        milvus-2.3.3        2.0.0-rc.8
+my-release        default          2               2022-07-28 16:05:20.11326 +0800 CST        deployed        milvus-3.1.2        2.1.0
 ```
 
 3. Run `$ kubectl get pods` to check the new pods. You can see the following output.
@@ -236,14 +242,14 @@ my-release-pulsar-zookeeper-1                     1/1     Running   0          1
 my-release-pulsar-zookeeper-2                     1/1     Running   0          11m
 ```
 
-4. Run the following command to check the new image version. You can see it is v2.0.0-rc8 now.
+4. Run the following command to check the new image version. You can see it is v2.1.0 now.
 
 ```
 $ kubectl get pods my-release-milvus-proxy-5685bbc546-v6scq -o=jsonpath='{$.spec.containers[0].image}'
 ```
 
 ```
-milvusdb/milvus:v2.0.0-rc8-20211104-d1f4106
+milvusdb/milvus:v2.1.0
 ```
 
 
