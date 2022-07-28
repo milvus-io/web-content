@@ -7,7 +7,7 @@ summary: Learn how to configure meta storage with Milvus Operator.
 
 # Configure Meta Storage with Milvus Operator
 
-etcd stores metadata of components in a Milvus. This topic introduces how to configure meta storage dependency when you install Milvus with Milvus Operator.
+Milvus uses etcd for storing metadata. This topic introduces how to configure meta storage dependency when you install Milvus with Milvus Operator.
 
 This topic assumes that you have deployed Milvus Operator.
 

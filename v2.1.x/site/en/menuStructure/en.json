@@ -406,7 +406,7 @@
       "order": 0
     },
     {
-      "id": "operator.md",
+      "id": "configure_operator.md",
       "title": "With Milvus Operator",
       "label1": "admin_guide",
       "label2": "configure_milvus",

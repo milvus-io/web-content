@@ -7,9 +7,7 @@ summary: Learn how to set up meta storage for Milvus using Docker Compose/Helm.
 
 # Configure Meta Storage with Docker Compose/Helm
 
-etcd stores metadata of components in a Milvus. 
-
-This topic introduces how to configure etcd with Docker Compose or Helm.
+Milvus uses etcd for storing metadata. This topic introduces how to configure etcd with Docker Compose or Helm.
 
 ## Configure with Docker Compose
 

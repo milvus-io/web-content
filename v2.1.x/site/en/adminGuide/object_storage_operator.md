@@ -7,7 +7,7 @@ summary: Learn how to configure object storage with Milvus Operator.
 
 # Configure Object Storage with Milvus Operator
 
-A Milvus cluster uses MinIO or S3 as object storage to persist large-scale files, such as index files and binary logs. This topic introduces how to configure object storage dependencies when you install Milvus with Milvus Operator.
+Milvus uses MinIO or S3 as object storage to persist large-scale files, such as index files and binary logs. This topic introduces how to configure object storage dependencies when you install Milvus with Milvus Operator.
 
 This topic assumes that you have deployed Milvus Operator.
 
