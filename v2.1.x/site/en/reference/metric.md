@@ -71,6 +71,10 @@ where **a** = (a1, a2,..., an) and **b** = (b1, b2,..., bn) are two points in n-
 
 It's the most commonly used distance metric and is very useful when the data are continuous.
 
+<div class="alert note">
+Milvus only caculates the value before applying square root when Euclidean distance is chosen as the distance metric.
+</div>
+
 ### Inner product (IP)
 
 The IP distance between two embeddings are defined as follows: 
