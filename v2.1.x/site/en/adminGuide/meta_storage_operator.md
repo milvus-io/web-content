@@ -127,7 +127,7 @@ spec:
 
 <div class="alert note">The preceding example specifies the number of replicas as <code>5</code> and limits the compute resources for etcd.</div>
 
-<div class="alert note">Find the complete configuration items to configure an internal etcd service in <a href="https://github.com/milvus-io/milvus-operator/blob/main/config/assets/charts/etcd/values.yaml">values.yaml</a>. Add configuration items as needed under <code>etcd.inCluster.values</code> as shown in the preceding example.</div>
+<div class="alert note">Find the complete configuration items to configure an internal etcd service in <a href="https://github.com/bitnami/charts/blob/ba6f8356e725a8342fe738a3b73ae40d5488b2ad/bitnami/etcd/values.yaml">values.yaml</a>. Add configuration items as needed under <code>etcd.inCluster.values</code> as shown in the preceding example.</div>
 
 Assuming that the configuration file is named `milvuscluster.yaml`, run the following command to apply the configuration.
 

@@ -198,7 +198,7 @@ spec:
 
 <div class="alert note">This example specifies the numbers of replicas of each component of Pulsar, the compute resources of Pulsar BookKeeper, and other configurations.</div>
 
-<div class="alert note">Find the complete configuration items to configure an internal Pulsar service in <a href="https://github.com/milvus-io/milvus-operator/blob/main/config/assets/charts/pulsar/values.yaml">values.yaml</a>. Add configuration items as needed under <code>pulsar.inCluster.values</code> as shown in the preceding example.</div>
+<div class="alert note">Find the complete configuration items to configure an internal Pulsar service in <a href="https://artifacthub.io/packages/helm/apache/pulsar/2.7.8?modal=values">values.yaml</a>. Add configuration items as needed under <code>pulsar.inCluster.values</code> as shown in the preceding example.</div>
 
 Assuming that the configuration file is named `milvuscluster.yaml`, run the following command to apply the configuration.
 
