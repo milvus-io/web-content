@@ -14,7 +14,7 @@ summary: Learn how to install Milvus cluster on Kubernetes using Milvus Operator
 Milvus Operator is a solution that helps you deploy and manage a full Milvus service stack to target Kubernetes (K8s) clusters. The stack includes all Milvus components and relevant dependencies like etcd, Pulsar and MinIO. This topic introduces how to deploy a Milvus cluster with Milvus Operator on K8s.
 
 ## Prerequisites
-- [Check the requirements for hardware and software](prerequisite-helm.md) prior to your installation.
+[Check the requirements for hardware and software](prerequisite-helm.md) prior to your installation.
 
 ## Create a K8s Cluster
 
