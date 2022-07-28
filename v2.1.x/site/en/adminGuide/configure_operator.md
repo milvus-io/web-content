@@ -98,7 +98,7 @@ Common fields used to configure each component include:
 - Fields used in global resource configuration: `image`, `env`, `nodeSelector`, `tolerations`, `resources` (see above).
 
 <div class="alert note">
-In addition, when configuring proxy, there is an extra field serviceType. This field defines the type of service Milvus provides in the K8s cluster.
+In addition, when configuring proxy, there is an extra field called `serviceType`. This field defines the type of service Milvus provides in the K8s cluster.
 </div>
 
 To configure resources for a specific component, add the component name in the field under `spec.componets` first and then configure its private resources.

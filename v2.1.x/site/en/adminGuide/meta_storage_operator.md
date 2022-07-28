@@ -134,17 +134,3 @@ Assuming that the configuration file is named `milvuscluster.yaml`, run the foll
 ```Shell
 kubectl apply -f milvuscluster.yaml
 ```
-s cluster. This topic introduces how to configure meta storage dependency when you install Milvus with Milvus Operator.
-
-This topic assumes that you have deployed Milvus Operator.
-
-<div class="alert note">See <a href="https://milvus.io/docs/v2.0.x/install_cluster-milvusoperator.md">Deploy Milvus Operator</a> for more information. </div>
-
-You need to specify a configuration file for using Milvus Operator to start a Milvus cluster.
-
-```YAML
-kubectl apply -f https://raw.githubusercontent.com/milvus-io/milvus-operator/main/config/samples/milvuscluster_default.yaml
-```
-
-You only need to edit the code template in `milvuscluster_default.yaml` to configure third-party dependencies. The following sections introduce how to configure object storage, etcd, and Pulsar respectively.
-

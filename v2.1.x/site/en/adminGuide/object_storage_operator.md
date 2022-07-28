@@ -34,7 +34,7 @@ A Milvus cluster uses MinIO or S3 as object storage to persist large-scale files
 Fields used to configure an external object storage service include:
 
 - `external`: A `true` value indicates that Milvus uses an external storage service.
-- `type`: Specifies whether Milvus uses S3 or MinIO as object storage.
+- `type`: Specifies Milvus uses whether S3 or MinIO as object storage.
 - `secretRef`: The secret reference that the object storage service uses.
 - `endpoint`: The endpoint of the object storage service.
 

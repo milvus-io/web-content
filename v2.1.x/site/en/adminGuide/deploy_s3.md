@@ -1,20 +1,20 @@
 ---
 id: deploy_s3.md
-title: Configure Object Storage with Docker/Helm
+title: Configure Object Storage with Docker Compose/Helm
 related_key: S3, storage
-summary: Learn how to set up S3 storage for Milvus.
+summary: Learn how to set up S3 storage for Milvus with Docker Compose/Helm.
 ---
 
-# Configure Object Storage with Docker/Helm
+# Configure Object Storage with Docker Compose/Helm
 
-Milvus uses MinIO for object storage by default, but it also supports using [Amazon Simple Storage Service (S3)](https://aws.amazon.com/s3/) as persistent object storage for log and index files. This topic describes how to set up S3 for Milvus. You can skip this topic if you are satisfied with MinIO.
+Milvus uses MinIO for object storage by default, but it also supports using [Amazon Simple Storage Service (S3)](https://aws.amazon.com/s3/) as persistent object storage for log and index files. This topic describes how to configure S3 for Milvus. You can skip this topic if you are satisfied with MinIO.
 
-You can set up S3 with [Docker Compose](https://docs.docker.com/get-started/overview/) or on K8s. 
+You can configure S3 with [Docker Compose](https://docs.docker.com/get-started/overview/) or on K8s. 
 
-## Set up with Docker Compose
+## Configure S3 with Docker Compose
 
 ### 1. Configure S3
-[MinIO](https://min.io/product/overview) is compatible with S3. To set up S3 with Docker Compose, provide your values for the <code>minio</code> section in the <code>milvus.yaml</code> file on the milvus/configs path.
+[MinIO](https://min.io/product/overview) is compatible with S3. To configure S3 with Docker Compose, provide your values for the <code>minio</code> section in the <code>milvus.yaml</code> file on the milvus/configs path.
 
 ```yaml
 minio:
@@ -33,9 +33,9 @@ Run the following command to start Milvus that uses the S3 configurations.
 ```shell
 docker-compose up
 ```
-<div class="alert note">Configurations only take effect after Milvus starts. See <a herf=https://milvus.io/docs/v2.1.0/install_cluster-docker.md#2-Start-Milvus>Start Milvus</a> for more information.</div>
+<div class="alert note">Configurations only take effect after Milvus starts. See <a herf=https://milvus.io/docs/v2.1.0/install_cluster-docker.md#Start-Milvus>Start Milvus</a> for more information.</div>
 
-## Set up on K8s
+## Configure S3 on K8s
 
 For Milvus clusters on K8s, you can configure S3 in the same command that starts Milvus. Alternatively, you can configure S3 using the <code>values.yml</code> file on the /charts/milvus path in the [milvus-helm](https://github.com/milvus-io/milvus-helm) repository before you start Milvus.
 
