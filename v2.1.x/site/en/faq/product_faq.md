@@ -77,7 +77,7 @@ No. If partitions for a search are specified, Milvus searches the specified part
 
 #### Does Milvus load the entire collection when partitions are specified for a search?
 
-No. Milvus v2.0 has varied behavior. Data must be loaded to memory before searching.
+No. Milvus has varied behavior. Data must be loaded to memory before searching.
 
 - If you know which partitions your data is located in, call `load_partition()` to load the intended partition(s) *then* specify partition(s) in the `search()` method call.
 - If you do not know the exact partitions, call `load_collection()` before calling `search()`.
@@ -155,7 +155,7 @@ Data in MinIO is designed to remain for a certain period of time for the conveni
 
 #### Does Milvus support message engines other than Pulsar?
 
-Future release of Milvus 2.0 will support Kafka.
+Yes. Kafka is supported in Milvus 2.1.0.
 
 #### What's the diference between a search and a query?
 

@@ -160,7 +160,7 @@ Map the local path to your `milvus.yaml` file onto the corresponding docker cont
 ...
 proxy:
     container_name: milvus-proxy
-    image: milvusdb/milvus:v2.0.0-rc7-20211011-d567b21
+    image: milvusdb/milvus:v2.1.0-20220726-1b33c731
     command: ["milvus", "run", "proxy"]
     volumes:       # Add a volumes section.
       - /local/path/to/your/milvus.yaml:/milvus/configs/milvus.yaml   # Map the local path to the container path
@@ -188,6 +188,6 @@ $ sudo docker-compose up -d
 ## What's next
 
 - If you want to learn how to monitor the Milvus services and create alerts:
-  - Learn [Monitor Milvus 2.0 with Prometheus Operator on Kubernetes](monitor.md)
+  - Learn [Monitor Milvus with Prometheus Operator on Kubernetes](monitor.md)
   - Learn [Visualize Milvus Metrics in Grafana](visualize.md).
 

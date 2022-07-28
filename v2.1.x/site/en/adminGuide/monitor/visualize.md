@@ -46,5 +46,5 @@ Select the Milvus instance you want to monitor. Then you can see the Milvus comp
   - Learn how to [create an alert for Milvus services](alert.md)
   - Adjust your [resource allocation](allocate.md)
   - [Scale out or scale in a Milvus cluster](scaleout.md)
-- If you are interested in upgrading the Milvus 2.0 version,
+- If you are interested in upgrading the Milvus version,
   - Read the [upgrading guide](upgrade.md)

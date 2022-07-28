@@ -96,7 +96,7 @@ See [Milvus tutorials](https://github.com/milvus-io/bootcamp/tree/master/solutio
 
 ## How is Milvus designed?
 
-As a cloud-native vector database, Milvus 2.0 separates storage and computation by design. To enhance elasticity and flexibility, all components in Milvus 2.0 are stateless.
+As a cloud-native vector database, Milvus separates storage and computation by design. To enhance elasticity and flexibility, all components in Milvus are stateless.
 
 The system breaks down into four levels:
 
@@ -130,7 +130,7 @@ The Milvus ecosystem provides helpful tools including:
 
 - [Milvus CLI](https://github.com/milvus-io/milvus_cli#overview)
 - [Attu](https://github.com/zilliztech/attu), a graphical management system for Milvus. 
-- [MilvusDM](https://milvus.io/docs/v2.0.0/migrate_overview.md) (Milvus Data Migration), an open-source tool designed specifically for importing and exporting data with Milvus.
+- [MilvusDM](migrate_overview.md) (Milvus Data Migration), an open-source tool designed specifically for importing and exporting data with Milvus.
 - [Milvus sizing tool](https://milvus.io/tools/sizing/), which helps you estimate the raw file size, memory size, and stable disk size needed for a specified number of vectors with various index types.
 
 ## What's next

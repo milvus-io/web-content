@@ -9,7 +9,7 @@ This article provides a detailed description of the implementation of data inser
 
 ## Data insertion
 
-You can specify a number of shards for each collection in Milvus, each shard corresponding to a virtual channel (*vchannel*). As the following figure shows, Milvus 2.0 assigns each vchannel in the log broker a physical channel (*pchannel*). Any incoming insert/delete request is routed to shards based on the hash value of primary key.
+You can specify a number of shards for each collection in Milvus, each shard corresponding to a virtual channel (*vchannel*). As the following figure shows, Milvus assigns each vchannel in the log broker a physical channel (*pchannel*). Any incoming insert/delete request is routed to shards based on the hash value of primary key.
 
 Validation of DML requests is moved forward to proxy because Milvus does not have complicated transactions. Proxy would request a timestamp for each insert/delete request from TSO (Timestamp Oracle), which is the timing module that colocates with the root coordinator. With the older timestamp being overwritten by the newer one, timestamps are used to determine the sequence of data requests being processed. Proxy retrieves information in batches from data coord including entities' segments and primary keys to increase overall throughput and avoid overburdening the central node. 
 

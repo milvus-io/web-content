@@ -172,7 +172,7 @@ $ helm upgrade my-release milvus/milvus --set dataCoord.enableCompaction=false
 ## What's next
 
 - If you want to learn how to monitor the Milvus services and create alerts:
-  - Learn [Monitor Milvus 2.0 with Prometheus Operator on Kubernetes](monitor.md)
+  - Learn [Monitor Milvus with Prometheus Operator on Kubernetes](monitor.md)
   - Learn [Visualize Milvus Metrics in Grafana](visualize.md).
 
 - If you are looking for instructions on how to allocate resources:

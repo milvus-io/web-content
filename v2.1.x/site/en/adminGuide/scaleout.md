@@ -128,7 +128,7 @@ helm upgrade my-release milvus/milvus --set queryNode.autoscaling.enabled=true -
 ## What's next
 
 - If you want to learn how to monitor the Milvus services and create alerts:
-  - Learn [Monitor Milvus 2.0 with Prometheus Operator on Kubernetes](monitor.md)
+  - Learn [Monitor Milvus with Prometheus Operator on Kubernetes](monitor.md)
 
 - If you are ready to deploy your cluster on clouds:
   - Learn how to [Deploy Milvus on AWS with Terraform and Ansible](aws.md)

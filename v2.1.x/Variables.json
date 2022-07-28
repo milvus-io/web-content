@@ -7,5 +7,6 @@
   "milvus_node_sdk_version": "2.1.2",
   "milvus_go_sdk_version": "2.1.0",
   "milvus_java_sdk_version": "2.1.0-beta4",
-  "milvus_operator_version": "0.6.0"
+  "milvus_operator_version": "0.6.0",
+  "milvus_image": "2.1.0-20220726-1b33c731"
 }

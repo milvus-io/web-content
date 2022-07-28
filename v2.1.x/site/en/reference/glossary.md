@@ -26,7 +26,7 @@ You can customize primary keys. If you do not configure manually, Milvus automat
 Fields are the units that make up entities. Fields can be structured data (e.g., numbers, strings) or vectors.
 
 <div class="alert note">
-Scalar field filtering is now available in Milvus 2.0!
+Starting from Milvus 2.0, scalar field filtering is available!
 </div>
 
 ## Log broker

@@ -12,7 +12,7 @@ This topic introduces schema in Milvus. Schema is used to define the properties 
 
 A field schema is the logical definition of a field. It is the first thing you need to define before defining a [collection schema](#Collection-schema) and [creating a collection](create_collection.md). 
 
-Milvus 2.0 supports only one primary key field in a collection.
+Milvus supports only one primary key field in a collection.
 
 ### Field schema properties
 

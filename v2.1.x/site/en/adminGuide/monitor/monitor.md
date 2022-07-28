@@ -77,5 +77,5 @@ my-release-milvus              54s
   - Adjust your [resource allocation](allocate.md)
 - If you are looking for information about how to scale a Milvus cluster:
   - Learn [scale a Milvus cluster](scaleout.md)
-- If you are interested in upgrading the Milvus 2.0 version,
+- If you are interested in upgrading the Milvus version,
   - Read the [upgrading guide](upgrade.md)
