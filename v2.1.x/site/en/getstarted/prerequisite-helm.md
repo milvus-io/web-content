@@ -11,15 +11,15 @@ summary: Learn the necessary preparations before installing Milvus.
 
 Before you install Milvus, check your hardware and software to see if they meet the requirements.
 
-- <div class="tab-wrapper"><a href="prerequisite-docker.md" class=''>Install with Docker Compose</a><a href="prerequisite-helm.md" class='active '>Install on Kubernetes</a></div>
+<div class="tab-wrapper"><a href="prerequisite-docker.md" class=''>Install with Docker Compose</a><a href="prerequisite-helm.md" class='active '>Install on Kubernetes</a></div>
 
 ## Hardware requirements
 
 | Component           | Requirement                                                  |Recommendation| Note                                                         |
 | ------------------- | ------------------------------------------------------------ |--------------| ------------------------------------------------------------ |
-| CPU                 | Intel CPU Sandy Bridge or later                              |<ul><li>standalone: 8 core or more</li><li>cluster: 16 core or more</li></ul>| Current version of Milvus does not support AMD and Apple M1 CPUs. |
+| CPU                 | <ul><li>Intel 2nd Gen Core CPU or higher</li><li>Apple Silicon</li></ul>|<ul><li>Standalone: 8 core or more</li><li>Cluster: 16 core or more</li></ul>| Current version of Milvus does not support AMD CPUs. |
 | CPU instruction set | <ul><li>SSE4.2</li><li>AVX</li><li>AVX2</li><li>AVX-512</li></ul> |<ul><li>SSE4.2</li><li>AVX</li><li>AVX2</li><li>AVX-512</li></ul> |  Vector similarity search and index building within Milvus require CPU's support of single instruction, multiple data (SIMD) extension sets. Ensure that the CPU supports at least one of the SIMD extensions listed. See [CPUs with AVX](https://en.wikipedia.org/wiki/Advanced_Vector_Extensions#CPUs_with_AVX) for more information.                           |
-| RAM                 | <ul><li>standalone: 16G</li><li>cluster: 64G</li></ul>       |<ul><li>standalone: 32G</li><li>cluster: 128G</li></ul>        | The size of RAM depends on the data volume.                  |
+| RAM                 | <ul><li>Standalone: 16G</li><li>Cluster: 64G</li></ul>       |<ul><li>Standalone: 32G</li><li>Cluster: 128G</li></ul>        | The size of RAM depends on the data volume.                  |
 | Hard drive          | SATA 3.0 SSD or higher                                       |NVMe SSD or higher | The size of hard drive depends on the data volume.           |
 
 ## Software requirements
