@@ -1,0 +1,276 @@
+
+<h1 class="title">Class QueryParam.Builder</h1>
+<div class="contentContainer">
+<ul class="inheritance">
+<li>java.lang.Object</li>
+<li>
+<ul class="inheritance">
+<li>io.milvus.param.dml.QueryParam.Builder</li>
+</ul>
+</li>
+</ul>
+<div class="description">
+<ul class="blockList">
+<li class="blockList">
+<dl>
+<dt>Enclosing class:</dt>
+<dd><a href="QueryParam.html" title="class in io.milvus.param.dml">QueryParam</a></dd>
+</dl>
+<hr>
+<pre><code>public static class QueryParam.Builder
+extends java.lang.Object</code></pre>
+<div class="block">Builder for <a href="QueryParam.html" title="class in io.milvus.param.dml"><code>QueryParam</code></a> class.</div>
+</li>
+</ul>
+</div>
+<div class="summary">
+<ul class="blockList">
+<li class="blockList">
+
+<section role="region">
+<ul class="blockList">
+<li class="blockList">
+<h3>Method Summary</h3>
+<table class="memberSummary">
+
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colSecond" scope="col">Method</th>
+<th class="colLast" scope="col">Description</th>
+</tr>
+<tr id="i0" class="altColor">
+<td class="colFirst"><code><a href="QueryParam.Builder.html" title="class in io.milvus.param.dml">QueryParam.Builder</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#addOutField(java.lang.String)">addOutField</a></span>&#8203;(@NonNull java.lang.String&nbsp;fieldName)</code></th>
+<td class="colLast">
+<div class="block">Specifies an output field (Optional).</div>
+</td>
+</tr>
+<tr id="i1" class="rowColor">
+<td class="colFirst"><code><a href="QueryParam.Builder.html" title="class in io.milvus.param.dml">QueryParam.Builder</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#addPartitionName(java.lang.String)">addPartitionName</a></span>&#8203;(@NonNull java.lang.String&nbsp;partitionName)</code></th>
+<td class="colLast">
+<div class="block">Adds a partition to specify query scope (Optional).</div>
+</td>
+</tr>
+<tr id="i2" class="altColor">
+<td class="colFirst"><code><a href="QueryParam.html" title="class in io.milvus.param.dml">QueryParam</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#build()">build</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Verifies parameters and creates a new <a href="QueryParam.html" title="class in io.milvus.param.dml"><code>QueryParam</code></a> instance.</div>
+</td>
+</tr>
+<tr id="i3" class="rowColor">
+<td class="colFirst"><code><a href="QueryParam.Builder.html" title="class in io.milvus.param.dml">QueryParam.Builder</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#withCollectionName(java.lang.String)">withCollectionName</a></span>&#8203;(@NonNull java.lang.String&nbsp;collectionName)</code></th>
+<td class="colLast">
+<div class="block">Sets the collection name.</div>
+</td>
+</tr>
+<tr id="i4" class="altColor">
+<td class="colFirst"><code><a href="QueryParam.Builder.html" title="class in io.milvus.param.dml">QueryParam.Builder</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#withExpr(java.lang.String)">withExpr</a></span>&#8203;(@NonNull java.lang.String&nbsp;expr)</code></th>
+<td class="colLast">
+<div class="block">Sets the expression to query entities.</div>
+</td>
+</tr>
+<tr id="i5" class="rowColor">
+<td class="colFirst"><code><a href="QueryParam.Builder.html" title="class in io.milvus.param.dml">QueryParam.Builder</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#withGuaranteeTimestamp(java.lang.Long)">withGuaranteeTimestamp</a></span>&#8203;(@NonNull java.lang.Long&nbsp;ts)</code></th>
+<td class="colLast">
+<div class="block">Instructs server to see insert/delete operations performed before a provided timestamp.</div>
+</td>
+</tr>
+<tr id="i6" class="altColor">
+<td class="colFirst"><code><a href="QueryParam.Builder.html" title="class in io.milvus.param.dml">QueryParam.Builder</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#withOutFields(java.util.List)">withOutFields</a></span>&#8203;(@NonNull java.util.List&lt;java.lang.String&gt;&nbsp;outFields)</code></th>
+<td class="colLast">
+<div class="block">Specifies output fields (Optional).</div>
+</td>
+</tr>
+<tr id="i7" class="rowColor">
+<td class="colFirst"><code><a href="QueryParam.Builder.html" title="class in io.milvus.param.dml">QueryParam.Builder</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#withPartitionNames(java.util.List)">withPartitionNames</a></span>&#8203;(@NonNull java.util.List&lt;java.lang.String&gt;&nbsp;partitionNames)</code></th>
+<td class="colLast">
+<div class="block">Sets partition names list to specify query scope (Optional).</div>
+</td>
+</tr>
+<tr id="i8" class="altColor">
+<td class="colFirst"><code><a href="QueryParam.Builder.html" title="class in io.milvus.param.dml">QueryParam.Builder</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#withTravelTimestamp(java.lang.Long)">withTravelTimestamp</a></span>&#8203;(@NonNull java.lang.Long&nbsp;ts)</code></th>
+<td class="colLast">
+<div class="block">Specify an absolute timestamp in a query to get results based on a data view at a specified point in time.</div>
+</td>
+</tr>
+</table>
+<ul class="blockList">
+<li class="blockList">
+<h3>Methods inherited from class&nbsp;java.lang.Object</h3>
+<code>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</code></li>
+</ul>
+</li>
+</ul>
+</section>
+</li>
+</ul>
+</div>
+<div class="details">
+<ul class="blockList">
+<li class="blockList">
+
+<section role="region">
+<ul class="blockList">
+<li class="blockList">
+<h3>Method Detail</h3>
+
+<ul class="blockList">
+<li class="blockList">
+<h4>withCollectionName</h4>
+<pre class="methodSignature"><code>public&nbsp;QueryParam.Builder&nbsp;withCollectionName&#8203;(@NonNull
+                                             @NonNull java.lang.String&nbsp;collectionName)</code></pre>
+<div class="block">Sets the collection name. Collection name cannot be empty or null.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>collectionName</code> - collection name</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd><code>Builder</code></dd>
+</dl>
+</li>
+</ul>
+
+<ul class="blockList">
+<li class="blockList">
+<h4>withPartitionNames</h4>
+<pre class="methodSignature"><code>public&nbsp;QueryParam.Builder&nbsp;withPartitionNames&#8203;(@NonNull
+                                             @NonNull java.util.List&lt;java.lang.String&gt;&nbsp;partitionNames)</code></pre>
+<div class="block">Sets partition names list to specify query scope (Optional).</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>partitionNames</code> - partition names list</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd><code>Builder</code></dd>
+</dl>
+</li>
+</ul>
+
+<ul class="blockList">
+<li class="blockList">
+<h4>addPartitionName</h4>
+<pre class="methodSignature"><code>public&nbsp;QueryParam.Builder&nbsp;addPartitionName&#8203;(@NonNull
+                                           @NonNull java.lang.String&nbsp;partitionName)</code></pre>
+<div class="block">Adds a partition to specify query scope (Optional).</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>partitionName</code> - partition name</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd><code>Builder</code></dd>
+</dl>
+</li>
+</ul>
+
+<ul class="blockList">
+<li class="blockList">
+<h4>withOutFields</h4>
+<pre class="methodSignature"><code>public&nbsp;QueryParam.Builder&nbsp;withOutFields&#8203;(@NonNull
+                                        @NonNull java.util.List&lt;java.lang.String&gt;&nbsp;outFields)</code></pre>
+<div class="block">Specifies output fields (Optional).</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>outFields</code> - output fields</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd><code>Builder</code></dd>
+</dl>
+</li>
+</ul>
+
+<ul class="blockList">
+<li class="blockList">
+<h4>addOutField</h4>
+<pre class="methodSignature"><code>public&nbsp;QueryParam.Builder&nbsp;addOutField&#8203;(@NonNull
+                                      @NonNull java.lang.String&nbsp;fieldName)</code></pre>
+<div class="block">Specifies an output field (Optional).</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>fieldName</code> - field name</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd><code>Builder</code></dd>
+</dl>
+</li>
+</ul>
+
+<ul class="blockList">
+<li class="blockList">
+<h4>withExpr</h4>
+<pre class="methodSignature"><code>public&nbsp;QueryParam.Builder&nbsp;withExpr&#8203;(@NonNull
+                                   @NonNull java.lang.String&nbsp;expr)</code></pre>
+<div class="block">Sets the expression to query entities.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>expr</code> - filtering expression</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd><code>Builder</code></dd>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="https://milvus.io/docs/v2.0.0/boolean.md">Boolean Expression Rules</a></dd>
+</dl>
+</li>
+</ul>
+
+<ul class="blockList">
+<li class="blockList">
+<h4>withTravelTimestamp</h4>
+<pre class="methodSignature"><code>public&nbsp;QueryParam.Builder&nbsp;withTravelTimestamp&#8203;(@NonNull
+                                              @NonNull java.lang.Long&nbsp;ts)</code></pre>
+<div class="block">Specify an absolute timestamp in a query to get results based on a data view at a specified point in time.
+ Default value is 0, server executes query on a full data view.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>ts</code> - a timestamp value</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd><code>Builder</code></dd>
+</dl>
+</li>
+</ul>
+
+<ul class="blockList">
+<li class="blockList">
+<h4>withGuaranteeTimestamp</h4>
+<pre class="methodSignature"><code>public&nbsp;QueryParam.Builder&nbsp;withGuaranteeTimestamp&#8203;(@NonNull
+                                                 @NonNull java.lang.Long&nbsp;ts)</code></pre>
+<div class="block">Instructs server to see insert/delete operations performed before a provided timestamp.
+ If no such timestamp is specified, the server will wait for the latest operation to finish and query.
+
+ Note: The timestamp is not an absolute timestamp, it is a hybrid value combined by UTC time and internal flags.
+  We call it TSO, for more information please refer to: https://github.com/milvus-io/milvus/blob/master/docs/design_docs/milvus_hybrid_ts_en.md
+  You can get a TSO from insert/delete operations, see the <code>MutationResultWrapper</code> class.
+  Use an operation's TSO to set this parameter, the server will execute query after this operation is finished.
+
+ Default value is GUARANTEE_EVENTUALLY_TS, query executes query immediately.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>ts</code> - a timestamp value</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd><code>Builder</code></dd>
+</dl>
+</li>
+</ul>
+
+<ul class="blockListLast">
+<li class="blockList">
+<h4>build</h4>
+<pre class="methodSignature"><code>public&nbsp;QueryParam&nbsp;build()
+                 throws ParamException</code></pre>
+<div class="block">Verifies parameters and creates a new <a href="QueryParam.html" title="class in io.milvus.param.dml"><code>QueryParam</code></a> instance.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd><a href="QueryParam.html" title="class in io.milvus.param.dml"><code>QueryParam</code></a></dd>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code><a href="../../exception/ParamException.html" title="class in io.milvus.exception">ParamException</a></code></dd>
+</dl>
+</li>
+</ul>
+</li>
+</ul>
+</section>
+</li>
+</ul>
+</div>
+</div>

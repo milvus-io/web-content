@@ -1,0 +1,154 @@
+
+<h1 class="title">Class CalcDistanceParam.Builder</h1>
+<div class="contentContainer">
+<ul class="inheritance">
+<li>java.lang.Object</li>
+<li>
+<ul class="inheritance">
+<li>io.milvus.param.dml.CalcDistanceParam.Builder</li>
+</ul>
+</li>
+</ul>
+<div class="description">
+<ul class="blockList">
+<li class="blockList">
+<dl>
+<dt>Enclosing class:</dt>
+<dd><a href="CalcDistanceParam.html" title="class in io.milvus.param.dml">CalcDistanceParam</a></dd>
+</dl>
+<hr>
+<pre><code>public static class CalcDistanceParam.Builder
+extends java.lang.Object</code></pre>
+<div class="block">Builder for <a href="CalcDistanceParam.html" title="class in io.milvus.param.dml"><code>CalcDistanceParam</code></a> class.</div>
+</li>
+</ul>
+</div>
+<div class="summary">
+<ul class="blockList">
+<li class="blockList">
+
+<section role="region">
+<ul class="blockList">
+<li class="blockList">
+<h3>Method Summary</h3>
+<table class="memberSummary">
+
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colSecond" scope="col">Method</th>
+<th class="colLast" scope="col">Description</th>
+</tr>
+<tr id="i0" class="altColor">
+<td class="colFirst"><code><a href="CalcDistanceParam.html" title="class in io.milvus.param.dml">CalcDistanceParam</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#build()">build</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Verifies parameters and creates a new <a href="CalcDistanceParam.html" title="class in io.milvus.param.dml"><code>CalcDistanceParam</code></a> instance.</div>
+</td>
+</tr>
+<tr id="i1" class="rowColor">
+<td class="colFirst"><code><a href="CalcDistanceParam.Builder.html" title="class in io.milvus.param.dml">CalcDistanceParam.Builder</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#withMetricType(io.milvus.param.MetricType)">withMetricType</a></span>&#8203;(<a href="../MetricType.html" title="enum in io.milvus.param">MetricType</a>&nbsp;metricType)</code></th>
+<td class="colLast">
+<div class="block">Sets metric type of calculation.</div>
+</td>
+</tr>
+<tr id="i2" class="altColor">
+<td class="colFirst"><code><a href="CalcDistanceParam.Builder.html" title="class in io.milvus.param.dml">CalcDistanceParam.Builder</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#withVectorsLeft(java.util.List)">withVectorsLeft</a></span>&#8203;(@NonNull java.util.List&lt;java.util.List&lt;java.lang.Float&gt;&gt;&nbsp;vectors)</code></th>
+<td class="colLast">
+<div class="block">Sets a list of left side vectors.</div>
+</td>
+</tr>
+<tr id="i3" class="rowColor">
+<td class="colFirst"><code><a href="CalcDistanceParam.Builder.html" title="class in io.milvus.param.dml">CalcDistanceParam.Builder</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#withVectorsRight(java.util.List)">withVectorsRight</a></span>&#8203;(@NonNull java.util.List&lt;java.util.List&lt;java.lang.Float&gt;&gt;&nbsp;vectors)</code></th>
+<td class="colLast">
+<div class="block">Sets a list of right side vectors.</div>
+</td>
+</tr>
+</table>
+<ul class="blockList">
+<li class="blockList">
+<h3>Methods inherited from class&nbsp;java.lang.Object</h3>
+<code>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</code></li>
+</ul>
+</li>
+</ul>
+</section>
+</li>
+</ul>
+</div>
+<div class="details">
+<ul class="blockList">
+<li class="blockList">
+
+<section role="region">
+<ul class="blockList">
+<li class="blockList">
+<h3>Method Detail</h3>
+
+<ul class="blockList">
+<li class="blockList">
+<h4>withVectorsLeft</h4>
+<pre class="methodSignature"><code>public&nbsp;CalcDistanceParam.Builder&nbsp;withVectorsLeft&#8203;(@NonNull
+                                                 @NonNull java.util.List&lt;java.util.List&lt;java.lang.Float&gt;&gt;&nbsp;vectors)</code></pre>
+<div class="block">Sets a list of left side vectors. The list cannot be null or empty, and each vector cannot be null or empty.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>vectors</code> - a list of float list, each float list is a vector.</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd><code>Builder</code></dd>
+</dl>
+</li>
+</ul>
+
+<ul class="blockList">
+<li class="blockList">
+<h4>withVectorsRight</h4>
+<pre class="methodSignature"><code>public&nbsp;CalcDistanceParam.Builder&nbsp;withVectorsRight&#8203;(@NonNull
+                                                  @NonNull java.util.List&lt;java.util.List&lt;java.lang.Float&gt;&gt;&nbsp;vectors)</code></pre>
+<div class="block">Sets a list of right side vectors. The list cannot be null or empty, and each vector cannot be null or empty.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>vectors</code> - a list of float list, each float list is a vector.</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd><code>Builder</code></dd>
+</dl>
+</li>
+</ul>
+
+<ul class="blockList">
+<li class="blockList">
+<h4>withMetricType</h4>
+<pre class="methodSignature"><code>public&nbsp;CalcDistanceParam.Builder&nbsp;withMetricType&#8203;(MetricType&nbsp;metricType)</code></pre>
+<div class="block">Sets metric type of calculation. Note that the current release of Milvus only support L2 and IP.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>metricType</code> - metric type</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd><code>Builder</code></dd>
+</dl>
+</li>
+</ul>
+
+<ul class="blockListLast">
+<li class="blockList">
+<h4>build</h4>
+<pre class="methodSignature"><code>public&nbsp;CalcDistanceParam&nbsp;build()
+                        throws ParamException</code></pre>
+<div class="block">Verifies parameters and creates a new <a href="CalcDistanceParam.html" title="class in io.milvus.param.dml"><code>CalcDistanceParam</code></a> instance.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd><a href="CalcDistanceParam.html" title="class in io.milvus.param.dml"><code>CalcDistanceParam</code></a></dd>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code><a href="../../exception/ParamException.html" title="class in io.milvus.exception">ParamException</a></code></dd>
+</dl>
+</li>
+</ul>
+</li>
+</ul>
+</section>
+</li>
+</ul>
+</div>
+</div>

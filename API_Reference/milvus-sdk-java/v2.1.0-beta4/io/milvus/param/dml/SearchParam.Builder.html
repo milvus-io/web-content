@@ -1,0 +1,413 @@
+
+<h1 class="title">Class SearchParam.Builder</h1>
+<div class="contentContainer">
+<ul class="inheritance">
+<li>java.lang.Object</li>
+<li>
+<ul class="inheritance">
+<li>io.milvus.param.dml.SearchParam.Builder</li>
+</ul>
+</li>
+</ul>
+<div class="description">
+<ul class="blockList">
+<li class="blockList">
+<dl>
+<dt>Enclosing class:</dt>
+<dd><a href="SearchParam.html" title="class in io.milvus.param.dml">SearchParam</a></dd>
+</dl>
+<hr>
+<pre><code>public static class SearchParam.Builder
+extends java.lang.Object</code></pre>
+<div class="block">Builder for <a href="SearchParam.html" title="class in io.milvus.param.dml"><code>SearchParam</code></a> class.</div>
+</li>
+</ul>
+</div>
+<div class="summary">
+<ul class="blockList">
+<li class="blockList">
+
+<section role="region">
+<ul class="blockList">
+<li class="blockList">
+<h3>Method Summary</h3>
+<table class="memberSummary">
+
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colSecond" scope="col">Method</th>
+<th class="colLast" scope="col">Description</th>
+</tr>
+<tr id="i0" class="altColor">
+<td class="colFirst"><code><a href="SearchParam.Builder.html" title="class in io.milvus.param.dml">SearchParam.Builder</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#addOutField(java.lang.String)">addOutField</a></span>&#8203;(@NonNull java.lang.String&nbsp;fieldName)</code></th>
+<td class="colLast">
+<div class="block">Specifies an output field (Optional).</div>
+</td>
+</tr>
+<tr id="i1" class="rowColor">
+<td class="colFirst"><code><a href="SearchParam.Builder.html" title="class in io.milvus.param.dml">SearchParam.Builder</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#addPartitionName(java.lang.String)">addPartitionName</a></span>&#8203;(@NonNull java.lang.String&nbsp;partitionName)</code></th>
+<td class="colLast">
+<div class="block">Adds a partition to specify search scope (Optional).</div>
+</td>
+</tr>
+<tr id="i2" class="altColor">
+<td class="colFirst"><code><a href="SearchParam.html" title="class in io.milvus.param.dml">SearchParam</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#build()">build</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Verifies parameters and creates a new <a href="SearchParam.html" title="class in io.milvus.param.dml"><code>SearchParam</code></a> instance.</div>
+</td>
+</tr>
+<tr id="i3" class="rowColor">
+<td class="colFirst"><code><a href="SearchParam.Builder.html" title="class in io.milvus.param.dml">SearchParam.Builder</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#withCollectionName(java.lang.String)">withCollectionName</a></span>&#8203;(@NonNull java.lang.String&nbsp;collectionName)</code></th>
+<td class="colLast">
+<div class="block">Sets the collection name.</div>
+</td>
+</tr>
+<tr id="i4" class="altColor">
+<td class="colFirst"><code><a href="SearchParam.Builder.html" title="class in io.milvus.param.dml">SearchParam.Builder</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#withExpr(java.lang.String)">withExpr</a></span>&#8203;(@NonNull java.lang.String&nbsp;expr)</code></th>
+<td class="colLast">
+<div class="block">Sets expression to filter out entities before searching (Optional).</div>
+</td>
+</tr>
+<tr id="i5" class="rowColor">
+<td class="colFirst"><code><a href="SearchParam.Builder.html" title="class in io.milvus.param.dml">SearchParam.Builder</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#withGuaranteeTimestamp(java.lang.Long)">withGuaranteeTimestamp</a></span>&#8203;(@NonNull java.lang.Long&nbsp;ts)</code></th>
+<td class="colLast">
+<div class="block">Instructs server to see insert/delete operations performed before a provided timestamp.</div>
+</td>
+</tr>
+<tr id="i6" class="altColor">
+<td class="colFirst"><code><a href="SearchParam.Builder.html" title="class in io.milvus.param.dml">SearchParam.Builder</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#withMetricType(io.milvus.param.MetricType)">withMetricType</a></span>&#8203;(@NonNull <a href="../MetricType.html" title="enum in io.milvus.param">MetricType</a>&nbsp;metricType)</code></th>
+<td class="colLast">
+<div class="block">Sets metric type of ANN searching.</div>
+</td>
+</tr>
+<tr id="i7" class="rowColor">
+<td class="colFirst"><code><a href="SearchParam.Builder.html" title="class in io.milvus.param.dml">SearchParam.Builder</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#withOutFields(java.util.List)">withOutFields</a></span>&#8203;(@NonNull java.util.List&lt;java.lang.String&gt;&nbsp;outFields)</code></th>
+<td class="colLast">
+<div class="block">Specifies output fields (Optional).</div>
+</td>
+</tr>
+<tr id="i8" class="altColor">
+<td class="colFirst"><code><a href="SearchParam.Builder.html" title="class in io.milvus.param.dml">SearchParam.Builder</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#withParams(java.lang.String)">withParams</a></span>&#8203;(@NonNull java.lang.String&nbsp;params)</code></th>
+<td class="colLast">
+<div class="block">Sets the search parameters specific to the index type.</div>
+</td>
+</tr>
+<tr id="i9" class="rowColor">
+<td class="colFirst"><code><a href="SearchParam.Builder.html" title="class in io.milvus.param.dml">SearchParam.Builder</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#withPartitionNames(java.util.List)">withPartitionNames</a></span>&#8203;(@NonNull java.util.List&lt;java.lang.String&gt;&nbsp;partitionNames)</code></th>
+<td class="colLast">
+<div class="block">Sets partition names list to specify search scope (Optional).</div>
+</td>
+</tr>
+<tr id="i10" class="altColor">
+<td class="colFirst"><code><a href="SearchParam.Builder.html" title="class in io.milvus.param.dml">SearchParam.Builder</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#withRoundDecimal(java.lang.Integer)">withRoundDecimal</a></span>&#8203;(@NonNull java.lang.Integer&nbsp;decimal)</code></th>
+<td class="colLast">
+<div class="block">Specifies the decimal place of the returned results.</div>
+</td>
+</tr>
+<tr id="i11" class="rowColor">
+<td class="colFirst"><code><a href="SearchParam.Builder.html" title="class in io.milvus.param.dml">SearchParam.Builder</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#withTopK(java.lang.Integer)">withTopK</a></span>&#8203;(@NonNull java.lang.Integer&nbsp;topK)</code></th>
+<td class="colLast">
+<div class="block">Sets topK value of ANN search.</div>
+</td>
+</tr>
+<tr id="i12" class="altColor">
+<td class="colFirst"><code><a href="SearchParam.Builder.html" title="class in io.milvus.param.dml">SearchParam.Builder</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#withTravelTimestamp(java.lang.Long)">withTravelTimestamp</a></span>&#8203;(@NonNull java.lang.Long&nbsp;ts)</code></th>
+<td class="colLast">
+<div class="block">Specify an absolute timestamp in a search to get results based on a data view at a specified point in time.</div>
+</td>
+</tr>
+<tr id="i13" class="rowColor">
+<td class="colFirst"><code><a href="SearchParam.Builder.html" title="class in io.milvus.param.dml">SearchParam.Builder</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#withVectorFieldName(java.lang.String)">withVectorFieldName</a></span>&#8203;(@NonNull java.lang.String&nbsp;vectorFieldName)</code></th>
+<td class="colLast">
+<div class="block">Sets target vector field by name.</div>
+</td>
+</tr>
+<tr id="i14" class="altColor">
+<td class="colFirst"><code><a href="SearchParam.Builder.html" title="class in io.milvus.param.dml">SearchParam.Builder</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#withVectors(java.util.List)">withVectors</a></span>&#8203;(@NonNull java.util.List&lt;?&gt;&nbsp;vectors)</code></th>
+<td class="colLast">
+<div class="block">Sets the target vectors.</div>
+</td>
+</tr>
+</table>
+<ul class="blockList">
+<li class="blockList">
+<h3>Methods inherited from class&nbsp;java.lang.Object</h3>
+<code>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</code></li>
+</ul>
+</li>
+</ul>
+</section>
+</li>
+</ul>
+</div>
+<div class="details">
+<ul class="blockList">
+<li class="blockList">
+
+<section role="region">
+<ul class="blockList">
+<li class="blockList">
+<h3>Method Detail</h3>
+
+<ul class="blockList">
+<li class="blockList">
+<h4>withCollectionName</h4>
+<pre class="methodSignature"><code>public&nbsp;SearchParam.Builder&nbsp;withCollectionName&#8203;(@NonNull
+                                              @NonNull java.lang.String&nbsp;collectionName)</code></pre>
+<div class="block">Sets the collection name. Collection name cannot be empty or null.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>collectionName</code> - collection name</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd><code>Builder</code></dd>
+</dl>
+</li>
+</ul>
+
+<ul class="blockList">
+<li class="blockList">
+<h4>withPartitionNames</h4>
+<pre class="methodSignature"><code>public&nbsp;SearchParam.Builder&nbsp;withPartitionNames&#8203;(@NonNull
+                                              @NonNull java.util.List&lt;java.lang.String&gt;&nbsp;partitionNames)</code></pre>
+<div class="block">Sets partition names list to specify search scope (Optional).</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>partitionNames</code> - partition names list</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd><code>Builder</code></dd>
+</dl>
+</li>
+</ul>
+
+<ul class="blockList">
+<li class="blockList">
+<h4>addPartitionName</h4>
+<pre class="methodSignature"><code>public&nbsp;SearchParam.Builder&nbsp;addPartitionName&#8203;(@NonNull
+                                            @NonNull java.lang.String&nbsp;partitionName)</code></pre>
+<div class="block">Adds a partition to specify search scope (Optional).</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>partitionName</code> - partition name</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd><code>Builder</code></dd>
+</dl>
+</li>
+</ul>
+
+<ul class="blockList">
+<li class="blockList">
+<h4>withMetricType</h4>
+<pre class="methodSignature"><code>public&nbsp;SearchParam.Builder&nbsp;withMetricType&#8203;(@NonNull
+                                          @NonNull MetricType&nbsp;metricType)</code></pre>
+<div class="block">Sets metric type of ANN searching.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>metricType</code> - metric type</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd><code>Builder</code></dd>
+</dl>
+</li>
+</ul>
+
+<ul class="blockList">
+<li class="blockList">
+<h4>withVectorFieldName</h4>
+<pre class="methodSignature"><code>public&nbsp;SearchParam.Builder&nbsp;withVectorFieldName&#8203;(@NonNull
+                                               @NonNull java.lang.String&nbsp;vectorFieldName)</code></pre>
+<div class="block">Sets target vector field by name. Field name cannot be empty or null.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>vectorFieldName</code> - vector field name</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd><code>Builder</code></dd>
+</dl>
+</li>
+</ul>
+
+<ul class="blockList">
+<li class="blockList">
+<h4>withTopK</h4>
+<pre class="methodSignature"><code>public&nbsp;SearchParam.Builder&nbsp;withTopK&#8203;(@NonNull
+                                    @NonNull java.lang.Integer&nbsp;topK)</code></pre>
+<div class="block">Sets topK value of ANN search.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>topK</code> - topK value</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd><code>Builder</code></dd>
+</dl>
+</li>
+</ul>
+
+<ul class="blockList">
+<li class="blockList">
+<h4>withExpr</h4>
+<pre class="methodSignature"><code>public&nbsp;SearchParam.Builder&nbsp;withExpr&#8203;(@NonNull
+                                    @NonNull java.lang.String&nbsp;expr)</code></pre>
+<div class="block">Sets expression to filter out entities before searching (Optional).</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>expr</code> - filtering expression</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd><code>Builder</code></dd>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="https://milvus.io/docs/v2.0.0/boolean.md">Boolean Expression Rules</a></dd>
+</dl>
+</li>
+</ul>
+
+<ul class="blockList">
+<li class="blockList">
+<h4>withOutFields</h4>
+<pre class="methodSignature"><code>public&nbsp;SearchParam.Builder&nbsp;withOutFields&#8203;(@NonNull
+                                         @NonNull java.util.List&lt;java.lang.String&gt;&nbsp;outFields)</code></pre>
+<div class="block">Specifies output fields (Optional).</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>outFields</code> - output fields</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd><code>Builder</code></dd>
+</dl>
+</li>
+</ul>
+
+<ul class="blockList">
+<li class="blockList">
+<h4>addOutField</h4>
+<pre class="methodSignature"><code>public&nbsp;SearchParam.Builder&nbsp;addOutField&#8203;(@NonNull
+                                       @NonNull java.lang.String&nbsp;fieldName)</code></pre>
+<div class="block">Specifies an output field (Optional).</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>fieldName</code> - filed name</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd><code>Builder</code></dd>
+</dl>
+</li>
+</ul>
+
+<ul class="blockList">
+<li class="blockList">
+<h4>withVectors</h4>
+<pre class="methodSignature"><code>public&nbsp;SearchParam.Builder&nbsp;withVectors&#8203;(@NonNull
+                                       @NonNull java.util.List&lt;?&gt;&nbsp;vectors)</code></pre>
+<div class="block">Sets the target vectors.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>vectors</code> - list of target vectors:
+                if vector type is FloatVector, vectors is List&lt;List&lt;Float&gt;&gt;;
+                if vector type is BinaryVector, vectors is List&lt;ByteBuffer&gt;;</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd><code>Builder</code></dd>
+</dl>
+</li>
+</ul>
+
+<ul class="blockList">
+<li class="blockList">
+<h4>withRoundDecimal</h4>
+<pre class="methodSignature"><code>public&nbsp;SearchParam.Builder&nbsp;withRoundDecimal&#8203;(@NonNull
+                                            @NonNull java.lang.Integer&nbsp;decimal)</code></pre>
+<div class="block">Specifies the decimal place of the returned results.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>decimal</code> - how many digits after the decimal point</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd><code>Builder</code></dd>
+</dl>
+</li>
+</ul>
+
+<ul class="blockList">
+<li class="blockList">
+<h4>withParams</h4>
+<pre class="methodSignature"><code>public&nbsp;SearchParam.Builder&nbsp;withParams&#8203;(@NonNull
+                                      @NonNull java.lang.String&nbsp;params)</code></pre>
+<div class="block">Sets the search parameters specific to the index type.
+
+ For example: IVF index, the search parameters can be "{\"nprobe\":10}"
+ For more information: @see <a href="https://milvus.io/docs/v2.0.0/index_selection.md">Index Selection</a></div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>params</code> - extra parameters in json format</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd><code>Builder</code></dd>
+</dl>
+</li>
+</ul>
+
+<ul class="blockList">
+<li class="blockList">
+<h4>withTravelTimestamp</h4>
+<pre class="methodSignature"><code>public&nbsp;SearchParam.Builder&nbsp;withTravelTimestamp&#8203;(@NonNull
+                                               @NonNull java.lang.Long&nbsp;ts)</code></pre>
+<div class="block">Specify an absolute timestamp in a search to get results based on a data view at a specified point in time.
+ Default value is 0, server executes search on a full data view.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>ts</code> - a timestamp value</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd><code>Builder</code></dd>
+</dl>
+</li>
+</ul>
+
+<ul class="blockList">
+<li class="blockList">
+<h4>withGuaranteeTimestamp</h4>
+<pre class="methodSignature"><code>public&nbsp;SearchParam.Builder&nbsp;withGuaranteeTimestamp&#8203;(@NonNull
+                                                  @NonNull java.lang.Long&nbsp;ts)</code></pre>
+<div class="block">Instructs server to see insert/delete operations performed before a provided timestamp.
+ If no such timestamp is specified, the server will wait for the latest operation to finish and search.
+
+ Note: The timestamp is not an absolute timestamp, it is a hybrid value combined by UTC time and internal flags.
+  We call it TSO, for more information please refer to: https://github.com/milvus-io/milvus/blob/master/docs/design_docs/milvus_hybrid_ts_en.md
+  You can get a TSO from insert/delete operations, see the <code>MutationResultWrapper</code> class.
+  Use an operation's TSO to set this parameter, the server will execute search after this operation is finished.
+
+ Default value is GUARANTEE_EVENTUALLY_TS, server executes search immediately.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>ts</code> - a timestamp value</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd><code>Builder</code></dd>
+</dl>
+</li>
+</ul>
+
+<ul class="blockListLast">
+<li class="blockList">
+<h4>build</h4>
+<pre class="methodSignature"><code>public&nbsp;SearchParam&nbsp;build()
+                  throws ParamException</code></pre>
+<div class="block">Verifies parameters and creates a new <a href="SearchParam.html" title="class in io.milvus.param.dml"><code>SearchParam</code></a> instance.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd><a href="SearchParam.html" title="class in io.milvus.param.dml"><code>SearchParam</code></a></dd>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code><a href="../../exception/ParamException.html" title="class in io.milvus.exception">ParamException</a></code></dd>
+</dl>
+</li>
+</ul>
+</li>
+</ul>
+</section>
+</li>
+</ul>
+</div>
+</div>

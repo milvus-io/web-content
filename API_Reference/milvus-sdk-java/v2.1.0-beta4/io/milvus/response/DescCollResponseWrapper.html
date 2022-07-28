@@ -1,0 +1,275 @@
+
+<h1 class="title">Class DescCollResponseWrapper</h1>
+<div class="contentContainer">
+<ul class="inheritance">
+<li>java.lang.Object</li>
+<li>
+<ul class="inheritance">
+<li>io.milvus.response.DescCollResponseWrapper</li>
+</ul>
+</li>
+</ul>
+<div class="description">
+<ul class="blockList">
+<li class="blockList">
+<hr>
+<pre><code>public class DescCollResponseWrapper
+extends java.lang.Object</code></pre>
+<div class="block">Util class to wrap response of <code>describeCollection</code> interface.</div>
+</li>
+</ul>
+</div>
+<div class="summary">
+<ul class="blockList">
+<li class="blockList">
+
+<section role="region">
+<ul class="blockList">
+<li class="blockList">
+<h3>Constructor Summary</h3>
+<table class="memberSummary">
+
+<tr>
+<th class="colFirst" scope="col">Constructor</th>
+<th class="colLast" scope="col">Description</th>
+</tr>
+<tr class="altColor">
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(io.milvus.grpc.DescribeCollectionResponse)">DescCollResponseWrapper</a></span>&#8203;(@NonNull io.milvus.grpc.DescribeCollectionResponse&nbsp;response)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+</table>
+</li>
+</ul>
+</section>
+
+<section role="region">
+<ul class="blockList">
+<li class="blockList">
+<h3>Method Summary</h3>
+<table class="memberSummary">
+
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colSecond" scope="col">Method</th>
+<th class="colLast" scope="col">Description</th>
+</tr>
+<tr id="i0" class="altColor">
+<td class="colFirst"><code>java.util.List&lt;java.lang.String&gt;</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getAliases()">getAliases</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Get aliases of the collection.</div>
+</td>
+</tr>
+<tr id="i1" class="rowColor">
+<td class="colFirst"><code>java.lang.String</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getCollectionDescription()">getCollectionDescription</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Get description of the collection.</div>
+</td>
+</tr>
+<tr id="i2" class="altColor">
+<td class="colFirst"><code>long</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getCollectionID()">getCollectionID</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Get internal id of the collection.</div>
+</td>
+</tr>
+<tr id="i3" class="rowColor">
+<td class="colFirst"><code>java.lang.String</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getCollectionName()">getCollectionName</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Get name of the collection.</div>
+</td>
+</tr>
+<tr id="i4" class="altColor">
+<td class="colFirst"><code>long</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getCreatedUtcTimestamp()">getCreatedUtcTimestamp</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Get utc timestamp when collection created.</div>
+</td>
+</tr>
+<tr id="i5" class="rowColor">
+<td class="colFirst"><code><a href="../param/collection/FieldType.html" title="class in io.milvus.param.collection">FieldType</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getFieldByName(java.lang.String)">getFieldByName</a></span>&#8203;(@NonNull java.lang.String&nbsp;fieldName)</code></th>
+<td class="colLast">
+<div class="block">Get schema of a field by name.</div>
+</td>
+</tr>
+<tr id="i6" class="altColor">
+<td class="colFirst"><code>java.util.List&lt;<a href="../param/collection/FieldType.html" title="class in io.milvus.param.collection">FieldType</a>&gt;</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getFields()">getFields</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Get schema of the collection's fields.</div>
+</td>
+</tr>
+<tr id="i7" class="rowColor">
+<td class="colFirst"><code>int</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getShardNumber()">getShardNumber</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Get shard number of the collection.</div>
+</td>
+</tr>
+<tr id="i8" class="altColor">
+<td class="colFirst"><code>java.lang.String</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#toString()">toString</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Construct a <code>String</code> by <a href="DescCollResponseWrapper.html" title="class in io.milvus.response"><code>DescCollResponseWrapper</code></a> instance.</div>
+</td>
+</tr>
+</table>
+<ul class="blockList">
+<li class="blockList">
+<h3>Methods inherited from class&nbsp;java.lang.Object</h3>
+<code>clone, equals, finalize, getClass, hashCode, notify, notifyAll, wait, wait, wait</code></li>
+</ul>
+</li>
+</ul>
+</section>
+</li>
+</ul>
+</div>
+<div class="details">
+<ul class="blockList">
+<li class="blockList">
+
+<section role="region">
+<ul class="blockList">
+<li class="blockList">
+<h3>Constructor Detail</h3>
+
+<ul class="blockListLast">
+<li class="blockList">
+<h4>DescCollResponseWrapper</h4>
+<pre><code>public&nbsp;DescCollResponseWrapper&#8203;(@NonNull
+                               @NonNull io.milvus.grpc.DescribeCollectionResponse&nbsp;response)</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+</section>
+
+<section role="region">
+<ul class="blockList">
+<li class="blockList">
+<h3>Method Detail</h3>
+
+<ul class="blockList">
+<li class="blockList">
+<h4>getCollectionName</h4>
+<pre class="methodSignature"><code>public&nbsp;java.lang.String&nbsp;getCollectionName()</code></pre>
+<div class="block">Get name of the collection.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd><code>String</code> name of the collection</dd>
+</dl>
+</li>
+</ul>
+
+<ul class="blockList">
+<li class="blockList">
+<h4>getCollectionDescription</h4>
+<pre class="methodSignature"><code>public&nbsp;java.lang.String&nbsp;getCollectionDescription()</code></pre>
+<div class="block">Get description of the collection.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd><code>String</code> description of the collection</dd>
+</dl>
+</li>
+</ul>
+
+<ul class="blockList">
+<li class="blockList">
+<h4>getCollectionID</h4>
+<pre class="methodSignature"><code>public&nbsp;long&nbsp;getCollectionID()</code></pre>
+<div class="block">Get internal id of the collection.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd><code>long</code> internal id of the collection</dd>
+</dl>
+</li>
+</ul>
+
+<ul class="blockList">
+<li class="blockList">
+<h4>getShardNumber</h4>
+<pre class="methodSignature"><code>public&nbsp;int&nbsp;getShardNumber()</code></pre>
+<div class="block">Get shard number of the collection.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd><code>int</code> shard number of the collection</dd>
+</dl>
+</li>
+</ul>
+
+<ul class="blockList">
+<li class="blockList">
+<h4>getCreatedUtcTimestamp</h4>
+<pre class="methodSignature"><code>public&nbsp;long&nbsp;getCreatedUtcTimestamp()</code></pre>
+<div class="block">Get utc timestamp when collection created.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd><code>long</code> utc timestamp when collection created</dd>
+</dl>
+</li>
+</ul>
+
+<ul class="blockList">
+<li class="blockList">
+<h4>getAliases</h4>
+<pre class="methodSignature"><code>public&nbsp;java.util.List&lt;java.lang.String&gt;&nbsp;getAliases()</code></pre>
+<div class="block">Get aliases of the collection.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>List&lt;String&gt; aliases of the collection</dd>
+</dl>
+</li>
+</ul>
+
+<ul class="blockList">
+<li class="blockList">
+<h4>getFields</h4>
+<pre class="methodSignature"><code>public&nbsp;java.util.List&lt;FieldType&gt;&nbsp;getFields()</code></pre>
+<div class="block">Get schema of the collection's fields.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>List&lt;FieldType&gt; schema of the collection's fields</dd>
+</dl>
+</li>
+</ul>
+
+<ul class="blockList">
+<li class="blockList">
+<h4>getFieldByName</h4>
+<pre class="methodSignature"><code>public&nbsp;FieldType&nbsp;getFieldByName&#8203;(@NonNull
+                                @NonNull java.lang.String&nbsp;fieldName)</code></pre>
+<div class="block">Get schema of a field by name.
+ Return null if the field doesn't exist</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>fieldName</code> - field name to get field description</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd><a href="../param/collection/FieldType.html" title="class in io.milvus.param.collection"><code>FieldType</code></a> schema of the field</dd>
+</dl>
+</li>
+</ul>
+
+<ul class="blockListLast">
+<li class="blockList">
+<h4>toString</h4>
+<pre class="methodSignature"><code>public&nbsp;java.lang.String&nbsp;toString()</code></pre>
+<div class="block">Construct a <code>String</code> by <a href="DescCollResponseWrapper.html" title="class in io.milvus.response"><code>DescCollResponseWrapper</code></a> instance.</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
+<dd><code>toString</code>&nbsp;in class&nbsp;<code>java.lang.Object</code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd><code>String</code></dd>
+</dl>
+</li>
+</ul>
+</li>
+</ul>
+</section>
+</li>
+</ul>
+</div>
+</div>

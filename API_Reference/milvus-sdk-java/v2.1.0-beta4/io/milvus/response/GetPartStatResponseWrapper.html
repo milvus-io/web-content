@@ -1,0 +1,121 @@
+
+<h1 class="title">Class GetPartStatResponseWrapper</h1>
+<div class="contentContainer">
+<ul class="inheritance">
+<li>java.lang.Object</li>
+<li>
+<ul class="inheritance">
+<li>io.milvus.response.GetPartStatResponseWrapper</li>
+</ul>
+</li>
+</ul>
+<div class="description">
+<ul class="blockList">
+<li class="blockList">
+<hr>
+<pre><code>public class GetPartStatResponseWrapper
+extends java.lang.Object</code></pre>
+<div class="block">Utility class to wrap response of <code>getPartitionStatistics</code> interface.</div>
+</li>
+</ul>
+</div>
+<div class="summary">
+<ul class="blockList">
+<li class="blockList">
+
+<section role="region">
+<ul class="blockList">
+<li class="blockList">
+<h3>Constructor Summary</h3>
+<table class="memberSummary">
+
+<tr>
+<th class="colFirst" scope="col">Constructor</th>
+<th class="colLast" scope="col">Description</th>
+</tr>
+<tr class="altColor">
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(io.milvus.grpc.GetPartitionStatisticsResponse)">GetPartStatResponseWrapper</a></span>&#8203;(@NonNull io.milvus.grpc.GetPartitionStatisticsResponse&nbsp;stat)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+</table>
+</li>
+</ul>
+</section>
+
+<section role="region">
+<ul class="blockList">
+<li class="blockList">
+<h3>Method Summary</h3>
+<table class="memberSummary">
+
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colSecond" scope="col">Method</th>
+<th class="colLast" scope="col">Description</th>
+</tr>
+<tr id="i0" class="altColor">
+<td class="colFirst"><code>long</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getRowCount()">getRowCount</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Gets the row count of a field.</div>
+</td>
+</tr>
+</table>
+<ul class="blockList">
+<li class="blockList">
+<h3>Methods inherited from class&nbsp;java.lang.Object</h3>
+<code>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</code></li>
+</ul>
+</li>
+</ul>
+</section>
+</li>
+</ul>
+</div>
+<div class="details">
+<ul class="blockList">
+<li class="blockList">
+
+<section role="region">
+<ul class="blockList">
+<li class="blockList">
+<h3>Constructor Detail</h3>
+
+<ul class="blockListLast">
+<li class="blockList">
+<h4>GetPartStatResponseWrapper</h4>
+<pre><code>public&nbsp;GetPartStatResponseWrapper&#8203;(@NonNull
+                                  @NonNull io.milvus.grpc.GetPartitionStatisticsResponse&nbsp;stat)</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+</section>
+
+<section role="region">
+<ul class="blockList">
+<li class="blockList">
+<h3>Method Detail</h3>
+
+<ul class="blockListLast">
+<li class="blockList">
+<h4>getRowCount</h4>
+<pre class="methodSignature"><code>public&nbsp;long&nbsp;getRowCount()
+                 throws java.lang.NumberFormatException</code></pre>
+<div class="block">Gets the row count of a field.
+ Throw <code>NumberFormatException</code> if the row count is not a number.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd><code>int</code> dimension of the vector field</dd>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code>java.lang.NumberFormatException</code></dd>
+</dl>
+</li>
+</ul>
+</li>
+</ul>
+</section>
+</li>
+</ul>
+</div>
+</div>
