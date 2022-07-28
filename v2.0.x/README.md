@@ -34,8 +34,9 @@ Want to write the docs yourself? See [CONTRIBUTING](CONTRIBUTING.md) for details
 
 Currently, we maintain the following versions of Milvus documentation in different branches:
 
-| `v2.0.x` branch | 2.0 version (the default and latest branch)   |
+| `v2.1.x` branch | 2.1 version (the default and latest branch)   |
 | --------------- | --------------------------------------------- |
+| `v2.0.x` branch | 2.0 version                                   |
 | `v1.1.1` branch | 1.1.1 version                                 |
 | `v1.1.0` branch | 1.1.0 version                                 |
 | `v1.0.0` branch | 1.0.0 version (first with long-term support)  |

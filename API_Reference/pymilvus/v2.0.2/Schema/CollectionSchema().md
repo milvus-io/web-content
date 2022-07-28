@@ -16,9 +16,9 @@ A CollectionSchema object.
 
 | Property             | Description                                                                  |
 | -------------------- | ---------------------------------------------------------------------------- |
-| `fields`             | List of FieldSchema                                                          |
-| `description`        | Description of the CollectionSchema                                          |
-| `auto_id`            | Boolean value that indicates if the primary keys are automatically generated |
+| `fields`             | List of FieldSchema.                                                          |
+| `description`        | Description of the CollectionSchema.                                          |
+| `auto_id`            | Boolean value that indicates if the primary keys are automatically generated. |
 
 ## Example
 

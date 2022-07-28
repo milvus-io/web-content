@@ -8,17 +8,35 @@ summary: Learn how to install Milvus stanalone on Kubernetes.
 
 <div class="tab-wrapper"><a href="install_standalone-docker.md" class=''>Docker Compose</a><a href="install_standalone-helm.md" class='active '>Helm</a><a href="install_standalone-aptyum.md" class=''>APT or YUM</a></div>
 
-# Install Milvus Standalone
+# Install Milvus Standalone with Helm
 
-This topic describes how to install Milvus standalone using Kubernetes.
+This topic describes how to install Milvus standalone with Helm on Kubernetes (K8s).
 
 ## Prerequisites
 
 Check [the requirements](prerequisite-helm.md)  for hardware and software prior to your installation.
 
-We recommend installing Milvus on Kubernetes (K8s) with minikube, which is a tool that allows you to run Kubernetes locally.
+## Create a K8s cluster using minikube
 
-minikube has a dependency on default StorageClass when installed. Check the dependency by running the following command. Other installation methods requires manual configuration of the StorageClass. See [Change the Default StorageClass](https://kubernetes.io/docs/tasks/administer-cluster/change-default-storage-class/) for more information.
+We recommend installing Milvus on K8s with [minikube](https://minikube.sigs.k8s.io/docs/), a tool that allows you to run K8s locally.
+
+### 1. Install minikube
+
+See [install minikube](https://minikube.sigs.k8s.io/docs/start/) for more information.
+
+### 2. Start a K8s cluster using minikube
+
+After installing minikube, run the following command to start a K8s cluster.
+
+```
+$ minikube start
+```
+
+### 3. Check the K8s cluster status
+
+Run `$ kubectl cluster-info` to check the status of the K8s cluster you just created. Ensure that you can access the K8s cluster via `kubectl`. If you have not installed `kubectl` locally, see [Use kubectl inside minikube](https://minikube.sigs.k8s.io/docs/handbook/kubectl/).
+
+minikube has a dependency on default StorageClass when installed. Check the dependency by running the following command. Other installation methods require manual configuration of the StorageClass. See [Change the Default StorageClass](https://kubernetes.io/docs/tasks/administer-cluster/change-default-storage-class/) for more information.
 
 ```bash
 $ kubectl get sc
@@ -26,15 +44,9 @@ NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDI
 standard (default)    k8s.io/minikube-hostpath     Delete           Immediate             false                    3m36s
 ```
 
-## Start a K8s cluster
-
-```bash
-$ minikube start
-```
-
 ## Install Helm Chart for Milvus
 
-Helm is a Kubernetes package manager that can help you deploy Milvus quickly.
+Helm is a K8s package manager that can help you deploy Milvus quickly.
 
 1. Add Milvus to Helm's repository.
 

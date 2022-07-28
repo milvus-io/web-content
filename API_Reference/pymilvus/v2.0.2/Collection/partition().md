@@ -12,7 +12,7 @@ partition(partition_name)
 
 | Parameter         | Description                                                  | Type                            | Required |
 | ----------------- | ------------------------------------------------------------ | ------------------------------- | -------- |
-| `partition_name`  | Name of the partition to get                                 | String                          | true     |
+| `partition_name`  | Name of the partition to get.                                 | String                          | true     |
 
 
 ## Return

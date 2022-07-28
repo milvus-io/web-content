@@ -1,6 +1,6 @@
 # query()
 
-Conducts a vector query.
+This method conducts a vector query.
 
 ## Invocation
 
@@ -8,23 +8,23 @@ Conducts a vector query.
 new milvusClient(MILUVS_ADDRESS).dataManager.query(QueryReq);
 ```
 
-## Parameter
+## Parameters
 
 ### QueryReq
 
-| Parameter                  | Description                           | type     | required |
+| Parameter                  | Description                           | Type     | Required |
 | -------------------------- | ------------------------------------- | -------- | -------- |
-| collection_name            | Collection name                       | String   | true     |
-| output_fields              | Vector or scalar field to be returned | String[] | true     |
-| expr(optional)             | Scalar field filter expression        | String   | false    |
-| partitions_names(optional) | Array of partition names              | string[] | false    |
+| collection_name            | Name of the collection to search on                       | String   | True     |
+| output_fields              | Vector or scalar field to be returned | String[] | True     |
+| expr(optional)             | Boolean expression to filter the data         | String   | False    |
+| partitions_names(optional) | An array of the names of the partitions to search on.       | String[] | Talse    |
 
 ## Example
 
 ```javascript
 new milvusClient(MILUVS_ADDRESS).dataManager.query({
   collection_name: "my_collection",
-  expr: "age in [1,2,3,4,5,6,7,8]",
+  expr: "age > 0",
   output_fields: ["age"],
 });
 ```
@@ -33,4 +33,11 @@ new milvusClient(MILUVS_ADDRESS).dataManager.query({
 
 ```javascript
 // query return
+{
+  status: { error_code: 'Success', reason: '' },
+  data: [
+    { age: '434848878802248081' },
+    ...999 more items,
+  ]
+}
 ```

@@ -12,9 +12,9 @@ loading_progress(collection_name, partition_names=None, using='default')
 
 | Parameter         | Description                                                  | Type                            | Required |
 | ----------------- | ------------------------------------------------------------ | ------------------------------- | -------- |
-| `collection_name` | Name of the collection to load                               | String                          | True     |
-| `partition_names` | Name of the partition(s) to load                             | list[String]                    | False    |
-| `using`           | Milvus Connection used to load the collection                | String                          | False    |
+| `collection_name` | Name of the collection to load.                               | String                          | True     |
+| `partition_names` | Name of the partition(s) to load.                             | list[String]                    | False    |
+| `using`           | Milvus connection used to load the collection.                | String                          | False    |
 
 ## Return
 
