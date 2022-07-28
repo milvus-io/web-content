@@ -162,7 +162,7 @@ We are excited to announce the general release of Milvus 2.0 and it is now consi
 <h3 id="v2.0.0">Improvements</h3>
 
 - Changes the default consistency level to `Bounded`:
-		If consistency level `Strong` is adopted during a search, Milvus waits until data is synchronized before the search, thus spending longer even on a small dataset. Under the the default consistency level of `Bounded`, newly inserted data remain invisible for a could of seconds before they can be retrieved. For more information, see [Guarantee Timestamp in Search Requests](https://github.com/milvus-io/milvus/blob/master/docs/developer_guides/how-guarantee-ts-works.md).
+		If consistency level `Strong` is adopted during a search, Milvus waits until data are synchronized before the search, thus spending longer even on a small dataset. Under the the default consistency level of `Bounded`, newly inserted data remain invisible for a could of seconds before they can be retrieved. For more information, see [Guarantee Timestamp in Search Requests](https://github.com/milvus-io/milvus/blob/master/docs/developer_guides/how-guarantee-ts-works.md).
 
 - [#15223](https://github.com/milvus-io/milvus/pull/15223) Makes query nodes send search or query results by RPC.
 
@@ -265,7 +265,7 @@ It should be noted that Milvus 2.0.0-PreGA is NOT compatible with previous versi
 
 <h3 id="v2.0.0-PreGA">Bug fixes</h3>
 
-- Data is not cleared on etcd, Pulsar, and MinIO when a collection is dropped:
+- Data are not cleared on etcd, Pulsar, and MinIO when a collection is dropped:
   - [#12191](https://github.com/milvus-io/milvus/pull/12191) Clears the metadata of the dropped segment on etcd.
   - [#11554](https://github.com/milvus-io/milvus/pull/11554) Adds garbage collector for data coord.
   - [#11552](https://github.com/milvus-io/milvus/pull/11552) Completes procedure of dropping collection in data node.

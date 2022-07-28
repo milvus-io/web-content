@@ -26,7 +26,7 @@ Under this section, you can enable local storage, and configure the path, etc.
   <tbody>
     <tr>
       <td>
-        <li>Local path to where vector data is stored during a search or a query to avoid repetitve access to MinIO or S3 service.</li>
+        <li>Local path to where vector data are stored during a search or a query to avoid repetitve access to MinIO or S3 service.</li>
         <li>Caution: Changing this parameter after using Milvus for a period of time will affect your access to old data.</li>
         <li>It is recommended to change this parameter before starting Milvus for the first time.</li>
         <li>This configuration takes effect only when <code>localStorage.enabled</code> is set as <code>true</code>.</li>
