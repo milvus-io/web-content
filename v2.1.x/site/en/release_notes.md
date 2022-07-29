@@ -34,7 +34,7 @@ Release date: 2022-07-27
 </table>
 
 
-Milvus 2.1.0 not only introduces many new features including support for VARCHAR data type, memory replicas, embedded Milvus, Kafka support, and RESTful API but also greatly improves the functionality, performance, and stability of Milvus. 
+Milvus 2.1.0 not only introduces many new features including support for VARCHAR data type, memory replicas, Kafka support, and RESTful API but also greatly improves the functionality, performance, and stability of Milvus. 
 
 <h3 id="v2.1.0">Features</h3>
 
@@ -45,10 +45,6 @@ Milvus now supports variable-length string as a scalar data type. Like previous 
 - In-memory replicas
 
 In-memory replicas enable you to load data on multiple query nodes. Like read replicas in traditional databases, in-memory replicas can help increase throughput if you have a relatively small dataset but want to scale read throughput with more hardware resources. We will support hedged read in future releases to increase availability when applying in-memory replicas.
-
-- Embedded Milvus
-
-Embedded Milvus enables you to [pip install Milvus](install_embedded_milvus.md) in one command, try quick demos and run short scripts in Python on your Macbook, including on the ones with M1 processor. 
 
 - Kafka support (Beta)
 
