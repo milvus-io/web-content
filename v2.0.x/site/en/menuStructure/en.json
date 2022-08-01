@@ -529,39 +529,6 @@
       "order": 3
     },
     {
-      "id": "migrate",
-      "title": "Migrate",
-      "label1": "admin_guide",
-      "label2": "",
-      "label3": "",
-      "order": 8,
-      "isMenu": true
-    },
-    {
-      "id": "h2m.md",
-      "title": "HDF5 to Milvus",
-      "label1": "admin_guide",
-      "label2": "migrate",
-      "label3": "",
-      "order": 0
-    },
-    {
-      "id": "f2m.md",
-      "title": "Faiss to Milvus ",
-      "label1": "admin_guide",
-      "label2": "migrate",
-      "label3": "",
-      "order": 1
-    },
-    {
-      "id": "m2m.md",
-      "title": "Milvus 1.x to 2.0",
-      "label1": "admin_guide",
-      "label2": "migrate",
-      "label3": "",
-      "order": 2
-    },
-    {
       "id": "tools",
       "title": "Tools",
       "label1": "",
