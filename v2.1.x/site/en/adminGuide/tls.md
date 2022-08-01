@@ -6,7 +6,7 @@ summary: Learn how to enable TLS proxy in Milvus.
 
 # Encryption in Transit
 
-TLS (Transport Layer Security) is a type of mutual authentication using the TLS protocol. Milvus proxy uses the TLS mutual authentication.
+TLS (Transport Layer Security) is an encryption protocol to ensure communication security. Milvus proxy uses TLS one-way and two-way authentication.
 
 This topic describes how to enable TLS proxy in Milvus.
 
@@ -16,6 +16,15 @@ This topic describes how to enable TLS proxy in Milvus.
 
 Make sure OpenSSL is installed. If you have not installed it, [build and install](https://github.com/openssl/openssl/blob/master/INSTALL.md) OpenSSL first.
 
+```shell
+openssl version
+```
+
+If OpenSSL is not installed. It can be installed with the following command in Ubuntu.
+
+```shell
+sudo apt install openssl
+```
 
 ### Create files
 
@@ -501,15 +510,22 @@ tls:
 
 common:
   security:
-    tlsEnabled: true
+    tlsMode: 2
  ```
- 
+
+### One-way authentication
+
+Server need server.pem and server.key. Client-side need server.pem.
+
+### Two-way authentication
+
+Server-side need server.pem, server.key and ca.pem. Client-side need client.pem, client.key, ca.pem.
 
 ## Connect to the Milvus server with TLS
 
 Configure the file paths of `client.pem`, `client.key`, and `ca.pem` for the client when using the Milvus SDK.
 
-The following is an example.
+The following example uses the Milvus Python SDK.
 
 ```
 from pymilvus import connections
@@ -525,6 +541,6 @@ print(f"\nList connections:")
 print(connections.list_connections())
 ```
 
-See [example_tls.py](https://github.com/milvus-io/pymilvus/blob/master/examples/example_tls.py) for more information.
+See [example_tls1.py](https://github.com/milvus-io/pymilvus/blob/master/examples/example_tls1.py) and [example_tls2.py](https://github.com/milvus-io/pymilvus/blob/master/examples/example_tls2.py) for more information.
 
  
