@@ -8,7 +8,7 @@ summary: Learn how to load a collection into memory for CRUD operations in Milvu
 
 This topic describes how to load the collection to memory before a search or a query. All search and query operations within Milvus are executed in memory. 
 
-Milvus 2.1 allows users to load a collection as multiple replicas to utilize the CPU and memory resources of extra query nodes. This feature boost the overall QPS and throughput with extra hardware. It is supported on PyMilvus in current release.
+Milvus 2.1 allows users to load a collection as multiple replicas to utilize the CPU and memory resources of extra query nodes. This feature boost the overall QPS and throughput without extra hardware. It is supported on PyMilvus in current release.
 
 <div class="alert warning">
 <ul>
