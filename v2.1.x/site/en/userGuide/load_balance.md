@@ -22,6 +22,7 @@ Get the `segmentID` of the sealed segment that you expect to transfer and the `n
   <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
   <a href="?shell">CLI</a>
+  <a href="?curl">RESTful API</a>
 </div>
 
 
@@ -123,6 +124,7 @@ Transfer the sealed segment(s) with the `segmentID` and the `nodeID` of the curr
   <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
   <a href="?shell">CLI</a>
+  <a href="?curl">RESTful API</a>
 </div>
 
 

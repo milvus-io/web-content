@@ -35,6 +35,7 @@ The following example filters data with primary key values of `0` and `1`.
   <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
   <a href="?shell">CLI</a>
+  <a href="?curl">RESTful API</a>
 </div>
 
 
@@ -53,6 +54,10 @@ private static final String DELETE_EXPR = "book_id in [0,1]";
 ```shell
 delete entities -c book
 The expression to specify entities to be deleted： book_id in [0,1]
+```
+
+```curl
+"expr" = "book_id in [0,1]"
 ```
 
 <table class="language-shell">
@@ -85,6 +90,7 @@ Delete the entities with the boolean expression you created. Milvus returns the 
   <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
   <a href="?shell">CLI</a>
+  <a href="?curl">RESTful API</a>
 </div>
 
 
@@ -117,6 +123,25 @@ milvusClient.delete(
 ```shell
 You are trying to delete the entities of collection. This action cannot be undone!
 Do you want to continue? [y/N]: y
+```
+
+```curl
+curl -X 'DELETE' \
+  'http://localhost:9091/api/v1/entities' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "collection_name": "book",
+    "expr": "book_id in [0,1]"
+  }'
+
+# Output
+{
+  "status":{},
+  "IDs":{"IdField":{"IntId":{"data":[0,1]}}},
+  "delete_cnt":2,
+  "timestamp":434262178115092482
+}
 ```
 
 <table class="language-python">
@@ -184,6 +209,24 @@ Do you want to continue? [y/N]: y
 	</tbody>
 </table>
 
+<table class="language-curl">
+	<thead>
+	<tr>
+		<th>Parameter</th>
+		<th>Description</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td><code>collection_name</code></td>
+		<td>Name of the collection to delete entities from.</td>
+	</tr>
+	<tr>
+		<td><code>expr</code></td>
+		<td>Boolean expression that specifies the entities to delete.</td>
+	</tr>
+	</tbody>
+</table>
 
 ## What's next
 

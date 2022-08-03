@@ -21,6 +21,7 @@ The following example builds a partition `novel` in the collection `book`.
   <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
   <a href="?shell">CLI</a>
+  <a href="?curl">RESTful API</a>
 </div>
 
 
@@ -61,6 +62,16 @@ milvusClient.createPartition(
 create partition -c book -p novel
 ```
 
+```curl
+curl -X 'POST' \
+  'http://localhost:9091/api/v1/partition' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "collection_name": "book",
+    "partition_name": "novel"
+  }'
+```
 
 <table class="language-python">
 	<thead>
@@ -164,6 +175,25 @@ create partition -c book -p novel
             <td>The description of the partition.</td>
         </tr>
     </tbody>
+</table>
+
+<table class="language-curl">
+	<thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+    </tr>
+	</thead>
+	<tbody>
+    <tr>
+      <td><code>collection_name</code></td>
+      <td>Name of the collection to create a partition in.</td>
+    </tr>
+    <tr>
+      <td><code>partition_name</code></td>
+      <td>Name of the partition to create.</td>
+    </tr>
+	</tbody>
 </table>
 
 ## Limits

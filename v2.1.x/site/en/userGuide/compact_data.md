@@ -26,6 +26,7 @@ Compaction requests are processed asynchronously because they are usually time-c
   <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
   <a href="?shell">CLI</a>
+  <a href="?curl">RESTful API</a>
 </div>
 
 
@@ -57,6 +58,19 @@ long compactionID = response.getData().getCompactionID();
 
 ```shell
 compact -c book
+```
+
+```curl
+curl -X 'POST' \
+  'http://localhost:9091/api/v1/compaction' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "collectionID": 434262071120432449
+  }'
+
+# Output:
+{"status":{},"compactionID":434262132129005569}
 ```
 
 <table class="language-javascript">
@@ -114,6 +128,7 @@ You can check the compaction status with the compaction ID returned when the man
   <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
   <a href="?shell">CLI</a>
+  <a href="?curl">RESTful API</a>
 </div>
 
 
@@ -140,6 +155,19 @@ milvusClient.getCompactionState(GetCompactionStateParam.newBuilder()
 
 ```shell
 show compaction_state -c book
+```
+
+```curl
+curl -X 'GET' \
+  'http://localhost:9091/api/v1/compaction/state' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "compactionID": 434262132129005569
+  }'
+
+# Output:
+{"status":{},"state":2}
 ```
 
 ## What's next

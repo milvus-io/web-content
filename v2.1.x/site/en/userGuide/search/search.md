@@ -23,6 +23,7 @@ All search and query operations within Milvus are executed in memory. Load the c
   <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
   <a href="?shell">CLI</a>
+  <a href="?curl">RESTful API</a>
 </div>
 
 
@@ -61,6 +62,16 @@ milvusClient.loadCollection(
 load -c book
 ```
 
+```curl
+curl -X 'POST' \
+  'http://localhost:9091/api/v1/collection/load' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "collection_name": "book"
+  }'
+```
+
 ## Prepare search parameters
 
 Prepare the parameters that suit your search scenario. The following example defines that the search will calculate the distance with Euclidean distance, and retrieve vectors from ten closest clusters built by the IVF_FLAT index.
@@ -71,6 +82,7 @@ Prepare the parameters that suit your search scenario. The following example def
   <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
   <a href="?shell">CLI</a>
+  <a href="?curl">RESTful API</a>
 </div>
 
 
@@ -122,6 +134,46 @@ timeout []:
 Guarantee Timestamp(It instructs Milvus to see all operations performed before a provided timestamp. If no such timestamp is provided, then Milvus will search all operations performed to date) [0]: 
 
 Travel Timestamp(Specify a timestamp in a search to get results based on a data view) [0]:
+```
+
+```curl
+curl -X 'POST' \
+  'http://localhost:9091/api/v1/search' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "collection_name": "book",
+    "output_fields": ["book_id"],
+    "search_params": [
+      {"key": "anns_field", "value": "book_intro"},
+      {"key": "topk", "value": "2"},
+      {"key": "params", "value": "{\"nprobe\": 10}"},
+      {"key": "metric_type", "value": "L2"},
+      {"key": "round_decimal", "value": "-1"}
+    ],
+    "vectors": [ [0.1,0.2] ],
+    "dsl_type": 1
+  }'
+
+# Output:
+{
+  "status":{},
+  "results":{
+    "num_queries":1,
+    "top_k":2,
+    "fields_data":[
+      {
+        "type":5,
+        "field_name":"book_id",
+        "Field":{"Scalars":{"Data":{"LongData":{"data":[1,2]}}}},
+        "field_id":100
+      }
+    ],
+    "scores":[1.45,4.25],
+    "ids":{"IdField":{"IntId":{"data":[1,2]}}},
+    "topks":[2]},
+    "collection_name":"book"
+}
 ```
 
 <table class="language-python">
@@ -250,6 +302,51 @@ Travel Timestamp(Specify a timestamp in a search to get results based on a data 
     </tbody>
 </table>
 
+<table class="language-curl">
+	<thead>
+	<tr>
+		<th>Parameter</th>
+		<th>Description</th>
+	</tr>
+	</thead>
+	<tbody>
+    <tr>
+		<td><code>output_fields</code>(optional)</td>
+		<td>Name of the field to return. Vector field is not supported in current release.</td>
+	</tr>
+	<tr>
+		<td><code>anns_field</code></td>
+		<td>Name of the field to search on.</td>
+	</tr>
+	<tr>
+		<td><code>topk</code></td>
+		<td>Number of the most similar results to return.</td>
+	</tr>
+	<tr>
+		<td><code>params</code></td>
+		<td>Search parameter(s) specific to the index. See <a href="index.md">Vector Index</a> for more information.</td>
+	</tr>
+	<tr>
+		<td><code>metric_type</code></td>
+		<td>Metrics used to measure similarity of vectors. See <a href="metric.md">Simlarity Metrics</a> for more information.</td>
+	</tr>
+	<tr>
+		<td><code>round_decimal</code> (optional)</td>
+		<td>Number of decimal places of returned distance.</td>
+	</tr>
+	<tr>
+		<td><code>Vectors</code></td>
+		<td>Vectors to search with.</td>
+	</tr>
+	<tr>
+		<td><code>dsl_type</code></td>
+		<td>Type of <code>dsl</code> (Data Search Language) field:
+		<br>0: "Dsl"
+		<br>1: "BoolExprV1"
+		</td>
+	</tr>
+	</tbody>
+</table>
 
 ## Conduct a vector search
 
@@ -263,6 +360,7 @@ Milvus supports setting consistency level specifically for a search (only on PyM
   <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
   <a href="?shell">CLI</a>
+  <a href="?curl">RESTful API</a>
 </div>
 
 
@@ -322,6 +420,10 @@ R<SearchResults> respSearch = milvusClient.search(searchParam);
 ```
 
 ```shell
+# Follow the previous step.
+```
+
+```curl
 # Follow the previous step.
 ```
 
@@ -529,6 +631,7 @@ Check the primary key values of the most similar vectors and their distances.
   <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
   <a href="?shell">CLI</a>
+  <a href="?curl">RESTful API</a>
 </div>
 
 
@@ -567,6 +670,7 @@ Release the collection loaded in Milvus to reduce memory consumption when the se
   <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
   <a href="?shell">CLI</a>
+  <a href="?curl">RESTful API</a>
 </div>
 
 
@@ -597,6 +701,16 @@ milvusClient.releaseCollection(
 
 ```shell
 release -c book
+```
+
+``` curl
+curl -X 'DELETE' \
+  'http://localhost:9091/api/v1/collection/load' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "collection_name": "book"
+  }'
 ```
 
 ## Limits

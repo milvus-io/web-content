@@ -25,6 +25,7 @@ Construct a Milvus connection. Ensure to connect to Milvus server before any ope
   <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
   <a href="?shell">CLI</a>
+  <a href="?curl">RESTful API</a>
 </div>
 
 
@@ -67,6 +68,9 @@ final MilvusServiceClient milvusClient = new MilvusServiceClient(
 connect -h localhost -p 19530 -a default
 ```
 
+```curl
+# You can use any HTTP client implementation to connect to Milvus server's HTTP port.
+```
 
 <table class="language-python">
 	<thead>
@@ -198,6 +202,7 @@ Disconnect from a Milvus server.
   <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
   <a href="?shell">CLI</a>
+  <a href="?curl">RESTful API</a>
 </div>
 
 
@@ -220,6 +225,10 @@ milvusClient.close()
 
 ```shell
 connect -D
+```
+
+```curl
+# Close your HTTP client connection.
 ```
 
 <table class="language-python">

@@ -23,6 +23,7 @@ All search and query operations within Milvus are executed in memory. Load the c
   <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
   <a href="?shell">CLI</a>
+  <a href="?curl">RESTful API</a>
 </div>
 
 
@@ -61,6 +62,9 @@ milvusClient.loadCollection(
 load -c book
 ```
 
+```curl
+# See the following step.
+```
 
 ## Conduct a hybrid vector search
 
@@ -72,6 +76,7 @@ By specifying the boolean expression, you can filter the scalar field of the ent
   <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
   <a href="?shell">CLI</a>
+  <a href="?curl">RESTful API</a>
 </div>
 
 
@@ -165,6 +170,47 @@ timeout []:
 Guarantee Timestamp(It instructs Milvus to see all operations performed before a provided timestamp. If no such timestamp is provided, then Milvus will search all operations performed to date) [0]: 
 
 Travel Timestamp(Specify a timestamp in a search to get results based on a data view) [0]:
+```
+
+```curl
+curl -X 'POST' \
+  'http://localhost:9091/api/v1/search' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "collection_name": "book",
+    "output_fields": ["book_id"],
+    "search_params": [
+      {"key": "anns_field", "value": "book_intro"},
+      {"key": "topk", "value": "2"},
+      {"key": "params", "value": "{\"nprobe\": 10}"},
+      {"key": "metric_type", "value": "L2"},
+      {"key": "round_decimal", "value": "-1"}
+    ],
+    "vectors": [ [0.1,0.2] ],
+    "dsl": "word_count >= 11000",
+    "dsl_type": 1
+  }'
+
+# Output:
+{
+  "status":{},
+  "results":{
+    "num_queries":1,
+    "top_k":2,
+    "fields_data":[
+      {
+        "type":5,
+        "field_name":"book_id",
+        "Field":{"Scalars":{"Data":{"LongData":{"data":[11,12]}}}},
+        "field_id":100
+      }
+    ],
+    "scores":[119.44999,142.24998],
+    "ids":{"IdField":{"IntId":{"data":[11,12]}}},"topks":[2]
+  },
+  "collection_name":"book"
+}
 ```
 
 <table class="language-python">
@@ -412,6 +458,56 @@ Travel Timestamp(Specify a timestamp in a search to get results based on a data 
     </tbody>
 </table>
 
+<table class="language-curl">
+	<thead>
+	<tr>
+		<th>Parameter</th>
+		<th>Description</th>
+	</tr>
+	</thead>
+	<tbody>
+    <tr>
+		<td><code>output_fields</code>(optional)</td>
+		<td>Name of the field to return. Vector field is not supported in current release.</td>
+	</tr>
+	<tr>
+		<td><code>anns_field</code></td>
+		<td>Name of the field to search on.</td>
+	</tr>
+	<tr>
+		<td><code>topk</code></td>
+		<td>Number of the most similar results to return.</td>
+	</tr>
+	<tr>
+		<td><code>params</code></td>
+		<td>Search parameter(s) specific to the index. See <a href="index.md">Vector Index</a> for more information.</td>
+	</tr>
+	<tr>
+		<td><code>metric_type</code></td>
+		<td>Metric type used for search. This parameter must be set identical to the metric type used for index building.</td>
+	</tr>
+	<tr>
+		<td><code>round_decimal</code> (optional)</td>
+		<td>Number of decimal places of returned distance.</td>
+	</tr>
+	<tr>
+		<td><code>Vectors</code></td>
+		<td>Vectors to search with.</td>
+	</tr>
+	<tr>
+		<td><code>dsl</code></td>
+		<td>Boolean expression used to filter attribute. Find more expression details in <a href="boolean.md">Boolean Expression Rules</a>.</td>
+	</tr>
+	<tr>
+		<td><code>dsl_type</code></td>
+		<td>Type of <code>dsl</code> (Data Search Language) field:
+		<br>0: "Dsl"
+		<br>1: "BoolExprV1"
+		</td>
+	</tr>
+	</tbody>
+</table>
+
 Check the returned results.
 
 <div class="multipleCode">
@@ -420,6 +516,7 @@ Check the returned results.
   <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
   <a href="?shell">CLI</a>
+  <a href="?curl">RESTful API</a>
 </div>
 
 
@@ -452,6 +549,11 @@ System.out.println(wrapperSearch.getFieldData("book_id", 0));
 ```shell
 # Milvus CLI automatically returns the primary key values of the most similar vectors and their distances.
 ```
+
+```curl
+# See the output of the previous step.
+```
+
 ## What's next
 
 - Try [Search with Time Travel](timetravel.md)

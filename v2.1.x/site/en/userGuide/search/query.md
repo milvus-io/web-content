@@ -23,6 +23,7 @@ All search and query operations within Milvus are executed in memory. Load the c
   <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
   <a href="?shell">CLI</a>
+  <a href="?curl">RESTful API</a>
 </div>
 
 
@@ -61,6 +62,10 @@ milvusClient.loadCollection(
 load -c book
 ```
 
+```curl
+# See the following step.
+```
+
 ## Conduct a vector query
 
 The following example filters the vectors with certain `book_id` values, and returns the `book_id` field and `book_intro` of the results.
@@ -73,6 +78,7 @@ Milvus supports setting consistency level specifically for a query (only on PyMi
   <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
   <a href="?shell">CLI</a>
+  <a href="?curl">RESTful API</a>
 </div>
 
 
@@ -127,6 +133,38 @@ Name of partitions that contain entities(split by "," if multiple) []:
 A list of fields to return(split by "," if multiple) []: book_id, book_intro
 
 timeout []:
+```
+
+```curl
+curl -X 'POST' \
+  'http://localhost:9091/api/v1/query' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "collection_name": "book",
+    "output_fields": ["book_id", "book_intro"],
+    "vectors": [ [0.1,0.2] ],
+    "expr": "book_id in [2,4,6,8]"
+  }'
+
+# Output:
+{
+  "status":{},
+  "fields_data":[
+    {
+      "type":5,
+      "field_name":"book_id",
+      "Field":{"Scalars":{"Data":{"LongData":{"data":[6,8,2,4]}}}},
+      "field_id":100
+    },
+    {
+      "type":101,
+      "field_name":"book_intro",
+      "Field":{"Vectors":{"dim":2,"Data":{"FloatVector":{"data":[6,1,8,1,2,1,4,1]}}}},
+      "field_id":102
+    }
+  ]
+}
 ```
 
 <table class="language-python">
@@ -248,7 +286,6 @@ timeout []:
 	</tbody>
 </table>
 
-
 <table class="language-shell">
     <thead>
         <tr>
@@ -266,6 +303,28 @@ timeout []:
     </tbody>
 </table>
 
+<table class="language-curl">
+	<thead>
+	<tr>
+		<th>Parameter</th>
+		<th>Description</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td><code>output_fields</code> (optional)</td>
+		<td>List of names of the fields to return.</td>
+	</tr>
+	<tr>
+		<td><code>vectors</code></td>
+		<td>Vectors to query.</td>
+	</tr>
+	<tr>
+		<td><code>expr</code></td>
+		<td>Boolean expression used to filter attribute. Find more expression details in <a href="boolean.md">Boolean Expression Rules</a>.</td>
+	</tr>
+	</tbody>
+</table>
 
 Check the returned results. 
 
@@ -275,6 +334,7 @@ Check the returned results.
   <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
   <a href="?shell">CLI</a>
+  <a href="?curl">RESTful API</a>
 </div>
 
 
@@ -302,6 +362,10 @@ System.out.println(wrapperQuery.getFieldWrapper("word_count").getFieldData());
 
 ```shell
 # Milvus CLI automatically returns the entities with the pre-defined output fields.
+```
+
+```curl
+# See the output of the previous step.
 ```
 
 ## What's next
