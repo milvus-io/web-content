@@ -69,24 +69,13 @@ curl -X 'POST' \
     "collectionID": 434262071120432449
   }'
 ```
-
-```curl
-curl -X 'POST' \
-  'http://localhost:9091/api/v1/compaction' \
-  -H 'accept: application/json' \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "collectionID": 434262071120432449
-  }'
-```
-
 <div class="language-curl">
 Output:
 
 ```json
 {"status":{},"compactionID":434262132129005569}
 ```
-<div>
+</div>
 
 <table class="language-javascript">
 	<thead>
