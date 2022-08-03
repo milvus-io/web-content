@@ -68,13 +68,18 @@ curl -X 'GET' \
     "collection_name": "book"
   }'
 ```
-```curl
-# Output:
+
+<div class="language-curl">
+Output:
+
+```json
 {
   "status":{},
   "value":true
 }
 ```
+
+</div>
 
 <table class="language-python">
 	<thead>
@@ -262,8 +267,11 @@ curl -X 'GET' \
     "collection_name": "book"
   }'
 ```
-```curl
-# Output:
+
+<div class="language-curl">
+Output:
+
+```json
 {
   "status": {},
   "schema": {
@@ -306,6 +314,8 @@ curl -X 'GET' \
   "consistency_level": 1
 }
 ```
+
+</div>
 
 <table class="language-python">
     <thead>
@@ -470,8 +480,11 @@ curl -X 'GET' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json'
 ```
-```curl
-# Output:
+
+<div class="language-curl">
+Output:
+
+```json
 {
   "status": {},
   "collection_names": [
@@ -488,6 +501,8 @@ curl -X 'GET' \
   ]
 }
 ```
+
+</div>
 
 <table class="language-go">
 	<thead>

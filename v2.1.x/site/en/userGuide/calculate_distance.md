@@ -356,11 +356,15 @@ curl -X 'GET' \
     \"params\": $params
   }"
 ```
-```curl
-# Output:
+
+<div class="language-curl">
+Output:
+
+```json
 {"status":{},"Array":{"FloatDist":{"data":[3,7,11,15,4,10,16,22]}}}
 ```
 
+</div>
 
 ## What's next
 

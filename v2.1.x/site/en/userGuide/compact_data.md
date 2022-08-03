@@ -69,12 +69,14 @@ curl -X 'POST' \
     "collectionID": 434262071120432449
   }'
 ```
+
 <div class="language-curl">
 Output:
 
 ```json
 {"status":{},"compactionID":434262132129005569}
 ```
+
 </div>
 
 <table class="language-javascript">
@@ -170,10 +172,15 @@ curl -X 'GET' \
     "compactionID": 434262132129005569
   }'
 ```
-```curl
-# Output:
+
+<div class="language-curl">
+Output:
+
+```json
 {"status":{},"state":2}
 ```
+
+</div>
 
 ## What's next
 

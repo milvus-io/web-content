@@ -135,8 +135,11 @@ curl -X 'DELETE' \
     "expr": "book_id in [0,1]"
   }'
 ```
-```curl
-# Output:
+
+<div class="language-curl">
+Output:
+
+```json
 {
   "status":{},
   "IDs":{"IdField":{"IntId":{"data":[0,1]}}},
@@ -144,6 +147,8 @@ curl -X 'DELETE' \
   "timestamp":434262178115092482
 }
 ```
+
+</div>
 
 <table class="language-python">
 	<thead>

@@ -63,10 +63,15 @@ curl -X 'DELETE' \
     "collection_name": "book"
   }'
 ```
-```curl
-# Output:
+
+<div class="language-curl">
+Output:
+
+```json
 {}
 ```
+
+</div>
 
 <table class="language-python">
 	<thead>
