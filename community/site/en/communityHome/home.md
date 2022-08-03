@@ -5,7 +5,7 @@ id: home.md
 <div class="community-h1-wrapper">
 
   <h1 class="title">
-    Reinvent data science Together.
+    Reinvent data science together
   </h1>
 
   <h2 class="sub-title">
@@ -168,9 +168,9 @@ The Milvus community is comprised of users, contributors, and culture that unite
 
   <div class="resource-card-container">
     <img src="../../assets/resource_event.svg" alt="avatar" />
-    <p class="label">Event</p>
+    <p class="label">Events</p>
     <p class="content">We host events, often. Click to find out the upcoming events near you.</p>
-    <a href="https://zilliz.com/events">
+    <a href="https://www.meetup.com/milvus-meetup/">
       More Events <img src="../../assets/arrow-right.svg" alt='icon' />
     </a>
   </div>
@@ -178,8 +178,8 @@ The Milvus community is comprised of users, contributors, and culture that unite
   <div class="resource-card-container">
     <img src="../../assets/resource_video.svg" alt="avatar" />
     <p class="label">Video</p>
-    <p class="content">We upload videos, often. Click to watch the video tutorials，webinar replays and other video contents.</p>
-    <a href="https://www.youtube.com/zillizchannel">
+    <p class="content">We know some of you prefer video content over text! Visit our YouTube channel to watch talks, webinars, and tutorials.</p>
+    <a href="https://www.youtube.com/c/MilvusVectorDatabase">
       More Videos <img src="../../assets/arrow-right.svg" alt='icon' />
     </a>
   </div>
