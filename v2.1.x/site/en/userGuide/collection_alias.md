@@ -6,7 +6,7 @@ summary: Learn how to manage collection alias in Milvus.
 
 # Collection Alias
 
-This topic describes how to manage collection alias. Milvus supports specifying a unique alias for a collection.
+This topic describes how to manage collection aliases. Milvus supports specifying a unique alias for a collection.
 
 <div class="alert note">
 A collection alias is globally unique, hence you cannot assign the same alias to different collections. However, you can assign multiple aliases to one collection.
@@ -69,7 +69,8 @@ curl -X 'POST' \
     "collection_name": "book",
     "alias":"publication"
   }'
-
+```
+```curl
 # Output:
 {}
 ```
@@ -223,7 +224,8 @@ curl -X 'DELETE' \
   -d '{
     "alias":"publication"
   }'
-
+```
+```curl
 # Output:
 {}
 ```
@@ -363,7 +365,8 @@ curl -X 'PATCH' \
     "collection_name": "book",
     "alias":"publication"
   }'
-
+```
+```curl
 # Output:
 {}
 ```

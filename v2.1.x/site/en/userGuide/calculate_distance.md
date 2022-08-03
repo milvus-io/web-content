@@ -345,7 +345,7 @@ print(results)
 // CLI User Guide will be ready soon.
 ```
 
-``` curl
+```curl
 curl -X 'GET' \
   'http://localhost:9091/api/v1/distance' \
   -H 'accept: application/json' \
@@ -355,7 +355,8 @@ curl -X 'GET' \
     \"op_right\": $vectors_right,
     \"params\": $params
   }"
-
+```
+```curl
 # Output:
 {"status":{},"Array":{"FloatDist":{"data":[3,7,11,15,4,10,16,22]}}}
 ```

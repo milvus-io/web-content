@@ -70,7 +70,8 @@ curl -X 'POST' \
   -d '{
     "collection_name": "book"
   }'
-
+```
+```curl
 # Output:
 {}
 ```
