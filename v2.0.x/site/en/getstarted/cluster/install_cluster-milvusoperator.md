@@ -61,6 +61,10 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 
 ### 1. Install cert-manager
 
+<div class="alert note">
+You can install Milvus Operator with Helm or `kubectl` command. If you choose to use Helm, you can skip this step and proceed directly to [Install by Helm command](install_cluster-milvusoperator.md#install-by-helm-command).
+</div>
+
 Milvus Operator uses [cert-manager](https://cert-manager.io/docs/installation/supported-releases/) to provide certificate for webhook server. Run the following command to install cert-manager.
 
 ```
@@ -195,8 +199,8 @@ validatingwebhookconfiguration.admissionregistration.k8s.io/milvus-operator-vali
 Run `$ kubectl get pods -n milvus-operator` to check if Milvus Operator is running. You can see the following output if Milvus Operator is running.
 
 ```
-NAME                                                  READY   STATUS    RESTARTS   AGE
-milvus-operator-controller-manager-698fc7dc8d-rlmtk   1/1     Running   0          46s
+NAME                               READY   STATUS    RESTARTS   AGE
+milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
 ```
 
 ## Install a Milvus cluster
@@ -222,7 +226,7 @@ milvuscluster.milvus.io/my-release created
 Run the following command to check the status of the Milvus cluster you just deployed.
 
 ```
-$ kubectl get mc my-release -o yaml
+$ kubectl get milvus my-release -o yaml
 ```
 
 You can confirm the current status of Milvus cluster from the `status` field in the output. When the Milvus cluster is still under creation, the `status` shows `Unhealthy`.
@@ -422,14 +426,14 @@ my-release-pulsar-zookeeper-1                   1/1     Running     0          1
 my-release-pulsar-zookeeper-2                   1/1     Running     0          13m
 ```
 
-When the Milvus cluster is installed, you can learn how to [Connect to Milvus server](manage_connection.md)
+When the Milvus cluster is installed, you can learn how to [Connect to Milvus server](manage_connection.md).
 
 ## Uninstall the Milvus cluster
 
 Run the following command to uninstall the Milvus cluster.
 
 ```
-$ kubectl delete mc my-release
+$ kubectl delete milvus my-release
 ```
 
 <div class="alert note">
