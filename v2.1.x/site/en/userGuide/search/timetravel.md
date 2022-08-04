@@ -326,8 +326,12 @@ curl -X 'POST' \
     ],
     "num_rows": 10
   }'
+```
 
-# Output:
+<div class="language-curl">
+Output:
+
+```json
 {
   "status":{},
   "IDs":{"IdField":{"IntId":{"data":[10,11,12,13,14,15,16,17,18,19]}}},
@@ -336,6 +340,8 @@ curl -X 'POST' \
   "timestamp":434575834238943233
 }
 ```
+
+</div>
 
 ## Search with a specified timestamp
 
@@ -486,8 +492,10 @@ No.1:
 +---------+------+------------+-----------+
 ```
 
-```curl
-# Output:
+<div class="language-curl">
+Output:
+
+```json
 {
   "status":{},
   "results":{
@@ -508,6 +516,8 @@ No.1:
   "collection_name":"test_time_travel"
 }
 ```
+
+</div>
 
 If you do not specify the timestamp or specify it with the timestamp of the second data batch, Milvus will return the results from both batches.
 
@@ -623,8 +633,12 @@ curl -X 'POST' \
     "vectors": [ [11,11] ],
     "dsl_type": 1
   }'
+```
 
-# Output:
+<div class="language-curl">
+Output:
+
+```json
 {
   "status":{},
   "results":{
@@ -645,6 +659,8 @@ curl -X 'POST' \
   "collection_name":"test_time_travel"
 }
 ```
+
+</div>
 
 ## Generate a timestamp for search
 
@@ -725,8 +741,12 @@ curl -X 'DELETE' \
     "collection_name": "test_time_travel",
     "expr": "pk in [0, 2, 4, 6, 8, 10, 12, 14, 16, 18]"
   }'
+```
 
-# Output:
+<div class="language-curl">
+Output:
+
+```json
 {
   "status":{},
   "IDs":{"IdField":{"IntId":{"data":[0,2,4,6,8,10,12,14,16,18]}}},
@@ -734,6 +754,8 @@ curl -X 'DELETE' \
   "timestamp": 434575874068316161
 }
 ```
+
+</div>
 
 As shown below, the deleted entities are not returned in the results if you search without specifying the timestamp.
 
@@ -832,8 +854,12 @@ curl -X 'POST' \
     "vectors": [ [11,11] ],
     "dsl_type": 1
   }'
+```
 
-# Output:
+<div class="language-curl">
+Output:
+
+```json
 {
   "status":{},
   "results":{
@@ -854,6 +880,8 @@ curl -X 'POST' \
   "collection_name":"test_time_travel"
 }
 ```
+
+</div>
 
 Search with the prior-to-deletion timestamp. Milvus retrieves entities from the data before the deletion.
 
@@ -955,8 +983,12 @@ curl -X 'POST' \
     "vectors": [ [10,10] ],
     "dsl_type": 1
   }'
+```
 
-# Output:
+<div class="language-curl">
+Output:
+
+```json
 {
   "status":{},
   "results":{
@@ -976,6 +1008,8 @@ curl -X 'POST' \
   "collection_name":"test_time_travel"
 }
 ```
+
+</div>
 
 ## What's next
 

@@ -191,8 +191,12 @@ curl -X 'POST' \
     "dsl": "word_count >= 11000",
     "dsl_type": 1
   }'
+```
 
-# Output:
+<div class="language-curl">
+Output:
+
+```json
 {
   "status":{},
   "results":{
@@ -212,6 +216,8 @@ curl -X 'POST' \
   "collection_name":"book"
 }
 ```
+
+</div>
 
 <table class="language-python">
 	<thead>

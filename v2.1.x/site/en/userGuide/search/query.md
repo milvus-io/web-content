@@ -146,8 +146,12 @@ curl -X 'POST' \
     "vectors": [ [0.1,0.2] ],
     "expr": "book_id in [2,4,6,8]"
   }'
+```
 
-# Output:
+<div class="language-curl">
+Output:
+
+```json
 {
   "status":{},
   "fields_data":[
@@ -166,6 +170,8 @@ curl -X 'POST' \
   ]
 }
 ```
+
+</div>
 
 <table class="language-python">
 	<thead>
