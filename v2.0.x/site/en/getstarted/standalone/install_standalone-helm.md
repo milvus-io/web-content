@@ -38,8 +38,11 @@ Run `$ kubectl cluster-info` to check the status of the K8s cluster you just cre
 
 minikube has a dependency on default StorageClass when installed. Check the dependency by running the following command. Other installation methods require manual configuration of the StorageClass. See [Change the Default StorageClass](https://kubernetes.io/docs/tasks/administer-cluster/change-default-storage-class/) for more information.
 
-```bash
+```
 $ kubectl get sc
+```
+
+```
 NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDINGMODE    ALLOWVOLUMEEXPANSION     AGE
 standard (default)    k8s.io/minikube-hostpath     Delete           Immediate             false                    3m36s
 ```
@@ -92,8 +95,10 @@ my-release-minio-5564fbbddc-mz7f5                  1/1     Running     0        
 Verify which local port the Milvus server is listening on. Replace the pod name with your own.
 
 ```bash
-$ kubectl get pod my-release-milvus-standalone-54c4f88cb9-f84pf --template
-='{{(index (index .spec.containers 0).ports 0).containerPort}}{{"\n"}}'
+$ kubectl get pod my-release-milvus-standalone-54c4f88cb9-f84pf --template='{{(index (index .spec.containers 0).ports 0).containerPort}}{{"\n"}}'
+```
+
+```
 19530
 ```
 
@@ -101,6 +106,9 @@ Open a new terminal and run the following command to forward a local port to the
 
 ```bash
 $ kubectl port-forward service/my-release-milvus 27017:19530
+```
+
+```
 Forwarding from 127.0.0.1:27017 -> 19530
 ```
 
