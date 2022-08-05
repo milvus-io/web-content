@@ -18,11 +18,12 @@ Docker Compose cannot deploy Milvus distributed clusters across machines, and ca
 </div>
 
 ## Prerequisites
-[Check the requirements for hardware and software](prerequisite-docker.md) prior to your installation. 
 
-## Download an installation file
+Check [the requirements](prerequisite-docker.md) for hardware and software prior to your installation. 
 
-[Download](https://github.com/milvus-io/milvus/releases/download/v2.1.0/milvus-cluster-docker-compose.yml) `milvus-cluster-docker-compose.yml` directly or with the following command, and save it as `docker-compose.yml`.
+## Download the `YAML` file
+
+[Download](https://github.com/milvus-io/milvus/releases/download/v2.1.0/milvus-cluster-docker-compose.yml) `milvus-cluster-docker-compose.yml` and save it as `docker-compose.yml` manually, or with the following command.
 
 ```
 $ wget https://github.com/milvus-io/milvus/releases/download/v2.1.0/milvus-cluster-docker-compose.yml -O docker-compose.yml
@@ -31,12 +32,17 @@ $ wget https://github.com/milvus-io/milvus/releases/download/v2.1.0/milvus-clust
 
 ## Start Milvus
 
+In the same directory as the `docker-compose.yml` file, start up Milvus by running:
+
 ```Shell
 $ sudo docker-compose up -d
 ```
 
+<div class="alert note">
+If your system has Docker Compose V2 installed instead of V1, use <code> docker compose </code> instead of <code> docker-compose </code>. Check if this is the case with <code> $ docker compose version </code>. Read <a href="https://docs.docker.com/compose/#compose-v2-and-the-new-docker-compose-command"> here </a> for more information.
+</div>
+
 ```Text
-Docker Compose is now in the Docker CLI, try `docker compose up`
 Creating milvus-etcd   ... done
 Creating milvus-minio  ... done
 Creating milvus-pulsar ... done
@@ -55,7 +61,9 @@ Check the status of the containers.
 ```
 $ sudo docker ps
 ```
+
 After Milvus cluster starts, 11 running docker containers appear including three dependencies and eight Milvus services.
+
 ```
       Name                     Command                  State                          Ports
 ----------------------------------------------------------------------------------------------------------------
@@ -74,9 +82,17 @@ milvus-rootcoord    /tini -- milvus run rootcoord    Up
 
 ## Stop Milvus
 
-To stop Milvus cluster, run <code>$ sudo docker-compose down</code>.
+To stop Milvus cluster, run:
 
-To delete data after stopping Milvus, run <code>$ sudo rm -rf  volumes</code>.
+```shell
+$ sudo docker-compose down
+```
+
+To delete data after stopping Milvus, run:
+
+```shell
+$ sudo rm -rf  volumes
+```
 
 ## What's next
 

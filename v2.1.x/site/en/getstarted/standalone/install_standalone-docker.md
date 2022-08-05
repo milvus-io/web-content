@@ -34,7 +34,7 @@ $ sudo docker-compose up -d
 ```
 
 <div class="alert note">
-If your system has Docker Compose V2 installed instead of V1, use `docker compose` instead of `docker-compose`. Check if this is the case with `$ docker compose version`. Read <a herf=https://docs.docker.com/compose/#compose-v2-and-the-new-docker-compose-command>here</a> for more information.
+If your system has Docker Compose V2 installed instead of V1, use <code> docker compose </code> instead of <code> docker-compose </code>. Check if this is the case with <code> $ docker compose version </code>. Read <a href="https://docs.docker.com/compose/#compose-v2-and-the-new-docker-compose-command"> here </a> for more information.
 </div>
 
 ```text

@@ -14,7 +14,8 @@ summary: Learn how to install Milvus cluster on Kubernetes.
 This topic introduces how to deploy a Milvus cluster with Helm on Kubernetes (K8s).
 
 ## Prerequisites
-[Check the requirements for hardware and software](prerequisite-helm.md) prior to your installation. 
+
+Check [the requirements](prerequisite-helm.md) for hardware and software prior to your installation.
 
 ## Create a K8s Cluster
 
@@ -124,21 +125,26 @@ my-release-pulsar-zookeeper-metadata-98zbr       0/1   Completed  0        3m24s
 
 ## Connect to Milvus
 
-Open a new terminal and run the following command to forward the local port to the port that Milvus uses.
+Verify which local port the Milvus server is listening on. Replace the pod name with your own.
 
-```
-$ kubectl port-forward service/my-release-milvus 19530
+```bash
+$ kubectl get pod my-release-milvus-standalone-54c4f88cb9-f84pf --template
+='{{(index (index .spec.containers 0).ports 0).containerPort}}{{"\n"}}'
+19530
 ```
 
-```
-Forwarding from 127.0.0.1:19530 -> 19530
+Open a new terminal and run the following command to forward a local port to the port that Milvus uses. Optionally, omit the designated port and use `:19530` to let `kubectl` allocate a local port for you so that you don't have to manage port conflicts.
+
+```bash
+$ kubectl port-forward service/my-release-milvus 27017:19530
+Forwarding from 127.0.0.1:27017 -> 19530
 ```
 
 ## Uninstall Milvus
 
 Run the following command to uninstall Milvus.
 
-```
+```bash
 $ helm uninstall my-release
 ```
 
@@ -146,7 +152,7 @@ $ helm uninstall my-release
 
 Stop the cluster and the minikube VM without deleting the resources you created.
 
-```
+```bash
 $ minikube stop
 ```
 
@@ -155,15 +161,15 @@ Run `minikube start` to restart the cluster.
 
 ## Delete the K8s cluster
 
-Delete the cluster, the minikube VM, and all resources you created including persistent volumes.
-
-```
-$ minikube delete
-```
-
 <div class="alert note">
 Run <code>$ kubectl logs `pod_name`</code> to get the <code>stderr</code> log of the pod before deleting the cluster and all resources.
 </div>
+
+Delete the cluster, the minikube VM, and all resources you created including persistent volumes.
+
+```bash
+$ minikube delete
+```
 
 ## What's next
 
