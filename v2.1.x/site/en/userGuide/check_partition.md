@@ -8,7 +8,7 @@ summary: Learn how to check partition information in Milvus.
 
 This topic describes how to check the information of partitions in Milvus.
 
-## Verify if a partition exist
+## Verify if a partition exists
 
 Verify if a partition exists in the specified collection.
 
