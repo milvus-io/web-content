@@ -134,3 +134,9 @@ Assuming that the configuration file is named `milvuscluster.yaml`, run the foll
 ```Shell
 kubectl apply -f milvuscluster.yaml
 ```
+
+## What's next
+
+Learn how to configure other Milvus dependencies with Milvus Operator:
+- [Configure Object Storage with Milvus Operator](object_storage_operator.md)
+- [Configure Message Storage with Milvus Operator](message_storage_operator.md)

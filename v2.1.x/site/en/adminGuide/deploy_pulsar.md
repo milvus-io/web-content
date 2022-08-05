@@ -125,3 +125,9 @@ To install Milvus and configure Kafka, run the following command using your valu
 ```shell
 helm install <your_release_name> milvus/milvus --set cluster.enabled=true --set externalKafka.enabled=true --set externalKafka.brokerlist='<your_kafka_brokerlist>'
 ```
+
+## What's next
+
+Learn how to configure other Milvus dependencies with Docker Compose or Helm:
+- [Configure Object Storage with Docker Compose or Helm](deploy_s3.md)
+- [Configure Meta Storage with Docker Compose or Helm](deploy_etcd.md)

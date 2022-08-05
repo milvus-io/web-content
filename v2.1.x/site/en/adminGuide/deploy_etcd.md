@@ -88,3 +88,10 @@ To install Milvus and configure etcd, run the following command using your value
 ```shell
 helm install <your_release_name> milvus/milvus --set cluster.enabled=true --set externaletcd.enabled=true 
 ```
+
+## What's next
+
+Learn how to configure other Milvus dependencies with Docker Compose or Helm:
+
+- [Configure Object Storage with Docker Compose or Helm](deploy_s3.md)
+- [Configure Message Storage with Docker Compose or Helm](deploy_pulsar.md)

@@ -87,6 +87,6 @@ helm install <your_release_name> milvus/milvus --set cluster.enabled=true --set 
 ```
 ## What's next
 
-If you want to learn how to use storage from other cloud providers:
-- [Use Google Cloud Storage](https://milvus.io/docs/v2.0.0/gcp.md#Use-Google-Cloud-Storage)
-- [Use Azure Blob Storage](https://milvus.io/docs/v2.0.0/azure.md#Use-Azure-Blob-Storage)
+Learn how to configure other Milvus dependencies with Docker Compose or Helm:
+- [Configure Meta Storage with Docker Compose or Helm](deploy_etcd.md)
+- [Configure Message Storage with Docker Compose or Helm](deploy_pulsar.md)

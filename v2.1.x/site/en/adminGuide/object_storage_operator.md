@@ -159,3 +159,9 @@ kubectl apply -f milvuscluster.yaml
 ```
 
 <div class="alert note">If <code>my-release</code> is an existing Milvus cluster, <code>milvuscluster.yaml</code> overwrites its configuration. Otherwise, a new Milvus cluster is created.</div>
+
+## What's next
+
+Learn how to configure other Milvus dependencies with Milvus Operator:
+- [Configure Meta Storage with Milvus Operator](meta_storage_operator.md)
+- [Configure Message Storage with Milvus Operator](message_storage_operator.md)
