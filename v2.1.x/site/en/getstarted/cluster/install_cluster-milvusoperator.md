@@ -62,7 +62,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 ### 1. Install cert-manager
 
 <div class="alert note">
-You can install Milvus Operator with Helm or `kubectl` command. If you choose to use Helm, you can skip this step and proceed directly to [Install by Helm command](install_cluster-milvusoperator.md#Install-by-Helm-command).
+You can install Milvus Operator with Helm or `kubectl` command. If you choose to use Helm, you can skip this step and proceed directly to <a href=https://milvus.io/docs/v2.1.0/install_cluster-milvusoperator.md#Install-by-Helm-command>Install by Helm command</a>.
 </div>
 
 Milvus Operator uses [cert-manager](https://cert-manager.io/docs/installation/supported-releases/) to provide certificate for webhook server. Run the following command to install cert-manager.
