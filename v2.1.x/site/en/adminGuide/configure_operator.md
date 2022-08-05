@@ -167,6 +167,13 @@ kubectl apply -f milvuscluster.yaml
 ```
 
 
+## What's next
+
+- Learn how to manage the following Milvus dependencies with Milvus Operator:
+  - [Configure Object Storage with Milvus Operator](object_storage_operator.md)
+  - [Configure Meta Storage with Milvus Operator](meta_storage_operator.md)
+  - [Configure Message Storage with Milvus Operator](message_storage_operator.md)
+
 
 
 
