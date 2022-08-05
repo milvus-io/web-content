@@ -187,7 +187,9 @@ $ sudo docker-compose up -d
 
 ## What's next
 
-- If you want to learn how to monitor the Milvus services and create alerts:
-  - Learn [Monitor Milvus with Prometheus Operator on Kubernetes](monitor.md)
-  - Learn [Visualize Milvus Metrics in Grafana](visualize.md).
+- Learn how to manage the following Milvus dependencies with Docker Compose or Helm:
+  - [Configure Object Storage with Docker Compose or Helm](deploy_s3.md)
+  - [Configure Meta Storage with Docker Compose or Helm](deploy_etcd.md)
+  - [Configure Message Storage with Docker Compose or Helm](deploy_pulsar.md)
+
 
