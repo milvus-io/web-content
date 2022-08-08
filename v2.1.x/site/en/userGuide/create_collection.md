@@ -44,7 +44,7 @@ book_id = FieldSchema(
 book_name = FieldSchema(
   name="book_name", 
   dtype=DataType.VARCHAR, 
-  max_length_per_row=200,
+  max_length=200,
 )
 word_count = FieldSchema(
   name="word_count", 
@@ -255,7 +255,7 @@ Output:
             <td><code>True</code> or <code>False</code></td>
         </tr>
         <tr>
-            <td><code>max_length_per_row</code> (Mandatory for VARCHAR field)</td>
+            <td><code>max_length</code> (Mandatory for VARCHAR field)</td>
             <td>Maximum length of strings allowed to be inserted.</td>
             <td>[1, 65,535]</td>
         </tr>
