@@ -24,7 +24,7 @@ Specify an an alias for a collection.
   <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
   <a href="?shell">CLI</a>
-  <a href="?curl">RESTful API</a>
+  <a href="?curl">Curl</a>
 </div>
 
 
@@ -185,7 +185,7 @@ Drop a specified alias.
   <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
   <a href="?shell">CLI</a>
-  <a href="?curl">RESTful API</a>
+  <a href="?curl">Curl</a>
 </div>
 
 
@@ -320,7 +320,7 @@ Alter an existing alias to another collection. The following example is based on
   <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
   <a href="?shell">CLI</a>
-  <a href="?curl">RESTful API</a>
+  <a href="?curl">Curl</a>
 </div>
 
 

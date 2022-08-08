@@ -23,7 +23,7 @@ All search and query operations within Milvus are executed in memory. Load the c
   <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
   <a href="?shell">CLI</a>
-  <a href="?curl">RESTful API</a>
+  <a href="?curl">Curl</a>
 </div>
 
 
@@ -76,7 +76,7 @@ By specifying the boolean expression, you can filter the scalar field of the ent
   <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
   <a href="?shell">CLI</a>
-  <a href="?curl">RESTful API</a>
+  <a href="?curl">Curl</a>
 </div>
 
 
@@ -522,7 +522,7 @@ Check the returned results.
   <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
   <a href="?shell">CLI</a>
-  <a href="?curl">RESTful API</a>
+  <a href="?curl">Curl</a>
 </div>
 
 

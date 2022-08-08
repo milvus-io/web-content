@@ -35,7 +35,7 @@ The following example filters data with primary key values of `0` and `1`.
   <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
   <a href="?shell">CLI</a>
-  <a href="?curl">RESTful API</a>
+  <a href="?curl">Curl</a>
 </div>
 
 
@@ -90,7 +90,7 @@ Delete the entities with the boolean expression you created. Milvus returns the 
   <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
   <a href="?shell">CLI</a>
-  <a href="?curl">RESTful API</a>
+  <a href="?curl">Curl</a>
 </div>
 
 

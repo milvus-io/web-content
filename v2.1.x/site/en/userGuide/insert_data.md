@@ -24,7 +24,7 @@ First, prepare the data to insert.  Data type of the data to insert must match t
   <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
   <a href="?shell">CLI</a>
-  <a href="?curl">RESTful API</a>
+  <a href="?curl">Curl</a>
 </div>
 
 
@@ -100,7 +100,7 @@ By specifying `partition_name`, you can optionally decide to which partition to 
   <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
   <a href="?shell">CLI</a>
-  <a href="?curl">RESTful API</a>
+  <a href="?curl">Curl</a>
 </div>
 
 

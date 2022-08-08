@@ -26,7 +26,7 @@ Compaction requests are processed asynchronously because they are usually time-c
   <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
   <a href="?shell">CLI</a>
-  <a href="?curl">RESTful API</a>
+  <a href="?curl">Curl</a>
 </div>
 
 
@@ -134,7 +134,7 @@ You can check the compaction status with the compaction ID returned when the man
   <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
   <a href="?shell">CLI</a>
-  <a href="?curl">RESTful API</a>
+  <a href="?curl">Curl</a>
 </div>
 
 

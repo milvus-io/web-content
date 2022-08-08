@@ -23,7 +23,7 @@ Milvus 2.1 allows users to load a partition as multiple replicas to utilize the 
   <a href="?go">GO</a>
   <a href="?javascript">Node.js</a>
   <a href="?shell">CLI</a>
-  <a href="?curl">RESTful API</a>
+  <a href="?curl">Curl</a>
 </div>
 
 
