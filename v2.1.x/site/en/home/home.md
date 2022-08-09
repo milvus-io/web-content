@@ -87,15 +87,12 @@ id: home.md
 
 ## What's new in docs
 
-_Apr 2022_
+_Jul 2022_
 
-- Added Milvus cluster installation guidance with [Ansible](install_cluster-ansible.md).
-- Remade API Reference of [PyMilvus](https://milvus.io/api-reference/pymilvus/v2.0.2/About.md) and [Milvus GO SDK](https://milvus.io/api-reference/go/v2.0.0/About.md).
-
-_Mar 2022_
-
-- Added guidance on [distance calculation](calculate_distance.md).
-- Added documentation on how to [load](load_partition.md) and [release](release_partition.md) a partition.
-- Added Milvus [benchmark](benchmark.md) report.
+- Added guidance on how to [configure Milvus with Milvus Operator](configure_operator.md).
+- Added guidance on how to configure [object storage](deploy_s3.md), [meta storage](deploy_etcd.md) and [message storage](deploy_pulsar.md) with Docker Compose or Helm.
+- Added guidance on how to [configure RocksMQ, Pulsar and Kafka for message storage](message_storage_operator.md) with Milvus Operator.
+- Added a full list of important monitoring metrics in the [Milvus Metrics Dashboard](metrics_dashboard.md).
+- Added security guidance including [user access authentication](authenticate.md) and [encryption in transit](tls.md) .
 
 </div>

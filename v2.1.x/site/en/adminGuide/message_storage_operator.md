@@ -45,7 +45,7 @@ Currently, you can only configure RocksMQ as the message storage for Milvus stan
 
 #### Example 
 
-The following example configures a RocksMQ service. You can 
+The following example configures a RocksMQ service. 
 
 ```YAML
 apiVersion: milvus.io/v1alpha1
