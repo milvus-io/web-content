@@ -9,16 +9,40 @@ This topic describes how to manage user authentication in Milvus.
 
 Milvus supports authenticated access by username and password.
 
-<div class="alert note">
-<ul>
-<li>Set <code>common.security.authorizationEnabled</code> in <code>milvus.yaml</code> as <code>true</code> when <a href="configure-docker.md">configuring Milvus</a> to enable authentication.</li>
-<li>A root user (password: <code>Milvus</code>) is created along with each Milvus instance by default. It is recommended to change the password of the root user when you start Milvus for the first time. The root user can be used to create new users for authenticated access.</li>
-</ul>
+## Enable user authentication
+
+
+
+<div class="filter">
+<a href="#docker">Docker Compose</a> <a href="#helm">Helm</a>
 </div>
 
-## Create an authenticated user
+<div class="table-wrapper filter-docker" markdown="block">
 
-Create a user with username and password.
+Set <code>common.security.authorizationEnabled</code> in <code>milvus.yaml</code> as <code>true</code> when <a href="configure-docker.md">configuring Milvus</a> to enable authentication.
+
+</div>
+
+<div class="table-wrapper filter-helm" markdown="block">
+    
+Enable authentication as shown in the example below.
+
+<pre>
+  <code>
+authorization:
+   enabled: true
+  </code>
+</pre>
+    
+</div>
+
+
+## Create an authenticated user
+    
+
+A root user (password: <code>Milvus</code>) is created along with each Milvus instance by default. It is recommended to change the password of the root user when you start Milvus for the first time. The root user can be used to create new users for authenticated access.
+
+Create a user with username and password with the following command.
 
 ```python
 from pymilvus import utility
@@ -31,6 +55,7 @@ utility.create_credential('user', 'password', using='default')
 | <code>password</code>        | Password for the user to create.                |
 | <code>using</code>           | Alias of the Milvus server to create the user.  |
 
+    
 ## Connect Milvus with an authenticated user
 
 Connect Milvus with an existing user.
