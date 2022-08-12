@@ -898,6 +898,13 @@
       "order": 7
     },
     {
+      "id": "benchmark.md",
+      "title": "Benchmarks",
+      "label1": "reference",
+      "label2": "",
+      "order": 8
+    },
+    {
       "id": "tutorials",
       "title": "Example Applications",
       "label1": "",
