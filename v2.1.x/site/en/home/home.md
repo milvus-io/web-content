@@ -86,9 +86,15 @@ id: home.md
 <div class="doc-home-what-is-new">
 
 ## What's new in docs
+  
+_Aug 2022_
+
+- Added the Milvus 2.1 [benchmark test report](benchmark.md).
+  
 
 _Jul 2022_
 
+- Added guidance on how to load a collection as [multiple in-memory replicas](load_collection.md). 
 - Added guidance on how to [configure Milvus with Milvus Operator](configure_operator.md).
 - Added guidance on how to configure [object storage](deploy_s3.md), [meta storage](deploy_etcd.md) and [message storage](deploy_pulsar.md) with Docker Compose or Helm.
 - Added guidance on how to [configure RocksMQ, Pulsar and Kafka for message storage](message_storage_operator.md) with Milvus Operator.
