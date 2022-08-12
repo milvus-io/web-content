@@ -46,6 +46,10 @@ Milvus now supports variable-length string as a scalar data type. Like previous 
 
 In-memory replicas enable you to load data on multiple query nodes. Like read replicas in traditional databases, in-memory replicas can help increase throughput if you have a relatively small dataset but want to scale read throughput with more hardware resources. We will support hedged read in future releases to increase availability when applying in-memory replicas.
 
+- Embedded Milvus
+
+Embedded Milvus enables you to [pip install Milvus](install_embedded_milvus.md) in one command, try quick demos and run short scripts in Python on your Macbook, including on the ones with M1 processor. 
+
 - Kafka support (Beta)
 
 Apache Kafka is the most widely used open-source distributed message store. In Milvus 2.1.0, you can simply use Kafka for message storage by modifying configurations. 
