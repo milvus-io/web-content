@@ -90,6 +90,7 @@ id: home.md
 _Aug 2022_
 
 - Added the Milvus 2.1 [benchmark test report](benchmark.md).
+- Added guidance on how to [install embedded Milvus](install_embedded_milvus.md).
   
 
 _Jul 2022_
