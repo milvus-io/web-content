@@ -168,9 +168,9 @@ standalone:
 
 ## Summary
 
-![2.1_qps](../../../assets/2.1_qps.jpg "A comparison of the QPS test results.")
+![2.1_qps](../../../assets/2.1_qps.png "A comparison of the QPS test results.")
 
-![2.1_rt](../../../assets/2.1_rt.jpg "A comparison of the RT test results.")
+![2.1_rt](../../../assets/2.1_rt.png "A comparison of the RT test results.")
 
 - In the current test scenario, the QPS of Milvus cluster is better than that of Milvus standalone under  1 million dataset.
 - In the current test scenario, the QPS of Milvus 2.1 standalone is better than that of Milvus 2.0.2 standalone under 1 million dataset.
