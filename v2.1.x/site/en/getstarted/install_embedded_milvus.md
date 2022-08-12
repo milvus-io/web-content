@@ -5,11 +5,8 @@ title: Install Embedded Milvus
 summary: Learn how to install embedded Milvus.
 ---
 
-# Install Embedded Milvus (Coming Soon)
+# Install Embedded Milvus
 
-<div class="alert note">
-Embedded Milvus will be released soon. Please stay tuned!
-</div>
 
 This topic describes how to install embedded Milvus. 
 
