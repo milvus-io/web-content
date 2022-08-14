@@ -1,12 +1,12 @@
 {
-  "milvus_release_version": "2.1.0",
-  "milvus_release_tag": "2.1.0",
-  "milvus_deb_name": "milvus_2.1.0-2_amd64",
-  "milvus_rpm_name": "milvus-2.1.0-2.el7.x86_64",
-  "milvus_python_sdk_version": "2.1.0",
+  "milvus_release_version": "2.1.1",
+  "milvus_release_tag": "2.1.1",
+  "milvus_deb_name": "milvus_2.1.1-1_amd64",
+  "milvus_rpm_name": "milvus-2.1.1-1.el7.x86_64",
+  "milvus_python_sdk_version": "2.1.1",
   "milvus_node_sdk_version": "2.1.2",
-  "milvus_go_sdk_version": "2.1.0",
+  "milvus_go_sdk_version": "2.1.1",
   "milvus_java_sdk_version": "2.1.0-beta4",
-  "milvus_operator_version": "0.6.0",
-  "milvus_image": "2.1.0-20220726-1b33c731"
+  "milvus_operator_version": "0.6.1",
+  "milvus_image": "2.1.0-20220809-bc62ca1f"
 }

@@ -383,9 +383,9 @@ System.out.println(wrapperQuery.getFieldWrapper("word_count").getFieldData());
 
 - Explore API references for Milvus SDKs:
 
-  - [PyMilvus API reference](/api-reference/pymilvus/v2.1.0/About.md)
+  - [PyMilvus API reference](/api-reference/pymilvus/v2.1.1/About.md)
   - [Node.js API reference](/api-reference/node/v2.1.2/About.md)
-  - [Go API reference](/api-reference/go/v2.1.0/About.md)
+  - [Go API reference](/api-reference/go/v2.1.1/About.md)
   - [Java API reference](/api-reference/java/v2.1.0-beta4/index.html)
 
 

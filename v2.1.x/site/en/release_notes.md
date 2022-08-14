@@ -6,9 +6,45 @@ summary: Milvus Release Notes
 
 Find out what’s new in Milvus! This page summarizes information about new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.1.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.1.1
+
+Release date: 12 August 2022
+
+| Milvus version | Python SDK version | Java SDK version | Go SDK version | Node.js SDK version |
+| -------------- | ------------------ | ---------------- | -------------- | ------------------- |
+| 2.1.1          | 2.1.1              | 2.1.0-beta4      | 2.1.1          | 2.1.2               |
+
+Milvus 2.1.1 is a minor bug fix version of Milvus 2.1.0.  It fixed Query Node crash under high concurrency, garbage collector failure to parse segment ID issue, and a few other stability issues.
+
+<h3 id="v2.1.1">Bug fixes</h3>
+
+- [#18383](https://github.com/milvus-io/milvus/pull/18383), [#18432](https://github.com/milvus-io/milvus/pull/18432) Fixed Garbage collector parse segment ID panics with bad input.
+
+- [#18418](https://github.com/milvus-io/milvus/pull/18418) Fixed metatable related error when etcd compaction error happens.
+
+- [#18568](https://github.com/milvus-io/milvus/pull/18568) Closes Node/Segment detector when closing ShardCluster.
+
+- [#18542](https://github.com/milvus-io/milvus/pull/18542) Adds CGO worker pool for Query Node to avoid OpenMP creating too many threads.
+
+- [#18569](https://github.com/milvus-io/milvus/pull/18569) Releases collection resources when all partitions are released to avoid resource leakage.
+
+<h3 id="v2.1.1">Improvements</h3>
+
+- [#18394](https://github.com/milvus-io/milvus/pull/18394) Removes watch delta channel task-related logic.
+
+- [#18513](https://github.com/milvus-io/milvus/pull/18513) Uses chunkManager rather than minio.Client in Data Node garbage collection.
+
+- [#18410](https://github.com/milvus-io/milvus/pull/18410) Limits the concurrency level for single load request
+
+<h3 id="v2.1.1">Featuress</h3>
+
+- [#18570](https://github.com/milvus-io/milvus/pull/18570) Supports dynamic change log level through HTTP.
+
+
+
 ## v2.1.0
 
-Release date: 2022-07-27
+Release date: 27 July 2022
 
 <h3 id="v2.1.0">Compatibility</h3>
 

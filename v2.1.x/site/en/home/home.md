@@ -93,7 +93,7 @@ _Aug 2022_
 - Added guidance on how to [install embedded Milvus](install_embedded_milvus.md).
   
 
-_Jul 2022_
+_Jul 2022 - Milvus 2.1 release_
 
 - Added guidance on how to load a collection as [multiple in-memory replicas](load_collection.md). 
 - Added guidance on how to [configure Milvus with Milvus Operator](configure_operator.md).

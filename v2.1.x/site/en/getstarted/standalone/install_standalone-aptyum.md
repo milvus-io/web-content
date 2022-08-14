@@ -41,9 +41,9 @@ $ sudo apt install milvus
 You can also download the `.deb` package that Milvus provides and install Milvus standalone.
 
 ```bash
-$ wget https://github.com/milvus-io/milvus/releases/download/v2.1.0/milvus_2.1.0-2_amd64.deb
+$ wget https://github.com/milvus-io/milvus/releases/download/v2.1.1/milvus_2.1.1-1_amd64.deb
 $ sudo apt-get update
-$ sudo dpkg -i milvus_2.1.0-2_amd64.deb
+$ sudo dpkg -i milvus_2.1.1-1_amd64.deb
 $ sudo apt-get -f install
 ```
 
@@ -52,7 +52,7 @@ $ sudo apt-get -f install
 On CentOS, you can install Milvus standalone with YUM.
 
 ```bash
-$ sudo yum install https://github.com/milvus-io/milvus/releases/download/v2.1.0/milvus-2.1.0-2.el7.x86_64.rpm
+$ sudo yum install https://github.com/milvus-io/milvus/releases/download/v2.1.1/milvus-2.1.1-1.el7.x86_64.rpm
 ```
 
 ## Check the status of Milvus and its dependencies
