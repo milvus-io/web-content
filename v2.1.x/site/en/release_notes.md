@@ -14,7 +14,7 @@ Release date: 12 August 2022
 | -------------- | ------------------ | ---------------- | -------------- | ------------------- |
 | 2.1.1          | 2.1.1              | 2.1.0-beta4      | 2.1.1          | 2.1.2               |
 
-Milvus 2.1.1 is a minor bug fix version of Milvus 2.1.0.  It fixed Query Node crash under high concurrency, garbage collector failure to parse segment ID issue, and a few other stability issues.
+Milvus 2.1.1 is a minor bug fix version of Milvus 2.1.0.  It fixed query node crash under high concurrency, garbage collector failure to parse segment ID issue, and a few other stability issues.
 
 <h3 id="v2.1.1">Bug fixes</h3>
 
