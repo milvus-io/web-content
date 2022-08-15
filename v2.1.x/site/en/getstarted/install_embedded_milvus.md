@@ -10,20 +10,23 @@ summary: Learn how to install embedded Milvus.
 
 This topic describes how to install embedded Milvus. 
 
-<div class="alert note">
+<div class="alert caution">
 Do not use embedded Milvus in production environment or if you require high performance.
 </div>
 
 
 Embedded Milvus is suitable for the following scenarios:
 - You want to use Milvus directly without having it installed using [Docker Compose, Helm, etc.](install_standalone-docker.md).
-- You don't feel like using any containers like Docker.
+- You do not want to use any containers like Docker.
 - You want to use Milvus without keeping a long-running Milvus process in your machine.
 
 ## Prerequisites
 
 - Python 3.6 or later
-- Supported operating systems include Ubuntu 18.04, Mac x86_64 >= 10.4, Mac M1 >= 11.0
+- Supported operating systems include:
+  - Ubuntu 18.04
+  - Mac x86_64 >= 10.4
+  - Mac M1 >= 11.0
 
 ## Install embedded Milvus
 
@@ -34,7 +37,7 @@ $ python3 -m pip install milvus
 ```
 
 
-You can also install a specific version of embedded Milvus. The following example installs the 2.0.2-rc4 version of embedded Milvus.
+You can also install a specific version of embedded Milvus. The following example installs the 2.1.0 version of embedded Milvus.
 
 ```
 $ python3 -m pip install milvus==2.1.0
@@ -104,15 +107,24 @@ Type "help", "copyright", "credits" or "license" for more information.
 ```
 
 ## Play with Embedded Milvus
-There are two ways to play with Embedded Milvus.
-1. Start another terminal windows and run your Milvus client script. For example:
+
+There are two ways to play with embedded Milvus.
+
+1. Start another terminal window and run your Milvus client script.The following is an example.
+
 ```
-# --- Download hello_milvus script ---
+# Download hello_milvus script
 $ wget https://raw.githubusercontent.com/milvus-io/pymilvus/v2.1.0/examples/hello_milvus.py
-# --- Run Hello Milvus ---
+# Run Hello Milvus 
 $ python3 hello_milvus.py
 ```
-2. (not suggested in Linxu) In the same window, type in and run your pyMilvus script, immediately after `milvus.start()`:
+
+2. In the same terminal window, import and run PyMilvus script immediately after running `milvus.start()`.
+
+<div class="alert note">
+This method is not suggested in Linux systems.
+</div>
+
 ```python
 $ python3
 Python 3.9.10 (main, Jan 15 2022, 11:40:53)
@@ -174,9 +186,16 @@ hit: (distance: 0.16927233338356018, id: 560)
 >>>
 ```
 
-## Cleaning Up
+<div class="alert note">
+   
+If embedded Milvus quits with segmentation error on Linux systems, start another terminal window and run your Milvus client. Setting the environment variable `LD_PRELOAD` in Linux sysmtems might cause conflicts and segmentation error.
 
-Finally, when you are done, it is highly recommended that you stop Milvus gracefully and use exit() or Ctrl-D (i.e. EOF) to exit.
+   
+</div>
+
+## Stop embedded Milvus and clean up the data
+
+It is highly recommended that you stop embedded Milvus gracefully and use exit() or Ctrl-D (i.e. EOF) to exit when you finish using embedded Milvus.
 
 ```python
 >>> milvus.stop()
@@ -188,13 +207,6 @@ to clean up, run:
 >>> exit()
 ```
 
-## FAQ
-Q: Embedded-Milvus quited with segmentation error on Linux systems.
+## What's next
 
-A: Start another terminal window to run your Milvus client. This is because setting env variable `LD_PRELOAD` in Linux might cause some conflicts.
-
----
-
-Q: I have other issues.
-
-A: Please file an issue here: https://github.com/milvus-io/embd-milvus/issues/new
+If you encounter any problems when installing or using embedded Milvus, [file an issue here](https://github.com/milvus-io/embd-milvus/issues/new).
