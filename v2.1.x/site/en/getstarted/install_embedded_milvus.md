@@ -5,7 +5,7 @@ title: Install Embedded Milvus
 summary: Learn how to install embedded Milvus.
 ---
 
-# Install Embedded Milvus
+# Install embedded Milvus
 
 
 This topic describes how to install embedded Milvus. 
@@ -106,7 +106,7 @@ Type "help", "copyright", "credits" or "license" for more information.
 >>>
 ```
 
-## Play with Embedded Milvus
+## Play with embedded Milvus
 
 There are two ways to play with embedded Milvus.
 
