@@ -5,10 +5,10 @@ title: Install Embedded Milvus
 summary: Learn how to install embedded Milvus.
 ---
 
-# Install embedded Milvus
+# Install Embedded Milvus
 
 
-This topic describes how to install embedded Milvus. 
+This topic describes how to install [embedded Milvus](https://github.com/milvus-io/embd-milvus). 
 
 <div class="alert caution">
 Do not use embedded Milvus in production environment or if you require high performance.
