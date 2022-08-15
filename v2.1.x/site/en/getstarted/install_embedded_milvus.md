@@ -43,7 +43,7 @@ You can also install a specific version of embedded Milvus. The following exampl
 $ python3 -m pip install milvus==2.1.0
 ```
 
-2. Create data folder for embedded Milvus under `/var/bin/e-mllvus`.
+2. Create data folder for embedded Milvus under `/var/bin/e-milvus`.
 
 ```
 $ sudo mkdir -p /var/bin/e-milvus
