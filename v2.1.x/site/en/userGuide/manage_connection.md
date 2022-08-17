@@ -16,9 +16,9 @@ Milvus supports two ports, port `19530` and port `9091`:
  
 - Port `19530` is for gRPC. It is the default port when you connect to a Milvus server with different Milvus SDKs.
 
-- Port `9091` is for RESTful API. It is used when you connect to a Milvus server with HTTP.
+- Port `9091` is for RESTful API. It is used when you connect to a Milvus server with an HTTP client.
 
-The example below connects to a Milvus server with host as `localhost` and port as `19530` or `9091`, and disconnects from it.
+The example below connects to the Milvus server with host as `localhost` and port as `19530` or `9091`, and disconncets from it. If the connection is refused, try unblocking the corresponding port.
 
 ## Connect to a Milvus server
 
