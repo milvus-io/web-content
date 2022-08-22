@@ -97,38 +97,6 @@ The following table classifies the indexes that Milvus supports:
     </td>
   </tr>
   <tr>
-    <td><a href="#RHNSW_FLAT">RHNSW_FLAT</a></td>
-    <td>Quantization-and-graph-based index</td>
-    <td>
-      <ul>
-        <li>High-speed query</li>
-        <li>Requires a recall rate as high as possible</li>
-        <li>Large memory resources</li>
-      </ul>
-    </td>
-  <tr>
-    <td><a href="#RHNSW_SQ">RHNSW_SQ</a></td>
-    <td>Quantization-and-graph-based index</td>
-    <td>
-      <ul>
-        <li>High-speed query</li>
-        <li>Limited memory resources</li>
-        <li>Accepts minor compromise in recall rate</li>
-      </ul>
-    </td>
-  </tr>
-  <tr>
-    <td><a href="#RHNSW_PQ">RHNSW_PQ</a></td>
-    <td>Quantization-and-graph-based index</td>
-    <td>
-      <ul>
-        <li>Very high-speed query</li>
-        <li>Limited memory resources</li>
-        <li>Accepts substantial compromise in recall rate</li>
-      </ul>
-    </td>
-  </tr>
-  <tr>
     <td><a href="#ANNOY">ANNOY</a></td>
     <td>Tree-based index</td>
     <td>
@@ -250,66 +218,6 @@ In order to improve performance, HNSW limits the maximum degree of nodes on each
   | --------- | ------------ | ---------------- |
   | `ef`      | Search scope | [`top_k`, 32768] |
 
-### RHNSW_FLAT
-
-<a name="RHNSW_FLAT"></a>
-
-RHNSW_FLAT (Refined Hierarchical Small World Graph) is a refined indexing algorithm based on HNSW. This index type optimizes the data storage solution of HNSW and thereby reduces the storage consumption.
-
-- Index building parameters
-
-  | Parameter        | Description                | Range    |
-  | ---------------- | -------------------------- | -------- |
-  | `M`              | Maximum degree of the node | [4, 64]  |
-  | `efConstruction` | Search scope               | [8, 512] |
-
-
-- Search parameters
-
-  | Parameter | Description  | Range            |
-  | --------- | ------------ | ---------------- |
-  | `ef`      | Search scope | [`top_k`, 32768] |
-
-### RHNSW_SQ
-
-<a name="RHNSW_SQ"></a>
-
-RHNSW_SQ (Refined Hierarchical Small World Graph and Scalar Quantization) is a refined indexing algorithm based on HNSW. This index type performs scalar quantization on vector data on the basis of HNSW and thereby substantially reduces the storage consumption.
-
-- Index building parameters
-
-  | Parameter        | Description                | Range    |
-  | ---------------- | -------------------------- | -------- |
-  | `M`              | Maximum degree of the node | [4, 64]  |
-  | `efConstruction` | Search scope               | [8, 512] |
-
-
-- Search parameters
-
-  | Parameter | Description  | Range            |
-  | --------- | ------------ | ---------------- |
-  | `ef`      | Search scope | [`top_k`, 32768] |
-
-### RHNSW_PQ
-
-<a name="RHNSW_PQ"></a>
-
-RHNSW_SQ (Refined Hierarchical Small World Graph and Product Quantization) is a refined indexing algorithm based on HNSW. This index type performs product quantization on vector data on the basis of HNSW and thereby significantly reduces the storage consumption.
-
-- Index building parameters
-
-  | Parameter        | Description                               | Range               |
-  | ---------------- | ----------------------------------------- | ------------------- |
-  | `M`              | Maximum degree of the node                | [4, 64]             |
-  | `efConstruction` | Search scope                              | [8, 512]            |
-  | `PQM`            | Number of factors of product quantization | dim ≡ 0 (mod `PQM`) |
-
-
-- Search parameters
-
-  | Parameter | Description  | Range            |
-  | --------- | ------------ | ---------------- |
-  | `ef`      | Search scope | [`top_k`, 32768] |
 
 ### ANNOY
 
