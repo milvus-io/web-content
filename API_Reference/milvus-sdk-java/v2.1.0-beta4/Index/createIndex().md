@@ -1,6 +1,6 @@
 # createIndex()
 
-The MilvusClient interface. This method creates an index on a field in the specified collection.
+A MilvusClient interface. This method creates an index on a field in the specified collection.
 
 ```Java
 R<RpcStatus> createIndex(CreateIndexParam requestParam);
