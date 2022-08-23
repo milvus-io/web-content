@@ -174,3 +174,7 @@ standalone:
 
 - In the current test scenario, the QPS of Milvus cluster is better than that of Milvus standalone under  1 million dataset.
 - In the current test scenario, the QPS of Milvus 2.1 standalone is better than that of Milvus 2.0.2 standalone under 1 million dataset.
+
+## What's next
+
+- Learn how to [perform a Milvus 2.1 benchmark by yourself](https://milvus.io/blog/2022-08-16-A-Quick-Guide-to-Benchmarking-Milvus-2-1.md).

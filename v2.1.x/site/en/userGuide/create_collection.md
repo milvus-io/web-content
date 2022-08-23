@@ -56,7 +56,7 @@ book_intro = FieldSchema(
   dim=2
 )
 schema = CollectionSchema(
-  fields=[book_id, word_count, book_intro], 
+  fields=[book_id, book_name, word_count, book_intro], 
   description="Test book search"
 )
 collection_name = "book"
