@@ -2,7 +2,9 @@
 
 A MilvusClient interface. This method drops a specified collection. 
 
+<div class="alert note">
 This method drops all data within the collection.
+</div>
 
 ```Java
 R<RpcStatus> dropCollection(DropCollectionParam requestParam);
