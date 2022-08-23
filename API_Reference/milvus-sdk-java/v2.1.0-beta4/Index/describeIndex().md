@@ -21,9 +21,9 @@ Methods of `DescribeIndexParam.Builder`:
 | ------------------------------------ | ------------------------------------------------------------ | ----------------------------------------- |
 | `withCollectionName(collectionName)` | Sets the collection name. Collection name cannot be empty or null. | `collectionName`: Target collection name. |
 | `withIndexName(String indexName)`    | Sets the target index name. Index name cannot be empty or null. If no index name is specified, the default index name (`_default_idx`) is used. | `indexName`: Name of the index.           |
-| `build()`                            | Construct a `DescribeIndexParam` object                      | N/A                                       |
+| `build()`                            | Constructs a `DescribeIndexParam` object.                      | N/A                                       |
 
-The `DropIndexParam.Builder.build()` could throw the following exceptions:
+The `DescribeIndexParam.Builder` could throw the following exceptions:
 
 - `ParamException` -- error if the parameter is invalid.
 
@@ -51,7 +51,7 @@ Methods of `DescIndexResponseWrapper`:
 | **Method**                                  | **Description**                                              | **Parameters**             | **Returns**       |
 | ------------------------------------------- | ------------------------------------------------------------ | -------------------------- | ----------------- |
 | `getIndexDescriptions()`                    | Gets a list of all index descriptions (Currently only return the information of one index). | N/A                        | `List<IndexDesc>` |
-| `getIndexDescByFieldName(String fieldName)` | Gets index description by field name. Returns null if the field doesn't exist. | `fieldName`: A field name. | `IndexDesc`       |
+| `getIndexDescByFieldName(String fieldName)` | Gets index description by field name. Returns `null` if the field doesn't exist. | `fieldName`: A field name. | `IndexDesc`       |
 
 Methods of `DescIndexResponseWrapper.IndexDesc`:
 
