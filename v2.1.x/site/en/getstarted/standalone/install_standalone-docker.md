@@ -52,11 +52,11 @@ $ sudo docker-compose ps
 After Milvus standalone starts, there will be three docker containers running, including the Milvus standalone service and its two dependencies.
 
 ```
-      Name                     Command                  State                          Ports
-----------------------------------------------------------------------------------------------------------------
-milvus-etcd         etcd -listen-peer-urls=htt ...   Up (healthy)   2379/tcp, 2380/tcp
+      Name                     Command                  State                            Ports
+--------------------------------------------------------------------------------------------------------------------
+milvus-etcd         etcd -advertise-client-url ...   Up             2379/tcp, 2380/tcp
 milvus-minio        /usr/bin/docker-entrypoint ...   Up (healthy)   9000/tcp
-milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:19530->19530/tcp,:::19530->19530/tcp
+milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:19530->19530/tcp, 0.0.0.0:9091->9091/tcp
 ```
 
 ## Stop Milvus
