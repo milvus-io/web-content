@@ -39,7 +39,7 @@ This method catches all the exceptions and returns an `R<DescribeIndexResponse>`
 
 ## DescIndexResponseWrapper
 
-A tool to encapsulate the `DescribeIndexResponse`. 
+A tool class to encapsulate the `DescribeIndexResponse`. 
 
 ```Java
 import io.milvus.response.DescIndexResponseWrapper;
