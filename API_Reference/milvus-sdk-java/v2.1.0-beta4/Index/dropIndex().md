@@ -1,6 +1,6 @@
 # dropIndex()
 
-MilvusClient interface. This method drops an index of a field for the specified collection.
+A MilvusClient interface. This method drops an index of a field for the specified collection.
 
 ```Java
 R<RpcStatus> dropIndex(DropIndexParam requestParam);
@@ -20,8 +20,8 @@ Methods of `DropIndexParam.Builder`:
 | Method                               | Description                                                  | Parameters                                    |
 | ------------------------------------ | ------------------------------------------------------------ | --------------------------------------------- |
 | `withCollectionName(collectionName)` | Sets the collection name. Collection name cannot be empty or null. | `collectionName`: Target collection name.     |
-| `withIndexName(String indexName)`    | Sets the name of the index to be dropped. If no index name is specified, the default index name ("_default_idx") is used. | `indexName`: Name of the index to be dropped. |
-| `build()`                            | Constructs a `CreateAliasParam` object.                      | N/A                                           |
+| `withIndexName(String indexName)`    | Sets the name of the index to be dropped. If no index name is specified, the default index name (`_default_idx`) is used. | `indexName`: Name of the index to be dropped. |
+| `build()`                            | Constructs a `DropIndexParam` object.                      | N/A                                           |
 
 The `DropIndexParam.Builder.build()` could throw the following exceptions:
 
