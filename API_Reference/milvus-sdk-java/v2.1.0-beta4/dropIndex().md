@@ -25,7 +25,7 @@ Methods of `DropIndexParam.Builder`:
 
 The `DropIndexParam.Builder.build()` could throw the following exceptions:
 
-- ParamException -- error if the parameter is invalid.
+- `ParamException` -- error if the parameter is invalid.
 
 ## Returns
 
