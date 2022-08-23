@@ -23,7 +23,7 @@ Methods of `DescribeIndexParam.Builder`:
 | `withIndexName(String indexName)`    | Sets the target index name. Index name cannot be empty or null. If no index name is specified, the default index name (`_default_idx`) is used. | `indexName`: Name of the index.           |
 | `build()`                            | Constructs a `DescribeIndexParam` object.                      | N/A                                       |
 
-The `DescribeIndexParam.Builder` could throw the following exceptions:
+The `DescribeIndexParam.Builder.build()` could throw the following exceptions:
 
 - `ParamException` -- error if the parameter is invalid.
 
