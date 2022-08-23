@@ -1,6 +1,6 @@
 # alterAlias()
 
-The MilvusClient interface. This method alters an alias from one collection to another.
+A MilvusClient interface. This method alters an alias from one collection to another.
 
 ```Java
 R<RpcStatus> alterAlias(AlterAliasParam requestParam);
@@ -21,7 +21,7 @@ Methods of `AlterAliasParam.Builder`:
 | ------------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | `withCollectionName(String collectionName)` | Sets the target collection name. Collection name cannot be empty or null. | `collectionName`: The name of the target collection to alter the alias to. |
 | `withAlias(String alias)`                   | Sets the collection alias to alter. Collection alias cannot be empty or null. | `alias`: The alias to alter.                                 |
-| `build()`                                   | Constructs a `CreateAliasParam` object.                      |                                                              |
+| `build()`                                   | Constructs a `AlterAliasParam` object.                      |     N/A                                                  |
 
 The `AlterAliasParam.Builder.build()` can throw the following exceptions:
 

@@ -1,6 +1,6 @@
 # createCredential()
 
-The MilvusClient interface. This method creates a credential using the given username and password.
+A MilvusClient interface. This method creates a credential using the given username and password.
 
 ```Java
 R<RpcStatus> createCredential(CreateCredentialParam requestParam);
@@ -21,7 +21,7 @@ Methods of `CreateCredentialParam.Builder`:
 | ------------------------------- | ---------------------------------------------------- | ------------------------------------------------------------ |
 | `withUsername(String username)` | Sets the username. Username cannot be empty or null. | `username`: The user name used to create the credential.     |
 | `withPassword(String password)` | Sets the password. Password cannot be empty or null. | `password`: The corresponding password to create the credential. |
-| `build()`                       | Constructs a `CreateCredentialParam` object.         |                                                              |
+| `build()`                       | Constructs a `CreateCredentialParam` object.         |      N/A                                                 |
 
 The `CreateCredentialParam.Builder.build()` can throw the following exceptions:
 

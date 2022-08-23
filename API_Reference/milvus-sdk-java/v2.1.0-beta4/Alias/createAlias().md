@@ -1,6 +1,6 @@
 # createAlias()
 
-The MilvusClient interface. This method creates an alias for a collection.
+A MilvusClient interface. This method creates an alias for a collection.
 
 ```Java
 R<RpcStatus> createAlias(CreateAliasParam requestParam);
@@ -21,7 +21,7 @@ Methods of `CreateAliasParam.Builder`:
 | -------------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | `withCollectionName( String collectionName)` | Sets the target collection name. Collection name cannot be empty or null. | `collectionName`: The name of the target collection to create an alias for. |
 | `withAlias(String alias)`                    | Sets the collection alias. Collection alias cannot be empty or null. | `alias`: The alias of the target collection.                 |
-| `build()`                                    | Constructs a `CreateAliasParam` object.                      |                                                              |
+| `build()`                                    | Constructs a `CreateAliasParam` object.                      |   N/A                                                        |
 
 `CreateAliasParam.Builder.build()` can throw the following exceptions:
 

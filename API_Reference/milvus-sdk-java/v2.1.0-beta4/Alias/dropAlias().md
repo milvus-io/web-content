@@ -1,6 +1,6 @@
 # dropAlias()
 
-The MilvusClient interface. This method drops an alias for the specified collection.
+A MilvusClient interface. This method drops an alias for the specified collection.
 
 ```Java
 R<RpcStatus> dropAlias(DropAliasParam requestParam);
@@ -20,7 +20,7 @@ Methods of `DropAliasParam.Builder`:
 | Method                    | Description                                                  | Parameters                  |
 | ------------------------- | ------------------------------------------------------------ | --------------------------- |
 | `withAlias(String alias)` | Sets the collection alias.  The alias cannot be empty or null. | `alias`: The alias to drop. |
-| `build()`                 | Constructs a `CreateAliasParam` object.                      |                             |
+| `build()`                 | Constructs a `DropAliasParam` object.                      |   N/A                       |
 
 The `DropAliasParam.Builder.build()` can throw the following exceptions:
 
