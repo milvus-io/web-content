@@ -2,10 +2,8 @@
 
 A MilvusClient interface. This method moves segment from a query node to another to keep the load balanced. 
 
-</div class="alert note"> 
-
+<div class="alert note"> 
 Milvus server has its internal machinery to keep load balanced, sometimes the segments might be moved back.
-
 </div>
 
 ```Java
@@ -25,7 +23,7 @@ Methods of `LoadBalanceParam.Builder`:
 
 | Method                                          | Description                                                  | Parameters                                      |
 | ----------------------------------------------- | ------------------------------------------------------------ | ----------------------------------------------- |
-| `withSourceNodeID(Long srcNodeID)`              | Sets the ID of source query node in which the sealed segments were loaded. | `srcNodeID`: Source query node ID.              |
+| `withSourceNodeID(Long srcNodeID)`              | Sets the ID of the source query node in which the sealed segments were loaded. | `srcNodeID`: Source query node ID.              |
 | `addDestinationNodeID(Long destNodeID)`         | Adds the ID of the destination query node to which the sealed segments will be balanced. | `destNodeID`: Destination query node ID.        |
 | `withDestinationNodeID(List<Long> destNodeIDs)` | Sets the ID array of the destination query nodes to which the sealed segments will be balanced. | `destNodeIDs`: Destination query node ID array. |
 | `addSegmentID(Long segmentID)`                  | Adds the ID of the sealed segment to be balanced.               | `segmentID`: Sealed segment ID.               |
