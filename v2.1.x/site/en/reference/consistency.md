@@ -37,7 +37,7 @@ Bounded staleness is suitable for scenarios that need to control search latency 
 
 Session ensures that all data writes can be immediately perceived in reads during the same session. In other words, when you write data via one client, the newly inserted data instantaneously become searchable. 
 
-![Session consistency](../../../assets/Consistency-Session.png "An illustration of session consistency.")
+![Session consistency](../../../assets/Consistency_Session.png "An illustration of session consistency.")
 
 We recommend choosing session as the consistency level for those scenarios where the demand for data consistency in the same session is high. An example can be deleting the data of a book entry from the library system, and after confirmation of the deletion and refreshing the page (a different session), the book should no longer be visible in the search results.
 
@@ -45,7 +45,7 @@ We recommend choosing session as the consistency level for those scenarios where
 
 There is no guaranteed order of reads and writes, and replicas eventually converge to the same state given that no further write operations are done. Under eventual consistency, replicas start working on read requests with the latest updated values. Eventual consistency is the weakest level among the four. 
 
-![Eventual consistency](../../../assets/Consistency-Eventual.png "An illustration of eventual consistency.")
+![Eventual consistency](../../../assets/Consistency_Eventual.png "An illustration of eventual consistency.")
 
 However, according to the PACELC theorem, search latency can be tremendously shortened upon sacrificing consistency. Therefore, eventual consistency is best suited for scenarios that do not have a high demand for data consistency but require blazing-fast search performance. An example can be retrieving reviews and ratings of Amazon products with eventual consistency. 
 
