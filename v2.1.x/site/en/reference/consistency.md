@@ -2,6 +2,7 @@
 id: consistency.md
 summary: Learn about the four levels of consistency in Milvus.
 ---
+# Consistency
 
 This topic introduces the four levels of consistency in Milvus and their best-suited scenarios. The mechanism behind ensuring consistency in Milvus is also covered in this topic.
 
