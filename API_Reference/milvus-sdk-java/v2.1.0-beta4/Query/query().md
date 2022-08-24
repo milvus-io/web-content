@@ -75,7 +75,7 @@ Methods of `FieldDataWrapper`:
 | `isVectorField()` | Tells the user whether this field is a vector field or a scalar field. | boolean                                                      |
 | `getDim()`        | Gets the dimension value if the field is a vector field. Throw `IllegalResponseException` if the field is not a vector filed. | int                                                          |
 | `getRowCount()`   | Gets the row count of a field. Throws `IllegalResponseException` if the field data is illegal. | long                                                         |
-| `getFieldData()`  | Returns the field data according to field type.              | - Returns `List<List<Float>>` for float vector field. - Returns `List<ByteBuffer>` for binary vector field. - Returns `List<Long>` for int64 field. - Returns `List<Integer>` for int32/int16/int8 field. - Returns `List<Boolean>` for boolean field. - Returns `List<Float>` for float field. - Returns `List<Double>` for double field. - Returns `List<String>` for VARCHAR field. |
+| `getFieldData()`  | Returns the field data according to field type.              | <ul><li>Returns `List<List<Float>>` for float vector field.</li> <li>Returns `List<ByteBuffer>` for binary vector field.</li> <li>Returns `List<Long>` for int64 field.</li> <li>Returns `List<Integer>` for int32/int16/int8 field.</li> <li>Returns `List<Boolean>` for boolean field.</li> <li>Returns `List<Float>` for float field.</li> <li>Returns `List<Double>` for double field.</li><li>Returns `List<String>` for VARCHAR field.</li></ul> |
 
 ## Example
 
