@@ -19,9 +19,7 @@ Currently, a vector field only supports one index type. Milvus automatically del
 
 ## ANNS vector indexes
 
-Most of the vector index types supported by Milvus use approximate nearest neighbors search (ANNS). Compared with accurate retrieval, which is usually very time-consuming, the core idea of ANNS is no longer limited to returning the most accurate result, but only searching for neighbors of the target. ANNS improves retrieval efficiency by sacrificing accuracy within an acceptable range.
-
-To learn how to choose an appropriate metric for an index, see [Similarity Metrics](metric.md).
+Most of the vector index types supported by Milvus use approximate nearest neighbors search (ANNS) algorithms. Compared with accurate retrieval, which is usually very time-consuming, the core idea of ANNS is no longer limited to returning the most accurate result, but only searching for neighbors of the target. ANNS improves retrieval efficiency by sacrificing accuracy within an acceptable range.
 
 According to the implementation methods, the ANNS vector index can be divided into four categories:
 
@@ -30,9 +28,25 @@ According to the implementation methods, the ANNS vector index can be divided in
 - Hash-based index
 - Quantization-based index
 
+
 ## Indexes supported in Milvus
 
+According to the suited data type, the supported indexes in Milvus can be divided into two categories:
+- Indexes for floating-point embeddings:
+  - For 128-dimensional floating-point embeddings, the storage they take up is 128 * the size of float = 512 bytes. And the [distance metrics](metric.md) used for float-point embeddings are Euclidean distance (L2) and Inner product. 
+  - This type of indexes include FLAT, IVF_FLAT, IVF_PQ, IVF_SQ8, ANNOY, and HNSW.
+- Indexes for binary embeddings
+  - For 128-dimensional binary embeddings, the storage they take up is 128 / 8 = 16 bytes. And the distance metrics used for binary embeddings are Jaccard, Tanimoto, Hamming, Superstructure, and Substructure.
+  - This type of indexes include BIN_FLAT and BIN_IVF_FLAT.
+
 The following table classifies the indexes that Milvus supports:
+
+<div class="filter">
+<a href="#floating">Floating-point embeddings</a> <a href="#binary">Binary embeddings</a>
+
+</div>
+
+<div class="filter-floating table-wrapper" markdown="block">
 
 <table>
 <thead>
@@ -240,7 +254,84 @@ When searching for vectors, ANNOY follows the tree structure to find subspaces c
   | ---------- | ------------------------------------------------------------ | ------------------------------- |
   | `search_k` | The number of nodes to search. -1 means 5% of the whole data. | {-1} ∪ [`top_k`, n × `n_trees`] |
 
+</div>
 
+<div class="filter-binary table-wrapper" markdown="block">
+<table>
+<thead>
+  <tr>
+    <th>Supported index</th>
+    <th>Classification</th>
+    <th>Scenario</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td><a href="#BIN_FLAT">BIN_FLAT</a></td>
+    <td>N/A</td>
+    <td>
+      <ul>
+        <li>Relatively small dataset</li>
+        <li>Requires a 100% recall rate</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td><a href="#BIN_IVF_FLAT">BIN_IVF_FLAT</a></td>
+    <td>Quantization-based index</td>
+    <td>
+      <ul>
+        <li>High-speed query</li>
+        <li>Requires a recall rate as high as possible</li>
+      </ul>
+    </td>
+  </tr>
+</tbody>
+</table>
+
+### BIN_FLAT
+
+<a name="BIN_FLAT"></a>
+
+This index is exactly the same as FLAT except that this can only be used for binary embeddings.
+
+For vector similarity search applications that require perfect accuracy and depend on relatively small (million-scale) datasets, the BIN_FLAT index is a good choice. BIN_FLAT does not compress vectors, and is the only index that can guarantee exact search results. Results from BIN_FLAT can also be used as a point of comparison for results produced by other indexes that have less than 100% recall.
+
+BIN_FLAT is accurate because it takes an exhaustive approach to search, which means for each query the target input is compared to every vector in a dataset. This makes BIN_FLAT the slowest index on our list, and poorly suited for querying massive vector data. There are no parameters for the BIN_FLAT index in Milvus, and using it does not require data training or additional storage.
+
+- Search parameters
+
+  | Parameter     | Description                            | Range                               |
+  | ------------- | -------------------------------------- | ----------------------------------- |
+  | `metric_type` | [Optional] The chosen distance metric. | See [Supported Metrics](metric.md). |
+
+### BIN_IVF_FLAT
+
+<a name="BIN_IVF_FLAT"></a>
+
+This index is exactly the same as IVF_FLAT except that this can only be used for binary embeddings.
+
+BIN_IVF_FLAT divides vector data into `nlist` cluster units, and then compares distances between the target input vector and the center of each cluster. Depending on the number of clusters the system is set to query (`nprobe`), similarity search results are returned based on comparisons between the target input and the vectors in the most similar cluster(s) only — drastically reducing query time.
+
+By adjusting `nprobe`, an ideal balance between accuracy and speed can be found for a given scenario. Query time increases sharply as both the number of target input vectors (`nq`), and the number of clusters to search (`nprobe`), increase.
+
+BIN_IVF_FLAT is the most basic BIN_IVF index, and the encoded data stored in each unit is consistent with the original data.
+
+ - Index building parameters
+
+   | Parameter | Description             | Range      |
+   | --------- | ----------------------- | ---------- |
+   | `nlist`   | Number of cluster units | [1, 65536] |
+
+
+- Search parameters
+
+  | Parameter | Description              | Range                                           |
+  | --------- | ------------------------ | ----------------------------------------------- |
+  | `nprobe`  | Number of units to query | CPU: [1, nlist] <br> GPU: [1, min(2048, nlist)] |
+
+
+</div>
 
 ## FAQ
 
