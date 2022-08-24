@@ -58,7 +58,7 @@ The following table classifies the indexes that Milvus supports:
 </thead>
 <tbody>
   <tr>
-    <td><a href="#FLAT">FLAT</a></td>
+    <td>FLAT</td>
     <td>N/A</td>
     <td>
       <ul>
@@ -68,7 +68,7 @@ The following table classifies the indexes that Milvus supports:
     </td>
   </tr>
   <tr>
-    <td><a href="#IVF_FLAT">IVF_FLAT</a></td>
+    <td>IVF_FLAT</td>
     <td>Quantization-based index</td>
     <td>
       <ul>
@@ -78,7 +78,7 @@ The following table classifies the indexes that Milvus supports:
     </td>
   </tr>
   <tr>
-    <td><a href="#IVF_SQ8">IVF_SQ8</a></td>
+    <td>IVF_SQ8</td>
     <td>Quantization-based index</td>
     <td>
       <ul>
@@ -89,7 +89,7 @@ The following table classifies the indexes that Milvus supports:
     </td>
   </tr>  
   <tr>
-    <td><a href="#IVF_PQ">IVF_PQ</a></td>
+    <td>IVF_PQ</td>
     <td>Quantization-based index</td>
     <td>
       <ul>
@@ -100,7 +100,7 @@ The following table classifies the indexes that Milvus supports:
     </td>
   </tr>
   <tr>
-    <td><a href="#HNSW">HNSW</a></td>
+    <td>HNSW</td>
     <td>Graph-based index</td>
     <td>
       <ul>
@@ -111,7 +111,7 @@ The following table classifies the indexes that Milvus supports:
     </td>
   </tr>
   <tr>
-    <td><a href="#ANNOY">ANNOY</a></td>
+    <td>ANNOY</td>
     <td>Tree-based index</td>
     <td>
       <ul>
@@ -125,7 +125,6 @@ The following table classifies the indexes that Milvus supports:
 
 ### FLAT
 
-<a name="FLAT"></a>
 
 For vector similarity search applications that require perfect accuracy and depend on relatively small (million-scale) datasets, the FLAT index is a good choice. FLAT does not compress vectors, and is the only index that can guarantee exact search results. Results from FLAT can also be used as a point of comparison for results produced by other indexes that have less than 100% recall.
 
@@ -139,7 +138,6 @@ FLAT is accurate because it takes an exhaustive approach to search, which means 
 
 ### IVF_FLAT
 
-<a name="IVF_FLAT"></a>
 
 IVF_FLAT divides vector data into `nlist` cluster units, and then compares distances between the target input vector and the center of each cluster. Depending on the number of clusters the system is set to query (`nprobe`), similarity search results are returned based on comparisons between the target input and the vectors in the most similar cluster(s) only — drastically reducing query time.
 
@@ -162,7 +160,6 @@ IVF_FLAT is the most basic IVF index, and the encoded data stored in each unit i
 
 ### IVF_SQ8
 
-<a name="IVF_SQ8"></a>
 
 IVF_FLAT does not perform any compression, so the index files it produces are roughly the same size as the original, raw non-indexed vector data. For example, if the original 1B SIFT dataset is 476 GB, its IVF_FLAT index files will be slightly larger (~470 GB). Loading all the index files into memory will consume 470 GB of storage.
 
@@ -184,7 +181,6 @@ When disk, CPU, or GPU memory resources are limited, IVF_SQ8 is a better option 
 
 ### IVF_PQ
 
-<a name="IVF_PQ"></a>
 
 `PQ` (Product Quantization) uniformly decomposes the original high-dimensional vector space into Cartesian products of `m` low-dimensional vector spaces, and then quantizes the decomposed low-dimensional vector spaces. Instead of calculating the distances between the target vector and the center of all the units, product quantization enables the calculation of distances between the target vector and the clustering center of each low-dimensional space and greatly reduces the time complexity and space complexity of the algorithm.
 
@@ -212,8 +208,6 @@ Index building parameters and search parameters vary with Milvus distribution. S
 
 ### HNSW
 
-<a name="HNSW"></a>
-
 HNSW (Hierarchical Navigable Small World Graph) is a graph-based indexing algorithm. It builds a multi-layer navigation structure for an image according to certain rules. In this structure, the upper layers are more sparse and the distances between nodes are farther; the lower layers are denser and the distances between nodes are closer. The search starts from the uppermost layer, finds the node closest to the target in this layer, and then enters the next layer to begin another search. After multiple iterations, it can quickly approach the target position.
 
 In order to improve performance, HNSW limits the maximum degree of nodes on each layer of the graph to `M`. In addition, you can use `efConstruction` (when building index) or `ef` (when searching targets) to specify a search range.
@@ -235,7 +229,6 @@ In order to improve performance, HNSW limits the maximum degree of nodes on each
 
 ### ANNOY
 
-<a name="ANNOY"></a>
 
 ANNOY (Approximate Nearest Neighbors Oh Yeah) is an index that uses a hyperplane to divide a high-dimensional space into multiple subspaces, and then stores them in a tree structure.
 
@@ -267,7 +260,7 @@ When searching for vectors, ANNOY follows the tree structure to find subspaces c
 </thead>
 <tbody>
   <tr>
-    <td><a href="#BIN_FLAT">BIN_FLAT</a></td>
+    <td>BIN_FLAT</td>
     <td>N/A</td>
     <td>
       <ul>
@@ -277,7 +270,7 @@ When searching for vectors, ANNOY follows the tree structure to find subspaces c
     </td>
   </tr>
   <tr>
-    <td><a href="#BIN_IVF_FLAT">BIN_IVF_FLAT</a></td>
+    <td>BIN_IVF_FLAT</td>
     <td>Quantization-based index</td>
     <td>
       <ul>
@@ -291,7 +284,6 @@ When searching for vectors, ANNOY follows the tree structure to find subspaces c
 
 ### BIN_FLAT
 
-<a name="BIN_FLAT"></a>
 
 This index is exactly the same as FLAT except that this can only be used for binary embeddings.
 
@@ -307,7 +299,6 @@ BIN_FLAT is accurate because it takes an exhaustive approach to search, which me
 
 ### BIN_IVF_FLAT
 
-<a name="BIN_IVF_FLAT"></a>
 
 This index is exactly the same as IVF_FLAT except that this can only be used for binary embeddings.
 
