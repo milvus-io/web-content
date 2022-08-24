@@ -15,40 +15,41 @@ public class R<T>
 Not all status codes are used, some of them are reserved.
 </div>
 
-| **Status**              | **Code** | **Description** |
-| ----------------------- | -------- | --------------- |
-| `IllegalResponse`       | -6       |                 |
-| `ParamError`            | -5       |                 |
-| `VersionMismatch`       | -4       |                 |
-| `Unknown`               | -3       |                 |
-| `ClientNotConnected`    | -2       |                 |
-| `RpcError`              | -1       |                 |
-| `Success`               | 0        |                 |
-| `UnexpectedError`       | 1        |                 |
-| `ConnectFailed`         | 2        |                 |
-| `PermissionDenied`      | 3        |                 |
-| `CollectionNotExists`   | 4        |                 |
-| `IllegalArgument`       | 5        |                 |
-| `IllegalDimension`      | 7        |                 |
-| `IllegalIndexType`      | 8        |                 |
-| `IllegalCollectionName` | 9        |                 |
-| `IllegalTOPK`           | 10       |                 |
-| `IllegalRowRecord`      | 11       |                 |
-| `IllegalVectorID`       | 12       |                 |
-| `IllegalSearchResult`   | 13       |                 |
-| `FileNotFound`          | 14       |                 |
-| `MetaFailed`            | 15       |                 |
-| `CacheFailed`           | 16       |                 |
-| `CannotCreateFolder`    | 17       |                 |
-| `CannotCreateFile`      | 18       |                 |
-| `CannotDeleteFolder`    | 19       |                 |
-| `CannotDeleteFile`      | 20       |                 |
-| `BuildIndexError`       | 21       |                 |
-| `IllegalNLIST`          | 22       |                 |
-| `IllegalMetricType`     | 23       |                 |
-| `OutOfMemory`           | 24       |                 |
-| `IndexNotExist`         | 25       |                 |
-| `EmptyCollection`       | 26       |                 |
+| **Status**              | **Code** | **Description**                                              |
+| ----------------------- | -------- | ------------------------------------------------------------ |
+| `IllegalResponse`       | -6       | The response returned by the server is incorrect. Parsing the response on the client side fails. |
+| `ParamError`            | -5       | The parameter is illegal on the client side.                 |
+| `VersionMismatch`       | -4       | **This error is reserved and not used for now.*              |
+| `Unknown`               | -3       | General error for an unknown reason.                         |
+| `ClientNotConnected`    | -2       | The connection is not ready.                                 |
+| `RpcError`              | -1       | **This error is reserved and not used for now.*              |
+| `Success`               | 0        | Operation succeeded.                                         |
+| `UnexpectedError`       | 1        | Error caused by unexpected reason.                           |
+| `ConnectFailed`         | 2        | **This error is reserved and not used for now.*              |
+| `PermissionDenied`      | 3        | **This error is reserved and not used for now.*              |
+| `CollectionNotExists`   | 4        | **This error is reserved and not used for now.*              |
+| `IllegalArgument`       | 5        | The parameter is illegal on the server side.                 |
+| `IllegalDimension`      | 7        | **This error is reserved and not used for now.*              |
+| `IllegalIndexType`      | 8        | **This error is reserved and not used for now.*              |
+| `IllegalCollectionName` | 9        | **This error is reserved and not used for now.*              |
+| `IllegalTOPK`           | 10       | **This error is reserved and not used for now.*              |
+| `IllegalRowRecord`      | 11       | **This error is reserved and not used for now.*              |
+| `IllegalVectorID`       | 12       | **This error is reserved and not used for now.*              |
+| `IllegalSearchResult`   | 13       | **This error is reserved and not used for now.*              |
+| `FileNotFound`          | 14       | **This error is reserved and not used for now.*              |
+| `MetaFailed`            | 15       | Getting metadata fails on the server side.                   |
+| `CacheFailed`           | 16       | **This error is reserved and not used for now.*              |
+| `CannotCreateFolder`    | 17       | **This error is reserved and not used for now.*              |
+| `CannotCreateFile`      | 18       | **This error is reserved and not used for now.*              |
+| `CannotDeleteFolder`    | 19       | **This error is reserved and not used for now.*              |
+| `CannotDeleteFile`      | 20       | **This error is reserved and not used for now.*              |
+| `BuildIndexError`       | 21       | **This error is reserved and not used for now.*              |
+| `IllegalNLIST`          | 22       | **This error is reserved and not used for now.*              |
+| `IllegalMetricType`     | 23       | **This error is reserved and not used for now.*              |
+| `OutOfMemory`           | 24       | **This error is reserved and not used for now.*              |
+| `IndexNotExist`         | 25       | **This error is reserved and not used for now.*              |
+| `EmptyCollection`       | 26       | **This error is reserved and not used for now.*              |
+
 
 ## Methods
 
