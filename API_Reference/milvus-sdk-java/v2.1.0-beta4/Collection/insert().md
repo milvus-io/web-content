@@ -22,7 +22,7 @@ Methods of `InsertParam.Builder`:
 | `withCollectionName(String collectionName)`  | Sets the target collection name. Collection name cannot be empty or null. | `collectionName`: The name of the collection to insert data into. |
 | `withPartitionName(String partitionName)`    | Sets the target partition name(optional).                    | `partitionName`: The name of the partition to insert data into. |
 | `withFields(List<InsertParam.Field> fields)` | Sets the data to be inserted. The field list cannot be empty.  Note that no input is required for the primary key field if auto-ID is enabled. | `fields`: a list of `Field` objects, each representing a field. |
-| `build()`                                    | Constructs an `InsertParam` object.                          |                                                              |
+| `build()`                                    | Constructs an `InsertParam` object.                          |  N/A                                                         |
 
 The `InsertParam.Builder.build()` can throw the following exceptions:
 
