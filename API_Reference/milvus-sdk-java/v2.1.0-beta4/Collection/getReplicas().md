@@ -19,7 +19,7 @@ Methods of `GetReplicasParam.Builder`:
 
 | Method                                      | Description                                                  | Parameters                                                   |
 | ------------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| `withCollectionName(String collectionName)` | Sets the collection name. Collection name cannot be empty or null. | collectionName: The name of the collection whose replica information needs to be listed. |
+| `withCollectionName(String collectionName)` | Sets the collection name. The collection name cannot be empty or null. | `collectionName`: The name of the collection whose replica information needs to be listed. |
 | `build()`                                   | Constructs a `GetReplicasParam` object.                      | N/A                                                          |
 
 The `GetReplicasParam.Builder.build()` can throw the following exceptions:
