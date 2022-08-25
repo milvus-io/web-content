@@ -25,7 +25,7 @@ Methods of `GetCollectionStatisticsParam.Builder`:
 
 | Method                                      | Description                                                  | Parameters                                                   |
 | ------------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| `withCollectionName(String collectionName)` | Sets the collection name. Collection name cannot be empty or null. | `collectionName`: The name of the collection whose statistical information needs to be checked. |
+| `withCollectionName(String collectionName)` | Sets the collection name. The collection name cannot be empty or null. | `collectionName`: The name of the collection whose statistical information needs to be checked. |
 | `withFlush(Boolean flush)`                  | Requests a flush action before retrieving collection statistics. | `flush`: Set the value to `true` to perform a flush action.  |
 | `build()`                                   | Constructs a `GetCollectionStatisticsParam` object.          | N/A                                                          |
 
@@ -54,7 +54,7 @@ GetCollStatResponseWrapper wrapper = new GetCollStatResponseWrapper(getStatRespo
 
 Methods of `GetCollStatResponseWrapper`:
 
-| **Method**      | **Description**                                              | **Parameters** | **Returns** |
+| Method      | Description                                              | Parameters | Returns |
 | --------------- | ------------------------------------------------------------ | -------------- | ----------- |
 | `getRowCount()` | Gets the row count of a collection. Note that due to technical reasones, the deleted entities are not counted in the row count. | N/A            | long        |
 
