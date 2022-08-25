@@ -54,6 +54,10 @@ Methods of `ShowPartitionsResponse`:
 | `getPartitionsInfo() `                          | Returns a list of `PartitionInfo`.                      | N/A                                     | `List<PartitionInfo>` |
 | `getPartitionInfoByName(String partitionName) ` | Returns a `PartitionInfo` object by the partition name. | `partitionName`: The name of the partition ro list. | `PartitionInfo`       |
 
+## PartitionInfo
+
+A tool class to hold information of a partition.
+
 Methods of `ShowPartitionsResponse.PartitionInfo`:
 
 | Method        | Description                       | Returns  |
