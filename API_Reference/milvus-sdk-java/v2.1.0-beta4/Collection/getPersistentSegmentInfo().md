@@ -1,6 +1,6 @@
 # getPersistentSegmentInfo()
 
-A MilvusClient interface. This method gets the information of persistent segments from data node, including row count, persistence state (growing or flushed), and more.
+A MilvusClient interface. This method gets the information of persisted segments from data node, including row count, persistence state (growing or flushed), and more.
 
 ```Java
 R<GetPersistentSegmentInfoResponse> getPersistentSegmentInfo(GetPersistentSegmentInfoParam requestParam);
