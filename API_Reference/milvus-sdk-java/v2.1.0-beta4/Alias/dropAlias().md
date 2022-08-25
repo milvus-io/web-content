@@ -19,7 +19,7 @@ Methods of `DropAliasParam.Builder`:
 
 | Method                    | Description                                                  | Parameters                  |
 | ------------------------- | ------------------------------------------------------------ | --------------------------- |
-| `withAlias(String alias)` | Sets the collection alias.  The alias cannot be empty or null. | `alias`: The alias to drop. |
+| `withAlias(String alias)` | Sets the collection alias. The alias cannot be empty or null. | `alias`: The alias to drop. |
 | `build()`                 | Constructs a `DropAliasParam` object.                      |   N/A                       |
 
 The `DropAliasParam.Builder.build()` can throw the following exceptions:
@@ -32,7 +32,7 @@ This method catches all the exceptions and returns an `R<RpcStatus>` object.
 
 - If the API fails on the server side, it returns the error code and message from the server.
 
-- If the API fails by RPC exception, it returns `R.Status.``Unknow` and the error message of the exception.
+- If the API fails by RPC exception, it returns `R.Status.Unknow` and the error message of the exception.
 
 - If the API succeeds, it returns `R.Status.Success`.
 
