@@ -19,8 +19,8 @@ Methods of `ReleaseCollectionParam.Builder`:
 
 | Method                                      | Description                                                  | Parameters                                               |
 | ------------------------------------------- | ------------------------------------------------------------ | -------------------------------------------------------- |
-| `withCollectionName(String collectionName)` | Sets the collection name. Collection name cannot be empty or null. | `collectionName`: The name of the collection to release. |
-| `build()`                                   | Constructs a `ReleaseCollectionParam` object                 | N/A                                                      |
+| `withCollectionName(String collectionName)` | Sets the collection name. The collection name cannot be empty or null. | `collectionName`: The name of the collection to release. |
+| `build()`                                   | Constructs a `ReleaseCollectionParam` object.                 | N/A                                                      |
 
 The `ReleaseCollectionParam.Builder.build()` can throw the following exceptions:
 
@@ -30,11 +30,11 @@ The `ReleaseCollectionParam.Builder.build()` can throw the following exceptions:
 
 This method catches all the exceptions and returns an `R<RpcStatus>` object.
 
-- If the api fails on the server side, it returns the error code and message from the server.
+- If the API fails on the server side, it returns the error code and message from the server.
 
-- If the api fails by RPC exception, it returns `R.Status.Unknow` and the error message of the exception.
+- If the API fails by RPC exception, it returns `R.Status.Unknow` and the error message of the exception.
 
-- If the api succeeds, it returns `R.Status.Success`.
+- If the API succeeds, it returns `R.Status.Success`.
 
 ## Example
 
