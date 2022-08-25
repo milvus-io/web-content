@@ -7,7 +7,7 @@ package io.milvus.param;
 public enum IndexType
 ```
 
-| **Type**     | **Code** | **Description**                     |
+| Type     | Code | Description                     |
 | ------------ | -------- | ----------------------------------- |
 | INVALID      | 0        | For internal usage.                 |
 | FLAT         | 1        | Only for `FloatVector` type field.  |
@@ -18,5 +18,5 @@ public enum IndexType
 | ANNOY        | 6        | Only for `FloatVector` type field.  |
 | BIN_FLAT     | 7        | Only for `BinaryVector` type field. |
 | BIN_IVF_FLAT | 8        | Only for `BinaryVector` type field. |
-| TRIE         | 9        | Only for `VarChar` type field       |
+| TRIE         | 9        | Only for `VARCHAR` type field.       |
 
