@@ -7,7 +7,7 @@ package io.milvus.param;
 public enum MetricType
 ```
 
-| **Type**       | **Code** | **Description**                                   |
+| Type       | Code | Description                                   |
 | -------------- | -------- | ------------------------------------------------- |
 | INVALID        | 0        | For internal usage.                               |
 | L2             | 1        | Euclidean distance. Only for float vectors.       |
