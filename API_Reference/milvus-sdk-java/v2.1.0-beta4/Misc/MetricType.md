@@ -1,6 +1,6 @@
 # MetricType
 
-The enumeration for available metric types.
+The enumeration of all available metric types in Milvus.
 
 ```Java
 package io.milvus.param;
