@@ -19,9 +19,9 @@ Methods of `ShowCollectionsParam.Builder`:
 
 | Method                                              | Description                                                  | Parameters                                                 |
 | --------------------------------------------------- | ------------------------------------------------------------ | ---------------------------------------------------------- |
-| `withCollectionNames(List<String> collectionNames)` | Sets a list of collection names. If the list is empty, the method will return all the collections in database. Collection name cannot be empty or null. | `collectionNames`: a list of the collection names to show. |
-| `addCollectionName(String collectionName)`          | Adds a collection name. Collection name cannot be empty or null. | `collectionName`: The name of the collection to show.      |
-| `build()`                                           | Constructs a `ShowCollectionsParam` object                   | N/A                                                        |
+| `withCollectionNames(List<String> collectionNames)` | Sets a list of collection names. If the list is empty, the method will return all the collections in database. The collection name cannot be empty or null. | `collectionNames`: A list of the collection names to show. |
+| `addCollectionName(String collectionName)`          | Adds a collection name. The collection name cannot be empty or null. | `collectionName`: The name of the collection to show.      |
+| `build()`                                           | Constructs a `ShowCollectionsParam` object.                   | N/A                                                        |
 
 The `ShowCollectionsParam.Builder.build()` can throw the following exceptions:
 
@@ -51,7 +51,7 @@ Methods of `ShowCollResponseWrapper`:
 | Method                                       | Description                                              | Parameters                    | Returns          |
 | ------------------------------------------------ | ------------------------------------------------------------ | --------------------------------- | -------------------- |
 | `getCollectionsInfo()`                           | Returns a list of `CollectionInfo` objects. Each `CollectionInfo` represents a collection. | N/A                               | List<CollectionInfo> |
-| `getCollectionInfoByName(String collectionName)` | Gets a `CollectionInfo` object by collection name.           | `collectionName`: collection name | CollectionInfo       |
+| `getCollectionInfoByName(String collectionName)` | Gets a `CollectionInfo` object by collection name.           | `collectionName`: Collection name. | CollectionInfo       |
 
 ## CollectionInfo
 
