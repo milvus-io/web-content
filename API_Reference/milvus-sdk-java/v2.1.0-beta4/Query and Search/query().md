@@ -1,6 +1,6 @@
 # query()
 
-A MilvusClient interface. This method queries entities based on scalar field(s) filtered by boolean expression. 
+A MilvusClient interface. This method queries entity(s) based on scalar field(s) filtered by boolean expression. 
 
 <div class="alert note">
 The order of the returned entities cannot be guaranteed.
