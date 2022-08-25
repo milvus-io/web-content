@@ -1,6 +1,6 @@
 # createAlias()
 
-A MilvusClient interface. This method creates an alias for a collection.
+A MilvusClient interface. This method creates an alias for a collection. Alias cannot be duplicated. Same alias cannot be assigned to different collections. Instead, you can specify multiple aliases for each collection.
 
 ```Java
 R<RpcStatus> createAlias(CreateAliasParam requestParam);
