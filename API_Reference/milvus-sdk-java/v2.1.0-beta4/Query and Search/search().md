@@ -1,6 +1,6 @@
 # search()
 
-A MilvusClient interface. This method conducts approximate nearest neighbor (ANN) search on a vector field and pairs up with boolean expression to conduct filtering on scalar fields before searching.
+A MilvusClient interface. This method conducts an approximate nearest neighbor (ANN) search on a vector field and pairs up with boolean expression to conduct filtering on scalar fields before searching.
 
 ```Java
 R<SearchResults> search(SearchParam requestParam);
@@ -19,17 +19,17 @@ Methods of `SearchParam.Builder`:
 
 | Method                                                       | Description                                                  | Parameters                                                   |
 | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| `withCollectionName(collectionName)`                         | Sets the collection name. The collection name cannot be empty or null. | `collectionName`: The target collection name.                    |
-| `withConsistencyLevel(ConsistencyLevelEnum consistencyLevel)` | Sets the consistency level used in the search. If the consistency level is not specified, the default level is `ConsistencyLevelEnum.STRONG`. | `consistencyLevel`: The consistency level used in the search.    |
-| `withPartitionNames(List<String> partitionNames)`            | Sets a partition name list to specify search scope (Optional). | `partitionNames`: The name list of the partitions to search.     |
-| `addPartitionName(String partitionName)`                     | Adds a partition to specify search scope (Optional).         | `partitionName`: The name of the partition to search.            |
-| `withGracefulTime(Long gracefulTime)`                        | Only used in `Bounded` consistency level. The Ddfault value is `5000` milliseconds. If graceful time is set, the `search()` will use current timestamp minus the graceful time as the ` GuaranteeTimestamp`. | `gracefulTime`: The graceful time value (unit: millisecond).     |
-| `withGuaranteeTimestamp(Long ts)`                            | Instructs the server to see insert/delete operations performed before a provided timestamp. If no such timestamp is specified, the server will wait for the latest operation to finish before processing a search. If you use an operation's TSO (Timestamp Oracle) to set this parameter, the server will execute the search after this operation is finished. The default value is `GUARANTEE_EVENTUALLY_TS`, with which the server executes the search immediately. (Note that the timestamp is not an absolute timestamp, it is a hybrid value combined by UTC time and internal flags. We call it TSO, for more information please refer to [Guarantee Timestamp](https://github.com/milvus-io/milvus/blob/master/docs/developer_guides/how-guarantee-ts-works.md). You can get a TSO from insert/delete operations, see the [MutationResultWrapper](../Collections/insert().md#MutationResultWrapper) class for [insert()](../Collections/insert().md) API.) | `ts`: A TSO timestamp value.                                 |
-| ` withTravelTimestamp(Long ts)`                              | Specifies an absolute timestamp in a query to get results based on a data view at a specified point in time (Optional). The default value is `0`, with which the server executes the search on a full data view. For more information please refer to [Search with Time Travel](https://milvus.io/docs/v2.1.x/timetravel.md). | `ts`: An absolute timestamp value.                           |
-| `withOutFields(List<String> outFields)`                      | Specifies output scalar fields (Optional).                   | `outFields`: The name list of output fields.                     |
-| `addOutField(String fieldName)`                              | Specifies an output scalar field (Optional).                 | `fieldName`: The name of an output field.                        |
+| `withCollectionName(collectionName)`                         | Sets the collection name. The collection name cannot be empty or null. | `collectionName`: The name of the collection to query.                |
+| `withConsistencyLevel(ConsistencyLevelEnum consistencyLevel)` | Sets the consistency level used in the query. If the consistency level is not specified, the default level is `ConsistencyLevelEnum.STRONG`. | `consistencyLevel`: The [consistency level](../Misc/ConsistencyLevelEnum.md) used in the query. |
+| `withPartitionNames(List<String> partitionNames)`            | Sets a partition name list to specify query scope (Optional). | `partitionNames`: The name list of the partitions to query.  |
+| `addPartitionName(String partitionName)`                     | Adds a partition to specify query scope (Optional).          | `partitionName`: The name of the partition to query.        |
+| `withGracefulTime(Long gracefulTime)`                        | Only used in `Bounded` consistency level. The default value is `5000` miliseconds. If graceful time is set, the `query()` will use current timestamp minus the graceful time as the ` GuaranteeTimestamp`. | `gracefulTime`: The graceful time value (unit: millisecond).  |
+| `withGuaranteeTimestamp(Long ts)`                            | Instructs the server to see the insert or delete operations performed before a provided timestamp (Optional). If no such timestamp is specified, the server will wait for the latest operation to finish before processing a query. If you use an operation's TSO (Timestamp Oracle) to set this parameter. The server will execute the query after this operation is finished. The default value is `GUARANTEE_EVENTUALLY_TS`, with which the server executes the query immediately. Note that the timestamp is not an absolute timestamp, it is a hybrid value combined by UTC time and internal flags. See[Guarantee Timestamp](https://github.com/milvus-io/milvus/blob/master/docs/developer_guides/how-guarantee-ts-works.md) for more information about TSO. You can get a TSO from insert or delete operations. See the [MutationResultWrapper](../Collection/insert().md#MutationResultWrapper) class in [insert()](../Collection/insert().md) API.) for more information | `ts`: A  TSO timestamp value.                            |
+| `withTravelTimestamp(Long ts)`                               | Specifies an absolute timestamp in a query to get results based on a data view at a specified point in time (Optional). The default value is `0`, with which the server executes the query on a full data view. For more information please refer to [Search with Time Travel](https://milvus.io/docs/v2.1.x/timetravel.md). | `ts`: An absolute timestamp value.                       |
+| `withOutFields(List<String> outFields)`                      | Specifies the output scalar fields (Optional). If the output fields are specified, the `QueryResults` returned by `query()` will contains the values of these fields. | `outFields`: The name list of output fields.                 |
+| `addOutField(String fieldName)`                              | Specifies an output scalar field (Optional).                 | `fieldName`: The name of an output field .                   |
 | `withExpr(String expr)`                                      | Sets the expression to filter scalar fields before searching (Optional). For more information please refer to [Boolean Expression Rules](https://milvus.io/docs/v2.1.x/boolean.md). | `expr`: The expression used to filter scalar fields.             |
-| `withMetricType(MetricType metricType)`                      | Sets the metric type of ANN search. The default value is `MetricType.L2`. | `metricType`: The metric type.                                   |
+| `withMetricType(MetricType metricType)`                      | Sets the metric type of ANN search. The default value is `MetricType.L2`. | `metricType`: The [metric type](../Misc/MetricType.md).                                   |
 | `withVectorFieldName(String vectorFieldName)`                | Sets the target vector field by name. The field name cannot be empty or null. | `vectorFieldName`: A vector field name.                      |
 | `withTopK(Integer topK)`                                     | Sets the topK value of ANN search. The available range is [1, 16384]. | `topK`: The topK value.                                          |
 | `withVectors(List<?> vectors)`                               | Sets the target vectors. Up to 16384 vectors are allowed.    | `vectors`:  <li> If target field type is float vector, `List< List<Float>>` is required.</li> <li>If target field type is binary vector, `List<ByteBuffer>` is required.</li> |
@@ -74,9 +74,9 @@ Methods of `SearchResultsWrapper.IDScore`:
 
 | Method     |Description                                    | Returns |
 | -------------- | -------------------------------------------------- | ----------- |
-| `getLongID() ` | Gets integer ID if the primary key type is Int64.  | long        |
-| `getStrID()`   | Gets string ID if the primary key type is VarChar. | String      |
-| `getScore()`   | Gets distance value.                               | float       |
+| `getLongID() ` | Gets the integer ID if the primary key type is Int64.  | long        |
+| `getStrID()`   | Gets the string ID if the primary key type is VarChar. | String      |
+| `getScore()`   | Gets the distance value.                               | float       |
 
 ## Example
 
