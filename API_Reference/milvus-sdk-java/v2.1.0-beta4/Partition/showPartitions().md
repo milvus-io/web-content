@@ -52,7 +52,7 @@ Methods of `ShowPartitionsResponse`:
 |   Method                                        |   Description                                           |   Parameters                            |   Returns             |
 | ----------------------------------------------- | ------------------------------------------------------- | --------------------------------------- | --------------------- |
 | `getPartitionsInfo() `                          | Returns a list of `PartitionInfo`.                      | N/A                                     | `List<PartitionInfo>` |
-| `getPartitionInfoByName(String partitionName) ` | Returns a `PartitionInfo` object by the partition name. | `partitionName`: The name of the partition ro list. | `PartitionInfo`       |
+| `getPartitionInfoByName(String partitionName) ` | Returns a `PartitionInfo` object by the partition name. | `partitionName`: The name of the partition to list. | `PartitionInfo`       |
 
 ## PartitionInfo
 
