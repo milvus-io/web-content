@@ -6,7 +6,7 @@ A MilvusClient interface. This method inserts entities asynchronously into a spe
 ListenableFuture<R<MutationResult>> insertAsync(InsertParam requestParam);
 ```
 
-This method uses the same parameter as `query()`, it invokes the RPC interface and returns a `ListenableFuture` object immediately.
+This method uses the same parameter as [query()](../Query/query().md#QueryParam), invokes the RPC interface and returns a `ListenableFuture` object immediately.
 
 ## Example
 
