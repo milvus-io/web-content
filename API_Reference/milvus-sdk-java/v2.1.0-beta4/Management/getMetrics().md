@@ -1,6 +1,6 @@
 # getMetrics()
 
-A MilvusClient interface. This method returns the information about runtime Milvus metrics in the `JSON` format.
+A MilvusClient interface. This method returns the information about runtime Milvus metrics in JSON format.
 
 ```Java
 R<GetMetricsResponse> getMetrics(GetMetricsParam requestParam);
@@ -19,7 +19,7 @@ Methods of `GetMetricsParam.Builder`:
 
 | Method                      | Description                                                  | Parameters                             |
 | --------------------------- | ------------------------------------------------------------ | -------------------------------------- |
-| `withRequest(String request)` | Sets the request to retrieve metric information from the server in the `JSON` format. | `request`: Request string in the `JSON` format. |
+| `withRequest(String request)` | Sets the request to retrieve metric information from the server in JSON format. | `request`: Request string in JSON format. |
 | `build()`                     | Constructs a `GetMetricsParam` object.                           |      N/A                                  |
 
 The `GetMetricsParam.Builder.build()` can throw the following exceptions:
