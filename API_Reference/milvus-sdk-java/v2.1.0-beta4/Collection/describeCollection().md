@@ -19,8 +19,8 @@ Methods of `DescribeCollectionParam.Builder`:
 
 | Method                                      | Description                                                  | Parameters                                                   |
 | ------------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| `withCollectionName(String collectionName)` | Sets the collection name. Collection name cannot be empty or null. | `collectionName`: The name of the collection to show details of. |
-| `build()`                                   | Constructs a `DescribeCollectionParam` object                | N/A                                                          |
+| `withCollectionName(String collectionName)` | Sets the collection name. The collection name cannot be empty or null. | `collectionName`: The name of the collection to show details of. |
+| `build()`                                   | Constructs a `DescribeCollectionParam` object.                | N/A                                                          |
 
 The `DescribeCollectionParam.Builder.build()` can throw the following exceptions:
 
