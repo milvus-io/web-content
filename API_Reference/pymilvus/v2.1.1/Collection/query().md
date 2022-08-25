@@ -1,4 +1,4 @@
-# search()
+# query()
 
 This method conducts a vector query.
 
