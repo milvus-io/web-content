@@ -1,6 +1,6 @@
 # getMetrics()
 
-A MilvusClient interface. This method returns the information about runtime Milvus metrics in JSON format.
+A MilvusClient interface. This method returns the information about runtime Milvus metrics in `JSON` format.
 
 ```Java
 R<GetMetricsResponse> getMetrics(GetMetricsParam requestParam);
