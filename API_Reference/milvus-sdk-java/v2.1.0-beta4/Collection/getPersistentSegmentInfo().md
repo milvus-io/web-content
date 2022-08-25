@@ -19,7 +19,7 @@ Methods of `GetPersistentSegmentInfoParam.Builder`:
 
 | Method                                      | Description                                                  | Parameters                                    |
 | ------------------------------------------- | ------------------------------------------------------------ | --------------------------------------------- |
-| `withCollectionName(String collectionName)` | Sets the collection name. Collection name cannot be empty or null. | `collectionName`: The name of the collection. |
+| `withCollectionName(String collectionName)` | Sets the collection name. The collection name cannot be empty or null. | `collectionName`: The name of the collection. |
 | `build()`                                   | Constructs a `GetPersistentSegmentInfoParam` object.         | N/A                                           |
 
 The `GetPersistentSegmentInfoParam.Builder.build()` can throw the following exceptions:
@@ -43,7 +43,7 @@ package io.milvus.grpc;
 public enum SegmentState
 ```
 
-| **Type**         | **Code** | **Description**                                  |
+| Type         | Code | Description                                  |
 | ---------------- | -------- | ------------------------------------------------ |
 | SegmentStateNone | 0        | For internal usage.                              |
 | NotExist         | 1        | For internal usage.                              |
