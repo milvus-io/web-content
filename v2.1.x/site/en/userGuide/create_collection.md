@@ -12,7 +12,7 @@ A collection consists of one or more partitions. While creating a new collection
 
 The following example builds a two-[shard](glossary.md#Sharding) collection named `book`, with a primary key field named `book_id`, an `INT64` scalar field named `word_count`, and a two-dimensional floating-point vector field named `book_intro`. Real applications will likely use much higher dimensional vectors than the example.
 
-Milvus supports setting consistency level while creating a collection (only on PyMilvus currently). The example in this topic sets the consistency level of the collection as `Strong`. You can also set the consistency level as `Bounded`, `Session` or `Eventual`. See [Consistency](consistency.md) for more information about the four consistency levels in Milvus.
+Milvus supports setting consistency level while creating a collection. The example in this topic sets the consistency level of the collection as `Strong`. You can also set the consistency level as `Bounded`, `Session` or `Eventual`. See [Consistency](consistency.md) for more information about the four consistency levels in Milvus.
 
 
 ## Prepare Schema
