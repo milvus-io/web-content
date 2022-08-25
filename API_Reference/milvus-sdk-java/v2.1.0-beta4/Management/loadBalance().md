@@ -23,11 +23,11 @@ Methods of `LoadBalanceParam.Builder`:
 
 | Method                                          | Description                                                  | Parameters                                      |
 | ----------------------------------------------- | ------------------------------------------------------------ | ----------------------------------------------- |
-| `withSourceNodeID(Long srcNodeID)`              | Sets the ID of the source query node in which the sealed segments were loaded. | `srcNodeID`: Source query node ID.              |
-| `addDestinationNodeID(Long destNodeID)`         | Adds the ID of the destination query node to which the sealed segments will be balanced. | `destNodeID`: Destination query node ID.        |
-| `withDestinationNodeID(List<Long> destNodeIDs)` | Sets the ID array of the destination query nodes to which the sealed segments will be balanced. | `destNodeIDs`: Destination query node ID array. |
-| `addSegmentID(Long segmentID)`                  | Adds the ID of the sealed segment to be balanced.               | `segmentID`: Sealed segment ID.               |
-| `withSegmentIDs(List<Long> segmentIDs)`         | Sets the ID array of the sealed segments to be balanced.          | `segmentIDs`: ID array of sealed segments.         |
+| `withSourceNodeID(Long srcNodeID)`              | Sets the ID of the source query node in which the sealed segments were loaded. | `srcNodeID`: The source query node ID.              |
+| `addDestinationNodeID(Long destNodeID)`         | Adds the ID of the destination query node to which the sealed segments will be balanced. | `destNodeID`: The sestination query node ID.        |
+| `withDestinationNodeID(List<Long> destNodeIDs)` | Sets the ID array of the destination query nodes to which the sealed segments will be balanced. | `destNodeIDs`: The ID array of destination query nodesy. |
+| `addSegmentID(Long segmentID)`                  | Adds the ID of the sealed segment to be balanced.               | `segmentID`: A sealed segment ID.               |
+| `withSegmentIDs(List<Long> segmentIDs)`         | Sets the ID array of the sealed segments to be balanced.          | `segmentIDs`: The ID array of sealed segments.         |
 | `build()`                                       | Constructs a `LoadBalanceParam` object.                      | N/A                                             |
 
 The`LoadBalanceParam.Builder.build()` could throw the following exceptions:
