@@ -36,7 +36,7 @@ Methods of `InsertParam.Field`:
 
 | **Method**                           | **Description**                                              | **Parameters**                                               |
 | ------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| `Field(String name, List<?> values)` | This class only provides a `Constructor`to create a `Field` object. | `name`: The name of the data field. `values`: *- If data type is* *Bool**,* *`values`* *is List of Boolean;* *- If* *data* *type is Int64,* *`values`* *is List of Long;* *- If* *data* *type is Float,* *`values`* *is List of Float;* *- If data type is Double,* *`values`* *is List of Double;* *- If* *data* *type is Varchar,* *`values`* *is List of String;* *- If* *data* *type is FloatVector,* *`values`* *is List of List Float;* *- If* *data* *type is BinaryVector,* *`values`* *is List of ByteBuffer;* |
+| `Field(String name, List<?> values)` | This class only provides a `Constructor`to create a `Field` object. | `name`: The name of the data field. <br/>`values`: <br/><li>If data type is Bool, `values` is List of Boolean;</li><br/><li>If data type is Int64, `values` is List of Long</li><br/><li>If data type is Float, `values` is List of Float</li><br/><li>If data type is Double, `values` is List of Double</li><br/><li>If data type is Varchar, `values` is List of String</li><br/><li>If data type is FloatVector, `values` is List of List Float</li><br/><li>If data type is BinaryVector, `values` is List of ByteBuffer.</li>|
 
 ## Returns
 
