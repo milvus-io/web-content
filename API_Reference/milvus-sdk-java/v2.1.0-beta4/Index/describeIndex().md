@@ -63,7 +63,7 @@ Methods of `DescIndexResponseWrapper.IndexDesc`:
 | ----------------- | ------------------------------------- | ------------ |
 | `getIndexType()`  | Gets the index type.                      | [IndexType](../Misc/IndexType.md)  |
 | `getMetricType()` | Gets the metric type                      | [MetricType](../Misc/MetricType.md) |
-| `getExtraParam()` | Gets the index parameters in JSON format. | `String`     |
+| `getExtraParam()` | Gets the index parameters in `JSON` format. | `String`     |
 
 ## Example
 
