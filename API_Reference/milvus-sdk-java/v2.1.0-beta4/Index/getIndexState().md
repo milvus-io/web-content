@@ -1,6 +1,6 @@
 # getIndexState()
 
-A MilvusClient interface. This method shows the index building state, and the reason for failure (if any).
+A MilvusClient interface. This method shows the index building state and the reason for failure, if there is any.
 
 ```Java
 R<GetIndexStateResponse> getIndexState(GetIndexStateParam requestParam);
@@ -19,13 +19,13 @@ Methods of `GetIndexStateParam.Builder`:
 
 | Method                             | Description                                                  | Parameters                             |
 | ---------------------------------- | ------------------------------------------------------------ | -------------------------------------- |
-| `withCollectionName(collectionName)` | Sets the collection name. Collection name cannot be empty or null. | `collectionName`: Target collection name. |
-| `withIndexName(String indexName)`    | Sets the target index name. Index name cannot be empty or null. If no index name is specified, the default index name (`_default_idx`) is used. | `indexName`: Name of the index.           |
+| `withCollectionName(collectionName)` | Sets the collection name. The collection name cannot be empty or null. | `collectionName`: The name of the collection whose index building state needs to be checked. |
+| `withIndexName(String indexName)`    | Sets the target index name. The index name cannot be empty or null. If no index name is specified, the default index name `_default_idx` is used. | `indexName`: The name of the index whose building state needs to be checked.           |
 | `build()`                            | Constructs a `GetIndexStateParam` object.                        |                           N/A             |
 
-The `GetIndexStateParam.Builder.build()` could throw the following exceptions:
+The `GetIndexStateParam.Builder.build()` can throw the following exceptions:
 
-- `ParamException` -- error if the parameter is invalid.
+- `ParamException`: error if the parameter is invalid.
 
 ## Returns
 
@@ -33,7 +33,7 @@ This method catches all the exceptions and returns an `R<GetIndexStateResponse>`
 
 - If the API fails on the server side, it returns the error code and message from the server.
 
-- If the API fails by RPC exception, it returns `R.Status.Unknow` and error message of the exception.
+- If the API fails by RPC exception, it returns `R.Status.Unknow` and the error message of the exception.
 
 - If the API succeeds, it returns a valid `GetIndexStateResponse` held by the R template.
 
