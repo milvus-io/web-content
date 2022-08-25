@@ -1,14 +1,12 @@
 # getCollectionStatistics()
 
-A MilvusClient interface. This method shows the statistical information of the specified collection. 
+A MilvusClient interface. This method shows the statistical information of a specified collection. 
 
 
 <div class="alert note">
-The current version only returns the row count of a collection. This method could be deprecated in the future. 
+The current version only returns the row count of a collection. This method can be deprecated in the future. 
 </div>
 
-
-The current version only returns the row count of a collection. This method could be deprecated in the future. 
 
 ```Java
 R<GetCollectionStatisticsResponse> getCollectionStatistics(GetCollectionStatisticsParam requestParam);
@@ -41,7 +39,7 @@ This method catches all the exceptions and returns an `R<GetCollectionStatistics
 
 - If the API fails on the server side, it returns the error code and message from the server.
 
-- If the API fails by RPC exception, it returns `R.Status.``Unknow` and the error message of the exception.
+- If the API fails by RPC exception, it returns `R.Status.Unknow` and the error message of the exception.
 
 - If the API succeeds, it returns a valid `GetCollectionStatisticsResponse` held by the R template. You can use `GetCollStatResponseWrapper` to get the information.
 
