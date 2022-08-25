@@ -19,8 +19,8 @@ Methods of `InsertParam.Builder`:
 
 | Method                                       | Description                                                  | Parameters                                                   |
 | -------------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| `withCollectionName(String collectionName)`  | Sets the target collection name. Collection name cannot be empty or null. | `collectionName`: The name of the collection to insert data into. |
-| `withPartitionName(String partitionName)`    | Sets the target partition name(optional).                    | `partitionName`: The name of the partition to insert data into. |
+| `withCollectionName(String collectionName)`  | Sets the target collection name. The collection name cannot be empty or null. | `collectionName`: The name of the collection to insert data into. |
+| `withPartitionName(String partitionName)`    | Sets the target partition name (optional).                    | `partitionName`: The name of the partition to insert data into. |
 | `withFields(List<InsertParam.Field> fields)` | Sets the data to be inserted. The field list cannot be empty.  Note that no input is required for the primary key field if auto-ID is enabled. | `fields`: a list of `Field` objects, each representing a field. |
 | `build()`                                    | Constructs an `InsertParam` object.                          |  N/A                                                         |
 
@@ -34,9 +34,9 @@ A tool class to hold a data field.
 
 Methods of `InsertParam.Field`:
 
-| **Method**                           | **Description**                                              | **Parameters**                                               |
+| Method                           | Description                                             | Parameters                                              |
 | ------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| `Field(String name, List<?> values)` | This class only provides a `Constructor`to create a `Field` object. | `name`: The name of the data field. <br/>`values`: <br/><li>If data type is Bool, `values` is List of Boolean;</li><br/><li>If data type is Int64, `values` is List of Long</li><br/><li>If data type is Float, `values` is List of Float</li><br/><li>If data type is Double, `values` is List of Double</li><br/><li>If data type is Varchar, `values` is List of String</li><br/><li>If data type is FloatVector, `values` is List of List Float</li><br/><li>If data type is BinaryVector, `values` is List of ByteBuffer.</li>|
+| `Field(String name, List<?> values)` | This class only provides a `Constructor`to create a `Field` object. | `name`: The name of the data field. <br/>`values`: <br/><ul><li>If data type is Bool, `values` is List of Boolean;</li><li>If data type is Int64, `values` is List of Long;</li><li>If data type is Float, `values` is List of Float;</li><li>If data type is Double, `values` is List of Double;</li><li>If data type is VARCHAR, `values` is List of String;</li><li>If data type is FloatVector, `values` is List of List Float;</li><li>If data type is BinaryVector, `values` is List of ByteBuffer.</li></ul>|
 
 ## Returns
 
@@ -59,11 +59,11 @@ MutationResultWrapper wrapper = new MutationResultWrapper(mutationResult);
 
 Methods of `MutationResultWrapper`:
 
-| **Method**         | **Description**                                              | **Returns**  |
+| Method         | Description                                              | Returns  |
 | ------------------ | ------------------------------------------------------------ | ------------ |
 | `getInsertCount()` | Gets the row count of the inserted entities.                 | long         |
-| `getLongIDs()`     | Gets the long ID array returned by the `insert()` interface if the primary key field is int64 type. Throw `ParamException` if the primary key type is not int64. | List<Long>   |
-| `getStringIDs()`   | Gets the string ID array returned by the `insert()` interface if the primary key field is varchar type. Throw `ParamException` if the primary key type is not varchar type. | List<String> |
+| `getLongIDs()`     | Gets the long ID array returned by the `insert()` interface if the primary key field is int64 type. Throws `ParamException` if the primary key type is not int64. | List<Long>   |
+| `getStringIDs()`   | Gets the string ID array returned by the `insert()` interface if the primary key field is VARCHAR type. Throws `ParamException` if the primary key type is not VARCHAR type. | List<String> |
 | `getDeleteCount()` | Gets the row count of the deleted entities. Currently, this value is always equal to the input row count. | long         |
 | `getOperationTs()` | Gets the timestamp of the operation marked by the server. You can use this timestamp as the guarantee timestamp of query/search APIs. Note that the timestamp is not an absolute timestamp, but rather a hybrid value combined by UTC time and internal flags. | long         |
 
