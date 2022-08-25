@@ -1,6 +1,6 @@
 # showCollections()
 
-A MilvusClient interface. This method lists all the collections or gets the collection loading status*.*
+A MilvusClient interface. This method lists all the collections or gets the collection loading status.
 
 ```Java
 R<ShowCollectionsResponse> showCollections(ShowCollectionsParam requestParam);
@@ -48,7 +48,7 @@ ShowCollResponseWrapper wrapper = new ShowCollResponseWrapper(showCollectionsRes
 
 Methods of `ShowCollResponseWrapper`:
 
-| **Method**                                       | **Description**                                              | **Parameters**                    | **Returns**          |
+| Method                                       | Description                                              | Parameters                    | Returns          |
 | ------------------------------------------------ | ------------------------------------------------------------ | --------------------------------- | -------------------- |
 | `getCollectionsInfo()`                           | Returns a list of `CollectionInfo` objects. Each `CollectionInfo` represents a collection. | N/A                               | List<CollectionInfo> |
 | `getCollectionInfoByName(String collectionName)` | Gets a `CollectionInfo` object by collection name.           | `collectionName`: collection name | CollectionInfo       |
@@ -59,7 +59,7 @@ A tool class to store a collection's information.
 
 Methods of `ShowCollResponseWrapper.CollectionInfo`:
 
-| **Method**                | **Description**                                              | **Returns** |
+|   Method                  |   Description                                                |   Returns   |
 | ------------------------- | ------------------------------------------------------------ | ----------- |
 | `getName()`               | Gets the name of the collection.                             | String      |
 | `getId()`                 | Gets the ID of the collection.                               | long        |
