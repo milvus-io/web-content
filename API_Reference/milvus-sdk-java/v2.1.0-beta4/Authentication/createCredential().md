@@ -19,8 +19,8 @@ Methods of `CreateCredentialParam.Builder`:
 
 | Method                          | Description                                          | Parameters                                                   |
 | ------------------------------- | ---------------------------------------------------- | ------------------------------------------------------------ |
-| `withUsername(String username)` | Sets the username. Username cannot be empty or null. | `username`: The username used to create the credential.     |
-| `withPassword(String password)` | Sets the password. Password cannot be empty or null. | `password`: The corresponding password used to create the credential. |
+| `withUsername(String username)` | Sets the username. The username cannot be empty or null. | `username`: The username used to create the credential.     |
+| `withPassword(String password)` | Sets the password. The password cannot be empty or null. | `password`: The corresponding password used to create the credential. |
 | `build()`                       | Constructs a `CreateCredentialParam` object.         |      N/A                                                 |
 
 The `CreateCredentialParam.Builder.build()` can throw the following exceptions:
