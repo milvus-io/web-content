@@ -1,6 +1,6 @@
 # getMetrics()
 
-A MilvusClient interface. This method returns the runtime metrics information of Milvus in JSON format.
+A MilvusClient interface. This method returns the information about runtime Milvus metrics in the `JSON` format.
 
 ```Java
 R<GetMetricsResponse> getMetrics(GetMetricsParam requestParam);
@@ -19,12 +19,12 @@ Methods of `GetMetricsParam.Builder`:
 
 | Method                      | Description                                                  | Parameters                             |
 | --------------------------- | ------------------------------------------------------------ | -------------------------------------- |
-| `withRequest(String request)` | Sets request in JSON format to retrieve metric information from server. | `request`: Request string in JSON format. |
+| `withRequest(String request)` | Sets the request to retrieve metric information from the server in the `JSON` format. | `request`: Request string in the `JSON` format. |
 | `build()`                     | Constructs a `GetMetricsParam` object.                           |      N/A                                  |
 
-The `GetMetricsParam.Builder.build()` could throw the following exceptions:
+The `GetMetricsParam.Builder.build()` can throw the following exceptions:
 
-- `ParamException` -- error if the parameter is invalid.
+- `ParamException`: error if the parameter is invalid.
 
 ## Returns
 
@@ -32,7 +32,7 @@ This method catches all the exceptions and returns an `R<GetMetricsResponse>` ob
 
 - If the API fails on the server side, it returns the error code and message from the server.
 
-- If the API fails by RPC exception, it returns `R.Status.Unknow` and error message of the exception.
+- If the API fails by RPC exception, it returns `R.Status.Unknow` and the error message of the exception.
 
 - If the API succeeds, it returns a valid `GetMetricsResponse` held by the R template.
 
