@@ -7,7 +7,7 @@ package io.milvus.grpc;
 public enum DataType
 ```
 
-| **Type**     | **Code** | **Description**                                              |
+| Type     | Code | Description                                              |
 | ------------ | -------- | ------------------------------------------------------------ |
 | None         | 0        | For internal usage.                                          |
 | Bool         | 1        | Boolean.                                                     |
@@ -20,5 +20,5 @@ public enum DataType
 | String       | 20       | Reserved. Do not use this.                                   |
 | VarChar      | 21       | Variable-length string with a limit on the maximum length.   |
 | BinaryVector | 100      | Binary vector. Each dimension is represented by 1 bit.       |
-| FloatVector  | 101      | Float vector. Each dimension is represented by 1 float(4 bits) value. |
+| FloatVector  | 101      | Float vector. Each dimension is represented by 1 float (4 bits) value. |
 
