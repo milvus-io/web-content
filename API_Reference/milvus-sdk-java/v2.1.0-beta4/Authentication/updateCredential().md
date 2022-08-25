@@ -24,9 +24,9 @@ Methods of `UpdateCredentialParam.Builder`:
 
 | Method                             | Description                                                  | Parameters                  |
 | ---------------------------------- | ------------------------------------------------------------ | --------------------------- |
-| `withUsername(String username)`    | Sets the username. Username cannot be empty or null.         | `username`: The username used to reset the password.  |
-| `withOldPassword(String password)` | Sets the old password. Old password cannot be empty or null. | password: The old password. |
-| `withNewPassword(String password)` | Sets the new password. New password cannot be empty or null. | password: The new password to create for the provided username. |
+| `withUsername(String username)`    | Sets the username. The username cannot be empty or null.         | `username`: The username used to reset the password.  |
+| `withOldPassword(String password)` | Sets the old password. The old password cannot be empty or null. | password: The old password. |
+| `withNewPassword(String password)` | Sets the new password. The new password cannot be empty or null. | password: The new password to create for the provided username. |
 | `build()`                          | Constructs a `UpdateCredentialParam` object.           |         N/A               |
 
 The `UpdateCredentialParam.Builder.build()` can throw the following exceptions:
