@@ -19,13 +19,13 @@ Methods of `HasPartitionParam.Builder`:
 
 | Method                                      | Description                                                  | Parameters                                |
 | ------------------------------------------- | ------------------------------------------------------------ | ----------------------------------------- |
-| `withCollectionName(String collectionName)` | Sets the collection name. Collection name cannot be empty or null. | `collectionName`: Target collection name. |
-| `withPartitionName(String partitionName)`   | Sets the partition name. Partition name cannot be empty or null. | `partitionName`: Target partition name.   |
+| `withCollectionName(String collectionName)` | Sets the collection name. The collection name cannot be empty or null. | `collectionName`: The name of the collection to check. |
+| `withPartitionName(String partitionName)`   | Sets the partition name. The partition name cannot be empty or null. | `partitionName`: The name of the partition to check.    |
 | `build()`                                   | Constructs a `HasPartitionParam `object.                     | N/A                                       |
 
-The `HasPartitionParam.Builder.build()` could throw the following exceptions:
+The `HasPartitionParam.Builder.build()` can throw the following exceptions:
 
-- `ParamException` -- error if the parameter is invalid.
+- `ParamException`: error if the parameter is invalid.
 
 ## Returns
 
@@ -33,7 +33,7 @@ This method catches all the exceptions and returns an `R<Boolean>` object.
 
 - If the API fails on the server side, it returns the error code and message from the server.
 
-- If the API fails by RPC exception, it returns `R.Status.Unknow` and error message of the exception.
+- If the API fails by RPC exception, it returns `R.Status.Unknow` and the error message of the exception.
 
 - If the API succeeds, it returns `R.Status.Success`.
 
