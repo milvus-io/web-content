@@ -849,67 +849,74 @@
       "order": 3
     },
     {
-      "id": "system_configuration.md",
-      "title": "System Configurations",
+      "id": "benchmark.md",
+      "title": "Benchmarks",
       "label1": "reference",
       "label2": "",
       "order": 1
-    },
-    {
-      "id": "metric.md",
-      "title": "Similarity Metrics",
-      "label1": "reference",
-      "label2": "",
-      "order": 2
-    },
-    {
-      "id": "index.md",
-      "title": "Vector Index",
-      "label1": "reference",
-      "label2": "",
-      "order": 3
-    },
-    {
-      "id": "schema.md",
-      "title": "Schema",
-      "label1": "reference",
-      "label2": "",
-      "order": 4
-    },
-    {
-      "id": "consistency.md",
-      "title": "Consistency",
-      "label1": "reference",
-      "label2": "",
-      "order": 5
     },
     {
       "id": "boolean.md",
       "title": "Boolean Expression Rules",
       "label1": "reference",
       "label2": "",
-      "order": 6
+      "order": 2
     },
     {
-      "id": "timetravel_ref.md",
-      "title": "Time Travel",
+      "id": "consistency.md",
+      "title": "Consistency",
       "label1": "reference",
       "label2": "",
-      "order": 7
+      "order": 3
     },
     {
       "id": "glossary.md",
       "title": "Glossary",
       "label1": "reference",
       "label2": "",
+      "order": 4
+    },
+    {
+      "id": "replica.md",
+      "title": "In-memory Replica",
+      "label1": "reference",
+      "label2": "",
+      "order": 5
+    },
+    {
+      "id": "schema.md",
+      "title": "Schema",
+      "label1": "reference",
+      "label2": "",
+      "order": 6
+    },
+    {
+      "id": "metric.md",
+      "title": "Similarity Metrics",
+      "label1": "reference",
+      "label2": "",
+      "order": 7
+    },
+    {
+      "id": "system_configuration.md",
+      "title": "System Configurations",
+      "label1": "reference",
+      "label2": "",
       "order": 8
     },
     {
-      "id": "benchmark.md",
-      "title": "Benchmarks",
+      "id": "timetravel_ref.md",
+      "title": "Time Travel",
       "label1": "reference",
       "label2": "",
       "order": 9
+    },
+    {
+      "id": "index.md",
+      "title": "Vector Index",
+      "label1": "reference",
+      "label2": "",
+      "order": 10
     },
     {
       "id": "tutorials",

@@ -5,70 +5,70 @@ summary: Learn about in-memory replica in Milvus.
 
 # In-Memory Replica
 
-This topic introduces the basic idea of in-memory replica in Milvus 2.1.
+This topic introduces the in-memory replica (replication) mechanism in Milvus that enables multiple segment replications in the working memory to improve performance and availability.
 
-Milvus 2.1 supports loading collection or partitions as multiple replicas so that you can leverage extra CPU and memory resources of query nodes to increase the overall QPS (query per second) and throughput.
+## Overview
 
+![Replica_Availiability](assets/replica_availability.jpg "In-memory replicas improve system availability.")
 
-With in-memory replica, you can scale out the Milvus service with extra hardware.
+With in-memory replicas, Milvus can load the same segment on multiple query nodes. If one query node has failed or is busy with a current search request when another arrives, the system can send new requests to an idle query node that has a replication of the same segment.
 
-## Relevant concepts
+### Performance
 
-The following concepts can help you better understand the in-memory replica feature.
+In-memory replicas allow you to leverage extra CPU and memory resources. It is very useful if you have a relatively small dataset but want to increase read throughput with extra hardware resources. Overall QPS (query per second) and throughput can be significantly improved.
+
+### Availability
+
+In-memory replicas help Milvus recover faster if a query node crashes. When a query node fails, the segment does not have to be reloaded on another query node. Instead, the search request can be resent to a new query node immediately without having to reload the data again. With multiple segment replicas maintained simultaneously, the system is more resilient in the face of a failover.
+
+## Key Concepts
+
+In-memory replicas are organized as replica groups. Each replica group contains [shard](https://milvus.io/docs/v2.1.x/glossary.md#Sharding) replicas. Each shard replica has a streaming replica and a historical replica that correspond to the growing and sealed [segments](https://milvus.io/docs/v2.1.x/glossary.md#Segment) in the shard (i.e. DML channel).
+
+![An illustration of how in-memory replica works](assets/replica_availability.jpg)
 
 ### Replica group
 
-A replica group consists of multiple query nodes and is responsible for handling historical replicas, namely replicas of sealed segments.
+A replica group consists of multiple [query nodes](https://milvus.io/docs/v2.1.x/four_layers.md#Query-node) that are responsible for handling historical data and replicas.
 
 ### Shard replica
 
-A shard replica consists of a streaming replica and a historical replica. One shard replica corresponds to one shard or DML (data manipulation language) channel.  Multiple shard replicas altogether form a replica group. The number of shard replicas in a replica group is determined by the number of shards in a specified collection.
+A shard replica consists of a streaming replica and a historical replica, both belonging to the same [shard](https://milvus.io/blog/deep-dive-1-milvus-architecture-overview.md#Shard). The number of shard replicas in a replica group is determined by the number of shards in a specified collection.
 
 ### Streaming replica
 
-A streaming replica consists of all the growing segments from one single DML channel. Generally, a streaming replica is handled by one single query node in a replica.
+A streaming replica contains all the [growing segments](https://milvus.io/docs/v2.1.x/glossary.md#Segment) from the same DML channel. Technically speaking, a streaming replica should be served by only one query node in one replica.
 
 ### Historical replica
 
-A historical replica consists of all the sealed segments from one single DML channel. Segments of a historical replica can be distributed on multiple query nodes that belong to the same replica group.
+A historical replica contains all the sealed segments from the same DML channel. The sealed segments of one historical replica can be distributed on several query nodes within the same replica group.
 
 ### Shard leader
 
-A shard leader is a query node that handles the streaming replica of the shard.
+A shard leader is the query node serving the streaming replica in a shard replica.
 
-## Enable in-memory replica
+## Design Details
 
-<div class="alert note">
+### Balance
 
-Currently, you can specify the number of replica groups into which the online query nodes are divided. All replica groups should have the memory to load at least one replica of the provided collection. Otherwise, an error occurs.
+A new segment that needs to be loaded will be allocated to multiple different query nodes. A search request can be processed once at least one replica is loaded successfully.
 
-</div>
+### Search
 
-1. Call `collection.load()` to load a collection and specify the value of `replica_number`. The example below load a collection as two replicas.
+#### Cache
 
-```
-from pymilvus import Collection
-collection = Collection("book")      # Get an existing collection.
-collection.load(replica_number=2) # load collection as 2 replicas
-```
+The proxy maintains a cache that maps segments to query nodes and updates it periodically. When the proxy receives a request, Milvus gets all sealed segments that need to be searched from the cache and try to assign them to the query nodes evenly.
 
-2. Call `collection.get_replicas()` to get replica information.
+For growing segments, the proxy also maintains a channel-to-query-node cache and sends requests to corresponding query nodes.
 
-```
-from pymilvus import Collection
-collection = Collection("book")      # Get an existing collection.
-collection.load(replica_number=2) # load collection as 2 replicas
-result = collection.get_replicas()
-print(result)
-```
+#### Failover
 
-The replica groups and the information of the corresponding query nodes and shard are returned. The following is an example of the returned results.
+The caches on the proxy are not always up-to-date. Some segments or channels may have been moved to other query nodes when a request comes in. In this case, the proxy will receive an error response, update the cache and try to assign it to another query node.
 
-```
-Replica groups:
-- Group: <group_id:432993548983599112>, <group_nodes:(4, 4)>, <shards:[Shard: <channel_name:by-dev-rootcoord-dml_1_432996419335618561v0>, <shard_leader:4>, <shard_nodes:[4]>, Shard: <channel_name:by-dev-rootcoord-dml_2_432996419335618561v1>, <shard_leader:4>, <shard_nodes:[4]>]>
-```
+A segment will be ignored if the proxy still cannot find it after updating the cache. This could happen if the segment has been compacted.
 
-<div class="alert note">
-Enabling in-memory replica does not affect search or query operations.
-</div>
+If the cache is not accurate, the proxy may miss some segments. Query nodes with DML channels (growing segments) return search responses along with a list of reliable segments  that the proxy can compare and update the cache with.
+
+### Enhancement
+
+The proxy cannot allocate search requests to query nodes completely equally and query nodes may have different resources to serve search requests. To avoid a long-tailed distribution of resources, the proxy will assign active segments on other query nodes to an idle query node that also has these segments.
