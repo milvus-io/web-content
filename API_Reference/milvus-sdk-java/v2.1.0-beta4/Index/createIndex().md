@@ -1,6 +1,6 @@
 # createIndex()
 
-A MilvusClient interface. This method creates an index on a field in the specified collection.
+A MilvusClient interface. This method creates an index on a field in a specified collection.
 
 ```Java
 R<RpcStatus> createIndex(CreateIndexParam requestParam);
@@ -19,15 +19,15 @@ Methods of `CreateIndexParam.Builder`:
 
 | Method                                       | Description                                                  | Parameters                                                   |
 | -------------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| `withCollectionName( String collectionName)` | Sets the target collection name. Collection name cannot be empty or null. | `collectionName`: The name of the target collection to create an index for. |
-| `withFieldName(String fieldName)`            | Sets the target field name. Field name cannot be empty or null. | `fieldName`: The target field name.                          |
+| `withCollectionName( String collectionName)` | Sets the target collection name. The collection name cannot be empty or null. | `collectionName`: The name of the collection to create an index for. |
+| `withFieldName(String fieldName)`            | Sets the target field name. The field name cannot be empty or null. | `fieldName`: The name of the field to build an index on.                          |
 | `withIndexType(IndexType indexType)`         | Sets the index type.                                         | `indexType`: Index type.                                     |
-| `withIndexName(String indexName)`            | Sets the name of index which will be created. Then you can use the index name to check the status of index. If no index name is specified, the default index name (`_default_idx`) is used. The max length of an index name is 255 characters. | `indexName`: Name of the index to be created.                |
+| `withIndexName(String indexName)`            | Sets the name of index to create. The index name can be used to check the status of index. If no index name is specified, the default index name `_default_idx` is used. The maximum length of an index name is 255 characters. | `indexName`: Name of the index to create.                |
 | `withMetricType(MetricType metricType)`      | Sets the metric type.                                        | `metricType`: Metric type.                                   |
-| `withExtraParam(String extraParam)`          | Sets the specific index parameters according to index type. For example, IVF index, the extra parameters can be `{\"nlist\":1024}`. | `extraParam`:  Extra parameters in JSON format.              |
-| `withSyncMode(Boolean syncMode)`             | Enables sync mode. For sync mode, the client keeps waiting until all segments of the collection are successfully indexed. If sync mode is disabled, the `createIndex()` returns instantly. By default sync mode is enabled. | `syncMode`: True when sync mode is enabled.                  |
-| `withSyncWaitingInterval(Long milliseconds)` | Sets the waiting interval in sync mode. With sync mode enabled, the client constantly checks index state at intervals. Interval value must be greater than zero, and cannot be greater than `Constant.MAX_WAITING_INDEX_INTERVAL`. By default, interval value is 500 milliseconds. | `milliseconds`: Sync mode interval value (unit: millisecond). |
-| `withSyncWaitingTimeout(Long seconds)`       | Sets the timeout value for sync mode. Timeout value must be greater than zero and no upper limit. The default value is 600 seconds. | `seconds`: Sync mode timeout value (unit: second).           |
+| `withExtraParam(String extraParam)`          | Sets the specific index parameters for the index type. For example, for IVF indexes, extra parameters can be `{\"nlist\":1024}`. | `extraParam`:  Extra parameters in JSON format.              |
+| `withSyncMode(Boolean syncMode)`             | Enables sync mode. For sync mode, the client keeps waiting until all segments of the collection are successfully indexed. If sync mode is disabled, `createIndex()` returns the results immediately.Sync mode is enabled by default. | `syncMode`: Sync mode is enabled when the value is `true`.                 |
+| `withSyncWaitingInterval(Long milliseconds)` | Sets the waiting interval in sync mode. With sync mode enabled, the client constantly checks index state at intervals. The interval value must be greater than zero, and cannot be greater than `Constant.MAX_WAITING_INDEX_INTERVAL`. Interval value is `500` milliseconds by default. | `milliseconds`: Sync mode interval value (unit: millisecond). |
+| `withSyncWaitingTimeout(Long seconds)`       | Sets the timeout value for sync mode. The timeout value must be greater than zero with no upper limit. The default value is `600` seconds. | `seconds`: Sync mode timeout value (unit: second).           |
 | `build()`                                    | Constructs a `CreateIndexParam` object.                      | N/A                                                          |
 
 The `CreateIndexParam.Builder.build()` can throw the following exceptions:
