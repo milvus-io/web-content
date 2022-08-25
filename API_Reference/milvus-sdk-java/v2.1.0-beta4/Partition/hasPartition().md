@@ -21,7 +21,7 @@ Methods of `HasPartitionParam.Builder`:
 | ------------------------------------------- | ------------------------------------------------------------ | ----------------------------------------- |
 | `withCollectionName(String collectionName)` | Sets the collection name. The collection name cannot be empty or null. | `collectionName`: The name of the collection to check. |
 | `withPartitionName(String partitionName)`   | Sets the partition name. The partition name cannot be empty or null. | `partitionName`: The name of the partition to check.    |
-| `build()`                                   | Constructs a `HasPartitionParam `object.                     | N/A                                       |
+| `build()`                                   | Constructs a `HasPartitionParam` object.                     | N/A                                       |
 
 The `HasPartitionParam.Builder.build()` can throw the following exceptions:
 
