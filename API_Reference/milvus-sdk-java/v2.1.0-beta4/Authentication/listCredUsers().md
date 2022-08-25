@@ -1,6 +1,6 @@
 # listCredUsers()
 
-A MilvusClient interface. This method lists all authenticated user access.
+A MilvusClient interface. This method lists all authenticated user accesses.
 
 ```Java
 R<ListCredUsersResponse> listCredUsers(ListCredUsersParam requestParam);
