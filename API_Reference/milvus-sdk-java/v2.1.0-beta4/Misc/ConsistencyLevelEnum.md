@@ -1,6 +1,6 @@
 # ConsistencyLevelEnum
 
-The enumeration for consistency level during a search/query.
+The enumeration of consistency levels during a search or query.
 
 ```Java
 package io.milvus.common.clientenum;
