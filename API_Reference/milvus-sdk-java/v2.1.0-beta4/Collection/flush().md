@@ -23,8 +23,8 @@ Methods of `FlushParam.Builder`:
 | `addCollectionName(String collectionName)`          | Adds a collection to be flushed.                             | `collectionName`: The name of the collection to be flushed.    |
 | `withSyncFlush(Boolean syncFlush)`                  | Sets the flush function to sync mode. With sync mode enabled, the client keeps waiting until all segments of the collection are successfully flushed. If sync mode is disabled, the client immediately returns the result after `flush()` is called. | `syncFlush`: A boolean value to indicate if sync mode is enabled. Sync mode is enabled if the value is set to `True`. |
 | `withSyncFlushWaitingInterval(Long milliseconds)`   | Sets the waiting interval in sync mode. With sync mode enabled, the client will check segments status at intervals. The value must be greater than zero, and cannot be greater than `Constant.MAX_WAITING_FLUSHING_INTERVAL`. The default value is `500` miliseconds. | `milliseconds`: The time interval in milliseconds for checking the flush status. |
-| `withSyncFlushWaitingTimeout(Long seconds)`         | Sets the timeout period for sync mode. The value must be greater than zero, and cannot be greater than `Constant.MAX_WAITING_FLUSHING_TIMEOUT`. The default value is `60` seconds. | `seconds`: A during of time in seconds to wait till timeout. |
-| `build()`                                           | Constructs a `FlushParam` object                             | N/A                                                          |
+| `withSyncFlushWaitingTimeout(Long seconds)`         | Sets the timeout period for sync mode. The value must be greater than zero, and cannot be greater than `Constant.MAX_WAITING_FLUSHING_TIMEOUT`. The default value is `60` seconds. | `seconds`: A duration of time in seconds to wait till timeout. |
+| `build()`                                           | Constructs a `FlushParam` object.                             | N/A                                                          |
 
 The `FlushParam.Builder.build()` can throw the following exceptions:
 
