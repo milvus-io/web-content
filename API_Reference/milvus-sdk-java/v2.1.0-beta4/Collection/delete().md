@@ -19,9 +19,9 @@ Methods of `DeleteParam.Builder`:
 
 | Method                                    | Description                                                  | Parameters                                                   |
 | ----------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| withCollectionName(String collectionName) | Sets the collection name. Collection name cannot be empty or null. | `collectionName`: The name of the collection to delete the entity or entities from. |
+| `withCollectionName(String collectionName)` | Sets the collection name. The collection name cannot be empty or null. | `collectionName`: The name of the collection to delete the entity or entities from. |
 | `withPartitionName(String partitionName)` | Sets the target partition name (Optional).                   | `partitionName`: The name of the partition to delete the entity or entities from. |
-| `withExpr(String expr)`                   | Sets the expression filtering to pick out the entities to be deleted. Currently, only expression in the format of "pk_field in [1, 2, ...]" is supported. | `expr`: the expression used for filtering the primary key field.                   |
+| `withExpr(String expr)`                   | Sets the expression filtering to pick out the entities to be deleted. Currently, only expression in the format of "pk_field in [1, 2, ...]" is supported. | `expr`: The expression used for filtering the primary key field.                   |
 | `build()`                                 | Constructs a `DeleteParam` object.                           | N/A                                                          |
 
 The `DeleteParam.Builder.build()` can throw the following exceptions:
