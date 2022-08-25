@@ -20,7 +20,7 @@ Methods of `DropIndexParam.Builder`:
 | Method                               | Description                                                  | Parameters                                    |
 | ------------------------------------ | ------------------------------------------------------------ | --------------------------------------------- |
 | `withCollectionName(collectionName)` | Sets the collection name. The collection name cannot be empty or null. | `collectionName`: The name of the collection whose index needs to be dropped.     |
-| `withIndexName(String indexName)`    | Sets the name of the index to drop. If no index name is specified, the default index name `_default_idx` is used. | `indexName`: Name of the index to drop. |
+| `withIndexName(String indexName)`    | Sets the name of the index to drop. If no index name is specified, the default index name `_default_idx` is used. | `indexName`: The name of the index to drop. |
 | `build()`                            | Constructs a `DropIndexParam` object.                      | N/A                                           |
 
 The `DropIndexParam.Builder.build()` can throw the following exceptions:
