@@ -1,6 +1,6 @@
 # listCredUsers()
 
-A MilvusClient interface. This method lists all user names.
+A MilvusClient interface. This method lists all authenticated user access.
 
 ```Java
 R<ListCredUsersResponse> listCredUsers(ListCredUsersParam requestParam);
@@ -27,7 +27,7 @@ This method catches all the exceptions and returns an `R<RpcStatus>` object.
 
 - If the API fails on the server side, it returns the error code and message from the server.
 
-- If the API fails by RPC exception, it returns `R.Status.``Unknow` and the error message of the exception.
+- If the API fails by RPC exception, it returns `R.Status.Unknow` and the error message of the exception.
 
 - If the API succeeds, it returns `R.Status.Success`.
 
