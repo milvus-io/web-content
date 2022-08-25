@@ -1,9 +1,9 @@
 # manualCompact()
 
-A MilvusClient interface. This method triggers a compaction operation on the server side.
+A MilvusClient interface. This method manually triggers a compaction operation on the server side.
 
 <div class="alert note">
-Milvus server can automatically trigger compaction operation in certain conditions.
+Compaction is automatically triggerd by the Milvus server under certain conditions.
 </div>
 
 ```Java
@@ -23,9 +23,9 @@ Methods of `ManualCompactParam.Builder`:
 
 | Method                                          | Description                                                  | Parameters                                      |
 | ----------------------------------------------- | ------------------------------------------------------------ | ----------------------------------------------- |
-| `withSourceNodeID(Long srcNodeID)`              | Sets the ID of the source query node in which the sealed segments were loaded. | `srcNodeID`: The source query node ID.              |
-| `addDestinationNodeID(Long destNodeID)`         | Adds the ID of an destination query node to which the sealed segments will be balanced. | `destNodeID`: The destination query node ID.        |
-| `withDestinationNodeID(List<Long> destNodeIDs)` | Sets the ID array of the destination query nodes to which the sealed segments will be balanced. | `destNodeIDs`: The ID array of destination query nodes. |
+| `withSourceNodeID(Long srcNodeID)`              | Sets the ID of the source query node in which the sealed segments were loaded. | `srcNodeID`: The ID of the source query node.              |
+| `addDestinationNodeID(Long destNodeID)`         | Adds the ID of an target query node to which the sealed segments will be balanced. | `destNodeID`: The ID of the target query node.        |
+| `withDestinationNodeID(List<Long> destNodeIDs)` | Sets the ID array of the target query nodes to which the sealed segments will be balanced. | `destNodeIDs`: The ID array of destination query nodes. |
 | `addSegmentID(Long segmentID)`                  | Adds the ID of a sealed segment to be balanced.              | `segmentID`: A sealed segment ID.               |
 | `withSegmentIDs(List<Long> segmentIDs)`         | Sets the ID array of the sealed segments to be balanced.      | `segmentIDs`: The ID array of sealed segments.      |
 | `build()`                                       | Constructs a `ManualCompactParam` object.                    |         N/A                                        |
