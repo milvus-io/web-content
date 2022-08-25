@@ -7,7 +7,7 @@ package io.milvus.common.clientenum;
 public enum ConsistencyLevelEnum
 ```
 
-| **Type**   | **Code** | **Description**                                              |
+| Type   | Code | Description                                              |
 | ---------- | -------- | ------------------------------------------------------------ |
 | STRONG     | 0        | Waits until all operations are completed before a search/query. |
 | BOUNDED    | 2        | Waits until operations in a time span are completed before a search/query. |
