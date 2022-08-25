@@ -25,7 +25,7 @@ Methods of `ManualCompactParam.Builder`:
 | ----------------------------------------------- | ------------------------------------------------------------ | ----------------------------------------------- |
 | `withSourceNodeID(Long srcNodeID)`              | Sets the ID of the source query node in which the sealed segments were loaded. | `srcNodeID`: The source query node ID.              |
 | `addDestinationNodeID(Long destNodeID)`         | Adds the ID of an destination query node to which the sealed segments will be balanced. | `destNodeID`: The destination query node ID.        |
-| `withDestinationNodeID(List<Long> destNodeIDs)` | Sets the ID array of the destination query nodes to which the sealed segments will be balanced. | `destNodeIDs`: The ID array g destination query nodes. |
+| `withDestinationNodeID(List<Long> destNodeIDs)` | Sets the ID array of the destination query nodes to which the sealed segments will be balanced. | `destNodeIDs`: The ID array of destination query nodes. |
 | `addSegmentID(Long segmentID)`                  | Adds the ID of a sealed segment to be balanced.              | `segmentID`: A sealed segment ID.               |
 | `withSegmentIDs(List<Long> segmentIDs)`         | Sets the ID array of the sealed segments to be balanced.      | `segmentIDs`: The ID array of sealed segments.      |
 | `build()`                                       | Constructs a `ManualCompactParam` object.                    |         N/A                                        |
