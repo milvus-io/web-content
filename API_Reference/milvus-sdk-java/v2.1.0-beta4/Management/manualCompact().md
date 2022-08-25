@@ -23,11 +23,11 @@ Methods of `ManualCompactParam.Builder`:
 
 | Method                                          | Description                                                  | Parameters                                      |
 | ----------------------------------------------- | ------------------------------------------------------------ | ----------------------------------------------- |
-| `withSourceNodeID(Long srcNodeID)`              | Sets the ID of the source query node in which the sealed segments were loaded. | `srcNodeID`: Source query node ID.              |
-| `addDestinationNodeID(Long destNodeID)`         | Adds the ID of an destination query node to which the sealed segments will be balanced. | `destNodeID`: Destination query node ID.        |
-| `withDestinationNodeID(List<Long> destNodeIDs)` | Sets the ID array of the destination query nodes to which the sealed segments will be balanced. | `destNodeIDs`: Destination query node ID array. |
+| `withSourceNodeID(Long srcNodeID)`              | Sets the ID of the source query node in which the sealed segments were loaded. | `srcNodeID`: The source query node ID.              |
+| `addDestinationNodeID(Long destNodeID)`         | Adds the ID of an destination query node to which the sealed segments will be balanced. | `destNodeID`: The destination query node ID.        |
+| `withDestinationNodeID(List<Long> destNodeIDs)` | Sets the ID array of the destination query nodes to which the sealed segments will be balanced. | `destNodeIDs`: The ID array g destination query nodes. |
 | `addSegmentID(Long segmentID)`                  | Adds the ID of a sealed segment to be balanced.              | `segmentID`: A sealed segment ID.               |
-| `withSegmentIDs(List<Long> segmentIDs)`         | Sets the ID array of the sealed segments to be balanced.      | `segmentIDs`: ID array of sealed segments.      |
+| `withSegmentIDs(List<Long> segmentIDs)`         | Sets the ID array of the sealed segments to be balanced.      | `segmentIDs`: The ID array of sealed segments.      |
 | `build()`                                       | Constructs a `ManualCompactParam` object.                    |         N/A                                        |
 
 The `ManualCompactParam.Builder.build()` could throw the following exceptions:
@@ -42,7 +42,7 @@ This method catches all the exceptions and returns an `R<ManualCompactionRespons
 
 - If the API fails by RPC exception, it returns `R.Status.Unknow` and error message of the exception.
 
-- If the API succeeds, it returns a valid `ManualCompactionResponse` held by the R template. The `ManualCompactionResponse` contains an ID of this compaction operation, of which you can check the state by `getCompactionState()` or `getCompactionStateWithPlans() method`.
+- If the API succeeds, it returns a valid `ManualCompactionResponse` held by the R template. The `ManualCompactionResponse` contains an ID of this compaction operation, of which you can check the state by `getCompactionState()` or `getCompactionStateWithPlans()` method.
 
 ## Example
 
