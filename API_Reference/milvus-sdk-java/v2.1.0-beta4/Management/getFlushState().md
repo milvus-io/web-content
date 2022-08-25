@@ -1,6 +1,6 @@
 # getFlushState()
 
-A MilvusClient interface. This method tests whether specified segments are flushed.
+A MilvusClient interface. This method checks whether the specified segments are flushed.
 
 ```Java
 R<GetFlushStateResponse> getFlushState(GetFlushStateParam requestParam);
@@ -19,13 +19,13 @@ Methods of `GetFlushStateParam.Builder`:
 
 | Method                                | Description                                                  | Parameters                          |
 | ------------------------------------- | ------------------------------------------------------------ | ----------------------------------- |
-|`withSegmentIDs(List<Long> segmentIDs)` | Sets the ID list of the segments to be tested. Typically the ID is returned by `flush()` method. | `segmentIDs`: ID list of segments. |
-| `addSegmentID(Long segmentID)`          | Adds the segment ID to be tested. Typically the ID is returned by `flush()` method. | `segmentID`: Segment ID.             |
+|`withSegmentIDs(List<Long> segmentIDs)` | Sets the ID list of the segments to check, which can be obtained by calling the <code><a href="../Collection/flush().md">flush()</a></code> method. | `segmentIDs`: A list of the IDs of the segments whose flush state needs to be checked. |
+| `addSegmentID(Long segmentID)`          | Adds the ID of the segment to check, which can be obtained by calling the <code><a href="../Collection/flush().md">flush()</a></code> method.  | `segmentID`: The ID of the segment whose flush state needs to be checked.           |
 | `build()`                               | Constructs a `GetFlushStateParam` object.                        |                      N/A               |
 
-The `GetFlushStateParam.Builder.build()` could throw the following exceptions:
+The `GetFlushStateParam.Builder.build()` can throw the following exceptions:
 
-- `ParamException` -- error if the parameter is invalid.
+- `ParamException`: error if the parameter is invalid.
 
 ## Returns
 
@@ -33,7 +33,7 @@ This method catches all the exceptions and returns an `R<GetFlushStateResponse>`
 
 - If the API fails on the server side, it returns the error code and message from the server.
 
-- If the API fails by RPC exception, it returns `R.Status.Unknow` and error message of the exception.
+- If the API fails by RPC exception, it returns `R.Status.Unknow` and the error message of the exception.
 
 - If the API succeeds, it returns a valid `GetFlushStateResponse` held by the R template. 
 
