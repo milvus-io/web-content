@@ -36,7 +36,7 @@ This method catches all the exceptions and returns an `R<GetPartitionStatisticsR
 
 - If the API fails by RPC exception, it returns `R.Status.Unknow` and the error message of the exception.
 
-- If the API succeeds, it returns a valid `GetPartitionStatisticsResponse` held by the R template. You can use `GetPartStatResponseWrappe`r to get statistics easily.
+- If the API succeeds, it returns a valid `GetPartitionStatisticsResponse` held by the R template. You can use `GetPartStatResponseWrapper` to get statistics easily.
 
 ## GetPartStatResponseWrapper
 
