@@ -24,7 +24,7 @@ Methods of `CreateCollectionParam.Builder`:
 | `withDescription(String description)`        | Sets the collection description. The description can be empty. The default description is "". | `description`: The description of the collection to create.  |
 | `withFieldTypes(List<FieldType> fieldTypes)` | Sets the collection schema. The collection schema cannot be empty. | `fieldTypes`: a list of `FieldType`, each representing a field schema. |
 | `addFieldType(FieldType fieldType)`          | Adds a field schema.                                         | `fieldType`: The schema of a field to add in the collection. |
-| `build()`                                    | Constructs a `CreateCollectionParam` object                  | N/A                                                          |
+| `build()`                                    | Constructs a `CreateCollectionParam` object.                  | N/A                                                          |
 
 The `CreateCollectionParam.Builder.build()` can throw the following exceptions:
 
@@ -53,7 +53,7 @@ primaryKey)`     | Sets the field as the primary key field. Only the fields whos
 | `withDimension(Integer dimension)`       | Sets the dimension of a vector field. The dimension value must be greater than zero. This method internally calls `addTypeParam()` to store the dimension value. | `dimension`: The dimension of the vector field.              |
 | `withMaxLength(Integer maxLength)`       | Sets the maximum length of a varchar field. The value must be greater than zero. This method internally calls the `addTypeParam()` to store the maximum length value. | `maxLength`: The maximum length of the varchar field.        |
 | `withAutoID(boolean autoID)`             | Enables auto-ID function for the field. Note that the auto-ID function can only be enabled on primary key field. If auto-ID function is enabled, Milvus automatically generates a unique ID for each entity so that values for the primary key field do not need to be provided during data insertion. If auto-ID is disabled, values for the primary key field need to be provided during data insertion. | `autoID`: A boolean value that indicates if the primary keys are automatically generated. The value `true` means that auto-ID is enabled, while the value `false` means it is not. |
-| `build()`                                | Create a `FieldType` object.                                 | N/A                                                          |
+| `build()`                                | Creates a `FieldType` object.                                 | N/A                                                          |
 
 ## Returns
 
