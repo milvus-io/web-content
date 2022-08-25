@@ -3,7 +3,7 @@
 A MilvusClient interface. This method drops a partition and the data within. 
 
 <div class="alert note">
-This method drops all data in the specified partition and the `_default` partition cannot be dropped.
+This method drops all data in the specified partition and the <code>_default</code> partition cannot be dropped.
 </div>
 
 ```Java
