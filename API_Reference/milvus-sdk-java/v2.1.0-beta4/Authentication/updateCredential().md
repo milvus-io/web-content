@@ -1,9 +1,9 @@
 # updateCredential()
 
-A MilvusClient interface. This method updates the password corresponding to a given username. The original username and password must be provided to check if the update operation is valid. 
+A MilvusClient interface. This method updates the password of an authenticated user access. The original username and password must be provided when checking the validility of the update operation. 
 
 <div class="alert note">
-The Milvus client will not update the corresponding connection when the credential is updated. Therefore, the original connection might be invalid.
+The old connection to the Milvus client can be invalidated after the credential is updated. 
 </div>
 
 
@@ -13,7 +13,7 @@ R<RpcStatus> updateCredential(UpdateCredentialParam requestParam);
 
 ## UpdateCredentialParam
 
-Use the `UpdateCredentialParam.Builder` to construct a `UpdateCredentialParam` object.
+Use the `UpdateCredentialParam.Builder` to construct an `UpdateCredentialParam` object.
 
 ```Java
 import io.milvus.param.UpdateCredentialParam;
@@ -24,9 +24,9 @@ Methods of `UpdateCredentialParam.Builder`:
 
 | Method                             | Description                                                  | Parameters                  |
 | ---------------------------------- | ------------------------------------------------------------ | --------------------------- |
-| `withUsername(String username)`    | Sets the username. Username cannot be empty or null.         | `username`: The user name.  |
+| `withUsername(String username)`    | Sets the username. Username cannot be empty or null.         | `username`: The username used to reset the password.  |
 | `withOldPassword(String password)` | Sets the old password. Old password cannot be empty or null. | password: The old password. |
-| `withNewPassword(String password)` | Sets the new password. New password cannot be empty or null. | password: The new password. |
+| `withNewPassword(String password)` | Sets the new password. New password cannot be empty or null. | password: The new password to create for the provided username. |
 | `build()`                          | Constructs a `UpdateCredentialParam` object.           |         N/A               |
 
 The `UpdateCredentialParam.Builder.build()` can throw the following exceptions:
