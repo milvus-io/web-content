@@ -1,6 +1,6 @@
 # IndexType
 
-The enumeration for available index types.
+The enumeration of all available index types in Milvus.
 
 ```Java
 package io.milvus.param;
