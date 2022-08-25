@@ -20,7 +20,7 @@ Methods of `ReleasePartitionsParam.Builder`:
 | Method                                          | Description                                                  | Parameters                             |
 | ----------------------------------------------- | ------------------------------------------------------------ | -------------------------------------- |
 | `withCollectionName(String collectionName)`       | Sets the collection name. The collection name cannot be empty or null. | `collectionName`: The name of the collection whose partition needs to be released. |
-| `withPartitionNames(List<String> partitionNames)` | Sets the partition name list. The partition name list cannot be null or empty. | `partitionNames`:  A list of the names of the partitions to release.  |
+| `withPartitionNames(List<String> partitionNames)` | Sets the partition name list. The partition name list cannot be empty or null. | `partitionNames`:  A list of the names of the partitions to release.  |
 | `addPartitionName(String partitionName)`          | Adds a partition by name. The partition name cannot be empty or null. | `partitionName`: The name of the partition to release.   |
 | `build()`                                         | Constructs a `ReleasePartitionsParam` object.                    |    N/A                                    |
 
