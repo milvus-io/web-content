@@ -34,7 +34,7 @@ This method catches all the exceptions and returns an `R<GetQuerySegmentInfoResp
 
 - If the API fails by RPC exception, it returns `R.Status.Unknow` and the error message of the exception.
 
-- If the API succeeds, it returns a valid `GetQuerySegmentInfoResponse` held by the R template. The `GetQuerySegmentInfoResponse` object contains a list of `QuerySegmentInfo`, and you can use `getState()` in `QuerySegmentInfo` to get the state of the segment. This process is similar to that of `PersistentSegmentInfo`.
+- If the API succeeds, it returns a valid `GetQuerySegmentInfoResponse` held by the R template. The `GetQuerySegmentInfoResponse` object contains a list of `QuerySegmentInfo`, and you can use `getState()` in `QuerySegmentInfo` to get the state of the segment. This process is similar to that of [PersistentSegmentInfo](getPersistentSegmentInfo().md).
 
 ## Example
 
