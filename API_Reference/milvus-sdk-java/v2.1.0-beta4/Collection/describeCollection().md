@@ -55,7 +55,7 @@ Methods of `DescCollResponseWrapper`:
 | `getShardNumber()`                 | Gets the number of shards of the collection.                 | N/A                     | Int             |
 | `getCreatedUtcTimestamp()`         | Gets the UTC timestamp that indicates when the collection is created. | N/A                     | long            |
 | `getAliases()`                     | Gets the alias of the collection.                            | N/A                     | List<String>    |
-| `getFields()`                      | Gets all field schemas in the collection.                    | N/A                     | List<FieldType> |
+| `getFields()`                      | Gets all field schemas in the collection.                    | N/A                     | List<[FieldType](createCollection().md#FieldType)> |
 | `getFieldByName(String fieldName)` | Gets a field schema by its field name.                       | fieldName: a field name | FieldType       |
 
 ## Example
