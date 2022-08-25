@@ -47,7 +47,7 @@ DescCollResponseWrapper wrapper = new DescCollResponseWrapper(descCollectionResp
 
 Methods of `DescCollResponseWrapper`:
 
-| **Method**                         | **Description**                                              | **Parameters**          | **Returns**     |
+| Method                         | Description                                              | Parameters          | Returns     |
 | ---------------------------------- | ------------------------------------------------------------ | ----------------------- | --------------- |
 | `getCollectionName()`              | Gets the name of the collection.                             | N/A                     | String          |
 | `getCollectionDescription()`       | Gets the description of the collection.                      | N/A                     | String          |
