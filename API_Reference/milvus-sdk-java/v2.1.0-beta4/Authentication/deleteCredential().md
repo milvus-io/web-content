@@ -1,6 +1,6 @@
 # deleteCredential()
 
-A MilvusClient interface. This method deletes the credential of a corresponding username.
+A MilvusClient interface. This method deletes an authenticated user access.
 
 ```Java
 R<RpcStatus> deleteCredential(DeleteCredentialParam requestParam);
@@ -19,7 +19,7 @@ Methods of `DeleteCredentialParam.Builder`:
 
 | Method                          | Description                                          | Parameters                                             |
 | ------------------------------- | ---------------------------------------------------- | ------------------------------------------------------ |
-| `withUsername(String username)` | Sets the username. Username cannot be empty or null. | `username`: The user name used to delete a credential. |
+| `withUsername(String username)` | Sets the username. Username cannot be empty or null. | `username`: The username used to delete a credential. |
 | `build()`                       | Constructs a `DeleteCredentialParam` object.         | N/A                                                    |
 
 The `DeleteCredentialParam.Builder.build()` can throw the following exceptions:
