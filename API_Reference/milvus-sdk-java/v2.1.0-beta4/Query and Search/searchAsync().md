@@ -6,7 +6,7 @@ A MilvusClient interface. This method conducts approximate nearest neighbor (ANN
 ListenableFuture<R<SearchResults>> searchAsync(SearchParam requestParam);
 ```
 
-This method uses the same parameter as `search()`, it invokes RPC interface and returns a `ListenableFuture` object immediately.
+This method uses the same parameter as <code><a href="search().md">search()</a></code>. It invokes the RPC interface and returns a `ListenableFuture` object immediately.
 
 ## Example
 
