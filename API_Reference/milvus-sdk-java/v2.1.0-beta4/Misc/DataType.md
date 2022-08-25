@@ -1,6 +1,6 @@
 # DataType
 
-The enum for available data types, defined by RPC proto.
+The eunumeration of all supported data types defined by RPC proto in Milvus.
 
 ```Java
 package io.milvus.grpc;
