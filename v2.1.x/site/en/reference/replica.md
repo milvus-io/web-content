@@ -9,7 +9,7 @@ This topic introduces the in-memory replica (replication) mechanism in Milvus th
 
 ## Overview
 
-![Replica_Availiability](assets/replica_availability.jpg "In-memory replicas improve system availability.")
+![Replica_Availiability](../../../assets/replica_availability.jpg "In-memory replicas improve system availability.")
 
 With in-memory replicas, Milvus can load the same segment on multiple query nodes. If one query node has failed or is busy with a current search request when another arrives, the system can send new requests to an idle query node that has a replication of the same segment.
 
@@ -25,7 +25,7 @@ In-memory replicas help Milvus recover faster if a query node crashes. When a qu
 
 In-memory replicas are organized as replica groups. Each replica group contains [shard](https://milvus.io/docs/v2.1.x/glossary.md#Sharding) replicas. Each shard replica has a streaming replica and a historical replica that correspond to the growing and sealed [segments](https://milvus.io/docs/v2.1.x/glossary.md#Segment) in the shard (i.e. DML channel).
 
-![An illustration of how in-memory replica works](assets/replica_availability.jpg)
+![An illustration of how in-memory replica works](../../../assets/replica_availability.jpg)
 
 ### Replica group
 
