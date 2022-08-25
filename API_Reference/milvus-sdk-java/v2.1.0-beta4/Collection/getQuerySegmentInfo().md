@@ -19,7 +19,7 @@ Methods of `GetQuerySegmentInfoParam.Builder`:
 
 | Method                                      | Description                                                  | Parameters                                                   |
 | ------------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| `withCollectionName(String collectionName)` | Sets the collection name. Collection name cannot be empty or null. | `collectionName`: The name of the collection to get the query information of the segment from. |
+| `withCollectionName(String collectionName)` | Sets the collection name. The collection name cannot be empty or null. | `collectionName`: The name of the collection to get the query information of the segment from. |
 | `build()`                                   | Constructs a `GetQuerySegmentInfoParam` object.              | N/A                                                          |
 
 The `GetQuerySegmentInfoParam.Builder.build()` can throw the following exceptions:
