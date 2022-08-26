@@ -21,18 +21,15 @@ ManualCompactParam.Builder builder = ManualCompactParam.newBuilder();
 
 Methods of `ManualCompactParam.Builder`:
 
-| Method                                          | Description                                                  | Parameters                                      |
-| ----------------------------------------------- | ------------------------------------------------------------ | ----------------------------------------------- |
-| `withSourceNodeID(Long srcNodeID)`              | Sets the ID of the source query node in which the sealed segments were loaded. | `srcNodeID`: The ID of the source query node.              |
-| `addDestinationNodeID(Long destNodeID)`         | Adds the ID of an target query node to which the sealed segments will be balanced. | `destNodeID`: The ID of the target query node.        |
-| `withDestinationNodeID(List<Long> destNodeIDs)` | Sets the ID array of the target query nodes to which the sealed segments will be balanced. | `destNodeIDs`: The ID array of destination query nodes. |
-| `addSegmentID(Long segmentID)`                  | Adds the ID of a sealed segment to be balanced.              | `segmentID`: A sealed segment ID.               |
-| `withSegmentIDs(List<Long> segmentIDs)`         | Sets the ID array of the sealed segments to be balanced.      | `segmentIDs`: The ID array of sealed segments.      |
-| `build()`                                       | Constructs a `ManualCompactParam` object.                    |         N/A                                        |
+| Method                                    | Description                                                  | Parameters                                                   |
+| ----------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| `withCollectionName(String collectionName)` | Sets the collection name. The collection name cannot be empty or null. | collectionName: The name of the collection that needs to be manually compacted. |
+| `build()`                                   | Constructs a `ManualCompactParam` object.                    | N/A                                                          |
+
 
 The `ManualCompactParam.Builder.build()` could throw the following exceptions:
 
-- `ParamException` -- error if the parameter is invalid.
+- `ParamException`: error if the parameter is invalid.
 
 ## Returns
 
