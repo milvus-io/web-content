@@ -65,4 +65,3 @@ The TSC is elected by the community. The TSC’s work includes:
 
 - Nominate and mentor maintainers, reviewers, and contributors to the project
 
-**Defined by**: https://github.com/orgs/milvus-io/teams/tsc
