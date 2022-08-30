@@ -27,15 +27,15 @@ Download and run an installation package for Attu based on your operating system
 	<tbody>
         <tr>
             <td><code>Linux</code></td>
-            <td><a href="https://github.com/zilliztech/attu/releases/download/v2.0.1/attu_2.0.1_amd64.deb">Linux installation package</a></td>
+            <td><a href="https://github.com/zilliztech/attu/releases/download/v2.1.0/attu_2.1.0_amd64.deb">Linux installation package</a></td>
         </tr>
         <tr>
             <td><code>macOS</code></td>
-            <td><a href="https://github.com/zilliztech/attu/releases/download/v2.0.1/attu-2.0.1.dmg">macOS installation package</a></td>
+            <td><a href="https://github.com/zilliztech/attu/releases/download/v2.1.0/attu-2.1.0.dmg">macOS installation package</a></td>
         </tr>
         <tr>
             <td><code>Windows</code></td>
-            <td><a href="https://github.com/zilliztech/attu/releases/download/v2.0.1/attu-Setup-2.0.1.exe">Windows installation package</a></td>
+            <td><a href="https://github.com/zilliztech/attu/releases/download/v2.1.0/attu-Setup-2.1.0.exe">Windows installation package</a></td>
         </tr>
 	</tbody>
 </table>
