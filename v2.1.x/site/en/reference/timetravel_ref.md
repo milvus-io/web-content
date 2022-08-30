@@ -6,34 +6,45 @@ summary: Learn the design and implementation details of Time Travel in Milvus.
 
 # Time Travel
 
-This topic introduces the Time Travel feature in detail, including how it is designed and how it works in Milvus. See [Search with Time Travel](timetravel.md) for more information about how to use this feature.
+This topic introduces the Time Travel feature in detail. See Search with Time Travel for more information about how to use this feature.
 
-Data engineers often need to roll back data to fix dirty data or bugs. Unlike traditional databases that use snapshots or retrain data to achieve data rollback, Milvus maintains a timeline for all data insert or delete operations. Therefore, users can specify the timestamp in a query to retrieve data at a specific point of time, which can significantly reduce maintenance costs.
+## Overview
 
-## Design Details
+Time Travel is a feature that allows you to access historical data at any point within a specified time period, making it possible to query, restore, and back up data in the past.  With Time Travel, you can:
 
-When the proxy receives a data insert or delete request, it also gets a timestamp from root coord. Then, the proxy adds the timestamp as an additional field to the inserted or deleted data. Timestamp is a data field just like primary key (`pk`). Data in the same insert or delete request share the same timestamp. The timestamp field is stored together with other data fields of a collection.
+- Search or query data that has been deleted.
+
+- Restore data that has been deleted or updated.
+
+- Back up data before a specific point of time.
+
+Unlike traditional databases that use snapshots or retain data to support the Time Travel feature, the Milvus vector database maintains a timeline for all data insert or delete operations and adopts a timestamp mechanism. This means you can specify the timestamp in a search or query to retrieve data at a specific point of time in the past to significantly reduce maintenance costs.
+
+## Timestamp in Milvus
+
+In the Milvus vector database, each entity has its own timestamp attribute. All data manipulation language (DML) operations including data insertion and deletion, mark entities with a timestamp. For instance, if you inserted several entities all at one go, this batch of data will be marked with timestamps and share the same timestamp value. 
+
+### DML operations
+
+When the proxy receives a data insert or delete request, it also gets a timestamp from the [root coord](https://milvus.io/docs/v2.1.x/four_layers.md#Root-coordinator-root-coord). Then, the proxy adds the timestamp as an additional field to the inserted or deleted data. Timestamp is a data field just like primary key (`pk`). The timestamp field is stored together with other data fields of a collection.
 
 When you load a collection to memory, all data in the collection, including their corresponding timestamps, are loaded into memory.
 
-During a search, if the search request received by the proxy contains the parameter, `travel_timestamp`, the value of this parameter will be passed to [segcore](https://github.com/milvus-io/milvus/tree/master/docs/design_docs/segcore), the execution engine which supports concurrent insertion, deletion, query, index loading, monitoring and statistics of a segment data in memory. The segcore filters the search results by timestamp.
+### Search or query with Time Travel
 
-## Search implementation
+`travel_timestamp` is a timestamp specified by you to indicate that you need to conduct a query or search on the data view before this point in time. In parallel to a traditional database, you can consider `travel_timestamp` as a data snapshot, and the query or search needs to be conducted on the data in this snapshot. 
 
-Searches with filtering in [knowhere](https://github.com/milvus-io/milvus/blob/master/docs/design_docs/knowhere_design.md) is achieved by bitset. Bitset can be applied in the following three aspects:
+During a search, if the search request received by the proxy contains the parameter, `travel_timestamp`, the value of this parameter will be passed to [segcore](https://github.com/milvus-io/milvus/tree/master/docs/design_docs/segcore), the execution engine which supports concurrent insertion, deletion, query, index loading, monitoring and statistics of a segment data in memory. The segcore filters the search results by timestamp. In other words, you can deem the Time Travel feature as data filtering with the condition limited by the value of `travel_timestamp`. This means that data whose timestamp value is greater than `travel_timestamp` are filtered out and will not be involved in the search or query process. The expression for filtering is `data.timestamp <= travel_timestamp`.
 
-- Delete data
-- Timestamp
-- Attribute filtering
+## Bitset for timestamp
 
-When searching in segcore, you can obtain a bitset indicating if the timestamp meets the condition. Then, the segcore combines the timestamp bitset with the other two types of bitsets, data deletion bitset and attribute filtering bitset. Finally, a bitset containing all deletion, attribute filtering, and timestamp information is generated. Then Milvus judges the range of data to query or search based on this bitset.
+To go into details, searches and queries with filtering in [knowhere](https://github.com/milvus-io/milvus/blob/master/docs/design_docs/knowhere_design.md) are facilitated by bitset. And the underlying mechanism behind Time Travel is enabled by bitset.
 
-All CRUD operations within Milvus are executed in memory. Therefore, you need to [load collection from disk to memory](search.md#Load-collection) before searching with Time Travel.
-
+When a search is conducted, the segcore obtains a bitset indicating if the timestamp meets the condition. Then Milvus judges the range of data to query or search based on this bitset.
 
 ### Sealed segment
 
-For sealed segments, you need to call `collection.load()` to load the collection to memory before searching with Time Travel. As an additional field of data, timestamps are also loaded to memory when you call `collection.load()`. When loading, segcore builds an index, `TimestampIndex` , on the timestamp field. The index contains information about the smallest and the largest timestamp of this sealed segment, and the offset, or the row number, of each timestamp in the segment.
+When loading a sealed segment, Milvus loads all the timestamps to memory and the segcore builds an index, `TimestampIndex` , on the timestamp field. The index contains information about the smallest and the largest timestamp value of this sealed segment, the offset and the row number of timestamps in this sealed segment.
 
 When you search with Time Travel, Milvus first filters the sealed segment according to the smallest and largest timestamp in the `TimestampIndex`:
 
