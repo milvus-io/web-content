@@ -5,7 +5,7 @@ summary: Learn about the main components in Milvus standalone and cluster.
 
 # Main Components
 
-There are two modes for running Milvus: Standalone and Cluster. These two modes share the same features. You can choose a mode that best fits your dataset size, traffic data, and more. For now, Milvus standalone cannot be "online" upgraded to Milvus cluster. 
+There are two modes for running Milvus: Standalone and Cluster. These two modes share the same features. You can choose a mode that best fits your dataset size, traffic data, and more. For now, Milvus standalone cannot be upgraded "online" to Milvus cluster. 
 
 ## Milvus standalone
 
