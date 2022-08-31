@@ -5,7 +5,7 @@ summary: Learn about the benchmark result of Milvus.
 
 # Milvus 2.1 Benchmark Test Report
 
-This report shows the major test results of Milvus 2.1, covering the performances of data inserting, index building, and vector similarity search. The tests aim to provide a benchmark against which the performances of future Milvus releases can be measured.
+This report shows the major test results of Milvus 2.1, covering the performances of data insertion, index building, and vector similarity search. The tests aim to provide a benchmark against which the performances of future Milvus releases can be measured.
 
 ## Terminology
 
