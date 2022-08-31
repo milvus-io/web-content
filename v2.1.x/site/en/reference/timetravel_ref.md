@@ -6,7 +6,7 @@ summary: Learn the design and implementation details of Time Travel in Milvus.
 
 # Time Travel
 
-This topic introduces the Time Travel feature in detail. See Search with Time Travel for more information about how to use this feature.
+This topic introduces the Time Travel feature in detail. See [Search with Time Travel](timetravel.md) for more information about how to use this feature.
 
 ## Overview
 
