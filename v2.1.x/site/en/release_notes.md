@@ -12,7 +12,7 @@ Release date: 12 August 2022
 
 | Milvus version | Python SDK version | Java SDK version | Go SDK version | Node.js SDK version |
 | -------------- | ------------------ | ---------------- | -------------- | ------------------- |
-| 2.1.1          | 2.1.1              | 2.1.0.           | 2.1.1          | 2.1.2               |
+| 2.1.1          | 2.1.1              | 2.1.0            | 2.1.1          | 2.1.2               |
 
 Milvus 2.1.1 is a minor bug fix version of Milvus 2.1.0.  It fixed query node crash under high concurrency, garbage collector failure to parse segment ID issue, and a few other stability issues.
 
