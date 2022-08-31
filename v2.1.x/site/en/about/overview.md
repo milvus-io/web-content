@@ -121,6 +121,7 @@ Milvus has client libraries wrapped on top of the Milvus API that can be used to
 - [PyMilvus](https://github.com/milvus-io/pymilvus)
 - [Node.js SDK](https://github.com/milvus-io/milvus-sdk-node)
 - [Go SDK](https://github.com/milvus-io/milvus-sdk-go)
+- [Java SDK](https://github.com/milvus-io/milvus-sdk-java)
 
 We are working on enabling more new client libraries. If you would like to contribute, go to the corresponding repository of [the Milvus Project](https://github.com/milvus-io).
 
