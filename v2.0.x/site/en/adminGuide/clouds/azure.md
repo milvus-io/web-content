@@ -138,7 +138,7 @@ Starting pods might take several minutes. Run `kubectl get services` to view ser
 
 Azure Blob Storage is Azure's version of AWS Simple Storage Service (S3).
 
-[MinIO Azure Gateway](https://docs.min.io/docs/minio-gateway-for-azure.html) allows accessing Azure. Essentially, MinIO Azure Gateway translates and forwards all connections to Azure by using APIs. You can use MinIO Azure Gateway instead of a MinIO server.
+[MinIO Azure Gateway](https://blog.min.io/deprecation-of-the-minio-gateway/) allows accessing Azure. Essentially, MinIO Azure Gateway translates and forwards all connections to Azure by using APIs. You can use MinIO Azure Gateway instead of a MinIO server.
 
 ### Set variables
 
