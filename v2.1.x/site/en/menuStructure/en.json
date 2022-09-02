@@ -891,39 +891,46 @@
       "order": 6
     },
     {
+      "id": "knowhere.md",
+      "title": "Knowhere",
+      "label1": "reference",
+      "label2": "",
+      "order": 7
+    },
+    {
       "id": "schema.md",
       "title": "Schema",
       "label1": "reference",
       "label2": "",
-      "order": 7
+      "order": 8
     },
     {
       "id": "metric.md",
       "title": "Similarity Metrics",
       "label1": "reference",
       "label2": "",
-      "order": 8
+      "order": 9
     },
     {
       "id": "system_configuration.md",
       "title": "System Configurations",
       "label1": "reference",
       "label2": "",
-      "order": 9
+      "order": 10
     },
     {
       "id": "timetravel_ref.md",
       "title": "Time Travel",
       "label1": "reference",
       "label2": "",
-      "order": 10
+      "order": 11
     },
     {
       "id": "index.md",
       "title": "Vector Index",
       "label1": "reference",
       "label2": "",
-      "order": 11
+      "order": 12
     },
     {
       "id": "tutorials",

@@ -72,3 +72,4 @@ See [How GuaranteeTs Works](https://github.com/milvus-io/milvus/blob/f3f46d3bb2d
   - [creating a collection](create_collection.md)
   - [conducting a vector similarity search](search.md)
   - [conducting a vector query](query.md)
+
