@@ -86,6 +86,14 @@ id: home.md
 <div class="doc-home-what-is-new">
 
 ## What's new in docs
+
+_Sep 2022_
+
+- Official release of 2.1.0 [Java API reference](https://milvus.io/api-reference/java/v2.1.0/About.md).
+- Added reference docs for [consistency levels in Milvus](consistency.md),[in-memory replica](replica.md), [bitset](bitset.md), and [Knowhere](knowhere.md), the vector execution engine in Milvus.
+- Added indexes on binary embeddings to [vector index](index.md)reference doc.
+- Updated reference doc explaining the mechanism behind [Time Travel](timetravel_ref.md).
+
   
 _Aug 2022_
 
