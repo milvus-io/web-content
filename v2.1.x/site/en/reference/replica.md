@@ -72,3 +72,8 @@ If the cache is not accurate, the proxy may miss some segments. Query nodes with
 ### Enhancement
 
 The proxy cannot allocate search requests to query nodes completely equally and query nodes may have different resources to serve search requests. To avoid a long-tailed distribution of resources, the proxy will assign active segments on other query nodes to an idle query node that also has these segments.
+
+## What's next
+
+- Learn how to [load a collection](load_collection.md) as multiple replicas.
+- Learn how to [load a partition](load_partition.md) as multiple replicas.

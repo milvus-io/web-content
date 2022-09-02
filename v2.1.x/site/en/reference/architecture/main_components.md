@@ -42,4 +42,6 @@ There are two modes for running Milvus: Standalone and Cluster. These two modes 
 
 ![Distributed_architecture](../../../../assets/distributed_architecture.jpg "Milvus cluster architecture.")
 
-For more details about Milvus' architecture, see [Computing/Storage Disaggregation](four_layers.md).
+## What's next
+
+- Read [Computing/Storage Disaggregation](four_layers.md) to understand the mechanism and design principle of Milvus.

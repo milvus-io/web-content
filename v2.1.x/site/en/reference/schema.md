@@ -165,3 +165,7 @@ collection, ins_res = Collection.construct_from_dataframe(
                                 )
 ```
 
+## What's next
+
+- Learn how to prepare schema when [creating a collection](create_collection.md).
+

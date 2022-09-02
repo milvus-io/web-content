@@ -52,3 +52,10 @@ Query nodes are independent from each other in a data query. Each node is respon
 ![Handoff](../../../../assets/handoff.jpg "Handoff in Milvus.")
 
 There are two types of segments, growing segments (for incremental data), and sealed segments (for historical data). Query nodes subscribe to vchannel to receive recent updates (incremental data) as growing segments. When a growing segment reaches a predefined threshold, data coord seals it and index building begins. Then a *handoff* operation initiated by query coord turns incremental data to historical data. Query coord will distribute sealed segments evenly among all query nodes according to memory usage, CPU overhead, and segment number.
+
+## What's next
+
+- Learn about how to [use the Milvus vector database for real-time query](https://milvus.io/blog/deep-dive-5-real-time-query.md).
+- Learn about [data insertion and data persistence in Milvus](https://milvus.io/blog/deep-dive-4-data-insertion-and-data-persistence.md).
+- Learn how [data is processed in Milvus](https://milvus.io/blog/deep-dive-3-data-processing.md).
+

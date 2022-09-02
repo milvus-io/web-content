@@ -65,3 +65,10 @@ A GuaranteeTs serves to inform query nodes that a search or query request will n
 - **Eventually**: GuaranteeTs is set to a very small value to skip the consistency check. Query nodes search immediately on the existing data view.
 
 See [How GuaranteeTs Works](https://github.com/milvus-io/milvus/blob/f3f46d3bb2dcae2de0bdb7bc0f7b20a72efceaab/docs/developer_guides/how-guarantee-ts-works.md) and [All The Things You Should Know About Time Synchronization](https://github.com/milvus-io/milvus/blob/master/docs/design_docs/milvus_timesync_en.md?from=from_parent_mindnote) for more information about the mechanism behind ensuring different levels of consistency in Milvus.
+
+## What's next
+
+- Learn how to tune consistency level when:
+  - [creating a collection](create_collection.md)
+  - [conducting a vector similarity search](search.md)
+  - [conducting a vector query](query.md)

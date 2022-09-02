@@ -339,3 +339,7 @@ See <a href="https://medium.com/unstructured-data-service/how-to-choose-an-index
 </p>
 </details>
 
+
+## What's next
+
+- Learn more about the [Similarity Metrics](metric.md) supported in Milvus.
