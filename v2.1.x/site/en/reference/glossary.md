@@ -5,6 +5,10 @@ title: Glossary
 
 # Glossary
 
+## Bitset
+
+In Milvus, bitsets are arrays of bit numbers `0` and `1` that can be used to represent certain data compactly and efficiently as opposed to in ints, floats, or chars. A bit number is `0` by default and is only set to `1` if it meets certain requirements.
+
 ## Channel
 
 There are two different channels in Milvus. They are [PChannel](#PChannel) and [VChannel](#VChannel). Each PChannel corresponds to a topic for log storage. While each VChannel corresponds a shard in a collection. 
