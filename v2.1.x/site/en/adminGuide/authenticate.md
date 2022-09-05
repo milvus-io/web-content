@@ -89,7 +89,7 @@ Change the password for an existing user and reset the Milvus connection.
 
 ```python
 from pymilvus import utility
-utility.reset_password('user', 'new_password', using='default')
+utility.reset_password('user', 'old_password', 'new_password', using='default')
 ```
 
 | Parameter                    |  Description                            |
