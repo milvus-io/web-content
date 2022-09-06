@@ -12,8 +12,6 @@ A collection consists of one or more partitions. While creating a new collection
 
 The following example builds a two-[shard](glossary.md#Sharding) collection named `book`, with a primary key field named `book_id`, an `INT64` scalar field named `word_count`, and a two-dimensional floating-point vector field named `book_intro`. Real applications will likely use much higher dimensional vectors than the example.
 
-Milvus supports setting consistency level while creating a collection. The example in this topic sets the consistency level of the collection as `Strong`. You can also set the consistency level as `Bounded`, `Session` or `Eventually`. See [Consistency](consistency.md) for more information about the four consistency levels in Milvus.
-
 
 ## Prepare Schema
 
@@ -158,7 +156,6 @@ curl -X 'POST' \
   -H 'Content-Type: application/json' \
   -d '{
     "collection_name": "book",
-    "consistency_level": 1,
     "schema": {
       "autoID": false,
       "description": "Test book search",
@@ -532,17 +529,6 @@ Output:
             <td>N/A</td>
         </tr>
         <tr>
-            <td><code>consistency_level</code></td>
-            <td>Consistency level of the collection to create.</td>
-            <td><ul>
-                    <li>0 for <code>Strong</code></li>
-                    <li>1 for <code>Session</code> (default)</li>
-                    <li>2 for <code>Bounded</code></li>
-                    <li>3 for <code>Eventually</code></li>
-                </ul>
-            </td>
-        </tr>
-        <tr>
             <td><code>name</code> (schema)</td>
             <td>Must be the same as <code>collection_name</code>, this duplicated field is kept for historical reasons.</td>
             <td>Same as <code>collection_name</code></td>
@@ -628,7 +614,7 @@ Output:
 
 ## Create a collection with the schema
 
-Then, create a collection with `Strong` consistency level and the schema you specified above.
+Then, create a collection with the schema you specified above.
 
 <div class="multipleCode">
   <a href="?python">Python </a>
@@ -647,7 +633,6 @@ collection = Collection(
     schema=schema, 
     using='default', 
     shards_num=2,
-    consistency_level="Strong"
     )
 ```
 
@@ -696,19 +681,6 @@ milvusClient.createCollection(createCollectionReq);
             <td><code>shards_num</code> (optional)</td>
             <td>Number of the shards for the collection to create.</td>
             <td>[1,256]</td>
-        </tr>
-        <tr>
-            <td><code>consistency_level</code> (optional)</td>
-            <td>Consistency level of the collection to create.</td>
-            <td>
-                <ul>
-                    <li><code>Strong</code></li>
-                    <li><code>Bounded</code></li>
-                    <li><code>Session</code></li>
-                    <li><code>Eventually</code></li>
-                    <li><code>Customized</code></li>
-                </ul>
-            </td>
         </tr>
     </tbody>
 </table>
