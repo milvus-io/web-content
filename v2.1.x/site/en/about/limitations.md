@@ -19,7 +19,7 @@ Milvus is committed to providing the best vector databases to power AI applicati
 
 ## Naming rules
 
-The name of a resource can contain numbers, letters, dollar signs ($), and underscores (\_). A resource name must start with a letter or an underscore (_).
+The name of a resource can contain numbers, letters, and underscores (\_\). A resource name must start with a letter or an underscore (\_\).
 
 ## Number of resources
 
