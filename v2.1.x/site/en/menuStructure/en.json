@@ -919,18 +919,25 @@
       "order": 10
     },
     {
+      "id": "timestamp.md",
+      "title": "Timestamp",
+      "label1": "reference",
+      "label2": "",
+      "order": 11
+    },
+    {
       "id": "timetravel_ref.md",
       "title": "Time Travel",
       "label1": "reference",
       "label2": "",
-      "order": 11
+      "order": 12
     },
     {
       "id": "index.md",
       "title": "Vector Index",
       "label1": "reference",
       "label2": "",
-      "order": 12
+      "order": 13
     },
     {
       "id": "tutorials",
