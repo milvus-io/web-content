@@ -5,6 +5,8 @@ title: Glossary
 
 # Glossary
 
+This topic explains some of the core concepts in the Milvus vector database.
+
 ## Bitset
 
 In Milvus, bitsets are arrays of bit numbers `0` and `1` that can be used to represent certain data compactly and efficiently as opposed to in ints, floats, or chars. A bit number is `0` by default and is only set to `1` if it meets certain requirements.
