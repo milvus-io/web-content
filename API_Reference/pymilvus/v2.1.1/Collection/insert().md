@@ -12,7 +12,7 @@ insert(data, partition_name=None, timeout=None, **kwargs)
 
 | Parameter         | Description                                                  | Type                            | Required |
 | ----------------- | ------------------------------------------------------------ | ------------------------------- | -------- |
-| `data`            | Data to insert                                               | list-like(list, tuple)          | True     |
+| `data`            | Data to insert                                               | list-like(list, tuple), pandas.DataFrame| True     |
 | `partition_name`  | Name of the partition to insert data into                    | String                          | False    |
 | `timeout`         | An optional duration of time in seconds to allow for the RPC. If it is set to None, the client keeps waiting until the server responds or error occurs.                                 | Float                           | False    |
 
@@ -45,4 +45,18 @@ data = [
 from pymilvus import Collection
 collection = Collection("book")      # Get an existing collection.
 mr = collection.insert(data)
+```
+
+```python
+import pandas, random
+from pymilvus import Collection
+
+collection = Collection("book")      # Get an existing collection.
+data = {                                                                                                  
+    "book_id": [i for i in range(2000)],                                                                      
+    "word_count": [i for i in range(10000, 12000)],                                    
+    "book_intro": [[random.random() for _ in range(2)] for _ in range(2000)]                                                                             
+}                                                                                                                                                                                                                        
+ df_data = pandas.DataFrame(data)
+ mr = collection.insert(df_data)
 ```
