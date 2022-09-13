@@ -926,18 +926,25 @@
       "order": 11
     },
     {
+      "id": "time_sync.md",
+      "title": "Time Synchronization",
+      "label1": "reference",
+      "label2": "",
+      "order": 12
+    },
+    {
       "id": "timetravel_ref.md",
       "title": "Time Travel",
       "label1": "reference",
       "label2": "",
-      "order": 12
+      "order": 13
     },
     {
       "id": "index.md",
       "title": "Vector Index",
       "label1": "reference",
       "label2": "",
-      "order": 13
+      "order": 14
     },
     {
       "id": "tutorials",
