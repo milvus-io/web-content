@@ -13,11 +13,11 @@ As described in the [monitoring guide](monitor.md), metrics contain useful infor
 
 Visualization is a chart showing the change of resource usage across time, which makes it easier for you to quickly see and notice the changes to resource usage especially when an event occurs.
 
-This tutorial uses Grafana, an open-source platform for time-series analytics, to visualize various performance metrics of Milvus.
+This tutorial uses Grafana, an open-source platform for time-series analytics, to visualize various performance metrics of a Milvus cluster deployed on Kubernetes (K8s).
 
 ## Prerequisites
-
-You need to [configure Prometheus](monitor.md) to monitor and collect metrics before using Grafana to visualize the metrics. If the setup is successful, you can access Grafana at `http://localhost:3000`. Or you can also access Grafana using the default Grafana `user:password` of `admin:admin`.
+- You have [installed a Milvus cluster on K8s)](install_cluster-helm.md).
+- You need to [configure Prometheus](monitor.md) to monitor and collect metrics before using Grafana to visualize the metrics. If the setup is successful, you can access Grafana at `http://localhost:3000`. Or you can also access Grafana using the default Grafana `user:password` of `admin:admin`.
 
 ## Visualize metrics using Grafana
 
