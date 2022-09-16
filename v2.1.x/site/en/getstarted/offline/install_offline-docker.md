@@ -24,13 +24,13 @@ To install Milvus offline, you need to pull and save all images in an online env
 - For Milvus standalone:
 
 ```
-$ wget https://github.com/milvus-io/milvus/releases/download/v2.1.1/milvus-standalone-docker-compose.yml -O docker-compose.yml
+$ wget https://github.com/milvus-io/milvus/releases/download/v2.1.2/milvus-standalone-docker-compose.yml -O docker-compose.yml
 ```
 
 - For Milvus cluster:
 
 ```
-$ wget https://github.com/milvus-io/milvus/releases/download/v2.1.1/milvus-cluster-docker-compose.yml -O docker-compose.yml
+$ wget https://github.com/milvus-io/milvus/releases/download/v2.1.2/milvus-cluster-docker-compose.yml -O docker-compose.yml
 
 ```
 

@@ -6,6 +6,47 @@ summary: Milvus Release Notes
 
 Find out what’s new in Milvus! This page summarizes information about new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.1.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.1.2
+Release date: 16 September 2022
+
+| Milvus version | Python SDK version | Java SDK version | Go SDK version | Node.js SDK version |
+| -------------- | ------------------ | ---------------- | -------------- | ------------------- |
+| 2.1.2          | 2.1.2              | 2.1.0            | 2.1.1          | 2.1.2               |
+
+Milvus 2.1.2 is a minor bug-fix version of Milvus 2.1.0. It fixed issues when garbage collector parses binlog path, a few other issues causing search hang, and performance regression when the user authentication feature is enabled.
+
+### Bug Fixes
+
+- [18733](https://github.com/milvus-io/milvus/pull/18733), [18783](https://github.com/milvus-io/milvus/pull/18783), [18844](https://github.com/milvus-io/milvus/pull/18844), [18886](https://github.com/milvus-io/milvus/pull/18886), [18906](https://github.com/milvus-io/milvus/pull/18906) Fixes load/cluster restart/scale hang.
+
+- [18678](https://github.com/milvus-io/milvus/pull/18678) Fixes flush panic after compaction. 
+
+- [18690](https://github.com/milvus-io/milvus/pull/18690) Fixes DataType::bool cast to double.
+
+- [18884](https://github.com/milvus-io/milvus/pull/18884), [18808](https://github.com/milvus-io/milvus/pull/18808) Fixes garbage collection failure when the storage root path starts with "/".
+
+- [18790](https://github.com/milvus-io/milvus/pull/18790) Fixes watchDmChannel being out-of-date after compaction issue.
+
+- [18872](https://github.com/milvus-io/milvus/issues/18872) Disables empty string insertion to avoid server crash.
+
+- [18701](https://github.com/milvus-io/milvus/pull/18701) Fixes RHNSWPQ pqm divided by zero.
+
+- [17782](https://github.com/milvus-io/milvus/pull/17782) Fixes flush hang when Pulsar error causes empty segments.
+
+- [18732](https://github.com/milvus-io/milvus/pull/18732) Fixes performance degradation caused by missing password verification cache.
+
+### Improvements
+
+- [18683](https://github.com/milvus-io/milvus/pull/18683) Deduplicates output fields for query. 
+
+- [18895](https://github.com/milvus-io/milvus/pull/18895) Adds manual compaction periodically to clean up deleted RocksMQ data.
+
+- [18795](https://github.com/milvus-io/milvus/pull/18795), [18850](https://github.com/milvus-io/milvus/pull/18850) Refactors compaction concurrency logic.
+
+### Features
+
+- [17899](https://github.com/milvus-io/milvus/pull/17899) Supports configurable SASL mechanism for Kafka.
+
 ## v2.1.1
 
 Release date: 12 August 2022
@@ -14,11 +55,11 @@ Release date: 12 August 2022
 | -------------- | ------------------ | ---------------- | -------------- | ------------------- |
 | 2.1.1          | 2.1.1              | 2.1.0            | 2.1.1          | 2.1.2               |
 
-Milvus 2.1.1 is a minor bug fix version of Milvus 2.1.0.  It fixed query node crash under high concurrency, garbage collector failure to parse segment ID issue, and a few other stability issues.
+Milvus 2.1.1 is a minor bug fix version of Milvus 2.1.0. It fixed query node crash under high concurrency, garbage collector failure to parse segment ID, and a few other stability issues.
 
 <h3 id="v2.1.1">Bug fixes</h3>
 
-- [#18383](https://github.com/milvus-io/milvus/pull/18383), [#18432](https://github.com/milvus-io/milvus/pull/18432) Fixed Garbage collector parse segment ID panics with bad input.
+- [#18383](https://github.com/milvus-io/milvus/pull/18383), [#18432](https://github.com/milvus-io/milvus/pull/18432) Fixed garbage collector parse segment ID panics with bad input.
 
 - [#18418](https://github.com/milvus-io/milvus/pull/18418) Fixed metatable related error when etcd compaction error happens.
 
@@ -34,12 +75,11 @@ Milvus 2.1.1 is a minor bug fix version of Milvus 2.1.0.  It fixed query node cr
 
 - [#18513](https://github.com/milvus-io/milvus/pull/18513) Uses chunkManager rather than minio.Client in Data Node garbage collection.
 
-- [#18410](https://github.com/milvus-io/milvus/pull/18410) Limits the concurrency level for single load request
+- [#18410](https://github.com/milvus-io/milvus/pull/18410) Limits the concurrency level for single load request.
 
-<h3 id="v2.1.1">Featuress</h3>
+<h3 id="v2.1.1">Features</h3>
 
-- [#18570](https://github.com/milvus-io/milvus/pull/18570) Supports dynamic change log level through HTTP.
-
+- [18570](https://github.com/milvus-io/milvus/pull/18570) Supports the dynamic change of log level through HTTP.
 
 
 ## v2.1.0

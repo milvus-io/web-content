@@ -23,10 +23,10 @@ Check [the requirements](prerequisite-docker.md) for hardware and software prior
 
 ## Download the `YAML` file
 
-[Download](https://github.com/milvus-io/milvus/releases/download/v2.1.1/milvus-cluster-docker-compose.yml) `milvus-cluster-docker-compose.yml` and save it as `docker-compose.yml` manually, or with the following command.
+[Download](https://github.com/milvus-io/milvus/releases/download/v2.1.2/milvus-cluster-docker-compose.yml) `milvus-cluster-docker-compose.yml` and save it as `docker-compose.yml` manually, or with the following command.
 
 ```
-$ wget https://github.com/milvus-io/milvus/releases/download/v2.1.1/milvus-cluster-docker-compose.yml -O docker-compose.yml
+$ wget https://github.com/milvus-io/milvus/releases/download/v2.1.2/milvus-cluster-docker-compose.yml -O docker-compose.yml
 ```
 
 

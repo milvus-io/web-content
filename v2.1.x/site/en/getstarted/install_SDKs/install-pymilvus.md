@@ -30,7 +30,7 @@ It is recommended to install a PyMilvus version that matches the version of the 
 </div>
 
 ```
-$ python3 -m pip install pymilvus==2.1.1
+$ python3 -m pip install pymilvus==2.1.2
 ```
 
 ## Verify installation
@@ -54,5 +54,5 @@ Having installed PyMilvus, you can:
   - [Insert data](insert_data.md)
   - [Conduct a vector search](search.md)
 
-- Explore [PyMilvus API reference](/api-reference/pymilvus/v2.1.1/About.md)
+- Explore [PyMilvus API reference](/api-reference/pymilvus/v2.1.2/About.md)
 
