@@ -31,7 +31,7 @@ Milvus 2.1.2 is a minor bug-fix version of Milvus 2.1.0. It fixed issues when ga
 
 - [18701](https://github.com/milvus-io/milvus/pull/18701) Fixes RHNSWPQ pqm divided by zero.
 
-- [17782](https://github.com/milvus-io/milvus/pull/17782) Fixes flush hang when Pulsar error causes empty segments.
+- [18714](https://github.com/milvus-io/milvus/pull/18714) Fixes flush hang when Pulsar error causes empty segments.
 
 - [18732](https://github.com/milvus-io/milvus/pull/18732) Fixes performance degradation caused by missing password verification cache.
 
