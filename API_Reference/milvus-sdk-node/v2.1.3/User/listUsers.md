@@ -9,7 +9,10 @@ new milvusClient(MILUVS_ADDRESS).userManager.listUsers();
 ```
 
 ## Parameters
-None.
+
+| Parameter | Description                                                                            | Type   | Required |
+| --------- | -------------------------------------------------------------------------------------- | ------ | -------- |
+| timeout   | An optional duration of time in millisecond to allow for the RPC. Default is undefined | Number | False    |
 
 ## Example
 

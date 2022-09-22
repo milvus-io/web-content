@@ -12,12 +12,13 @@ new milvusClient(MILUVS_ADDRESS).dataManager.query(QueryReq);
 
 ### QueryReq
 
-| Parameter                  | Description                           | Type     | Required |
-| -------------------------- | ------------------------------------- | -------- | -------- |
-| collection_name            | Name of the collection to search on                       | String   | True     |
-| output_fields              | Vector or scalar field to be returned | String[] | True     |
-| expr(optional)             | Boolean expression to filter the data         | String   | False    |
-| partitions_names(optional) | An array of the names of the partitions to search on.       | String[] | Talse    |
+| Parameter                  | Description                                                                            | Type     | Required |
+| -------------------------- | -------------------------------------------------------------------------------------- | -------- | -------- |
+| collection_name            | Name of the collection to search on                                                    | String   | True     |
+| output_fields              | Vector or scalar field to be returned                                                  | String[] | True     |
+| expr(optional)             | Boolean expression to filter the data                                                  | String   | False    |
+| partitions_names(optional) | An array of the names of the partitions to search on.                                  | String[] | Talse    |
+| timeout                    | An optional duration of time in millisecond to allow for the RPC. Default is undefined | Number   | False    |
 
 ## Example
 

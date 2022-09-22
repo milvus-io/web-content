@@ -12,12 +12,13 @@ new milvusClient(MILUVS_ADDRESS).collectionManager.createIndex(CreateIndexReq);
 
 ### CreateIndexReq
 
-| Parameter       | Description                                  | Type        | Required |
-| --------------- | -------------------------------------------- | ----------- | -------- |
-| collection_name | Collection name                              | String      | True     |
-| field_name      | Name of the field to create index on         | String      | True     |
-| index_name      | Name of the index to create                  | String      | False    |
-| extra_params    | Extra index parameters (see the table below) | IndexParams | False    |
+| Parameter       | Description                                                                            | Type        | Required |
+| --------------- | -------------------------------------------------------------------------------------- | ----------- | -------- |
+| collection_name | Collection name                                                                        | String      | True     |
+| field_name      | Name of the field to create index on                                                   | String      | True     |
+| index_name      | Name of the index to create                                                            | String      | False    |
+| extra_params    | Extra index parameters (see the table below)                                           | IndexParams | False    |
+| timeout         | An optional duration of time in millisecond to allow for the RPC. Default is undefined | Number      | False    |
 
 #### IndexParams
 

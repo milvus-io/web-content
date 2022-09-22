@@ -1,25 +1,34 @@
 # getCollectionStatistics()
+
 This method checks the row count of a specified collection.
 
-## Invocation 
+## Invocation
+
 ```javascript
-new milvusClient(MILUVS_ADDRESS).collectionManager.getCollectionStatistics(GetCollectionStatisticsReq);
+new milvusClient(MILUVS_ADDRESS).collectionManager.getCollectionStatistics(
+  GetCollectionStatisticsReq
+);
 ```
 
 ## Parameters
-### GetCollectionStatisticsReq
-| Parameter       | Description     | Type   | Required |
-| --------------- | --------------- | ------ | -------- |
-| collection_name | Name of the collection to check | String | True     |
 
+### GetCollectionStatisticsReq
+
+| Parameter       | Description                                                                            | Type   | Required |
+| --------------- | -------------------------------------------------------------------------------------- | ------ | -------- |
+| collection_name | Name of the collection to check                                                        | String | True     |
+| timeout         | An optional duration of time in millisecond to allow for the RPC. Default is undefined | Number | False    |
 
 ## Example
+
 ```javascript
 new milvusClient(MILUVS_ADDRESS).collectionManager.getCollectionStatistics({
-  collection_name: 'my_collection',
+  collection_name: "my_collection",
 });
 ```
+
 ## Return
+
 ```javascript
 // getCollectionStatistics return
 {

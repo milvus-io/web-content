@@ -1,25 +1,34 @@
 # showPartitions()
+
 This method lists all the partitions in a specified collection.
 
-## Invocation 
+## Invocation
+
 ```javascript
-new milvusClient(MILUVS_ADDRESS).partitionManager.showPartitions(ShowPartitionsReq);
+new milvusClient(MILUVS_ADDRESS).partitionManager.showPartitions(
+  ShowPartitionsReq
+);
 ```
 
 ## Parameters
+
 ### ShowPartitionsReq
-| Parameter       | Description     | Type   | Required |
-| --------------- | --------------- | ------ | -------- |
-| collection_name | Name of the collection to list all the partitions within | String | True     |
+
+| Parameter       | Description                                                                            | Type   | Required |
+| --------------- | -------------------------------------------------------------------------------------- | ------ | -------- |
+| collection_name | Name of the collection to list all the partitions within                               | String | True     |
+| timeout         | An optional duration of time in millisecond to allow for the RPC. Default is undefined | Number | False    |
 
 ## Example
+
 ```javascript
 new milvusClient(MILUVS_ADDRESS).partitionManager.showPartitions({
-  collection_name: 'my_collection',
+  collection_name: "my_collection",
 });
 ```
 
 ## Return
+
 ```javascript
 {
   status: { error_code: 'Success', reason: '' },

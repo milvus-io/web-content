@@ -1,27 +1,36 @@
 # describeIndex()
+
 This method gets the index information in a collection.
 
-## Invocation 
+## Invocation
+
 ```javascript
-new milvusClient(MILUVS_ADDRESS).collectionManager.describeIndex(DescribeIndexReq);
+new milvusClient(MILUVS_ADDRESS).collectionManager.describeIndex(
+  DescribeIndexReq
+);
 ```
 
 ## Parameters
+
 ### DescribeIndexReq
-| Parameter       | Description     | Type   | Required |
-| --------------- | --------------- | ------ | -------- |
-| collection_name | Name of the collection to check | String | True     |
-| field_name      | Name of the field to check      | String | False    |
-| index_name      | Name of the index to check     | String | False    |
+
+| Parameter       | Description                                                                            | Type   | Required |
+| --------------- | -------------------------------------------------------------------------------------- | ------ | -------- |
+| collection_name | Name of the collection to check                                                        | String | True     |
+| field_name      | Name of the field to check                                                             | String | False    |
+| index_name      | Name of the index to check                                                             | String | False    |
+| timeout         | An optional duration of time in millisecond to allow for the RPC. Default is undefined | Number | False    |
 
 ## Example
+
 ```javascript
 new milvusClient(MILUVS_ADDRESS).indexManager.describeIndex({
-  collection_name: 'my_collection',
+  collection_name: "my_collection",
 });
 ```
 
 ## Return
+
 ```javascript
 // describeIndex return
 {
