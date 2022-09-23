@@ -17,7 +17,6 @@ This topic describes how to install Attu, an efficient open-source management to
 
 - Milvus installed on [your local device](install_standalone-docker.md) or [cluster](install_cluster-docker.md).
 - Docker 19.03 or later
-- Attu v2.1.0 or later
 - Milvus 2.1.0 or later
 
 <div class="alert note">
