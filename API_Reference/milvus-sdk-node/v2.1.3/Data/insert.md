@@ -1,38 +1,46 @@
 # insert()
+
 This method inserts data into a specified collection.
 
-## Invocation 
+## Invocation
+
 ```javascript
 new milvusClient(MILUVS_ADDRESS).dataManager.insert(InsertReq);
 ```
 
 ## Parameters
-### InsertReq
-| Parameter                | Description                               | Type                   | Required |
-| ------------------------ | ----------------------------------------- | ---------------------- | -------- |
-| collection_name          | Name of the collection to insert data into                           | String                 | True     |
-| partition_name(optional) | Name of the partition to insert data into                        | String                 | False    |
-| fields_data              | Vector data                               | { [x: string]: any }[] | True    |
-| hash_keys(optional)      | The hash value determined by primary key | Number[]               | False    |
 
-### note 
+### InsertReq
+
+| Parameter                | Description                                                                            | Type                   | Required |
+| ------------------------ | -------------------------------------------------------------------------------------- | ---------------------- | -------- |
+| collection_name          | Name of the collection to insert data into                                             | String                 | True     |
+| partition_name(optional) | Name of the partition to insert data into                                              | String                 | False    |
+| fields_data              | Vector data                                                                            | { [x: string]: any }[] | True     |
+| hash_keys(optional)      | The hash value determined by primary key                                               | Number[]               | False    |
+| timeout                  | An optional duration of time in millisecond to allow for the RPC. Default is undefined | Number                 | False    |
+
+### note
+
 If the field type is binary, the vector data length needs to be dimension / 8.
 
 ## Example
-```javascript
 
+```javascript
 const vectorsData = Array.from({ length: 10 }).map(() => ({
-    vector_01: Array.from({ length: 4 }).map(() =>
-      Math.floor(Math.random() * 10)
-    ),
-  }));
+  vector_01: Array.from({ length: 4 }).map(() =>
+    Math.floor(Math.random() * 10)
+  ),
+}));
 
 new milvusClient(MILUVS_ADDRESS).dataManager.insert({
   collection_name: COLLECTION_NAME,
   fields_data: vectorsData,
 });
 ```
+
 ## Return
+
 ```javascript
 // insert return
 {

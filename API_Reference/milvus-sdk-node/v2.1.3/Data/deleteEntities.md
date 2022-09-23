@@ -1,28 +1,35 @@
 # deleteEntities()
+
 This method deletes entities from a specified collection.
 
-## Invocation 
+## Invocation
+
 ```javascript
 new milvusClient(MILUVS_ADDRESS).dataManager.deleteEntities(DeleteEntitiesReq);
 ```
 
 ## Parameters
+
 ### DeleteEntitiesReq
-| Parameter                | Description                                  | Type   | Required |
-| ------------------------ | -------------------------------------------- | ------ | -------- |
-| collection_name          | Name of the collection to delete entities from                              | String | True     |
-| expr                     | Boolean expression used for attibute filtering | String | True     |
-| partition_name(optional) | Name of the partition to deleted entities from                              | String | False    |
+
+| Parameter                | Description                                                                            | Type   | Required |
+| ------------------------ | -------------------------------------------------------------------------------------- | ------ | -------- |
+| collection_name          | Name of the collection to delete entities from                                         | String | True     |
+| expr                     | Boolean expression used for attibute filtering                                         | String | True     |
+| partition_name(optional) | Name of the partition to deleted entities from                                         | String | False    |
+| timeout                  | An optional duration of time in millisecond to allow for the RPC. Default is undefined | Number | False    |
 
 ## Example
+
 ```javascript
 new milvusClient(MILUVS_ADDRESS).dataManager.deleteEntities({
-   collection_name: "my_collection",
-   expr: 'age in [434848878802251176,444848878802251176]',
- });
- ```
- 
+  collection_name: "my_collection",
+  expr: "age in [434848878802251176,444848878802251176]",
+});
+```
+
 ## Return
+
 ```javascript
 // DeleteEntitiesReq return
 {

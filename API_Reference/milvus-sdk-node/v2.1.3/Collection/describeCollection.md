@@ -1,34 +1,44 @@
 # describeCollection()
+
 This method checks the details of a collection, including collection name, schema, and more.
 
-## Invocation 
+## Invocation
+
 ```javascript
-new milvusClient(MILUVS_ADDRESS).collectionManager.describeCollection(DescribeCollectionReq);
+new milvusClient(MILUVS_ADDRESS).collectionManager.describeCollection(
+  DescribeCollectionReq
+);
 ```
 
 ## Parameters
+
 ### DescribeCollectionReq
-| Parameter       | Description     | Type   | Required |
-| --------------- | --------------- | ------ | -------- |
-| collection_name | Name of the collection to check | String | True     |
+
+| Parameter       | Description                                                                            | Type   | Required |
+| --------------- | -------------------------------------------------------------------------------------- | ------ | -------- |
+| collection_name | Name of the collection to check                                                        | String | True     |
+| timeout         | An optional duration of time in millisecond to allow for the RPC. Default is undefined | Number | False    |
 
 ## Example
+
 ```javascript
 new milvusClient(MILUVS_ADDRESS).collectionManager.describeCollection({
-  collection_name: 'my_collection',
+  collection_name: "my_collection",
 });
 ```
+
 ## Return
+
 ```javascript
 // describe collection return
 {
   status: { error_code: 'Success', reason: '' },
   schema: {
     fields: [ {
-    type_params: [ 
+    type_params: [
       {
         dim: 8
-      } 
+      }
     ],
     index_params: [],
     fieldID: '100',

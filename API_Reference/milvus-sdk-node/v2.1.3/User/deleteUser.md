@@ -14,9 +14,10 @@ new milvusClient(MILUVS_ADDRESS).userManager.deleteUser({
 
 ### DeleteUserReq
 
-| Parameter | Description                        | Type   | Required |
-| --------- | ---------------------------------- | ------ | -------- |
-| username  | The existing username in Milvus to delete    | String | True     |
+| Parameter | Description                                                                            | Type   | Required |
+| --------- | -------------------------------------------------------------------------------------- | ------ | -------- |
+| username  | The existing username in Milvus to delete                                              | String | True     |
+| timeout   | An optional duration of time in millisecond to allow for the RPC. Default is undefined | Number | False    |
 
 ## Example
 
