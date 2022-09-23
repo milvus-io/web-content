@@ -14,12 +14,11 @@ new milvusClient(MILUVS_ADDRESS).collectionManager.createCollection(
 
 ### CreateCollectionReq(object)
 
-| Parameter         | Description                                                                            | Type   | Required |
-| ----------------- | -------------------------------------------------------------------------------------- | ------ | -------- |
-| collection_name   | Name of the collection to create                                                       | String | True     |
-| consistency_level | With which consistency level to create the collection. Default is Bounded.             | String | False    |
-| fields            | Schema of the collection to create                                                     | Field  | True     |
-| timeout           | An optional duration of time in millisecond to allow for the RPC. Default is undefined | Number | False    |
+| Parameter       | Description                                                                            | Type   | Required |
+| --------------- | -------------------------------------------------------------------------------------- | ------ | -------- |
+| collection_name | Name of the collection to create                                                       | String | True     |
+| fields          | Schema of the collection to create                                                     | Field  | True     |
+| timeout         | An optional duration of time in millisecond to allow for the RPC. Default is undefined | Number | False    |
 
 ### Fields(object)
 
