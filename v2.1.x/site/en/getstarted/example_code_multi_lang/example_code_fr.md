@@ -9,7 +9,7 @@ Ce topic décrit comment exécuter Milvus avec Python.
 ## 1. Installer PyMilvus
 
 ```Python
-pip3 install pymilvus==2.1.2
+pip3 install pymilvus==2.1.3
 ```
 <div class="alert note">
 Il est nécessaire d'utiliser la version 3.6 ou une version plus récente de Python. Plus d'informations sont disponibles dans le <a href="https://wiki.python.org/moin/BeginnersGuide/Download">guide d'installation de Python</a>.
@@ -18,7 +18,7 @@ Il est nécessaire d'utiliser la version 3.6 ou une version plus récente de Pyt
 ## 2. Télécharger un exemple code source
 
 ```bash
-$ wget https://raw.githubusercontent.com/milvus-io/pymilvus/v2.1.2/examples/hello_milvus.py
+$ wget https://raw.githubusercontent.com/milvus-io/pymilvus/v2.1.3/examples/hello_milvus.py
 ```
 
 ## 3. Scanner le code source
@@ -87,7 +87,7 @@ for raw_result in res:
         distance = result.distance
         print(id, distance)
 ```
-Se référer à [la documentation de l'API](/api-reference/pymilvus/v2.1.2/results.html) pour plus d'informations.
+Se référer à [la documentation de l'API](/api-reference/pymilvus/v2.1.3/results.html) pour plus d'informations.
 
 - Exécute une recherche hybride :
 <div class="alert note">

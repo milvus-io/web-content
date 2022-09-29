@@ -19,10 +19,10 @@ In current release, all parameters take effect only after Milvus restarts.
 
 ## Download a configuration file
 
-[Download](https://raw.githubusercontent.com/milvus-io/milvus/v2.1.2/configs/milvus.yaml) `milvus.yaml` directly or with the following command.
+[Download](https://raw.githubusercontent.com/milvus-io/milvus/v2.1.4/configs/milvus.yaml) `milvus.yaml` directly or with the following command.
 
 ```
-$ wget https://raw.githubusercontent.com/milvus-io/milvus/v2.1.2/configs/milvus.yaml
+$ wget https://raw.githubusercontent.com/milvus-io/milvus/v2.1.4/configs/milvus.yaml
 ```
 
 ## Modify the configuration file
@@ -136,18 +136,18 @@ Sorted by:
 
 ## Download an installation file
 
-Download the installation file for Milvus [standalone](https://github.com/milvus-io/milvus/releases/download/v2.1.2/milvus-standalone-docker-compose.yml) or [cluster](https://github.com/milvus-io/milvus/releases/download/v2.1.2/milvus-cluster-docker-compose.yml), and save it as `docker-compose.yml`.
+Download the installation file for Milvus [standalone](https://github.com/milvus-io/milvus/releases/download/v2.1.4/milvus-standalone-docker-compose.yml) or [cluster](https://github.com/milvus-io/milvus/releases/download/v2.1.4/milvus-cluster-docker-compose.yml), and save it as `docker-compose.yml`.
 
 You can also simply run the following command.
 
 ```
 # For Milvus standalone
-$ wget https://github.com/milvus-io/milvus/releases/download/v2.1.2/milvus-standalone-docker-compose.yml -O docker-compose.yml
+$ wget https://github.com/milvus-io/milvus/releases/download/v2.1.4/milvus-standalone-docker-compose.yml -O docker-compose.yml
 ```
 
 ```
 # For Milvus cluster
-$ wget https://github.com/milvus-io/milvus/releases/download/v2.1.2/milvus-cluster-docker-compose.yml -O docker-compose.yml
+$ wget https://github.com/milvus-io/milvus/releases/download/v2.1.4/milvus-cluster-docker-compose.yml -O docker-compose.yml
 ```
 
 ## Modify the installation file
@@ -160,7 +160,7 @@ Map the local path to your `milvus.yaml` file onto the corresponding docker cont
 ...
 proxy:
     container_name: milvus-proxy
-    image: milvusdb/milvus:v2.1.0-20220913-3c3ba55
+    image: milvusdb/milvus:v2.1.0-20220928-9122e34c
     command: ["milvus", "run", "proxy"]
     volumes:       # Add a volumes section.
       - /local/path/to/your/milvus.yaml:/milvus/configs/milvus.yaml   # Map the local path to the container path

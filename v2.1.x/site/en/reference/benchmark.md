@@ -29,7 +29,7 @@ This report shows the major test results of Milvus 2.1, covering the performance
             </tr>
             <tr>
                 <td>ef</td>
-                <td>A search parameter specific to <a href="https://milvus.io/docs/v2.1.2/index.md">HNSW index</a></td>
+                <td>A search parameter specific to <a href="https://milvus.io/docs/v2.1.4/index.md">HNSW index</a></td>
             </tr>
             <tr>
                 <td>RT</td>
@@ -64,7 +64,7 @@ All tests are performed under the following environments.
 
 ### Deployment scheme
 
-- Milvus instance (standalone or cluster) in each test is deployed via [Helm](https://milvus.io/docs/v2.1.2/install_standalone-helm.md) on a Kubernetes cluster based on physical or virtual machines.
+- Milvus instance (standalone or cluster) in each test is deployed via [Helm](https://milvus.io/docs/v2.1.4/install_standalone-helm.md) on a Kubernetes cluster based on physical or virtual machines.
 - Configurations of the tested Milvus instances merely vary in the number of CPU cores, the size of memory, and the number of replicas (worker nodes), which only applies to Milvus cluster.
 - Unspecified configurations are [default configurations](https://github.com/milvus-io/milvus-helm/blob/master/charts/milvus/values.yaml).
 - Milvus dependencies (MinIO, Pulsar, and etcd) store data on the local SSD in each node.
