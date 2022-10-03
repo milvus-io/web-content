@@ -146,7 +146,7 @@ CreateCollectionParam createCollectionReq = CreateCollectionParam.newBuilder()
 ```
 
 ```shell
-create collection -c book -f book_id:INT64 -f word_count:INT64 -f book_intro:FLOAT_VECTOR:2 -p book_id
+create collection -c book -f book_id:INT64:book_id -f word_count:INT64:word_count -f book_intro:FLOAT_VECTOR:2 -p book_id
 ```
 
 ```curl
@@ -497,7 +497,7 @@ Output:
         </tr>
         <tr>
             <td>-f (Multiple)</td>
-            <td>The field schema in the    ```<fieldName>:<dataType>:<dimOfVector/desc>``` format.</td>
+            <td>The field schema in the `<fieldName>:<dataType>:<dimOfVector/desc>` format.</td>
         </tr>
         <tr>
             <td>-p</td>
