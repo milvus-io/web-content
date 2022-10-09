@@ -51,14 +51,18 @@ You will see the following output if the EKS cluster is created.
    NAME          TYPE      CLUSTER-IP    EXTERNAL-IP                                PORT(S)             AGE
    kubernetes       ClusterIP   172.20.0.1    <none>                                  443/TCP             106m
    ```
+4. Add the Milvus Helm repository.
+```
+helm repo add milvus https://milvus-io.github.io/milvus-helm/
+```
 
-4. Run the following command to start the Milvus cluster that you have provisioned. The access key and an S3 bucket are required to use S3 as storage.
+5. Run the following command to start the Milvus cluster that you have provisioned. The access key and an S3 bucket are required to use S3 as storage.
 
 ```shell
 helm upgrade --install --set cluster.enabled=true --set externalS3.enabled=true --set externalS3.host='s3.us-east-2.amazonaws.com' --set externalS3.port=80 --set externalS3.accessKey=${access-key} --set externalS3.secretKey=${secret-key} --set externalS3.bucketName=${bucket-name} --set minio.enabled=False --set service.type=LoadBalancer milvus milvus/milvus
 ```
 
-5. Run ```kubectl get svc ``` again to retrieve the IP address of the load balancer and use it as the IP address of the Milvus cluster.
+6. Run ```kubectl get svc ``` again to retrieve the IP address of the load balancer and use it as the IP address of the Milvus cluster.
 
 <div class="alert note"> Run <code>kubectl get pods</code> to view the running pods on the cluster.</div>
 
