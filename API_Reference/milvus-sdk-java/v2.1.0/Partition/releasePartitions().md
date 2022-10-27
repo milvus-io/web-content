@@ -47,7 +47,7 @@ ReleasePartitionsParam param = ReleasePartitionsParam.newBuilder()
         .withCollectionName(collectionName)
         .addPartitionName(partitionName)
         .build();
-R<Boolean> response = client.releasePartitions(param);
+R<RpcStatus> response = client.releasePartitions(param);
 if (response.getStatus() != R.Status.Success.getCode()) {
     System.out.println(response.getMessage());
 }
