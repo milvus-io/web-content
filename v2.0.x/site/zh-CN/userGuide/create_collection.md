@@ -2,37 +2,28 @@
 id: create_collection.md
 related_key: create collection
 summary: Learn how to create a collection in Milvus.
+
 ---
 
-# Create a Collection
+# 创建 Collection
 
-<div class="alert note">
-<h3>Milvus Docs 需要你的帮助</h3>
-本文档暂时没有中文版本，欢迎你成为社区贡献者，协助中文技术文档的翻译。<br>
-你可以通过页面右边的 <b>编辑</b> 按钮直接贡献你的翻译。更多详情，参考 <a href="https://github.com/milvus-io/milvus-docs/blob/v2.0.0/CONTRIBUTING.md">贡献指南</a>。如需帮助，你可以 <a href="https://github.com/milvus-io/milvus-docs/issues/new/choose">提交 GitHub Issue</a>。
-</div>
+本主题介绍如何在 Milvus 创建 collection
 
+一个 collection 包含一个或者多个分区，在创建新的 collection 时，Milvus 会创建一个默认分区，更多信息请查看[Glossary - Collection](glossary.md#Collection)
 
-This topic describes how to create a collection in Milvus.
+下面的示例将构建一个名为 book 的两[分片](glossary.md#Sharding) collection ，其中一个名为 `book_id` 的主键字段、一个名为 `word_count` 的 INT64 标量字段和一个名为 `book_intro` 的二维浮点向量字段。实际应用程序可能会使用比示例更高维数的向量。
 
-A collection consists of one or more partitions. While creating a new collection, Milvus creates a default partition `_default`. See [Glossary - Collection](glossary.md#Collection) for more information.
+Milvus 支持在创建集合时设置一致性级别(当前只支持 PyMilvus)，例如，collection 的一致性级别设置为Strong，这意味着 Milvus 会在搜索或查询请求到来的确切时间点读取最新的数据视图。默认情况下，未指定一致性级别而创建的 collection 将使用有界一致性级别设置，在该级别下，当搜索或查询请求到来时，Milvus 会读取到较少被更新的数据视图（通常提前几秒）。除了在创建 collection 时，你也可以在[搜索](search.md)或[查询](query.md)时指定一致性级别(当前只支持 PyMilvus)，Milvus 支持的其它一致性级别请看[Guarantee Timestamp in Search Requests](https://github.com/milvus-io/milvus/blob/master/docs/developer_guides/how-guarantee-ts-works.md)
 
-The following example builds a two-[shard](glossary.md#Sharding) collection named `book`, with a primary key field named `book_id`, an `INT64` scalar field named `word_count`, and a two-dimensional floating point vector field named `book_intro`. Real applications will likely use much higher dimensional vectors than the example.
-
-Milvus supports setting consistency level while creating a collection (only on PyMilvus currently). In this example, the consistency level of the collection is set as "Strong", meaning Milvus will read the most updated data view at the exact time point when a search or query request comes. By default, a collection created without specifying the consistency level is set with bounded consistency level, under which Milvus reads a less updated data view (usually several seconds earlier) when a search or query request comes. Besides collection creation, you can also set the consistency level specifically for [search](search.md) or [query](query.md)  (only on PyMilvus currently). For other consistency level supported by Milvus, see [Guarantee Timestamp in Search Requests](https://github.com/milvus-io/milvus/blob/master/docs/developer_guides/how-guarantee-ts-works.md). 
-
-
-## Prepare Schema
+## 准备 Schema
 
 <div class="alert note">
     <ul>
-        <li><a href="manage_connection.md">Connecting to Milvus server</a> before any operation.</li>
-        <li>The collection to create must contain a primary key field and a vector field. INT64 is the only supported data type for the primary key field in current release of Milvus.</li>
+        <li>任何操作都需要先<a href="manage_connection.md">连接到 Milvus 服务</a></li>
+        <li>创建的 collection 必须包含一个主键字段和一个向量字段。当前 Milvus 版本主键字段的数据类型只支持 INT64。</li>
     </ul>
 </div>
-
-
-First, prepare necessary parameters, including field schema, collection schema, and collection name.
+首先，准备必要的参数，包括 field schema、collection schema 和 collection 名称
 
 <div class="multipleCode">
   <a href="?python">Python </a>
@@ -158,178 +149,181 @@ create collection -c book -f book_id:INT64 -f word_count:INT64 -f book_intro:FLO
 <table class="language-python">
 	<thead>
         <tr>
-            <th>Parameter</th>
-            <th>Description</th>
-            <th>Option</th>
+            <th>参数</th>
+            <th>描述</th>
+            <th>选项</th>
         </tr>
 	</thead>
 	<tbody>
         <tr>
             <td><code>FieldSchema</code></td>
-            <td>Schema of the fields within the collection to create. Refer to <a href="schema.md">Schema</a> for more information.</td>
+            <td>需要在集合中创建的字段 schema。点击 <a href="schema.md">Schema</a> 查看更多信息</td>
             <td>N/A</td>
         </tr>
         <tr>
             <td><code>name</code></td>
-            <td>Name of the field to create.</td>
+            <td>要创建的字段名称</td>
             <td>N/A</td>
         </tr>
         <tr>
             <td><code>dtype</code></td>
-            <td>Data type of the field to create.</td>
-            <td>For primary key field:
+            <td>需要创建字段的数据类型</td>
+            <td>对于主键字段:
                 <ul>
                     <li><code>DataType.INT64</code> (numpy.int64)</li>
                 </ul>
-                For scalar field:
+                对于标量字段:
                 <ul>
                     <li><code>DataType.BOOL</code> (Boolean)</li>
                     <li><code>DataType.INT64</code> (numpy.int64)</li>
                     <li><code>DataType.FLOAT</code> (numpy.float32)</li>
                     <li><code>DataType.DOUBLE</code> (numpy.double)</li>
                 </ul>
-                For vector field:
+                对于向量字段:
                 <ul>
-                    <li><code>BINARY_VECTOR</code> (Binary vector)</li>
-                    <li><code>FLOAT_VECTOR</code> (Float vector)</li>
+                    <li><code>BINARY_VECTOR</code> (二进制向量)</li>
+                    <li><code>FLOAT_VECTOR</code> (浮点型向量)</li>
                 </ul>
             </td>
         </tr>
         <tr>
-            <td><code>is_primary</code> (Mandatory for primary key field)</td>
-            <td>Switch to control if the field is primary key field.</td>
+            <td><code>is_primary</code> (主键字段必填)</td>
+            <td>控制字段是否为主键字段</td>
             <td><code>True</code> or <code>False</code></td>
         </tr>
         <tr>
-            <td><code>auto_id</code> (Mandatory for primary key field)</td>
-            <td>Switch to enable or disable Automatic ID (primary key) allocation.</td>
+            <td><code>auto_id</code> (主键字段必填)</td>
+            <td>控制是否启动自动分配 ID（主键）</td>
             <td><code>True</code> or <code>False</code></td>
         </tr>
         <tr>
-            <td><code>dim</code> (Mandatory for vector field)</td>
-            <td>Dimension of the vector.</td>
+            <td><code>dim</code> (向量字段必填)</td>
+            <td>向量的维度</td>
             <td>[1, 32,768]</td>
         </tr>
         <tr>
-            <td><code>description</code> (Optional)</td>
-            <td>Description of the field.</td>
+            <td><code>描述</code> (可选)</td>
+            <td>字段描述</td>
             <td>N/A</td>
         </tr>
         <tr>
             <td><code>CollectionSchema</code></td>
-        <td>Schema of the collection to create. Refer to <a href="schema.md">Schema</a> for more information.</td>
+        <td>需要创建的 collection schema. 点击 <a href="schema.md">Schema</a> 查看更多</td>
         <td>N/A</td>
         </tr>
         <tr>
             <td><code>fields</code></td>
-            <td>Fields of the collection to create.</td>
+            <td>需要创建的 collection 字段</td>
             <td>N/A</td>
         </tr>
         <tr>
-            <td><code>description</code> (Optional)</td>
-            <td>Description of the collection to create.</td>
+            <td><code>描述</code> (可选)</td>
+            <td>需要创建的 collection 描述</td>
             <td>N/A</td>
         </tr>
         <tr>
             <td><code>collection_name</code></td>
-            <td>Name of the collection to create.</td>
+            <td>需要创建的 collection 名称</td>
             <td>N/A</td>
         </tr>
 	</tbody>
 </table>
 
+
+
 <table class="language-go">
 	<thead>
         <tr>
-            <th>Parameter</th>
-            <th>Description</th>
-            <th>Option</th>
+            <th>参数</th>
+            <th>描述</th>
+            <th>选项</th>
         </tr>
 	</thead>
 	<tbody>
         <tr>
             <td><code>collectionName</code></td>
-            <td>Name of the collection to create.</td>
+            <td>需要创建的 collection 名称</td>
             <td>N/A</td>
         </tr>
         <tr>
-            <td><code>description</code></td>
-            <td>Description of the collection to create.</td>
+            <td><code>描述</code></td>
+            <td>需要创建的 collection 描述</td>
             <td>N/A</td>
         </tr>
         <tr>
             <td><code>Fields</code></td>
-            <td>Schema of the fields within the collection to create. Refer to <a href="schema.md">Schema</a> for more information.</td>
+            <td>需要在集合中创建的字段 schema。点击 <a href="schema.md">Schema</a> 查看更多信息</td>
             <td>N/A</td>
         </tr>
         <tr>
             <td><code>Name</code></td>
-            <td>Name of the field to create.</td>
+            <td>要创建的字段名称</td>
             <td>N/A</td>
         </tr>
         <tr>
             <td><code>DataType</code></td>
-            <td>Data type of the field to create.</td>
-            <td>For primary key field:
+            <td>需要创建字段的数据类型</td>
+            <td>对于主键字段:
                 <ul>
                     <li><code>entity.FieldTypeInt64</code> (numpy.int64)</li>
                 </ul>
-                For scalar field:
+                对于标量字段:
                 <ul>
                     <li><code>entity.FieldTypeBool</code> (Boolean)</li>
                     <li><code>entity.FieldTypeInt64</code> (numpy.int64)</li>
                     <li><code>entity.FieldTypeFloat</code> (numpy.float32)</li>
                     <li><code>entity.FieldTypeDouble</code> (numpy.double)</li>
                 </ul>
-                For vector field:
+                对于向量字段:
                 <ul>
-                    <li><code>entity.FieldTypeBinaryVector</code> (Binary vector)</li>
-                    <li><code>entity.FieldTypeFloatVector</code> (Float vector)</li>
+                    <li><code>entity.FieldTypeBinaryVector</code> (二进制向量)</li>
+                    <li><code>entity.FieldTypeFloatVector</code> (浮点型向量)</li>
                 </ul>
             </td>
         </tr>
         <tr>
-            <td><code>PrimaryKey</code> (Mandatory for primary key field)</td>
-            <td>Switch to control if the field is primary key field.</td>
+            <td><code>PrimaryKey</code> (主键字段必填)</td>
+            <td>控制字段是否为主键字段</td>
             <td><code>True</code> or <code>False</code></td>
         </tr>
         <tr>
-            <td><code>AutoID</code> (Mandatory for primary key field)</td>
-            <td>Switch to enable or disable Automatic ID (primary key) allocation.</td>
+            <td><code>AutoID</code> (主键字段必填)</td>
+            <td>控制是否启动自动分配 ID（主键）</td>
             <td><code>True</code> or <code>False</code></td>
         </tr>
         <tr>
-            <td><code>dim</code> (Mandatory for vector field)</td>
-            <td>Dimension of the vector.</td>
+            <td><code>dim</code> (向量字段必填)</td>
+            <td>向量的维度</td>
             <td>[1, 32768]</td>
         </tr>
 	</tbody>
 </table>
 
 
+
 <table class="language-javascript">
 	<thead>
         <tr>
-            <th>Parameter</th>
-            <th>Description</th>
-            <th>Option</th>
+            <th>参数</th>
+            <th>描述</th>
+            <th>选项</th>
         </tr>
 	</thead>
 	<tbody>
         <tr>
             <td><code>collection_name</code></td>
-            <td>Name of the collection to create.</td>
+            <td>需要创建的 collection 名称</td>
             <td>N/A</td>
         </tr>
         <tr>
-            <td><code>description</code></td>
-            <td>Description of the collection to create.</td>
+            <td><code>描述</code></td>
+            <td>需要创建的 collection 描述</td>
             <td>N/A</td>
         </tr>
         <tr>
             <td><code>fields</code></td>
             <td>Schema of the filed and the collection to create.</td>
-            <td>Refer to <a href="schema.md">Schema</a> for more information.</td>
+            <td>点击 <a href="schema.md">Schema</a> 查看更多信息</td>
         </tr>
         <tr>
             <td><code>data_type</code></td>
@@ -337,62 +331,63 @@ create collection -c book -f book_id:INT64 -f word_count:INT64 -f book_intro:FLO
             <td>Refer to <a href="https://github.com/milvus-io/milvus-sdk-node/blob/main/milvus/types/Common.ts">data type reference number</a> for more information.</td>
         </tr>
         <tr>
-            <td><code>is_primary</code> (Mandatory for primary key field)</td>
-            <td>Switch to control if the field is primary key field.</td>
+            <td><code>is_primary</code> (主键字段必填)</td>
+            <td>控制字段是否为主键字段</td>
             <td><code>True</code> or <code>False</code></td>
         </tr>
         <tr>
             <td><code>auto_id</code></td>
-            <td>Switch to enable or disable Automatic ID (primary key) allocation.</td>
+            <td>控制是否启动自动分配 ID（主键）</td>
             <td><code>True</code> or <code>False</code></td>
         </tr>
         <tr>
-            <td><code>dim</code> (Mandatory for vector field)</td>
-            <td>Dimension of the vector.</td>
+            <td><code>dim</code> (向量字段必填)</td>
+            <td>向量的维度</td>
             <td>[1, 32768]</td>
         </tr>
         <tr>
-            <td><code>description</code> (Optional)</td>
-            <td>Description of the field.</td>
+            <td><code>描述</code> (可选)</td>
+            <td>字段描述</td>
             <td>N/A</td>
         </tr>
 	</tbody>
 </table>
 
+
 <table class="language-java">
 	<thead>
         <tr>
-            <th>Parameter</th>
-            <th>Description</th>
-            <th>Option</th>
+            <th>参数</th>
+            <th>描述</th>
+            <th>选项</th>
         </tr>
 	</thead>
 	<tbody>
         <tr>
             <td><code>Name</code></td>
-            <td>Name of the field to create.</td>
+            <td>要创建的字段名称</td>
             <td>N/A</td>
         </tr>
         <tr>
-            <td><code>Description</code></td>
-            <td>Description of the field to create.</td>
+            <td><code>描述</code></td>
+            <td>需要创建的字段描述</td>
             <td>N/A</td>
         </tr>
         <tr>
             <td><code>DataType</code></td>
-            <td>Data type of the field to create.</td>
-            <td>For primary key field:
+            <td>需要创建的字段类型</td>
+            <td>对于主键字段:
                 <ul>
                     <li><code>entity.FieldTypeInt64</code> (numpy.int64)</li>
                 </ul>
-                For scalar field:
+                对于标量字段:
                 <ul>
                     <li><code>entity.FieldTypeBool</code> (Boolean)</li>
                     <li><code>entity.FieldTypeInt64</code> (numpy.int64)</li>
                     <li><code>entity.FieldTypeFloat</code> (numpy.float32)</li>
                     <li><code>entity.FieldTypeDouble</code> (numpy.double)</li>
                 </ul>
-                For vector field:
+                对于向量字段:
                 <ul>
                     <li><code>entity.FieldTypeBinaryVector</code> (Binary vector)</li>
                     <li><code>entity.FieldTypeFloatVector</code> (Float vector)</li>
@@ -400,72 +395,72 @@ create collection -c book -f book_id:INT64 -f word_count:INT64 -f book_intro:FLO
             </td>
         </tr>
         <tr>
-            <td><code>PrimaryKey</code> (Mandatory for primary key field)</td>
-            <td>Switch to control if the field is primary key field.</td>
+            <td><code>PrimaryKey</code> (主键字段必填)</td>
+            <td>控制字段是否为主键字段</td>
             <td><code>True</code> or <code>False</code></td>
         </tr>
         <tr>
             <td><code>AutoID</code></td>
-            <td>Switch to enable or disable Automatic ID (primary key) allocation.</td>
+            <td>控制是否启动自动分配 ID（主键）</td>
             <td><code>True</code> or <code>False</code></td>
         </tr>
         <tr>
-            <td><code>Dimension</code> (Mandatory for vector field)</td>
-            <td>Dimension of the vector.</td>
+            <td><code>Dimension</code> (向量字段必填)</td>
+            <td>向量的维度</td>
             <td>[1, 32768]</td>
         </tr>
         <tr>
             <td><code>CollectionName</code></td>
-            <td>Name of the collection to create.</td>
+            <td>需要创建的 collection 名称</td>
             <td>N/A</td>
         </tr>
         <tr>
-            <td><code>Description</code> (Optional)</td>
-            <td>Description of the collection to create.</td>
+            <td><code>描述</code> (可选)</td>
+            <td>需要创建的 collection 描述</td>
             <td>N/A</td>
         </tr>
         <tr>
             <td><code>ShardsNum</code></td>
-            <td>Number of the shards for the collection to create.</td>
+            <td>需要创建的 collection 的分片数量</td>
             <td>[1,256]</td>
         </tr>
 	</tbody>
 </table>
 
+
 <table class="language-shell">
     <thead>
         <tr>
-            <th>Option</th>
-            <th>Description</th>
+            <th>选项</th>
+            <th>描述</th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td>-c</td>
-            <td>The name of the collection.</td>
+            <td>collection 名称</td>
         </tr>
         <tr>
-            <td>-f (Multiple)</td>
-            <td>The field schema in the    <code>&lt;fieldName&gt;:&lt;dataType&gt;:&lt;dimOfVector/desc&gt;</code> format.</td>
+            <td>-f (可指定多个)</td>
+            <td>字段 schema，格式：<code>&lt;fieldName&gt;:&lt;dataType&gt;:&lt;dimOfVector/desc&gt;</code></td>
         </tr>
         <tr>
             <td>-p</td>
-            <td>The name of the primary key field.</td>
+            <td>主键字段名称</td>
         </tr>
         <tr>
-            <td>-a (Optional)</td>
-            <td>Flag to generate IDs automatically.</td>
+            <td>-a (可选)</td>
+            <td>自动生成 ID 的标志</td>
         </tr>
         <tr>
-            <td>-d (Optional)</td>
-            <td>The description of the collection.</td>
+            <td>-d (可选)</td>
+            <td>collection 描述</td>
         </tr>
     </tbody>
 </table>
+## 创建带有 schema 的 collection
 
-## Create a collection with the schema
-
-Then, create a collection with strong consistency level and the schema you specified above.
+然后创建一个带有强一致性级别和指定 schema 的 collection
 
 <div class="multipleCode">
   <a href="?python">Python </a>
@@ -507,31 +502,31 @@ milvusClient.createCollection(createCollectionReq);
 ```
 
 ```shell
-# Follow the previous step.
+# 同上
 ```
 
 <table class="language-python">
 	<thead>
         <tr>
-            <th>Parameter</th>
-            <th>Description</th>
-            <th>Option</th>
+            <th>参数</th>
+            <th>描述</th>
+            <th>选项</th>
         </tr>
 	</thead>
 	<tbody>
         <tr>
-            <td><code>using</code> (optional)</td>
-            <td>By specifying the server alias here, you can choose in which Milvus server you create a collection.</td>
+            <td><code>using</code> (可选)</td>
+            <td>通过 using 指定服务器别名，您可以选择在哪个 Milvus 服务器上创建集合。</td>
             <td>N/A</td>
         </tr>
         <tr>
-            <td><code>shards_num</code> (optional)</td>
-            <td>Number of the shards for the collection to create.</td>
+            <td><code>shards_num</code> (可选)</td>
+            <td>需要创建的 collection 的分片数量</td>
             <td>[1,256]</td>
         </tr>
         <tr>
-            <td><code>consistency_level</code> (optional)</td>
-            <td>Consistency level of the collection to create.</td>
+            <td><code>consistency_level</code> (可选)</td>
+            <td>要创建的集合的一致性级别。</td>
             <td>
                 <ul>
                     <li><code>Strong</code></li>
@@ -545,12 +540,14 @@ milvusClient.createCollection(createCollectionReq);
     </tbody>
 </table>
 
+
+
 <table class="language-go">
 	<thead>
         <tr>
-            <th>Parameter</th>
-            <th>Description</th>
-            <th>Option</th>
+            <th>参数</th>
+            <th>描述</th>
+            <th>选项</th>
         </tr>
 	</thead>
 	<tbody>
@@ -561,7 +558,7 @@ milvusClient.createCollection(createCollectionReq);
         </tr>
         <tr>
             <td><code>shardNum</code></td>
-            <td>Number of the shards for the collection to create.</td>
+            <td>需要创建的 collection 的分片数量</td>
             <td>[1,256]</td>
         </tr>
     </tbody>
@@ -569,25 +566,27 @@ milvusClient.createCollection(createCollectionReq);
 
 
 
-## Limits
-|Feature|Maximum limit|
-|---|---|
-|Length of a collection name|255 characters|
-|Number of partitions in a collection|4,096|
-|Number of fields in a collection|256|
-|Number of shards in a collection|256|
+## 使用限制
+
+| 类型                | 最大限制 |
+| ------------------- | -------- |
+| collection 名称长度 | 255 字符 |
+| collection 的分区数 | 4,096    |
+| 集合的字段数        | 256      |
+| 集合的分片数        | 256      |
 
 
 
-## What's next
+## 更多内容
 
-- Learn more basic operations of Milvus:
-  - [Insert data into Milvus](insert_data.md)
-  - [Create a partition](create_partition.md)
-  - [Build an index for vectors](build_index.md)
-  - [Conduct a vector search](search.md)
-  - [Conduct a hybrid search](hybridsearch.md)
-- Explore API references for Milvus SDKs:
+- 了解更多 Milvus 的基本操作：
+  - [插入数据](insert_data.md)
+  - [创建 partition](create_partition.md)
+  - [创建索引](build_index.md)
+  - [进行向量搜索](search.md)
+  - [进行混合搜索](hybridsearch.md)
+- 探索 Milvus SDK 的 API 参考：
   - [PyMilvus API reference](/api-reference/pymilvus/v2.0.2/tutorial.html)
   - [Node.js API reference](/api-reference/node/v2.0.2/tutorial.html)
+
 
