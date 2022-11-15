@@ -85,7 +85,7 @@ helm install <your_release_name> milvus/milvus --set cluster.enabled=true --set 
 
 For Milvus clusters on K8s, you can configure Kafka in the same command that starts Milvus. Alternatively, you can configure Kafka using the <code>values.yml</code> file on the /charts/milvus path in the [milvus-helm](https://github.com/milvus-io/milvus-helm) repository before you start Milvus.
 
- The following table lists the keys for configuring Pulsar in the YAML file.
+ The following table lists the keys for configuring Kafka in the YAML file.
 | Key             | Description                          | Value                                 |
 | --------------------- | ------------------------------------ | ------------------------------------ |
 | <code>externalkafka.enabled</code>    | Enables or disables Kafka.     | <code>true</code>/<code>false</code> |
