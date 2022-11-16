@@ -2,12 +2,12 @@
 id: install_cluster-milvusoperator.md
 label: Milvus Operator
 related_key: Kubernetes
-order: 2
-group: install_cluster-docker.md
+order: 0
+group: install_cluster-milvusoperator.md
 summary: Learn how to install Milvus cluster on Kubernetes using Milvus Operator
 ---
 
-<div class="tab-wrapper"><a href="install_cluster-docker.md" class=''>Docker Compose</a><a href="install_cluster-helm.md" class=''>Helm</a><a href="install_cluster-milvusoperator.md" class='active '>Milvus Operator</a><a href="install_cluster-ansible.md" class=''>Ansible</a></div>
+<div class="tab-wrapper"><a href="install_cluster-milvusoperator.md" class='active '>Milvus Operator</a><a href="install_cluster-helm.md" class=''>Helm</a><a href="install_cluster-docker.md" class=''>Docker Compose</a><a href="install_cluster-ansible.md" class=''>Ansible</a></div>
 
 # Install Milvus Cluster with Milvus Operator
 

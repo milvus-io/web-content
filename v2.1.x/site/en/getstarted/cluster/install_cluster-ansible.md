@@ -2,12 +2,12 @@
 id: install_cluster-ansible.md
 label: Ansible
 related_key: Docker
-order: 4
-group: install_cluster-docker.md
+order: 3
+group: install_cluster-milvusoperator.md
 summary: Learn how to install Milvus cluster with Ansible Controller.
 ---
 
-<div class="tab-wrapper"><a href="install_cluster-docker.md" class=''>Docker Compose</a><a href="install_cluster-helm.md" class=''>Helm</a><a href="install_cluster-milvusoperator.md" class=''>Milvus Operator</a><a href="install_cluster-ansible.md" class='active '>Ansible</a></div>
+<div class="tab-wrapper"><a href="install_cluster-milvusoperator.md" class=''>Milvus Operator</a><a href="install_cluster-helm.md" class=''>Helm</a><a href="install_cluster-docker.md" class=''>Docker Compose</a><a href="install_cluster-ansible.md" class='active '>Ansible</a></div>
 
 # Install Milvus Cluster with Ansible
 

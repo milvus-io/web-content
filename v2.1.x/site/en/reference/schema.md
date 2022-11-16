@@ -70,9 +70,6 @@ embedding_field = FieldSchema(name="embedding", dtype=DataType.FLOAT_VECTOR, dim
 `DataType` defines the kind of data a field contains. Different fields support different data types.
 
 - Primary key field supports:
-  - INT8: numpy.int8
-  - INT16: numpy.int16
-  - INT32: numpy.int32
   - INT64: numpy.int64
   - VARCHAR: VARCHAR
 - Scalar field supports:
