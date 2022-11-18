@@ -27,10 +27,34 @@ This topic describes how to deploy a Milvus cluster on [Amazon EKS](https://docs
 
 ## Deploy a Milvus cluster
 
-1. Run the following command to create an EKS cluster. The example in this topic uses `my-cluster` as the cluster name. You can replace it with your own value. See [Getting started with Amazon EKS](https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html) for more information.
+1. Copy the code from below code block, and save it to a file in yaml format, name the file as milvus_cluster.yaml.
+```
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+metadata:
+  name: my-eks-cluster
+  region: us-west-2
+  version: "1.23"
+
+nodeGroups:
+  - name: ng-1-workers
+    labels: { role: workers }
+    instanceType: m5.4xlarge
+    desiredCapacity: 2
+    volumeSize: 80
+    iam:
+      withAddonPolicies:
+        ebs: true
+
+addons:
+- name: aws-ebs-csi-driver
+  version: v1.13.0-eksbuild.1 # optional
 
 ```
-eksctl create cluster --name my-cluster --region region-code --fargate
+3. Run the following command to create an EKS cluster. The example in this topic uses `my-cluster` as the cluster name. You can replace it with your own value. See [Getting started with Amazon EKS](https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html) for more information.
+
+```
+eksctl create cluster -f milvus_cluster.yaml
 ```
 
 You will see the following output if the EKS cluster is created.
@@ -49,7 +73,7 @@ You will see the following output if the EKS cluster is created.
 
    ```shell
    NAME          TYPE      CLUSTER-IP    EXTERNAL-IP                                PORT(S)             AGE
-   kubernetes       ClusterIP   172.20.0.1    <none>                                  443/TCP             106m
+   kubernetes       ClusterIP   10.100.0.1    <none>                                  443/TCP             106m
    ```
 4. Add the Milvus Helm repository.
 ```
