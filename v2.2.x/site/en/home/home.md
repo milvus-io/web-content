@@ -85,29 +85,14 @@ id: home.md
 
 <div class="doc-home-what-is-new">
 
-## What's new in docs
+## What's new in docs  
 
-_Sep 2022_
+_Nov 2022 - Milvus 2.2.0 release_
 
-- Official release of 2.1.0 [Java API reference](https://milvus.io/api-reference/java/v2.1.0/About.md).
-- Added reference docs for [consistency levels in Milvus](consistency.md),[in-memory replica](replica.md), [bitset](bitset.md), and [Knowhere](knowhere.md), the vector execution engine in Milvus.
-- Added indexes on binary embeddings to [vector index](index.md)reference doc.
-- Updated reference doc explaining the mechanism behind [Time Travel](timetravel_ref.md).
-
-  
-_Aug 2022_
-
-- Added the Milvus 2.1 [benchmark test report](benchmark.md).
-- Added guidance on how to [install embedded Milvus](install_embedded_milvus.md).
-  
-
-_Jul 2022 - Milvus 2.1 release_
-
-- Added guidance on how to load a collection as [multiple in-memory replicas](load_collection.md). 
-- Added guidance on how to [configure Milvus with Milvus Operator](configure_operator.md).
-- Added guidance on how to configure [object storage](deploy_s3.md), [meta storage](deploy_etcd.md) and [message storage](deploy_pulsar.md) with Docker Compose or Helm.
-- Added guidance on how to [configure RocksMQ, Pulsar and Kafka for message storage](message_storage_operator.md) with Milvus Operator.
-- Added a full list of important monitoring metrics in the [Milvus Metrics Dashboard](metrics_dashboard.md).
-- Added security guidance including [user access authentication](authenticate.md) and [encryption in transit](tls.md) .
+- Added guidance on how to [bulk insert entities from files](bulk_load.md). 
+- Added description of [disk-based ANN index](disk_index.md).
+- Added guidance on how to configure [quotas_and_limits](configure_quota_limits.md).
+- Added guidance on how to [enable RBAC](rbac.md) with Milvus Operator.
+- Added guidance on how to [migrate metadata](upgrade_milvus_cluster.md) from 2.1.x to 2.2.0
 
 </div>
