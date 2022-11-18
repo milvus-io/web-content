@@ -79,4 +79,4 @@ Thanks to the contribution from [Zilliz](https://zilliz.com/), Milvus 2.2.0 now 
   - No auto-flush is triggered by any SDK APIs such as `num_entities()`, `create_index()`, etc.
   
 - Time Travel
-In Milvus 2.2,  Time Travel is disabled by default to save disk usage. To enable Time Travel, configure the parameter `common.retentionDuration` manually.
+  - In Milvus 2.2,  Time Travel is disabled by default to save disk usage. To enable Time Travel, configure the parameter `common.retentionDuration` manually.
