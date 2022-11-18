@@ -76,6 +76,23 @@ Methods of `SearchResultsWrapper.IDScore`:
 | `getStrID()`   | Gets the string ID if the primary key type is VarChar. | String      |
 | `getScore()`   | Gets the distance value.                               | float       |
 
+Whether `getScore()` is an accurate distance or not depands on the index type:
+- FLAT
+        
+    The score is **is** accurate distance.
+        
+- IVF_FLAT
+        
+    The score **is** accurate distance.
+        
+- IVF_SQ8/IVF_PQ
+        
+    The score is **not** accurate.
+        
+- HNSW/ANNOY
+        
+    The score **is** accurate.
+
 ## Example
 
 ```Java
