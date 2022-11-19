@@ -587,19 +587,11 @@
     },
     {
       "id": "upgrade_milvus_standalone.md",
-      "title": "Upgrade",
+      "title": "Upgrade Milvus Standalone",
       "label1": "admin_guide",
       "label2": "upgrade_milvus",
       "label3": "",
       "order": 1
-    },
-    {
-      "id": "upgrade_milvus_embedded.md",
-      "title": "Upgrade",
-      "label1": "admin_guide",
-      "label2": "upgrade_milvus",
-      "label3": "",
-      "order": 2
     },
     {
       "id": "monitor",
