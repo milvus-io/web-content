@@ -66,41 +66,69 @@ milvus/milvus        3.0.19               2.0.2                     Milvus is an
 milvus/milvus        3.0.18               2.0.2                     Milvus is an open-source vector database built ...
 ```
 
-### Step 5. Upgrade
+### Step 5. Migrate meta
+A major change in Milvus 2.2 is the meta structure of segment indexes. Therefore, you need to use Helm to migrate the meta while upgrading Milvus from v2.1.x to v2.2.0. We provide you with a script so that you can safely migrate your meta data.
 
-1. Run the following commands to upgrade your Milvus standalone from  v2.0.2 to v2.1.0.
+This script only applies to Milvus installed on a K8s cluster. Roll back to the previous version with the rollback operation first if an error occurs during the process.
 
-```
-$ helm repo update
-$ helm upgrade my-release milvus/milvus --set cluster.enabled=false --set etcd.replicaCount=1 --set minio.mode=standalone --set pulsar.enabled=false 
-```
+The following table lists the operations you can do for meta migration.
 
-2. Run `$ helm list` again to check your Milvus app version. You can see your Milvus standalone has been upgraded to v2.1.0.
+| Parameters   | Description                                                      | Default value                    | Required                |
+| ------------ | ---------------------------------------------------------------- | ---------------------------- | ----------------------- |
+| `i`          | The Milvus instance name.                                 | `None`                         | True                    |
+| `n`          | The namespace that Milvus is installed in.                | `default`                      | False                   |
+| `s`          | The source Milvus version.                                | `None`                         | True                    |
+| `t`          | The target Milvus version.                               | `None`                         | True                    |
+| `r`          | The root path of Milvus meta.                             | `by-dev`                       | False                   |
+| `w`          | The new Milvus image tag.                                 | `milvusdb/milvus:v2.2.0`       | False                   |
+| `m`          | The meta migration image tag.                             | `harbor.milvus.io/milvus/meta-migration:20221025-e54b6181b`       | False                   |
+| `o`          | The meta migration operation.                             | `migrate`                      | False                   |
+| `d`          | Whether to delete migration pod after the migration is completed.          | `false`                        | False                   |
 
-```
-NAME              NAMESPACE        REVISION        UPDATED                                     STATUS          CHART               APP VERSION
-my-release        default          2               2022-07-28 15:40:18.22437 +0800 CST        deployed        milvus-3.1.2        2.1.0
-```
+#### 1. Migrate meta
 
-3. Run `$ kubectl get pods` to check the new pods. You can see the following output.
+1. Download the migration script.
+2. Stop the Milvus components. Any live session in the Milvus etcd can cause the migration to fail.
+3. Create a backup for Milvus meta.
+4. Migrate the Milvus meta.
+5. Start Milvus components with a new image.
 
-```
-NAME                                            READY   STATUS    RESTARTS   AGE
-my-release-etcd-0                               1/1     Running   0          3m32s
-my-release-milvus-standalone-6967454987-72r55   1/1     Running   0          22s
-my-release-minio-744dd9586f-qngzv               1/1     Running   0          3m32s
-```
+#### 2.Upgrade Milvus from v2.1.x to v2.2.0
 
-<div class="alert note">
-When upgrading your Milvus standalone, old pods will be deleted. Therefore, the service may be offline for a short period of time.
-</div>
-
-4. Run the following command to check the new image version. You can see it is v2.0.0-rc8 now.
-
-```
-$ kubectl get pods my-release-milvus-standalone-6967454987-72r55 -o=jsonpath='{$.spec.containers[0].image}'
-```
+1. Specify Milvus instance name, source Milvus version, and target Milvus version.
 
 ```
-milvusdb/milvus:v2.1.0
+./migrate.sh -i my-release -s 2.1.1 -t 2.2.0
 ```
+
+2. Specify namespace with `-n` if your Milvus is not installed in the default K8s namespace.
+
+```
+./migrate.sh -i my-release -n milvus -s 2.1.1 -t 2.2.0
+```
+
+3. Specify rootpath with `-r` if your Milvus is installed with the custom `rootpath`.
+
+```
+./migrate.sh -i my-release -n milvus -s 2.1.1 -t 2.2.0 -r by-dev
+```
+
+4. Specify the image tag with `-w` if your Milvus is installed with custom `image`.
+
+```
+./migrate.sh -i my-release -n milvus -s 2.1.1 -t 2.2.0 -r by-dev -w milvusdb/milvus:master-20221016-15878781
+```
+
+5. Set `-d true` if you want to automatically remove the migration pod after the migration is completed.
+
+```
+./migrate.sh -i my-release -n milvus -s 2.1.1 -t 2.2.0 -w milvusdb/milvus:master-20221016-15878781 -d true
+```
+
+6. Rollback and migrate again if the migration fails.
+
+```
+./migrate.sh -i my-release -n milvus -s 2.1.1 -t 2.2.0 -r by-dev -o rollback -w <milvus-2-1-1-image>
+./migrate.sh -i my-release -n milvus -s 2.1.1 -t 2.2.0 -r by-dev -o migrate -w <milvus-2-2-0-image>
+```
+
