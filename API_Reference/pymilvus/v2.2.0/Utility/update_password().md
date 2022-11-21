@@ -1,11 +1,17 @@
-# reset_password()
+# update_password()
 
-This method resets the password of the specified user. You have to specify the name, old password, and new password of the user. 
+This method updates the password of a specified user. You have to specify the name, old password, and new password of the user. 
+
+<div class="alert note">
+
+This operation does not change the header of the currently running Milvus connection and may results in connection errors. Therefore, close all Milvus connections established by a user before updating the user's password.
+
+</div>
 
 ## Invocation
 
-```python
-reset_password(user, old_password, new_password)
+```Python
+update_password(user, old_password, new_password)
 ```
 
 ## Parameters
@@ -16,24 +22,17 @@ reset_password(user, old_password, new_password)
 | `old_password`    | Original password of the user                                | String                          | True     |
 | `new_password`    | New password of the user                                     | String                          | False    |
 
-## Return
+## Returns
 
 No return.
 
-## Raises
-
-
-
 ## Example
 
-```python
+```Python
 from pymilvus import connections, utility
 connections.connect()
-utility.reset_password(user, old_password, new_password)
+utility.update_password(user, old_password, new_password)
+connections.connect(user=user, password=new_password)
 users = utility.list_usernames()
 print(f"users in Milvus: {users}")
 ```
-
-## Limitation
-
-Password must have at least 6 characters and must not exceed 256 characters in length.

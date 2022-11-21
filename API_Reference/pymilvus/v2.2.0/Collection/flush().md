@@ -1,0 +1,3 @@
+# flush()
+
+This method 
