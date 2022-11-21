@@ -1,10 +1,15 @@
 ---
-id: upgrade_milvus_cluster.md
+id: upgrade_milvus_cluster-helm.md
+label: Helm
+order: 0
+group: upgrade_milvus_cluster-helm.md
 related_key: upgrade Milvus Cluster
 summary: Learn how to upgrade Milvus cluster.
 ---
 
-# Upgrade Milvus Cluster
+<div class="tab-wrapper"><a href="upgrade_milvus_cluster-helm.md" class='active '>Helm</a><a href="upgrade_milvus_cluster-docker.md" class=''>Docker Compose</a></div>
+
+# Upgrade Milvus Cluster with Helm Chart
 
 ### Step 1. Check the Milvus version
 

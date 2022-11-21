@@ -1,10 +1,16 @@
 ---
-id: upgrade_milvus_standalone.md
-related_key: upgrade Milvus Standalone
+id: upgrade_milvus_standalone-helm.md
+label: Helm
+order: 0
+group: upgrade_milvus_standalone-helm.md
+related_key: upgrade Milvus Cluster
 summary: Learn how to upgrade Milvus standalone.
 ---
 
-# Upgrade Milvus Standalone
+<div class="tab-wrapper"><a href="upgrade_milvus_standalone-helm.md" class='active '>Helm</a><a href="upgrade_milvus_standalone-docker.md" class=''>Docker Compose</a></div>
+
+
+# Upgrade Milvus Standalone with Helm Chart
 
 ### Step 1. Check the Milvus version
 

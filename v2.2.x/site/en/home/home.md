@@ -93,6 +93,6 @@ _Nov 2022 - Milvus 2.2.0 release_
 - Added description of [disk-based ANN index](disk_index.md).
 - Added guidance on how to configure [quotas_and_limits](configure_quota_limits.md).
 - Added guidance on how to [enable RBAC](rbac.md) with Milvus Operator.
-- Added guidance on how to [migrate metadata](upgrade_milvus_cluster.md) from 2.1.x to 2.2.0
+- Added guidance on how to [migrate metadata](upgrade_milvus_cluster-helm.md) from 2.1.x to 2.2.0
 
 </div>
