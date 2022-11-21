@@ -150,7 +150,7 @@ spec:
 
 <div class="alert note">In this example, <code>inCluster.deletionPolicy</code> defines a deleletion policy for data. <code>inCluster.values.resources</code> defines the compute resources that MinIO uses. <code>inCluster.values.statefulset.replicaCount</code> defines the number of replicas of MinIO on each drive.</div>
 
-<div class="alert note">Find the complete configuration items to configure an internal MinIO service in <a href="https://github.com/milvus-io/milvus-operator/blob/main/config/assets/charts/minio/values.yaml">values.yaml</a>. Add configuration items as needed under <code>storage.inCluster.values</code> as shown in the preceding example.</div>
+<div class="alert note">Find the complete configuration items to configure an internal MinIO service in <a href="https://github.com/milvus-io/milvus-helm/blob/master/charts/minio/values.yaml">values.yaml</a>. Add configuration items as needed under <code>storage.inCluster.values</code> as shown in the preceding example.</div>
 
 Assuming that the configuration file is named `milvuscluster.yaml`, run the following command to apply the configuration.
 
@@ -265,7 +265,7 @@ spec:
 
 <div class="alert note">The preceding example specifies the number of replicas as <code>5</code> and limits the compute resources for etcd.</div>
 
-<div class="alert note">Find the complete configuration items to configure an internal etcd service in <a href="https://github.com/milvus-io/milvus-operator/blob/main/config/assets/charts/etcd/values.yaml">values.yaml</a>. Add configuration items as needed under <code>etcd.inCluster.values</code> as shown in the preceding example.</div>
+<div class="alert note">Find the complete configuration items to configure an internal etcd service in <a href="https://artifacthub.io/packages/helm/bitnami/etcd">values.yaml</a>. Add configuration items as needed under <code>etcd.inCluster.values</code> as shown in the preceding example.</div>
 
 Assuming that the configuration file is named `milvuscluster.yaml`, run the following command to apply the configuration.
 
@@ -412,7 +412,7 @@ spec:
 
 <div class="alert note">This example specifies the numbers of replicas of each component of Pulsar, the compute resources of Pulsar BookKeeper, and other configurations.</div>
 
-<div class="alert note">Find the complete configuration items to configure an internal Pulsar service in <a href="https://github.com/milvus-io/milvus-operator/blob/main/config/assets/charts/pulsar/values.yaml">values.yaml</a>. Add configuration items as needed under <code>pulsar.inCluster.values</code> as shown in the preceding example.</div>
+<div class="alert note">Find the complete configuration items to configure an internal Pulsar service in <a href="https://github.com/kafkaesque-io/pulsar-helm-chart/blob/master/helm-chart-sources/pulsar/values.yaml">values.yaml</a>. Add configuration items as needed under <code>pulsar.inCluster.values</code> as shown in the preceding example.</div>
 
 Assuming that the configuration file is named `milvuscluster.yaml`, run the following command to apply the configuration.
 

@@ -246,7 +246,8 @@ You can download template configuration files at [Google Drive](https://drive.go
 
 - Files in the ```yaml_files``` folder
 
-  This folder stores Jinja2 files for each node type. Ansible uses Jinja2 templating. See [Introduction](https://jinja2docs.readthedocs.io/en/stable/intro.html) for more information about Jinja2.
+  This folder stores 
+  2 files for each node type. Ansible uses Jinja2 templating. See [Introduction](https://palletsprojects.com/p/jinja/) for more information about Jinja2.
 
 - ```playbook.yaml```
 
