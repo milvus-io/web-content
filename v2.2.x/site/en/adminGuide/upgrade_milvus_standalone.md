@@ -8,11 +8,11 @@ summary: Learn how to upgrade Milvus standalone.
 
 ### Step 1. Check the Milvus version
 
-Run `$ helm list` to check your Milvus app version. You can see the `APP VERSION` is 2.0.2. 
+Run `$ helm list` to check your Milvus app version. You can see the `APP VERSION` is 2.1.4. 
 
 ```
-NAME              NAMESPACE        REVISION        UPDATED                                     STATUS          CHART               APP VERSION
-my-release        default          1               2022-07-28 15:28:12.32068 +0800 CST          deployed        milvus-3.0.29        2.0.2
+NAME             	NAMESPACE	REVISION	UPDATED                                	STATUS  	CHART        	APP VERSION     
+new-release      	default  	1       	2022-11-21 15:41:25.51539 +0800 CST    	deployed	milvus-3.2.18	2.1.4
 ```
 
 ### Step 2. Check the running pods
@@ -21,21 +21,21 @@ Run `$ kubectl get pods` to check the running pods. You can see the following ou
 
 ```
 NAME                                            READY   STATUS    RESTARTS   AGE
-my-release-etcd-0                               1/1     Running   0          84s
-my-release-milvus-standalone-75c599fffc-6rwlj   1/1     Running   0          84s
-my-release-minio-744dd9586f-qngzv               1/1     Running   0          84s
+new-release-etcd-0                               1/1     Running   0          84s
+new-release-milvus-standalone-75c599fffc-6rwlj   1/1     Running   0          84s
+new-release-minio-744dd9586f-qngzv               1/1     Running   0          84s
 ```
 
 ### Step 3. Check the image tag
 
-Check the image tag for the pod `my-release-milvus-standalone-75c599fffc-6rwlj`. You can see the release of your Milvus standalone is v2.0.2.
+Check the image tag for the pod `new-release-milvus-standalone-75c599fffc-6rwlj`. You can see the release of your Milvus standalone is v2.1.4.
 
 ```
-$ kubectl get pods my-release-milvus-standalone-75c599fffc-6rwlj -o=jsonpath='{$.spec.containers[0].image}'
+$ kubectl get pods new-release-milvus-standalone-75c599fffc-6rwlj -o=jsonpath='{$.spec.containers[0].image}'
 ```
 
 ```
-milvusdb/milvus:v2.0.2
+milvusdb/milvus:v2.1.4
 ```
 
 
@@ -49,25 +49,27 @@ $ helm search repo milvus --versions
 ```
 
 ```
-NAME                 CHART VERSION        APP VERSION               DESCRIPTION
-milvus/milvus        3.1.2                2.1.0                     Milvus is an open-source vector database built ...
-milvus/milvus        3.1.1                2.1.0                     Milvus is an open-source vector database built ...
-milvus/milvus        3.1.0                2.1.0                     Milvus is an open-source vector database built ...
-milvus/milvus        3.0.29               2.0.2                     Milvus is an open-source vector database built ...
-milvus/milvus        3.0.28               2.0.2                     Milvus is an open-source vector database built ...
-milvus/milvus        3.0.27               2.0.2                     Milvus is an open-source vector database built ...
-milvus/milvus        3.0.26               2.0.2                     Milvus is an open-source vector database built ...
-milvus/milvus        3.0.25               2.0.2                     Milvus is an open-source vector database built ...
-milvus/milvus        3.0.24               2.0.2                     Milvus is an open-source vector database built ...
-milvus/milvus        3.0.23               2.0.2                     Milvus is an open-source vector database built ...
-milvus/milvus        3.0.21               2.0.2                     Milvus is an open-source vector database built ...
-milvus/milvus        3.0.20               2.0.2                     Milvus is an open-source vector database built ...
-milvus/milvus        3.0.19               2.0.2                     Milvus is an open-source vector database built ...
-milvus/milvus        3.0.18               2.0.2                     Milvus is an open-source vector database built ...
+NAME         	CHART VERSION	APP VERSION       	DESCRIPTION  
+milvus/milvus	3.3.0        	2.2.0             	Milvus is an open-source vector database built ...
+milvus/milvus	3.2.18       	2.1.4             	Milvus is an open-source vector database built ...
+milvus/milvus	3.2.17       	2.1.4             	Milvus is an open-source vector database built ...
+milvus/milvus	3.2.16       	2.1.4             	Milvus is an open-source vector database built ...
+milvus/milvus	3.2.15       	2.1.4             	Milvus is an open-source vector database built ...
+milvus/milvus	3.2.14       	2.1.4             	Milvus is an open-source vector database built ...
+milvus/milvus	3.2.13       	2.1.4             	Milvus is an open-source vector database built ...
+milvus/milvus	3.2.12       	2.1.4             	Milvus is an open-source vector database built ...
+milvus/milvus	3.2.11       	2.1.4             	Milvus is an open-source vector database built ...
+milvus/milvus	3.2.10       	2.1.4             	Milvus is an open-source vector database built ...
+milvus/milvus	3.2.9        	2.1.4             	Milvus is an open-source vector database built ...
+milvus/milvus	3.2.8        	2.1.4             	Milvus is an open-source vector database built ...
+milvus/milvus	3.2.7        	2.1.4             	Milvus is an open-source vector database built ...
+milvus/milvus	3.2.6        	2.1.4             	Milvus is an open-source vector database built ...
+milvus/milvus	3.2.5        	2.1.4             	Milvus is an open-source vector database built ...
+milvus/milvus	3.2.4        	2.1.4             	Milvus is an open-source vector database built ...
 ```
 
 ### Step 5. Migrate meta
-A major change in Milvus 2.2 is the meta structure of segment indexes. Therefore, you need to use Helm to migrate the meta while upgrading Milvus from v2.1.x to v2.2.0. We provide you with a script so that you can safely migrate your meta data.
+A major change in Milvus 2.2 is the metadata structure of segment indexes. Therefore, you need to use Helm to migrate the meta while upgrading Milvus from v2.1.x to v2.2.0. We provide you with a script so that you can safely migrate your metadata.
 
 This script only applies to Milvus installed on a K8s cluster. Roll back to the previous version with the rollback operation first if an error occurs during the process.
 
@@ -93,7 +95,7 @@ The following table lists the operations you can do for meta migration.
 4. Migrate the Milvus meta.
 5. Start Milvus components with a new image.
 
-#### 2.Upgrade Milvus from v2.1.x to v2.2.0
+#### 2. Upgrade Milvus from v2.1.x to v2.2.0
 
 1. Specify Milvus instance name, source Milvus version, and target Milvus version.
 
@@ -101,19 +103,19 @@ The following table lists the operations you can do for meta migration.
 ./migrate.sh -i my-release -s 2.1.1 -t 2.2.0
 ```
 
-2. Specify namespace with `-n` if your Milvus is not installed in the default K8s namespace.
+2. Specify the namespace with `-n` if your Milvus is not installed in the default K8s namespace.
 
 ```
 ./migrate.sh -i my-release -n milvus -s 2.1.1 -t 2.2.0
 ```
 
-3. Specify rootpath with `-r` if your Milvus is installed with the custom `rootpath`.
+3. Specify the root path with `-r` if your Milvus is installed with the custom `rootpath`.
 
 ```
 ./migrate.sh -i my-release -n milvus -s 2.1.1 -t 2.2.0 -r by-dev
 ```
 
-4. Specify the image tag with `-w` if your Milvus is installed with custom `image`.
+4. Specify the image tag with `-w` if your Milvus is installed with a custom `image`.
 
 ```
 ./migrate.sh -i my-release -n milvus -s 2.1.1 -t 2.2.0 -r by-dev -w milvusdb/milvus:master-20221016-15878781
