@@ -20,14 +20,14 @@ You can use [Apache Maven](https://maven.apache.org/install.html) or [Gradle](ht
  <dependency>
      <groupId>io.milvus</groupId>
      <artifactId>milvus-sdk-java</artifactId>
-     <version>2.1.0</version>
+     <version>2.2.0</version>
  </dependency>
 ```
 
 - Gradle/Grails
 
 ```
-compile 'io.milvus:milvus-sdk-java:2.1.0'
+compile 'io.milvus:milvus-sdk-java:2.2.0'
 ```
 
 ## Contributing
