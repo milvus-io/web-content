@@ -15,9 +15,11 @@ Release date: 18 November, 2022
 
 Milvus 2.2.0 introduces many new features including support for Disk-based approximate nearest neighbor (ANN) algorithm, bulk insertion of entities from files, and role-based access control (RBAC) for an improved security. In addition, this major release also ushers in a new era for vector search with enhanced stability, faster search speed, and more flexible scalability.
 
+<h3 id="v2.2.0">Breaking changes</h3> 
+
 Since metadata storage is refined and API usage is normalize, Milvus 2.2 is not fully compatible with earlier releases. Read [this guide](upgrade_milvus_cluster.md) to learn how to safely upgrade from Milvus 2.1.x to 2.2.0.
 
-<h3 id="v2.1.0">Features</h3> 
+<h3 id="v2.2.0">Features</h3> 
 
 - Support for bulk insertion of entities from files
 Milvus now offers a new set of bulk insertion APIs to make data insertion more efficient. You can now upload entities in a Json file directly to Milvus. See [Insert Entities from Files](bulk_load.md) for details.
