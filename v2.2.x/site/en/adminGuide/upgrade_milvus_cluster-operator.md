@@ -13,9 +13,18 @@ summary: Learn how to upgrade Milvus cluster.
 
 This topic describes how to ugrade your Milvus cluster with Milvus Operator and uses the example of upgrading Milvus 2.1.4 to Milvus 2.2.0.
 
+## 1. Upgrade you Milvus Operator to v0.7.0
+
+Run the following command to upgrade the version of your Milvus Operator to v0.7.0.
+
+```
+helm repo add milvus-operator https://milvus-io.github.io/milvus-operator/
+helm repo update milvus-operator
+helm -n milvus-operator upgrade milvus-operator milvus-operator/milvus-operator
+```
 
 
-## 1. Create a `.yaml` file for metadata migration
+## 2. Create a `.yaml` file for metadata migration
 
 Create a metadata migration file. The following is an example. You need to specify the `name`, `sourceVersion`, and `targetVersion` in the configuration file. The following example sets the `name` to `my-release-upgrade`, `sourceVersion` to `v2.1.4`, and `targetVersion` to `v2.2.0`. This means that your Milvus cluster will be upgraded from v2.1.4 to v2.2.0.
 
@@ -41,7 +50,7 @@ spec:
 
 
 
-## 2. Apply the new configuration
+## 3. Apply the new configuration
 
 Run the following command to apply the new configuration.
 
@@ -51,7 +60,7 @@ $ kubectl apply -f https://github.com/milvus-io/milvus-operator/blob/main/config
 
 
 
-## 3. Check the status of metadata migration
+## 4. Check the status of metadata migration
 
 Run the following command to check the status of your metadata migration.
 
@@ -65,6 +74,6 @@ Or, you can also run `kubectl get pod` to check all the pods. If all the pods ar
 
 
 
-## 4. Delete `my-release-upgrade`
+## 5. Delete `my-release-upgrade`
 
 When the upgrade is successful, delete `my-release-upgrade` in the `,yaml` file.
