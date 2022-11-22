@@ -5,7 +5,7 @@ This method conducts a vector similarity search.
 ## Invocation
 
 ```python
-search(data, anns_field, param, offset=0, limit, expr=None, partition_names=None, output_fields=None, timeout=None, round_decimal=-1, **kwargs)
+search(data, anns_field, param, limit, expr=None, partition_names=None, output_fields=None, timeout=None, round_decimal=-1, **kwargs)
 ```
 
 ## Parameters
@@ -14,8 +14,7 @@ search(data, anns_field, param, offset=0, limit, expr=None, partition_names=None
 | ----------------- | ------------------------------------------------------------- | ------------------ | -------- |
 | `data`            | Data to search with                                           | list[list[Float]]  | True     |
 | `anns_field`      | Name of the vector field to search on                         | String             | True     |
-| `param`           | Specific search parameter(s) of the index on the vector field | Dict               | True     |
-| `offset`          | Number of results to skip in the returned set. The sum of this value and `limit` should be less than 65535.                           | Integer            | False     |
+| `param`           | Specific search parameter(s) of the index on the vector field. You can set an offset in this dictionary. The sum of the offset value and the value in `limit` should be less than 65535.  | Dict               | True     |
 | `limit`           | Number of nearest records to return. The sum of this value and `offset` should be less than 65535.                          | Integer            | True     |
 | `expr`            | Boolean expression to filter the data                         | String             | False    |
 | `partition_names` | List of names of the partitions to search on. </br>All partition will be searched if it is left empty.                         | list[String]            | False    |

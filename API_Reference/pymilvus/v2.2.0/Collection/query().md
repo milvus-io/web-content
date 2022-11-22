@@ -5,7 +5,7 @@ This method conducts a vector query.
 ## Invocation
 
 ```python
-query(expr, offset=0, limit, output_fields=None, partition_names=None, timeout=None, **kwargs)
+query(expr, offset, limit, output_fields=None, partition_names=None, timeout=None)
 ```
 
 ## Parameters
@@ -15,7 +15,7 @@ query(expr, offset=0, limit, output_fields=None, partition_names=None, timeout=N
 | `expr`            | Boolean expression to filter the data                         | String             | True     |
 | `partition_names` | List of names of the partitions to search on. </br>All partition will be searched if it is left empty.                                                                              | list[String]       | False    |
 | `offset`          | Number of results to skip in the returned set. The sum of this value and `limit` should be less than 65535.                           | Integer            | False     |
-| `limit`           | Number of nearest records to return. The sum of this value and `offset` should be less than 65535.                          | Integer            | True     |
+| `limit`           | Number of nearest records to return. The sum of this value and `offset` should be less than 65535.                          | Integer            | False     |
 | `output_fields`   | List of names of fields to output                             | list[String]       | False    |
 | `timeout`         | An optional duration of time in seconds to allow for the RPC. If it is set to None, the client keeps waiting until the server responds or error occurs.                                                | Float              | False    |
 | `kwargs`: `consistency_level`|Consistency level used in the search. | String/Integer              | False    |
