@@ -15,7 +15,7 @@ do_bulk_insert(collection_name, partition_name=None, files, timeout=None, using=
 | `collection_name` | Name of a colletion | String | True |
 | `partition_name` | Name of a partition | String | False |
 | `files` | List of file paths. The path must be a MINIO or S3 bucket path | List[String] | True |
-| `timetout` | Timeout setting of this operation | Integer | False |
+| `timetout` | An optional duration of time in seconds to allow for the RPC. If it is set to None, the client keeps waiting until the server responds or error occurs. | Integer | False |
 | `using` |  Alias of the Milvus connection to be attached to | String | False |
 
 ## Raises

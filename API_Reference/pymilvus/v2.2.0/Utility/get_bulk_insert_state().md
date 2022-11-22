@@ -13,7 +13,7 @@ get_bulk_insert_state(task_id, timeout=None, using="default", **kwargs)
 | Parameter    | Description                                                  | Type                            | Required |
 | ------------ | ------------------------------------------------------------ | ------------------------------- | -------- |
 | `task_id` | ID of a running bulk insert task | Integer | True |
-| `timetout` | Timeout setting of this operation | Integer | False |
+| `timetout` | An optional duration of time in seconds to allow for the RPC. If it is set to None, the client keeps waiting until the server responds or error occurs. | Integer | False |
 | `using` |  Alias of the Milvus connection to be attached to | String | False |
 
 ## Returns

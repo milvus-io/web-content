@@ -1,24 +1,25 @@
-# flush()
+# set_properties()
 
-This method seals all entities in the current collection. Any insertion after a flush operation results in generating new segments. Note that only sealed segments can be indexed.
+This method modifies the current collection by setting its properties. Currently, you can only change the time-to-live (TTL) property of the collection by setting `collection.ttl.seconds`.
 
-## Invocation
+# Invocation
 
 ```Python
-flush(timeout=None)
+set_properties(properties, timeout=None)
 ```
 
-## Parameters
+# Parameters
 
 | Parameter         | Description                                                  | Type                            | Required |
 | ----------------- | ------------------------------------------------------------ | ------------------------------- | -------- |
+| `properties`      | A dictionary comprising pairs of properties and values | Dictionary          | True     |
 | `timeout`         | An optional duration of time in seconds to allow for the RPC. If it is set to None, the client keeps waiting until the server responds or error occurs.                                 | Float         | False    |
 
-## Returns
+# Returns
 
 No returns
 
-## Example
+# Example
 
 ```Python
 from pymilvus import connections, Collection, FieldSchema, CollectionSchema, DataType
@@ -28,9 +29,5 @@ fields = [
     FieldSchema("films", dtype=DataType.FLOAT_VECTOR, dim=128)
 ]
 schema = CollectionSchema(fields=fields)
-collection = Collection(name="test_collection_flush", schema=schema)
-collection.insert([[1, 2], [[1.0, 2.0], [3.0, 4.0]]])
-collection.flush()
-collection.num_entities
-# Prints the number of entities flushed: 2
+collection.set_properties({"collection.ttl.seconds": 60})
 ```
