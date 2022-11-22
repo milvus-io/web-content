@@ -578,7 +578,7 @@
       "order": 4
     },
     {
-      "id": "upgrade_milvus_cluster-helm.md",
+      "id": "upgrade_milvus_cluster-operator.md",
       "title": "Upgrade Milvus Cluster",
       "label1": "admin_guide",
       "label2": "upgrade_milvus",
