@@ -23,7 +23,7 @@ Methods of `RevokeRolePrivilegeParam.Builder`:
 
 | Method | Description | Parameters |
 | --- | --- | --- |
-| `withRoleName(String roleName)` | Sets the role name.  <br> The role name cannot be empty or null. | `roleName`: The role name. |
+| `withRoleName(String roleName)` | Sets the role name. <br> The role name cannot be empty or null. | `roleName`: The role name. |
 | `withObject(String object)` | Sets the object. <br> The object cannot be empty or null. | `object`: A granted object in Milvus, such as collection, partition, and database. |
 | `withObjectName(String objectName)` | Sets the object name. The object name cannot be empty or null.	|`objectName`: The object name. |
 | `withPrivilege(String privilege)` | Sets the privilege. The privilege cannot be empty or null. | `privilege`: A concrete permission for accessing some object. |

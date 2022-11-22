@@ -23,7 +23,7 @@ Methods of AddUserToRoleParam.Builder:
 
 | Method | Description | Parameters |
 | --- | --- | --- |
-| `withRoleName(String roleName)` | String roleName. <br> The role name cannot be empty or null. | `roleName`: The role name used to create the privilege. |
+| `withRoleName(String roleName)` | Sets the role name. <br> The role name cannot be empty or null. | `roleName`: The role name used to create the privilege. |
 | `withUsername(String username)` | Sets the username. <br> The username cannot be empty or null. |	`username`: The user name. | 
 
 The `RemoveUserFromRoleParam.Builder.build()` can throw the following exceptions:

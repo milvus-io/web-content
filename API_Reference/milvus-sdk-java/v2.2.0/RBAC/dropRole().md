@@ -23,7 +23,7 @@ Methods of `DropRoleParam.Builder`:
 
 | Method | Description | Parameters |
 | --- | --- | --- |
-| `withRoleName(String roleName)` | String `roleName`. The role name cannot be empty or null. | `roleName`: The role name used to create the privilege. |
+| `withRoleName(String roleName)` | Sets the role name. The role name cannot be empty or null. | `roleName`: The role name used to create the privilege. |
 
 The `DropRoleParam.Builder.build()` can throw the following exceptions:
 - `ParamException`: Prompts an error if the parameter is invalid.

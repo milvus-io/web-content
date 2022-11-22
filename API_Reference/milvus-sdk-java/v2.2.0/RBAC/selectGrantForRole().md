@@ -21,7 +21,7 @@ Methods of `CreateRoleParam.Builder`:
 
 | Method | Description | Parameters |
 | --- | --- | --- |
-| `withRoleName(String roleName)` | String `roleName`. The role name cannot be empty or null. | `roleName`: The role name used to create the privilege. |
+| `withRoleName(String roleName)` | Sets the role name. The role name cannot be empty or null. | `roleName`: The role name used to create the privilege. |
 
 The `SelectGrantForRoleParam.Builder.build()` can throw the following exceptions:
 - `ParamException`: error if the parameter is invalid.
