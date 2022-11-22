@@ -51,7 +51,8 @@ addons:
   version: v1.13.0-eksbuild.1 # optional
 
 ```
-3. Run the following command to create an EKS cluster. The example in this topic uses `my-cluster` as the cluster name. You can replace it with your own value. See [Getting started with Amazon EKS](https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html) for more information.
+
+Run the following command to create an EKS cluster. The example in this topic uses `my-cluster` as the cluster name. You can replace it with your own value. See [Getting started with Amazon EKS](https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html) for more information.
 
 ```
 eksctl create cluster -f milvus_cluster.yaml
