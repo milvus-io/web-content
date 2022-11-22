@@ -33,7 +33,7 @@ By default Milvus runs on localhost in port 19530, so you can use default value 
 </code></pre></div>
 </div>
 <p>After connecting, we can communicate with Milvus in the following ways. If you are confused about the
-terminology, see <a class="reference external" href="https://milvus.io/docs/terms.md">Milvus Terminology</a> for explanations.</p>
+terminology, see <a class="reference external" href="https://milvus.io/docs/v1.1.1/terms.md">Milvus Terminology</a> for explanations.</p>
 </div>
 <div class="section" id="collection">
 <h2>Collection<a class="headerlink" href="#collection" title="Permalink to this headline">¶</a></h2>
@@ -56,9 +56,9 @@ and <code class="docutils literal notranslate"><span class="pre">metric_type</sp
 be equal to bit size of a vector.</p>
 </dd>
 <dt>index_file_size:</dt><dd><p>Milvus controls the size of data segment according to the <cite>index_file_size</cite>, you can refer to
-<a class="reference external" href="https://milvus.io/docs/storage_concept.md">Storage Concepts</a> for more information about segments and <cite>index_file_size</cite>.</p>
+<a class="reference external" href="https://milvus.io/docs/v1.1.1/storage_concept.md">Storage Concepts</a> for more information about segments and <cite>index_file_size</cite>.</p>
 </dd>
-<dt>metric_type:</dt><dd><p>Milvus compute distance between two vectors, you can refer to <a class="reference external" href="https://milvus.io/docs/metric.md">Distance Metrics</a>
+<dt>metric_type:</dt><dd><p>Milvus compute distance between two vectors, you can refer to <a class="reference external" href="https://milvus.io/docs/v1.1.1/metric.md">Distance Metrics</a>
 for more information.</p>
 </dd>
 </dl>
@@ -109,7 +109,7 @@ If you want to go further into Milvus with indexes, it's recommended to check ou
 by PyMilvus, you check out <a class="reference external" href="https://pymilvus.readthedocs.io/en/1.1/param.html">Index</a>
 chapter of the PyMilvus documentation.</p>
 <p>Further more, if you want to get a thorough view of indexes, check our official website for
-<a class="reference external" href="https://milvus.io/docs/index.md">Vector Index</a>.</p>
+<a class="reference external" href="https://milvus.io/docs/v1.1.1/index.md">Vector Index</a>.</p>
 </div>
 <div class="section" id="create-partition">
 <h2>Create Partition<a class="headerlink" href="#create-partition" title="Permalink to this headline">¶</a></h2>
@@ -160,7 +160,7 @@ insertion process will fail. And vice versa.</p>
 <h2>Flush<a class="headerlink" href="#flush" title="Permalink to this headline">¶</a></h2>
 <p>After successfully inserting 3 entities into Milvus, we can <code class="docutils literal notranslate"><span class="pre">Flush</span></code> data from memory to disk so that we can
 retrieve them. Milvus also performs an automatic flush with a fixed interval(configurable, default 1 second),
-see <a class="reference external" href="https://milvus.io/docs/flush_python.md">Data Flushing</a>.</p>
+see <a class="reference external" href="https://milvus.io/docs/v1.1.1/flush_python.md">Data Flushing</a>.</p>
 <p>You can flush multiple collections at one time, so be aware the parameter is a list.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><code>>>> client.flush([collection_name])
 Status(code=0, message='OK')
