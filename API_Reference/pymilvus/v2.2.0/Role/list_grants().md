@@ -14,7 +14,7 @@ None
 
 ## Return
 
-Returns a GrantInfo object comprising a list of GrantItem objects.
+Returns a `GrantInfo` object comprising a list of `GrantItem` objects.
 
 ## Example
 

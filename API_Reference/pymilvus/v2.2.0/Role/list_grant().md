@@ -19,7 +19,7 @@ For details on applicable objects and privileges, refer to [Users and Roles](mil
 
 ## Return
 
-Returns a GrantInfo object comprising a list of GrantItem objects.
+Returns a `GrantInfo` object comprising a list of `GrantItem` objects.
 
 ## Example
 
