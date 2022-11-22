@@ -75,7 +75,7 @@ milvus/milvus	3.2.4        	2.1.4             	Milvus is an open-source vector d
 ```
 
 ### Step 5. Migrate meta
-A major change in Milvus 2.2 is the metadata structure of segment indexes. Therefore, you need to use Helm to migrate the meta while upgrading Milvus from v2.1.x to v2.2.0. We provide you with a script so that you can safely migrate your metadata.
+A major change in Milvus 2.2 is the metadata structure of segment indexes. Therefore, you need to use Helm to migrate the meta while upgrading Milvus from v2.1.x to v2.2.0. We provide you with [a script](https://github.com/milvus-io/milvus/blob/master/deployments/migrate-meta/migrate.sh) so that you can safely migrate your metadata.
 
 This script only applies to Milvus installed on a K8s cluster. Roll back to the previous version with the rollback operation first if an error occurs during the process.
 
@@ -95,7 +95,7 @@ The following table lists the operations you can do for meta migration.
 
 #### 1. Migrate meta
 
-1. Download the migration script.
+1. Download the [migration script](https://github.com/milvus-io/milvus/blob/master/deployments/migrate-meta/migrate.sh).
 2. Stop the Milvus components. Any live session in the Milvus etcd can cause the migration to fail.
 3. Create a backup for Milvus meta.
 4. Migrate the Milvus meta.
