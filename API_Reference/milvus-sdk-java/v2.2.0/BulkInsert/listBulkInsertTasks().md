@@ -20,7 +20,7 @@ Methods of `ListBulkInsertTasksParam.Builder`:
 | Method | Description | Parameters | 
 | --- | --- | --- |
 | `withCollectionName(String collectionName)` | Sets the target collection name, list all tasks if the name is empty. | `collectionName`: The name of the target collection. |
-| `withLimit(Integer limit)` | "Specify limit count of returned tasks, list all tasks if the value is 0. <br> Default value is 0"	| `limit`: limit number |
+| `withLimit(Integer limit)` | Specifies limit count of returned tasks, list all tasks if the value is 0. <br> Default value is 0	| `limit`: limit number |
 | `build()` | Constructs a `GetBulkInsertStateParam` | object | N/A |
 
 The `ListBulkInsertTasksParam.Builder.build()` can throw the following exceptions:

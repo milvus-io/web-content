@@ -21,7 +21,7 @@ Methods of `BulkInsertParam.Builder`:
 | ---    | --- | --- |
 | `withCollectionName(String collectionName)` | Sets the collection name. Collection name cannot be empty or null. | `collectionName`: The name of the target collection. |
 | `withPartitionName(String partitionName)`| Sets the partition name. partition name can be null. |	`partitionName`: The name of the target partition. |
-| `withFiles(List<String> files)` | Sets the path of the files. The paths cannot be empty or null.<br> Each file path must be a relative path under the Milvus storage root path. | `files`: A file paths list. Currently, you can only input one row-based JSON file for each call. |
+| `withFiles(List<String> files)` | Sets the path of the files. The paths cannot be empty or null.<br> Each file path must be a relative path under the Milvus storage bucket. | `files`: A file paths list. Currently, you can only input one row-based JSON file for each call. |
 | `addFile(String file)` | Set a file path to be imported.The paths cannot be empty or null. | `file': A file path. |
 | `build()` | Constructs a `BulkInsertParam` object | 	N/A |
 
