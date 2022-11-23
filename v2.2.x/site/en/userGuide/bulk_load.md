@@ -48,7 +48,7 @@ Using local hard disk for storage is only available in Milvus Standalone.
 
 - To use MinIO for storage, upload data files to the bucket defined by `minio.bucketName` in the `milvus.yml` configuration file .
 
-- To use local hard disk for storage, copy and paste data files into the file directory defined by `localStorage.path` in the `milvus.yml` configuration file.
+- For local storage, copy the data files into a directory of local disk.
 
 
 ### 2. Insert entities
