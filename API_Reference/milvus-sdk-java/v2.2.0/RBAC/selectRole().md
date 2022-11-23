@@ -22,6 +22,7 @@ SelectRoleParam.Builder builder = SelectRoleParam.newBuilder();
 Methods of SelectRoleParam.Builder:
 
 | Method | Description | Parameters |
+| --- | --- | --- |
 | `withRoleName(String roleName)` | Sets the role name. <br> The role name cannot be empty or null. | `roleName`: Name of the role to which certain privileges are bound. |
 | `withIncludeUserInfo(boolean includeUserInfo)` | Sets the `includeUserInfo`. <br> The default value of `includeUserInfo` is false.	| `includeUserInfo`: Whether UserInfo is included in the returned results. | 
 
