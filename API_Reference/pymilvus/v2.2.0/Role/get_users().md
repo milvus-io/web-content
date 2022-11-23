@@ -14,7 +14,7 @@ None
 
 ## Return
 
-Returns a UserInfo object comprising a list of UserItem objects.
+Returns a `UserInfo` object comprising a list of `UserItem` objects.
 
 ## Example
 
