@@ -135,9 +135,6 @@ curl -X 'POST' \
                 <li><code>IVF_PQ</code> (IVF_PQ)</li>
                 <li><code>HNSW</code> (HNSW)</li>
                 <li><code>ANNOY</code> (ANNOY)</li>
-                <li><code>RHNSW_FLAT</code> (RHNSW_FLAT)</li>
-                <li><code>RHNSW_PQ</code> (RHNSW_PQ)</li>
-                <li><code>RHNSW_SQ</code> (RHNSW_SQ)</li>
                 <li><code>DISKANN<sup>*<sup></code> (DISK_ANN)</li>
             </ul>
             For binary vectors:
@@ -196,10 +193,6 @@ curl -X 'POST' \
                 <li><code>IVF_PQ</code> (IVF_PQ)</li>
                 <li><code>HNSW</code> (HNSW)</li>
                 <li><code>ANNOY</code> (ANNOY)</li>
-                <li><code>RHNSW_FLAT</code> (RHNSW_FLAT)</li>
-                <li><code>RHNSW_PQ</code> (RHNSW_PQ)</li>
-                <li><code>RHNSW_SQ</code> (RHNSW_SQ)</li>
-                <li><code>DISKANN<sup>*<sup></code> (DISK_ANN)</li>
             </ul>
             For binary vectors:
             <ul>
@@ -213,9 +206,6 @@ curl -X 'POST' \
 		<td>Building parameter(s) specific to the index.</td>
         <td>See <a href="index.md">In-memory Index</a> and <a href="disk_index.md">On-disk Index</a> for more information.</td>
 	</tr>
-    <tr>
-        <td colspan=3>* DISKANN has certain prerequisites to meet. For details, see <a href="disk_index.md">Disk Index</a>.</td>
-    </tr>
 	</tbody>
 </table>
 
@@ -236,13 +226,10 @@ curl -X 'POST' \
                 <li><code>NewIndexFlat</code> (FLAT)</li>
                 <li><code>NewIndexIvfFlat</code> (IVF_FLAT)</li>
                 <li><code>NewIndexIvfSQ8</code> (IVF_SQ8)</li>
-                <li><code>NewIndexIvfPQ</code> (RNSG)</li>
-                <li><code>NewIndexRNSG</code> (HNSW)</li>
+                <li><code>NewIndexIvfPQ</code> (IVF_PQ)</li>
+                <li><code>NewIndexRNSG</code> (RNSG)</li>
                 <li><code>NewIndexHNSW</code> (HNSW)</li>
                 <li><code>NewIndexANNOY</code> (ANNOY)</li>
-                <li><code>NewIndexRHNSWFlat</code> (RHNSW_FLAT)</li>
-                <li><code>NewIndexRHNSW_PQ</code> (RHNSW_PQ)</li>
-                <li><code>NewIndexRHNSW_SQ</code> (RHNSW_SQ)</li>
             </ul>
             For binary vectors:
             <ul>
@@ -297,9 +284,7 @@ curl -X 'POST' \
                 <li><code>IVF_PQ</code> (IVF_PQ)</li>
                 <li><code>HNSW</code> (HNSW)</li>
                 <li><code>ANNOY</code> (ANNOY)</li>
-                <li><code>RHNSW_FLAT</code> (RHNSW_FLAT)</li>
-                <li><code>RHNSW_PQ</code> (RHNSW_PQ)</li>
-                <li><code>RHNSW_SQ</code> (RHNSW_SQ)</li>
+                <li><code>DISKANN<sup>*<sup></code> (DISK_ANN)</li>
             </ul>
             For binary vectors:
             <ul>
@@ -313,6 +298,9 @@ curl -X 'POST' \
 		<td>Building parameter(s) specific to the index.</td>
         <td>See <a href="index.md">In-memory Index</a> for more information.</td>
 	</tr>
+    <tr>
+        <td colspan=3>* DISKANN has certain prerequisites to meet. For details, see <a href="disk_index.md">Disk Index</a>.</td>
+    </tr>
 	</tbody>
 </table>
 
@@ -377,9 +365,6 @@ curl -X 'POST' \
                 <li><code>IVF_PQ</code> (IVF_PQ)</li>
                 <li><code>HNSW</code> (HNSW)</li>
                 <li><code>ANNOY</code> (ANNOY)</li>
-                <li><code>RHNSW_FLAT</code> (RHNSW_FLAT)</li>
-                <li><code>RHNSW_PQ</code> (RHNSW_PQ)</li>
-                <li><code>RHNSW_SQ</code> (RHNSW_SQ)</li>
             </ul>
             For binary vectors:
             <ul>
