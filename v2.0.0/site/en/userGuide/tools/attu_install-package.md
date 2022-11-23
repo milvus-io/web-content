@@ -31,7 +31,7 @@ Download and run an installation package for Attu based on your operating system
         </tr>
         <tr>
             <td><code>macOS</code></td>
-            <td><a href="/zilliztech/attu/releases/download/v2.0.1/attu-2.0.1.dmg">macOS installation package</a></td>
+            <td><a href="https://github.com/zilliztech/attu/releases/download/v2.0.1/attu-2.0.1.dmg">macOS installation package</a></td>
         </tr>
         <tr>
             <td><code>Windows</code></td>
