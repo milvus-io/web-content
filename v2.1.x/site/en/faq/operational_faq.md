@@ -81,7 +81,7 @@ See [CPU’s support for SIMD Instruction Set](prerequisite-docker.md).
 
 Yes. You can install Milvus on Windows either by compiling from source code or from a binary package. 
 
-See [Run Milvus on Windows](https://milvus.io/blog/2021-11-19-run-milvus-2.0-on-windows.md?page=1#all) to learn how to install Milvus on Windows.
+See [Run Milvus on Windows](https://milvus.io/blog/2021-11-19-run-milvus-2.0-on-windows.md) to learn how to install Milvus on Windows.
 
 #### I got an error when installing pymilvus on Windows. What shall I do?
 
