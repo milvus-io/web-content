@@ -38,7 +38,7 @@ Here we present three examples that illustrate how bitsets are used in Milvus, w
 - Entities whose `primary_key`s are [7, 8] are deleted when the timestamp ``ts`` equals 300.  
 - Only entities, whose `primary_key`s are [1, 3, 5, 7], satisfy the conditions of attribute filtering.
 
-![Order of DML events](../../../assets/bitset_0.jpg "Order of DML events.")
+![Order of DML events](../../../assets/bitset_0.svg "Order of DML events.")
 
 ### Case one
 
