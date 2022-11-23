@@ -14,11 +14,11 @@ Dropping a collection irreversibly deletes all data within it.
 
 
 <div class="multipleCode">
-  <a href="?python">Python </a>
-  <a href="?java">Java</a>
-  <a href="?go">GO</a>
-  <a href="?javascript">Node.js</a>
-  <a href="?shell">CLI</a>
+  <a href="#python">Python </a>
+  <a href="#java">Java</a>
+  <a href="#go">GO</a>
+  <a href="#javascript">Node.js</a>
+  <a href="#shell">CLI</a>
 </div>
 
 

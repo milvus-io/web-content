@@ -18,11 +18,11 @@ The following example shows how to perform a hybrid search on the basis of a reg
 All search and query operations within Milvus are executed in memory. Load the collection to memory before conducting a vector search.
 
 <div class="multipleCode">
-  <a href="?python">Python </a>
-  <a href="?java">Java</a>
-  <a href="?go">GO</a>
-  <a href="?javascript">Node.js</a>
-  <a href="?shell">CLI</a>
+  <a href="#python">Python </a>
+  <a href="#java">Java</a>
+  <a href="#go">GO</a>
+  <a href="#javascript">Node.js</a>
+  <a href="#shell">CLI</a>
 </div>
 
 
@@ -67,11 +67,11 @@ load -c book
 By specifying the boolean expression, you can filter the scalar field of the entities during the vector search. The following example limits the scale of search to the vectors within a specified `word_count` value range.
 
 <div class="multipleCode">
-  <a href="?python">Python </a>
-  <a href="?java">Java</a>
-  <a href="?go">GO</a>
-  <a href="?javascript">Node.js</a>
-  <a href="?shell">CLI</a>
+  <a href="#python">Python </a>
+  <a href="#java">Java</a>
+  <a href="#go">GO</a>
+  <a href="#javascript">Node.js</a>
+  <a href="#shell">CLI</a>
 </div>
 
 
@@ -415,11 +415,11 @@ Travel Timestamp(Specify a timestamp in a search to get results based on a data 
 Check the returned results.
 
 <div class="multipleCode">
-  <a href="?python">Python </a>
-  <a href="?java">Java</a>
-  <a href="?go">GO</a>
-  <a href="?javascript">Node.js</a>
-  <a href="?shell">CLI</a>
+  <a href="#python">Python </a>
+  <a href="#java">Java</a>
+  <a href="#go">GO</a>
+  <a href="#javascript">Node.js</a>
+  <a href="#shell">CLI</a>
 </div>
 
 

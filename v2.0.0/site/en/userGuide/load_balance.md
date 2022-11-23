@@ -17,11 +17,11 @@ If automatic load balance is disabled, you can still balance the load manually.
 Get the `segmentID` of the sealed segment that you expect to transfer and the `nodeID` of the query node that you expect to transfer the segment to.
 
 <div class="multipleCode">
-  <a href="?python">Python </a>
-  <a href="?java">Java</a>
-  <a href="?go">GO</a>
-  <a href="?javascript">Node.js</a>
-  <a href="?shell">CLI</a>
+  <a href="#python">Python </a>
+  <a href="#java">Java</a>
+  <a href="#go">GO</a>
+  <a href="#javascript">Node.js</a>
+  <a href="#shell">CLI</a>
 </div>
 
 
@@ -118,11 +118,11 @@ show query_segment -c book
 Transfer the sealed segment(s) with the `segmentID` and the `nodeID` of the current query node and new query node(s).
 
 <div class="multipleCode">
-  <a href="?python">Python </a>
-  <a href="?java">Java</a>
-  <a href="?go">GO</a>
-  <a href="?javascript">Node.js</a>
-  <a href="?shell">CLI</a>
+  <a href="#python">Python </a>
+  <a href="#java">Java</a>
+  <a href="#go">GO</a>
+  <a href="#javascript">Node.js</a>
+  <a href="#shell">CLI</a>
 </div>
 
 

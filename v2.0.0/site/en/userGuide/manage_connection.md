@@ -20,11 +20,11 @@ Below example connects to a Milvus server with host as `localhost` and port as `
 Construct a Milvus connection. Ensure to connect to Milvus server before any operations.
 
 <div class="multipleCode">
-  <a href="?python">Python </a>
-  <a href="?java">Java</a>
-  <a href="?go">GO</a>
-  <a href="?javascript">Node.js</a>
-  <a href="?shell">CLI</a>
+  <a href="#python">Python </a>
+  <a href="#java">Java</a>
+  <a href="#go">GO</a>
+  <a href="#javascript">Node.js</a>
+  <a href="#shell">CLI</a>
 </div>
 
 
@@ -193,11 +193,11 @@ A Milvus connection created by the passed parameters.
 Disconnect from a Milvus server.
 
 <div class="multipleCode">
-  <a href="?python">Python </a>
-  <a href="?java">Java</a>
-  <a href="?go">GO</a>
-  <a href="?javascript">Node.js</a>
-  <a href="?shell">CLI</a>
+  <a href="#python">Python </a>
+  <a href="#java">Java</a>
+  <a href="#go">GO</a>
+  <a href="#javascript">Node.js</a>
+  <a href="#shell">CLI</a>
 </div>
 
 

@@ -28,11 +28,11 @@ Prepare the boolean expression that filters the entities to delete. See [Boolean
 The following example filters data with primary key values of `0` and `1`.
 
 <div class="multipleCode">
-  <a href="?python">Python </a>
-  <a href="?java">Java</a>
-  <a href="?go">GO</a>
-  <a href="?javascript">Node.js</a>
-  <a href="?shell">CLI</a>
+  <a href="#python">Python </a>
+  <a href="#java">Java</a>
+  <a href="#go">GO</a>
+  <a href="#javascript">Node.js</a>
+  <a href="#shell">CLI</a>
 </div>
 
 
@@ -78,11 +78,11 @@ The expression to specify entities to be deleted： book_id in [0,1]
 Delete the entities with the boolean expression you created. Milvus returns the ID list of the deleted entities.
 
 <div class="multipleCode">
-  <a href="?python">Python </a>
-  <a href="?java">Java</a>
-  <a href="?go">GO</a>
-  <a href="?javascript">Node.js</a>
-  <a href="?shell">CLI</a>
+  <a href="#python">Python </a>
+  <a href="#java">Java</a>
+  <a href="#go">GO</a>
+  <a href="#javascript">Node.js</a>
+  <a href="#shell">CLI</a>
 </div>
 
 
