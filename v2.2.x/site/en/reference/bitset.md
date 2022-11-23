@@ -23,7 +23,7 @@ As bitsets contain only two possible values, they are perfect for storing result
 
 ### Data deletion
 
-Bitsets serve as a compact way to store information about whether a row in a segment is deleted. Deleted entities are marked with `1` in the corresponding bitset, which [will not be computed](https://milvus.io/blog/deleting-data-in-milvus.md?page=6#all) during a search or query.
+Bitsets serve as a compact way to store information about whether a row in a segment is deleted. Deleted entities are marked with `1` in the corresponding bitset, which [will not be computed](https://milvus.io/blog/deleting-data-in-milvus.md) during a search or query.
 
 ### Query with Time Travel
 
