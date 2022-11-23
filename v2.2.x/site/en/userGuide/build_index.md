@@ -25,12 +25,12 @@ The following example builds a 1024-cluster IVF_FLAT index with Euclidean distan
 Prepare the index parameters (If you expect to build indexes for scalar fields, no index-building parameter is required, and the default index type is a dictionary tree).
 
 <div class="multipleCode">
-  <a href="?python">Python </a>
-  <a href="?java">Java</a>
-  <a href="?go">GO</a>
-  <a href="?javascript">Node.js</a>
-  <a href="?shell">CLI</a>
-  <a href="?curl">Curl</a>
+  <a href="#python">Python </a>
+  <a href="#java">Java</a>
+  <a href="#go">GO</a>
+  <a href="#javascript">Node.js</a>
+  <a href="#shell">CLI</a>
+  <a href="#curl">Curl</a>
 </div>
 
 
@@ -401,12 +401,12 @@ curl -X 'POST' \
 Build the index by specifying the vector field name and index parameters.
 
 <div class="multipleCode">
-  <a href="?python">Python </a>
-  <a href="?java">Java</a>
-  <a href="?go">GO</a>
-  <a href="?javascript">Node.js</a>
-  <a href="?shell">CLI</a>
-  <a href="?curl">Curl</a>
+  <a href="#python">Python </a>
+  <a href="#java">Java</a>
+  <a href="#go">GO</a>
+  <a href="#javascript">Node.js</a>
+  <a href="#shell">CLI</a>
+  <a href="#curl">Curl</a>
 </div>
 
 

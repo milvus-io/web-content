@@ -18,12 +18,12 @@ Milvus 2.1 allows users to load a collection as multiple replicas to utilize the
 </div>
 
 <div class="multipleCode">
-  <a href="?python">Python </a>
-  <a href="?java">Java</a>
-  <a href="?go">GO</a>
-  <a href="?javascript">Node.js</a>
-  <a href="?shell">CLI</a>
-  <a href="?curl">Curl</a>
+  <a href="#python">Python </a>
+  <a href="#java">Java</a>
+  <a href="#go">GO</a>
+  <a href="#javascript">Node.js</a>
+  <a href="#shell">CLI</a>
+  <a href="#curl">Curl</a>
 </div>
 
 
