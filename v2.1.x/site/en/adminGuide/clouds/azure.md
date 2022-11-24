@@ -171,6 +171,6 @@ helm install my-release ./milvus --set service.type=LoadBalancer --set minio.per
 ## What's next
 
 If you want to learn how to deploy Milvus on other clouds:
-- [Deploy a Milvus Cluster on EC2](https://milvus.io/docs/v2.0.0/aws.md)
-- [Deploy a Milvus Cluster on EKS](https://milvus.io/docs/v2.0.0/eks.md)
-- [Deploy a Milvus Cluster on GCP](https://milvus.io/docs/v2.0.0/gcp.md)
+- [Deploy a Milvus Cluster on EC2](aws.md)
+- [Deploy a Milvus Cluster on EKS](eks.md)
+- [Deploy a Milvus Cluster on GCP](gcp.md)
