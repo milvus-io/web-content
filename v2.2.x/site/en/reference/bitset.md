@@ -5,13 +5,13 @@ summary: Learn about bitsets in Milvus.
 
 # Bitset
 
-This topic introduces the bitset mechanism that helps enable key functionalities like [Time Travel](https://milvus.io/docs/v2.0.0/timetravel_ref.md), attribute filtering, and [delete operations](https://milvus.io/blog/2022-02-07-how-milvus-deletes-streaming-data-in-distributed-cluster.md) in Milvus.
+This topic introduces the bitset mechanism that helps enable key functionalities like [Time Travel](timetravel_ref.md), attribute filtering, and [delete operations](https://milvus.io/blog/2022-02-07-how-milvus-deletes-streaming-data-in-distributed-cluster.md) in Milvus.
 
 ## Overview
 
 A bitset is a set of bits. Bits are elements with only two possible values, most typically `0` and `1`, or boolean values `true` and `false`. In Milvus, bitsets are arrays of bit numbers `0` and `1` that can be used to represent certain data compactly and efficiently as opposed to in ints, floats, or chars. A bit number is `0` by default and is only set to `1` if it meets certain requirements.
 
-Operations on bitsets are conducted with [boolean logic](https://milvus.io/docs/v2.0.0/boolean.md), under which an output value is either valid or invalid, also denoted by `1` and `0` respectively. For example, [logical operator](https://milvus.io/docs/v2.1.x/boolean.md#Logical-operators) `AND` can be used to compare two bitsets based on items in the same index positions and produces a new bitset with the results. If two items in a position are the same, then in the new bitset `1` will be written in that position; `0` if they are different.
+Operations on bitsets are conducted with [boolean logic](boolean.md), under which an output value is either valid or invalid, also denoted by `1` and `0` respectively. For example, [logical operator](https://milvus.io/docs/v2.1.x/boolean.md#Logical-operators) `AND` can be used to compare two bitsets based on items in the same index positions and produces a new bitset with the results. If two items in a position are the same, then in the new bitset `1` will be written in that position; `0` if they are different.
 
 ## Implementation
 
