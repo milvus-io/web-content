@@ -16,7 +16,7 @@ To accommodate the variety of requirements, Milvus offers as much as four deploy
 
 1. [Build from source code](https://github.com/milvus-io/milvus#to-start-developing-milvus)
 2. Install with Docker Compose 
-- [standalone](https://milvus.io/docs/v2.2.xinstall_standalone-docker.md)
+- [standalone](https://milvus.io/docs/v2.2.x/install_standalone-docker.md)
 - [cluster](https://milvus.io/docs/v2.2.x/install_cluster-docker.md)
 3. Install on Kubernetes 
 - [standalone](https://milvus.io/docs/v2.2.x/install_standalone-helm.md)
