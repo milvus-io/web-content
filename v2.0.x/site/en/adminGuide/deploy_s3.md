@@ -88,5 +88,5 @@ helm install <your_release_name> milvus/milvus --set cluster.enabled=true --set 
 ## What's next
 
 If you want to learn how to use storage from other cloud providers:
-- [Use Google Cloud Storage](https://milvus.io/docs/v2.0.0/gcp.md#Use-Google-Cloud-Storage)
-- [Use Azure Blob Storage](https://milvus.io/docs/v2.0.0/azure.md#Use-Azure-Blob-Storage)
+- [Use Google Cloud Storage](gcp.md#Use-Google-Cloud-Storage)
+- [Use Azure Blob Storage](azure.md#Use-Azure-Blob-Storage)
