@@ -17,7 +17,7 @@ Milvus 2.2.0 introduces many new features including support for Disk-based appro
 
 <h3 id="v2.2.0">Breaking changes</h3> 
 
-Since metadata storage is refined and API usage is normalize, Milvus 2.2 is not fully compatible with earlier releases. Read [this guide](upgrade_milvus_cluster-helm.md) to learn how to safely upgrade from Milvus 2.1.x to 2.2.0.
+Since metadata storage is refined and API usage is normalized, Milvus 2.2 is *not* fully compatible with earlier releases. Read [this guide](upgrade_milvus_cluster-helm.md) to learn how to safely upgrade from Milvus 2.1.x to 2.2.0.
 
 <h3 id="v2.2.0">Features</h3> 
 
