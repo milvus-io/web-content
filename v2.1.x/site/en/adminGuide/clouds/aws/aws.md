@@ -556,7 +556,7 @@ You can stop all nodes after you do not need a Milvus cluster any longer.
 ## What's next
 
 If you want to learn how to deploy Milvus on other clouds:
-- [Deploy a Milvus Cluster on EKS](https://milvus.io/docs/v2.0.0/eks.md)
-- [Deploy Milvus Cluster on GCP with Kubernetes](https://milvus.io/docs/v2.0.0/gcp.md)
-- [Guide to Deploying Milvus on Microsoft Azure With Kubernetes](https://milvus.io/docs/v2.0.0/azure.md)
+- [Deploy a Milvus Cluster on EKS](eks.md)
+- [Deploy Milvus Cluster on GCP with Kubernetes](gcp.md)
+- [Guide to Deploying Milvus on Microsoft Azure With Kubernetes](azure.md)
 
