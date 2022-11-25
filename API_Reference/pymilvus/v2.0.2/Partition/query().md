@@ -36,7 +36,7 @@ A list that contains all results.
 ```python
 from pymilvus import Partition
 partition = Partition("novel")
-res = collection.query(
+res = partition.query(
   expr = "book_id in [2,4,6,8]", 
   output_fields = ["book_id", "book_intro"],
   consistency_level="Strong"
