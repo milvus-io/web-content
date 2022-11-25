@@ -34,7 +34,7 @@ Milvus has been used in hundreds of organizations and institutions worldwide mai
 - Text search, recommender system, interactive question answering system, and other text search fields.
 - Drug discovery, genetic screening, and other biomedical fields.
 
-See [Scenarios](https://www.milvus.io/scenarios/) for more information. 
+See [Scenarios](https://milvus.io/bootcamp) for more information. 
 
 ## Key features
 
