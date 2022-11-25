@@ -87,7 +87,7 @@ Prepare the parameters that suit your search scenario. The following example def
 
 
 ```python
-search_params = {"metric_type": "L2", "params": {"nprobe": 10}}
+search_params = {"metric_type": "L2", "params": {"nprobe": 10}, "offset": 5}
 ```
 
 ```javascript
@@ -375,7 +375,6 @@ results = collection.search(
 	data=[[0.1, 0.2]], 
 	anns_field="book_intro", 
 	param=search_params,
-	offset=0, 
 	limit=10, 
 	expr=None,
 	consistency_level="Strong"
