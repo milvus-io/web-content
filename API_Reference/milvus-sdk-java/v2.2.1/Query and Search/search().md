@@ -32,6 +32,7 @@ Methods of `SearchParam.Builder`:
 | `withTopK(Integer topK)`                                     | Sets the topK value of ANN search. The available range is [1, 16384]. | `topK`: The topK value.                                          |
 | `withVectors(List<?> vectors)`                               | Sets the target vectors. Up to 16384 vectors are allowed.    | `vectors`:  <li> If target field type is float vector, `List< List<Float>>` is required.</li> <li>If target field type is binary vector, `List<ByteBuffer>` is required.</li> |
 | `withRoundDecimal(Integer decimal)`                          | Specifies the decimal place for returned distance. The available range is [-1, 6]. The default value is `-1`, with which the method returns all digits. | `decimal`: The number of digits reserved after the decimal point. |
+|  `withParams(String params)` | Specifies the search parameters in the JSON format. Valid keys are as follows: <br><ul><li>Special index-related parameters, such as `nprobe`, `ef`, `search_k`.</li><li>Metric type with `metric_type` as the key and `L2` or `IP` as the value.</li><li>The offset for pagination with `offset` as the key and an integer as the value.</li><li>The limit for pagination with `limit` as the key and an integer as the value.</li></ul> |
 | `build()`                                                    | Constructs a `SearchParam` object.                           | N/A                                                          |
 
 The `SearchParam.Builder.build()` can throw the following exceptions:
@@ -107,6 +108,7 @@ SearchParam param = SearchParam.newBuilder()
         .withVectors(targetVectors)
         .withVectorFieldName("field1")
         .withConsistencyLevel(ConsistencyLevelEnum.EVENTUALLY)
+        .withParams("{\"nprobe\":10,\"offset\":2, \"limit\":3}")
         .build();
 R<SearchResults> response = client.search(param)
 if (response.getStatus() != R.Status.Success.getCode()) {

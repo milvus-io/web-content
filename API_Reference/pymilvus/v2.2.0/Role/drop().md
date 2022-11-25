@@ -1,4 +1,4 @@
-# create()
+# drop()
 
 This method deletes a role. It succeeds if the role name exists, or fails if the role name does not exist.
 
