@@ -92,6 +92,8 @@ The following table lists the operations you can do for meta migration.
 | `m`          | The meta migration image tag.                             | `harbor.milvus.io/milvus/meta-migration:20221025-e54b6181b`       | False                   |
 | `o`          | The meta migration operation.                             | `migrate`                      | False                   |
 | `d`          | Whether to delete migration pod after the migration is completed.          | `false`                        | False                   |
+| `c`          | The storage class for meta migration pvc.                 | `default storage class`          | False                   |
+| `e`          | The etcd enpoint used by milvus.              | `etcd svc installed with milvus` | False                   |
 
 #### 1. Migrate meta
 
