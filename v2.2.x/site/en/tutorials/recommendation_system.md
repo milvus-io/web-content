@@ -6,12 +6,13 @@ summary: Build a personalized recommender system with Milvus.
 # Recommender System 
 
 This tutorial demonstrates how to use Milvus, the open-source vector database, to build a recommendation system.
-- [Open Jupyter notebook](https://github.com/milvus-io/bootcamp/blob/master/solutions/recommender_system/recommender_system.ipynb)
-- [Quick deploy](https://github.com/milvus-io/bootcamp/blob/master/solutions/recommender_system/quick_deploy)
+- [Open Jupyter notebook](https://github.com/milvus-io/bootcamp/blob/master/solutions/nlp/recommender_system/recommender_system.ipynb)
+- [Quick deploy](https://github.com/milvus-io/bootcamp/blob/master/solutions/nlp/recommender_system/quick_deploy)
 
-The ML Model and third-party software used include:
+The ML model and third-party software used include:
 - PaddlePaddle
 - Redis or MySQL
+- [Towhee](https://towhee.io/)
 
 </br>
 

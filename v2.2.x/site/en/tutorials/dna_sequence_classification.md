@@ -6,11 +6,13 @@ summary: Build a DNA sequence classification system with Milvus.
 # DNA Sequence Classification 
 
 This tutorial demonstrates how to use Milvus, the open-source vector database, to build a DNA sequence classification model.
-- [Open Jupyter notebook](https://github.com/milvus-io/bootcamp/blob/master/solutions/dna_sequence_classification/dna_sequence_classification.ipynb)
-- [Quick deploy](https://github.com/milvus-io/bootcamp/blob/master/solutions/text_search_engine/quick_deploy)
+- [Open Jupyter notebook](https://github.com/milvus-io/bootcamp/blob/master/solutions/medical/dna_sequence_classification/dna_sequence_classification.ipynb)
+- [Quick deploy](https://github.com/milvus-io/bootcamp/blob/master/solutions/medical/dna_sequence_classification/quick_deploy)
+
 The ML model and third-party software used include:
 - CountVectorizer
 - MySQL
+- [Towhee](https://towhee.io/)
 
 <br/>
 
