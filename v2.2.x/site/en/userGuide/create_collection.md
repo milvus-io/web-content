@@ -478,7 +478,7 @@ Output:
         <tr>
             <td><code>ShardsNum</code></td>
             <td>Number of the shards for the collection to create.</td>
-            <td>[1,256]</td>
+            <td>[1,64]</td>
         </tr>
 	</tbody>
 </table>
