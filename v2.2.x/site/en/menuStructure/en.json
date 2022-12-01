@@ -1089,6 +1089,14 @@
       "order": 8
     },
     {
+      "id": "image_deduplication_system.md",
+      "title": "Image Deduplication System",
+      "label1": "tutorials",
+      "label2": "",
+      "label3": "",
+      "order": 9
+    },
+    {
       "id": "faq",
       "title": "FAQs",
       "label1": "",
