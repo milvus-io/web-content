@@ -20,7 +20,7 @@ Methods of `DescribeIndexParam.Builder`:
 | Method                               | Description                                                  | Parameters                                |
 | ------------------------------------ | ------------------------------------------------------------ | ----------------------------------------- |
 | `withCollectionName(collectionName)` | Sets the collection name. The collection name cannot be empty or null. | `collectionName`: The name of the collection whose index information needs to be checked. |
-| `withIndexName(String indexName)`    | Sets the target index name. The index name cannot be empty or null. If no index name is specified, the default index name `_default_idx` is used. | `indexName`: Name of the index whose information needs to be checked.           |
+| `withIndexName(String indexName)`    | Sets the target index name. The index name cannot be empty or null. If no index name is specified, the default index name is an empty string. | `indexName`: Name of the index whose information needs to be checked.           |
 | `build()`                            | Constructs a `DescribeIndexParam` object.                      | N/A                                       |
 
 The `DescribeIndexParam.Builder.build()` could throw the following exceptions:
