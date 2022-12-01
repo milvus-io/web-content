@@ -20,7 +20,7 @@ Methods of `GetIndexStateParam.Builder`:
 | Method                             | Description                                                  | Parameters                             |
 | ---------------------------------- | ------------------------------------------------------------ | -------------------------------------- |
 | `withCollectionName(collectionName)` | Sets the collection name. The collection name cannot be empty or null. | `collectionName`: The name of the collection whose index building state needs to be checked. |
-| `withIndexName(String indexName)`    | Sets the target index name. The index name cannot be empty or null. If no index name is specified, the default index name `_default_idx` is used. | `indexName`: The name of the index whose building state needs to be checked.           |
+| `withIndexName(String indexName)`    | Sets the target index name. The index name cannot be empty or null. If no index name is specified, the default index name is an empty string. | `indexName`: The name of the index whose building state needs to be checked.           |
 | `build()`                            | Constructs a `GetIndexStateParam` object.                        |                           N/A             |
 
 The `GetIndexStateParam.Builder.build()` can throw the following exceptions:
