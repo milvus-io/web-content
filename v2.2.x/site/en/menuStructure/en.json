@@ -1081,6 +1081,14 @@
       "order": 7
     },
     {
+      "id": "text_image_search.md",
+      "title": "Text to Image Search Engine",
+      "label1": "tutorials",
+      "label2": "",
+      "label3": "",
+      "order": 8
+    },
+    {
       "id": "faq",
       "title": "FAQs",
       "label1": "",
