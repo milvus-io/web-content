@@ -5,7 +5,7 @@ This method gets the index information in a collection.
 ## Invocation
 
 ```javascript
-new milvusClient(MILUVS_ADDRESS).collectionManager.describeIndex(
+new milvusClient(MILUVS_ADDRESS).indexManager.describeIndex(
   DescribeIndexReq
 );
 ```
