@@ -11,7 +11,7 @@ None.
 
 # Example
 ```javascript
-milvusClient.closeConnection();
+new milvusClient(MILUVS_ADDRESS).closeConnection();
 ```
 
 # Return
