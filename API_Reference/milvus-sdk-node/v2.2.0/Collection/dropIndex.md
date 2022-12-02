@@ -22,7 +22,7 @@ new milvusClient(MILUVS_ADDRESS).indexManager.dropIndex(DropIndexReq);
 ## Example
 
 ```javascript
-new milvusClient(MILUVS_ADDRESS).collectionManager.dropIndex({
+new milvusClient(MILUVS_ADDRESS).indexManager.dropIndex({
   collection_name: "my_collection",
 });
 ```
