@@ -5,7 +5,7 @@ This method checks if the index building is completed or not.(Deprecated since 2
 ## Invocation
 
 ```javascript
-new milvusClient(MILUVS_ADDRESS).collectionManager.getIndexState(
+new milvusClient(MILUVS_ADDRESS).indexManager.getIndexState(
   GetIndexStateReq
 );
 ```
@@ -24,7 +24,7 @@ new milvusClient(MILUVS_ADDRESS).collectionManager.getIndexState(
 ## Example
 
 ```javascript
-new milvusClient(MILUVS_ADDRESS).collectionManager.getIndexState({
+new milvusClient(MILUVS_ADDRESS).indexManager.getIndexState({
   collection_name: "my_collection",
 });
 ```
