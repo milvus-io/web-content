@@ -291,7 +291,7 @@
       "order": 0
     },
     {
-      "id": "bulk_load.md",
+      "id": "bulk_insert.md",
       "title": "Insert Entities from Files",
       "label1": "userguide",
       "label2": "manage_data",

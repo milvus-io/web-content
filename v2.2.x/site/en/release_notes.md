@@ -22,7 +22,7 @@ Since metadata storage is refined and API usage is normalized, Milvus 2.2 is *no
 <h3 id="v2.2.0">Features</h3> 
 
 - Support for bulk insertion of entities from files
-Milvus now offers a new set of bulk insertion APIs to make data insertion more efficient. You can now upload entities in a Json file directly to Milvus. See [Insert Entities from Files](bulk_load.md) for details.
+Milvus now offers a new set of bulk insertion APIs to make data insertion more efficient. You can now upload entities in a Json file directly to Milvus. See [Insert Entities from Files](bulk_insert.md) for details.
 
 - Query result pagination 
 To avoid massive search and query results returned in a single RPC, Milvus now supports configuring offset and filtering results with keywords in searches and queries. See [Search](search.md) and [Query](query.md) for details.
