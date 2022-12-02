@@ -5,7 +5,7 @@ This synchronous method is the same as the asynchronous [`flush()` method](API_R
 ## Invocation
 
 ```javascript
-new milvusClient(MILUVS_ADDRESS).collectionManager.flushSync(FlushReq);
+new milvusClient(MILUVS_ADDRESS).dataManager.flushSync(FlushReq);
 ```
 
 ## Parameters
