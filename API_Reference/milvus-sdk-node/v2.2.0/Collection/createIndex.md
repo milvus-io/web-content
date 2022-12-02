@@ -5,7 +5,7 @@ This method creates an index on a vector field. Note that the index building pro
 ## Invocation
 
 ```javascript
-new milvusClient(MILUVS_ADDRESS).collectionManager.createIndex(CreateIndexReq);
+new milvusClient(MILUVS_ADDRESS).indexManager.createIndex(CreateIndexReq);
 ```
 
 ## Parameters
