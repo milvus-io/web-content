@@ -72,6 +72,8 @@ entities = [
     [[random.random() for _ in range(8)] for _ in range(3000)],  # field embeddings
 ]
 insert_result = hello_milvus.insert(entities)
+# After final entity is inserted, it is best to call flush to have no growing segments left in memory
+hello_milvus.flush()  
 ```
 
 - Builds indexes on the entities:
