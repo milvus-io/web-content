@@ -23,11 +23,11 @@ Milvus 为所有数据插入和删除操作维护一条时间线。它允许用�
 如果你在现有 Milvus 实例中使用自己的数据集，则可以继续下一步。
 
 <div class="multipleCode">
-  <a href="?python">Python </a>
-  <a href="?java">Java</a>
-  <a href="?go">GO</a>
-  <a href="?javascript">Node.js</a>
-  <a href="?shell">CLI</a>
+  <a href="#python">Python </a>
+  <a href="#java">Java</a>
+  <a href="#go">GO</a>
+  <a href="#javascript">Node.js</a>
+  <a href="#shell">CLI</a>
 </div>
 
 
@@ -84,11 +84,11 @@ create collection -c test_time_travel -f pk:INT64:primary_field -f example_field
 插入随机数据以模拟原始数据（Milvus CLI 示例使用包含类似数据的预构建远程 CSV 文件）。
 
 <div class="multipleCode">
-  <a href="?python">Python </a>
-  <a href="?java">Java</a>
-  <a href="?go">GO</a>
-  <a href="?javascript">Node.js</a>
-  <a href="?shell">CLI</a>
+  <a href="#python">Python </a>
+  <a href="#java">Java</a>
+  <a href="#go">GO</a>
+  <a href="#javascript">Node.js</a>
+  <a href="#shell">CLI</a>
 </div>
 
 
@@ -173,11 +173,11 @@ Milvus 采用物理时钟和逻辑计数器的组合作为混合时间戳。 64 
 插入第二批数据以模拟脏数据，其中追加一条 primary key 值为 `19`，向量值为 `[1.0,1.0]` 的数据作为后续步骤搜索的目标数据（Milvus CLI 示例使用包含类似数据的预构建远程 CSV 文件）。
 
 <div class="multipleCode">
-  <a href="?python">Python </a>
-  <a href="?java">Java</a>
-  <a href="?go">GO</a>
-  <a href="?javascript">Node.js</a>
-  <a href="?shell">CLI</a>
+  <a href="#python">Python </a>
+  <a href="#java">Java</a>
+  <a href="#go">GO</a>
+  <a href="#javascript">Node.js</a>
+  <a href="#shell">CLI</a>
 </div>
 
 
@@ -239,11 +239,11 @@ Milvus timestamp:           430390435713122310
 加载 collection 并使用第一批数据的时间戳搜索目标数据。指定时间戳后，Milvus 只会在时间戳指示的时间点检索数据视图。
 
 <div class="multipleCode">
-  <a href="?python">Python </a>
-  <a href="?java">Java</a>
-  <a href="?go">GO</a>
-  <a href="?javascript">Node.js</a>
-  <a href="?shell">CLI</a>
+  <a href="#python">Python </a>
+  <a href="#java">Java</a>
+  <a href="#go">GO</a>
+  <a href="#javascript">Node.js</a>
+  <a href="#shell">CLI</a>
 </div>
 
 
@@ -356,11 +356,11 @@ No.1:
 如果不指定时间戳或指定第二批数据的时间戳，Milvus 将返回两个批次的结果。
 
 <div class="multipleCode">
-  <a href="?python">Python </a>
-  <a href="?java">Java</a>
-  <a href="?go">GO</a>
-  <a href="?javascript">Node.js</a>
-  <a href="?shell">CLI</a>
+  <a href="#python">Python </a>
+  <a href="#java">Java</a>
+  <a href="#go">GO</a>
+  <a href="#javascript">Node.js</a>
+  <a href="#shell">CLI</a>
 </div>
 
 

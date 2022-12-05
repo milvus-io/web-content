@@ -20,11 +20,11 @@ summary: Learn how to query vectors in Milvus.
 Milvus 中的所有搜索和结构化匹配操作都在内存中执行。在执行向量结构化匹配之前将 collection 加载到内存中。
 
 <div class="multipleCode">
-  <a href="?python">Python </a>
-  <a href="?java">Java</a>
-  <a href="?go">GO</a>
-  <a href="?javascript">Node.js</a>
-  <a href="?shell">CLI</a>
+  <a href="#python">Python </a>
+  <a href="#java">Java</a>
+  <a href="#go">GO</a>
+  <a href="#javascript">Node.js</a>
+  <a href="#shell">CLI</a>
 </div>
 
 
@@ -69,11 +69,11 @@ load -c book
 Milvus 支持专门为搜索或结构化匹配设置一致性级别（目前仅在 PyMilvus 上）。在创建 collection 时，搜索或结构化匹配请求中设置的一致性级别将覆盖设置的一致性级别。在本例中，搜索请求的一致性级别设置为 "Strong"，这意味着 Milvus 将在搜索或结构化匹配请求出现的确切时间点读取最新的数据视图。如果在搜索或结构化匹配期间不指定一致性级别，Milvus 将采用创建 collection 的原始一致性级别。
 
 <div class="multipleCode">
-  <a href="?python">Python </a>
-  <a href="?java">Java</a>
-  <a href="?go">GO</a>
-  <a href="?javascript">Node.js</a>
-  <a href="?shell">CLI</a>
+  <a href="#python">Python </a>
+  <a href="#java">Java</a>
+  <a href="#go">GO</a>
+  <a href="#javascript">Node.js</a>
+  <a href="#shell">CLI</a>
 </div>
 
 
@@ -271,11 +271,11 @@ timeout []:
 查看返回的结果。
 
 <div class="multipleCode">
-  <a href="?python">Python </a>
-  <a href="?java">Java</a>
-  <a href="?go">GO</a>
-  <a href="?javascript">Node.js</a>
-  <a href="?shell">CLI</a>
+  <a href="#python">Python </a>
+  <a href="#java">Java</a>
+  <a href="#go">GO</a>
+  <a href="#javascript">Node.js</a>
+  <a href="#shell">CLI</a>
 </div>
 
 
