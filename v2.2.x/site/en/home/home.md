@@ -89,7 +89,7 @@ id: home.md
 
 _Nov 2022 - Milvus 2.2.0 release_
 
-- Added guidance on how to [bulk insert entities from files](bulk_load.md). 
+- Added guidance on how to [bulk insert entities from files](bulk_insert.md). 
 - Added description of [disk-based ANN index](disk_index.md).
 - Added guidance on how to configure [quotas_and_limits](configure_quota_limits.md).
 - Added guidance on how to [enable RBAC](rbac.md) with Milvus Operator.

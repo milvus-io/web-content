@@ -5,7 +5,7 @@ This method checks the progress of index building and shows the total number of 
 ## Invocation
 
 ```javascript
-new milvusClient(MILUVS_ADDRESS).collectionManager.getIndexBuildProgress(
+new milvusClient(MILUVS_ADDRESS).indexManager.getIndexBuildProgress(
   GetIndexBuildProgressReq
 );
 ```
@@ -24,7 +24,7 @@ new milvusClient(MILUVS_ADDRESS).collectionManager.getIndexBuildProgress(
 ## Example
 
 ```javascript
-new milvusClient(MILUVS_ADDRESS).collectionManager.getIndexBuildProgress({
+new milvusClient(MILUVS_ADDRESS).indexManager.getIndexBuildProgress({
   collection_name: "my_collection",
 });
 ```
