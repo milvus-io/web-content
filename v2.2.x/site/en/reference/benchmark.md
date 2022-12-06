@@ -3,9 +3,17 @@ id: benchmark.md
 summary: Learn about the benchmark result of Milvus. 
 ---
 
-# Milvus 2.1 Benchmark Test Report
+# Milvus 2.2 Benchmark Test Report
 
-This report shows the major test results of Milvus 2.1, covering the performances of data insertion, index building, and vector similarity search. The tests aim to provide a benchmark against which the performances of future Milvus releases can be measured.
+This report shows the major test results of Milvus 2.2.0. It aims to provide a picture of Milvus 2.2.0 search performance, especially in the capability to scale up and scale out.
+
+## Summary
+
+- Comparing with Milvus 2.1, the QPS of Milvus 2.2.0 increases over 48% in cluster mode and over 75% in standalone mode.
+- Milvus 2.2.0 has an impressive capability to scale up and scale out:
+  - QPS increases linearly when expanding CPU cores from 8 to 32.
+  - QPS increases linearly when expanding Querynode replicas from 1 to 8.
+
 
 ## Terminology
 
@@ -59,50 +67,47 @@ All tests are performed under the following environments.
 
 |    Software   |                                Version                                |
 | ------------- | --------------------------------------------------------------------- |
-|    Milvus     | <li>2.1.0-20220729-dcd6c9e5</li> <br> <li>2.0.2-20220401-898533c5</li>|
-| Milvus GO SDK | v2.1.1-0.20220801085923-509bbbbc89eb                                  |
+|    Milvus     | v2.2.0                                                                |
+| Milvus GO SDK | v2.2.0                                                                |
 
 ### Deployment scheme
 
-- Milvus instance (standalone or cluster) in each test is deployed via [Helm](https://milvus.io/docs/v2.2.x/install_standalone-helm.md) on a Kubernetes cluster based on physical or virtual machines.
-- Configurations of the tested Milvus instances merely vary in the number of CPU cores, the size of memory, and the number of replicas (worker nodes), which only applies to Milvus cluster.
-- Unspecified configurations are [default configurations](https://github.com/milvus-io/milvus-helm/blob/master/charts/milvus/values.yaml).
-- Milvus dependencies (MinIO, Pulsar, and etcd) store data on the local SSD in each node.
+- Milvus instances (standalone or cluster) are deployed via [Helm](https://milvus.io/docs/install_standalone-helm.md) on a Kubernetes cluster based on physical or virtual machines.
+-  Different tests merely vary in the number of CPU cores, the size of memory, and the number of replicas (worker nodes), which only applies to Milvus clusters.
+- Unspecified configurations are identical to [default configurations](https://github.com/milvus-io/milvus-helm/blob/master/charts/milvus/values.yaml).
+- Milvus dependencies (MinIO, Pulsar and Etcd) store data on the local SSD in each node.
 - Search requests are sent to the Milvus instances via [Milvus GO SDK](https://github.com/milvus-io/milvus-sdk-go/tree/master/tests).
 
 ### Data sets
 
-The test uses the open source dataset SIFT (128 dimensions) from [ANN-Benchmarks](https://github.com/erikbern/ann-benchmarks/#data-sets).
+The test uses the open-source dataset SIFT (128 dimensions) from [ANN-Benchmarks](https://github.com/erikbern/ann-benchmarks/#data-sets).
 
 ## Test pipeline
 
 1. Start a Milvus instance by Helm with respective server configurations as listed in each test.
 2. Connect to the Milvus instance via Milvus GO SDK and get the corresponding test results.
 3. Create a collection.
-4. Insert 1 million SIFT vectors. Build an HNSW index and configure the index parameters by setting `M`=8 and `efConstruction`=200.
+4. Insert 1 million SIFT vectors. Build an HNSW index and configure the index parameters by setting `M` to `8` and `efConstruction` to `200`.
 5. Load the collection.
+6. Search with different concurrent numbers with search parameters `nq=1, topk=1, ef=64`, the duration of each concurrency is at least 1 hour.
 
 ## Test results
 
-The test conducts a concurrent search on the the prepared data in the created collection and records the search performance metrics. The test result shows:
+### Milvus 2.2.0 v.s. Milvus 2.1.0 
 
-- When search parameters `nq`=1, `topk`=1, `ef`=64, search concurrency is **400** and the duration of concurrency is **5 hours**. 
-
-The detailed performance test results of Milvus 2.1 cluster, standalone, and Milvus 2.0.2 standalone is shown below.
-
-### Milvus 2.1 cluster
+#### Cluster
 
 <details>
     <summary><b>Server configurations (cluster)</b></summary>
 
 ```yaml
-image:
-  all:
-    tag: 2.1.0-20220729-dcd6c9e5
 queryNode:
   replicas: 1
   resources:
     limits:
+      cpu: "12.0"
+      memory: 8Gi
+    requests:
       cpu: "12.0"
       memory: 8Gi
 ```
@@ -111,23 +116,26 @@ queryNode:
 
 **Search performance**
 
-| QPS  | RT(TP99) / ms | RT(TP95) / ms | fail/s |
-|------|---------------|---------------|--------|
-| 6904 | 59            | 58            | 0      |
+| Milvus | QPS   | RT(TP99) / ms | RT(TP50) / ms | fail/s |
+| ------ |------ |---------------|---------------|--------|
+| 2.1.0  | 6904  | 59            | 28            | 0      |
+| 2.2.0  | 10248 | 63            | 24            | 0      |
 
-### Milvus 2.1 standalone
+![Cluster search performance](../../../assets/cluster_search_performance_210_vs_220.png)
+
+### Standalone
 
 <details>
     <summary><b>Server configurations (standalone)</b></summary>
 
 ```yaml
-image:
-  all:
-    tag: 2.1.0-20220729-dcd6c9e5
 standalone:
   replicas: 1
   resources:
     limits:
+      cpu: "12.0"
+      memory: 16Gi
+    requests:
       cpu: "12.0"
       memory: 16Gi
 ```
@@ -136,45 +144,82 @@ standalone:
 
 **Search performance**
 
-| QPS  | RT(TP99) / ms | RT(TP95) / ms | fail/s |
-|------|---------------|---------------|--------|
-| 4287 | 104           | 103           | 0      |
+| Milvus | QPS  | RT(TP99) / ms  | RT(TP50) / ms | fail/s |
+|------  |------|--------------- |---------------|--------|
+| 2.1.0  | 4287 | 104            | 76            | 0      |
+| 2.2.0  | 7522 | 127            | 79            | 0      |
 
+![Standalone search performance](../../../assets/standalone_search_performance_210_vs_220.png)
 
-### Milvus 2.0.2 standalone
+### Milvus 2.2.0 Scale-up
+
+Expand the CPU cores in one Querynode to check the capability to scale up.
+
+<details>
+    <summary><b>Server configurations (standalone)</b></summary>
+
+ ```yaml   
+queryNode:
+  replicas: 1
+  resources:
+    limits:
+      cpu: "8.0" /"12.0" /"16.0" /"32.0"
+      memory: 8Gi
+    requests:
+      cpu: "8.0" /"12.0" /"16.0" /"32.0"
+      memory: 8Gi
+```
+
+</details>
+
+**Search Performance**
+
+| CPU cores | Concurrent Number | QPS  | RT(TP99) / ms | RT(TP50) / ms | fail/s |
+| ------|------|------|---------------|---------------|--------|
+| 8 | 500 | 7153 | 127            | 83            | 0      |
+| 12 | 300 | 10248 | 63            | 24            | 0      |
+| 16 | 600 | 14135 | 85            | 42            | 0      |
+| 32 | 600 | 20281 | 63            | 28            | 0      |
+
+![Search performance by Querynode CPU cores](../../../assets/search_performance_by_querynode_cpu_cores.png)
+
+### Milvus 2.2.0 Scale-out
+
+Expand more replicas with more Querynodes to check the capability to scale out.
+
+<div class="alert note">
+
+Note: the number of Querynodes equals the `replica_number` when loading the collection.
+
+</div>
 
 <details>
     <summary><b>Server configurations (standalone)</b></summary>
 
 ```yaml
-image:
-  all:
-    tag: 2.0.2-20220401-898533c5
-standalone:
-  replicas: 1
+queryNode:
+  replicas: 1 / 2 / 4 / 8      
   resources:
     limits:
-      cpu: "12.0"
-      memory: 16Gi
+      cpu: "8.0"
+      memory: 8Gi
+    requests:
+      cpu: "8.0"
+      memory: 8Gi
 ```
 
 </details>
 
-**Search performance**
 
-| QPS | RT(TP99) / ms | RT(TP95) / ms | fail/s |
-|-----|---------------|---------------|--------|
-| 658 | 756           | 748           | 0      |
+| Replicas | Concurrent Number | QPS  | RT(TP99) / ms | RT(TP50) / ms | fail/s |
+|------|------|------|---------------|---------------|--------|
+| 1 | 500 |  7153 | 127            | 83            | 0      |
+| 2 | 500 |  15903 | 105            | 27            | 0      |
+| 4 | 800 | 19281 | 109            | 40            | 0      |
+| 8 | 1200 | 30655 | 93            | 38            | 0      |
 
-## Summary
-
-![2.1_qps](../../../assets/2.1_qps.png "A comparison of the QPS test results.")
-
-![2.1_rt](../../../assets/2.1_rt.png "A comparison of the RT test results.")
-
-- In the current test scenario, the QPS of Milvus cluster is better than that of Milvus standalone under  1 million dataset.
-- In the current test scenario, the QPS of Milvus 2.1 standalone is better than that of Milvus 2.0.2 standalone under 1 million dataset.
+![Search performance by Querynode replicas](../../../assets/search_performance_by_querynode_replicas.png)
 
 ## What's next
 
-- Learn how to [perform a Milvus 2.1 benchmark by yourself](https://milvus.io/blog/2022-08-16-A-Quick-Guide-to-Benchmarking-Milvus-2-1.md).
+- Try how to [perform a Milvus 2.2 benchmark by yourself](https://milvus.io/blog/2022-08-16-A-Quick-Guide-to-Benchmarking-Milvus-2-1.md).
