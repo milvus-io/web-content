@@ -4,7 +4,7 @@ label: Helm
 order: 2
 group: upgrade_milvus_cluster-operator.md
 related_key: upgrade Milvus Cluster
-summary: Learn how to upgrade Milvus cluster.
+summary: Learn how to upgrade Milvus cluster with Helm Chart.
 ---
 
 <div class="tab-wrapper"><a href="upgrade_milvus_cluster-operator.md" class=''>Milvus Operator</a><a href="upgrade_milvus_cluster-docker.md" class=''>Docker Compose</a><a href="upgrade_milvus_cluster-helm.md" class='active '>Helm</a></div>
