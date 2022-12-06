@@ -78,7 +78,7 @@
       "isMenu": true
     }, 
     {
-      "id": "prerequisites.md",
+      "id": "prerequisites",
       "title": "Prerequisites",
       "label1": "getstarted",
       "label2": "",
@@ -87,7 +87,7 @@
     },
     {
       "id": "prerequisite-helm.md",
-      "title": "Prerequisites",
+      "title": "Prerequisites for Installing on Kubernetes",
       "label1": "getstarted",
       "label2": "prerequisites",
       "label3": "",
@@ -95,7 +95,7 @@
     },
     {
       "id": "prerequisite-docker.md",
-      "title": "Prerequisites",
+      "title": "Prerequisites for Installing with Docker Compose",
       "label1": "getstarted",
       "label2": "prerequisites",
       "label3": "",
@@ -144,7 +144,7 @@
       "order": 3
     },
     {
-      "id": "install-sdks.md",
+      "id": "install-sdks",
       "title": "Install SDKs",
       "label1": "getstarted",
       "label2": "",

@@ -2,16 +2,12 @@
 id: prerequisite-helm.md
 label: Install on Kubernetes
 related_key: Kubernetes
-order: 1
-group: prerequisite-docker.md
 summary: Learn the necessary preparations before installing Milvus with Helm.
 ---
 
-# Environment Checklist
+# Environment Checklist for Installing Milvus on Kubernetes
 
 Before you install Milvus, check your hardware and software to see if they meet the requirements.
-
-<div class="tab-wrapper"><a href="prerequisite-docker.md" class=''>Install with Docker Compose</a><a href="prerequisite-helm.md" class='active '>Install on Kubernetes</a></div>
 
 ## Hardware requirements
 

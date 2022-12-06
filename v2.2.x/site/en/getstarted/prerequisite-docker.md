@@ -2,16 +2,12 @@
 id: prerequisite-docker.md
 label: Install with Docker Compose
 related_key: Docker
-order: 0
-group: prerequisite-docker.md
 summary: Learn the necessary preparations before installing Milvus with Docker Compose.
 ---
 
-# Environment Checklist
+# Environment Checklist for Installing Milvus with Docker Compose
 
 Before you install Milvus, check your hardware and software to see if they meet the requirements.
-
-<div class="tab-wrapper"><a href="prerequisite-docker.md" class='active '>Install with Docker Compose</a><a href="prerequisite-helm.md" class=''>Install on Kubernetes</a></div>
 
 ## Hardware requirements
 
