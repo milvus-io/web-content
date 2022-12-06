@@ -3,7 +3,7 @@ id: prerequisites.md
 title: Prerequisites
 ---
 
-# Configure Milvus
+# Prerequisites
 
 An environment checklist is available for you to ensure that you are ready to install Milvus. Use the one that fits in.
 
