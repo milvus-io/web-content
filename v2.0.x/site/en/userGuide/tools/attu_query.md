@@ -1,7 +1,7 @@
 ---
 id: attu_query.md
 related_key: attu
-summary: Attu, an intuitive GUI for Milvus service management.
+summary: Learn how to query data using Attu, an intuitive GUI tool for Milvus.
 ---
 
 # Query Data with Attu

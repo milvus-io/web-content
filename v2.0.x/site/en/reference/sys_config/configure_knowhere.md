@@ -2,7 +2,7 @@
 id: configure_knowhere.md
 related_key: configure
 group: system_configuration.md
-summary: Learn how to configure common parameters of Milvus.
+summary: Learn how to configure Knowhere-related parameters of Milvus.
 ---
 
 # Knowhere-related Configurations
