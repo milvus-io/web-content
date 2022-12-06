@@ -5,9 +5,9 @@ related_key: configure
 summary: Learn how to configure your Milvus.
 ---
 
-# Configure Milvus with Docker Compose or Helm
+# Configure Milvus with Docker Compose
 
-This topic describes how to configure Milvus components and its third-party dependencies with Docker Compose or Helm.
+This topic describes how to configure Milvus components and its third-party dependencies with Docker Compose.
 
 <div class="alert note">
 In current release, all parameters take effect only after Milvus restarts.
