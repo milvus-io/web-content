@@ -4,7 +4,7 @@ label: Helm
 related_key: configure
 group: configure-docker.md
 order: 1
-summary: Learn how to configure your Milvus.
+summary: Learn how to configure your Milvus with Helm.
 ---
 
 # Configure Milvus with Docker Compose or Helm

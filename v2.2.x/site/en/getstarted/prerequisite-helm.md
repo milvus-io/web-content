@@ -4,7 +4,7 @@ label: Install on Kubernetes
 related_key: Kubernetes
 order: 1
 group: prerequisite-docker.md
-summary: Learn the necessary preparations before installing Milvus.
+summary: Learn the necessary preparations before installing Milvus with Helm.
 ---
 
 # Environment Checklist
