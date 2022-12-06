@@ -78,13 +78,29 @@
       "isMenu": true
     }, 
     {
-      "id": "prerequisite-docker.md",
+      "id": "prerequisites.md",
       "title": "Prerequisites",
       "label1": "getstarted",
       "label2": "",
       "label3": "",
       "order": 0
-    },  
+    },
+    {
+      "id": "prerequisite-helm.md",
+      "title": "Prerequisites",
+      "label1": "getstarted",
+      "label2": "prerequisites",
+      "label3": "",
+      "order": 0
+    },
+    {
+      "id": "prerequisite-docker.md",
+      "title": "Prerequisites",
+      "label1": "getstarted",
+      "label2": "prerequisites",
+      "label3": "",
+      "order": 1
+    },   
     {
       "id": "installmilvus",
       "title": "Install Milvus",
@@ -128,12 +144,44 @@
       "order": 3
     },
     {
-      "id": "install-pymilvus.md",
+      "id": "install-sdks.md",
       "title": "Install SDKs",
       "label1": "getstarted",
       "label2": "",
       "label3": "",
       "order": 2
+    },
+    {
+      "id": "install-pymilvus.md",
+      "title": "Pymilvus",
+      "label1": "getstarted",
+      "label2": "install-sdks",
+      "label3": "",
+      "order": 0
+    },
+    {
+      "id": "install-java.md",
+      "title": "Java SDK",
+      "label1": "getstarted",
+      "label2": "install-sdks",
+      "label3": "",
+      "order": 1
+    },
+    {
+      "id": "install-go.md",
+      "title": "Go SDK",
+      "label1": "getstarted",
+      "label2": "install-sdks",
+      "label3": "",
+      "order": 2
+    },
+    {
+      "id": "install-node.md",
+      "title": "Node.js SDK",
+      "label1": "getstarted",
+      "label2": "install-sdks",
+      "label3": "",
+      "order": 3
     },
     {
       "id": "example_code.md",
@@ -414,12 +462,20 @@
       "isMenu": true
     },
     {
-      "id": "configure-docker.md",
-      "title": "With Docker or Helm",
+      "id": "configure-helm.md",
+      "title": "With Helm",
       "label1": "admin_guide",
       "label2": "configure_milvus",
       "label3": "",
-      "order": 0
+      "order": 1
+    },
+    {
+      "id": "configure-docker.md",
+      "title": "With Docker",
+      "label1": "admin_guide",
+      "label2": "configure_milvus",
+      "label3": "",
+      "order": 2
     },
     {
       "id": "configure_operator.md",
@@ -427,7 +483,7 @@
       "label1": "admin_guide",
       "label2": "configure_milvus",
       "label3": "",
-      "order": 1
+      "order": 0
     },
     {
       "id": "manage_dependencies",

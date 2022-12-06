@@ -1,19 +1,19 @@
 ---
 id: install_offline-docker.md
-label: Install with Docker Compose
-order: 0
+label: Docker Compose
+order: 1
 group: install_offline-docker.md
 related_key: offline
 summary: Learn how to install Milvus with Docker Compose offline.
 ---
 
-# Install Milvus Offline
+# Install Milvus Offline with Docker Compose
 
-This topic describes how to install Milvus in an offline environment. 
+This topic describes how to install Milvus with Docker Compose in an offline environment. 
 
 Installation of Milvus might fail due to image loading errors. You can install Milvus in an offline environment to avoid such problem.
 
-<div class="tab-wrapper"><a href="install_offline-docker.md" class='active '>Install with Docker Compose</a><a href="install_offline-helm.md" class=''>Install on Kubernetes</a></div>
+<div class="tab-wrapper"><a href="install_offline-helm.md" class=''>Kubernetes</a><a href="install_offline-docker.md" class='active '>Docker Compose</a></div>
 
 ## Download files and images
 
