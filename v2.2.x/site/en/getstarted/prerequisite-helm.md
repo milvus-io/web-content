@@ -5,7 +5,7 @@ related_key: Kubernetes
 summary: Learn the necessary preparations before installing Milvus with Helm.
 ---
 
-# Environment Checklist for Installing Milvus on Kubernetes
+# Environment Checklist for Milvus Milvus on Kubernetes
 
 Before you install Milvus, check your hardware and software to see if they meet the requirements.
 

@@ -5,7 +5,7 @@ related_key: Docker
 summary: Learn the necessary preparations before installing Milvus with Docker Compose.
 ---
 
-# Environment Checklist for Installing Milvus with Docker Compose
+# Environment Checklist for Milvus with Docker Compose
 
 Before you install Milvus, check your hardware and software to see if they meet the requirements.
 
