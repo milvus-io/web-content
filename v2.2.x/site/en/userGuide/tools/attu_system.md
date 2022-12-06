@@ -1,7 +1,7 @@
 ---
 id: attu_system.md
 related_key: attu
-summary: Attu, an intuitive GUI for Milvus service management.
+summary: Learn how to monitor your Milvus system with Attu, an intuitive GUI tool for Milvus.
 ---
 
 # Monitor System with Attu
