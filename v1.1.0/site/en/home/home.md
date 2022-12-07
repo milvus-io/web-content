@@ -69,3 +69,6 @@ Milvus was released under the open-source Apache License 2.0 in October 2019, an
 - [Milvus Performance FAQs](performance_faq.md)
 - [Troubleshooting](troubleshoot.md)
 </div>
+
+  
+</div>

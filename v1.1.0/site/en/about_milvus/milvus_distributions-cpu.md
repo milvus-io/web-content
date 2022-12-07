@@ -3,6 +3,7 @@ id: milvus_distributions-cpu.md
 label: CPU-only Milvus
 order: 0
 group: distribution
+summary: Learn about the indexes supported for CPU-only Milvus.
 ---
 
 # Milvus Distributions
