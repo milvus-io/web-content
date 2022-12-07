@@ -2,20 +2,16 @@
 id: configure-docker.md
 label: Docker Compose
 related_key: configure
-group: configure-docker.md
-order: 0
 summary: Learn how to configure your Milvus with Docker Compose.
 ---
 
-# Configure Milvus with Docker Compose or Helm
+# Configure Milvus with Docker Compose
 
-This topic describes how to configure Milvus components and its third-party dependencies with Docker Compose or Helm.
+This topic describes how to configure Milvus components and its third-party dependencies with Docker Compose.
 
 <div class="alert note">
 In current release, all parameters take effect only after Milvus restarts.
 </div>
-
-<div class="tab-wrapper"><a href="configure-docker.md" class='active '>Docker Compose</a><a href="configure-helm.md" class=''>Helm</a></div>
 
 ## Download a configuration file
 
