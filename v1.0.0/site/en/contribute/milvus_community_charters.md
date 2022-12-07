@@ -78,7 +78,7 @@ The SIGs are usually aligned to the Milvus system components, technology field, 
 
 <br/>
 
-If you want to initiate a new SIG, you need to complete and submit the [SIG proposal](https://github.com/milvus-io/community/sig/proposal_template.adoc). The proposal will be reviewed and voted on by Milvus Technology Steering Committee (TSC).
+If you want to initiate a new SIG, you need to complete and submit the [SIG proposal](https://github.com/milvus-io/milvus/blob/1.1/COMMUNITY.md). The proposal will be reviewed and voted on by Milvus Technology Steering Committee (TSC).
 
 #### Code contribution guideline
 Please refer: [Contributing to Milvus](https://github.com/milvus-io/milvus/blob/master/CONTRIBUTING.md)

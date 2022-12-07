@@ -3,6 +3,7 @@ id: milvus_docker-gpu.md
 label: GPU-enabled Milvus
 order: 1
 group: distribution
+summary: Learn how to install and start GPU-enabled Milvus.
 ---
 
 # Install and Start Milvus
@@ -159,7 +160,8 @@ Data formats of different versions may not be compatible with each other. The cu
 </details>
 <details>
 <summary><font color="#4fc4f9">Is Docker the only way to install and run Milvus?</font></summary>
-No. You can also build Milvus from source code in Linux. See <a href="https://github.com/milvus-io/milvus/blob/master/INSTALL.md">Build Milvus from source code</a> for more information.
+No. You can also build Milvus from source code in Linux. See <a href="https://github.com/milvus-io/milvus/blob/1.1/INSTALL.md">Build Milvus from source code</a> for more information.
+
 </details>
 <details>
 <summary><font color="#4fc4f9">How to set <code>nlist</code> and <code>nprobe</code> for IVF indexes?</font></summary>
