@@ -1,19 +1,19 @@
 ---
 id: install_offline-helm.md
 label: Install on Kubernetes
-order: 1
-group: install_offline-docker.md
+order: 0
+group: install_offline-helm.md
 related_key: offline
 summary: Learn how to install Milvus on Kubernetes offline.
 ---
 
-# Install Milvus Offline
+<div class="tab-wrapper"><a href="install_offline-helm.md" class='active '>Install on Kubernetes</a><a href="install_offline-docker.md" class=''>Install with Docker Compose</a></div>
 
-This topic describes how to install Milvus in an offline environment. 
+# Install Milvus Offline with Helm Charts
 
-Installation of Milvus might fail due to image loading errors. You can install Milvus in an offline environment to avoid such problem.
+This topic describes how to install Milvus with Helm charts in an offline environment. 
 
-<div class="tab-wrapper"><a href="install_offline-docker.md" class=''>Install with Docker Compose</a><a href="install_offline-helm.md" class='active '>Install on Kubernetes</a></div>
+Installation of Milvus might fail due to image loading errors. You can install Milvus in an offline environment to avoid such problems.
 
 ## Download files and images
 

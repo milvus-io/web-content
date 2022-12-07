@@ -16,7 +16,7 @@ The following example is based on the alias `publication`.
 
 ## Create a collection alias
 
-Specify an an alias for a collection.
+Specify an alias for a collection.
 
 <div class="multipleCode">
   <a href="#python">Python </a>

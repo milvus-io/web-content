@@ -7,11 +7,11 @@ related_key: attu
 summary: Learn how to install Attu with package to manage your Milvus service.
 ---
 
-# Install Attu
-
-This topic describes how to install Attu, an efficient open-source management tool for Milvus.
-
 <div class="tab-wrapper"><a href="attu_install-docker.md" class=''>Install with Docker Compose</a><a href="attu_install-helm.md" class=''>Install with Helm Chart</a><a href="attu_install-package.md" class='active '>Install with Package</a></div>
+
+# Install Attu with Pre-built Packages
+
+This topic describes how to install Attu with pre-built packages, an efficient open-source management tool for Milvus.
 
 ## Download and run installation package
 

@@ -86,13 +86,29 @@
       "isMenu": true
     }, 
     {
-      "id": "prerequisite-docker.md",
+      "id": "prerequisites",
       "title": "Prerequisites",
       "label1": "getstarted",
       "label2": "",
       "label3": "",
       "order": 0
-    },  
+    },    
+    {
+      "id": "prerequisite-docker.md",
+      "title": "with Docker Compose",
+      "label1": "getstarted",
+      "label2": "preprequisites",
+      "label3": "",
+      "order": 1
+    },
+    {
+      "id": "prerequisite-helm.md",
+      "title": "on Kubernetes",
+      "label1": "getstarted",
+      "label2": "prerequisites",
+      "label3": "",
+      "order": 0
+    },   
     {
       "id": "installmilvus",
       "title": "Install Milvus",
@@ -128,12 +144,44 @@
       "order": 2
     }, 
     {
-      "id": "install-pymilvus.md",
+      "id": "install_sdks",
       "title": "Install SDKs",
       "label1": "getstarted",
       "label2": "",
       "label3": "",
       "order": 2
+    },
+    {
+      "id": "install-pymilvus.md",
+      "title": "Pymilvus",
+      "label1": "getstarted",
+      "label2": "install_sdks",
+      "label3": "",
+      "order": 0
+    },
+    {
+      "id": "install-java.md",
+      "title": "Java SDK",
+      "label1": "getstarted",
+      "label2": "install_sdks",
+      "label3": "",
+      "order": 1
+    },
+    {
+      "id": "install-go.md",
+      "title": "Go SDK",
+      "label1": "getstarted",
+      "label2": "install_sdks",
+      "label3": "",
+      "order": 2
+    },
+    {
+      "id": "install-node.md",
+      "title": "Node.js SDK",
+      "label1": "getstarted",
+      "label2": "install_sdks",
+      "label3": "",
+      "order": 3
     },
     {
       "id": "example_code.md",
@@ -390,10 +438,26 @@
       "isMenu": true
     },
     {
-      "id": "configure-docker.md",
+      "id": "configure_milvus",
       "title": "Configure Milvus",
       "label1": "admin_guide",
       "label2": "",
+      "order": 0,
+      "isMenu": true
+    },
+    {
+      "id": "configure-docker.md",
+      "title": "With Docker Compose",
+      "label1": "admin_guide",
+      "label2": "configure_milvus",
+      "label3": "",
+      "order": 1
+    },
+    {
+      "id": "configure-helm.md",
+      "title": "With Helm",
+      "label1": "admin_guide",
+      "label2": "configure_milvus",
       "label3": "",
       "order": 0
     },

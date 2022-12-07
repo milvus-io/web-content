@@ -2,20 +2,16 @@
 id: configure-helm.md
 label: Helm
 related_key: configure
-group: configure-docker.md
-order: 1
 summary: Learn how to configure your Milvus with Helm.
 ---
 
-# Configure Milvus
+# Configure Milvus with Helm Charts
 
-This topic describes how to configure your Milvus.
+This topic describes how to configure your Milvus with Helm charts.
 
 <div class="alert note">
 In current release, all parameters take effect only after Milvus restarts.
 </div>
-
-<div class="tab-wrapper"><a href="configure-docker.md" class=''>Docker Compose</a><a href="configure-helm.md" class='active '>Helm</a></div>
 
 ## Configure Milvus via configuration file
 
