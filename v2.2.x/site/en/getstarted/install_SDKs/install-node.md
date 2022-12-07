@@ -5,8 +5,6 @@ related_key: SDK
 summary: Learn how to install the Node.js SDK of Milvus.
 ---
 
-<div class="tab-wrapper"><a href="install-pymilvus.md" class=''>Install PyMilvus</a><a href="install-node.md" class='active '>Install Node.js SDK</a><a href="install-java.md" class=''>Install Java SDK</a><a href="install-go.md" class=''>Install GO SDK</a></div>
-
 # Install Milvu Nodejs SDK
 
 This topic describes how to install Milvus Node.js SDK for Milvus.

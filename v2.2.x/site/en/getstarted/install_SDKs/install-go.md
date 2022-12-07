@@ -5,8 +5,6 @@ related_key: SDK
 summary: Learn how to install the GO SDK of Milvus.
 ---
 
-<div class="tab-wrapper"><a href="install-pymilvus.md" class=''>Install PyMilvus</a><a href="install-node.md" class=''>Install Node.js SDK</a><a href="install-java.md" class=''>Install Java SDK</a><a href="install-go.md" class='active '>Install GO SDK</a></div>
-
 # Install Milvus Go SDK
 
 This topic describes how to install Milvus Go SDK for Milvus.

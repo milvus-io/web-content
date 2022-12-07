@@ -5,8 +5,6 @@ related_key: SDK
 summary: Learn how to install the Java SDK of Milvus.
 ---
 
-<div class="tab-wrapper"><a href="install-pymilvus.md" class=''>Install PyMilvus</a><a href="install-node.md" class=''>Install Node.js SDK</a><a href="install-java.md" class='active '>Install Java SDK</a><a href="install-go.md" class=''>Install GO SDK</a></div>
-
 # Install Milvus Java SDK
 
 This topic describes how to install Milvus Java SDK for Milvus.

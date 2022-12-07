@@ -123,7 +123,7 @@ queryNode:
 
 ![Cluster search performance](../../../assets/cluster_search_performance_210_vs_220.png)
 
-### Standalone
+#### Standalone
 
 <details>
     <summary><b>Server configurations (standalone)</b></summary>
@@ -156,7 +156,7 @@ standalone:
 Expand the CPU cores in one Querynode to check the capability to scale up.
 
 <details>
-    <summary><b>Server configurations (standalone)</b></summary>
+    <summary><b>Server configurations (cluster)</b></summary>
 
  ```yaml   
 queryNode:
@@ -194,7 +194,7 @@ Note: the number of Querynodes equals the `replica_number` when loading the coll
 </div>
 
 <details>
-    <summary><b>Server configurations (standalone)</b></summary>
+    <summary><b>Server configurations (cluster)</b></summary>
 
 ```yaml
 queryNode:
