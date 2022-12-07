@@ -40,7 +40,7 @@ sudo rm -rf ./wal
 ```
 mkdir conf
 cd conf
-wget https://raw.githubusercontent.com/milvus-io/milvus/v1.1.1/core/conf/demo/server_config.yaml
+wget https://raw.githubusercontent.com/milvus-io/milvus/v1.1.0/core/conf/demo/server_config.yaml
 ```
 
 <div class="alert note">如果下载不成功，可在网页中打开下载网址，在 conf 目录下新建同名文件，把网页中的内容粘贴到文件中保存。</div>
@@ -64,20 +64,20 @@ meta_uri: mysql://root:123456@<MySQL_server_host IP>:3306/milvus
 使用相同的映射路径下载并启动 Milvus v1.0.0 容器：
 
 ```
-$ sudo docker run -d --name milvus_cpu_1.1.1 \
+$ sudo docker run -d --name milvus_cpu_1.1.0 \
 -p 19530:19530 \
 -p 19121:19121 \
 -v /home/$USER/milvus/db:/var/lib/milvus/db \
 -v /home/$USER/milvus/conf:/var/lib/milvus/conf \
 -v /home/$USER/milvus/logs:/var/lib/milvus/logs \
 -v /home/$USER/milvus/wal:/var/lib/milvus/wal \
-milvusdb/milvus:1.1.1-cpu-d061621-330cc6
+milvusdb/milvus:1.1.0-cpu-d050721-5e559c
 ```
 
 ## 第 5 步：安装对应版本的 Python SDK
 
 ```
-pip3 install pymilvus==1.1.2
+pip3 install pymilvus==1.1.0
 ```
 
 ## 第 6 步：验证数据正确性

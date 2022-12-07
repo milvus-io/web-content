@@ -57,7 +57,7 @@ $ sudo docker info
 拉取支持 GPU 的镜像：
 
 ```shell
-$ sudo docker pull milvusdb/milvus:1.1.1-gpu-d061621-330cc6
+$ sudo docker pull milvusdb/milvus:1.1.0-gpu-d050721-5e559c
 ```
 
 <div class="alert note">
@@ -89,11 +89,11 @@ $ sudo docker pull milvusdb/milvus:1.1.1-gpu-d061621-330cc6
 ```shell
 $ mkdir -p /home/$USER/milvus/conf
 $ cd /home/$USER/milvus/conf
-$ wget http://raw.githubusercontent.com/milvus-io/milvus/v1.1.1/core/conf/demo/server_config.yaml
+$ wget http://raw.githubusercontent.com/milvus-io/milvus/v1.1.0/core/conf/demo/server_config.yaml
 ```
 
 <div class="alert note">
-如果无法通过 <code>wget</code> 命令正常下载，你也可以在 <b>/home/$USER/milvus/conf</b> 目录下创建 <b>server_config.yaml</b> 文件，然后将 <a href="https://github.com/milvus-io/milvus/blob/v1.1.1/core/conf/demo/server_config.yaml">server config 文件</a> 的内容复制到你创建的配置文件中。
+如果无法通过 <code>wget</code> 命令正常下载，你也可以在 <b>/home/$USER/milvus/conf</b> 目录下创建 <b>server_config.yaml</b> 文件，然后将 <a href="https://github.com/milvus-io/milvus/blob/v1.1.0/core/conf/demo/server_config.yaml">server config 文件</a> 的内容复制到你创建的配置文件中。
 </div>
 
 配置文件下载完成后，你需要将 **server_config.yaml** 中的 `gpu` 区域的 `enable` 参数设置为 `true`。
@@ -107,14 +107,14 @@ $ wget http://raw.githubusercontent.com/milvus-io/milvus/v1.1.1/core/conf/demo/s
 启动 Docker 容器，将本地的文件路径映射到容器中：
 
 ```shell
-$ sudo docker run -d --name milvus_gpu_1.1.1 --gpus all \
+$ sudo docker run -d --name milvus_gpu_1.1.0 --gpus all \
 -p 19530:19530 \
 -p 19121:19121 \
 -v /home/$USER/milvus/db:/var/lib/milvus/db \
 -v /home/$USER/milvus/conf:/var/lib/milvus/conf \
 -v /home/$USER/milvus/logs:/var/lib/milvus/logs \
 -v /home/$USER/milvus/wal:/var/lib/milvus/wal \
-milvusdb/milvus:1.1.1-gpu-d061621-330cc6
+milvusdb/milvus:1.1.0-gpu-d050721-5e559c
 ```
 
 上述命令中用到的参数定义如下：
@@ -134,7 +134,7 @@ $ sudo docker ps
 如果 Milvus 服务没有正常启动，执行以下命令查询错误日志：
 
 ```shell
-$ sudo docker logs milvus_gpu_1.1.1
+$ sudo docker logs milvus_gpu_1.1.0
 ```
 
 ## 常见问题
@@ -183,6 +183,7 @@ IVF 索引的 <code>nlist</code> 值需要根据具体的使用情况去设置�
 
 在 `nlist` 为 4096 和 `nprobe` 为 128 时，速度性能最佳。
 </details>
+
 <details>
 <summary><font color="#4fc4f9">如何为建立索引和检索分配GPU？</font></summary>
 在 /home/$USER/milvus/conf 路径下的 <b>server_config.yaml</b> 文件中，你可以为建立索引以及检索分配 GPU。如下代码所示：
@@ -200,12 +201,10 @@ gpu:
     - gpu3
 ```
 <div class="alert note">
-gpu 0, 1, 2, 3是分配给 Docker 容器的 GPU 中的前四个。
+gpu 0, 1, 2, 3 是分配给 Docker 容器的 GPU 中的前四个。
 </div>
 
 </details>
-
-
 
 
 ## 接下来你可以

@@ -31,7 +31,7 @@ docker run -i -p 3000:3000 grafana/grafana
    | URL     | *http://<提供 Prometheus 服务的主机 IP>:9090* |
    | Access  | Browser                                     |
 
-5. 下载 [Grafana 配置文件](https://github.com/milvus-io/docs/blob/master/v1.1.1/assets/monitoring/dashboard.json)。
+5. 下载 [Grafana 配置文件](https://github.com/milvus-io/docs/blob/master/v1.1.0/assets/monitoring/dashboard.json)。
 
 6. [将配置文件导入 Grafana](http://docs.grafana.org/reference/export_import/#importing-a-dashboard)。
 
@@ -40,4 +40,4 @@ docker run -i -p 3000:3000 grafana/grafana
 
 ## 配置监控指标
 
-你可以通过 Milvus 提供的 [Grafana 配置文件](https://github.com/milvus-io/docs/blob/master/v1.1.1/assets/monitoring/dashboard.json) 配置 Milvus 提供的各项监控指标。详见：[Milvus 监控指标](milvus_metrics.md)。
+你可以通过 Milvus 提供的 [Grafana 配置文件](https://github.com/milvus-io/docs/blob/master/v1.1.0/assets/monitoring/dashboard.json) 配置 Milvus 提供的各项监控指标。详见：[Milvus 监控指标](milvus_metrics.md)。

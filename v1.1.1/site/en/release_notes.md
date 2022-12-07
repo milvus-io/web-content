@@ -4,37 +4,6 @@ id: release_notes.md
 
 # Release notes
 
-## v1.1.1
-
-**Release date**：2021-06-18
-
-#### Compatibility
-
-| Milvus version | Python SDK version | Java SDK version | Go SDK version |
-| :------------- | :----------------- | :--------------- | :------------- |
-| 1.1.1         | 1.1.0             | 1.1.1            | 1.1.0          |
-
-#### New Features
-
-- [#1434](https://github.com/milvus-io/milvus/issues/1434) Supports S3 storage (implemented by Unisinsight).
-- [#5142](https://github.com/milvus-io/milvus/issues/5142) Supports caching indexes in GPU memory.
-
-#### Bug Fixes
-
-- [#4897](https://github.com/milvus-io/milvus/issues/4897) Deleted entities reappear in new search results.
-- [#5164](https://github.com/milvus-io/milvus/issues/5164) No error returns when inserting or deleting entities on a partition that does not exist.
-- [#5191](https://github.com/milvus-io/milvus/issues/5191) Continuous insert and search operations cause Mishards to return the `index out of range` error.
-- [#5398](https://github.com/milvus-io/milvus/issues/5398) Server crashes sporadically after executing requests.
-- [#5537](https://github.com/milvus-io/milvus/issues/5537) Server fails to load Bloom filter after rebooting from a sudden shutdown.
-- [#5574](https://github.com/milvus-io/milvus/issues/5574) Indexes IVF_SQ8 and IVF_PQ cannot be built simultaneously on multiple GPUs.
-- [#5747](https://github.com/milvus-io/milvus/issues/5747) Server hangs if the product of the search parameters `nq` and `TopK` exceeds system capabilities.
-
-#### Other Improvements
-
-- [#5115](https://github.com/milvus-io/milvus/issues/5115) Increases the upper limit of `TopK` from 16,384 to 1,048,576 for CPU searches.
-- [#5204](https://github.com/milvus-io/milvus/issues/5204) Improves IVF search performance for GPU-enabled Milvus when no entity has been deleted.
-- [#5544](https://github.com/milvus-io/milvus/issues/5544) Increases the upper limit of `index_file_size` to 128 GB.
-
 ## v1.1.0
 
 **Release date**：2021-05-07
@@ -43,7 +12,7 @@ id: release_notes.md
 
 | Milvus version | Python SDK version | Java SDK version | Go SDK version |
 | :------------- | :----------------- | :--------------- | :------------- |
-| 1.1.0         | 1.1.0             | 1.1.0            | 1.1.0          |
+| 1.1.0         | 1.1.0             | 1.1.1            | 1.1.0          |
 
 #### New Features
 
@@ -96,7 +65,6 @@ id: release_notes.md
 
 - Memory leaks during indexing or querying operations. [#4749](https://github.com/milvus-io/milvus/issues/4749), [#4757](https://github.com/milvus-io/milvus/issues/4757), [#4765](https://github.com/milvus-io/milvus/issues/4765), [#4766](https://github.com/milvus-io/milvus/issues/4766)
 
-> - For more information about the features of Milvus 1.0, go to [What's Inside Milvus 1.0?](https://zilliz.com/blog/Whats-Inside-Milvus-1.0).
-> - For more information about its roadmap, see [Milvus 1.0: The World's Most Popular Open-Source Vector Database Just Got Better](https://zilliz.com/blog/milvus-1-0-the-worlds-most-popular-open-source-vector-database-just-got-better).
-
+> - For more information about the features of Milvus 1.0, go to [What's Inside Milvus 1.0?](https://milvus.io/blog/Whats-Inside-Milvus-1.0.md).
+> - For more information about its roadmap, see [Milvus 1.0: The World's Most Popular Open-Source Vector Database Just Got Better](https://milvus.io/blog/milvus-1-0-the-worlds-most-popular-open-source-vector-database-just-got-better.md).
 

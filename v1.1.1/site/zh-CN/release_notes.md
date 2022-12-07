@@ -3,37 +3,6 @@ id: release_notes.md
 ---
 # 发版说明
 
-## v1.1.1
-
-**发布时间**：2021-06-18
-
-#### 版本兼容
-
-| Milvus 版本 | Python SDK 版本 | Java SDK 版本 | Go SDK 版本 |
-| :------------- | :----------------- | :--------------- | :------------- |
-| 1.1.1         | 1.1.0             | 1.1.1            | 1.1.0          |
-
-#### 新增功能
-
-- [#1434](https://github.com/milvus-io/milvus/issues/1434) 支持 S3 存储（由紫光华智实现）。
-- [#5142](https://github.com/milvus-io/milvus/issues/5142) 支持在显存中缓存索引。
-
-#### 问题修复
-
-- [#4897](https://github.com/milvus-io/milvus/issues/4897) 已删除 entity 在后继查询中仍然能被查到。
-- [#5164](https://github.com/milvus-io/milvus/issues/5164) 在不存在的 partition 上插入或删除 entity 未引发异常报错。
-- [#5191](https://github.com/milvus-io/milvus/issues/5191) 一段时间内连续执行多次插入和查询操作后，Mishards 会返回 `index out of range` 错误。
-- [#5398](https://github.com/milvus-io/milvus/issues/5398) 系统执行请求后不定时崩溃。
-- [#5537](https://github.com/milvus-io/milvus/issues/5537) 电源突然关闭后重启无法加载布隆过滤器。
-- [#5574](https://github.com/milvus-io/milvus/issues/5574) 不能在多个 GPU 上同时构建 IVF_SQ8 和 IVF_PQ 索引。
-- [#5747](https://github.com/milvus-io/milvus/issues/5747) 查询时 `nq` 或 `TopK` 乘积过大会导致 Milvus 停止响应。
-
-#### 主要改进
-
-- [#5115](https://github.com/milvus-io/milvus/issues/5115) 将使用 CPU 查询的 `TopK` 上限从 16384 提高至 1048576。
-- [#5204](https://github.com/milvus-io/milvus/issues/5204) 在未删除任何 entity 的情况下，优化了 IVF 索引在 GPU 版 Milvus 上的查询性能。
-- [#5544](https://github.com/milvus-io/milvus/issues/5544) 将 `index_file_size` 上限提高至 128 GB。
-
 ## v1.1.0
 
 **发布时间**：2021-05-07
@@ -42,7 +11,7 @@ id: release_notes.md
 
 | Milvus 版本 | Python SDK 版本 | Java SDK 版本 | Go SDK 版本 |
 | :------------- | :----------------- | :--------------- | :------------- |
-| 1.1.0         | 1.1.0             | 1.1.0            | 1.1.0          |
+| 1.1.0         | 1.1.0             | 1.1.1            | 1.1.0          |
 
 #### 新增功能
 

@@ -47,16 +47,16 @@ id: setup_prometheus.md
     如果是在 Kubernetes 集群中，你需要为每个需要监控的 Milvus 节点配置 <b>server_config.yaml</b>。
     </div>
 
-3. 下载 Milvus [Prometheus 配置文件](https://github.com/milvus-io/docs/blob/master/v1.1.1/assets/monitoring/prometheus.yml)：
+3. 下载 Milvus [Prometheus 配置文件](https://github.com/milvus-io/docs/blob/master/v1.1.0/assets/monitoring/prometheus.yml)：
 
    ```shell
-   $ wget https://raw.githubusercontent.com/milvus-io/docs/master/v1.1.1/assets/monitoring/prometheus.yml \ -O prometheus.yml
+   $ wget https://raw.githubusercontent.com/milvus-io/docs/master/v1.1.0/assets/monitoring/prometheus.yml \ -O prometheus.yml
    ```
 
-4. 下载 Milvus [报警规则文件](https://github.com/milvus-io/docs/blob/master/v1.1.1/assets/monitoring/alert_rules.yml) 到  Prometheus 根目录：
+4. 下载 Milvus [报警规则文件](https://github.com/milvus-io/docs/blob/master/v1.1.0/assets/monitoring/alert_rules.yml) 到  Prometheus 根目录：
 
    ```shell
-   wget -P rules https://raw.githubusercontent.com/milvus-io/docs/master/v1.1.1/assets/monitoring/alert_rules.yml
+   wget -P rules https://raw.githubusercontent.com/milvus-io/docs/master/v1.1.0/assets/monitoring/alert_rules.yml
    ```
 
 5. 根据实际需求编辑 Prometheus 配置文件：

@@ -38,7 +38,7 @@ id: milvusdm.md
 
     ```
     F2M:
-  milvus_version: 1.1.1
+  milvus_version: 1.1.0
   data_path: '/home/data/faiss.index'
   dest_host: '127.0.0.1'
   dest_port: 19530
@@ -81,7 +81,7 @@ insert_milvus.insert_data(vectors, self.dest_collection_name, self.collection_pa
 
     ```
     H2M:
-  milvus-version: 1.1.1
+  milvus-version: 1.1.0
   data_path:
     - /Users/zilliz/float_1.h5
     - /Users/zilliz/float_2.h5
@@ -126,7 +126,7 @@ insert_milvus.insert_data(vectors, self.dest_collection_name, self.collection_pa
 
     ```
     M2M:
-  milvus_version: 1.1.1
+  milvus_version: 1.1.0
   source_milvus_path: '/home/user/milvus'
   mysql_parameter:
     host: '127.0.0.1'
@@ -174,7 +174,7 @@ insert_milvus.insert_data(vectors, self.dest_collection_name, self.collection_pa
 
     ```
     M2H:
-  milvus_version: 1.1.1
+  milvus_version: 1.1.0
   source_milvus_path: '/home/user/milvus'
   mysql_parameter:
     host: '127.0.0.1'

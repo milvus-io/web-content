@@ -32,7 +32,7 @@ This parameter (1 second by default) refers to the interval time of the data flu
 Milvus cannot search for data that has not been flushed within this time interval.
 </div>
 
-Besides, the parameter `index_file_size`, which is used when creating collections, has an impact on the insertion performance. The value of this parameter is 1024 MB by default and 128 GB at most. The larger the `index_file_size`, the more time it takes to merge data to the size set by this parameter, which affects the throughput rate of the insert operation. The smaller the parameter, the more data segments are generated. This may worsen query performance.
+Besides, the parameter `index_file_size`, which is used when creating collections, has an impact on the insertion performance. The value of this parameter is 1024 MB by default and 4096 MB at most. The larger the `index_file_size`, the more time it takes to merge data to the size set by this parameter, which affects the throughput rate of the insert operation. The smaller the parameter, the more data segments are generated. This may worsen query performance.
 
 Besides software-level elements, network bandwidth and storage media also play a role in the insertion performance.
 

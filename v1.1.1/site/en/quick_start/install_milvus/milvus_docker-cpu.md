@@ -3,11 +3,12 @@ id: milvus_docker-cpu.md
 label: CPU-only Milvus
 order: 0
 group: distribution
+summary: Learn how to install and start CPU-only Milvus using Docker.
 ---
 
-# Install and Start Milvus
-
 <div class="tab-wrapper"><a href="milvus_docker-cpu.md" class='active '>CPU-only Milvus</a><a href="milvus_docker-gpu.md" class=''>GPU-enabled Milvus</a></div> 
+
+# Install and Start CPU-only Milvus
 
 ## Prerequisites
 
@@ -57,7 +58,7 @@ $ sudo docker info
 Pull the CPU-only image:
 
 ```shell
-$ sudo docker pull milvusdb/milvus:1.1.1-cpu-d061621-330cc6
+$ sudo docker pull milvusdb/milvus:1.1.1-cpu-d050721-5e559c
 ```
 <div class="alert note">
 <ul>
@@ -93,7 +94,7 @@ $ wget https://raw.githubusercontent.com/milvus-io/milvus/v1.1.1/core/conf/demo/
 ```
 
 <div class="alert note">
-If you cannot download configuration files via the <code>wget</code> command, you can create a <b>server_config.yaml</b> file under <b>/home/$USER/milvus/conf</b>, and then copy the content from <a href="https://github.com/milvus-io/milvus/blob/v1.1.1/core/conf/demo/server_config.yaml">server config</a> to it.
+If you cannot download configuration files via the <code>wget</code> command, you can create a <b>server_config.yaml</b> file under <b>/home/$USER/milvus/conf</b>, and then copy the content from <a href="https://github.com/milvus-io/milvus/blob/1.1/INSTALL.md">server config</a> to it.
 </div>
 
 ## Start Docker Container
@@ -108,7 +109,7 @@ $ sudo docker run -d --name milvus_cpu_1.1.1 \
 -v /home/$USER/milvus/conf:/var/lib/milvus/conf \
 -v /home/$USER/milvus/logs:/var/lib/milvus/logs \
 -v /home/$USER/milvus/wal:/var/lib/milvus/wal \
-milvusdb/milvus:1.1.1-cpu-d061621-330cc6
+milvusdb/milvus:1.1.1-cpu-d050721-5e559c
 ```
 
 The `docker run` options used in the above command are defined as follows:
@@ -152,7 +153,8 @@ Data formats of different versions may not be compatible with each other. The cu
 </details>
 <details>
 <summary><font color="#4fc4f9">Is Docker the only way to install and run Milvus?</font></summary>
-No. You can also build Milvus from source code in Linux. See <a href="https://github.com/milvus-io/milvus/blob/master/INSTALL.md">Build Milvus from source code</a> for more information.
+No. You can also build Milvus from source code in Linux. See <a href="https://github.com/milvus-io/milvus/blob/1.1/INSTALL.md">Build Milvus from source code</a> for more information.
+
 </details>
 <details>
 <summary><font color="#4fc4f9">How to set <code>nlist</code> or <code>nprobe</code> for IVF indexes?</font></summary>

@@ -14,7 +14,7 @@ Milvus was released under the open-source Apache License 2.0 in October 2019, an
 
 <div class="start_card_container">
   <a href="milvus_docker-cpu.md">
-    <img  src="../../../assets/cpu_only.svg" alt="icon" />
+    <img  src="../../../assets/cpu.svg" alt="icon" />
     <p class="link-btn">Start CPU-only Milvus <i class="fas fa-chevron-circle-right"></i></p>
   </a>
   <p>Learn to build.</p>
@@ -22,7 +22,7 @@ Milvus was released under the open-source Apache License 2.0 in October 2019, an
 
 <div class="start_card_container">
   <a href="example_code.md">
-    <img  src="../../../assets/gpu_enabled.svg" alt="icon" />
+    <img  src="../../../assets/gpu.svg" alt="icon" />
     <p class="link-btn">Start GPU-enabled Milvus <i class="fas fa-chevron-circle-right"></i></p>
   </a>
   <p>Learn to build.</p>
@@ -70,4 +70,5 @@ Milvus was released under the open-source Apache License 2.0 in October 2019, an
 - [Troubleshooting](troubleshoot.md)
 </div>
 
-
+  
+</div>
