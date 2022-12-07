@@ -222,4 +222,4 @@ queryNode:
 
 ## What's next
 
-- Try how to [perform a Milvus 2.2 benchmark by yourself](https://milvus.io/blog/2022-08-16-A-Quick-Guide-to-Benchmarking-Milvus-2-1.md).
+- Try performing Milvus 2.2.0 benchmark tests on your own by referring to [this guide](https://milvus.io/blog/2022-08-16-A-Quick-Guide-to-Benchmarking-Milvus-2-1.md), except that you should instead use Milvus 2.2 and Pymilvus 2.2 in this guide.
