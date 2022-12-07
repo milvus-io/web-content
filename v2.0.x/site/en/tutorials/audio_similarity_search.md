@@ -6,8 +6,8 @@ summary: Build an audio similarity search system with Milvus.
 # Audio Similarity Search
 
 This tutorial demonstrates how to use Milvus, the open-source vector database to build an audio similarity search system.
-- [Open Jupyter notebook](https://github.com/milvus-io/bootcamp/blob/master/solutions/audio_similarity_search/audio_similarity_search.ipynb)
-- [Quick deploy](https://github.com/milvus-io/bootcamp/blob/master/solutions/audio_similarity_search/quick_deploy)
+- [Open Jupyter notebook](https://github.com/milvus-io/bootcamp/blob/master/solutions/audio/audio_similarity_search/audio_similarity_search.ipynb)
+- [Quick deploy](https://github.com/milvus-io/bootcamp/tree/master/solutions/audio/audio_similarity_search/quick_deploy)
 The ML model and third-party software used include:
 - PANNs (Large-Scale Pretrained Audio Neural Networks)
 - MySQL
