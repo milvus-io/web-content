@@ -7,7 +7,6 @@ summary: Build a text search engine with Milvus.
 
 In this tutorial, you will learn how to use Milvus, the open-source vector database, to build a text search engine.
 - [Open Jupyter notebook](https://github.com/towhee-io/examples/tree/main/nlp/text_search)
-- [Quick deploy](https://github.com/milvus-io/bootcamp/blob/master/solutions/nlp/text_search/quick_deploy)
 
 The ML model and third-party software used include:
 - BERT
