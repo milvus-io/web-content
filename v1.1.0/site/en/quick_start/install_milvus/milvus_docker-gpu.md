@@ -6,9 +6,9 @@ group: distribution
 summary: Learn how to install and start GPU-enabled Milvus.
 ---
 
-# Install and Start Milvus
-
 <div class="tab-wrapper"><a href="milvus_docker-cpu.md" class=''>CPU-only Milvus</a><a href="milvus_docker-gpu.md" class='active '>GPU-enabled Milvus</a></div>
+
+# Install and Start GPU-enabled Milvus
 
 ## Prerequisites
 

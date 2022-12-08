@@ -6,9 +6,9 @@ group: distribution
 summary: Learn how to install and start CPU-only Milvus using Docker.
 ---
 
-# Install and Start Milvus
-
 <div class="tab-wrapper"><a href="milvus_docker-cpu.md" class='active '>CPU-only Milvus</a><a href="milvus_docker-gpu.md" class=''>GPU-enabled Milvus</a></div> 
+
+# Install and Start CPU-only Milvus
 
 ## Prerequisites
 
