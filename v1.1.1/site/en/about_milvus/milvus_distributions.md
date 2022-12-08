@@ -1,7 +1,6 @@
 ---
 id: milvus_distributions.md
-title: 
-label: CPU-only Milvus
+label: milvus_distributions
 summary: Learn about the indexes supported for Milvus distributions.
 ---
 
