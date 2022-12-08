@@ -6,7 +6,9 @@ group: distribution
 summary: Learn about the indexes supported for GPU-enabled Milvus.
 ---
 
-# Milvus Distributions
+<div class="tab-wrapper"><a href="milvus_distributions-cpu.md" class=''>CPU-only Milvus</a><a href="milvus_distributions-gpu.md" class='active '>GPU-enabled Milvus</a></div> 
+
+# GPU-enabled Milvus
 
 ## Overview
 
@@ -19,8 +21,6 @@ Milvus is available in CPU-only and GPU-enabled distributions:
 </ul>
 
 For GPUs that support CUDA, the GPU-enabled Milvus distribution can be used to achieve much better search performance when working with large-scale datasets.
-
-<div class="tab-wrapper"><a href="milvus_distributions-cpu.md" class=''>CPU-only Milvus</a><a href="milvus_distributions-gpu.md" class='active '>GPU-enabled Milvus</a></div> 
 
 ## Indexes for GPU-enabled Milvus
 
