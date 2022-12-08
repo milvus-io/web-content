@@ -48,7 +48,7 @@ etcd:
 ```
 # Suppose your docker-compose run with the default milvus network,
 # and you put migration.yaml in the same directory with docker-compose.yaml.
-docker run --rm -it --network milvus -v $(pwd)/migration.yaml:/milvus/configs/migration.yaml harbor.milvus.io/milvus/meta-migration:v2.2.0 /milvus/bin/meta-migration -config=/milvus/configs/migration.yaml
+docker run --rm -it --network milvus -v $(pwd)/migration.yaml:/milvus/configs/migration.yaml milvus/meta-migration:v2.2.0 /milvus/bin/meta-migration -config=/milvus/configs/migration.yaml
 ```
 
 4. Start Milvus components again with the new Milvus image.
