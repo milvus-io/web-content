@@ -1,9 +1,12 @@
 ---
 id: milvus_distributions-cpu.md
 label: CPU-only Milvus
+order: 0
+group: distribution
 summary: Learn about the indexes supported for CPU-only Milvus.
 ---
 
+<div class="tab-wrapper"><a href="milvus_distributions-gpu.md" class=''>GPU-enabled Milvus</a><a href="milvus_distributions-cpu.md" class='active '>CPU-only Milvus</a></div>
 # CPU-only Milvus
 
 ## Indexes for CPU-only Milvus

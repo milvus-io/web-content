@@ -1,8 +1,12 @@
 ---
 id: milvus_distributions-gpu.md
 label: GPU-enabled Milvus
+order: 0
+group: distribution
 summary: Learn about the indexes supported for GPU-enabled Milvus.
 ---
+
+<div class="tab-wrapper"><a href="milvus_distributions-gpu.md" class='active '>GPU-enabled Milvus</a><a href="milvus_distributions-cpu.md" class=''>CPU-only Milvus</a></div>
 
 # GPU-enabled Milvus
 
