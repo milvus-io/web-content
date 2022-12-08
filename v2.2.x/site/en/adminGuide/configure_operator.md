@@ -1,6 +1,6 @@
 ---
 id: configure_operator.md
-title: Configure Milvus with Milvus Operator
+label: Milvus Operator
 related_key: Milvus Operator
 summary: Learn how to configure Milvus with Milvus Operator.
 ---

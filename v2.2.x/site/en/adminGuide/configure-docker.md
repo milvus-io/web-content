@@ -13,8 +13,6 @@ This topic describes how to configure Milvus components and its third-party depe
 In current release, all parameters take effect only after Milvus restarts.
 </div>
 
-<div class="tab-wrapper"><a href="upgrade_milvus_standalone-helm.md" class=''>Helm</a><a href="upgrade_milvus_cluster-operator.md" class=''>Milvus Operator</a><a href="configure-helm.md" class=''>Helm</a><a href="configure-docker.md" class='active '>Docker Compose</a><a href="upgrade_milvus_standalone-docker.md" class=''>Docker Compose</a><a href="upgrade_milvus_cluster-docker.md" class=''>Docker Compose</a><a href="upgrade_milvus_cluster-helm.md" class=''>Helm</a></div>
-
 ## Download a configuration file
 
 [Download](https://raw.githubusercontent.com/milvus-io/milvus/v2.2.0/configs/milvus.yaml) `milvus.yaml` directly or with the following command.
