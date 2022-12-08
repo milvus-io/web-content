@@ -18,14 +18,31 @@
       "order": 0
     },
     {
-      "id": "milvus_distributions-cpu.md",
+      "id": "milvus_distributions.md",
       "title": "Milvus Distributions",
       "label1": "about_milvus",
       "label2": "",
       "label3": "",
       "order": 1
+    },
+    {
+      "id": "milvus_distributions-cpu.md",
+      "title": "CPU-only Milvus",
+      "label1": "about_milvus",
+      "label2": "milvus_distributions.md",
+      "label3": "",
+      "order": 0
 
     },
+    {
+      "id": "milvus_distributions-gpu.md",
+      "title": "GPU-enabled Milvus",
+      "label1": "about_milvus",
+      "label2": "milvus_distributions.md",
+      "label3": "",
+      "order": 1
+
+    },    
     {
       "id": "announcement.md",
       "title": "Announcement Letter",
