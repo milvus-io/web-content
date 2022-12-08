@@ -2,7 +2,7 @@
 id: configure-helm.md
 label: Helm
 related_key: configure
-summary: Learn how to configure your Milvus.
+summary: Configure Milvus with Helm Charts.
 ---
 
 # Configure Milvus with Helm Charts
