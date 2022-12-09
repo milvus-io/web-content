@@ -128,7 +128,7 @@
       "order": 1
     }, 
     {
-      "id": "install_offline-docker.md",
+      "id": "install_offline-helm.md",
       "title": "Install Offline",
       "label1": "getstarted",
       "label2": "installmilvus",
