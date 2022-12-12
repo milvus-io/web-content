@@ -456,11 +456,11 @@ R<SearchResults> respSearch = milvusClient.search(searchParam);
 	</tr>
 	<tr>
 		<td><code>offset</code></td>
-		<td>Number of results to skip in the returned set.  The sum of this value and `limit` should be less than 65535.</td>
+		<td>Number of results to skip in the returned set.  The sum of this value and `limit` should be less than 16384.</td>
 	</tr>
 	<tr>
 		<td><code>limit</code></td>
-		<td>Number of the most similar results to return.  The sum of this value and `offset` should be less than 65535.</td>
+		<td>Number of the most similar results to return.  The sum of this value and `offset` should be less than 16384.</td>
 	</tr>
   <tr>
 		<td><code>expr</code></td>
