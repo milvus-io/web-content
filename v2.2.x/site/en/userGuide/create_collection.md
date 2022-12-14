@@ -719,7 +719,7 @@ milvusClient.createCollection(createCollectionReq);
 |---|---|
 |Length of a collection name|255 characters|
 |Number of partitions in a collection|4,096|
-|Number of fields in a collection|256|
+|Number of fields in a collection|64|
 |Number of shards in a collection|256|
 
 
