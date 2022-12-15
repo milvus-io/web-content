@@ -6,6 +6,58 @@ summary: Milvus Release Notes
 
 Find out what’s new in Milvus! This page summarizes information about new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.1.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.2.1
+Release date: 15 December, 2022
+
+| Milvus version | Python SDK version | Java SDK version | Go SDK version | Node.js SDK version |
+| -------------- | ------------------ | ---------------- | -------------- | ------------------- |
+| 2.2.0          | 2.2.0              | 2.2.1            | Coming soon          | 2.2.0         |
+
+Milvus 2.2.1 is the minor fixed version of Milvus 2.2.0. It supports authentication and TLS on all dependencies, optimizes the performance ludicrously on searches and fixes some critical issues. With tremendous contribution from the community, this release managed to resolve over 280 issues, so please try the new release and give us feedback on stability, performance and ease of use.
+
+<h3 id="v2.2.1">New Features</h3> 
+
+- Supports Pulsa tenant and authentication. ([#20762](https://github.com/milvus-io/milvus/pull/20762))
+- Supports TLS in etcd config source. ([#20910](https://github.com/milvus-io/milvus/pull/20910))
+
+<h3 id="v2.2.1">Performance</h3> 
+
+After upgrading the Knowhere vector engine and changing the parallelism strategy, Milvus 2.2.1 improves search performance by over 30%. 
+
+Optimizes the scheduler, and increases merge tasks probability. ([#20931](https://github.com/milvus-io/milvus/pull/20931))
+
+<h3 id="v2.2.1">Bug Fixes</h3> 
+
+- Fixed term filtering failures on indexed scalar fields. ([#20840](https://github.com/milvus-io/milvus/pull/20840))
+- Fixed the issue that only partial data returned upon QueryNode restarts. ([#21139](https://github.com/milvus-io/milvus/pull/21139))([#20976](https://github.com/milvus-io/milvus/pull/20976))
+- Fixed IndexNode panic upon failures to create an index. ([#20826](https://github.com/milvus-io/milvus/pull/20826))
+- Fixed endless BinaryVector compaction and generation of data on Minio. ([#21119](https://github.com/milvus-io/milvus/pull/21119)) ([#20971](https://github.com/milvus-io/milvus/pull/20971))
+- Fixed the issue that `meta_cache` of proxy partially updates. ([#21232](https://github.com/milvus-io/milvus/pull/21232))
+- Fixed slow segment loading due to staled checkpoints. ([#21150](https://github.com/milvus-io/milvus/pull/21150))
+- Fixed concurrently loaded Casbin model causing concurrent write operations. ([#21132](https://github.com/milvus-io/milvus/pull/21132))([#21145](https://github.com/milvus-io/milvus/pull/21145))([#21073](https://github.com/milvus-io/milvus/pull/21073))
+- Forbade garbage-collecting index meta when creating an index. ([#21024](https://github.com/milvus-io/milvus/pull/21024))
+- Fixed a bug that the index data can not be garbage-collected because `ListWithPrefix` from Minio with recursive is false. ([#21040](https://github.com/milvus-io/milvus/pull/21040)) 
+- Fixed an issue that an error code is returned when a query expression does not match any results. ([#21066](https://github.com/milvus-io/milvus/pull/21066))
+- Fixed search failures on disk index when `search_list` equals to `limit`. ([#21114](https://github.com/milvus-io/milvus/pull/21114))
+- Filled collection schema after DataCoord restarts.  ([#21164](https://github.com/milvus-io/milvus/pull/21164))
+- Fixed an issue that the compaction handler may double release and hang. ([#21019](https://github.com/milvus-io/milvus/pull/21019))
+- [restapi] Fixed precision loss for Int64 fields upon insert requests. ([#20827](https://github.com/milvus-io/milvus/pull/20827))
+- Increased `MaxWatchDuration` and make it configurable to prevent shards with large data loads from timing out. ([#21010](https://github.com/milvus-io/milvus/pull/21010))
+- Fixed the issue that the compaction target segment `rowNum` is always 0. ([#20941](https://github.com/milvus-io/milvus/pull/20941))
+- Fixed the issue that IndexCoord deletes segment index by mistake because IndexMeta is not stored in time. ([#21058](https://github.com/milvus-io/milvus/pull/21058))
+- Fixed the issue that DataCoord crushes if auto-compaction is disabled. ([#21079](https://github.com/milvus-io/milvus/pull/21079))
+- Fixed the issue that searches on growing segments even though the segments are indexed. ([#21215](https://github.com/milvus-io/milvus/pull/21215))
+
+<h3 id="v2.2.1">Improvements</h3> 
+
+- Refined logs and the default log level is set to INFO.
+- Fixed incorrect metrics and refined the metric dashboard.
+- Made TopK limit configurable ([#21155](https://github.com/milvus-io/milvus/pull/21155))
+
+<h3 id="v2.2.1">Breaking changes</h3> 
+
+Milvus now limits each RPC to 64 MB to avoid OOM and generating large message packs.
+
 ## v2.2.0
 Release date: 18 November, 2022
 
