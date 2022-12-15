@@ -112,7 +112,7 @@
 
     },
     {
-      "id": "install_standalone-docker.md",
+      "id": "install_standalone-helm.md",
       "title": "Milvus Standalone",
       "label1": "getstarted",
       "label2": "installmilvus",
