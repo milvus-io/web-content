@@ -6,7 +6,7 @@ group: install_standalone-helm.md
 summary: Learn how to install Milvus stanalone on Kubernetes.
 ---
 
-<div class="tab-wrapper"><a href="install_standalone-helm.md" class='active '>Helm</a><a href="install_standalone-docker.md" class=''>Docker Compose</a></div>
+<div class="tab-wrapper"><a href="install_standalone-helm.md" class='active '>Helm</a><a href="install_standalone-docker.md" class=''>Docker Compose</a><a href="install_standalone-operator.md" class=''>Helm</a></div>
 
 # Install Milvus Standalone with Kubernetes
 
