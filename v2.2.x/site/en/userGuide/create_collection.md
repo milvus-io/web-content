@@ -497,7 +497,7 @@ Output:
         </tr>
         <tr>
             <td>-f (Multiple)</td>
-            <td>The field schema in the `<fieldName>:<dataType>:<dimOfVector/desc>` format.</td>
+            <td>The field schema in the <code>&lt;fieldName&gt;:&lt;dataType&gt;:&lt;dimOfVector/desc&gt;</code> format.</td>
         </tr>
         <tr>
             <td>-p</td>
