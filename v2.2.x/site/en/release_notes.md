@@ -63,7 +63,7 @@ Release date: 18 November, 2022
 
 | Milvus version | Python SDK version | Java SDK version | Go SDK version | Node.js SDK version |
 | -------------- | ------------------ | ---------------- | -------------- | ------------------- |
-| 2.2.0          | 2.2.0              | 2.2.1            | Coming soon          | 2.2.0               |
+| 2.2.1          | 2.2.0              | 2.2.1            | 2.2.0          | 2.2.0               |
 
 Milvus 2.2.0 introduces many new features including support for Disk-based approximate nearest neighbor (ANN) algorithm, bulk insertion of entities from files, and role-based access control (RBAC) for an improved security. In addition, this major release also ushers in a new era for vector search with enhanced stability, faster search speed, and more flexible scalability.
 
