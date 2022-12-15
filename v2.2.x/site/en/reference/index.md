@@ -232,20 +232,26 @@ In order to improve performance, HNSW limits the maximum degree of nodes on each
 
 ANNOY (Approximate Nearest Neighbors Oh Yeah) is an index that uses a hyperplane to divide a high-dimensional space into multiple subspaces, and then stores them in a tree structure.
 
-When searching for vectors, ANNOY follows the tree structure to find subspaces closer to the target vector, and then compares all the vectors in these subspaces (The number of vectors being compared should not be less than `search_k`) to obtain the final result. Obviously, when the target vector is close to the edge of a certain subspace, sometimes it is necessary to greatly increase the number of searched subspaces to obtain a high recall rate. Therefore, ANNOY uses `n_trees` different methods to divide the whole space, and searches all the dividing methods simultaneously to reduce the probability that the target vector is always at the edge of the subspace.
+There are just two main parameters needed to tune ANNOY: the number of trees `n_trees` and the number of nodes to inspect during searching `search_k`.
+
+- `n_trees` is provided during build time and affects the build time and the index size. A larger value will give more accurate results, but larger indexes.
+
+- `search_k` is provided in runtime and affects the search performance. A larger value will give more accurate results, but will take longer time to return.
+  
+If `search_k` is not provided, it will default to `n * n_trees` where `n` is the number of approximate nearest neighbors. Otherwise, `search_k` and `n_trees` are roughly independent, i.e. the value of `n_trees` will not affect search time if `search_k` is held constant and vice versa. Basically it's recommended to set `n_trees` as large as possible given the amount of memory you can afford, and it's recommended to set `search_k` as large as possible given the time constraints you have for the queries.
 
 
 - Index building parameters
 
   | Parameter | Description                              | Range     |
   | --------- | ---------------------------------------- | --------- |
-  | `n_trees` | The number of methods of space division. | [1, 1024] |
+  | `n_trees` | The number of trees.                     | [1, 1024] |
 
 - Search parameters
 
   | Parameter  | Description                                                  | Range                           |
   | ---------- | ------------------------------------------------------------ | ------------------------------- |
-  | `search_k` | The number of nodes to search. -1 means 5% of the whole data. | {-1} ∪ [`top_k`, n × `n_trees`] |
+  | `search_k` | The parameters that controls the search scope.               | [k, inf] |
 
 </div>
 
