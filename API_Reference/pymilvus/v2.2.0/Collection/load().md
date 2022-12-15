@@ -5,7 +5,7 @@ This method loads the specified collection to memory (for search or query).
 ## Invocation
 
 ```python
-load(partition_names=None, timeout=None, **kwargs)
+load(partition_names=None, replica_number=1, timeout=None, **kwargs)
 ```
 
 ## Parameters
