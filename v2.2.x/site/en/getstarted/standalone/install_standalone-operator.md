@@ -204,12 +204,12 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
 
 ## Install Milvus standalone
 
-### 1. Deploy a Milvus cluster
+### 1. Install Milvus
 
-When Milvus Operator starts, run the following command to deploy a Milvus cluster.
+When Milvus Operator starts, run the following command to install Milvus.
 
 ```
-$ kubectl apply -f https://github.com/milvus-io/milvus-operator/blob/main/config/samples/milvus_default.yaml
+$ kubectl apply -f https://raw.githubusercontent.com/milvus-io/milvus-operator/main/config/samples/milvus_default.yaml
 ```
 
 
@@ -225,7 +225,7 @@ When the Milvus is successfully installed, you can learn how to [Connect to Milv
 
 ## Uninstall Milvus standalone
 
-Run the following command to uninstall the Milvus cluster.
+Run the following command to uninstall Milvus.
 
 ```
 $ kubectl delete milvus my-release
@@ -262,10 +262,6 @@ Having installed Milvus, you can:
   - [Insert data](insert_data.md)
   - [Conduct a vector search](search.md)
 - [Upgrade Milvus Using Helm Chart](upgrade.md)
-- [Scale your Milvus cluster](scaleout.md)
-- Deploy your Milvu cluster on clouds:
-  - [Amazon EC2](aws.md)
-  - [Amazon EKS](eks.md)
 - Explore [MilvusDM](migrate_overview.md), an open-source tool designed for importing and exporting data in Milvus.
 - [Monitor Milvus with Prometheus](monitor.md)
 
