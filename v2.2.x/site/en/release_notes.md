@@ -11,7 +11,7 @@ Release date: 15 December, 2022
 
 | Milvus version | Python SDK version | Java SDK version | Go SDK version | Node.js SDK version |
 | -------------- | ------------------ | ---------------- | -------------- | ------------------- |
-| 2.2.0          | 2.2.0              | 2.2.1            | Coming soon          | 2.2.0         |
+| 2.2.1          | 2.2.0              | 2.2.1            | 2.2.0          | 2.2.0         |
 
 Milvus 2.2.1 is the minor fixed version of Milvus 2.2.0. It supports authentication and TLS on all dependencies, optimizes the performance ludicrously on searches and fixes some critical issues. With tremendous contribution from the community, this release managed to resolve over 280 issues, so please try the new release and give us feedback on stability, performance and ease of use.
 
