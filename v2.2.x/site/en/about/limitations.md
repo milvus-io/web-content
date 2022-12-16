@@ -34,7 +34,7 @@ The name of a resource can contain numbers, letters, and underscores (\_\). A re
 | ----------- | ----------- |
 | Partition      | 4,096       |
 | Shard   | 256        |
-| Field   | 256        |
+| Field   | 64        |
 | Index   | 1        |
 | Entity   | unlimited        |
 
