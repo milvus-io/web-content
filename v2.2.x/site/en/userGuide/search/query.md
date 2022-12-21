@@ -120,6 +120,8 @@ QueryParam queryParam = QueryParam.newBuilder()
   .withConsistencyLevel(ConsistencyLevelEnum.STRONG)
   .withExpr("book_id in [2,4,6,8]")
   .withOutFields(query_output_fields)
+  .withOffset(0L)
+  .withLimit(10L)
   .build();
 R<QueryResults> respQuery = milvusClient.query(queryParam);
 ```

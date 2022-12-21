@@ -130,7 +130,7 @@ if err != nil {
 
 ```java
 final Integer SEARCH_K = 2;
-final String SEARCH_PARAM = "{\"nprobe\":10}";
+final String SEARCH_PARAM = "{\"nprobe\":10, \”offset\”:5}";
 List<String> search_output_fields = Arrays.asList("book_id");
 List<List<Float>> search_vectors = Arrays.asList(Arrays.asList(0.1f, 0.2f));
 
