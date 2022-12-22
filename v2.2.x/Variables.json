@@ -4,7 +4,7 @@
   "milvus_deb_name": "milvus_2.2.0-1_amd64",
   "milvus_rpm_name": "milvus-2.2.0-1.el7.x86_64",
   "milvus_python_sdk_version": "2.2.1",
-  "milvus_node_sdk_version": "2.2.0",
+  "milvus_node_sdk_version": "2.2.1",
   "milvus_go_sdk_version": "2.2.0",
   "milvus_java_sdk_version": "2.2.1",
   "milvus_operator_version": "0.7.0",

@@ -6,14 +6,30 @@ summary: Milvus Release Notes
 
 Find out what’s new in Milvus! This page summarizes information about new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.1.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## 2.2.2
+Release date: 22 December, 2022
+
+| Milvus version | Python SDK version | Java SDK version | Go SDK version | Node.js SDK version |
+| -------------- | ------------------ | ---------------- | -------------- | ------------------- |
+| 2.2.1          | 2.2.1              | 2.2.1            | 2.2.0          | 2.2.1         |
+
+Milvus 2.2.2 is a minor fix of Milvus 2.2.1. It fixed a few loading failure issues as of the upgrade to 2.2.1 and the issue that the proxy cache is not cleaned upon some types of errors.
+
+
+<h3 id="v2.2.1">Bug Fixes</h3> 
+
+- Fixed the issue that the proxy doesn't update the cache of shard leaders due to some types of errors. ([#21320](https://github.com/milvus-io/milvus/pull/21320))
+- Fixed the issue that the loaded info is not cleaned for released collections/partitions. ([#21321](https://github.com/milvus-io/milvus/pull/21321))
+- Fixed the issue that the load count is not cleared on time. ([#21314](https://github.com/milvus-io/milvus/pull/21314))
+
 ## v2.2.1
 Release date: 15 December, 2022
 
 | Milvus version | Python SDK version | Java SDK version | Go SDK version | Node.js SDK version |
 | -------------- | ------------------ | ---------------- | -------------- | ------------------- |
-| 2.2.1          | 2.2.1              | 2.2.1            | 2.2.0          | 2.2.0         |
+| 2.2.1          | 2.2.1              | 2.2.1            | 2.2.0          | 2.2.1         |
 
-Milvus 2.2.1 is the minor fixed version of Milvus 2.2.0. It supports authentication and TLS on all dependencies, optimizes the performance ludicrously on searches and fixes some critical issues. With tremendous contribution from the community, this release managed to resolve over 280 issues, so please try the new release and give us feedback on stability, performance and ease of use.
+Milvus 2.2.1 is a minor fix of Milvus 2.2.0. It supports authentication and TLS on all dependencies, optimizes the performance ludicrously on searches and fixes some critical issues. With tremendous contribution from the community, this release managed to resolve over 280 issues, so please try the new release and give us feedback on stability, performance and ease of use.
 
 <h3 id="v2.2.1">New Features</h3> 
 
