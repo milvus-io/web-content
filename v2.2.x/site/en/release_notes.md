@@ -11,7 +11,7 @@ Release date: 22 December, 2022
 
 | Milvus version | Python SDK version | Java SDK version | Go SDK version | Node.js SDK version |
 | -------------- | ------------------ | ---------------- | -------------- | ------------------- |
-| 2.2.1          | 2.2.1              | 2.2.1            | 2.2.0          | 2.2.1         |
+| 2.2.2          | 2.2.1              | 2.2.1            | 2.2.0          | 2.2.1         |
 
 Milvus 2.2.2 is a minor fix of Milvus 2.2.1. It fixed a few loading failure issues as of the upgrade to 2.2.1 and the issue that the proxy cache is not cleaned upon some types of errors.
 
