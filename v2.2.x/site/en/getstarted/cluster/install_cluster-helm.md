@@ -130,7 +130,7 @@ my-release-pulsar-zookeeper-metadata-98zbr       0/1   Completed  0        3m24s
 Verify which local port the Milvus server is listening on. Replace the pod name with your own.
 
 ```bash
-$ kubectl get pod my-release-milvus-standalone-54c4f88cb9-f84pf --template
+$ kubectl get pod my-release-milvus-proxy-6bd7f5587-ds2xv --template
 ='{{(index (index .spec.containers 0).ports 0).containerPort}}{{"\n"}}'
 19530
 ```
