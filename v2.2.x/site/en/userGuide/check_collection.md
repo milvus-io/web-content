@@ -195,15 +195,15 @@ Check the details of a collection.
 from pymilvus import Collection
 collection = Collection("book")  # Get an existing collection.
 
-collection.schema                	# Return the schema.CollectionSchema of the collection.
-collection.description           	# Return the description of the collection.
-collection.name                  	# Return the name of the collection.
-collection.is_empty              	# Return the boolean value that indicates if the collection is empty.
-collection.num_entities          	# Return the number of entities in the collection.
-collection.primary_field         	# Return the schema.FieldSchema of the primary key field.
-collection.partitions            	# Return the list[Partition] object.
-collection.indexes               	# Return the list[Index] object.
-collection.collection.ttl.seconds	# Return the expiration time of data in the collection.
+collection.schema                # Return the schema.CollectionSchema of the collection.
+collection.description           # Return the description of the collection.
+collection.name                  # Return the name of the collection.
+collection.is_empty              # Return the boolean value that indicates if the collection is empty.
+collection.num_entities          # Return the number of entities in the collection.
+collection.primary_field         # Return the schema.FieldSchema of the primary key field.
+collection.partitions            # Return the list[Partition] object.
+collection.indexes               # Return the list[Index] object.
+collection.properties		# Return the expiration time of data in the collection.
 ```
 
 ```javascript
@@ -351,8 +351,8 @@ Output:
             <td>The primary field of the collection.</td>
         </tr>
 	<tr>
-            <td>collection.ttl.seconds</td>
-            <td>The the expiration time of data in a collection.</td>
+            <td>properties</td>
+		<td>Currently, only the property of <code>collection.ttl.seconds</code> is shown. Collection time to live (TTL) is the expiration time of data in a collection.</td>
         </tr>
     </tbody>
 </table>
