@@ -25,12 +25,15 @@ Set <code>common.security.authorizationEnabled</code> in <code>milvus.yaml</code
 
 <div class="table-wrapper filter-helm" markdown="block">
     
-Enable authentication as shown in the example below.
+As of Milvus Helm Chart 4.0.0, you can enable user authentication by modifying `values.yaml` as follows:
 
 <pre>
   <code>
-authorization:
-   enabled: true
+extraConfigFiles:
+  user.yaml: |+
+    common:
+       security:
+          authorizationEnabled: true
   </code>
 </pre>
     
