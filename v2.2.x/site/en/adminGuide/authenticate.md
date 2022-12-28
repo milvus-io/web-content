@@ -32,8 +32,8 @@ As of Milvus Helm Chart 4.0.0, you can enable user authentication by modifying `
 extraConfigFiles:
   user.yaml: |+
     common:
-       security:
-          authorizationEnabled: true
+      security:
+        authorizationEnabled: true
   </code>
 </pre>
     
