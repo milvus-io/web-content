@@ -5,7 +5,7 @@ id: home.md
 <div class="doc-h1-wrapper">
 
   <h1 class="title">
-    Welcome to Milvus Docs!
+    Welcome to Milvus Docs doc preview!
   </h1>
 
   <h2 class="sub-title">
@@ -46,7 +46,6 @@ id: home.md
 
 </div>
 
-
 ## Recommended articles
 
 <div class="doc-home-recommend-section">
@@ -85,11 +84,11 @@ id: home.md
 
 <div class="doc-home-what-is-new">
 
-## What's new in docs  
+## What's new in docs
 
 _Nov 2022 - Milvus 2.2.0 release_
 
-- Added guidance on how to [bulk insert entities from files](bulk_insert.md). 
+- Added guidance on how to [bulk insert entities from files](bulk_insert.md).
 - Added description of [disk-based ANN index](disk_index.md).
 - Added guidance on how to configure [quotas_and_limits](configure_quota_limits.md).
 - Added guidance on how to [enable RBAC](rbac.md) with Milvus Operator.
