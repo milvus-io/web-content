@@ -1,0 +1,15 @@
+name: Preview docs update
+
+on:
+  push:
+    paths:
+      - "preview/**.md"
+
+jobs:
+  build:
+    runs-on: "ubuntu-latest"
+
+    steps:
+      - name: Trigger milvus.io
+        run: |
+          curl -XPOST -H 'Authorization: `Bearer ${{secrets.GH_TOKEN}}`' -d '{ event_type: "dev-deploy" }' 'https://api.github.com/repos/milvus-io/www.milvus.io/dispatches'

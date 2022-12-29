@@ -12,17 +12,6 @@ const publish = async () => {
     }
   );
   console.log("---- prod deploy -----", prodRes);
-
-  const devRes = await axios.post(
-    "https://api.github.com/repos/milvus-io/www.milvus.io/dispatches",
-    { event_type: "dev-deploy" },
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
-  console.log("---- dev deploy -----", devRes);
 };
 
 publish();
