@@ -19,6 +19,7 @@ Dropping a collection irreversibly deletes all data within it.
   <a href="#go">GO</a>
   <a href="#javascript">Node.js</a>
   <a href="#shell">CLI</a>
+  <a href="#curl">Curl</a>
 </div>
 
 
@@ -52,6 +53,25 @@ milvusClient.dropCollection(
 ```shell
 delete collection -c book
 ```
+
+```curl
+curl -X 'DELETE' \
+  'http://localhost:9091/api/v1/collection' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "collection_name": "book"
+  }'
+```
+
+<div class="language-curl">
+Output:
+
+```json
+{}
+```
+
+</div>
 
 <table class="language-python">
 	<thead>
@@ -132,6 +152,20 @@ delete collection -c book
     </tbody>
 </table>
 
+<table class="language-curl">
+	<thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+        </tr>
+	</thead>
+	<tbody>
+        <tr>
+            <td><code>collection_name</code></td>
+            <td>Name of the collection to drop.</td>
+        </tr>
+	</tbody>
+</table>
 
 ## What's next
 

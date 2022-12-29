@@ -19,7 +19,7 @@ Milvus is committed to providing the best vector databases to power AI applicati
 
 ## Naming rules
 
-The name of a resource can contain numbers, letters, dollar signs ($), and underscores (\_). A resource name must start with a letter or an underscore (_).
+The name of a resource can contain numbers, letters, and underscores (\_\). A resource name must start with a letter or an underscore (\_\).
 
 ## Number of resources
 
@@ -34,18 +34,15 @@ The name of a resource can contain numbers, letters, dollar signs ($), and under
 | ----------- | ----------- |
 | Partition      | 4,096       |
 | Shard   | 256        |
-| Field   | 256        |
+| Field   | 64        |
 | Index   | 1        |
 | Entity   | unlimited        |
 
 ## Length of a string 
 | Data type      | Limit  |
 | ----------- | ----------- |
-| VARCHAR      | 65,535 characters       |
+| VARCHAR      | 65,535       |
 
-<div class="alert note">
-VARCHAR and more string data types will be supported in future releases of Milvus.
-</div>
 
 
 ## Dimensions of a vector

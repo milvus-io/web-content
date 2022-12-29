@@ -9,11 +9,16 @@ summary: Learn how to connect to a Milvus server.
 This topic describes how to connect to and disconnect from a Milvus server.
 
 <div class="alert note">
-  Ensure to connect to Milvus server before any operations.
+  Ensure to connect to a Milvus server before any operations.
 </div>
 
-Below example connects to a Milvus server with host as `localhost` and port as `19530` and disconnects from it.
+Milvus supports two ports, port `19530` and port `9091`:
+ 
+- Port `19530` is for gRPC. It is the default port when you connect to a Milvus server with different Milvus SDKs.
 
+- Port `9091` is for RESTful API. It is used when you connect to a Milvus server with an HTTP client.
+
+The example below connects to the Milvus server with host as `localhost` and port as `19530` or `9091`, and disconncets from it. If the connection is refused, try unblocking the corresponding port.
 
 ## Connect to a Milvus server
 
@@ -25,6 +30,7 @@ Construct a Milvus connection. Ensure to connect to Milvus server before any ope
   <a href="#go">GO</a>
   <a href="#javascript">Node.js</a>
   <a href="#shell">CLI</a>
+  <a href="#curl">Curl</a>
 </div>
 
 
@@ -67,6 +73,10 @@ final MilvusServiceClient milvusClient = new MilvusServiceClient(
 connect -h localhost -p 19530 -a default
 ```
 
+```curl
+curl localhost:9091/api/v1/health  
+{"status":"ok"}
+```
 
 <table class="language-python">
 	<thead>
@@ -198,6 +208,7 @@ Disconnect from a Milvus server.
   <a href="#go">GO</a>
   <a href="#javascript">Node.js</a>
   <a href="#shell">CLI</a>
+  <a href="#curl">Curl</a>
 </div>
 
 
@@ -220,6 +231,10 @@ milvusClient.close()
 
 ```shell
 connect -D
+```
+
+```curl
+# Close your HTTP client connection.
 ```
 
 <table class="language-python">

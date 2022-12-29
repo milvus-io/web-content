@@ -40,7 +40,7 @@ For more information, see [Vector Indexing](https://www.zilliz.com/blog/Accelera
 
 #### Why did my changes to the configuration files not take effect?
 
-Milvus v2.0 does not support modification to configuration files during runtime. You must restart Milvus Docker for configuration file changes to take effect.
+Milvus does not support modification to configuration files during runtime. You must restart Milvus Docker for configuration file changes to take effect.
 
 #### How do I know if Milvus has started successfully?
 
@@ -75,13 +75,13 @@ $ lscpu | grep -e sse4_2 -e avx -e avx2 -e avx512
 
 Milvus requires your CPU to support a SIMD instruction set: SSE4.2, AVX, AVX2, or AVX512. CPU must support at least one of these to ensure that Milvus operates normally. An `illegal instruction` error returned during startup suggests that your CPU does not support any of the above four instruction sets.
 
-See [CPU’s support for SIMD Instruction Set](install_standalone-docker.md#before-you-begin).
+See [CPU’s support for SIMD Instruction Set](prerequisite-docker.md).
 
 #### Can I install Milvus on Windows?
 
 Yes. You can install Milvus on Windows either by compiling from source code or from a binary package. 
 
-See [Run Milvus 2.0 on Windows](https://milvus.io/blog/2021-11-19-run-milvus-2.0-on-windows.md?page=1#all) to learn how to install Milvus on Windows.
+See [Run Milvus on Windows](https://milvus.io/blog/2021-11-19-run-milvus-2.0-on-windows.md) to learn how to install Milvus on Windows.
 
 #### I got an error when installing pymilvus on Windows. What shall I do?
 

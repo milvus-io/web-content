@@ -12,7 +12,7 @@ This topic introduces schema in Milvus. Schema is used to define the properties 
 
 A field schema is the logical definition of a field. It is the first thing you need to define before defining a [collection schema](#Collection-schema) and [creating a collection](create_collection.md). 
 
-Milvus 2.0 supports only one primary key field in a collection.
+Milvus supports only one primary key field in a collection.
 
 ### Field schema properties
 
@@ -70,10 +70,8 @@ embedding_field = FieldSchema(name="embedding", dtype=DataType.FLOAT_VECTOR, dim
 `DataType` defines the kind of data a field contains. Different fields support different data types.
 
 - Primary key field supports:
-  - INT8: numpy.int8
-  - INT16: numpy.int16
-  - INT32: numpy.int32
   - INT64: numpy.int64
+  - VARCHAR: VARCHAR
 - Scalar field supports:
   - BOOL: Boolean (`true` or `false`)
   - INT8: numpy.int8
@@ -82,6 +80,7 @@ embedding_field = FieldSchema(name="embedding", dtype=DataType.FLOAT_VECTOR, dim
   - INT64: numpy.int64
   - FLOAT: numpy.float32
   - DOUBLE: numpy.double
+  - VARCHAR: VARCHAR
 - Vector field supports:
   - BINARY_VECTOR: Binary vector
   - FLOAT_VECTOR: Float vector
@@ -162,4 +161,8 @@ collection, ins_res = Collection.construct_from_dataframe(
                                 auto_id=False
                                 )
 ```
+
+## What's next
+
+- Learn how to prepare schema when [creating a collection](create_collection.md).
 

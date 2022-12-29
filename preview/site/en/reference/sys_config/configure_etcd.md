@@ -25,7 +25,7 @@ Under this section, you can configure etcd endpoints, relevant key prefixes, etc
   <tbody>
     <tr>
       <td>
-        <li>Endpoints used to access etcd service with. You can change this parameter as the endpoints of your own etcd cluster.</li>
+        <li>Endpoints used to access etcd service. You can change this parameter as the endpoints of your own etcd cluster.</li>
         <li>Environment variable: <code>ETCD_ENDPOINTS</code></li>
         <li>etcd preferentially acquires valid address from environment variable <code>ETCD_ENDPOINTS</code> when Milvus is started.</li>
       </td>

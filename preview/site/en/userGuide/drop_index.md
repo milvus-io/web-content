@@ -18,6 +18,7 @@ Dropping an index irreversibly removes all corresponding index files.
   <a href="#go">GO</a>
   <a href="#javascript">Node.js</a>
   <a href="#shell">CLI</a>
+  <a href="#curl">Curl</a>
 </div>
 
 
@@ -57,6 +58,16 @@ milvusClient.dropIndex(
 delete index -c book
 ```
 
+```curl
+curl -X 'DELETE' \
+  'http://localhost:9091/api/v1/index' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "collection_name": "book",
+    "field_name": "book_intro"
+  }'
+```
 
 <table class="language-javascript">
 	<thead>
@@ -130,6 +141,24 @@ delete index -c book
     </tbody>
 </table>
 
+<table class="language-curl">
+	<thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+        </tr>
+	</thead>
+	<tbody>
+        <tr>
+            <td><code>collection_name</code></td>
+            <td>Name of the collection to drop index on.</td>
+        </tr>
+        <tr>
+            <td><code>field_name</code></td>
+            <td>Name of the vector field to drop index on.</td>
+        </tr>
+    </tbody>
+</table>
 
 ## What's next
 

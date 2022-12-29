@@ -11,7 +11,7 @@ Milvus cluster depends on components including object storage, etcd, and Pulsar.
 
 This topic assumes that you have deployed Milvus Operator.
 
-<div class="alert note">See <a href="https://milvus.io/docs/v2.0.x/install_cluster-milvusoperator.md">Deploy Milvus Operator</a> for more information. </div>
+<div class="alert note">See <a href="https://milvus.io/docs/v2.2.2/install_cluster-milvusoperator.md">Deploy Milvus Operator</a> for more information. </div>
 
 You need to specify a configuration file for using Milvus Operator to start a Milvus cluster.
 
@@ -150,7 +150,7 @@ spec:
 
 <div class="alert note">In this example, <code>inCluster.deletionPolicy</code> defines a deleletion policy for data. <code>inCluster.values.resources</code> defines the compute resources that MinIO uses. <code>inCluster.values.statefulset.replicaCount</code> defines the number of replicas of MinIO on each drive.</div>
 
-<div class="alert note">Find the complete configuration items to configure an internal MinIO service in <a href="https://github.com/milvus-io/milvus-operator/blob/main/config/assets/charts/minio/values.yaml">values.yaml</a>. Add configuration items as needed under <code>storage.inCluster.values</code> as shown in the preceding example.</div>
+<div class="alert note">Find the complete configuration items to configure an internal MinIO service in <a href="https://github.com/milvus-io/milvus-helm/blob/master/charts/minio/values.yaml">values.yaml</a>. Add configuration items as needed under <code>storage.inCluster.values</code> as shown in the preceding example.</div>
 
 Assuming that the configuration file is named `milvuscluster.yaml`, run the following command to apply the configuration.
 

@@ -23,6 +23,7 @@ All search and query operations within Milvus are executed in memory. Load the c
   <a href="#go">GO</a>
   <a href="#javascript">Node.js</a>
   <a href="#shell">CLI</a>
+  <a href="#curl">Curl</a>
 </div>
 
 
@@ -61,6 +62,16 @@ milvusClient.loadCollection(
 load -c book
 ```
 
+```curl
+curl -X 'POST' \
+  'http://localhost:9091/api/v1/collection/load' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "collection_name": "book"
+  }'
+```
+
 ## Prepare search parameters
 
 Prepare the parameters that suit your search scenario. The following example defines that the search will calculate the distance with Euclidean distance, and retrieve vectors from ten closest clusters built by the IVF_FLAT index.
@@ -71,11 +82,12 @@ Prepare the parameters that suit your search scenario. The following example def
   <a href="#go">GO</a>
   <a href="#javascript">Node.js</a>
   <a href="#shell">CLI</a>
+  <a href="#curl">Curl</a>
 </div>
 
 
 ```python
-search_params = {"metric_type": "L2", "params": {"nprobe": 10}}
+search_params = {"metric_type": "L2", "params": {"nprobe": 10}, "offset": 5}
 ```
 
 ```javascript
@@ -95,7 +107,7 @@ sp, _ := entity.NewIndexFlatSearchParam( // NewIndex*SearchParam func
 
 ```java
 final Integer SEARCH_K = 2;                       // TopK
-final String SEARCH_PARAM = "{\"nprobe\":10}";    // Params
+final String SEARCH_PARAM = "{\"nprobe\":10, \”offset\”:5}";    // Params
 ```
 
 ```shell
@@ -123,6 +135,52 @@ Guarantee Timestamp(It instructs Milvus to see all operations performed before a
 
 Travel Timestamp(Specify a timestamp in a search to get results based on a data view) [0]:
 ```
+
+```curl
+curl -X 'POST' \
+  'http://localhost:9091/api/v1/search' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "collection_name": "book",
+    "output_fields": ["book_id"],
+    "search_params": [
+      {"key": "anns_field", "value": "book_intro"},
+      {"key": "topk", "value": "2"},
+      {"key": "params", "value": "{\"nprobe\": 10}"},
+      {"key": "metric_type", "value": "L2"},
+      {"key": "round_decimal", "value": "-1"}
+    ],
+    "vectors": [ [0.1,0.2] ],
+    "dsl_type": 1
+  }'
+```
+
+<div class="language-curl">
+Output:
+
+```json
+{
+  "status":{},
+  "results":{
+    "num_queries":1,
+    "top_k":2,
+    "fields_data":[
+      {
+        "type":5,
+        "field_name":"book_id",
+        "Field":{"Scalars":{"Data":{"LongData":{"data":[1,2]}}}},
+        "field_id":100
+      }
+    ],
+    "scores":[1.45,4.25],
+    "ids":{"IdField":{"IntId":{"data":[1,2]}}},
+    "topks":[2]},
+    "collection_name":"book"
+}
+```
+
+</div>
 
 <table class="language-python">
 	<thead>
@@ -250,12 +308,57 @@ Travel Timestamp(Specify a timestamp in a search to get results based on a data 
     </tbody>
 </table>
 
+<table class="language-curl">
+	<thead>
+	<tr>
+		<th>Parameter</th>
+		<th>Description</th>
+	</tr>
+	</thead>
+	<tbody>
+    <tr>
+		<td><code>output_fields</code>(optional)</td>
+		<td>Name of the field to return. Vector field is not supported in current release.</td>
+	</tr>
+	<tr>
+		<td><code>anns_field</code></td>
+		<td>Name of the field to search on.</td>
+	</tr>
+	<tr>
+		<td><code>topk</code></td>
+		<td>Number of the most similar results to return.</td>
+	</tr>
+	<tr>
+		<td><code>params</code></td>
+		<td>Search parameter(s) specific to the index. See <a href="index.md">Vector Index</a> for more information.</td>
+	</tr>
+	<tr>
+		<td><code>metric_type</code></td>
+		<td>Metrics used to measure similarity of vectors. See <a href="metric.md">Simlarity Metrics</a> for more information.</td>
+	</tr>
+	<tr>
+		<td><code>round_decimal</code> (optional)</td>
+		<td>Number of decimal places of returned distance.</td>
+	</tr>
+	<tr>
+		<td><code>Vectors</code></td>
+		<td>Vectors to search with.</td>
+	</tr>
+	<tr>
+		<td><code>dsl_type</code></td>
+		<td>Type of <code>dsl</code> (Data Search Language) field:
+		<br>0: "Dsl"
+		<br>1: "BoolExprV1"
+		</td>
+	</tr>
+	</tbody>
+</table>
 
 ## Conduct a vector search
 
 Search vectors with Milvus. To search in a specific [partition](glossary.md#Partition), specify the list of partition names. 
 
-Milvus supports setting consistency level specifically for a search or query  (only on PyMilvus currently). The consistency level set in the search or query requests overwrites the one set while creating the collection. In this example, the consistency level of the search request is set as "Strong", meaning Milvus will read the most updated data view at the exact time point when a search or query request comes. Without specifying the consistency level during a search or query, Milvus adopts the original consistency level of the collection.
+Milvus supports setting consistency level specifically for a search. The example in this topic sets the consistency level as `Strong`. You can also set the consistency level as `Bounded`, `Session` or `Eventually`. See [Consistency](consistency.md) for more information about the four consistency levels in Milvus.
 
 <div class="multipleCode">
   <a href="#python">Python </a>
@@ -263,6 +366,7 @@ Milvus supports setting consistency level specifically for a search or query  (o
   <a href="#go">GO</a>
   <a href="#javascript">Node.js</a>
   <a href="#shell">CLI</a>
+  <a href="#curl">Curl</a>
 </div>
 
 
@@ -270,7 +374,7 @@ Milvus supports setting consistency level specifically for a search or query  (o
 results = collection.search(
 	data=[[0.1, 0.2]], 
 	anns_field="book_intro", 
-	param=search_params, 
+	param=search_params,
 	limit=10, 
 	expr=None,
 	consistency_level="Strong"
@@ -311,6 +415,7 @@ List<List<Float>> search_vectors = Arrays.asList(Arrays.asList(0.1f, 0.2f));
 
 SearchParam searchParam = SearchParam.newBuilder()
 		.withCollectionName("book")
+		.withConsistencyLevel(ConsistencyLevelEnum.STRONG)
 		.withMetricType(MetricType.L2)
 		.withOutFields(search_output_fields)
 		.withTopK(SEARCH_K)
@@ -322,6 +427,10 @@ R<SearchResults> respSearch = milvusClient.search(searchParam);
 ```
 
 ```shell
+# Follow the previous step.
+```
+
+```curl
 # Follow the previous step.
 ```
 
@@ -341,13 +450,17 @@ R<SearchResults> respSearch = milvusClient.search(searchParam);
 		<td><code>anns_field</code></td>
 		<td>Name of the field to search on.</td>
 	</tr>
-  <tr>
+    <tr>
 		<td><code>param</code></td>
 		<td>Search parameter(s) specific to the index. See <a href="index.md">Vector Index</a> for more information.</td>
 	</tr>
 	<tr>
+		<td><code>offset</code></td>
+		<td>Number of results to skip in the returned set.  The sum of this value and `limit` should be less than 16384.</td>
+	</tr>
+	<tr>
 		<td><code>limit</code></td>
-		<td>Number of the most similar results to return.</td>
+		<td>Number of the most similar results to return.  The sum of this value and `offset` should be less than 16384.</td>
 	</tr>
   <tr>
 		<td><code>expr</code></td>
@@ -516,6 +629,11 @@ R<SearchResults> respSearch = milvusClient.search(searchParam);
 		<td>Boolean expression used to filter attribute.</td>
     <td>See <a href="boolean.md">Boolean Expression Rules</a> for more information.</td>
 	</tr>
+  <tr>
+		<td><code>ConsistencyLevel</code></td>
+		<td>The consistency level used in the query.</td>
+	  <td><code>STRONG</code>, <code>BOUNDED</code>, and<code>EVENTUALLY</code>.</td>
+	</tr>
 	</tbody>
 </table>
 
@@ -529,6 +647,7 @@ Check the primary key values of the most similar vectors and their distances.
   <a href="#go">GO</a>
   <a href="#javascript">Node.js</a>
   <a href="#shell">CLI</a>
+  <a href="#curl">Curl</a>
 </div>
 
 
@@ -567,6 +686,7 @@ Release the collection loaded in Milvus to reduce memory consumption when the se
   <a href="#go">GO</a>
   <a href="#javascript">Node.js</a>
   <a href="#shell">CLI</a>
+  <a href="#curl">Curl</a>
 </div>
 
 
@@ -599,6 +719,16 @@ milvusClient.releaseCollection(
 release -c book
 ```
 
+``` curl
+curl -X 'DELETE' \
+  'http://localhost:9091/api/v1/collection/load' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "collection_name": "book"
+  }'
+```
+
 ## Limits
 |Feature|Maximum limit|
 |---|---|
@@ -619,7 +749,10 @@ release -c book
   - [Search with Time Travel](timetravel.md)
 
 - Explore API references for Milvus SDKs:
-  - [PyMilvus API reference](/api-reference/pymilvus/v2.0.2/About.html)
-  - [Node.js API reference](/api-reference/node/v2.0.2/About.html)
-  - [Go API reference](/api-reference/go/v2.0.0/About.html)
-  - [Java API reference](/api-reference/java/v2.0.4/tutorial.html)
+
+  - [PyMilvus API reference](/api-reference/pymilvus/v2.2.1/About.md)
+  - [Node.js API reference](/api-reference/node/v2.2.1/About.md)
+  - [Go API reference](/api-reference/go/v2.2.0/About.md)
+  - [Java API reference](/api-reference/java/v2.2.1/About.md)
+
+

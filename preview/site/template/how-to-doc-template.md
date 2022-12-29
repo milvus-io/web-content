@@ -8,9 +8,10 @@ Please describe the instructive goal you expect to achieve and preparation/prere
 
 ## Step 1 - Use second-person imperative to state the operation
 
-Add detailed decription when necessary.
+Add detailed description when necessary.
 
 ```
+Check previous user guides for cohesion in code sample  .
 Aim for utility and simplicity when adding code/example  .
 ```
 

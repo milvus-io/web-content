@@ -198,3 +198,44 @@ Under this section, you can configure root coord address, index building thresho
   </tbody>
 </table>
 
+
+## `rootCoord.importTaskExpiration`
+
+<table id="rootCoord.importTaskExpiration">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <li>A file import task expires after <code>importTaskExpiration</code> seconds.</li>
+        <li>Unit: second</li>
+        <li>You should also change the value of the parameter in the <code>internal/util/paramtable/component_param.go</code> file.</li>
+      </td>
+      <td>900</td>
+    </tr>
+  </tbody>
+</table>
+
+## `rootCoord.importTaskRetention`
+
+<table id="rootCoord.importTaskRetention">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <li>Milvus keeps the record of import tasks for at least <code>importTaskRetention</code> seconds.</li>
+        <li>You should also change the value of the parameter in the <code>internal/util/paramtable/component_param.go</code> file.</li>
+      </td>
+      <td>86400</td>
+    </tr>
+  </tbody>
+</table>

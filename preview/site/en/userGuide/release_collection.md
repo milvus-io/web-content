@@ -14,6 +14,7 @@ This topic describes how to release a collection from memory after a search or a
   <a href="#go">GO</a>
   <a href="#javascript">Node.js</a>
   <a href="#shell">CLI</a>
+  <a href="#curl">Curl</a>
 </div>
 
 
@@ -39,7 +40,6 @@ if err != nil {
 }
 ```
 
-
 ```java
 milvusClient.releaseCollection(
   ReleaseCollectionParam.newBuilder()
@@ -51,6 +51,25 @@ milvusClient.releaseCollection(
 ```shell
 release -c book
 ```
+
+``` curl
+curl -X 'DELETE' \
+  'http://localhost:9091/api/v1/collection/load' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "collection_name": "book"
+  }'
+```
+
+<div class="language-curl">
+Output:
+
+```json
+{}
+```
+
+</div>
 
 <table class="language-python">
 	<thead>
@@ -133,6 +152,21 @@ release -c book
             <td>The name of the partition to release.</td>
         </tr>
     </tbody>
+</table>
+
+<table class="language-curl">
+	<thead>
+	<tr>
+		<th>Parameter</th>
+		<th>Description</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td><code>collection_name</code></td>
+		<td>Name of the collection to release.</td>
+	</tr>
+	</tbody>
 </table>
 
 ## Constraints

@@ -2,16 +2,13 @@
 
 The Milvus docs are open-source just like the database itself and welcome contributions from everyone in the Milvus community.
 
-> Please note that this repository is for Milvus technical documentation update and maintenance. Up-to-date, fully rendered technical documentation can be found at [milvus.io](https://www.milvus.io/) and [Web content repo](https://github.com/milvus-io/web-content).
+> This repository is for Milvus technical documentation update and maintenance. Visit [Milvus.io](milvus.io) or [Web content repo](https://github.com/milvus-io/web-content) for fully rendered documents.
 
 ## What contributions can I make?
 
-Basically anything you can think of to improve our documentation and make it more user friendly! Below are some straightforward examples:
-
+Basically anything you can think of to improve our documentation and make it more user friendly! For example:
 
 - Fix a typo or a grammatical error.
-
-- Translate English content into Chinese or other languages.
 
 - Update or extend existing documentation.
 
@@ -21,20 +18,17 @@ Basically anything you can think of to improve our documentation and make it mor
 
 Before you contribute please take a minute to familiarize yourself with basic [Markdown](https://www.markdownguide.org/basic-syntax/) syntax and have a look at our [Code of Conduct](https://github.com/milvus-io/milvus/blob/master/CODE_OF_CONDUCT.md).
 
-[Google Developer Documentation Style Guide](https://developers.google.com/style/) is **strongly recommended** before you want to make some substantial contributions, giving you some guidance on how to write accessible, consistent and inclusive documentation.
-
-For contributions concerning translation to other language, unedited machine translation will not be accepted. 
-
+We **strongly recommended** that you stand by the [Google Developer Documentation Style Guide](https://developers.google.com/style/) before you want to make any substantial contributions. This guide gives useful advice on how to write accessible, consistent and inclusive documentation.
 
 ## Get started
 
-If you are just correcting a typo or grammatical error, feel free to edit the page and [create a pull request](https://github.com/milvus-io/milvus-docs/pulls). 
+If you want to correct a typo or grammatical error, feel free to edit the page and [create a pull request](https://github.com/milvus-io/milvus-docs/pulls).
 
 For more substantial changes, please follow the following steps:
 
-1. [File an issue](https://github.com/milvus-io/milvus-docs/issues/new/choose) and assign it to yourself. 
+1. [File an issue](https://github.com/milvus-io/milvus-docs/issues/new/choose) and assign it to yourself.
    
-   Or, if you want to fix an existing issue then go to [Issues](https://github.com/milvus-io/milvus-docs/issues), choose one issue and assign it to yourself.
+   Or if you want to fix an existing issue, go to [Issues](https://github.com/milvus-io/milvus-docs/issues), choose one issue and assign it to yourself.
 
 2. Fork the [milvus-docs repository](https://github.com/milvus-io/milvus-docs) to your own GitHub account.
 
@@ -52,17 +46,17 @@ For detailed information on this workflow, see [Make Your First Contribution](ht
 - [Pages](#pages)
 - [Sidebar](#sidebar)
 
-### Languages
+### Language
 
-All documentation is originally written in English and translated into other language(s). Currently, the official website only supports two language versions: English and Chinese, stored in their corresponding **site/en** and **site/zh-CN** directories in each branch. Nevertheless, you are more than welcome to make a huge contribution to the community by translating the documentation into other languages you know! 
+All documentation is written in English, which is the official language supported by the Milvus website. Nevertheless, you are more than welcome to make a huge contribution to the community by translating the documentation into other languages you know!
+
+> We are grateful that efforts to maintain a Chinese version of the docs have been continued by a community [project](https://github.com/milvus-cn) ([#1449](https://github.com/milvus-io/milvus-docs/issues/1449)). Milvus has stopped official support for Chinese documentation since August 2021.
 
 ### Pages
 
-We provide documentation for each major version of Milvus. The pages for each version are found in a directory named for the version. For example, docs for Milvus v2.0 are in the `v2.0.x` directory, whereas docs for Milvus v1.1.0 are in the `v1.1.0` directory.
+We provide documentation for each major version of Milvus. The pages for each version can be found in a directory named for the version. For example, docs for Milvus v2.0 are in the `v2.0.x` directory, whereas docs for Milvus v1.1.0 are in the `v1.1.0` directory.
 
-
-Within each version directory, each page must be an **.md** file written in Markdown. File names should be lowercase with an underscore between words and should be brief but descriptive.
-
+Within each version's directory, every page must be an **.md** file written in Markdown. File names should be lowercase with an underscore between words and should be brief but descriptive.
 
 Example:
 
@@ -77,7 +71,7 @@ id: page_id.md
 
 title: Title of Page
 
-summary: Short description of the page for SEO
+summary: Short description of the page for SEO purposes
 
 related_key: keyword
 
@@ -94,16 +88,16 @@ group: major_page.md
 | `related_key` (optional) | Used as the keyword to pull related questions from the FAQ database to show at the bottom of the page. |
 | `group` (optional) | Add the leading page appeared on the sidenav if this page is a part of a page group. |
 
-#### Templates 
+#### Templates
 
-In general, there are four types of documentation: 
+In general, there are four types of documentation:
 
 - [How-to docs](site/template/how-to-doc-template.md)
 - [Conceptual docs](site/template/conceptual-doc-template.md)
 - [Reference docs](site/template/reference-doc-template.md)
 - [Tutorials](site/template/tutorial-doc-template.md)
 
-When drafting a document, you should follow these types of definitions with a degree of flexibility, as there is some amount of cross-over between them. 
+Follow any of these templates when you draft a document, but remember to be flexible as these types are not difinitively distinct from each other.
 
 #### Images
 
@@ -111,44 +105,36 @@ When drafting a document, you should follow these types of definitions with a de
 
 #### Fragments
 
-*Fragments* let you split the markdown into independent, reusable pieces and are defined in the **site/en/fragments** and **site/zh-CN/fragments** folders. Use the **{{fragments/xxx.md}}** syntax to reference a specific fragment.
+*Fragments* let you split the markdown into independent, reusable pieces and are defined in the **site/en/fragments** folder. Use the **{{fragments/xxx.md}}** syntax to reference a specific fragment.
 
 #### Variables
 
-*Variables* are used to store version information to be referenced in code or paths. They are defined in **Variables.json** and can be used in Markdown (**.md**) files, fragments, and templates. 
+*Variables* are used to store version information that are referenced in code or paths. They are defined in **Variables.json** and can be used in Markdown (**.md**) files, fragments, and templates.
 
-
-> The defined variables are implemented within the current folder and its subfolders. The **en** and **Zh-CN** folders each contain a **Variables.json** file.
-
+> The defined variables are implemented within the current folder and its subfolders.
 
 ### Sidebar
 
-For each documented version of Milvus, the JSON file in the **menuStructure** directory defines the pages that appear in the Docs sidebar. 
+For each documented version of Milvus, the JSON file in the **menuStructure** directory defines what pages appear in the Docs sidebar.
 
-If you're adding a page that you think should appear in the sidebar, please mention this in your pull request. Please follow the established practice when changing this file.
+If you're adding a page that you think should appear in the sidebar, please mention this in your pull request and follow the established practice when changing the **en.json** file.
 
 In the JSON file for a version's sidebar, there are six possible fields:
 
-
-
 | Field | Type | Description |
 | ------|------|------------ |
-| `id` | String | The unique ID (within en/zh-CN folder) is given to a page (defined in the front-matter of the corresponding Markdown file) or a section. |
-| `title` | String | This field defines the title for a section of the sidenav, e.g., "Get Started", for a subsection, e.g., "Install Milvus", or for a page, e.g., "Milvus Standalone". See the [JSON Example](#json-example) below for more clarity. |
-| `label<n>` (e.g., label1, label2, label3) | String | This field defines the hierarchical structure of pages and sections.  |
+| `id` | String | The unique ID (within the **en** folder) that is given to a section or a page (defined in the front-matter of the corresponding Markdown file). |
+| `title` | String | The title for an entry in the sidenav, e.g., "Get Started" (section), "Install Milvus" (subsection), or "Milvus Standalone" (page). See the [JSON Example](#json-example) below for more clarity. |
+| `label<n>` (e.g., label1, label2, label3) | String | The hierarchical structure of pages and sections.  |
 | `order` | Integar | The sorting order of pages and sections under the current label, starting from 0. |
-| `isMenu` | Boolean | This field defines whether it is a section/subsection of the sidenav. |
+| `isMenu` | Boolean | Set as `true` if the entry is a section/subsection of the sidenav. |
 | `outlink` | Array of strings | The URL of a page that is not rendered by any Markdown file in the **milvus-docs** repository. |
-
-
 
 #### JSON Example
 
 This example shows some of the "Get Started" section of the sidenav:
 
-
-
-```
+```json
 {
      "menuList": [
      ...,

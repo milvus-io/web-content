@@ -2,18 +2,14 @@
 id: install-java.md
 label: Install Java SDK
 related_key: SDK
-order: 3
-group: install-pymilvus.md
 summary: Learn how to install the Java SDK of Milvus.
 ---
 
-# Install Milvus SDK
+# Install Milvus Java SDK
 
-This topic describes how to install Milvus SDK for Milvus.
+This topic describes how to install Milvus Java SDK for Milvus.
 
 Current version of Milvus supports SDKs in Python, Node.js, GO, and Java.
-
-<div class="tab-wrapper"><a href="install-pymilvus.md" class=''>Install PyMilvus</a><a href="install-node.md" class=''>Install Node.js SDK</a><a href="install-go.md" class=''>Install GO SDK</a><a href="install-java.md" class='active '>Install Java SDK</a></div>
 
 ## Requirement
 
@@ -30,14 +26,14 @@ Run the following command to install Milvus Java SDK.
 <dependency>
     <groupId>io.milvus</groupId>
     <artifactId>milvus-sdk-java</artifactId>
-    <version>2.0.4</version>
+    <version>2.2.1</version>
 </dependency>
 ```
 
 - Gradle/Grails
 
 ```
-compile 'io.milvus:milvus-sdk-java:2.0.4'
+compile 'io.milvus:milvus-sdk-java:2.2.1'
 ```
 
 ## What's next
@@ -51,5 +47,5 @@ Having installed Milvus Java SDK, you can:
   - [Insert data](insert_data.md)
   - [Conduct a vector search](search.md)
 
-- Explore [Milvus Java API reference](/api-reference/java/v2.0.4/index.html)
+- Explore [Milvus Java API reference](/api-reference/java/v2.2.1/About.md)
 

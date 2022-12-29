@@ -17,17 +17,17 @@ Through running the example code we provided, you will have a primary understand
 
 ## Preparations
 
-- [Milvus 2.0.0](install_standalone-docker.md)
+- [Milvus 2.2.2](install_standalone-docker.md)
 - Python 3 (3.71 or later)
-- [PyMilvus 2.0.0](install-pymilvus.md)
+- [PyMilvus 2.2.1](install-pymilvus.md)
 
 
 ## Download example code
 
-[Download](https://raw.githubusercontent.com/milvus-io/pymilvus/v2.0.2/examples/hello_milvus.py) `hello_milvus.py` directly or with the following command.
+[Download](https://raw.githubusercontent.com/milvus-io/pymilvus/v2.2.1/examples/hello_milvus.py) `hello_milvus.py` directly or with the following command.
 
 ```bash
-$ wget https://raw.githubusercontent.com/milvus-io/pymilvus/v2.0.2/examples/hello_milvus.py
+$ wget https://raw.githubusercontent.com/milvus-io/pymilvus/v2.2.1/examples/hello_milvus.py
 ```
 
 
@@ -72,6 +72,8 @@ entities = [
     [[random.random() for _ in range(8)] for _ in range(3000)],  # field embeddings
 ]
 insert_result = hello_milvus.insert(entities)
+# After final entity is inserted, it is best to call flush to have no growing segments left in memory
+hello_milvus.flush()  
 ```
 
 - Builds indexes on the entities:
@@ -89,7 +91,7 @@ hello_milvus.create_index("embeddings", index)
 hello_milvus.load()
 vectors_to_search = entities[-1][-2:]
 search_params = {
-    "metric_type": "l2",
+    "metric_type": "L2",
     "params": {"nprobe": 10},
 }
 result = hello_milvus.search(vectors_to_search, "embeddings", search_params, limit=3, output_fields=["random"])

@@ -15,6 +15,7 @@ This topic describes how to release a partition from memory after a search or a 
   <a href="#go">GO</a>
   <a href="#javascript">Node.js</a>
   <a href="#shell">CLI</a>
+  <a href="#curl">Curl</a>
 </div>
 
 
@@ -55,6 +56,18 @@ milvusClient.releasePartitions(
 release -c book -p novel
 ```
 
+``` curl
+curl -X 'DELETE' \
+  'http://localhost:9091/api/v1/partitions/load' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "collection_name": "book",
+    "partition_names": ["novel"],
+    "replica_number": 1
+  }'
+```
+
 <table class="language-python">
 	<thead>
 	<tr>
@@ -84,7 +97,7 @@ release -c book -p novel
 	</tr>
     <tr>
 		<td><code>partition_names</code></td>
-		<td>List of names of the partitions to load.</td>
+		<td>List of names of the partitions to release.</td>
 	</tr>
 	</tbody>
 </table>
@@ -148,6 +161,25 @@ release -c book -p novel
             <td>The name of the partition to release.</td>
         </tr>
     </tbody>
+</table>
+
+<table class="language-curl">
+	<thead>
+	<tr>
+		<th>Parameter</th>
+		<th>Description</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td><code>collection_name</code></td>
+		<td>Name of the collection to release partitions.</td>
+	</tr>
+    <tr>
+		<td><code>partition_names</code></td>
+		<td>List of names of the partitions to release.</td>
+	</tr>
+	</tbody>
 </table>
 
 ## Constraints

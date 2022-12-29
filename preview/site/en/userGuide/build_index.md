@@ -6,23 +6,23 @@ summary: Learn how to build an index for vectors in Milvus.
 
 # Build an Index
 
-This topic describes how to build an index for vectors in Milvus. 
+This topic describes how to build an index in Milvus. 
 
-Vector indexes are an organizational unit of metadata used to accelerate [vector similarity search](search.md). Without index built on vectors, Milvus will perform a brute-force search by default.
+Vector indexes are an organizational unit of metadata used to accelerate [vector similarity search](search.md). Without the index built on vectors, Milvus will perform a brute-force search by default.
 
-See [Vector Index](index.md) for more information about mechanism and varieties of vector indexes.
+See [Vector Index](index.md) for more information about the mechanism and varieties of vector indexes.
 
 <div class="alert note">
 <ul>
-<li>Current release of Milvus only supports index on vector field. Future releases will support index on scalar field.</li>
+<li>Milvus 2.1 supports index on scalar fields.</li>
 <li>By default, Milvus does not index a segment with less than 1,024 rows. To change this parameter, configure <a href="configure_rootcoord.md#rootCoord.minSegmentSizeToEnableIndex"><code>rootCoord.minSegmentSizeToEnableIndex</code></a> in <code>milvus.yaml</code>.</li>
 </div>
 
-The following example builds a 1024-cluster IVF_FLAT index with Euclidean distance (L2) as the similarity metrics. You can choose the index and metrics that suit your scenario. See [Similarity Metrics](metric.md) for more information.
+The following example builds a 1024-cluster IVF_FLAT index with Euclidean distance (L2) as the similarity metric. You can choose the index and metrics that suit your scenario. See [Similarity Metrics](metric.md) for more information.
 
 ## Prepare index parameter
 
-Prepare the index parameters.
+Prepare the index parameters (If you expect to build indexes for scalar fields, no index-building parameter is required, and the default index type is a dictionary tree).
 
 <div class="multipleCode">
   <a href="#python">Python </a>
@@ -30,6 +30,7 @@ Prepare the index parameters.
   <a href="#go">GO</a>
   <a href="#javascript">Node.js</a>
   <a href="#shell">CLI</a>
+  <a href="#curl">Curl</a>
 </div>
 
 
@@ -80,6 +81,22 @@ Index params nlist: 1024
 Timeout []:
 ```
 
+```curl
+curl -X 'POST' \
+  'http://localhost:9091/api/v1/index' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "collection_name": "book",
+    "field_name": "book_intro",
+    "extra_params":[
+      {"key": "metric_type", "value": "L2"},
+      {"key": "index_type", "value": "IVF_FLAT"},
+      {"key": "params", "value": "{\"nlist\":1024}"}
+    ]
+  }'
+```
+
 <table class="language-python">
 	<thead>
 	<tr>
@@ -91,7 +108,7 @@ Timeout []:
 	<tbody>
 	<tr>
 		<td><code>metric_type</code></td>
-		<td>Type of metrics used to measure similarity of vectors.</td>
+		<td>Type of metrics used to measure the similarity of vectors.</td>
         <td>For floating point vectors:
             <ul>
                 <li><code>L2</code> (Euclidean distance)</li>
@@ -118,9 +135,7 @@ Timeout []:
                 <li><code>IVF_PQ</code> (IVF_PQ)</li>
                 <li><code>HNSW</code> (HNSW)</li>
                 <li><code>ANNOY</code> (ANNOY)</li>
-                <li><code>RHNSW_FLAT</code> (RHNSW_FLAT)</li>
-                <li><code>RHNSW_PQ</code> (RHNSW_PQ)</li>
-                <li><code>RHNSW_SQ</code> (RHNSW_SQ)</li>
+                <li><code>DISKANN<sup>*<sup></code> (DISK_ANN)</li>
             </ul>
             For binary vectors:
             <ul>
@@ -132,8 +147,11 @@ Timeout []:
 	<tr>
 		<td><code>params</code></td>
 		<td>Building parameter(s) specific to the index.</td>
-        <td>See <a href="index.md">Vector Index</a> for more information.</td>
+        <td>See <a href="index.md">In-memory Index</a> and <a href="disk_index.md">On-disk Index</a> for more information.</td>
 	</tr>
+    <tr>
+        <td colspan=3>* DISKANN has certain prerequisites to meet. For details, see <a href="disk_index.md">On-disk Index</a>.</td>
+    </tr>
 	</tbody>
 </table>
 
@@ -148,7 +166,7 @@ Timeout []:
 	<tbody>
 	<tr>
 		<td><code>metric_type</code></td>
-		<td>Type of metrics used to measure similarity of vectors.</td>
+		<td>Type of metrics used to measure the similarity of vectors.</td>
         <td>For floating point vectors:
             <ul>
                 <li><code>L2</code> (Euclidean distance)</li>
@@ -175,9 +193,6 @@ Timeout []:
                 <li><code>IVF_PQ</code> (IVF_PQ)</li>
                 <li><code>HNSW</code> (HNSW)</li>
                 <li><code>ANNOY</code> (ANNOY)</li>
-                <li><code>RHNSW_FLAT</code> (RHNSW_FLAT)</li>
-                <li><code>RHNSW_PQ</code> (RHNSW_PQ)</li>
-                <li><code>RHNSW_SQ</code> (RHNSW_SQ)</li>
             </ul>
             For binary vectors:
             <ul>
@@ -189,7 +204,7 @@ Timeout []:
 	<tr>
 		<td><code>params</code></td>
 		<td>Building parameter(s) specific to the index.</td>
-        <td>See <a href="index.md">Vector Index</a> for more information.</td>
+        <td>See <a href="index.md">In-memory Index</a> and <a href="disk_index.md">On-disk Index</a> for more information.</td>
 	</tr>
 	</tbody>
 </table>
@@ -205,19 +220,16 @@ Timeout []:
 	<tbody>
 	<tr>
 		<td><code>NewIndex func</code></td>
-		<td>Function to create entity.Index according to different index types.</td>
+		<td>Function to create entity. Index according to different index types.</td>
         <td>For floating point vectors:
             <ul>
                 <li><code>NewIndexFlat</code> (FLAT)</li>
                 <li><code>NewIndexIvfFlat</code> (IVF_FLAT)</li>
                 <li><code>NewIndexIvfSQ8</code> (IVF_SQ8)</li>
-                <li><code>NewIndexIvfPQ</code> (RNSG)</li>
-                <li><code>NewIndexRNSG</code> (HNSW)</li>
+                <li><code>NewIndexIvfPQ</code> (IVF_PQ)</li>
                 <li><code>NewIndexHNSW</code> (HNSW)</li>
                 <li><code>NewIndexANNOY</code> (ANNOY)</li>
-                <li><code>NewIndexRHNSWFlat</code> (RHNSW_FLAT)</li>
-                <li><code>NewIndexRHNSW_PQ</code> (RHNSW_PQ)</li>
-                <li><code>NewIndexRHNSW_SQ</code> (RHNSW_SQ)</li>
+		<li><code>NewIndexDISKANN<sup>*<sup></code> (DISK_ANN)</li>
             </ul>
             For binary vectors:
             <ul>
@@ -228,7 +240,7 @@ Timeout []:
 	</tr>
     <tr>
 		<td><code>metricType</code></td>
-		<td>Type of metrics used to measure similarity of vectors.</td>
+		<td>Type of metrics used to measure the similarity of vectors.</td>
         <td>For floating point vectors:
             <ul>
                 <li><code>L2</code> (Euclidean distance)</li>
@@ -247,8 +259,11 @@ Timeout []:
 	<tr>
 		<td><code>ConstructParams</code></td>
 		<td>Building parameter(s) specific to the index.</td>
-        <td>See <a href="index.md">Vector Index</a> for more information.</td>
+        <td>See <a href="index.md">In-memory Index</a> and <a href="disk_index.md">On-disk Index</a> for more information.</td>
 	</tr>
+	    <tr>
+		<td colspan=3>* DISKANN has certain prerequisites to meet. For details, see <a href="disk_index.md">On-disk Index</a>.</td>
+	    </tr>
 	</tbody>
 </table>
 
@@ -272,9 +287,7 @@ Timeout []:
                 <li><code>IVF_PQ</code> (IVF_PQ)</li>
                 <li><code>HNSW</code> (HNSW)</li>
                 <li><code>ANNOY</code> (ANNOY)</li>
-                <li><code>RHNSW_FLAT</code> (RHNSW_FLAT)</li>
-                <li><code>RHNSW_PQ</code> (RHNSW_PQ)</li>
-                <li><code>RHNSW_SQ</code> (RHNSW_SQ)</li>
+                <li><code>DISKANN<sup>*<sup></code> (DISK_ANN)</li>
             </ul>
             For binary vectors:
             <ul>
@@ -286,8 +299,11 @@ Timeout []:
 	<tr>
 		<td><code>ExtraParam</code></td>
 		<td>Building parameter(s) specific to the index.</td>
-        <td>See <a href="index.md">Vector Index</a> for more information.</td>
+        <td>See <a href="index.md">In-memory Index</a> and <a href="disk_index.md">On-disk Index</a> for more information.</td>
 	</tr>
+    <tr>
+        <td colspan=3>* DISKANN has certain prerequisites to meet. For details, see <a href="disk_index.md">On-disk Index</a>.</td>
+    </tr>
 	</tbody>
 </table>
 
@@ -306,6 +322,68 @@ Timeout []:
     </tbody>
 </table>
 
+<table class="language-curl">
+	<thead>
+	<tr>
+		<th>Parameter</th>
+		<th>Description</th>
+        <th>Options</th>
+	</tr>
+	</thead>
+	<tbody>
+    <tr>
+        <td><code>collection_name</code></td>
+        <td>Name of the collection to build the index on.</td>
+    </tr>
+    <tr>
+        <td><code>field_name</code></td>
+        <td>Name of the vector field to build the index on.</td>
+    </tr>	
+    <tr>
+		<td><code>metric_type</code></td>
+		<td>Type of metrics used to measure the similarity of vectors.</td>
+        <td>For floating point vectors:
+            <ul>
+                <li><code>L2</code> (Euclidean distance)</li>
+                <li><code>IP</code> (Inner product)</li>
+            </ul>
+            For binary vectors:
+            <ul>
+                <li><code>JACCARD</code> (Jaccard distance)</li>
+                <li><code>TANIMOTO</code> (Tanimoto distance)</li>
+                <li><code>HAMMING</code> (Hamming distance)</li>
+                <li><code>SUPERSTRUCTURE</code> (Superstructure)</li>
+                <li><code>SUBSTRUCTURE</code> (Substructure)</li>
+            </ul>
+        </td>
+	</tr>
+	<tr>
+		<td><code>index_type</code></td>
+		<td>Type of index used to accelerate the vector search.</td>
+        <td>For floating point vectors:
+            <ul>
+                <li><code>FLAT</code> (FLAT)</li>
+                <li><code>IVF_FLAT</code> (IVF_FLAT)</li>
+                <li><code>IVF_SQ8</code> (IVF_SQ8)</li>
+                <li><code>IVF_PQ</code> (IVF_PQ)</li>
+                <li><code>HNSW</code> (HNSW)</li>
+                <li><code>ANNOY</code> (ANNOY)</li>
+            </ul>
+            For binary vectors:
+            <ul>
+                <li><code>BIN_FLAT</code> (BIN_FLAT)</li>
+                <li><code>BIN_IVF_FLAT</code> (BIN_IVF_FLAT)</li>
+            </ul>
+        </td>
+	</tr>
+	<tr>
+		<td><code>params</code></td>
+		<td>Building parameter(s) specific to the index.</td>
+        <td>See <a href="index.md">In-memory Index</a> for more information.</td>
+	</tr>
+	</tbody>
+</table>
+
 ## Build index
 
 Build the index by specifying the vector field name and index parameters.
@@ -316,6 +394,7 @@ Build the index by specifying the vector field name and index parameters.
   <a href="#go">GO</a>
   <a href="#javascript">Node.js</a>
   <a href="#shell">CLI</a>
+  <a href="#curl">Curl</a>
 </div>
 
 
@@ -367,6 +446,10 @@ milvusClient.createIndex(
 ```
 
 ```shell
+# Follow the previous step.
+```
+
+```curl
 # Follow the previous step.
 ```
 

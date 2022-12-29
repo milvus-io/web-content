@@ -8,8 +8,13 @@ summary: Learn how to load a partition into memory for search or query in Milvus
 
 This topic describes how to load a partition to memory. Loading partitions instead of the whole collection to memory can significantly reduce the memory usage. All search and query operations within Milvus are executed in memory. 
 
+Milvus 2.1 allows users to load a partition as multiple replicas to utilize the CPU and memory resources of extra query nodes. This feature boost the overall QPS and throughput with extra hardware. It is supported on PyMilvus in current release.
+
 <div class="alert warning">
-In current release, volume of the data to load must be under 90% of the total memory resources of all query nodes to reserve memory resources for execution engine.
+<ul>
+<li>In current release, volume of the data to load must be under 90% of the total memory resources of all query nodes to reserve memory resources for execution engine.</li>
+<li>In current release, all on-line query nodes will be divided into multiple replica groups according to the replica number specified by user. All replica groups shall have minimal memory resources to load one replica of the provided collection. Otherwise, an error will be returned.</li>
+</ul>
 </div>
 
 <div class="multipleCode">
@@ -18,18 +23,19 @@ In current release, volume of the data to load must be under 90% of the total me
   <a href="#go">GO</a>
   <a href="#javascript">Node.js</a>
   <a href="#shell">CLI</a>
+  <a href="#curl">Curl</a>
 </div>
 
 
 ```python
 from pymilvus import Collection
 collection = Collection("book")      # Get an existing collection.
-collection.load(["novel"])
+collection.load(["novel"], replica_number=2)
 
 # Or you can load a partition with the partition as an object
 from pymilvus import Partition
 partition = Partition("novel")       # Get an existing partition.
-partition.load()
+partition.load(replica_number=2)
 ```
 
 ```javascript
@@ -64,6 +70,18 @@ milvusClient.loadPartitions(
 load -c book -p novel
 ```
 
+``` curl
+curl -X 'POST' \
+  'http://localhost:9091/api/v1/partitions/load' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "collection_name": "book",
+    "partition_names": ["novel"],
+    "replica_number": 1
+  }'
+```
+
 <table class="language-python">
 	<thead>
 	<tr>
@@ -75,6 +93,10 @@ load -c book -p novel
 	<tr>
 		<td><code>partition_name</code></td>
 		<td>Name of the partition.</td>
+	</tr>
+    <tr>
+		<td><code>replica_number</code> (optional)</td>
+		<td>Number of the replica to load.</td>
 	</tr>
 	</tbody>
 </table>
@@ -162,6 +184,42 @@ load -c book -p novel
         </tr>
     </tbody>
 </table>
+
+<table class="language-curl">
+	<thead>
+	<tr>
+		<th>Parameter</th>
+		<th>Description</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td><code>collection_name</code></td>
+		<td>Name of the collection to load partitions from.</td>
+	</tr>
+    <tr>
+		<td><code>partition_names</code></td>
+		<td>List of names of the partitions to load.</td>
+	</tr>
+    <tr>
+		<td><code>replica_number</code> (optional)</td>
+		<td>Number of the replica to load.</td>
+	</tr>
+	</tbody>
+</table>
+
+## Get replica information
+
+You can check the information of the loaded replicas.
+
+```python
+from pymilvus import Partition
+partition = Partition("novel")       # Get an existing partition.
+partition.load(replica_number=2)     # Load partition as 2 replicas
+result = partition.get_replicas()
+print(result)
+```
+
 
 ## Constraints
 

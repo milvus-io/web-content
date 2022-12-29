@@ -1,7 +1,7 @@
 ---
 id: attu_index.md
 related_key: attu
-summary: Attu, an intuitive GUI for Milvus service management.
+summary: Learn how to manage indexes with Attu, an intuitive GUI tool for Milvus.
 ---
 
 # Manage Index with Attu

@@ -13,11 +13,11 @@ As described in the [monitoring guide](monitor.md), metrics contain useful infor
 
 Visualization is a chart showing the change of resource usage across time, which makes it easier for you to quickly see and notice the changes to resource usage especially when an event occurs.
 
-This tutorial uses Grafana, an open-source platform for time-series analytics, to visualize various performance metrics of Milvus.
+This tutorial uses Grafana, an open-source platform for time-series analytics, to visualize various performance metrics of a Milvus cluster deployed on Kubernetes (K8s).
 
 ## Prerequisites
-
-You need to [configure Prometheus](monitor.md) to monitor and collect metrics before using Grafana to visualize the metrics. If the setup is successful, you can access Grafana at `http://localhost:3000`. Or you can also access Grafana using the default Grafana `user:password` of `admin:admin`.
+- You have [installed a Milvus cluster on K8s)](install_cluster-helm.md).
+- You need to [configure Prometheus](monitor.md) to monitor and collect metrics before using Grafana to visualize the metrics. If the setup is successful, you can access Grafana at `http://localhost:3000`. Or you can also access Grafana using the default Grafana `user:password` of `admin:admin`.
 
 ## Visualize metrics using Grafana
 
@@ -26,7 +26,7 @@ You need to [configure Prometheus](monitor.md) to monitor and collect metrics be
 Download and import Milvus dashboard from the JSON file.
 
 ```
-wget https://raw.githubusercontent.com/milvus-io/milvus/2.0.2/deployments/monitor/grafana/milvus-dashboard.json
+wget https://raw.githubusercontent.com/milvus-io/milvus/2.1.0/deployments/monitor/grafana/milvus-dashboard.json
 ```
 
 ![Download_and_import](../../../../assets/import_dashboard.png "Download and import dashboard.")
@@ -46,5 +46,5 @@ Select the Milvus instance you want to monitor. Then you can see the Milvus comp
   - Learn how to [create an alert for Milvus services](alert.md)
   - Adjust your [resource allocation](allocate.md)
   - [Scale out or scale in a Milvus cluster](scaleout.md)
-- If you are interested in upgrading the Milvus 2.0 version,
+- If you are interested in upgrading the Milvus version,
   - Read the [upgrading guide](upgrade.md)

@@ -1,26 +1,52 @@
 ---
 id: install_cluster-helm.md
-label: Helm 
+label: Helm
 related_key: Kubernetes
 order: 1
-group: install_cluster-docker.md
+group: install_cluster-milvusoperator.md
 summary: Learn how to install Milvus cluster on Kubernetes.
 ---
 
-# Install Milvus Cluster
+<div class="tab-wrapper"><a href="install_cluster-milvusoperator.md" class=''>Milvus Operator</a><a href="install_cluster-helm.md" class='active '>Helm</a><a href="install_cluster-docker.md" class=''>Docker Compose</a><a href="install_cluster-ansible.md" class=''>Ansible</a></div>
 
-This topic describes how to install Milvus cluster with Docker Compose or on Kubernetes. 
+# Install Milvus Cluster with Helm
 
-[Check the requirements for hardware and software](prerequisite-docker.md) prior to your installation. 
+This topic introduces how to deploy a Milvus cluster with Helm on Kubernetes (K8s).
 
-If you run into image loading errors while installing, you can [Install Milvus Offline](install_offline-docker.md).
+## Prerequisites
 
-You can also build Milvus from source code at [GitHub](https://github.com/milvus-io/milvus#to-start-developing-milvus).
+Check [the requirements](prerequisite-helm.md) for hardware and software prior to your installation.
+
+## Create a K8s Cluster
+
+If you have already deployed a K8s cluster for production, you can skip this step and proceed directly to [Install Helm Chart for Milvus](install_cluster-helm.md#Install-Helm-Chart-for-Milvus). If not, you can follow the steps below to quickly create a K8s for testing, and then use it to deploy a Milvus cluster with Helm. 
+
+### Create a K8s cluster using minikube
+
+We recommend installing Milvus on K8s with [minikube](https://minikube.sigs.k8s.io/docs/), a tool that allows you to run K8s locally.
+
+<div class="alert note">
+minikube can only be used in test environments. It is not recommended that you deploy Milvus distributed clusters in this way in production environments.
+</div>
+
+#### 1. Install minikube
+
+See [install minikube](https://minikube.sigs.k8s.io/docs/start/) for more information.
+
+#### 2. Start a K8s cluster using minikube
+
+After installing minikube, run the following command to start a K8s cluster.
+
+```
+$ minikube start
+```
+
+#### 3. Check the K8s cluster status
+
+Run `$ kubectl cluster-info` to check the status of the K8s cluster you just created. Ensure that you can access the K8s cluster via `kubectl`. If you have not installed `kubectl` locally, see [Use kubectl inside minikube](https://minikube.sigs.k8s.io/docs/handbook/kubectl/).
 
 
-<div class="tab-wrapper"><a href="install_cluster-docker.md" class=''>Docker Compose</a><a href="install_cluster-helm.md" class='active '>Helm</a><a href="install_cluster-milvusoperator.md" class=''>Milvus Operator</a><a href="install_cluster-ansible.md" class=''>Ansible</a></div>
-
-We recommend installing Milvus on Kubernetes with minikube. minikube has a dependency on default storageclass when installed. Check the dependency by running the following command. Other installation methods requires manual configuration of the storageclass. See [Change the Default Storageclass](https://kubernetes.io/docs/tasks/administer-cluster/change-default-storage-class/) for more information.
+minikube has a dependency on default StorageClass when installed. Check the dependency by running the following command. Other installation methods require manual configuration of the StorageClass. See [Change the default StorageClass](https://kubernetes.io/docs/tasks/administer-cluster/change-default-storage-class/) for more information.
 
 ```
 $ kubectl get sc
@@ -31,19 +57,9 @@ NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDI
 standard (default)    k8s.io/minikube-hostpath     Delete           Immediate             false                    3m36s
 ```
 
-## Start a K8s cluster
-
-<div class="alert note">
-This topic uses a local Kubernetes cluster based on minikube. You can deploy a Milvus cluster on your own Kubernetes cluster.
-</div>
-
-```
-$ minikube start
-```
-
 ## Install Helm Chart for Milvus
 
-Helm is a Kubernetes package manager that can help you deploy Milvus quickly.
+Helm is a K8s package manager that can help you deploy Milvus quickly.
 
 1. Add Milvus Helm repository.
 
@@ -69,6 +85,8 @@ $ helm install my-release milvus/milvus
   <ul>
     <li>The release name should only contain letters, numbers and dashes. Dots are not allowed in the release name.</li>
     <li>The default command line installs cluster version of Milvus while installing Milvus with Helm. Further setting is needed while installing Milvus standalone.</li>
+    <li>According to the <a href="https://kubernetes.io/docs/reference/using-api/deprecation-guide/#v1-25">deprecated API migration guide of Kuberenetes</a>, the <b>policy/v1beta1</b> API version of PodDisruptionBudget is not longer served as of v1.25. You are suggested to migrate manifests and API clients to use the <b>policy/v1</b> API version instead. <br>As a workaround for users who still use the <b>policy/v1beta1</b> API version of PodDisruptionBudget on Kuberenetes v1.25 and later, you can instead run the following command to install Milvus:<br>
+    <code>helm install my-release milvus/milvus --set pulsar.bookkeeper.pdb.usePolicy=false,pulsar.broker.pdb.usePolicy=false,pulsar.proxy.pdb.usePolicy=false,pulsar.zookeeper.pdb.usePolicy=false</code></li> 
     <li>See <a href="https://artifacthub.io/packages/helm/milvus/milvus">Milvus Helm Chart</a> and <a href="https://helm.sh/docs/">Helm</a> for more information.</li>
   </ul>
 </div>
@@ -109,21 +127,26 @@ my-release-pulsar-zookeeper-metadata-98zbr       0/1   Completed  0        3m24s
 
 ## Connect to Milvus
 
-Open a new terminal and run the following command to forward the local port to the port that Milvus uses.
+Verify which local port the Milvus server is listening on. Replace the pod name with your own.
 
-```
-$ kubectl port-forward service/my-release-milvus 19530
+```bash
+$ kubectl get pod my-release-milvus-proxy-6bd7f5587-ds2xv --template
+='{{(index (index .spec.containers 0).ports 0).containerPort}}{{"\n"}}'
+19530
 ```
 
-```
-Forwarding from 127.0.0.1:19530 -> 19530
+Open a new terminal and run the following command to forward a local port to the port that Milvus uses. Optionally, omit the designated port and use `:19530` to let `kubectl` allocate a local port for you so that you don't have to manage port conflicts.
+
+```bash
+$ kubectl port-forward service/my-release-milvus 27017:19530
+Forwarding from 127.0.0.1:27017 -> 19530
 ```
 
 ## Uninstall Milvus
 
 Run the following command to uninstall Milvus.
 
-```
+```bash
 $ helm uninstall my-release
 ```
 
@@ -131,7 +154,7 @@ $ helm uninstall my-release
 
 Stop the cluster and the minikube VM without deleting the resources you created.
 
-```
+```bash
 $ minikube stop
 ```
 
@@ -140,15 +163,15 @@ Run `minikube start` to restart the cluster.
 
 ## Delete the K8s cluster
 
-Delete the cluster, the minikube VM, and all resources you created including persistent volumes.
-
-```
-$ minikube delete
-```
-
 <div class="alert note">
 Run <code>$ kubectl logs `pod_name`</code> to get the <code>stderr</code> log of the pod before deleting the cluster and all resources.
 </div>
+
+Delete the cluster, the minikube VM, and all resources you created including persistent volumes.
+
+```bash
+$ minikube delete
+```
 
 ## What's next
 

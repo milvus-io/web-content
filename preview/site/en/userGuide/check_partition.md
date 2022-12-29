@@ -6,9 +6,9 @@ summary: Learn how to check partition information in Milvus.
 
 # Check Partition Information
 
-This topic describes how to check the information of the partition in Milvus.
+This topic describes how to check the information of partitions in Milvus.
 
-## Verify if a partition exist
+## Verify if a partition exists
 
 Verify if a partition exists in the specified collection.
 
@@ -18,6 +18,7 @@ Verify if a partition exists in the specified collection.
   <a href="#go">GO</a>
   <a href="#javascript">Node.js</a>
   <a href="#shell">CLI</a>
+  <a href="#curl">Curl</a>
 </div>
 
 
@@ -61,6 +62,27 @@ if (respHasPartition.getData() == Boolean.TRUE) {
 ```shell
 describe partition -c book -p novel
 ```
+
+``` curl
+curl -X 'GET' \
+  'http://localhost:9091/api/v1/partition/existence' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "collection_name": "book",
+    "partition_name": "novel"
+  }'
+```
+
+<div class="language-curl">
+Output:
+
+```json
+{"status":{},"value":true}
+```
+
+</div>
+
 
 <table class="language-python">
 	<thead>
@@ -139,6 +161,24 @@ describe partition -c book -p novel
     </tbody>
 </table>
 
+<table class="language-curl">
+	<thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+        </tr>
+	</thead>
+	<tbody>
+        <tr>
+            <td><code>collection_name</code></td>
+            <td>Name of the collection to check.</td>
+        </tr>
+        <tr>
+            <td><code>partition_name</code></td>
+            <td>Name of the partition to check.</td>
+        </tr>
+	</tbody>
+</table>
 
 ## List all partitions
 
@@ -148,6 +188,7 @@ describe partition -c book -p novel
   <a href="#go">GO</a>
   <a href="#javascript">Node.js</a>
   <a href="#shell">CLI</a>
+  <a href="#curl">Curl</a>
 </div>
 
 
@@ -186,6 +227,43 @@ System.out.println(respShowPartitions);
 ```shell
 list partitions -c book
 ```
+
+``` curl
+curl -X 'GET' \
+  'http://localhost:9091/api/v1/partitions' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "collection_name": "book"
+  }'
+```
+
+<div class="language-curl">
+Output:
+
+```json
+{
+  "status": {},
+  "partition_names": [
+    "_default",
+    "novel"
+  ],
+  "partitionIDs": [
+    434261413928632322,
+    434261764795531265
+  ],
+  "created_timestamps": [
+    434261413928632323,
+    434261764795531266
+  ],
+  "created_utc_timestamps": [
+    1656575828280,
+    1656577166731
+  ]
+}
+```
+
+</div>
 
 <table class="language-javascript">
 	<thead>
@@ -251,6 +329,20 @@ list partitions -c book
     </tbody>
 </table>
 
+<table class="language-curl">
+    <thead>
+        <tr>
+            <th>Option</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>-c</td>
+            <td>Name of the collection to check.</td>
+        </tr>
+    </tbody>
+</table>
 
 ## What's next
 

@@ -30,7 +30,7 @@ This is an unordered list:
 - Statement 1
   - Sub-statement 1
   - Sub-statement 2
-- Statemet 2
+- Statement 2
 - ...
 
 This is an ordered list:

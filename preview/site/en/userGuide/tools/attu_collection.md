@@ -1,7 +1,7 @@
 ---
 id: attu_collection.md
 related_key: attu
-summary: Attu, an intuitive GUI for Milvus service management.
+summary: Learn how to manage collections with Attu, an intuitive GUI tool for Milvus.
 ---
 
 # Manage Collections with Attu

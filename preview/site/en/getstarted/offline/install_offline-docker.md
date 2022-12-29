@@ -1,19 +1,19 @@
 ---
 id: install_offline-docker.md
-label: Install with Docker Compose
-order: 0
-group: install_offline-docker.md
+label: Docker Compose
+order: 1
+group: install_offline-helm.md
 related_key: offline
 summary: Learn how to install Milvus with Docker Compose offline.
 ---
 
-# Install Milvus Offline
+<div class="tab-wrapper"><a href="install_offline-helm.md" class=''>Kubernetes</a><a href="install_offline-docker.md" class='active '>Docker Compose</a></div>
 
-This topic describes how to install Milvus in an offline environment. 
+# Install Milvus Offline with Docker Compose
+
+This topic describes how to install Milvus with Docker Compose in an offline environment. 
 
 Installation of Milvus might fail due to image loading errors. You can install Milvus in an offline environment to avoid such problem.
-
-<div class="tab-wrapper"><a href="install_offline-docker.md" class='active '>Install with Docker Compose</a><a href="install_offline-helm.md" class=''>Install on Kubernetes</a></div>
 
 ## Download files and images
 
@@ -24,13 +24,13 @@ To install Milvus offline, you need to pull and save all images in an online env
 - For Milvus standalone:
 
 ```
-$ wget https://github.com/milvus-io/milvus/releases/download/v2.0.2/milvus-standalone-docker-compose.yml -O docker-compose.yml
+$ wget https://github.com/milvus-io/milvus/releases/download/v2.2.2/milvus-standalone-docker-compose.yml -O docker-compose.yml
 ```
 
 - For Milvus cluster:
 
 ```
-$ wget https://github.com/milvus-io/milvus/releases/download/v2.0.2/milvus-cluster-docker-compose.yml -O docker-compose.yml
+$ wget https://github.com/milvus-io/milvus/releases/download/v2.2.2/milvus-cluster-docker-compose.yml -O docker-compose.yml
 
 ```
 
@@ -56,7 +56,7 @@ python3 save_image.py --manifest docker-compose.yml
 4. Load the images.
 
 ```bash
-cd images/for image in $(find . -type f -name "*.tar.gz") ; do gunzip -c $image | docker load; done
+cd images/; for image in $(find . -type f -name "*.tar.gz") ; do gunzip -c $image | docker load; done
 ```
 
 ## Install Milvus offline

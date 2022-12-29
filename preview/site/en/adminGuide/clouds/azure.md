@@ -18,7 +18,7 @@ Ensure that your Azure project has been set up properly and you have access to t
 - [kubectl](https://kubernetes.io/docs/tasks/tools/)
 - [Helm](https://helm.sh/docs/intro/install/)
 
-Alternatively, you can use the [Cloud Shell](https://shell.azure.com.) which has the Azure CLI, kubectl, and Helm preinstalled.
+Alternatively, you can use the [Cloud Shell](https://learn.microsoft.com/en-us/azure/cloud-shell/overview) which has the Azure CLI, kubectl, and Helm preinstalled.
 
 <div class="alert note">After you install the Azure CLI, ensure that you are properly authenticated. </div>
 
@@ -138,7 +138,7 @@ Starting pods might take several minutes. Run `kubectl get services` to view ser
 
 Azure Blob Storage is Azure's version of AWS Simple Storage Service (S3).
 
-[MinIO Azure Gateway](https://docs.min.io/docs/minio-gateway-for-azure.html) allows accessing Azure. Essentially, MinIO Azure Gateway translates and forwards all connections to Azure by using APIs. You can use MinIO Azure Gateway instead of a MinIO server.
+[MinIO Azure Gateway](https://blog.min.io/deprecation-of-the-minio-gateway/) allows accessing Azure. Essentially, MinIO Azure Gateway translates and forwards all connections to Azure by using APIs. You can use MinIO Azure Gateway instead of a MinIO server.
 
 ### Set variables
 
@@ -171,6 +171,6 @@ helm install my-release ./milvus --set service.type=LoadBalancer --set minio.per
 ## What's next
 
 If you want to learn how to deploy Milvus on other clouds:
-- [Deploy a Milvus Cluster on EC2](https://milvus.io/docs/v2.0.0/aws.md)
-- [Deploy a Milvus Cluster on EKS](https://milvus.io/docs/v2.0.0/eks.md)
-- [Deploy a Milvus Cluster on GCP](https://milvus.io/docs/v2.0.0/gcp.md)
+- [Deploy a Milvus Cluster on EC2](aws.md)
+- [Deploy a Milvus Cluster on EKS](eks.md)
+- [Deploy a Milvus Cluster on GCP](gcp.md)

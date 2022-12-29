@@ -37,9 +37,9 @@ Theoretically, the maximum dataset size Milvus can handle is determined by the h
 
 Milvus deals with two types of data, inserted data and metadata. 
 
-Inserted data, including vector data, scalar data, and collection-specific schema, is stored in persistent storage (for now MinIO only) as incremental log.
+Inserted data, including vector data, scalar data, and collection-specific schema, are stored in persistent storage (for now MinIO only) as incremental log.
 
-Metadata is generated within Milvus. Each Milvus module has its own metadata that is stored in etcd.
+Metadata are generated within Milvus. Each Milvus module has its own metadata that are stored in etcd.
 
 #### Why is there no vector data in etcd?
 
@@ -51,7 +51,7 @@ Python SDKs for Milvus v0.9.0 or higher have a connection pool. The number of co
 
 #### Does Milvus support inserting and searching data simultaneously?
 
-Yes. Insert operations and query operations are handled by two separate modules that are mutually independent. From the client’s perspective, an insert operation is complete when the inserted data enters the message queue. However, inserted data is unsearchable until it is loaded to the query node. If the segment size does not reach the index-building threshold (512 MB by default), Milvus resorts to brute-force search and query performance may be diminished.
+Yes. Insert operations and query operations are handled by two separate modules that are mutually independent. From the client’s perspective, an insert operation is complete when the inserted data enters the message queue. However, inserted data are unsearchable until they are loaded to the query node. If the segment size does not reach the index-building threshold (512 MB by default), Milvus resorts to brute-force search and query performance may be diminished.
 
 #### Can vectors with duplicate primary keys be inserted into Milvus?
 
@@ -77,12 +77,11 @@ No. If partitions for a search are specified, Milvus searches the specified part
 
 #### Does Milvus load the entire collection when partitions are specified for a search?
 
-No. Milvus v2.0 has varied behavior. Data must be loaded to memory before searching.
+No. Milvus has varied behavior. Data must be loaded to memory before searching.
 
-- If you know which partitions your data is located in, call `load_partition()` to load the intended partition(s) *then* specify partition(s) in the `search()` method call.
+- If you know which partitions your data are located in, call `load_partition()` to load the intended partition(s) *then* specify partition(s) in the `search()` method call.
 - If you do not know the exact partitions, call `load_collection()` before calling `search()`.
 - If you fail to load collections or partitions before searching, Milvus returns an error.
-
 
 #### Can indexes be created after inserting vectors?
 
@@ -100,7 +99,7 @@ See [Vector Index](index.md) for more information.
 
 #### How does Milvus flush data?
 
-Milvus returns success when inserted data is loaded to the message queue. However, the data is not yet flushed to the disk. Then Milvus' data node writes the data in the message queue to persistent storage as incremental logs. If `flush()` is called, the data node is forced to write all data in the message queue to persistent storage immediately.
+Milvus returns success when inserted data are loaded to the message queue. However, the data are not yet flushed to the disk. Then Milvus' data node writes the data in the message queue to persistent storage as incremental logs. If `flush()` is called, the data node is forced to write all data in the message queue to persistent storage immediately.
 
 #### What is normalization? Why is normalization needed?
 
@@ -135,7 +134,7 @@ Current Milvus release does not support Apple M1 CPU.
 
 #### What data types does Milvus support on the primary key field?
 
-In current release, Milvus only support INT64 on primary key field. Both INT64 and string will be supported in the formal release of Milvus 2.0.0.
+In current release, Milvus support both INT64 and string.
 
 #### Is Milvus scalable?
 
@@ -143,11 +142,11 @@ Yes. You can deploy Milvus cluster with multiple nodes via Helm Chart on Kuberne
 
 #### Does the query perform in memory? What are incremental data and historical data?
 
-Yes. When a query request comes, Milvus searches both incremental data and historical data by loading them into memory. Incremental data are data in the growing segments, which are buffered in memory before they reach the threshold to be persisted in storage engine, while historical data are from the sealed segments that are stored in the object storage. Incremental data and historical data together constitute the whole dataset to search.
+Yes. When a query request comes, Milvus searches both incremental data and historical data by loading them into memory. Incremental data are in the growing segments, which are buffered in memory before they reach the threshold to be persisted in storage engine, while historical data are from the sealed segments that are stored in the object storage. Incremental data and historical data together constitute the whole dataset to search.
 
-#### Is Milvus 2.0 available for concurrent search?
+#### Is Milvus available for concurrent search?
 
-Yes. For queries on the same collection, Milvus concurrently searches the incremental and historical data. However, queries on different collections are conducted in series. Whereas the historical data can be an extremely huge dataset, searches on the historical data are relatively more time-consuming and essentially performed in series. The formal release of Milvus 2.0 will improve this issue.
+Yes. For queries on the same collection, Milvus concurrently searches the incremental and historical data. However, queries on different collections are conducted in series. Whereas the historical data can be an extremely huge dataset, searches on the historical data are relatively more time-consuming and essentially performed in series.
 
 #### Why does the data in MinIO remain after the corresponding collection is dropped?
 
@@ -155,16 +154,20 @@ Data in MinIO is designed to remain for a certain period of time for the conveni
 
 #### Does Milvus support message engines other than Pulsar?
 
-Future release of Milvus 2.0 will support Kafka.
+Yes. Kafka is supported in Milvus 2.1.0.
 
 #### What's the diference between a search and a query?
 
-In Milvus, a vector similarity search retrieves vectors based on similarity calculation and vector index acceleration. Unlike a vector similarity search, a vector query retrieves vectors via scalar filtering based on boolean expression. The boolean expression filters on scalar fields or the primary key field, and it retrieves all results that match the filters. In a query, neither similarity metrics nor vector index is involved.
+In Milvus, a vector similarity search retrieves vectors based on similarity calculation and vector index acceleration. Unlike a vector similarity search, a vector query retrieves vectors via scalar filtering based on a boolean expression. The boolean expression filters on scalar fields or the primary key field, and it retrieves all results that match the filters. In a query, neither similarity metrics nor vector index is involved.
+
+#### Why does a float vector value have a precision of 7 decimal digits in Milvus?
+
+Milvus stores vectors as Float32 arrays. A Float32 value has a precision of 7 decimal digits. Even with a Float64 value, such as 1.3476964684980388, Milvus stores it as 1.347696. Therefore, when you retrieve such a vector from Milvus, the precision of the Float64 value is lost.
 
 #### Still have questions?
 
 You can:
 
 - Check out [Milvus](https://github.com/milvus-io/milvus/issues) on GitHub. You're welcome to raise questions, share ideas, and help others.
-- Join our [Slack community](https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk) to find support and engage with our open-source community.
+- Join our [Slack community](https://slack.milvus.io/) to find support and engage with our open-source community.
 

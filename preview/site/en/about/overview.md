@@ -28,7 +28,7 @@ Learn more about [Milvus glossary](glossary.md).
 
 ### Unstructured data
 
-Unstructured data, including images, video, audio, and natural language, is information that doesn't follow a predefined model or manner of organization. This data type accounts for ~80% of the world's data, and can be converted into vectors using various artificial intelligence (AI) and machine learning (ML) models.
+Unstructured data, including images, video, audio, and natural language, is information that doesn't follow a pre-defined model or manner of organization. This data type accounts for around 80% of the world's data, and can be converted into vectors using various artificial intelligence (AI) and machine learning (ML) models.
 
 ### Embedding vectors
 
@@ -53,12 +53,12 @@ Indexes are an organization unit of data. You must declare the index type and si
 
 Most of the vector index types supported by Milvus use approximate nearest neighbors search (ANNS), including:
 
-- **FLAT**: FLAT is best suited for scenarios that seeks perfectly accurate and exact search results on a small, million-scale dataset.
-- **IVF_FLAT**: IVF_FLAT is a quantization-based index and is best suited for scenarios that seeks an ideal balance between accuracy and query speed.
-- **IVF_SQ8**: IVF_SQ8 is a quantization-based index and is best suited for scenarios that seeks a significant reduction on disk, CPU, and GPU memory consumption as these resources are very limited.
-- **IVF_PQ**: IVF_PQ is a quantization-based index and is best suited for scenarios that seeks high query speed even at the cost of accuracy. 
-- **HNSW**: HNSW is a graph-based index and is best suited for scenarios that has a high demand for search efficiency.
-- **ANNOY**: ANNOY is a tree-based index and is best suited for scenarios that seeks a high recall rate.
+- **FLAT**: FLAT is best suited for scenarios that seek perfectly accurate and exact search results on a small, million-scale dataset.
+- **IVF_FLAT**: IVF_FLAT is a quantization-based index and is best suited for scenarios that seek an ideal balance between accuracy and query speed.
+- **IVF_SQ8**: IVF_SQ8 is a quantization-based index and is best suited for scenarios that seek a significant reduction on disk, CPU, and GPU memory consumption as these resources are very limited.
+- **IVF_PQ**: IVF_PQ is a quantization-based index and is best suited for scenarios that seek high query speed even at the cost of accuracy. 
+- **HNSW**: HNSW is a graph-based index and is best suited for scenarios that have a high demand for search efficiency.
+- **ANNOY**: ANNOY is a tree-based index and is best suited for scenarios that seek a high recall rate.
 
 See [Vector Index](index.md) for more details.
 
@@ -84,7 +84,7 @@ See [Similarity Metrics](metric.md#floating) for more information.
 Milvus makes it easy to add similarity search to your applications. Example applications of Milvus include:
 
 - [Image similarity search](image_similarity_search.md): Images made searchable and instantaneously return the most similar images from a massive database.
-- [Video similarity search](video_similarity_search.md): By converting key frames into vectors and then feeding the results into Milvus, billions of videos can be searched and recommended in near real time.
+- [Video similarity search](video_similarity_search.md): By converting key frames into vectors and then feeding the results into Milvus, billions of videos can be searched and recommended in near real-time.
 - [Audio similarity search](audio_similarity_search.md): Quickly query massive volumes of audio data such as speech, music, sound effects, and surface similar sounds.
 - [Molecular similarity search](molecular_similarity_search.md): Blazing fast similarity search, substructure search, or superstructure search for a specified molecule.
 - [Recommender system](recommendation_system.md): Recommend information or products based on user behaviors and needs.
@@ -96,13 +96,13 @@ See [Milvus tutorials](https://github.com/milvus-io/bootcamp/tree/master/solutio
 
 ## How is Milvus designed?
 
-As a cloud-native vector database, Milvus 2.0 separates storage and computation by design. To enhance elasticity and flexibility, all components in Milvus 2.0 are stateless.
+As a cloud-native vector database, Milvus separates storage and computation by design. To enhance elasticity and flexibility, all components in Milvus are stateless.
 
 The system breaks down into four levels:
 
 - Access layer: The access layer is composed of a group of stateless proxies and serves as the front layer of the system and endpoint to users.
 - Coordinator service: The coordinator service assigns tasks to the worker nodes and functions as the system's brain.
-- Worker nodes: The worker nodes function as arms and legs and are dumb executors that follow instructions from the coordinator service and execute user-triggerd DML/DDL commands.
+- Worker nodes: The worker nodes function as arms and legs and are dumb executors that follow instructions from the coordinator service and execute user-triggered DML/DDL commands.
 - Storage: Storage is the bone of the system, and is responsible for data persistence. It comprises meta storage, log broker, and object storage.
 
 For more information, see [Architecture Overview](architecture_overview.md).
@@ -121,6 +121,7 @@ Milvus has client libraries wrapped on top of the Milvus API that can be used to
 - [PyMilvus](https://github.com/milvus-io/pymilvus)
 - [Node.js SDK](https://github.com/milvus-io/milvus-sdk-node)
 - [Go SDK](https://github.com/milvus-io/milvus-sdk-go)
+- [Java SDK](https://github.com/milvus-io/milvus-sdk-java)
 
 We are working on enabling more new client libraries. If you would like to contribute, go to the corresponding repository of [the Milvus Project](https://github.com/milvus-io).
 
@@ -130,7 +131,7 @@ The Milvus ecosystem provides helpful tools including:
 
 - [Milvus CLI](https://github.com/milvus-io/milvus_cli#overview)
 - [Attu](https://github.com/zilliztech/attu), a graphical management system for Milvus. 
-- [MilvusDM](https://milvus.io/docs/v2.0.0/migrate_overview.md) (Milvus Data Migration), an open-source tool designed specifically for importing and exporting data with Milvus.
+- [MilvusDM](migrate_overview.md) (Milvus Data Migration), an open-source tool designed specifically for importing and exporting data with Milvus.
 - [Milvus sizing tool](https://milvus.io/tools/sizing/), which helps you estimate the raw file size, memory size, and stable disk size needed for a specified number of vectors with various index types.
 
 ## What's next

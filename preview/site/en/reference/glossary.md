@@ -5,6 +5,12 @@ title: Glossary
 
 # Glossary
 
+This topic explains some of the core concepts in the Milvus vector database.
+
+## Bitset
+
+In Milvus, bitsets are arrays of bit numbers `0` and `1` that can be used to represent certain data compactly and efficiently as opposed to in ints, floats, or chars. A bit number is `0` by default and is only set to `1` if it meets certain requirements.
+
 ## Channel
 
 There are two different channels in Milvus. They are [PChannel](#PChannel) and [VChannel](#VChannel). Each PChannel corresponds to a topic for log storage. While each VChannel corresponds a shard in a collection. 
@@ -26,7 +32,7 @@ You can customize primary keys. If you do not configure manually, Milvus automat
 Fields are the units that make up entities. Fields can be structured data (e.g., numbers, strings) or vectors.
 
 <div class="alert note">
-Scalar field filtering is now available in Milvus 2.0!
+Starting from Milvus 2.0, scalar field filtering is available!
 </div>
 
 ## Log broker
@@ -75,7 +81,7 @@ Partitioning works to reduce read load by specifying a partition name, while sha
 </div>
 
 ## Unstructured data
-Unstructured data, including images, video, audio, and natural language, is information that doesn't follow a predefined model or manner of organization. This data type accounts for ~80% of the world's data, and can be converted into vectors using various artificial intelligence (AI) and machine learning (ML) models.
+Unstructured data, including images, video, audio, and natural language, is information that doesn't follow a predefined model or manner of organization. This data type accounts for around 80% of the world's data, and can be converted into vectors using various artificial intelligence (AI) and machine learning (ML) models.
 
 ## VChannel
 VChannel stands for logical channel. Each VChannel represents a shard in a collection. Each collection will be assigned a group of VChannels for recording data insertion, deletion, and update. VChannels are logically separated but physically share resources.

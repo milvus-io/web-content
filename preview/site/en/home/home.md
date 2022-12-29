@@ -65,9 +65,9 @@ id: home.md
   <p>Deploy</p>
 
 - [Configure Milvus](configure-docker.md)
+- [Manage Dependencies](deploy_s3.md)
 - [Deploy on Clouds](aws.md)
 - [Scale a Milvus Cluster](scaleout.md)
-- [Set up storage](deploy_s3.md)
 - [Monitor and Alert](monitor_overview.md)
 </div>
 
@@ -85,17 +85,14 @@ id: home.md
 
 <div class="doc-home-what-is-new">
 
-## What's new in docs
+## What's new in docs  
 
-_Apr 2022_
+_Nov 2022 - Milvus 2.2.0 release_
 
-- Added Milvus cluster installation guidance with [Ansible](install_cluster-ansible.md).
-- Remade API Reference of [PyMilvus](https://milvus.io/api-reference/pymilvus/v2.0.2/About.md) and [Milvus GO SDK](https://milvus.io/api-reference/go/v2.0.0/About.md).
-
-_Mar 2022_
-
-- Added guidance on [distance calculation](calculate_distance.md).
-- Added documentation on how to [load](load_partition.md) and [release](release_partition.md) a partition.
-- Added Milvus [benchmark](benchmark.md) report.
+- Added guidance on how to [bulk insert entities from files](bulk_insert.md). 
+- Added description of [disk-based ANN index](disk_index.md).
+- Added guidance on how to configure [quotas_and_limits](configure_quota_limits.md).
+- Added guidance on how to [enable RBAC](rbac.md) with Milvus Operator.
+- Added guidance on how to [migrate metadata](upgrade_milvus_cluster-helm.md) from 2.1.x to 2.2.0
 
 </div>

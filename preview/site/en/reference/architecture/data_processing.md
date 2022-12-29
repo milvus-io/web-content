@@ -9,7 +9,7 @@ This article provides a detailed description of the implementation of data inser
 
 ## Data insertion
 
-You can specify a number of shards for each collection in Milvus, each shard corresponding to a virtual channel (*vchannel*). As the following figure shows, Milvus 2.0 assigns each vchannel in the log broker a physical channel (*pchannel*). Any incoming insert/delete request is routed to shards based on the hash value of primary key.
+You can specify a number of shards for each collection in Milvus, each shard corresponding to a virtual channel (*vchannel*). As the following figure shows, Milvus assigns each vchannel in the log broker a physical channel (*pchannel*). Any incoming insert/delete request is routed to shards based on the hash value of primary key.
 
 Validation of DML requests is moved forward to proxy because Milvus does not have complicated transactions. Proxy would request a timestamp for each insert/delete request from TSO (Timestamp Oracle), which is the timing module that colocates with the root coordinator. With the older timestamp being overwritten by the newer one, timestamps are used to determine the sequence of data requests being processed. Proxy retrieves information in batches from data coord including entities' segments and primary keys to increase overall throughput and avoid overburdening the central node. 
 
@@ -52,3 +52,10 @@ Query nodes are independent from each other in a data query. Each node is respon
 ![Handoff](../../../../assets/handoff.jpg "Handoff in Milvus.")
 
 There are two types of segments, growing segments (for incremental data), and sealed segments (for historical data). Query nodes subscribe to vchannel to receive recent updates (incremental data) as growing segments. When a growing segment reaches a predefined threshold, data coord seals it and index building begins. Then a *handoff* operation initiated by query coord turns incremental data to historical data. Query coord will distribute sealed segments evenly among all query nodes according to memory usage, CPU overhead, and segment number.
+
+## What's next
+
+- Learn about how to [use the Milvus vector database for real-time query](https://milvus.io/blog/deep-dive-5-real-time-query.md).
+- Learn about [data insertion and data persistence in Milvus](https://milvus.io/blog/deep-dive-4-data-insertion-and-data-persistence.md).
+- Learn how [data is processed in Milvus](https://milvus.io/blog/deep-dive-3-data-processing.md).
+

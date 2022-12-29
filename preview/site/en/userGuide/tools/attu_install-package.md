@@ -7,11 +7,11 @@ related_key: attu
 summary: Learn how to install Attu with package to manage your Milvus service.
 ---
 
-# Install Attu
-
-This topic describes how to install Attu, an efficient open-source management tool for Milvus.
-
 <div class="tab-wrapper"><a href="attu_install-docker.md" class=''>Install with Docker Compose</a><a href="attu_install-helm.md" class=''>Install with Helm Chart</a><a href="attu_install-package.md" class='active '>Install with Package</a></div>
+
+# Install Attu with Pre-built Package
+
+Attu is an efficient open-source management tool for Milvus. This topic describes how to install Attu with the pre-built package.
 
 ## Download and run installation package
 
@@ -27,15 +27,15 @@ Download and run an installation package for Attu based on your operating system
 	<tbody>
         <tr>
             <td><code>Linux</code></td>
-            <td><a href="https://github.com/zilliztech/attu/releases/download/v2.0.1/attu_2.0.1_amd64.deb">Linux installation package</a></td>
+            <td><a href="https://github.com/zilliztech/attu/releases/download/v2.1.1/attu_2.1.1_amd64.deb">Linux installation package</a></td>
         </tr>
         <tr>
             <td><code>macOS</code></td>
-            <td><a href="/zilliztech/attu/releases/download/v2.0.1/attu-2.0.1.dmg">macOS installation package</a></td>
+            <td><a href="https://github.com/zilliztech/attu/releases/download/v2.1.1/attu-2.1.1.dmg">macOS installation package</a></td>
         </tr>
         <tr>
             <td><code>Windows</code></td>
-            <td><a href="https://github.com/zilliztech/attu/releases/download/v2.0.1/attu-Setup-2.0.1.exe">Windows installation package</a></td>
+            <td><a href="https://github.com/zilliztech/attu/releases/download/v2.1.1/attu-Setup-2.1.1.exe">Windows installation package</a></td>
         </tr>
 	</tbody>
 </table>

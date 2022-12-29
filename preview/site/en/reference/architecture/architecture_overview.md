@@ -14,4 +14,7 @@ Milvus adopts a shared-storage architecture featuring storage and computing disa
 ![Architecture_diagram](../../../../assets/architecture_diagram.png "Milvus architecture.")
 
 
-For more details about Milvus' architecture, see [Computing/Storage Disaggregation](four_layers.md) and [Main Components](main_components.md).
+## What's next
+
+- Learn more about [Computing/Storage Disaggregation](four_layers.md) in Milvus
+- Learn about the [Main Components](main_components.md) in Milvus.

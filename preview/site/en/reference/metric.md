@@ -69,7 +69,11 @@ The formula for Euclidean distance is as follows:
 
 where **a** = (a1, a2,..., an) and **b** = (b1, b2,..., bn) are two points in n-dimensional Euclidean space
 
-It's the most commonly used distance metric and is very useful when the data is continuous.
+It's the most commonly used distance metric and is very useful when the data are continuous.
+
+<div class="alert note">
+Milvus only caculates the value before applying square root when Euclidean distance is chosen as the distance metric.
+</div>
 
 ### Inner product (IP)
 
@@ -174,3 +178,8 @@ See <a href="https://en.wikipedia.org/wiki/Unit_vector">Wikipedia</a> for more i
 <summary><font color="#4fc4f9">Why do I get different results using Euclidean distance (L2) and inner product (IP) as the distance metric?</font></summary>
 Check if the vectors are normalized. If not, you need to normalize the vectors first. Theoretically speaking, similarities worked out by L2 are different from similarities worked out by IP, if the vectors are not normalized.
 </details>
+
+
+## What's next
+
+- Learn more about the supported [index types](index.md) in Milvus.

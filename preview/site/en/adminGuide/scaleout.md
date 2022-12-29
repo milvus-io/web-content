@@ -69,9 +69,10 @@ Milvus only supports adding the worker nodes and does not support adding the coo
 
 ## Scale a Milvus cluster 
 
-You can scale in your Milvus cluster either manually or automatically. If autoscaling is enabled, the Milvus cluster will shrink or expand automatically when CPU and memory resources consumption reaches the value you have set.  
+You can scale in your Milvus cluster either manually or automatically. If autoscaling is enabled, the Milvus cluster will shrink or expand automatically when CPU and memory resources consumption reaches the value you have set. 
 
-### Manual scaling
+Currently, Milvus 2.1.0 only supports scaling in and out manually.
+
 
 #### Scaling out
 
@@ -117,18 +118,11 @@ my-release-milvus-rootcoord-75585dc57b-cjh87    1/1     Running   0          2m
 my-release-minio-5564fbbddc-9sbgv               1/1     Running   0          2m
 ```
 
-### Autoscaling
-
-Run the following command to enable autoscaling for query node. You also need to configure the value for CPU and memory resource to trigger autoscaling.
-
-```
-helm upgrade my-release milvus/milvus --set queryNode.autoscaling.enabled=true --reuse-values
-```
 
 ## What's next
 
 - If you want to learn how to monitor the Milvus services and create alerts:
-  - Learn [Monitor Milvus 2.0 with Prometheus Operator on Kubernetes](monitor.md)
+  - Learn [Monitor Milvus with Prometheus Operator on Kubernetes](monitor.md)
 
 - If you are ready to deploy your cluster on clouds:
   - Learn how to [Deploy Milvus on AWS with Terraform and Ansible](aws.md)

@@ -23,6 +23,7 @@ All search and query operations within Milvus are executed in memory. Load the c
   <a href="#go">GO</a>
   <a href="#javascript">Node.js</a>
   <a href="#shell">CLI</a>
+  <a href="#curl">Curl</a>
 </div>
 
 
@@ -61,11 +62,15 @@ milvusClient.loadCollection(
 load -c book
 ```
 
+```curl
+# See the following step.
+```
+
 ## Conduct a vector query
 
 The following example filters the vectors with certain `book_id` values, and returns the `book_id` field and `book_intro` of the results.
 
-Milvus supports setting consistency level specifically for a search or query  (only on PyMilvus currently). The consistency level set in the search or query requests overwrites the one set while creating the collection. In this example, the consistency level of the search request is set as "Strong", meaning Milvus will read the most updated data view at the exact time point when a search or query request comes. Without specifying the consistency level during a search or query, Milvus adopts the original consistency level of the collection.
+Milvus supports setting consistency level specifically for a query. The example in this topic sets the consistency level as `Strong`. You can also set the consistency level as `Bounded`, `Session` or `Eventually`. See [Consistency](consistency.md) for more information about the four consistency levels in Milvus.
 
 <div class="multipleCode">
   <a href="#python">Python </a>
@@ -73,12 +78,15 @@ Milvus supports setting consistency level specifically for a search or query  (o
   <a href="#go">GO</a>
   <a href="#javascript">Node.js</a>
   <a href="#shell">CLI</a>
+  <a href="#curl">Curl</a>
 </div>
 
 
 ```python
 res = collection.query(
-  expr = "book_id in [2,4,6,8]", 
+  expr = "book_id in [2,4,6,8]",
+  offset = 0,
+  limit = 10, 
   output_fields = ["book_id", "book_intro"],
   consistency_level="Strong"
 )
@@ -109,8 +117,11 @@ if err != nil {
 List<String> query_output_fields = Arrays.asList("book_id", "word_count");
 QueryParam queryParam = QueryParam.newBuilder()
   .withCollectionName("book")
+  .withConsistencyLevel(ConsistencyLevelEnum.STRONG)
   .withExpr("book_id in [2,4,6,8]")
   .withOutFields(query_output_fields)
+  .withOffset(0L)
+  .withLimit(10L)
   .build();
 R<QueryResults> respQuery = milvusClient.query(queryParam);
 ```
@@ -129,6 +140,44 @@ A list of fields to return(split by "," if multiple) []: book_id, book_intro
 timeout []:
 ```
 
+```curl
+curl -X 'POST' \
+  'http://localhost:9091/api/v1/query' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "collection_name": "book",
+    "output_fields": ["book_id", "book_intro"],
+    "vectors": [ [0.1,0.2] ],
+    "expr": "book_id in [2,4,6,8]"
+  }'
+```
+
+<div class="language-curl">
+Output:
+
+```json
+{
+  "status":{},
+  "fields_data":[
+    {
+      "type":5,
+      "field_name":"book_id",
+      "Field":{"Scalars":{"Data":{"LongData":{"data":[6,8,2,4]}}}},
+      "field_id":100
+    },
+    {
+      "type":101,
+      "field_name":"book_intro",
+      "Field":{"Vectors":{"dim":2,"Data":{"FloatVector":{"data":[6,1,8,1,2,1,4,1]}}}},
+      "field_id":102
+    }
+  ]
+}
+```
+
+</div>
+
 <table class="language-python">
 	<thead>
 	<tr>
@@ -140,6 +189,14 @@ timeout []:
 	<tr>
 		<td><code>expr</code></td>
 		<td>Boolean expression used to filter attribute. Find more expression details in <a href="boolean.md">Boolean Expression Rules</a>.</td>
+	</tr>
+	<tr>
+		<td><code>offset</code></td>
+		<td>Number of results to skip in the returned set. The sum of this value and `limit` should be less than 65535.</td>
+	</tr>
+	<tr>
+		<td><code>limit</code></td>
+		<td>Number of the most similar results to return. The sum of this value and `offset` should be less than 65535.</td>
 	</tr>
 	<tr>
 		<td><code>output_fields</code> (optional)</td>
@@ -245,9 +302,13 @@ timeout []:
 		<td>Boolean expression used to filter attribute.</td>
     <td>See <a href="boolean.md">Boolean Expression Rules</a> for more information.</td>
 	</tr>
+  <tr>
+		<td><code>ConsistencyLevel</code></td>
+		<td>The consistency level used in the query.</td>
+	  <td><code>STRONG</code>, <code>BOUNDED</code>, and<code>EVENTUALLY</code>.</td>
+	</tr>
 	</tbody>
 </table>
-
 
 <table class="language-shell">
     <thead>
@@ -266,6 +327,28 @@ timeout []:
     </tbody>
 </table>
 
+<table class="language-curl">
+	<thead>
+	<tr>
+		<th>Parameter</th>
+		<th>Description</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td><code>output_fields</code> (optional)</td>
+		<td>List of names of the fields to return.</td>
+	</tr>
+	<tr>
+		<td><code>vectors</code></td>
+		<td>Vectors to query.</td>
+	</tr>
+	<tr>
+		<td><code>expr</code></td>
+		<td>Boolean expression used to filter attribute. Find more expression details in <a href="boolean.md">Boolean Expression Rules</a>.</td>
+	</tr>
+	</tbody>
+</table>
 
 Check the returned results. 
 
@@ -275,6 +358,7 @@ Check the returned results.
   <a href="#go">GO</a>
   <a href="#javascript">Node.js</a>
   <a href="#shell">CLI</a>
+  <a href="#curl">Curl</a>
 </div>
 
 
@@ -304,6 +388,10 @@ System.out.println(wrapperQuery.getFieldWrapper("word_count").getFieldData());
 # Milvus CLI automatically returns the entities with the pre-defined output fields.
 ```
 
+```curl
+# See the output of the previous step.
+```
+
 ## What's next
 
 - Learn more basic operations of Milvus:
@@ -312,7 +400,10 @@ System.out.println(wrapperQuery.getFieldWrapper("word_count").getFieldData());
   - [Search with Time Travel](timetravel.md)
 
 - Explore API references for Milvus SDKs:
-  - [PyMilvus API reference](/api-reference/pymilvus/v2.0.2/About.html)
-  - [Node.js API reference](/api-reference/node/v2.0.2/About.html)
-  - [Go API reference](/api-reference/go/v2.0.0/About.html)
-  - [Java API reference](/api-reference/java/v2.0.4/tutorial.html)
+
+  - [PyMilvus API reference](/api-reference/pymilvus/v2.2.1/About.md)
+  - [Node.js API reference](/api-reference/node/v2.2.1/About.md)
+  - [Go API reference](/api-reference/go/v2.2.0/About.md)
+  - [Java API reference](/api-reference/java/v2.2.1/About.md)
+
+

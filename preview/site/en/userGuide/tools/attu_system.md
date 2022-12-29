@@ -1,7 +1,7 @@
 ---
 id: attu_system.md
 related_key: attu
-summary: Attu, an intuitive GUI for Milvus service management.
+summary: Learn how to monitor your Milvus system with Attu, an intuitive GUI tool for Milvus.
 ---
 
 # Monitor System with Attu
@@ -16,16 +16,8 @@ Click the **System View** icon on the left-side navigation pane to visit the Sys
 
 The System View dashboard consists of the following tiles:
 
-- **Disk**: Shows the usage of storage space.
-- **Memory**: Shows the usage of memory.
-- **Qps**: Shows the last 10 monitored QPS. Each node represents a time point. Hover on a node to view the QPS monitored at the time point.
-- **Latency**: Shows the last 10 monitored latency. Each node represents a time point. Hover on a node to view the latency monitored at the time point.
-
-![System View](../../../../assets/attu/insight_system2.png "Latency at 25/11/2021, 10:51:52.")
-![System View](../../../../assets/attu/insight_system3.png "Latency at 25/11/2021, 10:55:52.")
-
 - **Topology**: Shows the structure of your Milvus instance. Click Milvus node or a coordinator node and the corresponding information appears in the Info tile on the right.
-- **Info**: Shows the hardware, system, and configuration information of the selected node.
+- **Info**: Shows the system and configuration information of the selected node.
 
 ## Node list view
 

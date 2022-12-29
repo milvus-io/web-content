@@ -4,7 +4,7 @@ id: tutorial-doc-template.md
 
 # Template for Tutorial Docs (Build a demo/solution with Milvus)
 
-Please describe the demo/solution that you expect to acquaint users with and preparation/prerequisites that involved.
+Please describe the demo/solution that you expect to acquaint users with and preparation or prerequisites that involved.
 
 ## Step 1 - Use second-person imperative to state the operation
 

@@ -8,8 +8,13 @@ summary: Learn how to load a collection into memory for CRUD operations in Milvu
 
 This topic describes how to load the collection to memory before a search or a query. All search and query operations within Milvus are executed in memory. 
 
+Milvus 2.1 allows users to load a collection as multiple replicas to utilize the CPU and memory resources of extra query nodes. This feature boost the overall QPS and throughput without extra hardware. It is supported on PyMilvus in current release.
+
 <div class="alert warning">
-In current release, volume of the data to load must be under 90% of the total memory resources of all query nodes to reserve memory resources for execution engine.
+<ul>
+<li>In current release, volume of the data to load must be under 90% of the total memory resources of all query nodes to reserve memory resources for execution engine.</li>
+<li>In current release, all on-line query nodes will be divided into multiple replica groups according to the replica number specified by user. All replica groups shall have minimal memory resources to load one replica of the provided collection. Otherwise, an error will be returned.</li>
+</ul>
 </div>
 
 <div class="multipleCode">
@@ -18,13 +23,14 @@ In current release, volume of the data to load must be under 90% of the total me
   <a href="#go">GO</a>
   <a href="#javascript">Node.js</a>
   <a href="#shell">CLI</a>
+  <a href="#curl">Curl</a>
 </div>
 
 
 ```python
 from pymilvus import Collection
 collection = Collection("book")      # Get an existing collection.
-collection.load()
+collection.load(replica_number=2)
 ```
 
 ```javascript
@@ -56,6 +62,25 @@ milvusClient.loadCollection(
 load -c book
 ```
 
+``` curl
+curl -X 'POST' \
+  'http://localhost:9091/api/v1/collection/load' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "collection_name": "book"
+  }'
+```
+
+<div class="language-curl">
+Output:
+
+```json
+{}
+```
+
+</div>
+
 <table class="language-python">
 	<thead>
 	<tr>
@@ -67,6 +92,10 @@ load -c book
 	<tr>
 		<td><code>partition_name</code> (optional)</td>
 		<td>Name of the partition to load.</td>
+	</tr>
+    <tr>
+		<td><code>replica_number</code> (optional)</td>
+		<td>Number of the replica to load.</td>
 	</tr>
 	</tbody>
 </table>
@@ -142,6 +171,41 @@ load -c book
         </tr>
     </tbody>
 </table>
+
+<table class="language-curl">
+	<thead>
+	<tr>
+		<th>Parameter</th>
+		<th>Description</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td><code>collection_name</code></td>
+		<td>Name of the collection to load.</td>
+	</tr>
+	</tbody>
+</table>
+
+## Get replica information
+
+You can check the information of the loaded replicas.
+
+```python
+from pymilvus import Collection
+collection = Collection("book")      # Get an existing collection.
+collection.load(replica_number=2)    # Load collection as 2 replicas
+result = collection.get_replicas()
+print(result)
+```
+
+Below is an example of the output.
+
+```
+Replica groups:
+- Group: <group_id:435309823872729305>, <group_nodes:(21, 20)>, <shards:[Shard: <channel_name:milvus-zong-rootcoord-dml_27_435367661874184193v0>, <shard_leader:21>, <shard_nodes:[21]>, Shard: <channel_name:milvus-zong-rootcoord-dml_28_435367661874184193v1>, <shard_leader:20>, <shard_nodes:[20, 21]>]>
+- Group: <group_id:435309823872729304>, <group_nodes:(25,)>, <shards:[Shard: <channel_name:milvus-zong-rootcoord-dml_28_435367661874184193v1>, <shard_leader:25>, <shard_nodes:[25]>, Shard: <channel_name:milvus-zong-rootcoord-dml_27_435367661874184193v0>, <shard_leader:25>, <shard_nodes:[25]>]>
+```
 
 ## Constraints
 
