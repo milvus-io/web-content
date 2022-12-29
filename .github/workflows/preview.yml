@@ -1,4 +1,4 @@
-name: Preview docs update
+name: Trigger milvus.io preview build
 
 on:
   push:

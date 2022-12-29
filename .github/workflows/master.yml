@@ -1,4 +1,4 @@
-name: Trigger milvus.io publish every time
+name: Trigger milvus.io production build
 
 on:
   repository_dispatch:
@@ -15,7 +15,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Stats Docs Words
-        env: 
+        env:
           MSERVICE_URL: ${{secrets.MSERVICE_URL}}
         run: |
           mv word-count.md word-count.js
@@ -23,9 +23,5 @@ jobs:
           node word-count.js
 
       - name: Trigger milvus.io
-        env:
-          GH_TOKEN: ${{secrets.GH_TOKEN}}
         run: |
-          mv trigger-milvus-build.md trigger-milvus-build.js
-          yarn
-          node trigger-milvus-build.js
+          curl -XPOST -H 'Authorization: `Bearer ${{secrets.GH_TOKEN}}`' -d '{ event_type: "prod-deploy" }' 'https://api.github.com/repos/milvus-io/www.milvus.io/dispatches'
