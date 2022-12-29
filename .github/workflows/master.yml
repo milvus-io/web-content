@@ -24,4 +24,4 @@ jobs:
 
       - name: Trigger milvus.io
         run: |
-          curl -XPOST -H 'Authorization: `Bearer ${{secrets.GH_TOKEN}}`' -d '{ event_type: "prod-deploy" }' 'https://api.github.com/repos/milvus-io/milvus.io/dispatches'
+          curl -XPOST -H "Authorization: Bearer ${{secrets.GH_TOKEN}}" https://api.github.com/repos/milvus-io/milvus.io/dispatches -d '{"event_type": "prod-deploy"}'
