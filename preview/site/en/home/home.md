@@ -5,7 +5,7 @@ id: home.md
 <div class="doc-h1-wrapper">
 
   <h1 class="title">
-    Welcome to Milvus Docs doc preview!
+    Welcome to Milvus Docs!
   </h1>
 
   <h2 class="sub-title">
