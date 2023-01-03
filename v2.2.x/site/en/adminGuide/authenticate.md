@@ -49,7 +49,7 @@ Create a user with username and password with the following command.
 
 ```python
 from pymilvus import utility
-utility.create_credential('user', 'password', using='default') 
+utility.create_user('user', 'password', using='default') 
 ```
 
 | Parameter                    |  Description                                    |
@@ -106,8 +106,8 @@ utility.reset_password('user', 'old_password', 'new_password', using='default')
 Delete an authenticated user.
 
 ```python
-Delete a user
-Delete an authenticated user.
+from pymilvus import utility
+utility.delete_user('user', using='default')
 ```
 
 | Parameter                    |  Description                            |
@@ -121,7 +121,7 @@ List all the credential users.
 
 ```python
 from pymilvus import utility
-users = utility.list_cred_users(using='default')
+users = utility.list_usernames(using='default')
 ```
 
 ## Limitations
