@@ -208,7 +208,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
 This tutorial uses the default configuration to install a Milvus cluster. All Milvus cluster components are enabled with multiple replicas, which consumes many resources. 
 
 <div class="alert note">
-If you have very limited local resources, you can install a Milvus cluster <a href="[url](https://github.com/milvus-io/milvus-operator/blob/main/config/samples/milvus_cluster_minimum.yaml)">using the minimum configuration</a>).
+If you have very limited local resources, you can install a Milvus cluster <a href="https://github.com/milvus-io/milvus-operator/blob/main/config/samples/milvus_cluster_minimum.yaml">using the minimum configuration</a>).
 </div>
 
 ### 1. Deploy a Milvus cluster
