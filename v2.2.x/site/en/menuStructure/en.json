@@ -452,7 +452,7 @@
       "label2": "",
       "order": 3,
       "isMenu": true
-    },
+    },   
     {
       "id": "configure_milvus",
       "title": "Configure Milvus",
@@ -733,6 +733,14 @@
       "order": 1
     },
     {
+      "id": "benchmark.md",
+      "title": "Benchmarks",
+      "label1": "",
+      "label2": "",
+      "order": 4,
+      "isMenu": true
+    },     
+    {
       "id": "tools",
       "title": "Tools",
       "label1": "",
@@ -944,14 +952,6 @@
       "label2": "architecture",
       "label3": "",
       "order": 3
-    },
-    {
-      "id": "benchmark.md",
-      "title": "Benchmarks",
-      "label1": "",
-      "label2": "",
-      "order": 4,
-      "isMenu": true
     },
     {
       "id": "bitset.md",
