@@ -57,7 +57,7 @@ $ sudo docker info
 Pull the GPU-enabled image:
 
 ```shell
-$ sudo docker pull milvusdb/milvus:1.1.1-gpu-d050721-5e559c
+$ sudo docker pull milvusdb/milvus:1.1.1-gpu-d061621-330cc6
 ```
 
 <div class="alert note">
@@ -115,7 +115,7 @@ $ sudo docker run -d --name milvus_gpu_1.1.1 --gpus all \
 -v /home/$USER/milvus/conf:/var/lib/milvus/conf \
 -v /home/$USER/milvus/logs:/var/lib/milvus/logs \
 -v /home/$USER/milvus/wal:/var/lib/milvus/wal \
-milvusdb/milvus:1.1.1-gpu-d050721-5e559c
+milvusdb/milvus:1.1.1-gpu-d061621-330cc6
 ```
 
 The `docker run` options used in the above command are defined as follows:
