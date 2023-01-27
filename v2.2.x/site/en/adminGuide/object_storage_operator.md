@@ -44,39 +44,22 @@ The following example configures an external object storage service.
 
 ```YAML
 kind: MilvusCluster
-
 metadata:
-
   name: my-release
-
   labels:
-
     app: milvus
-
 spec:
-
   dependencies: # Optional
-
     storage: # Optional
-
       # Whether (=true) to use an existed external storage as specified in the field endpoints or 
-
       # (=false) create a new storage inside the same kubernetes cluster for milvus.
-
       external: true # Optional default=false
-
       type: "MinIO" # Optional ("MinIO", "S3") default:="MinIO"
-
       # Secret reference of the storage if it has
-
       secretRef: mySecret # Optional
-
       # The external storage endpoint if external=true
-
       endpoint: "storageEndpoint"
-
   components: {}
-
   config: {}
 ```
 
@@ -92,59 +75,32 @@ The following example configures an internal MinIO service.
 
 ```YAML
 apiVersion: milvus.io/v1alpha1
-
 kind: MilvusCluster
-
 metadata:
-
   name: my-release
-
   labels:
-
     app: milvus
-
 spec:
-
   dependencies:
-
     storage: #
-
       external: false 
-
       type: "MinIO" # Optional ("MinIO", "S3") default:="MinIO"
-
       inCluster: 
-
         # deletionPolicy of storage when the milvus cluster is deleted
-
         deletionPolicy: Retain # Optional ("Delete", "Retain") default="Retain"
-
         # When deletionPolicy="Delete" whether the PersistantVolumeClaim shoud be deleted when the storage is deleted
-
         pvcDeletion: false
-
         values:
-
           resources:
-
              limits: 
-
               cpu: '2'
-
               memory: 6Gi
-
             requests:
-
               cpu: 100m
-
               memory: 512Mi
-
           statefulset:
-
             replicaCount: 6
-
   components: {}
-
   config: {}    
 ```
 
