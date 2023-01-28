@@ -1,5 +1,5 @@
 ---
-id: bulk_insert.md
+id: bulk_insert.bak.md
 related_key: bulk load
 summary: Learn how to insert multiple entities in a batch from a JSON file.
 ---
