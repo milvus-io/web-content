@@ -5,6 +5,8 @@ related_key: cluster
 summary: Learn how to deploy a Milvus cluster on GCP.
 ---
 
+# Deploy a Milvus Cluster on GCP
+
 Milvus is a cloud-native vector database and can be deployed on various cloud environments. This guide walks you through every detail about setting up Milvus on Google Cloud Platform (GCP).
 
 ![Deploy a Milvus cluster on GCP](../../../../assets/gcp-networking.png)
@@ -94,7 +96,7 @@ In this guide, we will use the Google Kubernetes Engine (GKE) service to provisi
 
 <div class="alert note">
 
-The machine type is up to your choice. You are advised to use the types of machines that offer a minimum memory of 16 GB to ensure service stability.
+You are advised to use the types of machines that offer a minimum memory of 16 GB to ensure service stability.
 
 </div>
 
@@ -125,13 +127,6 @@ gcloud container clusters get-credentials milvus-cluster-1
 
 ## Deploy Milvus
 
-<div class="multipleCode">
-<a href="#layer4">Behind a Layer-4 load balancer</a>
-<a href="#layer7">Behind a Layer-7 load balancer</a>
-</div>
-
-<div class="language-layer4"></div>
-
 Now the Kubernetes cluster is ready. Let's deploy Milvus right now. 
 
 ```bash
@@ -144,23 +139,7 @@ In the preceding commands, we add the repo of Milvus Helm charts locally and upd
 
 Notice the arguments following the `--set` flag, which indicates that we would like to expose the Milvus instance through a Layer-4 load balancer. 
 
-</div>
-
-<div class="language-layer7">
-
-Now the Kubernetes cluster is ready. Let's deploy Milvus right now.
-
-```bash
-helm repo add milvus https://milvus-io.github.io/milvus-helm/
-helm repo update
-helm install my-release milvus/milvus --set service.type=ClusterIP
-```
-
-In the preceding commands, we add the repo of Milvus Helm charts locally and update the repo to fetch the latest charts. Then we install a Milvus instance and name it **my-release**. 
-
-Notice the arguments following the `--set` flag, which indicates that we would like to restrict the access to the Milvus instance within the Kubernetes cluster. 
-
-</div>
+If you would like to expose your Milvus instance through a Layer-7 load balancer, [read this](gcp_layer7).
 
 ## Verify the deployment
 

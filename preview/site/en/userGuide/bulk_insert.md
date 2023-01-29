@@ -6,13 +6,13 @@ summary: Learn how to insert multiple entities in a batch from a JSON file.
 
 # Import Data
 
-To add multiple entities in a batch with legacy versions of Milvus, you can use the **insert** API to add these entities one after another programmatically. However, it brings massive network transmission across the client, proxy, Pulsar, and data nodes. 
+To add multiple entities in a batch with legacy versions of Milvus, you can use the **insert** API to add these entities one after another in a loop. However, it brings massive network transmission across the client, proxy, Pulsar, and data nodes. 
 
 Milvus 2.2 offers the **bulk-insert** API to facilitate batch data insertion from files. With this new API, you can import a large amount of data into a collection with just one line of code.
 
 ## Prepare Data Files
 
-To fully utilize the new API, you have to organize your data either in a row-based JSON file or a column-based NumPy file.
+To fully utilize the new API, you have to organize your data either in a row-based JSON file or a bunch of column-based NumPy files.
 
 * **Row-based JSON file**
 
