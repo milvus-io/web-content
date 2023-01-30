@@ -5,13 +5,13 @@ related_key: cluster
 summary: Learn how to deploy a Milvus cluster behind a Layer-7 load balancer on GCP.
 ---
 
-# Set up a Layer-7 Load Balancer for Milvus on GCP
+## Set up a Layer-7 Load Balancer for Milvus on GCP
 
 When compared to a Layer-4 load balancer, a Layer-7 load balancer offers smart load balancing and caching capabilities and is a great choice for cloud-native services. 
 
 This guide walks you through setting up a layer-7 load balancer for a Milvus cluster already running behind a Layer-4 load balancer.
 
-## Before your start
+### Before your start
 
 - A project already exists in your GCP account. 
 
@@ -23,7 +23,7 @@ This guide walks you through setting up a layer-7 load balancer for a Milvus clu
 
 - You have [deployed a Milvus cluster behind a Layer-4 load balancer on GCP](gcp).
 
-## Tweak Milvus configurations
+### Tweak Milvus configurations
 
 This guide assumes that you have already [deployed a Milvus cluster behind a Layer-4 load balancer on GCP](gcp). 
 
@@ -39,7 +39,7 @@ As a backend service of the Layer-7 load balancer, Milvus has to meet [certain e
 helm upgrade my-release milvus/milvus --set common.security.tlsMode=1
 ```
 
-## Set up a health check endpoint
+### Set up a health check endpoint
 
 To ensure service availability, Layer-7 load balancing on GCP requires probing the health conditions of the service. Therefore, we need to set up a BackendConfig to wrap up the health check endpoint and associate the BackendConfig with the Milvus service through annotations.
 
@@ -89,13 +89,13 @@ kubectl annotate service my-release-milvus \
 
 </div>
 
-## Prepare TLS certificates
+### Prepare TLS certificates
 
 TLS requires certificates to work. There are two ways to create certificates, namely self-managed and Google-managed.
 
 This guide uses **my-release.milvus.io** as the domain name to access our Milvus service. 
 
-### Create self-managed certificates
+#### Create self-managed certificates
 
 Run the following commands to create a certificate.
 
@@ -117,7 +117,7 @@ Then create a secret in your GKE cluster with these files for later use.
 kubectl create secret tls my-release-milvus-tls --cert=./tls.crt --key=./tls.key
 ```
 
-### Create Google-managed certificates
+#### Create Google-managed certificates
 
 The following snippet is a ManagedCertificate setting. Save it as `managed-crt.yaml` for later use.
 
@@ -156,7 +156,7 @@ status:
 
 Once **certificateStatus** turns to **Ready**, you are ready to set up the load balancer.
 
-## Create an Ingress to generate a Layer-7 Load Balancer
+### Create an Ingress to generate a Layer-7 Load Balancer
 
 Create a YAML file with one of the following snippets.
 
