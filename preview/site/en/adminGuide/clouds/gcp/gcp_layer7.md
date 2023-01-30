@@ -41,7 +41,7 @@ helm upgrade my-release milvus/milvus --set common.security.tlsMode=1
 
 ### Set up a health check endpoint
 
-To ensure service availability, Layer-7 load balancing on GCP requires probing the health conditions of the service. Therefore, we need to set up a BackendConfig to wrap up the health check endpoint and associate the BackendConfig with the Milvus service through annotations.
+To ensure service availability, Layer-7 load balancing on GCP requires probing the health conditions of the backend service. Therefore, we need to set up a BackendConfig to wrap up the health check endpoint and associate the BackendConfig with the Milvus service through annotations.
 
 The following snippet is the BackendConfig settings. Save it as `backendconfig.yaml` for later use.
 
@@ -81,7 +81,7 @@ kubectl annotate service my-release-milvus \
 
 - As to the second annotation,
 
-  Milvus only offers the health check endpoint over gRPC and HTTP/1. We need to set up a BackendConfig to wrap the health check endpoint and associate it with the Milvus service so that the Layer-7 load balancer probes this endpoint for the health condition of the service.
+  Milvus only offers the health check endpoint over gRPC and HTTP/1. We need to set up a BackendConfig to wrap the health check endpoint and associate it with the Milvus service so that the Layer-7 load balancer probes this endpoint for the health condition of Milvus.
 
 - As to the third annotation,
 
@@ -154,7 +154,7 @@ status:
     status: Provisioning
 ```
 
-Once **certificateStatus** turns to **Ready**, you are ready to set up the load balancer.
+Once **certificateStatus** turns to **Active**, you are ready to set up the load balancer.
 
 ### Create an Ingress to generate a Layer-7 Load Balancer
 
@@ -229,11 +229,11 @@ my-release-milvus   <none>   my-release.milvus.io             80      4s
 my-release-milvus   <none>   my-release.milvus.io   34.111.144.65   80, 443   41m
 ```
 
-Once **ADDRESS** is filled with an IP address, the Layer-7 load balancer is ready to use. Note that there are two ports available in the above output. Remember, you should always use port 443 for your own good.
+Once an IP address is in the **ADDRESS** field, the Layer-7 load balancer is ready to use. Both port 80 and port 443 are displayed in the above output. Remember, you should always use port 443 for your own good.
 
 ## Verify the connection through the Layer-7 load balancer
 
-This guide uses PyMilvus to verify the connection to the Milvus service on the GCP through a Layer-7 load balancer. For detailed steps, [read this](example_code).
+This guide uses PyMilvus to verify the connection to the Milvus service on the GCP through the Layer-7 load balancer we have just created. For detailed steps, [read this](example_code).
 
 Notice that connection parameters vary with the way you choose to manage the certificates in [Prepare TLS certificates](#prepare-tls-certificates).
 
@@ -256,7 +256,7 @@ connections.connect("default", host="34.111.144.65", port="443", secure=True, se
 
 <div class="alert note">
 
-- The IP address and port number in **host** and **port** should match that listed at the end of [Create an Ingress to generate a Layer-7 Load Balancer](#create-an-ingress-to-generate-a-layer-7-load-balancer).
-- If you have set up a DNS record to map your own domain name to the host IP address, replace the IP address in **host** with the domain name and omit **server_name**.
+- The IP address and port number in **host** and **port** should match those listed at the end of [Create an Ingress to generate a Layer-7 Load Balancer](#create-an-ingress-to-generate-a-layer-7-load-balancer).
+- If you have set up a DNS record to map domain name to the host IP address, replace the IP address in **host** with the domain name and omit **server_name**.
 
 </div>
