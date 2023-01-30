@@ -21,11 +21,11 @@ This guide walks you through setting up a layer-7 load balancer for a Milvus clu
 
 - You have [initialized the gcloud CLI](https://cloud.google.com/sdk/docs/install-sdk#initializing_the) with your GCP account credentials.
 
-- You have [deployed a Milvus cluster behind a Layer-4 load balancer on GCP](gcp).
+- You have [deployed a Milvus cluster behind a Layer-4 load balancer on GCP](gcp.md).
 
 ### Tweak Milvus configurations
 
-This guide assumes that you have already [deployed a Milvus cluster behind a Layer-4 load balancer on GCP](gcp). 
+This guide assumes that you have already [deployed a Milvus cluster behind a Layer-4 load balancer on GCP](gcp.md). 
 
 Before setting up a Layer-7 load balancer for this Milvus cluster, run the following command to remove the Layer-4 load balancer.
 
@@ -33,7 +33,7 @@ Before setting up a Layer-7 load balancer for this Milvus cluster, run the follo
 helm upgrade my-release milvus/milvus --set service.type=ClusterIP
 ```
 
-As a backend service of the Layer-7 load balancer, Milvus has to meet [certain encryption requirements](https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-http2) so that it can understand the HTTP2 requests from the load balancer. Therefore, you need to enable TLS on your Milvus cluster as follows.
+As a backend service of the Layer-7 load balancer, Milvus has to meet [certain encryption requirements](https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-http2) so that it can understand the HTTP/2 requests from the load balancer. Therefore, you need to enable TLS on your Milvus cluster as follows.
 
 ```bash
 helm upgrade my-release milvus/milvus --set common.security.tlsMode=1
@@ -131,7 +131,7 @@ spec:
     - my-release.milvus.io
 ```
 
-Create a managed certificate by applying the file to your GKE cluster as follows:
+Create a managed certificate by applying the setting to your GKE cluster as follows:
 
 ```bash
 kubectl apply -f ./managed-crt.yaml
@@ -229,11 +229,11 @@ my-release-milvus   <none>   my-release.milvus.io             80      4s
 my-release-milvus   <none>   my-release.milvus.io   34.111.144.65   80, 443   41m
 ```
 
-Once an IP address is in the **ADDRESS** field, the Layer-7 load balancer is ready to use. Both port 80 and port 443 are displayed in the above output. Remember, you should always use port 443 for your own good.
+Once an IP address is displayed in the **ADDRESS** field, the Layer-7 load balancer is ready to use. Both port 80 and port 443 are displayed in the above output. Remember, you should always use port 443 for your own good.
 
 ## Verify the connection through the Layer-7 load balancer
 
-This guide uses PyMilvus to verify the connection to the Milvus service on the GCP through the Layer-7 load balancer we have just created. For detailed steps, [read this](example_code).
+This guide uses PyMilvus to verify the connection to the Milvus service behind the Layer-7 load balancer we have just created. For detailed steps, [read this](example_code).
 
 Notice that connection parameters vary with the way you choose to manage the certificates in [Prepare TLS certificates](#prepare-tls-certificates).
 

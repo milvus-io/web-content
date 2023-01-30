@@ -139,7 +139,7 @@ In the preceding commands, we add the repo of Milvus Helm charts locally and upd
 
 Notice the arguments following the `--set` flag, which indicates that we would like to expose the Milvus instance through a Layer-4 load balancer. 
 
-If you would like to expose your Milvus instance through a Layer-7 load balancer, [read this](gcp_layer7).
+If you would like to expose your Milvus instance through a Layer-7 load balancer, [read this](gcp_layer7.md).
 
 ### Verify the deployment
 
@@ -151,4 +151,4 @@ kubectl get services
 
 The result is similar to the following:
 
-![Milvus service over a Layer-4 load balancer on GCP](../../../../assets/gcp.png)
+![Milvus service over a Layer-4 load balancer on GCP](../../../../../assets/gcp.png)
