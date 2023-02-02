@@ -5,7 +5,7 @@ This method checks the details of a collection, including collection name, schem
 ## Invocation
 
 ```javascript
-new milvusClient(MILUVS_ADDRESS).collectionManager.describeCollection(
+new milvusClient(MILVUS_ADDRESS).collectionManager.describeCollection(
   DescribeCollectionReq
 );
 ```
