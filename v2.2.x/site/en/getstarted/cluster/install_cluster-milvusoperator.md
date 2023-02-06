@@ -122,7 +122,7 @@ validatingwebhookconfiguration.admissionregistration.k8s.io/cert-manager-webhook
 ```
 
 <div class="alert note">
-cert-manager version 1.13 or later is required.
+cert-manager version 1.1.3 or later is required.
 </div>
 
 Run `$ kubectl get pods -n cert-manager` to check if cert-manager is running. You can see the following output if all the pods are running.
