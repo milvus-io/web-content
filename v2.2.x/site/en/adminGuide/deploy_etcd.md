@@ -59,8 +59,8 @@ For Milvus clusters on K8s, you can configure etcd in the same command that star
  The following table lists the keys for configuring etcd in the YAML file.
 | Key             | Description                          | Value                                 |
 | --------------------- | ------------------------------------ | ------------------------------------ |
-| <code>externaletcd.enabled</code>    | Enables or disables S3.     | <code>true</code>/<code>false</code> |
-| <code>externalS3.endpoints</code>       | The endpoint to access S3.    |                                      |
+| <code>externalEtcd.enabled</code>    | Enables or disables etcd.     | <code>true</code>/<code>false</code> |
+| <code>externalEtcd.endpoints</code>       | The endpoint to access etcd.    |                                      |
 
 
 
