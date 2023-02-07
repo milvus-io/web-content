@@ -183,7 +183,7 @@ Under this section, you can configure proxy port, system limits, etc.
   <tbody>
     <tr>
       <td>The maximum number of field can be created when creating in a collection. </td>
-      <td>256</td>
+      <td>64</td>
     </tr>
   </tbody>
 </table>
@@ -217,7 +217,7 @@ Under this section, you can configure proxy port, system limits, etc.
   <tbody>
     <tr>
       <td>The maximum number of shards can be created when creating in a collection.</td>
-      <td>256</td>
+      <td>64</td>
     </tr>
   </tbody>
 </table>
