@@ -12,7 +12,7 @@ In Milvus, you can use a resource group to physically isolate certain query node
 
 A resource group can hold several or all of the query nodes in a Milvus instance. You decide how you want to allocate query nodes among resource groups based on what makes the most sense for you. For example, in a multi-tenant scenario, you can allocate an appropriate number of query nodes to each tenant so that the operations within each resource group are physically independent of those in other resource groups.
 
-Note that a Milvus instance maintains a default resource group to hold all the query nodes and names it **__default_resource_group**. You can move some nodes from the default resource group to the one you create.
+Note that a Milvus instance maintains a default resource group to hold all the query nodes at the start-up and names it **__default_resource_group**. You can move some nodes from the default resource group to the one you create.
 
 ### Manage resource groups
 
@@ -71,7 +71,7 @@ python -m pip install --upgrade pymilvus
     # Resource group description: 
     #        <name:"demo">,           // string, rg name
     #        <capacity:1>,            // int, num_node which has been transfer to this rg
-    #        <num_available_node:1>,  // int, available node_num, some node may shutdown
+    #        <num_available_node:0>,  // int, available node_num, some node may shutdown
     #        <num_loaded_replica:{}>, // map[string]int, from collection_name to loaded replica of each collecion in this rg
     #        <num_outgoing_node:{}>,  // map[string]int, from collection_name to outgoging accessed node num by replica loaded in this rg 
     #        <num_incoming_node:{}>.  // map[string]int, from collection_name to incoming accessed node num by replica loaded in other rg
@@ -92,7 +92,7 @@ python -m pip install --upgrade pymilvus
     except Exception:
         print("Something went wrong while moving nodes.")
 
-    # Succeeded in moving 2 node(s) from __default_resource_group to rg.
+    # Succeeded in moving 1 node(s) from __default_resource_group to rg.
     ```
 
 5. Load collections and partitions to a resource group.
@@ -124,13 +124,13 @@ python -m pip install --upgrade pymilvus
     partition.load(replica_number=2, _resource_group=resource_groups)
     ```
 
-    Note that `_resource_group` is an optional parameter, and leaving it empty have Milvus loads the replicas onto the default query nodes in the default resource group.
+    Note that `_resource_group` is an optional parameter, and leaving it unspecified have Milvus load the replicas onto the query nodes in the default resource group.
 
     To have Milus load each replica of a collection in a separate resource group, ensure that the number of resource groups equals the number of replicas.
 
 6. Transfer replicas between resource groups.
 
-    Milvus uses [replicas](replica) to achieve load-balancing among [segments](glossary#Segment) distributed across several query nodes. You can move certain replicas of a collection from one resource group to another as follows:
+    Milvus uses [replicas](replica.md) to achieve load-balancing among [segments](glossary.md#Segment) distributed across several query nodes. You can move certain replicas of a collection from one resource group to another as follows:
 
     ```Python
     source = '__default_resource_group'
@@ -168,5 +168,5 @@ python -m pip install --upgrade pymilvus
 
 To deploy a multi-tenant Milvus instance, read the following:
 
-- [Enable RBAC](rbac)
-- [Users and roles](users_and_roles)
+- [Enable RBAC](rbac.md)
+- [Users and roles](users_and_roles.md)
