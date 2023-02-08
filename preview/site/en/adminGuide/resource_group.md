@@ -115,12 +115,13 @@ python -m pip install --upgrade pymilvus
     Also, you can just load a partition into a resource group and have its replicas distributed among several resource groups. The following assumes that a collection named `Books` already exists and it has a partition named `Novels`.
 
     ```Python
-    # Use the load method of a collection to load one of its partition
     collection = Collection("Books")
+
+    # Use the load method of a collection to load one of its partition
     collection.load(["Novels"], replica_number=2, _resource_group=resource_groups)
 
     # Or, you can use the load method of a partition directly
-    partition = Partition("Books", "Novels")
+    partition = Partition(collection, "Novels")
     partition.load(replica_number=2, _resource_group=resource_groups)
     ```
 
