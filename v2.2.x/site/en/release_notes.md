@@ -7,11 +7,11 @@ summary: Milvus Release Notes
 Find out what’s new in Milvus! This page summarizes information about new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.2.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
 ## 2.2.3
-Release date: 10 January, 2023
+Release date: 10 Feburary, 2023
 
 | Milvus version | Python SDK version | Java SDK version | Go SDK version | Node.js SDK version |
 | -------------- | ------------------ | ---------------- | -------------- | ------------------- |
-| 2.2.3          | 2.2.2              | 2.2.1            | 2.2.0          | 2.2.1         |
+| 2.2.3          | 2.2.2              | Coming soon      | Coming soon    | Coming soon        |
 
 Milvus 2.2.3 introduces the rolling upgrade capability to Milvus clusters and brings high availability settings to RootCoords. The former greatly reduces the impacts brought by the upgrade and restart of the Milvus cluster in production to the minimum, while the latter enables coordinators to work in active-standby mode and ensures a short failure recovery time of no more than 30 seconds. 
 
