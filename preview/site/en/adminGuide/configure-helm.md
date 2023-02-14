@@ -29,6 +29,22 @@ $ wget https://raw.githubusercontent.com/milvus-io/milvus-helm/master/charts/mil
 
 Configure your Milvus instance to suit your application scenarios by adjusting corresponding parameters in `values.yaml`.
 
+Specifically, search for `extraConfigFiles` in `values.yaml` and put your configurations in this section as follows:
+
+```yaml
+# Extra configs for milvus.yaml
+# If set, this config will merge into milvus.yaml
+# Please follow the config structure in the milvus.yaml
+# at https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml
+# Note: this config will be the top priority which will override the config
+# in the image and helm chart.
+extraConfigFiles:
+  user.yaml: |+
+    #    For example to set the graceful time for query nodes
+    #    queryNodes:
+    #      gracefulTime: 10
+```
+
 Check the following links for more information about each parameter.
 
 Sorted by:

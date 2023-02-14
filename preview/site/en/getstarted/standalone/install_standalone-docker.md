@@ -7,7 +7,7 @@ group: install_standalone-helm.md
 summary: Learn how to install Milvus stanalone with Docker Compose.
 ---
 
-<div class="tab-wrapper"><a href="install_standalone-helm.md" class=''>Helm</a><a href="install_standalone-operator.md" class=''>Milvus Operator</a><a href="install_standalone-docker.md" class='active '>Docker Compose</a></div>
+<div class="tab-wrapper"><a href="install_standalone-operator.md" class=''>Milvus Operator</a><a href="install_standalone-helm.md" class=''>Helm</a><a href="install_standalone-docker.md" class='active '>Docker Compose</a></div>
 
 # Install Milvus Standalone with Docker Compose
 
@@ -19,10 +19,10 @@ Check [the requirements](prerequisite-docker.md) for hardware and software prior
 
 ## Download the `YAML` file
 
-[Download](https://github.com/milvus-io/milvus/releases/download/v2.2.2/milvus-standalone-docker-compose.yml) `milvus-standalone-docker-compose.yml` and save it as `docker-compose.yml` manually, or with the following command.
+[Download](https://github.com/milvus-io/milvus/releases/download/v2.2.3/milvus-standalone-docker-compose.yml) `milvus-standalone-docker-compose.yml` and save it as `docker-compose.yml` manually, or with the following command.
 
 ```
-$ wget https://github.com/milvus-io/milvus/releases/download/v2.2.2/milvus-standalone-docker-compose.yml -O docker-compose.yml
+$ wget https://github.com/milvus-io/milvus/releases/download/v2.2.3/milvus-standalone-docker-compose.yml -O docker-compose.yml
 ```
 
 ## Start Milvus

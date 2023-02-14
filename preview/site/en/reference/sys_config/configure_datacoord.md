@@ -209,7 +209,7 @@ Under this section, you can configure data coord address, segment settings, comp
         <li>The minimum proportion to <code>datacoord.segment.maxSize</code> to seal a segment.</li>
         <li><code>datacoord.segment.maxSize</code> and <code>datacoord.segment.sealProportion</code> together determine if a segment can be sealed.</li>
       </td>
-      <td>0.75</td>
+      <td>0.23</td>
     </tr>
   </tbody>
 </table>
