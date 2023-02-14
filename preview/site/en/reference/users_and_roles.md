@@ -37,7 +37,7 @@ The following table lists the values you can choose when [enabling RBAC](rbac.md
 | Collection  | Release            | ReleaseCollection                                 |
 | Collection  | Insert             | Insert                                            |
 | Collection  | Delete             | Delete                                            |
-| Collection  | Search             | Delete                                            |
+| Collection  | Search             | Search                                            |
 | Collection  | Flush              | Flush                                             |
 | Collection  | Query              | Query                                             |
 | Collection  | GetStatistics      | GetCollectionStatistics                           |
@@ -54,12 +54,6 @@ The following table lists the values you can choose when [enabling RBAC](rbac.md
 | Global      | DropOwnership      | DeleteCredential DropRole                         |
 | Global      | SelectOwnership    | SelectRole/SelectGrant                            |
 | Global      | ManageOwnership    | OperateUserRole OperatePrivilege                  |
-| Global      | CreateResourceGroup| CreateResourceGroup                               |
-| Global      | DropResourceGroup  | DropResourceGroup                                 |
-| Global      | DescribeResourceGroup  | DescribeResourceGroup                         |
-| Global      | ListResourceGroup  | ListResourceGroup                                 |
-| Global      | TransferNode       | TransferNode                                      |
-| Global      | TransferReplica    | TransferReplica                                   |
 | User        | UpdateUser         | UpdateCredential                                  |
 | User        | SelectUser         | SelectUser                                        |
 

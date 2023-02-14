@@ -157,9 +157,9 @@ connect [-h (text)] [-p (int)] [-a (text)] [-s (text)] [-u (text)] [-pwd (text)]
 | -h     | --host       | (Optional) The host name. The default is "127.0.0.1".                                                       |
 | -p     | --port       | (Optional) The port number. The default is "19530".                                                         |
 | -a     | --alias      | (Optional) The alias name of the Milvus link. The default is "default".                                     |
-| -s     | --secure     | (Optional) Whether to enable secure connection or not. The default is "False".                                               |
+| -s     | --secure     | (Optional) Whether to enable secure connection or not. The default is "False".                              |
 | -pwd   | --password   | (Optional) The user password in Milvus. The default is "None".                                              |
-| -u     | --username   | (Optional) The username in Milvus. The default is "None".                                              |
+| -u     | --username   | (Optional) The username in Milvus. The default is "None".                                                   |
 | -D     | --disconnect | (Optional) Flag to disconnect from the Milvus server specified by an alias. The default alias is "default". |
 | --help | n/a          | Displays help for using the command.                                                                        |
 
@@ -184,7 +184,7 @@ create user -u (text) -p (text)
 | Option | Full name  | Description                                         |
 | :----- | :--------- | :-------------------------------------------------- |
 | -p     | --password | The user password in milvus. The default is "None". |
-| -u     | --username | The username in milvus. The default is "None". |
+| -u     | --username | The username in milvus. The default is "None".      |
 | --help | n/a        | Displays help for using the command.                |
 
 ### Examples
@@ -320,6 +320,8 @@ Collection name (car, car2): car2
 
 The name of the field to create an index for (vector): vector
 
+Index name: vectorIndex
+
 Index type (FLAT, IVF_FLAT, IVF_SQ8, IVF_PQ, RNSG, HNSW, ANNOY): IVF_FLAT
 
 Index metric type (L2, IP, HAMMING, TANIMOTO): L2
@@ -343,7 +345,7 @@ delete alias -p (text)
 
 | Option | Full name  | Description                          |
 | :----- | :--------- | :----------------------------------- |
-| -u     | --usernmae | The username.                |
+| -u     | --usernmae | The username.                        |
 | --help | n/a        | Displays help for using the command. |
 
 ### Example
@@ -460,7 +462,7 @@ Deletes an index and the corresponding index files.
 <h3 id="delete-index">Syntax</h3>
 
 ```shell
-delete index -c (text) [-t (float)]
+delete index -c (text) -in (text) [-t (float)]
 ```
 
 <h3 id="delete-index">Options</h3>
@@ -468,13 +470,14 @@ delete index -c (text) [-t (float)]
 | Option | Full name         | Description                                                                                                                                                                      |
 | :----- | :---------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | -c     | --collection-name | The name of the collection.                                                                                                                                                      |
+| -in    | --index-name      | The name of the index name.                                                                                                                                                      |
 | -t     | --timeout         | (Optional) The maximum allowed duration in seconds of an RPC call. Not passing this option indicates that the client keeps waiting until the server responds or an error occurs. |
 | --help | n/a               | Displays help for using the command.                                                                                                                                             |
 
 <h3 id="delete-index">Example</h3>
 
 ```shell
-milvus_cli > delete index -c car
+milvus_cli > delete index -c car -in indexName
 ```
 
 ## describe collection
@@ -528,20 +531,20 @@ milvus_cli > describe partition -c test_collection_insert -p _default
 
 Shows the detailed information of an index.
 
-<div class="alert note">Currently, a collection supports a maximum of one index.</div>
-
 <h3 id="describe-index">Syntax</h3>
 
 ```shell
-describe index -c (text)
+describe index -c (text) -in (text)
 ```
 
 <h3 id="describe-index">Options</h3>
 
-| Option | Full name         | Description                          |
-| :----- | :---------------- | :----------------------------------- |
-| -c     | --collection-name | The name of the collection.          |
-| --help | n/a               | Displays help for using the command. |
+| Option | Full name         | Description                 |
+| :----- | :---------------- | :-------------------------- |
+| -c     | --collection-name | The name of the collection. |
+| -in    | --index-name      | The name of the index.      |
+
+| --help | n/a | Displays help for using the command. |
 
 ## exit
 

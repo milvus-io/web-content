@@ -7,15 +7,15 @@ related_key: upgrade Milvus Cluster
 summary: Learn how to upgrade Milvus cluster with Milvus Operator.
 ---
 
-<div class="tab-wrapper"><a href="upgrade_milvus_cluster-operator.md" class='active '>Milvus Operator</a><a href="upgrade_milvus_cluster-docker.md" class=''>Docker Compose</a><a href="upgrade_milvus_cluster-helm.md" class=''>Helm</a></div>
+<div class="tab-wrapper"><a href="upgrade_milvus_cluster-operator.md" class='active '>Milvus Operator</a><a href="upgrade_milvus_cluster-helm.md" class=''>Helm</a><a href="upgrade_milvus_cluster-docker.md" class=''>Docker Compose</a></div>
 
 # Upgrade Milvus Cluster with Milvus Operator
 
 This topic describes how to ugrade your Milvus cluster with Milvus Operator and uses the example of upgrading Milvus 2.1.4 to Milvus 2.2.0.
 
-## 1. Upgrade you Milvus Operator to v0.7.0
+## 1. Upgrade your Milvus Operator
 
-Run the following command to upgrade the version of your Milvus Operator to v0.7.0.
+Run the following command to upgrade the version of your Milvus Operator to v0.7.5.
 
 ```
 helm repo add milvus-operator https://milvus-io.github.io/milvus-operator/

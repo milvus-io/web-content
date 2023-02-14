@@ -21,7 +21,7 @@ A major change in Milvus 2.2 is the meta structure of segment indexes. This topi
 docker stop <milvus-component-docker-container-name>
 ```
 
-2. Prepare the configuration file `migrate.yaml` for meta migration.
+2. Prepare the configuration file `migration.yaml` for meta migration.
 
 ```
 # migration.yaml
