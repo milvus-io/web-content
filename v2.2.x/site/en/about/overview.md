@@ -129,7 +129,7 @@ We are working on enabling more new client libraries. If you would like to contr
 
 The Milvus ecosystem provides helpful tools including:
 
-- [Milvus CLI](https://github.com/milvus-io/milvus_cli#overview)
+- [Milvus CLI](https://github.com/zilliztech/milvus_cli#overview)
 - [Attu](https://github.com/zilliztech/attu), a graphical management system for Milvus. 
 - [MilvusDM](migrate_overview.md) (Milvus Data Migration), an open-source tool designed specifically for importing and exporting data with Milvus.
 - [Milvus sizing tool](https://milvus.io/tools/sizing/), which helps you estimate the raw file size, memory size, and stable disk size needed for a specified number of vectors with various index types.
