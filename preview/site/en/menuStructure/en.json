@@ -373,19 +373,27 @@
     },
     {
       "id": "build_index.md",
-      "title": "Build an Index",
+      "title": "Build an Index on Vectors",
       "label1": "userguide",
       "label2": "manage_index",
       "label3": "",
       "order": 0
     },
     {
+      "id": "build_scalar_index.md",
+      "title": "Build an Index on Scalars",
+      "label1": "userguide",
+      "label2": "manage_index",
+      "label3": "",
+      "order": 1
+    },    
+    {
       "id": "drop_index.md",
       "title": "Drop an Index",
       "label1": "userguide",
       "label2": "manage_index",
       "label3": "",
-      "order": 1
+      "order": 2
     },
     {
       "id": "search",
@@ -1080,7 +1088,14 @@
       "label1": "reference",
       "label2": "vector_index",
       "order": 1
-    },        
+    },
+    {
+      "id": "scalar_index",
+      "title": "Scalar Index",
+      "label1": "reference",
+      "label2": "",
+      "order": 15      
+    }        
     {
       "id": "tutorials",
       "title": "Example Applications",
