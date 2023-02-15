@@ -11,7 +11,7 @@ Release date: 10 Feburary, 2023
 
 | Milvus version | Python SDK version | Java SDK version | Go SDK version | Node.js SDK version |
 | -------------- | ------------------ | ---------------- | -------------- | ------------------- |
-| 2.2.3          | 2.2.2              | Coming soon      | Coming soon    | Coming soon        |
+| 2.2.3          | 2.2.2              | 2.2.3            | Coming soon    | Coming soon        |
 
 Milvus 2.2.3 introduces the rolling upgrade capability to Milvus clusters and brings high availability settings to RootCoords. The former greatly reduces the impacts brought by the upgrade and restart of the Milvus cluster in production to the minimum, while the latter enables coordinators to work in active-standby mode and ensures a short failure recovery time of no more than 30 seconds. 
 
