@@ -107,7 +107,7 @@ $ kubectl get pods my-release-milvus-proxy-6c548f787f-scspp -o=jsonpath='{$.spec
 milvusdb/milvus:v2.1.4
 ```
 
-### 5. Migrate the metadata
+### 4. Migrate the metadata
 A major change in Milvus 2.2 is the metadata structure of segment indexes. Therefore, you need to use Helm to migrate the metadata while upgrading Milvus from v2.1.x to v2.2.0. Here is [a script](https://github.com/milvus-io/milvus/blob/master/deployments/migrate-meta/migrate.sh) for you to safely migrate your metadata.
 
 This script only applies to Milvus installed on a K8s cluster. Roll back to the previous version with the rollback operation first if an error occurs during the process.
