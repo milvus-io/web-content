@@ -136,6 +136,44 @@ Under this section, you can configure root coord address, index building thresho
 </table>
 
 
+## `rootCoord.activeStandby.enabled`
+
+<table id="rootCoord.dmlChannelNum">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        Whether the rootCoord works in active-standby mode.
+      </td>
+      <td>false</td>
+    </tr>
+  </tbody>
+</table>
+
+## `rootCoord.replicas`
+
+<table id="rootCoord.dmlChannelNum">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        Number of rootCoord pods. This is required if `rootCoord.activeStandby.enabled` is set to `true`.
+      </td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+
 ## `rootCoord.dmlChannelNum`
 
 <table id="rootCoord.dmlChannelNum">

@@ -23,11 +23,9 @@ In 2.2.3, the maximum number of fields in a collection is reduced from 256 to 64
 
 ### Features
 
-- Rolling upgrade using Helm
+- Rolling upgrade
 
   The rolling upgrade feature allows Milvus to respond to incoming requests during the upgrade, which is not possible in previous releases. In such releases, upgrading a Milvus instance requires it to be stopped first and then restarted after the upgrade is complete, leaving all incoming requests unanswered.
-
-  Currently, this feature applies only to Milvus instances installed using Milvus Helm charts.
 
   Related issues:
 
