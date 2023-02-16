@@ -15,7 +15,7 @@ This guide describes how to ugrade your Milvus standalone with Milvus operator.
 
 ## Upgrade your Milvus operator
 
-Run the following command to upgrade the version of your Milvus operator to v0.7.5.
+Run the following command to upgrade the version of your Milvus operator to v0.7.7.
 
 ```
 helm repo add milvus-operator https://milvus-io.github.io/milvus-operator/
@@ -114,14 +114,12 @@ spec:
     queryCoord:
       replicas: 2
       activeStandby:
-        enable: true    
+        enable: true  
+    dataCoord:
+      replicas: 2
+      activeStandby:
+        enable: true   
 ```
-
-<div class="alert note">
-
-Currently, dataCoords cannot work in active-standby mode.
-
-</div>
 
 Save the configuration in a YAML file (for example, `milvuscoordha.yml`) and apply it to your Milvus instance.
 

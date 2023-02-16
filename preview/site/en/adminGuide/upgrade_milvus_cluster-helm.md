@@ -190,6 +190,7 @@ Before conducting a rolling upgrade for coordiantors, you need to configure them
 ```shell
 helm upgrade --install my-release milvus/milvus --set rootCoordinator.activeStandby.enabled=true --set rootCoordinator.replicas=2
 helm upgrade --install my-release milvus/milvus --set queryCoordinator.activeStandby.enabled=true --set queryCoordinator.replicas=2
+helm upgrade --install my-release milvus/milvus --set dataCoordinator.activeStandby.enabled=true --set dataCoordinator.replicas=2
 ```
 
 <div class="alert note">
