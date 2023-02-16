@@ -94,41 +94,6 @@ Since Milvus 2.2.3, you can configure Milvus coordinators to work in active-stan
 
 In previous releases, coordinators are to be removed and then created during an upgrade, which may introduce certain downtime of the service.
 
-### 1. Configure coordinators to work in active-standby mode
-
-Before conducting a rolling upgrade for coordiantors, you need to configure them to work in active-standby mode.
-
-```yaml
-apiVersion: milvus.io/v1beta1
-kind: Milvus
-metadata:
-  name: my-release
-  labels:
-    app: milvus
-spec:
-  components:
-    rootCoord: 
-      replicas: 2
-      activeStandby:
-        enable: true
-    queryCoord:
-      replicas: 2
-      activeStandby:
-        enable: true  
-    dataCoord:
-      replicas: 2
-      activeStandby:
-        enable: true   
-```
-
-Save the configuration in a YAML file (for example, `milvuscoordha.yml`) and apply it to your Milvus instance.
-
-```shell
-kubectl apply -f milvucoordsha.yml
-```
-
-### 2. Conduct a rolling upgrade for the coordinators
-
 The rolling upgrade feature is disabled by default. You need to explicitly enable it through a configuration file.
 
 ```yaml
@@ -143,9 +108,9 @@ spec:
     image: milvusdb/milvus:<some-new-version>
 ```
 
-In this above configuration file, set `spec.components.enableRollingUpdate` to `true` and set `spec.components.image` to the desired Milvus version.
+In this above configuration file, set `spec.components.enableRollingUpdate` to `true` and set `spec.components.image` to the desired Milvus version. 
 
-By default, Milvus performs rolling upgrade for coordinators in an ordered way, in which it replaces the coordinator pod images one after another. To reduce the upgrade time, consider setting `spec.components.imageUpdateMode` to `all` so that Milvus replaces all coordinator pod images at the same time.
+By default, Milvus performs rolling upgrade for coordinators in an ordered way, in which it replaces the coordinator pod images one after another. To reduce the upgrade time, consider setting `spec.components.imageUpdateMode` to `all` so that Milvus replaces all pod images at the same time.
 
 ```yaml
 apiVersion: milvus.io/v1beta1
@@ -159,7 +124,7 @@ spec:
     image: milvusdb/milvus:<some-new-version>
 ```
 
-You can set `spec.components.imageUpdateMode` to `rollingDowngrade` to have Milvus replaces coordinator pod images with a lower version.
+You can set `spec.components.imageUpdateMode` to `rollingDowngrade` to have Milvus replace coordinator pod images with a lower version.
 
 ```yaml
 apiVersion: milvus.io/v1beta1
@@ -170,7 +135,7 @@ spec:
   components:
     enableRollingUpdate: true
     imageUpdateMode: rollingDowngrade
-    image: milvusdb/milvus:<some-new-version>
+    image: milvusdb/milvus:<some-older-version>
 ```
 
 Then save your configuration as a YAML file (for example, `milvusupgrade.yml`) and apply this configuration file to your Milvus instance as follows:
