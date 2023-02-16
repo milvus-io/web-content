@@ -16,8 +16,6 @@ When Milvus receives a search request with such a boolean expression, it parses 
 
 ![Attribute filtering in a segment](../../../assets/scalar_index.png)
 
-As shown in the figure above, Milvus abstracts the attribute filter condition (`expr`) into an appropriate function. In each segment, Milvus then uses this function to generate a bitset and applies the bitset to the similarity search along with the query vector. Finally, Milvus merges the search results in each segment and returns the required number of records.
-
 Scalar field indexing is a way of ensuring the speed of attribute filtering by sorting scalar field values in a particular way to accelerate information retrieval. 
 
 ## Scalar field indexing algorithms
