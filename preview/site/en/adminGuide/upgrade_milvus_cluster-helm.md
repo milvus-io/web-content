@@ -182,26 +182,7 @@ Since Milvus 2.2.3, you can configure Milvus coordinators to work in active-stan
 
 In previous releases, coordinators are to be removed and then created during an upgrade, which may introduce certain downtime of the service.
 
-### 1. Configure coordinators to work in active-standby mode
-
-Before conducting a rolling upgrade for coordiantors, you need to configure them to work in active-standby mode.
-
-
-```shell
-helm upgrade --install my-release milvus/milvus --set rootCoordinator.activeStandby.enabled=true --set rootCoordinator.replicas=2
-helm upgrade --install my-release milvus/milvus --set queryCoordinator.activeStandby.enabled=true --set queryCoordinator.replicas=2
-helm upgrade --install my-release milvus/milvus --set dataCoordinator.activeStandby.enabled=true --set dataCoordinator.replicas=2
-```
-
-<div class="alert note">
-
-Currently, dataCoords cannot work in active-standby mode.
-
-</div>
-
-### 2. Conduct a rolling upgrade for the coordinators
-
-Once coordinators work in active-standby mode, you need to run [a script](https://github.com/milvus-io/milvus/blob/master/deployments/upgrade/rollingUpdate.sh) to start the rolling upgrade.
+Rolling upgrades requires coordinators to work in active-standby mode. You can use [the script](https://github.com/milvus-io/milvus/blob/master/deployments/upgrade/rollingUpdate.sh) we provide to configure the coordinators to work in active-standby mode and start the rolling upgrade.
 
 The script applies only to the upgrade of Milvus installed with Helm. The following table lists the command flags available in the scripts.
 
