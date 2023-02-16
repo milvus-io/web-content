@@ -28,6 +28,7 @@ collection.create_index(
   field_name="book_name", 
   index_name="scalar_index",
 )
+collection.load()
 ```
 
 Once the index has been created, you can include a boolean expression on this string field in a vector similarity search as follows:
