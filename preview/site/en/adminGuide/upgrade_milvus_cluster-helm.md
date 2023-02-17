@@ -11,7 +11,7 @@ summary: Learn how to upgrade Milvus cluster with Helm Chart.
 
 # Upgrade Milvus Cluster with Helm Chart
 
-This guide describes how to ugrade your Milvus cluster with Milvus operator. 
+This guide describes how to upgrade your Milvus cluster with Milvus Helm charts. 
 
 ## Check Milvus Helm Chart
 
@@ -182,7 +182,7 @@ Since Milvus 2.2.3, you can configure Milvus coordinators to work in active-stan
 
 In previous releases, coordinators are to be removed and then created during an upgrade, which may introduce certain downtime of the service.
 
-Rolling upgrades requires coordinators to work in active-standby mode. You can use [the script](https://github.com/milvus-io/milvus/blob/master/deployments/upgrade/rollingUpdate.sh) we provide to configure the coordinators to work in active-standby mode and start the rolling upgrade.
+Rolling upgrades requires coordinators to work in active-standby mode. You can use [the script](https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/upgrade/rollingUpdate.sh) we provide to configure the coordinators to work in active-standby mode and start the rolling upgrade.
 
 The script applies only to the upgrade of Milvus installed with Helm. The following table lists the command flags available in the scripts.
 
