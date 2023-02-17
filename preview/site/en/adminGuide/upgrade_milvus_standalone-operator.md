@@ -90,9 +90,9 @@ When the upgrade is successful, delete `my-release-upgrade` in the YAML file.
 
 ## Conduct a rolling upgrade
 
-Since Milvus 2.2.3, you can configure Milvus coordinators to work in active-standby mode and enable rolling upgrade for them, so that Milvus can respond to incoming requests during the coordinator upgrades.
+Since Milvus 2.2.3, you can configure Milvus coordinators to work in active-standby mode and enable the rolling upgrade feature for them, so that Milvus can respond to incoming requests during the coordinator upgrades. In previous releases, coordinators are to be removed and then created during an upgrade, which may introduce certain downtime of the service.
 
-In previous releases, coordinators are to be removed and then created during an upgrade, which may introduce certain downtime of the service.
+Based on the rolling update capabilities provided by Kubernetes, the Milvus operator enforces an ordered update of the deployments according to their dependencies. In addition, Milvus implements a mechanism to ensure that its components remain compatible with those depending on them during the upgrade, significantly reducing potential service downtime.
 
 The rolling upgrade feature is disabled by default. You need to explicitly enable it through a configuration file.
 
