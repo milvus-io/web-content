@@ -393,7 +393,7 @@
       "label1": "userguide",
       "label2": "manage_index",
       "label3": "",
-      "order": 1
+      "order": 2
     },
     {
       "id": "search",
@@ -666,7 +666,7 @@
       "order": 0
     },
     {
-      "id": "upgrade_milvus_standalone-helm.md",
+      "id": "upgrade_milvus_standalone-operator.md",
       "title": "Upgrade Milvus Standalone",
       "label1": "admin_guide",
       "label2": "upgrade_milvus",

@@ -7,7 +7,7 @@ related_key: upgrade Milvus Standalone
 summary: Learn how to upgrade Milvus standalone with Docker Compose.
 ---
 
-<div class="tab-wrapper"><a href="upgrade_milvus_standalone-helm.md" class=''>Helm</a><a href="upgrade_milvus_standalone-docker.md" class='active '>Docker Compose</a></div>
+<div class="tab-wrapper"><a href="upgrade_milvus_standalone-docker.md" class='active '>Docker Compose</a></div>
 
 # Upgrade Milvus Standalone with Docker Compose
 

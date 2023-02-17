@@ -4,25 +4,24 @@ related_key: create index
 summary: Learn how to build an index for vectors in Milvus.
 ---
 
-# Build an Index
+# Build an Index on Vectors
 
-This topic describes how to build an index in Milvus. 
+This guide describes how to build an index on vectors in Milvus. 
 
 Vector indexes are an organizational unit of metadata used to accelerate [vector similarity search](search.md). Without the index built on vectors, Milvus will perform a brute-force search by default.
 
 See [Vector Index](index.md) for more information about the mechanism and varieties of vector indexes.
 
 <div class="alert note">
-<ul>
-<li>Milvus 2.1 supports index on scalar fields.</li>
-<li>By default, Milvus does not index a segment with less than 1,024 rows. To change this parameter, configure <a href="configure_rootcoord.md#rootCoord.minSegmentSizeToEnableIndex"><code>rootCoord.minSegmentSizeToEnableIndex</code></a> in <code>milvus.yaml</code>.</li>
+
+By default, Milvus does not index a segment with less than 1,024 rows. To change this parameter, configure <a href="configure_rootcoord.md#rootCoord.minSegmentSizeToEnableIndex"><code>rootCoord.minSegmentSizeToEnableIndex</code></a> in <code>milvus.yaml</code>.
 </div>
 
 The following example builds a 1024-cluster IVF_FLAT index with Euclidean distance (L2) as the similarity metric. You can choose the index and metrics that suit your scenario. See [Similarity Metrics](metric.md) for more information.
 
 ## Prepare index parameter
 
-Prepare the index parameters (If you expect to build indexes for scalar fields, no index-building parameter is required, and the default index type is a dictionary tree).
+Prepare the index parameters as follows:
 
 <div class="multipleCode">
   <a href="#python">Python </a>
