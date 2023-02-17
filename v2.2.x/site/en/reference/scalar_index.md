@@ -38,7 +38,7 @@ The following table lists the data types that Milvus supports and their correspo
 
 ## Performance recommandations
 
-To take full advantage of Milvus' capability in scalar field indexing and unleash its power in vector similarity searches. You may need a model to estimate the size of memory required based on the data you have.
+To take full advantage of Milvus' capability in scalar field indexing and unleash its power in vector similarity searches, you may need a model to estimate the size of memory required based on the data you have.
 
 The following tables list the estimation functions for all the data types that Milvus supports.
 
