@@ -62,5 +62,6 @@ results[0].ids
 results[0].distances
 
 # get the value of a specified output field.
-results[0].hits[0].entity.get('title')
+hit = results[0][0]
+hit.entity.get('title')
 ```
