@@ -18,7 +18,7 @@ search(data, anns_field, param, limit, expr=None, partition_names=None, output_f
 | `limit`           | Number of nearest records to return. The sum of this value and `offset` should be less than 65535.                          | Integer            | True     |
 | `expr`            | Boolean expression to filter the data                         | String             | False    |
 | `partition_names` | List of names of the partitions to search on. </br>All partition will be searched if it is left empty.                         | list[String]            | False    |
-| `output_fields`   | List of names of fields to output                             | list[String]       | False    |
+| `output_fields`   | List of names of fields to output. <br>When specified, you can get the values of the specified fields by using `hit.entity.get()`.                             | list[String]       | False    |
 | `timeout`         | An optional duration of time in seconds to allow for the RPC. If it is set to None, the client keeps waiting until the server responds or error occurs.                                  | Float              | False    |
 | `round_decimal`   | Number of the decimal places of the returned distance         | Integer            | False    |
 | `kwargs`: `_async`| Boolean value to indicate if to invoke asynchronously. | Bool   | False    |
@@ -51,8 +51,16 @@ results = collection.search(
 	param=search_params, 
 	limit=10, 
 	expr=None,
+	output_fields=['title'],
 	consistency_level="Strong"
 )
+
+# get the IDs of all returned hits
 results[0].ids
+
+# get the distances to the query vector from all returned hits
 results[0].distances
+
+# get the value of a specified output field.
+results[0].hits[0].entity.get('title')
 ```

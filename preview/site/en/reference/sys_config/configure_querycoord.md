@@ -51,6 +51,44 @@ Under this section, you can configure query coord address, auto handoff, auto lo
   </tbody>
 </table>
 
+## `queryCoord.activeStandby.enabled`
+
+<table id="rootCoord.dmlChannelNum">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        Whether the queryCoord works in active-standby mode.
+      </td>
+      <td>false</td>
+    </tr>
+  </tbody>
+</table>
+
+## `queryCoord.replicas`
+
+<table id="rootCoord.dmlChannelNum">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        Number of queryCoord pods. This is required if `queryCoord.activeStandby.enabled` is set to `true`.
+      </td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+
 ## `queryCoord.autoHandoff`
 
 <table id="queryCoord.autoHandoff">

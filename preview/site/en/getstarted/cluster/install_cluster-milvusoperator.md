@@ -122,7 +122,7 @@ validatingwebhookconfiguration.admissionregistration.k8s.io/cert-manager-webhook
 ```
 
 <div class="alert note">
-cert-manager version 1.13 or later is required.
+cert-manager version 1.1.3 or later is required.
 </div>
 
 Run `$ kubectl get pods -n cert-manager` to check if cert-manager is running. You can see the following output if all the pods are running.
@@ -147,7 +147,7 @@ There are two ways to install Milvus Operator on K8s:
 helm install milvus-operator \
   -n milvus-operator --create-namespace \
   --wait --wait-for-jobs \
-  https://github.com/milvus-io/milvus-operator/releases/download/v0.7.0/milvus-operator-0.7.0.tgz
+  https://github.com/milvus-io/milvus-operator/releases/download/v0.7.7/milvus-operator-0.7.7.tgz
 ```
 
 If Milvus Operator is installed, you can see the following output.
@@ -208,7 +208,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
 This tutorial uses the default configuration to install a Milvus cluster. All Milvus cluster components are enabled with multiple replicas, which consumes many resources. 
 
 <div class="alert note">
-If you have very limited local resources, you can install a Milvus cluster <a href="[url](https://github.com/milvus-io/milvus-operator/blob/main/config/samples/milvus_cluster_minimum.yaml)">using the minimum configuration</a>).
+If you have very limited local resources, you can install a Milvus cluster <a href="https://github.com/milvus-io/milvus-operator/blob/main/config/samples/milvus_cluster_minimum.yaml">using the minimum configuration</a>).
 </div>
 
 ### 1. Deploy a Milvus cluster
@@ -459,7 +459,7 @@ $ helm -n milvus-operator uninstall milvus-operator
 ### Uninstall Milvus Operator by `kubectl` command
 
 ```
-$ kubectl delete -f https://raw.githubusercontent.com/milvus-io/milvus-operator/v0.7.0/deploy/manifests/deployment.yaml
+$ kubectl delete -f https://raw.githubusercontent.com/milvus-io/milvus-operator/v0.7.7/deploy/manifests/deployment.yaml
 ```
 
 ## Delete the K8s cluster

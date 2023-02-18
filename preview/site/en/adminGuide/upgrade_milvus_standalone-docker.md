@@ -1,13 +1,13 @@
 ---
 id: upgrade_milvus_standalone-docker.md
 label: Docker Compose
-order: 1
+order: 2
 group: upgrade_milvus_standalone-helm.md
 related_key: upgrade Milvus Standalone
 summary: Learn how to upgrade Milvus standalone with Docker Compose.
 ---
 
-<div class="tab-wrapper"><a href="upgrade_milvus_standalone-helm.md" class=''>Helm</a><a href="upgrade_milvus_standalone-docker.md" class='active '>Docker Compose</a></div>
+<div class="tab-wrapper"><a href="upgrade_milvus_standalone-docker.md" class='active '>Docker Compose</a></div>
 
 # Upgrade Milvus Standalone with Docker Compose
 
@@ -21,7 +21,7 @@ A major change in Milvus 2.2 is the meta structure of segment indexes. This topi
 docker stop <milvus-component-docker-container-name>
 ```
 
-2. Prepare the configuration file `migrate.yaml` for meta migration.
+2. Prepare the configuration file `migration.yaml` for meta migration.
 
 ```
 # migration.yaml

@@ -133,6 +133,44 @@ Under this section, you can configure data coord address, segment settings, comp
   </tbody>
 </table>
 
+## `dataCoord.activeStandby.enabled`
+
+<table id="rootCoord.dmlChannelNum">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        Whether the dataCoord works in active-standby mode.
+      </td>
+      <td>false</td>
+    </tr>
+  </tbody>
+</table>
+
+## `dataCoord.replicas`
+
+<table id="rootCoord.dmlChannelNum">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        Number of dataCoord pods. This is required if `dataCoord.activeStandby.enabled` is set to `true`.
+      </td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+
 ## `dataCoord.enableCompaction`
 
 <table id="dataCoord.enableCompaction">
@@ -209,7 +247,7 @@ Under this section, you can configure data coord address, segment settings, comp
         <li>The minimum proportion to <code>datacoord.segment.maxSize</code> to seal a segment.</li>
         <li><code>datacoord.segment.maxSize</code> and <code>datacoord.segment.sealProportion</code> together determine if a segment can be sealed.</li>
       </td>
-      <td>0.75</td>
+      <td>0.23</td>
     </tr>
   </tbody>
 </table>

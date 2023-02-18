@@ -37,7 +37,7 @@ The following table lists the values you can choose when [enabling RBAC](rbac.md
 | Collection  | Release            | ReleaseCollection                                 |
 | Collection  | Insert             | Insert                                            |
 | Collection  | Delete             | Delete                                            |
-| Collection  | Search             | Delete                                            |
+| Collection  | Search             | Search                                            |
 | Collection  | Flush              | Flush                                             |
 | Collection  | Query              | Query                                             |
 | Collection  | GetStatistics      | GetCollectionStatistics                           |

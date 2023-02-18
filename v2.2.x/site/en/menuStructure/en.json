@@ -112,7 +112,7 @@
 
     },
     {
-      "id": "install_standalone-helm.md",
+      "id": "install_standalone-operator.md",
       "title": "Milvus Standalone",
       "label1": "getstarted",
       "label2": "installmilvus",
@@ -373,19 +373,27 @@
     },
     {
       "id": "build_index.md",
-      "title": "Build an Index",
+      "title": "Build an Index on Vectors",
       "label1": "userguide",
       "label2": "manage_index",
       "label3": "",
       "order": 0
     },
     {
+      "id": "build_scalar_index.md",
+      "title": "Build an Index on Scalars",
+      "label1": "userguide",
+      "label2": "manage_index",
+      "label3": "",
+      "order": 1
+    },  
+    {
       "id": "drop_index.md",
       "title": "Drop an Index",
       "label1": "userguide",
       "label2": "manage_index",
       "label3": "",
-      "order": 1
+      "order": 2
     },
     {
       "id": "search",
@@ -658,7 +666,7 @@
       "order": 0
     },
     {
-      "id": "upgrade_milvus_standalone-helm.md",
+      "id": "upgrade_milvus_standalone-operator.md",
       "title": "Upgrade Milvus Standalone",
       "label1": "admin_guide",
       "label2": "upgrade_milvus",
@@ -1080,6 +1088,13 @@
       "label1": "reference",
       "label2": "vector_index",
       "order": 1
+    },
+    {
+      "id": "scalar_index.md",
+      "title": "Scalar Index",
+      "label1": "reference",
+      "label2": "",
+      "order": 15      
     },        
     {
       "id": "tutorials",
