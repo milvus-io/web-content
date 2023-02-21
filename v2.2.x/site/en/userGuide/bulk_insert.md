@@ -10,13 +10,15 @@ Milvus 2.2 now supports inserting a batch of entities from a file. Compared to t
 
 ## Prepare the data file
 
-Organize the data to be inserted into a Milvus collection in a row-based JSON file or multiple NumPy files. 
+Organize the data to be inserted into a Milvus collection in a row-based JSON file or multiple NumPy files.
 
 ### Row-based JSON file
 
 You can name the file whatever makes sense, but the root key must be **root**. In the file, each entity is organized in a dictionary. The keys in the dictionary are field names, and the values are field values in the corresponding entity.
 
 The following is an example of a row-based JSON file.
+
+<div class="none-filter">
 
 ```
 {
@@ -30,6 +32,7 @@ The following is an example of a row-based JSON file.
 }
 ```
 
+</div>
 <div class="alert note">
 
 - Do not add any field that does not exist in the target collection, and do not miss any field that the schema of the target collection defines.
@@ -43,6 +46,8 @@ The following is an example of a row-based JSON file.
 
 As an alternative to the row-based JSON file mentioned above, you can also use NumPy arrays to organize each column of a dataset in a separate file. In this case, use the field name of each column to name the NumPy file.
 
+<div class="none-filter">
+
 ```python
 import numpy
 numpy.save('book_id.npy', numpy.array([101, 102, 103, 104, 105]))
@@ -54,6 +59,8 @@ arr = numpy.array([[1.1, 1.2],
             [5.1, 5.2]])
 numpy.save('book_intro.npy', arr)
 ```
+
+</div>
 
 <div class="alert note">
 
@@ -75,10 +82,9 @@ Using the local hard disk for storage is only available in Milvus Standalone.
 - To use MinIO for storage, upload data files to the bucket defined by `minio.bucketName` in the `milvus.yml` configuration file .
 - For local storage, copy the data files into a directory of the local disk.
 
-
 ### 2. Insert entities
 
-To facilitate data import from files, Milvus offers a bulk-insert API in various flavors. In PyMilvus, you can use the [`do_bulk_insert()`](https://milvus.io/api-reference/pymilvus/v2.2.2/Utility/do_bulk_insert().md) method. As to the Java SDK, use the [`bulkInsert`](https://milvus.io/api-reference/java/v2.2.3/BulkInsert/bulkInsert().md) method.
+To facilitate data import from files, Milvus offers a bulk-insert API in various flavors. In PyMilvus, you can use the [`do_bulk_insert()`](<https://milvus.io/api-reference/pymilvus/v2.2.2/Utility/do_bulk_insert().md>) method. As to the Java SDK, use the [`bulkInsert`](<https://milvus.io/api-reference/java/v2.2.3/BulkInsert/bulkInsert().md>) method.
 
 In this method, you need to set the name of the target collection as **collection_name** and the list of files [prepared in the previous step](#Prepare-the-data-file) as **files**. Optionally, you can specify the name of a specific partition as **partition_name** in the target collection so that Milvus imports the data from the files listed only into this partition.
 
@@ -156,20 +162,18 @@ In this method, you need to set the name of the target collection as **collectio
 
   - If you upload the data file to a MinIO instance, a valid file path should be relative to the root bucket defined in **"milvus.yml"**, such as **"data/book_id.npy"**.
   - If you upload the data file to the local hard drive, a valid file path should be an absolute path such as **"/tmp/data/book_id.npy"**.
-  
+
   If you have a lot of files to process, consider [creating multiple data-import tasks and have them run in parallel](#Import-multiple-NumPy-files-in-parallel).
 
   </div>
-
-
 
 ## List tasks
 
 ### Check task state
 
-Since the bulk-insert API is asynchronous, you might need to check whether a data-import task is complete. Milvus provides a **BulkInsertState** object to hold the details of a data-import task and you can use the get-bulk-insert-state API to retrieve this object using the programming language of your choice. 
+Since the bulk-insert API is asynchronous, you might need to check whether a data-import task is complete. Milvus provides a **BulkInsertState** object to hold the details of a data-import task and you can use the get-bulk-insert-state API to retrieve this object using the programming language of your choice.
 
-In the flavor of PyMilvus, you can use [`get_bulk_insert_state()`](https://milvus.io/api-reference/pymilvus/v2.2.2/Utility/get_bulk_insert_state().md). For Java SDK, use [`getBulkInsertState()`](https://milvus.io/api-reference/java/v2.2.3/BulkInsert/getBulkInsertState().md).
+In the flavor of PyMilvus, you can use [`get_bulk_insert_state()`](<https://milvus.io/api-reference/pymilvus/v2.2.2/Utility/get_bulk_insert_state().md>). For Java SDK, use [`getBulkInsertState()`](<https://milvus.io/api-reference/java/v2.2.3/BulkInsert/getBulkInsertState().md>).
 
 <div class="multipleCode">
   <a href="#python">Python </a>
@@ -178,9 +182,9 @@ In the flavor of PyMilvus, you can use [`get_bulk_insert_state()`](https://milvu
 
 ```python
 task = utility.get_bulk_insert_state(task_id=task_id)
-print("Task state:", task.state_name()) 
-print("Imported files:", task.files) 
-print("Collection name:", task.collection_name) 
+print("Task state:", task.state_name())
+print("Imported files:", task.files)
+print("Collection name:", task.collection_name)
 print("Partition name:", task.partition_name)
 print("Start time:", task.create_time_str)
 print("Imported row count:", task.row_count)
@@ -212,15 +216,14 @@ int progress = wrapper.getProgress();
 
 The following table lists the state of a data-import task returned.
 
-| State              |   Code   |   Description                                                |
-| ------------------ | -------- | ------------------------------------------------------------ |
-| Pending            | 0        | The task is pending.                                         |
-| Failed             | 1        | The task fails. Use <code>task.failed_reason</code> to understand why the task fails. |
-| Started            | 2        | The task has been dispatched to a data node and will be executed soon. |
-| Persisted          | 5        | New data segments have been generated and persisted.               |
-| Completed          | 6        | The metadata has been updated for the new segments. |
-| Failed and cleaned | 7        | The task fails and all temporary data generated by this task are cleared. |
-
+| State              | Code | Description                                                                           |
+| ------------------ | ---- | ------------------------------------------------------------------------------------- |
+| Pending            | 0    | The task is pending.                                                                  |
+| Failed             | 1    | The task fails. Use <code>task.failed_reason</code> to understand why the task fails. |
+| Started            | 2    | The task has been dispatched to a data node and will be executed soon.                |
+| Persisted          | 5    | New data segments have been generated and persisted.                                  |
+| Completed          | 6    | The metadata has been updated for the new segments.                                   |
+| Failed and cleaned | 7    | The task fails and all temporary data generated by this task are cleared.             |
 
 ### List all tasks
 
@@ -259,11 +262,10 @@ for (GetImportStateResponse task : tasks) {
 }
 ```
 
-|   Parameter                |   Description                                                |
-| -------------------------- | ------------------------------------------------------------ |
+| Parameter                  | Description                                                                                                                                                  |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | collection_name (optional) | Specify the target collection name to list all tasks on this collection. Leave the value empty if you want to list all tasks recorded by Milvus root coords. |
-| limit (optional)           | Specify this parameter to limit the number of returned tasks. |
-
+| limit (optional)           | Specify this parameter to limit the number of returned tasks.                                                                                                |
 
 See [System Configurations](configure_rootcoord.md) for more information about import task configurations.
 
@@ -274,12 +276,11 @@ See [System Configurations](configure_rootcoord.md) for more information about i
 | Max. size of task pending list | 65536         |
 | Max. size of a data file       | 16 GB         |
 
-
 ## Reference
 
 ### Configure Milvus for data import
 
-To have Milvus remove failed or old data-import tasks automatically, you can specify a timeout duration and retention period for data-import tasks in the Milvus configuration file. 
+To have Milvus remove failed or old data-import tasks automatically, you can specify a timeout duration and retention period for data-import tasks in the Milvus configuration file.
 
 ```yaml
 rootCoord:
@@ -297,6 +298,7 @@ rootCoord:
 The following examples demonstrate how to create NumPy files for columns of data types that Milvus supports.
 
 - Create a Numpy file from a boolean array
+<div class="none-filter">
 
   ```
   import numpy as np
@@ -306,57 +308,75 @@ The following examples demonstrate how to create NumPy files for columns of data
   np.save(file_path, arr)
   ```
 
+</div>
+
 - Create a NumPy file from an int8 array
 
-  ```
-  import numpy as np
-  data = [1, 2, 3, 4]
-  dt = np.dtype('int8', (len(data)))
-  arr = np.array(data, dtype=dt)
-  np.save(file_path, arr)
-  ```
+<div class="none-filter">
 
+```
+import numpy as np
+data = [1, 2, 3, 4]
+dt = np.dtype('int8', (len(data)))
+arr = np.array(data, dtype=dt)
+np.save(file_path, arr)
+```
+
+</div>
 - Create a NumPy file from an int16 array
 
-  ```
-  import numpy as np
-  data = [1, 2, 3, 4]
-  dt = np.dtype('int16', (len(data)))
-  arr = np.array(data, dtype=dt)
-  np.save(file_path, arr)
-  ```
+<div class="none-filter">
 
+```
+import numpy as np
+data = [1, 2, 3, 4]
+dt = np.dtype('int16', (len(data)))
+arr = np.array(data, dtype=dt)
+np.save(file_path, arr)
+```
+
+</div>
 - Create a NumPy file from an int32 array
+<div class="none-filter">
 
-  ```
-  import numpy as np
-  data = [1, 2, 3, 4]
-  dt = np.dtype('int32', (len(data)))
-  arr = np.array(data, dtype=dt)
-  np.save(file_path, arr)
-  ```
+```
+import numpy as np
+data = [1, 2, 3, 4]
+dt = np.dtype('int32', (len(data)))
+arr = np.array(data, dtype=dt)
+np.save(file_path, arr)
+```
 
+</div>
 - Create a NumPy file from an int64 array
+<div class="none-filter">
 
-  ```
-  import numpy as np
-  data = [1, 2, 3, 4]
-  dt = np.dtype('int64', (len(data)))
-  arr = np.array(data, dtype=dt)
-  np.save(file_path, arr)
-  ```
+```
+import numpy as np
+data = [1, 2, 3, 4]
+dt = np.dtype('int64', (len(data)))
+arr = np.array(data, dtype=dt)
+np.save(file_path, arr)
+```
+
+</div>
 
 - Create a NumPy file from a float array
 
-  ```
-  import numpy as np
-  data = [0.1, 0.2, 0.3, 0.4]
-  dt = np.dtype('float32', (len(data)))
-  arr = np.array(data, dtype=dt)
-  np.save(file_path, arr)
-  ```
+<div class="none-filter">
+
+```
+import numpy as np
+data = [0.1, 0.2, 0.3, 0.4]
+dt = np.dtype('float32', (len(data)))
+arr = np.array(data, dtype=dt)
+np.save(file_path, arr)
+```
+
+</div>
 
 - Create a NumPy file from a double float array
+<div class="none-filter">
 
   ```
   import numpy as np
@@ -366,7 +386,10 @@ The following examples demonstrate how to create NumPy files for columns of data
   np.save(file_path, arr)
   ```
 
+</div>
+
 - Create a NumPy file from a VARCHAR array
+<div class="none-filter">
 
   ```
   data = ["a", "b", "c", "d"]
@@ -374,21 +397,26 @@ The following examples demonstrate how to create NumPy files for columns of data
   np.save(file_path, arr)
   ```
 
+</div>
 - Create a NumPy file from a binary vector array
 
-  For binary vectors, use **uint8** as the NumPy data type. Each uint8 value represents 8 dimensions. For a 32-dimensional binary vector, use four uint8 values.
+For binary vectors, use **uint8** as the NumPy data type. Each uint8 value represents 8 dimensions. For a 32-dimensional binary vector, use four uint8 values.
 
-  ```
-  data = [
-      [43, 35, 124, 90],
-      [65, 212, 12, 57],
-      [6, 126, 232, 78],
-      [87, 189, 38, 22],
-  ]
-  dt = np.dtype('uint8', (len(data), 4))
-  arr = np.array(data)
-  np.save(file_path, arr)
-  ```
+<div class="none-filter">
+
+```
+data = [
+    [43, 35, 124, 90],
+    [65, 212, 12, 57],
+    [6, 126, 232, 78],
+    [87, 189, 38, 22],
+]
+dt = np.dtype('uint8', (len(data), 4))
+arr = np.array(data)
+np.save(file_path, arr)
+```
+
+</div>
 
 - Create a NumPy file from a float vector array
 
@@ -396,17 +424,21 @@ The following examples demonstrate how to create NumPy files for columns of data
 
   The following snippet creates a NumPy file from an 8-dimensional vector array formed using float32 values.
 
-  ```
-  data = [
-      [1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8],
-      [2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 2.8],
-      [3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7, 3.8],
-      [4.1, 4.2, 4.3, 4.4, 4.5, 4.6, 4.7, 4.8],
-  ]
-  dt = np.dtype('float32', (len(data), 8))
-  arr = np.array(data)
-  np.save(file_path, arr)
-  ```
+<div class="none-filter">
+
+```
+data = [
+    [1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8],
+    [2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 2.8],
+    [3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7, 3.8],
+    [4.1, 4.2, 4.3, 4.4, 4.5, 4.6, 4.7, 4.8],
+]
+dt = np.dtype('float32', (len(data), 8))
+arr = np.array(data)
+np.save(file_path, arr)
+```
+
+</div>
 
 ### Import multiple NumPy files in parallel
 
@@ -427,6 +459,8 @@ Assume the data structure is as follows:
 
 You can create multiple data-import tasks as follows
 
+<div class="none-filter">
+
 ```
 task_1 = utility.do_bulk_insert(
     collection_name="book",
@@ -438,35 +472,40 @@ task_2 = utility.do_bulk_insert(
 )
 ```
 
-
+</div>
 ### Check data searchability
 
 After a data-import task is complete, Milvus persists the imported data into segments and sends these segments to the index nodes for index-building. During the index-building process, these segments are unavailable for searches. Once such a process is complete, you need to call the load API again to load these segments into the query nodes. These segments will then be ready for searches.
 
 1. Check the index-building progress
 
-  PyMilvus provides a utility method to wait for the index-building process to complete.
+PyMilvus provides a utility method to wait for the index-building process to complete.
 
-  ```
-  utility.wait_for_index_building_complete(collection_name)
-  ```
+<div class="none-filter">
 
-  In other SDKs, you can use the describe-index API to check the index-building progress.
+```
+utility.wait_for_index_building_complete(collection_name)
+```
 
-  ```
-  while (true) {
-      R<DescribeIndexResponse> response = milvusClient.describeIndex(
-          DescribeIndexParam.newBuilder()
-              .withCollectionName(collection_name)
-              .withIndexName(index_name)
-              .build());
-      IndexDescription desc = response.getData().getIndexDescriptions(0);
-      if (desc.getIndexedRows() == desc.getTotalRows()) {
-          break;
-      }
-  }
-  ```
+</div>
+In other SDKs, you can use the describe-index API to check the index-building progress.
+<div class="none-filter">
 
+```
+while (true) {
+    R<DescribeIndexResponse> response = milvusClient.describeIndex(
+        DescribeIndexParam.newBuilder()
+            .withCollectionName(collection_name)
+            .withIndexName(index_name)
+            .build());
+    IndexDescription desc = response.getData().getIndexDescriptions(0);
+    if (desc.getIndexedRows() == desc.getTotalRows()) {
+        break;
+    }
+}
+```
+
+</div>
 2. Load new segments into query nodes
 
 Newly indexed segments need to be loaded manually as follows:
@@ -488,27 +527,26 @@ R<RpcStatus> response = milvusClient.loadCollection(
         .build());
 ```
 
-<div class="language-python filter-content">
+<div class="language-python">
   <div class="alert note">
 
-  The `_refresh` parameter is `false` by default. Do not set it to `true` when you load a collection for the first time.
+The `_refresh` parameter is `false` by default. Do not set it to `true` when you load a collection for the first time.
 
   </div>
 </div>
 
-<div class="language-java filter-content">
+<div class="language-java">
   <div class="alert note">
 
-  The `withRefresh()` method is optional. Do not call it with a `Boolean.TRUE` when you load a collection for the first time.
+The `withRefresh()` method is optional. Do not call it with a `Boolean.TRUE` when you load a collection for the first time.
 
   </div>
 </div>
-
-
 
 ## What's next
 
 Learn more basic operations of Milvus:
-  - [Build an index for vectors](build_index.md)
-  - [Conduct a vector search](search.md)
-  - [Conduct a hybrid search](hybridsearch.md)
+
+- [Build an index for vectors](build_index.md)
+- [Conduct a vector search](search.md)
+- [Conduct a hybrid search](hybridsearch.md)
