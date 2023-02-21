@@ -40,8 +40,9 @@ import io.milvus.param.*;
 GetLoadingProgressParam param = GetLoadingProgressParam.newBuilder()
         .withCollectionName(collectionName)
         .build();
-R<RpcStatus> response = client.getLoadingProgress(param);
+R<GetLoadingProgressResponse> response = client.getLoadingProgress(param);
 if (response.getStatus() != R.Status.Success.getCode()) {
     System.out.println(response.getMessage());
 }
+System.out.println(response.getProgress());
 ```

@@ -52,6 +52,7 @@ Methods of `GetBulkInsertStateWrapper`:
 | `getFiles()`    | Gets target files of the bulk insert task.  | N/A    | String    |
 | `getCollectionName()`  | Gets target collection name of the bulk insert task.  | N/A  | String |
 | `getPartitionName()`  | Gets target partition name of the bulk insert task.  | N/A    | String |
+| `getProgress()` | Gets the working progress of a data-import task in percentage | N/A | int    |
 
 ## ImportState
 
