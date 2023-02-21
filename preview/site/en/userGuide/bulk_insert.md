@@ -14,13 +14,7 @@ Organize the data to be inserted into a Milvus collection in a row-based JSON fi
 
 ### Row-based JSON file
 
-You can name the file whatever makes sense, but the root key must be **root**. In the file, each entity corresponds to a dictionary. The key of the dictionary is the primary field, and the value of the dictionary contains the rest fields. The entities in the file must match the collection schema.
-
-For binary vectors, use uint8 array. Each uint8 value represents 8 dimensions, and the value must be between [0, 255]. For example, [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1] is a 16-dimensional binary vector and should be written as [128, 7] in a JSON file.
-
-<div class="alert note">
-The file size should be no greater than 1 GB.
-</div>
+You can name the file whatever makes sense, but the root key must be **root**. In the file, each entity is organized in a dictionary. The keys in the dictionary are field names, and the values are field values in the corresponding entity.
 
 The following is an example of a row-based JSON file.
 
@@ -35,6 +29,15 @@ The following is an example of a row-based JSON file.
   ]
 }
 ```
+
+<div class="alert note">
+
+- Do not add any field that does not exist in the target collection, and do not miss any field that the schema of the target collection defines.
+- Use the correct types of values in each field. For example, use integers in integer fields, floats in float values, strings in varchar fields, and float arrays in vector fields.
+- For an auto-generated primary key, do not include it in the JSON file.
+- For binary vectors, use uint8 array. Each uint8 value represents 8 dimensions, and the value must be between [0, 255]. For example, [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1] is a 16-dimensional binary vector and should be written as [128, 7] in a JSON file.
+
+</div>
 
 ### Column-based NumPy files
 
