@@ -34,7 +34,7 @@ The following is an example of a row-based JSON file.
 
 - Do not add any field that does not exist in the target collection, and do not miss any field that the schema of the target collection defines.
 - Use the correct types of values in each field. For example, use integers in integer fields, floats in float fields, strings in varchar fields, and float arrays in vector fields.
-- For an auto-generated primary key, do not include it in the JSON file.
+- Do not include an auto-generated primary key in the JSON file.
 - For binary vectors, use uint8 arrays. Each uint8 value represents 8 dimensions, and the value must be between 0 and 255. For example, `[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1]` is a 16-dimensional binary vector and should be written as `[128, 7]` in the JSON file.
 
 </div>
