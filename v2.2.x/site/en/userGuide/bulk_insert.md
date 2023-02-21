@@ -488,7 +488,7 @@ R<RpcStatus> response = milvusClient.loadCollection(
         .build());
 ```
 
-<div class="language-python">
+<div class="language-python filter-content">
   <div class="alert note">
 
   The `_refresh` parameter is `false` by default. Do not set it to `true` when you load a collection for the first time.
@@ -496,7 +496,7 @@ R<RpcStatus> response = milvusClient.loadCollection(
   </div>
 </div>
 
-<div class="language-java">
+<div class="language-java filter-content">
   <div class="alert note">
 
   The `withRefresh()` method is optional. Do not call it with a `Boolean.TRUE` when you load a collection for the first time.
