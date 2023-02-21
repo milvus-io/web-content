@@ -20,7 +20,7 @@ Methods of `GetLoadStateParam.Builder`:
 | Method | Description | Parameters |
 | ------ | ----------- | ---------- |
 | `withCollectionName(String collectionName)` | Sets a collection name. Collection name cannot be empty or Null. | `collectionName`: Name of the collection to load. |
-| `withPartitionName(String partitionName)` | (Optional) Sets a list of partition names to narrow the search scope. | `partitionNames`: List of partition names |
+| `withPartitionName(List<String> partitionNames)` | (Optional) Sets a list of partition names to narrow the search scope. | `partitionNames`: List of partition names |
 | `addPartitionName(String partitionName)` | Adds a partition by its name. Partition name cannot be empty or Null. | `partitionName`: Name of the partition to be added. |
 
 The `GetLoadStateParam.Builder.build()` can throw the follwoing exceptions:
