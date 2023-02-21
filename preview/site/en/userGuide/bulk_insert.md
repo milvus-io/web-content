@@ -6,13 +6,11 @@ summary: Learn how to insert multiple entities in a batch from a JSON file.
 
 # Insert Entities from Files
 
-Milvus 2.2 now supports inserting a batch of entities from a file. Compared to the `insert()` method, this feature reduces network transmission across the Milvus client, proxy, Pulsar, and data nodes. You can now import a batch of entities in a file into a collection with just one line of code.
+Milvus 2.2 now supports inserting a batch of entities from a file. Compared to the `insert()` method, this feature reduces network transmission across the Milvus client, proxy, Pulsar, and data nodes. You can now import a batch of entities in one file or multiple files into a collection with just a few lines of code.
 
-This topic describes how to insert multiple entities in a batch from a JSON file.
+## Prepare the data file
 
-## Prepare a JSON file
-
-Organize the data you want to insert in a row-based JSON file or multiple NumPy files. 
+Organize the data to be inserted into a Milvus collection in a row-based JSON file or multiple NumPy files. 
 
 ### Row-based JSON file
 
@@ -80,7 +78,7 @@ Using local hard disk for storage is only available in Milvus Standalone.
 
 To facilitate data import from files, Milvus offers a bulk-insert API in various flavors. In PyMilvus, you can use the [`do_bulk_insert()`](https://milvus.io/api-reference/pymilvus/v2.2.2/Utility/do_bulk_insert().md) method. As to the Java SDK, you can use the [`bulkInsert`](https://milvus.io/api-reference/java/v2.2.3/BulkInsert/bulkInsert().md) method.
 
-In this method, you need to set the name of the target collection (**collection_name**) and the list of files [prepared in the previous step](#Prepare-a-json-file) (**files**). Optionally, you can specify the name of a specific partition (**partition_name**) in the target collection so that Milvus imports the data from the files listed only into this partition.
+In this method, you need to set the name of the target collection (**collection_name**) and the list of files [prepared in the previous step](#Prepare-the-data-file) (**files**). Optionally, you can specify the name of a specific partition (**partition_name**) in the target collection so that Milvus imports the data from the files listed only into this partition.
 
 - For a row-based JSON file, parameter **files** should be a one-member list containing the path to the JSON file.
 
@@ -496,7 +494,7 @@ R<RpcStatus> response = milvusClient.loadCollection(
   </div>
 </div>
 
-<div class="language-java alert note">
+<div class="language-java">
   <div class="alert note">
 
   The `withRefresh()` method is optional. Do not call it with a `Boolean.TRUE` when you load a collection for the first time.
