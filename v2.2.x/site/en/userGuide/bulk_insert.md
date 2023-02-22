@@ -298,6 +298,7 @@ rootCoord:
 The following examples demonstrate how to create NumPy files for columns of data types that Milvus supports.
 
 - Create a Numpy file from a boolean array
+
 <div class="none-filter">
 
   ```
@@ -323,6 +324,7 @@ np.save(file_path, arr)
 ```
 
 </div>
+
 - Create a NumPy file from an int16 array
 
 <div class="none-filter">
@@ -336,7 +338,9 @@ np.save(file_path, arr)
 ```
 
 </div>
+
 - Create a NumPy file from an int32 array
+
 <div class="none-filter">
 
 ```
@@ -348,7 +352,9 @@ np.save(file_path, arr)
 ```
 
 </div>
+
 - Create a NumPy file from an int64 array
+
 <div class="none-filter">
 
 ```
@@ -376,20 +382,21 @@ np.save(file_path, arr)
 </div>
 
 - Create a NumPy file from a double float array
+
 <div class="none-filter">
 
-  ```
-  import numpy as np
-  data = [0.1, 0.2, 0.3, 0.4]
-  dt = np.dtype('float64', (len(data)))
-  arr = np.array(data, dtype=dt)
-  np.save(file_path, arr)
-  ```
+```
+import numpy as np
+data = [0.1, 0.2, 0.3, 0.4]
+dt = np.dtype('float64', (len(data)))
+arr = np.array(data, dtype=dt)
+np.save(file_path, arr)
+```
 
 </div>
 
 - Create a NumPy file from a VARCHAR array
-<div class="none-filter">
+  <div class="none-filter">
 
   ```
   data = ["a", "b", "c", "d"]
@@ -398,6 +405,7 @@ np.save(file_path, arr)
   ```
 
 </div>
+
 - Create a NumPy file from a binary vector array
 
 For binary vectors, use **uint8** as the NumPy data type. Each uint8 value represents 8 dimensions. For a 32-dimensional binary vector, use four uint8 values.
@@ -473,6 +481,7 @@ task_2 = utility.do_bulk_insert(
 ```
 
 </div>
+
 ### Check data searchability
 
 After a data-import task is complete, Milvus persists the imported data into segments and sends these segments to the index nodes for index-building. During the index-building process, these segments are unavailable for searches. Once such a process is complete, you need to call the load API again to load these segments into the query nodes. These segments will then be ready for searches.
@@ -488,7 +497,9 @@ utility.wait_for_index_building_complete(collection_name)
 ```
 
 </div>
+
 In other SDKs, you can use the describe-index API to check the index-building progress.
+
 <div class="none-filter">
 
 ```
@@ -506,6 +517,7 @@ while (true) {
 ```
 
 </div>
+
 2. Load new segments into query nodes
 
 Newly indexed segments need to be loaded manually as follows:
