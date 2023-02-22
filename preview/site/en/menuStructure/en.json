@@ -650,12 +650,20 @@
       "order": 3
     },
     {
+      "id": "resource_group.md",
+      "title": "Manage Resource Groups",
+      "label1": "admin_guide",
+      "label2": "",
+      "label3": "",
+      "order": 4      
+    },
+    {
       "id": "upgrade_milvus",
       "title": "Upgrade",
       "label1": "admin_guide",
       "label2": "",
       "label3": "",
-      "order": 4
+      "order": 5
     },
     {
       "id": "upgrade_milvus_cluster-operator.md",
