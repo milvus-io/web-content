@@ -299,101 +299,101 @@ The following examples demonstrate how to create NumPy files for columns of data
 
 - Create a Numpy file from a boolean array
 
-<div class="none-filter">
+  <div class="none-filter">
+
+    ```
+    import numpy as np
+    data = [True, False, True, False]
+    dt = np.dtype('bool', (len(data)))
+    arr = np.array(data, dtype=dt)
+    np.save(file_path, arr)
+    ```
+
+  </div>
+
+- Create a NumPy file from an int8 array
+
+  <div class="none-filter">
 
   ```
   import numpy as np
-  data = [True, False, True, False]
-  dt = np.dtype('bool', (len(data)))
+  data = [1, 2, 3, 4]
+  dt = np.dtype('int8', (len(data)))
   arr = np.array(data, dtype=dt)
   np.save(file_path, arr)
   ```
 
-</div>
-
-- Create a NumPy file from an int8 array
-
-<div class="none-filter">
-
-```
-import numpy as np
-data = [1, 2, 3, 4]
-dt = np.dtype('int8', (len(data)))
-arr = np.array(data, dtype=dt)
-np.save(file_path, arr)
-```
-
-</div>
+  </div>
 
 - Create a NumPy file from an int16 array
 
-<div class="none-filter">
+  <div class="none-filter">
 
-```
-import numpy as np
-data = [1, 2, 3, 4]
-dt = np.dtype('int16', (len(data)))
-arr = np.array(data, dtype=dt)
-np.save(file_path, arr)
-```
+  ```
+  import numpy as np
+  data = [1, 2, 3, 4]
+  dt = np.dtype('int16', (len(data)))
+  arr = np.array(data, dtype=dt)
+  np.save(file_path, arr)
+  ```
 
-</div>
+  </div>
 
 - Create a NumPy file from an int32 array
 
-<div class="none-filter">
+  <div class="none-filter">
 
-```
-import numpy as np
-data = [1, 2, 3, 4]
-dt = np.dtype('int32', (len(data)))
-arr = np.array(data, dtype=dt)
-np.save(file_path, arr)
-```
+  ```
+  import numpy as np
+  data = [1, 2, 3, 4]
+  dt = np.dtype('int32', (len(data)))
+  arr = np.array(data, dtype=dt)
+  np.save(file_path, arr)
+  ```
 
-</div>
+  </div>
 
 - Create a NumPy file from an int64 array
 
-<div class="none-filter">
+  <div class="none-filter">
 
-```
-import numpy as np
-data = [1, 2, 3, 4]
-dt = np.dtype('int64', (len(data)))
-arr = np.array(data, dtype=dt)
-np.save(file_path, arr)
-```
+  ```
+  import numpy as np
+  data = [1, 2, 3, 4]
+  dt = np.dtype('int64', (len(data)))
+  arr = np.array(data, dtype=dt)
+  np.save(file_path, arr)
+  ```
 
-</div>
+  </div>
 
 - Create a NumPy file from a float array
 
-<div class="none-filter">
+  <div class="none-filter">
 
-```
-import numpy as np
-data = [0.1, 0.2, 0.3, 0.4]
-dt = np.dtype('float32', (len(data)))
-arr = np.array(data, dtype=dt)
-np.save(file_path, arr)
-```
+  ```
+  import numpy as np
+  data = [0.1, 0.2, 0.3, 0.4]
+  dt = np.dtype('float32', (len(data)))
+  arr = np.array(data, dtype=dt)
+  np.save(file_path, arr)
+  ```
 
-</div>
+  </div>
 
 - Create a NumPy file from a double float array
 
-<div class="none-filter">
+  <div class="none-filter">
 
-```
-import numpy as np
-data = [0.1, 0.2, 0.3, 0.4]
-dt = np.dtype('float64', (len(data)))
-arr = np.array(data, dtype=dt)
-np.save(file_path, arr)
-```
+  ```
+  import numpy as np
+  data = [0.1, 0.2, 0.3, 0.4]
+  dt = np.dtype('float64', (len(data)))
+  arr = np.array(data, dtype=dt)
+  np.save(file_path, arr)
+  ```
 
-</div>
+  </div>
 
 - Create a NumPy file from a VARCHAR array
   <div class="none-filter">
@@ -404,27 +404,27 @@ np.save(file_path, arr)
   np.save(file_path, arr)
   ```
 
-</div>
+  </div>
 
 - Create a NumPy file from a binary vector array
 
-For binary vectors, use **uint8** as the NumPy data type. Each uint8 value represents 8 dimensions. For a 32-dimensional binary vector, use four uint8 values.
+  For binary vectors, use **uint8** as the NumPy data type. Each uint8 value represents 8 dimensions. For a 32-dimensional binary vector, use four uint8 values.
 
-<div class="none-filter">
+  <div class="none-filter">
 
-```
-data = [
-    [43, 35, 124, 90],
-    [65, 212, 12, 57],
-    [6, 126, 232, 78],
-    [87, 189, 38, 22],
-]
-dt = np.dtype('uint8', (len(data), 4))
-arr = np.array(data)
-np.save(file_path, arr)
-```
+  ```
+  data = [
+      [43, 35, 124, 90],
+      [65, 212, 12, 57],
+      [6, 126, 232, 78],
+      [87, 189, 38, 22],
+  ]
+  dt = np.dtype('uint8', (len(data), 4))
+  arr = np.array(data)
+  np.save(file_path, arr)
+  ```
 
-</div>
+  </div>
 
 - Create a NumPy file from a float vector array
 
@@ -432,21 +432,21 @@ np.save(file_path, arr)
 
   The following snippet creates a NumPy file from an 8-dimensional vector array formed using float32 values.
 
-<div class="none-filter">
+  <div class="none-filter">
 
-```
-data = [
-    [1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8],
-    [2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 2.8],
-    [3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7, 3.8],
-    [4.1, 4.2, 4.3, 4.4, 4.5, 4.6, 4.7, 4.8],
-]
-dt = np.dtype('float32', (len(data), 8))
-arr = np.array(data)
-np.save(file_path, arr)
-```
+  ```
+  data = [
+      [1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8],
+      [2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 2.8],
+      [3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7, 3.8],
+      [4.1, 4.2, 4.3, 4.4, 4.5, 4.6, 4.7, 4.8],
+  ]
+  dt = np.dtype('float32', (len(data), 8))
+  arr = np.array(data)
+  np.save(file_path, arr)
+  ```
 
-</div>
+  </div>
 
 ### Import multiple NumPy files in parallel
 
