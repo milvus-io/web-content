@@ -44,7 +44,8 @@ For Milvus clusters on K8s, you can configure S3 in the same command that starts
 | --------------------- | ------------------------------------ | ------------------------------------ |
 | <code>externalS3.enabled</code>    | Enables or disables S3.     | <code>true</code>/<code>false</code> |
 | <code>externalS3.host</code>       | The endpoint to access S3.    |                                      |
-| <code>externalS3.port</code>       | The port to access S3.     |                                      |
+| <code>externalS3.port</code>       | The port to access S3.     | 
+| <code>externalS3.rootPath</code>   | The root path of the S3 storage. | An emtpy string by default. | 
 | <code>externalS3.accessKey</code>  | The access key ID for S3. |                                      |
 | <code>externalS3.secretKey</code>  | The secret access key for S3.            |                                      |
 | <code>externalS3.bucketName</code> | The name of the S3 bucket.                  |                                      |
