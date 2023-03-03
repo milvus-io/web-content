@@ -22,7 +22,7 @@ The following figure illustrates the relationship between objects, privileges, r
 
 The relationship between object, privilege, role and user.
 
-Milvus creates a `root` user by default. The `root` user is granted the `admin` privileges, which means that this `root` user can have access to all resources and perform all actions.
+Milvus creates a `root` user by default with a default password `Milvus`. The `root` user is granted the `admin` privileges, which means that this `root` user can have access to all resources and perform all actions.
 
 If a user is bind with a `public` role, this user is entitled to the privileges of `DescribeCollection`, `ShowCollections`, and `IndexDetail`.
 
