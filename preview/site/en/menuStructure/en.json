@@ -650,12 +650,20 @@
       "order": 3
     },
     {
+      "id": "coordinator_ha.md",
+      "title": "Coordinator HA",
+      "label1": "admin_guide",
+      "label2": "",
+      "label3": "",
+      "order": 4      
+    },
+    {
       "id": "resource_group.md",
       "title": "Manage Resource Groups",
       "label1": "admin_guide",
       "label2": "",
       "label3": "",
-      "order": 4      
+      "order": 5      
     },
     {
       "id": "upgrade_milvus",
@@ -663,7 +671,7 @@
       "label1": "admin_guide",
       "label2": "",
       "label3": "",
-      "order": 5
+      "order": 6
     },
     {
       "id": "upgrade_milvus_cluster-operator.md",
@@ -736,7 +744,7 @@
       "label1": "admin_guide",
       "label2": "",
       "label3": "",
-      "order": 6,
+      "order": 7,
       "isMenu": true
     },    
     {
@@ -745,7 +753,7 @@
       "label1": "admin_guide",
       "label2": "",
       "label3": "",
-      "order": 7,
+      "order": 8,
       "isMenu": true
     },
     {
