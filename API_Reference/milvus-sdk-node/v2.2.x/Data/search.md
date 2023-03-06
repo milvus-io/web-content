@@ -14,7 +14,7 @@ new milvusClient(MILUVS_ADDRESS).dataManager.search(SearchReq);
 | search_params     | Search parameters                                                                                                                                   | SearchParams (object) |
 | vectors           | Original vector to search with                                                                                                                      | Number[][]            |
 | vector_type       | Search parameters                                                                                                                                   | VectorTypes (number)  |
-| output_fields?    | Vector or scalar field to be returned                                                                                                               | String[]              |
+| output_fields?    | Vector or scalar field to be returnsed                                                                                                               | String[]              |
 | travel_timestamp? | Timestamp that is used for Time Travel. Users can specify a timestamp in a search to get results based on a data view at a specified point in time. | Number                |
 | partitions_names? | An array of the names of the partitions to search on                                                                                                | String[]              |
 | expr?             | Boolean expression to filter the data                                                                                                               | String                |
@@ -81,7 +81,7 @@ new milvusClient(MILUVS_ADDRESS).dataManager.search({
 #### Response
 
 ```javascript
-// search return
+// search returns
 {
   status: { error_code: 'Success', reason: '' },
   results: [

@@ -1,6 +1,6 @@
 # flushSync()
 
-This synchronous method is the same as the asynchronous [`flush()` method](API_Reference/milvus-sdk-node/v2.0.2/Data/flush.md). The difference is that this method ensures that data is flushed when the function result is returned.
+This synchronous method is the same as the asynchronous [`flush()` method](API_Reference/milvus-sdk-node/v2.0.2/Data/flush.md). The difference is that this method ensures that data is flushed when the function result is returnsed.
 
 ```javascript
 new milvusClient(MILUVS_ADDRESS).dataManager.flushSync(FlushReq);
@@ -26,6 +26,6 @@ new milvusClient(MILUVS_ADDRESS).dataManager.flushSync({
 ### Response
 
 ```javascript
-// flushSync return
+// flushSync returns
 { status: { error_code: 'Success', reason: '' }, flushed: true }
 ```

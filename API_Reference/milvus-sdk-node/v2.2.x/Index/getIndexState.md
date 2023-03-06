@@ -28,7 +28,7 @@ new milvusClient(MILUVS_ADDRESS).indexManager.getIndexState({
 ### Response
 
 ```javascript
-// getIndexState return
+// getIndexState returns
 {
   status: { error_code: 'Success', reason: '' },
   state: 'Finished',

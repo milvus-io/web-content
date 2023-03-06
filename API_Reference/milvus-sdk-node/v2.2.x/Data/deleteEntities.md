@@ -29,7 +29,7 @@ new milvusClient(MILUVS_ADDRESS).dataManager.deleteEntities({
 ### Response
 
 ```javascript
-// DeleteEntitiesReq return
+// DeleteEntitiesReq returns
 {
   status: { error_code: 'Success', reason: '' },
   succ_index: [],

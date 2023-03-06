@@ -38,7 +38,7 @@ new milvusClient(MILUVS_ADDRESS).dataManager.insert({
 ### Response
 
 ```javascript
-// insert return
+// insert returns
 {
   status: { error_code: 'Success', reason: '' },
   succ_index: [

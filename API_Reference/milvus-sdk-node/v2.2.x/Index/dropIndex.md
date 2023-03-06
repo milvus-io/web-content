@@ -28,5 +28,5 @@ new milvusClient(MILUVS_ADDRESS).indexManager.dropIndex({
 ### Response
 
 ```javascript
-// dropIndex return
+// dropIndex returns
 ```

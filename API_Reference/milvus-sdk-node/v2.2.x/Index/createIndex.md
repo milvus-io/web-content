@@ -48,6 +48,6 @@ new milvusClient(MILUVS_ADDRESS).indexManager.createIndex({
 ### Response
 
 ```javascript
-// createIndex return
+// createIndex returns
 { error_code: 'Success', reason: '' }
 ```

@@ -28,6 +28,6 @@ new milvusClient(MILUVS_ADDRESS).collectionManager.hasCollection({
 ### Response
 
 ```javascript
-// hasCollection return
+// hasCollection returns
 { status: { error_code: 'Success', reason: '' }, value: true }
 ```

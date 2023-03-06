@@ -30,7 +30,7 @@ new milvusClient(MILUVS_ADDRESS).indexManager.getIndexBuildProgress({
 ### Response
 
 ```javascript
-// getIndexBuildProgress return
+// getIndexBuildProgress returns
 {
   status: { error_code: 'Success', reason: '' },
   indexed_rows: '0',

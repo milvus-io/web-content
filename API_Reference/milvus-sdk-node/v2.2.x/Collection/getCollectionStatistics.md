@@ -28,7 +28,7 @@ new milvusClient(MILUVS_ADDRESS).collectionManager.getCollectionStatistics({
 ### Response
 
 ```javascript
-// getCollectionStatistics return
+// getCollectionStatistics returns
 {
   status: { error_code: 'Success', reason: '' },
   data: { row_count: '0' }

@@ -28,7 +28,7 @@ new milvusClient(MILUVS_ADDRESS).indexManager.describeIndex({
 ### Response
 
 ```javascript
-// describeIndex return
+// describeIndex returns
 {
   status: { error_code: 'Success', reason: '' },
   index_descriptions: [

@@ -28,6 +28,6 @@ new milvusClient(MILUVS_ADDRESS).collectionManager.loadCollectionSync({
 ### Response
 
 ```javascript
-// loadCollectionSync return
+// loadCollectionSync returns
 { error_code: 'Success', reason: '' }
 ```

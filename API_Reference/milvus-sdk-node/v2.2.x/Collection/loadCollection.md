@@ -29,6 +29,6 @@ new milvusClient(MILUVS_ADDRESS).collectionManager.loadCollection({
 ### Response
 
 ```javascript
-// loadCollection return
+// loadCollection returns
 { error_code: 'Success', reason: '' }
 ```

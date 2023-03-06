@@ -28,6 +28,6 @@ new milvusClient(MILUVS_ADDRESS).dataManager.getQuerySegmentInfo({
 ### Response
 
 ```javascript
-// getQuerySegmentInfo return
+// getQuerySegmentInfo returns
 { status: { error_code: 'Success', reason: '' }, infos: [] }
 ```

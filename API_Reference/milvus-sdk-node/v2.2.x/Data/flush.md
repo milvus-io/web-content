@@ -26,7 +26,7 @@ new milvusClient(MILUVS_ADDRESS).dataManager.flush({
 ### Response
 
 ```javascript
-// flush return
+// flush returns
 {
   status: { error_code: 'Success', reason: '' },
   coll_segIDs: { my_collection: { data: [] } }

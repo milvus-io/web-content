@@ -75,6 +75,6 @@ new milvusClient(MILUVS_ADDRESS).collectionManager.createCollection({
 ### Response
 
 ```javascript
-// create collection return
+// create collection returns
 { error_code: 'Success', reason: '' }
 ```

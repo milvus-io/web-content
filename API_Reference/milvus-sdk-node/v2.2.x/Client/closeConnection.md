@@ -17,6 +17,6 @@ new milvusClient(MILUVS_ADDRESS).closeConnection();
 ### Response
 
 ```javascript
-// grpc client return closed -> 4, connected -> 0
+// grpc client returns closed -> 4, connected -> 0
 4;
 ```

@@ -28,6 +28,6 @@ new milvusClient(MILUVS_ADDRESS).collectionManager.createAlias({
 ### Response
 
 ```javascript
-// create collection return
+// create collection returns
 { error_code: 'Success', reason: '' }
 ```

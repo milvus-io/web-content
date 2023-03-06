@@ -28,7 +28,7 @@ new milvusClient(MILUVS_ADDRESS).collectionManager.describeCollection({
 ### Response
 
 ```javascript
-// describe collection return
+// describe collection returns
 {
   status: { error_code: 'Success', reason: '' },
   schema: {

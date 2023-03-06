@@ -34,7 +34,7 @@ new milvusClient(MILUVS_ADDRESS).collectionManager.showCollections();
 ### Response
 
 ```javascript
-// showCollections return
+// showCollections returns
 {
   status: { error_code: 'Success', reason: '' },
   data: [

@@ -28,6 +28,6 @@ new milvusClient(MILUVS_ADDRESS).collectionManager.dropCollection({
 ### Response
 
 ```javascript
-// dropCollection return
+// dropCollection returns
 { error_code: 'Success', reason: '' }
 ```
