@@ -80,6 +80,15 @@ To observe coordinators' behaviors, you can
     [2022/09/21 11:58:33.859 +08:00] [DEBUG] [components/root_coord.go:58] ["RootCoord successfully started"]
     ```
 
+## Related configuration items
+
+Coordinator HA is disabled by default. You can enable this feature manually by changing the following items in your Milvus configuration file.
+
+- [rootCoord.activeStandby.enabled](configure_rootcoord#rootCoordactiveStandbyenabled)
+- [queryCoord.activeStandby.enabled](configure_querycoord#queryCoordactiveStandbyenabled)
+- [dataCoord.activeStandby.enabled](configure_datacoord#dataCoordactiveStandbyenabled)
+- [indexCoord.activeStandby.enabled](configure_indexcoord#indexCoordativeStandbyenabled)
+
 ## Limits
 
 Currently, there is no strong consistency guarantee between the active and standby service. Therefore, the standby coordinator needs to reload the metadata while taking over the active role.

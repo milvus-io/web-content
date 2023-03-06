@@ -650,14 +650,6 @@
       "order": 3
     },
     {
-      "id": "coordinator_ha.md",
-      "title": "Coordinator HA",
-      "label1": "admin_guide",
-      "label2": "",
-      "label3": "",
-      "order": 4      
-    },
-    {
       "id": "resource_group.md",
       "title": "Manage Resource Groups",
       "label1": "admin_guide",
@@ -1015,81 +1007,89 @@
       "order": 3
     },
     {
+      "id": "coordinator_ha.md",
+      "title": "Coordinator HA",
+      "label1": "admin_guide",
+      "label2": "",
+      "label3": "",
+      "order": 4      
+    },
+    {
       "id": "glossary.md",
       "title": "Glossary",
       "label1": "reference",
       "label2": "",
-      "order": 4
+      "order": 5
     },
     {
       "id": "replica.md",
       "title": "In-memory Replica",
       "label1": "reference",
       "label2": "",
-      "order": 5
+      "order": 6
     },
     {
       "id": "knowhere.md",
       "title": "Knowhere",
       "label1": "reference",
       "label2": "",
-      "order": 6
+      "order": 7
     },
     {
       "id": "schema.md",
       "title": "Schema",
       "label1": "reference",
       "label2": "",
-      "order": 7
+      "order": 8
     },
     {
       "id": "metric.md",
       "title": "Similarity Metrics",
       "label1": "reference",
       "label2": "",
-      "order": 8
+      "order": 9
     },
     {
       "id": "system_configuration.md",
       "title": "System Configurations",
       "label1": "reference",
       "label2": "",
-      "order": 9
+      "order": 10
     },
     {
       "id": "timestamp.md",
       "title": "Timestamp",
       "label1": "reference",
       "label2": "",
-      "order": 10
+      "order": 11
     },
     {
       "id": "time_sync.md",
       "title": "Time Synchronization",
       "label1": "reference",
       "label2": "",
-      "order": 11
+      "order": 12
     },
     {
       "id": "timetravel_ref.md",
       "title": "Time Travel",
       "label1": "reference",
       "label2": "",
-      "order": 12
+      "order": 13
     },
     {
       "id": "users_and_roles.md",
       "title": "Users and Roles",
       "label1": "reference",
       "label2": "",
-      "order": 13
+      "order": 14
     },    
     {
       "id": "vector_index",
       "title": "Vector Index",
       "label1": "reference",
       "label2": "",
-      "order": 14
+      "order": 15
     },
     {
       "id": "index.md",
@@ -1110,7 +1110,7 @@
       "title": "Scalar Index",
       "label1": "reference",
       "label2": "",
-      "order": 15      
+      "order": 16      
     },
     {
       "id": "tutorials",

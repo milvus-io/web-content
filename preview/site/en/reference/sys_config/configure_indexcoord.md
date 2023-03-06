@@ -52,6 +52,25 @@ Under this section, you can configure index coord address, etc.
   </tbody>
 </table>
 
+## `indexCoord.activeStandby.enabled`
+
+<table id="rootCoord.dmlChannelNum">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        Whether the indexCoord works in active-standby mode.
+      </td>
+      <td>false</td>
+    </tr>
+  </tbody>
+</table>
+
 ## `indexCoord.grpc.serverMaxRecvSize`
 
 <table id="indexCoord.grpc.serverMaxRecvSize">
