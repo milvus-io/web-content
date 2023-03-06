@@ -8,7 +8,7 @@ new milvusClient(MILUVS_ADDRESS).dataManager.insert(InsertReq);
 
 ### InsertReq
 
-| Parameter       | Description                                                                            | Type                   |
+| Parameters      | Description                                                                            | Type                   |
 | --------------- | -------------------------------------------------------------------------------------- | ---------------------- |
 | collection_name | Name of the collection to insert data into                                             | String                 |
 | fields_data     | Vector data                                                                            | { [x: string]: any }[] |

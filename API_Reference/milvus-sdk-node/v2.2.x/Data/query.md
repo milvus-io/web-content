@@ -8,7 +8,7 @@ new milvusClient(MILUVS_ADDRESS).dataManager.query(QueryReq);
 
 ### QueryReq
 
-| Parameter         | Description                                                                            | Type     |
+| Parameters        | Description                                                                            | Type     |
 | ----------------- | -------------------------------------------------------------------------------------- | -------- |
 | collection_name   | Name of the collection to search on                                                    | String   |
 | output_fields     | Vector or scalar field to be returned                                                  | String[] |

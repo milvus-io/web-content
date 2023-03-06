@@ -8,11 +8,11 @@ new milvusClient(MILUVS_ADDRESS).userManager.addUserToRole(AddUserToRoleReq);
 
 ### AddUserToRoleReq
 
-| Parameter | Description                                                                            | Type   |
-| --------- | -------------------------------------------------------------------------------------- | ------ |
-| username  | The user name                                                                          | String |
-| roleName  | The role name                                                                          | String |
-| timeout?  | An optional duration of time in millisecond to allow for the RPC. Default is undefined | Number |
+| Parameters | Description                                                                            | Type   |
+| ---------- | -------------------------------------------------------------------------------------- | ------ |
+| username   | The user name                                                                          | String |
+| roleName   | The role name                                                                          | String |
+| timeout?   | An optional duration of time in millisecond to allow for the RPC. Default is undefined | Number |
 
 ## Example
 

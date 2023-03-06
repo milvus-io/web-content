@@ -6,10 +6,9 @@ This method drops the index and its corresponding index file in the collection.
 new milvusClient(MILUVS_ADDRESS).indexManager.dropIndex(DropIndexReq);
 ```
 
-
 ### DropIndexReq
 
-| Parameter       | Description                                                                            | Type   |
+| Parameters      | Description                                                                            | Type   |
 | --------------- | -------------------------------------------------------------------------------------- | ------ |
 | collection_name | Collection name                                                                        | String |
 | field_name      | Field name                                                                             | String |

@@ -6,9 +6,9 @@ This method change alias target to another collection.
 new milvusClient(MILUVS_ADDRESS).collectionManager.alterAlias(AlterAliasReq);
 ```
 
-### AlterAliasReq(object)
+### AlterAliasReq
 
-| Parameter       | Description                                                                            | Type   |
+| Parameters      | Description                                                                            | Type   |
 | --------------- | -------------------------------------------------------------------------------------- | ------ |
 | collection_name | Target collection name                                                                 | String |
 | Alias           | Alias name                                                                             | String |

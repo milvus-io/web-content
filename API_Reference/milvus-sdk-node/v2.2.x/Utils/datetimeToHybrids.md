@@ -10,7 +10,7 @@ datetimeToHybrids(HybridTimestamp);
 
 ### Parameters
 
-| Parameter       | Description                                                                          | Type   |
+| Parameters      | Description                                                                          | Type   |
 | --------------- | ------------------------------------------------------------------------------------ | ------ |
 | HybridTimestamp | The hybrid timestamp, a non-negative integer ranging from 0 to 18446744073709551615. | String |
 

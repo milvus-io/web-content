@@ -10,7 +10,7 @@ new milvusClient(MILUVS_ADDRESS).partitionManager.createPartition(
 
 ### CreatePartitionReq
 
-| Parameter       | Description                                                                            | Type   |
+| Parameters      | Description                                                                            | Type   |
 | --------------- | -------------------------------------------------------------------------------------- | ------ |
 | collection_name | Name of the collection to create a partition in                                        | String |
 | partition_name  | Name of the partition to create                                                        | String |

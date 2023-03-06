@@ -10,7 +10,7 @@ new milvusClient(MILUVS_ADDRESS).partitionManager.loadPartitions(
 
 ### LoadPartitionsReq
 
-| Parameter       | Description                                                                            | Type     |
+| Parameters      | Description                                                                            | Type     |
 | --------------- | -------------------------------------------------------------------------------------- | -------- |
 | collection_name | Name of the collection in which the partition to load exists                           | String   |
 | partition_names | An array of the names of the partitions to load                                        | String[] |

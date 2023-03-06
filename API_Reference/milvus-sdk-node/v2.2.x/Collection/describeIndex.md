@@ -8,7 +8,7 @@ new milvusClient(MILUVS_ADDRESS).indexManager.describeIndex(DescribeIndexReq);
 
 ### DescribeIndexReq
 
-| Parameter       | Description                                                                            | Type   |
+| Parameters      | Description                                                                            | Type   |
 | --------------- | -------------------------------------------------------------------------------------- | ------ |
 | collection_name | Name of the collection to check                                                        | String |
 | field_name?     | Name of the field to check                                                             | String |

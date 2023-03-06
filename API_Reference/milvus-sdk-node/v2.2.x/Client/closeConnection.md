@@ -6,7 +6,7 @@ This method closes the connection to Milvus. Make sure you close the connection 
 new milvusClient(MILUVS_ADDRESS).closeConnection();
 ```
 
-# Example
+## Example
 
 ```javascript
 import { MilvusClient } from "@zilliz/milvus2-sdk-node";
@@ -14,7 +14,7 @@ import { MilvusClient } from "@zilliz/milvus2-sdk-node";
 new milvusClient(MILUVS_ADDRESS).closeConnection();
 ```
 
-# Return
+### Response
 
 ```javascript
 // grpc client return closed -> 4, connected -> 0

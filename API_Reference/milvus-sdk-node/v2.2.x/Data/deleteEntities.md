@@ -8,7 +8,7 @@ new milvusClient(MILUVS_ADDRESS).dataManager.deleteEntities(DeleteEntitiesReq);
 
 ### DeleteEntitiesReq
 
-| Parameter       | Description                                                                            | Type   |
+| Parameters      | Description                                                                            | Type   |
 | --------------- | -------------------------------------------------------------------------------------- | ------ |
 | collection_name | Name of the collection to delete entities from                                         | String |
 | expr            | Boolean expression used for attibute filtering                                         | String |

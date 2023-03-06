@@ -8,7 +8,7 @@ new milvusClient(MILUVS_ADDRESS).userManager.createUser(UpdateUserReq);
 
 ### UpdateUserReq
 
-| Parameter   | Description                                                                            | Type   |
+| Parameters  | Description                                                                            | Type   |
 | ----------- | -------------------------------------------------------------------------------------- | ------ |
 | username    | The username used to log into Milvus                                                   | String |
 | newPassword | The new password used to log into Milvus.                                              | String |

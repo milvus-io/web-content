@@ -6,9 +6,9 @@ This method remove alias for a collection.
 new milvusClient(MILUVS_ADDRESS).collectionManager.dropAlias(DropAliasReq);
 ```
 
-### DropAliasReq(object)
+### DropAliasReq
 
-| Parameter       | Description                                                                            | Type   |
+| Parameters      | Description                                                                            | Type   |
 | --------------- | -------------------------------------------------------------------------------------- | ------ |
 | collection_name | Target collection name                                                                 | String |
 | Alias           | Alias name                                                                             | String |

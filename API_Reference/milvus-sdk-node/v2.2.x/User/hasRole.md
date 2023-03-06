@@ -8,10 +8,10 @@ new milvusClient(MILUVS_ADDRESS).userManager.hasRole(HasRoleReq);
 
 ### HasRoleReq
 
-| Parameter | Description                                                                            | Type   |
-| --------- | -------------------------------------------------------------------------------------- | ------ |
-| roleName  | The role name                                                                          | String |
-| timeout?  | An optional duration of time in millisecond to allow for the RPC. Default is undefined | Number |
+| Parameters | Description                                                                            | Type   |
+| ---------- | -------------------------------------------------------------------------------------- | ------ |
+| roleName   | The role name                                                                          | String |
+| timeout?   | An optional duration of time in millisecond to allow for the RPC. Default is undefined | Number |
 
 ## Example
 

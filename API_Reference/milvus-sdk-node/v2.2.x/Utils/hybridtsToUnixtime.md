@@ -10,9 +10,9 @@ hybridtsToUnixtime(unixTime);
 
 ### Parameters
 
-| Parameter | Description                                                                                        | Type   |
-| --------- | -------------------------------------------------------------------------------------------------- | ------ |
-| unixTime  | Unix Epoch time, the number of seconds that have elapsed since January 1, 1970 (midnight UTC/GMT). | String |
+| Parameters | Description                                                                                        | Type   |
+| ---------- | -------------------------------------------------------------------------------------------------- | ------ |
+| unixTime   | Unix Epoch time, the number of seconds that have elapsed since January 1, 1970 (midnight UTC/GMT). | String |
 
 ## Example
 

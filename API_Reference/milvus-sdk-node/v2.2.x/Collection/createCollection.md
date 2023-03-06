@@ -8,24 +8,24 @@ new milvusClient(MILUVS_ADDRESS).collectionManager.createCollection(
 );
 ```
 
-### CreateCollectionReq(object)
+### CreateCollectionReq
 
-| Parameter       | Description                                                                            | Type   |
-| --------------- | -------------------------------------------------------------------------------------- | ------ |
-| collection_name | Name of the collection to create                                                       | String |
-| fields          | Schema of the collection to create                                                     | Field  |
-| timeout?        | An optional duration of time in millisecond to allow for the RPC. Default is undefined | Number |
+| Parameters      | Description                                                                            | Type          |
+| --------------- | -------------------------------------------------------------------------------------- | ------------- |
+| collection_name | Name of the collection to create                                                       | String        |
+| fields          | Schema of the collection to create                                                     | Field(object) |
+| timeout?        | An optional duration of time in millisecond to allow for the RPC. Default is undefined | Number        |
 
-### Fields(object)
+### Field
 
-| Parameter       | Description                                                             | Type     |
-| --------------- | ----------------------------------------------------------------------- | -------- |
-| name            | Field name                                                              | String   |
-| description     | Field description                                                       | String   |
-| data_type       | Data type of the field (see the table below)                            | DataType |
-| type_params?    | Vector field parameters                                                 | Object   |
-| autoID?         | Boolean value to indicate whether the IDs are automatically generated   | Bool     |
-| is_primary_key? | Boolean value to indicate whether this field is used as the primary key | Bool     |
+| Parameters      | Description                                                             | Type             |
+| --------------- | ----------------------------------------------------------------------- | ---------------- |
+| name            | Field name                                                              | String           |
+| description     | Field description                                                       | String           |
+| data_type       | Data type of the field (see the table below)                            | DataType(number) |
+| type_params?    | Vector field parameters                                                 | Object           |
+| autoID?         | Boolean value to indicate whether the IDs are automatically generated   | Bool             |
+| is_primary_key? | Boolean value to indicate whether this field is used as the primary key | Bool             |
 
 #### DataType
 
@@ -48,6 +48,7 @@ new milvusClient(MILUVS_ADDRESS).collectionManager.createCollection(
 
 ```javascript
 import { MilvusClient } from "@zilliz/milvus2-sdk-node";
+import { DataType } from "@zilliz/milvus2-sdk-node/dist/milvus/const/Milvus";
 
 new milvusClient(MILUVS_ADDRESS).collectionManager.createCollection({
   collection_name: "my_collection",

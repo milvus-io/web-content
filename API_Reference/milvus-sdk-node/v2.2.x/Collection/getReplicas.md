@@ -8,7 +8,7 @@ new milvusClient(MILUVS_ADDRESS).indexManager.getReplicas(GetReplicaReq);
 
 ### GetIndexStateReq
 
-| Parameter    | Description                                                                            | Type   |
+| Parameters   | Description                                                                            | Type   |
 | ------------ | -------------------------------------------------------------------------------------- | ------ |
 | collectionID | Collection ID                                                                          | Number |
 | timeout?     | An optional duration of time in millisecond to allow for the RPC. Default is undefined | Number |

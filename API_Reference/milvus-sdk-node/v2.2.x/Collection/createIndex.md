@@ -8,7 +8,7 @@ new milvusClient(MILUVS_ADDRESS).indexManager.createIndex(CreateIndexReq);
 
 ### CreateIndexReq
 
-| Parameter       | Description                                                                            | Type        |
+| Parameters      | Description                                                                            | Type        |
 | --------------- | -------------------------------------------------------------------------------------- | ----------- |
 | collection_name | Collection name                                                                        | String      |
 | field_name      | Name of the field to create index on                                                   | String      |
@@ -28,14 +28,18 @@ new milvusClient(MILUVS_ADDRESS).indexManager.createIndex(CreateIndexReq);
 
 ```javascript
 import { MilvusClient } from "@zilliz/milvus2-sdk-node";
+import {
+  MetricType,
+  IndexType,
+} from "@zilliz/milvus2-sdk-node/dist/milvus/const/Milvus";
 
 new milvusClient(MILUVS_ADDRESS).indexManager.createIndex({
   collection_name: "my_collection",
   field_name: "vector_01",
   index_name: "index_name",
   extra_params: {
-    index_type: "IVF_FLAT",
-    metric_type: "IP",
+    index_type: IndexType.IVF_FLAT,
+    metric_type: MetricType.IP,
     params: JSON.stringify({ nlist: 10 }),
   },
 });

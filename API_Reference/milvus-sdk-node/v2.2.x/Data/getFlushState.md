@@ -8,7 +8,7 @@ new milvusClient(MILUVS_ADDRESS).dataManager.getFlushState(GetFlushStateReq);
 
 ### GetFlushStateReq
 
-| Parameter  | Description                                                                            | type     |
+| Parameters | Description                                                                            | type     |
 | ---------- | -------------------------------------------------------------------------------------- | -------- |
 | segmentIDs | An array of the IDs of the segments to check                                           | String[] |
 | timeout?   | An optional duration of time in millisecond to allow for the RPC. Default is undefined | Number   |

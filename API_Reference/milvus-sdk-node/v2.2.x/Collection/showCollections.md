@@ -10,7 +10,7 @@ new milvusClient(MILUVS_ADDRESS).collectionManager.showCollections(
 
 ### ShowCollectionsReq
 
-| Parameter       | Description                                                                            | type                |
+| Parameters      | Description                                                                            | type                |
 | --------------- | -------------------------------------------------------------------------------------- | ------------------- |
 | collection_name | Name of the collections to check for their loading status                              | String[]            |
 | type            | ShowCollectionsType                                                                    | ShowCollectionsType |

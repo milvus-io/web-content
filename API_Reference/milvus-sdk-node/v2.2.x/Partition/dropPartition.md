@@ -10,7 +10,7 @@ new milvusClient(MILUVS_ADDRESS).partitionManager.dropPartition(
 
 ### DropPartitionReq
 
-| Parameter       | Description                                                                            | Type   |
+| Parameters      | Description                                                                            | Type   |
 | --------------- | -------------------------------------------------------------------------------------- | ------ |
 | collection_name | Name of the collection in which to drop the partition                                  | String |
 | partition_name  | Name of the partition to drop                                                          | String |

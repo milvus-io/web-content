@@ -12,8 +12,16 @@ Milvus-sdk-node is a node.js SDK of Milvus. Its source code is open-sourced and 
 
 ## Installation
 
+### npm
+
 ```javascript
  npm install @zilliz/milvus2-sdk-node
+```
+
+### yarn
+
+```javascript
+ yarn add @zilliz/milvus2-sdk-node
 ```
 
 ## Contributing

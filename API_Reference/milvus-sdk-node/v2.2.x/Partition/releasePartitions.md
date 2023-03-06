@@ -10,7 +10,7 @@ new milvusClient(MILUVS_ADDRESS).partitionManager.releasePartitions(
 
 ### ReleasePartitionsReq
 
-| Parameter       | Description                                                                            | Type     |
+| Parameters      | Description                                                                            | Type     |
 | --------------- | -------------------------------------------------------------------------------------- | -------- |
 | collection_name | Name of the collection in which the partition to release exists                        | String   |
 | partition_names | An array of the name of the partitions to release                                      | String[] |

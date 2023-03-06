@@ -8,7 +8,7 @@ new milvusClient(MILUVS_ADDRESS).partitionManager.hasPartition(HasPartitionReq);
 
 ### HasPartitionReq
 
-| Parameter       | Description                                                                            | Type   |
+| Parameters      | Description                                                                            | Type   |
 | --------------- | -------------------------------------------------------------------------------------- | ------ |
 | collection_name | Name of the collection in which the partition to verify exists                         | String |
 | partition_name  | Name of the partition to verify                                                        | String |

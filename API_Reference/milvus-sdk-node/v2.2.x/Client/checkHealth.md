@@ -6,7 +6,7 @@ This method check if Milvus is healthy at the moment.
 new milvusClient(MILUVS_ADDRESS).checkHealth();
 ```
 
-# Example
+## Example
 
 ```javascript
 import { MilvusClient } from "@zilliz/milvus2-sdk-node";
@@ -14,7 +14,7 @@ import { MilvusClient } from "@zilliz/milvus2-sdk-node";
 new milvusClient(MILUVS_ADDRESS).checkHealth();
 ```
 
-# Return
+### Response
 
 ```javascript
 {

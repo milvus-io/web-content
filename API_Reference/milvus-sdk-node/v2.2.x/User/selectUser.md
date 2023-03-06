@@ -8,7 +8,7 @@ new milvusClient(MILUVS_ADDRESS).userManager.selectUser(SelectUserReq);
 
 ### SelectUserReq
 
-| Parameter        | Description                                                                            | Type    |
+| Parameters       | Description                                                                            | Type    |
 | ---------------- | -------------------------------------------------------------------------------------- | ------- |
 | userName         | The user name                                                                          | String  |
 | includeUserInfo? | should result including user info, by default: true                                    | boolean |

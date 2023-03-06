@@ -10,7 +10,7 @@ new milvusClient(MILUVS_ADDRESS).indexManager.getIndexBuildProgress(
 
 ### GetIndexBuildProgressReq
 
-| Parameter       | Description                                                                            | Type   |
+| Parameters      | Description                                                                            | Type   |
 | --------------- | -------------------------------------------------------------------------------------- | ------ |
 | collection_name | Collection name                                                                        | String |
 | field_name?     | Name of the field to build index on                                                    | String |

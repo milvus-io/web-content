@@ -6,16 +6,16 @@ This is a class to initialize a Milvus client instance. Once connected to the Mi
 const milvusClient = new MilvusClient(MILUVS_ADDRESS);
 ```
 
-# Parameter
+## Parameters
 
-| Parameter | Description                             | Type    | Example             |
-| --------- | --------------------------------------- | ------- | ------------------- |
-| address   | The Milvus IP address                   | String  | '192.168.0.1:19530' |
-| ssl?      | SSL connection. It is false by default. | Boolean | false               |
-| username? | The username used to connect to Milvus  | String  | milvus              |
-| address?  | The password used to connect to Milvus  | String  | milvus              |
+| Parameters | Description                             | Type    | Example             |
+| ---------- | --------------------------------------- | ------- | ------------------- |
+| address    | The Milvus IP address                   | String  | '192.168.0.1:19530' |
+| ssl?       | SSL connection. It is false by default. | Boolean | false               |
+| username?  | The username used to connect to Milvus  | String  | milvus              |
+| address?   | The password used to connect to Milvus  | String  | milvus              |
 
-# Example
+### Example
 
 ```javascript
 import { MilvusClient } from "@zilliz/milvus2-sdk-node";

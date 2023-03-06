@@ -10,7 +10,7 @@ new milvusClient(MILUVS_ADDRESS).userManager.grantRolePrivilege(
 
 ### GrantRolePrivilegeReq
 
-| Parameter     | Description                                                                                                                                           | Type    |
+| Parameters    | Description                                                                                                                                           | Type    |
 | ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
 | roleName      | The user role name                                                                                                                                    | String  |
 | object        | Type of the operational object to which the specified privilege belongs, such as Collection, Index, Partition, etc. This parameter is case-sensitive. | boolean |

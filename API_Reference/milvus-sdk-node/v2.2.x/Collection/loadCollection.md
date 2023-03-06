@@ -10,7 +10,7 @@ new milvusClient(MILUVS_ADDRESS).collectionManager.loadCollection(
 
 ### LoadCollectionReq
 
-| Parameter       | Description                                                                            | Type            |
+| Parameters      | Description                                                                            | Type            |
 | --------------- | -------------------------------------------------------------------------------------- | --------------- |
 | collection_name | Name of the collection to load                                                         | String          |
 | replica_number? | number                                                                                 | Collection name |

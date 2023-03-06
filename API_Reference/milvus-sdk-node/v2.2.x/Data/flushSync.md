@@ -8,7 +8,7 @@ new milvusClient(MILUVS_ADDRESS).dataManager.flushSync(FlushReq);
 
 ### FlushReq
 
-| Parameter        | Description                                                                            | type     |
+| Parameters       | Description                                                                            | type     |
 | ---------------- | -------------------------------------------------------------------------------------- | -------- |
 | collection_names | An array of the names of the collections to flush                                      | String[] |
 | timeout?         | An optional duration of time in millisecond to allow for the RPC. Default is undefined | Number   |

@@ -10,7 +10,7 @@ new milvusClient(MILUVS_ADDRESS).partitionManager.getPartitionStatistics(
 
 ### GetPartitionStatisticsReq
 
-| Parameter       | Description                                                                            | Type   |
+| Parameters      | Description                                                                            | Type   |
 | --------------- | -------------------------------------------------------------------------------------- | ------ |
 | collection_name | Name of the collection in which the partition to check exists                          | String |
 | partition_name  | Name of the partition to check                                                         | String |

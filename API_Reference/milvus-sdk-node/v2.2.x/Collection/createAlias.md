@@ -6,9 +6,9 @@ This method creates a alias for a collection.
 new milvusClient(MILUVS_ADDRESS).collectionManager.createAlias(CreateAliasReq);
 ```
 
-### CreateAliasReq(object)
+### CreateAliasReq
 
-| Parameter       | Description                                                                            | Type   |
+| Parameters      | Description                                                                            | Type   |
 | --------------- | -------------------------------------------------------------------------------------- | ------ |
 | collection_name | Target collection name                                                                 | String |
 | Alias           | Alias name                                                                             | String |

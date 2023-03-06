@@ -10,7 +10,7 @@ new milvusClient(MILUVS_ADDRESS).collectionManager.dropCollection(
 
 ### DropCollectionReq
 
-| Parameter       | Description                                                                            | Type   |
+| Parameters      | Description                                                                            | Type   |
 | --------------- | -------------------------------------------------------------------------------------- | ------ |
 | collection_name | Name of the collection to drop                                                         | String |
 | timeout?        | An optional duration of time in millisecond to allow for the RPC. Default is undefined | Number |

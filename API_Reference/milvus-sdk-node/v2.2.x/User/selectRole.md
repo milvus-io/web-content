@@ -8,7 +8,7 @@ new milvusClient(MILUVS_ADDRESS).userManager.selectRole(SelectRoleReq);
 
 ### SelectRoleReq
 
-| Parameter        | Description                                                                            | Type    |
+| Parameters       | Description                                                                            | Type    |
 | ---------------- | -------------------------------------------------------------------------------------- | ------- |
 | roleName         | The role name                                                                          | String  |
 | includeUserInfo? | should result including user info, by default: true                                    | boolean |

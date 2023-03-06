@@ -6,31 +6,31 @@ This method conducts a vector similarity search.
 new milvusClient(MILUVS_ADDRESS).dataManager.search(SearchReq);
 ```
 
-### SearchReq(object)
+### SearchReq
 
-| Parameter         | Description                                                                                                                                         | Type                               |
-| ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------- |
-| collection_name   | Name of the collection to search on                                                                                                                 | String                             |
-| search_params     | Search parameters                                                                                                                                   | SearchParams (see the table below) |
-| vectors           | Original vector to search with                                                                                                                      | Number[][]                         |
-| vector_type       | Search parameters                                                                                                                                   | VectorTypes (see the table below)  |
-| output_fields?    | Vector or scalar field to be returned                                                                                                               | String[]                           |
-| travel_timestamp? | Timestamp that is used for Time Travel. Users can specify a timestamp in a search to get results based on a data view at a specified point in time. | Number                             |
-| partitions_names? | An array of the names of the partitions to search on                                                                                                | String[]                           |
-| expr?             | Boolean expression to filter the data                                                                                                               | String                             |
-| timeout?          | An optional duration of time in millisecond to allow for the RPC. Default is undefined                                                              | Number                             |
+| Parameters        | Description                                                                                                                                         | Type                  |
+| ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------- |
+| collection_name   | Name of the collection to search on                                                                                                                 | String                |
+| search_params     | Search parameters                                                                                                                                   | SearchParams (object) |
+| vectors           | Original vector to search with                                                                                                                      | Number[][]            |
+| vector_type       | Search parameters                                                                                                                                   | VectorTypes (number)  |
+| output_fields?    | Vector or scalar field to be returned                                                                                                               | String[]              |
+| travel_timestamp? | Timestamp that is used for Time Travel. Users can specify a timestamp in a search to get results based on a data view at a specified point in time. | Number                |
+| partitions_names? | An array of the names of the partitions to search on                                                                                                | String[]              |
+| expr?             | Boolean expression to filter the data                                                                                                               | String                |
+| timeout?          | An optional duration of time in millisecond to allow for the RPC. Default is undefined                                                              | Number                |
 
-#### SearchParams(object)
+#### SearchParams
 
-| Parameter      | Description          | Type        |
-| -------------- | -------------------- | ----------- |
-| anns_field     | Vector field name    | String      |
-| params         | Special parameters   | SearchParam |
-| topk?          | Search result counts | String      |
-| metric_type ?  | Metric type          | MetricTypes |
-| round_decimal? | Special parameters   | Number      |
+| Parameter      | Description          | Type                     |
+| -------------- | -------------------- | ------------------------ |
+| anns_field     | Vector field name    | String                   |
+| params         | Special parameters   | SearchParam(JSON string) |
+| topk?          | Search result counts | String                   |
+| metric_type?   | Metric type          | MetricTypes(string)      |
+| round_decimal? | Special parameters   | Number                   |
 
-#### MetricTypes(string)
+#### MetricTypes
 
 | Value          | Description        |
 | -------------- | ------------------ |
@@ -51,12 +51,17 @@ new milvusClient(MILUVS_ADDRESS).dataManager.search(SearchReq);
 
 #### SearchParam
 
-Please refer https://milvus.io/docs/index.md
+SearchParam is a json string, it's key and value, please refer to https://milvus.io/docs/index.md.
+
+```javascript
+JSON.stringify({ nprobe: 1024 });
+```
 
 ## Example
 
 ```javascript
 import { MilvusClient } from "@zilliz/milvus2-sdk-node";
+import { DataType, MetricType } from "@zilliz/milvus2-sdk-node/dist/milvus/const/Milvus";
 
 new milvusClient(MILUVS_ADDRESS).dataManager.search({
   collection_name: "my_collection",
@@ -65,11 +70,11 @@ new milvusClient(MILUVS_ADDRESS).dataManager.search({
   search_params: {
     anns_field: "vector_01",
     topk: 4,
-    metric_type: "L2",
+    metric_type: MetricType.L2,
     params: JSON.stringify({ nprobe: 1024 }),
   },
   output_fields: ["age"],
-  vector_type: 100,
+  vector_type: DataType.FloatVector,
 });
 ```
 

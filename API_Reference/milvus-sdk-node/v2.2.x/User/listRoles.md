@@ -8,9 +8,9 @@ new milvusClient(MILUVS_ADDRESS).userManager.listRoles(ListGrantsReq);
 
 ### ListGrantsReq
 
-| Parameter | Description                                                                            | Type   |
-| --------- | -------------------------------------------------------------------------------------- | ------ |
-| timeout?  | An optional duration of time in millisecond to allow for the RPC. Default is undefined | Number |
+| Parameters | Description                                                                            | Type   |
+| ---------- | -------------------------------------------------------------------------------------- | ------ |
+| timeout?   | An optional duration of time in millisecond to allow for the RPC. Default is undefined | Number |
 
 ## Example
 

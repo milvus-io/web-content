@@ -8,7 +8,7 @@ new milvusClient(MILUVS_ADDRESS).indexManager.getIndexState(GetIndexStateReq);
 
 ### GetIndexStateReq
 
-| Parameter       | Description                                                                            | Type   |
+| Parameters      | Description                                                                            | Type   |
 | --------------- | -------------------------------------------------------------------------------------- | ------ |
 | collection_name | Collection name                                                                        | String |
 | field_name?     | Name of the field to build index on                                                    | String |
