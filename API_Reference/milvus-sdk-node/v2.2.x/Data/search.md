@@ -73,7 +73,7 @@ new milvusClient(MILUVS_ADDRESS).dataManager.search({
 });
 ```
 
-### Return
+### Response
 
 ```javascript
 // search return

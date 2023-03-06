@@ -27,7 +27,7 @@ new milvusClient(MILUVS_ADDRESS).partitionManager.loadPartitions({
 });
 ```
 
-## Return
+## Response
 
 ```javascript
 { error_code: 'Success', reason: '' }

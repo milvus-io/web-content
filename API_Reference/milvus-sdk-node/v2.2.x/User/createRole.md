@@ -23,7 +23,7 @@ new milvusClient(MILUVS_ADDRESS).userManager.createRole({
 });
 ```
 
-## Return
+## Response
 
 ```javascript
 { error_code: 'Success', reason: '' }

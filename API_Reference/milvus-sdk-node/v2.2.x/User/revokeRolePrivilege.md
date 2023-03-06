@@ -31,4 +31,4 @@ new milvusClient(MILVUS_ADDRESS).userManager.revokeRolePrivilege({
 });
 ```
 
-## Return
+## Response

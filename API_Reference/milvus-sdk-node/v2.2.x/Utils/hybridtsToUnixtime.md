@@ -20,7 +20,7 @@ hybridtsToUnixtime(unixTime);
 hybridtsToUnixtime("429642767925248000");
 ```
 
-## Return
+## Response
 
 ```javascript
 // The UNIX Epoch time

@@ -27,7 +27,7 @@ new milvusClient(MILUVS_ADDRESS).partitionManager.getPartitionStatistics({
 });
 ```
 
-## Return
+## Response
 
 ```javascript
 {

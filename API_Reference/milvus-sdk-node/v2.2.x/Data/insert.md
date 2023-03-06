@@ -35,7 +35,7 @@ new milvusClient(MILUVS_ADDRESS).dataManager.insert({
 });
 ```
 
-## Return
+## Response
 
 ```javascript
 // insert return

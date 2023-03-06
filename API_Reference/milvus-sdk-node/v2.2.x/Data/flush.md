@@ -23,7 +23,7 @@ new milvusClient(MILUVS_ADDRESS).dataManager.flush({
 });
 ```
 
-## Return
+## Response
 
 ```javascript
 // flush return

@@ -20,7 +20,7 @@ datetimeToHybrids(HybridTimestamp);
 datetimeToHybrids(new Date(1638957092 * 1000));
 ```
 
-## Return
+## Response
 
 ```javascript
 //The hybrid timestamp

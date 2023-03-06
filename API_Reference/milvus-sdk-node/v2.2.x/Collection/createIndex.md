@@ -41,7 +41,7 @@ new milvusClient(MILUVS_ADDRESS).indexManager.createIndex({
 });
 ```
 
-## Return
+## Response
 
 ```javascript
 // createIndex return

@@ -29,4 +29,4 @@ new milvusClient(MILVUS_ADDRESS).userManager.selectGrant({
 });
 ```
 
-## Return
+## Response

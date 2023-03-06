@@ -25,7 +25,7 @@ new milvusClient(MILUVS_ADDRESS).indexManager.describeIndex({
 });
 ```
 
-## Return
+## Response
 
 ```javascript
 // describeIndex return

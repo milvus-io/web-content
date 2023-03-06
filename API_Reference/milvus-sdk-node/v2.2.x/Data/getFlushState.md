@@ -23,7 +23,7 @@ new milvusClient(MILUVS_ADDRESS).dataManager.getFlushState({
 });
 ```
 
-## Return
+## Response
 
 ```javascript
 // getFlushState return

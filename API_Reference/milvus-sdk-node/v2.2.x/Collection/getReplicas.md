@@ -23,7 +23,7 @@ new milvusClient(MILUVS_ADDRESS).indexManager.getReplicas({
 });
 ```
 
-## Return
+## Response
 
 ```javascript
 // getIndexState return

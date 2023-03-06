@@ -23,4 +23,4 @@ new milvusClient(MILUVS_ADDRESS).userManager.hasRole({
 });
 ```
 
-## Return
+## Response

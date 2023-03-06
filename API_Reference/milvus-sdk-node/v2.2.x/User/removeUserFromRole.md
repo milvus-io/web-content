@@ -27,7 +27,7 @@ new milvusClient(MILUVS_ADDRESS).userManager.removeUserFromRole({
 });
 ```
 
-## Return
+## Response
 
 ```javascript
 { error_code: 'Success', reason: '' }
