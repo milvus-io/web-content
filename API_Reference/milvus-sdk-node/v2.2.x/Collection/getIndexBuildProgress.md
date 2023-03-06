@@ -27,7 +27,7 @@ new milvusClient(MILUVS_ADDRESS).indexManager.getIndexBuildProgress({
 });
 ```
 
-## Response
+### Response
 
 ```javascript
 // getIndexBuildProgress return

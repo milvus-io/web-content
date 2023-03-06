@@ -25,7 +25,7 @@ new milvusClient(MILUVS_ADDRESS).collectionManager.releaseCollection({
 });
 ```
 
-## Response
+### Response
 
 ```javascript
 // releaseCollection return

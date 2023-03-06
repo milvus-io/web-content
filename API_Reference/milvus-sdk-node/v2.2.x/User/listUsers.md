@@ -20,7 +20,7 @@ import { MilvusClient } from "@zilliz/milvus2-sdk-node";
 new milvusClient(MILUVS_ADDRESS).userManager.listUsers();
 ```
 
-## Response
+### Response
 
 ```javascript
 {

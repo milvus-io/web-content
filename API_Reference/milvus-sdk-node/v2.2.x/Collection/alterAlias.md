@@ -25,7 +25,7 @@ new milvusClient(MILUVS_ADDRESS).collectionManager.createAlias({
 });
 ```
 
-## Response
+### Response
 
 ```javascript
 // create collection return

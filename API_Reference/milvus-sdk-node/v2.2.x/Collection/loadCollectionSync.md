@@ -25,7 +25,7 @@ new milvusClient(MILUVS_ADDRESS).collectionManager.loadCollectionSync({
 });
 ```
 
-## Response
+### Response
 
 ```javascript
 // loadCollectionSync return

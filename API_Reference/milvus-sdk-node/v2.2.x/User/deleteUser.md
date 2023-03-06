@@ -23,7 +23,7 @@ new milvusClient(MILUVS_ADDRESS).userManager.deleteUser({
 });
 ```
 
-## Response
+### Response
 
 ```javascript
 { error_code: 'Success', reason: '' }

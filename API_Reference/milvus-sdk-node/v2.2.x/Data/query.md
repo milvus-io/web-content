@@ -28,7 +28,7 @@ new milvusClient(MILUVS_ADDRESS).dataManager.query({
 });
 ```
 
-## Response
+### Response
 
 ```javascript
 // query return

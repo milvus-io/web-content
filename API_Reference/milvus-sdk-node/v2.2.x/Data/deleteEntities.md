@@ -26,7 +26,7 @@ new milvusClient(MILUVS_ADDRESS).dataManager.deleteEntities({
 });
 ```
 
-## Response
+### Response
 
 ```javascript
 // DeleteEntitiesReq return

@@ -25,7 +25,7 @@ new milvusClient(MILUVS_ADDRESS).dataManager.getQuerySegmentInfo({
 });
 ```
 
-## Response
+### Response
 
 ```javascript
 // getQuerySegmentInfo return

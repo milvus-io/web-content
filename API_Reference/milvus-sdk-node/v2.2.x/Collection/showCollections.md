@@ -31,7 +31,7 @@ import { MilvusClient } from "@zilliz/milvus2-sdk-node";
 new milvusClient(MILUVS_ADDRESS).collectionManager.showCollections();
 ```
 
-## Response
+### Response
 
 ```javascript
 // showCollections return
