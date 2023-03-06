@@ -7,9 +7,9 @@ datetimeToHybrids(HybridTimestamp);
 ```
 
 ## Parameters
-| Parameter      | Description                                                                      | Type   | Required |
-| -------------- | -------------------------------------------------------------------------------- | ------ | -------- |
-| HybridTimestamp | The hybrid timestamp, a non-negative integer ranging from 0 to 18446744073709551615. | String | True     |
+| Parameter      | Description                                                                      | Type   |  
+| -------------- | -------------------------------------------------------------------------------- | ------ | 
+| HybridTimestamp | The hybrid timestamp, a non-negative integer ranging from 0 to 18446744073709551615. | String | 
 
 ## Example
 ```javascript

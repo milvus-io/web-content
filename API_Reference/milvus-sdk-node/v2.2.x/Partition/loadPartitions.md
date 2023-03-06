@@ -14,11 +14,11 @@ new milvusClient(MILUVS_ADDRESS).partitionManager.loadPartitions(
 
 ### LoadPartitionsReq
 
-| Parameter       | Description                                                                            | Type         | Required |
-| --------------- | -------------------------------------------------------------------------------------- | ------------ | -------- |
-| collection_name | Name of the collection in which the partition to load exists                           | String       | True     |
-| partition_names | An array of the names of the partitions to load                                        | String array | True     |
-| timeout         | An optional duration of time in millisecond to allow for the RPC. Default is undefined | Number       | False    |
+| Parameter       | Description                                                                            | Type         |
+| --------------- | -------------------------------------------------------------------------------------- | ------------ |
+| collection_name | Name of the collection in which the partition to load exists                           | String       |
+| partition_names | An array of the names of the partitions to load                                        | String[] |
+| timeout?        | An optional duration of time in millisecond to allow for the RPC. Default is undefined | Number       |
 
 ## Example
 

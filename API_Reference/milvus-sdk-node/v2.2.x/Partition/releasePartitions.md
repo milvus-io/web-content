@@ -14,11 +14,11 @@ new milvusClient(MILUVS_ADDRESS).partitionManager.releasePartitions(
 
 ### ReleasePartitionsReq
 
-| Parameter       | Description                                                                            | Type         | Required |
-| --------------- | -------------------------------------------------------------------------------------- | ------------ | -------- |
-| collection_name | Name of the collection in which the partition to release exists                        | String       | True     |
-| partition_names | An array of the name of the partitions to release                                      | String array | True     |
-| timeout         | An optional duration of time in millisecond to allow for the RPC. Default is undefined | Number       | False    |
+| Parameter       | Description                                                                            | Type     |
+| --------------- | -------------------------------------------------------------------------------------- | -------- |
+| collection_name | Name of the collection in which the partition to release exists                        | String   |
+| partition_names | An array of the name of the partitions to release                                      | String[] |
+| timeout?        | An optional duration of time in millisecond to allow for the RPC. Default is undefined | Number   |
 
 ## Example
 

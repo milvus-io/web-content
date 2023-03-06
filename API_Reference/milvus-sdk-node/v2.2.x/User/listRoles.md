@@ -1,32 +1,23 @@
-# deleteUser()
+# listRoles()
 
-This method deletes a user in Milvus.
+This method lists all roles in Milvus.
 
 ## Invocation
 
 ```javascript
-new milvusClient(MILUVS_ADDRESS).userManager.deleteUser(DeleteUserReq);
+new milvusClient(MILUVS_ADDRESS).userManager.listRoles();
 ```
 
 ## Parameters
 
-### DeleteUserReq
-
 | Parameter | Description                                                                            | Type   |  
 | --------- | -------------------------------------------------------------------------------------- | ------ | 
-| username  | The existing username in Milvus to delete                                              | String | 
 | timeout?  | An optional duration of time in millisecond to allow for the RPC. Default is undefined | Number |
 
 ## Example
 
 ```javascript
-new milvusClient(MILUVS_ADDRESS).userManager.deleteUser({
-  username: "milvus",
-});
+new milvusClient(MILUVS_ADDRESS).userManager.listRoles();
 ```
 
 ## Return
-
-```javascript
-{ error_code: 'Success', reason: '' }
-```

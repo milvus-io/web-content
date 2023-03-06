@@ -5,21 +5,19 @@ This method gets the index information in a collection.
 ## Invocation
 
 ```javascript
-new milvusClient(MILUVS_ADDRESS).indexManager.describeIndex(
-  DescribeIndexReq
-);
+new milvusClient(MILUVS_ADDRESS).indexManager.describeIndex(DescribeIndexReq);
 ```
 
 ## Parameters
 
 ### DescribeIndexReq
 
-| Parameter       | Description                                                                            | Type   | Required |
-| --------------- | -------------------------------------------------------------------------------------- | ------ | -------- |
-| collection_name | Name of the collection to check                                                        | String | True     |
-| field_name      | Name of the field to check                                                             | String | False    |
-| index_name      | Name of the index to check                                                             | String | False    |
-| timeout         | An optional duration of time in millisecond to allow for the RPC. Default is undefined | Number | False    |
+| Parameter       | Description                                                                            | Type   |
+| --------------- | -------------------------------------------------------------------------------------- | ------ |
+| collection_name | Name of the collection to check                                                        | String |
+| field_name?     | Name of the field to check                                                             | String |
+| index_name?     | Name of the index to check                                                             | String |
+| timeout?        | An optional duration of time in millisecond to allow for the RPC. Default is undefined | Number |
 
 ## Example
 

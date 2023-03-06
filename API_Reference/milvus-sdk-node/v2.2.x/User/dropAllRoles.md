@@ -1,11 +1,11 @@
-# listUsers()
+# dropAllRoles()
 
-This method lists all users in Milvus.
+This method iterate throught all roles, then revoke all granted privileges, then drop all roles.
 
 ## Invocation
 
 ```javascript
-new milvusClient(MILUVS_ADDRESS).userManager.listUsers();
+new milvusClient(MILUVS_ADDRESS).userManager.dropAllRoles();
 ```
 
 ## Parameters
@@ -17,14 +17,7 @@ new milvusClient(MILUVS_ADDRESS).userManager.listUsers();
 ## Example
 
 ```javascript
-new milvusClient(MILUVS_ADDRESS).userManager.listUsers();
+new milvusClient(MILUVS_ADDRESS).userManager.dropAllRoles();
 ```
 
 ## Return
-
-```javascript
-{
-  status: { error_code: 'Success', reason: '' },
-  usernames: [ 'root','milvus' ],
-}
-```

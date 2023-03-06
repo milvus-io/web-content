@@ -1,29 +1,29 @@
-# createUser()
+# createRole()
 
-This method creates a user in Milvus.
+This method create a user role in Milvus.
 
 ## Invocation
 
 ```javascript
-new milvusClient(MILUVS_ADDRESS).userManager.createUser(CreateUserReq);
+new milvusClient(MILUVS_ADDRESS).userManager.createRole({
+  roleName: your_role_nname,
+});
 ```
 
 ## Parameters
 
-### CreateUserReq
+### CreateRoleReq
 
 | Parameter | Description                                                                            | Type   |
 | --------- | -------------------------------------------------------------------------------------- | ------ |
-| username  | The username used to log into Milvus                                                   | String |
-| password  | The password used to log into Milvus.                                                  | String |
+| roleName  | The role name                                                                          | String |
 | timeout?  | An optional duration of time in millisecond to allow for the RPC. Default is undefined | Number |
 
 ## Example
 
 ```javascript
-new milvusClient(MILUVS_ADDRESS).userManager.createUser({
-  username: "milvus",
-  password: "milvus",
+new milvusClient(MILUVS_ADDRESS).userManager.createRole({
+  roleName: "my-milvus-role",
 });
 ```
 

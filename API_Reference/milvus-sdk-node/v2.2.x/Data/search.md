@@ -12,27 +12,27 @@ new milvusClient(MILUVS_ADDRESS).dataManager.search(SearchReq);
 
 ### SearchReq(object)
 
-| Parameter                  | Description                                                                                                                                         | Type                               | Required |
-| -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------- | -------- |
-| collection_name            | Name of the collection to search on                                                                                                                 | String                             | True     |
-| search_params              | Search parameters                                                                                                                                   | SearchParams (see the table below) | True     |
-| vectors                    | Original vector to search with                                                                                                                      | Number[][]                         | True     |
-| vector_type                | Search parameters                                                                                                                                   | VectorTypes (see the table below)  | True     |
-| output_fields(optional)    | Vector or scalar field to be returned                                                                                                               | String[]                           | False    |
-| travel_timestamp(optional) | Timestamp that is used for Time Travel. Users can specify a timestamp in a search to get results based on a data view at a specified point in time. | Number                             | False    |
-| partitions_names(optional) | An array of the names of the partitions to search on                                                                                                | String[]                           | False    |
-| expr(optional)             | Boolean expression to filter the data                                                                                                               | String                             | False    |
-| timeout                    | An optional duration of time in millisecond to allow for the RPC. Default is undefined                                                              | Number                             | False    |
+| Parameter         | Description                                                                                                                                         | Type                               |
+| ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------- |
+| collection_name   | Name of the collection to search on                                                                                                                 | String                             |
+| search_params     | Search parameters                                                                                                                                   | SearchParams (see the table below) |
+| vectors           | Original vector to search with                                                                                                                      | Number[][]                         |
+| vector_type       | Search parameters                                                                                                                                   | VectorTypes (see the table below)  |
+| output_fields?    | Vector or scalar field to be returned                                                                                                               | String[]                           |
+| travel_timestamp? | Timestamp that is used for Time Travel. Users can specify a timestamp in a search to get results based on a data view at a specified point in time. | Number                             |
+| partitions_names? | An array of the names of the partitions to search on                                                                                                | String[]                           |
+| expr?             | Boolean expression to filter the data                                                                                                               | String                             |
+| timeout?          | An optional duration of time in millisecond to allow for the RPC. Default is undefined                                                              | Number                             |
 
 #### SearchParams(object)
 
-| Parameter     | Description          | Type        | Required |
-| ------------- | -------------------- | ----------- | -------- |
-| anns_field    | Vector field name    | String      | True     |
-| topk          | Search result counts | String      | False    |
-| metric_type   | Metric type          | MetricTypes | False    |
-| params        | Special parameters   | SearchParam | True     |
-| round_decimal | Special parameters   | Number      | False    |
+| Parameter      | Description          | Type        |
+| -------------- | -------------------- | ----------- |
+| anns_field     | Vector field name    | String      |
+| params         | Special parameters   | SearchParam |
+| topk?          | Search result counts | String      |
+| metric_type ?  | Metric type          | MetricTypes |
+| round_decimal? | Special parameters   | Number      |
 
 #### MetricTypes(string)
 

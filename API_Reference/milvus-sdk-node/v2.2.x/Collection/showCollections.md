@@ -14,18 +14,18 @@ new milvusClient(MILUVS_ADDRESS).collectionManager.showCollections(
 
 ### ShowCollectionsReq
 
-| Parameter       | Description                                                                            | type                | required |
-| --------------- | -------------------------------------------------------------------------------------- | ------------------- | -------- |
-| collection_name | Name of the collections to check for their loading status                              | String array        | False    |
-| type            | ShowCollectionsType                                                                    | ShowCollectionsType | False    |
-| timeout         | An optional duration of time in millisecond to allow for the RPC. Default is undefined | Number              | False    |
+| Parameter       | Description                                                                            | type                |
+| --------------- | -------------------------------------------------------------------------------------- | ------------------- |
+| collection_name | Name of the collections to check for their loading status                              | String[]        |
+| type            | ShowCollectionsType                                                                    | ShowCollectionsType |
+| timeout?        | An optional duration of time in millisecond to allow for the RPC. Default is undefined | Number              |
 
 ### ShowCollectionsType
 
-| value | Description | type   | required |
-| ----- | ----------- | ------ | -------- |
-| 0     | All         | number | true     |
-| 1     | Loaded      | number | true     |
+| value | Description | type   |
+| ----- | ----------- | ------ |
+| 0     | All         | number |
+| 1     | Loaded      | number |
 
 ## Example
 

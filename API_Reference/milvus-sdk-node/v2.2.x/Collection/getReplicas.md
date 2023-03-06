@@ -5,19 +5,17 @@ This method returns replica information.
 ## Invocation
 
 ```javascript
-new milvusClient(MILUVS_ADDRESS).indexManager.getReplicas(
-  GetReplicaReq
-);
+new milvusClient(MILUVS_ADDRESS).indexManager.getReplicas(GetReplicaReq);
 ```
 
 ## Parameter
 
 ### GetIndexStateReq
 
-| Parameter | Description | Type   | Required |
-| -- | --  | -- | -- |
-| collectionID | Collection ID | Number | True |
-| timeout | An optional duration of time in millisecond to allow for the RPC. Default is undefined | Number | False |
+| Parameter    | Description                                                                            | Type   |
+| ------------ | -------------------------------------------------------------------------------------- | ------ |
+| collectionID | Collection ID                                                                          | Number |
+| timeout?     | An optional duration of time in millisecond to allow for the RPC. Default is undefined | Number |
 
 ## Example
 
@@ -44,5 +42,3 @@ new milvusClient(MILUVS_ADDRESS).indexManager.getReplicas({
   status: { error_code: 'Success', reason: '' }
 }
 ```
-
-

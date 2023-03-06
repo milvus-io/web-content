@@ -12,13 +12,13 @@ new milvusClient(MILUVS_ADDRESS).dataManager.insert(InsertReq);
 
 ### InsertReq
 
-| Parameter                | Description                                                                            | Type                   | Required |
-| ------------------------ | -------------------------------------------------------------------------------------- | ---------------------- | -------- |
-| collection_name          | Name of the collection to insert data into                                             | String                 | True     |
-| partition_name(optional) | Name of the partition to insert data into                                              | String                 | False    |
-| fields_data              | Vector data                                                                            | { [x: string]: any }[] | True     |
-| hash_keys(optional)      | The hash value determined by primary key                                               | Number[]               | False    |
-| timeout                  | An optional duration of time in millisecond to allow for the RPC. Default is undefined | Number                 | False    |
+| Parameter       | Description                                                                            | Type                   |
+| --------------- | -------------------------------------------------------------------------------------- | ---------------------- |
+| collection_name | Name of the collection to insert data into                                             | String                 |
+| fields_data     | Vector data                                                                            | { [x: string]: any }[] |
+| partition_name? | Name of the partition to insert data into                                              | String                 |
+| hash_keys?      | The hash value determined by primary key                                               | Number[]               |
+| timeout?        | An optional duration of time in millisecond to allow for the RPC. Default is undefined | Number                 |
 
 ### note
 

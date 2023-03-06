@@ -14,10 +14,10 @@ new milvusClient(MILUVS_ADDRESS).dataManager.getQuerySegmentInfo(
 
 ### getQuerySegmentInfoReq
 
-| Parameter      | Description                                                                            | Type   | Required |
-| -------------- | -------------------------------------------------------------------------------------- | ------ | -------- |
-| collectionName | Name of the collection to check                                                        | String | True     |
-| timeout        | An optional duration of time in millisecond to allow for the RPC. Default is undefined | Number | False    |
+| Parameter      | Description                                                                            | Type   |
+| -------------- | -------------------------------------------------------------------------------------- | ------ |
+| collectionName | Name of the collection to check                                                        | String |
+| timeout        | An optional duration of time in millisecond to allow for the RPC. Default is undefined | Number |
 
 ## Example
 

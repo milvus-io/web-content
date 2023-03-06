@@ -12,21 +12,21 @@ new milvusClient(MILUVS_ADDRESS).indexManager.createIndex(CreateIndexReq);
 
 ### CreateIndexReq
 
-| Parameter       | Description                                                                            | Type        | Required |
-| --------------- | -------------------------------------------------------------------------------------- | ----------- | -------- |
-| collection_name | Collection name                                                                        | String      | True     |
-| field_name      | Name of the field to create index on                                                   | String      | True     |
-| index_name      | Name of the index to create                                                            | String      | False    |
-| extra_params    | Extra index parameters (see the table below)                                           | IndexParams | False    |
-| timeout         | An optional duration of time in millisecond to allow for the RPC. Default is undefined | Number      | False    |
+| Parameter       | Description                                                                            | Type        |
+| --------------- | -------------------------------------------------------------------------------------- | ----------- |
+| collection_name | Collection name                                                                        | String      |
+| field_name      | Name of the field to create index on                                                   | String      |
+| index_name?     | Name of the index to create                                                            | String      |
+| extra_params?   | Extra index parameters (see the table below)                                           | IndexParams |
+| timeout?        | An optional duration of time in millisecond to allow for the RPC. Default is undefined | Number      |
 
 #### IndexParams
 
-| Parameter   | Description      | Type   | Required |
-| ----------- | ---------------- | ------ | -------- |
-| index_type  | Index type       | String | True     |
-| metric_type | Metric type      | String | True     |
-| params      | Index parameters | Json   | True     |
+| Parameter   | Description      | Type   |
+| ----------- | ---------------- | ------ |
+| index_type  | Index type       | String |
+| metric_type | Metric type      | String |
+| params      | Index parameters | Json   |
 
 ## Example
 

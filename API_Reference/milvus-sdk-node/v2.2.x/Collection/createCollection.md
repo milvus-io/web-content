@@ -14,22 +14,22 @@ new milvusClient(MILUVS_ADDRESS).collectionManager.createCollection(
 
 ### CreateCollectionReq(object)
 
-| Parameter       | Description                                                                            | Type   | Required |
-| --------------- | -------------------------------------------------------------------------------------- | ------ | -------- |
-| collection_name | Name of the collection to create                                                       | String | True     |
-| fields          | Schema of the collection to create                                                     | Field  | True     |
-| timeout         | An optional duration of time in millisecond to allow for the RPC. Default is undefined | Number | False    |
+| Parameter       | Description                                                                            | Type   |
+| --------------- | -------------------------------------------------------------------------------------- | ------ |
+| collection_name | Name of the collection to create                                                       | String |
+| fields          | Schema of the collection to create                                                     | Field  |
+| timeout?        | An optional duration of time in millisecond to allow for the RPC. Default is undefined | Number |
 
 ### Fields(object)
 
-| Parameter      | Description                                                             | Type     | Required |
-| -------------- | ----------------------------------------------------------------------- | -------- | -------- |
-| name           | Field name                                                              | String   | True     |
-| description    | Field description                                                       | String   | True     |
-| data_type      | Data type of the field (see the table below)                            | DataType | True     |
-| type_params    | Vector field parameters                                                 | Object   | False    |
-| autoID         | Boolean value to indicate whether the IDs are automatically generated   | Bool     | False    |
-| is_primary_key | Boolean value to indicate whether this field is used as the primary key | Bool     | False    |
+| Parameter       | Description                                                             | Type     |
+| --------------- | ----------------------------------------------------------------------- | 
+| name            | Field name                                                              | String   |
+| description     | Field description                                                       | String   |
+| data_type       | Data type of the field (see the table below)                            | DataType |
+| type_params?    | Vector field parameters                                                 | Object   |
+| autoID?         | Boolean value to indicate whether the IDs are automatically generated   | Bool     |
+| is_primary_key? | Boolean value to indicate whether this field is used as the primary key | Bool     |
 
 #### DataType
 

@@ -14,11 +14,11 @@ new milvusClient(MILUVS_ADDRESS).partitionManager.dropPartition(
 
 ### DropPartitionReq
 
-| Parameter       | Description                                                                            | Type   | Required |
-| --------------- | -------------------------------------------------------------------------------------- | ------ | -------- |
-| collection_name | Name of the collection in which to drop the partition                                  | String | True     |
-| partition_name  | Name of the partition to drop                                                          | String | True     |
-| timeout         | An optional duration of time in millisecond to allow for the RPC. Default is undefined | Number | False    |
+| Parameter       | Description                                                                            | Type   |
+| --------------- | -------------------------------------------------------------------------------------- | ------ |
+| collection_name | Name of the collection in which to drop the partition                                  | String |
+| partition_name  | Name of the partition to drop                                                          | String |
+| timeout?        | An optional duration of time in millisecond to allow for the RPC. Default is undefined | Number |
 
 ## Example
 

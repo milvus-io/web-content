@@ -12,10 +12,10 @@ new milvusClient(MILUVS_ADDRESS).dataManager.flushSync(FlushReq);
 
 ### FlushReq
 
-| Parameter        | Description                                                                            | type     | required |
-| ---------------- | -------------------------------------------------------------------------------------- | -------- | -------- |
-| collection_names | An array of the names of the collections to flush                                      | String[] | True     |
-| timeout          | An optional duration of time in millisecond to allow for the RPC. Default is undefined | Number   | False    |
+| Parameter        | Description                                                                            | type     |
+| ---------------- | -------------------------------------------------------------------------------------- | -------- |
+| collection_names | An array of the names of the collections to flush                                      | String[] |
+| timeout?         | An optional duration of time in millisecond to allow for the RPC. Default is undefined | Number   |
 
 ## Example
 

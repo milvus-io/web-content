@@ -12,12 +12,12 @@ new milvusClient(MILUVS_ADDRESS).indexManager.dropIndex(DropIndexReq);
 
 ### DropIndexReq
 
-| Parameter       | Description                                                                            | Type   | Required |
-| --------------- | -------------------------------------------------------------------------------------- | ------ | -------- |
-| collection_name | Collection name                                                                        | String | True     |
-| field_name      | Field name                                                                             | String | True     |
-| index_name      | Index name                                                                             | String | False    |
-| timeout         | An optional duration of time in millisecond to allow for the RPC. Default is undefined | Number | False    |
+| Parameter       | Description                                                                            | Type   |
+| --------------- | -------------------------------------------------------------------------------------- | ------ |
+| collection_name | Collection name                                                                        | String |
+| field_name      | Field name                                                                             | String |
+| index_name?     | Index name                                                                             | String |
+| timeout?        | An optional duration of time in millisecond to allow for the RPC. Default is undefined | Number |
 
 ## Example
 

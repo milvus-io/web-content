@@ -12,12 +12,12 @@ new milvusClient(MILUVS_ADDRESS).dataManager.deleteEntities(DeleteEntitiesReq);
 
 ### DeleteEntitiesReq
 
-| Parameter                | Description                                                                            | Type   | Required |
-| ------------------------ | -------------------------------------------------------------------------------------- | ------ | -------- |
-| collection_name          | Name of the collection to delete entities from                                         | String | True     |
-| expr                     | Boolean expression used for attibute filtering                                         | String | True     |
-| partition_name(optional) | Name of the partition to deleted entities from                                         | String | False    |
-| timeout                  | An optional duration of time in millisecond to allow for the RPC. Default is undefined | Number | False    |
+| Parameter       | Description                                                                            | Type   |
+| --------------- | -------------------------------------------------------------------------------------- | ------ |
+| collection_name | Name of the collection to delete entities from                                         | String |
+| expr            | Boolean expression used for attibute filtering                                         | String |
+| partition_name? | Name of the partition to deleted entities from                                         | String |
+| timeout?        | An optional duration of time in millisecond to allow for the RPC. Default is undefined | Number |
 
 ## Example
 

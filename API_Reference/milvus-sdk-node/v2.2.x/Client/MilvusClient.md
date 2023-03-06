@@ -10,12 +10,12 @@ const milvusClient = new MilvusClient(MILUVS_ADDRESS);
 
 # Parameter
 
-| Parameter | Description                       |Type    | Required | Example             | 
-| --------- | --------------------------------- |------- | -------- | ------------------- |
-| address   | The Milvus IP address             |String  | True     | '192.168.0.1:19530' |
-| ssl       | SSL connection. It is false by default. |Boolean | False    | false               |
-| username  | The username used to connect to Milvus                 |String  | False    | milvus              |
-| address   | The password used to connect to Milvus                  |String  | False    | milvus              | 
+| Parameter | Description                             | Type    | Example             |
+| --------- | --------------------------------------- | ------- | ------------------- |
+| address   | The Milvus IP address                   | String  | '192.168.0.1:19530' |
+| ssl?      | SSL connection. It is false by default. | Boolean | false               |
+| username? | The username used to connect to Milvus  | String  | milvus              |
+| address?  | The password used to connect to Milvus  | String  | milvus              |
 
 # Example
 

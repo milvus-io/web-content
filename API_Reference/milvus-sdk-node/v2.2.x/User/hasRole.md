@@ -1,30 +1,28 @@
-# listUsers()
+# hasRole()
 
-This method lists all users in Milvus.
+This method checks if the role is existing.
 
 ## Invocation
 
 ```javascript
-new milvusClient(MILUVS_ADDRESS).userManager.listUsers();
+new milvusClient(MILUVS_ADDRESS).userManager.hasRole(HasRoleReq);
 ```
 
 ## Parameters
 
+### HasRoleReq
+
 | Parameter | Description                                                                            | Type   |
 | --------- | -------------------------------------------------------------------------------------- | ------ |
+| roleName  | The role name                                                                          | String |
 | timeout?  | An optional duration of time in millisecond to allow for the RPC. Default is undefined | Number |
 
 ## Example
 
 ```javascript
-new milvusClient(MILUVS_ADDRESS).userManager.listUsers();
+new milvusClient(MILUVS_ADDRESS).userManager.hasRole({
+  roleName: "my-role",
+});
 ```
 
 ## Return
-
-```javascript
-{
-  status: { error_code: 'Success', reason: '' },
-  usernames: [ 'root','milvus' ],
-}
-```

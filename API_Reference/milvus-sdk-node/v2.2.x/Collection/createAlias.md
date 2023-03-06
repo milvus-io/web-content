@@ -12,11 +12,11 @@ new milvusClient(MILUVS_ADDRESS).collectionManager.createAlias(CreateAliasReq);
 
 ### CreateAliasReq(object)
 
-| Parameter       | Description                                                                            | Type   | Required |
-| --------------- | -------------------------------------------------------------------------------------- | ------ | -------- |
-| collection_name | Target collection name                                                                 | String | True     |
-| Alias           | Alias name                                                                             | String | True     |
-| timeout         | An optional duration of time in millisecond to allow for the RPC. Default is undefined | Number | False    |
+| Parameter       | Description                                                                            | Type   |
+| --------------- | -------------------------------------------------------------------------------------- | ------ |
+| collection_name | Target collection name                                                                 | String |
+| Alias           | Alias name                                                                             | String |
+| timeout?        | An optional duration of time in millisecond to allow for the RPC. Default is undefined | Number |
 
 ## Example
 
