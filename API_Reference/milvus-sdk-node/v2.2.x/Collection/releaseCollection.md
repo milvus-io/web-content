@@ -2,15 +2,11 @@
 
 This method releases the specified collection from memory.
 
-## Invocation
-
 ```javascript
 new milvusClient(MILUVS_ADDRESS).collectionManager.releaseCollection(
   ReleaseCollectionReq
 );
 ```
-
-## Parameters
 
 ### ReleaseCollectionReq
 

@@ -2,15 +2,11 @@
 
 This method loads the specified collection to memory (for search or query) synchronously and ensures that this collection is loaded.
 
-## Invocation
-
 ```javascript
 new milvusClient(MILUVS_ADDRESS).collectionManager.loadCollectionSync(
   LoadCollectionReq
 );
 ```
-
-## Parameters
 
 ### LoadCollectionReq
 

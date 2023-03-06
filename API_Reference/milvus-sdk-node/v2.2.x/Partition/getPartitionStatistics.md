@@ -2,15 +2,11 @@
 
 This method checks the statistics of a specified partition.
 
-## Invocation
-
 ```javascript
 new milvusClient(MILUVS_ADDRESS).partitionManager.getPartitionStatistics(
   GetPartitionStatisticsReq
 );
 ```
-
-## Parameters
 
 ### GetPartitionStatisticsReq
 

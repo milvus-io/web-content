@@ -2,15 +2,11 @@
 
 This method drops a partition and all data within this partition. Note that the `_default` partition cannot be dropped.
 
-## Invocation
-
 ```javascript
 new milvusClient(MILUVS_ADDRESS).partitionManager.dropPartition(
   DropPartitionReq
 );
 ```
-
-## Parameters
 
 ### DropPartitionReq
 

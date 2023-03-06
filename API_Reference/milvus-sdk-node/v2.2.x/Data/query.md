@@ -2,13 +2,9 @@
 
 This method conducts a vector query.
 
-## Invocation
-
 ```javascript
 new milvusClient(MILUVS_ADDRESS).dataManager.query(QueryReq);
 ```
-
-## Parameters
 
 ### QueryReq
 

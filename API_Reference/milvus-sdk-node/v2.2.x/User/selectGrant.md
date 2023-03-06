@@ -2,13 +2,9 @@
 
 This method recieve a grant information from milvus.
 
-## Invocation
-
 ```javascript
 new milvusClient(MILUVS_ADDRESS).userManager.selectGrant(SelectGrantReq);
 ```
-
-## Parameters
 
 ### SelectGrantReq
 

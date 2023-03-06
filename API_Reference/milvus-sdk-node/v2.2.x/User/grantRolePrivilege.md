@@ -2,15 +2,11 @@
 
 This method grants privileges to a role.
 
-## Invocation
-
 ```javascript
 new milvusClient(MILUVS_ADDRESS).userManager.grantRolePrivilege(
   GrantRolePrivilegeReq
 );
 ```
-
-## Parameters
 
 ### GrantRolePrivilegeReq
 

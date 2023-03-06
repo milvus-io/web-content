@@ -2,15 +2,9 @@
 
 This method create a user role in Milvus.
 
-## Invocation
-
 ```javascript
-new milvusClient(MILUVS_ADDRESS).userManager.createRole({
-  roleName: your_role_nname,
-});
+new milvusClient(MILUVS_ADDRESS).userManager.createRole(CreateRoleReq);
 ```
-
-## Parameters
 
 ### CreateRoleReq
 

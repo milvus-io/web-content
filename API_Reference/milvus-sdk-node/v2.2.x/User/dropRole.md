@@ -2,13 +2,9 @@
 
 This method drops a user role in Milvus.
 
-## Invocation
-
 ```javascript
 new milvusClient(MILUVS_ADDRESS).userManager.dropRole(DropUserReq);
 ```
-
-## Parameters
 
 ### DropUserReq
 

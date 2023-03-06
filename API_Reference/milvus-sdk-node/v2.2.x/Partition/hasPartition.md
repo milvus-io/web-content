@@ -2,13 +2,9 @@
 
 This method verifies if a partition exists in the specified collection.
 
-## Invocation
-
 ```javascript
 new milvusClient(MILUVS_ADDRESS).partitionManager.hasPartition(HasPartitionReq);
 ```
-
-## Parameters
 
 ### HasPartitionReq
 

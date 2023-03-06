@@ -2,13 +2,11 @@
 
 This method iterate throught all roles, then revoke all granted privileges, then drop all roles.
 
-## Invocation
-
 ```javascript
 new milvusClient(MILUVS_ADDRESS).userManager.dropAllRoles();
 ```
 
-## Parameters
+### Parameters
 
 | Parameter | Description                                                                            | Type   |
 | --------- | -------------------------------------------------------------------------------------- | ------ |

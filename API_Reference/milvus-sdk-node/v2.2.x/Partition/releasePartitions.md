@@ -2,15 +2,11 @@
 
 This method releases the specified partition from memory.
 
-## Invocation
-
 ```javascript
 new milvusClient(MILUVS_ADDRESS).partitionManager.releasePartitions(
   ReleasePartitionsReq
 );
 ```
-
-## Parameters
 
 ### ReleasePartitionsReq
 

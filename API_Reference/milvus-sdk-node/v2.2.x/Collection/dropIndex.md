@@ -2,13 +2,10 @@
 
 This method drops the index and its corresponding index file in the collection.
 
-## Invocation
-
 ```javascript
 new milvusClient(MILUVS_ADDRESS).indexManager.dropIndex(DropIndexReq);
 ```
 
-## Parameter
 
 ### DropIndexReq
 

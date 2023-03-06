@@ -2,8 +2,6 @@
 
 This method check if Milvus is healthy at the moment.
 
-# Invocation
-
 ```javascript
 new milvusClient(MILUVS_ADDRESS).checkHealth();
 ```

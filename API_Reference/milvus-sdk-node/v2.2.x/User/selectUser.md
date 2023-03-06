@@ -2,13 +2,9 @@
 
 This method gets all roles that belong to a specified user.
 
-## Invocation
-
 ```javascript
 new milvusClient(MILUVS_ADDRESS).userManager.selectUser(SelectUserReq);
 ```
-
-## Parameters
 
 ### SelectUserReq
 

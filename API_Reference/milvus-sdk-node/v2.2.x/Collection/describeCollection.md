@@ -2,15 +2,11 @@
 
 This method checks the details of a collection, including collection name, schema, and more.
 
-## Invocation
-
 ```javascript
 new milvusClient(MILVUS_ADDRESS).collectionManager.describeCollection(
   DescribeCollectionReq
 );
 ```
-
-## Parameters
 
 ### DescribeCollectionReq
 

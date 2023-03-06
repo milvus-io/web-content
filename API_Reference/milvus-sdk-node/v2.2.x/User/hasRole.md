@@ -2,13 +2,9 @@
 
 This method checks if the role is existing.
 
-## Invocation
-
 ```javascript
 new milvusClient(MILUVS_ADDRESS).userManager.hasRole(HasRoleReq);
 ```
-
-## Parameters
 
 ### HasRoleReq
 

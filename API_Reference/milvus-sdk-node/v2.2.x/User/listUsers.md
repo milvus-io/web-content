@@ -2,13 +2,11 @@
 
 This method lists all users in Milvus.
 
-## Invocation
-
 ```javascript
 new milvusClient(MILUVS_ADDRESS).userManager.listUsers();
 ```
 
-## Parameters
+### Parameters
 
 | Parameter | Description                                                                            | Type   |
 | --------- | -------------------------------------------------------------------------------------- | ------ |

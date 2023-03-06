@@ -2,15 +2,11 @@
 
 This method checks the progress of index building and shows the total number of rows and the number of index rows. (Deprecated since 2.2.0)
 
-## Invocation
-
 ```javascript
 new milvusClient(MILUVS_ADDRESS).indexManager.getIndexBuildProgress(
   GetIndexBuildProgressReq
 );
 ```
-
-## Parameters
 
 ### GetIndexBuildProgressReq
 

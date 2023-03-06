@@ -2,16 +2,14 @@
 
 This method lists all roles in Milvus.
 
-## Invocation
-
 ```javascript
-new milvusClient(MILUVS_ADDRESS).userManager.listRoles();
+new milvusClient(MILUVS_ADDRESS).userManager.listRoles(ListGrantsReq);
 ```
 
-## Parameters
+### ListGrantsReq
 
-| Parameter | Description                                                                            | Type   |  
-| --------- | -------------------------------------------------------------------------------------- | ------ | 
+| Parameter | Description                                                                            | Type   |
+| --------- | -------------------------------------------------------------------------------------- | ------ |
 | timeout?  | An optional duration of time in millisecond to allow for the RPC. Default is undefined | Number |
 
 ## Example

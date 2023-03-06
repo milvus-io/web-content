@@ -2,13 +2,9 @@
 
 This method creates a user in Milvus.
 
-## Invocation
-
 ```javascript
 new milvusClient(MILUVS_ADDRESS).userManager.createUser(CreateUserReq);
 ```
-
-## Parameters
 
 ### CreateUserReq
 

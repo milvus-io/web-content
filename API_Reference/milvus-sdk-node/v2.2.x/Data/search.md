@@ -2,13 +2,9 @@
 
 This method conducts a vector similarity search.
 
-## Invocation
-
 ```javascript
 new milvusClient(MILUVS_ADDRESS).dataManager.search(SearchReq);
 ```
-
-## Parameters
 
 ### SearchReq(object)
 

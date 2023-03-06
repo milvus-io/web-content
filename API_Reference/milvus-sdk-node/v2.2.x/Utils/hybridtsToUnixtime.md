@@ -1,23 +1,28 @@
 # hybridtsToUnixtime()
+
 This method converts a hybrid timestamp to UNIX Epoch time despite the timing logic.
 
-## Invocation 
+## Invocation
+
 ```javascript
 hybridtsToUnixtime(unixTime);
 ```
 
-## Parameter
-| Parameter | Description                                                                                              | Type   |  
-| --------- | -------------------------------------------------------------------------------------------------------- | ------ | 
-| unixTime  | Unix Epoch time, the number of seconds that have elapsed since January 1, 1970 (midnight UTC/GMT). | String | 
+### Parameters
+
+| Parameter | Description                                                                                        | Type   |
+| --------- | -------------------------------------------------------------------------------------------------- | ------ |
+| unixTime  | Unix Epoch time, the number of seconds that have elapsed since January 1, 1970 (midnight UTC/GMT). | String |
 
 ## Example
+
 ```javascript
 hybridtsToUnixtime("429642767925248000");
 ```
 
 ## Return
+
 ```javascript
 // The UNIX Epoch time
-1638957092
+1638957092;
 ```

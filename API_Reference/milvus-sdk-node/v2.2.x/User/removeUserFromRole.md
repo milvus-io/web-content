@@ -2,15 +2,11 @@
 
 This method remove a user from role in Milvus.
 
-## Invocation
-
 ```javascript
 new milvusClient(MILUVS_ADDRESS).userManager.removeUserFromRole(
   RemoveUserFromRoleReq
 );
 ```
-
-## Parameters
 
 ### RemoveUserFromRoleReq
 

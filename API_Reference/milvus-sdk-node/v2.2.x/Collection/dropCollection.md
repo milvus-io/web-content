@@ -2,15 +2,11 @@
 
 This method drops a collection and all data within this specified collection.
 
-## Invocation
-
 ```javascript
 new milvusClient(MILUVS_ADDRESS).collectionManager.dropCollection(
   DropCollectionReq
 );
 ```
-
-## Parameters
 
 ### DropCollectionReq
 

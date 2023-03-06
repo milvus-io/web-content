@@ -2,13 +2,9 @@
 
 This method returns replica information.
 
-## Invocation
-
 ```javascript
 new milvusClient(MILUVS_ADDRESS).indexManager.getReplicas(GetReplicaReq);
 ```
-
-## Parameter
 
 ### GetIndexStateReq
 

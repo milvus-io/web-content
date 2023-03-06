@@ -2,13 +2,9 @@
 
 This method change alias target to another collection.
 
-## Invocation
-
 ```javascript
 new milvusClient(MILUVS_ADDRESS).collectionManager.alterAlias(AlterAliasReq);
 ```
-
-## Parameters
 
 ### AlterAliasReq(object)
 

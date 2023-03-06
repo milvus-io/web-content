@@ -2,13 +2,9 @@
 
 This method update user info in Milvus.
 
-## Invocation
-
 ```javascript
 new milvusClient(MILUVS_ADDRESS).userManager.createUser(UpdateUserReq);
 ```
-
-## Parameters
 
 ### UpdateUserReq
 

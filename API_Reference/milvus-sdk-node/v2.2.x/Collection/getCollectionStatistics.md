@@ -2,15 +2,11 @@
 
 This method checks the row count of a specified collection.
 
-## Invocation
-
 ```javascript
 new milvusClient(MILUVS_ADDRESS).collectionManager.getCollectionStatistics(
   GetCollectionStatisticsReq
 );
 ```
-
-## Parameters
 
 ### GetCollectionStatisticsReq
 

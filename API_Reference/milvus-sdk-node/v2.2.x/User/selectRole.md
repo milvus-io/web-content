@@ -2,13 +2,9 @@
 
 This method recieve a role information from milvus.
 
-## Invocation
-
 ```javascript
 new milvusClient(MILUVS_ADDRESS).userManager.selectRole(SelectRoleReq);
 ```
-
-## Parameters
 
 ### SelectRoleReq
 

@@ -2,8 +2,6 @@
 
 This is a class to initialize a Milvus client instance. Once connected to the Milvus instance, you can perform operations from this client.
 
-# Invocation
-
 ```javascript
 const milvusClient = new MilvusClient(MILUVS_ADDRESS);
 ```

@@ -2,15 +2,11 @@
 
 This method revokes privileges to a role.
 
-## Invocation
-
 ```javascript
 new milvusClient(MILUVS_ADDRESS).userManager.RevokeRolePrivilegeReq(
   revokeRolePrivilegeReq
 );
 ```
-
-## Parameters
 
 ### RevokeRolePrivilegeReq
 

@@ -2,15 +2,11 @@
 
 This method creates a collection with the specified schema.
 
-## Invocation
-
 ```javascript
 new milvusClient(MILUVS_ADDRESS).collectionManager.createCollection(
   CreateCollectionReq
 );
 ```
-
-## Parameters
 
 ### CreateCollectionReq(object)
 
@@ -23,7 +19,7 @@ new milvusClient(MILUVS_ADDRESS).collectionManager.createCollection(
 ### Fields(object)
 
 | Parameter       | Description                                                             | Type     |
-| --------------- | ----------------------------------------------------------------------- | 
+| --------------- | ----------------------------------------------------------------------- | -------- |
 | name            | Field name                                                              | String   |
 | description     | Field description                                                       | String   |
 | data_type       | Data type of the field (see the table below)                            | DataType |

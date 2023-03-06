@@ -2,13 +2,9 @@
 
 This method inserts data into a specified collection.
 
-## Invocation
-
 ```javascript
 new milvusClient(MILUVS_ADDRESS).dataManager.insert(InsertReq);
 ```
-
-## Parameters
 
 ### InsertReq
 

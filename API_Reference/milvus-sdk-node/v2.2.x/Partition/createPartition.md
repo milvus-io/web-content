@@ -2,15 +2,11 @@
 
 This method creates a partition in a specified collection.
 
-## Invocation
-
 ```javascript
 new milvusClient(MILUVS_ADDRESS).partitionManager.createPartition(
   CreatePartitionReq
 );
 ```
-
-## Parameters
 
 ### CreatePartitionReq
 

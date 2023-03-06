@@ -2,19 +2,15 @@
 
 This method deletes a user in Milvus.
 
-## Invocation
-
 ```javascript
 new milvusClient(MILUVS_ADDRESS).userManager.deleteUser(DeleteUserReq);
 ```
 
-## Parameters
-
 ### DeleteUserReq
 
-| Parameter | Description                                                                            | Type   |  
-| --------- | -------------------------------------------------------------------------------------- | ------ | 
-| username  | The existing username in Milvus to delete                                              | String | 
+| Parameter | Description                                                                            | Type   |
+| --------- | -------------------------------------------------------------------------------------- | ------ |
+| username  | The existing username in Milvus to delete                                              | String |
 | timeout?  | An optional duration of time in millisecond to allow for the RPC. Default is undefined | Number |
 
 ## Example

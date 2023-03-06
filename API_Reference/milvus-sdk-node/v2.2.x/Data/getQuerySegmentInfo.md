@@ -2,15 +2,11 @@
 
 This method checks the information of the segments in the query nodes via proxy.
 
-## Invocation
-
 ```javascript
 new milvusClient(MILUVS_ADDRESS).dataManager.getQuerySegmentInfo(
   getQuerySegmentInfoReq
 );
 ```
-
-## Parameters
 
 ### getQuerySegmentInfoReq
 

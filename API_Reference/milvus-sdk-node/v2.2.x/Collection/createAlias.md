@@ -2,13 +2,9 @@
 
 This method creates a alias for a collection.
 
-## Invocation
-
 ```javascript
 new milvusClient(MILUVS_ADDRESS).collectionManager.createAlias(CreateAliasReq);
 ```
-
-## Parameters
 
 ### CreateAliasReq(object)
 

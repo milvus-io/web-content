@@ -2,13 +2,11 @@
 
 This method lists all roles in Milvus.
 
-## Invocation
-
 ```javascript
 new milvusClient(MILUVS_ADDRESS).userManager.listGrants();
 ```
 
-## Parameters
+### Parameters
 
 | Parameter | Description                                                                            | Type   |
 | --------- | -------------------------------------------------------------------------------------- | ------ |

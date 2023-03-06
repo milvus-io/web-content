@@ -2,13 +2,9 @@
 
 This method checks the status of data flush by segment IDs.
 
-## Invocation
-
 ```javascript
 new milvusClient(MILUVS_ADDRESS).dataManager.getFlushState(GetFlushStateReq);
 ```
-
-## Parameters
 
 ### GetFlushStateReq
 

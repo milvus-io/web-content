@@ -2,13 +2,9 @@
 
 This method deletes entities from a specified collection.
 
-## Invocation
-
 ```javascript
 new milvusClient(MILUVS_ADDRESS).dataManager.deleteEntities(DeleteEntitiesReq);
 ```
-
-## Parameters
 
 ### DeleteEntitiesReq
 

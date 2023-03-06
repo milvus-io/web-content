@@ -2,13 +2,9 @@
 
 This method checks if the index building is completed or not.(Deprecated since 2.2.0)
 
-## Invocation
-
 ```javascript
 new milvusClient(MILUVS_ADDRESS).indexManager.getIndexState(GetIndexStateReq);
 ```
-
-## Parameter
 
 ### GetIndexStateReq
 

@@ -2,13 +2,9 @@
 
 This method remove alias for a collection.
 
-## Invocation
-
 ```javascript
 new milvusClient(MILUVS_ADDRESS).collectionManager.dropAlias(DropAliasReq);
 ```
-
-## Parameters
 
 ### DropAliasReq(object)
 

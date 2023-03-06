@@ -2,21 +2,17 @@
 
 List all collections or get collection loading status.
 
-## Invocation
-
 ```javascript
 new milvusClient(MILUVS_ADDRESS).collectionManager.showCollections(
   ShowCollectionsReq
 );
 ```
 
-## Parameter
-
 ### ShowCollectionsReq
 
 | Parameter       | Description                                                                            | type                |
 | --------------- | -------------------------------------------------------------------------------------- | ------------------- |
-| collection_name | Name of the collections to check for their loading status                              | String[]        |
+| collection_name | Name of the collections to check for their loading status                              | String[]            |
 | type            | ShowCollectionsType                                                                    | ShowCollectionsType |
 | timeout?        | An optional duration of time in millisecond to allow for the RPC. Default is undefined | Number              |
 

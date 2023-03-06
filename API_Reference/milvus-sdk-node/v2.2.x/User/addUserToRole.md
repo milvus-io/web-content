@@ -2,13 +2,9 @@
 
 This method add a user to role in Milvus.
 
-## Invocation
-
 ```javascript
 new milvusClient(MILUVS_ADDRESS).userManager.addUserToRole(AddUserToRoleReq);
 ```
-
-## Parameters
 
 ### AddUserToRoleReq
 

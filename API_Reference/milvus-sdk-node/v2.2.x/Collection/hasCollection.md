@@ -2,15 +2,11 @@
 
 This method checks if a specified collection exists.
 
-## Invocation
-
 ```javascript
 new milvusClient(MILUVS_ADDRESS).collectionManager.hasCollection(
   HasCollectionReq
 );
 ```
-
-## Parameters
 
 ### HasCollectionReq
 

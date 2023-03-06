@@ -2,15 +2,11 @@
 
 This method lists all the partitions in a specified collection.
 
-## Invocation
-
 ```javascript
 new milvusClient(MILUVS_ADDRESS).partitionManager.showPartitions(
   ShowPartitionsReq
 );
 ```
-
-## Parameters
 
 ### ShowPartitionsReq
 
