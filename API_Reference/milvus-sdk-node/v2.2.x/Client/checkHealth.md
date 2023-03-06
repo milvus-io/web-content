@@ -1,6 +1,6 @@
 # checkHealth()
 
-This method check if Milvus is healthy at the moment.
+This method verifies the current status of Milvus to ensure its optimal functioning.
 
 ```javascript
 new milvusClient(MILUVS_ADDRESS).checkHealth();

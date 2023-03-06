@@ -1,6 +1,6 @@
 # loadCollection()
 
-This method loads the specified collection to memory (for search or query).
+By utilizing this method, you can load a specified collection into memory, which enables you to perform searches or queries on the data contained within it.
 
 ```javascript
 new milvusClient(MILUVS_ADDRESS).collectionManager.loadCollection(

@@ -1,6 +1,6 @@
 # loadCollectionSync()
 
-This method loads the specified collection to memory (for search or query) synchronously and ensures that this collection is loaded.
+This method allows you to load a specified collection into memory synchronously, ensuring that the collection is successfully loaded and available for search or query operations.
 
 ```javascript
 new milvusClient(MILUVS_ADDRESS).collectionManager.loadCollectionSync(

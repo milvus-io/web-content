@@ -1,6 +1,6 @@
 # alterAlias()
 
-This method change alias target to another collection.
+Using this method, you can change the target collection of a pre-existing alias to another collection.
 
 ```javascript
 new milvusClient(MILUVS_ADDRESS).collectionManager.alterAlias(AlterAliasReq);

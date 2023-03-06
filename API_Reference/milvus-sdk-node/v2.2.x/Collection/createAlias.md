@@ -1,6 +1,6 @@
 # createAlias()
 
-This method creates a alias for a collection.
+By creating a collection alias, you can simplify the process of vector search by using the alias instead of the actual collection name.
 
 ```javascript
 new milvusClient(MILUVS_ADDRESS).collectionManager.createAlias(CreateAliasReq);

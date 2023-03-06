@@ -1,6 +1,6 @@
 # createCollection()
 
-This method creates a collection with the specified schema.
+With this method, you can create a new collection with a defined schema based on your specified requirements.
 
 ```javascript
 new milvusClient(MILUVS_ADDRESS).collectionManager.createCollection(

@@ -1,6 +1,6 @@
 # getCollectionStatistics()
 
-This method checks the row count of a specified collection.
+With this method, you can check the number of entities that exist within a specified collection.
 
 ```javascript
 new milvusClient(MILUVS_ADDRESS).collectionManager.getCollectionStatistics(

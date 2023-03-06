@@ -1,6 +1,6 @@
 # dropAlias()
 
-This method remove alias for a collection.
+Using this method, you can remove the alias associated with a specific collection.
 
 ```javascript
 new milvusClient(MILUVS_ADDRESS).collectionManager.dropAlias(DropAliasReq);

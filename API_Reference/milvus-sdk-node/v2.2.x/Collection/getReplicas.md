@@ -1,6 +1,6 @@
 # getReplicas()
 
-This method returnss replica information.
+This method returns replica information.
 
 ```javascript
 new milvusClient(MILUVS_ADDRESS).collectionManager.getReplicas(GetReplicaReq);

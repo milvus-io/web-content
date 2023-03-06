@@ -1,6 +1,6 @@
 # MilvusClient()
 
-This is a class to initialize a Milvus client instance. Once connected to the Milvus instance, you can perform operations from this client.
+This class serves as an initializer for a Milvus client instance. Upon successful connection to the Milvus instance, the client can execute various operations.
 
 ```javascript
 const milvusClient = new MilvusClient(MILUVS_ADDRESS);
@@ -32,5 +32,10 @@ const milvusClient = new MilvusClient(MILUVS_ADDRESS);
 import { MilvusClient } from "@zilliz/milvus2-sdk-node";
 
 const milvusAddress = `192.168.0.1:19530`;
-const milvusClient = new MilvusClient(MILUVS_ADDRESS, false, "user", "password");
+const milvusClient = new MilvusClient(
+  MILUVS_ADDRESS,
+  false,
+  "user",
+  "password"
+);
 ```

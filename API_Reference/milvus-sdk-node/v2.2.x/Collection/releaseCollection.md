@@ -1,6 +1,6 @@
 # releaseCollection()
 
-This method releases the specified collection from memory.
+With this method, you can release a specified collection from memory, freeing up resources and potentially improving system performance.
 
 ```javascript
 new milvusClient(MILUVS_ADDRESS).collectionManager.releaseCollection(
