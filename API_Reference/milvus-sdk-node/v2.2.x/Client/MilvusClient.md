@@ -17,16 +17,20 @@ const milvusClient = new MilvusClient(MILUVS_ADDRESS);
 
 ### Example
 
+### Connect without password
+
 ```javascript
 import { MilvusClient } from "@zilliz/milvus2-sdk-node";
 
 const milvusAddress = `192.168.0.1:19530`;
-const milvusClient = new MilvusClien(MILUVS_ADDRESS);
-// if you have a user, username and password both is milvus, you can
-const milvusClient2 = new MilvusClien(
-  MILUVS_ADDRESS,
-  false,
-  "milvus",
-  "milvus"
-);
+const milvusClient = new MilvusClient(MILUVS_ADDRESS);
+```
+
+### Connect with password
+
+```javascript
+import { MilvusClient } from "@zilliz/milvus2-sdk-node";
+
+const milvusAddress = `192.168.0.1:19530`;
+const milvusClient = new MilvusClient(MILUVS_ADDRESS, false, "user", "password");
 ```
