@@ -655,7 +655,7 @@
       "label1": "admin_guide",
       "label2": "",
       "label3": "",
-      "order": 4
+      "order": 5
     },
     {
       "id": "upgrade_milvus_cluster-operator.md",
@@ -679,7 +679,7 @@
       "label1": "admin_guide",
       "label2": "",
       "label3": "",
-      "order": 5,
+      "order": 6,
       "isMenu": true
     },
     {
@@ -728,7 +728,7 @@
       "label1": "admin_guide",
       "label2": "",
       "label3": "",
-      "order": 6,
+      "order": 7,
       "isMenu": true
     },    
     {
@@ -737,7 +737,7 @@
       "label1": "admin_guide",
       "label2": "",
       "label3": "",
-      "order": 7,
+      "order": 8,
       "isMenu": true
     },
     {
