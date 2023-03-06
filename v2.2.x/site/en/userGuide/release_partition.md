@@ -44,10 +44,12 @@ if err != nil {
 ```
 
 ```java
+List<String> partitionNames = new ArrayList<>();
+partitionNames.add("novel");
 milvusClient.releasePartitions(
   ReleasePartitionsParam.newBuilder()
     .withCollectionName("book")
-    .withPartitionNames(["novel"])
+    .withPartitionNames(partitionNames)
     .build()
 );
 ```
