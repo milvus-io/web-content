@@ -23,6 +23,8 @@ new milvusClient(MILUVS_ADDRESS).collectionManager.loadCollection(
 ## Example
 
 ```javascript
+import { MilvusClient } from "@zilliz/milvus2-sdk-node";
+
 new milvusClient(MILUVS_ADDRESS).collectionManager.loadCollection({
   collection_name: "my_collection",
 });

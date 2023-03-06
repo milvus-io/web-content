@@ -22,6 +22,8 @@ new milvusClient(MILUVS_ADDRESS).partitionManager.showPartitions(
 ## Example
 
 ```javascript
+import { MilvusClient } from "@zilliz/milvus2-sdk-node";
+
 new milvusClient(MILUVS_ADDRESS).partitionManager.showPartitions({
   collection_name: "my_collection",
 });

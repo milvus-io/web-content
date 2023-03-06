@@ -20,6 +20,8 @@ new milvusClient(MILUVS_ADDRESS).dataManager.getFlushState(GetFlushStateReq);
 ## Example
 
 ```javascript
+import { MilvusClient } from "@zilliz/milvus2-sdk-node";
+
 new milvusClient(MILUVS_ADDRESS).dataManager.getFlushState({
   segmentIDs: segIds,
 });

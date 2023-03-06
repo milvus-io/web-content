@@ -22,6 +22,8 @@ new milvusClient(MILUVS_ADDRESS).dataManager.deleteEntities(DeleteEntitiesReq);
 ## Example
 
 ```javascript
+import { MilvusClient } from "@zilliz/milvus2-sdk-node";
+
 new milvusClient(MILUVS_ADDRESS).dataManager.deleteEntities({
   collection_name: "my_collection",
   expr: "age in [434848878802251176,444848878802251176]",

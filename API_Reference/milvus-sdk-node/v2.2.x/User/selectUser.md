@@ -21,6 +21,8 @@ new milvusClient(MILUVS_ADDRESS).userManager.selectUser(SelectUserReq);
 ## Example
 
 ```javascript
+import { MilvusClient } from "@zilliz/milvus2-sdk-node";
+
 new milvusClient(MILUVS_ADDRESS).userManager.selectUser({
   username: "my-username",
   includeUserInfo: true,

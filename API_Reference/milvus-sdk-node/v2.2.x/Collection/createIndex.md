@@ -31,6 +31,8 @@ new milvusClient(MILUVS_ADDRESS).indexManager.createIndex(CreateIndexReq);
 ## Example
 
 ```javascript
+import { MilvusClient } from "@zilliz/milvus2-sdk-node";
+
 new milvusClient(MILUVS_ADDRESS).indexManager.createIndex({
   collection_name: "my_collection",
   field_name: "vector_01",

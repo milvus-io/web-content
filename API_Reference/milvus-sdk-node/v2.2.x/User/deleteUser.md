@@ -20,6 +20,8 @@ new milvusClient(MILUVS_ADDRESS).userManager.deleteUser(DeleteUserReq);
 ## Example
 
 ```javascript
+import { MilvusClient } from "@zilliz/milvus2-sdk-node";
+
 new milvusClient(MILUVS_ADDRESS).userManager.deleteUser({
   username: "milvus",
 });

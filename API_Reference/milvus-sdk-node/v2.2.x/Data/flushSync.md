@@ -20,6 +20,8 @@ new milvusClient(MILUVS_ADDRESS).dataManager.flushSync(FlushReq);
 ## Example
 
 ```javascript
+import { MilvusClient } from "@zilliz/milvus2-sdk-node";
+
 new milvusClient(MILUVS_ADDRESS).dataManager.flushSync({
   collection_names: ["my_collection"],
 });

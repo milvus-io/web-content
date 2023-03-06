@@ -25,7 +25,9 @@ new milvusClient(MILUVS_ADDRESS).userManager.RevokeRolePrivilegeReq(
 ## Example
 
 ```javascript
-milvusClient.userManager.revokeRolePrivilege({
+import { MilvusClient } from "@zilliz/milvus2-sdk-node";
+
+new milvusClient(MILVUS_ADDRESS).userManager.revokeRolePrivilege({
   roleName: "roleName",
   object: "*",
   objectName: "Collection",

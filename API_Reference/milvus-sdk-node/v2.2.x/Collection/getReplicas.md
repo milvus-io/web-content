@@ -20,6 +20,8 @@ new milvusClient(MILUVS_ADDRESS).indexManager.getReplicas(GetReplicaReq);
 ## Example
 
 ```javascript
+import { MilvusClient } from "@zilliz/milvus2-sdk-node";
+
 new milvusClient(MILUVS_ADDRESS).indexManager.getReplicas({
   collectionID: 123,
 });

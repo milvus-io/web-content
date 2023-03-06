@@ -23,6 +23,8 @@ new milvusClient(MILUVS_ADDRESS).partitionManager.createPartition(
 ## Example
 
 ```javascript
+import { MilvusClient } from "@zilliz/milvus2-sdk-node";
+
 new milvusClient(MILUVS_ADDRESS).partitionManager.createPartition({
   collection_name: "my_collection",
   partition_name: "my_partition",

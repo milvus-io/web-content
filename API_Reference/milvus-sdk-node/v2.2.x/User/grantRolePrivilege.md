@@ -25,7 +25,9 @@ new milvusClient(MILUVS_ADDRESS).userManager.grantRolePrivilege(
 ## Example
 
 ```javascript
-milvusClient.userManager.grantRolePrivilege({
+import { MilvusClient } from "@zilliz/milvus2-sdk-node";
+
+new milvusClient(MILVUS_ADDRESS).userManager.grantRolePrivilege({
   roleName: "roleName",
   object: "*",
   objectName: "Collection",

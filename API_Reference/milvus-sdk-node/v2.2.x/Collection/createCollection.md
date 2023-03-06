@@ -51,6 +51,8 @@ new milvusClient(MILUVS_ADDRESS).collectionManager.createCollection(
 ## Example
 
 ```javascript
+import { MilvusClient } from "@zilliz/milvus2-sdk-node";
+
 new milvusClient(MILUVS_ADDRESS).collectionManager.createCollection({
   collection_name: "my_collection",
   fields: [

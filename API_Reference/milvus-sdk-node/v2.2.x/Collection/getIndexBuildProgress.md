@@ -24,6 +24,8 @@ new milvusClient(MILUVS_ADDRESS).indexManager.getIndexBuildProgress(
 ## Example
 
 ```javascript
+import { MilvusClient } from "@zilliz/milvus2-sdk-node";
+
 new milvusClient(MILUVS_ADDRESS).indexManager.getIndexBuildProgress({
   collection_name: "my_collection",
 });

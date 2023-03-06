@@ -23,6 +23,8 @@ new milvusClient(MILUVS_ADDRESS).dataManager.query(QueryReq);
 ## Example
 
 ```javascript
+import { MilvusClient } from "@zilliz/milvus2-sdk-node";
+
 new milvusClient(MILUVS_ADDRESS).dataManager.query({
   collection_name: "my_collection",
   expr: "age > 0",

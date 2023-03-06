@@ -23,6 +23,8 @@ new milvusClient(MILUVS_ADDRESS).userManager.removeUserFromRole(
 ## Example
 
 ```javascript
+import { MilvusClient } from "@zilliz/milvus2-sdk-node";
+
 new milvusClient(MILUVS_ADDRESS).userManager.removeUserFromRole({
   username: "my-username",
   roleName: "my-milvus-role-name",

@@ -21,6 +21,8 @@ new milvusClient(MILUVS_ADDRESS).userManager.createUser(CreateUserReq);
 ## Example
 
 ```javascript
+import { MilvusClient } from "@zilliz/milvus2-sdk-node";
+
 new milvusClient(MILUVS_ADDRESS).userManager.createUser({
   username: "milvus",
   password: "milvus",

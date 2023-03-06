@@ -21,6 +21,8 @@ new milvusClient(MILUVS_ADDRESS).collectionManager.createAlias(CreateAliasReq);
 ## Example
 
 ```javascript
+import { MilvusClient } from "@zilliz/milvus2-sdk-node";
+
 new milvusClient(MILUVS_ADDRESS).collectionManager.createAlias({
   collection_name: "my_collection",
   alias: "my_alias",

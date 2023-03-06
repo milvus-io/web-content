@@ -18,6 +18,8 @@ new milvusClient(MILUVS_ADDRESS).userManager.listGrants();
 ## Example
 
 ```javascript
+import { MilvusClient } from "@zilliz/milvus2-sdk-node";
+
 new milvusClient(MILUVS_ADDRESS).userManager.listGrants();
 ```
 

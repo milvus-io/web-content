@@ -60,6 +60,8 @@ Please refer https://milvus.io/docs/index.md
 ## Example
 
 ```javascript
+import { MilvusClient } from "@zilliz/milvus2-sdk-node";
+
 new milvusClient(MILUVS_ADDRESS).dataManager.search({
   collection_name: "my_collection",
   expr: "",

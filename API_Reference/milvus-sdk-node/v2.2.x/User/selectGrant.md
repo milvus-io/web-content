@@ -23,7 +23,9 @@ new milvusClient(MILUVS_ADDRESS).userManager.selectGrant(SelectGrantReq);
 ## Example
 
 ```javascript
-new milvusClient.userManager.selectGrant({
+import { MilvusClient } from "@zilliz/milvus2-sdk-node";
+
+new milvusClient(MILVUS_ADDRESS).userManager.selectGrant({
   roleName: "roleName",
   object: "*",
   objectName: "Collection",

@@ -1,19 +1,18 @@
 # checkHealth()
+
 This method check if Milvus is healthy at the moment.
 
 # Invocation
 
 ```javascript
-milvusClient.checkHealth();
+new milvusClient(MILUVS_ADDRESS).checkHealth();
 ```
-
-# Parameters
-
-None.
 
 # Example
 
 ```javascript
+import { MilvusClient } from "@zilliz/milvus2-sdk-node";
+
 new milvusClient(MILUVS_ADDRESS).checkHealth();
 ```
 
@@ -23,5 +22,4 @@ new milvusClient(MILUVS_ADDRESS).checkHealth();
 {
   isHealth: true,
 }
-
 ```
