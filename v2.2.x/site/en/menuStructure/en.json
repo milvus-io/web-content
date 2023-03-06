@@ -999,6 +999,13 @@
       "order": 3
     },
     {
+      "id": "coordinator_ha.md",
+      "title": "Coordinator HA",
+      "label1": "reference",
+      "label2": "",
+      "order": 3      
+    },
+    {
       "id": "glossary.md",
       "title": "Glossary",
       "label1": "reference",

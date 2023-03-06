@@ -15,9 +15,79 @@ In the 2.2.3 release, Milvus implements high availability for coordinators to ma
 
 The figure above illustrates how coordinators work in the active-standby mode. When a pair of coordinators start, they register with etcd using their server ID and compete for the active role. The coordinator who succeeds in leasing the active role from the etcd will start serving, and the other coordinator in the pair will remain on standby, watching the active role and ready to serve if the active coordinator dies. 
 
-## Observe coordinators' behaviors
+## Enable coordinator HA
 
-To observe coordinators' behaviors, you can 
+### With Helm
+
+To start multiple coordinators and have them work in active-standby mode, you should make the following changes to your `values.yaml` file.
+
+- Set `xxxCoordinator.replicas` to `2`.
+- Set `xxxCoordinator.activeStandby.enabled` to `true`.
+
+The following code snippet uses RootCoord as an example. You can do the same to coordinators of other types.
+
+```yaml
+rootCoordinator:
+  enabled: true
+  # You can set the number of replicas greater than 1 only if you also need to set activeStandby.enabled to true.
+  replicas: 2  # Otherwise, remove this configuration item.
+  resources: {}
+  nodeSelector: {}
+  affinity: {}
+  tolerations: []
+  extraEnv: []
+  heaptrack:
+    enabled: false
+  profiling:
+    enabled: false  # Enable live profiling
+  activeStandby:
+    enabled: true  # Set this to true to have RootCoordinators work in active-standby mode.
+```
+
+### With Docker
+
+To start multiple coordinators and have them work in active-standby mode, you can add some definitions to the `docker-compose` file that you use to start your Milvus cluster.
+
+The following code snippet uses RootCoord as an example. You can do the same to coordinators of other types.
+
+```yaml
+  rootcoord:
+    container_name: milvus-rootcoord
+    image: milvusdb/milvus:v2.2.3
+    command: ["milvus", "run", "rootcoord"]
+    environment:
+      ETCD_ENDPOINTS: etcd:2379
+      MINIO_ADDRESS: minio:9000
+      PULSAR_ADDRESS: pulsar://pulsar:6650
+      ROOT_COORD_ADDRESS: rootcoord:53100
+      # add ROOT_COORD_ENABLE_ACTIVE_STANDBY to enable active standby
+      ROOT_COORD_ENABLE_ACTIVE_STANDBY: true
+    depends_on:
+      - "etcd"
+      - "pulsar"
+      - "minio"
+
+#   add the following to have RootCoords work in active-standby mode
+#   rootcoord-1:
+#    container_name: milvus-rootcoord-1
+#    image: milvusdb/milvus:v2.2.3
+#    command: ["milvus", "run", "rootcoord"]
+#    environment:
+#      ETCD_ENDPOINTS: etcd:2379
+#      MINIO_ADDRESS: minio:9000
+#      PULSAR_ADDRESS: pulsar://pulsar:6650
+#      ROOT_COORD_ADDRESS: rootcoord-1:53100
+#      # add ROOT_COORD_ENABLE_ACTIVE_STANDBY to enable active standby
+#      ROOT_COORD_ENABLE_ACTIVE_STANDBY: true
+#    depends_on:
+#      - "etcd"
+#      - "pulsar"
+#      - "minio"
+```
+
+### With Mac/Linux shell
+
+To start multiple coordinators and have them work in active-standby mode, you can 
 
 1. Download the Milvus source code to your local drive, and [start up a Milvus cluster from the source code](https://github.com/milvus-io/milvus/blob/master/DEVELOPMENT.md) as follows:
 
@@ -84,10 +154,10 @@ To observe coordinators' behaviors, you can
 
 Coordinator HA is disabled by default. You can enable this feature manually by changing the following items in your Milvus configuration file.
 
-- [rootCoord.activeStandby.enabled](configure_rootcoord#rootCoordactiveStandbyenabled)
-- [queryCoord.activeStandby.enabled](configure_querycoord#queryCoordactiveStandbyenabled)
-- [dataCoord.activeStandby.enabled](configure_datacoord#dataCoordactiveStandbyenabled)
-- [indexCoord.activeStandby.enabled](configure_indexcoord#indexCoordativeStandbyenabled)
+- [rootCoord.activeStandby.enabled](configure_rootcoord.md#rootCoordactiveStandbyenabled)
+- [queryCoord.activeStandby.enabled](configure_querycoord.md#queryCoordactiveStandbyenabled)
+- [dataCoord.activeStandby.enabled](configure_datacoord.md#dataCoordactiveStandbyenabled)
+- [indexCoord.activeStandby.enabled](configure_indexcoord.md#indexCoordativeStandbyenabled)
 
 ## Limits
 
