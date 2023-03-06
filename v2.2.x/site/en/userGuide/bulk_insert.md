@@ -79,12 +79,12 @@ You can use either MinIO or the local hard disk for storage in Milvus.
 Using the local hard disk for storage is only available in Milvus Standalone.
 </div>
 
-- To use MinIO for storage, upload data files to the bucket defined by `minio.bucketName` in the `milvus.yml` configuration file .
+- To use MinIO for storage, upload data files to the bucket defined by `minio.bucketName` in the `milvus.yml` configuration file.
 - For local storage, copy the data files into a directory of the local disk.
 
 ### 2. Insert entities
 
-To facilitate data import from files, Milvus offers a bulk-insert API in various flavors. In PyMilvus, you can use the [`do_bulk_insert()`](<https://milvus.io/api-reference/pymilvus/v2.2.2/Utility/do_bulk_insert().md>) method. As to the Java SDK, use the [`bulkInsert`](<https://milvus.io/api-reference/java/v2.2.3/BulkInsert/bulkInsert().md>) method.
+To facilitate data import from files, Milvus offers a bulk-insert API in various flavors. In PyMilvus, you can use the [`do_bulk_insert()`](https://milvus.io/api-reference/pymilvus/v2.2.2/Utility/do_bulk_insert().md) method. As to the Java SDK, use the [`bulkInsert`](https://milvus.io/api-reference/java/v2.2.3/BulkInsert/bulkInsert().md) method.
 
 In this method, you need to set the name of the target collection as **collection_name** and the list of files [prepared in the previous step](#Prepare-the-data-file) as **files**. Optionally, you can specify the name of a specific partition as **partition_name** in the target collection so that Milvus imports the data from the files listed only into this partition.
 
@@ -173,7 +173,7 @@ In this method, you need to set the name of the target collection as **collectio
 
 Since the bulk-insert API is asynchronous, you might need to check whether a data-import task is complete. Milvus provides a **BulkInsertState** object to hold the details of a data-import task and you can use the get-bulk-insert-state API to retrieve this object using the programming language of your choice.
 
-In the flavor of PyMilvus, you can use [`get_bulk_insert_state()`](<https://milvus.io/api-reference/pymilvus/v2.2.2/Utility/get_bulk_insert_state().md>). For Java SDK, use [`getBulkInsertState()`](<https://milvus.io/api-reference/java/v2.2.3/BulkInsert/getBulkInsertState().md>).
+In the flavor of PyMilvus, you can use [`get_bulk_insert_state()`](https://milvus.io/api-reference/pymilvus/v2.2.2/Utility/get_bulk_insert_state().md). For Java SDK, use [`getBulkInsertState()`](https://milvus.io/api-reference/java/v2.2.3/BulkInsert/getBulkInsertState().md).
 
 <div class="multipleCode">
   <a href="#python">Python </a>
