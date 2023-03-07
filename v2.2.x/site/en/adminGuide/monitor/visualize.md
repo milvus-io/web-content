@@ -26,7 +26,7 @@ This tutorial uses Grafana, an open-source platform for time-series analytics, t
 Download and import Milvus dashboard from the JSON file.
 
 ```
-wget https://raw.githubusercontent.com/milvus-io/milvus/2.1.0/deployments/monitor/grafana/milvus-dashboard.json
+wget https://raw.githubusercontent.com/milvus-io/milvus/2.2.0/deployments/monitor/grafana/milvus-dashboard.json
 ```
 
 ![Download_and_import](../../../../assets/import_dashboard.png "Download and import dashboard.")
