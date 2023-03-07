@@ -12,26 +12,22 @@ This report shows the major test results of Milvus 2.2.0. It aims to provide a p
       <div style="flex:0.3;">
       <img src="https://zilliz.com/images/whitepaper/performance.png">
   </div>
-      <div style="flex:1; padding: 10px;">
-
-        We have recently run a benchmark against Milvus 2.2.3 and have the following key findings:
-
-        - A 2.5x reduction in search latency
-        - A 4.5x increase in QPS
-        - Billion-scale similarity search with little performance degradation
-        - Linear scalability when using multiple replicas
-
-        For details, welcome downloading [this whitepaper](https://zilliz.com/whitepaper) and [related benchmark test code](https://github.com/zilliztech/vectordb-benchmark). 
-        
-        Looking forward to hearing from you about your thoughts and suggestions.
-
+      <div style="flex:1; padding: 10px; ">
+        <p>We have recently run a benchmark against Milvus 2.2.3 and have the following key findings:</p>
+        <ul>
+          <li>A 2.5x reduction in search latency</li>
+          <li>A 4.5x increase in QPS</li>
+          <li>Billion-scale similarity search with little performance degradation</li>
+          <li>Linear scalability when using multiple replicas</li>
+        </ul>
+        <p>For details, welcome referring to <a href="https://zilliz.com/whitepaper">this whitepaper</a> and <a href="https://github.com/zilliztech/vectordb-benchmark">related benchmark test code</a>. </p>
       </div>
   </div>
 </div>
 
 ## Summary
 
-- Comparing with Milvus 2.1, the QPS of Milvus 2.2.0 increases over 48% in cluster mode and over 75% in standalone mode.
+- Compared with Milvus 2.1, the QPS of Milvus 2.2.0 increases over 48% in cluster mode and over 75% in standalone mode.
 - Milvus 2.2.0 has an impressive capability to scale up and scale out:
   - QPS increases linearly when expanding CPU cores from 8 to 32.
   - QPS increases linearly when expanding Querynode replicas from 1 to 8.
