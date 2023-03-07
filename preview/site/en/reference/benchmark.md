@@ -5,7 +5,19 @@ summary: Learn about the benchmark result of Milvus.
 
 # Milvus 2.2 Benchmark Test Report
 
-This report shows the major test results of Milvus 2.2.0. It aims to provide a picture of Milvus 2.2.0 search performance, especially in the capability to scale up and scale out.
+This report shows the major test results of Milvus 2.2.0. It aims to provide a picture of Milvus 2.2.0 search performance, especially in the capability to scale up and scale out. 
+
+<div class="alert warning">
+
+A warning
+
+</div>
+
+<div class="alert quote">
+
+A quote
+
+</div>
 
 ## Summary
 
