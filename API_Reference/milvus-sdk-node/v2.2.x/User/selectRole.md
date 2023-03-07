@@ -12,7 +12,7 @@ new milvusClient(MILUVS_ADDRESS).userManager.selectRole(SelectRoleReq);
 | ---------------- | -------------------------------------------------------------------------------------- | ------- |
 | roleName         | The role name                                                                          | String  |
 | includeUserInfo? | should result including user info, by default: true                                    | boolean |
-| timeout?         | An optional duration of time in millisecond to allow for the RPC. Default is undefined | Number  |
+| timeout?         | This parameter is used to specify the length of time, in milliseconds, that the RPC (Remote Procedure Call) is allowed to run. If no value is provided, the default is undefined. | Number  |
 
 ## Example
 

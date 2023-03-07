@@ -13,7 +13,7 @@ new milvusClient(MILUVS_ADDRESS).indexManager.describeIndex(DescribeIndexReq);
 | collection_name | Name of the collection to check                                                        | String |
 | field_name?     | Name of the field to check                                                             | String |
 | index_name?     | Name of the index to check                                                             | String |
-| timeout?        | An optional duration of time in millisecond to allow for the RPC. Default is undefined | Number |
+| timeout?        | This parameter is used to specify the length of time, in milliseconds, that the RPC (Remote Procedure Call) is allowed to run. If no value is provided, the default is undefined. | Number |
 
 ## Example
 

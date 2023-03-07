@@ -13,7 +13,7 @@ new milvusClient(MILUVS_ADDRESS).dataManager.deleteEntities(DeleteEntitiesReq);
 | collection_name | Name of the collection to delete entities from                                         | String |
 | expr            | Boolean expression used for attibute filtering                                         | String |
 | partition_name? | Name of the partition to deleted entities from                                         | String |
-| timeout?        | An optional duration of time in millisecond to allow for the RPC. Default is undefined | Number |
+| timeout?        | This parameter is used to specify the length of time, in milliseconds, that the RPC (Remote Procedure Call) is allowed to run. If no value is provided, the default is undefined. | Number |
 
 ## Example
 

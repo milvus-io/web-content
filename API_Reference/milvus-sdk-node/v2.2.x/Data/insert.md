@@ -14,7 +14,7 @@ new milvusClient(MILUVS_ADDRESS).dataManager.insert(InsertReq);
 | fields_data     | Vector data                                                                            | { [x: string]: any }[] |
 | partition_name? | Name of the partition to insert data into                                              | String                 |
 | hash_keys?      | The hash value determined by primary key                                               | Number[]               |
-| timeout?        | An optional duration of time in millisecond to allow for the RPC. Default is undefined | Number                 |
+| timeout?        | This parameter is used to specify the length of time, in milliseconds, that the RPC (Remote Procedure Call) is allowed to run. If no value is provided, the default is undefined. | Number                 |
 
 ### note
 

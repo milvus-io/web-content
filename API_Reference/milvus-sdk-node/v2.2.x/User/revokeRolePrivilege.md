@@ -16,7 +16,7 @@ new milvusClient(MILUVS_ADDRESS).userManager.RevokeRolePrivilegeReq(
 | object        | Type of the operational object to which the specified privilege belongs, such as Collection, Index, Partition, etc. This parameter is case-sensitive. | boolean |
 | objectName    | Name of the object to which the role is granted the specified prvilege.                                                                               | string  |
 | privilegeName | Name of the privilege to be granted to the role. This parameter is case-sensitive.                                                                    | string  |
-| timeout?      | An optional duration of time in millisecond to allow for the RPC. Default is undefined                                                                | Number  |
+| timeout?      | This parameter is used to specify the length of time, in milliseconds, that the RPC (Remote Procedure Call) is allowed to run. If no value is provided, the default is undefined.                                                                | Number  |
 
 ## Example
 
