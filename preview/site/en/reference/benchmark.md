@@ -12,16 +12,15 @@ This report shows the major test results of Milvus 2.2.0. It aims to provide a p
       <div style="flex:0.3;">
       <img src="https://zilliz.com/images/whitepaper/performance.png">
   </div>
-      <div style="flex:1; padding: 10px; ">
-        <p>We have recently run a benchmark against Milvus 2.2.3 and have the following key findings:</p>
-        <ul>
-          <li>A 2.5x reduction in search latency</li>
-          <li>A 4.5x increase in QPS</li>
-          <li>Billion-scale similarity search with little performance degradation</li>
-          <li>Linear scalability when using multiple replicas</li>
-        </ul>
-        <p>For details, welcome referring to <a href="https://zilliz.com/whitepaper">this whitepaper</a> and <a href="https://github.com/zilliztech/vectordb-benchmark">related benchmark test code</a>. </p>
-      </div>
+  <div style="flex:1; padding: 10px; ">
+    <p>We have recently run a benchmark against Milvus 2.2.3 and have the following key findings:</p>
+    <ul>
+      <li>A 2.5x reduction in search latency</li>
+      <li>A 4.5x increase in QPS</li>
+      <li>Billion-scale similarity search with little performance degradation</li>
+      <li>Linear scalability when using multiple replicas</li>
+    </ul>
+    <p>For details, welcome referring to <a href="https://zilliz.com/whitepaper">this whitepaper</a> and <a href="https://github.com/zilliztech/vectordb-benchmark">related benchmark test code</a>. </p>
   </div>
 </div>
 
