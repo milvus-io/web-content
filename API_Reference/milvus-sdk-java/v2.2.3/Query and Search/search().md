@@ -115,7 +115,7 @@ if (response.getStatus() != R.Status.Success.getCode()) {
     System.out.println(response.getMessage());
 }
 
-SearchResultsWrapper wrapper = new SearchResultsWrapper(response.getData());
+SearchResultsWrapper wrapper = new SearchResultsWrapper(response.getData().getResults());
 System.out.println("Search results:");
 for (int i = 0; i < targetVectors.size(); ++i) {
     List<SearchResultsWrapper.IDScore> scores = results.getIDScore(i);
