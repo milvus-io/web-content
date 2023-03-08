@@ -67,29 +67,3 @@ DiskIndex:
 | `LoadNumThreadRatio` | Ratio between the number of threads used to load index/search and the number of CPUs. For details, refer to the first item in [References and Facts](disk_index.md#references-and-facts). | [1, 65536 / 32 / CPU number] | 8.0 |
 | `BeamWidthRatio` | Ratio between the maximum number of IO requests per search iteration and CPU number. | [1, max(128 / CPU number, 16)] | 4.0 |
 
-
-## References and Facts
-
-- On the maximum number of DiskANN threads
-
-  DiskANN uses Linux AIO to read and write the disk. The maximum number of concurrent I/O requests for each DiskANN thread is 32, and that limit on Linux is 65536. Therefore, the maximum number of DiskANN threads should be no greater than 65532 / 32 ≈ 2047.
-
-  Note that other processes may also involve concurrent I/O operations on Linux, which is usually less than 10000. Therefore, when setting `LoadNumThreadRatio`, use a value smaller than the maximum number of DiskANN threads to calculate its upper bound.
-
-  For your reference,
-
-  - To check the limit on the Linux system, run
-
-    ```Shell
-    sudo sysctl -a | grep fs.aio-max-nr
-    ``` 
-
-  - To raise the limit, run 
-
-    ```Shell
-    sudo sysctl -w fs.aio-max-nr=X
-    ```
-
-- On the time spent on building and loading the DiskANN index
-
-  Building the DiskANN index is time-consuming. For a SIFT dataset comprising 25,000,000 entries of 128-dimensional vectors, the size of the dataset is about 12.5 GB. The time spent on building an index for the dataset is about 40 minutes and that spent on loading the built index is about 13.2 minutes.
