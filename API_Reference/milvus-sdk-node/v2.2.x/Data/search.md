@@ -1,6 +1,8 @@
 # search()
 
-This method conducts a vector similarity search.
+This method performs a vector similarity search.
+
+> You must load the collection before searching or querying
 
 ```javascript
 new milvusClient(MILUVS_ADDRESS).dataManager.search(SearchReq);
@@ -8,17 +10,17 @@ new milvusClient(MILUVS_ADDRESS).dataManager.search(SearchReq);
 
 ### SearchReq
 
-| Parameters        | Description                                                                                                                                         | Type                  |
-| ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------- |
-| collection_name   | Name of the collection to search on                                                                                                                 | String                |
-| search_params     | Search parameters                                                                                                                                   | SearchParams (object) |
-| vectors           | Original vector to search with                                                                                                                      | Number[][]            |
-| vector_type       | Search parameters                                                                                                                                   | VectorTypes (number)  |
-| output_fields?    | Vector or scalar field to be returnsed                                                                                                               | String[]              |
-| travel_timestamp? | Timestamp that is used for Time Travel. Users can specify a timestamp in a search to get results based on a data view at a specified point in time. | Number                |
-| partitions_names? | An array of the names of the partitions to search on                                                                                                | String[]              |
-| expr?             | Boolean expression to filter the data                                                                                                               | String                |
-| timeout?          | This parameter is used to specify the length of time, in milliseconds, that the RPC (Remote Procedure Call) is allowed to run. If no value is provided, the default is undefined.                                                              | Number                |
+| Parameters        | Description                                                                                                                                                                       | Type                  |
+| ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------- |
+| collection_name   | Name of the collection to search on                                                                                                                                               | String                |
+| search_params     | Search parameters                                                                                                                                                                 | SearchParams (object) |
+| vectors           | Original vector to search with                                                                                                                                                    | Number[][]            |
+| vector_type       | Search parameters                                                                                                                                                                 | VectorTypes (number)  |
+| output_fields?    | Vector or scalar field to be returnsed                                                                                                                                            | String[]              |
+| travel_timestamp? | Timestamp that is used for Time Travel. Users can specify a timestamp in a search to get results based on a data view at a specified point in time.                               | Number                |
+| partitions_names? | An array of the names of the partitions to search on                                                                                                                              | String[]              |
+| expr?             | Boolean expression to filter the data                                                                                                                                             | String                |
+| timeout?          | This parameter is used to specify the length of time, in milliseconds, that the RPC (Remote Procedure Call) is allowed to run. If no value is provided, the default is undefined. | Number                |
 
 #### SearchParams
 
@@ -61,7 +63,10 @@ JSON.stringify({ nprobe: 1024 });
 
 ```javascript
 import { MilvusClient } from "@zilliz/milvus2-sdk-node";
-import { DataType, MetricType } from "@zilliz/milvus2-sdk-node/dist/milvus/const/Milvus";
+import {
+  DataType,
+  MetricType,
+} from "@zilliz/milvus2-sdk-node/dist/milvus/const/Milvus";
 
 new milvusClient(MILUVS_ADDRESS).dataManager.search({
   collection_name: "my_collection",

@@ -1,6 +1,6 @@
 # dropAllRoles()
 
-This method iterate throught all roles, then revoke all granted privileges, then drop all roles.
+This method iterates through all roles, revokes any granted privileges, and drops all roles.
 
 ```javascript
 new milvusClient(MILUVS_ADDRESS).userManager.dropAllRoles();

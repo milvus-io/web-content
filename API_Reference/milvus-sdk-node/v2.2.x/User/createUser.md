@@ -1,6 +1,6 @@
 # createUser()
 
-This method creates a user in Milvus.
+This is a method for creating a user identity in Milvus.
 
 ```javascript
 new milvusClient(MILUVS_ADDRESS).userManager.createUser(CreateUserReq);
@@ -8,10 +8,10 @@ new milvusClient(MILUVS_ADDRESS).userManager.createUser(CreateUserReq);
 
 ### CreateUserReq
 
-| Parameters | Description                                                                            | Type   |
-| ---------- | -------------------------------------------------------------------------------------- | ------ |
-| username   | The username used to log into Milvus                                                   | String |
-| password   | The password used to log into Milvus.                                                  | String |
+| Parameters | Description                                                                                                                                                                       | Type   |
+| ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ |
+| username   | The username used to log into Milvus                                                                                                                                              | String |
+| password   | The password used to log into Milvus.                                                                                                                                             | String |
 | timeout?   | This parameter is used to specify the length of time, in milliseconds, that the RPC (Remote Procedure Call) is allowed to run. If no value is provided, the default is undefined. | Number |
 
 ## Example

@@ -1,6 +1,6 @@
 # flush()
 
-Milvus temporarily buffers newly inserted vectors in cache. This method is asynchronous and persists inserted entities to object storage. After calling this method, you need to wait for a period of time for the data to be flushed.
+Milvus uses a cache to hold newly added vectors temporarily. This method is asynchronous and saves the added entities to object storage. After calling this method, you must wait for a period of time for the data to be flushed.
 
 ```javascript
 new milvusClient(MILUVS_ADDRESS).dataManager.flush(FlushReq);
@@ -8,9 +8,9 @@ new milvusClient(MILUVS_ADDRESS).dataManager.flush(FlushReq);
 
 ### FlushReq
 
-| Parameters       | Description                                                                            | Type     |
-| ---------------- | -------------------------------------------------------------------------------------- | -------- |
-| collection_names | An array of the names of collections that contain the data to flush                    | String[] |
+| Parameters       | Description                                                                                                                                                                       | Type     |
+| ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
+| collection_names | An array of the names of collections that contain the data to flush                                                                                                               | String[] |
 | timeout?         | This parameter is used to specify the length of time, in milliseconds, that the RPC (Remote Procedure Call) is allowed to run. If no value is provided, the default is undefined. | Number   |
 
 ## Example

@@ -1,6 +1,6 @@
 # releasePartitions()
 
-This method releases the specified partition from memory.
+This method is used to release a specific partition from memory.
 
 ```javascript
 new milvusClient(MILUVS_ADDRESS).partitionManager.releasePartitions(

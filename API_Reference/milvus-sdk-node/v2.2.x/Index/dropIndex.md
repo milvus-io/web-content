@@ -1,6 +1,6 @@
 # dropIndex()
 
-This method drops the index and its corresponding index file in the collection.
+This method drops the specified index.
 
 ```javascript
 new milvusClient(MILUVS_ADDRESS).indexManager.dropIndex(DropIndexReq);

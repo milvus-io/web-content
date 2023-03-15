@@ -1,6 +1,6 @@
 # getQuerySegmentInfo()
 
-This method checks the information of the segments in the query nodes via proxy.
+This method retrieves information about the segments in the query nodes through the proxy.
 
 ```javascript
 new milvusClient(MILUVS_ADDRESS).dataManager.getQuerySegmentInfo(

@@ -1,6 +1,6 @@
 # describeIndex()
 
-This method gets the index information in a collection.
+This method fetches the index details from a collection.
 
 ```javascript
 new milvusClient(MILUVS_ADDRESS).indexManager.describeIndex(DescribeIndexReq);

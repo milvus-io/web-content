@@ -1,6 +1,6 @@
 # selectGrant()
 
-This method recieve a grant information from milvus.
+This method retrieves the list of privileges granted to a role in Milvus.
 
 ```javascript
 new milvusClient(MILUVS_ADDRESS).userManager.selectGrant(SelectGrantReq);

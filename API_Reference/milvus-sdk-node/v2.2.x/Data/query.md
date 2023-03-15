@@ -1,6 +1,8 @@
 # query()
 
-This method conducts a vector query.
+This method performs a vector query.
+
+> You must load the collection before searching or querying
 
 ```javascript
 new milvusClient(MILUVS_ADDRESS).dataManager.query(QueryReq);

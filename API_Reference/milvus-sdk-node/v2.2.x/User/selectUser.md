@@ -1,6 +1,6 @@
 # selectUser()
 
-This method gets all roles that belong to a specified user.
+This method retrieves a list of all roles assigned to a specified user in Milvus.
 
 ```javascript
 new milvusClient(MILUVS_ADDRESS).userManager.selectUser(SelectUserReq);

@@ -1,6 +1,6 @@
 # getPartitionStatistics()
 
-This method checks the statistics of a specified partition.
+This method retrieves statistics about a specified partition.
 
 ```javascript
 new milvusClient(MILUVS_ADDRESS).partitionManager.getPartitionStatistics(
@@ -10,10 +10,10 @@ new milvusClient(MILUVS_ADDRESS).partitionManager.getPartitionStatistics(
 
 ### GetPartitionStatisticsReq
 
-| Parameters      | Description                                                                            | Type   |
-| --------------- | -------------------------------------------------------------------------------------- | ------ |
-| collection_name | Name of the collection in which the partition to check exists                          | String |
-| partition_name  | Name of the partition to check                                                         | String |
+| Parameters      | Description                                                                                                                                                                       | Type   |
+| --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ |
+| collection_name | Name of the collection in which the partition to check exists                                                                                                                     | String |
+| partition_name  | Name of the partition to check                                                                                                                                                    | String |
 | timeout?        | This parameter is used to specify the length of time, in milliseconds, that the RPC (Remote Procedure Call) is allowed to run. If no value is provided, the default is undefined. | Number |
 
 ## Example

@@ -1,6 +1,6 @@
 # listGrants()
 
-This method lists all roles in Milvus.
+This method lists all granted privileges in Milvus.
 
 ```javascript
 new milvusClient(MILUVS_ADDRESS).userManager.listGrants();

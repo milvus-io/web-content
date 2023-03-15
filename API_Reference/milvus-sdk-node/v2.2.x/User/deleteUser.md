@@ -1,6 +1,6 @@
 # deleteUser()
 
-This method deletes a user in Milvus.
+This method deletes a user identity in Milvus.
 
 ```javascript
 new milvusClient(MILUVS_ADDRESS).userManager.deleteUser(DeleteUserReq);

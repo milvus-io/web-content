@@ -1,6 +1,6 @@
 # createIndex()
 
-This method creates an index on a vector field. Note that the index building process is an asynchronous.
+This method generates an index on a vector field. It is important to note that the index creation process is asynchronous.
 
 ```javascript
 new milvusClient(MILUVS_ADDRESS).indexManager.createIndex(CreateIndexReq);

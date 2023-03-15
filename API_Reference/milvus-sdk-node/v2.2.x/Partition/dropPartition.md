@@ -1,6 +1,8 @@
 # dropPartition()
 
-This method drops a partition and all data within this partition. Note that the `_default` partition cannot be dropped.
+This method is used to drop a partition and all the data contained within it.
+
+> the `_default` partition cannot be dropped.
 
 ```javascript
 new milvusClient(MILUVS_ADDRESS).partitionManager.dropPartition(
@@ -10,10 +12,10 @@ new milvusClient(MILUVS_ADDRESS).partitionManager.dropPartition(
 
 ### DropPartitionReq
 
-| Parameters      | Description                                                                            | Type   |
-| --------------- | -------------------------------------------------------------------------------------- | ------ |
-| collection_name | Name of the collection in which to drop the partition                                  | String |
-| partition_name  | Name of the partition to drop                                                          | String |
+| Parameters      | Description                                                                                                                                                                       | Type   |
+| --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ |
+| collection_name | Name of the collection in which to drop the partition                                                                                                                             | String |
+| partition_name  | Name of the partition to drop                                                                                                                                                     | String |
 | timeout?        | This parameter is used to specify the length of time, in milliseconds, that the RPC (Remote Procedure Call) is allowed to run. If no value is provided, the default is undefined. | Number |
 
 ## Example

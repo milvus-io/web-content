@@ -1,6 +1,8 @@
 # getIndexBuildProgress()
 
-This method checks the progress of index building and shows the total number of rows and the number of index rows. (Deprecated since 2.2.0)
+This method monitors the index building progress and displays the total number of rows as well as the number of indexed rows.
+
+> This method has been deprecated since version 2.2.0, you can use getIndexState instead.
 
 ```javascript
 new milvusClient(MILUVS_ADDRESS).indexManager.getIndexBuildProgress(
