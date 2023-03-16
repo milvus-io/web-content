@@ -12,7 +12,7 @@ Partition(collection, name, description='', **kwargs)
 
 | Parameter    | Description                                                  | Type                            | Required |
 | ------------ | ------------------------------------------------------------ | ------------------------------- | -------- |
-| `collection` | Name of the collection                                       | String                          | True     |
+| `collection` | A collection object                                          | `Collection`                    | True     |
 | `name`       | Name of the partition to create                              | String                          | True     |
 | `description`   | Description of the collection                             | String                          | False    |
 
@@ -33,6 +33,7 @@ A new partition object created with the specified name.
 ## Example
 
 ```python
-from pymilvus import Partition
-partition = Partition("book", "novel", "")
+from pymilvus import Collection, Partition
+collection = Collection("book")
+partition = Partition(collection, "novel", "")
 ```
