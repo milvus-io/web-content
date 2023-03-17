@@ -35,7 +35,7 @@ We have also made several enhancements to make your Milvus cluster faster and co
 
 - New option to the search and query APIs
 
-  If you are more concerned with performance rather than data freshness, enabling this option will skip search on all growing segments and offer better search performance under the scenario search with insertion. See [search](https://milvus.io/api-reference/pymilvus/v2.2.3/Collection/search().md)]() and [query()](https://milvus.io/api-reference/pymilvus/v2.2.3/Collection/query().md) for details.
+  If you are more concerned with performance rather than data freshness, enabling this option will skip search on all growing segments and offer better search performance under the scenario search with insertion. See [search()](https://milvus.io/api-reference/pymilvus/v2.2.3/Collection/search().md) and [query()](https://milvus.io/api-reference/pymilvus/v2.2.3/Collection/query().md) for details.
 
 ### Bugfix
 
