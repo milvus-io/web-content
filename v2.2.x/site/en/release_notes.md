@@ -33,9 +33,13 @@ We have also made several enhancements to make your Milvus cluster faster and co
 
   Milvus now supports Google Cloud Storage as the object storage.
 
+<div style="display:none">
+
 - New option to the search and query APIs
 
   If you are more concerned with performance rather than data freshness, enabling this option will skip search on all growing segments and offer better search performance under the scenario search with insertion. See [search()](https://milvus.io/api-reference/pymilvus/v2.2.3/Collection/search().md) and [query()](https://milvus.io/api-reference/pymilvus/v2.2.3/Collection/query().md) for details.
+
+</div>
 
 ### Bugfix
 
