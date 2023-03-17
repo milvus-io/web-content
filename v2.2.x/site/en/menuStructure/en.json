@@ -225,12 +225,20 @@
       "order": 0
     },
     {
+      "id": "rename_collection.md",
+      "title": "Rename a Collection",
+      "label1": "userguide",
+      "label2": "manage_collection",
+      "label3": "",
+      "order": 1
+    },    
+    {
       "id": "modify_collection.md",
       "title": "Modify a Collection",
       "label1": "userguide",
       "label2": "manage_collection",
       "label3": "",
-      "order": 1
+      "order": 2
     },
     {
       "id": "check_collection.md",
@@ -238,7 +246,7 @@
       "label1": "userguide",
       "label2": "manage_collection",
       "label3": "",
-      "order": 2
+      "order": 3
     },
     {
       "id": "drop_collection.md",
@@ -246,7 +254,7 @@
       "label1": "userguide",
       "label2": "manage_collection",
       "label3": "",
-      "order": 3
+      "order": 4
     },
     {
       "id": "collection_alias.md",
@@ -254,7 +262,7 @@
       "label1": "userguide",
       "label2": "manage_collection",
       "label3": "",
-      "order": 4
+      "order": 5
     },
     {
       "id": "load_collection.md",
@@ -262,7 +270,7 @@
       "label1": "userguide",
       "label2": "manage_collection",
       "label3": "",
-      "order": 5
+      "order": 6
     },
     {
       "id": "release_collection.md",
@@ -270,7 +278,7 @@
       "label1": "userguide",
       "label2": "manage_collection",
       "label3": "",
-      "order": 6
+      "order": 7
     },
     {
       "id": "manage_partition",
@@ -650,12 +658,20 @@
       "order": 3
     },
     {
+      "id": "resource_group.md",
+      "title": "Manage Resource Groups",
+      "label1": "admin_guide",
+      "label2": "",
+      "label3": "",
+      "order": 5      
+    },
+    {
       "id": "upgrade_milvus",
       "title": "Upgrade",
       "label1": "admin_guide",
       "label2": "",
       "label3": "",
-      "order": 5
+      "order": 6
     },
     {
       "id": "upgrade_milvus_cluster-operator.md",

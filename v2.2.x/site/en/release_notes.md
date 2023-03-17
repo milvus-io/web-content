@@ -6,12 +6,115 @@ summary: Milvus Release Notes
 
 Find out what’s new in Milvus! This page summarizes information about new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.2.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
-## 2.2.3
-Release date: 10 Feburary, 2023
+## 2.2.4
+Release date: 17 March, 2023
 
 | Milvus version | Python SDK version | Java SDK version | Go SDK version | Node.js SDK version |
 | -------------- | ------------------ | ---------------- | -------------- | ------------------- |
-| 2.2.3          | 2.2.2              | 2.2.3            | Coming soon    | Coming soon        |
+| 2.2.4          | 2.2.3              | 2.2.3            | 2.2.1          | 2.2.4               |
+
+Milvus 2.2.4 is a minor update to Milvus 2.2.0. It introduces new features, such as namespace-based resource grouping, collection-level physical isolation, and collection renaming. 
+
+In addition to these features, Milvus 2.2.4 also addresses several issues related to rolling upgrades, failure recovery, and load balancing. These bug fixes contribute to a more stable and reliable system. 
+
+We have also made several enhancements to make your Milvus cluster faster and consume less memory with reduced convergence time for failure recovery.
+
+### New Features
+
+- Resource grouping
+
+  Milvus has implemented resource grouping for QueryNodes. A resource group is a collection of QueryNodes. Milvus supports grouping QueryNodes in the cluster into different resource groups, where access to physical resources in different resource groups is completely isolated. See [Manage Resource Group](resource_group.md) for more information.
+
+- Collection renaming
+
+  The Collection-renaming API provides a way for users to change the name of a collection. Currently, PyMilvus supports this API, and SDKs for other programming languages are on the way. See [Rename a Collection](rename_collection.md) for details.
+
+- Google Cloud Storage support
+
+  Milvus now supports Google Cloud Storage as the object storage.
+
+- New option to the search and query APIs
+
+  If you are more concerned with performance rather than data freshness, enabling this option will skip search on all growing segments and offer better search performance under the scenario search with insertion. See [search(/api-reference/pymilvus/v2.2.3/Collection/search().md)]() and [query()]() for details.
+
+### Bugfix
+
+- Fixed segment not found when forwarding delete to empty segment [#22528](https://github.com/milvus-io/milvus/pull/22528)[#22551](https://github.com/milvus-io/milvus/pull/22551)
+- Fixed possible broken channel checkpoint in v2.2.2 [#22205](https://github.com/milvus-io/milvus/pull/22205) [#22227](https://github.com/milvus-io/milvus/pull/22227)
+- Fixed entity number mismatch with some entities inserted  [#22306](https://github.com/milvus-io/milvus/pull/22306)
+- Fixed DiskANN recovery failure after QueryNode reboots [#22488](https://github.com/milvus-io/milvus/pull/22488) [#22514](https://github.com/milvus-io/milvus/pull/22514)
+- Fixed search/release on same segment [#22414](https://github.com/milvus-io/milvus/pull/22414)
+- Fixed file system crash during bulk-loading files prefixed with a '.' [#22215](https://github.com/milvus-io/milvus/pull/22215)
+- Added tickle for DataCoord watch event [#21193](https://github.com/milvus-io/milvus/pull/21193) [#22209](https://github.com/milvus-io/milvus/pull/22209)
+- Fixed deadlock when releasing segments and removing nodes concurrently [#22584](https://github.com/milvus-io/milvus/pull/22584)
+- Added channel balancer on DataCoord [#22324](https://github.com/milvus-io/milvus/pull/22324) [#22377](https://github.com/milvus-io/milvus/pull/22377)
+- Fixed balance generated reduce task [#22236](https://github.com/milvus-io/milvus/pull/22236) [#22326](https://github.com/milvus-io/milvus/pull/22326)
+- Fixed QueryCoord panic caused by balancing [#22486](https://github.com/milvus-io/milvus/pull/22486)
+- Added scripts for rolling update Milvus's component installed with helm [#22124](https://github.com/milvus-io/milvus/pull/22124)
+- Added `NotFoundTSafer` and `NoReplicaAvailable` to retriable error code [#22505](https://github.com/milvus-io/milvus/pull/22505)
+- Fixed no retires upon gRPC error [#22529](https://github.com/milvus-io/milvus/pull/22529)
+- Fixed an issue for automatic component state update to healthy after start [#22084](https://github.com/milvus-io/milvus/pull/22084)
+- Added graceful-stop for sessions [#22386](https://github.com/milvus-io/milvus/pull/22386)
+- Added retry op for all servers [#22274](https://github.com/milvus-io/milvus/pull/22274)
+- Fixed metrics info panic when network error happens [#22802](https://github.com/milvus-io/milvus/pull/22802)
+- Fixed disordered minimum timestamp in proxy's pchan statistics [#22756](https://github.com/milvus-io/milvus/pull/22756)
+- Fixed an issue to ensure segment ID recovery upon failures to send time-tick [#22771](https://github.com/milvus-io/milvus/pull/22771)
+- Added segment info retrieval without the binlog path [#22741](https://github.com/milvus-io/milvus/pull/22741)
+- Added distribution.Peek for GetDataDistribution in case of blocked by release [#22752](https://github.com/milvus-io/milvus/pull/22752)
+- Fixed the segment not found error [#22739](https://github.com/milvus-io/milvus/pull/22739)
+- Reset delta position to vchannel in packSegmentLoadReq [#22721](https://github.com/milvus-io/milvus/pull/22721) 
+- Added vector float data verification for bulkinsert and insert [#22729](https://github.com/milvus-io/milvus/pull/22729)
+- Upgraded Knowhere to 1.3.10 to fix bugs [#22746](https://github.com/milvus-io/milvus/pull/22746) 
+- Fixed RootCoord double updates TSO [#22715](https://github.com/milvus-io/milvus/pull/22715) [#22723](https://github.com/milvus-io/milvus/pull/22723)
+- Fixed confused time-tick logs [#22733](https://github.com/milvus-io/milvus/pull/22733) [#22734](https://github.com/milvus-io/milvus/pull/22734)
+- Fixed session nil point [#22696](https://github.com/milvus-io/milvus/pull/22696)
+- Upgraded Knowhere to 1.3.10 [#22614](https://github.com/milvus-io/milvus/pull/22614)
+- Fixed incorrect sequence of timetick statistics on proxy[#21855](https://github.com/milvus-io/milvus/pull/21855) [#22560](https://github.com/milvus-io/milvus/pull/22560)
+- Enabled DataCoord to handle GetIndexedSegment error from IndexCoord [#22673](https://github.com/milvus-io/milvus/pull/22673)
+- Fixed an issue for Milvus writes flushed segment key only after the segment is flushed [#22667](https://github.com/milvus-io/milvus/pull/22667)
+- Marked cache deprecated instead of removing it [#22675](https://github.com/milvus-io/milvus/pull/22675)
+- Updated shard leader cache [#22632](https://github.com/milvus-io/milvus/pull/22632)
+- Fixed an issue for the replica observer to assign node [#22635](https://github.com/milvus-io/milvus/pull/22635)
+- Fixed the not found issue when retrieving collection creation timestamp [#22629](https://github.com/milvus-io/milvus/pull/22629) [#22634](https://github.com/milvus-io/milvus/pull/22634)
+- Fixed time-tick running backwards during DDLs [#22617](https://github.com/milvus-io/milvus/pull/22617) [#22618](https://github.com/milvus-io/milvus/pull/22618)
+- Fixed max collection name case [#22601](https://github.com/milvus-io/milvus/pull/22601) 
+- Fixed DataNode tickle not run default [#22622](https://github.com/milvus-io/milvus/pull/22622)-
+- Fixed DataCoord panic while reading timestamp of an empty segment [#22598](https://github.com/milvus-io/milvus/pull/22598)
+- Added scripts to get etcd info [#22589](https://github.com/milvus-io/milvus/pull/22589)
+- Fixed concurrent loading timeout during DiskANN indexing [#22548](https://github.com/milvus-io/milvus/pull/22548)
+- Fixed an issue to ensure index file not finish early because of compaction [#22509](https://github.com/milvus-io/milvus/pull/22509)
+- Added `MultiQueryNodes` tag for resource group [#22527](https://github.com/milvus-io/milvus/pull/22527) [#22544](https://github.com/milvus-io/milvus/pull/22544)
+
+### Enhancement
+
+- **Performance**
+
+  - Improved query performance by avoiding counting all bits [#21909](https://github.com/milvus-io/milvus/pull/21909) [#22285](https://github.com/milvus-io/milvus/pull/22285)
+  - Fixed dual copy of varchar fields while loading [#22114](https://github.com/milvus-io/milvus/pull/22114) [#22291](https://github.com/milvus-io/milvus/pull/22291)
+  - Updated DataCoord compaction panic after DataNode update plan to ensure consistency [#22143](https://github.com/milvus-io/milvus/pull/22143) [#22329](https://github.com/milvus-io/milvus/pull/22329)
+  - Improved search performance by avoiding allocating a zero-byte vector during searches [#22219](https://github.com/milvus-io/milvus/pull/22219) [#22357](https://github.com/milvus-io/milvus/pull/22357)
+  - Upgraded Knowhere to 1.3.9 to accelerate IVF/BF [#22368](https://github.com/milvus-io/milvus/pull/22368)
+  - Improved search task merge policy [#22006](https://github.com/milvus-io/milvus/pull/22006) [#22287](https://github.com/milvus-io/milvus/pull/22287)
+  - Refined Read method of MinioChunkManager to reduce IO[#22257](https://github.com/milvus-io/milvus/pull/22257)
+
+- **Memory Usage**
+
+  - Saved index files by 16m to save memory usage while indexing [#22369](https://github.com/milvus-io/milvus/pull/22369)
+  - Added memory usage too large sync policy [#22241](https://github.com/milvus-io/milvus/pull/22241)
+
+- **Others**
+
+  - Removed constraints that compaction happens only on indexed segment [#22145](https://github.com/milvus-io/milvus/pull/22145)
+  - Changed RocksMQ page size to 256M to reduce RocksMQ disk usage [#22433](https://github.com/milvus-io/milvus/pull/22433)
+  - Changed the etcd session timeout to 20s to improve recovery speed[#22400](https://github.com/milvus-io/milvus/pull/22400)
+  - Added the RBAC for the GetLoadingProgress and GetLoadState API [#22313](https://github.com/milvus-io/milvus/pull/22313)
+
+## 2.2.3
+Release date: 10 February, 2023
+
+| Milvus version | Python SDK version | Java SDK version | Go SDK version | Node.js SDK version |
+| -------------- | ------------------ | ---------------- | -------------- | ------------------- |
+| 2.2.3          | 2.2.2              | 2.2.3            | 2.2.0          | 2.2.3               |
 
 Milvus 2.2.3 introduces the rolling upgrade capability to Milvus clusters and brings high availability settings to RootCoords. The former greatly reduces the impacts brought by the upgrade and restart of the Milvus cluster in production to the minimum, while the latter enables coordinators to work in active-standby mode and ensures a short failure recovery time of no more than 30 seconds. 
 
