@@ -22,11 +22,7 @@ query(expr, offset, limit, output_fields=None, partition_names=None, timeout=Non
 | `kwargs`: `guarantee_timestamp`|Milvus searches on the data view before this timestamp when it is provided. Otherwise, it searches the most updated data view. It can be only used in `Customized` level of consistency. | Integer              | False    |
 | `kwargs`: `graceful_time`|PyMilvus will use current timestamp minus the `graceful_time` as the `guarantee_timestamp` for search. It can be only used in `Bounded` level of consistency. | Integer              | False    |
 | `kwargs`: `travel_timestamp`|Timestamp that is used for Time Travel. Users can specify a timestamp in a search to get results based on a data view at a specified point in time.| Integer              | False    |
-<div style="display:none">
-
 | `kwargs`: `ignore_growing` | Whether to ignore growing segments during similarity searches. The value defaults to `False`, indicating that searches involve growing segments. | Bool | False |
-
-</div>
 
 ## Return
 
