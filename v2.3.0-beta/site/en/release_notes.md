@@ -17,11 +17,11 @@ The latest release of Milvus introduced a new feature that will please many user
 
 ### Features
 
-**GPU support**
+- **GPU support**
 
-Milvus now supports two GPU-based IVF indexes: RAFT and FAISS. According to a benchmark on RAFT's GPU-based IVF-series indexes, GPU indexing achieves a 10x increase in search performance on large NQ cases.
+  Milvus now supports two GPU-based IVF indexes: RAFT and FAISS. According to a benchmark on RAFT's GPU-based IVF-series indexes, GPU indexing achieves a 10x increase in search performance on large NQ cases.
 
-- Benchmark
+  Benchmark
 
   We have compared **RAFT-IVF-Flat** with **IVF-Flat** and HNSW at a recall rate of 95%, and obtained the following results.
 
@@ -37,19 +37,19 @@ Milvus now supports two GPU-based IVF indexes: RAFT and FAISS. According to a be
 
   Special thanks go to @wphicks and @cjnolet from Nvidia for their contributions to the RAFT code.
 
-- Memory-mapped (mmap) file I/O
+- **Memory-mapped (mmap) file I/O**
 
   In scenarios where there is not sufficient memory for large datasets and it is insensitive to query performance, Milvus uses mmap to allow the system to treat parts of a file as if they were in memory. This can reduce memory usage and improve performance if all data is held in the system page cache.
   
-- Range search
+- **Range search**
 
   The range search method returns all vectors within a certain radius around the query point, as opposed to the k-nearest ones. Range search is a valuable tool for querying vectors within a specific distance, for use cases such as anomaly detection and object distinction.
  
-- Upsert
+- **Upsert**
 
   Milvus now supports record upsert, similar to that in a relational database. This operation atomically deletes the original entity with the primary key (PK) and inserts a new entity. Note that upserts can only be applied to a given primary key.
 
-- Change Data Capture(CDC)
+- **Change Data Capture(CDC)**
  
   Change Data Capture is a process that identifies and tracks changes to data in a database. Milvus CDC provides real-time subscriptions to data and database events as they occur.
  
