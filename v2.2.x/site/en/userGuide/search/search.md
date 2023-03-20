@@ -192,12 +192,18 @@ Output:
 	<tbody>
 	<tr>
 		<td><code>metric_type</code></td>
-		<td>Metrics used to measure similarity of vectors. See <a href="metric.md">Simlarity Metrics</a> for more information.</td>
+		<td>Metrics used to measure the similarity of vectors. See <a href="metric.md">Simlarity Metrics</a> for more information.</td>
 	</tr>
     <tr>
 		<td><code>params</code></td>
 		<td>Search parameter(s) specific to the index. See <a href="index.md">Vector Index</a> for more information.</td>
 	</tr>
+	<tr>
+		<td><code>offset</code></td>
+		<td>An offset in this dictionary. The sum of the offset value and the value in <code>limit</code> should be less than 65535. </td>
+	</tr>
+	<td><code>ignore_growing</code></td>
+	<td>Whether to ignore growing segments during similarity searches. The value defaults to <code>False</code>, indicating that searches involve growing segments.</td>
 	</tbody>
 </table>
 
