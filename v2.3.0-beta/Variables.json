@@ -8,6 +8,6 @@
   "milvus_go_sdk_version": "2.2.1",
   "milvus_java_sdk_version": "2.2.3",
   "milvus_operator_version": "0.7.8",
-  "milvus_image": "2.3.0-beta",
+  "milvus_image": "2.3.0-gpu-beta",
   "attu_release": "2.2.3"
 }

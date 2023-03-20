@@ -195,7 +195,7 @@ Map the local path to your `milvus.yaml` file onto the corresponding docker cont
 ...
 proxy:
     container_name: milvus-proxy
-    image: milvusdb/milvus:v2.3.0-beta
+    image: milvusdb/milvus:v2.3.0-gpu-beta
     command: ["milvus", "run", "proxy"]
     volumes:       # Add a volumes section.
       - /local/path/to/your/milvus.yaml:/milvus/configs/milvus.yaml   # Map the local path to the container path
