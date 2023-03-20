@@ -30,13 +30,6 @@ Milvus now supports two GPU-based IVF indexes: RAFT and FAISS. According to a be
   | HNSW (VPS)          | 14,537           | 791              | 1516             | 5761              |
   | IVF-Flat (VPS)      | 3097             | 142              | 791              | 723               |
   | RAFT-IVF-Flat (VPS) | 121,568          | 5737             | 20,163           | 16,557            |
-
-  Also we benchmarked **RAFT-IVF-PQ** comparing Knowhere's fastest index HNSW at 80% recall.
-
-  | Datasets            | SIFT             | GIST             | GLOVE            | Deep              |
-  | ------------------- | ---------------- | ---------------- | ---------------- | ----------------- |
-  | HNSW(VPS)	          | 20,809	         | 2593	            | 8005	           | 13,291            |
-  | RAFT-IVF-PQ(VPS)	  | 271,885	         | 7448	            | 38,989	         | 80,363            |
  
   These benchmarks run against [Knowhere](knowhere.md) on a host with an 8-core CPU, 32 GB of RAM, and an Nvidia A100 GPU with an NQ of 100.
 
