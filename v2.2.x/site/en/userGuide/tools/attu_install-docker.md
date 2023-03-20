@@ -23,10 +23,18 @@ Attu is an efficient open-source management tool for Milvus. This topic describe
 See <a href="https://milvus.io/docs/v2.0.x/attu_install-docker.md">v2.0.x Attu doc</a> if you are using Milvus 2.0.x.
 </div>
 
+## Milvus to Attu Version Mapping
+
+| Milvus Version | Recommended Attu Image Version | 
+| -------------- | ------------------------------ |
+| v2.0.x         | v2.0.5                         |
+| v2.1.x         | v2.1.5                         |
+| v2.2.x         | v2.2.3           |
+
 ## Start an Attu instance
 
 ```Apache
-docker run -p 8000:3000  -e MILVUS_URL={your machine IP}:19530 zilliz/attu:latest
+docker run -p 8000:3000  -e MILVUS_URL={your machine IP}:19530 zilliz/attu:v2.2.3
 ```
 
 Once you start the docker, visit `http://{ your machine IP }:8000` in your browser, and click **Connect** to enter the Attu service.
