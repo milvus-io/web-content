@@ -22,6 +22,13 @@ This topic describes how to install Attu with Docker Compose, an efficient open-
 Attu only supports Milvus 2.x.
 </div>
 
+## Milvus to Attu Version Mapping
+
+| Milvus Version | Recommended Attu Image Version | 
+| -------------- | ------------------------------ |
+| v2.0.x         | v2.0.5                         |
+| v2.1.x         | v2.1.5                         |
+
 ## Start an Attu instance
 
 ```Apache
