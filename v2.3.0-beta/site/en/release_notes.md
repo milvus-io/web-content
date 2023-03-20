@@ -23,7 +23,7 @@ Milvus now supports two GPU-based IVF indexes: RAFT and FAISS. According to a be
 
 - Benchmark
 
-  We have compared RAFT-IVF-Flat with IVF-Flat and HNSW at a recall rate of 95%, and obtained the following results.
+  We have compared **RAFT-IVF-Flat** with **IVF-Flat** and HNSW at a recall rate of 95%, and obtained the following results.
 
   | Datasets            | SIFT             | GIST             | GLOVE            | Deep              |
   | ------------------- | ---------------- | ---------------- | ---------------- | ----------------- |
@@ -31,9 +31,16 @@ Milvus now supports two GPU-based IVF indexes: RAFT and FAISS. According to a be
   | IVF-Flat (VPS)      | 3097             | 142              | 791              | 723               |
   | RAFT-IVF-Flat (VPS) | 121,568          | 5737             | 20,163           | 16,557            |
 
+  Also we benchmarked **RAFT-IVF-PQ** comparing Knowhere's fastest index HNSW at 80% recall.
+
+  | Datasets            | SIFT             | GIST             | GLOVE            | Deep              |
+  | ------------------- | ---------------- | ---------------- | ---------------- | ----------------- |
+  | HNSW(VPS)	          | 20,809	         | 2593	            | 8005	           | 13,291            |
+  | RAFT-IVF-PQ(VPS)	  | 271,885	         | 7448	            | 38,989	         | 80,363            |
+ 
   These benchmarks run against [Knowhere](knowhere.md) on a host with an 8-core CPU, 32 GB of RAM, and an Nvidia A100 GPU with an NQ of 100.
 
-  For details on these benchmarks, refer to [Milvus Performance Evaluation 2023](https://zilliz.com/resources).
+  For details on these benchmarks, refer to [the release notes of Knowhere v2.1.0](https://github.com/milvus-io/knowhere/releases/tag/v2.1.0).
 
   Special thanks go to @wphicks and @cjnolet from Nvidia for their contributions to the RAFT code.
 
@@ -55,8 +62,6 @@ Milvus now supports two GPU-based IVF indexes: RAFT and FAISS. According to a be
  
 In addition to the aforementioned features, later release 2.3 of Milvus will also introduce new features such as accurate count support, Feder visualization support and growing segment indexing. 
 
-- Partition Dynamic Load/Release
- 
-  Milvus later will offer Dynamic Partitioning, which allows users to conveniently create and load a partition without releasing the collection. In addition, Milvus 2.3.0 will improve memory management, performance, and manageability under multi-partition cases.
+Milvus later will offer Dynamic Partitioning, which allows users to conveniently create and load a partition without releasing the collection. In addition, Milvus 2.3.0 will improve memory management, performance, and manageability under multi-partition cases.
 
 Now, you can download [Milvus](https://hub.docker.com/r/milvusdb/milvus) and [get started](https://milvus.io).
