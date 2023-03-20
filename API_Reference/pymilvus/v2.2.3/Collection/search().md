@@ -14,7 +14,7 @@ search(data, anns_field, param, limit, expr=None, partition_names=None, output_f
 | ----------------- | ------------------------------------------------------------- | ------------------ | -------- |
 | `data`            | Data to search with                                           | list[list[Float]]  | True     |
 | `anns_field`      | Name of the vector field to search on                         | String             | True     |
-| `param`           | Specific search parameter(s) of the index on the vector field. You can set an offset in this dictionary. The sum of the offset value and the value in `limit` should be less than 65535.  | Dict               | True     |
+| `param`           | Specific search parameter(s) of the index on the vector field. For details, refer to [Prepare search parameters](https://milvus.io/docs/search.md#Prepare-search-parameters).  | Dict               | True     |
 | `limit`           | Number of nearest records to return. The sum of this value and `offset` should be less than 65535.                          | Integer            | True     |
 | `expr`            | Boolean expression to filter the data                         | String             | False    |
 | `partition_names` | List of names of the partitions to search on. </br>All partition will be searched if it is left empty.                         | list[String]            | False    |
@@ -27,7 +27,6 @@ search(data, anns_field, param, limit, expr=None, partition_names=None, output_f
 | `kwargs`: `guarantee_timestamp`| Milvus searches on the data view before this timestamp when it is provided. Otherwise, it searches the most updated data view. It can be only used in `Customized` level of consistency. | Integer   | False    |
 | `kwargs`: `graceful_time`| PyMilvus will use current timestamp minus the `graceful_time` as the `guarantee_timestamp` for search. It can be only used in `Bounded` level of consistency. | Integer   | False    |
 | `kwargs`: `travel_timestamp`| Timestamp that is used for Time Travel. Users can specify a timestamp in a search to get results based on a data view at a specified point in time. | Integer   | False    |
-| `kwargs`: `ignore_growing` | Whether to ignore growing segments during similarity searches. The value defaults to `False`, indicating that searches involve growing segments. | Bool | False |
 
 ## Return
 
