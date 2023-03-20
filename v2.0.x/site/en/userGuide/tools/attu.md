@@ -44,12 +44,6 @@ Below is the features we have to offer:
 
 Learn more about how to [install Attu](attu_install-docker.md).
 
-## Milvus to Attu Version Mapping
-
-| Milvus Version | Recommended Attu Version | 
-| -------------- | ------------------------ |
-| v2.0.x         | v2.0.5                   |
-
 ## Contribution
 
 Attu is an open-source project. All contributions are welcome. Pleae read our [Contribute guide](https://github.com/zilliztech/attu) before making contributions.
