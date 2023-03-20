@@ -4,11 +4,11 @@ This method allows you to change the name of a collection.
 
 ```javascript
 new milvusClient(MILUVS_ADDRESS).collectionManager.renameCollection(
-  renameCollectionReq
+  RenameCollectionReq
 );
 ```
 
-### renameCollectionReq
+### RenameCollectionReq
 
 | Parameters          | Description                                                                                                                                                                       | Type   |
 | ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ |
