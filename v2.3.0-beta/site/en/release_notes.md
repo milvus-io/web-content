@@ -21,7 +21,7 @@ The latest release of Milvus introduced a new feature that will please many user
 
   Milvus now supports two GPU-based IVF indexes: RAFT and FAISS. According to a benchmark on RAFT's GPU-based IVF-series indexes, GPU indexing achieves a 10x increase in search performance on large NQ cases.
 
-  We have compared **RAFT-IVF-Flat** with **IVF-Flat** and HNSW at a recall rate of 95%, and obtained the following results.
+  We have compared **RAFT-IVF-Flat** with **IVF-Flat** and **HNSW** at a recall rate of 95%, and obtained the following results.
 
   | Datasets            | SIFT             | GIST             | GLOVE            | Deep              |
   | ------------------- | ---------------- | ---------------- | ---------------- | ----------------- |
@@ -62,8 +62,8 @@ The latest release of Milvus introduced a new feature that will please many user
  
   Change Data Capture is a process that identifies and tracks changes to data in a database. Milvus CDC provides real-time subscriptions to data and database events as they occur.
  
-In addition to the aforementioned features, later release 2.3 of Milvus will also introduce new features such as accurate count support, Feder visualization support and growing segment indexing. 
+In addition to the aforementioned features, Milvus 2.3 will also introduce new features such as accurate count support, Feder visualization support and growing segment indexing. 
 
-In addition, Milvus will offer Dynamic Partitioning in later releases, which allows users to conveniently create and load a partition without releasing the collection. In addition, Milvus 2.3.0 will improve memory management, performance, and manageability under multi-partition cases.
+Milvus will also offer Dynamic Partitioning in later releases, which allows users to conveniently create and load a partition without releasing the collection. In addition, Milvus 2.3.0 will improve memory management, performance, and manageability under multi-partition cases.
 
 Now, you can download [Milvus](https://hub.docker.com/r/milvusdb/milvus) and [get started](https://milvus.io).
