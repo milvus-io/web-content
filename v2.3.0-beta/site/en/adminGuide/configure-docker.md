@@ -173,21 +173,33 @@ Sorted by:
 
 Download the installation file for Milvus [standalone](https://github.com/milvus-io/milvus/releases/download/v2.3.0-beta/milvus-standalone-docker-compose.yml) or [cluster](https://github.com/milvus-io/milvus/releases/download/v2.3.0-beta/milvus-cluster-docker-compose.yml), and save it as `docker-compose.yml`.
 
+If you want to install Milvus with GPU support, download the installation file for Milvus [standalone](https://github.com/milvus-io/milvus/releases/download/v2.3.0-beta/milvus-standalone-docker-compose.yml) or [cluster](https://github.com/milvus-io/milvus/releases/download/v2.3.0-beta/milvus-cluster-docker-compose.yml), and save it as `docker-compose.yml`.
+
 You can also simply run the following command.
 
 ```
 # For Milvus standalone
+
+# With CPU-only support
 $ wget https://github.com/milvus-io/milvus/releases/download/v2.3.0-beta/milvus-standalone-docker-compose.yml -O docker-compose.yml
+
+# With GPU support
+$ wget https://github.com/milvus-io/milvus/releases/download/v2.3.0-beta/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml
 ```
 
 ```
 # For Milvus cluster
+
+# With CPU-only support
 $ wget https://github.com/milvus-io/milvus/releases/download/v2.3.0-beta/milvus-cluster-docker-compose.yml -O docker-compose.yml
+
+# With GPU support
+wget https://github.com/milvus-io/milvus/releases/download/v2.3.0-beta/milvus-cluster-docker-compose-gpu.yml -O docker-compose.yml
 ```
 
 ## Modify the installation file
 
-In `docker-compose.yml`, add a `volumes` section under each Milvus component, i.e. root coord, data coord, data node, query coord, query node, index coord, index node, and proxy. 
+In `docker-compose.yml`, add a `volumes` section under each Milvus component, i.e. RootCoord, DataCoord, DataNode, QueryCoord, QueryNode, IndexCoord, IndexNode, and Proxy. 
 
 Map the local path to your `milvus.yaml` file onto the corresponding docker container paths to the configuration files `/milvus/configs/milvus.yaml` under all `volumes` sections.
 
@@ -195,7 +207,9 @@ Map the local path to your `milvus.yaml` file onto the corresponding docker cont
 ...
 proxy:
     container_name: milvus-proxy
-    image: milvusdb/milvus:v2.3.0-gpu-beta
+    # Change this to "milvusdb/milvus:v2.3.0-beta 
+    # if you prefer to use Milvus without GPU support"
+    image: milvusdb/milvus:v2.3.0-gpu-beta 
     command: ["milvus", "run", "proxy"]
     volumes:       # Add a volumes section.
       - /local/path/to/your/milvus.yaml:/milvus/configs/milvus.yaml   # Map the local path to the container path

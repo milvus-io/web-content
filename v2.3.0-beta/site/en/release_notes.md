@@ -13,7 +13,7 @@ Release date: 20 March, 2023
 | -------------- | ------------------ | ---------------- | -------------- | ------------------- |
 | 2.3.0 beta     | 2.2.3b1            | N/A              | N/A            | N/A                 |
 
-The latest release of Milvus introduced a new feature that will please many users: Nvidia GPU support. This new feature brings the ability to support heterogeneous computing, which can significantly accelerate specialized workloads. With GPU support, users can expect faster and more efficient vector data searches, ultimately improving productivity and performance.
+The latest release of Milvus introduced a new feature that will please many users: NVIDIA GPU support. This new feature brings the ability to support heterogeneous computing, which can significantly accelerate specialized workloads. With GPU support, users can expect faster and more efficient vector data searches, ultimately improving productivity and performance.
 
 ### Features
 
@@ -31,11 +31,21 @@ The latest release of Milvus introduced a new feature that will please many user
   | IVF-Flat (VPS)      | 3097             | 142              | 791              | 723               |
   | RAFT-IVF-Flat (VPS) | 121,568          | 5737             | 20,163           | 16,557            |
  
-  These benchmarks run against [Knowhere](knowhere.md) on a host with an 8-core CPU, 32 GB of RAM, and an Nvidia A100 GPU with an NQ of 100.
+  These benchmarks run against [Knowhere](knowhere.md) on a host with an 8-core CPU, 32 GB of RAM, and an NVIDIA A100 GPU with an NQ of 100.
 
   For details on these benchmarks, refer to [the release notes of Knowhere v2.1.0](https://github.com/milvus-io/knowhere/releases/tag/v2.1.0).
 
-  Special thanks go to @wphicks and @cjnolet from Nvidia for their contributions to the RAFT code.
+  Special thanks go to @wphicks and @cjnolet from NVIDIA for their contributions to the RAFT code.
+
+  <div class="alert note">
+
+  To use Milvus with GPU support, ensure that
+
+  - Docker Compose version is v1.28.0 or later
+  - NVIDIA Tesla driver version is 450.80.02 or later
+  - NVIDIA GTX driver version is 510.47.03 or later 
+
+  </div>
 
 - **Memory-mapped (mmap) file I/O**
 

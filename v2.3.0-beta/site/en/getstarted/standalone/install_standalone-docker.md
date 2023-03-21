@@ -19,11 +19,17 @@ Check [the requirements](prerequisite-docker.md) for hardware and software prior
 
 ## Download the `YAML` file
 
-[Download](https://github.com/milvus-io/milvus/releases/download/v2.3.0-beta/milvus-standalone-docker-compose.yml) `milvus-standalone-docker-compose.yml` and save it as `docker-compose.yml` manually, or with the following command.
+- If you want to install Milvus without GPU support, [download](https://github.com/milvus-io/milvus/releases/download/v2.3.0-beta/milvus-standalone-docker-compose.yml) `milvus-standalone-docker-compose.yml` and save it as `docker-compose.yml` manually, or with the following command.
 
-```
-$ wget https://github.com/milvus-io/milvus/releases/download/v2.3.0-beta/milvus-standalone-docker-compose.yml -O docker-compose.yml
-```
+  ```
+  $ wget https://github.com/milvus-io/milvus/releases/download/v2.3.0-beta/milvus-standalone-docker-compose.yml -O docker-compose.yml
+  ```
+
+- If you want to install Milvus with GPU support, [download](https://github.com/milvus-io/milvus/releases/download/v2.3.0-beta/milvus-standalone-docker-compose-gpu.yml) `milvus-standalone-docker-compose-gpu.yml` and save it as `docker-compose.yml` manually, or with the following command.
+
+  ```
+  $ wget https://github.com/milvus-io/milvus/releases/download/v2.3.0-beta/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml
+  ```
 
 ## Start Milvus
 
