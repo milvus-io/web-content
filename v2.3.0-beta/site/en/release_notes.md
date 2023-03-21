@@ -39,9 +39,10 @@ The latest release of Milvus introduced a new feature that will please many user
 
   To use Milvus with GPU support, ensure that
 
-  - Docker Compose version is v1.28.0 or later
-  - NVIDIA Tesla driver version is 450.80.02 or later
-  - NVIDIA GTX driver version is 510.47.03 or later 
+  - Docker Compose version is v1.28.0 or later.
+  - NVIDIA Tesla driver version is 450.80.02 or later.
+  - NVIDIA GTX driver version is 510.47.03 or later.
+  - The NVIDIA Container Toolkit has been installed. For details, refer to [Setting up NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#id2).
 
   </div>
 
@@ -63,6 +64,6 @@ The latest release of Milvus introduced a new feature that will please many user
  
 In addition to the aforementioned features, later release 2.3 of Milvus will also introduce new features such as accurate count support, Feder visualization support and growing segment indexing. 
 
-Milvus later will offer Dynamic Partitioning, which allows users to conveniently create and load a partition without releasing the collection. In addition, Milvus 2.3.0 will improve memory management, performance, and manageability under multi-partition cases.
+In addition, Milvus will offer Dynamic Partitioning in later releases, which allows users to conveniently create and load a partition without releasing the collection. In addition, Milvus 2.3.0 will improve memory management, performance, and manageability under multi-partition cases.
 
 Now, you can download [Milvus](https://hub.docker.com/r/milvusdb/milvus) and [get started](https://milvus.io).
