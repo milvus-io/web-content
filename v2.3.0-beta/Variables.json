@@ -1,6 +1,6 @@
 {
-  "milvus_release_version": "2.2.4",
-  "milvus_release_tag": "2.2.4",
+  "milvus_release_version": "2.3.0 beta",
+  "milvus_release_tag": "2.3.0-beta",
   "milvus_deb_name": "milvus_2.2.0-1_amd64",
   "milvus_rpm_name": "milvus-2.2.0-1.el7.x86_64",
   "milvus_python_sdk_version": "2.3.0b1",
