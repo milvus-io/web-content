@@ -173,7 +173,7 @@ Sorted by:
 
 Download the installation file for Milvus [standalone](https://github.com/milvus-io/milvus/releases/download/v2.3.0-beta/milvus-standalone-docker-compose.yml) or [cluster](https://github.com/milvus-io/milvus/releases/download/v2.3.0-beta/milvus-cluster-docker-compose.yml), and save it as `docker-compose.yml`.
 
-If you want to install Milvus with GPU support, download the installation file for Milvus [standalone](https://github.com/milvus-io/milvus/releases/download/v2.3.0-beta/milvus-standalone-docker-compose.yml) or [cluster](https://github.com/milvus-io/milvus/releases/download/v2.3.0-beta/milvus-cluster-docker-compose.yml), and save it as `docker-compose.yml`.
+If you want to install Milvus with GPU support, download the installation file for Milvus [standalone](https://github.com/milvus-io/milvus/releases/download/v2.3.0-beta/milvus-standalone-docker-compose-gpu.yml) or [cluster](https://github.com/milvus-io/milvus/releases/download/v2.3.0-beta/milvus-cluster-docker-compose-gpu.yml), and save it as `docker-compose.yml`.
 
 You can also simply run the following command.
 

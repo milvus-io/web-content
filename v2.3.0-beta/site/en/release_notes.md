@@ -21,8 +21,6 @@ The latest release of Milvus introduced a new feature that will please many user
 
   Milvus now supports two GPU-based IVF indexes: RAFT and FAISS. According to a benchmark on RAFT's GPU-based IVF-series indexes, GPU indexing achieves a 10x increase in search performance on large NQ cases.
 
-  Benchmark
-
   We have compared **RAFT-IVF-Flat** with **IVF-Flat** and HNSW at a recall rate of 95%, and obtained the following results.
 
   | Datasets            | SIFT             | GIST             | GLOVE            | Deep              |
