@@ -28,34 +28,40 @@ If a user is bind with a `public` role, this user is entitled to the privileges 
 
 The following table lists the values you can choose when [enabling RBAC](rbac.md).
 
-| Object name | Privilege name     | Relevant API description on the client side       |
-|-------------|--------------------|---------------------------------------------------|
-| Collection  | CreateIndex        | CreateIndex                                       |
-| Collection  | DropIndex          | DropIndex                                         |
-| Collection  | IndexDetail        | DescribeIndex/GetIndexState/GetIndexBuildProgress |
-| Collection  | Load               | LoadCollection                                    |
-| Collection  | Release            | ReleaseCollection                                 |
-| Collection  | Insert             | Insert                                            |
-| Collection  | Delete             | Delete                                            |
-| Collection  | Search             | Search                                            |
-| Collection  | Flush              | Flush                                             |
-| Collection  | Query              | Query                                             |
-| Collection  | GetStatistics      | GetCollectionStatistics                           |
-| Collection  | Compaction         | Compact                                           |
-| Collection  | Alias              | CreateAlias/DropAlias/AlterAlias                  |
-| Collection  | Import             | BulkInsert/Import                                 |
-| Collection  | LoadBalance        | LoadBalance                                       |
-| Global      | *(All)             | All API operation permissions in this table       |
-| Global      | CreateCollection   | CreateCollection                                  |
-| Global      | DropCollection     | DropCollection                                    |
-| Global      | DescribeCollection | DescribeCollection                                |
-| Global      | ShowCollections    | ShowCollections                                   |
-| Global      | CreateOwnership    | CreateUser CreateRole                             |
-| Global      | DropOwnership      | DeleteCredential DropRole                         |
-| Global      | SelectOwnership    | SelectRole/SelectGrant                            |
-| Global      | ManageOwnership    | OperateUserRole OperatePrivilege                  |
-| User        | UpdateUser         | UpdateCredential                                  |
-| User        | SelectUser         | SelectUser                                        |
+| Object name | Privilege name        | Relevant API description on the client side       |
+| ----------- | --------------------- | ------------------------------------------------- |
+| Collection  | CreateIndex           | CreateIndex                                       |
+| Collection  | DropIndex             | DropIndex                                         |
+| Collection  | IndexDetail           | DescribeIndex/GetIndexState/GetIndexBuildProgress |
+| Collection  | Load                  | LoadCollection                                    |
+| Collection  | Release               | ReleaseCollection                                 |
+| Collection  | Insert                | Insert                                            |
+| Collection  | Delete                | Delete                                            |
+| Collection  | Search                | Search                                            |
+| Collection  | Flush                 | Flush                                             |
+| Collection  | Query                 | Query                                             |
+| Collection  | GetStatistics         | GetCollectionStatistics                           |
+| Collection  | Compaction            | Compact                                           |
+| Collection  | Alias                 | CreateAlias/DropAlias/AlterAlias                  |
+| Collection  | Import                | BulkInsert/Import                                 |
+| Collection  | LoadBalance           | LoadBalance                                       |
+| Global      | *(All)                | All API operation permissions in this table       |
+| Global      | CreateCollection      | CreateCollection                                  |
+| Global      | DropCollection        | DropCollection                                    |
+| Global      | DescribeCollection    | DescribeCollection                                |
+| Global      | ShowCollections       | ShowCollections                                   |
+| Global      | CreateOwnership       | CreateUser CreateRole                             |
+| Global      | DropOwnership         | DeleteCredential DropRole                         |
+| Global      | SelectOwnership       | SelectRole/SelectGrant                            |
+| Global      | ManageOwnership       | OperateUserRole OperatePrivilege                  |
+| Global      | CreateResourceGroup   | CreateResourceGroup                               |
+| Global      | DropResourceGroup     | DropResourceGroup                                 |
+| Global      | DescribeResourceGroup | DescribeResourceGroup                             |
+| Global      | ListResourceGroups    | ListResourceGroups                                |
+| Global      | TransferNode          | TransferNode                                      |
+| Global      | TransferReplica       | TransferReplica                                   |
+| User        | UpdateUser            | UpdateCredential                                  |
+| User        | SelectUser            | SelectUser                                        |
 
 
 <div class="alert note">
