@@ -10,7 +10,7 @@ In Milvus, you can use a resource group to physically isolate certain query node
 
 ### What is a resource group
 
-A resource group can hold several or all of the query nodes in a Milvus instance. You decide how you want to allocate query nodes among resource groups based on what makes the most sense for you. For example, in a multi-tenant scenario, you can allocate an appropriate number of query nodes to each tenant so that the operations within each resource group are physically independent of those in other resource groups.
+A resource group can hold several or all of the query nodes in a Milvus cluster. You decide how you want to allocate query nodes among resource groups based on what makes the most sense for you. For example, in a multi-collection scenario, you can allocate an appropriate number of query nodes to each resource group and load collections into different resource group, so that the operations within each collection are physically independent of those in other collections.
 
 Note that a Milvus instance maintains a default resource group to hold all the query nodes at the start-up and names it **__default_resource_group**. You can move some nodes from the default resource group to the one you create.
 
@@ -63,7 +63,7 @@ All code samples on this page are in PyMilvus 2.3.0b1. Upgrade your PyMilvus ins
     print(f"Resource group description: {info}")
 
     # Resource group description: 
-    #        <name:"demo">,           // string, rg name
+    #        <name:"rg">,           // string, rg name
     #        <capacity:1>,            // int, num_node which has been transfer to this rg
     #        <num_available_node:0>,  // int, available node_num, some node may shutdown
     #        <num_loaded_replica:{}>, // map[string]int, from collection_name to loaded replica of each collecion in this rg
@@ -102,6 +102,7 @@ All code samples on this page are in PyMilvus 2.3.0b1. Upgrade your PyMilvus ins
     collection.load(replica_number=2)
 
     # Or, you can ask Milvus load the collection to the desired resource group.
+    # make sure that query nodes num should be greater or equal to replica_number
     resource_groups = ['rg']
     collection.load(replica_number=2, _resource_group=resource_groups) 
     ```
