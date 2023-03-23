@@ -868,7 +868,7 @@
       "isMenu": true
     }, 
     {
-      "id": "milvus_backup_cli.md",
+      "id": "milvus_backup-cli.md",
       "title": "Commands",
       "label1": "tools",
       "label2": "milvus_backup",
@@ -877,7 +877,7 @@
       "isMenu": true
     },
     {
-      "id": "milvus_backup_api.md",
+      "id": "milvus_backup-api.md",
       "title": "API",
       "label1": "tools",
       "label2": "milvus_backup",
