@@ -51,7 +51,7 @@ results = collection.search(
 	param=search_params, 
 	limit=10, 
 	expr=None,
-	output_fields=['title'],
+	output_fields=['title'], # set the fields you want to retrieve in the search results.
 	consistency_level="Strong"
 )
 
@@ -61,7 +61,7 @@ results[0].ids
 # get the distances to the query vector from all returned hits
 results[0].distances
 
-# get the value of a specified output field.
+# Get the value of an output field specified in the search request.
+# Vector fields are not supported yet.
 hit = results[0][0]
 hit.entity.get('title')
-```
