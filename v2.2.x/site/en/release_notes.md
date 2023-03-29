@@ -6,6 +6,60 @@ summary: Milvus Release Notes
 
 Find out what’s new in Milvus! This page summarizes information about new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.2.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## 2.2.5
+
+Release date: 29 March, 2023
+
+| Milvus version | Python SDK version | Java SDK version | Go SDK version | Node.js SDK version |
+| -------------- | ------------------ | ---------------- | -------------- | ------------------- |
+| 2.2.5          | 2.2.4              | 2.2.4            | 2.2.1          | 2.2.4               |
+
+### Security
+
+Fixed MinIO CVE-2023-28432 by upgrading MinIO to RELEASE.2023-03-20T20-16-18Z。
+
+### New Features
+
+- **First/Random replica selection policy**
+
+  This policy allows for a random replica selection if the first replica chosen under the round-robin selection policy fails. This improves the throughput of database operations.
+
+### Bug fixes
+
+- Fixed index data loss during the upgrade from Milvus 2.2.0 to 2.2.3.
+
+  - Fixed an issue to prevent DataCoord from calculating segment lines by stale log entries num (#23069)
+  - Fixed DataCoord's meta that may be broken with DataNode of the prior version (#23031)
+
+- Fixed DataCoord Out-of-Memory (OOM) with large fresh pressure.
+
+  - Fixed an issue to make DataNode's tt interval configurable (#22990) 
+  - Fixed endless appending SIDs (#22989)
+
+- Fixed a concurrency issue in the LRU cache that was caused by concurrent queries with specified output fields.
+
+  - Fixed an issue to use single-flight to limit the readWithCache concurrent operation (#23037)
+  - Fixed LRU cache concurrency (#23041)
+  - Fixed query performance issue with a large number of segments (#23028)
+  - Fixed shard leader cache
+  - Fixed GetShardLeader returns old leader (#22887) (#22903)
+  - Fixed an issue to deprecate the shard cache immediately if a query failed (#22848)
+  - Fixed an issue to enable batch delete files on GCP of MinIO (#23052) (#23083)
+  - Fixed flush delta buffer if SegmentID equals 0 (#23064)
+  - fixed unassigned from resource group (#22800)
+  - Fixed load partition timeout logic still using createdAt (#23022)
+  - Fixed unsub channel always removes QueryShard (#22961)
+
+### Enhancements
+
+- Added memory Protection by using the buffer size in memory synchronization policy (#22797)
+- Added dimension checks upon inserted records (#22819) (#22826)
+- Added configuration item to disable BF load (#22998)
+- Aligned the maximum dimensions of the DisANN index and that of a collection (#23027)
+- Added checks whether all columns aligned with same num_rows (#22968) (#22981)
+- Upgraded Knowhere to 1.3.11 (#22975)
+- Added the user RPC counter (#22870)
+
 ## 2.2.4
 Release date: 17 March, 2023
 
@@ -37,7 +91,7 @@ We have also made several enhancements to make your Milvus cluster faster and co
 
   If you are more concerned with performance rather than data freshness, enabling this option will skip search on all growing segments and offer better search performance under the scenario search with insertion. See [search()](https://milvus.io/api-reference/pymilvus/v2.2.3/Collection/search().md) and [query()](https://milvus.io/api-reference/pymilvus/v2.2.3/Collection/query().md) for details.
 
-### Bugfix
+### Bug fixes
 
 - Fixed segment not found when forwarding delete to empty segment [#22528](https://github.com/milvus-io/milvus/pull/22528)[#22551](https://github.com/milvus-io/milvus/pull/22551)
 - Fixed possible broken channel checkpoint in v2.2.2 [#22205](https://github.com/milvus-io/milvus/pull/22205) [#22227](https://github.com/milvus-io/milvus/pull/22227)
