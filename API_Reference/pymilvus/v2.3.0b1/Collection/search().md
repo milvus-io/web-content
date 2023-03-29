@@ -61,8 +61,8 @@ results[0].ids
 # get the distances to the query vector from all returned hits
 results[0].distances
 
-# Get the value of an output field specified in the search request.
-# Vector fields are not supported yet.
+# get the value of an output field specified in the search request.
+# vector fields are not supported yet.
 hit = results[0][0]
 hit.entity.get('title')
 ```
