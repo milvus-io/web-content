@@ -16,7 +16,7 @@ Release date: 29 March, 2023
 
 ### Security
 
-Fixed MinIO CVE-2023-28432 by upgrading MinIO to RELEASE.2023-03-20T20-16-18Z。
+Fixed MinIO CVE-2023-28432 by upgrading MinIO to RELEASE.2023-03-20T20-16-18Z.
 
 ### New Features
 
