@@ -26,7 +26,7 @@ Fixed MinIO CVE-2023-28432 by upgrading MinIO to RELEASE.2023-03-20T20-16-18Z.
 
 ### Bug fixes
 
-- Fixed index data loss during the upgrade from Milvus 2.2.0 to 2.2.3.
+- Fixed index data loss during the upgrade from Milvus 2.2.0 to 2.2.3 or higher.
 
   - Fixed an issue to prevent DataCoord from calculating segment lines by stale log entries num (#23069)
   - Fixed DataCoord's meta that may be broken with DataNode of the prior version (#23031)
@@ -41,7 +41,9 @@ Fixed MinIO CVE-2023-28432 by upgrading MinIO to RELEASE.2023-03-20T20-16-18Z.
   - Fixed an issue to use single-flight to limit the readWithCache concurrent operation (#23037)
   - Fixed LRU cache concurrency (#23041)
   - Fixed query performance issue with a large number of segments (#23028)
-  - Fixed shard leader cache
+
+- Fixed shard leader cache
+
   - Fixed GetShardLeader returns old leader (#22887) (#22903)
   - Fixed an issue to deprecate the shard cache immediately if a query failed (#22848)
   - Fixed an issue to enable batch delete files on GCP of MinIO (#23052) (#23083)
