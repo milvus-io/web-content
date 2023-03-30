@@ -99,9 +99,9 @@ We have also made several enhancements to make your Milvus cluster faster and co
 ### Bug fixes
 
 - Fixed segment not found when forwarding delete to empty segment ([#22528](https://github.com/milvus-io/milvus/pull/22528))([#22551](https://github.com/milvus-io/milvus/pull/22551))
-- Fixed possible broken channel checkpoint in v2.2.2 ([#22205](https://github.com/milvus-io/milvus/pull/22205)) ([#22227](https://github.com/milvus-io/milvus/pull/22227)))
+- Fixed possible broken channel checkpoint in v2.2.2 ([#22205](https://github.com/milvus-io/milvus/pull/22205)) ([#22227](https://github.com/milvus-io/milvus/pull/22227))
 - Fixed entity number mismatch with some entities inserted  ([#22306](https://github.com/milvus-io/milvus/pull/22306))
-- Fixed DiskANN recovery failure after QueryNode reboots ([#22488](https://github.com/milvus-io/milvus/pull/22488) [#22514](https://github.com/milvus-io/milvus/pull/22514))
+- Fixed DiskANN recovery failure after QueryNode reboots ([#22488](https://github.com/milvus-io/milvus/pull/22488)) ([#22514](https://github.com/milvus-io/milvus/pull/22514))
 - Fixed search/release on same segment ([#22414](https://github.com/milvus-io/milvus/pull/22414))
 - Fixed file system crash during bulk-loading files prefixed with a '.' ([#22215](https://github.com/milvus-io/milvus/pull/22215))
 - Added tickle for DataCoord watch event ([#21193](https://github.com/milvus-io/milvus/pull/21193)) ([#22209](https://github.com/milvus-io/milvus/pull/22209))
