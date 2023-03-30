@@ -28,39 +28,42 @@ Fixed MinIO CVE-2023-28432 by upgrading MinIO to RELEASE.2023-03-20T20-16-18Z.
 
 - Fixed index data loss during the upgrade from Milvus 2.2.0 to 2.2.3 or higher.
 
-  - Fixed an issue to prevent DataCoord from calculating segment lines by stale log entries num (#23069)
-  - Fixed DataCoord's meta that may be broken with DataNode of the prior version (#23031)
+  - Fixed an issue to prevent DataCoord from calculating segment lines by stale log entries num ([#23069](https://github.com/milvus-io/milvus/pull/23069))
+  - Fixed DataCoord's meta that may be broken with DataNode of the prior version ([#23031](https://github.com/milvus-io/milvus/pull/23031))
 
 - Fixed DataCoord Out-of-Memory (OOM) with large fresh pressure.
 
-  - Fixed an issue to make DataNode's tt interval configurable (#22990) 
-  - Fixed endless appending SIDs (#22989)
+  - Fixed an issue to make DataNode's tt interval configurable ([#22990](https://github.com/milvus-io/milvus/pull/22990)) 
+  - Fixed endless appending SIDs ([#22989](https://github.com/milvus-io/milvus/pull/22989))
 
 - Fixed a concurrency issue in the LRU cache that was caused by concurrent queries with specified output fields.
 
-  - Fixed an issue to use single-flight to limit the readWithCache concurrent operation (#23037)
-  - Fixed LRU cache concurrency (#23041)
-  - Fixed query performance issue with a large number of segments (#23028)
+  - Fixed an issue to use single-flight to limit the readWithCache concurrent operation ([#23037](https://github.com/milvus-io/milvus/pull/23037))
+  - Fixed LRU cache concurrency ([#23041](https://github.com/milvus-io/milvus/pull/23041))
 
 - Fixed shard leader cache
 
-  - Fixed GetShardLeader returns old leader (#22887) (#22903)
-  - Fixed an issue to deprecate the shard cache immediately if a query failed (#22848)
-  - Fixed an issue to enable batch delete files on GCP of MinIO (#23052) (#23083)
-  - Fixed flush delta buffer if SegmentID equals 0 (#23064)
-  - fixed unassigned from resource group (#22800)
-  - Fixed load partition timeout logic still using createdAt (#23022)
-  - Fixed unsub channel always removes QueryShard (#22961)
+  - Fixed GetShardLeader returns old leader ([#22887](https://github.com/milvus-io/milvus/pull/22887)) ([#22903](https://github.com/milvus-io/milvus/pull/22903))
+  - Fixed an issue to deprecate the shard cache immediately if a query failed ([#22848](https://github.com/milvus-io/milvus/pull/22848))
+
+- Other fixes
+
+  - Fixed query performance issue with a large number of segments ([#23028](https://github.com/milvus-io/milvus/pull/23028))
+  - Fixed an issue to enable batch delete files on GCP of MinIO ([#23052](https://github.com/milvus-io/milvus/pull/23052)) ([#23083](https://github.com/milvus-io/milvus/pull/23083))
+  - Fixed flush delta buffer if SegmentID equals 0 ([#23064](https://github.com/milvus-io/milvus/pull/23064))
+  - fixed unassigned from resource group ([#22800](https://github.com/milvus-io/milvus/pull/22800))
+  - Fixed load partition timeout logic still using createdAt ([#23022](https://github.com/milvus-io/milvus/pull/23022))
+  - Fixed unsub channel always removes QueryShard ([#22961](https://github.com/milvus-io/milvus/pull/22961))
 
 ### Enhancements
 
-- Added memory Protection by using the buffer size in memory synchronization policy (#22797)
-- Added dimension checks upon inserted records (#22819) (#22826)
-- Added configuration item to disable BF load (#22998)
-- Aligned the maximum dimensions of the DisANN index and that of a collection (#23027)
-- Added checks whether all columns aligned with same num_rows (#22968) (#22981)
-- Upgraded Knowhere to 1.3.11 (#22975)
-- Added the user RPC counter (#22870)
+- Added memory Protection by using the buffer size in memory synchronization policy ([#22797](https://github.com/milvus-io/milvus/pull/22797))
+- Added dimension checks upon inserted records ([#22819](https://github.com/milvus-io/milvus/pull/22819)) ([#22826](https://github.com/milvus-io/milvus/pull/22826))
+- Added configuration item to disable BF load ([#22998](https://github.com/milvus-io/milvus/pull/22998))
+- Aligned the maximum dimensions of the DisANN index and that of a collection ([#23027](https://github.com/milvus-io/milvus/pull/23027))
+- Added checks whether all columns aligned with same num_rows ([#22968](https://github.com/milvus-io/milvus/pull/22968)) ([#22981](https://github.com/milvus-io/milvus/pull/22981))
+- Upgraded Knowhere to 1.3.11 ([#22975](https://github.com/milvus-io/milvus/pull/22975))
+- Added the user RPC counter ([#22870](https://github.com/milvus-io/milvus/pull/22870))
 
 ## 2.2.4
 Release date: 17 March, 2023
