@@ -5,7 +5,7 @@ summary: Learn about the motivation and procedure for Milvus coordinators to wor
 
 # Coordinator HA
 
-As shown in the [Mivlus architecture](architecture_overview), Milvus consists of many components and has them work in a distributed manner. Among all the components, Milvus ensures the high availability of the workers through [scaling up and scaling out](scaleout) of the nodes, making coordinators the only weak link in the chain. 
+As shown in the [Milvus architecture](architecture_overview.md), Milvus consists of many components and has them work in a distributed manner. Among all the components, Milvus ensures the high availability of the workers through [scaling up and scaling out](scaleout.md) of the nodes, making coordinators the only weak link in the chain. 
 
 ## Overview
 

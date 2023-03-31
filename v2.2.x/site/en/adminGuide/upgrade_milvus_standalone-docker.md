@@ -11,9 +11,19 @@ summary: Learn how to upgrade Milvus standalone with Docker Compose.
 
 # Upgrade Milvus Standalone with Docker Compose
 
-A major change in Milvus 2.2 is the meta structure of segment indexes. This topic describes how to use Docker Compose to migrate the meta and upgrade Milvus from v2.1.x to v2.2.0.
+A major change in Milvus 2.2 is the metadata structure of segment indexes. This topic describes how to use Docker Compose upgrade Milvus from v2.1.x to v2.2.x.
 
-## Upgrade Milvus from v2.1.x to v2.2.0
+In normal cases, you can upgrade Milvus as follows and a certain downtime is introduced:
+
+```shell
+// Run the following only after update the milvus image tag in the docker-compose.yaml
+docker-compose down
+docker-compose up -d
+```
+
+However, you need to [migrate the metadata](#Migrate-the-metadata) before any upgrade from Milvus v2.1.x to v0.7.9.
+
+## Migrate the metadata
 
 1. Stop all Milvus components.
 
@@ -23,7 +33,7 @@ docker stop <milvus-component-docker-container-name>
 
 2. Prepare the configuration file `migration.yaml` for meta migration.
 
-```
+```yaml
 # migration.yaml
 cmd:
   # Option: run/backup/rollback
@@ -31,7 +41,7 @@ cmd:
   runWithBackup: true
 config:
   sourceVersion: 2.1.4   # Specify your milvus version
-  targetVersion: 2.2.0
+  targetVersion: 2.2.5
   backupFilePath: /tmp/migration.bak
 metastore:
   type: etcd
@@ -53,15 +63,11 @@ docker run --rm -it --network milvus -v $(pwd)/migration.yaml:/milvus/configs/mi
 
 4. Start Milvus components again with the new Milvus image.
 
-```
-Update the milvus image tag in the docker-compose.yaml
+```shell
+// Run the following only after update the milvus image tag in the docker-compose.yaml
 docker-compose down
 docker-compose up -d
 ```
-
-
-
-
 
 ## What's next
 - You might also want to learn how to:
