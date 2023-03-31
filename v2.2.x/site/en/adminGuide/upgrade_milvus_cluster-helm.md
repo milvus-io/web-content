@@ -43,6 +43,46 @@ milvus/milvus   3.3.5           2.2.0                   Milvus is an open-source
 milvus/milvus   3.3.4           2.2.0                   Milvus is an open-source vector database built ...
 ```
 
+You can choose the upgrade path for your Milvus as follows:
+
+- [Conduct a rolling upgrade](#Conduct-a-rolling-upgrade) from Milvus v2.2.3 and later releases to v2.2.5.
+- [Upgrade Milvus using Helm](#Upgrade-Milvus-using-Helm) for an upgrade from a minor release before v2.2.3 to v2.2.5.
+- [Migrate the metadata](#Migrate-the-metadata) before the upgrade from Milvus v2.1.x to v2.2.5.
+
+## Conduct a rolling upgrade
+
+Since Milvus 2.2.3, you can configure Milvus coordinators to work in active-standby mode and enable the rolling upgrade feature for them, so that Milvus can respond to incoming requests during the coordinator upgrades. In previous releases, coordinators are to be removed and then created during an upgrade, which may introduce certain downtime of the service.
+
+Rolling upgrades requires coordinators to work in active-standby mode. You can use [the script](https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/upgrade/rollingUpdate.sh) we provide to configure the coordinators to work in active-standby mode and start the rolling upgrade.
+
+Based on the rolling update capabilities provided by Kubernetes, the above script enforces an ordered update of the deployments according to their dependencies. In addition, Milvus implements a mechanism to ensure that its components remain compatible with those depending on them during the upgrade, significantly reducing potential service downtime.
+
+The script applies only to the upgrade of Milvus installed with Helm. The following table lists the command flags available in the scripts.
+
+| Parameters   | Description                                               | Default value                    | Required                |
+| ------------ | ----------------------------------------------------------| -------------------------------- | ----------------------- |
+| `i`          | Milvus instance name                                      | `None`                           | True                    |
+| `n`          | Namespace that Milvus is installed in                     | `default`                        | False                   |
+| `t`          | Target Milvus version                                     | `None`                           | True                    |
+| `w`          | New Milvus image tag                                      | `milvusdb/milvus:v2.2.3`         | True                    |
+| `o`          | Operation                                                 | `update`                         | False                   |
+
+Once you have ensured that all deployments in your Milvus instance are in their normal status. You can run the following command to upgrade the Milvus instance to 2.2.5.
+
+```shell
+sh rollingUpdate.sh -n default -i my-release -o update -t 2.2.5 -w 'milvusdb/milvus:v2.2.5'
+```
+
+<div class="alert note">
+
+1. The script hard-codes the upgrade order of the deployments and cannot be changed.
+2. The script uses `kubectl patch` to update the deployments and `kubectl rollout status` to watch their status.
+3. The script uses `kubectl patch` to update the `app.kubernetes.io/version` label of the deployments to the one specified after the `-t` flag in the command.
+
+</div>
+
+## Upgrade Milvus using Helm
+
 To upgrade Milvus from a minor release before v2.2.3 to the latest, run the following commands:
 
 ```shell
@@ -50,10 +90,7 @@ helm repo update
 helm upgrade --version=4.0.14 # use the helm chart version here
 ```
 
-In normal cases, you can upgrade your Milvus instance using `helm upgrade` except you want to:
-
-- [Migrate the metadata](#Migrate-the-metadata) before the upgrade from Milvus v2.1.x to v2.2.x.
-- [Conduct a rolling upgrade](#Conduct-a-rolling-upgrade) from Milvus v2.2.3 and later releases to the latest.
+Use the Helm chart version in the preceding command. For details on how to obtain the Helm chart version, refer to [Check the Milvus version](#Check-the-Milvus-version).
 
 ## Migrate the metadata
 
@@ -181,35 +218,3 @@ The following commands assume that you upgrade Milvus from v2.1.4 to 2.2.5. Chan
     ./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.2.5 -r by-dev -o rollback -w milvusdb/milvus:v2.1.1
     ./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.2.5 -r by-dev -o migrate -w milvusdb/milvus:v2.2.5
     ```
-
-## Conduct a rolling upgrade
-
-Since Milvus 2.2.3, you can configure Milvus coordinators to work in active-standby mode and enable the rolling upgrade feature for them, so that Milvus can respond to incoming requests during the coordinator upgrades. In previous releases, coordinators are to be removed and then created during an upgrade, which may introduce certain downtime of the service.
-
-Rolling upgrades requires coordinators to work in active-standby mode. You can use [the script](https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/upgrade/rollingUpdate.sh) we provide to configure the coordinators to work in active-standby mode and start the rolling upgrade.
-
-Based on the rolling update capabilities provided by Kubernetes, the above script enforces an ordered update of the deployments according to their dependencies. In addition, Milvus implements a mechanism to ensure that its components remain compatible with those depending on them during the upgrade, significantly reducing potential service downtime.
-
-The script applies only to the upgrade of Milvus installed with Helm. The following table lists the command flags available in the scripts.
-
-| Parameters   | Description                                               | Default value                    | Required                |
-| ------------ | ----------------------------------------------------------| -------------------------------- | ----------------------- |
-| `i`          | Milvus instance name                                      | `None`                           | True                    |
-| `n`          | Namespace that Milvus is installed in                     | `default`                        | False                   |
-| `t`          | Target Milvus version                                     | `None`                           | True                    |
-| `w`          | New Milvus image tag                                      | `milvusdb/milvus:v2.2.3`         | True                    |
-| `o`          | Operation                                                 | `update`                         | False                   |
-
-Once you have ensured that all deployments in your Milvus instance are in their normal status. You can run the following command to upgrade the Milvus instance to 2.2.5.
-
-```shell
-sh rollingUpdate.sh -n default -i my-release -o update -t 2.2.5 -w 'milvusdb/milvus:v2.2.5'
-```
-
-<div class="alert note">
-
-1. The script hard-codes the upgrade order of the deployments and cannot be changed.
-2. The script uses `kubectl patch` to update the deployments and `kubectl rollout status` to watch their status.
-3. The script uses `kubectl patch` to update the `app.kubernetes.io/version` label of the deployments to the one specified after the `-t` flag in the command.
-
-</div>
