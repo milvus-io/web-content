@@ -16,7 +16,7 @@ A major change in Milvus 2.2 is the metadata structure of segment indexes. This 
 In normal cases, you can upgrade Milvus as follows and a certain downtime is introduced:
 
 ```shell
-// Run the following only after update the milvus image tag in the docker-compose.yaml
+// Run the following only after you update the milvus image tag in the docker-compose.yaml
 docker-compose down
 docker-compose up -d
 ```
