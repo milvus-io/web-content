@@ -230,9 +230,13 @@ Output:
                 For scalar field:
                 <ul>
                     <li><code>DataType.BOOL</code> (Boolean)</li>
+                    <li><code>DataType.INT8</code> (numpy.int8)</li>
+                    <li><code>DataType.INT16</code> (numpy.int16)</li>
+                    <li><code>DataType.INT32</code> (numpy.int32)</li>
                     <li><code>DataType.INT64</code> (numpy.int64)</li>
                     <li><code>DataType.FLOAT</code> (numpy.float32)</li>
                     <li><code>DataType.DOUBLE</code> (numpy.double)</li>
+                    <li><code>DataType.VARCHAR</code> (VARCHAR)</li>
                 </ul>
                 For vector field:
                 <ul>
@@ -323,14 +327,19 @@ Output:
             <td>Data type of the field to create.</td>
             <td>For primary key field:
                 <ul>
-                    <li><code>entity.FieldTypeInt64</code> (numpy.int64)</li>
+                    <li><code>entity.FieldTypeInt64 (numpy.int64)</code></li>
+                    <li><code>entity.FieldTypeVarChar (VARCHAR)</code></li>
                 </ul>
                 For scalar field:
                 <ul>
-                    <li><code>entity.FieldTypeBool</code> (Boolean)</li>
-                    <li><code>entity.FieldTypeInt64</code> (numpy.int64)</li>
-                    <li><code>entity.FieldTypeFloat</code> (numpy.float32)</li>
-                    <li><code>entity.FieldTypeDouble</code> (numpy.double)</li>
+                    <li><code>entity.FieldTypeBool (Boolean)</code></li>
+                    <li><code>entity.FieldTypeInt8 (numpy.int8)</code></li>
+                    <li><code>entity.FieldTypeInt16 (numpy.int16)</code></li>
+                    <li><code>entity.FieldTypeInt32 (numpy.int32)</code></li>
+                    <li><code>entity.FieldTypeInt64 (numpy.int64)</code></li>
+                    <li><code>entity.FieldTypeFloat (numpy.float32)</code></li>
+                    <li><code>entity.FieldTypeDouble (numpy.double)</code></li>
+                    <li><code>entity.FieldTypeVarChar (VARCHAR)</code></li>
                 </ul>
                 For vector field:
                 <ul>
@@ -385,7 +394,7 @@ Output:
         <tr>
             <td><code>data_type</code></td>
             <td>Data type of the filed to create.</td>
-            <td>Refer to <a href="https://github.com/milvus-io/milvus-sdk-node/blob/main/milvus/types/Common.ts">data type reference number</a> for more information.</td>
+            <td>Refer to <a href="https://github.com/milvus-io/milvus-sdk-node/blob/main/milvus/const/Milvus.ts#L287">data type reference number</a> for more information.</td>
         </tr>
         <tr>
             <td><code>is_primary</code> (Mandatory for primary key field)</td>
@@ -435,13 +444,18 @@ Output:
             <td>For primary key field:
                 <ul>
                     <li><code>entity.FieldTypeInt64</code> (numpy.int64)</li>
+                    <li><code>entity.FieldTypeVarChar</code> (VARCHAR)</li>
                 </ul>
                 For scalar field:
                 <ul>
                     <li><code>entity.FieldTypeBool</code> (Boolean)</li>
+                    <li><code>entity.FieldTypeInt8</code> (numpy.int8)</li>
+                    <li><code>entity.FieldTypeInt16</code> (numpy.int16)</li>
+                    <li><code>entity.FieldTypeInt32</code> (numpy.int32)</li>
                     <li><code>entity.FieldTypeInt64</code> (numpy.int64)</li>
                     <li><code>entity.FieldTypeFloat</code> (numpy.float32)</li>
                     <li><code>entity.FieldTypeDouble</code> (numpy.double)</li>
+                    <li><code>entity.FieldTypeVarChar</code> (VARCHAR)</li>
                 </ul>
                 For vector field:
                 <ul>

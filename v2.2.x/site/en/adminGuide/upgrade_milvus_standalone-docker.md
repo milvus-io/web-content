@@ -15,6 +15,12 @@ This topic describes how to upgrade your Milvus using Docker Compose.
 
 In normal cases, you can [upgrade Milvus by changing its image](#Upgrade-Milvus-by-changing-its-image). However, you need to [migrate the metadata](#Migrate-the-metadata) before any upgrade from v2.1.x to v2.2.5.
 
+<div class="alter note">
+
+Due to security concerns, Milvus upgrades its MinIO to RELEASE.2023-03-20T20-16-18Z with the release of v2.2.5. Before any upgrades from previous Milvus Standalone releases installed using Docker Compose, you should create a Single-Node Single-Drive MinIO deployment and migrate existing MinIO settings and content to the new deployment. For details, refer to [this guide](https://min.io/docs/minio/linux/operations/install-deploy-manage/migrate-fs-gateway.html#id2).
+
+</div>
+
 ## Upgrade Milvus by changing its image
 
 In normal cases, you can upgrade Milvus as follows:
