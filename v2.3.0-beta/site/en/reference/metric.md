@@ -27,7 +27,7 @@ The following table shows how these widely used similarity metrics fit with vari
 <tbody>
   <tr>
     <td class="tg-0pky"><ul><li>Euclidean distance (L2)</li><li>Inner product (IP)</li></td>
-    <td class="tg-0pky" rowspan="2"><ul><li>FLAT</li><li>IVF_FLAT</li><li>IVF_SQ8</li><li>IVF_PQ</li><li>HNSW</li><li>IVF_HNSW</li><li>RHNSW_FLAT</li><li>RHNSW_SQ</li><li>RHNSW_PQ</li><li>ANNOY</li></ul></td>
+    <td class="tg-0pky" rowspan="2"><ul><li>FLAT</li><li>IVF_FLAT</li><li>IVF_SQ8</li><li>IVF_PQ</li><li>HNSW</li><li>DISKANN</li><li>GPU_IVF_FLAT</li><li>GPU_IVF_PQ</li></ul></td>
   </tr>
 </tbody>
 </table>
