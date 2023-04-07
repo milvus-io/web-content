@@ -33,7 +33,7 @@ minikube is required when running Kubernetes cluster locally. minikube requires 
 | Software | Version                       | Note |
 | -------- | ----------------------------- | ---- |
 | etcd     | 3.5.0                         |  See [additional disk requirements](#Additional-disk-requirements). |
-| MinIO    |  RELEASE.2020-11-06T23-17-07Z | |
+| MinIO    |  RELEASE.2023-03-20T20-16-18Z | |
 | Pulsar   | 2.8.2                         | |
 
 ### Additional disk requirements
