@@ -28,15 +28,26 @@ Milvus 2.1 allows users to load a collection as multiple replicas to utilize the
 
 
 ```python
-from pymilvus import Collection
-collection = Collection("book")      # Get an existing collection.
+from pymilvus import Collection, utility
+
+# Get an existing collection.
+collection = Collection("book")      
 collection.load(replica_number=2)
+
+# Check the loading progress and loading status
+utility.load_state("book")
+# Output: <LoadState: Loaded>
+
+utility.loading_progress("book")
+# Output: {'loading_progress': 100%}
 ```
 
 ```javascript
 await milvusClient.collectionManager.loadCollection({
   collection_name: "book",
 });
+
+
 ```
 
 ```go
@@ -48,6 +59,26 @@ err := milvusClient.LoadCollection(
 if err != nil {
   log.Fatal("failed to load collection:", err.Error())
 }
+
+// To get the load status
+loadStatus, err := milvusClient.GetLoadState(
+  context.Background(),             // ctx
+  "book",                           // CollectionName
+  []string{"Default partition"}     // List of partitions
+)
+if err != nil {
+    log.Fatal("failed to get the load state", err.Error())
+}
+
+// To get the loading progress
+percentage, err := milvusClient.GetLoadingProgress(
+    context.Background(),           // ctx
+    "book",                         // CollectionName
+    []string{"Default partition"}   // List of partitions
+)
+if err != nil {
+    log.Fatal("failed to get the loading progress", err.Error())
+}
 ```
 
 ```java
@@ -56,6 +87,28 @@ milvusClient.loadCollection(
     .withCollectionName("book")
     .build()
 );
+
+// You can check the loading status 
+
+GetLoadStateParam param = GetLoadStateParam.newBuilder()
+        .withCollectionName(collectionName)
+        .build();
+R<GetLoadStateResponse> response = client.getLoadState(param);
+if (response.getStatus() != R.Status.Success.getCode()) {
+    System.out.println(response.getMessage());
+}
+System.out.println(response.getState());
+
+// and loading progress as well
+
+GetLoadingProgressParam param = GetLoadingProgressParam.newBuilder()
+        .withCollectionName(collectionName)
+        .build();
+R<GetLoadingProgressResponse> response = client.getLoadingProgress(param);
+if (response.getStatus() != R.Status.Success.getCode()) {
+    System.out.println(response.getMessage());
+}
+System.out.println(response.getProgress());
 ```
 
 ```shell

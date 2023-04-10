@@ -30,7 +30,7 @@ Several timestamp-related parameters are involved when you conduct a vector simi
 
 If the `Guarantee_timestamp` is not configured, Milvus automatically takes the point in time when the search request is made. Therefore, the search is conducted on a data view with all data updates by DML operations before the search.
 
-To save you the trouble of understanding the [TSO](https://github.com/milvus-io/milvus/blob/master/docs/design_docs/milvus_hybrid_ts_en.md?from=from_parent_mindnote) inside Milvus, as a user, you do not have to directly configure the `Guarantee_timestamp` parameter. You only need to choose the [consistency level](https://milvus.io/docs/v2.1.x/consistency.md), and Milvus automatically handles the `Guarantee_timestamp` parameter for you. Each consistency level corresponds to a certain `Guarantee_timestamp` value.
+To save you the trouble of understanding the [TSO](https://github.com/milvus-io/milvus/blob/master/docs/design_docs/20211214-milvus_hybrid_ts.md) inside Milvus, as a user, you do not have to directly configure the `Guarantee_timestamp` parameter. You only need to choose the [consistency level](https://milvus.io/docs/v2.1.x/consistency.md), and Milvus automatically handles the `Guarantee_timestamp` parameter for you. Each consistency level corresponds to a certain `Guarantee_timestamp` value.
 
 ![Guarantee_Timestamp](../../../assets/Guarantee_Timestamp.png "An illustration of guarantee timestamp.").
 
