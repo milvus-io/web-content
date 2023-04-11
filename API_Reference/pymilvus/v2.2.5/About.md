@@ -10,7 +10,13 @@ PyMilvus is a Python SDK of Milvus. Its source code is open-sourced and hosted o
 | 1.1.*	         | 1.1.2                        |
 | 2.0.x	         | 2.0.2                        |
 | 2.1.x	         | 2.1.3                        |
-| 2.2.x          | 2.2.4                        |
+| 2.2.x          | 2.2.5                        |
+
+<div class="alert note">
+
+The latest release supports Python 3.11, but no longer supports Python 3.6 and previous versions.
+
+</div>
 
 ## Installation
 
@@ -23,7 +29,7 @@ $ pip3 install pymilvus
 - Install a specific version of PyMilvus.
 
 ```shell
-$ pip3 install pymilvus==2.2.4
+$ pip3 install pymilvus==2.2.5
 ```
 
 - Upgrade PyMilvus to the latest version.
