@@ -90,8 +90,8 @@ const params = {
 
 ```go
 var (
-		collectionName = "book"
-	)
+    collectionName = "book"
+    )
 schema := &entity.Schema{
   CollectionName: collectionName,
   Description:    "Test book search",
