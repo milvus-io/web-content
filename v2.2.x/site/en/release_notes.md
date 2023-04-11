@@ -12,7 +12,7 @@ Release date: 29 March, 2023
 
 | Milvus version | Python SDK version | Java SDK version | Go SDK version | Node.js SDK version |
 | -------------- | ------------------ | ---------------- | -------------- | ------------------- |
-| 2.2.5          | 2.2.4              | 2.2.4            | 2.2.1          | 2.2.4               |
+| 2.2.5          | 2.2.5              | 2.2.4            | 2.2.1          | 2.2.4               |
 
 ### Security
 

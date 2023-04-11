@@ -13,7 +13,7 @@ Current version of Milvus supports SDKs in Python, Node.js, GO, and Java.
 
 ## Requirements
 
-- Python 3.6 or later is required.
+- Python 3.7 or later is required.
 - Google protobuf is installed. You can install it with the command `pip3 install protobuf==3.20.0`.
 - grpcio-tools is installed. You can install it with the command `pip3 install grpcio-tools`.
 
@@ -26,7 +26,7 @@ It is recommended to install a PyMilvus version that matches the version of the 
 </div>
 
 ```
-$ python3 -m pip install pymilvus==2.2.4
+$ python3 -m pip install pymilvus==2.2.5
 ```
 
 ## Verify installation
@@ -50,5 +50,5 @@ Having installed PyMilvus, you can:
   - [Insert data](insert_data.md)
   - [Conduct a vector search](search.md)
 
-- Explore [PyMilvus API reference](/api-reference/pymilvus/v2.2.4/About.md)
+- Explore [PyMilvus API reference](/api-reference/pymilvus/v2.2.5/About.md)
 

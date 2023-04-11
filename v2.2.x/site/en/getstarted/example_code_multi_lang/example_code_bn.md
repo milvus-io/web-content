@@ -9,7 +9,7 @@ id: example_code_bn.md
 ## 1. PyMilvus ইনস্টল করুন
 
 ```Python
-pip3 install pymilvus==2.2.4
+pip3 install pymilvus==2.2.5
 ```
 <div class="alert note">
 পাইথন 3.6 বা তার পরের ভার্সন প্রয়োজন। দেখুন  <a href="https://wiki.python.org/moin/BeginnersGuide/Download">পাইথন ডাউনলোড করা হচ্ছে
@@ -19,7 +19,7 @@ pip3 install pymilvus==2.2.4
 ## 2. নমুনা কোড ডাউনলোড করুন
 
 ```bash
-$ wget https://raw.githubusercontent.com/milvus-io/pymilvus/v2.2.4/examples/hello_milvus.py
+$ wget https://raw.githubusercontent.com/milvus-io/pymilvus/v2.2.5/examples/hello_milvus.py
 ```
 
 ## 3. নমুনাটি স্ক্যান করুন
@@ -89,7 +89,7 @@ for raw_result in res:
         distance = result.distance
         print(id, distance)
 ```
-আরও তথ্য পেতে [API Reference](/api-reference/pymilvus/v2.2.4/results.html) দেখুন। 
+আরও তথ্য পেতে [API Reference](/api-reference/pymilvus/v2.2.5/results.html) দেখুন। 
 
 - একটি হাইব্রিড অনুসন্ধান করে
 <div class="alert note">
