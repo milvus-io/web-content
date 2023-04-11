@@ -73,7 +73,7 @@ const params = {
         dim: "2",
       },
     },
-	{
+    {
       name: "book_id",
       data_type: 5,   //DataType.Int64
       is_primary_key: true,
@@ -397,14 +397,14 @@ Output:
             <td>Refer to <a href="https://github.com/milvus-io/milvus-sdk-node/blob/main/milvus/const/Milvus.ts#L287">data type reference number</a> for more information.</td>
         </tr>
         <tr>
-            <td><code>is_primary</code> (Mandatory for primary key field)</td>
+            <td><code>is_primary_key</code> (Mandatory for primary key field)</td>
             <td>Switch to control if the field is primary key field.</td>
-            <td><code>True</code> or <code>False</code></td>
+            <td><code>true</code> or <code>false</code></td>
         </tr>
         <tr>
-            <td><code>auto_id</code></td>
+            <td><code>autoID</code></td>
             <td>Switch to enable or disable Automatic ID (primary key) allocation.</td>
-            <td><code>True</code> or <code>False</code></td>
+            <td><code>true</code> or <code>false</code></td>
         </tr>
         <tr>
             <td><code>dim</code> (Mandatory for vector field)</td>
