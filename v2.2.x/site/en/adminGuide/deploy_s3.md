@@ -42,14 +42,14 @@ For Milvus clusters on K8s, you can configure S3 in the same command that starts
  The following table lists the keys for configuring S3 in the YAML file.
 | Key             | Description                          | Value                                 |
 | --------------------- | ------------------------------------ | ------------------------------------ |
-| <code>externalS3.enabled</code>    | Enables or disables S3.     | <code>true</code>/<code>false</code> |
-| <code>externalS3.host</code>       | The endpoint to access S3.    |                                      |
-| <code>externalS3.port</code>       | The port to access S3.     | 
-| <code>externalS3.rootPath</code>   | The root path of the S3 storage. | An emtpy string by default. | 
-| <code>externalS3.accessKey</code>  | The access key ID for S3. |                                      |
-| <code>externalS3.secretKey</code>  | The secret access key for S3.            |                                      |
-| <code>externalS3.bucketName</code> | The name of the S3 bucket.                  |                                      |
-| <code>minio.enabled</code>         | Enables or disables MinIO.       |  <code>true</code>/<code>false</code> |
+| <code>minio.enabled</code>         | Enables or disables MinIO.       | <code>true</code>/<code>false</code> |
+| <code>externalS3.enabled</code>    | Enables or disables S3.          | <code>true</code>/<code>false</code> |
+| <code>externalS3.host</code>       | The endpoint to access S3.       |                                      |
+| <code>externalS3.port</code>       | The port to access S3.           |                                      |
+| <code>externalS3.rootPath</code>   | The root path of the S3 storage. | An emtpy string by default.          | 
+| <code>externalS3.accessKey</code>  | The access key ID for S3.        |                                      |
+| <code>externalS3.secretKey</code>  | The secret access key for S3.    |                                      |
+| <code>externalS3.bucketName</code> | The name of the S3 bucket.       |                                      |
 
 
 ### Using the YAML file
@@ -84,7 +84,7 @@ helm install <your_release_name> milvus/milvus -f values.yaml
 To install Milvus and configure S3, run the following command using your values.
 
 ```shell
-helm install <your_release_name> milvus/milvus --set cluster.enabled=true --set externalS3.enabled=true --set externalS3.host='<your_s3_endpoint>' --set externalS3.port=<your_s3_port> --set externalS3.accessKey=<your_s3_access_key_id> --set externalS3.secretKey=<your_s3_secret_key> --set externalS3.bucketName=<your_bucket_name> --set minio.enabled=false
+helm install <your_release_name> milvus/milvus --set cluster.enabled=true  --set minio.enabled=false --set externalS3.enabled=true --set externalS3.host=<your_s3_endpoint> --set externalS3.port=<your_s3_port> --set externalS3.accessKey=<your_s3_access_key_id> --set externalS3.secretKey=<your_s3_secret_key> --set externalS3.bucketName=<your_bucket_name>
 ```
 ## What's next
 

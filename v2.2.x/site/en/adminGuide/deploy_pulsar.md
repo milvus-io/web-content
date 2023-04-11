@@ -46,9 +46,10 @@ For Milvus clusters on K8s, you can configure Pulsar in the same command that st
  The following table lists the keys for configuring Pulsar in the YAML file.
 | Key             | Description                          | Value                                 |
 | --------------------- | ------------------------------------ | ------------------------------------ |
-| <code>externalpulsar.enabled</code>    | Enables or disables Pulsar.     | <code>true</code>/<code>false</code> |
-| <code>externalpulsar.host</code>       | The endpoint to access Pulsar.    |                                      |
-| <code>externalpulsar.port</code>       | The port to access Pulsar.     |                                      |
+| <code>pulsar.enabled</code>         | Enables or disables Pulsar.             | <code>true</code>/<code>false</code> |
+| <code>externalPulsar.enabled</code> | Enables or disables external Pulsar.    | <code>true</code>/<code>false</code> |
+| <code>externalPulsar.host</code>    | The endpoint to access external Pulsar. |                                      |
+| <code>externalPulsar.port</code>    | The port to access external Pulsar.     |                                      |
 
 #### Using the YAML file
 
@@ -64,7 +65,7 @@ pulsar:
 ```yaml
 externalPulsar:
   enabled: true
-  host: <your_pulsar_localhost>
+  host: <your_pulsar_IP>
   port: <your_pulsar_port>
 ```
 
@@ -78,7 +79,7 @@ helm install <your_release_name> milvus/milvus -f values.yaml
 To install Milvus and configure Pulsar, run the following command using your values.
 
 ```shell
-helm install <your_release_name> milvus/milvus --set cluster.enabled=true --set externalPulsar.enabled=true --set externalPulsar.host='<your_pulsar_endpoint>' --set externalPulsar.port=<your_pulsar_port>
+helm install <your_release_name> milvus/milvus --set cluster.enabled=true --set pulsar.enabled=false --set externalPulsar.enabled=true --set externalPulsar.host=<your_pulsar_IP> --set externalPulsar.port=<your_pulsar_port>
 ```
 
 ### Configure Kafka on K8s
@@ -88,24 +89,25 @@ For Milvus clusters on K8s, you can configure Kafka in the same command that sta
  The following table lists the keys for configuring Pulsar in the YAML file.
 | Key             | Description                          | Value                                 |
 | --------------------- | ------------------------------------ | ------------------------------------ |
-| <code>externalkafka.enabled</code>    | Enables or disables Kafka.     | <code>true</code>/<code>false</code> |
-| <code>externalkafka.brokerlist</code>       | The brokerlist to access Kafka.    |                                      |
+| <code>kafka.enabled</code>            | Enables or disables Kafka.               | <code>true</code>/<code>false</code> |
+| <code>externalKafka.enabled</code>    | Enables or disables external Kafka.      | <code>true</code>/<code>false</code> |
+| <code>externalKafka.brokerlist</code> | The brokerlist to access external Kafka. |                                      |
 
 The following table lists the mandatory configurations for external Kafka. Set them in Kafka configurations.
 | Key             | Description                         | Value                                   |
 | --------------------- | ------------------------------------ | ------------------------------------ |
-| `max.request.size`    | The maximum size of a request in bytes. | `5242880` |
-| `message.max.bytes`   | The largest record batch size allowed by Kafka | `10485760` |
-| `auto.create.topics.enable` | Enable auto creation of topic on the server | `true` |
-| `num.partitions`      | The default number of log partitions per topic | `1` |
+| `max.request.size`          | The maximum size of a request in bytes.         | `5242880` |
+| `message.max.bytes`         | The largest record batch size allowed by Kafka. | `10485760` |
+| `auto.create.topics.enable` | Enable auto creation of topic on the server.    | `true` |
+| `num.partitions`            | The default number of log partitions per topic. | `1` |
 
 #### Using the YAML file
 
-1. Configure the <code>kafka</code> section in the <code>values.yaml</code> file.
+1. Configure the <code>kafka</code> section in the <code>values.yaml</code> file if you want to use Kafka as the message storage system.
 
 ```yaml
 kafka:
-  enabled: false
+  enabled: true
   name: kafka
   replicaCount: 3
   image:
@@ -113,12 +115,12 @@ kafka:
     tag: 3.1.0-debian-10-r52
 ```
 
-2. Configure the <code>externalKafka</code> section using your values in the <code>values.yaml</code> file.
+2. Configure the <code>externalKafka</code> section using your values in the <code>values.yaml</code> file if you want to use external Kafka as the message storage system.
 
 ```yaml
 externalKafka:
-  enabled: false
-  brokerList: <your_kafka_brokerlist>
+  enabled: true
+  brokerList: <your_kafka_IP>:<your_kafka_port>
 ```
 
 3. After configuring the preceding sections and saving the <code>values.yaml</code> file, run the following command to install Milvus that uses the Kafka configurations.
@@ -131,7 +133,13 @@ helm install <your_release_name> milvus/milvus -f values.yaml
 To install Milvus and configure Kafka, run the following command using your values.
 
 ```shell
-helm install <your_release_name> milvus/milvus --set cluster.enabled=true --set externalKafka.enabled=true --set externalKafka.brokerlist='<your_kafka_brokerlist>'
+helm install <your_release_name> milvus/milvus --set cluster.enabled=true --set pulsar.enabled=false --set kafka.enabled=true
+```
+
+To install Milvus and configure external Kafka, run the following command using your values.
+
+```shell
+helm install <your_release_name> milvus/milvus --set cluster.enabled=true --set pulsar.enabled=false --set externalKafka.enabled=true --set externalKafka.brokerlist=<your_kafka_IP>:<your_kafka_port>
 ```
 
 ## What's next
