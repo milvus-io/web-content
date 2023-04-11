@@ -51,13 +51,13 @@ Kubernetes provides four service modes: ClusterIp, Ingress, LoadBalancer, and No
 helm install my-release milvus/milvus --set attu.enabled=true
 ```
 
-2. Forward the Attu service to local port `3000`.
+2. Forward the Attu service to local port `3000` and listen on all addresses.
 
 ```
-kubectl port-forward service/my-release-milvus-attu 3000
+kubectl port-forward --address 0.0.0.0 service/my-release-milvus-attu 3000
 ```
 
-3. Visit `http://127.0.0.1:3000/connect` in your browser, and click **Connect** to enter the Attu service.
+3. Visit `http://{ your machine IP }/connect` in your browser, and click **Connect** to enter the Attu service.
 
 ![Attu_install](../../../../assets/attu/insight_install.png "Connect to the Attu service.")
 
