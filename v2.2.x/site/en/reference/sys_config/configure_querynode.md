@@ -190,7 +190,7 @@ Under this section, you can configure query node port, graceful time, etc.
       <td>
           Row count by which Segcore divides a segment into chunks.
       </td>
-      <td>32768</td>
+      <td>1024</td>
     </tr>
   </tbody>
 </table>
