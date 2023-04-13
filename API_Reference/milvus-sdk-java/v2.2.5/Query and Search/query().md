@@ -33,6 +33,7 @@ Methods of `QueryParam.Builder`:
 | `withExpr(String expr)`                                      | Sets the expression to query entities. For more information please refer to [Boolean Expression Rules](https://milvus.io/docs/v2.1.x/boolean.md). | `expr`: The boolean expression used in the query.         |
 | `withOffset(Long offset)`	| Sets a position, the returned entities before which will be ignored. This parameter works only when the `limit` value is specified. The default value is 0, starting from beginning of the returned set of entities. | `offset`: A value that defines the position. |
 | `withLimit(Long limit)` | Sets a value to limit the returned number of entities. It must be a positive integer. The default value is 0, indicating that all entities are returned without a limit.	| `limit`: A value that defines the limit of returned entities. |
+| `withIgnoreGrowing(Boolean ignoreGrowing)` | Whether to ignore growing segments during similarity searches. The value defaults to `false`, indicating that searches involve growing segments. | `ignoreGrowing`: Whether to ignore growing segments or not. |
 | `build()`                                                    | Constructs a `QueryParam` object.                            | N/A                                                      |
 
 The `QueryParam.Builder.build()` can throw the following exceptions:
