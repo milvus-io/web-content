@@ -403,6 +403,6 @@ System.out.println(wrapperQuery.getFieldWrapper("word_count").getFieldData());
   - [PyMilvus API reference](/api-reference/pymilvus/v2.2.5/About.md)
   - [Node.js API reference](/api-reference/node/v2.2.x/About.md)
   - [Go API reference](/api-reference/go/v2.2.1/About.md)
-  - [Java API reference](/api-reference/java/v2.2.4/About.md)
+  - [Java API reference](/api-reference/java/v2.2.5/About.md)
 
 
