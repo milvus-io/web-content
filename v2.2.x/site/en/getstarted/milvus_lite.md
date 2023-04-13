@@ -43,7 +43,7 @@ Milvus Lite is suitable for the following scenarios:
   - CentOS >= 7.0 (x86_64)
   - MacOS >= 11.0 (Apple Silicon)
 
-<div class="alert notes">  
+<div class="alert note">  
 
 - For Linux users, Milvus Lite uses **manylinux2014** as the base image. It should be able to run on most Linux distributions.
 - Milvus Lite can also run on Windows. However, this is not strictly verified.
