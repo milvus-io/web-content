@@ -19,15 +19,15 @@ Through running the example code we provided, you will have a primary understand
 
 - [Milvus 2.2.5](install_standalone-docker.md)
 - Python 3 (3.71 or later)
-- [PyMilvus 2.2.5](install-pymilvus.md)
+- [PyMilvus 2.2.6](install-pymilvus.md)
 
 
 ## Download example code
 
-[Download](https://raw.githubusercontent.com/milvus-io/pymilvus/v2.2.5/examples/hello_milvus.py) `hello_milvus.py` directly or with the following command.
+[Download](https://raw.githubusercontent.com/milvus-io/pymilvus/v2.2.6/examples/hello_milvus.py) `hello_milvus.py` directly or with the following command.
 
 ```bash
-$ wget https://raw.githubusercontent.com/milvus-io/pymilvus/v2.2.5/examples/hello_milvus.py
+$ wget https://raw.githubusercontent.com/milvus-io/pymilvus/v2.2.6/examples/hello_milvus.py
 ```
 
 
