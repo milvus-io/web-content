@@ -161,7 +161,7 @@ You can import Milvus Lite as a Python library or use it as a CLI-based Milvus s
 
 You can configure Milvus Lite in the same way as you do Milvus instances through both Python APIs and CLI.
 
-- To configure Milvus Lite using Python APIs, you can use the `config.set` API of a `MilvusServer` instance for both baisc and extra configuration items as follows:
+- To configure Milvus Lite using Python APIs, you can use the `config.set` API of a `MilvusServer` instance for both basic and extra configuration items as follows:
 
   ```python
   from milvus import default_server
