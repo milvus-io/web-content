@@ -47,8 +47,7 @@ new milvusClient(MILUVS_ADDRESS).createCollection(
 ## Example
 
 ```javascript
-import { MilvusClient } from "@zilliz/milvus2-sdk-node";
-import { DataType } from "@zilliz/milvus2-sdk-node/dist/milvus/const/Milvus";
+import { MilvusClient, DataType } from "@zilliz/milvus2-sdk-node";
 
 new milvusClient(MILUVS_ADDRESS).createCollection({
   collection_name: "my_collection",
