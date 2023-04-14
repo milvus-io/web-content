@@ -1,6 +1,6 @@
 {
-  "milvus_release_version": "2.2.6",
-  "milvus_release_tag": "2.2.6",
+  "milvus_release_version": "2.2.5",
+  "milvus_release_tag": "2.2.5",
   "milvus_deb_name": "milvus_2.2.0-1_amd64",
   "milvus_rpm_name": "milvus-2.2.0-1.el7.x86_64",
   "milvus_python_sdk_version": "2.2.6",
@@ -9,6 +9,6 @@
   "milvus_java_sdk_version": "2.2.5",
   "milvus_operator_version": "0.7.9",
   "milvus_helm_chart_version": "4.0.14",
-  "milvus_image": "2.2.6",
+  "milvus_image": "2.2.5",
   "attu_release": "2.2.3"
 }
