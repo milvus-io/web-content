@@ -14,9 +14,9 @@ Release date: 13 April, 2023
 | -------------- | ------------------ | ---------------- | -------------- | ------------------- |
 | 2.2.6          | 2.2.6              | 2.2.5            | 2.2.1          | 2.2.4               |
 
-**DO NOT use Milvus 2.2.5.**
+**Upgrade to Milvus 2.2.6 as soon as possible!**
 
-Please refrain from using version 2.2.5 due to several critical issues that require immediate attention. Version 2.2.6 addresses these issues. One of the critical issues is the inability to recycle dirty binlog data. We highly recommend using version 2.2.6 version instead of version 2.2.5 to avoid any potential complications.
+You are advised to refrain from using version 2.2.5 due to several critical issues that require immediate attention. Version 2.2.6 addresses these issues. One of the critical issues is the inability to recycle dirty binlog data. We highly recommend using version 2.2.6 version instead of version 2.2.5 to avoid any potential complications.
 
 If you hit the issue where data on object storage cannot be recycled, upgrade your Milvus to v2.2.6 to fix these issues.
 
@@ -28,6 +28,7 @@ If you hit the issue where data on object storage cannot be recycled, upgrade yo
 - Fixed the accuracy of metric RootCoordInsertChannelTimeTick ([#23284](https://github.com/milvus-io/milvus/pull/23284))
 - Fixed the issue that the timestamp reported by the proxy may stop in some cases  ([#23291](https://github.com/milvus-io/milvus/pull/23291))  
 - Fixed the problem that the coordinator role may self-destruct by mistake during the restart process ([#23344](https://github.com/milvus-io/milvus/pull/23344)) 
+- Fixed the problem that the checkpoint is left behind due to the abnormal exit of the garbage collection goroutine caused by the etcd restart ([#23401](https://github.com/milvus-io/milvus/pull/23401))
 
 ### Enhancement
 
