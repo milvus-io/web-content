@@ -3,7 +3,7 @@
 This method generates an index on a vector field. It is important to note that the index creation process is asynchronous.
 
 ```javascript
-new milvusClient(MILUVS_ADDRESS).indexManager.createIndex(CreateIndexReq);
+new milvusClient(MILUVS_ADDRESS).createIndex(CreateIndexReq);
 ```
 
 ### CreateIndexReq
@@ -33,7 +33,7 @@ import {
   IndexType,
 } from "@zilliz/milvus2-sdk-node/dist/milvus/const/Milvus";
 
-new milvusClient(MILUVS_ADDRESS).indexManager.createIndex({
+new milvusClient(MILUVS_ADDRESS).createIndex({
   collection_name: "my_collection",
   field_name: "vector_01",
   index_name: "index_name",

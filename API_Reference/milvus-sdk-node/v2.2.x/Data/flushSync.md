@@ -3,7 +3,7 @@
 This synchronous version of [`flush()` method](API_Reference/milvus-sdk-node/v2.2.x/Data/flush.md). This method differs from others in that it guarantees that the data is flushed and persisted before returning the function result.
 
 ```javascript
-new milvusClient(MILUVS_ADDRESS).dataManager.flushSync(FlushReq);
+new milvusClient(MILUVS_ADDRESS).flushSync(FlushReq);
 ```
 
 ### FlushReq
@@ -18,7 +18,7 @@ new milvusClient(MILUVS_ADDRESS).dataManager.flushSync(FlushReq);
 ```javascript
 import { MilvusClient } from "@zilliz/milvus2-sdk-node";
 
-new milvusClient(MILUVS_ADDRESS).dataManager.flushSync({
+new milvusClient(MILUVS_ADDRESS).flushSync({
   collection_names: ["my_collection"],
 });
 ```

@@ -3,7 +3,7 @@
 This method is used to release a specific partition from memory.
 
 ```javascript
-new milvusClient(MILUVS_ADDRESS).partitionManager.releasePartitions(
+new milvusClient(MILUVS_ADDRESS).releasePartitions(
   ReleasePartitionsReq
 );
 ```
@@ -21,7 +21,7 @@ new milvusClient(MILUVS_ADDRESS).partitionManager.releasePartitions(
 ```javascript
 import { MilvusClient } from "@zilliz/milvus2-sdk-node";
 
-new milvusClient(MILUVS_ADDRESS).partitionManager.releasePartitions({
+new milvusClient(MILUVS_ADDRESS).releasePartitions({
   collection_name: "my_collection",
   partition_names: ["my_partition"],
 });

@@ -3,7 +3,7 @@
 This method creates a partition in a specified collection.
 
 ```javascript
-new milvusClient(MILUVS_ADDRESS).partitionManager.createPartition(
+new milvusClient(MILUVS_ADDRESS).createPartition(
   CreatePartitionReq
 );
 ```
@@ -21,7 +21,7 @@ new milvusClient(MILUVS_ADDRESS).partitionManager.createPartition(
 ```javascript
 import { MilvusClient } from "@zilliz/milvus2-sdk-node";
 
-new milvusClient(MILUVS_ADDRESS).partitionManager.createPartition({
+new milvusClient(MILUVS_ADDRESS).createPartition({
   collection_name: "my_collection",
   partition_name: "my_partition",
 });

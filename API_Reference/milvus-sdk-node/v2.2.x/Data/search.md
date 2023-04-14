@@ -5,7 +5,7 @@ This method performs a vector similarity search.
 > You must load the collection before searching or querying
 
 ```javascript
-new milvusClient(MILUVS_ADDRESS).dataManager.search(SearchReq);
+new milvusClient(MILUVS_ADDRESS).search(SearchReq);
 ```
 
 ### SearchReq
@@ -68,7 +68,7 @@ import {
   MetricType,
 } from "@zilliz/milvus2-sdk-node/dist/milvus/const/Milvus";
 
-new milvusClient(MILUVS_ADDRESS).dataManager.search({
+new milvusClient(MILUVS_ADDRESS).search({
   collection_name: "my_collection",
   expr: "",
   vectors: [[1, 2, 3, 4]],

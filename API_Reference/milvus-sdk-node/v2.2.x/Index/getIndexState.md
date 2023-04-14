@@ -3,7 +3,7 @@
 This method monitors the index building progress and displays the total number of rows as well as the number of indexed rows.
 
 ```javascript
-new milvusClient(MILUVS_ADDRESS).indexManager.getIndexState(GetIndexStateReq);
+new milvusClient(MILUVS_ADDRESS).getIndexState(GetIndexStateReq);
 ```
 
 ### GetIndexStateReq
@@ -20,7 +20,7 @@ new milvusClient(MILUVS_ADDRESS).indexManager.getIndexState(GetIndexStateReq);
 ```javascript
 import { MilvusClient } from "@zilliz/milvus2-sdk-node";
 
-new milvusClient(MILUVS_ADDRESS).indexManager.getIndexState({
+new milvusClient(MILUVS_ADDRESS).getIndexState({
   collection_name: "my_collection",
 });
 ```

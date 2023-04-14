@@ -3,7 +3,7 @@
 This method deletes entities from a specified collection.
 
 ```javascript
-new milvusClient(MILUVS_ADDRESS).dataManager.deleteEntities(DeleteEntitiesReq);
+new milvusClient(MILUVS_ADDRESS).deleteEntities(DeleteEntitiesReq);
 ```
 
 ### DeleteEntitiesReq
@@ -20,7 +20,7 @@ new milvusClient(MILUVS_ADDRESS).dataManager.deleteEntities(DeleteEntitiesReq);
 ```javascript
 import { MilvusClient } from "@zilliz/milvus2-sdk-node";
 
-new milvusClient(MILUVS_ADDRESS).dataManager.deleteEntities({
+new milvusClient(MILUVS_ADDRESS).deleteEntities({
   collection_name: "my_collection",
   expr: "age in [434848878802251176,444848878802251176]",
 });

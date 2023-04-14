@@ -3,7 +3,7 @@
 This method retrieves a list of all roles assigned to a specified user in Milvus.
 
 ```javascript
-new milvusClient(MILUVS_ADDRESS).userManager.selectUser(SelectUserReq);
+new milvusClient(MILUVS_ADDRESS).selectUser(SelectUserReq);
 ```
 
 ### SelectUserReq
@@ -19,7 +19,7 @@ new milvusClient(MILUVS_ADDRESS).userManager.selectUser(SelectUserReq);
 ```javascript
 import { MilvusClient } from "@zilliz/milvus2-sdk-node";
 
-new milvusClient(MILUVS_ADDRESS).userManager.selectUser({
+new milvusClient(MILUVS_ADDRESS).selectUser({
   username: "my-username",
   includeUserInfo: true,
 });

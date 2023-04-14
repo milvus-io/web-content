@@ -3,7 +3,7 @@
 This method lists all granted privileges in Milvus.
 
 ```javascript
-new milvusClient(MILUVS_ADDRESS).userManager.listGrants();
+new milvusClient(MILUVS_ADDRESS).listGrants();
 ```
 
 ### Parameters
@@ -18,7 +18,7 @@ new milvusClient(MILUVS_ADDRESS).userManager.listGrants();
 ```javascript
 import { MilvusClient } from "@zilliz/milvus2-sdk-node";
 
-new milvusClient(MILUVS_ADDRESS).userManager.listGrants();
+new milvusClient(MILUVS_ADDRESS).listGrants();
 ```
 
 ### Response

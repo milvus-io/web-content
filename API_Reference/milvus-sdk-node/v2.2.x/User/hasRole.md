@@ -3,7 +3,7 @@
 This method verifies if the role already exists.
 
 ```javascript
-new milvusClient(MILUVS_ADDRESS).userManager.hasRole(HasRoleReq);
+new milvusClient(MILUVS_ADDRESS).hasRole(HasRoleReq);
 ```
 
 ### HasRoleReq
@@ -18,7 +18,7 @@ new milvusClient(MILUVS_ADDRESS).userManager.hasRole(HasRoleReq);
 ```javascript
 import { MilvusClient } from "@zilliz/milvus2-sdk-node";
 
-new milvusClient(MILUVS_ADDRESS).userManager.hasRole({
+new milvusClient(MILUVS_ADDRESS).hasRole({
   roleName: "my-role",
 });
 ```

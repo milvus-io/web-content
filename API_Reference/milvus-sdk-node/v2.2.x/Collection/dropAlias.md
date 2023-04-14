@@ -3,7 +3,7 @@
 Using this method, you can remove the alias associated with a specific collection.
 
 ```javascript
-new milvusClient(MILUVS_ADDRESS).collectionManager.dropAlias(DropAliasReq);
+new milvusClient(MILUVS_ADDRESS).dropAlias(DropAliasReq);
 ```
 
 ### DropAliasReq
@@ -19,7 +19,7 @@ new milvusClient(MILUVS_ADDRESS).collectionManager.dropAlias(DropAliasReq);
 ```javascript
 import { MilvusClient } from "@zilliz/milvus2-sdk-node";
 
-new milvusClient(MILUVS_ADDRESS).collectionManager.dropAlias({
+new milvusClient(MILUVS_ADDRESS).dropAlias({
   collection_name: "my_collection",
   alias: "my_alias",
 });

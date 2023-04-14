@@ -3,7 +3,7 @@
 This is a method for creating a user identity in Milvus.
 
 ```javascript
-new milvusClient(MILUVS_ADDRESS).userManager.createUser(CreateUserReq);
+new milvusClient(MILUVS_ADDRESS).createUser(CreateUserReq);
 ```
 
 ### CreateUserReq
@@ -19,7 +19,7 @@ new milvusClient(MILUVS_ADDRESS).userManager.createUser(CreateUserReq);
 ```javascript
 import { MilvusClient } from "@zilliz/milvus2-sdk-node";
 
-new milvusClient(MILUVS_ADDRESS).userManager.createUser({
+new milvusClient(MILUVS_ADDRESS).createUser({
   username: "milvus",
   password: "milvus",
 });

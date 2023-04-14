@@ -3,7 +3,7 @@
 This method returns replica information.
 
 ```javascript
-new milvusClient(MILUVS_ADDRESS).collectionManager.getReplicas(GetReplicaReq);
+new milvusClient(MILUVS_ADDRESS).getReplicas(GetReplicaReq);
 ```
 
 ### GetIndexStateReq
@@ -18,7 +18,7 @@ new milvusClient(MILUVS_ADDRESS).collectionManager.getReplicas(GetReplicaReq);
 ```javascript
 import { MilvusClient } from "@zilliz/milvus2-sdk-node";
 
-new milvusClient(MILUVS_ADDRESS).collectionManager.getReplicas({
+new milvusClient(MILUVS_ADDRESS).getReplicas({
   collectionID: 123,
 });
 ```

@@ -3,7 +3,7 @@
 This method drops a collection and all data within this specified collection.
 
 ```javascript
-new milvusClient(MILUVS_ADDRESS).collectionManager.dropCollection(
+new milvusClient(MILUVS_ADDRESS).dropCollection(
   DropCollectionReq
 );
 ```
@@ -20,7 +20,7 @@ new milvusClient(MILUVS_ADDRESS).collectionManager.dropCollection(
 ```javascript
 import { MilvusClient } from "@zilliz/milvus2-sdk-node";
 
-new milvusClient(MILUVS_ADDRESS).collectionManager.dropCollection({
+new milvusClient(MILUVS_ADDRESS).dropCollection({
   collection_name: "my_collection",
 });
 ```

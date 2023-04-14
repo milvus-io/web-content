@@ -3,7 +3,7 @@
 By creating a collection alias, you can simplify the process of vector search by using the alias instead of the actual collection name.
 
 ```javascript
-new milvusClient(MILUVS_ADDRESS).collectionManager.createAlias(CreateAliasReq);
+new milvusClient(MILUVS_ADDRESS).createAlias(CreateAliasReq);
 ```
 
 ### CreateAliasReq
@@ -19,7 +19,7 @@ new milvusClient(MILUVS_ADDRESS).collectionManager.createAlias(CreateAliasReq);
 ```javascript
 import { MilvusClient } from "@zilliz/milvus2-sdk-node";
 
-new milvusClient(MILUVS_ADDRESS).collectionManager.createAlias({
+new milvusClient(MILUVS_ADDRESS).createAlias({
   collection_name: "my_collection",
   alias: "my_alias",
 });

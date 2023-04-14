@@ -3,7 +3,7 @@
 This method checks the status of data flushing by segment IDs.
 
 ```javascript
-new milvusClient(MILUVS_ADDRESS).dataManager.getFlushState(GetFlushStateReq);
+new milvusClient(MILUVS_ADDRESS).getFlushState(GetFlushStateReq);
 ```
 
 ### GetFlushStateReq
@@ -18,7 +18,7 @@ new milvusClient(MILUVS_ADDRESS).dataManager.getFlushState(GetFlushStateReq);
 ```javascript
 import { MilvusClient } from "@zilliz/milvus2-sdk-node";
 
-new milvusClient(MILUVS_ADDRESS).dataManager.getFlushState({
+new milvusClient(MILUVS_ADDRESS).getFlushState({
   segmentIDs: segIds,
 });
 ```

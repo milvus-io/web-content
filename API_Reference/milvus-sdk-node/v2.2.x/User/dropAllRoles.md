@@ -3,7 +3,7 @@
 This method iterates through all roles, revokes any granted privileges, and drops all roles.
 
 ```javascript
-new milvusClient(MILUVS_ADDRESS).userManager.dropAllRoles();
+new milvusClient(MILUVS_ADDRESS).dropAllRoles();
 ```
 
 ### Parameters
@@ -17,7 +17,7 @@ new milvusClient(MILUVS_ADDRESS).userManager.dropAllRoles();
 ```javascript
 import { MilvusClient } from "@zilliz/milvus2-sdk-node";
 
-new milvusClient(MILUVS_ADDRESS).userManager.dropAllRoles();
+new milvusClient(MILUVS_ADDRESS).dropAllRoles();
 ```
 
 ### Response

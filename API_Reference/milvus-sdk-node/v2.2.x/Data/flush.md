@@ -3,7 +3,7 @@
 Milvus uses a cache to hold newly added vectors temporarily. This method is asynchronous and saves the added entities to object storage. After calling this method, you must wait for a period of time for the data to be flushed.
 
 ```javascript
-new milvusClient(MILUVS_ADDRESS).dataManager.flush(FlushReq);
+new milvusClient(MILUVS_ADDRESS).flush(FlushReq);
 ```
 
 ### FlushReq
@@ -18,7 +18,7 @@ new milvusClient(MILUVS_ADDRESS).dataManager.flush(FlushReq);
 ```javascript
 import { MilvusClient } from "@zilliz/milvus2-sdk-node";
 
-new milvusClient(MILUVS_ADDRESS).dataManager.flush({
+new milvusClient(MILUVS_ADDRESS).flush({
   collection_names: ["my_collection"],
 });
 ```

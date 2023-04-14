@@ -3,7 +3,7 @@
 This method allows you to load a specified collection into memory synchronously, ensuring that the collection is successfully loaded and available for search or query operations.
 
 ```javascript
-new milvusClient(MILUVS_ADDRESS).collectionManager.loadCollectionSync(
+new milvusClient(MILUVS_ADDRESS).loadCollectionSync(
   LoadCollectionReq
 );
 ```
@@ -20,7 +20,7 @@ new milvusClient(MILUVS_ADDRESS).collectionManager.loadCollectionSync(
 ```javascript
 import { MilvusClient } from "@zilliz/milvus2-sdk-node";
 
-new milvusClient(MILUVS_ADDRESS).collectionManager.loadCollectionSync({
+new milvusClient(MILUVS_ADDRESS).loadCollectionSync({
   collection_name: "my_collection",
 });
 ```

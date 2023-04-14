@@ -3,7 +3,7 @@
 This method fetches the index details from a collection.
 
 ```javascript
-new milvusClient(MILUVS_ADDRESS).indexManager.describeIndex(DescribeIndexReq);
+new milvusClient(MILUVS_ADDRESS).describeIndex(DescribeIndexReq);
 ```
 
 ### DescribeIndexReq
@@ -20,7 +20,7 @@ new milvusClient(MILUVS_ADDRESS).indexManager.describeIndex(DescribeIndexReq);
 ```javascript
 import { MilvusClient } from "@zilliz/milvus2-sdk-node";
 
-new milvusClient(MILUVS_ADDRESS).indexManager.describeIndex({
+new milvusClient(MILUVS_ADDRESS).describeIndex({
   collection_name: "my_collection",
 });
 ```

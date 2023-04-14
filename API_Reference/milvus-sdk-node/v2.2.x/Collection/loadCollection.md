@@ -3,7 +3,7 @@
 By utilizing this method, you can load a specified collection into memory, which enables you to perform searches or queries on the data contained within it.
 
 ```javascript
-new milvusClient(MILUVS_ADDRESS).collectionManager.loadCollection(
+new milvusClient(MILUVS_ADDRESS).loadCollection(
   LoadCollectionReq
 );
 ```
@@ -21,7 +21,7 @@ new milvusClient(MILUVS_ADDRESS).collectionManager.loadCollection(
 ```javascript
 import { MilvusClient } from "@zilliz/milvus2-sdk-node";
 
-new milvusClient(MILUVS_ADDRESS).collectionManager.loadCollection({
+new milvusClient(MILUVS_ADDRESS).loadCollection({
   collection_name: "my_collection",
 });
 ```

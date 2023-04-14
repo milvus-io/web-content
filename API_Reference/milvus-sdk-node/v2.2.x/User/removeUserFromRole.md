@@ -3,7 +3,7 @@
 This method remove a user from role in Milvus.
 
 ```javascript
-new milvusClient(MILUVS_ADDRESS).userManager.removeUserFromRole(
+new milvusClient(MILUVS_ADDRESS).removeUserFromRole(
   RemoveUserFromRoleReq
 );
 ```
@@ -21,7 +21,7 @@ new milvusClient(MILUVS_ADDRESS).userManager.removeUserFromRole(
 ```javascript
 import { MilvusClient } from "@zilliz/milvus2-sdk-node";
 
-new milvusClient(MILUVS_ADDRESS).userManager.removeUserFromRole({
+new milvusClient(MILUVS_ADDRESS).removeUserFromRole({
   username: "my-username",
   roleName: "my-milvus-role-name",
 });

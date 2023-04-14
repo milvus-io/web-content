@@ -3,7 +3,7 @@
 With this method, you can check the number of entities that exist within a specified collection.
 
 ```javascript
-new milvusClient(MILUVS_ADDRESS).collectionManager.getCollectionStatistics(
+new milvusClient(MILUVS_ADDRESS).getCollectionStatistics(
   GetCollectionStatisticsReq
 );
 ```
@@ -20,7 +20,7 @@ new milvusClient(MILUVS_ADDRESS).collectionManager.getCollectionStatistics(
 ```javascript
 import { MilvusClient } from "@zilliz/milvus2-sdk-node";
 
-new milvusClient(MILUVS_ADDRESS).collectionManager.getCollectionStatistics({
+new milvusClient(MILUVS_ADDRESS).getCollectionStatistics({
   collection_name: "my_collection",
 });
 ```

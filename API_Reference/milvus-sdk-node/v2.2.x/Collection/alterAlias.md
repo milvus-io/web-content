@@ -3,7 +3,7 @@
 Using this method, you can change the target collection of a pre-existing alias to another collection.
 
 ```javascript
-new milvusClient(MILUVS_ADDRESS).collectionManager.alterAlias(AlterAliasReq);
+new milvusClient(MILUVS_ADDRESS).alterAlias(AlterAliasReq);
 ```
 
 ### AlterAliasReq
@@ -19,7 +19,7 @@ new milvusClient(MILUVS_ADDRESS).collectionManager.alterAlias(AlterAliasReq);
 ```javascript
 import { MilvusClient } from "@zilliz/milvus2-sdk-node";
 
-new milvusClient(MILUVS_ADDRESS).collectionManager.createAlias({
+new milvusClient(MILUVS_ADDRESS).alterAlias({
   collection_name: "another_collection",
   alias: "my_alias",
 });

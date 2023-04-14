@@ -3,7 +3,7 @@
 This method creates a new role in Milvus.
 
 ```javascript
-new milvusClient(MILUVS_ADDRESS).userManager.createRole(CreateRoleReq);
+new milvusClient(MILUVS_ADDRESS).createRole(CreateRoleReq);
 ```
 
 ### CreateRoleReq
@@ -18,7 +18,7 @@ new milvusClient(MILUVS_ADDRESS).userManager.createRole(CreateRoleReq);
 ```javascript
 import { MilvusClient } from "@zilliz/milvus2-sdk-node";
 
-new milvusClient(MILUVS_ADDRESS).userManager.createRole({
+new milvusClient(MILUVS_ADDRESS).createRole({
   roleName: "my-milvus-role",
 });
 ```

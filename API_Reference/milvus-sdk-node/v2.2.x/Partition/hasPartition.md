@@ -3,7 +3,7 @@
 This method verifies if a partition exists in the specified collection.
 
 ```javascript
-new milvusClient(MILUVS_ADDRESS).partitionManager.hasPartition(HasPartitionReq);
+new milvusClient(MILUVS_ADDRESS).hasPartition(HasPartitionReq);
 ```
 
 ### HasPartitionReq
@@ -19,7 +19,7 @@ new milvusClient(MILUVS_ADDRESS).partitionManager.hasPartition(HasPartitionReq);
 ```javascript
 import { MilvusClient } from "@zilliz/milvus2-sdk-node";
 
-new milvusClient(MILUVS_ADDRESS).partitionManager.hasPartition({
+new milvusClient(MILUVS_ADDRESS).hasPartition({
   collection_name: "my_collection",
   partition_name: "my_partition",
 });

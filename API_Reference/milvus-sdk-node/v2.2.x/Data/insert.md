@@ -3,7 +3,7 @@
 This method inserts data into a specified collection.
 
 ```javascript
-new milvusClient(MILUVS_ADDRESS).dataManager.insert(InsertReq);
+new milvusClient(MILUVS_ADDRESS).insert(InsertReq);
 ```
 
 ### InsertReq
@@ -29,7 +29,7 @@ const vectorsData = Array.from({ length: 10 }).map(() => ({
   ),
 }));
 
-new milvusClient(MILUVS_ADDRESS).dataManager.insert({
+new milvusClient(MILUVS_ADDRESS).insert({
   collection_name: COLLECTION_NAME,
   fields_data: vectorsData,
 });

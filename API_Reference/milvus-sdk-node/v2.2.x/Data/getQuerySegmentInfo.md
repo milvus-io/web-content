@@ -3,7 +3,7 @@
 This method retrieves information about the segments in the query nodes through the proxy.
 
 ```javascript
-new milvusClient(MILUVS_ADDRESS).dataManager.getQuerySegmentInfo(
+new milvusClient(MILUVS_ADDRESS).getQuerySegmentInfo(
   getQuerySegmentInfoReq
 );
 ```
@@ -20,7 +20,7 @@ new milvusClient(MILUVS_ADDRESS).dataManager.getQuerySegmentInfo(
 ```javascript
 import { MilvusClient } from "@zilliz/milvus2-sdk-node";
 
-new milvusClient(MILUVS_ADDRESS).dataManager.getQuerySegmentInfo({
+new milvusClient(MILUVS_ADDRESS).getQuerySegmentInfo({
   collectionName: "my_collection",
 });
 ```

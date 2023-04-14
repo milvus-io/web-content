@@ -3,7 +3,7 @@
 This method lists all users in Milvus.
 
 ```javascript
-new milvusClient(MILUVS_ADDRESS).userManager.listUsers();
+new milvusClient(MILUVS_ADDRESS).listUsers();
 ```
 
 ### Parameters
@@ -17,7 +17,7 @@ new milvusClient(MILUVS_ADDRESS).userManager.listUsers();
 ```javascript
 import { MilvusClient } from "@zilliz/milvus2-sdk-node";
 
-new milvusClient(MILUVS_ADDRESS).userManager.listUsers();
+new milvusClient(MILUVS_ADDRESS).listUsers();
 ```
 
 ### Response

@@ -3,7 +3,7 @@
 This method retrieves statistics about a specified partition.
 
 ```javascript
-new milvusClient(MILUVS_ADDRESS).partitionManager.getPartitionStatistics(
+new milvusClient(MILUVS_ADDRESS).getPartitionStatistics(
   GetPartitionStatisticsReq
 );
 ```
@@ -21,7 +21,7 @@ new milvusClient(MILUVS_ADDRESS).partitionManager.getPartitionStatistics(
 ```javascript
 import { MilvusClient } from "@zilliz/milvus2-sdk-node";
 
-new milvusClient(MILUVS_ADDRESS).partitionManager.getPartitionStatistics({
+new milvusClient(MILUVS_ADDRESS).getPartitionStatistics({
   collection_name: "my_collection",
   partition_name: "my_partition",
 });

@@ -3,7 +3,7 @@
 With this method, you can create a new collection with a defined schema based on your specified requirements.
 
 ```javascript
-new milvusClient(MILUVS_ADDRESS).collectionManager.createCollection(
+new milvusClient(MILUVS_ADDRESS).createCollection(
   CreateCollectionReq
 );
 ```
@@ -50,7 +50,7 @@ new milvusClient(MILUVS_ADDRESS).collectionManager.createCollection(
 import { MilvusClient } from "@zilliz/milvus2-sdk-node";
 import { DataType } from "@zilliz/milvus2-sdk-node/dist/milvus/const/Milvus";
 
-new milvusClient(MILUVS_ADDRESS).collectionManager.createCollection({
+new milvusClient(MILUVS_ADDRESS).createCollection({
   collection_name: "my_collection",
   fields: [
     {

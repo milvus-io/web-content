@@ -3,7 +3,7 @@
 This method retrieves the list of privileges granted to a role in Milvus.
 
 ```javascript
-new milvusClient(MILUVS_ADDRESS).userManager.selectGrant(SelectGrantReq);
+new milvusClient(MILUVS_ADDRESS).selectGrant(SelectGrantReq);
 ```
 
 ### SelectGrantReq
@@ -21,7 +21,7 @@ new milvusClient(MILUVS_ADDRESS).userManager.selectGrant(SelectGrantReq);
 ```javascript
 import { MilvusClient } from "@zilliz/milvus2-sdk-node";
 
-new milvusClient(MILVUS_ADDRESS).userManager.selectGrant({
+new milvusClient(MILVUS_ADDRESS).selectGrant({
   roleName: "roleName",
   object: "*",
   objectName: "Collection",

@@ -3,7 +3,7 @@
 This method drops a user role in Milvus.
 
 ```javascript
-new milvusClient(MILUVS_ADDRESS).userManager.dropRole(DropUserReq);
+new milvusClient(MILUVS_ADDRESS).dropRole(DropUserReq);
 ```
 
 ### DropUserReq
@@ -18,7 +18,7 @@ new milvusClient(MILUVS_ADDRESS).userManager.dropRole(DropUserReq);
 ```javascript
 import { MilvusClient } from "@zilliz/milvus2-sdk-node";
 
-new milvusClient(MILUVS_ADDRESS).userManager.dropRole({
+new milvusClient(MILUVS_ADDRESS).dropRole({
   roleName: "my-milvus-role",
 });
 ```

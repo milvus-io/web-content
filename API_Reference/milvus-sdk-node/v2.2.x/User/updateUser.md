@@ -3,7 +3,7 @@
 This method update user info in Milvus.
 
 ```javascript
-new milvusClient(MILUVS_ADDRESS).userManager.createUser(UpdateUserReq);
+new milvusClient(MILUVS_ADDRESS).createUser(UpdateUserReq);
 ```
 
 ### UpdateUserReq
@@ -20,7 +20,7 @@ new milvusClient(MILUVS_ADDRESS).userManager.createUser(UpdateUserReq);
 ```javascript
 import { MilvusClient } from "@zilliz/milvus2-sdk-node";
 
-new milvusClient(MILUVS_ADDRESS).userManager.createUser({
+new milvusClient(MILUVS_ADDRESS).createUser({
   username: "milvus",
   oldPassword: "oldMilvusPass",
   newPassword: "newMilvusPass",

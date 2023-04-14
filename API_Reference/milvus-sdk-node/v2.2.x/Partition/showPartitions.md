@@ -3,7 +3,7 @@
 This method lists all the partitions in a specified collection.
 
 ```javascript
-new milvusClient(MILUVS_ADDRESS).partitionManager.showPartitions(
+new milvusClient(MILUVS_ADDRESS).showPartitions(
   ShowPartitionsReq
 );
 ```
@@ -20,7 +20,7 @@ new milvusClient(MILUVS_ADDRESS).partitionManager.showPartitions(
 ```javascript
 import { MilvusClient } from "@zilliz/milvus2-sdk-node";
 
-new milvusClient(MILUVS_ADDRESS).partitionManager.showPartitions({
+new milvusClient(MILUVS_ADDRESS).showPartitions({
   collection_name: "my_collection",
 });
 ```

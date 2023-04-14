@@ -3,7 +3,7 @@
 This method allows you to change the name of a collection.
 
 ```javascript
-new milvusClient(MILUVS_ADDRESS).collectionManager.renameCollection(
+new milvusClient(MILUVS_ADDRESS).renameCollection(
   RenameCollectionReq
 );
 ```
@@ -21,7 +21,7 @@ new milvusClient(MILUVS_ADDRESS).collectionManager.renameCollection(
 ```javascript
 import { MilvusClient } from "@zilliz/milvus2-sdk-node";
 
-new milvusClient(MILUVS_ADDRESS).collectionManager.renameCollection({
+new milvusClient(MILUVS_ADDRESS).renameCollection({
   collection_name: "my_collection",
   new_collection_name: "my_new_collection",
 });

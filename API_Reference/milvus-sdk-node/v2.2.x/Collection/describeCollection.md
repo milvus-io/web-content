@@ -3,7 +3,7 @@
 By using this method, you can retrieve a collection's details such as its name, schema, and other relevant information.
 
 ```javascript
-new milvusClient(MILVUS_ADDRESS).collectionManager.describeCollection(
+new milvusClient(MILVUS_ADDRESS).describeCollection(
   DescribeCollectionReq
 );
 ```
@@ -20,7 +20,7 @@ new milvusClient(MILVUS_ADDRESS).collectionManager.describeCollection(
 ```javascript
 import { MilvusClient } from "@zilliz/milvus2-sdk-node";
 
-new milvusClient(MILUVS_ADDRESS).collectionManager.describeCollection({
+new milvusClient(MILUVS_ADDRESS).describeCollection({
   collection_name: "my_collection",
 });
 ```

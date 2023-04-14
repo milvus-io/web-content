@@ -3,7 +3,7 @@
 With this method, you can release a specified collection from memory, freeing up resources and potentially improving system performance.
 
 ```javascript
-new milvusClient(MILUVS_ADDRESS).collectionManager.releaseCollection(
+new milvusClient(MILUVS_ADDRESS).releaseCollection(
   ReleaseCollectionReq
 );
 ```
@@ -20,7 +20,7 @@ new milvusClient(MILUVS_ADDRESS).collectionManager.releaseCollection(
 ```javascript
 import { MilvusClient } from "@zilliz/milvus2-sdk-node";
 
-new milvusClient(MILUVS_ADDRESS).collectionManager.releaseCollection({
+new milvusClient(MILUVS_ADDRESS).releaseCollection({
   collection_name: "my_collection",
 });
 ```

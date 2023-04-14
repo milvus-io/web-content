@@ -5,7 +5,7 @@ This method is used to load a specific partition into memory for search or query
 > You must load before searching or querying
 
 ```javascript
-new milvusClient(MILUVS_ADDRESS).partitionManager.loadPartitions(
+new milvusClient(MILUVS_ADDRESS).loadPartitions(
   LoadPartitionsReq
 );
 ```
@@ -23,7 +23,7 @@ new milvusClient(MILUVS_ADDRESS).partitionManager.loadPartitions(
 ```javascript
 import { MilvusClient } from "@zilliz/milvus2-sdk-node";
 
-new milvusClient(MILUVS_ADDRESS).partitionManager.loadPartitions({
+new milvusClient(MILUVS_ADDRESS).loadPartitions({
   collection_name: "my_collection",
   partition_names: ["my_partition"],
 });

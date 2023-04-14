@@ -5,7 +5,7 @@ This method performs a vector query.
 > You must load the collection before searching or querying
 
 ```javascript
-new milvusClient(MILUVS_ADDRESS).dataManager.query(QueryReq);
+new milvusClient(MILUVS_ADDRESS).query(QueryReq);
 ```
 
 ### QueryReq
@@ -23,7 +23,7 @@ new milvusClient(MILUVS_ADDRESS).dataManager.query(QueryReq);
 ```javascript
 import { MilvusClient } from "@zilliz/milvus2-sdk-node";
 
-new milvusClient(MILUVS_ADDRESS).dataManager.query({
+new milvusClient(MILUVS_ADDRESS).query({
   collection_name: "my_collection",
   expr: "age > 0",
   output_fields: ["age"],

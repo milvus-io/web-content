@@ -3,7 +3,7 @@
 This method deletes a user identity in Milvus.
 
 ```javascript
-new milvusClient(MILUVS_ADDRESS).userManager.deleteUser(DeleteUserReq);
+new milvusClient(MILUVS_ADDRESS).deleteUser(DeleteUserReq);
 ```
 
 ### DeleteUserReq
@@ -18,7 +18,7 @@ new milvusClient(MILUVS_ADDRESS).userManager.deleteUser(DeleteUserReq);
 ```javascript
 import { MilvusClient } from "@zilliz/milvus2-sdk-node";
 
-new milvusClient(MILUVS_ADDRESS).userManager.deleteUser({
+new milvusClient(MILUVS_ADDRESS).deleteUser({
   username: "milvus",
 });
 ```

@@ -3,7 +3,7 @@
 This method recieve a role information from milvus.
 
 ```javascript
-new milvusClient(MILUVS_ADDRESS).userManager.selectRole(SelectRoleReq);
+new milvusClient(MILUVS_ADDRESS).selectRole(SelectRoleReq);
 ```
 
 ### SelectRoleReq
@@ -19,7 +19,7 @@ new milvusClient(MILUVS_ADDRESS).userManager.selectRole(SelectRoleReq);
 ```javascript
 import { MilvusClient } from "@zilliz/milvus2-sdk-node";
 
-new milvusClient(MILUVS_ADDRESS).userManager.selectRole({
+new milvusClient(MILUVS_ADDRESS).selectRole({
   username: "my-username",
   includeUserInfo: true,
 });

@@ -5,7 +5,7 @@ This method monitors the index building progress and displays the total number o
 > This method has been deprecated since version 2.2.0, you can use getIndexState instead.
 
 ```javascript
-new milvusClient(MILUVS_ADDRESS).indexManager.getIndexBuildProgress(
+new milvusClient(MILUVS_ADDRESS).getIndexBuildProgress(
   GetIndexBuildProgressReq
 );
 ```
@@ -24,7 +24,7 @@ new milvusClient(MILUVS_ADDRESS).indexManager.getIndexBuildProgress(
 ```javascript
 import { MilvusClient } from "@zilliz/milvus2-sdk-node";
 
-new milvusClient(MILUVS_ADDRESS).indexManager.getIndexBuildProgress({
+new milvusClient(MILUVS_ADDRESS).getIndexBuildProgress({
   collection_name: "my_collection",
 });
 ```

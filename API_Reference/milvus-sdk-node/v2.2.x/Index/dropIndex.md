@@ -3,7 +3,7 @@
 This method drops the specified index.
 
 ```javascript
-new milvusClient(MILUVS_ADDRESS).indexManager.dropIndex(DropIndexReq);
+new milvusClient(MILUVS_ADDRESS).dropIndex(DropIndexReq);
 ```
 
 ### DropIndexReq
@@ -20,7 +20,7 @@ new milvusClient(MILUVS_ADDRESS).indexManager.dropIndex(DropIndexReq);
 ```javascript
 import { MilvusClient } from "@zilliz/milvus2-sdk-node";
 
-new milvusClient(MILUVS_ADDRESS).indexManager.dropIndex({
+new milvusClient(MILUVS_ADDRESS).dropIndex({
   collection_name: "my_collection",
 });
 ```

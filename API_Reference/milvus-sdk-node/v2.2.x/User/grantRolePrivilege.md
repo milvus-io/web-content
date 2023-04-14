@@ -3,7 +3,7 @@
 This method grants privileges to a role.
 
 ```javascript
-new milvusClient(MILUVS_ADDRESS).userManager.grantRolePrivilege(
+new milvusClient(MILUVS_ADDRESS).grantRolePrivilege(
   GrantRolePrivilegeReq
 );
 ```
@@ -23,7 +23,7 @@ new milvusClient(MILUVS_ADDRESS).userManager.grantRolePrivilege(
 ```javascript
 import { MilvusClient } from "@zilliz/milvus2-sdk-node";
 
-new milvusClient(MILVUS_ADDRESS).userManager.grantRolePrivilege({
+new milvusClient(MILVUS_ADDRESS).grantRolePrivilege({
   roleName: "roleName",
   object: "*",
   objectName: "Collection",

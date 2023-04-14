@@ -3,7 +3,7 @@
 This method adds a user to a specified role in Milvus.
 
 ```javascript
-new milvusClient(MILUVS_ADDRESS).userManager.addUserToRole(AddUserToRoleReq);
+new milvusClient(MILUVS_ADDRESS).addUserToRole(AddUserToRoleReq);
 ```
 
 ### AddUserToRoleReq
@@ -19,7 +19,7 @@ new milvusClient(MILUVS_ADDRESS).userManager.addUserToRole(AddUserToRoleReq);
 ```javascript
 import { MilvusClient } from "@zilliz/milvus2-sdk-node";
 
-new milvusClient(MILUVS_ADDRESS).userManager.addUserToRole({
+new milvusClient(MILUVS_ADDRESS).addUserToRole({
   username: "my-username",
   roleName: "my-milvus-role-name",
 });

@@ -5,7 +5,7 @@ This method is used to drop a partition and all the data contained within it.
 > the `_default` partition cannot be dropped.
 
 ```javascript
-new milvusClient(MILUVS_ADDRESS).partitionManager.dropPartition(
+new milvusClient(MILUVS_ADDRESS).dropPartition(
   DropPartitionReq
 );
 ```
@@ -23,7 +23,7 @@ new milvusClient(MILUVS_ADDRESS).partitionManager.dropPartition(
 ```javascript
 import { MilvusClient } from "@zilliz/milvus2-sdk-node";
 
-new milvusClient(MILUVS_ADDRESS).partitionManager.dropPartition({
+new milvusClient(MILUVS_ADDRESS).dropPartition({
   collection_name: "my_collection",
   partition_name: "my_partition",
 });

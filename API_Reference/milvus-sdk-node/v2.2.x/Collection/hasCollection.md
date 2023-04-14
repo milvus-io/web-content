@@ -3,7 +3,7 @@
 This method checks if a specified collection exists.
 
 ```javascript
-new milvusClient(MILUVS_ADDRESS).collectionManager.hasCollection(
+new milvusClient(MILUVS_ADDRESS).hasCollection(
   HasCollectionReq
 );
 ```
@@ -20,7 +20,7 @@ new milvusClient(MILUVS_ADDRESS).collectionManager.hasCollection(
 ```javascript
 import { MilvusClient } from "@zilliz/milvus2-sdk-node";
 
-new milvusClient(MILUVS_ADDRESS).collectionManager.hasCollection({
+new milvusClient(MILUVS_ADDRESS).hasCollection({
   collection_name: "my_collection",
 });
 ```

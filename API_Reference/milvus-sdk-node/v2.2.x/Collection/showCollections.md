@@ -3,7 +3,7 @@
 List all collections or get collection loading status.
 
 ```javascript
-new milvusClient(MILUVS_ADDRESS).collectionManager.showCollections(
+new milvusClient(MILUVS_ADDRESS).showCollections(
   ShowCollectionsReq
 );
 ```
@@ -28,7 +28,7 @@ new milvusClient(MILUVS_ADDRESS).collectionManager.showCollections(
 ```javascript
 import { MilvusClient } from "@zilliz/milvus2-sdk-node";
 
-new milvusClient(MILUVS_ADDRESS).collectionManager.showCollections();
+new milvusClient(MILUVS_ADDRESS).showCollections();
 ```
 
 ### Response

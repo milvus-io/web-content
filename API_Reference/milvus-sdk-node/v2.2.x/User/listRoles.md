@@ -3,7 +3,7 @@
 This method lists all roles in Milvus.
 
 ```javascript
-new milvusClient(MILUVS_ADDRESS).userManager.listRoles(ListGrantsReq);
+new milvusClient(MILUVS_ADDRESS).listRoles(ListGrantsReq);
 ```
 
 ### ListGrantsReq
@@ -17,7 +17,7 @@ new milvusClient(MILUVS_ADDRESS).userManager.listRoles(ListGrantsReq);
 ```javascript
 import { MilvusClient } from "@zilliz/milvus2-sdk-node";
 
-new milvusClient(MILUVS_ADDRESS).userManager.listRoles();
+new milvusClient(MILUVS_ADDRESS).listRoles();
 ```
 
 ### Response

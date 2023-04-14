@@ -3,7 +3,7 @@
 This method revokes the privileges granted to a role.
 
 ```javascript
-new milvusClient(MILUVS_ADDRESS).userManager.RevokeRolePrivilegeReq(
+new milvusClient(MILUVS_ADDRESS).RevokeRolePrivilegeReq(
   revokeRolePrivilegeReq
 );
 ```
@@ -23,7 +23,7 @@ new milvusClient(MILUVS_ADDRESS).userManager.RevokeRolePrivilegeReq(
 ```javascript
 import { MilvusClient } from "@zilliz/milvus2-sdk-node";
 
-new milvusClient(MILVUS_ADDRESS).userManager.revokeRolePrivilege({
+new milvusClient(MILVUS_ADDRESS).revokeRolePrivilege({
   roleName: "roleName",
   object: "*",
   objectName: "Collection",
