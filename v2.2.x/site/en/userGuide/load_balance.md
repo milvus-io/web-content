@@ -44,7 +44,7 @@ milvusClient.getQuerySegmentInfo(
 ```
 
 ```javascript
-await dataManager.getQuerySegmentInfo({
+await getQuerySegmentInfo({
     collectionName: "book",
 });
 ```
@@ -151,7 +151,7 @@ milvusClient.loadBalance(
 ```
 
 ```javascript
-await dataManager.loadBalance({
+await loadBalance({
   src_nodeID: 3,
   dst_nodeIDs: [4],
   sealed_segmentIDs: [431067441441538050]

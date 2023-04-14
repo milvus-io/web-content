@@ -62,7 +62,7 @@ const params = {
     },
   ],
 };
-await milvusClient.collectionManager.createCollection(params);
+await milvusClient.createCollection(params);
 ```
 
 ```go
@@ -138,7 +138,7 @@ const entities1 = Array.from({ length: 10 }, (v, k) => ({
   "example_field": Array.from({   length: 2  }, () => Math.random()),
   "pk": k,
 }));
-const batch1 = milvusClient.dataManager.insert({
+const batch1 = milvusClient.insert({
   collection_name: "test_time_travel",
   fields_data: entities1,
 });
@@ -271,7 +271,7 @@ entities2.push({
   "pk": 19,
   "example_field": [1.0, 1.0],
 });
-const batch2 = await milvusClient.dataManager.insert({
+const batch2 = await milvusClient.insert({
   collection_name: "test_time_travel",
   fields_data: entities2,
 });
@@ -371,10 +371,10 @@ res[0].ids
 ```
 
 ```javascript
-await milvusClient.collectionManager.loadCollection({
+await milvusClient.loadCollection({
   collection_name: "test_time_travel",
 });
-const res = await milvusClient.dataManager.search({
+const res = await milvusClient.search({
   collection_name: "test_time_travel",
   vectors: [
     [1.0, 1.0]
@@ -549,7 +549,7 @@ res[0].ids
 ```javascript
 batch2.timestamp
 428828283406123011
-const res2 = await milvusClient.dataManager.search({
+const res2 = await milvusClient.search({
   collection_name: "test_time_travel",
   vectors: [
     [1.0, 1.0]
@@ -709,7 +709,7 @@ collection.delete(expr)
 
 ```javascript
 const expr = "pk in [0, 2, 4, 6, 8, 10, 12, 14, 16, 18]"
-await milvusClient.dataManager.deleteEntities({
+await milvusClient.deleteEntities({
   collection_name: "test_time_travel",
   expr: expr,
 });
@@ -771,7 +771,7 @@ res[0].ids
 ```
 
 ```javascript
-const res3 = await milvusClient.dataManager.search({
+const res3 = await milvusClient.search({
   collection_name: "test_time_travel",
   vectors: [
     [1.0, 1.0]
@@ -898,7 +898,7 @@ res[0].ids
 ```
 
 ```javascript
-const res4 = await milvusClient.dataManager.search({
+const res4 = await milvusClient.search({
   collection_name: "test_time_travel",
   vectors: [
     [1.0, 1.0]

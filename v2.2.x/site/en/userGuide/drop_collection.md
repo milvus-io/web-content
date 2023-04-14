@@ -29,7 +29,7 @@ utility.drop_collection("book")
 ```
 
 ```javascript
-await milvusClient.collectionManager.dropCollection({  collection_name: "book",});
+await milvusClient.dropCollection({  collection_name: "book",});
 ```
 
 ```go

@@ -34,7 +34,7 @@ collection.load()
 ```
 
 ```javascript
-await milvusClient.collectionManager.loadCollection({
+await milvusClient.loadCollection({
   collection_name: "book",
 });
 ```
@@ -390,7 +390,7 @@ results = collection.search(
 ```
 
 ```javascript
-const results = await milvusClient.dataManager.search({
+const results = await milvusClient.search({
   collection_name: "book",
   expr: "",
   vectors: [[0.1, 0.2]],
@@ -703,7 +703,7 @@ collection.release()
 ```
 
 ```javascript
-await milvusClient.collectionManager.releaseCollection({  collection_name: "book",});
+await milvusClient.releaseCollection({  collection_name: "book",});
 ```
 
 ```go

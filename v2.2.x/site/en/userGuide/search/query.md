@@ -34,7 +34,7 @@ collection.load()
 ```
 
 ```javascript
-await milvusClient.collectionManager.loadCollection({
+await milvusClient.loadCollection({
   collection_name: "book",
 });
 ```
@@ -93,7 +93,7 @@ res = collection.query(
 ```
 
 ```javascript
-const results = await milvusClient.dataManager.query({
+const results = await milvusClient.query({
   collection_name: "book",
   expr: "book_id in [2,4,6,8]",
   output_fields: ["book_id", "book_intro"],

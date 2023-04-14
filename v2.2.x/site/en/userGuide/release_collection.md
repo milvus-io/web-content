@@ -25,7 +25,7 @@ collection.release()
 ```
 
 ```javascript
-await milvusClient.collectionManager.releaseCollection({
+await milvusClient.releaseCollection({
   collection_name: "book",
 });
 ```

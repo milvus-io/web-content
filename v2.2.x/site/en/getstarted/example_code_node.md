@@ -50,14 +50,13 @@ import { InsertReq } from "@zilliz/milvus2-sdk-node/dist/milvus/types/Insert";
 - Connects to the Milvus server:
 ```ts
 const milvusClient = new MilvusClient("localhost:19530");
-const collectionManager = milvusClient.collectionManager;
 ```
 
 - Creates a collection:
 ```ts
 const collectionName = "hello_milvus";
     const dim = "4";
-    const createRes = await collectionManager.createCollection(
+    const createRes = await milvusClient.createCollection(
         {
             collection_name: collectionName,
             fields: [
@@ -135,13 +134,13 @@ const generateInsertData = function generateInsertData(
       partition_name: "test",
     };
   
-    await milvusClient.dataManager.insert(params);
+    await milvusClient.insert(params);
     console.log("--- Insert Data to Collection ---");
 ```
 
 - Loads the collection and builds index on it:
 ``` ts
-    await milvusClient.indexManager.createIndex({
+    await milvusClient.createIndex({
       collection_name: collectionName,
       field_name: "float_vector",
       extra_params: {
@@ -156,13 +155,13 @@ const generateInsertData = function generateInsertData(
 - Searches the collection:
 ```ts
         // need load collection before search
-    const loadCollectionRes = await collectionManager.loadCollectionSync({
+    const loadCollectionRes = await milvusClient.loadCollectionSync({
       collection_name: collectionName,
     });
     console.log("--- Load collection (" + collectionName + ") ---", loadCollectionRes);
 
 
-    const result = await milvusClient.dataManager.search({
+    const result = await milvusClient.search({
       collection_name: collectionName,
       vectors: [vectorsData[0]["float_vector"]],
       search_params: {
@@ -181,15 +180,15 @@ const generateInsertData = function generateInsertData(
 
 - Releases the collection:
 ```ts
-    const releaseRes = await collectionManager.releaseCollection({
+    const releaseRes = await milvusClient.releaseCollection({
       collection_name: collectionName,
     });
     console.log("--- Release Collection ---", releaseRes);
 ``` 
 
 - Drops the collection:
-```tw
-    const dropRes = await collectionManager.dropCollection({
+```ts
+    const dropRes = await milvusClient.dropCollection({
       collection_name: collectionName,
     });
     console.log("--- Drop Collection ---", dropRes);

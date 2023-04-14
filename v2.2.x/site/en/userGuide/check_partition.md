@@ -29,7 +29,7 @@ collection.has_partition("novel")
 ```
 
 ```javascript
-await milvusClient.partitionManager.hasPartition({
+await milvusClient.hasPartition({
   collection_name: "book",
   partition_name: "novel",
 });
@@ -199,7 +199,7 @@ collection.partitions
 ```
 
 ```javascript
-await milvusClient.partitionManager.showPartitions({
+await milvusClient.showPartitions({
   collection_name: "book",
 });
 ```

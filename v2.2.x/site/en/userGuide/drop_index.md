@@ -29,7 +29,7 @@ collection.drop_index()
 ```
 
 ```javascript
-await milvusClient.indexManager.dropIndex({
+await milvusClient.dropIndex({
   collection_name: "book",
 });
 ```

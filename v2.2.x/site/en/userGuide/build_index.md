@@ -411,7 +411,7 @@ utility.index_building_progress("book")
 ```
 
 ```javascript
-await milvusClient.indexManager.createIndex({
+await milvusClient.createIndex({
   collection_name: "book",
   field_name: "book_intro",
   extra_params: index_params,
