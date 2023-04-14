@@ -8,12 +8,12 @@ new milvusClient(MILUVS_ADDRESS).createIndex(CreateIndexReq);
 
 ### CreateIndexReq
 
-| Parameters      | Description                                                                            | Type        |
-| --------------- | -------------------------------------------------------------------------------------- | ----------- |
-| collection_name | Collection name                                                                        | String      |
-| field_name      | Name of the field to create index on                                                   | String      |
-| index_name?     | Name of the index to create                                                            | String      |
-| extra_params?   | Extra index parameters (see the table below)                                           | IndexParams |
+| Parameters      | Description                                                                                                                                                                       | Type        |
+| --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
+| collection_name | Collection name                                                                                                                                                                   | String      |
+| field_name      | Name of the field to create index on                                                                                                                                              | String      |
+| index_name?     | Name of the index to create                                                                                                                                                       | String      |
+| extra_params?   | Extra index parameters (see the table below)                                                                                                                                      | IndexParams |
 | timeout?        | This parameter is used to specify the length of time, in milliseconds, that the RPC (Remote Procedure Call) is allowed to run. If no value is provided, the default is undefined. | Number      |
 
 #### IndexParams
@@ -27,11 +27,7 @@ new milvusClient(MILUVS_ADDRESS).createIndex(CreateIndexReq);
 ## Example
 
 ```javascript
-import { MilvusClient } from "@zilliz/milvus2-sdk-node";
-import {
-  MetricType,
-  IndexType,
-} from "@zilliz/milvus2-sdk-node/dist/milvus/const/Milvus";
+import { MilvusClient, MetricType, IndexType } from "@zilliz/milvus2-sdk-node";
 
 new milvusClient(MILUVS_ADDRESS).createIndex({
   collection_name: "my_collection",
