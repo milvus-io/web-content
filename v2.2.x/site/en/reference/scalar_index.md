@@ -22,9 +22,7 @@ Scalar field indexing is a way of ensuring the speed of attribute filtering by s
 
 Milvus implements scalar field indexing with the goal of low memory usage, high filtering efficiency, and short loading time.
 
-Specifically, indexing algorithms for scalar fields vary with field data types. However, you do not need to set the index type manually when indexing a scalar field. The default indexing algorithm applies. 
-
-The following table lists the data types that Milvus supports and their corresponding default indexing algorithms.
+Specifically, indexing algorithms for scalar fields vary with field data types. The following table lists the data types that Milvus supports and their corresponding default indexing algorithms.
 
 | Data type                     | Default indexing algorithm        |
 | ----------------------------- | --------------------------------- |

@@ -6,7 +6,34 @@ summary: Milvus Release Notes
 
 Find out what’s new in Milvus! This page summarizes information about new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.2.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
-## 2.2.5
+## v2.2.6
+
+Release date: 13 April, 2023
+
+| Milvus version | Python SDK version | Java SDK version | Go SDK version | Node.js SDK version |
+| -------------- | ------------------ | ---------------- | -------------- | ------------------- |
+| 2.2.6          | 2.2.6              | 2.2.5            | 2.2.1          | 2.2.4               |
+
+**DO NOT use Milvus 2.2.5.**
+
+Please refrain from using version 2.2.5 due to several critical issues that require immediate attention. Version 2.2.6 addresses these issues. One of the critical issues is the inability to recycle dirty binlog data. We highly recommend using version 2.2.6 version instead of version 2.2.5 to avoid any potential complications.
+
+If you hit the issue where data on object storage cannot be recycled, upgrade your Milvus to v2.2.6 to fix these issues.
+
+### Bugfix
+
+- Fixed the problem of DataCoord GC failure  ([#23298](https://github.com/milvus-io/milvus/pull/23298))
+- Fixed the problem that index parameters passed when creating a collection will override those passed in subsequent create_index operations ([#23242](https://github.com/milvus-io/milvus/pull/23242)) 
+- Fix the problem that the message backlog occurs in RootCoord, which causes the delay of the whole system to increase ([#23267](https://github.com/milvus-io/milvus/pull/23267)) 
+- Fixed the accuracy of metric RootCoordInsertChannelTimeTick ([#23284](https://github.com/milvus-io/milvus/pull/23284))
+- Fixed the issue that the timestamp reported by the proxy may stop in some cases  ([#23291](https://github.com/milvus-io/milvus/pull/23291))  
+- Fixed the problem that the coordinator role may self-destruct by mistake during the restart process ([#23344](https://github.com/milvus-io/milvus/pull/23344)) 
+
+### Enhancement
+
+- Added slow logging performance for query/search when the latency is not less than 5 seconds ([#23274](https://github.com/milvus-io/milvus/pull/23274))
+
+## v2.2.5
 
 Release date: 29 March, 2023
 
@@ -65,7 +92,7 @@ Fixed MinIO CVE-2023-28432 by upgrading MinIO to RELEASE.2023-03-20T20-16-18Z.
 - Upgraded Knowhere to 1.3.11 ([#22975](https://github.com/milvus-io/milvus/pull/22975))
 - Added the user RPC counter ([#22870](https://github.com/milvus-io/milvus/pull/22870))
 
-## 2.2.4
+## v2.2.4
 Release date: 17 March, 2023
 
 | Milvus version | Python SDK version | Java SDK version | Go SDK version | Node.js SDK version |
@@ -168,7 +195,7 @@ We have also made several enhancements to make your Milvus cluster faster and co
   - Changed the etcd session timeout to 20s to improve recovery speed([#22400](https://github.com/milvus-io/milvus/pull/22400))
   - Added the RBAC for the GetLoadingProgress and GetLoadState API ([#22313](https://github.com/milvus-io/milvus/pull/22313))
 
-## 2.2.3
+## v2.2.3
 Release date: 10 February, 2023
 
 | Milvus version | Python SDK version | Java SDK version | Go SDK version | Node.js SDK version |
@@ -304,7 +331,7 @@ In 2.2.3, the maximum number of fields in a collection is reduced from 256 to 64
   - Prevent users from deleting entities by any non-primary-key field ([#21459](https://github.com/milvus-io/milvus/pull/21459)) ([#21472](https://github.com/milvus-io/milvus/pull/21472))
   - Fixed potential nil access on segments ([#22104](https://github.com/milvus-io/milvus/pull/22104))
 
-## 2.2.2
+## v2.2.2
 Release date: 22 December, 2022
 
 | Milvus version | Python SDK version | Java SDK version | Go SDK version | Node.js SDK version |
