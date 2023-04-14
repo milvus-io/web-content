@@ -43,7 +43,7 @@ utility.loading_progress("book")
 ```
 
 ```javascript
-await milvusClient.collectionManager.loadCollection({
+await milvusClient.loadCollection({
   collection_name: "book",
 });
 

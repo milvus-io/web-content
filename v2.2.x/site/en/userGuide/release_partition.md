@@ -26,7 +26,7 @@ partition.release()
 ```
 
 ```javascript
-await milvusClient.partitionManager.releasePartitions({
+await milvusClient.releasePartitions({
     collection_name: "book",
     partition_names: ["novel"],
  });

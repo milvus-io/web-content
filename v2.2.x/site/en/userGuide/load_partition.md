@@ -39,7 +39,7 @@ partition.load(replica_number=2)
 ```
 
 ```javascript
-await milvusClient.partitionManager.loadPartitions({
+await milvusClient.loadPartitions({
   collection_name: "book",
   partition_names: ["novel"],
 });

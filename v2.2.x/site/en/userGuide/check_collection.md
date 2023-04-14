@@ -28,7 +28,7 @@ utility.has_collection("book")
 ```
 
 ```javascript
-await milvusClient.collectionManager.hasCollection({
+await milvusClient.hasCollection({
   collection_name: "book",
 });
 ```
@@ -207,11 +207,11 @@ collection.properties		# Return the expiration time of data in the collection.
 ```
 
 ```javascript
-await milvusClient.collectionManager.describeCollection({          // Return the name and schema of the collection.
+await milvusClient.describeCollection({          // Return the name and schema of the collection.
   collection_name: "book",
 });
 
-await milvusClient.collectionManager.getCollectionStatistics({     // Return the statistics information of the collection.
+await milvusClient.getCollectionStatistics({     // Return the statistics information of the collection.
   collection_name: "book",
 });
 ```
@@ -455,7 +455,7 @@ utility.list_collections()
 ```
 
 ```javascript
-await milvusClient.collectionManager.showCollections();
+await milvusClient.showCollections();
 ```
 
 ```go
