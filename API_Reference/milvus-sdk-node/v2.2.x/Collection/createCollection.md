@@ -56,9 +56,7 @@ new milvusClient(MILUVS_ADDRESS).createCollection({
       name: "vector_01",
       description: "vector field",
       data_type: DataType.FloatVector,
-      type_params: {
-        dim: "8",
-      },
+      dim: "8",
     },
     {
       name: "age",
