@@ -6,15 +6,13 @@ summary: Milvus Release Notes
 
 Find out what’s new in Milvus! This page summarizes information about new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.2.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
-<div style="display:none">
-
 ## v2.2.6
 
-Release date: 13 April, 2023
+Release date: 18 April, 2023
 
 | Milvus version | Python SDK version | Java SDK version | Go SDK version | Node.js SDK version |
 | -------------- | ------------------ | ---------------- | -------------- | ------------------- |
-| 2.2.6          | 2.2.6              | 2.2.5            | 2.2.1          | 2.2.4               |
+| 2.2.6          | 2.2.7              | 2.2.5            | 2.2.1          | 2.2.4               |
 
 **Upgrade to Milvus 2.2.6 as soon as possible!**
 
@@ -35,8 +33,6 @@ If you hit the issue where data on object storage cannot be recycled, upgrade yo
 ### Enhancement
 
 - Added slow logging performance for query/search when the latency is not less than 5 seconds ([#23274](https://github.com/milvus-io/milvus/pull/23274))
-
-</div>
 
 ## v2.2.5
 
