@@ -388,7 +388,7 @@ Output:
         </tr>
         <tr>
             <td><code>fields</code></td>
-            <td>Schema of the filed and the collection to create.</td>
+            <td>Schema of the field and the collection to create.</td>
             <td>Refer to <a href="schema.md">Schema</a> for more information.</td>
         </tr>
         <tr>
