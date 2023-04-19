@@ -31,7 +31,7 @@ book_id = FieldSchema(
 book_name = FieldSchema(
   name="book_name", 
   dtype=DataType.VARCHAR, 
-  max_length_per_row=200, #max_length_per_row must be specified to limit the max length of VARCHAR. The value should be in (0, 65535].
+  max_length=200, #max_length must be specified to limit the max length of VARCHAR. The value should be in (0, 65535].
 )
 word_count = FieldSchema(
   name="word_count", 
