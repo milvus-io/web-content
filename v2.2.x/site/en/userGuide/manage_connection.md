@@ -39,6 +39,8 @@ Construct a Milvus connection. Ensure to connect to Milvus server before any ope
 from pymilvus import connections
 connections.connect(
   alias="default", 
+  user='username',
+  password='password'
   host='localhost', 
   port='19530'
 )
@@ -89,6 +91,14 @@ curl localhost:9091/api/v1/health
 	<tr>
 		<td><code>alias</code></td>
 		<td>Alias of the Milvus connection to construct.</td>
+	</tr>
+	<tr>
+		<td><code>user</code></td>
+		<td>Username of the Milvus server.</td>
+	</tr>
+	<tr>
+		<td><code>password</code></td>
+		<td>Password of the username of the Milvus server.</td>
 	</tr>
 	<tr>
 		<td><code>host</code></td>
