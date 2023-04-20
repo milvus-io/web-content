@@ -773,11 +773,68 @@
       "order": 1
     },
     {
+      "id": "integrations",
+      "title": "Integrations",
+      "label1": "",
+      "label2": "",
+      "label3": "",
+      "order": 4,
+      "isMenu": true
+    },
+    {
+      "id": "integrate_with_openai.md",
+      "title": "OpenAI",
+      "label1": "integrations",
+      "label2": "",
+      "label3": "",
+      "order": 0
+    },
+    {
+      "id": "integrate_with_cohere.md",
+      "title": "Co:here",
+      "label1": "integrations",
+      "label2": "",
+      "label3": "",
+      "order": 1
+    },
+    {
+      "id": "integrate_with_hugging-face.md",
+      "title": "HuggingFace",
+      "label1": "integrations",
+      "label2": "",
+      "label3": "",
+      "order": 2
+    },
+    {
+      "id": "integrate_with_pytorch.md",
+      "title": "PyTorch",
+      "label1": "integrations",
+      "label2": "",
+      "label3": "",
+      "order": 3
+    },
+    {
+      "id": "integrate_with_sentencetransformers.md",
+      "title": "SentenceTransformers",
+      "label1": "integrations",
+      "label2": "",
+      "label3": "",
+      "order": 4
+    },
+    {
+      "id": "integrate_with_llama.md",
+      "title": "LlamaIndex",
+      "label1": "integrations",
+      "label2": "",
+      "label3": "",
+      "order": 5
+    },
+    {
       "id": "benchmark.md",
       "title": "Benchmarks",
       "label1": "",
       "label2": "",
-      "order": 4,
+      "order": 5,
       "isMenu": true
     },     
     {
@@ -785,7 +842,7 @@
       "title": "Tools",
       "label1": "",
       "label2": "",
-      "order": 5,
+      "order": 6,
       "isMenu": true
     },
     {
@@ -949,7 +1006,7 @@
       "title": "Reference",
       "label1": "",
       "label2": "",
-      "order": 5,
+      "order": 7,
       "isMenu": true
     },
     {
@@ -1124,7 +1181,7 @@
       "title": "Example Applications",
       "label1": "",
       "label2": "",
-      "order": 6,
+      "order": 8,
       "isMenu": true
     },
     {
@@ -1212,7 +1269,7 @@
       "title": "FAQs",
       "label1": "",
       "label2": "",
-      "order": 7,
+      "order": 9,
       "isMenu": true
     },
     
