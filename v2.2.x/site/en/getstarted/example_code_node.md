@@ -42,9 +42,7 @@ This sample code does the following:
 
 - Imports the Node.js SDK package:
 ```ts
-import { MilvusClient } from "@zilliz/milvus2-sdk-node"
-import { DataType } from "@zilliz/milvus2-sdk-node/dist/milvus/types/Common";
-import { InsertReq } from "@zilliz/milvus2-sdk-node/dist/milvus/types/Insert";
+import { MilvusClient, DataType, InsertReq } from "@zilliz/milvus2-sdk-node"
 ```
 
 - Connects to the Milvus server:
