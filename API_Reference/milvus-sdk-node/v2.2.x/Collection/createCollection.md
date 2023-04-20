@@ -3,17 +3,15 @@
 With this method, you can create a new collection with a defined schema based on your specified requirements.
 
 ```javascript
-new milvusClient(MILUVS_ADDRESS).createCollection(
-  CreateCollectionReq
-);
+new milvusClient(MILUVS_ADDRESS).createCollection(CreateCollectionReq);
 ```
 
 ### CreateCollectionReq
 
-| Parameters      | Description                                                                            | Type          |
-| --------------- | -------------------------------------------------------------------------------------- | ------------- |
-| collection_name | Name of the collection to create                                                       | String        |
-| fields          | Schema of the collection to create                                                     | Field(object) |
+| Parameters      | Description                                                                                                                                                                       | Type          |
+| --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| collection_name | Name of the collection to create                                                                                                                                                  | String        |
+| fields          | Schema of the collection to create                                                                                                                                                | Field(object) |
 | timeout?        | This parameter is used to specify the length of time, in milliseconds, that the RPC (Remote Procedure Call) is allowed to run. If no value is provided, the default is undefined. | Number        |
 
 ### Field
@@ -43,6 +41,13 @@ new milvusClient(MILUVS_ADDRESS).createCollection(
 | 21    | Varchar                   |
 | 100   | Binary vector             |
 | 101   | Float vector              |
+
+### type_params
+
+| Parameters | Description                     | Type   |
+| ---------- | ------------------------------- | ------ |
+| dim        | dimension of the vector field   | String |
+| max_length | max length of the varChar field | String |
 
 ## Example
 
