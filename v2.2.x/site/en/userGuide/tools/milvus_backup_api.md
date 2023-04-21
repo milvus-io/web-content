@@ -83,6 +83,8 @@ This step is optional. If you skip this, ensure that you already have some data 
 
 ## Back up data
 
+<div class="tab-wrapper"></div>
+
 Note that running Milvus Backup against a Milvus instance will not normally affect the running of the instance. Your Milvus instance is fully functional during backup or restore.
 
 Run the following command to create a backup. Change `collection_names` and `backup_name` if necessary.
@@ -118,6 +120,8 @@ While running the above command, change `backup_id` and `backup_name` to the one
 Now, you can save the backup files to a safe place for restoration in the future, or upload them to [Zilliz Cloud](https://cloud.zilliz.com) to create a managed vector database with your data. For details, refer to [Migrate from Milvus to Zilliz Cloud](https://zilliz.com/doc/migrate_from_milvus-2x).
 
 ## Restore data
+
+<div class="tab-wrapper"></div>
 
 You can call the restore API command with a `collection_suffix` option to create a new collection by restoring the data from the backup. Change `collection_names` and `backup_name` if necessary. 
 
