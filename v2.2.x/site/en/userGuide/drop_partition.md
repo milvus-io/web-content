@@ -10,7 +10,8 @@ This topic describes how to drop a partition in a specified collection.
 
 
 <div class="alert caution">
-Dropping a partition irreversibly deletes all data within it.
+- You have to release the partition before you drop it.
+- Dropping a partition irreversibly deletes all data within it.
 </div>
 
 

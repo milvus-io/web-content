@@ -879,30 +879,29 @@
       "order":2
     },
     {
-      "id": "milvusdm",
-      "title": "MilvusDM",
+      "id": "milvus_backup",
+      "title": "Milvus Backup",
       "label1": "tools",
       "label2": "",
       "label3": "",
-      "order": 1,
-      "isMenu": true
+      "order": 2
     },
     {
-      "id": "migrate_overview.md",
+      "id": "milvus_backup_overview.md",
       "title": "Overview",
       "label1": "tools",
-      "label2": "milvusdm",
+      "label2": "milvus_backup",
       "label3": "",
       "order": 0
-    }, 
+    },
     {
-      "id": "milvusdm_install.md",
-      "title": "Installation",
+      "id": "milvus_backup_cli.md",
+      "title": "Usage Guide",
       "label1": "tools",
-      "label2": "milvusdm",
+      "label2": "milvus_backup",
       "label3": "",
       "order": 1
-    },  
+    },
     {
       "id": "milvus_attu",
       "title": "Attu",
@@ -993,12 +992,37 @@
       "order": 9
     },
     {
+      "id": "milvusdm",
+      "title": "MilvusDM",
+      "label1": "tools",
+      "label2": "",
+      "label3": "",
+      "order": 4,
+      "isMenu": true
+    },
+    {
+      "id": "migrate_overview.md",
+      "title": "Overview",
+      "label1": "tools",
+      "label2": "milvusdm",
+      "label3": "",
+      "order": 0
+    }, 
+    {
+      "id": "milvusdm_install.md",
+      "title": "Installation",
+      "label1": "tools",
+      "label2": "milvusdm",
+      "label3": "",
+      "order": 1
+    },      
+    {
       "id": "sizing",
       "title": "Milvus Sizing Tool",
       "label1": "tools",
       "label2": "",
       "label3": "",
-      "order": 3,
+      "order": 5,
       "outLink": "https://milvus.io/tools/sizing/"
     },
     {
