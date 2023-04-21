@@ -896,11 +896,19 @@
     },
     {
       "id": "milvus_backup_cli.md",
-      "title": "Usage Guide",
+      "title": "Commands",
       "label1": "tools",
       "label2": "milvus_backup",
       "label3": "",
       "order": 1
+    },
+    {
+      "id": "milvus_backup_cli.md",
+      "title": "RESTful API",
+      "label1": "tools",
+      "label2": "milvus_backup",
+      "label3": "",
+      "order": 2
     },
     {
       "id": "milvus_attu",
