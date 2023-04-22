@@ -1,9 +1,5 @@
 ---
 id: milvus_backup_api.md
-lablel: RESTful API
-order: 1
-group: milvus_backup_cli.md
-related_key: Milvus Backup
 summary: Learn how to use Milvus Backup through API
 ---
 
@@ -83,7 +79,7 @@ This step is optional. If you skip this, ensure that you already have some data 
 
 ## Back up data
 
-<div class="tab-wrapper"></div>
+<div class="tab-wrapper"><a href="attu_install-docker.md" class=''>Install with Docker Compose</a><a href="attu_install-helm.md" class=''>Install with Helm Chart</a><a href="attu_install-package.md" class=''>Install with Package</a></div>
 
 Note that running Milvus Backup against a Milvus instance will not normally affect the running of the instance. Your Milvus instance is fully functional during backup or restore.
 
@@ -121,7 +117,7 @@ Now, you can save the backup files to a safe place for restoration in the future
 
 ## Restore data
 
-<div class="tab-wrapper"></div>
+<div class="tab-wrapper"><a href="attu_install-docker.md" class=''>Install with Docker Compose</a><a href="attu_install-helm.md" class=''>Install with Helm Chart</a><a href="attu_install-package.md" class=''>Install with Package</a></div>
 
 You can call the restore API command with a `collection_suffix` option to create a new collection by restoring the data from the backup. Change `collection_names` and `backup_name` if necessary. 
 
