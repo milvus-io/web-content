@@ -1,9 +1,5 @@
 ---
 id: milvus_backup_cli.md
-lablel: CLI
-order: 0
-group: milvus_backup_cli.md
-related_key: Milvus Backup
 summary: Learn how to use Milvus Backup through CLI
 ---
 
@@ -69,7 +65,7 @@ This step is optional. If you skip this, ensure that you already have some data 
 
 Note that running Milvus Backup against a Milvus instance will not normally affect the running of the instance. Your Milvus instance is fully functional during backup or restore.
 
-<div class="tab-wrapper"></div>
+<div class="tab-wrapper"><a href="attu_install-docker.md" class=''>Install with Docker Compose</a><a href="attu_install-helm.md" class=''>Install with Helm Chart</a><a href="attu_install-package.md" class=''>Install with Package</a></div>
 
 Run the following command to create a backup.
 
@@ -98,7 +94,7 @@ Now, you can save the backup files to a safe place for restoration in the future
 
 ## Restore data
 
-<div class="tab-wrapper"></div>
+<div class="tab-wrapper"><a href="attu_install-docker.md" class=''>Install with Docker Compose</a><a href="attu_install-helm.md" class=''>Install with Helm Chart</a><a href="attu_install-package.md" class=''>Install with Package</a></div>
 
 You can run the `restore` command with the `-s` flag to create a new collection by restoring the data from the backup:
 
