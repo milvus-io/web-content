@@ -68,20 +68,23 @@ const params = {
     {
       name: "book_intro",
       description: "",
-      data_type: 101,  // DataType.FloatVector
-      type_params: {
-        dim: "2",
-      },
+      data_type: DataType.FloatVector,
+      dim: 2,
     },
     {
       name: "book_id",
-      data_type: 5,   //DataType.Int64
+      data_type: DataType.Int64,
       is_primary_key: true,
       description: "",
     },
     {
+      name: "book_name",
+      data_type: DataType.VarChar,
+      description: "",
+    },
+    {
       name: "word_count",
-      data_type: 5,    //DataType.Int64
+      data_type: DataType.Int64,
       description: "",
     },
   ],
