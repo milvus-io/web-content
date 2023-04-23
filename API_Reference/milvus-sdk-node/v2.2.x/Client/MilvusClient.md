@@ -3,7 +3,7 @@
 This class serves as an initializer for a Milvus client instance. Upon successful connection to the Milvus instance, the client can execute various operations.
 
 ```javascript
-const milvusClient = new MilvusClient(MILUVS_ADDRESS);
+const milvusClient = new MilvusClient(MilvusClientConfig);
 ```
 
 ## Parameters
@@ -22,8 +22,8 @@ const milvusClient = new MilvusClient(MILUVS_ADDRESS);
 ```javascript
 import { MilvusClient } from "@zilliz/milvus2-sdk-node";
 
-const milvusAddress = `192.168.0.1:19530`;
-const milvusClient = new MilvusClient(MILUVS_ADDRESS);
+const address = `192.168.0.1:19530`;
+const milvusClient = new MilvusClient( address );
 ```
 
 ### Connect with password
@@ -31,11 +31,10 @@ const milvusClient = new MilvusClient(MILUVS_ADDRESS);
 ```javascript
 import { MilvusClient } from "@zilliz/milvus2-sdk-node";
 
-const milvusAddress = `192.168.0.1:19530`;
-const milvusClient = new MilvusClient(
-  MILUVS_ADDRESS,
-  false,
-  "user",
-  "password"
-);
+const milvusClient = new MilvusClient({
+  address: '192.168.0.1:19530',
+  ssl: false,
+  username: 'optional',
+  password: 'optional'
+});
 ```
