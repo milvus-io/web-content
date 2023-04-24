@@ -186,7 +186,7 @@ curl -X 'DELETE' \
 
 ## Constraints
 
-- Error will be returned at the attempt to load partition(s) when the parent collection is already loaded. Future releases will support releasing partitions from a loaded collection, and (if needed) then loading some other partition(s).
+- Error will be returned at the attempt to release partition(s) when the parent collection is already loaded. Future releases will support releasing partitions from a loaded collection, and (if needed) then loading some other partition(s).
 - "Load successfully" will be returned at the attempt to load the collection that is already loaded.
 - Error will be returned at the attempt to load the collection when the child partition(s) is/are already loaded. Future releases will support loading the collection when some of its partitions are already loaded.
 - Loading different partitions in a same collection via separate RPCs is not allowed.
