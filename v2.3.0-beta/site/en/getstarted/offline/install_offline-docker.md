@@ -53,6 +53,7 @@ To use Milvus with GPU support, ensure that
 - NVIDIA Tesla driver version is 450.80.02 or later.
 - NVIDIA GTX driver version is 510.47.03 or later. 
 - NVIDIA Container Toolkit has been installed. For details, refer to [Setting up NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#id2).
+- NVIDIA CUDA version is 11.6 or later.
 
 </div>
 
