@@ -737,16 +737,7 @@
       "label2": "monitor",
       "label3": "",
       "order": 4
-    },
-    {
-      "id": "rbac.md",
-      "title": "Enable RBAC",
-      "label1": "admin_guide",
-      "label2": "",
-      "label3": "",
-      "order": 7,
-      "isMenu": true
-    },    
+    },   
     {
       "id": "security",
       "title": "Security",
@@ -765,12 +756,21 @@
       "order": 0
     },
     {
+      "id": "rbac.md",
+      "title": "Enable RBAC",
+      "label1": "admin_guide",
+      "label2": "security",
+      "label3": "",
+      "order": 1,
+      "isMenu": true
+    }, 
+    {
       "id": "tls.md",
       "title": "Encryption in Transit",
       "label1": "admin_guide",
       "label2": "security",
       "label3": "",
-      "order": 1
+      "order": 2
     },
     {
       "id": "integrations",
