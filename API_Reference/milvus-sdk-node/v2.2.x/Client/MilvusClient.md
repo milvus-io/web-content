@@ -17,16 +17,20 @@ const milvusClient = new MilvusClient(MilvusClientConfig);
 
 ### Example
 
-### Connect without password
+### Connect using parameters
 
 ```javascript
 import { MilvusClient } from "@zilliz/milvus2-sdk-node";
 
 const address = `192.168.0.1:19530`;
-const milvusClient = new MilvusClient( address );
+const secure = true;
+const username = 'username';
+const password = 'password';
+const milvusClient = new MilvusClient( address, secure, username, password);
 ```
 
-### Connect with password
+### Connect with parameters object
+> The feature is supported until v2.2.7
 
 ```javascript
 import { MilvusClient } from "@zilliz/milvus2-sdk-node";
