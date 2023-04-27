@@ -12,13 +12,11 @@ A collection consists of one or more partitions. While creating a new collection
 
 The following example builds a two-[shard](glossary.md#Sharding) collection named `book`, with a primary key field named `book_id`, an `INT64` scalar field named `word_count`, and a two-dimensional floating-point vector field named `book_intro`. Real applications will likely use much higher dimensional vectors than the example.
 
-
 ## Prepare Schema
 
 <div class="alert note">
 The collection to create must contain a primary key field and a vector field. INT64 and String are supported data type on primary key field.
 </div>
-
 
 First, prepare necessary parameters, including field schema, collection schema, and collection name.
 
@@ -35,32 +33,33 @@ First, prepare necessary parameters, including field schema, collection schema, 
 ```python
 from pymilvus import CollectionSchema, FieldSchema, DataType
 book_id = FieldSchema(
-  name="book_id", 
-  dtype=DataType.INT64, 
-  is_primary=True, 
+  name="book_id",
+  dtype=DataType.INT64,
+  is_primary=True,
 )
 book_name = FieldSchema(
-  name="book_name", 
-  dtype=DataType.VARCHAR, 
+  name="book_name",
+  dtype=DataType.VARCHAR,
   max_length=200,
 )
 word_count = FieldSchema(
-  name="word_count", 
-  dtype=DataType.INT64,  
+  name="word_count",
+  dtype=DataType.INT64,
 )
 book_intro = FieldSchema(
-  name="book_intro", 
-  dtype=DataType.FLOAT_VECTOR, 
+  name="book_intro",
+  dtype=DataType.FLOAT_VECTOR,
   dim=2
 )
 schema = CollectionSchema(
-  fields=[book_id, book_name, word_count, book_intro], 
+  fields=[book_id, book_name, word_count, book_intro],
   description="Test book search"
 )
 collection_name = "book"
 ```
 
 ```javascript
+import { MetricType } from "@zilliz/milvus2-sdk-node";
 const params = {
   collection_name: "book",
   description: "Test book search",
@@ -369,7 +368,6 @@ Output:
 	</tbody>
 </table>
 
-
 <table class="language-javascript">
 	<thead>
         <tr>
@@ -411,6 +409,11 @@ Output:
         </tr>
         <tr>
             <td><code>dim</code> (Mandatory for vector field)</td>
+            <td>Dimension of the vector.</td>
+            <td>[1, 32768]</td>
+        </tr>
+        <tr>
+            <td><code>max_length</code> (Mandatory for VarChar field)</td>
             <td>Dimension of the vector.</td>
             <td>[1, 32768]</td>
         </tr>
@@ -646,9 +649,9 @@ Then, create a collection with the schema you specified above.
 ```python
 from pymilvus import Collection
 collection = Collection(
-    name=collection_name, 
-    schema=schema, 
-    using='default', 
+    name=collection_name,
+    schema=schema,
+    using='default',
     shards_num=2
     )
 ```
@@ -729,17 +732,14 @@ milvusClient.createCollection(createCollectionReq);
     </tbody>
 </table>
 
-
-
 ## Limits
-|Feature|Maximum limit|
-|---|---|
-|Length of a collection name|255 characters|
-|Number of partitions in a collection|4,096|
-|Number of fields in a collection|64|
-|Number of shards in a collection|256|
 
-
+| Feature                              | Maximum limit  |
+| ------------------------------------ | -------------- |
+| Length of a collection name          | 255 characters |
+| Number of partitions in a collection | 4,096          |
+| Number of fields in a collection     | 64             |
+| Number of shards in a collection     | 256            |
 
 ## What's next
 
@@ -749,4 +749,3 @@ milvusClient.createCollection(createCollectionReq);
   - [Build an index for vectors](build_index.md)
   - [Conduct a vector search](search.md)
   - [Conduct a hybrid search](hybridsearch.md)
-
