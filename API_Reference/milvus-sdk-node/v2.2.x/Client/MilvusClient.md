@@ -30,7 +30,7 @@ const milvusClient = new MilvusClient( address, secure, username, password);
 ```
 
 ### Connect with parameters object
-> The feature is supported until v2.2.7
+> The feature is supported start from v2.2.7
 
 ```javascript
 import { MilvusClient } from "@zilliz/milvus2-sdk-node";
