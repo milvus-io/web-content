@@ -3,10 +3,27 @@
 This method performs a vector similarity search.
 
 > You must load the collection before searching or querying
+>
+> Starting from node sdk v2.2.7, you can use much simpler search params
 
 ```javascript
-new milvusClient(MILUVS_ADDRESS).search(SearchReq);
+new milvusClient(MILUVS_ADDRESS).search(SearchSimpleReq);
 ```
+
+### SearchSimpleReq
+
+| Parameters        | Description                                                                                                                                                                       | Type       |
+| ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
+| collection_name   | Name of the collection to search on                                                                                                                                               | String     |
+| vector?           | vector to search, effect only if vectors are not set                                                                                                                              | Number[]   |
+| vectors?          | vectors vectors to search                                                                                                                                                         | Number[][] |
+| limit?            | Topk, by default: 10                                                                                                                                                              | Number     |
+| offset?           | offset, by default: 0                                                                                                                                                             | Number     |
+| output_fields?    | Vector or scalar field to be returnsed, by default, we will output all fields                                                                                                     | String[]   |
+| partitions_names? | An array of the names of the partitions to search on                                                                                                                              | String[]   |
+| metric_type?      | similarity metric, by default, it is 'L2'                                                                                                                                         | String     |
+| filter?           | Boolean expression to filter the data                                                                                                                                             | String     |
+| timeout?          | This parameter is used to specify the length of time, in milliseconds, that the RPC (Remote Procedure Call) is allowed to run. If no value is provided, the default is undefined. | Number     |
 
 ### SearchReq
 
@@ -59,7 +76,36 @@ SearchParam is a json string, it's key and value, please refer to https://milvus
 JSON.stringify({ nprobe: 1024 });
 ```
 
-## Example
+### After node sdk v2.2.7
+
+> Starting from node sdk v2.2.7, you can use much simpler search api
+
+```javascript
+import { MilvusClient } from "@zilliz/milvus2-sdk-node";
+import {
+  DataType,
+  MetricType,
+} from "@zilliz/milvus2-sdk-node/dist/milvus/const/Milvus";
+
+// simple search example
+new milvusClient(MILUVS_ADDRESS).search({
+  collection_name: "my_collection",
+  vector: [1, 2, 3, 4],
+});
+
+// complex search example
+new milvusClient(MILUVS_ADDRESS).search({
+  collection_name: "my_collection",
+  vector: [1, 2, 3, 4],
+  filter: "count > 5",
+  limit: 10,
+  offset: 2,
+  metric_type: MetricType.L2,
+  param: { nprobe: 1024 },
+});
+```
+
+## Before node sdk v2.2.7
 
 ```javascript
 import { MilvusClient } from "@zilliz/milvus2-sdk-node";

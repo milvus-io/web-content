@@ -2,6 +2,8 @@
 
 With this method, you can create a new collection with a defined schema based on your specified requirements.
 
+> Starting from node sdk v2.2.7, you can use much simpler create collection params
+
 ```javascript
 new milvusClient(MILUVS_ADDRESS).createCollection(CreateCollectionReq);
 ```
@@ -22,6 +24,8 @@ new milvusClient(MILUVS_ADDRESS).createCollection(CreateCollectionReq);
 | description     | Field description                                                       | String           |
 | data_type       | Data type of the field (see the table below)                            | DataType(number) |
 | autoID?         | Boolean value to indicate whether the IDs are automatically generated   | Bool             |
+| dim?            | dimension of the vector field                                           | number           |
+| max_length?     | max length of the varChar field                                         | number           |
 | is_primary_key? | Boolean value to indicate whether this field is used as the primary key | Bool             |
 
 #### DataType
@@ -41,13 +45,6 @@ new milvusClient(MILUVS_ADDRESS).createCollection(CreateCollectionReq);
 | 100   | Binary vector             |
 | 101   | Float vector              |
 
-### type_params
-
-| Parameters | Description                     | Type   |
-| ---------- | ------------------------------- | ------ |
-| dim        | dimension of the vector field   | String |
-| max_length | max length of the varChar field | String |
-
 ## Example
 
 ```javascript
@@ -60,7 +57,7 @@ new milvusClient(MILUVS_ADDRESS).createCollection({
       name: "vector_01",
       description: "vector field",
       data_type: DataType.FloatVector,
-      dim: "8",
+      dim: 8,
     },
     {
       name: "age",
@@ -69,7 +66,7 @@ new milvusClient(MILUVS_ADDRESS).createCollection({
       is_primary_key: true,
       description: "",
     },
-     {
+    {
       name: "name",
       data_type: DataType.VarChar,
       max_length: 256,
