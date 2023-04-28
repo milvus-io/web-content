@@ -7,7 +7,7 @@
   "milvus_node_sdk_version": "2.2.x",
   "milvus_go_sdk_version": "2.2.2",
   "milvus_java_sdk_version": "2.2.5",
-  "milvus_operator_version": "0.7.10",
+  "milvus_operator_version": "0.7.11",
   "milvus_helm_chart_version": "4.0.16",
   "milvus_image": "2.2.7",
   "attu_release": "2.2.3"
