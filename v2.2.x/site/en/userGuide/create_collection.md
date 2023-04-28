@@ -79,6 +79,7 @@ const params = {
     {
       name: "book_name",
       data_type: DataType.VarChar,
+      max_length: 256,
       description: "",
     },
     {

@@ -13,7 +13,7 @@ This topic describes how to connect to and disconnect from a Milvus server.
 </div>
 
 Milvus supports two ports, port `19530` and port `9091`:
- 
+
 - Port `19530` is for gRPC. It is the default port when you connect to a Milvus server with different Milvus SDKs.
 
 - Port `9091` is for RESTful API. It is used when you connect to a Milvus server with an HTTP client.
@@ -38,10 +38,10 @@ Construct a Milvus connection. Ensure to connect to Milvus server before any ope
 # Run `python3` in your terminal to operate in the Python interactive mode.
 from pymilvus import connections
 connections.connect(
-  alias="default", 
+  alias="default",
   user='username',
   password='password'
-  host='localhost', 
+  host='localhost',
   port='19530'
 )
 ```
@@ -49,7 +49,10 @@ connections.connect(
 ```javascript
 import { MilvusClient } from "@zilliz/milvus2-sdk-node";
 const address = "localhost:19530";
-const milvusClient = new MilvusClient(address);
+const user = "username";
+const password = "password";
+const ssl = false;
+const milvusClient = new MilvusClient(address, ssl, user, password, ssl);
 ```
 
 ```go
@@ -76,7 +79,7 @@ connect -h localhost -p 19530 -a default
 ```
 
 ```curl
-curl localhost:9091/api/v1/health  
+curl localhost:9091/api/v1/health
 {"status":"ok"}
 ```
 
@@ -122,6 +125,18 @@ curl localhost:9091/api/v1/health
     	<tr>
 	    	<td><code>address</code></td>
 			<td>Address of the Milvus connection to construct.</td>
+		</tr>
+    <tr>
+	    <td><code>username</code></td>
+			<td>The username used to connect to Milvus.</td>
+		</tr>
+    <tr>
+	    <td><code>password</code></td>
+			<td>The password used to connect to Milvus.</td>
+		</tr>
+    <tr>
+	    <td><code>ssl</code></td>
+			<td>SSL connection. It is false by default.</td>
 		</tr>
 	</tbody>
 </table>
@@ -203,10 +218,9 @@ A Milvus connection created by the passed parameters.
   <li><b>NotImplementedError</b>: If handler in connection parameters is not GRPC.</li>
   <li><b>ParamError</b>: If pool in connection parameters is not supported.</li>
   <li><b>Exception</b>: If server specified in parameters is not ready, we cannot connect to server.</li>
-</ul>  
+</ul>
 
 </div>
-
 
 ## Disconnect from a Milvus server
 
@@ -225,7 +239,6 @@ Disconnect from a Milvus server.
 ```python
 connections.disconnect("default")
 ```
-
 
 ```javascript
 await milvusClient.closeConnection();
@@ -275,4 +288,3 @@ Having connected to a Milvus server, you can:
 - [Build a vector index](build_index.md)
 - [Conduct a vector search](search.md)
 - [Conduct a hybrid search](hybridsearch.md)
-
