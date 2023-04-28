@@ -6,6 +6,44 @@ summary: Milvus Release Notes
 
 Find out what’s new in Milvus! This page summarizes information about new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.2.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.2.7
+
+Release date: 28 April, 2023
+
+| Milvus version | Python SDK version | Java SDK version | Go SDK version | Node.js SDK version |
+| -------------- | ------------------ | ---------------- | -------------- | ------------------- |
+| 2.2.7          | 2.2.8              | 2.2.5            | 2.2.2          | 2.2.7               |
+
+In this update, we have focused on resolving various issues reported by our users, enhancing the software's overall stability and functionality. Additionally, we have implemented several optimizations, such as load balancing, search grouping, and memory usage improvements.
+
+### Bugfix
+
+- Fixed a panic caused by not removing metadata of a dropped segment from the DataNode. ([#23492](https://github.com/milvus-io/milvus/pull/23492))
+- Fixed a bug that caused forever blocking due to the release of a non-loaded partition. ([#23612](https://github.com/milvus-io/milvus/pull/23612))
+- To prevent the query service from becoming unavailable, automatic balancing at the channel level has been disabled as a workaround. ([#23632](https://github.com/milvus-io/milvus/pull/23632)) ([#23724](https://github.com/milvus-io/milvus/pull/23724))
+- Cancel failed tasks in the scheduling queue promptly to prevent an increase in QueryCoord scheduling latency. ([#23649](https://github.com/milvus-io/milvus/pull/23649))
+- Fixed compatibility bug and recalculate segment rows to prevent service queries from being unavailable. ([#23696](https://github.com/milvus-io/milvus/pull/23696))
+- Fixed a bug in the superuser password validation logic. ([#23729](https://github.com/milvus-io/milvus/pull/23729))
+- Fixed the issue of shard detector rewatch failure, which was caused by returning a closed channel. ([#23734](https://github.com/milvus-io/milvus/pull/23734))
+- Fixed a loading failure caused by unhandled interrupts in the AWS SDK. ([#23736](https://github.com/milvus-io/milvus/pull/23736))
+- Fixed the "HasCollection" check in DataCoord. ([#23709](https://github.com/milvus-io/milvus/pull/23709))
+- Fixed the bug that assigned all available nodes to a single replica incorrectly. ([#23626](https://github.com/milvus-io/milvus/pull/23626))
+
+### Enhancement
+
+- Optimized the display of RootCoord histogram metrics. ([#23567](https://github.com/milvus-io/milvus/pull/23567))
+- Reduced peak memory consumption during collection loading. ([#23138](https://github.com/milvus-io/milvus/pull/23138))
+- Removed unnecessary handoff event-related metadata. ([#23565](https://github.com/milvus-io/milvus/pull/23565))
+- Added a plugin logic to QueryNode to support the dynamic loading of shared library files. ([#23599](https://github.com/milvus-io/milvus/pull/23599))
+- Supports load balancing with replica granularity. ([#23629](https://github.com/milvus-io/milvus/pull/23629))
+- Released a load-balancing strategy based on scores. ([#23805](https://github.com/milvus-io/milvus/pull/23805))
+- Added a coroutine pool to limit the concurrency of cgo calls triggered by "delete". ([#23680](https://github.com/milvus-io/milvus/pull/23680))
+- Improved the compaction algorithm to make the distribution of segment sizes tend towards the ideal value. ([#23692](https://github.com/milvus-io/milvus/pull/23692))
+- Changed the default shard number to 1. ([#23593](https://github.com/milvus-io/milvus/pull/23593))
+- Improved search grouping algorithm to enhance throughput. ([#23721](https://github.com/milvus-io/milvus/pull/23721))
+- Code refactoring: Separated the read, build, and load DiskANN parameters. ([#23722](https://github.com/milvus-io/milvus/pull/23722))
+- Updated etcd and Minio versions. ([#23765](https://github.com/milvus-io/milvus/pull/23765))
+
 ## v2.2.6
 
 Release date: 18 April, 2023
@@ -13,8 +51,6 @@ Release date: 18 April, 2023
 | Milvus version | Python SDK version | Java SDK version | Go SDK version | Node.js SDK version |
 | -------------- | ------------------ | ---------------- | -------------- | ------------------- |
 | 2.2.6          | 2.2.7              | 2.2.5            | 2.2.1          | 2.2.4               |
-
-**Upgrade to Milvus 2.2.6 as soon as possible!**
 
 You are advised to refrain from using version 2.2.5 due to several critical issues that require immediate attention. Version 2.2.6 addresses these issues. One of the critical issues is the inability to recycle dirty binlog data. We highly recommend using version 2.2.6 version instead of version 2.2.5 to avoid any potential complications.
 
