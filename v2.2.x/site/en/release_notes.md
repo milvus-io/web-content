@@ -6,6 +6,20 @@ summary: Milvus Release Notes
 
 Find out what’s new in Milvus! This page summarizes information about new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.2.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.2.8
+
+Release date: 3 May, 2023
+
+| Milvus version | Python SDK version | Java SDK version | Go SDK version | Node.js SDK version |
+| -------------- | ------------------ | ---------------- | -------------- | ------------------- |
+| 2.2.8          | 2.2.8              | 2.2.5            | 2.2.2          | 2.2.8               |
+
+In this update, we fixed 1 critical bug. 
+
+### Bugfix
+
+- Fixed RootCoord panic caused by the upgrades from v2.2.x to v2.2.7 ([#23828](https://github.com/milvus-io/milvus/pull/23828)).
+
 ## v2.2.7
 
 Release date: 28 April, 2023
