@@ -93,6 +93,9 @@ Change the password for an existing user and reset the Milvus connection.
 ```python
 from pymilvus import utility
 utility.reset_password('user', 'old_password', 'new_password', using='default')
+
+# Or you can use an alias function update_password
+utility.update_password('user', 'old_password', 'new_password', using='default')
 ```
 
 | Parameter                    |  Description                            |
@@ -100,6 +103,18 @@ utility.reset_password('user', 'old_password', 'new_password', using='default')
 | <code>user</code>            | Username to reset password.             |
 | <code>password</code>        | New password for the user.              |
 | <code>using</code>           | Alias of the Milvus server.             |
+
+If you forget your old password, Milvus provides a configuration item that allows you to designate certain users as super users. This eliminates the need for the old password when you reset the password.
+
+```yaml
+common:
+    security:
+        superUsers: root, foo
+```
+
+By default, the `common.security.superUsers` field is empty, meaning that all users must provide the old password when resetting their password. However, you can designate specific users as super users who do not need to provide the old password. In the example above, `root` and `foo` are designated as super users.
+
+You should add the above configuration item in the Milvus configuration file that governs the running of your Milvus instance.
 
 ## Delete a user
 
