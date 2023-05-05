@@ -102,6 +102,21 @@ If you didn't change the config, using kubectl logs <pod-name> or docker logs CO
 
 Yes, you can. But we recommend inserting data in batches, each of which should not exceed 256 MB, before indexing each segment.
 
+#### Can I share an etcd instance among multiple Milvus instances?
+
+Yes, you can share an etcd instance among multiple Milvus instances. To do so, you need to change `etcd.rootPath` to a separate value for each Milvus instance in the configuration files of each before starting them.
+
+#### Can I share a Pulsar instance among multiple Milvus instances?
+
+Yes, you can share a Pulsar instance among multiple Milvus instances. To do so, you can
+
+- If multi-tenancy is enabled on your Pulsar instance, consider allocating a separate tenant or namespace for each Milvus instance. To do so, you need to change `pulsar.tenant` or `pulsar.namespace` in the configuration files of your Milvus instances to a unique value for each before starting them.
+- If you do not plan on enabling multi-tenancy on your Pulsar instance, consider changing `msgChannel.chanNamePrefix.cluster` in the configuration files of your Milvus instances to a unique value for each before starting them.
+
+#### Can I share a MinIO instance among multiple Milvus instances?
+
+Yes, you can share a MinIO instance among multiple Milvus instances. To do so, you need to change `minio.rootPath` to a unique value for each Milvus instance in the configuration files of each before starting them.
+
 #### Still have questions?
 
 You can:

@@ -82,3 +82,42 @@ Under this section, you can configure Pulsar address, the message size, etc.
   </tbody>
 </table>
 
+## `pulsar.tenant`
+
+<table id="pulsar.tenant">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <li>Pulsar can be provisioned for specific tenants with appropriate capacity allocated to the tenant.</li>
+        <li>To share a Pulsar instance among multiple Milvus instances, you can change this to an Pulsar tenant rather than the default one for each Milvus instance before you start them. However, if you do not want Pulsar multi-tenancy, you are advised to change <code>msgChannel.chanNamePrefix.cluster</code> to the different value. For details, see <a href="operational_faq.md">Operation FAQs</a>.</li>
+      </td>
+      <td>public</td>
+    </tr>
+  </tbody>
+</table>
+
+## `pulsar.namespace`
+
+<table id="pulsar.namespace">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <li>A Pulsar namespace is the administrative unit nomenclature within a tenant.</li>
+        <li>To share a Pulsar instance among multiple Milvus instances, you can change this to an Pulsar tenant rather than the default one for each Milvus instance before you start them. However, if you do not want Pulsar multi-tenancy, you are advised to change <code>msgChannel.chanNamePrefix.cluster</code> to the different value. For details, see <a href="operational_faq.md">Operation FAQs</a>.</li>
+      </td>
+      <td>default</td>
+    </tr>
+  </tbody>
+</table>

@@ -25,8 +25,8 @@ Under this section, you can configure the message channel name prefixes and comp
     <tr>
       <td>
         <li>Root name prefix of the channel when a message channel is created.</li>
-        <li>Caution: Changing this parameter after using Milvus for a period of time will affect your access to old data.</li>
         <li>It is recommended to change this parameter before starting Milvus for the first time.</li>
+        <li>To share a Pulsar instance among multiple Milvus instances, consider changing this to a name rather than the default one for each Milvus instance before you start them. For details, see <a href="operational_faq.md">Operational FAQs</a>.</li>
       </td>
       <td>"by-dev"</td>
     </tr>

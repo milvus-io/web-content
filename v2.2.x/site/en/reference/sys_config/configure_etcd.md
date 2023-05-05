@@ -48,9 +48,10 @@ Under this section, you can configure etcd endpoints, relevant key prefixes, etc
     <tr>
       <td>
         <li>Root prefix of the key to where Milvus stores data in etcd.</li>
-        <li>Caution: Changing this parameter after using Milvus for a period of time will affect your access to old data.</li>
         <li>It is recommended to change this parameter before starting Milvus for the first time.</li>
-        <li>Set an easy-to-identify root key prefix for Milvus if etcd service already exists.</li>
+        <li>To share an etcd instance among multiple Milvus instances, consider changing this to a different value for each Milvus instance before you start them. For details, see <a href="operational_faq.md">Operation FAQs</a>.</li>
+        <li>Set an easy-to-identify root path for Milvus if etcd service already exists.</li>
+        <li>Changing this for an already running Milvus instance may result in failures to read legacy data.</li>
       </td>
       <td>by-dev</td>
     </tr>
@@ -99,4 +100,5 @@ Under this section, you can configure etcd endpoints, relevant key prefixes, etc
     </tr>
   </tbody>
 </table>
+
 
