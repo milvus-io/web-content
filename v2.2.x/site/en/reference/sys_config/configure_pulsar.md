@@ -14,7 +14,9 @@ Pulsar is the underlying engine supporting Milvus cluster's reliable storage and
 Under this section, you can configure Pulsar address, the message size, etc.
 
 <div class="alert note">
-To share a Pulsar instance among multiple Milvus instances, you need to change <code>pulsar.tenant</code> or <code>pulsar.namespace</code> to a unique value for each of the Milvus instances if you have enabled multi-tenancy on the Pulsar instance. For details, refer to <a href="operational_faq.md#Can-I-share-a-Pulsar-instance-among-multiple-Milvus-instances">Operation FAQs</a>.
+<li>To share a Pulsar instance with multi-tenancy enabled among multiple Milvus instances, you need to change <code>pulsar.tenant</code> or <code>pulsar.namespace</code> to a unique value for each of the Milvus instances. </li>
+<li>To share a Pulsar instance with multi-tenancy disabled among multiple Milvus instances, you need to change <code>msgChannel.chanNamePrefix.cluster</code> to a unique value for each of the Milvus instances.</li>
+For details, refer to <a href="operational_faq.md#Can-I-share-a-Pulsar-instance-among-multiple-Milvus-instances">Operation FAQs</a>.
 </div>
 
 
