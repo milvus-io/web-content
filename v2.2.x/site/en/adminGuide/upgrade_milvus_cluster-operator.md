@@ -7,7 +7,7 @@ related_key: upgrade Milvus Cluster
 summary: Learn how to upgrade Milvus cluster with Milvus Operator.
 ---
 
-<div class="tab-wrapper"><a href="upgrade_milvus_cluster-operator.md" class='active '>Milvus Operator</a><a href="upgrade_milvus_cluster-helm.md" class=''>Helm</a><a href="upgrade_milvus_cluster-docker.md" class=''>Docker Compose</a></div>
+<div class="tab-wrapper"><a href="upgrade_milvus_cluster-operator.md" class='active '>Milvus Operator</a><a href="upgrade_milvus_cluster-helm.md" class=''>Helm</a></div>
 
 # Upgrade Milvus Cluster with Milvus Operator
 

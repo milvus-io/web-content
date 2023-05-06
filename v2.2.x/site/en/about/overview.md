@@ -141,7 +141,6 @@ The Milvus ecosystem provides helpful tools including:
 - Install Milvus for your testing or production environment:
   - [Installation Prerequisites](prerequisite-docker.md)
   - [Install Milvus Standalone](install_standalone-docker.md)
-  - [Install Milvus Cluster](install_cluster-docker.md)
 - If you're interested in diving deep into the design details of Milvus:
   - Read about [Milvus architecture](architecture_overview.md)
 

@@ -11,6 +11,9 @@ This topic introduces the message channel-related configurations of Milvus.
 
 Under this section, you can configure the message channel name prefixes and component subscription name prefixes.
 
+<div class="alert note">
+To share a Pulsar instance with multi-tenancy disabled among multiple Milvus instances, you need to change <code>msgChannel.chanNamePrefix.cluster</code> to a unique value for each of the Milvus instances if you have enabled multi-tenancy on the Pulsar instance. For details, refer to <a href="operational_faq.md#Can-I-share-a-Pulsar-instance-among-multiple-Milvus-instances">Operation FAQs</a>.
+</div>
 
 ## `msgChannel.chanNamePrefix.cluster`
 
@@ -26,7 +29,7 @@ Under this section, you can configure the message channel name prefixes and comp
       <td>
         <li>Root name prefix of the channel when a message channel is created.</li>
         <li>It is recommended to change this parameter before starting Milvus for the first time.</li>
-        <li>To share a Pulsar instance among multiple Milvus instances, consider changing this to a name rather than the default one for each Milvus instance before you start them. For details, see <a href="operational_faq.md">Operational FAQs</a>.</li>
+        <li>To share a Pulsar instance among multiple Milvus instances, consider changing this to a name rather than the default one for each Milvus instance before you start them. For details, see <a href="operational_faq.md#Can-I-share-a-Pulsar-instance-among-multiple-Milvus-instances">Operational FAQs</a>.</li>
       </td>
       <td>"by-dev"</td>
     </tr>

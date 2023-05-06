@@ -7,11 +7,13 @@ summary: Learn how to configure etcd for Milvus.
 
 # etcd-related Configurations
 
-This topic introduces the etcd-related configurations of Milvus.
+This topic introduces the etcd-related configurations of Milvus. etcd is the metadata engine supporting Milvus' metadata storage and access. 
 
-etcd is the metadata engine supporting Milvus' metadata storage and access. 
+In this section, you can configure etcd endpoints, relevant key prefixes, etc.
 
-Under this section, you can configure etcd endpoints, relevant key prefixes, etc.
+<div class="alert note">
+To share an etcd instance among multiple Milvus instances, you need to change <code>etcd.rootPath</code> to a unique value for each of the Milvus instances. For details, refer to <a href="operational_faq.md#Can-I-share-an-etcd-instance-among-multiple-Milvus-instances">Operation FAQs</a>.
+</div>
 
 ## `etcd.endpoints`
 
@@ -49,7 +51,7 @@ Under this section, you can configure etcd endpoints, relevant key prefixes, etc
       <td>
         <li>Root prefix of the key to where Milvus stores data in etcd.</li>
         <li>It is recommended to change this parameter before starting Milvus for the first time.</li>
-        <li>To share an etcd instance among multiple Milvus instances, consider changing this to a different value for each Milvus instance before you start them. For details, see <a href="operational_faq.md">Operation FAQs</a>.</li>
+        <li>To share an etcd instance among multiple Milvus instances, consider changing this to a different value for each Milvus instance before you start them. For details, see <a href="operational_faq.md#Can-I-share-an-etcd-instance-among-multiple-Milvus-instances">Operation FAQs</a>.</li>
         <li>Set an easy-to-identify root path for Milvus if etcd service already exists.</li>
         <li>Changing this for an already running Milvus instance may result in failures to read legacy data.</li>
       </td>
