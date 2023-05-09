@@ -4,21 +4,6 @@ This method monitors the index building progress and displays the total number o
 
 > This method has been deprecated since version 2.2.0, you can use getIndexState instead.
 
-```javascript
-new milvusClient(MILUVS_ADDRESS).getIndexBuildProgress(
-  GetIndexBuildProgressReq
-);
-```
-
-### GetIndexBuildProgressReq
-
-| Parameters      | Description                                                                            | Type   |
-| --------------- | -------------------------------------------------------------------------------------- | ------ |
-| collection_name | Collection name                                                                        | String |
-| field_name?     | Name of the field to build index on                                                    | String |
-| index_name?     | Name of the index to check                                                             | String |
-| timeout?        | This parameter is used to specify the length of time, in milliseconds, that the RPC (Remote Procedure Call) is allowed to run. If no value is provided, the default is undefined. | Number |
-
 ## Example
 
 ```javascript
@@ -39,3 +24,12 @@ new milvusClient(MILUVS_ADDRESS).getIndexBuildProgress({
   total_rows: '0'
 }
 ```
+
+### Parameters
+
+| Parameters      | Description                                                                                                                                                                       | Type   |
+| --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ |
+| collection_name | Collection name                                                                                                                                                                   | String |
+| field_name?     | Name of the field to build index on                                                                                                                                               | String |
+| index_name?     | Name of the index to check                                                                                                                                                        | String |
+| timeout?        | This parameter is used to specify the length of time, in milliseconds, that the RPC (Remote Procedure Call) is allowed to run. If no value is provided, the default is undefined. | Number |

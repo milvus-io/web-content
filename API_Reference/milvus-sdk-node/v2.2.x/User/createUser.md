@@ -2,18 +2,6 @@
 
 This is a method for creating a user identity in Milvus.
 
-```javascript
-new milvusClient(MILUVS_ADDRESS).createUser(CreateUserReq);
-```
-
-### CreateUserReq
-
-| Parameters | Description                                                                                                                                                                       | Type   |
-| ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ |
-| username   | The username used to log into Milvus                                                                                                                                              | String |
-| password   | The password used to log into Milvus.                                                                                                                                             | String |
-| timeout?   | This parameter is used to specify the length of time, in milliseconds, that the RPC (Remote Procedure Call) is allowed to run. If no value is provided, the default is undefined. | Number |
-
 ## Example
 
 ```javascript
@@ -30,3 +18,11 @@ new milvusClient(MILUVS_ADDRESS).createUser({
 ```javascript
 { error_code: 'Success', reason: '' }
 ```
+
+### Parameters
+
+| Parameters | Description                                                                                                                                                                       | Type   |
+| ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ |
+| username   | The username used to log into Milvus                                                                                                                                              | String |
+| password   | The password used to log into Milvus.                                                                                                                                             | String |
+| timeout?   | This parameter is used to specify the length of time, in milliseconds, that the RPC (Remote Procedure Call) is allowed to run. If no value is provided, the default is undefined. | Number |

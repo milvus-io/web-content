@@ -45,8 +45,6 @@ new milvusClient(MILUVS_ADDRESS).createCollection({
 
 ## Parameters
 
-### CreateCollectionReq
-
 | Parameters        | Description                                                                                                                                                                          | Type    |
 | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------- |
 | collection_name   | Name of the collection to create                                                                                                                                                     | String  |

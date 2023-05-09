@@ -2,18 +2,6 @@
 
 By creating a collection alias, you can simplify the process of vector search by using the alias instead of the actual collection name.
 
-```javascript
-new milvusClient(MILUVS_ADDRESS).createAlias(CreateAliasReq);
-```
-
-### CreateAliasReq
-
-| Parameters      | Description                                                                            | Type   |
-| --------------- | -------------------------------------------------------------------------------------- | ------ |
-| collection_name | Target collection name                                                                 | String |
-| Alias           | Alias name                                                                             | String |
-| timeout?        | This parameter is used to specify the length of time, in milliseconds, that the RPC (Remote Procedure Call) is allowed to run. If no value is provided, the default is undefined. | Number |
-
 ## Example
 
 ```javascript
@@ -31,3 +19,11 @@ new milvusClient(MILUVS_ADDRESS).createAlias({
 // create collection returns
 { error_code: 'Success', reason: '' }
 ```
+
+### Parameters
+
+| Parameters      | Description                                                                                                                                                                       | Type   |
+| --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ |
+| collection_name | Target collection name                                                                                                                                                            | String |
+| Alias           | Alias name                                                                                                                                                                        | String |
+| timeout?        | This parameter is used to specify the length of time, in milliseconds, that the RPC (Remote Procedure Call) is allowed to run. If no value is provided, the default is undefined. | Number |

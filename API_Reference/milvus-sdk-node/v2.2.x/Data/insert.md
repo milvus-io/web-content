@@ -2,23 +2,7 @@
 
 This method inserts data into a specified collection.
 
-```javascript
-new milvusClient(MILUVS_ADDRESS).insert(InsertReq);
-```
-
-### InsertReq
-
-| Parameters      | Description                                                                            | Type                   |
-| --------------- | -------------------------------------------------------------------------------------- | ---------------------- |
-| collection_name | Name of the collection to insert data into                                             | String                 |
-| fields_data     | Vector data                                                                            | { [x: string]: any }[] |
-| partition_name? | Name of the partition to insert data into                                              | String                 |
-| hash_keys?      | The hash value determined by primary key                                               | Number[]               |
-| timeout?        | This parameter is used to specify the length of time, in milliseconds, that the RPC (Remote Procedure Call) is allowed to run. If no value is provided, the default is undefined. | Number                 |
-
-### note
-
-If the field type is binary, the vector data length needs to be dimension / 8.
+> If the field type is binary, the vector data length needs to be dimension / 8.
 
 ## Example
 
@@ -62,3 +46,12 @@ new milvusClient(MILUVS_ADDRESS).insert({
   },
 }
 ```
+
+### Parameters
+
+| Parameters      | Description                                                                                                                                                                       | Type                   |
+| --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------- |
+| collection_name | Name of the collection to insert data into                                                                                                                                        | String                 |
+| fields_data     | Vector data                                                                                                                                                                       | { [x: string]: any }[] |
+| partition_name? | Name of the partition to insert data into                                                                                                                                         | String                 |
+| timeout?        | This parameter is used to specify the length of time, in milliseconds, that the RPC (Remote Procedure Call) is allowed to run. If no value is provided, the default is undefined. | Number                 |

@@ -2,8 +2,17 @@
 
 This class serves as an initializer for a Milvus client instance. Upon successful connection to the Milvus instance, the client can execute various operations.
 
+## Example
+
 ```javascript
-const client = new MilvusClient(MilvusClientConfig);
+import { MilvusClient } from "@zilliz/milvus2-sdk-node";
+
+const milvusClient = new MilvusClient({
+  address: "192.168.0.1:19530",
+  ssl: false,
+  username: "optional",
+  password: "optional",
+});
 ```
 
 Now you can use all methods of the client, like `client.createCollection`, `client.createIndex`, `client.loadCollection`, `client.search` to communicate with the Milvus server.
@@ -62,17 +71,4 @@ export interface ChannelOptions {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any;
 }
-```
-
-### Example
-
-```javascript
-import { MilvusClient } from "@zilliz/milvus2-sdk-node";
-
-const milvusClient = new MilvusClient({
-  address: "192.168.0.1:19530",
-  ssl: false,
-  username: "optional",
-  password: "optional",
-});
 ```

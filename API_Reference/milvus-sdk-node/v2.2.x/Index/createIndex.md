@@ -2,25 +2,6 @@
 
 This method generates an index on a vector field. It is important to note that the index creation process is asynchronous.
 
-> Starting from node sdk v2.2.7, you can use much simpler create index params
-
-```javascript
-new milvusClient(MILUVS_ADDRESS).createIndex(CreateIndexReq);
-```
-
-### CreateIndexReq
-
-| Parameters      | Description                                                                                                                                                                       | Type        |
-| --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
-| collection_name | Collection name                                                                                                                                                                   | String      |
-| field_name      | Name of the field to create index on                                                                                                                                              | String      |
-| index_name?     | Name of the index to create                                                                                                                                                       | String      |
-| extra_params?   | Extra index parameters (see the table below)                                                                                                                                      | IndexParams |
-| index_type      | Index type                                                                                                                                                                        | String      |
-| metric_type     | Metric type                                                                                                                                                                       | String      |
-| params          | Index parameters                                                                                                                                                                  | Object      |
-| timeout?        | This parameter is used to specify the length of time, in milliseconds, that the RPC (Remote Procedure Call) is allowed to run. If no value is provided, the default is undefined. | Number      |
-
 ## Example
 
 ```javascript
@@ -42,3 +23,16 @@ new milvusClient(MILUVS_ADDRESS).createIndex({
 // createIndex returns
 { error_code: 'Success', reason: '' }
 ```
+
+### Parameters
+
+| Parameters      | Description                                                                                                                                                                       | Type        |
+| --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
+| collection_name | Collection name                                                                                                                                                                   | String      |
+| field_name      | Name of the field to create index on                                                                                                                                              | String      |
+| index_name?     | Name of the index to create                                                                                                                                                       | String      |
+| extra_params?   | Extra index parameters (see the table below)                                                                                                                                      | IndexParams |
+| index_type      | Index type                                                                                                                                                                        | String      |
+| metric_type     | Metric type                                                                                                                                                                       | String      |
+| params          | Index parameters                                                                                                                                                                  | Object      |
+| timeout?        | This parameter is used to specify the length of time, in milliseconds, that the RPC (Remote Procedure Call) is allowed to run. If no value is provided, the default is undefined. | Number      |

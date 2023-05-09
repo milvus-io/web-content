@@ -2,17 +2,6 @@
 
 This method lists all granted privileges in Milvus.
 
-```javascript
-new milvusClient(MILUVS_ADDRESS).listGrants();
-```
-
-### Parameters
-
-| Parameters | Description                                                                            | Type   |
-| ---------- | -------------------------------------------------------------------------------------- | ------ |
-| roleName   | The role name                                                                          | String |
-| timeout?   | This parameter is used to specify the length of time, in milliseconds, that the RPC (Remote Procedure Call) is allowed to run. If no value is provided, the default is undefined. | Number |
-
 ## Example
 
 ```javascript
@@ -22,3 +11,10 @@ new milvusClient(MILUVS_ADDRESS).listGrants();
 ```
 
 ### Response
+
+### Parameters
+
+| Parameters | Description                                                                                                                                                                       | Type   |
+| ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ |
+| roleName   | The role name                                                                                                                                                                     | String |
+| timeout?   | This parameter is used to specify the length of time, in milliseconds, that the RPC (Remote Procedure Call) is allowed to run. If no value is provided, the default is undefined. | Number |
