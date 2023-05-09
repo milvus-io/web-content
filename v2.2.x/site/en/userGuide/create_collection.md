@@ -59,7 +59,7 @@ collection_name = "book"
 ```
 
 ```javascript
-import { MetricType } from "@zilliz/milvus2-sdk-node";
+import { DataType } from "@zilliz/milvus2-sdk-node";
 const params = {
   collection_name: "book",
   description: "Test book search",
