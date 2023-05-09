@@ -3,6 +3,7 @@
 With this method, you can create a new collection with a defined schema based on your specified requirements.
 
 > The collection to create must contain a primary key field and a vector field. `Int64` or `String` are supported data type on primary key field.
+
 > The collection to create must contain a vector field, which can be `DataType.FloatVector` or `DataType.BinaryVector`, and set it's dimensions with the property `dim`.
 
 ## Example
