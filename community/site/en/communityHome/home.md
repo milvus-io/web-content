@@ -130,7 +130,7 @@ The Milvus community is comprised of users, contributors, and culture that unite
   <div class="join-card-container">
     <img src="../../assets/slack-v3.svg" alt="avatar" />
     <p class="label">Slack Channel</p>
-    <a href="​https://join.slack.com/t/milvusio/shared_invite/zt-1sbwc00jb-PbO7dCZziao4vWDBJxtRDg" class="secondaryBtnSm">
+    <a href="https://join.slack.com/t/milvusio/shared_invite/zt-1sbwc00jb-PbO7dCZziao4vWDBJxtRDg" class="secondaryBtnSm">
       Join now
     </a>
   </div>
