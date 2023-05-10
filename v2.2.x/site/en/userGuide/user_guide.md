@@ -7,6 +7,8 @@ title: User Guide
 
 Follow the step-by-step instructions to learn about the basic database features that Milvus has to offer. 
 
+- [Using the MilvusClient](using_milvus_client.md): Learn how to use the simplified MilvusClient.
+
 - [Manage Milvus Connections](manage_connection.md): Learn how to connect to or disconnect from a Milvus server.
 
 - [Manage Collections](manage_collections.md): A Milvus collection is similar to a table in traditional databases and is used to store and manage data. Learn about the collection-level operations.
