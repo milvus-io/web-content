@@ -200,10 +200,36 @@
       "isMenu": true
     },
     {
+      "id": "milvusclient",
+      "title": "Simplified MilvusClient",
+      "label1": "userguide",
+      "label2": "",
+      "label3": "",
+      "order": 0,
+      "isMenu": true
+    },
+    {
+      "id": "using_milvusclient.md",
+      "title": "Use MilvusClient",
+      "label1": "userguide",
+      "label2": "milvusclient",
+      "label3": "",
+      "order": 0  
+    },
+    {
+      "id": "standard_sdks",
+      "title": "Standard SDKs",
+      "label1": "userguide",
+      "label2": "",
+      "label3": "",
+      "order": 1,
+      "isMenu": true
+    },    
+    {
       "id": "manage_connection.md",
       "title": "Manage Milvus Connections",
       "label1": "userguide",
-      "label2": "",
+      "label2": "standard_sdks",
       "label3": "",
       "order": 0
     },
@@ -211,7 +237,7 @@
       "id": "manage_collection",
       "title": "Manage Collections",
       "label1": "userguide",
-      "label2": "",
+      "label2": "standard_sdks",
       "label3": "",
       "order": 1,
       "isMenu": true
@@ -220,71 +246,71 @@
       "id": "create_collection.md",
       "title": "Create a Collection",
       "label1": "userguide",
-      "label2": "manage_collection",
-      "label3": "",
+      "label2": "standard_sdks",
+      "label3": "manage_collection",
       "order": 0
     },
     {
       "id": "rename_collection.md",
       "title": "Rename a Collection",
       "label1": "userguide",
-      "label2": "manage_collection",
-      "label3": "",
+      "label2": "standard_sdks",
+      "label3": "manage_collection",
       "order": 1
     },    
     {
       "id": "modify_collection.md",
       "title": "Modify a Collection",
       "label1": "userguide",
-      "label2": "manage_collection",
-      "label3": "",
+      "label2": "standard_sdks",
+      "label3": "manage_collection",
       "order": 2
     },
     {
       "id": "check_collection.md",
       "title": "Check Collection Information",
       "label1": "userguide",
-      "label2": "manage_collection",
-      "label3": "",
+      "label2": "standard_sdks",
+      "label3": "manage_collection",
       "order": 3
     },
     {
       "id": "drop_collection.md",
       "title": "Drop a Collection",
       "label1": "userguide",
-      "label2": "manage_collection",
-      "label3": "",
+      "label2": "standard_sdks",
+      "label3": "manage_collection",
       "order": 4
     },
     {
       "id": "collection_alias.md",
       "title": "Manage Collection Alias",
       "label1": "userguide",
-      "label2": "manage_collection",
-      "label3": "",
+      "label2": "standard_sdks",
+      "label3": "manage_collection",
       "order": 5
     },
     {
       "id": "load_collection.md",
       "title": "Load Collection",
       "label1": "userguide",
-      "label2": "manage_collection",
-      "label3": "",
+      "label2": "standard_sdks",
+      "label3": "manage_collection",
       "order": 6
     },
     {
       "id": "release_collection.md",
       "title": "Release Collection",
       "label1": "userguide",
-      "label2": "manage_collection",
-      "label3": "",
+      "label2": "standard_sdks",
+      "label3": "manage_collection",
       "order": 7
     },
     {
       "id": "manage_partition",
       "title": "Manage Partitions",
       "label1": "userguide",
-      "label2": "",
+      "label2": "standard_sdks",
       "label3": "",
       "order": 2,
       "isMenu": true
@@ -293,47 +319,47 @@
       "id": "create_partition.md",
       "title": "Create a Partition",
       "label1": "userguide",
-      "label2": "manage_partition",
-      "label3": "",
+      "label2": "standard_sdks",
+      "label3": "manage_partition",
       "order": 0
     },
     {
       "id": "check_partition.md",
       "title": "Check Partition Information",
       "label1": "userguide",
-      "label2": "manage_partition",
-      "label3": "",
+      "label2": "standard_sdks",
+      "label3": "manage_partition",
       "order": 1
     },
     {
       "id": "drop_partition.md",
       "title": "Drop a Partition",
       "label1": "userguide",
-      "label2": "manage_partition",
-      "label3": "",
+      "label2": "standard_sdks",
+      "label3": "manage_partition",
       "order": 2
     },
     {
       "id": "load_partition.md",
       "title": "Load a Partition",
       "label1": "userguide",
-      "label2": "manage_partition",
-      "label3": "",
+      "label2": "standard_sdks",
+      "label3": "manage_partition",
       "order": 3
     },
     {
       "id": "release_partition.md",
       "title": "Release a Partition",
       "label1": "userguide",
-      "label2": "manage_partition",
-      "label3": "",
+      "label2": "standard_sdks",
+      "label3": "manage_partition",
       "order": 4
     },
     {
       "id": "manage_data",
       "title": "Manage Data",
       "label1": "userguide",
-      "label2": "",
+      "label2": "manage_partition",
       "label3": "",
       "order": 3,
       "isMenu": true
@@ -342,39 +368,39 @@
       "id": "insert_data.md",
       "title": "Insert Entities",
       "label1": "userguide",
-      "label2": "manage_data",
-      "label3": "",
+      "label2": "standard_sdks",
+      "label3": "manage_data",
       "order": 0
     },
     {
       "id": "bulk_insert.md",
       "title": "Insert Entities from Files",
       "label1": "userguide",
-      "label2": "manage_data",
-      "label3": "",
+      "label2": "standard_sdks",
+      "label3": "manage_data",
       "order": 1
     },
     {
       "id": "delete_data.md",
       "title": "Delete Entities",
       "label1": "userguide",
-      "label2": "manage_data",
-      "label3": "",
+      "label2": "standard_sdks",
+      "label3": "manage_data",
       "order": 2
     },
     {
       "id": "compact_data.md",
       "title": "Compact Data",
       "label1": "userguide",
-      "label2": "manage_data",
-      "label3": "",
+      "label2": "standard_sdks",
+      "label3": "manage_data",
       "order": 3
     },
     {
       "id": "manage_index",
       "title": "Manage Indexes",
       "label1": "userguide",
-      "label2": "",
+      "label2": "standard_sdks",
       "label3": "",
       "order": 4,
       "isMenu": true
@@ -383,31 +409,31 @@
       "id": "build_index.md",
       "title": "Build an Index on Vectors",
       "label1": "userguide",
-      "label2": "manage_index",
-      "label3": "",
+      "label2": "standard_sdks",
+      "label3": "manage_index",
       "order": 0
     },
     {
       "id": "build_scalar_index.md",
       "title": "Build an Index on Scalars",
       "label1": "userguide",
-      "label2": "manage_index",
-      "label3": "",
+      "label2": "standard_sdks",
+      "label3": "manage_index",
       "order": 1
     },  
     {
       "id": "drop_index.md",
       "title": "Drop an Index",
       "label1": "userguide",
-      "label2": "manage_index",
-      "label3": "",
+      "label2": "standard_sdks",
+      "label3": "manage_index",
       "order": 2
     },
     {
       "id": "search",
       "title": "Search and Query",
       "label1": "userguide",
-      "label2": "",
+      "label2": "standard_sdks",
       "label3": "",
       "order": 5,
       "isMenu": true
@@ -416,31 +442,31 @@
       "id": "search.md",
       "title": "Search",
       "label1": "userguide",
-      "label2": "search",
-      "label3": "",
+      "label2": "standard_sdks",
+      "label3": "search",
       "order": 0
     },
     {
       "id": "hybridsearch.md",
       "title": "Hybrid Search",
       "label1": "userguide",
-      "label2": "search",
-      "label3": "",
+      "label2": "standard_sdks",
+      "label3": "search",
       "order": 2
     },
     {
       "id": "query.md",
       "title": "Query",
       "label1": "userguide",
-      "label2": "search",
-      "label3": "",
+      "label2": "standard_sdks",
+      "label3": "search",
       "order": 1
     },
     {
       "id": "timetravel.md",
       "title": "Search with Time Travel",
       "label1": "userguide",
-      "label2": "",
+      "label2": "standard_sdks",
       "label3": "",
       "order": 6
     },
@@ -448,7 +474,7 @@
       "id": "calculate_distance.md",
       "title": "Calculate Distance",
       "label1": "userguide",
-      "label2": "",
+      "label2": "standard_sdks",
       "label3": "",
       "order": 7
     },

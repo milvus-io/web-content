@@ -4,7 +4,7 @@ related_key: Milvus Client Python
 summary: Learn how to use the MilvusClient Python API.
 ---
 
-# Using the MilvusClient
+# Use the MilvusClient
 
 This page goes over how to use the MilvusClient found in Pymilvus. The MilvusClient is a simplified wrapper around Pymilvus that is easier to use and hides away a majority of the complication found in using the original SDK.
 
