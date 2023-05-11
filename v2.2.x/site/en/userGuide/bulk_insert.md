@@ -14,7 +14,7 @@ Organize the data to be inserted into a Milvus collection in a row-based JSON fi
 
 ### Row-based JSON file
 
-You can name the file whatever makes sense, but the root key must be **root**. In the file, each entity is organized in a dictionary. The keys in the dictionary are field names, and the values are field values in the corresponding entity.
+You can name the file whatever makes sense, but the root key must be **rows**. In the file, each entity is organized in a dictionary. The keys in the dictionary are field names, and the values are field values in the corresponding entity.
 
 The following is an example of a row-based JSON file.
 
