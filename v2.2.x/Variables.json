@@ -10,5 +10,5 @@
   "milvus_operator_version": "0.7.12",
   "milvus_helm_chart_version": "4.0.20",
   "milvus_image": "2.2.8",
-  "attu_release": "2.2.3"
+  "attu_release": "2.2.5"
 }

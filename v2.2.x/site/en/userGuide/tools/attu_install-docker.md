@@ -29,12 +29,12 @@ See <a href="https://milvus.io/docs/v2.0.x/attu_install-docker.md">v2.0.x Attu d
 | -------------- | ------------------------------ |
 | v2.0.x         | v2.0.5                         |
 | v2.1.x         | v2.1.5                         |
-| v2.2.x         | v2.2.3           |
+| v2.2.x         | v2.2.5           |
 
 ## Start an Attu instance
 
 ```Apache
-docker run -p 8000:3000  -e MILVUS_URL={your machine IP}:19530 zilliz/attu:v2.2.3
+docker run -p 8000:3000  -e MILVUS_URL={your machine IP}:19530 zilliz/attu:v2.2.5
 ```
 
 Once you start the docker, visit `http://{ your machine IP }:8000` in your browser, and click **Connect** to enter the Attu service.
