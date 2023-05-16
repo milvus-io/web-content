@@ -113,7 +113,7 @@ result = hello_milvus.search(vectors_to_search, "embeddings", search_params, lim
 - Deletes entities by their primary keys:
 
 ```Python
-expr = f"pk in [{ids[0]}, {ids[1]}]"
+expr = f"pk in [{entities[0]}, {entities[1]}]"
 hello_milvus.delete(expr)
 ```
 
