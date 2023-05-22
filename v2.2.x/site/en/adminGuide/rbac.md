@@ -13,6 +13,8 @@ This topic describes how to enable RBAC and manage [users and roles](users_and_r
 ## 1. Create a user
 
 ```
+from pymilvus import utility
+
 utility.create_user(user, password, using="default")
 ```
 
@@ -47,6 +49,8 @@ utility.list_users(include_role_info, using="default")
 The following example creates a role named `roleA`.
 
 ```
+from pymilvus import Role, utility
+
 role_name = "roleA"
 role = Role(role_name, using=_CONNECTION)
 role.create()
