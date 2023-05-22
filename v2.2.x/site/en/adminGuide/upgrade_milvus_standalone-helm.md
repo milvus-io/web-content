@@ -50,6 +50,8 @@ You can choose the upgrade path for your Milvus as follows:
 - [Upgrade Milvus using Helm](#Upgrade-Milvus-using-Helm) for an upgrade from a minor release before v2.2.3 to v2.2.8.
 - [Migrate the metadata](#Migrate-the-metadata) before the upgrade from Milvus v2.1.x to v2.2.8.
 
+<div style="display:none;">
+
 ## Conduct a rolling upgrade
 
 Since Milvus 2.2.3, you can configure Milvus coordinators to work in active-standby mode and enable the rolling upgrade feature for them, so that Milvus can respond to incoming requests during the coordinator upgrades. In previous releases, coordinators are to be removed and then created during an upgrade, which may introduce certain downtime of the service.
@@ -81,6 +83,8 @@ sh rollingUpdate.sh -n default -i my-release -o update -t 2.2.8 -w 'milvusdb/mil
 2. The script uses `kubectl patch` to update the deployments and `kubectl rollout status` to watch their status.
 3. The script uses `kubectl patch` to update the `app.kubernetes.io/version` label of the deployments to the one specified after the `-t` flag in the command.
 
+</div>
+    
 </div>
 
 ## Upgrade Milvus using Helm
