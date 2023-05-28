@@ -41,10 +41,21 @@ A list that contains all results.
 from pymilvus import Collection
 collection = Collection("book")      # Get an existing collection.
 res = collection.query(
-  expr = "book_id in [2,4,6,8]", 
-  output_fields = ["book_id", "book_intro"],
+  expr="book_id in [2,4,6,8]", 
+  output_fields=["book_id", "book_intro"],
   consistency_level="Strong"
 )
 sorted_res = sorted(res, key=lambda k: k['book_id'])
 sorted_res
+
+# You can also reference dynamic fields in filter expressions,
+# and include them in output fields
+res = collection.query(
+    # demontrates the ways to reference a dynamic field.
+    expr='$meta["dynamic_field_1"] > 10 and dynamic_field_2 == 10',
+    # sets the names of the fields you want to retrieve from the search result.
+    output_fields=['title', 'dynamic_field_1', 'dynamic_field_2'], 
+)
+
+sorted_res = sorted(res, key=lambda k: k['dynamic_field_1'])
 ```

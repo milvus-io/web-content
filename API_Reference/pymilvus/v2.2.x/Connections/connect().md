@@ -54,4 +54,8 @@ connections.connect()
 # A sample file at https://github.com/milvus-io/pymilvus/blob/master/.env.example
 # Rename the file to .env so that pymilvus will automatically load it.
 connections.connect()
+
+# Connect to a specific database
+# Ensure the specified database exists.
+connections.connect(db_name="books")
 ```
