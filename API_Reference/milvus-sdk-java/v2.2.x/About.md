@@ -8,7 +8,7 @@ Milvus Java SDK is an open-source project and its source code is hosted on [GitH
 | -------------- | ----------------------- |
 | 2.0.2          | 2.0.4                   |
 | 2.1.0          | 2.1.0                   |
-| 2.2.0          | 2.2.5                   |
+| 2.2.0          | 2.2.6                   |
 
 ## Installation
 
@@ -27,7 +27,7 @@ You can use [Apache Maven](https://maven.apache.org/install.html) or [Gradle](ht
 - Gradle/Grails
 
 ```
-compile 'io.milvus:milvus-sdk-java:2.2.5'
+compile 'io.milvus:milvus-sdk-java:2.2.6'
 ```
 
 ## Contributing
