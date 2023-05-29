@@ -30,5 +30,12 @@ from pymilvus import MilvusClient
 
 client = MilvusClient()
 
+# Delete an entity by its id if the id is a string
+client.delete_by_pk('pk-1')
+
+# Delete an entity by its id if the id is an integer
+client.delete_by_pk(0)
+
+# Delete multiple entities
 client.delete_by_pk(['pk-1', 'pk-2'])
 ```

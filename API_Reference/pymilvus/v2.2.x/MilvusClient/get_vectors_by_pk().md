@@ -30,5 +30,13 @@ from pymilvus import MilvusClient
 
 client = MilvusClient()
 
+# Grab an entity by its id if the id is a string
+client.get_vectors_by_pk('pk-1')
+
+# Grab an entity by its id if the id is an integer
+client.get_vectors_by_pk(0)
+
+# Grab multiple entities
+
 client.get_vectors_by_pk(['pk-1', 'pk-2'])
 ```

@@ -18,7 +18,7 @@ insert_data(
 
 | Parameter          | Description                          | Type     | Required |
 |--------------------|--------------------------------------|----------|----------|
-| `data` | A list of dictionaries to pass in. | Dictionary | True     |
+| `data` | A list of dictionaries to pass in. Each dictionary represents an entity. All fields defined in the schema are required and should be included as keys in the dictionary. You may also add dynamic keys for any additional fields not defined in the schema.| Dictionary | True     |
 | `timeout` | Maximum time that the method should wait for the operation to complete before raising an exception. | Integer | False    |
 | `batch_size` | Number of entities to insert in a batch. Default value: **100**. | Integer | False    |
 | `partition` | Partition to which data is inserted. | String | False    |
