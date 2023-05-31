@@ -17,6 +17,8 @@ This topic describes how to install Milvus standalone using Docker Compose.
 
 Check [the requirements](prerequisite-docker.md) for hardware and software prior to your installation.
 
+For the users using MacOS 10.14 or later, set the Docker virtual machine (VM) to use a minimum of 2 virtual CPUs (vCPUs) and 8 GB of initial memory. Otherwise, installation might fail.
+
 ## Download the `YAML` file
 
 [Download](https://github.com/milvus-io/milvus/releases/download/v2.2.8/milvus-standalone-docker-compose.yml) `milvus-standalone-docker-compose.yml` and save it as `docker-compose.yml` manually, or with the following command.
