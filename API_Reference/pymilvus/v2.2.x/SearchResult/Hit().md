@@ -20,3 +20,21 @@ A Hit object.
 | `distances` | Return the distance between the hit record and the query                |
 | `score`     | Return the score of the hit record. The score is set equal to distance. |
 | `str`       | Return the information of hit record                                    |
+
+## Examples
+
+```python
+# hit is a Hit object
+
+# gets the id of a hit entity
+print(hit.ids)
+
+# gets the distance of a entity from the query vector
+print(hit.distances)
+
+# gets the score of a hit entity
+# should equal to the distance
+print(hit.score)
+
+# gets description of a hit entity
+print(hit.str)

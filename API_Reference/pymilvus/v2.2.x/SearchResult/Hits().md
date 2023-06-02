@@ -20,4 +20,32 @@ A Hits object.
 | `self[item]`         | Return the kth Hit corresponding to the query                                                              |
 | `len(self)`          | Return the number of hit record                                                                            |
 | `ids`                | Return the primary keys of all search results                                                              |
-| `distances`          | Return the distances of all hit record                                                                     |
+| `distances`          | Return the distances of all hit record     |
+
+## Example
+
+```python
+# 'hits' is a Hits object
+
+# gets all the ids of returned hits
+print(hits.ids)
+
+# gets the distances of the returned hits from the query vector 
+print(hits.distances)
+
+# gets the total number of returned hits
+print(len(hits))
+
+# iterates over a set of hits
+for hit in iter(hits)
+    # gets all fields specified in the output fields
+    print(hit.entity)
+    # or a specific output field
+    print(hit.entity.get('title'))
+
+# gets all output fields of a set of hits
+print(hits[0].entity)
+
+# or a specific output field
+print(hits[0].entity.get("title"))
+```

@@ -45,24 +45,28 @@ A SearchResult object, an iterable, 2d-array-like class whose first dimension is
 search_params = {"metric_type": "L2", "params": {"nprobe": 10}}
 from pymilvus import Collection
 collection = Collection("book")      # Get an existing collection.
-results = collection.search(
-	data=[[0.1, 0.2]], 
-	anns_field="book_intro", 
-	param=search_params, 
-	limit=10, 
-	expr=None,
-	output_fields=['title'], # set the names of the fields you want to retrieve from the search result.
-	consistency_level="Strong"
+result = collection.search(
+    data=[[0.1, 0.2]], 
+    anns_field="book_intro", 
+    param=search_params, 
+    limit=10, 
+    # demontrates the ways to reference a dynamic field.
+    expr='$meta["dynamic_field_1"] > 10 and dynamic_field_2 == 10',
+    # sets the names of the fields you want to retrieve from the search result.
+    output_fields=['title', 'dynamic_field_1', 'dynamic_field_2'], 
+    consistency_level="Strong"
 )
 
-# get the IDs of all returned hits
-results[0].ids
+for hits in result:
+    # get the IDs of all returned hits
+    print(hits.ids)
 
-# get the distances to the query vector from all returned hits
-results[0].distances
-
-# get the value of an output field specified in the search request.
-# vector fields are not supported yet.
-hit = results[0][0]
-hit.entity.get('title')
+    # get the distances to the query vector from all returned hits
+    print(hits.distances)
+    for hit in hits:
+        # get the value of an output field specified in the search request.
+        # dynamic fields are supported, but vector fields are not supported yet.    
+        print(hit.entity.get('title'))
+        print(hit.entity.get('$meta["dynamic_field_1"]'))
+        print(hit.entity.get('$dynamic_field_2'))
 ```
