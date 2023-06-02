@@ -208,6 +208,15 @@
       "order": 0
     },
     {
+      "id": "manage_databases.md",
+      "title": "Manage Databases",
+      "label1": "userguide",
+      "label2": "",
+      "label3": "",
+      "order": 1,
+      "isMenu": true
+    },
+    {
       "id": "manage_collection",
       "title": "Manage Collections",
       "label1": "userguide",
@@ -1147,53 +1156,67 @@
       "order": 7
     },
     {
+      "id": "dynamic_schema.md",
+      "title": "Dynamic Schema",
+      "label1": "reference",
+      "label2": "",
+      "order": 8
+    },
+    {
       "id": "metric.md",
       "title": "Similarity Metrics",
       "label1": "reference",
       "label2": "",
-      "order": 8
+      "order": 9
+    },
+    {
+      "id": "multi_tenancy.md",
+      "title": "Multi-tenancy",
+      "label1": "reference",
+      "label2": "",
+      "order": 10
     },
     {
       "id": "system_configuration.md",
       "title": "System Configurations",
       "label1": "reference",
       "label2": "",
-      "order": 9
+      "order": 11
     },
     {
       "id": "timestamp.md",
       "title": "Timestamp",
       "label1": "reference",
       "label2": "",
-      "order": 10
+      "order": 12
     },
     {
       "id": "time_sync.md",
       "title": "Time Synchronization",
       "label1": "reference",
       "label2": "",
-      "order": 11
+      "order": 13
     },
     {
       "id": "timetravel_ref.md",
       "title": "Time Travel",
       "label1": "reference",
       "label2": "",
-      "order": 12
+      "order": 14
     },
     {
       "id": "users_and_roles.md",
       "title": "Users and Roles",
       "label1": "reference",
       "label2": "",
-      "order": 13
+      "order": 15
     },    
     {
       "id": "vector_index",
       "title": "Vector Index",
       "label1": "reference",
       "label2": "",
-      "order": 14
+      "order": 16
     },
     {
       "id": "index.md",
@@ -1214,7 +1237,7 @@
       "title": "Scalar Index",
       "label1": "reference",
       "label2": "",
-      "order": 15      
+      "order": 17      
     },        
     {
       "id": "tutorials",

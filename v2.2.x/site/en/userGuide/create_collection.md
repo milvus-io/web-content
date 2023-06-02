@@ -53,7 +53,8 @@ book_intro = FieldSchema(
 )
 schema = CollectionSchema(
   fields=[book_id, book_name, word_count, book_intro],
-  description="Test book search"
+  description="Test book search",
+  enable_dynamic_field=True
 )
 collection_name = "book"
 ```
@@ -240,6 +241,7 @@ Output:
                     <li><code>DataType.FLOAT</code> (numpy.float32)</li>
                     <li><code>DataType.DOUBLE</code> (numpy.double)</li>
                     <li><code>DataType.VARCHAR</code> (VARCHAR)</li>
+                    <li><code>DataType.JSON</code> (JSON) </li>
                 </ul>
                 For vector field:
                 <ul>
@@ -501,6 +503,11 @@ Output:
             <td>Number of the shards for the collection to create.</td>
             <td>[1,64]</td>
         </tr>
+        <tr>
+            <td><code>PartitionsNum</code></td>
+            <td>Number of the logical partitions for the collection to create.</td>
+            <td>[1,4096]</td>
+        </tr>
 	</tbody>
 </table>
 
@@ -703,8 +710,13 @@ milvusClient.createCollection(createCollectionReq);
             <td>Number of the shards for the collection to create.</td>
             <td>[1,256]</td>
         </tr>
-	<tr>
-            <td><code>properties: collection.ttl.seconds</code> (optional)</td>
+        <tr>
+            <td><code>num_partitions</code> (optional)</td>
+            <td>Number of logical partitions for the collection to create.</td>
+            <td>[1,4096]</td>
+        </tr>
+	    <tr>
+            <td><code>*kwargs: collection.ttl.seconds</code> (optional)</td>
             <td>Collection time to live (TTL) is the expiration time of a collection. Data in an expired collection will be cleaned up and will not be involved in searches or queries. Specify TTL in the unit of seconds.</td>
             <td>The value should be 0 or greater. 0 means TTL is disabled.</td>
         </tr>

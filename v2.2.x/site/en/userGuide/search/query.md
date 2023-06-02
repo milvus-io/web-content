@@ -72,6 +72,8 @@ The following example filters the vectors with certain `book_id` values, and ret
 
 Milvus supports setting consistency level specifically for a query. The example in this topic sets the consistency level as `Strong`. You can also set the consistency level as `Bounded`, `Session` or `Eventually`. See [Consistency](consistency.md) for more information about the four consistency levels in Milvus.
 
+You can also use dynamic fields in the filter expression and output fields in the query requests. For example, refer to [Dynamic Schema](dynamic_schema.md).
+
 <div class="multipleCode">
   <a href="#python">Python </a>
   <a href="#java">Java</a>

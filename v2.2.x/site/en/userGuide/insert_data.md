@@ -18,6 +18,8 @@ The following example inserts 2,000 rows of randomly generated data as the examp
 
 First, prepare the data to insert.  Data type of the data to insert must match the schema of the collection, otherwise Milvus will raise exception.
 
+Once you enable dynamic schema, you can append dynamic fields in the data. For details, refer to [Dynamic Schema](dynamic_schema.md).
+
 <div class="multipleCode">
   <a href="#python">Python </a>
   <a href="#java">Java</a>
@@ -34,8 +36,12 @@ data = [
   [i for i in range(2000)],
   [str(i) for i in range(2000)],
   [i for i in range(10000, 12000)],
-  [[random.random() for _ in range(2)] for _ in range(2000)],
+  [[random.random() for _ in range(2)] for _ in range(2000)]
 ]
+
+## Once your collection is enabled with dynamic schema,
+## you can add non-existing field values.
+data.append([str("dy"*i) for i in range(2000)])
 ```
 
 ```javascript

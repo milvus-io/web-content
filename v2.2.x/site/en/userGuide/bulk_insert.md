@@ -16,11 +16,11 @@ Organize the data to be inserted into a Milvus collection in a row-based JSON fi
 
 You can name the file whatever makes sense, but the root key must be **rows**. In the file, each entity is organized in a dictionary. The keys in the dictionary are field names, and the values are field values in the corresponding entity.
 
-The following is an example of a row-based JSON file.
+The following is an example of a row-based JSON file. You can include fields not defined in the collection schema as dynamic fields. For details, refer to [Dynamic Schema](dynamic_schema.md).
 
 <div class="none-filter">
 
-```
+```python
 {
   "rows":[
     {"book_id": 101, "word_count": 13, "book_intro": [1.1, 1.2]},
@@ -30,15 +30,28 @@ The following is an example of a row-based JSON file.
     {"book_id": 105, "word_count": 34, "book_intro": [5.1, 5.2]}
   ]
 }
+
+# To include dynamic fields, do as follows:
+
+{
+  "rows":[
+    {"book_id": 102, "word_count": 25, "book_intro": [2.1, 2.2], "book_props": {"year": 2018, "price": 15.05}},
+    {"book_id": 103, "word_count": 7, "book_intro": [3.1, 3.2], "book_props": {"year": 2020, "price": 36.68}},
+    {"book_id": 104, "word_count": 12, "book_intro": [4.1, 4.2] , "book_props": {"year": 2019, "price": 20.14}},
+    {"book_id": 105, "word_count": 34, "book_intro": [5.1, 5.2] , "book_props": {"year": 2021, "price": 9.36}}
+  ]
+}
 ```
 
 </div>
 <div class="alert note">
 
 - Do not add any field that does not exist in the target collection, and do not miss any field that the schema of the target collection defines.
+- To add fields that are not predefined in the schema, you should enable dynamic schema for the collection. In this case, Milvus automatically adds these fields to an internal JSON field. For details, refer to [Dynamic Schema](dynamic_schema.md).
 - Use the correct types of values in each field. For example, use integers in integer fields, floats in float fields, strings in varchar fields, and float arrays in vector fields.
 - Do not include an auto-generated primary key in the JSON file.
 - For binary vectors, use uint8 arrays. Each uint8 value represents 8 dimensions, and the value must be between 0 and 255. For example, `[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1]` is a 16-dimensional binary vector and should be written as `[128, 7]` in the JSON file.
+
 
 </div>
 
@@ -58,9 +71,21 @@ arr = numpy.array([[1.1, 1.2],
             [4.1, 4.2],
             [5.1, 5.2]])
 numpy.save('book_intro.npy', arr)
+arr = numpy.array([json.dumps({"year": 2015, "price": 23.43}),
+            json.dumps({"year": 2018, "price": 15.05}),
+            json.dumps({"year": 2020, "price": 36.68}),
+            json.dumps({"year": 2019, "price": 20.14}),
+            json.dumps({"year": 2021, "price": 9.36}))
+numpy.save('book_props.npy', arr)
 ```
 
 </div>
+
+You can also add dynamic fields using NumPy files as follows. For details on dynamic fields, refer to [Dynamic Schema](dynamic_schema.md).
+
+```
+numpy.save('$meta.py', numpy.array([ json.dumps({x: 2}), json.dumps({y: 8, z: 2}) ]))
+```
 
 <div class="alert note">
 

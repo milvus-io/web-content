@@ -70,6 +70,8 @@ load -c book
 
 By specifying the boolean expression, you can filter the scalar field of the entities during the vector search. The following example limits the scale of search to the vectors within a specified `word_count` value range.
 
+You can also use dynamic fields in the filter expression and output fields in the search requests. For example, refer to [Dynamic Schema](dynamic_schema.md).
+
 <div class="multipleCode">
   <a href="#python">Python </a>
   <a href="#java">Java</a>

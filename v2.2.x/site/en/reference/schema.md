@@ -48,7 +48,17 @@ Milvus supports only one primary key field in a collection.
 	<tr>
 		<td>dim</td>
 		<td>Dimension of the vector</td>
-    <td>Data type: Integer &isin;[1, 32768].<br/>Mandatory for the vector field</td>
+    	<td>Data type: Integer &isin;[1, 32768].<br/>Mandatory for the vector field</td>
+	</tr>
+	<tr>
+		<td>is_dynamic</td>
+		<td>Whether this field is a dynamic field.</td>
+		<td>Data type: Boolean (<code>true</code> or <code>false</code>).</td>
+	</tr>
+	<tr>
+		<td>is_partition_key</td>
+		<td>Whether this field is a partition-key field.</td>
+		<td>Data type: Boolean (<code>true</code> or <code>false</code>).</td>
 	</tr>
 	</tbody>
 </table>
@@ -61,6 +71,9 @@ from pymilvus import FieldSchema
 id_field = FieldSchema(name="id", dtype=DataType.INT64, is_primary=True, description="primary id")
 age_field = FieldSchema(name="age", dtype=DataType.INT64, description="age")
 embedding_field = FieldSchema(name="embedding", dtype=DataType.FLOAT_VECTOR, dim=128, description="vector")
+
+# The following creates a dynamic field and use it as the partition key
+position_field = FieldSchema(name="position", dtype=DataType.VARCHAR, max_length=256, is_dynamic=True, is_partition_key=True)
 ```
 
 
@@ -84,6 +97,8 @@ embedding_field = FieldSchema(name="embedding", dtype=DataType.FLOAT_VECTOR, dim
 - Vector field supports:
   - BINARY_VECTOR: Binary vector
   - FLOAT_VECTOR: Float vector
+
+JSON as a composite data type is available. A JSON field comprises key-value pairs. Each key is a string, and a value can be a number, string, boolean value, array, or list. For details, refer to [JSON: a new data type](dynamic_schema.md#JSON-a-new-data-type)
 
 ## Collection schema
 
@@ -116,6 +131,11 @@ A collection schema is the logical definition of a collection. Usually you need 
 		<td>Whether to enable Automatic ID (primary key) allocation or not</td>
 		<td>Data type: Boolean (<code>true</code> or <code>false</code>).<br/>Optional</td>
 	</tr>
+    <tr>
+		<td>enable_dynamic_field</td>
+		<td>Whether to enable dynamic schema or not</td>
+		<td>Data type: Boolean (<code>true</code> or <code>false</code>).<br/>Optional, defaults to <code>False</code><br/>For details on dynamic schema, refer to <a herf="dynamic_schema.md">Dynamic Schema</a> and the user guides for managing collections.</td>
+	</tr>
 	</tbody>
 </table>
 
@@ -130,7 +150,10 @@ from pymilvus import FieldSchema, CollectionSchema
 id_field = FieldSchema(name="id", dtype=DataType.INT64, is_primary=True, description="primary id")
 age_field = FieldSchema(name="age", dtype=DataType.INT64, description="age")
 embedding_field = FieldSchema(name="embedding", dtype=DataType.FLOAT_VECTOR, dim=128, description="vector")
-schema = CollectionSchema(fields=[id_field, age_field, embedding_field], auto_id=False, description="desc of a collection")
+position_field = FieldSchema(name="position", dtype=DataType.VARCHAR, max_length=256, is_dynamic=True, is_partition_key=True)
+
+# Enable dynamic field in the collection schema
+schema = CollectionSchema(fields=[id_field, age_field, embedding_field], auto_id=False, enable_dynamic_field=True, description="desc of a collection")
 ```
 
 Create a collection with the schema specified:
@@ -152,7 +175,8 @@ import pandas as pd
 df = pd.DataFrame({
         "id": [i for i in range(nb)],
         "age": [random.randint(20, 40) for i in range(nb)],
-        "embedding": [[random.random() for _ in range(dim)] for _ in range(nb)]
+        "embedding": [[random.random() for _ in range(dim)] for _ in range(nb)],
+		"position": "test_pos"
     })
 collection, ins_res = Collection.construct_from_dataframe(
                                 'my_collection',
@@ -165,4 +189,5 @@ collection, ins_res = Collection.construct_from_dataframe(
 ## What's next
 
 - Learn how to prepare schema when [creating a collection](create_collection.md).
-
+- Read more about [dynamic schema](dynamic_schema.md).
+- Read more about partition-key in [Multi-tenancy](multi-tenancy.md).
