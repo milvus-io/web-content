@@ -27,7 +27,7 @@ You can use [Apache Maven](https://maven.apache.org/install.html) or [Gradle](ht
 - Gradle/Grails
 
 ```
-compile 'io.milvus:milvus-sdk-java:2.2.6'
+compile 'io.milvus:milvus-sdk-java:2.2.5'
 ```
 
 ## Contributing
