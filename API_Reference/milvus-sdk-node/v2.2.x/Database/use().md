@@ -1,5 +1,7 @@
 # use()
 
+`milvus v2.2.9+` & `node v2.2.12+`
+
 This method changes the default database.
 
 A Milvus cluster ships with a default database named `default`. All collection operations are performed within the default database. You can use this method to change the default database.

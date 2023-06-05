@@ -1,16 +1,17 @@
 # createDatabase()
 
+`milvus v2.2.9+` & `node v2.2.12+`
+
 This method creates a database.
 
 ## Example
 
-````javascript
+```javascript
 import { MilvusClient } from "@zilliz/milvus2-sdk-node";
 
 await milvusClient.createDatabase({
   db_name: DB_NAME,
 });
-
 ```
 
 ### Response
@@ -29,7 +30,7 @@ await milvusClient.createDatabase({
   ],
   status: { error_code: 'Success', reason: '' }
 }
-````
+```
 
 ### Parameters
 

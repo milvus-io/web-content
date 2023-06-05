@@ -1,14 +1,15 @@
 # listDatabases()
 
+`milvus v2.2.9+` & `node v2.2.12+`
+
 This method lists all databases.
 
 ## Example
 
-````javascript
+```javascript
 import { MilvusClient } from "@zilliz/milvus2-sdk-node";
 
 await milvusClient.listDatabases();
-
 ```
 
 ### Response
@@ -17,7 +18,7 @@ await milvusClient.listDatabases();
 {
   status: { error_code: 'Success', reason: '' },
 }
-````
+```
 
 ### Parameters
 

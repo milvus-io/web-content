@@ -16,7 +16,7 @@ new milvusClient(MILUVS_ADDRESS).createCollection({
   fields: [
     {
       name: "age",
-      description: "",
+      description: "id field",
       data_type: DataType.Int64,
       autoID: true,
       is_primary_key: true,
@@ -29,11 +29,17 @@ new milvusClient(MILUVS_ADDRESS).createCollection({
     },
     {
       name: "name",
+      description: "other field",
       data_type: DataType.VarChar,
       max_length: 256,
-      description: "",
+    },
+    {
+      name: "meta",
+      description: "json field",
+      data_type: DataType.JSON,
     },
   ],
+  enable_dynamic_field: false,
 });
 ```
 
@@ -46,42 +52,46 @@ new milvusClient(MILUVS_ADDRESS).createCollection({
 
 ## Parameters
 
-| Parameters        | Description                                                                                                                                                                          | Type    |
-| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------- |
-| collection_name   | Name of the collection to create                                                                                                                                                     | String  |
-| fields            | field schema to create                                                                                                                                                               | Field[] |
-| timeout?          | This parameter is used to specify the length of time, in milliseconds, that the RPC (Remote Procedure Call) is allowed to run. If no value is provided, the default is undefined.    | Number  |
-| consistency_level | Consistency in a distributed database specifically refers to the property that ensures every node or replica has the same view of data when writing or reading data at a given time. | String  |
+| Parameters            | Description                                                                                                                                                                          | Type                        |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------- |
+| collection_name       | Name of the collection to create                                                                                                                                                     | String                      |
+| fields                | field schema to create                                                                                                                                                               | Field[]                     |
+| timeout?              | This parameter is used to specify the length of time, in milliseconds, that the RPC (Remote Procedure Call) is allowed to run. If no value is provided, the default is undefined.    | Number                      |
+| consistency_level?    | Consistency in a distributed database specifically refers to the property that ensures every node or replica has the same view of data when writing or reading data at a given time. | String , default: "Bounded" |
+| num_partitions?       | `milvus v2.2.9+` & `node v2.2.12+` partitions limit, default: 64, max: 4096                                                                                                          | Field[]                     |
+| enable_dynamic_field? | `milvus v2.2.9+` & `node v2.2.12+` enbale dynamic field                                                                                                                              | String                      |
 
 ### Field Object
 
-| Parameters      | Description                                                             | Type                       |
-| --------------- | ----------------------------------------------------------------------- | -------------------------- |
-| name            | Field name                                                              | String                     |
-| data_type       | Data type of the field (see the table below)                            | DataType(number) or String |
-| description?    | Field description                                                       | String                     |
-| autoID?         | Boolean value to indicate whether the IDs are automatically generated   | Bool                       |
-| dim?            | dimension of the vector field                                           | number                     |
-| max_length?     | max length of the varChar field                                         | number                     |
-| is_primary_key? | Boolean value to indicate whether this field is used as the primary key | Bool                       |
+| Parameters        | Description                                                                                                                                                         | Type                       |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------- |
+| name              | Field name                                                                                                                                                          | String                     |
+| data_type         | Data type of the field (see the table below)                                                                                                                        | DataType(number) or String |
+| description?      | Field description                                                                                                                                                   | String                     |
+| autoID?           | Boolean value to indicate whether the IDs are automatically generated                                                                                               | Bool                       |
+| dim?              | dimension of the vector field                                                                                                                                       | number                     |
+| max_length?       | max length of the varChar field                                                                                                                                     | number                     |
+| is_primary_key?   | Boolean value to indicate whether this field is used as the primary key                                                                                             | Bool                       |
+| is_partition_key? | `milvus v2.2.9+` & `node v2.2.12+` Boolean value to indicate whether this field is used as the partition key enabled field, only support `Int64` or `VarChar` field | Bool                       |
 
 #### data_type property
 
 You can either use enum or string, for example: `DataType.Int64` or `Int64` for the `data_type` property.
 
-| Number | String       |
-| ------ | ------------ |
-| 1      | Bool         |
-| 2      | Int8         |
-| 3      | Int16        |
-| 4      | Int32        |
-| 5      | Int64        |
-| 10     | Float        |
-| 11     | Double       |
-| 21     | Varchar      |
-| 100    | BinaryVector |
-| 101    | FloatVector  |
+| Number | String                                  |
+| ------ | --------------------------------------- |
+| 1      | Bool                                    |
+| 2      | Int8                                    |
+| 3      | Int16                                   |
+| 4      | Int32                                   |
+| 5      | Int64                                   |
+| 10     | Float                                   |
+| 11     | Double                                  |
+| 21     | Varchar                                 |
+| 23     | JSON `milvus v2.2.9+` & `node v2.2.12+` |
+| 100    | BinaryVector                            |
+| 101    | FloatVector                             |
 
 ### consistency_level property
 
-The default value is `"Strong"`, you can set the consistency level as : `"Session"` or `"Bounded"` or `"Eventually"` or `"Customized"`.
+The default value is `"Bounded"`, you can set the consistency level as : `"Session"` or `"Bounded"` or `"Eventually"` or `"Customized"`.

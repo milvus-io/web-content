@@ -1,10 +1,12 @@
 # dropDatabase()
 
+`milvus v2.2.9+` & `node v2.2.12+`
+
 This method drops a databases.
 
 ## Example
 
-````javascript
+```javascript
 import { MilvusClient } from "@zilliz/milvus2-sdk-node";
 
 await milvusClient.dropDatabase({
@@ -18,7 +20,7 @@ await milvusClient.dropDatabase({
 {
   status: { error_code: 'Success', reason: '' },
 }
-````
+```
 
 ### Parameters
 
