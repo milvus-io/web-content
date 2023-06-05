@@ -6,16 +6,16 @@ Milvus-sdk-node is a node.js SDK for Milvus, an open-source vector database. Its
 
 The following collection shows Milvus versions and recommended @zilliz/milvus2-sdk-node versions:
 
-| Milvus version | Recommended @zilliz/milvus2-sdk-node version |
-| :------------: | :------------------------------------------: |
-| v2.2.9+ | **v2.2.11+** |
-| v2.2.0 - v2.2.8 | v2.2.10 |
+| Milvus version  | Node sdk version | Installation                               |
+| :-------------: | :--------------: | :----------------------------------------- |
+|     v2.2.9+     |   **v2.2.11+**   | `yarn add @zilliz/milvus2-sdk-node`        |
+| v2.2.0 - v2.2.8 |     v2.2.10      | `yarn add @zilliz/milvus2-sdk-node@2.2.10` |
 
 ## Dependencies
 
 - [Milvus](https://milvus.io/)
 - [Zilliz Cloud](https://cloud.zilliz.com/signup)
-- Node: v12+
+- Node: v14+
 
 ## Installation
 
@@ -69,11 +69,11 @@ sudo docker-compose up -d
 Create a new app.js file and add the following code to try out some basic vector operations using the Milvus node.js client.
 
 ```javascript
-import { MilvusClient, DataType } from '@zilliz/milvus2-sdk-node';
+import { MilvusClient, DataType } from "@zilliz/milvus2-sdk-node";
 
-const address = 'your-milvus-ip';
-const username = 'your-milvus-username'; // optional username
-const password = 'your-milvus-password'; // optional password
+const address = "your-milvus-ip";
+const username = "your-milvus-username"; // optional username
+const password = "your-milvus-password"; // optional password
 const ssl = false; // secure or not
 
 // connect to milvus
@@ -184,11 +184,11 @@ By creating an index and loading the collection into memory, you can improve the
 // create index
 await client.createIndex({
   collection_name,
-  field_name: 'book_intro',
-  index_name: 'myindex',
-  index_type: 'HNSW',
+  field_name: "book_intro",
+  index_name: "myindex",
+  index_type: "HNSW",
   params: { efConstruction: 10, M: 4 },
-  metric_type: 'L2',
+  metric_type: "L2",
 });
 ```
 
@@ -229,11 +229,11 @@ const searchVector = [...Array(dim)].map(() => Math.random());
 const res = await client.search({
   collection_name, // required, the collection name
   vector: [0.1, 0.2, 0.3, 0.4], // required, vector used to compare other vectors in milvus
-  filter: 'word_count > 0', // optional, filter
+  filter: "word_count > 0", // optional, filter
   params: { nprobe: 64 }, // optional, specify the search parameters
   limit: 1, // specify the number of nearest neighbors to return
-  metric_type: 'L2', // optional, metric to calculate similarity of two vectors
-  output_fields: ['book_id', 'word_count'], // optional, specify the fields to return in the search results
+  metric_type: "L2", // optional, metric to calculate similarity of two vectors
+  output_fields: ["book_id", "word_count"], // optional, specify the fields to return in the search results
 });
 ```
 
@@ -253,5 +253,3 @@ First, a random search vector is generated. Then, the `client.search()` method i
 `metric_type`: Optional. Specifies the metric used to calculate the similarity of two vectors. The example code sets this to `"L2"`. By default, it will be `"L2"`.
 
 `output_fields`: Optional. Specifies which fields to include in the search results. The example code specifies the `book_id` and `word_count` fields, by default the node sdk will output all fields.
-
-
