@@ -146,7 +146,7 @@ There are two ways to install Milvus Operator on K8s:
 helm install milvus-operator \
   -n milvus-operator --create-namespace \
   --wait --wait-for-jobs \
-  https://github.com/milvus-io/milvus-operator/releases/download/v0.7.12/milvus-operator-0.7.12.tgz
+  https://github.com/milvus-io/milvus-operator/releases/download/v0.7.13/milvus-operator-0.7.13.tgz
 ```
 
 If Milvus Operator is installed, you can see the following output.
@@ -244,7 +244,7 @@ $ helm -n milvus-operator uninstall milvus-operator
 ### Uninstall Milvus Operator by `kubectl` command
 
 ```
-$ kubectl delete -f https://raw.githubusercontent.com/milvus-io/milvus-operator/v0.7.12/deploy/manifests/deployment.yaml
+$ kubectl delete -f https://raw.githubusercontent.com/milvus-io/milvus-operator/v0.7.13/deploy/manifests/deployment.yaml
 ```
 
 ## Delete the K8s cluster
