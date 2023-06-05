@@ -2,7 +2,7 @@
 
 `node sdk v2.2.12+`
 
-This method performs delete by ids.
+This method deletes entities by id array.
 
 ## Example
 
