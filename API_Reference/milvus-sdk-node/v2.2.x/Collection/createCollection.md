@@ -58,21 +58,21 @@ new milvusClient(MILUVS_ADDRESS).createCollection({
 | fields                | field schema to create                                                                                                                                                               | Field[]                     |
 | timeout?              | This parameter is used to specify the length of time, in milliseconds, that the RPC (Remote Procedure Call) is allowed to run. If no value is provided, the default is undefined.    | Number                      |
 | consistency_level?    | Consistency in a distributed database specifically refers to the property that ensures every node or replica has the same view of data when writing or reading data at a given time. | String , default: "Bounded" |
-| num_partitions?       | `milvus v2.2.9+` & `node v2.2.12+` partitions limit, default: 64, max: 4096                                                                                                          | Field[]                     |
-| enable_dynamic_field? | `milvus v2.2.9+` & `node v2.2.12+` enbale dynamic field                                                                                                                              | String                      |
+| num_partitions?       | `milvus v2.2.9+` & `node sdk v2.2.12+` partitions limit, default: 64, max: 4096                                                                                                      | Field[]                     |
+| enable_dynamic_field? | `milvus v2.2.9+` & `node sdk v2.2.12+` enbale dynamic field                                                                                                                          | String                      |
 
 ### Field Object
 
-| Parameters        | Description                                                                                                                                                         | Type                       |
-| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------- |
-| name              | Field name                                                                                                                                                          | String                     |
-| data_type         | Data type of the field (see the table below)                                                                                                                        | DataType(number) or String |
-| description?      | Field description                                                                                                                                                   | String                     |
-| autoID?           | Boolean value to indicate whether the IDs are automatically generated                                                                                               | Bool                       |
-| dim?              | dimension of the vector field                                                                                                                                       | number                     |
-| max_length?       | max length of the varChar field                                                                                                                                     | number                     |
-| is_primary_key?   | Boolean value to indicate whether this field is used as the primary key                                                                                             | Bool                       |
-| is_partition_key? | `milvus v2.2.9+` & `node v2.2.12+` Boolean value to indicate whether this field is used as the partition key enabled field, only support `Int64` or `VarChar` field | Bool                       |
+| Parameters        | Description                                                                                                                                                             | Type                       |
+| ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------- |
+| name              | Field name                                                                                                                                                              | String                     |
+| data_type         | Data type of the field (see the table below)                                                                                                                            | DataType(number) or String |
+| description?      | Field description                                                                                                                                                       | String                     |
+| autoID?           | Boolean value to indicate whether the IDs are automatically generated                                                                                                   | Bool                       |
+| dim?              | dimension of the vector field                                                                                                                                           | number                     |
+| max_length?       | max length of the varChar field                                                                                                                                         | number                     |
+| is_primary_key?   | Boolean value to indicate whether this field is used as the primary key                                                                                                 | Bool                       |
+| is_partition_key? | `milvus v2.2.9+` & `node sdk v2.2.12+` Boolean value to indicate whether this field is used as the partition key enabled field, only support `Int64` or `VarChar` field | Bool                       |
 
 #### data_type property
 

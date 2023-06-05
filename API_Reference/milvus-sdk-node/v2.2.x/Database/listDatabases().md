@@ -1,6 +1,6 @@
 # listDatabases()
 
-`milvus v2.2.9+` & `node v2.2.12+`
+`milvus v2.2.9+` & `node sdk v2.2.12+`
 
 This method lists all databases.
 
