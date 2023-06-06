@@ -11,11 +11,7 @@ This method performs a vector similarity search.
 > Starting from node sdk v2.2.7, you can use much simpler search api
 
 ```javascript
-import { MilvusClient } from "@zilliz/milvus2-sdk-node";
-import {
-  DataType,
-  MetricType,
-} from "@zilliz/milvus2-sdk-node/dist/milvus/const/Milvus";
+import { MilvusClient, DataType, MetricType} from "@zilliz/milvus2-sdk-node";
 
 // simple search example
 new milvusClient(MILUVS_ADDRESS).search({
