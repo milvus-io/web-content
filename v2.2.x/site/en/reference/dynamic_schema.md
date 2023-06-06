@@ -68,7 +68,7 @@ id: 938, distance: 0.7819530963897705, entity: {'title': 'Mortality Rate As an I
 
 As mentioned previously, `$meta` is a JSON field, which means that Milvus now supports JSON as a data type. 
 
-Defining a JSON field requires you to enable dynamic schema. JSON fields are composed of key-value pairs, where each key is a string and its corresponding value can be a number, string, boolean, list, or array. It's worth noting that values in a list or array should be of the same type, and all nested dictionaries will be treated as strings. When defining JSON keys, it's important to use only alphanumeric characters and underscores, as other characters may cause filter or search issues.
+Defining a JSON field doesn't require you to enable dynamic schema. JSON fields are composed of key-value pairs, where each key is a string and its corresponding value can be a number, string, boolean, list, or array. It's worth noting that values in a list or array should be of the same type, and all nested dictionaries will be treated as strings. When defining JSON keys, it's important to use only alphanumeric characters and underscores, as other characters may cause filter or search issues.
 
 To access a specific key within a JSON field, you can either directly use the key name or place the key name within square brackets and put the square brackets next to the JSON field name. For example, to access the `claps` key in the `$meta` JSON field, use either `$meta["claps"]` or `claps`.
 
