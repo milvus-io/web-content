@@ -22,7 +22,7 @@ We hope you enjoy the latest release!
 
 ### New Features
 
-- JSON support
+- JSON support 
 
   - Introduced JSON data type ([#23839](https://github.com/milvus-io/milvus/pull/23839)).
   - Added support for expressions with JSON fields ([#23804](https://github.com/milvus-io/milvus/pull/23804), [#24016](https://github.com/milvus-io/milvus/pull/24016)).
@@ -64,6 +64,15 @@ We hope you enjoy the latest release!
   - Added configurable policy for query node and user-level schedule policy ([#23718](https://github.com/milvus-io/milvus/pull/23718)).
   - Implemented rate limit based on growing segment size ([#24157](https://github.com/milvus-io/milvus/pull/24157)).
   - Added support for single quotes within string expressions ([#24386](https://github.com/milvus-io/milvus/pull/24386), [#24406](https://github.com/milvus-io/milvus/pull/24406)).
+
+Read these pages to learn more.
+
+- [Dynamic Schema](dynamic_schema.md)
+- [Schema](schema.md)
+- [Manage Databases](manage_databases.md)
+- [Multi-tenancy](multi_tenancy.md)
+
+For the use of these new features, please refer to related pages in the User Guides and the [PyMilvus API reference](api-reference/pymilvus/v2.2.x/About.md).
 
 ### Bug fixes
 
