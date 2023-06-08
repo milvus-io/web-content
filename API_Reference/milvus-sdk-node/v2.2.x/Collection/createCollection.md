@@ -8,6 +8,35 @@ With this method, you can create a new collection with a defined schema based on
 
 ## Example
 
+### After Milvus v2.2.9
+
+When the collection is created, milvus will create and load the collection for you, so you can insert data and search directly.
+
+```javascript
+import { MilvusClient, DataType } from "@zilliz/milvus2-sdk-node";
+
+new milvusClient(MILUVS_ADDRESS).createCollection({
+  collection_name: "my_collection",
+  dimension: 128,
+});
+```
+
+#### Parameters
+
+| Parameters          | Description                                                    | Type                               |
+| ------------------- | -------------------------------------------------------------- | ---------------------------------- |
+| collection_name     | collection name                                                | String                             |
+| dimension           | vector dimension                                               | number                             |
+| primary_field_name? | primary field name                                             | String                             |
+| id_type?            | What data type is the id type, default is DataType.Int64,      | DataType.Int64 or DataType.VarChar |
+| vector_field_name?  | vector field name                                              | string                             |
+| metric_type?        | max length of the varChar field                                | string or MetricType               |
+| enableDynamicField? | enable dynamic field                                           | Bool                               |
+| auto_id?            | enable auto id, default is fales                               | Bool                               |
+| index_params?       | create index params, same as parameters for method createIndex | Object                             |
+
+### Before Milvus v2.2.9
+
 ```javascript
 import { MilvusClient, DataType } from "@zilliz/milvus2-sdk-node";
 
@@ -52,27 +81,27 @@ new milvusClient(MILUVS_ADDRESS).createCollection({
 
 ## Parameters
 
-| Parameters            | Description                                                                                                                                                                          | Type                        |
-| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------- |
-| collection_name       | Name of the collection to create                                                                                                                                                     | String                      |
-| fields                | field schema to create                                                                                                                                                               | Field[]                     |
-| timeout?              | This parameter is used to specify the length of time, in milliseconds, that the RPC (Remote Procedure Call) is allowed to run. If no value is provided, the default is undefined.    | Number                      |
-| consistency_level?    | Consistency in a distributed database specifically refers to the property that ensures every node or replica has the same view of data when writing or reading data at a given time. | String , default: "Bounded" |
-| num_partitions?       | `milvus v2.2.9+` & `node sdk v2.2.12+` partitions limit, default: 64, max: 4096                                                                                                      | Field[]                     |
-| enable_dynamic_field? | `milvus v2.2.9+` & `node sdk v2.2.12+` enbale dynamic field                                                                                                                          | String                      |
+| Parameters                                                   | Description                                                                                                                                                                          | Type                        |
+| ------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------- |
+| collection_name                                              | Name of the collection to create                                                                                                                                                     | String                      |
+| fields                                                       | field schema to create                                                                                                                                                               | Field[]                     |
+| timeout?                                                     | This parameter is used to specify the length of time, in milliseconds, that the RPC (Remote Procedure Call) is allowed to run. If no value is provided, the default is undefined.    | Number                      |
+| consistency_level?                                           | Consistency in a distributed database specifically refers to the property that ensures every node or replica has the same view of data when writing or reading data at a given time. | String , default: "Bounded" |
+| num_partitions? `milvus v2.2.9+` & `node sdk v2.2.12+`       | partitions limit, default: 64, max: 4096                                                                                                                                             | Field[]                     |
+| enable_dynamic_field? `milvus v2.2.9+` & `node sdk v2.2.12+` | enbale dynamic field                                                                                                                                                                 | String                      |
 
 ### Field Object
 
-| Parameters        | Description                                                                                                                                                             | Type                       |
-| ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------- |
-| name              | Field name                                                                                                                                                              | String                     |
-| data_type         | Data type of the field (see the table below)                                                                                                                            | DataType(number) or String |
-| description?      | Field description                                                                                                                                                       | String                     |
-| autoID?           | Boolean value to indicate whether the IDs are automatically generated                                                                                                   | Bool                       |
-| dim?              | dimension of the vector field                                                                                                                                           | number                     |
-| max_length?       | max length of the varChar field                                                                                                                                         | number                     |
-| is_primary_key?   | Boolean value to indicate whether this field is used as the primary key                                                                                                 | Bool                       |
-| is_partition_key? | `milvus v2.2.9+` & `node sdk v2.2.12+` Boolean value to indicate whether this field is used as the partition key enabled field, only support `Int64` or `VarChar` field | Bool                       |
+| Parameters                                               | Description                                                                                                                      | Type                       |
+| -------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- | -------------------------- |
+| name                                                     | Field name                                                                                                                       | String                     |
+| data_type                                                | Data type of the field (see the table below)                                                                                     | DataType(number) or String |
+| description?                                             | Field description                                                                                                                | String                     |
+| autoID?                                                  | Boolean value to indicate whether the IDs are automatically generated                                                            | Bool                       |
+| dim?                                                     | dimension of the vector field                                                                                                    | number                     |
+| max_length?                                              | max length of the varChar field                                                                                                  | number                     |
+| is_primary_key?                                          | Boolean value to indicate whether this field is used as the primary key                                                          | Bool                       |
+| is_partition_key? `milvus v2.2.9+` & `node sdk v2.2.12+` | Boolean value to indicate whether this field is used as the partition key enabled field, only support `Int64` or `VarChar` field | Bool                       |
 
 #### data_type property
 
