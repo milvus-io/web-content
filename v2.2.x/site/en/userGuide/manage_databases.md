@@ -66,4 +66,5 @@ db.list_database()
 ## What's next
 
 [Enable RBAC](rbac.md)
-[Multi-tenancy](multi-tenancy.md)
+
+[Multi-tenancy](multi_tenancy.md)
