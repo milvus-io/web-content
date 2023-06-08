@@ -39,7 +39,7 @@ Milvus Lite is suitable for the following scenarios:
 - Python 3.7 or later
 - Verified operating systems are as follows:
 
-  - Ubuntu >= 18.04 (x86_64)
+  - Ubuntu >= 20.04 (x86_64)
   - CentOS >= 7.0 (x86_64)
   - MacOS >= 11.0 (Apple Silicon)
 
