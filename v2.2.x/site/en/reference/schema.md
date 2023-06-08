@@ -51,11 +51,6 @@ Milvus supports only one primary key field in a collection.
     	<td>Data type: Integer &isin;[1, 32768].<br/>Mandatory for the vector field</td>
 	</tr>
 	<tr>
-		<td>is_dynamic</td>
-		<td>Whether this field is a dynamic field.</td>
-		<td>Data type: Boolean (<code>true</code> or <code>false</code>).</td>
-	</tr>
-	<tr>
 		<td>is_partition_key</td>
 		<td>Whether this field is a partition-key field.</td>
 		<td>Data type: Boolean (<code>true</code> or <code>false</code>).</td>
@@ -73,7 +68,7 @@ age_field = FieldSchema(name="age", dtype=DataType.INT64, description="age")
 embedding_field = FieldSchema(name="embedding", dtype=DataType.FLOAT_VECTOR, dim=128, description="vector")
 
 # The following creates a dynamic field and use it as the partition key
-position_field = FieldSchema(name="position", dtype=DataType.VARCHAR, max_length=256, is_dynamic=True, is_partition_key=True)
+position_field = FieldSchema(name="position", dtype=DataType.VARCHAR, max_length=256, is_partition_key=True)
 ```
 
 
@@ -150,7 +145,7 @@ from pymilvus import FieldSchema, CollectionSchema
 id_field = FieldSchema(name="id", dtype=DataType.INT64, is_primary=True, description="primary id")
 age_field = FieldSchema(name="age", dtype=DataType.INT64, description="age")
 embedding_field = FieldSchema(name="embedding", dtype=DataType.FLOAT_VECTOR, dim=128, description="vector")
-position_field = FieldSchema(name="position", dtype=DataType.VARCHAR, max_length=256, is_dynamic=True, is_partition_key=True)
+position_field = FieldSchema(name="position", dtype=DataType.VARCHAR, max_length=256, is_partition_key=True)
 
 # Enable dynamic field in the collection schema
 schema = CollectionSchema(fields=[id_field, age_field, embedding_field], auto_id=False, enable_dynamic_field=True, description="desc of a collection")

@@ -89,6 +89,7 @@ const params = {
       description: "",
     },
   ],
+  enableDynamicField: true
 };
 ```
 
@@ -120,6 +121,7 @@ schema := &entity.Schema{
       },
     },
   },
+  EnableDynamicField: true
 }
 ```
 
@@ -146,6 +148,7 @@ CreateCollectionParam createCollectionReq = CreateCollectionParam.newBuilder()
         .addFieldType(fieldType1)
         .addFieldType(fieldType2)
         .addFieldType(fieldType3)
+        .withEnableDynamicField(true)
         .build();
 ```
 
@@ -501,7 +504,7 @@ Output:
         <tr>
             <td><code>ShardsNum</code></td>
             <td>Number of the shards for the collection to create.</td>
-            <td>[1,64]</td>
+            <td>[1,16]</td>
         </tr>
         <tr>
             <td><code>PartitionsNum</code></td>
@@ -708,7 +711,7 @@ milvusClient.createCollection(createCollectionReq);
         <tr>
             <td><code>shards_num</code> (optional)</td>
             <td>Number of the shards for the collection to create.</td>
-            <td>[1,256]</td>
+            <td>[1,16]</td>
         </tr>
         <tr>
             <td><code>num_partitions</code> (optional)</td>
@@ -740,7 +743,7 @@ milvusClient.createCollection(createCollectionReq);
         <tr>
             <td><code>shardNum</code></td>
             <td>Number of the shards for the collection to create.</td>
-            <td>[1,256]</td>
+            <td>[1,16]</td>
         </tr>
     </tbody>
 </table>
@@ -752,7 +755,7 @@ milvusClient.createCollection(createCollectionReq);
 | Length of a collection name          | 255 characters |
 | Number of partitions in a collection | 4,096          |
 | Number of fields in a collection     | 64             |
-| Number of shards in a collection     | 256            |
+| Number of shards in a collection     | 16            |
 
 ## What's next
 
