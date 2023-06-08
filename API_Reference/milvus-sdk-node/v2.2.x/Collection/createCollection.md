@@ -8,7 +8,7 @@ With this method, you can create a new collection with a defined schema based on
 
 ## Example
 
-### After Milvus v2.2.9
+### After Milvus v2.2.9，new createCollection can be used, but still you can pass old parameters.
 
 When the collection is created, milvus will create and load the collection for you, so you can insert data and search directly.
 
