@@ -18,7 +18,6 @@ A FieldSchema object.
 | -------------------- | ---------------------------------------------------------------------------- |
 | `name`               | Name of the field                                                            |
 | `is_primary`         | Boolean value that indicates if the field is the primary key field           |
-| `is_dynamic`         | Boolean value that indicates if the field is a dynamic field.                |
 | `is_partition_key`   | Boolean value that indicates if the field is a partition-key field.          |
 
 ## Example
@@ -47,13 +46,8 @@ book_intro = FieldSchema(
   dim=2
 )
 
-book_meta = FieldSchema(
-  name="book_meta",
-  is_dynamic=True
-)
-
 schema = CollectionSchema(
-  fields=[book_id, word_count, book_intro, boot_meta], 
+  fields=[book_id, word_count, book_intro], 
   description="Test book search",
   enable_dynamic_field=True
 )

@@ -43,13 +43,8 @@ book_intro = FieldSchema(
   dim=2
 )
 
-book_meta = FieldSchema(
-  name="book_meta",
-  is_dynamic=True
-)
-
 schema = CollectionSchema(
-  fields=[book_id, word_count, book_intro, book_meta], 
+  fields=[book_id, word_count, book_intro], 
   description="Test book search",
   enable_dynamic_field=True
 )
