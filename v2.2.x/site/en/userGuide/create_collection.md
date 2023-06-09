@@ -15,7 +15,7 @@ The following example builds a two-[shard](glossary.md#Sharding) collection name
 ## Prepare Schema
 
 <div class="alert note">
-The collection to create must contain a primary key field and a vector field. INT64 and String are supported data type on primary key field.
+The collection to create must contain a primary key field and a vector field. INT64 and VarChar are supported data type on primary key field.
 </div>
 
 First, prepare necessary parameters, including field schema, collection schema, and collection name.
