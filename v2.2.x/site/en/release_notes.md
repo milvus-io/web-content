@@ -12,7 +12,7 @@ Release date: 2 June, 2023
 
 | Milvus version | Python SDK version | Java SDK version | Go SDK version | Node.js SDK version |
 | -------------- | ------------------ | ---------------- | -------------- | ------------------- |
-| 2.2.9          | 2.2.9              | 2.2.5            | 2.2.3          | 2.2.11               |
+| 2.2.9          | 2.2.9              | 2.2.5            | 2.2.3          | 2.2.16               |
 
 Milvus 2.2.9 has added JSON support, allowing for more flexible schemas within collections through dynamic schemas. The search efficiency has been improved through partition keys, which enable data separation for different data categories, such as multiple users, in a single collection. Additionally, database support has been integrated into Role-Based Access Control (RBAC), further fortifying multi-tenancy management and security. Support has also been extended to Alibaba Cloud OSS, and connection management has been refined, resulting in an improved user experience.
 
