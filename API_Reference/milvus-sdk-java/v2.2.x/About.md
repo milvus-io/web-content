@@ -20,7 +20,7 @@ You can use [Apache Maven](https://maven.apache.org/install.html) or [Gradle](ht
  <dependency>
      <groupId>io.milvus</groupId>
      <artifactId>milvus-sdk-java</artifactId>
-     <version>2.2.5</version>
+     <version>2.2.6</version>
  </dependency>
 ```
 
