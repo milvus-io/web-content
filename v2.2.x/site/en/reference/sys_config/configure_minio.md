@@ -77,7 +77,7 @@ To share a MinIO instance among multiple Milvus instances, you need to change <c
     <tr>
       <td>
         <li>Access key ID that MinIO or S3 issues to user for authorized access.</li>
-        <li>Environment variable: <code>MINIO_ACCESS_KEY</code></li>
+        <li>Environment variable: <code>MINIO_ACCESS_KEY</code> or <code>minio.accessKeyID</code></li>
         <li><code>minio.accessKeyID</code> and <code>minio.secretAccessKey</code> together are used for identity authentication to access the MinIO or S3 service.</li>
         <li>This configuration must be set identical to the environment variable <code>MINIO_ACCESS_KEY</code>, which is necessary for starting MinIO or S3.</li>
         <li>The default value applies to MinIO or S3 service that started with the default <b>docker-compose.yml</b> file.</li>
@@ -101,7 +101,7 @@ To share a MinIO instance among multiple Milvus instances, you need to change <c
     <tr>
       <td>
         <li>Secret key used to encrypt the signature string and verify the signature string on server. It must be kept strictly confidential and accessible only to the MinIO or S3 server and users.</li>
-        <li>Environment variable: <code>MINIO_SECRET_KEY</code></li>
+        <li>Environment variable: <code>MINIO_SECRET_KEY</code> or <code>minio.secretAccessKey</code></li>
         <li><code>minio.accessKeyID</code> and <code>minio.secretAccessKey</code> together are used for identity authentication to access the MinIO or S3 service.</li>
         <li>This configuration must be set identical to the environment variable <code>MINIO_SECRET_KEY</code>, which is necessary for starting MinIO or S3.</li>
         <li>The default value applies to MinIO or S3 service that started with the default <b>docker-compose.yml</b> file.</li>
