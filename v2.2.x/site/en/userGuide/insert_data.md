@@ -386,7 +386,7 @@ Output:
 
 ## Flush the Data in Milvus
 
-When data is inserted into Milvus it is inserted into segments. Segments have to reach a certain size to be sealed and indexed. Unsealed segments will be searched brute force. In order to avoid this with any remainder data, it is best to call flush(). The flush call with seal any remaining segments and send them for indexing. It is important to only call this at the end of an insert session, as calling this too much will cause fragmented data that will need to be cleaned later on.
+When data is inserted into Milvus it is inserted into segments. Segments have to reach a certain size to be sealed and indexed. Unsealed segments will be searched brute force. In order to avoid this with any remainder data, it is best to call flush(). The flush call will seal any remaining segments and send them for indexing. It is important to only call this at the end of an insert session, as calling this too much will cause fragmented data that will need to be cleaned later on.
 
 
 ## Limits
