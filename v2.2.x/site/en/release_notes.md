@@ -6,6 +6,170 @@ summary: Milvus Release Notes
 
 Find out what’s new in Milvus! This page summarizes information about new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.2.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## 2.2.9
+
+Release date: 2 June, 2023
+
+| Milvus version | Python SDK version | Java SDK version | Go SDK version | Node.js SDK version |
+| -------------- | ------------------ | ---------------- | -------------- | ------------------- |
+| 2.2.9          | 2.2.9              | 2.2.5            | 2.2.3          | 2.2.16               |
+
+Milvus 2.2.9 has added JSON support, allowing for more flexible schemas within collections through dynamic schemas. The search efficiency has been improved through partition keys, which enable data separation for different data categories, such as multiple users, in a single collection. Additionally, database support has been integrated into Role-Based Access Control (RBAC), further fortifying multi-tenancy management and security. Support has also been extended to Alibaba Cloud OSS, and connection management has been refined, resulting in an improved user experience.
+
+As always, this release includes bug fixes, enhancements, and performance improvements. Notably, disk usage has been significantly reduced, and performance has been improved, particularly for filtered searches. 
+
+We hope you enjoy the latest release!
+
+### New Features
+
+- JSON support 
+
+  - Introduced JSON data type ([#23839](https://github.com/milvus-io/milvus/pull/23839)).
+  - Added support for expressions with JSON fields ([#23804](https://github.com/milvus-io/milvus/pull/23804), [#24016](https://github.com/milvus-io/milvus/pull/24016)).
+  - Enabled JSON support for bulk insert operations ([#24227](https://github.com/milvus-io/milvus/pull/24227)).
+  - Enhanced performance of filters using JSON fields ([#24268](https://github.com/milvus-io/milvus/pull/24268), [#24282](https://github.com/milvus-io/milvus/pull/24282)).
+
+- Dynamic schema
+
+  - Added dynamic schema support ([#24062](https://github.com/milvus-io/milvus/pull/24062), [#24176](https://github.com/milvus-io/milvus/pull/24176), [#24205](https://github.com/milvus-io/milvus/pull/24205), [#24099](https://github.com/milvus-io/milvus/pull/24099)).
+  - Enabled dynamic fields in bulk insert operations ([#24265](https://github.com/milvus-io/milvus/pull/24265)).
+
+- Partition key
+
+  - Introduced partition key ([#23994](https://github.com/milvus-io/milvus/pull/23994)).
+  - Added support for imports when partition key is enabled and backup is present ([#24454](https://github.com/milvus-io/milvus/pull/24454)).
+  - Added unit tests for partition key ([#24167](https://github.com/milvus-io/milvus/pull/24167)).
+  - Resolved issue with bulk insert not supporting partition key ([#24328](https://github.com/milvus-io/milvus/pull/24328)).
+
+- Database support in RBAC
+
+  - Added database support in Role-Based Access Control (RBAC) ([#23742](https://github.com/milvus-io/milvus/pull/23742)).
+  - Resolved non-existent database error for FlushAll function ([#24222](https://github.com/milvus-io/milvus/pull/24222)).
+  - Implemented default database value for RBAC requests ([#24307](https://github.com/milvus-io/milvus/pull/24307)).
+  - Ensured backward compatibility with empty database name ([#24317](https://github.com/milvus-io/milvus/pull/24317)).
+
+- Connection management
+
+  - Implemented the connect API to manage connections ([#24224](https://github.com/milvus-io/milvus/pull/24224)) ([#24293](https://github.com/milvus-io/milvus/pull/24293))
+  - Implemented checks if a database exists when Connect was called ([#24399](https://github.com/milvus-io/milvus/pull/24399))
+
+- Alibaba Cloud OSS support
+
+  - Added support for Aliyun OSS in chunk manager ([#22663](https://github.com/milvus-io/milvus/pull/22663), [#22842](https://github.com/milvus-io/milvus/pull/22842), [#23956](https://github.com/milvus-io/milvus/pull/23956)).
+  - Enabled Alibaba Cloud OSS as object storage using access key (AK) or Identity and Access Management (IAM) ([#23949](https://github.com/milvus-io/milvus/pull/23949)).
+
+- Additional features
+
+  - Implemented AutoIndex ([#24387](https://github.com/milvus-io/milvus/pull/24387), [#24443](https://github.com/milvus-io/milvus/pull/24443)).
+  - Added configurable policy for query node and user-level schedule policy ([#23718](https://github.com/milvus-io/milvus/pull/23718)).
+  - Implemented rate limit based on growing segment size ([#24157](https://github.com/milvus-io/milvus/pull/24157)).
+  - Added support for single quotes within string expressions ([#24386](https://github.com/milvus-io/milvus/pull/24386), [#24406](https://github.com/milvus-io/milvus/pull/24406)).
+
+Read these pages to learn more.
+
+- [Dynamic Schema](dynamic_schema.md)
+- [Schema](schema.md)
+- [Manage Databases](manage_databases.md)
+- [Multi-tenancy](multi_tenancy.md)
+
+For the use of these new features, please refer to related pages in the User Guides and the [PyMilvus API reference](api-reference/pymilvus/v2.2.x/About.md).
+
+### Bug fixes
+
+- Added temporary disk data cleaning upon the start of Milvus ([#24400](https://github.com/milvus-io/milvus/pull/24400)).
+- Fixed crash issue of bulk insert caused by an invalid Numpy array file ([#24480](https://github.com/milvus-io/milvus/pull/24480)).
+- Fixed an empty result set type for Int8~Int32 ([#23851](https://github.com/milvus-io/milvus/pull/23851)).
+- Fixed the panic that occurs while balancing releasing a collection ([#24003](https://github.com/milvus-io/milvus/pull/24003)) ([#24070](https://github.com/milvus-io/milvus/pull/24070)).
+- Fixed an error that occurs when a role removes a user that has already been deleted ([#24049](https://github.com/milvus-io/milvus/pull/24049)).
+- Fixed an issue where session stop/goingStop becomes stuck after a lost connection ([#23771](https://github.com/milvus-io/milvus/pull/23771)).
+- Fixed the panic caused by incorrect logic of getting unindexed segments ([#24061](https://github.com/milvus-io/milvus/pull/24061)).
+- Fixed the panic that occurs when a collection does not exist in quota effect ([#24321](https://github.com/milvus-io/milvus/pull/24321)).
+- Fixed an issue where refresh may be notified as finished early ([#24438](https://github.com/milvus-io/milvus/pull/24438)) ([#24466](https://github.com/milvus-io/milvus/pull/24466)).
+
+### Enhancement
+
+- Added an error response to return when an unimplemented request is received ([#24546](https://github.com/milvus-io/milvus/pull/24546))
+- Reduced disk usage for Milvus Lite and Standalone:
+
+  - Refine RocksDB option ([#24394](https://github.com/milvus-io/milvus/pull/24394))
+  - Fix RocksMQ retention not triggering at DataCoord timetick channel ([#24134](https://github.com/milvus-io/milvus/pull/24134))
+
+- Optimized quota to avoid OOM on search
+- Added consistency_level in search/query request ([#24541](https://github.com/milvus-io/milvus/pull/24541))
+- (pr24562) Supported search with default parameters ([#24516](https://github.com/milvus-io/milvus/pull/24516))
+- Put DataNode load statslog lazy if SkipBFStatsLog is true ([#23779](https://github.com/milvus-io/milvus/pull/23779))
+- Put QueryNode lazy load statslog if SkipBFLoad is true ([#23904](https://github.com/milvus-io/milvus/pull/23904))
+- Fixed concurrent map read/write in rate limiter ([#23957](https://github.com/milvus-io/milvus/pull/23957))
+- Improved load/release performance:
+
+  - Implemented more frequent CollectionObserver checks to trigger during load procedure ([#23925](https://github.com/milvus-io/milvus/pull/23925))
+  - Implemented checks to trigger while waiting for collection/partition to be released ([#24535](https://github.com/milvus-io/milvus/pull/24535))
+
+- Optimized PrivilegeAll permission check ([#23972](https://github.com/milvus-io/milvus/pull/23972))
+- Fixed the "not shard leader" error when gracefully stopping ([#24038](https://github.com/milvus-io/milvus/pull/24038))
+- Checked the overflow for inserted integer ([#24142](https://github.com/milvus-io/milvus/pull/24142)) ([#24172](https://github.com/milvus-io/milvus/pull/24172))
+- Lowered the task merge cap to mitigate an insufficient memory error ([#24233](https://github.com/milvus-io/milvus/pull/24233))
+- Removed constraint that prevents creating an index after load ([#24415](https://github.com/milvus-io/milvus/pull/24415))
+- Removed index check to trigger compaction ([#23657](https://github.com/milvus-io/milvus/pull/23657)) ([#23688](https://github.com/milvus-io/milvus/pull/23688))
+- Optimized the search performance with a high filtering ratio ([#23948](https://github.com/milvus-io/milvus/pull/23948))
+
+### Performance improvements
+
+- Added SIMD support for several filtering expressions ([#23715](https://github.com/milvus-io/milvus/pull/23715), [#23781](https://github.com/milvus-io/milvus/pull/23781)).
+- Reduced data copying during insertion into growing segments ([#24492](https://github.com/milvus-io/milvus/pull/24492)).
+
+## v2.2.8
+
+Release date: 3 May, 2023
+
+| Milvus version | Python SDK version | Java SDK version | Go SDK version | Node.js SDK version |
+| -------------- | ------------------ | ---------------- | -------------- | ------------------- |
+| 2.2.8          | 2.2.8              | 2.2.5            | 2.2.2          | 2.2.8               |
+
+In this update, we fixed 1 critical bug. 
+
+### Bugfix
+
+- Fixed RootCoord panic caused by the upgrades from v2.2.x to v2.2.7 ([#23828](https://github.com/milvus-io/milvus/pull/23828)).
+
+## v2.2.7
+
+Release date: 28 April, 2023
+
+| Milvus version | Python SDK version | Java SDK version | Go SDK version | Node.js SDK version |
+| -------------- | ------------------ | ---------------- | -------------- | ------------------- |
+| 2.2.7          | 2.2.8              | 2.2.5            | 2.2.2          | 2.2.7               |
+
+In this update, we have focused on resolving various issues reported by our users, enhancing the software's overall stability and functionality. Additionally, we have implemented several optimizations, such as load balancing, search grouping, and memory usage improvements.
+
+### Bugfix
+
+- Fixed a panic caused by not removing metadata of a dropped segment from the DataNode. ([#23492](https://github.com/milvus-io/milvus/pull/23492))
+- Fixed a bug that caused forever blocking due to the release of a non-loaded partition. ([#23612](https://github.com/milvus-io/milvus/pull/23612))
+- To prevent the query service from becoming unavailable, automatic balancing at the channel level has been disabled as a workaround. ([#23632](https://github.com/milvus-io/milvus/pull/23632)) ([#23724](https://github.com/milvus-io/milvus/pull/23724))
+- Cancel failed tasks in the scheduling queue promptly to prevent an increase in QueryCoord scheduling latency. ([#23649](https://github.com/milvus-io/milvus/pull/23649))
+- Fixed compatibility bug and recalculate segment rows to prevent service queries from being unavailable. ([#23696](https://github.com/milvus-io/milvus/pull/23696))
+- Fixed a bug in the superuser password validation logic. ([#23729](https://github.com/milvus-io/milvus/pull/23729))
+- Fixed the issue of shard detector rewatch failure, which was caused by returning a closed channel. ([#23734](https://github.com/milvus-io/milvus/pull/23734))
+- Fixed a loading failure caused by unhandled interrupts in the AWS SDK. ([#23736](https://github.com/milvus-io/milvus/pull/23736))
+- Fixed the "HasCollection" check in DataCoord. ([#23709](https://github.com/milvus-io/milvus/pull/23709))
+- Fixed the bug that assigned all available nodes to a single replica incorrectly. ([#23626](https://github.com/milvus-io/milvus/pull/23626))
+
+### Enhancement
+
+- Optimized the display of RootCoord histogram metrics. ([#23567](https://github.com/milvus-io/milvus/pull/23567))
+- Reduced peak memory consumption during collection loading. ([#23138](https://github.com/milvus-io/milvus/pull/23138))
+- Removed unnecessary handoff event-related metadata. ([#23565](https://github.com/milvus-io/milvus/pull/23565))
+- Added a plugin logic to QueryNode to support the dynamic loading of shared library files. ([#23599](https://github.com/milvus-io/milvus/pull/23599))
+- Supports load balancing with replica granularity. ([#23629](https://github.com/milvus-io/milvus/pull/23629))
+- Released a load-balancing strategy based on scores. ([#23805](https://github.com/milvus-io/milvus/pull/23805))
+- Added a coroutine pool to limit the concurrency of cgo calls triggered by "delete". ([#23680](https://github.com/milvus-io/milvus/pull/23680))
+- Improved the compaction algorithm to make the distribution of segment sizes tend towards the ideal value. ([#23692](https://github.com/milvus-io/milvus/pull/23692))
+- Changed the default shard number to 1. ([#23593](https://github.com/milvus-io/milvus/pull/23593))
+- Improved search grouping algorithm to enhance throughput. ([#23721](https://github.com/milvus-io/milvus/pull/23721))
+- Code refactoring: Separated the read, build, and load DiskANN parameters. ([#23722](https://github.com/milvus-io/milvus/pull/23722))
+- Updated etcd and Minio versions. ([#23765](https://github.com/milvus-io/milvus/pull/23765))
+
 ## v2.2.6
 
 Release date: 18 April, 2023
@@ -13,8 +177,6 @@ Release date: 18 April, 2023
 | Milvus version | Python SDK version | Java SDK version | Go SDK version | Node.js SDK version |
 | -------------- | ------------------ | ---------------- | -------------- | ------------------- |
 | 2.2.6          | 2.2.7              | 2.2.5            | 2.2.1          | 2.2.4               |
-
-**Upgrade to Milvus 2.2.6 as soon as possible!**
 
 You are advised to refrain from using version 2.2.5 due to several critical issues that require immediate attention. Version 2.2.6 addresses these issues. One of the critical issues is the inability to recycle dirty binlog data. We highly recommend using version 2.2.6 version instead of version 2.2.5 to avoid any potential complications.
 

@@ -25,6 +25,12 @@ $ helm search repo milvus --versions
 
 ```
 NAME            CHART VERSION   APP VERSION             DESCRIPTION                                       
+milvus/milvus	4.0.23       	2.2.9             	Milvus is an open-source vector database built ...
+milvus/milvus	4.0.22       	2.2.8             	Milvus is an open-source vector database built ...
+milvus/milvus	4.0.21       	2.2.8             	Milvus is an open-source vector database built ...
+milvus/milvus	4.0.20       	2.2.8             	    Milvus is an open-source vector database built ...
+milvus/milvus	4.0.19       	2.2.7             	    Milvus is an open-source vector database built ...
+milvus/milvus   4.0.17          2.2.6                   Milvus is an open-source vector database built ...
 milvus/milvus   4.0.16          2.2.6                   Milvus is an open-source vector database built ...
 milvus/milvus   4.0.14          2.2.5                   Milvus is an open-source vector database built ...
 milvus/milvus   4.0.13          2.2.5                   Milvus is an open-source vector database built ...
@@ -36,19 +42,15 @@ milvus/milvus   4.0.7           2.2.3                   Milvus is an open-source
 milvus/milvus   4.0.6           2.2.2                   Milvus is an open-source vector database built ...
 milvus/milvus   4.0.5           2.2.2                   Milvus is an open-source vector database built ...
 milvus/milvus   4.0.4           2.2.2                   Milvus is an open-source vector database built ...
-milvus/milvus   4.0.3           2.2.2                   Milvus is an open-source vector database built ...
-milvus/milvus   4.0.2           2.2.2                   Milvus is an open-source vector database built ...
-milvus/milvus   4.0.1           2.2.1                   Milvus is an open-source vector database built ...
-milvus/milvus   4.0.0           2.2.1                   Milvus is an open-source vector database built ...
-milvus/milvus   3.3.6           2.2.0                   Milvus is an open-source vector database built ...
-milvus/milvus   3.3.5           2.2.0                   Milvus is an open-source vector database built ...
 ```
 
 You can choose the upgrade path for your Milvus as follows:
 
-- [Conduct a rolling upgrade](#Conduct-a-rolling-upgrade) from Milvus v2.2.3 and later releases to v2.2.6.
-- [Upgrade Milvus using Helm](#Upgrade-Milvus-using-Helm) for an upgrade from a minor release before v2.2.3 to v2.2.6.
-- [Migrate the metadata](#Migrate-the-metadata) before the upgrade from Milvus v2.1.x to v2.2.6.
+- [Conduct a rolling upgrade](#Conduct-a-rolling-upgrade) from Milvus v2.2.3 and later releases to v2.2.9.
+- [Upgrade Milvus using Helm](#Upgrade-Milvus-using-Helm) for an upgrade from a minor release before v2.2.3 to v2.2.9.
+- [Migrate the metadata](#Migrate-the-metadata) before the upgrade from Milvus v2.1.x to v2.2.9.
+
+<div style="display:none;">
 
 ## Conduct a rolling upgrade
 
@@ -68,10 +70,10 @@ The script applies only to the upgrade of Milvus installed with Helm. The follow
 | `w`          | New Milvus image tag                                      | `milvusdb/milvus:v2.2.3`         | True                    |
 | `o`          | Operation                                                 | `update`                         | False                   |
 
-Once you have ensured that all deployments in your Milvus instance are in their normal status. You can run the following command to upgrade the Milvus instance to 2.2.6.
+Once you have ensured that all deployments in your Milvus instance are in their normal status. You can run the following command to upgrade the Milvus instance to 2.2.9.
 
 ```shell
-sh rollingUpdate.sh -n default -i my-release -o update -t 2.2.6 -w 'milvusdb/milvus:v2.2.6'
+sh rollingUpdate.sh -n default -i my-release -o update -t 2.2.9 -w 'milvusdb/milvus:v2.2.9'
 ```
 
 <div class="alert note">
@@ -82,6 +84,8 @@ sh rollingUpdate.sh -n default -i my-release -o update -t 2.2.6 -w 'milvusdb/mil
 3. The script uses `kubectl patch` to update the `app.kubernetes.io/version` label of the deployments to the one specified after the `-t` flag in the command.
 
 </div>
+    
+</div>
 
 ## Upgrade Milvus using Helm
 
@@ -89,7 +93,7 @@ To upgrade Milvus from a minor release before v2.2.3 to the latest, run the foll
 
 ```shell
 helm repo update
-helm upgrade --version=4.0.16 # use the helm chart version here
+helm upgrade --version=4.0.23 # use the helm chart version here
 ```
 
 Use the Helm chart version in the preceding command. For details on how to obtain the Helm chart version, refer to [Check the Milvus version](#Check-the-Milvus-version).
@@ -157,42 +161,42 @@ The following table lists the operations you can do for meta migration.
 4. Migrate the Milvus metadata.
 5. Start Milvus components with a new image.
 
-#### 2. Upgrade Milvus from v2.1.x to 2.2.6
+#### 2. Upgrade Milvus from v2.1.x to 2.2.9
 
-The following commands assume that you upgrade Milvus from v2.1.4 to 2.2.6. Change them to the versions that fit your needs.
+The following commands assume that you upgrade Milvus from v2.1.4 to 2.2.9. Change them to the versions that fit your needs.
 
 1. Specify Milvus instance name, source Milvus version, and target Milvus version.
 
     ```
-    ./migrate.sh -i my-release -s 2.1.4 -t 2.2.6
+    ./migrate.sh -i my-release -s 2.1.4 -t 2.2.9
     ```
 
 2. Specify the namespace with `-n` if your Milvus is not installed in the default K8s namespace.
 
     ```
-    ./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.2.6
+    ./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.2.9
     ```
 
 3. Specify the root path with `-r` if your Milvus is installed with the custom `rootpath`.
 
     ```
-    ./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.2.6 -r by-dev
+    ./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.2.9 -r by-dev
     ```
 
 4. Specify the image tag with `-w` if your Milvus is installed with a custom `image`.
 
     ```
-    ./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.2.6 -r by-dev -w milvusdb/milvus:v2.2.6
+    ./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.2.9 -r by-dev -w milvusdb/milvus:v2.2.9
     ```
 
 5. Set `-d true` if you want to automatically remove the migration pod after the migration is completed.
 
     ```
-    ./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.2.6 -w milvusdb/milvus:v2.2.6 -d true
+    ./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.2.9 -w milvusdb/milvus:v2.2.9 -d true
     ```
 
 6. Rollback and migrate again if the migration fails.
 
     ```
-    ./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.2.6 -r by-dev -o rollback -w milvusdb/milvus:v2.1.1
-    ./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.2.6 -r by-dev -o migrate -w milvusdb/milvus:v2.2.6
+    ./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.2.9 -r by-dev -o rollback -w milvusdb/milvus:v2.1.1
+    ./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.2.9 -r by-dev -o migrate -w milvusdb/milvus:v2.2.9

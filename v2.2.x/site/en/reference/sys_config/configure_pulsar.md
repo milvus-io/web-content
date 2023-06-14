@@ -13,6 +13,12 @@ Pulsar is the underlying engine supporting Milvus cluster's reliable storage and
 
 Under this section, you can configure Pulsar address, the message size, etc.
 
+<div class="alert note">
+<li>To share a Pulsar instance with multi-tenancy enabled among multiple Milvus instances, you need to change <code>pulsar.tenant</code> or <code>pulsar.namespace</code> to a unique value for each of the Milvus instances. </li>
+<li>To share a Pulsar instance with multi-tenancy disabled among multiple Milvus instances, you need to change <code>msgChannel.chanNamePrefix.cluster</code> to a unique value for each of the Milvus instances.</li>
+For details, refer to <a href="operational_faq.md#Can-I-share-a-Pulsar-instance-among-multiple-Milvus-instances">Operation FAQs</a>.
+</div>
+
 
 ## `pulsar.address`
 
@@ -82,3 +88,42 @@ Under this section, you can configure Pulsar address, the message size, etc.
   </tbody>
 </table>
 
+## `pulsar.tenant`
+
+<table id="pulsar.tenant">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <li>Pulsar can be provisioned for specific tenants with appropriate capacity allocated to the tenant.</li>
+        <li>To share a Pulsar instance among multiple Milvus instances, you can change this to an Pulsar tenant rather than the default one for each Milvus instance before you start them. However, if you do not want Pulsar multi-tenancy, you are advised to change <code>msgChannel.chanNamePrefix.cluster</code> to the different value. For details, see <a href="operational_faq.md#Can-I-share-a-Pulsar-instance-among-multiple-Milvus-instances">Operation FAQs</a>.</li>
+      </td>
+      <td>public</td>
+    </tr>
+  </tbody>
+</table>
+
+## `pulsar.namespace`
+
+<table id="pulsar.namespace">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <li>A Pulsar namespace is the administrative unit nomenclature within a tenant.</li>
+        <li>To share a Pulsar instance among multiple Milvus instances, you can change this to an Pulsar tenant rather than the default one for each Milvus instance before you start them. However, if you do not want Pulsar multi-tenancy, you are advised to change <code>msgChannel.chanNamePrefix.cluster</code> to the different value. For details, see <a href="operational_faq.md#Can-I-share-a-Pulsar-instance-among-multiple-Milvus-instances">Operation FAQs</a>.</li>
+      </td>
+      <td>default</td>
+    </tr>
+  </tbody>
+</table>

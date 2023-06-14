@@ -2,19 +2,6 @@
 
 By using this method, you can retrieve a collection's details such as its name, schema, and other relevant information.
 
-```javascript
-new milvusClient(MILVUS_ADDRESS).describeCollection(
-  DescribeCollectionReq
-);
-```
-
-### DescribeCollectionReq
-
-| Parameters      | Description                                                                            | Type   |
-| --------------- | -------------------------------------------------------------------------------------- | ------ |
-| collection_name | Name of the collection to check                                                        | String |
-| timeout?        | This parameter is used to specify the length of time, in milliseconds, that the RPC (Remote Procedure Call) is allowed to run. If no value is provided, the default is undefined. | Number |
-
 ## Example
 
 ```javascript
@@ -64,3 +51,10 @@ new milvusClient(MILUVS_ADDRESS).describeCollection({
   consistency_level: 'Session',
 }
 ```
+
+### Parameters
+
+| Parameters      | Description                                                                                                                                                                       | Type   |
+| --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ |
+| collection_name | Name of the collection to check                                                                                                                                                   | String |
+| timeout?        | This parameter is used to specify the length of time, in milliseconds, that the RPC (Remote Procedure Call) is allowed to run. If no value is provided, the default is undefined. | Number |

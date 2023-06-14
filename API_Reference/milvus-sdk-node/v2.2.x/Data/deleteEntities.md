@@ -2,19 +2,6 @@
 
 This method deletes entities from a specified collection.
 
-```javascript
-new milvusClient(MILUVS_ADDRESS).deleteEntities(DeleteEntitiesReq);
-```
-
-### DeleteEntitiesReq
-
-| Parameters      | Description                                                                            | Type   |
-| --------------- | -------------------------------------------------------------------------------------- | ------ |
-| collection_name | Name of the collection to delete entities from                                         | String |
-| expr            | Boolean expression used for attibute filtering                                         | String |
-| partition_name? | Name of the partition to deleted entities from                                         | String |
-| timeout?        | This parameter is used to specify the length of time, in milliseconds, that the RPC (Remote Procedure Call) is allowed to run. If no value is provided, the default is undefined. | Number |
-
 ## Example
 
 ```javascript
@@ -29,7 +16,6 @@ new milvusClient(MILUVS_ADDRESS).deleteEntities({
 ### Response
 
 ```javascript
-// DeleteEntitiesReq returns
 {
   status: { error_code: 'Success', reason: '' },
   succ_index: [],
@@ -42,3 +28,12 @@ new milvusClient(MILUVS_ADDRESS).deleteEntities({
   IDs: { int_id: { data: [ '434848878802251176', '444848878802251176' ] }, id_field: 'int_id' }
 }
 ```
+
+### Parameters
+
+| Parameters      | Description                                                                                                                                                                       | Type   |
+| --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ |
+| collection_name | Name of the collection to delete entities from                                                                                                                                    | String |
+| expr            | Boolean expression used for attibute filtering                                                                                                                                    | String |
+| partition_name? | Name of the partition to deleted entities from                                                                                                                                    | String |
+| timeout?        | This parameter is used to specify the length of time, in milliseconds, that the RPC (Remote Procedure Call) is allowed to run. If no value is provided, the default is undefined. | Number |

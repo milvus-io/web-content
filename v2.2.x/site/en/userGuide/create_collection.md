@@ -15,7 +15,7 @@ The following example builds a two-[shard](glossary.md#Sharding) collection name
 ## Prepare Schema
 
 <div class="alert note">
-The collection to create must contain a primary key field and a vector field. INT64 and String are supported data type on primary key field.
+The collection to create must contain a primary key field and a vector field. INT64 and VarChar are supported data type on primary key field.
 </div>
 
 First, prepare necessary parameters, including field schema, collection schema, and collection name.
@@ -53,13 +53,14 @@ book_intro = FieldSchema(
 )
 schema = CollectionSchema(
   fields=[book_id, book_name, word_count, book_intro],
-  description="Test book search"
+  description="Test book search",
+  enable_dynamic_field=True
 )
 collection_name = "book"
 ```
 
 ```javascript
-import { MetricType } from "@zilliz/milvus2-sdk-node";
+import { DataType } from "@zilliz/milvus2-sdk-node";
 const params = {
   collection_name: "book",
   description: "Test book search",
@@ -88,6 +89,7 @@ const params = {
       description: "",
     },
   ],
+  enableDynamicField: true
 };
 ```
 
@@ -119,6 +121,7 @@ schema := &entity.Schema{
       },
     },
   },
+  EnableDynamicField: true
 }
 ```
 
@@ -145,6 +148,7 @@ CreateCollectionParam createCollectionReq = CreateCollectionParam.newBuilder()
         .addFieldType(fieldType1)
         .addFieldType(fieldType2)
         .addFieldType(fieldType3)
+        .withEnableDynamicField(true)
         .build();
 ```
 
@@ -240,6 +244,7 @@ Output:
                     <li><code>DataType.FLOAT</code> (numpy.float32)</li>
                     <li><code>DataType.DOUBLE</code> (numpy.double)</li>
                     <li><code>DataType.VARCHAR</code> (VARCHAR)</li>
+                    <li><code>DataType.JSON</code> (JSON) </li>
                 </ul>
                 For vector field:
                 <ul>
@@ -499,7 +504,12 @@ Output:
         <tr>
             <td><code>ShardsNum</code></td>
             <td>Number of the shards for the collection to create.</td>
-            <td>[1,64]</td>
+            <td>[1,16]</td>
+        </tr>
+        <tr>
+            <td><code>PartitionsNum</code></td>
+            <td>Number of the logical partitions for the collection to create.</td>
+            <td>[1,4096]</td>
         </tr>
 	</tbody>
 </table>
@@ -701,10 +711,15 @@ milvusClient.createCollection(createCollectionReq);
         <tr>
             <td><code>shards_num</code> (optional)</td>
             <td>Number of the shards for the collection to create.</td>
-            <td>[1,256]</td>
+            <td>[1,16]</td>
         </tr>
-	<tr>
-            <td><code>properties: collection.ttl.seconds</code> (optional)</td>
+        <tr>
+            <td><code>num_partitions</code> (optional)</td>
+            <td>Number of logical partitions for the collection to create.</td>
+            <td>[1,4096]</td>
+        </tr>
+	    <tr>
+            <td><code>*kwargs: collection.ttl.seconds</code> (optional)</td>
             <td>Collection time to live (TTL) is the expiration time of a collection. Data in an expired collection will be cleaned up and will not be involved in searches or queries. Specify TTL in the unit of seconds.</td>
             <td>The value should be 0 or greater. 0 means TTL is disabled.</td>
         </tr>
@@ -728,7 +743,7 @@ milvusClient.createCollection(createCollectionReq);
         <tr>
             <td><code>shardNum</code></td>
             <td>Number of the shards for the collection to create.</td>
-            <td>[1,256]</td>
+            <td>[1,16]</td>
         </tr>
     </tbody>
 </table>
@@ -740,7 +755,7 @@ milvusClient.createCollection(createCollectionReq);
 | Length of a collection name          | 255 characters |
 | Number of partitions in a collection | 4,096          |
 | Number of fields in a collection     | 64             |
-| Number of shards in a collection     | 256            |
+| Number of shards in a collection     | 16            |
 
 ## What's next
 

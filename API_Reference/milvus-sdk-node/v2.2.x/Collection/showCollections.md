@@ -2,27 +2,6 @@
 
 List all collections or get collection loading status.
 
-```javascript
-new milvusClient(MILUVS_ADDRESS).showCollections(
-  ShowCollectionsReq
-);
-```
-
-### ShowCollectionsReq
-
-| Parameters      | Description                                                                            | type                |
-| --------------- | -------------------------------------------------------------------------------------- | ------------------- |
-| collection_name | Name of the collections to check for their loading status                              | String[]            |
-| type            | ShowCollectionsType                                                                    | ShowCollectionsType |
-| timeout?        | This parameter is used to specify the length of time, in milliseconds, that the RPC (Remote Procedure Call) is allowed to run. If no value is provided, the default is undefined. | Number              |
-
-### ShowCollectionsType
-
-| value | Description | type   |
-| ----- | ----------- | ------ |
-| 0     | All         | number |
-| 1     | Loaded      | number |
-
 ## Example
 
 ```javascript
@@ -49,3 +28,18 @@ new milvusClient(MILUVS_ADDRESS).showCollections();
   created_utc_timestamps: [ '1658732862090' ],
 }
 ```
+
+### Parameters
+
+| Parameters      | Description                                                                                                                                                                       | type                |
+| --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------- |
+| collection_name | Name of the collections to check for their loading status                                                                                                                         | String[]            |
+| type            | ShowCollectionsType                                                                                                                                                               | ShowCollectionsType |
+| timeout?        | This parameter is used to specify the length of time, in milliseconds, that the RPC (Remote Procedure Call) is allowed to run. If no value is provided, the default is undefined. | Number              |
+
+#### ShowCollectionsType
+
+| value | Description | type   |
+| ----- | ----------- | ------ |
+| 0     | All         | number |
+| 1     | Loaded      | number |

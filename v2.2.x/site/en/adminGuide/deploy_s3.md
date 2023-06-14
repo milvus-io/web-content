@@ -24,6 +24,7 @@ minio:
   secretAccessKey: <your_s3_secret_access_key>
   useSSL: <true/false>
   bucketName: "<your_bucket_name>"
+  useSSL: <true/false>
 ```
 See [MinIO/S3 Configurations](configure_minio.md) for more information.
 
@@ -33,7 +34,7 @@ Run the following command to start Milvus that uses the S3 configurations.
 ```shell
 docker-compose up
 ```
-<div class="alert note">Configurations only take effect after Milvus starts. See <a href=https://milvus.io/docs/v2.2.x/install_cluster-docker.md#Start-Milvus>Start Milvus</a> for more information.</div>
+<div class="alert note">Configurations only take effect after Milvus starts. See <a href=https://milvus.io/docs/install_standalone-docker.md#Start-Milvus>Start Milvus</a> for more information.</div>
 
 ## Configure S3 on K8s
 
@@ -50,6 +51,7 @@ For Milvus clusters on K8s, you can configure S3 in the same command that starts
 | <code>externalS3.accessKey</code>  | The access key ID for S3.        |                                      |
 | <code>externalS3.secretKey</code>  | The secret access key for S3.    |                                      |
 | <code>externalS3.bucketName</code> | The name of the S3 bucket.       |                                      |
+| <code>externalS3.useSSL</code>     | Whether to use SSL when connecting | The values defaults to <code>false</code> |
 
 
 ### Using the YAML file
@@ -72,6 +74,7 @@ externalS3:
   secretKey: "<your_s3_secret_key>"
   useSSL: <true/false>
   bucketName: "<your_bucket_name>"
+  useSSL: <true/false>
 ```
 
 3. After configuring the preceding sections and saving the <code>values.yaml</code> file, run the following command to install Milvus that uses the S3 configurations.

@@ -2,20 +2,6 @@
 
 This method allows you to change the name of a collection.
 
-```javascript
-new milvusClient(MILUVS_ADDRESS).renameCollection(
-  RenameCollectionReq
-);
-```
-
-### RenameCollectionReq
-
-| Parameters          | Description                                                                                                                                                                       | Type   |
-| ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ |
-| collection_name     | Name of the collection to check                                                                                                                                                   | String |
-| new_collection_name | New Collection name                                                                                                                                                               | String |
-| timeout?            | This parameter is used to specify the length of time, in milliseconds, that the RPC (Remote Procedure Call) is allowed to run. If no value is provided, the default is undefined. | Number |
-
 ## Example
 
 ```javascript
@@ -33,3 +19,11 @@ new milvusClient(MILUVS_ADDRESS).renameCollection({
 // renameCollection returns
 { status: { error_code: 'Success', reason: '' }, value: true }
 ```
+
+### Parameters
+
+| Parameters          | Description                                                                                                                                                                       | Type   |
+| ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ |
+| collection_name     | Name of the collection to check                                                                                                                                                   | String |
+| new_collection_name | New Collection name                                                                                                                                                               | String |
+| timeout?            | This parameter is used to specify the length of time, in milliseconds, that the RPC (Remote Procedure Call) is allowed to run. If no value is provided, the default is undefined. | Number |

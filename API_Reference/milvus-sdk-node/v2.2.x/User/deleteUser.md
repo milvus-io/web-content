@@ -2,17 +2,6 @@
 
 This method deletes a user identity in Milvus.
 
-```javascript
-new milvusClient(MILUVS_ADDRESS).deleteUser(DeleteUserReq);
-```
-
-### DeleteUserReq
-
-| Parameters | Description                                                                            | Type   |
-| ---------- | -------------------------------------------------------------------------------------- | ------ |
-| username   | The existing username in Milvus to delete                                              | String |
-| timeout?   | This parameter is used to specify the length of time, in milliseconds, that the RPC (Remote Procedure Call) is allowed to run. If no value is provided, the default is undefined. | Number |
-
 ## Example
 
 ```javascript
@@ -28,3 +17,10 @@ new milvusClient(MILUVS_ADDRESS).deleteUser({
 ```javascript
 { error_code: 'Success', reason: '' }
 ```
+
+### Parameters
+
+| Parameters | Description                                                                                                                                                                       | Type   |
+| ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ |
+| username   | The existing username in Milvus to delete                                                                                                                                         | String |
+| timeout?   | This parameter is used to specify the length of time, in milliseconds, that the RPC (Remote Procedure Call) is allowed to run. If no value is provided, the default is undefined. | Number |

@@ -46,8 +46,7 @@ Milvus does not support modification to configuration files during runtime. You 
 
 If Milvus is started using Docker Compose, run `docker ps` to observe how many Docker containers are running and check if Milvus services started correctly.
 
-- For Milvus standalone, you should be able to observe at least three running Docker containers, one being the Milvus service and the other two being etcd management and storage service. For more information, see [Installing Milvus Standalone](install_standalone-docker.md).
-- For Milvus Cluster, you should be able to observe at least twelve running Docker containers, nine for the Milvus service and three for basic services. For more information, see [Installing Milvus Cluster](install_cluster-docker.md).
+For Milvus standalone, you should be able to observe at least three running Docker containers, one being the Milvus service and the other two being etcd management and storage service. For more information, see [Installing Milvus Standalone](install_standalone-docker.md).
 
 #### Why is the time in the log files different from the system time?
 
@@ -101,6 +100,21 @@ If you didn't change the config, using kubectl logs <pod-name> or docker logs CO
 #### Can I create index for a segment before inserting data into it?
 
 Yes, you can. But we recommend inserting data in batches, each of which should not exceed 256 MB, before indexing each segment.
+
+#### Can I share an etcd instance among multiple Milvus instances?
+
+Yes, you can share an etcd instance among multiple Milvus instances. To do so, you need to change `etcd.rootPath` to a separate value for each Milvus instance in the configuration files of each before starting them.
+
+#### Can I share a Pulsar instance among multiple Milvus instances?
+
+Yes, you can share a Pulsar instance among multiple Milvus instances. To do so, you can
+
+- If multi-tenancy is enabled on your Pulsar instance, consider allocating a separate tenant or namespace for each Milvus instance. To do so, you need to change `pulsar.tenant` or `pulsar.namespace` in the configuration files of your Milvus instances to a unique value for each before starting them.
+- If you do not plan on enabling multi-tenancy on your Pulsar instance, consider changing `msgChannel.chanNamePrefix.cluster` in the configuration files of your Milvus instances to a unique value for each before starting them.
+
+#### Can I share a MinIO instance among multiple Milvus instances?
+
+Yes, you can share a MinIO instance among multiple Milvus instances. To do so, you need to change `minio.rootPath` to a unique value for each Milvus instance in the configuration files of each before starting them.
 
 #### Still have questions?
 

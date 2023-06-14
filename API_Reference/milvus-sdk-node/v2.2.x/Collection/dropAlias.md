@@ -2,18 +2,6 @@
 
 Using this method, you can remove the alias associated with a specific collection.
 
-```javascript
-new milvusClient(MILUVS_ADDRESS).dropAlias(DropAliasReq);
-```
-
-### DropAliasReq
-
-| Parameters      | Description                                                                            | Type   |
-| --------------- | -------------------------------------------------------------------------------------- | ------ |
-| collection_name | Target collection name                                                                 | String |
-| Alias           | Alias name                                                                             | String |
-| timeout?        | This parameter is used to specify the length of time, in milliseconds, that the RPC (Remote Procedure Call) is allowed to run. If no value is provided, the default is undefined. | Number |
-
 ## Example
 
 ```javascript
@@ -31,3 +19,11 @@ new milvusClient(MILUVS_ADDRESS).dropAlias({
 // create collection returns
 { error_code: 'Success', reason: '' }
 ```
+
+### Parameters
+
+| Parameters      | Description                                                                                                                                                                       | Type   |
+| --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ |
+| collection_name | Target collection name                                                                                                                                                            | String |
+| Alias           | Alias name                                                                                                                                                                        | String |
+| timeout?        | This parameter is used to specify the length of time, in milliseconds, that the RPC (Remote Procedure Call) is allowed to run. If no value is provided, the default is undefined. | Number |

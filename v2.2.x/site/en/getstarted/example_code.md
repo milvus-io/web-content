@@ -17,17 +17,17 @@ Through running the example code we provided, you will have a primary understand
 
 ## Preparations
 
-- [Milvus 2.2.6](install_standalone-docker.md)
+- [Milvus 2.2.9](install_standalone-docker.md)
 - Python 3 (3.7.1 or later)
-- [PyMilvus 2.2.7](install-pymilvus.md)
+- [PyMilvus 2.2.x](install-pymilvus.md)
 
 
 ## Download example code
 
-[Download](https://raw.githubusercontent.com/milvus-io/pymilvus/v2.2.7/examples/hello_milvus.py) `hello_milvus.py` directly or with the following command.
+[Download](https://raw.githubusercontent.com/milvus-io/pymilvus/master/examples/hello_milvus.py) `hello_milvus.py` directly or with the following command.
 
 ```bash
-$ wget https://raw.githubusercontent.com/milvus-io/pymilvus/v2.2.7/examples/hello_milvus.py
+$ wget https://raw.githubusercontent.com/milvus-io/pymilvus/master/examples/hello_milvus.py
 ```
 
 
@@ -113,7 +113,7 @@ result = hello_milvus.search(vectors_to_search, "embeddings", search_params, lim
 - Deletes entities by their primary keys:
 
 ```Python
-expr = f"pk in [{ids[0]}, {ids[1]}]"
+expr = f"pk in [{entities[0]}, {entities[1]}]"
 hello_milvus.delete(expr)
 ```
 

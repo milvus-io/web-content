@@ -2,17 +2,6 @@
 
 This method returns replica information.
 
-```javascript
-new milvusClient(MILUVS_ADDRESS).getReplicas(GetReplicaReq);
-```
-
-### GetIndexStateReq
-
-| Parameters   | Description                                                                            | Type   |
-| ------------ | -------------------------------------------------------------------------------------- | ------ |
-| collectionID | Collection ID                                                                          | Number |
-| timeout?     | This parameter is used to specify the length of time, in milliseconds, that the RPC (Remote Procedure Call) is allowed to run. If no value is provided, the default is undefined. | Number |
-
 ## Example
 
 ```javascript
@@ -40,3 +29,10 @@ new milvusClient(MILUVS_ADDRESS).getReplicas({
   status: { error_code: 'Success', reason: '' }
 }
 ```
+
+### Parameters
+
+| Parameters   | Description                                                                                                                                                                       | Type   |
+| ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ |
+| collectionID | Collection ID                                                                                                                                                                     | Number |
+| timeout?     | This parameter is used to specify the length of time, in milliseconds, that the RPC (Remote Procedure Call) is allowed to run. If no value is provided, the default is undefined. | Number |

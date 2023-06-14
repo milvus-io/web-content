@@ -2,19 +2,6 @@
 
 This method drops a collection and all data within this specified collection.
 
-```javascript
-new milvusClient(MILUVS_ADDRESS).dropCollection(
-  DropCollectionReq
-);
-```
-
-### DropCollectionReq
-
-| Parameters      | Description                                                                            | Type   |
-| --------------- | -------------------------------------------------------------------------------------- | ------ |
-| collection_name | Name of the collection to drop                                                         | String |
-| timeout?        | This parameter is used to specify the length of time, in milliseconds, that the RPC (Remote Procedure Call) is allowed to run. If no value is provided, the default is undefined. | Number |
-
 ## Example
 
 ```javascript
@@ -31,3 +18,10 @@ new milvusClient(MILUVS_ADDRESS).dropCollection({
 // dropCollection returns
 { error_code: 'Success', reason: '' }
 ```
+
+### Parameters
+
+| Parameters      | Description                                                                                                                                                                       | Type   |
+| --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ |
+| collection_name | Name of the collection to drop                                                                                                                                                    | String |
+| timeout?        | This parameter is used to specify the length of time, in milliseconds, that the RPC (Remote Procedure Call) is allowed to run. If no value is provided, the default is undefined. | Number |

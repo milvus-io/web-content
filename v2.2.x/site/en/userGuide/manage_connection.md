@@ -40,7 +40,7 @@ from pymilvus import connections
 connections.connect(
   alias="default",
   user='username',
-  password='password'
+  password='password',
   host='localhost',
   port='19530'
 )
@@ -49,10 +49,10 @@ connections.connect(
 ```javascript
 import { MilvusClient } from "@zilliz/milvus2-sdk-node";
 const address = "localhost:19530";
-const user = "username";
+const username = "username";
 const password = "password";
 const ssl = false;
-const milvusClient = new MilvusClient(address, ssl, user, password, ssl);
+const milvusClient = new MilvusClient({address, ssl, username, password});
 ```
 
 ```go

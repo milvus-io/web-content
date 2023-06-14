@@ -45,10 +45,6 @@ Metadata are generated within Milvus. Each Milvus module has its own metadata th
 
 etcd stores Milvus module metadata; MinIO stores entities.
 
-#### Does Milvus' Python SDK have a connection pool?
-
-Python SDKs for Milvus v0.9.0 or higher have a connection pool. The number of connections in a connection pool has no upper limit.
-
 #### Does Milvus support inserting and searching data simultaneously?
 
 Yes. Insert operations and query operations are handled by two separate modules that are mutually independent. From the client’s perspective, an insert operation is complete when the inserted data enters the message queue. However, inserted data are unsearchable until they are loaded to the query node. If the segment size does not reach the index-building threshold (512 MB by default), Milvus resorts to brute-force search and query performance may be diminished.

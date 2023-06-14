@@ -13,6 +13,8 @@ This topic describes how to enable RBAC and manage [users and roles](users_and_r
 ## 1. Create a user
 
 ```
+from pymilvus import utility
+
 utility.create_user(user, password, using="default")
 ```
 
@@ -47,6 +49,8 @@ utility.list_users(include_role_info, using="default")
 The following example creates a role named `roleA`.
 
 ```
+from pymilvus import Role, utility
+
 role_name = "roleA"
 role = Role(role_name, using=_CONNECTION)
 role.create()
@@ -69,6 +73,8 @@ utility.list_roles(include_user_info, using="default")
 ## 3. Grant a privilege to a role
 
 The following example demonstrates how to grant the permission of searching all collections to the role named `roleA`. See [Users and Roles](users_and_roles.md) for other types of privileges you can grant.
+
+Before granting permission to the role to manipulate collections in other databases, use `db.using_database()` or directly connect to the desired database to change the default database to the desired one. For details, refer to [Manage Databases](manage_databases.md).
 
 ```
 role.grant("Collection", "*", "Search")

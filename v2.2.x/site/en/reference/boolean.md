@@ -7,7 +7,7 @@ summary: Learn about boolean expression rules in Milvus.
 
 ## Overview
 
-A predicate expression outputs a boolean value. Milvus conducts scalar filtering by searching with predicates. A predicate expression, when evaluated, returns either TRUE or FALSE. View [Python SDK API Reference](/api-reference/pymilvus/v2.2.7/Collection/query().md) for instruction on using predicate expressions.
+A predicate expression outputs a boolean value. Milvus conducts scalar filtering by searching with predicates. A predicate expression, when evaluated, returns either TRUE or FALSE. View [Python SDK API Reference](/api-reference/pymilvus/v2.2.x/Collection/query().md) for instruction on using predicate expressions.
 
 [EBNF](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form) grammar rules describe boolean expressions rules:
 
@@ -218,11 +218,29 @@ VARCHAR not in ["str1", "str2"]
 VARCHAR like "prefix%"
 ```
 
+8. Use dynamic fields in building expressions
+
+```python
+# Use the field name with a double-quoted or 
+# single-quoted key in a square brack 
+$meta["count"] <= 400
+
+# or just use the key to build expressions.
+count <= 400
+```
+
+<div class="alert note">
+
+You can use dynamic fields in building boolean expressions. For details, refer to [Dynamic Schema](dynamic_schema.md).
+
+</div>
+
 ## What's next
 
 Now that you know how bitsets work in Milvus, you might also want to:
 
 - Learn how to conduct a  [Hybrid Search](hybridsearch.md).
-- Learn how to  [use strings to filter](https://milvus.io/blog/2022-08-08-How-to-use-string-data-to-empower-your-similarity-search-applications.md) your search results.
+- Learn how to [use strings to filter](https://milvus.io/blog/2022-08-08-How-to-use-string-data-to-empower-your-similarity-search-applications.md) your search results.
+- Learn how to [use dynamic fields in building boolean expressions](dynamic_schema.md).
 
 

@@ -70,6 +70,8 @@ load -c book
 
 By specifying the boolean expression, you can filter the scalar field of the entities during the vector search. The following example limits the scale of search to the vectors within a specified `word_count` value range.
 
+You can also use dynamic fields in the filter expression and output fields in the search requests. For example, refer to [Dynamic Schema](dynamic_schema.md).
+
 <div class="multipleCode">
   <a href="#python">Python </a>
   <a href="#java">Java</a>
@@ -571,9 +573,9 @@ System.out.println(wrapperSearch.getFieldData("book_id", 0));
 
 - Explore API references for Milvus SDKs:
 
-  - [PyMilvus API reference](/api-reference/pymilvus/v2.2.7/About.md)
+  - [PyMilvus API reference](/api-reference/pymilvus/v2.2.x/About.md)
   - [Node.js API reference](/api-reference/node/v2.2.x/About.md)
-  - [Go API reference](/api-reference/go/v2.2.1/About.md)
-  - [Java API reference](/api-reference/java/v2.2.5/About.md)
+  - [Go API reference](/api-reference/go/v2.2.x/About.md)
+  - [Java API reference](/api-reference/java/v2.2.x/About.md)
 
 
