@@ -24,7 +24,7 @@ summary: Learn how to install and start CPU-only Milvus using Docker.
 | Component | Recommended configuration             |
 | ---------- | ------------------------------------- |
 | CPU        | Intel CPU Sandy Bridge or higher. |
-| CPU Instruction Set | <ul><li>SSE42</li><li>AVX</li><li>AVX2</li><li>AVX512</li></ul> |
+| CPU Instruction Set | <ul><li>SSE4.2</li><li>AVX</li><li>AVX2</li><li>AVX512</li></ul> |
 | RAM        | 8 GB or more (depends on the data volume) |
 | Hard Drive | SATA 3.0 SSD or higher                |
 
