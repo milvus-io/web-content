@@ -9,7 +9,7 @@ import { MilvusClient } from "@zilliz/milvus2-sdk-node";
 
 const milvusClient = new MilvusClient({
   address: "192.168.0.1:19530",
-  ssl: false,
+  ssl: false, // deprecated on `node sdk v2.2.12`+
   username: "optional",
   password: "optional",
 });
@@ -28,6 +28,17 @@ Now you can use all methods of the client, like `client.createCollection`, `clie
 | maxRetries?     | The number of retries for the grpc method, by default: 3                                                                 | Number  | 3                   |
 | retryDelay?     | The delay between attempts at retrying a failed grpc method in ms, by default: 30                                        | Number  | 30                  |
 | channelOptions? | an optional configuration object that can be passed to a gRPC client when creating a channel to connect to a gRPC server | Object  |                     |
+| tls?            | TLS configuration                                                                                                        | Object  |                     |
+
+### TLS config object
+
+| Parameters      | Description                                                                          | Type    | Example                   |
+| --------------- | ------------------------------------------------------------------------------------ | ------- | ------------------------- |
+| rootCertPath    | The file path to the root certificate used for TLS/SSL connection                    | String  | '/path/to/my/cert'        |
+| privateKeyPath? | The file path to the private key used for SSL connection                             | Boolean | '/path/to/my/private_key' |
+| certChainPath?  | The file path to the certificate chain used for TLS/SSL connection                   | String  | '/path/to/my/cert/chain'  |
+| verifyOptions?  | Options for certificate verification during TLS/SSL connection (e.g., 'verify_peer') | String  |                           |
+| serverName?     | The server name used for certificate verification during TLS/SSL connection          | String  |                           |
 
 ### channelOptions
 

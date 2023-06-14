@@ -6,11 +6,11 @@ With this method, you can create a new collection with a defined schema based on
 
 > The collection to create must contain a vector field, which can be `DataType.FloatVector` or `DataType.BinaryVector`, and set it's dimensions with the property `dim`.
 
-## Example
+## Example 1
 
-### After Milvus v2.2.9，new createCollection can be used, but still you can pass previous version's parameters.
+`node sdk v2.2.11+`
 
-When the collection is created, milvus will create and load the collection for you, so you can insert data and search directly.
+When the collection is created, the SDK will create and load the collection for you, so you can insert data and search directly.
 
 ```javascript
 import { MilvusClient, DataType } from "@zilliz/milvus2-sdk-node";
@@ -35,39 +35,45 @@ new milvusClient(MILUVS_ADDRESS).createCollection({
 | auto_id?            | enable auto id, default is fales                               | Bool                               |
 | index_params?       | create index params, same as parameters for method createIndex | Object                             |
 
-### Before Milvus v2.2.9
+## Example 2
+
+`node sdk v2.2.0+`
+
+You need to define schema first, then create the collection.
 
 ```javascript
 import { MilvusClient, DataType } from "@zilliz/milvus2-sdk-node";
 
+const schema: Field[] = [
+  {
+    name: "age",
+    description: "id field",
+    data_type: DataType.Int64,
+    autoID: true,
+    is_primary_key: true,
+  },
+  {
+    name: "vector_01",
+    description: "vector field",
+    data_type: DataType.FloatVector,
+    dim: 8,
+  },
+  {
+    name: "name",
+    description: "other field",
+    data_type: DataType.VarChar,
+    max_length: 256,
+  },
+  {
+    name: "meta",
+    description: "json field",
+    data_type: DataType.JSON,
+  },
+];
+
 new milvusClient(MILUVS_ADDRESS).createCollection({
   collection_name: "my_collection",
-  fields: [
-    {
-      name: "age",
-      description: "id field",
-      data_type: DataType.Int64,
-      autoID: true,
-      is_primary_key: true,
-    },
-    {
-      name: "vector_01",
-      description: "vector field",
-      data_type: DataType.FloatVector,
-      dim: 8,
-    },
-    {
-      name: "name",
-      description: "other field",
-      data_type: DataType.VarChar,
-      max_length: 256,
-    },
-    {
-      name: "meta",
-      description: "json field",
-      data_type: DataType.JSON,
-    },
-  ],
+  fields: schema,
   enable_dynamic_field: false,
 });
 ```
@@ -90,7 +96,7 @@ new milvusClient(MILUVS_ADDRESS).createCollection({
 | num_partitions? `milvus v2.2.9+` & `node sdk v2.2.12+`       | partitions limit, default: 64, max: 4096                                                                                                                                             | Field[]                     |
 | enable_dynamic_field? `milvus v2.2.9+` & `node sdk v2.2.12+` | enbale dynamic field                                                                                                                                                                 | String                      |
 
-### Field Object
+### Field
 
 | Parameters                                               | Description                                                                                                                      | Type                       |
 | -------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- | -------------------------- |
@@ -103,7 +109,7 @@ new milvusClient(MILUVS_ADDRESS).createCollection({
 | is_primary_key?                                          | Boolean value to indicate whether this field is used as the primary key                                                          | Bool                       |
 | is_partition_key? `milvus v2.2.9+` & `node sdk v2.2.12+` | Boolean value to indicate whether this field is used as the partition key enabled field, only support `Int64` or `VarChar` field | Bool                       |
 
-#### data_type property
+#### The `data_type` property
 
 You can either use enum or string, for example: `DataType.Int64` or `Int64` for the `data_type` property.
 
@@ -121,6 +127,6 @@ You can either use enum or string, for example: `DataType.Int64` or `Int64` for 
 | 100    | BinaryVector                            |
 | 101    | FloatVector                             |
 
-### consistency_level property
+### The `consistency_level` property
 
 The default value is `"Bounded"`, you can set the consistency level as : `"Session"` or `"Bounded"` or `"Eventually"` or `"Customized"`.
