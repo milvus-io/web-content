@@ -206,7 +206,7 @@ Under this section, you can configure data coord address, segment settings, comp
       <td>
         Switch value to control if to enable garbage collection to clear the discarded data in MinIO or S3 service.
       </td>
-      <td>false</td>
+      <td>true</td>
     </tr>
   </tbody>
 </table>
