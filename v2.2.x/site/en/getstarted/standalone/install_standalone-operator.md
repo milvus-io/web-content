@@ -261,7 +261,7 @@ Having installed Milvus, you can:
   - [Create a partition](create_partition.md)
   - [Insert data](insert_data.md)
   - [Conduct a vector search](search.md)
-- [Upgrade Milvus Using Helm Chart](upgrade.md)
+- [Upgrade Milvus Using Milvus Operator](upgrade_milvus_standalone-operator.md)
 - Explore [MilvusDM](migrate_overview.md), an open-source tool designed for importing and exporting data in Milvus.
 - [Monitor Milvus with Prometheus](monitor.md)
 

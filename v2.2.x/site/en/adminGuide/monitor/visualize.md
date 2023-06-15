@@ -47,4 +47,4 @@ Select the Milvus instance you want to monitor. Then you can see the Milvus comp
   - Adjust your [resource allocation](allocate.md)
   - [Scale out or scale in a Milvus cluster](scaleout.md)
 - If you are interested in upgrading the Milvus version,
-  - Read the [upgrading guide](upgrade.md)
+  - Read the [guide for upgrading Milvus cluster](upgrade_milvus_cluster-operator.md) and [that for upgrade Milvus standalone](upgrade_milvus_standalone-operator.md).

@@ -63,9 +63,15 @@ db.list_database()
 ['default']
 ```
 
-## Use the rbac with database
+## Use the RBAC with database
 
-In order to better understand the following example, here are some common code parts.
+RBAC also covers database operations and ensures forward compatibility. The word **database** in the Permission APIs (Grant / Revoke / List Grant) has the following meanings:
+
+- If neither a Milvus connection nor a Permission API call specifies a `db_name`, **database** refers to the default database.
+- If a Milvus connection specifies a `db_name`, but a Permission API call afterward does not, **database** refers to the database whose name was specified in the Milvus connection.
+- If a Permission API call is made upon a Milvus connection, with or without `db_name` specified, **database** refers to the database whose name was specified in the Permission API call.
+
+The following code snippet is shared among the listed blocks below.
 
 ```python
 from pymilvus import connections, Role
@@ -83,7 +89,7 @@ def connect_to_milvus(db_name="default"):
     connections.connect(host=_HOST, port=_PORT, db_name=db_name)
 ```
 
-1. Connect to milvus without db parameter, permission api has no db parameter, use default db
+- If neither a Milvus connection nor a Permission API call specifies a `db_name`, **database** refers to the default database.
 
 ```
 connect_to_milvus()
@@ -97,7 +103,7 @@ print(role.list_grant("Collection", "*"))
 role.revoke("Global", "*", _PRIVILEGE_INSERT)
 ```
 
-2. Connect to milvus with db parameters, permission api without db parameters, use the db value in the connection
+- If a Milvus connection specifies a `db_name`, but a Permission API call afterward does not, **database** refers to the database whose name was specified in the Milvus connection.
 
 ```python
 # NOTE: please make sure the 'foo' db has been created
@@ -110,7 +116,7 @@ print(role.list_grant("Collection", "*"))
 role.revoke("Global", "*", _PRIVILEGE_INSERT)
 ```
 
-3. Regardless of whether to connect milvus with db parameters or not, if there are db parameters in the permission api, use the db value in the api
+- If a Permission API call is made upon a Milvus connection, with or without `db_name` specified, **database** refers to the database whose name was specified in the Permission API call.
 
 ```python
 # NOTE: please make sure the 'foo' db has been created

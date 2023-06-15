@@ -185,4 +185,4 @@ collection, ins_res = Collection.construct_from_dataframe(
 
 - Learn how to prepare schema when [creating a collection](create_collection.md).
 - Read more about [dynamic schema](dynamic_schema.md).
-- Read more about partition-key in [Multi-tenancy](multi-tenancy.md).
+- Read more about partition-key in [Multi-tenancy](multi_tenancy.md).

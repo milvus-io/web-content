@@ -155,6 +155,6 @@ Having installed Milvus, you can:
   - [Insert data](insert_data.md)
   - [Conduct a vector search](search.md)
 
-- [Upgrade Milvus Using Helm Chart](upgrade.md).
+- [Upgrade Milvus Using Helm Chart](upgrade_milvus_standalone-helm.md).
 - Explore [MilvusDM](migrate_overview.md), an open-source tool designed for importing and exporting data in Milvus.
 - [Monitor Milvus with Prometheus](monitor.md).

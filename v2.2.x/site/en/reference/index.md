@@ -104,7 +104,7 @@ The following table classifies the indexes that Milvus supports:
     <td>Graph-based index</td>
     <td>
       <ul>
-        <li>High-speed query</li>
+        <li>Very high-speed query</li>
         <li>Requires a recall rate as high as possible</li>
         <li>Large memory resources</li>
       </ul>
@@ -116,6 +116,7 @@ The following table classifies the indexes that Milvus supports:
     <td>
       <ul>
         <li>Low-dimensional vectors</li>
+        <li>Will be deprecated in new versions due to its low recall rate.</li>
       </ul>
     </td>
   </tr>
@@ -128,7 +129,7 @@ The following table classifies the indexes that Milvus supports:
 
 For vector similarity search applications that require perfect accuracy and depend on relatively small (million-scale) datasets, the FLAT index is a good choice. FLAT does not compress vectors, and is the only index that can guarantee exact search results. Results from FLAT can also be used as a point of comparison for results produced by other indexes that have less than 100% recall.
 
-FLAT is accurate because it takes an exhaustive approach to search, which means for each query the target input is compared to every vector in a dataset. This makes FLAT the slowest index on our list, and poorly suited for querying massive vector data. There are no parameters for the FLAT index in Milvus, and using it does not require data training or additional storage.
+FLAT is accurate because it takes an exhaustive approach to search, which means for each query the target input is compared to every vector in a dataset. This makes FLAT the slowest index on our list, and poorly suited for querying massive vector data. There are no parameters required for the FLAT index in Milvus, and using it does not need data training.
 
 - Search parameters
 
@@ -156,14 +157,14 @@ IVF_FLAT is the most basic IVF index, and the encoded data stored in each unit i
 
   | Parameter | Description              | Range                                           |
   | --------- | ------------------------ | ----------------------------------------------- |
-  | `nprobe`  | Number of units to query | CPU: [1, nlist] <br> GPU: [1, min(2048, nlist)] |
+  | `nprobe`  | Number of units to query | CPU: [1, nlist] |
 
 ### IVF_SQ8
 
 
 IVF_FLAT does not perform any compression, so the index files it produces are roughly the same size as the original, raw non-indexed vector data. For example, if the original 1B SIFT dataset is 476 GB, its IVF_FLAT index files will be slightly smaller (~470 GB). Loading all the index files into memory will consume 470 GB of storage.
 
-When disk, CPU, or GPU memory resources are limited, IVF_SQ8 is a better option than IVF_FLAT. This index type can convert each FLOAT (4 bytes) to UINT8 (1 byte) by performing scalar quantization. This reduces disk, CPU, and GPU memory consumption by 70–75%. For the 1B SIFT dataset, the IVF_SQ8 index files require just 140 GB of storage.
+When disk, CPU, or GPU memory resources are limited, IVF_SQ8 is a better option than IVF_FLAT. This index type can convert each FLOAT (4 bytes) to UINT8 (1 byte) by performing Scalar Quantization (SQ). This reduces disk, CPU, and GPU memory consumption by 70–75%. For the 1B SIFT dataset, the IVF_SQ8 index files require just 140 GB of storage.
 
 
  - Index building parameters
@@ -177,7 +178,7 @@ When disk, CPU, or GPU memory resources are limited, IVF_SQ8 is a better option 
 
   | Parameter | Description              | Range                                           |
   | --------- | ------------------------ | ----------------------------------------------- |
-  | `nprobe`  | Number of units to query | CPU: [1, nlist] <br> GPU: [1, min(2048, nlist)] |
+  | `nprobe`  | Number of units to query | CPU: [1, nlist]  |
 
 ### IVF_PQ
 
@@ -195,7 +196,7 @@ Index building parameters and search parameters vary with Milvus distribution. S
   | Parameter | Description                               | Range               |
   | --------- | ----------------------------------------- | ------------------- |
   | `nlist`   | Number of cluster units                   | [1, 65536]          |
-  | `m`       | Number of factors of product quantization | `dim` ≡ 0 (mod `m`) |
+  | `m`       | Number of factors of product quantization | `dim mod m == 0` |
   | `nbits`   | [Optional] Number of bits in which each low-dimensional vector is stored. | [1, 16] (8 by default) |
 
 - Search parameters
@@ -295,7 +296,7 @@ This index is exactly the same as FLAT except that this can only be used for bin
 
 For vector similarity search applications that require perfect accuracy and depend on relatively small (million-scale) datasets, the BIN_FLAT index is a good choice. BIN_FLAT does not compress vectors, and is the only index that can guarantee exact search results. Results from BIN_FLAT can also be used as a point of comparison for results produced by other indexes that have less than 100% recall.
 
-BIN_FLAT is accurate because it takes an exhaustive approach to search, which means for each query the target input is compared to every vector in a dataset. This makes BIN_FLAT the slowest index on our list, and poorly suited for querying massive vector data. There are no parameters for the BIN_FLAT index in Milvus, and using it does not require data training or additional storage.
+BIN_FLAT is accurate because it takes an exhaustive approach to search, which means for each query the target input is compared to vectors in a dataset. This makes BIN_FLAT the slowest index on our list, and poorly suited for querying massive vector data. There are no parameters for the BIN_FLAT index in Milvus, and using it does not require data training or additional storage.
 
 - Search parameters
 
@@ -325,7 +326,7 @@ BIN_IVF_FLAT is the most basic BIN_IVF index, and the encoded data stored in eac
 
   | Parameter | Description              | Range                                           |
   | --------- | ------------------------ | ----------------------------------------------- |
-  | `nprobe`  | Number of units to query | CPU: [1, nlist] <br> GPU: [1, min(2048, nlist)] |
+  | `nprobe`  | Number of units to query | CPU: [1, nlist]  |
 
 
 </div>

@@ -17,7 +17,7 @@ Looking for more advanced guides and instructions on Milvus DevOps? Check out th
 
 - [Scale a Milvus Cluster](scaleout.md):  Flexibly increase or decrease the number of worker nodes of each type according to your own need.
 
-- [Upgrade](upgrade.md): Upgrade Milvus to the latest version with Helm Chart.
+- [Upgrade](upgrade_milvus_cluster-helm.md): Upgrade Milvus to the latest version with Helm Chart.
 
 - [Monitor and Alert](monitor_and_alert.md): Use Prometheus to monitor metrics and Grafana to visualize metrics and create alerts.
 

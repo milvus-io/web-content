@@ -476,7 +476,7 @@ Having installed Milvus, you can:
   - [Create a partition](create_partition.md)
   - [Insert data](insert_data.md)
   - [Conduct a vector search](search.md)
-- [Upgrade Milvus Using Helm Chart](upgrade.md)
+- [Upgrade Milvus Using Milvus Operator](upgrade_milvus_cluster-operator.md)
 - [Scale your Milvus cluster](scaleout.md)
 - Deploy your Milvu cluster on clouds:
   - [Amazon EC2](aws.md)

@@ -60,9 +60,11 @@ The following table lists the values you can choose when [enabling RBAC](rbac.md
 | Global      | ListResourceGroups    | ListResourceGroups                                |
 | Global      | TransferNode          | TransferNode                                      |
 | Global      | TransferReplica       | TransferReplica                                   |
+| Global      | RenameCollection      | RenameCollection                                  |
+| Global      | CreateDatabase        | CreateDatabase                                    |
+| Global      | ListDatabases         | ListDatabases                                     |
 | User        | UpdateUser            | UpdateCredential                                  |
 | User        | SelectUser            | SelectUser                                        |
-
 
 <div class="alert note">
 <li>Object and privilege names are case-sensitive.</li>

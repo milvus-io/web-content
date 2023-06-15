@@ -397,7 +397,6 @@ results[0].ids
 results[0].distances
 
 # get the value of an output field specified in the search request.
-# vector fields are not supported yet.
 hit = results[0][0]
 hit.entity.get('title')
 ```

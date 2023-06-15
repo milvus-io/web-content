@@ -81,4 +81,4 @@ my-release-milvus              54s
 - If you are looking for information about how to scale a Milvus cluster:
   - Learn [scale a Milvus cluster](scaleout.md)
 - If you are interested in upgrading the Milvus version,
-  - Read the [upgrading guide](upgrade.md)
+  - Read the [guide for upgrading Milvus cluster](upgrade_milvus_cluster-operator.md) and [that for upgrade Milvus standalone](upgrade_milvus_standalone-operator.md).

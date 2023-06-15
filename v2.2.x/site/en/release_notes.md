@@ -6,6 +6,49 @@ summary: Milvus Release Notes
 
 Find out what’s new in Milvus! This page summarizes information about new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.2.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## 2.2.10
+
+Release date: 14 June, 2023
+
+| Milvus version | Python SDK version | Java SDK version | Go SDK version | Node.js SDK version |
+| -------------- | ------------------ | ---------------- | -------------- | ------------------- |
+| 2.2.10         | 2.2.11             | 2.2.6            | 2.2.4          | 2.2.17              |
+
+
+We are excited to announce the release of Milvus 2.2.10! This update includes important bug fixes, specifically addressing occasional system crashes, ensuring a more stable experience. We have also made significant improvements to loading and indexing speeds, resulting in smoother operations. A significant optimization in this release is the reduction of memory usage in data nodes, made possible through the integration of the Go payload writer instead of the old CGO implementation. Furthermore, we have expanded our Role-Based Access Control (RBAC) capabilities, extending these protections to the database and 'Flush All' API. Enjoy the enhanced security and performance of Milvus 2.2.10!
+
+### New Features
+
+- Added role-based access control (RBAC) for the new interface:
+    1. Added RBAC for FlushAll ([#24751](https://github.com/milvus-io/milvus/pull/24751)) ([#24755](https://github.com/milvus-io/milvus/pull/24755))
+    2. Added RBAC for Database API ([#24653](https://github.com/milvus-io/milvus/pull/24653))
+
+### Bug Fixes
+
+- Fixed random crash introduced by AWS S3 SDK:
+    1. Used SA_ONSTACK flag for SIGPIPE handler ([#24661](https://github.com/milvus-io/milvus/pull/24661))
+    2. Added sa_mask for SIGPIPE handler ([#24824](https://github.com/milvus-io/milvus/pull/24824))
+- Fixed "show loaded collections" ([#24628](https://github.com/milvus-io/milvus/pull/24628)) ([#24629](https://github.com/milvus-io/milvus/pull/24629))
+- Fixed creating a collection not being idempotent ([#24721](https://github.com/milvus-io/milvus/pull/24721)) ([#24722](https://github.com/milvus-io/milvus/pull/24722))
+- Fixed DB name being empty in the "describe collection" response ([#24603](https://github.com/milvus-io/milvus/pull/24603))
+- Fixed deleted data still being visible ([#24796](https://github.com/milvus-io/milvus/pull/24796))
+
+### Enhancements
+
+- Replaced GCO payload writer with Go payload writer to reduce memory usage ([#24656](https://github.com/milvus-io/milvus/pull/24656))
+- Enabled max result window limit ([#24768](https://github.com/milvus-io/milvus/pull/24768))
+- Removed unused iterator initialization ([#24758](https://github.com/milvus-io/milvus/pull/24758))
+- Enabled metric type checks before search ([#24652](https://github.com/milvus-io/milvus/pull/24652)) ([#24716](https://github.com/milvus-io/milvus/pull/24716))
+- Used go-api/v2 for milvus-proto ([#24723](https://github.com/milvus-io/milvus/pull/24723))
+- Optimized the penalty mechanism for exceeding rate limits ([#24624](https://github.com/milvus-io/milvus/pull/24624))
+- Allowed default params in HNSW & DISKANN ([#24807](https://github.com/milvus-io/milvus/pull/24807))
+- Security -
+  - [2.2] Bumped [github.com/gin-gonic/gin](http://github.com/gin-gonic/gin) from 1.9.0 to 1.9.1 ([#24830](https://github.com/milvus-io/milvus/pull/24830))
+
+## Performance
+
+- Fixed build index performance downgrade ([#24651](https://github.com/milvus-io/milvus/pull/24651))
+
 ## 2.2.9
 
 Release date: 2 June, 2023

@@ -16,7 +16,7 @@ To speed up [attribute filtering](boolean.md) in [hybrid searches](hybridsearch.
 
 ## Build index
 
-To build an index on scalar fields, you do not need to set any index parameters. The default value of a scalar field index name is **_default_idx_**. You can set it to another value that seems fit.
+To build an index on scalar fields, you do not need to set any index parameters. The default value of a scalar field index name is **_default_idx_** followed by the name of the indexed field. You can set it to another value that seems fit.
 
 The following code snippet assumes that a collection named `book` already exists and an index is to be created on the string field `book_name`.
 
