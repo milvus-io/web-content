@@ -57,6 +57,8 @@ Methods of `DescCollResponseWrapper`:
 | `getAliases()`                     | Gets the alias of the collection.                            | N/A                     | List<String>    |
 | `getFields()`                      | Gets all field schemas in the collection.                    | N/A                     | List<[FieldType](createCollection().md#FieldType)> |
 | `getFieldByName(String fieldName)` | Gets a field schema by its field name.                       | fieldName: a field name | FieldType       |
+| `isDynamicFieldEnabled()` | Get whether dynamic fields are allowed in the collection.  | N/A | boolean |
+| `getPartitionKeyField()` | Get the field on which partition key is enabled. | N/A | FieldType |
 
 ## Example
 

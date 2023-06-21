@@ -77,6 +77,8 @@ Methods of `SearchResultsWrapper.IDScore`:
 | `getLongID() ` | Gets the integer ID if the primary key type is Int64.  | long        |
 | `getStrID()`   | Gets the string ID if the primary key type is VarChar. | String      |
 | `getScore()`   | Gets the distance value.                               | float       |
+| `get(String keyName)` | Get the value of a field by its name. If the field exists either as a pre-defined field or a dynamic field, its value is to return.<br>If the field does not exist, a `ParamException` is raised. | Object  |
+
 
 Whether `getScore()` is an accurate distance or not depands on the index type:
 - FLAT
@@ -120,9 +122,8 @@ SearchResultsWrapper wrapper = new SearchResultsWrapper(response.getData().getRe
 System.out.println("Search results:");
 for (int i = 0; i < targetVectors.size(); ++i) {
     List<SearchResultsWrapper.IDScore> scores = results.getIDScore(i);
-    for (int j = 0; j < scores.size(); ++j) {
-        SearchResultsWrapper.IDScore score = scores.get(j);
-        System.out.println("Top " + j + " ID:" + score.getLongID() + " Distance:" + score.getScore());
+    for (SearchResultsWrapper.IDScore score:scores) {
+        System.out.println(score);
     }
 }
 ```
