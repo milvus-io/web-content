@@ -112,6 +112,13 @@ $ kubectl port-forward service/my-release-milvus 27017:19530
 Forwarding from 127.0.0.1:27017 -> 19530
 ```
 
+By default, ports forward by kubectl only listen on localhost. Use flag `address` if you want Milvus server to listen on selected IP or all addresses.
+
+```bash
+$ kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27017:19530
+Forwarding from 0.0.0.0:27017 -> 19530
+```
+
 ## Uninstall Milvus
 
 Run the following command to uninstall Milvus.

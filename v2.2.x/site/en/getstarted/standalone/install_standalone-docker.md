@@ -61,6 +61,16 @@ milvus-minio        /usr/bin/docker-entrypoint ...   Up (healthy)   9000/tcp
 milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:19530->19530/tcp, 0.0.0.0:9091->9091/tcp
 ```
 
+## Connect to Milvus
+
+Verify which local port the Milvus server is listening on. Replace the container name with your own.
+
+```bash
+$ docker port milvus-standalone 19530/tcp
+```
+
+You can connect to Milvus cluster using the local IP address and port number returned by this command.
+
 ## Stop Milvus
 
 To stop Milvus standalone, run:

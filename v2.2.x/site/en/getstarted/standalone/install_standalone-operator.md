@@ -146,7 +146,7 @@ There are two ways to install Milvus Operator on K8s:
 helm install milvus-operator \
   -n milvus-operator --create-namespace \
   --wait --wait-for-jobs \
-  https://github.com/milvus-io/milvus-operator/releases/download/v0.7.13/milvus-operator-0.7.13.tgz
+  https://github.com/milvus-io/milvus-operator/releases/download/v0.7.14/milvus-operator-0.7.14.tgz
 ```
 
 If Milvus Operator is installed, you can see the following output.
@@ -223,6 +223,30 @@ $ kubectl get milvus my-release -o yaml
 
 When the Milvus is successfully installed, you can learn how to [Connect to Milvus server](manage_connection.md).
 
+## Connect to Milvus
+
+Verify which local port the Milvus server is listening on. Replace the pod name with your own.
+
+```bash
+$ kubectl get pod my-release-milvus-proxy-84f67cdb7f-pg6wf --template
+='{{(index (index .spec.containers 0).ports 0).containerPort}}{{"\n"}}'
+19530
+```
+
+Open a new terminal and run the following command to forward a local port to the port that Milvus uses. Optionally, omit the designated port and use `:19530` to let `kubectl` allocate a local port for you so that you don't have to manage port conflicts.
+
+```bash
+$ kubectl port-forward service/my-release-milvus 27017:19530
+Forwarding from 127.0.0.1:27017 -> 19530
+```
+
+By default, kubectl's port-forwarding only listens on localhost. Use flag `address` if you want Milvus server to listen on selected IP or all addresses.
+
+```bash
+$ kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27017:19530
+Forwarding from 0.0.0.0:27017 -> 19530
+```
+
 ## Uninstall Milvus standalone
 
 Run the following command to uninstall Milvus.
@@ -244,7 +268,7 @@ $ helm -n milvus-operator uninstall milvus-operator
 ### Uninstall Milvus Operator by `kubectl` command
 
 ```
-$ kubectl delete -f https://raw.githubusercontent.com/milvus-io/milvus-operator/v0.7.13/deploy/manifests/deployment.yaml
+$ kubectl delete -f https://raw.githubusercontent.com/milvus-io/milvus-operator/v0.7.14/deploy/manifests/deployment.yaml
 ```
 
 ## Delete the K8s cluster

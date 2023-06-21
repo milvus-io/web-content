@@ -77,6 +77,16 @@ milvus-querynode    /tini -- milvus run querynode    Up
 milvus-rootcoord    /tini -- milvus run rootcoord    Up
 ```
 
+## Connect to Milvus
+
+Verify which local port the Milvus server is listening on. Replace the container name with your own.
+
+```bash
+$ docker port milvus-proxy 19530/tcp
+```
+
+You can connect to Milvus cluster using the local IP address and port number returned by this command.
+
 ## Stop Milvus
 
 To stop Milvus cluster, run:
