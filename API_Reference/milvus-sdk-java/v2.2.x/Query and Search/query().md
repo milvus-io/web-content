@@ -64,6 +64,9 @@ Methods of `QueryResultsWrapper`:
 | Method                          | Description                                              | Parameters                                               | Returns      |
 | ----------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ---------------- |
 | `getFieldWrapper(String fieldName)` | Returns a `FieldDataWrapper` object by a field name. `ParamException` is thrown if the field does not exist. | `fieldName`: a field name which is specified by the `withOutFields()` of `QueryParam`. | FieldDataWrapper |
+| `getRowCount()` | Gets the row count of a query results. | N/A | long |
+| `getRowRecord(long index)` | Gets a row record from query result. Throws a `ParamException` if the specified index does not exist. | `Index`: index of the row to return. | `QueryResultsWrapper.RowRecord` |
+| `getRowRecords()` | Gets a list of row records from the query results | N/A | `List<RowRecord>` |
 
 ## FieldDataWrapper
 
@@ -77,6 +80,12 @@ Methods of `FieldDataWrapper`:
 | `getDim()`        | Gets the dimension value if the field is a vector field. `IllegalResponseException` is thrown if the field is not a vector field. | int                                                          |
 | `getRowCount()`   | Gets the row count of a field. `IllegalResponseException` is thrown if the field data is illegal. | long                                                         |
 | `getFieldData()`  | Returns the field data according to field type.              | <li>Returns `List<List<Float>>` for float vector field.</li> <li>Returns `List<ByteBuffer>` for binary vector field.</li> <li>Returns `List<Long>` for int64 field.</li> <li>Returns `List<Integer>` for int32/int16/int8 field.</li> <li>Returns `List<Boolean>` for boolean field.</li> <li>Returns `List<Float>` for float field.</li> <li>Returns `List<Double>` for double field.</li><li>Returns `List<String>` for VARCHAR field.</li> |
+
+## QueryResultsWrapper.RowRecord
+
+| Method                | Description                                                                                                                                                                                       | Returns |
+|-----------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|
+| `get(String keyName)` | Get the value of a field by its name. If the field exists either as a pre-defined field or a dynamic field, its value is to return.<br>If the field does not exist, a `ParamException` is raised. | Object  |
 
 ## Example
 
@@ -98,7 +107,8 @@ if (response.getStatus() != R.Status.Success.getCode()) {
 }
 
 QueryResultsWrapper wrapper = new QueryResultsWrapper(response.getData());
-FieldDataWrapper fieldData = queryResultsWrapper.getFieldWrapper("field1");
-System.out.println("Field " + fieldName + " row count: " + fieldData.getRowCount());
-System.out.println(fieldData.getFieldData());
+List<QueryResultsWrapper.RowRecord> records = wrapper.getRowRecords();
+for (QueryResultsWrapper.RowRecord record:records) {
+    System.out.println(record);
+}
 ```
