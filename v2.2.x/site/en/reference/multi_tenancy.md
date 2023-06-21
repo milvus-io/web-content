@@ -59,4 +59,4 @@ To recap, you can use either or some of the multi-tenancy strategies above to fo
 ## What's next
 
 [Manage Databases](manage_databases.md)
-[Manage partition keys](create_collection.md#Manage-partition-keys)
+[Schema](schema.md)

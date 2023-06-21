@@ -145,9 +145,11 @@ from pymilvus import FieldSchema, CollectionSchema
 id_field = FieldSchema(name="id", dtype=DataType.INT64, is_primary=True, description="primary id")
 age_field = FieldSchema(name="age", dtype=DataType.INT64, description="age")
 embedding_field = FieldSchema(name="embedding", dtype=DataType.FLOAT_VECTOR, dim=128, description="vector")
+
+# Enable partition key on a field if you need to implement multi-tenancy based on the partition-key field
 position_field = FieldSchema(name="position", dtype=DataType.VARCHAR, max_length=256, is_partition_key=True)
 
-# Enable dynamic field in the collection schema
+# Set enable_dynamic_field to True if you need to use dynamic fields. 
 schema = CollectionSchema(fields=[id_field, age_field, embedding_field], auto_id=False, enable_dynamic_field=True, description="desc of a collection")
 ```
 
@@ -159,8 +161,13 @@ collection_name1 = "tutorial_1"
 collection1 = Collection(name=collection_name1, schema=schema, using='default', shards_num=2)
 ```
 <div class="alert note">
-  You can define the shard number with <code>shards_num</code> and in which Milvus server you wish to create a collection by specifying the alias in <code>using</code>.
-  </div>
+
+  - You can define the shard number with <code>shards_num</code>.
+  - You can define the Milvus server on which you wish to create a collection by specifying the alias in <code>using</code>.
+  - You can enable the partition key feature on a field by setting <code>is_partition_key</code> to <code>True</code> on the field if you need to implement [partition-key-based multi-tenancy](multi_tenancy.md).
+  - You can enable dynamic schema by setting <code>enable_dynamic_field</code> to <code>True</code> in the collection schema if you need to [use dynamic fields](dynamic_schema.md).
+
+</div>
   
 <br/>
 You can also create a collection with <code>Collection.construct_from_dataframe</code>, which automatically generates a collection schema from DataFrame and creates a collection.
@@ -168,17 +175,18 @@ You can also create a collection with <code>Collection.construct_from_dataframe<
 ```python
 import pandas as pd
 df = pd.DataFrame({
-        "id": [i for i in range(nb)],
-        "age": [random.randint(20, 40) for i in range(nb)],
-        "embedding": [[random.random() for _ in range(dim)] for _ in range(nb)],
-		"position": "test_pos"
-    })
+    "id": [i for i in range(nb)],
+    "age": [random.randint(20, 40) for i in range(nb)],
+    "embedding": [[random.random() for _ in range(dim)] for _ in range(nb)],
+    "position": "test_pos"
+})
+
 collection, ins_res = Collection.construct_from_dataframe(
-                                'my_collection',
-                                df,
-                                primary_field='id',
-                                auto_id=False
-                                )
+    'my_collection',
+    df,
+    primary_field='id',
+    auto_id=False
+    )
 ```
 
 ## What's next

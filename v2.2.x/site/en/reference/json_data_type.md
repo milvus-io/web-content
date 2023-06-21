@@ -125,21 +125,21 @@ When working with JSON fields, you can enclose a string value with either double
 
 To build filter expressions using a JSON field, you can utilize the keys within the field. If a key's value is an integer or a float, you can compare it with another integer or float key or an INT32/64 or FLOAT32/64 field. If a key's value is a string, you can compare it only with another string key or a VARCHAR field.
 
-The following table assumes that the value of a JSON field has a key named A. Use it as a reference when constructing boolean expressions using JSON field keys.
+The following table assumes that the value of a JSON field named `json_field` has a key named `A`. Use it as a reference when constructing boolean expressions using JSON field keys.
 
-| Operator     | Examples                                    | Remarks                                                                                                |
-| ------------ | ------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
-| **<**        |  "A < 3"                                    | A should exist.                                                                                        |
-| **>**        |  "A > 1"                                    | A should exist.                                                                                        |
-| **==**       |  "A == 1"  or "A == 'abc'"                  | A should exist.                                                                                        |
-| **!=**       |  "A != 1" or "A != 'abc'"                   | A can be not existing.                                                                                 |
-| **<=**       |  "A <= 5"                                   | A should exist.                                                                                        |
-| **>=**       |  "A >= 1"                                   | A should exist.                                                                                        |
-| **not**      |  "not A == 1" or "not A != 'abc'"           | A can be not existing.                                                                                 |
-| **in**       |  "A in [1, 2, 3]" or "A in ['a', 'b', 'c']" | A should exist.                                                                                        |
-| **add (&&)** | "A > 1 && A < 3"                            | Whether A should exists depends on the requirements of the expressions at either side of the operator. |
-| **or (||)**  | "A > 1 || A < 3"                            | Whether A should exists depends on the requirements of the expressions at either side of the operator. |
-| **exist**    | "exist A"                                   | A should exist.                                                                                        |
+| Operator | Examples                         | Remarks                                                                                                                                                                                                                                                                                                   |
+|----------|----------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **<**    | `'json_field["A"] < 3'`          | This expression evaluates to true if the value of `json_field["A"]` is less than 3.                                                                                                                                                                                                                       |
+| **>**    | `'json_field["A"] > 1'`          | This expression evaluates to true if the value of `json_field["A"]` is greater than 1.                                                                                                                                                                                                                    |
+| **==**   | `'json_field["A"] == 1'`         | This expression evaluates to true if the value of `json_field["A"]` is equal to `1`.                                                                                                                                                                                                                      |
+| **!=**   | `'json_field["A"][0]' != "abc"'` | This expression evaluates to true if <ul><li>`json_field` does not have a key named `A`.</li><li>`json_field` has a key named `A` but `json_field["A"]` is not an array.</li><li>`json_field["A"]` is an empty array.</li><li>`json_field["A"]` is an array but the first element is not `abc`.</li></ul> |
+| **<=**   | `'json_field["A"] <= 5'`         | This expression evaluates to true if the value of `json_field["A"]` is less than or equal to `5`.                                                                                                                                                                                                         |
+| **>=**   | `'json_field["A"] >= 1'`         | This expression evaluates to true if the value of `json_field["A"]` is greater than or equal to `1`.                                                                                                                                                                                                      |
+| **not**       | `'not json_field["A"] == 1'`.                                                                                 | This expression evaluates to true if <ul><li>`json_field` does not have a key named `A`.</li><li>`json_field["A"]` is not equal to `1`.</li></ul>
+| **in**        | `'json_field["A"] in [1, 2, 3]'`  | This expression evaluates to true if the value of `json_field["A"]` is `1`, `2`, or `3`.                                                                                        |
+| **add (&&)**  | `'json_field["A"] > 1 && json_field["A"] < 3'`                           | This expression evaluates to true if the value of `json_field["A"]` is greater than `1` and less than `3`. |
+| **or (\|\|)** | `'json_field["A"] > 1 \|\| json_field["A"] < 3'`                         | This expression evaluates to true if the value of `json_field["A"]` is greater than `1` or less than `3`. |
+| **exist**     | `'exist json_field["A"]'`                                  | This expression evaluates to true if `json_field` does not have a key named `A`.                                                                                        |
 
 ## What's next
 
