@@ -45,7 +45,7 @@ We are excited to announce the release of Milvus 2.2.10! This update includes im
 - Security -
   - [2.2] Bumped [github.com/gin-gonic/gin](http://github.com/gin-gonic/gin) from 1.9.0 to 1.9.1 ([#24830](https://github.com/milvus-io/milvus/pull/24830))
 
-## Performance
+### Performance
 
 - Fixed build index performance downgrade ([#24651](https://github.com/milvus-io/milvus/pull/24651))
 
