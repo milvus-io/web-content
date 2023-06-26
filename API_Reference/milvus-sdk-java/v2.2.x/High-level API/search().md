@@ -41,6 +41,7 @@ This method catches all the exceptions and returns an `R<SearchResponse>` object
 
 ## Example
 
+```
 import io.milvus.param.*;
 import io.milvus.response.SearchResultsWrapper;
 import io.milvus.grpc.SearchResults;
@@ -61,3 +62,4 @@ if (response.getStatus() != R.Status.Success.getCode()) {
 for (QueryResultsWrapper.RowRecord rowRecord : response.getData().getRowRecords()) {
     System.out.println(rowRecord);
 }
+```
