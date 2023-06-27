@@ -108,7 +108,7 @@ See [Wikipedia](https://en.wikipedia.org/wiki/Unit_vector) for more information.
 For normalized vectors, Euclidean distance (L2) is mathematically equivalent to inner product (IP). If these similarity metrics return different results, check to see if your vectors are normalized
 
 #### Is there a limit to the total number of collections and partitions in Milvus?
-There is no limit on the number of collections. However, the number of partitions in each collection must not exceed the value set by the parameter `master.maxPartitionNum`.
+You can create a maximum of 65536 collections. The number of partitions in each collection must not exceed the value set by the parameter `master.maxPartitionNum`.
 
 #### Why do I get fewer than k vectors when searching for `topk` vectors?
 

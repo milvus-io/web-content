@@ -200,7 +200,7 @@ Output:
 	</tr>
 	<tr>
 		<td><code>offset</code></td>
-		<td>An offset in this dictionary. The sum of the offset value and the value in <code>limit</code> should be less than 65535. </td>
+		<td>An offset in this dictionary. The sum of the offset value and the value in <code>limit</code> should be less than 16384. </td>
 	</tr>
 	<tr>
 		<td><code>ignore_growing</code></td>
