@@ -6,6 +6,46 @@ summary: Milvus Release Notes
 
 Find out what’s new in Milvus! This page summarizes information about new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.2.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## 2.2.11
+
+Release date: 21 June, 2023
+
+| Milvus version | Python SDK version | Java SDK version | Go SDK version | Node.js SDK version |
+| -------------- | ------------------ | ---------------- | -------------- | ------------------- |
+| 2.2.11         | 2.2.13             | 2.2.7            | 2.2.5          | 2.2.18              |
+
+We're happy to share that Milvus 2.2.11 is now available! This update includes significant bug fixes, addressing occasional system crashes and ensuring a more stable experience. We've also implemented various optimizations related to monitoring, logging, rate limiting, and interception of cross-cluster requests.
+
+### Bugfix
+
+- Fixed occasionally QueryNode panic during load ([#24902](https://github.com/milvus-io/milvus/pull/24902))
+- Fixed panic in the session module caused by uninitialized atomic variable ([#25005](https://github.com/milvus-io/milvus/pull/25005))
+- Rectified the issue of read request throttling caused by miscalculation of queue length twice. ([#24440](https://github.com/milvus-io/milvus/pull/24440))
+- Fixed Flush hang after SyncSegments timeout. ([#24692](https://github.com/milvus-io/milvus/pull/24692))
+- Fixed miss loading the same name collection during the recovery stage. ([#24941](https://github.com/milvus-io/milvus/pull/24941))
+- Added a format check for Authorization Tokens. ([#25033](https://github.com/milvus-io/milvus/pull/25033))
+- Fixed the issue of RemoteChunkManager not being thread-safe. ([#25069](https://github.com/milvus-io/milvus/pull/25069))
+- Optimized the internal component of GPRC state handling by allowing retry based on different error types. ([#25042](https://github.com/milvus-io/milvus/pull/25042))
+- Rectified the problem of erroneously excessive logging of error messages related to the stats log. ([#25094](https://github.com/milvus-io/milvus/pull/25094))
+- Fixed compaction stuck due to channel rebalance. ([#25098](https://github.com/milvus-io/milvus/pull/25098))
+- Fixed the issue of coroutines staying blocked after the consumer is closed. ([#25123](https://github.com/milvus-io/milvus/pull/25123))
+- Avoided indefinite blocking of keepAliveOnce by a timeout parameter. ([#25111](https://github.com/milvus-io/milvus/pull/25111))
+
+### Enhancement
+
+- Optimize the panic code logic of key components. ([#24859](https://github.com/milvus-io/milvus/pull/24859))
+- Bump semver to development v2.2.11. ([#24938](https://github.com/milvus-io/milvus/pull/24938)) ([#25075](https://github.com/milvus-io/milvus/pull/25075))
+- Add cluster validation interceptor to prevent the Cross-Cluster routing issue. ([#25030](https://github.com/milvus-io/milvus/pull/25030))
+- Add some compaction logs for better issue tracking. ([#24975](https://github.com/milvus-io/milvus/pull/24975))
+- Add log for confirming gc finished in RootCoord. ([#24946](https://github.com/milvus-io/milvus/pull/24946))
+- Prioritize checking the upper limit of Collection numbers in the DataBase. ([#24951](https://github.com/milvus-io/milvus/pull/24951))
+- Upgrade the dependent milvus-proto/go-api to version 2.2.10. ([#24885](https://github.com/milvus-io/milvus/pull/24885))
+- Close kafka internal consumer properly. ([#24997](https://github.com/milvus-io/milvus/pull/24997)) ([#25049](https://github.com/milvus-io/milvus/pull/25049)) ([#25071](https://github.com/milvus-io/milvus/pull/25071))
+- Restrict the concurrency of sync tasks for each flowgraph in DataNode. ([#25035](https://github.com/milvus-io/milvus/pull/25035))
+- Updated Minio version. ([#24897](https://github.com/milvus-io/milvus/pull/24897))
+- Add error code to minio chunkmanager exception. ([#25181](https://github.com/milvus-io/milvus/pull/25181))
+- Utilize a singleton coroutine pool to reduce the number of employed coroutines. ([#25171](https://github.com/milvus-io/milvus/pull/25171))
+
 ## 2.2.10
 
 Release date: 14 June, 2023
@@ -115,7 +155,7 @@ Read these pages to learn more.
 - [Manage Databases](manage_databases.md)
 - [Multi-tenancy](multi_tenancy.md)
 
-For the use of these new features, please refer to related pages in the User Guides and the [PyMilvus API reference](api-reference/pymilvus/v2.2.x/About.md).
+For the use of these new features, please refer to related pages in the User Guides and the [PyMilvus API reference](https://milvus.io/api-reference/pymilvus/v2.2.x/About.md).
 
 ### Bug fixes
 
