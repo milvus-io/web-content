@@ -24,7 +24,8 @@ Methods of `SearchSimpleParam.Builder`:
 | `withFilter(String filter)` | Sets an expression to filter entities. For more information, refer to [this doc](https://milvus.io/docs/boolean.md). | `filter`: A boolean expression to filter entities. |
 | `withVectors(List<?> vectors)` | Sets the query vector.<br>The maximum number of vectors to include in a search should be less than 16384. | `vectors`: <ul><li>If the vector field holds float vectors, the type of `vectors` should be `List<List<Float>>`.</li><li></li>If the vector field holds binary vectors, the type of `vectors` should be `List<ByteBuffer>`.</ul> |
 | `withOffset(Long offset)` | Sets a position prior to which entities are to ignore in the search. | `offset`: A position prior to which entities are to ignore. |
-| `withLimit(Long limit)` | Sets the number or entities to return.<br>The value should be 0 or a positive integer.<br>The value defaults to `0`, which lifts the limits on the number of entities to return. | `limit`: Number of entities to return. |
+| `withLimit(Long limit)` | Sets the number or entities to return.<br>The value should be 0 or a positive integer.<br>The value defaults to `10`, indicates that 10 results are to return if not specified. | `limit`: Number of entities to return. |
+| `withConsistencyLevel(ConsistencyLevelEnum consistencyLevel)` | Sets the consistency level of the collection to search against. If not specified, the default consistency level is to be used. For details, please refer to `ConsistencyLevelEnum` in **Misc**. | `consistencyLevel`: The consistency level of the collection to search against. |
 | `build()` | Constructs a `SearchSimpleParam` object. | N/A |
 
 The SearchSimpleParam.Builder.build() can throw the following exceptions:
@@ -51,7 +52,7 @@ SearchSimpleParam param = SearchSimpleParam.newBuilder()
         .withVectors(generateFloatVector())
         .withOutputFields(Lists.newArrayList("*"))
         .withFilter(filter)
-        .withLimit(100)
+        .withLimit(100L)
         .withOffset(0L)
         .build();
 R<SearchResponse> response = client.search(param)

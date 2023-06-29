@@ -24,6 +24,7 @@ Methods of `QuerySimpleParam.Builder`:
 | `withFilter(String filter)` | Sets an expression to filter entities. For more information, refer to [this doc](https://milvus.io/docs/boolean.md). | `filter`: A boolean expression to filter entities. |
 | `withOffset(Long offset)` | Sets a position prior to which entities are to ignore in the query. | `offset`: A position prior to which entities are to ignore. |
 | `withLimit(Long limit)` | Sets the number or entities to return.<br>The value should be 0 or a positive integer.<br>The value defaults to `0`, which lifts the limits on the number of entities to return. | `limit`: Number of entities to return. |
+| `withConsistencyLevel(ConsistencyLevelEnum consistencyLevel)` | Sets the consistency level of the collection to query against. If not specified, the default consistency level is to be used. For details, please refer to `ConsistencyLevelEnum` in **Misc**. | `consistencyLevel`: The consistency level of the collection to query against. |
 | `build()` | Constructs a `QuerySimpleParam` object. | N/A |
 
 The QuerySimpleParam.Builder.build() can throw the following exceptions:

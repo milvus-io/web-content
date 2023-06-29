@@ -23,6 +23,7 @@ Methods of `GetIdsParam.Builder`:
 | `withPrimaryIds(List<T> primaryIds)` | Sets the IDs of the entities to retrieve.<br>The value cannot be empty or null. | `primaryIds`: A list of primary keys of the entities to retrieve. |
 | `addPrimaryId(T primaryId)` | Sets the ID of the entity you want to retrieve.<br>The value cannot be empty or null.<br>Use only the values of the primary key. | `primaryId`: ID of the entity you want to retrieve. |
 | `withOutputFields(List<String> outputFields)` | (Optional) Sets the output fields. | `outputFields`: A list of output fields you prefer. |
+| `withConsistencyLevel(ConsistencyLevelEnum consistencyLevel)` | Sets the consistency level of the collection to get. If not specified, the default consistency level will be used. For details, refer to `ConsistencyLevelEnum` in **Misc**. | `consistencyLevel`: The consistency level of the collection to get. |
 | `build()` | Constructs a `GetIdsParam` object. | N/A |
 
 The GetIdsParam.Builder.build() can throw the following exceptions:
