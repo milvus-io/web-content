@@ -8,7 +8,7 @@ Find out what’s new in Milvus! This page summarizes information about new feat
 
 ## 2.2.11
 
-Release date: 21 June, 2023
+Release date: 28 June, 2023
 
 | Milvus version | Python SDK version | Java SDK version | Go SDK version | Node.js SDK version |
 | -------------- | ------------------ | ---------------- | -------------- | ------------------- |
