@@ -17,7 +17,7 @@ Through running the example code we provided, you will have a primary understand
 
 ## Preparations
 
-- [Milvus 2.2.11](install_standalone-docker.md)
+- [Milvus 2.2.10](install_standalone-docker.md)
 - Python 3 (3.7.1 or later)
 - [PyMilvus 2.2.x](install-pymilvus.md)
 
