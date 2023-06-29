@@ -13,6 +13,7 @@ Methods of `MilvusClient` for connection:
 | ------------------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | -------------- |
 | `withTimeout(long timeout, TimeUnit timeoutUnit)` | The timeout setting for RPC call.                                | <li><code>timeout</code>: The timeout period for invoking a method.</li><li><code>timeoutUnit</code>: The unit for timeout.</li> | `MilvusClient` |
 | `close(long maxWaitSeconds)`                      | Disconnects from a Milvus server with configurable timeout value. Call this method before the application terminates. This method throws an `InterruptedException` exception if it is interrupted. | `maxWaitSeconds`: The timeout period to wait until the RPC channel closes. | N/A            |
+| `setLogLevel(LogLevel level)` | Sets the log level at runtime. | `level`: The log level at runtime. | N/A |
 
 ## ConnectParam
 

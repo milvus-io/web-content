@@ -27,6 +27,9 @@ Methods of `CreateSimpleCollectionParam.Builder`:
 | `withVectorField(String vectorField)` | Sets the name of the vector field.<br>The value cannot be empty or null. | `primaryField`: Customized name of the vector field. |
 | `withAutoID(boolean autoId)` | Sets whether the primary field automatically increments<br>The value defaults to `false`. | `autoId`: Whether the primary field automatically increments is allowed. |
 | `withSyncLoad(boolean syncLoad)` | Sets whether the collection is to be loaded upon creation.<br>The value defaults to `true`, indicating that the collection is to be loaded upon creation. | `syncLoad`: Whether the collection is to be loaded upon creation. |
+| `withConsistencyLevel(ConsistencyLevelEnum consistencyLevel)` | Sets the consistency level. <br>The default value is `ConsistencyLevelEnum.BOUNDED`. | `consistencyLevel`: The consistency level of the collection. |
+| `withPrimaryFieldType(DataType primaryFieldType)` | Sets the data type of the primary field. <br>The value cannot be empty or null. The default value is `DataType.Int64`. | `primaryFieldType`: The data type of the primary field. |
+| `withMaxLength(Integer maxLength)` | Sets the maximum length of the primary field if the data type of the primary field `DataType.VarChar`. <br>The value cannot be empty or null. | `maxLength`: The maximum length of the primary field if its data type is `DataType.VarChar`. |
 | `build()` |  Constructs a `CreateSimpleCollectionParam` object. | N/A |
 
 The CreateSimpleCollectionParam.Builder.build() can throw the following exceptions:
