@@ -17,9 +17,9 @@ Currently, a vector field only supports one index type. Milvus automatically del
 ## Prerequisites
 
 To use DiskANN, note that
-- DiskANN is enabled by default. 
-  - To disable it, you can run `make disk_index=OFF` when you compile Milvus from the source.
-  - To enable it again, you need to compile milvus again with `make disk_index=ON`.
+- DiskANN is enabled by default. If you prefer in-memory index over on-disk index, you are advised to disable this feature for a better performance.
+  - To disable it, you can change `queryNode.enableDisk` to `false` in your milvus configuration file.
+  - To enable it again, you can set `queryNode.enableDisk` to `true`.
 - The Milvus instance runs on Ubuntu 18.04.6 or a later release.
 - The Milvus data path should be mounted to an NVMe SSD for full performance:
   - For a Milvus Standalone instance, the data path should be **/var/lib/milvus/data** in the container where the instance runs.
