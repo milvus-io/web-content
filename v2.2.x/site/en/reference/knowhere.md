@@ -81,7 +81,7 @@ However, for code consistency, `IDMAP` also inherits from the `VecIndex` class w
 
 #### IVF indexes
 
-![IVF](../../../assets/IDMAP.png "Code structure of IVF indexes.")
+![IVF](../../../assets/IVF.png "Code structure of IVF indexes.")
 
 The IVF (inverted file) indexes are the most frequently used. The `IVF` class is derived from `VecIndex` and `FaissBaseIndex`, and further extends to `IVFSQ` and `IVFPQ`. `GPUIVF` is derived from `GPUIndex` and `IVF`. Then `GPUIVF` further extends to `GPUIVFSQ` and `GPUIVFPQ`.
 

@@ -12,9 +12,9 @@ Dynamic schema enables users to insert entities with new fields into a Milvus co
 
 ## Create collection with dynamic schema enabled
 
-To create a collection using a dynamic data model, set `enable_dynamic_field` to `True` when defining the data model. Afterward, all undefined fields and their values in the data entities inserted afterward will be stored in a magic JSON field named `$meta` as key-value pairs. We prefer to use the term "dynamic fields" to refer to these key-value pairs.
+To create a collection using a dynamic data model, set `enable_dynamic_field` to `True` when defining the data model. Afterward, all undefined fields and their values in the data entities inserted afterward will be treated as pre-defined fields. We prefer to use the term "dynamic fields" to refer to these key-value pairs.
 
-Notice that the `$meta` field does not bring any changes to the way you use Milvus. You can ask Milvus to output dynamic fields in search/query results and include them in search and query filter expressions just as they are already defined in the collection schema.
+With these dynamic fields, you can ask Milvus to output them in search/query results and include them in search and query filter expressions just as they are already defined in the collection schema.
 
 ```python
 from pymilvus import connections, Collection, FieldSchema, CollectionSchema, DataType, utility
@@ -88,7 +88,7 @@ print("Entity counts: ", collection.num_entities)
 
 ## Search with dynamic fields
 
-If you have created a collection with dynamic field enabled, and inserted data with dynamic fields into, index, and load the collection, you can use dynamic fields in the filter expression of a search or a query as follows:
+If you have created a collection with dynamic field enabled and inserted data with dynamic fields into, index, and load the collection, you can use dynamic fields in the filter expression of a search or a query as follows:
 
 ```python
 # Use the vector field of the first entity as the query vector.
@@ -97,7 +97,7 @@ result = collection.search(
     anns_field="title_vector",
     param={"metric_type": "L2", "params": {"nprobe": 10}},
     limit=3,
-    expr='$meta["claps"] > 30 and reading_time < 10',
+    expr='claps > 30 and reading_time < 10',
     output_fields=["title", "reading_time", "claps"],
 )
 
@@ -122,6 +122,19 @@ for hits in result:
 # Title:  Why The Coronavirus Mortality Rate is Misleading , Reading time:  9 , Claps 2900
 # Title:  Coronavirus shows what ethical Amazon could look like , Reading time:  4 , Claps 51
 ```
+
+<div class="alert note">
+
+If the key of a dynamic field contains characters other than digits, letters, and underscores (e.g. plus signs, asterisks, or dollar signs), you need to include the key within `$meta[]` as shown in the following code snippet when using it in a boolean expression or including it in the output fields.
+
+```python
+...
+expr='$meta["#key"] in ["a", "b", "c"]',
+output_fields='$meta["#key"]' 
+...
+```
+
+</div>
 
 ## What's next
 
