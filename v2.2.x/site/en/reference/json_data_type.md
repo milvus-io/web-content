@@ -139,7 +139,7 @@ The following table assumes that the value of a JSON field named `json_field` ha
 | **in**        | `'json_field["A"] in [1, 2, 3]'`  | This expression evaluates to true if the value of `json_field["A"]` is `1`, `2`, or `3`.                                                                                        |
 | **and (&&)**  | `'json_field["A"] > 1 && json_field["A"] < 3'`                           | This expression evaluates to true if the value of `json_field["A"]` is greater than `1` and less than `3`. |
 | **or (\|\|)** | `'json_field["A"] > 1 \|\| json_field["A"] < 3'`                         | This expression evaluates to true if the value of `json_field["A"]` is greater than `1` or less than `3`. |
-| **exists**     | `'exist json_field["A"]'`                                  | This expression evaluates to true if `json_field` does not have a key named `A`.                                                                                        |
+| **exists**     | `'exists json_field["A"]'`                                  | This expression evaluates to true if `json_field` does not have a key named `A`.                                                                                        |
 
 ## What's next
 
