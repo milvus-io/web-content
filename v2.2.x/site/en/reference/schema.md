@@ -67,7 +67,7 @@ id_field = FieldSchema(name="id", dtype=DataType.INT64, is_primary=True, descrip
 age_field = FieldSchema(name="age", dtype=DataType.INT64, description="age")
 embedding_field = FieldSchema(name="embedding", dtype=DataType.FLOAT_VECTOR, dim=128, description="vector")
 
-# The following creates a dynamic field and use it as the partition key
+# The following creates a field and use it as the partition key
 position_field = FieldSchema(name="position", dtype=DataType.VARCHAR, max_length=256, is_partition_key=True)
 ```
 
