@@ -26,7 +26,7 @@ Methods of `GetIdsParam.Builder`:
 | `withConsistencyLevel(ConsistencyLevelEnum consistencyLevel)` | Sets the consistency level of the collection to get. If not specified, the default consistency level will be used. For details, refer to `ConsistencyLevelEnum` in **Misc**. | `consistencyLevel`: The consistency level of the collection to get. |
 | `build()` | Constructs a `GetIdsParam` object. | N/A |
 
-The GetIdsParam.Builder.build() can throw the following exceptions:
+The `GetIdsParam.Builder.build()` method can throw the following exceptions:
 
 - `ParamException` is raised if the parameter is invalid.
 

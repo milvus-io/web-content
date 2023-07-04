@@ -20,11 +20,11 @@ Methods of `DeleteIdsParam.Builder`:
 | Method | Description | Parameters |
 | --- | --- | --- |
 | `withCollectionName(String collectionName)` | Sets the target collection name.<br>The value cannot be empty or null. | `collectionName`: Name of the collection from which the entities specified by their primary keys are to be deleted. |
-| `withPrimaryIds(List<T> primaryIds)` | Sets the IDs of the entities to be deleted.<br>The value cannot be empty or null. | `primaryIds`: A list of primary keys of the entities to be deleted |
+| `withPrimaryIds(List<T> primaryIds)` | Sets the IDs of the entities to be deleted.<br>The value cannot be empty or null. | `primaryIds`: A list of primary keys of the entities to be deleted. |
 | `addPrimaryId(T primaryId)` | Sets the ID of the entity you want to delete.<br>The value cannot be empty or null.<br>Use only the values of the primary key. | `primaryId`: ID of the entity you want to delete. |
 | `build()` | Constructs a `DeleteIdsParam` object. | N/A |
 
-The DeleteIdsParam.Builder.build() can throw the following exceptions:
+The `DeleteIdsParam.Builder.build()` method can throw the following exceptions:
 
 - `ParamException` is raised if the parameter is invalid.
 
