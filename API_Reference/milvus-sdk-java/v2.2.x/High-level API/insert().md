@@ -8,22 +8,22 @@ R<InsertResponse> insert(InsertRowsParam requestParam);
 
 ## InsertRowsParam
 
-Use the InsertRowsParam.Builder to construct an InsertRowsParam object.
+Use the `InsertRowsParam.Builder` method to construct an `InsertRowsParam` object.
 
 ```Java
 import io.milvus.param.highlevel.dml.InsertRowsParam;
 InsertRowsParam.Builder builder = InsertRowsParam.newBuilder();
 ```
 
-Methods of InsertRowsParam.Builder:
+Methods of `InsertRowsParam.Builder`:
 
 | Method | Description | Parameters |
 | --- | --- | --- |
 | `withCollectionName(String collectionName)` | Sets the target collection name.<br>The value cannot be empty or null. | `collectionName`: Name of the collection to which the data is to be inserted in rows. |
 | `withRows(List<JSONObject> rows)` | Sets the data to insert in rows.<br>The list cannot be empty.<br>Exclude the primary key if it automatically increments. | `rows`: A list of `JSONObject` objects, each representing a row in the dataset. |
-| `build()` | Constructs an InsertRowsParam object. | N/A |
+| `build()` | Constructs an `InsertRowsParam` object. | N/A |
 
-The InsertRowsParam.Builder.build() can throw the following exceptions:
+The `InsertRowsParam.Builder.build()` method can throw the following exceptions:
 
 - `ParamException` is raised if the parameter is invalid.
 

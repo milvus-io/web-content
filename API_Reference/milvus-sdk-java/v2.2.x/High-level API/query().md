@@ -27,7 +27,7 @@ Methods of `QuerySimpleParam.Builder`:
 | `withConsistencyLevel(ConsistencyLevelEnum consistencyLevel)` | Sets the consistency level of the collection to query against. If not specified, the default consistency level is to be used. For details, please refer to `ConsistencyLevelEnum` in **Misc**. | `consistencyLevel`: The consistency level of the collection to query against. |
 | `build()` | Constructs a `QuerySimpleParam` object. | N/A |
 
-The QuerySimpleParam.Builder.build() can throw the following exceptions:
+The `QuerySimpleParam.Builder.build()` method can throw the following exceptions:
 
 - `ParamException` is raised if the parameter is invalid.
 

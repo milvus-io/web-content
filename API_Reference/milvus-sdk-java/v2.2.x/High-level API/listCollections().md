@@ -21,11 +21,12 @@ Methods of `ListCollectionsParam.Builder`:
 | --- | --- | --- |
 | `build()` | Construct a `ListCollectionsParam` object. | N/A |
 
-The ListCollectionsParam.Builder.build() can throw the following exceptions:
+The `ListCollectionsParam.Builder.build()` method can throw the following exceptions:
 
 - `ParamException` is raised if the parameter is invalid.
 
-Returns
+## Returns
+
 This method catches all the exceptions and returns an `R<ListCollectionsResponse>` object.
 
 - If the API fails on the server side, it returns the error code and message from the server.

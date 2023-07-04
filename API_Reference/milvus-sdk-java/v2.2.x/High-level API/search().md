@@ -42,7 +42,7 @@ This method catches all the exceptions and returns an `R<SearchResponse>` object
 
 ## Example
 
-```
+```Java
 import io.milvus.param.*;
 import io.milvus.response.SearchResultsWrapper;
 import io.milvus.grpc.SearchResults;
