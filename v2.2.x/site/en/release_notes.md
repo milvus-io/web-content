@@ -80,7 +80,7 @@ We are excited to announce the release of Milvus 2.2.10! This update includes im
 
 ### Enhancements
 
-- Replaced GCO payload writer with Go payload writer to reduce memory usage ([#24656](https://github.com/milvus-io/milvus/pull/24656))
+- Replaced CGO payload writer with Go payload writer to reduce memory usage ([#24656](https://github.com/milvus-io/milvus/pull/24656))
 - Enabled max result window limit ([#24768](https://github.com/milvus-io/milvus/pull/24768))
 - Removed unused iterator initialization ([#24758](https://github.com/milvus-io/milvus/pull/24758))
 - Enabled metric type checks before search ([#24652](https://github.com/milvus-io/milvus/pull/24652)) ([#24716](https://github.com/milvus-io/milvus/pull/24716))
