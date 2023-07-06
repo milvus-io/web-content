@@ -17,7 +17,7 @@ await milvusClient.createDatabase({
 });
 
 // use that db
-await milvusClient.useDatabase({
+await milvusClient.use({
   db_name: DB_NAME,
 });
 
