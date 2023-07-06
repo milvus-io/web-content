@@ -14,8 +14,8 @@ query(expr, offset, limit, output_fields=None, partition_names=None, timeout=Non
 | ----------------- | ------------------------------------------------------------- | ------------------ | -------- |
 | `expr`            | Boolean expression to filter the data                         | String             | True     |
 | `partition_names` | List of names of the partitions to search on. </br>All partition will be searched if it is left empty.                                                                              | list[String]       | False    |
-| `limit`           | Number of nearest records to return. The value of this parameter should be less than 65535.                          | Integer            | False     |
-| `offset`          | Number of results to skip in the returned set. This parameter is available only when `limit` is specified, and the sum of this value and `limit` should be less than 65535.                           | Integer            | False     |
+| `limit`           | Number of nearest records to return. The value of this parameter should be less than 16384.                          | Integer            | False     |
+| `offset`          | Number of results to skip in the returned set. This parameter is available only when `limit` is specified, and the sum of this value and `limit` should be less than 16384.                           | Integer            | False     |
 | `output_fields`   | List of names of fields to output                             | list[String]       | False    |
 | `timeout`         | An optional duration of time in seconds to allow for the RPC. If it is set to None, the client keeps waiting until the server responds or error occurs.                                                | Float              | False    |
 | `kwargs`: `consistency_level`|Consistency level used in the search. | String/Integer              | False    |

@@ -15,7 +15,7 @@ search(data, anns_field, param, limit, expr=None, partition_names=None, output_f
 | `data`            | Data to search with                                           | list[list[Float]]  | True     |
 | `anns_field`      | Name of the vector field to search on                         | String             | True     |
 | `param`           | Specific search parameter(s) of the index on the vector field. For details, refer to [Prepare search parameters](https://milvus.io/docs/search.md#Prepare-search-parameters).  | Dict               | True     |
-| `limit`           | Number of nearest records to return. The sum of this value and `offset` should be less than 65535.                          | Integer            | True     |
+| `limit`           | Number of nearest records to return. The sum of this value and `offset` should be less than 16384.                          | Integer            | True     |
 | `expr`            | Boolean expression to filter the data                         | String             | False    |
 | `partition_names` | List of names of the partitions to search on. </br>All partition will be searched if it is left empty.                         | list[String]            | False    |
 | `output_fields`   | List of names of fields to output. <br>When specified, you can get the values of the specified fields by using `hit.entity.get()`.                             | list[String]       | False    |
