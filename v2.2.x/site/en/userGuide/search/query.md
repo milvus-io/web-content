@@ -192,12 +192,12 @@ Output:
 		<td>Boolean expression used to filter attribute. Find more expression details in <a href="boolean.md">Boolean Expression Rules</a>.</td>
 	</tr>
 	<tr>
-		<td><code>offset</code></td>
-		<td>Number of results to skip in the returned set. The sum of this value and `limit` should be less than 65535.</td>
-	</tr>
-	<tr>
 		<td><code>limit</code></td>
 		<td>Number of the most similar results to return. The sum of this value and `offset` should be less than 65535.</td>
+	</tr>
+	<tr>
+		<td><code>offset</code></td>
+		<td>Number of results to skip in the returned set. This parameter is available only when `limit` is specified, and the sum of this value and `limit` should be less than 65535.</td>
 	</tr>
 	<tr>
 		<td><code>output_fields</code> (optional)</td>
