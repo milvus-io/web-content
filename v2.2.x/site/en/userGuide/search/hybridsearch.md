@@ -244,11 +244,11 @@ Output:
 	</tr>
 	<tr>
 		<td><code>offset</code></td>
-		<td>Number of results to skip in the returned set. The sum of this value and `limit` should be less than 65535.</td>
+		<td>Number of results to skip in the returned set. This parameter is available only when <code>limit</code> is specified. The sum of this value and <code>limit</code> should be less than 16384.</td>
 	</tr>
 	<tr>
 		<td><code>limit</code></td>
-		<td>Number of the most similar results to return.</td>
+		<td>Number of the most similar results to return. The sum of this value and <code>offset</code> should be less than 16384.</td>
 	</tr>
   <tr>
 		<td><code>expr</code></td>
@@ -256,7 +256,7 @@ Output:
 	</tr>
   <tr>
 		<td><code>partition_names</code> (optional)</td>
-		<td>List of names of the partition to search in.  The sum of this value and `offset` should be less than 65535.</td>
+		<td>List of names of the partition to search in. </td>
 	</tr>
   <tr>
 		<td><code>output_fields</code> (optional)</td>

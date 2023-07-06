@@ -193,11 +193,11 @@ Output:
 	</tr>
 	<tr>
 		<td><code>limit</code></td>
-		<td>Number of the most similar results to return. The sum of this value and `offset` should be less than 65535.</td>
+		<td>Number of the most similar results to return. The sum of this value and <code>offset</code> should be less than 16384.</td>
 	</tr>
 	<tr>
 		<td><code>offset</code></td>
-		<td>Number of results to skip in the returned set. This parameter is available only when `limit` is specified, and the sum of this value and `limit` should be less than 65535.</td>
+		<td>Number of results to skip in the returned set. This parameter is available only when <code>limit</code> is specified, and the sum of this value and <code>limit</code> should be less than 16384.</td>
 	</tr>
 	<tr>
 		<td><code>output_fields</code> (optional)</td>
