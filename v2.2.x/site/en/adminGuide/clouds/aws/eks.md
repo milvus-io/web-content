@@ -83,7 +83,7 @@ helm repo add milvus https://milvus-io.github.io/milvus-helm/
 5. Run the following command to start the Milvus cluster that you have provisioned. The access key and an S3 bucket are required to use S3 as storage.
 
 ```shell
-helm upgrade --install --set cluster.enabled=true --set externalS3.enabled=true --set externalS3.host='s3.us-east-2.amazonaws.com' --set externalS3.port=80 --set externalS3.accessKey=${access-key} --set externalS3.secretKey=${secret-key} --set externalS3.bucketName=${bucket-name} --set minio.enabled=False --set service.type=LoadBalancer milvus milvus/milvus
+helm upgrade --install --set cluster.enabled=true --set externalS3.enabled=true --set externalS3.host='s3.us-west-2.amazonaws.com' --set externalS3.port=80 --set externalS3.accessKey=${access-key} --set externalS3.secretKey=${secret-key} --set externalS3.bucketName=${bucket-name} --set minio.enabled=False --set service.type=LoadBalancer milvus milvus/milvus
 ```
 
 6. Run ```kubectl get svc ``` again to retrieve the IP address of the load balancer and use it as the IP address of the Milvus cluster.
@@ -97,7 +97,7 @@ Currently, a Milvus cluster can only be scaled manually. Run the following comma
 <div class ="alert note">See <a href="https://milvus.io/docs/v2.0.x/four_layers.md#StorageComputing-Disaggregation">Storage/Computing Disaggregation</a> for more information about the data node, index node, query node, and proxy.</div>
 
 ```shell
-helm upgrade --install --set cluster.enabled=true --set dataNode.replicas=1 --set indexNode.replicas=1 --set queryNode.replicas=1 --set proxy.replicas=1 --set externalS3.enabled=true --set externalS3.host='s3.us-east-2.amazonaws.com' --set externalS3.port=80 --set externalS3.accessKey=${access-key} --set externalS3.secretKey=${secret-key} --set externalS3.bucketName=${bucket-name} --set minio.enabled=False --set service.type=LoadBalancer milvus milvus/milvus
+helm upgrade --install --set cluster.enabled=true --set dataNode.replicas=1 --set indexNode.replicas=1 --set queryNode.replicas=1 --set proxy.replicas=1 --set externalS3.enabled=true --set externalS3.host='s3.us-west-2.amazonaws.com' --set externalS3.port=80 --set externalS3.accessKey=${access-key} --set externalS3.secretKey=${secret-key} --set externalS3.bucketName=${bucket-name} --set minio.enabled=False --set service.type=LoadBalancer milvus milvus/milvus
 ```
 
 After running the preceding command, you can run ```kubectl get pods``` to view the newly created node instances.
