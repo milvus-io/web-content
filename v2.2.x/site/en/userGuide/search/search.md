@@ -191,18 +191,20 @@ Output:
 	</thead>
 	<tbody>
 	<tr>
-		<td><code>metric_type</code></td>
-		<td>Metrics used to measure the similarity of vectors. See <a href="metric.md">Simlarity Metrics</a> for more information.</td>
+		<td><code>limit</code></td>
+		<td>Number of entities to skip during the search. This parameter is available only when <code>limit</code> is specified.</td>
+	</tr>
+	<tr>
+		<td><code>offset</code></td>
+		<td>Number of entities to return for the search. The sum of this parameter and <code>offset</code> should be less than <code>16384</code>.</td>
 	</tr>
     <tr>
-		<td><code>params</code></td>
+		<td><code>param</code></td>
 		<td>Search parameter(s) specific to the index. See <a href="index.md">Vector Index</a> for more information. Possible options are as follows: <ul>
-			<li><code>metric_type</code> Indicates the method used to measure the distance between vectors during search. It should be the same as the one specified for the index-building process.</li>
-			<li><code>nprobe</code> Indicates the number of cluster units to search. This parameter is available only when <code>index_type</code> is set to <code>IVF_FLAT</code>, <code>IVF_SQ8</code>, or <code>IVF_PQ</code>. The value should be less than <code>nlist</code> specified for the index-building process.</li>
+			<li><code>metric_type</code> Indicates the method used to measure the distance between vectors during search. It should be the same as the one specified for the index-building process. See <a href="metric.md">Simlarity Metrics</a> for more information.</li>
+			<li><code>params</code> Indicates the detailed setting of the search parameter: <ul>			<li><code>nprobe</code> Indicates the number of cluster units to search. This parameter is available only when <code>index_type</code> is set to <code>IVF_FLAT</code>, <code>IVF_SQ8</code>, or <code>IVF_PQ</code>. The value should be less than <code>nlist</code> specified for the index-building process.</li>
 			<li><code>ef</code> Indicates the search scope. This parameter is available only when <code>index_type</code> is set to <code>HNSW</code>. The value should be within the range from <code>top_k</code> to <code>32768</code>.</li>
-			<li><code>search_k</code> Indicates the search scope. This parameter is available only when <code>index_type</code> is set to <code>ANNOY</code>. The value should be greater than or equal to the top K. </li>
-			<li><code>offset</code> Indicates the number of entities to skip during the search. This parameter is available only when <code>limit</code> is specified.</li>
-			<li><code>limit</code> Indicates the number of entities to return for the search. The sum of this parameter and <code>offset</code> should be less than <code>16384</code>.</li>
+			<li><code>search_k</code> Indicates the search scope. This parameter is available only when <code>index_type</code> is set to <code>ANNOY</code>. The value should be greater than or equal to the top K. </li></ul></li>
 		</ul></td>
 	</tr>
 	<tr>
