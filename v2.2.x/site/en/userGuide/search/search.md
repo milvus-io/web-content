@@ -192,11 +192,11 @@ Output:
 	<tbody>
 	<tr>
 		<td><code>limit</code></td>
-		<td>Number of entities to skip during the search. This parameter is available only when <code>limit</code> is specified.</td>
+		<td>Number of entities to return for the search. This parameter is available only when <code>limit</code> is specified.</td>
 	</tr>
 	<tr>
 		<td><code>offset</code></td>
-		<td>Number of entities to return for the search. The sum of this parameter and <code>offset</code> should be less than <code>16384</code>.</td>
+		<td>Number of entities to skip during the search. The sum of this parameter and <code>offset</code> should be less than <code>16384</code>.</td>
 	</tr>
     <tr>
 		<td><code>param</code></td>
