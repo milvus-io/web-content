@@ -435,7 +435,7 @@ Some of them are used to set backpressure signals that force Milvus to lower the
     <tr>
       <td>
         <li>Maximum time tick delay. A time tick delay is the difference between RootCoord TSO and the minimum time tick of all flow graphs on DataNodes and QueryNodes.</li>
-        <li>Setting this item to <code>300</code> indicates that Milvus reduces the DML request rate as the delay increases and drops all DML requests once the delay reaches the set maximum in milliseconds.</li>
+        <li>Setting this item to <code>300</code> indicates that Milvus reduces the DML request rate as the delay increases and drops all DML requests once the delay reaches the set maximum in seconds.</li>
         <li>To use this setting, set <code>quotaAndLimits.limitWriting.ttProtection.enabled</code> to <code>true</code> at the same time.</li>
       </td>
       <td>300</td>
