@@ -59,7 +59,13 @@ fields = [
     FieldSchema(name='vector', dtype=DataType.FLOAT_VECTOR, description="", dim=384, is_index=True),
 ]
 
-schema = CollectionSchema(fields=fields, description="", enable_dynamic_field=True)
+schema = CollectionSchema(
+    fields=fields, 
+    description="", 
+    enable_dynamic_field=True, 
+    # The following is an alternative to setting `is_partition_key` in a field schema.
+    partition_key_field="store_address" 
+)
 
 collection = Collection(name='McDonald_s_Reviews', schema=schema )
 collection.create_index(

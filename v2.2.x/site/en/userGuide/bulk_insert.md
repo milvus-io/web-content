@@ -35,6 +35,7 @@ The following is an example of a row-based JSON file. You can include fields not
 
 {
   "rows":[
+    {"book_id": 101, "word_count": 13, "book_intro": [1.1, 1.2], "book_props": {"year": 2015, "price": 23.43}},
     {"book_id": 102, "word_count": 25, "book_intro": [2.1, 2.2], "book_props": {"year": 2018, "price": 15.05}},
     {"book_id": 103, "word_count": 7, "book_intro": [3.1, 3.2], "book_props": {"year": 2020, "price": 36.68}},
     {"book_id": 104, "word_count": 12, "book_intro": [4.1, 4.2] , "book_props": {"year": 2019, "price": 20.14}},
@@ -51,6 +52,7 @@ The following is an example of a row-based JSON file. You can include fields not
 - Use the correct types of values in each field. For example, use integers in integer fields, floats in float fields, strings in varchar fields, and float arrays in vector fields.
 - Do not include an auto-generated primary key in the JSON file.
 - For binary vectors, use uint8 arrays. Each uint8 value represents 8 dimensions, and the value must be between 0 and 255. For example, `[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1]` is a 16-dimensional binary vector and should be written as `[128, 7]` in the JSON file.
+- If you have enabled dynamic schema for a collection, you can add fields that are not pre-defined in the schema. Milvus automatically adds these non-existent fields into a JSON field.
 
 
 </div>
@@ -157,7 +159,7 @@ In this method, you need to set the name of the target collection as **collectio
   task_id = utility.do_bulk_insert(
       collection_name="book",
       partition_name="2022",
-      files=["book_id.npy", "word_count.npy", "book_intro.npy"]
+      files=["book_id.npy", "word_count.npy", "book_intro.npy", "book_props.npy"]
   )
   ```
 
@@ -173,6 +175,7 @@ In this method, you need to set the name of the target collection as **collectio
           .addFile("book_id.npy")
           .addFile("word_count.npy")
           .addFile("book_intro.npy")
+          .addFile("book_props.npy")
           .build()
   R<ImportResponse> response = milvusClient.bulkInsert(param);
   BulkInsertResponseWrapper wrapper = new BulkInsertResponseWrapper(response.getData());
@@ -484,10 +487,12 @@ Assume the data structure is as follows:
 │    └── book_id.npy
 │    └── word_count.npy
 │    └── book_intro.npy
+│    └── book_props.npy
 ├── task_2
 │    └── book_id.npy
 │    └── word_count.npy
 │    └── book_intro.npy
+│    └── book_props.npy
 </pre>
 
 You can create multiple data-import tasks as follows
@@ -497,11 +502,11 @@ You can create multiple data-import tasks as follows
 ```
 task_1 = utility.do_bulk_insert(
     collection_name="book",
-    files=["task_1/book_id.npy", "task_1/word_count.npy", "task_1/book_intro.npy"]
+    files=["task_1/book_id.npy", "task_1/word_count.npy", "task_1/book_intro.npy", "task_1/book_props.npy"]
 )
 task_2 = utility.do_bulk_insert(
     collection_name="book",
-    files=["task_2/book_id.npy", "task_2/word_count.npy", "task_2/book_intro.npy"]
+    files=["task_2/book_id.npy", "task_2/word_count.npy", "task_2/book_intro.npy", "task_2/book_props.npy"]
 )
 ```
 
