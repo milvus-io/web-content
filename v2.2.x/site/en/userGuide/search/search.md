@@ -100,7 +100,7 @@ const searchParams = {
 ```
 
 ```go
-sp, _ := entity.NewIndexFlatSearchParam( // NewIndex*SearchParam func
+sp, _ := entity.NewIndexIvfFlatSearchParam( // NewIndex*SearchParam func
 	10,                                  // searchParam
 )
 ```
