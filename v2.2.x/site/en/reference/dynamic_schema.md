@@ -19,6 +19,8 @@ With these dynamic fields, you can ask Milvus to output them in search/query res
 ```python
 from pymilvus import connections, Collection, FieldSchema, CollectionSchema, DataType, utility
 
+connections.connect(host='localhost', port='19530')
+
 # 1. define fields
 fields = [
     FieldSchema(name="id", dtype=DataType.INT64, is_primary=True, auto_id=True, max_length=100),
@@ -57,27 +59,40 @@ Once the collection is created, you can start inserting data, including the dyna
 
 ### Prepare data
 
-Suppose we have a dataset with each row being similar to the following:
+To demonstrate the use of dynamic schema, we have prepared [a dataset from Kaggle](https://www.kaggle.com/datasets/shiyu22chen/cleaned-medium-articles-dataset) containing the articles published on Medium.com from Jan 2020 to August 2020.
 
-```json
-{
-   'title': 'The Reported Mortality Rate of Coronavirus Is Not Important',
-   'title_vector': [0.041732933, 0.013779674, -0.027564144, ..., 0.030096486],
-   'link': 'https://medium.com/swlh/the-reported-mortality-rate-of-coronavirus-is-not-important-369989c8d912',
-   'reading_time': 13,
-   'publication': 'The Startup',
-   'claps': 1100,
-   'responses': 18
-}
+In this section, we need to prepare the dataset as follows:
+
+```python
+import json
+import pandas as pd
+
+# read the raw dataset and convert it to JSON
+df = pd.read_csv('New_Medium_Data.csv')
+df.to_json('New_Medium_Data.json', orient='records')
+
+# convert the vector field values into real numbers
+def m(row):
+    row.update({'title_vector': list(map(float, row['title_vector'][1:-1].split(', ')))})
+    return row
+
+with open('New_Medium_Data.json') as f:
+    data_rows = json.load(f)
+    data_rows = map(m, data_rows)
+    data_rows = list(data_rows)
 ```
 
-## Insert data
+Then we should use `data_rows` as a handler to demonstrate the use of a collection with dynamic schema enabled.
+
+### Insert data
 
 You can insert this dataset into the collection we have just created.
 
 ```python
 # 6. insert data
 collection.insert(data_rows)
+
+# Call the flush API to make inserted data immediately available for search
 collection.flush()
 
 print("Entity counts: ", collection.num_entities)

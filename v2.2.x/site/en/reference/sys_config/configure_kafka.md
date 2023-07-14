@@ -9,7 +9,7 @@ summary: Learn how to configure Kafka for Milvus cluster.
 
 This topic introduces the Kafka-related configurations of Milvus.
 
-Kafka is the underlying engine supporting Milvus cluster's reliable storage and publication/subscription of message streams. 
+Kafka is the underlying engine supporting Milvus cluster's reliable storage and publication/subscription of message streams.
 
 Under this section, you can configure Kafka producer, consumer, sasl information and etc.
 

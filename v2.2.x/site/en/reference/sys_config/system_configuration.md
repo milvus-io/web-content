@@ -51,6 +51,11 @@ Under this section, you can configure message size, retention time and size, etc
 
 See [RocksMQ-related Configurations](configure_rocksmq.md) for detailed description for each parameter under this section.
 
+### `kafka`
+
+Apache Kafka is an open-source distributed event streaming platform for high-performance data pipelines, streaming analytics, data integration, and mission-critical applications. It serves as an alternative to RocksMQ and Pulsar for reliable storage and publication/subscription of message streams.
+
+See [Kafka-related Configurations](configure_kafka.md) for detailed description for each parameter under this section.
 
 ### `rootCoord`
 

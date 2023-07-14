@@ -8,7 +8,9 @@ summary: JSON data type in Milvus.
 
 JSON stands for Javascript Object Notation, which is a lightweight and easy-to-use text-based data format. JSON fields consist of key-value pairs, where each key is a string and its corresponding value can be a number, string, boolean, list, or array. You can insert dictionaries as a field value into collections of your Milvus instances.
 
-For instance, here's an example of a JSON field that stores the metadata of a published article.
+To demonstrate the use of a JSON field, we have prepared [a dataset from Kaggle](https://www.kaggle.com/datasets/shiyu22chen/cleaned-medium-articles-dataset) containing the articles published on Medium.com from Jan 2020 to August 2020.
+
+We should prepare the dataset a little bit to make its member dictionaries similar to the following:
 
 ```python
 {
@@ -24,6 +26,34 @@ For instance, here's an example of a JSON field that stores the metadata of a pu
 }
 ```
 
+For your reference, the code used to process the dataset is as follows:
+
+```python
+import json
+import pandas as pd
+
+df = pd.read_csv('New_Medium_Data.csv')
+df.to_json('New_Medium_Data.json', orient='records')
+
+def m(row):
+    row.update({
+        'title_vector': list(map(float, row['title_vector'][1:-1].split(', '))),
+        'article_meta': {
+            'link': row.pop('link'),
+            'reading_time': row.pop('reading_time'),
+            'publication': row.pop('publication'),
+            'claps': row.pop('claps'),
+            'responses': row.pop('responses'),
+        }
+    })
+    return row
+
+with open('New_Medium_Data.json') as f:
+    data_rows = json.load(f)
+    data_rows = map(m, data_rows)
+    data_rows = list(data_rows)
+```
+
 Please keep in mind that when creating a list or array, it's important to ensure that all values are of the same type. Additionally, any nested dictionaries will be treated as strings. When defining JSON keys, it's recommended to only use alphanumeric characters and underscores, as other characters may cause issues with filtering or searching.
 
 ## Define JSON field
@@ -33,6 +63,8 @@ To define a JSON field, simply follow the same procedure as defining fields of o
 ```python
 import json
 from pymilvus import connections, Collection, FieldSchema, CollectionSchema, DataType
+
+connections.connect(host='localhost', port='19530')
 
 # 1. define fields
 fields = [
@@ -78,7 +110,14 @@ After creating a collection from the CollectionSchema object, dictionaries such 
 
 # 5. insert data
 collection.insert(data_rows)
+
+# Call the flush API to make inserted data immediately available for search
 collection.flush()
+
+print("Entity counts: ", collection.num_entities)
+
+# Output
+# Entity counts:  5979
 ```
 
 ## Search within JSON field
@@ -105,9 +144,9 @@ for hits in result:
             "Title: ", 
             hit.entity.get("title"), 
             ", Reading time: ", 
-            json.loads(hit.entity.get("article_meta"))['reading_time'], 
+            hit.entity.get("article_meta")['reading_time'], 
             ", Claps", 
-            json.loads(hit.entity.get("article_meta"))['claps']
+            hit.entity.get("article_meta")['claps']
         )
 
 # Output:
