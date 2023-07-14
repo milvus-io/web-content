@@ -7,7 +7,7 @@ summary: This page goes over how to search for the best answer to questions usin
 
 With ChatGPT taking the headlines, many companies are wondering how they can take advantage of it for their current products. One big use case that stands out is improving the tedious and limited search functionality of product documentation. Currently, if a user wants to figure out how to use a product, they must comb through all the document pages hoping to come up with an answer. What if we could replace this tedious process with ChatGPT? What if ChatGPT could summarize all the info that is needed and answer any questions that a user might have?  This is where LlamaIndex and Milvus come in.
 
-LlamaIndex and Milvus are worth together to ingest and retrieve relevant info. LlamaIndex begins by taking in all the different documents you may have and embedding them using OpenAI. Once we have the embeddings we can push them into Milvus along with any relevant text and metadata. When a user wants to ask a question, LlamaIndex will search through Milvus for the closest answers and use ChatGPT to summarize those answers.
+LlamaIndex and Milvus work together to ingest and retrieve relevant info. LlamaIndex begins by taking in all the different documents you may have and embedding them using OpenAI. Once we have the embeddings we can push them into Milvus along with any relevant text and metadata. When a user wants to ask a question, LlamaIndex will search through Milvus for the closest answers and use ChatGPT to summarize those answers.
 
 For this example, the documentation that we are going to be searching through is the documentation found on the Milvus [website](milvus.io/docs).
 
