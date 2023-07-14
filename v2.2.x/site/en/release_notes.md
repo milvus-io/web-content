@@ -51,7 +51,7 @@ We're happy to share that Milvus 2.2.11 is now available! This update includes s
 - Utilize a singleton coroutine pool to reduce the number of employed coroutines. ([#25171](https://github.com/milvus-io/milvus/pull/25171))
 - Optimized disk usage for RocksMq by enabling zstd compression starting from level 2 ([#25231](https://github.com/milvus-io/milvus/pull/25231)) ([#25238](https://github.com/milvus-io/milvus/pull/25238))
 
-## 2.2.10
+## v2.2.10
 
 Release date: 14 June, 2023
 
@@ -94,7 +94,7 @@ We are excited to announce the release of Milvus 2.2.10! This update includes im
 
 - Fixed build index performance downgrade ([#24651](https://github.com/milvus-io/milvus/pull/24651))
 
-## 2.2.9
+## v2.2.9
 
 Release date: 2 June, 2023
 
