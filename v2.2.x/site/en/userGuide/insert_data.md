@@ -139,9 +139,9 @@ if err != nil {
 
 ```java
 List<InsertParam.Field> fields = new ArrayList<>();
-fields.add(new InsertParam.Field("book_id", DataType.Int64, book_id_array));
-fields.add(new InsertParam.Field("word_count", DataType.Int64, word_count_array));
-fields.add(new InsertParam.Field("book_intro", DataType.FloatVector, book_intro_array));
+fields.add(new InsertParam.Field("book_id", book_id_array));
+fields.add(new InsertParam.Field("word_count", word_count_array));
+fields.add(new InsertParam.Field("book_intro", book_intro_array));
 
 InsertParam insertParam = InsertParam.newBuilder()
   .withCollectionName("book")
