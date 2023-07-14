@@ -66,6 +66,26 @@ For details, refer to <a href="operational_faq.md#Can-I-share-a-Pulsar-instance-
   </tbody>
 </table>
 
+## `pulsar.webport`
+
+<table id="pulsar.webport">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <li>Web port of of Pulsar service. </li>
+        <li>If you connect direcly without proxy, should use 8080</li>
+      </td>
+      <td>80</td>
+    </tr>
+  </tbody>
+</table>
+
 ## `pulsar.maxMessageSize`
 
 <table id="pulsar.maxMessageSize">
