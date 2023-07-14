@@ -51,6 +51,10 @@ We recommend making the headers (column names) as the first row in your CSV file
 
 1. Click **Data Query** on the **Collection** page. On the **Data Query** tab page, enter query conditions in the field and then click **Query** to retrieve all query results that match your query conditions.
 
-2. Click the **Download** icon to download the query results as a CSV file.
+2. Select query results you want to download, and click the **Download** icon to download the query results as a CSV file.
 
 ![Export Data](../../../../assets/attu/insight_data6.png "Click the Download icon.")
+
+<div class="alert note">
+The download CSV file should be smaller than 150MB and the row count is less than 100,000, otherwise the download will fail.
+</div>
