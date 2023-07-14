@@ -98,3 +98,42 @@ Under this section, you can configure message size, retention time and size, etc
     </tr>
   </tbody>
 </table>
+
+## `rocksmq.compactionInterval`
+
+<table id="rocksmq.compactionInterval">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <li>Time interval to trigger rocksdb compaction to remove deleted data. </li>
+        <li>Unit: Second</li>
+      </td>
+      <td>86400</td>
+    </tr>
+  </tbody>
+</table>
+
+## `rocksmq.lrucacheratio`
+
+<table id="rocksmq.lrucacheratio">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <li>Rocksdb cache memory ratio. </li>
+      </td>
+      <td>0.06</td>
+    </tr>
+  </tbody>
+</table>
