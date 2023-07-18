@@ -1,0 +1,100 @@
+# List Collections
+
+Lists collections in a cluster.
+
+## Endpoint
+
+<div>
+    <div style="display: inline-block; background: #0d8d67; font-size: 0.6em; border-radius: 10px; color: #ffffff; padding: 0.3em 1em;">
+        <span>GET</span>
+    </div>
+    <span style="font-weight: bold;">  https://{milvus_endpoint}/vector/collections</span>
+</div>
+
+## Example
+
+
+List all collections in a cluster:
+
+```shell
+curl --request GET \
+     --url '${MILVUS_ENDPOINT}/v1/vector/collections' \
+     --header 'Authorization: Bearer <API-Key>' \
+     --header 'accept: application/json' \
+     --header 'content-type: application/json'
+```
+
+Sample response:
+
+```shell
+{
+   code: 200,
+   data: [
+         "collection1",
+         "collection2",
+         ...
+         "collectionN",
+         ]
+}
+```
+
+
+
+## Request
+
+### Parameters
+
+- No query parameters required
+
+- No path parameters required
+
+### Request Body
+
+No request body required
+
+## Response
+
+Returns a list of collections in the specified cluster.
+
+### Response Bodies
+
+- Response body if we process your request successfully
+
+```json
+{
+    "code": 200,
+    "data": {}
+}
+```
+
+- Response body if we failed to process your request
+
+```json
+{
+    "code": integer,
+    "message": string
+}
+```
+
+### Properties
+
+The properties in the returned response are listed in the following table.
+
+| Property | Description                                                                                                                                 |
+|----------|---------------------------------------------------------------------------------------------------------------------------------------------|
+| `code`   | **integer**<br>Indicates whether the request succeeds.<br><ul><li>`200`: The request succeeds.</li><li>Others: Some error occurs.</li></ul> |
+| `data`  | **array**<br>A data array of strings. |
+| `message`  | **string**<br>Indicates the possible reason for the reported error. |
+
+## Possible Errors
+
+| Code | Error Message |
+| ---- | ------------- |
+| 80000 | Incorrect parameter: xxx |
+| 80001 | The token is illegal |
+| 80002 | The token is invalid |
+| 80020 | Invalid clusterId or you do not have permission to access that Cluster. |
+| 80022 | Dedicated cluster not support this operation. |
+| 90011 | Invalid CollectionName. Reason: xxx |
+| 90102 | The cluster does not exist in current region. |
+| 90103 | The clusterId parameter is empty in the request path. |
