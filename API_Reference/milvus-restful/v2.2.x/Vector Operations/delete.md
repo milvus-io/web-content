@@ -2,13 +2,11 @@
 
 Deletes one or more entities from a collection.
 
-## Endpoint
-
 <div>
     <div style="display: inline-block; background: #026aca; font-size: 0.6em; border-radius: 10px; color: #ffffff; padding: 0.3em 1em;">
         <span>POST</span>
     </div>
-    <span style="font-weight: bold;">  https://{milvus_endpoint}/vector/delete</span>
+    <span style="font-weight: bold;">  https://{public_endpoint}/v1/vector/delete</span>
 </div>
 
 ## Example
@@ -18,8 +16,8 @@ Delete a collection whose ID is an integer:
 
 ```shell
 curl --request POST \
-     --url '${MILVUS_ENDPOINT}/v1/vector/delete' \
-     --header 'Authorization: Bearer <API-Key>' \
+     --url '${MILVUS_HOST}:${MILVUS_PORT}/v1/vector/delete' \
+     --header 'Authorization: Bearer <TOKEN>' \
      --header 'accept: application/json' \
      --header 'content-type: application/json'
      -d '{
@@ -32,8 +30,8 @@ Delete a collection whose ID is a string:
 
 ```shell
 curl --request POST \
-     --url '${MILVUS_ENDPOINT}/v1/vector/delete' \
-     --header 'Authorization: Bearer <API-Key>' \
+     --url '${MILVUS_HOST}:${MILVUS_PORT}/v1/vector/delete' \
+     --header 'Authorization: Bearer <TOKEN>' \
      --header 'accept: application/json' \
      --header 'content-type: application/json'
      -d '{
@@ -46,8 +44,8 @@ Delete a list of collections whose IDs are integers:
 
 ```shell
 curl --request POST \
-     --url '${MILVUS_ENDPOINT}/v1/vector/delete' \
-     --header 'Authorization: Bearer <API-Key>' \
+     --url '${MILVUS_HOST}:${MILVUS_PORT}/v1/vector/delete' \
+     --header 'Authorization: Bearer <TOKEN>' \
      --header 'accept: application/json' \
      --header 'content-type: application/json'
      -d '{
@@ -60,8 +58,8 @@ Delete a list of collections whose IDs are strings:
 
 ```shell
 curl --request POST \
-     --url '${MILVUS_ENDPOINT}/v1/vector/delete' \
-     --header 'Authorization: Bearer <API-Key>' \
+     --url '${MILVUS_HOST}:${MILVUS_PORT}/v1/vector/delete' \
+     --header 'Authorization: Bearer <TOKEN>' \
      --header 'accept: application/json' \
      --header 'content-type: application/json'
      -d '{
@@ -77,7 +75,11 @@ curl --request POST \
 
 - No query parameters required
 
-- No path parameters required
+- Path parameters
+
+    | Parameter        | Description                                                                               |
+    |------------------|-------------------------------------------------------------------------------------------|
+    | `public-endpoint`  | **string**(required)<br>|
 
 ### Request Body
 

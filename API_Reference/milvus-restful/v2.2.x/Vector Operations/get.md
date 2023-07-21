@@ -2,13 +2,11 @@
 
 Conducts a similarity search in a collection.
 
-## Endpoint
-
 <div>
     <div style="display: inline-block; background: #026aca; font-size: 0.6em; border-radius: 10px; color: #ffffff; padding: 0.3em 1em;">
         <span>POST</span>
     </div>
-    <span style="font-weight: bold;">  https://{milvus_endpoint}/vector/get</span>
+    <span style="font-weight: bold;">  https://{public_endpoint}/v1/vector/get</span>
 </div>
 
 ## Example
@@ -18,8 +16,8 @@ Get a specified entity whose ID is an integer:
 
 ```shell
 curl --request POST \
-     --url '${MILVUS_ENDPOINT}/v1/vector/get' \
-     --header 'Authorization: Bearer <API-Key>' \
+     --url '${MILVUS_HOST}:${MILVUS_PORT}/v1/vector/get' \
+     --header 'Authorization: Bearer <TOKEN>' \
      --header 'accept: application/json' \
      --header 'content-type: application/json'
      -d '{
@@ -33,8 +31,8 @@ Get a specified entity whose ID is a string:
 
 ```shell
 curl --request POST \
-     --url '${MILVUS_ENDPOINT}/v1/vector/get' \
-     --header 'Authorization: Bearer <API-Key>' \
+     --url '${MILVUS_HOST}:${MILVUS_PORT}/v1/vector/get' \
+     --header 'Authorization: Bearer <TOKEN>' \
      --header 'accept: application/json' \
      --header 'content-type: application/json'
      -d '{
@@ -48,8 +46,8 @@ Get a list of entities whose IDs are integers:
 
 ```shell
 curl --request POST \
-     --url '${MILVUS_ENDPOINT}/v1/vector/get' \
-     --header 'Authorization: Bearer <API-Key>' \
+     --url '${MILVUS_HOST}:${MILVUS_PORT}/v1/vector/get' \
+     --header 'Authorization: Bearer <TOKEN>' \
      --header 'accept: application/json' \
      --header 'content-type: application/json'
      -d '{
@@ -63,8 +61,8 @@ Get a list of entities whose IDs are strings:
 
 ```shell
 curl --request POST \
-     --url '${MILVUS_ENDPOINT}/v1/vector/get' \
-     --header 'Authorization: Bearer <API-Key>' \
+     --url '${MILVUS_HOST}:${MILVUS_PORT}/v1/vector/get' \
+     --header 'Authorization: Bearer <TOKEN>' \
      --header 'accept: application/json' \
      --header 'content-type: application/json'
      -d '{
@@ -82,7 +80,11 @@ curl --request POST \
 
 - No query parameters required
 
-- No path parameters required
+- Path parameters
+
+    | Parameter        | Description                                                                               |
+    |------------------|-------------------------------------------------------------------------------------------|
+    | `public-endpoint`  | **string**(required)<br>|
 
 ### Request Body
 
