@@ -113,33 +113,10 @@ The properties in the returned response are listed in the following table.
 
 ## Possible Errors
 
-| Code | Error Message |
-| ---- | ------------- |
-| 80000 | Incorrect parameter: xxx |
-| 80001 | The token is illegal |
-| 80002 | The token is invalid |
-| 80007 |  This CU Size requires significant resource consumption. If you want to use it, please complete the card binding on the Billing page first. |
-| 80010 | Duplicated ClusterName. You have already created a running Cluster with the same name. To avoid complexity in management, please modify the name and create a new one. |
-| 80014 | Your input cuSize value is not supported yet. |
-| 80022 | Dedicated cluster not support this operation. |
-| 90013 | The parameter shardsNum should have a value range between 1 and 32. |
-| 90014 | The length of parameter description can not exceed 4096. |
-| 90015 | There are no fields. Please include at least 1 primary key field and 1 vector field in the table definition. |
-| 90016 | No primary key field. |
-| 90017 | There can only be one primary key field for each collection. |
-| 90018 | The type of the primary key field must be int64 or varchar. |
-| 90019 | AutoID can only be added to the primary key field. |
-| 90020 | AutoID can only be added to a primary key field of type int64. |
-| 90023 | The length of the Varchar type should be between 1 and 65535. |
-| 90025 | The dimension of the vector column should be between 32 and 32768. |
-| 90027 | Invalid parameter metricType. Only L2 or IP are allowed. Please refer to the documentation: https://milvus.io/docs/metric.md |
-| 90100 | Parse number of field xxx type error. |
-| 90102 | The cluster does not exist in current region. |
-| 90106 | The collection already exists. |
-| 90110 | No filter key field. |
-| 90112 | The field name should not be empty. |
-| 90113 | The field type of field xxx should not be empty. |
-| 90114 | The index field name can only be added to a vector field. |
-| 90122 | No dimension key field. |
-| 90136 | No create collection content provided. |
-| 90139 | Type mismatch for field 'xxx'. expected type:xxx, but received input:xxx. |
+| Error Code | Description |
+| --- | --- |
+| 1800 | user hasn't authenticate |
+| 1801 | can only accept json format request |
+| 1802 | missing required parameters |
+| 1803 | fail to marshal collection schema |
+| 800 | database not found |

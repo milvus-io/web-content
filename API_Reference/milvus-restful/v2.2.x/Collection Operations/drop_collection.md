@@ -96,16 +96,9 @@ The properties in the returned response are listed in the following table.
 
 ## Possible Errors
 
-| Code | Error Message |
-| ---- | ------------- |
-| 80000 | Incorrect parameter: xxx |
-| 80001 | The token is illegal |
-| 80002 | The token is invalid |
-| 80020 | Invalid clusterId or you do not have permission to access that Cluster. |
-| 80022 | Dedicated cluster not support this operation. |
-| 90001 | The collection xxx does not exist. You can use ListCollections to view the list of existing collections. |
-| 90011 | Invalid CollectionName. Reason: xxx |
-| 90102 | The cluster does not exist in current region. |
-| 90103 | The clusterId parameter is empty in the request path. |
-| 90138 | No drop collection content provided. |
-| 90139 | Type mismatch for field 'xxx'. expected type:xxx, but received input:xxx. |
+| Error Code | Description |
+| --- | --- |
+| 1800 | user hasn't authenticate |
+| 1801 | can only accept json format request |
+| 1802 | missing required parameters |
+| 800 | database not found |

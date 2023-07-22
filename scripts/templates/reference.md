@@ -172,6 +172,4 @@ The properties in the returned response are listed in the following table.
 
 ## Possible Errors
 
-| Code | Error Message |
-| ---- | ------------- |
 {{ page_title | list_error }}

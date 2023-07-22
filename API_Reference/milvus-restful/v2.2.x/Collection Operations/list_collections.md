@@ -90,13 +90,7 @@ The properties in the returned response are listed in the following table.
 
 ## Possible Errors
 
-| Code | Error Message |
-| ---- | ------------- |
-| 80000 | Incorrect parameter: xxx |
-| 80001 | The token is illegal |
-| 80002 | The token is invalid |
-| 80020 | Invalid clusterId or you do not have permission to access that Cluster. |
-| 80022 | Dedicated cluster not support this operation. |
-| 90011 | Invalid CollectionName. Reason: xxx |
-| 90102 | The cluster does not exist in current region. |
-| 90103 | The clusterId parameter is empty in the request path. |
+| Error Code | Description |
+| --- | --- |
+| 1800 | user hasn't authenticate |
+| 800 | database not found |

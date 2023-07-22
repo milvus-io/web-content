@@ -116,26 +116,10 @@ The properties in the returned response are listed in the following table.
 
 ## Possible Errors
 
-| Code | Error Message |
-| ---- | ------------- |
-| 80000 | Incorrect parameter: xxx |
-| 80001 | The token is illegal |
-| 80002 | The token is invalid |
-| 80020 | Invalid clusterId or you do not have permission to access that Cluster. |
-| 80022 | Dedicated cluster not support this operation. |
-| 90001 | The collection xxx does not exist. You can use ListCollections to view the list of existing collections. |
-| 90002 | The return value property xxx does not exist on collection xxx. |
-| 90004 | The parameter value for 'limit' should be between 1 and 100. |
-| 90005 | The parameter value for 'offset' should not be less than 0. |
-| 90006 | The attribute xxx is not of vector type, and therefore can not be used for approximate retrieval. |
-| 90007 | The vector dimensions do not match on the field xxx. The input vector has a dimension of xxx, while the expected vector dimension is xxx. |
-| 90011 | Invalid CollectionName. Reason: xxx |
-| 90102 | The cluster does not exist in current region. |
-| 90103 | The clusterId parameter is empty in the request path. |
-| 90110 | No filter key field. |
-| 90111 | The parameter value for 'level' should be between 1 and 3. |
-| 90115 | The number of columns inserted does not match the defined number of columns in the set. |
-| 90125 | No vector key field. |
-| 90126 | The sum of the 'offset' parameter value and the 'limit' parameter value should not exceed 16384. |
-| 90135 | No search content provided. |
-| 90139 | Type mismatch for field 'xxx'. expected type:xxx, but received input:xxx. |
+| Error Code | Description |
+| --- | --- |
+| 1800 | user hasn't authenticate |
+| 1801 | can only accept json format request |
+| 1802 | missing required parameters |
+| 1805 | fail to parse search result |
+| 800 | database not found |

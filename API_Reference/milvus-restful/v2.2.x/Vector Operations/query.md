@@ -99,19 +99,4 @@ The properties in the returned response are listed in the following table.
 
 ## Possible Errors
 
-| Code | Error Message |
-| ---- | ------------- |
-| 80000 | Incorrect parameter: xxx |
-| 80001 | The token is illegal |
-| 80002 | The token is invalid |
-| 80020 | Invalid clusterId or you do not have permission to access that Cluster. |
-| 90001 | The collection xxx does not exist. You can use ListCollections to view the list of existing collections. |
-| 90002 | The return value property xxx does not exist on collection xxx. |
-| 90004 | The parameter value for 'limit' should be between 1 and 100. |
-| 90005 | The parameter value for 'offset' should not be less than 0. |
-| 90011 | Invalid CollectionName. Reason: xxx |
-| 90102 | The cluster does not exist in current region. |
-| 90103 | The clusterId parameter is empty in the request path. |
-| 90110 | No filter key field. |
-| 90134 | No query content provided. |
-| 90139 | Type mismatch for field 'xxx'. expected type:xxx, but received input:xxx. |
+None
