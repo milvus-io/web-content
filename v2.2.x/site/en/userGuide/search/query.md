@@ -22,10 +22,7 @@ All search and query operations within Milvus are executed in memory. Load the c
   <a href="#java">Java</a>
   <a href="#go">GO</a>
   <a href="#javascript">Node.js</a>
-  <a href="#shell">CLI</a>
-  <a href="#curl">Curl</a>
 </div>
-
 
 ```python
 from pymilvus import Collection
@@ -82,10 +79,7 @@ You can also use dynamic fields in the filter expression and output fields in th
   <a href="#java">Java</a>
   <a href="#go">GO</a>
   <a href="#javascript">Node.js</a>
-  <a href="#shell">CLI</a>
-  <a href="#curl">Curl</a>
 </div>
-
 
 ```python
 res = collection.query(
@@ -107,16 +101,23 @@ const results = await milvusClient.query({
 ```
 
 ```go
+opt := client.SearchQueryOptionFunc(func(option *client.SearchQueryOption) {
+    option.Limit = 3
+    option.Offset = 0
+    option.ConsistencyLevel = entity.ClStrong
+    option.IgnoreGrowing = false
+})
+
 queryResult, err := milvusClient.Query(
-	context.Background(),                                   // ctx
-	"book",                                                 // CollectionName
-	"",                                                     // PartitionName
-	entity.NewColumnInt64("book_id", []int64{2,4,6,8}),     // expr
-	[]string{"book_id", "book_intro"}                       // OutputFields
-	entity.SearchQueryOptionFunc.WithLimit(10).WithOffset(0)// queryOptions
+    context.Background(),                                   // ctx
+    "book",                                                 // CollectionName
+    "",                                                     // PartitionName
+    entity.NewColumnInt64("book_id", []int64{2,4,6,8}),     // expr
+    []string{"book_id", "book_intro"},                      // OutputFields
+    opt,                                                    // queryOptions
 )
 if err != nil {
-	log.Fatal("fail to query collection:", err.Error())
+    log.Fatal("fail to query collection:", err.Error())
 }
 ```
 
@@ -189,81 +190,81 @@ Output:
 </div>
 
 <table class="language-python">
-	<thead>
-	<tr>
-		<th>Parameter</th>
-		<th>Description</th>
-	</tr>
-	</thead>
-	<tbody>
-	<tr>
-		<td><code>expr</code></td>
-		<td>Boolean expression used to filter attribute. Find more expression details in <a href="boolean.md">Boolean Expression Rules</a>.</td>
-	</tr>
-	<tr>
-		<td><code>limit</code></td>
-		<td>Number of the most similar results to return. The sum of this value and <code>offset</code> should be less than 16384.</td>
-	</tr>
-	<tr>
-		<td><code>offset</code></td>
-		<td>Number of results to skip in the returned set. This parameter is available only when <code>limit</code> is specified, and the sum of this value and <code>limit</code> should be less than 16384.</td>
-	</tr>
-	<tr>
-		<td><code>output_fields</code> (optional)</td>
-		<td>List of names of the field to return.</td>
-	</tr>
-	<tr>
-		<td><code>partition_names</code> (optional)</td>
-		<td>List of names of the partitions to query on.</td>
-	</tr>
-	<tr>
-		<td><code>consistency_level</code> (optional)</td>
-		<td>Consistency level of the query.</td>
-	</tr>
-	</tbody>
+    <thead>
+    <tr>
+        <th>Parameter</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><code>expr</code></td>
+        <td>Boolean expression used to filter attribute. Find more expression details in <a href="boolean.md">Boolean Expression Rules</a>.</td>
+    </tr>
+    <tr>
+        <td><code>limit</code></td>
+        <td>Number of the most similar results to return. The sum of this value and <code>offset</code> should be less than 16384.</td>
+    </tr>
+    <tr>
+        <td><code>offset</code></td>
+        <td>Number of results to skip in the returned set. This parameter is available only when <code>limit</code> is specified, and the sum of this value and <code>limit</code> should be less than 16384.</td>
+    </tr>
+    <tr>
+        <td><code>output_fields</code> (optional)</td>
+        <td>List of names of the field to return.</td>
+    </tr>
+    <tr>
+        <td><code>partition_names</code> (optional)</td>
+        <td>List of names of the partitions to query on.</td>
+    </tr>
+    <tr>
+        <td><code>consistency_level</code> (optional)</td>
+        <td>Consistency level of the query.</td>
+    </tr>
+    </tbody>
 </table>
 
 
 <table class="language-javascript">
-	<thead>
-	<tr>
-		<th>Parameter</th>
-		<th>Description</th>
-	</tr>
-	</thead>
-	<tbody>
-	<tr>
-		<td><code>collection_name</code></td>
-		<td>Name of the collection to query.</td>
-	</tr>
-	<tr>
-		<td><code>expr</code></td>
-		<td>Boolean expression used to filter attribute. Find more expression details in <a href="boolean.md">Boolean Expression Rules</a>.</td>
-	</tr>
-	<tr>
-		<td><code>output_fields</code> (optional)</td>
-		<td>List of names of the field to return.</td>
-	</tr>
-	<tr>
-		<td><code>limit</code> (optional)</td>
-		<td>Number of the most similar results to return. The sum of this value and <code>offset</code> should be less than 16384.</td>
-	</tr>
-	<tr>
-		<td><code>offset</code> (optional)</td>
-		<td>Number of results to skip in the returned set. This parameter is available only when <code>limit</code> is specified, and the sum of this value and <code>limit</code> should be less than 16384.</td>
-	</tr>
-	</tbody>
+    <thead>
+    <tr>
+        <th>Parameter</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><code>collection_name</code></td>
+        <td>Name of the collection to query.</td>
+    </tr>
+    <tr>
+        <td><code>expr</code></td>
+        <td>Boolean expression used to filter attribute. Find more expression details in <a href="boolean.md">Boolean Expression Rules</a>.</td>
+    </tr>
+    <tr>
+        <td><code>output_fields</code> (optional)</td>
+        <td>List of names of the field to return.</td>
+    </tr>
+    <tr>
+        <td><code>limit</code> (optional)</td>
+        <td>Number of the most similar results to return. The sum of this value and <code>offset</code> should be less than 16384.</td>
+    </tr>
+    <tr>
+        <td><code>offset</code> (optional)</td>
+        <td>Number of results to skip in the returned set. This parameter is available only when <code>limit</code> is specified, and the sum of this value and <code>limit</code> should be less than 16384.</td>
+    </tr>
+    </tbody>
 </table>
 
 <table class="language-go">
-	<thead>
-	<tr>
-		<th>Parameter</th>
-		<th>Description</th>
+    <thead>
+    <tr>
+        <th>Parameter</th>
+        <th>Description</th>
     <th>Options</th>
-	</tr>
-	</thead>
-	<tbody>
+    </tr>
+    </thead>
+    <tbody>
   <tr>
     <td><code>ctx</code></td>
     <td>Context to control API invocation process.</td>
@@ -280,68 +281,66 @@ Output:
     <td>N/A</td>
   </tr>
   <tr>
-		<td><code>expr</code></td>
-		<td>Boolean expression used to filter attribute.</td>
+        <td><code>expr</code></td>
+        <td>Boolean expression used to filter attribute.</td>
     <td>See <a href="boolean.md">Boolean Expression Rules</a> for more information.</td>
-	</tr>
+    </tr>
     <tr>
-		<td><code>OutputFields</code></td>
-		<td>Name of the field to return.</td>
-    	<td>Vector field is not supported in current release.</td>
-	</tr>
-	<tr>
-		<td><code>opts</code></td>
-		<td>Query options in the form of <code>entity.SearchQueryOptionFunc</code>.</td>
-		<td>Options for the search. Possible options are as follows:<ul>
-			<li><code>WithLimit(limit int64)</code> Number of entities to return. This option is to be overwritten by <code>topK</code> for searches.</li>
-			<li><code>WithOffset(offset int64)</code> Number of entities to skip. The sum of this value and that of <code>TopK</code> should be less than 16384.</li>
-			<li><code>WithIgnoreGrowing()</code></li>
-			<li><code>WithSearchQueryConsistencyLevel(cl entity.ConsistencyLevel)</code></li>
-			<li><code>WithTravelTimeStamp(tt int64)</code></li>
-			<li><code>WithGuaranteeTimeStamp(gt int64)</code></li>
-		</ul></td>
-	</tr>
-	</tbody>
+        <td><code>OutputFields</code></td>
+        <td>Name of the field to return.</td>
+        <td>Vector field is not supported in current release.</td>
+    </tr>
+    <tr>
+        <td><code>opts</code></td>
+        <td>Query options in the form of <code>entity.SearchQueryOptionFunc</code>.</td>
+        <td><ul>
+            <li><code>Limit</code> Indicates the number of entities to return.</li>
+            <li><code>Offset</code> Indicates the number of entities to skip during the search. The sum of this parameter and <code>Limit</code> should be less than <code>16384</code>.</li>
+            <li><code>ConsistencyLevel</code> Indicates the consistency level applied during the search.</li>
+            <li><code>Ignore Growing</code> Indicates whether to ignore growing segments during similarity searches. The value defaults to <code>False</code>, indicating that searches involve growing segments. </li>
+        </ul></td>
+    </tr>
+    </tbody>
 </table>
 
 <table class="language-java">
-	<thead>
-	<tr>
-		<th>Parameter</th>
-		<th>Description</th>
+    <thead>
+    <tr>
+        <th>Parameter</th>
+        <th>Description</th>
     <th>Options</th>
-	</tr>
-	</thead>
-	<tbody>
-	<tr>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
     <td><code>CollectionName</code></td>
     <td>Name of the collection to load.</td>
     <td>N/A</td>
   </tr>
   <tr>
-		<td><code>OutFields</code></td>
-		<td>Name of the field to return.</td>
+        <td><code>OutFields</code></td>
+        <td>Name of the field to return.</td>
     <td>Vector field is not supported in current release.</td>
-	</tr>
+    </tr>
   <tr>
-		<td><code>Expr</code></td>
-		<td>Boolean expression used to filter attribute.</td>
+        <td><code>Expr</code></td>
+        <td>Boolean expression used to filter attribute.</td>
     <td>See <a href="boolean.md">Boolean Expression Rules</a> for more information.</td>
-	</tr>
-	<tr>
-		<td><code>Limit</code> (optional)</td>
-		<td>Number of the most similar results to return. The sum of this value and <code>offset</code> in <code>WithOffset()</code> should be less than 16384.</td>
-	</tr>
-	<tr>
-		<td><code>Offset</code> (optional)</td>
-		<td>Number of results to skip in the returned set. This parameter is available only when <code>limit</code> is specified, and the sum of this value and <code>limit</code> in <code>WithLimit()</code> should be less than 16384.</td>
-	</tr>
+    </tr>
+    <tr>
+        <td><code>Limit</code> (optional)</td>
+        <td>Number of the most similar results to return. The sum of this value and <code>offset</code> in <code>WithOffset()</code> should be less than 16384.</td>
+    </tr>
+    <tr>
+        <td><code>Offset</code> (optional)</td>
+        <td>Number of results to skip in the returned set. This parameter is available only when <code>limit</code> is specified, and the sum of this value and <code>limit</code> in <code>WithLimit()</code> should be less than 16384.</td>
+    </tr>
   <tr>
-		<td><code>ConsistencyLevel</code></td>
-		<td>The consistency level used in the query.</td>
-	  <td><code>STRONG</code>, <code>BOUNDED</code>, and<code>EVENTUALLY</code>.</td>
-	</tr>
-	</tbody>
+        <td><code>ConsistencyLevel</code></td>
+        <td>The consistency level used in the query.</td>
+      <td><code>STRONG</code>, <code>BOUNDED</code>, and<code>EVENTUALLY</code>.</td>
+    </tr>
+    </tbody>
 </table>
 
 <table class="language-shell" style="display: none;">
@@ -362,26 +361,26 @@ Output:
 </table>
 
 <table class="language-curl" style="display: none;">
-	<thead>
-	<tr>
-		<th>Parameter</th>
-		<th>Description</th>
-	</tr>
-	</thead>
-	<tbody>
-	<tr>
-		<td><code>output_fields</code> (optional)</td>
-		<td>List of names of the fields to return.</td>
-	</tr>
-	<tr>
-		<td><code>vectors</code></td>
-		<td>Vectors to query.</td>
-	</tr>
-	<tr>
-		<td><code>expr</code></td>
-		<td>Boolean expression used to filter attribute. Find more expression details in <a href="boolean.md">Boolean Expression Rules</a>.</td>
-	</tr>
-	</tbody>
+    <thead>
+    <tr>
+        <th>Parameter</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><code>output_fields</code> (optional)</td>
+        <td>List of names of the fields to return.</td>
+    </tr>
+    <tr>
+        <td><code>vectors</code></td>
+        <td>Vectors to query.</td>
+    </tr>
+    <tr>
+        <td><code>expr</code></td>
+        <td>Boolean expression used to filter attribute. Find more expression details in <a href="boolean.md">Boolean Expression Rules</a>.</td>
+    </tr>
+    </tbody>
 </table>
 
 Check the returned results. 
@@ -391,10 +390,7 @@ Check the returned results.
   <a href="#java">Java</a>
   <a href="#go">GO</a>
   <a href="#javascript">Node.js</a>
-  <a href="#shell">CLI</a>
-  <a href="#curl">Curl</a>
 </div>
-
 
 ```python
 sorted_res = sorted(res, key=lambda k: k['book_id'])
@@ -408,7 +404,7 @@ console.log(results.data)
 ```go
 fmt.Printf("%#v\n", queryResult)
 for _, qr := range queryResult {
-	fmt.Println(qr.IDs)
+    fmt.Println(qr.IDs)
 }
 ```
 

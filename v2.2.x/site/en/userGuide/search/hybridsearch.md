@@ -112,9 +112,17 @@ const results = await milvusClient.search({
 ```
 
 ```go
-sp, _ := entity.NewIndexFlatSearchParam(   // NewIndex*SearchParam func
+sp := entity.NewIndexFlatSearchParam(   // NewIndex*SearchParam func
   10,                                      // searchParam
 )
+
+opt := client.SearchQueryOptionFunc(func(option *client.SearchQueryOption) {
+    option.Limit = 3
+    option.Offset = 0
+    option.ConsistencyLevel = entity.ClStrong
+    option.IgnoreGrowing = false
+})
+
 searchResult, err := milvusClient.Search(
   context.Background(),                    // ctx
   "book",                                  // CollectionName
@@ -126,8 +134,9 @@ searchResult, err := milvusClient.Search(
   entity.L2,                               // metricType
   2,                                       // topK
   sp,                                      // sp
-  entity.SearchQueryOptionFunc.WithLimit(10).WithOffset(0) // search options
+  opt,                                     // search options
 )
+
 if err != nil {
   log.Fatal("fail to search collection:", err.Error())
 }
@@ -389,14 +398,12 @@ Output:
 	<tr>
 		<td><code>opts</code></td>
 		<td>Search options in the form of <code>entity.SearchQueryOptionFunc</code>.</td>
-		<td>Options for the search. Possible options are as follows:<ul>
-			<li><code>WithLimit(limit int64)</code> Number of entities to return. This option is to be overwritten by <code>topK</code> for searches.</li>
-			<li><code>WithOffset(offset int64)</code> Number of entities to skip. The sum of this value and that of <code>TopK</code> should be less than 16384.</li>
-			<li><code>WithIgnoreGrowing()</code></li>
-			<li><code>WithSearchQueryConsistencyLevel(cl entity.ConsistencyLevel)</code></li>
-			<li><code>WithTravelTimeStamp(tt int64)</code></li>
-			<li><code>WithGuaranteeTimeStamp(gt int64)</code></li>
-		</ul></td>
+        <td><ul>
+            <li><code>Limit</code> Indicates the number of entities to return.</li>
+            <li><code>Offset</code> Indicates the number of entities to skip during the search. The sum of this parameter and <code>Limit</code> should be less than <code>16384</code>.</li>
+            <li><code>ConsistencyLevel</code> Indicates the consistency level applied during the search.</li>
+            <li><code>Ignore Growing</code> Indicates whether to ignore growing segments during similarity searches. The value defaults to <code>False</code>, indicating that searches involve growing segments. </li>
+        </ul></td>
 	</tr>
 	</tbody>
 </table>

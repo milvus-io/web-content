@@ -22,10 +22,7 @@ All search and query operations within Milvus are executed in memory. Load the c
   <a href="#java">Java</a>
   <a href="#go">GO</a>
   <a href="#javascript">Node.js</a>
-  <a href="#shell">CLI</a>
-  <a href="#curl">Curl</a>
 </div>
-
 
 ```python
 from pymilvus import Collection
@@ -81,10 +78,7 @@ Prepare the parameters that suit your search scenario. The following example def
   <a href="#java">Java</a>
   <a href="#go">GO</a>
   <a href="#javascript">Node.js</a>
-  <a href="#shell">CLI</a>
-  <a href="#curl">Curl</a>
 </div>
-
 
 ```python
 search_params = {
@@ -102,9 +96,16 @@ const searchParams = {
 ```
 
 ```go
-sp, _ := entity.NewIndexIvfFlatSearchParam( // NewIndex*SearchParam func
-    10,                                     // searchParam
+sp := entity.NewIndexIvfFlatSearchParam( // NewIndex*SearchParam func
+    10,                                  // searchParam
 )
+
+opt := client.SearchQueryOptionFunc(func(option *client.SearchQueryOption) {
+    option.Limit = 3
+    option.Offset = 0
+    option.ConsistencyLevel = entity.ClStrong
+    option.IgnoreGrowing = false
+})
 ```
 
 ```java
@@ -189,66 +190,66 @@ Output:
 </div>
 
 <table class="language-python">
-	<thead>
-	<tr>
-		<th>Parameter</th>
-		<th>Description</th>
-	</tr>
-	</thead>
-	<tbody>
-	<tr>
-		<td><code>metric_type</code></td>
-		<td>Method used to measure the distance between vectors during search. It should be the same as the one specified for the index-building process. See <a href="metric.md">Simlarity Metrics</a> for more information.</td>
-	</tr>
-	<tr>
-		<td><code>offset</code></td>
-		<td>Number of entities to skip during the search. The sum of this parameter and <code>limit</code> of the <code>search</code> method should be less than <code>16384</code>.</td>
-	</tr>
-	<tr>
-		<td><code>ignore_growing</code></td>
-		<td>Whether to ignore growing segments during similarity searches. The value defaults to <code>False</code>, indicating that searches involve growing segments.</td>
-	</tr>	
+    <thead>
     <tr>
-		<td><code>params</code></td>
-		<td>Search parameter(s) specific to the specified index type. See <a href="index.md">Vector Index</a> for more information. Possible options are as follows: <ul><li><code>nprobe</code> Indicates the number of cluster units to search. This parameter is available only when <code>index_type</code> is set to <code>IVF_FLAT</code>, <code>IVF_SQ8</code>, or <code>IVF_PQ</code>. The value should be less than <code>nlist</code> specified for the index-building process.</li>
-			<li><code>ef</code> Indicates the search scope. This parameter is available only when <code>index_type</code> is set to <code>HNSW</code>. The value should be within the range from <code>top_k</code> to <code>32768</code>.</li>
-			<li><code>search_k</code> Indicates the search scope. This parameter is available only when <code>index_type</code> is set to <code>ANNOY</code>. The value should be greater than or equal to the top K. </li>
-		</ul></td>
-	</tr>
-	</tbody>
+        <th>Parameter</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><code>metric_type</code></td>
+        <td>Method used to measure the distance between vectors during search. It should be the same as the one specified for the index-building process. See <a href="metric.md">Simlarity Metrics</a> for more information.</td>
+    </tr>
+    <tr>
+        <td><code>offset</code></td>
+        <td>Number of entities to skip during the search. The sum of this parameter and <code>limit</code> of the <code>search</code> method should be less than <code>16384</code>.</td>
+    </tr>
+    <tr>
+        <td><code>ignore_growing</code></td>
+        <td>Whether to ignore growing segments during similarity searches. The value defaults to <code>False</code>, indicating that searches involve growing segments.</td>
+    </tr>    
+    <tr>
+        <td><code>params</code></td>
+        <td>Search parameter(s) specific to the specified index type. See <a href="index.md">Vector Index</a> for more information. Possible options are as follows: <ul><li><code>nprobe</code> Indicates the number of cluster units to search. This parameter is available only when <code>index_type</code> is set to <code>IVF_FLAT</code>, <code>IVF_SQ8</code>, or <code>IVF_PQ</code>. The value should be less than <code>nlist</code> specified for the index-building process.</li>
+            <li><code>ef</code> Indicates the search scope. This parameter is available only when <code>index_type</code> is set to <code>HNSW</code>. The value should be within the range from <code>top_k</code> to <code>32768</code>.</li>
+            <li><code>search_k</code> Indicates the search scope. This parameter is available only when <code>index_type</code> is set to <code>ANNOY</code>. The value should be greater than or equal to the top K. </li>
+        </ul></td>
+    </tr>
+    </tbody>
 </table>
 
 <table class="language-javascript">
-	<thead>
-	<tr>
-		<th>Parameter</th>
-		<th>Description</th>
-	</tr>
-	</thead>
-	<tbody>
+    <thead>
     <tr>
-		<td><code>params</code></td>
-		<td>Search parameter(s) specific to the index. See <a href="index.md">Vector Index</a> for more information. Possible options are as follows:<ul>
-			<li><code>nprobe</code> Indicates the number of cluster units to search. This parameter is available only when <code>index_type</code> is set to <code>IVF_FLAT</code>, <code>IVF_SQ8</code>, or <code>IVF_PQ</code>. The value should be less than <code>nlist</code> specified for the index-building process.</li>
-			<li><code>ef</code> Indicates the search scope. This parameter is available only when <code>index_type</code> is set to <code>HNSW</code>. The value should be within the range from <code>top_k</code> to <code>32768</code>.</li>
-			<li><code>search_k</code> Indicates the search scope. This parameter is available only when <code>index_type</code> is set to <code>ANNOY</code>. The value should be greater than or equal to the top K. </li>
-		</ul></td>
-	</tr>
-	</tbody>
+        <th>Parameter</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><code>params</code></td>
+        <td>Search parameter(s) specific to the index. See <a href="index.md">Vector Index</a> for more information. Possible options are as follows:<ul>
+            <li><code>nprobe</code> Indicates the number of cluster units to search. This parameter is available only when <code>index_type</code> is set to <code>IVF_FLAT</code>, <code>IVF_SQ8</code>, or <code>IVF_PQ</code>. The value should be less than <code>nlist</code> specified for the index-building process.</li>
+            <li><code>ef</code> Indicates the search scope. This parameter is available only when <code>index_type</code> is set to <code>HNSW</code>. The value should be within the range from <code>top_k</code> to <code>32768</code>.</li>
+            <li><code>search_k</code> Indicates the search scope. This parameter is available only when <code>index_type</code> is set to <code>ANNOY</code>. The value should be greater than or equal to the top K. </li>
+        </ul></td>
+    </tr>
+    </tbody>
 </table>
 
 <table class="language-go">
-	<thead>
-	<tr>
-		<th>Parameter</th>
-		<th>Description</th>
+    <thead>
+    <tr>
+        <th>Parameter</th>
+        <th>Description</th>
     <th>Options</th>
-	</tr>
-	</thead>
-	<tbody>
-	<tr>
-		<td><code>NewIndex*SearchParam func</code></td>
-		<td>Function to create <code>entity.SearchParam</code> according to different index types.</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><code>NewIndex*SearchParam func</code></td>
+        <td>Function to create <code>entity.SearchParam</code> according to different index types.</td>
         <td>For floating point vectors:
             <ul>
                 <li><code>NewIndexFlatSearchParam()</code> (FLAT)</li>
@@ -264,42 +265,52 @@ Output:
                 <li><code>NewIndexBinIvfFlatSearchParam(nprobe int)</code> (BIN_IVF_FLAT)</li>
             </ul>
         </td>
-	</tr>
-	<tr>
-		<td><code>sp</code></td>
-		<td>Search parameter(s) specific to the index returned by the preceding functions.</td>
-    <td>See <a href="index.md">Vector Index</a> for more information. </td>
-	</tr>
-	</tbody>
+    </tr>
+    <tr>
+        <td><code>sp</code></td>
+        <td>Search parameter(s) specific to the index returned by the preceding functions.</td>
+        <td>See <a href="index.md">Vector Index</a> for more information. </td>
+    </tr>
+    <tr>
+        <td><code>opt<code></td>
+        <td>Options for ANN searches.</td>
+        <td><ul>
+            <li><code>Limit</code> Indicates the number of entities to return.</li>
+            <li><code>Offset</code> Indicates the number of entities to skip during the search. The sum of this parameter and <code>Limit</code> should be less than <code>16384</code>.</li>
+            <li><code>ConsistencyLevel</code> Indicates the consistency level applied during the search.</li>
+            <li><code>Ignore Growing</code> Indicates whether to ignore growing segments during similarity searches. The value defaults to <code>False</code>, indicating that searches involve growing segments. </li>
+        </ul></td>
+    </tr>
+    </tbody>
 </table>
 
 <table class="language-java">
-	<thead>
-	<tr>
-		<th>Parameter</th>
-		<th>Description</th>
-    	<th>Options</th>
-	</tr>
-	</thead>
-	<tbody>
+    <thead>
+    <tr>
+        <th>Parameter</th>
+        <th>Description</th>
+        <th>Options</th>
+    </tr>
+    </thead>
+    <tbody>
   <tr>
-		<td><code>SEARCH_K</code></td>
-		<td>Number of the most similar results to return.</td>
+        <td><code>SEARCH_K</code></td>
+        <td>Number of the most similar results to return.</td>
     <td>N/A</td>
-	</tr>
+    </tr>
   <tr>
-		<td><code>SEARCH_PARAM</code></td>
-		<td>Search parameter(s) specific to the index.</td>
+        <td><code>SEARCH_PARAM</code></td>
+        <td>Search parameter(s) specific to the index.</td>
     <td>See <a href="index.md">Vector Index</a> for more information. Possible options are as follows:<ul>
-		<li><code>nprobe</code> Indicates the number of cluster units to search. This parameter is available only when <code>index_type</code> is set to <code>IVF_FLAT</code>, <code>IVF_SQ8</code>, or <code>IVF_PQ</code>. The value should be less than <code>nlist</code> specified for the index-building process.</li>
-		<li><code>ef</code> Indicates the search scope. This parameter is available only when <code>index_type</code> is set to <code>HNSW</code>. The value should be within the range from <code>top_k</code> to <code>32768</code>.</li>
-		<li><code>search_k</code> Indicates the search scope. This parameter is available only when <code>index_type</code> is set to <code>ANNOY</code>. The value should be greater than or equal to the top K.</li>
-		<li><code>metric_type</code> Indicates the metric type used in the search. It should be the same as the one specified when you index the collection.</li>
-		<li><code>limit</code> Indicates the number of entities to return starting from the last skippped entity.</li>
-		<li><code>offset</code> Indicates the number of entities to skip during the search. The sum of this parameter and <code>topK</code> of the <code>withTopK()</code> method should be less than <code>16384</code>.</li>
-	</ul></td>
-	</tr>
-	</tbody>
+        <li><code>nprobe</code> Indicates the number of cluster units to search. This parameter is available only when <code>index_type</code> is set to <code>IVF_FLAT</code>, <code>IVF_SQ8</code>, or <code>IVF_PQ</code>. The value should be less than <code>nlist</code> specified for the index-building process.</li>
+        <li><code>ef</code> Indicates the search scope. This parameter is available only when <code>index_type</code> is set to <code>HNSW</code>. The value should be within the range from <code>top_k</code> to <code>32768</code>.</li>
+        <li><code>search_k</code> Indicates the search scope. This parameter is available only when <code>index_type</code> is set to <code>ANNOY</code>. The value should be greater than or equal to the top K.</li>
+        <li><code>metric_type</code> Indicates the metric type used in the search. It should be the same as the one specified when you index the collection.</li>
+        <li><code>limit</code> Indicates the number of entities to return starting from the last skippped entity.</li>
+        <li><code>offset</code> Indicates the number of entities to skip during the search. The sum of this parameter and <code>topK</code> of the <code>withTopK()</code> method should be less than <code>16384</code>.</li>
+    </ul></td>
+    </tr>
+    </tbody>
 </table>
 
 
@@ -321,49 +332,49 @@ Output:
 </table>
 
 <table class="language-curl" style="display:none">
-	<thead>
-	<tr>
-		<th>Parameter</th>
-		<th>Description</th>
-	</tr>
-	</thead>
-	<tbody>
+    <thead>
     <tr>
-		<td><code>output_fields</code>(optional)</td>
-		<td>Name of the field to return. Vector field is not supported in current release.</td>
-	</tr>
-	<tr>
-		<td><code>anns_field</code></td>
-		<td>Name of the field to search on.</td>
-	</tr>
-	<tr>
-		<td><code>topk</code></td>
-		<td>Number of the most similar results to return.</td>
-	</tr>
-	<tr>
-		<td><code>params</code></td>
-		<td>Search parameter(s) specific to the index. See <a href="index.md">Vector Index</a> for more information.</td>
-	</tr>
-	<tr>
-		<td><code>metric_type</code></td>
-		<td>Metrics used to measure similarity of vectors. See <a href="metric.md">Simlarity Metrics</a> for more information.</td>
-	</tr>
-	<tr>
-		<td><code>round_decimal</code> (optional)</td>
-		<td>Number of decimal places of returned distance.</td>
-	</tr>
-	<tr>
-		<td><code>Vectors</code></td>
-		<td>Vectors to search with.</td>
-	</tr>
-	<tr>
-		<td><code>dsl_type</code></td>
-		<td>Type of <code>dsl</code> (Data Search Language) field:
-		<br>0: "Dsl"
-		<br>1: "BoolExprV1"
-		</td>
-	</tr>
-	</tbody>
+        <th>Parameter</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><code>output_fields</code>(optional)</td>
+        <td>Name of the field to return. Vector field is not supported in current release.</td>
+    </tr>
+    <tr>
+        <td><code>anns_field</code></td>
+        <td>Name of the field to search on.</td>
+    </tr>
+    <tr>
+        <td><code>topk</code></td>
+        <td>Number of the most similar results to return.</td>
+    </tr>
+    <tr>
+        <td><code>params</code></td>
+        <td>Search parameter(s) specific to the index. See <a href="index.md">Vector Index</a> for more information.</td>
+    </tr>
+    <tr>
+        <td><code>metric_type</code></td>
+        <td>Metrics used to measure similarity of vectors. See <a href="metric.md">Simlarity Metrics</a> for more information.</td>
+    </tr>
+    <tr>
+        <td><code>round_decimal</code> (optional)</td>
+        <td>Number of decimal places of returned distance.</td>
+    </tr>
+    <tr>
+        <td><code>Vectors</code></td>
+        <td>Vectors to search with.</td>
+    </tr>
+    <tr>
+        <td><code>dsl_type</code></td>
+        <td>Type of <code>dsl</code> (Data Search Language) field:
+        <br>0: "Dsl"
+        <br>1: "BoolExprV1"
+        </td>
+    </tr>
+    </tbody>
 </table>
 
 ## Conduct a vector search
@@ -377,22 +388,19 @@ Milvus supports setting consistency level specifically for a search. The example
   <a href="#java">Java</a>
   <a href="#go">GO</a>
   <a href="#javascript">Node.js</a>
-  <a href="#shell">CLI</a>
-  <a href="#curl">Curl</a>
 </div>
-
 
 ```python
 results = collection.search(
     data=[[0.1, 0.2]], 
     anns_field="book_intro", 
     # the sum of `offset` in `param` and `limit` 
-	# should be less than 16384.
+    # should be less than 16384.
     param=search_params,
     limit=10,
     expr=None,
     # set the names of the fields you want to 
-	# retrieve from the search result.
+    # retrieve from the search result.
     output_fields=['title'],
     consistency_level="Strong"
 )
@@ -434,10 +442,7 @@ searchResult, err := milvusClient.Search(
     entity.L2,                               // metricType
     10,                                      // topK
     sp,                                      // sp
-    entity.SearchQueryOption{                // searchOptions
-        Offset: 2,                           // offset
-        ConsistencyLevel: ClStrong           // consistency level
-    }
+    opt,
 )
 if err != nil {
     log.Fatal("fail to search collection:", err.Error())
@@ -470,96 +475,96 @@ R<SearchResults> respSearch = milvusClient.search(searchParam);
 ```
 
 <table class="language-python">
-	<thead>
-	<tr>
-		<th>Parameter</th>
-		<th>Description</th>
-	</tr>
-	</thead>
-	<tbody>
+    <thead>
     <tr>
-		<td><code>data</code></td>
-		<td>Vectors to search with.</td>
-	</tr>
-	<tr>
-		<td><code>anns_field</code></td>
-		<td>Name of the field to search on.</td>
-	</tr>
+        <th>Parameter</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
     <tr>
-		<td><code>param</code></td>
-		<td>Search parameter(s) specific to the index. See <a href="index.md">Vector Index</a> for more information.</td>
-	</tr>
-	<tr>
-		<td><code>limit</code></td>
-		<td>Number of the most similar results to return.  The sum of this value and <code>offset</code> in <code>param</code> should be less than 16384.</td>
-	</tr>
+        <td><code>data</code></td>
+        <td>Vectors to search with.</td>
+    </tr>
+    <tr>
+        <td><code>anns_field</code></td>
+        <td>Name of the field to search on.</td>
+    </tr>
+    <tr>
+        <td><code>param</code></td>
+        <td>Search parameter(s) specific to the index. See <a href="index.md">Vector Index</a> for more information.</td>
+    </tr>
+    <tr>
+        <td><code>limit</code></td>
+        <td>Number of the most similar results to return.  The sum of this value and <code>offset</code> in <code>param</code> should be less than 16384.</td>
+    </tr>
   <tr>
-		<td><code>expr</code></td>
-		<td>Boolean expression used to filter attribute. See <a href="boolean.md">Boolean Expression Rules</a> for more information.</td>
-	</tr>
+        <td><code>expr</code></td>
+        <td>Boolean expression used to filter attribute. See <a href="boolean.md">Boolean Expression Rules</a> for more information.</td>
+    </tr>
   <tr>
-		<td><code>output_fields</code> (optional)</td>
-		<td>Name of the field to return. Vector field is not supported in current release.</td>
-	</tr>
-	<tr>
-		<td><code>consistency_level</code> (optional)</td>
-		<td>Consistency level of the search.</td>
-	</tr>
-	</tbody>
+        <td><code>output_fields</code> (optional)</td>
+        <td>Name of the field to return. Vector field is not supported in current release.</td>
+    </tr>
+    <tr>
+        <td><code>consistency_level</code> (optional)</td>
+        <td>Consistency level of the search.</td>
+    </tr>
+    </tbody>
 </table>
 
 <table class="language-javascript">
-	<thead>
-	<tr>
-		<th>Parameter</th>
-		<th>Description</th>
-	</tr>
-	</thead>
-	<tbody>
-	<tr>
-		<td><code>collection_name</code></td>
-		<td>Name of the collection to search in.</td>
-	</tr>
-	<tr>
+    <thead>
+    <tr>
+        <th>Parameter</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><code>collection_name</code></td>
+        <td>Name of the collection to search in.</td>
+    </tr>
+    <tr>
     <td><code>search_params</code></td>
     <td>Parameters (as an object) used for search.</td>
   </tr>
-	<tr>
+    <tr>
     <td><code>vector</code> / <code>vectors</code></td>
     <td>Vectors to search with. Note that you should provide a list of floats if you choose to use <code>vector</code>. Otherwise, you should provide a list of float lists.</td>
   </tr>
   <tr>
-		<td><code>vector_type</code></td>
-		<td>Pre-check of binary or float vectors. <code>100</code> for binary vectors and <code>101</code> for float vectors.</td>
-	</tr>
-	<tr>
-		<td><code>limit</code> (optional)</td>
-		<td>Number of the most similar results to return. The sum of this value and <code>offset</code> should be less than 16384.</td>
-	</tr>
-	<tr>
-		<td><code>offset</code> (optional)</td>
-		<td>Number of entities to skip. The sum of this value of <code>limit</code> should be less than 16384.</td>
-	</tr>
+        <td><code>vector_type</code></td>
+        <td>Pre-check of binary or float vectors. <code>100</code> for binary vectors and <code>101</code> for float vectors.</td>
+    </tr>
     <tr>
-		<td><code>filter</code> (optional)</td>
-		<td>Boolean expression used to filter attribute. See <a href="boolean.md">Boolean Expression Rules</a> for more information.</td>
-	</tr>
+        <td><code>limit</code> (optional)</td>
+        <td>Number of the most similar results to return. The sum of this value and <code>offset</code> should be less than 16384.</td>
+    </tr>
+    <tr>
+        <td><code>offset</code> (optional)</td>
+        <td>Number of entities to skip. The sum of this value of <code>limit</code> should be less than 16384.</td>
+    </tr>
+    <tr>
+        <td><code>filter</code> (optional)</td>
+        <td>Boolean expression used to filter attribute. See <a href="boolean.md">Boolean Expression Rules</a> for more information.</td>
+    </tr>
   <tr>
-		<td><code>output_fields</code> (optional)</td>
-		<td>Name of the field to return. Vector field is not supported in current release.</td>
-	</tr>
-	</tbody>
+        <td><code>output_fields</code> (optional)</td>
+        <td>Name of the field to return. Vector field is not supported in current release.</td>
+    </tr>
+    </tbody>
 </table>
 
 <table class="language-go">
-	<thead>
-	<tr>
-		<th>Parameter</th>
-		<th>Description</th>
+    <thead>
+    <tr>
+        <th>Parameter</th>
+        <th>Description</th>
     <th>Options</th>
-	</tr>
-	</thead>
-	<tbody>
+    </tr>
+    </thead>
+    <tbody>
   <tr>
     <td><code>ctx</code></td>
     <td>Context to control API invocation process.</td>
@@ -576,100 +581,88 @@ R<SearchResults> respSearch = milvusClient.search(searchParam);
     <td>N/A</td>
   </tr>
   <tr>
-		<td><code>expr</code></td>
-		<td>Boolean expression used to filter attribute.</td>
+        <td><code>expr</code></td>
+        <td>Boolean expression used to filter attribute.</td>
     <td>See <a href="boolean.md">Boolean Expression Rules</a> for more information.</td>
-	</tr>
+    </tr>
   <tr>
-		<td><code>output_fields</code></td>
-		<td>Name of the field to return.</td>
+        <td><code>output_fields</code></td>
+        <td>Name of the field to return.</td>
     <td>Vector field is not supported in current release.</td>
-	</tr>
+    </tr>
   <tr>
     <td><code>vectors</code></td>
     <td>Vectors to search with.</td>
     <td>N/A</td>
   </tr>
   <tr>
-		<td><code>vectorField</code></td>
-		<td>Name of the field to search on.</td>
+        <td><code>vectorField</code></td>
+        <td>Name of the field to search on.</td>
     <td>N/A</td>
-	</tr>
+    </tr>
   <tr>
-		<td><code>metricType</code></td>
-		<td>Metric type used for search.</td>
+        <td><code>metricType</code></td>
+        <td>Metric type used for search.</td>
     <td>This parameter must be set identical to the metric type used for index building.</td>
-	</tr>
+    </tr>
   <tr>
-		<td><code>topK</code></td>
-		<td>Number of the most similar results to return. The sum of this value and that of <code>offset</code> in <code>WithOffset</code> of <code>opts</code> should be less than 16384.</td>
+        <td><code>topK</code></td>
+        <td>Number of the most similar results to return. The sum of this value and that of <code>offset</code> in <code>WithOffset</code> of <code>opts</code> should be less than 16384.</td>
     <td>N/A</td>
-	</tr>
+    </tr>
   <tr>
-		<td><code>sp</code></td>
-		<td><code>entity.SearchParam<code> specific to the index.</td>
+        <td><code>sp</code></td>
+        <td><code>entity.SearchParam<code> specific to the index.</td>
     <td>N/A</td>
-	</tr>
-	<tr>
-		<td><code>opts</code></td>
-		<td>Search options in the form of <code>entity.SearchQueryOptionFunc</code>.</td>
-		<td>Options for the search. Possible options are as follows:<ul>
-			<li><code>WithLimit(limit int64)</code> Number of entities to return. This option is to be overwritten by <code>topK</code> for searches.</li>
-			<li><code>WithOffset(offset int64)</code> Number of entities to skip. The sum of this value and that of <code>TopK</code> should be less than 16384.</li>
-			<li><code>WithIgnoreGrowing()</code></li>
-			<li><code>WithSearchQueryConsistencyLevel(cl entity.ConsistencyLevel)</code></li>
-			<li><code>WithTravelTimeStamp(tt int64)</code></li>
-			<li><code>WithGuaranteeTimeStamp(gt int64)</code></li>
-		</ul></td>
-	</tr>
-	</tbody>
+    </tr>
+    </tbody>
 </table>
 
 <table class="language-java">
-	<thead>
-	<tr>
-		<th>Parameter</th>
-		<th>Description</th>
+    <thead>
+    <tr>
+        <th>Parameter</th>
+        <th>Description</th>
     <th>Options</th>
-	</tr>
-	</thead>
-	<tbody>
-	<tr>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
     <td><code>CollectionName</code></td>
     <td>Name of the collection to load.</td>
     <td>N/A</td>
   </tr>
   <tr>
-		<td><code>MetricType</code></td>
-		<td>Metric type used for search.</td>
+        <td><code>MetricType</code></td>
+        <td>Metric type used for search.</td>
     <td>This parameter must be set identical to the metric type used for index building.</td>
-	</tr>
+    </tr>
   <tr>
-		<td><code>OutFields</code></td>
-		<td>Name of the field to return.</td>
+        <td><code>OutFields</code></td>
+        <td>Name of the field to return.</td>
     <td>Vector field is not supported in current release.</td>
-	</tr>
+    </tr>
   <tr>
     <td><code>Vectors</code></td>
     <td>Vectors to search with.</td>
     <td>N/A</td>
   </tr>
 <tr>
-		<td><code>VectorFieldName</code></td>
-		<td>Name of the field to search on.</td>
+        <td><code>VectorFieldName</code></td>
+        <td>Name of the field to search on.</td>
     <td>N/A</td>
-	</tr>
+    </tr>
   <tr>
-		<td><code>Expr</code></td>
-		<td>Boolean expression used to filter attribute.</td>
+        <td><code>Expr</code></td>
+        <td>Boolean expression used to filter attribute.</td>
     <td>See <a href="boolean.md">Boolean Expression Rules</a> for more information.</td>
-	</tr>
+    </tr>
   <tr>
-		<td><code>ConsistencyLevel</code></td>
-		<td>The consistency level used in the query.</td>
-	  <td><code>STRONG</code>, <code>BOUNDED</code>, and<code>EVENTUALLY</code>.</td>
-	</tr>
-	</tbody>
+        <td><code>ConsistencyLevel</code></td>
+        <td>The consistency level used in the query.</td>
+      <td><code>STRONG</code>, <code>BOUNDED</code>, and<code>EVENTUALLY</code>.</td>
+    </tr>
+    </tbody>
 </table>
 
 
@@ -681,10 +674,7 @@ Check the primary key values of the most similar vectors and their distances.
   <a href="#java">Java</a>
   <a href="#go">GO</a>
   <a href="#javascript">Node.js</a>
-  <a href="#shell">CLI</a>
-  <a href="#curl">Curl</a>
 </div>
-
 
 ```python
 results[0].ids
@@ -698,8 +688,8 @@ console.log(results.results)
 ```go
 fmt.Printf("%#v\n", searchResult)
 for _, sr := range searchResult {
-	fmt.Println(sr.IDs)
-	fmt.Println(sr.Scores)
+    fmt.Println(sr.IDs)
+    fmt.Println(sr.Scores)
 }
 ```
 
@@ -720,10 +710,7 @@ Release the collection loaded in Milvus to reduce memory consumption when the se
   <a href="#java">Java</a>
   <a href="#go">GO</a>
   <a href="#javascript">Node.js</a>
-  <a href="#shell">CLI</a>
-  <a href="#curl">Curl</a>
 </div>
-
 
 ```python
 collection.release()
@@ -745,7 +732,7 @@ if err != nil {
 
 ```java
 milvusClient.releaseCollection(
-		ReleaseCollectionParam.newBuilder()
+        ReleaseCollectionParam.newBuilder()
                 .withCollectionName("book")
                 .build());
 ```
