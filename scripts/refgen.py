@@ -64,10 +64,13 @@ class RefGen:
                 siblings = [ x for x in self.parents if x['title'] == page_parent ][0]['pages']
                 page_url = [ x for x in siblings if x['title'] == page_title ][0]['url']
                 page_method = [ x for x in siblings if x['title'] == page_title ][0]['method']
-                server = "https://{public_endpoint}"
+                server = "https://${MILVUS_HOST}:${MILVUS_PORT}"
 
                 if 'parameters' in self.specifications['paths'][url][method]:
                     for param in self.specifications['paths'][url][method]['parameters']:
+                        if param['name'] == "public-endpoint":
+                            continue
+                        
                         if param['in'] == 'query':
                             query_params.append(param)
                         elif param['in'] == 'path':

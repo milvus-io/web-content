@@ -6,7 +6,7 @@ Describes the details of a collection.
     <div style="display: inline-block; background: #0d8d67; font-size: 0.6em; border-radius: 10px; color: #ffffff; padding: 0.3em 1em;">
         <span>GET</span>
     </div>
-    <span style="font-weight: bold;">  https://{public_endpoint}/v1/vector/collections/describe</span>
+    <span style="font-weight: bold;">  https://${MILVUS_HOST}:${MILVUS_PORT}/v1/vector/collections/describe</span>
 </div>
 
 ## Example
@@ -68,11 +68,7 @@ Success response:
     |------------------|-------------------------------------------------------------------------------------------|
     | `collectionName`  | **string**(required)<br>The name of the collection to describe.|
 
-- Path parameters
-
-    | Parameter        | Description                                                                               |
-    |------------------|-------------------------------------------------------------------------------------------|
-    | `public-endpoint`  | **string**(required)<br>|
+- No path parameters required
 
 ### Request Body
 

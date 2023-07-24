@@ -6,7 +6,7 @@ Conducts a similarity search in a collection.
     <div style="display: inline-block; background: #026aca; font-size: 0.6em; border-radius: 10px; color: #ffffff; padding: 0.3em 1em;">
         <span>POST</span>
     </div>
-    <span style="font-weight: bold;">  https://{public_endpoint}/v1/vector/search</span>
+    <span style="font-weight: bold;">  https://${MILVUS_HOST}:${MILVUS_PORT}/v1/vector/search</span>
 </div>
 
 ## Example
@@ -52,11 +52,7 @@ curl --request POST \
 
 - No query parameters required
 
-- Path parameters
-
-    | Parameter        | Description                                                                               |
-    |------------------|-------------------------------------------------------------------------------------------|
-    | `public-endpoint`  | **string**(required)<br>|
+- No path parameters required
 
 ### Request Body
 
