@@ -112,7 +112,7 @@ const results = await milvusClient.search({
 ```
 
 ```go
-sp := entity.NewIndexFlatSearchParam(   // NewIndex*SearchParam func
+sp, _ := entity.NewIndexFlatSearchParam(   // NewIndex*SearchParam func
   10,                                      // searchParam
 )
 
