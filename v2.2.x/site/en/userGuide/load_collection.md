@@ -22,10 +22,7 @@ Milvus allows users to load a collection as multiple replicas to utilize the CPU
   <a href="#java">Java</a>
   <a href="#go">GO</a>
   <a href="#javascript">Node.js</a>
-  <a href="#shell">CLI</a>
-  <a href="#curl">Curl</a>
 </div>
-
 
 ```python
 from pymilvus import Collection, utility
@@ -110,7 +107,7 @@ if (response.getStatus() != R.Status.Success.getCode()) {
 }
 System.out.println(response.getProgress());
 ```
-
+<div style="display: none">
 ```shell
 load -c book
 ```
@@ -131,6 +128,8 @@ Output:
 ```json
 {}
 ```
+
+</div>
 
 </div>
 
@@ -206,7 +205,7 @@ Output:
     </tbody>
 </table>
 
-<table class="language-shell">
+<table class="language-shell" style="display: none">
     <thead>
         <tr>
             <th>Option</th>
@@ -225,7 +224,7 @@ Output:
     </tbody>
 </table>
 
-<table class="language-curl">
+<table class="language-curl" style="display: none">
 	<thead>
 	<tr>
 		<th>Parameter</th>

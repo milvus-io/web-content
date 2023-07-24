@@ -20,10 +20,7 @@ This topic describes how to drop a partition in a specified collection.
   <a href="#java">Java</a>
   <a href="#go">GO</a>
   <a href="#javascript">Node.js</a>
-  <a href="#shell">CLI</a>
-  <a href="#curl">Curl</a>
 </div>
-
 
 ```python
 from pymilvus import Collection
@@ -57,6 +54,8 @@ milvusClient.dropPartition(
 );
 ```
 
+<div style="display: none">
+
 ```shell
 delete partition -c book -p novel
 ```
@@ -71,6 +70,8 @@ curl -X 'DELETE' \
     "partition_name": "novel"
   }'
 ```
+
+</div>
 
 <table class="language-python">
 	<thead>
@@ -149,7 +150,7 @@ curl -X 'DELETE' \
   </tbody>
 </table>
 
-<table class="language-shell">
+<table class="language-shell" style="display: none">
     <thead>
         <tr>
             <th>Option</th>
@@ -168,7 +169,7 @@ curl -X 'DELETE' \
     </tbody>
 </table>
 
-<table class="language-curl">
+<table class="language-curl" style="display: none">
 	<thead>
         <tr>
             <th>Parameter</th>

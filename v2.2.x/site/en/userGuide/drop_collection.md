@@ -18,10 +18,8 @@ Dropping a collection irreversibly deletes all data within it.
   <a href="#java">Java</a>
   <a href="#go">GO</a>
   <a href="#javascript">Node.js</a>
-  <a href="#shell">CLI</a>
   <a href="#curl">Curl</a>
 </div>
-
 
 ```python
 from pymilvus import utility
@@ -50,13 +48,18 @@ milvusClient.dropCollection(
 );
 ```
 
+<div style="display: none">
+
 ```shell
 delete collection -c book
 ```
 
+</div>
+
 ```curl
 curl -X 'DELETE' \
-  'http://localhost:9091/api/v1/collection' \
+  '${MILVUS_HOST}:${MILVUS_PORT}/v1/vector/collections/drop' \
+  -H 'Authorization: Bearer ${TOKEN}' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
   -d '{
@@ -68,7 +71,10 @@ curl -X 'DELETE' \
 Output:
 
 ```json
-{}
+{
+    "code": 200,
+    "data": {}
+}
 ```
 
 </div>
@@ -137,7 +143,7 @@ Output:
     </tbody>
 </table>
 
-<table class="language-shell">
+<table class="language-shell" style="display: none">
     <thead>
         <tr>
             <th>Option</th>
@@ -161,7 +167,7 @@ Output:
 	</thead>
 	<tbody>
         <tr>
-            <td><code>collection_name</code></td>
+            <td><code>collectionName</code></td>
             <td>Name of the collection to drop.</td>
         </tr>
 	</tbody>

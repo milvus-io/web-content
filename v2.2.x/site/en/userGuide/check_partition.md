@@ -17,10 +17,7 @@ Verify if a partition exists in the specified collection.
   <a href="#java">Java</a>
   <a href="#go">GO</a>
   <a href="#javascript">Node.js</a>
-  <a href="#shell">CLI</a>
-  <a href="#curl">Curl</a>
 </div>
-
 
 ```python
 from pymilvus import Collection
@@ -59,6 +56,8 @@ if (respHasPartition.getData() == Boolean.TRUE) {
 }
 ```
 
+<div style="display: none">
+
 ```shell
 describe partition -c book -p novel
 ```
@@ -80,6 +79,8 @@ Output:
 ```json
 {"status":{},"value":true}
 ```
+
+</div>
 
 </div>
 
@@ -142,7 +143,7 @@ Output:
   </tbody>
 </table>
 
-<table class="language-shell">
+<table class="language-shell" style="display: none">
     <thead>
         <tr>
             <th>Option</th>
@@ -161,7 +162,7 @@ Output:
     </tbody>
 </table>
 
-<table class="language-curl">
+<table class="language-curl" style="display: none">
 	<thead>
         <tr>
             <th>Parameter</th>
@@ -187,10 +188,7 @@ Output:
   <a href="#java">Java</a>
   <a href="#go">GO</a>
   <a href="#javascript">Node.js</a>
-  <a href="#shell">CLI</a>
-  <a href="#curl">Curl</a>
 </div>
-
 
 ```python
 from pymilvus import Collection
@@ -223,6 +221,8 @@ R<ShowPartitionsResponse> respShowPartitions = milvusClient.showPartitions(
 );
 System.out.println(respShowPartitions);
 ```
+
+<div style="display: none">
 
 ```shell
 list partitions -c book
@@ -262,6 +262,7 @@ Output:
   ]
 }
 ```
+</div>
 
 </div>
 
@@ -314,7 +315,7 @@ Output:
   </tbody>
 </table>
 
-<table class="language-shell">
+<table class="language-shell" style="display: none">
     <thead>
         <tr>
             <th>Option</th>
@@ -329,7 +330,7 @@ Output:
     </tbody>
 </table>
 
-<table class="language-curl">
+<table class="language-curl" style="display: none">
     <thead>
         <tr>
             <th>Option</th>

@@ -23,10 +23,7 @@ Specify an alias for a collection.
   <a href="#java">Java</a>
   <a href="#go">GO</a>
   <a href="#javascript">Node.js</a>
-  <a href="#shell">CLI</a>
-  <a href="#curl">Curl</a>
 </div>
-
 
 ```python
 from pymilvus import utility
@@ -55,6 +52,7 @@ milvusClient.createAlias(
     .build()
 );
 ```
+<div style="display: none">
 
 ```shell
 create alias -c book -a publication
@@ -74,6 +72,8 @@ curl -X 'POST' \
 # Output:
 {}
 ```
+
+</div>
 
 <table class="language-python">
 	<thead>
@@ -133,7 +133,7 @@ curl -X 'POST' \
 	</tbody>
 </table>
 
-<table class="language-shell">
+<table class="language-shell" style="display: none">
     <thead>
         <tr>
             <th>Option</th>
@@ -156,7 +156,7 @@ curl -X 'POST' \
     </tbody>
 </table>
 
-<table class="language-curl">
+<table class="language-curl" style="display: none">
 	<thead>
         <tr>
             <th>Parameter</th>
@@ -184,10 +184,7 @@ Drop a specified alias.
   <a href="#java">Java</a>
   <a href="#go">GO</a>
   <a href="#javascript">Node.js</a>
-  <a href="#shell">CLI</a>
-  <a href="#curl">Curl</a>
 </div>
-
 
 ```python
 from pymilvus import utility
@@ -212,6 +209,8 @@ milvusClient.dropAlias(
 );
 ```
 
+<div style="display: none">
+
 ```shell
 delete alias -a publication
 ```
@@ -229,6 +228,8 @@ curl -X 'DELETE' \
 # Output:
 {}
 ```
+
+</div>
 
 <table class="language-python">
 	<thead>
@@ -276,7 +277,7 @@ curl -X 'DELETE' \
 	</tbody>
 </table>
 
-<table class="language-shell">
+<table class="language-shell" style="display:none">
     <thead>
         <tr>
             <th>Option</th>
@@ -291,7 +292,7 @@ curl -X 'DELETE' \
     </tbody>
 </table>
 
-<table class="language-curl">
+<table class="language-curl" style="display: none">
 	<thead>
         <tr>
             <th>Parameter</th>
@@ -315,10 +316,7 @@ Alter an existing alias to another collection. The following example is based on
   <a href="#java">Java</a>
   <a href="#go">GO</a>
   <a href="#javascript">Node.js</a>
-  <a href="#shell">CLI</a>
-  <a href="#curl">Curl</a>
 </div>
-
 
 ```python
 from pymilvus import utility
@@ -348,6 +346,8 @@ milvusClient.alterAlias(
 );
 ```
 
+<div style="display: none">
+
 ```shell
 create alias -c book -A -a publication
 ```
@@ -369,6 +369,8 @@ Output:
 ```json
 {}
 ```
+
+</div>
 
 </div>
 
@@ -430,7 +432,7 @@ Output:
 	</tbody>
 </table>
 
-<table class="language-shell">
+<table class="language-shell" style="display: none">
     <thead>
         <tr>
             <th>Option</th>
@@ -453,7 +455,7 @@ Output:
     </tbody>
 </table>
 
-<table class="language-curl">
+<table class="language-curl" style="display: none">
 	<thead>
         <tr>
             <th>Parameter</th>

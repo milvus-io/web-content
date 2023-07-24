@@ -20,10 +20,7 @@ The following example builds a partition `novel` in the collection `book`.
   <a href="#java">Java</a>
   <a href="#go">GO</a>
   <a href="#javascript">Node.js</a>
-  <a href="#shell">CLI</a>
-  <a href="#curl">Curl</a>
 </div>
-
 
 ```python
 from pymilvus import Collection
@@ -58,6 +55,8 @@ milvusClient.createPartition(
 );
 ```
 
+<div style="display: none">
+
 ```shell
 create partition -c book -p novel
 ```
@@ -72,6 +71,8 @@ curl -X 'POST' \
     "partition_name": "novel"
   }'
 ```
+
+</div>
 
 <table class="language-python">
 	<thead>
@@ -154,7 +155,7 @@ curl -X 'POST' \
   </tbody>
 </table>
 
-<table class="language-shell">
+<table class="language-shell" style="display: none">
     <thead>
         <tr>
             <th>Option</th>
@@ -177,7 +178,7 @@ curl -X 'POST' \
     </tbody>
 </table>
 
-<table class="language-curl">
+<table class="language-curl" style="display: none">
 	<thead>
     <tr>
       <th>Parameter</th>

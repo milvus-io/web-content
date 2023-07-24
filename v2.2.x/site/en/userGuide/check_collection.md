@@ -17,10 +17,7 @@ Verify if a collection exists in Milvus.
   <a href="#java">Java</a>
   <a href="#go">GO</a>
   <a href="#javascript">Node.js</a>
-  <a href="#shell">CLI</a>
-  <a href="#curl">Curl</a>
 </div>
-
 
 ```python
 from pymilvus import utility
@@ -54,6 +51,7 @@ if (respHasCollection.getData() == Boolean.TRUE) {
   System.out.println("Collection exists.");
 }
 ```
+<div style="display:none;">
 
 ```shell
 describe collection -c book
@@ -78,6 +76,8 @@ Output:
   "value":true
 }
 ```
+
+</div>
 
 </div>
 
@@ -147,7 +147,7 @@ Output:
     </tbody>
 </table>
 
-<table class="language-shell">
+<table class="language-shell" style="display:none">
     <thead>
         <tr>
             <th>Option</th>
@@ -162,7 +162,7 @@ Output:
     </tbody>
 </table>
 
-<table class="language-curl">
+<table class="language-curl" style="display:none">
 	<thead>
         <tr>
             <th>Parameter</th>
@@ -186,10 +186,8 @@ Check the details of a collection.
   <a href="#java">Java</a>
   <a href="#go">GO</a>
   <a href="#javascript">Node.js</a>
-  <a href="#shell">CLI</a>
   <a href="#curl">Curl</a>
 </div>
-
 
 ```python
 from pymilvus import Collection
@@ -255,64 +253,55 @@ GetCollStatResponseWrapper wrapperCollectionStatistics = new GetCollStatResponse
 System.out.println("Collection row count: " + wrapperCollectionStatistics.getRowCount());
 ```
 
+<div style="display: none">
+
 ```shell
 describe collection -c book
 ```
 
+</div>
+
 ```curl
 curl -X 'GET' \
-  'http://localhost:9091/api/v1/collection' \
+  '${MILVUS_HOST}:${MILVUS_PORT}/v1/vector/collections/describe' \
+  -H 'Authorization: Bearer ${TOKEN}' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
   -d '{
-    "collection_name": "book"
+    "collectionName": "book"
   }'
 ```
 
 <div class="language-curl">
 Output:
 
-```json
+```shell
+# Output of describeCollection
 {
-  "status": {},
-  "schema": {
-    "name": "book",
-    "description": "Test book search",
-    "fields": [
-      {
-        "fieldID": 100,
-        "name": "book_id",
-        "is_primary_key": true,
-        "description": "book id",
-        "data_type": 5
-      },
-      {
-        "fieldID": 101,
-        "name": "book_intro",
-        "description": "embedded vector of book introduction",
-        "data_type": 101,
-        "type_params": [
-          {
-            "key": "dim",
-            "value": "2"
-          }
-        ]
-      }
-    ]
-  },
-  "collectionID": 434240188610972993,
-  "virtual_channel_names": [
-    "by-dev-rootcoord-dml_0_434240188610972993v0",
-    "by-dev-rootcoord-dml_1_434240188610972993v1"
-  ],
-  "physical_channel_names": [
-    "by-dev-rootcoord-dml_0",
-    "by-dev-rootcoord-dml_1"
-  ],
-  "created_timestamp": 434240188610772994,
-  "created_utc_timestamp": 1656494860118,
-  "shards_num": 2,
-  "consistency_level": 1
+    "code": 200,
+    "data": {
+        "collectionName": "string",
+        "description": "string",
+        "fields": [
+            {
+                "autoId": true,
+                "description": "string",
+                "name": "string",
+                "primaryKey": true,
+                "type": "string"
+            }
+        ],
+        "indexes": [
+            {
+                "fieldName": "string",
+                "indexName": "string",
+                "metricType": "string"
+            }
+        ],
+        "load": "string",
+        "shardsNum": 0,
+        "enableDynamic": true
+    }
 }
 ```
 
@@ -405,7 +394,7 @@ Output:
     </tbody>
 </table>
 
-<table class="language-shell">
+<table class="language-shell" style="display: none">
     <thead>
         <tr>
             <th>Option</th>
@@ -429,7 +418,7 @@ Output:
 	</thead>
 	<tbody>
         <tr>
-            <td><code>collection_name</code></td>
+            <td><code>collectionName</code></td>
             <td>Name of the collection to check.</td>
         </tr>
 	</tbody>
@@ -474,14 +463,18 @@ R<ShowCollectionsResponse> respShowCollections = milvusClient.showCollections(
   );
 System.out.println(respShowCollections);
 ```
+<div style="display: none">
 
 ```shell
 list collections
 ```
 
+</div>
+
 ```curl
 curl -X 'GET' \
-  'http://localhost:9091/api/v1/collections' \
+  '${MILVUS_HOST}:${MILVUS_PORT}/v1/vector/collections' \
+  -H 'Authorization: Bearer ${TOKEN}' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json'
 ```
@@ -489,21 +482,16 @@ curl -X 'GET' \
 <div class="language-curl">
 Output:
 
-```json
+```shell
+# Output of list collections
 {
-  "status": {},
-  "collection_names": [
-    "book"
-  ],
-  "collection_ids": [
-    434240188610972993
-  ],
-  "created_timestamps": [
-    434240188610772994
-  ],
-  "created_utc_timestamps": [
-    1656494860118
-  ]
+   code: 200,
+   data: [
+         "collection1",
+         "collection2",
+         ...
+         "collectionN",
+         ]
 }
 ```
 

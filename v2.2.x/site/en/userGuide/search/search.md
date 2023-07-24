@@ -78,6 +78,7 @@ Prepare the parameters that suit your search scenario. The following example def
   <a href="#java">Java</a>
   <a href="#go">GO</a>
   <a href="#javascript">Node.js</a>
+  <a href="#curl">Curl</a>
 </div>
 
 ```python
@@ -141,49 +142,44 @@ Guarantee Timestamp(It instructs Milvus to see all operations performed before a
 Travel Timestamp(Specify a timestamp in a search to get results based on a data view) [0]:
 ```
 
-```curl
-curl -X 'POST' \
-  'http://localhost:9091/api/v1/search' \
-  -H 'accept: application/json' \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "collection_name": "book",
-    "output_fields": ["book_id"],
-    "search_params": [
-      {"key": "anns_field", "value": "book_intro"},
-      {"key": "topk", "value": "2"},
-      {"key": "params", "value": "{\"nprobe\": 10}"},
-      {"key": "metric_type", "value": "L2"},
-      {"key": "round_decimal", "value": "-1"}
-    ],
-    "vectors": [ [0.1,0.2] ],
-    "dsl_type": 1
-  }'
-```
-
 </div>
 
-<div class="language-curl" style="display: none">
+```curl
+# Search entities based on a given vector.
+curl --request POST \
+     --url '${MILVUS_HOST}:${MILVUS_PORT}/v1/vector/search' \
+     --header 'Authorization: Bearer <TOKEN>' \
+     --header 'accept: application/json' \
+     --header 'content-type: application/json'
+     -d '{
+        "collectionName": "collection1",
+        "vector": [0.0128121, 0.029119, .... , 0.09121]
+      }'
+
+# Search entities and return specific fields.
+curl --request POST \
+     --url '${MILVUS_HOST}:${MILVUS_PORT}/v1/vector/search' \
+     --header 'Authorization: Bearer <TOKEN>' \
+     --header 'accept: application/json' \
+     --header 'content-type: application/json'
+     -d '{
+       "collectionName": "collection1",
+       "outputFields": ["id", "name", "feature", "distance"],
+       "vector": [0.0128121, 0.029119, .... , 0.09121],
+       "filter": "id in (1, 2, 3)",
+       "limit": 100,
+       "offset": 0
+     }'
+```
+
+<div class="language-curl">
+
 Output:
 
 ```json
 {
-  "status":{},
-  "results":{
-    "num_queries":1,
-    "top_k":2,
-    "fields_data":[
-      {
-        "type":5,
-        "field_name":"book_id",
-        "Field":{"Scalars":{"Data":{"LongData":{"data":[1,2]}}}},
-        "field_id":100
-      }
-    ],
-    "scores":[1.45,4.25],
-    "ids":{"IdField":{"IntId":{"data":[1,2]}}},
-    "topks":[2]},
-    "collection_name":"book"
+    "code": 200,
+    "data": {}
 }
 ```
 
@@ -331,7 +327,7 @@ Output:
     </tbody>
 </table>
 
-<table class="language-curl" style="display:none">
+<table class="language-curl">
     <thead>
     <tr>
         <th>Parameter</th>
@@ -340,39 +336,28 @@ Output:
     </thead>
     <tbody>
     <tr>
-        <td><code>output_fields</code>(optional)</td>
-        <td>Name of the field to return. Vector field is not supported in current release.</td>
+        <td><code>collectionName</code></td>
+        <td>(Required) The name of the collection to which this operation applies.</td>
     </tr>
     <tr>
-        <td><code>anns_field</code></td>
-        <td>Name of the field to search on.</td>
+        <td><code>filter</code></td>
+        <td>The filter used to find matches for the search</td>
     </tr>
     <tr>
-        <td><code>topk</code></td>
-        <td>Number of the most similar results to return.</td>
+        <td><code>limit</code></td>
+        <td>The maximum number of entities to return.<br>The sum of this value of that of `offset` should be less than **1024**.<br>The value defaults to <code>100</code>.<br>The value ranges from <code>1</code> to <code>100</code></td>
     </tr>
     <tr>
-        <td><code>params</code></td>
-        <td>Search parameter(s) specific to the index. See <a href="index.md">Vector Index</a> for more information.</td>
+        <td><code>offset</code></td>
+        <td>The number of entities to skip in the search results.<br>The sum of this value and that of `limit` should not be greater than <code>1024</code>.<br>The maximum value is <code>1024</code>.</td>
     </tr>
     <tr>
-        <td><code>metric_type</code></td>
-        <td>Metrics used to measure similarity of vectors. See <a href="metric.md">Simlarity Metrics</a> for more information.</td>
+        <td><code>outputFields</code></td>
+        <td>An array of fields to return along with the search results.</td>
     </tr>
     <tr>
-        <td><code>round_decimal</code> (optional)</td>
-        <td>Number of decimal places of returned distance.</td>
-    </tr>
-    <tr>
-        <td><code>Vectors</code></td>
-        <td>Vectors to search with.</td>
-    </tr>
-    <tr>
-        <td><code>dsl_type</code></td>
-        <td>Type of <code>dsl</code> (Data Search Language) field:
-        <br>0: "Dsl"
-        <br>1: "BoolExprV1"
-        </td>
+        <td><code>vector</code></td>
+        <td>The query vector in the form of a list of floating numbers.</td>
     </tr>
     </tbody>
 </table>
@@ -388,6 +373,7 @@ Milvus supports setting consistency level specifically for a search. The example
   <a href="#java">Java</a>
   <a href="#go">GO</a>
   <a href="#javascript">Node.js</a>
+  <a href="#curl">Curl</a>
 </div>
 
 ```python
@@ -664,8 +650,6 @@ R<SearchResults> respSearch = milvusClient.search(searchParam);
     </tr>
     </tbody>
 </table>
-
-
 
 Check the primary key values of the most similar vectors and their distances.
 

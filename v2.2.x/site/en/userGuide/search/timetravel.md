@@ -25,10 +25,7 @@ If you work with your own dataset in an existing Milvus instance, you can move f
   <a href="#java">Java</a>
   <a href="#go">GO</a>
   <a href="#javascript">Node.js</a>
-  <a href="#shell">CLI</a>
-  <a href="#curl">Curl</a>
 </div>
-
 
 ```python
 from pymilvus import connections, Collection, FieldSchema, CollectionSchema, DataType
@@ -119,10 +116,7 @@ Insert random data to simulate the original data (Milvus CLI example uses a pre-
   <a href="#java">Java</a>
   <a href="#go">GO</a>
   <a href="#javascript">Node.js</a>
-  <a href="#shell">CLI</a>
-  <a href="#curl">Curl</a>
 </div>
-
 
 ```python
 import random
@@ -244,10 +238,7 @@ Insert the second batch of data to simulate the dirty data, among which a piece 
   <a href="#java">Java</a>
   <a href="#go">GO</a>
   <a href="#javascript">Node.js</a>
-  <a href="#shell">CLI</a>
-  <a href="#curl">Curl</a>
 </div>
-
 
 ```python
 data = [
@@ -352,10 +343,7 @@ Load the collection and search the target data with the timestamp of the first d
   <a href="#java">Java</a>
   <a href="#go">GO</a>
   <a href="#javascript">Node.js</a>
-  <a href="#shell">CLI</a>
-  <a href="#curl">Curl</a>
 </div>
-
 
 ```python
 collection.load()
@@ -526,10 +514,7 @@ If you do not specify the timestamp or specify it with the timestamp of the seco
   <a href="#java">Java</a>
   <a href="#go">GO</a>
   <a href="#javascript">Node.js</a>
-  <a href="#shell">CLI</a>
-  <a href="#curl">Curl</a>
 </div>
-
 
 ```python
 batch2.timestamp

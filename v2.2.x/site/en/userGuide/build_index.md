@@ -28,10 +28,7 @@ Prepare the index parameters as follows:
   <a href="#java">Java</a>
   <a href="#go">GO</a>
   <a href="#javascript">Node.js</a>
-  <a href="#shell">CLI</a>
-  <a href="#curl">Curl</a>
 </div>
-
 
 ```python
 index_params = {
@@ -64,6 +61,8 @@ final IndexType INDEX_TYPE = IndexType.IVF_FLAT;   // IndexType
 final String INDEX_PARAM = "{\"nlist\":1024}";     // ExtraParam
 ```
 
+<div style="display: none">
+
 ```shell
 create index
 
@@ -95,6 +94,8 @@ curl -X 'POST' \
     ]
   }'
 ```
+
+</div>
 
 <table class="language-python">
 	<thead>
@@ -306,7 +307,7 @@ curl -X 'POST' \
 	</tbody>
 </table>
 
-<table class="language-shell">
+<table class="language-shell" style="display: none">
     <thead>
         <tr>
             <th>Option</th>
@@ -321,7 +322,7 @@ curl -X 'POST' \
     </tbody>
 </table>
 
-<table class="language-curl">
+<table class="language-curl" style="display: none">
 	<thead>
 	<tr>
 		<th>Parameter</th>
@@ -392,10 +393,7 @@ Build the index by specifying the vector field name and index parameters.
   <a href="#java">Java</a>
   <a href="#go">GO</a>
   <a href="#javascript">Node.js</a>
-  <a href="#shell">CLI</a>
-  <a href="#curl">Curl</a>
 </div>
-
 
 ```python
 from pymilvus import Collection, utility
@@ -444,6 +442,8 @@ milvusClient.createIndex(
 );
 ```
 
+<div style="display: none">
+
 ```shell
 # Follow the previous step.
 ```
@@ -451,6 +451,8 @@ milvusClient.createIndex(
 ```curl
 # Follow the previous step.
 ```
+
+</div>
 
 <table class="language-python">
 	<thead>

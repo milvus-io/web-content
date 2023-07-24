@@ -29,10 +29,7 @@ Construct a Milvus connection. Ensure to connect to Milvus server before any ope
   <a href="#java">Java</a>
   <a href="#go">GO</a>
   <a href="#javascript">Node.js</a>
-  <a href="#shell">CLI</a>
-  <a href="#curl">Curl</a>
 </div>
-
 
 ```python
 # Run `python3` in your terminal to operate in the Python interactive mode.
@@ -231,10 +228,7 @@ Disconnect from a Milvus server.
   <a href="#java">Java</a>
   <a href="#go">GO</a>
   <a href="#javascript">Node.js</a>
-  <a href="#shell">CLI</a>
-  <a href="#curl">Curl</a>
 </div>
-
 
 ```python
 connections.disconnect("default")

@@ -79,6 +79,7 @@ You can also use dynamic fields in the filter expression and output fields in th
   <a href="#java">Java</a>
   <a href="#go">GO</a>
   <a href="#javascript">Node.js</a>
+  <a href="#curl">Curl</a>
 </div>
 
 ```python
@@ -151,41 +152,31 @@ timeout []:
 ```
 
 ```curl
-curl -X 'POST' \
-  'http://localhost:9091/api/v1/query' \
-  -H 'accept: application/json' \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "collection_name": "book",
-    "output_fields": ["book_id", "book_intro"],
-    "expr": "book_id in [2,4,6,8]"
-  }'
+curl --request POST \
+     --url '${MILVUS_HOST}:${MILVUS_PORT}/v1/vector/query' \
+     --header 'Authorization: Bearer <TOKEN>' \
+     --header 'accept: application/json' \
+     --header 'content-type: application/json'
+     -d '{
+       "collectionName": "collection1",
+       "outputFields": ["id", "name", "feature", "distance"],
+       "filter": "id in (1, 2, 3)",
+       "limit": 100,
+       "offset": 0
+     }'
 ```
+
+</div>
 
 <div class="language-curl">
 Output:
 
 ```json
 {
-  "status":{},
-  "fields_data":[
-    {
-      "type":5,
-      "field_name":"book_id",
-      "Field":{"Scalars":{"Data":{"LongData":{"data":[6,8,2,4]}}}},
-      "field_id":100
-    },
-    {
-      "type":101,
-      "field_name":"book_intro",
-      "Field":{"Vectors":{"dim":2,"Data":{"FloatVector":{"data":[6,1,8,1,2,1,4,1]}}}},
-      "field_id":102
-    }
-  ]
+    "code": 200,
+    "data": {}
 }
 ```
-
-</div>
 
 </div>
 
@@ -360,7 +351,7 @@ Output:
     </tbody>
 </table>
 
-<table class="language-curl" style="display: none;">
+<table class="language-curl">
     <thead>
     <tr>
         <th>Parameter</th>
@@ -369,16 +360,24 @@ Output:
     </thead>
     <tbody>
     <tr>
-        <td><code>output_fields</code> (optional)</td>
-        <td>List of names of the fields to return.</td>
+        <td><code>collectionName</code></td>
+        <td>(Required) The name of the collection to which this operation applies.</td>
     </tr>
     <tr>
-        <td><code>vectors</code></td>
-        <td>Vectors to query.</td>
+        <td><code>filter</code></td>
+        <td>The filter used to find matches for the search</td>
     </tr>
     <tr>
-        <td><code>expr</code></td>
-        <td>Boolean expression used to filter attribute. Find more expression details in <a href="boolean.md">Boolean Expression Rules</a>.</td>
+        <td><code>limit</code></td>
+        <td>The maximum number of entities to return.<br>The sum of this value of that of `offset` should be less than **1024**.<br>The value defaults to <code>100</code>.<br>The value ranges from <code>1</code> to <code>100</code></td>
+    </tr>
+    <tr>
+        <td><code>offset</code></td>
+        <td>The number of entities to skip in the search results.<br>The sum of this value and that of `limit` should not be greater than <code>1024</code>.<br>The maximum value is <code>1024</code>.</td>
+    </tr>
+    <tr>
+        <td><code>outputFields</code></td>
+        <td>An array of fields to return along with the search results.</td>
     </tr>
     </tbody>
 </table>
@@ -390,6 +389,7 @@ Check the returned results.
   <a href="#java">Java</a>
   <a href="#go">GO</a>
   <a href="#javascript">Node.js</a>
+  <a href="#curl">Curl</a>
 </div>
 
 ```python

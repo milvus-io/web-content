@@ -14,10 +14,7 @@ This topic describes how to release a partition from memory after a search or a 
   <a href="#java">Java</a>
   <a href="#go">GO</a>
   <a href="#javascript">Node.js</a>
-  <a href="#shell">CLI</a>
-  <a href="#curl">Curl</a>
 </div>
-
 
 ```python
 from pymilvus import Partition
@@ -54,6 +51,8 @@ milvusClient.releasePartitions(
 );
 ```
 
+<div style="display: none">
+
 ```shell
 release -c book -p novel
 ```
@@ -69,6 +68,8 @@ curl -X 'DELETE' \
     "replica_number": 1
   }'
 ```
+
+</div>
 
 <table class="language-python">
 	<thead>
@@ -146,7 +147,7 @@ curl -X 'DELETE' \
     </tbody>
 </table>
 
-<table class="language-shell">
+<table class="language-shell" style="display: none">
     <thead>
         <tr>
             <th>Option</th>
@@ -165,7 +166,7 @@ curl -X 'DELETE' \
     </tbody>
 </table>
 
-<table class="language-curl">
+<table class="language-curl" style="display: none">
 	<thead>
 	<tr>
 		<th>Parameter</th>

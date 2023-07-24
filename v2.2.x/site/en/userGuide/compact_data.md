@@ -25,10 +25,7 @@ Compaction requests are processed asynchronously because they are usually time-c
   <a href="#java">Java</a>
   <a href="#go">GO</a>
   <a href="#javascript">Node.js</a>
-  <a href="#shell">CLI</a>
-  <a href="#curl">Curl</a>
 </div>
-
 
 ```python
 from pymilvus import Collection
@@ -56,6 +53,8 @@ R<ManualCompactionResponse> response = milvusClient.manualCompaction(
 long compactionID = response.getData().getCompactionID();
 ```
 
+<div style="display: none">
+
 ```shell
 compact -c book
 ```
@@ -76,6 +75,8 @@ Output:
 ```json
 {"status":{},"compactionID":434262132129005569}
 ```
+
+</div>
 
 </div>
 
@@ -109,7 +110,7 @@ Output:
     </tbody>
 </table>
 
-<table class="language-shell">
+<table class="language-shell" style="display: none">
     <thead>
         <tr>
             <th>Option</th>
@@ -133,10 +134,7 @@ You can check the compaction status with the compaction ID returned when the man
   <a href="#java">Java</a>
   <a href="#go">GO</a>
   <a href="#javascript">Node.js</a>
-  <a href="#shell">CLI</a>
-  <a href="#curl">Curl</a>
 </div>
-
 
 ```python
 collection.get_compaction_state()
@@ -159,6 +157,8 @@ milvusClient.getCompactionState(GetCompactionStateParam.newBuilder()
 );
 ```
 
+<div style="display: none">
+
 ```shell
 show compaction_state -c book
 ```
@@ -179,6 +179,8 @@ Output:
 ```json
 {"status":{},"state":2}
 ```
+
+</div>
 
 </div>
 

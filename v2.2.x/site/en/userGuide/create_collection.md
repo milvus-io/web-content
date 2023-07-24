@@ -25,10 +25,8 @@ First, prepare necessary parameters, including field schema, collection schema, 
   <a href="#java">Java</a>
   <a href="#go">GO</a>
   <a href="#javascript">Node.js</a>
-  <a href="#shell">CLI</a>
   <a href="#curl">Curl</a>
 </div>
-
 
 ```python
 from pymilvus import CollectionSchema, FieldSchema, DataType
@@ -152,57 +150,38 @@ CreateCollectionParam createCollectionReq = CreateCollectionParam.newBuilder()
         .build();
 ```
 
+<div style="display: none">
+
 ```shell
 create collection -c book -f book_id:INT64:book_id -f word_count:INT64:word_count -f book_intro:FLOAT_VECTOR:2 -p book_id
 ```
 
+</div>
+
 ```curl
 curl -X 'POST' \
-  'http://localhost:9091/api/v1/collection' \
+  '${MILVUS_HOST}:${MILVUS_PORT}/v1/vector/collections/create'' \
+  -H 'Authorization: Bearer ${TOKEN}'
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
   -d '{
-    "collection_name": "book",
-    "schema": {
-      "autoID": false,
-      "description": "Test book search",
-      "fields": [
-        {
-          "name": "book_id",
-          "description": "book id",
-          "is_primary_key": true,
-          "autoID": false,
-          "data_type": 5
-        },
-        {
-          "name": "word_count",
-          "description": "count of words",
-          "is_primary_key": false,
-          "data_type": 5
-        },
-        {
-          "name": "book_intro",
-          "description": "embedded vector of book introduction",
-          "data_type": 101,
-          "is_primary_key": false,
-          "type_params": [
-            {
-              "key": "dim",
-              "value": "2"
-            }
-          ]
-        }
-      ],
-      "name": "book"
-    }
-  }'
+       "dbName": "default",   
+       "collectionName": "medium_articles",
+       "dimension": 256,
+       "metricType": "L2",
+       "primaryField": "id",
+       "vectorField": "vector"
+      }'
 ```
 
 <div class="language-curl">
 Output:
 
 ```json
-{}
+{
+    "code": 200,
+    "data": {}
+}
 ```
 
 </div>
@@ -514,7 +493,7 @@ Output:
 	</tbody>
 </table>
 
-<table class="language-shell">
+<table class="language-shell" style="display: none">
     <thead>
         <tr>
             <th>Option</th>
@@ -555,90 +534,34 @@ Output:
     </thead>
     <tbody>
         <tr>
-            <td><code>collection_name</code></td>
-            <td>Name of the collection to create.</td>
+            <td><code>dbName</code></td>
+            <td>The name of the database to which the collection to create belongs to.</td>
             <td>N/A</td>
         </tr>
         <tr>
-            <td><code>name</code> (schema)</td>
-            <td>Must be the same as <code>collection_name</code>, this duplicated field is kept for historical reasons.</td>
-            <td>Same as <code>collection_name</code></td>
-        </tr>
-        <tr>
-            <td><code>autoID</code> (schema)</td>
-            <td>Switch to enable or disable Automatic ID (primary key) allocation.</td>
-            <td><code>True</code> or <code>False</code></td>
-        </tr>
-        <tr>
-            <td><code>description</code> (schema)</td>
-            <td>Description of the collection to create.</td>
+            <td><code>collectionName</code> (schema)</td>
+            <td>(Required) The name of the collection to create.</td>
             <td>N/A</td>
         </tr>
         <tr>
-            <td><code>fields</code></td>
-            <td>Schema of the fields within the collection to create. Refer to <a href="schema.md">Schema</a> for more information.</td>
+            <td><code>dimension</code> (schema)</td>
+            <td>(Required) The number of dimensions for the vector field of the collection.<br>The value ranges from <code>32</code> to <code>32768</code>.</td>
             <td>N/A</td>
         </tr>
         <tr>
-            <td><code>name</code>(field)</td>
-            <td>Name of the field to create.</td>
+            <td><code>metricType</code> (schema)</td>
+            <td>The distance metric used for the collection.<br>The value defaults to <code>L2</code>.</td>
             <td>N/A</td>
         </tr>
         <tr>
-            <td><code>description</code> (field)</td>
-            <td>Description of the collection to create.</td>
+            <td><code>primaryField</code></td>
+            <td>The name of the primary key field.<br>The value defaults to <code>id</code>.</td>
             <td>N/A</td>
         </tr>
         <tr>
-            <td><code>is_primary_key</code>(Mandatory for primary key field)</td>
-            <td>Switch to control if the field is primary key field.</td>
-            <td><code>True</code> or <code>False</code></td>
-        </tr>
-        <tr>
-            <td><code>autoID</code> (field)(Mandatory for primary key field)</td>
-            <td>Switch to enable or disable Automatic ID (primary key) allocation.</td>
-            <td><code>True</code> or <code>False</code></td>
-        </tr>
-        <tr>
-            <td><code>data_type</code></td>
-            <td>Data type of the field to create.</td>
-            <td>
-                Enums:
-                <br>1: "Bool",
-                <br>2: "Int8",
-                <br>3: "Int16",
-                <br>4: "Int32",
-                <br>5: "Int64",
-                <br>10: "Float",
-                <br>11: "Double",
-                <br>20: "String",
-                <br>21: "VarChar",
-                <br>100: "BinaryVector",
-                <br>101: "FloatVector",
-                <br>
-                <br>For primary key field:
-                <ul>
-                    <li><code>DataType.INT64</code> (numpy.int64)</li>
-                    <li><code>DataType.VARCHAR</code> (VARCHAR)</li>
-                </ul>
-                For scalar field:
-                <ul>
-                    <li><code>DataType.BOOL</code> (Boolean)</li>
-                    <li><code>DataType.INT64</code> (numpy.int64)</li>
-                    <li><code>DataType.FLOAT</code> (numpy.float32)</li>
-                    <li><code>DataType.DOUBLE</code> (numpy.double)</li>
-                </ul>
-                For vector field:
-                <ul>
-                    <li><code>BINARY_VECTOR</code> (Binary vector)</li>
-                    <li><code>FLOAT_VECTOR</code> (Float vector)</li>
-                </ul>
-            </td>
-        </tr>
-        <tr>
-            <td><code>dim</code> (Mandatory for vector field)</td>
-            <td>Dimension of the vector.</td>
-            <td>[1, 32,768]</td>
+            <td><code>vectorField</code>(field)</td>
+            <td>The name of the vector field.<br>The value defaults to <code>vector</code>.</td>
+            <td>N/A</td>
         </tr>
     </tbody>
 </table>
@@ -652,10 +575,7 @@ Then, create a collection with the schema you specified above.
   <a href="#java">Java</a>
   <a href="#go">GO</a>
   <a href="#javascript">Node.js</a>
-  <a href="#shell">CLI</a>
-  <a href="#curl">Curl</a>
 </div>
-
 
 ```python
 from pymilvus import Collection
@@ -684,14 +604,6 @@ if err != nil {
 
 ```java
 milvusClient.createCollection(createCollectionReq);
-```
-
-```shell
-# Follow the previous step.
-```
-
-```curl
-# Follow the previous step.
 ```
 
 <table class="language-python">
