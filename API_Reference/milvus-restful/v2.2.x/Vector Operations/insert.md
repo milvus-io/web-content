@@ -139,4 +139,11 @@ The properties in the returned response are listed in the following table.
 
 ## Possible Errors
 
-None
+| Error Code | Description |
+| --- | --- |
+| 800 | database not found |
+| 1800 | user hasn't authenticate |
+| 1801 | can only accept json format request |
+| 1802 | missing required parameters |
+| 1804 | fail to deal the insert data |
+| 1806 | please check the primary key and its' type can only in [int |

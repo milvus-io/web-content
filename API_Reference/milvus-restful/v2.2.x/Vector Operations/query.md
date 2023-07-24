@@ -99,4 +99,10 @@ The properties in the returned response are listed in the following table.
 
 ## Possible Errors
 
-None
+| Error Code | Description |
+| --- | --- |
+| 800 | database not found |
+| 1800 | user hasn't authenticate |
+| 1801 | can only accept json format request |
+| 1802 | missing required parameters |
+| 1805 | fail to parse search result |

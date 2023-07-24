@@ -92,5 +92,5 @@ The properties in the returned response are listed in the following table.
 
 | Error Code | Description |
 | --- | --- |
-| 1800 | user hasn't authenticate |
 | 800 | database not found |
+| 1800 | user hasn't authenticate |

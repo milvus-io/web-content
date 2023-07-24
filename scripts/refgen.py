@@ -217,7 +217,7 @@ class RefGen:
         list_header = '| Error Code | Description |\n| --- | --- |\n'
         if ''.join(page_title.split(' ')) in errgen.groups:
             group = errgen.groups[''.join(page_title.split(' '))]
-            group.sort()
+            list(map(lambda x: int(x),group)).sort()
             return list_header + ''.join([ f'| {x} | {errgen.get_errorcode_desc(x)} |\n' for x in group])
         else:
             return 'None'
