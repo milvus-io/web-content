@@ -140,12 +140,11 @@ for hits in result:
 
 <div class="alert note">
 
-If the key of a dynamic field contains characters other than digits, letters, and underscores (e.g. plus signs, asterisks, or dollar signs), you need to include the key within `$meta[]` as shown in the following code snippet when using it in a boolean expression or including it in the output fields.
+If the key of a dynamic field contains characters other than digits, letters, and underscores (e.g. plus signs, asterisks, or dollar signs), you need to include the key within `$meta[]` as shown in the following code snippet when using it in a boolean expression.
 
 ```python
 ...
-expr='$meta["#key"] in ["a", "b", "c"]',
-output_fields='$meta["#key"]' 
+expr='$meta["#key"] in ["a", "b", "c"]'
 ...
 ```
 
