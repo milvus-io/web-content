@@ -539,17 +539,17 @@ Output:
             <td>N/A</td>
         </tr>
         <tr>
-            <td><code>collectionName</code> (schema)</td>
+            <td><code>collectionName</code></td>
             <td>(Required) The name of the collection to create.</td>
             <td>N/A</td>
         </tr>
         <tr>
-            <td><code>dimension</code> (schema)</td>
+            <td><code>dimension</code></td>
             <td>(Required) The number of dimensions for the vector field of the collection.<br>The value ranges from <code>32</code> to <code>32768</code>.</td>
             <td>N/A</td>
         </tr>
         <tr>
-            <td><code>metricType</code> (schema)</td>
+            <td><code>metricType</code></td>
             <td>The distance metric used for the collection.<br>The value defaults to <code>L2</code>.</td>
             <td>N/A</td>
         </tr>

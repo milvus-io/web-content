@@ -151,6 +151,8 @@ A list of fields to return(split by "," if multiple) []: book_id, book_intro
 timeout []:
 ```
 
+</div>
+
 ```curl
 curl --request POST \
      --url '${MILVUS_HOST}:${MILVUS_PORT}/v1/vector/query' \
@@ -165,8 +167,6 @@ curl --request POST \
        "offset": 0
      }'
 ```
-
-</div>
 
 <div class="language-curl">
 Output:
