@@ -85,7 +85,7 @@ Prepare the parameters that suit your search scenario. The following example def
 search_params = {
     "metric_type": "L2", 
     "offset": 5, 
-    "ignore_growing": false, 
+    "ignore_growing": False, 
     "params": {"nprobe": 10}
 }
 ```
