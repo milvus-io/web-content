@@ -572,7 +572,7 @@ R<RpcStatus> response = milvusClient.loadCollection(
 <div class="language-python">
   <div class="alert note">
 
-The `_refresh` parameter is `false` by default. Do not set it to `true` when you load a collection for the first time.
+The `_refresh` parameter is `False` by default. Do not set it to `True` when you load a collection for the first time.
 
   </div>
 </div>
