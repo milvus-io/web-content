@@ -16,7 +16,7 @@ This topic assumes that you have deployed Milvus Operator.
 You need to specify a configuration file for using Milvus Operator to start a Milvus cluster.
 
 ```YAML
-kubectl apply -f https://raw.githubusercontent.com/milvus-io/milvus-operator/main/config/samples/milvuscluster_default.yaml
+kubectl apply -f https://raw.githubusercontent.com/milvus-io/milvus-operator/main/config/samples/milvus_cluster_default.yaml
 ```
 
 You only need to edit the code template in `milvuscluster_default.yaml` to configure third-party dependencies. The following sections introduce how to configure object storage, etcd, and Pulsar respectively.
@@ -78,37 +78,21 @@ The following example configures an external Pulsar service.
 
 ```YAML
 apiVersion: milvus.io/v1alpha1
-
 kind: MilvusCluster
-
 metadata:
-
   name: my-release
-
   labels:
-
     app: milvus
-
 spec:
-
   dependencies: # Optional
-
     pulsar: # Optional
-
       # Whether (=true) to use an existed external pulsar as specified in the field endpoints or 
-
       # (=false) create a new pulsar inside the same kubernetes cluster for milvus.
-
       external: true # Optional default=false
-
       # The external pulsar endpoints if external=true
-
       endpoints:
-
       - 192.168.1.1:6650
-
   components: {}
-
   config: {}           
 ```
 
@@ -122,77 +106,41 @@ The following example configures an internal Pulsar service.
 
 ```YAML
 apiVersion: milvus.io/v1alpha1
-
 kind: MilvusCluster
-
 metadata:
-
   name: my-release
-
   labels:
-
     app: milvus
-
 spec:
-
   dependencies:
-
     pulsar:
-
       inCluster:
-
         values:
-
           components:
-
             autorecovery: false
-
           zookeeper:
-
             replicaCount: 1
-
           bookkeeper:
-
             replicaCount: 1
-
             resoureces:
-
               limit:
-
                 cpu: '4'
-
               memory: 8Gi
-
             requests:
-
               cpu: 200m
-
               memory: 512Mi
-
           broker:
-
             replicaCount: 1
-
             configData:
-
               ## Enable `autoSkipNonRecoverableData` since bookkeeper is running
-
               ## without persistence
-
               autoSkipNonRecoverableData: "true"
-
               managedLedgerDefaultEnsembleSize: "1"
-
               managedLedgerDefaultWriteQuorum: "1"
-
               managedLedgerDefaultAckQuorum: "1"
-
           proxy:
-
             replicaCount: 1
-
   components: {}
-
   config: {}            
 ```
 
