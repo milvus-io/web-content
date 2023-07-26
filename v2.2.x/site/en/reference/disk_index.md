@@ -41,7 +41,6 @@ To use DiskANN, ensure that you
 
   | Parameter     | Description                         | Range                                           |
   | ------------- | ----------------------------------- | ----------------------------------------------- |
-  | `k`           | Number of closest vectors to return | [1, 12768]                                      |
   | `search_list` | Size of the candidate list, a larger size offers a higher recall rate with degraded performance. | [k, min( 10 * k, 65535)] for k > 20 <br> [k, 200] for k <= 20 |
 
 ## DiskANN-related Milvus configurations

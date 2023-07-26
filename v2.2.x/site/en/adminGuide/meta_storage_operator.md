@@ -7,7 +7,7 @@ summary: Learn how to configure meta storage with Milvus Operator.
 
 # Configure Meta Storage with Milvus Operator
 
-Milvus uses etcd for storing metadata. This topic introduces how to configure meta storage dependency when you install Milvus with Milvus Operator.
+Milvus uses etcd for storing metadata. This topic introduces how to configure meta storage dependency when you install Milvus with Milvus Operator. For more details, refer to [Configure Meta Storage with Milvus Operator](https://github.com/milvus-io/milvus-operator/blob/main/docs/administration/manage-dependencies/meta-storage.md) in the Milvus Operator repository.
 
 This topic assumes that you have deployed Milvus Operator.
 

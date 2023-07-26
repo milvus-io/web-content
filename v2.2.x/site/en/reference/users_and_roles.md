@@ -34,6 +34,7 @@ The following table lists the values you can choose when [enabling RBAC](rbac.md
 | Collection  | DropIndex             | DropIndex                                         |
 | Collection  | IndexDetail           | DescribeIndex/GetIndexState/GetIndexBuildProgress |
 | Collection  | Load                  | LoadCollection                                    |
+| Collection  | GetLoadingProgress    | GetLoadingProgress                                |
 | Collection  | Release               | ReleaseCollection                                 |
 | Collection  | Insert                | Insert                                            |
 | Collection  | Delete                | Delete                                            |
