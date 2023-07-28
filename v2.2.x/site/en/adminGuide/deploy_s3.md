@@ -24,7 +24,6 @@ minio:
   secretAccessKey: <your_s3_secret_access_key>
   useSSL: <true/false>
   bucketName: "<your_bucket_name>"
-  useSSL: <true/false>
 ```
 See [MinIO/S3 Configurations](configure_minio.md) for more information.
 
