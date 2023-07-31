@@ -5,7 +5,7 @@ This is the constructor method to create a FieldSchema.
 ## Invocation
 
 ```python
-FieldSchema(name, dtype, description='', **kwargs)
+FieldSchema(name, dtype, is_primary, description='', default_value, **kwargs)
 ```
 
 ## Return
@@ -17,7 +17,11 @@ A FieldSchema object.
 | Property             | Description                                                                  |
 | -------------------- | ---------------------------------------------------------------------------- |
 | `name`               | Name of the field                                                            |
+| `dtype`              | Data type of the field to create                                             |
 | `is_primary`         | Boolean value that indicates if the field is the primary key field           |
+| `description`        | Description of the field to create                                           |
+| `default_value`      | Default value of the field. This parameter supports only for scalar fields except array and JSON formats. You cannot specify a default value for a primary key field.                                           |
+
 
 ## Example
 
@@ -32,10 +36,16 @@ book_name = FieldSchema(
   name="book_name", 
   dtype=DataType.VARCHAR, 
   max_length=200, #max_length must be specified to limit the max length of VARCHAR. The value should be in (0, 65535].
+  # The default value will be used if this field is left empty during data inserts or upserts.
+  # The data type of `default_value` must be the same as that specified in `dtype`. 
+  default_value="Unknown"
 )
 word_count = FieldSchema(
   name="word_count", 
-  dtype=DataType.INT64,  
+  dtype=DataType.INT64,
+  # The default value will be used if this field is left empty during data inserts or upserts.
+  # The data type of `default_value` must be the same as that specified in `dtype`.
+  default_value=9999  
 )
 book_intro = FieldSchema(
   name="book_intro", 
