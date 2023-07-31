@@ -100,7 +100,7 @@ role.list_grants()
 Bind the role to a user so that this user can inherit all the privileges of the role.
 
 ```
-role.add_user("roleA", username)
+role.add_user(username)
 ```
 
 After binding a role to a user, you can:
@@ -108,7 +108,7 @@ After binding a role to a user, you can:
 - List all users bind to a role
 
 ```
-role.get_users("roleA")
+role.get_users()
 ```
 
 ## 5. Deny access or privileges
