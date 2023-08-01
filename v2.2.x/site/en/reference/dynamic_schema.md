@@ -23,7 +23,7 @@ connections.connect(host='localhost', port='19530')
 
 # 1. define fields
 fields = [
-    FieldSchema(name="id", dtype=DataType.INT64, is_primary=True, auto_id=True, max_length=100),
+    FieldSchema(name="id", dtype=DataType.INT64, is_primary=True, auto_id=True),
     FieldSchema(name="title", dtype=DataType.VARCHAR, max_length=512),
     FieldSchema(name="title_vector", dtype=DataType.FLOAT_VECTOR, dim=768)
 ]
