@@ -262,7 +262,7 @@ Success response:
         ],
         "load": "string",
         "shardsNum": 0,
-        "enableDynamic": true
+        "enableDynamicField": true
     }
 }
 ```

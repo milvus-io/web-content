@@ -7,6 +7,12 @@
   },
   "tags": [
     {
+      "name": "Cloud Meta"
+    },
+    {
+      "name": "Cluster Operations"
+    },
+    {
       "name": "Collection Operations"
     },
     {
@@ -14,6 +20,313 @@
     }
   ],
   "paths": {
+    "/v1/clouds": {
+      "get": {
+        "summary": "List Cloud Providers",
+        "x-apifox-folder": "Cloud Meta",
+        "x-apifox-status": "released",
+        "deprecated": false,
+        "description": "Lists all cloud providers available on Zilliz Cloud.",
+        "tags": [
+          "Cloud Meta"
+        ],
+        "parameters": [
+          {
+            "name": "cloud-provider-id",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a list of all available cloud providers on Zilliz Cloud.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/Clouds"
+                    },
+                    {
+                      "$ref": "#/components/schemas/Error"
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "value": ""
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "value": ""
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://www.apifox.cn/web/project/2645146/apis/api-77767159-run"
+      }
+    },
+    "/v1/regions": {
+      "get": {
+        "summary": "List Cloud Regions",
+        "x-apifox-folder": "Cloud Meta",
+        "x-apifox-status": "released",
+        "deprecated": false,
+        "description": "Lists all available cloud regions of a specific cloud provider.",
+        "tags": [
+          "Cloud Meta"
+        ],
+        "parameters": [
+          {
+            "name": "cloud-provider-id",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "cloudId",
+            "in": "query",
+            "description": "The ID of a valid cloud provider.",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a list of all available regions that the specified cloud provider offers.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/Regions"
+                    },
+                    {
+                      "$ref": "#/components/schemas/Error"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://www.apifox.cn/web/project/2645146/apis/api-77767161-run"
+      }
+    },
+    "/v1/clusters": {
+      "get": {
+        "summary": "List Clusters",
+        "x-apifox-folder": "Cluster Operations",
+        "x-apifox-status": "released",
+        "deprecated": false,
+        "description": "Lists all clusters in the specified cloud region.",
+        "tags": [
+          "Cluster Operations"
+        ],
+        "parameters": [
+          {
+            "name": "cloud-region-id",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "The number of records to return on each page.",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "current",
+            "in": "query",
+            "description": "The current page number.",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a list of your clusters.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/Clusters"
+                    },
+                    {
+                      "$ref": "#/components/schemas/Error"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://www.apifox.cn/web/project/2645146/apis/api-77767163-run"
+      }
+    },
+    "/v1/clusters/clusters/{clusterId}": {
+      "get": {
+        "summary": "Describe Cluster",
+        "x-apifox-folder": "Cluster Operations",
+        "x-apifox-status": "released",
+        "deprecated": false,
+        "description": "Describe a cluster in detail.",
+        "tags": [
+          "Cluster Operations"
+        ],
+        "parameters": [
+          {
+            "name": "cloud-region-id",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "clusterId",
+            "in": "path",
+            "description": "The ID of a cluster to which this operation applies.",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns an array of clusters in detail.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpapi.GenericResp-resp_ListClusterResp"
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://www.apifox.cn/web/project/2645146/apis/api-77767164-run"
+      }
+    },
+    "/v1/clusters/{clusterId}/resume": {
+      "post": {
+        "summary": "Resume Cluster",
+        "x-apifox-folder": "Cluster Operations",
+        "x-apifox-status": "released",
+        "deprecated": false,
+        "description": "Resume a suspended cluster.",
+        "tags": [
+          "Cluster Operations"
+        ],
+        "parameters": [
+          {
+            "name": "cloud-region-id",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "clusterId",
+            "in": "path",
+            "description": "The ID of a cluster to which this operation applies.",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the ID of the affected cluster.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpapi.GenericResp-resp_ActionClusterResp"
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://www.apifox.cn/web/project/2645146/apis/api-77767167-run"
+      }
+    },
+    "/v1/clusters/{clusterId}/suspend": {
+      "post": {
+        "summary": "Suspend Cluster",
+        "x-apifox-folder": "Cluster Operations",
+        "x-apifox-status": "released",
+        "deprecated": false,
+        "description": "Suspend a specified cluster. This operation will only stop the cluster and your data will remain intact.",
+        "tags": [
+          "Cluster Operations"
+        ],
+        "parameters": [
+          {
+            "name": "cloud-region-id",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "clusterId",
+            "in": "path",
+            "description": "The ID of a cluster to which this operation applies.",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the ID of the affected cluster.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpapi.GenericResp-resp_ActionClusterResp"
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://www.apifox.cn/web/project/2645146/apis/api-77767168-run"
+      }
+    },
     "/v1/vector/collections": {
       "get": {
         "summary": "List Collections",
@@ -1211,7 +1524,7 @@
             "type": "integer",
             "description": "The number of shards in the collection."
           },
-          "enableDynamic": {
+          "enableDynamicField": {
             "type": "boolean",
             "description": "Whether the dynamic JSON feature is enabled for this collection."
           }
@@ -1223,10 +1536,10 @@
           "indexes",
           "load",
           "shardsNum",
-          "enableDynamic"
+          "enableDynamicField"
         ],
         "required": [
-          "enableDynamic"
+          "enableDynamicField"
         ],
         "x-apifox-ignore-properties": [],
         "x-apifox-folder": "Schemas"
@@ -1376,6 +1689,420 @@
             "type": "array",
             "items": {
               "type": "string"
+            }
+          }
+        },
+        "x-apifox-orders": [
+          "code",
+          "data"
+        ],
+        "x-apifox-ignore-properties": [],
+        "x-apifox-folder": "Schemas"
+      },
+      "httpapi.GenericResp-resp_ActionClusterResp": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer"
+          },
+          "data": {
+            "$ref": "#/components/schemas/resp.ActionClusterResp"
+          }
+        },
+        "x-apifox-orders": [
+          "code",
+          "data"
+        ],
+        "x-apifox-ignore-properties": [],
+        "x-apifox-folder": "Schemas"
+      },
+      "resp.ActionClusterResp": {
+        "type": "object",
+        "properties": {
+          "clusterId": {
+            "type": "string",
+            "description": "The ID of a cluster."
+          },
+          "prompt": {
+            "type": "string",
+            "description": "The statement indicating that the current operation succeeds."
+          }
+        },
+        "x-apifox-orders": [
+          "clusterId",
+          "prompt"
+        ],
+        "x-apifox-ignore-properties": [],
+        "x-apifox-folder": "Schemas"
+      },
+      "httpapi.GenericResp-resp_ListClusterResp": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer"
+          },
+          "data": {
+            "type": "object",
+            "x-apifox-refs": {
+              "01H1RF3YYDEJQV8V95B61TT8V7": {
+                "$ref": "#/components/schemas/resp.ClusterDTO",
+                "x-apifox-overrides": {}
+              }
+            },
+            "properties": {
+              "clusterId": {
+                "type": "string",
+                "description": "The ID of the cluster."
+              },
+              "clusterName": {
+                "type": "string",
+                "description": "The Name of the cluster."
+              },
+              "description": {
+                "type": "string",
+                "description": "An optional description of the cluster."
+              },
+              "regionId": {
+                "type": "string",
+                "description": "The ID of the cloud region where the cluster exists."
+              },
+              "clusterType": {
+                "type": "string",
+                "description": "The type of the CU associated with the cluster."
+              },
+              "cuSize": {
+                "type": "integer",
+                "description": "The size of the CU used by the cluster."
+              },
+              "status": {
+                "type": "string",
+                "description": "The current status of the cluster. Possible values are **CREATING**, **RUNNING**, **SUSPENDING**, and **RESUMING**."
+              },
+              "connectAddress": {
+                "type": "string",
+                "description": "The public endpoint of the cluster. You can use this to connect to your cluster from public networks."
+              },
+              "privateLinkAddress": {
+                "type": "string",
+                "description": "The private endpoint of the cluster. You can use this to connect to your cluster from your VPSs in the same cloud region."
+              },
+              "createTime": {
+                "type": "string",
+                "description": "The time when this cluster has been creaated."
+              },
+              "storageSize": {
+                "type": "integer",
+                "description": "The storage size of the cluster.",
+                "format": "sint64"
+              },
+              "snapshotNumber": {
+                "type": "integer",
+                "description": "The number of snapshofts created from the cluster."
+              },
+              "createProgress": {
+                "type": "integer",
+                "description": "The creation progress of the cluster."
+              }
+            },
+            "required": [
+              "storageSize",
+              "snapshotNumber",
+              "createProgress",
+              "regionId",
+              "cuSize"
+            ],
+            "x-apifox-orders": [
+              "01H1RF3YYDEJQV8V95B61TT8V7",
+              "storageSize",
+              "snapshotNumber",
+              "createProgress"
+            ],
+            "x-apifox-ignore-properties": [
+              "clusterId",
+              "clusterName",
+              "description",
+              "regionId",
+              "clusterType",
+              "cuSize",
+              "status",
+              "connectAddress",
+              "privateLinkAddress",
+              "createTime"
+            ]
+          }
+        },
+        "x-apifox-orders": [
+          "code",
+          "data"
+        ],
+        "x-apifox-ignore-properties": [],
+        "x-apifox-folder": "Schemas"
+      },
+      "resp.ClusterDTO": {
+        "type": "object",
+        "properties": {
+          "clusterId": {
+            "type": "string",
+            "description": "The ID of the cluster."
+          },
+          "clusterName": {
+            "type": "string",
+            "description": "The Name of the cluster."
+          },
+          "description": {
+            "type": "string",
+            "description": "An optional description of the cluster."
+          },
+          "regionId": {
+            "type": "string",
+            "description": "The ID of the cloud region where the cluster exists."
+          },
+          "clusterType": {
+            "type": "string",
+            "description": "The type of the CU associated with the cluster."
+          },
+          "cuSize": {
+            "type": "integer",
+            "description": "The size of the CU used by the cluster."
+          },
+          "status": {
+            "type": "string",
+            "description": "The current status of the cluster. Possible values are **CREATING**, **RUNNING**, **SUSPENDING**, and **RESUMING**."
+          },
+          "connectAddress": {
+            "type": "string",
+            "description": "The public endpoint of the cluster. You can use this to connect to your cluster from public networks."
+          },
+          "privateLinkAddress": {
+            "type": "string",
+            "description": "The private endpoint of the cluster. You can use this to connect to your cluster from your VPSs in the same cloud region."
+          },
+          "createTime": {
+            "type": "string",
+            "description": "The time when this cluster has been creaated."
+          }
+        },
+        "x-apifox-orders": [
+          "clusterId",
+          "clusterName",
+          "description",
+          "regionId",
+          "clusterType",
+          "cuSize",
+          "status",
+          "connectAddress",
+          "privateLinkAddress",
+          "createTime"
+        ],
+        "required": [
+          "regionId",
+          "cuSize"
+        ],
+        "x-apifox-ignore-properties": [],
+        "x-apifox-folder": "Schemas"
+      },
+      "Clusters": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "count": {
+                "type": "integer",
+                "description": "The total number of clusters returned."
+              },
+              "currentPage": {
+                "type": "integer",
+                "description": "The current page in the results."
+              },
+              "pageSize": {
+                "type": "integer",
+                "description": "The number of clusters per page in the results."
+              },
+              "clusters": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "clusterId": {
+                      "type": "string",
+                      "description": "The ID of the cluster."
+                    },
+                    "clusterName": {
+                      "type": "string",
+                      "description": "The name of the cluster."
+                    },
+                    "description": {
+                      "type": "string",
+                      "description": "An optional description about the cluster."
+                    },
+                    "regionId": {
+                      "type": "string",
+                      "description": "The ID of the region where the cluster exists."
+                    },
+                    "clusterType": {
+                      "type": "string",
+                      "description": "The type of CU associated with the cluster. Possible values are **Performance-optimized** and **Capacity-optimized**."
+                    },
+                    "cuSize": {
+                      "type": "integer",
+                      "description": "The size of the CU associated with the cluster."
+                    },
+                    "status": {
+                      "type": "string",
+                      "description": "The current status of the cluster. Possible values are **INITIALIZING**, **RUNNING**, **SUSPENDING**, and **RESUMING**."
+                    },
+                    "connectAddress": {
+                      "type": "string",
+                      "description": "The public endpoint of the cluster. You can connect to the cluster using this endpoint from the public network."
+                    },
+                    "privateLinkAddress": {
+                      "type": "string",
+                      "description": "The private endpoint of the cluster. You can set up a private link to allow your VPS in the same cloud region to access your cluster."
+                    },
+                    "createTime": {
+                      "type": "string",
+                      "description": "The time at which the cluster has been created."
+                    }
+                  },
+                  "x-apifox-orders": [
+                    "clusterId",
+                    "clusterName",
+                    "description",
+                    "regionId",
+                    "clusterType",
+                    "cuSize",
+                    "status",
+                    "connectAddress",
+                    "privateLinkAddress",
+                    "createTime"
+                  ],
+                  "required": [
+                    "regionId"
+                  ],
+                  "x-apifox-ignore-properties": []
+                },
+                "description": "An array of clusters in detail."
+              }
+            },
+            "x-apifox-orders": [
+              "count",
+              "currentPage",
+              "pageSize",
+              "clusters"
+            ],
+            "x-apifox-ignore-properties": []
+          }
+        },
+        "x-apifox-orders": [
+          "code",
+          "data"
+        ],
+        "x-apifox-ignore-properties": [],
+        "x-apifox-folder": "Schemas"
+      },
+      "req.PageListReq": {
+        "type": "object",
+        "properties": {
+          "currentPage": {
+            "type": "integer"
+          },
+          "pageSize": {
+            "type": "integer"
+          }
+        },
+        "x-apifox-orders": [
+          "currentPage",
+          "pageSize"
+        ],
+        "x-apifox-ignore-properties": [],
+        "x-apifox-folder": "Schemas"
+      },
+      "Regions": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "cloudId": {
+                  "type": "string",
+                  "description": "The ID of a cloud provider"
+                },
+                "regionId": {
+                  "type": "string",
+                  "description": "The ID of a cloud region"
+                },
+                "apiBaseUrl": {
+                  "type": "string",
+                  "description": "The base URL of an Zilliz Cloud open API endpiont"
+                }
+              },
+              "x-apifox-orders": [
+                "cloudId",
+                "regionId",
+                "apiBaseUrl"
+              ],
+              "x-apifox-ignore-properties": []
+            }
+          }
+        },
+        "x-apifox-orders": [
+          "code",
+          "data"
+        ],
+        "x-apifox-ignore-properties": [],
+        "x-apifox-folder": "Schemas"
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer"
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "x-apifox-orders": [
+          "code",
+          "message"
+        ],
+        "x-apifox-ignore-properties": [],
+        "x-apifox-folder": "Schemas"
+      },
+      "Clouds": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "cloudId": {
+                  "type": "string",
+                  "description": "The ID of a cloud provider."
+                },
+                "description": {
+                  "type": "string",
+                  "description": "The description of the cloud provider."
+                }
+              },
+              "x-apifox-orders": [
+                "cloudId",
+                "description"
+              ],
+              "x-apifox-ignore-properties": []
             }
           }
         },
