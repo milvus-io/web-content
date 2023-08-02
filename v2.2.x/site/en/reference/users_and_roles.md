@@ -46,7 +46,7 @@ The following table lists the values you can choose when [enabling RBAC](rbac.md
 | Collection  | Alias                 | CreateAlias/DropAlias/AlterAlias                  |
 | Collection  | Import                | BulkInsert/Import                                 |
 | Collection  | LoadBalance           | LoadBalance                                       |
-| Global      | *(All)                | All API operation permissions in this table       |
+| Global      | All                   | All API operation permissions in this table       |
 | Global      | CreateCollection      | CreateCollection                                  |
 | Global      | DropCollection        | DropCollection                                    |
 | Global      | DescribeCollection    | DescribeCollection                                |
@@ -69,7 +69,8 @@ The following table lists the values you can choose when [enabling RBAC](rbac.md
 
 <div class="alert note">
 <li>Object and privilege names are case-sensitive.</li>
-<li>To grant all privileges to a global object, use "*" for privilege name.</li>
+<li>To grant all privileges to a kind of object, like Collection, Global, User, use "*" for privilege name. </li>
+<li>The "*" privilege name for the Global object doesn't include the All privilege, because the All privilege includes all permissions, including any collection and user object.</li>
 </div>
 
 ## What's next
