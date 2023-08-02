@@ -158,6 +158,26 @@ for hits in result:
 
 To access a particular key within a JSON field, you can reference the key name by including the JSON field name (such as article_meta["claps"] in expr) and include the name of the JSON field in output_fields. Then you can access the keys in the returned JSON value as normal dictionaries.
 
+Milvus also supports `json_contains`. You can use it to check whether the value corresponding to an array-like JSON key contains a specified element.
+
+For example, if the dataset to be inserted is similar to the following:
+
+```python
+rows = [
+    { "x": [1,2,3,4] }
+]
+```
+
+You can insert it as follows and have Milvus hit the only entity with `json_contains` as follows:
+
+```python
+collection.insert(rows)
+
+expr = "json_contains(x, 2)"
+
+collection.search(query_vector, "vector", search_params, limit=1, expr=expr)
+```
+
 ## Limits
 
 When working with JSON fields, you can enclose a string value with either double quotation marks ("") or single quotation marks (''). It's important to note that Milvus stores string values in the JSON field as is without performing semantic escape or conversion. For instance, **'a"b'**, **"a'b"**, **'a\\'b'**, and **"a\\"b"** will be saved as is, while **'a'b'** and **"a"b"** will be treated as invalid values.
@@ -179,6 +199,7 @@ The following table assumes that the value of a JSON field named `json_field` ha
 | **and (&&)**  | `'json_field["A"] > 1 && json_field["A"] < 3'`                           | This expression evaluates to true if the value of `json_field["A"]` is greater than `1` and less than `3`. |
 | **or (\|\|)** | `'json_field["A"] > 1 \|\| json_field["A"] < 3'`                         | This expression evaluates to true if the value of `json_field["A"]` is greater than `1` or less than `3`. |
 | **exists**     | `'exists json_field["A"]'`                                  | This expression evaluates to true if `json_field` does not have a key named `A`.                                                                                        |
+| **json_contains** | `'json_contains(json_field["A"], x)'` | This expression evaluates to true if the value of `json_field[A]` is an array and contains `x`. Note that `x` cannot be an array. |
 
 ## What's next
 
