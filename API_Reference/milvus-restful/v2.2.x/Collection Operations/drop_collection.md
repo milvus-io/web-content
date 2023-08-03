@@ -16,10 +16,10 @@ Drop a collection named `medium_articles`:
 
 ```shell
 curl --request POST \
-     --url '${MILVUS_HOST}:${MILVUS_PORT}/v1/vector/collections/drop' \
-     --header 'Authorization: Bearer <TOKEN>' \
-     --header 'accept: application/json' \
-     --header 'content-type: application/json'
+     --url "${MILVUS_HOST}:${MILVUS_PORT}/v1/vector/collections/drop" \
+     --header "Authorization: Bearer ${TOKEN}" \
+     --header "accept: application/json" \
+     --header "content-type: application/json" \
      -d '{
         "collectionName": "medium_articles"
       }'

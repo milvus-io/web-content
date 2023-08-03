@@ -16,13 +16,10 @@ Describe the details of a collection named `medium_articles`:
 
 ```shell
 curl --request GET \
-     --url '${MILVUS_HOST}:${MILVUS_PORT}/v1/vector/collections/describe' \
-     --header 'Authorization: Bearer <TOKEN>' \
-     --header 'accept: application/json' \
-     --header 'content-type: application/json'
-     -d '{
-        "collectionName": "medium_articles"
-      }'
+     --url "${MILVUS_HOST}:${MILVUS_PORT}/v1/vector/collections/describe?collectionName=medium_articles" \
+     --header "Authorization: Bearer ${TOKEN}" \
+     --header "accept: application/json" \
+     --header "content-type: application/json"
 ```
 
 Success response:
