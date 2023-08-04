@@ -12,10 +12,10 @@ The following is the API endpoint used to list collections in a Milvus cluster.
 
 ```shell
 curl --request GET \
-    --url 'http://${MILVUS_HOST}:${MILVUS_PORT}/v1/vector/collections' \
-    --header 'Authorization: Bearer <TOKEN>' \
-    --header 'accept: application/json' \
-    --header 'content-type: application/json'
+    --url "${MILVUS_HOST}:${MILVUS_PORT}/v1/vector/collections" \
+    --header "Authorization: Bearer ${TOKEN}" \
+    --header "accept: application/json" \
+    --header "content-type: application/json"
 ```
 
 ## Authentication credentials
