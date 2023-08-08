@@ -1,4 +1,4 @@
-# Get Started
+# About RESTful API
 
 Milvus offers RESTful API for you to manipulate your collections and data stored in them. Before you dive in, there are several things that are worth noting:
 
