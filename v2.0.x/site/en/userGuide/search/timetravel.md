@@ -682,8 +682,8 @@ No.1:
   - [Conduct a hybrid search](hybridsearch.md)
 
 - Explore API references for Milvus SDKs:
-  - [PyMilvus API reference](/api-reference/pymilvus/v2.0.2/About.md)
+  - [PyMilvus API reference](/api-reference/pymilvus/v2.0.x/About.md)
   - [Node.js API reference](/api-reference/node/v2.0.x/About.md)
-  - [Go API reference](/api-reference/go/v2.0.0/About.md)
-  - [Java API reference](/api-reference/java/v2.0.4/About.md)
+  - [Go API reference](/api-reference/go/v2.0.x/About.md)
+  - [Java API reference](/api-reference/java/v2.0.x/About.md)
 
