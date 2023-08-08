@@ -16,13 +16,10 @@ Describe the details of a collection named `medium_articles`:
 
 ```shell
 curl --request GET \
-     --url '${MILVUS_HOST}:${MILVUS_PORT}/v1/vector/collections/describe' \
-     --header 'Authorization: Bearer <TOKEN>' \
-     --header 'accept: application/json' \
-     --header 'content-type: application/json'
-     -d '{
-        "collectionName": "medium_articles"
-      }'
+     --url "${MILVUS_HOST}:${MILVUS_PORT}/v1/vector/collections/describe?collectionName=medium_articles" \
+     --header "Authorization: Bearer ${TOKEN}" \
+     --header "accept: application/json" \
+     --header "content-type: application/json"
 ```
 
 Success response:
@@ -88,7 +85,7 @@ Returns the specified collection in detail.
     "data": {
         "collectionName": "string",
         "description": "string",
-        "enableDynamic": "boolean",
+        "enableDynamicField": "boolean",
         "fields": [
             {
                 "autoId": "boolean",
@@ -142,7 +139,7 @@ The properties in the returned response are listed in the following table.
 | `data.indexes[].metricType`   | **string**<br>The metric type used in the index process. |
 | `data.load`   | **string**<br>The load status of the collection. Possible values are **unload**, **loading**, and **loaded**. |
 | `data.shardsNum`   | **integer**<br>The number of shards in the collection. |
-| `data.enableDynamic`   | **boolean**<br>Whether the dynamic JSON feature is enabled for this collection. |
+| `data.enableDynamicField`   | **boolean**<br>Whether the dynamic JSON feature is enabled for this collection. |
 | `message`  | **string**<br>Indicates the possible reason for the reported error. |
 
 ## Possible Errors

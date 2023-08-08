@@ -16,14 +16,14 @@ Query entities that meet specific conditions:
 
 ```shell
 curl --request POST \
-     --url '${MILVUS_HOST}:${MILVUS_PORT}/v1/vector/query' \
-     --header 'Authorization: Bearer <TOKEN>' \
-     --header 'accept: application/json' \
-     --header 'content-type: application/json'
+     --url "${MILVUS_HOST}:${MILVUS_PORT}/v1/vector/query" \
+     --header "Authorization: Bearer ${TOKEN}" \
+     --header "accept: application/json" \
+     --header "content-type: application/json" \
      -d '{
-       "collectionName": "collection1",
-       "outputFields": ["id", "name", "feature", "distance"],
-       "filter": "id in (1, 2, 3)",
+       "collectionName": "medium_articles",
+       "outputFields": ["id", "title", "link"],
+       "filter": "id in [443300716234671427, 443300716234671426]",
        "limit": 100,
        "offset": 0
      }'

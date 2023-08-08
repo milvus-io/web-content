@@ -16,12 +16,12 @@ Delete a collection whose ID is an integer:
 
 ```shell
 curl --request POST \
-     --url '${MILVUS_HOST}:${MILVUS_PORT}/v1/vector/delete' \
-     --header 'Authorization: Bearer <TOKEN>' \
-     --header 'accept: application/json' \
-     --header 'content-type: application/json'
+     --url "${MILVUS_HOST}:${MILVUS_PORT}/v1/vector/delete" \
+     --header "Authorization: Bearer ${TOKEN}" \
+     --header "accept: application/json" \
+     --header "content-type: application/json" \
      -d '{
-       "collectionName": "collection1",
+       "collectionName": "medium_articles",
        "id": 1
      }'
 ```
@@ -30,12 +30,12 @@ Delete a collection whose ID is a string:
 
 ```shell
 curl --request POST \
-     --url '${MILVUS_HOST}:${MILVUS_PORT}/v1/vector/delete' \
-     --header 'Authorization: Bearer <TOKEN>' \
-     --header 'accept: application/json' \
-     --header 'content-type: application/json'
+     --url "${MILVUS_HOST}:${MILVUS_PORT}/v1/vector/delete" \
+     --header "Authorization: Bearer ${TOKEN}" \
+     --header "accept: application/json" \
+     --header "content-type: application/json" \
      -d '{
-       "collectionName": "collection1",
+       "collectionName": "medium_articles",
        "id": "id1"
      }'
 ```
@@ -44,12 +44,12 @@ Delete a list of collections whose IDs are integers:
 
 ```shell
 curl --request POST \
-     --url '${MILVUS_HOST}:${MILVUS_PORT}/v1/vector/delete' \
-     --header 'Authorization: Bearer <TOKEN>' \
-     --header 'accept: application/json' \
-     --header 'content-type: application/json'
+     --url "${MILVUS_HOST}:${MILVUS_PORT}/v1/vector/delete" \
+     --header "Authorization: Bearer ${TOKEN}" \
+     --header "accept: application/json" \
+     --header "content-type: application/json" \
      -d '{
-        "collectionName": "collection1",
+        "collectionName": "medium_articles",
         "id": [1,2,3,4]
       }'
 ```
@@ -58,12 +58,12 @@ Delete a list of collections whose IDs are strings:
 
 ```shell
 curl --request POST \
-     --url '${MILVUS_HOST}:${MILVUS_PORT}/v1/vector/delete' \
-     --header 'Authorization: Bearer <TOKEN>' \
-     --header 'accept: application/json' \
-     --header 'content-type: application/json'
+     --url "${MILVUS_HOST}:${MILVUS_PORT}/v1/vector/delete" \
+     --header "Authorization: Bearer ${TOKEN}" \
+     --header "accept: application/json" \
+     --header "content-type: application/json" \
      -d '{
-        "collectionName": "collection1",
+        "collectionName": "medium_articles",
         "id": ["id1", "id2", "id3","id4"]
       }'
 ```
