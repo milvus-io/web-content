@@ -306,7 +306,7 @@
                                                     "type": "integer",
                                                     "description": "The number of shards in the collection."
                                                 },
-                                                "enableDynamic": {
+                                                "enableDynamicField": {
                                                     "type": "boolean",
                                                     "description": "Whether the dynamic JSON feature is enabled for this collection."
                                                 }
@@ -318,10 +318,10 @@
                                                 "indexes",
                                                 "load",
                                                 "shardsNum",
-                                                "enableDynamic"
+                                                "enableDynamicField"
                                             ],
                                             "required": [
-                                                "enableDynamic"
+                                                "enableDynamicField"
                                             ],
                                             "x-apifox-ignore-properties": [],
                                             "x-apifox-folder": "Schemas"
@@ -1066,7 +1066,7 @@
                 "x-apifox-folder": "Vector Operations",
                 "x-apifox-status": "released",
                 "deprecated": false,
-                "description": "Conducts a similarity search in a collection.",
+                "description": "Gets entities by the specified IDs.",
                 "tags": [
                     "Vector Operations"
                 ],

@@ -1,6 +1,6 @@
 # Get
 
-Conducts a similarity search in a collection.
+Gets entities by the specified IDs.
 
 <div>
     <div style="display: inline-block; background: #026aca; font-size: 0.6em; border-radius: 10px; color: #ffffff; padding: 0.3em 1em;">
