@@ -1,6 +1,6 @@
 {
-  "milvus_release_version": "2.2.12",
-  "milvus_release_tag": "2.2.12",
+  "milvus_release_version": "2.2.13",
+  "milvus_release_tag": "2.2.13",
   "milvus_deb_name": "milvus_2.2.0-1_amd64",
   "milvus_rpm_name": "milvus-2.2.0-1.el7.x86_64",
   "milvus_python_sdk_version": "2.2.x",
@@ -10,7 +10,7 @@
   "milvus_restful_sdk_version": "2.2.x",
   "milvus_operator_version": "0.7.15",
   "milvus_helm_chart_version": "4.0.26",
-  "milvus_image": "2.2.12",
-  "attu_release": "2.2.6",
+  "milvus_image": "2.2.13",
+  "attu_release": "2.2.7",
   "milvus_backup_release": "0.3.0"
 }

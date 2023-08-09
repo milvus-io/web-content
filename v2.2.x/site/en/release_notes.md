@@ -6,6 +6,41 @@ summary: Milvus Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.2.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## 2.2.13
+
+Release date: Aug 9, 2023
+
+| Milvus version | Python SDK version | Java SDK version | Go SDK version | Node.js SDK version |
+| -------------- | ------------------ | ---------------- | -------------- | ------------------- |
+| 2.2.13         | 2.2.15             | 2.2.11           | 2.2.7          | 2.2.23              |
+
+Milvus 2.2.13 is a minor bugfix release that fixes several performance degrading issues, including excessive disk usage when TTL is enabled, and the failure to import dynamic fields via bulk load. In addition, Milvus 2.2.13 also extends object storage support beyond S3 and MinIO.
+
+### Bugfixes
+
+- Resolved a crash bug in bulk-insert for dynamic fields. ([#25980](https://github.com/milvus-io/milvus/pull/25980))
+- Reduced excessive MinIO storage usage by saving metadata (timestampFrom, timestampTo) during compaction. ([#26210](https://github.com/milvus-io/milvus/pull/26210))
+- Corrected lock usage in DataCoord compaction. ([#26032](https://github.com/milvus-io/milvus/pull/26032)) ([#26042](https://github.com/milvus-io/milvus/pull/26042))
+- Incorporated session util fixes through cherry-picking. ([#26101](https://github.com/milvus-io/milvus/pull/26101))
+- Removed user-role mapping information along with a user. ([#25988](https://github.com/milvus-io/milvus/pull/25988)) ([#26048](https://github.com/milvus-io/milvus/pull/26048))
+- Improved the RBAC cache update process. ([#26150](https://github.com/milvus-io/milvus/pull/26150)) ([#26151](https://github.com/milvus-io/milvus/pull/26151))
+- Fixed MsgPack from mq msgstream ts not being set. ([#25924](https://github.com/milvus-io/milvus/pull/25924))
+- Fixed the issue of `sc.distribution` being nil. ([#25904](https://github.com/milvus-io/milvus/pull/25904))
+- Fixed incorrect results while retrieving data of int8. ([#26171](https://github.com/milvus-io/milvus/pull/26171))
+
+### Enhancements
+
+- Upgraded MinIO-go and add region and virtual host config for segcore chunk manager ([#25811](https://github.com/milvus-io/milvus/pull/25811))
+- Reduced log volumes of DC&DN ([#26060](https://github.com/milvus-io/milvus/pull/26060)) ([#26094](https://github.com/milvus-io/milvus/pull/26094))
+- Added a new configuration item: proxy.http.port ([#25923](https://github.com/milvus-io/milvus/pull/25923))
+- Forced use DNS for AliyunOSS because of sdk bug ([#26176](https://github.com/milvus-io/milvus/pull/26176))
+- Fixed indexnode and datanode num metric ([#25920](https://github.com/milvus-io/milvus/pull/25920))
+- Disabled deny writing when the growing segment size exceeds the watermark ([#26163](https://github.com/milvus-io/milvus/pull/26163)) ([#26208](https://github.com/milvus-io/milvus/pull/26208))
+
+### Performance-related issues
+
+- Fixed the performance degradation in version 2.2.12 by adding back the segment CGO pool and separating sq/dm operations ([#26035](https://github.com/milvus-io/milvus/pull/26035)).
+
 ## 2.2.12
 
 Release date: 24 July, 2023
@@ -23,6 +58,7 @@ New features in this release include:
     Note that you must set a token even if the authentication is disabled in Milvus for now. For details, see [#25873](https://github.com/milvus-io/milvus/pull/25873).
 
 - Improved ability to retrieve vectors during ANN searches, along with better vector-retrieving performance during queries. Users can now set the vector field as one of the output fields in ANN searches and queries against HNSW-, DiskANN-, or IVF-FLAT-indexed collections.
+
 - Better search performance with reduced overhead, even when dealing with large top-K values, improved write performance in partition-key-enabled or multi-partition scenarios, and enhanced CPU usage in scenarios with large machines.
 
 Additionally, a large number of issues have been fixed, including excessive disk usage, stuck compaction, infrequent data deletions, object storage access failures using AWS S3 SDK, and bulk-insertion failures.
