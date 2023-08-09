@@ -12,7 +12,7 @@ Release date: Aug 9, 2023
 
 | Milvus version | Python SDK version | Java SDK version | Go SDK version | Node.js SDK version |
 | -------------- | ------------------ | ---------------- | -------------- | ------------------- |
-| 2.2.13         | 2.2.15             | 2.2.10           | 2.2.7          | 2.2.23              |
+| 2.2.13         | 2.2.15             | 2.2.11           | 2.2.7          | 2.2.23              |
 
 Milvus 2.2.13 is a minor bugfix release that fixes several performance degrading issues, including excessive disk usage when TTL is enabled, and the failure to import dynamic fields via bulk load. In addition, Milvus 2.2.13 also extends object storage support beyond S3 and MinIO.
 
