@@ -28,7 +28,7 @@ To use DiskANN, note that
 ## Limits
 
 To use DiskANN, ensure that you
-- Use only float vectors with at least 32 dimensions in your data.
+- Use only float vectors with at least 8 dimensions in your data.
 - Use only Euclidean Distance (L2) or Inner Product (IP) to measure the distance between vectors.
 
 ## Index and search settings

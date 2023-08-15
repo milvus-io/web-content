@@ -146,7 +146,7 @@ There are two ways to install Milvus Operator on K8s:
 helm install milvus-operator \
   -n milvus-operator --create-namespace \
   --wait --wait-for-jobs \
-  https://github.com/milvus-io/milvus-operator/releases/download/v0.7.17/milvus-operator-0.7.17.tgz
+  https://github.com/zilliztech/milvus-operator/releases/download/v0.7.17/milvus-operator-0.7.17.tgz
 ```
 
 If Milvus Operator is installed, you can see the following output.
@@ -160,16 +160,16 @@ TEST SUITE: None
 NOTES:
 Milvus Operator Is Starting, use `kubectl get -n milvus-operator deploy/milvus-operator` to check if its successfully installed
 If Operator not started successfully, check the checker's log with `kubectl -n milvus-operator logs job/milvus-operator-checker`
-Full Installation doc can be found in https://github.com/milvus-io/milvus-operator/blob/main/docs/installation/installation.md
-Quick start with `kubectl apply -f https://raw.githubusercontent.com/milvus-io/milvus-operator/main/config/samples/milvus_minimum.yaml`
-More samples can be found in https://github.com/milvus-io/milvus-operator/tree/main/config/samples
-CRD Documentation can be found in https://github.com/milvus-io/milvus-operator/tree/main/docs/CRD
+Full Installation doc can be found in https://github.com/zilliztech/milvus-operator/blob/main/docs/installation/installation.md
+Quick start with `kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_minimum.yaml`
+More samples can be found in https://github.com/zilliztech/milvus-operator/tree/main/config/samples
+CRD Documentation can be found in https://github.com/zilliztech/milvus-operator/tree/main/docs/CRD
 ```
 
 #### Install by `kubectl` command
 
 ```
-$ kubectl apply -f https://raw.githubusercontent.com/milvus-io/milvus-operator/main/deploy/manifests/deployment.yaml
+$ kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/deploy/manifests/deployment.yaml
 ```
 
 If Milvus Operator is installed, you can see the following output.
@@ -209,7 +209,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
 When Milvus Operator starts, run the following command to install Milvus.
 
 ```
-$ kubectl apply -f https://raw.githubusercontent.com/milvus-io/milvus-operator/main/config/samples/milvus_default.yaml
+$ kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_default.yaml
 ```
 
 
@@ -268,7 +268,7 @@ $ helm -n milvus-operator uninstall milvus-operator
 ### Uninstall Milvus Operator by `kubectl` command
 
 ```
-$ kubectl delete -f https://raw.githubusercontent.com/milvus-io/milvus-operator/v0.7.17/deploy/manifests/deployment.yaml
+$ kubectl delete -f https://raw.githubusercontent.com/zilliztech/milvus-operator/v0.7.17/deploy/manifests/deployment.yaml
 ```
 
 ## Delete the K8s cluster

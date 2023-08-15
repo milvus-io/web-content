@@ -16,7 +16,7 @@ This topic assumes that you have deployed Milvus Operator.
 You need to specify a configuration file for using Milvus Operator to start a Milvus cluster.
 
 ```YAML
-kubectl apply -f https://raw.githubusercontent.com/milvus-io/milvus-operator/main/config/samples/milvuscluster_default.yaml
+kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvuscluster_default.yaml
 ```
 
 You only need to edit the code template in `milvuscluster_default.yaml` to configure third-party dependencies. The following sections introduce how to configure object storage, etcd, and Pulsar respectively.
@@ -265,7 +265,7 @@ spec:
 
 <div class="alert note">The preceding example specifies the number of replicas as <code>5</code> and limits the compute resources for etcd.</div>
 
-<div class="alert note">Find the complete configuration items to configure an internal etcd service in <a href="https://github.com/milvus-io/milvus-operator/blob/main/config/assets/charts/etcd/values.yaml">values.yaml</a>. Add configuration items as needed under <code>etcd.inCluster.values</code> as shown in the preceding example.</div>
+<div class="alert note">Find the complete configuration items to configure an internal etcd service in <a href="https://github.com/zilliztech/milvus-operator/blob/main/config/assets/charts/etcd/values.yaml">values.yaml</a>. Add configuration items as needed under <code>etcd.inCluster.values</code> as shown in the preceding example.</div>
 
 Assuming that the configuration file is named `milvuscluster.yaml`, run the following command to apply the configuration.
 
@@ -412,7 +412,7 @@ spec:
 
 <div class="alert note">This example specifies the numbers of replicas of each component of Pulsar, the compute resources of Pulsar BookKeeper, and other configurations.</div>
 
-<div class="alert note">Find the complete configuration items to configure an internal Pulsar service in <a href="https://github.com/milvus-io/milvus-operator/blob/main/config/assets/charts/pulsar/values.yaml">values.yaml</a>. Add configuration items as needed under <code>pulsar.inCluster.values</code> as shown in the preceding example.</div>
+<div class="alert note">Find the complete configuration items to configure an internal Pulsar service in <a href="https://github.com/zilliztech/milvus-operator/blob/main/config/assets/charts/pulsar/values.yaml">values.yaml</a>. Add configuration items as needed under <code>pulsar.inCluster.values</code> as shown in the preceding example.</div>
 
 Assuming that the configuration file is named `milvuscluster.yaml`, run the following command to apply the configuration.
 

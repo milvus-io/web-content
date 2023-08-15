@@ -26,7 +26,7 @@ Private resource configurations will overwrite global resource configurations. I
 When using Milvus Operator to start a Milvus cluster, you need to specify a configuration file. The example here uses the default configuration file.
 
 ```yaml
-kubectl apply -f https://raw.githubusercontent.com/milvus-io/milvus-operator/main/config/samples/milvus_cluster_default.yaml
+kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml
 ```
 
 The details of the configuration file is as follows:
@@ -51,7 +51,7 @@ The field `spec.components` includes both the global and private resource config
 - `tolerations` and `nodeSelector`: The scheduling rules of each Milvus component in the K8s cluster. See [tolerations](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/) and [nodeSelector](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/) for more information.
 - `env`: The environment variables. 
 
-If you want to configure more fields, see documentation [here](https://pkg.go.dev/github.com/milvus-io/milvus-operator/apis/milvus.io/v1beta1#ComponentSpec).
+If you want to configure more fields, see documentation [here](https://pkg.go.dev/github.com/zilliztech/milvus-operator/apis/milvus.io/v1beta1#ComponentSpec).
 
 To configure global resource for Milvus cluster, create a `milvuscluster_resource.yaml` file. 
 
@@ -99,7 +99,7 @@ Originally in Milvus 2.0, a Milvus cluster includes eight components: proxy, roo
 Common fields used to configure each component include:
 - `replica`: The number of replicas of each component.
 - `port`: The listen port number of each component.
-- The four commonly used fields in global resource configuration: `image`, `env`, `nodeSelector`, `tolerations`, `resources` (see above). For more configurable fields, click on each component in [this documentation](https://pkg.go.dev/github.com/milvus-io/milvus-operator/apis/milvus.io/v1beta1#MilvusComponents).
+- The four commonly used fields in global resource configuration: `image`, `env`, `nodeSelector`, `tolerations`, `resources` (see above). For more configurable fields, click on each component in [this documentation](https://pkg.go.dev/github.com/zilliztech/milvus-operator/apis/milvus.io/v1beta1#MilvusComponents).
 
 <div class="alert note">
 In addition, when configuring proxy, there is an extra field called `serviceType`. This field defines the type of service Milvus provides in the K8s cluster.

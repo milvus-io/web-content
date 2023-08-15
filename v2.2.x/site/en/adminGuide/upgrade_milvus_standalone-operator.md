@@ -143,7 +143,7 @@ spec:
 Run the following command to apply the new configuration.
 
 ```
-$ kubectl apply -f https://github.com/milvus-io/milvus-operator/blob/main/config/samples/beta/milvusupgrade.yaml
+$ kubectl apply -f https://github.com/zilliztech/milvus-operator/blob/main/config/samples/beta/milvusupgrade.yaml
 ```
 
 

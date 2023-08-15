@@ -7,7 +7,7 @@ summary: Learn how to configure message storage with Milvus Operator.
 
 # Configure Message Storage with Milvus Operator
 
-Milvus uses RocksMQ, Pulsar or Kafka for managing logs of recent changes, outputting stream logs, and providing log subscriptions. This topic introduces how to configure message storage dependencies when you install Milvus with Milvus Operator. For more details, refer to [Configure Message Storage with Milvus Operator](https://github.com/milvus-io/milvus-operator/blob/main/docs/administration/manage-dependencies/message-storage.md) in the Milvus Operator repository.
+Milvus uses RocksMQ, Pulsar or Kafka for managing logs of recent changes, outputting stream logs, and providing log subscriptions. This topic introduces how to configure message storage dependencies when you install Milvus with Milvus Operator. For more details, refer to [Configure Message Storage with Milvus Operator](https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/manage-dependencies/message-storage.md) in the Milvus Operator repository.
 
 This topic assumes that you have deployed Milvus Operator.
 
@@ -16,7 +16,7 @@ This topic assumes that you have deployed Milvus Operator.
 You need to specify a configuration file for using Milvus Operator to start a Milvus cluster.
 
 ```YAML
-kubectl apply -f https://raw.githubusercontent.com/milvus-io/milvus-operator/main/config/samples/milvus_cluster_default.yaml
+kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml
 ```
 
 You only need to edit the code template in `milvuscluster_default.yaml` to configure third-party dependencies. The following sections introduce how to configure object storage, etcd, and Pulsar respectively.
