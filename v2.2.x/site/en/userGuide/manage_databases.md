@@ -86,7 +86,7 @@ _PRIVILEGE_INSERT = "Insert"
 
 def connect_to_milvus(db_name="default"):
     print(f"connect to milvus\n")
-    connections.connect(host=_HOST, port=_PORT, db_name=db_name)
+    connections.connect(host=_HOST, port=_PORT, user=_ROOT, password=_ROOT_PASSWORD, db_name=db_name)
 ```
 
 - If neither a Milvus connection nor a Permission API call specifies a `db_name`, **database** refers to the default database.
