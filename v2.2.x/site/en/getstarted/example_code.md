@@ -7,7 +7,7 @@ group: example_code.md
 summary: Get started with Milvus faster using this Python example code.
 ---
 
-<div class="tab-wrapper"><a href="example_code.md" class='active '>Python</a><a href="example_code_node.md" class=''>Node.js</a></div>
+<div class="tab-wrapper"><a href="example_code.md" class='active '>Python</a></div>
 
 # Run Milvus using Python
 

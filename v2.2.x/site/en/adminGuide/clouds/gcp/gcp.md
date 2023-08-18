@@ -130,7 +130,7 @@ gcloud container clusters get-credentials milvus-cluster-1
 Now the Kubernetes cluster is ready. Let's deploy Milvus right now. 
 
 ```bash
-helm repo add milvus https://milvus-io.github.io/milvus-helm/
+helm repo add milvus https://zilliztech.github.io/milvus-helm/
 helm repo update
 helm install my-release milvus/milvus --set service.type=LoadBalancer
 ```

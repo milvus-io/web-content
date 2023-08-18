@@ -16,7 +16,7 @@ To install Milvus offline, you need to pull and save all images in an online env
 1. Add and update Milvus Helm repository locally.
 
 ```
-helm repo add milvus https://milvus-io.github.io/milvus-helm/
+helm repo add milvus https://zilliztech.github.io/milvus-helm/
 helm repo update
 ```
 

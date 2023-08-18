@@ -107,7 +107,7 @@ Use the same shell for the following procedures. If you switch to another shell,
 1. Run the following command to add the Milvus Helm chart repository.
 
 ```shell
-helm repo add milvus https://milvus-io.github.io/milvus-helm/
+helm repo add milvus https://zilliztech.github.io/milvus-helm/
 ```
 
 2. Run the following command to update your Milvus Helm chart.

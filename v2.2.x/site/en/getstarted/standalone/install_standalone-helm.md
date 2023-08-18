@@ -54,8 +54,23 @@ Helm is a K8s package manager that can help you deploy Milvus quickly.
 1. Add Milvus to Helm's repository.
 
 ```bash
-$ helm repo add milvus https://milvus-io.github.io/milvus-helm/
+$ helm repo add milvus https://zilliztech.github.io/milvus-helm/
 ```
+
+<div class="alert note">
+
+The Milvus Helm Charts repo at `https://milvus-io.github.io/milvus-helm/` has been archived and you can get further updates from `https://zilliztech.github.io/milvus-helm/` as follows:
+
+```shell
+helm repo add zilliztech https://zilliztech.github.io/milvus-helm
+helm repo update
+# upgrade existing helm release
+helm upgrade my-release zilliztech/milvus
+```
+
+The archived repo is still available for the charts up to 4.0.31. For later releases, use the new repo instead.
+
+</div>
 
 2. Update your local chart repository.
 

@@ -77,7 +77,7 @@ You will see the following output if the EKS cluster is created.
    ```
 4. Add the Milvus Helm repository.
 ```
-helm repo add milvus https://milvus-io.github.io/milvus-helm/
+helm repo add milvus https://zilliztech.github.io/milvus-helm/
 ```
 
 5. Run the following command to start the Milvus cluster that you have provisioned. The access key and an S3 bucket are required to use S3 as storage.
