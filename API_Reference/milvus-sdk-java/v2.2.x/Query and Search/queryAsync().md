@@ -10,7 +10,7 @@ The order of the returned entities cannot be guaranteed.
 ListenableFuture<R<QueryResults>> queryAsync(QueryParam requestParam);
 ```
 
-This method uses the same parameter as <code><a href="query().md"query()</a></code>. It invokes RPC interface and returns a `ListenableFuture` object immediately.
+This method uses the same parameter as <code><a href="query().md">query()</a></code>. It invokes RPC interface and returns a `ListenableFuture` object immediately.
 
 ## Example
 
