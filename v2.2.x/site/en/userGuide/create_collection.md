@@ -196,7 +196,7 @@ Output:
 	</thead>
 	<tbody>
         <tr>
-            <td><code>FieldSchema</code></td>
+            <td><b><code>FieldSchema</code><b></td>
             <td>Schema of the fields within the collection to create. Refer to <a href="schema.md">Schema</a> for more information.</td>
             <td>N/A</td>
         </tr>
@@ -258,7 +258,7 @@ Output:
             <td>N/A</td>
         </tr>
         <tr>
-            <td><code>CollectionSchema</code></td>
+            <td><b><code>CollectionSchema</code><b></td>
         <td>Schema of the collection to create. Refer to <a href="schema.md">Schema</a> for more information.</td>
         <td>N/A</td>
         </tr>
@@ -272,6 +272,11 @@ Output:
             <td>Description of the collection to create.</td>
             <td>N/A</td>
         </tr>
+        <tr>
+		<td>enable_dynamic_field</td>
+		<td>Whether to enable dynamic schema or not</td>
+		<td>Data type: Boolean (<code>true</code> or <code>false</code>).<br/>Optional, defaults to <code>False</code>.<br/>For details on dynamic schema, refer to <a herf="dynamic_schema.md">Dynamic Schema</a> and the user guides for managing collections.</td>
+	    </tr>
         <tr>
             <td><code>collection_name</code></td>
             <td>Name of the collection to create.</td>

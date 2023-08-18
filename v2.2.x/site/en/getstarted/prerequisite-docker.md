@@ -34,7 +34,7 @@ Before you install Milvus, check your hardware and software to see if they meet 
 
 ### Additional disk requirements
 
-Disk performance is critical to etcd. It is highly recommended that you use local NVMe SSDs. Slower disk reponse may cause frequent cluster elections that will eventually degrade the etcd service.
+Disk performance is critical to etcd. It is highly recommended that you use local NVMe SSDs. Slower disk response may cause frequent cluster elections that will eventually degrade the etcd service.
 
 To test if your disk is qualified, use [fio](https://github.com/axboe/fio).
 

@@ -129,7 +129,7 @@ A collection schema is the logical definition of a collection. Usually you need 
     <tr>
 		<td>enable_dynamic_field</td>
 		<td>Whether to enable dynamic schema or not</td>
-		<td>Data type: Boolean (<code>true</code> or <code>false</code>).<br/>Optional, defaults to <code>False</code><br/>For details on dynamic schema, refer to <a herf="dynamic_schema.md">Dynamic Schema</a> and the user guides for managing collections.</td>
+		<td>Data type: Boolean (<code>true</code> or <code>false</code>).<br/>Optional, defaults to <code>False</code>.<br/>For details on dynamic schema, refer to <a herf="dynamic_schema.md">Dynamic Schema</a> and the user guides for managing collections.</td>
 	</tr>
 	</tbody>
 </table>

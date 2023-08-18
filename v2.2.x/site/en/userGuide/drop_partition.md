@@ -8,11 +8,13 @@ summary: Learn how to drop a partition in Milvus.
 
 This topic describes how to drop a partition in a specified collection.
 
-
 <div class="alert caution">
-- You have to release the partition before you drop it.
-- Dropping a partition irreversibly deletes all data within it.
+  <ul>
+    <li>&nbsp; You have to release the partition before you drop it.</li>
+    <li>&nbsp; Dropping a partition irreversibly deletes all data within it.</li>
+  </ul>
 </div>
+
 
 
 <div class="multipleCode">

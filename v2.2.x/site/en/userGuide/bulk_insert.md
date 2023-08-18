@@ -77,7 +77,7 @@ arr = numpy.array([json.dumps({"year": 2015, "price": 23.43}),
             json.dumps({"year": 2018, "price": 15.05}),
             json.dumps({"year": 2020, "price": 36.68}),
             json.dumps({"year": 2019, "price": 20.14}),
-            json.dumps({"year": 2021, "price": 9.36}))
+            json.dumps({"year": 2021, "price": 9.36})])
 numpy.save('book_props.npy', arr)
 ```
 
@@ -85,9 +85,13 @@ numpy.save('book_props.npy', arr)
 
 You can also add dynamic fields using NumPy files as follows. For details on dynamic fields, refer to [Dynamic Schema](dynamic_schema.md).
 
-```
+<div class="none-filter">
+
+```python
 numpy.save('$meta.py', numpy.array([ json.dumps({x: 2}), json.dumps({y: 8, z: 2}) ]))
 ```
+
+</div>
 
 <div class="alert note">
 
@@ -209,6 +213,7 @@ In the flavor of PyMilvus, you can use [`get_bulk_insert_state()`](https://milvu
 </div>
 
 ```python
+from pymilvus import utility, BulkInsertState
 task = utility.get_bulk_insert_state(task_id=task_id)
 print("Task state:", task.state_name)
 print("Imported files:", task.files)
@@ -329,7 +334,7 @@ The following examples demonstrate how to create NumPy files for columns of data
 
   <div class="none-filter">
 
-    ```
+    ```python
     import numpy as np
     data = [True, False, True, False]
     dt = np.dtype('bool', (len(data)))
@@ -343,7 +348,7 @@ The following examples demonstrate how to create NumPy files for columns of data
 
   <div class="none-filter">
 
-  ```
+  ```python
   import numpy as np
   data = [1, 2, 3, 4]
   dt = np.dtype('int8', (len(data)))
@@ -357,7 +362,7 @@ The following examples demonstrate how to create NumPy files for columns of data
 
   <div class="none-filter">
 
-  ```
+  ```python
   import numpy as np
   data = [1, 2, 3, 4]
   dt = np.dtype('int16', (len(data)))
@@ -371,7 +376,7 @@ The following examples demonstrate how to create NumPy files for columns of data
 
   <div class="none-filter">
 
-  ```
+  ```python
   import numpy as np
   data = [1, 2, 3, 4]
   dt = np.dtype('int32', (len(data)))
@@ -385,7 +390,7 @@ The following examples demonstrate how to create NumPy files for columns of data
 
   <div class="none-filter">
 
-  ```
+  ```python
   import numpy as np
   data = [1, 2, 3, 4]
   dt = np.dtype('int64', (len(data)))
@@ -399,7 +404,7 @@ The following examples demonstrate how to create NumPy files for columns of data
 
   <div class="none-filter">
 
-  ```
+  ```python
   import numpy as np
   data = [0.1, 0.2, 0.3, 0.4]
   dt = np.dtype('float32', (len(data)))
@@ -413,7 +418,7 @@ The following examples demonstrate how to create NumPy files for columns of data
 
   <div class="none-filter">
 
-  ```
+  ```python
   import numpy as np
   data = [0.1, 0.2, 0.3, 0.4]
   dt = np.dtype('float64', (len(data)))
@@ -426,7 +431,8 @@ The following examples demonstrate how to create NumPy files for columns of data
 - Create a NumPy file from a VARCHAR array
   <div class="none-filter">
 
-  ```
+  ```python
+  import numpy as np
   data = ["a", "b", "c", "d"]
   arr = np.array(data)
   np.save(file_path, arr)
@@ -440,7 +446,8 @@ The following examples demonstrate how to create NumPy files for columns of data
 
   <div class="none-filter">
 
-  ```
+  ```python
+  import numpy as np
   data = [
       [43, 35, 124, 90],
       [65, 212, 12, 57],
@@ -462,7 +469,8 @@ The following examples demonstrate how to create NumPy files for columns of data
 
   <div class="none-filter">
 
-  ```
+  ```python
+  import numpy as np
   data = [
       [1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8],
       [2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 2.8],
@@ -499,7 +507,7 @@ You can create multiple data-import tasks as follows
 
 <div class="none-filter">
 
-```
+```python
 task_1 = utility.do_bulk_insert(
     collection_name="book",
     files=["task_1/book_id.npy", "task_1/word_count.npy", "task_1/book_intro.npy", "task_1/book_props.npy"]
@@ -522,7 +530,7 @@ PyMilvus provides a utility method to wait for the index-building process to com
 
 <div class="none-filter">
 
-```
+```python
 utility.wait_for_index_building_complete(collection_name)
 ```
 

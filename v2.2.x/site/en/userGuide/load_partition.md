@@ -8,7 +8,7 @@ summary: Learn how to load a partition into memory for search or query in Milvus
 
 This topic describes how to load a partition to memory. Loading partitions instead of the whole collection to memory can significantly reduce the memory usage. All search and query operations within Milvus are executed in memory. 
 
-Milvus 2.1 allows users to load a partition as multiple replicas to utilize the CPU and memory resources of extra query nodes. This feature boost the overall QPS and throughput with extra hardware. It is supported on PyMilvus in current release.
+Milvus 2.1 or later allows users to load a partition as multiple replicas to utilize the CPU and memory resources of extra query nodes. This feature boost the overall QPS and throughput with extra hardware. It is supported on PyMilvus in current release.
 
 <div class="alert warning">
 <ul>
