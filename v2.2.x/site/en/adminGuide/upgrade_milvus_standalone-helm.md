@@ -40,6 +40,8 @@ The archived repo is still available for the charts up to 4.0.31. For later rele
 
 ```
 NAME                    CHART VERSION   APP VERSION             DESCRIPTION                                       
+zilliztech/milvus       4.0.34          2.2.14                  Milvus is an open-source vector database built ...
+zilliztech/milvus       4.0.33          2.2.13                  Milvus is an open-source vector database built ...
 zilliztech/milvus       4.0.32          2.2.13                  Milvus is an open-source vector database built ...
 zilliztech/milvus       4.0.31          2.2.13                  Milvus is an open-source vector database built ...
 zilliztech/milvus       4.0.30          2.2.13                  Milvus is an open-source vector database built ...
@@ -101,7 +103,7 @@ To upgrade Milvus from a minor release before v2.2.3 to the latest, run the foll
 
 ```shell
 helm repo update
-helm upgrade my-release milvus/milvus --reuse-values --version=4.0.32 # use the helm chart version here
+helm upgrade my-release milvus/milvus --reuse-values --version=4.0.34 # use the helm chart version here
 ```
 
 Use the Helm chart version in the preceding command. For details on how to obtain the Helm chart version, refer to [Check the Milvus version](#Check-the-Milvus-version).

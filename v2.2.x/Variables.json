@@ -9,7 +9,7 @@
   "milvus_java_sdk_version": "2.2.x",
   "milvus_restful_sdk_version": "2.2.x",
   "milvus_operator_version": "0.7.17",
-  "milvus_helm_chart_version": "4.0.32",
+  "milvus_helm_chart_version": "4.0.34",
   "milvus_image": "2.2.14",
   "attu_release": "2.2.8",
   "milvus_backup_release": "0.3.2"
