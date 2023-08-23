@@ -1,0 +1,25 @@
+groups:
+
+- name: alert_rules
+  rules:
+  # Alert for server down
+  - alert: MilvusServerDown
+    expr: up{job="milvus_server"}
+    for: 1s
+    labels:
+      severity: page
+      
+  # Alert on CPU temperature too high
+  - alert: CPUTemperatureTooHigh
+    expr: CPU_temperature{job="milvus_server"}>=80
+    for: 1s
+    labels:
+     severity: page
+     
+  # Alert on GPU temperature too high
+  - alert: GPUTemperatureTooHigh
+    expr: GPU_temperature{job="milvus_server"}>=80
+    for: 1s
+    labels:
+      severity: page
+

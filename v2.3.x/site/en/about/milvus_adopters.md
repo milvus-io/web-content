@@ -1,0 +1,40 @@
+---
+id: milvus_adopters.md
+title: Milvus Adopters
+related_key: Milvus adopters
+summary: Learn about companies that have adopted Milvus in production applications. 
+---
+# Milvus Adopters
+Trusted by over 1,000 organizations worldwide, Milvus is used in almost all industries. The following table lists companies that have adopted Milvus in production.
+
+| Company                                                 | Industry          | User story                                             |
+| ------------------------------------------------------------ | ---------------------- | ------------------------------------------------------------ |
+| [ambeRoad](https://amberoad.de/?lang=en) |  Software| |
+| [Beike](https://investors.ke.com/about-us)                                                | Real estate           | [Making With Milvus: AI-Infused Proptech for Personalized Real Estate Search](https://milvus.io/blog/Making-With-Milvus-AI-Infused-Proptech-for-Personalized-Real-Estate-Search.md)                                              |                                             |
+|[Deepset.ai](https://deepset.ai/)                                                    | Software         | [Semantic Search with Milvus, Knowledge Graph QA, Web Crawlers and more!](https://medium.com/deepset-ai/semantic-search-with-milvus-knowledge-graph-qa-web-crawlers-and-more-837451eae9fa)                                             |
+| [DXY.cn](https://en.wikipedia.org/wiki/DXY.cn)                                                  | Medical           |
+| [eBay](https://en.wikipedia.org/wiki/EBay) | Online retail| |
+| [EnjoyMusic Technology](https://enjoymusic.ai/about)                                                 | Entertainment          |[Item-based Collaborative Filtering for Music Recommender System](https://milvus.io/blog/music-recommender-system-item-based-collaborative-filtering-milvus.md)                                          |
+| [Getir](https://getir.com/) | Instant grocery | |
+| [Hewlett-Packard (HP)](https://en.wikipedia.org/wiki/Hewlett-Packard)   | 	Information technology          |                                        |
+| [IOMED](https://iomed.health/)   | 	Clinical research          |                                        |
+| [iYUNDONG](http://yundong.ai/)                                                 | Sports        | [Extracting Event Highlights Using iYUNDONG Sports App](https://milvus.io/blog/Extracting-Events-Highlights-Using-iYUNDONG-Sports-App.md)                                          |
+| [Juicedata](https://juicefs.com/aboutus)                                                | Software         |[Building a Milvus Cluster Based on JuiceFS](https://milvus.io/blog/building-a-milvus-cluster-based-on-juicefs.md)                  |
+| [Kingsoft](https://en.wikipedia.org/wiki/Kingsoft)                                              | Software         | [Building an AI-Powered Writing Assistant for WPS Office](https://milvus.io/blog/Building-an-AI-Powered-Writing-Assistant-with-WPS-Office.md)                                              |
+| [Line Plus](https://linecorp.com/en/company/info) |  Technology, software| |
+| [Lucidworks](https://en.wikipedia.org/wiki/Lucidworks)                                                 | Software         | [Build Semantic Search at Speed](https://milvus.io/blog/build-semantic-search-at-speed-milvus-lucidworks.md)                                             |
+| [Meetsocial Group](https://www.meetsocial.com/company.html)                                                  | Marketing         |                                              |
+| [Miao Health](https://www.miao.cn/portal/about?l=en-us)                                                  | Health technology         |                                            |
+| [Mozat](http://www.mozat.com/home)                                                | Online social| [Building a Wardrobe and Outfit Planning App with Milvus](https://milvus.io/blog/building-a-wardrobe-and-outfit-planning-app-with-milvus.md)          |                                             |
+| [Opera](https://en.wikipedia.org/wiki/Opera_(company))                                                 | Software           |                                           |
+| [Shopee](https://en.wikipedia.org/wiki/Shopee) |  Online retail| |
+| [Smartnews](https://about.smartnews.com/en/) |  Media| |
+| [Sohu](https://en.wikipedia.org/wiki/Sohu)                                                 |Internet         | [Building an Intelligent News Recommendation System Inside Sohu News App](https://milvus.io/blog/building-an-intelligent-news-recommendation-system-inside-sohu-news-app.md)                                             |
+| [The Cleveland Museum of Art](https://en.wikipedia.org/wiki/Cleveland_Museum_of_Art)                                                | Arts         | [ArtLens AI: Share Your View](https://milvus.io/blog/ArtLens-AI-Share-Your-View.md)                                               |
+| [Tokopedia](https://en.wikipedia.org/wiki/Tokopedia)                                               | Online retail           | [How we used semantic search to make our search 10x smarter](https://milvus.io/blog/How-we-used-semantic-search-to-make-our-search-10-x-smarter.md)                           |
+| [TrendMicro](https://en.wikipedia.org/wiki/Trend_Micro)                                               | Software         | [Making with Milvus: Detecting Android Viruses in Real Time for Trend Micro](https://milvus.io/blog/Making-with-Milvus-Detecting-Android-Viruses-in-Real-Time-for-Trend-Micro.md)                                             |
+| [Ufoto](https://www.ufotosoft.com/en/index_en.html)                                               | Software           |                                                |
+| [Vipshop](https://en.wikipedia.org/wiki/Vipshop)                                                | Online retail| [Building a Personalized Product Recommender System with Vipshop and Milvus](https://milvus.io/blog/building-a-personalized-product-recommender-system-with-vipshop-and-milvus.md)    |                                               |
+| Vova                                               | Online retail        | [Building a Search by Image Shopping Experience with VOVA and Milvus](https://milvus.io/blog/building-a-search-by-image-shopping-experience-with-vova-and-milvus.md)                                             |
+| [Walmart](https://en.wikipedia.org/wiki/Walmart) |  Retail| |
+| [Xiaomi](https://en.wikipedia.org/wiki/Xiaomi)                                                 | Consumer electronics          | [Making with Milvus: AI-Powered News Recommendation Inside Xiaomi's Mobile Browser](https://milvus.io/blog/Making-with-Milvus-AI-Powered-News-Recommendation-Inside-Xiaomi-Mobile-Browser.md)                                |
