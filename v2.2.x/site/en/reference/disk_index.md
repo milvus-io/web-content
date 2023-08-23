@@ -70,3 +70,12 @@ DiskIndex:
 | `LoadNumThreadRatio` | Ratio between the number of threads used to load index/search and the number of CPUs. For details, refer to the first item in [References and Facts](disk_index.md#references-and-facts). | [1, 65536 / 32 / CPU number] | 8.0 |
 | `BeamWidthRatio` | Ratio between the maximum number of IO requests per search iteration and CPU number. | [1, max(128 / CPU number, 16)] | 4.0 |
 
+## Troubleshooting
+
+- How to deal with the `io_setup() failed; returned -11, errno=11:Resource temporarily unavailable` error?
+
+  The Linux kernel provides the Asynchronous non-blocking I/O (AIO) feature that allows a process to initiate multiple I/O operations simultaneously without having to wait for any of them to complete. This helps boost performance for applications that can overlap processing and I/O.
+
+  The performance can be tuned using the `/proc/sys/fs/aio-max-nr` virtual file in the proc file system. The `aio-max-nr` parameter determines the maximum number of allowable concurrent requests.
+
+  The `aio-max-nr` defaults to `65535`, you can set it up to `10485760`.

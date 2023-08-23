@@ -29,12 +29,12 @@ See <a href="https://milvus.io/docs/v2.0.x/attu_install-docker.md">v2.0.x Attu d
 | -------------- | ------------------------------ |
 | v2.0.x         | v2.0.5                         |
 | v2.1.x         | v2.1.5                         |
-| v2.2.x         | v2.2.7           |
+| v2.2.x         | v2.2.8           |
 
 ## Start an Attu instance
 
 ```Apache
-docker run -p 8000:3000  -e MILVUS_URL={your machine IP}:19530 zilliz/attu:v2.2.7
+docker run -p 8000:3000  -e MILVUS_URL={your machine IP}:19530 zilliz/attu:v2.2.8
 ```
 
 Once you start the docker, visit `http://{ your machine IP }:8000` in your browser, and click **Connect** to enter the Attu service.
@@ -46,17 +46,17 @@ And we alsow support TLS connection, username and password.
 
 # Install Milvus Standalone and Attu with Docker Compose
 
-[Download](https://github.com/milvus-io/milvus/releases/download/v2.2.13/milvus-standalone-docker-compose.yml) `milvus-standalone-docker-compose.yml` and save it as `docker-compose.yml` manually, or with the following command.
+[Download](https://github.com/milvus-io/milvus/releases/download/v2.2.14/milvus-standalone-docker-compose.yml) `milvus-standalone-docker-compose.yml` and save it as `docker-compose.yml` manually, or with the following command.
 
 ```
-$ wget https://github.com/milvus-io/milvus/releases/download/v2.2.13/milvus-standalone-docker-compose.yml -O docker-compose.yml
+$ wget https://github.com/milvus-io/milvus/releases/download/v2.2.14/milvus-standalone-docker-compose.yml -O docker-compose.yml
 ```
 
 Edit the downloaded `docker-compose.yml` file using your favorite text editor and add the following to the services block:
 ```
   attu:
     container_name: attu
-    image: zilliz/attu:v2.2.7
+    image: zilliz/attu:v2.2.8
     environment:
       MILVUS_URL: milvus-standalone:19530
     ports:

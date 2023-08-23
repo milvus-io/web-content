@@ -6,6 +6,46 @@ summary: Milvus Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.2.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## 2.2.14
+
+Release date: Aug 23, 2023
+
+| Milvus version | Python SDK version | Java SDK version | Go SDK version | Node.js SDK version |
+| -------------- | ------------------ | ---------------- | -------------- | ------------------- |
+| 2.2.14         | 2.2.15             | 2.2.11           | 2.2.7          | 2.2.24              |
+
+Milvus 2.2.14 is a minor bug-fix release that mainly addresses cluster unavailability issues during rolling upgrades. With this new release, Milvus deployed with Kubernetes operator can be upgraded with almost zero downtime.
+
+### Bug Fixes
+
+This update addresses the following issues:
+
+- Fixed the issues that caused rolling upgrades to take longer than expected:
+  - Changed the default `gracefulStopTimeout` and now only displays a warning when there is a failure to refresh the policy cache. ([#26443](https://github.com/milvus-io/milvus/pull/26443))
+  - Refined gRPC retries. ([#26464](https://github.com/milvus-io/milvus/pull/26464))
+  - Checked and reset the gRPC client server ID if it mismatches with the session. ([#26473](https://github.com/milvus-io/milvus/pull/26473))
+  - Added a server ID validation interceptor. ([#26395](https://github.com/milvus-io/milvus/pull/26395)) ([#26424](https://github.com/milvus-io/milvus/pull/26424))
+  - Improved the performance of the server ID interceptor validation. ([#26468](https://github.com/milvus-io/milvus/pull/26468)) ([#26496](https://github.com/milvus-io/milvus/pull/26496))
+- Fixed the expression incompatibility issue between the parser and the executor. ([#26493](https://github.com/milvus-io/milvus/pull/26493)) ([#26495](https://github.com/milvus-io/milvus/pull/26495))
+- Fixed failures in serializing string index when its size exceeds 2 GB. ([#26393](https://github.com/milvus-io/milvus/pull/26393))
+- Fixed issues where enormous duplicate collections were being re-dropped during restore. ([#26030](https://github.com/milvus-io/milvus/pull/26030))
+- Fixed the issue where the leader view returns a loading shard cluster. ([#26263](https://github.com/milvus-io/milvus/pull/26263))
+- Fixed the Liveness check block in SessionUtil to watch forever. ([#26250](https://github.com/milvus-io/milvus/pull/26250))
+- Fixed issues related to logical expressions. ([#26513](https://github.com/milvus-io/milvus/pull/26513)) ([#26515](https://github.com/milvus-io/milvus/pull/26515))
+- Fixed issues related to continuous restart of DataNode/DataCoord. [#26470](https://github.com/milvus-io/milvus/pull/26470) ([#26506](https://github.com/milvus-io/milvus/pull/26506))
+- Fixed issues related to being stuck in channel checkpoint. ([#26544](https://github.com/milvus-io/milvus/pull/26544))
+- Fixed an issue so that Milvus considers the balance task with a released source segment as stale. ([#26498](https://github.com/milvus-io/milvus/pull/26498))
+
+### Enhancement
+
+- Refined error messages for fields that do not exist ([#26331](https://github.com/milvus-io/milvus/pull/26331)).
+- Fixed unclear error messages of the proto parser ([#26365](https://github.com/milvus-io/milvus/pull/26365)) ([#26366](https://github.com/milvus-io/milvus/pull/26366)).
+- Prohibited setting a partition name for a collection that already has a partition key ([#26128](https://github.com/milvus-io/milvus/pull/26128)).
+- Added disk metric information ([#25678](https://github.com/milvus-io/milvus/pull/25678)).
+- Fixed the CollectionNotExists error during vector search and retrieval ([#26532](https://github.com/milvus-io/milvus/pull/26532)).
+- Added a default `MALLOC_CONF` environment variable to release memory after dropping a collection ([#26353](https://github.com/milvus-io/milvus/pull/26353)).
+- Made pulsar request timeout configurable ([#26526](https://github.com/milvus-io/milvus/pull/26526)).
+
 ## 2.2.13
 
 Release date: Aug 9, 2023
