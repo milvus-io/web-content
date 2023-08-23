@@ -9,7 +9,7 @@ Dit onderwerp beschrijft hoe je Milvus kan uitvoeren met Python.
 ## 1. Installeer PyMilvus
 
 ```Python
-pip3 install pymilvus==2.1.3
+pip3 install pymilvus==2.1.x
 ```
 <div class="alert note">
 Python 3.6 of later is vereist. Zie <a href="https://wiki.python.org/moin/BeginnersGuide/Download">Python downloaden</a> voor meer informatie.
@@ -18,7 +18,7 @@ Python 3.6 of later is vereist. Zie <a href="https://wiki.python.org/moin/Beginn
 ## 2. Download voorbeeld code
 
 ```bash
-$ wget https://raw.githubusercontent.com/milvus-io/pymilvus/v2.1.3/examples/hello_milvus.py
+$ wget https://raw.githubusercontent.com/milvus-io/pymilvus/v2.1.x/examples/hello_milvus.py
 ```
 
 ## 3. Scan het voorbeeld
@@ -87,7 +87,7 @@ for raw_result in res:
         distance = result.distance
         print(id, distance)
 ```
-Zie [API Reference](/api-reference/pymilvus/v2.1.3/results.html) voor meer informatie.
+Zie [API Reference](/api-reference/pymilvus/v2.1.x/results.html) voor meer informatie.
 
 - Voert hybride zoekopdracht uit：
 <div class="alert note">
