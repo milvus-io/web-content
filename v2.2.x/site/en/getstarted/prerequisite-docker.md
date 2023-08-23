@@ -49,6 +49,5 @@ Ideally, your disk should reach over 500  IOPS and below 10ms for the 99th perce
 
 - If your hardware and software meet the requirements, you can:
   - [Install Milvus standalone with Docker Compose](install_standalone-docker.md)
-  - [Install Milvus cluster with Docker Compose](install_cluster-docker.md)
 
 - See [System Configuration](system_configuration.md) for parameters you can set while installing Milvus.

@@ -4,18 +4,18 @@ related_key: query vectors
 summary: Learn how to query vectors in Milvus.
 ---
 
-# Conduct a Vector Query
+# Conduct a Query
 
-This topic describes how to conduct a vector query.
+This topic describes how to conduct a query.
 
-Unlike a vector similarity search, a vector query retrieves vectors via scalar filtering based on [boolean expression](boolean.md). Milvus supports many data types in the scalar fields and a variety of boolean expressions. The boolean expression filters on scalar fields or the primary key field, and it retrieves all results that match the filters.
+Unlike a vector similarity search, a query retrieves vectors via scalar filtering based on [boolean expression](boolean.md). Milvus supports many data types in the scalar fields and a variety of boolean expressions. The boolean expression filters on scalar fields or the primary key field, and it retrieves all results that match the filters.
 
-The following example shows how to perform a vector query on a 2000-row dataset of book ID (primary key), word count (scalar field), and book introduction (vector field), simulating the situation where you query for certain books based on their IDs.
+The following example shows how to perform a query on a 2000-row dataset of book ID (primary key), word count (scalar field), and book introduction (vector field), simulating the situation where you query for certain books based on their IDs.
 
 
 ## Load collection
 
-All search and query operations within Milvus are executed in memory. Load the collection to memory before conducting a vector query.
+All search and query operations within Milvus are executed in memory. Load the collection to memory before conducting a query.
 
 <div class="multipleCode">
   <a href="#python">Python </a>
@@ -64,9 +64,7 @@ load -c book
 # See the following step.
 ```
 
-</div>
-
-## Conduct a vector query
+## Conduct a query
 
 The following example filters the vectors with certain `book_id` values, and returns the `book_id` field and `book_intro` of the results.
 
@@ -423,18 +421,58 @@ System.out.println(wrapperQuery.getFieldWrapper("word_count").getFieldData());
 ```
 </div>
 
+## Count entities
+
+When conducting a query, you can append `count(*)` to `output_fields`, so Milvus can return the number of entities in the collection. If you want to count entities that meet specific conditions, use `expr` to define a Boolean expression.
+
+Count all entities in a collection:
+
+```python
+res = collection.query(
+  expr="", 
+  output_fields = [count(*)],
+)
+
+print(res)
+print(res[0])
+
+# Output:
+# [{'count(*)': 2996}]
+# {'count(*)': 2996}
+```
+
+Count entities that meet specific filter conditions:
+
+```python
+res = collection.query(
+  # filter entities whose ID is in the specified list
+  expr="book_id in [2,4,6,8]", 
+  output_fields = [count(*)],
+)
+
+print(res)
+print(res[0])
+
+# Output:
+# [{'count(*)': 2996}]
+# {'count(*)': 2996}
+```
+
+## Limits
+
+When `count(*)` is used in `output_fields`, the `limit` parameter is forbidden.
+
 ## What's next
 
 - Learn more basic operations of Milvus:
   - [Conduct a vector search](search.md)
   - [Conduct a hybrid search](hybridsearch.md)
-  - [Search with Time Travel](timetravel.md)
 
 - Explore API references for Milvus SDKs:
 
-  - [PyMilvus API reference](/api-reference/pymilvus/v2.2.x/About.md)
-  - [Node.js API reference](/api-reference/node/v2.2.x/About.md)
-  - [Go API reference](/api-reference/go/v2.2.x/About.md)
-  - [Java API reference](/api-reference/java/v2.2.x/About.md)
+  - [PyMilvus API reference](/api-reference/pymilvus/v2.3.x/About.md)
+  - [Node.js API reference](/api-reference/node/v2.3.x/About.md)
+  - [Go API reference](/api-reference/go/v2.3.x/About.md)
+  - [Java API reference](/api-reference/java/v2.3.x/About.md)
 
 

@@ -8,6 +8,12 @@ summary: Learn how to release a partition into memory for search or query in Mil
 
 This topic describes how to release a partition from memory after a search or a query to reduce memory usage.
 
+Since version 2.3.0, Milvus has enhanced its partition operations and now supports cascading load and release operations. This means that you can perform any combination of the following operations:
+
+- Release a loaded collection.
+- Release a specific partition from a loaded collection.
+- Release a loaded partition.
+- Release a collection that has part of partitions loaded.
 
 <div class="multipleCode">
   <a href="#python">Python </a>
@@ -184,14 +190,6 @@ curl -X 'DELETE' \
 	</tr>
 	</tbody>
 </table>
-
-## Constraints
-
-- Error will be returned at the attempt to release partition(s) when the parent collection is already loaded. Future releases will support releasing partitions from a loaded collection, and (if needed) then loading some other partition(s).
-- "Load successfully" will be returned at the attempt to load the collection that is already loaded.
-- Error will be returned at the attempt to load the collection when the child partition(s) is/are already loaded. Future releases will support loading the collection when some of its partitions are already loaded.
-- Loading different partitions in a same collection via separate RPCs is not allowed.
-
 
 ## What's next
 

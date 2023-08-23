@@ -21,7 +21,6 @@ The example above changes the collection TTL to 1800 seconds.
 | Properties: collection.ttl.seconds | Collection time to live (TTL) is the expiration time of data in a collection. Expired data in the collection will be cleaned up and will not be involved in searches or queries. Specify TTL in the unit of seconds. | The value should be 0 or greater. The default value is 0, which means TTL is disabled. |
 
 
-> TTL only happens after compaction which means the expired data will be invisible and GC after segment compacted. 
 ## What's next
 
 - Learn more basic operations of Milvus:

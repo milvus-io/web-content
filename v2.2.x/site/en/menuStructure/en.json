@@ -120,6 +120,14 @@
       "order": 0
     },
     {
+      "id": "install_standalone-gpu-docker.md",
+      "title": "Milvus Standalone (GPU)",
+      "label1": "getstarted",
+      "label2": "installmilvus",
+      "label3": "",
+      "order": 0
+    },
+    {
       "id": "install_cluster-milvusoperator.md",
       "title": "Milvus Cluster",
       "label1": "getstarted",
@@ -364,12 +372,20 @@
       "order": 1
     },
     {
+      "id": "upsert_entities.md",
+      "title": "Upsert Entities",
+      "label1": "userguide",
+      "label2": "manage_data",
+      "label3": "",
+      "order": 2
+    },    
+    {
       "id": "delete_data.md",
       "title": "Delete Entities",
       "label1": "userguide",
       "label2": "manage_data",
       "label3": "",
-      "order": 2
+      "order": 3
     },
     {
       "id": "compact_data.md",
@@ -377,7 +393,7 @@
       "label1": "userguide",
       "label2": "manage_data",
       "label3": "",
-      "order": 3
+      "order": 4
     },
     {
       "id": "manage_index",
@@ -385,7 +401,7 @@
       "label1": "userguide",
       "label2": "",
       "label3": "",
-      "order": 4,
+      "order": 5,
       "isMenu": true
     },
     {
@@ -418,7 +434,7 @@
       "label1": "userguide",
       "label2": "",
       "label3": "",
-      "order": 5,
+      "order": 6,
       "isMenu": true
     },
     {
@@ -446,12 +462,20 @@
       "order": 1
     },
     {
-      "id": "timetravel.md",
-      "title": "Search with Time Travel",
+      "id": "with_iterators.md",
+      "title": "Query",
       "label1": "userguide",
-      "label2": "",
+      "label2": "search",
       "label3": "",
-      "order": 6
+      "order": 3
+    },
+    {
+      "id": "within_range.md",
+      "title": "Query",
+      "label1": "userguide",
+      "label2": "search",
+      "label3": "",
+      "order": 4
     },
     {
       "id": "bootcamp_userguide",
@@ -929,6 +953,38 @@
       "outLink": "https://github.com/zilliztech/attu"
     },
     {
+      "id": "birdwatcher",
+      "title": "Birdwatcher",
+      "label1": "tools",
+      "label2": "",
+      "label3": "",
+      "order": 3      
+    },
+    {
+      "id": "birdwatcher_overview.md",
+      "title": "Overview",
+      "label1": "tools",
+      "label2": "birdwatcher",
+      "label3": "",
+      "order": 0
+    },
+    {
+      "id": "birdwatcher_install_guides.md",
+      "title": "Install Guides",
+      "label1": "tools",
+      "label2": "birdwatcher",
+      "label3": "",
+      "order": 1      
+    },
+    {
+      "id": "birdwatcher_usage_guides.md",
+      "title": "Usage Guides",
+      "label1": "tools",
+      "label2": "birdwatcher",
+      "label3": "",
+      "order": 2      
+    },
+    {
       "id": "milvusdm",
       "title": "MilvusDM",
       "label1": "tools",
@@ -1124,13 +1180,6 @@
       "order": 15
     },
     {
-      "id": "timetravel_ref.md",
-      "title": "Time Travel",
-      "label1": "reference",
-      "label2": "",
-      "order": 16
-    },
-    {
       "id": "users_and_roles.md",
       "title": "Users and Roles",
       "label1": "reference",
@@ -1212,14 +1261,6 @@
       "label2": "",
       "label3": "",
       "order": 4
-    },
-    {
-      "id": "molecular_similarity_search.md",
-      "title": "Molecular Similarity Search",
-      "label1": "tutorials",
-      "label2": "",
-      "label3": "",
-      "order": 5
     },
     {
       "id": "dna_sequence_classification.md",

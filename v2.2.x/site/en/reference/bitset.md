@@ -5,7 +5,7 @@ summary: Learn about bitsets in Milvus.
 
 # Bitset
 
-This topic introduces the bitset mechanism that helps enable key functionalities like [Time Travel](timetravel_ref.md), attribute filtering, and [delete operations](https://milvus.io/blog/2022-02-07-how-milvus-deletes-streaming-data-in-distributed-cluster.md) in Milvus.
+This topic introduces the bitset mechanism that helps enable key functionalities like attribute filtering and [delete operations](https://milvus.io/blog/2022-02-07-how-milvus-deletes-streaming-data-in-distributed-cluster.md) in Milvus.
 
 ## Overview
 
@@ -24,10 +24,6 @@ As bitsets contain only two possible values, they are perfect for storing result
 ### Data deletion
 
 Bitsets serve as a compact way to store information about whether a row in a segment is deleted. Deleted entities are marked with `1` in the corresponding bitset, which [will not be computed](https://milvus.io/blog/deleting-data-in-milvus.md) during a search or query.
-
-### Query with Time Travel
-
-When you search with Time Travel, Milvus uses bitsets to store information about whether data in a segment meet your timestamp requirement in `travel_timestamp`. Data are marked as `1` if their timestamp is larger than or equals to the requirement, meaning they are present at the given time. The exact process is more complicated for Time Travel to be as efficient as it can be. See [Bitset for timestamp](https://milvus.io/docs/v2.1.x/timetravel_ref.md#Bitset-for-timestamp) for more information.
 
 ## Examples
 
@@ -88,6 +84,5 @@ Now we have two bitsets after Time Travel and attribute filtering: `filter_bitse
 
 Now that you know how bitsets work in Milvus, you might also want to:
 
-- Learn how to [use strings to filter](https://milvus.io/blog/2022-08-08-How-to-use-string-data-to-empower-your-similarity-search-applications.md) your search results, or refer to [Hybrid Search](https://milvus.io/docs/v2.1.x/hybridsearch.md) on our docs.
-- Learn more about how to [search with Time Travel](https://milvus.io/docs/v2.1.x/timetravel.md).
+- Learn how to [use strings to filter](https://milvus.io/blog/2022-08-08-How-to-use-string-data-to-empower-your-similarity-search-applications.md) your search results, or refer to [Hybrid Search](https://milvus.io/docs/hybridsearch.md) on our docs.
 - Understand [how data are processed](https://milvus.io/docs/v2.1.x/data_processing.md) in Milvus.

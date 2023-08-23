@@ -61,6 +61,10 @@ Milvus supports only one primary key field in a collection.
 
 ### Create a field schema
 
+To reduce the complexity in data inserts, Milvus allows you to specify a default value for each scalar field during field schema creation, excluding the primary key field. This indicates that if you leave a field empty when inserting data, the default value you specified for this field applies.
+
+Create a regular field schema:
+
 ```python
 from pymilvus import FieldSchema
 id_field = FieldSchema(name="id", dtype=DataType.INT64, is_primary=True, description="primary id")
@@ -71,9 +75,20 @@ embedding_field = FieldSchema(name="embedding", dtype=DataType.FLOAT_VECTOR, dim
 position_field = FieldSchema(name="position", dtype=DataType.VARCHAR, max_length=256, is_partition_key=True)
 ```
 
+Create a field schema with default field values:
 
+```python
+from pymilvus import FieldSchema
 
-### Supported data type
+fields = [
+  FieldSchema(name="id", dtype=DataType.INT64, is_primary=True),
+  # configure default value `25` for field `age`
+  FieldSchema(name="age", dtype=DataType.INT64, default_value=25, description="age"),
+  embedding_field = FieldSchema(name="embedding", dtype=DataType.FLOAT_VECTOR, dim=128, description="vector")
+]
+```
+
+### Supported data types
 
 `DataType` defines the kind of data a field contains. Different fields support different data types.
 
@@ -97,8 +112,7 @@ JSON as a composite data type is available. A JSON field comprises key-value pai
 
 ## Collection schema
 
-A collection schema is the logical definition of a collection. Usually you need to define the [field schema](#Field-schema) before defining a collection schema and [creating a collection](create_collection.md). 
-
+A collection schema is the logical definition of a collection. Usually you need to define the [field schema](#Field-schema) before defining a collection schema and [creating a collection](create_collection.md).
 
 ### Collection schema properties
 

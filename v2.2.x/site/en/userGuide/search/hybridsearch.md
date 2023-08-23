@@ -254,7 +254,6 @@ Output:
       <li><code>ignore_growing</code> Whether to ignore growing segments during similarity searches. The value defaults to <code>False</code>, indicating that searches involve growing segments.</li>
       <li><code>params</code> Search parameter(s) specific to the specified index type. See <a href="index.md">Vector Index</a> for more information. Possible options are as follows: <ul><li><code>nprobe</code> Indicates the number of cluster units to search. This parameter is available only when <code>index_type</code> is set to <code>IVF_FLAT</code>, <code>IVF_SQ8</code>, or <code>IVF_PQ</code>. The value should be less than <code>nlist</code> specified for the index-building process.</li>
 			<li><code>ef</code> Indicates the search scope. This parameter is available only when <code>index_type</code> is set to <code>HNSW</code>. The value should be within the range from <code>top_k</code> to <code>32768</code>.</li>
-			<li><code>search_k</code> Indicates the search scope. This parameter is available only when <code>index_type</code> is set to <code>ANNOY</code>. The value should be greater than or equal to the top K. </li>
 		</ul></li>
 	</tr>
 	<tr>
@@ -380,7 +379,6 @@ Output:
                 <li><code>NewIndexIvfSQ8SearchParam(nprobe int)</code> (IVF_SQ8)</li>
                 <li><code>NewIndexIvfPQSearchParam(nprobe int)</code> (RNSG)</li>
                 <li><code>NewIndexHNSWSearchParam(ef int)</code> (HNSW)</li>
-                <li><code>NewIndexANNOYSearchParam(search_k int)</code> (ANNOY)</li>
             </ul></li>
             <li>For binary vectors:
             <ul>
@@ -452,7 +450,6 @@ Output:
     <td>See <a href="index.md">Vector Index</a> for more information. Possible options are as follows:<ul>
 		<li><code>nprobe</code> Indicates the number of cluster units to search. This parameter is available only when <code>index_type</code> is set to <code>IVF_FLAT</code>, <code>IVF_SQ8</code>, or <code>IVF_PQ</code>. The value should be less than <code>nlist</code> specified for the index-building process.</li>
 		<li><code>ef</code> Indicates the search scope. This parameter is available only when <code>index_type</code> is set to <code>HNSW</code>. The value should be within the range from <code>top_k</code> to <code>32768</code>.</li>
-		<li><code>search_k</code> Indicates the search scope. This parameter is available only when <code>index_type</code> is set to <code>ANNOY</code>. The value should be greater than or equal to the top K.</li>
 		<li><code>metric_type</code> Indicates the metric type used in the search. It should be the same as the one specified when you index the collection.</li>
 		<li><code>limit</code> Indicates the number of entities to return starting from the last skippped entity.</li>
 		<li><code>offset</code> Indicates the number of entities to skip during the search. The sum of this parameter and <code>topK</code> of the <code>withTopK()</code> method should be less than <code>16384</code>.</li>
@@ -576,13 +573,11 @@ System.out.println(wrapperSearch.getFieldData("book_id", 0));
 
 ## What's next
 
-- Try [Search with Time Travel](timetravel.md)
-
 - Explore API references for Milvus SDKs:
 
-  - [PyMilvus API reference](/api-reference/pymilvus/v2.2.x/About.md)
-  - [Node.js API reference](/api-reference/node/v2.2.x/About.md)
-  - [Go API reference](/api-reference/go/v2.2.x/About.md)
-  - [Java API reference](/api-reference/java/v2.2.x/About.md)
+  - [PyMilvus API reference](/api-reference/pymilvus/v2.3.x/About.md)
+  - [Node.js API reference](/api-reference/node/v2.3.x/About.md)
+  - [Go API reference](/api-reference/go/v2.3.x/About.md)
+  - [Java API reference](/api-reference/java/v2.3.x/About.md)
 
 

@@ -51,6 +51,14 @@ Under this section, you can configure message size, retention time and size, etc
 
 See [RocksMQ-related Configurations](configure_rocksmq.md) for detailed description for each parameter under this section.
 
+### `nats`
+
+NATS is a message-oriented middleware that allows data exchange between applications and services, segmented in the form of messages. Milvus uses NATS as a underlying engine for reliable storage and pub/sub of message streams. You can use it as an alternative to RocksMQ.
+
+Under this section, you can configure NATS server, monitoring properties, and rention time and size, etc.
+
+See [NATS-related Configurations](configure_nats.md) for detailed description for each parameter under this section.
+
 ### `kafka`
 
 Apache Kafka is an open-source distributed event streaming platform for high-performance data pipelines, streaming analytics, data integration, and mission-critical applications. It serves as an alternative to RocksMQ and Pulsar for reliable storage and publication/subscription of message streams.
@@ -243,4 +251,3 @@ The following parameters control the log output and object storage access.
 
 - Learn more about the installation of Milvus:
   - [Install Milvus Standalone](install_standalone-docker.md)
-  - [Install Milvus Cluster](install_cluster-docker.md)

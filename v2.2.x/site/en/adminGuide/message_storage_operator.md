@@ -19,19 +19,19 @@ You need to specify a configuration file for using Milvus Operator to start a Mi
 kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml
 ```
 
-You only need to edit the code template in `milvuscluster_default.yaml` to configure third-party dependencies. The following sections introduce how to configure object storage, etcd, and Pulsar respectively.
+You only need to edit the code template in `milvus_cluster_default.yaml` to configure third-party dependencies. The following sections introduce how to configure object storage, etcd, and Pulsar respectively.
 
 ## Before you begin
-The table below shows whether RocksMQ, Pulsar, and Kafka are supported in Milvus standalone and cluster mode. 
+The table below shows whether RocksMQ, NATS, Pulsar, and Kafka are supported in Milvus standalone and cluster mode. 
 
-|                 | RocksMQ | Pulsar | Kafka |
-|:---------------:|:-------:|:------:|:-----:|
-| Standalone mode |    ✔️    |    ✔️   |   ✔️   |
-|   Cluster mode  |    ✖️    |    ✔️   |   ✔️   |
+|                 | RocksMQ | NATS   | Pulsar | Kafka |
+|:---------------:|:-------:|:------:|:------:|:-----:|
+| Standalone mode |    ✔️    |    ✔️   |   ✔️    |   ✔️   |
+|   Cluster mode  |    ✖️    |    ✖️   |   ✔️    |   ✔️   |
 
 There are also other limitations for specifying the message storage:
 - Only one message storage for one Milvus instance is supported. However we still have backward compatibility with multiple message storages set for one instance. The priority is as follows:
-  - standalone mode:  RocksMQ (default) > Pulsar > Kafka
+  - standalone mode:  RocksMQ (default) > NATS > Pulsar > Kafka
   - cluster mode: Pulsar (default) > Kafka
 - The message storage cannot be changed while the Milvus system is running. 
 -  Only Kafka 2.x or 3.x verison is supported.
@@ -40,7 +40,9 @@ There are also other limitations for specifying the message storage:
 RocksMQ is the default message storage in Milvus standalone. 
 
 <div class="alert note">
+
 Currently, you can only configure RocksMQ as the message storage for Milvus standalone with Milvus Operator. 
+
 </div>
 
 #### Example 
@@ -54,9 +56,84 @@ metadata:
   name: milvus
 spec:
   dependencies: {}
+  components: {}
   config: {}
 ```
 
+## Configure NATS
+
+NATS is an alternative message storage for NATS.
+
+#### Example
+
+The following example configures a NATS service. 
+
+```YAML
+apiVersion: milvus.io/v1alpha1
+kind: Milvus
+metadata:
+  name: milvus
+spec:
+  dependencies: 
+    msgStreamType: 'natsmq'
+    natsmq:
+      # server side configuration for natsmq.
+      server: 
+        # 4222 by default, Port for nats server listening.
+        port: 4222 
+        # /var/lib/milvus/nats by default, directory to use for JetStream storage of nats.
+        storeDir: /var/lib/milvus/nats 
+        # (B) 16GB by default, Maximum size of the 'file' storage.
+        maxFileStore: 17179869184 
+        # (B) 8MB by default, Maximum number of bytes in a message payload.
+        maxPayload: 8388608 
+        # (B) 64MB by default, Maximum number of bytes buffered for a connection applies to client connections.
+        maxPending: 67108864 
+        # (√ms) 4s by default, waiting for initialization of natsmq finished.
+        initializeTimeout: 4000 
+        monitor:
+          # false by default, If true enable debug log messages.
+          debug: false 
+          # true by default, If set to false, log without timestamps.
+          logTime: true 
+          # no log file by default, Log file path relative to.. .
+          logFile: 
+          # (B) 0, unlimited by default, Size in bytes after the log file rolls over to a new one.
+          logSizeLimit: 0 
+        retention:
+          # (min) 3 days by default, Maximum age of any message in the P-channel.
+          maxAge: 4320 
+          # (B) None by default, How many bytes the single P-channel may contain. Removing oldest messages if the P-channel exceeds this size.
+          maxBytes:
+          # None by default, How many message the single P-channel may contain. Removing oldest messages if the P-channel exceeds this limit.    
+          maxMsgs: 
+  components: {}
+  config: {}
+```
+
+To migrate the message storage from RocksMQ to NATS, do as follows:
+
+1. Stop all DDL operations.
+2. Call the FlushAll API and then stop Milvus once the API call finishes executing.
+3. Change `msgStreamType` to `natsmq` and make necessary changes to NATS settings in `spec.dependencies.natsmq`.
+4. Start Milvus again and check whether:
+
+    - A log entry that reads `mqType=natsmq` is present in the logs.
+    - A directory named `jetstream` is present in the directory specified in `spec.dependencies.natsmq.server.storeDir`.
+
+5. (Optional) Back up and clean up the data files in the RocksMQ storage directory.
+
+<div class="alert note">
+
+**Choose between RocksMQ and NATS?**
+
+RockMQ uses CGO to interact with RocksDB and manages the memory by itself, while the pure-GO NATS embedded in the Milvus installation delegates its memory management to Go's garbage collector (GC).
+
+In the scenario where the data packet is smaller than 64 kb, RocksDB outperforms in terms of memory usage, CPU usage, and response time. On the other hand, if the data packet is greater than 64 kb, NATS excels in terms of response time with sufficient memory and ideal GC scheduling.
+
+Currently, you are advised to use NATS only for experiments.
+
+</div>
 
 ## Configure Pulsar
 
@@ -173,7 +250,7 @@ Fields used to configure an external Kafka service include:
 
 The following example configures an external Kafka service.
 
-```
+```yaml
 apiVersion: milvus.io/v1alpha1
 kind: MilvusCluster
 metadata:

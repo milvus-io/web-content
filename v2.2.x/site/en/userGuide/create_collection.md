@@ -18,7 +18,9 @@ The following example builds a two-[shard](glossary.md#Sharding) collection name
 The collection to create must contain a primary key field and a vector field. INT64 and VarChar are supported data type on primary key field.
 </div>
 
-First, prepare necessary parameters, including field schema, collection schema, and collection name.
+First, prepare necessary parameters, including the field schema, collection schema, and collection name.
+
+Before defining a collection schema, create a schema for each field in the collection. To reduce the complexity in data inserts, Milvus allows you to specify a default value for each scalar field, excluding a primary key field. This indicates that if you leave a field empty when inserting data, the default value you configured for this field during field schema creation will be used.
 
 <div class="multipleCode">
   <a href="#python">Python </a>
@@ -39,10 +41,16 @@ book_name = FieldSchema(
   name="book_name",
   dtype=DataType.VARCHAR,
   max_length=200,
+  # The default value will be used if this field is left empty during data inserts or upserts.
+  # The data type of `default_value` must be the same as that specified in `dtype`.
+  default_value="Unknown"
 )
 word_count = FieldSchema(
   name="word_count",
   dtype=DataType.INT64,
+  # The default value will be used if this field is left empty during data inserts or upserts.
+  # The data type of `default_value` must be the same as that specified in `dtype`.
+  default_value=9999
 )
 book_intro = FieldSchema(
   name="book_intro",
@@ -246,6 +254,11 @@ Output:
             <td><code>max_length</code> (Mandatory for VARCHAR field)</td>
             <td>Maximum length of strings allowed to be inserted.</td>
             <td>[1, 65,535]</td>
+        </tr>
+        <tr>
+            <td><code>default_value</code></td>
+            <td>Default value of the field. This parameter is available only for non-array and non-JSON scalar fields. You cannot specify a default value for a primary key field. Refer to <a href="#parameter-default_value">Parameter default_value</a> for more information.</td>
+            <td>N/A</td>
         </tr>
         <tr>
             <td><code>dim</code> (Mandatory for vector field)</td>
@@ -667,12 +680,21 @@ milvusClient.createCollection(createCollectionReq);
 
 ## Limits
 
+### Resource configuration
+
 | Feature                              | Maximum limit  |
 | ------------------------------------ | -------------- |
 | Length of a collection name          | 255 characters |
 | Number of partitions in a collection | 4,096          |
 | Number of fields in a collection     | 64             |
 | Number of shards in a collection     | 16            |
+
+### Parameter `default_value`
+
+- `default_value` is available only for non-array and non-JSON scalar fields.
+- `default_value` does not apply to the primary key.
+- The data type of `default_value` must be the same as that specified in `dtype`. Otherwise, an error can occur.
+- In the case of using `auto_id`, it's not allowed to set all the remaining fields to use default values. That is, when performing insert or upsert operations, you need to specify values for at least one field. Otherwise, an error can occur.
 
 ## What's next
 
