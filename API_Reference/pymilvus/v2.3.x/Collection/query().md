@@ -12,11 +12,11 @@ query(expr, offset, limit, output_fields=None, partition_names=None, timeout=Non
 
 | Parameter         | Description                                                   | Type               | Required |
 | ----------------- | ------------------------------------------------------------- | ------------------ | -------- |
-| `expr`            | Boolean expression to filter the data                         | String             | True     |
+| `expr`            | Boolean expression to filter the data.                         | String             | True     |
 | `partition_names` | List of names of the partitions to search on. </br>All partition will be searched if it is left empty.                                                                              | list[String]       | False    |
 | `offset`          | Number of results to skip in the returned set. The sum of this value and `limit` should be less than 65535.                           | Integer            | False     |
 | `limit`           | Number of nearest records to return. The sum of this value and `offset` should be less than 65535.                          | Integer            | False     |
-| `output_fields`   | List of names of fields to output                             | list[String]       | False    |
+| `output_fields`   | List of names of fields to output. To count entities, add special field `count(*)` to this parameter, for example, `output_fields=[count(*)]`.                            | list[String]       | False    |
 | `timeout`         | An optional duration of time in seconds to allow for the RPC. If it is set to None, the client keeps waiting until the server responds or error occurs.                                                | Float              | False    |
 | `kwargs`: `consistency_level`|Consistency level used in the search. | String/Integer              | False    |
 | `kwargs`: `guarantee_timestamp`|Milvus searches on the data view before this timestamp when it is provided. Otherwise, it searches the most updated data view. It can be only used in `Customized` level of consistency. | Integer              | False    |
