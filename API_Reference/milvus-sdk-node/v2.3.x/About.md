@@ -9,6 +9,7 @@ The following collection shows Milvus versions and recommended @zilliz/milvus2-s
 | Milvus version | Node sdk version | Installation                        |
 | :------------: | :--------------: | :---------------------------------- |
 |    v2.2.0+     |    **latest**    | `yarn add @zilliz/milvus2-sdk-node` |
+|    v2.3.0+     |    **latest**    | `yarn add @zilliz/milvus2-sdk-node` |
 
 ## Dependencies
 
