@@ -16,7 +16,7 @@ grant(object, object_name, privilege)
 | `object_name`| Name of the object to which the role is granted the specified prvilege.            | String                          | True     |
 | `privilege`| Name of the privilege to be granted to the role. This parameter is case-sensitive.           | String                          | True     |
 
-For details on applicable objects and privileges, refer to [Users and Roles](milvus.io/docs/v2.2.x/users_and_roles.md).
+For details on applicable objects and privileges, refer to [Users and Roles](https://milvus.io/docs/v2.2.x/users_and_roles.md).
 
 ## Return
 
