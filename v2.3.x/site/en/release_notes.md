@@ -71,7 +71,7 @@ Users now have the option to set a distance range using arguments to retrieve sp
 
 ```python
 // add radius and range_filter to params in search_params
-search_params = {"params": {"nprobe": 10, "radius": 10, "range_filter" : 20}, "metric_type": "L2"}
+search_params = {"params": {"nprobe": 10, "radius": 20, "range_filter" : 10}, "metric_type": "L2"}
 res = collection.search(
     vectors, "float_vector", search_params, topK,
     "int64 > 100", output_fields=["int64", "float"]
