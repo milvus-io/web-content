@@ -8,7 +8,7 @@ Milvus Java SDK is an open-source project and its source code is hosted on [GitH
 | -------------- | ----------------------- |
 | 2.0.2          | 2.0.4                   |
 | 2.1.0          | 2.1.0                   |
-| 2.2.0          | 2.2.9                   |
+| 2.2.0          | 2.2.10                   |
 
 ## Installation
 

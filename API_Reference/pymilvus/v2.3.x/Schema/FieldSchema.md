@@ -18,6 +18,7 @@ A FieldSchema object.
 | -------------------- | ---------------------------------------------------------------------------- |
 | `name`               | Name of the field                                                            |
 | `is_primary`         | Boolean value that indicates if the field is the primary key field           |
+| `is_partition_key`   | Boolean value that indicates if the field is a partition-key field.          |
 
 ## Example
 
@@ -33,18 +34,22 @@ book_name = FieldSchema(
   dtype=DataType.VARCHAR, 
   max_length=200, #max_length must be specified to limit the max length of VARCHAR. The value should be in (0, 65535].
 )
+
 word_count = FieldSchema(
   name="word_count", 
   dtype=DataType.INT64,  
 )
+
 book_intro = FieldSchema(
   name="book_intro", 
   dtype=DataType.FLOAT_VECTOR, 
   dim=2
 )
+
 schema = CollectionSchema(
   fields=[book_id, word_count, book_intro], 
-  description="Test book search"
+  description="Test book search",
+  enable_dynamic_field=True
 )
 ```
 
@@ -65,6 +70,8 @@ Scalar field supports:
 - FLOAT: numpy.float32
 - DOUBLE: numpy.double
 - VARCHAR: VARCHAR
+
+You can create a JSON field, comprising key-value pairs. Each key should be a string and values can be numbers, strings, boolean values, arrays, and lists. For details, read ["JSON: a new data type"](dynamic_schema#Json-a-new-data-type).
 
 Vector field supports:
 - BINARY_VECTOR: Binary vector
