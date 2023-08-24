@@ -15,7 +15,7 @@ search(data, anns_field, param, limit, expr=None, partition_names=None, output_f
 | `data`            | Data to search with                                           | list[list[Float]]  | True     |
 | `anns_field`      | Name of the vector field to search on                         | String             | True     |
 | `param`           | Specific search parameter(s) of the index on the vector field. For details, refer to [Prepare search parameters](https://milvus.io/docs/search.md#Prepare-search-parameters).  | Dict               | True     |
-| `limit`           | Number of nearest records to return. The sum of this value and `offset` should be less than 65535.                          | Integer            | True     |
+| `limit`           | Number of nearest records to return. The sum of this value and `offset` should be less than 16384.                          | Integer            | True     |
 | `expr`            | Boolean expression to filter the data                         | String             | False    |
 | `partition_names` | List of names of the partitions to search on. </br>All partition will be searched if it is left empty.                         | list[String]            | False    |
 | `output_fields`   | List of names of fields to output. <br>When specified, you can get the values of the specified fields by using `hit.entity.get()`.                             | list[String]       | False    |
@@ -49,26 +49,30 @@ Conduct a vector similarity search that returns topK most similar results:
 search_params = {"metric_type": "L2", "params": {"nprobe": 10}}
 from pymilvus import Collection
 collection = Collection("book")      # Get an existing collection.
-results = collection.search(
-	data=[[0.1, 0.2]], 
-	anns_field="book_intro", 
-	param=search_params, 
-	limit=10, 
-	expr=None,
-	output_fields=['title'], # set the names of the fields you want to retrieve from the search result.
-	consistency_level="Strong"
+result = collection.search(
+    data=[[0.1, 0.2]], 
+    anns_field="book_intro", 
+    param=search_params, 
+    limit=10, 
+    # demontrates the ways to reference a dynamic field.
+    expr='$meta["dynamic_field_1"] > 10 and dynamic_field_2 == 10',
+    # sets the names of the fields you want to retrieve from the search result.
+    output_fields=['title', 'dynamic_field_1', 'dynamic_field_2'], 
+    consistency_level="Strong"
 )
 
-# get the IDs of all returned hits
-results[0].ids
+for hits in result:
+    # get the IDs of all returned hits
+    print(hits.ids)
 
-# get the distances to the query vector from all returned hits
-results[0].distances
-
-# get the value of an output field specified in the search request.
-# vector fields are not supported yet.
-hit = results[0][0]
-hit.entity.get('title')
+    # get the distances to the query vector from all returned hits
+    print(hits.distances)
+    for hit in hits:
+        # get the value of an output field specified in the search request.
+        # dynamic fields are supported, but vector fields are not supported yet.    
+        print(hit.entity.get('title'))
+        print(hit.entity.get('$meta["dynamic_field_1"]'))
+        print(hit.entity.get('$dynamic_field_2'))
 ```
 
 Conduct a range search that returns vectors whose similarity to the query vector falls into a specify range:
