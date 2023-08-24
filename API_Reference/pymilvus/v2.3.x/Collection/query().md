@@ -12,7 +12,7 @@ query(expr, offset, limit, output_fields=None, partition_names=None, timeout=Non
 
 | Parameter         | Description                                                   | Type               | Required |
 | ----------------- | ------------------------------------------------------------- | ------------------ | -------- |
-| `expr`            | Boolean expression to filter the data                         | String             | True     |
+| `expr`            | Boolean expression to filter the data.                         | String             | True     |
 | `partition_names` | List of names of the partitions to search on. </br>All partition will be searched if it is left empty.                                                                              | list[String]       | False    |
 | `limit`           | Number of nearest records to return. The value of this parameter should be less than 16384.                          | Integer            | False     |
 | `offset`          | Number of results to skip in the returned set. This parameter is available only when `limit` is specified, and the sum of this value and `limit` should be less than 16384.                           | Integer            | False     |

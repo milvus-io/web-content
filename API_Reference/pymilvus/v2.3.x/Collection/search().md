@@ -5,7 +5,7 @@ This method conducts a vector similarity search.
 ## Invocation
 
 ```python
-search(data, anns_field, param, limit, expr=None, partition_names=None, output_fields=None, timeout=None, round_decimal=-1, **kwargs)
+search(data, anns_field, param, limit, expr=None, partition_names=None, output_fields=None, radius, range_filter, timeout=None, round_decimal=-1, **kwargs)
 ```
 
 ## Parameters
@@ -19,6 +19,8 @@ search(data, anns_field, param, limit, expr=None, partition_names=None, output_f
 | `expr`            | Boolean expression to filter the data                         | String             | False    |
 | `partition_names` | List of names of the partitions to search on. </br>All partition will be searched if it is left empty.                         | list[String]            | False    |
 | `output_fields`   | List of names of fields to output. <br>When specified, you can get the values of the specified fields by using `hit.entity.get()`.                             | list[String]       | False    |
+| `radius` | Angle where the vector with the least similarity resides. | Float | False |
+| `range_filter` | Filters vector field values whose similarity to the query vector falls into a specific range. This parameter is used in combination with `radius`. | Float | False |
 | `timeout`         | An optional duration of time in seconds to allow for the RPC. If it is set to None, the client keeps waiting until the server responds or error occurs.                                  | Float              | False    |
 | `round_decimal`   | Number of the decimal places of the returned distance         | Integer            | False    |
 | `kwargs`: `_async`| Boolean value to indicate if to invoke asynchronously. | Bool   | False    |
@@ -40,6 +42,8 @@ A SearchResult object, an iterable, 2d-array-like class whose first dimension is
 - `BaseException`: error if the return result from server is not ok.
 
 ## Example
+
+Conduct a vector similarity search that returns topK most similar results:
 
 ```python
 search_params = {"metric_type": "L2", "params": {"nprobe": 10}}
@@ -69,4 +73,32 @@ for hits in result:
         print(hit.entity.get('title'))
         print(hit.entity.get('$meta["dynamic_field_1"]'))
         print(hit.entity.get('$dynamic_field_2'))
+```
+
+Conduct a range search that returns vectors whose similarity to the query vector falls into a specify range:
+
+```python
+search_param = {
+  "data": [[0.1, 0.2]], # query vector
+  "anns_field": "book_intro", # name of the field to search on
+  "param": {"metric_type": "L2", "nprobe": 10, "radius": 10.0, "range_filter" : 5.0},
+  "offset": 0,
+  "limit": 2,
+  output_fields=["int64", "float"] # fields to return
+}
+
+res = collection.search(**search_param)
+```
+
+```python
+search_param = {
+  "data": [[0.1, 0.2]], # query vector
+  "anns_field": "book_intro", # name of the field to search on
+  "param": {"metric_type": "IP", "nprobe": 10, "radius": 0.8, "range_filter" : 1.0},
+  "offset": 0,
+  "limit": 2,
+  output_fields=["int64", "float"] # fields to return
+}
+
+res = collection.search(**search_param)
 ```

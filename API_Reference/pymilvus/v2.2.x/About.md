@@ -29,7 +29,7 @@ $ pip3 install pymilvus
 - Install a specific version of PyMilvus.
 
 ```shell
-$ pip3 install pymilvus==2.2.14
+$ pip3 install pymilvus==2.2.15
 ```
 
 - Upgrade PyMilvus to the latest version.
