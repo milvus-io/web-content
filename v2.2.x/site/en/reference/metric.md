@@ -26,8 +26,8 @@ The following table shows how these widely used similarity metrics fit with vari
 </thead>
 <tbody>
   <tr>
-    <td class="tg-0pky"><ul><li>Euclidean distance (L2)</li><li>Inner product (IP)</li><li>Cosine similarity (COSINE)</li></td>
-    <td class="tg-0pky" rowspan="2"><ul><li>FLAT</li><li>IVF_FLAT</li><li>IVF_SQ8</li><li>IVF_PQ</li><li>GPU_IVF_FLAT</li><li>GPU_IVF_PQ</li><li>HNSW</li><li>DISKANN</li></ul></td>
+    <td class="tg-0pky"><ul><li>Euclidean distance (L2)</li><li>Inner product (IP)</li></td>
+    <td class="tg-0pky" rowspan="2"><ul><li>FLAT</li><li>IVF_FLAT</li><li>IVF_SQ8</li><li>IVF_PQ</li><li>HNSW</li><li>ANNOY</li><li>DISKANN</li></ul></td>
   </tr>
 </tbody>
 </table>
@@ -45,8 +45,12 @@ The following table shows how these widely used similarity metrics fit with vari
 </thead>
 <tbody>
   <tr>
-    <td class="tg-0pky"><ul><li>Jaccard</li><li>Hamming</li></ul></td>
+    <td class="tg-0pky"><ul><li>Jaccard</li><li>Tanimoto</li><li>Hamming</li></ul></td>
     <td class="tg-0pky"><ul><li>BIN_FLAT</li><li>BIN_IVF_FLAT</li></ul></td>
+  </tr>
+  <tr>
+    <td class="tg-0pky"><ul><li>Superstructure</li><li>Substructure</li></ul></td>
+    <td class="tg-0pky">* BIN_FLAT</td>
   </tr>
 </tbody>
 </table>
@@ -63,7 +67,7 @@ The formula for Euclidean distance is as follows:
 
 ![euclidean](../../../assets/euclidean_metric.png "Euclidean distance.")
 
-where **a** = (a<sub>0</sub>, a<sub>1</sub>,..., a<sub>n-1</sub>) and **b** = (b<sub>0</sub>, b<sub>0</sub>,..., b<sub>n-1</sub>) are two points in n-dimensional Euclidean space
+where **a** = (a1, a2,..., an) and **b** = (b1, b2,..., bn) are two points in n-dimensional Euclidean space
 
 It's the most commonly used distance metric and is very useful when the data are continuous.
 
@@ -77,33 +81,22 @@ The IP distance between two embeddings are defined as follows:
 
 ![ip](../../../assets/IP_formula.png "Inner product.")
 
+Where A and B are embeddings, `||A||` and `||B||` are the norms of A and B.
+
 IP is more useful if you are more interested in measuring the orientation but not the magnitude of the vectors.
 
 <div class="alert note">
-
  If you use IP to calculate embeddings similarities, you must normalize your embeddings. After normalization, the inner product equals cosine similarity.
-
 </div>
+
 
 Suppose X' is normalized from embedding X: 
 
 ![normalize](../../../assets/normalize_formula.png "Normalize.")
 
-The correlation between the two embeddings is as follows:
+The correlation between the two embeddings is as follows: 
 
 ![normalization](../../../assets/normalization_formula.png "Normalization.")
-
-### Cosine Similarity
-
-Cosine similarity uses the cosine of the angle between two sets of vectors to measure how similar they are. You can think of the two sets of vectors as two line segments that start from the same origin ([0,0,...]) but point in different directions.
-
-To calculate the cosine similarity between two sets of vectors **A = (a<sub>0</sub>, a<sub>1</sub>,..., a<sub>n-1</sub>)** and **B = (b<sub>0</sub>, b<sub>1</sub>,..., b<sub>n-1</sub>)**, use the following formula:
-
-![cosine_similarity](../../../assets/cosine_similarity.png "Cosine Similarity")
-
-The cosine similarity is always in the interval **[-1, 1]**. For example, two proportional vectors have a cosine similarity of **1**, two orthogonal vectors have a similarity of **0**, and two opposite vectors have a similarity of **-1**. The larger the cosine, the smaller the angle between two vectors, indicating that these two vectors are more similar to each other.
-
-By subtracting their cosine similarity from 1, you can get the cosine distance between two vectors.
 
 ### Jaccard distance
 
@@ -115,6 +108,20 @@ Jaccard distance measures the dissimilarity between data sets and is obtained by
 
 ![Jaccard distance](../../../assets/jaccard_dist.png "Jaccard distance.")
 
+### Tanimoto distance
+
+For binary variables, the Tanimoto coefficient is equivalent to Jaccard distance:
+
+![tanimoto coefficient](../../../assets/tanimoto_coeff.png "Tanimoto coefficient.")
+
+In Milvus, the Tanimoto coefficient is only applicable for a binary variable, and for binary variables, the Tanimoto coefficient ranges from 0 to +1 (where +1 is the highest similarity).
+
+For binary variables, the formula of Tanimoto distance is:
+
+![tanimoto distance](../../../assets/tanimoto_dist.png "Tanimoto distance.")
+
+The value ranges from 0 to +infinity.
+
 ### Hamming distance
 
 Hamming distance measures binary data strings. The distance between two strings of equal length is the number of bit positions at which the bits are different.
@@ -122,6 +129,36 @@ Hamming distance measures binary data strings. The distance between two strings 
 For example, suppose there are two strings, 1101 1001 and 1001 1101.
 
 11011001 ⊕ 10011101 = 01000100. Since, this contains two 1s, the Hamming distance, d (11011001, 10011101) = 2.
+
+### Superstructure
+
+The Superstructure is used to measure the similarity of a chemical structure and its superstructure. When the value equals 0, this means the chemical structure in the database is the superstructure of the target chemical structure.
+
+Superstructure similarity can be measured by:
+
+![superstructure](../../../assets/superstructure.png "Superstructure.")
+
+Where
+
+- B is the superstructure of A
+- N<sub>A</sub> specifies the number of bits in the fingerprint of molecular A.
+- N<sub>B</sub> specifies the number of bits in the fingerprint of molecular B.
+- N<sub>AB</sub> specifies the number of shared bits in the fingerprint of molecular A and B.
+
+### Substructure
+
+The Substructure is used to measure the similarity of a chemical structure and its substructure. When the value equals 0, this means the chemical structure in the database is the substructure of the target chemical structure.
+
+Substructure similarity can be measured by:
+
+![substructure](../../../assets/substructure.png "Substructure.")
+
+Where
+
+- B is the substructure of A
+- N<sub>A</sub> specifies the number of bits in the fingerprint of molecular A.
+- N<sub>B</sub> specifies the number of bits in the fingerprint of molecular B.
+- N<sub>AB</sub> specifies the number of shared bits in the fingerprint of molecular A and B.
 
 ## FAQ
 

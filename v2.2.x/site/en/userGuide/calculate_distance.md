@@ -219,7 +219,10 @@ params='[
                 For binary vectors:
                 <ul>
                     <li><code>JACCARD</code> (Jaccard distance)</li>
+                    <li><code>TANIMOTO</code> (Tanimoto distance)</li>
                     <li><code>HAMMING</code> (Hamming distance)</li>
+                    <li><code>SUPERSTRUCTURE</code> (Superstructure)</li>
+                    <li><code>SUBSTRUCTURE</code> (Substructure)</li>
                 </ul>
             </td>
         </tr>
@@ -368,4 +371,5 @@ Output:
 - Learn more basic operations of Milvus:
   - [Conduct a vector search](search.md)
   - [Conduct a hybrid search](hybridsearch.md)
+  - [Search with Time Travel](timetravel.md)
 

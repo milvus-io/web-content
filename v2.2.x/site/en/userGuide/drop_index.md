@@ -166,4 +166,5 @@ curl -X 'DELETE' \
 - Learn more basic operations of Milvus:
   - [Conduct a vector search](search.md)
   - [Conduct a hybrid search](hybridsearch.md)
+  - [Search with Time Travel](timetravel.md)
 
