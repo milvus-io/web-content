@@ -11,7 +11,7 @@ PyMilvus is a Python SDK of Milvus. Its source code is open-sourced and hosted o
 | 2.0.x	         | 2.0.2                        |
 | 2.1.x	         | 2.1.3                        |
 | 2.2.x          | 2.2.3                        |
-| 2.3.0          | 2.3.0
+| 2.3.x          | 2.3.0
 
 ## Installation
 
