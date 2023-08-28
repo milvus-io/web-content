@@ -7,7 +7,7 @@ group: query.md
 summary: Learn how to query vectors in Milvus.
 ---
 
-<div class="tab-wrapper"><a href="query.md" class='active '>Conduct a Query</a><a href="with_iterators.md" class=''>Conduct a Query with Iterators</a><a href="within_range.md" class=''>Conduct a query within Range</a></div>
+<div class="tab-wrapper"><a href="query.md" class='active '>Conduct a Query</a><a href="with_iterators.md" class=''>Conduct a Query with Iterators</a></div>
 
 # Conduct a Query
 

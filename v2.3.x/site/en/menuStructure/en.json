@@ -446,14 +446,6 @@
       "order": 0
     },
     {
-      "id": "hybridsearch.md",
-      "title": "Hybrid Search",
-      "label1": "userguide",
-      "label2": "search",
-      "label3": "",
-      "order": 2
-    },
-    {
       "id": "query.md",
       "title": "Query",
       "label1": "userguide",

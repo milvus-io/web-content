@@ -1,8 +1,13 @@
 ---
 id: search.md
+label: Conduct a Vector Similarity Search
 related_key: search
+order: 0
+group: search.md
 summary: Conduct a vector similarity search with Milvus.
 ---
+
+<div class="tab-wrapper"><a href="search.md" class='active '>Conduct a Vector Similarity Search</a><a href="hybridsearch.md" class=''>Conduct a Hybrid Search</a><a href="within_range.md" class=''>Conduct a Range Search</a></div>
 
 # Conduct a Vector Similarity Search
 
