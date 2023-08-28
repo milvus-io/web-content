@@ -462,22 +462,6 @@
       "order": 1
     },
     {
-      "id": "with_iterators.md",
-      "title": "Query",
-      "label1": "userguide",
-      "label2": "search",
-      "label3": "",
-      "order": 3
-    },
-    {
-      "id": "within_range.md",
-      "title": "Query",
-      "label1": "userguide",
-      "label2": "search",
-      "label3": "",
-      "order": 4
-    },
-    {
       "id": "bootcamp_userguide",
       "title": "Bootcamp",
       "label1": "userguide",

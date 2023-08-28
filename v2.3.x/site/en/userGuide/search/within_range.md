@@ -1,8 +1,13 @@
 ---
 id: within_range.md
+label: Conduct a query within Range
 related_key: Within Range
+order: 2
+group: query.md
 summary: Learn how to conduct a range search.
 ---
+
+<div class="tab-wrapper"><a href="query.md" class=''>Conduct a Query</a><a href="with_iterators.md" class=''>Conduct a Query with Iterators</a><a href="within_range.md" class='active '>Conduct a query within Range</a></div>
 
 # Within Range
 

@@ -1,8 +1,13 @@
 ---
 id: with_iterators.md
+label: Conduct a Query with Iterators
 related_key: With Iterators
+order: 1
+group: query.md
 summary: Learn how to search and query data with iterators. 
 ---
+
+<div class="tab-wrapper"><a href="query.md" class=''>Conduct a Query</a><a href="with_iterators.md" class='active '>Conduct a Query with Iterators</a><a href="within_range.md" class=''>Conduct a query within Range</a></div>
 
 # With Iterators
 

@@ -1,8 +1,13 @@
 ---
 id: query.md
+label: Conduct a Query
 related_key: query vectors
+order: 0
+group: query.md
 summary: Learn how to query vectors in Milvus.
 ---
+
+<div class="tab-wrapper"><a href="query.md" class='active '>Conduct a Query</a><a href="with_iterators.md" class=''>Conduct a Query with Iterators</a><a href="within_range.md" class=''>Conduct a query within Range</a></div>
 
 # Conduct a Query
 
@@ -59,6 +64,7 @@ milvusClient.loadCollection(
 ```shell
 load -c book
 ```
+</div>
 
 ```curl
 # See the following step.
