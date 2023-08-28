@@ -1,15 +1,15 @@
 ---
 id: within_range.md
-label: Conduct a Range Search
+label: Range Search
 related_key: Within Range
 order: 2
 group: search.md
 summary: Learn how to conduct a range search.
 ---
 
-<div class="tab-wrapper"><a href="search.md" class=''>Conduct a Vector Similarity Search</a><a href="hybridsearch.md" class=''>Conduct a Hybrid Search</a><a href="within_range.md" class='active '>Conduct a Range Search</a></div>
+<div class="tab-wrapper"><a href="search.md" class=''>Vector Similarity Search</a><a href="hybridsearch.md" class=''>Hybrid Search</a><a href="within_range.md" class='active '>Range Search</a></div>
 
-# Within Range
+# Conduct a Vector Similarity Search Within a Range
 
 This topic describes how to conduct a range search.
 
@@ -134,9 +134,9 @@ In terms of L2 distance, conduct a range search that returns vectors with a simi
 search_param = {
   "data": [[0.1, 0.2]], # query vector
   "anns_field": "book_intro", # name of the field to search on
-  "param": {"metric_type": "L2", "nprobe": 10, "radius": 10.0, "range_filter" : 5.0, "offset": 0},
+  "param": { "metric_type": "L2", "params": { "nprobe": 10, "radius": 10.0, "range_filter" : 5.0 }, "offset": 0 },
   "limit": 2,
-  output_fields=["int64", "float"] # fields to return
+  "output_fields": ["int64", "float"]  # fields to return
 }
 
 res = collection.search(**search_param)
@@ -171,9 +171,9 @@ In terms of IP distance, conduct a range search that returns vectors with a simi
 search_param = {
   "data": [[0.1, 0.2]], # query vector
   "anns_field": "book_intro", # name of the field to search on
-  "param": {"metric_type": "IP", "nprobe": 10, "radius": 0.8, "range_filter" : 1.0, "offset": 0},
+  "param": {"metric_type": "IP", "params": { "nprobe": 10, "radius": 0.8, "range_filter" : 1.0 }, "offset": 0 },
   "limit": 2,
-  output_fields=["int64", "float"] # fields to return
+  "output_fields": ["int64", "float"] # fields to return
 }
 
 res = collection.search(**search_param)

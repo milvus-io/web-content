@@ -1,13 +1,13 @@
 ---
 id: hybridsearch.md
-label: Conduct a Hybrid Search
+label: Hybrid Search
 related_key: filter
 order: 1
 group: search.md
 summary: Conduct a Hybrid Search with Milvus.
 ---
 
-<div class="tab-wrapper"><a href="search.md" class=''>Conduct a Vector Similarity Search</a><a href="hybridsearch.md" class='active '>Conduct a Hybrid Search</a><a href="within_range.md" class=''>Conduct a Range Search</a></div>
+<div class="tab-wrapper"><a href="search.md" class=''>Vector Similarity Search</a><a href="hybridsearch.md" class='active '>Hybrid Search</a><a href="within_range.md" class=''>Range Search</a></div>
 
 # Conduct a Hybrid Search
 

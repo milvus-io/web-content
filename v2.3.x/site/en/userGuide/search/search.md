@@ -1,13 +1,13 @@
 ---
 id: search.md
-label: Conduct a Vector Similarity Search
+label: Vector Similarity Search
 related_key: search
 order: 0
 group: search.md
 summary: Conduct a vector similarity search with Milvus.
 ---
 
-<div class="tab-wrapper"><a href="search.md" class='active '>Conduct a Vector Similarity Search</a><a href="hybridsearch.md" class=''>Conduct a Hybrid Search</a><a href="within_range.md" class=''>Conduct a Range Search</a></div>
+<div class="tab-wrapper"><a href="search.md" class='active '>Vector Similarity Search</a><a href="hybridsearch.md" class=''>Hybrid Search</a><a href="within_range.md" class=''>Range Search</a></div>
 
 # Conduct a Vector Similarity Search
 
@@ -212,8 +212,11 @@ Output:
     </tr>    
     <tr>
         <td><code>params</code></td>
-        <td>Search parameter(s) specific to the specified index type. See <a href="index.md">Vector Index</a> for more information. Possible options are as follows: <ul><li><code>nprobe</code> Indicates the number of cluster units to search. This parameter is available only when <code>index_type</code> is set to <code>IVF_FLAT</code>, <code>IVF_SQ8</code>, or <code>IVF_PQ</code>. The value should be less than <code>nlist</code> specified for the index-building process.</li>
-            <li><code>ef</code> Indicates the search scope. This parameter is available only when <code>index_type</code> is set to <code>HNSW</code>. The value should be within the range from <code>top_k</code> to <code>32768</code>.</li>
+        <td>Search parameter(s) specific to the specified index type. See <a href="index.md">Vector Index</a> for more information. Possible options are as follows: <ul>
+        <li><code>nprobe</code> Indicates the number of cluster units to search. This parameter is available only when <code>index_type</code> is set to <code>IVF_FLAT</code>, <code>IVF_SQ8</code>, or <code>IVF_PQ</code>. The value should be less than <code>nlist</code> specified for the index-building process.</li>
+        <li><code>ef</code> Indicates the search scope. This parameter is available only when <code>index_type</code> is set to <code>HNSW</code>. The value should be within the range from <code>top_k</code> to <code>32768</code>.</li>
+        <li><code>radius</code> Indicates the angle where the vector with the least similarity resides.</li>
+        <li><code>range_filter</code> Indicates the filter used to filter vector field values whose similarity to the query vector falls into a specific range.</li>
         </ul></td>
     </tr>
     </tbody>
