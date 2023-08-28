@@ -134,8 +134,7 @@ In terms of L2 distance, conduct a range search that returns vectors with a simi
 search_param = {
   "data": [[0.1, 0.2]], # query vector
   "anns_field": "book_intro", # name of the field to search on
-  "param": {"metric_type": "L2", "nprobe": 10, "radius": 10.0, "range_filter" : 5.0},
-  "offset": 0,
+  "param": {"metric_type": "L2", "nprobe": 10, "radius": 10.0, "range_filter" : 5.0, "offset": 0},
   "limit": 2,
   output_fields=["int64", "float"] # fields to return
 }
@@ -172,8 +171,7 @@ In terms of IP distance, conduct a range search that returns vectors with a simi
 search_param = {
   "data": [[0.1, 0.2]], # query vector
   "anns_field": "book_intro", # name of the field to search on
-  "param": {"metric_type": "IP", "nprobe": 10, "radius": 0.8, "range_filter" : 1.0},
-  "offset": 0,
+  "param": {"metric_type": "IP", "nprobe": 10, "radius": 0.8, "range_filter" : 1.0, "offset": 0},
   "limit": 2,
   output_fields=["int64", "float"] # fields to return
 }
