@@ -124,7 +124,6 @@ To share a MinIO instance among multiple Milvus instances, you need to change <c
     <tr>
       <td>
         <li>Switch value to control if to access the MinIO or S3 service through SSL.</li>
-        <li>Milvus 2.0.0 does not support secure access to MinIO or S3 service. Future releases will support secure access to MinIO.</li>
       </td>
       <td>false</td>
     </tr>

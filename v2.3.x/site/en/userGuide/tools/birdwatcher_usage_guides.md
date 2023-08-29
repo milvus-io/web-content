@@ -9,7 +9,7 @@ This guide walks you through how to use Birdwatcher to check the state of your M
 
 ## Start Birdwatcher
 
-Birdwatcher is an command-line tool, you can start it as follows:
+Birdwatcher is a command-line tool, you can start it as follows:
 
 ```shell
 ./birdwatcher

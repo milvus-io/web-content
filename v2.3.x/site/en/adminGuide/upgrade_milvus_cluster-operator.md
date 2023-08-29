@@ -18,9 +18,9 @@ This guide describes how to upgrade your Milvus cluster with Milvus operator.
 Run the following command to upgrade the version of your Milvus Operator to v0.8.0.
 
 ```
-helm repo add milvus-operator https://milvus-io.github.io/milvus-operator/
-helm repo update milvus-operator
-helm -n milvus-operator upgrade milvus-operator milvus-operator/milvus-operator
+helm repo add zilliztech-milvus-operator https://zilliztech.github.io/milvus-operator/
+helm repo update zilliztech-milvus-operator
+helm -n milvus-operator upgrade milvus-operator zilliztech-milvus-operator/milvus-operator
 ```
 
 Once you have upgraded your Milvus operator to the latest version, you have the following choices:

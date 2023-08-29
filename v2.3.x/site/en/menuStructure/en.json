@@ -495,6 +495,14 @@
       "order": 2
     },
     {
+      "id": "dynamic_config.md",
+      "title": "On the Fly",
+      "label1": "admin_guide",
+      "label2": "configure_milvus",
+      "label3": "",
+      "order": 3
+    },
+    {
       "id": "configure_operator.md",
       "title": "With Milvus Operator",
       "label1": "admin_guide",
