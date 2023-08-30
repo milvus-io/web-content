@@ -436,7 +436,7 @@ Count all entities in a collection:
 ```python
 res = collection.query(
   expr="", 
-  output_fields = [count(*)],
+  output_fields = ["count(*)"],
 )
 
 print(res)
@@ -453,7 +453,7 @@ Count entities that meet specific filter conditions:
 res = collection.query(
   # filter entities whose ID is in the specified list
   expr="book_id in [2,4,6,8]", 
-  output_fields = [count(*)],
+  output_fields = ["count(*)"],
 )
 
 print(res)

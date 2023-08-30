@@ -19,7 +19,7 @@ You need to ensure that：
 
 <div class="alert note">
 
-- Examples in this guide change the value of `proxy.minPasswordLength` to `8`. You can replace the key with the applicable ones listed in 
+- Examples in this guide change the value of `proxy.minPasswordLength` to `8`. You can replace the key with the applicable ones listed in [Applicable configuration items](dynamic_config.md#Applicable-configuration-items).
 - Examples in this guide assume that the root path of your Milvus is `by-dev`. All configurations are listed under the path `by-dev/config`. The Milvus root path varies with the way you install it. For the instances installed using the Helm charts, the root path defaults to `by-dev`. If you do not know the root path, refer to [Connect to etcd](birdwatcher_usage_guides.md#Connect-to-etcd).
 
 </div>
