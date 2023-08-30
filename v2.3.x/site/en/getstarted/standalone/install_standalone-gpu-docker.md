@@ -2,12 +2,12 @@
 id: install_standalone-gpu-docker.md
 label: Docker Compose (GPU)
 related_key: Docker
-order: 0
+order: 1
 group: install_standalone-docker.md
 summary: Learn how to install Milvus GPU standalone with Docker Compose.
 ---
 
-<div class="tab-wrapper"><a href="install_standalone-gpu-docker.md" class='active '>Docker Compose (GPU)</a><a href="install_standalone-docker.md" class=''>Docker Compose (CPU)</a><a href="install_standalone-operator.md" class=''>Milvus Operator</a><a href="install_standalone-helm.md" class=''>Helm</a></div>
+<div class="tab-wrapper"><a href="install_standalone-docker.md" class=''>Docker Compose (CPU)</a><a href="install_standalone-gpu-docker.md" class='active '>Docker Compose (GPU)</a><a href="install_standalone-operator.md" class=''>Milvus Operator</a><a href="install_standalone-helm.md" class=''>Helm</a></div>
 
 # Install Milvus Standalone with Docker Compose (GPU)
 

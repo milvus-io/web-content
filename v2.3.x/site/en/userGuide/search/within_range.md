@@ -9,7 +9,7 @@ summary: Learn how to conduct a range search.
 
 <div class="tab-wrapper"><a href="search.md" class=''>Vector Similarity Search</a><a href="hybridsearch.md" class=''>Hybrid Search</a><a href="within_range.md" class='active '>Range Search</a></div>
 
-# Conduct a Vector Similarity Search Within a Range
+# Conduct a Range Search
 
 This topic describes how to conduct a range search.
 
