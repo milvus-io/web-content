@@ -286,9 +286,9 @@ Output:
             <td>N/A</td>
         </tr>
         <tr>
-		<td>enable_dynamic_field</td>
-		<td>Whether to enable dynamic schema or not</td>
-		<td>Data type: Boolean (<code>true</code> or <code>false</code>).<br/>Optional, defaults to <code>False</code>.<br/>For details on dynamic schema, refer to <a herf="dynamic_schema.md">Dynamic Schema</a> and the user guides for managing collections.</td>
+	    <td><code>enable_dynamic_field</code></td>
+	    <td>Whether to enable dynamic schema or not</td>
+	    <td>Data type: Boolean (<code>true</code> or <code>false</code>).<br/>Optional, defaults to <code>False</code>.<br/>For details on dynamic schema, refer to <a herf="dynamic_schema.md">Dynamic Schema</a> and the user guides for managing collections.</td>
 	    </tr>
         <tr>
             <td><code>collection_name</code></td>
