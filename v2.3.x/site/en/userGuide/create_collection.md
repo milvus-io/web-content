@@ -563,7 +563,7 @@ Output:
             <td>[1, 4096]</td>
         </tr>
         <tr>
-            <td><code>FieldType.newBuilder()</code></td>
+            <td rowspan="7"><code>FieldType.newBuilder()</code></td>
             <td><code>withName(String name)</code></td>
             <td>Name of the field to create.</td>
             <td>N/A</td>
