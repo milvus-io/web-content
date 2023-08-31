@@ -47,8 +47,7 @@ Methods of `FieldType.Builder`:
 | Method                                   | Description                                                  | Parameters                                                   |
 | ---------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | `withName(String name)`                  | Sets the name of the field. The name cannot be empty or null. | `Name`: The name of the field.                               |
-| `withPrimaryKey(
-primaryKey)`     | Sets the field as the primary key field. Only the fields whose data type is `int64` or `varchar` can be set as the primary key field. The value is `false` by default. | `primaryKey`: A boolean value that indicates if the field is the primary key field. The value `true` means that the field is the primary key field while the value `false` means it is not. |
+| `withPrimaryKey(primaryKey)`     | Sets the field as the primary key field. Only the fields whose data type is `int64` or `varchar` can be set as the primary key field. The value is `false` by default. | `primaryKey`: A boolean value that indicates if the field is the primary key field. The value `true` means that the field is the primary key field while the value `false` means it is not. |
 | `withDescription(String description)`    | Sets the field description. The description can be empty. The default value is "". | `Description`: The description of the field.                 |
 | `withDataType(DataType dataType)`        | Sets the data type for the field. Please refer to [DataType](../Misc/DataType.md) in Misc. | `dataType`: The data type of the field.                      |
 | `addTypeParam(String key, String value)` | Adds a parameter pair for the field. This is mainly used to set extra parameters for the vector field and VARCHAR field. | `key`: The parameter key.`Value`: The parameter value.       |
