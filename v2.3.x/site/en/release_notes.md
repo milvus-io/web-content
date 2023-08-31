@@ -102,17 +102,17 @@ Milvus now includes support for FAISS' FastScan, which has demonstrated a 20% pe
 
 The table below presents performance comparison results obtained using [VectorDBBench](https://github.com/zilliztech/VectorDBBench). It evaluates the performance of ScaNN, HNSW, and IVF-FLAT in handling data retrieval from a 768-dimensional vector dataset sourced from Cohere.
 
-| Index    | Case         | QPS | Latency (P99) ms | Recall |
+| Index    | Case         | QPS | Latency (P99) s  | Recall |
 |----------|--------------|-----|------------------|--------|
-| ScaNN    | 99% filtered | 626 | 0.0069           | 0.9532 |
-|          | 1% filtered  | 750 | 0.0063           | 0.9493 |
-|          | 0% filtered  | 883 | 0.0051           | 0.9491 |
-| IVF-FLAT | 99% filtered | 722 | 0.0061           | 0.9532 |
-|          | 1% filtered  | 122 | 0.0161           | 0.9493 |
-|          | 0% filtered  | 123 | 0.0154           | 0.9494 |
-| HNSW     | 99% filtered | 773 | 0.0066           | 1.0    |
-|          | 1% filtered  | 355 | 0.0081           | 0.9839 |
-|          | 0% filtered  | 696 | 0.0054           | 0.9528 |
+| ScaNN    | 99% filtered | 626 | 6.9              | 0.9532 |
+|          | 1% filtered  | 750 | 6.3              | 0.9493 |
+|          | 0% filtered  | 883 | 5.1              | 0.9491 |
+| IVF-FLAT | 99% filtered | 722 | 6.1              | 0.9532 |
+|          | 1% filtered  | 122 | 16.1             | 0.9493 |
+|          | 0% filtered  | 123 | 15.4             | 0.9494 |
+| HNSW     | 99% filtered | 773 | 6.6              | 1.0    |
+|          | 1% filtered  | 355 | 8.1              | 0.9839 |
+|          | 0% filtered  | 696 | 5.4              | 0.9528 |
 
 ### Iterator
 
