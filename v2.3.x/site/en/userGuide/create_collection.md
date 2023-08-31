@@ -197,18 +197,14 @@ Output:
 <table class="language-python">
 	<thead>
         <tr>
+            <th>Schema Type</th>
             <th>Parameter</th>
             <th>Description</th>
             <th>Option</th>
         </tr>
 	</thead>
 	<tbody>
-        <tr>
-            <td><b><code>FieldSchema</code><b></td>
-            <td>Schema of the fields within the collection to create. Refer to <a href="schema.md">Schema</a> for more information.</td>
-            <td>N/A</td>
-        </tr>
-        <tr>
+        <tr><td rowspan="8"><code>FieldSchema</code></td>
             <td><code>name</code></td>
             <td>Name of the field to create.</td>
             <td>N/A</td>
@@ -241,13 +237,13 @@ Output:
             </td>
         </tr>
         <tr>
-            <td><code>is_primary</code> (Mandatory for primary key field)</td>
-            <td>Switch to control if the field is primary key field.</td>
+            <td><code>is_primary</code></td>
+            <td>Switch to control if the field is the primary key field. This parameter is mandatory for the primary key field.</td>
             <td><code>True</code> or <code>False</code></td>
         </tr>
         <tr>
-            <td><code>auto_id</code> (Mandatory for primary key field)</td>
-            <td>Switch to enable or disable automatic ID (primary key) allocation.</td>
+            <td><code>auto_id</code></td>
+            <td>Switch to enable or disable automatic ID (primary key) allocation. This parameter is mandatory for the primary key field and defaults to <code>False</code></td>
             <td><code>True</code> or <code>False</code></td>
         </tr>
         <tr>
@@ -271,11 +267,7 @@ Output:
             <td>N/A</td>
         </tr>
         <tr>
-            <td><b><code>CollectionSchema</code><b></td>
-        <td>Schema of the collection to create. Refer to <a href="schema.md">Schema</a> for more information.</td>
-        <td>N/A</td>
-        </tr>
-        <tr>
+            <td rowspan="4"><code>CollectionSchema</code></td>
             <td><code>fields</code></td>
             <td>Fields of the collection to create.</td>
             <td>N/A</td>
@@ -286,10 +278,10 @@ Output:
             <td>N/A</td>
         </tr>
         <tr>
-	    <td><code>enable_dynamic_field</code></td>
-	    <td>Whether to enable dynamic schema or not</td>
-	    <td>Data type: Boolean (<code>true</code> or <code>false</code>).<br/>Optional, defaults to <code>False</code>.<br/>For details on dynamic schema, refer to <a herf="dynamic_schema.md">Dynamic Schema</a> and the user guides for managing collections.</td>
-	    </tr>
+            <td><code>enable_dynamic_field</code></td>
+            <td>Whether to enable dynamic schema or not</td>
+            <td>Data type: Boolean (<code>true</code> or <code>false</code>).<br/>Optional, defaults to <code>False</code>.<br/>For details on dynamic schema, refer to <a herf="dynamic_schema.md">Dynamic Schema</a> and the user guides for managing collections.</td>
+            </tr>
         <tr>
             <td><code>collection_name</code></td>
             <td>Name of the collection to create.</td>
@@ -301,6 +293,7 @@ Output:
 <table class="language-go">
 	<thead>
         <tr>
+            <th>Type</th>
             <th>Parameter</th>
             <th>Description</th>
             <th>Option</th>
@@ -308,14 +301,20 @@ Output:
 	</thead>
 	<tbody>
         <tr>
-            <td><code>collectionName</code></td>
+            <td rowspan="5"><code>entity.Schema</code></td>
+            <td><code>CollectionName</code></td>
             <td>Name of the collection to create.</td>
             <td>N/A</td>
         </tr>
         <tr>
-            <td><code>description</code></td>
+            <td><code>Description</code></td>
             <td>Description of the collection to create.</td>
             <td>N/A</td>
+        </tr>
+        <tr>
+            <td><code>AutoID</code></td>
+            <td>Switch to enable or disable Automatic ID (primary key) allocation.</td>
+            <td><code>True</code> or <code>False</code></td>
         </tr>
         <tr>
             <td><code>Fields</code></td>
@@ -323,8 +322,29 @@ Output:
             <td>N/A</td>
         </tr>
         <tr>
+            <td><code>EnableDynamicField</code></td>
+            <td>Whether to enable dynamic schema or not. For details on dynamic schema, refer to <a herf="dynamic_schema.md">Dynamic Schema</a> and the user guides for managing collections.</td>
+            <td>N/A</td>
+        </tr>
+        <tr>
+            <td rowspan="9"><code>entity.Field</code></td>
             <td><code>Name</code></td>
             <td>Name of the field to create.</td>
+            <td>N/A</td>
+        </tr>
+        <tr>
+            <td><code>PrimaryKey</code></td>
+            <td>Whether this field is the primary key. This is mandatory for the primary key.</td>
+            <td>N/A</td>
+        </tr>
+        <tr>
+            <td><code>AutoID</code></td>
+            <td>Whether this field value automatically increments. This is mandatory for the primary key.</td>
+            <td>N/A</td>
+        </tr>
+        <tr>
+            <td><code>Description</code></td>
+            <td>Description of the field.</td>
             <td>N/A</td>
         </tr>
         <tr>
@@ -354,19 +374,24 @@ Output:
             </td>
         </tr>
         <tr>
-            <td><code>PrimaryKey</code> (Mandatory for primary key field)</td>
-            <td>Switch to control if the field is primary key field.</td>
-            <td><code>True</code> or <code>False</code></td>
+            <td><code>TypeParams</code></td>
+            <td>A string mapping to set parameters for a specific data type.</td>
+            <td>N/A</td>
         </tr>
         <tr>
-            <td><code>AutoID</code> (Mandatory for primary key field)</td>
-            <td>Switch to enable or disable Automatic ID (primary key) allocation.</td>
-            <td><code>True</code> or <code>False</code></td>
+            <td><code>IndexParams</code></td>
+            <td>A string mapping to set parameters for the index of the collection.</td>
+            <td>N/A</td>
         </tr>
         <tr>
-            <td><code>dim</code> (Mandatory for vector field)</td>
-            <td>Dimension of the vector.</td>
-            <td>[1, 32768]</td>
+            <td><code>IsDynamic</code></td>
+            <td>Whether dynamic schema is enabled on this field.</td>
+            <td>N/A</td>
+        </tr>
+        <tr>
+            <td><code>IsPartitionKey</code></td>
+            <td>Whether this field acts as the partition key.</td>
+            <td>N/A</td>
         </tr>
 	</tbody>
 </table>
@@ -374,6 +399,7 @@ Output:
 <table class="language-javascript">
 	<thead>
         <tr>
+            <th>Interface</th>
             <th>Parameter</th>
             <th>Description</th>
             <th>Option</th>
@@ -381,9 +407,15 @@ Output:
 	</thead>
 	<tbody>
         <tr>
+            <td rowspan="8"><code>CreateCollectionReq</code></td>
             <td><code>collection_name</code></td>
             <td>Name of the collection to create.</td>
             <td>N/A</td>
+        </tr>
+        <tr>
+            <td><code>shards_num</code></td>
+            <td>Number of shards to create along with the collection.</td>
+            <td>[1, 16]</td>
         </tr>
         <tr>
             <td><code>description</code></td>
@@ -391,18 +423,65 @@ Output:
             <td>N/A</td>
         </tr>
         <tr>
+            <td><code>consistency_level</code></td>
+            <td>Consistency level of the collection. For details, refer to [Consistency Level](consistency_level.md)</td>
+            <td>Possible values are as follows:<ul>
+                <li><code>Strong</code></li>
+                <li><code>Session</code></li>
+                <li><code>Bounded</code></li>
+                <li><code>Eventually</code></li>
+                <li><code>Customized</code></li>
+            </td>
+        </tr>
+        <tr>
             <td><code>fields</code></td>
             <td>Schema of the field and the collection to create.</td>
             <td>Refer to <a href="schema.md">Schema</a> for more information.</td>
         </tr>
         <tr>
-            <td><code>data_type</code></td>
+            <td><code>num_partitions</code></td>
+            <td>Number of parititions to create along within the collection.</td>
+            <td>[1, 4096]</td>
+        </tr>
+        <tr>
+            <td><code>partition_key_field</code></td>
+            <td>Name of the field that is designed to act as the partiion key. For details, refer to [Use Partition Key](partition_key.md)</td>
+            <td>N/A</td>
+        </tr>
+        <tr>
+            <td><code>enable_dynamic_field</code> | <code>enableDynamicField</code></td>
+            <td>Whether to enable dynamic schema for this collection.</td>
+            <td>N/A</td>
+        </tr>
+        <tr>
+            <td rowspan="10"><code>FieldType</code></td>
+            <td><code>name</code></td>
+            <td>Name of the field.</td>
+            <td>N/A</td>
+        </tr>
+        <tr>
+            <td><code>description</code></td>
+            <td>Description of the field.</td>
+            <td>N/A</td>
+        </tr>
+        <tr>
+            <td><code>data_type</code> | <code>DataType</code></td>
             <td>Data type of the filed to create.</td>
             <td>Refer to <a href="https://github.com/milvus-io/milvus-sdk-node/blob/main/milvus/const/Milvus.ts#L287">data type reference number</a> for more information.</td>
         </tr>
         <tr>
-            <td><code>is_primary_key</code> (Mandatory for primary key field)</td>
-            <td>Switch to control if the field is primary key field.</td>
+            <td><code>is_primary_key</code></td>
+            <td>Switch to control if the field is primary key field. This is mandatory for the parimary key.</td>
+            <td><code>true</code> or <code>false</code></td>
+        </tr>
+        <tr>
+            <td><code>is_partition_key</code></td>
+            <td>Switch to control if the field acts as the partition key.</td>
+            <td><code>true</code> or <code>false</code></td>
+        </tr>
+        <tr>
+            <td><code>is_dynamic</code></td>
+            <td>Switch to control if the field is a dynamic field.</td>
             <td><code>true</code> or <code>false</code></td>
         </tr>
         <tr>
@@ -411,18 +490,18 @@ Output:
             <td><code>true</code> or <code>false</code></td>
         </tr>
         <tr>
-            <td><code>dim</code> (Mandatory for vector field)</td>
-            <td>Dimension of the vector.</td>
+            <td><code>dim</code></td>
+            <td>Dimension of the vector. This is mandatory for a vector field.</td>
             <td>[1, 32768]</td>
         </tr>
         <tr>
-            <td><code>max_length</code> (Mandatory for VarChar field)</td>
-            <td>Dimension of the vector.</td>
+            <td><code>max_length</code></td>
+            <td>Dimension of the vector. This is mandatory for a string field.</td>
             <td>[1, 32768]</td>
         </tr>
         <tr>
-            <td><code>description</code> (Optional)</td>
-            <td>Description of the field.</td>
+            <td><code>default_value</code> (Optional)</td>
+            <td>Default value that applies if not specified.</td>
             <td>N/A</td>
         </tr>
 	</tbody>
@@ -431,6 +510,7 @@ Output:
 <table class="language-java">
 	<thead>
         <tr>
+            <th>Class</th>
             <th>Parameter</th>
             <th>Description</th>
             <th>Option</th>
@@ -438,75 +518,106 @@ Output:
 	</thead>
 	<tbody>
         <tr>
-            <td><code>Name</code></td>
-            <td>Name of the field to create.</td>
-            <td>N/A</td>
-        </tr>
-        <tr>
-            <td><code>Description</code></td>
-            <td>Description of the field to create.</td>
-            <td>N/A</td>
-        </tr>
-        <tr>
-            <td><code>DataType</code></td>
-            <td>Data type of the field to create.</td>
-            <td>For primary key field:
-                <ul>
-                    <li><code>entity.FieldTypeInt64</code> (numpy.int64)</li>
-                    <li><code>entity.FieldTypeVarChar</code> (VARCHAR)</li>
-                </ul>
-                For scalar field:
-                <ul>
-                    <li><code>entity.FieldTypeBool</code> (Boolean)</li>
-                    <li><code>entity.FieldTypeInt8</code> (numpy.int8)</li>
-                    <li><code>entity.FieldTypeInt16</code> (numpy.int16)</li>
-                    <li><code>entity.FieldTypeInt32</code> (numpy.int32)</li>
-                    <li><code>entity.FieldTypeInt64</code> (numpy.int64)</li>
-                    <li><code>entity.FieldTypeFloat</code> (numpy.float32)</li>
-                    <li><code>entity.FieldTypeDouble</code> (numpy.double)</li>
-                    <li><code>entity.FieldTypeVarChar</code> (VARCHAR)</li>
-                </ul>
-                For vector field:
-                <ul>
-                    <li><code>entity.FieldTypeBinaryVector</code> (Binary vector)</li>
-                    <li><code>entity.FieldTypeFloatVector</code> (Float vector)</li>
-                </ul>
-            </td>
-        </tr>
-        <tr>
-            <td><code>PrimaryKey</code> (Mandatory for primary key field)</td>
-            <td>Switch to control if the field is primary key field.</td>
-            <td><code>True</code> or <code>False</code></td>
-        </tr>
-        <tr>
-            <td><code>AutoID</code></td>
-            <td>Switch to enable or disable Automatic ID (primary key) allocation.</td>
-            <td><code>True</code> or <code>False</code></td>
-        </tr>
-        <tr>
-            <td><code>Dimension</code> (Mandatory for vector field)</td>
-            <td>Dimension of the vector.</td>
-            <td>[1, 32768]</td>
-        </tr>
-        <tr>
-            <td><code>CollectionName</code></td>
+            <td rowspan="8"><code>CreateCollectionSchema.newBuilder()</code></td>
+            <td><code>withCollectionName(String collectionName)</code></td>
             <td>Name of the collection to create.</td>
             <td>N/A</td>
         </tr>
         <tr>
-            <td><code>Description</code> (Optional)</td>
-            <td>Description of the collection to create.</td>
+            <td><code>withDatabaseName(String databaseName)</code></td>
+            <td>Name of the database in which the collection is to create.</td>
             <td>N/A</td>
         </tr>
         <tr>
-            <td><code>ShardsNum</code></td>
-            <td>Number of the shards for the collection to create.</td>
-            <td>[1,16]</td>
+            <td><code>withShardsNum(int shardsNum)</code></td>
+            <td>Number of shards to create along with the collection.</td>
+            <td>[1, 16]</td>
         </tr>
         <tr>
-            <td><code>PartitionsNum</code></td>
-            <td>Number of the logical partitions for the collection to create.</td>
-            <td>[1,4096]</td>
+            <td><code>withEnableDynamicField(boolean enableDynamicField)</code></td>
+            <td>Whether to enable dynamic field for this collection.</td>
+            <td>N/A</td>
+        </tr>
+        <tr>
+            <td><code>withDescription(boolean description)</code></td>
+            <td>Description of this collection.</td>
+            <td>N/A</td>
+        </tr>
+        <tr>
+            <td><code>withFieldTypes(List<FieldType> fieldType)</code></td>
+            <td>Fields in this collection</td>
+            <td>N/A</td>
+        </tr>
+        <tr>
+            <td><code>withConsistencyLevel(ConsistencyLevelEnum consistencyLevel)</code></td>
+            <td>Description of this collection.</td>
+            <td>Possible values are as follows: <ul>
+                <li><code>STRONG</code></li>
+                <li><code>BOUNDED</code></li>
+                <li><code>EVENTUALLY</code></li>
+            </td>
+        </tr>
+        <tr>
+            <td><code>withPartitionsNum(int partitionsNum)</code></td>
+            <td>Number of partitions to create in this collection.</td>
+            <td>[1, 4096]</td>
+        </tr>
+        <tr>
+            <td><code>FieldType.newBuilder()</code></td>
+            <td><code>withName(String name)</code></td>
+            <td>Name of the field to create.</td>
+            <td>N/A</td>
+        </tr>
+        <tr>
+            <td><code>withIsDynamic(boolean isDynamic)</code></td>
+            <td>Whether this field is a dynamic field.</td>
+            <td>N/A</td>
+        </tr>
+        <tr>
+            <td><code>withPrimaryKey(boolean primaryKey)</code></td>
+            <td>Whether this field is the primary key.</td>
+            <td>N/A</td>
+        </tr>
+        <tr>
+            <td><code>withDescription(String description)</code></td>
+            <td>Description of this field.</td>
+            <td>N/A</td>
+        </tr>
+        <tr>
+            <td><code>withDataType(DataType datatype)</code></td>
+            <td>Data type of the field to create.</td>
+            <td>For primary key field:
+                <ul>
+                    <li><code>DataType.Int64</code> (numpy.int64)</li>
+                    <li><code>DataType.VarChar</code> (VARCHAR)</li>
+                </ul>
+                For scalar field:
+                <ul>
+                    <li><code>DataType.Bool</code> (Boolean)</li>
+                    <li><code>DataType.Int8</code> (numpy.int8)</li>
+                    <li><code>DataType.Int16</code> (numpy.int16)</li>
+                    <li><code>DataType.Int32</code> (numpy.int32)</li>
+                    <li><code>DataType.Int64</code> (numpy.int64)</li>
+                    <li><code>DataType.Float</code> (numpy.float32)</li>
+                    <li><code>DataType.Double</code> (numpy.double)</li>
+                    <li><code>DataType.VarChar</code> (VARCHAR)</li>
+                </ul>
+                For vector field:
+                <ul>
+                    <li><code>DataType.BinaryVector</code> (Binary vector)</li>
+                    <li><code>DataType.FloatVector</code> (Float vector)</li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td><code>withAutoID(boolean autoId)</code></td>
+            <td>Switch to enable or disable Automatic ID (primary key) allocation.</td>
+            <td><code>True</code> or <code>False</code></td>
+        </tr>
+        <tr>
+            <td><code>withDimension(int dimension)</code> (Mandatory for vector field)</td>
+            <td>Dimension of the vector.</td>
+            <td>[1, 32768]</td>
         </tr>
 	</tbody>
 </table>
