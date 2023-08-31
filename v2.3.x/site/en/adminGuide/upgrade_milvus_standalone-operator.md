@@ -95,9 +95,9 @@ Compose a configuration file as follows and save it as **milvusupgrade.yaml**:
 apiVersion: milvus.io/v1beta1
 kind: Milvus
 metadata:
-name: my-release
+    name: my-release
 labels:
-app: milvus
+    app: milvus
 spec:
   # Omit other fields ...
   components:
