@@ -302,11 +302,10 @@ Output:
   <tr>
         <td><code>SEARCH_PARAM</code></td>
         <td>Search parameter(s) specific to the index.</td>
-    <td>See <a href="index.md">Vector Index</a> for more information. Possible options are as follows:<ul>
+        <td>See <a href="index.md">Vector Index</a> for more information. Possible options are as follows:<ul>
         <li><code>nprobe</code> Indicates the number of cluster units to search. This parameter is available only when <code>index_type</code> is set to <code>IVF_FLAT</code>, <code>IVF_SQ8</code>, or <code>IVF_PQ</code>. The value should be less than <code>nlist</code> specified for the index-building process.</li>
         <li><code>ef</code> Indicates the search scope. This parameter is available only when <code>index_type</code> is set to <code>HNSW</code>. The value should be within the range from <code>top_k</code> to <code>32768</code>.</li>
         <li><code>metric_type</code> Indicates the metric type used in the search. It should be the same as the one specified when you index the collection.</li>
-        <li><code>limit</code> Indicates the number of entities to return starting from the last skippped entity.</li>
         <li><code>offset</code> Indicates the number of entities to skip during the search. The sum of this parameter and <code>topK</code> of the <code>withTopK()</code> method should be less than <code>16384</code>.</li>
     </ul></td>
     </tr>
