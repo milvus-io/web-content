@@ -36,6 +36,10 @@ Methods of `ConnectParam.Builder`:
 | `secure(boolean enable) withSecure(boolean enable)`          | Enables security for the client channel.                     | `enable`: Security is enabled if the value is set to `true`. |
 | `withIdleTimeout(long idleTimeout, TimeUnit timeUnit)`       | Sets the value of idle timeout of the client channel. The timeout value must be greater than zero. | `idleTimeout`: The idle timeout period of the client channel. `timeUnit`: The unit of timeout. |
 | `withAuthorization(String username, String password)`        | Sets the username and password for this connection.          | <li><code>username</code>: The username of the current user.</li><li><code>password</code>: The password corresponding to the username.</li> |
+| `withClientKeyPath(String clientKeyPath)` | Sets the path to the client key file for two-way authentication. This method applies only if the `secure` method is `True`  | `clientKeyPath`: Path to the client key file. |
+| `withClientPemPath(String clientPemPath)` | Sets the path to the client PEM file for two-way authentication. This method applies only if the `secure` method is `True`  | `clientPemPath`: Path to the client PEM file. |
+| `withCaPemPath(String caPemPath)` | Sets the path to the CA PEM file for two-way authentication. This method applies only if the `secure` method is `True`  | `caPemPath`: Path to the CA PEM file. |
+| `withServerPemPath(String serverPemPath)` | Sets the path to the server PEM file for two-way authentication. This method applies only if the `secure` method is `True`  | `serverPemPath`: Path to the server PEM file. |
 | `build()`                                                    | Constructs a `ConnectParam` object.                          | N/A                                                          |
 
 The `ConnectParam.Builder.build()` can throw the following exceptions:
