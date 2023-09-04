@@ -29,6 +29,7 @@ Methods of `ConnectParam.Builder`:
 | Method                                                       | Description                                                  | Patameters                                                   |
 | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | `withHost(String host)`                                      | Sets the host name or address.                               | `host`: The name or address of the host.                     |
+| `withDatabaseName(String databaseName)`                      | Sets the name of the database to use for the connection. |     `databaseName`: The name of the target database to connect. |
 | `withPort(int port)`                                         | Sets the connection port. The value must be greater than zero and less than 65536. | `port`: The connection port.                                 |
 | `withConnectTimeout(long connectTimeout, TimeUnit timeUnit)` | Sets the connection timeout value of client channel. The timeout value must be greater than zero. | `connectTimeout`: The connection timeout period. timeUnit: The unit of timeout. |
 | `withKeepAliveTime(long keepAliveTime, TimeUnit timeUnit)`   | Sets the keep-alive timeout value of the client channel. The timeout value must be greater than zero. | <li><code>keepAliveTime</code>: The keep-alive timeout period.</li><li><code>timeUnit</code>: The unit of timeout.</li> |
