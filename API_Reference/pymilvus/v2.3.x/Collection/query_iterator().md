@@ -14,7 +14,7 @@ query_iterator(expr, output_fields, limit, consistency_level)
 | --- | --- | --- | --- |
 | `expr` | 	Boolean expression to filter the data. | String | True |
 | `output_fields` | Name of the field to return. | list[String] | False |
-| `limit` | Number of results to return per page. | Integer | True |
+| `limit` | Number of results to return. | Integer | True |
 | `consistency_level` | Consistency level used in the search. Find more expression details in [query()](query().md). | String/Integer | False |
 
 ## Return
