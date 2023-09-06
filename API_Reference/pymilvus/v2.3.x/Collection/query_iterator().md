@@ -14,9 +14,9 @@ query_iterator(expr, output_fields, limit, consistency_level)
 | --- | --- | --- | --- |
 | `batch_size` | Number of results to return per page. The value defaults to 1000. | Integer | False |
 | `limit` | Number of results to return. If not specified, no limit applies. | Integer | False |
-| `expr` | 	Boolean expression to filter the data. | String | False |
+| `expr` | 	Boolean expression to filter the data. Find more expression details in [query()](query().md). | String | False |
 | `output_fields` | Name of the field to return. | list[String] | False |
-| `consistency_level` | Consistency level used in the search. Find more expression details in [query()](query().md). | String/Integer | False |
+| `consistency_level` | Consistency level used in the search. | String/Integer | False |
 
 ## Return
 
