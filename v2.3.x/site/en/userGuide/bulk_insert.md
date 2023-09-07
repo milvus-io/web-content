@@ -119,7 +119,7 @@ Using the local hard disk for storage is only available in Milvus Standalone.
 
 ### 2. Insert entities
 
-To facilitate data import from files, Milvus offers a bulk-insert API in various flavors. In PyMilvus, you can use the [`do_bulk_insert()`](https://milvus.io/api-reference/pymilvus/v2.2.2/Utility/do_bulk_insert().md) method. As to the Java SDK, use the [`bulkInsert`](https://milvus.io/api-reference/java/v2.2.3/BulkInsert/bulkInsert().md) method.
+To facilitate data import from files, Milvus offers a bulk-insert API in various flavors. In PyMilvus, you can use the [`do_bulk_insert()`](https://milvus.io/api-reference/pymilvus/v2.3.x/Utility/do_bulk_insert().md) method. As to the Java SDK, use the [`bulkInsert`](https://milvus.io/api-reference/java/v2.3.x/BulkInsert/bulkInsert().md) method.
 
 In this method, you need to set the name of the target collection as **collection_name** and the list of files [prepared in the previous step](#Prepare-the-data-file) as **files**. Optionally, you can specify the name of a specific partition as **partition_name** in the target collection so that Milvus imports the data from the files listed only into this partition.
 
