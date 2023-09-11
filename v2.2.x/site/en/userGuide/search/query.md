@@ -60,6 +60,8 @@ milvusClient.loadCollection(
 load -c book
 ```
 
+</div>
+
 ```curl
 # See the following step.
 ```

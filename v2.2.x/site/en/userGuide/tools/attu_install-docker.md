@@ -7,7 +7,7 @@ related_key: attu
 summary: Learn how to install Attu with Docker Compose to manage your Milvus service.
 ---
 
-<div class="tab-wrapper"><a href="attu_install-docker.md" class='active '>Install with Docker Compose</a></div>
+<div class="tab-wrapper"><a href="attu_install-docker.md" class='active '>Install with Docker Compose</a><a href="attu_install-helm.md" class=''>Install with Helm Chart</a><a href="attu_install-package.md" class=''>Install with Package</a></div>
 
 # Install Attu with Docker
 
