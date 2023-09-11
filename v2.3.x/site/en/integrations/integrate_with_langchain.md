@@ -67,7 +67,7 @@ Once the documents are ready, we need to convert them into vector embeddings and
 
 ```python
 # Set up an embedding model to covert document chunks into vector embeddings.
-embeddings = OpenAIEmbeddings(model="ada")
+embeddings = OpenAIEmbeddings()
 
 # Set up a vector store used to save the vector embeddings. Here we use Milvus as the vector store.
 vector_store = Milvus.from_documents(
