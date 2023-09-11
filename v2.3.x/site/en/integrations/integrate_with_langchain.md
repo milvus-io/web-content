@@ -66,7 +66,7 @@ Created a chunk of size 1278, which is longer than the specified 1024
 Once the documents are ready, we need to convert them into vector embeddings and save them into the vector store.
 
 ```python
-# Set up an embedding model to covert document chunks into vector embeddings.
+# Set up an embedding model to convert document chunks into vector embeddings.
 embeddings = OpenAIEmbeddings()
 
 # Set up a vector store used to save the vector embeddings. Here we use Milvus as the vector store.

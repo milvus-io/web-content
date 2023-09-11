@@ -31,7 +31,7 @@ Here we can find the parameters used in the following snippets. Some of them nee
 ```python
 DATASET = 'squad'  # Huggingface Dataset to use
 MODEL = 'bert-base-uncased'  # Transformer to use for embeddings
-TOKENIZATION_BATCH_SIZE = 1000  # Batch size for tokenizing operaiton
+TOKENIZATION_BATCH_SIZE = 1000  # Batch size for tokenizing operation
 INFERENCE_BATCH_SIZE = 64  # batch size for transformer
 INSERT_RATIO = .001  # How many titles to embed and insert
 COLLECTION_NAME = 'huggingface_db'  # Collection name

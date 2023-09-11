@@ -130,7 +130,7 @@ Current Milvus release does not support Apple M1 CPU.
 
 #### What data types does Milvus support on the primary key field?
 
-In current release, Milvus support both INT64 and string.
+In current release, Milvus supports both INT64 and string.
 
 #### Is Milvus scalable?
 
@@ -152,7 +152,7 @@ Data in MinIO is designed to remain for a certain period of time for the conveni
 
 Yes. Kafka is supported in Milvus 2.1.0.
 
-#### What's the diference between a search and a query?
+#### What's the difference between a search and a query?
 
 In Milvus, a vector similarity search retrieves vectors based on similarity calculation and vector index acceleration. Unlike a vector similarity search, a vector query retrieves vectors via scalar filtering based on a boolean expression. The boolean expression filters on scalar fields or the primary key field, and it retrieves all results that match the filters. In a query, neither similarity metrics nor vector index is involved.
 

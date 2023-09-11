@@ -118,12 +118,12 @@ In this example, the data includes the original question, the original question'
 # Set up a co:here client.
 cohere_client = cohere.Client(COHERE_API_KEY)
 
-# Extract embedings from questions using Cohere
+# Extract embeddings from questions using Cohere
 def embed(texts):
     res = cohere_client.embed(texts, model='multilingual-22-12')
     return res.embeddings
 
-# Insert each question, answer, and qustion embedding
+# Insert each question, answer, and question embedding
 total = pandas.DataFrame()
 for batch in tqdm(np.array_split(simplified_records, (COUNT/BATCH_SIZE) + 1)):
     questions = batch['question'].tolist()
@@ -162,7 +162,7 @@ def search(text, top_k = 5):
 
     results = collection.search(
         data = embed([text]),  # Embeded the question
-        anns_field="original_question_embedding",  # Search across the original original question embeddings
+        anns_field="original_question_embedding",  # Search across the original question embeddings
         param=search_params,
         limit = top_k,  # Limit to top_k results per search
         output_fields=['original_question', 'answer']  # Include the original question and answer in the result
