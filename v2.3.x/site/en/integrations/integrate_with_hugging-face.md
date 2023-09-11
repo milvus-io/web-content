@@ -38,7 +38,7 @@ COLLECTION_NAME = 'huggingface_db'  # Collection name
 DIMENSION = 768  # Embeddings size
 LIMIT = 10  # How many results to search for
 MILVUS_HOST = "localhost"
-MIVLUS_PORT = "19530"
+MILVUS_PORT = "19530"
 ```
 
 To know more about the model and dataset used on this page, refer to [bert-base-uncased](https://huggingface.co/bert-base-uncased) and [squad](https://huggingface.co/datasets/squad).
