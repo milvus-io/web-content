@@ -191,7 +191,9 @@ Similar to IVF_FLAT, GPU_IVF_FLAT also divides vector data into `nlist` cluster 
 
 By adjusting `nprobe`, an ideal balance between accuracy and speed can be found for a given scenario. Results from the [IVF_FLAT performance test](https://zilliz.com/blog/Accelerating-Similarity-Search-on-Really-Big-Data-with-Vector-Indexing) demonstrate that query time increases sharply as both the number of target input vectors (`nq`), and the number of clusters to search (`nprobe`), increase.
 
-IVF_FLAT is the most basic IVF index, and the encoded data stored in each unit is consistent with the original data.
+GPU_IVF_FLAT is the most basic IVF index, and the encoded data stored in each unit is consistent with the original data.
+
+When conducting searches, note that you can set the top-K up to 256 for any search against a GPU_IVF_FLAT-indexed collection.
 
 - Index building parameters
 
@@ -204,6 +206,12 @@ IVF_FLAT is the most basic IVF index, and the encoded data stored in each unit i
   | Parameter | Description              | Range           | Default Value |
   | --------- | ------------------------ | --------------- | ------------- |
   | `nprobe`  | Number of units to query | [1, nlist]      | 8 |
+
+- Limits on search
+
+  | Parameter | Range  |
+  | --------- | ------ |
+  | `top-K`   | <= 256 |
 
 ### IVF_SQ8
 
