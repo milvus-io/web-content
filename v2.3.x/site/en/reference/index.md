@@ -297,21 +297,29 @@ IVF\_PQ performs IVF index clustering before quantizing the product of vectors. 
 
 Index building parameters and search parameters vary with Milvus distribution. Select your Milvus distribution first.
 
+When conducting searches, note that you can set the top-K up to 8192 for any search against a GPU_IVF_FLAT-indexed collection.
+
 </div>
 
 - Index building parameters
 
-  | Parameter | Description                               | Range               |
-  | --------- | ----------------------------------------- | ------------------- |
-  | `nlist`   | Number of cluster units                   | [1, 65536]          |
-  | `m`       | Number of factors of product quantization | `dim mod m == 0` |
-  | `nbits`   | [Optional] Number of bits in which each low-dimensional vector is stored. | [1, 16] (8 by default) |
+  | Parameter | Description                               | Range               | Default Value |
+  | --------- | ----------------------------------------- | ------------------- | ------------- |
+  | `nlist`   | Number of cluster units                   | [1, 65536]          | 128           |
+  | `m`       | Number of factors of product quantization | `dim mod m == 0`    | 4 |
+  | `nbits`   | [Optional] Number of bits in which each low-dimensional vector is stored. | [1, 16] | 8 |
 
 - Search parameters
 
-  | Parameter | Description              | Range      |
-  | --------- | ------------------------ | ---------- |
-  | `nprobe`  | Number of units to query | [1, nlist] |
+  | Parameter | Description              | Range      | Default Value |
+  | --------- | ------------------------ | ---------- | ------------- |
+  | `nprobe`  | Number of units to query | [1, nlist] | 8 |
+
+- Limits on search
+
+  | Parameter | Range   |
+  | --------- | ------- |
+  | `top-K`   | <= 8192 |
 
 ### HNSW
 
