@@ -16,7 +16,7 @@ You can use [Apache Maven](https://maven.apache.org/install.html) or [Gradle](ht
 
 - Apache Maven
 
-```
+```xml
  <dependency>
      <groupId>io.milvus</groupId>
      <artifactId>milvus-sdk-java</artifactId>
