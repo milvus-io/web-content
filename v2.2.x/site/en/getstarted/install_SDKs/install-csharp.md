@@ -21,7 +21,7 @@ The current version of Milvus supports SDKs in Python, Node.js, GO, Java, and C#
 Run the following command to install Milvus C# SDK.
 
 ```shell
-> dotnet add package Milvus.Client --version 2.2.2-preview.5
+dotnet add package Milvus.Client --version 2.2.2-preview.6
 ```
 
 ## What's next

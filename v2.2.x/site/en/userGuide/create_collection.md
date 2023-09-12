@@ -151,14 +151,6 @@ CreateCollectionParam createCollectionReq = CreateCollectionParam.newBuilder()
         .build();
 ```
 
-<div style="display: none">
-
-```shell
-create collection -c book -f book_id:INT64:book_id -f word_count:INT64:word_count -f book_intro:FLOAT_VECTOR:2 -p book_id
-```
-
-</div>
-
 ```curl
 curl -X 'POST' \
   '${MILVUS_HOST}:${MILVUS_PORT}/v1/vector/collections/create'' \
@@ -597,7 +589,7 @@ var schema = new CollectionSchema
     </thead>
     <tbody>
         <tr>
-            <td><code>CollectionSchema</code><td>
+            <td><code>CollectionSchema</code></td>
             <td>The logical definition of a collection, describing the fields which makes it up.</td>
             <td>Possible parameters: <ul>
                 <li><code>Fields</code>: A list of Fields derived from the <code>FieldSchema</code> class.</li>
@@ -606,7 +598,7 @@ var schema = new CollectionSchema
             </ul></td>
         </tr>
         <tr>
-            <td><code>FieldSchema</code><td>
+            <td><code>FieldSchema</code></td>
             <td>The logical definition of a collection, describing the fields which makes it up.</td>
             <td>Possible methods: <ul>
                 <li><code>Create(string name, MilvusDataType dataType, bool isPrimaryKey, bool autoId, bool isPartitionKey, string description)</code></li>
