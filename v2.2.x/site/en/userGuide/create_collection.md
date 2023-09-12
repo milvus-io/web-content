@@ -25,6 +25,7 @@ First, prepare necessary parameters, including field schema, collection schema, 
   <a href="#java">Java</a>
   <a href="#go">GO</a>
   <a href="#javascript">Node.js</a>
+  <a href="#csharp">C#</a>
   <a href="#curl">Curl</a>
 </div>
 
@@ -182,6 +183,21 @@ Output:
     "code": 200,
     "data": {}
 }
+```
+
+```csharp
+var schema = new CollectionSchema
+{
+    Fields =
+    {
+        FieldSchema.Create<long>("book_id", isPrimaryKey: true),
+        FieldSchema.CreateVarchar("book_name", maxLength: 200),
+        FieldSchema.Create<long>("word_count"),
+        FieldSchema.CreateFloatVector("book_intro", dimension: 2)
+    },
+    Description = "Test book search",
+    EnableDynamicFields = true
+};
 ```
 
 </div>
@@ -571,6 +587,38 @@ Output:
     </tbody>
 </table>
 
+<table class="language-csharp">
+    <thead>
+        <tr>
+            <th>Class</th>
+            <th>Description</th>
+            <th>Option</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>CollectionSchema</code><td>
+            <td>The logical definition of a collection, describing the fields which makes it up.</td>
+            <td>Possible parameters: <ul>
+                <li><code>Fields</code>: A list of Fields derived from the <code>FieldSchema</code> class.</li>
+                <li><code>Description</code>: (Optional) Description of the collection schema.</li>
+                <li><code>EnableDynamicFields</code>: (Optional) Whether to enable dynamic fields.</li>
+            </ul></td>
+        </tr>
+        <tr>
+            <td><code>FieldSchema</code><td>
+            <td>The logical definition of a collection, describing the fields which makes it up.</td>
+            <td>Possible methods: <ul>
+                <li><code>Create(string name, MilvusDataType dataType, bool isPrimaryKey, bool autoId, bool isPartitionKey, string description)</code></li>
+                <li><code>Create<TData>(string name, bool isPrimaryKey, bool autoId, bool isPartitionKey, string description)</code></li>
+                <li><code>CreateVarchar(string name, int maxLength, bool isPrimaryKey, bool autoId, bool isPartitionKey, string description)</code></li>
+                <li><code>CreateFloatVector(string name, int dimension, string description)</code></li>
+                <li><code>CreateBinaryVector(string name, int dimension, string description)</code></li>
+                <li><code>CreateJson(string name)</code></li>
+            </ul></td>
+        </tr>
+    </tbody>
+</table>
 ## Create a collection with the schema
 
 Then, create a collection with the schema you specified above.
@@ -580,6 +628,8 @@ Then, create a collection with the schema you specified above.
   <a href="#java">Java</a>
   <a href="#go">GO</a>
   <a href="#javascript">Node.js</a>
+  <a href="#csharp">C#</a>
+  <a href="#curl">Curl</a>
 </div>
 
 ```python
@@ -593,7 +643,7 @@ collection = Collection(
 ```
 
 ```javascript
-await milvusClient.createCollection(params);
+await milvusClient.createCollection(param);
 ```
 
 ```go
@@ -609,6 +659,26 @@ if err != nil {
 
 ```java
 milvusClient.createCollection(createCollectionReq);
+```
+
+```csharp
+var collection = await milvusClient.CreateCollectionAsync(collectionName, schema, shardsNum: 2);
+```
+
+```curl
+curl --request POST \
+     --url "${MILVUS_HOST}:${MILVUS_PORT}/v1/vector/collections/create" \
+     --header "Authorization: Bearer ${TOKEN}" \
+     --header "accept: application/json" \
+     --header "content-type: application/json" \
+     -d '{
+       "dbName": "default",   
+       "collectionName": "medium_articles",
+       "dimension": 256,
+       "metricType": "L2",
+       "primaryField": "id",
+       "vectorField": "vector"
+      }'
 ```
 
 <table class="language-python">
@@ -661,6 +731,45 @@ milvusClient.createCollection(createCollectionReq);
             <td><code>shardNum</code></td>
             <td>Number of the shards for the collection to create.</td>
             <td>[1,16]</td>
+        </tr>
+    </tbody>
+</table>
+
+<table class="language-csharp">
+    <thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Option</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>collectionName</code></td>
+            <td>Name of the collection.</td>
+            <td>N/A</td>
+        </tr>
+        <tr>
+            <td><code>schema</code></td>
+            <td>Schema of the collection. Should be a <code>CollectionSchema</code> object.</td>
+            <td>N/A</td>
+        </tr>
+        <tr>
+            <td><code>consistencyLevel</code></td>
+            <td>Consistency Level of the collection.</td>
+            <td>Possible values are <ul>
+                <li><code>ConsistencyLevel.Strong</code></li>
+                <li><code>ConsistencyLevel.Session</code></li>
+                <li><code>ConsistencyLevel.BoundedStaleness</code></li>
+                <li><code>ConsistencyLevel.Eventually</code></li>
+                <li><code>ConsistencyLevel.Customized</code></li>
+            </ul></td>
+        </tr>
+        <tr></td>
+        <tr>
+            <td><code>shardsNum</code></td>
+            <td>Number of shards to create.</td>
+            <td>N/A</td>
         </tr>
     </tbody>
 </table>

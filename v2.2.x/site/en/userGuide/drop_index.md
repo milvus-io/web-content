@@ -15,8 +15,9 @@ Dropping an index irreversibly removes all corresponding index files.
 <div class="multipleCode">
   <a href="#python">Python </a>
   <a href="#java">Java</a>
-  <a href="#go">GO</a>
+  <a href="#go">Go</a>
   <a href="#javascript">Node.js</a>
+  <a href="#csharp">C#</a>
 </div>
 
 ```python
@@ -51,24 +52,9 @@ milvusClient.dropIndex(
 );
 ```
 
-<div style="display: none">
-
-```shell
-delete index -c book
+```csharp
+await milvusClient.GetCollection("book").DropIndexAsync("book_intro");
 ```
-
-```curl
-curl -X 'DELETE' \
-  'http://localhost:9091/api/v1/index' \
-  -H 'accept: application/json' \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "collection_name": "book",
-    "field_name": "book_intro"
-  }'
-```
-
-</div>
 
 <table class="language-javascript">
 	<thead>
@@ -127,22 +113,7 @@ curl -X 'DELETE' \
     </tbody>
 </table>
 
-<table class="language-shell" style="display: none">
-    <thead>
-        <tr>
-            <th>Option</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>-c</td>
-            <td>Name of the collection to drop index from.</td>
-        </tr>
-    </tbody>
-</table>
-
-<table class="language-curl" style="display: none">
+<table class="language-csharp">
 	<thead>
         <tr>
             <th>Parameter</th>
@@ -151,11 +122,11 @@ curl -X 'DELETE' \
 	</thead>
 	<tbody>
         <tr>
-            <td><code>collection_name</code></td>
+            <td><code>collectionName</code></td>
             <td>Name of the collection to drop index on.</td>
         </tr>
         <tr>
-            <td><code>field_name</code></td>
+            <td><code>fieldName</code></td>
             <td>Name of the vector field to drop index on.</td>
         </tr>
     </tbody>

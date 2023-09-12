@@ -25,6 +25,7 @@ Once you enable dynamic schema, you can append dynamic fields in the data. For d
   <a href="#java">Java</a>
   <a href="#go">GO</a>
   <a href="#javascript">Node.js</a>
+  <a href="#csharp">C#</a>
   <a href="#curl">Curl</a>
 </div>
 
@@ -84,13 +85,18 @@ for (long i = 0L; i < 2000; ++i) {
 }
 ```
 
-<div style="display: none">
+```csharp
+var bookIds = new long[2000];
+var wordCounts = new long[2000];
+var bookIntros = new ReadOnlyMemory<float>[2000];
 
-```shell
-# Prepare your data in a CSV file. Milvus CLI only supports importing data from local or remote files.
+for (var i = 0; i < 2000; i++)
+{
+    bookIds[i] = i;
+    wordCounts[i] = i + 10000;
+    bookIntros[i] = new[] { Random.Shared.NextSingle(), Random.Shared.NextSingle() };
+}
 ```
-
-</div>
 
 ```curl
 # See the following step.
@@ -107,10 +113,9 @@ By specifying `partition_name`, you can optionally decide to which partition to 
   <a href="#java">Java</a>
   <a href="#go">GO</a>
   <a href="#javascript">Node.js</a>
-  <a href="#shell">CLI</a>
+  <a href="#csharp">C#</a>
   <a href="#curl">Curl</a>
 </div>
-
 
 ```python
 from pymilvus import Collection
@@ -153,13 +158,14 @@ InsertParam insertParam = InsertParam.newBuilder()
 milvusClient.insert(insertParam);
 ```
 
-<div style="display: none">
-
-```shell
-import -c book 'https://raw.githubusercontent.com/milvus-io/milvus_cli/main/examples/user_guide/search.csv'
+```csharp
+await milvusClient.GetCollection("book").InsertAsync(new FieldData[]
+{
+    FieldData.Create("book_id", bookIds),
+    FieldData.Create("word_count", wordCounts),
+    FieldData.CreateFloatVector("book_intro", bookIntros)
+});
 ```
-
-</div>
 
 ```curl
 # insert an entity to a collection
@@ -320,21 +326,29 @@ Output:
 	</tbody>
 </table>
 
-<table class="language-shell" style="display: none">
+<table class="language-csharp">
     <thead>
         <tr>
-            <th>Option</th>
+            <th>Parameter</th>
             <th>Description</th>
+            <th>Option</th>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td>-c</td>
-            <td>Name of the collection to insert data into.</td>
+            <td><code>collectionName</code></td>
+            <td>The name of the collection to which entities will be inserted. You should get a collection and call its <code>InsertAsync</code> with the following parameters.</td>
+            <td>N/A</td>
         </tr>
         <tr>
-            <td>-p (Optional)</td>
+            <td><code>data</code></td>
+            <td>Data to insert into Milvus. Should be a list of <code>FieldData</code> object.</td>
+            <td>N/A</td>
+        </tr>
+        <tr>
+            <td><code>partitionName</code></td>
             <td>Name of the partition to insert data into.</td>
+            <td>N/A</td>
         </tr>
     </tbody>
 </table>

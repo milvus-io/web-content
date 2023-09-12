@@ -29,7 +29,7 @@ Run the following command to install Milvus C# SDK.
 Having installed Milvus Java SDK, you can:
 
 - Learn the basic operations of Milvus:
-  - [Manage Database](manage_database.md)
+  - [Manage Database](manage_databases.md)
   - [Connect to Milvus server](manage_connection.md)
   - [Create a collection](create_collection.md)
   - [Create a partition](create_partition.md)

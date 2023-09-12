@@ -20,6 +20,11 @@ To build an index on scalar fields, you do not need to set any index parameters.
 
 The following code snippet assumes that a collection named `book` already exists and an index is to be created on the string field `book_name`.
 
+<div class="multipleCode">
+  <a href="#python">Python </a>
+  <a href="#csharp">C#</a>
+</div>
+
 ```python
 from pymilvus import Collection
 
@@ -31,7 +36,18 @@ collection.create_index(
 collection.load()
 ```
 
+```csharp
+var collection = milvusClient.GetCollection("book");
+await collection.CreateIndexAsync("book_name", indexName: "scalar_index");
+await collection.LoadAsync();
+```
+
 Once the index has been created, you can include a boolean expression on this string field in a vector similarity search as follows:
+
+<div class="multipleCode">
+  <a href="#python">Python </a>
+  <a href="#csharp">C#</a>
+</div>
 
 ```python
 search_param = {
@@ -42,6 +58,10 @@ search_param = {
   "expr": "book_name like \"Hello%\"", 
 }
 res = collection.search(**search_param)
+```
+
+```csharp
+
 ```
 
 ## What's next

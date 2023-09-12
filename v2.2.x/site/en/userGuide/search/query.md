@@ -22,6 +22,7 @@ All search and query operations within Milvus are executed in memory. Load the c
   <a href="#java">Java</a>
   <a href="#go">GO</a>
   <a href="#javascript">Node.js</a>
+  <a href="#csharp">C#</a>
 </div>
 
 ```python
@@ -54,19 +55,10 @@ milvusClient.loadCollection(
     .build()
 );
 ```
-<div style="display: none;">
 
-```shell
-load -c book
+```csharp
+var collection = milvusClient.GetCollection("book").LoadAsync();
 ```
-
-</div>
-
-```curl
-# See the following step.
-```
-
-</div>
 
 ## Conduct a vector query
 
@@ -81,6 +73,7 @@ You can also use dynamic fields in the filter expression and output fields in th
   <a href="#java">Java</a>
   <a href="#go">GO</a>
   <a href="#javascript">Node.js</a>
+  <a href="#csharp">C#</a>
   <a href="#curl">Curl</a>
 </div>
 
@@ -137,23 +130,16 @@ QueryParam queryParam = QueryParam.newBuilder()
 R<QueryResults> respQuery = milvusClient.query(queryParam);
 ```
 
-<div style="display:none;">
-
-```shell
-query
-
-collection_name: book
-
-The query expression: book_id in [2,4,6,8]
-
-Name of partitions that contain entities(split by "," if multiple) []:
-
-A list of fields to return(split by "," if multiple) []: book_id, book_intro
-
-timeout []:
+```csharp
+var results = await Client.GetCollection("book").QueryAsync(
+    expression: "book_id in [2,4,6,8]",
+    new QueryParameters
+    {
+        Offset = 0,
+        Limit = 10,
+        OutputFields = { "book_id", "book_intro" }
+    });
 ```
-
-</div>
 
 ```curl
 curl --request POST \
@@ -336,19 +322,25 @@ Output:
     </tbody>
 </table>
 
-<table class="language-shell" style="display: none;">
+<table class="language-csharp">
     <thead>
         <tr>
-            <th>Option</th>
-            <th>Full name</th>
+            <th>Parameter</th>
             <th>Description</th>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td>--help</td>
-            <td>n/a</td>
-            <td>Displays help for using the command.</td>
+            <td>expression</td>
+            <td>Boolean expression used to filter attribute. See <a href="boolean.md">Boolean Expression Rules</a> for more information.</td>
+        </tr>
+        <tr>
+            <td>parameters</td>
+            <td>Query parameters. Possible options are: <ul>
+                <li><code>OutputFields</code>: A dictionary of the fields in the search results.</li>
+                <li><code>Offset</code>: Number of records to skip before return. The sum of this value and <code>Limit</code> should be less than <code>16384</code>.</li>
+                <li><code>Limit</code>: Number of records to return. The sum of this value and <code>Offset</code> should be less than <code>16384</code>.</li>
+            </ul></td>
         </tr>
     </tbody>
 </table>

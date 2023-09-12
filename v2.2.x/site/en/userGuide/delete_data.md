@@ -34,6 +34,7 @@ The following example filters data with primary key values of `0` and `1`.
   <a href="#java">Java</a>
   <a href="#go">GO</a>
   <a href="#javascript">Node.js</a>
+  <a href="#csharp">C#</a>
   <a href="#curl">Curl</a>
 </div>
 
@@ -49,38 +50,17 @@ const expr = "book_id in [0,1]";
 private static final String DELETE_EXPR = "book_id in [0,1]";
 ```
 
-<div style="display: none">
-
-```shell
-delete entities -c book
-The expression to specify entities to be deleted： book_id in [0,1]
+```go
+pks := entity.NewColumnInt64("book_id", []int64{0, 1})
 ```
 
-</div>
+```csharp
+var expression = "book_id in [0,1]"; 
+```
 
 ```curl
 # See the following section.
 ```
-
-<table class="language-shell">
-    <thead>
-        <tr>
-            <th>Option</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>-c</td>
-            <td>The name of the collection.</td>
-        </tr>
-        <tr>
-            <td>-p (Optional)</td>
-            <td>The name of the partition that the entities belong to.</td>
-        </tr>
-    </tbody>
-</table>
-
 
 ## Delete entities
 
@@ -91,6 +71,7 @@ Delete the entities with the boolean expression you created. Milvus returns the 
   <a href="#java">Java</a>
   <a href="#go">GO</a>
   <a href="#javascript">Node.js</a>
+  <a href="#csharp">C#</a>
   <a href="#curl">Curl</a>
 </div>
 
@@ -108,7 +89,7 @@ await milvusClient.deleteEntities({
 ```
 
 ```go
-// This function is under active development on the GO client.
+client.DeleteByPks("book", pks)
 ```
 
 ```java
@@ -120,14 +101,9 @@ milvusClient.delete(
 );
 ```
 
-<div style="display: none">
-
-```shell
-You are trying to delete the entities of collection. This action cannot be undone!
-Do you want to continue? [y/N]: y
+```csharp
+await milvusClient.GetCollection("book").DeleteAsync(expression);
 ```
-
-</div>
 
 ```curl
 curl -X 'DELETE' \
@@ -209,6 +185,52 @@ Output:
 	</tr>
     <tr>
 		<td><code>expr</code></td>
+		<td>Boolean expression that specifies the entities to delete.</td>
+	</tr>
+    <tr>
+		<td><code>PartitionName</code> (optional)</td>
+		<td>Name of the partition to delete entities from.</td>
+	</tr>
+	</tbody>
+</table>
+
+<table class="language-go">
+	<thead>
+	<tr>
+		<th>Parameter</th>
+		<th>Description</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td><code>collName</code></td>
+		<td>Name of the collection to delete entities from.</td>
+	</tr>
+    <tr>
+		<td><code>partitionName</code> (optional)</td>
+		<td>Name of the partition to delete entities from.</td>
+	</tr>
+    <tr>
+		<td><code>ids</code></td>
+		<td>A set of ids to delete.</td>
+	</tr>
+	</tbody>
+</table>
+
+<table class="language-csharp">
+	<thead>
+	<tr>
+		<th>Parameter</th>
+		<th>Description</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td><code>CollectionName</code></td>
+		<td>Name of the collection to delete entities from. You should get a collection and call its <code>InsertAsync</code> with the following parameters.</td>
+	</tr>
+    <tr>
+		<td><code>expression</code></td>
 		<td>Boolean expression that specifies the entities to delete.</td>
 	</tr>
     <tr>

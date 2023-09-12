@@ -15,8 +15,9 @@ Verify if a partition exists in the specified collection.
 <div class="multipleCode">
   <a href="#python">Python </a>
   <a href="#java">Java</a>
-  <a href="#go">GO</a>
+  <a href="#go">Go</a>
   <a href="#javascript">Node.js</a>
+  <a href="#csharp">C#</a>
 </div>
 
 ```python
@@ -56,33 +57,9 @@ if (respHasPartition.getData() == Boolean.TRUE) {
 }
 ```
 
-<div style="display: none">
-
-```shell
-describe partition -c book -p novel
+```csharp
+var exists = await milvusClient.GetCollection("book").HasPartitionAsync("novel");
 ```
-
-``` curl
-curl -X 'GET' \
-  'http://localhost:9091/api/v1/partition/existence' \
-  -H 'accept: application/json' \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "collection_name": "book",
-    "partition_name": "novel"
-  }'
-```
-
-<div class="language-curl">
-Output:
-
-```json
-{"status":{},"value":true}
-```
-
-</div>
-
-</div>
 
 
 <table class="language-python">
@@ -143,26 +120,7 @@ Output:
   </tbody>
 </table>
 
-<table class="language-shell" style="display: none">
-    <thead>
-        <tr>
-            <th>Option</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>-c</td>
-            <td>Name of the collection to check.</td>
-        </tr>
-        <tr>
-            <td>-p</td>
-            <td>Name of the partition to check.</td>
-        </tr>
-    </tbody>
-</table>
-
-<table class="language-curl" style="display: none">
+<table class="language-csharp">
 	<thead>
         <tr>
             <th>Parameter</th>
@@ -186,8 +144,9 @@ Output:
 <div class="multipleCode">
   <a href="#python">Python </a>
   <a href="#java">Java</a>
-  <a href="#go">GO</a>
+  <a href="#go">Go</a>
   <a href="#javascript">Node.js</a>
+  <a href="#csharp">C#</a>
 </div>
 
 ```python
@@ -222,49 +181,9 @@ R<ShowPartitionsResponse> respShowPartitions = milvusClient.showPartitions(
 System.out.println(respShowPartitions);
 ```
 
-<div style="display: none">
-
-```shell
-list partitions -c book
+```csharp
+var partitions = await milvusClient.GetCollection("book").ShowPartitionsAsync();
 ```
-
-``` curl
-curl -X 'GET' \
-  'http://localhost:9091/api/v1/partitions' \
-  -H 'accept: application/json' \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "collection_name": "book"
-  }'
-```
-
-<div class="language-curl">
-Output:
-
-```json
-{
-  "status": {},
-  "partition_names": [
-    "_default",
-    "novel"
-  ],
-  "partitionIDs": [
-    434261413928632322,
-    434261764795531265
-  ],
-  "created_timestamps": [
-    434261413928632323,
-    434261764795531266
-  ],
-  "created_utc_timestamps": [
-    1656575828280,
-    1656577166731
-  ]
-}
-```
-</div>
-
-</div>
 
 <table class="language-javascript">
 	<thead>
@@ -315,31 +234,16 @@ Output:
   </tbody>
 </table>
 
-<table class="language-shell" style="display: none">
+<table class="language-csharp">
     <thead>
         <tr>
-            <th>Option</th>
+            <th>Parameter</th>
             <th>Description</th>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td>-c</td>
-            <td>Name of the collection to check.</td>
-        </tr>
-    </tbody>
-</table>
-
-<table class="language-curl" style="display: none">
-    <thead>
-        <tr>
-            <th>Option</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>-c</td>
+            <td>collectionName</td>
             <td>Name of the collection to check.</td>
         </tr>
     </tbody>

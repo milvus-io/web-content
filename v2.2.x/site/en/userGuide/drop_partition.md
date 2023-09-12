@@ -15,13 +15,12 @@ This topic describes how to drop a partition in a specified collection.
   </ul>
 </div>
 
-
-
 <div class="multipleCode">
   <a href="#python">Python </a>
   <a href="#java">Java</a>
   <a href="#go">GO</a>
   <a href="#javascript">Node.js</a>
+  <a href="#csharp">C#</a>
 </div>
 
 ```python
@@ -56,24 +55,9 @@ milvusClient.dropPartition(
 );
 ```
 
-<div style="display: none">
-
-```shell
-delete partition -c book -p novel
+```csharp
+await milvusClient.GetCollection("book").DropPartitionsAsync("novel");
 ```
-
-```curl
-curl -X 'DELETE' \
-  'http://localhost:9091/api/v1/partition' \
-  -H 'accept: application/json' \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "collection_name": "book",
-    "partition_name": "novel"
-  }'
-```
-
-</div>
 
 <table class="language-python">
 	<thead>
@@ -152,26 +136,7 @@ curl -X 'DELETE' \
   </tbody>
 </table>
 
-<table class="language-shell" style="display: none">
-    <thead>
-        <tr>
-            <th>Option</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>-c</td>
-            <td>Name of the collection to drop partition from.</td>
-        </tr>
-        <tr>
-            <td>-p</td>
-            <td>Name of the partition to drop.</td>
-        </tr>
-    </tbody>
-</table>
-
-<table class="language-curl" style="display: none">
+<table class="language-csharp">
 	<thead>
         <tr>
             <th>Parameter</th>
@@ -180,11 +145,11 @@ curl -X 'DELETE' \
 	</thead>
 	<tbody>
         <tr>
-            <td><code>collection_name</code></td>
+            <td><code>collectionName</code></td>
             <td>Name of the collection to drop partition from.</td>
         </tr>
         <tr>
-            <td><code>partition_name</code></td>
+            <td><code>partitionName</code></td>
             <td>Name of the partition to drop.</td>
         </tr>
 	</tbody>
