@@ -168,6 +168,7 @@ curl -X 'POST' \
 ```
 
 <div class="language-curl">
+	
 Output:
 
 ```json
@@ -176,6 +177,8 @@ Output:
     "data": {}
 }
 ```
+
+</div>
 
 ```csharp
 var schema = new CollectionSchema
@@ -192,7 +195,7 @@ var schema = new CollectionSchema
 };
 ```
 
-</div>
+
 
 <table class="language-python">
 	<thead>
