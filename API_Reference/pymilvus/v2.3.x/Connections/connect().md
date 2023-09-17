@@ -16,7 +16,9 @@ connect(alias, **kwargs)
 | `kwargs`
 | `kwargs`: `host`     | IP address of the Milvus connection.| String          | True  |
 | `kwargs`: `port`     | Port of the Milvus connection.| Integer          | True  |
-| `kwargs`: `uri`  | Milvus instance endpoint, usually in the form of `<scheme>://<host>:<port>`. Possible examples are `http://localhost:19530`, `tcp:localhost:19530`, `https://localhost:19530`. | True |
+| `kwargs`: `uri`  | Milvus instance endpoint, usually in the form of `<scheme>://<host>:<port>`. Possible examples are `http://localhost:19530`, `tcp:localhost:19530`, `https://localhost:19530`. | String | False
+| `kwargs`: `user` | Username to connect to the Milvus server. | String | False | 
+| `kwargs`: `password` | Password of the user used to connect to the Milvus server. | String | False | 
 | `kwargs`: `secure` | Whether TLS/SSL is required to access the endpoint. | Integer | False | 
 
 ## Return
