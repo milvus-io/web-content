@@ -424,7 +424,7 @@ Output:
         </tr>
         <tr>
             <td><code>consistency_level</code></td>
-            <td>Consistency level of the collection. For details, refer to [Consistency Level](consistency_level.md)</td>
+            <td>Consistency level of the collection. For details, refer to [Consistency Level](consistency.md)</td>
             <td>Possible values are as follows:<ul>
                 <li><code>Strong</code></li>
                 <li><code>Session</code></li>

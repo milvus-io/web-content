@@ -130,5 +130,5 @@ Currently, you can change the following configuration items on the fly.
 
 ## What's next
 
-- Learn more about [System Configurations](system-configuration).
-- Learn how to configure Milvus installed using [Milvus Operator](configure-operator.md), [Helm charts](configure-helm), and [Docker](configure-docker).
+- Learn more about [System Configurations](system_configuration.md).
+- Learn how to configure Milvus installed using [Milvus Operator](configure_operator.md), [Helm charts](configure-helm.md), and [Docker](configure-docker.md).
