@@ -77,7 +77,7 @@ The IP distance between two embeddings are defined as follows:
 
 ![ip](../../../assets/IP_formula.png "Inner product.")
 
-IP is more useful if you are more interested in measuring the orientation but not the magnitude of the vectors.
+IP is more useful if you need to compare non-normalized data or when you care about magnitude and angle.
 
 <div class="alert note">
 
