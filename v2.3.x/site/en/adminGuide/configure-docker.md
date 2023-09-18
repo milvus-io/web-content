@@ -182,24 +182,29 @@ $ wget https://github.com/milvus-io/milvus/releases/download/v2.3.0/milvus-stand
 
 ## Modify the installation file
 
-In `docker-compose.yml`, add a `volumes` section under each Milvus component, i.e. root coord, data coord, data node, query coord, query node, index coord, index node, and proxy. 
+In `docker-compose.yml`, add a `volumes` section under each `milvus-standalone`.
 
 Map the local path to your `milvus.yaml` file onto the corresponding docker container paths to the configuration files `/milvus/configs/milvus.yaml` under all `volumes` sections.
 
 ```yaml
 ...
-proxy:
-    container_name: milvus-proxy
-    image: milvusdb/milvus:v2.3.0
-    command: ["milvus", "run", "proxy"]
+  standalone:
+    container_name: milvus-standalone
+    image: milvusdb/milvus:v2.2.13
+    command: ["milvus", "run", "standalone"]
     volumes:       # Add a volumes section.
       - /local/path/to/your/milvus.yaml:/milvus/configs/milvus.yaml   # Map the local path to the container path
     environment:
       ETCD_ENDPOINTS: etcd:2379
       MINIO_ADDRESS: minio:9000
-      PULSAR_ADDRESS: pulsar://pulsar:6650
+    volumes:
+      - ${DOCKER_VOLUME_DIRECTORY:-.}/volumes/milvus:/var/lib/milvus
     ports:
       - "19530:19530"
+      - "9091:9091"
+    depends_on:
+      - "etcd"
+      - "minio"
 ...
 ```
 
