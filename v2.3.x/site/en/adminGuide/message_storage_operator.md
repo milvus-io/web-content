@@ -31,10 +31,11 @@ The table below shows whether RocksMQ, NATS, Pulsar, and Kafka are supported in 
 
 There are also other limitations for specifying the message storage:
 - Only one message storage for one Milvus instance is supported. However we still have backward compatibility with multiple message storages set for one instance. The priority is as follows:
-  - standalone mode:  RocksMQ (default) > NATS > Pulsar > Kafka
+  - standalone mode:  RocksMQ (default) > Pulsar > Kafka
   - cluster mode: Pulsar (default) > Kafka
+  - Nats introduced in 2.3 do not participate in these priority rules for backward compatibility.
 - The message storage cannot be changed while the Milvus system is running. 
--  Only Kafka 2.x or 3.x verison is supported.
+- Only Kafka 2.x or 3.x verison is supported.
 
 ## Configure RocksMQ
 RocksMQ is the default message storage in Milvus standalone. 
