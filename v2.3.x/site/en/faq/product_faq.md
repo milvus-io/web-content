@@ -81,9 +81,7 @@ No. Milvus has varied behavior. Data must be loaded to memory before searching.
 
 #### Can indexes be created after inserting vectors?
 
-Yes. If `create_index()` is called, Milvus builds an index for subsequently inserted vectors. However, Milvus does not build an index until the newly inserted vectors fill an entire segment and the newly created index file is separate from the previous one.
-
-
+Yes. If an index has been built for a collection by `create_index()` before, Milvus will automatically build an index for subsequently inserted vectors. However, Milvus does not build an index until the newly inserted vectors fill an entire segment and the newly created index file is separate from the previous one.
 
 #### How are the FLAT and IVF_FLAT indexes different?
 

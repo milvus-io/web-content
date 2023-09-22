@@ -204,7 +204,7 @@ Output:
     </tr>
     <tr>
         <td><code>offset</code></td>
-        <td>Number of entities to skip during the search. The sum of this parameter and <code>limit</code> of the <code>search</code> method should be less than <code>16384</code>.</td>
+        <td>Number of entities to skip during the search. The sum of this value and <code>limit</code> of the <code>search</code> method should be less than <code>16384</code>. For example, if you want the 9th and 10th nearest neighbors to the query vector, set <code>limit</code> to <code>2</code> and <code>offset</code> to <code>8</code>.</td>
     </tr>
     <tr>
         <td><code>ignore_growing</code></td>
@@ -277,7 +277,7 @@ Output:
         <td>Options for ANN searches.</td>
         <td><ul>
             <li><code>Limit</code> Indicates the number of entities to return.</li>
-            <li><code>Offset</code> Indicates the number of entities to skip during the search. The sum of this parameter and <code>Limit</code> should be less than <code>16384</code>.</li>
+            <li><code>Offset</code> Indicates the number of entities to skip during the search. The sum of this parameter and <code>Limit</code> should be less than <code>16384</code>. For example, if you want the 9th and 10th nearest neighbors to the query vector, set <code>limit</code> to <code>2</code> and <code>offset</code> to <code>8</code>.</li>
             <li><code>ConsistencyLevel</code> Indicates the consistency level applied during the search.</li>
             <li><code>Ignore Growing</code> Indicates whether to ignore growing segments during similarity searches. The value defaults to <code>False</code>, indicating that searches involve growing segments. </li>
         </ul></td>
@@ -306,7 +306,8 @@ Output:
         <li><code>nprobe</code> Indicates the number of cluster units to search. This parameter is available only when <code>index_type</code> is set to <code>IVF_FLAT</code>, <code>IVF_SQ8</code>, or <code>IVF_PQ</code>. The value should be less than <code>nlist</code> specified for the index-building process.</li>
         <li><code>ef</code> Indicates the search scope. This parameter is available only when <code>index_type</code> is set to <code>HNSW</code>. The value should be within the range from <code>top_k</code> to <code>32768</code>.</li>
         <li><code>metric_type</code> Indicates the metric type used in the search. It should be the same as the one specified when you index the collection.</li>
-        <li><code>offset</code> Indicates the number of entities to skip during the search. The sum of this parameter and <code>topK</code> of the <code>withTopK()</code> method should be less than <code>16384</code>.</li>
+        <li><code>limit</code> Indicates the number of entities to return starting from the last skippped entity.</li>
+        <li><code>offset</code> Indicates the number of entities to skip during the search. The sum of this value and <code>topK</code> of the <code>withTopK()</code> method should be less than <code>16384</code>. For example, if you want the 9th and 10th nearest neighbors to the query vector, set <code>topK</code> to <code>2</code> and <code>offset</code> to <code>8</code>.</li>
     </ul></td>
     </tr>
     </tbody>
@@ -348,11 +349,11 @@ Output:
     </tr>
     <tr>
         <td><code>limit</code></td>
-        <td>The maximum number of entities to return.<br>The sum of this value of that of `offset` should be less than **1024**.<br>The value defaults to <code>100</code>.<br>The value ranges from <code>1</code> to <code>100</code></td>
+        <td>The maximum number of entities to return.<br>The sum of this parameter value and <code>offset</code> should be less than <code>1024</code>.<br>The value defaults to <code>100</code>.<br>The value ranges from <code>1</code> to <code>100</code></td>
     </tr>
     <tr>
         <td><code>offset</code></td>
-        <td>The number of entities to skip in the search results.<br>The sum of this value and that of `limit` should not be greater than <code>1024</code>.<br>The maximum value is <code>1024</code>.</td>
+        <td>The number of entities to skip in the search results.<br>The sum of this parameter value and <code>limit</code> should not be greater than <code>1024</code>.<br>The maximum value is <code>1024</code>. For example, if you want the 9th and 10th nearest neighbors to the query vector, set <code>limit</code> to <code>2</code> and <code>offset</code> to <code>8</code>.</td>
     </tr>
     <tr>
         <td><code>outputFields</code></td>
@@ -485,7 +486,7 @@ R<SearchResults> respSearch = milvusClient.search(searchParam);
     </tr>
     <tr>
         <td><code>limit</code></td>
-        <td>Number of the most similar results to return.  The sum of this value and <code>offset</code> in <code>param</code> should be less than 16384.</td>
+        <td>Number of the results to return.  The sum of this value and <code>offset</code> in <code>param</code> should be less than 16384.</td>
     </tr>
   <tr>
         <td><code>expr</code></td>
@@ -528,11 +529,11 @@ R<SearchResults> respSearch = milvusClient.search(searchParam);
     </tr>
     <tr>
         <td><code>limit</code> (optional)</td>
-        <td>Number of the most similar results to return. The sum of this value and <code>offset</code> should be less than 16384.</td>
+        <td>Number of the results to return. The sum of this value and <code>offset</code> should be less than 16384.</td>
     </tr>
     <tr>
         <td><code>offset</code> (optional)</td>
-        <td>Number of entities to skip. The sum of this value of <code>limit</code> should be less than 16384.</td>
+        <td>Number of entities to skip. The sum of this value and <code>limit</code> should be less than 16384. For example, if you want the 9th and 10th nearest neighbors to the query vector, set <code>limit</code> to <code>2</code> and <code>offset</code> to <code>8</code>.</td>
     </tr>
     <tr>
         <td><code>filter</code> (optional)</td>
@@ -596,7 +597,7 @@ R<SearchResults> respSearch = milvusClient.search(searchParam);
     </tr>
   <tr>
         <td><code>topK</code></td>
-        <td>Number of the most similar results to return. The sum of this value and that of <code>offset</code> in <code>WithOffset</code> of <code>opts</code> should be less than 16384.</td>
+        <td>Number of the results to return. The sum of this value and that of <code>offset</code> in <code>WithOffset</code> of <code>opts</code> should be less than 16384.</td>
     <td>N/A</td>
     </tr>
   <tr>

@@ -10,7 +10,7 @@ This topic describes how to insert data in Milvus via client.
 
 You can also migrate data to Milvus with [MilvusDM](migrate_overview.md), an open-source tool designed specifically for importing and exporting data with Milvus.
 
-Milvus 2.1 supports VARCHAR data type on scalar field. When building indexes for VARCHAR-type scalar fields, the default index type is dictionary tree.
+Milvus 2.1 supports the `VARCHAR` data type on scalar fields. When building indexes for VARCHAR-type scalar fields, the default index type is dictionary tree.
 
 The following example inserts 2,000 rows of randomly generated data as the example data (Milvus CLI example uses a pre-built, remote CSV file containing similar data). Real applications will likely use much higher dimensional vectors than the example. You can prepare your own data to replace the example.
 
@@ -373,9 +373,15 @@ Output:
     </tbody>
 </table>
 
+<div class="alert note">
+
+After inserting entities into a collection that has previously been indexed, you do not need to re-index the collection, as Milvus will automatically create an index for the newly inserted data. For more information, refer to [Can indexes be created after inserting vectors?](product_faq.md#Can-indexes-be-created-after-inserting-vectors)
+
+</div>
+
 ## Flush the Data in Milvus
 
-When data is inserted into Milvus it is inserted into segments. Segments have to reach a certain size to be sealed and indexed. Unsealed segments will be searched brute force. In order to avoid this with any remainder data, it is best to call flush(). The flush call will seal any remaining segments and send them for indexing. It is important to only call this at the end of an insert session, as calling this too much will cause fragmented data that will need to be cleaned later on.
+When data is inserted into Milvus it is inserted into segments. Segments have to reach a certain size to be sealed and indexed. Unsealed segments will be searched brute force. In order to avoid this with any remainder data, it is best to call `flush()`. The `flush()` call will seal any remaining segments and send them for indexing. It is important to only call this method at the end of an insert session. Calling it too often will cause fragmented data that will need to be cleaned later on.
 
 
 ## Limits

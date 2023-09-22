@@ -138,9 +138,15 @@ err != nil {
   </tbody>
 </table>
 
+<div class="alert note">
+
+After upserting entities into a collection that has previously been indexed, you do not need to re-index the collection, as Milvus will automatically create an index for the newly upserted data. For more information, refer to [Can indexes be created after inserting vectors?](product_faq.md#Can-indexes-be-created-after-inserting-vectors)
+
+</div>
+
 ## Flush data
 
-When data is upserted into Milvus it is updated and inserted into segments. Segments have to reach a certain size to be sealed and indexed. Unsealed segments will be searched brute force. In order to avoid this with any remainder data, it is best to call `flush()`. The `flush()` call will seal any remaining segments and send them for indexing. It is important to only call this at the end of an upsert session, as calling this too much will cause fragmented data that will need to be cleaned later on.
+When data is upserted into Milvus it is updated and inserted into segments. Segments have to reach a certain size to be sealed and indexed. Unsealed segments will be searched brute force. In order to avoid this with any remainder data, it is best to call `flush()`. The `flush()` call will seal any remaining segments and send them for indexing. It is important to only call this method at the end of an upsert session. Calling it too often will cause fragmented data that will need to be cleaned later on.
 
 ## Limits
 

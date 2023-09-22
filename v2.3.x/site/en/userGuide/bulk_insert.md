@@ -203,6 +203,8 @@ In this method, you need to set the name of the target collection as **collectio
 
   </div>
 
+After inserting entities into a collection that has previously been indexed, you do not need to re-index the collection, as Milvus will automatically create an index for the newly inserted data. For more information, refer to [Can indexes be created after inserting vectors?](product_faq.md#Can-indexes-be-created-after-inserting-vectors)
+
 ## List tasks
 
 ### Check task state
