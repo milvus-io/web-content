@@ -30,7 +30,7 @@ Ensure that
 Download `milvus-standalone-docker-compose-gpu.yml` and save it as `docker-compose.yml` manually, or with the following command.
 
 ```shell
-$ wget https://github.com/milvus-io/milvus/releases/download/v2.3.0/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml
+$ wget https://github.com/milvus-io/milvus/releases/download/v2.3.1/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml
 ```
 
 You need to make some changes to the environment variables of the standalone service in the YAML file as follows:
@@ -66,7 +66,7 @@ $ sudo docker compose up -d
 
 <div class="alert note">
 
-If you failed to run the above command, please check whether your system has Docker Compose V1 installed. If it is the case, you are advised to migrate to Docker Compose V2 due to the notes on [this page](https://docs.docker.com/compose/).
+If you failed to run the above command, please check whether your system has Docker Compose V1 installed. If this is the case, you are advised to migrate to Docker Compose V2 due to the notes on [this page](https://docs.docker.com/compose/).
 
 </div>
 
