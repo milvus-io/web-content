@@ -6,6 +6,48 @@ summary: Milvus Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.3.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.3.1
+
+Release date: Sep 22, 2023
+
+| Milvus version | Python SDK version | Java SDK version | Go SDK version | Node.js SDK version |
+|----------------|--------------------|------------------|----------------|---------------------|
+| 2.3.1          | 2.3.1              | 2.3.1            | 2.3.1          | 2.3.2               |
+
+We are excited to introduce Milvus 2.3.1, a patch release that includes several enhancements and bug fixes. These improvements are designed to enhance system stability and performance.
+
+### Features
+
+- Restored support for SUBSTRUCTURE/SUPERSTRUCTURE binary metric types ([#26766](https://github.com/milvus-io/milvus/pull/26766)).
+- Displayed index information during GetSegmentInfo ([#26981](https://github.com/milvus-io/milvus/pull/26981)).
+
+### Performance Improvement
+
+- Improved loading mechanism ([#26746](https://github.com/milvus-io/milvus/pull/26746)): Unnecessary data copies have been reduced, resulting in enhanced overall load performance.
+- Optimized MMap performance ([#26750](https://github.com/milvus-io/milvus/pull/26750)): The efficiency and capacity of MMap have been enhanced.
+- Refactored storage merge insert data ([#26839](https://github.com/milvus-io/milvus/pull/26839)): The merging process has been optimized, leading to improved data node performance.
+- Enhanced VARCHAR bulk insert speed ([#26199](https://github.com/milvus-io/milvus/pull/26199)): Batch processing reads have greatly improved the speed of VARCHAR bulk inserts.
+- Utilized a pointer receiver for large structures ([#26668](https://github.com/milvus-io/milvus/pull/26668)): Memory copy has been enhanced by utilizing a pointer receiver.
+
+### Enhancements
+
+- Enhanced error handling in QueryNode ([#26910](https://github.com/milvus-io/milvus/pull/26910), [#26940](https://github.com/milvus-io/milvus/pull/26940), [#26918](https://github.com/milvus-io/milvus/pull/26918), [#27013](https://github.com/milvus-io/milvus/pull/27013), [#26904](https://github.com/milvus-io/milvus/pull/26904), [#26521](https://github.com/milvus-io/milvus/pull/26521), [#26773](https://github.com/milvus-io/milvus/pull/26773), [#26676](https://github.com/milvus-io/milvus/pull/26676)): Error messages have been made more descriptive and informative, improving the user experience.
+- Enhanced Flush All API operations ([#26802](https://github.com/milvus-io/milvus/pull/26802), [#26769](https://github.com/milvus-io/milvus/pull/26769), [#26859](https://github.com/milvus-io/milvus/pull/26859)): The Flush, FlushAll, and GetFlushAllState API operations have undergone several improvements for better data syncing with object storage.
+- Improved resilience of the RPC client with retry mechanism ([#26795](https://github.com/milvus-io/milvus/pull/26795)): The RPC client now has an enhanced retry mechanism, improving its resilience.
+- Removed invalid offset check during data filling ([#26666](https://github.com/milvus-io/milvus/pull/26666)).
+- Delayed connection reset for `Canceled` or `DeadlineExceeded` gRPC code ([#27014](https://github.com/milvus-io/milvus/pull/27014)).
+- Achieved cleaner and more efficient error code management through miscellaneous code management and control enhancements ([#26881](https://github.com/milvus-io/milvus/pull/26881), [#26725](https://github.com/milvus-io/milvus/pull/26725), [#26713](https://github.com/milvus-io/milvus/pull/26713), [#26732](https://github.com/milvus-io/milvus/pull/26732)).
+
+### Bug Fixes
+
+- Fixed the index task retry issue ([#26878](https://github.com/milvus-io/milvus/pull/26878)): Canceled tasks are no longer marked as failed without retrying.
+- Addressed load stability issues ([#26763](https://github.com/milvus-io/milvus/pull/26763), [#26959](https://github.com/milvus-io/milvus/pull/26959), [#26931](https://github.com/milvus-io/milvus/pull/26931), [#26813](https://github.com/milvus-io/milvus/pull/26813), [#26685](https://github.com/milvus-io/milvus/pull/26685), [#26630](https://github.com/milvus-io/milvus/pull/26630), [#27027](https://github.com/milvus-io/milvus/pull/27027)): Several stability issues related to load have been resolved.
+- Resolved the segment retrieval issue ([#26670](https://github.com/milvus-io/milvus/pull/26670)): Retrieving now returns the correct number of results based on the specified limit.
+- Fixed memory leak when putting duplicated segments ([#26693](https://github.com/milvus-io/milvus/pull/26693)).
+- Fixed the bug for concurrent parsing expressions with strings ([#26721](https://github.com/milvus-io/milvus/pull/26721)).
+- Fixed the panic caused by empty traceID ([#26754](https://github.com/milvus-io/milvus/pull/26754)) ([#26808](https://github.com/milvus-io/milvus/pull/26808)).
+- Fixed the issue where timeout tasks never release the queue, leading to stuck compactions ([#26593](https://github.com/milvus-io/milvus/pull/26593)).
+
 ## v2.3.0
 Release date: Aug 23, 2023
 
