@@ -102,7 +102,7 @@ const params = {
 ```go
 var (
     collectionName = "book"
-    )
+)
 schema := &entity.Schema{
   CollectionName: collectionName,
   Description:    "Test book search",
@@ -127,7 +127,7 @@ schema := &entity.Schema{
       },
     },
   },
-  EnableDynamicField: true
+  EnableDynamicField: true,
 }
 ```
 

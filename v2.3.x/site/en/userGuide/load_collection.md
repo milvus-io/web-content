@@ -51,7 +51,7 @@ await milvusClient.loadCollection({
 err := milvusClient.LoadCollection(
   context.Background(),   // ctx
   "book",                 // CollectionName
-  false                   // async
+  false,                  // async
 )
 if err != nil {
   log.Fatal("failed to load collection:", err.Error())
@@ -61,7 +61,7 @@ if err != nil {
 loadStatus, err := milvusClient.GetLoadState(
   context.Background(),             // ctx
   "book",                           // CollectionName
-  []string{"Default partition"}     // List of partitions
+  []string{"Default partition"},    // List of partitions
 )
 if err != nil {
     log.Fatal("failed to get the load state", err.Error())
@@ -71,7 +71,7 @@ if err != nil {
 percentage, err := milvusClient.GetLoadingProgress(
     context.Background(),           // ctx
     "book",                         // CollectionName
-    []string{"Default partition"}   // List of partitions
+    []string{"Default partition"},  // List of partitions
 )
 if err != nil {
     log.Fatal("failed to get the loading progress", err.Error())

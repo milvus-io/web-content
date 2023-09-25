@@ -54,7 +54,7 @@ err := milvusClient.LoadPartitions(
   context.Background(),   // ctx
   "book",                 // CollectionName
   []string{"novel"},      // partitionNames
-  false                   // async
+  false,                  // async
 )
 if err != nil {
   log.Fatal("failed to load partitions:", err.Error())
