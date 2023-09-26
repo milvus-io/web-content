@@ -37,7 +37,7 @@ According to the suited data type, the supported indexes in Milvus can be divide
 
   - For 128-dimensional floating-point embeddings, the storage they take up is 128 * the size of float = 512 bytes. And the [distance metrics](metric.md) used for float-point embeddings are Euclidean distance (L2) and Inner product.
 
-  - These types of indexes include FLAT, IVF_FLAT, IVF_PQ, IVF_SQ8, HNSW, and ScaNN<sup>(beta)</sup> for CPU-based ANN searches and GPU_IVF_FLAT and GPU_IVF_PQ for GPU-based ANN searches.
+  - These types of indexes include FLAT, IVF_FLAT, IVF_PQ, IVF_SQ8, HNSW, and SCANN<sup>(beta)</sup> for CPU-based ANN searches and GPU_IVF_FLAT and GPU_IVF_PQ for GPU-based ANN searches.
 
 - Indexes for binary embeddings
 
@@ -138,7 +138,7 @@ The following table classifies the indexes that Milvus supports:
     </td>
   </tr>
   <tr>
-    <td>ScaNN</td>
+    <td>SCANN</td>
     <td>Quantization-based index</td>
     <td>
       <ul>
@@ -257,15 +257,16 @@ Index building parameters and search parameters vary with Milvus distribution. S
   | --------- | ------------------------ | ---------- |
   | `nprobe`  | Number of units to query | [1, nlist] |
 
-### ScaNN
+### SCANN
 
-ScaNN (Score-aware quantization loss) is similar to IVF_PQ in terms of vector clustering and product quantization. What makes them different lies in the implementation details of product quantization and the use of SIMD (Single-Instruction / Multi-data) for efficient calculation.
+SCANN (Score-aware quantization loss) is similar to IVF_PQ in terms of vector clustering and product quantization. What makes them different lies in the implementation details of product quantization and the use of SIMD (Single-Instruction / Multi-data) for efficient calculation.
 
 - Index building parameters
 
-  | Parameter | Description                               | Range               |
-  | --------- | ----------------------------------------- | ------------------- |
-  | `nlist`   | Number of cluster units                   | [1, 65536]          |
+  | Parameter       | Description                                  | Range                                  |
+  |-----------------|----------------------------------------------|----------------------------------------|
+  | `nlist`         | Number of cluster units                      | [1, 65536]                             |
+  | `with_raw_data` | Whether to include the raw data in the index | `True` or `False`. Defaults to `True`. |
 
   <div class="alert note">
 
