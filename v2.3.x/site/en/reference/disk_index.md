@@ -53,9 +53,7 @@ DiskIndex:
   MaxDegree: 56
   SearchListSize: 100
   PQCodeBugetGBRatio: 0.125
-  BuildNumThreadsRatio: 1.0
   SearchCacheBudgetGBRatio: 0.125
-  LoadNumThreadRatio: 8.0
   BeamWidthRatio: 4.0
 ...
 ```
@@ -65,9 +63,7 @@ DiskIndex:
 | `MaxDegree` | Maximum degree of the Vamana graph. <br> A larger value offers a higher recall rate but increases the size of and time to build the index. | [1, 512] | 56 | 
 | `SearchListSize` | Size of the candidate list. <br> A larger value increases the time spent on building the index but offers a higher recall rate. <br> Set it to a value smaller than `MaxDegree` unless you need to reduce the index-building time. | [1, ∞] | 100 |
 | `PQCodeBugetGBRatio` | Size limit on the PQ code. <br> A larger value offers a higher recall rate but increases memory usage. | (0.0, 0.25] | 0.125 |
-| `BuildNumThreadsRatio` | Ratio between the number of threads used to build the index and the number of CPUs. | [1.0, 128.0 / CPU number] | 1.0 |
 | `SearchCacheBudgetGBRatio` | Ratio of cached node numbers to raw data. <br> A larger value improves index-building performance with increased memory usage. | [0.0, 0.3) | 0.10 |
-| `LoadNumThreadRatio` | Ratio between the number of threads used to load index/search and the number of CPUs. For details, refer to the first item in [References and Facts](disk_index.md#references-and-facts). | [1, 65536 / 32 / CPU number] | 8.0 |
 | `BeamWidthRatio` | Ratio between the maximum number of IO requests per search iteration and CPU number. | [1, max(128 / CPU number, 16)] | 4.0 |
 
 ## Troubleshooting
