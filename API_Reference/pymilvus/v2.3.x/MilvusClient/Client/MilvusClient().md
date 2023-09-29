@@ -41,7 +41,7 @@ None
 - Create a MilvusClient instance using `token`:
 
     ```python
-    from pymilvs import MilvusClient
+    from pymilvus import MilvusClient
 
     client = MilvusClient(
     uri='http://localhost:19530',
@@ -52,7 +52,7 @@ None
 - Create a MilvusClient instance using separate parameters `user` and `password`
 
     ```python
-    from pymilvs import MilvusClient
+    from pymilvus import MilvusClient
 
     client = MilvusClient(
     uri='http://localhost:19530',
