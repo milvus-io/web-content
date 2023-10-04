@@ -22,6 +22,8 @@ A FieldSchema object.
 | `is_partition_key`   | Boolean value that indicates if the field is a partition-key field.          |
 | `description`        | Description of the field to create                                           |
 | `default_value`      | Default value of the field. This parameter supports only for scalar fields except array and JSON formats. You cannot specify a default value for a primary key field.                                           |
+| `max_length`        | Must be specified to limit the max length of VARCHAR. The value should be in (0, 65535]|
+
 
 ## Example
 
