@@ -178,7 +178,6 @@ curl -X 'POST' \
   -d '{
          "collectionName": "collection1",
          "data": {
-             "id": "id1",
              "vector": [0.1, 0.2, 0.3],
              "name": "tom",
              "email": "tom@zilliz.com",
@@ -191,12 +190,11 @@ curl --request POST \
      --url '${MILVUS_HOST}:${MILVUS_PORT}/v1/vector/insert' \
      --header 'Authorization: Bearer <TOKEN>' \
      --header 'accept: application/json' \
-     --header 'content-type: application/json'
+     --header 'content-type: application/json' \
      -d '{
          "collectionName": "collection1",
          "data": [
              {
-                "id": "id1",
                 "vector": [0.1, 0.2, 0.3],
                 "name": "bob",
                 "email": "bob@zilliz.com",

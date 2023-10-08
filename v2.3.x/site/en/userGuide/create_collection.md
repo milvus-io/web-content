@@ -168,8 +168,8 @@ create collection -c book -f book_id:INT64:book_id -f word_count:INT64:word_coun
 
 ```curl
 curl -X 'POST' \
-  '${MILVUS_HOST}:${MILVUS_PORT}/v1/vector/collections/create'' \
-  -H 'Authorization: Bearer ${TOKEN}'
+  '${MILVUS_HOST}:${MILVUS_PORT}/v1/vector/collections/create' \
+  -H 'Authorization: Bearer ${TOKEN}' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
   -d '{
