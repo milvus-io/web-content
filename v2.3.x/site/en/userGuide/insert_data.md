@@ -200,7 +200,6 @@ curl --request POST \
                 "email": "bob@zilliz.com",
                 "date": "2023-04-13"
              },{
-                "id": "id2",
                 "vector": [0.1, 0.2, 0.3],
                 "name": "ally",
                 "email": "ally@zilliz.com",
