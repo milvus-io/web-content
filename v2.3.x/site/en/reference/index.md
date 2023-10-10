@@ -48,13 +48,13 @@ According to the suited data type, the supported indexes in Milvus can be divide
 The following table classifies the indexes that Milvus supports:
 
 <div class="filter">
-<a href="#floating">Floating-point embeddings</a> <a href="#binary">Binary embeddings</a>
-
+  <a href="#floating">Floating-point embeddings</a> 
+  <a href="#binary">Binary embeddings</a>
 </div>
 
 <div class="filter-floating table-wrapper" markdown="block">
 
-<table>
+<table id="floating">
 <thead>
   <tr>
     <th>Supported index</th>
@@ -151,6 +151,41 @@ The following table classifies the indexes that Milvus supports:
 </tbody>
 </table>
 
+</div>
+
+<div class="filter-floating table-wrapper" markdown="block">
+
+<table id="binary">
+<thead>
+  <tr>
+    <th>Supported index</th>
+    <th>Classification</th>
+    <th>Scenario</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>BIN_FLAT</td>
+    <td>Quantization-based index</td>
+    <td><ul>
+      <li>Depends on relatively small datasets.</li>
+      <li>Requires perfect accuracy.</li>
+      <li>No compression applies.</li>
+      <li>Guarantee exact search results.</li>
+    </ul></td>
+  </tr>
+  <tr>
+    <td>BIN_IVF_FLAT</td>
+    <td>Quantization-based index</td>
+    <td><ul>
+      <li>High-speed query</li>
+      <li>Requires a recall rate as high as possible</li>
+    </ul></td>
+  </tr>
+</tbody>
+</table>
+
+</div>
 
 ### FLAT
 
