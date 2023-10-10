@@ -84,7 +84,7 @@ search_param = {
   "param": {"metric_type": "L2", "nprobe": 10, "radius": 10.0, "range_filter" : 5.0},
   "offset": 0,
   "limit": 2,
-  output_fields=["int64", "float"] # fields to return
+  output_fields: ["int64", "float"] # fields to return
 }
 
 res = collection.search(**search_param)
@@ -97,7 +97,7 @@ search_param = {
   "param": {"metric_type": "IP", "nprobe": 10, "radius": 0.8, "range_filter" : 1.0},
   "offset": 0,
   "limit": 2,
-  output_fields=["int64", "float"] # fields to return
+  output_fields: ["int64", "float"] # fields to return
 }
 
 res = collection.search(**search_param)
