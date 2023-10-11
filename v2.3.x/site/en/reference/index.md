@@ -52,7 +52,7 @@ The following table classifies the indexes that Milvus supports:
   <a href="#binary">Binary embeddings</a>
 </div>
 
-<div class="filter-component table-wrapper">
+<div class="filter-floating table-wrapper">
 
 <table id="floating">
 <thead>
@@ -153,7 +153,7 @@ The following table classifies the indexes that Milvus supports:
 
 </div>
 
-<div class="filter-component table-wrapper">
+<div class="filter-binary table-wrapper">
 
 <table id="binary">
 <thead>
