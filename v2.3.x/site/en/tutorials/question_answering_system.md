@@ -7,7 +7,6 @@ summary: Build a question answering system with Milvus.
 
 This tutorial demonstrates how to use Milvus, the open-source vector database, to build a question answering (QA) system.
 - [Open Jupyter notebook](https://github.com/towhee-io/examples/tree/main/nlp/question_answering)
-- [Quick deploy](https://github.com/milvus-io/bootcamp/blob/master/solutions/nlp/question_answering_system/quick_deploy) 
 - [Try online demo](https://milvus.io/milvus-demos/)
 
 The ML model and third-party software used include:
