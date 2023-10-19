@@ -106,7 +106,7 @@ await milvusClient.GetCollection("book").DeleteAsync(expression);
 ```
 
 ```curl
-curl -X 'DELETE' \
+curl -X 'POST' \
   '${MILVUS_HOST}:${MILVUS_PORT}/v1/vector/delete' \
   -H 'Authorization: Bearer ${TOKEN}' \
   -H 'accept: application/json' \
