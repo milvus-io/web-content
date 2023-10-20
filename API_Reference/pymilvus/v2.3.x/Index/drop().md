@@ -25,8 +25,18 @@ No return.
 
 ## Example
 
+Drop the only index in a collection:
+
 ```python
 from pymilvus import Collection
 collection = Collection("book")      # Get an existing collection.
 collection.drop_index()
+```
+
+If a collection contains two or more indexes, specify the name of the index to delete it:
+
+```python
+from pymilvus import Collection
+collection = Collection("book")
+collection.drop_index(index_name='book_intro')
 ```
