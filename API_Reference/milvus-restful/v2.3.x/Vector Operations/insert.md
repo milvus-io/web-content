@@ -66,24 +66,28 @@ curl --request POST \
 
 ```json
 {
-    "collectionName": "string"
+    "collectionName": "string",
+    "dbName": "string"
 }
 ```
 
 | Parameter        | Description                                                                               |
 |------------------|-------------------------------------------------------------------------------------------|
+| `dbName`  | **string**<br>The name of the database.|
 | `collectionName`  | **string**(required)<br>The name of the collection to which entities will be inserted.|
 | `data`  | **object**(required)<br>An entity object. Note that the keys in the entity should match the collection schema.|
 
 ```json
 {
     "collectionName": "string",
-    "data": []
+    "data": [],
+    "dbName": "string"
 }
 ```
 
 | Parameter        | Description                                                                               |
 |------------------|-------------------------------------------------------------------------------------------|
+| `dbName`  | **string**<br>The name of the database.|
 | `collectionName`  | **string**(required)<br>The name of the collection to which entities will be inserted.|
 | `data`  | **array**(required)<br>An array of entity objects. Note that the keys in an entity object should match the collection schema|
 

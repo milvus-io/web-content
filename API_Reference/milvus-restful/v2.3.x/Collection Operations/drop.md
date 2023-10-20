@@ -1,32 +1,27 @@
-# Create Collection
+# Drop Collection
 
-Creates a collection in a cluster.
+Drops a collection. This operation erases your collection data. Exercise caution when performing this operation.
 
 <div>
     <div style="display: inline-block; background: #026aca; font-size: 0.6em; border-radius: 10px; color: #ffffff; padding: 0.3em 1em;">
         <span>POST</span>
     </div>
-    <span style="font-weight: bold;">  https://${MILVUS_HOST}:${MILVUS_PORT}/v1/vector/collections/create</span>
+    <span style="font-weight: bold;">  https://${MILVUS_HOST}:${MILVUS_PORT}/v1/vector/collections/drop</span>
 </div>
 
 ## Example
 
 
-Create a collection named `medium_articles`:
+Drop a collection named `medium_articles`:
 
 ```shell
 curl --request POST \
-     --url "${MILVUS_HOST}:${MILVUS_PORT}/v1/vector/collections/create" \
+     --url "${MILVUS_HOST}:${MILVUS_PORT}/v1/vector/collections/drop" \
      --header "Authorization: Bearer ${TOKEN}" \
      --header "accept: application/json" \
      --header "content-type: application/json" \
      -d '{
-       "dbName": "default",   
-       "collectionName": "medium_articles",
-       "dimension": 256,
-       "metricType": "L2",
-       "primaryField": "id",
-       "vectorField": "vector"
+        "collectionName": "medium_articles"
       }'
 ```
 
@@ -47,31 +42,25 @@ Success response:
 
 - No query parameters required
 
-- No path parameters required
+- Path parameters
+
+    | Parameter        | Description                                                                               |
+    |------------------|-------------------------------------------------------------------------------------------|
+    | `CLUSTER_ENDPOINT`  | **string**(required)<br>The endpoint of your cluster.|
 
 ### Request Body
 
 ```json
 {
     "collectionName": "string",
-    "dbName": "string",
-    "description": "string",
-    "dimension": "integer",
-    "metricType": "string",
-    "primaryField": "string",
-    "vectorField": "string"
+    "dbName": "string"
 }
 ```
 
 | Parameter        | Description                                                                               |
 |------------------|-------------------------------------------------------------------------------------------|
-| `dbName`  | **string**<br>The name of the database to which the collection to create belongs to. |
-| `collectionName`  | **string**(required)<br>The name of the collection to create.|
-| `dimension`  | **integer**(required)<br>The number of dimensions for the vector field of the collection.<br>The value ranges from **32** to **32768**.|
-| `metricType`  | **string**<br>The distance metric used for the collection.<br>The value defaults to **L2**.|
-| `primaryField`  | **string**<br>The primary key field.<br>The value defaults to **id**.|
-| `vectorField`  | **string**<br>The vector field.<br>The value defaults to **vector**.|
-| `description`  | **string**<br>The description of the collection|
+| `dbName`  | **string**<br>The name of the database.|
+| `collectionName`  | **string**(required)<br>The name of the collection to delete.|
 
 ## Response
 
@@ -115,4 +104,3 @@ The properties in the returned response are listed in the following table.
 | 1800 | user hasn't authenticate |
 | 1801 | can only accept json format request |
 | 1802 | missing required parameters |
-| 1803 | fail to marshal collection schema |

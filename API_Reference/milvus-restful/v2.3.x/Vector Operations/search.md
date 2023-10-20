@@ -59,16 +59,22 @@ curl --request POST \
 ```json
 {
     "collectionName": "string",
+    "dbName": "string",
     "filter": "string",
     "limit": "integer",
     "offset": "integer",
     "outputFields": [],
+    "params": {
+        "radius": "number",
+        "range_filter": "number"
+    },
     "vector": []
 }
 ```
 
 | Parameter        | Description                                                                               |
 |------------------|-------------------------------------------------------------------------------------------|
+| `dbName`  | **string**<br>The name of the database.|
 | `collectionName`  | **string**(required)<br>The name of the collection to which this operation applies.|
 | `filter`  | **string**<br>The filter used to find matches for the search|
 | `limit`  | **integer**<br>The maximum number of entities to return.<br>The sum of this value of that of `offset` should be less than **1024**.<br>The value defaults to **100**.<br>The value ranges from **1** to **100**.|
