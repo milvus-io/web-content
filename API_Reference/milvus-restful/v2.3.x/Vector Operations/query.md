@@ -44,6 +44,7 @@ curl --request POST \
 ```json
 {
     "collectionName": "string",
+    "dbName": "string",
     "filter": "string",
     "limit": "integer",
     "offset": "integer",
@@ -53,10 +54,11 @@ curl --request POST \
 
 | Parameter        | Description                                                                               |
 |------------------|-------------------------------------------------------------------------------------------|
+| `dbName`  | **string**<br>The name of the database.|
 | `collectionName`  | **string**(required)<br>The name of the collection to which this operation applies.|
 | `filter`  | **string**(required)<br>The filter used to find matches for the search.|
-| `limit`  | **integer**<br>The maximum number of entities to return.<br>The sum of this value and that of `offset` should be less than **16384**.<br>The value defaults to **100**.<br>The value ranges from **1** to **100**.|
-| `offset`  | **integer**<br>The number of entities to skip in the search results.<br>The sum of this value and that of `limit` should be less than **16384**.<br>The maximum value is **16384**.|
+| `limit`  | **integer**<br>The maximum number of entities to return.<br/>The sum of this value and that of `offset` should be less than **16384**.<br>The value defaults to **100**.<br>The value ranges from **1** to **100**.|
+| `offset`  | **integer**<br>The number of entities to skip in the search results.<br/>The sum of this value and that of `limit` should be less than **16384**.<br>The maximum value is **16384**.|
 | `outputFields`  | **array**<br>An array of fields to return along with the search results.|
 
 ## Response

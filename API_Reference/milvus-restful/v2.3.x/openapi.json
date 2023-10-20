@@ -26,11 +26,20 @@
         ],
         "parameters": [
           {
-            "name": "public-endpoint",
+            "name": "CLUSTER_ENDPOINT",
             "in": "path",
-            "description": "",
+            "description": "The endpoint of your cluster.",
             "required": true,
-            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "dbName",
+            "in": "query",
+            "description": "The name of the database",
+            "required": false,
+            "example": "default",
             "schema": {
               "type": "string"
             }
@@ -65,7 +74,12 @@
             }
           }
         },
-        "x-run-in-apifox": "https://www.apifox.cn/web/project/2645146/apis/api-77767175-run"
+        "x-run-in-apifox": "https://apifox.com/web/project/2645146/apis/api-77767175-run",
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
       }
     },
     "/v1/vector/collections/create": {
@@ -80,9 +94,9 @@
         ],
         "parameters": [
           {
-            "name": "public-endpoint",
+            "name": "CLUSTER_ENDPOINT",
             "in": "path",
-            "description": "",
+            "description": "The endpoint of your cluster.",
             "required": true,
             "schema": {
               "type": "string"
@@ -97,7 +111,7 @@
                 "properties": {
                   "dbName": {
                     "type": "string",
-                    "description": "The name of the database to which the collection to create belongs to. <zilliz>This parameter applies only to dedicated clusters.</zilliz>"
+                    "description": "The name of the database. <zilliz>This parameter applies only to dedicated clusters.</zilliz>"
                   },
                   "collectionName": {
                     "type": "string",
@@ -105,8 +119,8 @@
                   },
                   "dimension": {
                     "type": "integer",
-                    "description": "The number of dimensions for the vector field of the collection.",
-                    "minimum": 32,
+                    "description": "The number of dimensions for the vector field of the collection. For performance-optimized CUs, this value ranges from 1 to 32768. For capacity-optimized and cost-optimized CUs, this value ranges from 32 to 32768.",
+                    "minimum": 1,
                     "maximum": 32768
                   },
                   "metricType": {
@@ -179,7 +193,12 @@
             }
           }
         },
-        "x-run-in-apifox": "https://www.apifox.cn/web/project/2645146/apis/api-77767176-run"
+        "x-run-in-apifox": "https://apifox.com/web/project/2645146/apis/api-77767176-run",
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
       }
     },
     "/v1/vector/collections/describe": {
@@ -194,9 +213,9 @@
         ],
         "parameters": [
           {
-            "name": "public-endpoint",
+            "name": "CLUSTER_ENDPOINT",
             "in": "path",
-            "description": "",
+            "description": "The endpoint of your cluster.",
             "required": true,
             "schema": {
               "type": "string"
@@ -208,6 +227,16 @@
             "description": "The name of the collection to describe.",
             "required": true,
             "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "dbName",
+            "in": "query",
+            "description": "The name of the database.",
+            "required": false,
+            "example": "default",
             "schema": {
               "type": "string"
             }
@@ -341,7 +370,12 @@
             }
           }
         },
-        "x-run-in-apifox": "https://www.apifox.cn/web/project/2645146/apis/api-77767177-run"
+        "x-run-in-apifox": "https://apifox.com/web/project/2645146/apis/api-77767177-run",
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
       }
     },
     "/v1/vector/collections/drop": {
@@ -356,9 +390,9 @@
         ],
         "parameters": [
           {
-            "name": "public-endpoint",
+            "name": "CLUSTER_ENDPOINT",
             "in": "path",
-            "description": "",
+            "description": "The endpoint of your cluster.",
             "required": true,
             "schema": {
               "type": "string"
@@ -370,20 +404,46 @@
             "application/json": {
               "schema": {
                 "type": "object",
+                "x-apifox-refs": {
+                  "01HD5Z6MN1V8J7487CTKFNDVF8": {
+                    "x-apifox-overrides": {},
+                    "type": "object",
+                    "properties": {
+                      "collectionName": {
+                        "type": "string",
+                        "description": "The name of the collection to delete."
+                      }
+                    },
+                    "x-apifox-orders": [
+                      "collectionName"
+                    ],
+                    "required": [
+                      "collectionName"
+                    ],
+                    "x-apifox-ignore-properties": [],
+                    "x-apifox-folder": "Schemas"
+                  }
+                },
                 "properties": {
+                  "dbName": {
+                    "type": "string",
+                    "description": "The name of the database."
+                  },
                   "collectionName": {
                     "type": "string",
                     "description": "The name of the collection to delete."
                   }
                 },
                 "x-apifox-orders": [
-                  "collectionName"
+                  "dbName",
+                  "01HD5Z6MN1V8J7487CTKFNDVF8"
                 ],
                 "required": [
                   "collectionName"
                 ],
-                "x-apifox-ignore-properties": [],
-                "x-apifox-folder": "Schemas"
+                "x-apifox-ignore-properties": [
+                  "collectionName"
+                ]
               },
               "example": ""
             }
@@ -419,7 +479,12 @@
             }
           }
         },
-        "x-run-in-apifox": "https://www.apifox.cn/web/project/2645146/apis/api-77767178-run"
+        "x-run-in-apifox": "https://apifox.com/web/project/2645146/apis/api-77767178-run",
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
       }
     },
     "/v1/vector/delete": {
@@ -451,6 +516,10 @@
                   {
                     "type": "object",
                     "properties": {
+                      "dbName": {
+                        "type": "string",
+                        "description": "The name of the database."
+                      },
                       "collectionName": {
                         "type": "string",
                         "description": "The name of the collection to which this operation applies."
@@ -462,6 +531,7 @@
                     },
                     "x-apifox-refs": {},
                     "x-apifox-orders": [
+                      "dbName",
                       "collectionName",
                       "id"
                     ],
@@ -474,6 +544,10 @@
                   {
                     "type": "object",
                     "properties": {
+                      "dbName": {
+                        "type": "string",
+                        "description": "The name of the database."
+                      },
                       "collectionName": {
                         "type": "string",
                         "description": "The name of the collection to which this operation applies."
@@ -488,6 +562,7 @@
                     },
                     "x-apifox-refs": {},
                     "x-apifox-orders": [
+                      "dbName",
                       "collectionName",
                       "id"
                     ],
@@ -500,6 +575,10 @@
                   {
                     "type": "object",
                     "properties": {
+                      "dbName": {
+                        "type": "string",
+                        "description": "The name of the database."
+                      },
                       "collectionName": {
                         "type": "string",
                         "description": "The name of the collection to which this operation applies."
@@ -511,6 +590,7 @@
                     },
                     "x-apifox-refs": {},
                     "x-apifox-orders": [
+                      "dbName",
                       "collectionName",
                       "id"
                     ],
@@ -523,6 +603,10 @@
                   {
                     "type": "object",
                     "properties": {
+                      "dbName": {
+                        "type": "string",
+                        "description": "The name of the database."
+                      },
                       "collectionName": {
                         "type": "string",
                         "description": "The name of the collection to which this operation applies."
@@ -537,6 +621,7 @@
                     },
                     "x-apifox-refs": {},
                     "x-apifox-orders": [
+                      "dbName",
                       "collectionName",
                       "id"
                     ],
@@ -582,7 +667,12 @@
             }
           }
         },
-        "x-run-in-apifox": "https://www.apifox.cn/web/project/2645146/apis/api-77767179-run"
+        "x-run-in-apifox": "https://apifox.com/web/project/2645146/apis/api-77767179-run",
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
       }
     },
     "/v1/vector/insert": {
@@ -615,10 +705,15 @@
                     "type": "object",
                     "additionalProperties": false,
                     "x-apifox-orders": [
+                      "dbName",
                       "collectionName",
                       "data"
                     ],
                     "properties": {
+                      "dbName": {
+                        "type": "string",
+                        "description": "The name of the database."
+                      },
                       "collectionName": {
                         "type": "string",
                         "description": "The name of the collection to which entities will be inserted."
@@ -639,11 +734,44 @@
                   },
                   {
                     "type": "object",
-                    "required": [
-                      "data",
-                      "collectionName"
-                    ],
+                    "x-apifox-refs": {
+                      "01HD5ZD78VCVFQE5Y3NK4AJ57C": {
+                        "x-apifox-overrides": {},
+                        "type": "object",
+                        "required": [
+                          "data",
+                          "collectionName"
+                        ],
+                        "properties": {
+                          "collectionName": {
+                            "type": "string",
+                            "description": "The name of the collection to which entities will be inserted."
+                          },
+                          "data": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "additionalProperties": true,
+                              "x-apifox-orders": [],
+                              "properties": {},
+                              "x-apifox-ignore-properties": []
+                            },
+                            "description": "An array of entity objects. Note that the keys in an entity object should match the collection schema"
+                          }
+                        },
+                        "x-apifox-orders": [
+                          "collectionName",
+                          "data"
+                        ],
+                        "x-apifox-ignore-properties": [],
+                        "x-apifox-folder": "Schemas"
+                      }
+                    },
                     "properties": {
+                      "dbName": {
+                        "type": "string",
+                        "description": "The name of the database."
+                      },
                       "collectionName": {
                         "type": "string",
                         "description": "The name of the collection to which entities will be inserted."
@@ -661,11 +789,17 @@
                       }
                     },
                     "x-apifox-orders": [
+                      "dbName",
+                      "01HD5ZD78VCVFQE5Y3NK4AJ57C"
+                    ],
+                    "required": [
                       "collectionName",
                       "data"
                     ],
-                    "x-apifox-ignore-properties": [],
-                    "x-apifox-folder": "Schemas"
+                    "x-apifox-ignore-properties": [
+                      "collectionName",
+                      "data"
+                    ]
                   }
                 ]
               },
@@ -728,7 +862,12 @@
             }
           }
         },
-        "x-run-in-apifox": "https://www.apifox.cn/web/project/2645146/apis/api-77767180-run"
+        "x-run-in-apifox": "https://apifox.com/web/project/2645146/apis/api-77767180-run",
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
       }
     },
     "/v1/vector/search": {
@@ -805,6 +944,27 @@
                           "format": "float32"
                         },
                         "description": "The query vector in the form of a list of floating numbers."
+                      },
+                      "params": {
+                        "type": "object",
+                        "properties": {
+                          "radius": {
+                            "type": "number",
+                            "format": "float64"
+                          },
+                          "range_filter": {
+                            "type": "number",
+                            "format": "float64"
+                          }
+                        },
+                        "x-apifox-orders": [
+                          "radius",
+                          "range_filter"
+                        ],
+                        "required": [
+                          "range_filter"
+                        ],
+                        "x-apifox-ignore-properties": []
                       }
                     },
                     "x-apifox-orders": [
@@ -813,7 +973,8 @@
                       "limit",
                       "offset",
                       "outputFields",
-                      "vector"
+                      "vector",
+                      "params"
                     ],
                     "required": [
                       "collectionName",
@@ -824,9 +985,14 @@
                   }
                 },
                 "x-apifox-orders": [
+                  "dbName",
                   "01H1PFY2ZE8WYR08AGKW1MBY8M"
                 ],
                 "properties": {
+                  "dbName": {
+                    "type": "string",
+                    "description": "The name of the database."
+                  },
                   "collectionName": {
                     "type": "string",
                     "description": "The name of the collection to which this operation applies."
@@ -864,6 +1030,27 @@
                       "format": "float32"
                     },
                     "description": "The query vector in the form of a list of floating numbers."
+                  },
+                  "params": {
+                    "type": "object",
+                    "properties": {
+                      "radius": {
+                        "type": "number",
+                        "format": "float64"
+                      },
+                      "range_filter": {
+                        "type": "number",
+                        "format": "float64"
+                      }
+                    },
+                    "x-apifox-orders": [
+                      "radius",
+                      "range_filter"
+                    ],
+                    "required": [
+                      "range_filter"
+                    ],
+                    "x-apifox-ignore-properties": []
                   }
                 },
                 "required": [
@@ -876,7 +1063,8 @@
                   "limit",
                   "offset",
                   "outputFields",
-                  "vector"
+                  "vector",
+                  "params"
                 ]
               },
               "example": ""
@@ -915,7 +1103,12 @@
             }
           }
         },
-        "x-run-in-apifox": "https://www.apifox.cn/web/project/2645146/apis/api-77767181-run"
+        "x-run-in-apifox": "https://apifox.com/web/project/2645146/apis/api-77767181-run",
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
       }
     },
     "/v1/vector/query": {
@@ -945,6 +1138,10 @@
               "schema": {
                 "type": "object",
                 "properties": {
+                  "dbName": {
+                    "type": "string",
+                    "description": "The name of the database."
+                  },
                   "collectionName": {
                     "type": "string",
                     "description": "The name of the collection to which this operation applies."
@@ -955,14 +1152,14 @@
                   },
                   "limit": {
                     "type": "integer",
-                    "description": "The maximum number of entities to return.<br>The sum of this value and that of `offset` should be less than **16384**.",
+                    "description": "The maximum number of entities to return.<br/>The sum of this value and that of `offset` should be less than **16384**.",
                     "default": 100,
                     "minimum": 1,
                     "maximum": 100
                   },
                   "offset": {
                     "type": "integer",
-                    "description": "The number of entities to skip in the search results.<br>The sum of this value and that of `limit` should be less than **16384**.",
+                    "description": "The number of entities to skip in the search results.<br/>The sum of this value and that of `limit` should be less than **16384**.",
                     "minimum": 0,
                     "exclusiveMinimum": true,
                     "maximum": 16384
@@ -989,14 +1186,14 @@
                       },
                       "limit": {
                         "type": "integer",
-                        "description": "The maximum number of entities to return.<br>The sum of this value and that of `offset` should be less than **16384**.",
+                        "description": "The maximum number of entities to return.<br/>The sum of this value and that of `offset` should be less than **16384**.",
                         "default": 100,
                         "minimum": 1,
                         "maximum": 100
                       },
                       "offset": {
                         "type": "integer",
-                        "description": "The number of entities to skip in the search results.<br>The sum of this value and that of `limit` should be less than **16384**.",
+                        "description": "The number of entities to skip in the search results.<br/>The sum of this value and that of `limit` should be less than **16384**.",
                         "minimum": 0,
                         "exclusiveMinimum": true,
                         "maximum": 16384
@@ -1025,6 +1222,7 @@
                   }
                 },
                 "x-apifox-orders": [
+                  "dbName",
                   "01H0KV6DX6NKH0PHSNRYW8XD4S"
                 ],
                 "required": [
@@ -1075,7 +1273,12 @@
             }
           }
         },
-        "x-run-in-apifox": "https://www.apifox.cn/web/project/2645146/apis/api-82167294-run"
+        "x-run-in-apifox": "https://apifox.com/web/project/2645146/apis/api-82167294-run",
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
       }
     },
     "/v1/vector/get": {
@@ -1106,7 +1309,45 @@
                 "oneOf": [
                   {
                     "type": "object",
+                    "x-apifox-refs": {
+                      "01HD5Z9Z1Q1DHXF2DQF7E1XNGP": {
+                        "x-apifox-overrides": {},
+                        "type": "object",
+                        "properties": {
+                          "collectionName": {
+                            "type": "string",
+                            "description": "The name of the collection to which this operation applies."
+                          },
+                          "outputFields": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            },
+                            "description": "An array of fields to return along with the search results."
+                          },
+                          "id": {
+                            "type": "string",
+                            "description": "The ID of the entity to be retrieved"
+                          }
+                        },
+                        "x-apifox-orders": [
+                          "collectionName",
+                          "outputFields",
+                          "id"
+                        ],
+                        "required": [
+                          "collectionName",
+                          "id"
+                        ],
+                        "x-apifox-ignore-properties": [],
+                        "x-apifox-folder": "Schemas"
+                      }
+                    },
                     "properties": {
+                      "dbName": {
+                        "type": "string",
+                        "description": "The name of the database."
+                      },
                       "collectionName": {
                         "type": "string",
                         "description": "The name of the collection to which this operation applies."
@@ -1124,20 +1365,63 @@
                       }
                     },
                     "x-apifox-orders": [
-                      "collectionName",
-                      "outputFields",
-                      "id"
+                      "dbName",
+                      "01HD5Z9Z1Q1DHXF2DQF7E1XNGP"
                     ],
                     "required": [
                       "collectionName",
                       "id"
                     ],
-                    "x-apifox-ignore-properties": [],
-                    "x-apifox-folder": "Schemas"
+                    "x-apifox-ignore-properties": [
+                      "collectionName",
+                      "outputFields",
+                      "id"
+                    ]
                   },
                   {
                     "type": "object",
+                    "x-apifox-refs": {
+                      "01HD5ZAPGFY3WY8NJDN75B62SN": {
+                        "x-apifox-overrides": {},
+                        "type": "object",
+                        "properties": {
+                          "collectionName": {
+                            "type": "string",
+                            "description": "The name of the collection to which this operation applies."
+                          },
+                          "outputFields": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            },
+                            "description": "An array of fields to return along with the search results."
+                          },
+                          "id": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            },
+                            "description": "An array of IDs of the entities to be retrieved"
+                          }
+                        },
+                        "x-apifox-orders": [
+                          "collectionName",
+                          "outputFields",
+                          "id"
+                        ],
+                        "required": [
+                          "collectionName",
+                          "id"
+                        ],
+                        "x-apifox-ignore-properties": [],
+                        "x-apifox-folder": "Schemas"
+                      }
+                    },
                     "properties": {
+                      "dbName": {
+                        "type": "string",
+                        "description": "The name of the database."
+                      },
                       "collectionName": {
                         "type": "string",
                         "description": "The name of the collection to which this operation applies."
@@ -1158,16 +1442,18 @@
                       }
                     },
                     "x-apifox-orders": [
-                      "collectionName",
-                      "outputFields",
-                      "id"
+                      "dbName",
+                      "01HD5ZAPGFY3WY8NJDN75B62SN"
                     ],
                     "required": [
                       "collectionName",
                       "id"
                     ],
-                    "x-apifox-ignore-properties": [],
-                    "x-apifox-folder": "Schemas"
+                    "x-apifox-ignore-properties": [
+                      "collectionName",
+                      "outputFields",
+                      "id"
+                    ]
                   },
                   {
                     "type": "object",
@@ -1177,10 +1463,15 @@
                           "id": {
                             "type": "integer",
                             "description": "The ID of entity to be retrieved"
+                          },
+                          "collectionName": {
+                            "type": "string",
+                            "description": "The name of the collection to which this operation applies."
                           }
                         },
                         "required": [
-                          "id"
+                          "id",
+                          "collectionName"
                         ],
                         "type": "object",
                         "properties": {
@@ -1210,9 +1501,14 @@
                       }
                     },
                     "x-apifox-orders": [
+                      "dbName",
                       "01H0KWBZQSHZ451Z4A9YQ9WQTA"
                     ],
                     "properties": {
+                      "dbName": {
+                        "type": "string",
+                        "description": "The name of the database."
+                      },
                       "collectionName": {
                         "type": "string",
                         "description": "The name of the collection to which this operation applies."
@@ -1241,7 +1537,48 @@
                   },
                   {
                     "type": "object",
+                    "x-apifox-refs": {
+                      "01HD5ZBYR8SRADRXNM1ZHG8TCS": {
+                        "x-apifox-overrides": {},
+                        "type": "object",
+                        "properties": {
+                          "collectionName": {
+                            "type": "string",
+                            "description": "The name of the collection to which this operation applies."
+                          },
+                          "outputFields": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            },
+                            "description": "An array of fields to return along with the search results."
+                          },
+                          "id": {
+                            "type": "array",
+                            "items": {
+                              "type": "integer"
+                            },
+                            "description": "An array of IDs of the entities to be retrieved"
+                          }
+                        },
+                        "x-apifox-orders": [
+                          "collectionName",
+                          "outputFields",
+                          "id"
+                        ],
+                        "required": [
+                          "collectionName",
+                          "id"
+                        ],
+                        "x-apifox-ignore-properties": [],
+                        "x-apifox-folder": "Schemas"
+                      }
+                    },
                     "properties": {
+                      "dbName": {
+                        "type": "string",
+                        "description": "The name of the database."
+                      },
                       "collectionName": {
                         "type": "string",
                         "description": "The name of the collection to which this operation applies."
@@ -1262,16 +1599,18 @@
                       }
                     },
                     "x-apifox-orders": [
-                      "collectionName",
-                      "outputFields",
-                      "id"
+                      "dbName",
+                      "01HD5ZBYR8SRADRXNM1ZHG8TCS"
                     ],
                     "required": [
                       "collectionName",
                       "id"
                     ],
-                    "x-apifox-ignore-properties": [],
-                    "x-apifox-folder": "Schemas"
+                    "x-apifox-ignore-properties": [
+                      "collectionName",
+                      "outputFields",
+                      "id"
+                    ]
                   }
                 ]
               },
@@ -1311,7 +1650,12 @@
             }
           }
         },
-        "x-run-in-apifox": "https://www.apifox.cn/web/project/2645146/apis/api-82172081-run"
+        "x-run-in-apifox": "https://apifox.com/web/project/2645146/apis/api-82172081-run",
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
       }
     }
   },
@@ -1460,14 +1804,14 @@
           },
           "limit": {
             "type": "integer",
-            "description": "The maximum number of entities to return.<br>The sum of this value and that of `offset` should be less than **16384**.",
+            "description": "The maximum number of entities to return.<br/>The sum of this value and that of `offset` should be less than **16384**.",
             "default": 100,
             "minimum": 1,
             "maximum": 100
           },
           "offset": {
             "type": "integer",
-            "description": "The number of entities to skip in the search results.<br>The sum of this value and that of `limit` should be less than **16384**.",
+            "description": "The number of entities to skip in the search results.<br/>The sum of this value and that of `limit` should be less than **16384**.",
             "minimum": 0,
             "exclusiveMinimum": true,
             "maximum": 16384
@@ -1534,6 +1878,27 @@
               "format": "float32"
             },
             "description": "The query vector in the form of a list of floating numbers."
+          },
+          "params": {
+            "type": "object",
+            "properties": {
+              "radius": {
+                "type": "number",
+                "format": "float64"
+              },
+              "range_filter": {
+                "type": "number",
+                "format": "float64"
+              }
+            },
+            "x-apifox-orders": [
+              "radius",
+              "range_filter"
+            ],
+            "required": [
+              "range_filter"
+            ],
+            "x-apifox-ignore-properties": []
           }
         },
         "x-apifox-orders": [
@@ -1542,7 +1907,8 @@
           "limit",
           "offset",
           "outputFields",
-          "vector"
+          "vector",
+          "params"
         ],
         "required": [
           "collectionName",
@@ -2047,7 +2413,7 @@
         "properties": {
           "dbName": {
             "type": "string",
-            "description": "The name of the database to which the collection to create belongs to. <zilliz>This parameter applies only to dedicated clusters.</zilliz>"
+            "description": "The name of the database. <zilliz>This parameter applies only to dedicated clusters.</zilliz>"
           },
           "collectionName": {
             "type": "string",
@@ -2055,8 +2421,8 @@
           },
           "dimension": {
             "type": "integer",
-            "description": "The number of dimensions for the vector field of the collection.",
-            "minimum": 32,
+            "description": "The number of dimensions for the vector field of the collection. For performance-optimized CUs, this value ranges from 1 to 32768. For capacity-optimized and cost-optimized CUs, this value ranges from 32 to 32768.",
+            "minimum": 1,
             "maximum": 32768
           },
           "metricType": {
@@ -2114,6 +2480,12 @@
         ],
         "x-apifox-ignore-properties": [],
         "x-apifox-folder": "Schemas"
+      }
+    },
+    "securitySchemes": {
+      "bearer": {
+        "type": "http",
+        "scheme": "bearer"
       }
     }
   },

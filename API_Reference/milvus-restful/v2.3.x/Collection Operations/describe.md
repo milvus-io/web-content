@@ -64,6 +64,7 @@ Success response:
     | Parameter        | Description                                                                               |
     |------------------|-------------------------------------------------------------------------------------------|
     | `collectionName`  | **string**(required)<br>The name of the collection to describe.|
+    | `dbName`  | **string**<br>The name of the database.|
 
 - No path parameters required
 

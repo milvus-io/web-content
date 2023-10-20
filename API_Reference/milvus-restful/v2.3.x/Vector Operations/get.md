@@ -87,6 +87,7 @@ curl --request POST \
 ```json
 {
     "collectionName": "string",
+    "dbName": "string",
     "id": "string",
     "outputFields": []
 }
@@ -94,6 +95,7 @@ curl --request POST \
 
 | Parameter        | Description                                                                               |
 |------------------|-------------------------------------------------------------------------------------------|
+| `dbName`  | **string**<br>The name of the database.|
 | `collectionName`  | **string**(required)<br>The name of the collection to which this operation applies.|
 | `outputFields`  | **array**<br>An array of fields to return along with the search results.|
 | `id`  | **string**(required)<br>The ID of the entity to be retrieved|
@@ -101,6 +103,7 @@ curl --request POST \
 ```json
 {
     "collectionName": "string",
+    "dbName": "string",
     "id": [],
     "outputFields": []
 }
@@ -108,6 +111,7 @@ curl --request POST \
 
 | Parameter        | Description                                                                               |
 |------------------|-------------------------------------------------------------------------------------------|
+| `dbName`  | **string**<br>The name of the database.|
 | `collectionName`  | **string**(required)<br>The name of the collection to which this operation applies.|
 | `outputFields`  | **array**<br>An array of fields to return along with the search results.|
 | `id`  | **array**(required)<br>An array of IDs of the entities to be retrieved|
@@ -115,6 +119,7 @@ curl --request POST \
 ```json
 {
     "collectionName": "string",
+    "dbName": "string",
     "id": "integer",
     "outputFields": []
 }
@@ -122,6 +127,7 @@ curl --request POST \
 
 | Parameter        | Description                                                                               |
 |------------------|-------------------------------------------------------------------------------------------|
+| `dbName`  | **string**<br>The name of the database.|
 | `collectionName`  | **string**(required)<br>The name of the collection to which this operation applies.|
 | `outputFields`  | **array**<br>An array of fields to return along with the search results.|
 | `id`  | **integer**(required)<br>The ID of entity to be retrieved|
@@ -129,6 +135,7 @@ curl --request POST \
 ```json
 {
     "collectionName": "string",
+    "dbName": "string",
     "id": [],
     "outputFields": []
 }
@@ -136,6 +143,7 @@ curl --request POST \
 
 | Parameter        | Description                                                                               |
 |------------------|-------------------------------------------------------------------------------------------|
+| `dbName`  | **string**<br>The name of the database.|
 | `collectionName`  | **string**(required)<br>The name of the collection to which this operation applies.|
 | `outputFields`  | **array**<br>An array of fields to return along with the search results.|
 | `id`  | **array**(required)<br>An array of IDs of the entities to be retrieved|
