@@ -24,15 +24,15 @@ A list of index names.
 ```python
 from pymilvus import Collection, utility
 
-list = utility.list_indexes("movies_db")
+indexes = utility.list_indexes("movies_db")
 
-print(list)
+print(indexes)
 # Output
 # [_idx_title_vector]
 
-list = utility.list_indexes("movies_db", fieldname="embedding")
+indexes = utility.list_indexes("movies_db", fieldname="embedding")
 
-print(list)
+print(indexes)
 # Output
 # [_idx_title_vector]
 ```
