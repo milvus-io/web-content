@@ -26,7 +26,7 @@ dotnet add package Milvus.Client --version 2.2.2-preview.6
 
 ## What's next
 
-Having installed Milvus Java SDK, you can:
+Having installed Milvus C# SDK, you can:
 
 - Learn the basic operations of Milvus:
   - [Manage Database](manage_databases.md)
@@ -36,5 +36,5 @@ Having installed Milvus Java SDK, you can:
   - [Insert data](insert_data.md)
   - [Conduct a vector search](search.md)
 
-- Explore [Milvus Java API reference](/api-reference/java/v2.2.x/About.md)
+- Explore [Milvus C# API reference](/api-reference/java/v2.2.x/About.md)
 
