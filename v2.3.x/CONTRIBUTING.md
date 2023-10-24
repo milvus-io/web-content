@@ -2,7 +2,7 @@
 
 The Milvus docs are open-source just like the database itself and welcome contributions from everyone in the Milvus community.
 
-> This repository is for Milvus technical documentation update and maintenance. Visit [Milvus.io](milvus.io) or [Web content repo](https://github.com/milvus-io/web-content) for fully rendered documents.
+> This repository is for Milvus technical documentation update and maintenance. Visit [Milvus.io](https://milvus.io/docs) or [Web content repo](https://github.com/milvus-io/web-content) for fully rendered documents.
 
 ## What contributions can I make?
 
@@ -42,7 +42,7 @@ For detailed information on this workflow, see [Make Your First Contribution](ht
 
 ![Folders](assets/folder-structure.png)
 
-- [Languages](#languages)
+- [Languages](#language)
 - [Pages](#pages)
 - [Sidebar](#sidebar)
 
