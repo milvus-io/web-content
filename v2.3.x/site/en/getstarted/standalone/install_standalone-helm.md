@@ -1,14 +1,15 @@
 ---
 id: install_standalone-helm.md
-label: Helm
+label: Helm (CPU)
+related_key: Helm
 order: 3
 group: install_standalone-docker.md
 summary: Learn how to install Milvus stanalone on Kubernetes.
 ---
 
-<div class="tab-wrapper"><a href="install_standalone-docker.md" class=''>Docker Compose (CPU)</a><a href="install_standalone-gpu-docker.md" class=''>Docker Compose (GPU)</a><a href="install_standalone-operator.md" class=''>Milvus Operator</a><a href="install_standalone-helm.md" class='active '>Helm</a></div>
+<div class="tab-wrapper"><a href="install_standalone-operator.md" class=''>Milvus Operator</a><a href="install_standalone-docker.md" class=''>Docker (CPU)</a><a href="install_standalone-gpu-docker.md" class=''>Docker (GPU)</a><a href="install_standalone-helm.md" class='active '>Helm (CPU)</a><a href="install_standalone-gpu-helm.md" class=''>Helm (GPU)</a></div>
 
-# Install Milvus Standalone with Kubernetes
+# Install Milvus Standalone with Kubernetes (CPU)
 
 This topic describes how to install Milvus standalone using Kubernetes (K8s).
 

@@ -494,7 +494,7 @@ R<SearchResults> respSearch = milvusClient.search(searchParam);
     </tr>
   <tr>
         <td><code>output_fields</code> (optional)</td>
-        <td>Name of the field to return. Vector field is not supported in current release.</td>
+        <td>Name of the field to return. Milvus supports returning the vector field.</td>
     </tr>
     <tr>
         <td><code>consistency_level</code> (optional)</td>
@@ -541,7 +541,7 @@ R<SearchResults> respSearch = milvusClient.search(searchParam);
     </tr>
   <tr>
 		<td><code>output_fields</code> (optional)</td>
-		<td>Name of the field to return.</td>
+		<td>Name of the field to return. Milvus supports returning the vector field.</td>
 	</tr>
 	</tbody>
 </table>
@@ -577,7 +577,7 @@ R<SearchResults> respSearch = milvusClient.search(searchParam);
     </tr>
   <tr>
 		<td><code>output_fields</code></td>
-		<td>Name of the field to return.</td>
+		<td>Name of the field to return. Milvus supports returning the vector field.</td>
     <td>N/A</td>
 	</tr>
   <tr>

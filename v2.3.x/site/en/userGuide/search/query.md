@@ -206,7 +206,7 @@ Output:
     </tr>
     <tr>
         <td><code>output_fields</code> (optional)</td>
-        <td>List of names of the field to return.</td>
+        <td>Name of the field to return. Milvus supports returning the vector field.</td>
     </tr>
     <tr>
         <td><code>partition_names</code> (optional)</td>
@@ -238,7 +238,7 @@ Output:
     </tr>
     <tr>
         <td><code>output_fields</code> (optional)</td>
-        <td>List of names of the field to return.</td>
+        <td>Name of the field to return. Milvus supports returning the vector field.</td>
     </tr>
     <tr>
         <td><code>limit</code> (optional)</td>
@@ -282,8 +282,7 @@ Output:
     </tr>
     <tr>
         <td><code>OutputFields</code></td>
-        <td>Name of the field to return.</td>
-        <td>Vector field is not supported in current release.</td>
+        <td>Name of the field to return. Milvus supports returning the vector field.</td>
     </tr>
     <tr>
         <td><code>opts</code></td>
@@ -314,8 +313,7 @@ Output:
   </tr>
   <tr>
         <td><code>OutFields</code></td>
-        <td>Name of the field to return.</td>
-    <td>Vector field is not supported in current release.</td>
+        <td>Name of the field to return. Milvus supports returning the vector field.</td>
     </tr>
   <tr>
         <td><code>Expr</code></td>

@@ -1108,7 +1108,14 @@
     },
     {
       "id": "json_data_type.md",
-      "title": "JSON",
+      "title": "Use JSON Field",
+      "label1": "reference",
+      "label2": "",
+      "order": 9
+    },
+    {
+      "id": "array_data_type.md",
+      "title": "Use Array Field",
       "label1": "reference",
       "label2": "",
       "order": 9

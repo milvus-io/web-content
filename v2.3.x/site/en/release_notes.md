@@ -6,6 +6,98 @@ summary: Milvus Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.3.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.3.2
+
+Release date: Oct 26, 2023
+
+| Milvus version | Python SDK version | Java SDK version | Go SDK version | Node.js SDK version |
+|----------------|--------------------|------------------|----------------|---------------------|
+| 2.3.2          | 2.3.2              | 2.3.2            | 2.3.2          | 2.3.3               |
+
+We're thrilled to unveil Milvus 2.3.2, enriched with an array of novel features. Experience support for array data types, delve into intricate delete expressions, and celebrate the return of binary metric types such as SUBSTRUCTURE/SUPERSTRUCTURE. 
+
+This release promises enhanced performance through minimized data copying during loading and better bulk insertions. Coupled with heightened error messaging and handling, you're in for a smoother experience. Notably, our commitment to rolling upgrade stability ensures minimized service disruptions during updates.
+
+## Breaking Changes
+
+- Discontinued TimeTravel in compactor ([#26785](https://github.com/milvus-io/milvus/pull/26785))
+- Phased out mysql metastore ([#26633](https://github.com/milvus-io/milvus/pull/26633))
+
+## New Features
+
+- Array datatype now supported ([#26369](https://github.com/milvus-io/milvus/pull/26369))
+- Introduced complex delete expressions ([#25752](https://github.com/milvus-io/milvus/pull/25752))
+- Reintroduced binary metric types SUBSTRUCTURE/SUPERSTRUCTURE ([#26766](https://github.com/milvus-io/milvus/pull/26766))
+- Vector index mmap now available ([#26750](https://github.com/milvus-io/milvus/pull/26750))
+- CDC: Added capability to replicate mq messages ([#27240](https://github.com/milvus-io/milvus/pull/27240))
+- Facilitated renaming of database names within collections ([#26543](https://github.com/milvus-io/milvus/pull/26543))
+- Activated bulk insert of binlog data with partition keys ([#27241](https://github.com/milvus-io/milvus/pull/27241))
+- Enhanced support for multiple index engines ([#27178](https://github.com/milvus-io/milvus/pull/27178))
+- Introduced chunk cache to fetch raw vectors:
+  - Newly added ChunkCache facilitates vector retrieval from storage ([#26142](https://github.com/milvus-io/milvus/pull/26142))
+- Implemented Tikv as a distributed meta solution:
+  - Integrated Tikv ([#26246](https://github.com/milvus-io/milvus/pull/26246))
+- Rolled out float16 vector support ([#25852](https://github.com/milvus-io/milvus/pull/25852))
+  Note: Index for float16 vector coming in the next version
+- Restful updates:
+  - Unveiled new interface for upsert ([#27787](https://github.com/milvus-io/milvus/pull/27787))
+  - Context enriched with grpc metadata ([#27668](https://github.com/milvus-io/milvus/pull/27668))
+  - Defined component listening IP ([#27161](https://github.com/milvus-io/milvus/pull/27161))
+
+## Performance Enhancements
+
+- Optimized data loading by minimizing data copy operations ([#26746](https://github.com/milvus-io/milvus/pull/26746))
+- Streamlined bulk inserts with batched varchar reading ([#26199](https://github.com/milvus-io/milvus/pull/26199))
+- Improved handling of large structs using pointer receivers ([#26668](https://github.com/milvus-io/milvus/pull/26668))
+- Removed unnecessary offset checks during data fills ([#26666](https://github.com/milvus-io/milvus/pull/26666))
+- Addressed high CPU consumption linked to proto.size ([#27054](https://github.com/milvus-io/milvus/pull/27054))
+- Optimized scalar column data with MADV_WILLNEED ([#27170](https://github.com/milvus-io/milvus/pull/27170))
+
+## Additional Enhancements
+
+- Robust rolling upgrade capabilities:
+  - Significant improvement in system availability during rolling upgrades, ensuring minimal service interruptions.
+- Upgraded error messaging and handling for a seamless experience.
+- Optimized flushing processes:
+  - Addressed issues where delete commands weren't being saved during flush operations.
+  - Resolved slow flush-related issues.
+  - Segregated task queues for Flush and DDL to prevent mutual blockages.
+- Improved RocksMQ seek speeds ([#27646](https://github.com/milvus-io/milvus/pull/27646)) and standalone recovery times.
+- Streamlined compact tasks ([#27899](https://github.com/milvus-io/milvus/pull/27899))
+- Added a channel manager in DataNode ([#27308](https://github.com/milvus-io/milvus/pull/27308))
+- Refined chunk management:
+  - Removed MultiRemoveWithPrefix ([#26924](https://github.com/milvus-io/milvus/pull/26924))
+  - Enhanced minio chunk handling ([#27510](https://github.com/milvus-io/milvus/pull/27510))
+  - Simplified ChunkCache path initialization ([#27433](https://github.com/milvus-io/milvus/pull/27433))
+  - Configurable read-ahead policy in ChunkCache ([#27291](https://github.com/milvus-io/milvus/pull/27291))
+  - Rectified chunk manager usage issues ([#27051](https://github.com/milvus-io/milvus/pull/27051))
+- Integrated grpc compression ([#27894](https://github.com/milvus-io/milvus/pull/27894))
+- Decoupled client-server API interfaces ([#27186](https://github.com/milvus-io/milvus/pull/27186))
+- Transitioned etcd watch-related code to event manager ([#27192](https://github.com/milvus-io/milvus/pull/27192))
+- Displayed index details during GetSegmentInfo ([#26981](https://github.com/milvus-io/milvus/pull/26981))
+
+## Bug Fixes
+
+- Resolved concurrent string parsing expression issues ([#26721](https://github.com/milvus-io/milvus/pull/26721))
+- Fixed connection issues with Kafka under SASL_SSL ([#26617](https://github.com/milvus-io/milvus/pull/26617))
+- Implemented error responses for yet-to-be-implemented APIs, replacing panic reactions ([#26589](https://github.com/milvus-io/milvus/pull/26589))
+- Addressed data race concerns:
+  - Mitigated gRPC client data race issues ([#26574](https://github.com/milvus-io/milvus/pull/26574))
+  - Rectified config data race with FileSource ([#26518](https://github.com/milvus-io/milvus/pull/26518))
+- Mended partition garbage collection issues ([#27816](https://github.com/milvus-io/milvus/pull/27816)).
+- Rectified SIGSEGV errors encountered when operating within gdb ([#27736](https://github.com/milvus-io/milvus/pull/27736)).
+- Addressed thread safety issues in glog for standalone mode ([#27703](https://github.com/milvus-io/milvus/pull/27703)).
+- Fixed instances where segments were inadvertently retained post-task cancellations ([#26685](https://github.com/milvus-io/milvus/pull/26685)).
+- Resolved loading failures for collections exceeding 128 partitions ([#26763](https://github.com/milvus-io/milvus/pull/26763)).
+- Ensured compatibility with scalar index types such as marisa-trie and Ascending ([#27638](https://github.com/milvus-io/milvus/pull/27638)).
+- Corrected issues causing retrieval to sometimes exceed specified result limits ([#26670](https://github.com/milvus-io/milvus/pull/26670)).
+- Solved startup failures in rootcoord due to role number limits ([#27361](https://github.com/milvus-io/milvus/pull/27361)).
+- Patched Kafka consumer connection leaks ([#27224](https://github.com/milvus-io/milvus/pull/27224)).
+- Disabled the enlarging of indices for flat structures ([#27309](https://github.com/milvus-io/milvus/pull/27309)).
+- Updated garbage collector to fetch metadata post-storage listing ([#27203](https://github.com/milvus-io/milvus/pull/27203)).
+- Fixed instances of datanode crashes stemming from simultaneous compaction and delete processes ([#27167](https://github.com/milvus-io/milvus/pull/27167)).
+- Ironed out issues related to concurrent load logic in querynodev2 ([#26959](https://github.com/milvus-io/milvus/pull/26959)).
+
 ## v2.3.1
 
 Release date: Sep 22, 2023

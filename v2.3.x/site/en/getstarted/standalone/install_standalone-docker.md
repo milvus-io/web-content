@@ -1,13 +1,13 @@
 ---
 id: install_standalone-docker.md
-label: Docker Compose (CPU)
+label: Docker (CPU)
 related_key: Docker
-order: 0
+order: 1
 group: install_standalone-docker.md
 summary: Learn how to install Milvus stanalone with Docker Compose.
 ---
 
-<div class="tab-wrapper"><a href="install_standalone-docker.md" class='active '>Docker Compose (CPU)</a><a href="install_standalone-gpu-docker.md" class=''>Docker Compose (GPU)</a><a href="install_standalone-operator.md" class=''>Milvus Operator</a><a href="install_standalone-helm.md" class=''>Helm</a></div>
+<div class="tab-wrapper"><a href="install_standalone-operator.md" class=''>Milvus Operator</a><a href="install_standalone-docker.md" class='active '>Docker (CPU)</a><a href="install_standalone-gpu-docker.md" class=''>Docker (GPU)</a><a href="install_standalone-helm.md" class=''>Helm (CPU)</a><a href="install_standalone-gpu-helm.md" class=''>Helm (GPU)</a></div>
 
 # Install Milvus Standalone with Docker Compose (CPU)
 
@@ -21,10 +21,10 @@ For the users using MacOS 10.14 or later, set the Docker virtual machine (VM) to
 
 ## Download the `YAML` file
 
-[Download](https://github.com/milvus-io/milvus/releases/download/v2.3.1/milvus-standalone-docker-compose.yml) `milvus-standalone-docker-compose.yml` and save it as `docker-compose.yml` manually, or with the following command.
+[Download](https://github.com/milvus-io/milvus/releases/download/v2.3.2/milvus-standalone-docker-compose.yml) `milvus-standalone-docker-compose.yml` and save it as `docker-compose.yml` manually, or with the following command.
 
 ```
-$ wget https://github.com/milvus-io/milvus/releases/download/v2.3.1/milvus-standalone-docker-compose.yml -O docker-compose.yml
+$ wget https://github.com/milvus-io/milvus/releases/download/v2.3.2/milvus-standalone-docker-compose.yml -O docker-compose.yml
 ```
 
 ## Start Milvus

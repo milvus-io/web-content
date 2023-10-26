@@ -8,14 +8,17 @@ summary: Learn how to delete data in Milvus.
 
 This topic describes how to delete entities in Milvus.
 
-Milvus supports deleting entities by primary key filtered with boolean expression.
+Milvus supports deleting entities by primary key or complex boolean expressions. Deleting entities by primary key is much faster and lighter than deleting them by complex boolean expressions. This is because Milvus executes queries first when deleting data by complex boolean expressions.
 
 
 <div class="alert caution">
     <ul>
-	      <li>Deleted entities can still be retrieved immediately after the deletion if the consistency level is set lower than <code>Strong</code>.</li>
+		  <li>Deleted entities can still be retrieved immediately after the deletion if the consistency level is set lower than <code>Strong</code>.</li>
 	      <li>Entities deleted beyond the pre-specified span of time for Time Travel cannot be retrieved again.</li>
-        <li>Frequent deletion operations will impact the system performance.</li>
+          <li>Frequent deletion operations will impact the system performance.</li>
+		  <li>Before deleting entities by comlpex boolean expressions, make sure the collection has been loaded.</li>
+		  <li>Deleting entities by complex boolean expressions is not an atomic operation. Therefore, if it fails halfway through, some data may still be deleted.</li>
+		  <li>Deleting entities by complex boolean expressions is supported only when the consistency is set to <b>Bounded</b>. For details, see <a href="consistency.md#Consistency-levels">Consistency</a>.</li>
     </ul>
 </div>
 
@@ -23,11 +26,13 @@ Milvus supports deleting entities by primary key filtered with boolean expressio
 
 ## Prepare boolean expression
 
-Prepare the boolean expression that filters the entities to delete. 
+Prepare the boolean expression that filters the entities to delete.
 
-Milvus only supports deleting entities with clearly specified primary keys, which can be achieved merely with the term expression `in`. Other operators can be used only in query or scalar filtering in vector search. See [Boolean Expression Rules](boolean.md) for more information.
+Milvus supports deleting entities by primary key or complex boolean expressions. For more information on expression rules and supported operators, see [Boolean Expression Rules](boolean.md).
 
-The following example filters data with primary key values of `0` and `1`.
+### Simple boolean expression
+
+Use a simple expression to filter data with primary key values of `0` and `1`:
 
 <div class="multipleCode">
   <a href="#python">Python </a>
@@ -81,6 +86,27 @@ The expression to specify entities to be deleted： book_id in [0,1]
     </tbody>
 </table>
 
+### Complex boolean expression
+
+To filter entities that meet specific conditions, define complex boolean expressions.
+
+Filter entities whose `word_count` is greater than or equal to `11000`:
+
+```python
+expr = "word_count >= 11000"
+```
+
+Filter entities whose `book_name` is not `Unknown`:
+
+```python
+expr = "book_name != Unknown"
+```
+
+Filter entities whose primary key values are greater than `5` and `word_count` is smaller than or equal to `9999`:
+
+```python
+expr = "book_id > 5 && word_count <= 9999"
+```
 
 ## Delete entities
 

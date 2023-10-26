@@ -158,7 +158,7 @@ The following table describes the parameters for searching or querying data with
 | `search_params` | Search parameters specific to the index. Find more expression details in [Conduct a Vector Similarity Search](search.md#prepare-search-parameters). |
 | `limit` | Number of results to return per page. |
 | `radius` | Angle where the vector with the least similarity resides. Find more expression details in [Within Range](within_range.md#configure-a-range-for-vector-filtering). |
-| `output_fields` | Name of the field to return. |
+| `output_fields` | Name of the field to return. Milvus supports returning the vector field.|
 
 ## What's next
 

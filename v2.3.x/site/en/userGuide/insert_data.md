@@ -378,7 +378,13 @@ After inserting entities into a collection that has previously been indexed, you
 
 ## Flush the Data in Milvus
 
-When data is inserted into Milvus it is inserted into segments. Segments have to reach a certain size to be sealed and indexed. Unsealed segments will be searched brute force. In order to avoid this with any remainder data, it is best to call `flush()`. The `flush()` call will seal any remaining segments and send them for indexing. It is important to only call this method at the end of an insert session. Calling it too often will cause fragmented data that will need to be cleaned later on.
+When data is inserted into Milvus, it is stored in segments. Segments have to reach a certain size before they can be sealed and indexed. Unsealed segments are searched using brute force. If you need to search the data immediately after insertion, you can call the `flush()` method once the data is inserted. This method seals any remaining segments and sends them for indexing. It is important to only call this method at the end of an insert session. Calling it too frequently will result in fragmented data that will require cleaning later on.
+
+<div class="alert note">
+
+Milvus automatically triggers the `flush()` operation. In most cases, manual calls to this operation are not necessary.
+
+</div>
 
 
 ## Limits
