@@ -81,6 +81,9 @@ curl --request POST \
 | `offset`  | **integer**<br>The number of entities to skip in the search results.<br>The sum of this value and that of `limit` should not be greater than **1024**.<br>The maximum value is **1024**.|
 | `outputFields`  | **array**<br>An array of fields to return along with the search results.|
 | `vector`  | **array (number \[float32\])**(required)<br>The query vector in the form of a list of floating numbers.|
+| `params`  | **object**<br>List of search parameters|
+| `params.radius`  | **number(float64)**<br>The angle where the vector with the least similarity resides.|
+| `params.range_filter`  | **number(float64)**<br>Used in combination to filter vector field values whose similarity to the query vector falls into a specific range.|
 
 ## Response
 
