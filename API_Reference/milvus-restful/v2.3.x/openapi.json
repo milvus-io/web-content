@@ -950,11 +950,13 @@
                         "properties": {
                           "radius": {
                             "type": "number",
-                            "format": "float64"
+                            "format": "float64",
+                            "description": "The angle where the vector with the least similarity resides."
                           },
                           "range_filter": {
                             "type": "number",
-                            "format": "float64"
+                            "format": "float64",
+                            "description": "Used in combination to filter vector field values whose similarity to the query vector falls into a specific range."
                           }
                         },
                         "x-apifox-orders": [
@@ -964,6 +966,7 @@
                         "required": [
                           "range_filter"
                         ],
+                        "description": "List of search parameters",
                         "x-apifox-ignore-properties": []
                       }
                     },
@@ -1036,11 +1039,13 @@
                     "properties": {
                       "radius": {
                         "type": "number",
-                        "format": "float64"
+                        "format": "float64",
+                        "description": "The angle where the vector with the least similarity resides."
                       },
                       "range_filter": {
                         "type": "number",
-                        "format": "float64"
+                        "format": "float64",
+                        "description": "Used in combination to filter vector field values whose similarity to the query vector falls into a specific range."
                       }
                     },
                     "x-apifox-orders": [
@@ -1050,6 +1055,7 @@
                     "required": [
                       "range_filter"
                     ],
+                    "description": "List of search parameters",
                     "x-apifox-ignore-properties": []
                   }
                 },
@@ -1657,10 +1663,251 @@
           }
         ]
       }
+    },
+    "/v1/vector/upsert": {
+      "post": {
+        "summary": "Upsert",
+        "x-apifox-folder": "Vector Operations",
+        "x-apifox-status": "released",
+        "deprecated": false,
+        "description": "Inserts one or more entities into a collection.",
+        "tags": [
+          "Vector Operations"
+        ],
+        "parameters": [
+          {
+            "name": "public-endpoint",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "oneOf": [
+                  {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "x-apifox-orders": [
+                      "dbName",
+                      "collectionName",
+                      "data"
+                    ],
+                    "properties": {
+                      "dbName": {
+                        "type": "string",
+                        "description": "The name of the database."
+                      },
+                      "collectionName": {
+                        "type": "string",
+                        "description": "The name of the collection to which entities will be inserted."
+                      },
+                      "data": {
+                        "type": "object",
+                        "properties": {},
+                        "x-apifox-orders": [],
+                        "description": "An entity object. Note that the keys in the entity should match the collection schema.",
+                        "x-apifox-ignore-properties": []
+                      }
+                    },
+                    "required": [
+                      "collectionName",
+                      "data"
+                    ],
+                    "x-apifox-ignore-properties": []
+                  },
+                  {
+                    "type": "object",
+                    "x-apifox-refs": {
+                      "01HD5ZEEX7KEAW58KXK0N7QHG0": {
+                        "x-apifox-overrides": {},
+                        "type": "object",
+                        "required": [
+                          "data",
+                          "collectionName"
+                        ],
+                        "properties": {
+                          "collectionName": {
+                            "type": "string",
+                            "description": "The name of the collection to which entities will be inserted."
+                          },
+                          "data": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "additionalProperties": true,
+                              "x-apifox-orders": [],
+                              "properties": {},
+                              "x-apifox-ignore-properties": []
+                            },
+                            "description": "An array of entity objects. Note that the keys in an entity object should match the collection schema"
+                          }
+                        },
+                        "x-apifox-orders": [
+                          "collectionName",
+                          "data"
+                        ],
+                        "x-apifox-ignore-properties": [],
+                        "x-apifox-folder": "Schemas"
+                      }
+                    },
+                    "x-apifox-orders": [
+                      "dbName",
+                      "01HD5ZEEX7KEAW58KXK0N7QHG0"
+                    ],
+                    "properties": {
+                      "dbName": {
+                        "type": "string",
+                        "description": "The name of the database."
+                      },
+                      "collectionName": {
+                        "type": "string",
+                        "description": "The name of the collection to which entities will be inserted."
+                      },
+                      "data": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "additionalProperties": true,
+                          "x-apifox-orders": [],
+                          "properties": {},
+                          "x-apifox-ignore-properties": []
+                        },
+                        "description": "An array of entity objects. Note that the keys in an entity object should match the collection schema"
+                      }
+                    },
+                    "required": [
+                      "collectionName",
+                      "data"
+                    ],
+                    "x-apifox-ignore-properties": [
+                      "collectionName",
+                      "data"
+                    ]
+                  }
+                ]
+              },
+              "example": ""
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns the number of inserted entities and an array of their IDs.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "upsertCount": {
+                          "type": "integer",
+                          "examples": [
+                            4
+                          ],
+                          "description": "The number of inserted entities."
+                        },
+                        "upsertIds": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "examples": [
+                            [
+                              "['id1'",
+                              " 'id2'",
+                              " 'id3']"
+                            ]
+                          ],
+                          "description": "An array of the IDs of inserted entities."
+                        }
+                      },
+                      "x-apifox-refs": {},
+                      "x-apifox-orders": [
+                        "upsertCount",
+                        "upsertIds"
+                      ],
+                      "x-apifox-ignore-properties": []
+                    }
+                  },
+                  "x-apifox-orders": [
+                    "code",
+                    "data"
+                  ],
+                  "x-apifox-ignore-properties": [],
+                  "x-apifox-folder": "Schemas"
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/2645146/apis/api-114647593-run",
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
     }
   },
   "components": {
     "schemas": {
+      "httpapi.GenericResp-customer_UpsertResp": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "upsertCount": {
+                "type": "integer",
+                "examples": [
+                  4
+                ],
+                "description": "The number of inserted entities."
+              },
+              "upsertIds": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "examples": [
+                  [
+                    "['id1'",
+                    " 'id2'",
+                    " 'id3']"
+                  ]
+                ],
+                "description": "An array of the IDs of inserted entities."
+              }
+            },
+            "x-apifox-refs": {},
+            "x-apifox-orders": [
+              "upsertCount",
+              "upsertIds"
+            ],
+            "x-apifox-ignore-properties": []
+          }
+        },
+        "x-apifox-orders": [
+          "code",
+          "data"
+        ],
+        "x-apifox-ignore-properties": [],
+        "x-apifox-folder": "Schemas"
+      },
       "customer.GetReq4": {
         "type": "object",
         "properties": {
@@ -1884,11 +2131,13 @@
             "properties": {
               "radius": {
                 "type": "number",
-                "format": "float64"
+                "format": "float64",
+                "description": "The angle where the vector with the least similarity resides."
               },
               "range_filter": {
                 "type": "number",
-                "format": "float64"
+                "format": "float64",
+                "description": "Used in combination to filter vector field values whose similarity to the query vector falls into a specific range."
               }
             },
             "x-apifox-orders": [
@@ -1898,6 +2147,7 @@
             "required": [
               "range_filter"
             ],
+            "description": "List of search parameters",
             "x-apifox-ignore-properties": []
           }
         },

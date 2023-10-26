@@ -115,7 +115,7 @@ class RefGen:
                         end_pos = t.find(end_tag) + len(end_tag)
                         t = t[:start_pos] + t[end_pos:]
 
-                file_name = page_title.replace(' ', '_').lower()
+                file_name = page_title.split(' ')[0].lower()
 
                 with open('API_Reference/milvus-restful/{}/{}/{}.md'.format(version, page_parent, file_name), 'w') as f:
                     f.write(t)
