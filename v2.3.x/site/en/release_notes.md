@@ -26,6 +26,7 @@ This release promises enhanced performance through minimized data copying during
 ## New Features
 
 - Array datatype now supported ([#26369](https://github.com/milvus-io/milvus/pull/26369))
+  - Doc page: [Use Array Fields](https://milvus.io/docs/array_data_type.md)
 - Introduced complex delete expressions ([#25752](https://github.com/milvus-io/milvus/pull/25752))
 - Reintroduced binary metric types SUBSTRUCTURE/SUPERSTRUCTURE ([#26766](https://github.com/milvus-io/milvus/pull/26766))
 - Vector index mmap now available ([#26750](https://github.com/milvus-io/milvus/pull/26750))
@@ -38,9 +39,10 @@ This release promises enhanced performance through minimized data copying during
 - Implemented Tikv as a distributed meta solution:
   - Integrated Tikv ([#26246](https://github.com/milvus-io/milvus/pull/26246))
 - Rolled out float16 vector support ([#25852](https://github.com/milvus-io/milvus/pull/25852))
-  Note: Index for float16 vector coming in the next version
+  - Note: Index for float16 vector coming in the next version
 - Restful updates:
   - Unveiled new interface for upsert ([#27787](https://github.com/milvus-io/milvus/pull/27787))
+    - Doc page: [upsert](https://milvus.io/api-reference/restful/v2.3.x/Vector%20Operations/upsert.md)
   - Context enriched with grpc metadata ([#27668](https://github.com/milvus-io/milvus/pull/27668))
   - Defined component listening IP ([#27161](https://github.com/milvus-io/milvus/pull/27161))
 
