@@ -1,69 +1,77 @@
 ---
-id: install_cluster-helm.md
-label: Helm (CPU)
+id: install_cluster-gpu-helm.md
+label: Helm (GPU)
 related_key: Kubernetes
-order: 1
+order: 2
 group: install_cluster-milvusoperator.md
-summary: Learn how to install Milvus cluster on Kubernetes.
+summary: Learn how to install Milvus cluster on Kubernetes (GPU).
 ---
 
-<div class="tab-wrapper"><a href="install_cluster-milvusoperator.md" class=''>Milvus Operator</a><a href="install_cluster-helm.md" class='active '>Helm (CPU)</a><a href="install_cluster-gpu-helm.md" class=''>Helm (GPU)</a></div>
+<div class="tab-wrapper"><a href="install_cluster-milvusoperator.md" class=''>Milvus Operator</a><a href="install_cluster-helm.md" class=''>Helm (CPU)</a><a href="install_cluster-gpu-helm.md" class='active '>Helm (GPU)</a></div>
 
-# Install Milvus Cluster with Helm
+# Install Milvus Cluster with Helm (GPU)
 
-This topic introduces how to deploy a Milvus cluster with Helm on Kubernetes (K8s).
+This topic introduces how to deploy a Milvus cluster with GPU support using Helm on Kubernetes.
 
 ## Prerequisites
 
-Check [the requirements](prerequisite-helm.md) for hardware and software prior to your installation.
+- The compute capability of your GPU device is 6.1, 7.0, 7.5, or 8.0. To check whether your GPU device suffices the requirement, check [Your GPU Compute Capability](https://developer.nvidia.com/cuda-gpus) on the NVIDIA developer website.
 
-## Create a K8s Cluster
+- You have installed the NVIDIA driver for your GPU device on one of [the supported Linux distributions](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html#linux-distributions) and then the NVIDIA Container Toolkit following [this guide](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html).
 
-If you have already deployed a K8s cluster for production, you can skip this step and proceed directly to [Install Helm Chart for Milvus](install_cluster-helm.md#Install-Helm-Chart-for-Milvus). If not, you can follow the steps below to quickly create a K8s for testing, and then use it to deploy a Milvus cluster with Helm. 
+- You have installed a Kubernetes cluster, and the `kubectl` command-line tool has been configured to communicate with your cluster. It is recommended to run this tutorial on a cluster with at least two nodes that are not acting as control plane hosts.
 
-### Create a K8s cluster using minikube
+- Check [the requirements](prerequisite-helm.md) for hardware and software prior to your installation.
 
-We recommend installing Milvus on K8s with [minikube](https://minikube.sigs.k8s.io/docs/), a tool that allows you to run K8s locally.
+## Start a Kubernetes cluster with GPU worker nodes
 
-<div class="alert note">
-minikube can only be used in test environments. It is not recommended that you deploy Milvus distributed clusters in this way in production environments.
-</div>
+We recommend installing Milvus on a Kubernetes cluster with GPU worker nodes and using the default storage class provisioned.
 
-#### 1. Install minikube
+### 1. Prepare GPU worker nodes
 
-See [install minikube](https://minikube.sigs.k8s.io/docs/start/) for more information.
+See [Prepare GPU worker nodes](https://gitlab.com/nvidia/kubernetes/device-plugin/-/blob/main/README.md#preparing-your-gpu-nodes) for more information.
 
-#### 2. Start a K8s cluster using minikube
+### 2. Enable GPU support on Kubernetes
 
-After installing minikube, run the following command to start a K8s cluster.
+See [install nvidia-device-plugin with helm](https://gitlab.com/nvidia/kubernetes/device-plugin/-/blob/main/README.md#deployment-via-helm) for more information.
 
+After setting up, run `kubectl describe node <gpu-worker-node>` to view the GPU resources. The command output should be similar to the following:
+
+```bash
+Capacity:
+  ...
+  nvidia.com/gpu:     4
+  ...
+Allocatable:
+  ...
+  nvidia.com/gpu:     4
+  ...
 ```
-$ minikube start
-```
 
-#### 3. Check the K8s cluster status
+Note: In this example, we have set up a GPU worker node with 4 GPU cards.
 
-Run `$ kubectl cluster-info` to check the status of the K8s cluster you just created. Ensure that you can access the K8s cluster via `kubectl`. If you have not installed `kubectl` locally, see [Use kubectl inside minikube](https://minikube.sigs.k8s.io/docs/handbook/kubectl/).
+### 3. Check the default storage class
 
+Milvus relies on the default storage class to automatically provision volumes for data persistence. Run the following command to check storage classes:
 
-minikube has a dependency on default StorageClass when installed. Check the dependency by running the following command. Other installation methods require manual configuration of the StorageClass. See [Change the default StorageClass](https://kubernetes.io/docs/tasks/administer-cluster/change-default-storage-class/) for more information.
-
-```
+```bash
 $ kubectl get sc
 ```
 
-```
-NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDINGMODE    ALLOWVOLUMEEXPANSION     AGE
-standard (default)    k8s.io/minikube-hostpath     Delete           Immediate             false                    3m36s
+The command output should be similar to the following:
+
+```bash
+NAME                   PROVISIONER                                     RECLAIMPOLICY   VOLUMEBINDINGMODE      ALLOWVOLUMEEXPANSION   AGE
+local-path (default)   rancher.io/local-path                           Delete          WaitForFirstConsumer   false                  461d
 ```
 
 ## Install Helm Chart for Milvus
 
-Helm is a K8s package manager that can help you deploy Milvus quickly.
+Helm is a Kubernetes package manager that can help you deploy Milvus quickly.
 
-1. Add Milvus Helm repository.
+1. Add Milvus to Helm's repository.
 
-```
+```bash
 $ helm repo add milvus https://zilliztech.github.io/milvus-helm/
 ```
 
@@ -71,7 +79,7 @@ $ helm repo add milvus https://zilliztech.github.io/milvus-helm/
 
 The Milvus Helm Charts repo at `https://milvus-io.github.io/milvus-helm/` has been archived and you can get further updates from `https://zilliztech.github.io/milvus-helm/` as follows:
 
-```shell
+```bash
 helm repo add zilliztech https://zilliztech.github.io/milvus-helm
 helm repo update
 # upgrade existing helm release
@@ -82,9 +90,9 @@ The archived repo is still available for the charts up to 4.0.31. For later rele
 
 </div>
 
-2. Update charts locally.
+2. Update your local chart repository.
 
-```
+```bash
 $ helm repo update
 ```
 
@@ -92,8 +100,63 @@ $ helm repo update
 
 Start Milvus with Helm by specifying the release name, the chart, and parameters you expect to change. This topic uses <code>my-release</code> as the release name. To use a different release name, replace <code>my-release</code> in the command.
 
+Milvus allows you to assign one or more GPU devices to Milvus.
+
+### Assign a single GPU device
+
+Run the following commands to assign a single GPU device to Milvus:
+
+```bash
+cat <<EOF > custom-values.yaml
+indexNode:
+  resources:
+    requests:
+      nvidia.com/gpu: "1"
+    limits:
+      nvidia.com/gpu: "1"
+queryNode:
+  resources:
+    requests:
+      nvidia.com/gpu: "1"
+    limits:
+      nvidia.com/gpu: "1"
+EOF
 ```
-$ helm install my-release milvus/milvus
+
+```bash
+$ helm install my-release milvus/milvus -f custom-values.yaml
+```
+
+### Assign multiple GPU devices
+
+Run the following commands to assign multiple GPU devices to Milvus:
+
+```bash
+cat <<EOF > custom-values.yaml
+indexNode:
+  resources:
+    requests:
+      nvidia.com/gpu: "2"
+    limits:
+      nvidia.com/gpu: "2"
+  extraEnv:
+  - name: CUDA_VISIBLE_DEVICES
+    value: "0, 1"
+queryNode:
+  resources:
+    requests:
+      nvidia.com/gpu: "2"
+    limits:
+      nvidia.com/gpu: "2"
+  extraEnv:
+  - name: CUDA_VISIBLE_DEVICES
+    value: "0, 1"
+EOF
+```
+In the configuration above, a total of four GPU cards are assigned, with two cards designated for the index node and the other two for the query node.
+
+```bash
+$ helm install my-release milvus/milvus -f custom-values.yaml
 ```
 
 <div class="alert note">
@@ -108,13 +171,13 @@ $ helm install my-release milvus/milvus
 
 Check the status of the running pods.
 
-```
+```bash
 $ kubectl get pods
 ```
 
 After Milvus starts, the `READY` column displays `1/1` for all pods.
 
-```
+```text
 NAME                                             READY  STATUS   RESTARTS  AGE
 my-release-etcd-0                                1/1    Running   0        3m23s
 my-release-etcd-1                                1/1    Running   0        3m23s
@@ -170,29 +233,6 @@ Run the following command to uninstall Milvus.
 
 ```bash
 $ helm uninstall my-release
-```
-
-## Stop the K8s cluster
-
-Stop the cluster and the minikube VM without deleting the resources you created.
-
-```bash
-$ minikube stop
-```
-
-Run `minikube start` to restart the cluster.
-
-
-## Delete the K8s cluster
-
-<div class="alert note">
-Run <code>$ kubectl logs `pod_name`</code> to get the <code>stderr</code> log of the pod before deleting the cluster and all resources.
-</div>
-
-Delete the cluster, the minikube VM, and all resources you created including persistent volumes.
-
-```bash
-$ minikube delete
 ```
 
 ## What's next
