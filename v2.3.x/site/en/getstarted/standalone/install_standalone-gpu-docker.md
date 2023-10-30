@@ -37,7 +37,7 @@ You need to make some changes to the environment variables of the standalone ser
 
 - To assign a specific GPU device to Milvus, locate the `deploy.resources.reservations.devices[0].devices_ids` field in the definition of the `standalone` service and replace its value with the ID of the desired GPU. You can use the `nvidia-smi` tool, included with NVIDIA GPU display drivers, to determine the ID of a GPU device. Milvus supports multiple GPU devices.
 
-- Add `KNOWHERE_GPU_MEM_POOL_SIZE` in the `environment` section of the `standalone` service and set its value to reflect the size of a shared display memory pool. The format for the size is `initialSize;maximumSize`, where `initialSize` represents the initial size of the memory pool and `maximumSize` represents its maximum size. Both values should be integers set in MB and join them using a semicolon(`;`). Milvus uses this field to allocate display memory to each process.
+- Add `KNOWHERE_GPU_MEM_POOL_SIZE` in the `environment` section of the `standalone` service and set its value to reflect the size of a shared display memory pool. The format for the size is `initialSize;maximumSize`, where `initialSize` represents the initial size of the memory pool and `maximumSize` represents its maximum size. Both values should be integers set in MB joined by a semicolon(`;`). Milvus uses this field to allocate display memory to each process.
 
 Assign a single GPU device to Milvus:
 
