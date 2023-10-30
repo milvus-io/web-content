@@ -46,7 +46,7 @@ Assign a single GPU device to Milvus:
 standalone:
   environment:
     ...
-    KNOWHERE_GPU_MEM_POOL_SIZE: 2048:4096
+    KNOWHERE_GPU_MEM_POOL_SIZE: 2048;4096
   ...
   deploy:
     resources:
@@ -65,7 +65,7 @@ Assign multiple GPU devices to Milvus:
 standalone:
   environment:
     ...
-    KNOWHERE_GPU_MEM_POOL_SIZE: 2048:4096
+    KNOWHERE_GPU_MEM_POOL_SIZE: 2048;4096
   ...
   deploy:
     resources:
