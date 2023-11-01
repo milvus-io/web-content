@@ -192,12 +192,11 @@ Map the local path to your `milvus.yaml` file onto the corresponding docker cont
     container_name: milvus-standalone
     image: milvusdb/milvus:v2.2.13
     command: ["milvus", "run", "standalone"]
-    volumes:       # Add a volumes section.
-      - /local/path/to/your/milvus.yaml:/milvus/configs/milvus.yaml   # Map the local path to the container path
     environment:
       ETCD_ENDPOINTS: etcd:2379
       MINIO_ADDRESS: minio:9000
     volumes:
+      - /local/path/to/your/milvus.yaml:/milvus/configs/milvus.yaml   # Map the local path to the container path
       - ${DOCKER_VOLUME_DIRECTORY:-.}/volumes/milvus:/var/lib/milvus
     ports:
       - "19530:19530"
