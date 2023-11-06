@@ -14,11 +14,11 @@ This topic describes how to connect to and disconnect from a Milvus server.
 
 Milvus supports two ports, port `19530` and port `9091`:
 
-- Port `19530` is for gRPC. It is the default port when you connect to a Milvus server with different Milvus SDKs.
+- Port `19530` is for gRPC and RESTful API. It is the default port when you connect to a Milvus server with different Milvus SDKs or HTTP clients.
 
-- Port `9091` is for RESTful API. It is used when you connect to a Milvus server with an HTTP client.
+- Port `9091` is for metrics collection, pprof profiling, and health probes within Kubernetes. It serves as a management port.
 
-The example below connects to the Milvus server with host as `localhost` and port as `19530` or `9091`, and disconnects from it. If the connection is refused, try unblocking the corresponding port.
+The example below demonstrates how to establish a connection to the Milvus server using `localhost` as the host and `19530` as the port, and then how to properly disconnect from it. If the connection is refused, try unblocking the corresponding port.
 
 ## Connect to a Milvus server
 
@@ -76,8 +76,10 @@ connect -h localhost -p 19530 -a default
 ```
 
 ```curl
-curl localhost:9091/api/v1/health
-{"status":"ok"}
+curl --request GET \
+    --url 'localhost:19530/v1/vector/collections'
+
+{"code":200,"data":["fouram_sLmXoqnw"]}
 ```
 
 <table class="language-python">
