@@ -367,8 +367,8 @@ In order to improve performance, HNSW limits the maximum degree of nodes on each
 
   | Parameter        | Description                | Range    |
   | ---------------- | -------------------------- | -------- |
-  | `M`              | Maximum degree of the node | [4, 64]  |
-  | `efConstruction` | Search scope               | [8, 512] |
+  | `M`              | Maximum degree of the node | (1, 2048)  |
+  | `efConstruction` | Search scope               | (1, int32_max) |
 
 - Search parameters
 
