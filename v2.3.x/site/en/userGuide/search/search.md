@@ -89,7 +89,7 @@ Prepare the parameters that suit your search scenario. The following example def
 ```python
 search_params = {
     "metric_type": "L2", 
-    "offset": 5, 
+    "offset": 0, 
     "ignore_growing": False, 
     "params": {"nprobe": 10}
 }
@@ -116,7 +116,7 @@ opt := client.SearchQueryOptionFunc(func(option *client.SearchQueryOption) {
 
 ```java
 final Integer SEARCH_K = 2;                       // TopK
-final String SEARCH_PARAM = "{\"nprobe\":10, \"offset\":5}";    // Params
+final String SEARCH_PARAM = "{\"nprobe\":10, \"offset\":0}";    // Params
 ```
 
 <div style="display: none;">
