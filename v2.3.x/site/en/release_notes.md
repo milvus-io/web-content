@@ -6,6 +6,57 @@ summary: Milvus Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.3.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## 2.3.3
+
+Release date: Nov 10, 2023
+
+| Milvus version | Python SDK version | Java SDK version | Go SDK version | Node.js SDK version |
+|----------------|--------------------|------------------|----------------|---------------------|
+| 2.3.3          | 2.3.3              | 2.3.3            | 2.3.3          | 2.3.3               |
+
+Milvus 2.3.3 was a bugfix version that focused on minimizing business interruption during rolling upgrades to less than 30 seconds. Additionally, it aimed to enhance the performance of vector retrieval during searches. Critical bugs related to filtering on array types and the possible appearance of deleted data were addressed. Note that we also bumped Knowhere up to [2.2.2](https://github.com/zilliztech/knowhere/releases/tag/v2.2.2) in this release.
+
+### Features
+
+Supported pure list JSON in bulk insert (#28126)
+
+### Improvements
+
+- Constructed a plan directly when searching with vector output (#27963)
+- Removed binlog/delta log from getRecoveryInfoV2 (#27895) (#28090)
+- Refined code for fixed-length types array (#28109)
+- Improved rolling upgrade unserviceable time
+  - Refined stop order (#28016) (#28089)
+  - Set qcv2 index task priority to Low (#28117) (#28134)
+  - Removed retry in getShards (#28011) (#28091)
+  - Fixed load index for stopping node (#28047) (#28137)
+  - Fixed retry on offline node (#28079) (#28139)
+  - Fixed QueryNode panic while upgrading (#28034) (#28114)
+  - Fixed coordinator fast restart by deleting old session (#28205)
+  - Fixed check grpc error logic (#28182) (#28218)
+  - Delayed the cancellation of ctx when stopping the node (#28249)
+  - Disabled auto balance when an old node exists (#28191) (#28224)
+  - Fixed auto balance block channel reassign after datanode restart (#28276)
+  - Fixed retry when proxy stopped (#28263)
+- Reduced useless ObjectExists in AzureBlobManager (#28157)
+- Got vector concurrently (#28119)
+- Forced set Aliyun use_virtual_host to true for all (#28237)
+- Fixed delete session key with prefix causing multiple QueryNode crashes (#28267)
+
+### Bug Fixes
+
+- Fixed script stop unable to find Milvus process (#27958)
+- Fixed timestamp reordering issue with delete records (#27941) (#28113)
+- Fixed prefix query with longer subarray potentially causing a crash (#28112)
+- Limited max thread num for pool (#28018) (#28115)
+- Fixed sync distribution with the wrong version (#28130) (#28170)
+- Added a custom HTTP header: Accept-Type-Allow-Int64 for JS client (#28125)
+- Fixed bug for constructing ArrayView with fixed-length type (#28186)
+- Fixed bug for setting index state when IndexNode connecting failed (#28221)
+- Fixed bulk insert bug that segments are compacted after import (#28227)
+- Fixed the target updated before version updated to cause data missing (#28257)
+- Handled exceptions while loading (#28306)
+
 ## v2.3.2
 
 Release date: Oct 26, 2023
@@ -23,7 +74,7 @@ This release promises enhanced performance through minimized data copying during
 - Discontinued TimeTravel in compactor ([#26785](https://github.com/milvus-io/milvus/pull/26785))
 - Phased out mysql metastore ([#26633](https://github.com/milvus-io/milvus/pull/26633))
 
-## New Features
+### New Features
 
 - Array datatype now supported ([#26369](https://github.com/milvus-io/milvus/pull/26369))
   - Doc page: [Use Array Fields](https://milvus.io/docs/array_data_type.md)
@@ -46,7 +97,7 @@ This release promises enhanced performance through minimized data copying during
   - Context enriched with grpc metadata ([#27668](https://github.com/milvus-io/milvus/pull/27668))
   - Defined component listening IP ([#27161](https://github.com/milvus-io/milvus/pull/27161))
 
-## Performance Enhancements
+### Performance Enhancements
 
 - Optimized data loading by minimizing data copy operations ([#26746](https://github.com/milvus-io/milvus/pull/26746))
 - Streamlined bulk inserts with batched varchar reading ([#26199](https://github.com/milvus-io/milvus/pull/26199))
@@ -55,7 +106,7 @@ This release promises enhanced performance through minimized data copying during
 - Addressed high CPU consumption linked to proto.size ([#27054](https://github.com/milvus-io/milvus/pull/27054))
 - Optimized scalar column data with MADV_WILLNEED ([#27170](https://github.com/milvus-io/milvus/pull/27170))
 
-## Additional Enhancements
+### Additional Enhancements
 
 - Robust rolling upgrade capabilities:
   - Significant improvement in system availability during rolling upgrades, ensuring minimal service interruptions.
@@ -78,7 +129,7 @@ This release promises enhanced performance through minimized data copying during
 - Transitioned etcd watch-related code to event manager ([#27192](https://github.com/milvus-io/milvus/pull/27192))
 - Displayed index details during GetSegmentInfo ([#26981](https://github.com/milvus-io/milvus/pull/26981))
 
-## Bug Fixes
+### Bug Fixes
 
 - Resolved concurrent string parsing expression issues ([#26721](https://github.com/milvus-io/milvus/pull/26721))
 - Fixed connection issues with Kafka under SASL_SSL ([#26617](https://github.com/milvus-io/milvus/pull/26617))
