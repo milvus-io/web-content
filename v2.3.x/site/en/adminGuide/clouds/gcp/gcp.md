@@ -101,19 +101,18 @@ You are advised to use the types of machines that offer a minimum memory of 16 G
 </div>
 
 ```bash
-gcloud beta container clusters create "milvus-cluster-1" \
+gcloud container clusters create "milvus-cluster-1" \
     --project "milvus-testing-nonprod" \
     --zone "us-west1-a" \
     --no-enable-basic-auth \
-    --cluster-version "1.20.8-gke.900" \
+    --cluster-version "1.27.3-gke.100" \
     --release-channel "regular" \
-    --machine-type "e2-standard-4" \
+    --machine-type "c2-standard-4" \
     --image-type "COS_CONTAINERD" \
     --disk-type "pd-standard" \
     --disk-size "100" \
     --max-pods-per-node "110" \
-    --num-nodes "2" \
-    --enable-stackdriver-kubernetes \
+    --num-nodes "3" \
     --enable-ip-alias \
     --network "projects/milvus-testing-nonprod/global/networks/milvus-network" \
     --subnetwork "projects/milvus-testing-nonprod/regions/us-west1/subnetworks/milvus-network"
@@ -122,7 +121,7 @@ gcloud beta container clusters create "milvus-cluster-1" \
 It would take a couple of minutes for the Kubernetes cluster to go up. Once the cluster is ready, use the following command to fetch its credentials so that you can run `kubectl` commands in your terminal to communicate with the cluster remotely.
 
 ```bash
-gcloud container clusters get-credentials milvus-cluster-1
+gcloud container clusters get-credentials milvus-cluster-1 --zone "us-west1-a"
 ```
 
 ### Deploy Milvus
@@ -152,3 +151,39 @@ kubectl get services
 The result is similar to the following:
 
 ![Milvus service over a Layer-4 load balancer on GCP](../../../../../assets/gcp.png)
+
+### Use Google Cloud Storage (GCS) as external object storage
+
+- Create bucket.
+```bash
+gcloud storage buckets create gs://milvus-testing-nonprod --project=milvus-testing-nonprod --default-storage-class=STANDARD --location=us-west1 --uniform-bucket-level-access
+```
+- Generate User Access Key and Secret Key, you should go to your project’s storage page. In the left sidebar of the dashboard, click Google Cloud Storage and then Settings. Select the INTEROPERABILITY tab. If you haven't enabled it already, click on Interoperable Access. Then click CREATE A KEY button to create.
+
+- Add values.yaml
+```yaml
+cluster:
+    enabled: true
+
+service:
+    type: LoadBalancer
+
+minio:
+    enabled: false
+
+externalS3:
+    enabled: true
+    host: storage.googleapis.com
+    port: 443
+    rootPath: milvus/my-release
+    bucketName: milvus-testing-nonprod
+    cloudProvider: gcp
+    useSSL: true
+    accessKey: "<access-key>"
+    secretKey: "<secret-key>"
+```
+
+- Install milvus
+```bash
+helm install -f values.yaml my-release milvus/milvus
+```
