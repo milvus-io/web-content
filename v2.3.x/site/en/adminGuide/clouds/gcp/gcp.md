@@ -104,6 +104,7 @@ You are advised to use the types of machines that offer a minimum memory of 16 G
 gcloud container clusters create "milvus-cluster-1" \
     --project "milvus-testing-nonprod" \
     --zone "us-west1-a" \
+    --workload-pool "milvus-testing-nonprod.svc.id.goog" \
     --no-enable-basic-auth \
     --cluster-version "1.27.3-gke.100" \
     --release-channel "regular" \
@@ -124,34 +125,6 @@ It would take a couple of minutes for the Kubernetes cluster to go up. Once the 
 gcloud container clusters get-credentials milvus-cluster-1 --zone "us-west1-a"
 ```
 
-### Deploy Milvus
-
-Now the Kubernetes cluster is ready. Let's deploy Milvus right now. 
-
-```bash
-helm repo add milvus https://zilliztech.github.io/milvus-helm/
-helm repo update
-helm install my-release milvus/milvus --set service.type=LoadBalancer
-```
-
-In the preceding commands, we add the repo of Milvus Helm charts locally and update the repo to fetch the latest charts. Then we install a Milvus instance and name it **my-release**. 
-
-Notice the arguments following the `--set` flag, which indicates that we would like to expose the Milvus instance through a Layer-4 load balancer. 
-
-If you would like to expose your Milvus instance through a Layer-7 load balancer, [read this](gcp_layer7.md).
-
-### Verify the deployment
-
-Once all pods are running, run the following command to view the external IP address and port used to access the Milvus instance.
-
-```bash
-kubectl get services
-```
-
-The result is similar to the following:
-
-![Milvus service over a Layer-4 load balancer on GCP](../../../../../assets/gcp.png)
-
 ### Use Google Cloud Storage (GCS) as external object storage
 
 - Create bucket.
@@ -159,6 +132,8 @@ The result is similar to the following:
 gcloud storage buckets create gs://milvus-testing-nonprod --project=milvus-testing-nonprod --default-storage-class=STANDARD --location=us-west1 --uniform-bucket-level-access
 ```
 - Generate User Access Key and Secret Key, you should go to your project’s storage page. In the left sidebar of the dashboard, click Google Cloud Storage and then Settings. Select the INTEROPERABILITY tab. If you haven't enabled it already, click on Interoperable Access. Then click CREATE A KEY button to create.
+
+![GCP Access keys for your user account](../../../../../assets/access_key.jpg)
 
 - Add values.yaml
 ```yaml
@@ -183,7 +158,35 @@ externalS3:
     secretKey: "<secret-key>"
 ```
 
-- Install milvus
+### Deploy Milvus
+
+Now the Kubernetes cluster is ready. Let's deploy Milvus right now. 
+
 ```bash
+helm repo add milvus https://zilliztech.github.io/milvus-helm/
+helm repo update
 helm install -f values.yaml my-release milvus/milvus
 ```
+
+In the preceding commands, we add the repo of Milvus Helm charts locally and update the repo to fetch the latest charts. Then we install a Milvus instance and name it **my-release**. 
+
+Notice the config `service.type` value, which indicates that we would like to expose the Milvus instance through a Layer-4 load balancer. 
+
+If you would like to expose your Milvus instance through a Layer-7 load balancer, [read this](gcp_layer7.md).
+
+### Verify the deployment
+
+Once all pods are running, run the following command to view the external IP address and port used to access the Milvus instance.
+
+```bash
+kubectl get services
+```
+
+The result is similar to the following:
+
+![Milvus service over a Layer-4 load balancer on GCP](../../../../../assets/gcp.png)
+
+
+### Hello Milvus
+
+Please refer to [Hello Milvus](https://milvus.io/docs/example_code.md), change the host value to the external IP address, then run the code.
