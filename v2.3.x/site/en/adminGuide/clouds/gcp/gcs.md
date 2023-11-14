@@ -35,7 +35,8 @@ gcloud iam service-accounts create milvus-gcs-access-sa \
 ```bash
 gcloud projects add-iam-policy-binding milvus-testing-nonprod \
     --member "serviceAccount:milvus-gcs-access-sa@milvus-testing-nonprod.iam.gserviceaccount.com" \
-    --role "roles/storage.admin"
+    --role "roles/storage.admin" \
+    --condition='title=milvus-testing-nonprod,expression=resource.service == "storage.googleapis.com" && resource.name.startsWith("projects/_/buckets/milvus-testing-nonprod")'
 ```
 
 - Allow the Kubernetes service account to impersonate the IAM service account by adding an IAM policy binding between the two service accounts. This binding allows the Kubernetes service account to act as the IAM service account.
