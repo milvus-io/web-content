@@ -44,6 +44,7 @@ search_params = {
 # create a search iterator
 search_iterator = collection.search_iterator(
     vectors_to_search,
+    VECTOR_FIELD_NAME,
     search_params,
     limit=5,
     output_fields=[bookID, authors]
@@ -52,11 +53,11 @@ search_iterator = collection.search_iterator(
 while True:
     # turn to the next page
     res = search_iterator.next()
-    if len(res[0]) == 0:
+    if len(res) == 0:
         print("search iteration finished, close")
         # close the iterator
         search_iterator.close()
         break
-    for i in range(len(res[0])):
-        print(res[0][i])
+    for i in range(len(res)):
+        print(res[i])
 ```
