@@ -12,7 +12,7 @@ Release date: Nov 14, 2023
 
 | Milvus version | Python SDK version | Java SDK version | Go SDK version | Node.js SDK version |
 | -------------- | ------------------ | ---------------- | -------------- | ------------------- |
-| 2.2.15         | 2.2.17             | 2.2.15           | v2.2.8         | 2.2.24              |
+| 2.2.15         | 2.2.17             | 2.2.15           | 2.2.8         | 2.2.24              |
 
 Milvus 2.2.15, a bugfix version of the Milvus 2.2.x series, has introduced significant improvements and bug fixes. This version enhanced the `bulkinsert` functionality to support `partitionkey` and the new JSON list format. Additionally, 2.2.15 has substantially improved the rolling upgrade process to 2.3.3 and resolved many critical issues. We strongly recommend all 2.2.15 users upgrade to this version before moving to 2.3.
 
