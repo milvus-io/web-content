@@ -33,8 +33,7 @@ The following table lists the values you can choose when [enabling RBAC](rbac.md
 | Collection  | CreateIndex           | CreateIndex                                       |
 | Collection  | DropIndex             | DropIndex                                         |
 | Collection  | IndexDetail           | DescribeIndex/GetIndexState/GetIndexBuildProgress |
-| Collection  | Load                  | LoadCollection                                    |
-| Collection  | GetLoadingProgress    | GetLoadingProgress                                |
+| Collection  | Load                  | LoadCollection/GetLoadingProgress/GetLoadState    |
 | Collection  | Release               | ReleaseCollection                                 |
 | Collection  | Insert                | Insert                                            |
 | Collection  | Delete                | Delete                                            |
@@ -43,7 +42,6 @@ The following table lists the values you can choose when [enabling RBAC](rbac.md
 | Collection  | Query                 | Query                                             |
 | Collection  | GetStatistics         | GetCollectionStatistics                           |
 | Collection  | Compaction            | Compact                                           |
-| Collection  | Alias                 | CreateAlias/DropAlias/AlterAlias                  |
 | Collection  | Import                | BulkInsert/Import                                 |
 | Collection  | LoadBalance           | LoadBalance                                       |
 | Global      | All                   | All API operation permissions in this table       |
@@ -51,6 +49,7 @@ The following table lists the values you can choose when [enabling RBAC](rbac.md
 | Global      | DropCollection        | DropCollection                                    |
 | Global      | DescribeCollection    | DescribeCollection                                |
 | Global      | ShowCollections       | ShowCollections                                   |
+| Global      | FlushAll              | FlushAll                                          |
 | Global      | CreateOwnership       | CreateUser CreateRole                             |
 | Global      | DropOwnership         | DeleteCredential DropRole                         |
 | Global      | SelectOwnership       | SelectRole/SelectGrant                            |
@@ -63,6 +62,7 @@ The following table lists the values you can choose when [enabling RBAC](rbac.md
 | Global      | TransferReplica       | TransferReplica                                   |
 | Global      | RenameCollection      | RenameCollection                                  |
 | Global      | CreateDatabase        | CreateDatabase                                    |
+| Global      | DropDatabase          | DropDatabase                                      | 1
 | Global      | ListDatabases         | ListDatabases                                     |
 | User        | UpdateUser            | UpdateCredential                                  |
 | User        | SelectUser            | SelectUser                                        |
