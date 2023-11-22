@@ -651,12 +651,20 @@
       "order": 2
     },
     {
-      "id": "azure.md",
+      "id": "azure",
       "title": "Azure",
       "label1": "admin_guide",
       "label2": "cloud",
       "label3": "",
-      "order": 2
+      "order": 3
+    },    
+    {
+      "id": "azure.md",
+      "title": "Azure",
+      "label1": "admin_guide",
+      "label2": "cloud",
+      "label3": "azure",
+      "order": 0
     },
     {
       "id": "scaleout.md",
