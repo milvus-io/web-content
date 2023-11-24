@@ -115,10 +115,10 @@ az storage account keys list --account-name milvustesting2
 - Add values.yaml
 ```yaml
 cluster:
-    enabled: true
+  enabled: true
 
 service:
-    type: LoadBalancer
+  type: LoadBalancer
 
 extraConfigFiles:
   user.yaml: |+
@@ -129,15 +129,15 @@ minio:
   enabled: false
 
 externalS3:
-      enabled: true
-      host: core.windows.net
-      port: 443
-      rootPath: my-release
-      bucketName: testmilvus # the storage account container name
-      cloudProvider: azure
-      useSSL: true
-      accessKey: "milvustesting1" # the storage account name
-      secretKey: "<secret-key>" 
+  enabled: true
+  host: core.windows.net
+  port: 443
+  rootPath: my-release
+  bucketName: testmilvus # the storage account container name
+  cloudProvider: azure
+  useSSL: true
+  accessKey: "milvustesting1" # the storage account name
+  secretKey: "<secret-key>" 
 ```
 
 ### Deploy Milvus

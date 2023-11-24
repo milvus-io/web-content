@@ -667,6 +667,14 @@
       "order": 0
     },
     {
+      "id": "abs.md",
+      "title": "ABS With IAM",
+      "label1": "admin_guide",
+      "label2": "cloud",
+      "label3": "azure",
+      "order": 1
+    },
+    {
       "id": "scaleout.md",
       "title": "Scale a Milvus Cluster",
       "label1": "admin_guide",

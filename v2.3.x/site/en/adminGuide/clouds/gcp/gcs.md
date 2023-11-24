@@ -78,8 +78,8 @@ minio:
     enabled: false
 
 serviceAccount:
-  create: false
-  name: milvus-gcs-access-sa
+    create: false
+    name: milvus-gcs-access-sa
 
 externalS3:
     enabled: true
