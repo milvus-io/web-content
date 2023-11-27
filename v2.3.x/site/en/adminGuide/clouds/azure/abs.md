@@ -25,33 +25,14 @@ export LOCATION="<your location>"
 export SERVICE_ACCOUNT_NAMESPACE="default"
 ```
 
-- Update an AKS cluster with OIDC Issuer.
+- Update an AKS cluster with OIDC Issuer and Workload Identity.
 ```bash
-az aks update -g ${RESOURCE_GROUP} -n ${AKS_CLUSTER} --enable-oidc-issuer
+az aks update -g ${RESOURCE_GROUP} -n ${AKS_CLUSTER} --enable-oidc-issuer --enable-workload-identity
 ```
 
 - Get the OIDC issuer URL.
 ```bash
 export SERVICE_ACCOUNT_ISSUER="$(az aks show --resource-group ${RESOURCE_GROUP} --name ${AKS_CLUSTER} --query 'oidcIssuerProfile.issuerUrl' -otsv)"
-```
-
-- Get tenant ID.
-```bash
-export AZURE_TENANT_ID="$(az account show -s ${SUB_ID} --query tenantId -otsv)"
-```
-
-- Install the mutating admission webhook.
-```bash
-helm repo add azure-workload-identity https://azure.github.io/azure-workload-identity/charts
-helm repo update
-helm install workload-identity-webhook azure-workload-identity/workload-identity-webhook \
-   --namespace azure-workload-identity-system \
-   --create-namespace \
-   --set azureTenantID="${AZURE_TENANT_ID}"
-curl -L https://github.com/a8m/envsubst/releases/download/v1.2.0/envsubst-`uname -s`-`uname -m` -o envsubst
-chmod +x envsubst
-sudo mv envsubst /usr/local/bin
-curl -sL https://github.com/Azure/azure-workload-identity/releases/download/v1.2.0/azure-wi-webhook.yaml | envsubst | kubectl apply -f -
 ```
 
 - Create storage account and container.
