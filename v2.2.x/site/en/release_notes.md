@@ -6,6 +6,36 @@ summary: Milvus Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.2.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## 2.2.16
+
+Release date: Nov 27, 2023
+
+| Milvus version | Python SDK version | Java SDK version | Go SDK version | Node.js SDK version |
+| -------------- | ------------------ | ---------------- | -------------- | ------------------- |
+| 2.2.16         | 2.2.17             | 2.2.15           | 2.2.8         | 2.2.24              |
+
+Milvus 2.2.16 represents a minor patch release following Milvus 2.2.15. This update primarily concentrates on bolstering system stability, enhancing fault recovery speed, and addressing various identified issues. Notably, the Knowhere version has been updated in this release, leading to quicker loading of DiskAnn indexes.
+
+For an optimal experience, we highly recommend all users currently on the 2.2.0 series to upgrade to this version before considering a move to 2.3.
+
+### Bug Fixes
+
+- Corrected the docker-compose etcd health check command ([27980](https://github.com/milvus-io/milvus/pull/27980)).
+- Completed the cleanup of remaining meta information after dropping a Collection ([28500](https://github.com/milvus-io/milvus/pull/28500)).
+- Rectified the issue causing panic during the execution of stop logic in query coordination ([28543](https://github.com/milvus-io/milvus/pull/28543)).
+- Resolved the problem of the cmux server failing to gracefully shut down ([28384](https://github.com/milvus-io/milvus/pull/28384)).
+- Eliminated the reference counting logic related to the query shard service to prevent potential leaks ([28547](https://github.com/milvus-io/milvus/pull/28547)).
+- Removed the logic of polling collection information from RootCoord during the restart process of QueryCoord to prevent startup failures ([28607](https://github.com/milvus-io/milvus/pull/28607)).
+- Fixed parsing errors in expressions containing mixed single and double quotations ([28417](https://github.com/milvus-io/milvus/pull/28417)).
+- Addressed DataNode panic during flushing delete buffer ([28710](https://github.com/milvus-io/milvus/pull/28710)).
+
+### Enhancements
+
+- Updated Knowhere to version 1.3.20 to accelerate the loading process ([28658](https://github.com/milvus-io/milvus/pull/28658)).
+- Made etcdkv request timeout configurable ([28664](https://github.com/milvus-io/milvus/pull/28664)).
+- Increased the timeout duration for QueryCoord to probe the query nodes via gRPC to 2 seconds ([28647](https://github.com/milvus-io/milvus/pull/28647)).
+- Bumped milvus-proto/go-api to version 2.2.16 ([28708](https://github.com/milvus-io/milvus/pull/28708)).
+
 ## 2.2.15
 
 Release date: Nov 14, 2023
