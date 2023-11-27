@@ -43,8 +43,8 @@ $ kubectl apply -f manifests/
 
 <div class="alert note">
 The default prometheus-k8s clusterrole can not capture milvus' metrics, need to patch:
-`kubectl patch clusterrole prometheus-k8s --type=json -p='[{"op": "add", "path": "/rules/-", "value": {"apiGroups": [""], "resources": ["pods", "services", "endpoints"], "verbs": ["get", "watch", "list"]}}]' `
 </div>
+`kubectl patch clusterrole prometheus-k8s --type=json -p='[{"op": "add", "path": "/rules/-", "value": {"apiGroups": [""], "resources": ["pods", "services", "endpoints"], "verbs": ["get", "watch", "list"]}}]' `
 
 To delete a stack, run `kubectl delete --ignore-not-found=true -f manifests/ -f manifests/setup`.
 
