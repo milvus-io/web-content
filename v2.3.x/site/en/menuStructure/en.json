@@ -668,7 +668,7 @@
     },
     {
       "id": "abs.md",
-      "title": "ABS With IAM",
+      "title": "Blob Storage With IAM",
       "label1": "admin_guide",
       "label2": "cloud",
       "label3": "azure",
