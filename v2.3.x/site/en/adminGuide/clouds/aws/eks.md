@@ -381,7 +381,7 @@ You can follow the simple guide below to verify the installation. For more detai
 
     <div class="alert notes">
 
-    If You have set `service.beta.kubernetes.io/aws-load-balancer-scheme` to `internal` in `milvus.yaml`. You should run the example code within the EKS VPS.
+    If You have set `service.beta.kubernetes.io/aws-load-balancer-scheme` to `internal` in `milvus.yaml`. You should run the example code within the EKS VPC.
 
     </div>
 
