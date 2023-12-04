@@ -123,6 +123,34 @@ For example, suppose there are two strings, 1101 1001 and 1001 1101.
 
 11011001 ⊕ 10011101 = 01000100. Since, this contains two 1s, the Hamming distance, d (11011001, 10011101) = 2.
 
+### Structural Similarity
+
+When a chemical structure occurs as a part of a larger chemical structure, the former is called a substructure and the latter is called a superstructure. For example, ethanol is a substructure of acetic acid, and acetic acid is a superstructure of ethanol.
+
+Structural similarity is used to determine whether two chemical formulae are similar to each other in that one is the superstructure or substructure of the other.
+
+To determine whether A is a superstructure of B, use the following formula:
+
+![superstructure](../../../assets/superstructure.png "Superstructure")
+
+Where:
+
+- A is the binary representation of a chemical formula to be retrieved
+- B is the binary representation of a chemical formula in the database
+
+Once it returns `0`, **A** is not a superstructure of **B**. Otherwise, the result is the other way around.
+
+To determine whether A is a substructure of B, use the following formula:
+
+![substructure](../../../assets/substructure.png "subsctructure")
+
+Where:
+
+- A is the binary representation of a chemical formula to be retrieved
+- B is the binary representation of a chemical formula in the database
+
+Once it returns `0`, **A** is not a substructure of **B**. Otherwise, the result is the other way around.
+
 ## FAQ
 
 <details>
