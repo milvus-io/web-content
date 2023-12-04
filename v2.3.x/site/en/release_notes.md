@@ -79,6 +79,7 @@ This release promises enhanced performance through minimized data copying during
 - Array datatype now supported ([#26369](https://github.com/milvus-io/milvus/pull/26369))
   - Doc page: [Use Array Fields](https://milvus.io/docs/array_data_type.md)
 - Introduced complex delete expressions ([#25752](https://github.com/milvus-io/milvus/pull/25752))
+  - Doc page: [Delete Entities](https://milvus.io/docs/delete_data.md)  
 - Reintroduced binary metric types SUBSTRUCTURE/SUPERSTRUCTURE ([#26766](https://github.com/milvus-io/milvus/pull/26766))
 - Vector index mmap now available ([#26750](https://github.com/milvus-io/milvus/pull/26750))
 - CDC: Added capability to replicate mq messages ([#27240](https://github.com/milvus-io/milvus/pull/27240))
