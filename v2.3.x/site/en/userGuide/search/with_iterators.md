@@ -116,7 +116,7 @@ while True:
 
 ## Search with iterator
 
-The following example creates a search iterator using the generated vectors, search parameters, and output fields for the book ID and authors. The `limit` parameter is also set to 5, which means that the search will return a maximum of 5 results per page.
+The following example creates a search iterator using the generated vectors, search parameters, and output fields for the book ID and authors. The `limit` parameter is also set to 5, which means that the search will return a maximum of 5 results.
 
 ```python
 vectors_to_search = rng.random((SEARCH_NQ, DIM))
