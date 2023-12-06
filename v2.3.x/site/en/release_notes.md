@@ -251,7 +251,7 @@ To address these issues, we have made the decision to develop our own log broker
 
 ### Upsert
 
-Users now can use the upsert API in Milvus for updating or inserting data. It is important to note that the upsert API combines search, delete, and insert operations, which may result in a degradation of performance. Therefore, it is recommended to use the insert APIs for specific and definitive insertions, while reserving the upsert APIs for more ambiguous scenarios.
+Users now can use the upsert API in Milvus for updating or inserting data. It is important to note that the upsert API combines search, delete, and insert operations, which may result in a degradation of performance. Therefore, it is recommended to use the insert APIs for specific and definitive insertions, while reserving the upsert APIs for more ambiguous scenarios. [Click here](upsert_entities.md) to read more.
 
 ### Range Search
 
@@ -266,7 +266,7 @@ res = collection.search(
 )
 ```
 
-In the above example, the returned vectors will have distances ranging from 10 to 20 regarding the query vector. It is important to note that the method of distance measurement varies depending on the chosen metric type. Therefore, it is recommended to familiarize yourself with each metric type before applying a range search. Additionally, please be aware that the maximum number of vectors returned is limited to 16384.
+In the above example, the returned vectors will have distances ranging from 10 to 20 regarding the query vector. It is important to note that the method of distance measurement varies depending on the chosen metric type. Therefore, it is recommended to familiarize yourself with each metric type before applying a range search. Additionally, please be aware that the maximum number of vectors returned is limited to 16384. [Click here](within_range.md) to read more.
 
 ### Count
 
@@ -274,11 +274,11 @@ In previous releases, users would often use the num_entities API to retrieve the
 
 In this release, Milvus introduces the count statement as an alternative solution for users to obtain the number of entities in a collection without relying on the flush API.
 
-Please be aware that the count statement consumes system resources, and it is advisable to avoid calling it frequently to prevent unnecessary resource consumption.
+Please be aware that the count statement consumes system resources, and it is advisable to avoid calling it frequently to prevent unnecessary resource consumption. [Click here](query.md#Count-entities) to read more.
 
 ### Cosine Metrics
 
-The Cosine Metrics is widely regarded as the standard method for measuring the distance between vectors, particularly in Large Language Models (LLMs). With the release of Milvus 2.3.0, cosine metrics are now natively supported. As a result, users no longer need to quantize vectors for IP (Inner Product) metrics.
+The Cosine Metrics is widely regarded as the standard method for measuring the distance between vectors, particularly in Large Language Models (LLMs). With the release of Milvus 2.3.0, cosine metrics are now natively supported. As a result, users no longer need to quantize vectors for IP (Inner Product) metrics. [Click here](metric.md#Cosine-Similarity) to read more.
 
 ### Raw Vectors in Search Returns
 
@@ -288,7 +288,7 @@ Starting from Milvus 2.3.0, the capability to include raw vectors in search resu
 
 Milvus now includes support for FAISS' FastScan, which has demonstrated a 20% performance improvement compared to HNSW and a 7-fold increase compared to IVF-FLAT in multiple benchmark tests. ScaNN, an index-building algorithm similar to IVF-PQ, offers a faster index-building process. However, it's important to note that using ScaNN may result in a potential loss of precision and therefore requires refinement using the raw vectors.
 
-The table below presents performance comparison results obtained using [VectorDBBench](https://github.com/zilliztech/VectorDBBench). It evaluates the performance of ScaNN, HNSW, and IVF-FLAT in handling data retrieval from a 768-dimensional vector dataset sourced from Cohere.
+The table below presents performance comparison results obtained using [VectorDBBench](https://github.com/zilliztech/VectorDBBench). It evaluates the performance of ScaNN, HNSW, and IVF-FLAT in handling data retrieval from a 768-dimensional vector dataset sourced from Cohere. [Click here](index.md#SCANN) to read more.
 
 | Index    | Case         | QPS | Latency (P99) s  | Recall |
 |----------|--------------|-----|------------------|--------|
@@ -304,11 +304,11 @@ The table below presents performance comparison results obtained using [VectorDB
 
 ### Iterator
 
-PyMilvus now includes support for iterators, enabling users to retrieve more than 16,384 entities in a search or range search operation. The iterator functionality operates similarly to ElasticSearch's scroll API and the cursor concept in relational databases.
+PyMilvus now includes support for iterators, enabling users to retrieve more than 16,384 entities in a search or range search operation. The iterator functionality operates similarly to ElasticSearch's scroll API and the cursor concept in relational databases. [Click here](with_iterators.md) to read more.
 
 ### JSON_CONTAINS
 
-Starting from Milvus 2.3.0, users can utilize the JSON_CONTAINS expressions to retrieve entities whose JSON field values contain one or a specified set of elements. This feature enhances the flexibility and capability of filtering and querying data within Milvus.
+Starting from Milvus 2.3.0, users can utilize the JSON_CONTAINS expressions to retrieve entities whose JSON field values contain one or a specified set of elements. This feature enhances the flexibility and capability of filtering and querying data within Milvus. [Click here](boolean.md) to read more.
 
 ### CDC support
 
@@ -343,7 +343,7 @@ Milvus 2.1.0 introduced support for multiple replicas in memory to improve QPS. 
 
 ### Dynamic Configuration
 
-Modifying configurations is a common operation for database maintenance and optimization. Starting from this version, Milvus supports dynamically modifying configuration parameters without the need to restart the cluster. There are two supported methods: modifying key-value pairs in etcd or directly modifying the `milvus.yaml` configuration file. It is important to note that not all configuration parameters can be modified dynamically. Please refer to the Milvus documentation for more details.
+Modifying configurations is a common operation for database maintenance and optimization. Starting from this version, Milvus supports dynamically modifying configuration parameters without the need to restart the cluster. There are two supported methods: modifying key-value pairs in etcd or directly modifying the `milvus.yaml` configuration file. It is important to note that not all configuration parameters can be modified dynamically. [Click here](dynamic_config.md) to read more.
 
 ### Tracing support
 
