@@ -37,8 +37,8 @@ In normal cases, you can upgrade Milvus as follows:
 2. Run the following commands to perform the upgrade.
 
     ```shell
-    docker-compose down
-    docker-compose up -d
+    docker compose down
+    docker compose up -d
     ```
 
 ## Migrate the metadata
@@ -83,8 +83,8 @@ In normal cases, you can upgrade Milvus as follows:
 
     ```shell
     // Run the following only after update the milvus image tag in the docker-compose.yaml
-    docker-compose down
-    docker-compose up -d
+    docker compose down
+    docker compose up -d
     ```
 
 ## What's next

@@ -33,7 +33,7 @@ You'd also remove the `MINIO_ADDRESS` environment variable for milvus service at
 ### 3. Run Milvus
 Run the following command to start Milvus that uses the S3 configurations.
 ```shell
-docker-compose up
+docker compose up
 ```
 <div class="alert note">Configurations only take effect after Milvus starts. See <a href=https://milvus.io/docs/install_standalone-docker.md#Start-Milvus>Start Milvus</a> for more information.</div>
 

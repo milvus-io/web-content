@@ -141,7 +141,7 @@ You can connect to Milvus using the local IP address and port number returned by
 
 To stop Milvus standalone, run:
 ```
-sudo docker-compose down
+sudo docker compose down
 ```
 
 To delete data after stopping Milvus, run:

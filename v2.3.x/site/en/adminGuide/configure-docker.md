@@ -216,7 +216,7 @@ Data are stored in the <code>/volumes</code> folder according to the default con
 Having finished modifying the configuration file and installation file, you can then start Milvus.
 
 ```
-$ sudo docker-compose up -d
+$ sudo docker compose up -d
 ```
 
 ## What's next
