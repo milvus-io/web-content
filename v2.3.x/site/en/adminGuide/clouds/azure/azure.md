@@ -75,7 +75,6 @@ Alternatively, you can use the [Cloud Shell](https://learn.microsoft.com/en-us/a
 1. Navigate to the cluster that you have created in Kubernetes services and click it.
 2. On the left-side navigation pane, click `Overview`.
 3. On the **Overview** page that appears, click **Connect** to view the resource group and subscription.
-![Azure](../../../../../assets/azure.png "The Azure overview page.")
 
 ### Set a subscription and credentials
 
@@ -157,20 +156,16 @@ Notice the config `service.type` value, which indicates that we would like to ex
 
 ### Verify the deployment
 
-Once all pods are running, run the following command to view the external IP address and port used to access the Milvus instance.
+Once all pods are running, run the following command to get the external IP address.
 
 ```bash
-kubectl get services
+kubectl get services|grep my-release-milvus|grep LoadBalancer|awk '{print $4}'
 ```
-
-The result is similar to the following:
-
-![Milvus service over a Layer-4 load balancer on Azure](../../../../../assets/azure_service.png)
 
 
 ### Hello Milvus
 
-Please refer to [Hello Milvus](https://milvus.io/docs/example_code.md), change the host value to service IP, then run the code.
+Please refer to [Hello Milvus](https://milvus.io/docs/example_code.md), change the host value to external IP address, then run the code.
 
 
 ## What's next

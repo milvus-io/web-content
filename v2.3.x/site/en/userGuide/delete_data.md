@@ -50,6 +50,10 @@ expr = "book_id in [0,1]"
 const expr = "book_id in [0,1]";
 ```
 
+```go
+expr := "book_id in [0,1]"
+```
+
 ```java
 private static final String DELETE_EXPR = "book_id in [0,1]";
 ```
@@ -96,16 +100,28 @@ Filter entities whose `word_count` is greater than or equal to `11000`:
 expr = "word_count >= 11000"
 ```
 
+```go
+expr := "word_count >= 11000"
+```
+
 Filter entities whose `book_name` is not `Unknown`:
 
 ```python
 expr = "book_name != Unknown"
 ```
 
+```go
+expr := "book_name != Unknown"
+```
+
 Filter entities whose primary key values are greater than `5` and `word_count` is smaller than or equal to `9999`:
 
 ```python
 expr = "book_id > 5 && word_count <= 9999"
+```
+
+```go
+expr := "book_id > 5 && word_count <= 9999"
 ```
 
 ## Delete entities
@@ -134,7 +150,15 @@ await milvusClient.deleteEntities({
 ```
 
 ```go
-// This function is under active development on the GO client.
+err = milvusClient.Delete(
+    context.Background(), // ctx
+    "book",               // collection name
+    "",                   // partition name
+    expr,                 // expr
+)
+if err != nil {
+    log.Fatal("failed to delete:", err.Error())
+}
 ```
 
 ```java

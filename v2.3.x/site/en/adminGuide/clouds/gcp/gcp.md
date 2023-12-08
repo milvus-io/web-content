@@ -176,15 +176,11 @@ If you would like to expose your Milvus instance through a Layer-7 load balancer
 
 ### Verify the deployment
 
-Once all pods are running, run the following command to view the external IP address and port used to access the Milvus instance.
+Once all pods are running, run the following command to get the external IP address.
 
 ```bash
-kubectl get services
+kubectl get services|grep my-release-milvus|grep LoadBalancer|awk '{print $4}'
 ```
-
-The result is similar to the following:
-
-![Milvus service over a Layer-4 load balancer on GCP](../../../../../assets/gcp.png)
 
 
 ### Hello Milvus

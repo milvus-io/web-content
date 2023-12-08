@@ -13,11 +13,11 @@ summary: Learn how to search and query data with iterators.
 
 This topic describes how to search and query data with iterators.
 
-Before an iterator is introduced, one common way of querying or searching a large dataset in Milvus is to use `offset` and `limit` parameters in combination, which specify the starting position and the maximum number of items to return respectively. However, this approach may result in performance issues when your database accumulates more data than your server can store in memory, and you still need to paginate through all the data. For more information about `offset` and `limit`, see [Conduct a Vector Similarity Search](search.md#prepare-search-parameters).
+Before an iterator is introduced, one common way of querying or searching a large dataset in Milvus is to use `offset` and `limit` parameters in combination, which specify the starting position and the maximum number of items to return respectively. However, this method may lead to performance issues as the offset and limit continuously increase, potentially imposing a substantial memory burden on Milvus servers. For more information about `offset` and `limit`, see [Conduct a Vector Similarity Search](search.md#prepare-search-parameters).
 
-For that to happen the database will need to perform an inefficient full scan every time you request a pagination. This means that if there are 100,000,000 search results and you request an `offset` of 50,000,000, the system will need to fetch all those records (which will not even be needed), cache them in memory, and afterwards only retrieve the 20 results specified in `limit`.
+For that to happen the database will need to perform an inefficient full scan every time you request a pagination. This means that if there are 100,000,000 search results and you request an `offset` of 50,000,000, the system will need to fetch all those records (which will not even be needed), cache them in memory, sort according to vector similarity and primary key and afterwards only retrieve the 20 results specified in `limit`.
 
-To address the performance issue, an alternative is to use an iterator, which is an object that allows you to use `expr` to filter scalar fields by primary keys and then iterate over a sequence of search or query results. Using an iterator has some advantages:
+To address the performance issue, an alternative is to use an iterator, which is an object that allows you to use `expr` to filter scalar fields and then iterate over a sequence of search or query results. Using an iterator has some advantages:
 
 - It simplifies the code and eliminates the need for manual configuration of `offset` and `limit`.
 - It’s more efficient and consistent, as it filters fields by Boolean expressions first and fetches data on demand.
@@ -85,7 +85,7 @@ curl -X 'POST' \
 
 ## Query with iterator
 
-The following example uses `expr` to define a Boolean expression that looks for results where the number of pages in a book is between 600 and 700 inclusive, and then creates a query iterator along with output fields for the book ID and authors. The `limit` parameter is set to **5**, which means that the query will return a maximum of 5 results per page.
+The following example uses `expr` to define a Boolean expression that looks for results where the number of pages in a book is between 600 and 700 inclusive, and then creates a query iterator along with output fields for the book ID and authors. The `batch_size` parameter is set to 10, meaning that every page returned will consist of 10 entities. And the `limit` parameter is set to **100**, which means that the query will return a maximum of 100 results totally. Note that iterator guarantees that no repeated results will be returned so if there are not enough entities matched input expr, the iterator will return empty page and the whole iteration should terminate. 
 
 In the code, the query iterator's `next()` method is called repeatedly to retrieve each page of results. If the length of the returned results is zero, it means that there are no more pages to retrieve, so the loop is exited and the iterator is closed by using `close()`. Otherwise, the results are printed to the console, with each result showing the book ID and authors.
 
@@ -96,11 +96,12 @@ expr = "600 <= num_pages <= 700"
 # return `bookID` and `authors`
 output_fields=[bookID, authors]
 
-# return 5 results per page
-limit = 5
+# return 10 results per page and 100 results totally
+batch_size = 10
+limit = 100
 
 # create a query iterator
-query_iterator = collection.query_iterator(expr, output_fields, limit)
+query_iterator = collection.query_iterator(batch_size, limit, expr, output_fields)
 
 while True:
     # turn to the next page
@@ -116,22 +117,31 @@ while True:
 
 ## Search with iterator
 
-The following example creates a search iterator using the generated vectors, search parameters, and output fields for the book ID and authors. The `limit` parameter is also set to 5, which means that the search will return a maximum of 5 results.
+The following example creates a search iterator using the generated vectors, search parameters, and output fields for the book ID and authors. 
+The `batch_size` parameter is also set to 10, which means that the search will return exact 5 entities per page, except for the final page. 
+And the parameter `limit` is set to 100, meaning that the iterator will return 100 entities in total at most. 
+Note that iterator guarantees that no repeated results will be returned so if there are not enough entities, the iterator will return empty page and the whole iteration should terminate. 
+
+Regarding the `radius` and `range_filter` parameters, search_iterators will ensure the returned entities are restricted
+in the range defined by these two parameters. More information is available in [Within Range](within_range.md#configure-a-range-for-vector-filtering).  
 
 ```python
 vectors_to_search = rng.random((SEARCH_NQ, DIM))
 
 search_params = {
     "metric_type": "L2",
-    "params": {"nprobe": 10, "radius": 1.0},
+    "params": {"nprobe": 10, "radius": 1.0, "range_filter": 0.7},
 }
 
 # create a search iterator
 search_iterator = collection.search_iterator(
-    vectors_to_search,
-    search_params,
-    limit=5,
-    output_fields=[bookID, authors]
+    data=vectors_to_search,
+    anns_field="vector_field",
+    param=search_params,
+    batch_size=10,
+    limit=100,
+    expr="600 <= num_pages <= 700",
+    output_fields=["bookID", "authors"]
 )
                                              
 while True:
@@ -150,15 +160,17 @@ while True:
 
 The following table describes the parameters for searching or querying data with iterators.
 
-| Parameter | Description |
-| --- | --- |
-| `expr` | Boolean expression used to filter attributes. Find more expression details in [Boolean Expression Rules](boolean.md). |
-| `vectors_to_search` | Query vector to search with. |
-| `vector_field` | Name of the vector field. |
-| `search_params` | Search parameters specific to the index. Find more expression details in [Conduct a Vector Similarity Search](search.md#prepare-search-parameters). |
-| `limit` | Number of results to return per page. |
-| `radius` | Angle where the vector with the least similarity resides. Find more expression details in [Within Range](within_range.md#configure-a-range-for-vector-filtering). |
-| `output_fields` | Name of the field to return. Milvus supports returning the vector field.|
+| Parameter       | Description                                                                                                                                                       |
+|-----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `expr`          | Boolean expression used to filter attributes. Find more expression details in [Boolean Expression Rules](boolean.md).                                             |
+| `data`          | The list of vectors to search with.                                                                                                                               |
+| `anns_field`    | Name of the vector field.                                                                                                                                         |
+| `param`         | Search parameters specific to the index. Find more expression details in [Conduct a Vector Similarity Search](search.md#prepare-search-parameters).               |
+| `batch_size`    | Number of entities to return per page.                                                                                                                            |
+| `limit`         | Number of results to return totally in this iteration process.                                                                                                    |
+| `radius`        | Angle where the vector with the least similarity resides. Find more expression details in [Within Range](within_range.md#configure-a-range-for-vector-filtering). |
+ | `range_filter`  | The filter used to filter a part of entities. Find more expression details in [Within Range](within_range.md#configure-a-range-for-vector-filtering).             |
+ | `output_fields` | Name of the field to return. Milvus supports returning the vector field.                                                                                          |
 
 ## What's next
 
