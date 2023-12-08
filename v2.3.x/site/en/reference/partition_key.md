@@ -64,12 +64,16 @@ schema = CollectionSchema(
     description="", 
     enable_dynamic_field=True, 
     # The following is an alternative to setting `is_partition_key` in a field schema.
-    partition_key_field="store_address",
+    partition_key_field="store_address"
+)
+
+collection = Collection(
+    name='McDonald_s_Reviews',
+    schema=schema,
     # The number partitions to create are 64 by default. Set it to a proper value that you see fit.
     num_partitions=100
 )
 
-collection = Collection(name='McDonald_s_Reviews', schema=schema )
 collection.create_index(
     field_name='vector', 
     index_params={
