@@ -82,7 +82,7 @@ Scalar field supports:
 - DOUBLE: numpy.double
 - VARCHAR: VARCHAR
 
-You can create a JSON field, comprising key-value pairs. Each key should be a string and values can be numbers, strings, boolean values, arrays, and lists. For details, read ["JSON: a new data type"](dynamic_schema#Json-a-new-data-type).
+You can create a JSON field, comprising key-value pairs. Each key should be a string and values can be numbers, strings, boolean values, arrays, and lists. For details, read [JavaScript Object Notation](https://milvus.io/docs/json_data_type.md).
 
 Vector field supports:
 - BINARY_VECTOR: Binary vector
