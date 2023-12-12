@@ -41,7 +41,7 @@ To use DiskANN, ensure that you
 
   | Parameter     | Description                         | Range                                           |
   | ------------- | ----------------------------------- | ----------------------------------------------- |
-  | `search_list` | Size of the candidate list, a larger size offers a higher recall rate with degraded performance. | [k, min( 10 * k, 65535)] for k > 20 <br> [k, 200] for k <= 20 |
+  | `search_list` | Size of the candidate list, a larger size offers a higher recall rate with degraded performance. | [top_k, min( 10 * top_k, 65535)] for k > 20 <br> [top_k, 200] for top_k <= 20 |
 
 ## DiskANN-related Milvus configurations
 
