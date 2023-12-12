@@ -27,7 +27,7 @@ A Hit object.
 # hit is a Hit object
 
 # gets the id of a hit entity
-print(hit.ids)
+print(hit.id)
 
 # gets the distance of a entity from the query vector
 print(hit.distances)
