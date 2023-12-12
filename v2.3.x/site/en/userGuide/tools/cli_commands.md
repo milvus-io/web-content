@@ -459,40 +459,40 @@ delete index -c (text) -in (text)
 milvus_cli > delete index -c car -in indexName
 ```
 
-## describe collection
+## show collection
 
 Shows the detailed information of a collection.
 
-<h3 id="describe-collection">Syntax</h3>
+<h3 id="show-collection">Syntax</h3>
 
 ```shell
 show collection -c (text)
 ```
 
-<h3 id="describe-collection">Options</h3>
+<h3>Options</h3>
 
 | Option | Full name         | Description                          |
 | :----- | :---------------- | :----------------------------------- |
 | -c     | --collection-name | The name of the collection.          |
 | --help | n/a               | Displays help for using the command. |
 
-<h3 id="describe-collection">Example</h3>
+<h3>Example</h3>
 
 ```shell
 milvus_cli > show collection -c test_collection_insert
 ```
 
-## describe partition
+## show partition
 
 Shows the detailed information of a partition.
 
-<h3 id="describe-partition">Syntax</h3>
+<h3 id="show-partition">Syntax</h3>
 
 ```shell
 show partition -c (text) -p (text)
 ```
 
-<h3 id="describe-partition">Options</h3>
+<h3>Options</h3>
 
 | Option | Full name         | Description                                               |
 | :----- | :---------------- | :-------------------------------------------------------- |
@@ -500,23 +500,23 @@ show partition -c (text) -p (text)
 | -p     | --partition       | The name of the partition.                                |
 | --help | n/a               | Displays help for using the command.                      |
 
-<h3 id="describe-partition">Example</h3>
+<h3>Example</h3>
 
 ```shell
 milvus_cli > show partition -c test_collection_insert -p _default
 ```
 
-## describe index
+## show index
 
 Shows the detailed information of an index.
 
-<h3 id="describe-index">Syntax</h3>
+<h3 id="show-index">Syntax</h3>
 
 ```shell
 show index -c (text) -in (text)
 ```
 
-<h3 id="describe-index">Options</h3>
+<h3 >Options</h3>
 
 | Option | Full name         | Description                 |
 | :----- | :---------------- | :-------------------------- |
