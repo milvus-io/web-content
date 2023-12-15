@@ -194,3 +194,28 @@ Under this section, you can configure query node port, graceful time, etc.
     </tr>
   </tbody>
 </table>
+
+## `queryNode.segcore.InterimIndex`
+
+<table id="queryNode.segcore.chunkRows">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+          Whether to create a temporary index for growing segments and sealed segments not yet indexed, improving search performance.<br/>
+          <ul><li>
+            Milvus will eventually seals and indexes all segments, but enabling this optimizes search performance for immediate queries following data insertion.
+          </li>
+          <li>
+            This defaults to `true`, indicating that Milvus creates temporary index for growing segments and the sealed segments that are not indexed upon searches.
+          </li></ul>
+      </td>
+      <td>true</td>
+    </tr>
+  </tbody>
+</table>
