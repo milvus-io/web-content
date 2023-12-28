@@ -16,8 +16,8 @@ A Hit object.
 
 | Property             | Description                                                    |
 | -------------------- | -------------------------------------------------------------- |
-| `ids`       | Return the primary keys of the hit results                              |
-| `distances` | Return the distance between the hit record and the query                |
+| `id`       | Return the primary key of the hit result                              |
+| `distance` | Return the distance between the hit record and the query                |
 | `score`     | Return the score of the hit record. The score is set equal to distance. |
 | `str`       | Return the information of hit record                                    |
 
@@ -27,10 +27,10 @@ A Hit object.
 # hit is a Hit object
 
 # gets the id of a hit entity
-print(hit.ids)
+print(hit.id)
 
 # gets the distance of a entity from the query vector
-print(hit.distances)
+print(hit.distance)
 
 # gets the score of a hit entity
 # should equal to the distance
