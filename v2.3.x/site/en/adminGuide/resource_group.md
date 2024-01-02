@@ -18,7 +18,7 @@ Note that a Milvus instance maintains a default resource group to hold all the q
 
 <div class="alert note">
 
-All code samples on this page are in PyMilvus 2.3.3. Upgrade your PyMilvus installation before running them.
+All code samples on this page are in PyMilvus 2.3.4. Upgrade your PyMilvus installation before running them.
 
 </div>
 

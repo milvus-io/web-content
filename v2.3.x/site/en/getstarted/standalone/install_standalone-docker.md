@@ -21,10 +21,10 @@ For the users using MacOS 10.14 or later, set the Docker virtual machine (VM) to
 
 ## Download the `YAML` file
 
-[Download](https://github.com/milvus-io/milvus/releases/download/v2.3.3/milvus-standalone-docker-compose.yml) `milvus-standalone-docker-compose.yml` and save it as `docker-compose.yml` manually, or with the following command.
+[Download](https://github.com/milvus-io/milvus/releases/download/v2.3.4/milvus-standalone-docker-compose.yml) `milvus-standalone-docker-compose.yml` and save it as `docker-compose.yml` manually, or with the following command.
 
 ```
-$ wget https://github.com/milvus-io/milvus/releases/download/v2.3.3/milvus-standalone-docker-compose.yml -O docker-compose.yml
+$ wget https://github.com/milvus-io/milvus/releases/download/v2.3.4/milvus-standalone-docker-compose.yml -O docker-compose.yml
 ```
 
 ## Start Milvus

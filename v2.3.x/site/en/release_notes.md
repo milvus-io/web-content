@@ -6,6 +6,85 @@ summary: Milvus Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.3.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## 2.3.4
+
+Release date: Jan 2, 2024
+
+| Milvus version | Python SDK version | Java SDK version | Go SDK version | Node.js SDK version |
+|----------------|--------------------|------------------|----------------|---------------------|
+| 2.3.4          | 2.3.4              | 2.3.3            | 2.3.4          | 2.3.5               |
+
+Milvus 2.3.4 brings significant enhancements, focusing on availability and usability. The update introduces access logs for better monitoring and integrates Parquet for efficient bulk imports. A key feature is the binlog index on growing segments for faster searches. Major improvements include support for up to 10,000 collections/partitions, reduced memory usage, clearer error messages, quicker loading, and better query shard balance. It addresses critical issues like resource leakage, load/release failures, and concurrency challenges. However, it discontinues regular expression searches in partitions to save resources, with an option to re-enable this feature in the configuration.
+
+### Features
+
+- **Access Logs**:
+  - Milvus now supports access logs for monitoring external interfaces. These logs record method names, user requests, response times, and error codes.
+  - Note: Currently, this feature supports only gRPC; RESTful requests are not included.
+
+- **Parquet File Import**:
+  - This update introduces support for Parquet file imports, enhancing performance and memory efficiency. It also broadens data type support, including arrays and JSON.
+  - This feature supersedes the previous limitation of JSON and NumPy formats.
+
+- **Binlog Index on Growing Segments**:
+  - Milvus now employs a binlog index on growing segments to enhance search efficiency, allowing for advanced indices like IVF or Fast Scann.
+  - This improvement can increase search speeds in growing segments by up to tenfold.
+
+### Improvements
+
+- **Expanded Collection/Partition Support**:
+  - Milvus now supports up to 10,000 collections/partitions in a cluster, benefiting multi-tenant environments.
+  - The improvement comes from timetick mechanism refinement, goroutine management, and memory usage improvement.
+  - Note: Exceeding the recommended limit may affect failure recovery and resource usage. Recommended limit is 10,000 (Collection * Shard * Partition).
+
+- **Reduced Memory Usage**:
+  - Enhancements have been made to improve memory efficiency during various operations, including data retrieval and variable length data handling.
+
+- **Refined Error Messaging**:
+  - Error messages have been split into summaries and details for clearer understanding.
+
+- **Accelerated Loading Speed**:
+  - Various optimizations have been implemented to increase loading speeds, particularly in scenarios with frequent flushes and deletions.
+
+- **Improved Query Shard Balance**:
+  - Implemented balance channel in `querycoord` and other improvements for efficient shard management.
+
+- **Other Enhancements**:
+  - Includes security improvements, MMap support for index loading, partition-level privileges, and more.
+
+### Critical Bug Fixes
+
+- **Resource Leakage Fixes**:
+  - Addressed critical memory leaks in Pulsar producer/consumer and improved garbage collection of meta snapshots.
+
+- **Load/Release Failure Fixes**:
+  - Resolved issues causing load/release operations to stall, especially in clusters with many segments.
+
+- **Concurrency Issues**:
+  - Fixed problems related to concurrent insertions, deletions, and queries.
+
+- **Other Critical Fixes**:
+  - Fixed an issue where upgrades from version 2.2 failed due to missing `CollectionLoadInfo`.
+  - Fixed an issue where deletions might be lost because of errors in parsing compacted file logpaths ([#29276](https://github.com/milvus-io/milvus/pull/29276)).
+  - Fixed an issue where flush and compaction processes could become stuck under heavy insert/delete traffic.
+  - Fixed the inability to perform compact operations on the array type ([#29505](https://github.com/milvus-io/milvus/pull/29505)) ([#29504](https://github.com/milvus-io/milvus/pull/29504)).
+  - Fixed an issue where collections with more than 128 partitions failed to be released ([#28567](https://github.com/milvus-io/milvus/pull/28567)).
+  - Fixed an issue related to parsing expressions that include quotation marks ([#28418](https://github.com/milvus-io/milvus/pull/28418)).
+  - Addressed a failure in Azure Blob Storage's `ListObjects` operation causing garbage collection failures ([#27931](https://github.com/milvus-io/milvus/pull/27931)) ([#28894](https://github.com/milvus-io/milvus/pull/28894)).
+  - Fixed an issue with missing target database names in `RenameCollection` operations ([#28911](https://github.com/milvus-io/milvus/pull/28911)).
+  - Fixed an issue where iterators lost data in cases of duplicated results ([#29406](https://github.com/milvus-io/milvus/pull/29406)) ([#29446](https://github.com/milvus-io/milvus/pull/29446)).
+  - Corrected the bulk insert binlog process to consider timestamp order when processing delta data ([#29176](https://github.com/milvus-io/milvus/pull/29176)).
+  - Fixed an issue to exclude insert data before a growing checkpoint ([#29559](https://github.com/milvus-io/milvus/pull/29559)).
+  - Addressed a problem where frequent flushing caused rate limits in Minio ([#28625](https://github.com/milvus-io/milvus/pull/28625)).
+  - Fixed an issue where creating growing segments could introduce an excessive number of threads ([#29314](https://github.com/milvus-io/milvus/pull/29314)).
+  - Fixed an issue in retrieving binary vectors from chunk cache ([#28866](https://github.com/milvus-io/milvus/pull/28866)) ([#28884](https://github.com/milvus-io/milvus/pull/28884)).
+  - Fixed an issue where checkpoints were incorrectly updated after dropping a collection ([#29221](https://github.com/milvus-io/milvus/pull/29221)).
+
+### Breaking Change
+
+- **Discontinued Regular Expression Search in Partitions**:
+  - To reduce resource consumption, regular expression searches in partitions have been discontinued. However, this feature can be re-enabled through configuration (see [#29154](https://github.com/milvus-io/milvus/pull/29154) for details).
+
 ## 2.3.3
 
 Release date: Nov 10, 2023
