@@ -21,6 +21,7 @@ Milvus 2.3.4 brings significant enhancements, focusing on availability and usabi
 - **Access Logs**:
   - Milvus now supports access logs for monitoring external interfaces. These logs record method names, user requests, response times, and error codes.
   - Note: Currently, this feature supports only gRPC; RESTful requests are not included.
+  - Doc page: [Configure Access Logs](https://milvus.io/docs/configure_access_logs.md)
 
 - **Parquet File Import**:
   - This update introduces support for Parquet file imports, enhancing performance and memory efficiency. It also broadens data type support, including arrays and JSON.
