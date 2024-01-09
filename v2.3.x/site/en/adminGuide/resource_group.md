@@ -104,7 +104,7 @@ All code samples on this page are in PyMilvus 2.3.4. Upgrade your PyMilvus insta
     # Or, you can ask Milvus load the collection to the desired resource group.
     # make sure that query nodes num should be greater or equal to replica_number
     resource_groups = ['rg']
-    collection.load(replica_number=2, _resource_group=resource_groups) 
+    collection.load(replica_number=2, _resource_groups=resource_groups) 
     ```
 
     Also, you can just load a partition into a resource group and have its replicas distributed among several resource groups. The following assumes that a collection named `Books` already exists and it has a partition named `Novels`.
@@ -113,14 +113,14 @@ All code samples on this page are in PyMilvus 2.3.4. Upgrade your PyMilvus insta
     collection = Collection("Books")
 
     # Use the load method of a collection to load one of its partition
-    collection.load(["Novels"], replica_number=2, _resource_group=resource_groups)
+    collection.load(["Novels"], replica_number=2, _resource_groups=resource_groups)
 
     # Or, you can use the load method of a partition directly
     partition = Partition(collection, "Novels")
-    partition.load(replica_number=2, _resource_group=resource_groups)
+    partition.load(replica_number=2, _resource_groups=resource_groups)
     ```
 
-    Note that `_resource_group` is an optional parameter, and leaving it unspecified have Milvus load the replicas onto the query nodes in the default resource group.
+    Note that `_resource_groups` is an optional parameter, and leaving it unspecified have Milvus load the replicas onto the query nodes in the default resource group.
 
     To have Milus load each replica of a collection in a separate resource group, ensure that the number of resource groups equals the number of replicas.
 
