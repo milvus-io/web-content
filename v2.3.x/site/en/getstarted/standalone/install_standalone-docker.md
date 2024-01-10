@@ -85,6 +85,28 @@ To delete data after stopping Milvus, run:
 sudo rm -rf  volumes
 ```
 
+## Minimal Standalone Mode
+
+If you need to use standalone mode with embedded ETCD and local storage (without starting MinIO and additional ETCD)
+```
+docker run -d \
+--name milvus-standalone \
+--security-opt seccomp:unconfined \
+-e ETCD_USE_EMBED=true \
+-e ETCD_DATA_DIR=/var/lib/milvus/etcd \
+-e COMMON_STORAGETYPE=local \
+-v ${DOCKER_VOLUME_DIRECTORY:-.}/volumes/milvus:/var/lib/milvus \
+-p 80:19530 \
+-p 9091:9091 \
+--health-cmd="curl -f http://localhost:9091/healthz" \
+--health-interval=30s \
+--health-start-period=90s \
+--health-timeout=20s \
+--health-retries=3 \
+milvusdb/milvus:v2.3.4 \
+milvus run standalone
+```
+
 ## What's next
 
 Having installed Milvus, you can:
