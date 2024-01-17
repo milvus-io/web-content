@@ -560,22 +560,21 @@ help <command>
 
 | Command      | Description                                                                                                         |
 | :----------- | :------------------------------------------------------------------------------------------------------------------ |
-| calc         | Calculates the distance between two vector arrays, mkts_from_hybridts, mkts_from_unixtime, or hybridts_to_unixtime. |
 | clear        | Clears the screen.                                                                                                  |
 | connect      | Connects to Milvus.                                                                                                 |
-| create       | Creates a collection, partition, index, or alias.                                                                   |
-| delete       | Deletes a collection, partition, index, entity, or alias.                                                           |
-| describe     | Describes a collection, partition, or index.                                                                        |
+| create       | Create collection, database, partition,user and index.                                                              |
+| delete       | Delete collection, database, partition,alias,user or index.                                                         |
 | exit         | Closes the command line window.                                                                                     |
 | help         | Displays help for using a command.                                                                                  |
-| import       | Imports data into a partition.                                                                                      |
-| list         | Lists collections, partitions, or indexes.                                                                          |
+| insert       | Imports data into a partition.                                                                                      |
+| list         | List collections,databases, partitions,users or indexes.                                                            |
 | load         | Loads a collection or partition.                                                                                    |
-| load_balance | Performs load balancing on a query node.                                                                            |
 | query        | Shows query results that match all the criteria that you enter.                                                     |
 | release      | Releases a collection or partition.                                                                                 |
 | search       | Performs a vector similarity search or hybrid search.                                                               |
-| show         | Shows the current collection, progress of entity loading, progress of entity indexing, or segment information.      |
+| show         | Show connection, database,collection, loading_progress or index_progress.                                           |
+| rename       | Rename collection                                                                                                   |
+| use          | Use database                                                                                                        |
 | version      | Shows the version of Milvus_CLI.                                                                                    |
 
 ## import
