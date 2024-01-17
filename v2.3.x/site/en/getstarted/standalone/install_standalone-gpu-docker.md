@@ -30,7 +30,7 @@ Ensure that
 Download `milvus-standalone-docker-compose-gpu.yml` and save it as `docker-compose.yml` manually, or with the following command.
 
 ```shell
-$ wget https://github.com/milvus-io/milvus/releases/download/v2.3.4/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml
+$ wget https://github.com/milvus-io/milvus/releases/download/v2.3.5/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml
 ```
 
 You need to make some changes to the environment variables of the standalone service in the YAML file as follows:

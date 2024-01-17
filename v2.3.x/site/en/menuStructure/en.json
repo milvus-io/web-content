@@ -887,6 +887,14 @@
       "order": 6
     },
     {
+      "id": "integrate_with_haystack.md",
+      "title": "HayStack",
+      "label1": "integrations",
+      "label2": "",
+      "label3": "",
+      "order": 7
+    },
+    {
       "id": "benchmark.md",
       "title": "Benchmarks",
       "label1": "",

@@ -6,6 +6,50 @@ summary: Milvus Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.3.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.3.5
+
+Release date: Jan 17, 2024
+
+| Milvus version | Python SDK version | Java SDK version | Go SDK version | Node.js SDK version |
+|----------------|--------------------|------------------|----------------|---------------------|
+| 2.3.5          | 2.3.5              | 2.3.4            | 2.3.5          | 2.3.5               |
+
+Milvus v2.3.5 marks a significant update focused on improving overall functionality and stability. In this release, we've made enhancements to Role-Based Access Control (RBAC) and Alias, prioritizing user-friendliness. Additionally, various improvements have been implemented to optimize system performance and resource management. A notable feature in v2.3.5 is the reintroduction of the MVCC (Multi-Version Concurrency Control) mechanism, crucial for efficiently managing concurrent and phased queries. This release also addresses critical bug fixes, preventing issues related to data deletion loss, abnormal system panics, and deadlocks, ensuring a more reliable and stable user experience.
+
+### Features
+
+- **Role-Based Access Control (RBAC)**
+  - Authorize users to query grant information for their roles. ([#29747](https://github.com/milvus-io/milvus/pull/29747))
+  - Feature: Add RBAC functionality to alias. ([#29885](https://github.com/milvus-io/milvus/pull/29885))
+
+### Improvements:
+
+- Restore MVCC functionality ([#29749](https://github.com/milvus-io/milvus/pull/29749))
+- Add concurrency for DataCoord segment GC to increase garbage collection speed ([#29557](https://github.com/milvus-io/milvus/pull/29557))
+- Read Azure files without ReadAll to control memory usage ([#29604](https://github.com/milvus-io/milvus/pull/29604))
+- Support reading hardware metrics for cgroupv2 ([#29847](https://github.com/milvus-io/milvus/pull/29847))
+- Save lite WatchInfo into etcd in DataNode ([#29751](https://github.com/milvus-io/milvus/pull/29751))
+- Support access log printing cluster prefix ([#29646](https://github.com/milvus-io/milvus/pull/29646))
+- Rewrite generation segment plan based on assigning segments to make it more understandable ([#29574](https://github.com/milvus-io/milvus/pull/29574))
+- Performance:
+   - Enhancement: Use GPU pool for GPU tasks ([#29678](https://github.com/milvus-io/milvus/pull/29678))
+   - Cache collection schema attributes to reduce proxy CPU usage ([#29668](https://github.com/milvus-io/milvus/pull/29668))
+   - Pre-allocate result FieldData space to reduce growing slices ([#29726](https://github.com/milvus-io/milvus/pull/29726))
+
+### Critical Bug Fixes:
+
+- Fix the delete message disorder issue causing data loss ([#29917](https://github.com/milvus-io/milvus/pull/29917))
+- Throw an exception when the upload file fails for DiskIndex to avoid core dump ([#29628](https://github.com/milvus-io/milvus/pull/29628))
+- Fix dynamic update of rate limit config with incorrect value ([#29902](https://github.com/milvus-io/milvus/pull/29902))
+- Ensure compact operation on DataCoord meta performs as a transaction ([#29776](https://github.com/milvus-io/milvus/pull/29776))
+- Fix panic caused by type assert LocalSegment on Segment ([#29018](https://github.com/milvus-io/milvus/pull/29018))
+- Drop segment meta info with a prefix to avoid etcd txn out of limit ([#29857](https://github.com/milvus-io/milvus/pull/29857))
+- Remove unnecessary lock-in config manager ([#29855](https://github.com/milvus-io/milvus/pull/29855))
+- Rectify memory leaks when reading data from Azure. ([#30006](https://github.com/milvus-io/milvus/pull/30006))
+- Resolve the issue of mistakenly duplicating dynamic fields when handling RESTful insert requests. ([#30043](https://github.com/milvus-io/milvus/pull/30043))
+- Rectify the deadlock issue in the BlockAll operation within the flowgraph. ([#29972](https://github.com/milvus-io/milvus/pull/29972))
+- Resolve the issue of failing to parse lengthy and complex expressions. ([#30021](https://github.com/milvus-io/milvus/pull/30021))
+
 ## v2.3.4
 
 Release date: Jan 2, 2024
