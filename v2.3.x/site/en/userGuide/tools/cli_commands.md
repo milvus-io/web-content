@@ -245,7 +245,9 @@ create collection -c (text) -f (text) -p (text) [-a] [-d (text)]
 <h3 id="create-collection">Example</h3>
 
 ```shell
-milvus_cli > create collection -c car -f id:INT64:primary_field -f vector:FLOAT_VECTOR:128 -f color:INT64:color -f brand:INT64:brand -p id -A -d 'car_collection'
+## For array field: --schema-field support <fieldName>:<dataType>:<maxCapacity>:<elementDataType>(:<maxLength>if Varchar)
+
+milvus_cli > create collection -c car -f id:INT64:primary_field -f vector:FLOAT_VECTOR:128 -f color:INT64:color -f brand:ARRAY:64:VARCHAR:128 -p id -A -d 'car_collection'
 ```
 
 ## create partition
@@ -305,12 +307,10 @@ The name of the field to create an index for (vector): vector
 Index name: vectorIndex
 
 # Default is ''
-Index type (FLAT, IVF_FLAT, IVF_SQ8, IVF_PQ, RNSG, HNSW, ANNOY, AUTOINDEX, DISKANN, ) []:  IVF_FLAT  
+Index type (FLAT, IVF_FLAT, IVF_SQ8, IVF_PQ, RNSG, HNSW, ANNOY, AUTOINDEX, DISKANN, GPU_IVF_FLAT, GPU_IVF_PQ, SCANN, STL_SORT, Trie, ) []: IVF_FLAT  
 
 # Default is ''
-Index metric type (L2, IP, HAMMING, TANIMOTO,): L2
-
-Index params nlist: 2
+Index metric type (L2, IP, HAMMING, TANIMOTO, COSINE, ) []: 
 
 Timeout []:
 ```
