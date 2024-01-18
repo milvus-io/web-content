@@ -15,7 +15,7 @@ This guide describes how to upgrade your Milvus standalone with Milvus operator.
 
 ## Upgrade your Milvus operator
 
-Run the following command to upgrade the version of your Milvus operator to v0.8.7.
+Run the following command to upgrade the version of your Milvus operator to v0.8.8.
 
 ```
 helm repo add zilliztech-milvus-operator https://zilliztech.github.io/milvus-operator/

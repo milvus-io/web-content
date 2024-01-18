@@ -6,7 +6,7 @@ group: install_standalone-docker.md
 summary: Learn how to install Milvus stanalone with Milvus Operator.
 ---
 
-<div class="tab-wrapper"><a href="install_standalone-operator.md" class='active '>Milvus Operator</a><a href="install_standalone-docker.md" class=''>Docker (CPU)</a><a href="install_standalone-gpu-docker.md" class=''>Docker (GPU)</a><a href="install_standalone-helm.md" class=''>Helm (CPU)</a><a href="install_standalone-gpu-helm.md" class=''>Helm (GPU)</a></div>
+<div class="tab-wrapper"><a href="install_standalone-operator.md" class='active '>Milvus Operator</a><a href="install_standalone-docker.md" class=''>Docker</a><a href="install_standalone-helm.md" class=''>Helm (CPU)</a><a href="install_standalone-gpu-helm.md" class=''>Helm (GPU)</a></div>
 
 # Install Milvus Standalone with Milvus Operator
 
@@ -146,7 +146,7 @@ There are two ways to install Milvus Operator on K8s:
 helm install milvus-operator \
   -n milvus-operator --create-namespace \
   --wait --wait-for-jobs \
-  https://github.com/zilliztech/milvus-operator/releases/download/v0.8.7/milvus-operator-0.8.7.tgz
+  https://github.com/zilliztech/milvus-operator/releases/download/v0.8.8/milvus-operator-0.8.8.tgz
 ```
 
 If Milvus Operator is installed, you can see the following output.
@@ -268,7 +268,7 @@ $ helm -n milvus-operator uninstall milvus-operator
 ### Uninstall Milvus Operator by `kubectl` command
 
 ```
-$ kubectl delete -f https://raw.githubusercontent.com/zilliztech/milvus-operator/v0.8.7/deploy/manifests/deployment.yaml
+$ kubectl delete -f https://raw.githubusercontent.com/zilliztech/milvus-operator/v0.8.8/deploy/manifests/deployment.yaml
 ```
 
 ## Delete the K8s cluster
