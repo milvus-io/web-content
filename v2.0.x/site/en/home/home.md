@@ -16,13 +16,13 @@ id: home.md
 
 <div class="doc-home-promotion-wrapper">
   <div class="promotion-content">
-    <h2 class="promotion-title">Try Managed Milvus For Free</h2>
-    <p class="promotion-desc">Try Zilliz Cloud for free with $100 credits. No credit card required.</p>
+    <h2 class="promotion-title">Try Managed Milvus For Free!</h2>
+    <p class="promotion-desc">The easiest way to experience Milvus!</p>
   </div>
 
   <div class="cta-wrapper">
-    <a class="cta-global" href="https://cloud.zilliz.com/signup">Deploy on Global Service</a>
-    <a class="cta-cn" href="https://cloud.zilliz.com.cn/signup">Deploy on China Service</a>
+    <a class="cta-global" href="https://cloud.zilliz.com/signup">Zilliz Cloud</a>
+    <a class="cta-cn" href="https://cloud.zilliz.com.cn/signup">Zilliz Cloud China</a>
   </div>
 </div>
 
@@ -58,7 +58,6 @@ id: home.md
 
 </div>
 
-
 ## Recommended articles
 
 <div class="doc-home-recommend-section">
@@ -77,9 +76,9 @@ id: home.md
   <p>Deploy</p>
 
 - [Configure Milvus](configure-docker.md)
+- [Manage Dependencies](deploy_s3.md)
 - [Deploy on Clouds](aws.md)
 - [Scale a Milvus Cluster](scaleout.md)
-- [Set up storage](deploy_s3.md)
 - [Monitor and Alert](monitor_overview.md)
 </div>
 
