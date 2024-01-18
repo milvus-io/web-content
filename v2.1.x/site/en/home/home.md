@@ -14,6 +14,18 @@ id: home.md
 
 </div>
 
+<div class="doc-home-promotion-wrapper">
+  <div class="promotion-content">
+    <h2 class="promotion-title">Try Managed Milvus For Free</h2>
+    <p class="promotion-desc">Try Zilliz Cloud for free with $100 credits. No credit card required.</p>
+  </div>
+
+  <div class="cta-wrapper">
+    <a class="cta-global" href="https://cloud.zilliz.com/signup">Deploy on Global Service</a>
+    <a class="cta-cn" href="https://cloud.zilliz.com.cn/signup">Deploy on China Service</a>
+  </div>
+</div>
+
 ## Get Started
 
 <div class="card-wrapper">
