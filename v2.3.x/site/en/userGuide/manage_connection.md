@@ -24,6 +24,12 @@ The example below demonstrates how to establish a connection to the Milvus serve
 
 Construct a Milvus connection. Ensure to connect to Milvus server before any operations.
 
+<div class="alert note">
+
+The following code snippets assume that you have enabled authentication and need to set up a connection using the **root** account with the default password **Milvus**. The `token` parameter is a string in the format of `username:password`. If you have not set up authentication, you can omit this parameter.
+
+</div>
+
 <div class="multipleCode">
   <a href="#python">Python </a>
   <a href="#java">Java</a>
@@ -36,20 +42,17 @@ Construct a Milvus connection. Ensure to connect to Milvus server before any ope
 from pymilvus import connections
 connections.connect(
   alias="default",
-  user='username',
-  password='password',
-  host='localhost',
-  port='19530'
+  uri="localhost:19530",
+  token="root:Milvus",
 )
 ```
 
 ```javascript
 import { MilvusClient } from "@zilliz/milvus2-sdk-node";
 const address = "localhost:19530";
-const username = "username";
-const password = "password";
+const token = "root:Milvus"
 const ssl = false;
-const milvusClient = new MilvusClient({address, ssl, username, password});
+const milvusClient = new MilvusClient({address, ssl, token});
 ```
 
 ```go
@@ -65,8 +68,8 @@ if err != nil {
 ```java
 final MilvusServiceClient milvusClient = new MilvusServiceClient(
   ConnectParam.newBuilder()
-    .withHost("localhost")
-    .withPort(19530)
+    .withUri("localhost:19530")
+    .withToken("root:Milvus")
     .build()
 );
 ```

@@ -7,7 +7,7 @@ group: install_cluster-milvusoperator.md
 summary: Learn how to install Milvus cluster on Kubernetes using Milvus Operator
 ---
 
-<div class="tab-wrapper"><a href="install_cluster-milvusoperator.md" class='active '>Milvus Operator</a><a href="install_cluster-helm.md" class=''>Helm (CPU)</a><a href="install_cluster-gpu-helm.md" class=''>Helm (GPU)</a></div>
+<div class="tab-wrapper"><a href="install_cluster-milvusoperator.md" class='active '>Milvus Operator</a><a href="install_cluster-helm.md" class=''>Helm (CPU)</a></div>
 
 # Install Milvus Cluster with Milvus Operator
 
