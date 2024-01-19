@@ -2,16 +2,16 @@
 id: install_standalone-docker.md
 label: Docker
 related_key: Docker
-order: 1
+order: 0
 group: install_standalone-docker.md
-summary: Learn how to install Milvus standalone with Docker Compose.
+summary: Learn how to install Milvus standalone with Docker.
 ---
 
-<div class="tab-wrapper"><a href="install_standalone-operator.md" class=''>Milvus Operator</a><a href="install_standalone-docker.md" class='active '>Docker</a><a href="install_standalone-helm.md" class=''>Helm (CPU)</a><a href="install_standalone-gpu-helm.md" class=''>Helm (GPU)</a></div>
+<div class="tab-wrapper"><a href="install_standalone-docker.md" class='active '>Docker</a><a href="install_standalone-operator.md" class=''>Milvus Operator</a><a href="install_standalone-helm.md" class=''>Helm (CPU)</a><a href="install_standalone-gpu-helm.md" class=''>Helm (GPU)</a></div>
 
-# Install Milvus Standalone with Docker Compose
+# Install Milvus Standalone with Docker
 
-This topic describes how to install Milvus standalone using Docker Compose.
+This topic describes how to install Milvus standalone using Docker.
 
 Milvus now can use GPU devices to build indexes and perform ANN searches thanks to the contributions from NVIDIA.
 
@@ -31,7 +31,56 @@ Milvus now can use GPU devices to build indexes and perform ANN searches thanks 
 
   - Your hardware and software meet the specification requirements listed on [this page](https://milvus.io/docs/prerequisite-docker.md).  
 
-## Download the `YAML` file
+
+## Minimal Standalone Mode
+
+- Create file embedEtcd.yaml, the contents:
+```
+listen-client-urls: http://0.0.0.0:2379
+advertise-client-urls: http://0.0.0.0:2379
+```
+
+- Start Milvus.
+```
+sudo docker run -d \
+--name milvus-standalone \
+--security-opt seccomp:unconfined \
+-e ETCD_USE_EMBED=true \
+-e ETCD_DATA_DIR=/var/lib/milvus/etcd \
+-e ETCD_CONFIG_PATH=/milvus/configs/embedEtcd.yaml \
+-e COMMON_STORAGETYPE=local \
+-v ${DOCKER_VOLUME_DIRECTORY:-.}/volumes/milvus:/var/lib/milvus \
+-v ${DOCKER_VOLUME_DIRECTORY:-.}/embedEtcd.yaml:/milvus/configs/embedEtcd.yaml \
+-p 19530:19530 \
+-p 9091:9091 \
+-p 2379:2379 \
+--health-cmd="curl -f http://localhost:9091/healthz" \
+--health-interval=30s \
+--health-start-period=90s \
+--health-timeout=20s \
+--health-retries=3 \
+milvusdb/milvus:v2.3.5 \
+milvus run standalone
+```
+
+- Connect to Milvus
+Please refer to [Hello Milvus](https://milvus.io/docs/example_code.md), then run the example code.
+
+- Stop Milvus
+
+To stop Milvus standalone, run:
+```
+sudo docker stop milvus-standalone
+```
+
+To delete data after stopping Milvus, run:
+```
+sudo rm -rf ${DOCKER_VOLUME_DIRECTORY:-.}/volumes
+```
+
+## Install Milvus standalone using Docker Compose
+
+### Download the `YAML` file
 
 - For CPU users, [download](https://github.com/milvus-io/milvus/releases/download/v2.3.5/milvus-standalone-docker-compose.yml) `milvus-standalone-docker-compose.yml` and save it as `docker-compose.yml` manually, or with the following command.
 
@@ -89,7 +138,7 @@ Milvus now can use GPU devices to build indexes and perform ANN searches thanks 
   ...
   ```
 
-## Start Milvus
+### Start Milvus
 
 In the directory that holds `docker-compose.yml`, start Milvus by running:
 
@@ -139,7 +188,7 @@ Make GPU devices `0` and `1` visible to Milvus:
 CUDA_VISIBLE_DEVICES=0,1 ./milvus run standalone
 ```
 
-## Connect to Milvus
+### Connect to Milvus
 
 Verify which local port the Milvus server is listening on. Replace the container name with your own.
 
@@ -147,7 +196,7 @@ Verify which local port the Milvus server is listening on. Replace the container
 $ docker port milvus-standalone 19530/tcp
 ```
 
-You can connect to Milvus using the local IP address and port number returned by this command.
+Please refer to [Hello Milvus](https://milvus.io/docs/example_code.md), then run the example code.
 
 ## Stop Milvus
 
@@ -159,28 +208,6 @@ sudo docker compose down
 To delete data after stopping Milvus, run:
 ```
 sudo rm -rf  volumes
-```
-
-## Minimal Standalone Mode
-
-If you need to use standalone mode with embedded ETCD and local storage (without starting MinIO and additional ETCD)
-```
-docker run -d \
---name milvus-standalone \
---security-opt seccomp:unconfined \
--e ETCD_USE_EMBED=true \
--e ETCD_DATA_DIR=/var/lib/milvus/etcd \
--e COMMON_STORAGETYPE=local \
--v ${DOCKER_VOLUME_DIRECTORY:-.}/volumes/milvus:/var/lib/milvus \
--p 80:19530 \
--p 9091:9091 \
---health-cmd="curl -f http://localhost:9091/healthz" \
---health-interval=30s \
---health-start-period=90s \
---health-timeout=20s \
---health-retries=3 \
-milvusdb/milvus:v2.3.4 \
-milvus run standalone
 ```
 
 ## What's next
