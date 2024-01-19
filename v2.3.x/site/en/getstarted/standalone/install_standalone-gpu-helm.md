@@ -7,7 +7,7 @@ group: install_standalone-docker.md
 summary: Learn how to install Milvus stanalone on Kubernetes (GPU).
 ---
 
-<div class="tab-wrapper"><a href="install_standalone-docker.md" class=''>Docker</a><a href="install_standalone-operator.md" class=''>Milvus Operator</a><a href="install_standalone-helm.md" class=''>Helm (CPU)</a><a href="install_standalone-gpu-helm.md" class='active '>Helm (GPU)</a></div>
+<div class="tab-wrapper"><a href="install_standalone-docker.md" class=''>Docker</a><a href="install_standalone-aptyum.md" class=''>Dpkg</a><a href="install_standalone-operator.md" class=''>Milvus Operator</a><a href="install_standalone-helm.md" class=''>Helm (CPU)</a><a href="install_standalone-gpu-helm.md" class='active '>Helm (GPU)</a></div>
 
 # Install Milvus Standalone with Kubernetes (GPU)
 
