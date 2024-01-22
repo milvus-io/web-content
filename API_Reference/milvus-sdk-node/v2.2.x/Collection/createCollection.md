@@ -32,7 +32,7 @@ new milvusClient(MILUVS_ADDRESS).createCollection({
 | vector_field_name?  | vector field name                                              | string                             |
 | metric_type?        | max length of the varChar field                                | string or MetricType               |
 | enableDynamicField? | enable dynamic field                                           | Bool                               |
-| auto_id?            | enable auto id, default is fales                               | Bool                               |
+| auto_id?            | enable auto id, default is false                               | Bool                               |
 | index_params?       | create index params, same as parameters for method createIndex | Object                             |
 
 ## Example 2
