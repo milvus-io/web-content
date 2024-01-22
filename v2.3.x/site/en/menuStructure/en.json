@@ -871,14 +871,6 @@
       "order": 4
     },
     {
-      "id": "integrate_with_llama.md",
-      "title": "LlamaIndex",
-      "label1": "integrations",
-      "label2": "",
-      "label3": "",
-      "order": 5
-    },
-    {
       "id": "integrate_with_langchain.md",
       "title": "LangChain",
       "label1": "integrations",
