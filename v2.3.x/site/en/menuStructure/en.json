@@ -887,6 +887,14 @@
       "order": 7
     },
     {
+      "id": "integrate_with_voxel51.md",
+      "title": "FiftyOne",
+      "label1": "integrations",
+      "label2": "",
+      "label3": "",
+      "order": 7
+    },
+    {
       "id": "benchmark.md",
       "title": "Benchmarks",
       "label1": "",
