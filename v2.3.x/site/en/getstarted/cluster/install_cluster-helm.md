@@ -1,13 +1,13 @@
 ---
 id: install_cluster-helm.md
-label: Helm (CPU)
+label: Helm
 related_key: Kubernetes
 order: 1
 group: install_cluster-milvusoperator.md
 summary: Learn how to install Milvus cluster on Kubernetes.
 ---
 
-<div class="tab-wrapper"><a href="install_cluster-milvusoperator.md" class=''>Milvus Operator</a><a href="install_cluster-helm.md" class='active '>Helm (CPU)</a></div>
+<div class="tab-wrapper"><a href="install_cluster-milvusoperator.md" class=''>Milvus Operator</a><a href="install_cluster-helm.md" class='active '>Helm</a></div>
 
 # Install Milvus Cluster with Helm
 
