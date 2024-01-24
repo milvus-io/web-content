@@ -1,6 +1,6 @@
 {
-  "milvus_release_version": "2.3.5",
-  "milvus_release_tag": "2.3.5",
+  "milvus_release_version": "2.3.6",
+  "milvus_release_tag": "2.3.6",
   "milvus_deb_name": "milvus_2.2.0-1_amd64",
   "milvus_rpm_name": "milvus-2.2.0-1.el7.x86_64",
   "milvus_python_sdk_version": "2.3.x",
@@ -14,10 +14,10 @@
   "milvus_csharp_sdk_version": "2.2.x",
   "milvus_csharp_sdk_real_version": "2.2.14", 
   "milvus_restful_sdk_version": "2.3.x",
-  "milvus_restful_sdk_real_version": "2.3.5",
-  "milvus_operator_version": "0.8.8",
-  "milvus_helm_chart_version": "4.1.12",
-  "milvus_image": "2.3.5",
+  "milvus_restful_sdk_real_version": "2.3.6",
+  "milvus_operator_version": "0.9.0",
+  "milvus_helm_chart_version": "4.1.14",
+  "milvus_image": "2.3.6",
   "attu_release": "2.3.6",
   "milvus_backup_release": "0.4.6-beta",
   "birdwatcher_release": "1.0.3"
