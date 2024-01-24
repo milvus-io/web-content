@@ -18,23 +18,23 @@ Milvus v2.3.6 marks a minor yet impactful update, concentrating on boosting over
 
 ### Improvements
 
-- Replace "leader_observer" with "leader_checker" to address concurrency issues related to loading and releasing segments (#29984 #30152).
-- Transform specific magic numbers into configurable options (#30070).
-- Remove heartbeat delay logic for ShardLeader to prevent misjudging its availability (#30085).
-- When allocating channels, shuffle ShardLeader candidates to avoid load imbalance (#30089).
-- Enhance RESTful support by adding functionality for arrays and JSON (#30077).
-- Add a counter monitoring for rate-limited requests (#30132).
-- Accelerate index loading through concurrent methods (#30018).
-- Remove the step of DataNode subscribing to the message stream during the Import phase to avoid Import timeouts (#30133).
-- Introduce association logic between privileges to simplify the authorization process (#30154).
-- Implement unified restrictions on the number of Collections, Partitions, and Shards (#30017).
+- Replace "leader_observer" with "leader_checker" to address concurrency issues related to loading and releasing segments ([#29984](https://github.com/milvus-io/milvus/pull/29984) [#30152](https://github.com/milvus-io/milvus/pull/30152)).
+- Transform specific magic numbers into configurable options ([#30070](https://github.com/milvus-io/milvus/pull/30070)).
+- Remove heartbeat delay logic for ShardLeader to prevent misjudging its availability ([#30085](https://github.com/milvus-io/milvus/pull/30085)).
+- When allocating channels, shuffle ShardLeader candidates to avoid load imbalance ([#30089](https://github.com/milvus-io/milvus/pull/30089)).
+- Enhance RESTful support by adding functionality for arrays and JSON ([#30077](https://github.com/milvus-io/milvus/pull/30077)).
+- Add a counter monitoring for rate-limited requests ([#30132](https://github.com/milvus-io/milvus/pull/30132)).
+- Accelerate index loading through concurrent methods ([#30018](https://github.com/milvus-io/milvus/pull/30018)).
+- Remove the step of DataNode subscribing to the message stream during the Import phase to avoid Import timeouts ([#30133](https://github.com/milvus-io/milvus/pull/30133)).
+- Introduce association logic between privileges to simplify the authorization process ([#30154](https://github.com/milvus-io/milvus/pull/30154)).
+- Implement unified restrictions on the number of Collections, Partitions, and Shards ([#30017](https://github.com/milvus-io/milvus/pull/30017)).
 
 ### Critical bug fixes
 
-- Fixed a memory leak caused by incorrect usage of OpenTelemetry in segcore (#30068).
-- Addressed the issue of slow disk index loading by dynamically patching the index parameters (#30016).
-- Resolved the problem of changes made through the "alter collection" command not being persisted (#30156).
-- Fixed the issue where read request rate limiting ultimately leads to the unavailability of the read service (#30196).
+- Fixed a memory leak caused by incorrect usage of OpenTelemetry in segcore ([#30068](https://github.com/milvus-io/milvus/pull/30068)).
+- Addressed the issue of slow disk index loading by dynamically patching the index parameters ([#30016](https://github.com/milvus-io/milvus/pull/30016)).
+- Resolved the problem of changes made through the "alter collection" command not being persisted ([#30156](https://github.com/milvus-io/milvus/pull/30156)).
+- Fixed the issue where read request rate limiting ultimately leads to the unavailability of the read service ([#30196](https://github.com/milvus-io/milvus/pull/30196)).
 
 ## v2.3.5
 

@@ -19,7 +19,7 @@ Through running the example code we provided, you will have a primary understand
 
 - [Milvus 2.3.6](install_standalone-docker.md)
 - Python 3 (3.7.1 or later)
-- [PyMilvus 2.3.5](install-pymilvus.md)
+- [PyMilvus 2.3.6](install-pymilvus.md)
 
 
 ## Download example code
