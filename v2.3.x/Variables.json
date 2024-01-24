@@ -14,7 +14,7 @@
   "milvus_csharp_sdk_version": "2.2.x",
   "milvus_csharp_sdk_real_version": "2.2.14", 
   "milvus_restful_sdk_version": "2.3.x",
-  "milvus_restful_sdk_real_version": "2.3.6",
+  "milvus_restful_sdk_real_version": "2.3.5",
   "milvus_operator_version": "0.8.8",
   "milvus_helm_chart_version": "4.1.12",
   "milvus_image": "2.3.5",
