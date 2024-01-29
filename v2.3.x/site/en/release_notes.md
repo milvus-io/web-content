@@ -45,7 +45,7 @@ Milvus v2.3.7 marks a minor yet impactful update, concentrating on boosting over
 ### Critical Bug Fixes
 
 - Fixed a memory leak caused by incorrect usage of OpenTelemetry in the Segcore ([#30068](https://github.com/milvus-io/milvus/pull/30068)).
-- Addressed the issue of slow disk index loading by dynamically patching the index parameters ([#30016](https://github.com/milvus-io/milvus/pull/30016)).
+- Addressed the issue of slow disk index loading by dynamically patching the index parameters ([#30116](https://github.com/milvus-io/milvus/pull/30116)).
 - Resolved the problem of changes made through the "alter collection" command not being persisted ([#30156](https://github.com/milvus-io/milvus/pull/30156)).
 - Fixed the issue where read request rate limiting ultimately leads to the unavailability of the read service ([#30196](https://github.com/milvus-io/milvus/pull/30196)).
 - Resolve the deadlock issue when getting the configuration ([#30319](https://github.com/milvus-io/milvus/pull/30319))
