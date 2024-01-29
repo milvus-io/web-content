@@ -372,6 +372,17 @@ Search vectors with Milvus. To search in a specific [partition](glossary.md#Part
 
 Milvus supports setting consistency level specifically for a search. The example in this topic sets the consistency level as `Strong`. You can also set the consistency level as `Bounded`, `Session` or `Eventually`. See [Consistency](consistency.md) for more information about the four consistency levels in Milvus.
 
+<div class="alert notes">
+
+When conducting vector searches using GPU-enabled Milvus, the number of returned entities should meet the following requirements:
+
+- **GPU_IVF_FLAT**: The number of returned entities should be less than 256.
+- **GPU_IVF_PQ**: The number of returned entities should be less than 1024.
+
+For details, refer to [In-memory Index](index.md)
+
+</div>
+
 <div class="multipleCode">
   <a href="#python">Python </a>
   <a href="#java">Java</a>

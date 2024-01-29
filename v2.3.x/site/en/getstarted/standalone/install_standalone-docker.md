@@ -82,16 +82,16 @@ sudo rm -rf ${DOCKER_VOLUME_DIRECTORY:-.}/volumes
 
 ### Download the `YAML` file
 
-- For CPU users, [download](https://github.com/milvus-io/milvus/releases/download/v2.3.5/milvus-standalone-docker-compose.yml) `milvus-standalone-docker-compose.yml` and save it as `docker-compose.yml` manually, or with the following command.
+- For CPU users, [download](https://github.com/milvus-io/milvus/releases/download/v2.3.7/milvus-standalone-docker-compose.yml) `milvus-standalone-docker-compose.yml` and save it as `docker-compose.yml` manually, or with the following command.
 
   ```
-  $ wget https://github.com/milvus-io/milvus/releases/download/v2.3.5/milvus-standalone-docker-compose.yml -O docker-compose.yml
+  $ wget https://github.com/milvus-io/milvus/releases/download/v2.3.7/milvus-standalone-docker-compose.yml -O docker-compose.yml
   ```
 
-- For GPU users, [download](https://github.com/milvus-io/milvus/releases/download/v2.3.5/milvus-standalone-docker-compose-gpu.yml) `milvus-standalone-docker-compose-gpu.yml` and save it as `docker-compose.yml` manually, or with the following command.
+- For GPU users, [download](https://github.com/milvus-io/milvus/releases/download/v2.3.7/milvus-standalone-docker-compose-gpu.yml) `milvus-standalone-docker-compose-gpu.yml` and save it as `docker-compose.yml` manually, or with the following command.
 
   ```
-  $ wget https://github.com/milvus-io/milvus/releases/download/v2.3.5/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml
+  $ wget https://github.com/milvus-io/milvus/releases/download/v2.3.7/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml
   ```
 
   You need to make some changes to the environment variables of the standalone service in the YAML file as follows:

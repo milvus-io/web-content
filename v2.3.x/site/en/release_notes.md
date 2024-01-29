@@ -6,6 +6,52 @@ summary: Milvus Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.3.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.3.7
+
+Release date: Jan 29, 2024
+
+
+| Milvus version | Python SDK version | Java SDK version | Go SDK version | Node.js SDK version |
+|----------------|--------------------|------------------|----------------|---------------------|
+| 2.3.7          | 2.3.6              | 2.3.4            | 2.3.5          | 2.3.5               |
+
+Milvus v2.3.7 marks a minor yet impactful update, concentrating on boosting overall functionality and stability. In this release, we have refactored the business logic for a graceful stop to prevent any data loss, introduced support for array and JSON data types through RESTFul APIs, and amped up the speed of index loading. Alongside these enhancements, we've made several tweaks to optimize system performance and resource management. Additionally, this release addresses critical bug fixes as well as issues like memory leaks, load timeouts, and service unavailability, ensuring a more reliable and stable user experience.
+
+### Features
+
+- **Limit Collection Counts**
+
+  A Milvus instance allows up to 65,536 collections. However, too many collections may result in performance issues. Therefore, it is recommended to limit the number of collections created in a Milvus instance. Read more on [Limit Collection Counts](limit_collection_counts.md).
+
+- **Chunk Cache**
+
+  The chunk cache mechanism enables Milvus to pre-load data into cache memory on the local hard disk of the query nodes before it is needed. This mechanism significantly improves vector retrieval performance by reducing the time it takes to load data from disk to memory. Read more on [Configure Chunk Cache](chunk_cache.md)
+
+### Improvements
+
+- Transform specific magic numbers into configurable options ([#30070](https://github.com/milvus-io/milvus/pull/30070)).
+- Remove heartbeat delay logic for ShardLeader to prevent misjudging its availability ([#30085](https://github.com/milvus-io/milvus/pull/30085)).
+- When allocating channels, shuffle ShardLeader candidates to avoid load imbalance ([#30089](https://github.com/milvus-io/milvus/pull/30089)).
+- Enhance RESTful support by adding functionality for arrays and JSON ([#30077](https://github.com/milvus-io/milvus/pull/30077)).
+- Add a counter monitoring for rate-limited requests ([#30132](https://github.com/milvus-io/milvus/pull/30132)).
+- Accelerate index loading through concurrent methods ([#30018](https://github.com/milvus-io/milvus/pull/30018)).
+- Remove the step of DataNode subscribing to the message stream during the Import phase to avoid Import timeouts ([#30133](https://github.com/milvus-io/milvus/pull/30133)).
+- Introduce association logic between privileges to simplify the authorization process ([#30154](https://github.com/milvus-io/milvus/pull/30154)).
+- Implement unified restrictions on the number of Collections, Partitions, and Shards ([#30017](https://github.com/milvus-io/milvus/pull/30017)).
+- Incorporate proactive pre-warming logic for ChunkCache to mitigate the issue of high latency when retrieving raw vectors during cold start queries ([#30289](https://github.com/milvus-io/milvus/pull/30289))
+- Optimize the load balancing algorithm by assigning weight to growing segments ([#30293](https://github.com/milvus-io/milvus/pull/30293))
+- Remove unnecessary business logic for conversions between partition names and IDs to reduce latency in the data retrieve stage when processing search requests ([#30255](https://github.com/milvus-io/milvus/pull/30255)) 
+
+### Critical Bug Fixes
+
+- Fixed a memory leak caused by incorrect usage of OpenTelemetry in the Segcore ([#30068](https://github.com/milvus-io/milvus/pull/30068)).
+- Addressed the issue of slow disk index loading by dynamically patching the index parameters ([#30016](https://github.com/milvus-io/milvus/pull/30016)).
+- Resolved the problem of changes made through the "alter collection" command not being persisted ([#30156](https://github.com/milvus-io/milvus/pull/30156)).
+- Fixed the issue where read request rate limiting ultimately leads to the unavailability of the read service ([#30196](https://github.com/milvus-io/milvus/pull/30196)).
+- Resolve the deadlock issue when getting the configuration ([#30319](https://github.com/milvus-io/milvus/pull/30319))
+- Fix incorrect usage of the Goroutine pool on CGO calls ([#30275](https://github.com/milvus-io/milvus/pull/30275))
+- Add a timeout mechanism to the graceful stop process to prevent potential cases of getting stuck([#30320](https://github.com/milvus-io/milvus/pull/30320))
+
 ## v2.3.5
 
 Release date: Jan 17, 2024

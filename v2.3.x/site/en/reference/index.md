@@ -355,7 +355,7 @@ When conducting searches, note that you can set the top-K up to 8192 for any sea
 
   | Parameter | Range   |
   | --------- | ------- |
-  | `top-K`   | <= 8192 |
+  | `top-K`   | <= 1024 |
 
 ### HNSW
 
