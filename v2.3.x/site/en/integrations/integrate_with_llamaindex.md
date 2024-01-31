@@ -66,13 +66,18 @@ index = VectorStoreIndex.from_documents(
 
 The above code will generate a Milvus collection named **llamalection** on the Milvus server with default settings. You can include the following arguments to customize the MilvusVectorStore object to your needs:
 
+- **uri**: the URI to connect to, comes in the form of "http://address:port" and defaults to "http://localhost:19530".
+- **token**: the token used to authenticate the connection. You can leave it unspecified if RBAC is not enabled. Otherwise, use the username and password of an existing user. To be authenticated as the root user with the default password, use "root:Milvus".
 - **collection_name**: the name of the Milvus collection to create or use.
-- **host**: the hostname or IP address of the Milvus server.
-- **port**: the port number of the Milvus server.
-- **user**: the username to use to connect to the Milvus server.
-- **password**: the password to use to connect to the Milvus server.
-- **dim**: the dimension of the vectors to store in Milvus.
+- **dim**: the dimension of the vector embeddings. If it is not provided, collection creation will be done upon the first insertion.
+- **embedding_field**: the name of the field used to hold vector embeddings in the collection to create, defaults to `DEFAULT_EMBEDDING_KEY`.
+- **doc_id_field**: the name of the field used to hold doc IDs in the collection to create, defaults to `DEFAULT_DOC_ID_KEY`.
+- **similarity_metric**: the similarity metric to use. Possible options are `IP` and `L2` and defaults to `IP`.
+- **consistency_level**: the consistency level to use in the collection to create. Possible options are `Strong`, `Bounded`, `Staleness`, `Eventually`, and defaults to `Strong`.
 - **overwrite**: whether to overwrite the existing collection if it exists.
+- **text_key**: the name of the field that holds text in an existing collection, defaults to `None`. This applies only when you want to use an existing collection instead of create a new one.
+- **index_config**: the index parameters used to build an index for the specified collection, defaults to `None`.
+- **search_config**: the search parameters used to prepare searches in the specified collection, defaults to `None`.
 
 </div>
 
