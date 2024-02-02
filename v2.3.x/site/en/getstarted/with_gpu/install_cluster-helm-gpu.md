@@ -1,17 +1,17 @@
 ---
-id: install_cluster-helm.md
-label: Helm
+id: install_cluster-helm-gpu.md
+label: Cluster
 related_key: Kubernetes
 order: 1
-group: install_cluster-milvusoperator.md
+group: install_standalone-helm-gpu.md
 summary: Learn how to install Milvus cluster on Kubernetes.
 ---
 
-<div class="tab-wrapper"><a href="install_cluster-milvusoperator.md" class=''>Milvus Operator</a><a href="install_cluster-helm.md" class='active '>Helm</a></div>
+<div class="tab-wrapper"><a href="install_standalone-helm-gpu.md" class=''>Standalone</a><a href="install_cluster-helm-gpu.md" class='active '>Cluster</a></div>
 
 # Install Milvus Cluster with Helm
 
-This topic describes how to install Milvus standalone using Kubernetes.  
+This topic describes how to install Milvus standalone using Kubernetes with CPU-only and GPU support.  
 
 ## Prerequisites
 
@@ -56,6 +56,33 @@ $ kubectl get sc
 NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDINGMODE    ALLOWVOLUMEEXPANSION     AGE
 standard (default)    k8s.io/minikube-hostpath     Delete           Immediate             false                    3m36s
 ```
+
+## Start a Kubernetes cluster with GPU worker nodes
+
+If you prefer to use GPU-enabled worker nodes, you can follow the steps below to create a K8s cluster with GPU worker nodes. We recommend installing Milvus on a Kubernetes cluster with GPU worker nodes and using the default storage class provisioned.
+
+### 1. Prepare GPU worker nodes
+
+See [Prepare GPU worker nodes](https://gitlab.com/nvidia/kubernetes/device-plugin/-/blob/main/README.md#preparing-your-gpu-nodes) for more information.
+
+### 2. Enable GPU support on Kubernetes
+
+See [install nvidia-device-plugin with helm](https://gitlab.com/nvidia/kubernetes/device-plugin/-/blob/main/README.md#deployment-via-helm) for more information.
+
+After setting up, run `kubectl describe node <gpu-worker-node>` to view the GPU resources. The command output should be similar to the following:
+
+```bash
+Capacity:
+  ...
+  nvidia.com/gpu:     4
+  ...
+Allocatable:
+  ...
+  nvidia.com/gpu:     4
+  ...
+```
+
+Note: In this example, we have set up a GPU worker node with 4 GPU cards.
 
 ## Check the default storage class
 
@@ -105,33 +132,88 @@ $ helm repo update
 
 ## Start Milvus
 
-Once you have installed the Helm chart, you can start Milvus on Kubernetes. In this section, we will guide you through the steps to start Milvus.
+Once you have installed the Helm chart, you can start Milvus on Kubernetes. In this section, we will guide you through the steps to start Milvus with GPU support.
 
 You should start Milvus with Helm by specifying the release name, the chart, and the parameters you expect to change. In this guide, we use <code>my-release</code> as the release name. To use a different release name, replace <code>my-release</code> in the following commands with the one you are using.
 
-```
-$ helm install my-release milvus/milvus
-```
+Milvus allows you to assign one or more GPU devices to Milvus.
 
-<div class="alert note">
-  <ul>
-    <li>The release name should only contain letters, numbers and dashes. Dots are not allowed in the release name.</li>
-    <li>The default command line installs cluster version of Milvus while installing Milvus with Helm. Further setting is needed while installing Milvus standalone.</li>
-    <li>According to the <a href="https://kubernetes.io/docs/reference/using-api/deprecation-guide/#v1-25">deprecated API migration guide of Kuberenetes</a>, the <b>policy/v1beta1</b> API version of PodDisruptionBudget is not longer served as of v1.25. You are suggested to migrate manifests and API clients to use the <b>policy/v1</b> API version instead. <br>As a workaround for users who still use the <b>policy/v1beta1</b> API version of PodDisruptionBudget on Kuberenetes v1.25 and later, you can instead run the following command to install Milvus:<br>
-    <code>helm install my-release milvus/milvus --set pulsar.bookkeeper.pdb.usePolicy=false,pulsar.broker.pdb.usePolicy=false,pulsar.proxy.pdb.usePolicy=false,pulsar.zookeeper.pdb.usePolicy=false</code></li> 
-    <li>See <a href="https://artifacthub.io/packages/helm/milvus/milvus">Milvus Helm Chart</a> and <a href="https://helm.sh/docs/">Helm</a> for more information.</li>
-  </ul>
-</div>
+- Assign a single GPU device
 
-Check the status of the running pods.
+  Run the following commands to assign a single GPU device to Milvus:
 
-```
-$ kubectl get pods
-```
+  ```bash
+  cat <<EOF > custom-values.yaml
+  indexNode:
+    resources:
+      requests:
+        nvidia.com/gpu: "1"
+      limits:
+        nvidia.com/gpu: "1"
+  queryNode:
+    resources:
+      requests:
+        nvidia.com/gpu: "1"
+      limits:
+        nvidia.com/gpu: "1"
+  EOF
+  ```
+
+  ```bash
+  $ helm install my-release milvus/milvus -f custom-values.yaml
+  ```
+
+- Assign multiple GPU devices
+
+  Run the following commands to assign multiple GPU devices to Milvus:
+
+  ```bash
+  cat <<EOF > custom-values.yaml
+  indexNode:
+    resources:
+      requests:
+        nvidia.com/gpu: "2"
+      limits:
+        nvidia.com/gpu: "2"
+    extraEnv:
+    - name: CUDA_VISIBLE_DEVICES
+      value: "0, 1"
+  queryNode:
+    resources:
+      requests:
+        nvidia.com/gpu: "2"
+      limits:
+        nvidia.com/gpu: "2"
+    extraEnv:
+    - name: CUDA_VISIBLE_DEVICES
+      value: "0, 1"
+  EOF
+  ```
+  In the configuration above, a total of four GPU cards are assigned, with two cards designated for the index node and the other two for the query node.
+
+  ```bash
+  $ helm install my-release milvus/milvus -f custom-values.yaml
+  ```
+
+  <div class="alert note">
+    <ul>
+      <li>The release name should only contain letters, numbers and dashes. Dots are not allowed in the release name.</li>
+      <li>The default command line installs cluster version of Milvus while installing Milvus with Helm. Further setting is needed while installing Milvus standalone.</li>
+      <li>According to the <a href="https://kubernetes.io/docs/reference/using-api/deprecation-guide/#v1-25">deprecated API migration guide of Kuberenetes</a>, the <b>policy/v1beta1</b> API version of PodDisruptionBudget is not longer served as of v1.25. You are suggested to migrate manifests and API clients to use the <b>policy/v1</b> API version instead. <br>As a workaround for users who still use the <b>policy/v1beta1</b> API version of PodDisruptionBudget on Kuberenetes v1.25 and later, you can instead run the following command to install Milvus:<br>
+      <code>helm install my-release milvus/milvus --set pulsar.bookkeeper.pdb.usePolicy=false,pulsar.broker.pdb.usePolicy=false,pulsar.proxy.pdb.usePolicy=false,pulsar.zookeeper.pdb.usePolicy=false</code></li> 
+      <li>See <a href="https://artifacthub.io/packages/helm/milvus/milvus">Milvus Helm Chart</a> and <a href="https://helm.sh/docs/">Helm</a> for more information.</li>
+    </ul>
+  </div>
+
+  Check the status of the running pods.
+
+  ```bash
+  $ kubectl get pods
+  ```
 
 After Milvus starts, the `READY` column displays `1/1` for all pods.
 
-```
+```text
 NAME                                             READY  STATUS   RESTARTS  AGE
 my-release-etcd-0                                1/1    Running   0        3m23s
 my-release-etcd-1                                1/1    Running   0        3m23s

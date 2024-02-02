@@ -128,12 +128,20 @@
       "order": 1
     }, 
     {
+      "id": "install_standalone-helm-gpu.md",
+      "title": "With GPU Support",
+      "label1": "getstarted",
+      "label2": "installmilvus",
+      "label3": "",
+      "order": 2
+    },
+    {
       "id": "install_offline-helm.md",
       "title": "Install Offline",
       "label1": "getstarted",
       "label2": "installmilvus",
       "label3": "",
-      "order": 2
+      "order": 3
     }, 
     {
       "id": "install_sdks",

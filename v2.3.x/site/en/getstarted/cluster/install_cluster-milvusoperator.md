@@ -505,6 +505,10 @@ Having installed Milvus, you can:
 - Deploy your Milvu cluster on clouds:
   - [Amazon EC2](aws.md)
   - [Amazon EKS](eks.md)
+  - [Google Cloud](gcp.md)
+  - [Google Cloud Storage](gcs.md)
+  - [Microsoft Azure](azure.md)
+  - [Microsoft Azure Blob Storage](abs.md)
 - Explore [Milvus Backup](milvus_backup_overview.md), an open-source tool for Milvus data backups.
 - Explore [Birdwatcher](birdwatcher_overview.md), an open-source tool for debugging Milvus and dynamic configuration updates.
 - Explore [Attu](https://milvus.io/docs/attu.md), an open-source GUI tool for intuitive Milvus management.

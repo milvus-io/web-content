@@ -1,21 +1,27 @@
 ---
-id: install_standalone-helm.md
-label: Helm
-related_key: Helm
-order: 3
-group: install_standalone-docker.md
-summary: Learn how to install Milvus standalone on Kubernetes.
+id: install_standalone-helm-gpu.md
+label: Standalone
+order: 0
+group: install_standalone-helm-gpu.md
+related_key: Docker
+summary: Learn the necessary preparations before installing Milvus with Docker.
 ---
 
-<div class="tab-wrapper"><a href="install_standalone-docker.md" class=''>Docker</a><a href="install_standalone-aptyum.md" class=''>Dpkg</a><a href="install_standalone-operator.md" class=''>Milvus Operator</a><a href="install_standalone-helm.md" class='active '>Helm</a></div>
+<div class="tab-wrapper"><a href="install_standalone-helm-gpu.md" class='active '>Standalone</a><a href="install_cluster-helm-gpu.md" class=''>Cluster</a></div>
 
-# Install Milvus Standalone with Kubernetes
+# Install Milvus with GPU Support
 
-This topic describes how to install Milvus standalone using Kubernetes.
+Milvus now can use GPU devices to build indexes and perform ANN searches thanks to the contribution from NVIDIA. This guide will show you how to install Milvus with GPU support on your machine.
 
 ## Prerequisites
 
-Check [the requirements](prerequisite-helm.md) for hardware and software prior to your installation.
+Before installing Milvus with GPU support, make sure you have the following prerequisites:
+
+- The compute capability of your GPU device is 6.1, 7.0, 7.5, or 8.0. To check whether your GPU device suffices the requirement, check [Your GPU Compute Capability](https://developer.nvidia.com/cuda-gpus) on the NVIDIA developer website.
+
+- You have installed the NVIDIA driver for your GPU device on one of [the supported Linux distributions](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html#linux-distributions) and then the NVIDIA Container Toolkit following [this guide](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html).
+
+- You have installed a Kubernetes cluster, and the `kubectl` command-line tool has been configured to communicate with your cluster. It is recommended to run this tutorial on a cluster with at least two nodes that are not acting as control plane hosts.
 
 ## Create a K8s cluster using minikube
 
@@ -48,7 +54,34 @@ NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDI
 standard (default)    k8s.io/minikube-hostpath     Delete           Immediate             false                    3m36s
 ```
 
-### 4. Check the default storage class
+## Start a Kubernetes cluster with GPU worker nodes
+
+If you prefer to use GPU-enabled worker nodes, you can follow the steps below to create a K8s cluster with GPU worker nodes. We recommend installing Milvus on a Kubernetes cluster with GPU worker nodes and using the default storage class provisioned.
+
+### 1. Prepare GPU worker nodes
+
+See [Prepare GPU worker nodes](https://gitlab.com/nvidia/kubernetes/device-plugin/-/blob/main/README.md#preparing-your-gpu-nodes) for more information.
+
+### 2. Enable GPU support on Kubernetes
+
+See [install nvidia-device-plugin with helm](https://gitlab.com/nvidia/kubernetes/device-plugin/-/blob/main/README.md#deployment-via-helm) for more information.
+
+After setting up, run `kubectl describe node <gpu-worker-node>` to view the GPU resources. The command output should be similar to the following:
+
+```bash
+Capacity:
+  ...
+  nvidia.com/gpu:     4
+  ...
+Allocatable:
+  ...
+  nvidia.com/gpu:     4
+  ...
+```
+
+Note: In this example, we have set up a GPU worker node with 4 GPU cards.
+
+### 3. Check the default storage class
 
 Milvus relies on the default storage class to automatically provision volumes for data persistence. Run the following command to check storage classes:
 
@@ -96,23 +129,62 @@ $ helm repo update
 
 ## Start Milvus
 
-Once you have installed the Helm chart, you can start Milvus on Kubernetes. In this section, we will guide you through the steps to start Milvus.
+Once you have installed the Helm chart, you can start Milvus on Kubernetes. In this section, we will guide you through the steps to start Milvus with GPU support.
 
 You should start Milvus with Helm by specifying the release name, the chart, and the parameters you expect to change. In this guide, we use <code>my-release</code> as the release name. To use a different release name, replace <code>my-release</code> in the following commands with the one you are using.
 
-```bash
-$ helm install my-release milvus/milvus --set cluster.enabled=false --set etcd.replicaCount=1 --set minio.mode=standalone --set pulsar.enabled=false
-```
+Milvus allows you to assign one or more GPU devices to Milvus. 
 
-<div class="alert note">
-See <a href="https://artifacthub.io/packages/helm/milvus/milvus">Milvus Helm Chart</a> and <a href="https://helm.sh/docs/">Helm</a> for more information.
-</div>
+- Assign a single GPU device
 
-Check the status of the running pods.
+  Run the following commands to assign a single GPU device to Milvus:
 
-```bash
-$ kubectl get pods
-```
+  ```bash
+  cat <<EOF > custom-values.yaml
+  standalone:
+    resources:
+      requests:
+        nvidia.com/gpu: "1"
+      limits:
+        nvidia.com/gpu: "1"
+  EOF
+  ```
+
+  ```bash
+  $ helm install my-release milvus/milvus --set cluster.enabled=false --set etcd.replicaCount=1 --set minio.mode=standalone --set pulsar.enabled=false -f custom-values.yaml
+  ```
+
+- Assign multiple GPU devices
+
+  Run the following commands to assign multiple GPU devices to Milvus:
+
+  ```bash
+  cat <<EOF > custom-values.yaml
+  standalone:
+    resources:
+      requests:
+        nvidia.com/gpu: "2"
+      limits:
+        nvidia.com/gpu: "2"
+    extraEnv:
+    - name: CUDA_VISIBLE_DEVICES
+      value: "0, 1"
+  EOF
+  ```
+
+  ```bash
+  $ helm install my-release milvus/milvus --set cluster.enabled=false --set etcd.replicaCount=1 --set minio.mode=standalone --set pulsar.enabled=false -f custom-values.yaml
+  ```
+
+  <div class="alert note">
+  See <a href="https://artifacthub.io/packages/helm/milvus-helm/milvus">Milvus Helm Chart</a> and <a href="https://helm.sh/docs/">Helm</a> for more information.
+  </div>
+
+  Check the status of the running pods:
+
+  ```bash
+  $ kubectl get pods
+  ```
 
 After Milvus starts, the `READY` column displays `1/1` for all pods.
 
@@ -201,3 +273,5 @@ Having installed Milvus, you can:
 - Explore [Birdwatcher](birdwatcher_overview.md), an open-source tool for debugging Milvus and dynamic configuration updates.
 - Explore [Attu](https://milvus.io/docs/attu.md), an open-source GUI tool for intuitive Milvus management.
 - [Monitor Milvus with Prometheus](monitor.md).
+
+
