@@ -9,7 +9,7 @@ summary: Learn the necessary preparations before installing Milvus with Docker.
 
 <div class="tab-wrapper"><a href="install_standalone-helm-gpu.md" class='active '>Standalone</a><a href="install_cluster-helm-gpu.md" class=''>Cluster</a></div>
 
-# Install Milvus with GPU Support
+# Install Milvus Standalone with GPU Support
 
 Milvus now can use GPU devices to build indexes and perform ANN searches thanks to the contribution from NVIDIA. This guide will show you how to install Milvus with GPU support on your machine.
 
