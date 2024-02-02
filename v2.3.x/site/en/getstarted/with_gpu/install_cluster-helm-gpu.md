@@ -9,7 +9,7 @@ summary: Learn how to install Milvus cluster on Kubernetes.
 
 <div class="tab-wrapper"><a href="install_standalone-helm-gpu.md" class=''>Standalone</a><a href="install_cluster-helm-gpu.md" class='active '>Cluster</a></div>
 
-# Install Milvus Cluster with Helm
+# Install Milvus Cluster with GPU Support
 
 This topic describes how to install Milvus standalone using Kubernetes with CPU-only and GPU support.  
 
