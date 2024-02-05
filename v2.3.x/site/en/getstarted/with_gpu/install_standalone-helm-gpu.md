@@ -1,13 +1,13 @@
 ---
 id: install_standalone-helm-gpu.md
-label: Standalone
+label: Standalone (Helm)
 order: 0
 group: install_standalone-helm-gpu.md
 related_key: Docker
 summary: Learn the necessary preparations before installing Milvus with Docker.
 ---
 
-<div class="tab-wrapper"><a href="install_standalone-helm-gpu.md" class='active '>Standalone</a><a href="install_cluster-helm-gpu.md" class=''>Cluster</a></div>
+<div class="tab-wrapper"><a href="install_standalone-helm-gpu.md" class='active '>Standalone (Helm)</a><a href="install_standalone-docker-compose-gpu.md" class=''>Standalone (Docker)</a><a href="install_cluster-helm-gpu.md" class=''>Cluster (Helm)</a></div>
 
 # Install Milvus Standalone with GPU Support
 
