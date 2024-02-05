@@ -1,13 +1,13 @@
 ---
 id: install_standalone-docker-compose.md
-label: Docker
-related_key: Docker
+label: Docker Compose
+related_key: Docker Compose
 order: 4
 group: install_standalone-docker.md
 summary: Learn how to install Milvus standalone with Docker Compose.
 ---
 
-<div class="tab-wrapper"><a href="install_standalone-docker.md" class=''>Docker</a><a href="install_standalone-operator.md" class=''>Milvus Operator</a><a href="install_standalone-helm.md" class=''>Helm</a><a href="install_standalone-aptyum.md" class=''>Dpkg</a><a href="install_standalone-docker-compose.md" class='active '>Docker</a></div>
+<div class="tab-wrapper"><a href="install_standalone-docker.md" class=''>Docker</a><a href="install_standalone-operator.md" class=''>Milvus Operator</a><a href="install_standalone-helm.md" class=''>Helm</a><a href="install_standalone-aptyum.md" class=''>Dpkg</a><a href="install_standalone-docker-compose.md" class='active '>Docker Compose</a></div>
 
 # Install Milvus Standalone with Docker Compose
 

@@ -7,7 +7,7 @@ group: install_standalone-docker.md
 summary: Learn how to install Milvus stanalone with dpkg.
 ---
 
-<div class="tab-wrapper"><a href="install_standalone-docker.md" class=''>Docker</a><a href="install_standalone-operator.md" class=''>Milvus Operator</a><a href="install_standalone-helm.md" class=''>Helm</a><a href="install_standalone-aptyum.md" class='active '>Dpkg</a><a href="install_standalone-docker-compose.md" class=''>Docker</a></div>
+<div class="tab-wrapper"><a href="install_standalone-docker.md" class=''>Docker</a><a href="install_standalone-operator.md" class=''>Milvus Operator</a><a href="install_standalone-helm.md" class=''>Helm</a><a href="install_standalone-aptyum.md" class='active '>Dpkg</a><a href="install_standalone-docker-compose.md" class=''>Docker Compose</a></div>
 
 # Install Milvus Standalone with dpkg
 
