@@ -117,7 +117,7 @@ queryResult, err := milvusClient.Query(
     context.Background(),                                   // ctx
     "book",                                                 // CollectionName
     "",                                                     // PartitionName
-    entity.NewColumnInt64("book_id", []int64{2,4,6,8}),     // expr
+    "book_id in [2,4,6,8]",                                 // expr
     []string{"book_id", "book_intro"},                      // OutputFields
     opt,                                                    // queryOptions
 )
@@ -406,7 +406,10 @@ console.log(results.data)
 ```go
 fmt.Printf("%#v\n", queryResult)
 for _, qr := range queryResult {
-    fmt.Println(qr.IDs)
+    for i := 0; i < qr.Len(); i++ {
+        value, _ := qr.Get(i)
+        fmt.Println(value)
+    }
 }
 ```
 
