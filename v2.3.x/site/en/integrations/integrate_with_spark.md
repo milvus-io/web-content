@@ -49,7 +49,7 @@ In this demo, we create a sample Spark DataFrame with vector data and write it t
 
 <div class="multipleCode">
   <a href="#python">Python </a>
-  <a href="#scalar">Scalar</a>
+  <a href="#scala">Scala</a>
 </div>
 
 ```python
