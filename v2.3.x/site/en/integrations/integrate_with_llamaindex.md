@@ -16,7 +16,7 @@ The RAG system combines a retrieval system with a generative model to generate n
 Code snippets on this page require **pymilvus** and **llamaindex** libraries. You can install them using the following commands:
 
 ```shell
-pthon3 -m pip install --upgrade pymilvus llamaindex openai
+python3 -m pip install --upgrade pymilvus llamaindex openai
 ```
 
 What's more, LlamaIndex requires an LLM model at the backend. In this article, we will use the OpenAI as the LLM backend. You can sign up for a free API key at [OpenAI](https://openai.com/).
