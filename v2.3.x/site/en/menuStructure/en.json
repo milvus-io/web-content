@@ -924,7 +924,15 @@
       "label1": "integrations",
       "label2": "",
       "label3": "",
-      "order": 7
+      "order":  7
+    },
+    {
+      "id": "integrate_with_spark.md",
+      "title": "Spark",
+      "label1": "integrations",
+      "label2": "",
+      "label3": "",
+      "order": 8
     },
     {
       "id": "benchmark.md",
