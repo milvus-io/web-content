@@ -1,34 +1,44 @@
 ---
 id: install_standalone-aptyum.md
-label: Dpkg
+label: DEB/RPM
 related_key: Install
 order: 3
 group: install_standalone-docker.md
-summary: Learn how to install Milvus stanalone with dpkg.
+summary: Learn how to install Milvus stanalone with dpkg/yum.
 ---
 
-<div class="tab-wrapper"><a href="install_standalone-docker.md" class=''>Docker</a><a href="install_standalone-operator.md" class=''>Milvus Operator</a><a href="install_standalone-helm.md" class=''>Helm</a><a href="install_standalone-aptyum.md" class='active '>Dpkg</a><a href="install_standalone-docker-compose.md" class=''>Docker Compose</a></div>
+<div class="tab-wrapper"><a href="install_standalone-docker.md" class=''>Docker</a><a href="install_standalone-operator.md" class=''>Milvus Operator</a><a href="install_standalone-helm.md" class=''>Helm</a><a href="install_standalone-aptyum.md" class='active '>DEB/RPM</a><a href="install_standalone-docker-compose.md" class=''>Docker Compose</a></div>
 
-# Install Milvus Standalone with dpkg
+# Install Milvus Standalone with dpkg/yum
 
-This topic describes how to install Milvus standalone on Ubuntu systems.
+This topic describes how to install Milvus standalone using package manager dpkg or yum on Linux systems.
+
 
 ## Prerequisites
 
 Check [the requirements](prerequisite-docker.md) for hardware and software prior to your installation.
 
-## Install Milvus with dpkg on Ubuntu
+## Install Milvus
+
+### Install Milvus with dpkg on Ubuntu
 
 ```bash
-$ wget https://github.com/milvus-io/milvus/releases/download/v2.3.5/milvus_2.3.5-1_amd64.deb
+$ wget https://github.com/milvus-io/milvus/releases/download/v2.3.7/milvus_2.3.7-1_amd64.deb
 $ sudo apt-get update
-$ sudo dpkg -i milvus_2.3.5-1_amd64.deb
+$ sudo dpkg -i milvus_2.3.7-1_amd64.deb
 $ sudo apt-get -f install
+```
+
+### Install Milvus with yum on RedHat9
+
+```bash
+$ sudo yum install -y https://github.com/milvus-io/milvus/releases/download/v2.3.7/milvus-2.3.7-1.el9.x86_64.rpm
 ```
 
 ## Check the status of Milvus
 
 ```bash
+$ sudo systemctl restart milvus
 $ sudo systemctl status milvus
 ```
 
@@ -38,8 +48,16 @@ Please refer to [Hello Milvus](https://milvus.io/docs/example_code.md), then run
 
 ## Uninstall Milvus
 
+### Uninstall Milvus on Ubuntu
+
 ```bash
 $ sudo dpkg -P milvus
+```
+
+### Uninstall Milvus on RedHat9
+
+```bash
+$ sudo yum remove -y milvus
 ```
 
 ## What's next
