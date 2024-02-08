@@ -6,6 +6,34 @@ summary: Milvus Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.3.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.3.8
+
+Release date: Feb 7, 2024
+
+| Milvus version | Python SDK version | Java SDK version | Go SDK version | Node.js SDK version |
+|----------------|--------------------|------------------|----------------|---------------------|
+| 2.3.8          | 2.3.6              | 2.3.4            | 2.3.5          | 2.3.5               |
+
+Milvus v2.3.8 is a minor patch release following Milvus v2.3.7. This release includes several enhancements and bug fixes. These improvements are designed to enhance system stability and observability. One of the key bug fixes is to prevent BulkInsert from getting stuck after a node restart.
+
+## Improvements
+
+- Improved error messaging for dimension mismatch in search vectors ([#30316](https://github.com/milvus-io/milvus/pull/30316))
+- Integrated Milvus build process details, including commit information and dependency identifiers, into monitoring metrics ([#29666](https://github.com/milvus-io/milvus/pull/29666))
+- Streamlined loading strategy for segment Binlog files to optimize performance ([#30348](https://github.com/milvus-io/milvus/pull/30348))
+- Expanded BulkInsert feature to accommodate auto-incrementing primary keys for VarChar types ([#30448](https://github.com/milvus-io/milvus/pull/30448))
+- Enhanced memory estimation algorithm during data loading to prevent out-of-memory (OOM) errors ([#30475](https://github.com/milvus-io/milvus/pull/30475))
+- Eliminated extraneous log messages for cleaner logging ([#30478](https://github.com/milvus-io/milvus/pull/30478))
+- Updated to Knowhere version 2.2.4 for improved functionality ([#30513](https://github.com/milvus-io/milvus/pull/30513))
+
+## Critical Bug Fixes
+
+- Fixed panic error caused by watching multiple channels in the Datanodes ([#30136](https://github.com/milvus-io/milvus/pull/30136))
+- Corrected reading of index parameters from the configuration file ([#30353](https://github.com/milvus-io/milvus/pull/30353))
+- Ensured effectiveness of the db_name parameter for DescribeAlias and ListAliases operations ([#30453](https://github.com/milvus-io/milvus/pull/30453))
+- Resolved proxy startup hang-up due to improper port occupation handling ([#30416](https://github.com/milvus-io/milvus/pull/30416))
+- Refactored BulkInsert Flush process to prevent hang-ups after restart ([#30439](https://github.com/milvus-io/milvus/pull/30439))
+
 ## v2.3.7
 
 Release date: Jan 29, 2024
