@@ -6,6 +6,22 @@ summary: Milvus Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.3.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.3.9
+
+Release date: Feb 19, 2024
+
+| Milvus version | Python SDK version | Java SDK version | Go SDK version | Node.js SDK version |
+|----------------|--------------------|------------------|----------------|---------------------|
+| 2.3.9          | 2.3.6              | 2.3.4            | 2.3.5          | 2.3.5               |
+
+Milvus 2.3.9 is a critical patch release succeeding Milvus 2.3.8, incorporating a number of vital bug fixes. Key among these is the resolution of the DiskANN construction failure issue. **We strongly advise users experiencing disk index construction problems in version 2.3.8 to upgrade to version 2.3.9 without delay**.
+
+### Critial Bug Fixes
+
+- Fixed DiskANN construction failure in Milvus version 2.3.8 (#30640).
+- Addressed loading failures due to inability to replace the primary key index (#30578).
+- Added `collectionName` to the response of the ListAliases API (#30533).
+
 ## v2.3.8
 
 Release date: Feb 7, 2024
