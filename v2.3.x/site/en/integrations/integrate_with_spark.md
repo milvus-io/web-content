@@ -23,7 +23,7 @@ The Spark-Milvus Connector supports Scala and Python programming languages. User
 
 2. Download the **spark-milvus** jar file.
 
-    ```shell
+    ```
     wget https://github.com/zilliztech/spark-milvus/raw/1.0.0-SNAPSHOT/output/spark-milvus-1.0.0-SNAPSHOT.jar
     ```
 
@@ -33,13 +33,13 @@ The Spark-Milvus Connector supports Scala and Python programming languages. User
 
     - **pyspark**
 
-        ```shell
+        ```
         ./bin/pyspark --jars spark-milvus-1.0.0-SNAPSHOT.jar
         ```
 
     - **spark-shell**
 
-        ```shell
+        ```
         ./bin/spark-shell --jars spark-milvus-1.0.0-SNAPSHOT.jar
         ```
 
@@ -229,7 +229,7 @@ In this demo, we will
 
 To enable the Spark-MySQL Connector, you need to add the following dependency to your Spark environment:
 
-```shell
+```
 spark-shell --jars spark-milvus-1.0.0-SNAPSHOT.jar,mysql-connector-j-x.x.x.jar
 ```
 

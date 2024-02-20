@@ -214,7 +214,7 @@ Assume that two array fields `int_array` and `var_array` have been defined. The 
 | array_contains (ARRAY_CONTAINS) | <code>'array_contains(int_array, 100)'</code> | This expression evaluates to true if <code>int_array</code> contains element <code>100</code>. |
 | array_contains_all (ARRAY_CONTAINS_ALL) | <code>'array_contains_all(int_array, [1, 2, 3])'</code> | This expression evaluates to true if <code>int_array</code> contains all elements <code>1</code>, <code>2</code>, and <code>3</code>. |
 | array_contains_any (ARRAY_CONTAINS_ANY) | <code>'array_contains_any(var_array, ["a", "b", "c"])'</code> | This expression evaluates to true if <code>var_array</code> contains any element of <code>"a"</code>, <code>"b"</code>, and <code>"c"</code>. |
-| array_length | <code>'array_length(int_array) > 10'</code> | This expression evaluates to true if <code>int_array</code> contains more than 10 elements. |
+| array_length | <code>'array_length(int_array) == 10'</code> | This expression evaluates to true if <code>int_array</code> contains exactly 10 elements. |
 
 ## What’s next
 
