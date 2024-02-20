@@ -18,9 +18,9 @@ Milvus 2.3.9 is a critical patch release succeeding Milvus 2.3.8, incorporating 
 
 ### Critial Bug Fixes
 
-- Fixed DiskANN construction failure in Milvus version 2.3.8 (#30640).
-- Addressed loading failures due to inability to replace the primary key index (#30578).
-- Added `collectionName` to the response of the ListAliases API (#30533).
+- Fixed DiskANN construction failure in Milvus version 2.3.8 ([#30640](https://github.com/milvus-io/milvus/pull/30640)).
+- Addressed loading failures due to inability to replace the primary key index ([#30578](https://github.com/milvus-io/milvus/pull/30578)).
+- Added `collectionName` to the response of the ListAliases API ([#30533](https://github.com/milvus-io/milvus/pull/30533)).
 
 ## v2.3.8
 
