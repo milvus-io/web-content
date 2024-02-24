@@ -6,6 +6,31 @@ summary: Milvus Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.3.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.3.10
+
+Release date: Feb 23, 2024
+
+| Milvus version | Python SDK version | Java SDK version | Go SDK version | Node.js SDK version |
+|----------------|--------------------|------------------|----------------|---------------------|
+| 2.3.10         | 2.3.6              | 2.3.4            | 2.3.5          | 2.3.5               |
+
+Milvus v2.3.10 is a critical patch release that follows Milvus v2.3.9, featuring several essential bug fixes. A significant fix in this release addresses the issue of missing data in hybrid search results when utilizing partition keys.
+
+Users who have encountered hybrid search issues in release v2.3.5 through v2.3.9, especially those using partition key features, are highly recommended to upgrade to version v2.3.10 promptly.
+
+### Critical Bug Fixes
+
+- Fixed the upsert error where the primary key field was incorrectly treated as the PartitionKey field ([Issue #30607](https://github.com/milvus-io/milvus/issues/30607)).
+- Prevented flush blockages by skipping the filling of segmentID in indexBuildCh ([#30749](https://github.com/milvus-io/milvus/pull/30749)).
+
+### Bug Fixes
+
+- Prevented accidental deletion of original data by avoiding the use of absolute paths in ChunkCache ([#30679](https://github.com/milvus-io/milvus/pull/30679)).
+- Enforced the use of virtual host for Tencent Cloud object storage ([#30685](https://github.com/milvus-io/milvus/pull/30685)).
+- Updated disk usage metrics following segment release ([#30707](https://github.com/milvus-io/milvus/pull/30707)).
+- Released loaded growing segments if WatchDmlChannel fails ([#30745](https://github.com/milvus-io/milvus/pull/30745)).
+- Resolved a panic caused by using a nil interface in the gRPC client ([#30755](https://github.com/milvus-io/milvus/pull/30755)).
+
 ## v2.3.9
 
 Release date: Feb 19, 2024
