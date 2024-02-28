@@ -434,7 +434,7 @@ object TransformDemo extends App {
 }
 ```
 
-### Databriks -> Zilliz Cloud
+### Databricks -> Zilliz Cloud
 
 If you are using Zilliz Cloud (the managed Milvus service), you can leverage its convenient Data Import API. Zilliz Cloud provides comprehensive tools and documentation to help you efficiently move your data from various data sources, including Spark and Databricks. Simply set up an S3 bucket as an intermediary and open its access to your Zilliz Cloud account. The Zilliz Cloud's Data Import API will automatically load the full batch of data from the S3 bucket to your Zilliz Cloud cluster.
 
