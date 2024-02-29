@@ -14,7 +14,7 @@ Milvus allows users to load a collection as multiple replicas to utilize the CPU
 <ul>
 <li>The volume of the data to load must be under 90% of the total memory resources of all query nodes to reserve memory resources for the execution engine.</li>
 <li>All the online query nodes will be divided into multiple replica groups according to the replica number specified by users. All replica groups shall have minimal memory resources to load one replica of the provided collection. Otherwise, an error will be returned.</li>
-<li>Create an index before loading a collection. To implement brute-force searches, you have to at least create an IVF_FLAT index on the collection.</li>
+<li>Create an index before loading a collection. To implement searches, create at least an IVF_FLAT index on the collection.</li>
 </ul>
 </div>
 
