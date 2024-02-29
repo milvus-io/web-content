@@ -67,7 +67,7 @@ sample_df.write \
     .option("milvus.port", "19530") \
     .option("milvus.collection.name", "hello_spark_milvus") \
     .option("milvus.collection.vectorField", "vec") \
-    .option("milvus.collection.vectorDim", "5") \
+    .option("milvus.collection.vectorDim", "8") \
     .option("milvus.collection.primaryKeyField", "id") \
     .format("milvus") \
     .save()
