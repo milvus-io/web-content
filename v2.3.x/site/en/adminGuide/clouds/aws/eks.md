@@ -258,7 +258,7 @@ In this guide, we will use Milvus Helm Charts to deploy a Milvus cluster. You ca
 
 2. Prepare the Milvus configuration file `milvus.yaml`, and replace `<bucket-name>` with the name of the bucket created above.
 
-    <div class="alert notes">
+    <div class="alert note">
     
     - To configure HA for your Milvus, refer to [this calculator](https://milvus.io/tools/sizing/) for more information. You can download the related configurations directly from the calculator, and you should remove MinIO-related configurations.
     - To implement multi-replica deployments of coordinators, set `xxCoordinator.activeStandby.enabled` to `true`.
@@ -355,7 +355,7 @@ In this guide, we will use Milvus Helm Charts to deploy a Milvus cluster. You ca
     kubectl get pods -n milvus
     ```
 
-    <div class="alert notes">
+    <div class="alert note">
 
     Helm does not support scheduling the order of service creation. It is normal that business pods to restart for one or two times before `etcd` and `pulsar` are up in the early stage.
 
@@ -379,7 +379,7 @@ You can follow the simple guide below to verify the installation. For more detai
 
 2. Change the `host` argument in the example code to the Milvus service address above.
 
-    <div class="alert notes">
+    <div class="alert note">
 
     If You have set `service.beta.kubernetes.io/aws-load-balancer-scheme` to `internal` in `milvus.yaml`. You should run the example code within the EKS VPC.
 
