@@ -52,9 +52,9 @@ To recap, you can use either or some of the multi-tenancy strategies above to fo
 |---------------------------|----------------|--------------|----------------------|
 | Database oriented         | Strong         | Strong       | 64                   |
 | One collection for all    | Weak           | Medium       | N/A                  |
-| One collection per tenant | Strong         | Strong       | 65536                |
+| One collection per tenant | Strong         | Strong       | Less than 10000      |
 | One partition per tenant  | Medium         | Strong       | 4096                 |
-| Partition-key-based       | Medium         | Strong       | N/A                  |
+| Partition-key-based       | Medium         | Strong       | 10000000             |
 
 ## What's next
 
