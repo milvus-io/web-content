@@ -27,11 +27,13 @@ minio:
 ```
 See [MinIO/S3 Configurations](configure_minio.md) for more information.
 
+### 2. Refine docker-compose.yaml
+You'd also remove the `MINIO_ADDRESS` environment variable for milvus service at `docker-compose.yaml`. By default milvus will use local minio instead of external S3.
 
-### 2. Run Milvus
+### 3. Run Milvus
 Run the following command to start Milvus that uses the S3 configurations.
 ```shell
-docker-compose up
+docker compose up
 ```
 <div class="alert note">Configurations only take effect after Milvus starts. See <a href=https://milvus.io/docs/install_standalone-docker.md#Start-Milvus>Start Milvus</a> for more information.</div>
 

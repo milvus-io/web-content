@@ -41,7 +41,14 @@ await milvusClient.createAlias({
 ```
 
 ```go
-// This function is under active development on the GO client.
+err = milvusClient.CreateAlias(
+    context.Background(), // ctx
+    "book",               // collection name
+    "publication",        // alias
+)
+if err != nil {
+    log.Fatal("failed to create alias:", err.Error())
+}
 ```
 
 ```java
@@ -198,7 +205,13 @@ await milvusClient.dropAlias({
 ```
 
 ```go
-// This function is under active development on the GO client.
+err = milvusClient.DropAlias(
+    context.Background(), // ctx
+    "publication",        // alias
+)
+if err != nil {
+    log.Fatal("failed to drop alias:", err.Error())
+}
 ```
 
 ```java
@@ -334,7 +347,14 @@ await milvusClient.alterAlias({
 ```
 
 ```go
-// This function is under active development on the GO client.
+err = milvusClient.AlterAlias(
+    context.Background(), // ctx
+    "book",               // collection name
+    "publication",        // alias
+)
+if err != nil {
+    log.Fatal("failed to alter alias:", err.Error())
+}
 ```
 
 ```java

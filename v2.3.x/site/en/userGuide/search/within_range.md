@@ -11,17 +11,22 @@ summary: Learn how to conduct a range search.
 
 # Conduct a Range Search
 
-This topic describes how to conduct a range search.
+Understanding how to filter your search results by the proximity of entities is crucial in vector database operations. A range search serves this exact purpose by narrowing down results according to the distance between a query vector and database vectors. This guide will walk you through the process of conducting a range search in Milvus, which consists of a vector similarity search followed by distance-based filtering.
 
-A range search is a way of filtering search results based on the distance between a query vector and a vector field value. The distance can be measured using different metric types.
+## Quick steps for a range search
 
-When performing a range search, Milvus first conducts a vector similarity search. It then executes vector filtering based on the specified distance condition, and finally returns the vector results whose distance falls into a specific range.
+1. **Load your collection into memory**: Initiate by ensuring your dataset is loaded and ready for search.
+2. **Set your search parameters**: Define `radius` and `range_filter` parameters to control your search precision.
+3. **Execute the search**: Perform the range search using the parameters set in step 2. We provide examples for **L2 (Euclidean)** and **IP (Inner Product)** distances.
+4. **Review your results**: The vectors returned will be within the range you specified, tailored to the distance metrics you have chosen.
 
-The following examples show how to conduct a range search on the basis of a regular [vector search](search.md).
+<div class="alert note">
+Milvus may return fewer results than your set <code>limit</code> if not enough vectors meet the specified distance criteria after range filtering.
+</div>
 
-## Load collection
+## Step 1: Load collection
 
-All search and query operations within Milvus are executed in memory. Load the collection to memory before conducting a vector similarity search.
+Before anything else, make sure the collection is loaded into memory as Milvus operates in-memory for search and query functions.
 
 <div class="multipleCode">
   <a href="#python">Python </a>
@@ -45,15 +50,86 @@ if err != nil {
 }
 ```
 
-## Configure a range for vector filtering
+## Step 2: Configure range filtering
 
-Compared to a regular [vector search](search.md), a range search in Milvus passes in two new parameters `radius` and `range_filter` to control the search range and obtain the desired search results.
+With Milvus, a range search is differentiated from a standard [vector search](search.md) by two key parameters:
 
-`radius` specifies the angle where the vector with the least similarity resides. The optional `range_filter` can be used in combination to filter vector field values whose similarity to the query vector falls into a specific range. Both data types of parameters `radius` and `range_filter` are FLOAT. By setting these two parameters, you can effectively balance the search accuracy and efficiency.
+- `radius`: Determines the threshold of least similarity.
+- `range_filter`: Optionally refines the search to vectors within a specific similarity range.
 
-Typically, the similarity is measured by the distance between a vector field value and a query vector. Choosing different distance metric types would have a significant impact on the configuration of `radius` and `range_filter`.
+These parameters are of the `FLOAT` type and are pivotal in balancing accuracy and search efficiency.
 
-For instance, in the case of [L2](metric.md#euclidean-distance-l2) distance, the search results must be filtered based on vector field values whose distance is smaller than `radius`. This is because in L2 distance, the smaller the distance, the more similar the vectors are. Based on this knowledge, if you want to filter out part of the most similar vectors not to return, you can specify a valid `range_filter` value that is smaller than `radius`.
+### Distance metrics influence
+
+- **L2** distance: Filters vectors less distant than `radius`, since smaller L2 distances indicate higher similarity. To exclude the closest vectors from results, set `range_filter` less than `radius`.
+
+  <div class="multipleCode">
+    <a href="#python">Python </a>
+    <a href="#go">GO</a>
+  </div>
+
+  ```python
+  param = {
+      # use `L2` as the metric to calculate the distance
+      "metric_type": "L2",
+      "params": {
+          # search for vectors with a distance smaller than 1.0
+          "radius": 1.0,
+          # filter out vectors with a distance smaller than or equal to 0.8
+          "range_filter" : 0.8
+      }
+  }
+  ```
+
+  ```go
+  fmt.Printf(msgFmt, "start creating index IVF_FLAT")
+  idx, err := entity.NewIndexIvfFlat(entity.L2, 2)
+  if err != nil {
+          log.Fatalf("failed to create ivf flat index, err: %v", err)
+  }
+  if err := c.CreateIndex(ctx, collectionName, "embeddings", idx, false); err != nil {
+          log.Fatalf("failed to create index, err: %v", err)
+  }
+  sp.AddRadius(1.0)
+  sp.AddRangeFilter(0.8)
+  ```
+
+- **IP** distance: Filters vectors more distant than `radius`, since larger IP distances indicate higher similarity. Here, `range_filter` should be greater than `radius` to exclude the most similar vectors.
+
+  <div class="multipleCode">
+    <a href="#python">Python </a>
+    <a href="#go">GO</a>
+  </div>
+
+  ```python
+  param = {
+      # use `IP` as the metric to calculate the distance
+      "metric_type": "IP",
+      "params": {
+          # search for vectors with a distance greater than 0.8
+          "radius": 0.8,
+          # filter out most similar vectors with a distance greater than or equal to 1.0
+          "range_filter" : 1.0
+      }
+  }
+  ```
+
+  ```go
+  fmt.Printf(msgFmt, "start creating index IVF_FLAT")
+  idx, err := entity.NewIndexIvfFlat(entity.IP, 2)
+  if err != nil {
+          log.Fatalf("failed to create ivf flat index, err: %v", err)
+  }
+  if err := c.CreateIndex(ctx, collectionName, "embeddings", idx, false); err != nil {
+          log.Fatalf("failed to create index, err: %v", err)
+  }
+  sp.AddRadius(0.8)
+  sp.AddRangeFilter(1.0)
+  ```
+
+## Step 3: Execute the range search
+
+For an **L2** distance range search, get vectors within a similarity range of **0.8** to **1.0**:
 
 <div class="multipleCode">
   <a href="#python">Python </a>
@@ -61,85 +137,17 @@ For instance, in the case of [L2](metric.md#euclidean-distance-l2) distance, the
 </div>
 
 ```python
-search_params = {
-    # use `L2` as the metric to calculate the distance
-    "metric_type": "L2",
-    "params": {
-        # search for vectors with a distance smaller than 10.0
-        "radius": 10.0,
-        # filter out vectors with a distance smaller than or equal to 5.0
-        "range_filter" : 5.0
-    }
-}
-```
+res = collection.search(
+    data=[[0.3785311281681061,0.2960498034954071]], # query vector
+    anns_field='book_intro', # vector field name
+    param=param, # search parameters defined in step 2
+    limit=5 # number of results to return
+)
 
-```go
-fmt.Printf(msgFmt, "start creating index IVF_FLAT")
-idx, err := entity.NewIndexIvfFlat(entity.L2, 2)
-if err != nil {
-        log.Fatalf("failed to create ivf flat index, err: %v", err)
-}
-if err := c.CreateIndex(ctx, collectionName, "embeddings", idx, false); err != nil {
-        log.Fatalf("failed to create index, err: %v", err)
-}
-sp.AddRadius(10.0)
-sp.AddRangeFilter(5.0)
-```
+print(res)
 
-In the case of [IP](metric.md#inner-product-ip) distance, the situation is somewhat different. In terms of IP distance, larger distances represent greater similarity. Therefore, the values of `radius` and `range_filter` in IP distance are reversed compared to L2 distance. That being said, in terms of IP distance, if you use `range_filter` to filter out part of the most similar vectors, a valid `range_filter` value must be greater than `radius`, and the result vectors should be with a distance greater than `radius` but smaller than or equal to `range_filter`.
-
-<div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#go">GO</a>
-</div>
-
-```python
-search_params = {
-    # use `IP` as the metric to calculate the distance
-    "metric_type": "IP",
-    "params": {
-        # search for vectors with a distance greater than 0.8
-        "radius": 0.8,
-        # filter out most similar vectors with a distance greater than or equal to 1.0
-        "range_filter" : 1.0
-    }
-}
-```
-
-```go
-fmt.Printf(msgFmt, "start creating index IVF_FLAT")
-idx, err := entity.NewIndexIvfFlat(entity.IP, 2)
-if err != nil {
-        log.Fatalf("failed to create ivf flat index, err: %v", err)
-}
-if err := c.CreateIndex(ctx, collectionName, "embeddings", idx, false); err != nil {
-        log.Fatalf("failed to create index, err: %v", err)
-}
-sp.AddRadius(0.8)
-sp.AddRangeFilter(1.0)
-```
-
-## Conduct a range search
-
-By specifying `radius` and `range_filter` based on distance metric types, you can define a range scope of result vectors to return.
-
-In terms of L2 distance, conduct a range search that returns vectors with a similarity in a range of `5.0` and `10.0`:
-
-<div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#go">GO</a>
-</div>
-
-```python
-search_param = {
-  "data": [[0.1, 0.2]], # query vector
-  "anns_field": "book_intro", # name of the field to search on
-  "param": { "metric_type": "L2", "params": { "nprobe": 10, "radius": 10.0, "range_filter" : 5.0 }, "offset": 0 },
-  "limit": 2,
-  "output_fields": ["int64", "float"]  # fields to return
-}
-
-res = collection.search(**search_param)
+# Output:
+# ["['id: 494, distance: 0.8085046410560608, entity: {}', 'id: 108, distance: 0.8211717009544373, entity: {}', 'id: 1387, distance: 0.8252214789390564, entity: {}']"]
 ```
 
 ```go
@@ -150,8 +158,8 @@ fmt.Printf(msgFmt, "start searcching based on vector similarity")
     }
     begin := time.Now()
     sp, _ := entity.NewIndexIvfFlatSearchParam(16)
-    sp.AddRadius(10.0)
-    sp.AddRangeFilter(5.0)
+    sp.AddRadius(1.0)
+    sp.AddRangeFilter(0.8)
     sRet, err := c.Search(ctx, collectionName, nil, "", []string{randomCol}, vec2search,
         embeddingCol, entity.L2, topK, sp)
     end := time.Now()
@@ -160,7 +168,7 @@ fmt.Printf(msgFmt, "start searcching based on vector similarity")
     }
 ```
 
-In terms of IP distance, conduct a range search that returns vectors with a similarity in a range of `1.0` and `0.8`:
+For an **IP** distance range search, get vectors within a similarity range of **1.0** to **0.8**:
 
 <div class="multipleCode">
   <a href="#python">Python </a>
@@ -168,15 +176,17 @@ In terms of IP distance, conduct a range search that returns vectors with a simi
 </div>
 
 ```python
-search_param = {
-  "data": [[0.1, 0.2]], # query vector
-  "anns_field": "book_intro", # name of the field to search on
-  "param": {"metric_type": "IP", "params": { "nprobe": 10, "radius": 0.8, "range_filter" : 1.0 }, "offset": 0 },
-  "limit": 2,
-  "output_fields": ["int64", "float"] # fields to return
-}
+res = collection.search(
+    data=[[0.8280364871025085,0.957599937915802]], # query vector
+    anns_field='book_intro', # vector field name
+    param=param, # search parameters defined in step 2
+    limit=5 # number of results to return
+)
 
-res = collection.search(**search_param)
+print(res)
+
+# Output:
+# ["['id: 455, distance: 0.9997385740280151, entity: {}', 'id: 1908, distance: 0.9995749592781067, entity: {}', 'id: 262, distance: 0.9994202852249146, entity: {}', 'id: 1475, distance: 0.9993369579315186, entity: {}', 'id: 1536, distance: 0.999295175075531, entity: {}']"]
 ```
 
 ```go
@@ -199,7 +209,7 @@ fmt.Printf(msgFmt, "start searcching based on vector similarity")
 
 ## Conclusion
 
-A range search in Milvus can return similar vector results with a distance falling into a specific range. This functionality is enabled by specifying `radius` and `range_filter` in search parameters. The following table summarizes how a distance metric type can affect the configuration of the two parameters.
+Milvus returns vectors that fit within the specified range based on your `radius` and `range_filter` settings. Below is a quick reference table summarizing how different distance metrics affect these settings:
 
 | Metric Type  | Configuration                         |
 |--------------|---------------------------------------|

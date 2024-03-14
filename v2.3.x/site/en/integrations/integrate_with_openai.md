@@ -19,8 +19,8 @@ We'll also prepare the data that we're going to use for this example. You can gr
 import csv
 import json
 import random
-import openai
 import time
+from openai import OpenAI
 from pymilvus import connections, FieldSchema, CollectionSchema, DataType, Collection, utility
 ```
 
@@ -46,8 +46,9 @@ DIMENSION = 1536  # Embeddings size
 COUNT = 100  # How many titles to embed and insert.
 MILVUS_HOST = 'localhost'  # Milvus server URI
 MILVUS_PORT = '19530'
-OPENAI_ENGINE = 'text-embedding-ada-002'  # Which engine to use
-openai.api_key = 'sk-******'  # Use your own Open AI API Key here
+OPENAI_ENGINE = 'text-embedding-3-small'  # Which engine to use, you can change it into `text-embedding-3-large` or `text-embedding-ada-002`
+client = OpenAI()
+client.api_key = 'sk-******'  # Use your own Open AI API Key here
 ```
 <div class="alert note">
 Because the embedding process for a free OpenAI account is relatively time-consuming, we use a set of data small enough to reach a balance between the script executing time and the precision of the search results. You can change the <code>COUNT</code> constant to fit your needs.
@@ -87,9 +88,11 @@ Once we have the collection setup we need to start inserting our data. This is i
 ```python
 # Extract embedding from text using OpenAI
 def embed(text):
-    return openai.Embedding.create(
-        input=text, 
-        engine=OPENAI_ENGINE)["data"][0]["embedding"]
+    response = client.embeddings.create(
+        input=text,
+        model=OPENAI_ENGINE
+    )
+    return response.data[0].embedding
 
 # Insert each title and its embedding
 for idx, text in enumerate(random.sample(sorted(csv_load(FILE)), k=COUNT)):  # Load COUNT amount of random values from dataset

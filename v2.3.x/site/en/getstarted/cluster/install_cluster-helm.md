@@ -11,7 +11,7 @@ summary: Learn how to install Milvus cluster on Kubernetes.
 
 # Install Milvus Cluster with Helm
 
-This topic introduces how to deploy a Milvus cluster with Helm on Kubernetes (K8s).
+This topic describes how to install Milvus standalone using Kubernetes.  
 
 ## Prerequisites
 
@@ -57,6 +57,21 @@ NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDI
 standard (default)    k8s.io/minikube-hostpath     Delete           Immediate             false                    3m36s
 ```
 
+## Check the default storage class
+
+Milvus relies on the default storage class to automatically provision volumes for data persistence. Run the following command to check storage classes:
+
+```bash
+$ kubectl get sc
+```
+
+The command output should be similar to the following:
+
+```bash
+NAME                   PROVISIONER                                     RECLAIMPOLICY   VOLUMEBINDINGMODE      ALLOWVOLUMEEXPANSION   AGE
+local-path (default)   rancher.io/local-path                           Delete          WaitForFirstConsumer   false                  461d
+```
+
 ## Install Helm Chart for Milvus
 
 Helm is a K8s package manager that can help you deploy Milvus quickly.
@@ -90,7 +105,9 @@ $ helm repo update
 
 ## Start Milvus
 
-Start Milvus with Helm by specifying the release name, the chart, and parameters you expect to change. This topic uses <code>my-release</code> as the release name. To use a different release name, replace <code>my-release</code> in the command.
+Once you have installed the Helm chart, you can start Milvus on Kubernetes. In this section, we will guide you through the steps to start Milvus.
+
+You should start Milvus with Helm by specifying the release name, the chart, and the parameters you expect to change. In this guide, we use <code>my-release</code> as the release name. To use a different release name, replace <code>my-release</code> in the following commands with the one you are using.
 
 ```
 $ helm install my-release milvus/milvus
@@ -214,6 +231,10 @@ Having installed Milvus, you can:
 - Deploy your Milvu cluster on clouds:
   - [Amazon EC2](aws.md)
   - [Amazon EKS](eks.md)
+  - [Google Cloud](gcp.md)
+  - [Google Cloud Storage](gcs.md)
+  - [Microsoft Azure](azure.md)
+  - [Microsoft Azure Blob Storage](abs.md)
 - Explore [Milvus Backup](milvus_backup_overview.md), an open-source tool for Milvus data backups.
 - Explore [Birdwatcher](birdwatcher_overview.md), an open-source tool for debugging Milvus and dynamic configuration updates.
 - Explore [Attu](https://milvus.io/docs/attu.md), an open-source GUI tool for intuitive Milvus management.

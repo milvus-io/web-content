@@ -47,7 +47,7 @@ See [etcd-related Configurations](configure_etcd.md) for more information.
 Run the following command to start Milvus that uses the etcd configurations.
 
 ```
-docker-compose up
+docker compose up
 ```
 
 <div class="alert note">Configurations only take effect after Milvus starts. See <a href=https://milvus.io/docs/install_standalone-docker.md#Start-Milvus>Start Milvus</a> for more information.</div>

@@ -37,7 +37,7 @@ According to the suited data type, the supported indexes in Milvus can be divide
 
   - For 128-dimensional floating-point embeddings, the storage they take up is 128 * the size of float = 512 bytes. And the [distance metrics](metric.md) used for float-point embeddings are Euclidean distance (L2) and Inner product.
 
-  - These types of indexes include FLAT, IVF_FLAT, IVF_PQ, IVF_SQ8, HNSW, and ScaNN<sup>(beta)</sup> for CPU-based ANN searches and GPU_IVF_FLAT and GPU_IVF_PQ for GPU-based ANN searches.
+  - These types of indexes include FLAT, IVF_FLAT, IVF_PQ, IVF_SQ8, HNSW, and SCANN<sup>(beta)</sup> for CPU-based ANN searches and GPU_IVF_FLAT and GPU_IVF_PQ for GPU-based ANN searches.
 
 - Indexes for binary embeddings
 
@@ -48,13 +48,13 @@ According to the suited data type, the supported indexes in Milvus can be divide
 The following table classifies the indexes that Milvus supports:
 
 <div class="filter">
-<a href="#floating">Floating-point embeddings</a> <a href="#binary">Binary embeddings</a>
-
+  <a href="#floating">Floating-point embeddings</a> 
+  <a href="#binary">Binary embeddings</a>
 </div>
 
-<div class="filter-floating table-wrapper" markdown="block">
+<div class="filter-floating table-wrapper">
 
-<table>
+<table id="floating">
 <thead>
   <tr>
     <th>Supported index</th>
@@ -138,7 +138,7 @@ The following table classifies the indexes that Milvus supports:
     </td>
   </tr>
   <tr>
-    <td>ScaNN</td>
+    <td>SCANN</td>
     <td>Quantization-based index</td>
     <td>
       <ul>
@@ -151,6 +151,52 @@ The following table classifies the indexes that Milvus supports:
 </tbody>
 </table>
 
+</div>
+
+<div class="filter-binary table-wrapper">
+
+<table id="binary">
+<thead>
+  <tr>
+    <th>Supported index</th>
+    <th>Classification</th>
+    <th>Scenario</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>BIN_FLAT</td>
+    <td>Quantization-based index</td>
+    <td><ul>
+      <li>Depends on relatively small datasets.</li>
+      <li>Requires perfect accuracy.</li>
+      <li>No compression applies.</li>
+      <li>Guarantee exact search results.</li>
+    </ul></td>
+  </tr>
+  <tr>
+    <td>BIN_IVF_FLAT</td>
+    <td>Quantization-based index</td>
+    <td><ul>
+      <li>High-speed query</li>
+      <li>Requires a recall rate as high as possible</li>
+    </ul></td>
+  </tr>
+  <tr>
+    <td>BIN_HNSW</td>
+    <td>Graph-based index</td>
+    <td>
+      <ul>
+        <li>Very high-speed query</li>
+        <li>Requires a recall rate as high as possible</li>
+        <li>Large memory resources</li>
+      </ul>
+    </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
 
 ### FLAT
 
@@ -191,7 +237,9 @@ Similar to IVF_FLAT, GPU_IVF_FLAT also divides vector data into `nlist` cluster 
 
 By adjusting `nprobe`, an ideal balance between accuracy and speed can be found for a given scenario. Results from the [IVF_FLAT performance test](https://zilliz.com/blog/Accelerating-Similarity-Search-on-Really-Big-Data-with-Vector-Indexing) demonstrate that query time increases sharply as both the number of target input vectors (`nq`), and the number of clusters to search (`nprobe`), increase.
 
-IVF_FLAT is the most basic IVF index, and the encoded data stored in each unit is consistent with the original data.
+GPU_IVF_FLAT is the most basic IVF index, and the encoded data stored in each unit is consistent with the original data.
+
+When conducting searches, note that you can set the top-K up to 256 for any search against a GPU_IVF_FLAT-indexed collection.
 
 - Index building parameters
 
@@ -204,6 +252,12 @@ IVF_FLAT is the most basic IVF index, and the encoded data stored in each unit i
   | Parameter | Description              | Range           | Default Value |
   | --------- | ------------------------ | --------------- | ------------- |
   | `nprobe`  | Number of units to query | [1, nlist]      | 8 |
+
+- Limits on search
+
+  | Parameter | Range  |
+  | --------- | ------ |
+  | `top-K`   | <= 256 |
 
 ### IVF_SQ8
 
@@ -249,15 +303,16 @@ Index building parameters and search parameters vary with Milvus distribution. S
   | --------- | ------------------------ | ---------- |
   | `nprobe`  | Number of units to query | [1, nlist] |
 
-### ScaNN
+### SCANN
 
-ScaNN (Score-aware quantization loss) is similar to IVF_PQ in terms of vector clustering and product quantization. What makes them different lies in the implementation details of product quantization and the use of SIMD (Single-Instruction / Multi-data) for efficient calculation.
+SCANN (Score-aware quantization loss) is similar to IVF_PQ in terms of vector clustering and product quantization. What makes them different lies in the implementation details of product quantization and the use of SIMD (Single-Instruction / Multi-data) for efficient calculation.
 
 - Index building parameters
 
-  | Parameter | Description                               | Range               |
-  | --------- | ----------------------------------------- | ------------------- |
-  | `nlist`   | Number of cluster units                   | [1, 65536]          |
+  | Parameter       | Description                                  | Range                                  |
+  |-----------------|----------------------------------------------|----------------------------------------|
+  | `nlist`         | Number of cluster units                      | [1, 65536]                             |
+  | `with_raw_data` | Whether to include the raw data in the index | `True` or `False`. Defaults to `True`. |
 
   <div class="alert note">
 
@@ -289,21 +344,29 @@ IVF\_PQ performs IVF index clustering before quantizing the product of vectors. 
 
 Index building parameters and search parameters vary with Milvus distribution. Select your Milvus distribution first.
 
+When conducting searches, note that you can set the top-K up to 8192 for any search against a GPU_IVF_FLAT-indexed collection.
+
 </div>
 
 - Index building parameters
 
-  | Parameter | Description                               | Range               |
-  | --------- | ----------------------------------------- | ------------------- |
-  | `nlist`   | Number of cluster units                   | [1, 65536]          |
-  | `m`       | Number of factors of product quantization | `dim mod m == 0` |
-  | `nbits`   | [Optional] Number of bits in which each low-dimensional vector is stored. | [1, 16] (8 by default) |
+  | Parameter | Description                               | Range               | Default Value |
+  | --------- | ----------------------------------------- | ------------------- | ------------- |
+  | `nlist`   | Number of cluster units                   | [1, 65536]          | 128           |
+  | `m`       | Number of factors of product quantization | `dim mod m == 0`    | 4 |
+  | `nbits`   | [Optional] Number of bits in which each low-dimensional vector is stored. | [1, 16] | 8 |
 
 - Search parameters
 
-  | Parameter | Description              | Range      |
-  | --------- | ------------------------ | ---------- |
-  | `nprobe`  | Number of units to query | [1, nlist] |
+  | Parameter | Description              | Range      | Default Value |
+  | --------- | ------------------------ | ---------- | ------------- |
+  | `nprobe`  | Number of units to query | [1, nlist] | 8 |
+
+- Limits on search
+
+  | Parameter | Range   |
+  | --------- | ------- |
+  | `top-K`   | <= 1024 |
 
 ### HNSW
 
@@ -313,16 +376,16 @@ In order to improve performance, HNSW limits the maximum degree of nodes on each
 
 - Index building parameters
 
-  | Parameter        | Description                | Range    |
-  | ---------------- | -------------------------- | -------- |
-  | `M`              | Maximum degree of the node | [4, 64]  |
-  | `efConstruction` | Search scope               | [8, 512] |
+  | Parameter        | Description                | Range        |
+  | ---------------- | -------------------------- | ------------ |
+  | `M`              | Maximum degree of the node | (2, 2048)    |
+  | `efConstruction` | Search scope               | (1, int_max) |
 
 - Search parameters
 
   | Parameter | Description  | Range            |
   | --------- | ------------ | ---------------- |
-  | `ef`      | Search scope | [`top_k`, 32768] |
+  | `ef`      | Search scope | [1, int_max]     |
 
 ### BIN_FLAT
 
@@ -361,8 +424,6 @@ BIN_IVF_FLAT is the most basic BIN_IVF index, and the encoded data stored in eac
   | --------- | ------------------------ | ----------------------------------------------- |
   | `nprobe`  | Number of units to query | [1, nlist]  |
 
-
-</div>
 
 ## FAQ
 

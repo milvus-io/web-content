@@ -245,7 +245,9 @@ create collection -c (text) -f (text) -p (text) [-a] [-d (text)]
 <h3 id="create-collection">Example</h3>
 
 ```shell
-milvus_cli > create collection -c car -f id:INT64:primary_field -f vector:FLOAT_VECTOR:128 -f color:INT64:color -f brand:INT64:brand -p id -A -d 'car_collection'
+## For array field: --schema-field support <fieldName>:<dataType>:<maxCapacity>:<elementDataType>(:<maxLength>if Varchar)
+
+milvus_cli > create collection -c car -f id:INT64:primary_field -f vector:FLOAT_VECTOR:128 -f color:INT64:color -f brand:ARRAY:64:VARCHAR:128 -p id -A -d 'car_collection'
 ```
 
 ## create partition
@@ -305,12 +307,10 @@ The name of the field to create an index for (vector): vector
 Index name: vectorIndex
 
 # Default is ''
-Index type (FLAT, IVF_FLAT, IVF_SQ8, IVF_PQ, RNSG, HNSW, ANNOY, AUTOINDEX, DISKANN, ) []:  IVF_FLAT  
+Index type (FLAT, IVF_FLAT, IVF_SQ8, IVF_PQ, RNSG, HNSW, ANNOY, AUTOINDEX, DISKANN, GPU_IVF_FLAT, GPU_IVF_PQ, SCANN, STL_SORT, Trie, ) []: IVF_FLAT  
 
 # Default is ''
-Index metric type (L2, IP, HAMMING, TANIMOTO,): L2
-
-Index params nlist: 2
+Index metric type (L2, IP, HAMMING, TANIMOTO, COSINE, ) []: 
 
 Timeout []:
 ```
@@ -459,40 +459,40 @@ delete index -c (text) -in (text)
 milvus_cli > delete index -c car -in indexName
 ```
 
-## describe collection
+## show collection
 
 Shows the detailed information of a collection.
 
-<h3 id="describe-collection">Syntax</h3>
+<h3 id="show-collection">Syntax</h3>
 
 ```shell
 show collection -c (text)
 ```
 
-<h3 id="describe-collection">Options</h3>
+<h3>Options</h3>
 
 | Option | Full name         | Description                          |
 | :----- | :---------------- | :----------------------------------- |
 | -c     | --collection-name | The name of the collection.          |
 | --help | n/a               | Displays help for using the command. |
 
-<h3 id="describe-collection">Example</h3>
+<h3>Example</h3>
 
 ```shell
 milvus_cli > show collection -c test_collection_insert
 ```
 
-## describe partition
+## show partition
 
 Shows the detailed information of a partition.
 
-<h3 id="describe-partition">Syntax</h3>
+<h3 id="show-partition">Syntax</h3>
 
 ```shell
 show partition -c (text) -p (text)
 ```
 
-<h3 id="describe-partition">Options</h3>
+<h3>Options</h3>
 
 | Option | Full name         | Description                                               |
 | :----- | :---------------- | :-------------------------------------------------------- |
@@ -500,23 +500,23 @@ show partition -c (text) -p (text)
 | -p     | --partition       | The name of the partition.                                |
 | --help | n/a               | Displays help for using the command.                      |
 
-<h3 id="describe-partition">Example</h3>
+<h3>Example</h3>
 
 ```shell
 milvus_cli > show partition -c test_collection_insert -p _default
 ```
 
-## describe index
+## show index
 
 Shows the detailed information of an index.
 
-<h3 id="describe-index">Syntax</h3>
+<h3 id="show-index">Syntax</h3>
 
 ```shell
 show index -c (text) -in (text)
 ```
 
-<h3 id="describe-index">Options</h3>
+<h3 >Options</h3>
 
 | Option | Full name         | Description                 |
 | :----- | :---------------- | :-------------------------- |
@@ -560,22 +560,21 @@ help <command>
 
 | Command      | Description                                                                                                         |
 | :----------- | :------------------------------------------------------------------------------------------------------------------ |
-| calc         | Calculates the distance between two vector arrays, mkts_from_hybridts, mkts_from_unixtime, or hybridts_to_unixtime. |
 | clear        | Clears the screen.                                                                                                  |
 | connect      | Connects to Milvus.                                                                                                 |
-| create       | Creates a collection, partition, index, or alias.                                                                   |
-| delete       | Deletes a collection, partition, index, entity, or alias.                                                           |
-| describe     | Describes a collection, partition, or index.                                                                        |
+| create       | Create collection, database, partition,user and index.                                                              |
+| delete       | Delete collection, database, partition,alias,user or index.                                                         |
 | exit         | Closes the command line window.                                                                                     |
 | help         | Displays help for using a command.                                                                                  |
-| import       | Imports data into a partition.                                                                                      |
-| list         | Lists collections, partitions, or indexes.                                                                          |
+| insert       | Imports data into a partition.                                                                                      |
+| list         | List collections,databases, partitions,users or indexes.                                                            |
 | load         | Loads a collection or partition.                                                                                    |
-| load_balance | Performs load balancing on a query node.                                                                            |
 | query        | Shows query results that match all the criteria that you enter.                                                     |
 | release      | Releases a collection or partition.                                                                                 |
 | search       | Performs a vector similarity search or hybrid search.                                                               |
-| show         | Shows the current collection, progress of entity loading, progress of entity indexing, or segment information.      |
+| show         | Show connection, database,collection, loading_progress or index_progress.                                           |
+| rename       | Rename collection                                                                                                   |
+| use          | Use database                                                                                                        |
 | version      | Shows the version of Milvus_CLI.                                                                                    |
 
 ## import

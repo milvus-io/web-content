@@ -6,14 +6,15 @@ summary: Learn how to load a collection into memory for CRUD operations in Milvu
 
 # Load a Collection
 
-This topic describes how to load the collection to memory before a search or a query. All search and query operations within Milvus are executed in memory. 
+This topic describes how to load the collection to memory before a search or a query. All search and query operations within Milvus are executed in memory. You should create an index before you can load a collection.
 
 Milvus allows users to load a collection as multiple replicas to utilize the CPU and memory resources of extra query nodes. This feature boosts the overall QPS and throughput without extra hardware. Before loading a collection, ensure that you have already indexed it.
 
 <div class="alert warning">
 <ul>
-<li>In current release, volume of the data to load must be under 90% of the total memory resources of all query nodes to reserve memory resources for execution engine.</li>
-<li>In current release, all on-line query nodes will be divided into multiple replica groups according to the replica number specified by user. All replica groups shall have minimal memory resources to load one replica of the provided collection. Otherwise, an error will be returned.</li>
+<li>The volume of the data to load must be under 90% of the total memory resources of all query nodes to reserve memory resources for the execution engine.</li>
+<li>All the online query nodes will be divided into multiple replica groups according to the replica number specified by users. All replica groups shall have minimal memory resources to load one replica of the provided collection. Otherwise, an error will be returned.</li>
+<li>Create an index before loading a collection. To implement searches, create at least an IVF_FLAT index on the collection.</li>
 </ul>
 </div>
 
@@ -51,7 +52,7 @@ await milvusClient.loadCollection({
 err := milvusClient.LoadCollection(
   context.Background(),   // ctx
   "book",                 // CollectionName
-  false                   // async
+  false,                  // async
 )
 if err != nil {
   log.Fatal("failed to load collection:", err.Error())
@@ -61,7 +62,7 @@ if err != nil {
 loadStatus, err := milvusClient.GetLoadState(
   context.Background(),             // ctx
   "book",                           // CollectionName
-  []string{"Default partition"}     // List of partitions
+  []string{"Default partition"},    // List of partitions
 )
 if err != nil {
     log.Fatal("failed to get the load state", err.Error())
@@ -71,7 +72,7 @@ if err != nil {
 percentage, err := milvusClient.GetLoadingProgress(
     context.Background(),           // ctx
     "book",                         // CollectionName
-    []string{"Default partition"}   // List of partitions
+    []string{"Default partition"},  // List of partitions
 )
 if err != nil {
     log.Fatal("failed to get the loading progress", err.Error())

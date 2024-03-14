@@ -89,7 +89,7 @@ hello_milvus.create_index("embeddings", index)
 hello_milvus.load()
 vectors_to_search = entities[-1][-2:]
 search_params = {
-    "metric_type": "l2",
+    "metric_type": "L2",
     "params": {"nprobe": 10},
 }
 result = hello_milvus.search(vectors_to_search, "embeddings", search_params, limit=3, output_fields=["random"])

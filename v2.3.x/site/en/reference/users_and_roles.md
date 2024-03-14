@@ -33,24 +33,32 @@ The following table lists the values you can choose when [enabling RBAC](rbac.md
 | Collection  | CreateIndex           | CreateIndex                                       |
 | Collection  | DropIndex             | DropIndex                                         |
 | Collection  | IndexDetail           | DescribeIndex/GetIndexState/GetIndexBuildProgress |
-| Collection  | Load                  | LoadCollection                                    |
+| Collection  | Load                  | LoadCollection/GetLoadingProgress/GetLoadState    |
 | Collection  | GetLoadingProgress    | GetLoadingProgress                                |
+| Collection  | GetLoadState          | GetLoadState                                      |
 | Collection  | Release               | ReleaseCollection                                 |
 | Collection  | Insert                | Insert                                            |
 | Collection  | Delete                | Delete                                            |
+| Collection  | Upsert                | Upsert                                            |
 | Collection  | Search                | Search                                            |
-| Collection  | Flush                 | Flush                                             |
+| Collection  | Flush                 | Flush/GetFlushState                               |
+| Collection  | GetFlushState         | GetFlushState                                     |
 | Collection  | Query                 | Query                                             |
 | Collection  | GetStatistics         | GetCollectionStatistics                           |
 | Collection  | Compaction            | Compact                                           |
-| Collection  | Alias                 | CreateAlias/DropAlias/AlterAlias                  |
 | Collection  | Import                | BulkInsert/Import                                 |
 | Collection  | LoadBalance           | LoadBalance                                       |
+| Collection  | CreatePartition       | CreatePartition                                   |
+| Collection  | DropPartition         | DropPartition                                     |
+| Collection  | ShowPartitions        | ShowPartitions                                    |
+| Collection  | HasPartition          | HasPartition                                      |
 | Global      | All                   | All API operation permissions in this table       |
 | Global      | CreateCollection      | CreateCollection                                  |
 | Global      | DropCollection        | DropCollection                                    |
 | Global      | DescribeCollection    | DescribeCollection                                |
 | Global      | ShowCollections       | ShowCollections                                   |
+| Global      | RenameCollection      | RenameCollection                                  |
+| Global      | FlushAll              | FlushAll                                          |
 | Global      | CreateOwnership       | CreateUser CreateRole                             |
 | Global      | DropOwnership         | DeleteCredential DropRole                         |
 | Global      | SelectOwnership       | SelectRole/SelectGrant                            |
@@ -61,9 +69,13 @@ The following table lists the values you can choose when [enabling RBAC](rbac.md
 | Global      | ListResourceGroups    | ListResourceGroups                                |
 | Global      | TransferNode          | TransferNode                                      |
 | Global      | TransferReplica       | TransferReplica                                   |
-| Global      | RenameCollection      | RenameCollection                                  |
 | Global      | CreateDatabase        | CreateDatabase                                    |
+| Global      | DropDatabase          | DropDatabase                                      |
 | Global      | ListDatabases         | ListDatabases                                     |
+| Global      | CreateAlias           | CreateAlias                                       |
+| Global      | DropAlias             | DropAlias                                         |
+| Global      | DescribeAlias         | DescribeAlias                                     |
+| Global      | ListAliases           | ListAliases                                       |
 | User        | UpdateUser            | UpdateCredential                                  |
 | User        | SelectUser            | SelectUser                                        |
 

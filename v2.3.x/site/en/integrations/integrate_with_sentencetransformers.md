@@ -132,7 +132,7 @@ def csv_load(file):
             yield (row[1], row[7])
 
 
-# Extract embeding from text using OpenAI
+# Extract embedding from text using OpenAI
 def embed_insert(data):
     embeds = transformer.encode(data[1]) 
     ins = [

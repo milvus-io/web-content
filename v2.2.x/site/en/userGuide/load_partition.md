@@ -22,6 +22,7 @@ Milvus 2.1 or later allows users to load a partition as multiple replicas to uti
   <a href="#java">Java</a>
   <a href="#go">GO</a>
   <a href="#javascript">Node.js</a>
+  <a href="#csharp">C#</a>
 </div>
 
 ```python
@@ -63,25 +64,15 @@ milvusClient.loadPartitions(
 );
 ```
 
-<div style="display: none">
+```csharp
+await milvusClient.GetCollection("book").LoadPartitionAsync("novel");
 
-```shell
-load -c book -p novel
+// To load multiple partitions:
+// await milvusClient.GetCollection("book").LoadPartitionsAsync(partitionNames: new List<string> {
+//     "novel",
+//     "history"
+// });
 ```
-
-``` curl
-curl -X 'POST' \
-  'http://localhost:9091/api/v1/partitions/load' \
-  -H 'accept: application/json' \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "collection_name": "book",
-    "partition_names": ["novel"],
-    "replica_number": 1
-  }'
-```
-
-</div>
 
 <table class="language-python">
 	<thead>
@@ -167,26 +158,7 @@ curl -X 'POST' \
     </tbody>
 </table>
 
-<table class="language-shell" style="display: none">
-    <thead>
-        <tr>
-            <th>Option</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>-c</td>
-            <td>Name of the collection to load partitions from.</td>
-        </tr>
-        <tr>
-            <td>-p (Multiple)</td>
-            <td>The name of the partition to load.</td>
-        </tr>
-    </tbody>
-</table>
-
-<table class="language-curl" style="display: none">
+<table class="language-csharp">
 	<thead>
 	<tr>
 		<th>Parameter</th>
@@ -195,12 +167,12 @@ curl -X 'POST' \
 	</thead>
 	<tbody>
 	<tr>
-		<td><code>collection_name</code></td>
+		<td><code>collectionName</code></td>
 		<td>Name of the collection to load partitions from.</td>
 	</tr>
     <tr>
-		<td><code>partition_names</code></td>
-		<td>List of names of the partitions to load.</td>
+		<td><code>partitionName / partitionNames</code></td>
+		<td>Name of partition to load or name list of the partitions to load.</td>
 	</tr>
     <tr>
 		<td><code>replica_number</code> (optional)</td>

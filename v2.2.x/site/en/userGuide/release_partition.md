@@ -8,12 +8,12 @@ summary: Learn how to release a partition into memory for search or query in Mil
 
 This topic describes how to release a partition from memory after a search or a query to reduce memory usage.
 
-
 <div class="multipleCode">
   <a href="#python">Python </a>
   <a href="#java">Java</a>
-  <a href="#go">GO</a>
+  <a href="#go">Go</a>
   <a href="#javascript">Node.js</a>
+  <a href="#csharp">C#</a>
 </div>
 
 ```python
@@ -51,25 +51,14 @@ milvusClient.releasePartitions(
 );
 ```
 
-<div style="display: none">
-
-```shell
-release -c book -p novel
+```csharp
+await milvusClient.GetCollection("book").ReleasePartitionAsync("novel");
+// You can release a set of partititons as follows:
+// await milvusClient.GetCollection("book").ReleasePartitionsAsync(partitionNames: new List<string> {
+//     "novel",
+//     "history"
+// })
 ```
-
-``` curl
-curl -X 'DELETE' \
-  'http://localhost:9091/api/v1/partitions/load' \
-  -H 'accept: application/json' \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "collection_name": "book",
-    "partition_names": ["novel"],
-    "replica_number": 1
-  }'
-```
-
-</div>
 
 <table class="language-python">
 	<thead>
@@ -147,26 +136,7 @@ curl -X 'DELETE' \
     </tbody>
 </table>
 
-<table class="language-shell" style="display: none">
-    <thead>
-        <tr>
-            <th>Option</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>-c</td>
-            <td>Name of the collection to release partition.</td>
-        </tr>
-        <tr>
-            <td>-p (Multiple)</td>
-            <td>The name of the partition to release.</td>
-        </tr>
-    </tbody>
-</table>
-
-<table class="language-curl" style="display: none">
+<table class="language-csharp">
 	<thead>
 	<tr>
 		<th>Parameter</th>
@@ -175,12 +145,12 @@ curl -X 'DELETE' \
 	</thead>
 	<tbody>
 	<tr>
-		<td><code>collection_name</code></td>
+		<td><code>collectionName</code></td>
 		<td>Name of the collection to release partitions.</td>
 	</tr>
     <tr>
-		<td><code>partition_names</code></td>
-		<td>List of names of the partitions to release.</td>
+		<td><code>partitionName / partitionNames</code></td>
+		<td>Name of a partition or name list of the partitions to release.</td>
 	</tr>
 	</tbody>
 </table>

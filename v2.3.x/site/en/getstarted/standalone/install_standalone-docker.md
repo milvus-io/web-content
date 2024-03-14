@@ -1,89 +1,49 @@
 ---
 id: install_standalone-docker.md
-label: Docker Compose (CPU)
+label: Docker
 related_key: Docker
 order: 0
 group: install_standalone-docker.md
-summary: Learn how to install Milvus stanalone with Docker Compose.
+summary: Learn how to install Milvus standalone with Docker.
 ---
 
-<div class="tab-wrapper"><a href="install_standalone-docker.md" class='active '>Docker Compose (CPU)</a><a href="install_standalone-gpu-docker.md" class=''>Docker Compose (GPU)</a><a href="install_standalone-operator.md" class=''>Milvus Operator</a><a href="install_standalone-helm.md" class=''>Helm</a></div>
+<div class="tab-wrapper"><a href="install_standalone-docker.md" class='active '>Docker</a><a href="install_standalone-operator.md" class=''>Milvus Operator</a><a href="install_standalone-helm.md" class=''>Helm</a><a href="install_standalone-aptyum.md" class=''>DEB/RPM</a><a href="install_standalone-docker-compose.md" class=''>Docker Compose</a></div>
 
-# Install Milvus Standalone with Docker Compose (CPU)
+# Install Milvus Standalone with Docker
 
-This topic describes how to install Milvus standalone using Docker Compose.
+This topic describes how to install Milvus standalone using Docker.
+
 
 ## Prerequisites
 
-Check [the requirements](prerequisite-docker.md) for hardware and software prior to your installation.
+- [Install Docker](https://docs.docker.com/get-docker/).
 
-For the users using MacOS 10.14 or later, set the Docker virtual machine (VM) to use a minimum of 2 virtual CPUs (vCPUs) and 8 GB of initial memory. Otherwise, installation might fail.
+- [Check the requirements for hardware and software](prerequisite-helm.md) prior to your installation.
 
-## Download the `YAML` file
 
-[Download](https://github.com/milvus-io/milvus/releases/download/v2.3.0/milvus-standalone-docker-compose.yml) `milvus-standalone-docker-compose.yml` and save it as `docker-compose.yml` manually, or with the following command.
+## Install Milvus Standalone with Docker
 
+- Start Milvus.
 ```
-$ wget https://github.com/milvus-io/milvus/releases/download/v2.3.0/milvus-standalone-docker-compose.yml -O docker-compose.yml
-```
-
-## Start Milvus
-
-In the same directory as the `docker-compose.yml` file, start up Milvus by running:
-
-```shell
-$ sudo docker compose up -d
+wget https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh
+bash standalone_embed.sh start
 ```
 
-<div class="alert note">
+- Connect to Milvus
+Please refer to [Hello Milvus](https://milvus.io/docs/example_code.md), then run the example code.
 
-If you failed to run the above command, please check whether your system has Docker Compose V1 installed. If it is the case, you are advised to migrate to Docker Compose V2 due to the notes on [this page](https://docs.docker.com/compose/).
-
-</div>
-
-```text
-Creating milvus-etcd  ... done
-Creating milvus-minio ... done
-Creating milvus-standalone ... done
-```
-
-Now check if the containers are up and running.
-
-```
-$ sudo docker compose ps
-```
-
-After Milvus standalone starts, there will be three docker containers running, including the Milvus standalone service and its two dependencies.
-
-```
-      Name                     Command                  State                            Ports
---------------------------------------------------------------------------------------------------------------------
-milvus-etcd         etcd -advertise-client-url ...   Up             2379/tcp, 2380/tcp
-milvus-minio        /usr/bin/docker-entrypoint ...   Up (healthy)   9000/tcp
-milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:19530->19530/tcp, 0.0.0.0:9091->9091/tcp
-```
-
-## Connect to Milvus
-
-Verify which local port the Milvus server is listening on. Replace the container name with your own.
-
-```bash
-$ docker port milvus-standalone 19530/tcp
-```
-
-You can connect to Milvus using the local IP address and port number returned by this command.
-
-## Stop Milvus
+- Stop Milvus
 
 To stop Milvus standalone, run:
 ```
-sudo docker compose down
+bash standalone_embed.sh stop
 ```
 
 To delete data after stopping Milvus, run:
 ```
-sudo rm -rf  volumes
+bash standalone_embed.sh delete
 ```
+
 
 ## What's next
 

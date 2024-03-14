@@ -39,7 +39,7 @@ await milvusClient.createPartition({
 err := milvusClient.CreatePartition(
   context.Background(),   // ctx
   "book",                 // CollectionName
-  "novel"                 // partitionName
+  "novel",                // partitionName
 )
 if err != nil {
   log.Fatal("failed to create partition:", err.Error())

@@ -14,6 +14,18 @@ id: home.md
 
 </div>
 
+<div class="doc-home-promotion-wrapper">
+  <div class="promotion-content">
+    <h2 class="promotion-title">Try Managed Milvus For Free!</h2>
+    <p class="promotion-desc">Try Zilliz Cloud for free! The easiest way to experience Milvus!</p>
+  </div>
+
+  <div class="cta-wrapper">
+    <a class="cta-global" href="https://cloud.zilliz.com/signup">Zilliz Cloud</a>
+    <a class="cta-cn" href="https://cloud.zilliz.com.cn/signup">Zilliz Cloud China</a>
+  </div>
+</div>
+
 ## Get Started
 
 <div class="card-wrapper">
@@ -45,7 +57,6 @@ id: home.md
 </div>
 
 </div>
-
 
 ## Recommended articles
 
@@ -85,11 +96,11 @@ id: home.md
 
 <div class="doc-home-what-is-new">
 
-## What's new in docs  
+## What's new in docs
 
 _Nov 2022 - Milvus 2.2.0 release_
 
-- Added guidance on how to [bulk insert entities from files](bulk_insert.md). 
+- Added guidance on how to [bulk insert entities from files](bulk_insert.md).
 - Added description of [disk-based ANN index](disk_index.md).
 - Added guidance on how to configure [quotas_and_limits](configure_quota_limits.md).
 - Added guidance on how to [enable RBAC](rbac.md) with Milvus Operator.

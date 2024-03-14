@@ -22,6 +22,7 @@ Milvus allows users to load a collection as multiple replicas to utilize the CPU
   <a href="#java">Java</a>
   <a href="#go">GO</a>
   <a href="#javascript">Node.js</a>
+  <a href="#csharp">C#</a>
 </div>
 
 ```python
@@ -43,8 +44,6 @@ utility.loading_progress("book")
 await milvusClient.loadCollection({
   collection_name: "book",
 });
-
-
 ```
 
 ```go
@@ -107,31 +106,16 @@ if (response.getStatus() != R.Status.Success.getCode()) {
 }
 System.out.println(response.getProgress());
 ```
-<div style="display: none">
-```shell
-load -c book
+
+```csharp
+var collection = Client.GetCollection("book")
+await collection.LoadAsync();
+
+// You can check the loading progress
+
+var progress = await collection.GetLoadingProgressAysnc();
+Console.WriteLine(progress);
 ```
-
-``` curl
-curl -X 'POST' \
-  'http://localhost:9091/api/v1/collection/load' \
-  -H 'accept: application/json' \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "collection_name": "book"
-  }'
-```
-
-<div class="language-curl">
-Output:
-
-```json
-{}
-```
-
-</div>
-
-</div>
 
 <table class="language-python">
 	<thead>
@@ -205,7 +189,7 @@ Output:
     </tbody>
 </table>
 
-<table class="language-shell" style="display: none">
+<table class="language-csharp">
     <thead>
         <tr>
             <th>Option</th>
@@ -214,34 +198,22 @@ Output:
     </thead>
     <tbody>
         <tr>
-            <td>-c</td>
-            <td>Name of the collection to load.</td>
-        </tr>
-        <tr>
-            <td>-p (Optional/Multiple)</td>
+            <td>(Optional) replicaNumber</td>
             <td>The name of the partition to load.</td>
         </tr>
     </tbody>
 </table>
 
-<table class="language-curl" style="display: none">
-	<thead>
-	<tr>
-		<th>Parameter</th>
-		<th>Description</th>
-	</tr>
-	</thead>
-	<tbody>
-	<tr>
-		<td><code>collection_name</code></td>
-		<td>Name of the collection to load.</td>
-	</tr>
-	</tbody>
-</table>
-
 ## Get replica information
 
 You can check the information of the loaded replicas.
+
+<div class="multipleCode">
+  <a href="#python">Python </a>
+  <a href="#java">Java</a>
+  <a href="#go">GO</a>
+  <a href="#javascript">Node.js</a>
+</div>
 
 ```python
 from pymilvus import Collection
@@ -249,6 +221,24 @@ collection = Collection("book")      # Get an existing collection.
 collection.load(replica_number=2)    # Load collection as 2 replicas
 result = collection.get_replicas()
 print(result)
+```
+
+```java
+GetReplicasParam getReplicasParam = GetReplicasParam.newBuilder()
+    .withCollectionName("book")
+    .build();
+
+client.getReplicas(getReplicasParam);
+```
+
+```go
+replicas, err = client.GetReplicas(context.Background(), "book")
+```
+
+```javascript
+let res = client.getReplicas({
+    collectionID: '436777253933154305' // should be a collection id returned by a compact task.
+})
 ```
 
 Below is an example of the output.

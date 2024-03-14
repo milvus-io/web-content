@@ -15,12 +15,14 @@ Verify if a collection exists in Milvus.
 <div class="multipleCode">
   <a href="#python">Python </a>
   <a href="#java">Java</a>
-  <a href="#go">GO</a>
+  <a href="#go">Go</a>
   <a href="#javascript">Node.js</a>
+  <a href="#csharp">C#</a>
 </div>
 
 ```python
 from pymilvus import utility
+
 utility.has_collection("book")
 ```
 
@@ -51,35 +53,10 @@ if (respHasCollection.getData() == Boolean.TRUE) {
   System.out.println("Collection exists.");
 }
 ```
-<div style="display:none;">
 
-```shell
-describe collection -c book
+```csharp
+var collectionExists = await Client.HasCollectionAsync("book");
 ```
-
-```curl
-curl -X 'GET' \
-  'http://localhost:9091/api/v1/collection/existence' \
-  -H 'accept: application/json' \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "collection_name": "book"
-  }'
-```
-
-<div class="language-curl">
-Output:
-
-```json
-{
-  "status":{},
-  "value":true
-}
-```
-
-</div>
-
-</div>
 
 <table class="language-python">
 	<thead>
@@ -95,7 +72,6 @@ Output:
         </tr>
 	</tbody>
 </table>
-
 
 <table class="language-javascript">
 	<thead>
@@ -131,7 +107,6 @@ Output:
     </tbody>
 </table>
 
-
 <table class="language-java">
 	<thead>
         <tr>
@@ -147,22 +122,7 @@ Output:
     </tbody>
 </table>
 
-<table class="language-shell" style="display:none">
-    <thead>
-        <tr>
-            <th>Option</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>-c</td>
-            <td>Name of the collection to check.</td>
-        </tr>
-    </tbody>
-</table>
-
-<table class="language-curl" style="display:none">
+<table class="language-csharp">
 	<thead>
         <tr>
             <th>Parameter</th>
@@ -171,11 +131,10 @@ Output:
 	</thead>
 	<tbody>
         <tr>
-            <td><code>collection_name</code></td>
+            <td><code>collectionName</code></td>
             <td>Name of the collection to check.</td>
         </tr>
-	</tbody>
-</table>
+    </tbody>
 
 ## Check collection details
 
@@ -184,8 +143,9 @@ Check the details of a collection.
 <div class="multipleCode">
   <a href="#python">Python </a>
   <a href="#java">Java</a>
-  <a href="#go">GO</a>
+  <a href="#go">Go</a>
   <a href="#javascript">Node.js</a>
+  <a href="#csharp">C#</a>
   <a href="#curl">Curl</a>
 </div>
 
@@ -253,13 +213,10 @@ GetCollStatResponseWrapper wrapperCollectionStatistics = new GetCollStatResponse
 System.out.println("Collection row count: " + wrapperCollectionStatistics.getRowCount());
 ```
 
-<div style="display: none">
-
-```shell
-describe collection -c book
+```csharp
+var collection = milvusClient.GetCollection("book");
+var desc = await collection.DescribeAsync();
 ```
-
-</div>
 
 ```curl
 curl -X 'GET' \
@@ -304,7 +261,6 @@ Output:
     }
 }
 ```
-
 </div>
 
 <table class="language-python">
@@ -394,21 +350,6 @@ Output:
     </tbody>
 </table>
 
-<table class="language-shell" style="display: none">
-    <thead>
-        <tr>
-            <th>Option</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>-c</td>
-            <td>Name of the collection to check.</td>
-        </tr>
-    </tbody>
-</table>
-
 <table class="language-curl">
 	<thead>
         <tr>
@@ -431,12 +372,11 @@ List all collections in this Milvus Instance.
 <div class="multipleCode">
   <a href="#python">Python </a>
   <a href="#java">Java</a>
-  <a href="#go">GO</a>
+  <a href="#go">Go</a>
   <a href="#javascript">Node.js</a>
-  <a href="#shell">CLI</a>
+  <a href="#csharp">C#</a>
   <a href="#curl">Curl</a>
 </div>
-
 
 ```python
 from pymilvus import utility
@@ -463,13 +403,14 @@ R<ShowCollectionsResponse> respShowCollections = milvusClient.showCollections(
   );
 System.out.println(respShowCollections);
 ```
-<div style="display: none">
 
-```shell
-list collections
+```csharp
+var collections = await milvusClient.ListCollectionsAsync();
+
+foreach (var collection in collections) {
+    Console.WriteLine(collection.Name);
+}
 ```
-
-</div>
 
 ```curl
 curl -X 'GET' \

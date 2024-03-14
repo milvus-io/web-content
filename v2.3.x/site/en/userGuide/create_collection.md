@@ -102,7 +102,7 @@ const params = {
 ```go
 var (
     collectionName = "book"
-    )
+)
 schema := &entity.Schema{
   CollectionName: collectionName,
   Description:    "Test book search",
@@ -127,7 +127,7 @@ schema := &entity.Schema{
       },
     },
   },
-  EnableDynamicField: true
+  EnableDynamicField: true,
 }
 ```
 
@@ -168,8 +168,8 @@ create collection -c book -f book_id:INT64:book_id -f word_count:INT64:word_coun
 
 ```curl
 curl -X 'POST' \
-  '${MILVUS_HOST}:${MILVUS_PORT}/v1/vector/collections/create'' \
-  -H 'Authorization: Bearer ${TOKEN}'
+  '${MILVUS_HOST}:${MILVUS_PORT}/v1/vector/collections/create' \
+  -H 'Authorization: Bearer ${TOKEN}' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
   -d '{
@@ -204,7 +204,7 @@ Output:
         </tr>
 	</thead>
 	<tbody>
-        <tr><td rowspan="8"><code>FieldSchema</code></td>
+        <tr><td rowspan="10"><code>FieldSchema</code></td>
             <td><code>name</code></td>
             <td>Name of the field to create.</td>
             <td>N/A</td>
@@ -228,11 +228,28 @@ Output:
                     <li><code>DataType.DOUBLE</code> (numpy.double)</li>
                     <li><code>DataType.VARCHAR</code> (VARCHAR)</li>
                     <li><code>DataType.JSON</code> (JSON) </li>
+                    <li><code>DataType.ARRAY</code></li>
                 </ul>
                 For vector field:
                 <ul>
                     <li><code>BINARY_VECTOR</code> (Binary vector)</li>
                     <li><code>FLOAT_VECTOR</code> (Float vector)</li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td><code>element_type</code> (Mandatory for ARRAY field)</td>
+            <td>Data type of array elements to create. The data type of all elements in an array field must be the same.</td>
+            <td>Valid values:
+                <ul>
+                    <li><code>DataType.Int8</code></li>
+                    <li><code>DataType.Int16</code></li>
+                    <li><code>DataType.Int32</code></li>
+                    <li><code>DataType.Int64</code></li>
+                    <li><code>DataType.VARCHAR</code></li>
+                    <li><code>DataType.BOOL</code></li>
+                    <li><code>DataType.FLOAT</code></li>
+                    <li><code>DataType.DOUBLE</code></li>
                 </ul>
             </td>
         </tr>
@@ -250,6 +267,11 @@ Output:
             <td><code>max_length</code> (Mandatory for VARCHAR field)</td>
             <td>Maximum length of strings allowed to be inserted.</td>
             <td>[1, 65,535]</td>
+        </tr>
+        <tr>
+            <td><code>max_capacity</code> (Mandatory for ARRAY field)</td>
+            <td>Maximum number of elements allowed for an array field.</td>
+            <td>[1, 4,096]</td>
         </tr>
         <tr>
             <td><code>default_value</code></td>
@@ -424,7 +446,7 @@ Output:
         </tr>
         <tr>
             <td><code>consistency_level</code></td>
-            <td>Consistency level of the collection. For details, refer to [Consistency Level](consistency_level.md)</td>
+            <td>Consistency level of the collection. For details, refer to [Consistency Level](consistency.md)</td>
             <td>Possible values are as follows:<ul>
                 <li><code>Strong</code></li>
                 <li><code>Session</code></li>

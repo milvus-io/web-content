@@ -10,17 +10,54 @@ If you want to rename a collection, you can use the collection-renaming API to i
 
 In the following code snippet, we create a collection and name it `old_collection`. Then we rename it `new_collection`.
 
+<div class="multipleCode">
+  <a href="#python">Python </a>
+  <a href="#java">Java</a>
+  <a href="#go">Go</a>
+  <a href="#javascript">Node.js</a>
+  <a href="#csharp">C#</a>
+</div>
+
 ```python
-from pymilvus import Collection, FieldSchema, CollectionSchema, DataType, connections, utility
-connections.connect(alias="default")
-schema = CollectionSchema(fields=[
-...     FieldSchema("int64", DataType.INT64, description="int64", is_primary=True),
-...     FieldSchema("float_vector", DataType.FLOAT_VECTOR, is_primary=False, dim=128),
-... ])
+from pymilvus import Collection, utility
+
 collection = Collection(name="old_collection", schema=schema)
-utility.rename_collection("old_collection", "new_collection") # Output: True
-utility.drop_collection("new_collection")
-utility.has_collection("new_collection") # Output: False
+utility.rename_collection("old_collection", "new_collection")
+```
+
+```java
+import io.milvus.client.*;
+import io.milvus.param.*;
+
+RenameCollectionParam renameCollectionParam = new RenameCollectionParam.newBuilder()
+    .withOldCollectionName("old_collection")
+    .withNewCollectionName("new_collection")
+    .build();
+
+milvusClient.renameCollection(renameCollectionParam);
+```
+
+```go
+// Not available yet
+```
+
+```javascript
+const { MilvusClient } = require('@zilliz/milvus2-sdk-node');
+
+const client = new MilvusClient({ address, username, password });
+
+client.renameCollection({
+    collection_name: "old_collection",
+    new_collection_name: "new_collection"
+}).then(res => {
+    console.log(res);
+})
+```
+
+```csharp
+using Milvus.Client;
+
+var collection = milvusClient.GetCollection("old_collection").RenameAsync("new_collection");
 ```
 
 For code examples in the flavor of other programming languages, keep watching.

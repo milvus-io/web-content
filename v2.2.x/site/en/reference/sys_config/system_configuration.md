@@ -243,4 +243,3 @@ The following parameters control the log output and object storage access.
 
 - Learn more about the installation of Milvus:
   - [Install Milvus Standalone](install_standalone-docker.md)
-  - [Install Milvus Cluster](install_cluster-docker.md)

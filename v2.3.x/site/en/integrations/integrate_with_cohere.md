@@ -32,7 +32,7 @@ Here we can find the parameters used in the following snippets. Some of them nee
 ```python
 FILE = 'https://rajpurkar.github.io/SQuAD-explorer/dataset/train-v2.0.json'  # The SQuAD dataset url
 COLLECTION_NAME = 'question_answering_db'  # Collection name
-DIMENSION = 768  # Embeddings size, cohere embeddings default to 4096 with the large model
+DIMENSION = 1024  # Embeddings size, cohere embeddings default to 4096 with the large model
 COUNT = 5000  # How many questions to embed and insert into Milvus
 BATCH_SIZE = 96 # How large of batches to use for embedding and insertion
 MILVUS_HOST = 'localhost'  # Milvus server URI
@@ -96,7 +96,7 @@ collection = Collection(name=COLLECTION_NAME, schema=schema)
 
 # Create an IVF_FLAT index for collection.
 index_params = {
-    'metric_type':'L2',
+    'metric_type':'IP',
     'index_type':"IVF_FLAT",
     'params':{"nlist": 1024}
 }
@@ -118,26 +118,28 @@ In this example, the data includes the original question, the original question'
 # Set up a co:here client.
 cohere_client = cohere.Client(COHERE_API_KEY)
 
-# Extract embedings from questions using Cohere
-def embed(texts):
-    res = cohere_client.embed(texts, model='multilingual-22-12')
+# Extract embeddings from questions using Cohere
+def embed(texts, input_type):
+    res = cohere_client.embed(texts, model='embed-multilingual-v3.0', input_type=input_type)
     return res.embeddings
 
 # Insert each question, answer, and qustion embedding
 total = pandas.DataFrame()
 for batch in tqdm(np.array_split(simplified_records, (COUNT/BATCH_SIZE) + 1)):
     questions = batch['question'].tolist()
+    embeddings = embed(questions, "search_document")
     
     data = [
-        questions,
-        batch['answer'].tolist(),
-        embed(questions)      
+        {
+            'original_question': x,
+            'answer': batch['answer'].tolist()[i],
+            'original_question_embedding': embeddings[i]
+        } for i, x in enumerate(questions)
     ]
 
-    collection.insert(data)
+    collection.insert(data=data)
 
-# Flush at end to make sure all rows are sent for indexing
-collection.flush()
+time.sleep(10)
 ```
 
 ## Ask questions
@@ -151,60 +153,105 @@ Searches performed on data right after insertion might be a little slower as sea
 </div>
 
 ```python
-# Search the database for an answer to a question text
+# Search the cluster for an answer to a question text
 def search(text, top_k = 5):
 
-    # Set search params 
-    search_params = {
-        "metric_type": "L2",
-        "params": {"nprobe": 10}
-    }
+    # AUTOINDEX does not require any search params 
+    search_params = {}
 
     results = collection.search(
-        data = embed([text]),  # Embeded the question
-        anns_field="original_question_embedding",  # Search across the original original question embeddings
+        data = embed([text], "search_query"),  # Embeded the question
+        anns_field='original_question_embedding',
         param=search_params,
         limit = top_k,  # Limit to top_k results per search
         output_fields=['original_question', 'answer']  # Include the original question and answer in the result
     )
 
-    ret = []
-    for hit in results[0]:
-        row = []
-        row.extend([hit.entity.get('answer'), hit.score, hit.entity.get('original_question') ])  # Get the answer, distance, and original question for the results
-        ret.append(row)
+    distances = results[0].distances
+    entities = [ x.entity.to_dict()['entity'] for x in results[0] ]
+
+    ret = [ {
+        "answer": x[1]["answer"],
+        "distance": x[0],
+        "original_question": x[1]['original_question']
+    } for x in zip(distances, entities)]
+
     return ret
 
 # Ask these questions
-search_questions = ['What kills bacteria?', 'Whats the biggest dog?']
+search_questions = ['What kills bacteria?', 'What\'s the biggest dog?']
 
 # Print out the results in order of [answer, similarity score, original question]
-for question in search_questions:
-    print('Question:', question)
-    print('\nAnswer,', 'Distance,', 'Original Question')
-    for result in search(question):
-        print(result)
-    print()
+
+ret = [ { "question": x, "candidates": search(x) } for x in search_questions ]
 ```
 
 The output should be similar to the following:
 
 ```shell
-Question: What kills bacteria?
+# Output
+#
+# [
+#     {
+#         "question": "What kills bacteria?",
+#         "candidates": [
+#             {
+#                 "answer": "farming",
+#                 "distance": 0.6261022090911865,
+#                 "original_question": "What makes bacteria resistant to antibiotic treatment?"
+#             },
+#             {
+#                 "answer": "Phage therapy",
+#                 "distance": 0.6093736886978149,
+#                 "original_question": "What has been talked about to treat resistant bacteria?"
+#             },
+#             {
+#                 "answer": "oral contraceptives",
+#                 "distance": 0.5902313590049744,
+#                 "original_question": "In therapy, what does the antibacterial interact with?"
+#             },
+#             {
+#                 "answer": "slowing down the multiplication of bacteria or killing the bacteria",
+#                 "distance": 0.5874154567718506,
+#                 "original_question": "How do antibiotics work?"
+#             },
+#             {
+#                 "answer": "in intensive farming to promote animal growth",
+#                 "distance": 0.5667208433151245,
+#                 "original_question": "Besides in treating human disease where else are antibiotics used?"
+#             }
+#         ]
+#     },
+#     {
+#         "question": "What's the biggest dog?",
+#         "candidates": [
+#             {
+#                 "answer": "English Mastiff",
+#                 "distance": 0.7875324487686157,
+#                 "original_question": "What breed was the largest dog known to have lived?"
+#             },
+#             {
+#                 "answer": "forest elephants",
+#                 "distance": 0.5886962413787842,
+#                 "original_question": "What large animals reside in the national park?"
+#             },
+#             {
+#                 "answer": "Rico",
+#                 "distance": 0.5634892582893372,
+#                 "original_question": "What is the name of the dog that could ID over 200 things?"
+#             },
+#             {
+#                 "answer": "Iditarod Trail Sled Dog Race",
+#                 "distance": 0.546872615814209,
+#                 "original_question": "Which dog-sled race in Alaska is the most famous?"
+#             },
+#             {
+#                 "answer": "part of the family",
+#                 "distance": 0.5387814044952393,
+#                 "original_question": "Most people today describe their dogs as what?"
+#             }
+#         ]
+#     }
+# ]
 
-Answer, Distance, Original Question
-['Phage therapy', 5976.171875, 'What has been talked about to treat resistant bacteria?']
-['oral contraceptives', 7065.4130859375, 'In therapy, what does the antibacterial interact with?']
-['farming', 7250.0791015625, 'What makes bacteria resistant to antibiotic treatment?']
-['slowing down the multiplication of bacteria or killing the bacteria', 7291.306640625, 'How do antibiotics work?']
-['converting nitrogen gas to nitrogenous compounds', 7310.67724609375, 'What do bacteria do in soil?']
-
-Question: Whats the biggest dog?
-
-Answer, Distance, Original Question
-['English Mastiff', 4205.16064453125, 'What breed was the largest dog known to have lived?']
-['Rico', 6108.88427734375, 'What is the name of the dog that could ID over 200 things?']
-['part of the family', 7904.853515625, 'Most people today describe their dogs as what?']
-['77.5 million', 8752.98828125, 'How many people in the United States are said to own dog?']
-['Iditarod Trail Sled Dog Race', 9251.58984375, 'Which dog-sled race in Alaska is the most famous?']
 ```

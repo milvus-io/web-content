@@ -15,10 +15,10 @@ In current release, all parameters take effect only after Milvus restarts.
 
 ## Download a configuration file
 
-[Download](https://raw.githubusercontent.com/milvus-io/milvus/v2.3.0/configs/milvus.yaml) `milvus.yaml` directly or with the following command.
+[Download](https://raw.githubusercontent.com/milvus-io/milvus/v2.3.11/configs/milvus.yaml) `milvus.yaml` directly or with the following command.
 
 ```
-$ wget https://raw.githubusercontent.com/milvus-io/milvus/v2.3.0/configs/milvus.yaml
+$ wget https://raw.githubusercontent.com/milvus-io/milvus/v2.3.11/configs/milvus.yaml
 ```
 
 ## Modify the configuration file
@@ -171,35 +171,39 @@ Sorted by:
 
 ## Download an installation file
 
-Download the installation file for Milvus [standalone](https://github.com/milvus-io/milvus/releases/download/v2.3.0/milvus-standalone-docker-compose.yml), and save it as `docker-compose.yml`.
+Download the installation file for Milvus [standalone](https://github.com/milvus-io/milvus/releases/download/v2.3.11/milvus-standalone-docker-compose.yml), and save it as `docker-compose.yml`.
 
 You can also simply run the following command.
 
 ```
 # For Milvus standalone
-$ wget https://github.com/milvus-io/milvus/releases/download/v2.3.0/milvus-standalone-docker-compose.yml -O docker-compose.yml
+$ wget https://github.com/milvus-io/milvus/releases/download/v2.3.11/milvus-standalone-docker-compose.yml -O docker-compose.yml
 ```
 
 ## Modify the installation file
 
-In `docker-compose.yml`, add a `volumes` section under each Milvus component, i.e. root coord, data coord, data node, query coord, query node, index coord, index node, and proxy. 
+In `docker-compose.yml`, add a `volumes` section under each `milvus-standalone`.
 
 Map the local path to your `milvus.yaml` file onto the corresponding docker container paths to the configuration files `/milvus/configs/milvus.yaml` under all `volumes` sections.
 
 ```yaml
 ...
-proxy:
-    container_name: milvus-proxy
-    image: milvusdb/milvus:v2.3.0
-    command: ["milvus", "run", "proxy"]
-    volumes:       # Add a volumes section.
-      - /local/path/to/your/milvus.yaml:/milvus/configs/milvus.yaml   # Map the local path to the container path
+  standalone:
+    container_name: milvus-standalone
+    image: milvusdb/milvus:v2.2.13
+    command: ["milvus", "run", "standalone"]
     environment:
       ETCD_ENDPOINTS: etcd:2379
       MINIO_ADDRESS: minio:9000
-      PULSAR_ADDRESS: pulsar://pulsar:6650
+    volumes:
+      - /local/path/to/your/milvus.yaml:/milvus/configs/milvus.yaml   # Map the local path to the container path
+      - ${DOCKER_VOLUME_DIRECTORY:-.}/volumes/milvus:/var/lib/milvus
     ports:
       - "19530:19530"
+      - "9091:9091"
+    depends_on:
+      - "etcd"
+      - "minio"
 ...
 ```
 
@@ -212,7 +216,7 @@ Data are stored in the <code>/volumes</code> folder according to the default con
 Having finished modifying the configuration file and installation file, you can then start Milvus.
 
 ```
-$ sudo docker-compose up -d
+$ sudo docker compose up -d
 ```
 
 ## What's next

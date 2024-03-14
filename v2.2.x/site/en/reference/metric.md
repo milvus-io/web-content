@@ -83,7 +83,7 @@ The IP distance between two embeddings are defined as follows:
 
 Where A and B are embeddings, `||A||` and `||B||` are the norms of A and B.
 
-IP is more useful if you are more interested in measuring the orientation but not the magnitude of the vectors.
+IP is more useful if you want to compare non-normalized data or when you care about magnitude and angle.
 
 <div class="alert note">
  If you use IP to calculate embeddings similarities, you must normalize your embeddings. After normalization, the inner product equals cosine similarity.

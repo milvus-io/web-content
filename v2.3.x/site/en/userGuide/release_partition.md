@@ -39,7 +39,7 @@ await milvusClient.releasePartitions({
 err := milvusClient.ReleasePartitions(
   context.Background(),   // ctx
   "book",                 // CollectionName
-  []string{"novel"}       // partitionNames
+  []string{"novel"},      // partitionNames
 )
 if err != nil {
   log.Fatal("failed to release partitions:", err.Error())

@@ -81,9 +81,7 @@ No. Milvus has varied behavior. Data must be loaded to memory before searching.
 
 #### Can indexes be created after inserting vectors?
 
-Yes. If `create_index()` is called, Milvus builds an index for subsequently inserted vectors. However, Milvus does not build an index until the newly inserted vectors fill an entire segment and the newly created index file is separate from the previous one.
-
-
+Yes. If an index has been built for a collection by `create_index()` before, Milvus will automatically build an index for subsequently inserted vectors. However, Milvus does not build an index until the newly inserted vectors fill an entire segment and the newly created index file is separate from the previous one.
 
 #### How are the FLAT and IVF_FLAT indexes different?
 
@@ -108,7 +106,14 @@ See [Wikipedia](https://en.wikipedia.org/wiki/Unit_vector) for more information.
 For normalized vectors, Euclidean distance (L2) is mathematically equivalent to inner product (IP). If these similarity metrics return different results, check to see if your vectors are normalized
 
 #### Is there a limit to the total number of collections and partitions in Milvus?
-You can create a maximum of 65536 collections. The number of partitions in each collection must not exceed the value set by the parameter `master.maxPartitionNum`.
+
+Yes. You can create up to 65,535 collections in a Milvus instance. When calculating the number of existing collections, Milvus counts all collections with shards and partitions in them.
+
+For example, let's assume you have already created 100 collections, with 2 shards and 4 partitions in 60 of them and with 1 shard and 12 partitions in the rest 40 collections. The current number of collections can be calculated as:
+
+```
+60 * 2 * 4 + 40 * 1 * 12 = 960
+```
 
 #### Why do I get fewer than k vectors when searching for `topk` vectors?
 
@@ -130,7 +135,7 @@ Current Milvus release does not support Apple M1 CPU.
 
 #### What data types does Milvus support on the primary key field?
 
-In current release, Milvus support both INT64 and string.
+In current release, Milvus supports both INT64 and string.
 
 #### Is Milvus scalable?
 
@@ -152,7 +157,7 @@ Data in MinIO is designed to remain for a certain period of time for the conveni
 
 Yes. Kafka is supported in Milvus 2.1.0.
 
-#### What's the diference between a search and a query?
+#### What's the difference between a search and a query?
 
 In Milvus, a vector similarity search retrieves vectors based on similarity calculation and vector index acceleration. Unlike a vector similarity search, a vector query retrieves vectors via scalar filtering based on a boolean expression. The boolean expression filters on scalar fields or the primary key field, and it retrieves all results that match the filters. In a query, neither similarity metrics nor vector index is involved.
 

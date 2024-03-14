@@ -147,7 +147,7 @@ There are two ways to install Milvus Operator on K8s:
 helm install milvus-operator \
   -n milvus-operator --create-namespace \
   --wait --wait-for-jobs \
-  https://github.com/zilliztech/milvus-operator/releases/download/v0.8.0/milvus-operator-0.8.0.tgz
+  https://github.com/zilliztech/milvus-operator/releases/download/v0.9.7/milvus-operator-0.9.7.tgz
 ```
 
 If Milvus Operator is installed, you can see the following output.
@@ -298,7 +298,7 @@ my-release-pulsar-zookeeper-0         0/1     Pending             0          16s
 
 ### 3. Enable Milvus components
 
-Milvus Operator first creates all dependencies like etcd, Pulsar, and MinIO, and then continues to create Milvus components. Therefore, you can only see the pods of etcd, Pulsar, and MinIO now.  Once all denependencies are enabled, Milvus Operator will start all Milvus components. The status of the Milvus cluster is shown as in the following output.
+Milvus Operator first creates all dependencies like etcd, Pulsar, and MinIO, and then continues to create Milvus components. Therefore, you can only see the pods of etcd, Pulsar, and MinIO now.  Once all dependencies are enabled, Milvus Operator will start all Milvus components. The status of the Milvus cluster is shown as in the following output.
 
 ```
 ...
@@ -483,7 +483,7 @@ $ helm -n milvus-operator uninstall milvus-operator
 ### Uninstall Milvus Operator by `kubectl` command
 
 ```
-$ kubectl delete -f https://raw.githubusercontent.com/zilliztech/milvus-operator/v0.8.0/deploy/manifests/deployment.yaml
+$ kubectl delete -f https://raw.githubusercontent.com/zilliztech/milvus-operator/v0.9.7/deploy/manifests/deployment.yaml
 ```
 
 ## Delete the K8s cluster
@@ -505,6 +505,10 @@ Having installed Milvus, you can:
 - Deploy your Milvu cluster on clouds:
   - [Amazon EC2](aws.md)
   - [Amazon EKS](eks.md)
+  - [Google Cloud](gcp.md)
+  - [Google Cloud Storage](gcs.md)
+  - [Microsoft Azure](azure.md)
+  - [Microsoft Azure Blob Storage](abs.md)
 - Explore [Milvus Backup](milvus_backup_overview.md), an open-source tool for Milvus data backups.
 - Explore [Birdwatcher](birdwatcher_overview.md), an open-source tool for debugging Milvus and dynamic configuration updates.
 - Explore [Attu](https://milvus.io/docs/attu.md), an open-source GUI tool for intuitive Milvus management.

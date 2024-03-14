@@ -10,7 +10,7 @@ This topic describes how to insert data in Milvus via client.
 
 You can also migrate data to Milvus with [MilvusDM](migrate_overview.md), an open-source tool designed specifically for importing and exporting data with Milvus.
 
-Milvus 2.1 supports VARCHAR data type on scalar field. When building indexes for VARCHAR-type scalar fields, the default index type is dictionary tree.
+Milvus 2.1 supports the `VARCHAR` data type on scalar fields. When building indexes for VARCHAR-type scalar fields, the default index type is dictionary tree.
 
 The following example inserts 2,000 rows of randomly generated data as the example data (Milvus CLI example uses a pre-built, remote CSV file containing similar data). Real applications will likely use much higher dimensional vectors than the example. You can prepare your own data to replace the example.
 
@@ -25,6 +25,7 @@ Once you enable dynamic schema, you can append dynamic fields in the data. For d
   <a href="#java">Java</a>
   <a href="#go">GO</a>
   <a href="#javascript">Node.js</a>
+  <a href="#csharp">C#</a>
   <a href="#curl">Curl</a>
 </div>
 
@@ -84,13 +85,18 @@ for (long i = 0L; i < 2000; ++i) {
 }
 ```
 
-<div style="display: none">
+```csharp
+var bookIds = new long[2000];
+var wordCounts = new long[2000];
+var bookIntros = new ReadOnlyMemory<float>[2000];
 
-```shell
-# Prepare your data in a CSV file. Milvus CLI only supports importing data from local or remote files.
+for (var i = 0; i < 2000; i++)
+{
+    bookIds[i] = i;
+    wordCounts[i] = i + 10000;
+    bookIntros[i] = new[] { Random.Shared.NextSingle(), Random.Shared.NextSingle() };
+}
 ```
-
-</div>
 
 ```curl
 # See the following step.
@@ -107,10 +113,9 @@ By specifying `partition_name`, you can optionally decide to which partition to 
   <a href="#java">Java</a>
   <a href="#go">GO</a>
   <a href="#javascript">Node.js</a>
-  <a href="#shell">CLI</a>
+  <a href="#csharp">C#</a>
   <a href="#curl">Curl</a>
 </div>
-
 
 ```python
 from pymilvus import Collection
@@ -153,13 +158,14 @@ InsertParam insertParam = InsertParam.newBuilder()
 milvusClient.insert(insertParam);
 ```
 
-<div style="display: none">
-
-```shell
-import -c book 'https://raw.githubusercontent.com/milvus-io/milvus_cli/main/examples/user_guide/search.csv'
+```csharp
+await milvusClient.GetCollection("book").InsertAsync(new FieldData[]
+{
+    FieldData.Create("book_id", bookIds),
+    FieldData.Create("word_count", wordCounts),
+    FieldData.CreateFloatVector("book_intro", bookIntros)
+});
 ```
-
-</div>
 
 ```curl
 # insert an entity to a collection
@@ -171,7 +177,6 @@ curl -X 'POST' \
   -d '{
          "collectionName": "collection1",
          "data": {
-             "id": "id1",
              "vector": [0.1, 0.2, 0.3],
              "name": "tom",
              "email": "tom@zilliz.com",
@@ -184,18 +189,16 @@ curl --request POST \
      --url '${MILVUS_HOST}:${MILVUS_PORT}/v1/vector/insert' \
      --header 'Authorization: Bearer <TOKEN>' \
      --header 'accept: application/json' \
-     --header 'content-type: application/json'
+     --header 'content-type: application/json' \
      -d '{
          "collectionName": "collection1",
          "data": [
              {
-                "id": "id1",
                 "vector": [0.1, 0.2, 0.3],
                 "name": "bob",
                 "email": "bob@zilliz.com",
                 "date": "2023-04-13"
              },{
-                "id": "id2",
                 "vector": [0.1, 0.2, 0.3],
                 "name": "ally",
                 "email": "ally@zilliz.com",
@@ -320,21 +323,29 @@ Output:
 	</tbody>
 </table>
 
-<table class="language-shell" style="display: none">
+<table class="language-csharp">
     <thead>
         <tr>
-            <th>Option</th>
+            <th>Parameter</th>
             <th>Description</th>
+            <th>Option</th>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td>-c</td>
-            <td>Name of the collection to insert data into.</td>
+            <td><code>collectionName</code></td>
+            <td>The name of the collection to which entities will be inserted. You should get a collection and call its <code>InsertAsync</code> with the following parameters.</td>
+            <td>N/A</td>
         </tr>
         <tr>
-            <td>-p (Optional)</td>
+            <td><code>data</code></td>
+            <td>Data to insert into Milvus. Should be a list of <code>FieldData</code> object.</td>
+            <td>N/A</td>
+        </tr>
+        <tr>
+            <td><code>partitionName</code></td>
             <td>Name of the partition to insert data into.</td>
+            <td>N/A</td>
         </tr>
     </tbody>
 </table>
@@ -366,9 +377,21 @@ Output:
     </tbody>
 </table>
 
+<div class="alert note">
+
+After inserting entities into a collection that has previously been indexed, you do not need to re-index the collection, as Milvus will automatically create an index for the newly inserted data. For more information, refer to [Can indexes be created after inserting vectors?](product_faq.md#Can-indexes-be-created-after-inserting-vectors)
+
+</div>
+
 ## Flush the Data in Milvus
 
-When data is inserted into Milvus it is inserted into segments. Segments have to reach a certain size to be sealed and indexed. Unsealed segments will be searched brute force. In order to avoid this with any remainder data, it is best to call flush(). The flush call will seal any remaining segments and send them for indexing. It is important to only call this at the end of an insert session, as calling this too much will cause fragmented data that will need to be cleaned later on.
+When data is inserted into Milvus, it is stored in segments. Segments have to reach a certain size before they can be sealed and indexed. Unsealed segments are searched using brute force. If you need to search the data immediately after insertion, you can call the `flush()` method once the data is inserted. This method seals any remaining segments and sends them for indexing. It is important to only call this method at the end of an insert session. Calling it too frequently will result in fragmented data that will require cleaning later on.
+
+<div class="alert note">
+
+Milvus automatically triggers the `flush()` operation. In most cases, manual calls to this operation are not necessary.
+
+</div>
 
 
 ## Limits

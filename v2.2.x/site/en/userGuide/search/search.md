@@ -22,6 +22,7 @@ All search and query operations within Milvus are executed in memory. Load the c
   <a href="#java">Java</a>
   <a href="#go">GO</a>
   <a href="#javascript">Node.js</a>
+  <a href="#csharp">C#</a>
 </div>
 
 ```python
@@ -55,18 +56,8 @@ milvusClient.loadCollection(
 );
 ```
 
-```shell
-load -c book
-```
-
-```curl
-curl -X 'POST' \
-  'http://localhost:9091/api/v1/collection/load' \
-  -H 'accept: application/json' \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "collection_name": "book"
-  }'
+```csharp
+var collection = milvusClient.GetCollection("book").LoadAsync();
 ```
 
 ## Prepare search parameters
@@ -78,6 +69,7 @@ Prepare the parameters that suit your search scenario. The following example def
   <a href="#java">Java</a>
   <a href="#go">GO</a>
   <a href="#javascript">Node.js</a>
+  <a href="#csharp">C#</a>
   <a href="#curl">Curl</a>
 </div>
 
@@ -114,35 +106,15 @@ final Integer SEARCH_K = 2;                       // TopK
 final String SEARCH_PARAM = "{\"nprobe\":10, \"offset\":5}";    // Params
 ```
 
-<div style="display: none;">
-
-```shell
-search
-
-Collection name (book): book
-
-The vectors of search data(the length of data is number of query (nq), the dim of every vector in data must be equal to vector field’s of collection. You can also import a csv file without headers): [[0.1, 0.2]]
-
-The vector field used to search of collection (book_intro): book_intro
-
-Metric type: L2
-
-Search parameter nprobe's value: 10
-
-The max number of returned record, also known as topk: 10
-
-The boolean expression used to filter attribute []: 
-
-The names of partitions to search (split by "," if multiple) ['_default'] []: 
-
-timeout []:
-
-Guarantee Timestamp(It instructs Milvus to see all operations performed before a provided timestamp. If no such timestamp is provided, then Milvus will search all operations performed to date) [0]: 
-
-Travel Timestamp(Specify a timestamp in a search to get results based on a data view) [0]:
+```csharp
+var parameters = new SearchParameters
+{
+    OutputFields = { "title" },
+    ConsistencyLevel = ConsistencyLevel.Strong,
+    Offset = 5,
+    ExtraParameters = { ["nprobe"] = "1024" }
+};
 ```
-
-</div>
 
 ```curl
 # Search entities based on a given vector.
@@ -309,19 +281,43 @@ Output:
 </table>
 
 
-<table class="language-shell" style="display:none">
+<table class="language-csharp">
     <thead>
         <tr>
-            <th>Option</th>
-            <th>Full name</th>
+            <th>Parameter</th>
             <th>Description</th>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td>--help</td>
-            <td>n/a</td>
-            <td>Displays help for using the command.</td>
+            <td>OutputFields</td>
+            <td>A dictionary of the fields in the search results.</td>
+        </tr>
+        <tr>
+            <td>ConsistencyLevel</td>
+            <td>Consistency level for the search. Possible values are: <ul>
+                <li>ConsistencyLevel.Strong</li>
+                <li>ConsistencyLevel.Session</li>
+                <li>ConsistencyLevel.BoundedStaleness</li>
+                <li>ConsistencyLevel.Eventually</li>
+                <li>ConsistencyLevel.Customized</li>
+            </ul></td>
+        </tr>
+        <tr>
+            <td>Offset</td>
+            <td>Number of records to skip before return. The sum of this value and <code>limit</code> in the search request should be less than <code>16384</code>.</td>
+        </tr>
+        <tr>
+            <td>Expression</td>
+            <td>Boolean expression used to filter attribute. See <a href="boolean.md">Boolean Expression Rules</a> for more information.</td>
+        </tr>
+        <tr>
+            <td>ExtraParameters</td>
+            <td>Other applicable parameters. See <a href="index.md">Vector Index</a> for more information. Possible options are as follows:<ul>
+        <li><code>nprobe</code> Indicates the number of cluster units to search. This parameter is available only when <code>index_type</code> is set to <code>IVF_FLAT</code>, <code>IVF_SQ8</code>, or <code>IVF_PQ</code>. The value should be less than <code>nlist</code> specified for the index-building process.</li>
+        <li><code>ef</code> Indicates the search scope. This parameter is available only when <code>index_type</code> is set to <code>HNSW</code>. The value should be within the range from <code>top_k</code> to <code>32768</code>.</li>
+        <li><code>search_k</code> Indicates the search scope. This parameter is available only when <code>index_type</code> is set to <code>ANNOY</code>. The value should be greater than or equal to the top K.</li>
+    </ul></td>
         </tr>
     </tbody>
 </table>
@@ -372,6 +368,7 @@ Milvus supports setting consistency level specifically for a search. The example
   <a href="#java">Java</a>
   <a href="#go">GO</a>
   <a href="#javascript">Node.js</a>
+  <a href="#csharp">C#</a>
   <a href="#curl">Curl</a>
 </div>
 
@@ -451,8 +448,14 @@ SearchParam searchParam = SearchParam.newBuilder()
 R<SearchResults> respSearch = milvusClient.search(searchParam);
 ```
 
-```shell
-# Follow the previous step.
+```csharp
+var results = await milvusClient.GetCollection("book").SearchAsync(
+    vectorFieldName: "book_intro",
+    vectors: new ReadOnlyMemory<float>[] { new[] { 0.1f, 0.2f } },
+    SimilarityMetricType.L2,
+    // the sum of `offset` in `parameters` and `limit` should be less than 16384.
+    limit: 10,
+    parameters);
 ```
 
 ```curl
@@ -650,6 +653,43 @@ R<SearchResults> respSearch = milvusClient.search(searchParam);
     </tbody>
 </table>
 
+<table class="language-csharp">
+    <thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Options</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>collectionName</code></td>
+            <td>Name of the collection to load.</td>
+            <td>N/A</td>
+        </tr>
+        <tr>
+            <td><code>metricType</code></td>
+            <td>Metric type used for search.</td>
+            <td>This parameter must be set identical to the metric type used for index building.</td>
+        </tr>
+        <tr>
+            <td><code>vectors</code></td>
+            <td>Vectors to search with.</td>
+            <td>N/A</td>
+        </tr>
+        <tr>
+            <td><code>vectorFieldName</code></td>
+            <td>Name of the field to search on.</td>
+            <td>N/A</td>
+        </tr>
+        <tr>
+            <td><code>limit</code></td>
+            <td>Number of records to return.</td>
+            <td>N/A</td>
+        </tr>
+    </tbody>
+</table>
+
 Check the primary key values of the most similar vectors and their distances.
 
 <div class="multipleCode">
@@ -657,6 +697,7 @@ Check the primary key values of the most similar vectors and their distances.
   <a href="#java">Java</a>
   <a href="#go">GO</a>
   <a href="#javascript">Node.js</a>
+  <a href="#csharp">C#</a>
 </div>
 
 ```python
@@ -682,8 +723,15 @@ System.out.println(wrapperSearch.getIDScore(0));
 System.out.println(wrapperSearch.getFieldData("book_id", 0));
 ```
 
-```shell
-# Milvus CLI automatically returns the primary key values of the most similar vectors and their distances.
+```csharp
+// # get the IDs of all returned hits
+Console.WriteLine(results.Ids.LongIds)
+// alternative Console.WriteLine(results.Ids.StringIds)
+
+// get the scores to the query vector from all returned hits
+foreach (var score in results.Scores.ToList()) {
+    Console.WriteLine(score);
+};
 ```
 
 Release the collection loaded in Milvus to reduce memory consumption when the search is completed.
@@ -693,6 +741,7 @@ Release the collection loaded in Milvus to reduce memory consumption when the se
   <a href="#java">Java</a>
   <a href="#go">GO</a>
   <a href="#javascript">Node.js</a>
+  <a href="#csharp">C#</a>
 </div>
 
 ```python
@@ -720,19 +769,9 @@ milvusClient.releaseCollection(
                 .build());
 ```
 
-```shell
-release -c book
-```
-
-``` curl
-curl -X 'DELETE' \
-  'http://localhost:9091/api/v1/collection/load' \
-  -H 'accept: application/json' \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "collection_name": "book"
-  }'
-```
+```csharp
+var collection = milvusClient.GetCollection("book").ReleaseAsync();
+``
 
 ## Limits
 |Feature|Maximum limit|

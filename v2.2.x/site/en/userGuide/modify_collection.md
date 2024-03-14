@@ -10,8 +10,25 @@ This topic describes how to modify the properties, especially the time to live (
 
 Currently, the TTL feature is only available in Python.
 
-```
+<div class="multipleCode">
+  <a href="#python">Python </a>
+  <a href="#java">Java</a>
+  <a href="#go">GO</a>
+</div>
+
+```python
+collection = Collection("books")
 collection.set_properties(properties={"collection.ttl.seconds": 1800})
+```
+
+```java
+AlterCollectionParam alterCollectionParam = AlterCollectionParam.newBuilder
+  .withCollectionName("books")
+  .withTTL(1800)
+```
+
+```go
+client.AlterCollection(context.Background(), "books", entity.CollectionTTL(1800))
 ```
 
 The example above changes the collection TTL to 1800 seconds.

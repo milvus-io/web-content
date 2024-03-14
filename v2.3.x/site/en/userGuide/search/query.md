@@ -117,7 +117,7 @@ queryResult, err := milvusClient.Query(
     context.Background(),                                   // ctx
     "book",                                                 // CollectionName
     "",                                                     // PartitionName
-    entity.NewColumnInt64("book_id", []int64{2,4,6,8}),     // expr
+    "book_id in [2,4,6,8]",                                 // expr
     []string{"book_id", "book_intro"},                      // OutputFields
     opt,                                                    // queryOptions
 )
@@ -202,11 +202,11 @@ Output:
     </tr>
     <tr>
         <td><code>offset</code></td>
-        <td>Number of results to skip in the returned set. This parameter is available only when <code>limit</code> is specified, and the sum of this value and <code>limit</code> should be less than 16384.</td>
+        <td>Number of results to skip in the returned set. This parameter is available only when <code>limit</code> is specified, and the sum of this value and <code>limit</code> should be less than 16384. For example, if you want the 9th and 10th nearest neighbors to the query vector, set <code>limit</code> to <code>2</code> and <code>offset</code> to <code>8</code>.</td>
     </tr>
     <tr>
         <td><code>output_fields</code> (optional)</td>
-        <td>List of names of the field to return.</td>
+        <td>Name of the field to return. Milvus supports returning the vector field.</td>
     </tr>
     <tr>
         <td><code>partition_names</code> (optional)</td>
@@ -238,7 +238,7 @@ Output:
     </tr>
     <tr>
         <td><code>output_fields</code> (optional)</td>
-        <td>List of names of the field to return.</td>
+        <td>Name of the field to return. Milvus supports returning the vector field.</td>
     </tr>
     <tr>
         <td><code>limit</code> (optional)</td>
@@ -246,7 +246,7 @@ Output:
     </tr>
     <tr>
         <td><code>offset</code> (optional)</td>
-        <td>Number of results to skip in the returned set. This parameter is available only when <code>limit</code> is specified, and the sum of this value and <code>limit</code> should be less than 16384.</td>
+        <td>Number of results to skip in the returned set. This parameter is available only when <code>limit</code> is specified, and the sum of this value and <code>limit</code> should be less than 16384. For example, if you want the 9th and 10th nearest neighbors to the query vector, set <code>limit</code> to <code>2</code> and <code>offset</code> to <code>8</code>.</td>
     </tr>
     </tbody>
 </table>
@@ -282,8 +282,7 @@ Output:
     </tr>
     <tr>
         <td><code>OutputFields</code></td>
-        <td>Name of the field to return.</td>
-        <td>Vector field is not supported in current release.</td>
+        <td>Name of the field to return. Milvus supports returning the vector field.</td>
     </tr>
     <tr>
         <td><code>opts</code></td>
@@ -314,8 +313,7 @@ Output:
   </tr>
   <tr>
         <td><code>OutFields</code></td>
-        <td>Name of the field to return.</td>
-    <td>Vector field is not supported in current release.</td>
+        <td>Name of the field to return. Milvus supports returning the vector field.</td>
     </tr>
   <tr>
         <td><code>Expr</code></td>
@@ -328,7 +326,7 @@ Output:
     </tr>
     <tr>
         <td><code>Offset</code> (optional)</td>
-        <td>Number of results to skip in the returned set. This parameter is available only when <code>limit</code> is specified, and the sum of this value and <code>limit</code> in <code>WithLimit()</code> should be less than 16384.</td>
+        <td>Number of results to skip in the returned set. This parameter is available only when <code>limit</code> is specified, and the sum of this value and <code>limit</code> in <code>WithLimit()</code> should be less than 16384. For example, if you want the 9th and 10th nearest neighbors to the query vector, set <code>limit</code> to <code>2</code> and <code>offset</code> to <code>8</code>.</td>
     </tr>
   <tr>
         <td><code>ConsistencyLevel</code></td>
@@ -373,11 +371,11 @@ Output:
     </tr>
     <tr>
         <td><code>limit</code></td>
-        <td>The maximum number of entities to return.<br>The sum of this value of that of `offset` should be less than **1024**.<br>The value defaults to <code>100</code>.<br>The value ranges from <code>1</code> to <code>100</code></td>
+        <td>The maximum number of entities to return.<br>The sum of this value of that of <code>offset</code> should be less than <code>1024</code>.<br>The value defaults to <code>100</code>.<br>The value ranges from <code>1</code> to <code>100</code></td>
     </tr>
     <tr>
         <td><code>offset</code></td>
-        <td>The number of entities to skip in the search results.<br>The sum of this value and that of `limit` should not be greater than <code>1024</code>.<br>The maximum value is <code>1024</code>.</td>
+        <td>The number of entities to skip in the search results.<br>The sum of this value and that of <code>limit</code> should not be greater than <code>1024</code>.<br>The maximum value is <code>1024</code>. For example, if you want the 9th and 10th nearest neighbors to the query vector, set <code>limit</code> to <code>2</code> and <code>offset</code> to <code>8</code>.</td>
     </tr>
     <tr>
         <td><code>outputFields</code></td>
@@ -408,7 +406,10 @@ console.log(results.data)
 ```go
 fmt.Printf("%#v\n", queryResult)
 for _, qr := range queryResult {
-    fmt.Println(qr.IDs)
+    for i := 0; i < qr.Len(); i++ {
+        value, _ := qr.Get(i)
+        fmt.Println(value)
+    }
 }
 ```
 

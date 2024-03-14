@@ -8,7 +8,7 @@ summary: Learn how to build an index for vectors in Milvus.
 
 This guide describes how to build an index on vectors in Milvus. 
 
-Vector indexes are an organizational unit of metadata used to accelerate [vector similarity search](search.md). Without the index built on vectors, Milvus will perform a brute-force search by default.
+Vector indexes are an organizational unit of metadata used to accelerate [vector similarity search](search.md). You need to create an index before you can perform ANN searches against your Milvus.
 
 See [Vector Index](index.md) for more information about the mechanism and varieties of vector indexes.
 
@@ -26,8 +26,9 @@ Prepare the index parameters as follows:
 <div class="multipleCode">
   <a href="#python">Python </a>
   <a href="#java">Java</a>
-  <a href="#go">GO</a>
+  <a href="#go">Go</a>
   <a href="#javascript">Node.js</a>
+  <a href="#csharp">C#</a>
 </div>
 
 ```python
@@ -61,41 +62,11 @@ final IndexType INDEX_TYPE = IndexType.IVF_FLAT;   // IndexType
 final String INDEX_PARAM = "{\"nlist\":1024}";     // ExtraParam
 ```
 
-<div style="display: none">
-
-```shell
-create index
-
-Collection name (book): book
-
-The name of the field to create an index for (book_intro): book_intro
-
-Index type (FLAT, IVF_FLAT, IVF_SQ8, IVF_PQ, RNSG, HNSW, ANNOY): IVF_FLAT
-
-Index metric type (L2, IP, HAMMING, TANIMOTO): L2
-
-Index params nlist: 1024
-
-Timeout []:
+```csharp
+var indexType = IndexType.IvfFlat;
+var metricType = SimilarityMetricType.L2;
+var extraParams = new Dictionary<string, string> { ["nlist"] = "1024" };
 ```
-
-```curl
-curl -X 'POST' \
-  'http://localhost:9091/api/v1/index' \
-  -H 'accept: application/json' \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "collection_name": "book",
-    "field_name": "book_intro",
-    "extra_params":[
-      {"key": "metric_type", "value": "L2"},
-      {"key": "index_type", "value": "IVF_FLAT"},
-      {"key": "params", "value": "{\"nlist\":1024}"}
-    ]
-  }'
-```
-
-</div>
 
 <table class="language-python">
 	<thead>
@@ -307,22 +278,7 @@ curl -X 'POST' \
 	</tbody>
 </table>
 
-<table class="language-shell" style="display: none">
-    <thead>
-        <tr>
-            <th>Option</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>--help</td>
-            <td>Displays help for using the command.</td>
-        </tr>
-    </tbody>
-</table>
-
-<table class="language-curl" style="display: none">
+<table class="language-csharp">
 	<thead>
 	<tr>
 		<th>Parameter</th>
@@ -331,57 +287,31 @@ curl -X 'POST' \
 	</tr>
 	</thead>
 	<tbody>
-    <tr>
-        <td><code>collection_name</code></td>
-        <td>Name of the collection to build the index on.</td>
-    </tr>
-    <tr>
-        <td><code>field_name</code></td>
-        <td>Name of the vector field to build the index on.</td>
-    </tr>	
-    <tr>
-		<td><code>metric_type</code></td>
-		<td>Type of metrics used to measure the similarity of vectors.</td>
-        <td>For floating point vectors:
-            <ul>
-                <li><code>L2</code> (Euclidean distance)</li>
-                <li><code>IP</code> (Inner product)</li>
-            </ul>
-            For binary vectors:
-            <ul>
-                <li><code>JACCARD</code> (Jaccard distance)</li>
-                <li><code>TANIMOTO</code> (Tanimoto distance)</li>
-                <li><code>HAMMING</code> (Hamming distance)</li>
-                <li><code>SUPERSTRUCTURE</code> (Superstructure)</li>
-                <li><code>SUBSTRUCTURE</code> (Substructure)</li>
-            </ul>
-        </td>
-	</tr>
 	<tr>
-		<td><code>index_type</code></td>
+		<td><code>indexType</code></td>
 		<td>Type of index used to accelerate the vector search.</td>
         <td>For floating point vectors:
             <ul>
-                <li><code>FLAT</code> (FLAT)</li>
-                <li><code>IVF_FLAT</code> (IVF_FLAT)</li>
-                <li><code>IVF_SQ8</code> (IVF_SQ8)</li>
-                <li><code>IVF_PQ</code> (IVF_PQ)</li>
-                <li><code>HNSW</code> (HNSW)</li>
-                <li><code>ANNOY</code> (ANNOY)</li>
+                <li><code>IndexType.Flat</code> (FLAT)</li>
+                <li><code>IndexType.IvfFlat</code> (IVF_FLAT)</li>
+                <li><code>IndexType.IvfSq8</code> (IVF_SQ8)</li>
+                <li><code>IndexType.IvfPq</code> (IVF_PQ)</li>
+                <li><code>IndexType.Hnsw</code> (HNSW)</li>
+                <li><code>IndexType.Annoy</code> (ANNOY)</li>
             </ul>
             For binary vectors:
             <ul>
-                <li><code>BIN_FLAT</code> (BIN_FLAT)</li>
-                <li><code>BIN_IVF_FLAT</code> (BIN_IVF_FLAT)</li>
+                <li><code>IndexType.BinFlat</code> (BIN_FLAT)</li>
+                <li><code>IndexType.BinIvfFlat</code> (BIN_IVF_FLAT)</li>
             </ul>
         </td>
 	</tr>
 	<tr>
-		<td><code>params</code></td>
+		<td><code>ExtraParam</code></td>
 		<td>Building parameter(s) specific to the index.</td>
         <td>See <a href="index.md">In-memory Index</a> for more information.</td>
 	</tr>
-	</tbody>
+	</tbody>    
 </table>
 
 ## Build index
@@ -391,8 +321,9 @@ Build the index by specifying the vector field name and index parameters.
 <div class="multipleCode">
   <a href="#python">Python </a>
   <a href="#java">Java</a>
-  <a href="#go">GO</a>
+  <a href="#go">Go</a>
   <a href="#javascript">Node.js</a>
+  <a href="#csharp">C#</a>
 </div>
 
 ```python
@@ -442,17 +373,9 @@ milvusClient.createIndex(
 );
 ```
 
-<div style="display: none">
-
-```shell
-# Follow the previous step.
+```csharp
+await milvusClient.GetCollection("book").CreateIndexAsync("book_intro", indexType, metricType, extraParams: extraParams);
 ```
-
-```curl
-# Follow the previous step.
-```
-
-</div>
 
 <table class="language-python">
 	<thead>

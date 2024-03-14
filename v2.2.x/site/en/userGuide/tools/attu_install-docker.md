@@ -7,7 +7,7 @@ related_key: attu
 summary: Learn how to install Attu with Docker Compose to manage your Milvus service.
 ---
 
-<div class="tab-wrapper"><a href="attu_install-docker.md" class='active '>Install with Docker Compose</a></div>
+<div class="tab-wrapper"><a href="attu_install-docker.md" class='active '>Install with Docker Compose</a><a href="attu_install-helm.md" class=''>Install with Helm Chart</a><a href="attu_install-package.md" class=''>Install with Package</a></div>
 
 # Install Attu with Docker
 
@@ -46,10 +46,10 @@ And we alsow support TLS connection, username and password.
 
 # Install Milvus Standalone and Attu with Docker Compose
 
-[Download](https://github.com/milvus-io/milvus/releases/download/v2.2.14/milvus-standalone-docker-compose.yml) `milvus-standalone-docker-compose.yml` and save it as `docker-compose.yml` manually, or with the following command.
+[Download](https://github.com/milvus-io/milvus/releases/download/v2.2.16/milvus-standalone-docker-compose.yml) `milvus-standalone-docker-compose.yml` and save it as `docker-compose.yml` manually, or with the following command.
 
 ```
-$ wget https://github.com/milvus-io/milvus/releases/download/v2.2.14/milvus-standalone-docker-compose.yml -O docker-compose.yml
+$ wget https://github.com/milvus-io/milvus/releases/download/v2.2.16/milvus-standalone-docker-compose.yml -O docker-compose.yml
 ```
 
 Edit the downloaded `docker-compose.yml` file using your favorite text editor and add the following to the services block:

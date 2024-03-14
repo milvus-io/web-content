@@ -22,6 +22,7 @@ All search and query operations within Milvus are executed in memory. Load the c
   <a href="#java">Java</a>
   <a href="#go">GO</a>
   <a href="#javascript">Node.js</a>
+  <a href="#csharp">C#</a>
 </div>
 
 ```python
@@ -55,15 +56,9 @@ milvusClient.loadCollection(
 );
 ```
 
-<div style="display: none">
-```shell
-load -c book
+```csharp
+var collection = milvusClient.GetCollection("book").LoadAsync();
 ```
-
-```curl
-# See the following step.
-```
-</div>
 
 ## Conduct a hybrid vector search
 
@@ -76,6 +71,7 @@ You can also use dynamic fields in the filter expression and output fields in th
   <a href="#java">Java</a>
   <a href="#go">GO</a>
   <a href="#javascript">Node.js</a>
+  <a href="#csharp">C#</a>
 </div>
 
 ```python
@@ -155,80 +151,21 @@ SearchParam searchParam = SearchParam.newBuilder()
 R<SearchResults> respSearch = milvusClient.search(searchParam);
 ```
 
-<div style="display:none;">
-```shell
-search
-
-Collection name (book): book
-
-The vectors of search data(the length of data is number of query (nq), the dim of every vector in data must be equal to vector field’s of collection. You can also import a csv file without headers): [[0.1, 0.2]]
-
-The vector field used to search of collection (book_intro): book_intro
-
-Metric type: L2
-
-Search parameter nprobe's value: 10
-
-The max number of returned record, also known as topk: 2
-
-The boolean expression used to filter attribute []: word_count <= 11000
-
-The names of partitions to search (split by "," if multiple) ['_default'] []: 
-
-timeout []:
-
-Guarantee Timestamp(It instructs Milvus to see all operations performed before a provided timestamp. If no such timestamp is provided, then Milvus will search all operations performed to date) [0]: 
-
-Travel Timestamp(Specify a timestamp in a search to get results based on a data view) [0]:
+```csharp
+var results = await milvusClient.GetCollection("book").SearchAsync(
+    vectorFieldName: "book_intro",
+    vectors: new ReadOnlyMemory<float>[] { new[] { 0.1f, 0.2f } },
+    SimilarityMetricType.L2,
+    limit: 10,
+    new SearchParameters
+    {
+        OutputFields = { "title" },
+        ConsistencyLevel = ConsistencyLevel.Strong,
+        Offset = 5,
+        Expression = "word_count <= 11000",
+        ExtraParameters = { ["nprobe"] = "1024" }
+    });
 ```
-
-```curl
-curl -X 'POST' \
-  'http://localhost:9091/api/v1/search' \
-  -H 'accept: application/json' \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "collection_name": "book",
-    "output_fields": ["book_id"],
-    "search_params": [
-      {"key": "anns_field", "value": "book_intro"},
-      {"key": "topk", "value": "2"},
-      {"key": "params", "value": "{\"nprobe\": 10}"},
-      {"key": "metric_type", "value": "L2"},
-      {"key": "round_decimal", "value": "-1"}
-    ],
-    "vectors": [ [0.1,0.2] ],
-    "dsl": "word_count >= 11000",
-    "dsl_type": 1
-  }'
-```
-
-<div class="language-curl">
-Output:
-
-```json
-{
-  "status":{},
-  "results":{
-    "num_queries":1,
-    "top_k":2,
-    "fields_data":[
-      {
-        "type":5,
-        "field_name":"book_id",
-        "Field":{"Scalars":{"Data":{"LongData":{"data":[11,12]}}}},
-        "field_id":100
-      }
-    ],
-    "scores":[119.44999,142.24998],
-    "ids":{"IdField":{"IntId":{"data":[11,12]}}},"topks":[2]
-  },
-  "collection_name":"book"
-}
-```
-
-</div>
-</div>
 
 <table class="language-python">
 	<thead>
@@ -461,71 +398,45 @@ Output:
 	</tbody>
 </table>
 
-<table class="language-shell" style="display:none;">
+<table class="language-csharp">
     <thead>
         <tr>
-            <th>Option</th>
-            <th>Full name</th>
+            <th>Parameter</th>
             <th>Description</th>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td>--help</td>
-            <td>n/a</td>
-            <td>Displays help for using the command.</td>
+            <td>OutputFields</td>
+            <td>A dictionary of the fields in the search results.</td>
+        </tr>
+        <tr>
+            <td>ConsistencyLevel</td>
+            <td>Consistency level for the search. Possible values are: <ul>
+                <li>ConsistencyLevel.Strong</li>
+                <li>ConsistencyLevel.Session</li>
+                <li>ConsistencyLevel.BoundedStaleness</li>
+                <li>ConsistencyLevel.Eventually</li>
+                <li>ConsistencyLevel.Customized</li>
+            </ul></td>
+        </tr>
+        <tr>
+            <td>Offset</td>
+            <td>Number of records to skip before return. The sum of this value and <code>limit</code> in the search request should be less than <code>16384</code>.</td>
+        </tr>
+        <tr>
+            <td>Expression</td>
+            <td>Boolean expression used to filter attribute. See <a href="boolean.md">Boolean Expression Rules</a> for more information.</td>
+        </tr>
+        <tr>
+            <td>ExtraParameters</td>
+            <td>Other applicable parameters. See <a href="index.md">Vector Index</a> for more information. Possible options are as follows:<ul>
+        <li><code>nprobe</code> Indicates the number of cluster units to search. This parameter is available only when <code>index_type</code> is set to <code>IVF_FLAT</code>, <code>IVF_SQ8</code>, or <code>IVF_PQ</code>. The value should be less than <code>nlist</code> specified for the index-building process.</li>
+        <li><code>ef</code> Indicates the search scope. This parameter is available only when <code>index_type</code> is set to <code>HNSW</code>. The value should be within the range from <code>top_k</code> to <code>32768</code>.</li>
+        <li><code>search_k</code> Indicates the search scope. This parameter is available only when <code>index_type</code> is set to <code>ANNOY</code>. The value should be greater than or equal to the top K.</li>
+    </ul></td>
         </tr>
     </tbody>
-</table>
-
-<table class="language-curl" style="display:none;">
-	<thead>
-	<tr>
-		<th>Parameter</th>
-		<th>Description</th>
-	</tr>
-	</thead>
-	<tbody>
-    <tr>
-		<td><code>output_fields</code>(optional)</td>
-		<td>Name of the field to return. Vector field is not supported in current release.</td>
-	</tr>
-	<tr>
-		<td><code>anns_field</code></td>
-		<td>Name of the field to search on.</td>
-	</tr>
-	<tr>
-		<td><code>topk</code></td>
-		<td>Number of the most similar results to return.</td>
-	</tr>
-	<tr>
-		<td><code>params</code></td>
-		<td>Search parameter(s) specific to the index. See <a href="index.md">Vector Index</a> for more information.</td>
-	</tr>
-	<tr>
-		<td><code>metric_type</code></td>
-		<td>Metric type used for search. This parameter must be set identical to the metric type used for index building.</td>
-	</tr>
-	<tr>
-		<td><code>round_decimal</code> (optional)</td>
-		<td>Number of decimal places of returned distance.</td>
-	</tr>
-	<tr>
-		<td><code>Vectors</code></td>
-		<td>Vectors to search with.</td>
-	</tr>
-	<tr>
-		<td><code>dsl</code></td>
-		<td>Boolean expression used to filter attribute. Find more expression details in <a href="boolean.md">Boolean Expression Rules</a>.</td>
-	</tr>
-	<tr>
-		<td><code>dsl_type</code></td>
-		<td>Type of <code>dsl</code> (Data Search Language) field:
-		<br>0: "Dsl"
-		<br>1: "BoolExprV1"
-		</td>
-	</tr>
-	</tbody>
 </table>
 
 Check the returned results.
@@ -535,6 +446,7 @@ Check the returned results.
   <a href="#java">Java</a>
   <a href="#go">GO</a>
   <a href="#javascript">Node.js</a>
+  <a href="#csharp">C#</a>
 </div>
 
 ```python
@@ -563,16 +475,16 @@ System.out.println(wrapperSearch.getIDScore(0));
 System.out.println(wrapperSearch.getFieldData("book_id", 0));
 ```
 
-<div style="display:none;">
+```csharp
+// # get the IDs of all returned hits
+Console.WriteLine(results.Ids.LongIds)
+// alternative Console.WriteLine(results.Ids.StringIds)
 
-```shell
-# Milvus CLI automatically returns the primary key values of the most similar vectors and their distances.
+// get the scores to the query vector from all returned hits
+foreach (var score in results.Scores.ToList()) {
+    Console.WriteLine(score);
+};
 ```
-
-```curl
-# See the output of the previous step.
-```
-</div>
 
 ## What's next
 

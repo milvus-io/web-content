@@ -64,10 +64,16 @@ schema = CollectionSchema(
     description="", 
     enable_dynamic_field=True, 
     # The following is an alternative to setting `is_partition_key` in a field schema.
-    partition_key_field="store_address" 
+    partition_key_field="store_address"
 )
 
-collection = Collection(name='McDonald_s_Reviews', schema=schema )
+collection = Collection(
+    name='McDonald_s_Reviews',
+    schema=schema,
+    # The number partitions to create are 64 by default. Set it to a proper value that you see fit.
+    num_partitions=100
+)
+
 collection.create_index(
     field_name='vector', 
     index_params={
@@ -88,6 +94,25 @@ utility.list_collections()
 ```
 
 If the above code snippets output the name of the collection, it is ready to accept data from the prepared dataset.
+
+Before that, there are several things you should know more about:
+
+- Enable partition key
+
+  - Use the `is_partition_key` setting on a specific field.
+  - Alternatively, specify the `partition_key_field` in the collection schema.
+
+- Set the number of partitions
+
+  - The `CollectionSchema` object has a `num_partitions` argument. This determines how many partitions will be created in the collection.
+  - When you set this alongside an enabled partition key, the system creates the specified number of partitions during collection creation. Once set, you cannot modify (add or delete) these partitions.
+  - By default, `num_partitions` is set to `64`, but you can adjust this according to your needs.
+
+- Milvus's data distribution strategy
+
+  - Every entity inserted into Milvus gets hashed. The partition that will store this entity is determined based on its hash value.
+
+  - If a search request includes boolean expressions related to the partition key, Milvus will hash that specific partition key to filter and identify the relevant partition. This narrows down the search scope, making searches faster and more efficient.
 
 For other possible options for `metric_type` and `index_type`, please refer to [Similarity Metrics](metric.md), [In-memory Index](index.md) and [On-disk Index](disk_index.md).
 

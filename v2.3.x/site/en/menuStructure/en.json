@@ -128,12 +128,20 @@
       "order": 1
     }, 
     {
+      "id": "install_standalone-helm-gpu.md",
+      "title": "With GPU Support",
+      "label1": "getstarted",
+      "label2": "installmilvus",
+      "label3": "",
+      "order": 2
+    },
+    {
       "id": "install_offline-helm.md",
       "title": "Install Offline",
       "label1": "getstarted",
       "label2": "installmilvus",
       "label3": "",
-      "order": 2
+      "order": 3
     }, 
     {
       "id": "install_sdks",
@@ -582,7 +590,7 @@
       "label1": "admin_guide",
       "label2": "",
       "label3": "",
-      "order": 2
+      "order": 3
     },
     {
       "id": "cloud",
@@ -590,7 +598,7 @@
       "label1": "admin_guide",
       "label2": "",
       "label3": "",
-      "order": 3,
+      "order": 4,
       "isMenu": true
     },
     {
@@ -635,19 +643,51 @@
       "order": 0
     },
     {
-      "id": "gcp_layer7.md",
-      "title": "Layer-7 Load Balancing",
+      "id": "gcs.md",
+      "title": "GCS With IAM",
       "label1": "admin_guide",
       "label2": "cloud",
       "label3": "gcp",
       "order": 1
     },
     {
-      "id": "azure.md",
+      "id": "gcp_layer7.md",
+      "title": "Layer-7 Load Balancing",
+      "label1": "admin_guide",
+      "label2": "cloud",
+      "label3": "gcp",
+      "order": 2
+    },
+    {
+      "id": "azure",
       "title": "Azure",
       "label1": "admin_guide",
       "label2": "cloud",
       "label3": "",
+      "order": 3
+    },    
+    {
+      "id": "azure.md",
+      "title": "Azure",
+      "label1": "admin_guide",
+      "label2": "cloud",
+      "label3": "azure",
+      "order": 0
+    },
+    {
+      "id": "abs.md",
+      "title": "Blob Storage With IAM",
+      "label1": "admin_guide",
+      "label2": "cloud",
+      "label3": "azure",
+      "order": 1
+    },
+    {
+      "id": "ingress.md",
+      "title": "Ingress Nginx",
+      "label1": "admin_guide",
+      "label2": "cloud",
+      "label3": "azure",
       "order": 2
     },
     {
@@ -656,7 +696,15 @@
       "label1": "admin_guide",
       "label2": "",
       "label3": "",
-      "order": 3
+      "order": 5
+    },
+    {
+      "id": "scale-dependencies.md",
+      "title": "Scale Dependencies",
+      "label1": "admin_guide",
+      "label2": "",
+      "label3": "",
+      "order": 6
     },
     {
       "id": "resource_group.md",
@@ -664,7 +712,31 @@
       "label1": "admin_guide",
       "label2": "",
       "label3": "",
-      "order": 5      
+      "order": 7      
+    },
+    {
+      "id": "configure_access_logs.md",
+      "title": "Configure Access Logs",
+      "label1": "admin_guide",
+      "label2": "",
+      "label3": "",
+      "order": 8      
+    },
+    {
+      "id": "limit_collection_counts.md",
+      "title": "Limit Collection Counts",
+      "label1": "admin_guide",
+      "label2": "",
+      "label3": "",
+      "order": 9      
+    },
+    {
+      "id": "chunk_cache.md",
+      "title": "Configure Chunk Cache",
+      "label1": "admin_guide",
+      "label2": "",
+      "label3": "",
+      "order": 10      
     },
     {
       "id": "upgrade_milvus",
@@ -672,7 +744,7 @@
       "label1": "admin_guide",
       "label2": "",
       "label3": "",
-      "order": 6
+      "order": 9
     },
     {
       "id": "upgrade_milvus_cluster-operator.md",
@@ -696,7 +768,7 @@
       "label1": "admin_guide",
       "label2": "",
       "label3": "",
-      "order": 6,
+      "order": 11,
       "isMenu": true
     },
     {
@@ -745,7 +817,7 @@
       "label1": "admin_guide",
       "label2": "",
       "label3": "",
-      "order": 8,
+      "order": 12,
       "isMenu": true
     },
     {
@@ -823,12 +895,12 @@
       "order": 4
     },
     {
-      "id": "integrate_with_llama.md",
+      "id": "integrate_with_llamaindex.md",
       "title": "LlamaIndex",
       "label1": "integrations",
       "label2": "",
       "label3": "",
-      "order": 5
+      "order": 4
     },
     {
       "id": "integrate_with_langchain.md",
@@ -837,6 +909,30 @@
       "label2": "",
       "label3": "",
       "order": 6
+    },
+    {
+      "id": "integrate_with_haystack.md",
+      "title": "HayStack",
+      "label1": "integrations",
+      "label2": "",
+      "label3": "",
+      "order": 7
+    },
+    {
+      "id": "integrate_with_voxel51.md",
+      "title": "FiftyOne",
+      "label1": "integrations",
+      "label2": "",
+      "label3": "",
+      "order":  7
+    },
+    {
+      "id": "integrate_with_spark.md",
+      "title": "Spark",
+      "label1": "integrations",
+      "label2": "",
+      "label3": "",
+      "order": 8
     },
     {
       "id": "benchmark.md",
@@ -921,7 +1017,7 @@
     },
     {
       "id": "milvus_attu",
-      "title": "Attu",
+      "title": "Attu(Milvus GUI)",
       "label1": "tools",
       "label2": "",
       "label3": "",
@@ -993,6 +1089,15 @@
       "label3": "",
       "order": 5,
       "outLink": "https://milvus.io/tools/sizing/"
+    },
+    {
+      "id": "milvus_cdc",
+      "title": "Milvus CDC",
+      "label1": "tools",
+      "label2": "",
+      "label3": "",
+      "order": 6,
+      "outLink": "https://github.com/zilliztech/milvus-cdc"
     },
     {
       "id": "reference",
@@ -1086,6 +1191,13 @@
       "order": 5
     },
     {
+      "id": "mmap.md",
+      "title": "MMap-enabled Queries",
+      "label1": "reference",
+      "label2": "",
+      "order": 5
+    },
+    {
       "id": "knowhere.md",
       "title": "Knowhere",
       "label1": "reference",
@@ -1108,7 +1220,14 @@
     },
     {
       "id": "json_data_type.md",
-      "title": "JSON",
+      "title": "Use JSON Field",
+      "label1": "reference",
+      "label2": "",
+      "order": 9
+    },
+    {
+      "id": "array_data_type.md",
+      "title": "Use Array Field",
       "label1": "reference",
       "label2": "",
       "order": 9

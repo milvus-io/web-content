@@ -176,6 +176,14 @@
       "order": 3
     },
     {
+      "id": "install-csharp.md",
+      "title": "C# SDK",
+      "label1": "getstarted",
+      "label2": "install_sdks",
+      "label3": "",
+      "order": 3
+    },
+    {
       "id": "milvus_lite.md",
       "title": "With Milvus Lite",
       "label1": "getstarted",

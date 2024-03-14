@@ -1,6 +1,6 @@
 ---
 id: integrate_with_langchain.md
-summary: This page goes over how to search for the best answer to questions using Milvus as the Vector Database and LlamaIndex as the embedding system.
+summary: This page goes over how to search for the best answer to questions using Milvus as the Vector Database and LangChain as the embedding system.
 ---
 
 # Question Answering over Documents with Milvus and LangChain
@@ -20,14 +20,24 @@ Code snippets on this page require **pymilvus** and **langchain** installed. Ope
 In this section, you need to set up all parameters to be used in the following code snippets.
 
 ```python
-from os import environ
+import os
 
-MILVUS_HOST = "localhost"
-MILVUS_PORT = "19530"
-OPENAI_API_KEY = "sk-******" # example: "sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+# 1. Set up the name of the collection to be created.
+COLLECTION_NAME = 'doc_qa_db'
 
-## Set up environment variables
-environ["OPENAI_API_KEY"] = OPENAI_API_KEY
+# 2. Set up the dimension of the embeddings.
+DIMENSION = 768
+
+# 3. Set up the cohere api key
+OPENAI_API_KEY = "YOUR_OPENAI_API_KEY"
+os.environ["OPENAI_API_KEY"] = OPENAI_API_KEY
+
+# 4. Set up the connection parameters for your Zilliz Cloud cluster.
+URI = 'YOUR_CLUSTER_ENDPOINT'
+
+# 5. Set up the token for your Zilliz Cloud cluster.
+# You can either use an API key or a set of cluster username and password joined by a colon.
+TOKEN = 'YOUR_CLUSTER_TOKEN'
 ```
 
 ## Prepare data
@@ -40,81 +50,118 @@ Before you dive in, you should finish the following steps:
 
 ```python
 from langchain.embeddings.openai import OpenAIEmbeddings
-from langchain.vectorstores import Milvus
+from langchain.vectorstores.zilliz import Zilliz
 from langchain.document_loaders import WebBaseLoader
-from langchain.text_splitter import CharacterTextSplitter
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain.chat_models import ChatOpenAI
+from langchain.vectorstores.milvus import Milvus
+from langchain.schema.runnable import RunnablePassthrough
+from langchain.prompts import PromptTemplate
 
 # Use the WebBaseLoader to load specified web pages into documents
 loader = WebBaseLoader([
-    "https://milvus.io/docs/overview.md",
+    'https://milvus.io/docs/overview.md',
+    'https://milvus.io/docs/release_notes.md',
+    'https://milvus.io/docs/architecture_overview.md',
+    'https://milvus.io/docs/four_layers.md',
+    'https://milvus.io/docs/main_components.md',
+    'https://milvus.io/docs/data_processing.md',
+    'https://milvus.io/docs/bitset.md',
+    'https://milvus.io/docs/boolean.md',
+    'https://milvus.io/docs/consistency.md',
+    'https://milvus.io/docs/coordinator_ha.md',
+    'https://milvus.io/docs/replica.md',
+    'https://milvus.io/docs/knowhere.md',
+    'https://milvus.io/docs/schema.md',
+    'https://milvus.io/docs/dynamic_schema.md',
+    'https://milvus.io/docs/json_data_type.md',
+    'https://milvus.io/docs/metric.md',
+    'https://milvus.io/docs/partition_key.md',
+    'https://milvus.io/docs/multi_tenancy.md',
+    'https://milvus.io/docs/timestamp.md',
+    'https://milvus.io/docs/users_and_roles.md',
+    'https://milvus.io/docs/index.md',
+    'https://milvus.io/docs/disk_index.md',
+    'https://milvus.io/docs/scalar_index.md',
+    'https://milvus.io/docs/performance_faq.md',
+    'https://milvus.io/docs/product_faq.md',
+    'https://milvus.io/docs/operational_faq.md',
+    'https://milvus.io/docs/troubleshooting.md',
 ])
 
 docs = loader.load()
 
 # Split the documents into smaller chunks
-text_splitter = CharacterTextSplitter(chunk_size=1024, chunk_overlap=0)
-docs = text_splitter.split_documents(docs)
+text_splitter = RecursiveCharacterTextSplitter(chunk_size=1024, chunk_overlap=0)
+all_splits = text_splitter.split_documents(docs)
 ```
 
-The output of the text splitter would be similar to the following:
-
-```shell
-Created a chunk of size 1745, which is longer than the specified 1024
-Created a chunk of size 1278, which is longer than the specified 1024
-```
-
-Once the documents are ready, we need to convert them into vector embeddings and save them into the vector store.
+After preparing the documents, the next step is to convert them into vector embeddings and save them in the vector store.
 
 ```python
-# Set up an embedding model to covert document chunks into vector embeddings.
-embeddings = OpenAIEmbeddings(model="ada")
+embeddings = OpenAIEmbeddings()
+connection_args = { 'uri': URI, 'token': TOKEN }
 
-# Set up a vector store used to save the vector embeddings. Here we use Milvus as the vector store.
-vector_store = Milvus.from_documents(
-    docs,
+vector_store = Milvus(
+    embedding_function=embeddings,
+    connection_args=connection_args,
+    collection_name=COLLECTION_NAME,
+    drop_old=True,
+).from_documents(
+    all_splits,
     embedding=embeddings,
-    connection_args={"host": MILVUS_HOST, "port": MILVUS_PORT}
+    collection_name=COLLECTION_NAME,
+    connection_args=connection_args,
 )
 ```
 
-You can try text-to-text similarity searches using the following code snippet. The results returned will be the most relevant text in the document to the queries.
+To perform text-to-text similarity searches, use the following code snippet. The results will return the most relevant text in the document to the queries.
 
 ```python
-query = "What is milvus?"
+query = "What are the main components of Milvus?"
 docs = vector_store.similarity_search(query)
 
-print(docs)
+print(len(docs))
 ```
 
 The output should be similar to the following:
 
 ```shell
-[Document(page_content='Milvus workflow.', metadata={'source': 'https://milvus.io/docs/overview.md', 'title': 'Introduction Milvus documentation', 'description': 'Milvus is an open-source vector database designed specifically for AI application development, embeddings similarity search, and MLOps v2.2.x.', 'language': 'en'}), Document(page_content="Installat...rved.", metadata={'source': 'https://milvus.io/docs/overview.md', 'title': 'Introduction Milvus documentation', 'description': 'Milvus is an open-source vector database designed specifically for AI application development, embeddings similarity search, and MLOps v2.2.x.', 'language': 'en'}), Document(page_content='Introduction ... Milvus is able to analyze the correlation between two vectors by calculating their similarity distance. If the two embedding vectors are very similar, it means that the original data sources are similar as well.', metadata={'source': 'https://milvus.io/docs/overview.md', 'title': 'Introduction Milvus documentation', 'description': 'Milvus is an open-source vector database designed specifically for AI application development, embeddings similarity search, and MLOps v2.2.x.', 'language': 'en'}), Document(page_content="Key concepts\n...search algorithms are used to accelerate the searching process. If the two embedding vectors are very similar, it means that the original data sources are similar as well.\nWhy Milvus?", metadata={'source': 'https://milvus.io/docs/overview.md', 'title': 'Introduction Milvus documentation', 'description': 'Milvus is an open-source vector database designed specifically for AI application development, embeddings similarity search, and MLOps v2.2.x.', 'language': 'en'})]
+4
 ```
 
 ## Ask your question
 
-Once the documents are ready to serve, you can set up a chain to include them in a prompt so that LLM will use the docs as a reference when preparing answers.
+After preparing the documents, you can set up a chain to include them in a prompt. This will allow LLM to use the docs as a reference when preparing answers.
 
-Note that LangChain offers four chain types for question-answering with sources, namely **stuff**, **map_reduce**, **refine**, and **map-rerank**. In simple terms, a **stuff** chain will include the document as a whole, which is only suitable for small documents. As most LLMs impose restrictions on the maximum number of tokens a prompt can contain, it is recommended to use the other three types of chains. These chains split the input document into smaller pieces and feed them to the LLM in different ways. For details, refer to [Index-related chains](https://docs.langchain.com/docs/components/chains/index_related_chains) in LangChain documents.
-
-The following code snippet sets up a chain using OpenAI as the LLM and **map-reduce** the chain type.
+The following code snippet sets up a RAG chain using OpenAI as the LLM and a RAG prompt.
 
 ```python
-from langchain.chains.qa_with_sources import load_qa_with_sources_chain
-from langchain.llms import OpenAI
+llm = ChatOpenAI(model_name="gpt-3.5-turbo", temperature=0) 
+retriever = vector_store.as_retriever()
 
-chain = load_qa_with_sources_chain(OpenAI(temperature=0), chain_type="map_reduce", return_intermediate_steps=True)
-query = "What is Milvus?"
-chain({"input_documents": docs, "question": query}, return_only_outputs=True)
+template = """Use the following pieces of context to answer the question at the end. 
+If you don't know the answer, just say that you don't know, don't try to make up an answer. 
+Use three sentences maximum and keep the answer as concise as possible. 
+Always say "thanks for asking!" at the end of the answer. 
+{context}
+Question: {question}
+Helpful Answer:"""
+rag_prompt = PromptTemplate.from_template(template)
+
+rag_chain = (
+    {"context": retriever, "question": RunnablePassthrough()}
+    | rag_prompt
+    | llm
+)
+
+print(rag_chain.invoke("Explain IVF_FLAT in Milvus."))
 ```
 
-The returned results include both the **intermediate_steps** and **output_text**. The former indicates what documents it refers to during the search, and the latter is the final answer to the question.
+The returned results include a content argument as the output_text.
 
-```shell
-{'intermediate_steps': [' No relevant text.',
-  ' What is Milvus vector database?',
-  '\nWhat is Milvus? Milvus was created in 2019 with a singular goal: store, index, and manage massive embedding vectors generated by deep neural networks and other machine learning (ML) models. As a database specifically designed to handle queries over input vectors, it is capable of indexing vectors on a trillion scale. Unlike existing relational databases which mainly deal with structured data following a pre-defined pattern, Milvus is designed from the bottom-up to handle embedding vectors converted from unstructured data.',
-  ' Milvus is a vector database and similarity search platform that enables users to quickly and accurately search for semantically similar vectors in an unstructured data repository. It uses modern embedding techniques to convert unstructured data to embedding vectors, and approximate nearest neighbor (ANN) search algorithms to accelerate the searching process.'],
- 'output_text': ' Milvus is a vector database and similarity search platform that enables users to quickly and accurately search for semantically similar vectors in an unstructured data repository. It uses modern embedding techniques to convert unstructured data to embedding vectors, and approximate nearest neighbor (ANN) search algorithms to accelerate the searching process.\nSOURCES: https://milvus.io/docs/overview.md'}
+```python
+# Output
+#
+# content='IVF_FLAT is an index mechanism in Milvus that divides a vector space into clusters. It compares the distances between a target vector and the centers of all clusters to find the nearest clusters. Then, it compares the distances between the target vector and the vectors in the selected clusters to find the nearest vectors. IVF_FLAT demonstrates performance advantages when the number of vectors exceeds the value of nlist. Thanks for asking!'
 ```

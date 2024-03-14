@@ -14,13 +14,13 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Stats Docs Words
-        env:
-          MSERVICE_URL: ${{secrets.MSERVICE_URL}}
-        run: |
-          mv word-count.md word-count.js
-          yarn
-          node word-count.js
+      # - name: Stats Docs Words
+      #   env:
+      #     MSERVICE_URL: ${{secrets.MSERVICE_URL}}
+      #   run: |
+      #     mv word-count.md word-count.js
+      #     yarn
+      #     node word-count.js
 
       - name: Trigger milvus.io
         run: |

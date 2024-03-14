@@ -42,6 +42,13 @@ JsonArrayDefs = "json_contains" | "JSON_CONTAINS"
            | "json_contains_any" | "JSON_CONTAINS_ANY";
 JsonExpr =  Constant | ConstantArray | STRING | BOOLEAN;
 JsonArray = "[" JsonExpr { "," JsonExpr } "]";
+ArrayOps = ArrayDefs "(" IDENTIFIER "," ArrayExpr | Array ")";
+ArrayDefs = "array_contains" | "ARRAY_CONTAINS" 
+           | "array_contains_all" | "ARRAY_CONTAINS_ALL" 
+           | "array_contains_any" | "ARRAY_CONTAINS_ANY"
+           | "array_length"       | "ARRAY_LENGTH";
+ArrayExpr =  Constant | ConstantArray | STRING | BOOLEAN;
+Array = "[" ArrayExpr { "," ArrayExpr } "]";
 ```
 
 The following table lists the description of each symbol mentioned in the above Boolean expression rules.
@@ -77,6 +84,7 @@ The following table lists the description of each symbol mentioned in the above 
 | Expr   | Expr, an abbreviation meaning expression, can be LogicalExpr or NIL. |
 | MatchOp   | A MatchOp, namely a match operator, compares a string to a string constant or a string prefix constant. |
 | JsonArrayOp | A JsonOp, namely a JSON operator, checks whether the specified identifier contains the specified elements. |
+| ArrayOp | An ArrayOp, namely an array operator, checks whether the specified identifier contains the specified elements. |
 
 ## Operators
 
@@ -119,21 +127,25 @@ Relational operators use symbols to check for equality, inequality, or relative 
 
 The following table lists the precedence and associativity of operators. Operators are listed top to bottom, in descending precedence.
 
-| Precedence | Operator                            | Description   | Associativity |
-|------------|-------------------------------------|---------------|---------------|
-| 1          | + -                                 | UnaryArithOp  | Left-to-right |
-| 2          | not                                 | UnaryLogicOp  | Right-to-left |
-| 3          | **                                  | BinaryArithOp | Left-to-right |
-| 4          | * / %                               | BinaryArithOp | Left-to-right |
-| 5          | + -                                 | BinaryArithOp | Left-to-right |
-| 6          | < <= > >=                           | CmpOp         | Left-to-right |
-| 7          | == !=                               | CmpOp         | Left-to-right |
-| 8          | like LIKE                           | MatchOp       | Left-to-right |
-| 9          | json_contains JSON_CONTAINS         | JsonArrayOp   | Left-to-right |
-| 10         | json_contains_all JSON_CONTAINS_ALL | JsonArrayOp   | Left-to-right |
-| 11         | json_contains_any JSON_CONTAINS_ANY | JsonArrayOp   | Left-to-right |
-| 12         | && and                              | BinaryLogicOp | Left-to-right |
-| 13         | \|\| or                             | BinaryLogicOp | Left-to-right |
+| Precedence | Operator                              | Description   | Associativity |
+|------------|---------------------------------------|---------------|---------------|
+| 1          | + -                                   | UnaryArithOp  | Left-to-right |
+| 2          | not                                   | UnaryLogicOp  | Right-to-left |
+| 3          | **                                    | BinaryArithOp | Left-to-right |
+| 4          | * / %                                 | BinaryArithOp | Left-to-right |
+| 5          | + -                                   | BinaryArithOp | Left-to-right |
+| 6          | < <= > >=                             | CmpOp         | Left-to-right |
+| 7          | == !=                                 | CmpOp         | Left-to-right |
+| 8          | like LIKE                             | MatchOp       | Left-to-right |
+| 9          | json_contains JSON_CONTAINS           | JsonArrayOp   | Left-to-right |
+| 9          | array_contains ARRAY_CONTAINS         | ArrayOp       | Left-to-right |
+| 10         | json_contains_all JSON_CONTAINS_ALL   | JsonArrayOp   | Left-to-right |
+| 10         | array_contains_all ARRAY_CONTAINS_ALL | ArrayOp       | Left-to-right |
+| 11         | json_contains_any JSON_CONTAINS_ANY   | JsonArrayOp   | Left-to-right |
+| 11         | array_contains_any ARRAY_CONTAINS_ANY | ArrayOp       | Left-to-right |
+| 12         | array_length  ARRAY_LENGTH            | ArrayOp       | Left-to-right |
+| 13         | && and                                | BinaryLogicOp | Left-to-right |
+| 14         | \|\| or                               | BinaryLogicOp | Left-to-right |
 
 Expressions are normally evaluated from left to right. Complex expressions are evaluated one at a time. The order in which the expressions are evaluated is determined by the precedence of the operators used.
 
@@ -261,6 +273,47 @@ VARCHAR like "prefix%"
     json_contains_any(x, [6,9]) # ==> false
     ```
 
+9. ArrayOp
+
+- `ARRAY_CONTAINS(identifier, ArrayExpr)`
+
+    If the array expression of an `ARRAY_CONTAINS` (the second argument) statement is a list, the identifier (the first argument) should be list of list. Otherwise, the statement always evaluates to False.
+
+    ```python
+    # 'int_array': [1,2,3]
+    array_contains(int_array, 1) # ==> true
+    array_contains(int_array, "a") # ==> false
+    ```
+
+- `ARRAY_CONTAINS_ALL(identifier, ArrayExpr)`
+
+    The array expression in an `ARRAY_CONTAINS_ALL` statement should always be a list.
+
+    ```python
+    # "int_array": [1,2,3,4,5,7,8]
+    array_contains_all(int_array, [1,2,8]) # ==> true
+    array_contains_all(int_array, [4,5,6]) # ==> false 6 is not exists
+    ```
+
+- `ARRAY_CONTAINS_ANY(identifier, ArrayExpr)`
+
+    The array expression in an `ARRAY_CONTAINS_ANY` statement should always be a list. Otherwise, it acts the same as `ARRAY_CONTAINS`.
+
+    ```python
+    # "int_array": [1,2,3,4,5,7,8]
+    array_contains_any(int_array, [1,2,8]) # ==> true
+    array_contains_any(int_array, [4,5,6]) # ==> true
+    array_contains_any(int_array, [6,9]) # ==> false
+    ```
+
+- `ARRAY_LENGTH(identifier)`
+
+    Check the number of elements in an array.
+
+    ```python
+    # "int_array": [1,2,3,4,5,7,8]
+    array_length(int_array) # ==> 7
+    ```
 
 ## What's next
 

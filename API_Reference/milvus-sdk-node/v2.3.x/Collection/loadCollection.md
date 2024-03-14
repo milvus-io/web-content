@@ -1,6 +1,6 @@
 # loadCollection()
 
-By utilizing this method, you can load a specified collection into memory, which enables you to perform searches or queries on the data contained within it.
+By utilizing this method, you can load a specified collection into memory asynchronously, which enables you to perform searches or queries on the data contained within it.
 
 ## Example
 

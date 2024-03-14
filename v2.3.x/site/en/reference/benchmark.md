@@ -20,7 +20,7 @@ This report shows the major test results of Milvus 2.2.0. It aims to provide a p
       <li>Billion-scale similarity search with little performance degradation</li>
       <li>Linear scalability when using multiple replicas</li>
     </ul>
-    <p>For details, welcome referring to <a href="https://zilliz.com/resources/whitepaper/milvus-performance-benchmark">this whitepaper</a> and <a href="https://github.com/zilliztech/vectordb-benchmark">related benchmark test code</a>. </p>
+    <p>For details, welcome referring to <a href="https://zilliz.com/resources/whitepaper/milvus-performance-benchmark">this whitepaper</a> and <a href="https://github.com/zilliztech/VectorDBBench">related benchmark test code</a>. </p>
   </div>
 </div>
 

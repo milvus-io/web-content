@@ -21,8 +21,9 @@ Specify an alias for a collection.
 <div class="multipleCode">
   <a href="#python">Python </a>
   <a href="#java">Java</a>
-  <a href="#go">GO</a>
+  <a href="#go">Go</a>
   <a href="#javascript">Node.js</a>
+  <a href="#csharp">C#</a>
 </div>
 
 ```python
@@ -52,28 +53,10 @@ milvusClient.createAlias(
     .build()
 );
 ```
-<div style="display: none">
 
-```shell
-create alias -c book -a publication
+```csharp
+await milvusClient.CreateAliasAsync("book", "publication");
 ```
-
-```curl
-curl -X 'POST' \
-  'http://localhost:9091/api/v1/alias' \
-  -H 'accept: application/json' \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "collection_name": "book",
-    "alias":"publication"
-  }'
-```
-```curl
-# Output:
-{}
-```
-
-</div>
 
 <table class="language-python">
 	<thead>
@@ -156,7 +139,7 @@ curl -X 'POST' \
     </tbody>
 </table>
 
-<table class="language-curl" style="display: none">
+<table class="language-csharp">
 	<thead>
         <tr>
             <th>Parameter</th>
@@ -165,7 +148,7 @@ curl -X 'POST' \
 	</thead>
 	<tbody>
         <tr>
-            <td><code>collection_name</code></td>
+            <td><code>collectionName</code></td>
             <td>Name of the collection to create alias on.</td>
         </tr>
         <tr>
@@ -182,8 +165,9 @@ Drop a specified alias.
 <div class="multipleCode">
   <a href="#python">Python </a>
   <a href="#java">Java</a>
-  <a href="#go">GO</a>
+  <a href="#go">Go</a>
   <a href="#javascript">Node.js</a>
+  <a href="#csharp">C#</a>
 </div>
 
 ```python
@@ -198,7 +182,7 @@ await milvusClient.dropAlias({
 ```
 
 ```go
-// This function is under active development on the GO client.
+client.DropAlias(context.Background(), "publication")
 ```
 
 ```java
@@ -209,27 +193,9 @@ milvusClient.dropAlias(
 );
 ```
 
-<div style="display: none">
-
-```shell
-delete alias -a publication
+```csharp
+await milvusClient.DropAliasAsync("publication");
 ```
-
-```curl
-curl -X 'DELETE' \
-  'http://localhost:9091/api/v1/alias' \
-  -H 'accept: application/json' \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "alias":"publication"
-  }'
-```
-```curl
-# Output:
-{}
-```
-
-</div>
 
 <table class="language-python">
 	<thead>
@@ -277,22 +243,22 @@ curl -X 'DELETE' \
 	</tbody>
 </table>
 
-<table class="language-shell" style="display:none">
-    <thead>
+<table class="language-go">
+	<thead>
         <tr>
-            <th>Option</th>
+            <th>Parameter</th>
             <th>Description</th>
         </tr>
-    </thead>
-    <tbody>
+	</thead>
+	<tbody>
         <tr>
-            <td>-a</td>
+            <td><code>alias</code></td>
             <td>Collection alias to drop.</td>
         </tr>
-    </tbody>
+	</tbody>
 </table>
 
-<table class="language-curl" style="display: none">
+<table class="language-csharp">
 	<thead>
         <tr>
             <th>Parameter</th>
@@ -314,8 +280,9 @@ Alter an existing alias to another collection. The following example is based on
 <div class="multipleCode">
   <a href="#python">Python </a>
   <a href="#java">Java</a>
-  <a href="#go">GO</a>
+  <a href="#go">Go</a>
   <a href="#javascript">Node.js</a>
+  <a href="#csharp">C#</a>
 </div>
 
 ```python
@@ -334,7 +301,7 @@ await milvusClient.alterAlias({
 ```
 
 ```go
-// This function is under active development on the GO client.
+client.AlterAlias(context.Background(), "book", "publication")
 ```
 
 ```java
@@ -346,31 +313,9 @@ milvusClient.alterAlias(
 );
 ```
 
-<div style="display: none">
-
-```shell
-create alias -c book -A -a publication
+```csharp
+await milvusClient.AlterAliasAsync("book", "publication");
 ```
-
-```curl
-curl -X 'PATCH' \
-  'http://localhost:9091/api/v1/alias' \
-  -H 'accept: application/json' \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "collection_name": "book",
-    "alias":"publication"
-  }'
-```
-
-<div class="language-curl">
-Output:
-
-```json
-{}
-```
-
-</div>
 
 </div>
 
@@ -384,11 +329,11 @@ Output:
 	<tbody>
         <tr>
             <td><code>collection_name</code></td>
-            <td>Name of the collection to alter alias to.</td>
+            <td>Name of the collection.</td>
         </tr>
         <tr>
             <td><code>alias</code></td>
-            <td>Collection alias to alter.</td>
+            <td>New alias</td>
         </tr>
 	</tbody>
 </table>
@@ -404,11 +349,11 @@ Output:
 	<tbody>
         <tr>
             <td><code>collection_name</code></td>
-            <td>Name of the collection to alter alias to.</td>
+            <td>Name of the collection</td>
         </tr>
         <tr>
             <td><code>alias</code></td>
-            <td>Collection alias to alter.</td>
+            <td>New alias</td>
         </tr>
 	</tbody>
 </table>
@@ -423,16 +368,16 @@ Output:
 	<tbody>
         <tr>
             <td><code>CollectionName</code></td>
-            <td>Name of the collection to alter alias to.</td>
+            <td>Name of the collection.</td>
         </tr>
         <tr>
             <td><code>Alias</code></td>
-            <td>Collection alias to alter.</td>
+            <td>New alias.</td>
         </tr>
 	</tbody>
 </table>
 
-<table class="language-shell" style="display: none">
+<table class="language-go">
     <thead>
         <tr>
             <th>Option</th>
@@ -441,21 +386,17 @@ Output:
     </thead>
     <tbody>
         <tr>
-            <td>-c</td>
-            <td>Name of the collection to alter alias to.</td>
+            <td>collName</td>
+            <td>Name of the collection.</td>
         </tr>
         <tr>
-            <td>-a</td>
-            <td>Collection alias to alter.</td>
-        </tr>
-        <tr>
-            <td>-A</td>
-            <td>Flag to transfer the alias to a specified collection.</td>
+            <td>alias</td>
+            <td>New Alias</td>
         </tr>
     </tbody>
 </table>
 
-<table class="language-curl" style="display: none">
+<table class="language-csharp">
 	<thead>
         <tr>
             <th>Parameter</th>
@@ -464,12 +405,12 @@ Output:
 	</thead>
 	<tbody>
         <tr>
-            <td><code>collection_name</code></td>
-            <td>Name of the collection to alter alias to.</td>
+            <td><code>collectionName</code></td>
+            <td>Name of the collection</td>
         </tr>
         <tr>
             <td><code>alias</code></td>
-            <td>Collection alias to alter.</td>
+            <td>New Alias</td>
         </tr>
 	</tbody>
 </table>

@@ -61,7 +61,7 @@ After creating a role, you can:
 - Check if a role exists.
 
 ```
-role.is_exist("roleA")
+role.is_exist()
 ```
 
 - List all roles.

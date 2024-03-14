@@ -114,6 +114,8 @@ fields = [
   - FLOAT: numpy.float32
   - DOUBLE: numpy.double
   - VARCHAR: VARCHAR
+  - JSON: [JSON](json_data_type.md)
+  - Array: Array(array_data_type.md)
 - Vector field supports:
   - BINARY_VECTOR: Binary vector
   - FLOAT_VECTOR: Float vector

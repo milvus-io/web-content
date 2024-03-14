@@ -6,6 +6,104 @@ summary: Milvus Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.2.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## 2.2.16
+
+Release date: Nov 27, 2023
+
+| Milvus version | Python SDK version | Java SDK version | Go SDK version | Node.js SDK version |
+| -------------- | ------------------ | ---------------- | -------------- | ------------------- |
+| 2.2.16         | 2.2.17             | 2.2.15           | 2.2.8         | 2.2.24              |
+
+Milvus 2.2.16 represents a minor patch release following Milvus 2.2.15. This update primarily concentrates on bolstering system stability, enhancing fault recovery speed, and addressing various identified issues. Notably, the Knowhere version has been updated in this release, leading to quicker loading of DiskAnn indexes.
+
+For an optimal experience, we highly recommend all users currently on the 2.2.0 series to upgrade to this version before considering a move to 2.3.
+
+### Bug Fixes
+
+- Corrected the docker-compose etcd health check command ([27980](https://github.com/milvus-io/milvus/pull/27980)).
+- Completed the cleanup of remaining meta information after dropping a Collection ([28500](https://github.com/milvus-io/milvus/pull/28500)).
+- Rectified the issue causing panic during the execution of stop logic in query coordination ([28543](https://github.com/milvus-io/milvus/pull/28543)).
+- Resolved the problem of the cmux server failing to gracefully shut down ([28384](https://github.com/milvus-io/milvus/pull/28384)).
+- Eliminated the reference counting logic related to the query shard service to prevent potential leaks ([28547](https://github.com/milvus-io/milvus/pull/28547)).
+- Removed the logic of polling collection information from RootCoord during the restart process of QueryCoord to prevent startup failures ([28607](https://github.com/milvus-io/milvus/pull/28607)).
+- Fixed parsing errors in expressions containing mixed single and double quotations ([28417](https://github.com/milvus-io/milvus/pull/28417)).
+- Addressed DataNode panic during flushing delete buffer ([28710](https://github.com/milvus-io/milvus/pull/28710)).
+
+### Enhancements
+
+- Updated Knowhere to version 1.3.20 to accelerate the loading process ([28658](https://github.com/milvus-io/milvus/pull/28658)).
+- Made etcdkv request timeout configurable ([28664](https://github.com/milvus-io/milvus/pull/28664)).
+- Increased the timeout duration for QueryCoord to probe the query nodes via gRPC to 2 seconds ([28647](https://github.com/milvus-io/milvus/pull/28647)).
+- Bumped milvus-proto/go-api to version 2.2.16 ([28708](https://github.com/milvus-io/milvus/pull/28708)).
+
+## 2.2.15
+
+Release date: Nov 14, 2023
+
+| Milvus version | Python SDK version | Java SDK version | Go SDK version | Node.js SDK version |
+| -------------- | ------------------ | ---------------- | -------------- | ------------------- |
+| 2.2.15         | 2.2.17             | 2.2.15           | 2.2.8         | 2.2.24              |
+
+Milvus 2.2.15, a bugfix version of the Milvus 2.2.x series, has introduced significant improvements and bug fixes. This version enhanced the `bulkinsert` functionality to support `partitionkey` and the new JSON list format. Additionally, 2.2.15 has substantially improved the rolling upgrade process to 2.3.3 and resolved many critical issues. We strongly recommend all 2.2.15 users upgrade to this version before moving to 2.3.
+
+### Incompatible Update
+
+- Removed MySQL metastore support ([#26634](https://github.com/milvus-io/milvus/pull/26634)).
+
+### Features
+
+- Enabled `bulkinsert` of binlog data with `partitionkey` ([#27336](https://github.com/milvus-io/milvus/pull/27336)).
+- Added support for `bulkinsert` with pure list JSON ([#28127](https://github.com/milvus-io/milvus/pull/28127)).
+
+### Improvements
+
+- Added `-g` flag for compiling with debug information ([#26698](https://github.com/milvus-io/milvus/pull/26698)).
+- Implemented a workaround to fix `ChannelManager` holding mutex for too long ([#26870](https://github.com/milvus-io/milvus/pull/26870), [#26874](https://github.com/milvus-io/milvus/pull/26874)).
+- Reduced the number of goroutines resulting from `GetIndexInfos` ([#27547](https://github.com/milvus-io/milvus/pull/27547)).
+- Eliminated the recollection of segment stats during `datacoord` startup ([#27562](https://github.com/milvus-io/milvus/pull/27562)).
+- Removed `flush` from the DDL queue ([#27691](https://github.com/milvus-io/milvus/pull/27691)).
+- Decreased the write lock scope in channel manager ([#27824](https://github.com/milvus-io/milvus/pull/27824)).
+- Reduced the number of parallel tasks for compaction ([#27900](https://github.com/milvus-io/milvus/pull/27900)).
+- Refined RPC call in `unwatch drop channel` ([#27884](https://github.com/milvus-io/milvus/pull/27884)).
+- Enhanced `bulkinsert` to read `varchar` in batches ([#26198](https://github.com/milvus-io/milvus/pull/26198)).
+- Optimized Milvus rolling upgrade process, including:
+  - Refined standalone components' stop order ([#26742](https://github.com/milvus-io/milvus/pull/26742), [#26778](https://github.com/milvus-io/milvus/pull/26778)).
+  - Improved RPC client retry mechanism ([#26797](https://github.com/milvus-io/milvus/pull/26797)).
+  - Handled errors from new `RootCoord` for `DescribeCollection` ([#27029](https://github.com/milvus-io/milvus/pull/27029)).
+  - Added a stop hook for session cleanup ([#27565](https://github.com/milvus-io/milvus/pull/27565)).
+  - Accelerated shard leader cache update frequency ([#27641](https://github.com/milvus-io/milvus/pull/27641)).
+  - Disabled retryable error logic in search/query operations ([#27661](https://github.com/milvus-io/milvus/pull/27661)).
+  - Supported signal reception from parent process ([#27755](https://github.com/milvus-io/milvus/pull/27755)).
+  - Checked data sync service number during graceful stop ([#27789](https://github.com/milvus-io/milvus/pull/27789)).
+  - Fixed query shard service leak ([#27848](https://github.com/milvus-io/milvus/pull/27848)).
+  - Refined Proxy stop process ([#27910](https://github.com/milvus-io/milvus/pull/27910)).
+  - Fixed deletion of session key with prefix ([#28261](https://github.com/milvus-io/milvus/pull/28261)).
+  - Addressed unretryable errors ([#27955](https://github.com/milvus-io/milvus/pull/27955)).
+  - Refined stop order for components ([#28017](https://github.com/milvus-io/milvus/pull/28017)).
+  - Added timeout for graceful stop ([#27326](https://github.com/milvus-io/milvus/pull/27326), [#28226](https://github.com/milvus-io/milvus/pull/28226)).
+  - Implemented fast fail when querynode is not ready ([#28204](https://github.com/milvus-io/milvus/pull/28204)).
+
+### Bug Fixes
+
+- Resolved `CollectionNotFound` error during `describe rg` ([#26569](https://github.com/milvus-io/milvus/pull/26569)).
+- Fixed issue where timeout tasks never released the queue ([#26594](https://github.com/milvus-io/milvus/pull/26594)).
+- Refined signal handler for the entire Milvus role lifetime ([#26642](https://github.com/milvus-io/milvus/pull/26642), [#26702](https://github.com/milvus-io/milvus/pull/26702)).
+- Addressed panic caused by non-nil component pointer to `component` interface ([#27079](https://github.com/milvus-io/milvus/pull/27079)).
+- Enhanced garbage collector to fetch meta after listing from storage ([#27205](https://github.com/milvus-io/milvus/pull/27205)).
+- Fixed Kafka consumer connection leak ([#27223](https://github.com/milvus-io/milvus/pull/27223)).
+- Reduced RPC size for `GetRecoveryInfoV2` ([#27484](https://github.com/milvus-io/milvus/pull/27484)).
+- Resolved concurrent parsing expression issues with strings ([#26721](https://github.com/milvus-io/milvus/pull/26721), [#27539](https://github.com/milvus-io/milvus/pull/27539)).
+- Fixed query shard `inUse` leak ([#27765](https://github.com/milvus-io/milvus/pull/27765)).
+- Corrected `rootPath` issue when querynode cleaned local directory ([#28314](https://github.com/milvus-io/milvus/pull/28314)).
+- Ensured compatibility with sync target version ([#28290](https://github.com/milvus-io/milvus/pull/28290)).
+- Fixed release of query shard when releasing growing segment ([#28040](https://github.com/milvus-io/milvus/pull/28040)).
+- Addressed slow response in `flushManager.isFull` ([#28141](https://github.com/milvus-io/milvus/pull/28141), [#28149](https://github.com/milvus-io/milvus/pull/28149)).
+- Implemented check for length before comparing strings ([#28111](https://github.com/milvus-io/milvus/pull/28111)).
+- Resolved panic during close delete flow graph ([#28202](https://github.com/milvus-io/milvus/pull/28202)).
+- Fixed `bulkinsert` bug where segments were compacted after import ([#28200](https://github.com/milvus-io/milvus/pull/28200)).
+- Solved data node panic during save binlog path ([#28243](https://github.com/milvus-io/milvus/pull/28243)).
+- Updated collection target after observer start ([#27962](https://github.com/milvus-io/milvus/pull/27962)).
+
 ## 2.2.14
 
 Release date: Aug 23, 2023
