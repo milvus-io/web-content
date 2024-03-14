@@ -1,0 +1,42 @@
+
+# list_connections()
+
+This operation returns a list of all connection names and handler objects.
+
+## Request Syntax
+
+```python
+list_connections()
+```
+
+__PARAMETERS:__
+
+None
+
+__RETURN TYPE:__
+
+_List_
+
+__RETURNS:__
+
+A list of all connection names and handler objects.
+
+__EXCEPTIONS:__
+
+None
+
+## Examples
+
+```python
+from pymilvus import connections
+
+connections.connect(
+    uri='https://localhost:19530',
+    token='root:Milvus'
+)
+connections.list_connections()
+
+# Output
+# [('default', <pymilvus.client.grpc_handler.GrpcHandler at 0x13743b967>)]
+```
+
