@@ -1,0 +1,73 @@
+
+# flush_all()
+
+This operation seals all segments.
+
+## Request Syntax
+
+```python
+flush_all(
+    using: str = "default",
+    timeout: float | None,
+    **kwargs,
+)
+```
+
+__PARAMETERS:__
+
+- __using__ (_str_) - 
+
+    The alias of the employed connection.
+
+    The default value is __default__, indicating that this operation employs the default connection.
+
+- __timeout__ (_float _|_ None_)  
+
+    The timeout duration for this operation. Setting this to __None__ indicates that this operation timeouts when any response arrives or any error occurs.
+
+__RETURN TYPE:__
+
+_NoneType_
+
+__RETURNS:__
+
+None
+
+__EXCEPTIONS:__
+
+N/A
+
+## Examples
+
+```python
+from pymilvus import (
+    connections, 
+    Collection, 
+    FieldSchema, 
+    CollectionSchema, 
+    DataType, 
+    utility,
+)
+
+# Connect to localhost:19530
+connections.connect()
+
+# Create a collection
+collection = Collection(
+    name="test_collection_flush", 
+    schema=CollectionSchema(fields=[
+        FieldSchema("film_id", DataType.INT64, is_primary=True),
+        FieldSchema("films", dtype=DataType.FLOAT_VECTOR, dim=128)
+    ])
+)
+
+# Insert data
+collection.insert([[1, 2], [[1.0, 2.0], [3.0, 4.0]]])
+
+utility.flush_all(_async=False) # synchronized flush_all
+# or use `future` to flush_all asynchronously
+
+future = utility.flush_all(_async=True)
+future.done() # flush_all finished
+```
+
