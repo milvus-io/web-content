@@ -2,10 +2,12 @@
 id: install_standalone-gpu-docker.md
 label: Docker Compose (GPU)
 related_key: Docker
-order: 0
+order: 1
 group: install_standalone-docker.md
 summary: Learn how to install Milvus GPU standalone with Docker Compose.
 ---
+
+<div class="tab-wrapper"><a href="install_standalone-docker.md" class=''>Docker Compose (CPU)</a><a href="install_standalone-gpu-docker.md" class='active '>Docker Compose (GPU)</a><a href="install_standalone-operator.md" class=''>Milvus Operator</a><a href="install_standalone-helm.md" class=''>Helm</a></div>
 
 # Install Milvus Standalone with Docker Compose (GPU)
 
@@ -33,9 +35,26 @@ $ wget https://github.com/milvus-io/milvus/releases/download/v2.3.0/milvus-stand
 
 You need to make some changes to the environment variables of the standalone service in the YAML file as follows:
 
-- Find `NVIDIA_VISIBLE_DEVICES` and change its value to the ID of the GPU to be assigned to Milvus. You can use `nvidia-smi` shipped with NVIDIA GPU display drivers to find the ID of a specific GPU device, according to [this page](https://developer.nvidia.com/nvidia-system-management-interface). Currently, you can set only one GPU device here.
+- To assign a specific GPU device to Milvus, locate the `deploy.resources.reservations.devices[0].devices_ids` field in the definition of the `standalone` service and replace its value with the ID of the desired GPU. You can use the `nvidia-smi` tool, included with NVIDIA GPU display drivers, to determine the ID of a GPU device. Please note that only one GPU device can be set at this time.
 
-- Find `KNOWHERE_GPU_MEM_POOL_SIZE` and change its value to the size of a shared display memory pool defined in the format of `initialSize;maximumSize`, in which `initialSize` indicates the initial size of the memory pool and `maximumSize` indicates its maximum size. Milvus uses this value to determine the display memory allocated to each process.
+- Add `KNOWHERE_GPU_MEM_POOL_SIZE` in the `environment` section of the `standalone` service and set its value to reflect the size of a shared display memory pool. The format for the size is `initialSize;maximumSize`, where `initialSize` represents the initial size of the memory pool and `maximumSize` represents its maximum size. Both values should be set in MB. Milvus uses this field to allocate display memory to each process.
+
+```yaml
+...
+standalone:
+  environment:
+    ...
+    KNOWHERE_GPU_MEM_POOL_SIZE: 2048:4096
+  ...
+  deploy:
+    resources:
+      reservations:
+        devices:
+          - driver: nvidia
+            capabilities: ["gpu"]
+            device_ids: ["0"]
+...
+```
 
 ## Start Milvus
 

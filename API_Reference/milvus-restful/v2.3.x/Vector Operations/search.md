@@ -59,22 +59,31 @@ curl --request POST \
 ```json
 {
     "collectionName": "string",
+    "dbName": "string",
     "filter": "string",
     "limit": "integer",
     "offset": "integer",
     "outputFields": [],
+    "params": {
+        "radius": "number",
+        "range_filter": "number"
+    },
     "vector": []
 }
 ```
 
 | Parameter        | Description                                                                               |
 |------------------|-------------------------------------------------------------------------------------------|
+| `dbName`  | **string**<br>The name of the database.|
 | `collectionName`  | **string**(required)<br>The name of the collection to which this operation applies.|
 | `filter`  | **string**<br>The filter used to find matches for the search|
 | `limit`  | **integer**<br>The maximum number of entities to return.<br>The sum of this value of that of `offset` should be less than **1024**.<br>The value defaults to **100**.<br>The value ranges from **1** to **100**.|
 | `offset`  | **integer**<br>The number of entities to skip in the search results.<br>The sum of this value and that of `limit` should not be greater than **1024**.<br>The maximum value is **1024**.|
 | `outputFields`  | **array**<br>An array of fields to return along with the search results.|
 | `vector`  | **array (number \[float32\])**(required)<br>The query vector in the form of a list of floating numbers.|
+| `params`  | **object**<br>List of search parameters|
+| `params.radius`  | **number(float64)**<br>The angle where the vector with the least similarity resides.|
+| `params.range_filter`  | **number(float64)**<br>Used in combination to filter vector field values whose similarity to the query vector falls into a specific range.|
 
 ## Response
 

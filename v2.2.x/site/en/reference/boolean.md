@@ -7,7 +7,7 @@ summary: Learn about boolean expression rules in Milvus.
 
 ## Overview
 
-A predicate expression outputs a boolean value. Milvus conducts scalar filtering by searching with predicates. A predicate expression, when evaluated, returns either TRUE or FALSE. View [Python SDK API Reference](/api-reference/pymilvus/v2.3.x/Collection/query().md) for instruction on using predicate expressions.
+A predicate expression outputs a boolean value. Milvus conducts scalar filtering by searching with predicates. A predicate expression, when evaluated, returns either TRUE or FALSE. View [Python SDK API Reference](/api-reference/pymilvus/v2.2.x/Collection/query().md) for instruction on using predicate expressions.
 
 [EBNF](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form) grammar rules describe boolean expressions rules:
 
@@ -36,12 +36,6 @@ CompareExpr = IDENTIFIER CmpOp IDENTIFIER
 CmpOpRestricted = "<" | "<=";
 CmpOp = ">" | ">=" | "<" | "<=" | "=="| "!=";
 MatchOp = "like" | "LIKE";
-JsonArrayOps = JsonDefs "(" IDENTIFIER "," JsonExpr | JsonArray ")";
-JsonArrayDefs = "json_contains" | "JSON_CONTAINS" 
-           | "json_contains_all" | "JSON_CONTAINS_ALL" 
-           | "json_contains_any" | "JSON_CONTAINS_ANY";
-JsonExpr =  Constant | ConstantArray | STRING | BOOLEAN;
-JsonArray = "[" JsonExpr { "," JsonExpr } "]";
 ```
 
 The following table lists the description of each symbol mentioned in the above Boolean expression rules.
@@ -76,11 +70,10 @@ The following table lists the description of each symbol mentioned in the above 
 | LogicalExpr      | A LogicalExpr can be a BinaryLogicalOp on two LogicalExprs, or a UnaryLogicalOp on a single LogicalExpr, or a LogicalExpr grouped within parentheses, or a SingleExpr. The LogicalExpr is defined recursively.    |
 | Expr   | Expr, an abbreviation meaning expression, can be LogicalExpr or NIL. |
 | MatchOp   | A MatchOp, namely a match operator, compares a string to a string constant or a string prefix constant. |
-| JsonArrayOp | A JsonOp, namely a JSON operator, checks whether the specified identifier contains the specified elements. |
 
 ## Operators
 
-### Logical operators
+### Logical operators:
 
 Logical operators perform a comparison between two expressions. 
 
@@ -89,7 +82,10 @@ Logical operators perform a comparison between two expressions.
 | 'and' &&  | and           | expr1 && expr2   | True if both expr1 and expr2 are true. |
 | 'or' \|\|  | or           | expr1 \|\| expr2     | True if either expr1 or expr2 are true.  |
 
-### Binary arithmetic operators
+
+
+
+### Binary arithmetic operators:
 
 Binary arithmetic operators contain two operands and can perform basic arithmetic operations and return the corresponding result. 
 
@@ -102,7 +98,8 @@ Binary arithmetic operators contain two operands and can perform basic arithmeti
 | **        | Power         | a ** b      | Raise the first operand to the power of the second operand.     |
 | %         | Modulo        | a % b       | Divide the first operand by the second operand and yield the remainder portion.    |
 
-### Relational operators
+
+### Relational operators:
 
 Relational operators use symbols to check for equality, inequality, or relative order between two expressions. 
 
@@ -115,45 +112,43 @@ Relational operators use symbols to check for equality, inequality, or relative 
 | <=        | Less than or equal          | a <= b     | True if a is less than or equal to b.     |
 | >=        | Greater than or equal         | a >= b      | True if a is greater than or equal to b.    |
 
+
 ## Operator precedence and associativity
 
 The following table lists the precedence and associativity of operators. Operators are listed top to bottom, in descending precedence.
 
-| Precedence | Operator                            | Description   | Associativity |
-|------------|-------------------------------------|---------------|---------------|
-| 1          | + -                                 | UnaryArithOp  | Left-to-right |
-| 2          | not                                 | UnaryLogicOp  | Right-to-left |
-| 3          | **                                  | BinaryArithOp | Left-to-right |
-| 4          | * / %                               | BinaryArithOp | Left-to-right |
-| 5          | + -                                 | BinaryArithOp | Left-to-right |
-| 6          | < <= > >=                           | CmpOp         | Left-to-right |
-| 7          | == !=                               | CmpOp         | Left-to-right |
-| 8          | like LIKE                           | MatchOp       | Left-to-right |
-| 9          | json_contains JSON_CONTAINS         | JsonArrayOp   | Left-to-right |
-| 10         | json_contains_all JSON_CONTAINS_ALL | JsonArrayOp   | Left-to-right |
-| 11         | json_contains_any JSON_CONTAINS_ANY | JsonArrayOp   | Left-to-right |
-| 12         | && and                              | BinaryLogicOp | Left-to-right |
-| 13         | \|\| or                             | BinaryLogicOp | Left-to-right |
 
-Expressions are normally evaluated from left to right. Complex expressions are evaluated one at a time. The order in which the expressions are evaluated is determined by the precedence of the operators used.
+| Precedence | Operator  | Description  | Associativity |
+|------------|-----------|---------------|---------------|
+| 1          | + -       | UnaryArithOp  | Left-to-right |
+| 2          | not       | UnaryLogicOp  | Right-to-left |
+| 3          | **        | BinaryArithOp | Left-to-right |
+| 4          | * / %     | BinaryArithOp | Left-to-right |
+| 5          | + -       | BinaryArithOp | Left-to-right |
+| 6          | < <= > >= | CmpOp         | Left-to-right |
+| 7          | == !=     | CmpOp         | Left-to-right |
+| 8          | like LIKE | MatchOp       | Left-to-right |
+| 9          | && and    | BinaryLogicOp | Left-to-right |
+| 10         | \|\| or   | BinaryLogicOp | Left-to-right |
+
+
+Expressions are normally evaluated from left to right. Complex expressions are evaluated one at a time. The order in which the expressions are evaluated is determined by the precedence of the operators used. 
 
 If an expression contains two or more operators with the same precedence, the operator to the left is evaluated first. 
 
 <div class="alert note">
-
-For example, 10 / 2 * 5 will be evaluated as (10 / 2) and the result multiplied by 5.
-
+For example, 10 / 2 * 5 will be evaluated as (10 / 2) and the result multiplied by 5. 
 </div>
 
 When a lower precedence operation should be processed first, it should be enclosed within parentheses. 
 
 <div class="alert note">
-
-For example, 30 / 2 + 8. This is normally evaluated as 30 divided by 2 then 8 added to the result. If you want to divide by 2 + 8, it should be written as 30 / (2 + 8).
-
+For example, 30 / 2 + 8. This is normally evaluated as 30 divided by 2 then 8 added to the result. If you want to divide by 2 + 8, it should be written as 30 / (2 + 8). 
 </div>
 
+
 Parentheses can be nested within expressions. Innermost parenthetical expressions are evaluated first.
+
 
 ## Usage
 
@@ -177,6 +172,7 @@ Samples of all available boolean expression usage in Milvus are listed as follow
 VARCHAR > "str1"
 ```
 
+
 2. BinaryLogicalOp and parentheses
 
 ```
@@ -186,9 +182,7 @@ VARCHAR > "str1"
 3. TermExpr and UnaryLogicOp
 
 <div class="alert note">
-
 Milvus only supports deleting entities with clearly specified primary keys, which can be achieved merely with the term expression <code>in</code>.
-
 </div>
 
 ```
@@ -224,43 +218,22 @@ VARCHAR not in ["str1", "str2"]
 VARCHAR like "prefix%"
 ```
 
-8. JsonArrayOp
+8. Use dynamic fields in building expressions
 
-- `JSON_CONTAINS(identifier, JsonExpr)`
+```python
+# Use the field name with a double-quoted or 
+# single-quoted key in a square brack 
+$meta["count"] <= 400
 
-    If the JSON expression of a `JSON_CONTAINS` (the second argument) statement is a list, the identifier (the first argument) should be list of list. Otherwise, the statement always evaluates to False.
+# or just use the key to build expressions.
+count <= 400
+```
 
-    ```python
-    # {"x": [1,2,3]}
-    json_contains(x, 1) # ==> true
-    json_contains(x, "a") # ==> false
-        
-    # {"x": [[1,2,3], [4,5,6], [7,8,9]]}
-    json_contains(x, [1,2,3]) # ==> true
-    json_contains(x, [3,2,1]) # ==> false
-    ```
+<div class="alert note">
 
-- `JSON_CONTAINS_ALL(identifier, JsonExpr)`
+You can use dynamic fields in building boolean expressions. For details, refer to [Dynamic Schema](dynamic_schema.md).
 
-    The JSON expression in a `JSON_CONTAINS_ALL` statement should always be a list.
-
-    ```python
-    # {"x": [1,2,3,4,5,7,8]}
-    json_contains_all(x, [1,2,8]) # ==> true
-    json_contains_all(x, [4,5,6]) # ==> false 6 is not exists
-    ```
-
-- `JSON_CONTAINS_ANY(identifier, JsonExpr)`
-
-    The JSON expression in a `JSON_CONTAINS_ANY` statement should always be a list. Otherwise, it acts the same as `JSON_CONTAINS`.
-
-    ```python
-    # {"x": [1,2,3,4,5,7,8]}
-    json_contains_any(x, [1,2,8]) # ==> true
-    json_contains_any(x, [4,5,6]) # ==> true
-    json_contains_any(x, [6,9]) # ==> false
-    ```
-
+</div>
 
 ## What's next
 

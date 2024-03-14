@@ -49,5 +49,5 @@ Having installed Milvus Node.js SDK, you can:
   - [Insert data](insert_data.md)
   - [Conduct a vector search](search.md)
 
-- Explore [Milvus Node.js API reference](/api-reference/node/v2.3.x/About.md)
+- Explore [Milvus Node.js API reference](/api-reference/node/v2.2.x/About.md)
 

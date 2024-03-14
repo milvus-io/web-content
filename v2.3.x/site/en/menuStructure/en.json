@@ -120,14 +120,6 @@
       "order": 0
     },
     {
-      "id": "install_standalone-gpu-docker.md",
-      "title": "Milvus Standalone (GPU)",
-      "label1": "getstarted",
-      "label2": "installmilvus",
-      "label3": "",
-      "order": 0
-    },
-    {
       "id": "install_cluster-milvusoperator.md",
       "title": "Milvus Cluster",
       "label1": "getstarted",
@@ -446,36 +438,12 @@
       "order": 0
     },
     {
-      "id": "hybridsearch.md",
-      "title": "Hybrid Search",
-      "label1": "userguide",
-      "label2": "search",
-      "label3": "",
-      "order": 2
-    },
-    {
       "id": "query.md",
       "title": "Query",
       "label1": "userguide",
       "label2": "search",
       "label3": "",
       "order": 1
-    },
-    {
-      "id": "with_iterators.md",
-      "title": "Query",
-      "label1": "userguide",
-      "label2": "search",
-      "label3": "",
-      "order": 3
-    },
-    {
-      "id": "within_range.md",
-      "title": "Query",
-      "label1": "userguide",
-      "label2": "search",
-      "label3": "",
-      "order": 4
     },
     {
       "id": "bootcamp_userguide",
@@ -525,6 +493,14 @@
       "label2": "configure_milvus",
       "label3": "",
       "order": 0
+    },
+    {
+      "id": "dynamic_config.md",
+      "title": "On the Fly",
+      "label1": "admin_guide",
+      "label2": "configure_milvus",
+      "label3": "",
+      "order": 3
     },
     {
       "id": "manage_dependencies",

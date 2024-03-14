@@ -15,12 +15,12 @@ This guide describes how to upgrade your Milvus standalone with Milvus operator.
 
 ## Upgrade your Milvus operator
 
-Run the following command to upgrade the version of your Milvus operator to v0.7.17.
+Run the following command to upgrade the version of your Milvus operator to v0.8.0.
 
 ```
-helm repo add milvus-operator https://milvus-io.github.io/milvus-operator/
-helm repo update milvus-operator
-helm -n milvus-operator upgrade milvus-operator milvus-operator/milvus-operator
+helm repo add zilliztech-milvus-operator https://zilliztech.github.io/milvus-operator/
+helm repo update zilliztech-milvus-operator
+helm -n milvus-operator upgrade milvus-operator zilliztech-milvus-operator/milvus-operator
 ```
 
 Once you have upgraded your Milvus operator to the latest version, you have the following choices:
@@ -95,9 +95,9 @@ Compose a configuration file as follows and save it as **milvusupgrade.yaml**:
 apiVersion: milvus.io/v1beta1
 kind: Milvus
 metadata:
-name: my-release
+    name: my-release
 labels:
-app: milvus
+    app: milvus
 spec:
   # Omit other fields ...
   components:

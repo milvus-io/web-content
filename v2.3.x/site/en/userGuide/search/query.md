@@ -1,8 +1,13 @@
 ---
 id: query.md
+label: Conduct a Query
 related_key: query vectors
+order: 0
+group: query.md
 summary: Learn how to query vectors in Milvus.
 ---
+
+<div class="tab-wrapper"><a href="query.md" class='active '>Conduct a Query</a><a href="with_iterators.md" class=''>Conduct a Query with Iterators</a></div>
 
 # Conduct a Query
 
@@ -59,6 +64,7 @@ milvusClient.loadCollection(
 ```shell
 load -c book
 ```
+</div>
 
 ```curl
 # See the following step.
@@ -430,7 +436,7 @@ Count all entities in a collection:
 ```python
 res = collection.query(
   expr="", 
-  output_fields = [count(*)],
+  output_fields = ["count(*)"],
 )
 
 print(res)
@@ -447,7 +453,7 @@ Count entities that meet specific filter conditions:
 res = collection.query(
   # filter entities whose ID is in the specified list
   expr="book_id in [2,4,6,8]", 
-  output_fields = [count(*)],
+  output_fields = ["count(*)"],
 )
 
 print(res)

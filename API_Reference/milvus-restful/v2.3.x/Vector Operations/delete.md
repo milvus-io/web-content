@@ -82,48 +82,56 @@ curl --request POST \
 ```json
 {
     "collectionName": "string",
+    "dbName": "string",
     "id": "string"
 }
 ```
 
 | Parameter        | Description                                                                               |
 |------------------|-------------------------------------------------------------------------------------------|
+| `dbName`  | **string**<br>The name of the database.|
 | `collectionName`  | **string**(required)<br>The name of the collection to which this operation applies.|
 | `id`  | **string**(required)<br>The ID of the entity to be retrieved|
 
 ```json
 {
     "collectionName": "string",
+    "dbName": "string",
     "id": []
 }
 ```
 
 | Parameter        | Description                                                                               |
 |------------------|-------------------------------------------------------------------------------------------|
+| `dbName`  | **string**<br>The name of the database.|
 | `collectionName`  | **string**(required)<br>The name of the collection to which this operation applies.|
 | `id`  | **array**(required)<br>An array of IDs of the entities to be retrieved|
 
 ```json
 {
     "collectionName": "string",
+    "dbName": "string",
     "id": "integer"
 }
 ```
 
 | Parameter        | Description                                                                               |
 |------------------|-------------------------------------------------------------------------------------------|
+| `dbName`  | **string**<br>The name of the database.|
 | `collectionName`  | **string**(required)<br>The name of the collection to which this operation applies.|
 | `id`  | **integer**(required)<br>The ID of the entity to be retrieved|
 
 ```json
 {
     "collectionName": "string",
+    "dbName": "string",
     "id": []
 }
 ```
 
 | Parameter        | Description                                                                               |
 |------------------|-------------------------------------------------------------------------------------------|
+| `dbName`  | **string**<br>The name of the database.|
 | `collectionName`  | **string**(required)<br>The name of the collection to which this operation applies.|
 | `id`  | **array**(required)<br>An array of IDs of the entities to be retrieved|
 

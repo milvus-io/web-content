@@ -26,32 +26,42 @@ Milvus supports only one primary key field in a collection.
 	</thead>
 	<tbody>
 	<tr>
-		<td>name</td>
+		<td><code>name</code></td>
 		<td>Name of the field in the collection to create</td>
 		<td>Data type: String.<br/>Mandatory</td>
 	</tr>
 	<tr>
-		<td>dtype</td>
+		<td><code>dtype</code></td>
 		<td>Data type of the field</td>
 		<td>Mandatory</td>
 	</tr>
     <tr>
-		<td>description</td>
+		<td><code>description</code></td>
 		<td>Description of the field</td>
 		<td>Data type: String.<br/>Optional</td>
 	</tr>
     <tr>
-		<td>is_primary</td>
+		<td><code>is_primary</code></td>
 		<td>Whether to set the field as the primary key field or not</td>
 		<td>Data type: Boolean (<code>true</code> or <code>false</code>).<br/>Mandatory for the primary key field</td>
 	</tr>
+        <tr>
+	        <td><code>auto_id</code> (Mandatory for primary key field)</td>
+        	<td>Switch to enable or disable automatic ID (primary key) allocation.</td>
+        	<td><code>True</code> or <code>False</code></td>
+        </tr>
+        <tr>
+        	<td><code>max_length</code> (Mandatory for VARCHAR field)</td>
+        	<td>Maximum length of strings allowed to be inserted.</td>
+        	<td>[1, 65,535]</td>
+        </tr>
 	<tr>
-		<td>dim</td>
+		<td><code>dim</code></td>
 		<td>Dimension of the vector</td>
-    	<td>Data type: Integer &isin;[1, 32768].<br/>Mandatory for the vector field</td>
+    		<td>Data type: Integer &isin;[1, 32768].<br/>Mandatory for the vector field</td>
 	</tr>
 	<tr>
-		<td>is_partition_key</td>
+		<td><code>is_partition_key</code></td>
 		<td>Whether this field is a partition-key field.</td>
 		<td>Data type: Boolean (<code>true</code> or <code>false</code>).</td>
 	</tr>
@@ -126,22 +136,22 @@ A collection schema is the logical definition of a collection. Usually you need 
 	</thead>
 	<tbody>
 	<tr>
-		<td>field</td>
+		<td><code>field</code></td>
 		<td>Fields in the collection to create</td>
 		<td>Mandatory</td>
 	</tr>
     <tr>
-		<td>description</td>
+		<td><code>description</code></td>
 		<td>Description of the collection</td>
 		<td>Data type: String.<br/>Optional</td>
 	</tr>
     <tr>
-		<td>auto_id</td>
-		<td>Whether to enable Automatic ID (primary key) allocation or not</td>
-		<td>Data type: Boolean (<code>true</code> or <code>false</code>).<br/>Optional</td>
+		<td><code>partition_key_field</code></td>
+		<td>Name of a field that is designed to act as the partition key.</td>
+		<td>Data type: String.<br/>Optional</td>
 	</tr>
     <tr>
-		<td>enable_dynamic_field</td>
+		<td><code>enable_dynamic_field</code></td>
 		<td>Whether to enable dynamic schema or not</td>
 		<td>Data type: Boolean (<code>true</code> or <code>false</code>).<br/>Optional, defaults to <code>False</code>.<br/>For details on dynamic schema, refer to <a herf="dynamic_schema.md">Dynamic Schema</a> and the user guides for managing collections.</td>
 	</tr>

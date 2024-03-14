@@ -6,20 +6,9 @@ summary: Learn how to load a partition into memory for search or query in Milvus
 
 # Load a Partition
 
-This topic describes how to load a partition to memory. Loading partitions instead of the whole collection to memory can significantly reduce the memory usage. All search and query operations within Milvus are executed in memory.
+This topic describes how to load a partition to memory. Loading partitions instead of the whole collection to memory can significantly reduce the memory usage. All search and query operations within Milvus are executed in memory. 
 
-<<<<<<< HEAD
 Milvus 2.1 or later allows users to load a partition as multiple replicas to utilize the CPU and memory resources of extra query nodes. This feature boost the overall QPS and throughput with extra hardware. It is supported on PyMilvus in current release.
-=======
-Since version 2.3.0, Milvus has enhanced its partition operations and now supports cascading load and release operations. This means that you can perform any combination of the following operations:
-
-- Load a collection that has already been loaded.
-- Load a collection, and then load a specific partition in the collection.
-- Load a partition, and then load the collection to which it belongs.
-- Load a partition, and reload it before release.
-
-Milvus allows users to load a partition as multiple replicas to utilize the CPU and memory resources of extra query nodes. This feature boosts the overall QPS and throughput with extra hardware. It is supported on PyMilvus in current release.
->>>>>>> 201cc1f6b3697e1b3ea48676aa9c72a8d9ab6a5c
 
 <div class="alert warning">
 <ul>
@@ -231,6 +220,15 @@ partition.load(replica_number=2)     # Load partition as 2 replicas
 result = partition.get_replicas()
 print(result)
 ```
+
+
+## Constraints
+
+- Error will be returned at the attempt to load partition(s) when the parent collection is already loaded. Future releases will support releasing partitions from a loaded collection, and (if needed) then loading some other partition(s).
+- "Load successfully" will be returned at the attempt to load the collection that is already loaded.
+- Error will be returned at the attempt to load the collection when the child partition(s) is/are already loaded. Future releases will support loading the collection when some of its partitions are already loaded.
+- Loading different partitions in a same collection via separate RPCs is not allowed.
+
 
 ## What's next
 

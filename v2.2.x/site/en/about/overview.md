@@ -54,10 +54,11 @@ Indexes are an organization unit of data. You must declare the index type and si
 Most of the vector index types supported by Milvus use approximate nearest neighbors search (ANNS), including:
 
 - **FLAT**: FLAT is best suited for scenarios that seek perfectly accurate and exact search results on a small, million-scale dataset.
-- **IVF_FLAT**: IVF_FLAT is a quantization-based index and is best suited for scenarios that seek an ideal balance between accuracy and query speed. There is also a GPU version **GPU_IVF_FLAT**.
+- **IVF_FLAT**: IVF_FLAT is a quantization-based index and is best suited for scenarios that seek an ideal balance between accuracy and query speed.
 - **IVF_SQ8**: IVF_SQ8 is a quantization-based index and is best suited for scenarios that seek a significant reduction on disk, CPU, and GPU memory consumption as these resources are very limited.
-- **IVF_PQ**: IVF_PQ is a quantization-based index and is best suited for scenarios that seek high query speed even at the cost of accuracy. There is also a GPU version **GPU_IVF_PQ**.
+- **IVF_PQ**: IVF_PQ is a quantization-based index and is best suited for scenarios that seek high query speed even at the cost of accuracy. 
 - **HNSW**: HNSW is a graph-based index and is best suited for scenarios that have a high demand for search efficiency.
+- **ANNOY**: ANNOY is a tree-based index and is best suited for scenarios that seek a high recall rate.
 
 See [Vector Index](index.md) for more details.
 
@@ -72,6 +73,9 @@ The metrics that are widely used for floating point embeddings include:
 The metrics that are widely used for binary embeddings include:
 - **Hamming**: This metric is generally used in the field of natural language processing (NLP).
 - **Jaccard**: This metric is generally used in the field of molecular similarity search.
+- **Tanimoto**: This metric is generally used in the field of molecular similarity search.
+- **Superstructure**: This metric is generally used to search for similar superstructure of a molecule.
+- **Substructure**: This metric is generally used  to search for similar substructure of a molecule.
 
 See [Similarity Metrics](metric.md#floating) for more information.
 
@@ -82,9 +86,10 @@ Milvus makes it easy to add similarity search to your applications. Example appl
 - [Image similarity search](image_similarity_search.md): Images made searchable and instantaneously return the most similar images from a massive database.
 - [Video similarity search](video_similarity_search.md): By converting key frames into vectors and then feeding the results into Milvus, billions of videos can be searched and recommended in near real-time.
 - [Audio similarity search](audio_similarity_search.md): Quickly query massive volumes of audio data such as speech, music, sound effects, and surface similar sounds.
+- [Molecular similarity search](molecular_similarity_search.md): Blazing fast similarity search, substructure search, or superstructure search for a specified molecule.
 - [Recommender system](recommendation_system.md): Recommend information or products based on user behaviors and needs.
 - [Question answering system](question_answering_system.md): Interactive digital QA chatbot that automatically answers user questions.
-- [DNA sequence classification](dna_sequence_classification.md): Accurately sort out the classification of a gene in milliseconds by comparing similar DNA sequences.
+- [DNA sequence classification](dna_sequence_classification.md): Accurately sort out the classification of a gene in milliseconds by comparing similar DNA sequence.
 - [Text search engine](text_search_engine.md): Help users find the information they are looking for by comparing keywords against a database of texts.
 
 See [Milvus tutorials](https://github.com/milvus-io/bootcamp/tree/master/solutions) and [Milvus Adopters](milvus_adopters.md) for more Milvus application scenarios.

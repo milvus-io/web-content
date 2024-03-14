@@ -8,7 +8,7 @@ summary: Learn how to build an index for vectors in Milvus.
 
 This guide describes how to build an index on vectors in Milvus. 
 
-Vector indexes are an organizational unit of metadata used to accelerate [vector similarity search](search.md). Without the index built on vectors, Milvus will perform a brute-force search.
+Vector indexes are an organizational unit of metadata used to accelerate [vector similarity search](search.md). Without the index built on vectors, Milvus will perform a brute-force search by default.
 
 See [Vector Index](index.md) for more information about the mechanism and varieties of vector indexes.
 
@@ -70,9 +70,9 @@ Collection name (book): book
 
 The name of the field to create an index for (book_intro): book_intro
 
-Index type (FLAT, IVF_FLAT, IVF_SQ8, IVF_PQ, RNSG, HNSW): IVF_FLAT
+Index type (FLAT, IVF_FLAT, IVF_SQ8, IVF_PQ, RNSG, HNSW, ANNOY): IVF_FLAT
 
-Index metric type (L2, IP, HAMMING): L2
+Index metric type (L2, IP, HAMMING, TANIMOTO): L2
 
 Index params nlist: 1024
 
@@ -113,12 +113,14 @@ curl -X 'POST' \
             <ul>
                 <li><code>L2</code> (Euclidean distance)</li>
                 <li><code>IP</code> (Inner product)</li>
-                <li><code>COSINE</code> (Cosine similarity)</li>
             </ul>
             For binary vectors:
             <ul>
                 <li><code>JACCARD</code> (Jaccard distance)</li>
+                <li><code>TANIMOTO</code> (Tanimoto distance)</li>
                 <li><code>HAMMING</code> (Hamming distance)</li>
+                <li><code>SUPERSTRUCTURE</code> (Superstructure)</li>
+                <li><code>SUBSTRUCTURE</code> (Substructure)</li>
             </ul>
         </td>
 	</tr>
@@ -131,9 +133,8 @@ curl -X 'POST' \
                 <li><code>IVF_FLAT</code> (IVF_FLAT)</li>
                 <li><code>IVF_SQ8</code> (IVF_SQ8)</li>
                 <li><code>IVF_PQ</code> (IVF_PQ)</li>
-                <li><code>GPU_IVF_FLAT<sup>*<sup></code> (GPU_IVF_FLAT)</li>
-                <li><code>GPU_IVF_PQ<sup>*<sup>></code> (GPU_IVF_PQ)</li>
                 <li><code>HNSW</code> (HNSW)</li>
+                <li><code>ANNOY</code> (ANNOY)</li>
                 <li><code>DISKANN<sup>*<sup></code> (DISK_ANN)</li>
             </ul>
             For binary vectors:
@@ -149,7 +150,7 @@ curl -X 'POST' \
         <td>See <a href="index.md">In-memory Index</a> and <a href="disk_index.md">On-disk Index</a> for more information.</td>
 	</tr>
     <tr>
-        <td colspan=3><ul><li>* <b>DISKANN</b> has certain prerequisites to meet. For details, see <a href="disk_index.md">On-disk Index</a>.</li><li>* <b>GPU_IVF_FLAT</b> and <b>GPU_IVF_PQ</b> are available only when you install Milvus with the GPU feature enabled. For details, see <a href="install_standalone-gpu-docker.md"></td>
+        <td colspan=3>* DISKANN has certain prerequisites to meet. For details, see <a href="disk_index.md">On-disk Index</a>.</td>
     </tr>
 	</tbody>
 </table>
@@ -170,12 +171,14 @@ curl -X 'POST' \
             <ul>
                 <li><code>L2</code> (Euclidean distance)</li>
                 <li><code>IP</code> (Inner product)</li>
-                <li><code>COSINE</code> (Cosine similarity)</li>
             </ul>
             For binary vectors:
             <ul>
                 <li><code>JACCARD</code> (Jaccard distance)</li>
+                <li><code>TANIMOTO</code> (Tanimoto distance)</li>
                 <li><code>HAMMING</code> (Hamming distance)</li>
+                <li><code>SUPERSTRUCTURE</code> (Superstructure)</li>
+                <li><code>SUBSTRUCTURE</code> (Substructure)</li>
             </ul>
         </td>
 	</tr>
@@ -188,10 +191,8 @@ curl -X 'POST' \
                 <li><code>IVF_FLAT</code> (IVF_FLAT)</li>
                 <li><code>IVF_SQ8</code> (IVF_SQ8)</li>
                 <li><code>IVF_PQ</code> (IVF_PQ)</li>
-                <li><code>GPU_IVF_FLAT<sup>*<sup></code> (GPU_IVF_FLAT)</li>
-                <li><code>GPU_IVF_PQ<sup>*<sup>></code> (GPU_IVF_PQ)</li>
                 <li><code>HNSW</code> (HNSW)</li>
-                <li><code>DISKANN<sup>*<sup></code> (DISK_ANN)</li>
+                <li><code>ANNOY</code> (ANNOY)</li>
             </ul>
             For binary vectors:
             <ul>
@@ -205,9 +206,6 @@ curl -X 'POST' \
 		<td>Building parameter(s) specific to the index.</td>
         <td>See <a href="index.md">In-memory Index</a> and <a href="disk_index.md">On-disk Index</a> for more information.</td>
 	</tr>
-    <tr>
-        <td colspan=3><ul><li>* <b>DISKANN</b> has certain prerequisites to meet. For details, see <a href="disk_index.md">On-disk Index</a>.</li><li>* <b>GPU_IVF_FLAT</b> and <b>GPU_IVF_PQ</b> are available only when you install Milvus with the GPU feature enabled. For details, see <a href="install_standalone-gpu-docker.md"></td>
-    </tr>
 	</tbody>
 </table>
 
@@ -229,10 +227,9 @@ curl -X 'POST' \
                 <li><code>NewIndexIvfFlat</code> (IVF_FLAT)</li>
                 <li><code>NewIndexIvfSQ8</code> (IVF_SQ8)</li>
                 <li><code>NewIndexIvfPQ</code> (IVF_PQ)</li>
-                <li><code>NewIndexGPUIvfFlat</code> (GPU_IVF_FLAT)</li>
-                <li><code>NewIndexGPUIvfPQ</code> (GPU_IVF_PQ)</li>
                 <li><code>NewIndexHNSW</code> (HNSW)</li>
-		        <li><code>NewIndexDISKANN<sup>*<sup></code> (DISK_ANN)</li>
+                <li><code>NewIndexANNOY</code> (ANNOY)</li>
+		<li><code>NewIndexDISKANN<sup>*<sup></code> (DISK_ANN)</li>
             </ul>
             For binary vectors:
             <ul>
@@ -248,12 +245,14 @@ curl -X 'POST' \
             <ul>
                 <li><code>L2</code> (Euclidean distance)</li>
                 <li><code>IP</code> (Inner product)</li>
-                <li><code>COSINE</code> (Cosine similarity)</li>
             </ul>
             For binary vectors:
             <ul>
                 <li><code>JACCARD</code> (Jaccard distance)</li>
+                <li><code>TANIMOTO</code> (Tanimoto distance)</li>
                 <li><code>HAMMING</code> (Hamming distance)</li>
+                <li><code>SUPERSTRUCTURE</code> (Superstructure)</li>
+                <li><code>SUBSTRUCTURE</code> (Substructure)</li>
             </ul>
         </td>
 	</tr>
@@ -262,9 +261,9 @@ curl -X 'POST' \
 		<td>Building parameter(s) specific to the index.</td>
         <td>See <a href="index.md">In-memory Index</a> and <a href="disk_index.md">On-disk Index</a> for more information.</td>
 	</tr>
-    <tr>
-        <td colspan=3><ul><li>* <b>DISKANN</b> has certain prerequisites to meet. For details, see <a href="disk_index.md">On-disk Index</a>.</li><li>* <b>GPU_IVF_FLAT</b> and <b>GPU_IVF_PQ</b> are available only when you install Milvus with the GPU feature enabled. For details, see <a href="install_standalone-gpu-docker.md"></td>
-    </tr>
+	    <tr>
+		<td colspan=3>* DISKANN has certain prerequisites to meet. For details, see <a href="disk_index.md">On-disk Index</a>.</td>
+	    </tr>
 	</tbody>
 </table>
 
@@ -286,9 +285,8 @@ curl -X 'POST' \
                 <li><code>IVF_FLAT</code> (IVF_FLAT)</li>
                 <li><code>IVF_SQ8</code> (IVF_SQ8)</li>
                 <li><code>IVF_PQ</code> (IVF_PQ)</li>
-                <li><code>GPU_IVF_FLAT<sup>*<sup></code> (GPU_IVF_FLAT)</li>
-                <li><code>GPU_IVF_PQ<sup>*<sup>></code> (GPU_IVF_PQ)</li>
                 <li><code>HNSW</code> (HNSW)</li>
+                <li><code>ANNOY</code> (ANNOY)</li>
                 <li><code>DISKANN<sup>*<sup></code> (DISK_ANN)</li>
             </ul>
             For binary vectors:
@@ -304,7 +302,7 @@ curl -X 'POST' \
         <td>See <a href="index.md">In-memory Index</a> and <a href="disk_index.md">On-disk Index</a> for more information.</td>
 	</tr>
     <tr>
-        <td colspan=3><ul><li>* <b>DISKANN</b> has certain prerequisites to meet. For details, see <a href="disk_index.md">On-disk Index</a>.</li><li>* <b>GPU_IVF_FLAT</b> and <b>GPU_IVF_PQ</b> are available only when you install Milvus with the GPU feature enabled. For details, see <a href="install_standalone-gpu-docker.md"></td>
+        <td colspan=3>* DISKANN has certain prerequisites to meet. For details, see <a href="disk_index.md">On-disk Index</a>.</td>
     </tr>
 	</tbody>
 </table>
@@ -352,7 +350,10 @@ curl -X 'POST' \
             For binary vectors:
             <ul>
                 <li><code>JACCARD</code> (Jaccard distance)</li>
+                <li><code>TANIMOTO</code> (Tanimoto distance)</li>
                 <li><code>HAMMING</code> (Hamming distance)</li>
+                <li><code>SUPERSTRUCTURE</code> (Superstructure)</li>
+                <li><code>SUBSTRUCTURE</code> (Substructure)</li>
             </ul>
         </td>
 	</tr>
@@ -366,6 +367,7 @@ curl -X 'POST' \
                 <li><code>IVF_SQ8</code> (IVF_SQ8)</li>
                 <li><code>IVF_PQ</code> (IVF_PQ)</li>
                 <li><code>HNSW</code> (HNSW)</li>
+                <li><code>ANNOY</code> (ANNOY)</li>
             </ul>
             For binary vectors:
             <ul>
@@ -532,3 +534,4 @@ milvusClient.createIndex(
 - Learn more basic operations of Milvus:
   - [Conduct a vector search](search.md)
   - [Conduct a hybrid search](hybridsearch.md)
+  - [Search with Time Travel](timetravel.md)

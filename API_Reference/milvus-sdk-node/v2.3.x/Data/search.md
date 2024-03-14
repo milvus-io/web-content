@@ -25,6 +25,7 @@ new milvusClient(MILUVS_ADDRESS).search({
   metric_type: MetricType.L2,
   param: { nprobe: 1024 },
   consistency_level: ConsistencyLevelEnum.Strong,
+  output_fields: ["your field defined in schema"],
 });
 
 // batch search example
@@ -83,7 +84,7 @@ new milvusClient(MILUVS_ADDRESS).search({
 | vector? or vectors? | vector or vectors to search                                                                                                                                                          | Number[] or Number[][] |
 | limit? or topk?     | Topk, by default: 10                                                                                                                                                                 | Number                 |
 | offset?             | offset, by default: 0                                                                                                                                                                | Number                 |
-| output_fields?      | Vector or scalar field to be returnsed, by default, we will output all fields in the collection                                                                                      | String[]               |
+| output_fields?      | Vector or scalar field to be returned, by default, we will output all fields in the collection,                                                                                      | String[]               |
 | partitions_names?   | An array of the names of the partitions to search on                                                                                                                                 | String[]               |
 | metric_type?        | similarity metric, by default, it is 'L2'                                                                                                                                            | String                 |
 | filter? or expr?    | Boolean expression to filter the data                                                                                                                                                | String                 |
