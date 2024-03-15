@@ -26,7 +26,6 @@ Specifically, indexing algorithms for scalar fields vary with field data types. 
 
 | Data type                     | Default indexing algorithm        |
 | ----------------------------- | --------------------------------- |
-| BOOL                          | STL sort                          |
 | VARCHAR                       | MARISA-trie                       |
 | INT16                         | STL sort                          |
 | INT32                         | STL sort                          |
