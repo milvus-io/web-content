@@ -49,7 +49,7 @@ print("Document ID:", documents[0].doc_id)
 # Document ID: d33f0397-b51a-4455-9b0f-88a101254d95
 ```
 
-Now can can create a Milvus collection and insert the documents into it.
+Now you can create a Milvus collection and insert the documents into it.
 
 ```python
 from llama_index.core import VectorStoreIndex, StorageContext
