@@ -6,6 +6,30 @@ summary: Milvus Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.3.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.3.12
+
+Release date: Mar 15, 2024
+
+| Milvus version | Python SDK version | Java SDK version | Go SDK version | Node.js SDK version |
+|----------------|--------------------|------------------|----------------|---------------------|
+| 2.3.12         | 2.3.7              | 2.3.4            | 2.3.6          | 2.3.5               |
+
+Milvus v2.3.12 is a bug-fix release that resolves data loss in some edge cases and includes several other minor fixes. The enhancements address the high memory usage of coordinators in instances with a large number of segments and the ARM image page size issue. 
+
+It is highly recommended to upgrade to this latest version to prevent data loss.
+
+### Bug Fixes
+
+- [Critical] Fixed a bug that some insert data would be lost when deleteBuf memory policy is triggered ([#31159](https://github.com/milvus-io/milvus/pull/31159))
+- Fixed a bug that some duplicated segments couldn't be released after channel balancing  ([#31126](https://github.com/milvus-io/milvus/pull/31126))
+- Fixed a bug that the balance checker of the Querycoord used the wrong param item for check interval ([#31141](https://github.com/milvus-io/milvus/pull/31141))
+- Fixed a bug that database info could be incorrect when describing collection with ID  ([#31177](https://github.com/milvus-io/milvus/pull/31177))
+
+### Improvements
+
+- Change pagesize to 64k for AARCH64 platform ([#31114](https://github.com/milvus-io/milvus/pull/31114))
+- Introduce an internal API to list indexes meta and reduce memory usage during load collection ([#31150](https://github.com/milvus-io/milvus/pull/31150))([#31163](https://github.com/milvus-io/milvus/pull/31163))
+
 ## v2.3.11
 
 Release date: Mar 8, 2024
