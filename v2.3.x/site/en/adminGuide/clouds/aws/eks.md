@@ -125,6 +125,12 @@ You can set up the required AWS resources, including an AWS S3 bucket and an EKS
     # }    
     ```
 
+3. (Optional) Attach the policy to your AWS User/Role if you want to accesskey instead of IAM AssumeRole.
+  
+      ```shell
+      aws iam attach-user-policy --user-name <your-user-name> --policy-arn "arn:aws:iam::<your-iam-account-id>:policy/MilvusS3ReadWrite"
+      ```
+
 ### Create an Amazon EKS Cluster
 
 1. Prepare a cluster configuration file as follows and name it `eks_cluster.yaml`. Do replace `MilvusS3ReadWrite_Policy_ARN` with the one listed in the command output above.
