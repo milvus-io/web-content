@@ -28,7 +28,6 @@ Once you have Milvus running locally on `localhost:19530`, you can start using M
 
 ### Create the indexing Pipeline and index some documents
 ```python
-import glob
 import os
 
 from haystack import Pipeline
@@ -40,7 +39,7 @@ from haystack.components.writers import DocumentWriter
 from milvus_haystack import MilvusDocumentStore
 from milvus_haystack.milvus_embedding_retriever import MilvusEmbeddingRetriever
 
-file_paths = glob.glob("./milvus-document-store.md")  # Your knowledge documents here
+file_paths = [os.path.abspath(__file__)]  # Your knowledge documents here
 
 document_store = MilvusDocumentStore(
     connection_args={
@@ -68,7 +67,7 @@ print("Number of documents:", document_store.count_documents())
 
 ### Create the retrieval pipeline and try a query
 ```python
-question = "What is Milvus?"
+question = "How to install Haystack and the Milvus integration?"
 
 retrieval_pipeline = Pipeline()
 retrieval_pipeline.add_component("embedder", SentenceTransformersTextEmbedder())
