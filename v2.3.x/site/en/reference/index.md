@@ -182,17 +182,6 @@ The following table classifies the indexes that Milvus supports:
       <li>Requires a recall rate as high as possible</li>
     </ul></td>
   </tr>
-  <tr>
-    <td>BIN_HNSW</td>
-    <td>Graph-based index</td>
-    <td>
-      <ul>
-        <li>Very high-speed query</li>
-        <li>Requires a recall rate as high as possible</li>
-        <li>Large memory resources</li>
-      </ul>
-    </td>
-  </tr>
 </tbody>
 </table>
 

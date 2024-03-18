@@ -7,7 +7,7 @@ group: install_standalone-helm-gpu.md
 summary: Learn how to install Milvus cluster on Kubernetes.
 ---
 
-<div class="tab-wrapper"><a href="install_standalone-helm-gpu.md" class=''>Standalone (Helm)</a><a href="install_standalone-docker-compose-gpu.md" class=''>Standalone (Docker)</a><a href="install_cluster-helm-gpu.md" class='active '>Cluster (Helm)</a></div>
+<div class="tab-wrapper"><a href="install_standalone-helm-gpu.md" class=''>Standalone (Helm)</a><a href="install_standalone-docker-compose-gpu.md" class=''>Standalone (Docker Compose)</a><a href="install_cluster-helm-gpu.md" class='active '>Cluster (Helm)</a></div>
 
 # Install Milvus Cluster with GPU Support
 
@@ -17,9 +17,26 @@ Milvus now can use GPU devices to build indexes and perform ANN searches thanks 
 
 Before installing Milvus with GPU support, make sure you have the following prerequisites:
 
-- The compute capability of your GPU device is 6.1, 7.0, 7.5, or 8.0. To check whether your GPU device suffices the requirement, check [Your GPU Compute Capability](https://developer.nvidia.com/cuda-gpus) on the NVIDIA developer website.
+- The compute capability of your GPU device is 7.0、7.5、8.0、8.6、8.9、9.0. To check whether your GPU device suffices the requirement, check [Your GPU Compute Capability](https://developer.nvidia.com/cuda-gpus) on the NVIDIA developer website.
 
 - You have installed the NVIDIA driver for your GPU device on one of [the supported Linux distributions](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html#linux-distributions) and then the NVIDIA Container Toolkit following [this guide](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html).
+
+  For Ubuntu 22.04 users, you can install the driver and the container toolkit with the following commands:
+
+  ```shell
+  $ sudo apt install --no-install-recommends nvidia-headless-545 nvidia-utils-545
+  ```
+
+  For other OS users, please refer to the [official installation guide](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#installing-on-ubuntu-and-debian).
+
+  You can check whether the driver has been installed correctly by running the following command:
+
+  ```shell
+  $ modinfo nvidia | grep "^version"
+  version:        535.161.07
+  ```
+
+  You are recommended to use the drivers of version 535 and above.
 
 - You have installed a Kubernetes cluster, and the `kubectl` command-line tool has been configured to communicate with your cluster. It is recommended to run this tutorial on a cluster with at least two nodes that are not acting as control plane hosts.
 
@@ -52,7 +69,7 @@ $ minikube start
 Run `$ kubectl cluster-info` to check the status of the K8s cluster you just created. Ensure that you can access the K8s cluster via `kubectl`. If you have not installed `kubectl` locally, see [Use kubectl inside minikube](https://minikube.sigs.k8s.io/docs/handbook/kubectl/).
 
 
-minikube has a dependency on default StorageClass when installed. Check the dependency by running the following command. Other installation methods require manual configuration of the StorageClass. See [Change the default StorageClass](https://kubernetes.io/docs/tasks/administer-cluster/change-default-storage-class/) for more information.
+Minikube has a dependency on the default StorageClass when installed. Check the dependency by running the following command. Other installation methods require manual configuration of the StorageClass. See [Change the default StorageClass](https://kubernetes.io/docs/tasks/administer-cluster/change-default-storage-class/) for more information.
 
 ```
 $ kubectl get sc
@@ -181,21 +198,39 @@ Milvus allows you to assign one or more GPU devices to Milvus.
         nvidia.com/gpu: "2"
       limits:
         nvidia.com/gpu: "2"
-    extraEnv:
-    - name: CUDA_VISIBLE_DEVICES
-      value: "0, 1"
   queryNode:
     resources:
       requests:
         nvidia.com/gpu: "2"
       limits:
         nvidia.com/gpu: "2"
-    extraEnv:
-    - name: CUDA_VISIBLE_DEVICES
-      value: "0, 1"
   EOF
   ```
-  In the configuration above, a total of four GPU cards are assigned, with two cards designated for the index node and the other two for the query node.
+
+  In the configuration above, the indexNode and queryNode share two GPUs. To assign different GPUs to the indexNode and the queryNode, you can modify the configuration accordingly by setting `extraEnv` in the configuration file as follows:
+
+  ```bash
+  cat <<EOF > custom-values.yaml
+  indexNode:
+    resources:
+      requests:
+        nvidia.com/gpu: "1"
+      limits:
+        nvidia.com/gpu: "1"
+    extraEnv:
+      - name: CUDA_VISIBLE_DEVICES
+        value: "0"
+  queryNode:
+    resources:
+      requests:
+        nvidia.com/gpu: "1"
+      limits:
+        nvidia.com/gpu: "1"
+    extraEnv:
+      - name: CUDA_VISIBLE_DEVICES
+        value: "1"
+  EOF
+  ```
 
   ```bash
   $ helm install my-release milvus/milvus -f custom-values.yaml
