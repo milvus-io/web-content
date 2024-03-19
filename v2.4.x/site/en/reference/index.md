@@ -365,16 +365,16 @@ In order to improve performance, HNSW limits the maximum degree of nodes on each
 
 - Index building parameters
 
-  | Parameter        | Description                | Range    |
-  | ---------------- | -------------------------- | -------- |
-  | `M`              | Maximum degree of the node | (1, 2048)  |
-  | `efConstruction` | Search scope               | (1, int32_max) |
+  | Parameter        | Description                | Range        |
+  | ---------------- | -------------------------- | ------------ |
+  | `M`              | Maximum degree of the node | (2, 2048)    |
+  | `efConstruction` | Search scope               | (1, int_max) |
 
 - Search parameters
 
   | Parameter | Description  | Range            |
   | --------- | ------------ | ---------------- |
-  | `ef`      | Search scope | [`top_k`, 32768] |
+  | `ef`      | Search scope | [1, int_max]     |
 
 ### BIN_FLAT
 
@@ -413,8 +413,6 @@ BIN_IVF_FLAT is the most basic BIN_IVF index, and the encoded data stored in eac
   | --------- | ------------------------ | ----------------------------------------------- |
   | `nprobe`  | Number of units to query | [1, nlist]  |
 
-
-</div>
 
 ## FAQ
 

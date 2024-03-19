@@ -1,13 +1,13 @@
 ---
 id: install_standalone-docker-compose-gpu.md
-label: Standalone (Docker)
+label: Standalone (Docker Compose)
 related_key: Kubernetes
 order: 1
 group: install_standalone-helm-gpu.md
 summary: Learn how to install Milvus cluster on Kubernetes.
 ---
 
-<div class="tab-wrapper"><a href="install_standalone-helm-gpu.md" class=''>Standalone (Helm)</a><a href="install_standalone-docker-compose-gpu.md" class='active '>Standalone (Docker)</a><a href="install_cluster-helm-gpu.md" class=''>Cluster (Helm)</a></div>
+<div class="tab-wrapper"><a href="install_standalone-helm-gpu.md" class=''>Standalone (Helm)</a><a href="install_standalone-docker-compose-gpu.md" class='active '>Standalone (Docker Compose)</a><a href="install_cluster-helm-gpu.md" class=''>Cluster (Helm)</a></div>
 
 # Install Milvus Cluster with Docker Compose
 
@@ -17,9 +17,26 @@ This topic describes how to install a Milvus cluster with GPU support using Dock
 
 Before installing Milvus with GPU support, make sure you have the following prerequisites:
 
-- The compute capability of your GPU device is 6.1, 7.0, 7.5, or 8.0. To check whether your GPU device suffices the requirement, check [Your GPU Compute Capability](https://developer.nvidia.com/cuda-gpus) on the NVIDIA developer website.
+- The compute capability of your GPU device is 7.0、7.5、8.0、8.6、8.9、9.0. To check whether your GPU device suffices the requirement, check [Your GPU Compute Capability](https://developer.nvidia.com/cuda-gpus) on the NVIDIA developer website.
 
 - You have installed the NVIDIA driver for your GPU device on one of [the supported Linux distributions](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html#linux-distributions) and then the NVIDIA Container Toolkit following [this guide](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html).
+
+  For Ubuntu 22.04 users, you can install the driver and the container toolkit with the following commands:
+
+  ```shell
+  $ sudo apt install --no-install-recommends nvidia-headless-545 nvidia-utils-545
+  ```
+
+  For other OS users, please refer to the [official installation guide](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#installing-on-ubuntu-and-debian).
+
+  You can check whether the driver has been installed correctly by running the following command:
+
+  ```shell
+  $ modinfo nvidia | grep "^version"
+  version:        535.161.07
+  ```
+
+  You are recommended to use the drivers of version 535 and above.
 
 - You have installed a Kubernetes cluster, and the `kubectl` command-line tool has been configured to communicate with your cluster. It is recommended to run this tutorial on a cluster with at least two nodes that are not acting as control plane hosts.
 
@@ -34,26 +51,26 @@ To install Milvus standalone with Docker Compose, follow these steps:
 
 ### Download and configure the `YAML` file
 
-[Download](https://github.com/milvus-io/milvus/releases/download/v2.3.10/milvus-standalone-docker-compose-gpu.yml) `milvus-standalone-docker-compose-gpu.yml` and save it as `docker-compose.yml` manually, or with the following command.
+[Download](https://github.com/milvus-io/milvus/releases/download/v2.3.12/milvus-standalone-docker-compose-gpu.yml) `milvus-standalone-docker-compose-gpu.yml` and save it as `docker-compose.yml` manually, or with the following command.
 
   ```
-  $ wget https://github.com/milvus-io/milvus/releases/download/v2.3.10/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml
+  $ wget https://github.com/milvus-io/milvus/releases/download/v2.3.12/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml
   ```
 
   You need to make some changes to the environment variables of the standalone service in the YAML file as follows:
 
   - To assign a specific GPU device to Milvus, locate the `deploy.resources.reservations.devices[0].devices_ids` field in the definition of the `standalone` service and replace its value with the ID of the desired GPU. You can use the `nvidia-smi` tool, included with NVIDIA GPU display drivers, to determine the ID of a GPU device. Milvus supports multiple GPU devices.
 
-  - Add `KNOWHERE_GPU_MEM_POOL_SIZE` in the `environment` section of the `standalone` service and set its value to reflect the size of a shared display memory pool. The format for the size is `initialSize;maximumSize`, where `initialSize` represents the initial size of the memory pool and `maximumSize` represents its maximum size. Both values should be integers set in MB joined by a semicolon(`;`). Milvus uses this field to allocate display memory to each process.
+  - Set the size of the memory pool assigned for GPU indexing, where `initialSize` represents the initial size of the memory pool and `maximumSize` represents its maximum size. Both values should be integers set in MB. Milvus uses these fields to allocate display memory to each process.
 
   Assign a single GPU device to Milvus:
 
   ```yaml
   ...
   standalone:
-    environment:
-      ...
-      KNOWHERE_GPU_MEM_POOL_SIZE: 2048;4096
+    gpu:
+      initMemSize: 0
+      maxMemSize: 1024
     ...
     deploy:
       resources:
@@ -70,9 +87,9 @@ To install Milvus standalone with Docker Compose, follow these steps:
   ```yaml
   ...
   standalone:
-    environment:
-      ...
-      KNOWHERE_GPU_MEM_POOL_SIZE: 2048;4096
+    gpu:
+      initMemSize: 0
+      maxMemSize: 1024
     ...
     deploy:
       resources:

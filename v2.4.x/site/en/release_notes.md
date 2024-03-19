@@ -6,6 +6,73 @@ summary: Milvus Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.3.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.3.12
+
+Release date: Mar 15, 2024
+
+| Milvus version | Python SDK version | Java SDK version | Go SDK version | Node.js SDK version |
+|----------------|--------------------|------------------|----------------|---------------------|
+| 2.3.12         | 2.3.7              | 2.3.4            | 2.3.6          | 2.3.5               |
+
+Milvus v2.3.12 is a bug-fix release that resolves data loss in some edge cases and includes several other minor fixes. The enhancements address the high memory usage of coordinators in instances with a large number of segments and the ARM image page size issue. 
+
+It is highly recommended to upgrade to this latest version to prevent data loss.
+
+### Bug Fixes
+
+- [Critical] Fixed a bug that some insert data would be lost when deleteBuf memory policy is triggered ([#31159](https://github.com/milvus-io/milvus/pull/31159))
+- Fixed a bug that some duplicated segments couldn't be released after channel balancing  ([#31126](https://github.com/milvus-io/milvus/pull/31126))
+- Fixed a bug that the balance checker of the Querycoord used the wrong param item for check interval ([#31141](https://github.com/milvus-io/milvus/pull/31141))
+- Fixed a bug that database info could be incorrect when describing collection with ID  ([#31177](https://github.com/milvus-io/milvus/pull/31177))
+
+### Improvements
+
+- Change pagesize to 64k for AARCH64 platform ([#31114](https://github.com/milvus-io/milvus/pull/31114))
+- Introduce an internal API to list indexes meta and reduce memory usage during load collection ([#31150](https://github.com/milvus-io/milvus/pull/31150))([#31163](https://github.com/milvus-io/milvus/pull/31163))
+
+## v2.3.11
+
+Release date: Mar 8, 2024
+
+| Milvus version | Python SDK version | Java SDK version | Go SDK version | Node.js SDK version |
+|----------------|--------------------|------------------|----------------|---------------------|
+| 2.3.11         | 2.3.6              | 2.3.4            | 2.3.5          | 2.3.5               |
+
+Milvus v2.3.11 brings improvements and bug fixes aimed at enhancing performance, security, and stability. The improvements include optimized data loading, enhanced security with TLS support for Kafka connections, memory optimization, and more. Additionally, bug fixes address issues such as search/query failures, incorrect data types in outputs, and disk estimation errors. We encourage you to update to this latest version to take advantage of these enhancements and fixes.
+
+### Improvements
+
+- Optimized JSON loading by reducing 1x memory copy ([#30864](https://github.com/milvus-io/milvus/pull/30864))
+- Implemented TLS support for Kafka connections ([#30466](https://github.com/milvus-io/milvus/pull/30466) [#30925](https://github.com/milvus-io/milvus/pull/30925))
+- Optimized monitoring: Remove time tick delay metrics when nodes go offline ([#30879](https://github.com/milvus-io/milvus/pull/30879))
+- Optimized memory usage and loading speed for variable length data ([#30900](https://github.com/milvus-io/milvus/pull/30900))
+- Implemented support for varchar autoID in bulk insert operations ([#30913](https://github.com/milvus-io/milvus/pull/30913))
+- Added support for rate limiting for flush operations at the collection level ([#29568](https://github.com/milvus-io/milvus/pull/29568))
+- Improved compatibility for the watch DM channel request ([#30954](https://github.com/milvus-io/milvus/pull/30954))
+- Enhanced stability when reading S3 objects ([#30976](https://github.com/milvus-io/milvus/pull/30976))
+- Reduced contention for locks in the DescribeIndex operation ([#30975](https://github.com/milvus-io/milvus/pull/30975))
+- Optimized automatic balancing in QueryCoord ([#30725](https://github.com/milvus-io/milvus/pull/30725))
+- Enabled Milvus containers to run as a non-root user ([#30937](https://github.com/milvus-io/milvus/pull/30937))
+- Enhanced lock granularity in DataCoord meta ([#30986](https://github.com/milvus-io/milvus/pull/30986))
+- Enhanced memory estimation during loading by adding a load memory factor ([#30999](https://github.com/milvus-io/milvus/pull/30999))
+- Reduced memory consumption for DataNode when dealing with multiple collections ([#30991](https://github.com/milvus-io/milvus/pull/30991))
+- Optimized the connection manager in the proxy to prevent out-of-memory errors ([#31009](https://github.com/milvus-io/milvus/pull/31009))
+
+### Bug Fixes
+
+- Fixed search/query failed caused by passing an incorrect context and missing error handling ([#30818](https://github.com/milvus-io/milvus/pull/30818))
+- Fixed incorrect data types in the output when using the RESTful query interface ([#30738](https://github.com/milvus-io/milvus/pull/30738))
+- Fixed incorrect disk estimation when loading disk index (or index with mmap enabled) ([#30948](https://github.com/milvus-io/milvus/pull/30948))
+- Fixed the issue where redundant segments with older versions may never be released ([#30953](https://github.com/milvus-io/milvus/pull/30953))
+- Fixed the issue where incorrect disk limits may be read ([#30966](https://github.com/milvus-io/milvus/pull/30966))
+- Fixed a series of issues with the RESTful interface, such as incorrect int64 precision and failed insertion ([#30873](https://github.com/milvus-io/milvus/pull/30873))
+- Fixed panic during rolling upgrade caused by compatibility issues ([#30656](https://github.com/milvus-io/milvus/pull/30656))
+- Fixed an issue where flush and compaction were stalled due to uncleared compaction tasks in the Datanode ([#30972](https://github.com/milvus-io/milvus/pull/30972))
+- Fixed frequent lock contention in the GetCompactionTo operation, which caused channel checkpoints lag ([#30965](https://github.com/milvus-io/milvus/pull/30965))
+- Fixed the issue where Datanode failed to update channel checkpoints with multiple collections ([#31024](https://github.com/milvus-io/milvus/pull/31024) [#31082](https://github.com/milvus-io/milvus/pull/31082))
+- Fixed insertion failures caused by frequent contention for locks ([#31026](https://github.com/milvus-io/milvus/pull/31026))
+- Fixed proxy panic caused by missing error handling ([#31086](https://github.com/milvus-io/milvus/pull/31086))
+
 ## v2.3.10
 
 Release date: Feb 23, 2024
