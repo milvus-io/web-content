@@ -192,19 +192,76 @@
       "order": 3
     },
     {
-      "id": "example_code.md",
-      "title": "Hello Milvus",
+      "id": "quickstart.md",
+      "title": "Quickstart",
       "label1": "getstarted",
       "label2": "",
       "label3": "",
-      "order": 3
+      "order": 4
     },
+    {
+      "id": "embeddings",
+      "title": "Embeddings",
+      "label1": "",
+      "label2": "",
+      "label3": "",
+      "order": 2,
+      "isMenu": true
+    }, 
+    {
+      "id": "embeddings.md",
+      "title": "Embeddings",
+      "label1": "embeddings",
+      "label2": "",
+      "label3": "",
+      "order": 0
+    }, 
+    {
+      "id": "embed-with-openai.md",
+      "title": "OpenAI",
+      "label1": "embeddings",
+      "label2": "",
+      "label3": "",
+      "order": 1
+    }, 
+    {
+      "id": "embed-with-sentence-transform.md",
+      "title": "Sentence Transformers",
+      "label1": "embeddings",
+      "label2": "",
+      "label3": "",
+      "order": 2
+    }, 
+    {
+      "id": "embed-with-bgm-m3.md",
+      "title": "BGE M3",
+      "label1": "embeddings",
+      "label2": "",
+      "label3": "",
+      "order": 3
+    }, 
+    {
+      "id": "embed-with-bm25.md",
+      "title": "BM25",
+      "label1": "embeddings",
+      "label2": "",
+      "label3": "",
+      "order": 4
+    }, 
+    {
+      "id": "embed-with-splade.md",
+      "title": "SPLADE",
+      "label1": "embeddings",
+      "label2": "",
+      "label3": "",
+      "order": 5
+    }, 
     {
       "id": "userguide",
       "title": "User Guide",
       "label1": "",
       "label2": "",
-      "order": 2,
+      "order": 3,
       "isMenu": true
     },
     {
@@ -221,134 +278,19 @@
       "label1": "userguide",
       "label2": "",
       "label3": "",
-      "order": 1,
-      "isMenu": true
+      "order": 1
     },
     {
-      "id": "manage_collection",
+      "id": "manage-collections.md",
       "title": "Manage Collections",
       "label1": "userguide",
       "label2": "",
       "label3": "",
-      "order": 1,
-      "isMenu": true
-    },
-    {
-      "id": "create_collection.md",
-      "title": "Create a Collection",
-      "label1": "userguide",
-      "label2": "manage_collection",
-      "label3": "",
-      "order": 0
-    },
-    {
-      "id": "rename_collection.md",
-      "title": "Rename a Collection",
-      "label1": "userguide",
-      "label2": "manage_collection",
-      "label3": "",
-      "order": 1
-    },    
-    {
-      "id": "modify_collection.md",
-      "title": "Modify a Collection",
-      "label1": "userguide",
-      "label2": "manage_collection",
-      "label3": "",
       "order": 2
     },
     {
-      "id": "check_collection.md",
-      "title": "Check Collection Information",
-      "label1": "userguide",
-      "label2": "manage_collection",
-      "label3": "",
-      "order": 3
-    },
-    {
-      "id": "drop_collection.md",
-      "title": "Drop a Collection",
-      "label1": "userguide",
-      "label2": "manage_collection",
-      "label3": "",
-      "order": 4
-    },
-    {
-      "id": "collection_alias.md",
-      "title": "Manage Collection Alias",
-      "label1": "userguide",
-      "label2": "manage_collection",
-      "label3": "",
-      "order": 5
-    },
-    {
-      "id": "load_collection.md",
-      "title": "Load Collection",
-      "label1": "userguide",
-      "label2": "manage_collection",
-      "label3": "",
-      "order": 6
-    },
-    {
-      "id": "release_collection.md",
-      "title": "Release Collection",
-      "label1": "userguide",
-      "label2": "manage_collection",
-      "label3": "",
-      "order": 7
-    },
-    {
-      "id": "manage_partition",
-      "title": "Manage Partitions",
-      "label1": "userguide",
-      "label2": "",
-      "label3": "",
-      "order": 2,
-      "isMenu": true
-    },
-    {
-      "id": "create_partition.md",
-      "title": "Create a Partition",
-      "label1": "userguide",
-      "label2": "manage_partition",
-      "label3": "",
-      "order": 0
-    },
-    {
-      "id": "check_partition.md",
-      "title": "Check Partition Information",
-      "label1": "userguide",
-      "label2": "manage_partition",
-      "label3": "",
-      "order": 1
-    },
-    {
-      "id": "drop_partition.md",
-      "title": "Drop a Partition",
-      "label1": "userguide",
-      "label2": "manage_partition",
-      "label3": "",
-      "order": 2
-    },
-    {
-      "id": "load_partition.md",
-      "title": "Load a Partition",
-      "label1": "userguide",
-      "label2": "manage_partition",
-      "label3": "",
-      "order": 3
-    },
-    {
-      "id": "release_partition.md",
-      "title": "Release a Partition",
-      "label1": "userguide",
-      "label2": "manage_partition",
-      "label3": "",
-      "order": 4
-    },
-    {
-      "id": "manage_data",
-      "title": "Manage Data",
+      "id": "manage_indexes",
+      "title": "Manage Indexes",
       "label1": "userguide",
       "label2": "",
       "label3": "",
@@ -356,81 +298,40 @@
       "isMenu": true
     },
     {
-      "id": "insert_data.md",
-      "title": "Insert Entities",
+      "id": "index-vector-fields.md",
+      "title": "Index Vector Fields",
       "label1": "userguide",
-      "label2": "manage_data",
+      "label2": "manage_indexes",
       "label3": "",
       "order": 0
     },
     {
-      "id": "bulk_insert.md",
-      "title": "Insert Entities from Files",
+      "id": "index-scalar-fields.md",
+      "title": "Index Scalar Fields",
       "label1": "userguide",
-      "label2": "manage_data",
+      "label2": "manage_indexes",
       "label3": "",
       "order": 1
     },
     {
-      "id": "upsert_entities.md",
-      "title": "Upsert Entities",
+      "id": "manage-partitions.md",
+      "title": "Manage Partitions",
       "label1": "userguide",
-      "label2": "manage_data",
-      "label3": "",
-      "order": 2
-    },    
-    {
-      "id": "delete_data.md",
-      "title": "Delete Entities",
-      "label1": "userguide",
-      "label2": "manage_data",
-      "label3": "",
-      "order": 3
-    },
-    {
-      "id": "compact_data.md",
-      "title": "Compact Data",
-      "label1": "userguide",
-      "label2": "manage_data",
+      "label2": "",
       "label3": "",
       "order": 4
     },
     {
-      "id": "manage_index",
-      "title": "Manage Indexes",
+      "id": "insert-update-delete.md",
+      "title": "Insert, Upsert & Delete",
       "label1": "userguide",
       "label2": "",
       "label3": "",
-      "order": 5,
-      "isMenu": true
+      "order": 5
     },
     {
-      "id": "build_index.md",
-      "title": "Build an Index on Vectors",
-      "label1": "userguide",
-      "label2": "manage_index",
-      "label3": "",
-      "order": 0
-    },
-    {
-      "id": "build_scalar_index.md",
-      "title": "Build an Index on Scalars",
-      "label1": "userguide",
-      "label2": "manage_index",
-      "label3": "",
-      "order": 1
-    },  
-    {
-      "id": "drop_index.md",
-      "title": "Drop an Index",
-      "label1": "userguide",
-      "label2": "manage_index",
-      "label3": "",
-      "order": 2
-    },
-    {
-      "id": "search",
-      "title": "Search and Query",
+      "id": "search_query_get",
+      "title": "Search, Query & Get",
       "label1": "userguide",
       "label2": "",
       "label3": "",
@@ -438,20 +339,60 @@
       "isMenu": true
     },
     {
-      "id": "search.md",
-      "title": "Search",
+      "id": "single-vector-search.md",
+      "title": "Single-Vector Search",
       "label1": "userguide",
-      "label2": "search",
+      "label2": "search_query_get",
       "label3": "",
       "order": 0
     },
     {
-      "id": "query.md",
-      "title": "Query",
+      "id": "multi-vecctor-search.md",
+      "title": "Multi-Vector Search",
       "label1": "userguide",
-      "label2": "search",
+      "label2": "search_query_get",
       "label3": "",
       "order": 1
+    },
+    {
+      "id": "get-and-scalar-query.md",
+      "title": "Get & Scalar Query",
+      "label1": "userguide",
+      "label2": "search_query_get",
+      "label3": "",
+      "order": 2
+    },
+    {
+      "id": "with-iterators.md",
+      "title": "With Iterators",
+      "label1": "userguide",
+      "label2": "search_query_get",
+      "label3": "",
+      "order": 3
+    },
+    {
+      "id": "enable-dynamic-field.md",
+      "title": "Enable Dynamic Field",
+      "label1": "userguide",
+      "label2": "",
+      "label3": "",
+      "order": 7
+    },
+    {
+      "id": "use-partition-key.md",
+      "title": "Use Partition Key",
+      "label1": "userguide",
+      "label2": "",
+      "label3": "",
+      "order": 8
+    },
+    {
+      "id": "use-json-fields.md",
+      "title": "Use JSON Fields",
+      "label1": "userguide",
+      "label2": "",
+      "label3": "",
+      "order": 9
     },
     {
       "id": "bootcamp_userguide",
@@ -459,7 +400,7 @@
       "label1": "userguide",
       "label2": "",
       "label3": "",
-      "order": 8,
+      "order": 10,
       "outLink": "https://milvus.io/bootcamp"
     },
     {
@@ -467,7 +408,7 @@
       "title": "Administration Guide",
       "label1": "",
       "label2": "",
-      "order": 3,
+      "order": 4,
       "isMenu": true
     },   
     {
@@ -851,7 +792,7 @@
       "label1": "",
       "label2": "",
       "label3": "",
-      "order": 4,
+      "order": 5,
       "isMenu": true
     },
     {
@@ -939,7 +880,7 @@
       "title": "Benchmarks",
       "label1": "",
       "label2": "",
-      "order": 5,
+      "order": 6,
       "isMenu": true
     },     
     {
@@ -947,7 +888,7 @@
       "title": "Tools",
       "label1": "",
       "label2": "",
-      "order": 6,
+      "order": 7,
       "isMenu": true
     },
     {
@@ -1097,14 +1038,46 @@
       "label2": "",
       "label3": "",
       "order": 6,
-      "outLink": "https://github.com/zilliztech/milvus-cdc"
+      "isMenu": true
+    },
+    {
+      "id": "milvus-cdc-overview.md",
+      "title": "Overview",
+      "label1": "tools",
+      "label2": "milvus_cdc",
+      "label3": "",
+      "order": 0
+    },
+    {
+      "id": "deploy-cdc-server.md",
+      "title": "Deploy CDC Server",
+      "label1": "tools",
+      "label2": "milvus_cdc",
+      "label3": "",
+      "order": 1
+    },
+    {
+      "id": "manage-cdc-tasks.md",
+      "title": "Manage CDC Tasks",
+      "label1": "tools",
+      "label2": "milvus_cdc",
+      "label3": "",
+      "order": 2
+    },
+    {
+      "id": "cdc-monitoring.md",
+      "title": "Monitoring",
+      "label1": "tools",
+      "label2": "milvus_cdc",
+      "label3": "",
+      "order": 3
     },
     {
       "id": "reference",
       "title": "Reference",
       "label1": "",
       "label2": "",
-      "order": 7,
+      "order": 8,
       "isMenu": true
     },
     {
@@ -1192,7 +1165,7 @@
     },
     {
       "id": "mmap.md",
-      "title": "MMap-enabled Queries",
+      "title": "MMap-enabled Storage",
       "label1": "reference",
       "label2": "",
       "order": 5
@@ -1212,18 +1185,11 @@
       "order": 7
     },
     {
-      "id": "dynamic_schema.md",
-      "title": "Dynamic Schema",
+      "id": "gpu_index.md",
+      "title": "GPU Index",
       "label1": "reference",
       "label2": "",
       "order": 8
-    },
-    {
-      "id": "json_data_type.md",
-      "title": "Use JSON Field",
-      "label1": "reference",
-      "label2": "",
-      "order": 9
     },
     {
       "id": "array_data_type.md",
@@ -1240,8 +1206,8 @@
       "order": 10
     },
     {
-      "id": "partition_key.md",
-      "title": "Partition Key",
+      "id": "sparse_vector.md",
+      "title": "Sparse Vector",
       "label1": "reference",
       "label2": "",
       "order": 11      

@@ -65,3 +65,19 @@ Under this section, you can configure the default names of partition and index, 
   </tbody>
 </table>
 
+## `common.ttMsgEnabled`
+
+<table id="common.ttMsgEnabled">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Whether to disable the internal time messaging mechanism for the system. If disabled (set to `false`), the system will not allow DML operations, including insertion, deletion, queries, and searches. This helps Milvus-CDC synchronize incremental data.</td>
+      <td>false</td>
+    </tr>
+  </tbody>
+</table>

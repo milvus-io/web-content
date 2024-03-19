@@ -239,6 +239,23 @@ Under this section, you can configure proxy port, system limits, etc.
   </tbody>
 </table>
 
+## `proxy.maxVectorFieldNum`
+
+<table id="proxy.maxVectorFieldNum">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>The maximum number of vector fields that can be specified in a collection. Value range: [1, 10].</td>
+      <td>4</td>
+    </tr>
+  </tbody>
+</table>
+
 ## `proxy.accessLog.enable`
 
 <table id="proxy.accessLog.enable">

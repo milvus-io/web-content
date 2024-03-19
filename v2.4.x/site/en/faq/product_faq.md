@@ -163,7 +163,15 @@ In Milvus, a vector similarity search retrieves vectors based on similarity calc
 
 #### Why does a float vector value have a precision of 7 decimal digits in Milvus?
 
-Milvus stores vectors as Float32 arrays. A Float32 value has a precision of 7 decimal digits. Even with a Float64 value, such as 1.3476964684980388, Milvus stores it as 1.347696. Therefore, when you retrieve such a vector from Milvus, the precision of the Float64 value is lost.
+Milvus supports storing vectors as Float32 arrays. A Float32 value has a precision of 7 decimal digits. Even with a Float64 value, such as 1.3476964684980388, Milvus stores it as 1.347696. Therefore, when you retrieve such a vector from Milvus, the precision of the Float64 value is lost.
+
+#### How does Milvus handle vector data types and precision?
+
+Milvus supports Binary, Float32, Float16, and BFloat16 vector types.
+
+- Binary vectors: Store binary data as sequences of 0s and 1s, used in image processing and information retrieval.
+- Float32 vectors: Default storage with a precision of about 7 decimal digits. Even Float64 values are stored with Float32 precision, leading to potential precision loss upon retrieval.
+- Float16 and BFloat16 vectors: Offer reduced precision and memory usage. Float16 is suitable for applications with limited bandwidth and storage, while BFloat16 balances range and efficiency, commonly used in deep learning to reduce computational requirements without significantly impacting accuracy.
 
 #### Still have questions?
 

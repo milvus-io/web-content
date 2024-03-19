@@ -82,7 +82,7 @@ The following table lists the description of each symbol mentioned in the above 
 | SingleExpr   |  SingleExpr, namely single expression, can be either a TermExpr or a CompareExpr.      |
 | LogicalExpr      | A LogicalExpr can be a BinaryLogicalOp on two LogicalExprs, or a UnaryLogicalOp on a single LogicalExpr, or a LogicalExpr grouped within parentheses, or a SingleExpr. The LogicalExpr is defined recursively.    |
 | Expr   | Expr, an abbreviation meaning expression, can be LogicalExpr or NIL. |
-| MatchOp   | A MatchOp, namely a match operator, compares a string to a string constant or a string prefix constant. |
+| MatchOp   | A MatchOp, namely a match operator, compares a string to a string constant or a string prefix, infix, or suffix constant. |
 | JsonArrayOp | A JsonOp, namely a JSON operator, checks whether the specified identifier contains the specified elements. |
 | ArrayOp | An ArrayOp, namely an array operator, checks whether the specified identifier contains the specified elements. |
 
@@ -230,10 +230,13 @@ VARCHAR not in ["str1", "str2"]
 "200+300 < int64 <= 500+500"
 ```
 
-7. MatchOp (prefix matching)
+7. MatchOp
 
 ```
 VARCHAR like "prefix%"
+VARCHAR like "%suffix"
+VARCHAR like "%middle%"
+VARCHAR like "_suffix"
 ```
 
 8. JsonArrayOp

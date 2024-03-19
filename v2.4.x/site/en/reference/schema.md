@@ -117,8 +117,10 @@ fields = [
   - JSON: [JSON](json_data_type.md)
   - Array: Array(array_data_type.md)
 - Vector field supports:
-  - BINARY_VECTOR: Binary vector
-  - FLOAT_VECTOR: Float vector
+  - BINARY_VECTOR: Stores binary data as a sequence of 0s and 1s, used for compact feature representation in image processing and information retrieval.
+  - FLOAT_VECTOR: Stores 32-bit floating-point numbers, commonly used in scientific computing and machine learning for representing real numbers.
+  - FLOAT16_VECTOR: Stores 16-bit half-precision floating-point numbers, used in deep learning and GPU computations for memory and bandwidth efficiency.
+  - BFLOAT16_VECTOR: Stores 16-bit floating-point numbers with reduced precision but the same exponent range as Float32, popular in deep learning for reducing memory and computational requirements without significantly impacting accuracy.
 
 JSON as a composite data type is available. A JSON field comprises key-value pairs. Each key is a string, and a value can be a number, string, boolean value, array, or list. For details, refer to [JSON: a new data type](dynamic_schema.md#JSON-a-new-data-type)
 
