@@ -31,7 +31,7 @@ writer = LocalBulkWriter(
 
 __PARAMETERS:__
 
-- __schema__ (_[CollectionSchema](./ORM-CollectionSchema)_) -
+- __schema__ (_[CollectionSchema](../../../ORM/CollectionSchema/CollectionSchema.md)_) -
 
     __[REQUIRED]__
 
