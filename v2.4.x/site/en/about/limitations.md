@@ -66,7 +66,7 @@ In current release, data to be load must be under 90% of the total memory resour
 | <code>topk</code> (number of the most similar result to return)   | 16,384       |
 | <code>nq</code> (number of the search requests)    | 16,384       |
 
-## Index liimits on different search types
+## Index limits on different search types
 
 The following table provides an overview of the support for various search behaviors across different index types.
 
