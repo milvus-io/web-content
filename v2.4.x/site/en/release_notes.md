@@ -15,15 +15,15 @@ Release date: March 20, 2024
 
 This release introduces several scenario-based features:
 
-- **New GPU Index - CAGRA**: Thanks to NVIDIA's contribution, this new GPU index offers a 10x performance boost, especially for batch searches.
+- **New GPU Index - CAGRA**: Thanks to NVIDIA's contribution, this new GPU index offers a 10x performance boost, especially for batch searches. For details, refer to [GPU Index](gpu_index.md).
 
-- **Multi-vector** and **Hybrid Search**: This feature enables storing vector embeddings from multiple models and conducting multi-vector searches.
+- **Multi-vector** and **Hybrid Search**: This feature enables storing vector embeddings from multiple models and conducting multi-vector searches. For details, refer to [Multi-vector Search](multi-vector-search.md).
 
-- **Sparse Vectors**: Ideal for keyword interpretation and analysis, sparse vectors are now supported for processing in your collection.
+- **Sparse Vectors**: Ideal for keyword interpretation and analysis, sparse vectors are now supported for processing in your collection. For details, refer to [Sparse Vectors](sparse_vector.md).
 
-- **Grouping Search**: Categorical aggregation enhances document-level recall for Retrieval-Augmented Generation (RAG) applications.
+- **Grouping Search**: Categorical aggregation enhances document-level recall for Retrieval-Augmented Generation (RAG) applications. For details, refer to [Grouping Search](single-vector-search.md#grouping-search).
 
-- **Inverted Index** and **Fuzzy Matching**: These capabilities improve keyword retrieval for scalar fields.
+- **Inverted Index** and **Fuzzy Matching**: These capabilities improve keyword retrieval for scalar fields. For details, refer to [Index Scalar Fields](index-scalar-fields.md) and [Filtered Search](single-vector-search.md#filtered-search).
 
 ### New Features
 
@@ -90,13 +90,15 @@ Milvus uses memory-mapped storage (MMap) to optimize its memory usage. Instead o
 
 In addition, this release also allows dynamic and fine-grained control over MMap without the need to restart Milvus.
 
+For details, refer to [MMap Storage](mmap.md).
+
 ### Others
 
 #### Milvus-CDC
 
 Milvus-CDC is an easy-to-use companion tool to capture and synchronize incremental data between Milvus instances, allowing for easy incremental backup and disaster recovery. In this release, Milvus-CDC has improved stability, and its Change Data Capture (CDC) functionality now becomes generally available.
 
-To learn more about Milvus-CDC, visit [GitHub repository](https://github.com/zilliztech/milvus-cdc).
+To learn more about Milvus-CDC, refer to [GitHub repository](https://github.com/zilliztech/milvus-cdc) and [Milvus-CDC Overview](milvus-cdc-overview.md).
 
 #### Refined MilvusClient Interfaces
 
