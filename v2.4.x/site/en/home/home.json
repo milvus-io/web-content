@@ -14,7 +14,7 @@
         "title": "Quick Start",
         "key": "Cluster",
         "btnLabel": "Learn to use",
-        "link": "example_code.md"
+        "link": "quickstart.md"
       },
       {
         "title": "Milvus Bootcamp",
@@ -37,24 +37,24 @@
     "items": [{
         "label": "Use",
         "list": [{
-            "text": "Create a Collection",
-            "link": "create_collection.md"
+            "text": "Manage Collections",
+            "link": "manage-collections.md"
           },
           {
-            "text": "Insert Data",
-            "link": "insert_data.md"
+            "text": "Insert, Upsert & Delete",
+            "link": "insert-update-delete.md"
           },
           {
-            "text": "Build an Index",
-            "link": "build_index.md"
+            "text": "Manage Indexes",
+            "link": "manage-indexes.md"
           },
           {
-            "text": "Vector Similarity Search",
-            "link": "search.md"
+            "text": "Single-Vector Search",
+            "link": "single-vector-search.md"
           },
           {
-            "text": "Query",
-            "link": "query.md"
+            "text": "Get & Scalar Query",
+            "link": "get-and-scalar-query.md"
           }
         ]
       },
@@ -116,16 +116,16 @@
     },
     "title": "Blog",
     "items": [{
-      "time": "June 29, 2021",
-      "link": "https://medium.com/@xiaofan.luan/milvus-2-0-redefining-vector-database-438479a7dd6e",
-      "title": "Milvus 2.0: Redefining Vector Database",
-      "abstract": "Milvus 2.0 is available now. This refactored, cloud-native version powers image/video search, chatbots, and many more AI applications.",
+      "time": "Feb 19, 2024",
+      "link": "https://milvus.io/blog/what-milvus-version-to-start-with.md",
+      "title": "What Milvus version to start with",
+      "abstract": "Selecting the appropriate Milvus version is foremost to the success of any project leveraging vector search technology. With different Milvus versions tailored to varying requirements, understanding the importance of selecting the correct version is crucial for achieving the desired results.",
       "imgSrc": "https://zilliz-cms.s3.us-west-2.amazonaws.com/2_0_cover_bbc582b347.jpg"
     }]
   },
   "section5": {
     "title": "What's new in docs",
-    "date": "Oct 2021",
+    "date": "March 2024",
     "list": [
       "With the release of Milvus 2.0-RC7, we've made a number of compatibility and performance updates. Check out the <a href='release_notes.md'>Release Notes</a> for details. Note that RC7 is <i>not compatible</i> with previous versions of Milvus 2.0.0 due to changes made to storage format.",
       "<a href='/docs/v2.0.0/image_similarity_search.md'>Tutorials</a> are updated with direct links to Jupyter notebook, GitHub repos, and online demos. Read the latest tutorial about how to use Milvus to build a <a href='/blog/dna_sequence_classification.md'>DNA sequence classification model</a>.",

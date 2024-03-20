@@ -157,9 +157,9 @@ We recommend reading [Milvus monitoring framework overview](monitor_overview.md)
   
 | Panel  | Panel description  | PromQL (Prometheus query language)  | The Milvus metrics used  | Milvus metrics description  |
 |---|---|---|---|---|
-| Index Request Rate  | The average number of index building requests received per second by index coord within the past two minutes.  | ```  sum(increase(milvus_indexcoord_indexreq_count{app_kubernetes_io_instance=~"$instance", app_kubernetes_io_name="$app_name", namespace="$namespace"}[2m])/120) by (status)  ```  | `milvus_indexcoord_indexreq_count`  | The number of index building requests received by index coord.  |
-| Index Task Count  | The count of all indexing tasks recorded by index coord in index metadata.  | ```  sum(milvus_indexcoord_indextask_count{app_kubernetes_io_instance=~"$instance", app_kubernetes_io_name="$app_name", namespace="$namespace"}) by (index_task_status)  ```  | `milvus_indexcoord_indextask_count`  | The count of all indexing tasks recorded by index coord in index metadata.  |
-| Index Node Num  | The number of index nodes managed by index coord.    | ```  sum(milvus_indexcoord_indexnode_num{app_kubernetes_io_instance=~"$instance", app_kubernetes_io_name="$app_name", namespace="$namespace"}) by (app_kubernetes_io_instance)  ```  | `milvus_indexcoord_indexnode_num`  | The number of index nodes managed by index coord.    |
+| Index Request Rate  | The average number of index building requests received per second within the past two minutes.  | ```  sum(increase(milvus_indexcoord_indexreq_count{app_kubernetes_io_instance=~"$instance", app_kubernetes_io_name="$app_name", namespace="$namespace"}[2m])/120) by (status)  ```  | `milvus_indexcoord_indexreq_count`  | The number of index building requests received.  |
+| Index Task Count  | The count of all indexing tasks recorded in index metadata.  | ```  sum(milvus_indexcoord_indextask_count{app_kubernetes_io_instance=~"$instance", app_kubernetes_io_name="$app_name", namespace="$namespace"}) by (index_task_status)  ```  | `milvus_indexcoord_indextask_count`  | The count of all indexing tasks recorded in index metadata.  |
+| Index Node Num  | The number of managed index nodes.    | ```  sum(milvus_indexcoord_indexnode_num{app_kubernetes_io_instance=~"$instance", app_kubernetes_io_name="$app_name", namespace="$namespace"}) by (app_kubernetes_io_instance)  ```  | `milvus_indexcoord_indexnode_num`  | The number of managed index nodes.    |
   
 </details>
 

@@ -20,7 +20,7 @@ Composed of a group of stateless proxies, the access layer is the front layer of
 
 The coordinator service assigns tasks to the worker nodes and functions as the system's brain. The tasks it takes on include cluster topology management, load balancing, timestamp generation, data declaration, and data management. 
 
-There are four coordinator types: root coordinator (root coord), data coordinator (data coord), query coordinator (query coord), and index coordinator (index coord).
+There are three coordinator types: root coordinator (root coord), data coordinator (data coord), and query coordinator (query coord).
 
 ### Root coordinator (root coord)
 
@@ -33,10 +33,6 @@ Query coord manages topology and load balancing for the query nodes, and handoff
 ### Data coordinator (data coord)
 
 Data coord manages topology of the data nodes, maintains metadata, and triggers flush, compact, and other background data operations. 
-
-### Index coordinator (index coord)
-
-Index coord manages topology of the index nodes, builds index, and maintains index metadata.
 
 ## Worker nodes
 

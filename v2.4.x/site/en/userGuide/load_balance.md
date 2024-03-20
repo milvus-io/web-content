@@ -257,9 +257,10 @@ load_balance -s 3 -d 4 -ss 431067441441538050
 ## What's next
 
 - Learn more basic operations of Milvus:
-  - [Insert data into Milvus](insert_data.md)
-  - [Create a partition](create_partition.md)
-  - [Build an index for vectors](build_index.md)
-  - [Conduct a vector search](search.md)
-  - [Conduct a hybrid search](hybridsearch.md)
+  - [Insert, Upsert & Delete](insert-update-delete.md)
+  - [Manage Partitions](manage-partitions.md)
+  - [Index Vector Fields](index-vector-fields.md)
+  - [Index Scalar Fields](index-scalar-fields.md)
+  - [Single-vector search](single-vector-search.md)
+  - [Multi-vector search](multi-vector-search.md)
 

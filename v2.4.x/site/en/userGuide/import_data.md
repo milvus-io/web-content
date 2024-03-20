@@ -182,9 +182,9 @@ The state codes and their corresponding descriptions.
 ## What's next
 
 - Learn more basic operations of Milvus:
-  - [Build an index for vectors](build_index.md)
-  - [Conduct a vector search](search.md)
-  - [Conduct a hybrid search](hybridsearch.md)
+  - [Index Vetor Fields](index-vector-fields.md)
+  - [Single-Vector Search](single-vector-search.md)
+  - [Multi-Vector Search](multi-vector-search.md)
 - Explore API references for Milvus SDKs:
   - [PyMilvus API reference](/api-reference/pymilvus/v2.3.x/tutorial.html)
   - [Node.js API reference](/api-reference/node/v2.3.x/tutorial.html)

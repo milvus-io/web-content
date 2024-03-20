@@ -221,7 +221,7 @@ Run the following command to check the status of Milvus you just installed.
 $ kubectl get milvus my-release -o yaml
 ```
 
-When the Milvus is successfully installed, you can learn how to [Connect to Milvus server](manage_connection.md).
+When the Milvus is successfully installed, you can learn how to [manage collections](manage-collections.md).
 
 ## Connect to Milvus
 
@@ -278,14 +278,14 @@ When you no longer need the K8s cluster in the test environment, you can run `$ 
 ## What's next
 
 Having installed Milvus, you can:
-- Check [Hello Milvus](example_code.md) to run an example code with different SDKs to see what Milvus can do.
+- Check [Hello Milvus](quickstart.md) to run an example code with different SDKs to see what Milvus can do.
 - Learn the basic operations of Milvus:
-  - [Connect to Milvus server](manage_connection.md)
   - [Manage Databases](manage_databases.md)
-  - [Create a collection](create_collection.md)
-  - [Create a partition](create_partition.md)
-  - [Insert data](insert_data.md)
-  - [Conduct a vector search](search.md)
+  - [Manage Collections](manage-collections.md)
+  - [Manage Partitions](manage-partitions.md)
+  - [Insert, Upsert & Delete](insert-update-delete.md)
+  - [Single-Vector Search](single-vector-search.md)
+  - [Multi-Vector Search](multi-vector-search.md)
 - [Upgrade Milvus Using Milvus Operator](upgrade_milvus_standalone-operator.md)
 - Explore [Milvus Backup](milvus_backup_overview.md), an open-source tool for Milvus data backups.
 - Explore [Birdwatcher](birdwatcher_overview.md), an open-source tool for debugging Milvus and dynamic configuration updates.

@@ -39,7 +39,7 @@ id: home.md
 </div>
 
 <div class="start_card_container">
-  <a href="example_code.md">
+  <a href="quickstart.md">
     <img  src="../../../assets/home_quick_start.svg" alt="icon" />
     <p class="link-btn">Quick Start <i class="fas fa-chevron-right"></i></p>
   </a>
@@ -65,11 +65,11 @@ id: home.md
 <div class="recomment-item">
   <p>Use</p>
 
-- [Create a Collection](create_collection.md)
-- [Manage Data](insert_data.md)
-- [Build an Index](build_index.md)
-- [Search](search.md)
-- [Query](query.md)
+- [Manage Collections](manage-collections.md)
+- [Insert, Upsert, and Delete](insert-update-delete.md)
+- [Index Vector Fields](index-vector-fields.md)
+- [Single-Vector Search](single-vector-search.md)
+- [Get & Scalar Query](get-and-scalar-query.md)
 </div>
 
 <div class="recomment-item">
@@ -98,12 +98,12 @@ id: home.md
 
 ## What's new in docs
 
-_Nov 2022 - Milvus 2.2.0 release_
+_Nov 2024 - Milvus 2.4.0 release_
 
-- Added guidance on how to [bulk insert entities from files](bulk_insert.md).
-- Added description of [disk-based ANN index](disk_index.md).
-- Added guidance on how to configure [quotas_and_limits](configure_quota_limits.md).
+- Added guidance on how to [conduct multi-vector search](multi-vector-search.md).
+- Added description of [GPU index](gpu_index.md).
+- Added guidance on how to [embed your data using PyMilvus](embeddings.md).
 - Added guidance on how to [enable RBAC](rbac.md) with Milvus Operator.
-- Added guidance on how to [migrate metadata](upgrade_milvus_cluster-helm.md) from 2.1.x to 2.2.0
+- Added descriptions of [Milvus CDC](milvus-cdc-overview.md).
 
 </div>

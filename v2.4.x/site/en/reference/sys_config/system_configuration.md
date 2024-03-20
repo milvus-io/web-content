@@ -97,14 +97,6 @@ Under this section, you can configure query node port, graceful time, etc.
 
 See [Query Node-related Configurations](configure_querynode.md) for detailed description for each parameter under this section.
 
-### `indexCoord`
-
-Index coordinator (index coord) manages topology of the index nodes, and maintains index metadata.
-
-Under this section, you can configure index coord address, etc.
-
-See [Index Coordinator-related Configurations](configure_indexcoord.md) for detailed description for each parameter under this section.
-
 ### `indexNode`
 
 Index node builds indexes for vectors.

@@ -132,7 +132,7 @@ The Milvus ecosystem provides helpful tools including:
 ## What's next
 
 - Get started with a 3-minute tutorial:
-  - [Hello Milvus](example_code.md)
+  - [Hello Milvus](quickstart.md)
 - Install Milvus for your testing or production environment:
   - [Installation Prerequisites](prerequisite-docker.md)
   - [Install Milvus Standalone](install_standalone-docker.md)

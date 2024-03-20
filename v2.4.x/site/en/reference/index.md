@@ -10,7 +10,7 @@ This topic lists various types of in-memory indexes Milvus supports, scenarios e
 
 Indexing is the process of efficiently organizing data, and it plays a major role in making similarity search useful by dramatically accelerating time-consuming queries on large datasets. 
 
-To improve query performance, you can [specify an index type](build_index.md) for each vector field. 
+To improve query performance, you can [specify an index type](index-vector-fields.md) for each vector field. 
 
 <div class="alert note"> 
 Currently, a vector field only supports one index type. Milvus automatically deletes the old index when switching the index type.

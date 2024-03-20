@@ -265,14 +265,6 @@
       "isMenu": true
     },
     {
-      "id": "manage_connection.md",
-      "title": "Manage Milvus Connections",
-      "label1": "userguide",
-      "label2": "",
-      "label3": "",
-      "order": 0
-    },
-    {
       "id": "manage_databases.md",
       "title": "Manage Databases",
       "label1": "userguide",
@@ -347,7 +339,7 @@
       "order": 0
     },
     {
-      "id": "multi-vecctor-search.md",
+      "id": "multi-vector-search.md",
       "title": "Multi-Vector Search",
       "label1": "userguide",
       "label2": "search_query_get",

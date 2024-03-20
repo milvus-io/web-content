@@ -81,10 +81,10 @@ The following tables list the estimation functions for all the data types that M
 
 ## What's next
 
-- To index a scalar field, read [Build an Index on Scalars](build_scalar_index.md).
+- To index a scalar field, read [Build an Index on Scalars](index-scalar-fields.md).
 - To learn more about the related terms and rules mentioned above, read
 
     - [Bitset](bitset.md)
-    - [Hybrid search](hybridsearch.md)
+    - [Multi-Vector search](multi-vector-search.md)
     - [Boolean expression rules](boolean.md)
     - [Supported data types](schema.md#Supported-data-type)
