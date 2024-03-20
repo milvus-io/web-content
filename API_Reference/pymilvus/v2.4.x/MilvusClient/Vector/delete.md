@@ -126,13 +126,13 @@ client.delete(
 
 ## Related methods
 
-- [get()](./Vector/get.md)
+- [get()](./get.md)
 
-- [insert()](./Vector/insert.md)
+- [insert()](./insert.md)
 
-- [query()](./Vector/query.md)
+- [query()](./query.md)
 
-- [search()](./Vector/search.md)
+- [search()](./search.md)
 
-- [upsert()](./Vector/upsert.md)
+- [upsert()](./upsert.md)
 

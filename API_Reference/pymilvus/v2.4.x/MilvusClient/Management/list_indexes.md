@@ -133,13 +133,13 @@ client.list_indexes(collection_name="customized_setup")
 
 ## Related methods
 
-- [add_index()](./Management/add_index.md)
+- [add_index()](./add_index.md)
 
-- [create_index()](./Management/create_index.md)
+- [create_index()](./create_index.md)
 
-- [describe_index()](./Management/describe_index.md)
+- [describe_index()](./describe_index.md)
 
-- [drop_index()](./Management/drop_index.md)
+- [drop_index()](./drop_index.md)
 
-- [prepare_index_params()](./Management/prepare_index_params.md)
+- [prepare_index_params()](./prepare_index_params.md)
 

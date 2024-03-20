@@ -70,9 +70,9 @@ writer.commit(call_back=callback)
 
 ## Related classes and methods
 
-- [append_row()](./RemoteBulkWriter/append_row.md)
+- [append_row()](./append_row.md)
 
-- [AzureConnectParam](./RemoteBulkWriter/AzureConnectParam.md)
+- [AzureConnectParam](./AzureConnectParam.md)
 
-- [S3ConnectParam](./RemoteBulkWriter/S3ConnectParam.md)
+- [S3ConnectParam](./S3ConnectParam.md)
 

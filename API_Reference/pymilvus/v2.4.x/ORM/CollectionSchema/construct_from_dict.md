@@ -69,7 +69,7 @@ print(schema)
 
 The following operations are related to `construct_from_dict()`:
 
-- [FieldSchema](./ORM/FieldSchema.md)
+- [FieldSchema](../FieldSchema/FieldSchema.md)
 
 - [DataType](../../MilvusClient/Collections/DataType.md)
 

@@ -128,21 +128,21 @@ schema.add_field(field_name="my_vector", datatype=DataType.FLOAT_VECTOR, dim=5)
 
 ## Related methods
 
-- [create_collection()](./Collections/create_collection.md)
+- [create_collection()](./create_collection.md)
 
-- [describe_collection()](./Collections/describe_collection.md)
+- [describe_collection()](./describe_collection.md)
 
-- [drop_collection()](./Collections/drop_collection.md)
+- [drop_collection()](./drop_collection.md)
 
-- [get_collection_stats()](./Collections/get_collection_stats.md)
+- [get_collection_stats()](./get_collection_stats.md)
 
-- [has_collection()](./Collections/has_collection.md)
+- [has_collection()](./has_collection.md)
 
-- [list_collections()](./Collections/list_collections.md)
+- [list_collections()](./list_collections.md)
 
-- [rename_collection()](./Collections/rename_collection.md)
+- [rename_collection()](./rename_collection.md)
 
-- [IndexType](./Collections/IndexType.md)
+- [IndexType](./IndexType.md)
 
-- [DataType](./Collections/DataType.md)
+- [DataType](./DataType.md)
 

@@ -37,7 +37,7 @@ An __IndexParams__ contains a list of __IndexParam__ objects.
     │       └── add_index()
     ```
 
-    It offers the __[add_index()](./Management-add_index)__ method to add indexes to the list.
+    It offers the __[add_index()](.-add_index)__ method to add indexes to the list.
 
 __EXCEPTIONS:__
 
@@ -51,13 +51,13 @@ from pymilvus import MilvusClient
 index_params = MilvusClient.prepare_index_params()
 ```
 
-- [add_index()](./Management/add_index.md)
+- [add_index()](./add_index.md)
 
-- [create_index()](./Management/create_index.md)
+- [create_index()](./create_index.md)
 
-- [describe_index()](./Management/describe_index.md)
+- [describe_index()](./describe_index.md)
 
-- [drop_index()](./Management/drop_index.md)
+- [drop_index()](./drop_index.md)
 
-- [list_indexes()](./Management/list_indexes.md)
+- [list_indexes()](./list_indexes.md)
 

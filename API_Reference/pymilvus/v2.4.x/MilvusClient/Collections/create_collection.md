@@ -44,7 +44,7 @@ __PARAMETERS:__
 
     This parameter is designed for the quick setup of a collection and will ignored if the __schema__ is not __None __and a field in the schema has its __is_primary__ set to __True__.
 
-- __id_type__ (_[DataType](./Collections-DataType)_) -
+- __id_type__ (_[DataType](./DataType.md)_) -
 
     The data type of the primary field in this collection.
 
@@ -307,21 +307,21 @@ You can choose between a quick setup or a customized setup as follows:
 
 ## Related methods
 
-- [create_schema()](./Collections/create_schema.md)
+- [create_schema()](./create_schema.md)
 
-- [describe_collection()](./Collections/describe_collection.md)
+- [describe_collection()](./describe_collection.md)
 
-- [drop_collection()](./Collections/drop_collection.md)
+- [drop_collection()](./drop_collection.md)
 
-- [get_collection_stats()](./Collections/get_collection_stats.md)
+- [get_collection_stats()](./get_collection_stats.md)
 
-- [has_collection()](./Collections/has_collection.md)
+- [has_collection()](./has_collection.md)
 
-- [list_collections()](./Collections/list_collections.md)
+- [list_collections()](./list_collections.md)
 
-- [rename_collection()](./Collections/rename_collection.md)
+- [rename_collection()](./rename_collection.md)
 
-- [IndexType](./Collections/IndexType.md)
+- [IndexType](./IndexType.md)
 
-- [DataType](./Collections/DataType.md)
+- [DataType](./DataType.md)
 

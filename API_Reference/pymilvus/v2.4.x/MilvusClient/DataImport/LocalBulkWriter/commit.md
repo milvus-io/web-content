@@ -58,5 +58,5 @@ writer.commit(call_back=callback)
 
 ## Related methods
 
-- [append_row()](./LocalBulkWriter/append_row.md)
+- [append_row()](./append_row.md)
 

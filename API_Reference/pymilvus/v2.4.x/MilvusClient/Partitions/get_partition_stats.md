@@ -112,15 +112,15 @@ client.get_partition_stats(
 
 ## Related methods
 
-- [create_partition()](./Partitions/create_partition.md)
+- [create_partition()](./create_partition.md)
 
-- [drop_partition()](./Partitions/drop_partition.md)
+- [drop_partition()](./drop_partition.md)
 
-- [has_partition()](./Partitions/has_partition.md)
+- [has_partition()](./has_partition.md)
 
-- [list_partitions()](./Partitions/list_partitions.md)
+- [list_partitions()](./list_partitions.md)
 
-- [load_partitions()](./Partitions/load_partitions.md)
+- [load_partitions()](./load_partitions.md)
 
-- [release_partitions()](./Partitions/release_partitions.md)
+- [release_partitions()](./release_partitions.md)
 

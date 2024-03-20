@@ -187,7 +187,7 @@ schema.add_field(
 
 The following operations are related to `add_field()`:
 
-- [FieldSchema](./ORM/FieldSchema.md)
+- [FieldSchema](../FieldSchema/FieldSchema.md)
 
 - [DataType](../../MilvusClient/Collections/DataType.md)
 

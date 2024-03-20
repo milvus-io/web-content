@@ -60,9 +60,9 @@ writer.append_row(
 
 ## Related classes and methods
 
-- [commit()](./RemoteBulkWriter/commit.md)
+- [commit()](./commit.md)
 
-- [AzureConnectParam](./RemoteBulkWriter/AzureConnectParam.md)
+- [AzureConnectParam](./AzureConnectParam.md)
 
-- [S3ConnectParam](./RemoteBulkWriter/S3ConnectParam.md)
+- [S3ConnectParam](./S3ConnectParam.md)
 

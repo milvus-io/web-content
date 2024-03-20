@@ -77,15 +77,15 @@ client.has_partition(
 
 ## Related methods
 
-- [create_partition()](./Partitions/create_partition.md)
+- [create_partition()](./create_partition.md)
 
-- [drop_partition()](./Partitions/drop_partition.md)
+- [drop_partition()](./drop_partition.md)
 
-- [get_partition_stats()](./Partitions/get_partition_stats.md)
+- [get_partition_stats()](./get_partition_stats.md)
 
-- [list_partitions()](./Partitions/list_partitions.md)
+- [list_partitions()](./list_partitions.md)
 
-- [load_partitions()](./Partitions/load_partitions.md)
+- [load_partitions()](./load_partitions.md)
 
-- [release_partitions()](./Partitions/release_partitions.md)
+- [release_partitions()](./release_partitions.md)
 

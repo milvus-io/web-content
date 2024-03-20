@@ -151,9 +151,9 @@ client.get_load_state(
 
 ## Related methods
 
-- [get_load_state()](./Management/get_load_state.md)
+- [get_load_state()](./get_load_state.md)
 
-- [load_collection()](./Management/load_collection.md)
+- [load_collection()](./load_collection.md)
 
-- [refresh_load()](./Management/refresh_load.md)
+- [refresh_load()](./refresh_load.md)
 

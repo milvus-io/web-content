@@ -162,13 +162,13 @@ res = client.insert(
 
 ## Related methods
 
-- [delete()](./Vector/delete.md)
+- [delete()](./delete.md)
 
-- [get()](./Vector/get.md)
+- [get()](./get.md)
 
-- [query()](./Vector/query.md)
+- [query()](./query.md)
 
-- [search()](./Vector/search.md)
+- [search()](./search.md)
 
-- [upsert()](./Vector/upsert.md)
+- [upsert()](./upsert.md)
 

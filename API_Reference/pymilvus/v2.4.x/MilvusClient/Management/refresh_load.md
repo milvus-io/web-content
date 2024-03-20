@@ -64,9 +64,9 @@ client.refresh_load(
 
 ## Related methods
 
-- [get_load_state()](./Management/get_load_state.md)
+- [get_load_state()](./get_load_state.md)
 
-- [load_collection()](./Management/load_collection.md)
+- [load_collection()](./load_collection.md)
 
-- [release_collection()](./Management/release_collection.md)
+- [release_collection()](./release_collection.md)
 

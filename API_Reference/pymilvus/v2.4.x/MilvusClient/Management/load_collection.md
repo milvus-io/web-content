@@ -132,9 +132,9 @@ client.load_collection(
 
 ## Related methods
 
-- [get_load_state()](./Management/get_load_state.md)
+- [get_load_state()](./get_load_state.md)
 
-- [refresh_load()](./Management/refresh_load.md)
+- [refresh_load()](./refresh_load.md)
 
-- [release_collection()](./Management/release_collection.md)
+- [release_collection()](./release_collection.md)
 

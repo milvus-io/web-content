@@ -54,21 +54,21 @@ client.list_collections()
 
 ## Related methods
 
-- [create_collection()](./Collections/create_collection.md)
+- [create_collection()](./create_collection.md)
 
-- [create_schema()](./Collections/create_schema.md)
+- [create_schema()](./create_schema.md)
 
-- [describe_collection()](./Collections/describe_collection.md)
+- [describe_collection()](./describe_collection.md)
 
-- [drop_collection()](./Collections/drop_collection.md)
+- [drop_collection()](./drop_collection.md)
 
-- [get_collection_stats()](./Collections/get_collection_stats.md)
+- [get_collection_stats()](./get_collection_stats.md)
 
-- [has_collection()](./Collections/has_collection.md)
+- [has_collection()](./has_collection.md)
 
-- [rename_collection()](./Collections/rename_collection.md)
+- [rename_collection()](./rename_collection.md)
 
-- [IndexType](./Collections/IndexType.md)
+- [IndexType](./IndexType.md)
 
-- [DataType](./Collections/DataType.md)
+- [DataType](./DataType.md)
 

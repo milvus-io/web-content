@@ -63,7 +63,7 @@ print(schema_dict)
 
 The following operations are related to `to_dict()`:
 
-- [FieldSchema](./ORM/FieldSchema.md)
+- [FieldSchema](../FieldSchema/FieldSchema.md)
 
 - [DataType](../../MilvusClient/Collections/DataType.md)
 

@@ -50,5 +50,5 @@ writer.append_row(
 
 ## Related methods
 
-- [commit()](./LocalBulkWriter/commit.md)
+- [commit()](./commit.md)
 

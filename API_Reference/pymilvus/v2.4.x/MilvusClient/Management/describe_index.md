@@ -199,13 +199,13 @@ client.describe_index(
 
 ## Related methods
 
-- [add_index()](./Management/add_index.md)
+- [add_index()](./add_index.md)
 
-- [create_index()](./Management/create_index.md)
+- [create_index()](./create_index.md)
 
-- [drop_index()](./Management/drop_index.md)
+- [drop_index()](./drop_index.md)
 
-- [list_indexes()](./Management/list_indexes.md)
+- [list_indexes()](./list_indexes.md)
 
-- [prepare_index_params()](./Management/prepare_index_params.md)
+- [prepare_index_params()](./prepare_index_params.md)
 
