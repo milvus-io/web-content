@@ -18,7 +18,7 @@ In this release, you have the flexibility to choose MilvusClient or the original
 | 2.1.x	         | 2.1.3                        |
 | 2.2.x          | 2.2.3                        |
 | 2.3.0          | 2.3.7                        | 
-| 2.4.0-rc.1     | 2.4.0-rc.1                   |
+| 2.4.0-rc.1     | 2.4.0                        |
 
 ## Install & Update
 
