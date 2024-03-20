@@ -104,4 +104,4 @@ To learn more about Milvus-CDC, refer to [GitHub repository](https://github.com/
 
 MilvusClient is an easy-to-use alternative to the ORM module. It adopts a purely functional approach to simplify interactions with the server. Instead of maintaining a connection pool, each MilvusClient establishes a gRPC connection to the server. 
 The MilvusClient module has implemented most of the functionalities of the ORM module.
-To learn more about the MilvusClient module, visit [pymilvus](https://github.com/milvus-io/pymilvus).
+To learn more about the MilvusClient module, visit [pymilvus](https://github.com/milvus-io/pymilvus) and the [reference documents](/api-reference/pymilvus/v2.4.x/About.md).
