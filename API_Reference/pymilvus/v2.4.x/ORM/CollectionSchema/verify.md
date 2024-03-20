@@ -58,9 +58,9 @@ schema.verify()
 
 The following operations are related to `verify()`:
 
-- [FieldSchema](./ORM/FieldSchema.md)
+- [FieldSchema](../FieldSchema/FieldSchema.md)
 
-- [DataType](./Collections/DataType.md)
+- [DataType](../../MilvusClient/Collections/DataType.md)
 
 - [add_field()](./add_field.md)
 

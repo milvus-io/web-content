@@ -20,7 +20,7 @@ __PARAMETERS:__
 
     The name of the field.
 
-- __datatype__ (_[DataType](./Collections-DataType)_) - 
+- __datatype__ (_[DataType](../../MilvusClient/Collections/DataType.md)_) - 
 
     __[REQUIRED]__
 
@@ -117,7 +117,7 @@ __PARAMETERS:__
 
 __RETURN TYPE:__
 
-_[CollectionSchema](./PyMilvusLegacy-CollectionSchema)_
+_[CollectionSchema](../CollectionSchema/CollectionSchema.md)_
 
 __RETURNS:__
 

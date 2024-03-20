@@ -27,7 +27,7 @@ __PARAMETERS:__
 
     The name of the collection to create.
 
-- __schema__ (_[CollectionSchema](./PyMilvusLegacy-CollectionSchema)_) - 
+- __schema__ (_[CollectionSchema](../CollectionSchema/CollectionSchema.md)_) - 
 
     The schema used to create the collection. 
 

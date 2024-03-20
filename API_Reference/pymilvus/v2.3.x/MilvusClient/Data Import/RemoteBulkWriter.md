@@ -33,7 +33,7 @@ writer = RemoteBulkWriter(
 
 __PARAMETERS:__
 
-- __schema__ (_[CollectionSchema](./PyMilvusLegacy-CollectionSchema)_) -
+- __schema__ (_[CollectionSchema](../../ORM/CollectionSchema/CollectionSchema.md)_) -
 
     __[REQUIRED]__
 

@@ -27,7 +27,7 @@ __PARAMETERS:__
 
     Name of the field.
 
-- __dtype__ (_[DataType](./Collections-DataType)_) -
+- __dtype__ (_[DataType](../../MilvusClient/Collections/DataType.md)_) -
 
     __[REQUIRED]__
 

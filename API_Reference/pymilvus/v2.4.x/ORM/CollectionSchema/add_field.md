@@ -19,7 +19,7 @@ __PARAMETERS:__
 
     The name of the field.
 
-- __datatype__ (_[DataType](./Collections-DataType)_) - 
+- __datatype__ (_[DataType](../../MilvusClient/Collections/DataType.md)_) - 
 
     __[REQUIRED]__
 
@@ -189,7 +189,7 @@ The following operations are related to `add_field()`:
 
 - [FieldSchema](./ORM/FieldSchema.md)
 
-- [DataType](./Collections/DataType.md)
+- [DataType](../../MilvusClient/Collections/DataType.md)
 
 - [construct_from_dict()](./construct_from_dict.md)
 

@@ -125,9 +125,9 @@ collection, results = Collection.construct_from_dataframe(
 
 The following operations are related to `construct_from_dataframe()`:
 
-- [Collection](./ORM/Collection.md)
+- [Collection](../Collection/Collection.md)
 
-- [CollectionSchema](./ORM/CollectionSchema.md)
+- [CollectionSchema](../CollectionSchema/CollectionSchema.md)
 
-- [FieldSchema](./ORM/FieldSchema.md)
+- [FieldSchema](../FieldSchema/FieldSchema.md)
 

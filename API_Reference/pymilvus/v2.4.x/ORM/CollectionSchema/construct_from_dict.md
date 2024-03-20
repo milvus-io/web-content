@@ -71,7 +71,7 @@ The following operations are related to `construct_from_dict()`:
 
 - [FieldSchema](./ORM/FieldSchema.md)
 
-- [DataType](./Collections/DataType.md)
+- [DataType](../../MilvusClient/Collections/DataType.md)
 
 - [add_field()](./add_field.md)
 
