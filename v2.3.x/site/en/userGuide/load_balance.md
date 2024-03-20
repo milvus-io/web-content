@@ -12,6 +12,12 @@ Milvus supports automatic load balance by default. You can [configure](configure
 
 If automatic load balance is disabled, you can still balance the load manually.
 
+<div class="alert note">
+
+When interacting with Milvus using Python code, you have the flexibility to choose between PyMilvus and MilvusClient (new). For more information, refer to <a href="https://milvus.io/api-reference/pymilvus/v2.3.x/About.md">Python SDK</a>.
+
+</div>
+
 ## Check segment information
 
 Get the `segmentID` of the sealed segment that you expect to transfer and the `nodeID` of the query node that you expect to transfer the segment to.

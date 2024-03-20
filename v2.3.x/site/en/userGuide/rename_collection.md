@@ -8,6 +8,12 @@ summary: Learn how to rename a collection from memory in Milvus.
 
 If you want to rename a collection, you can use the collection-renaming API to interact with Milvus. This guide helps you understand how to rename an existing collection using the SDK of your choice.
 
+<div class="alert note">
+
+When interacting with Milvus using Python code, you have the flexibility to choose between PyMilvus and MilvusClient (new). For more information, refer to <a href="https://milvus.io/api-reference/pymilvus/v2.3.x/About.md">Python SDK</a>.
+
+</div>
+
 In the following code snippet, we create a collection and name it `old_collection`. Then we rename it `new_collection`.
 
 ```python

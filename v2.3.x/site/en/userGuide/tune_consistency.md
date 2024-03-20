@@ -40,6 +40,12 @@ By default, the consistency level is set as `Bounded`, under which Milvus reads 
 
 The following examples set the consistency level as `Strong`, meaning Milvus will read the most updated data view at the exact time point when a search or query request comes. The consistency level set in the search or query requests overwrites the one set while creating the collection.  Without specifying the consistency level during a search or query, Milvus adopts the original consistency level of the collection.
 
+<div class="alert note">
+
+When interacting with Milvus using Python code, you have the flexibility to choose between PyMilvus and MilvusClient (new). For more information, refer to <a href="https://milvus.io/api-reference/pymilvus/v2.3.x/About.md">Python SDK</a>.
+
+</div>
+
 - **Create a collection**
 
 ```

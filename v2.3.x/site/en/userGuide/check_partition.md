@@ -8,6 +8,12 @@ summary: Learn how to check partition information in Milvus.
 
 This topic describes how to check the information of partitions in Milvus.
 
+<div class="alert note">
+
+When interacting with Milvus using Python code, you have the flexibility to choose between PyMilvus and MilvusClient (new). For more information, refer to <a href="https://milvus.io/api-reference/pymilvus/v2.3.x/About.md">Python SDK</a>.
+
+</div>
+
 ## Verify if a partition exists
 
 Verify if a partition exists in the specified collection.

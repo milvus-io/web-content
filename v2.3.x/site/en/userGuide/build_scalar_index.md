@@ -14,6 +14,12 @@ Unlike vectors, which have both magnitude and direction, scalars have only magni
 
 To speed up [attribute filtering](boolean.md) in [hybrid searches](hybridsearch.md), you can build indexes on scalar fields since Milvus v2.1.0. You can read more about scalar field indexing [here](scalar_index.md).
 
+<div class="alert note">
+
+When interacting with Milvus using Python code, you have the flexibility to choose between PyMilvus and MilvusClient (new). For more information, refer to <a href="https://milvus.io/api-reference/pymilvus/v2.3.x/About.md">Python SDK</a>.
+
+</div>
+
 ## Build index
 
 To build an index on scalar fields, you do not need to set any index parameters. The default value of a scalar field index name is **\_default\_idx\_\<fieldId\>** followed by the name of the indexed field. You can set it to another value that seems fit.

@@ -8,6 +8,12 @@ summary: Learn how to insert multiple entities in a batch from a JSON file.
 
 Milvus 2.2 now supports inserting a batch of entities from a file. Compared to the `insert()` method, this feature reduces network transmission across the Milvus client, proxy, Pulsar, and data nodes. You can now import a batch of entities in one file or multiple files into a collection with just a few lines of code.
 
+<div class="alert note">
+
+When interacting with Milvus using Python code, you have the flexibility to choose between PyMilvus and MilvusClient (new). For more information, refer to <a href="https://milvus.io/api-reference/pymilvus/v2.3.x/About.md">Python SDK</a>.
+
+</div>
+
 ## Prepare the data file
 
 Organize the data to be inserted into a Milvus collection in a row-based JSON file or multiple NumPy files.

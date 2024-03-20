@@ -8,8 +8,12 @@ summary: Learn how to manage collection alias in Milvus.
 
 This topic describes how to manage collection aliases. Milvus supports specifying a unique alias for a collection.
 
-<div class="alert note">
 A collection alias is globally unique, hence you cannot assign the same alias to different collections. However, you can assign multiple aliases to one collection.
+
+<div class="alert note">
+
+When interacting with Milvus using Python code, you have the flexibility to choose between PyMilvus and MilvusClient (new). For more information, refer to <a href="https://milvus.io/api-reference/pymilvus/v2.3.x/About.md">Python SDK</a>.
+
 </div>
 
 The following example is based on the alias `publication`.

@@ -20,6 +20,12 @@ Milvus supports two ports, port `19530` and port `9091`:
 
 The example below demonstrates how to establish a connection to the Milvus server using `localhost` as the host and `19530` as the port, and then how to properly disconnect from it. If the connection is refused, try unblocking the corresponding port.
 
+<div class="alert note">
+
+When interacting with Milvus using Python code, you have the flexibility to choose between PyMilvus and MilvusClient (new). For more information, refer to <a href="https://milvus.io/api-reference/pymilvus/v2.3.x/About.md">Python SDK</a>.
+
+</div>
+
 ## Connect to a Milvus server
 
 Construct a Milvus connection. Ensure to connect to Milvus server before any operations.

@@ -12,6 +12,12 @@ This topic describes how to drop an index in Milvus. Before dropping an index, m
 Dropping an index irreversibly removes all corresponding index files.
 </div>
 
+<div class="alert note">
+
+When interacting with Milvus using Python code, you have the flexibility to choose between PyMilvus and MilvusClient (new). For more information, refer to <a href="https://milvus.io/api-reference/pymilvus/v2.3.x/About.md">Python SDK</a>.
+
+</div>
+
 Drop the only index in a collection:
 
 <div class="multipleCode">

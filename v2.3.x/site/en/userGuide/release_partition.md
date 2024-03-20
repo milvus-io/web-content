@@ -15,6 +15,12 @@ Since version 2.3.0, Milvus has enhanced its partition operations and now suppor
 - Release a loaded partition.
 - Release a collection that has part of partitions loaded.
 
+<div class="alert note">
+
+When interacting with Milvus using Python code, you have the flexibility to choose between PyMilvus and MilvusClient (new). For more information, refer to <a href="https://milvus.io/api-reference/pymilvus/v2.3.x/About.md">Python SDK</a>.
+
+</div>
+
 <div class="multipleCode">
   <a href="#python">Python </a>
   <a href="#java">Java</a>

@@ -14,6 +14,12 @@ Milvus 2.1 supports the `VARCHAR` data type on scalar fields. When building inde
 
 The following example inserts 2,000 rows of randomly generated data as the example data (Milvus CLI example uses a pre-built, remote CSV file containing similar data). Real applications will likely use much higher dimensional vectors than the example. You can prepare your own data to replace the example.
 
+<div class="alert note">
+
+When interacting with Milvus using Python code, you have the flexibility to choose between PyMilvus and MilvusClient (new). For more information, refer to <a href="https://milvus.io/api-reference/pymilvus/v2.3.x/About.md">Python SDK</a>.
+
+</div>
+
 ## Prepare data
 
 First, prepare the data to insert.  Data type of the data to insert must match the schema of the collection, otherwise Milvus will raise an exception.

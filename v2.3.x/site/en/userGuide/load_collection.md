@@ -18,6 +18,12 @@ Milvus allows users to load a collection as multiple replicas to utilize the CPU
 </ul>
 </div>
 
+<div class="alert note">
+
+When interacting with Milvus using Python code, you have the flexibility to choose between PyMilvus and MilvusClient (new). For more information, refer to <a href="https://milvus.io/api-reference/pymilvus/v2.3.x/About.md">Python SDK</a>.
+
+</div>
+
 <div class="multipleCode">
   <a href="#python">Python </a>
   <a href="#java">Java</a>
