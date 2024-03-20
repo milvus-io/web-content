@@ -30,7 +30,7 @@ bash standalone_embed.sh start
 ```
 
 - Connect to Milvus
-Please refer to [Hello Milvus](https://milvus.io/docs/example_code.md), then run the example code.
+Please refer to [Quickstart](https://milvus.io/docs/quickstart.md), then run the example code.
 
 - Stop Milvus
 
