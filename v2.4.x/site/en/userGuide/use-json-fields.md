@@ -37,6 +37,7 @@ For instance, the following is an example of a JSON field that stores the metada
 <li><p>Ensure that all values in a list or array are of the same data type.</p></li>
 <li><p>Any nested dictionaries in a JSON field value will be considered strings.</p></li>
 <li><p>Use only alphanumeric characters and underscores to name JSON keys, as other characters may cause problems with filtering or searching.</p></li>
+<li><p>The code snippets on this page use new <a href="https://milvus.io/api-reference/pymilvus/v2.3.x/About.md">MilvusClient</a> (Python) to interact with Milvus. New MilvusClient SDKs for other languages will be released in future updates.</p></li>
 </ul>
 
 </div>

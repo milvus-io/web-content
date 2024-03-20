@@ -12,6 +12,12 @@ Regular method to insert a large batch of entities to Milvus usually leads to a 
 
 You can also migrate data to Milvus with [MilvusDM](migrate_overview.md), an open-source tool designed specifically for importing and exporting data with Milvus.
 
+<div class="alert note">
+
+The code snippets on this page use new <a href="https://milvus.io/api-reference/pymilvus/v2.3.x/About.md">MilvusClient</a> (Python) to interact with Milvus. New MilvusClient SDKs for other languages will be released in future updates.
+
+</div>
+
 ## Prepare data file
 
 You can prepare the data file on row base or column base.

@@ -24,7 +24,13 @@ Iterators are powerful tools that help you navigate through large datasets by us
 
 <p><b>notes</b></p>
 
-<p>This feature is available for Milvus 2.3.x or later.</p>
+<ul>
+
+<li>This feature is available for Milvus 2.3.x or later.</li>
+
+<li>The code snippets on this page use new <a href="https://milvus.io/api-reference/pymilvus/v2.3.x/About.md">MilvusClient</a> (Python) to interact with Milvus. New MilvusClient SDKs for other languages will be released in future updates.</li>
+
+</ul>
 
 </div>
 

@@ -13,15 +13,11 @@ The partition key in Zilliz Cloud allows for the distribution of incoming entiti
 
 You can use the partition key to implement multi-tenancy. For details on multi-tenancy, read [Multi-tenancy](https://milvus.io/docs/multi_tenancy.md) for more.
 
-## Before you start
+<div class="alert note">
 
-Before creating a collection, ensure that
+The code snippets on this page use new <a href="https://milvus.io/api-reference/pymilvus/v2.3.x/About.md">MilvusClient</a> (Python) to interact with Milvus. New MilvusClient SDKs for other languages will be released in future updates.
 
-- You have a blueprint of your data model (i.e. schema). For details, see [Schema Explained](./schema-explained).
-
-- You have created a dedicated cluster. For details, see [Create Cluster](./create-cluster).
-
-- You have downloaded the example dataset. For details, see [Example Dataset](./example-dataset).
+</div>
 
 ## Enable partition key
 

@@ -8,6 +8,12 @@ summary: This guide will walk you through creating and configuring scalar indexe
 
 In Milvus, a scalar index is used to speed up metafiltering by a specific non-vector field value, similar to a traditional database index. This guide will walk you through creating and configuring scalar indexes for fields such as integers, strings, etc.
 
+<div class="alert note">
+
+The code snippets on this page use new <a href="https://milvus.io/api-reference/pymilvus/v2.3.x/About.md">MilvusClient</a> (Python) to interact with Milvus. New MilvusClient SDKs for other languages will be released in future updates.
+
+</div>
+
 ## Types of scalar indexing
 
 - __[Auto indexing](./index-scalar-fields#auto-indexing)__: Milvus automatically decides the index type based on the data type of the scalar field. This is suitable when you do not need to control the specific index type.
@@ -19,8 +25,6 @@ In Milvus, a scalar index is used to speed up metafiltering by a specific non-ve
 To use auto indexing, omit the __index_type__ parameter so that Milvus can infer the index type based on the scalar field type. For mappings between scalar data types and default indexing algorithms, refer to [Scalar field indexing algorithms](https://milvus.io/docs/scalar_index.md#Scalar-field-indexing-algorithms).
 
 Example:
-
-
 
 ```python
 # Auto indexing
@@ -40,36 +44,6 @@ client.create_index(
   collection_name="test_scalar_index", # Specify the collection name
   index_params=index_params
 )
-```
-
-```java
-import io.milvus.v2.common.IndexParam;
-import io.milvus.v2.service.index.request.CreateIndexReq;
-
-IndexParam indexParamForScalarField = IndexParam.builder()
-    .fieldName("scalar_1") // Name of the scalar field to be indexed
-    .indexName("default_index") // Name of the index to be created
-    .indexType("") // Type of index to be created. For auto indexing, leave it empty or omit this parameter.
-    .build();
-
-List<IndexParam> indexParams = new ArrayList<>();
-indexParams.add(indexParamForVectorField);
-
-CreateIndexReq createIndexReq = CreateIndexReq.builder()
-    .collectionName("test_scalar_index") // Specify the collection name
-    .indexParams(indexParams)
-    .build();
-
-client.createIndex(createIndexReq);
-```
-
-```javascript
-await client.createIndex({
-    collection_name: "test_scalar_index", // Specify the collection name
-    field_name: "scalar_1", // Name of the scalar field to be indexed
-    index_name: "default_index", // Name of the index to be created
-    index_type: "" // Type of index to be created. For auto indexing, leave it empty or omit this parameter.
-})
 ```
 
 ## Custom indexing
@@ -133,108 +107,6 @@ __Methods and Parameters__
 
         The __IndexParams__ object that contains index configurations.
 
-```java
-import io.milvus.v2.common.IndexParam;
-import io.milvus.v2.service.index.request.CreateIndexReq;
-
-IndexParam indexParamForScalarField = IndexParam.builder()
-    .fieldName("scalar_1") // Name of the scalar field to be indexed
-    .indexName("inverted_index") // Name of the index to be created
-    .indexType("INVERTED") // Type of index to be created
-    .build();
-
-List<IndexParam> indexParams = new ArrayList<>();
-indexParams.add(indexParamForVectorField);
-
-CreateIndexReq createIndexReq = CreateIndexReq.builder()
-    .collectionName("test_scalar_index") // Specify the collection name
-    .indexParams(indexParams)
-    .build();
-
-client.createIndex(createIndexReq);
-```
-
-__Methods and Parameters__
-
-- __IndexParam__
-
-    Prepares an __IndexParam__ object.
-
-    - __fieldName__ (_String_)
-
-        The name of the scalar field to index.
-
-    - __indexName__ (_String_)
-
-        The name of the scalar index to create. Each scalar field supports one index.
-
-    - __indexType__ (_String_)
-
-        The type of the scalar index to create. For implicit indexing, leave it empty or omit this parameter.
-
-        For custom indexing, valid values are:
-
-        - __INVERTED__: (Recommended) An inverted index consists of a term dictionary containing all tokenized words sorted alphabetically. For details, refer to Scalar Index.
-
-        - __STL_SORT__: Sorts scalar fields using the standard template library sort algorithm. Supports Boolean and numeric fields (e.g., INT8, INT16, INT32, INT64, FLOAT, DOUBLE).
-
-        - __Trie__: A tree data structure for fast prefix searches and retrievals. Supports VARCHAR fields.
-
-- __CreateIndexReq__
-
-    Creates the index in the specified collection.
-
-    - __collectionName__ (_String_)
-
-        The name of the collection for which the index is created.
-
-    - __indexParams__
-
-        A list of __IndexParam__ objects that contain index configurations.
-
-</Tabltem>
-
-```javascript
-await client.createIndex({
-    collection_name: "test_scalar_index", // Specify the collection name
-    field_name: "scalar_1", // Name of the scalar field to be indexed
-    index_name: "inverted_index", // Name of the index to be created
-    index_type: "INVERTED" // Type of index to be created
-})
-```
-
-__Methods and Parameters__
-
-- __createIndex__
-
-    Creates the index in the specified collection.
-
-    - __collection_name__ (_string_)
-
-        The name of the collection for which the index is created.
-
-    - __field_name__ (_string_)
-
-        The name of the scalar field to index.
-
-    - __index_name__ (_string_)
-
-        The name of the scalar index to create. Each scalar field supports one index.
-
-    - __index_type__ (_string_)
-
-        The type of the scalar index to create. For implicit indexing, leave it empty or omit this parameter.
-
-        For custom indexing, valid values are:
-
-        - __INVERTED__: (Recommended) An inverted index consists of a term dictionary containing all tokenized words sorted alphabetically. For details, refer to Scalar Index.
-
-        - __STL_SORT__: Sorts scalar fields using the standard template library sort algorithm. Supports Boolean and numeric fields (e.g., INT8, INT16, INT32, INT64, FLOAT, DOUBLE).
-
-        - __Trie__: A tree data structure for fast prefix searches and retrievals. Supports VARCHAR fields.
-
-</Tabltem>
-
 ## Verifying the result
 
 Use the __list_indexes()__ method to verify the creation of scalar indexes:
@@ -248,25 +120,6 @@ client.list_indexes(
 
 # Output:
 # ['default_index','inverted_index']
-```
-
-```java
-import java.util.List;
-import io.milvus.v2.service.index.request.ListIndexesReq;
-
-ListIndexesReq listIndexesReq = ListIndexesReq.builder()
-    .collectionName("test_scalar_index")  // Specify the collection name
-    .build();
-
-List<String> indexNames = client.listIndexes(listIndexesReq);
-
-System.out.println(indexNames);
-
-// Output:
-// [
-//     "default_index",
-//     "inverted_index"
-// ]
 ```
 
 ## Limits

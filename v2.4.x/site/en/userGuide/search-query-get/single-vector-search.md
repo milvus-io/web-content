@@ -20,6 +20,12 @@ There are a variety of search types to meet different requirements:
 
 - [Grouping search](./single-vector-search#grouping-search): Groups search results based on a specific field to ensure diversity in the results.
 
+<div class="alert note">
+
+The code snippets on this page use new <a href="https://milvus.io/api-reference/pymilvus/v2.3.x/About.md">MilvusClient</a> (Python) to interact with Milvus. New MilvusClient SDKs for other languages will be released in future updates.
+
+</div>
+
 ## Preparations
 
 The code snippet below repurposes the existing code to establish a connection to a Zilliz Cloud cluster and quickly set up a collection.

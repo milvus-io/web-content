@@ -15,6 +15,12 @@ Dynamic schema enables users to insert entities with new fields into a collectio
 
 Dynamic schema also provides flexibility in data processing, enabling users to store and retrieve complex data structures in their collections. This includes nested data, arrays, and other complex data types.
 
+<div class="alert note">
+
+The code snippets on this page use new <a href="https://milvus.io/api-reference/pymilvus/v2.3.x/About.md">MilvusClient</a> (Python) to interact with Milvus. New MilvusClient SDKs for other languages will be released in future updates.
+
+</div>
+
 ## Enable dynamic field
 
 To create a collection using a dynamic schema, set `enable_dynamic_field` to `True` when defining the data model. Afterward, all undefined fields and their values in the data entities inserted afterward will be treated as pre-defined fields. We prefer to use the term "dynamic fields" to refer to these key-value pairs.
