@@ -16,6 +16,8 @@ There are two main categories of embeddings, each producing a different type of 
 
 Milvus offers built-in embedding functions that work with popular embedding providers. Before creating a collection in Milvus, you can use these functions to generate embeddings for your datasets, streamlining the process of preparing data and vector searches.
 
+To create embeddings in action, refer to [Using PyMilvus's Model To Generate Text Embeddings](https://github.com/milvus-io/bootcamp/blob/master/bootcamp/model/embedding_functions.ipynb).
+
 |  Embedding Function                                                                   |  Type   |  API or Open-sourced |
 | ------------------------------------------------------------------------------------- | ------- | -------------------- |
 |  [openai](/reference/python/Model-OpenAIEmbeddingFunction)                            |  Dense  |  API                 |
@@ -152,5 +154,3 @@ The expected output is similar to the following:
 ```python
 Dim: 21 (1, 21)
 ```
-
-<DocCardList />
