@@ -11,7 +11,7 @@ Release date: March 20, 2024
 
 | Milvus version | Python SDK version |
 |----------------|--------------------|
-| 2.4.0-rc.1     | 2.4.0-rc.1         |
+| 2.4.0-rc.1     | 2.4.0.             |
 
 This release introduces several scenario-based features:
 
