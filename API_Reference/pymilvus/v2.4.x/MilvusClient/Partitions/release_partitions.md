@@ -1,0 +1,131 @@
+# release_partitions()
+
+This operation releases the partitions in a specified collection from memory.
+
+## Request syntax
+
+```python
+release_partitions(
+    collection_name: str,
+    partition_names: str | List[str],
+    timeout: Optional[float] = None
+) -> None
+```
+
+__PARAMETERS:__
+
+- __collection_name __(_str_) -
+
+    __[REQUIRED]__
+
+    The name of an existing collection.
+
+- __partition_names__ (_str | list[str]_) -
+
+    __[REQUIRED]__
+
+    A list of the names of the partitions to release.
+
+- __timeout__ (_float _|_ None_)  
+
+    The timeout duration for this operation. 
+
+    Setting this to __None__ indicates that this operation timeouts when any response arrives or any error occurs.
+
+__RETURN TYPE:__
+
+_NoneType_
+
+__RETURNS:__
+
+None
+
+<div class="admonition note">
+
+<p><b>notes</b></p>
+
+<p>A collection is in the loaded state only if any or all of its partitions are loaded.</p>
+
+</div>
+
+__EXCEPTIONS:__
+
+- __MilvusException__
+
+    This exception will be raised when any error occurs during this operation.
+
+## Example
+
+```python
+from pymilvus import MilvusClient
+
+# 1. Create a milvus client
+client = MilvusClient(
+    uri="http://localhost:19530",
+    token="root:Milvus"
+)
+
+# 2. Create a collection and get its load status
+client.create_collection(collection_name="test_collection", dimension=5)
+
+res = client.get_load_state(
+    collection_name="test_collection"
+)
+
+print(res)
+
+# {'state': <LoadState: Loaded>}
+
+# 3. Create a partition
+client.create_partition(
+    collection_name="test_collection", 
+    partition_name="partition_A"
+)
+
+# 4. Check the load status of the partition
+res = client.get_load_state(
+    collection_name="test_collection",
+    partition_name="partition_A",
+)
+
+print(res)
+
+# {'state': <LoadState: Loaded>}
+
+# 5. Release the partition
+client.release_partitions(
+    collection_name="test_collection",
+    partition_names=["partition_A"]
+)
+
+# 6. Check the load status
+res = client.get_load_state(
+    collection_name="test_collection",
+    partition_name="partition_A"
+)
+
+print(res)
+
+# {'state': <LoadState: NotLoad>}
+
+res = client.get_load_state(
+    collection_name="test_collection"
+)
+
+# {'state': <LoadState: Loaded>}
+```
+
+## Related methods
+
+- [create_partition()](./Partitions/create_partition.md)
+
+- [drop_partition()](./Partitions/drop_partition.md)
+
+- [get_partition_stats()](./Partitions/get_partition_stats.md)
+
+- [has_partition()](./Partitions/has_partition.md)
+
+- [list_partitions()](./Partitions/list_partitions.md)
+
+- [load_partitions()](./Partitions/load_partitions.md)
+

@@ -4,7 +4,7 @@ PyMilvus is a Python SDK of Milvus. Its source code is open-sourced and hosted o
 
 <div class="alert note">
 
-Since v2.3.7, you have the flexibility to choose MilvusClient, or the original ORM module to talk with Milvus.
+Since v2.3.7, you have the flexibility to choose MilvusClient or the original ORM module to talk with Milvus.
 
 </div>
 
