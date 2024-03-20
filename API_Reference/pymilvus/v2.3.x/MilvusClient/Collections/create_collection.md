@@ -81,7 +81,7 @@ __PARAMETERS:__
 
     The timeout duration for this operation. Setting this to __None__ indicates that this operation timeouts when any response returns or error occurs.
 
-- __schema__ (_[CollectionSchema](../../PyMilvus%20(Legacy)/CollectionSchema)_ | _None_)
+- __schema__ (_[CollectionSchema](../../ORM/CollectionSchema/CollectionSchema.md)_ | _None_)
 
     The schema of this collection.
 
