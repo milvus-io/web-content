@@ -50,5 +50,5 @@ Having installed PyMilvus, you can:
   - [Single-Vector Search](single-vector-search.md)
   - [Multi-Vector Search](multi-vector-search.md)
 
-- Explore [PyMilvus API reference](/api-reference/pymilvus/v2.3.x/About.md)
+- Explore [PyMilvus API reference](/api-reference/pymilvus/v2.4.x/About.md)
 

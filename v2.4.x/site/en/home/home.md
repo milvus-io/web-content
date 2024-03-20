@@ -98,7 +98,7 @@ id: home.md
 
 ## What's new in docs
 
-_Nov 2024 - Milvus 2.4.0 release_
+_Mar 2024 - Milvus 2.4.0 release_
 
 - Added guidance on how to [conduct multi-vector search](multi-vector-search.md).
 - Added description of [GPU index](gpu_index.md).
