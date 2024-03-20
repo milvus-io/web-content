@@ -123,9 +123,3 @@ collection = Collection(
     using="default"
 )
 ```
-
-## Members
-
-The following are the members of the `Collection` class:
-
-<DocCardList />

@@ -80,9 +80,3 @@ collection = Collection("book")
 # Create a partition object in the current collection
 partition = Partition(collection, "novel", "")
 ```
-
-## Members
-
-The following are the members of the `Partition` class:
-
-<DocCardList />
