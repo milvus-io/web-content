@@ -49,7 +49,7 @@ To use sparse vectors in Milvus, prepare vector embeddings in one of the support
 
 </div>
 
-To generate embeddings, the pymilvus library provides a built-in `model` package, which offers a range of functionalities for embedding generation. For details, refer to [[Draft] Embeddings](./embeddings).
+To generate embeddings, the pymilvus library provides a built-in `model` package, which offers a range of functionalities for embedding generation. For details, refer to [Embeddings](embeddings.md).
 
 ## Create a collection with a sparse vector field
 
@@ -77,7 +77,8 @@ schema.add_field(field_name="sparse_vector", datatype=DataType.SPARSE_FLOAT_VECT
 client.create_collection(collection_name="test_sparse_vector", schema=schema)
 ```
 
-For details on common collection parameters, refer to .
+For details on common collection parameters, refer to [create_collection()
+](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md).
 
 ## Insert entities with sparse vector embeddings
 
@@ -142,7 +143,7 @@ __Index Parameters for Sparse Vectors:__
 
 - __params__: Includes the __drop_ratio_build__ option to fine-tune the balance between efficiency and accuracy by ignoring small values during the index-building process.
 
-For information about common index parameters, refer to [create_index()](https://milvus.io/api-reference/pymilvus/v2.3.x/Collection/create_index().md).
+For information about common index parameters, refer to [create_index()](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/create_index.md).
 
 ## Perform ANN search
 
@@ -224,7 +225,7 @@ When using sparse vectors in Milvus, consider the following limits:
 
 - For sparse vector fields, only the __SPARSE_INVERTED_INDEX__ and __SPARSE_WAND__ index types are supported.
 
-- Currently, [range search](./single-vector-search#range-search), [grouping search](./single-vector-search#grouping-search), and [search iterator](./with-iterators) are not supported for sparse vectors.
+- Currently, [range search](https://milvus.io/docs/single-vector-search.md#Range-search), [grouping search](https://milvus.io/docs/single-vector-search.md#Grouping-search), and [search iterator](https://milvus.io/docs/with-iterators.md#Search-with-iterator) are not supported for sparse vectors.
 
 ## FAQ
 

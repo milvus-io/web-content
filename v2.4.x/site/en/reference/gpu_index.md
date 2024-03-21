@@ -54,11 +54,11 @@ The following examples demonstrate how to build GPU indexes of different types.
 
 When setting up GPU index parameters, define __index_type__, __metric_type__, and __params__:
 
-- __index_type __(_string_): The type of index used to accelerate vector search. Valid options include __GPU_CAGRA__, __GPU_IVF_FLAT__, __GPU_IVF_PQ and__ GPU_BRUTE_FORCE__.
+- __index_type__ (_string_): The type of index used to accelerate vector search. Valid options include __GPU_CAGRA__, __GPU_IVF_FLAT__, __GPU_IVF_PQ and__ GPU_BRUTE_FORCE__.
 
 - __metric_type__ (_string_): The type of metrics used to measure the similarity of vectors. Valid options are __IP__ and __L2__.
 
-- __params __(_dict_): The index-specific building parameters. The valid options for this parameter depend on the index type.
+- __params__(_dict_): The index-specific building parameters. The valid options for this parameter depend on the index type.
 
 Here are example configurations for different index types:
 
@@ -77,7 +77,7 @@ Here are example configurations for different index types:
 
     Possible options for __params__ include:
 
-    - __intermediate_graph_degree __(_int_): Affects recall and build time by determining the graph's degree before pruning. Recommended values are __32__ or __64__.
+    - __intermediate_graph_degree__ (_int_): Affects recall and build time by determining the graph's degree before pruning. Recommended values are __32__ or __64__.
 
     - __graph_degree__ (_int_): Affects search performance and recall by setting the graph's degree after pruning. Typically, it is half of the __intermediate_graph_degree__. A larger difference between these two degrees results in a longer build time. Its value must be smaller than the value of __intermediate_graph_degree__.
 
@@ -87,7 +87,7 @@ Here are example configurations for different index types:
 
         - __NN_DESCENT__: Provides a quicker build with potentially lower recall.
 
-    - __cache_dataset_on_device __(_string_, __"true"__ | __"false"__): Decides whether to cache the original dataset in GPU memory. Setting this to __"true"__ enhances recall by refining search results, while setting it to __"false"__ conserves GPU memory.
+    - __cache_dataset_on_device__ (_string_, __"true"__ | __"false"__): Decides whether to cache the original dataset in GPU memory. Setting this to __"true"__ enhances recall by refining search results, while setting it to __"false"__ conserves GPU memory.
 
 - __GPU_IVF_FLAT__ or __GPU_IVF_PQ__ index
 
@@ -214,7 +214,7 @@ When using GPU indexes, be aware of certain constraints:
 
 - Loading OOM protection for GPU indexes is not fully supported, too much data might lead to QueryNode crashes.
 
-- GPU indexes do not support search functions like [range search](./single-vector-search#range-search) and [grouping search](./single-vector-search#grouping-search).
+- GPU indexes do not support search functions like [range search](https://milvus.io/docs/single-vector-search.md#Range-search) and [grouping search](https://milvus.io/docs/single-vector-search.md#Grouping-searchh).
 
 ## FAQ
 

@@ -12,17 +12,17 @@ After your data is inserted, the next step is to send a `search` request to sear
 
 There are a variety of search types to meet different requirements:
 
-- [Basic search](./single-vector-search#basic-search): Includes single-vector search, bulk-vector search, partition search, and search with specified output fields.
+- [Basic search](https://milvus.io/docs/single-vector-search.md#Basic-search): Includes single-vector search, bulk-vector search, partition search, and search with specified output fields.
 
-- [Filtered search](./single-vector-search#filtered-search): Applies filtering criteria based on scalar fields to refine search results.
+- [Filtered search](https://milvus.io/docs/single-vector-search.md#Filtered-search): Applies filtering criteria based on scalar fields to refine search results.
 
-- [Range search](./single-vector-search#range-search): Finds vectors within a specific distance range from the query vector.
+- [Range search](https://milvus.io/docs/single-vector-search.md#Range-search): Finds vectors within a specific distance range from the query vector.
 
-- [Grouping search](./single-vector-search#grouping-search): Groups search results based on a specific field to ensure diversity in the results.
+- [Grouping search](https://milvus.io/docs/single-vector-search.md#Grouping-search): Groups search results based on a specific field to ensure diversity in the results.
 
 <div class="alert note">
 
-The code snippets on this page use new <a href="https://milvus.io/api-reference/pymilvus/v2.3.x/About.md">MilvusClient</a> (Python) to interact with Milvus. New MilvusClient SDKs for other languages will be released in future updates.
+The code snippets on this page use new <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">MilvusClient</a> (Python) to interact with Milvus. New MilvusClient SDKs for other languages will be released in future updates.
 
 </div>
 
@@ -375,7 +375,7 @@ For instance, to refine search results based on a string pattern, you can use th
 
 - To match values ending with a specific suffix, use the syntax __'like "%suffix"'__.
 
-- The __like__ operator can also be used for single-character matching by using the underscore (_____) to represent any single character. For example, __'like "y_llow"'__.
+- The __like__ operator can also be used for single-character matching by using the underscore (_) to represent any single character. For example, __'like "y_llow"'__.
 
 Filter results whose __color__ is prefixed with __red__:
 
