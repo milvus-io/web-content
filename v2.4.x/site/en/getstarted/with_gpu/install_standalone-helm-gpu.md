@@ -33,10 +33,10 @@ Before installing Milvus with GPU support, make sure you have the following prer
 
   ```shell
   $ modinfo nvidia | grep "^version"
-  version:        535.161.07
+  version:        545.29.06
   ```
 
-  You are recommended to use the drivers of version 535 and above.
+  You are recommended to use the drivers of version 545 and above.
 
 - You have installed a Kubernetes cluster, and the `kubectl` command-line tool has been configured to communicate with your cluster. It is recommended to run this tutorial on a cluster with at least two nodes that are not acting as control plane hosts.
 
@@ -53,14 +53,14 @@ See [install minikube](https://minikube.sigs.k8s.io/docs/start/) for more inform
 After installing minikube, run the following command to start a K8s cluster.
 
 ```
-$ minikube start
+$ minikube start --gpus all
 ```
 
 ### 3. Check the K8s cluster status
 
 Run `$ kubectl cluster-info` to check the status of the K8s cluster you just created. Ensure that you can access the K8s cluster via `kubectl`. If you have not installed `kubectl` locally, see [Use kubectl inside minikube](https://minikube.sigs.k8s.io/docs/handbook/kubectl/).
 
-minikube has a dependency on default StorageClass when installed. Check the dependency by running the following command. Other installation methods require manual configuration of the StorageClass. See [Change the Default StorageClass](https://kubernetes.io/docs/tasks/administer-cluster/change-default-storage-class/) for more information.
+Minikube has a dependency on default StorageClass when installed. Check the dependency by running the following command. Other installation methods require manual configuration of the StorageClass. See [Change the Default StorageClass](https://kubernetes.io/docs/tasks/administer-cluster/change-default-storage-class/) for more information.
 
 ```
 $ kubectl get sc

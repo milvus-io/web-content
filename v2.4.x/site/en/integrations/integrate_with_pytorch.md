@@ -106,11 +106,11 @@ At this point, we are going to begin setting up Milvus. The steps are as follows
     collection.load()
     ```
 
-Once these steps are done the collection is ready to be inserted into and searched. Any data added will be indexed automatically and be available to search immediately. If the data is very fresh, the search might be slower as brute force searching will be used on data that is still in process of getting indexed.
+Once these steps are done, the collection is ready to be inserted into and searched. Any added data will be indexed automatically and be available to search immediately. If the data is very fresh, the search might be slower as brute force searching will be used on data that is still in process of being indexed.
 
 ## Inserting the data
 
-For this example, we are going to use the ResNet50 model provided by `torch` and its model hub. To get the embeddings, we are taking off the final classification layer, resulting in the model giving us embeddings of 2048 dimensions. All the vision models found on `torch` use the same preprocessing that we have included here.
+For this example, we are going to use the ResNet50 model provided by `torch` and its model hub. To get the embeddings, we are taking off the final classification layer, which results in the model giving us embeddings of 2048 dimensions. All the vision models found on `torch` use the same preprocessing that we have included here.
 
 In these next few steps we will be: 
 
@@ -183,7 +183,7 @@ In these next few steps we will be:
    <div class="alert note">
    
    - This step is relatively time-consuming because embedding takes time. Take a sip of coffee and relax.
-   - PyTorch may not work well with Python 3.9 and earlier versions. Considering using Python 3.10 and later versions instead.
+   - PyTorch may not work well with Python 3.9 and earlier versions. Consider using Python 3.10 and later versions instead.
    
    </div>
 
