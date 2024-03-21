@@ -72,6 +72,8 @@ __Considerations__:
 
 - Partially indexed or loaded vector fields in a collection will result in an error.
 
+- Currently, each AnnSearchRequest in a hybrid search can carry one query vector.
+
 - Typically, each collection has a default allowance of up to 4 vector fields. However, you have the option to adjust the `proxy.maxVectorFieldNum` configuration to expand the maximum number of vector fields in a collection, with a maximum limit of 10 vector fields per collection. See [Proxy-related Configurations](https://milvus.io/docs/configure_proxy.md#Proxy-related-Configurations) for more.
 
 ## Practical examples 
@@ -225,10 +227,10 @@ The following table outlines the parameters used in a hybrid search.
 | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 |  `reqs`                             |  A list of search requests, where each request is an `ANNSearchRequest` object. Each request corresponds to a different vector field and a different set of search parameters. |
 |  `reqs.ANNSearchRequest`            |  A class representing an ANN search request.                                                                                                                                   |
-|  `reqs.ANNSearchRequest.data`       |  The query vector to search in the request.                                                                                                                                    |
+|  `reqs.ANNSearchRequest.data`       |  The query vector to search in the request. This parameter accepts a list containing one element (or query vector).                                                                                                                                   |
 |  `reqs.ANNSearchRequest.anns_field` |  The vector field to use in the request.                                                                                                                                       |
-|  `reqs.ANNSearchRequest.param`      |  A dictionary of search parameters for the request. For details, refer to [Search parameters](./single-vector-search#search-parameters).                                       |
-|  `reqs.ANNSearchRequest.limit`      |  The maximum number of results to return in the request.                                                                                                                       |
+|  `reqs.ANNSearchRequest.param`      |  A dictionary of search parameters for the request. For details, refer to [Search parameters](single-vector-search.md#search-parameters).                                       |
+|  `reqs.ANNSearchRequest.limit`      |  The maximum number of results to return in the request. When performing a hybrid search with multiple ANN search requests, the top results defined by limit from each request will be combined and re-ranked before returning the final search results.                                                                                                                      |
 |  `reqs.ANNSearchRequest.expr`       |  (Optional) The expression to filter the results.                                                                                                                              |
 |  `rerank`                           |  The reranking strategy to use for hybrid search. Valid values: `WeightedRanker` and `RRFRanker`.                                                                              |
 |  `limit`                            |  The maximum number of results to return in the hybrid search.                                                                                                                 |
