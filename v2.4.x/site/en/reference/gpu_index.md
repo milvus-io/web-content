@@ -30,7 +30,7 @@ Currently, Milvus loads all indexes into GPU memory for efficient search operati
 
 Milvus uses a global graphics memory pool to allocate GPU memory.
 
-It supports two parameters `initMemSize` and `maxMemSize` in [Milvus config file](https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml#L760-L762). The pool size is initially set to `initMemSize`, and will be automatically expanded to `maxMemSize` after exceeding this limit.
+It supports two parameters `initMemSize` and `maxMemSize` in [Milvus config file](https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml#L767-L769). The pool size is initially set to `initMemSize`, and will be automatically expanded to `maxMemSize` after exceeding this limit.
 
 The default `initMemSize` is 1/2 of the available GPU memory when Milvus starts, and the default `maxMemSize` is equal to all available GPU memory.
 
