@@ -49,6 +49,8 @@ docs = [
     "Born in Maida Vale, London, Turing was raised in southern England.",
 ]
 
+embeddings = ef.encode_documents(docs)
+
 # Print embeddings
 print("Embeddings:", embeddings)
 # Print dimension and shape of embeddings

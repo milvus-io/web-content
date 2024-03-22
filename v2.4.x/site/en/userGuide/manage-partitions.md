@@ -25,7 +25,7 @@ Upon the creation of a collection, at least a default partition named ___default
 
 ## Preparations
 
-The code snippet below repurposes the existing code to establish a connection to a Zilliz Cloud cluster and create a collection and its index separately. Consequently, the collection remains unloaded.
+The code snippet below repurposes the existing code to establish a connection to Milvus and create a collection and its index separately. Consequently, the collection remains unloaded.
 
 ```python
 from pymilvus import MilvusClient, DataType
