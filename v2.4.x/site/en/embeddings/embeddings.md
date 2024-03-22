@@ -20,11 +20,11 @@ To create embeddings in action, refer to [Using PyMilvus's Model To Generate Tex
 
 |  Embedding Function                                                                   |  Type   |  API or Open-sourced |
 | ------------------------------------------------------------------------------------- | ------- | -------------------- |
-|  [openai](/reference/python/Model-OpenAIEmbeddingFunction)                            |  Dense  |  API                 |
-|  [sentence-transformer](/reference/python/Model-SentenceTransformerEmbeddingFunction) |  Dense  |  Open-sourced        |
-|  [bm25](/reference/python/Model-BM25EmbeddingFunction)                                |  Sparse |  Open-sourced        |
-|  [Splade](/reference/python/Model-SpladeEmbeddingFunction)                            |  Sparse |  Open-sourced        |
-|  [bge-m3](/reference/python/Model-BGEM3EmbeddingFunction)                             |  Hybrid |  Open-sourced        |
+|  [openai](https://milvus.io/api-reference/pymilvus/v2.4.x/Model/OpenAIEmbeddingFunction/OpenAIEmbeddingFunction.md)                            |  Dense  |  API                 |
+|  [sentence-transformer](https://milvus.io/api-reference/pymilvus/v2.4.x/Model/SentenceTransformerEmbeddingFunction/SentenceTransformerEmbeddingFunction.md) |  Dense  |  Open-sourced        |
+|  [bm25](https://milvus.io/api-reference/pymilvus/v2.4.x/Model/BM25EmbeddingFunction/BM25EmbeddingFunction.md)                                |  Sparse |  Open-sourced        |
+|  [Splade](https://milvus.io/api-reference/pymilvus/v2.4.x/Model/SpladeEmbeddingFunction/SpladeEmbeddingFunction.md)                            |  Sparse |  Open-sourced        |
+|  [bge-m3](https://milvus.io/api-reference/pymilvus/v2.4.x/Model/BGEM3EmbeddingFunction/BGEM3EmbeddingFunction.md)                             |  Hybrid |  Open-sourced        |
 
 ## Example 1: Use default embedding function to generate dense vectors
 
@@ -34,7 +34,7 @@ To use embedding functions with Milvus, first install the PyMilvus client librar
 pip install pymilvus[model]
 ```
 
-The `model` subpackage supports various embedding models, from [OpenAI](./embed-with-openai), [Sentence Transformers](./embed-with-sentence-transform), [BGE M3](./embed-with-bgm-m3), [BM25](./embed-with-bm25), to [SPLADE](./embed-with-splade) pretrained models. For simpilicity, this example uses the `DefaultEmbeddingFunction` which is __all-MiniLM-L6-v2__ sentence transformer model, the model is about 70MB and it will be downloaded during first use:
+The `model` subpackage supports various embedding models, from [OpenAI](https://milvus.io/docs/embed-with-openai.md), [Sentence Transformers](https://milvus.io/docs/embed-with-sentence-transform.md), [BGE M3](https://milvus.io/docs/embed-with-bgm-m3.md), [BM25](https://milvus.io/docs/embed-with-bm25.md), to [SPLADE](https://milvus.io/docs/embed-with-splade.md) pretrained models. For simpilicity, this example uses the `DefaultEmbeddingFunction` which is __all-MiniLM-L6-v2__ sentence transformer model, the model is about 70MB and it will be downloaded during first use:
 
 ```python
 from pymilvus import model
@@ -70,7 +70,7 @@ Dim: 384 (384,)
 
 ## Example 2: Generate dense and sparse vectors in one call with BGE M3 model
 
-In this example, we use [BGE M3](./embed-with-bgm-m3) hybrid model to embed text into both dense and sparse vectors and use them to retrieve relevant documents. The overall steps are as follows:
+In this example, we use [BGE M3](https://milvus.io/docs/embed-with-bgm-m3.md) hybrid model to embed text into both dense and sparse vectors and use them to retrieve relevant documents. The overall steps are as follows:
 
 1. Embed the text as dense and sparse vectors using BGE-M3 model;
 
