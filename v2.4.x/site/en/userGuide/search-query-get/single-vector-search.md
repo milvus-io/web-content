@@ -6,7 +6,14 @@ summary: This article describes how to search for vectors in a Milvus collection
 
 # Single-Vector Search
 
-After your data is inserted, the next step is to send a `search` request to search for vectors that are similar to your query vector. A single-vector search compares your query vector against the existing vectors in your collection to find the most similar entities, returning their IDs and the distances between them. This process can optionally return the vector values and metadata of the results.
+Once you have inserted your data, the next step is to perform similarity searches on your collection in Milvus.
+
+Milvus allows you to conduct two types of searches, depending on the number of vector fields in your collection:
+
+- **Single-vector search**: If your collection has only one vector field, use the [`search()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/search.md) method to find the most similar entities. This method compares your query vector with the existing vectors in your collection and returns the IDs of the closest matches along with the distances between them. Optionally, it can also return the vector values and metadata of the results.
+- **Multi-vector search**: For collections with two or more vector fields, use the [`hybrid_search()`](https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/hybrid_search.md) method. This method performs multiple Approximate Nearest Neighbor (ANN) search requests and combines the results to return the most relevant matches after reranking.
+
+This guide focuses on how to perform a single-vector search in Milvus. For details on multi-vector search, refer to [hybrid search](https://milvus.io/docs/multi-vector-search.md).
 
 ## Overview
 
@@ -127,7 +134,7 @@ The output showcases the top 5 neighbors nearest to your query vector, including
 
 ### Bulk-vector search
 
-A bulk-vector search extends the [single-vector search](./single-vector-search#single-vector-search) concept by allowing multiple query vectors to be searched in a single request. This type of search is ideal for scenarios where you need to find similar vectors for a set of query vectors, significantly reducing the time and computational resources required.
+A bulk-vector search extends the [single-vector search](https://milvus.io/docs/single-vector-search.md#Single-Vector-Search) concept by allowing multiple query vectors to be searched in a single request. This type of search is ideal for scenarios where you need to find similar vectors for a set of query vectors, significantly reducing the time and computational resources required.
 
 In a bulk-vector search, you can include several query vectors in the `data` field. The system processes these vectors in parallel, returning a separate result set for each query vector, each set containing the closest matches found within the collection.
 
@@ -365,7 +372,7 @@ Alongside the nearest neighbors, the search results will include the specified f
 
 ## Filtered search
 
-Filtered search applies scalar filters to vector searches, allowing you to refine the search results based on specific criteria. You can find more about filter expressions in [Boolean Expression Rules](https://milvus.io/docs/boolean.md) and examples in [Get & Scalar Query](./get-and-scalar-query).
+Filtered search applies scalar filters to vector searches, allowing you to refine the search results based on specific criteria. You can find more about filter expressions in [Boolean Expression Rules](https://milvus.io/docs/boolean.md) and examples in [Get & Scalar Query](https://milvus.io/docs/get-and-scalar-query.md).
 
 For instance, to refine search results based on a string pattern, you can use the __like__ operator. This operator enables string matching by considering prefixes, infixes, and suffixes:
 
@@ -614,7 +621,7 @@ __Limitations__
 
 - __Performance Impact__: Be mindful that performance degrades with increasing query vector counts. Using a cluster with 2 CPU cores and 8 GB of memory as an example, the execution time for grouping search increases proportionally with the number of input query vectors.
 
-- __Functionality__: Grouping search is not supported by [range search](./single-vector-search#range-search) or [search iterators](./with-iterators#search-with-iterator).
+- __Functionality__: Grouping search is not supported by [range search](https://milvus.io/docs/single-vector-search.md#Range-search) or [search iterators](https://milvus.io/docs/with-iterators.md#Search-with-iterator).
 
 ## Search parameters
 

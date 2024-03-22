@@ -12,7 +12,7 @@ This guide demonstrates how to get entities by ID and conduct scalar filtering. 
 
 A scalar query filters entities in a collection based on a defined condition using boolean expressions. The query result is a set of entities that match the defined condition. Unlike a vector search, which identifies the closest vector to a given vector in a collection, queries filter entities based on specific criteria.
 
-On Zilliz Cloud, __a filter is always a string compising field names joined by operators__. In this guide, you will find various filter examples. To learn more about the operator details, go to the [Reference](./get-and-scalar-query#reference-on-scalar-filters) section.
+On Zilliz Cloud, __a filter is always a string compising field names joined by operators__. In this guide, you will find various filter examples. To learn more about the operator details, go to the [Reference](https://milvus.io/docs/get-and-scalar-query.md#Reference-on-scalar-filters) section.
 
 <div class="alert note">
 
@@ -264,7 +264,7 @@ print(res)
 
 ## Use Basic Operators
 
-In this section, you will find examples of how to use basic operators in scalar filtering. You can apply these filters to [vector searches](./single-vector-search#filtered-search) and [data deletions](./insert-update-delete#delete-entities) too.
+In this section, you will find examples of how to use basic operators in scalar filtering. You can apply these filters to [vector searches](https://milvus.io/docs/single-vector-search.md#Filtered-search) and [data deletions](https://milvus.io/docs/insert-update-delete.md#Delete-entities) too.
 
 - Filter entities with their tag values falling between 1,000 to 1,500.
 
@@ -353,7 +353,7 @@ In this section, you will find examples of how to use basic operators in scalar 
 
 ## Use Advanced Operators
 
-In this section, you will find examples of how to use advanced operators in scalar filtering. You can apply these filters to [vector searches](./single-vector-search#filtered-search) and [data deletions](./insert-update-delete#delete-entities) too.
+In this section, you will find examples of how to use advanced operators in scalar filtering. You can apply these filters to [vector searches](https://milvus.io/docs/single-vector-search.md#Filtered-search) and [data deletions](https://milvus.io/docs/insert-update-delete.md#Delete-entities) too.
 
 ### Count entities
 

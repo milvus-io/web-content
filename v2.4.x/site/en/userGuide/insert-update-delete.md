@@ -13,7 +13,7 @@ This guide walks you through the data manipulation operations within a collectio
 
 - You have created a collection. To create a collection, refer to [Manage Collections](manage-collections.md).
 
-- To insert a large volume of data, you are advised to use [Data Import](./data-import).
+- To insert a large volume of data, you are advised to use [Data Import](https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/LocalBulkWriter/LocalBulkWriter.md).
 
 ## Overview
 
@@ -161,7 +161,7 @@ print(res)
 # }
 ```
 
-The output is a dictionary containing the statistics on the affected entities. For details on partition operations, refer to [Manage Partitions](./manage-partitions).
+The output is a dictionary containing the statistics on the affected entities. For details on partition operations, refer to [Manage Partitions](manage-partitions.md).
 
 ## Upsert entities
 
@@ -234,7 +234,7 @@ print(res)
 # }
 ```
 
-The output is a dictionary containing the statistics on the affected entities. For details on partition operations, refer to [Manage Partitions](./manage-partitions).
+The output is a dictionary containing the statistics on the affected entities. For details on partition operations, refer to [Manage Partitions](manage-partitions.md).
 
 ## Delete entities
 
@@ -278,4 +278,4 @@ If an entity is no longer needed, you can delete it from the collection. Milvus 
     # }
     ```
 
-For details on how to use filter expressions, refer to [Get & Scalar Query](./get-and-scalar-query).
+For details on how to use filter expressions, refer to [Get & Scalar Query](get-and-scalar-query.md).

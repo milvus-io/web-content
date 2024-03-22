@@ -5,11 +5,17 @@ title: Use JSON Fields
 
 # Use JSON Fields
 
-This guide explains how to use the JSON fields, such as inserting JSON values as well as searching and querying in JSON fields with basic and advanced operators
+This guide explains how to use the JSON fields, such as inserting JSON values as well as searching and querying in JSON fields with basic and advanced operators.
+
+<div class="admonition note">
+
+The code snippets on this page use new <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">MilvusClient</a> (Python) to interact with Milvus. New MilvusClient SDKs for other languages will be released in future updates.
+
+</div>
 
 ## Overview
 
-JSON is an acronym for Javascript Object Notation. It is a simple and lightweight text-based data format. The data in JSON is structured in key-value pairs. Every key is a string and it corresponds to a value that can be a number, string, boolean, list, or array. With Zilliz Cloud clusters, you can store dictionaries as a field value in collections.
+JSON is an acronym for Javascript Object Notation. It is a simple and lightweight text-based data format. The data in JSON is structured in key-value pairs. Every key is a string and it corresponds to a value that can be a number, string, boolean, list, or array. In Milvus, you can store dictionaries as a field value in collections.
 
 For instance, the following is an example of a JSON field that stores the metadata of a published article.
 
@@ -37,7 +43,7 @@ For instance, the following is an example of a JSON field that stores the metada
 <li><p>Ensure that all values in a list or array are of the same data type.</p></li>
 <li><p>Any nested dictionaries in a JSON field value will be considered strings.</p></li>
 <li><p>Use only alphanumeric characters and underscores to name JSON keys, as other characters may cause problems with filtering or searching.</p></li>
-<li><p>The code snippets on this page use new <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">MilvusClient</a> (Python) to interact with Milvus. New MilvusClient SDKs for other languages will be released in future updates.</p></li>
+<li>Currently, indexing JSON fields is not available, which can make filtering time-consuming. However, this limitation will be addressed in upcoming releases.</li>
 </ul>
 
 </div>
@@ -287,7 +293,7 @@ When working with JSON fields, you can either use the JSON fields as filters or 
 <p><b>notes</b></p>
 
 <ul>
-<li>Zilliz Cloud stores string values in the JSON field as is without performing semantic escape or conversion. </li>
+<li>Milvus stores string values in the JSON field as is without performing semantic escape or conversion. </li>
 </ul>
 <p>For instance, <code>'a"b'</code>, <code>"a'b"</code>, <code>'a\\\\'b'</code>, and <code>"a\\\\"b"</code> will be saved as is, while <code>'a'b'</code> and <code>"a"b"</code> will be treated as invalid values.</p>
 <ul>

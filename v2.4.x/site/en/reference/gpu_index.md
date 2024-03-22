@@ -54,7 +54,7 @@ The following examples demonstrate how to build GPU indexes of different types.
 
 When setting up GPU index parameters, define __index_type__, __metric_type__, and __params__:
 
-- __index_type__ (_string_): The type of index used to accelerate vector search. Valid options include __GPU_CAGRA__, __GPU_IVF_FLAT__, __GPU_IVF_PQ and__ GPU_BRUTE_FORCE__.
+- __index_type__ (_string_): The type of index used to accelerate vector search. Valid options include __GPU_CAGRA__, __GPU_IVF_FLAT__, __GPU_IVF_PQ__, and __GPU_BRUTE_FORCE__.
 
 - __metric_type__ (_string_): The type of metrics used to measure the similarity of vectors. Valid options are __IP__ and __L2__.
 

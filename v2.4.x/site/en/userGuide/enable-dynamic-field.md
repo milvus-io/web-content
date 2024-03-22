@@ -75,7 +75,7 @@ Once the collection is created, you can start inserting data, including the dyna
 
 ### Prepare data
 
-Now we need to prepare a piece of applicable data out of the [Example Dataset](./example-dataset).
+Now we need to prepare a piece of applicable data.
 
 ```python
 # 6. Prepare data

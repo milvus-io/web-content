@@ -17,7 +17,7 @@ Upon the creation of a collection, at least a default partition named ___default
 
 <p><b>notes</b></p>
 
-<p>Milvus  introduces a feature called <strong>Partition Key</strong>, leveraging the underlying partitions to store entities based on the hashed values of a specific field. This feature facilitates the implementation of multi-tenancy, enhancing search performance. For details, read <a href="./use-partition-key">Use Partition Key</a>.</p>
+<p>Milvus  introduces a feature called <strong>Partition Key</strong>, leveraging the underlying partitions to store entities based on the hashed values of a specific field. This feature facilitates the implementation of multi-tenancy, enhancing search performance. For details, read <a href="https://milvus.io/docs/use-partition-key.md">Use Partition Key</a>.</p>
 <p>If the <strong>Partition Key</strong> feature is on in a collection, Milvus takes care of managing all the partitions, relieving you of this responsibility.</p>
 <p>The code snippets on this page use new <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">MilvusClient</a> (Python) to interact with Milvus. New MilvusClient SDKs for other languages will be released in future updates.</p>
 
@@ -76,7 +76,7 @@ The output of the above code snippet includes the names of the partitions within
 <p><b>notes</b></p>
 
 <p>If you have set a field as the partition key in a collection, Milvus creates at least <strong>64</strong> partitions along with the collection. When listing the partitions, the results may differ from the output of the above code snippets.</p>
-<p>For details, refer to <a href="./use-partition-key">Use Partition Key</a>.</p>
+<p>For details, refer to <a href="https://milvus.io/docs/use-partition-key.md">Use Partition Key</a>.</p>
 
 </div>
 
@@ -111,7 +111,7 @@ The code snippet above creates a partition in a collection and lists the partiti
 <p><b>notes</b></p>
 
 <p>If you have set a field as the partition key in a collection, Milvus takes care of managing the partitions in the collection. Therefore, you may encounter prompted errors when attempting to create partitions.</p>
-<p>For details, refer to <a href="./use-partition-key">Use Partition Key</a>.</p>
+<p>For details, refer to <a href="https://milvus.io/docs/use-partition-key.md">Use Partition Key</a>.</p>
 
 </div>
 

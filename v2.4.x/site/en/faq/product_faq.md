@@ -37,7 +37,7 @@ Theoretically, the maximum dataset size Milvus can handle is determined by the h
 
 Milvus deals with two types of data, inserted data and metadata. 
 
-Inserted data, including vector data, scalar data, and collection-specific schema, are stored in persistent storage (for now MinIO only) as incremental log.
+Inserted data, including vector data, scalar data, and collection-specific schema, are stored in persistent storage as incremental log. Milvus supports multiple object storage backends, including [MinIO](https://min.io/), [AWS S3](https://aws.amazon.com/s3/?nc1=h_ls), [Google Cloud Storage](https://cloud.google.com/storage?hl=en#object-storage-for-companies-of-all-sizes) (GCS), [Azure Blob Storage](https://azure.microsoft.com/en-us/products/storage/blobs), [Alibaba Cloud OSS](https://www.alibabacloud.com/product/object-storage-service), and [Tencent Cloud Object Storage](https://www.tencentcloud.com/products/cos) (COS).
 
 Metadata are generated within Milvus. Each Milvus module has its own metadata that are stored in etcd.
 
