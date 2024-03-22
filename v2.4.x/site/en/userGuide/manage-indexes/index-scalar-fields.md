@@ -16,9 +16,9 @@ The code snippets on this page use new <a href="https://milvus.io/api-reference/
 
 ## Types of scalar indexing
 
-- __[Auto indexing](./index-scalar-fields#auto-indexing)__: Milvus automatically decides the index type based on the data type of the scalar field. This is suitable when you do not need to control the specific index type.
+- __[Auto indexing](https://milvus.io/docs/index-scalar-fields.md#Auto-indexing)__: Milvus automatically decides the index type based on the data type of the scalar field. This is suitable when you do not need to control the specific index type.
 
-- __[Custom indexing](./index-scalar-fields#custom-indexing)__: You specify the exact index type, such as an inverted index. This provides more control over the index type selection.
+- __[Custom indexing](https://milvus.io/docs/index-scalar-fields.md#Custom-indexing)__: You specify the exact index type, such as an inverted index. This provides more control over the index type selection.
 
 ## Auto indexing
 
