@@ -165,7 +165,7 @@ The output is a dictionary containing the statistics on the affected entities. F
 
 ## Upsert entities
 
-Upserting data is a combination of update and insert operations. In Zilliz Cloud, an upsert operation performs a data-level action to either insert or update an entity based on whether its primary key already exists in a collection. Specifically:
+Upserting data is a combination of update and insert operations. In Milvus, an upsert operation performs a data-level action to either insert or update an entity based on whether its primary key already exists in a collection. Specifically:
 
 - If the primary key of the entity already exists in the collection, the existing entity will be overwritten.
 
