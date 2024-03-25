@@ -216,9 +216,18 @@ IVF_FLAT is the most basic IVF index, and the encoded data stored in each unit i
 
 - Search parameters
 
-  | Parameter | Description              | Range           | Default Value |
-  | --------- | ------------------------ | --------------- | ------------- |
-  | `nprobe`  | Number of units to query | [1, nlist] | 8 |
+  - Common search
+
+  | Parameter                  | Description                                             | Range      | Default Value |
+  |----------------------------|---------------------------------------------------------|------------|---------------|
+  | `nprobe`                   | Number of units to query                                | [1, nlist] | 8             |
+
+  - Range search
+
+  | Parameter                  | Description                                             | Range      | Default Value |
+  |----------------------------|---------------------------------------------------------|------------|---------------|
+  | `max_empty_result_buckets` | Maximum number of empty buckets that has been returned.<br/> This is a range-search parameter and terminates the search whilst the number of empty buckets in the return reaches the specified value.<br/> Increasing this value can improve recall rate at the cost of increased search time. | [1, 65535] | 1  |
+
 
 ### GPU_IVF_FLAT
 
@@ -238,9 +247,17 @@ When conducting searches, note that you can set the top-K up to 256 for any sear
 
 - Search parameters
 
-  | Parameter | Description              | Range           | Default Value |
-  | --------- | ------------------------ | --------------- | ------------- |
-  | `nprobe`  | Number of units to query | [1, nlist]      | 8 |
+  - Common search
+
+    | Parameter | Description              | Range           | Default Value |
+    | --------- | ------------------------ | --------------- | ------------- |
+    | `nprobe`  | Number of units to query | [1, nlist]      | 8 |
+
+  - Range search
+
+    | Parameter                  | Description                                             | Range      | Default Value |
+    |----------------------------|---------------------------------------------------------|------------|---------------|
+    | `max_empty_result_buckets` | Maximum number of empty buckets that has been returned.<br/> This is a range-search parameter and terminates the search whilst the number of empty buckets in the return reaches the specified value.<br/> Increasing this value can improve recall rate at the cost of increased search time. | [1, 65535] | 1  |
 
 - Limits on search
 
@@ -262,9 +279,17 @@ When disk, CPU, or GPU memory resources are limited, IVF_SQ8 is a better option 
 
 - Search parameters
 
-  | Parameter | Description              | Range                                           |
-  | --------- | ------------------------ | ----------------------------------------------- |
-  | `nprobe`  | Number of units to query | [1, nlist]  |
+  - Common search
+
+    | Parameter | Description              | Range           | Default Value |
+    | --------- | ------------------------ | --------------- | ------------- |
+    | `nprobe`  | Number of units to query | [1, nlist]      | 8 |
+
+  - Range search
+
+    | Parameter                  | Description                                             | Range      | Default Value |
+    |----------------------------|---------------------------------------------------------|------------|---------------|
+    | `max_empty_result_buckets` | Maximum number of empty buckets that has been returned.<br/> This is a range-search parameter and terminates the search whilst the number of empty buckets in the return reaches the specified value.<br/> Increasing this value can improve recall rate at the cost of increased search time. | [1, 65535] | 1  |
 
 ### IVF_PQ
 
@@ -288,9 +313,17 @@ Index building parameters and search parameters vary with Milvus distribution. S
 
 - Search parameters
 
-  | Parameter | Description              | Range      |
-  | --------- | ------------------------ | ---------- |
-  | `nprobe`  | Number of units to query | [1, nlist] |
+  - Common search
+
+    | Parameter | Description              | Range           | Default Value |
+    | --------- | ------------------------ | --------------- | ------------- |
+    | `nprobe`  | Number of units to query | [1, nlist]      | 8 |
+
+  - Range search
+
+    | Parameter                  | Description                                             | Range      | Default Value |
+    |----------------------------|---------------------------------------------------------|------------|---------------|
+    | `max_empty_result_buckets` | Maximum number of empty buckets that has been returned.<br/> This is a range-search parameter and terminates the search whilst the number of empty buckets in the return reaches the specified value.<br/> Increasing this value can improve recall rate at the cost of increased search time. | [1, 65535] | 1  |
 
 ### SCANN
 
@@ -311,10 +344,18 @@ SCANN (Score-aware quantization loss) is similar to IVF_PQ in terms of vector cl
 
 - Search parameters
 
-  | Parameter | Description              | Range      |
-  | --------- | ------------------------ | ---------- |
-  | `nprobe`  | Number of units to query | [1, nlist] |
-  | `reorder_k` | Number of candidate units to query | [`top_k`, ∞] |
+  - Common search
+
+    | Parameter | Description              | Range      | Default value |
+    | --------- | ------------------------ | ---------- | ------------- |
+    | `nprobe`  | Number of units to query | [1, nlist] |               |
+    | `reorder_k` | Number of candidate units to query | [`top_k`, ∞] | |
+
+  - Range search
+
+    | Parameter                  | Description                                             | Range      | Default Value |
+    |----------------------------|---------------------------------------------------------|------------|---------------|
+    | `max_empty_result_buckets` | Maximum number of empty buckets that has been returned.<br/> This is a range-search parameter and terminates the search whilst the number of empty buckets in the return reaches the specified value.<br/> Increasing this value can improve recall rate at the cost of increased search time. | [1, 65535] | 1  |
 
 ### GPU_IVF_PQ
 
@@ -340,9 +381,17 @@ When conducting searches, note that you can set the top-K up to 8192 for any sea
 
 - Search parameters
 
-  | Parameter | Description              | Range      | Default Value |
-  | --------- | ------------------------ | ---------- | ------------- |
-  | `nprobe`  | Number of units to query | [1, nlist] | 8 |
+  - Common search
+
+    | Parameter | Description              | Range           | Default Value |
+    | --------- | ------------------------ | --------------- | ------------- |
+    | `nprobe`  | Number of units to query | [1, nlist]      | 8 |
+
+  - Range search
+
+    | Parameter                  | Description                                             | Range      | Default Value |
+    |----------------------------|---------------------------------------------------------|------------|---------------|
+    | `max_empty_result_buckets` | Maximum number of empty buckets that has been returned.<br/> This is a range-search parameter and terminates the search whilst the number of empty buckets in the return reaches the specified value.<br/> Increasing this value can improve recall rate at the cost of increased search time. | [1, 65535] | 1  |
 
 - Limits on search
 
@@ -399,12 +448,19 @@ BIN_IVF_FLAT is the most basic BIN_IVF index, and the encoded data stored in eac
    | --------- | ----------------------- | ---------- |
    | `nlist`   | Number of cluster units | [1, 65536] |
 
-
 - Search parameters
 
-  | Parameter | Description              | Range                                           |
-  | --------- | ------------------------ | ----------------------------------------------- |
-  | `nprobe`  | Number of units to query | [1, nlist]  |
+  - Common search
+
+    | Parameter | Description              | Range           | Default Value |
+    | --------- | ------------------------ | --------------- | ------------- |
+    | `nprobe`  | Number of units to query | [1, nlist]      | 8 |
+
+  - Range search
+
+    | Parameter                  | Description                                             | Range      | Default Value |
+    |----------------------------|---------------------------------------------------------|------------|---------------|
+    | `max_empty_result_buckets` | Maximum number of empty buckets that has been returned.<br/> This is a range-search parameter and terminates the search whilst the number of empty buckets in the return reaches the specified value.<br/> Increasing this value can improve recall rate at the cost of increased search time. | [1, 65535] | 1  |
 
 
 ## FAQ
