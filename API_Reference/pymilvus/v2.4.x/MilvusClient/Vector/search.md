@@ -88,7 +88,7 @@ __PARAMETERS:__
 
         - __max_empty_result_buckets__ (_int_)
 
-            This param is only used for range search for IVF-serial indexes, including __BIN_IVF_FLAT__, __IVF_FLAT__, __IVF_SQ8__, __IVF_PQ__, and __SCANN__.
+            This param is only used for range search for IVF-serial indexes, including __BIN_IVF_FLAT__, __IVF_FLAT__, __IVF_SQ8__, __IVF_PQ__, and __SCANN__. The value defaults to 1 and ranges from 1 to 65536.
 
             During range search, the search process terminates early if the number of buckets with no valid range search results reaches the specified value. Increasing this parameter improves range search recall.
 
