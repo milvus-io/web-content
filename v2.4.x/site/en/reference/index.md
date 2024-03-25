@@ -316,13 +316,6 @@ SCANN (Score-aware quantization loss) is similar to IVF_PQ in terms of vector cl
   | `nprobe`  | Number of units to query | [1, nlist] |
   | `reorder_k` | Number of candidate units to query | [`top_k`, ∞] |
 
-- Range search parameters
-
-  | Parameter | Description              | Range      |
-  | --------- | ------------------------ | ---------- |
-  | `radius`  | Number of units to query | [1, nlist] |
-  | `range_filter` | Number of candidate units to query | [`top_k`, ∞] |
-
 ### GPU_IVF_PQ
 
 `PQ` (Product Quantization) uniformly decomposes the original high-dimensional vector space into Cartesian products of `m` low-dimensional vector spaces, and then quantizes the decomposed low-dimensional vector spaces. Instead of calculating the distances between the target vector and the center of all the units, product quantization enables the calculation of distances between the target vector and the clustering center of each low-dimensional space and greatly reduces the time complexity and space complexity of the algorithm.
