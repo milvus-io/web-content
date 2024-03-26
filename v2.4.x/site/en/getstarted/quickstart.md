@@ -22,13 +22,9 @@ Once you have obtained the cluster credentials or an API key, you can use it to 
 ```python
 from pymilvus import MilvusClient, DataType
 
-CLUSTER_ENDPOINT = "YOUR_CLUSTER_ENDPOINT"
-TOKEN = "YOUR_CLUSTER_TOKEN"
-
 # 1. Set up a Milvus client
 client = MilvusClient(
-    uri=CLUSTER_ENDPOINT,
-    token=TOKEN 
+    uri="http://localhost:19530"
 )
 ```
 
@@ -36,7 +32,7 @@ client = MilvusClient(
 
 <p><b>notes</b></p>
 
-<p>Due to language differences, you should <strong>include your code in the main function</strong> if you prefer to code in <strong>Java</strong> or <strong>Node.js</strong>.</p>
+<p>If you have enabled authentication on your Milvus instance, you should add `token` parameter when initiating MilvusClient and set the value to a colon-separated username and password. To authenticate using the default username and password, set `token` to `root:Milvus`.</p>
 
 </div>
 
