@@ -253,12 +253,6 @@ When conducting searches, note that you can set the top-K up to 256 for any sear
     | --------- | ------------------------ | --------------- | ------------- |
     | `nprobe`  | Number of units to query | [1, nlist]      | 8 |
 
-  - Range search
-
-    | Parameter                  | Description                                             | Range      | Default Value |
-    |----------------------------|---------------------------------------------------------|------------|---------------|
-    | `max_empty_result_buckets` | Maximum number of buckets not returning any search results.<br/>This is a range-search parameter and terminates the search process whilst the number of consecutive empty buckets reaches the specified value.<br/>Increasing this value can improve recall rate at the cost of increased search time. | [1, 65535] | 2  |
-
 - Limits on search
 
   | Parameter | Range  |
@@ -386,12 +380,6 @@ When conducting searches, note that you can set the top-K up to 8192 for any sea
     | Parameter | Description              | Range           | Default Value |
     | --------- | ------------------------ | --------------- | ------------- |
     | `nprobe`  | Number of units to query | [1, nlist]      | 8 |
-
-  - Range search
-
-    | Parameter                  | Description                                             | Range      | Default Value |
-    |----------------------------|---------------------------------------------------------|------------|---------------|
-    | `max_empty_result_buckets` | Maximum number of buckets not returning any search results.<br/>This is a range-search parameter and terminates the search process whilst the number of consecutive empty buckets reaches the specified value.<br/>Increasing this value can improve recall rate at the cost of increased search time. | [1, 65535] | 2  |
 
 - Limits on search
 
