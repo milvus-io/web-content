@@ -54,13 +54,9 @@ Against the backdrop of the great leap in the AI industry, most developers just 
 ```python
 from pymilvus import MilvusClient, DataType
 
-CLUSTER_ENDPOINT = "YOUR_CLUSTER_ENDPOINT"
-TOKEN = "YOUR_CLUSTER_TOKEN"
-
 # 1. Set up a Milvus client
 client = MilvusClient(
-    uri=CLUSTER_ENDPOINT,
-    token=TOKEN 
+    uri="http://localhost:19530"
 )
 
 # 2. Create a collection in quick setup mode

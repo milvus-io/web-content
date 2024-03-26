@@ -9,7 +9,7 @@ This guide walks you through using the partition key to accelerate data retrieva
 
 ## Overview
 
-The partition key in Zilliz Cloud allows for the distribution of incoming entities into different partitions based on their respective partition key values. This allows entities with the same key value to be grouped together in a partition, which in turn accelerates search performance by avoiding the need to scan irrelevant partitions when filtering by the key field. Compared to traditional filtering methods, the partition key can greatly enhance query performance.
+The partition key in Milvus allows for the distribution of incoming entities into different partitions based on their respective partition key values. This allows entities with the same key value to be grouped together in a partition, which in turn accelerates search performance by avoiding the need to scan irrelevant partitions when filtering by the key field. Compared to traditional filtering methods, the partition key can greatly enhance query performance.
 
 You can use the partition key to implement multi-tenancy. For details on multi-tenancy, read [Multi-tenancy](https://milvus.io/docs/multi_tenancy.md) for more.
 
@@ -27,15 +27,12 @@ To demonstrate the use of partition keys, we will continue to use the example da
 import json, time
 from pymilvus import connections, FieldSchema, CollectionSchema, DataType, Collection, utility
 
-CLUSTER_ENDPOINT="YOUR_CLUSTER_ENDPOINT" # Set your cluster endpoint
-TOKEN="YOUR_CLUSTER_TOKEN" # Set your token
 COLLECTION_NAME="medium_articles_2020" # Set your collection name
 DATASET_PATH="{}/../medium_articles_2020_dpr.json".format(os.path.dirname(__file__)) # Set your dataset path
 
 # 1. Connect to cluster
 client = MilvusClient(
-    uri=CLUSTER_ENDPOINT,
-    token=TOKEN
+    uri="http://localhost:19530"
 )
 
 # 2. Define collection schema

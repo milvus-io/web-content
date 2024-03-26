@@ -35,18 +35,14 @@ The code snippets on this page use new <a href="https://milvus.io/api-reference/
 
 ## Preparations
 
-The code snippet below repurposes the existing code to establish a connection to a Zilliz Cloud cluster and quickly set up a collection.
+The code snippet below repurposes the existing code to establish a connection to Milvus and quickly set up a collection.
 
 ```python
 from pymilvus import MilvusClient
 
-CLUSTER_ENDPOINT = "YOUR_CLUSTER_ENDPOINT"
-TOKEN = "YOUR_CLUSTER_TOKEN"
-
 # 1. Set up a Milvus client
 client = MilvusClient(
-    uri=CLUSTER_ENDPOINT,
-    token=TOKEN 
+    uri="http://localhost:19530"
 )
 
 # 2. Insert randomly generated vectors 
@@ -655,7 +651,7 @@ The following table lists all possible settings in the search parameters.
 
 <p><b>notes</b></p>
 
-<p>[1] Number of cluster units after indexing. When indexing a collection, Zilliz Cloud sub-divides the vector data into multiple cluster units, the number of which varies with the actual index settings.</p>
+<p>[1] Number of cluster units after indexing. When indexing a collection, Milvus sub-divides the vector data into multiple cluster units, the number of which varies with the actual index settings.</p>
 <p>[2] Number of entities to return in a search.</p>
 
 </div>

@@ -56,15 +56,12 @@ To define a JSON field, simply follow the same procedure as defining fields of o
 import os, json, time
 from pymilvus import MilvusClient, DataType
 
-CLUSTER_ENDPOINT="YOUR_CLUSTER_ENDPOINT" # Set your cluster endpoint
-TOKEN="YOUR_CLUSTER_TOKEN" # Set your token
 COLLECTION_NAME="medium_articles_2020" # Set your collection name
 DATASET_PATH="{}/../medium_articles_2020_dpr.json".format(os.path.dirname(__file__)) # Set your dataset path
 
 # 1. Connect to cluster
 client = MilvusClient(
-    uri=CLUSTER_ENDPOINT,
-    token=TOKEN
+    uri="http://localhost:19530"
 )
 
 # 2. Define collection schema

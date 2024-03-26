@@ -36,13 +36,9 @@ The code snippet below repurposes the existing code to establish a connection to
 ```python
 from pymilvus import MilvusClient
 
-CLUSTER_ENDPOINT = "YOUR_CLUSTER_ENDPOINT"
-TOKEN = "YOUR_CLUSTER_TOKEN"
-
 # 1. Set up a Milvus client
 client = MilvusClient(
-    uri=CLUSTER_ENDPOINT,
-    token=TOKEN 
+    uri="http://localhost:19530"
 )
 
 # 2. Create a collection

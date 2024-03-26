@@ -12,7 +12,7 @@ This guide demonstrates how to get entities by ID and conduct scalar filtering. 
 
 A scalar query filters entities in a collection based on a defined condition using boolean expressions. The query result is a set of entities that match the defined condition. Unlike a vector search, which identifies the closest vector to a given vector in a collection, queries filter entities based on specific criteria.
 
-On Zilliz Cloud, __a filter is always a string compising field names joined by operators__. In this guide, you will find various filter examples. To learn more about the operator details, go to the [Reference](https://milvus.io/docs/get-and-scalar-query.md#Reference-on-scalar-filters) section.
+In Milvus, __a filter is always a string compising field names joined by operators__. In this guide, you will find various filter examples. To learn more about the operator details, go to the [Reference](https://milvus.io/docs/get-and-scalar-query.md#Reference-on-scalar-filters) section.
 
 <div class="alert note">
 
@@ -22,20 +22,16 @@ The code snippets on this page use new <a href="https://milvus.io/api-reference/
 
 ## Preparations
 
-The following steps repurpose the code to connect to a Zilliz Cloud cluster, quickly set up a collection, and insert over 1,000 randomly generated entities into the collection.
+The following steps repurpose the code to connect to Milvus, quickly set up a collection, and insert over 1,000 randomly generated entities into the collection.
 
 ### Step 1: Create a collection
 
 ```python
 from pymilvus import MilvusClient
 
-CLUSTER_ENDPOINT = "YOUR_CLUSTER_ENDPOINT"
-TOKEN = "YOUR_CLUSTER_TOKEN"
-
 # 1. Set up a Milvus client
 client = MilvusClient(
-    uri=CLUSTER_ENDPOINT,
-    token=TOKEN 
+    uri="http://localhost:19530"
 )
 
 # 2. Create a collection

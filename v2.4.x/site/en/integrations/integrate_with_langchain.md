@@ -32,12 +32,8 @@ DIMENSION = 768
 OPENAI_API_KEY = "YOUR_OPENAI_API_KEY"
 os.environ["OPENAI_API_KEY"] = OPENAI_API_KEY
 
-# 4. Set up the connection parameters for your Zilliz Cloud cluster.
-URI = 'YOUR_CLUSTER_ENDPOINT'
-
-# 5. Set up the token for your Zilliz Cloud cluster.
-# You can either use an API key or a set of cluster username and password joined by a colon.
-TOKEN = 'YOUR_CLUSTER_TOKEN'
+# 4. Set up the connection parameters for your Milvus server.
+URI = 'http://localhost:19530'
 ```
 
 ## Prepare data
@@ -100,7 +96,7 @@ After preparing the documents, the next step is to convert them into vector embe
 
 ```python
 embeddings = OpenAIEmbeddings()
-connection_args = { 'uri': URI, 'token': TOKEN }
+connection_args = { 'uri': URI }
 
 vector_store = Milvus(
     embedding_function=embeddings,

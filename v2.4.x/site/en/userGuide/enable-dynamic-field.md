@@ -9,7 +9,7 @@ This page explains how to use the dynamic field in a collection for flexible dat
 
 ## Overview
 
-Schema design is crucial for Zilliz Cloud cluster data processing. Before inserting entities into a collection, clarify the schema design and ensure that all data entities inserted afterward match the schema. However, this puts limits on collections, making them similar to tables in relational databases.
+Schema design is crucial for Milvus data processing. Before inserting entities into a collection, clarify the schema design and ensure that all data entities inserted afterward match the schema. However, this puts limits on collections, making them similar to tables in relational databases.
 
 Dynamic schema enables users to insert entities with new fields into a collection without modifying the existing schema. This means that users can insert data without knowing the full schema of a collection and can include fields that are not yet defined.
 
@@ -25,21 +25,18 @@ The code snippets on this page use new <a href="https://milvus.io/api-reference/
 
 To create a collection using a dynamic schema, set `enable_dynamic_field` to `True` when defining the data model. Afterward, all undefined fields and their values in the data entities inserted afterward will be treated as pre-defined fields. We prefer to use the term "dynamic fields" to refer to these key-value pairs.
 
-With these dynamic fields, you can ask Zilliz Cloud to output dynamic fields in search/query results and include them in search and query filter expressions just as they are already defined in the collection schema.
+With these dynamic fields, you can ask Milvus to output dynamic fields in search/query results and include them in search and query filter expressions just as they are already defined in the collection schema.
 
 ```python
 import json, os, time
 from pymilvus import MilvusClient, DataType
 
-CLUSTER_ENDPOINT="YOUR_CLUSTER_ENDPOINT" # Set your cluster endpoint
-TOKEN="YOUR_CLUSTER_TOKEN" # Set your token
 COLLECTION_NAME="medium_articles_2020" # Set your collection name
 DATASET_PATH="{}/../medium_articles_2020_dpr.json".format(os.path.dirname(__file__)) # Set your dataset path
 
 # 1. Connect to cluster
 client = MilvusClient(
-    uri=CLUSTER_ENDPOINT,
-    token=TOKEN
+    uri="http://localhost:19530"
 )
 
 # 2. Define collection schema

@@ -103,7 +103,7 @@ The system breaks down into four levels:
 For more information, see [Architecture Overview](architecture_overview.md).
 
 
-![Architecture](../../../assets/milvus_architecture.jpeg "Milvus architecure.")
+![Architecture](../../../assets/milvus_architecture.png "Milvus architecure.")
 
 ## Developer tools
 

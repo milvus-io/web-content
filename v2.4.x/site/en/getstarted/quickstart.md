@@ -28,7 +28,7 @@ client = MilvusClient(
 
 <div class="alert note">
 
-<p>If you have enabled authentication on your Milvus instance, you should add `token` parameter when initiating MilvusClient and set the value to a colon-separated username and password. To authenticate using the default username and password, set `token` to `root:Milvus`.</p>
+<p>If you have enabled authentication on your Milvus instance, you should add <code>token</code> as a parameter when initiating MilvusClient and set the value to a colon-separated username and password. To authenticate using the default username and password, set <code>token</code> to <code>root:Milvus</code>.</p>
 
 </div>
 
@@ -119,7 +119,7 @@ In the above setup, you have the flexibility to define various aspects of the co
 
         Whether to use the reserved JSON field __$meta__ to store non-schema-defined fields and their values. 
 
-     For a detailed explanation of the schema, refer to [Schema Explained](./schema-explained).
+     For a detailed explanation of the schema, refer to [Schema](schema.md).
 
 - __Index parameters__
 
@@ -129,13 +129,13 @@ In the above setup, you have the flexibility to define various aspects of the co
 
     - For scalar fields, including the primary field, Milvus uses __TRIE__ for integers and __STL_SORT__ for strings.
 
-    For additional insights into index types, refer to[AUTOINDEX Explained](./autoindex-explained).
+    For additional insights into index types, refer to [Index](index.md).
 
 <div class="admonition note">
 
 <p><b>notes</b></p>
 
-<p>The collection created in the preceding code snippets are automatically loaded. If you prefer not to create an automatically loaded collection, refer to <a href="./manage-collections-sdks#step-3-create-the-collection">Manage Collections (SDKs)</a>.</p>
+<p>The collection created in the preceding code snippets are automatically loaded. If you prefer not to create an automatically loaded collection, refer to <a href="https://milvus.io/docs/manage-collections.md">Manage Collections</a>.</p>
 <p>Collections created using the RESTful API are always automatically loaded.</p>
 
 </div>

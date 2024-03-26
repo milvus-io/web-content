@@ -58,7 +58,7 @@ Milvus supports only one primary key field in a collection.
 	<tr>
 		<td><code>dim</code></td>
 		<td>Dimension of the vector</td>
-    		<td>Data type: Integer &isin;[1, 32768].<br/>Mandatory for the vector field</td>
+    		<td>Data type: Integer &isin;[1, 32768].<br/>Mandatory for a dense vector field. Omit for a <a href="https://milvus.io/docs/sparse_vector.md">sparse vector</a> field.</td>
 	</tr>
 	<tr>
 		<td><code>is_partition_key</code></td>
@@ -115,14 +115,18 @@ fields = [
   - DOUBLE: numpy.double
   - VARCHAR: VARCHAR
   - JSON: [JSON](use-json-fields.md)
-  - Array: Array(array_data_type.md)
+  - Array: [Array](array_data_type.md)
+
+  JSON as a composite data type is available. A JSON field comprises key-value pairs. Each key is a string, and a value can be a number, string, boolean value, array, or list. For details, refer to [JSON: a new data type](use-json-fields.md).
+  
 - Vector field supports:
   - BINARY_VECTOR: Stores binary data as a sequence of 0s and 1s, used for compact feature representation in image processing and information retrieval.
   - FLOAT_VECTOR: Stores 32-bit floating-point numbers, commonly used in scientific computing and machine learning for representing real numbers.
   - FLOAT16_VECTOR: Stores 16-bit half-precision floating-point numbers, used in deep learning and GPU computations for memory and bandwidth efficiency.
   - BFLOAT16_VECTOR: Stores 16-bit floating-point numbers with reduced precision but the same exponent range as Float32, popular in deep learning for reducing memory and computational requirements without significantly impacting accuracy.
+  - SPARSE_FLOAT_VECTOR: Stores a list of non-zero elements and their corresponding indices, used for representing sparse vectors. For more information, refer to [Sparse Vectors](sparse_vector.md).
 
-JSON as a composite data type is available. A JSON field comprises key-value pairs. Each key is a string, and a value can be a number, string, boolean value, array, or list. For details, refer to [JSON: a new data type](use-json-fields.md)
+  Milvus supports multiple vector fields in a collection. For more information, refer to [Multi-Vector Search](multi-vector-search.md).
 
 ## Collection schema
 
