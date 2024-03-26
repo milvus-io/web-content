@@ -218,15 +218,15 @@ IVF_FLAT is the most basic IVF index, and the encoded data stored in each unit i
 
   - Common search
 
-  | Parameter                  | Description                                             | Range      | Default Value |
-  |----------------------------|---------------------------------------------------------|------------|---------------|
-  | `nprobe`                   | Number of units to query                                | [1, nlist] | 8             |
+    | Parameter                  | Description                                             | Range      | Default Value |
+    |----------------------------|---------------------------------------------------------|------------|---------------|
+    | `nprobe`                   | Number of units to query                                | [1, nlist] | 8             |
 
   - Range search
 
-  | Parameter                  | Description                                             | Range      | Default Value |
-  |----------------------------|---------------------------------------------------------|------------|---------------|
-  | `max_empty_result_buckets` | Maximum number of empty buckets that has been returned.<br/> This is a range-search parameter and terminates the search whilst the number of empty buckets in the return reaches the specified value.<br/> Increasing this value can improve recall rate at the cost of increased search time. | [1, 65535] | 1  |
+    | Parameter                  | Description                                             | Range      | Default Value |
+    |----------------------------|---------------------------------------------------------|------------|---------------|
+    | `max_empty_result_buckets` | Maximum number of buckets not returning any search results.<br/>This is a range-search parameter and terminates the search process whilst the number of consecutive empty buckets reaches the specified value.<br/>Increasing this value can improve recall rate at the cost of increased search time. | [1, 65535] | 2  |
 
 
 ### GPU_IVF_FLAT
@@ -257,7 +257,7 @@ When conducting searches, note that you can set the top-K up to 256 for any sear
 
     | Parameter                  | Description                                             | Range      | Default Value |
     |----------------------------|---------------------------------------------------------|------------|---------------|
-    | `max_empty_result_buckets` | Maximum number of empty buckets that has been returned.<br/> This is a range-search parameter and terminates the search whilst the number of empty buckets in the return reaches the specified value.<br/> Increasing this value can improve recall rate at the cost of increased search time. | [1, 65535] | 1  |
+    | `max_empty_result_buckets` | Maximum number of buckets not returning any search results.<br/>This is a range-search parameter and terminates the search process whilst the number of consecutive empty buckets reaches the specified value.<br/>Increasing this value can improve recall rate at the cost of increased search time. | [1, 65535] | 2  |
 
 - Limits on search
 
@@ -289,7 +289,7 @@ When disk, CPU, or GPU memory resources are limited, IVF_SQ8 is a better option 
 
     | Parameter                  | Description                                             | Range      | Default Value |
     |----------------------------|---------------------------------------------------------|------------|---------------|
-    | `max_empty_result_buckets` | Maximum number of empty buckets that has been returned.<br/> This is a range-search parameter and terminates the search whilst the number of empty buckets in the return reaches the specified value.<br/> Increasing this value can improve recall rate at the cost of increased search time. | [1, 65535] | 1  |
+    | `max_empty_result_buckets` | Maximum number of buckets not returning any search results.<br/>This is a range-search parameter and terminates the search process whilst the number of consecutive empty buckets reaches the specified value.<br/>Increasing this value can improve recall rate at the cost of increased search time. | [1, 65535] | 2  |
 
 ### IVF_PQ
 
@@ -323,7 +323,7 @@ Index building parameters and search parameters vary with Milvus distribution. S
 
     | Parameter                  | Description                                             | Range      | Default Value |
     |----------------------------|---------------------------------------------------------|------------|---------------|
-    | `max_empty_result_buckets` | Maximum number of empty buckets that has been returned.<br/> This is a range-search parameter and terminates the search whilst the number of empty buckets in the return reaches the specified value.<br/> Increasing this value can improve recall rate at the cost of increased search time. | [1, 65535] | 1  |
+    | `max_empty_result_buckets` | Maximum number of buckets not returning any search results.<br/>This is a range-search parameter and terminates the search process whilst the number of consecutive empty buckets reaches the specified value.<br/>Increasing this value can improve recall rate at the cost of increased search time. | [1, 65535] | 2  |
 
 ### SCANN
 
@@ -355,7 +355,7 @@ SCANN (Score-aware quantization loss) is similar to IVF_PQ in terms of vector cl
 
     | Parameter                  | Description                                             | Range      | Default Value |
     |----------------------------|---------------------------------------------------------|------------|---------------|
-    | `max_empty_result_buckets` | Maximum number of empty buckets that has been returned.<br/> This is a range-search parameter and terminates the search whilst the number of empty buckets in the return reaches the specified value.<br/> Increasing this value can improve recall rate at the cost of increased search time. | [1, 65535] | 1  |
+    | `max_empty_result_buckets` | Maximum number of buckets not returning any search results.<br/>This is a range-search parameter and terminates the search process whilst the number of consecutive empty buckets reaches the specified value.<br/>Increasing this value can improve recall rate at the cost of increased search time. | [1, 65535] | 2  |
 
 ### GPU_IVF_PQ
 
@@ -391,7 +391,7 @@ When conducting searches, note that you can set the top-K up to 8192 for any sea
 
     | Parameter                  | Description                                             | Range      | Default Value |
     |----------------------------|---------------------------------------------------------|------------|---------------|
-    | `max_empty_result_buckets` | Maximum number of empty buckets that has been returned.<br/> This is a range-search parameter and terminates the search whilst the number of empty buckets in the return reaches the specified value.<br/> Increasing this value can improve recall rate at the cost of increased search time. | [1, 65535] | 1  |
+    | `max_empty_result_buckets` | Maximum number of buckets not returning any search results.<br/>This is a range-search parameter and terminates the search process whilst the number of consecutive empty buckets reaches the specified value.<br/>Increasing this value can improve recall rate at the cost of increased search time. | [1, 65535] | 2  |
 
 - Limits on search
 
@@ -410,13 +410,13 @@ In order to improve performance, HNSW limits the maximum degree of nodes on each
   | Parameter        | Description                | Range        |
   | ---------------- | -------------------------- | ------------ |
   | `M`              | Maximum degree of the node | (2, 2048)    |
-  | `efConstruction` | Search scope               | (1, int_max) |
+  | `efConstruction` | Size of the dynamic list for the nearest neighbors during the index time. Higher `efConstruction` leads to a may improve index quality at the cost of increased indexing time.              | (1, int_max) |
 
 - Search parameters
 
   | Parameter | Description  | Range            |
   | --------- | ------------ | ---------------- |
-  | `ef`      | Search scope | [1, int_max]     |
+  | `ef`      | Size of the dynamic list for the nearest neighbors during the search time. Higher `ef` leads to more accurate but slower search. | [1, int_max]     |
 
 ### BIN_FLAT
 
@@ -460,7 +460,7 @@ BIN_IVF_FLAT is the most basic BIN_IVF index, and the encoded data stored in eac
 
     | Parameter                  | Description                                             | Range      | Default Value |
     |----------------------------|---------------------------------------------------------|------------|---------------|
-    | `max_empty_result_buckets` | Maximum number of empty buckets that has been returned.<br/> This is a range-search parameter and terminates the search whilst the number of empty buckets in the return reaches the specified value.<br/> Increasing this value can improve recall rate at the cost of increased search time. | [1, 65535] | 1  |
+    | `max_empty_result_buckets` | Maximum number of buckets not returning any search results.<br/>This is a range-search parameter and terminates the search process whilst the number of consecutive empty buckets reaches the specified value.<br/>Increasing this value can improve recall rate at the cost of increased search time. | [1, 65535] | 2  |
 
 
 ## FAQ
