@@ -28,7 +28,7 @@ client = MilvusClient(
 )
 ```
 
-<div class="admonition note">
+<div class="alert note">
 
 <p><b>notes</b></p>
 
