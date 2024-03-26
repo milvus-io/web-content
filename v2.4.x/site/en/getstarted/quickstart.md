@@ -123,11 +123,11 @@ In the above setup, you have the flexibility to define various aspects of the co
 
 - __Index parameters__
 
-    Index parameters dictate how Zilliz Cloud organizes your data within a collection. You can assign specific indexes to fields by configuring their __metric types__ and __index types__. 
+    Index parameters dictate how Milvus organizes your data within a collection. You can assign specific indexes to fields by configuring their __metric types__ and __index types__. 
 
     - For the vector field, you can use __AUTOINDEX__ as the index type and use __COSINE__, __L2__, or __IP__ as the `metric_type`.
 
-    - For scalar fields, including the primary field, Zilliz Cloud uses __TRIE__ for integers and __STL_SORT__ for strings.
+    - For scalar fields, including the primary field, Milvus uses __TRIE__ for integers and __STL_SORT__ for strings.
 
     For additional insights into index types, refer to[AUTOINDEX Explained](./autoindex-explained).
 
@@ -551,7 +551,7 @@ print(res)
 
 ## Delete Entities
 
-Zilliz Cloud allows deleting entities by IDs and by filters.
+Milvus allows deleting entities by IDs and by filters.
 
 - __Delete entities by IDs.__
 
