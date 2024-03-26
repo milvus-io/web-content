@@ -13,8 +13,6 @@ This guide explains how to connect to your Milvus cluster and performs CRUD oper
 
 - You have installed preferred SDKs. You can choose among various languages, including [Python](https://milvus.io/docs/install-pymilvus.md), [Java](https://milvus.io/docs/install-java.md), [Go](https://milvus.io/docs/install-go.md), and [Node.js](https://milvus.io/docs/install-node.md).
 
-- You can click the __Open in Colab__ button if you prefer to start right away in your browser.
-
 ## Connect to Milvus
 
 Once you have obtained the cluster credentials or an API key, you can use it to connect to your Milvus now.
