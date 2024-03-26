@@ -30,8 +30,6 @@ client = MilvusClient(
 
 <div class="alert note">
 
-<p><b>notes</b></p>
-
 <p>If you have enabled authentication on your Milvus instance, you should add `token` parameter when initiating MilvusClient and set the value to a colon-separated username and password. To authenticate using the default username and password, set `token` to `root:Milvus`.</p>
 
 </div>
