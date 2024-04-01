@@ -37,7 +37,7 @@ According to the suited data type, the supported indexes in Milvus can be divide
 
   - For 128-dimensional floating-point embeddings, the storage they take up is 128 * the size of float = 512 bytes. And the [distance metrics](metric.md) used for float-point embeddings are Euclidean distance (L2) and Inner product.
 
-  - These types of indexes include FLAT, IVF_FLAT, IVF_PQ, IVF_SQ8, HNSW, and SCANN<sup>(beta)</sup> for CPU-based ANN searches and GPU_IVF_FLAT and GPU_IVF_PQ for GPU-based ANN searches.
+  - These types of indexes include FLAT, IVF_FLAT, IVF_PQ, IVF_SQ8, HNSW, and SCANN<sup>(beta)</sup> for CPU-based ANN searches.
 
 - Indexes for binary embeddings
 
@@ -84,16 +84,6 @@ The following table classifies the indexes that Milvus supports:
     </td>
   </tr>
   <tr>
-    <td>GPU_IVF_FLAT</td>
-    <td>Quantization-based index</td>
-    <td>
-      <ul>
-        <li>High-speed query</li>
-        <li>Requires a recall rate as high as possible</li>
-      </ul>
-    </td>
-  </tr>
-  <tr>
     <td>IVF_SQ8</td>
     <td>Quantization-based index</td>
     <td>
@@ -106,17 +96,6 @@ The following table classifies the indexes that Milvus supports:
   </tr>  
   <tr>
     <td>IVF_PQ</td>
-    <td>Quantization-based index</td>
-    <td>
-      <ul>
-        <li>Very high-speed query</li>
-        <li>Limited memory resources</li>
-        <li>Accepts substantial compromise in recall rate</li>
-      </ul>
-    </td>
-  </tr>
-  <tr>
-    <td>GPU_IVF_PQ</td>
     <td>Quantization-based index</td>
     <td>
       <ul>
@@ -228,37 +207,6 @@ IVF_FLAT is the most basic IVF index, and the encoded data stored in each unit i
     |----------------------------|---------------------------------------------------------|------------|---------------|
     | `max_empty_result_buckets` | Maximum number of buckets not returning any search results.<br/>This is a range-search parameter and terminates the search process whilst the number of consecutive empty buckets reaches the specified value.<br/>Increasing this value can improve recall rate at the cost of increased search time. | [1, 65535] | 2  |
 
-
-### GPU_IVF_FLAT
-
-Similar to IVF_FLAT, GPU_IVF_FLAT also divides vector data into `nlist` cluster units, and then compares distances between the target input vector and the center of each cluster. Depending on the number of clusters the system is set to query (`nprobe`), similarity search results are returned based on comparisons between the target input and the vectors in the most similar cluster(s) only — drastically reducing query time.
-
-By adjusting `nprobe`, an ideal balance between accuracy and speed can be found for a given scenario. Results from the [IVF_FLAT performance test](https://zilliz.com/blog/Accelerating-Similarity-Search-on-Really-Big-Data-with-Vector-Indexing) demonstrate that query time increases sharply as both the number of target input vectors (`nq`), and the number of clusters to search (`nprobe`), increase.
-
-GPU_IVF_FLAT is the most basic IVF index, and the encoded data stored in each unit is consistent with the original data.
-
-When conducting searches, note that you can set the top-K up to 256 for any search against a GPU_IVF_FLAT-indexed collection.
-
-- Index building parameters
-
-   | Parameter | Description             | Range      | Default Value |
-   | --------- | ----------------------- | ---------- | ------------- |
-   | `nlist`   | Number of cluster units | [1, 65536] | 128 |
-
-- Search parameters
-
-  - Common search
-
-    | Parameter | Description              | Range           | Default Value |
-    | --------- | ------------------------ | --------------- | ------------- |
-    | `nprobe`  | Number of units to query | [1, nlist]      | 8 |
-
-- Limits on search
-
-  | Parameter | Range  |
-  | --------- | ------ |
-  | `top-K`   | <= 256 |
-
 ### IVF_SQ8
 
 IVF_FLAT does not perform any compression, so the index files it produces are roughly the same size as the original, raw non-indexed vector data. For example, if the original 1B SIFT dataset is 476 GB, its IVF_FLAT index files will be slightly smaller (~470 GB). Loading all the index files into memory will consume 470 GB of storage.
@@ -350,42 +298,6 @@ SCANN (Score-aware quantization loss) is similar to IVF_PQ in terms of vector cl
     | Parameter                  | Description                                             | Range      | Default Value |
     |----------------------------|---------------------------------------------------------|------------|---------------|
     | `max_empty_result_buckets` | Maximum number of buckets not returning any search results.<br/>This is a range-search parameter and terminates the search process whilst the number of consecutive empty buckets reaches the specified value.<br/>Increasing this value can improve recall rate at the cost of increased search time. | [1, 65535] | 2  |
-
-### GPU_IVF_PQ
-
-`PQ` (Product Quantization) uniformly decomposes the original high-dimensional vector space into Cartesian products of `m` low-dimensional vector spaces, and then quantizes the decomposed low-dimensional vector spaces. Instead of calculating the distances between the target vector and the center of all the units, product quantization enables the calculation of distances between the target vector and the clustering center of each low-dimensional space and greatly reduces the time complexity and space complexity of the algorithm.
-
-IVF\_PQ performs IVF index clustering before quantizing the product of vectors. Its index file is even smaller than IVF\_SQ8, but it also causes a loss of accuracy during searching vectors.
-
-<div class="alert note">
-
-Index building parameters and search parameters vary with Milvus distribution. Select your Milvus distribution first.
-
-When conducting searches, note that you can set the top-K up to 8192 for any search against a GPU_IVF_FLAT-indexed collection.
-
-</div>
-
-- Index building parameters
-
-  | Parameter | Description                               | Range               | Default Value |
-  | --------- | ----------------------------------------- | ------------------- | ------------- |
-  | `nlist`   | Number of cluster units                   | [1, 65536]          | 128           |
-  | `m`       | Number of factors of product quantization | `dim mod m == 0`    | 4 |
-  | `nbits`   | [Optional] Number of bits in which each low-dimensional vector is stored. | [1, 16] | 8 |
-
-- Search parameters
-
-  - Common search
-
-    | Parameter | Description              | Range           | Default Value |
-    | --------- | ------------------------ | --------------- | ------------- |
-    | `nprobe`  | Number of units to query | [1, nlist]      | 8 |
-
-- Limits on search
-
-  | Parameter | Range   |
-  | --------- | ------- |
-  | `top-K`   | <= 1024 |
 
 ### HNSW
 

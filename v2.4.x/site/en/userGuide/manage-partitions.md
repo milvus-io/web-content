@@ -324,3 +324,23 @@ print(res)
 <p>Before dropping a partition, you need to release it from memory.</p>
 
 </div>
+
+## FAQ
+
+- __How much data can be stored in a partition?__
+
+    It is recommended to store less than 1B of data in a partition.
+
+- __What is the maximum number of partitions that can be created?__
+
+    By default, Milvus allows a maximum of 4,096 partitions to be created. You can adjust the maximum number of partitions by configuring `rootCoord.maxPartitionNum`. For details, refer to [System Configurations](https://milvus.io/docs/configure_rootcoord.md#rootCoordmaxPartitionNum).
+
+- __How can I differentiate between partitions and partition keys?__
+
+    Partitions are physical storage units, whereas partition keys are logical concepts that automatically assign data to specific partitions based on a designated column.
+
+    For instance, in Milvus, if you have a collection with a partition key defined as the `color` field, the system automatically assigns data to partitions based on the hashed values of the `color` field for each entity. This automated process relieves the user of the responsibility to manually specify the partition when inserting or searching data.
+
+    On the other hand, when manually creating partitions, you need to assign data to each partition based on the criteria of the partition key. If you have a collection with a `color` field, you would manually assign entities with a `color` value of `red` to `partition A`, and entities with a `color` value of `blue` to `partition B`. This manual management requires more effort.
+
+    In summary, both partitions and partition keys are utilized to optimize data computation and enhance query efficiency. It is essential to recognize that enabling a partition key means surrendering control over the manual management of partition data insertion and loading, as these processes are fully automated and handled by Milvus.

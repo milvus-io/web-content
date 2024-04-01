@@ -3,7 +3,7 @@ id: schema.md
 summary: Learn how to define a schema in Milvus.
 ---
 
-# Schema
+# Manage Schema
 
 This topic introduces schema in Milvus. Schema is used to define the properties of a collection and the fields within.
 

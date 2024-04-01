@@ -3,7 +3,7 @@ id: boolean.md
 summary: Learn about boolean expression rules in Milvus.
 ---
 
-# Boolean Expression Rules
+# Scalar Filtering Rules
 
 ## Overview
 

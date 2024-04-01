@@ -613,6 +613,8 @@ __Limitations__
 
 - __Indexing__: This grouping feature works only for collections that are indexed with the __HNSW__, __IVF_FLAT__, or __FLAT__ type. For more information, refer to [In-memory Index](https://milvus.io/docs/index.md#HNSW).
 
+- __Vector__: Currently, grouping search does not support a vector field of the __BINARY_VECTOR__ type. For more information on data types, refer to [Supported data types](https://milvus.io/docs/schema.md#Supported-data-types).
+
 - __Field__: Currently, grouping search allows only for a single column. You cannot specify multiple field names in the `group_by_field` config.  Additionally, grouping search is incompatible with data types of JSON, FLOAT, DOUBLE, ARRAY, or vector fields.
 
 - __Performance Impact__: Be mindful that performance degrades with increasing query vector counts. Using a cluster with 2 CPU cores and 8 GB of memory as an example, the execution time for grouping search increases proportionally with the number of input query vectors.

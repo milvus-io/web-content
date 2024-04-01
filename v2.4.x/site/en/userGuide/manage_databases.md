@@ -7,6 +7,12 @@ title: Manage Databases
 
 Similar to traditional database engines, you can also create databases in Milvus and allocate privileges to certain users to manage them. Then such users have the right to manage the collections in the databases. A Milvus cluster supports a maximum of 64 databases.
 
+<div class="alert note">
+
+The code snippets on this page use the <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Connections/connect.md">PyMilvus ORM module</a> to interact with Milvus. Code snippets with the new <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">MilvusClient SDK</a> will be available soon.
+
+</div>
+
 ## Create database
 
 To create a database, you need to first connect to a Milvus cluster and prepare a name for it:

@@ -6,223 +6,113 @@ summary: GPU index mechanism in Milvus.
 
 # GPU Index
 
-This guide describes GPU indexes supported in Milvus and provides a step-by-step process for using a GPU index.
-
-## Overview
+Milvus supports various GPU index types to accelerate search performance and efficiency, especially in high-throughput, low-latency, and high-recall scenarios. This topic provides an overview of the GPU index types supported by Milvus, their suitable use cases, and performance characteristics. For information on building indexes with GPU, refer to [Index with GPU](index-with-gpu.md).
 
 GPU acceleration can greatly improve the search performance and efficiency of Milvus, especially for high-throughput, low-latency and high-recall scenarios, and is also very friendly to large nq batch search secnario.
 
 ![performance](../../../assets/gpu_index.png)
 
-Milvus' GPU support is contributed by Nvidia [RAPIDS](https://rapids.ai/) team. Currently, Milvus supports four GPU index types, each designed for specific use cases:
+Milvus' GPU support is contributed by Nvidia [RAPIDS](https://rapids.ai/) team. The following are the GPU index types currently supported by Milvus.
 
-- __GPU_CAGRA__: A graph-based index optimized for GPUs, __GPU_CAGRA__ performs well on inference GPUs. It's best suited for situations with a small number of queries, where training GPUs with lower memory frequency may not yield optimal results.
+## GPU_CAGRA
 
-- __GPU_IVF_FLAT__ and __GPU_IVF_PQ__: These quantization-based indexes organize vector data into clusters and employ product quantization for efficient search. They are ideal for scenarios requiring fast queries and can manage limited memory resources while balancing accuracy and speed.
+GPU_CAGRA is a graph-based index optimized for GPUs, which performs well on inference GPUs. It's best suited for situations with a small number of queries, where training GPUs with lower memory frequency may not yield optimal results.
 
-- __GPU_BRUTE_FORCE__: This index is tailored for cases where extremely high recall is crucial, guaranteeing a recall of 1 by comparing each query with all vectors in the dataset. It only requires the metric type (__metric_type__) and top-k (__limit__) as index building and search parameters.
+- Index building parameters
 
-Currently, Milvus loads all indexes into GPU memory for efficient search operations. The amount of data that can be loaded is directly determined by the size of the GPU memory. CAGRA's memory usage is approximately 1.8 times that of the original vector data. __GPU_IVF_PQ__ utilizes a smaller memory footprint, which depends on the compression parameter settings. On the other hand, __GPU_IVF_FLAT__ and __GPU_BRUTE_FORCE__ require memory equal to the size of the original data.
+  | Parameter                   | Description                                                                                                                                                                                                                                                     | Default Value        |
+   |-----------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------|
+   | `intermediate_graph_degree` | Affects recall and build time by determining the graph's degree before pruning. Recommended values are `32` or `64`.                                                                                                                                                                                | <code>128</code>     |
+   | `graph_degree`              | Affects search performance and recall by setting the graph's degree after pruning. A larger difference between these two degrees results in a longer build time. Its value must be smaller than the value of __intermediate_graph_degree__.                                                                                                   | <code>64</code>      |
+   | `build_algo`                | Selects the graph generation algorithm before pruning. Possible values:</br><code>IVF_PQ</code>: Offers higher quality but slower build time.</br> <code>NN_DESCENT</code>: Provides a quicker build with potentially lower recall.                             | <code>IVF_PQ</code>  |
+   | `cache_dataset_on_device`   | Decides whether to cache the original dataset in GPU memory. Possible values:</br><code>"true"</code>: Caches the original dataset to enhance recall by refining search results.</br> <code>"false"</code>: Does not cache the original dataset to save memory. | <code>"false"</code> |
 
-## Use a GPU index
+- Search parameters
 
-### Configure Milvus settings for GPU memory control
+    | Parameter                           | Description                                                                                                                                                                                                                                                                                                  | Default Value |
+    |-------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------|
+    | `itopk_size`                        | Determines the size of intermediate results kept during the search. A larger value may improve recall at the expense of search performance. It should be at least equal to the final top-k (limit) value and is typically a power of 2 (e.g., 16, 32, 64, 128).                                              | Empty         |
+    | `search_width`                      | Specifies the number of entry points into the CAGRA graph during the search. Increasing this value can enhance recall but may impact search performance.                                                                                                                                                     | Empty         |
+    | `min_iterations` / `max_iterations` | Controls the search iteration process. By default, they are set to `0`, and CAGRA automatically determines the number of iterations based on `itopk_size` and `search_width`. Adjusting these values manually can help balance performance and accuracy.                                                       | `0`             |
+    | `team_size`                         | Specifies the number of CUDA threads used for calculating metric distance on the GPU. Common values are a power of 2 up to 32 (e.g. 2, 4, 8, 16, 32). It has a minor impact on search performance. The default value is `0`, where Milvus automatically selects the `team_size` based on the vector dimension. | `0`             |
 
-Milvus uses a global graphics memory pool to allocate GPU memory.
 
-It supports two parameters `initMemSize` and `maxMemSize` in [Milvus config file](https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml#L767-L769). The pool size is initially set to `initMemSize`, and will be automatically expanded to `maxMemSize` after exceeding this limit.
+## GPU_IVF_FLAT
 
-The default `initMemSize` is 1/2 of the available GPU memory when Milvus starts, and the default `maxMemSize` is equal to all available GPU memory.
+Similar to [IVF_FLAT](https://milvus.io/docs/index.md#IVF_FLAT), GPU_IVF_FLAT also divides vector data into `nlist` cluster units, and then compares distances between the target input vector and the center of each cluster. Depending on the number of clusters the system is set to query (`nprobe`), similarity search results are returned based on comparisons between the target input and the vectors in the most similar cluster(s) only — drastically reducing query time.
 
-```yaml
-#when using GPU indexing, Milvus will utilize a memory pool to avoid frequent memory allocation and deallocation.
-#here, you can set the size of the memory occupied by the memory pool, with the unit being MB.
-#note that there is a possibility of Milvus crashing when the actual memory demand exceeds the value set by maxMemSize.
-#if initMemSize and MaxMemSize both set zero,
-#milvus will automatically initialize half of the available GPU memory,
-#maxMemSize will the whole available GPU memory as default value.
-gpu:
-  initMemSize: 0 #set the initial memory pool size.
-  maxMemSize: 0 #maxMemSize sets the maximum memory usage limit. When the memory usage exceed initMemSize, Milvus will attempt to expand the memory pool. 
-```
+By adjusting `nprobe`, an ideal balance between accuracy and speed can be found for a given scenario. Results from the [IVF_FLAT performance test](https://zilliz.com/blog/Accelerating-Similarity-Search-on-Really-Big-Data-with-Vector-Indexing) demonstrate that query time increases sharply as both the number of target input vectors (`nq`), and the number of clusters to search (`nprobe`), increase.
 
-### Build an index
+GPU_IVF_FLAT is the most basic IVF index, and the encoded data stored in each unit is consistent with the original data.
 
-The following examples demonstrate how to build GPU indexes of different types.
+When conducting searches, note that you can set the top-K up to 256 for any search against a GPU_IVF_FLAT-indexed collection.
 
-#### Prepare index parameters
+- Index building parameters
 
-When setting up GPU index parameters, define __index_type__, __metric_type__, and __params__:
+   | Parameter | Description             | Range      | Default Value |
+   | --------- | ----------------------- | ---------- | ------------- |
+   | `nlist`   | Number of cluster units | [1, 65536] | 128 |
 
-- __index_type__ (_string_): The type of index used to accelerate vector search. Valid options include __GPU_CAGRA__, __GPU_IVF_FLAT__, __GPU_IVF_PQ__, and __GPU_BRUTE_FORCE__.
+- Search parameters
 
-- __metric_type__ (_string_): The type of metrics used to measure the similarity of vectors. Valid options are __IP__ and __L2__.
+  - Common search
 
-- __params__(_dict_): The index-specific building parameters. The valid options for this parameter depend on the index type.
+    | Parameter | Description              | Range           | Default Value |
+    | --------- | ------------------------ | --------------- | ------------- |
+    | `nprobe`  | Number of units to query | [1, nlist]      | 8 |
 
-Here are example configurations for different index types:
+- Limits on search
 
-- __GPU_CAGRA__ index
+  | Parameter | Range  |
+  | --------- | ------ |
+  | `top-K`   | <= 256 |
 
-    ```python
-    index_params = {
-        "metric_type": "L2",
-        "index_type": "GPU_CAGRA",
-        "params": {
-            'intermediate_graph_degree': 64,
-            'graph_degree': 32
-        }
-    }
-    ```
+## GPU_IVF_PQ
 
-    Possible options for __params__ include:
+`PQ` (Product Quantization) uniformly decomposes the original high-dimensional vector space into Cartesian products of `m` low-dimensional vector spaces, and then quantizes the decomposed low-dimensional vector spaces. Instead of calculating the distances between the target vector and the center of all the units, product quantization enables the calculation of distances between the target vector and the clustering center of each low-dimensional space and greatly reduces the time complexity and space complexity of the algorithm.
 
-    - __intermediate_graph_degree__ (_int_): Affects recall and build time by determining the graph's degree before pruning. Recommended values are __32__ or __64__.
+IVF\_PQ performs IVF index clustering before quantizing the product of vectors. Its index file is even smaller than IVF\_SQ8, but it also causes a loss of accuracy during searching vectors.
 
-    - __graph_degree__ (_int_): Affects search performance and recall by setting the graph's degree after pruning. Typically, it is half of the __intermediate_graph_degree__. A larger difference between these two degrees results in a longer build time. Its value must be smaller than the value of __intermediate_graph_degree__.
+<div class="alert note">
 
-    - __build_algo__ (_string_): Selects the graph generation algorithm before pruning. Possible options: 
+Index building parameters and search parameters vary with Milvus distribution. Select your Milvus distribution first.
 
-        - __IVF_PQ__: Offers higher quality but slower build time.
+When conducting searches, note that you can set the top-K up to 8192 for any search against a GPU_IVF_FLAT-indexed collection.
 
-        - __NN_DESCENT__: Provides a quicker build with potentially lower recall.
+</div>
 
-    - __cache_dataset_on_device__ (_string_, __"true"__ | __"false"__): Decides whether to cache the original dataset in GPU memory. Setting this to __"true"__ enhances recall by refining search results, while setting it to __"false"__ conserves GPU memory.
+- Index building parameters
 
-- __GPU_IVF_FLAT__ or __GPU_IVF_PQ__ index
+  | Parameter | Description                               | Range               | Default Value |
+  | --------- | ----------------------------------------- | ------------------- | ------------- |
+  | `nlist`   | Number of cluster units                   | [1, 65536]          | 128           |
+  | `m`       | Number of factors of product quantization | `dim mod m == 0`    | 4 |
+  | `nbits`   | [Optional] Number of bits in which each low-dimensional vector is stored. | [1, 16] | 8 |
 
-    ```python
-    index_params = {
-        "metric_type": "L2",
-        "index_type": "GPU_IVF_FLAT", # Or GPU_IVF_PQ
-        "params": {
-            "nlist": 1024
-        }
-    }
-    ```
+- Search parameters
 
-    The __params__ options are identical to those used in __[IVF_FLAT](https://milvus.io/docs/index.md#IVF_FLAT) and [IVF_PQ](https://milvus.io/docs/index.md#IVF_PQ)__.
+  - Common search
 
-- __GPU_BRUTE_FORCE__ index
+    | Parameter | Description              | Range           | Default Value |
+    | --------- | ------------------------ | --------------- | ------------- |
+    | `nprobe`  | Number of units to query | [1, nlist]      | 8 |
 
-    ```python
-    index_params = {
-        'index_type': 'GPU_BRUTE_FORCE',
-        'metric_type': 'L2',
-        'params': {}
-    }
-    ```
+- Limits on search
 
-    No additional __params__ configurations are required.
+  | Parameter | Range   |
+  | --------- | ------- |
+  | `top-K`   | <= 1024 |
 
-#### Build index
+## GPU_BRUTE_FORCE
 
-After configuring the index parameters in __index_params__, call the `create_index()` method to build the index.
+GPU_BRUTE_FORCE is tailored for cases where extremely high recall is crucial, guaranteeing a recall of 1 by comparing each query with all vectors in the dataset. It only requires the metric type (`metric_type`) and top-k (`limit`) as index building and search parameters.
 
-```python
-# Get an existing collection
-collection = Collection("YOUR_COLLECTION_NAME")
+For GPU_BRUTE_FORCE, no addition index building parameters or search parameters are required.
 
-collection.create_index(
-    field_name="vector", # Name of the vector field on which an index is built
-    index_params=index_params
-)
-```
+## Conclusion
 
-### Search
+Currently, Milvus loads all indexes into GPU memory for efficient search operations. The amount of data that can be loaded depends on the size of the GPU memory:
 
-Once you have built your GPU index, the next step is to prepare the search parameters before conducting a search.
-
-#### Prepare search parameters
-
-Below are example configurations for different index types:
-
-- __GPU_BRUTE_FORCE__ index
-
-    ```python
-    search_params = {
-        "metric_type": "L2",
-        "params": {}
-    }
-    ```
-
-    No additional __params__ configurations are required.
-
-- __GPU_CAGRA__ index
-
-    ```python
-    search_params = {
-        "metric_type": "L2",
-        "params": {
-            "itopk_size": 128,
-            "search_width": 4,
-            "min_iterations": 0,
-            "max_iterations": 0,
-            "team_size": 0
-        }
-    }
-    ```
-
-    Key search parameters include:
-
-    - __itopk_size__: Determines the size of intermediate results kept during the search. A larger value may improve recall at the expense of search performance. It should be at least equal to the final top-k (__limit__) value and is typically a power of 2 (e.g., 16, 32, 64, 128).
-
-    - __search_width__: Specifies the number of entry points into the CAGRA graph during the search. Increasing this value can enhance recall but may impact search performance. The default value is __1__.
-
-    - __min_iterations__ / __max_iterations__: These parameters control the search iteration process. By default, they are set to __0__, and CAGRA automatically determines the number of iterations based on __itopk_size__ and __search_width__. Adjusting these values manually can help balance performance and accuracy.
-
-    - __team_size__: Specifies the number of CUDA threads used for calculating metric distance on the GPU. Common values are a power of 2 up to 32 (e.g. 2, 4, 8, 16, 32). It has a minor impact on search performance. The default value is __0__, where Milvus automatically selects the __team_size__ based on the vector dimension.
-
-- __GPU_IVF_FLAT__ or __GPU_IVF_PQ__ index
-
-    ```python
-    search_params = {
-        "metric_type": "L2", 
-        "params": {"nprobe": 10}
-    }
-    ```
-
-    Search parameters for these two index types are similar to those used in __[IVF_FLAT](https://milvus.io/docs/index.md#IVF_FLAT) and [IVF_PQ](https://milvus.io/docs/index.md#IVF_PQ)__. For more information, refer to [Conduct a Vector Similarity Search](https://milvus.io/docs/search.md#Prepare-search-parameters).
-
-#### Conduct a search
-
-Use the `search()` method to perform a vector similarity search on the GPU index.
-
-```python
-# Load data into memory
-collection.load()
-
-collection.search(
-    data=[[query_vector]], # Your query vector
-    anns_field="vector", # Name of the vector field
-    param=search_params,
-    limit=100 # Number of the results to return
-)
-```
-
-## Limits
-
-When using GPU indexes, be aware of certain constraints:
-
-- For __GPU_IVF_FLAT__, the maximum value for __limit__ is 256.
-
-- For __GPU_IVF_PQ__ and __GPU_CAGRA__, the maximum value for __limit__ is 1024.
-
-- While there is no set limit for __limit__ on __GPU_BRUTE_FORCE__, it is recommended not to exceed 4096 to avoid potential performance issues.
-
-- Currently, GPU indexes do not support COSINE distance. If COSINE distance is required, data should be normalized first, and then inner product (IP) distance can be used as a substitute.
-
-- Loading OOM protection for GPU indexes is not fully supported, too much data might lead to QueryNode crashes.
-
-- GPU indexes do not support search functions like [range search](https://milvus.io/docs/single-vector-search.md#Range-search) and [grouping search](https://milvus.io/docs/single-vector-search.md#Grouping-searchh).
-
-## FAQ
-
-- __When is it appropriate to utilize a GPU index?__
-
-    A GPU index is particularly beneficial in situations that demand high throughput or high recall. For instance, when dealing with large batches, the throughput of GPU indexing can surpass that of CPU indexing by as much as 100 times. In scenarios with smaller batches, GPU indexes still significantly outshine CPU indexes in terms of performance. Furthermore, if there's a requirement for rapid data insertion, incorporating a GPU can substantially speed up the process of building indexes.
-
-- __In which scenarios are GPU indexes like CAGRA, GPU_IVF_PQ, GPU_IVF_FLAT, and GPU_BRUTE_FORCE most suitable?__
-
-    CAGRA indexes are ideal for scenarios that demand enhanced performance, albeit at the cost of consuming more memory. For environments where memory conservation is a priority, the __GPU_IVF_PQ__ index can help minimize storage requirements, though this comes with a higher loss in precision. The __GPU_IVF_FLAT__ index serves as a balanced option, offering a compromise between performance and memory usage. Lastly, the __GPU_BRUTE_FORCE__ index is designed for exhaustive search operations, guaranteeing a recall rate of 1 by performing traversal searches.
-
+- **GPU_CAGRA**: Memory usage is approximately 1.8 times that of the original vector data.
+- **GPU_IVF_FLAT** and **GPU_BRUTE_FORCE**: Requires memory equal to the size of the original data.
+- **GPU_IVF_PQ**: Utilizes a smaller memory footprint, which depends on the compression parameter settings.

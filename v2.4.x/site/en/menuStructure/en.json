@@ -35,38 +35,20 @@
       "outLink": "https://wiki.lfaidata.foundation/display/MIL/Milvus+Long+Term+Roadmap+and+Time+schedule"
     },
     {
-      "id": "limitations.md",
-      "title": "Milvus Limits",
+      "id": "release_notes.md",
+      "title": "Releases",
       "label1": "about",
       "label2": "",
       "label3": "",
       "order": 3
     },
     {
-      "id": "release_notes.md",
-      "title": "Releases",
+      "id": "benchmark.md",
+      "title": "Benchmarks",
       "label1": "about",
       "label2": "",
       "label3": "",
       "order": 4
-    },
-    {
-      "id": "enhancementproposals",
-      "title": "Enhancement Proposals",
-      "label1": "about",
-      "label2": "",
-      "label3": "",
-      "order": 5,
-      "outLink": "https://wiki.lfaidata.foundation/pages/viewpage.action?pageId=43287103"
-    },
-    {
-      "id": "bootcamp_about",
-      "title": "Bootcamp",
-      "label1": "about",
-      "label2": "",
-      "label3": "",
-      "order": 6,
-      "outLink": "https://milvus.io/bootcamp"
     },
     {
       "id": "getstarted",
@@ -142,6 +124,14 @@
       "label2": "installmilvus",
       "label3": "",
       "order": 3
+    },
+    {
+      "id": "milvus_lite.md",
+      "title": "With Milvus Lite",
+      "label1": "getstarted",
+      "label2": "installmilvus",
+      "label3": "",
+      "order": 4
     }, 
     {
       "id": "install_sdks",
@@ -153,7 +143,7 @@
     },
     {
       "id": "install-pymilvus.md",
-      "title": "Pymilvus",
+      "title": "PyMilvus",
       "label1": "getstarted",
       "label2": "install_sdks",
       "label3": "",
@@ -184,14 +174,6 @@
       "order": 3
     },
     {
-      "id": "milvus_lite.md",
-      "title": "With Milvus Lite",
-      "label1": "getstarted",
-      "label2": "",
-      "label3": "",
-      "order": 3
-    },
-    {
       "id": "quickstart.md",
       "title": "Quickstart",
       "label1": "getstarted",
@@ -200,61 +182,153 @@
       "order": 4
     },
     {
-      "id": "embeddings",
-      "title": "Embeddings",
+      "id": "concepts",
+      "title": "Concepts",
       "label1": "",
       "label2": "",
       "label3": "",
       "order": 2,
       "isMenu": true
-    }, 
+    },
     {
-      "id": "embeddings.md",
-      "title": "Embeddings",
-      "label1": "embeddings",
+      "id": "architecture",
+      "title": "Architecture",
+      "label1": "concepts",
       "label2": "",
+      "label3": "",
+      "order": 0,
+      "isMenu": true
+    },
+    {
+      "id": "architecture_overview.md",
+      "title": "Overview",
+      "label1": "concepts",
+      "label2": "architecture",
       "label3": "",
       "order": 0
-    }, 
+    },
     {
-      "id": "embed-with-openai.md",
-      "title": "OpenAI",
-      "label1": "embeddings",
-      "label2": "",
+      "id": "four_layers.md",
+      "title": "Storage/Computing",
+      "label1": "concepts",
+      "label2": "architecture",
       "label3": "",
       "order": 1
-    }, 
+    },
     {
-      "id": "embed-with-sentence-transform.md",
-      "title": "Sentence Transformers",
-      "label1": "embeddings",
-      "label2": "",
+      "id": "main_components.md",
+      "title": "Main Components",
+      "label1": "concepts",
+      "label2": "architecture",
       "label3": "",
       "order": 2
-    }, 
+    },
     {
-      "id": "embed-with-bgm-m3.md",
-      "title": "BGE M3",
-      "label1": "embeddings",
-      "label2": "",
+      "id": "data_processing.md",
+      "title": "Data Processing",
+      "label1": "concepts",
+      "label2": "architecture",
       "label3": "",
       "order": 3
-    }, 
+    },
     {
-      "id": "embed-with-bm25.md",
-      "title": "BM25",
-      "label1": "embeddings",
-      "label2": "",
-      "label3": "",
-      "order": 4
-    }, 
+      "id": "coordinator_ha.md",
+      "title": "Coordinator HA",
+      "label1": "concepts",
+      "label2": "architecture",
+      "order": 4      
+    },
     {
-      "id": "embed-with-splade.md",
-      "title": "SPLADE",
-      "label1": "embeddings",
-      "label2": "",
-      "label3": "",
+      "id": "knowhere.md",
+      "title": "Knowhere",
+      "label1": "concepts",
+      "label2": "architecture",
       "order": 5
+    },
+    {
+      "id": "bitset.md",
+      "title": "Bitset",
+      "label1": "concepts",
+      "label2": "",
+      "order": 1
+    },
+    {
+      "id": "consistency.md",
+      "title": "Consistency",
+      "label1": "concepts",
+      "label2": "",
+      "order": 2
+    },
+    {
+      "id": "multi_tenancy.md",
+      "title": "Multi-tenancy",
+      "label1": "concepts",
+      "label2": "",
+      "order": 3
+    },
+    {
+      "id": "timestamp.md",
+      "title": "Timestamp",
+      "label1": "concepts",
+      "label2": "",
+      "order": 4
+    },
+    {
+      "id": "metric.md",
+      "title": "Similarity Metrics",
+      "label1": "concepts",
+      "label2": "",
+      "order": 5
+    },
+    {
+      "id": "time_sync.md",
+      "title": "Time Synchronization",
+      "label1": "concepts",
+      "label2": "",
+      "order": 6
+    },
+    {
+      "id": "vector_index",
+      "title": "Vector Index",
+      "label1": "concepts",
+      "label2": "",
+      "order": 7,
+      "isMenu": true
+    },
+    {
+      "id": "index.md",
+      "title": "In-memory Index",
+      "label1": "concepts",
+      "label2": "vector_index",
+      "order": 0
+    },
+    {
+      "id": "disk_index.md",
+      "title": "On-disk Index",
+      "label1": "concepts",
+      "label2": "vector_index",
+      "order": 1
+    },
+    {
+      "id": "gpu_index.md",
+      "title": "GPU Index",
+      "label1": "concepts",
+      "label2": "vector_index",
+      "order": 2
+    },
+    {
+      "id": "scalar_index.md",
+      "title": "Scalar Index",
+      "label1": "concepts",
+      "label2": "",
+      "order": 8
+    },
+    {
+      "id": "glossary.md",
+      "title": "Glossary",
+      "label1": "concepts",
+      "label2": "",
+      "order": 9
     }, 
     {
       "id": "userguide",
@@ -267,6 +341,14 @@
     {
       "id": "manage_databases.md",
       "title": "Manage Databases",
+      "label1": "userguide",
+      "label2": "",
+      "label3": "",
+      "order": 0
+    },
+    {
+      "id": "schema.md",
+      "title": "Manage Schema",
       "label1": "userguide",
       "label2": "",
       "label3": "",
@@ -304,6 +386,14 @@
       "label2": "manage_indexes",
       "label3": "",
       "order": 1
+    },
+    {
+      "id": "index-with-gpu.md",
+      "title": "Index with GPU",
+      "label1": "userguide",
+      "label2": "manage_indexes",
+      "label3": "",
+      "order": 2
     },
     {
       "id": "manage-partitions.md",
@@ -363,49 +453,149 @@
       "order": 3
     },
     {
-      "id": "enable-dynamic-field.md",
-      "title": "Enable Dynamic Field",
+      "id": "advanced_features",
+      "title": "Advanced Features",
       "label1": "userguide",
       "label2": "",
       "label3": "",
-      "order": 7
+      "order": 7,
+      "isMenu": true
+    },
+    {
+      "id": "enable-dynamic-field.md",
+      "title": "Dynamic Field",
+      "label1": "userguide",
+      "label2": "advanced_features",
+      "label3": "",
+      "order": 0
     },
     {
       "id": "use-partition-key.md",
-      "title": "Use Partition Key",
+      "title": "Partition Key",
       "label1": "userguide",
-      "label2": "",
+      "label2": "advanced_features",
       "label3": "",
-      "order": 8
+      "order": 1
     },
     {
       "id": "use-json-fields.md",
-      "title": "Use JSON Fields",
+      "title": "JSON Field",
       "label1": "userguide",
-      "label2": "",
+      "label2": "advanced_features",
       "label3": "",
-      "order": 9
+      "order": 2
     },
     {
-      "id": "bootcamp_userguide",
-      "title": "Bootcamp",
+      "id": "array_data_type.md",
+      "title": "Array Field",
       "label1": "userguide",
+      "label2": "advanced_features",
+      "order": 3
+    },
+    {
+      "id": "sparse_vector.md",
+      "title": "Sparse Vector",
+      "label1": "userguide",
+      "label2": "advanced_features",
+      "order": 4      
+    },
+    {
+      "id": "boolean.md",
+      "title": "Scalar Filtering Rules",
+      "label1": "userguide",
+      "label2": "advanced_features",
+      "order": 5
+    },
+    {
+      "id": "users_and_roles.md",
+      "title": "Users and Roles",
+      "label1": "userguide",
+      "label2": "advanced_features",
+      "order": 6
+    },
+    
+    {
+      "id": "replica.md",
+      "title": "In-memory Replica",
+      "label1": "userguide",
+      "label2": "advanced_features",
+      "order": 7
+    },
+    {
+      "id": "mmap.md",
+      "title": "MMap Storage",
+      "label1": "userguide",
+      "label2": "advanced_features",
+      "order": 8
+    },
+    {
+      "id": "embeddings",
+      "title": "Embeddings",
+      "label1": "",
       "label2": "",
       "label3": "",
-      "order": 10,
-      "outLink": "https://milvus.io/bootcamp"
-    },
+      "order": 4,
+      "isMenu": true
+    }, 
+    {
+      "id": "embeddings.md",
+      "title": "Overview",
+      "label1": "embeddings",
+      "label2": "",
+      "label3": "",
+      "order": 0
+    }, 
+    {
+      "id": "embed-with-openai.md",
+      "title": "OpenAI",
+      "label1": "embeddings",
+      "label2": "",
+      "label3": "",
+      "order": 1
+    }, 
+    {
+      "id": "embed-with-sentence-transform.md",
+      "title": "Sentence Transformers",
+      "label1": "embeddings",
+      "label2": "",
+      "label3": "",
+      "order": 2
+    }, 
+    {
+      "id": "embed-with-bgm-m3.md",
+      "title": "BGE M3",
+      "label1": "embeddings",
+      "label2": "",
+      "label3": "",
+      "order": 3
+    }, 
+    {
+      "id": "embed-with-bm25.md",
+      "title": "BM25",
+      "label1": "embeddings",
+      "label2": "",
+      "label3": "",
+      "order": 4
+    }, 
+    {
+      "id": "embed-with-splade.md",
+      "title": "SPLADE",
+      "label1": "embeddings",
+      "label2": "",
+      "label3": "",
+      "order": 5
+    }, 
     {
       "id": "admin_guide",
       "title": "Administration Guide",
       "label1": "",
       "label2": "",
-      "order": 4,
+      "order": 5,
       "isMenu": true
     },   
     {
-      "id": "configure_milvus",
-      "title": "Configure Milvus",
+      "id": "basic_config",
+      "title": "Basic Configurations",
       "label1": "admin_guide",
       "label2": "",
       "order": 0,
@@ -415,40 +605,71 @@
       "id": "configure-helm.md",
       "title": "With Helm",
       "label1": "admin_guide",
-      "label2": "configure_milvus",
+      "label2": "basic_config",
       "label3": "",
-      "order": 1
+      "order": 0
     },
     {
       "id": "configure-docker.md",
       "title": "With Docker",
       "label1": "admin_guide",
-      "label2": "configure_milvus",
+      "label2": "basic_config",
       "label3": "",
-      "order": 2
+      "order": 1
     },
     {
       "id": "configure_operator.md",
       "title": "With Milvus Operator",
       "label1": "admin_guide",
-      "label2": "configure_milvus",
+      "label2": "basic_config",
       "label3": "",
-      "order": 0
+      "order": 2
+    },
+    {
+      "id": "system_configuration.md",
+      "title": "System Configurations",
+      "label1": "admin_guide",
+      "label2": "basic_config",
+      "order": 3
+    },
+    {
+      "id": "typical_config",
+      "title": "Typical Configurations",
+      "label1": "admin_guide",
+      "label2": "",
+      "order": 1,
+      "isMenu": true
     },
     {
       "id": "dynamic_config.md",
       "title": "On the Fly",
       "label1": "admin_guide",
-      "label2": "configure_milvus",
+      "label2": "typical_config",
       "label3": "",
-      "order": 3
+      "order": 0
+    },
+    {
+      "id": "limit_collection_counts.md",
+      "title": "Limit Collection Counts",
+      "label1": "admin_guide",
+      "label2": "typical_config",
+      "label3": "",
+      "order": 2      
+    },
+    {
+      "id": "chunk_cache.md",
+      "title": "Configure Chunk Cache",
+      "label1": "admin_guide",
+      "label2": "typical_config",
+      "label3": "",
+      "order": 3      
     },
     {
       "id": "manage_dependencies",
       "title": "Manage Dependencies",
       "label1": "admin_guide",
       "label2": "",
-      "order": 1,
+      "order": 2,
       "isMenu": true
     },
     {
@@ -515,6 +736,14 @@
       "label1": "admin_guide",
       "label2": "manage_dependencies",
       "label3": "milvus_operator_dependencies",
+      "order": 2
+    },
+    {
+      "id": "scale-dependencies.md",
+      "title": "Scale Dependencies",
+      "label1": "admin_guide",
+      "label2": "manage_dependencies",
+      "label3": "",
       "order": 2
     },
     {
@@ -632,52 +861,20 @@
       "order": 5
     },
     {
-      "id": "scale-dependencies.md",
-      "title": "Scale Dependencies",
-      "label1": "admin_guide",
-      "label2": "",
-      "label3": "",
-      "order": 6
-    },
-    {
       "id": "resource_group.md",
       "title": "Manage Resource Groups",
       "label1": "admin_guide",
       "label2": "",
       "label3": "",
-      "order": 7      
-    },
-    {
-      "id": "configure_access_logs.md",
-      "title": "Configure Access Logs",
-      "label1": "admin_guide",
-      "label2": "",
-      "label3": "",
-      "order": 8      
-    },
-    {
-      "id": "limit_collection_counts.md",
-      "title": "Limit Collection Counts",
-      "label1": "admin_guide",
-      "label2": "",
-      "label3": "",
-      "order": 9      
-    },
-    {
-      "id": "chunk_cache.md",
-      "title": "Configure Chunk Cache",
-      "label1": "admin_guide",
-      "label2": "",
-      "label3": "",
-      "order": 10      
-    },
+      "order": 6      
+    },    
     {
       "id": "upgrade_milvus",
       "title": "Upgrade",
       "label1": "admin_guide",
       "label2": "",
       "label3": "",
-      "order": 9
+      "order": 7
     },
     {
       "id": "upgrade_milvus_cluster-operator.md",
@@ -696,61 +893,104 @@
       "order": 1
     },
     {
-      "id": "monitor",
-      "title": "Monitor and Alert",
+      "id": "monitor_alert_log",
+      "title": "Monitoring, Alerts & Logs",
       "label1": "admin_guide",
       "label2": "",
       "label3": "",
-      "order": 11,
+      "order": 8,
+      "isMenu": true
+    },
+    {
+      "id": "monitoring",
+      "title": "Monitoring",
+      "label1": "admin_guide",
+      "label2": "monitor_alert_log",
+      "label3": "",
+      "order": 0,
       "isMenu": true
     },
     {
       "id": "monitor_overview.md",
-      "title": "Monitoring Architecture",
+      "title": "Architecture",
       "label1": "admin_guide",
-      "label2": "monitor",
-      "label3": "",
+      "label2": "monitor_alert_log",
+      "label3": "monitoring",
       "order": 0
     },
     {
       "id": "monitor.md",
       "title": "Deploy Monitoring Services",
       "label1": "admin_guide",
-      "label2": "monitor",
-      "label3": "",
+      "label2": "monitor_alert_log",
+      "label3": "monitoring",
       "order": 1
     },
     {
       "id": "visualize.md",
-      "title": "Visualize Milvus Metrics",
+      "title": "Visualize Metrics",
       "label1": "admin_guide",
-      "label2": "monitor",
-      "label3": "",
+      "label2": "monitor_alert_log",
+      "label3": "monitoring",
       "order": 2
     },
     {
       "id": "metrics_dashboard.md",
       "title": "Milvus Metrics Dashboard",
       "label1": "admin_guide",
-      "label2": "monitor",
-      "label3": "",
+      "label2": "monitor_alert_log",
+      "label3": "monitoring",
       "order": 3
+    },
+    {
+      "id": "alerts",
+      "title": "Alerts",
+      "label1": "admin_guide",
+      "label2": "monitor_alert_log",
+      "label3": "",
+      "order": 1,
+      "isMenu": true
     },
     {
       "id": "alert.md",
       "title": "Create an Alert",
       "label1": "admin_guide",
-      "label2": "monitor",
-      "label3": "",
-      "order": 4
+      "label2": "monitor_alert_log",
+      "label3": "alerts",
+      "order": 0
     },   
+    {
+      "id": "logs",
+      "title": "Logs",
+      "label1": "admin_guide",
+      "label2": "monitor_alert_log",
+      "label3": "",
+      "order": 2,
+      "isMenu": true
+    },
+    {
+      "id": "configure_grafana_loki.md",
+      "title": "Configure Grafana Loki",
+      "label1": "admin_guide",
+      "label2": "monitor_alert_log",
+      "label3": "logs",
+      "order": 0      
+    },
+    {
+      "id": "configure_access_logs.md",
+      "title": "Configure Access Logs",
+      "label1": "admin_guide",
+      "label2": "monitor_alert_log",
+      "label3": "logs",
+      "order": 1      
+    },
     {
       "id": "security",
       "title": "Security",
       "label1": "admin_guide",
       "label2": "",
       "label3": "",
-      "order": 12,
+      "order": 9,
       "isMenu": true
     },
     {
@@ -779,108 +1019,11 @@
       "order": 2
     },
     {
-      "id": "integrations",
-      "title": "Integrations",
-      "label1": "",
-      "label2": "",
-      "label3": "",
-      "order": 5,
-      "isMenu": true
-    },
-    {
-      "id": "integrate_with_openai.md",
-      "title": "OpenAI",
-      "label1": "integrations",
-      "label2": "",
-      "label3": "",
-      "order": 0
-    },
-    {
-      "id": "integrate_with_cohere.md",
-      "title": "Cohere",
-      "label1": "integrations",
-      "label2": "",
-      "label3": "",
-      "order": 1
-    },
-    {
-      "id": "integrate_with_hugging-face.md",
-      "title": "HuggingFace",
-      "label1": "integrations",
-      "label2": "",
-      "label3": "",
-      "order": 2
-    },
-    {
-      "id": "integrate_with_pytorch.md",
-      "title": "PyTorch",
-      "label1": "integrations",
-      "label2": "",
-      "label3": "",
-      "order": 3
-    },
-    {
-      "id": "integrate_with_sentencetransformers.md",
-      "title": "SentenceTransformers",
-      "label1": "integrations",
-      "label2": "",
-      "label3": "",
-      "order": 4
-    },
-    {
-      "id": "integrate_with_llamaindex.md",
-      "title": "LlamaIndex",
-      "label1": "integrations",
-      "label2": "",
-      "label3": "",
-      "order": 4
-    },
-    {
-      "id": "integrate_with_langchain.md",
-      "title": "LangChain",
-      "label1": "integrations",
-      "label2": "",
-      "label3": "",
-      "order": 6
-    },
-    {
-      "id": "integrate_with_haystack.md",
-      "title": "HayStack",
-      "label1": "integrations",
-      "label2": "",
-      "label3": "",
-      "order": 7
-    },
-    {
-      "id": "integrate_with_voxel51.md",
-      "title": "FiftyOne",
-      "label1": "integrations",
-      "label2": "",
-      "label3": "",
-      "order":  7
-    },
-    {
-      "id": "integrate_with_spark.md",
-      "title": "Spark",
-      "label1": "integrations",
-      "label2": "",
-      "label3": "",
-      "order": 8
-    },
-    {
-      "id": "benchmark.md",
-      "title": "Benchmarks",
-      "label1": "",
-      "label2": "",
-      "order": 6,
-      "isMenu": true
-    },     
-    {
       "id": "tools",
       "title": "Tools",
       "label1": "",
       "label2": "",
-      "order": 7,
+      "order": 6,
       "isMenu": true
     },
     {
@@ -1065,208 +1208,103 @@
       "order": 3
     },
     {
-      "id": "reference",
-      "title": "Reference",
-      "label1": "",
-      "label2": "",
-      "order": 8,
-      "isMenu": true
-    },
-    {
-      "id": "architecture",
-      "title": "Architecture",
-      "label1": "reference",
+      "id": "milvus_connectors",
+      "title": "Milvus Connectors",
+      "label1": "tools",
       "label2": "",
       "label3": "",
-      "order": 0,
+      "order": 7,
       "isMenu": true
     },
     {
-      "id": "architecture_overview.md",
-      "title": "Overview",
-      "label1": "reference",
-      "label2": "architecture",
+      "id": "integrate_with_spark.md",
+      "title": "Spark",
+      "label1": "tools",
+      "label2": "milvus_connectors",
       "label3": "",
       "order": 0
     },
     {
-      "id": "four_layers.md",
-      "title": "Storage/Computing",
-      "label1": "reference",
-      "label2": "architecture",
+      "id": "integrations",
+      "title": "Integrations",
+      "label1": "",
+      "label2": "",
+      "label3": "",
+      "order": 7,
+      "isMenu": true
+    },
+    {
+      "id": "integrate_with_openai.md",
+      "title": "OpenAI",
+      "label1": "integrations",
+      "label2": "",
+      "label3": "",
+      "order": 0
+    },
+    {
+      "id": "integrate_with_cohere.md",
+      "title": "Cohere",
+      "label1": "integrations",
+      "label2": "",
       "label3": "",
       "order": 1
     },
     {
-      "id": "main_components.md",
-      "title": "Main Components",
-      "label1": "reference",
-      "label2": "architecture",
+      "id": "integrate_with_hugging-face.md",
+      "title": "HuggingFace",
+      "label1": "integrations",
+      "label2": "",
       "label3": "",
       "order": 2
     },
     {
-      "id": "data_processing.md",
-      "title": "Data Processing",
-      "label1": "reference",
-      "label2": "architecture",
+      "id": "integrate_with_pytorch.md",
+      "title": "PyTorch",
+      "label1": "integrations",
+      "label2": "",
       "label3": "",
       "order": 3
     },
     {
-      "id": "bitset.md",
-      "title": "Bitset",
-      "label1": "reference",
+      "id": "integrate_with_sentencetransformers.md",
+      "title": "SentenceTransformers",
+      "label1": "integrations",
       "label2": "",
-      "order": 1
-    },
-    {
-      "id": "boolean.md",
-      "title": "Boolean Expression Rules",
-      "label1": "reference",
-      "label2": "",
-      "order": 2
-    },
-    {
-      "id": "consistency.md",
-      "title": "Consistency",
-      "label1": "reference",
-      "label2": "",
-      "order": 3
-    },
-    {
-      "id": "coordinator_ha.md",
-      "title": "Coordinator HA",
-      "label1": "reference",
-      "label2": "",
-      "order": 3      
-    },
-    {
-      "id": "glossary.md",
-      "title": "Glossary",
-      "label1": "reference",
-      "label2": "",
+      "label3": "",
       "order": 4
     },
     {
-      "id": "replica.md",
-      "title": "In-memory Replica",
-      "label1": "reference",
+      "id": "integrate_with_llamaindex.md",
+      "title": "LlamaIndex",
+      "label1": "integrations",
       "label2": "",
-      "order": 5
+      "label3": "",
+      "order": 4
     },
     {
-      "id": "mmap.md",
-      "title": "MMap-enabled Storage",
-      "label1": "reference",
+      "id": "integrate_with_langchain.md",
+      "title": "LangChain",
+      "label1": "integrations",
       "label2": "",
-      "order": 5
-    },
-    {
-      "id": "knowhere.md",
-      "title": "Knowhere",
-      "label1": "reference",
-      "label2": "",
+      "label3": "",
       "order": 6
     },
     {
-      "id": "schema.md",
-      "title": "Schema",
-      "label1": "reference",
+      "id": "integrate_with_haystack.md",
+      "title": "HayStack",
+      "label1": "integrations",
       "label2": "",
+      "label3": "",
       "order": 7
     },
     {
-      "id": "gpu_index.md",
-      "title": "GPU Index",
-      "label1": "reference",
+      "id": "integrate_with_voxel51.md",
+      "title": "FiftyOne",
+      "label1": "integrations",
       "label2": "",
-      "order": 8
-    },
-    {
-      "id": "array_data_type.md",
-      "title": "Use Array Field",
-      "label1": "reference",
-      "label2": "",
-      "order": 9
-    },
-    {
-      "id": "metric.md",
-      "title": "Similarity Metrics",
-      "label1": "reference",
-      "label2": "",
-      "order": 10
-    },
-    {
-      "id": "sparse_vector.md",
-      "title": "Sparse Vector",
-      "label1": "reference",
-      "label2": "",
-      "order": 11      
-    },
-    {
-      "id": "multi_tenancy.md",
-      "title": "Multi-tenancy",
-      "label1": "reference",
-      "label2": "",
-      "order": 12
-    },
-    {
-      "id": "system_configuration.md",
-      "title": "System Configurations",
-      "label1": "reference",
-      "label2": "",
-      "order": 13
-    },
-    {
-      "id": "timestamp.md",
-      "title": "Timestamp",
-      "label1": "reference",
-      "label2": "",
-      "order": 14
-    },
-    {
-      "id": "time_sync.md",
-      "title": "Time Synchronization",
-      "label1": "reference",
-      "label2": "",
-      "order": 15
-    },
-    {
-      "id": "users_and_roles.md",
-      "title": "Users and Roles",
-      "label1": "reference",
-      "label2": "",
-      "order": 17
-    },    
-    {
-      "id": "vector_index",
-      "title": "Vector Index",
-      "label1": "reference",
-      "label2": "",
-      "order": 18
-    },
-    {
-      "id": "index.md",
-      "title": "In-memory Index",
-      "label1": "reference",
-      "label2": "vector_index",
-      "order": 0
-    },
-    {
-      "id": "disk_index.md",
-      "title": "On-disk Index",
-      "label1": "reference",
-      "label2": "vector_index",
-      "order": 1
-    },
-    {
-      "id": "scalar_index.md",
-      "title": "Scalar Index",
-      "label1": "reference",
-      "label2": "",
-      "order": 18      
-    },        
+      "label3": "",
+      "order":  7
+    },            
     {
       "id": "tutorials",
       "title": "Example Applications",
@@ -1355,7 +1393,6 @@
       "order": 9,
       "isMenu": true
     },
-    
     {
       "id": "performance_faq.md",
       "title": "Performance FAQs",
@@ -1380,11 +1417,19 @@
       "order": 2
     },
     {
+      "id": "limitations.md",
+      "title": "Milvus Limits",
+      "label1": "faq",
+      "label2": "",
+      "label3": "",
+      "order": 3
+    },
+    {
       "id": "troubleshooting.md",
       "title": "Troubleshooting",
       "label1": "faq",
       "label2": "",
-      "order": 3
+      "order": 4
     }
   ]
 }
