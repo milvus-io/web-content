@@ -120,7 +120,7 @@ Index parameters dictate how Milvus organizes your data within a collection. You
 
 ```python
 # 3.3. Prepare index parameters
-index_params = client.create_index_params()
+index_params = client.prepare_index_params()
 
 # 3.4. Add indexes
 index_params.add_index(
