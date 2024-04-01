@@ -2,6 +2,7 @@
 id: embed-with-bgm-m3.md
 order: 4
 summary: BGE-M3 is named for its capabilities in Multi-Linguality, Multi-Functionality, and Multi-Granularity.
+title: BGE M3
 ---
 
 # BGE M3

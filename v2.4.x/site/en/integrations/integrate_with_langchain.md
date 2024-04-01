@@ -1,6 +1,7 @@
 ---
 id: integrate_with_langchain.md
 summary: This page goes over how to search for the best answer to questions using Milvus as the Vector Database and LangChain as the embedding system.
+title: Question Answering over Documents with Milvus and LangChain
 ---
 
 # Question Answering over Documents with Milvus and LangChain

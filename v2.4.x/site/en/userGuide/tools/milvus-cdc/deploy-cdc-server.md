@@ -2,6 +2,7 @@
 id: deploy-cdc-server.md
 order: 2
 summary: This guide provides a step-by-step process for deploying a Milvus-CDC server.
+title: Deploy CDC Server
 ---
 
 # Deploy CDC Server

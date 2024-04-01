@@ -2,6 +2,7 @@
 id: get-and-scalar-query.md
 order: 3
 summary: This guide demonstrates how to get entities by ID and conduct scalar filtering.
+title: Get & Scalar Query
 ---
 
 # Get & Scalar Query

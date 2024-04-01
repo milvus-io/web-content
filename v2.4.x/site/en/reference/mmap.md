@@ -1,6 +1,7 @@
 ---
 id: mmap.md
 summary: MMap enables more data in a single node.
+title: MMap-enabled Data Storage
 ---
 
 # MMap-enabled Data Storage

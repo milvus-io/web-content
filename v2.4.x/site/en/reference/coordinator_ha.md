@@ -1,6 +1,7 @@
 ---
 id: coordinator_ha.md
 summary: Learn about the motivation and procedure for Milvus coordinators to work in active standby.
+title: Coordinator HA
 ---
 
 # Coordinator HA

@@ -3,6 +3,7 @@ id: prerequisite-docker.md
 label: Install with Docker Compose
 related_key: Docker
 summary: Learn the necessary preparations before installing Milvus with Docker Compose.
+title: Environment Checklist for Milvus with Docker Compose
 ---
 
 # Environment Checklist for Milvus with Docker Compose

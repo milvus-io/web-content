@@ -1,6 +1,7 @@
 ---
 id: text_image_search.md
-summary: Build a text to image search engine with Milvus. 
+summary: Build a text to image search engine with Milvus.
+title: Text to Image Search Engine
 ---
 
 # Text to Image Search Engine

@@ -1,6 +1,7 @@
 ---
 id: replica.md
 summary: Learn about in-memory replica in Milvus.
+title: In-Memory Replica
 ---
 
 # In-Memory Replica

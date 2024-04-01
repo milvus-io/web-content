@@ -1,6 +1,7 @@
 ---
 id: release_notes.md
 summary: Milvus Release Notes
+title: Release Notes
 ---
 # Release Notes
 

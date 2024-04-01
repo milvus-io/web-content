@@ -1,6 +1,7 @@
 ---
 id: consistency.md
 summary: Learn about the four levels of consistency in Milvus.
+title: Consistency
 ---
 # Consistency
 

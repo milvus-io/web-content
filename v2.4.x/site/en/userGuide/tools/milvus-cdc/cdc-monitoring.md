@@ -2,6 +2,7 @@
 id: cdc-monitoring.md
 order: 4
 summary: Milvus-CDC provides comprehensive monitoring capabilities through Grafana dashboards.
+title: Monitoring
 ---
 
 # Monitoring

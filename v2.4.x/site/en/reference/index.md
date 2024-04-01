@@ -2,6 +2,7 @@
 id: index.md
 related_key: index
 summary: Index mechanism in Milvus.
+title: In-memory Index
 ---
 
 # In-memory Index

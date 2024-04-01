@@ -2,7 +2,7 @@
 id: milvus_adopters.md
 title: Milvus Adopters
 related_key: Milvus adopters
-summary: Learn about companies that have adopted Milvus in production applications. 
+summary: Learn about companies that have adopted Milvus in production applications.
 ---
 # Milvus Adopters
 Trusted by over 1,000 organizations worldwide, Milvus is used in almost all industries. The following table lists companies that have adopted Milvus in production.

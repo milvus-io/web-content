@@ -1,6 +1,7 @@
 ---
 id: four_layers.md
 summary: Storage/computing disaggregation structure in Milvus.
+title: Storage/Computing Disaggregation
 ---
 
 # Storage/Computing Disaggregation

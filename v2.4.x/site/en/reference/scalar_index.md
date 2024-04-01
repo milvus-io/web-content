@@ -2,6 +2,7 @@
 id: scalar_index.md
 related_key: scalar_index
 summary: Scalar index in Milvus.
+title: Scalar Index
 ---
 
 # Scalar Index

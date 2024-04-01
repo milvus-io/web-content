@@ -1,6 +1,7 @@
 ---
 id: quickstart.md
 summary: Get started with Milvus.
+title: Quickstart
 ---
 
 # Quickstart

@@ -2,6 +2,7 @@
 id: embed-with-bm25.md
 order: 5
 summary: BM25 is a ranking function used in information retrieval to estimate the relevance of documents to a given search query.
+title: BM25
 ---
 
 # BM25

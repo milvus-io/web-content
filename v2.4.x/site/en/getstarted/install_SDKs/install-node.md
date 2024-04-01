@@ -3,6 +3,7 @@ id: install-node.md
 label: Install Node.js SDK
 related_key: SDK
 summary: Learn how to install the Node.js SDK of Milvus.
+title: Install Milvus Nodejs SDK
 ---
 
 # Install Milvus Nodejs SDK

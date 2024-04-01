@@ -1,6 +1,7 @@
 ---
 id: insert-update-delete.md
 summary: This guide walks you through the data manipulation operations within a collection, including insertion, upsertion, and deletion.
+title: Insert, Upsert & Delete
 ---
 
 # Insert, Upsert & Delete

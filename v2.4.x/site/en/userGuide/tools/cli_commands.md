@@ -1,6 +1,7 @@
 ---
 id: cli_commands.md
 summary: Interact with Milvus using commands.
+title: Milvus_CLI Command Reference
 ---
 
 # Milvus_CLI Command Reference

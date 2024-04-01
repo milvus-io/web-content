@@ -2,6 +2,7 @@
 id: embed-with-splade.md
 order: 6
 summary: This article describes how to use the SpladeEmbeddingFunction to encode documents and queries using the SPLADE model.
+title: SPLADE
 ---
 
 # SPLADE

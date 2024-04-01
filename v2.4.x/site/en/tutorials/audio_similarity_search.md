@@ -1,6 +1,7 @@
 ---
 id: audio_similarity_search.md
-summary: Build an audio similarity search system with Milvus. 
+summary: Build an audio similarity search system with Milvus.
+title: Audio Similarity Search
 ---
 
 # Audio Similarity Search

@@ -2,6 +2,7 @@
 id: gpu_index.md
 related_key: gpu_index
 summary: GPU index mechanism in Milvus.
+title: GPU Index
 ---
 
 # GPU Index

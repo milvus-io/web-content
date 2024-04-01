@@ -1,6 +1,7 @@
 ---
 id: integrate_with_sentencetransformers.md
 summary: This page discusses movie search using Milvus
+title: Movie Search Using Milvus and SentenceTransformers
 ---
 
 # Movie Search Using Milvus and SentenceTransformers

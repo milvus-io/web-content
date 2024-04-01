@@ -2,6 +2,7 @@
 id: index-vector-fields.md
 order: 1
 summary: This guide walks you through the basic operations on creating and managing indexes on vector fields in a collection.
+title: Index Vector Fields
 ---
 
 # Index Vector Fields

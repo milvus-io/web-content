@@ -2,6 +2,7 @@
 id: index-with-gpu.md
 order: 3
 summary: This guide explains how to build an index with GPU support in Milvus to enhance search performance.
+title: Index with GPU
 ---
 
 # Index with GPU

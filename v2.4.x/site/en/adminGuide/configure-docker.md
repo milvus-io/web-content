@@ -3,6 +3,7 @@ id: configure-docker.md
 label: Docker Compose
 related_key: configure
 summary: Configure Milvus with Docker Compose.
+title: Configure Milvus with Docker Compose
 ---
 
 # Configure Milvus with Docker Compose

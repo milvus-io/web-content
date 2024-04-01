@@ -1,6 +1,7 @@
 ---
 id: text_search_engine.md
-summary: Build a text search engine with Milvus. 
+summary: Build a text search engine with Milvus.
+title: Text Search Engine
 ---
 
 # Text Search Engine

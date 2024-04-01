@@ -2,6 +2,7 @@
 id: embed-with-openai.md
 order: 2
 summary: Milvus integrates with OpenAI's models via the OpenAIEmbeddingFunction class.
+title: OpenAI
 ---
 
 # OpenAI

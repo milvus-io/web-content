@@ -3,6 +3,7 @@ id: configure_nats.md
 related_key: configure
 group: system_configuration.md
 summary: Learn how to configure NATs for Milvus standalone.
+title: NATS-related Configurations
 ---
 
 # NATS-related Configurations

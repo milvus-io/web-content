@@ -3,6 +3,7 @@ id: configure_common.md
 related_key: configure
 group: system_configuration.md
 summary: Learn how to configure common parameters of Milvus.
+title: Common Configurations
 ---
 
 # Common Configurations

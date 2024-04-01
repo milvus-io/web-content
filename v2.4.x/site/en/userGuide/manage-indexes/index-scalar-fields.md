@@ -2,6 +2,7 @@
 id: index-scalar-fields.md
 order: 2
 summary: This guide will walk you through creating and configuring scalar indexes for fields such as integers, strings, etc.
+title: Index Scalar Fields
 ---
 
 # Index Scalar Fields

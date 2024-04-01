@@ -2,6 +2,7 @@
 id: embeddings.md
 order: 1
 summary: Learn how to generate embeddings for your data.
+title: Overview
 ---
 
 # Overview

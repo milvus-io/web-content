@@ -1,6 +1,7 @@
 ---
 id: milvusdm_install.md
 summary: Learn how to install MilvusDM to migrate your data.
+title: Install MilvusDM
 ---
 
 # Install MilvusDM

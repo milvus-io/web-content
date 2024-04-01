@@ -5,13 +5,13 @@ related_key: cluster
 summary: Learn how to deploy a Milvus cluster on GCP.
 ---
 
-## Deploy a Milvus Cluster on GCP
+# Deploy a Milvus Cluster on GCP
 
 Milvus is a cloud-native vector database and can be deployed on various cloud environments. This guide walks you through every detail about setting up Milvus on Google Cloud Platform (GCP).
 
 ![Deploy a Milvus cluster on GCP](../../../../../assets/gcp-networking.png)
 
-### Before you start
+## Before you start
 
 To deploy Milvus on GCP, ensure that
 
@@ -23,7 +23,7 @@ To deploy Milvus on GCP, ensure that
 
 - You have [initialized the gcloud CLI](https://cloud.google.com/sdk/docs/install-sdk#initializing_the) with your GCP account credentials.
 
-### Set up the network
+## Set up the network
 
 To ensure Milvus security, you need to create a logically isolated virtual network in your GCP project. The following command creates a VPC.
 
@@ -90,7 +90,7 @@ gcloud compute firewall-rules create allow-milvus-in \
     --source-ranges=0.0.0.0/0
 ```
 
-### Provision a Kubernetes cluster
+## Provision a Kubernetes cluster
 
 In this guide, we will use the Google Kubernetes Engine (GKE) service to provision a Kubernetes cluster with two nodes in the **us-west1-a** zone. Each node is an **e2-standard-4** Compute Engine virtual machine running the **COS_CONTAINERD** image.
 
@@ -125,7 +125,7 @@ It would take a couple of minutes for the Kubernetes cluster to go up. Once the 
 gcloud container clusters get-credentials milvus-cluster-1 --zone "us-west1-a"
 ```
 
-### Use Google Cloud Storage (GCS) as external object storage
+## Use Google Cloud Storage (GCS) as external object storage
 
 - Create bucket.
 ```bash
@@ -158,7 +158,7 @@ externalS3:
     secretKey: "<secret-key>"
 ```
 
-### Deploy Milvus
+## Deploy Milvus
 
 Now the Kubernetes cluster is ready. Let's deploy Milvus right now. 
 
@@ -174,7 +174,7 @@ Notice the config `service.type` value, which indicates that we would like to ex
 
 If you would like to expose your Milvus instance through a Layer-7 load balancer, [read this](gcp_layer7.md).
 
-### Verify the deployment
+## Verify the deployment
 
 Once all pods are running, run the following command to get the external IP address.
 
@@ -183,6 +183,6 @@ kubectl get services|grep my-release-milvus|grep LoadBalancer|awk '{print $4}'
 ```
 
 
-### Hello Milvus
+## Hello Milvus
 
 Please refer to [Hello Milvus](https://milvus.io/docs/example_code.md), change the host value to the external IP address, then run the code.

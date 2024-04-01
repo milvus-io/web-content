@@ -3,6 +3,7 @@ id: configure_querynode.md
 related_key: configure
 group: system_configuration.md
 summary: Learn how to configure query node of Milvus.
+title: Query Node-related Configurations
 ---
 
 # Query Node-related Configurations

@@ -5,15 +5,15 @@ related_key: gcs, storage, workload identity, iam
 summary: Learn how to configure gcs with Workload Identity.
 ---
 
-## Configure GCS Access by Workload Identity
+# Configure GCS Access by Workload Identity
 This topic introduces how to configure gcs access by Workload Identity when you install Milvus with helm. 
 For more details, refer to [Workload Identity](https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity).
 
-### Before you start
+## Before you start
 
 Please enable Workload Identity on clusters and node pools using the Google Cloud CLI or the Google Cloud console. Workload Identity must be enabled at the cluster level before you can enable Workload Identity on node pools.
 
-### Configure applications to use Workload Identity
+## Configure applications to use Workload Identity
 
 - Create bucket.
 ```bash
@@ -53,7 +53,7 @@ kubectl annotate serviceaccount milvus-gcs-access-sa \
     iam.gke.io/gcp-service-account=milvus-gcs-access-sa@milvus-testing-nonprod.iam.gserviceaccount.com
 ```
 
-### Verify the Workload Identity setup
+## Verify the Workload Identity setup
 
 Please refer to  [Workload Identity](https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity). Run the following command inside the Pod:
 ```bash
@@ -61,7 +61,7 @@ curl -H "Metadata-Flavor: Google" http://169.254.169.254/computeMetadata/v1/inst
 ```
 If the result is `milvus-gcs-access-sa@milvus-testing-nonprod.iam.gserviceaccount.com`, it's ok.
 
-### Deploy Milvus
+## Deploy Milvus
 ```bash
 helm install -f values.yaml my-release milvus/milvus
 ``` 

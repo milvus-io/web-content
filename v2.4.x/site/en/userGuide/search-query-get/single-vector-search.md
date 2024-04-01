@@ -2,6 +2,7 @@
 id: single-vector-search.md
 order: 1
 summary: This article describes how to search for vectors in a Milvus collection using a single query vector.
+title: Single-Vector Search
 ---
 
 # Single-Vector Search

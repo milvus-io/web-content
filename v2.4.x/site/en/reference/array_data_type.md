@@ -2,6 +2,7 @@
 id: array_data_type.md
 related_key: array_data_type
 summary: Array data type in Milvus.
+title: Array
 ---
 
 # Array

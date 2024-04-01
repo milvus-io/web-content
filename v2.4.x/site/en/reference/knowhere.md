@@ -1,6 +1,7 @@
 ---
 id: knowhere.md
 summary: Learn about Knowhere in Milvus.
+title: Knowhere
 ---
 
 # Knowhere

@@ -1,6 +1,7 @@
 ---
 id: authenticate.md
 summary: Learn how to manage user authentication in Milvus.
+title: Authenticate User Access
 ---
 
 # Authenticate User Access

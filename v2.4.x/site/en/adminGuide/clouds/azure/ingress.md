@@ -5,12 +5,12 @@ related_key: ingress nginx
 summary: Learn how to configure ingress nginx with Milvus.
 ---
 
-## Configure ingress nginx with Milvus
+# Configure ingress nginx with Milvus
 This topic introduces how to configure ingress nginx with Milvus. 
 For more details, refer to [ingress-nginx](https://learn.microsoft.com/en-us/azure/aks/ingress-tls?tabs=azure-cli).
 
 
-### Configure ingress nginx
+## Configure ingress nginx
 
 - Set env.
 ```bash
@@ -51,7 +51,7 @@ az network public-ip show --ids $PUBLICIPID --query "[dnsSettings.fqdn]" --outpu
 ```
 
 
-### Install cert-manager
+## Install cert-manager
 
 ```bash
 helm repo add jetstack https://charts.jetstack.io
@@ -61,7 +61,7 @@ helm install cert-manager jetstack/cert-manager \
     --set installCRDs=true
 ```
 
-### Create a CA cluster issuer
+## Create a CA cluster issuer
 
 - Create a cluster issuer, such as cluster-issuer.yaml, using the following example manifest. Replace MY_EMAIL_ADDRESS with a valid address from your organization.
 ```yaml
@@ -87,11 +87,11 @@ kubectl apply -f cluster-issuer.yaml
 ```
 
 
-### Deploy Milvus
+## Deploy Milvus
 refer to [Azure](https://milvus.io/docs/azure.md), notice the config `service.type` value, you need change to `ClusterIP`. 
 
 
-### Create Milvus ingress route
+## Create Milvus ingress route
 ```bash
 kubectl apply -f ingress.yaml
 ``` 
@@ -126,7 +126,7 @@ spec:
                   number: 19530
 ```
 
-### Verify
+## Verify
 ```bash
 kubectl get certificate 
 NAME         READY   SECRET       AGE
@@ -136,7 +136,7 @@ NAME                CLASS   HOSTS                                   ADDRESS     
 my-release-milvus   nginx   milvustest.eastus2.cloudapp.azure.com   EXTERNAL-IP   80, 443   8m15s
 ```
 
-### Hello Milvus
+## Hello Milvus
 Please refer to [Hello Milvus](https://milvus.io/docs/example_code.md), change uri args, then run the code.
 ```python
 connections.connect("default",uri="https://milvustest.eastus2.cloudapp.azure.com:443") 

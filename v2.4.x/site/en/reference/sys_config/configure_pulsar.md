@@ -3,6 +3,7 @@ id: configure_pulsar.md
 related_key: configure
 group: system_configuration.md
 summary: Learn how to configure Pulsar for Milvus cluster.
+title: Pulsar-related Configurations
 ---
 
 # Pulsar-related Configurations

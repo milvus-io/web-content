@@ -1,6 +1,7 @@
 ---
 id: boolean.md
 summary: Learn about boolean expression rules in Milvus.
+title: Scalar Filtering Rules
 ---
 
 # Scalar Filtering Rules

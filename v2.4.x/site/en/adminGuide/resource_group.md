@@ -2,19 +2,20 @@
 id: resource_group.md
 related_key: Manage Resource Groups
 summary: Learn how to manage resource groups.
+title: Manage Resource Groups
 ---
 
-## Manage Resource Groups
+# Manage Resource Groups
 
 In Milvus, you can use a resource group to physically isolate certain query nodes from others. This guide walks you through how to create and manage custom resource groups as well as transfer nodes between them.
 
-### What is a resource group
+## What is a resource group
 
 A resource group can hold several or all of the query nodes in a Milvus cluster. You decide how you want to allocate query nodes among resource groups based on what makes the most sense for you. For example, in a multi-collection scenario, you can allocate an appropriate number of query nodes to each resource group and load collections into different resource group, so that the operations within each collection are physically independent of those in other collections.
 
 Note that a Milvus instance maintains a default resource group to hold all the query nodes at the start-up and names it **__default_resource_group**. You can move some nodes from the default resource group to the one you create.
 
-### Manage resource groups
+## Manage resource groups
 
 <div class="alert note">
 
@@ -160,7 +161,7 @@ All code samples on this page are in PyMilvus 2.4.0. Upgrade your PyMilvus insta
         print(f"Something went wrong while dropping {source}.")
     ```
 
-## What's next
+# What's next
 
 To deploy a multi-tenant Milvus instance, read the following:
 

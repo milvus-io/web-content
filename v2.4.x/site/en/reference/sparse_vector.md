@@ -1,6 +1,7 @@
 ---
 id: sparse_vector.md
 summary: Learn how to use sparse vectors in Milvus.
+title: Sparse Vector
 ---
 
 # Sparse Vector

@@ -2,6 +2,7 @@
 id: embed-with-sentence-transform.md
 order: 3
 summary: This article demonstrates how to use Sentence Transformers in Milvus to encode documents and queries into dense vectors.
+title: Sentence Transformers
 ---
 
 # Sentence Transformers
