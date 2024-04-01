@@ -50,7 +50,7 @@ Choose one of the following storage options and create a `loki.yaml` configurati
 
 - Option 2: Using AWS S3 for storage
 
-  Replace `<accessKey>` and `<keyId>` with your AWS credentials.
+  In the following example, replace `<accessKey>` and `<keyId>` with your own S3 access key and ID, `s3.endpoint` with the S3 endpoint, and `s3.region` with the S3 region.
 
   ```yaml
   loki:
@@ -146,4 +146,4 @@ After adding Loki as a data source, query Milvus logs in Grafana:
 2. In the upper-left corner of the page, choose the loki data source.
 3. Use __Label browser__ to select labels and query logs.
 
-![Query](../../../../assets/milvuslog.jpg "The data source config.")
+![Query](../../../../assets/milvuslog.jpg "Query Milvus logs in Grafana.")
