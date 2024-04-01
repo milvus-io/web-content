@@ -68,9 +68,7 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
 
 You can choose the upgrade path for your Milvus as follows:
 
-<div style="display: none;">
-- [Conduct a rolling upgrade](#Conduct-a-rolling-upgrade) from Milvus v2.2.3 and later releases to v2.4.0-rc.1.
-</div>
+<div style="display: none;">- [Conduct a rolling upgrade](#conduct-a-rolling-upgrade) from Milvus v2.2.3 and later releases to v2.4.0-rc.1.</div>
 - [Upgrade Milvus using Helm](#Upgrade-Milvus-using-Helm) for an upgrade from a minor release before v2.2.3 to v2.4.0-rc.1.
 - [Migrate the metadata](#Migrate-the-metadata) before the upgrade from Milvus v2.1.x to v2.4.0-rc.1.
 
