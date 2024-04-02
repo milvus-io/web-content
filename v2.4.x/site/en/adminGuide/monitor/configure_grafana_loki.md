@@ -1,10 +1,10 @@
 ---
 id: configure_grafana_loki.md
-title: Congiure Grafana Loki
+title: Configure Grafana Loki
 summary: This topic describes how to collect logs using Loki and query logs for a Milvus cluster using Grafana.
 ---
 
-# Congiure Grafana Loki
+# Configure Grafana Loki
 
 This guide provides instructions on how to configure Loki to collect logs and Grafana to query and display logs for a Milvus cluster.
 
@@ -23,7 +23,7 @@ In this guide, you will learn how to:
 
 Loki is a log aggregation system inspired by Prometheus. Deploy Loki using Helm to collect logs from your Milvus cluster.
 
-### Step 1: Add Grafana's Helm Chart Repository
+### 1. Add Grafana's Helm Chart Repository
 
 Add Grafana’s chart repository to Helm and update it:
 
@@ -32,7 +32,7 @@ helm repo add grafana https://grafana.github.io/helm-charts
 helm repo update
 ```
 
-### Step 2: Configure Object Storage for Loki
+### 2. Configure Object Storage for Loki
 
 Choose one of the following storage options and create a `loki.yaml` configuration file:
 
@@ -70,7 +70,7 @@ Choose one of the following storage options and create a `loki.yaml` configurati
         accessKeyId: <keyId>
   ```
 
-### Step 3: Install Loki
+### 3. Install Loki
 
 Run the following commands to install Loki:
 
@@ -83,7 +83,7 @@ helm install --values loki.yaml loki grafana/loki -n loki
 
 Promtail is a log collection agent for Loki. It reads logs from Milvus pods and sends them to Loki.
 
-### Step 1: Create Promtail Configuration
+### 1. Create Promtail Configuration
 
 Create a `promtail.yaml` configuration file:
 
@@ -93,7 +93,7 @@ config:
     - url: http://loki-gateway/loki/api/v1/push
 ```
 
-### Step 2: Install Promtail
+### 2. Install Promtail
 
 Install Promtail using Helm:
 
@@ -105,7 +105,7 @@ helm install  --values promtail.yaml promtail grafana/promtail -n loki
 
 Deploy Grafana and configure it to connect to Loki for querying logs.
 
-### Step 1: Deploy Grafana
+### 1. Deploy Grafana
 
 Install Grafana using the following commands:
 
@@ -127,7 +127,7 @@ export POD_NAME=$(kubectl get pods --namespace monitoring -l "app.kubernetes.io/
 kubectl --namespace monitoring port-forward $POD_NAME 3000
 ```
 
-### Step 2: Add Loki as a Data Source in Grafana
+### 2. Add Loki as a Data Source in Grafana
 
 Once Grafana is running, you need to add Loki as a data source to query logs.
 
@@ -138,7 +138,7 @@ Once Grafana is running, you need to add Loki as a data source to query logs.
 
 ![DataSource](../../../../assets/datasource.jpg "The data source config.")
 
-### Step 3: Query Milvus Logs
+### 3. Query Milvus Logs
 
 After adding Loki as a data source, query Milvus logs in Grafana:
 
