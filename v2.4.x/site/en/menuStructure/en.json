@@ -529,6 +529,14 @@
       "order": 8
     },
     {
+      "id": "resource_group.md",
+      "title": "Manage Resource Groups",
+      "label1": "userguide",
+      "label2": "advanced_features",
+      "label3": "",
+      "order": 9      
+    }, 
+    {
       "id": "embeddings",
       "title": "Embeddings",
       "label1": "",
@@ -594,65 +602,178 @@
       "isMenu": true
     },   
     {
-      "id": "basic_config",
-      "title": "Basic Configurations",
+      "id": "deployment",
+      "title": "Deployment",
       "label1": "admin_guide",
       "label2": "",
       "order": 0,
       "isMenu": true
     },
     {
-      "id": "configure-helm.md",
-      "title": "With Helm",
+      "id": "on_premises",
+      "title": "On Premises",
       "label1": "admin_guide",
-      "label2": "basic_config",
-      "label3": "",
-      "order": 0
+      "label2": "deployment",
+      "order": 0,
+      "isMenu": true
     },
     {
       "id": "configure-docker.md",
       "title": "With Docker",
       "label1": "admin_guide",
-      "label2": "basic_config",
-      "label3": "",
+      "label2": "deployment",
+      "label3": "on_premises",
+      "order": 0
+    },
+    {
+      "id": "configure-helm.md",
+      "title": "With Helm",
+      "label1": "admin_guide",
+      "label2": "deployment",
+      "label3": "on_premises",
       "order": 1
     },
     {
       "id": "configure_operator.md",
       "title": "With Milvus Operator",
       "label1": "admin_guide",
-      "label2": "basic_config",
-      "label3": "",
+      "label2": "deployment",
+      "label3": "on_premises",
       "order": 2
     },
     {
-      "id": "system_configuration.md",
-      "title": "System Configurations",
+      "id": "allocate.md",
+      "title": "Allocate Resources",
       "label1": "admin_guide",
-      "label2": "basic_config",
+      "label2": "deployment",
+      "label3": "on_premises",
       "order": 3
     },
     {
-      "id": "typical_config",
-      "title": "Typical Configurations",
+      "id": "on_cloud",
+      "title": "On Clouds",
+      "label1": "admin_guide",
+      "label2": "deployment",
+      "order": 1,
+      "isMenu": true
+    },
+    {
+      "id": "aws",
+      "title": "AWS",
+      "label1": "admin_guide",
+      "label2": "on_cloud",
+      "label3": "",
+      "order": 0,
+      "isMenu": true
+    },
+    {
+      "id": "aws.md",
+      "title": "Amazon EC2",
+      "label1": "admin_guide",
+      "label2": "on_cloud",
+      "label3": "aws",
+      "order": 0
+    },
+    {
+      "id": "eks.md",
+      "title": "Amazon EKS",
+      "label1": "admin_guide",
+      "label2": "on_cloud",
+      "label3": "aws",
+      "order": 1
+    },
+    {
+      "id": "gcp",
+      "title": "GCP",
+      "label1": "admin_guide",
+      "label2": "on_cloud",
+      "label3": "",
+      "order": 2
+    },    
+    {
+      "id": "gcp.md",
+      "title": "GCP",
+      "label1": "admin_guide",
+      "label2": "on_cloud",
+      "label3": "gcp",
+      "order": 0
+    },
+    {
+      "id": "gcs.md",
+      "title": "GCS With IAM",
+      "label1": "admin_guide",
+      "label2": "on_cloud",
+      "label3": "gcp",
+      "order": 1
+    },
+    {
+      "id": "gcp_layer7.md",
+      "title": "Layer-7 Load Balancing",
+      "label1": "admin_guide",
+      "label2": "on_cloud",
+      "label3": "gcp",
+      "order": 2
+    },
+    {
+      "id": "azure",
+      "title": "Azure",
+      "label1": "admin_guide",
+      "label2": "on_cloud",
+      "label3": "",
+      "order": 3
+    },    
+    {
+      "id": "azure.md",
+      "title": "Azure",
+      "label1": "admin_guide",
+      "label2": "on_cloud",
+      "label3": "azure",
+      "order": 0
+    },
+    {
+      "id": "abs.md",
+      "title": "Blob Storage With IAM",
+      "label1": "admin_guide",
+      "label2": "on_cloud",
+      "label3": "azure",
+      "order": 1
+    },
+    {
+      "id": "ingress.md",
+      "title": "Ingress Nginx",
+      "label1": "admin_guide",
+      "label2": "on_cloud",
+      "label3": "azure",
+      "order": 2
+    },
+    {
+      "id": "configuration",
+      "title": "Configuration",
       "label1": "admin_guide",
       "label2": "",
       "order": 1,
       "isMenu": true
     },
     {
+      "id": "system_configuration.md",
+      "title": "System Configurations",
+      "label1": "admin_guide",
+      "label2": "configuration",
+      "order": 0
+    },
+    {
       "id": "dynamic_config.md",
       "title": "On the Fly",
       "label1": "admin_guide",
-      "label2": "typical_config",
+      "label2": "configuration",
       "label3": "",
-      "order": 0
+      "order": 1
     },
     {
       "id": "limit_collection_counts.md",
       "title": "Limit Collection Counts",
       "label1": "admin_guide",
-      "label2": "typical_config",
+      "label2": "configuration",
       "label3": "",
       "order": 2      
     },
@@ -660,7 +781,7 @@
       "id": "chunk_cache.md",
       "title": "Configure Chunk Cache",
       "label1": "admin_guide",
-      "label2": "typical_config",
+      "label2": "configuration",
       "label3": "",
       "order": 3      
     },
@@ -739,24 +860,8 @@
       "order": 2
     },
     {
-      "id": "scale-dependencies.md",
-      "title": "Scale Dependencies",
-      "label1": "admin_guide",
-      "label2": "manage_dependencies",
-      "label3": "",
-      "order": 2
-    },
-    {
-      "id": "allocate.md",
-      "title": "Allocate Resources",
-      "label1": "admin_guide",
-      "label2": "",
-      "label3": "",
-      "order": 3
-    },
-    {
-      "id": "cloud",
-      "title": "Deploy on Clouds",
+      "id": "scaling",
+      "title": "Scaling",
       "label1": "admin_guide",
       "label2": "",
       "label3": "",
@@ -764,110 +869,22 @@
       "isMenu": true
     },
     {
-      "id": "aws",
-      "title": "AWS",
-      "label1": "admin_guide",
-      "label2": "cloud",
-      "label3": "",
-      "order": 0,
-      "isMenu": true
-    },
-    {
-      "id": "aws.md",
-      "title": "Amazon EC2",
-      "label1": "admin_guide",
-      "label2": "cloud",
-      "label3": "aws",
-      "order": 0
-    },
-    {
-      "id": "eks.md",
-      "title": "Amazon EKS",
-      "label1": "admin_guide",
-      "label2": "cloud",
-      "label3": "aws",
-      "order": 1
-    },
-    {
-      "id": "gcp",
-      "title": "GCP",
-      "label1": "admin_guide",
-      "label2": "cloud",
-      "label3": "",
-      "order": 2
-    },    
-    {
-      "id": "gcp.md",
-      "title": "GCP",
-      "label1": "admin_guide",
-      "label2": "cloud",
-      "label3": "gcp",
-      "order": 0
-    },
-    {
-      "id": "gcs.md",
-      "title": "GCS With IAM",
-      "label1": "admin_guide",
-      "label2": "cloud",
-      "label3": "gcp",
-      "order": 1
-    },
-    {
-      "id": "gcp_layer7.md",
-      "title": "Layer-7 Load Balancing",
-      "label1": "admin_guide",
-      "label2": "cloud",
-      "label3": "gcp",
-      "order": 2
-    },
-    {
-      "id": "azure",
-      "title": "Azure",
-      "label1": "admin_guide",
-      "label2": "cloud",
-      "label3": "",
-      "order": 3
-    },    
-    {
-      "id": "azure.md",
-      "title": "Azure",
-      "label1": "admin_guide",
-      "label2": "cloud",
-      "label3": "azure",
-      "order": 0
-    },
-    {
-      "id": "abs.md",
-      "title": "Blob Storage With IAM",
-      "label1": "admin_guide",
-      "label2": "cloud",
-      "label3": "azure",
-      "order": 1
-    },
-    {
-      "id": "ingress.md",
-      "title": "Ingress Nginx",
-      "label1": "admin_guide",
-      "label2": "cloud",
-      "label3": "azure",
-      "order": 2
-    },
-    {
       "id": "scaleout.md",
-      "title": "Scale a Milvus Cluster",
+      "title": "Scale Cluster",
       "label1": "admin_guide",
-      "label2": "",
+      "label2": "scaling",
       "label3": "",
-      "order": 5
+      "order": 0
     },
     {
-      "id": "resource_group.md",
-      "title": "Manage Resource Groups",
+      "id": "scale-dependencies.md",
+      "title": "Scale Dependencies",
       "label1": "admin_guide",
-      "label2": "",
+      "label2": "scaling",
       "label3": "",
-      "order": 6      
-    },    
+      "order": 1
+    },
+     
     {
       "id": "upgrade_milvus",
       "title": "Upgrade",

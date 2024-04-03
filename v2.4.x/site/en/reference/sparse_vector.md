@@ -10,7 +10,14 @@ Sparse vectors represent words or phrases using vector embeddings where most ele
 
 In Milvus, the use of sparse vectors follows a similar workflow to that of dense vectors. It involves creating a collection with a sparse vector column, inserting data, creating an index, and conducting similarity searches and scalar queries.
 
-This topic provides a step-by-step guide to using sparse vectors in Milvus. To see sparse vectors in action, refer  to [hello_sparse](https://github.com/milvus-io/pymilvus/blob/master/examples/milvus_client/sparse.py).
+In this tutorial, you will learn how to:
+
+- Prepare sparse vector embeddings;
+- Create a collection with a sparse vector field;
+- Insert entities with sparse vector embeddings;
+- Index the collection and perform ANN search on sparse vectors.
+
+To see sparse vectors in action, refer  to [hello_sparse.py](https://github.com/milvus-io/pymilvus/blob/master/examples/milvus_client/sparse.py).
 
 <div class="admonition note">
 
@@ -42,48 +49,7 @@ To use sparse vectors in Milvus, prepare vector embeddings in one of the support
     [(2, 0.33), (98, 0.72), ...]
     ```
 
-<div class="admonition note">
-
-<p><b>notes</b></p>
-
-<p>The vector dimensions must be of Python <code>int</code> or <code>numpy.integer</code> type, and the values must be of Python <code>float</code> or <code>numpy.floating</code> type.</p>
-
-</div>
-
-To generate embeddings, the pymilvus library provides a built-in `model` package, which offers a range of functionalities for embedding generation. For details, refer to [Embeddings](embeddings.md).
-
-## Create a collection with a sparse vector field
-
-To create a collection with a sparse vector field in Milvus, set the __datatype__ of the sparse vector field to __DataType.SPARSE_FLOAT_VECTOR__. Unlike dense vectors, there is no need to specify a dimension for sparse vectors.
-
-```python
-import numpy as np
-import random
-from pymilvus import MilvusClient, DataType
-
-# Create a MilvusClient instance
-client = MilvusClient(uri="http://localhost:19530")
-
-# Create a collection with a sparse vector field
-schema = client.create_schema(
-    auto_id=True,
-    enable_dynamic_fields=True,
-)
-
-schema.add_field(field_name="pk", datatype=DataType.VARCHAR, is_primary=True, max_length=100)
-schema.add_field(field_name="scalar_field", datatype=DataType.DOUBLE)
-# For sparse vector, no need to specify dimension
-schema.add_field(field_name="sparse_vector", datatype=DataType.SPARSE_FLOAT_VECTOR)
-
-client.create_collection(collection_name="test_sparse_vector", schema=schema)
-```
-
-For details on common collection parameters, refer to [create_collection()
-](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md).
-
-## Insert entities with sparse vector embeddings
-
-The following example inserts sparse embeddings into a collection by generating a random sparse matrix for 10,000 entities, each with 10,000 dimensions and a sparsity density of 0.005.
+The following example prepares sparse embeddings by generating a random sparse matrix for 10,000 entities, each with 10,000 dimensions and a sparsity density of 0.005.
 
 ```python
 # Prepare entities with sparse vector representation
@@ -106,6 +72,82 @@ entities = [
     for _ in range(num_entities)
 ]
 
+# print the first entity to check the representation
+print(entities[0])
+
+# Output:
+# {
+#     'scalar_field': 0.520821523849214,
+#     'sparse_vector': {
+#         5263: 0.2639375518635271,
+#         3573: 0.34701499565746674,
+#         9637: 0.30856525997853057,
+#         4399: 0.19771651149001523,
+#         6959: 0.31025067641541815,
+#         1729: 0.8265339135915016,
+#         1220: 0.15303302147479103,
+#         7335: 0.9436728846033107,
+#         6167: 0.19929870545596562,
+#         5891: 0.8214617920371853,
+#         2245: 0.7852255053773395,
+#         2886: 0.8787982039149889,
+#         8966: 0.9000606703940665,
+#         4910: 0.3001170013981104,
+#         17: 0.00875671667413136,
+#         3279: 0.7003425473001098,
+#         2622: 0.7571360018373428,
+#         4962: 0.3901879090102064,
+#         4698: 0.22589525720196246,
+#         3290: 0.5510228492587324,
+#         6185: 0.4508413201390492
+#     }
+# }
+```
+
+<div class="admonition note">
+
+<p><b>notes</b></p>
+
+<p>The vector dimensions must be of Python <code>int</code> or <code>numpy.integer</code> type, and the values must be of Python <code>float</code> or <code>numpy.floating</code> type.</p>
+
+</div>
+
+To generate embeddings, you can also use the `model` package built in the PyMilvus library, which offers a range of embedding functions. For details, refer to [Embeddings](embeddings.md).
+
+## Create a collection with a sparse vector field
+
+To create a collection with a sparse vector field, set the __datatype__ of the sparse vector field to __DataType.SPARSE_FLOAT_VECTOR__. Unlike dense vectors, there is no need to specify a dimension for sparse vectors.
+
+```python
+import numpy as np
+import random
+from pymilvus import MilvusClient, DataType
+
+# Create a MilvusClient instance
+client = MilvusClient(uri="http://localhost:19530")
+
+# Create a collection with a sparse vector field
+schema = client.create_schema(
+    auto_id=True,
+    enable_dynamic_fields=True,
+)
+
+schema.add_field(field_name="pk", datatype=DataType.VARCHAR, is_primary=True, max_length=100)
+schema.add_field(field_name="scalar_field", datatype=DataType.DOUBLE)
+# For sparse vector, no need to specify dimension
+schema.add_field(field_name="sparse_vector", datatype=DataType.SPARSE_FLOAT_VECTOR) # set `datatype` to `SPARSE_FLOAT_VECTOR`
+
+client.create_collection(collection_name="test_sparse_vector", schema=schema)
+```
+
+For details on common collection parameters, refer to [create_collection()
+](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md).
+
+## Insert entities with sparse vector embeddings
+
+To insert entities with sparse vector embeddings, simply pass the list of entities to the `insert()` method.
+
+```python
 # Insert entities
 client.insert(collection_name="test_sparse_vector", data=entities)
 ```
@@ -123,34 +165,32 @@ index_params = client.prepare_index_params()
 index_params.add_index(
     field_name="sparse_vector",
     index_name="sparse_inverted_index",
-    index_type="SPARSE_INVERTED_INDEX",
-    metric_type="IP",
-    params={"drop_ratio_build": 0.2},
+    index_type="SPARSE_INVERTED_INDEX", # the type of index to be created. set to `SPARSE_INVERTED_INDEX` or `SPARSE_WAND`.
+    metric_type="IP", # the metric type to be used for the index. Currently, only `IP` (Inner Product) is supported.
+    params={"drop_ratio_build": 0.2}, # the ratio of small vector values to be dropped during indexing.
 )
 
 # Create index
 client.create_index(collection_name="test_sparse_vector", index_params=index_params)
 ```
 
-__Index Parameters for Sparse Vectors:__
+For index building on sparse vectors, take note of the following:
 
-- __index_type__: Two specific types of indexes are supported for sparse vector fields:
+- `index_type`: The type of index to be built. Possible options for sparse vectors:
 
-    - __SPARSE_INVERTED_INDEX__: An inverted index that maps each dimension to its non-zero vectors, facilitating direct access to relevant data during searches. Ideal for datasets with sparse but high-dimensional data.
+  - `SPARSE_INVERTED_INDEX`: An inverted index that maps each dimension to its non-zero vectors, facilitating direct access to relevant data during searches. Ideal for datasets with sparse but high-dimensional data.
 
-    - __SPARSE_WAND__: Utilizes the Weak-AND (WAND) algorithm to quickly bypass unlikely candidates, focusing evaluation on those with higher ranking potential. Treats dimensions as terms and vectors as documents, speeding up searches in large, sparse datasets.
+  - `SPARSE_WAND`: Utilizes the Weak-AND (WAND) algorithm to quickly bypass unlikely candidates, focusing evaluation on those with higher ranking potential. Treats dimensions as terms and vectors as documents, speeding up searches in large, sparse datasets.
 
-- __metric_type__: Only the inner product (IP) distance metric is supported for sparse vectors.
+- `metric_type`: Only `IP` (Inner Product) distance metric is supported for sparse vectors.
 
-- __params__: Includes the __drop_ratio_build__ option to fine-tune the balance between efficiency and accuracy by ignoring small values during the index-building process.
+- `params.drop_ratio_build`: The index parameter used specifically for sparse vectors. It controls the proportion of small vector values that are excluded during the indexing process. This parameter enables fine-tuning of the trade-off between efficiency and accuracy by disregarding small values when constructing the index. For instance, if `drop_ratio_build = 0.3`, during the index construction, all values from all sparse vectors are gathered and sorted. The smallest 30% of these values are not included in the index, thereby reducing the computational workload during search.
 
-For information about common index parameters, refer to [create_index()](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/create_index.md).
+For more information, refer to [In-memory Index](index.md).
 
 ## Perform ANN search
 
-To perform ANN searches on collections containing sparse vectors, configure parameters specific to sparse data:
-
-- __drop_ratio_search__: fine-tunes the search process by specifying the percentage of smallest values to ignore in the query vector, balancing between search precision and performance.
+After the collection is indexed and loaded into memory, use the `search()` method to retrieve the relevant documents based on the query.
 
 ```python
 # Load the collection into memory
@@ -163,7 +203,7 @@ query_vector = entities[-1]["sparse_vector"]
 
 search_params = {
     "metric_type": "IP",
-    "params": {"drop_ratio_search": 0.2},
+    "params": {"drop_ratio_search": 0.2}, # the ratio of small vector values to be dropped during search.
 }
 
 search_res = client.search(
@@ -184,7 +224,13 @@ for hits in search_res:
 # hit: {'id': '448458373272702005', 'distance': 0.9848432540893555, 'entity': {'pk': '448458373272702005', 'scalar_field': 0.9871869181562156}}
 ```
 
+When configuring search parameters, take note of the following:
+
+- `params.drop_ratio_search`: The search parameter used specifically for sparse vectors. This option allows fine-tuning of the search process by specifying the ratio of the smallest values in the query vector to ignore. It helps balance search precision and performance. The smaller the value set for `drop_ratio_search`, the less these small values contribute to the final score. By ignoring some small values, search performance can be improved with minimal impact on accuracy.
+
 ## Perform scalar queries
+
+In addition to ANN search, Milvus also supports scalar queries on sparse vectors. These queries allow you to retrieve documents based on a scalar value associated with the sparse vector.
 
 Filter entities with __scalar_field__ greater than 3:
 
