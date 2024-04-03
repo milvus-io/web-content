@@ -8,7 +8,7 @@ These API endpoints involve manipulating collections in a specified cluster as w
 
 The prefix of an API endpoint should always be the URI of your Milvus instance
 
-For instanc we have:
+For instance we have:
 * **GRPC Port:** localhost:19530
 * **REST Port:** localhost:9091
 
