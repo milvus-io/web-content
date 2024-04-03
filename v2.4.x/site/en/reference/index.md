@@ -9,14 +9,13 @@ title: In-memory Index
 
 This topic lists various types of in-memory indexes Milvus supports, scenarios each of them best suits, and parameters users can configure to achieve better search performance. For on-disk indexes, see **[On-disk Index](disk_index.md)**.
 
-Indexing is the process of efficiently organizing data, and it plays a major role in making similarity search useful by dramatically accelerating time-consuming queries on large datasets. 
+Indexing is the process of efficiently organizing data, and it plays a major role in making similarity search useful by dramatically accelerating time-consuming queries on large datasets.
 
-To improve query performance, you can [specify an index type](index-vector-fields.md) for each vector field. 
+To improve query performance, you can [specify an index type](index-vector-fields.md) for each vector field.
 
-<div class="alert note"> 
+<div class="alert note">
 Currently, a vector field only supports one index type. Milvus automatically deletes the old index when switching the index type.
 </div>
-
 
 ## ANNS vector indexes
 
@@ -29,12 +28,11 @@ According to the implementation methods, the ANNS vector index can be divided in
 - Hash-based index
 - Quantization-based index
 
-
 ## Indexes supported in Milvus
 
 According to the suited data type, the supported indexes in Milvus can be divided into two categories:
 
-- Indexes for floating-point embeddings:
+- Indexes for floating-point embeddings
 
   - For 128-dimensional floating-point embeddings, the storage they take up is 128 * the size of float = 512 bytes. And the [distance metrics](metric.md) used for float-point embeddings are Euclidean distance (L2) and Inner product.
 
@@ -46,11 +44,18 @@ According to the suited data type, the supported indexes in Milvus can be divide
 
   - This type of indexes include BIN_FLAT and BIN_IVF_FLAT.
 
+- Indexes for sparse embeddings
+
+  - The distance metric supported for sparse embeddings is `IP` (Inner Product) only.
+
+  - The types of indexes include `SPARSE_INVERTED_INDEX` and `SPARSE_WAND`.
+
 The following table classifies the indexes that Milvus supports:
 
 <div class="filter">
-  <a href="#floating">Floating-point embeddings</a> 
+  <a href="#floating">Floating-point embeddings</a>
   <a href="#binary">Binary embeddings</a>
+  <a href="#sparse">Sparse embeddings</a>
 </div>
 
 <div class="filter-floating table-wrapper">
@@ -167,8 +172,39 @@ The following table classifies the indexes that Milvus supports:
 
 </div>
 
-### FLAT
+<div class="filter-sparse table-wrapper">
 
+<table id="sparse">
+<thead>
+  <tr>
+    <th>Supported index</th>
+    <th>Classification</th>
+    <th>Scenario</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>SPARSE_INVERTED_INDEX</td>
+    <td>Inverted index</td>
+    <td><ul>
+      <li>Depends on relatively small datasets.</li>
+      <li>Requires a 100% recall rate.</li>
+    </ul></td>
+  </tr>
+  <tr>
+    <td>SPARSE_WAND</td>
+    <td>Inverted index</td>
+    <td><ul>
+      <li><a href="https://dl.acm.org/doi/10.1145/956863.956944">Weak-AND</a> algorithm accelerated</li>
+      <li>Can get a significant speed improvement while only sacrificing a small amount of recall.</li>
+    </ul></td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+
+### FLAT
 
 For vector similarity search applications that require perfect accuracy and depend on relatively small (million-scale) datasets, the FLAT index is a good choice. FLAT does not compress vectors, and is the only index that can guarantee exact search results. Results from FLAT can also be used as a point of comparison for results produced by other indexes that have less than 100% recall.
 
@@ -343,7 +379,7 @@ By adjusting `nprobe`, an ideal balance between accuracy and speed can be found 
 
 BIN_IVF_FLAT is the most basic BIN_IVF index, and the encoded data stored in each unit is consistent with the original data.
 
- - Index building parameters
+- Index building parameters
 
    | Parameter | Description             | Range      |
    | --------- | ----------------------- | ---------- |
@@ -363,9 +399,41 @@ BIN_IVF_FLAT is the most basic BIN_IVF index, and the encoded data stored in eac
     |----------------------------|---------------------------------------------------------|------------|---------------|
     | `max_empty_result_buckets` | Maximum number of buckets not returning any search results.<br/>This is a range-search parameter and terminates the search process whilst the number of consecutive empty buckets reaches the specified value.<br/>Increasing this value can improve recall rate at the cost of increased search time. | [1, 65535] | 2  |
 
+### SPARSE_INVERTED_INDEX
+
+Each dimension maintains a list of vectors that have a non-zero value at that dimension. During search, Milvus iterates through each dimension of the query vector and computes scores for vectors that have non-zero values in those dimensions.
+
+- Index building parameters
+
+  | Parameter        | Description                | Range        |
+  | ---------------- | -------------------------- | ------------ |
+  | `drop_ratio_build` | The proportion of small vector values that are excluded during the indexing process. This option allows fine-tuning of the indexing process, making a trade-off between efficiency and accuracy by disregarding small values when building the index.              | [0, 1] |
+
+- Search parameters
+
+    | Parameter           | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | Range  |
+    |---------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------|
+    | `drop_ratio_search` | The proportion of small vector values that are excluded during the search process. This option allows fine-tuning of the search process by specifying the ratio of the smallest values in the query vector to ignore. It helps balance search precision and performance. The smaller the value set for `drop_ratio_search`, the less these small values contribute to the final score. By ignoring some small values, search performance can be improved with minimal impact on accuracy. | [0, 1] |
+
+### SPARSE_WAND
+
+This index shares similarities with `SPARSE_INVERTED_INDEX`, while it utilizes the [Weak-AND](https://dl.acm.org/doi/10.1145/956863.956944) algorithm to further reduce the number of full IP distance evaluations during the search process.
+
+Based on our testing, `SPARSE_WAND` generally outperforms other methods in terms of speed. However, its performance can deteriorate rapidly as the density of the vectors increases. To address this issue, introducing a non-zero `drop_ratio_search` can significantly enhance performance while only incurring minimal accuracy loss. For more information, refer to [Sparse Vector](sparse_vector.md).
+
+- Index building parameters
+
+  | Parameter        | Description                | Range        |
+  | ---------------- | -------------------------- | ------------ |
+  | `drop_ratio_build` | The proportion of small vector values that are excluded during the indexing process. This option allows fine-tuning of the indexing process, making a trade-off between efficiency and accuracy by disregarding small values when building the index.               | [0, 1] |
+
+- Search parameters
+
+    | Parameter           | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | Range  |
+    |---------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------|
+    | `drop_ratio_search` | The proportion of small vector values that are excluded during the search process. This option allows fine-tuning of the search process by specifying the ratio of the smallest values in the query vector to ignore. It helps balance search precision and performance. The smaller the value set for `drop_ratio_search`, the less these small values contribute to the final score. By ignoring some small values, search performance can be improved with minimal impact on accuracy. | [0, 1] |
 
 ## FAQ
-
 
 <details>
 <summary><font color="#4fc4f9">What is the difference between FLAT index and IVF_FLAT index?</font></summary>
@@ -378,7 +446,6 @@ Therefore, when the total number of vectors approximately equals <code>nlist</co
 See <a href="https://medium.com/unstructured-data-service/how-to-choose-an-index-in-milvus-4f3d15259212">How to Choose an Index in Milvus</a> for more information.
 </p>
 </details>
-
 
 ## What's next
 
