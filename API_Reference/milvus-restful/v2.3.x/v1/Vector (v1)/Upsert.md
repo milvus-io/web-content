@@ -6,7 +6,7 @@ Inserts one or more entities into a collection.
     <div style="display: inline-block; background: #026aca; font-size: 0.6em; border-radius: 10px; color: #ffffff; padding: 0.3em 1em;">
         <span>POST</span>
     </div>
-    <span style="font-weight: bold;">  https://${MILVUS_HOST}:${MILVUS_PORT}/v1/vector/upsert</span>
+    <span style="font-weight: bold;">  https://${MILVUS_URI}/v1/vector/upsert</span>
 </div>
 
 ## Example

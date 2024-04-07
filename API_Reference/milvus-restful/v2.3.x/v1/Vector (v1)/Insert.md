@@ -6,7 +6,7 @@ Inserts one or more entities into a collection.
     <div style="display: inline-block; background: #026aca; font-size: 0.6em; border-radius: 10px; color: #ffffff; padding: 0.3em 1em;">
         <span>POST</span>
     </div>
-    <span style="font-weight: bold;">  https://${MILVUS_HOST}:${MILVUS_PORT}/v1/vector/insert</span>
+    <span style="font-weight: bold;">  https://${MILVUS_URI}/v1/vector/insert</span>
 </div>
 
 ## Example
@@ -15,9 +15,11 @@ Inserts one or more entities into a collection.
 Insert an entity to a collection named `collection1`:
 
 ```shell
+export MILVUS_URI="http://localhost:19530"
+
+
 curl --request POST \
-     --url "${MILVUS_HOST}:${MILVUS_PORT}/v1/vector/insert" \
-     --header "Authorization: Bearer ${TOKEN}" \
+     --url "${MILVUS_URI}/v1/vector/insert" \
      --header "accept: application/json" \
      --header "content-type: application/json" \
      -d '{
@@ -33,9 +35,11 @@ curl --request POST \
 Insert multiple entities:
 
 ```shell
+export MILVUS_URI="http://localhost:19530"
+
+
 curl --request POST \
-     --url "${MILVUS_HOST}:${MILVUS_PORT}/v1/vector/insert" \
-     --header "Authorization: Bearer ${TOKEN}" \
+     --url "${MILVUS_URI}/v1/vector/insert" \
      --header "accept: application/json" \
      --header "content-type: application/json" \
      -d '{

@@ -1,32 +1,44 @@
-# Query
+# Create Collection
 
-Conducts a vector query in a collection.
+Creates a collection in a cluster.
 
 <div>
     <div style="display: inline-block; background: #026aca; font-size: 0.6em; border-radius: 10px; color: #ffffff; padding: 0.3em 1em;">
         <span>POST</span>
     </div>
-    <span style="font-weight: bold;">  https://${MILVUS_HOST}:${MILVUS_PORT}/v1/vector/query</span>
+    <span style="font-weight: bold;">  https://${MILVUS_URI}/v1/vector/collections/create</span>
 </div>
 
 ## Example
 
 
-Query entities that meet specific conditions:
+Create a collection named `medium_articles`:
 
 ```shell
+export MILVUS_URI="http://localhost:19530"
+
+
 curl --request POST \
-     --url "${MILVUS_HOST}:${MILVUS_PORT}/v1/vector/query" \
-     --header "Authorization: Bearer ${TOKEN}" \
+     --url "${MILVUS_URI}/v1/vector/collections/create" \
      --header "accept: application/json" \
      --header "content-type: application/json" \
      -d '{
+       "dbName": "default",   
        "collectionName": "medium_articles",
-       "outputFields": ["id", "title", "link"],
-       "filter": "id in [443300716234671427, 443300716234671426]",
-       "limit": 100,
-       "offset": 0
-     }'
+       "dimension": 256,
+       "metricType": "L2",
+       "primaryField": "id",
+       "vectorField": "vector"
+      }'
+```
+
+Success response:
+
+```shell
+{
+    "code": 200,
+    "data": {}
+}
 ```
 
 
@@ -45,25 +57,27 @@ curl --request POST \
 {
     "collectionName": "string",
     "dbName": "string",
-    "filter": "string",
-    "limit": "integer",
-    "offset": "integer",
-    "outputFields": []
+    "description": "string",
+    "dimension": "integer",
+    "metricType": "string",
+    "primaryField": "string",
+    "vectorField": "string"
 }
 ```
 
 | Parameter        | Description                                                                               |
 |------------------|-------------------------------------------------------------------------------------------|
-| `dbName`  | **string**<br>The name of the database.|
-| `collectionName`  | **string**(required)<br>The name of the collection to which this operation applies.|
-| `filter`  | **string**(required)<br>The filter used to find matches for the search.|
-| `limit`  | **integer**<br>The maximum number of entities to return.<br/>The sum of this value and that of `offset` should be less than **16384**.<br>The value defaults to **100**.<br>The value ranges from **1** to **100**.|
-| `offset`  | **integer**<br>The number of entities to skip in the search results.<br/>The sum of this value and that of `limit` should be less than **16384**.<br>The maximum value is **16384**.|
-| `outputFields`  | **array**<br>An array of fields to return along with the search results.|
+| `dbName`  | **string**<br>The name of the database. |
+| `collectionName`  | **string**(required)<br>The name of the collection to create.|
+| `dimension`  | **integer**(required)<br>The number of dimensions for the vector field of the collection. For performance-optimized CUs, this value ranges from 1 to 32768. For capacity-optimized and cost-optimized CUs, this value ranges from 32 to 32768.<br>The value ranges from **1** to **32768**.|
+| `metricType`  | **string**<br>The distance metric used for the collection.<br>The value defaults to **L2**.|
+| `primaryField`  | **string**<br>The primary key field.<br>The value defaults to **id**.|
+| `vectorField`  | **string**<br>The vector field.<br>The value defaults to **vector**.|
+| `description`  | **string**<br>The description of the collection|
 
 ## Response
 
-Returns the search results.
+Returns an empty object.
 
 ### Response Bodies
 
@@ -92,7 +106,7 @@ The properties in the returned response are listed in the following table.
 | Property | Description                                                                                                                                 |
 |----------|---------------------------------------------------------------------------------------------------------------------------------------------|
 | `code`   | **integer**<br>Indicates whether the request succeeds.<br><ul><li>`200`: The request succeeds.</li><li>Others: Some error occurs.</li></ul> |
-| `data`  | **array**<br>A data array of objects. |
+| `data`    | **object**<br>A data object. |
 | `message`  | **string**<br>Indicates the possible reason for the reported error. |
 
 ## Possible Errors
@@ -103,4 +117,4 @@ The properties in the returned response are listed in the following table.
 | 1800 | user hasn't authenticate |
 | 1801 | can only accept json format request |
 | 1802 | missing required parameters |
-| 1805 | fail to parse search result |
+| 1803 | fail to marshal collection schema |

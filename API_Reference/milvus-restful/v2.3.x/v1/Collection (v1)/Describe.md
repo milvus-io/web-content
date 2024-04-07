@@ -6,7 +6,7 @@ Describes the details of a collection.
     <div style="display: inline-block; background: #0d8d67; font-size: 0.6em; border-radius: 10px; color: #ffffff; padding: 0.3em 1em;">
         <span>GET</span>
     </div>
-    <span style="font-weight: bold;">  https://${MILVUS_HOST}:${MILVUS_PORT}/v1/vector/collections/describe</span>
+    <span style="font-weight: bold;">  https://${MILVUS_URI}/v1/vector/collections/describe</span>
 </div>
 
 ## Example
@@ -15,9 +15,11 @@ Describes the details of a collection.
 Describe the details of a collection named `medium_articles`:
 
 ```shell
+export MILVUS_URI="http://localhost:19530"
+
+
 curl --request GET \
-     --url "${MILVUS_HOST}:${MILVUS_PORT}/v1/vector/collections/describe?collectionName=medium_articles" \
-     --header "Authorization: Bearer ${TOKEN}" \
+     --url "${MILVUS_URI}/v1/vector/collections/describe?collectionName=medium_articles" \
      --header "accept: application/json" \
      --header "content-type: application/json"
 ```

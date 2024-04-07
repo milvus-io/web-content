@@ -106,25 +106,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "code": {
-                      "type": "integer"
-                    },
-                    "data": {
-                      "type": "object",
-                      "x-apifox-orders": [],
-                      "properties": {},
-                      "x-apifox-ignore-properties": [],
-                      "x-apifox-folder": "Schemas"
-                    }
-                  },
-                  "x-apifox-orders": [
-                    "code",
-                    "data"
-                  ],
-                  "x-apifox-ignore-properties": [],
-                  "x-apifox-folder": "Schemas"
+                  "$ref": "#/components/schemas/httpapi.GenericResp-customer_DeleteResp"
                 },
                 "examples": {
                   "1": {
@@ -237,50 +219,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "code": {
-                      "type": "integer"
-                    },
-                    "data": {
-                      "type": "object",
-                      "properties": {
-                        "insertCount": {
-                          "type": "integer",
-                          "examples": [
-                            4
-                          ],
-                          "description": "The number of inserted entities."
-                        },
-                        "insertIds": {
-                          "type": "array",
-                          "items": {
-                            "type": "string"
-                          },
-                          "examples": [
-                            [
-                              "['id1'",
-                              " 'id2'",
-                              " 'id3']"
-                            ]
-                          ],
-                          "description": "An array of the IDs of inserted entities."
-                        }
-                      },
-                      "x-apifox-orders": [
-                        "insertCount",
-                        "insertIds"
-                      ],
-                      "x-apifox-ignore-properties": [],
-                      "x-apifox-folder": "Schemas"
-                    }
-                  },
-                  "x-apifox-orders": [
-                    "code",
-                    "data"
-                  ],
-                  "x-apifox-ignore-properties": [],
-                  "x-apifox-folder": "Schemas"
+                  "$ref": "#/components/schemas/httpapi.GenericResp-customer_InsertResp"
                 },
                 "examples": {
                   "1": {
@@ -486,27 +425,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "dbName": {
-                    "type": "string",
-                    "description": "The name of the database in which to check the existence of a collection."
-                  },
-                  "collectionName": {
-                    "type": "string",
-                    "description": "The name of an existing collection."
-                  }
-                },
-                "x-apifox-orders": [
-                  "dbName",
-                  "collectionName"
-                ],
-                "required": [
-                  "dbName",
-                  "collectionName"
-                ],
-                "x-apifox-ignore-properties": [],
-                "x-apifox-folder": "httpRequest"
+                "$ref": "#/components/schemas/hasReq"
               }
             }
           }
@@ -517,65 +436,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "x-apifox-refs": {
-                    "01HHH35TZX2TCVTZBQKXKX6K2A": {
-                      "x-apifox-overrides": {
-                        "data": {
-                          "type": "object",
-                          "properties": {
-                            "rowCount": {
-                              "type": "integer"
-                            }
-                          },
-                          "x-apifox-orders": [
-                            "rowCount"
-                          ],
-                          "required": [
-                            "rowCount"
-                          ]
-                        }
-                      },
-                      "required": [
-                        "data"
-                      ],
-                      "type": "object",
-                      "properties": {}
-                    }
-                  },
-                  "x-apifox-orders": [
-                    "01HHH35TZX2TCVTZBQKXKX6K2A",
-                    "code",
-                    "data"
-                  ],
-                  "properties": {
-                    "code": {
-                      "type": "integer",
-                      "x-apifox-folder": ""
-                    },
-                    "data": {
-                      "type": "object",
-                      "properties": {
-                        "has": {
-                          "type": "boolean",
-                          "description": "A boolean value indicates whether the specified partition exists."
-                        }
-                      },
-                      "x-apifox-orders": [
-                        "has"
-                      ],
-                      "required": [
-                        "has"
-                      ],
-                      "x-apifox-ignore-properties": []
-                    }
-                  },
-                  "required": [
-                    "code",
-                    "data"
-                  ],
-                  "x-apifox-ignore-properties": [],
-                  "x-apifox-folder": "httpReturn"
+                  "$ref": "#/components/schemas/Has"
                 },
                 "examples": {
                   "1": {
@@ -603,26 +464,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "code": {
-                      "type": "integer",
-                      "x-apifox-folder": ""
-                    },
-                    "message": {
-                      "type": "string"
-                    }
-                  },
-                  "x-apifox-orders": [
-                    "code",
-                    "message"
-                  ],
-                  "required": [
-                    "code",
-                    "message"
-                  ],
-                  "x-apifox-ignore-properties": [],
-                  "x-apifox-folder": "httpReturn"
+                  "$ref": "#/components/schemas/Message"
                 }
               }
             }
@@ -671,46 +513,8 @@
                 "type": "object",
                 "x-apifox-refs": {
                   "01HK7J1JFBPZZW9W62DMMBS7FF": {
-                    "x-apifox-overrides": {},
-                    "type": "object",
-                    "properties": {
-                      "dbName": {
-                        "type": "string",
-                        "description": "The name of the database to which the collection belongs.\nSetting this to a non-existing database results in a **MilvusException**."
-                      },
-                      "collectionName": {
-                        "type": "string",
-                        "description": "The name of the target collection.\nSetting this to a non-existing collection results in a **MilvusException**."
-                      }
-                    },
-                    "x-apifox-orders": [
-                      "01HHHAGCVE37R139X5S96YXH0Z",
-                      "collectionName"
-                    ],
-                    "required": [
-                      "collectionName"
-                    ],
-                    "x-apifox-refs": {
-                      "01HHHAGCVE37R139X5S96YXH0Z": {
-                        "x-apifox-overrides": {},
-                        "type": "object",
-                        "properties": {
-                          "dbName": {
-                            "type": "string",
-                            "description": "The name of the database to which the collection belongs.\nSetting this to a non-existing database results in a **MilvusException**."
-                          }
-                        },
-                        "x-apifox-orders": [
-                          "dbName"
-                        ],
-                        "x-apifox-ignore-properties": [],
-                        "x-apifox-folder": "httpRequest"
-                      }
-                    },
-                    "x-apifox-ignore-properties": [
-                      "dbName"
-                    ],
-                    "x-apifox-folder": "httpRequest"
+                    "$ref": "#/components/schemas/CollectionName",
+                    "x-apifox-overrides": {}
                   }
                 },
                 "properties": {
@@ -754,30 +558,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "x-apifox-refs": {},
-                  "x-apifox-orders": [
-                    "code",
-                    "data"
-                  ],
-                  "properties": {
-                    "code": {
-                      "type": "integer",
-                      "x-apifox-folder": ""
-                    },
-                    "data": {
-                      "type": "object",
-                      "properties": {},
-                      "x-apifox-orders": [],
-                      "x-apifox-ignore-properties": []
-                    }
-                  },
-                  "required": [
-                    "code",
-                    "data"
-                  ],
-                  "x-apifox-ignore-properties": [],
-                  "x-apifox-folder": "httpReturn"
+                  "$ref": "#/components/schemas/code%3A%20OK"
                 },
                 "examples": {
                   "1": {
@@ -832,27 +613,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "dbName": {
-                    "type": "string",
-                    "description": "The name of the database which the collection belongs to. Setting this to a non-existing database results in an error."
-                  },
-                  "collectionName": {
-                    "type": "string",
-                    "description": "The name of the collection to check.\nSetting this to a non-existing database results in an error."
-                  }
-                },
-                "x-apifox-orders": [
-                  "dbName",
-                  "collectionName"
-                ],
-                "required": [
-                  "dbName",
-                  "collectionName"
-                ],
-                "x-apifox-ignore-properties": [],
-                "x-apifox-folder": "httpRequest"
+                "$ref": "#/components/schemas/getStatsReq"
               }
             }
           }
@@ -863,65 +624,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "x-apifox-refs": {
-                    "01HHH317CQPQ10K4E3XHXH1Q1P": {
-                      "x-apifox-overrides": {
-                        "data": {
-                          "type": "object",
-                          "properties": {
-                            "rowCount": {
-                              "type": "integer"
-                            }
-                          },
-                          "x-apifox-orders": [
-                            "rowCount"
-                          ],
-                          "required": [
-                            "rowCount"
-                          ]
-                        }
-                      },
-                      "required": [
-                        "data"
-                      ],
-                      "type": "object",
-                      "properties": {}
-                    }
-                  },
-                  "x-apifox-orders": [
-                    "01HHH317CQPQ10K4E3XHXH1Q1P",
-                    "code",
-                    "data"
-                  ],
-                  "properties": {
-                    "code": {
-                      "type": "integer",
-                      "x-apifox-folder": ""
-                    },
-                    "data": {
-                      "type": "object",
-                      "properties": {
-                        "rowCount": {
-                          "type": "integer",
-                          "description": "The number of entities."
-                        }
-                      },
-                      "x-apifox-orders": [
-                        "rowCount"
-                      ],
-                      "required": [
-                        "rowCount"
-                      ],
-                      "x-apifox-ignore-properties": []
-                    }
-                  },
-                  "required": [
-                    "code",
-                    "data"
-                  ],
-                  "x-apifox-ignore-properties": [],
-                  "x-apifox-folder": "httpReturn"
+                  "$ref": "#/components/schemas/rowCount-collection%2Fpartition"
                 },
                 "examples": {
                   "1": {
@@ -942,26 +645,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "code": {
-                      "type": "integer",
-                      "x-apifox-folder": ""
-                    },
-                    "message": {
-                      "type": "string"
-                    }
-                  },
-                  "x-apifox-orders": [
-                    "code",
-                    "message"
-                  ],
-                  "required": [
-                    "code",
-                    "message"
-                  ],
-                  "x-apifox-ignore-properties": [],
-                  "x-apifox-folder": "httpReturn"
+                  "$ref": "#/components/schemas/Message"
                 }
               }
             }
@@ -1065,50 +749,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "code": {
-                      "type": "integer"
-                    },
-                    "data": {
-                      "type": "object",
-                      "properties": {
-                        "upsertCount": {
-                          "type": "integer",
-                          "examples": [
-                            4
-                          ],
-                          "description": "The number of inserted entities."
-                        },
-                        "upsertIds": {
-                          "type": "array",
-                          "items": {
-                            "type": "string"
-                          },
-                          "examples": [
-                            [
-                              "['id1'",
-                              " 'id2'",
-                              " 'id3']"
-                            ]
-                          ],
-                          "description": "An array of the IDs of inserted entities."
-                        }
-                      },
-                      "x-apifox-refs": {},
-                      "x-apifox-orders": [
-                        "upsertCount",
-                        "upsertIds"
-                      ],
-                      "x-apifox-ignore-properties": []
-                    }
-                  },
-                  "x-apifox-orders": [
-                    "code",
-                    "data"
-                  ],
-                  "x-apifox-ignore-properties": [],
-                  "x-apifox-folder": "Schemas"
+                  "$ref": "#/components/schemas/httpapi.GenericResp-customer_UpsertResp"
                 }
               }
             }
@@ -1320,18 +961,7 @@
                   "vector": {
                     "type": "array",
                     "items": {
-                      "type": "array",
-                      "items": {
-                        "anyOf": [
-                          {
-                            "type": "integer"
-                          },
-                          {
-                            "type": "string"
-                          }
-                        ]
-                      },
-                      "x-apifox-folder": ""
+                      "$ref": "#/components/schemas/vector"
                     },
                     "description": "A list of vector embeddings.\n<include target=\"milvus\">Milvus</include><include target=\"zilliz\">Zilliz Cloud</include> searches for the most similar vector embeddings to the specified ones."
                   },
@@ -1363,23 +993,7 @@
                   },
                   "searchParams": {
                     "description": " The parameter settings specific to this operation.\n- **metric_type** (*str*) -\n  -   The metric type applied to this operation. This should be the same as the one used when you index the vector field specified above. \n  -   Possible values are **L2**, **IP**, and **COSINE**.\n- **params** (dict) -\n  -   Additional parameters\n  - **radius** (float) -\n    -    Determines the threshold of least similarity. When setting `metric_type` to `L2`, ensure that this value is greater than that of **range_filter**. Otherwise, this value should be lower than that of **range_filter**. \n  - **range_filter**  (float) -  \n    -    Refines the search to vectors within a specific similarity range. When setting `metric_type` to `IP` or `COSINE`, ensure that this value is greater than that of **radius**. Otherwise, this value should be lower than that of **radius**. \n<include target=\"milvus\">\nFor details on other applicable search parameters, refer to [In-memory Index](https://milvus.io/docs/index.md) and [On-disk Index](https://milvus.io/docs/disk_index.md).\n</include>\n<include target=\"zilliz\">\nFor details on other applicable search parameters, read [AUTOINDEX Explained](https://docs.zilliz.com/docs/autoindex-explained) to get more.\n</include>",
-                    "type": "object",
-                    "properties": {
-                      "radius": {
-                        "type": "integer",
-                        "description": "      Determines the threshold of least similarity. When setting metric_type to L2, ensure that this value is greater than that of range_filter. Otherwise, this value should be lower than that of range_filter. "
-                      },
-                      "range_filter": {
-                        "type": "integer",
-                        "description": "      Refines the search to vectors within a specific similarity range. When setting metric_type to IP or COSINE, ensure that this value is greater than that of radius. Otherwise, this value should be lower than that of radius. "
-                      }
-                    },
-                    "x-apifox-orders": [
-                      "radius",
-                      "range_filter"
-                    ],
-                    "x-apifox-ignore-properties": [],
-                    "x-apifox-folder": ""
+                    "$ref": "#/components/schemas/search-params"
                   },
                   "partitionNames": {
                     "type": "array",
@@ -1545,8 +1159,7 @@
                   "type": "object",
                   "properties": {
                     "code": {
-                      "type": "integer",
-                      "x-apifox-folder": ""
+                      "$ref": "#/components/schemas/httpReturnCode"
                     },
                     "data": {
                       "type": "array",
@@ -1623,78 +1236,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "x-apifox-refs": {
-                  "01HHHAJ1WWBFQ6P0EGBKMR7GEP": {
-                    "x-apifox-overrides": {},
-                    "type": "object",
-                    "properties": {
-                      "dbName": {
-                        "type": "string",
-                        "description": "The name of the database to which the collection belongs.\nSetting this to a non-existing database results in a **MilvusException**."
-                      },
-                      "collectionName": {
-                        "type": "string",
-                        "description": "The name of the target collection.\nSetting this to a non-existing collection results in a **MilvusException**."
-                      }
-                    },
-                    "x-apifox-orders": [
-                      "01HHHAGCVE37R139X5S96YXH0Z",
-                      "collectionName"
-                    ],
-                    "required": [
-                      "collectionName"
-                    ],
-                    "x-apifox-refs": {
-                      "01HHHAGCVE37R139X5S96YXH0Z": {
-                        "x-apifox-overrides": {},
-                        "type": "object",
-                        "properties": {
-                          "dbName": {
-                            "type": "string",
-                            "description": "The name of the database to which the collection belongs.\nSetting this to a non-existing database results in a **MilvusException**."
-                          }
-                        },
-                        "x-apifox-orders": [
-                          "dbName"
-                        ],
-                        "x-apifox-ignore-properties": [],
-                        "x-apifox-folder": "httpRequest"
-                      }
-                    },
-                    "x-apifox-ignore-properties": [
-                      "dbName"
-                    ],
-                    "x-apifox-folder": "httpRequest"
-                  }
-                },
-                "properties": {
-                  "dbName": {
-                    "type": "string",
-                    "description": "The name of the database to which the collection belongs.\nSetting this to a non-existing database results in a **MilvusException**."
-                  },
-                  "collectionName": {
-                    "type": "string",
-                    "description": "The name of the target collection.\nSetting this to a non-existing collection results in a **MilvusException**."
-                  },
-                  "partitionName": {
-                    "type": "string",
-                    "description": "The name of the target parition."
-                  }
-                },
-                "required": [
-                  "partitionName",
-                  "collectionName"
-                ],
-                "x-apifox-orders": [
-                  "01HHHAJ1WWBFQ6P0EGBKMR7GEP",
-                  "partitionName"
-                ],
-                "x-apifox-ignore-properties": [
-                  "dbName",
-                  "collectionName"
-                ],
-                "x-apifox-folder": "httpRequest"
+                "$ref": "#/components/schemas/PartitionName"
               }
             }
           }
@@ -1705,30 +1247,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "x-apifox-refs": {},
-                  "x-apifox-orders": [
-                    "code",
-                    "data"
-                  ],
-                  "properties": {
-                    "code": {
-                      "type": "integer",
-                      "x-apifox-folder": ""
-                    },
-                    "data": {
-                      "type": "object",
-                      "properties": {},
-                      "x-apifox-orders": [],
-                      "x-apifox-ignore-properties": []
-                    }
-                  },
-                  "required": [
-                    "code",
-                    "data"
-                  ],
-                  "x-apifox-ignore-properties": [],
-                  "x-apifox-folder": "httpReturn"
+                  "$ref": "#/components/schemas/code%3A%20OK"
                 },
                 "examples": {
                   "1": {
@@ -1783,78 +1302,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "x-apifox-refs": {
-                  "01HHHAJ1WWBFQ6P0EGBKMR7GEP": {
-                    "x-apifox-overrides": {},
-                    "type": "object",
-                    "properties": {
-                      "dbName": {
-                        "type": "string",
-                        "description": "The name of the database to which the collection belongs.\nSetting this to a non-existing database results in a **MilvusException**."
-                      },
-                      "collectionName": {
-                        "type": "string",
-                        "description": "The name of the target collection.\nSetting this to a non-existing collection results in a **MilvusException**."
-                      }
-                    },
-                    "x-apifox-orders": [
-                      "01HHHAGCVE37R139X5S96YXH0Z",
-                      "collectionName"
-                    ],
-                    "required": [
-                      "collectionName"
-                    ],
-                    "x-apifox-refs": {
-                      "01HHHAGCVE37R139X5S96YXH0Z": {
-                        "x-apifox-overrides": {},
-                        "type": "object",
-                        "properties": {
-                          "dbName": {
-                            "type": "string",
-                            "description": "The name of the database to which the collection belongs.\nSetting this to a non-existing database results in a **MilvusException**."
-                          }
-                        },
-                        "x-apifox-orders": [
-                          "dbName"
-                        ],
-                        "x-apifox-ignore-properties": [],
-                        "x-apifox-folder": "httpRequest"
-                      }
-                    },
-                    "x-apifox-ignore-properties": [
-                      "dbName"
-                    ],
-                    "x-apifox-folder": "httpRequest"
-                  }
-                },
-                "properties": {
-                  "dbName": {
-                    "type": "string",
-                    "description": "The name of the database to which the collection belongs.\nSetting this to a non-existing database results in a **MilvusException**."
-                  },
-                  "collectionName": {
-                    "type": "string",
-                    "description": "The name of the target collection.\nSetting this to a non-existing collection results in a **MilvusException**."
-                  },
-                  "partitionName": {
-                    "type": "string",
-                    "description": "The name of the target parition."
-                  }
-                },
-                "required": [
-                  "partitionName",
-                  "collectionName"
-                ],
-                "x-apifox-orders": [
-                  "01HHHAJ1WWBFQ6P0EGBKMR7GEP",
-                  "partitionName"
-                ],
-                "x-apifox-ignore-properties": [
-                  "dbName",
-                  "collectionName"
-                ],
-                "x-apifox-folder": "httpRequest"
+                "$ref": "#/components/schemas/PartitionName"
               }
             }
           }
@@ -1865,30 +1313,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "x-apifox-refs": {},
-                  "x-apifox-orders": [
-                    "code",
-                    "data"
-                  ],
-                  "properties": {
-                    "code": {
-                      "type": "integer",
-                      "x-apifox-folder": ""
-                    },
-                    "data": {
-                      "type": "object",
-                      "properties": {},
-                      "x-apifox-orders": [],
-                      "x-apifox-ignore-properties": []
-                    }
-                  },
-                  "required": [
-                    "code",
-                    "data"
-                  ],
-                  "x-apifox-ignore-properties": [],
-                  "x-apifox-folder": "httpReturn"
+                  "$ref": "#/components/schemas/code%3A%20OK"
                 }
               }
             }
@@ -1934,49 +1359,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "userName": {
-                    "type": "string",
-                    "description": "The name of the target user. The value should start with a letter and can only contain underline, letters and numbers."
-                  },
-                  "password": {
-                    "type": "string",
-                    "description": "The corresponding password to the new user to create. \nThe password must be a string of 8 to 64 characters and must include at least three of the following character types: uppercase letters, lowercase letters, numbers, and special characters."
-                  }
-                },
-                "x-apifox-orders": [
-                  "01HHKX7XPAX9WZ7W4GJJ2W1FXY",
-                  "password"
-                ],
-                "required": [
-                  "password",
-                  "userName"
-                ],
-                "x-apifox-refs": {
-                  "01HHKX7XPAX9WZ7W4GJJ2W1FXY": {
-                    "x-apifox-overrides": {},
-                    "type": "object",
-                    "properties": {
-                      "userName": {
-                        "type": "string",
-                        "description": "The name of the target user. The value should start with a letter and can only contain underline, letters and numbers."
-                      }
-                    },
-                    "x-apifox-orders": [
-                      "userName"
-                    ],
-                    "required": [
-                      "userName"
-                    ],
-                    "x-apifox-ignore-properties": [],
-                    "x-apifox-folder": "httpRequest"
-                  }
-                },
-                "x-apifox-ignore-properties": [
-                  "userName"
-                ],
-                "x-apifox-folder": "httpRequest"
+                "$ref": "#/components/schemas/Password"
               }
             }
           }
@@ -1987,30 +1370,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "x-apifox-refs": {},
-                  "x-apifox-orders": [
-                    "code",
-                    "data"
-                  ],
-                  "properties": {
-                    "code": {
-                      "type": "integer",
-                      "x-apifox-folder": ""
-                    },
-                    "data": {
-                      "type": "object",
-                      "properties": {},
-                      "x-apifox-orders": [],
-                      "x-apifox-ignore-properties": []
-                    }
-                  },
-                  "required": [
-                    "code",
-                    "data"
-                  ],
-                  "x-apifox-ignore-properties": [],
-                  "x-apifox-folder": "httpReturn"
+                  "$ref": "#/components/schemas/code%3A%20OK"
                 },
                 "examples": {
                   "1": {
@@ -2065,82 +1425,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "userName": {
-                    "type": "string",
-                    "description": "The name of the target user. The value should start with a letter and can only contain underline, letters and numbers."
-                  },
-                  "password": {
-                    "type": "string",
-                    "description": "The corresponding password to the new user to create. \nThe password must be a string of 8 to 64 characters and must include at least three of the following character types: uppercase letters, lowercase letters, numbers, and special characters."
-                  },
-                  "newPassword": {
-                    "type": "string",
-                    "description": "The new password for the specified user.    The password must be a string of 8 to 64 characters and must include at least three of the following character types: uppercase letters, lowercase letters, numbers, and special characters."
-                  }
-                },
-                "x-apifox-orders": [
-                  "01HHKX9JA6N05F6TE4NMG46P4X",
-                  "newPassword"
-                ],
-                "required": [
-                  "newPassword",
-                  "userName",
-                  "password"
-                ],
-                "x-apifox-refs": {
-                  "01HHKX9JA6N05F6TE4NMG46P4X": {
-                    "type": "object",
-                    "properties": {
-                      "userName": {
-                        "type": "string",
-                        "description": "The name of the target user. The value should start with a letter and can only contain underline, letters and numbers."
-                      },
-                      "password": {
-                        "type": "string",
-                        "description": "The corresponding password to the new user to create. \nThe password must be a string of 8 to 64 characters and must include at least three of the following character types: uppercase letters, lowercase letters, numbers, and special characters."
-                      }
-                    },
-                    "x-apifox-orders": [
-                      "01HHKX7XPAX9WZ7W4GJJ2W1FXY",
-                      "password"
-                    ],
-                    "required": [
-                      "password",
-                      "userName"
-                    ],
-                    "x-apifox-refs": {
-                      "01HHKX7XPAX9WZ7W4GJJ2W1FXY": {
-                        "x-apifox-overrides": {},
-                        "type": "object",
-                        "properties": {
-                          "userName": {
-                            "type": "string",
-                            "description": "The name of the target user. The value should start with a letter and can only contain underline, letters and numbers."
-                          }
-                        },
-                        "x-apifox-orders": [
-                          "userName"
-                        ],
-                        "required": [
-                          "userName"
-                        ],
-                        "x-apifox-ignore-properties": [],
-                        "x-apifox-folder": "httpRequest"
-                      }
-                    },
-                    "x-apifox-ignore-properties": [
-                      "userName"
-                    ],
-                    "x-apifox-folder": "httpRequest"
-                  }
-                },
-                "x-apifox-ignore-properties": [
-                  "userName",
-                  "password"
-                ],
-                "x-apifox-folder": "httpRequest"
+                "$ref": "#/components/schemas/NewPassword"
               }
             }
           }
@@ -2151,30 +1436,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "x-apifox-refs": {},
-                  "x-apifox-orders": [
-                    "code",
-                    "data"
-                  ],
-                  "properties": {
-                    "code": {
-                      "type": "integer",
-                      "x-apifox-folder": ""
-                    },
-                    "data": {
-                      "type": "object",
-                      "properties": {},
-                      "x-apifox-orders": [],
-                      "x-apifox-ignore-properties": []
-                    }
-                  },
-                  "required": [
-                    "code",
-                    "data"
-                  ],
-                  "x-apifox-ignore-properties": [],
-                  "x-apifox-folder": "httpReturn"
+                  "$ref": "#/components/schemas/code%3A%20OK"
                 },
                 "examples": {
                   "1": {
@@ -2229,22 +1491,8 @@
           "content": {
             "application/json": {
               "schema": {
-                "x-apifox-overrides": {},
-                "type": "object",
-                "properties": {
-                  "userName": {
-                    "type": "string",
-                    "description": "The name of the target user. The value should start with a letter and can only contain underline, letters and numbers."
-                  }
-                },
-                "x-apifox-orders": [
-                  "userName"
-                ],
-                "required": [
-                  "userName"
-                ],
-                "x-apifox-ignore-properties": [],
-                "x-apifox-folder": "httpRequest"
+                "$ref": "#/components/schemas/UserName",
+                "x-apifox-overrides": {}
               }
             }
           }
@@ -2255,30 +1503,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "x-apifox-refs": {},
-                  "x-apifox-orders": [
-                    "code",
-                    "data"
-                  ],
-                  "properties": {
-                    "code": {
-                      "type": "integer",
-                      "x-apifox-folder": ""
-                    },
-                    "data": {
-                      "type": "object",
-                      "properties": {},
-                      "x-apifox-orders": [],
-                      "x-apifox-ignore-properties": []
-                    }
-                  },
-                  "required": [
-                    "code",
-                    "data"
-                  ],
-                  "x-apifox-ignore-properties": [],
-                  "x-apifox-folder": "httpReturn"
+                  "$ref": "#/components/schemas/code%3A%20OK"
                 },
                 "examples": {
                   "1": {
@@ -2360,8 +1585,7 @@
                   "type": "object",
                   "properties": {
                     "code": {
-                      "type": "integer",
-                      "x-apifox-folder": ""
+                      "$ref": "#/components/schemas/httpReturnCode"
                     },
                     "data": {
                       "type": "array",
@@ -2443,8 +1667,7 @@
                   "type": "object",
                   "properties": {
                     "code": {
-                      "type": "integer",
-                      "x-apifox-folder": ""
+                      "$ref": "#/components/schemas/httpReturnCode"
                     },
                     "data": {
                       "type": "array",
@@ -2521,49 +1744,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "x-apifox-refs": {
-                  "01HHM2QS57QE5706K1CDHNZ6SV": {
-                    "x-apifox-overrides": {},
-                    "type": "object",
-                    "properties": {
-                      "userName": {
-                        "type": "string",
-                        "description": "The name of the target user. The value should start with a letter and can only contain underline, letters and numbers."
-                      }
-                    },
-                    "x-apifox-orders": [
-                      "userName"
-                    ],
-                    "required": [
-                      "userName"
-                    ],
-                    "x-apifox-ignore-properties": [],
-                    "x-apifox-folder": "httpRequest"
-                  }
-                },
-                "properties": {
-                  "userName": {
-                    "type": "string",
-                    "description": "The name of the target user. The value should start with a letter and can only contain underline, letters and numbers."
-                  },
-                  "roleName": {
-                    "type": "string",
-                    "description": "The name of the target role."
-                  }
-                },
-                "required": [
-                  "roleName",
-                  "userName"
-                ],
-                "x-apifox-orders": [
-                  "01HHM2QS57QE5706K1CDHNZ6SV",
-                  "roleName"
-                ],
-                "x-apifox-ignore-properties": [
-                  "userName"
-                ],
-                "x-apifox-folder": "httpRequest"
+                "$ref": "#/components/schemas/Role%26User"
               }
             }
           }
@@ -2574,30 +1755,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "x-apifox-refs": {},
-                  "x-apifox-orders": [
-                    "code",
-                    "data"
-                  ],
-                  "properties": {
-                    "code": {
-                      "type": "integer",
-                      "x-apifox-folder": ""
-                    },
-                    "data": {
-                      "type": "object",
-                      "properties": {},
-                      "x-apifox-orders": [],
-                      "x-apifox-ignore-properties": []
-                    }
-                  },
-                  "required": [
-                    "code",
-                    "data"
-                  ],
-                  "x-apifox-ignore-properties": [],
-                  "x-apifox-folder": "httpReturn"
+                  "$ref": "#/components/schemas/code%3A%20OK"
                 },
                 "examples": {
                   "1": {
@@ -2666,30 +1824,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "code": {
-                      "type": "integer",
-                      "x-apifox-folder": ""
-                    },
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "type": "string",
-                        "description": "A list of item objects."
-                      }
-                    }
-                  },
-                  "x-apifox-orders": [
-                    "code",
-                    "data"
-                  ],
-                  "required": [
-                    "code",
-                    "data"
-                  ],
-                  "x-apifox-ignore-properties": [],
-                  "x-apifox-folder": "httpReturn"
+                  "$ref": "#/components/schemas/Names-collection%2Fpartition%2Fuser%2Frole%2Findex%2Falias"
                 },
                 "examples": {
                   "1": {
@@ -2747,22 +1882,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "x-apifox-refs": {},
-                "properties": {
-                  "roleName": {
-                    "type": "string",
-                    "description": "The name of the role."
-                  }
-                },
-                "required": [
-                  "roleName"
-                ],
-                "x-apifox-orders": [
-                  "roleName"
-                ],
-                "x-apifox-ignore-properties": [],
-                "x-apifox-folder": "httpRequest"
+                "$ref": "#/components/schemas/RoleName"
               }
             }
           }
@@ -2773,67 +1893,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "code": {
-                      "type": "integer",
-                      "x-apifox-folder": ""
-                    },
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "object_type": {
-                            "type": "string",
-                            "description": "  The type of the object to which the privilege belongs."
-                          },
-                          "privilege": {
-                            "type": "string",
-                            "description": "  The privilege that is granted to the role."
-                          },
-                          "object_name": {
-                            "type": "string",
-                            "description": "  The name of the object to which the role is granted the specified privilege."
-                          },
-                          "db_name": {
-                            "type": "string",
-                            "description": "  The name of the database in which this operation has been executed."
-                          },
-                          "grantor": {
-                            "type": "string",
-                            "description": "  The name of the user who granted a specific role to a user."
-                          }
-                        },
-                        "required": [
-                          "object_type",
-                          "privilege",
-                          "object_name",
-                          "db_name"
-                        ],
-                        "x-apifox-orders": [
-                          "object_type",
-                          "privilege",
-                          "object_name",
-                          "db_name",
-                          "grantor"
-                        ],
-                        "x-apifox-ignore-properties": [],
-                        "x-apifox-folder": ""
-                      },
-                      "description": "A list of privilege items."
-                    }
-                  },
-                  "x-apifox-orders": [
-                    "code",
-                    "data"
-                  ],
-                  "required": [
-                    "code",
-                    "data"
-                  ],
-                  "x-apifox-ignore-properties": [],
-                  "x-apifox-folder": "httpReturn"
+                  "$ref": "#/components/schemas/Privileges"
                 },
                 "examples": {
                   "1": {
@@ -2910,22 +1970,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "x-apifox-refs": {},
-                "properties": {
-                  "roleName": {
-                    "type": "string",
-                    "description": "The name of the role."
-                  }
-                },
-                "required": [
-                  "roleName"
-                ],
-                "x-apifox-orders": [
-                  "roleName"
-                ],
-                "x-apifox-ignore-properties": [],
-                "x-apifox-folder": "httpRequest"
+                "$ref": "#/components/schemas/RoleName"
               }
             }
           }
@@ -2936,30 +1981,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "x-apifox-refs": {},
-                  "x-apifox-orders": [
-                    "code",
-                    "data"
-                  ],
-                  "properties": {
-                    "code": {
-                      "type": "integer",
-                      "x-apifox-folder": ""
-                    },
-                    "data": {
-                      "type": "object",
-                      "properties": {},
-                      "x-apifox-orders": [],
-                      "x-apifox-ignore-properties": []
-                    }
-                  },
-                  "required": [
-                    "code",
-                    "data"
-                  ],
-                  "x-apifox-ignore-properties": [],
-                  "x-apifox-folder": "httpReturn"
+                  "$ref": "#/components/schemas/code%3A%20OK"
                 },
                 "examples": {
                   "1": {
@@ -3014,22 +2036,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "x-apifox-refs": {},
-                "properties": {
-                  "roleName": {
-                    "type": "string",
-                    "description": "The name of the role."
-                  }
-                },
-                "required": [
-                  "roleName"
-                ],
-                "x-apifox-orders": [
-                  "roleName"
-                ],
-                "x-apifox-ignore-properties": [],
-                "x-apifox-folder": "httpRequest"
+                "$ref": "#/components/schemas/RoleName"
               }
             }
           }
@@ -3040,30 +2047,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "x-apifox-refs": {},
-                  "x-apifox-orders": [
-                    "code",
-                    "data"
-                  ],
-                  "properties": {
-                    "code": {
-                      "type": "integer",
-                      "x-apifox-folder": ""
-                    },
-                    "data": {
-                      "type": "object",
-                      "properties": {},
-                      "x-apifox-orders": [],
-                      "x-apifox-ignore-properties": []
-                    }
-                  },
-                  "required": [
-                    "code",
-                    "data"
-                  ],
-                  "x-apifox-ignore-properties": [],
-                  "x-apifox-folder": "httpReturn"
+                  "$ref": "#/components/schemas/code%3A%20OK"
                 },
                 "examples": {
                   "1": {
@@ -3121,22 +2105,7 @@
                 "type": "object",
                 "x-apifox-refs": {
                   "01HKM81R4X4ZPQNGM4CEBWV263": {
-                    "type": "object",
-                    "x-apifox-refs": {},
-                    "properties": {
-                      "roleName": {
-                        "type": "string",
-                        "description": "The name of the role."
-                      }
-                    },
-                    "required": [
-                      "roleName"
-                    ],
-                    "x-apifox-orders": [
-                      "roleName"
-                    ],
-                    "x-apifox-ignore-properties": [],
-                    "x-apifox-folder": "httpRequest"
+                    "$ref": "#/components/schemas/RoleName"
                   }
                 },
                 "properties": {
@@ -3182,30 +2151,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "x-apifox-refs": {},
-                  "x-apifox-orders": [
-                    "code",
-                    "data"
-                  ],
-                  "properties": {
-                    "code": {
-                      "type": "integer",
-                      "x-apifox-folder": ""
-                    },
-                    "data": {
-                      "type": "object",
-                      "properties": {},
-                      "x-apifox-orders": [],
-                      "x-apifox-ignore-properties": []
-                    }
-                  },
-                  "required": [
-                    "code",
-                    "data"
-                  ],
-                  "x-apifox-ignore-properties": [],
-                  "x-apifox-folder": "httpReturn"
+                  "$ref": "#/components/schemas/code%3A%20OK"
                 },
                 "examples": {
                   "1": {
@@ -3263,46 +2209,8 @@
                 "type": "object",
                 "x-apifox-refs": {
                   "01HHP4HPBXF5B9P9A41EN5E9VJ": {
-                    "x-apifox-overrides": {},
-                    "type": "object",
-                    "properties": {
-                      "dbName": {
-                        "type": "string",
-                        "description": "The name of the database to which the collection belongs.\nSetting this to a non-existing database results in a **MilvusException**."
-                      },
-                      "collectionName": {
-                        "type": "string",
-                        "description": "The name of the target collection.\nSetting this to a non-existing collection results in a **MilvusException**."
-                      }
-                    },
-                    "x-apifox-orders": [
-                      "01HHHAGCVE37R139X5S96YXH0Z",
-                      "collectionName"
-                    ],
-                    "required": [
-                      "collectionName"
-                    ],
-                    "x-apifox-refs": {
-                      "01HHHAGCVE37R139X5S96YXH0Z": {
-                        "x-apifox-overrides": {},
-                        "type": "object",
-                        "properties": {
-                          "dbName": {
-                            "type": "string",
-                            "description": "The name of the database to which the collection belongs.\nSetting this to a non-existing database results in a **MilvusException**."
-                          }
-                        },
-                        "x-apifox-orders": [
-                          "dbName"
-                        ],
-                        "x-apifox-ignore-properties": [],
-                        "x-apifox-folder": "httpRequest"
-                      }
-                    },
-                    "x-apifox-ignore-properties": [
-                      "dbName"
-                    ],
-                    "x-apifox-folder": "httpRequest"
+                    "$ref": "#/components/schemas/CollectionName",
+                    "x-apifox-overrides": {}
                   }
                 },
                 "properties": {
@@ -3317,67 +2225,7 @@
                   "indexParams": {
                     "type": "array",
                     "items": {
-                      "type": "object",
-                      "properties": {
-                        "metricType": {
-                          "type": "string",
-                          "description": "The similarity metric type used to build the index.\nPossible values for float vector embeddings.\n- For an Milvus instance, possible values are **L2**, **IP**, and **COSINE**, and those for binary vector embeddings are **Jaccard** and **Hamming**.  For details, refer to [Similarity Metrics](https://milvus.io/docs/metric.md).\n- For a Zilliz Cloud cluster, possible values are **L2**, **IP**, and **COSINE**. Read [Similarity Metrics Explained](https://docs.zilliz.com/docs/search-metrics-explained) to get more."
-                        },
-                        "fieldName": {
-                          "type": "string",
-                          "description": "The name of the target field on which an index is to be created."
-                        },
-                        "indexName": {
-                          "type": "string",
-                          "description": "The name of the index to create, the value defaults to the target field name."
-                        },
-                        "indexConfig": {
-                          "description": "The index type and related settings. For details, refer to [Vector Indexes](https://milvus.io/docs/index.md).",
-                          "type": "object",
-                          "properties": {
-                            "index_type": {
-                              "type": "string",
-                              "description": "The type of the index to create"
-                            },
-                            "M": {
-                              "type": "string",
-                              "description": "The maximum degree of the node and applies only when index_type is set to __HNSW__."
-                            },
-                            "efConstruction": {
-                              "type": "string",
-                              "description": "The search scope. This applies only when **index_type** is set to **HNSW**"
-                            },
-                            "nlist": {
-                              "type": "string",
-                              "description": "The number of cluster units. This applies to IVF-related index types."
-                            }
-                          },
-                          "x-apifox-orders": [
-                            "index_type",
-                            "M",
-                            "efConstruction",
-                            "nlist"
-                          ],
-                          "required": [
-                            "index_type"
-                          ],
-                          "x-apifox-ignore-properties": [],
-                          "x-apifox-folder": ""
-                        }
-                      },
-                      "x-apifox-orders": [
-                        "metricType",
-                        "fieldName",
-                        "indexName",
-                        "indexConfig"
-                      ],
-                      "required": [
-                        "metricType",
-                        "fieldName",
-                        "indexName"
-                      ],
-                      "x-apifox-ignore-properties": [],
-                      "x-apifox-folder": ""
+                      "$ref": "#/components/schemas/index-param"
                     },
                     "description": "  The parameters that apply to the index-building process."
                   }
@@ -3404,30 +2252,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "x-apifox-refs": {},
-                  "x-apifox-orders": [
-                    "code",
-                    "data"
-                  ],
-                  "properties": {
-                    "code": {
-                      "type": "integer",
-                      "x-apifox-folder": ""
-                    },
-                    "data": {
-                      "type": "object",
-                      "properties": {},
-                      "x-apifox-orders": [],
-                      "x-apifox-ignore-properties": []
-                    }
-                  },
-                  "required": [
-                    "code",
-                    "data"
-                  ],
-                  "x-apifox-ignore-properties": [],
-                  "x-apifox-folder": "httpReturn"
+                  "$ref": "#/components/schemas/code%3A%20OK"
                 },
                 "examples": {
                   "1": {
@@ -3482,78 +2307,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "x-apifox-refs": {
-                  "01HHHAJ1WWBFQ6P0EGBKMR7GEP": {
-                    "x-apifox-overrides": {},
-                    "type": "object",
-                    "properties": {
-                      "dbName": {
-                        "type": "string",
-                        "description": "The name of the database to which the collection belongs.\nSetting this to a non-existing database results in a **MilvusException**."
-                      },
-                      "collectionName": {
-                        "type": "string",
-                        "description": "The name of the target collection.\nSetting this to a non-existing collection results in a **MilvusException**."
-                      }
-                    },
-                    "x-apifox-orders": [
-                      "01HHHAGCVE37R139X5S96YXH0Z",
-                      "collectionName"
-                    ],
-                    "required": [
-                      "collectionName"
-                    ],
-                    "x-apifox-refs": {
-                      "01HHHAGCVE37R139X5S96YXH0Z": {
-                        "x-apifox-overrides": {},
-                        "type": "object",
-                        "properties": {
-                          "dbName": {
-                            "type": "string",
-                            "description": "The name of the database to which the collection belongs.\nSetting this to a non-existing database results in a **MilvusException**."
-                          }
-                        },
-                        "x-apifox-orders": [
-                          "dbName"
-                        ],
-                        "x-apifox-ignore-properties": [],
-                        "x-apifox-folder": "httpRequest"
-                      }
-                    },
-                    "x-apifox-ignore-properties": [
-                      "dbName"
-                    ],
-                    "x-apifox-folder": "httpRequest"
-                  }
-                },
-                "properties": {
-                  "dbName": {
-                    "type": "string",
-                    "description": "The name of the database to which the collection belongs.\nSetting this to a non-existing database results in a **MilvusException**."
-                  },
-                  "collectionName": {
-                    "type": "string",
-                    "description": "The name of the target collection.\nSetting this to a non-existing collection results in a **MilvusException**."
-                  },
-                  "indexName": {
-                    "type": "string",
-                    "description": "The name fo the target index."
-                  }
-                },
-                "x-apifox-orders": [
-                  "01HHHAJ1WWBFQ6P0EGBKMR7GEP",
-                  "indexName"
-                ],
-                "required": [
-                  "indexName",
-                  "collectionName"
-                ],
-                "x-apifox-ignore-properties": [
-                  "dbName",
-                  "collectionName"
-                ],
-                "x-apifox-folder": "httpRequest"
+                "$ref": "#/components/schemas/IndexName"
               }
             }
           }
@@ -3564,30 +2318,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "x-apifox-refs": {},
-                  "x-apifox-orders": [
-                    "code",
-                    "data"
-                  ],
-                  "properties": {
-                    "code": {
-                      "type": "integer",
-                      "x-apifox-folder": ""
-                    },
-                    "data": {
-                      "type": "object",
-                      "properties": {},
-                      "x-apifox-orders": [],
-                      "x-apifox-ignore-properties": []
-                    }
-                  },
-                  "required": [
-                    "code",
-                    "data"
-                  ],
-                  "x-apifox-ignore-properties": [],
-                  "x-apifox-folder": "httpReturn"
+                  "$ref": "#/components/schemas/code%3A%20OK"
                 },
                 "examples": {
                   "1": {
@@ -3680,76 +2411,12 @@
                   "type": "object",
                   "properties": {
                     "code": {
-                      "type": "integer",
-                      "x-apifox-folder": ""
+                      "$ref": "#/components/schemas/httpReturnCode"
                     },
                     "data": {
                       "type": "array",
                       "items": {
-                        "type": "object",
-                        "x-apifox-refs": {},
-                        "properties": {
-                          "fieldName": {
-                            "type": "string",
-                            "description": "The name of the target field."
-                          },
-                          "indexName": {
-                            "type": "string",
-                            "description": "The name of the index."
-                          },
-                          "indexState": {
-                            "description": "The status of the indexing progress.",
-                            "type": "string",
-                            "x-apifox-folder": ""
-                          },
-                          "indexType": {
-                            "type": "string",
-                            "description": "The type of this index."
-                          },
-                          "indexedRows": {
-                            "type": "integer",
-                            "description": "The total number o rows that have been indexed."
-                          },
-                          "metricType": {
-                            "type": "string",
-                            "description": "The type of the metric."
-                          },
-                          "pendingRows": {
-                            "type": "integer",
-                            "description": "The number of rows that are waiting to be indexed."
-                          },
-                          "totalRows": {
-                            "type": "integer",
-                            "description": "The total number of entities/rows"
-                          },
-                          "failReason": {
-                            "type": "string",
-                            "description": "The reason for the failure to build indexes."
-                          }
-                        },
-                        "required": [
-                          "indexName",
-                          "totalRows",
-                          "pendingRows",
-                          "indexedRows",
-                          "indexState",
-                          "fieldName",
-                          "indexType",
-                          "metricType"
-                        ],
-                        "x-apifox-orders": [
-                          "fieldName",
-                          "indexName",
-                          "indexState",
-                          "indexType",
-                          "indexedRows",
-                          "metricType",
-                          "pendingRows",
-                          "totalRows",
-                          "failReason"
-                        ],
-                        "x-apifox-ignore-properties": [],
-                        "x-apifox-folder": ""
+                        "$ref": "#/components/schemas/index-detail"
                       }
                     }
                   },
@@ -3829,46 +2496,8 @@
           "content": {
             "application/json": {
               "schema": {
-                "x-apifox-overrides": {},
-                "type": "object",
-                "properties": {
-                  "dbName": {
-                    "type": "string",
-                    "description": "The name of the database to which the collection belongs.\nSetting this to a non-existing database results in a **MilvusException**."
-                  },
-                  "collectionName": {
-                    "type": "string",
-                    "description": "The name of the target collection.\nSetting this to a non-existing collection results in a **MilvusException**."
-                  }
-                },
-                "x-apifox-orders": [
-                  "01HHHAGCVE37R139X5S96YXH0Z",
-                  "collectionName"
-                ],
-                "required": [
-                  "collectionName"
-                ],
-                "x-apifox-refs": {
-                  "01HHHAGCVE37R139X5S96YXH0Z": {
-                    "x-apifox-overrides": {},
-                    "type": "object",
-                    "properties": {
-                      "dbName": {
-                        "type": "string",
-                        "description": "The name of the database to which the collection belongs.\nSetting this to a non-existing database results in a **MilvusException**."
-                      }
-                    },
-                    "x-apifox-orders": [
-                      "dbName"
-                    ],
-                    "x-apifox-ignore-properties": [],
-                    "x-apifox-folder": "httpRequest"
-                  }
-                },
-                "x-apifox-ignore-properties": [
-                  "dbName"
-                ],
-                "x-apifox-folder": "httpRequest"
+                "$ref": "#/components/schemas/CollectionName",
+                "x-apifox-overrides": {}
               }
             }
           }
@@ -3879,30 +2508,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "x-apifox-refs": {},
-                  "x-apifox-orders": [
-                    "code",
-                    "data"
-                  ],
-                  "properties": {
-                    "code": {
-                      "type": "integer",
-                      "x-apifox-folder": ""
-                    },
-                    "data": {
-                      "type": "object",
-                      "properties": {},
-                      "x-apifox-orders": [],
-                      "x-apifox-ignore-properties": []
-                    }
-                  },
-                  "required": [
-                    "code",
-                    "data"
-                  ],
-                  "x-apifox-ignore-properties": [],
-                  "x-apifox-folder": "httpReturn"
+                  "$ref": "#/components/schemas/code%3A%20OK"
                 },
                 "examples": {
                   "1": {
@@ -4042,81 +2648,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "x-apifox-refs": {
-                  "01HHHAJ1WWBFQ6P0EGBKMR7GEP": {
-                    "x-apifox-overrides": {},
-                    "type": "object",
-                    "properties": {
-                      "dbName": {
-                        "type": "string",
-                        "description": "The name of the database to which the collection belongs.\nSetting this to a non-existing database results in a **MilvusException**."
-                      },
-                      "collectionName": {
-                        "type": "string",
-                        "description": "The name of the target collection.\nSetting this to a non-existing collection results in a **MilvusException**."
-                      }
-                    },
-                    "x-apifox-orders": [
-                      "01HHHAGCVE37R139X5S96YXH0Z",
-                      "collectionName"
-                    ],
-                    "required": [
-                      "collectionName"
-                    ],
-                    "x-apifox-refs": {
-                      "01HHHAGCVE37R139X5S96YXH0Z": {
-                        "x-apifox-overrides": {},
-                        "type": "object",
-                        "properties": {
-                          "dbName": {
-                            "type": "string",
-                            "description": "The name of the database to which the collection belongs.\nSetting this to a non-existing database results in a **MilvusException**."
-                          }
-                        },
-                        "x-apifox-orders": [
-                          "dbName"
-                        ],
-                        "x-apifox-ignore-properties": [],
-                        "x-apifox-folder": "httpRequest"
-                      }
-                    },
-                    "x-apifox-ignore-properties": [
-                      "dbName"
-                    ],
-                    "x-apifox-folder": "httpRequest"
-                  }
-                },
-                "properties": {
-                  "dbName": {
-                    "type": "string",
-                    "description": "The name of the database to which the collection belongs.\nSetting this to a non-existing database results in a **MilvusException**."
-                  },
-                  "collectionName": {
-                    "type": "string",
-                    "description": "The name of the target collection.\nSetting this to a non-existing collection results in a **MilvusException**."
-                  },
-                  "partitionNames": {
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    },
-                    "description": "The list of names of the target partitions."
-                  }
-                },
-                "required": [
-                  "partitionNames",
-                  "collectionName"
-                ],
-                "x-apifox-orders": [
-                  "01HHHAJ1WWBFQ6P0EGBKMR7GEP",
-                  "partitionNames"
-                ],
-                "x-apifox-ignore-properties": [
-                  "dbName",
-                  "collectionName"
-                ],
-                "x-apifox-folder": "httpRequest"
+                "$ref": "#/components/schemas/PartitionNames"
               }
             }
           }
@@ -4127,30 +2659,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "x-apifox-refs": {},
-                  "x-apifox-orders": [
-                    "code",
-                    "data"
-                  ],
-                  "properties": {
-                    "code": {
-                      "type": "integer",
-                      "x-apifox-folder": ""
-                    },
-                    "data": {
-                      "type": "object",
-                      "properties": {},
-                      "x-apifox-orders": [],
-                      "x-apifox-ignore-properties": []
-                    }
-                  },
-                  "required": [
-                    "code",
-                    "data"
-                  ],
-                  "x-apifox-ignore-properties": [],
-                  "x-apifox-folder": "httpReturn"
+                  "$ref": "#/components/schemas/code%3A%20OK"
                 },
                 "examples": {
                   "1": {
@@ -4205,81 +2714,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "x-apifox-refs": {
-                  "01HHHAJ1WWBFQ6P0EGBKMR7GEP": {
-                    "x-apifox-overrides": {},
-                    "type": "object",
-                    "properties": {
-                      "dbName": {
-                        "type": "string",
-                        "description": "The name of the database to which the collection belongs.\nSetting this to a non-existing database results in a **MilvusException**."
-                      },
-                      "collectionName": {
-                        "type": "string",
-                        "description": "The name of the target collection.\nSetting this to a non-existing collection results in a **MilvusException**."
-                      }
-                    },
-                    "x-apifox-orders": [
-                      "01HHHAGCVE37R139X5S96YXH0Z",
-                      "collectionName"
-                    ],
-                    "required": [
-                      "collectionName"
-                    ],
-                    "x-apifox-refs": {
-                      "01HHHAGCVE37R139X5S96YXH0Z": {
-                        "x-apifox-overrides": {},
-                        "type": "object",
-                        "properties": {
-                          "dbName": {
-                            "type": "string",
-                            "description": "The name of the database to which the collection belongs.\nSetting this to a non-existing database results in a **MilvusException**."
-                          }
-                        },
-                        "x-apifox-orders": [
-                          "dbName"
-                        ],
-                        "x-apifox-ignore-properties": [],
-                        "x-apifox-folder": "httpRequest"
-                      }
-                    },
-                    "x-apifox-ignore-properties": [
-                      "dbName"
-                    ],
-                    "x-apifox-folder": "httpRequest"
-                  }
-                },
-                "properties": {
-                  "dbName": {
-                    "type": "string",
-                    "description": "The name of the database to which the collection belongs.\nSetting this to a non-existing database results in a **MilvusException**."
-                  },
-                  "collectionName": {
-                    "type": "string",
-                    "description": "The name of the target collection.\nSetting this to a non-existing collection results in a **MilvusException**."
-                  },
-                  "partitionNames": {
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    },
-                    "description": "The list of names of the target partitions."
-                  }
-                },
-                "required": [
-                  "partitionNames",
-                  "collectionName"
-                ],
-                "x-apifox-orders": [
-                  "01HHHAJ1WWBFQ6P0EGBKMR7GEP",
-                  "partitionNames"
-                ],
-                "x-apifox-ignore-properties": [
-                  "dbName",
-                  "collectionName"
-                ],
-                "x-apifox-folder": "httpRequest"
+                "$ref": "#/components/schemas/PartitionNames"
               }
             }
           }
@@ -4290,30 +2725,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "x-apifox-refs": {},
-                  "x-apifox-orders": [
-                    "code",
-                    "data"
-                  ],
-                  "properties": {
-                    "code": {
-                      "type": "integer",
-                      "x-apifox-folder": ""
-                    },
-                    "data": {
-                      "type": "object",
-                      "properties": {},
-                      "x-apifox-orders": [],
-                      "x-apifox-ignore-properties": []
-                    }
-                  },
-                  "required": [
-                    "code",
-                    "data"
-                  ],
-                  "x-apifox-ignore-properties": [],
-                  "x-apifox-folder": "httpReturn"
+                  "$ref": "#/components/schemas/code%3A%20OK"
                 },
                 "examples": {
                   "1": {
@@ -4405,207 +2817,18 @@
                   },
                   "schema": {
                     "description": "The schema is responsible for organizing data in the target collection. A valid schema should have multiple fields, which must include a primary key, a vector field, and several scalar fields.",
-                    "type": "object",
-                    "properties": {
-                      "autoId": {
-                        "type": "string",
-                        "description": "Whether allows the primary field to automatically increment. Setting this to True makes the primary field automatically increment. In this case, the primary field should not be included in the data to insert to avoid errors. Set this parameter in the field with is_primary set to True."
-                      },
-                      "enableDynamicField": {
-                        "type": "string"
-                      },
-                      "fields": {
-                        "type": "array",
-                        "items": {
-                          "type": "object",
-                          "properties": {
-                            "fieldName": {
-                              "type": "string",
-                              "description": "The name of the field to create in the target collection"
-                            },
-                            "dataType": {
-                              "type": "string",
-                              "description": "The data type of the field values."
-                            },
-                            "elementDataType": {
-                              "type": "string",
-                              "description": "The data type of the elements in an array field."
-                            },
-                            "isPrimary": {
-                              "type": "boolean",
-                              "description": "Whether the current field is the primary field. Setting this to True makes the current field the primary field."
-                            },
-                            "isPartitionKey": {
-                              "type": "boolean",
-                              "description": "Whether the current field serves as the partition key. Setting this to True makes the current field serve as the partition key. In this case, MilvusZilliz Cloud manages all partitions in the current collection."
-                            },
-                            "elementTypeParams": {
-                              "type": "object",
-                              "properties": {
-                                "max_length": {
-                                  "type": "string",
-                                  "description": "An optional parameter for VarChar values that determines the maximum length of the value in the current field."
-                                },
-                                "dim": {
-                                  "type": "string",
-                                  "description": "An optional parameter for FloatVector or BinaryVector fields that determines the vector dimension."
-                                },
-                                "max_capacity": {
-                                  "type": "string",
-                                  "description": "An optional parameter for Array field values that determines the maximum number of elements in the current array field."
-                                }
-                              },
-                              "x-apifox-orders": [
-                                "max_length",
-                                "dim",
-                                "max_capacity"
-                              ],
-                              "required": [
-                                "max_length",
-                                "dim",
-                                "max_capacity"
-                              ],
-                              "description": "Extra field parameters.",
-                              "x-apifox-ignore-properties": []
-                            }
-                          },
-                          "x-apifox-orders": [
-                            "fieldName",
-                            "dataType",
-                            "elementDataType",
-                            "isPrimary",
-                            "isPartitionKey",
-                            "elementTypeParams"
-                          ],
-                          "required": [
-                            "fieldName",
-                            "dataType"
-                          ],
-                          "description": "The name of the field to create in the target collection",
-                          "x-apifox-ignore-properties": [],
-                          "x-apifox-folder": ""
-                        }
-                      }
-                    },
-                    "x-apifox-orders": [
-                      "autoId",
-                      "enableDynamicField",
-                      "fields"
-                    ],
-                    "required": [
-                      "autoId",
-                      "enableDynamicField",
-                      "fields"
-                    ],
-                    "x-apifox-ignore-properties": [],
-                    "x-apifox-folder": ""
+                    "$ref": "#/components/schemas/Collection-Schema"
                   },
                   "indexParams": {
                     "type": "array",
                     "items": {
-                      "type": "object",
-                      "properties": {
-                        "metricType": {
-                          "type": "string",
-                          "description": "The similarity metric type used to build the index.\nPossible values for float vector embeddings.\n- For an Milvus instance, possible values are **L2**, **IP**, and **COSINE**, and those for binary vector embeddings are **Jaccard** and **Hamming**.  For details, refer to [Similarity Metrics](https://milvus.io/docs/metric.md).\n- For a Zilliz Cloud cluster, possible values are **L2**, **IP**, and **COSINE**. Read [Similarity Metrics Explained](https://docs.zilliz.com/docs/search-metrics-explained) to get more."
-                        },
-                        "fieldName": {
-                          "type": "string",
-                          "description": "The name of the target field on which an index is to be created."
-                        },
-                        "indexName": {
-                          "type": "string",
-                          "description": "The name of the index to create, the value defaults to the target field name."
-                        },
-                        "indexConfig": {
-                          "description": "The index type and related settings. For details, refer to [Vector Indexes](https://milvus.io/docs/index.md).",
-                          "type": "object",
-                          "properties": {
-                            "index_type": {
-                              "type": "string",
-                              "description": "The type of the index to create"
-                            },
-                            "M": {
-                              "type": "string",
-                              "description": "The maximum degree of the node and applies only when index_type is set to __HNSW__."
-                            },
-                            "efConstruction": {
-                              "type": "string",
-                              "description": "The search scope. This applies only when **index_type** is set to **HNSW**"
-                            },
-                            "nlist": {
-                              "type": "string",
-                              "description": "The number of cluster units. This applies to IVF-related index types."
-                            }
-                          },
-                          "x-apifox-orders": [
-                            "index_type",
-                            "M",
-                            "efConstruction",
-                            "nlist"
-                          ],
-                          "required": [
-                            "index_type"
-                          ],
-                          "x-apifox-ignore-properties": [],
-                          "x-apifox-folder": ""
-                        }
-                      },
-                      "x-apifox-orders": [
-                        "metricType",
-                        "fieldName",
-                        "indexName",
-                        "indexConfig"
-                      ],
-                      "required": [
-                        "metricType",
-                        "fieldName",
-                        "indexName"
-                      ],
-                      "x-apifox-ignore-properties": [],
-                      "x-apifox-folder": ""
+                      "$ref": "#/components/schemas/index-param"
                     },
                     "description": "The parameters that apply to the index-building process."
                   },
                   "params": {
-                    "description": "Extra parameters for the collection.",
-                    "type": "object",
-                    "properties": {
-                      "max_length": {
-                        "type": "string",
-                        "description": "The maximum number of characters in a VarChar field. This parameter is mandatory when the current field type is VarChar."
-                      },
-                      "enableDynamicField": {
-                        "type": "string",
-                        "description": "Whether to enable the reserved dynamic field. If set to true, non-schema-defined fields are saved in the reserved dynamic field as key-value pairs."
-                      },
-                      "shardsNum": {
-                        "type": "string",
-                        "description": "The number of shards to create along with the current collection."
-                      },
-                      "consistencyLevel": {
-                        "type": "string",
-                        "description": "The consistency level of the collection. Possible values are __STRONG__, __BOUNDED__, __SESSION__, and __EVENTUALLY__."
-                      },
-                      "partitionsNum": {
-                        "type": "string",
-                        "description": "The number of partitions to create along with the current collection. This parameter is mandatory if one field of the collection has been designated as the partition key."
-                      },
-                      "ttlSeconds": {
-                        "type": "string",
-                        "description": "The time-to-live (TTL) period of the collection. If set, the collection is to be dropped once the period ends."
-                      }
-                    },
-                    "x-apifox-orders": [
-                      "max_length",
-                      "enableDynamicField",
-                      "shardsNum",
-                      "consistencyLevel",
-                      "partitionsNum",
-                      "ttlSeconds"
-                    ],
-                    "x-apifox-ignore-properties": [],
-                    "x-apifox-folder": ""
+                    "$ref": "#/components/schemas/collection-params",
+                    "description": "Extra parameters for the collection."
                   }
                 },
                 "x-apifox-refs": {},
@@ -4637,25 +2860,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "code": {
-                      "type": "integer"
-                    },
-                    "data": {
-                      "type": "object",
-                      "x-apifox-orders": [],
-                      "properties": {},
-                      "x-apifox-ignore-properties": [],
-                      "x-apifox-folder": "Schemas"
-                    }
-                  },
-                  "x-apifox-orders": [
-                    "code",
-                    "data"
-                  ],
-                  "x-apifox-ignore-properties": [],
-                  "x-apifox-folder": "Schemas"
+                  "$ref": "#/components/schemas/httpapi.GenericResp-customer_CreateIndexResp"
                 },
                 "examples": {
                   "1": {
@@ -4745,65 +2950,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "x-apifox-refs": {
-                    "01HHH35TZX2TCVTZBQKXKX6K2A": {
-                      "x-apifox-overrides": {
-                        "data": {
-                          "type": "object",
-                          "properties": {
-                            "rowCount": {
-                              "type": "integer"
-                            }
-                          },
-                          "x-apifox-orders": [
-                            "rowCount"
-                          ],
-                          "required": [
-                            "rowCount"
-                          ]
-                        }
-                      },
-                      "required": [
-                        "data"
-                      ],
-                      "type": "object",
-                      "properties": {}
-                    }
-                  },
-                  "x-apifox-orders": [
-                    "01HHH35TZX2TCVTZBQKXKX6K2A",
-                    "code",
-                    "data"
-                  ],
-                  "properties": {
-                    "code": {
-                      "type": "integer",
-                      "x-apifox-folder": ""
-                    },
-                    "data": {
-                      "type": "object",
-                      "properties": {
-                        "has": {
-                          "type": "boolean",
-                          "description": "A boolean value indicates whether the specified partition exists."
-                        }
-                      },
-                      "x-apifox-orders": [
-                        "has"
-                      ],
-                      "required": [
-                        "has"
-                      ],
-                      "x-apifox-ignore-properties": []
-                    }
-                  },
-                  "required": [
-                    "code",
-                    "data"
-                  ],
-                  "x-apifox-ignore-properties": [],
-                  "x-apifox-folder": "httpReturn"
+                  "$ref": "#/components/schemas/Has"
                 },
                 "examples": {
                   "1": {
@@ -4895,65 +3042,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "x-apifox-refs": {
-                    "01HHH317CQPQ10K4E3XHXH1Q1P": {
-                      "x-apifox-overrides": {
-                        "data": {
-                          "type": "object",
-                          "properties": {
-                            "rowCount": {
-                              "type": "integer"
-                            }
-                          },
-                          "x-apifox-orders": [
-                            "rowCount"
-                          ],
-                          "required": [
-                            "rowCount"
-                          ]
-                        }
-                      },
-                      "required": [
-                        "data"
-                      ],
-                      "type": "object",
-                      "properties": {}
-                    }
-                  },
-                  "x-apifox-orders": [
-                    "01HHH317CQPQ10K4E3XHXH1Q1P",
-                    "code",
-                    "data"
-                  ],
-                  "properties": {
-                    "code": {
-                      "type": "integer",
-                      "x-apifox-folder": ""
-                    },
-                    "data": {
-                      "type": "object",
-                      "properties": {
-                        "rowCount": {
-                          "type": "integer",
-                          "description": "The number of entities."
-                        }
-                      },
-                      "x-apifox-orders": [
-                        "rowCount"
-                      ],
-                      "required": [
-                        "rowCount"
-                      ],
-                      "x-apifox-ignore-properties": []
-                    }
-                  },
-                  "required": [
-                    "code",
-                    "data"
-                  ],
-                  "x-apifox-ignore-properties": [],
-                  "x-apifox-folder": "httpReturn"
+                  "$ref": "#/components/schemas/rowCount-collection%2Fpartition"
                 },
                 "examples": {
                   "1": {
@@ -5010,49 +3099,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "x-apifox-refs": {
-                  "01HHM2QS57QE5706K1CDHNZ6SV": {
-                    "x-apifox-overrides": {},
-                    "type": "object",
-                    "properties": {
-                      "userName": {
-                        "type": "string",
-                        "description": "The name of the target user. The value should start with a letter and can only contain underline, letters and numbers."
-                      }
-                    },
-                    "x-apifox-orders": [
-                      "userName"
-                    ],
-                    "required": [
-                      "userName"
-                    ],
-                    "x-apifox-ignore-properties": [],
-                    "x-apifox-folder": "httpRequest"
-                  }
-                },
-                "properties": {
-                  "userName": {
-                    "type": "string",
-                    "description": "The name of the target user. The value should start with a letter and can only contain underline, letters and numbers."
-                  },
-                  "roleName": {
-                    "type": "string",
-                    "description": "The name of the target role."
-                  }
-                },
-                "required": [
-                  "roleName",
-                  "userName"
-                ],
-                "x-apifox-orders": [
-                  "01HHM2QS57QE5706K1CDHNZ6SV",
-                  "roleName"
-                ],
-                "x-apifox-ignore-properties": [
-                  "userName"
-                ],
-                "x-apifox-folder": "httpRequest"
+                "$ref": "#/components/schemas/Role%26User"
               }
             }
           }
@@ -5063,30 +3110,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "x-apifox-refs": {},
-                  "x-apifox-orders": [
-                    "code",
-                    "data"
-                  ],
-                  "properties": {
-                    "code": {
-                      "type": "integer",
-                      "x-apifox-folder": ""
-                    },
-                    "data": {
-                      "type": "object",
-                      "properties": {},
-                      "x-apifox-orders": [],
-                      "x-apifox-ignore-properties": []
-                    }
-                  },
-                  "required": [
-                    "code",
-                    "data"
-                  ],
-                  "x-apifox-ignore-properties": [],
-                  "x-apifox-folder": "httpReturn"
+                  "$ref": "#/components/schemas/code%3A%20OK"
                 },
                 "examples": {
                   "1": {
@@ -5144,22 +3168,7 @@
                 "type": "object",
                 "x-apifox-refs": {
                   "01HKM8TRVJ5K2CP1QQ9SBPQKB1": {
-                    "type": "object",
-                    "x-apifox-refs": {},
-                    "properties": {
-                      "roleName": {
-                        "type": "string",
-                        "description": "The name of the role."
-                      }
-                    },
-                    "required": [
-                      "roleName"
-                    ],
-                    "x-apifox-orders": [
-                      "roleName"
-                    ],
-                    "x-apifox-ignore-properties": [],
-                    "x-apifox-folder": "httpRequest"
+                    "$ref": "#/components/schemas/RoleName"
                   }
                 },
                 "properties": {
@@ -5205,30 +3214,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "x-apifox-refs": {},
-                  "x-apifox-orders": [
-                    "code",
-                    "data"
-                  ],
-                  "properties": {
-                    "code": {
-                      "type": "integer",
-                      "x-apifox-folder": ""
-                    },
-                    "data": {
-                      "type": "object",
-                      "properties": {},
-                      "x-apifox-orders": [],
-                      "x-apifox-ignore-properties": []
-                    }
-                  },
-                  "required": [
-                    "code",
-                    "data"
-                  ],
-                  "x-apifox-ignore-properties": [],
-                  "x-apifox-folder": "httpReturn"
+                  "$ref": "#/components/schemas/code%3A%20OK"
                 },
                 "examples": {
                   "1": {
@@ -5317,45 +3303,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "code": {
-                      "type": "integer",
-                      "x-apifox-folder": ""
-                    },
-                    "data": {
-                      "type": "object",
-                      "properties": {
-                        "loadState": {
-                          "type": "string",
-                          "description": "An object that indicates the load status of the specified collection.\nThe possible states are as follows:\n- **Loaded**\n  -  Indicates that the specified collection is loaded.\n- **Loading**\n  -  Indicates that the specified collection is being loaded.\n- **NotExist**\n  -  Indicates that the specified collection does not exist. \n  -  Including a non-existing partition in **partition_names** results in a **MilvusException**.\n- **NotLoad**\n  -  Indicates that the specified collection is not loaded."
-                        },
-                        "loadProgress": {
-                          "type": "integer",
-                          "description": "An integer that indicates the load progress in the percentage of the specified collection."
-                        }
-                      },
-                      "x-apifox-orders": [
-                        "loadState",
-                        "loadProgress"
-                      ],
-                      "required": [
-                        "loadState",
-                        "loadProgress"
-                      ],
-                      "x-apifox-ignore-properties": []
-                    }
-                  },
-                  "x-apifox-orders": [
-                    "code",
-                    "data"
-                  ],
-                  "required": [
-                    "code",
-                    "data"
-                  ],
-                  "x-apifox-ignore-properties": [],
-                  "x-apifox-folder": "httpReturn"
+                  "$ref": "#/components/schemas/loadState-collection%2Fpartition"
                 },
                 "examples": {
                   "1": {
@@ -5445,8 +3393,7 @@
                   "type": "object",
                   "properties": {
                     "code": {
-                      "type": "integer",
-                      "x-apifox-folder": ""
+                      "$ref": "#/components/schemas/httpReturnCode"
                     },
                     "data": {
                       "type": "array",
@@ -5546,30 +3493,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "code": {
-                      "type": "integer",
-                      "x-apifox-folder": ""
-                    },
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "type": "string",
-                        "description": "A list of item objects."
-                      }
-                    }
-                  },
-                  "x-apifox-orders": [
-                    "code",
-                    "data"
-                  ],
-                  "required": [
-                    "code",
-                    "data"
-                  ],
-                  "x-apifox-ignore-properties": [],
-                  "x-apifox-folder": "httpReturn"
+                  "$ref": "#/components/schemas/Names-collection%2Fpartition%2Fuser%2Frole%2Findex%2Falias"
                 },
                 "examples": {
                   "1": {
@@ -5592,26 +3516,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "code": {
-                      "type": "integer",
-                      "x-apifox-folder": ""
-                    },
-                    "message": {
-                      "type": "string"
-                    }
-                  },
-                  "x-apifox-orders": [
-                    "code",
-                    "message"
-                  ],
-                  "required": [
-                    "code",
-                    "message"
-                  ],
-                  "x-apifox-ignore-properties": [],
-                  "x-apifox-folder": "httpReturn"
+                  "$ref": "#/components/schemas/Message"
                 }
               }
             }
@@ -5690,8 +3595,7 @@
                   "type": "object",
                   "properties": {
                     "code": {
-                      "type": "integer",
-                      "x-apifox-folder": ""
+                      "$ref": "#/components/schemas/httpReturnCode"
                     },
                     "data": {
                       "type": "object",
@@ -5921,46 +3825,8 @@
           "content": {
             "application/json": {
               "schema": {
-                "x-apifox-overrides": {},
-                "type": "object",
-                "properties": {
-                  "dbName": {
-                    "type": "string",
-                    "description": "The name of the database to which the collection belongs.\nSetting this to a non-existing database results in a **MilvusException**."
-                  },
-                  "collectionName": {
-                    "type": "string",
-                    "description": "The name of the target collection.\nSetting this to a non-existing collection results in a **MilvusException**."
-                  }
-                },
-                "x-apifox-orders": [
-                  "01HHHAGCVE37R139X5S96YXH0Z",
-                  "collectionName"
-                ],
-                "required": [
-                  "collectionName"
-                ],
-                "x-apifox-refs": {
-                  "01HHHAGCVE37R139X5S96YXH0Z": {
-                    "x-apifox-overrides": {},
-                    "type": "object",
-                    "properties": {
-                      "dbName": {
-                        "type": "string",
-                        "description": "The name of the database to which the collection belongs.\nSetting this to a non-existing database results in a **MilvusException**."
-                      }
-                    },
-                    "x-apifox-orders": [
-                      "dbName"
-                    ],
-                    "x-apifox-ignore-properties": [],
-                    "x-apifox-folder": "httpRequest"
-                  }
-                },
-                "x-apifox-ignore-properties": [
-                  "dbName"
-                ],
-                "x-apifox-folder": "httpRequest"
+                "$ref": "#/components/schemas/CollectionName",
+                "x-apifox-overrides": {}
               },
               "example": ""
             }
@@ -5972,25 +3838,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "code": {
-                      "type": "integer"
-                    },
-                    "data": {
-                      "type": "object",
-                      "x-apifox-orders": [],
-                      "properties": {},
-                      "x-apifox-ignore-properties": [],
-                      "x-apifox-folder": "Schemas"
-                    }
-                  },
-                  "x-apifox-orders": [
-                    "code",
-                    "data"
-                  ],
-                  "x-apifox-ignore-properties": [],
-                  "x-apifox-folder": "Schemas"
+                  "$ref": "#/components/schemas/httpapi.GenericResp-customer_DropCollectionResp"
                 },
                 "examples": {
                   "1": {
@@ -6073,30 +3921,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "code": {
-                      "type": "integer",
-                      "x-apifox-folder": ""
-                    },
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "type": "string",
-                        "description": "A list of item objects."
-                      }
-                    }
-                  },
-                  "x-apifox-orders": [
-                    "code",
-                    "data"
-                  ],
-                  "required": [
-                    "code",
-                    "data"
-                  ],
-                  "x-apifox-ignore-properties": [],
-                  "x-apifox-folder": "httpReturn"
+                  "$ref": "#/components/schemas/Names-collection%2Fpartition%2Fuser%2Frole%2Findex%2Falias"
                 },
                 "examples": {
                   "1": {
@@ -6184,37 +4009,10 @@
                   "type": "object",
                   "properties": {
                     "code": {
-                      "type": "integer",
-                      "x-apifox-folder": ""
+                      "$ref": "#/components/schemas/httpReturnCode"
                     },
                     "data": {
-                      "type": "object",
-                      "properties": {
-                        "dbName": {
-                          "type": "string",
-                          "description": "The name of the database to which the collection belongs."
-                        },
-                        "collectionName": {
-                          "type": "string",
-                          "description": "the name of the collection to which an alias belongs."
-                        },
-                        "aliasName": {
-                          "type": "string",
-                          "description": "The name of the alias."
-                        }
-                      },
-                      "x-apifox-orders": [
-                        "dbName",
-                        "collectionName",
-                        "aliasName"
-                      ],
-                      "required": [
-                        "dbName",
-                        "collectionName",
-                        "aliasName"
-                      ],
-                      "x-apifox-ignore-properties": [],
-                      "x-apifox-folder": ""
+                      "$ref": "#/components/schemas/alias-detail"
                     }
                   },
                   "x-apifox-orders": [
@@ -6284,32 +4082,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "dbName": {
-                    "type": "string",
-                    "description": "The name of the database to which the collection belongs."
-                  },
-                  "collectionName": {
-                    "type": "string",
-                    "description": "The name of the target collection to reassign an alias to."
-                  },
-                  "aliasName": {
-                    "type": "string",
-                    "description": "The alias of the collection. "
-                  }
-                },
-                "x-apifox-orders": [
-                  "dbName",
-                  "collectionName",
-                  "aliasName"
-                ],
-                "required": [
-                  "aliasName",
-                  "collectionName"
-                ],
-                "x-apifox-ignore-properties": [],
-                "x-apifox-folder": "httpRequest"
+                "$ref": "#/components/schemas/Alias%26Collection"
               }
             }
           }
@@ -6320,30 +4093,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "x-apifox-refs": {},
-                  "x-apifox-orders": [
-                    "code",
-                    "data"
-                  ],
-                  "properties": {
-                    "code": {
-                      "type": "integer",
-                      "x-apifox-folder": ""
-                    },
-                    "data": {
-                      "type": "object",
-                      "properties": {},
-                      "x-apifox-orders": [],
-                      "x-apifox-ignore-properties": []
-                    }
-                  },
-                  "required": [
-                    "code",
-                    "data"
-                  ],
-                  "x-apifox-ignore-properties": [],
-                  "x-apifox-folder": "httpReturn"
+                  "$ref": "#/components/schemas/code%3A%20OK"
                 },
                 "examples": {
                   "1": {
@@ -6398,32 +4148,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "dbName": {
-                    "type": "string",
-                    "description": "The name of the database to which the collection belongs."
-                  },
-                  "collectionName": {
-                    "type": "string",
-                    "description": "The name of the collection to which the alias is assigned to."
-                  },
-                  "aliasName": {
-                    "type": "string",
-                    "description": "The alias to drop.\nWhen dropping an alias, you do not need to provide the collection name because one alias can only be assigned to exactly one collection. Therefore, the server knows which collection the specified alias belongs to."
-                  }
-                },
-                "x-apifox-orders": [
-                  "dbName",
-                  "collectionName",
-                  "aliasName"
-                ],
-                "required": [
-                  "aliasName",
-                  "collectionName"
-                ],
-                "x-apifox-ignore-properties": [],
-                "x-apifox-folder": "httpRequest"
+                "$ref": "#/components/schemas/AliasName"
               }
             }
           }
@@ -6434,30 +4159,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "x-apifox-refs": {},
-                  "x-apifox-orders": [
-                    "code",
-                    "data"
-                  ],
-                  "properties": {
-                    "code": {
-                      "type": "integer",
-                      "x-apifox-folder": ""
-                    },
-                    "data": {
-                      "type": "object",
-                      "properties": {},
-                      "x-apifox-orders": [],
-                      "x-apifox-ignore-properties": []
-                    }
-                  },
-                  "required": [
-                    "code",
-                    "data"
-                  ],
-                  "x-apifox-ignore-properties": [],
-                  "x-apifox-folder": "httpReturn"
+                  "$ref": "#/components/schemas/code%3A%20OK"
                 },
                 "examples": {
                   "1": {
@@ -6512,32 +4214,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "dbName": {
-                    "type": "string",
-                    "description": "The name of the database to which the collection belongs."
-                  },
-                  "collectionName": {
-                    "type": "string",
-                    "description": "The name of the target collection to reassign an alias to."
-                  },
-                  "aliasName": {
-                    "type": "string",
-                    "description": "The alias of the collection. "
-                  }
-                },
-                "x-apifox-orders": [
-                  "dbName",
-                  "collectionName",
-                  "aliasName"
-                ],
-                "required": [
-                  "aliasName",
-                  "collectionName"
-                ],
-                "x-apifox-ignore-properties": [],
-                "x-apifox-folder": "httpRequest"
+                "$ref": "#/components/schemas/Alias%26Collection"
               }
             }
           }
@@ -6548,30 +4225,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "x-apifox-refs": {},
-                  "x-apifox-orders": [
-                    "code",
-                    "data"
-                  ],
-                  "properties": {
-                    "code": {
-                      "type": "integer",
-                      "x-apifox-folder": ""
-                    },
-                    "data": {
-                      "type": "object",
-                      "properties": {},
-                      "x-apifox-orders": [],
-                      "x-apifox-ignore-properties": []
-                    }
-                  },
-                  "required": [
-                    "code",
-                    "data"
-                  ],
-                  "x-apifox-ignore-properties": [],
-                  "x-apifox-folder": "httpReturn"
+                  "$ref": "#/components/schemas/code%3A%20OK"
                 },
                 "examples": {
                   "1": {
@@ -6685,11 +4339,7 @@
             "type": "integer"
           },
           "data": {
-            "type": "object",
-            "x-apifox-orders": [],
-            "properties": {},
-            "x-apifox-ignore-properties": [],
-            "x-apifox-folder": "Schemas"
+            "$ref": "#/components/schemas/customer.DropCollectionResp"
           }
         },
         "x-apifox-orders": [
@@ -6710,8 +4360,7 @@
         "type": "object",
         "properties": {
           "code": {
-            "type": "integer",
-            "x-apifox-folder": ""
+            "$ref": "#/components/schemas/httpReturnCode"
           },
           "data": {
             "type": "object",
@@ -6758,11 +4407,7 @@
             "type": "integer"
           },
           "data": {
-            "type": "object",
-            "x-apifox-orders": [],
-            "properties": {},
-            "x-apifox-ignore-properties": [],
-            "x-apifox-folder": "Schemas"
+            "$ref": "#/components/schemas/customer.CreateIndexResp"
           }
         },
         "x-apifox-orders": [
@@ -6831,73 +4476,7 @@
           "fields": {
             "type": "array",
             "items": {
-              "type": "object",
-              "properties": {
-                "fieldName": {
-                  "type": "string",
-                  "description": "The name of the field to create in the target collection"
-                },
-                "dataType": {
-                  "type": "string",
-                  "description": "The data type of the field values."
-                },
-                "elementDataType": {
-                  "type": "string",
-                  "description": "The data type of the elements in an array field."
-                },
-                "isPrimary": {
-                  "type": "boolean",
-                  "description": "Whether the current field is the primary field. Setting this to True makes the current field the primary field."
-                },
-                "isPartitionKey": {
-                  "type": "boolean",
-                  "description": "Whether the current field serves as the partition key. Setting this to True makes the current field serve as the partition key. In this case, MilvusZilliz Cloud manages all partitions in the current collection."
-                },
-                "elementTypeParams": {
-                  "type": "object",
-                  "properties": {
-                    "max_length": {
-                      "type": "string",
-                      "description": "An optional parameter for VarChar values that determines the maximum length of the value in the current field."
-                    },
-                    "dim": {
-                      "type": "string",
-                      "description": "An optional parameter for FloatVector or BinaryVector fields that determines the vector dimension."
-                    },
-                    "max_capacity": {
-                      "type": "string",
-                      "description": "An optional parameter for Array field values that determines the maximum number of elements in the current array field."
-                    }
-                  },
-                  "x-apifox-orders": [
-                    "max_length",
-                    "dim",
-                    "max_capacity"
-                  ],
-                  "required": [
-                    "max_length",
-                    "dim",
-                    "max_capacity"
-                  ],
-                  "description": "Extra field parameters.",
-                  "x-apifox-ignore-properties": []
-                }
-              },
-              "x-apifox-orders": [
-                "fieldName",
-                "dataType",
-                "elementDataType",
-                "isPrimary",
-                "isPartitionKey",
-                "elementTypeParams"
-              ],
-              "required": [
-                "fieldName",
-                "dataType"
-              ],
-              "description": "The name of the field to create in the target collection",
-              "x-apifox-ignore-properties": [],
-              "x-apifox-folder": ""
+              "$ref": "#/components/schemas/Field-Schema"
             }
           }
         },
@@ -6987,46 +4566,8 @@
         "type": "object",
         "x-apifox-refs": {
           "01HHHAJ1WWBFQ6P0EGBKMR7GEP": {
-            "x-apifox-overrides": {},
-            "type": "object",
-            "properties": {
-              "dbName": {
-                "type": "string",
-                "description": "The name of the database to which the collection belongs.\nSetting this to a non-existing database results in a **MilvusException**."
-              },
-              "collectionName": {
-                "type": "string",
-                "description": "The name of the target collection.\nSetting this to a non-existing collection results in a **MilvusException**."
-              }
-            },
-            "x-apifox-orders": [
-              "01HHHAGCVE37R139X5S96YXH0Z",
-              "collectionName"
-            ],
-            "required": [
-              "collectionName"
-            ],
-            "x-apifox-refs": {
-              "01HHHAGCVE37R139X5S96YXH0Z": {
-                "x-apifox-overrides": {},
-                "type": "object",
-                "properties": {
-                  "dbName": {
-                    "type": "string",
-                    "description": "The name of the database to which the collection belongs.\nSetting this to a non-existing database results in a **MilvusException**."
-                  }
-                },
-                "x-apifox-orders": [
-                  "dbName"
-                ],
-                "x-apifox-ignore-properties": [],
-                "x-apifox-folder": "httpRequest"
-              }
-            },
-            "x-apifox-ignore-properties": [
-              "dbName"
-            ],
-            "x-apifox-folder": "httpRequest"
+            "$ref": "#/components/schemas/CollectionName",
+            "x-apifox-overrides": {}
           }
         },
         "properties": {
@@ -7081,19 +4622,8 @@
         ],
         "x-apifox-refs": {
           "01HHHAGCVE37R139X5S96YXH0Z": {
-            "x-apifox-overrides": {},
-            "type": "object",
-            "properties": {
-              "dbName": {
-                "type": "string",
-                "description": "The name of the database to which the collection belongs.\nSetting this to a non-existing database results in a **MilvusException**."
-              }
-            },
-            "x-apifox-orders": [
-              "dbName"
-            ],
-            "x-apifox-ignore-properties": [],
-            "x-apifox-folder": "httpRequest"
+            "$ref": "#/components/schemas/DbName",
+            "x-apifox-overrides": {}
           }
         },
         "x-apifox-ignore-properties": [
@@ -7128,9 +4658,8 @@
             "description": "The name of the index."
           },
           "indexState": {
-            "description": "The status of the indexing progress.",
-            "type": "string",
-            "x-apifox-folder": ""
+            "$ref": "#/components/schemas/index-state",
+            "description": "The status of the indexing progress."
           },
           "indexType": {
             "type": "string",
@@ -7189,46 +4718,8 @@
         "type": "object",
         "x-apifox-refs": {
           "01HHHAJ1WWBFQ6P0EGBKMR7GEP": {
-            "x-apifox-overrides": {},
-            "type": "object",
-            "properties": {
-              "dbName": {
-                "type": "string",
-                "description": "The name of the database to which the collection belongs.\nSetting this to a non-existing database results in a **MilvusException**."
-              },
-              "collectionName": {
-                "type": "string",
-                "description": "The name of the target collection.\nSetting this to a non-existing collection results in a **MilvusException**."
-              }
-            },
-            "x-apifox-orders": [
-              "01HHHAGCVE37R139X5S96YXH0Z",
-              "collectionName"
-            ],
-            "required": [
-              "collectionName"
-            ],
-            "x-apifox-refs": {
-              "01HHHAGCVE37R139X5S96YXH0Z": {
-                "x-apifox-overrides": {},
-                "type": "object",
-                "properties": {
-                  "dbName": {
-                    "type": "string",
-                    "description": "The name of the database to which the collection belongs.\nSetting this to a non-existing database results in a **MilvusException**."
-                  }
-                },
-                "x-apifox-orders": [
-                  "dbName"
-                ],
-                "x-apifox-ignore-properties": [],
-                "x-apifox-folder": "httpRequest"
-              }
-            },
-            "x-apifox-ignore-properties": [
-              "dbName"
-            ],
-            "x-apifox-folder": "httpRequest"
+            "$ref": "#/components/schemas/CollectionName",
+            "x-apifox-overrides": {}
           }
         },
         "properties": {
@@ -7275,37 +4766,8 @@
             "description": "The name of the index to create, the value defaults to the target field name."
           },
           "indexConfig": {
-            "description": "The index type and related settings. For details, refer to [Vector Indexes](https://milvus.io/docs/index.md).",
-            "type": "object",
-            "properties": {
-              "index_type": {
-                "type": "string",
-                "description": "The type of the index to create"
-              },
-              "M": {
-                "type": "string",
-                "description": "The maximum degree of the node and applies only when index_type is set to __HNSW__."
-              },
-              "efConstruction": {
-                "type": "string",
-                "description": "The search scope. This applies only when **index_type** is set to **HNSW**"
-              },
-              "nlist": {
-                "type": "string",
-                "description": "The number of cluster units. This applies to IVF-related index types."
-              }
-            },
-            "x-apifox-orders": [
-              "index_type",
-              "M",
-              "efConstruction",
-              "nlist"
-            ],
-            "required": [
-              "index_type"
-            ],
-            "x-apifox-ignore-properties": [],
-            "x-apifox-folder": ""
+            "$ref": "#/components/schemas/index-config",
+            "description": "The index type and related settings. For details, refer to [Vector Indexes](https://milvus.io/docs/index.md)."
           }
         },
         "x-apifox-orders": [
@@ -7358,50 +4820,12 @@
         "type": "object",
         "properties": {
           "code": {
-            "type": "integer",
-            "x-apifox-folder": ""
+            "$ref": "#/components/schemas/httpReturnCode"
           },
           "data": {
             "type": "array",
             "items": {
-              "type": "object",
-              "properties": {
-                "object_type": {
-                  "type": "string",
-                  "description": "  The type of the object to which the privilege belongs."
-                },
-                "privilege": {
-                  "type": "string",
-                  "description": "  The privilege that is granted to the role."
-                },
-                "object_name": {
-                  "type": "string",
-                  "description": "  The name of the object to which the role is granted the specified privilege."
-                },
-                "db_name": {
-                  "type": "string",
-                  "description": "  The name of the database in which this operation has been executed."
-                },
-                "grantor": {
-                  "type": "string",
-                  "description": "  The name of the user who granted a specific role to a user."
-                }
-              },
-              "required": [
-                "object_type",
-                "privilege",
-                "object_name",
-                "db_name"
-              ],
-              "x-apifox-orders": [
-                "object_type",
-                "privilege",
-                "object_name",
-                "db_name",
-                "grantor"
-              ],
-              "x-apifox-ignore-properties": [],
-              "x-apifox-folder": ""
+              "$ref": "#/components/schemas/Privilege-Entity"
             },
             "description": "A list of privilege items."
           }
@@ -7479,8 +4903,7 @@
         "type": "object",
         "properties": {
           "code": {
-            "type": "integer",
-            "x-apifox-folder": ""
+            "$ref": "#/components/schemas/httpReturnCode"
           },
           "data": {
             "type": "array",
@@ -7505,22 +4928,8 @@
         "type": "object",
         "x-apifox-refs": {
           "01HHM2QS57QE5706K1CDHNZ6SV": {
-            "x-apifox-overrides": {},
-            "type": "object",
-            "properties": {
-              "userName": {
-                "type": "string",
-                "description": "The name of the target user. The value should start with a letter and can only contain underline, letters and numbers."
-              }
-            },
-            "x-apifox-orders": [
-              "userName"
-            ],
-            "required": [
-              "userName"
-            ],
-            "x-apifox-ignore-properties": [],
-            "x-apifox-folder": "httpRequest"
+            "$ref": "#/components/schemas/UserName",
+            "x-apifox-overrides": {}
           }
         },
         "properties": {
@@ -7594,49 +5003,7 @@
         ],
         "x-apifox-refs": {
           "01HHKX9JA6N05F6TE4NMG46P4X": {
-            "type": "object",
-            "properties": {
-              "userName": {
-                "type": "string",
-                "description": "The name of the target user. The value should start with a letter and can only contain underline, letters and numbers."
-              },
-              "password": {
-                "type": "string",
-                "description": "The corresponding password to the new user to create. \nThe password must be a string of 8 to 64 characters and must include at least three of the following character types: uppercase letters, lowercase letters, numbers, and special characters."
-              }
-            },
-            "x-apifox-orders": [
-              "01HHKX7XPAX9WZ7W4GJJ2W1FXY",
-              "password"
-            ],
-            "required": [
-              "password",
-              "userName"
-            ],
-            "x-apifox-refs": {
-              "01HHKX7XPAX9WZ7W4GJJ2W1FXY": {
-                "x-apifox-overrides": {},
-                "type": "object",
-                "properties": {
-                  "userName": {
-                    "type": "string",
-                    "description": "The name of the target user. The value should start with a letter and can only contain underline, letters and numbers."
-                  }
-                },
-                "x-apifox-orders": [
-                  "userName"
-                ],
-                "required": [
-                  "userName"
-                ],
-                "x-apifox-ignore-properties": [],
-                "x-apifox-folder": "httpRequest"
-              }
-            },
-            "x-apifox-ignore-properties": [
-              "userName"
-            ],
-            "x-apifox-folder": "httpRequest"
+            "$ref": "#/components/schemas/Password"
           }
         },
         "x-apifox-ignore-properties": [
@@ -7667,22 +5034,8 @@
         ],
         "x-apifox-refs": {
           "01HHKX7XPAX9WZ7W4GJJ2W1FXY": {
-            "x-apifox-overrides": {},
-            "type": "object",
-            "properties": {
-              "userName": {
-                "type": "string",
-                "description": "The name of the target user. The value should start with a letter and can only contain underline, letters and numbers."
-              }
-            },
-            "x-apifox-orders": [
-              "userName"
-            ],
-            "required": [
-              "userName"
-            ],
-            "x-apifox-ignore-properties": [],
-            "x-apifox-folder": "httpRequest"
+            "$ref": "#/components/schemas/UserName",
+            "x-apifox-overrides": {}
           }
         },
         "x-apifox-ignore-properties": [
@@ -7697,11 +5050,7 @@
             "type": "integer"
           },
           "data": {
-            "type": "object",
-            "x-apifox-orders": [],
-            "properties": {},
-            "x-apifox-ignore-properties": [],
-            "x-apifox-folder": "Schemas"
+            "$ref": "#/components/schemas/customer.DeleteResp"
           }
         },
         "x-apifox-orders": [
@@ -7722,46 +5071,8 @@
         "type": "object",
         "x-apifox-refs": {
           "01HHHAJ1WWBFQ6P0EGBKMR7GEP": {
-            "x-apifox-overrides": {},
-            "type": "object",
-            "properties": {
-              "dbName": {
-                "type": "string",
-                "description": "The name of the database to which the collection belongs.\nSetting this to a non-existing database results in a **MilvusException**."
-              },
-              "collectionName": {
-                "type": "string",
-                "description": "The name of the target collection.\nSetting this to a non-existing collection results in a **MilvusException**."
-              }
-            },
-            "x-apifox-orders": [
-              "01HHHAGCVE37R139X5S96YXH0Z",
-              "collectionName"
-            ],
-            "required": [
-              "collectionName"
-            ],
-            "x-apifox-refs": {
-              "01HHHAGCVE37R139X5S96YXH0Z": {
-                "x-apifox-overrides": {},
-                "type": "object",
-                "properties": {
-                  "dbName": {
-                    "type": "string",
-                    "description": "The name of the database to which the collection belongs.\nSetting this to a non-existing database results in a **MilvusException**."
-                  }
-                },
-                "x-apifox-orders": [
-                  "dbName"
-                ],
-                "x-apifox-ignore-properties": [],
-                "x-apifox-folder": "httpRequest"
-              }
-            },
-            "x-apifox-ignore-properties": [
-              "dbName"
-            ],
-            "x-apifox-folder": "httpRequest"
+            "$ref": "#/components/schemas/CollectionName",
+            "x-apifox-overrides": {}
           }
         },
         "properties": {
@@ -7905,8 +5216,7 @@
         ],
         "properties": {
           "code": {
-            "type": "integer",
-            "x-apifox-folder": ""
+            "$ref": "#/components/schemas/httpReturnCode"
           },
           "data": {
             "type": "object",
@@ -7964,8 +5274,7 @@
         ],
         "properties": {
           "code": {
-            "type": "integer",
-            "x-apifox-folder": ""
+            "$ref": "#/components/schemas/httpReturnCode"
           },
           "data": {
             "type": "object",
@@ -7988,36 +5297,7 @@
             "type": "integer"
           },
           "data": {
-            "type": "object",
-            "properties": {
-              "insertCount": {
-                "type": "integer",
-                "examples": [
-                  4
-                ],
-                "description": "The number of inserted entities."
-              },
-              "insertIds": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                },
-                "examples": [
-                  [
-                    "['id1'",
-                    " 'id2'",
-                    " 'id3']"
-                  ]
-                ],
-                "description": "An array of the IDs of inserted entities."
-              }
-            },
-            "x-apifox-orders": [
-              "insertCount",
-              "insertIds"
-            ],
-            "x-apifox-ignore-properties": [],
-            "x-apifox-folder": "Schemas"
+            "$ref": "#/components/schemas/customer.InsertResp"
           }
         },
         "x-apifox-orders": [
@@ -8063,8 +5343,7 @@
         "type": "object",
         "properties": {
           "code": {
-            "type": "integer",
-            "x-apifox-folder": ""
+            "$ref": "#/components/schemas/httpReturnCode"
           },
           "message": {
             "type": "string"
@@ -8115,8 +5394,7 @@
         ],
         "properties": {
           "code": {
-            "type": "integer",
-            "x-apifox-folder": ""
+            "$ref": "#/components/schemas/httpReturnCode"
           },
           "data": {
             "type": "object",
