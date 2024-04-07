@@ -6,7 +6,7 @@ Gets entities by the specified IDs.
     <div style="display: inline-block; background: #026aca; font-size: 0.6em; border-radius: 10px; color: #ffffff; padding: 0.3em 1em;">
         <span>POST</span>
     </div>
-    <span style="font-weight: bold;">  https://${MILVUS_HOST}:${MILVUS_PORT}/v1/vector/get</span>
+    <span style="font-weight: bold;">  https://${MILVUS_URI}/v1/vector/get</span>
 </div>
 
 ## Example
@@ -15,9 +15,11 @@ Gets entities by the specified IDs.
 Get a specified entity whose ID is an integer:
 
 ```shell
+export MILVUS_URI="http://localhost:19530"
+
+
 curl --request POST \
-     --url "${MILVUS_HOST}:${MILVUS_PORT}/v1/vector/get" \
-     --header "Authorization: Bearer ${TOKEN}" \
+     --url "${MILVUS_URI}/v1/vector/get" \
      --header "accept: application/json" \
      --header "content-type: application/json" \
      -d '{
@@ -30,9 +32,11 @@ curl --request POST \
 Get a specified entity whose ID is a string:
 
 ```shell
+export MILVUS_URI="http://localhost:19530"
+
+
 curl --request POST \
-     --url "${MILVUS_HOST}:${MILVUS_PORT}/v1/vector/get" \
-     --header "Authorization: Bearer ${TOKEN}" \
+     --url "${MILVUS_URI}/v1/vector/get" \
      --header "accept: application/json" \
      --header "content-type: application/json" \
      -d '{
@@ -45,9 +49,11 @@ curl --request POST \
 Get a list of entities whose IDs are integers:
 
 ```shell
+export MILVUS_URI="http://localhost:19530"
+
+
 curl --request POST \
-     --url "${MILVUS_HOST}:${MILVUS_PORT}/v1/vector/get" \
-     --header "Authorization: Bearer ${TOKEN}" \
+     --url "${MILVUS_URI}/v1/vector/get" \
      --header "accept: application/json" \
      --header "content-type: application/json" \
      -d '{
@@ -60,9 +66,11 @@ curl --request POST \
 Get a list of entities whose IDs are strings:
 
 ```shell
+export MILVUS_URI="http://localhost:19530"
+
+
 curl --request POST \
-     --url "${MILVUS_HOST}:${MILVUS_PORT}/v1/vector/get" \
-     --header "Authorization: Bearer ${TOKEN}" \
+     --url "${MILVUS_URI}/v1/vector/get" \
      --header "accept: application/json" \
      --header "content-type: application/json" \
      -d "{
