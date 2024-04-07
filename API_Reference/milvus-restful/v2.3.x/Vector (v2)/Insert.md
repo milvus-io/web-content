@@ -9,9 +9,6 @@
 
 This operation inserts data into a specific collection. 
 
-> Notes
-> You can insert a maximum of 100 entities at a time. To insert large volumes of data, please use [the bulk-insert API](https://docs.zilliz.com/docs/data-import).
-
 ## Example
 
 ```shell

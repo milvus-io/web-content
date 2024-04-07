@@ -17,10 +17,7 @@ export MILVUS_URI="localhost:19530"
 curl --location --request POST "http://${MILVUS_URI}/v2/vectordb/partitions/has" \
 --header "Content-Type: application/json" \
 --data-raw '{
-    "partitionNames": [
-        "_default",
-        "january"
-    ],
+    "partitionName": "january",
     "collectionName": "quick_setup"
 }'
 ```

@@ -59,7 +59,7 @@ Possible response is similar to the following.
 
 ## Response
 
-成功
+Returns a list of roles assigned to the user.
 
 ### Response Bodies
 

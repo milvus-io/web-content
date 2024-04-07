@@ -18,7 +18,7 @@ curl --location --request POST "http://${MILVUS_URI}/v2/vectordb/entities/query"
 --header "Content-Type: application/json" \
 --data-raw '{
     "collectionName": "quick_setup",
-    "filter": "color like \"red_\"",
+    "filter": "color like \"red_%\"",
     "outputFields": [
         "color"
     ],
