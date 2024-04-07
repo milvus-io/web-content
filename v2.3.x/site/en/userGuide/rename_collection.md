@@ -2,6 +2,7 @@
 id: rename_collection.md
 related_key: rename collection
 summary: Learn how to rename a collection from memory in Milvus.
+title: Rename a Collection
 ---
 
 # Rename a Collection

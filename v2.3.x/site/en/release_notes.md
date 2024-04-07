@@ -1,10 +1,51 @@
 ---
 id: release_notes.md
 summary: Milvus Release Notes
+title: Release Notes
 ---
 # Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.3.0 in this section. We suggest that you regularly visit this page to learn about updates.
+
+## v2.3.13
+
+Release date: Apr 7, 2024
+
+| Milvus version | Python SDK version | Java SDK version | Go SDK version | Node.js SDK version |
+|----------------|--------------------|------------------|----------------|---------------------|
+| 2.3.13         | 2.3.7              | 2.3.5            | 2.3.6          | 2.3.5               |
+
+This release aims to enhance system performance, reliability and observability with key features like improved index information retrieval, secure Minio connections via TLS, and new metrics for better monitoring. These updates aim to provide a more secure, efficient, and reliable user experience.
+
+### Improvements
+
+- Optimized DescribeIndex performance by implementing bulk index information retrieval([#31239](https://github.com/milvus-io/milvus/pull/31239))([#31429](https://github.com/milvus-io/milvus/pull/31429))
+- Improved access efficiency to formatted keys by caching the formatted key of param item([#31402](https://github.com/milvus-io/milvus/pull/31402))
+- Add metrics for querycoord current target cp lag([#31463](https://github.com/milvus-io/milvus/pull/31463))
+- Implemented TLS support for Minio connections([#31292](https://github.com/milvus-io/milvus/pull/31292))([#31619](https://github.com/milvus-io/milvus/pull/31619))
+- Speed up target recovery after QueryCoord restart([#31449](https://github.com/milvus-io/milvus/pull/31449))
+- Added new metrics for entities statistics([#31511](https://github.com/milvus-io/milvus/pull/31511))
+- Implementing the API of the resultful([#30430](https://github.com/milvus-io/milvus/pull/30430))
+- Save collection targets by batches([#31655](https://github.com/milvus-io/milvus/pull/31655))
+- Added validation checks for the legality of field data types([#31699](https://github.com/milvus-io/milvus/pull/31699))
+
+### Bug Fixes
+
+- Fixed the issue in CurrentTargetFirst/NextTargetFirst where it would generate unexpected task behavior([#31419](https://github.com/milvus-io/milvus/pull/31419))
+- Fixed the bug that does not cause the shard leader to fail when search fails([#31450](https://github.com/milvus-io/milvus/pull/31450))
+- Fixed a bug where nodes were marked as unreachable when get client failure([#31451](https://github.com/milvus-io/milvus/pull/31451))
+- Fixed client error handling to enable retries for certain types of unrecoverable errors instead of directly returning them([#31452](https://github.com/milvus-io/milvus/pull/31452))
+- Fixed an issue where the balance channel would freeze due to deadlocks([#31455](https://github.com/milvus-io/milvus/pull/31455))
+- Fixed a bug where nodeID was not checked when updating channel checkpoints([#31508](https://github.com/milvus-io/milvus/pull/31508))
+- Fixed the incorrect use of double buffering for entry size exceeding the max size([#31549](https://github.com/milvus-io/milvus/pull/31549))
+- Fixed a bug where delegator's filtering removed all delete messages, making deleted messages temporarily accessible([#31587](https://github.com/milvus-io/milvus/pull/31587))
+- Fixed a bug where the proxy's context was canceled prematurely during session revocation([#31595](https://github.com/milvus-io/milvus/pull/31595))
+- Fixed the target observer updates manual and automatic tasks were not mutually exclusive([#31603](https://github.com/milvus-io/milvus/pull/31603))
+- Fixed a bug where channel metadata was updated even when nodeID did not match([#31665](https://github.com/milvus-io/milvus/pull/31665))
+- Fixed a bug where compaction tasks were not cleaned up when releasing channels([#31694](https://github.com/milvus-io/milvus/pull/31694))
+- Fixed a bug where the injection was invalid when the queue was empty([#31819](https://github.com/milvus-io/milvus/pull/31819))
+- Fixed a bug where channel meta mergeFlushSegment was not idempotent cause data loss([#31837](https://github.com/milvus-io/milvus/pull/31837))
+- Fixed the bug that Datacoord session disconnects before revoking it([#31747](https://github.com/milvus-io/milvus/pull/31747))
 
 ## v2.3.12
 

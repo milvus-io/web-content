@@ -1,6 +1,7 @@
 ---
 id: question_answering_system.md
-summary: Build a question answering system with Milvus.  
+summary: Build a question answering system with Milvus.
+title: Question Answering System
 ---
 
 # Question Answering System 

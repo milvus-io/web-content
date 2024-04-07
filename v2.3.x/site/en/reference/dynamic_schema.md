@@ -2,6 +2,7 @@
 id: dynamic_schema.md
 related_key: dynamic_schema
 summary: Dynamic schema in Milvus.
+title: Dynamic Schema
 ---
 
 # Dynamic Schema

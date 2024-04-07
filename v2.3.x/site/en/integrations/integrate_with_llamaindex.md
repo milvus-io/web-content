@@ -1,6 +1,7 @@
 ---
 id: integrate_with_llamaindex.md
 summary: This page goes over how to search for the best answer to questions using Milvus as the Vector Database and LlamaIndex as the embedding system.
+title: Retrieval-Augmented Generation (RAG) with Milvus and LlamaIndex
 ---
 
 # Retrieval-Augmented Generation (RAG) with Milvus and LlamaIndex

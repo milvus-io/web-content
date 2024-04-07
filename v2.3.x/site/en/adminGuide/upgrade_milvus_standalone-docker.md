@@ -5,6 +5,7 @@ order: 1
 group: upgrade_milvus_standalone-operator.md
 related_key: upgrade Milvus Standalone
 summary: Learn how to upgrade Milvus standalone with Docker Compose.
+title: Upgrade Milvus Standalone with Docker Compose
 ---
 
 <div class="tab-wrapper"><a href="upgrade_milvus_standalone-operator.md" class=''>Milvus Operator</a><a href="upgrade_milvus_standalone-helm.md" class=''>Helm</a><a href="upgrade_milvus_standalone-docker.md" class='active '>Docker Compose</a></div>
@@ -13,7 +14,7 @@ summary: Learn how to upgrade Milvus standalone with Docker Compose.
 
 This topic describes how to upgrade your Milvus using Docker Compose. 
 
-In normal cases, you can [upgrade Milvus by changing its image](#Upgrade-Milvus-by-changing-its-image). However, you need to [migrate the metadata](#Migrate-the-metadata) before any upgrade from v2.1.x to v2.3.12.
+In normal cases, you can [upgrade Milvus by changing its image](#Upgrade-Milvus-by-changing-its-image). However, you need to [migrate the metadata](#Migrate-the-metadata) before any upgrade from v2.1.x to v2.3.13.
 
 <div class="alter note">
 
@@ -31,7 +32,7 @@ In normal cases, you can upgrade Milvus as follows:
     ...
     standalone:
       container_name: milvus-standalone
-      image: milvusdb/milvus:v2.3.12
+      image: milvusdb/milvus:v2.3.13
     ```
 
 2. Run the following commands to perform the upgrade.
@@ -59,7 +60,7 @@ In normal cases, you can upgrade Milvus as follows:
       runWithBackup: true
     config:
       sourceVersion: 2.1.4   # Specify your milvus version
-      targetVersion: 2.3.12
+      targetVersion: 2.3.13
       backupFilePath: /tmp/migration.bak
     metastore:
       type: etcd

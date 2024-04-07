@@ -3,6 +3,7 @@ id: configure_indexcoord.md
 related_key: configure
 group: system_configuration.md
 summary: Learn how to configure index coordinator of Milvus.
+title: Index Coordinator-related Configurations
 ---
 
 # Index Coordinator-related Configurations

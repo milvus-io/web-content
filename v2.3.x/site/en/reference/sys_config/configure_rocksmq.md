@@ -3,6 +3,7 @@ id: configure_rocksmq.md
 related_key: configure
 group: system_configuration.md
 summary: Learn how to configure RocksMQ for Milvus standalone.
+title: RocksMQ-related Configurations
 ---
 
 # RocksMQ-related Configurations

@@ -2,6 +2,7 @@
 id: check_partition.md
 related_key: Partition
 summary: Learn how to check partition information in Milvus.
+title: Check Partition Information
 ---
 
 # Check Partition Information

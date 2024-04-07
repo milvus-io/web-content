@@ -1,6 +1,7 @@
 ---
 id: recommendation_system.md
-summary: Build a personalized recommender system with Milvus. 
+summary: Build a personalized recommender system with Milvus.
+title: Recommender System
 ---
 
 # Recommender System 

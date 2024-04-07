@@ -2,6 +2,7 @@
 id: insert_data.md
 related_key: insert
 summary: Learn how to insert data in Milvus.
+title: Insert Entities
 ---
 
 # Insert Entities

@@ -2,6 +2,7 @@
 id: create_collection.md
 related_key: create collection
 summary: Learn how to create a collection in Milvus.
+title: Create a Collection
 ---
 
 # Create a Collection

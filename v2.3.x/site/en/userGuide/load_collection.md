@@ -2,6 +2,7 @@
 id: load_collection.md
 related_key: load collection
 summary: Learn how to load a collection into memory for CRUD operations in Milvus.
+title: Load a Collection
 ---
 
 # Load a Collection

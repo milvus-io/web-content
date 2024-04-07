@@ -2,6 +2,7 @@
 id: multi_tenancy.md
 related_key: multi-tenancy
 summary: Multi-tenancy in Milvus.
+title: Multi-tenancy strategies
 ---
 
 # Multi-tenancy strategies

@@ -2,6 +2,7 @@
 id: check_collection.md
 related_key: collection
 summary: Learn how to check collection information in Milvus.
+title: Check Collection Information
 ---
 
 # Check Collection Information

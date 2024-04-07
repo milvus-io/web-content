@@ -2,6 +2,7 @@
 id: users_and_roles.md
 related_key: users, roles
 summary: Learn about the definition of users, roles, objects, and privileges in role-based access control (RBAC).
+title: Users and Roles
 ---
 
 # Users and Roles

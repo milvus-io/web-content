@@ -2,6 +2,7 @@
 id: release_partition.md
 related_key: release partition
 summary: Learn how to release a partition into memory for search or query in Milvus.
+title: Release a Partition
 ---
 
 # Release a Partition

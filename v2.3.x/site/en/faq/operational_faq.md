@@ -1,6 +1,7 @@
 ---
 id: operational_faq.md
 summary: Find answers to commonly asked questions about operations in Milvus.
+title: Operational FAQ
 ---
 
 # Operational FAQ

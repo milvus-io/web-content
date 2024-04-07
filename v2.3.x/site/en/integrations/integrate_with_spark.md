@@ -1,6 +1,7 @@
 ---
 id: integrate_with_spark.md
 summary: This page discusses the Spark-Milvus connector.
+title: Spark-Milvus Connector User Guide
 ---
 
 # Spark-Milvus Connector User Guide

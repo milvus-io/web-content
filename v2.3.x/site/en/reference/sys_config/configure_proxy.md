@@ -3,6 +3,7 @@ id: configure_proxy.md
 related_key: configure
 group: system_configuration.md
 summary: Learn how to configure proxy of Milvus.
+title: Proxy-related Configurations
 ---
 
 # Proxy-related Configurations

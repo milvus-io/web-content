@@ -1,6 +1,7 @@
 ---
 id: milvus_backup_overview.md
-summary: Milvus-Backup is a tool that allows users to backup and restore Milvus data. 
+summary: Milvus-Backup is a tool that allows users to backup and restore Milvus data.
+title: Milvus Backup
 ---
 
 # Milvus Backup

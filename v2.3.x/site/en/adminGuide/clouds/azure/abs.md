@@ -5,12 +5,12 @@ related_key: blob storage, workload identity, iam
 summary: Learn how to configure Blob Storage with Workload Identity.
 ---
 
-## Configure Blob Storage Access by Workload Identity
+# Configure Blob Storage Access by Workload Identity
 This topic introduces how to configure Azure Blob Storage access by Workload Identity when you install Milvus with helm. 
 For more details, refer to [Workload Identity](https://azure.github.io/azure-workload-identity/docs/introduction.html).
 
 
-### Configure applications to use Workload Identity
+## Configure applications to use Workload Identity
 
 - Set env.
 ```bash
@@ -74,7 +74,7 @@ az identity federated-credential create \
 ```
 
 
-### Deploy Milvus
+## Deploy Milvus
 ```bash
 helm install -f values.yaml my-release milvus/milvus
 ``` 

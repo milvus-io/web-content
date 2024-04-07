@@ -1,6 +1,7 @@
 ---
 id: benchmark.md
-summary: Learn about the benchmark result of Milvus. 
+summary: Learn about the benchmark result of Milvus.
+title: Milvus 2.2 Benchmark Test Report
 ---
 
 # Milvus 2.2 Benchmark Test Report

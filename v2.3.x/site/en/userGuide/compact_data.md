@@ -2,6 +2,7 @@
 id: compact_data.md
 related_key: compact data
 summary: Learn how to compact data in Milvus.
+title: Compact Data
 ---
 
 # Compact Data

@@ -1,6 +1,7 @@
 ---
 id: integrate_with_testcontainers.md
 summary: This page discusses vector database integration with Testcontainers.
+title: Testcontainers
 ---
 
 # Testcontainers

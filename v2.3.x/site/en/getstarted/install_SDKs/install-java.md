@@ -3,6 +3,7 @@ id: install-java.md
 label: Install Java SDK
 related_key: SDK
 summary: Learn how to install the Java SDK of Milvus.
+title: Install Milvus Java SDK
 ---
 
 # Install Milvus Java SDK

@@ -3,6 +3,7 @@ id: configure_indexnode.md
 related_key: configure
 group: system_configuration.md
 summary: Learn how to configure index node of Milvus.
+title: Index Node-related Configurations
 ---
 
 # Index Node-related Configurations

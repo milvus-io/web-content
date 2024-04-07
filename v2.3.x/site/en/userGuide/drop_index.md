@@ -2,6 +2,7 @@
 id: drop_index.md
 related_key: drop index
 summary: Learn how to drop an index in Milvus.
+title: Drop an Index
 ---
 
 # Drop an Index

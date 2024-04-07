@@ -2,6 +2,7 @@
 id: rbac.md
 related_key: enable RBAC
 summary: Learn how to manage users, roles, and privileges.
+title: Enable RBAC
 ---
 
 # Enable RBAC

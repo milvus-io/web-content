@@ -2,6 +2,7 @@
 id: import_data.md
 related_key: bulk load
 summary: Learn how to bulk load data in Milvus.
+title: Import Data
 ---
 
 # Import Data

@@ -2,6 +2,7 @@
 id: json_data_type.md
 related_key: json_data_type
 summary: JSON data type in Milvus.
+title: JavaScript Object Notation (JSON)
 ---
 
 # JavaScript Object Notation (JSON)

@@ -2,6 +2,7 @@
 id: partition_key.md
 related_key: partition_key
 summary: Learn how to use the partition key feature.
+title: Partition Key
 ---
 
 # Partition Key

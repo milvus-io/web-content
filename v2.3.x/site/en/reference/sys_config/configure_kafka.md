@@ -3,6 +3,7 @@ id: configure_kafka.md
 related_key: configure
 group: system_configuration.md
 summary: Learn how to configure Kafka for Milvus cluster.
+title: Kafka-related Configurations
 ---
 
 # Kafka-related Configurations

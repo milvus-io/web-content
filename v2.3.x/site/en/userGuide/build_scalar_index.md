@@ -2,6 +2,7 @@
 id: build_scalar_index.md
 related_key: create scalar index
 summary: Learn how to build an index for scalar fields in Milvus.
+title: Build an Index on Scalars
 ---
 
 # Build an Index on Scalars

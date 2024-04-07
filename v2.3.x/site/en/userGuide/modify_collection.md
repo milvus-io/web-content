@@ -2,6 +2,7 @@
 id: modify_collection.md
 related_key: modify collection
 summary: Learn how to modify the properties of a collection in Milvus.
+title: Modify a collection
 ---
 
 # Modify a collection

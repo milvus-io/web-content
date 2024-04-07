@@ -2,6 +2,7 @@
 id: drop_collection.md
 related_key: drop collection
 summary: Learn how to drop a collection in Milvus.
+title: Drop a collection
 ---
 
 # Drop a collection

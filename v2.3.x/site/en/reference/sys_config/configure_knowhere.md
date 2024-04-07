@@ -3,6 +3,7 @@ id: configure_knowhere.md
 related_key: configure
 group: system_configuration.md
 summary: Learn how to configure Knowhere-related parameters of Milvus.
+title: Knowhere-related Configurations
 ---
 
 # Knowhere-related Configurations

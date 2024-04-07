@@ -1,6 +1,7 @@
 ---
 id: integrate_with_voxel51.md
 summary: This page discusses the integration with voxel51
+title: Conduct Vision Searches with Milvus and FiftyOne
 ---
 
 # Conduct Vision Searches with Milvus and FiftyOne

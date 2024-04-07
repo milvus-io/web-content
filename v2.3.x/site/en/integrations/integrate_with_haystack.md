@@ -1,6 +1,7 @@
 ---
 id: integrate_with_haystack.md
 summary: This page goes over how to search for the best answer to questions using Milvus as the Vector Database and Haystack as the LLM framework.
+title: Build Retrieval Augmented Generative System with Milvus and Haystack
 ---
 
 # Build Retrieval Augmented Generative System with Milvus and Haystack

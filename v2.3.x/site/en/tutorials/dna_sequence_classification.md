@@ -1,6 +1,7 @@
 ---
 id: dna_sequence_classification.md
-summary: Build a DNA sequence classification system with Milvus. 
+summary: Build a DNA sequence classification system with Milvus.
+title: DNA Sequence Classification
 ---
 
 # DNA Sequence Classification 

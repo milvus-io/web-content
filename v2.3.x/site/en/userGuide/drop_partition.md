@@ -2,6 +2,7 @@
 id: drop_partition.md
 related_key: Partition
 summary: Learn how to drop a partition in Milvus.
+title: Drop Partitions
 ---
 
 # Drop Partitions

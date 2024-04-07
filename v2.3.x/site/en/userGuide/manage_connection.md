@@ -2,6 +2,7 @@
 id: manage_connection.md
 related_key: connect Milvus
 summary: Learn how to connect to a Milvus server.
+title: Manage Milvus Connections
 ---
 
 # Manage Milvus Connections

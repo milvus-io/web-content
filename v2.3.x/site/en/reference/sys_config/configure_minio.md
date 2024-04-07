@@ -3,6 +3,7 @@ id: configure_minio.md
 related_key: configure
 group: system_configuration.md
 summary: Learn how to configure MinIO for Milvus.
+title: MinIO-related Configurations
 ---
 
 # MinIO-related Configurations

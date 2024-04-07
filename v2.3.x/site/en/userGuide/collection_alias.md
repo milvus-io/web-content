@@ -2,6 +2,7 @@
 id: collection_alias.md
 related_key: collection alias
 summary: Learn how to manage collection alias in Milvus.
+title: Collection Alias
 ---
 
 # Collection Alias

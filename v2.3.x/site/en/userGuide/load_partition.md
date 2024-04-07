@@ -2,6 +2,7 @@
 id: load_partition.md
 related_key: load partition
 summary: Learn how to load a partition into memory for search or query in Milvus.
+title: Load a Partition
 ---
 
 # Load a Partition

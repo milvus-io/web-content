@@ -3,6 +3,7 @@ id: configure_etcd.md
 related_key: configure
 group: system_configuration.md
 summary: Learn how to configure etcd for Milvus.
+title: etcd-related Configurations
 ---
 
 # etcd-related Configurations

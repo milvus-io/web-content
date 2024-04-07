@@ -5,6 +5,7 @@ related_key: Within Range
 order: 2
 group: search.md
 summary: Learn how to conduct a range search.
+title: Conduct a Range Search
 ---
 
 <div class="tab-wrapper"><a href="search.md" class=''>Vector Similarity Search</a><a href="hybridsearch.md" class=''>Hybrid Search</a><a href="within_range.md" class='active '>Range Search</a></div>

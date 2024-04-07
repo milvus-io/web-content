@@ -5,6 +5,7 @@ label: Python
 order: 0
 group: example_code.md
 summary: Get started with Milvus faster using this Python example code.
+title: Run Milvus using Python
 ---
 
 <div class="tab-wrapper"><a href="example_code.md" class='active '>Python</a></div>
@@ -17,7 +18,7 @@ Through running the example code we provided, you will have a primary understand
 
 ## Preparations
 
-- [Milvus 2.3.12](install_standalone-docker.md)
+- [Milvus 2.3.13](install_standalone-docker.md)
 - Python 3 (3.7.1 or later)
 - [PyMilvus 2.3.7](install-pymilvus.md)
 

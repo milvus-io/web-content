@@ -2,6 +2,7 @@
 id: disk_index.md
 related_key: disk_index
 summary: Disk index mechanism in Milvus.
+title: On-disk Index
 ---
 
 # On-disk Index

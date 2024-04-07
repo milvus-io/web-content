@@ -5,6 +5,7 @@ related_key: filter
 order: 1
 group: search.md
 summary: Conduct a Hybrid Search with Milvus.
+title: Conduct a Hybrid Search
 ---
 
 <div class="tab-wrapper"><a href="search.md" class=''>Vector Similarity Search</a><a href="hybridsearch.md" class='active '>Hybrid Search</a><a href="within_range.md" class=''>Range Search</a></div>

@@ -3,6 +3,7 @@ id: dynamic_config.md
 related_key: configure
 group: system_configuration.md
 summary: Learn about the system configuration of Milvus.
+title: Configure Milvus on the Fly
 ---
 
 # Configure Milvus on the Fly

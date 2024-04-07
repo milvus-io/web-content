@@ -2,6 +2,7 @@
 id: using_milvusclient.md
 related_key: Milvus Client Python
 summary: Learn how to use the MilvusClient Python API.
+title: Use the MilvusClient
 ---
 
 # Use the MilvusClient

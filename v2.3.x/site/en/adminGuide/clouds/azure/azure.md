@@ -5,15 +5,15 @@ related_key: cluster
 summary: Learn how to deploy a Milvus cluster on Azure.
 ---
 
-##  Deploy Milvus on Azure with AKS
+#  Deploy Milvus on Azure with AKS
 
  This topic describes how to provision and create a cluster with [Azure Kubernetes Service](https://azure.microsoft.com/en-us/services/kubernetes-service/#overview) (AKS) and the [Azure portal](https://portal.azure.com).
 
-### Prerequisites
+## Prerequisites
 
 Ensure that your Azure project has been set up properly and you have access to the resources that you want to use. Contact your administrators if you are not sure about your access permission. 
    
-### Software requirements
+## Software requirements
 - [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli#install)
 - [kubectl](https://kubernetes.io/docs/tasks/tools/)
 - [Helm](https://helm.sh/docs/intro/install/)
@@ -22,7 +22,7 @@ Alternatively, you can use the [Cloud Shell](https://learn.microsoft.com/en-us/a
 
 <div class="alert note">After you install the Azure CLI, ensure that you are properly authenticated. </div>
 
-### Provision a Kubernetes cluster
+## Provision a Kubernetes cluster
 
 1. Log on to the Azure portal.
 2. On the Azure portal menu or from the **Home** page, select **Create a resource**.
@@ -70,13 +70,13 @@ Alternatively, you can use the [Cloud Shell](https://learn.microsoft.com/en-us/a
 
 5. After configuring the options, click **Review + create** and then **Create** when validation completes. It takes a few minutes to create the cluster. 
 
-### Connect to the cluster
+## Connect to the cluster
 
 1. Navigate to the cluster that you have created in Kubernetes services and click it.
 2. On the left-side navigation pane, click `Overview`.
 3. On the **Overview** page that appears, click **Connect** to view the resource group and subscription.
 
-### Set a subscription and credentials
+## Set a subscription and credentials
 
 <div class="alert note">You can use Azure Cloud Shell to perform the following procedures.</div>
 
@@ -96,7 +96,7 @@ Use the same shell for the following procedures. If you switch to another shell,
 </div>
 
 
-### Using Azure Blob Storage as external object storage
+## Using Azure Blob Storage as external object storage
 
 Azure Blob Storage is Azure's version of AWS Simple Storage Service (S3).
 
@@ -139,7 +139,7 @@ externalS3:
   secretKey: "<secret-key>" 
 ```
 
-### Deploy Milvus
+## Deploy Milvus
 
 Now the Kubernetes cluster is ready. Let's deploy Milvus right now. 
 
@@ -154,7 +154,7 @@ In the preceding commands, we add the repo of Milvus Helm charts locally and upd
 Notice the config `service.type` value, which indicates that we would like to expose the Milvus instance through a Layer-4 load balancer. 
 
 
-### Verify the deployment
+## Verify the deployment
 
 Once all pods are running, run the following command to get the external IP address.
 
@@ -163,7 +163,7 @@ kubectl get services|grep my-release-milvus|grep LoadBalancer|awk '{print $4}'
 ```
 
 
-### Hello Milvus
+## Hello Milvus
 
 Please refer to [Hello Milvus](https://milvus.io/docs/example_code.md), change the host value to external IP address, then run the code.
 

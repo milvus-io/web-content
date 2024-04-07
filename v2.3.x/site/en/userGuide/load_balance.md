@@ -2,6 +2,7 @@
 id: load_balance.md
 related_key: Load balance
 summary: Learn how to balance query load in Milvus.
+title: Balance Query Load
 ---
 
 # Balance Query Load

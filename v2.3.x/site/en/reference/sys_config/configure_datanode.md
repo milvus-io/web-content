@@ -3,6 +3,7 @@ id: configure_datanode.md
 related_key: configure
 group: system_configuration.md
 summary: Learn how to configure data node of Milvus.
+title: Data Node-related Configurations
 ---
 
 # Data Node-related Configurations

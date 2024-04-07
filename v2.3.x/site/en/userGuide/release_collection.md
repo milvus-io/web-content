@@ -2,6 +2,7 @@
 id: release_collection.md
 related_key: release collection
 summary: Learn how to release a collection from memory in Milvus.
+title: Release a Collection
 ---
 
 # Release a Collection

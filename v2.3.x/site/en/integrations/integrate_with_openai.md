@@ -1,6 +1,7 @@
 ---
 id: integrate_with_openai.md
 summary: This page discusses vector database integration with OpenAI's embedding API.
+title: Similarity Search with Milvus and OpenAI
 ---
 
 # Similarity Search with Milvus and OpenAI

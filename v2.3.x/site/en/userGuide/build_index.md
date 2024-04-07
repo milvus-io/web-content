@@ -2,6 +2,7 @@
 id: build_index.md
 related_key: create index
 summary: Learn how to build an index for vectors in Milvus.
+title: Build an Index on Vectors
 ---
 
 # Build an Index on Vectors

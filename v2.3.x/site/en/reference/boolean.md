@@ -1,6 +1,7 @@
 ---
 id: boolean.md
 summary: Learn about boolean expression rules in Milvus.
+title: Boolean Expression Rules
 ---
 
 # Boolean Expression Rules

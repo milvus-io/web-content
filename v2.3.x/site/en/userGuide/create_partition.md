@@ -2,6 +2,7 @@
 id: create_partition.md
 related_key: Partition
 summary: Learn how to create a partition in Milvus.
+title: Create a Partition
 ---
 
 # Create a Partition

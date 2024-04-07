@@ -1,6 +1,7 @@
 ---
 id: bitset.md
 summary: Learn about bitsets in Milvus.
+title: Bitset
 ---
 
 # Bitset

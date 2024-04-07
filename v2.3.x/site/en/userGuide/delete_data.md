@@ -2,6 +2,7 @@
 id: delete_data.md
 related_key: delete
 summary: Learn how to delete data in Milvus.
+title: Delete Entities
 ---
 
 # Delete Entities

@@ -1,6 +1,7 @@
 ---
 id: schema.md
 summary: Learn how to define a schema in Milvus.
+title: Schema
 ---
 
 # Schema

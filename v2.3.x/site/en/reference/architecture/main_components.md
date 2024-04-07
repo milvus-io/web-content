@@ -1,6 +1,7 @@
 ---
 id: main_components.md
 summary: Learn about the main components in Milvus standalone and cluster.
+title: Main Components
 ---
 
 # Main Components

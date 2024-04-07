@@ -3,6 +3,7 @@ id: configure_quota_limits.md
 related_key: configure
 group: system_configuration.md
 summary: Learn how to configure quotas and limitations.
+title: Quota- and Limit-related configurations
 ---
 
 # Quota- and Limit-related configurations

@@ -1,6 +1,7 @@
 ---
 id: birdwatcher_install_guides.md
 summary: Learn how to install Birdwatch to debug Milvus.
+title: Install Birdwatcher
 ---
 
 # Install Birdwatcher

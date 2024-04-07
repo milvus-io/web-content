@@ -3,6 +3,7 @@ id: install-go.md
 label: Install GO SDK
 related_key: SDK
 summary: Learn how to install the GO SDK of Milvus.
+title: Install Milvus Go SDK
 ---
 
 # Install Milvus Go SDK
