@@ -1,13 +1,15 @@
 # Rename Collection
 
-This operation renames an existing collection and optionally moves the collection to a new database.
-
-<div>
-    <div style="display: inline-block; background: #026aca; font-size: 0.6em; border-radius: 10px; color: #ffffff; padding: 0.3em 1em;">
+<div style="background: #f9f9f9; padding: 10px; border-radius: 5px; margin-bottom: 20px;">
+    <div style="display: inline-block; background: #026aca; font-size: 0.6em; border-radius: 10px; color: #ffffff; padding: 0.3em 1em; line-height: 1.5em;">
         <span>POST</span>
     </div>
-    <span style="font-weight: bold;">  http://${MILVUS_URI}/v2/vectordb/collections/rename</span>
+    <div style="display: inline-block; font-size: 0.85em; font-weight: 700; margin-left: 10px;">
+        <span>http://${MILVUS_URI}/v2/vectordb/collections/rename</span>
+    </div>
 </div>
+
+This operation renames an existing collection and optionally moves the collection to a new database.
 
 ## Example
 

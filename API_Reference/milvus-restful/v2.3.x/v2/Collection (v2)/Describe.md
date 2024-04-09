@@ -1,13 +1,15 @@
 # Describe Collection
 
-Describes the details of a collection.
-
-<div>
-    <div style="display: inline-block; background: #026aca; font-size: 0.6em; border-radius: 10px; color: #ffffff; padding: 0.3em 1em;">
+<div style="background: #f9f9f9; padding: 10px; border-radius: 5px; margin-bottom: 20px;">
+    <div style="display: inline-block; background: #026aca; font-size: 0.6em; border-radius: 10px; color: #ffffff; padding: 0.3em 1em; line-height: 1.5em;">
         <span>POST</span>
     </div>
-    <span style="font-weight: bold;">  http://${MILVUS_URI}/v2/vectordb/collections/describe</span>
+    <div style="display: inline-block; font-size: 0.85em; font-weight: 700; margin-left: 10px;">
+        <span>http://${MILVUS_URI}/v2/vectordb/collections/describe</span>
+    </div>
 </div>
+
+Describes the details of a collection.
 
 ## Example
 
@@ -101,7 +103,7 @@ Possible output would be similar to the following:
 
 | Parameter        | Description                                                                               |
 |------------------|-------------------------------------------------------------------------------------------|
-| `dbName` <span style="color:red">*</span> | __string__<br/>The name of the database.  |
+| `dbName`  | __string__<br/>The name of the database.  |
 | `collectionName` <span style="color:red">*</span> | __string__<br/>The name of the collection to describe.  |
 
 ## Response

@@ -1,13 +1,15 @@
 # Create Collection
 
-This operation creates a collection in a specified cluster.
-
-<div>
-    <div style="display: inline-block; background: #026aca; font-size: 0.6em; border-radius: 10px; color: #ffffff; padding: 0.3em 1em;">
+<div style="background: #f9f9f9; padding: 10px; border-radius: 5px; margin-bottom: 20px;">
+    <div style="display: inline-block; background: #026aca; font-size: 0.6em; border-radius: 10px; color: #ffffff; padding: 0.3em 1em; line-height: 1.5em;">
         <span>POST</span>
     </div>
-    <span style="font-weight: bold;">  http://${MILVUS_URI}/v2/vectordb/collections/create</span>
+    <div style="display: inline-block; font-size: 0.85em; font-weight: 700; margin-left: 10px;">
+        <span>http://${MILVUS_URI}/v2/vectordb/collections/create</span>
+    </div>
 </div>
+
+This operation creates a collection in a specified cluster.
 
 ## Example
 
@@ -179,7 +181,7 @@ Possible responses for the above requests are similar to the following:
     "primaryFieldName": "string",
     "vectorFieldName": "string",
     "schema": {
-        "autoId": "string",
+        "autoID": "string",
         "enableDynamicField": "string",
         "fields": [
             {
@@ -223,15 +225,15 @@ Possible responses for the above requests are similar to the following:
 | Parameter        | Description                                                                               |
 |------------------|-------------------------------------------------------------------------------------------|
 | `dbName`  | __string__<br/>The name of the database. <zilliz>This parameter applies only to dedicated clusters.</zilliz>  |
-| `collectionName`  | __string__<br/>The name of the collection to create.  |
+| `collectionName` <span style="color:red">*</span> | __string__<br/>The name of the collection to create.  |
 | `dimension`  | __integer__<br/>The number of dimensions a vector value should have.<br/>This is required if **dtype** of this field is set to **DataType.FLOAT_VECTOR**.  |
 | `metricType`  | __string__<br/>The metric type applied to this operation. <br/>Possible values are **L2**, **IP**, and **COSINE**.<br/>The value defaults to COSINE  |
 | `idType`  | __string__<br/>The data type of the primary field. This parameter is designed for the quick-setup of a collection and will be ignored if __schema__ is defined.  |
-| `autoID` <span style="color:red">*</span> | __string__<br/>Whether the primary field automatically increments. This parameter is designed for the quick-setup of a collection and will be ignored if __schema__ is defined.<br/>The value defaults to false  |
+| `autoID`  | __string__<br/>Whether the primary field automatically increments. This parameter is designed for the quick-setup of a collection and will be ignored if __schema__ is defined.<br/>The value defaults to false  |
 | `primaryFieldName`  | __string__<br/>The name of the primary field. This parameter is designed for the quick-setup of a collection and will be ignored if __schema__ is defined.  |
 | `vectorFieldName`  | __string__<br/>The name of the vector field. This parameter is designed for the quick-setup of a collection and will be ignored if __schema__ is defined.  |
 | `schema` | __object__<br/>The schema is responsible for organizing data in the target collection. A valid schema should have multiple fields, which must include a primary key, a vector field, and several scalar fields. |
-| `schema.autoId`  | __string__<br/>Whether allows the primary field to automatically increment. Setting this to True makes the primary field automatically increment. In this case, the primary field should not be included in the data to insert to avoid errors. Set this parameter in the field with is_primary set to True.  |
+| `schema.autoID`  | __string__<br/>Whether allows the primary field to automatically increment. Setting this to True makes the primary field automatically increment. In this case, the primary field should not be included in the data to insert to avoid errors. Set this parameter in the field with is_primary set to True.  |
 | `schema.enableDynamicField`  | __string__<br/>Whether allows to use the reserved __$meta__ field to hold non-schema-defined fields in key-value pairs.  |
 | `schema[].fields` | __array__<br/>A list of field objects. |
 | `schema[].fields[]` | __object__<br/>A field object |

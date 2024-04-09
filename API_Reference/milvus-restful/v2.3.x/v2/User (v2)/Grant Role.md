@@ -1,15 +1,15 @@
 # Grant Role To User
 
-This operation grants a specified role to the current user. Once granted the role, the user gets permissions allowed for the current role and can perform certain Operations (v2).
-
-<div>
-    <div style="display: inline-block; background: #026aca; font-size: 0.6em; border-radius: 10px; color: #ffffff; padding: 0.3em 1em;">
+<div style="background: #f9f9f9; padding: 10px; border-radius: 5px; margin-bottom: 20px;">
+    <div style="display: inline-block; background: #026aca; font-size: 0.6em; border-radius: 10px; color: #ffffff; padding: 0.3em 1em; line-height: 1.5em;">
         <span>POST</span>
     </div>
-    <span style="font-weight: bold;">  http://${MILVUS_URI}/v2/vectordb/users/grant_role</span>
+    <div style="display: inline-block; font-size: 0.85em; font-weight: 700; margin-left: 10px;">
+        <span>http://${MILVUS_URI}/v2/vectordb/users/grant_role</span>
+    </div>
 </div>
 
-
+This operation grants a specified role to the current user. Once granted the role, the user gets permissions allowed for the current role and can perform certain operations.
 
 > Notes
 > To complete this operation, you need to enable authentication on your Milvus instance. For details, refer to [Authenticate User Access](https://milvus.io/docs/authenticate.md).

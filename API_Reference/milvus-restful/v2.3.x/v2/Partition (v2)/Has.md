@@ -1,15 +1,15 @@
 # Has Partition
 
-This operation checks whether a partition exists.
-
-<div>
-    <div style="display: inline-block; background: #026aca; font-size: 0.6em; border-radius: 10px; color: #ffffff; padding: 0.3em 1em;">
+<div style="background: #f9f9f9; padding: 10px; border-radius: 5px; margin-bottom: 20px;">
+    <div style="display: inline-block; background: #026aca; font-size: 0.6em; border-radius: 10px; color: #ffffff; padding: 0.3em 1em; line-height: 1.5em;">
         <span>POST</span>
     </div>
-    <span style="font-weight: bold;">  http://${MILVUS_URI}/v2/vectordb/partitions/has</span>
+    <div style="display: inline-block; font-size: 0.85em; font-weight: 700; margin-left: 10px;">
+        <span>http://${MILVUS_URI}/v2/vectordb/partitions/has</span>
+    </div>
 </div>
 
-
+This operation checks whether a partition exists.
 
 ## Example
 
@@ -20,7 +20,7 @@ curl --location --request POST "http://${MILVUS_URI}/v2/vectordb/partitions/has"
 --header "Content-Type: application/json" \
 --data-raw '{
     "partitionName": "january",
-    "collectionName": "quick_setup"
+    "collectionName": "test_collection"
 }'
 ```
 Possible response is similar to the following:
