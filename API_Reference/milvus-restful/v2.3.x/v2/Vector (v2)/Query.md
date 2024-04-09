@@ -1,15 +1,15 @@
 # Query
 
-This operation conducts a filtering on the scalar field with a specified boolean expression.
-
-<div>
-    <div style="display: inline-block; background: #026aca; font-size: 0.6em; border-radius: 10px; color: #ffffff; padding: 0.3em 1em;">
+<div style="background: #f9f9f9; padding: 10px; border-radius: 5px; margin-bottom: 20px;">
+    <div style="display: inline-block; background: #026aca; font-size: 0.6em; border-radius: 10px; color: #ffffff; padding: 0.3em 1em; line-height: 1.5em;">
         <span>POST</span>
     </div>
-    <span style="font-weight: bold;">  http://${MILVUS_URI}/v2/vectordb/entities/query</span>
+    <div style="display: inline-block; font-size: 0.85em; font-weight: 700; margin-left: 10px;">
+        <span>http://${MILVUS_URI}/v2/vectordb/entities/query</span>
+    </div>
 </div>
 
-
+This operation conducts a filtering on the scalar field with a specified boolean expression.
 
 ## Example
 
@@ -79,7 +79,7 @@ Possible response is similar to the following.
 |------------------|-------------------------------------------------------------------------------------------|
 | `dbName`  | __string__<br/>The name of the database.  |
 | `collectionName` <span style="color:red">*</span> | __string__<br/>The name of the collection to which this operation applies.  |
-| `filter`  | __string__<br/>The filter used to find matches for the search.  |
+| `filter` <span style="color:red">*</span> | __string__<br/>The filter used to find matches for the search.  |
 | `outputFields` | __array__<br/>An array of fields to return along with the search results. |
 | `outputFields[]`  | __string__<br/>  |
 | `partitionNames` | __array__<br/>The name of the partitions to which this operation applies. |
