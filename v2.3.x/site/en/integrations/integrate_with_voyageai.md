@@ -1,6 +1,7 @@
 ---
 id: integrate_with_voyageai.md
 summary: This page discusses vector database integration with VoyageAI's embedding API.
+title: Similarity Search with Milvus and VoyageAI
 ---
 
 # Similarity Search with Milvus and VoyageAI
