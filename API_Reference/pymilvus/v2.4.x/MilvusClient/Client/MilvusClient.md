@@ -103,5 +103,5 @@ client = MilvusClient(
 
 ## Class members
 
-Refer to [MilvusClient](./MilvusClient) for a categorized list of class members.
+Refer to [MilvusClient](./MilvusClient.md) for a categorized list of class members.
 
