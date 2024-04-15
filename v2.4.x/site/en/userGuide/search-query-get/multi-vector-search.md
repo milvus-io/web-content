@@ -172,6 +172,8 @@ After creating `AnnSearchRequest` instances, configure a reranking strategy to c
 
     ```python
     # Alternatively, use RRFRanker for reciprocal rank fusion reranking
+    from pymilvus import RRFRanker
+    
     rerank = RRFRanker()
     ```
 
