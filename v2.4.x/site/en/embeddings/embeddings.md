@@ -33,6 +33,7 @@ To use embedding functions with Milvus, first install the PyMilvus client librar
 
 ```python
 pip install pymilvus[model]
+# or pip install "pymilvus[model]" for zsh.
 ```
 
 The `model` subpackage supports various embedding models, from [OpenAI](https://milvus.io/docs/embed-with-openai.md), [Sentence Transformers](https://milvus.io/docs/embed-with-sentence-transform.md), [BGE M3](https://milvus.io/docs/embed-with-bgm-m3.md), [BM25](https://milvus.io/docs/embed-with-bm25.md), to [SPLADE](https://milvus.io/docs/embed-with-splade.md) pretrained models. For simpilicity, this example uses the `DefaultEmbeddingFunction` which is __all-MiniLM-L6-v2__ sentence transformer model, the model is about 70MB and it will be downloaded during first use:
