@@ -324,11 +324,18 @@
       "order": 8
     },
     {
+      "id": "reranking.md",
+      "title": "Reranking",
+      "label1": "concepts",
+      "label2": "",
+      "order": 9
+    },
+    {
       "id": "glossary.md",
       "title": "Glossary",
       "label1": "concepts",
       "label2": "",
-      "order": 9
+      "order": 10
     }, 
     {
       "id": "userguide",
