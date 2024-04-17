@@ -26,9 +26,9 @@ helm -n milvus-operator upgrade milvus-operator zilliztech-milvus-operator/milvu
 
 Once you have upgraded your Milvus operator to the latest version, you have the following choices:
 
-- To upgrade Milvus from v2.2.3 or later releases to 2.4.0-rc.1, you can [conduct a rolling upgrade](#Conduct-a-rolling-upgrade).
-- To upgrade Milvus from a minor release before v2.2.3 to 2.4.0-rc.1, you are advised to [upgrade Milvus by changing its image version](#Upgrade-Milvus-by-changing-its-image).
-- To upgrade Milvus from v2.1.x to 2.4.0-rc.1, you need to [migrate the metadata](#Migrate-the-metadata) before the actual upgrade.
+- To upgrade Milvus from v2.2.3 or later releases to 2.4.0, you can [conduct a rolling upgrade](#Conduct-a-rolling-upgrade).
+- To upgrade Milvus from a minor release before v2.2.3 to 2.4.0, you are advised to [upgrade Milvus by changing its image version](#Upgrade-Milvus-by-changing-its-image).
+- To upgrade Milvus from v2.1.x to 2.4.0, you need to [migrate the metadata](#Migrate-the-metadata) before the actual upgrade.
 
 ## Conduct a rolling upgrade
 
@@ -47,7 +47,7 @@ spec:
   components:
     enableRollingUpdate: true
     imageUpdateMode: rollingUpgrade # Default value, can be omitted
-    image: milvusdb/milvus:v2.4.0-rc.1
+    image: milvusdb/milvus:v2.4.0
 ```
 
 In this above configuration file, set `spec.components.enableRollingUpdate` to `true` and set `spec.components.image` to the desired Milvus version.
@@ -63,7 +63,7 @@ spec:
   components:
     enableRollingUpdate: true
     imageUpdateMode: all
-    image: milvusdb/milvus:v2.4.0-rc.1
+    image: milvusdb/milvus:v2.4.0
 ```
 
 You can set `spec.components.imageUpdateMode` to `rollingDowngrade` to have Milvus replace coordinator pod images with a lower version.
@@ -101,7 +101,7 @@ metadata:
 spec:
   # Omit other fields ...
   components:
-   image: milvusdb/milvus:v2.4.0-rc.1
+   image: milvusdb/milvus:v2.4.0
 ```
 
 Then run the following to perform the upgrade:
@@ -112,11 +112,11 @@ kubectl apply -f milvusupgrade.yaml
 
 ## Migrate the metadata
 
-Since Milvus 2.2.0, the metadata is incompatible with that in previous releases. The following example snippets assume an upgrade from Milvus 2.1.4 to Milvus 2.4.0-rc.1.
+Since Milvus 2.2.0, the metadata is incompatible with that in previous releases. The following example snippets assume an upgrade from Milvus 2.1.4 to Milvus 2.4.0.
 
 ### 1. Create a `.yaml` file for metadata migration
 
-Create a metadata migration file. The following is an example. You need to specify the `name`, `sourceVersion`, and `targetVersion` in the configuration file. The following example sets the `name` to `my-release-upgrade`, `sourceVersion` to `v2.1.4`, and `targetVersion` to `v2.4.0-rc.1`. This means that your Milvus cluster will be upgraded from v2.1.4 to v2.4.0-rc.1.
+Create a metadata migration file. The following is an example. You need to specify the `name`, `sourceVersion`, and `targetVersion` in the configuration file. The following example sets the `name` to `my-release-upgrade`, `sourceVersion` to `v2.1.4`, and `targetVersion` to `v2.4.0`. This means that your Milvus cluster will be upgraded from v2.1.4 to v2.4.0.
 
 ```
 apiVersion: milvus.io/v1beta1
@@ -128,9 +128,9 @@ spec:
     namespace: default
     name: my-release
   sourceVersion: "v2.1.4"
-  targetVersion: "v2.4.0-rc.1"
+  targetVersion: "v2.4.0"
   # below are some omit default values:
-  # targetImage: "milvusdb/milvus:v2.4.0-rc.1"
+  # targetImage: "milvusdb/milvus:v2.4.0"
   # toolImage: "milvusdb/meta-migration:v2.2.0"
   # operation: upgrade
   # rollbackIfFailed: true
