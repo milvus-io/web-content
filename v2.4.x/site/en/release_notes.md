@@ -11,9 +11,9 @@ Find out what’s new in Milvus! This page summarizes new features, improvements
 
 Release date: April 17, 2024
 
-| Milvus version | Python SDK version |
-|----------------|--------------------|
-| 2.4.0          | 2.4.0              |
+| Milvus version | Python SDK version | Node.js SDK version |
+|----------------|--------------------| --------------------|
+| 2.4.0          | 2.4.0              | 2.4.0               |
 
 We are excited to announce the official launch of Milvus 2.4.0. Building upon the solid foundation of the 2.4.0-rc.1 release, we have focused on addressing critical bugs reported by our users, while preserving the existing functionality. In addition, Milvus 2.4.0 introduces a range of optimizations aimed at enhancing system performance, improving observability through the incorporation of various metrics, and streamlining the codebase for increased simplicity.
 
