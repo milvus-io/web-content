@@ -14,6 +14,22 @@ This guide explains how to connect to your Milvus cluster and performs CRUD oper
 
 - You have installed preferred SDKs. You can choose among various languages, including [Python](https://milvus.io/docs/install-pymilvus.md), [Java](https://milvus.io/docs/install-java.md), [Go](https://milvus.io/docs/install-go.md), and [Node.js](https://milvus.io/docs/install-node.md).
 
+## Hello Milvus
+
+To confirm that your Milvus instance is operational and Python SDK is set up correctly, start by downloading the `hello_milvus.py` script. You can do this using the following command:
+
+```bash
+wget https://raw.githubusercontent.com/milvus-io/milvus-docs/v2.4.x/assets/hello_milvus.py
+```
+
+Next, update the `uri` parameter in the script with the address of your Milvus instance. Once updated, run the script using the command below:
+
+```python
+python hello_milvus.py
+```
+
+If the script executes without returning any error messages, your Milvus instance is functioning correctly and the Python SDK is properly installed.
+
 ## Connect to Milvus
 
 Once you have obtained the cluster credentials or an API key, you can use it to connect to your Milvus now.
