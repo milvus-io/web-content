@@ -25,7 +25,7 @@ With default settings, you do not need to provide any authentication credentials
 
 ```shell
 export MILVUS_URI="http://localhost:19530"
-export TOKEN="root:Milvus"
+export TOKEN="root:milvus"
 
 curl --request GET \
     --url '${MILVUS_URI}/v1/vector/collections' \

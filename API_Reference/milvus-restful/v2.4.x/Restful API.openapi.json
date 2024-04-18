@@ -1,0 +1,1920 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Restful API",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "Collection Operations"
+    },
+    {
+      "name": "Vector Operations"
+    }
+  ],
+  "paths": {
+    "/v1/vector/collections": {
+      "get": {
+        "summary": "List Collections",
+        "x-apifox-folder": "Collection Operations",
+        "x-apifox-status": "released",
+        "deprecated": false,
+        "description": "Lists collections in a cluster.",
+        "tags": [
+          "Collection Operations"
+        ],
+        "parameters": [
+          {
+            "name": "CLUSTER_ENDPOINT",
+            "in": "path",
+            "description": "The endpoint of your cluster.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "dbName",
+            "in": "query",
+            "description": "The name of the database",
+            "required": false,
+            "example": "default",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a list of collections in the specified cluster.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpapi.GenericResp-customer_ListCollectionsResp"
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/2645146/apis/api-77767175-run",
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/v1/vector/collections/create": {
+      "post": {
+        "summary": "Create Collection",
+        "x-apifox-folder": "Collection Operations",
+        "x-apifox-status": "released",
+        "deprecated": false,
+        "description": "Creates a collection in a cluster.",
+        "tags": [
+          "Collection Operations"
+        ],
+        "parameters": [
+          {
+            "name": "CLUSTER_ENDPOINT",
+            "in": "path",
+            "description": "The endpoint of your cluster.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CollectionCreateSimple"
+              },
+              "example": ""
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns an empty object.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpapi.GenericResp-customer_CreateIndexResp"
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/2645146/apis/api-77767176-run",
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/v1/vector/collections/describe": {
+      "get": {
+        "summary": "Describe Collection",
+        "x-apifox-folder": "Collection Operations",
+        "x-apifox-status": "released",
+        "deprecated": false,
+        "description": "Describes the details of a collection.",
+        "tags": [
+          "Collection Operations"
+        ],
+        "parameters": [
+          {
+            "name": "CLUSTER_ENDPOINT",
+            "in": "path",
+            "description": "The endpoint of your cluster.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "collectionName",
+            "in": "query",
+            "description": "The name of the collection to describe.",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "dbName",
+            "in": "query",
+            "description": "The name of the database.",
+            "required": false,
+            "example": "default",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the specified collection in detail.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpapi.GenericResp-customer_DescCollectionResp"
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/2645146/apis/api-77767177-run",
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/v1/vector/collections/drop": {
+      "post": {
+        "summary": "Drop Collection",
+        "x-apifox-folder": "Collection Operations",
+        "x-apifox-status": "released",
+        "deprecated": false,
+        "description": "Drops a collection. This operation erases your collection data. Exercise caution when performing this operation.",
+        "tags": [
+          "Collection Operations"
+        ],
+        "parameters": [
+          {
+            "name": "CLUSTER_ENDPOINT",
+            "in": "path",
+            "description": "The endpoint of your cluster.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "x-apifox-refs": {
+                  "01HD5Z6MN1V8J7487CTKFNDVF8": {
+                    "$ref": "#/components/schemas/customer.DropCollectionReq",
+                    "x-apifox-overrides": {}
+                  }
+                },
+                "properties": {
+                  "dbName": {
+                    "type": "string",
+                    "description": "The name of the database."
+                  },
+                  "collectionName": {
+                    "type": "string",
+                    "description": "The name of the collection to delete."
+                  }
+                },
+                "x-apifox-orders": [
+                  "dbName",
+                  "01HD5Z6MN1V8J7487CTKFNDVF8"
+                ],
+                "required": [
+                  "collectionName"
+                ],
+                "x-apifox-ignore-properties": [
+                  "collectionName"
+                ]
+              },
+              "example": ""
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns an empty object.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpapi.GenericResp-customer_DropCollectionResp"
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/2645146/apis/api-77767178-run",
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/v1/vector/delete": {
+      "post": {
+        "summary": "Delete",
+        "x-apifox-folder": "Vector Operations",
+        "x-apifox-status": "released",
+        "deprecated": false,
+        "description": "Deletes one or more entities from a collection.",
+        "tags": [
+          "Vector Operations"
+        ],
+        "parameters": [
+          {
+            "name": "public-endpoint",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "oneOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "dbName": {
+                        "type": "string",
+                        "description": "The name of the database."
+                      },
+                      "collectionName": {
+                        "type": "string",
+                        "description": "The name of the collection to which this operation applies."
+                      },
+                      "id": {
+                        "type": "string",
+                        "description": "The ID of the entity to be retrieved"
+                      }
+                    },
+                    "x-apifox-refs": {},
+                    "x-apifox-orders": [
+                      "dbName",
+                      "collectionName",
+                      "id"
+                    ],
+                    "required": [
+                      "collectionName",
+                      "id"
+                    ],
+                    "x-apifox-ignore-properties": []
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "dbName": {
+                        "type": "string",
+                        "description": "The name of the database."
+                      },
+                      "collectionName": {
+                        "type": "string",
+                        "description": "The name of the collection to which this operation applies."
+                      },
+                      "id": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "An array of IDs of the entities to be retrieved"
+                      }
+                    },
+                    "x-apifox-refs": {},
+                    "x-apifox-orders": [
+                      "dbName",
+                      "collectionName",
+                      "id"
+                    ],
+                    "required": [
+                      "collectionName",
+                      "id"
+                    ],
+                    "x-apifox-ignore-properties": []
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "dbName": {
+                        "type": "string",
+                        "description": "The name of the database."
+                      },
+                      "collectionName": {
+                        "type": "string",
+                        "description": "The name of the collection to which this operation applies."
+                      },
+                      "id": {
+                        "type": "integer",
+                        "description": "The ID of the entity to be retrieved"
+                      }
+                    },
+                    "x-apifox-refs": {},
+                    "x-apifox-orders": [
+                      "dbName",
+                      "collectionName",
+                      "id"
+                    ],
+                    "required": [
+                      "collectionName",
+                      "id"
+                    ],
+                    "x-apifox-ignore-properties": []
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "dbName": {
+                        "type": "string",
+                        "description": "The name of the database."
+                      },
+                      "collectionName": {
+                        "type": "string",
+                        "description": "The name of the collection to which this operation applies."
+                      },
+                      "id": {
+                        "type": "array",
+                        "items": {
+                          "type": "integer"
+                        },
+                        "description": "An array of IDs of the entities to be retrieved"
+                      }
+                    },
+                    "x-apifox-refs": {},
+                    "x-apifox-orders": [
+                      "dbName",
+                      "collectionName",
+                      "id"
+                    ],
+                    "required": [
+                      "collectionName",
+                      "id"
+                    ],
+                    "x-apifox-ignore-properties": []
+                  }
+                ]
+              },
+              "example": ""
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns an empty object.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpapi.GenericResp-customer_DeleteResp"
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/2645146/apis/api-77767179-run",
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/v1/vector/insert": {
+      "post": {
+        "summary": "Insert",
+        "x-apifox-folder": "Vector Operations",
+        "x-apifox-status": "released",
+        "deprecated": false,
+        "description": "Inserts one or more entities into a collection.",
+        "tags": [
+          "Vector Operations"
+        ],
+        "parameters": [
+          {
+            "name": "public-endpoint",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "oneOf": [
+                  {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "x-apifox-orders": [
+                      "dbName",
+                      "collectionName",
+                      "data"
+                    ],
+                    "properties": {
+                      "dbName": {
+                        "type": "string",
+                        "description": "The name of the database."
+                      },
+                      "collectionName": {
+                        "type": "string",
+                        "description": "The name of the collection to which entities will be inserted."
+                      },
+                      "data": {
+                        "type": "object",
+                        "properties": {},
+                        "x-apifox-orders": [],
+                        "description": "An entity object. Note that the keys in the entity should match the collection schema.",
+                        "x-apifox-ignore-properties": []
+                      }
+                    },
+                    "required": [
+                      "collectionName",
+                      "data"
+                    ],
+                    "x-apifox-ignore-properties": []
+                  },
+                  {
+                    "type": "object",
+                    "x-apifox-refs": {
+                      "01HD5ZD78VCVFQE5Y3NK4AJ57C": {
+                        "$ref": "#/components/schemas/customer.InsertReq",
+                        "x-apifox-overrides": {}
+                      }
+                    },
+                    "properties": {
+                      "dbName": {
+                        "type": "string",
+                        "description": "The name of the database."
+                      },
+                      "collectionName": {
+                        "type": "string",
+                        "description": "The name of the collection to which entities will be inserted."
+                      },
+                      "data": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "additionalProperties": true,
+                          "x-apifox-orders": [],
+                          "properties": {},
+                          "x-apifox-ignore-properties": []
+                        },
+                        "description": "An array of entity objects. Note that the keys in an entity object should match the collection schema"
+                      }
+                    },
+                    "x-apifox-orders": [
+                      "dbName",
+                      "01HD5ZD78VCVFQE5Y3NK4AJ57C"
+                    ],
+                    "required": [
+                      "collectionName",
+                      "data"
+                    ],
+                    "x-apifox-ignore-properties": [
+                      "collectionName",
+                      "data"
+                    ]
+                  }
+                ]
+              },
+              "example": ""
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns the number of inserted entities and an array of their IDs.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpapi.GenericResp-customer_InsertResp"
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/2645146/apis/api-77767180-run",
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/v1/vector/search": {
+      "post": {
+        "summary": "Search",
+        "x-apifox-folder": "Vector Operations",
+        "x-apifox-status": "released",
+        "deprecated": false,
+        "description": "Conducts a similarity search in a collection. ",
+        "tags": [
+          "Vector Operations"
+        ],
+        "parameters": [
+          {
+            "name": "public-endpoint",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "x-apifox-refs": {
+                  "01H1PFY2ZE8WYR08AGKW1MBY8M": {
+                    "$ref": "#/components/schemas/customer.SearchOrQueryReq",
+                    "x-apifox-overrides": {
+                      "level": {
+                        "type": "integer",
+                        "description": "The precision level of the results can be adjusted using values **1**, **2**, or **3**. Higher precision levels lead to more accurate results but take longer to compute. The default value is 1, which prioritizes speed over accuracy.",
+                        "default": 1
+                      }
+                    }
+                  }
+                },
+                "x-apifox-orders": [
+                  "dbName",
+                  "01H1PFY2ZE8WYR08AGKW1MBY8M"
+                ],
+                "properties": {
+                  "dbName": {
+                    "type": "string",
+                    "description": "The name of the database."
+                  },
+                  "collectionName": {
+                    "type": "string",
+                    "description": "The name of the collection to which this operation applies."
+                  },
+                  "filter": {
+                    "type": "string",
+                    "description": "The filter used to find matches for the search"
+                  },
+                  "limit": {
+                    "type": "integer",
+                    "description": "The maximum number of entities to return.<br>The sum of this value of that of `offset` should be less than **1024**.",
+                    "default": 100,
+                    "minimum": 1,
+                    "maximum": 100
+                  },
+                  "offset": {
+                    "type": "integer",
+                    "description": "The number of entities to skip in the search results.<br>The sum of this value and that of `limit` should not be greater than **1024**.",
+                    "minimum": 0,
+                    "maximum": 1024,
+                    "exclusiveMinimum": true
+                  },
+                  "outputFields": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "default": "id, distance"
+                    },
+                    "description": "An array of fields to return along with the search results."
+                  },
+                  "vector": {
+                    "type": "array",
+                    "items": {
+                      "type": "number",
+                      "format": "float32"
+                    },
+                    "description": "The query vector in the form of a list of floating numbers."
+                  },
+                  "params": {
+                    "type": "object",
+                    "properties": {
+                      "radius": {
+                        "type": "number",
+                        "format": "float64",
+                        "description": "The angle where the vector with the least similarity resides."
+                      },
+                      "range_filter": {
+                        "type": "number",
+                        "format": "float64",
+                        "description": "Used in combination to filter vector field values whose similarity to the query vector falls into a specific range."
+                      }
+                    },
+                    "x-apifox-orders": [
+                      "radius",
+                      "range_filter"
+                    ],
+                    "required": [
+                      "range_filter"
+                    ],
+                    "description": "List of search parameters",
+                    "x-apifox-ignore-properties": []
+                  }
+                },
+                "required": [
+                  "collectionName",
+                  "vector"
+                ],
+                "x-apifox-ignore-properties": [
+                  "collectionName",
+                  "filter",
+                  "limit",
+                  "offset",
+                  "outputFields",
+                  "vector",
+                  "params"
+                ]
+              },
+              "example": ""
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns the search results.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {},
+                        "x-apifox-orders": [],
+                        "x-apifox-ignore-properties": []
+                      }
+                    }
+                  },
+                  "x-apifox-refs": {},
+                  "x-apifox-orders": [
+                    "code",
+                    "data"
+                  ],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/2645146/apis/api-77767181-run",
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/v1/vector/query": {
+      "post": {
+        "summary": "Query",
+        "x-apifox-folder": "Vector Operations",
+        "x-apifox-status": "released",
+        "deprecated": false,
+        "description": "Conducts a vector query in a collection.",
+        "tags": [
+          "Vector Operations"
+        ],
+        "parameters": [
+          {
+            "name": "public-endpoint",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "dbName": {
+                    "type": "string",
+                    "description": "The name of the database."
+                  },
+                  "collectionName": {
+                    "type": "string",
+                    "description": "The name of the collection to which this operation applies."
+                  },
+                  "filter": {
+                    "type": "string",
+                    "description": "The filter used to find matches for the search."
+                  },
+                  "limit": {
+                    "type": "integer",
+                    "description": "The maximum number of entities to return.<br/>The sum of this value and that of `offset` should be less than **16384**.",
+                    "default": 100,
+                    "minimum": 1,
+                    "maximum": 100
+                  },
+                  "offset": {
+                    "type": "integer",
+                    "description": "The number of entities to skip in the search results.<br/>The sum of this value and that of `limit` should be less than **16384**.",
+                    "minimum": 0,
+                    "exclusiveMinimum": true,
+                    "maximum": 16384
+                  },
+                  "outputFields": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "An array of fields to return along with the search results."
+                  }
+                },
+                "x-apifox-refs": {
+                  "01H0KV6DX6NKH0PHSNRYW8XD4S": {
+                    "$ref": "#/components/schemas/customer.QueryReq"
+                  }
+                },
+                "x-apifox-orders": [
+                  "dbName",
+                  "01H0KV6DX6NKH0PHSNRYW8XD4S"
+                ],
+                "required": [
+                  "collectionName",
+                  "filter"
+                ],
+                "x-apifox-ignore-properties": [
+                  "collectionName",
+                  "filter",
+                  "limit",
+                  "offset",
+                  "outputFields"
+                ]
+              },
+              "example": ""
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns the search results.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {},
+                        "x-apifox-orders": [],
+                        "x-apifox-ignore-properties": []
+                      }
+                    }
+                  },
+                  "x-apifox-refs": {},
+                  "x-apifox-orders": [
+                    "code",
+                    "data"
+                  ],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/2645146/apis/api-82167294-run",
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/v1/vector/get": {
+      "post": {
+        "summary": "Get",
+        "x-apifox-folder": "Vector Operations",
+        "x-apifox-status": "released",
+        "deprecated": false,
+        "description": "Gets entities by the specified IDs.",
+        "tags": [
+          "Vector Operations"
+        ],
+        "parameters": [
+          {
+            "name": "public-endpoint",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "oneOf": [
+                  {
+                    "type": "object",
+                    "x-apifox-refs": {
+                      "01HD5Z9Z1Q1DHXF2DQF7E1XNGP": {
+                        "$ref": "#/components/schemas/customer.GetReq1",
+                        "x-apifox-overrides": {}
+                      }
+                    },
+                    "properties": {
+                      "dbName": {
+                        "type": "string",
+                        "description": "The name of the database."
+                      },
+                      "collectionName": {
+                        "type": "string",
+                        "description": "The name of the collection to which this operation applies."
+                      },
+                      "outputFields": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "An array of fields to return along with the search results."
+                      },
+                      "id": {
+                        "type": "string",
+                        "description": "The ID of the entity to be retrieved"
+                      }
+                    },
+                    "x-apifox-orders": [
+                      "dbName",
+                      "01HD5Z9Z1Q1DHXF2DQF7E1XNGP"
+                    ],
+                    "required": [
+                      "collectionName",
+                      "id"
+                    ],
+                    "x-apifox-ignore-properties": [
+                      "collectionName",
+                      "outputFields",
+                      "id"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "x-apifox-refs": {
+                      "01HD5ZAPGFY3WY8NJDN75B62SN": {
+                        "$ref": "#/components/schemas/customer.GetReq2",
+                        "x-apifox-overrides": {}
+                      }
+                    },
+                    "properties": {
+                      "dbName": {
+                        "type": "string",
+                        "description": "The name of the database."
+                      },
+                      "collectionName": {
+                        "type": "string",
+                        "description": "The name of the collection to which this operation applies."
+                      },
+                      "outputFields": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "An array of fields to return along with the search results."
+                      },
+                      "id": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "An array of IDs of the entities to be retrieved"
+                      }
+                    },
+                    "x-apifox-orders": [
+                      "dbName",
+                      "01HD5ZAPGFY3WY8NJDN75B62SN"
+                    ],
+                    "required": [
+                      "collectionName",
+                      "id"
+                    ],
+                    "x-apifox-ignore-properties": [
+                      "collectionName",
+                      "outputFields",
+                      "id"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "x-apifox-refs": {
+                      "01H0KWBZQSHZ451Z4A9YQ9WQTA": {
+                        "$ref": "#/components/schemas/customer.GetReq3",
+                        "x-apifox-overrides": {
+                          "id": {
+                            "type": "integer",
+                            "description": "The ID of entity to be retrieved"
+                          },
+                          "collectionName": {
+                            "type": "string",
+                            "description": "The name of the collection to which this operation applies."
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "collectionName"
+                        ]
+                      }
+                    },
+                    "x-apifox-orders": [
+                      "dbName",
+                      "01H0KWBZQSHZ451Z4A9YQ9WQTA"
+                    ],
+                    "properties": {
+                      "dbName": {
+                        "type": "string",
+                        "description": "The name of the database."
+                      },
+                      "collectionName": {
+                        "type": "string",
+                        "description": "The name of the collection to which this operation applies."
+                      },
+                      "outputFields": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "An array of fields to return along with the search results."
+                      },
+                      "id": {
+                        "type": "integer",
+                        "description": "The ID of entity to be retrieved"
+                      }
+                    },
+                    "required": [
+                      "collectionName",
+                      "id"
+                    ],
+                    "x-apifox-ignore-properties": [
+                      "collectionName",
+                      "outputFields",
+                      "id"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "x-apifox-refs": {
+                      "01HD5ZBYR8SRADRXNM1ZHG8TCS": {
+                        "$ref": "#/components/schemas/customer.GetReq4",
+                        "x-apifox-overrides": {}
+                      }
+                    },
+                    "properties": {
+                      "dbName": {
+                        "type": "string",
+                        "description": "The name of the database."
+                      },
+                      "collectionName": {
+                        "type": "string",
+                        "description": "The name of the collection to which this operation applies."
+                      },
+                      "outputFields": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "An array of fields to return along with the search results."
+                      },
+                      "id": {
+                        "type": "array",
+                        "items": {
+                          "type": "integer"
+                        },
+                        "description": "An array of IDs of the entities to be retrieved"
+                      }
+                    },
+                    "x-apifox-orders": [
+                      "dbName",
+                      "01HD5ZBYR8SRADRXNM1ZHG8TCS"
+                    ],
+                    "required": [
+                      "collectionName",
+                      "id"
+                    ],
+                    "x-apifox-ignore-properties": [
+                      "collectionName",
+                      "outputFields",
+                      "id"
+                    ]
+                  }
+                ]
+              },
+              "example": ""
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns the search results.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {},
+                        "x-apifox-orders": [],
+                        "x-apifox-ignore-properties": []
+                      }
+                    }
+                  },
+                  "x-apifox-refs": {},
+                  "x-apifox-orders": [
+                    "code",
+                    "data"
+                  ],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/2645146/apis/api-82172081-run",
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/v1/vector/upsert": {
+      "post": {
+        "summary": "Upsert",
+        "x-apifox-folder": "Vector Operations",
+        "x-apifox-status": "released",
+        "deprecated": false,
+        "description": "Inserts one or more entities into a collection.",
+        "tags": [
+          "Vector Operations"
+        ],
+        "parameters": [
+          {
+            "name": "public-endpoint",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "oneOf": [
+                  {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "x-apifox-orders": [
+                      "dbName",
+                      "collectionName",
+                      "data"
+                    ],
+                    "properties": {
+                      "dbName": {
+                        "type": "string",
+                        "description": "The name of the database."
+                      },
+                      "collectionName": {
+                        "type": "string",
+                        "description": "The name of the collection to which entities will be inserted."
+                      },
+                      "data": {
+                        "type": "object",
+                        "properties": {},
+                        "x-apifox-orders": [],
+                        "description": "An entity object. Note that the keys in the entity should match the collection schema.",
+                        "x-apifox-ignore-properties": []
+                      }
+                    },
+                    "required": [
+                      "collectionName",
+                      "data"
+                    ],
+                    "x-apifox-ignore-properties": []
+                  },
+                  {
+                    "type": "object",
+                    "x-apifox-refs": {
+                      "01HD5ZEEX7KEAW58KXK0N7QHG0": {
+                        "$ref": "#/components/schemas/customer.InsertReq",
+                        "x-apifox-overrides": {}
+                      }
+                    },
+                    "x-apifox-orders": [
+                      "dbName",
+                      "01HD5ZEEX7KEAW58KXK0N7QHG0"
+                    ],
+                    "properties": {
+                      "dbName": {
+                        "type": "string",
+                        "description": "The name of the database."
+                      },
+                      "collectionName": {
+                        "type": "string",
+                        "description": "The name of the collection to which entities will be inserted."
+                      },
+                      "data": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "additionalProperties": true,
+                          "x-apifox-orders": [],
+                          "properties": {},
+                          "x-apifox-ignore-properties": []
+                        },
+                        "description": "An array of entity objects. Note that the keys in an entity object should match the collection schema"
+                      }
+                    },
+                    "required": [
+                      "collectionName",
+                      "data"
+                    ],
+                    "x-apifox-ignore-properties": [
+                      "collectionName",
+                      "data"
+                    ]
+                  }
+                ]
+              },
+              "example": ""
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns the number of inserted entities and an array of their IDs.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpapi.GenericResp-customer_UpsertResp"
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/2645146/apis/api-114647593-run",
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "httpapi.GenericResp-customer_UpsertResp": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "upsertCount": {
+                "type": "integer",
+                "examples": [
+                  4
+                ],
+                "description": "The number of inserted entities."
+              },
+              "upsertIds": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "examples": [
+                  [
+                    "['id1'",
+                    " 'id2'",
+                    " 'id3']"
+                  ]
+                ],
+                "description": "An array of the IDs of inserted entities."
+              }
+            },
+            "x-apifox-refs": {},
+            "x-apifox-orders": [
+              "upsertCount",
+              "upsertIds"
+            ],
+            "x-apifox-ignore-properties": []
+          }
+        },
+        "x-apifox-orders": [
+          "code",
+          "data"
+        ],
+        "x-apifox-ignore-properties": [],
+        "x-apifox-folder": "Schemas"
+      },
+      "customer.GetReq4": {
+        "type": "object",
+        "properties": {
+          "collectionName": {
+            "type": "string",
+            "description": "The name of the collection to which this operation applies."
+          },
+          "outputFields": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "An array of fields to return along with the search results."
+          },
+          "id": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "description": "An array of IDs of the entities to be retrieved"
+          }
+        },
+        "x-apifox-orders": [
+          "collectionName",
+          "outputFields",
+          "id"
+        ],
+        "required": [
+          "collectionName",
+          "id"
+        ],
+        "x-apifox-ignore-properties": [],
+        "x-apifox-folder": "Schemas"
+      },
+      "customer.GetReq3": {
+        "type": "object",
+        "properties": {
+          "collectionName": {
+            "type": "string",
+            "description": "The name of the collection to which this operation applies."
+          },
+          "outputFields": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "An array of fields to return along with the search results."
+          },
+          "id": {
+            "type": "integer",
+            "description": "The ID of the entity to be retrieved"
+          }
+        },
+        "x-apifox-orders": [
+          "collectionName",
+          "outputFields",
+          "id"
+        ],
+        "required": [
+          "collectionName",
+          "id"
+        ],
+        "x-apifox-ignore-properties": [],
+        "x-apifox-folder": "Schemas"
+      },
+      "customer.GetReq2": {
+        "type": "object",
+        "properties": {
+          "collectionName": {
+            "type": "string",
+            "description": "The name of the collection to which this operation applies."
+          },
+          "outputFields": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "An array of fields to return along with the search results."
+          },
+          "id": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "An array of IDs of the entities to be retrieved"
+          }
+        },
+        "x-apifox-orders": [
+          "collectionName",
+          "outputFields",
+          "id"
+        ],
+        "required": [
+          "collectionName",
+          "id"
+        ],
+        "x-apifox-ignore-properties": [],
+        "x-apifox-folder": "Schemas"
+      },
+      "customer.GetReq1": {
+        "type": "object",
+        "properties": {
+          "collectionName": {
+            "type": "string",
+            "description": "The name of the collection to which this operation applies."
+          },
+          "outputFields": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "An array of fields to return along with the search results."
+          },
+          "id": {
+            "type": "string",
+            "description": "The ID of the entity to be retrieved"
+          }
+        },
+        "x-apifox-orders": [
+          "collectionName",
+          "outputFields",
+          "id"
+        ],
+        "required": [
+          "collectionName",
+          "id"
+        ],
+        "x-apifox-ignore-properties": [],
+        "x-apifox-folder": "Schemas"
+      },
+      "customer.QueryReq": {
+        "type": "object",
+        "properties": {
+          "collectionName": {
+            "type": "string",
+            "description": "The name of the collection to which this operation applies."
+          },
+          "filter": {
+            "type": "string",
+            "description": "The filter used to find matches for the search."
+          },
+          "limit": {
+            "type": "integer",
+            "description": "The maximum number of entities to return.<br/>The sum of this value and that of `offset` should be less than **16384**.",
+            "default": 100,
+            "minimum": 1,
+            "maximum": 100
+          },
+          "offset": {
+            "type": "integer",
+            "description": "The number of entities to skip in the search results.<br/>The sum of this value and that of `limit` should be less than **16384**.",
+            "minimum": 0,
+            "exclusiveMinimum": true,
+            "maximum": 16384
+          },
+          "outputFields": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "An array of fields to return along with the search results."
+          }
+        },
+        "x-apifox-orders": [
+          "collectionName",
+          "filter",
+          "limit",
+          "offset",
+          "outputFields"
+        ],
+        "required": [
+          "collectionName",
+          "filter"
+        ],
+        "x-apifox-ignore-properties": [],
+        "x-apifox-folder": "Schemas"
+      },
+      "customer.SearchOrQueryReq": {
+        "type": "object",
+        "properties": {
+          "collectionName": {
+            "type": "string",
+            "description": "The name of the collection to which this operation applies."
+          },
+          "filter": {
+            "type": "string",
+            "description": "The filter used to find matches for the search"
+          },
+          "limit": {
+            "type": "integer",
+            "description": "The maximum number of entities to return.<br>The sum of this value of that of `offset` should be less than **1024**.",
+            "default": 100,
+            "minimum": 1,
+            "maximum": 100
+          },
+          "offset": {
+            "type": "integer",
+            "description": "The number of entities to skip in the search results.<br>The sum of this value and that of `limit` should not be greater than **1024**.",
+            "minimum": 0,
+            "maximum": 1024,
+            "exclusiveMinimum": true
+          },
+          "outputFields": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "default": "id, distance"
+            },
+            "description": "An array of fields to return along with the search results."
+          },
+          "vector": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "float32"
+            },
+            "description": "The query vector in the form of a list of floating numbers."
+          },
+          "params": {
+            "type": "object",
+            "properties": {
+              "radius": {
+                "type": "number",
+                "format": "float64",
+                "description": "The angle where the vector with the least similarity resides."
+              },
+              "range_filter": {
+                "type": "number",
+                "format": "float64",
+                "description": "Used in combination to filter vector field values whose similarity to the query vector falls into a specific range."
+              }
+            },
+            "x-apifox-orders": [
+              "radius",
+              "range_filter"
+            ],
+            "required": [
+              "range_filter"
+            ],
+            "description": "List of search parameters",
+            "x-apifox-ignore-properties": []
+          }
+        },
+        "x-apifox-orders": [
+          "collectionName",
+          "filter",
+          "limit",
+          "offset",
+          "outputFields",
+          "vector",
+          "params"
+        ],
+        "required": [
+          "collectionName",
+          "vector"
+        ],
+        "x-apifox-ignore-properties": [],
+        "x-apifox-folder": "Schemas"
+      },
+      "httpapi.GenericResp-customer_InsertResp": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer"
+          },
+          "data": {
+            "$ref": "#/components/schemas/customer.InsertResp"
+          }
+        },
+        "x-apifox-orders": [
+          "code",
+          "data"
+        ],
+        "x-apifox-ignore-properties": [],
+        "x-apifox-folder": "Schemas"
+      },
+      "customer.InsertResp": {
+        "type": "object",
+        "properties": {
+          "insertCount": {
+            "type": "integer",
+            "examples": [
+              4
+            ],
+            "description": "The number of inserted entities."
+          },
+          "insertIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "examples": [
+              [
+                "['id1'",
+                " 'id2'",
+                " 'id3']"
+              ]
+            ],
+            "description": "An array of the IDs of inserted entities."
+          }
+        },
+        "x-apifox-orders": [
+          "insertCount",
+          "insertIds"
+        ],
+        "x-apifox-ignore-properties": [],
+        "x-apifox-folder": "Schemas"
+      },
+      "customer.InsertReq": {
+        "type": "object",
+        "required": [
+          "data",
+          "collectionName"
+        ],
+        "properties": {
+          "collectionName": {
+            "type": "string",
+            "description": "The name of the collection to which entities will be inserted."
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": true,
+              "x-apifox-orders": [],
+              "properties": {},
+              "x-apifox-ignore-properties": []
+            },
+            "description": "An array of entity objects. Note that the keys in an entity object should match the collection schema"
+          }
+        },
+        "x-apifox-orders": [
+          "collectionName",
+          "data"
+        ],
+        "x-apifox-ignore-properties": [],
+        "x-apifox-folder": "Schemas"
+      },
+      "httpapi.GenericResp-customer_DeleteResp": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer"
+          },
+          "data": {
+            "$ref": "#/components/schemas/customer.DeleteResp"
+          }
+        },
+        "x-apifox-orders": [
+          "code",
+          "data"
+        ],
+        "x-apifox-ignore-properties": [],
+        "x-apifox-folder": "Schemas"
+      },
+      "customer.DeleteResp": {
+        "type": "object",
+        "x-apifox-orders": [],
+        "properties": {},
+        "x-apifox-ignore-properties": [],
+        "x-apifox-folder": "Schemas"
+      },
+      "httpapi.GenericResp-customer_DropCollectionResp": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer"
+          },
+          "data": {
+            "$ref": "#/components/schemas/customer.DropCollectionResp"
+          }
+        },
+        "x-apifox-orders": [
+          "code",
+          "data"
+        ],
+        "x-apifox-ignore-properties": [],
+        "x-apifox-folder": "Schemas"
+      },
+      "customer.DropCollectionResp": {
+        "type": "object",
+        "x-apifox-orders": [],
+        "properties": {},
+        "x-apifox-ignore-properties": [],
+        "x-apifox-folder": "Schemas"
+      },
+      "customer.DropCollectionReq": {
+        "type": "object",
+        "properties": {
+          "collectionName": {
+            "type": "string",
+            "description": "The name of the collection to delete."
+          }
+        },
+        "x-apifox-orders": [
+          "collectionName"
+        ],
+        "required": [
+          "collectionName"
+        ],
+        "x-apifox-ignore-properties": [],
+        "x-apifox-folder": "Schemas"
+      },
+      "httpapi.GenericResp-customer_DescCollectionResp": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer"
+          },
+          "data": {
+            "$ref": "#/components/schemas/customer.DescCollectionResp"
+          }
+        },
+        "x-apifox-orders": [
+          "code",
+          "data"
+        ],
+        "x-apifox-ignore-properties": [],
+        "x-apifox-folder": "Schemas"
+      },
+      "customer.DescCollectionResp": {
+        "type": "object",
+        "properties": {
+          "collectionName": {
+            "type": "string",
+            "description": "The name of the collection."
+          },
+          "description": {
+            "type": "string",
+            "description": "An optional description of the collection."
+          },
+          "fields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/customer.DescField"
+            },
+            "description": "An field array"
+          },
+          "indexes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/customer.DescIndex"
+            },
+            "description": "An index array"
+          },
+          "load": {
+            "type": "string",
+            "description": "The load status of the collection. Possible values are **unload**, **loading**, and **loaded**."
+          },
+          "shardsNum": {
+            "type": "integer",
+            "description": "The number of shards in the collection."
+          },
+          "enableDynamicField": {
+            "type": "boolean",
+            "description": "Whether the dynamic JSON feature is enabled for this collection."
+          }
+        },
+        "x-apifox-orders": [
+          "collectionName",
+          "description",
+          "fields",
+          "indexes",
+          "load",
+          "shardsNum",
+          "enableDynamicField"
+        ],
+        "required": [
+          "enableDynamicField"
+        ],
+        "x-apifox-ignore-properties": [],
+        "x-apifox-folder": "Schemas"
+      },
+      "customer.DescIndex": {
+        "type": "object",
+        "properties": {
+          "fieldName": {
+            "type": "string",
+            "description": "The name of the indexed field."
+          },
+          "indexName": {
+            "type": "string",
+            "description": "The name of the generated index files."
+          },
+          "metricType": {
+            "type": "string",
+            "description": "The metric type used in the index process."
+          }
+        },
+        "x-apifox-orders": [
+          "fieldName",
+          "indexName",
+          "metricType"
+        ],
+        "x-apifox-ignore-properties": [],
+        "x-apifox-folder": "Schemas"
+      },
+      "customer.DescField": {
+        "type": "object",
+        "properties": {
+          "autoId": {
+            "type": "boolean",
+            "description": "Whether the primary key automatically increments."
+          },
+          "description": {
+            "type": "string",
+            "description": "An optional description of the field."
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the field."
+          },
+          "primaryKey": {
+            "type": "boolean",
+            "description": "Whether the field is a primary field."
+          },
+          "type": {
+            "type": "string",
+            "description": "The data type of the values in this field."
+          }
+        },
+        "x-apifox-orders": [
+          "autoId",
+          "description",
+          "name",
+          "primaryKey",
+          "type"
+        ],
+        "x-apifox-ignore-properties": [],
+        "x-apifox-folder": "Schemas"
+      },
+      "httpapi.GenericResp-customer_CreateIndexResp": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer"
+          },
+          "data": {
+            "$ref": "#/components/schemas/customer.CreateIndexResp"
+          }
+        },
+        "x-apifox-orders": [
+          "code",
+          "data"
+        ],
+        "x-apifox-ignore-properties": [],
+        "x-apifox-folder": "Schemas"
+      },
+      "customer.CreateIndexResp": {
+        "type": "object",
+        "x-apifox-orders": [],
+        "properties": {},
+        "x-apifox-ignore-properties": [],
+        "x-apifox-folder": "Schemas"
+      },
+      "CollectionCreateSimple": {
+        "type": "object",
+        "properties": {
+          "dbName": {
+            "type": "string",
+            "description": "The name of the database. <zilliz>This parameter applies only to dedicated clusters.</zilliz>"
+          },
+          "collectionName": {
+            "type": "string",
+            "description": "The name of the collection to create."
+          },
+          "dimension": {
+            "type": "integer",
+            "description": "The number of dimensions for the vector field of the collection. For performance-optimized CUs, this value ranges from 1 to 32768. For capacity-optimized and cost-optimized CUs, this value ranges from 32 to 32768.",
+            "minimum": 1,
+            "maximum": 32768
+          },
+          "metricType": {
+            "type": "string",
+            "description": "The distance metric used for the collection.",
+            "default": "L2"
+          },
+          "primaryField": {
+            "type": "string",
+            "description": "The primary key field.",
+            "default": "id"
+          },
+          "vectorField": {
+            "type": "string",
+            "description": "The vector field.",
+            "default": "vector"
+          },
+          "description": {
+            "type": "string",
+            "description": "The description of the collection"
+          }
+        },
+        "required": [
+          "collectionName",
+          "dimension"
+        ],
+        "x-apifox-orders": [
+          "dbName",
+          "collectionName",
+          "dimension",
+          "metricType",
+          "primaryField",
+          "vectorField",
+          "description"
+        ],
+        "x-apifox-ignore-properties": [],
+        "x-apifox-folder": "Schemas"
+      },
+      "httpapi.GenericResp-customer_ListCollectionsResp": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "x-apifox-orders": [
+          "code",
+          "data"
+        ],
+        "x-apifox-ignore-properties": [],
+        "x-apifox-folder": "Schemas"
+      }
+    },
+    "securitySchemes": {
+      "bearer": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "servers": []
+}
