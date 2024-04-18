@@ -51,5 +51,5 @@ Having installed Milvus Node.js SDK, you can:
   - [Single-Vector Search](single-vector-search.md)
   - [Multi-Vector Search](multi-vector-search.md)
 
-- Explore [Milvus Node.js API reference](/api-reference/node/v2.3.x/About.md)
+- Explore [Milvus Node.js API reference](/api-reference/node/v2.4.x/About.md)
 
