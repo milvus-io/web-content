@@ -620,7 +620,7 @@ __Limitations__
 
 - __Performance Impact__: Be mindful that performance degrades with increasing query vector counts. Using a cluster with 2 CPU cores and 8 GB of memory as an example, the execution time for grouping search increases proportionally with the number of input query vectors.
 
-- __Functionality__: Grouping search is not supported by [range search](https://milvus.io/docs/single-vector-search.md#Range-search) or [search iterators](https://milvus.io/docs/with-iterators.md#Search-with-iterator).
+- __Functionality__: Currently, grouping search is not supported by [range search](https://milvus.io/docs/single-vector-search.md#Range-search), [search iterators](https://milvus.io/docs/with-iterators.md#Search-with-iterator), or [multi-vector search](multi-vector-search.md)
 
 ## Search parameters
 
