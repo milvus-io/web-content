@@ -1,10 +1,10 @@
 # __call__()
 
-This operation in [SpladeEmbeddingFunction](./SpladeEmbeddingFunction.md) takes a list of text strings and directly encodes them into vector embeddings.
+This operation in [SpladeEmbeddingFunction](./EmbeddingModels-SpladeEmbeddingFunction) takes a list of text strings and directly encodes them into vector embeddings.
 
-Unlike [encode_documents()](./encode_documents) or [encode_queries()](./encode_queries), which enable you to prepend __doc_instruction__ or __query_instruction__ and utilize __k_tokens_document__ or __k_tokens_query__ for result pruning, the __call__(.md) method directly returns embeddings without offering the option to prepend instructions or prune results.
+Unlike [encode_documents()](./SpladeEmbeddingFunction-encode_documents) or [encode_queries()](./SpladeEmbeddingFunction-encode_queries), which enable you to prepend **doc_instruction** or **query_instruction** and utilize **k_tokens_document** or **k_tokens_query** for result pruning, the **call**() method directly returns embeddings without offering the option to prepend instructions or prune results.
 
-## Request syntax
+## Request syntax{#request-syntax}
 
 ```python
 # Instance created
@@ -16,27 +16,27 @@ splade_ef(
 ) -> csr_array
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __texts__ (_List[str]_)
+- **texts** (*List[str]*)
 
     A list of string values, where each string represents text that will be passed to the embedding model for encoding. The model will generate an embedding vector for each string in the list.
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
-_csr_array_
+*csr_array*
 
-__RETURNS:__
+**RETURNS:**
 
 Compressed sparse row matrices representing the document embeddings.
 
-__Exceptions:__
+**Exceptions:**
 
-- __ImportError__
+- **ImportError**
 
     This exception will be raised when the transformers library is not installed.
 
-## Examples
+## Examples{#examples}
 
 ```python
 from pymilvus import model

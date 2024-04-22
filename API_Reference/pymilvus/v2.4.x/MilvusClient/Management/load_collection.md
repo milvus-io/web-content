@@ -2,44 +2,62 @@
 
 This operation loads the data of a specific collection into memory.
 
-## Request syntax
+## Request syntax{#request-syntax}
 
 ```python
 load_collection(
     collection_name: str, 
+    replica_number: int
     timeout: Optional[float] = None
 ) -> None
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __collection_name__ (_str_) -
+- **collection_name** (*str*) -
 
-    __[REQUIRED]__
+    **[REQUIRED]**
 
     The name of a collection.
 
-- __timeout__ (_float_ | _None_) -
+- **replica_number** (*int*) -
+
+    The number of replicas to create on query nodes upon collection loading.
+
+    - For a Milvus Standalone deployment, the maximum value should be 1.
+
+    - For a Milvus Cluster deployment, the maximum value should be no greater than the `queryNode.replicas` in your Milvus configurations. For details on how to change Milvus configurations, refer to our configuration guides.
+
+    <div class="admonition note">
+
+    <p><b>what is a replica?</b></p>
+
+    <p>In-memory replicas are replications of the same segment on multiple query nodes. If one query node has failed or is busy with a current search request when another arrives, the system can send new requests to an idle query node that has a replication of the same segment.</p>
+    <p>For details, refer to <a href="https://milvus.io/docs/replica.md#In-Memory-Replica">In-Memory Replica</a>.</p>
+
+    </div>
+
+- **timeout** (*float* | *None*) -
 
     The timeout duration for this operation. 
 
-    Setting this to __None__ indicates that this operation timeouts when any response returns or error occurs.
+    Setting this to **None** indicates that this operation timeouts when any response returns or error occurs.
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
-_NoneType_
+*NoneType*
 
-__RETURNS:__
+**RETURNS:**
 
 None
 
-__EXCEPTIONS:__
+**EXCEPTIONS:**
 
-- __MilvusException__
+- **MilvusException**
 
     This exception will be raised when any error occurs during this operation.
 
-## Examples
+## Examples{#examples}
 
 ```python
 from pymilvus import MilvusClient, DataType
@@ -126,15 +144,16 @@ client.create_index(
 
 # 7. Load indexes
 client.load_collection(
-    collection_name="customized_setup"
+    collection_name="customized_setup",
+    replica_number=2
 )
 ```
 
-## Related methods
+## Related methods{#related-methods}
 
-- [get_load_state()](./get_load_state.md)
+- [get_load_state()](./Management-get_load_state)
 
-- [refresh_load()](./refresh_load.md)
+- [refresh_load()](./Management-refresh_load)
 
-- [release_collection()](./release_collection.md)
+- [release_collection()](./Management-release_collection)
 

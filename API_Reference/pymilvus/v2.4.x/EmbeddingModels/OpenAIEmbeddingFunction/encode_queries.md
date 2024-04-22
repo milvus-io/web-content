@@ -2,7 +2,7 @@
 
 This operation takes in a list of query strings and encodes each query into a vector embedding.
 
-## Request syntax
+## Request syntax{#request-syntax}
 
 ```python
 encode_queries(
@@ -10,34 +10,34 @@ encode_queries(
 ) -> List[np.array]
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __queries__ (_List[str]_)
+- **queries** (*List[str]*)
 
     A list of string values, where each string represents a query that will be passed to the embedding model for encoding. The model will generate an embedding vector for each string in the list.
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
-_List[np.array]_
+*List[np.array]*
 
-__RETURNS:__
+**RETURNS:**
 
 A list where each element is a NumPy array.
 
-__Exceptions:__
+**Exceptions:**
 
-- __ImportError__
+- **ImportError**
 
     This exception will be raised when the OpenAI module is not installed.
 
-## Examples
+## Examples{#examples}
 
 ```python
 from pymilvus import model
 
 openai_ef = model.dense.OpenAIEmbeddingFunction(
-    model_name='text-embedding-3-large', _# Specify the model name_
-    dimensions=512 _# Set the embedding dimensionality according to MRL feature._
+    model_name='text-embedding-3-large', *# Specify the model name*
+    dimensions=512 *# Set the embedding dimensionality according to MRL feature.*
 )
 
 queries = ["When was artificial intelligence founded", 

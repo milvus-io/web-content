@@ -2,7 +2,7 @@
 
 This operation fits various statistics that are required to calculate BM25 ranking score using the corpus given.
 
-## Request syntax
+## Request syntax{#request-syntax}
 
 ```python
 fit(
@@ -10,21 +10,21 @@ fit(
 )
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __corpus__ (_string_)
+- **corpus** (*string*)
 
     A list of strings that represent the documents used to fit the model
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
-_NoneType_
+*NoneType*
 
-__RETURNS:__
+**RETURNS:**
 
 None
 
-## Examples
+## Examples{#examples}
 
 ```python
 from pymilvus.pymilvus.model.sparse.bm25.tokenizers import build_default_analyzer

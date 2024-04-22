@@ -2,9 +2,9 @@
 
 This operation takes in documents and encodes them into vector embeddings.
 
-When using __BM25EmbeddingFunction__, note that __encoding_queries()__ and __encoding_documents()__ operations cannot be interchanged mathematically. Therefore, there is no implemented ____call__()__ available.
+When using **BM25EmbeddingFunction**, note that **encoding_queries()** and **encoding_documents()** operations cannot be interchanged mathematically. Therefore, there is no implemented **__call__()** available.
 
-## Request syntax
+## Request syntax{#request-syntax}
 
 ```python
 encode_documents(
@@ -12,27 +12,27 @@ encode_documents(
 ) -> csr_array
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __documents__ (_List[str]_)
+- **documents** (*List[str]*)
 
     A list of string values, where each string represents a document that will be passed to the embedding model for encoding. The model will generate an embedding vector for each string in the list.
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
-_csr_array_
+*csr_array*
 
-__RETURNS:__
+**RETURNS:**
 
 A [scipy.sparse.csr_array](https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_array.html) data structure, which is a sparse matrix format commonly used for document embedding representations.
 
-__EXCEPTIONS:__
+**EXCEPTIONS:**
 
-- __ValueError__
+- **ValueError**
 
     This exception will be raised when an unsupported operation is attempted on the embedding object.
 
-## Examples
+## Examples{#examples}
 
 ```python
 from pymilvus.model.sparse.bm25.tokenizers import build_default_analyzer

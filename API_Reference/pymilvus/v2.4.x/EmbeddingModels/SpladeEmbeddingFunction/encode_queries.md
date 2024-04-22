@@ -2,7 +2,7 @@
 
 This operation takes in a list of query strings and encodes each query into a vector embedding.
 
-## Request syntax
+## Request syntax{#request-syntax}
 
 ```python
 encode_queries(
@@ -10,27 +10,27 @@ encode_queries(
 ) -> csr_array
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __queries__ (_List[str]_)
+- **queries** (*List[str]*)
 
     A list of string values, where each string represents a query that will be passed to the embedding model for encoding. The model will generate an embedding vector for each string in the list.
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
-_csr_array_
+*csr_array*
 
-__RETURNS:__
+**RETURNS:**
 
 Compressed sparse row matrices representing the query embeddings.
 
-__Exceptions:__
+**Exceptions:**
 
-- __ImportError__
+- **ImportError**
 
     This exception will be raised when the transformers library is not installed.
 
-## Examples
+## Examples{#examples}
 
 ```python
 from pymilvus import model

@@ -1,10 +1,10 @@
 # __call__()
 
-This operation in [SentenceTransformerEmbeddingFunction](./SentenceTransformerEmbeddingFunction.md) takes a list of text strings and directly encodes them into vector embeddings.
+This operation in [SentenceTransformerEmbeddingFunction](./EmbeddingModels-SentenceTransformerEmbeddingFunction) takes a list of text strings and directly encodes them into vector embeddings.
 
-To prevent potential errors when directly using the ____call()____ method, avoid using __query_instruction__ or __doc_instruction__ for SentenceTransformerEmbeddingFunction initialization. For more information, refer to [SentenceTransformerEmbeddingFunction](./SentenceTransformerEmbeddingFunction.md).
+To prevent potential errors when directly using the **__call()__** method, avoid using **query_instruction** or **doc_instruction** for SentenceTransformerEmbeddingFunction initialization. For more information, refer to [SentenceTransformerEmbeddingFunction](./EmbeddingModels-SentenceTransformerEmbeddingFunction).
 
-## Request syntax
+## Request syntax{#request-syntax}
 
 ```python
 # Instance created
@@ -16,27 +16,27 @@ sentence_transformer_ef(
 ) -> List[np.array]
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __texts__ (_List[str]_)
+- **texts** (*List[str]*)
 
     A list of string values, where each string represents text that will be passed to the embedding model for encoding. The model will generate an embedding vector for each string in the list.
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
-_List[np.array]_
+*List[np.array]*
 
-__RETURNS:__
+**RETURNS:**
 
 A list where each element is a NumPy array.
 
-__Exceptions:__
+**Exceptions:**
 
-- __ImportError__
+- **ImportError**
 
     This exception will be raised when the necessary sentence-transformers module is not installed.
 
-## Examples
+## Examples{#examples}
 
 ```python
 from pymilvus import model
