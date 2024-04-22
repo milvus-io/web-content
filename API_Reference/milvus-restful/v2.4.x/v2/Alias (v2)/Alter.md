@@ -23,7 +23,9 @@ curl --location --request POST "http://${MILVUS_URI}/v2/vectordb/aliases/alter" 
     "collectionName": "custom_setup_indexed"
 }'
 ```
+
 Possible response is similar to the following
+
 ```json
 {
     "code": 200,

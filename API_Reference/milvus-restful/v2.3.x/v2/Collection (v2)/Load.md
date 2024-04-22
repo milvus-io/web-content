@@ -22,7 +22,9 @@ curl --location --request POST "http://${MILVUS_URI}/v2/vectordb/collections/loa
     "collectionName": "quick_setup"
 }'
 ```
-Possible response is similar to the following:
+
+Possible response is similar to the following
+:
 ```json
 {
     "code": 200,
@@ -38,7 +40,7 @@ Possible response is similar to the following:
 
     | Parameter        | Description                                                                               |
     |------------------|-------------------------------------------------------------------------------------------|
-    | `Request-Header`  | **integer**(required)<br/>The timeout duration for this operation in seconds. Setting this to None indicates that this operation timeouts when any response arrives or any error occurs.<br/>|
+    | `Request-Timeout`  | **integer**(required)<br/>The timeout duration for this operation in seconds. Setting this to None indicates that this operation timeouts when any response arrives or any error occurs.<br/>|
     | `Authorization`  | **string**<br/>The authentication token|
 
 - No query parameters required

@@ -191,9 +191,9 @@ Possible responses for the above requests are similar to the following:
                 "isPrimary": "boolean",
                 "isPartitionKey": "boolean",
                 "elementTypeParams": {
-                    "max_length": "string",
-                    "dim": "string",
-                    "max_capacity": "string"
+                    "max_length": "integer",
+                    "dim": "integer",
+                    "max_capacity": "integer"
                 }
             }
         ]
@@ -205,19 +205,19 @@ Possible responses for the above requests are similar to the following:
             "indexName": "string",
             "indexConfig": {
                 "index_type": "string",
-                "M": "string",
-                "efConstruction": "string",
-                "nlist": "string"
+                "M": "integer",
+                "efConstruction": "integer",
+                "nlist": "integer"
             }
         }
     ],
     "params": {
-        "max_length": "string",
-        "enableDynamicField": "string",
-        "shardsNum": "string",
-        "consistencyLevel": "string",
-        "partitionsNum": "string",
-        "ttlSeconds": "string"
+        "max_length": "integer",
+        "enableDynamicField": "boolean",
+        "shardsNum": "integer",
+        "consistencyLevel": "integer",
+        "partitionsNum": "integer",
+        "ttlSeconds": "integer"
     }
 }
 ```
@@ -243,9 +243,9 @@ Possible responses for the above requests are similar to the following:
 | `schema[].fields[].isPrimary`  | __boolean__<br/>Whether the current field is the primary field. Setting this to True makes the current field the primary field.  |
 | `schema[].fields[].isPartitionKey`  | __boolean__<br/>Whether the current field serves as the partition key. Setting this to True makes the current field serve as the partition key. In this case, MilvusZilliz Cloud manages all partitions in the current collection.  |
 | `schema[].fields[].elementTypeParams` | __object__<br/>Extra field parameters. |
-| `schema[].fields[].elementTypeParams.max_length`  | __string__<br/>An optional parameter for VarChar values that determines the maximum length of the value in the current field.  |
-| `schema[].fields[].elementTypeParams.dim`  | __string__<br/>An optional parameter for FloatVector or BinaryVector fields that determines the vector dimension.  |
-| `schema[].fields[].elementTypeParams.max_capacity`  | __string__<br/>An optional parameter for Array field values that determines the maximum number of elements in the current array field.  |
+| `schema[].fields[].elementTypeParams.max_length`  | __integer__<br/>An optional parameter for VarChar values that determines the maximum length of the value in the current field.  |
+| `schema[].fields[].elementTypeParams.dim`  | __integer__<br/>An optional parameter for FloatVector or BinaryVector fields that determines the vector dimension.  |
+| `schema[].fields[].elementTypeParams.max_capacity`  | __integer__<br/>An optional parameter for Array field values that determines the maximum number of elements in the current array field.  |
 | `indexParams` | __array__<br/>The parameters that apply to the index-building process. |
 | `indexParams[]` | __object__<br/> |
 | `indexParams[].metricType`  | __string__<br/>The similarity metric type used to build the index.<br/>The value defaults to COSINE  |
@@ -253,16 +253,16 @@ Possible responses for the above requests are similar to the following:
 | `indexParams[].indexName`  | __string__<br/>The name of the index to create, the value defaults to the target field name.  |
 | `indexParams[].indexConfig` | __object__<br/>The index type and related settings. For details, refer to [Vector Indexes](https://milvus.io/docs/index.md). |
 | `indexParams[].indexConfig.index_type`  | __string__<br/>The type of the index to create  |
-| `indexParams[].indexConfig.M`  | __string__<br/>The maximum degree of the node and applies only when index_type is set to __HNSW__.  |
-| `indexParams[].indexConfig.efConstruction`  | __string__<br/>The search scope. This applies only when **index_type** is set to **HNSW**  |
-| `indexParams[].indexConfig.nlist`  | __string__<br/>The number of cluster units. This applies to IVF-related index types.  |
+| `indexParams[].indexConfig.M`  | __integer__<br/>The maximum degree of the node and applies only when index_type is set to __HNSW__.  |
+| `indexParams[].indexConfig.efConstruction`  | __integer__<br/>The search scope. This applies only when **index_type** is set to **HNSW**  |
+| `indexParams[].indexConfig.nlist`  | __integer__<br/>The number of cluster units. This applies to IVF-related index types.  |
 | `params` | __object__<br/>Extra parameters for the collection. |
-| `params.max_length`  | __string__<br/>The maximum number of characters in a VarChar field. This parameter is mandatory when the current field type is VarChar.  |
-| `params.enableDynamicField`  | __string__<br/>Whether to enable the reserved dynamic field. If set to true, non-schema-defined fields are saved in the reserved dynamic field as key-value pairs.  |
-| `params.shardsNum`  | __string__<br/>The number of shards to create along with the current collection.  |
-| `params.consistencyLevel`  | __string__<br/>The consistency level of the collection. Possible values are __STRONG__, __BOUNDED__, __SESSION__, and __EVENTUALLY__.  |
-| `params.partitionsNum`  | __string__<br/>The number of partitions to create along with the current collection. This parameter is mandatory if one field of the collection has been designated as the partition key.  |
-| `params.ttlSeconds`  | __string__<br/>The time-to-live (TTL) period of the collection. If set, the collection is to be dropped once the period ends.  |
+| `params.max_length`  | __integer__<br/>The maximum number of characters in a VarChar field. This parameter is mandatory when the current field type is VarChar.  |
+| `params.enableDynamicField`  | __boolean__<br/>Whether to enable the reserved dynamic field. If set to true, non-schema-defined fields are saved in the reserved dynamic field as key-value pairs.  |
+| `params.shardsNum`  | __integer__<br/>The number of shards to create along with the current collection.  |
+| `params.consistencyLevel`  | __integer__<br/>The consistency level of the collection. Possible values are __STRONG__, __BOUNDED__, __SESSION__, and __EVENTUALLY__.  |
+| `params.partitionsNum`  | __integer__<br/>The number of partitions to create along with the current collection. This parameter is mandatory if one field of the collection has been designated as the partition key.  |
+| `params.ttlSeconds`  | __integer__<br/>The time-to-live (TTL) period of the collection. If set, the collection is to be dropped once the period ends.  |
 
 ## Response
 
