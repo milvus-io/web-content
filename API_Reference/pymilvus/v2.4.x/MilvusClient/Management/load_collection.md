@@ -6,7 +6,8 @@ This operation loads the data of a specific collection into memory.
 
 ```python
 load_collection(
-    collection_name: str, 
+    collection_name: str,
+    replica_number: int,
     timeout: Optional[float] = None
 ) -> None
 ```
@@ -126,7 +127,8 @@ client.create_index(
 
 # 7. Load indexes
 client.load_collection(
-    collection_name="customized_setup"
+    collection_name="customized_setup",
+    replica_number=2
 )
 ```
 
