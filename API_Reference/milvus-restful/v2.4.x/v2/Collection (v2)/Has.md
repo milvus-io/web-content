@@ -24,7 +24,9 @@ curl --location --request POST "http://${MILVUS_URI}/v2/vectordb/collections/has
 }'
 ```
 
-The possible response is similar to the following:
+The 
+possible response is similar to the following
+:
 
 ```json
 {

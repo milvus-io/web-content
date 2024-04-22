@@ -37,7 +37,9 @@ curl --location --request POST "http://${MILVUS_URI}/v2/vectordb/entities/insert
     "collectionName": "quick_setup"
 }'
 ```
-Possible response is similar to the following:
+
+Possible response is similar to the following
+:
 ```json
 {
     "code": 200,

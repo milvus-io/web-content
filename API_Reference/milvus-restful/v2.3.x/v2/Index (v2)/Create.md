@@ -33,7 +33,9 @@ curl --location --request POST "http://${MILVUS_URI}/v2/vectordb/indexes/create"
     ]
 }'
 ```
-Possible response is similar to the following:
+
+Possible response is similar to the following
+:
 ```json
 {
     "code": 200,
@@ -69,9 +71,9 @@ Possible response is similar to the following:
             "indexName": "string",
             "indexConfig": {
                 "index_type": "string",
-                "M": "string",
-                "efConstruction": "string",
-                "nlist": "string"
+                "M": "integer",
+                "efConstruction": "integer",
+                "nlist": "integer"
             }
         }
     ]
@@ -89,9 +91,9 @@ Possible response is similar to the following:
 | `indexParams[].indexName`  | __string__<br/>The name of the index to create, the value defaults to the target field name.  |
 | `indexParams[].indexConfig` | __object__<br/>The index type and related settings. For details, refer to [Vector Indexes](https://milvus.io/docs/index.md). |
 | `indexParams[].indexConfig.index_type`  | __string__<br/>The type of the index to create  |
-| `indexParams[].indexConfig.M`  | __string__<br/>The maximum degree of the node and applies only when index_type is set to __HNSW__.  |
-| `indexParams[].indexConfig.efConstruction`  | __string__<br/>The search scope. This applies only when **index_type** is set to **HNSW**  |
-| `indexParams[].indexConfig.nlist`  | __string__<br/>The number of cluster units. This applies to IVF-related index types.  |
+| `indexParams[].indexConfig.M`  | __integer__<br/>The maximum degree of the node and applies only when index_type is set to __HNSW__.  |
+| `indexParams[].indexConfig.efConstruction`  | __integer__<br/>The search scope. This applies only when **index_type** is set to **HNSW**  |
+| `indexParams[].indexConfig.nlist`  | __integer__<br/>The number of cluster units. This applies to IVF-related index types.  |
 
 ## Response
 

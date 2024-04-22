@@ -24,7 +24,9 @@ curl --location --request POST "http://${MILVUS_URI}/v2/vectordb/users/update_pa
     "password": "P@ssw0rd"
 }'
 ```
-Possible response is similar to the following.
+
+Possible response is similar to the following
+.
 ```json
 {
     "code": 200,

@@ -20,7 +20,9 @@ curl --location --request POST "http://${MILVUS_URI}/v2/vectordb/roles/list" \
 --header "Content-Type: application/json" \
 --data-raw '{}'
 ```
-Possible response is similar to the following.
+
+Possible response is similar to the following
+.
 ```json
 {
     "code": 200,

@@ -22,7 +22,9 @@ curl --location --request POST "http://${MILVUS_URI}/v2/vectordb/jobs/import/get
     "jobId": 44870776388440916
 }'
 ```
-Possible response is similar to the following.
+
+Possible response is similar to the following
+.
 ```json
 {
     "code": 200,

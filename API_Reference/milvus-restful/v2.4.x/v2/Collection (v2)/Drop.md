@@ -22,7 +22,9 @@ curl --location --request POST "http://${MILVUS_URI}/v2/vectordb/collections/dro
     "collectionName": "custom_quick_setup"
 }'
 ```
-Possible response is similar to the following:
+
+Possible response is similar to the following
+:
 ```json
 {
     "code": 200,

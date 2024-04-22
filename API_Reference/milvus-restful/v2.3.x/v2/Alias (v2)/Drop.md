@@ -21,7 +21,9 @@ curl --location --request POST "http://${MILVUS_URI}/v2/vectordb/aliases/drop" \
     "aliasName": "bob"
 }'
 ```
+
 Possible response is similar to the following
+
 ```json
 {
     "code": 200,

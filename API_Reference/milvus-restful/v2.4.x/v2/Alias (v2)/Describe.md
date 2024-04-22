@@ -22,7 +22,9 @@ curl --location --request POST "http://${MILVUS_URI}/v2/vectordb/aliases/describ
     "aliasName": "bob"
 }'
 ```
+
 Possible response is similar to the following
+
 ```shell
 {
     "code": 200,

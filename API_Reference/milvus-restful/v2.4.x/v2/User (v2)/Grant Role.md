@@ -26,7 +26,9 @@ curl --location --request POST "http://${MILVUS_URI}/v2/vectordb/users/grant_rol
     "userName": "milvusAdmin"
 }'
 ```
-Possible response is similar to the following:
+
+Possible response is similar to the following
+:
 ```json
 {
     "code": 200,
