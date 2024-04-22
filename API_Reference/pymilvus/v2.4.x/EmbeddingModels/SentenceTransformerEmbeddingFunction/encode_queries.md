@@ -10,23 +10,23 @@ encode_queries(
 ) -> List[np.array]
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __queries__ (_List[str]_)
+- **queries** (*List[str]*)
 
     A list of string values, where each string represents a query that will be passed to the embedding model for encoding. The model will generate an embedding vector for each string in the list.
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
-_List[np.array]_
+*List[np.array]*
 
-__RETURNS:__
+**RETURNS:**
 
 A list where each element is a NumPy array.
 
-__Exceptions:__
+**Exceptions:**
 
-- __ImportError__
+- **ImportError**
 
     This exception will be raised when the necessary sentence-transformers module is not installed.
 

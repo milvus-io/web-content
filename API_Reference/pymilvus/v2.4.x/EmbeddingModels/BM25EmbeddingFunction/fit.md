@@ -10,17 +10,17 @@ fit(
 )
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __corpus__ (_string_)
+- **corpus** (*string*)
 
     A list of strings that represent the documents used to fit the model
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
-_NoneType_
+*NoneType*
 
-__RETURNS:__
+**RETURNS:**
 
 None
 

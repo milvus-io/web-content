@@ -10,23 +10,23 @@ load(
 )
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __path__ (_string_)
+- **path** (*string*)
 
-    The file path to load the BM25 model parameters from. Defaults to __None__, where the code will use a default metadata filename and URL to load the default parameters. The default parameters are fitted on the [MS MARCO](https://microsoft.github.io/msmarco/) ranking dataset.
+    The file path to load the BM25 model parameters from. Defaults to **None**, where the code will use a default metadata filename and URL to load the default parameters. The default parameters are fitted on the [MS MARCO](https://microsoft.github.io/msmarco/) ranking dataset.
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
-_NoneType_
+*NoneType*
 
-__RETURNS:__
+**RETURNS:**
 
 None
 
-__Exceptions:__
+**Exceptions:**
 
-- __OSError__
+- **OSError**
 
     This exception will be raised when the file cannot be opened, such as when the path is invalid or permissions do not allow opening the file.
 

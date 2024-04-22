@@ -8,31 +8,31 @@ This operation saves the BM25 model parameters to a JSON file at the given path.
 save(path: str)
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- path (_string_)
+- path (*string*)
 
     The path of the JSON file that stores the BM25 model parameters. The configurable parameters include:
 
-    - __k1__ (_float_) -
+    - **k1** (*float*) -
 
-        The BM25 k1 parameter, a float defaulting to __1.5__. This controls document term normalization.
+        The BM25 k1 parameter, a float defaulting to **1.5**. This controls document term normalization.
 
-    - __b__ (_float_) -
+    - **b** (*float*) -
 
-        The BM25 b parameter, a float defaulting to __0.75__. This controls field length normalization. 
+        The BM25 b parameter, a float defaulting to **0.75**. This controls field length normalization. 
 
-    - __epsilon__ (_float_)
+    - **epsilon** (*float*)
 
-        A float defaulting to __0.25__. This is used to smooth idf values.
+        A float defaulting to **0.25**. This is used to smooth idf values.
 
-    These parameters can be specified when initializing the BM25EmbeddingFunction class. For details, refer to [BM25EmbeddingFunction](./BM25EmbeddingFunction.md).
+    These parameters can be specified when initializing the BM25EmbeddingFunction class. For details, refer to [BM25EmbeddingFunction](./EmbeddingModels-BM25EmbeddingFunction).
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
-_NoneType_
+*NoneType*
 
-__RETURNS:__
+**RETURNS:**
 
 None
 

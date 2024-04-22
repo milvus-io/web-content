@@ -10,23 +10,23 @@ encode_documents(
 ) -> csr_array
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __documents__ (_List[str]_)
+- **documents** (*List[str]*)
 
     A list of string values, where each string represents a document that will be passed to the embedding model for encoding. The model will generate an embedding vector for each string in the list.
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
-_csr_array_
+*csr_array*
 
-__RETURNS:__
+**RETURNS:**
 
 Compressed sparse row matrices representing the document embeddings.
 
-__Exceptions:__
+**Exceptions:**
 
-- __ImportError__
+- **ImportError**
 
     This exception will be raised when the transformers library is not installed.
 
