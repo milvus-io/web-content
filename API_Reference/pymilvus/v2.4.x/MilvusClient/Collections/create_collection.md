@@ -1,6 +1,6 @@
 # create_collection()
 
-This operation creates a collection either with default or customized settings. 
+This operation supports creates a collection with 2 separate modes: quick setup or customized setup. 
 
 ## Request syntax
 
@@ -14,8 +14,8 @@ create_collection(
     metric_type: str = "COSINE",
     auto_id: bool = False,
     timeout: Optional[float] = None,
-    schema: Optional[CollectionSchema] = None,
-    index_params: Optional[IndexParams] = None,
+    schema: Optional[CollectionSchema] = None,    # this is customized setting
+    index_params: Optional[IndexParams] = None,    # this is customized setting
     **kwargs,
 ) -> None
 ```
@@ -84,7 +84,7 @@ __PARAMETERS:__
 
     The schema of this collection.
 
-    Setting this to __None__ indicates this collection will be created with default settings. 
+    Setting this to __None__ indicates this collection will be created with quick setup. 
 
     To set up a collection with a customized schema, you need to create a __CollectionSchema__ object and reference it here. In this case, Milvus ignores all other schema-related settings carried in the request.
 
@@ -202,7 +202,7 @@ You can choose between a quick setup or a customized setup as follows:
 
 - __Quick setup__
 
-    The quick setup collection has two fields: the primary and vector fields. It also allows the insertion of undefined fields and their values in key-value pairs in a dynamic field.
+    The quick setup collection has two required fields: the primary and vector fields. It also allows the insertion of undefined fields and their values in key-value pairs in a dynamic field.
 
     ```python
     client.create_collection(
@@ -236,7 +236,7 @@ You can choose between a quick setup or a customized setup as follows:
     )
     ```
 
-    In the above code, the collection will be created and automatically loaded into memory.
+    In the above code, the collection will be created, automatically indexed and loaded into memory.
 
 - __Customized setup with index parameters__
 
@@ -279,7 +279,7 @@ You can choose between a quick setup or a customized setup as follows:
     )
     ```
 
-    In the above code, the collection will be created and automatically loaded into memory.
+    In the above code, the collection will be created, indexed with customized settings and automatically loaded into memory.
 
 - __Customized setup without index parameters__
 
@@ -303,7 +303,7 @@ You can choose between a quick setup or a customized setup as follows:
     )
     ```
 
-    In the above code, the collection will also be created, but its data will not automatically loaded into memory.
+    In the above code, the collection will also be created, but since it lacks index_params, so its data will not indexed and loaded into memory automatically.
 
 ## Related methods
 
