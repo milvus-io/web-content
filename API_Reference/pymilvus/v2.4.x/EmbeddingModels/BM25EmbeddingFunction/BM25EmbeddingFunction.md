@@ -6,7 +6,7 @@ BM25EmbeddingFunction is a class in pymilvus that handles encoding text into emb
 pymilvus.model.sparse.bm25.BM25EmbeddingFunction
 ```
 
-## Constructor{#constructor}
+## Constructor
 
 Constructs a BM25EmbeddingFunction for common use cases.
 
@@ -47,7 +47,7 @@ BM25EmbeddingFunction(
 
     The number of worker processes to use for parallelization. Defaults to the number of CPU cores if not specified.
 
-## Examples{#examples}
+## Examples
 
 ```python
 **from** pymilvus.model.sparse.bm25.tokenizers **import** build_default_analyzer

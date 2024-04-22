@@ -2,7 +2,7 @@
 
 This operation takes in a list of query strings and encodes each query into a vector embedding.
 
-## Request syntax{#request-syntax}
+## Request syntax
 
 ```python
 encode_queries(
@@ -30,7 +30,7 @@ A list where each element is a NumPy array.
 
     This exception will be raised when the necessary sentence-transformers module is not installed.
 
-## Examples{#examples}
+## Examples
 
 ```python
 from pymilvus import model

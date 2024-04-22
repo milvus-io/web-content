@@ -2,7 +2,7 @@
 
 This operation takes in documents and encodes them into vector embeddings.
 
-## Request syntax{#request-syntax}
+## Request syntax
 
 ```python
 encode_documents(
@@ -30,7 +30,7 @@ A list where each element is a NumPy array.
 
     This exception will be raised when the OpenAI module is not installed.
 
-## Examples{#examples}
+## Examples
 
 ```python
 from pymilvus import model

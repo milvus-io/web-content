@@ -6,7 +6,7 @@
 pymilvus.model.dense.SentenceTransformerEmbeddingFunction
 ```
 
-## Constructor{#constructor}
+## Constructor
 
 Constructs a SentenceTransformerEmbeddingFunction for common use cases.
 
@@ -52,7 +52,7 @@ SentenceTransformerEmbeddingFunction(
 
     Allows additional keyword arguments to be passed to the model initialization. For more information, refer to [SentenceTransformer](https://github.com/UKPLab/sentence-transformers/blob/master/sentence_transformers/SentenceTransformer.py).
 
-## Examples{#examples}
+## Examples
 
 ```python
 from pymilvus import model

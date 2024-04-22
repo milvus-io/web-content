@@ -4,7 +4,7 @@ This operation in [OpenAIEmbeddingFunction](./EmbeddingModels-OpenAIEmbeddingFun
 
 The **__call__()** method of OpenAIEmbeddingFunction shares the same functionality as [encode_documents()](./OpenAIEmbeddingFunction-encode_documents) and [encode_queries()](./OpenAIEmbeddingFunction-encode_queries).
 
-## Request syntax{#request-syntax}
+## Request syntax
 
 ```python
 # Instance created
@@ -36,7 +36,7 @@ A list where each element is a NumPy array.
 
     This exception will be raised when the OpenAI module is not installed.
 
-## Examples{#examples}
+## Examples
 
 ```python
 from pymilvus import model

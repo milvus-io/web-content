@@ -2,7 +2,7 @@
 
 This operation loads BM25 model parameters from a JSON file.
 
-## Request syntax{#request-syntax}
+## Request syntax
 
 ```python
 load(
@@ -30,7 +30,7 @@ None
 
     This exception will be raised when the file cannot be opened, such as when the path is invalid or permissions do not allow opening the file.
 
-## Examples{#examples}
+## Examples
 
 ```python
 from pymilvus.model.sparse.bm25.tokenizers import build_default_analyzer

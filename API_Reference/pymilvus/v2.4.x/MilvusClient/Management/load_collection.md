@@ -2,7 +2,7 @@
 
 This operation loads the data of a specific collection into memory.
 
-## Request syntax{#request-syntax}
+## Request syntax
 
 ```python
 load_collection(
@@ -57,7 +57,7 @@ None
 
     This exception will be raised when any error occurs during this operation.
 
-## Examples{#examples}
+## Examples
 
 ```python
 from pymilvus import MilvusClient, DataType
@@ -149,7 +149,7 @@ client.load_collection(
 )
 ```
 
-## Related methods{#related-methods}
+## Related methods
 
 - [get_load_state()](./Management-get_load_state)
 

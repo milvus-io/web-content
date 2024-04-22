@@ -2,7 +2,7 @@
 
 This operation takes in a list of query strings and encodes each query into a vector embedding.
 
-## Request syntax{#request-syntax}
+## Request syntax
 
 ```python
 encode_queries(
@@ -30,7 +30,7 @@ Compressed sparse row matrices representing the query embeddings.
 
     This exception will be raised when the transformers library is not installed.
 
-## Examples{#examples}
+## Examples
 
 ```python
 from pymilvus import model

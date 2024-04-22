@@ -6,7 +6,7 @@
 pymilvus.model.dense.OpenAIEmbeddingFunction
 ```
 
-## Constructor{#constructor}
+## Constructor
 
 Constructs an OpenAIEmbeddingFunction for common use cases.
 
@@ -42,7 +42,7 @@ OpenAIEmbeddingFunction(
 
     Allows additional keyword arguments to be passed to the model initialization. For more information, refer to [Client](https://github.com/openai/openai-python/blob/main/src/openai/_client.py).
 
-## Examples{#examples}
+## Examples
 
 ```python
 from pymilvus import model

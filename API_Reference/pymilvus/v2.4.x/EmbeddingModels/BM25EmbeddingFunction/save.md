@@ -2,7 +2,7 @@
 
 This operation saves the BM25 model parameters to a JSON file at the given path.
 
-## Request syntax{#request-syntax}
+## Request syntax
 
 ```python
 save(path: str)
@@ -36,7 +36,7 @@ save(path: str)
 
 None
 
-## Examples{#examples}
+## Examples
 
 ```python
 from pymilvus.model.sparse.bm25.tokenizers import build_default_analyzer

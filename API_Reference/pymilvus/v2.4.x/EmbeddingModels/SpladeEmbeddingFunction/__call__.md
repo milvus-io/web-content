@@ -4,7 +4,7 @@ This operation in [SpladeEmbeddingFunction](./EmbeddingModels-SpladeEmbeddingFun
 
 Unlike [encode_documents()](./SpladeEmbeddingFunction-encode_documents) or [encode_queries()](./SpladeEmbeddingFunction-encode_queries), which enable you to prepend **doc_instruction** or **query_instruction** and utilize **k_tokens_document** or **k_tokens_query** for result pruning, the **call**() method directly returns embeddings without offering the option to prepend instructions or prune results.
 
-## Request syntax{#request-syntax}
+## Request syntax
 
 ```python
 # Instance created
@@ -36,7 +36,7 @@ Compressed sparse row matrices representing the document embeddings.
 
     This exception will be raised when the transformers library is not installed.
 
-## Examples{#examples}
+## Examples
 
 ```python
 from pymilvus import model

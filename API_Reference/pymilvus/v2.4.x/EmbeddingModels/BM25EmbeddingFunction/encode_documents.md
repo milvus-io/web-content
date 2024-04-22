@@ -4,7 +4,7 @@ This operation takes in documents and encodes them into vector embeddings.
 
 When using **BM25EmbeddingFunction**, note that **encoding_queries()** and **encoding_documents()** operations cannot be interchanged mathematically. Therefore, there is no implemented **__call__()** available.
 
-## Request syntax{#request-syntax}
+## Request syntax
 
 ```python
 encode_documents(
@@ -32,7 +32,7 @@ A [scipy.sparse.csr_array](https://docs.scipy.org/doc/scipy/reference/generated/
 
     This exception will be raised when an unsupported operation is attempted on the embedding object.
 
-## Examples{#examples}
+## Examples
 
 ```python
 from pymilvus.model.sparse.bm25.tokenizers import build_default_analyzer

@@ -6,7 +6,7 @@
 pymilvus.model.sparse.SpladeEmbeddingFunction
 ```
 
-## Constructor{#constructor}
+## Constructor
 
 Constructs a SpladeEmbeddingFunction for common use cases.
 
@@ -57,7 +57,7 @@ SpladeEmbeddingFunction(
 
     Allows additional keyword arguments to be passed to the model initialization. For more information, refer to [AutoModelForMaskedLM](https://huggingface.co/docs/transformers/model_doc/auto#transformers.AutoModelForMaskedLM).
 
-## Examples{#examples}
+## Examples
 
 ```python
 from pymilvus import model
