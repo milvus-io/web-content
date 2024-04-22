@@ -82,7 +82,7 @@ IP is more useful if you need to compare non-normalized data or when you care ab
 
 <div class="alert note">
 
- If you use IP to calculate embeddings similarities, you must normalize your embeddings. After normalization, the inner product equals cosine similarity.
+ If you apply the IP distance metric to normalized embeddings, the result will be equivalent to calculating the cosine similarity between the embeddings.
 
 </div>
 

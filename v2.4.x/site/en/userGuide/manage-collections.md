@@ -286,10 +286,16 @@ During the loading process of a collection, Milvus loads the collection's index 
 
 ### Load a collection
 
+To load a collection, use the `load_collection()` method, specifying the collection name. You can also set `replica_number` to determine how many in-memory replicas of data segments to create on query nodes when the collection is loaded.
+
+- Milvus Standalone: The maximum allowed value for `replica_number` is 1.
+- Milvus Cluster: The maximum value should not exceed the `queryNode.replicas` set in your Milvus configurations. For additional details, refer to [Query Node-related Configurations](https://milvus.io/docs/configure_querynode.md#Query-Node-related-Configurations).
+
 ```python
 # 7. Load the collection
 client.load_collection(
-    collection_name="customized_setup_2"
+    collection_name="customized_setup_2",
+    replica_number=1 # Number of replicas to create on query nodes. Max value is 1 for Milvus Standalone, and no greater than `queryNode.replicas` for Milvus Cluster.
 )
 
 res = client.get_load_state(

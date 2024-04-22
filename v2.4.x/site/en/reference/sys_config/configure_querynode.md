@@ -136,6 +136,25 @@ Under this section, you can configure query node port, graceful time, etc.
   </tbody>
 </table>
 
+## `queryNode.replicas`
+
+<table id="queryNode.replicas">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+     <td>
+        The number of in-memory replicas of data segments that are created on query nodes when a collection is loaded. In a Standalone deployment, the maximum value is 1. For more information, refer to <a href="https://milvus.io/docs/replica.md#In-Memory-Replica">In-Memory Replica</a>.
+      </td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+
 ## `queryNode.stats.publishInterval`
 
 <table id="queryNode.stats.publishInterval">

@@ -98,7 +98,7 @@ import io.milvus.grpc.QueryResults;
 QueryParam param = QueryParam.newBuilder()
         .withCollectionName("collection1")
         .withExpr("id in [100, 101]")
-        .addOutFields("field1")
+        .addOutField("field1")
         .withConsistencyLevel(ConsistencyLevelEnum.EVENTUALLY)
         .build();
 R<QueryResults> response = client.query(param)

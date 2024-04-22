@@ -146,6 +146,8 @@ client.create_index(
 client.load_collection(
     collection_name="customized_setup",
     replica_number=2
+    collection_name="customized_setup",
+    replica_number=2
 )
 ```
 

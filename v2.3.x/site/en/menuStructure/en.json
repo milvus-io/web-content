@@ -935,12 +935,20 @@
       "order": 8
     },
     {
+      "id": "integrate_with_voyageai.md",
+      "title": "VoyageAI",
+      "label1": "integrations",
+      "label2": "",
+      "label3": "",
+      "order": 9
+    },
+    {
       "id": "integrate_with_testcontainers.md",
       "title": "Testcontainers",
       "label1": "integrations",
       "label2": "",
       "label3": "",
-      "order": 8
+      "order": 10
     },
     {
       "id": "benchmark.md",
