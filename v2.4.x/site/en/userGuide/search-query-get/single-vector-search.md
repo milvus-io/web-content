@@ -371,15 +371,24 @@ Alongside the nearest neighbors, the search results will include the specified f
 
 Filtered search applies scalar filters to vector searches, allowing you to refine the search results based on specific criteria. You can find more about filter expressions in [Boolean Expression Rules](https://milvus.io/docs/boolean.md) and examples in [Get & Scalar Query](https://milvus.io/docs/get-and-scalar-query.md).
 
-For instance, to refine search results based on a string pattern, you can use the __like__ operator. This operator enables string matching by considering prefixes, infixes, and suffixes:
+### Use the `like` operator
 
-- To match values starting with a specific prefix, use the syntax __'like "prefix%"'__.
+The `like` operator enhances string searches by evaluating patterns including prefixes, infixes, and suffixes:
 
-- To match values containing a specific sequence of characters anywhere within the string, use the syntax __'like "%infix%"'__.
+- __Prefix matching__: To find values starting with a specific prefix, use the syntax `'like "prefix%"'`.
+- __Infix matching__: To find values containing a specific sequence of characters anywhere within the string, use the syntax `'like "%infix%"'`.
+- __Suffix matching__: To find values ending with a specific suffix, use the syntax `'like "%suffix"'`.
 
-- To match values ending with a specific suffix, use the syntax __'like "%suffix"'__.
+For single-character matching, underscore (`_`) acts as a wildcard for one character, e.g., `'like "y_llow"'`.
 
-- The __like__ operator can also be used for single-character matching by using the underscore (_) to represent any single character. For example, __'like "y_llow"'__.
+### Special characters in search strings
+
+If you want to search for a string that contains special characters like underscores (`_`) or percent signs (`%`), which are normally used as wildcards in search patterns (`_` for any single character and `%` for any sequence of characters), you must escape these characters to treat them as literal characters. Use a backslash (`\`) to escape special characters, and remember to escape the backslash itself. For instance:
+
+- To search for a literal underscore, use `\\_`.
+- To search for a literal percent sign, use `\\%`.
+
+So, if you need to search for the text `"_version_"`, your query should be formatted as `'like "\\_version\\_"'` to ensure the underscores are treated as part of the search term and not as wildcards.
 
 Filter results whose __color__ is prefixed with __red__:
 
