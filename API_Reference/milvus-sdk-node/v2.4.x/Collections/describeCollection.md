@@ -6,7 +6,7 @@ This operation lists detailed information about a specific collection.
 describeCollection(data): Promise<DescribeCollectionResponse>
 ```
 
-## Request Syntax{#request-syntax}
+## Request Syntax
 
 ```javascript
 milvusClient.describeCollection({ 
@@ -134,7 +134,7 @@ A list of the names of the virtual channels in this collection.
 
     The number of shards in the collection.
 
-## Example{#example}
+## Example
 
 ```java
 const milvusClient = new milvusClient(MILUVS_ADDRESS);

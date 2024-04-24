@@ -6,11 +6,11 @@ This operation conducts a vector similarity search with an optional scalar filte
 search(data): Promise<ResStatus>
 ```
 
-## Request Syntax{#request-syntax}
+## Request Syntax
 
 This method has the following alternatives.
 
-### With SearchReq{#with-searchreq}
+### With SearchReq
 
 ```javascript
 milvusClient.search({
@@ -149,7 +149,7 @@ This method returns a promise that resolves to a **SearchResults** object.
 
         The reason that indicates the reason for the reported error. It remains an empty string if this operation succeeds.
 
-### With SearchSimpleReq{#with-searchsimplereq}
+### With SearchSimpleReq
 
 ```javascript
 milvusClient.search({
@@ -285,7 +285,7 @@ This method returns a promise that resolves to a **SearchResults** object.
 
         The reason that indicates the reason for the reported error. It remains an empty string if this operation succeeds.
 
-## Example{#example}
+## Example
 
 ```java
 

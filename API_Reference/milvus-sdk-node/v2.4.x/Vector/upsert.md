@@ -6,7 +6,7 @@ This operation inserts or updates data in a specific collection.
 upsert(data): Promise<MutationResult>
 ```
 
-## Request Syntax{#request-syntax}
+## Request Syntax
 
 ```javascript
 milvusClient.upsert({
@@ -160,7 +160,7 @@ This method returns a promise that resolves to a **MutationResult** object.
 
         The reason that indicates the reason for the reported error. It remains an empty string if this operation succeeds.
 
-## Example{#example}
+## Example
 
 ```java
 

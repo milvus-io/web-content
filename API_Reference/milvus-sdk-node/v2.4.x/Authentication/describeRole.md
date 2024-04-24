@@ -6,7 +6,7 @@ This operation describes a specific role.
 describeRole(data): Promise<SelectRoleResponse>
 ```
 
-## Request Syntax{#request-syntax}
+## Request Syntax
 
 ```javascript
 milvusClient.describeRole({
@@ -109,7 +109,7 @@ This method returns a promise that resolves to a **SelectRoleResponse** object.
 
         The reason that indicates the reason for the reported error. It remains an empty string if this operation succeeds.
 
-## Example{#example}
+## Example
 
 ```java
 milvusClient.describeRole({roleName: 'myrole'});

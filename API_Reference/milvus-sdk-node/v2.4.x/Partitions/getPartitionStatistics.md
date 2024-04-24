@@ -6,7 +6,7 @@ This operation displays the statistics collected on a specific partition.
 getPartitionStatistics(data): Promise<StatisticsResponse>
 ```
 
-## Request Syntax{#request-syntax}
+## Request Syntax
 
 ```javascript
 milvusClient.getPartitionStatistics({
@@ -72,7 +72,7 @@ This method returns a promise that resolves to a **StatisticsResponse** object.
 
         The reason that indicates the reason for the reported error. It remains an empty string if this operation succeeds.
 
-## Example{#example}
+## Example
 
 ```java
 new milvusClient(MILUVS_ADDRESS).getPartitionStatistics({

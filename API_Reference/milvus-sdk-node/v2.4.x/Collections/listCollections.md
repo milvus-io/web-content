@@ -6,7 +6,7 @@ This operation lists all existing collections.
 milvusClient.listCollections();
 ```
 
-## Request Syntax{#request-syntax}
+## Request Syntax
 
 ```javascript
 listCollections({
@@ -89,7 +89,7 @@ This method returns a promise that resolves to a **ShowCollectionsResponse** obj
 
         The reason that indicates the reason for the reported error. It remains an empty string if this operation succeeds.
 
-## Example{#example}
+## Example
 
 ```java
 const milvusClient = new milvusClient(MILUVS_ADDRESS);

@@ -6,7 +6,7 @@ This operation revokes a privilege already assigned to a role.
 revokePrivilege(data): Promise<ResStatus>
 ```
 
-## Request Syntax{#request-syntax}
+## Request Syntax
 
 ```javascript
 milvusClient.revokePrivilege({
@@ -87,7 +87,7 @@ This method returns a promise that resolves to a **ResStatus** object.
 
     The reason that indicates the reason for the reported error. It remains an empty string if this operation succeeds.
 
-## Example{#example}
+## Example
 
 ```java
 milvusClient.revokePrivilege({

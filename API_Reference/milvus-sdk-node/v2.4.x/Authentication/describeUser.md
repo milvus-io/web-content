@@ -6,7 +6,7 @@ This is a method template.
 describeUser(data): Promise<SelectUserResponse>
 ```
 
-## Request Syntax{#request-syntax}
+## Request Syntax
 
 ```javascript
 milvusClient.describeUser({
@@ -79,7 +79,7 @@ This method returns a promise that resolves to a **SelectUserResponse** object.
 
         The reason that indicates the reason for the reported error. It remains an empty string if this operation succeeds.
 
-## Example{#example}
+## Example
 
 ```java
 milvusClient.describeUser({username: 'name'})

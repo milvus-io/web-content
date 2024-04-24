@@ -6,7 +6,7 @@ This operation describes a specific index.
 describeIndex(data): Promise<DescribeIndexResponse>
 ```
 
-## Request Syntax{#request-syntax}
+## Request Syntax
 
 ```javascript
  milvusClient.describeIndex({ 
@@ -106,7 +106,7 @@ This method returns a promise that resolves to a **DescribeIndexResponse** objec
 
         The reason that indicates the reason for the reported error. It remains an empty string if this operation succeeds.
 
-## Example{#example}
+## Example
 
 ```java
 const milvusClient = new MilvusClient(MILUVS_ADDRESS);

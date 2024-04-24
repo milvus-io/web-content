@@ -6,7 +6,7 @@ This operation drops a specified collection alias.
 dropAlias(data): Promise<ResStatus>
 ```
 
-## Request Syntax{#request-syntax}
+## Request Syntax
 
 ```javascript
 milvusClient.dropAlias({
@@ -57,7 +57,7 @@ This method returns a promise that resolves to a **ResStatus** object.
 
     The reason that indicates the reason for the reported error. It remains an empty string if this operation succeeds.
 
-## Example{#example}
+## Example
 
 ```java
 const milvusClient = new milvusClient(MILUVS_ADDRESS);

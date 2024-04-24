@@ -6,7 +6,7 @@ This operation lists the partitions in a specified collection.
 listPartitions(data): Promise<ShowPartitionsResponse>
 ```
 
-## Request Syntax{#request-syntax}
+## Request Syntax
 
 ```javascript
 milvusClient.listPartitions({
@@ -73,7 +73,7 @@ This method returns a promise that resolves to a **ShowPartitionsResponse** obje
 
         The reason that indicates the reason for the reported error. It remains an empty string if this operation succeeds.
 
-## Example{#example}
+## Example
 
 ```java
 new milvusClient(MILUVS_ADDRESS).listPartitions({

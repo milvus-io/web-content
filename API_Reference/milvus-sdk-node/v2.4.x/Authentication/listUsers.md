@@ -6,7 +6,7 @@ This is a method template.
 listUsers(data): Promise<ListCredUsersResponse>
 ```
 
-## Request Syntax{#request-syntax}
+## Request Syntax
 
 ```javascript
 milvusClient.listUsers()
@@ -53,7 +53,7 @@ This method returns a promise that resolves to a **ListCredUsersResponse** objec
 
         The reason that indicates the reason for the reported error. It remains an empty string if this operation succeeds.
 
-## Example{#example}
+## Example
 
 ```java
 milvusClient.listUsers()

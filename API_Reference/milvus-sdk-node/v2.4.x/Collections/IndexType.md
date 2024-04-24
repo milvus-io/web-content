@@ -2,7 +2,7 @@
 
 This is an enumeration that provides the following constants.
 
-## Constants{#constants}
+## Constants
 
 - **ANNOY** = ANNOY
 Sets the index type to ANNOY.

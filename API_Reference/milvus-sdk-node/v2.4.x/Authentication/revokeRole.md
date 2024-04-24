@@ -6,7 +6,7 @@ This operation revokes the role assigned to a user.
 revokeRole(data): Promise<ResStatus>
 ```
 
-## Request Syntax{#request-syntax}
+## Request Syntax
 
 ```javascript
 milvusClient.revokeRole({
@@ -62,7 +62,7 @@ This method returns a promise that resolves to a **ResStatus** object.
 
     The reason that indicates the reason for the reported error. It remains an empty string if this operation succeeds.
 
-## Example{#example}
+## Example
 
 ```java
 milvusClient.removeUserFromRole({

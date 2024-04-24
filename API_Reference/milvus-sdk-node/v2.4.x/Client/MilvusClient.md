@@ -6,7 +6,7 @@ A **MilvusClient** instance represents a Node.js client that connects to a speci
 new MilvusClient(options:ClientConfig)
 ```
 
-## Request Syntax{#request-syntax}
+## Request Syntax
 
 ```javascript
 new MilvusClient(config: ClientConfig)
@@ -146,12 +146,12 @@ new MilvusClient(config: ClientConfig)
 
 This method returns a Milvus Client instance that extends GRPC Client and handles communication with Milvus server.
 
-## Example{#example}
+## Example
 
 ```python
 new MilvusClient(config: ClientConfig)
 ```
 
-## Class members{#class-members}
+## Class members
 
 Refer to [MilvusClient](./undefined) for a categorized list of class members.

@@ -6,7 +6,7 @@ This operation lists the statistics collected on a specific collection.
 getCollectionStatistics(data): Promise<StatisticsResponse>
 ```
 
-## Request Syntax{#request-syntax}
+## Request Syntax
 
 ```javascript
 milvusClient.getCollectionStatistics({ 
@@ -61,7 +61,7 @@ This method returns a promise that resolves to a **StatisticsResponse** object.
 
         The reason that indicates the reason for the reported error. It remains an empty string if this operation succeeds.
 
-## Example{#example}
+## Example
 
 ```java
 const milvusClient = new milvusClient(MILUVS_ADDRESS);

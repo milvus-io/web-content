@@ -2,7 +2,7 @@
 
 This is an enumeration that provides the following constants.
 
-## Constants{#constants}
+## Constants
 
 - NONE = 0
 Sets the data type to **NoneType**.
@@ -43,5 +43,5 @@ Sets the data type to **Binary Vector**.
 - FloatVector = 101
 Sets the data type to **Float Vector**.
 
-## Example{#example}
+## Example
 

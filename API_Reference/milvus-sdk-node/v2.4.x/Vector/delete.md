@@ -6,11 +6,11 @@ This operation deletes entities by their IDs or with a boolean expression.
 delete(data): Promise<MutationResult>
 ```
 
-## Request Syntax{#request-syntax}
+## Request Syntax
 
 This method has the following alternatives.
 
-### With DeleteByIdsReq {#with-deletebyidsreq}
+### With DeleteByIdsReq 
 
 ```javascript
 milvusClient.delete({
@@ -73,7 +73,7 @@ This method returns a promise that resolves to a **ResStatus** object.
 
     The reason that indicates the reason for the reported error. It remains an empty string if this operation succeeds.
 
-### With DeleteByFilterReq{#with-deletebyfilterreq}
+### With DeleteByFilterReq
 
 ```javascript
 milvusClient.delete({
@@ -136,7 +136,7 @@ This method returns a promise that resolves to a **ResStatus** object.
 
     The reason that indicates the reason for the reported error. It remains an empty string if this operation succeeds.
 
-## Example{#example}
+## Example
 
 <div class="multipleCode">
     <a href="#python">Python</a>

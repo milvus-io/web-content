@@ -6,11 +6,11 @@ This operation creates a collection either with default or customized settings.
 createCollection(data): Promise<ResStatus>
 ```
 
-## Request Syntax{#request-syntax}
+## Request Syntax
 
 This method has the following alternatives.
 
-### With CreateColReq{#with-createcolreq}
+### With CreateColReq
 
 Using this request body, you can create a collection by simply setting the collection name and dimension of the vector field.
 
@@ -98,7 +98,7 @@ milvusClient.createCollection({
 
     The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response returns or error occurs.
 
-### With CreateCollectionReq{#with-createcollectionreq}
+### With CreateCollectionReq
 
 Using this request body, you can customize the schema settings of the collection.
 
@@ -264,7 +264,7 @@ milvusClient.createCollection({
 
     The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response returns or error occurs.
 
-### With CreateCollectionWithSchemaAndIndexParamsReq{#with-createcollectionwithschemaandindexparamsreq}
+### With CreateCollectionWithSchemaAndIndexParamsReq
 
 Using this request body, you can customize the schema and index settings of the collection. Upon creation, the collection is automatically loaded.
 
@@ -487,7 +487,7 @@ This method returns a promise that resolves to a **ResStatus** object.
 
     The reason that indicates the reason for the reported error. It remains an empty string if this operation succeeds.
 
-## Example{#example}
+## Example
 
 ```java
 const milvusClient = new milvusClient(MILUVS_ADDRESS);
