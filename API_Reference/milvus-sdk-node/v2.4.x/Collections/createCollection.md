@@ -16,19 +16,19 @@ Using this request body, you can create a collection by simply setting the colle
 
 ```javascript
 milvusClient.createCollection({
-    [collection_name](http://localhost:5500/docs/interfaces/CreateColReq.html#collection_name): *string*;
-    [dimension](http://localhost:5500/docs/interfaces/CreateColReq.html#dimension): *number*;
-    [auto_id](http://localhost:5500/docs/interfaces/CreateColReq.html#auto_id)?: *boolean*;
-    [consistency_level](http://localhost:5500/docs/interfaces/CreateColReq.html#consistency_level)?: *"Strong"* | *"Session"* | *"Bounded"* | *"Eventually"* | *"Customized"*;
-    [description](http://localhost:5500/docs/interfaces/CreateColReq.html#description)?: *string*;
-    [enableDynamicField](http://localhost:5500/docs/interfaces/CreateColReq.html#enableDynamicField)?: *boolean*;
-    [enable_dynamic_field](http://localhost:5500/docs/interfaces/CreateColReq.html#enable_dynamic_field)?: *boolean*;
-    [id_type](http://localhost:5500/docs/interfaces/CreateColReq.html#id_type)?: [*Int64*](http://localhost:5500/docs/enums/DataType.html#Int64) | [*VarChar*](http://localhost:5500/docs/enums/DataType.html#VarChar);
-    [index_params](http://localhost:5500/docs/interfaces/CreateColReq.html#index_params)?: [*CreateIndexParam*](http://localhost:5500/docs/interfaces/CreateIndexParam.html);
-    [metric_type](http://localhost:5500/docs/interfaces/CreateColReq.html#metric_type)?: *string*;
-    [primary_field_name](http://localhost:5500/docs/interfaces/CreateColReq.html#primary_field_name)?: *string*;
-    [vector_field_name](http://localhost:5500/docs/interfaces/CreateColReq.html#vector_field_name)?: *string*;
-    [timeout](http://localhost:5500/docs/interfaces/CreateColReq.html#timeout)?: *number*;
+    collection_name: *string*;
+    dimension: *number*;
+    auto_id?: *boolean*;
+    consistency_level?: *"Strong"* | *"Session"* | *"Bounded"* | *"Eventually"* | *"Customized"*;
+    description?: *string*;
+    enableDynamicField?: *boolean*;
+    enable_dynamic_field?: *boolean*;
+    id_type?: [*Int64*](http://localhost:5500/docs/enums/DataType.html#Int64) | [*VarChar*](http://localhost:5500/docs/enums/DataType.html#VarChar);
+    index_params?: [*CreateIndexParam*](http://localhost:5500/docs/interfaces/CreateIndexParam.html);
+    metric_type?: *string*;
+    primary_field_name?: *string*;
+    vector_field_name?: *string*;
+    timeout?: *number*;
  })
 ```
 
