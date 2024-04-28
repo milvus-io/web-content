@@ -28,7 +28,7 @@ milvusClient.describeCollection({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**Returns Promise\<DescribeCollectionResponse>*
+**Returns** *Promise\<DescribeCollectionResponse>*
 
 This method returns a promise that resolves to a **DescribeCollectionResponse** object.
 
