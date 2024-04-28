@@ -128,7 +128,7 @@ See [Vector Index](index.md) for more information.
 
 #### What is the maximum vector dimension supported in Milvus?
 
-Milvus can manage vectors with up to 32,768 dimensions.
+Milvus can manage vectors with up to 32,768 dimensions by default. You can increase the value of `Proxy.maxDimension` to allow for a larger dimension vector.
 
 #### Does Milvus support Apple M1 CPU?
 

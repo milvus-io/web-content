@@ -13,7 +13,7 @@ This guide demonstrates how to build an LLM-driven question-answering applicatio
 Code snippets on this page require **pymilvus** and **langchain** installed. OpenAI's embedding API has also been used to embed docs into the vector store, and therefore **openai** and **tiktoken** are also required. If they are not present on your system, run the following commands to install them.
 
 ```shell
-! python -m pip install --upgrade pymilvus langchain openai tiktoken
+! python -m pip install --upgrade pymilvus langchain langchain-core langchain-community langchain-openai langchain_text_splitters openai tiktoken
 ```
 
 ## Global parameters
@@ -46,14 +46,13 @@ Before you dive in, you should finish the following steps:
 - Set up a vector store used to save the vector embeddings.
 
 ```python
-from langchain.embeddings.openai import OpenAIEmbeddings
-from langchain.vectorstores.zilliz import Zilliz
-from langchain.document_loaders import WebBaseLoader
-from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain.chat_models import ChatOpenAI
-from langchain.vectorstores.milvus import Milvus
-from langchain.schema.runnable import RunnablePassthrough
-from langchain.prompts import PromptTemplate
+from langchain_openai import OpenAIEmbeddings
+from langchain_openai import ChatOpenAI
+from langchain_core.runnables import RunnablePassthrough
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_community.document_loaders import WebBaseLoader
+from langchain_community.vectorstores import Milvus
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 # Use the WebBaseLoader to load specified web pages into documents
 loader = WebBaseLoader([

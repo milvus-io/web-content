@@ -517,7 +517,7 @@ If you know the IDs of the entities to retrieve, you can get entities by their I
 res = client.get(
     collection_name="quick_setup",
     ids=[1,2,3],
-    output_fields=["title", "vector"]
+    output_fields=["color", "vector"]
 )
 
 print(res)
@@ -527,6 +527,7 @@ print(res)
 # [
 #     {
 #         "id": 1,
+#         "color": "red_7025",
 #         "vector": [
 #             0.19886813,
 #             0.060235605,
@@ -537,6 +538,7 @@ print(res)
 #     },
 #     {
 #         "id": 2,
+#         "color": "orange_6781",
 #         "vector": [
 #             0.43742132,
 #             -0.55975026,
@@ -547,6 +549,7 @@ print(res)
 #     },
 #     {
 #         "id": 3,
+#         "color": "pink_9298",
 #         "vector": [
 #             0.3172005,
 #             0.97190446,

@@ -35,7 +35,7 @@ mkdir cert && cd cert
 touch openssl.cnf gen.sh
 ```
 
-2. Copy the following configurations into the files. Configuration of `CommonName` is required. `CommonName` refers to the server name that the client needs to specify when connecting.
+2. Copy the following configurations into the files respectively. 
 
 <details><summary><code>openssl.cnf</code></summary>
 
@@ -263,12 +263,6 @@ authorityKeyIdentifier=keyid,issuer
 basicConstraints = CA:FALSE
 keyUsage = nonRepudiation, digitalSignature, keyEncipherment
 
-subjectAltName = @alt_names
-
-[ alt_names ]
-DNS.1 = localhost
-DNS.2 = *.ronething.cn
-DNS.3 = *.ronething.com
 
 [ v3_ca ]
 
@@ -403,6 +397,8 @@ ess_cert_id_chain	= no	# Must the ESS cert id chain be included?
 
 The `openssl.cnf` file is a default OpenSSL configuration file. See [manual page](https://www.openssl.org/docs/manmaster/man5/config.html) for more information. The `gen.sh` file generates relevant certificate files. You can modify the `gen.sh` file for different purposes such as changing the validity period of the certificate file, the length of the certificate key or the certificate file names.
 
+It is necessary to configure the `CommonName` in the `gen.sh` file. The `CommonName` refers to the server name that the client should specify while connecting.
+
 <details><summary><code>gen.sh</code></summary>
 
 ```shell
@@ -500,7 +496,7 @@ openssl x509 -req -days 3650 -in server.csr -out server.pem -CA ca.pem -CAkey ca
 
 ## Modify Milvus server configurations
 
-Set `tlsEnabled` to `true` and configure the file paths of `server.pem`, `server.key`, and `ca.pem` for the server in `config/milvus.yaml`.
+Configure the file paths of `server.pem`, `server.key`, and `ca.pem` for the server in `config/milvus.yaml`.
 
 ```
 tls:
@@ -510,16 +506,19 @@ tls:
 
 common:
   security:
-    tlsMode: 2
+    # tlsMode 0 indicates no authentication
+    # tlsMode 1 indicates one-way authentication
+    # tlsMode 2 indicates two-way authentication
+    tlsMode: 2 
  ```
 
 ### One-way authentication
 
-Server need server.pem and server.key. Client-side need server.pem.
+Server-side needs server.pem and server.key files, client-side needs server.pem file.
 
 ### Two-way authentication
 
-Server-side need server.pem, server.key and ca.pem. Client-side need client.pem, client.key, ca.pem.
+Server-side needs server.pem, server.key and ca.pem files, client-side needs client.pem, client.key and ca.pem files.
 
 ## Connect to the Milvus server with TLS
 

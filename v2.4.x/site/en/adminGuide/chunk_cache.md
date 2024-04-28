@@ -3,7 +3,7 @@ id: chunk_cache.md
 title: Configure Chunk Cache
 ---
 
-# Connfigure Chunk Cache
+# Configure Chunk Cache
 
 The chunk cache mechanism enables Milvus to pre-load data into cache on the local hard disk of the query nodes before it is needed. This mechanism significantly improves vector retrieval performance by reducing the time it takes to load data from disk to memory.
 

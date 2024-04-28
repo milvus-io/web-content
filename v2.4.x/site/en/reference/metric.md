@@ -21,7 +21,7 @@ The following table shows how these widely used similarity metrics fit with vari
 <table class="tg">
 <thead>
   <tr>
-    <th class="tg-0pky" style="width: 204px;">Similarity Metrics</th>
+    <th class="tg-0pky" style="width: 204px;">Metric Types</th>
     <th class="tg-0pky">Index Types</th>
   </tr>
 </thead>

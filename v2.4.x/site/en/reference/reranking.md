@@ -14,7 +14,7 @@ Reranking in multi-vector search is a crucial step that consolidates results fro
 
 - `WeightedRanker`: assigns weights based on the significance of each vector field;
 
-- `RRFRanker`: employs a reciprocal rank fusion (RFF) method.
+- `RRFRanker`: employs a reciprocal rank fusion (RRF) method.
 
 The following figure illustrates the execution of a multi-vector search in Milvus and highlights the role of reranking in the process.
 

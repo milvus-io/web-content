@@ -87,7 +87,7 @@ Milvus makes it easy to add similarity search to your applications. Example appl
 - [DNA sequence classification](dna_sequence_classification.md): Accurately sort out the classification of a gene in milliseconds by comparing similar DNA sequences.
 - [Text search engine](text_search_engine.md): Help users find the information they are looking for by comparing keywords against a database of texts.
 
-See [Milvus tutorials](https://github.com/milvus-io/bootcamp/tree/master/solutions) and [Milvus Adopters](milvus_adopters.md) for more Milvus application scenarios.
+See [Milvus tutorials](https://github.com/milvus-io/bootcamp/tree/master/bootcamp) and [Milvus Adopters](milvus_adopters.md) for more Milvus application scenarios.
 
 ## How is Milvus designed?
 
