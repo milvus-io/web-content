@@ -1,0 +1,214 @@
+# search()
+
+This operation conducts a vector similarity search with an optional scalar filtering expression.
+
+```java
+public SearchResp search(SearchReq request)
+```
+
+## Request Syntax
+
+```java
+search(SearchReq.builder()
+    .collectionName(String collectionName)
+    .partitionNames(List<String> partitionNames)
+    .annsField(String annsField)
+    .topK(int topK)
+    .filter(String filter)
+    .outputFields(List<String> outputFields)
+    .data(List<Object> data)
+    .offset(long offset)
+    .limit(long limit)
+    .roundDecimal(int roundDecimal)
+    .searchParams(String searchParams)
+    .guaranteeTimestamp(long guaranteeTimestamp)
+    .gracefulTime(long gracefulTime)
+    .consistencyLevel(ConsistencyLevel consistencyLevel)
+    .ignoreGrowing(boolean ignoreGrowing)
+    .build()
+)
+```
+
+**BUILDER METHODS:**
+
+- `collectionName(String collectionName)`
+
+    The name of an existing collection.
+
+- `partitionNames(List<String> partitionNames)`
+
+    A list of partition names.
+
+- `annsField(String annsField)`
+
+    The name of the vector field, used when there is more than one vector field. If only one vector field exists, we will use it directly.
+
+- `topK(int topK)`
+
+    The number of records to return in the search result. This parameter uses the same syntax as the `limit` parameter, so you should only set one of them.
+
+    You can use this parameter in combination with `offset` to enable pagination.
+
+    The sum of this value and `offset` should be less than 16,384. 
+
+- `filter(String filter)`
+
+    A scalar filtering condition to filter matching entities. 
+
+    You can set this parameter to an empty string to skip scalar filtering. To build a scalar filtering condition, refer to [Boolean Expression Rules](https://milvus.io/docs/boolean.md). 
+
+- `outputFields(List<String> outputFields)`
+
+    A list of field names to include in each entity in return.
+
+    The value defaults to **None**. If left unspecified, all fields are selected as the output fields.
+
+- `data(List<Object> data)`
+
+    A list of vector embeddings.
+
+    Milvus searches for the most similar vector embeddings to the specified ones.
+
+- `offset(long offset)`
+
+    The number of records to skip in the query result. 
+
+    You can use this parameter in combination with `limit` to enable pagination.
+
+    The sum of this value and `limit` should be less than 16,384. 
+
+- `limit(long limit)`
+
+    The number of records to return in the search result. This parameter uses the same syntax as the `topK` parameter, so you should only set one of them.
+
+    You can use this parameter in combination with `offset` to enable pagination.
+
+    The sum of this value and `offset` should be less than 16,384. 
+
+- `roundDecimal(int roundDecimal)`
+
+    The number of decimal places that Milvus rounds the calculated distances to.
+
+    The value defaults to **-1**, indicating that Milvus skips rounding the calculated distances and returns the raw value.
+
+- `searchParams(Map<String,Object> searchParams)`
+
+    The parameter settings specific to this operation.
+
+    - **metric_type** (String)
+
+        The metric type applied to this operation. This should be the same as the one used when you index the vector field specified above. 
+
+        Possible values are **L2**, **IP**, and **COSINE**.
+
+    - **radius** (float)
+
+        Determines the threshold of least similarity. When setting `metric_type` to `L2`, ensure that this value is greater than that of **range_filter**. Otherwise, this value should be lower than that of **range_filter**. 
+
+    - **range_filter** (float)
+
+        Refines the search to vectors within a specific similarity range. When setting `metric_type` to `IP` or `COSINE`, ensure that this value is greater than that of **radius**. Otherwise, this value should be lower than that of **radius**.
+
+    For details on other applicable search parameters, refer to [In-memory Index](https://milvus.io/docs/index.md) and [On-disk Index](https://milvus.io/docs/disk_index.md).
+
+- `guaranteeTimestamp(long guaranteeTimestamp)`
+
+    A valid timestamp. 
+
+    If this parameter is set, MilvusZilliz Cloud executes the query only if all entities inserted before this timestamp are visible to query nodes. 
+
+    <div class="admonition note">
+
+    <p><b>notes</b></p>
+
+    <p>This parameter is valid when the default consistency level applies.</p>
+
+    </div>
+
+- `gracefulTime(long gracefulTime)`
+
+    A period of time in ms.
+
+    The value defaults to **5000L**. If this parameter is set, MilvusZilliz Cloud calculates the guarantee timestamp by subtracting this from the current timestamp.
+
+    <div class="admonition note">
+
+    <p><b>notes</b></p>
+
+    <p>This parameter is valid when a consistency level other than the default one applies.</p>
+
+    </div>
+
+- `consistencyLevel(ConsistencyLevel consistencyLevel)`
+
+    The consistency level of the target collection.
+
+    The value defaults to the one specified when you create the current collection, with options of **Strong** (**0**), **Bounded** (**1**), **Session** (**2**), and **Eventually** (**3**).
+
+    <div class="admonition note">
+
+    <p><b>what is the consistency level?</b></p>
+
+    <p>Consistency in a distributed database specifically refers to the property that ensures every node or replica has the same view of data when writing or reading data at a given time.</p>
+    <p>Milvus supports four consistency levels: <strong>Strong</strong>, <strong>Bounded Staleness</strong>, <strong>Session</strong>, and <strong>Eventually</strong>. The default consistency level in Milvus is <strong>Bounded Staleness</strong>.</p>
+    <p>You can easily tune the consistency level when conducting a vector similarity search or query to make it best suit your application.</p>
+
+    </div>
+
+- `ignoreGrowing(boolean ignoreGrowing)`
+
+    Whether to ignore growing segments during similarity searches.
+
+**RETURN TYPE:**
+
+*List\<SearchResult\>*
+
+**RETURNS:**
+
+A list of **SearchResult objects representing specific search results with the specified output fields and relevance score.
+
+**PARAMETERS:**
+
+- **entity** (*Map\<String, Object\>*)
+
+    A map that stores the specific fields associated with the search result.
+
+- **distance** (*Float*)
+
+    The relevant distance of the search result. The distance indicates how closely the vector associated with the search result matches the query vector.
+
+- **id** (Object)
+
+The id of the search result, dataType is either string or int64 
+
+<div class="admonition note">
+
+<p><b>notes</b></p>
+
+<p>If the number of returned entities is less than expected, duplicate entities may exist in your collection.</p>
+
+</div>
+
+**EXCEPTIONS:**
+
+- **MilvusClientExceptions**
+
+    This exception will be raised when any error occurs during this operation.
+
+## Example
+
+```java
+// search for top 2 in collection "test"
+List<Float> vectorList = new ArrayList<>();
+vectorList.add(1.0f);
+vectorList.add(2.0f);
+
+SearchReq searchReq = SearchReq.builder()
+        .collectionName("test")
+        .data(Collections.singletonList(vectorList))
+        .topK(2)
+        .build();
+SearchResp searchResp = client.search(searchReq);
+//SearchResp(searchResults=[[SearchResp.SearchResult(entity={vector=[0.598938, 0.8336413]}, distance=1.0000001, id=0), SearchResp.SearchResult(entity={vector=[0.33950245, 0.685143]}, distance=0.986753, id=2)]])
+```
+
