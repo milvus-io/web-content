@@ -7,6 +7,45 @@ title: Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.3.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.3.14
+
+Release date: Apr 29, 2024
+
+| Milvus version | Python SDK version | Java SDK version | Go SDK version | Node.js SDK version |
+|----------------|--------------------|------------------|----------------|---------------------|
+| 2.3.14         | 2.3.7              | 2.3.6            | 2.3.6          | 2.3.5               |
+
+This release focuses on improving system performance, reliability, and observability with key features. It supports RESTful APIs to execute rolling upgrades, implements task-driven collection observation, allows for configurable intervals for garbage collection (GC), and enhances the check logic.
+
+Furthermore, it fixes bugs in RESTful v2, resolving issues such as parameter parsing errors and ineffective parameter handling. Critical bug fixes related to deadlocks and data accuracy have also been included. Additionally, performance improvements have been made when handling large numbers of segments.
+
+Overall, these updates aim to provide a more secure, efficient, and reliable user experience.
+
+### Improvements
+
+- Added configuration items to skip Auto ID and Partition Key checks to improve check speed.([#32671](https://github.com/milvus-io/milvus/pull/32671))
+- Implemented the collection observer of QueryCoordV2 task-driven.([#32615](https://github.com/milvus-io/milvus/pull/32615))
+- Supported the get sdk type by user agent in access log.([#32554](https://github.com/milvus-io/milvus/pull/32554))
+- Supported the use of different intervals for GC scan.([#32551](https://github.com/milvus-io/milvus/pull/32551))
+- Removed the support for the always-true expression in delete expr.([#32495](https://github.com/milvus-io/milvus/pull/32495))
+- Allowed users to disable search optimization.([#32143](https://github.com/milvus-io/milvus/pull/32143))
+- Added restful api for devops to execute rolling upgrade.([#31846](https://github.com/milvus-io/milvus/pull/31846))
+
+### Bug fixes
+
+- Fixed the bug that the calculation precision may be different between growing index and sealed index.([#32584](https://github.com/milvus-io/milvus/pull/32584))
+- Fixed the bug that grow task stuck when node become stopping.([#32556](https://github.com/milvus-io/milvus/pull/32556))
+- Fixed the issue that leader view may not update when segment version did not match.([#32517](https://github.com/milvus-io/milvus/pull/32517))
+- Fixed the bug that value in elementTypeParams not be integer in restful api.([#32362](https://github.com/milvus-io/milvus/pull/32362))
+- Fixed dbName parameter of describeAlias request not take effect and fixed the issue which will report lack of permission when not pass the whole privileges to describe collection in restful api.  ([#32162](https://github.com/milvus-io/milvus/pull/32162))
+- Fixed cp lag metrics leakage by marking channel checkpoint dropped.([#32454](https://github.com/milvus-io/milvus/pull/32454))
+- Fixed the bug where not update segment's version in syncDistribution.([#32320](https://github.com/milvus-io/milvus/pull/32320)) 
+- Fixed a bug that coordinator register blocked on ProcessActiveStandby.([#32133](https://github.com/milvus-io/milvus/pull/32133))
+- Fixed a bug that the reduce didn't handle offset without limit and reduceStopForBest correctly.([#32087](https://github.com/milvus-io/milvus/pull/32087))  
+- Fixed a bug that not validata PlaceholderGroups before combine them.([#32045](https://github.com/milvus-io/milvus/pull/32045))
+- Fixed a bug where acquire index meta's lock for each segment.([#31798](https://github.com/milvus-io/milvus/pull/31798))
+- Fixed a bug that Rootcoord's stop may block in quota_center's stop.([#31824](https://github.com/milvus-io/milvus/pull/31824))
+
 ## v2.3.13
 
 Release date: Apr 7, 2024
