@@ -20,7 +20,7 @@ curl --location --request POST "http://${MILVUS_URI}/v2/vectordb/collections/lis
 --header "Content-Type: application/json" \
 --data-raw '{
     "dbName": "default"
-}
+}'
 ```
 
 The possible output will be similar to the following:
