@@ -16,7 +16,7 @@ This operation lists all collections in the specified database.
 ```shell
 export MILVUS_URI="localhost:19530"
 
-curl --location --request POST "http://${MILVUS_URI}/v2/vectordb/collections/create" \
+curl --location --request POST "http://${MILVUS_URI}/v2/vectordb/collections/list" \
 --header "Content-Type: application/json" \
 --data-raw '{
     "dbName": "default"
