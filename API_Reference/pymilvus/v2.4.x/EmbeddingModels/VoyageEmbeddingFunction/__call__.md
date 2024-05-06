@@ -1,6 +1,6 @@
 # __call__()
 
-This operation in [SpladeEmbeddingFunction](./SpladeEmbeddingFunction.md) takes a list of text strings and directly encodes them into vector embeddings.
+This operation in [VoyageEmbeddingFunction](./VoyageEmbeddingFunction.md) takes a list of text strings and directly encodes them into vector embeddings.
 
 Unlike [encode_documents()](./encode_documents.md) or [encode_queries()](./encode_queries.md), which enable you to prepend **doc_instruction** or **query_instruction** and utilize **k_tokens_document** or **k_tokens_query** for result pruning, the **call**() method directly returns embeddings without offering the option to prepend instructions or prune results.
 
@@ -8,12 +8,13 @@ Unlike [encode_documents()](./encode_documents.md) or [encode_queries()](./encod
 
 ```python
 # Instance created
-splade_ef = SpladeEmbeddingFunction()
+
+voyage_ef = VoyageEmbeddingFunction()
 
 # __call__ method will be called
-splade_ef(
+voyage_ef(
     texts: List[str]
-) -> csr_array
+) -> List[np.array]
 ```
 
 **PARAMETERS:**
@@ -24,26 +25,26 @@ splade_ef(
 
 **RETURN TYPE:**
 
-*csr_array*
+*List[np.array]*
 
 **RETURNS:**
 
-Compressed sparse row matrices representing the document embeddings.
+A list where each element is a NumPy array.
 
 **Exceptions:**
 
 - **ImportError**
 
-    This exception will be raised when the transformers library is not installed.
+    This exception will be raised when the Voyage module is not installed.
 
 ## Examples
 
 ```python
-from pymilvus import model
+from pymilvus.model.dense import VoyageEmbeddingFunction
 
-splade_ef = model.sparse.SpladeEmbeddingFunction(
-    model_name="naver/splade-cocondenser-selfdistil", 
-    device="cpu"
+voyage_ef = VoyageEmbeddingFunction(
+    model_name="voyage-lite-02-instruct", # Defaults to `voyage-2`
+    api_key='YOUR_API_KEY' # Replace with your own Voyage API key
 )
 
 docs = [
@@ -52,8 +53,12 @@ docs = [
     "Born in Maida Vale, London, Turing was raised in southern England.",
 ]
 
-splade_ef(docs)
+voyage_ef(docs)
 
-# <3x30522 sparse array of type '<class 'numpy.float32'>'
-#   with 298 stored elements in Compressed Sparse Row format>
+# [array([ 0.02582654, -0.00907086, -0.04604037, ..., -0.01227521,
+#          0.04420955, -0.00038829]),
+#  array([ 0.03844212, -0.01597065, -0.03728884, ..., -0.02118733,
+#          0.03349845,  0.0065346 ]),
+#  array([ 0.05143557, -0.01096631, -0.02690451, ..., -0.02416254,
+#          0.07658645,  0.03064499])]
 ```

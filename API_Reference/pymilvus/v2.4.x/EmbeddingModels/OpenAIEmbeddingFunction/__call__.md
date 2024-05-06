@@ -1,8 +1,8 @@
 # __call__()
 
-This operation in [OpenAIEmbeddingFunction](./EmbeddingModels-OpenAIEmbeddingFunction) takes a list of text strings and directly encodes them into vector embeddings.
+This operation in [OpenAIEmbeddingFunction](./OpenAIEmbeddingFunction.md) takes a list of text strings and directly encodes them into vector embeddings.
 
-The **__call__()** method of OpenAIEmbeddingFunction shares the same functionality as [encode_documents()](./OpenAIEmbeddingFunction-encode_documents) and [encode_queries()](./OpenAIEmbeddingFunction-encode_queries).
+The **__call__()** method of OpenAIEmbeddingFunction shares the same functionality as [encode_documents()](./encode_documents.md) and [encode_queries()](./encode_queries.md).
 
 ## Request syntax
 
