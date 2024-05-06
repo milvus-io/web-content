@@ -7,59 +7,6 @@ title: Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.4.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
-## v2.4.1
-
-Release date: May 6, 2024
-
-| Milvus version | Python SDK version | Java SDK version    | Node.js SDK version |
-|----------------|--------------------| --------------------| --------------------|
-| 2.4.0          | 2.4.0              | 2.4.0               | 2.4.2               |
-
-Milvus version 2.4.1 brings numerous improvements and bug fixes that aim to enhance the software's performance, observability, and stability. These improvements include a declarative resource group API, enhanced bulk insert functionality that supports Float16/BFloat16 vector data types, a refined garbage collection (GC) mechanism that reduces list operations for object storage, and other changes related to performance optimizations. Additionally, bug fixes address issues such as compilation errors, failed fuzzy matches on newline characters, incorrect parameter datatypes for RESTful interfaces, and BulkInsert raising errors on numpy files when dynamic fields are enabled.
-
-### Breaking changes
-
-- Discontinued support for delete with an empty filter expression. ([#32472](https://github.com/milvus-io/milvus/pull/32472))
-
-### Improvements
-
-- Added declarative resource group api ([#31930](https://github.com/milvus-io/milvus/pull/31930) [#32297](https://github.com/milvus-io/milvus/pull/32297) [#32536](https://github.com/milvus-io/milvus/pull/32536) [#32666](https://github.com/milvus-io/milvus/pull/32666))
-- Added support for Float16/BFloat16 vector data types in bulk insert ([#32157](https://github.com/milvus-io/milvus/pull/32157))
-- Revised the implementation of garbage collection to minimize list operations associated with object storage([#31740](https://github.com/milvus-io/milvus/pull/31740))
-- Enhanced the management of milvus.yaml by automatically generating relevant configuration items in the milvus.yaml file through code([#31832](https://github.com/milvus-io/milvus/pull/31832) [#32357](https://github.com/milvus-io/milvus/pull/32357))
-- Enhanced sparse float vector to support brute force iterator search and range search ([#32635](https://github.com/milvus-io/milvus/pull/32635))
-- Enhanced the performance of the Query by retrieving the data after performing local reduction ([#32346](https://github.com/milvus-io/milvus/pull/32346))
-- Reduced the cpu usage when collection number is high ([#32245](https://github.com/milvus-io/milvus/pull/32245))
-- Added WithBlock option for etcd client creation ([#32641](https://github.com/milvus-io/milvus/pull/32641))
-- Used client_request_id specified by the client as the TraceID if client provided([#32264](https://github.com/milvus-io/milvus/pull/32264))
-- Added db label to the metrics for the delete and bulk insert operations([#32611](https://github.com/milvus-io/milvus/pull/32611))
-- Added logic to skip the verification through configuration for AutoID and PartitionKey columns([#32592](https://github.com/milvus-io/milvus/pull/32592))
-- Refined errors related to authentication ([#32253](https://github.com/milvus-io/milvus/pull/32253))
-- Refined error logs for AllocSegmentID in DataCoord([#32351](https://github.com/milvus-io/milvus/pull/32351) [#32335](https://github.com/milvus-io/milvus/pull/32335))
-- Removed duplicate metrics([#32380](https://github.com/milvus-io/milvus/pull/32380) [#32308](https://github.com/milvus-io/milvus/pull/32308)) and clean up unused metrics([#32404](https://github.com/milvus-io/milvus/pull/32404) [#32515](https://github.com/milvus-io/milvus/pull/32515))
-- Added configuration option to control whether to enforce the activation of the partitionKey feature([#32433](https://github.com/milvus-io/milvus/pull/32433))
-- Added configuration option to control the maximum amount of data that can be inserted in a single request([#32433](https://github.com/milvus-io/milvus/pull/32433))
-- Parallelize the applyDelete operation at the segment level to accelerate the processing of Delete messages by the Delegator([#32291](https://github.com/milvus-io/milvus/pull/32291))
-- Used index ([#32232](https://github.com/milvus-io/milvus/pull/32232) [#32505](https://github.com/milvus-io/milvus/pull/32505) [#32533](https://github.com/milvus-io/milvus/pull/32533) [#32595](https://github.com/milvus-io/milvus/pull/32595)) and add cache ([#32580](https://github.com/milvus-io/milvus/pull/32580)) to accelerate frequent filtering operations in QueryCoord.
-- Rewrote the data structure([#32273](https://github.com/milvus-io/milvus/pull/32273)) and refactor code([#32389](https://github.com/milvus-io/milvus/pull/32389) ) to accelerate common operations in DataCood.
-- Refactored the data structure used in the SyncManager of DataNode to reduce memory usage and prevent errors ([#32673](https://github.com/milvus-io/milvus/pull/32673))
-- Rewrote the collection observer in QueryCoord to make it task-driven([#32441](https://github.com/milvus-io/milvus/pull/32441))
-- Removed openblas from conan([#32002](https://github.com/milvus-io/milvus/pull/32002))
-
-### Bug fixes
-
-- Fixed build milvus in rockylinux8 ([#32619](https://github.com/milvus-io/milvus/pull/32619))
-- Fixed compilation errors for SVE on ARM ([#32463](https://github.com/milvus-io/milvus/pull/32463) [#32270](https://github.com/milvus-io/milvus/pull/32270))
-- Fixed the crash issue on ARM-based GPU images([#31980](https://github.com/milvus-io/milvus/pull/31980)).
-- Fixed regex query can't handle text with newline ([#32569](https://github.com/milvus-io/milvus/pull/32569))
-- Fixed search get empty result caused by GetShardLeaders return empty node list ([#32685](https://github.com/milvus-io/milvus/pull/32685))
-- Fixed BulkInsert raised error when encountering dynamic fields in numpy files([#32596](https://github.com/milvus-io/milvus/pull/32596))
-- Fixed bugs related to the RESTFulV2 interface, including an important fix that allows numeric parameters in requests to accept numerical input instead of string type([#32485](https://github.com/milvus-io/milvus/pull/32485) [#32355](https://github.com/milvus-io/milvus/pull/32355))
-- Fixed memory leak in proxy by remove watching config event in rate limiter([#32313](https://github.com/milvus-io/milvus/pull/32313))
-- Fixed the issue where the rate limiter incorrectly reports that the partition cannot be found when partitionName is not specified([#32647](https://github.com/milvus-io/milvus/pull/32647))
-- Added detection between the cases of Collection being in the recovery state and not being loaded in the error type.（[#32447](https://github.com/milvus-io/milvus/pull/32447)）
-- Corrected the negative queryable num entities metric ([#32361](https://github.com/milvus-io/milvus/pull/32361))
-
 ## v2.4.0
 
 Release date: April 17, 2024
@@ -68,7 +15,7 @@ Release date: April 17, 2024
 |----------------|--------------------| --------------------|
 | 2.4.0          | 2.4.0              | 2.4.0               |
 
-We are excited to announce the official launch of Milvus 2.4.- Building upon the solid foundation of the 2.4.0-rc.1 release, we have focused on addressing critical bugs reported by our users, while preserving the existing functionality. In addition, Milvus 2.4.0 introduces a range of optimizations aimed at enhancing system performance, improving observability through the incorporation of various metrics, and streamlining the codebase for increased simplicity.
+We are excited to announce the official launch of Milvus 2.4.0. Building upon the solid foundation of the 2.4.0-rc.1 release, we have focused on addressing critical bugs reported by our users, while preserving the existing functionality. In addition, Milvus 2.4.0 introduces a range of optimizations aimed at enhancing system performance, improving observability through the incorporation of various metrics, and streamlining the codebase for increased simplicity.
 
 ### Improvements
 
@@ -170,9 +117,9 @@ You can now aggregate the search results by the values in a specific scalar fiel
 
 Example code can be found in [example_group_by.py](https://github.com/milvus-io/pymilvus/blob/2.4/examples/example_group_by.py).
 
-#### Float16 and BFloat- Vector DataType
+#### Float16 and BFloat16 Vector DataType
 
-Machine learning and neural networks often use half-precision data types, such as Float16 and BFloat- While these data types can improve query efficiency and reduce memory usage, they come with a tradeoff of reduced accuracy. With this release, Milvus now supports these data types for vector fields.
+Machine learning and neural networks often use half-precision data types, such as Float16 and BFloat16. While these data types can improve query efficiency and reduce memory usage, they come with a tradeoff of reduced accuracy. With this release, Milvus now supports these data types for vector fields.
 
 Example code can be found in [float16_example.py](https://github.com/milvus-io/pymilvus/blob/2.4/examples/float16_example.py) and [bfloat16_example.py](https://github.com/milvus-io/pymilvus/blob/2.4/examples/bfloat16_example.py).
 
