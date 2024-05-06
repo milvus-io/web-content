@@ -13,7 +13,7 @@ Release date: May 6, 2024
 
 | Milvus version | Python SDK version | Java SDK version    | Node.js SDK version |
 |----------------|--------------------| --------------------| --------------------|
-| 2.4.0          | 2.4.1              | 2.4.0               | 2.4.2               |
+| 2.4.1          | 2.4.1              | 2.4.0               | 2.4.2               |
 
 Milvus version 2.4.1 brings numerous improvements and bug fixes that aim to enhance the software's performance, observability, and stability. These improvements include a declarative resource group API, enhanced bulk insert functionality that supports Float16/BFloat16 vector data types, a refined garbage collection (GC) mechanism that reduces list operations for object storage, and other changes related to performance optimizations. Additionally, bug fixes address issues such as compilation errors, failed fuzzy matches on newline characters, incorrect parameter datatypes for RESTful interfaces, and BulkInsert raising errors on numpy files when dynamic fields are enabled.
 
