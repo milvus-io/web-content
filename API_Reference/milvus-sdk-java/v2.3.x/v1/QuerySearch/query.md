@@ -30,11 +30,11 @@ Methods of `QueryParam.Builder`:
     </tr>
     <tr>
         <td>withConsistencyLevel(ConsistencyLevelEnum consistencyLevel)</td>
-        <td>Sets the search consistency level(Optional).If the level is not set, will use the default consistency level of the collection.</td>
+        <td>Sets the search consistency level(Optional).<br/>If the level is not set, will use the default consistency level of the collection.</td>
         <td>consistencyLevel: The consistency level used in the query.</td>
     </tr>
     <tr>
-        <td>withPartitionNames(List&lt;String> partitionNames)</td>
+        <td>withPartitionNames(List<String> partitionNames)</td>
         <td>Sets partition names list to specify query scope (Optional).</td>
         <td>partitionNames: The name list of partitions to be queried.</td>
     </tr>
@@ -44,9 +44,9 @@ Methods of `QueryParam.Builder`:
         <td>partitionName: A partition name to be queried.</td>
     </tr>
     <tr>
-        <td>withOutFields(List&lt;String> outFields)</td>
-        <td>Specifies output scalar fields (Optional).If output fields are specified, the QueryResults returned by query() will contains the values of these fields. </td>
-        <td>outFields: The name list of fields to be outputed.</td>
+        <td>withOutFields(List<String> outFields)</td>
+        <td>Specifies output scalar fields (Optional).<br/>If output fields are specified, the QueryResults returned by query() will contains the values of these fields. </td>
+        <td><br/>outFields: The name list of fields to be outputed.</td>
     </tr>
     <tr>
         <td>addOutField(String fieldName)</td>

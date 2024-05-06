@@ -29,7 +29,7 @@ Methods of `ShowPartitionsParam.Builder`:
         <td>collectionName: The target collection name.</td>
     </tr>
     <tr>
-        <td>withPartitionNames(List&lt;String> partitionNames)</td>
+        <td>withPartitionNames(List<String> partitionNames)</td>
         <td>Set the partition names list. Partition names list cannot be null or empty.</td>
         <td>partitionNames: The name list of partitions to show.</td>
     </tr>

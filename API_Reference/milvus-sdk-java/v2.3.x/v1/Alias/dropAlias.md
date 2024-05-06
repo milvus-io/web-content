@@ -25,7 +25,7 @@ Methods of `DropAliasParam.Builder`:
     </tr>
     <tr>
         <td>withAlias(String alias)</td>
-        <td>Sets the collection alias. The alias cannot be empty or null.</td>
+        <td>Sets the collection alias. <br/>The alias cannot be empty or null.</td>
         <td>alias: The alias to drop.</td>
     </tr>
     <tr>

@@ -24,7 +24,7 @@ Methods of `ListAliasesParam.Builder`:
         <th>Parameters</th>
     </tr>
     <tr>
-        <td>withCollectionName(String collectionName)</td>
+        <td><br/>withCollectionName(String collectionName)</td>
         <td>Sets the target collection name. Collection name cannot be empty or null.</td>
         <td>collectionName: The name of the target collection to list the aliases.</td>
     </tr>

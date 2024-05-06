@@ -24,8 +24,8 @@ Methods of `ShowCollectionsParam.Builder`:
         <th>Parameters</th>
     </tr>
     <tr>
-        <td>withCollectionNames(List&lt;String> collectionNames)</td>
-        <td>Sets a list of collection names. If the list is empty, the method will return all the collections in database.Collection name cannot be empty or null.</td>
+        <td>withCollectionNames(List<String> collectionNames)</td>
+        <td>Sets a list of collection names. If the list is empty, the method will return all the collections in database.<br/>Collection name cannot be empty or null.</td>
         <td>collectionNames: A list of the collection names to show.</td>
     </tr>
     <tr>

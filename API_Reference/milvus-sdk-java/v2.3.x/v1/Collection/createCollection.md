@@ -75,7 +75,7 @@ Methods of `CreateSimpleCollectionParam.Builder`:
     </tr>
     <tr>
         <td>withMaxLength(Integer maxLength)</td>
-        <td>Sets the primaryFiled maxLength.If primaryFiled is specified as varchar, this parameter maxLength needs to be specified</td>
+        <td>Sets the primaryFiled maxLength.<br/>If primaryFiled is specified as varchar, this parameter maxLength needs to be specified</td>
         <td>maxLength: The max length of the primary field If primaryFiled is specified as varchar.</td>
     </tr>
     <tr>

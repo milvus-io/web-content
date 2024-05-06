@@ -30,13 +30,13 @@ Methods of `AlterCollectionParam.Builder`:
     </tr>
     <tr>
         <td>withTTL(Integer ttlSeconds)</td>
-        <td>Collection time to live (TTL) is the expiration time of data in a collection. Expired data in the collection will be cleaned up and will not be involved in searches or queries. Specify TTL in the unit of seconds.This method internally calls the withProperty() to set value.</td>
+        <td>Collection time to live (TTL) is the expiration time of data in a collection. Expired data in the collection will be cleaned up and will not be involved in searches or queries. Specify TTL in the unit of seconds.<br/>This method internally calls the withProperty() to set value.</td>
         <td>ttlSeconds: The time to live value. The value should be 0 or greater.</td>
     </tr>
     <tr>
         <td>withProperty(String key,  String value)</td>
         <td>Basic method to set a key-value property.</td>
-        <td>key: The key of a property.value: The value of a property.</td>
+        <td>key: The key of a property.<br/>value: The value of a property.</td>
     </tr>
     <tr>
         <td>build()</td>

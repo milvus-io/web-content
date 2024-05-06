@@ -42,7 +42,7 @@ Methods of `LoadBalanceParam.Builder`:
         <td>destNodeID: The destination query node ID.</td>
     </tr>
     <tr>
-        <td>withDestinationNodeID(List&lt;Long> destNodeIDs)</td>
+        <td>withDestinationNodeID(List<Long> destNodeIDs)</td>
         <td>Set an ID array of the destination query nodes to which the sealed segments will be balance.</td>
         <td>destNodeIDs: The destination query node ID array.</td>
     </tr>
@@ -52,7 +52,7 @@ Methods of `LoadBalanceParam.Builder`:
         <td>segmentID: A sealed segment ID.</td>
     </tr>
     <tr>
-        <td>withSegmentIDs(List&lt;Long> segmentIDs)</td>
+        <td>withSegmentIDs(List<Long> segmentIDs)</td>
         <td>Set an ID array of sealed segments which to be balanced.</td>
         <td>segmentIDs: The sealed segments ID array.</td>
     </tr>

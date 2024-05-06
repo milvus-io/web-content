@@ -24,7 +24,7 @@ Methods of `CreateIndexParam.Builder`:
         <th>Parameters</th>
     </tr>
     <tr>
-        <td>withCollectionName(String collectionName)</td>
+        <td>withCollectionName(<br/>String collectionName)</td>
         <td>Set the target collection name. Collection name cannot be empty or null.</td>
         <td>collectionName: The name of the target collection to create an index for.</td>
     </tr>
@@ -49,9 +49,9 @@ Methods of `CreateIndexParam.Builder`:
         <td>metricType: The metric type</td>
     </tr>
     <tr>
-        <td>withExtraParam(String extraParam)</td>
+        <td><br/>withExtraParam(String extraParam)</td>
         <td>Sets the specific index parameters according to index type. For example, IVF index, the extra parameters can be `{"nlist":1024}`.</td>
-        <td>extraParam: Extra parameters in JSON format</td>
+        <td>extraParam: <br/>Extra parameters in JSON format</td>
     </tr>
     <tr>
         <td>withSyncMode(Boolean syncMode)</td>
@@ -61,10 +61,10 @@ Methods of `CreateIndexParam.Builder`:
     <tr>
         <td>withSyncWaitingInterval(Long milliseconds)</td>
         <td>Set the waiting interval in sync mode. With sync mode enabled, the client constantly checks index state by interval. Interval value must be greater than zero, and cannot be greater than Constant.MAX_WAITING_INDEX_INTERVAL. By default, interval value is 500 milliseconds.</td>
-        <td>milliseconds: Sync mode interval value(unit: millisecond)</td>
+        <td><br/>milliseconds: Sync mode interval value(unit: millisecond)</td>
     </tr>
     <tr>
-        <td>withSyncWaitingTimeout( Long seconds)</td>
+        <td><br/>withSyncWaitingTimeout( Long seconds)</td>
         <td>Set the timeout value for sync mode. Timeout value must be greater than zero and no upper limit. Default value is 600 seconds.</td>
         <td>seconds: Sync mode timeout value(unit: second)</td>
     </tr>

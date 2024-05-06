@@ -30,7 +30,7 @@ Methods of `ListBulkInsertTasksParam.Builder`:
     </tr>
     <tr>
         <td>withLimit(Integer limit)</td>
-        <td>Specify limit count of returned tasks, list all tasks if the value is 0.Default value is 0</td>
+        <td>Specify limit count of returned tasks, list all tasks if the value is 0.<br/>Default value is 0</td>
         <td>limit: The limit value to control the numbe of tasks returned.</td>
     </tr>
     <tr>

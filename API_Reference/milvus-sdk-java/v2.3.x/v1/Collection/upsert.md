@@ -34,14 +34,14 @@ Methods of `UpsertParam.Builder`:
         <td>partitionName: The name of the partition to insert data into.</td>
     </tr>
     <tr>
-        <td>withFields(List&lt;InsertParam.Field> fields)</td>
-        <td>Sets the column-based data to be inserted. The fields list cannot be empty. Note that no input is required for the primary key field if auto-id is enabled.</td>
+        <td>withFields(List<InsertParam.Field> fields)</td>
+        <td>Sets the column-based data to be inserted. The fields list cannot be empty. <br/>Note that no input is required for the primary key field if auto-id is enabled.</td>
         <td>fields: A list of Field objects, each representing a field.</td>
     </tr>
     <tr>
-        <td>withRows(List&lt;JSONObject> rows)</td>
-        <td>Sets the row-based data to be inserted. The row list cannot be empty.Note that if the withFields() is called, the rows by withRows() will be ignored.</td>
-        <td>rows: A list of JSONObject objects, each representing a row in key-value format.- Requires List&lt;Boolean> if the data type is Bool.- Requires List&lt;Long> if the data type is Int64.- Requires List&lt;Integer> or List&lt;Short> if the data type is Int8/Int16/Int32.- Value is List&lt;Float> if the data type is Float.- Value is List&lt;Double> if the data type is Double.- Value is List&lt;String> if the data type is Varchar.- Value is List&lt;List&lt;?>> if the data type is Array, the inner List type must be equal to the element type of the Array field.- Value is List&lt;List&lt;Float>>, if the data type is FloatVector.- Value is List&lt;ByteBuffer>, if the data type is BinaryVector</td>
+        <td>withRows(List<JSONObject> rows)</td>
+        <td>Sets the row-based data to be inserted. The row list cannot be empty.<br/>Note that if the withFields() is called, the rows by withRows() will be ignored.</td>
+        <td>rows: A list of JSONObject objects, each representing a row in key-value format.<br/>- Requires List<Boolean> if the data type is Bool.<br/>- Requires List<Long> if the data type is Int64.<br/>- Requires List<Integer> or List<Short> if the data type is Int8/Int16/Int32.<br/>- Value is List<Float> if the data type is Float.<br/>- Value is List<Double> if the data type is Double.<br/>- Value is List<String> if the data type is Varchar.<br/>- Value is List<List<?>> if the data type is Array, the inner List type must be equal to the element type of the Array field.<br/>- Value is List<List<Float>>, if the data type is FloatVector.<br/>- Value is List<ByteBuffer>, if the data type is BinaryVector<br/></td>
     </tr>
     <tr>
         <td>build()</td>

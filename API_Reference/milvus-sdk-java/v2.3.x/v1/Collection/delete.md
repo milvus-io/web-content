@@ -34,13 +34,13 @@ Methods of `DeleteIdsParam.Builder`:
         <td>partitionName: The target partition name.</td>
     </tr>
     <tr>
-        <td>withPrimaryIds(List&lt;T> primaryIds)</td>
-        <td>Specifies primaryField ids. PrimaryIds cannot be empty or null.Note only support the value of primary key.</td>
+        <td>withPrimaryIds(List<T> primaryIds)</td>
+        <td>Specifies primaryField ids. PrimaryIds cannot be empty or null.<br/>Note only support the value of primary key.</td>
         <td>primaryIds: A list of primary field id.</td>
     </tr>
     <tr>
         <td>addPrimaryId(T primaryId)</td>
-        <td>Specifies primaryField id. PrimaryId cannot be empty or null.Note only support the value of primary key.</td>
+        <td>Specifies primaryField id. PrimaryId cannot be empty or null.<br/>Note only support the value of primary key.</td>
         <td>primaryId: The id of primary field key.</td>
     </tr>
     <tr>

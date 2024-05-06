@@ -29,9 +29,9 @@ Methods of `GetLoadingProgressParam.Builder`:
         <td>collectionName: The name of the collection to load.</td>
     </tr>
     <tr>
-        <td>withPartitionNames(List&lt;String> partitionNames)</td>
+        <td>withPartitionNames(List<String> partitionNames)</td>
         <td>Sets partition names list to specify query scope (Optional).</td>
-        <td>partitionNames: The name list of partitions to be loaded.</td>
+        <td>partitionNames: <br/>The name list of partitions to be loaded.</td>
     </tr>
     <tr>
         <td>build()</td>

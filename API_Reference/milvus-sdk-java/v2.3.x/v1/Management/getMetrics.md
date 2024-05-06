@@ -24,7 +24,7 @@ Methods of `GetMetricsParam.Builder`:
         <th>Parameters</th>
     </tr>
     <tr>
-        <td>withRequest(String request)</td>
+        <td><br/>withRequest(String request)</td>
         <td>Set request in JSON format to retrieve metric information from server.</td>
         <td>request: Request string in JSON format</td>
     </tr>

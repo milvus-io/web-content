@@ -24,13 +24,13 @@ Methods of `CreateAliasParam.Builder`:
         <th>Parameters</th>
     </tr>
     <tr>
-        <td>withCollectionName(String collectionName)</td>
-        <td>Sets the target collection name. Collection name cannot be empty or null.</td>
+        <td>withCollectionName(<br/>String collectionName)</td>
+        <td>Sets the target collection name. <br/>Collection name cannot be empty or null.</td>
         <td>collectionName: The name of the target collection to create an alias for.</td>
     </tr>
     <tr>
         <td>withAlias(String alias)</td>
-        <td>Sets the collection alias.Collection alias cannot be empty or null.</td>
+        <td>Sets the collection alias.<br/>Collection alias cannot be empty or null.</td>
         <td>alias: The alias of the target collection.</td>
     </tr>
     <tr>
