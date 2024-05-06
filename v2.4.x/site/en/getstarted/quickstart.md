@@ -45,7 +45,13 @@ client = MilvusClient(
 
 <div class="alert note">
 
-<p>If you have enabled authentication on your Milvus instance, you should add <code>token</code> as a parameter when initiating MilvusClient and set the value to a colon-separated username and password. To authenticate using the default username and password, set <code>token</code> to <code>root:Milvus</code>.</p>
+<ul>
+
+<li>If you have enabled authentication on your Milvus instance, you should add <code>token</code> as a parameter when initiating MilvusClient and set the value to a colon-separated username and password. To authenticate using the default username and password, set <code>token</code> to <code>root:Milvus</code>. For information on how to enable authentication, refer to <a href="authenticate.md">Authenticate User Access</a>.</li>
+
+<li>If you have enabled TLS on your Milvus instance, you should provide certificate file paths when initiating MilvusClient. For information on how to enable TLS, refer to <a href="tls.md">Encryption in Transit</a>.</li>
+
+</ul>
 
 </div>
 
@@ -65,7 +71,7 @@ client.create_collection(
 )
 ```
 
-In the above setup, 
+In the above setup,
 
 - The primary and vector fields use their default names (__id__ and __vector__).
 
@@ -128,23 +134,23 @@ In the above setup, you have the flexibility to define various aspects of the co
 
     The schema defines the structure of a collection. Except for adding pre-defined fields and setting their attributes as demonstrated above, you have the option of enabling and disabling
 
-    - __AutoID__
+  - __AutoID__
 
         Whether to enable the collection to automatically increment the primary field.
 
-    - __Dynamic Field__
+  - __Dynamic Field__
 
-        Whether to use the reserved JSON field __$meta__ to store non-schema-defined fields and their values. 
+        Whether to use the reserved JSON field __$meta__ to store non-schema-defined fields and their values.
 
      For a detailed explanation of the schema, refer to [Schema](schema.md).
 
 - __Index parameters__
 
-    Index parameters dictate how Milvus organizes your data within a collection. You can assign specific indexes to fields by configuring their __metric types__ and __index types__. 
+    Index parameters dictate how Milvus organizes your data within a collection. You can assign specific indexes to fields by configuring their __metric types__ and __index types__.
 
-    - For the vector field, you can use __AUTOINDEX__ as the index type and use __COSINE__, __L2__, or __IP__ as the `metric_type`.
+  - For the vector field, you can use __AUTOINDEX__ as the index type and use __COSINE__, __L2__, or __IP__ as the `metric_type`.
 
-    - For scalar fields, including the primary field, Milvus uses __TRIE__ for integers and __STL_SORT__ for strings.
+  - For scalar fields, including the primary field, Milvus uses __TRIE__ for integers and __STL_SORT__ for strings.
 
     For additional insights into index types, refer to [Index](index.md).
 
@@ -193,7 +199,7 @@ print(res)
 # }
 ```
 
-The provided code assumes that you have created a collection in the __Quick Setup__ manner. As shown in the above code, 
+The provided code assumes that you have created a collection in the __Quick Setup__ manner. As shown in the above code,
 
 - The data to insert is organized into a list of dictionaries, where each dictionary represents a data record, termed as an entity.
 
@@ -261,7 +267,7 @@ You can conduct similarity searches based on one or more vector embeddings.
 
 ### Single-vector search
 
-The value of the __query_vectors__ variable is a list containing a sub-list of floats. The sub-list represents a vector embedding of 5 dimensions. 
+The value of the __query_vectors__ variable is a list containing a sub-list of floats. The sub-list represents a vector embedding of 5 dimensions.
 
 ```python
 # 6. Search with a single vector
@@ -367,7 +373,7 @@ print(res)
 
 ```
 
-The output should be a list of two sub-lists, each of which contains three dictionaries, representing the returned entities with their IDs and distances. 
+The output should be a list of two sub-lists, each of which contains three dictionaries, representing the returned entities with their IDs and distances.
 
 ### Filtered searches
 
@@ -639,4 +645,3 @@ client.drop_collection(
 - The data insertion process may take some time to complete. It is recommended to wait a few seconds after inserting data and before conducting similarity searches.
 
 - Filter expressions can be used in both search and query requests. However, they are mandatory for query requests.
-

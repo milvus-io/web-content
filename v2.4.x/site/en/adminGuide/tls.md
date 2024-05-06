@@ -10,6 +10,12 @@ TLS (Transport Layer Security) is an encryption protocol to ensure communication
 
 This topic describes how to enable TLS proxy in Milvus.
 
+<div class="alert note">
+
+TLS and user authentication are two distinct security approaches. If you have enabled both user authentication and TLS in your Milvus system, you will need to provide a username, password, and certificate file paths. For information on how to enable user authentication, refer to [Authenticate User Access](authenticate.md).
+
+</div>
+
 ## Create your own certificate
 
 ### Prerequisites
@@ -493,53 +499,117 @@ Open the `server.csr`, the `ca.key` and the `ca.pem` files to sign the certifica
 openssl x509 -req -days 3650 -in server.csr -out server.pem -CA ca.pem -CAkey ca.key -CAcreateserial -extfile ./openssl.cnf -extensions v3_req
 ```
 
+## Set up a Milvus server with TLS
 
-## Modify Milvus server configurations
+This section outlines the steps to configure a Milvus server with TLS encryption.
 
-Configure the file paths of `server.pem`, `server.key`, and `ca.pem` for the server in `config/milvus.yaml`.
+<div class="alert note">
 
-```
+Due to current limitations with milvus-helm and milvus-operator regarding certificate file path configurations, this guide will focus on deployment using Docker Compose.
+
+</div>
+
+### 1. Modify the Milvus server configuration
+
+To enable TLS, set `common.security.tlsMode` in `milvus.yaml` to `1` (for one-way TLS) or `2` (for two-way TLS).
+
+```yaml
 tls:
-  serverPemPath: configs/cert/server.pem
-  serverKeyPath: configs/cert/server.key
-  caPemPath: configs/cert/ca.pem
+  serverPemPath: /milvus/tls/server.pem
+  serverKeyPath: /milvus/tls/server.key
+  caPemPath: /milvus/tls/ca.pem
 
 common:
   security:
-    # tlsMode 0 indicates no authentication
-    # tlsMode 1 indicates one-way authentication
-    # tlsMode 2 indicates two-way authentication
-    tlsMode: 2 
- ```
+    tlsMode: 1
+```
 
-### One-way authentication
+Parameters:
 
-Server-side needs server.pem and server.key files, client-side needs server.pem file.
+- `serverPemPath`: The path to the server certificate file.
+- `serverKeyPath`: The path to the server key file.
+- `caPemPath`: The path to the CA certificate file.
+- `tlsMode`: The TLS mode for encryption. Valid values:
+  - `1`: One-way authentication, where only the server requires a certificate and the client verifies it. This mode requires `server.pem` and `server.key` from the server side, and `server.pem` from the client side.
+  - `2`: Two-way authentication, where both the server and the client require certificates to establish a secure connection. This mode requires `server.pem`, `server.key`, and `ca.pem` from the server side, and `client.pem`, `client.key`, and `ca.pem` from the client side.
 
-### Two-way authentication
+### 2. Map certificate files to the container
 
-Server-side needs server.pem, server.key and ca.pem files, client-side needs client.pem, client.key and ca.pem files.
+#### Prepare certificate files
+
+Create a new folder named `tls` in the same directory as your `docker-compose.yaml`. Copy the `server.pem`, `server.key`, and `ca.pem` into the `tls` folder. Place them in a directory structure as follows:
+
+```
+├── docker-compose.yml
+├── milvus.yaml
+└── tls
+     ├── server.pem
+     ├── server.key
+     └── ca.pem
+```
+
+#### Update Docker Compose configuration
+
+Edit the `docker-compose.yaml` file to map the certificate file paths inside the container as shown below:
+
+```yaml
+  standalone:
+    container_name: milvus-standalone
+    image: milvusdb/milvus:latest
+    command: ["milvus", "run", "standalone"]
+    security_opt:
+    - seccomp:unconfined
+    environment:
+      ETCD_ENDPOINTS: etcd:2379
+      MINIO_ADDRESS: minio:9000
+    volumes:
+      - ${DOCKER_VOLUME_DIRECTORY:-.}/volumes/milvus:/var/lib/milvus
+      - ${DOCKER_VOLUME_DIRECTORY:-.}/tls:/milvus/tls
+      - ${DOCKER_VOLUME_DIRECTORY:-.}/milvus.yaml:/milvus/configs/milvus.yaml
+```
+
+#### Deploy Milvus using Docker Compose
+
+Execute the following command to deploy Milvus:
+
+```bash
+sudo docker compose up -d
+```
 
 ## Connect to the Milvus server with TLS
 
-Configure the file paths of `client.pem`, `client.key`, and `ca.pem` for the client when using the Milvus SDK.
+For SDK interactions, use the following setups depending on the TLS mode.
 
-The following example uses the Milvus Python SDK.
+### One-way TLS connection
 
+Provide the path to `server.pem` and ensure the `server_name` matches the `CommonName` configured in the certificate.
+  
+```python
+from pymilvus import MilvusClient
+
+client = MilvusClient(
+    uri="http://localhost:19530",
+    secure=True,
+    server_pem_path="path_to/server.pem",
+    server_name="localhost"
+)
 ```
-from pymilvus import connections
 
-_HOST = '127.0.0.1'
-_PORT = '19530'
+### Two-way TLS connection
 
-print(f"\nCreate connection...")
-connections.connect(host=_HOST, port=_PORT, secure=True, client_pem_path="cert/client.pem",
-                        client_key_path="cert/client.key",
-                        ca_pem_path="cert/ca.pem", server_name="localhost")
-print(f"\nList connections:")
-print(connections.list_connections())
+Provide paths to `client.pem`, `client.key`, and `ca.pem`, and ensure the `server_name` matches the `CommonName` configured in the certificate.
+
+```python
+from pymilvus import MilvusClient
+
+client = MilvusClient(
+    uri="http://localhost:19530",
+    secure=True,
+    client_pem_path="path_to/client.pem",
+    client_key_path="path_to/client.key",
+    ca_pem_path="path_to/ca.pem",
+    server_name="localhost"
+)
 ```
 
 See [example_tls1.py](https://github.com/milvus-io/pymilvus/blob/master/examples/example_tls1.py) and [example_tls2.py](https://github.com/milvus-io/pymilvus/blob/master/examples/example_tls2.py) for more information.
-
- 
