@@ -6,7 +6,7 @@ A MilvusClient interface. This method deletes entity(s) based on the primary key
 R<MutationResult> delete(DeleteParam requestParam);
 ```
 
-#### DeleteParam
+## DeleteParam
 
 Use the `DeleteParam.Builder` to construct a `DeleteParam` object.
 
@@ -49,7 +49,7 @@ The `DeleteParam.Builder.build()` can throw the following exceptions:
 
 - ParamException: error if the parameter is invalid.
 
-#### Returns
+## Returns
 
 This method catches all the exceptions and returns an `R<MutationResult>` object.
 
@@ -59,7 +59,7 @@ This method catches all the exceptions and returns an `R<MutationResult>` object
 
 - If the API succeeds, it returns a valid `MutationResult` held by the `R` template. You can use `MutationResultWrapper` to get the returned information. See the corresponding section in `insert()` for more information about MutationResultWrapper.
 
-#### Example
+## Example
 
 ```java
 import io.milvus.param.*;

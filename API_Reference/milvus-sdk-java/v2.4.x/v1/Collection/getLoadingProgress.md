@@ -6,7 +6,7 @@ A MilvusClient interface. This method gets loading collection progress.
 R<GetLoadingProgressResponse> getLoadingProgress(GetLoadingProgressParam requestParam);
 ```
 
-#### LoadCollectionParam
+## LoadCollectionParam
 
 Use the `GetLoadingProgressParam.Builder` to construct a `GetLoadingProgressParam` object.
 
@@ -29,9 +29,9 @@ Methods of `GetLoadingProgressParam.Builder`:
         <td>collectionName: The name of the collection to load.</td>
     </tr>
     <tr>
-        <td>withPartitionNames(List&lt;String> partitionNames)</td>
+        <td>withPartitionNames(List<String> partitionNames)</td>
         <td>Sets partition names list to specify query scope (Optional).</td>
-        <td>partitionNames: The name list of partitions to be loaded.</td>
+        <td>partitionNames: <br/>The name list of partitions to be loaded.</td>
     </tr>
     <tr>
         <td>build()</td>
@@ -64,7 +64,7 @@ The `GetLoadingProgressParam.Builder.build()` can throw the following exceptions
 
 - ParamException: error if the parameter is invalid.
 
-#### Returns
+## Returns
 
 This method catches all the exceptions and returns an `R<GetLoadingProgressResponse>` object.
 
@@ -74,7 +74,7 @@ This method catches all the exceptions and returns an `R<GetLoadingProgressRespo
 
 - If the API succeeds, it returns `R.Status.Success`.
 
-#### Example
+## Example
 
 ```java
 import io.milvus.param.*;

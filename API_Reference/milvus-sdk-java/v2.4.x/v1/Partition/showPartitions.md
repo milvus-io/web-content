@@ -6,7 +6,7 @@ MilvusClient interface. This method shows all partitions in the specified collec
 R<ShowPartitionsResponse> showPartitions(ShowPartitionsParam requestParam);
 ```
 
-#### ShowPartitionsParam
+## ShowPartitionsParam
 
 Use the `ShowPartitionsParam.Builder` to construct a `ShowPartitionsParam` object.
 
@@ -29,7 +29,7 @@ Methods of `ShowPartitionsParam.Builder`:
         <td>collectionName: The target collection name.</td>
     </tr>
     <tr>
-        <td>withPartitionNames(List&lt;String> partitionNames)</td>
+        <td>withPartitionNames(List<String> partitionNames)</td>
         <td>Set the partition names list. Partition names list cannot be null or empty.</td>
         <td>partitionNames: The name list of partitions to show.</td>
     </tr>
@@ -49,7 +49,7 @@ The `ShowPartitionsParam.Builder.build()` can throw the following exceptions:
 
 - ParamException: error if the parameter is invalid.
 
-#### Returns
+## Returns
 
 This method catches all the exceptions and returns an `R<ShowPartitionsResponse>` object.
 
@@ -59,7 +59,7 @@ This method catches all the exceptions and returns an `R<ShowPartitionsResponse>
 
 - If the API succeeds, it returns a valid `ShowPartitionsResponse` held by the `R` template. You can use ShowPartResponseWrapper to get information easily.
 
-#### ShowPartResponseWrapper
+## ShowPartResponseWrapper
 
 A tool class to encapsulate the `ShowPartitionsResponse`. 
 
@@ -75,7 +75,7 @@ Methods of `ShowPartitionsResponse`:
 |  getPartitionsInfo()<br/>                           |  Return a list of PartitionInfo.                    |  N/A                                       |  List<PartitionInfo> |
 |  getPartitionInfoByName(String partitionName)<br/>  |  Return a PartitionInfo object by a partition name. |  partitionName: The target partition name. |  PartitionInfo       |
 
-#### PartitionInfo
+## PartitionInfo
 
 A tool class to hold information of a partition.
 
@@ -87,7 +87,7 @@ Methods of `ShowPartitionsResponse.PartitionInfo`
 |  getMetricType() |  Get metric type.                     |  MetricType  |
 |  getExtraParam() |  Get index parameters in JSON format. |  String      |
 
-#### Example
+## Example
 
 ```java
 import io.milvus.param.*;

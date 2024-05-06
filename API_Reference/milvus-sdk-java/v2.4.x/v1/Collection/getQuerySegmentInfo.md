@@ -6,7 +6,7 @@ A MilvusClient interface. This method gets the query information of segments in 
 R<GetQuerySegmentInfoResponse> getQuerySegmentInfo(GetQuerySegmentInfoParam requestParam);
 ```
 
-#### GetQuerySegmentInfoParam
+## GetQuerySegmentInfoParam
 
 Use the `GetQuerySegmentInfoParam.Builder` to construct a `GetQuerySegmentInfoParam` object.
 
@@ -39,7 +39,7 @@ The `GetQuerySegmentInfoParam.Builder.build()` can throw the following exception
 
 - ParamException: error if the parameter is invalid.
 
-#### Returns
+## Returns
 
 This method catches all the exceptions and returns an `R<GetQuerySegmentInfoResponse>` object.
 
@@ -49,7 +49,7 @@ This method catches all the exceptions and returns an `R<GetQuerySegmentInfoResp
 
 - If the API succeeds, it returns a valid `GetQuerySegmentInfoResponse` held by the R template. The GetQuerySegmentInfoResponse object contains a list of `QuerySegmentInfo`, and you can use `QuerySegmentInfo.getState()` to get the state of the segment. This process is similar to that of `PersistentSegmentInfo`.
 
-#### Example
+## Example
 
 ```java
 import io.milvus.param.*;

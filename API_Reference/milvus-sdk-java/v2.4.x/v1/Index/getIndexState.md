@@ -6,7 +6,7 @@ MilvusClient interface. This method shows the index building state, and the reas
 R<GetIndexStateResponse> getIndexState(GetIndexStateParam requestParam);
 ```
 
-#### GetIndexStateParam
+## GetIndexStateParam
 
 Use the `GetIndexStateParam.Builder` to construct a `GetIndexStateParam` object.
 
@@ -44,7 +44,7 @@ The `GetIndexStateParam.Builder.build()` can throw the following exceptions:
 
 - ParamException: error if the parameter is invalid.
 
-#### Returns
+## Returns
 
 This method catches all the exceptions and returns an `R<GetIndexStateResponse>` object.
 
@@ -54,7 +54,7 @@ This method catches all the exceptions and returns an `R<GetIndexStateResponse>`
 
 - If the API succeeds, it returns a valid `GetIndexStateResponse` held by the R template.
 
-#### Example
+## Example
 
 ```java
 import io.milvus.param.*;

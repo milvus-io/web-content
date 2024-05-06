@@ -6,7 +6,7 @@ MilvusClient interface. This method lists all the resource groups.
 R<ListResourceGroupsResponse> listResourceGroups(ListResourceGroupsParam requestParam);
 ```
 
-#### ListResourceGroupsParam
+## ListResourceGroupsParam
 
 Use the `ListResourceGroupsParam.Builder` to construct a `ListResourceGroupsParam` object.
 
@@ -30,7 +30,7 @@ Methods of `ListResourceGroupsParam.Builder`:
     </tr>
 </table>
 
-#### Returns
+## Returns
 
 This method catches all the exceptions and returns an `R<ListResourceGroupsResponse>` object.
 
@@ -40,7 +40,7 @@ This method catches all the exceptions and returns an `R<ListResourceGroupsRespo
 
 - If the API succeeds, it returns a valid `ListResourceGroupsResponse` held by the `R` template. You can use `ListResourceGroupsResponse` to get resource group information.
 
-#### Example
+## Example
 
 ```java
 import io.milvus.param.ListResourceGroupsParam;

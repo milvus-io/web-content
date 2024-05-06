@@ -6,7 +6,7 @@ A MilvusClient interface. This method creates a collection with the specified sc
 R<RpcStatus> createCollection(CreateCollectionParam requestParam);
 ```
 
-#### CreateCollectionParam
+## CreateCollectionParam
 
 Use the `CreateCollectionParam.Builder` to construct a `CreateCollectionParam` object.
 
@@ -30,7 +30,7 @@ Methods of `CreateCollectionParam.Builder`:
     </tr>
     <tr>
         <td>withShardsNum(int shardsNum)</td>
-        <td>Sets the shards number. The number must be greater or equal to zero.The default value is 0, which means letting the server decide the value. The server set this value to 1 if user didn't specify it.</td>
+        <td>Sets the shards number. The number must be greater or equal to zero.<br/>The default value is 0, which means letting the server decide the value. The server set this value to 1 if user didn't specify it.</td>
         <td>shardsNum: The number of shards to split the inserted data into. Multiple shards are processed by multiple nodes in Milvus.</td>
     </tr>
     <tr>
@@ -39,7 +39,7 @@ Methods of `CreateCollectionParam.Builder`:
         <td>description: The description of the collection to create.</td>
     </tr>
     <tr>
-        <td>withFieldTypes(List&lt;FieldType> fieldTypes)</td>
+        <td>withFieldTypes(List<FieldType> fieldTypes)</td>
         <td>Sets the collection schema. The collection schema cannot be empty.</td>
         <td>fieldTypes: a list of FieldType objects, each representing a field schema.</td>
     </tr>
@@ -55,7 +55,7 @@ Methods of `CreateCollectionParam.Builder`:
     </tr>
     <tr>
         <td>withPartitionsNum(int partitionsNum)</td>
-        <td>Sets the partitions number if there is partition key field. The number must be greater than zero.The default value is 64(defined in server side). The upper limit is 4096(defined in server side).Not allow to set this value if none of field is partition key. Only one partition key field is allowed in a collection.</td>
+        <td>Sets the partitions number if there is partition key field. The number must be greater than zero.<br/>The default value is 64(defined in server side). The upper limit is 4096(defined in server side).<br/>Not allow to set this value if none of field is partition key. Only one partition key field is allowed in a collection.</td>
         <td>partitionsNum: Defines the number of partition if there is a partition key field in the collection.</td>
     </tr>
     <tr>
@@ -69,7 +69,7 @@ The `CreateCollectionParam.Builder.build()` can throw the following exceptions:
 
 - ParamException: error if the parameter is invalid.
 
-#### FieldType
+## FieldType
 
 A tool class to represent a field's schema. Use `FieldType.Builder` to build a `FieldType` object.
 
@@ -96,7 +96,7 @@ Methods of `FieldType.Builder`:
 |  withPartitionKey(boolean partitionKey)<br/>  |  Sets the field to be partition key.<br/>A partition key field's values are hashed and distributed to different logic partitions.<br/>Only int64 and varchar type fields can be a partition key. The primary key field can not be a partition key.                                                                                                                                                                |  partitionKey: A boolean value that defines if this field is a partition key field. The value true is a partition key, false is not.                                                          |
 |  build()                                         |  Create a FieldType object.                                                                                                                                                                                                                                                                                                                                                                                     |  N/A                                                                                                                                                                                          |
 
-#### Returns
+## Returns
 
 This method catches all the exceptions and returns an `R<RpcStatus>` object.
 
@@ -106,7 +106,7 @@ This method catches all the exceptions and returns an `R<RpcStatus>` object.
 
 - If the API succeeds, it returns `R.Status.Success`.
 
-#### Example
+## Example
 
 ```java
 import io.milvus.param.*;

@@ -6,7 +6,7 @@ MilvusClient interface. This method drops a role. It will succeed if the role ex
 R<RpcStatus> dropRole(DropRoleParam requestParam);
 ```
 
-#### DropRoleParam
+## DropRoleParam
 
 Use the `DropRoleParam.Builder` to construct a `DropRoleParam` object.
 
@@ -39,7 +39,7 @@ The `CreateRoleParam.Builder.build()` can throw the following exceptions:
 
 - ParamException: error if the parameter is invalid.
 
-#### Returns
+## Returns
 
 This method catches all the exceptions and returns an `R<RpcStatus>` object.
 
@@ -49,7 +49,7 @@ This method catches all the exceptions and returns an `R<RpcStatus>` object.
 
 - If the API succeeds, it returns `R.Status.Success`.
 
-#### Example
+## Example
 
 ```java
 import io.milvus.param.DropRoleParam;

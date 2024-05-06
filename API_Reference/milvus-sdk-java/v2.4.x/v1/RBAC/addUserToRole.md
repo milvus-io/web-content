@@ -6,7 +6,7 @@ MilvusClient interface. This method adds a user to a role. The user will get per
 R<RpcStatus> addUserToRole(AddUserToRoleParam requestParam);
 ```
 
-#### AddUserToRoleParam
+## AddUserToRoleParam
 
 Use the `AddUserToRoleParam.Builder` to construct an `AddUserToRoleParam` object.
 
@@ -44,7 +44,7 @@ The `AddUserToRoleParam.Builder.build()` can throw the following exceptions:
 
 - ParamException: error if the parameter is invalid.
 
-#### Returns
+## Returns
 
 This method catches all the exceptions and returns an `R<RpcStatus>` object.
 
@@ -54,7 +54,7 @@ This method catches all the exceptions and returns an `R<RpcStatus>` object.
 
 - If the API succeeds, it returns `R.Status.Success`.
 
-#### Example
+## Example
 
 ```java
 import io.milvus.param.AddUserToRoleParam;

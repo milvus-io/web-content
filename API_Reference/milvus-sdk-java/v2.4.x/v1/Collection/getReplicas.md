@@ -6,7 +6,7 @@ A MilvusClient interface. This method lists the replica information of a specifi
 R<GetReplicasResponse> getReplicas(GetReplicasParam requestParam);
 ```
 
-#### GetReplicasParam
+## GetReplicasParam
 
 Use the `GetReplicasParam.Builder` to construct a GetReplicasParam object.
 
@@ -39,7 +39,7 @@ The `GetReplicasParam.Builder.build()` can throw the following exceptions:
 
 - ParamException: error if the parameter is invalid.
 
-#### Returns
+## Returns
 
 This method catches all the exceptions and returns an `R<GetReplicasResponse>` object.
 
@@ -49,7 +49,7 @@ This method catches all the exceptions and returns an `R<GetReplicasResponse>` o
 
 - If the API succeeds, it returns a valid `GetReplicasResponse` held by the `R` template.
 
-#### Example
+## Example
 
 ```java
 import io.milvus.param.*;

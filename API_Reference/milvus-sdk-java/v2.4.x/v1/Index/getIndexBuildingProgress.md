@@ -6,7 +6,7 @@ MilvusClient interface. This method shows the index-building progress, such as h
 R<GetIndexBuildProgressResponse> getIndexBuildProgress(GetIndexBuildProgressParam requestParam);
 ```
 
-#### GetIndexBuildProgressParam
+## GetIndexBuildProgressParam
 
 Use the `GetIndexBuildProgressParam.Builder` to construct a `GetIndexBuildProgressParam` object.
 
@@ -44,7 +44,7 @@ The `GetIndexBuildProgressParam.Builder.build()` can throw the following excepti
 
 - ParamException: error if the parameter is invalid.
 
-#### Returns
+## Returns
 
 This method catches all the exceptions and returns an `R<GetIndexBuildProgressResponse>` object.
 
@@ -54,7 +54,7 @@ This method catches all the exceptions and returns an `R<GetIndexBuildProgressRe
 
 - If the API succeeds, it returns a valid `GetIndexBuildProgressResponse` held by the `R` template.
 
-#### Example
+## Example
 
 ```java
 import io.milvus.param.*;

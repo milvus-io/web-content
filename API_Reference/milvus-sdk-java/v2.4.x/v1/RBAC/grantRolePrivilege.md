@@ -6,7 +6,7 @@ MilvusClient interface. This method grants the role privilege*.*
 R<RpcStatus> grantRolePrivilege(GrantRolePrivilegeParam requestParam);
 ```
 
-#### GrantRolePrivilegeParam
+## GrantRolePrivilegeParam
 
 Use the `GrantRolePrivilegeParam.Builder` to construct a `GrantRolePrivilegeParam` object.
 
@@ -54,7 +54,7 @@ The `GrantRolePrivilegeParam.Builder.build()` can throw the following exceptions
 
 - ParamException: error if the parameter is invalid.
 
-#### Returns
+## Returns
 
 This method catches all the exceptions and returns an `R<RpcStatus>` object.
 
@@ -64,7 +64,7 @@ This method catches all the exceptions and returns an `R<RpcStatus>` object.
 
 - If the API succeeds, it returns `R.Status.Success`.
 
-#### Example
+## Example
 
 ```java
 import io.milvus.param.GrantRolePrivilegeParam;

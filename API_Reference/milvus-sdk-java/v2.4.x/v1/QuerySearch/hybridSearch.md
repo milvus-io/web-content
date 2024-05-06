@@ -6,7 +6,7 @@ The MilvusClient interface. This method conducts an approximate nearest neighbor
 R<SearchResults> hybridSearch(HybridSearchParam requestParam);
 ```
 
-#### HybridSearchParam
+## HybridSearchParam
 
 Use the `HybridSearchParam.Builder` to construct a `HybridSearchParam` object.
 
@@ -30,11 +30,11 @@ Methods of `HybridSearchParam.Builder`:
     </tr>
     <tr>
         <td>withConsistencyLevel(ConsistencyLevelEnum consistencyLevel)</td>
-        <td>Sets the search consistency level(Optional).If the level is not set, will use the default consistency level of the collection.</td>
+        <td>Sets the search consistency level(Optional).<br/>If the level is not set, will use the default consistency level of the collection.</td>
         <td>consistencyLevel: The consistency level used in the search.</td>
     </tr>
     <tr>
-        <td>withPartitionNames(List&lt;String> partitionNames)</td>
+        <td>withPartitionNames(List<String> partitionNames)</td>
         <td>Sets partition names list to specify search scope (Optional).</td>
         <td>partitionNames: The name list of partitions to be searched.</td>
     </tr>
@@ -44,9 +44,9 @@ Methods of `HybridSearchParam.Builder`:
         <td>partitionName: A partition name to be searched.</td>
     </tr>
     <tr>
-        <td>withOutFields(List&lt;String> outFields)</td>
+        <td>withOutFields(List<String> outFields)</td>
         <td>Specifies output scalar fields (Optional).</td>
-        <td>outFields: The name list of fields to be outputed.</td>
+        <td><br/>outFields: The name list of fields to be outputed.</td>
     </tr>
     <tr>
         <td>addOutField(String fieldName)</td>
@@ -55,12 +55,12 @@ Methods of `HybridSearchParam.Builder`:
     </tr>
     <tr>
         <td>withTopK(Integer topK)</td>
-        <td>Set topK value of ANN search.Avaiable range: [1, 16384]</td>
+        <td>Set topK value of ANN search.<br/>Avaiable range: [1, 16384]</td>
         <td>topK: The topk value.</td>
     </tr>
     <tr>
         <td>withRoundDecimal(Integer decimal)</td>
-        <td>Specifies the decimal place for returned distance.Avaiable range: [-1, 6]Default value is -1, return all digits.</td>
+        <td>Specifies the decimal place for returned distance.<br/>Avaiable range: [-1, 6]<br/>Default value is -1, return all digits.</td>
         <td>decimal: How many digits reserved after the decimal point.</td>
     </tr>
     <tr>
@@ -70,7 +70,7 @@ Methods of `HybridSearchParam.Builder`:
     </tr>
     <tr>
         <td>withRanker(BaseRanker ranker)</td>
-        <td>Set a ranker for rearranging number of limit results.Avaiable:- RRFRanker- WeightedRanker</td>
+        <td>Set a ranker for rearranging number of limit results.<br/>Avaiable:<br/>- RRFRanker<br/>- WeightedRanker</td>
         <td>ranker: The concrete ranker object.</td>
     </tr>
     <tr>
@@ -84,7 +84,7 @@ The `HybridSearchParam.Builder.build()` can throw the following exceptions:
 
 - ParamException: error if the parameter is invalid.
 
-#### AnnSearchParam
+## AnnSearchParam
 
 The sub-request of `hybridSearch()`.
 
@@ -110,7 +110,7 @@ Methods of `AnnSearchParam.Builder`:
     </tr>
     <tr>
         <td>withMetricType(MetricType metricType)</td>
-        <td>Set metric type of ANN search.Default value is MetricType.None, which means let the server determine the defaul metric type. Please refer to MetricType in Misc.</td>
+        <td>Set metric type of ANN search.<br/>Default value is MetricType.None, which means let the server determine the defaul metric type. Please refer to MetricType in Misc.</td>
         <td>metricType: The metric type to search.</td>
     </tr>
     <tr>
@@ -120,37 +120,37 @@ Methods of `AnnSearchParam.Builder`:
     </tr>
     <tr>
         <td>withTopK(Integer topK)</td>
-        <td>Set topK value of ANN search.Avaiable range: [1, 16384]</td>
+        <td>Set topK value of ANN search.<br/>Avaiable range: [1, 16384]</td>
         <td>topK: The topk value.</td>
     </tr>
     <tr>
         <td>withParams(String params)</td>
-        <td>Specifies the parameters of search in JSON format. The followings are valid keys of param:1. special parameters for index, such as "nprobe", "ef", "search_k"2. metric type with key "metric_type" and a string value such as "L2", "IP".3. offset for pagination with key "offset" and an integer value</td>
+        <td>Specifies the parameters of search in JSON format. The followings are valid keys of param:<br/>1. special parameters for index, such as "nprobe", "ef", "search_k"<br/>2. metric type with key "metric_type" and a string value such as "L2", "IP".<br/>3. offset for pagination with key "offset" and an integer value</td>
         <td>params: A JSON format string for extra parameters.</td>
     </tr>
     <tr>
-        <td>withFloatVectors(List&lt;List&lt;Float>> vectors)</td>
-        <td>Set the target vectors to search FloatVector field. Up to 16384 vectors allowed.Note: this method will reset the target vectors of SearchParam. To input vectors, call it only once.</td>
+        <td>withFloatVectors(List<List<Float>> vectors)</td>
+        <td>Set the target vectors to search FloatVector field. Up to 16384 vectors allowed.<br/>Note: this method will reset the target vectors of SearchParam. To input vectors, call it only once.</td>
         <td>vectors: The target vectors</td>
     </tr>
     <tr>
-        <td>withBinaryVectors(List&lt;ByteBuffer> vectors)</td>
-        <td>Set the target vectors to search BinaryVector field. Up to 16384 vectors allowed.Note: this method will reset the target vectors of SearchParam. To input vectors, call it only once.</td>
+        <td>withBinaryVectors(List<ByteBuffer> vectors)</td>
+        <td>Set the target vectors to search BinaryVector field. Up to 16384 vectors allowed.<br/>Note: this method will reset the target vectors of SearchParam. To input vectors, call it only once.</td>
         <td>vectors: The target vectors</td>
     </tr>
     <tr>
-        <td>withFloat16Vectors(List&lt;ByteBuffer> vectors)</td>
-        <td>Set the target vectors to search Float16Vector field. Up to 16384 vectors allowed.Note: this method will reset the target vectors of SearchParam. To input vectors, call it only once.</td>
+        <td>withFloat16Vectors(List<ByteBuffer> vectors)</td>
+        <td>Set the target vectors to search Float16Vector field. Up to 16384 vectors allowed.<br/><br/>Note: this method will reset the target vectors of SearchParam. To input vectors, call it only once.</td>
         <td>vectors: The target vectors</td>
     </tr>
     <tr>
-        <td>withBFloat16Vectors(List&lt;List&lt;Float>> vectors)</td>
-        <td>Set the target vectors to search BFloat16Vector field. Up to 16384 vectors allowed.Note: this method will reset the target vectors of SearchParam. To input vectors, call it only once.</td>
+        <td>withBFloat16Vectors(List<List<Float>> vectors)</td>
+        <td>Set the target vectors to search BFloat16Vector field. Up to 16384 vectors allowed.<br/><br/>Note: this method will reset the target vectors of SearchParam. To input vectors, call it only once.</td>
         <td>vectors: The target vectors</td>
     </tr>
     <tr>
-        <td>withSparseFloatVectors(List&lt;SortedMap&lt;Long, Float>> vectors)</td>
-        <td>Set the target vectors to search SparseFloatVector field. Up to 16384 vectors allowed.Note: this method will reset the target vectors of SearchParam. To input vectors, call it only once.</td>
+        <td>withSparseFloatVectors(List<SortedMap<Long, Float>> vectors)</td>
+        <td>Set the target vectors to search SparseFloatVector field. Up to 16384 vectors allowed.<br/><br/>Note: this method will reset the target vectors of SearchParam. To input vectors, call it only once.</td>
         <td>vectors: The target vectors</td>
     </tr>
     <tr>
@@ -160,7 +160,7 @@ Methods of `AnnSearchParam.Builder`:
     </tr>
 </table>
 
-#### RRFRanker
+## RRFRanker
 
 The RRF reranking strategy, which merges results from multiple searches, favoring items that consistently appear.
 
@@ -181,7 +181,7 @@ Methods of `RRFRanker.Builder`:
     </tr>
     <tr>
         <td>withK(Integer k)</td>
-        <td>Sets k factor for RRF. Value cannot be negative. Default value is 60.score = 1 / (k + float32(rank_i+1))rank_i is the rank in each field</td>
+        <td>Sets k factor for RRF. Value cannot be negative. Default value is 60.<br/>score = 1 / (k + float32(rank_i+1))<br/>rank_i is the rank in each field<br/></td>
         <td>k: The k factor value.</td>
     </tr>
     <tr>
@@ -191,7 +191,7 @@ Methods of `RRFRanker.Builder`:
     </tr>
 </table>
 
-#### WeightedRanker
+## WeightedRanker
 
 The average weighted scoring reranking strategy, which prioritizes vectors based on relevance, averaging their significance.
 
@@ -211,8 +211,8 @@ Methods of `WeightedRanker.Builder`:
         <th>Parameters</th>
     </tr>
     <tr>
-        <td>withWeights(List&lt;Float> weights)</td>
-        <td>Assign weights for each AnnSearchParam. The length of weights must be equal to number of AnnSearchParam.You can assign any float value for weight, the sum of weight values can exceed 1.The distance/similarity values of each field will be mapped into a range of [0,1],and score = sum(weights[i] * distance_i_in_[0,1]).</td>
+        <td>withWeights(List<Float> weights)</td>
+        <td>Assign weights for each AnnSearchParam. The length of weights must be equal to number of AnnSearchParam.<br/>You can assign any float value for weight, the sum of weight values can exceed 1.<br/>The distance/similarity values of each field will be mapped into a range of [0,1],<br/>and score = sum(weights[i] * distance_i_in_[0,1]).<br/></td>
         <td>weights: The weight values.</td>
     </tr>
     <tr>
@@ -222,7 +222,7 @@ Methods of `WeightedRanker.Builder`:
     </tr>
 </table>
 
-#### Returns
+## Returns
 
 This method catches all the exceptions and returns an `R<SearchResults>` object.
 
@@ -232,7 +232,7 @@ This method catches all the exceptions and returns an `R<SearchResults>` object.
 
 - If the API succeeds, it returns valid `SearchResults` held by the `R` template. You can use `SearchResultsWrapper` to get the results.
 
-#### Example
+## Example
 
 ```java
 import io.milvus.param.dml.*;

@@ -6,7 +6,7 @@ MilvusClient interface. This method shows the information of the specified index
 R<DescribeIndexResponse> describeIndex(DescribeIndexParam requestParam);
 ```
 
-#### DescribeIndexParam
+## DescribeIndexParam
 
 Use the `DescribeIndexParam.Builder` to construct a `DescribeIndexParam` object.
 
@@ -44,7 +44,7 @@ The `DropIndexParam.Builder.build()` can throw the following exceptions:
 
 - ParamException: error if the parameter is invalid.
 
-#### Returns
+## Returns
 
 This method catches all the exceptions and returns an `R<DescribeIndexResponse>` object.
 
@@ -54,7 +54,7 @@ This method catches all the exceptions and returns an `R<DescribeIndexResponse>`
 
 - If the API succeeds, it returns a valid `DescribeIndexResponse` held by the `R` template. You can use `DescIndexResponseWrapper` to get index descriptions easily.
 
-#### DescIndexResponseWrapper
+## DescIndexResponseWrapper
 
 A tool class to encapsulate the `DescribeIndexResponse`. 
 
@@ -70,7 +70,7 @@ Methods of `DescIndexResponseWrapper`:
 |  getIndexDescriptions()<br/>                     |  Get a list of all index descriptions. (Currently only return one index information) |  N/A                     |  List<IndexDesc> |
 |  getIndexDescByFieldName(String fieldName)<br/>  |  Get index description by field name. Return null if the field doesn't exist.        |  fieldName: A field name |  IndexDesc       |
 
-#### IndexDesc
+## IndexDesc
 
 A tool class to describe an index.
 
@@ -82,7 +82,7 @@ Methods of `DescIndexResponseWrapper.IndexDesc`
 |  getMetricType() |  Get metric type.                     |  MetricType  |
 |  getExtraParam() |  Get index parameters in JSON format. |  String      |
 
-#### Example
+## Example
 
 ```java
 import io.milvus.param.*;

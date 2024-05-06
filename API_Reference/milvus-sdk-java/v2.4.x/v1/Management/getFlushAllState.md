@@ -6,7 +6,7 @@ MilvusClient interface. This method tests whether specified segments are flushed
 R<GetFlushAllStateResponse> getFlushAllState(GetFlushAllStateParam requestParam);
 ```
 
-#### GetFlushAllStateParam
+## GetFlushAllStateParam
 
 Use the `GetFlushAllStateParam.Builder` to construct a `GetFlushAllStateParam` object.
 
@@ -30,7 +30,7 @@ Methods of `GetFlushAllStateParam.Builder`:
     </tr>
 </table>
 
-#### Returns
+## Returns
 
 This method catches all the exceptions and returns an `R<GetFlushAllStateResponse>` object.
 
@@ -40,7 +40,7 @@ This method catches all the exceptions and returns an `R<GetFlushAllStateRespons
 
 - If the API succeeds, it returns a valid `GetFlushAllStateResponse` held by the `R` template.
 
-#### Example
+## Example
 
 ```java
 import io.milvus.param.*;

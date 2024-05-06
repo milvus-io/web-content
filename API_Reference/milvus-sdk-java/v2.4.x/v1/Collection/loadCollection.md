@@ -6,7 +6,7 @@ A MilvusClient interface. This method loads the specified collection and all the
 R<RpcStatus> loadCollection(LoadCollectionParam requestParam);
 ```
 
-#### LoadCollectionParam
+## LoadCollectionParam
 
 Use the `LoadCollectionParam.Builder` to construct a `LoadCollectionParam` object.
 
@@ -30,7 +30,7 @@ Methods of `LoadCollectionParam.Builder`:
     </tr>
     <tr>
         <td>withSyncLoad(Boolean syncLoad)</td>
-        <td>Enables sync mode when loading a collection. With sync mode enabled, the client keeps waiting until all segments of the collection are successfully loaded. If sync mode is disabled, the client returns instantly after `loadCollection()` is called.Sync mode is enabled by default.</td>
+        <td>Enables sync mode when loading a collection. With sync mode enabled, the client keeps waiting until all segments of the collection are successfully loaded. If sync mode is disabled, the client returns instantly after `loadCollection()` is called.<br/>Sync mode is enabled by default.</td>
         <td>syncLoad:A boolean value to indicate if sync mode is enabled. If the value is set to `True`, this means sync mode is enabled.</td>
     </tr>
     <tr>
@@ -50,7 +50,7 @@ Methods of `LoadCollectionParam.Builder`:
     </tr>
     <tr>
         <td>withRefresh(Boolean refresh)</td>
-        <td>Whether to renew the segment list of this collection before loading. This flag must be set to FALSE when first time call the loadCollection(). After loading a collection, call loadCollection() again with refresh=TRUE, the server will look for new segments that are not loaded yet and tries to load them up.This method is mainly for bulkinsert() interface.</td>
+        <td>Whether to renew the segment list of this collection before loading. This flag must be set to FALSE when first time call the loadCollection(). After loading a collection, call loadCollection() again with refresh=TRUE, the server will look for new segments that are not loaded yet and tries to load them up.<br/>This method is mainly for bulkinsert() interface.</td>
         <td>refresh: The flag whether to renew segment list.</td>
     </tr>
     <tr>
@@ -64,7 +64,7 @@ The `LoadCollectionParam.Builder.build()` can throw the following exceptions:
 
 - ParamException: error if the parameter is invalid.
 
-#### Returns
+## Returns
 
 This method catches all the exceptions and returns an `R<RpcStatus>` object.
 
@@ -74,7 +74,7 @@ This method catches all the exceptions and returns an `R<RpcStatus>` object.
 
 - If the API succeeds, it returns `R.Status.Success`.
 
-#### Example
+## Example
 
 ```java
 import io.milvus.param.*;

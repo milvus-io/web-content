@@ -6,7 +6,7 @@ The MilvusClient interface. This method queries entity(s) based on scalar field(
 R<QueryResults> query(QueryParam requestParam);
 ```
 
-#### QueryParam
+## QueryParam
 
 Use the `QueryParam.Builder` to construct a `QueryParam` object.
 
@@ -30,11 +30,11 @@ Methods of `QueryParam.Builder`:
     </tr>
     <tr>
         <td>withConsistencyLevel(ConsistencyLevelEnum consistencyLevel)</td>
-        <td>Sets the search consistency level(Optional).If the level is not set, will use the default consistency level of the collection.</td>
+        <td>Sets the search consistency level(Optional).<br/>If the level is not set, will use the default consistency level of the collection.</td>
         <td>consistencyLevel: The consistency level used in the query.</td>
     </tr>
     <tr>
-        <td>withPartitionNames(List&lt;String> partitionNames)</td>
+        <td>withPartitionNames(List<String> partitionNames)</td>
         <td>Sets partition names list to specify query scope (Optional).</td>
         <td>partitionNames: The name list of partitions to be queried.</td>
     </tr>
@@ -44,9 +44,9 @@ Methods of `QueryParam.Builder`:
         <td>partitionName: A partition name to be queried.</td>
     </tr>
     <tr>
-        <td>withOutFields(List&lt;String> outFields)</td>
-        <td>Specifies output scalar fields (Optional).If output fields are specified, the QueryResults returned by query() will contains the values of these fields. </td>
-        <td>outFields: The name list of fields to be outputed.</td>
+        <td>withOutFields(List<String> outFields)</td>
+        <td>Specifies output scalar fields (Optional).<br/>If output fields are specified, the QueryResults returned by query() will contains the values of these fields. </td>
+        <td><br/>outFields: The name list of fields to be outputed.</td>
     </tr>
     <tr>
         <td>addOutField(String fieldName)</td>
@@ -84,7 +84,7 @@ The `QueryParam.Builder.build()` can throw the following exceptions:
 
 - ParamException: error if the parameter is invalid.
 
-#### Returns
+## Returns
 
 This method catches all the exceptions and returns an `R<QueryResults>` object.
 
@@ -94,7 +94,7 @@ This method catches all the exceptions and returns an `R<QueryResults>` object.
 
 - If the API succeeds, it returns valid `QueryResults` held by the `R` template. You can use `QueryResultsWrapper` to get the query results.
 
-#### QueryResultsWrapper
+## QueryResultsWrapper
 
 A tool class to encapsulate the `QueryResults`. 
 
@@ -111,7 +111,7 @@ Methods of `QueryResultsWrapper`:
 |  getRowCount()                              |  Gets the row count of a query result.                                                                 |  N/A                                                                              |  long                                |
 |  getRowRecords()                            |  Gets row records list from the query result.                                                          |  N/A                                                                              |  List<QueryResultsWrapper.RowRecord> |
 
-#### FieldDataWrapper
+## FieldDataWrapper
 
 A tool class to encapsulate column data returned by `query()` API. 
 
@@ -126,7 +126,7 @@ Methods of `FieldDataWrapper`:
 |  getRowCount()            |  Gets the row count of a field. Throws IllegalResponseException if the field data is illegal.                                |  long                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 |  getFieldData()           |  Returns the field data according to field type.<br/>                                                                     |  - Return List<List<Float>> for FloatVector field.<br/> - Return List<ByteBuffer> for BinaryVector/Float16Vector/BFloatVector field.<br/> - Return List<SortedMap<Long, Float>> for SparseFloatVector field.<br/> - Return List<Long> for Int64 field.<br/> - Return List<Integer> for Int32/Int16/Int8 field.<br/> - Return List<Boolean> for Bool field.<br/> - Return List<Float> for Float field.<br/> - Return List<Double> for Double field.<br/> - Return List<String> for Varchar field.<br/> - Return List<ByteString> for JSON field. |
 
-#### QueryResultsWrapper.RowRecord
+## QueryResultsWrapper.RowRecord
 
 A tool class to hold the data of a single row in key-value format.
 
@@ -137,7 +137,7 @@ Methods of `RowRecord`:
 |  put(String keyName, Object obj)<br/>  |  For internal use. Set a key-value pair for the row.                                                                                                                                                                                      |  boolean     |
 |  get(String keyName)                      |  Get a value by a key name. If the key name is a field name, return the value of this field.<br/>If the key name is in the dynamic field, return the value from the dynamic field.<br/>Throws ParamException if the key name doesn't exist. |  Object      |
 
-#### Example
+## Example
 
 ```java
 import io.milvus.param.dml.*;

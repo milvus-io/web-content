@@ -6,7 +6,7 @@ MilvusClient interface. This method returns the state of a compaction operation,
 R<GetCompactionStateResponse> getCompactionState(GetCompactionStateParam requestParam);
 ```
 
-#### GetCompactionStateParam
+## GetCompactionStateParam
 
 Use the `GetCompactionStateParam.Builder` to construct a `GetCompactionStateParam` object.
 
@@ -39,7 +39,7 @@ The `GetCompactionStateParam.Builder.build()` can throw the following exceptions
 
 - ParamException: error if the parameter is invalid.
 
-#### Returns
+## Returns
 
 This method catches all the exceptions and returns an `R<GetCompactionStateResponse>` object.
 
@@ -49,7 +49,7 @@ This method catches all the exceptions and returns an `R<GetCompactionStateRespo
 
 - If the API succeeds, it returns a valid `GetCompactionStateResponse` held by the `R` template.
 
-#### CompactionState
+## CompactionState
 
 Use the `getState()` of `GetCompactionStateResponse` to get the compaction state:
 
@@ -64,7 +64,7 @@ public enum CompactionState
 |  *Executing*     |  1        |  Compaction is in executing |
 |  *Completed*     |  2        |  Compaction is completed    |
 
-#### Example
+## Example
 
 ```java
 import io.milvus.param.*;

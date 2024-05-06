@@ -6,7 +6,7 @@ MilvusClient interface. This method alters an index with key-value properties.
 R<RpcStatus> alterIndex(AlterIndexParam requestParam);
 ```
 
-#### AlterIndexParam
+## AlterIndexParam
 
 Use the `AlterIndexParam.Builder` to construct an `AlterIndexParam` object.
 
@@ -44,7 +44,7 @@ The `AlterIndexParam.Builder.build()` can throw the following exceptions:
 
 - ParamException: error if the parameter is invalid.
 
-#### Returns
+## Returns
 
 This method catches all the exceptions and returns an `R<RpcStatus>` object.
 
@@ -54,7 +54,7 @@ This method catches all the exceptions and returns an `R<RpcStatus>` object.
 
 - If the API succeeds, it returns `R.Status.Success`.
 
-#### Example
+## Example
 
 ```java
 import io.milvus.param.*;

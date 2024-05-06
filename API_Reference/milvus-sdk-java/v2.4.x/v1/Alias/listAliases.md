@@ -6,7 +6,7 @@ A MilvusClient interface. This method lists the aliases of a collection.
 R<ListAliasesResponse> listAliases(ListAliasesParam requestParam);
 ```
 
-#### ListAliasesParam
+## ListAliasesParam
 
 Use the `ListAliasesParam.Builder` to construct a `ListAliasesParam` object.
 
@@ -24,7 +24,7 @@ Methods of `ListAliasesParam.Builder`:
         <th>Parameters</th>
     </tr>
     <tr>
-        <td>withCollectionName(String collectionName)</td>
+        <td><br/>withCollectionName(String collectionName)</td>
         <td>Sets the target collection name. Collection name cannot be empty or null.</td>
         <td>collectionName: The name of the target collection to list the aliases.</td>
     </tr>
@@ -39,7 +39,7 @@ The `ListAliasesParam.Builder.build()` can throw the following exceptions:
 
 - ParamException: error if the parameter is invalid.
 
-#### Returns
+## Returns
 
 This method catches all the exceptions and returns an `R<RpcStatus>` object.
 
@@ -49,7 +49,7 @@ This method catches all the exceptions and returns an `R<RpcStatus>` object.
 
 - If the API succeeds, it returns a valid `ListAliasesResponse` held by the `R` template. You can use `ListAliasesResponse` to get the information of aliases.
 
-#### Example
+## Example
 
 ```java
 import io.milvus.param.*;

@@ -6,7 +6,7 @@ A MilvusClient interface. This method lists all the collections or gets the coll
 R<ShowCollectionsResponse> showCollections(ShowCollectionsParam requestParam);
 ```
 
-#### ShowCollectionsParam
+## ShowCollectionsParam
 
 Use the `ShowCollectionsParam.Builder` to construct a `ShowCollectionsParam` object.
 
@@ -24,8 +24,8 @@ Methods of `ShowCollectionsParam.Builder`:
         <th>Parameters</th>
     </tr>
     <tr>
-        <td>withCollectionNames(List&lt;String> collectionNames)</td>
-        <td>Sets a list of collection names. If the list is empty, the method will return all the collections in database.Collection name cannot be empty or null.</td>
+        <td>withCollectionNames(List<String> collectionNames)</td>
+        <td>Sets a list of collection names. If the list is empty, the method will return all the collections in database.<br/>Collection name cannot be empty or null.</td>
         <td>collectionNames: A list of the collection names to show.</td>
     </tr>
     <tr>
@@ -44,7 +44,7 @@ The `ShowCollectionsParam.Builder.build()` can throw the following exceptions:
 
 - ParamException: error if the parameter is invalid.
 
-#### Returns
+## Returns
 
 This method catches all the exceptions and returns an `R<ShowCollectionsResponse>` object.
 
@@ -54,7 +54,7 @@ This method catches all the exceptions and returns an `R<ShowCollectionsResponse
 
 - If the API succeeds, it returns a valid `ShowCollectionsResponse` held by the `R` template. You can use `ShowCollResponseWrapper` to get the information.
 
-#### ShowCollResponseWrapper
+## ShowCollResponseWrapper
 
 A tool class to encapsulate the ShowCollectionsResponse. 
 
@@ -70,7 +70,7 @@ Methods of `ShowCollResponseWrapper`:
 |  getCollectionsInfo()<br/>                   |  Returns a list of CollectionInfo objects. Each CollectionInfo represents a collection. |  N/A                                    |  List<CollectionInfo> |
 |  getCollectionInfoByName(String collectionName) |  Gets a CollectionInfo object by collection name.<br/>                               |  `collectionName`: The collection name. |  CollectionInfo       |
 
-#### CollectionInfo
+## CollectionInfo
 
 A tool class to store a collection's information.
 
@@ -83,7 +83,7 @@ Methods of `ShowCollResponseWrapper.CollectionInfo`:
 |  getUtcTimestamp()                |  Gets a UTC timestamp that indicates when this collection is created. This method is for internal usage. |  long        |
 |  getInMemoryPercentage()<br/>  |  Load percentage on query node.<br/>                                                                  |  long        |
 
-#### Example
+## Example
 
 ```java
 import io.milvus.param.*;

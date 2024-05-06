@@ -14,7 +14,7 @@ A MilvusClient interface. This method triggers a flush action in which all growi
 R<FlushResponse> flush(FlushParam requestParam);
 ```
 
-#### FlushParam
+## FlushParam
 
 Use the `FlushParam.Builder` to construct a `FlushParam` object.
 
@@ -32,7 +32,7 @@ Methods of `FlushParam.Builder`:
         <th>Parameters</th>
     </tr>
     <tr>
-        <td>withCollectionNames(List&lt;String> collectionNames)</td>
+        <td>withCollectionNames(List<String> collectionNames)</td>
         <td>Sets a list of collections to be flushed.</td>
         <td>collectionNames: a list of the names of the collections to be flushed.</td>
     </tr>
@@ -52,7 +52,7 @@ Methods of `FlushParam.Builder`:
         <td>milliseconds: The time interval in milliseconds for checking the flush status. </td>
     </tr>
     <tr>
-        <td>withSyncFlushWaitingTimeout(Long seconds)</td>
+        <td><br/>withSyncFlushWaitingTimeout(Long seconds)</td>
         <td>Sets the timeout period for sync mode. The value must be greater than zero, and cannot be greater than Constant.MAX_WAITING_FLUSHING_TIMEOUT. The default value is 60 seconds.</td>
         <td>seconds: A during of time in seconds to wait till timeout.</td>
     </tr>
@@ -67,7 +67,7 @@ The `FlushParam.Builder.build()` can throw the following exceptions:
 
 - ParamException: error if the parameter is invalid.
 
-#### Returns
+## Returns
 
 This method catches all the exceptions and returns an `R<FlushResponse>` object.
 
@@ -77,7 +77,7 @@ This method catches all the exceptions and returns an `R<FlushResponse>` object.
 
 - If the API succeeds, it returns a valid `FlushResponse` held by the `R` template. The `FlushResponse` contains a map of the collection name and a corresponding list of flushed segments. The map is internally used by other SDK methods such as `createIndex()`.
 
-#### Example
+## Example
 
 ```java
 import io.milvus.param.*;

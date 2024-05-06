@@ -7,7 +7,7 @@ package io.milvus.param;
 public class R<T>
 ```
 
-#### R.Status
+## R.Status
 
 R.Status is an enumeration of the status codes. Each R<T> object holds an integer value that can be mapped to the R.Status.
 
@@ -48,7 +48,7 @@ Note: Not all status codes are used, some of them are reserved.
 |  IndexNotExist         |  25       |  **This error is reserved and not used for now.*                                                  |
 |  EmptyCollection       |  26       |  **This error is reserved and not used for now.*                                                  |
 
-#### Methods
+## Methods
 
 <table>
     <tr>
@@ -73,7 +73,7 @@ Note: Not all status codes are used, some of them are reserved.
     </tr>
 </table>
 
-#### Example
+## Example
 
 ```java
 import io.milvus.param.*;

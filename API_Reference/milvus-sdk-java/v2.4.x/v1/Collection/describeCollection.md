@@ -6,7 +6,7 @@ A MilvusClient interface. This method shows the details of a collection, e.g. na
 R<DescribeCollectionResponse> describeCollection(DescribeCollectionParam requestParam);
 ```
 
-#### DescribeCollectionParam
+## DescribeCollectionParam
 
 Use the `DescribeCollectionParam.Builder` to construct a `DescribeCollectionParam` object.
 
@@ -39,7 +39,7 @@ The `DescribeCollectionParam.Builder.build()` can throw the following exceptions
 
 - ParamException: error if the parameter is invalid.
 
-#### Returns
+## Returns
 
 This method catches all the exceptions and returns an `R<DescribeCollectionResponse>` object.
 
@@ -49,7 +49,7 @@ This method catches all the exceptions and returns an `R<DescribeCollectionRespo
 
 - If the API succeeds, it returns a valid `DescribeCollectionResponse` held by the `R` template. You can use `DescCollResponseWrapper` to get the information.
 
-#### DescCollResponseWrapper
+## DescCollResponseWrapper
 
 A tool class to encapsulate the DescribeCollectionResponse. 
 
@@ -73,7 +73,7 @@ Methods of `DescCollResponseWrapper`:
 |  isDynamicFieldEnabled()          |  Get whether the collection dynamic field is enabled                                   |  N/A                            |  boolean         |
 |  getPartitionKeyField()           |  Get the partition key field.<br/>Return null if the partition key field doesn't exist. |  N/A                            |  FieldType       |
 
-#### Example
+## Example
 
 ```java
 import io.milvus.param.*;

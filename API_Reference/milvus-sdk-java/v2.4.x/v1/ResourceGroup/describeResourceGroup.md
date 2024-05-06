@@ -6,7 +6,7 @@ MilvusClient interface. This method drops a resource group by name.
 R<DescribeResourceGroupResponse> describeResourceGroup(DescribeResourceGroupParam requestParam);
 ```
 
-#### DescribeResourceGroupParam
+## DescribeResourceGroupParam
 
 Use the `DescribeResourceGroupParam.Builder` to construct a `DescribeResourceGroupParam` object.
 
@@ -39,7 +39,7 @@ The `DescribeResourceGroupParam.Builder.build()` can throw the following excepti
 
 - ParamException: error if the parameter is invalid.
 
-#### Returns
+## Returns
 
 This method catches all the exceptions and returns an `R<DescribeResourceGroupResponse>` object.
 
@@ -49,7 +49,7 @@ This method catches all the exceptions and returns an `R<DescribeResourceGroupRe
 
 - If the API succeeds, it returns a valid `DescribeResourceGroupResponse` held by the `R` template. You can use `DescribeResourceGroupResponse` to get resource group information.
 
-#### Example
+## Example
 
 ```java
 import io.milvus.param.DescribeResourceGroupParam;

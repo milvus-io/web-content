@@ -6,7 +6,7 @@ A MilvusClient interface. This method lists bulk insert tasks.
 R<ListImportTasksResponse> listBulkInsertTasks(ListBulkInsertTasksParam requestParam);
 ```
 
-#### ListBulkInsertTasksParam
+## ListBulkInsertTasksParam
 
 Use the `ListBulkInsertTasksParam.Builder` to construct a `ListBulkInsertTasksParam` object.
 
@@ -30,7 +30,7 @@ Methods of `ListBulkInsertTasksParam.Builder`:
     </tr>
     <tr>
         <td>withLimit(Integer limit)</td>
-        <td>Specify limit count of returned tasks, list all tasks if the value is 0.Default value is 0</td>
+        <td>Specify limit count of returned tasks, list all tasks if the value is 0.<br/>Default value is 0</td>
         <td>limit: The limit value to control the numbe of tasks returned.</td>
     </tr>
     <tr>
@@ -44,13 +44,13 @@ The `ListBulkInsertTasksParam.Builder.build()` can throw the following exception
 
 - ParamException: error if the parameter is invalid.
 
-#### Returns
+## Returns
 
 This method catches all the exceptions and returns an `R<ListImportTasksResponse>` object.
 
 The `ListImportTasksResponse` contains a list of `GetImportStateResponse`, which you can use `GetBulkInsertStateWrapper` to parse. Call the `getTasksList()` of `ListImportTasksResponse` to get all the tasks.
 
-#### Example
+## Example
 
 ```java
 import io.milvus.param.bulkinsert.*;

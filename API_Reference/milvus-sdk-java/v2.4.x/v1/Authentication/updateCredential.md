@@ -12,7 +12,7 @@ A MilvusClient interface. This method updates the password corresponding to a gi
 R<RpcStatus> updateCredential(UpdateCredentialParam requestParam);
 ```
 
-#### UpdateCredentialParam
+## UpdateCredentialParam
 
 Use the `UpdateCredentialParam.Builder` to construct an `UpdateCredentialParam` object.
 
@@ -55,7 +55,7 @@ The `UpdateCredentialParam.Builder.build()` can throw the following exceptions:
 
 - ParamException: error if the parameter is invalid.
 
-#### Returns
+## Returns
 
 This method catches all the exceptions and returns an `R<RpcStatus>` object.
 
@@ -65,7 +65,7 @@ This method catches all the exceptions and returns an `R<RpcStatus>` object.
 
 - If the API succeeds, it returns `R.Status.Success`.
 
-#### Example
+## Example
 
 ```java
 import io.milvus.param.*;

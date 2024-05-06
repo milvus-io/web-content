@@ -16,7 +16,7 @@ Methods of MilvusClient for connection:
 |  close(long maxWaitSeconds)<br/>                       |  Disconnects from a Milvus server with a configurable timeout value. Call this method before the application terminates.<br/>This method throws an `InterruptedException` exception if it is interrupted. |  maxWaitSeconds: The timeout period to wait for the RPC channel to close.                       |  N/A<br/>           |
 |  setLogLevel(LogLevel level)<br/>                      |  Set log level in runtime.<br/>Note: this method cannot change the log level configured by log4j configurations. It only hides some logs inside the MilvusClient class.                                   |  level: A log level                                                                             |  N/A                   |
 
-#### ConnectParam
+## ConnectParam
 
 Use the `ConnectParam.Builder` to construct a `ConnectParam` object for the MilvusClient.
 
@@ -40,23 +40,23 @@ Methods of `ConnectParam.Builder`:
     </tr>
     <tr>
         <td>withPort(int port)</td>
-        <td>Sets the connection port. The value must be greater than zero and less than 65536.</td>
+        <td>Sets the connection port. <br/>The value must be greater than zero and less than 65536.</td>
         <td>port: The connection port.</td>
     </tr>
     <tr>
         <td>withConnectTimeout(long connectTimeout, TimeUnit timeUnit)</td>
         <td>Sets the connection timeout value of client channel. The timeout value must be greater than zero. The default value is 10 seconds.</td>
-        <td>connectTimeout: The connection timeout period.timeUnit: The unit of timeout.</td>
+        <td>connectTimeout: The connection timeout period.<br/>timeUnit: The unit of timeout.</td>
     </tr>
     <tr>
         <td>withKeepAliveTime(long keepAliveTime, TimeUnit timeUnit)</td>
         <td>Sets the keep-alive time value of the client channel. The time value must be greater than zero. The default value is 55 seconds.</td>
-        <td>keepAliveTime: The keep-alive time period.timeUnit: The unit of time.</td>
+        <td>keepAliveTime: The keep-alive time period.<br/>timeUnit: The unit of time.</td>
     </tr>
     <tr>
         <td>withKeepAliveTimeout(long keepAliveTimeout, TimeUnit timeUnit)</td>
         <td>Sets the keep-alive timeout value of client channel. The timeout value must be greater than zero. The default value is 20 seconds.</td>
-        <td>keepAliveTimeout: The keep-alive timeout value.timeUnit: The unit of timeout.</td>
+        <td>keepAliveTimeout: The keep-alive timeout value.<br/>timeUnit: The unit of timeout.</td>
     </tr>
     <tr>
         <td>keepAliveWithoutCalls(boolean enable)</td>
@@ -64,19 +64,19 @@ Methods of `ConnectParam.Builder`:
         <td>enable: Boolean value to indicate if the keep-alive function is enabled. The keep-alive function is enabled if the value is set to true.</td>
     </tr>
     <tr>
-        <td>secure(boolean enable)withSecure(boolean enable)</td>
+        <td>secure(boolean enable)<br/>withSecure(boolean enable)</td>
         <td>Enables security for the client channel.</td>
         <td>enable: Security is enabled if the value is set to true.</td>
     </tr>
     <tr>
         <td>withIdleTimeout(long idleTimeout, TimeUnit timeUnit)</td>
         <td>Sets the value of idle timeout of the client channel. The timeout value must be greater than zero. The default value is 24 hours.</td>
-        <td>idleTimeout: The idle timeout period of the client channel.timeUnit: The unit of timeout.</td>
+        <td>idleTimeout: The idle timeout period of the client channel.<br/>timeUnit: The unit of timeout.</td>
     </tr>
     <tr>
         <td>withAuthorization(String username, String password)</td>
         <td>Sets the username and password for this connection.</td>
-        <td>username: The username of the current user.password: The password corresponding to the username.</td>
+        <td>username: The username of the current user.<br/>password: The password corresponding to the username.</td>
     </tr>
     <tr>
         <td>withClientKeyPath(String clientKeyPath)</td>
@@ -109,7 +109,7 @@ The `ConnectParam.Builder.build()` can throw the following exceptions:
 
 - ParamException: error if the parameter is invalid.
 
-#### RetryParam
+## RetryParam
 
 Use the `RetryParam.Builder` to construct a RetryParam object for the `MilvusClient`.
 
@@ -162,7 +162,7 @@ The `RetryParam.Builder.build()` can throw the following exceptions:
 
 - ParamException: error if the parameter is invalid.
 
-#### Example
+## Example
 
 - Without timeout setting for RPC call:
 

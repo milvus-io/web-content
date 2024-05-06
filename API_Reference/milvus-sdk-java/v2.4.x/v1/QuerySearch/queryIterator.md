@@ -6,7 +6,7 @@ MilvusClient interface. This method returns an iterator for you to iterate over 
 R<QueryIterator> queryIterator(QueryIteratorParam requestParam);
 ```
 
-#### QueryIteratorParam
+## QueryIteratorParam
 
 Use the `QueryIteratorParam.Builder` to construct a `QueryIteratorParam` object.
 
@@ -30,11 +30,11 @@ Methods of `QueryIteratorParam.Builder`:
     </tr>
     <tr>
         <td>withConsistencyLevel(ConsistencyLevelEnum consistencyLevel)</td>
-        <td>Sets the search consistency level(Optional).If the level is not set, will use the default consistency level of the collection.</td>
+        <td>Sets the search consistency level(Optional).<br/>If the level is not set, will use the default consistency level of the collection.</td>
         <td>consistencyLevel: The consistency level used in the query.</td>
     </tr>
     <tr>
-        <td>withPartitionNames(List&lt;String> partitionNames)</td>
+        <td>withPartitionNames(List<String> partitionNames)</td>
         <td>Sets partition names list to specify query scope (Optional).</td>
         <td>partitionNames: The name list of partitions to be queried.</td>
     </tr>
@@ -44,9 +44,9 @@ Methods of `QueryIteratorParam.Builder`:
         <td>partitionName: A partition name to be queried.</td>
     </tr>
     <tr>
-        <td>withOutFields(List&lt;String> outFields)</td>
-        <td>Specifies output scalar fields (Optional).If output fields are specified, the QueryResults returned by query() will contains the values of these fields. </td>
-        <td>outFields: The name list of fields to be outputed.</td>
+        <td>withOutFields(List<String> outFields)</td>
+        <td>Specifies output scalar fields (Optional).<br/>If output fields are specified, the QueryResults returned by query() will contains the values of these fields. </td>
+        <td><br/>outFields: The name list of fields to be outputed.</td>
     </tr>
     <tr>
         <td>addOutField(String fieldName)</td>
@@ -75,7 +75,7 @@ Methods of `QueryIteratorParam.Builder`:
     </tr>
     <tr>
         <td>withBatchSize(Long batchSize)</td>
-        <td>Specify a value to control the number of entities returned per batch. Must be a positive value.Default value is 1000, will return without batchSize.</td>
+        <td>Specify a value to control the number of entities returned per batch. Must be a positive value.<br/>Default value is 1000, will return without batchSize.</td>
         <td>batchSize: A value to define the number of entities returned per batch</td>
     </tr>
     <tr>
@@ -89,7 +89,7 @@ The `QueryIteratorParam.Builder.build()` can throw the following exceptions:
 
 - ParamException: error if the parameter is invalid.
 
-#### Returns
+## Returns
 
 This method catches all the exceptions and returns an `R<QueryIterator>` object.
 
@@ -99,7 +99,7 @@ This method catches all the exceptions and returns an `R<QueryIterator>` object.
 
 - If the API succeeds, it returns a valid `QueryIterator` held by the `R` template.
 
-#### QueryIterator
+## QueryIterator
 
 Methods of `QueryIterator`:
 
@@ -108,7 +108,7 @@ Methods of `QueryIterator`:
 |  next()     |  Return a batch of results. |  N/A            |  List<QueryResultsWrapper.RowRecord> |
 |  close()    |  Release the cache results. |  N/A            |  N/A                                 |
 
-#### Example
+## Example
 
 ```java
 import io.milvus.param.dml.*;

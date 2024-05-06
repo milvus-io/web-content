@@ -6,7 +6,7 @@ MilvusClient interface. This method releases partitions' data from memory.
 R<RpcStatus> releasePartitions(ReleasePartitionsParam requestParam);
 ```
 
-#### ReleasePartitionsParam
+## ReleasePartitionsParam
 
 Use the `ReleasePartitionsParam.Builder` to construct a `ReleasePartitionsParam` object.
 
@@ -29,7 +29,7 @@ Methods of `ReleasePartitionsParam.Builder`:
         <td>collectionName: The target collection name.</td>
     </tr>
     <tr>
-        <td>withPartitionNames(List&lt;String> partitionNames)</td>
+        <td>withPartitionNames(List<String> partitionNames)</td>
         <td>Set the partition names list. Partition names list cannot be null or empty.</td>
         <td>partitionNames: The name list of partitions to be released.</td>
     </tr>
@@ -49,7 +49,7 @@ The `ReleasePartitionsParam.Builder.build()` can throw the following exceptions:
 
 - ParamException: error if the parameter is invalid.
 
-#### Returns
+## Returns
 
 This method catches all the exceptions and returns an `R<RpcStatus>` object.
 
@@ -59,7 +59,7 @@ This method catches all the exceptions and returns an `R<RpcStatus>` object.
 
 - If the API succeeds, it returns `R.Status.Success`.
 
-#### Example
+## Example
 
 ```java
 import io.milvus.param.*;

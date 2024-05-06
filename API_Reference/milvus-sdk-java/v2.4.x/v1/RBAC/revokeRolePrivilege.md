@@ -6,7 +6,7 @@ MilvusClient interface. This method revokes the role privilege.
 R<RpcStatus> revokeRolePrivilege(RevokeRolePrivilegeParam requestParam);
 ```
 
-#### RevokeRolePrivilegeParam
+## RevokeRolePrivilegeParam
 
 Use the `RevokeRolePrivilegeParam.Builder` to construct a `RevokeRolePrivilegeParam` object.
 
@@ -54,7 +54,7 @@ The `RevokeRolePrivilegeParam.Builder.build()` can throw the following exception
 
 - ParamException: error if the parameter is invalid.
 
-#### Returns
+## Returns
 
 This method catches all the exceptions and returns an `R<RpcStatus>` object.
 
@@ -64,7 +64,7 @@ This method catches all the exceptions and returns an `R<RpcStatus>` object.
 
 - If the API succeeds, it returns `R.Status.Success`.
 
-#### Example
+## Example
 
 ```java
 import io.milvus.param.RevokeRolePrivilegeParam;

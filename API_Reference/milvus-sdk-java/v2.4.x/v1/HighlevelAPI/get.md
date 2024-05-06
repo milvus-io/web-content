@@ -6,7 +6,7 @@ The MilvusClient interface. This method gets entity(s) based on the primary fiel
 R<GetResponse> get(GetIdsParam requestParam);
 ```
 
-#### GetIdsParam
+## GetIdsParam
 
 Use the `GetIdsParam.Builder` to construct a `GetIdsParam` object.
 
@@ -29,17 +29,17 @@ Methods of `GetIdsParam.Builder`:
         <td>collectionName: The name of the collection to insert data into.</td>
     </tr>
     <tr>
-        <td>withPrimaryIds(List&lt;T> primaryIds)</td>
-        <td>Specifies id fields. ID cannot be empty or null.Note only support the value of primary key.</td>
+        <td>withPrimaryIds(List<T> primaryIds)</td>
+        <td>Specifies id fields. ID cannot be empty or null.<br/>Note only support the value of primary key.</td>
         <td>primaryIds: a list of primary field key objects.</td>
     </tr>
     <tr>
         <td>addPrimaryId(T primaryId)</td>
-        <td>Specifies primaryField id. PrimaryId cannot be empty or null.Note only support the value of primary key.</td>
+        <td>Specifies primaryField id. PrimaryId cannot be empty or null.<br/>Note only support the value of primary key.</td>
         <td>primaryId: The id of primary field key.</td>
     </tr>
     <tr>
-        <td>withOutputFields(List&lt;String> outputFields)</td>
+        <td>withOutputFields(List<String> outputFields)</td>
         <td>Specifies output fields (Optional).</td>
         <td>outputFields: A list of output field you need.</td>
     </tr>
@@ -59,7 +59,7 @@ The `GetIdsParam.Builder.build()` can throw the following exceptions:
 
 - ParamException: error if the parameter is invalid.
 
-#### Returns
+## Returns
 
 This method catches all the exceptions and returns an `R<GetResponse>` object.
 
@@ -69,7 +69,7 @@ This method catches all the exceptions and returns an `R<GetResponse>` object.
 
 - If the API succeeds, it returns a valid `GetResponse` held by the `R` template.
 
-#### Example
+## Example
 
 ```java
 import io.milvus.param.*;

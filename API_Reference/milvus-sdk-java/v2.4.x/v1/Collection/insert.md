@@ -6,7 +6,7 @@ A MilvusClient interface. This method inserts entities into a specified collecti
 R<MutationResult> insert(InsertParam requestParam);
 ```
 
-#### InsertParam
+## InsertParam
 
 Use the `InsertParam.Builder` to construct an `InsertParam` object.
 
@@ -34,14 +34,14 @@ Methods of `InsertParam.Builder`:
         <td>partitionName: The name of the partition to insert data into.</td>
     </tr>
     <tr>
-        <td>withFields(List&lt;InsertParam.Field> fields)</td>
-        <td>Sets the data to be inserted. The field list cannot be empty. Note that no input is required for the primary key field if auto_id is enabled.</td>
+        <td>withFields(List<InsertParam.Field> fields)</td>
+        <td>Sets the data to be inserted. The field list cannot be empty. <br/>Note that no input is required for the primary key field if auto_id is enabled.</td>
         <td>fields: A list of Field objects, each representing a field.</td>
     </tr>
     <tr>
-        <td>withRows(List&lt;JSONObject> rows)</td>
-        <td>Sets the row-based data to be inserted. The row list cannot be empty.Note that if the withFields() is called, the rows by withRows() will be ignored.</td>
-        <td>rows: A list of JSONObject objects, each representing a row in key-value format.- Requires List&lt;Boolean> if the data type is Bool.- Requires List&lt;Long> if the data type is Int64.- Requires List&lt;Integer> or List&lt;Short> if the data type is Int8/Int16/Int32.- Value is List&lt;Float> if the data type is Float.- Value is List&lt;Double> if the data type is Double.- Value is List&lt;String> if the data type is Varchar.- Value is List&lt;List&lt;?>> if the data type is Array, the inner List type must be equal to the element type of the Array field.- Value is List&lt;List&lt;Float>>, if the data type is FloatVector.- Value is List&lt;ByteBuffer>, if the data type is BinaryVector/Float16Vector/BFloat16Vector.- Value is List&lt;SortedMap&lt;Long, Float>> if the data type is SparseFloatVector.</td>
+        <td>withRows(List<JSONObject> rows)</td>
+        <td>Sets the row-based data to be inserted. The row list cannot be empty.<br/>Note that if the withFields() is called, the rows by withRows() will be ignored.</td>
+        <td>rows: A list of JSONObject objects, each representing a row in key-value format.<br/>- Requires List<Boolean> if the data type is Bool.<br/>- Requires List<Long> if the data type is Int64.<br/>- Requires List<Integer> or List<Short> if the data type is Int8/Int16/Int32.<br/>- Value is List<Float> if the data type is Float.<br/>- Value is List<Double> if the data type is Double.<br/>- Value is List<String> if the data type is Varchar.<br/>- Value is List<List<?>> if the data type is Array, the inner List type must be equal to the element type of the Array field.<br/>- Value is List<List<Float>>, if the data type is FloatVector.<br/>- Value is List<ByteBuffer>, if the data type is BinaryVector/Float16Vector/BFloat16Vector.<br/>- Value is List<SortedMap<Long, Float>> if the data type is SparseFloatVector.</td>
     </tr>
     <tr>
         <td>build()</td>
@@ -54,7 +54,7 @@ The `InsertParam.Builder.build()` can throw the following exceptions:
 
 - ParamException: error if the parameter is invalid.
 
-#### Field
+## Field
 
 A tool class to hold a data field.
 
@@ -64,7 +64,7 @@ Methods of `InsertParam.Field`:
 | -------------------------------------------- | -------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 |  Field(String name, List<?> values)<br/>  |  This class only provides a constructor to create a Field object.<br/>  |  name: The name of the data field. values:<br/>- Requires List<Boolean> if the data type is Bool.<br/>- Requires List<Long> if the data type is Int64.<br/>- Requires List<Integer> or List<Short> if the data type is Int8/Int16/Int32.<br/>- Requires List<Float> if the data type is Float.<br/>- Requires List<Double> if the data type is Double.<br/>- Requires List<String> if the data type is Varchar.<br/>- Requires List<List<?>> if the data type is Array, the inner List type must be equal to the element type of the Array field.<br/>- Requires List<List<Float>>, if the data type is FloatVector.<br/>- Requires List<ByteBuffer>, if the data type is BinaryVector/Float16Vector/BFloat16Vector.<br/>- Requires List<SortedMap<Long, Float>> if the data type is SparseFloatVector. |
 
-#### Returns
+## Returns
 
 This method catches all the exceptions and returns an `R<MutationResult>` object.
 
@@ -74,7 +74,7 @@ This method catches all the exceptions and returns an `R<MutationResult>` object
 
 - If the API succeeds, it returns a valid `MutationResult` held by the `R` template. You can use `MutationResultWrapper` to get the returned information.
 
-#### MutationResultWrapper
+## MutationResultWrapper
 
 A tool class to encapsulate the MutationResult. 
 
@@ -93,7 +93,7 @@ Methods of `MutationResultWrapper`:
 |  getDeleteCount()          |  Gets the row count of the deleted entities. Currently, this value is always equal to the input row count.                                                               |  long                  |
 |  getOperationTs()<br/>  |  Gets the timestamp of the operation marked by the server.                                                                                                               |  long                  |
 
-#### Example
+## Example
 
 ```java
 import io.milvus.param.*;

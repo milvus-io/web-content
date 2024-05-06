@@ -6,7 +6,7 @@ MilvusClient interface. This method returns the runtime metrics information of M
 R<GetMetricsResponse> getMetrics(GetMetricsParam requestParam);
 ```
 
-#### GetMetricsParam
+## GetMetricsParam
 
 Use the `GetMetricsParam.Builder` to construct a `GetMetricsParam` object.
 
@@ -24,7 +24,7 @@ Methods of `GetMetricsParam.Builder`:
         <th>Parameters</th>
     </tr>
     <tr>
-        <td>withRequest(String request)</td>
+        <td><br/>withRequest(String request)</td>
         <td>Set request in JSON format to retrieve metric information from server.</td>
         <td>request: Request string in JSON format</td>
     </tr>
@@ -39,7 +39,7 @@ The `GetMetricsParam.Builder.build()` can throw the following exceptions:
 
 - ParamException: error if the parameter is invalid.
 
-#### Returns
+## Returns
 
 This method catches all the exceptions and returns an `R<GetMetricsResponse>` object.
 
@@ -49,7 +49,7 @@ This method catches all the exceptions and returns an `R<GetMetricsResponse>` ob
 
 - If the API succeeds, it returns a valid `GetMetricsResponse` held by the `R` template.
 
-#### Example
+## Example
 
 ```java
 import io.milvus.param.*;
