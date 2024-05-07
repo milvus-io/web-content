@@ -75,7 +75,7 @@ index_params = MilvusClient.prepare_index_params()
 index_params.add_index(
     field_name="vector",
     metric_type="COSINE",
-    index_type=,
+    index_type="IVF_FLAT",
     index_name="vector_index"
 )
 
