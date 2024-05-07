@@ -33,7 +33,7 @@ Query coord manages topology and load balancing for the query nodes, and handoff
 
 ### Data coordinator (data coord)
 
-Data coord manages topology of the data nodes, maintains metadata, and triggers flush, compact, and other background data operations. 
+Data coord manages topology of the data nodes and index nodes, maintains metadata, and triggers flush, compact, and index building and other background data operations. 
 
 ## Worker nodes
 
@@ -57,7 +57,7 @@ Storage is the bone of the system, responsible for data persistence. It comprise
 
 ### Meta storage
 
-Meta storage stores snapshots of metadata such as collection schema, node status, and message consumption checkpoints. Storing metadata demands extremely high availability, strong consistency, and transaction support, so Milvus chose etcd for meta store. Milvus also uses etcd for service registration and health check. 
+Meta storage stores snapshots of metadata such as collection schema, and message consumption checkpoints. Storing metadata demands extremely high availability, strong consistency, and transaction support, so Milvus chose etcd for meta store. Milvus also uses etcd for service registration and health check. 
 
 ### Object storage
 
@@ -65,7 +65,7 @@ Object storage stores snapshot files of logs, index files for scalar and vector 
 
 ### Log broker 
 
-The log broker is a pub-sub system that supports playback. It is responsible for streaming data persistence, execution of reliable asynchronous queries, event notification, and return of query results. It also ensures integrity of the incremental data when the worker nodes recover from system breakdown. Milvus cluster uses Pulsar as log broker; Milvus standalone uses RocksDB as log broker. Besides, the log broker can be readily replaced with streaming data storage platforms such as Kafka and Pravega. 
+The log broker is a pub-sub system that supports playback. It is responsible for streaming data persistence and event notification. It also ensures integrity of the incremental data when the worker nodes recover from system breakdown. Milvus cluster uses Pulsar as log broker; Milvus standalone uses RocksDB as log broker. Besides, the log broker can be readily replaced with streaming data storage platforms such as Kafka. 
 
 Milvus is built around log broker and follows the "log as data" principle, so Milvus does not maintain a physical table but guarantees data reliability through logging persistence and snapshot logs. 
 
