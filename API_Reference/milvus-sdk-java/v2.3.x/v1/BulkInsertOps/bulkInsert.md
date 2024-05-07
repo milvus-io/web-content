@@ -6,7 +6,7 @@ A MilvusClient interface. This method imports data from external files, currentl
 R<ImportResponse> bulkInsert(BulkInsertParam requestParam);
 ```
 
-#### BulkInsertParam{#bulkinsertparam}
+## BulkInsertParam
 
 Use the `BulkInsertParam.Builder` to construct a `BulkInsertParam` object.
 
@@ -54,7 +54,7 @@ The `BulkInsertParam.Builder.build()` can throw the following exceptions:
 
 - ParamException: error if the parameter is invalid.
 
-#### Returns{#returns}
+## Returns
 
 This method catches all the exceptions and returns an `R<ImportResponse>` object.
 
@@ -64,7 +64,7 @@ This method catches all the exceptions and returns an `R<ImportResponse>` object
 
 - If the API succeeds, it returns a valid `ImportResponse` held by the `R` template. You can use `ImportResponse` to get the task ID.
 
-#### Example{#example}
+## Example
 
 ```java
 import io.milvus.param.bulkinsert.*;
