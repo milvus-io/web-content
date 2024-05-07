@@ -21,11 +21,15 @@ The code snippets on this page use new <a href="https://milvus.io/api-reference/
 
 ## Enable partition key
 
-To demonstrate the use of partition keys, we will continue to use the example dataset that contains over 5,000 articles, and the __publication__ field will serve as the partition key. 
+To demonstrate the use of partition keys, we will continue to use the example dataset that contains over 5,000 articles, and the __publication__ field will serve as the partition key.
+
+In the example code below, `num_partitions` determines the number of partitions that will be created. By default, it is set to `64`. We recommend you retain the default value.
 
 ```python
 import json, time
-from pymilvus import connections, FieldSchema, CollectionSchema, DataType, Collection, utility
+import os
+
+from pymilvus import MilvusClient, DataType
 
 COLLECTION_NAME="medium_articles_2020" # Set your collection name
 DATASET_PATH="{}/../medium_articles_2020_dpr.json".format(os.path.dirname(__file__)) # Set your dataset path
@@ -36,9 +40,10 @@ client = MilvusClient(
 )
 
 # 2. Define collection schema
-schema = MilvusClient.create_schema(
+schema = client.create_schema(
     auto_id=True,
-    partition_key_field="publication"
+    partition_key_field="publication",
+    num_partitions=64 # Number of partitions. Defaults to 64.
 )
 
 schema.add_field(field_name="id", datatype=DataType.INT64, is_primary=True)
@@ -50,11 +55,12 @@ schema.add_field(field_name="publication", datatype=DataType.VARCHAR, max_length
 schema.add_field(field_name="claps", datatype=DataType.INT64)
 schema.add_field(field_name="responses", datatype=DataType.INT64)
 ```
+
 After you have defined the fields, set other necessary parameters.
 
 ```python
 # 3. Define index parameters
-index_params = MilvusClient.prepare_index_params()
+index_params = client.prepare_index_params()
 
 index_params.add_index(
     field_name="title_vector",
@@ -139,7 +145,10 @@ res = client.search(
     search_params={"metric_type": "L2", "params": {}}
 )
 
-print(result)
+print(res)
+
+# output:
+# [[{'id': 449589529787268425, 'distance': 0.36103835701942444, 'entity': {'claps': 83, 'title': 'The Hidden Side Effect of the Coronavirus', 'reading_time': 8}}, {'id': 449589529787262437, 'distance': 0.36103835701942444, 'entity': {'claps': 83, 'title': 'The Hidden Side Effect of the Coronavirus', 'reading_time': 8}}, {'id': 449589529787274413, 'distance': 0.36103835701942444, 'entity': {'claps': 83, 'title': 'The Hidden Side Effect of the Coronavirus', 'reading_time': 8}}]]
 ```
 
 ## Use cases
