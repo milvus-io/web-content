@@ -154,7 +154,7 @@ end_time = time.time()
 
 for hits in result:
     for hit in hits:
-        print(f"hit: {hit}, random field: {hit.get('random')}")
+        print(f"hit: {hit}, random field: {hit.get('entity').get('random')}")
 print(search_latency_fmt.format(end_time - start_time))
 
 # -----------------------------------------------------------------------------
@@ -209,7 +209,7 @@ end_time = time.time()
 
 for hits in result:
     for hit in hits:
-        print(f"hit: {hit}, random field: {hit.get('random')}")
+        print(f"hit: {hit}, random field: {hit.get('entity').get('random')}")
 print(search_latency_fmt.format(end_time - start_time))
 
 ###############################################################################
