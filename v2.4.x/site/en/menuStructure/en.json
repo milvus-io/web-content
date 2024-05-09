@@ -26,13 +26,12 @@
       "order": 1
     },
     {
-      "id": "roadmap",
+      "id": "roadmap.md",
       "title": "Milvus Roadmap",
       "label1": "about",
       "label2": "",
       "label3": "",
-      "order": 2,
-      "outLink": "https://wiki.lfaidata.foundation/display/MIL/Milvus+Long+Term+Roadmap+and+Time+schedule"
+      "order": 2
     },
     {
       "id": "release_notes.md",
@@ -49,6 +48,14 @@
       "label2": "",
       "label3": "",
       "order": 4
+    },
+    {
+      "id": "comparison.md",
+      "title": "Comparison",
+      "label1": "about",
+      "label2": "",
+      "label3": "",
+      "order": 5
     },
     {
       "id": "getstarted",
@@ -325,7 +332,7 @@
     },
     {
       "id": "glossary.md",
-      "title": "Glossary",
+      "title": "Terminology",
       "label1": "concepts",
       "label2": "",
       "order": 10
