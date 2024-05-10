@@ -25,7 +25,7 @@ To create embeddings in action, refer to [Using PyMilvus's Model To Generate Tex
 |  [sentence-transformer](https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/SentenceTransformerEmbeddingFunction/SentenceTransformerEmbeddingFunction.md) |  Dense  |  Open-sourced        |
 |  [bm25](https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/BM25EmbeddingFunction/BM25EmbeddingFunction.md)                                |  Sparse |  Open-sourced        |
 |  [Splade](https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/SpladeEmbeddingFunction/SpladeEmbeddingFunction.md)                            |  Sparse |  Open-sourced        |
-|  [bge-m3](https://milvus.io/api-reference/pymilvus/v2.4.x/Model/BGEM3EmbeddingFunction/BGEM3EmbeddingFunction.md)                             |  Hybrid |  Open-sourced        |
+|  [bge-m3](https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/BGEM3EmbeddingFunction/BGEM3EmbeddingFunction.md)                             |  Hybrid |  Open-sourced        |
 |  [voyageai](https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/VoyageEmbeddingFunction/VoyageEmbeddingFunction.md)                            |  Dense  |  API                 |
 ## Example 1: Use default embedding function to generate dense vectors
 
