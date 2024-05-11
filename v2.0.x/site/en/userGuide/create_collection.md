@@ -62,7 +62,7 @@ collection_name = "book"
 ```javascript
 const params = {
   collection_name: "book",
-  description: "Test book search"
+  description: "Test book search",
   fields: [
     {
       name: "book_intro",
