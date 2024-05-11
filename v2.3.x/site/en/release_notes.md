@@ -7,6 +7,32 @@ title: Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.3.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.3.15
+
+Release date: May 11, 2024
+
+| Milvus version | Python SDK version | Java SDK version | Go SDK version | Node.js SDK version |
+|----------------|--------------------|------------------|----------------|---------------------|
+| 2.3.15         | 2.3.7              | 2.3.6            | 2.3.6          | 2.3.5               |
+
+This release comes with several enhancements and bug fixes to improve security and stability. One of the improvements is the inclusion of the channel checkpoint in the flush response. Another enhancement is the ability to check whether autoID is enabled during data insertion, which optimizes the data migration using Milvus-CDC. 
+
+The bug fixes address issues such as empty segments in meta, and incorrect data types during data insertion according to the schema. A critical patch has also been implemented to solve the consistent failure and retries of the syncDistribution request to the delegator. We highly recommend updating to the latest version to benefit from these fixes.
+
+### Improvements
+
+- Supported return channel checkpoint info in flush response ([#32683](https://github.com/milvus-io/milvus/pull/32683))
+- Add config to check id during inserting data when autoID enabled  ([#32840](https://github.com/milvus-io/milvus/pull/32840))
+
+### Critical Bug Fixes
+
+- Fixing a bug where the syncDistribution request to the delegator consistently fails and retries persistently. ([#32923](https://github.com/milvus-io/milvus/pull/32923))
+
+### Other Bug Fixes
+
+- Fixed a bug where the system could generate empty segments. Added support for the compactor to clean up empty segments. ([#32690](https://github.com/milvus-io/milvus/pull/32690))
+- Fixed a bug that involved validating whether the input data types match the schema. ([#32790](https://github.com/milvus-io/milvus/pull/32790), [#32845](https://github.com/milvus-io/milvus/pull/32845))
+
 ## v2.3.14
 
 Release date: Apr 29, 2024
