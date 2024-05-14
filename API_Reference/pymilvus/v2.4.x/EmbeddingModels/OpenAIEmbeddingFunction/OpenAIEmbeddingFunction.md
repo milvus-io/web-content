@@ -48,7 +48,7 @@ OpenAIEmbeddingFunction(
 from pymilvus import model
 
 openai_ef = model.dense.OpenAIEmbeddingFunction(
-    model_name='text-embedding-3-large', *# Specify the model name*
-    dimensions=512 *# Set the embedding dimensionality according to MRL feature.*
+    model_name='text-embedding-3-large', # Specify the model name
+    dimensions=512 # Set the embedding dimensionality according to MRL feature.
 )
 ```
