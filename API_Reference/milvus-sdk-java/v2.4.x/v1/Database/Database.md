@@ -1,3 +1,0 @@
-# Database
-
-<DocCardList />

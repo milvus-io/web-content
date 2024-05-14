@@ -1,3 +1,0 @@
-# Query/Search
-
-<DocCardList />

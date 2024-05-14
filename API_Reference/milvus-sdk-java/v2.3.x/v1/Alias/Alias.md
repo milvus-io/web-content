@@ -1,3 +1,0 @@
-# Alias
-
-<DocCardList />

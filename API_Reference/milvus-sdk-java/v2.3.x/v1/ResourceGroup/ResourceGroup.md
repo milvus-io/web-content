@@ -1,3 +1,0 @@
-# Resource Group
-
-<DocCardList />
