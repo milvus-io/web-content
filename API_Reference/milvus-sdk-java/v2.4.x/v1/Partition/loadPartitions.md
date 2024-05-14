@@ -29,7 +29,7 @@ Methods of `LoadPartitionsParam.Builder`:
         <td>collectionName: The target collection name.</td>
     </tr>
     <tr>
-        <td>withPartitionNames(List<String> partitionNames)</td>
+        <td>withPartitionNames(List\<String> partitionNames)</td>
         <td>Set the partition names list. Partition names list cannot be null or empty.</td>
         <td>partitionNames: <br/>The name list of partitions to be loaded.</td>
     </tr>
@@ -45,12 +45,12 @@ Methods of `LoadPartitionsParam.Builder`:
     </tr>
     <tr>
         <td>withSyncLoadWaitingInterval(Long milliseconds)</td>
-        <td>Set the waiting interval for sync mode. In sync mode, the client constantly checks partition load state by interval.<br/>Interval must be greater than zero, and cannot be greater than `Constant.MAX_WAITING_LOADING_INTERVAL`.<br/>Default value is 500 milliseconds</td>
+        <td>Set the waiting interval for sync mode. In sync mode, the client constantly checks partition load state by interval.<br/>Interval must be greater than zero, and cannot be greater than <code>Constant.MAX_WAITING_LOADING_INTERVAL</code>.<br/>Default value is 500 milliseconds</td>
         <td>milliseconds: interval value(units: millisecond)</td>
     </tr>
     <tr>
         <td>withSyncLoadWaitingTimeout(Long seconds)</td>
-        <td>Set the timeout value for sync mode.<br/>Timeout value must be greater than zero, and cannot be greater than `Constant.MAX_WAITING_LOADING_TIMEOUT`.<br/>Default value is 60 seconds.</td>
+        <td>Set the timeout value for sync mode.<br/>Timeout value must be greater than zero, and cannot be greater than <code>Constant.MAX_WAITING_LOADING_TIMEOUT</code>.<br/>Default value is 60 seconds.</td>
         <td>seconds: timeout value(units: second)</td>
     </tr>
     <tr>

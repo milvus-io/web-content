@@ -7,19 +7,80 @@ package io.milvus.grpc;
 public enum DataType
 ```
 
-|  **Type**     |  **Code** |  **Description**                                                                                                             |
-| ------------- | --------- | ---------------------------------------------------------------------------------------------------------------------------- |
-|  None         |  0        |  For internal usage.                                                                                                         |
-|  Bool         |  1        |                                                                                                                              |
-|  Int8         |  2        |                                                                                                                              |
-|  Int16        |  3        |                                                                                                                              |
-|  Int32        |  4        |                                                                                                                              |
-|  Int64        |  5        |                                                                                                                              |
-|  Float        |  10       |                                                                                                                              |
-|  Double       |  11       |                                                                                                                              |
-|  String       |  20       |  Reserved. Do not use this.                                                                                                  |
-|  VarChar      |  21       |  Variable-length string with a limit on the maximum length.                                                                  |
-|  Array        |  22       |  Array data type. The element type can be one of the data types: Int8, Int16, Int32, Int64, Varchar, Bool, Float, or Double. |
-|  JSON         |  23       |                                                                                                                              |
-|  BinaryVector |  100      |  Binary vector. Each dimension is represented by 1 bit.                                                                      |
-|  FloatVector  |  101      |  Float vector. Each dimension is represented by 1 float(4 bits) value.                                                       |
+<table>
+   <tr>
+     <th><strong>Type</strong></th>
+     <th><strong>Code</strong></th>
+     <th><strong>Description</strong></th>
+   </tr>
+   <tr>
+     <td>None</td>
+     <td>0</td>
+     <td>For internal usage.</td>
+   </tr>
+   <tr>
+     <td>Bool</td>
+     <td>1</td>
+     <td></td>
+   </tr>
+   <tr>
+     <td>Int8</td>
+     <td>2</td>
+     <td></td>
+   </tr>
+   <tr>
+     <td>Int16</td>
+     <td>3</td>
+     <td></td>
+   </tr>
+   <tr>
+     <td>Int32</td>
+     <td>4</td>
+     <td></td>
+   </tr>
+   <tr>
+     <td>Int64</td>
+     <td>5</td>
+     <td></td>
+   </tr>
+   <tr>
+     <td>Float</td>
+     <td>10</td>
+     <td></td>
+   </tr>
+   <tr>
+     <td>Double</td>
+     <td>11</td>
+     <td></td>
+   </tr>
+   <tr>
+     <td>String</td>
+     <td>20</td>
+     <td>Reserved. Do not use this.</td>
+   </tr>
+   <tr>
+     <td>VarChar</td>
+     <td>21</td>
+     <td>Variable-length string with a limit on the maximum length.</td>
+   </tr>
+   <tr>
+     <td>Array</td>
+     <td>22</td>
+     <td>Array data type. The element type can be one of the data types: Int8, Int16, Int32, Int64, Varchar, Bool, Float, or Double.</td>
+   </tr>
+   <tr>
+     <td>JSON</td>
+     <td>23</td>
+     <td></td>
+   </tr>
+   <tr>
+     <td>BinaryVector</td>
+     <td>100</td>
+     <td>Binary vector. Each dimension is represented by 1 bit.</td>
+   </tr>
+   <tr>
+     <td>FloatVector</td>
+     <td>101</td>
+     <td>Float vector. Each dimension is represented by 1 float(4 bits) value.</td>
+   </tr>
+</table>

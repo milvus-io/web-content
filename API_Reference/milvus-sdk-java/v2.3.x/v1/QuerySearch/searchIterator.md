@@ -34,7 +34,7 @@ Methods of `SearchIteratorParam.Builder`:
         <td>consistencyLevel: The consistency level used in the search.</td>
     </tr>
     <tr>
-        <td>withPartitionNames(List<String> partitionNames)</td>
+        <td>withPartitionNames(List\<String> partitionNames)</td>
         <td>Sets partition names list to specify search scope (Optional).</td>
         <td>partitionNames: The name list of partitions to be searched.</td>
     </tr>
@@ -44,7 +44,7 @@ Methods of `SearchIteratorParam.Builder`:
         <td>partitionName: A partition name to be searched.</td>
     </tr>
     <tr>
-        <td>withOutFields(List<String> outFields)</td>
+        <td>withOutFields(List\<String> outFields)</td>
         <td>Specifies output scalar fields (Optional).</td>
         <td><br/>outFields: The name list of fields to be outputed.</td>
     </tr>
@@ -55,7 +55,7 @@ Methods of `SearchIteratorParam.Builder`:
     </tr>
     <tr>
         <td>withExpr(String expr)</td>
-        <td>[object Object],[object Object],[object Object],[object Object],[object Object]</td>
+        <td></td>
         <td>expr: The expression to filter scalar fields.</td>
     </tr>
     <tr>
@@ -74,9 +74,9 @@ Methods of `SearchIteratorParam.Builder`:
         <td>topK: The topk value.</td>
     </tr>
     <tr>
-        <td>withVectors(List<?> vectors)</td>
+        <td>withVectors(List\<?> vectors)</td>
         <td>Set the target vectors. Up to 16384 vectors allowed.</td>
-        <td>vectors: <br/>- If target field type is FloatVector, List< List<Float>> is required.<br/>- If target field type is BinaryVector vector, List<ByteBuffer> is required.</td>
+        <td>vectors: <br/>- If target field type is FloatVector, List\< List\<Float>gt; is required.<br/>- If target field type is BinaryVector vector, List\<ByteBuffer> is required.</td>
     </tr>
     <tr>
         <td>withRoundDecimal(Integer decimal)</td>
@@ -85,7 +85,7 @@ Methods of `SearchIteratorParam.Builder`:
     </tr>
     <tr>
         <td>withParams(String params)</td>
-        <td>Specifies the parameters of search in JSON format. The followings are valid keys of param:<br/>1. special parameters for index, such as "nprobe", "ef", "search_k"<br/>2. metric type with key "metric_type" and a string value such as "L2", "IP".<br/>3. offset for pagination with key "offset" and an integer value</td>
+        <td>Specifies the parameters of search in JSON format. The followings are valid keys of param:<br/>1. special parameters for index, such as "nprobe", "ef", "search<em>k"<br/>2. metric type with key "metric</em>type" and a string value such as "L2", "IP".<br/>3. offset for pagination with key "offset" and an integer value</td>
         <td>params: A JSON format string for extra parameters.</td>
     </tr>
     <tr>
@@ -123,10 +123,26 @@ This method catches all the exceptions and returns an `R<SearchIterator>` object
 
 Methods of `SearchIterator`:
 
-|  **Method** |  **Description**            |  **Parameters** |  **Returns**                         |
-| ----------- | --------------------------- | --------------- | ------------------------------------ |
-|  next()     |  Return a batch of results. |  N/A<br/>    |  List<QueryResultsWrapper.RowRecord> |
-|  close()    |  Release the cache results. |  N/A            |  N/A                                 |
+<table>
+   <tr>
+     <th><strong>Method</strong></th>
+     <th><strong>Description</strong></th>
+     <th><strong>Parameters</strong></th>
+     <th><strong>Returns</strong></th>
+   </tr>
+   <tr>
+     <td>next()</td>
+     <td>Return a batch of results.</td>
+     <td>N/A<br/></td>
+     <td>List\<QueryResultsWrapper.RowRecord></td>
+   </tr>
+   <tr>
+     <td>close()</td>
+     <td>Release the cache results.</td>
+     <td>N/A</td>
+     <td>N/A</td>
+   </tr>
+</table>
 
 ## Example
 

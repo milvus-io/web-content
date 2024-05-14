@@ -34,7 +34,7 @@ Methods of `BulkInsertParam.Builder`:
         <td>partitionName: The name of the target partition.</td>
     </tr>
     <tr>
-        <td>withFiles(List<String> files)</td>
+        <td>withFiles(List\<String> files)</td>
         <td>Sets the path of the files. The paths cannot be empty or null.<br/>Each file path must be a relative path under the Milvus storage bucket.</td>
         <td>files: A file paths list. Currently, you can only input one row-based JSON file for each call.</td>
     </tr>

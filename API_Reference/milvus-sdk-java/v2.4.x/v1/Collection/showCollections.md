@@ -24,7 +24,7 @@ Methods of `ShowCollectionsParam.Builder`:
         <th>Parameters</th>
     </tr>
     <tr>
-        <td>withCollectionNames(List<String> collectionNames)</td>
+        <td>withCollectionNames(List\<String> collectionNames)</td>
         <td>Sets a list of collection names. If the list is empty, the method will return all the collections in database.<br/>Collection name cannot be empty or null.</td>
         <td>collectionNames: A list of the collection names to show.</td>
     </tr>
@@ -65,10 +65,26 @@ ShowCollResponseWrapper wrapper = new ShowCollResponseWrapper(showCollectionsRes
 
 Methods of `ShowCollResponseWrapper`:
 
-|  **Method**                                     |  **Description**                                                                        |  **Parameters**                         |  **Returns**          |
-| ----------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------- | --------------------- |
-|  getCollectionsInfo()<br/>                   |  Returns a list of CollectionInfo objects. Each CollectionInfo represents a collection. |  N/A                                    |  List<CollectionInfo> |
-|  getCollectionInfoByName(String collectionName) |  Gets a CollectionInfo object by collection name.<br/>                               |  `collectionName`: The collection name. |  CollectionInfo       |
+<table>
+   <tr>
+     <th><strong>Method</strong></th>
+     <th><strong>Description</strong></th>
+     <th><strong>Parameters</strong></th>
+     <th><strong>Returns</strong></th>
+   </tr>
+   <tr>
+     <td>getCollectionsInfo()<br/></td>
+     <td>Returns a list of CollectionInfo objects. Each CollectionInfo represents a collection.</td>
+     <td>N/A</td>
+     <td>List\<CollectionInfo></td>
+   </tr>
+   <tr>
+     <td>getCollectionInfoByName(String collectionName)</td>
+     <td>Gets a CollectionInfo object by collection name.<br/></td>
+     <td><code>collectionName</code>: The collection name.</td>
+     <td>CollectionInfo</td>
+   </tr>
+</table>
 
 ## CollectionInfo
 
@@ -76,12 +92,33 @@ A tool class to store a collection's information.
 
 Methods of `ShowCollResponseWrapper.CollectionInfo`:
 
-|  **Method**                       |  **Description**                                                                                         |  **Returns** |
-| --------------------------------- | -------------------------------------------------------------------------------------------------------- | ------------ |
-|  getName()                        |  Gets the name of the collection.                                                                        |  String      |
-|  getId()                          |  Gets the ID of the collection.                                                                          |  long        |
-|  getUtcTimestamp()                |  Gets a UTC timestamp that indicates when this collection is created. This method is for internal usage. |  long        |
-|  getInMemoryPercentage()<br/>  |  Load percentage on query node.<br/>                                                                  |  long        |
+<table>
+   <tr>
+     <th><strong>Method</strong></th>
+     <th><strong>Description</strong></th>
+     <th><strong>Returns</strong></th>
+   </tr>
+   <tr>
+     <td>getName()</td>
+     <td>Gets the name of the collection.</td>
+     <td>String</td>
+   </tr>
+   <tr>
+     <td>getId()</td>
+     <td>Gets the ID of the collection.</td>
+     <td>long</td>
+   </tr>
+   <tr>
+     <td>getUtcTimestamp()</td>
+     <td>Gets a UTC timestamp that indicates when this collection is created. This method is for internal usage.</td>
+     <td>long</td>
+   </tr>
+   <tr>
+     <td>getInMemoryPercentage()<br/></td>
+     <td>Load percentage on query node.<br/></td>
+     <td>long</td>
+   </tr>
+</table>
 
 ## Example
 

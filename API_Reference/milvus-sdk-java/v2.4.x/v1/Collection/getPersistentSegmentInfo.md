@@ -56,16 +56,53 @@ package io.milvus.grpc;
 public enum SegmentState
 ```
 
-|  **Type**         |  **Code** |  **Description**                                  |
-| ----------------- | --------- | ------------------------------------------------- |
-|  SegmentStateNone |  0        |  For internal usage.                              |
-|  NotExist         |  1        |  For internal usage.                              |
-|  Growing          |  2        |  A growing segment in query node.                 |
-|  Sealed           |  3        |  The segment is sealed and waiting to be flushed. |
-|  Flushed          |  4        |  The segment has been flushed to storage.         |
-|  Flushing         |  5        |  The server is flushing this segment.             |
-|  Dropped          |  6        |  The segment has been marked as deleted.          |
-|  Importing        |  7        |  Reserved for bulkinsert interface.               |
+<table>
+   <tr>
+     <th><strong>Type</strong></th>
+     <th><strong>Code</strong></th>
+     <th><strong>Description</strong></th>
+   </tr>
+   <tr>
+     <td>SegmentStateNone</td>
+     <td>0</td>
+     <td>For internal usage.</td>
+   </tr>
+   <tr>
+     <td>NotExist</td>
+     <td>1</td>
+     <td>For internal usage.</td>
+   </tr>
+   <tr>
+     <td>Growing</td>
+     <td>2</td>
+     <td>A growing segment in query node.</td>
+   </tr>
+   <tr>
+     <td>Sealed</td>
+     <td>3</td>
+     <td>The segment is sealed and waiting to be flushed.</td>
+   </tr>
+   <tr>
+     <td>Flushed</td>
+     <td>4</td>
+     <td>The segment has been flushed to storage.</td>
+   </tr>
+   <tr>
+     <td>Flushing</td>
+     <td>5</td>
+     <td>The server is flushing this segment.</td>
+   </tr>
+   <tr>
+     <td>Dropped</td>
+     <td>6</td>
+     <td>The segment has been marked as deleted.</td>
+   </tr>
+   <tr>
+     <td>Importing</td>
+     <td>7</td>
+     <td>Reserved for bulkinsert interface.</td>
+   </tr>
+</table>
 
 ## Example
 

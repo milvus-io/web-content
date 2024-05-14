@@ -39,7 +39,7 @@ Methods of `CreateCollectionParam.Builder`:
         <td>description: The description of the collection to create.</td>
     </tr>
     <tr>
-        <td>withFieldTypes(List<FieldType> fieldTypes)</td>
+        <td>withFieldTypes(List\<FieldType> fieldTypes)</td>
         <td>Sets the collection schema. The collection schema cannot be empty.</td>
         <td>fieldTypes: a list of FieldType objects, each representing a field schema.</td>
     </tr>
@@ -81,20 +81,73 @@ FieldType ft = builder.build()
 
 Methods of `FieldType.Builder`:
 
-|  **Method**                                      |  **Description**                                                                                                                                                                                                                                                                                                                                                                                                |  **Parameters**                                                                                                                                                                               |
-| ------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|  withName(String name)                           |  Sets the name of the field. The name cannot be empty or null.                                                                                                                                                                                                                                                                                                                                                  |  name: The name of the field.                                                                                                                                                                 |
-|  withPrimaryKey(boolean primaryKey)<br/>      |  Sets the field as the primary key field. Only fields whose data type is INT64 or VARCHAR can be set as the primary key field. The value is false by default.<br/>                                                                                                                                                                                                                                           |  primaryKey: A boolean value that defines if the field is the primary key field. The value true means that the field is the primary key field while the value false means it is not.<br/>  |
-|  withDescription(String description)             |  Sets the field description. The description can be empty. The default value is an empty string.                                                                                                                                                                                                                                                                                                                |  description: The description of the field.                                                                                                                                                   |
-|  withDataType(DataType dataType)                 |  Sets the data type for the field. Please refer to DataType in Misc.                                                                                                                                                                                                                                                                                                                                            |  dataType: The data type of the field.                                                                                                                                                        |
-|  withElementType(DataType elementType)           |  Sets the element type for Array type field.<br/> Valid element types for Array: Int8, Int16, Int32, Int64, Varchar, Bool, Float, Double                                                                                                                                                                                                                                                                     |  elementType: element type of the array.                                                                                                                                                      |
-|  addTypeParam(String key, String value)<br/>  |  Adds a parameter pair for the field. This is mainly used to set extra parameters for the vector field and varchar field.                                                                                                                                                                                                                                                                                       |  key: The parameter key.<br/> value: The parameter value.                                                                                                                                  |
-|  withDimension(Integer dimension)                |  Sets the dimension of a vector field. The dimension value must be greater than zero. This method internally calls addTypeParam() to store the dimension value.                                                                                                                                                                                                                                                 |  dimension: The dimension of the vector field.                                                                                                                                                |
-|  withMaxLength(Integer maxLength)                |  Sets the maximum length of a Varchar field. The value must be greater than zero. This method internally calls the addTypeParam() to store the maximum length value.                                                                                                                                                                                                                                            |  maxLength: The maximum length of the varchar field.                                                                                                                                          |
-|  withMaxCapacity(Integer maxCapacity)            |  Sets the max capacity of an Array field. <br/>The valid capacity value range is [1, 4096]                                                                                                                                                                                                                                                                                                                       |  maxCapacity: The max capacity of the array.                                                                                                                                                  |
-|  withAutoID(boolean autoID)<br/>              |  Enables auto-ID function for the field. Note that the auto-ID function can only be enabled on primary key field.<br/>If auto-ID function is enabled, Milvus automatically generates a unique ID for each entity so that values for the primary key field do not need to be provided during data insertion. If auto-ID is disabled, values for the primary key field need to be provided during data insertion.  |  autoID: A boolean value that defines if the primary keys are automatically generated. The value true means that auto-ID is enabled, while the value false means it is not.<br/>           |
-|  withPartitionKey(boolean partitionKey)<br/>  |  Sets the field to be partition key.<br/>A partition key field's values are hashed and distributed to different logic partitions.<br/>Only int64 and varchar type fields can be a partition key. The primary key field can not be a partition key.                                                                                                                                                                |  partitionKey: A boolean value that defines if this field is a partition key field. The value true is a partition key, false is not.                                                          |
-|  build()                                         |  Create a FieldType object.                                                                                                                                                                                                                                                                                                                                                                                     |  N/A                                                                                                                                                                                          |
+<table>
+   <tr>
+     <th><strong>Method</strong></th>
+     <th><strong>Description</strong></th>
+     <th><strong>Parameters</strong></th>
+   </tr>
+   <tr>
+     <td>withName(String name)</td>
+     <td>Sets the name of the field. The name cannot be empty or null.</td>
+     <td>name: The name of the field.</td>
+   </tr>
+   <tr>
+     <td>withPrimaryKey(boolean primaryKey)<br/></td>
+     <td>Sets the field as the primary key field. Only fields whose data type is INT64 or VARCHAR can be set as the primary key field. The value is false by default.<br/></td>
+     <td>primaryKey: A boolean value that defines if the field is the primary key field. The value true means that the field is the primary key field while the value false means it is not.<br/></td>
+   </tr>
+   <tr>
+     <td>withDescription(String description)</td>
+     <td>Sets the field description. The description can be empty. The default value is an empty string.</td>
+     <td>description: The description of the field.</td>
+   </tr>
+   <tr>
+     <td>withDataType(DataType dataType)</td>
+     <td>Sets the data type for the field. Please refer to DataType in Misc.</td>
+     <td>dataType: The data type of the field.</td>
+   </tr>
+   <tr>
+     <td>withElementType(DataType elementType)</td>
+     <td>Sets the element type for Array type field.<br/> Valid element types for Array: Int8, Int16, Int32, Int64, Varchar, Bool, Float, Double</td>
+     <td>elementType: element type of the array.</td>
+   </tr>
+   <tr>
+     <td>addTypeParam(String key, String value)<br/></td>
+     <td>Adds a parameter pair for the field. This is mainly used to set extra parameters for the vector field and varchar field.</td>
+     <td>key: The parameter key.<br/> value: The parameter value.</td>
+   </tr>
+   <tr>
+     <td>withDimension(Integer dimension)</td>
+     <td>Sets the dimension of a vector field. The dimension value must be greater than zero. This method internally calls addTypeParam() to store the dimension value.</td>
+     <td>dimension: The dimension of the vector field.</td>
+   </tr>
+   <tr>
+     <td>withMaxLength(Integer maxLength)</td>
+     <td>Sets the maximum length of a Varchar field. The value must be greater than zero. This method internally calls the addTypeParam() to store the maximum length value.</td>
+     <td>maxLength: The maximum length of the varchar field.</td>
+   </tr>
+   <tr>
+     <td>withMaxCapacity(Integer maxCapacity)</td>
+     <td>Sets the max capacity of an Array field. <br/>The valid capacity value range is [1, 4096]</td>
+     <td>maxCapacity: The max capacity of the array.</td>
+   </tr>
+   <tr>
+     <td>withAutoID(boolean autoID)<br/></td>
+     <td>Enables auto-ID function for the field. Note that the auto-ID function can only be enabled on primary key field.<br/>If auto-ID function is enabled, Milvus automatically generates a unique ID for each entity so that values for the primary key field do not need to be provided during data insertion. If auto-ID is disabled, values for the primary key field need to be provided during data insertion.</td>
+     <td>autoID: A boolean value that defines if the primary keys are automatically generated. The value true means that auto-ID is enabled, while the value false means it is not.<br/></td>
+   </tr>
+   <tr>
+     <td>withPartitionKey(boolean partitionKey)<br/></td>
+     <td>Sets the field to be partition key.<br/>A partition key field's values are hashed and distributed to different logic partitions.<br/>Only int64 and varchar type fields can be a partition key. The primary key field can not be a partition key.</td>
+     <td>partitionKey: A boolean value that defines if this field is a partition key field. The value true is a partition key, false is not.</td>
+   </tr>
+   <tr>
+     <td>build()</td>
+     <td>Create a FieldType object.</td>
+     <td>N/A</td>
+   </tr>
+</table>
 
 ## Returns
 

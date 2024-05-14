@@ -71,9 +71,20 @@ GetCollStatResponseWrapper wrapper = new GetCollStatResponseWrapper(getStatRespo
 
 Methods of `GetCollStatResponseWrapper`:
 
-|  **Method**             |  **Description**                                                                                                                |  **Parameters** |  **Returns** |
-| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------- | --------------- | ------------ |
-|  getRowCount()<br/>  |  Gets the row count of a collection. Note that due to technical reasons, the deleted entities are not counted in the row count. |  N/A<br/>    |  long        |
+<table>
+   <tr>
+     <th><strong>Method</strong></th>
+     <th><strong>Description</strong></th>
+     <th><strong>Parameters</strong></th>
+     <th><strong>Returns</strong></th>
+   </tr>
+   <tr>
+     <td>getRowCount()<br/></td>
+     <td>Gets the row count of a collection. Note that due to technical reasons, the deleted entities are not counted in the row count.</td>
+     <td>N/A<br/></td>
+     <td>long</td>
+   </tr>
+</table>
 
 ## Example
 

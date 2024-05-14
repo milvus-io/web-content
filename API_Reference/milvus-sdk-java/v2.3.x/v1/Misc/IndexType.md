@@ -7,20 +7,85 @@ package io.milvus.param;
 public enum IndexType
 ```
 
-|  **Type**         |  **Code** |  **Description**                                                                            |
-| ----------------- | --------- | ------------------------------------------------------------------------------------------- |
-|  None             |  0        |  For internal usage.                                                                        |
-|  FLAT<br/>     |  1        |  Only for FloatVector type field.                                                           |
-|  IVF_FLAT         |  2        |  Only for FloatVector type field.                                                           |
-|  IVF_SQ8          |  3        |  Only for FloatVector type field.                                                           |
-|  IVF_PQ           |  4        |  Only for FloatVector type field.                                                           |
-|  HNSW             |  5        |  Only for FloatVector type field.                                                           |
-|  DISKANN<br/>  |  10       |  Only for FloatVector type field.                                                           |
-|  AUTOINDEX        |  11       |  Only for FloatVector type field. The auto index parameters are defined in the milvus.yaml. |
-|  SCANN            |  12       |  Only for FloatVector type field.                                                           |
-|  GPU_IVF_FLAT     |  50       |  Only for FloatVector type field. Only works when server is GPU mode                        |
-|  GPU_IVF_PQ       |  51       |  Only for FloatVector type field. Only works when server is GPU mode                        |
-|  BIN_FLAT         |  80       |  Only for BinaryVector type field.                                                          |
-|  BIN_IVF_FLAT     |  81       |  Only for BinaryVector type field.                                                          |
-|  TRIE             |  100      |  Only for VarChar type field                                                                |
-|  STL_SORT         |  200      |  Only for scalar type field                                                                 |
+<table>
+   <tr>
+     <th><strong>Type</strong></th>
+     <th><strong>Code</strong></th>
+     <th><strong>Description</strong></th>
+   </tr>
+   <tr>
+     <td>None</td>
+     <td>0</td>
+     <td>For internal usage.</td>
+   </tr>
+   <tr>
+     <td>FLAT<br/></td>
+     <td>1</td>
+     <td>Only for FloatVector type field.</td>
+   </tr>
+   <tr>
+     <td>IVF_FLAT</td>
+     <td>2</td>
+     <td>Only for FloatVector type field.</td>
+   </tr>
+   <tr>
+     <td>IVF_SQ8</td>
+     <td>3</td>
+     <td>Only for FloatVector type field.</td>
+   </tr>
+   <tr>
+     <td>IVF_PQ</td>
+     <td>4</td>
+     <td>Only for FloatVector type field.</td>
+   </tr>
+   <tr>
+     <td>HNSW</td>
+     <td>5</td>
+     <td>Only for FloatVector type field.</td>
+   </tr>
+   <tr>
+     <td>DISKANN<br/></td>
+     <td>10</td>
+     <td>Only for FloatVector type field.</td>
+   </tr>
+   <tr>
+     <td>AUTOINDEX</td>
+     <td>11</td>
+     <td>Only for FloatVector type field. The auto index parameters are defined in the milvus.yaml.</td>
+   </tr>
+   <tr>
+     <td>SCANN</td>
+     <td>12</td>
+     <td>Only for FloatVector type field.</td>
+   </tr>
+   <tr>
+     <td>GPU<em>IVF</em>FLAT</td>
+     <td>50</td>
+     <td>Only for FloatVector type field. Only works when server is GPU mode</td>
+   </tr>
+   <tr>
+     <td>GPU<em>IVF</em>PQ</td>
+     <td>51</td>
+     <td>Only for FloatVector type field. Only works when server is GPU mode</td>
+   </tr>
+   <tr>
+     <td>BIN_FLAT</td>
+     <td>80</td>
+     <td>Only for BinaryVector type field.</td>
+   </tr>
+   <tr>
+     <td>BIN<em>IVF</em>FLAT</td>
+     <td>81</td>
+     <td>Only for BinaryVector type field.</td>
+   </tr>
+   <tr>
+     <td>TRIE</td>
+     <td>100</td>
+     <td>Only for VarChar type field</td>
+   </tr>
+   <tr>
+     <td>STL_SORT</td>
+     <td>200</td>
+     <td>Only for scalar type field</td>
+   </tr>
+</table>

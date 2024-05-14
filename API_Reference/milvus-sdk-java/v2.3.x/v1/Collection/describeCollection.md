@@ -60,18 +60,74 @@ DescCollResponseWrapper wrapper = new DescCollResponseWrapper(response);
 
 Methods of `DescCollResponseWrapper`:
 
-|  **Method**                       |  **Description**                                                                       |  **Parameters**                 |  **Returns**     |
-| --------------------------------- | -------------------------------------------------------------------------------------- | ------------------------------- | ---------------- |
-|  getCollectionName()              |  Get the name of the collection.                                                       |  N/A                            |  String          |
-|  getCollectionDescription()       |  Get the description of the collection.<br/>                                        |  N/A                            |  String          |
-|  getCollectionID()                |  Get the internal ID of the collection.                                                |  N/A                            |  long            |
-|  getShardNumber()                 |  Get the shard number of the collection.                                               |  N/A                            |  int<br/>     |
-|  getCreatedUtcTimestamp()         |  Get UTC timestamp when the collection is created.                                     |  N/A<br/>                    |  long<br/>    |
-|  getAliases()                     |  Get aliases of the collection.                                                        |  N/A                            |  List<String>    |
-|  getFields()                      |  Get the schema of the collection's fields.                                            |  N/A                            |  List<FieldType> |
-|  getFieldByName(String fieldName) |  Get the schema of a field by name.<br/>Return null if the field doesn't exist.         |  fieldName: The name of a field |  FieldType       |
-|  isDynamicFieldEnabled()          |  Get whether the collection dynamic field is enabled                                   |  N/A                            |  boolean         |
-|  getPartitionKeyField()           |  Get the partition key field.<br/>Return null if the partition key field doesn't exist. |  N/A                            |  FieldType       |
+<table>
+   <tr>
+     <th><strong>Method</strong></th>
+     <th><strong>Description</strong></th>
+     <th><strong>Parameters</strong></th>
+     <th><strong>Returns</strong></th>
+   </tr>
+   <tr>
+     <td>getCollectionName()</td>
+     <td>Get the name of the collection.</td>
+     <td>N/A</td>
+     <td>String</td>
+   </tr>
+   <tr>
+     <td>getCollectionDescription()</td>
+     <td>Get the description of the collection.<br/></td>
+     <td>N/A</td>
+     <td>String</td>
+   </tr>
+   <tr>
+     <td>getCollectionID()</td>
+     <td>Get the internal ID of the collection.</td>
+     <td>N/A</td>
+     <td>long</td>
+   </tr>
+   <tr>
+     <td>getShardNumber()</td>
+     <td>Get the shard number of the collection.</td>
+     <td>N/A</td>
+     <td>int<br/></td>
+   </tr>
+   <tr>
+     <td>getCreatedUtcTimestamp()</td>
+     <td>Get UTC timestamp when the collection is created.</td>
+     <td>N/A<br/></td>
+     <td>long<br/></td>
+   </tr>
+   <tr>
+     <td>getAliases()</td>
+     <td>Get aliases of the collection.</td>
+     <td>N/A</td>
+     <td>List\<String></td>
+   </tr>
+   <tr>
+     <td>getFields()</td>
+     <td>Get the schema of the collection's fields.</td>
+     <td>N/A</td>
+     <td>List\<FieldType></td>
+   </tr>
+   <tr>
+     <td>getFieldByName(String fieldName)</td>
+     <td>Get the schema of a field by name.<br/>Return null if the field doesn't exist.</td>
+     <td>fieldName: The name of a field</td>
+     <td>FieldType</td>
+   </tr>
+   <tr>
+     <td>isDynamicFieldEnabled()</td>
+     <td>Get whether the collection dynamic field is enabled</td>
+     <td>N/A</td>
+     <td>boolean</td>
+   </tr>
+   <tr>
+     <td>getPartitionKeyField()</td>
+     <td>Get the partition key field.<br/>Return null if the partition key field doesn't exist.</td>
+     <td>N/A</td>
+     <td>FieldType</td>
+   </tr>
+</table>
 
 ## Example
 

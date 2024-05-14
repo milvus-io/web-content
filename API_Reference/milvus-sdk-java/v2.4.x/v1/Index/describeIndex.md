@@ -65,10 +65,26 @@ DescIndexResponseWrapper wrapper = new DescIndexResponseWrapper(descIndexRespons
 
 Methods of `DescIndexResponseWrapper`:
 
-|  **Method**                                         |  **Description**                                                                     |  **Parameters**          |  **Returns**     |
-| --------------------------------------------------- | ------------------------------------------------------------------------------------ | ------------------------ | ---------------- |
-|  getIndexDescriptions()<br/>                     |  Get a list of all index descriptions. (Currently only return one index information) |  N/A                     |  List<IndexDesc> |
-|  getIndexDescByFieldName(String fieldName)<br/>  |  Get index description by field name. Return null if the field doesn't exist.        |  fieldName: A field name |  IndexDesc       |
+<table>
+   <tr>
+     <th><strong>Method</strong></th>
+     <th><strong>Description</strong></th>
+     <th><strong>Parameters</strong></th>
+     <th><strong>Returns</strong></th>
+   </tr>
+   <tr>
+     <td>getIndexDescriptions()<br/></td>
+     <td>Get a list of all index descriptions. (Currently only return one index information)</td>
+     <td>N/A</td>
+     <td>List\<IndexDesc></td>
+   </tr>
+   <tr>
+     <td>getIndexDescByFieldName(String fieldName)<br/></td>
+     <td>Get index description by field name. Return null if the field doesn't exist.</td>
+     <td>fieldName: A field name</td>
+     <td>IndexDesc</td>
+   </tr>
+</table>
 
 ## IndexDesc
 
@@ -76,11 +92,28 @@ A tool class to describe an index.
 
 Methods of `DescIndexResponseWrapper.IndexDesc`
 
-|  **Method**      |  **Description**                      |  **Returns** |
-| ---------------- | ------------------------------------- | ------------ |
-|  getIndexType()  |  Get index type.                      |  IndexType   |
-|  getMetricType() |  Get metric type.                     |  MetricType  |
-|  getExtraParam() |  Get index parameters in JSON format. |  String      |
+<table>
+   <tr>
+     <th><strong>Method</strong></th>
+     <th><strong>Description</strong></th>
+     <th><strong>Returns</strong></th>
+   </tr>
+   <tr>
+     <td>getIndexType()</td>
+     <td>Get index type.</td>
+     <td>IndexType</td>
+   </tr>
+   <tr>
+     <td>getMetricType()</td>
+     <td>Get metric type.</td>
+     <td>MetricType</td>
+   </tr>
+   <tr>
+     <td>getExtraParam()</td>
+     <td>Get index parameters in JSON format.</td>
+     <td>String</td>
+   </tr>
+</table>
 
 ## Example
 

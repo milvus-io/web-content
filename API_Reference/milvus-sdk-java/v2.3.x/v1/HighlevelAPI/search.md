@@ -29,19 +29,19 @@ Methods of `SearchSimpleParam.Builder`:
         <td>collectionName: target collection name</td>
     </tr>
     <tr>
-        <td>withOutFields(List<String> outFields)</td>
+        <td>withOutFields(List\<String> outFields)</td>
         <td>Specifies output scalar fields (Optional).</td>
         <td><br/>outFields: The name list of fields to be outputed</td>
     </tr>
     <tr>
         <td>withFilter(String filter)</td>
-        <td>[object Object],[object Object],[object Object],[object Object],[object Object]</td>
+        <td></td>
         <td>filter: The expression to filter scalar fields</td>
     </tr>
     <tr>
-        <td>withVectors(List<?> vectors)</td>
+        <td>withVectors(List\<?> vectors)</td>
         <td>Set the target vector. Up to 16384 vectors allowed.</td>
-        <td>vectors: <br/>- If target field type is float vector, List< List<Float>> is required;<br/>- If target field type is binary vector, List<ByteBuffer> is required;</td>
+        <td>vectors: <br/>- If target field type is float vector, List\< List\<Float>gt; is required;<br/>- If target field type is binary vector, List\<ByteBuffer> is required;</td>
     </tr>
     <tr>
         <td>withOffset(Long offset)</td>

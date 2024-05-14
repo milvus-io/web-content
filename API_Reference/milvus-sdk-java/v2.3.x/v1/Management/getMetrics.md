@@ -56,7 +56,7 @@ import io.milvus.param.*;
 import io.milvus.grpc.GetMetricsResponse;
 
 GetMetricsParam param = GetMetricsParam.newBuilder()
-        .withRequest("{\"metric_type\":\"system_info\"}")
+        .withRequest("\{\"metric_type\":\"system_info\"}")
         .build();
 R<GetMetricsResponse> response = client.getMetrics(param);
 if (response.getStatus() != R.Status.Success.getCode()) {

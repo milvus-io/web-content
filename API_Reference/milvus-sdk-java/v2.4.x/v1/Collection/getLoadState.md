@@ -29,7 +29,7 @@ Methods of `GetLoadStateParam.Builder`:
         <td>collectionName: The name of the collection to get state.</td>
     </tr>
     <tr>
-        <td>withPartitionNames(List<String> partitionNames)</td>
+        <td>withPartitionNames(List\<String> partitionNames)</td>
         <td>Sets partition names list to specify query scope (Optional).</td>
         <td>partitionNames: <br/>A name list of partition to get state.</td>
     </tr>

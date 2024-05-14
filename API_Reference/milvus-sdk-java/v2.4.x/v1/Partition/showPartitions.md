@@ -29,7 +29,7 @@ Methods of `ShowPartitionsParam.Builder`:
         <td>collectionName: The target collection name.</td>
     </tr>
     <tr>
-        <td>withPartitionNames(List<String> partitionNames)</td>
+        <td>withPartitionNames(List\<String> partitionNames)</td>
         <td>Set the partition names list. Partition names list cannot be null or empty.</td>
         <td>partitionNames: The name list of partitions to show.</td>
     </tr>
@@ -70,10 +70,26 @@ ShowPartResponseWrapper wrapper = new ShowPartResponseWrapper(showPartitionsResp
 
 Methods of `ShowPartitionsResponse`:
 
-|  **Method**                                            |  **Description**                                    |  **Parameters**                            |  **Returns**         |
-| ------------------------------------------------------ | --------------------------------------------------- | ------------------------------------------ | -------------------- |
-|  getPartitionsInfo()<br/>                           |  Return a list of PartitionInfo.                    |  N/A                                       |  List<PartitionInfo> |
-|  getPartitionInfoByName(String partitionName)<br/>  |  Return a PartitionInfo object by a partition name. |  partitionName: The target partition name. |  PartitionInfo       |
+<table>
+   <tr>
+     <th><strong>Method</strong></th>
+     <th><strong>Description</strong></th>
+     <th><strong>Parameters</strong></th>
+     <th><strong>Returns</strong></th>
+   </tr>
+   <tr>
+     <td>getPartitionsInfo()<br/></td>
+     <td>Return a list of PartitionInfo.</td>
+     <td>N/A</td>
+     <td>List\<PartitionInfo></td>
+   </tr>
+   <tr>
+     <td>getPartitionInfoByName(String partitionName)<br/></td>
+     <td>Return a PartitionInfo object by a partition name.</td>
+     <td>partitionName: The target partition name.</td>
+     <td>PartitionInfo</td>
+   </tr>
+</table>
 
 ## PartitionInfo
 
@@ -81,11 +97,28 @@ A tool class to hold information of a partition.
 
 Methods of `ShowPartitionsResponse.PartitionInfo`
 
-|  **Method**      |  **Description**                      |  **Returns** |
-| ---------------- | ------------------------------------- | ------------ |
-|  getIndexType()  |  Get index type.                      |  IndexType   |
-|  getMetricType() |  Get metric type.                     |  MetricType  |
-|  getExtraParam() |  Get index parameters in JSON format. |  String      |
+<table>
+   <tr>
+     <th><strong>Method</strong></th>
+     <th><strong>Description</strong></th>
+     <th><strong>Returns</strong></th>
+   </tr>
+   <tr>
+     <td>getIndexType()</td>
+     <td>Get index type.</td>
+     <td>IndexType</td>
+   </tr>
+   <tr>
+     <td>getMetricType()</td>
+     <td>Get metric type.</td>
+     <td>MetricType</td>
+   </tr>
+   <tr>
+     <td>getExtraParam()</td>
+     <td>Get index parameters in JSON format.</td>
+     <td>String</td>
+   </tr>
+</table>
 
 ## Example
 

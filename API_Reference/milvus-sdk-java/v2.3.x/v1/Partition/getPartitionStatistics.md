@@ -70,9 +70,18 @@ GetPartStatResponseWrapper wrapper = new GetPartStatResponseWrapper(partStatResp
 
 Methods of `GetPartStatResponseWrapper`:
 
-|  **Method**    |  **Description**                                                                                      |  **Returns** |
-| -------------- | ----------------------------------------------------------------------------------------------------- | ------------ |
-|  getRowCount() |  Get the row count of a partition.<br/>Throw NumberFormatException if the row count string is illegal. |  long        |
+<table>
+   <tr>
+     <th><strong>Method</strong></th>
+     <th><strong>Description</strong></th>
+     <th><strong>Returns</strong></th>
+   </tr>
+   <tr>
+     <td>getRowCount()</td>
+     <td>Get the row count of a partition.<br/>Throw NumberFormatException if the row count string is illegal.</td>
+     <td>long</td>
+   </tr>
+</table>
 
 ## Example
 

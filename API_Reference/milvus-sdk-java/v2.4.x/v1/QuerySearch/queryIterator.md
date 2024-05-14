@@ -34,7 +34,7 @@ Methods of `QueryIteratorParam.Builder`:
         <td>consistencyLevel: The consistency level used in the query.</td>
     </tr>
     <tr>
-        <td>withPartitionNames(List<String> partitionNames)</td>
+        <td>withPartitionNames(List\<String> partitionNames)</td>
         <td>Sets partition names list to specify query scope (Optional).</td>
         <td>partitionNames: The name list of partitions to be queried.</td>
     </tr>
@@ -44,8 +44,8 @@ Methods of `QueryIteratorParam.Builder`:
         <td>partitionName: A partition name to be queried.</td>
     </tr>
     <tr>
-        <td>withOutFields(List<String> outFields)</td>
-        <td>Specifies output scalar fields (Optional).<br/>If output fields are specified, the QueryResults returned by query() will contains the values of these fields. </td>
+        <td>withOutFields(List\<String> outFields)</td>
+        <td>Specifies output scalar fields (Optional).<br/>If output fields are specified, the QueryResults returned by query() will contains the values of these fields.</td>
         <td><br/>outFields: The name list of fields to be outputed.</td>
     </tr>
     <tr>
@@ -55,7 +55,7 @@ Methods of `QueryIteratorParam.Builder`:
     </tr>
     <tr>
         <td>withExpr(String expr)</td>
-        <td>[object Object],[object Object],[object Object]</td>
+        <td>Set the expression to query entities. For more information please refer to <a href="https://milvus.io/docs/v2.3.x/boolean.md">this doc</a>.</td>
         <td>expr: The expression to query</td>
     </tr>
     <tr>
@@ -103,10 +103,26 @@ This method catches all the exceptions and returns an `R<QueryIterator>` object.
 
 Methods of `QueryIterator`:
 
-|  **Method** |  **Description**            |  **Parameters** |  **Returns**                         |
-| ----------- | --------------------------- | --------------- | ------------------------------------ |
-|  next()     |  Return a batch of results. |  N/A            |  List<QueryResultsWrapper.RowRecord> |
-|  close()    |  Release the cache results. |  N/A            |  N/A                                 |
+<table>
+   <tr>
+     <th><strong>Method</strong></th>
+     <th><strong>Description</strong></th>
+     <th><strong>Parameters</strong></th>
+     <th><strong>Returns</strong></th>
+   </tr>
+   <tr>
+     <td>next()</td>
+     <td>Return a batch of results.</td>
+     <td>N/A</td>
+     <td>List\<QueryResultsWrapper.RowRecord></td>
+   </tr>
+   <tr>
+     <td>close()</td>
+     <td>Release the cache results.</td>
+     <td>N/A</td>
+     <td>N/A</td>
+   </tr>
+</table>
 
 ## Example
 

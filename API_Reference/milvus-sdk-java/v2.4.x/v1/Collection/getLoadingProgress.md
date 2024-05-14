@@ -29,7 +29,7 @@ Methods of `GetLoadingProgressParam.Builder`:
         <td>collectionName: The name of the collection to load.</td>
     </tr>
     <tr>
-        <td>withPartitionNames(List<String> partitionNames)</td>
+        <td>withPartitionNames(List\<String> partitionNames)</td>
         <td>Sets partition names list to specify query scope (Optional).</td>
         <td>partitionNames: <br/>The name list of partitions to be loaded.</td>
     </tr>
@@ -39,23 +39,23 @@ Methods of `GetLoadingProgressParam.Builder`:
         <td>N/A</td>
     </tr>
     <tr>
-        <td>`withSyncLoadWaitingInterval(Long milliseconds)`</td>
-        <td>Sets the waiting interval for sync mode. In sync mode, the client checks the collection load status at intervals. The value must be greater than zero, and cannot be greater than `Constant.MAX_WAITING_LOADING_INTERVAL`. The default value is `500` milliseconds</td>
-        <td>`milliseconds`: The time interval in milliseconds for checking the data load status. </td>
+        <td><code>withSyncLoadWaitingInterval(Long milliseconds)</code></td>
+        <td>Sets the waiting interval for sync mode. In sync mode, the client checks the collection load status at intervals. The value must be greater than zero, and cannot be greater than <code>Constant.MAX_WAITING_LOADING_INTERVAL</code>. The default value is <code>500</code> milliseconds</td>
+        <td><code>milliseconds</code>: The time interval in milliseconds for checking the data load status.</td>
     </tr>
     <tr>
-        <td>`withSyncLoadWaitingTimeout(Long seconds)`</td>
-        <td>Sets the timeout period for sync mode. The value must be greater than zero and cannot be greater than `Constant.MAX_WAITING_LOADING_TIMEOUT`. The default value is `60` seconds.</td>
-        <td>`seconds`: A during of time in seconds to wait till timeout.</td>
+        <td><code>withSyncLoadWaitingTimeout(Long seconds)</code></td>
+        <td>Sets the timeout period for sync mode. The value must be greater than zero and cannot be greater than <code>Constant.MAX_WAITING_LOADING_TIMEOUT</code>. The default value is <code>60</code> seconds.</td>
+        <td><code>seconds</code>: A during of time in seconds to wait till timeout.</td>
     </tr>
     <tr>
-        <td>`withReplicaNumber(Integer replicaNumber)`</td>
-        <td>Specifies the number of replicas to load. The default value is `1`.</td>
-        <td>`replicaNumber`: The number of the replicas to load when loading a collection.</td>
+        <td><code>withReplicaNumber(Integer replicaNumber)</code></td>
+        <td>Specifies the number of replicas to load. The default value is <code>1</code>.</td>
+        <td><code>replicaNumber</code>: The number of the replicas to load when loading a collection.</td>
     </tr>
     <tr>
-        <td>`build()`</td>
-        <td>Constructs a `LoadCollectionParam` object</td>
+        <td><code>build()</code></td>
+        <td>Constructs a <code>LoadCollectionParam</code> object</td>
         <td>N/A</td>
     </tr>
 </table>

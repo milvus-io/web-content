@@ -48,7 +48,11 @@ The `ListBulkInsertTasksParam.Builder.build()` can throw the following exception
 
 This method catches all the exceptions and returns an `R<ListImportTasksResponse>` object.
 
-The `ListImportTasksResponse` contains a list of `GetImportStateResponse`, which you can use `GetBulkInsertStateWrapper` to parse. Call the `getTasksList()` of `ListImportTasksResponse` to get all the tasks.
+- If the API fails on the server side, it returns the error code and message from the server.
+
+- If the API fails by RPC exception, it returns `R.Status.Unknown` and the error message of the exception.
+
+- If the API succeeds, it returns a valid `ListImportTasksResponse` held by the `R` template which you can get states of all the tasks.
 
 ## Example
 

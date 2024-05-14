@@ -7,9 +7,25 @@ package io.milvus.param;
 public enum LogLevel
 ```
 
-|  **Type** |  **Description**                                            |
-| --------- | ----------------------------------------------------------- |
-|  Debug    |  Debug level, All the logs are visible.                     |
-|  Info     |  Debug level, information, warning, error logs are visible. |
-|  Warning  |  Debug level, warning and error logs are visible.           |
-|  Error    |  Error level, only error logs are visible.                  |
+<table>
+   <tr>
+     <th><strong>Type</strong></th>
+     <th><strong>Description</strong></th>
+   </tr>
+   <tr>
+     <td>Debug</td>
+     <td>Debug level, All the logs are visible.</td>
+   </tr>
+   <tr>
+     <td>Info</td>
+     <td>Debug level, information, warning, error logs are visible.</td>
+   </tr>
+   <tr>
+     <td>Warning</td>
+     <td>Debug level, warning and error logs are visible.</td>
+   </tr>
+   <tr>
+     <td>Error</td>
+     <td>Error level, only error logs are visible.</td>
+   </tr>
+</table>

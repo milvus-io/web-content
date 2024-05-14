@@ -50,7 +50,7 @@ Methods of `CreateIndexParam.Builder`:
     </tr>
     <tr>
         <td><br/>withExtraParam(String extraParam)</td>
-        <td>Sets the specific index parameters according to index type. For example, IVF index, the extra parameters can be `{"nlist":1024}`.</td>
+        <td>Sets the specific index parameters according to index type. For example, IVF index, the extra parameters can be <code>{"nlist":1024}</code>.</td>
         <td>extraParam: <br/>Extra parameters in JSON format</td>
     </tr>
     <tr>
@@ -60,7 +60,7 @@ Methods of `CreateIndexParam.Builder`:
     </tr>
     <tr>
         <td>withSyncWaitingInterval(Long milliseconds)</td>
-        <td>Set the waiting interval in sync mode. With sync mode enabled, the client constantly checks index state by interval. Interval value must be greater than zero, and cannot be greater than Constant.MAX_WAITING_INDEX_INTERVAL. By default, interval value is 500 milliseconds.</td>
+        <td>Set the waiting interval in sync mode. With sync mode enabled, the client constantly checks index state by interval. Interval value must be greater than zero, and cannot be greater than Constant.MAX<em>WAITING</em>INDEX_INTERVAL. By default, interval value is 500 milliseconds.</td>
         <td><br/>milliseconds: Sync mode interval value(unit: millisecond)</td>
     </tr>
     <tr>
@@ -99,7 +99,7 @@ CreateIndexParam param = CreateIndexParam.newBuilder()
         .withFieldName("field1")
         .withIndexType(IndexType.IVF_FLAT)
         .withMetricType(MetricType.L2)
-        .withExtraParam("{\"nlist\":64}")
+        .withExtraParam("\{\"nlist\":64}")
         .build();
 R<RpcStatus> response = client.createIndex(param)
 if (response.getStatus() != R.Status.Success.getCode()) {

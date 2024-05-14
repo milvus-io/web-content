@@ -58,11 +58,28 @@ package io.milvus.grpc;
 public enum CompactionState
 ```
 
-|  **Type**        |  **Code** |  **Description**            |
-| ---------------- | --------- | --------------------------- |
-|  *UndefiedState* |  0        |  For internal usage.        |
-|  *Executing*     |  1        |  Compaction is in executing |
-|  *Completed*     |  2        |  Compaction is completed    |
+<table>
+   <tr>
+     <th><strong>Type</strong></th>
+     <th><strong>Code</strong></th>
+     <th><strong>Description</strong></th>
+   </tr>
+   <tr>
+     <td><em>UndefiedState</em></td>
+     <td>0</td>
+     <td>For internal usage.</td>
+   </tr>
+   <tr>
+     <td><em>Executing</em></td>
+     <td>1</td>
+     <td>Compaction is in executing</td>
+   </tr>
+   <tr>
+     <td><em>Completed</em></td>
+     <td>2</td>
+     <td>Compaction is completed</td>
+   </tr>
+</table>
 
 ## Example
 

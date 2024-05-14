@@ -9,12 +9,38 @@ MilvusServiceClient(ConnectParam connectParam)
 
 Methods of MilvusClient for connection:
 
-|  **Method**                                               |  **Description**                                                                                                                                                                                         |  **Parameters**                                                                                 |  **Returns**           |
-| --------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ---------------------- |
-|  withTimeout(long timeout, TimeUnit timeoutUnit)<br/>  |  Timeout setting for RPC call.<br/>                                                                                                                                                                   |  timeout: The timeout period when invoking a method.<br/> timeoutUnit: The unit for timeout. |  MilvusClient<br/>  |
-|  withRetry(RetryParam retryParam)                         |  Sets the parameters for retry.<br/>                                                                                                                                                                  |  retryParam: Parameter for retry on failure.                                                    |  MilvusClient          |
-|  close(long maxWaitSeconds)<br/>                       |  Disconnects from a Milvus server with a configurable timeout value. Call this method before the application terminates.<br/>This method throws an `InterruptedException` exception if it is interrupted. |  maxWaitSeconds: The timeout period to wait for the RPC channel to close.                       |  N/A<br/>           |
-|  setLogLevel(LogLevel level)<br/>                      |  Set log level in runtime.<br/>Note: this method cannot change the log level configured by log4j configurations. It only hides some logs inside the MilvusClient class.                                   |  level: A log level                                                                             |  N/A                   |
+<table>
+   <tr>
+     <th><strong>Method</strong></th>
+     <th><strong>Description</strong></th>
+     <th><strong>Parameters</strong></th>
+     <th><strong>Returns</strong></th>
+   </tr>
+   <tr>
+     <td>withTimeout(long timeout, TimeUnit timeoutUnit)<br/></td>
+     <td>Timeout setting for RPC call.<br/></td>
+     <td>timeout: The timeout period when invoking a method.<br/> timeoutUnit: The unit for timeout.</td>
+     <td>MilvusClient<br/></td>
+   </tr>
+   <tr>
+     <td>withRetry(RetryParam retryParam)</td>
+     <td>Sets the parameters for retry.<br/></td>
+     <td>retryParam: Parameter for retry on failure.</td>
+     <td>MilvusClient</td>
+   </tr>
+   <tr>
+     <td>close(long maxWaitSeconds)<br/></td>
+     <td>Disconnects from a Milvus server with a configurable timeout value. Call this method before the application terminates.<br/>This method throws an <code>InterruptedException</code> exception if it is interrupted.</td>
+     <td>maxWaitSeconds: The timeout period to wait for the RPC channel to close.</td>
+     <td>N/A<br/></td>
+   </tr>
+   <tr>
+     <td>setLogLevel(LogLevel level)<br/></td>
+     <td>Set log level in runtime.<br/>Note: this method cannot change the log level configured by log4j configurations. It only hides some logs inside the MilvusClient class.</td>
+     <td>level: A log level</td>
+     <td>N/A</td>
+   </tr>
+</table>
 
 ## ConnectParam
 
