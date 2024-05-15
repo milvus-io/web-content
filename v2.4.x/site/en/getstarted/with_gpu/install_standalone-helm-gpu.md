@@ -18,7 +18,7 @@ Milvus now can use GPU devices to build indexes and perform ANN searches thanks 
 
 Before installing Milvus with GPU support, make sure you have the following prerequisites:
 
-- The compute capability of your GPU device is 7.0、7.5、8.0、8.6、8.9、9.0. To check whether your GPU device suffices the requirement, check [Your GPU Compute Capability](https://developer.nvidia.com/cuda-gpus) on the NVIDIA developer website.
+- The compute capability of your GPU device is 6.0、7.0、7.5、8.0、8.6、9.0. To check whether your GPU device suffices the requirement, check [Your GPU Compute Capability](https://developer.nvidia.com/cuda-gpus) on the NVIDIA developer website.
 
 - You have installed the NVIDIA driver for your GPU device on one of [the supported Linux distributions](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html#linux-distributions) and then the NVIDIA Container Toolkit following [this guide](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html).
 
@@ -153,7 +153,7 @@ You should start Milvus with Helm by specifying the release name, the chart, and
 
 Milvus allows you to assign one or more GPU devices to Milvus. 
 
-- Assign a single GPU device
+- Assign a single GPU device (recommended)
 
   Run the following commands to assign a single GPU device to Milvus:
 
