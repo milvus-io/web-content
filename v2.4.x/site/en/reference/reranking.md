@@ -43,6 +43,8 @@ Note that:
 
 - The total number of weight values provided in `WeightedRanker` should equal the number of `AnnSearchRequest` instances you have created earlier.
 
+- It is worth noting that due to the different measurements of the different metric types, we normalize the distances of the recall results so that they lie in the interval [0,1], where 0 means different and 1 means similar. The final score will be the sum of the weight values and distances.
+
 ## Reciprocal Rank Fusion (RRFRanker)
 
 RRF is a data fusion method that combines ranking lists based on the reciprocal of their ranks. It is an effective way to balance the influence of each vector field, especially when there is no clear precedence of importance. This strategy is typically used when you want to give equal consideration to all vector fields or when there is uncertainty about the relative importance of each field.
