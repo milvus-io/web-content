@@ -1230,30 +1230,14 @@
       "order": 2      
     },
     {
-      "id": "milvusdm",
-      "title": "MilvusDM",
+      "id": "migration",
+      "title": "Milvus Migration",
       "label1": "tools",
       "label2": "",
       "label3": "",
       "order": 4,
-      "isMenu": true
-    },
-    {
-      "id": "migrate_overview.md",
-      "title": "Overview",
-      "label1": "tools",
-      "label2": "milvusdm",
-      "label3": "",
-      "order": 0
-    }, 
-    {
-      "id": "milvusdm_install.md",
-      "title": "Installation",
-      "label1": "tools",
-      "label2": "milvusdm",
-      "label3": "",
-      "order": 1
-    },      
+      "outLink": "https://github.com/zilliztech/milvus-migration?tab=readme-ov-file"
+    },  
     {
       "id": "sizing",
       "title": "Milvus Sizing Tool",
