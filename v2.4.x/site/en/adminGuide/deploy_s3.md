@@ -75,7 +75,6 @@ externalS3:
   secretKey: "<your_s3_secret_key>"
   useSSL: <true/false>
   bucketName: "<your_bucket_name>"
-  useSSL: <true/false>
 ```
 
 3. After configuring the preceding sections and saving the <code>values.yaml</code> file, run the following command to install Milvus that uses the S3 configurations.
