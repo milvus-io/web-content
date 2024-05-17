@@ -45,7 +45,7 @@ DIMENSION = 1024  # Embeddings size
 COUNT = 100  # How many titles to embed and insert.
 MILVUS_HOST = 'localhost'  # Milvus server URI
 MILVUS_PORT = '19530'
-MODEL_NAME = 'voyage-2'  # Which model to use, please check https://docs.voyageai.com/docs/embeddings for available models
+MODEL_NAME = 'voyage-law-2'  # Which model to use, please check https://docs.voyageai.com/docs/embeddings for available models
 client = voyageai.Client(api_key="YOUR_VOYAGEAI_API_KEY")
 ```
 
