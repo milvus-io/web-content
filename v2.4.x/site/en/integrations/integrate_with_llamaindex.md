@@ -79,6 +79,25 @@ The above code will generate a Milvus collection named **llamalection** on the M
 - **text_key**: the name of the field that holds text in an existing collection, defaults to `None`. This applies only when you want to use an existing collection instead of create a new one.
 - **index_config**: the index parameters used to build an index for the specified collection, defaults to `None`.
 - **search_config**: the search parameters used to prepare searches in the specified collection, defaults to `None`.
+- **batch_size**: configures the number of documents processed in one batch when inserting data into Milvus. Defaults to `100`.
+- **enable_sparse**: a boolean flag indicating whether to enable support for sparse embeddings for hybrid retrieval. Defaults to `False`.
+- **sparse_embedding_function**: if enable_sparse is True, this object should be provided to convert text to a sparse embedding.
+- **hybrid_ranker**: specifies the type of ranker used in hybrid search queries. Currently only supports `RRFRanker`, `WeightedRanker`. Defaults to `RRFRanker`.
+- **hybrid_ranker_params**: Configuration parameters for the hybrid ranker.
+    The structure of this dictionary depends on the specific ranker being used:
+    - For `RRFRanker`, it should include:
+        - 'k' (int): A parameter used in Reciprocal Rank Fusion (RRF). This value is used
+                     to calculate the rank scores as part of the RRF algorithm, which combines
+                     multiple ranking strategies into a single score to improve search relevance.
+    - For `WeightedRanker`, it expects:
+        - 'weights' (list of float): A list of exactly two weights:
+            - The weight for the dense embedding component.
+            - The weight for the sparse embedding component.
+              
+          These weights are used to adjust the importance of the dense and sparse components of the embeddings in the hybrid retrieval process.
+          
+    Defaults to an empty dictionary, implying that the ranker will operate with its predefined default settings.
+
 
 </div>
 
