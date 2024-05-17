@@ -53,9 +53,9 @@ The name of a resource can contain numbers, letters, and underscores (\_\). A re
 ## Input and Output per RPC
 | Operation      | Limit |
 | ----------- | ----------- |
-| Insert      | 512 MB    |
-| Search   | 512 MB     |
-| Query   | 512 MB      |
+| Insert      | 64 MB    |
+| Search   | 64 MB     |
+| Query   | 64 MB      |
 
 ## Load limits
 In current release, data to be load must be under 90% of the total memory resources of all query nodes to reserve memory resources for execution engine.
