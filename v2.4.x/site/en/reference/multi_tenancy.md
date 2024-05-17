@@ -39,10 +39,6 @@ Managing a single collection is much easier than managing multiple ones. Instead
 
 Milvus 2.2.9 introduces a new feature named partition key. Upon the creation of a collection, nominate a tenant field and make it the partition key field. Milvus will store entities in a partition according to the values in the partition key field. When conducting ANN searches, Milvus changes to a partition based on the specified partition key, filters entities according to the partition key, and searches among the filtered entities.
 
-<div class="alert note">
-
-Once you set the partition key for a collection, you cannot bulk-insert entities into the collection.
-
 </div>
 
 This strategy lifts the limit on the maximum number of tenants that a Milvus collection can support and greatly simplifies resource management because Milvus automatically manages partitions for you.
