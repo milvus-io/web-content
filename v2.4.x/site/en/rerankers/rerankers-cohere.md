@@ -11,11 +11,9 @@ Milvus supports [Cohere](https://docs.cohere.com/docs/rerank-2)[ reranker models
 
 To use this feature, install the necessary dependencies:
 
-```python
-pip install pymilvus==2.4.0
+```bash
+pip install --upgrade pymilvus
 pip install "pymilvus[model]"
-
-pip install cohere
 ```
 
 Then, instantiate the `CohereRerankFunction`:

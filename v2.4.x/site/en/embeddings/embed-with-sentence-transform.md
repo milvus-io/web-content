@@ -9,10 +9,11 @@ title: Sentence Transformers
 
 Milvus integrates with [Sentence Transformer](https://www.sbert.net/docs/pretrained_models.html#model-overview) pre-trained models via the __SentenceTransformerEmbeddingFunction__ class. This class provides methods for encoding documents and queries using the pretrained Sentence Transformer models and returning the embeddings as dense vectors compatible with Milvus indexing.
 
-To install the necessary Sentence Transformer Python package, use the command:
+To use this feature, install the necessary dependencies:
 
-```python
-pip install sentence-transformers
+```bash
+pip install --upgrade pymilvus
+pip install "pymilvus[model]"
 ```
 
 Then, instantiate the __SentenceTransformerEmbeddingFunction__:

@@ -9,10 +9,11 @@ title: Voyage
 
 Milvus integrates with Voyage's models via the VoyageEmbeddingFunction class. This class provides methods for encoding documents and queries using the Voyage models and returning the embeddings as dense vectors compatible with Milvus indexing. To utilize this functionality, obtain an API key from [Voyage](https://docs.voyageai.com/docs/api-key-and-installation) by creating an account on their platform.
 
-To install the necessary Voyage Python package, use the command:
+To use this feature, install the necessary dependencies:
 
 ```bash
-pip install -U voyageai
+pip install --upgrade pymilvus
+pip install "pymilvus[model]"
 ```
 
 Then, instantiate the `VoyageEmbeddingFunction`:

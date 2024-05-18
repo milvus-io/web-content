@@ -11,10 +11,11 @@ title: BGE M3
 
 Milvus integrates with the BGE M3 model using the __BGEM3EmbeddingFunction__ class. This class handles the computation of embeddings and returns them in a format compatible with Milvus for indexing and searching. To use this feature, FlagEmbedding must be installed.
 
-To install the necessary FlagEmbedding Python package, use the command:
+To use this feature, install the necessary dependencies:
 
-```python
-pip install FlagEmbedding
+```bash
+pip install --upgrade pymilvus
+pip install "pymilvus[model]"
 ```
 
 Then, instantiate the __BGEM3EmbeddingFunction__:

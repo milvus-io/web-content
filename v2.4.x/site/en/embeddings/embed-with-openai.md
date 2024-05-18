@@ -9,10 +9,11 @@ title: OpenAI
 
 Milvus integrates with OpenAI's models via the __OpenAIEmbeddingFunction__ class. This class provides methods for encoding documents and queries using the pretrained OpenAI models and returning the embeddings as dense vectors compatible with Milvus indexing. To utilize this functionality, obtain an API key from [OpenAI](https://openai.com/api/) by creating an account on their platform.
 
-To install the necessary OpenAI Python package, use the command:
+To use this feature, install the necessary dependencies:
 
-```python
-pip install openai
+```bash
+pip install --upgrade pymilvus
+pip install "pymilvus[model]"
 ```
 
 Then, instantiate the __OpenAIEmbeddingFunction__:

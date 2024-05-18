@@ -11,6 +11,13 @@ title: SPLADE
 
 Milvus integrates with the SPLADE model via the __SpladeEmbeddingFunction__ class. This class provides methods for encoding documents and queries and returning the embeddings as sparse vectors compatible with Milvus indexing.
 
+To use this feature, install the necessary dependencies:
+
+```bash
+pip install --upgrade pymilvus
+pip install "pymilvus[model]"
+```
+
 To instantiate the __SpladeEmbeddingFunction__, use the command:
 
 ```python

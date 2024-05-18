@@ -11,11 +11,9 @@ Milvus supports [Cross-Encoders](https://github.com/FlagOpen/FlagEmbedding/tree/
 
 To use this feature, install the necessary dependencies:
 
-```python
-pip install pymilvus==2.4.0
+```bash
+pip install --upgrade pymilvus
 pip install "pymilvus[model]"
-
-pip install sentence-transformers
 ```
 
 Then, instantiate the `CrossEncoderRerankFunction`:

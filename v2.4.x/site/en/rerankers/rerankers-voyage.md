@@ -11,11 +11,9 @@ Milvus supports [Voyage reranker model](https://github.com/FlagOpen/FlagEmbeddin
 
 To use this feature, install the necessary dependencies:
 
-```python
-pip install pymilvus==2.4.0
+```bash
+pip install --upgrade pymilvus
 pip install "pymilvus[model]"
-
-pip install voyageai
 ```
 
 Then, instantiate the `VoyageRerankFunction`:

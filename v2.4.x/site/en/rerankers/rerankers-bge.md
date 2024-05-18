@@ -11,11 +11,9 @@ Milvus supports [BGE reranker models](https://github.com/FlagOpen/FlagEmbedding/
 
 To use this feature, install the necessary dependencies:
 
-```python
-pip install pymilvus==2.4.0
+```bash
+pip install --upgrade pymilvus
 pip install "pymilvus[model]"
-
-pip install FlagEmbedding
 ```
 
 Then, instantiate the `BGERerankFunction`:

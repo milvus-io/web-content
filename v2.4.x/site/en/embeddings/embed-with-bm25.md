@@ -11,7 +11,15 @@ title: BM25
 
 Milvus integrates with the BM25 model using the __BM25EmbeddingFunction__ class. This class handles the computation of embeddings and returns them in a format compatible with Milvus for indexing and searching. Essential to this process is building an analyzer for tokenization.
 
+To use this feature, install the necessary dependencies:
+
+```bash
+pip install --upgrade pymilvus
+pip install "pymilvus[model]"
+```
+
 To easily create a tokenizer, Milvus offers a default analyzer that only requires specifying the language of the text.
+
 
 __Example__:
 
