@@ -24,16 +24,16 @@ Check [the requirements](prerequisite-docker.md) for hardware and software prior
 ### Install Milvus with dpkg on Ubuntu
 
 ```bash
-$ wget https://github.com/milvus-io/milvus/releases/download/v2.3.12/milvus_2.3.12-1_amd64.deb
+$ wget https://github.com/milvus-io/milvus/releases/download/v2.3.15/milvus_2.3.15-1_amd64.deb
 $ sudo apt-get update
-$ sudo dpkg -i milvus_2.3.12-1_amd64.deb
+$ sudo dpkg -i milvus_2.3.15-1_amd64.deb
 $ sudo apt-get -f install
 ```
 
 ### Install Milvus with yum on RedHat9
 
 ```bash
-$ sudo yum install -y https://github.com/milvus-io/milvus/releases/download/v2.3.12/milvus-2.3.12-1.el9.x86_64.rpm
+$ sudo yum install -y https://github.com/milvus-io/milvus/releases/download/v2.3.15/milvus-2.3.15-1.el9.x86_64.rpm
 ```
 
 ## Check the status of Milvus

@@ -26,7 +26,7 @@ This topic describes how to install Milvus standalone using Docker.
 
 - Start Milvus.
 ```
-wget https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh
+wget https://raw.githubusercontent.com/milvus-io/milvus/2.3/scripts/standalone_embed.sh
 bash standalone_embed.sh start
 ```
 
