@@ -1,6 +1,8 @@
 ---
 id: prepare-source-data.md
+order: 0
 title: Prepare Source Data
+summary: This page discusses something you should consider before you start bulk-inserting data into your collection.
 ---
 
 # Prepare Source Data
@@ -103,6 +105,11 @@ CollectionSchemaParam schema = CollectionSchemaParam.newBuilder()
 
 A **LocalBulkWriter** appends rows from the source dataset and commits them to a local file of the specified format.
 
+<div class="multipleCode">
+  <a href="#python">Python </a>
+  <a href="#java">Java</a>
+</div>
+
 ```python
 from pymilvus.bulk_writer import LocalBulkWriter, BulkFileType
 # Use `from pymilvus import LocalBulkWriter, BulkFileType` 
@@ -144,7 +151,7 @@ For details on parameter settings, refer to [LocalBulkWriter](https://milvus.io/
 
 </div>
 
-<div class="language-python">
+<div class="language-java">
 
 When creating a **LocalBulkWriter**, you should:
 
@@ -161,6 +168,11 @@ For details on parameter settings, refer to LocalBulkWriter in the SDK reference
 
 Instead of committing appended data to a local file, a **RemoteBulkWriter** commits them to a remote bucket. Therefore, you should set up a **ConnectParam** object before creating a **RemoteBulkWriter**.
 
+<div class="multipleCode">
+  <a href="#python">Python </a>
+  <a href="#java">Java</a>
+</div>
+
 
 ```python
 from pymilvus.bulk_writer import RemoteBulkWriter
@@ -174,7 +186,7 @@ BUCKET_NAME="milvus-bucket"
 
 # Connections parameters to access the remote bucket
 conn = RemoteBulkWriter.S3ConnectParam(
-    endpoint="10.102.6.239:9000", # the default MinIO service started along with Milvus
+    endpoint="localhost:9000", # the default MinIO service started along with Milvus
     access_key=ACCESS_KEY,
     secret_key=SECRET_KEY,
     bucket_name=BUCKET_NAME,
@@ -200,6 +212,11 @@ StorageConnectParam storageConnectParam = S3ConnectParam.newBuilder()
 ```
 
 Once the connection parameters are ready, you can reference it in the **RemoteBulkWriter** as follows:
+
+<div class="multipleCode">
+  <a href="#python">Python </a>
+  <a href="#java">Java</a>
+</div>
 
 ```python
 from pymilvus.bulk_writer import BulkFileType
@@ -257,6 +274,11 @@ A **BulkWriter** has two methods: `appendRow()` adds a row from a source dataset
 
 For demonstration purposes, the following code appends randomly generated data.
 
+<div class="multipleCode">
+  <a href="#python">Python </a>
+  <a href="#java">Java</a>
+</div>
+
 ```python
 import random
 import string
@@ -297,6 +319,11 @@ remoteBulkWriter.commit(false);
 ```
 
 Since the schema defined permits dynamic fields, you can also include non-schema-defined fields in the data to insert as follows.
+
+<div class="multipleCode">
+  <a href="#python">Python </a>
+  <a href="#java">Java</a>
+</div>
 
 ```python
 import random
@@ -351,6 +378,11 @@ To check the results, you can get the actual output path by printing the `batch_
 
 To check the results, you can get the actual output path by printing the `getBatchFiles()` method of the writer.
 
+</div>
+
+<div class="multipleCode">
+  <a href="#python">Python </a>
+  <a href="#java">Java</a>
 </div>
 
 ```python

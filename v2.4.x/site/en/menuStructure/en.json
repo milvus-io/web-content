@@ -419,7 +419,7 @@
       "order": 5
     },
     {
-      "id": "data-import",
+      "id": "data_import",
       "title": "Data Import",
       "label1": "userguide",
       "label2": "",
@@ -430,7 +430,7 @@
     {
       "id": "prepare-source-data.md",
       "title": "Prepare Source Data",
-      "label1": "data-import",
+      "label1": "data_import",
       "label2": "",
       "label3": "",
       "order": 0
@@ -438,7 +438,7 @@
     {
       "id": "import-data.md",
       "title": "Import Data",
-      "label1": "data-import",
+      "label1": "data_import",
       "label2": "",
       "label3": "",
       "order": 1

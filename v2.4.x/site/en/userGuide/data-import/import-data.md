@@ -1,6 +1,8 @@
 ---
 id: import-data.md
+order: 1
 title: Import Data
+summary: This page demonstrates the procedure to import the prepared data.
 ---
 
 # Import data
@@ -101,7 +103,7 @@ This page demonstrates the procedure to import the prepared data.
 
 To import the prepared data, you have to create an import job as follows:
 
-```bash
+```
 export MILVUS_URI="localhost:19530"
 
 curl --request POST "http://${MILVUS_URI}/v2/vectordb/jobs/import/create" \
@@ -133,7 +135,7 @@ The request body contains two fields:
 
         If the prepared file is in JSON format, **each sub-list should contain the path to a single prepared JSON file**.
 
-        ```bash
+        ```
         [
             "/d1782fa1-6b65-4ff3-b05a-43a436342445/1.json"
         ],
@@ -143,14 +145,14 @@ The request body contains two fields:
 
         If the prepared file is in Parquet format, **each sub-list should contain the path to a single prepared parquet file**.
 
-        ```bash
+        ```
         [
             "/a6fb2d1c-7b1b-427c-a8a3-178944e3b66d/1.parquet"
         ]
 
 The possible return is as follows:
 
-```bash
+```
 {
     "code": 200,
     "data": {
@@ -163,7 +165,7 @@ The possible return is as follows:
 
 Once you get an import job ID, you can check the import progress as follows:
 
-```bash
+```
 export MILVUS_URI="localhost:19530"
 
 curl --request POST "http://${MILVUS_URI}/v2/vectordb/jobs/import/get_progress" \
@@ -175,7 +177,7 @@ curl --request POST "http://${MILVUS_URI}/v2/vectordb/jobs/import/get_progress" 
 
 The possible response is as follows:
 
-```bash
+```
 {
     "code": 200,
     "data": {
@@ -215,7 +217,7 @@ The possible response is as follows:
 
 You can list all import jobs relative to a specific collection as follows:
 
-```bash
+```
 export MILVUS_URI="localhost:19530"
 
 curl --request POST "http://${MILVUS_URI}/v2/vectordb/jobs/import/list" \
@@ -227,7 +229,7 @@ curl --request POST "http://${MILVUS_URI}/v2/vectordb/jobs/import/list" \
 
 The possible values are as follows:
 
-```bash
+```
 {
     "code": 200,
     "data": {
