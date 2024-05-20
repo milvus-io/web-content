@@ -419,12 +419,37 @@
       "order": 5
     },
     {
+      "id": "data-import",
+      "title": "Data Import",
+      "label1": "userguide",
+      "label2": "",
+      "label3": "",
+      "order": 6,
+      "isMenu": true
+    },
+    {
+      "id": "prepare-source-data.md",
+      "title": "Prepare Source Data",
+      "label1": "data-import",
+      "label2": "",
+      "label3": "",
+      "order": 0
+    },
+    {
+      "id": "import-data.md",
+      "title": "Import Data",
+      "label1": "data-import",
+      "label2": "",
+      "label3": "",
+      "order": 1
+    },
+    {
       "id": "search_query_get",
       "title": "Search, Query & Get",
       "label1": "userguide",
       "label2": "",
       "label3": "",
-      "order": 6,
+      "order": 7,
       "isMenu": true
     },
     {
@@ -465,7 +490,7 @@
       "label1": "userguide",
       "label2": "",
       "label3": "",
-      "order": 7,
+      "order": 8,
       "isMenu": true
     },
     {
