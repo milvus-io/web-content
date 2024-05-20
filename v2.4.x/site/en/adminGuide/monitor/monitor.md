@@ -64,7 +64,7 @@ $ kubectl --namespace monitoring --address 0.0.0.0 port-forward svc/grafana 3000
 
 ### 2. Enable ServiceMonitor
 
-The ServiceMonitor is not enabled for Milvus Helm by default. After installing the Prometheus Operator in the Kubernetes cluster, you can enable it by adding the parameter `metrics.serviceMontior.enabled=true`.
+The ServiceMonitor is not enabled for Milvus Helm by default. After installing the Prometheus Operator in the Kubernetes cluster, you can enable it by adding the parameter `metrics.serviceMonitor.enabled=true`.
 
 ```
 $ helm upgrade my-release milvus/milvus --set metrics.serviceMonitor.enabled=true --reuse-values
