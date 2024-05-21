@@ -13,40 +13,40 @@ has_partition(
 )
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __collection_name__ (_str_) -
+- **collection_name** (*str*) -
 
-    __[REQUIRED]__
+    **[REQUIRED]**
 The name of an existing collection.
 
-    Setting this to a non-existing collection results in a __MilvusException__.
+    Setting this to a non-existing collection results in a **MilvusException**.
 
-- __partition_name__ (_str_) -
+- **partition_name** (*str*) -
 
-    __[REQUIRED]__
+    **[REQUIRED]**
 The name of a partition.
 
-- __using__ (_str_) - 
+- **using** (*str*) - 
 
     The alias of the employed connection.
 
-    The default value is __default__, indicating that this operation employs the default connection.
+    The default value is **default**, indicating that this operation employs the default connection.
 
-- __timeout__ (_float _|_ None_)  
+- **timeout** (*float* | *None*)  
 
-    The timeout duration for this operation. Setting this to __None__ indicates that this operation timeouts when any response arrives or any error occurs.
+    The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
-_bool_
+*bool*
 
-__RETURNS:__
+**RETURNS:**
 A boolean value indicates whether the specified partition exists.
 
-__EXCEPTIONS:__
+**EXCEPTIONS:**
 
-- __MilvusException__
+- **MilvusException**
 
     This exception will be raised when any error occurs during this operation, especially when the specified alias does not exist.
 
@@ -72,15 +72,15 @@ collection.has_partition(
 
 The following operations are related to `has_partition()`:
 
-- [drop_collection()](./drop_collection.md)
+- [drop_collection()](drop_collection.md)
 
-- [flush_all()](./flush_all.md)
+- [flush_all()](flush_all.md)
 
-- [get_query_segment_info()](./get_query_segment_info.md)
+- [get_query_segment_info()](get_query_segment_info.md)
 
-- [has_collection()](./has_collection.md)
+- [has_collection()](has_collection.md)
 
-- [list_collections()](./list_collections.md)
+- [list_collections()](list_collections.md)
 
-- [rename_collection()](./rename_collection.md)
+- [rename_collection()](rename_collection.md)
 

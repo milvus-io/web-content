@@ -23,27 +23,27 @@ collection.drop_partition(
 )
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __partition_name__ (_str_) -
+- **partition_name** (*str*) -
 
     The name of the partition to drop.
 
-- __timeout__ (_float _|_ None_)  
+- **timeout** (*float* | *None*)  
 
-    The timeout duration for this operation. Setting this to __None__ indicates that this operation timeouts when any response arrives or any error occurs.
+    The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
-_NoneType_
+*NoneType*
 
-__RETURNS:__
+**RETURNS:**
 
 None
 
-__EXCEPTIONS:__
+**EXCEPTIONS:**
 
-- __MilvusException__
+- **MilvusException**
 
     This exception will be raised when any error occurs during this operation.
 
@@ -80,13 +80,13 @@ collection.has_partition("test_partition") # False
 
 The following operations are related to `drop_collection()`:
 
-- [Collection](./ORM/Collection.md)
+- [Collection](Collection.md)
 
-- [Partition](./ORM/Partition.md)
+- [Partition](../Partition/Partition.md)
 
-- [create_partition()](./create_partition.md)
+- [create_partition()](create_partition.md)
 
-- [partition()](./partition.md)
+- [partition()](partition.md)
 
-- [has_partition()](./has_partition.md)
+- [has_partition()](has_partition.md)
 

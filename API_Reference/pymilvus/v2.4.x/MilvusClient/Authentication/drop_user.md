@@ -11,35 +11,35 @@ drop_user(
 )
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __user_name__ (_str_) -
+- **user_name** (*str*) -
 
-    __[REQUIRED]__
+    **[REQUIRED]**
 
     The name of the user to drop.
 
-- __timeout__ (_float _|_ None_)  
+- **timeout** (*float* | *None*)  
 
     The timeout duration for this operation. 
 
-    Setting this to __None__ indicates that this operation timeouts when any response arrives or any error occurs.
+    Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
-_NoneType_
+*NoneType*
 
-__RETURNS:__
+**RETURNS:**
 
 None
 
-__EXCEPTIONS:__
+**EXCEPTIONS:**
 
-- __MilvusException__
+- **MilvusException**
 
     This exception will be raised when any error occurs during this operation.
 
-- __BaseException__
+- **BaseException**
 
     This exception will be raised when this operation fails.
 
@@ -63,11 +63,11 @@ client.drop_user(user_name="user_1")
 
 ## Related methods
 
-- [create_user()](./Authentication/create_user.md)
+- [create_user()](create_user.md)
 
-- [describe_user()](./Authentication/describe_user.md)
+- [describe_user()](describe_user.md)
 
-- [list_users()](./Authentication/list_users.md)
+- [list_users()](list_users.md)
 
-- [update_password()](./Authentication/update_password.md)
+- [update_password()](update_password.md)
 

@@ -29,27 +29,27 @@ writer = LocalBulkWriter(
 )
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __schema__ (_[CollectionSchema](../../../ORM/CollectionSchema/CollectionSchema.md)_) -
+- **schema** (*[CollectionSchema](../../ORM/CollectionSchema/CollectionSchema.md)*) -
 
-    __[REQUIRED]__
+    **[REQUIRED]**
 
     The schema of a target collection to which the rewritten data is to be imported.
 
-- __local_path__ (_str_) -
+- **local_path** (*str*) -
 
-    __[REQUIRED]__
+    **[REQUIRED]**
 
     The path to the directory that is to hold the rewritten data.
 
-- __segment_size__ (_int_) -
+- **segment_size** (*int*) -
 
     The maximum size of a file segment.
 
     While rewriting your raw data, Milvus splits your raw data into segments.
 
-    The value defaults to __536,870,912__ in bytes, which is __512__ MB.
+    The value defaults to **536,870,912** in bytes, which is **512** MB.
 
     <div class="admonition note">
 
@@ -67,38 +67,44 @@ __PARAMETERS:__
 
     </div>
 
-- __file_type__ (_[BulkFileType](./DataImport-BulkFileType)_) -
+- **file_type** (*[BulkFileType](../BulkFileType.md)*) -
 
     The type of the output file.
 
-    The value defaults to __BulkFileType.NPY__. 
+    The value defaults to **BulkFileType.NPY**. 
 
-    Possible options are __BulkFileType.NPY__, __BulkFileType.JSON_RB__ and __BulkFileType.PARQUET__.
+    Possible options are **BulkFileType.NPY**, **BulkFileType.JSON_RB** and **BulkFileType.PARQUET**.
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
-_LocalBulkWriter_
+*LocalBulkWriter*
 
-__RETURNS:__
+**RETURNS:**
 
-A __LocalBulkWriter__ object.
+A **LocalBulkWriter** object.
 
-__EXCEPTIONS:__
+**EXCEPTIONS:**
 
-- __SchemaNotReadyException__
+- **SchemaNotReadyException**
 
     This exception will be raised when the provided schema is invalid.
 
 ## Properties
 
-- __uuid__ (_str_) -
+- **uuid** (*str*) -
 
     A randomly generated UUID, used to name the output file or directory, with JSON, Parquet, and NumPy formats supported.
 
-- __data_path__ (_pathlib.PosixPath_) -
+- **data_path** (*pathlib.PosixPath*) -
 
     The path to the output directory.
 
-- __batch_files__ (_str_) -
+- **batch_files** (*str*) -
 
     A list of the generated file names.
+
+## Methods
+
+The following are the methods of the **LocalBulkWriter** class:
+
+<DocCardList />

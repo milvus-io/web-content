@@ -1,8 +1,8 @@
-# __call__()
+# \_\_call\_\_()
 
-This operation in [SpladeEmbeddingFunction](./SpladeEmbeddingFunction.md) takes a list of text strings and directly encodes them into vector embeddings.
+This operation in [SpladeEmbeddingFunction](SpladeEmbeddingFunction.md) takes a list of text strings and directly encodes them into vector embeddings.
 
-Unlike [encode_documents()](./encode_documents.md) or [encode_queries()](./encode_queries.md), which enable you to prepend **doc_instruction** or **query_instruction** and utilize **k_tokens_document** or **k_tokens_query** for result pruning, the **call**() method directly returns embeddings without offering the option to prepend instructions or prune results.
+Unlike [encode_documents()](encode_documents.md) or [encode_queries()](encode_queries.md), which enable you to prepend **doc_instruction** or **query_instruction** and utilize **k_tokens_document** or **k_tokens_query** for result pruning, the **call**() method directly returns embeddings without offering the option to prepend instructions or prune results.
 
 ## Request syntax
 
@@ -10,7 +10,7 @@ Unlike [encode_documents()](./encode_documents.md) or [encode_queries()](./encod
 # Instance created
 splade_ef = SpladeEmbeddingFunction()
 
-# __call__ method will be called
+# \_\_call\_\_ method will be called
 splade_ef(
     texts: List[str]
 ) -> csr_array

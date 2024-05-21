@@ -8,25 +8,25 @@ This operation removes the connection from the registry by the given alias and d
 remove_connection(alias: str)
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __alias__ (_string_) -
+- **alias** (*string*) -
 
-    __[REQUIRED]__
+    **[REQUIRED]**
 
     A connection alias
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
-_NoneType_
+*NoneType*
 
-__RETURNS:__
+**RETURNS:**
 
 None
 
-__EXCEPTIONS:__
+**EXCEPTIONS:**
 
-- __ConnectionConfigException__
+- **ConnectionConfigException**
 
     This exception will be raised when the connection configuration is invalid.
 
@@ -42,15 +42,15 @@ connections.remove_connection(alias="default")
 
 The following operations are related to `remove_connection()`:
 
-- [add_connection()](./add_connection.md)
+- [add_connection()](add_connection.md)
 
-- [connect()](./connect.md)
+- [connect()](connect.md)
 
-- [disconnect()](./disconnect.md)
+- [disconnect()](disconnect.md)
 
-- [get_connection_addr()](./get_connection_addr.md)
+- [get_connection_addr()](get_connection_addr.md)
 
-- [has_connection()](./has_connection.md)
+- [has_connection()](has_connection.md)
 
-- [list_connections()](./list_connections.md)
+- [list_connections()](list_connections.md)
 

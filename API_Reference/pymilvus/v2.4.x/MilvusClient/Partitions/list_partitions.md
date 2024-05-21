@@ -11,29 +11,29 @@ list_partitions(
 ) -> list
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __collection_name __(_str_) -
+- **collection_name** (*str*) -
 
-    __[REQUIRED]__
+    **[REQUIRED]**
 
     The name of an existing collection.
 
-- __timeout__ (_float _|_ None_)  
+- **timeout** (*float* | *None*)  
 
-    The timeout duration for this operation. Setting this to __None__ indicates that this operation timeouts when any response arrives or any error occurs.
+    The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
-_list_
+*list*
 
-__RETURNS:__
+**RETURNS:**
 
 A list of partition names.
 
-__EXCEPTIONS:__
+**EXCEPTIONS:**
 
-- __MilvusException__
+- **MilvusException**
 
     This exception will be raised when any error occurs during this operation.
 
@@ -67,15 +67,15 @@ client.list_partitions(
 
 ## Related methods
 
-- [create_partition()](./create_partition.md)
+- [create_partition()](create_partition.md)
 
-- [drop_partition()](./drop_partition.md)
+- [drop_partition()](drop_partition.md)
 
-- [get_partition_stats()](./get_partition_stats.md)
+- [get_partition_stats()](get_partition_stats.md)
 
-- [has_partition()](./has_partition.md)
+- [has_partition()](has_partition.md)
 
-- [load_partitions()](./load_partitions.md)
+- [load_partitions()](load_partitions.md)
 
-- [release_partitions()](./release_partitions.md)
+- [release_partitions()](release_partitions.md)
 

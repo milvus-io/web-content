@@ -11,26 +11,26 @@ list_resource_groups(
 )
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __using__ (_str_) - 
+- **using** (*str*) - 
 
     The alias of the employed connection.
 
-    The default value is __default__, indicating that this operation employs the default connection.
+    The default value is **default**, indicating that this operation employs the default connection.
 
-- __timeout__ (_float _|_ None_)  
+- **timeout** (*float* | *None*)  
 
-    The timeout duration for this operation. Setting this to __None__ indicates that this operation timeouts when any response arrives or any error occurs.
+    The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
-_list_
+*list*
 
-__RETURNS:__
+**RETURNS:**
 A list of all resource group names.
 
-__EXAMPLE:__
+**EXAMPLE:**
 
 ```python
 from pymilvus import connections, utility
@@ -60,13 +60,13 @@ utility.list_resource_groups(
 
 The following operations are related to `list_resource_groups()`:
 
-- [create_resource_group()](./create_resource_group.md)
+- [create_resource_group()](create_resource_group.md)
 
-- [describe_resource_group()](./describe_resource_group.md)
+- [describe_resource_group()](describe_resource_group.md)
 
-- [drop_resource_group()](./drop_resource_group.md)
+- [drop_resource_group()](drop_resource_group.md)
 
-- [transfer_node()](./transfer_node.md)
+- [transfer_node()](transfer_node.md)
 
-- [transfer_replica()](./transfer_replica.md)
+- [transfer_replica()](transfer_replica.md)
 

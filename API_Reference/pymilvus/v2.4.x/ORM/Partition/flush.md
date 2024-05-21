@@ -20,23 +20,23 @@ flush(
 
 </div>
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __timeout__ (_float _|_ None_)  
+- **timeout** (*float* | *None*)  
 
-    The timeout duration for this operation. Setting this to __None__ indicates that this operation timeouts when any response arrives or any error occurs.
+    The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
-_NoneType_
+*NoneType*
 
-__RETURNS:__
+**RETURNS:**
 
-_None_
+*None*
 
-__EXCEPTIONS:__
+**EXCEPTIONS:**
 
-- __MilvusException__
+- **MilvusException**
 
     This exception will be raised when any error occurs during this operation.
 
@@ -87,13 +87,13 @@ partition.num_entities # 5
 
 The following operations are related to `flush()`:
 
-- [delete()](./delete.md)
+- [delete()](delete.md)
 
-- [insert()](./insert.md)
+- [insert()](insert.md)
 
-- [query()](./query.md)
+- [query()](query.md)
 
-- [search()](./search.md)
+- [search()](search.md)
 
-- [upsert()](./upsert.md)
+- [upsert()](upsert.md)
 

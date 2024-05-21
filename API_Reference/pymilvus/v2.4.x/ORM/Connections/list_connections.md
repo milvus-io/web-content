@@ -8,19 +8,19 @@ This operation returns a list of all connection names and handler objects.
 list_connections()
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
 None
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
-_List_
+*List*
 
-__RETURNS:__
+**RETURNS:**
 
 A list of all connection names and handler objects.
 
-__EXCEPTIONS:__
+**EXCEPTIONS:**
 
 None
 
@@ -43,15 +43,15 @@ connections.list_connections()
 
 The following operations are related to `list_connections()`:
 
-- [add_connection()](./add_connection.md)
+- [add_connection()](add_connection.md)
 
-- [connect()](./connect.md)
+- [connect()](connect.md)
 
-- [disconnect()](./disconnect.md)
+- [disconnect()](disconnect.md)
 
-- [get_connection_addr()](./get_connection_addr.md)
+- [get_connection_addr()](get_connection_addr.md)
 
-- [has_connection()](./has_connection.md)
+- [has_connection()](has_connection.md)
 
-- [remove_connection()](./remove_connection.md)
+- [remove_connection()](remove_connection.md)
 

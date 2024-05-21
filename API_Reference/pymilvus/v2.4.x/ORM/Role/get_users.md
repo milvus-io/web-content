@@ -8,15 +8,15 @@ This operation lists all users associated with the current role.
 get_users()
 ```
 
-__PARAMETERS__
+**PARAMETERS**
 
 N/A
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
-_tuple_
+*tuple*
 
-__RETURNS:__
+**RETURNS:**
 
 A tuple that contains the names of all users added to the current role.
 
@@ -36,21 +36,21 @@ users = role.get_users() # (admin, )
 
 The following operations are related to `get_users()`:
 
-- [add_user()](./add_user.md)
+- [add_user()](add_user.md)
 
-- [create()](./create.md)
+- [create()](create.md)
 
-- [drop()](./drop.md)
+- [drop()](drop.md)
 
-- [grant()](./grant.md)
+- [grant()](grant.md)
 
-- [is_exist()](./is_exist.md)
+- [is_exist()](is_exist.md)
 
-- [list_grant()](./list_grant.md)
+- [list_grant()](list_grant.md)
 
-- [list_grants()](./list_grants.md)
+- [list_grants()](list_grants.md)
 
-- [remove_user()](./remove_user.md)
+- [remove_user()](remove_user.md)
 
-- [revoke()](./revoke.md)
+- [revoke()](revoke.md)
 

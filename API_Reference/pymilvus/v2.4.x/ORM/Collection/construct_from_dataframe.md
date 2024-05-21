@@ -12,27 +12,27 @@ construct_from_dataframe(
 )
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __name__ (_string_) -
+- **name** (*string*) -
 
-    __[REQUIRED]__
+    **[REQUIRED]**
 
     The name of the collection to create.
 
-- __primary_field__ (_string_) -
+- **primary_field** (*string*) -
 
-    __[REQUIRED]__
+    **[REQUIRED]**
 
     The name of the primary field. It should be one of the column labels in the following dataframe.
 
-- __dataframe__ (_pandas.DataFrame_) 
+- **dataframe** (*pandas.DataFrame*) 
 
-    __[REQUIRED]__
+    **[REQUIRED]**
 
     The dataframe containing the data to be inserted into the collection.
 
-    You can form a data frame in any way, as demonstrated in the __Example__ section on [this page](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html).
+    You can form a data frame in any way, as demonstrated in the **Example** section on [this page](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html).
 
     ```python
     dataframe = pd.DataFrame({
@@ -47,55 +47,55 @@ __PARAMETERS:__
     })
     ```
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
-_tuple (Collection, MutationResults)_
+*tuple (Collection, MutationResults)*
 
-__RETURNS:__
+**RETURNS:**
 
-A tuple containing the collection and a __MutationResult__ object returned by the __insert()__ operation.
+A tuple containing the collection and a **MutationResult** object returned by the **insert()** operation.
 
-A __MutationResult__ object contains the following fields:
+A **MutationResult** object contains the following fields:
 
-- __insert_count__ (_int_)
+- **insert_count** (*int*)
 
     The count of inserted entities.
 
-- __delete_count__ (_int_)
+- **delete_count** (*int*)
 
     The count of deleted entities.
 
-- __upsert_count__ (_int_)
+- **upsert_count** (*int*)
 
     The count of upserted entities.
 
-- __succ_count__ (_int_)
+- **succ_count** (*int*)
 
     The count of successful executions during this operation.
 
-- __succ_index__ (_list_)
+- **succ_index** (*list*)
 
     A list of index numbers starting from 0, each indicating a successful operation.
 
-- __err_count__ (_int_)
+- **err_count** (*int*)
 
     The count of failed executions during this operation.
 
-- __err_index__ (_list_)
+- **err_index** (*list*)
 
     A list of index numbers starting from 0, each indicating a failed operation.
 
-- __primary_keys__ (_list_)
+- **primary_keys** (*list*)
 
     A list of primary keys for the inserted entities.
 
-- __timestamp__ (_int_)
+- **timestamp** (*int*)
 
     The timestamp at which this operation is completed.
 
-__EXCEPTIONS:__
+**EXCEPTIONS:**
 
-- __SchemaNotReadyException__
+- **SchemaNotReadyException**
 
     This exception will be raised when the specified primary field is not valid.
 
@@ -125,7 +125,7 @@ collection, results = Collection.construct_from_dataframe(
 
 The following operations are related to `construct_from_dataframe()`:
 
-- [Collection](../Collection/Collection.md)
+- [Collection](Collection.md)
 
 - [CollectionSchema](../CollectionSchema/CollectionSchema.md)
 

@@ -15,44 +15,44 @@ load_balance(
 )
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __collection_name__ (_str_) -
-__[REQUIRED]__
+- **collection_name** (*str*) -
+**[REQUIRED]**
 
     The name of an existing collection for which a load-balancing group is set up.
 
-- __src_node_id__ (_int_) -
-__[REQUIRED]__
+- **src_node_id** (*int*) -
+**[REQUIRED]**
 
     The ID of the query node the collection currently uses.
 
-- __dst_node_ids__ (_list[int]_) -
+- **dst_node_ids** (*list[int]*) -
 
     The IDs of the query nodes to be added to the load-balancing group.
 
-- __sealed_segment_ids__ (_list[int]_) -
+- **sealed_segment_ids** (*list[int]*) -
 
     The IDs of the sealed segments to load-balance.
 
-- __timeout__ (_float_)  
+- **timeout** (*float*)  
 
-    The timeout duration for this operation. Setting this to __None__ indicates that this operation timeouts when any response arrives or any error occurs.
+    The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-- __using__ (_str_) - 
+- **using** (*str*) - 
 
     The alias of the employed connection.
 
-    The default value is __default__, indicating that this operation employs the default connection.
+    The default value is **default**, indicating that this operation employs the default connection.
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
-_NoneType_
+*NoneType*
 
-__RETURNS:__
+**RETURNS:**
 None
 
-__EXCEPTIONS:__
+**EXCEPTIONS:**
 
 N/A
 

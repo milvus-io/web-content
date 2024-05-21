@@ -8,21 +8,21 @@ This operation drops an existing role. The operation will succeed if the specifi
 drop()
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
 N/A
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
-_NoneType_
+*NoneType*
 
-__RETURNS:__
+**RETURNS:**
 
-_None_
+*None*
 
-__EXCEPTIONS:__
+**EXCEPTIONS:**
 
-- __MilvusException__
+- **MilvusException**
 
     This exception will be raised when any error occurs during this operation.
 
@@ -59,21 +59,21 @@ roles = utility.list_roles(include_user_info=True)
 
 The following operations are related to `drop()`:
 
-- [add_user()](./add_user.md)
+- [add_user()](add_user.md)
 
-- [create()](./create.md)
+- [create()](create.md)
 
-- [get_users()](./get_users.md)
+- [get_users()](get_users.md)
 
-- [grant()](./grant.md)
+- [grant()](grant.md)
 
-- [is_exist()](./is_exist.md)
+- [is_exist()](is_exist.md)
 
-- [list_grant()](./list_grant.md)
+- [list_grant()](list_grant.md)
 
-- [list_grants()](./list_grants.md)
+- [list_grants()](list_grants.md)
 
-- [remove_user()](./remove_user.md)
+- [remove_user()](remove_user.md)
 
-- [revoke()](./revoke.md)
+- [revoke()](revoke.md)
 

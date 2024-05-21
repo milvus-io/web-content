@@ -10,25 +10,25 @@ partition(
 )
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __partition_name__ (_str_) -
+- **partition_name** (*str*) -
 
-    __[REQUIRED]__
+    **[REQUIRED]**
 
     The name of the partition to get.
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
-_Partition _| _NoneType_
+*Partition* | *NoneType*
 
-__RETURNS:__
+**RETURNS:**
 
-A __Partition__ object. If the current collection does not have a partition of the specified name, __None__ is returned.
+A **Partition** object. If the current collection does not have a partition of the specified name, **None** is returned.
 
-__EXCEPTIONS:__
+**EXCEPTIONS:**
 
-- __MilvusException__
+- **MilvusException**
 
     This exception will be raised when any error occurs during this operation.
 
@@ -56,13 +56,13 @@ partition = collection.partition(partition_name="test_partition")
 
 The following operations are related to `partition()`:
 
-- [Collection](./ORM/Collection.md)
+- [Collection](Collection.md)
 
-- [Partition](./ORM/Partition.md)
+- [Partition](../Partition/Partition.md)
 
-- [create_partition()](./create_partition.md)
+- [create_partition()](create_partition.md)
 
-- [drop_partition()](./drop_partition.md)
+- [drop_partition()](drop_partition.md)
 
-- [has_partition()](./has_partition.md)
+- [has_partition()](has_partition.md)
 

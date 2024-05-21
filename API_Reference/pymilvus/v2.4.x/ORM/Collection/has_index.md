@@ -8,23 +8,23 @@ This operation checks whether the current collection has a built index.
 has_index(timeout: float | None)
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __timeout__ (_float _|_ None_)  
+- **timeout** (*float* | *None*)  
 
-    The timeout duration for this operation. Setting this to __None__ indicates that this operation timeouts when any response arrives or any error occurs.
+    The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
-_bool_
+*bool*
 
-__RETURNS:__
+**RETURNS:**
 
 A boolean value indicating whether the current collection has a built index or not.
 
-__EXCEPTIONS:__
+**EXCEPTIONS:**
 
-- __MilvusException__
+- **MilvusException**
 
     This exception will be raised when any error occurs during this operation.
 
@@ -74,15 +74,15 @@ collection.has_index() # False
 
 The following operations are related to `has_index()`:
 
-- [create_index()](./create_index.md)
+- [create_index()](create_index.md)
 
-- [drop_index()](./drop_index.md)
+- [drop_index()](drop_index.md)
 
-- [index()](./index.md)
+- [index()](index.md)
 
-- [index_building_progress()](./utility/index_building_progress.md)
+- [index_building_progress()](../utility/index_building_progress.md)
 
-- [wait_for_index_building_complete()](./utility/wait_for_index_building_complete.md)
+- [wait_for_index_building_complete()](../utility/wait_for_index_building_complete.md)
 
-- [list_indexes()](./utility/list_indexes.md)
+- [list_indexes()](../utility/list_indexes.md)
 

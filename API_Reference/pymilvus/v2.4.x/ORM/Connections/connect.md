@@ -15,11 +15,11 @@ connect(
 )
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __alias__ (_string_) -
+- **alias** (*string*) -
 
-    __[REQUIRED]__
+    **[REQUIRED]**
 
     A connection alias.
 
@@ -34,29 +34,29 @@ __PARAMETERS:__
 
     </div>
 
-- __user__ (_string_) -
+- **user** (*string*) -
 
     A valid username used to connect to the specified Milvus instance.
 
     Use this if authentication has been enabled on the target Milvus instance. To enable authentication, refer to [Authenticate User Access](https://milvus.io/docs/authenticate.md).
 
-    This should be used along with __password__.
+    This should be used along with **password**.
 
-- __password__ (_string_) -
+- **password** (*string*) -
 
     A valid password used to connect to the specified Milvus instance.
 
     Use this if authentication has been enabled on the target Milvus instance. To enable authentication, refer to [Authenticate User Access](https://milvus.io/docs/authenticate.md).
 
-    This should be used along with __user__.
+    This should be used along with **user**.
 
-- __db_name__ (_string_) -
+- **db_name** (*string*) -
 
     The name of the database to which the target Milvus instance belongs.
 
-- __token__ (_string_) -
+- **token** (*string*) -
 
-    A valid access token to access the specified Milvus instance. This can be used as an alternative to setting __user__ and __password__ separately.
+    A valid access token to access the specified Milvus instance. This can be used as an alternative to setting **user** and **password** separately.
 
     When setting this field, notice that:
 
@@ -64,89 +64,89 @@ __PARAMETERS:__
 
     Use this if authentication has been enabled on the target Milvus instance. To enable authentication, refer to [Authenticate User Access](https://milvus.io/docs/authenticate.md).
 
-- __kwargs__ (_dict_) -
+- **kwargs** (*dict*) -
 
     Keyword arguments for configuring the connection. The following keys are supported:
 
-    - __address__ (_string_) -
+    - **address** (*string*) -
 
-        The actual address to connect. Example address: __localhost:19530__.
+        The actual address to connect. Example address: **localhost:19530**.
 
-    - __uri__ (_string_) -
+    - **uri** (*string*) -
 
-        The URI of the Milvus instance. For example: __http://localhost:19530__.
+        The URI of the Milvus instance. For example: **http://localhost:19530**.
 
-    - __host__ (_string_) -
+    - **host** (*string*) -
 
-        The host of the Milvus instance. The value defaults to __localhost__, and PyMilvus will fill in the default host if only __port__ is provided.
+        The host of the Milvus instance. The value defaults to **localhost**, and PyMilvus will fill in the default host if only **port** is provided.
 
-    - __port__ (_string | int_) -
+    - **port** (*string | int*) -
 
-        The port that Milvus instance listens to. The value defaults to __19530__, and PyMilvus will fill in the default port if only __host__ is provided.
+        The port that Milvus instance listens to. The value defaults to **19530**, and PyMilvus will fill in the default port if only **host** is provided.
 
-    - __secure__ (_bool_) -
+    - **secure** (*bool*) -
 
         A boolean value indicating whether TLS is employed in the connection.
 
-    - __client_key_path__ (_string_) -
+    - **client_key_path** (*string*) -
 
-        A path to a valid __client.key__ file for the TLS certificate verification on the client side.
-
-        This parameter is necessary when using a self-signed TLS certificate or a certificate signed by an unknown authority.
-
-        This parameter should work with __client_pem_path__,__ ca_pem_path__,__ server_pem_path__, and__ server_name__ if applicable.
-
-    - __client_pem_path__ (_string_) -
-
-        A path to a valid __client.pem__ file for the TLS certificate verification on the client side.
+        A path to a valid **client.key** file for the TLS certificate verification on the client side.
 
         This parameter is necessary when using a self-signed TLS certificate or a certificate signed by an unknown authority.
 
-        This parameter should work with __client_key_path__,__ ca_pem_path__,__ server_pem_path__, and__ server_name__ if applicable.
+        This parameter should work with **client_pem_path**, **ca_pem_path**, **server_pem_path**, and **server_name** if applicable.
 
-    - __ca_pem_path__ (_string_) -
+    - **client_pem_path** (*string*) -
 
-        A path to a valid __ca.pem__ file for the TLS certificate verification.
-
-        This parameter is necessary when using a self-signed TLS certificate or a certificate signed by an unknown authority.
-
-        This parameter should work with __client_key_path__,__ client_pem_path__,__ server_pem_path__, and__ server_name__ if applicable.
-
-    - __server_pem_path__ (_string_) -
-
-        A path to a valid __server.pem__ file for the TLS certificate verification on the server side.
+        A path to a valid **client.pem** file for the TLS certificate verification on the client side.
 
         This parameter is necessary when using a self-signed TLS certificate or a certificate signed by an unknown authority.
 
-        This parameter should work with __client_key_path__,__ client_pem_path__,__ ca_pem_path__, and__ server_name__ if applicable.
+        This parameter should work with **client_key_path**, **ca_pem_path**, **server_pem_path**, and **server_name** if applicable.
 
-    - __server_name__ (_string_) -
+    - **ca_pem_path** (*string*) -
+
+        A path to a valid **ca.pem** file for the TLS certificate verification.
+
+        This parameter is necessary when using a self-signed TLS certificate or a certificate signed by an unknown authority.
+
+        This parameter should work with **client_key_path**, **client_pem_path**, **server_pem_path**, and **server_name** if applicable.
+
+    - **server_pem_path** (*string*) -
+
+        A path to a valid **server.pem** file for the TLS certificate verification on the server side.
+
+        This parameter is necessary when using a self-signed TLS certificate or a certificate signed by an unknown authority.
+
+        This parameter should work with **client_key_path**, **client_pem_path**, **ca_pem_path**, and **server_name** if applicable.
+
+    - **server_name** (*string*) -
 
         A path to a valid server name for the TLS certificate verification on the server side.
 
         This parameter is necessary when using a self-signed TLS certificate or a certificate signed by an unknown authority.
 
-        This parameter should work with __client_key_path__,__ client_pem_path__,__ ca_pem_path__, and__ server_pem_path__ if applicable.
+        This parameter should work with **client_key_path**, **client_pem_path**, **ca_pem_path**, and **server_pem_path** if applicable.
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
 None
 
-__RETURNS:__
+**RETURNS:**
 
 None
 
 ## Exceptions
 
-- __NotImplementedError__:
+- **NotImplementedError**:
 
     This exception will be raised when the handler parameter value is not GRPC.
 
-- __ParamError__: 
+- **ParamError**: 
 
     This exception will be raised when an unsupported value is passed for the pool parameter.
 
-- __Exception__: 
+- **Exception**: 
 
     This exception will be raised when the server specified in the connection parameters is not reachable/ready and the client cannot connect to it.
 
@@ -185,15 +185,15 @@ connections.connect(db_name="books")
 
 The following operations are related to `connect()`:
 
-- [add_connection()](./add_connection.md)
+- [add_connection()](add_connection.md)
 
-- [disconnect()](./disconnect.md)
+- [disconnect()](disconnect.md)
 
-- [get_connection_addr()](./get_connection_addr.md)
+- [get_connection_addr()](get_connection_addr.md)
 
-- [has_connection()](./has_connection.md)
+- [has_connection()](has_connection.md)
 
-- [list_connections()](./list_connections.md)
+- [list_connections()](list_connections.md)
 
-- [remove_connection()](./remove_connection.md)
+- [remove_connection()](remove_connection.md)
 

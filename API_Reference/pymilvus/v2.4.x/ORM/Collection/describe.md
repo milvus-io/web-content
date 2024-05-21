@@ -8,17 +8,17 @@ This operation describes the current collection.
 describe(timeout: float | None)
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __timeout__ (_float _|_ None_)  
+- **timeout** (*float* | *None*)  
 
-    The timeout duration for this operation. Setting this to __None__ indicates that this operation timeouts when any response arrives or any error occurs.
+    The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
-_dict_
+*dict*
 
-__RETURNS:__
+**RETURNS:**
 
 A dictionary that contains detailed information about the specified collection.
 
@@ -57,79 +57,79 @@ A dictionary that contains detailed information about the specified collection.
 }
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __collection_name__ (_str_) -
+- **collection_name** (*str*) -
 
     The name of the current collection.
 
-- __auto_id__ (_bool_) -
+- **auto_id** (*bool*) -
 
     Whether Milvus automatically generates the primary key for the collection.
 
-- __num_shards__ (_int_) -
+- **num_shards** (*int*) -
 
     The number of shards the current collection has.
 
-- __description__ (_str_)
+- **description** (*str*)
 
     The description of the current collection.
 
-- __fields__ (_list_)
+- **fields** (*list*)
 
     A list of fields in the current collection.
 
-    - __field_id__ (_int_)
+    - **field_id** (*int*)
 
         The ID of the current field.
 
-    - __name__ (_str_)
+    - **name** (*str*)
 
         The name of the current field.
 
-    - __description__ (_str_)
+    - **description** (*str*)
 
         The description of the current field.
 
-    - __type__ (_int_)
+    - **type** (*int*)
 
         The type of the current field. For details, refer to DataType.
 
-    - __params__ (_dict_)
+    - **params** (*dict*)
 
         Additional attributes of the current fields.
 
-        - For VARCHAR fields, __max_length__ (_int_) is a possible attribute, which determines the number of characters in the value of the current field.
+        - For VARCHAR fields, **max_length** (*int*) is a possible attribute, which determines the number of characters in the value of the current field.
 
-        - For FLOAT_VECTOR fields, __dim__ (_int_) is a possible attribute, which determines the number of vector embeddings in the value of the current field.
+        - For FLOAT_VECTOR fields, **dim** (*int*) is a possible attribute, which determines the number of vector embeddings in the value of the current field.
 
-    - __element_type__ (_int_)
+    - **element_type** (*int*)
 
-    - __is_primary__ (_bool_)
+    - **is_primary** (*bool*)
 
         Whether the current field serves as the primary key of the collection.
 
-- __aliases__ (_list_)      
+- **aliases** (*list*)      
 
     A list of collection aliases. You can use any alias in the list to use the current collection.  
 
-- __collection_id__ (_int_)
+- **collection_id** (*int*)
 
     The ID of the current collection. Milvus allocates an ID for each collection while creating it.
 
-- __consistency_level__ (_int_)
+- **consistency_level** (*int*)
 
     The consistency level of the current collection. For details, refer to ConsistencyLevel.
 
-- __properties__ (_dict_)
+- **properties** (*dict*)
 
-- __num_partitions__ (_int_) 
+- **num_partitions** (*int*) 
 
     The number of partitions in the current collection.
 
-__EXCEPTIONS:__
+**EXCEPTIONS:**
 
-- __DescribeCollectionException__
+- **DescribeCollectionException**
 
     This arises when any error occurs during this operation.
 
@@ -189,11 +189,11 @@ collection.describe()
 
 ## Related operations
 
-- [drop()](./drop.md)
+- [drop()](drop.md)
 
-- [flush()](./flush.md)
+- [flush()](flush.md)
 
-- [get_replicas()](./get_replicas.md)
+- [get_replicas()](get_replicas.md)
 
-- [set_properties()](./set_properties.md)
+- [set_properties()](set_properties.md)
 

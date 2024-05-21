@@ -21,31 +21,31 @@ grant(
 ) 
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __object__ (_string_)
+- **object** (*string*)
 
-    __[REQUIRED]__
+    **[REQUIRED]**
 
     The type of the object to grant the privilege.
 
-    The value is case-sensitive, and possible options are __Collection__, __Global__, and __User__. For details, refer to [Users & Roles](https://milvus.io/docs/users_and_roles.md).
+    The value is case-sensitive, and possible options are **Collection**, **Global**, and **User**. For details, refer to [Users & Roles](https://milvus.io/docs/users_and_roles.md).
 
-- __object_name__ (_string_)
+- **object_name** (*string*)
 
-    __[REQUIRED]__
+    **[REQUIRED]**
 
-    The name of a target object of the type specified in __object__.
+    The name of a target object of the type specified in **object**.
 
     It can be a collection name, a user name, or a wild card (*).
 
-- __privilege__ (_string_)
+- **privilege** (*string*)
 
-    __[REQUIRED]__
+    **[REQUIRED]**
 
     The name of the privilege to grant.
 
-    Applicable privileges vary with the specified __object__. For details, refer to refer to [Users & Roles](https://milvus.io/docs/users_and_roles.md).
+    Applicable privileges vary with the specified **object**. For details, refer to refer to [Users & Roles](https://milvus.io/docs/users_and_roles.md).
 
     <div class="admonition note">
 
@@ -53,26 +53,26 @@ __PARAMETERS:__
 
     <ul>
     <li><p>To grant all privileges to a kind of object, like <strong>Collection</strong>, <strong>Global</strong>, <strong>User</strong>, use <code>*</code> for privilege name.</p></li>
-    <li><p>When <code>object</code> is set to <code>Global</code>, setting <code>privilege</code> to <code>*</code> is not equivalent to setting it to <code>All</code>. The <code>All</code> privilege includes all permissions, including any collection and user object.</p></li>
+    <li><p>When <code>object</code> is set to <code>Global</code>, setting <code>privilege</code> to <code>\*</code> is not equivalent to setting it to <code>All</code>. The <code>All</code> privilege includes all permissions, including any collection and user object.</p></li>
     </ul>
 
     </div>
 
-- __db_name__ (_string_)
+- **db_name** (*string*)
 
     The name of a database the object belongs to. If left unspecified, the default database applies.
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
-_NoneType_
+*NoneType*
 
-__RETURNS:__
+**RETURNS:**
 
-_None_
+*None*
 
-__EXCEPTIONS:__
+**EXCEPTIONS:**
 
-- __MilvusException__
+- **MilvusException**
 
     This exception will be raised when any error occurs during this operation.
 
@@ -92,21 +92,21 @@ role.grant("Collection", collection_name, "Insert")
 
 The following operations are related to `grant()`:
 
-- [add_user()](./add_user.md)
+- [add_user()](add_user.md)
 
-- [create()](./create.md)
+- [create()](create.md)
 
-- [drop()](./drop.md)
+- [drop()](drop.md)
 
-- [get_users()](./get_users.md)
+- [get_users()](get_users.md)
 
-- [is_exist()](./is_exist.md)
+- [is_exist()](is_exist.md)
 
-- [list_grant()](./list_grant.md)
+- [list_grant()](list_grant.md)
 
-- [list_grants()](./list_grants.md)
+- [list_grants()](list_grants.md)
 
-- [remove_user()](./remove_user.md)
+- [remove_user()](remove_user.md)
 
-- [revoke()](./revoke.md)
+- [revoke()](revoke.md)
 

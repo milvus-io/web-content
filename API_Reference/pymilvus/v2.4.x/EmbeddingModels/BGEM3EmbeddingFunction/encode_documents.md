@@ -10,25 +10,25 @@ encode_documents(
 ) -> Dict
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __documents__ (_List[str]_)
+- **documents** (*List[str]*)
 
     A list of string values, where each string represents a document that will be passed to the embedding model for encoding. The model will generate an embedding vector for each string in the list.
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
-_Dict_
+*Dict*
 
-__RETURNS:__
+**RETURNS:**
 
 A dictionary containing the document embeddings.
 
-When initializing [BGEM3EmbeddingFunction](./BGEM3EmbeddingFunction.md), if __return_dense__, __return_sparse__, and __return_colbert_vecs__ are set to __True__, the returned dictionary will contain the keys __dense__, __sparse__, and __colbert_vecs__, with the corresponding dense embeddings, sparse word embeddings, and ColBERT vectors.
+When initializing [BGEM3EmbeddingFunction](BGEM3EmbeddingFunction.md), if **return_dense**, **return_sparse**, and **return_colbert_vecs** are set to **True**, the returned dictionary will contain the keys **dense**, **sparse**, and **colbert_vecs**, with the corresponding dense embeddings, sparse word embeddings, and ColBERT vectors.
 
-__Exceptions:__
+**Exceptions:**
 
-- __ImportError__
+- **ImportError**
 
     This exception will be raised when the FlagEmbedding module is not installed.
 

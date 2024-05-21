@@ -1,8 +1,8 @@
-# __call__()
+# \_\_call\_\_()
 
-This operation in [BGEM3EmbeddingFunction](./BGEM3EmbeddingFunction.md) takes a list of text strings and directly encodes them into vector embeddings.
+This operation in [BGEM3EmbeddingFunction](BGEM3EmbeddingFunction.md) takes a list of text strings and directly encodes them into vector embeddings.
 
-The ____call__()__ method of BGEM3EmbeddingFunction shares the same functionality as [encode_documents()](./encode_documents) and [encode_queries()](./encode_queries.md).
+The **\_\_call\_\_()** method of BGEM3EmbeddingFunction shares the same functionality as [encode_documents()](encode_documents.md) and [encode_queries()](encode_queries.md).
 
 ## Request syntax
 
@@ -10,31 +10,31 @@ The ____call__()__ method of BGEM3EmbeddingFunction shares the same functionalit
 # Instance created
 bge_m3_ef = BGEM3EmbeddingFunction()
 
-# __call__ method will be called
+# \_\_call\_\_ method will be called
 bge_m3_ef(
     texts: List[str]
 ) -> Dict
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __texts__ (_List[str]_)
+- **texts** (*List[str]*)
 
     A list of string values, where each string represents text that will be passed to the embedding model for encoding. The model will generate an embedding vector for each string in the list.
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
-_Dict_
+*Dict*
 
-__RETURNS:__
+**RETURNS:**
 
 A dictionary containing the document embeddings.
 
-When initializing [BGEM3EmbeddingFunction](./BGEM3EmbeddingFunction.md), if __return_dense__, __return_sparse__, and __return_colbert_vecs__ are set to __True__, the returned dictionary will contain the keys __dense__, __sparse__, and __colbert_vecs__, with the corresponding dense embeddings, sparse word embeddings, and ColBERT vectors.
+When initializing [BGEM3EmbeddingFunction](BGEM3EmbeddingFunction.md), if **return_dense**, **return_sparse**, and **return_colbert_vecs** are set to **True**, the returned dictionary will contain the keys **dense**, **sparse**, and **colbert_vecs**, with the corresponding dense embeddings, sparse word embeddings, and ColBERT vectors.
 
-__Exceptions:__
+**Exceptions:**
 
-- __ImportError__
+- **ImportError**
 
     This exception will be raised when the FlagEmbedding module is not installed.
 
@@ -56,7 +56,7 @@ docs = [
     "Born in Maida Vale, London, Turing was raised in southern England.",
 ]
 
-# bge_m3_ef.__call__ will be called
+# bge_m3_ef.\_\_call\_\_ will be called
 bge_m3_ef(docs)
 
 # {'dense': [array([-0.02505937, -0.00142193,  0.04015467, ..., -0.02094924,

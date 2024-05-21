@@ -8,19 +8,19 @@ This operation checks if a connection with the given alias has already been esta
 has_connection(alias: str)
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __alias__ (_string_) -
+- **alias** (*string*) -
 
-    __[REQUIRED]__
+    **[REQUIRED]**
 
     A connection alias.
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
-_Boolean_
+*Boolean*
 
-__RETURNS:__
+**RETURNS:**
 
 A Boolean value indicating whether the connection exists.
 
@@ -33,9 +33,9 @@ A Boolean value indicating whether the connection exists.
 
 </div>
 
-__EXCEPTIONS:__
+**EXCEPTIONS:**
 
-- __ConnectionConfigException__
+- **ConnectionConfigException**
 
     This exception will be raised when the connection configuration is invalid.
 
@@ -54,15 +54,15 @@ connections.has_connection(alias="default")
 
 The following operations are related to `has_connection()`:
 
-- [add_connection()](./add_connection.md)
+- [add_connection()](add_connection.md)
 
-- [connect()](./connect.md)
+- [connect()](connect.md)
 
-- [disconnect()](./disconnect.md)
+- [disconnect()](disconnect.md)
 
-- [get_connection_addr()](./get_connection_addr.md)
+- [get_connection_addr()](get_connection_addr.md)
 
-- [list_connections()](./list_connections.md)
+- [list_connections()](list_connections.md)
 
-- [remove_connection()](./remove_connection.md)
+- [remove_connection()](remove_connection.md)
 

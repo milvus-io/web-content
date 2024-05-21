@@ -22,52 +22,52 @@ rename_collection(
 )
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __old_collection_name__ (_str_) -
+- **old_collection_name** (*str*) -
 
-    __[REQUIRED]__
+    **[REQUIRED]**
 The original name of the target collection.
 
-    Setting this to a non-existing collection results in a __MilvusException__.
+    Setting this to a non-existing collection results in a **MilvusException**.
 
-- __new_collection_name__ (_str_) -
+- **new_collection_name** (*str*) -
 
-    __[REQUIRED]__
+    **[REQUIRED]**
 
     The name of the target collection after this operation.
 
-    Setting this to the value of __old_collection_name__ results in a __MilvusException__.
+    Setting this to the value of **old_collection_name** results in a **MilvusException**.
 
-- __new_db_name__ (_str_) -
+- **new_db_name** (*str*) -
 
     The name of the database to which the collection belongs after this operation.
 
-    The value defaults to __default__. Setting this to a database rather than the one the collection belongs to before this operation moves this collection to the specified database.
+    The value defaults to **default**. Setting this to a database rather than the one the collection belongs to before this operation moves this collection to the specified database.
 
-    Setting this to a non-existing database results in a __MilvusException__.
+    Setting this to a non-existing database results in a **MilvusException**.
 
-- __using__ (_str_) - 
+- **using** (*str*) - 
 
     The alias of the employed connection.
 
-    The default value is __default__, indicating that this operation employs the default connection.
+    The default value is **default**, indicating that this operation employs the default connection.
 
-- __timeout__ (_float _|_ None_)  
+- **timeout** (*float* | *None*)  
 
-    The timeout duration for this operation. Setting this to __None__ indicates that this operation timeouts when any response arrives or any error occurs.
+    The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
-_NoneType_
+*NoneType*
 
-__RETURNS:__
+**RETURNS:**
 
 None
 
-__EXCEPTIONS:__
+**EXCEPTIONS:**
 
-- __MilvusException__
+- **MilvusException**
 
     This exception will be raised when any error occurs during this operation, especially when the specified alias does not exist.
 
@@ -97,15 +97,15 @@ utility.rename_collection(
 
 The following operations are related to `rename_collection()`:
 
-- [drop_collection()](./drop_collection.md)
+- [drop_collection()](drop_collection.md)
 
-- [flush_all()](./flush_all.md)
+- [flush_all()](flush_all.md)
 
-- [get_query_segment_info()](./get_query_segment_info.md)
+- [get_query_segment_info()](get_query_segment_info.md)
 
-- [has_collection()](./has_collection.md)
+- [has_collection()](has_collection.md)
 
-- [has_partition()](./has_partition.md)
+- [has_partition()](has_partition.md)
 
-- [list_collections()](./list_collections.md)
+- [list_collections()](list_collections.md)
 

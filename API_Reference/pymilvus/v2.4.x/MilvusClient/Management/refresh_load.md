@@ -11,31 +11,31 @@ refresh_load(
 )
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __collection_name__ (_str_) -
+- **collection_name** (*str*) -
 
-    __[REQUIRED]__
+    **[REQUIRED]**
 
     The name of the target collection of this operation.
 
-- __timeout__ (_float _|_ None_)  
+- **timeout** (*float* | *None*)  
 
     The timeout duration for this operation. 
 
-    Setting this to __None__ indicates that this operation timeouts when any response arrives or any error occurs.
+    Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
-_NoneType_
+*NoneType*
 
-__RETURNS:__
+**RETURNS:**
 
  None
 
-__EXCEPTIONS:__
+**EXCEPTIONS:**
 
-- __MilvusException__
+- **MilvusException**
 
     This exception will be raised when any error occurs during this operation.
 
@@ -64,9 +64,9 @@ client.refresh_load(
 
 ## Related methods
 
-- [get_load_state()](./get_load_state.md)
+- [get_load_state()](get_load_state.md)
 
-- [load_collection()](./load_collection.md)
+- [load_collection()](load_collection.md)
 
-- [release_collection()](./release_collection.md)
+- [release_collection()](release_collection.md)
 

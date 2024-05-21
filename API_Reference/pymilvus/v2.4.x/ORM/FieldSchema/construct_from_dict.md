@@ -19,23 +19,23 @@ construct_from_dict(
 
 </div>
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __raw__ (_dict_)
+- **raw** (*dict*)
 
     A dictionary containing the raw data to construct the field schema.
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
-_FieldSchema_
+*FieldSchema*
 
-__RETURNS:__
+**RETURNS:**
 
 A FieldSchema object.
 
-__EXCEPTIONS:__
+**EXCEPTIONS:**
 
-- __MilvusException__
+- **MilvusException**
 
     This exception will be raised when any error occurs during this operation.
 
@@ -64,5 +64,5 @@ print(field)
 
 The following operations are related to `construct_from_dict()`:
 
-- [to_dict()](./to_dict.md)
+- [to_dict()](to_dict.md)
 

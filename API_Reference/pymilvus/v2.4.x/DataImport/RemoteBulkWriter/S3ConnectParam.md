@@ -1,6 +1,6 @@
 # S3ConnectParam
 
-An __S3ConnectParam__ instance sets connection parameters for a __RemoteBulkWriter__ instance.
+An **S3ConnectParam** instance sets connection parameters for a **RemoteBulkWriter** instance.
 
 ```python
 class pymilvus.RemoteBulkWriter.S3ConnectParam
@@ -8,7 +8,7 @@ class pymilvus.RemoteBulkWriter.S3ConnectParam
 
 ## Constructor
 
-Constructs an __S3ConnectParam__ object by a set of parameters, such as __bucket_name__, __access_key__, __secret_key__, etc.
+Constructs an **S3ConnectParam** object by a set of parameters, such as **bucket_name**, **access_key**, **secret_key**, etc.
 
 <div class="admonition note">
 
@@ -37,62 +37,72 @@ connect_param = S3ConnectParam(
 )
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __bucket_name__ (_str_)
+- **bucket_name** (*str*)
 
     The name of the remote bucket to connect to.
 
-- __endpoint__ (_str_)
+- **endpoint** (*str*)
 
     The URL of the AWS-S3-compatible service.
 
     The value can be the URL of a MinIO service or that of any AWS S3 compatible public service.
 
-    |  __Service Name__ |  __Endpoint__           |
-    | ----------------- | ----------------------- |
-    |  __AWS S3__       |  s3.amazonaws.com       |
-    |  __GCS__          |  storage.googleapis.com |
+    <table>
+       <tr>
+         <th><strong>Service Name</strong></th>
+         <th><strong>Endpoint</strong></th>
+       </tr>
+       <tr>
+         <td><strong>AWS S3</strong></td>
+         <td>s3.amazonaws.com</td>
+       </tr>
+       <tr>
+         <td><strong>GCS</strong></td>
+         <td>storage.googleapis.com</td>
+       </tr>
+    </table>
 
-- __access_key__ (_str_)
+- **access_key** (*str*)
 
     The access key (user ID) used to authenticate access to the specified bucket.
 
-- __secret_key__ (_str_)
+- **secret_key** (*str*)
 
     The secret_key (password) used to authenticate access to the specified bucket.
 
-- __secure__ (_bool_)
+- **secure** (*bool*)
 
     Whether to use secure (TLS) connection to the AWS S3 compatible service. 
 
-- __session_token__ (_str_)
+- **session_token** (*str*)
 
     A session token of your account in the AWS S3 compatible service.
 
-- __region__ (_str_)
+- **region** (*str*)
 
     The name or ID of the region where the bucket resides.
 
-- __http_client __(_urllib3.poolmanager.PoolManager_)
+- **http_client** (*urllib3.poolmanager.PoolManager*)
 
     A customized HTTP client.
 
-- __credentials__ (_minio.credentials.Provider_)    
+- **credentials** (*minio.credentials.Provider*)    
 
     A credentials provider of your account in the AWS S3 compatible service.
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
-_RemoteBulkWriter_
+*RemoteBulkWriter*
 
-__RETURNS:__
+**RETURNS:**
 
-A __RemoteBulkWriter__ object.
+A **RemoteBulkWriter** object.
 
-__EXCEPTIONS:__
+**EXCEPTIONS:**
 
-- __Exception__
+- **Exception**
 
     This exception will be raised if the connection fails.
 

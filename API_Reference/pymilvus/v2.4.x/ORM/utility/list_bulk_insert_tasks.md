@@ -13,36 +13,36 @@ list_bulk_insert_tasks(
 )
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __limit__ (_int_) -
+- **limit** (*int*) -
 
     The number of tasks to return.
 
-    The value defaults to __0__, indicating that no limit applies. 
+    The value defaults to **0**, indicating that no limit applies. 
 
-- __collection_name__ (_list[str]_) -
+- **collection_name** (*list[str]*) -
 
     A list of collection names.
 
-    The value defaults to __None__, indicating that all collections are included.
+    The value defaults to **None**, indicating that all collections are included.
 
-- __using__ (_str_) - 
+- **using** (*str*) - 
 
     The alias of the employed connection.
 
-    The default value is __default__, indicating that this operation employs the default connection.
+    The default value is **default**, indicating that this operation employs the default connection.
 
-- __timeout__ (_float _|_ None_)  
+- **timeout** (*float* | *None*)  
 
-    The timeout duration for this operation. Setting this to __None__ indicates that this operation timeouts when any response arrives or any error occurs.
+    The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
-_list_
+*list*
 
-__RETURNS:__
-A list of __BulkInsertState__ objects.
+**RETURNS:**
+A list of **BulkInsertState** objects.
 
 ```python
 ├── BulkInsertState
@@ -66,109 +66,109 @@ A list of __BulkInsertState__ objects.
 │   └── collection_name
 ```
 
-- __task_id__ (_int_)
+- **task_id** (*int*)
 
-    A task ID returned by the __do_bulk_insert()__ function.
+    A task ID returned by the **do_bulk_insert()** function.
 
-- __state__ (_int_)
-
-    The state of the specified bulk_insert task in integers. Possible values are the following integers:
-
-    - __0__: Indicates that the task is in a pending state
-
-    - __1__: Indicates that the task failed.
-
-    - __2__: Indicates that the task has already started.
-
-    - __5__: Indicates that the data has been persisted.
-
-    - __6__: Indicates that the task has been completed.
-
-    - __7__: Indicates that the task failed and the data has been cleaned up.
-
-    - __100__: Indicates that the task is in an unknown state.
-
-- __state_name__ (_str_)
+- **state** (*int*)
 
     The state of the specified bulk_insert task in integers. Possible values are the following integers:
 
-    - __Pending__: Indicates that the task is in a pending state
+    - **0**: Indicates that the task is in a pending state
 
-    - __Failed__: Indicates that the task failed.
+    - **1**: Indicates that the task failed.
 
-    - __Started__: Indicates that the task has already started.
+    - **2**: Indicates that the task has already started.
 
-    - __Persisted__: Indicates that the data has been persisted.
+    - **5**: Indicates that the data has been persisted.
 
-    - __Completed__: Indicates that the task has been completed.
+    - **6**: Indicates that the task has been completed.
 
-    - __FailedAndCleaned__: Indicates that the task failed and the data has been cleaned up.
+    - **7**: Indicates that the task failed and the data has been cleaned up.
 
-    - __Unknown__: Indicates that the task is in an unknown state.
+    - **100**: Indicates that the task is in an unknown state.
 
-- __row_count__ (_int_)
+- **state_name** (*str*)
+
+    The state of the specified bulk_insert task in integers. Possible values are the following integers:
+
+    - **Pending**: Indicates that the task is in a pending state
+
+    - **Failed**: Indicates that the task failed.
+
+    - **Started**: Indicates that the task has already started.
+
+    - **Persisted**: Indicates that the data has been persisted.
+
+    - **Completed**: Indicates that the task has been completed.
+
+    - **FailedAndCleaned**: Indicates that the task failed and the data has been cleaned up.
+
+    - **Unknown**: Indicates that the task is in an unknown state.
+
+- **row_count** (*int*)
 
     The number of entities inserted in the current bulk-insert task.
 
-- __progress__ (_int_) 
+- **progress** (*int*) 
 
     The progress of the current bulk-insert task.
 
-- __infos__ (_dict_)
+- **infos** (*dict*)
 
     A dictionary containing information about the current bulk-insert task. Possible keys are as follows:
 
-    - __files__ (_str_)
+    - **files** (*str*)
 
         The names of the files involved in the current bulk-insert task in a comma-separated string.
 
-    - __collection__ (_str_)
+    - **collection** (*str*)
 
         The name of the target collection.
 
-    - __partition__ (_str_)
+    - **partition** (*str*)
 
         The name of the target partition.
 
-    - __failed_reason__ (_str_)
+    - **failed_reason** (*str*)
 
         The reason for any bulk-insert failures. If the task succeeds, this is an empty string.
 
-    - __progress_percent__ (str)
+    - **progress_percent** (str)
 
         The progress of the current bulk-insert task in percentage.
 
-    - __persist_cost__ (str)
+    - **persist_cost** (str)
 
         The persistence cost of the current bulk-insert task.
 
-- __ids__ (_list_) 
+- **ids** (*list*) 
 
     The IDs of the inserted entities in a list.
 
-- __id_ranges__ (_google._upb._message.RepeatedScalarContainer_)
+- **id_ranges** (*google._upb._message.RepeatedScalarContainer*)
 
 - The ID of the inserted entities in a range.
 
-- __files__ (str)
+- **files** (str)
 
     The names of the files involved in the current bulk-insert task in a comma-separated string.
 
-- __create_timestamp__ (int)
+- **create_timestamp** (int)
 
     The timestamp at which the current bulk-insert task has been created.
 
-- __create_time_str__ (str)
+- **create_time_str** (str)
 
     The timestamp at which the current bulk-insert task has been created, in a human-readable string.
 
-- __collection_name__ (str)
+- **collection_name** (str)
 
     The name of the target collection.
 
-__EXCEPTIONS:__
+**EXCEPTIONS:**
 
-- __MilvusException__
+- **MilvusException**
 
     This exception will be raised when any error occurs during this operation.
 
@@ -188,9 +188,9 @@ res = utility.list_bulk_insert_tasks()
 
 The following operations are related to `list_bulk_insert_state()`:
 
-- [BulkInsertState](./BulkInsertState.md)
+- [BulkInsertState](BulkInsertState.md)
 
-- [do_bulk_insert()](./do_bulk_insert.md)
+- [do_bulk_insert()](do_bulk_insert.md)
 
-- [get_bulk_insert_state()](./get_bulk_insert_state.md)
+- [get_bulk_insert_state()](get_bulk_insert_state.md)
 

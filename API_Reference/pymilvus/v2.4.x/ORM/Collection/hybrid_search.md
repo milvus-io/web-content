@@ -16,13 +16,13 @@ hybrid_search(
 )
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __reqs__ (_List[AnnSearchRequest]_) -
+- **reqs** (*List[AnnSearchRequest]*) -
 
-    A list of search requests, where each request is an __ANNSearchRequest__ object. Each request corresponds to a different vector field and a different set of search parameters.
+    A list of search requests, where each request is an **ANNSearchRequest** object. Each request corresponds to a different vector field and a different set of search parameters.
 
-    - __ANNSearchRequest__: A class representing an ANN search request.
+    - **ANNSearchRequest**: A class representing an ANN search request.
 
         ```python
         ├── AnnSearchRequest
@@ -33,17 +33,17 @@ __PARAMETERS:__
         │   └── expr
         ```
 
-        - __data__: The query vector to search in the request.
+        - **data** (*List*): The query vector to search in the request. This parameter accepts a list containing one element.
 
-        - __anns_field__: The vector field to use in the request.
+        - **anns_field** (*str*): The vector field to use in the request.
 
-        - __param__: A dictionary of search parameters for the request. For details, refer to [Search parameters](https://milvus.io/docs/single-vector-search#search-parameters).
+        - **param** (*dict*): A dictionary of search parameters for the request. For details, refer to [Search parameters](https://milvus.io/docs/single-vector-search#search-parameters).
 
-        - __limit__: The maximum number of results to return in the request.
+        - **limit** (*int*): The maximum number of results to return in the request. When performing a hybrid search with multiple ANN search requests, the top results defined by **limit** from each request will be combined and re-ranked before returning the final search results.
 
-        - __expr__: (Optional) The expression to filter the results.
+        - **expr** (*str*): (Optional) The expression to filter the results.
 
-- __rerank __(_BaseRanker_) -
+- **rerank** (*BaseRanker*) -
 
     The reranking strategy to use for hybrid search. Valid values: `WeightedRanker` and `RRFRanker`.
 
@@ -51,43 +51,43 @@ __PARAMETERS:__
 
     - `RRFRanker`: The RRF reranking strategy, which merges results from multiple searches, favoring items that consistently appear.
 
-- __limit__ (_int_) -
+- **limit** (*int*) -
 
     The total number of entities to return.
 
-    You can use this parameter in combination with `offset` in __param__ to enable pagination.
+    You can use this parameter in combination with `offset` in **param** to enable pagination.
 
-    The sum of this value and `offset` in __param__ should be less than 16,384.
+    The sum of this value and `offset` in **param** should be less than 16,384.
 
-- __partition_names__ (_List[str]_) -
+- **partition_names** (*List[str]*) -
 
     A list of partition names.
 
-    The value defaults to __None__. If specified, only the specified partitions are involved in queries.
+    The value defaults to **None**. If specified, only the specified partitions are involved in queries.
 
-- __output_fields__ (_List[str]_) -
+- **output_fields** (*List[str]*) -
 
     A list of field names to include in each entity in return.
 
-    The value defaults to __None__. If left unspecified, only the primary field is included.
+    The value defaults to **None**. If left unspecified, only the primary field is included.
 
-- __timeout__ (_float_) -
+- **timeout** (*float*) -
 
-    The timeout duration for this operation. Setting this to __None__ indicates that this operation timeouts when any response arrives or any error occurs.
+    The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-- __round_decimal__ (int) -
+- **round_decimal** (int) -
 
     The number of decimal places that Milvus rounds the calculated distances to.
 
-    The value defaults to __-1__, indicating that Milvus skips rounding the calculated distances and returns the raw value.
+    The value defaults to **-1**, indicating that Milvus skips rounding the calculated distances and returns the raw value.
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
-_SearchResult_
+*SearchResult*
 
-__RETURNS:__
+**RETURNS:**
 
-A __SearchResult__ object that contains a list of __Hits__ objects. 
+A **SearchResult** object that contains a list of **Hits** objects. 
 
 - Response structure
 
@@ -115,41 +115,41 @@ A __SearchResult__ object that contains a list of __Hits__ objects.
 
 - Properties and methods
 
-    - A __Hits__ object has the following fields:
+    - A **Hits** object has the following fields:
 
-        - __ids__ (_list[int]_ | _list[str]_)
+        - **ids** (*list[int]* | *list[str]*)
 
             A list containing the IDs of the hit entities.
 
-        - __distances__ (list[float]) 
+        - **distances** (list[float]) 
 
             A list of distances from the hit entities' vector fields to the query vector.
 
-    - A __Hit__ object has the following fields:
+    - A **Hit** object has the following fields:
 
-        - __id__ (_int_ | _str_)
+        - **id** (*int* | *str*)
 
             The ID of a hit entity.
 
-        - __distance__ (_float_)
+        - **distance** (*float*)
 
             The distance from a hit entity's vector field to the query vector.
 
-        - __score__ (_float_)
+        - **score** (*float*)
 
-            An alias to __distance__.
+            An alias to **distance**.
 
-        - __vector__ (_list[float]_)   
+        - **vector** (*list[float]*)   
 
             The vector field of a hit entity.
 
-        - __get(_field_name: str_)__
+        - **get(*field_name: str*)**
 
             A function to get the value of the specified field in a hit entity. 
 
-__EXCEPTIONS:__
+**EXCEPTIONS:**
 
-- __MilvusException__
+- **MilvusException**
 
     This exception will be raised when any error occurs during this operation.
 

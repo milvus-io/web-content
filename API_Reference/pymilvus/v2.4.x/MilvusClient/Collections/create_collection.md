@@ -20,110 +20,110 @@ create_collection(
 ) -> None
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __collection_name__ (_str_) -
+- **collection_name** (*str*) -
 
-    __[REQUIRED]__
+    **[REQUIRED]**
 
     The name of the collection to create.
 
-- __dimension__ (_int_) -
+- **dimension** (*int*) -
 
     The dimension of the collection field to hold vector embeddings.
 
     The value is usually determined by the model you use to generate vector embeddings.
 
-    This parameter is designed for the quick setup of a collection and will be ignored if __schema__ is not __None __and a field in the schema has its __dim __set to a positive integer.
+    This parameter is designed for the quick setup of a collection and will be ignored if **schema** is not **None** and a field in the schema has its **dim** set to a positive integer.
 
-- __primary_field_name__ (_str_) -
+- **primary_field_name** (*str*) -
 
     The name of the primary field in this collection.
 
-    The value defaults to __id__. You can use another name you see fit. Skip this parameter if you need to set up a collection with a customized schema.
+    The value defaults to **id**. You can use another name you see fit. Skip this parameter if you need to set up a collection with a customized schema.
 
-    This parameter is designed for the quick setup of a collection and will ignored if the __schema__ is not __None __and a field in the schema has its __is_primary__ set to __True__.
+    This parameter is designed for the quick setup of a collection and will ignored if the **schema** is not **None** and a field in the schema has its **is_primary** set to **True**.
 
-- __id_type__ (_[DataType](./DataType.md)_) -
+- **id_type** (*[DataType](DataType.md)*) -
 
     The data type of the primary field in this collection.
 
-    The value defaults to __DataType.INT64__. Possible values are __DataType.INT64__ and __DataType.VARCHAR__. 
+    The value defaults to **DataType.INT64**. Possible values are **DataType.INT64** and **DataType.VARCHAR**. 
 
-    This parameter is designed for the quick setup of a collection and will be ignored if __schema__ is not __None__.
+    This parameter is designed for the quick setup of a collection and will be ignored if **schema** is not **None**.
 
-- __vector_field_name__ (_str_) -
+- **vector_field_name** (*str*) -
 
     The name of the collection field to hold vector embeddings.
 
-    The value defaults to __vector__. You can use another name you see fit. 
+    The value defaults to **vector**. You can use another name you see fit. 
 
-    This parameter is designed for the quick setup of a collection and will be ignored if __schema__ is not __None__.
+    This parameter is designed for the quick setup of a collection and will be ignored if **schema** is not **None**.
 
-- __metric_type__ (_str_) -
+- **metric_type** (*str*) -
 
     The algorithm used for this collection to measure similarities between vector embeddings.
 
-    The value defaults to __COSINE__. Possible values are __L2__, __IP__, and __COSINE__. For details on these metric types, refer to [Similarity Metrics](https://milvus.io/docs/metric.md).
+    The value defaults to **COSINE**. Possible values are **L2**, **IP**, and **COSINE**. For details on these metric types, refer to [Similarity Metrics](https://milvus.io/docs/metric.md).
 
-    This parameter is designed for the quick setup of a collection and will be ignored if __schema__ is not __None__.
+    This parameter is designed for the quick setup of a collection and will be ignored if **schema** is not **None**.
 
-- __auto_id__ (_bool_) -
+- **auto_id** (*bool*) -
 
     Whether the primary field automatically increments upon data insertions into this collection.
 
-    The value defaults to __False__. Setting this to __True__ makes the primary field automatically increment. 
+    The value defaults to **False**. Setting this to **True** makes the primary field automatically increment. 
 
-    This parameter is designed for the quick setup of a collection and will be ignored if __schema__ is not __None__.
+    This parameter is designed for the quick setup of a collection and will be ignored if **schema** is not **None**.
 
-- __timeout__ (_float_ | _None_) -
+- **timeout** (*float* | *None*) -
 
-    The timeout duration for this operation. Setting this to __None__ indicates that this operation timeouts when any response returns or error occurs.
+    The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response returns or error occurs.
 
-- __schema__ (_CollectionSchema_ | _None_)
+- **schema** (*CollectionSchema* | *None*)
 
     The schema of this collection.
 
-    Setting this to __None__ indicates this collection will be created with default settings. 
+    Setting this to **None** indicates this collection will be created with default settings. 
 
-    To set up a collection with a customized schema, you need to create a __CollectionSchema__ object and reference it here. In this case, Milvus ignores all other schema-related settings carried in the request.
+    To set up a collection with a customized schema, you need to create a **CollectionSchema** object and reference it here. In this case, Milvus ignores all other schema-related settings carried in the request.
 
-- __index_params__ (_IndexParams_ | _None_)
+- **index_params** (*IndexParams* | *None*)
 
-    The parameters for building the index on the vector field in this collection. To set up a collection with a customized schema and automatically load the collection to memory, you need to create an __IndexParams__ object and reference it here. 
+    The parameters for building the index on the vector field in this collection. To set up a collection with a customized schema and automatically load the collection to memory, you need to create an **IndexParams** object and reference it here. 
 
     You should at least add an index for the vector field in this collection. You can also skip this parameter if you prefer to set up the index parameters later on.
 
-- __kwargs__ -
+- **kwargs** -
 
-    - __enable_dynamic_field__ (_bool_) -
+    - **enable_dynamic_field** (*bool*) -
 
-        Whether to use a reserved JSON field named __$meta__ to store undefined fields and their values in key-value pairs.
+        Whether to use a reserved JSON field named **$meta** to store undefined fields and their values in key-value pairs.
 
-        The value defaults to __True__, indicating that the __$meta__ field is used.
+        The value defaults to **True**, indicating that the **$meta** field is used.
 
-        This parameter is ignored if __schema__ is not __None__.
+        This parameter is ignored if **schema** is not **None**.
 
-    - __num_shards__ (_int_) -
+    - **num_shards** (*int*) -
 
         The number of shards to create along with the creation of this collection. 
 
-        The value defaults to __1__, indicating that two shards are to be created along with this collection.
+        The value defaults to **1**, indicating that one shard is to be created along with this collection.
 
         <div class="admonition note">
 
         <p><b>what is sharding?</b></p>
 
         <p>Sharding refers to distributing write operations to different nodes to make the most of the parallel computing potential of a Milvus cluster for writing data.</p>
-        <p>By default, a collection contains two shards.</p>
+        <p>By default, a collection contains one shard.</p>
 
         </div>
 
-    - __partition_key_field__ (_str_) -
+    - **partition_key_field** (*str*) -
 
         The name of the field that serves as the partition key. Each collection can have one partition key.
 
-        This parameter is ignored if __schema__ is not __None __and a field in the schema has its __is_parition_key__ set to __True__.
+        This parameter is ignored if **schema** is not **None** and a field in the schema has its **is_parition_key** set to **True**.
 
         <div class="admonition note">
 
@@ -135,17 +135,17 @@ __PARAMETERS:__
 
         </div>
 
-    - __num_partitions__ (_int_) -
+    - **num_partitions** (*int*) -
 
         The number of partitions to create for the partition key feature.
 
-        The value defaults to __64__, indicating that 64 partitions are to be created along with this collection. This parameter applies when __partition_key_field __is set to the name of a field.
+        The value defaults to **64**, indicating that 64 partitions are to be created along with this collection. This parameter applies when **partition_key_field** is set to the name of a field.
 
-    - __consistency_level__ (_int_ | _str_)
+    - **consistency_level** (*int* | *str*)
 
         The consistency level of the target collection.
 
-        The value defaults to __Bounded __(__2__) with options of __Strong __(__0__), __Session __(__1__), __Bounded __(__2__), and __Eventually __(__3__).
+        The value defaults to **Bounded** (**2**) with options of **Strong** (**0**), **Session** (**1**), **Bounded** (**2**), and **Eventually** (**3**).
 
         <div class="admonition note">
 
@@ -157,29 +157,29 @@ __PARAMETERS:__
 
         </div>
 
-    - __properties__ (_dict_) -
+    - **properties** (*dict*) -
 
         Additional properties in key-value pairs.
 
-        - __collection.ttl.seconds__ (_int_)
+        - **collection.ttl.seconds** (*int*)
 
             The time-to-live (TTL) of a collection in seconds.
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
-_NoneType_
+*NoneType*
 
-__RETURNS:__
+**RETURNS:**
 
 None
 
-__EXCEPTIONS:__
+**EXCEPTIONS:**
 
-- __PrimaryKeyException__
+- **PrimaryKeyException**
 
     This exception will be raised if the data type of the primary field is not an integer or a string.
 
-- __MilvusException__
+- **MilvusException**
 
     This exception will be raised when any error occurs during this operation.
 
@@ -200,7 +200,7 @@ client = MilvusClient(
 
 You can choose between a quick setup or a customized setup as follows:
 
-- __Quick setup__
+- **Quick setup**
 
     The quick setup collection has two fields: the primary and vector fields. It also allows the insertion of undefined fields and their values in key-value pairs in a dynamic field.
 
@@ -213,13 +213,13 @@ You can choose between a quick setup or a customized setup as follows:
 
     In the above setup, 
 
-    - The primary and vector fields use their default names (__id__ and __vector__).
+    - The primary and vector fields use their default names (**id** and **vector**).
 
-    - The metric type is also set to its default value (__COSINE__).
+    - The metric type is also set to its default value (**COSINE**).
 
     - The primary field accepts integers and does not automatically increments.
 
-    - The reserved JSON field named __$meta__ is used to store non-schema-defined fields and their values.
+    - The reserved JSON field named **$meta** is used to store non-schema-defined fields and their values.
 
     You can modify the names of the primary and vector fields and change the metric type. Additionally, the primary field can be set to increment automatically.
 
@@ -238,7 +238,7 @@ You can choose between a quick setup or a customized setup as follows:
 
     In the above code, the collection will be created and automatically loaded into memory.
 
-- __Customized setup with index parameters__
+- **Customized setup with index parameters**
 
     For a customized setup, create the schema and index parameters beforehand. 
 
@@ -281,7 +281,7 @@ You can choose between a quick setup or a customized setup as follows:
 
     In the above code, the collection will be created and automatically loaded into memory.
 
-- __Customized setup without index parameters__
+- **Customized setup without index parameters**
 
     ```python
     from pymilvus import MilvusClient, DataType
@@ -307,21 +307,21 @@ You can choose between a quick setup or a customized setup as follows:
 
 ## Related methods
 
-- [create_schema()](./create_schema.md)
+- [create_schema()](create_schema.md)
 
-- [describe_collection()](./describe_collection.md)
+- [describe_collection()](describe_collection.md)
 
-- [drop_collection()](./drop_collection.md)
+- [drop_collection()](drop_collection.md)
 
-- [get_collection_stats()](./get_collection_stats.md)
+- [get_collection_stats()](get_collection_stats.md)
 
-- [has_collection()](./has_collection.md)
+- [has_collection()](has_collection.md)
 
-- [list_collections()](./list_collections.md)
+- [list_collections()](list_collections.md)
 
-- [rename_collection()](./rename_collection.md)
+- [rename_collection()](rename_collection.md)
 
-- [IndexType](./IndexType.md)
+- [IndexType](IndexType.md)
 
-- [DataType](./DataType.md)
+- [DataType](DataType.md)
 

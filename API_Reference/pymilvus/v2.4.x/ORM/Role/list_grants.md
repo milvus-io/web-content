@@ -10,21 +10,21 @@ list_grants(
 )
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __db_name__ (_str_)
+- **db_name** (*str*)
 
     The name of a database in which Milvus carries out this operation.
 
     If the specified database does not exist, an empty result returns.
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
-_GrantInfo_
+*GrantInfo*
 
-__RETURNS:__
+**RETURNS:**
 
-A __GrantInfo__ object that contains a list of __GrantItem__ objects.
+A **GrantInfo** object that contains a list of **GrantItem** objects.
 
 ```python
 ├── GrantInfo
@@ -38,11 +38,11 @@ A __GrantInfo__ object that contains a list of __GrantItem__ objects.
 │           └── db_name
 ```
 
-The __GrantItem__ objects contains the following fields:
+The **GrantItem** objects contains the following fields:
 
-__EXCEPTIONS:__
+**EXCEPTIONS:**
 
-- __MilvusException__
+- **MilvusException**
 
     This exception will be raised when any error occurs during this operation.
 
@@ -64,21 +64,21 @@ res = list_grants(
 
 The following operations are related to `get_replicas()`:
 
-- [add_user()](./add_user.md)
+- [add_user()](add_user.md)
 
-- [create()](./create.md)
+- [create()](create.md)
 
-- [drop()](./drop.md)
+- [drop()](drop.md)
 
-- [get_users()](./get_users.md)
+- [get_users()](get_users.md)
 
-- [grant()](./grant.md)
+- [grant()](grant.md)
 
-- [is_exist()](./is_exist.md)
+- [is_exist()](is_exist.md)
 
-- [list_grant()](./list_grant.md)
+- [list_grant()](list_grant.md)
 
-- [remove_user()](./remove_user.md)
+- [remove_user()](remove_user.md)
 
-- [revoke()](./revoke.md)
+- [revoke()](revoke.md)
 

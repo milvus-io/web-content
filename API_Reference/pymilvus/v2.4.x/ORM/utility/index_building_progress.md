@@ -13,65 +13,65 @@ index_building_progress(
 )
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __collection_name__ (_str_) -
+- **collection_name** (*str*) -
 
-    __[REQUIRED]__
+    **[REQUIRED]**
 
     The name of an existing collection.
 
-    Setting this to a non-existing collection leads to a __CollectionNotExistException__.
+    Setting this to a non-existing collection leads to a **CollectionNotExistException**.
 
-- __index_name__ (_str_) -
+- **index_name** (*str*) -
 
     The name of the target index of this operation.
 
     If left unspecified, the default index applies. If the collection has multiple indexes, this parameter is mandatory.
 
-    Setting this to a non-existing index leads to an __IndexNotExistException__.
+    Setting this to a non-existing index leads to an **IndexNotExistException**.
 
-- __using__ (_str_) - 
+- **using** (*str*) - 
 
     The alias of the employed connection.
 
-    The default value is __default__, indicating that this operation employs the default connection.
+    The default value is **default**, indicating that this operation employs the default connection.
 
-- __timeout__ (_float _|_ None_)  
+- **timeout** (*float* | *None*)  
 
-    The timeout duration for this operation. Setting this to __None__ indicates that this operation times out when any response arrives or any error occurs.
+    The timeout duration for this operation. Setting this to **None** indicates that this operation times out when any response arrives or any error occurs.
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
-_dict_
+*dict*
 
-__RETURNS:__
+**RETURNS:**
 A dictionary that contains the number of indexed entities as well as that of total entities in the specified collection.
 The dictionary has the following keys:
 
-- __total_rows__ (_int_)
+- **total_rows** (*int*)
 
     The total number of entities in the specified collection.
 
-- __indexed_rows__ (_int_)
+- **indexed_rows** (*int*)
 
     The number of indexed entities in the specified collection.
 
-- __pending_index_rows__ (_int_)
+- **pending_index_rows** (*int*)
 
     The number of entities that are pending to be indexed.
 
-__EXCEPTIONS:__
+**EXCEPTIONS:**
 
-- __CollectionNotExistException__
+- **CollectionNotExistException**
 
     This exception will be raised if the specified collection does not exist.
 
-- __IndexNotExistException__
+- **IndexNotExistException**
 
     This exception will be raised if the specified index does not exist.
 
-- __AmbiguousIndexName__
+- **AmbiguousIndexName**
 
     This exception will be raised if multiple indexes exist but the index name is left unspecified.
 
@@ -136,15 +136,15 @@ utility.index_building_progress(
 
 The following operations are related to `index_building_progress()`
 
-- [create_index()](./Collection/create_index.md)
+- [create_index()](../Collection/create_index.md)
 
-- [drop_index()](./Collection/drop_index.md)
+- [drop_index()](../Collection/drop_index.md)
 
-- [has_index()](./Collection/has_index.md)
+- [has_index()](../Collection/has_index.md)
 
-- [index()](./Collection/index.md)
+- [index()](../Collection/index.md)
 
-- [wait_for_index_building_complete()](./wait_for_index_building_complete.md)
+- [wait_for_index_building_complete()](wait_for_index_building_complete.md)
 
-- [list_indexes()](./list_indexes.md)
+- [list_indexes()](list_indexes.md)
 

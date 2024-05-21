@@ -14,11 +14,11 @@ query(
 )
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __expr __(_str_) -
+- **expr** (*str*) -
 
-    __[REQUIRED]__
+    **[REQUIRED]**
 
     A scalar filtering condition to filter matching entities. 
 
@@ -26,29 +26,29 @@ __PARAMETERS:__
 
     To build a scalar filtering condition, refer to [Boolean Expression Rules](https://milvus.io/docs/boolean.md). 
 
-- __output_fields__ (_list_) -
+- **output_fields** (*list*) -
 
     A list of field names to include in each entity in return.
 
-    The value defaults to __None__. If left unspecified, only the primary field is included.
+    The value defaults to **None**. If left unspecified, only the primary field is included.
 
-- __partition_names__ (_list_)
+- **partition_names** (*list*)
 
     A list of partition names.
 
-    The value defaults to __None__. If specified, only the specified partitions are involved in queries.
+    The value defaults to **None**. If specified, only the specified partitions are involved in queries.
 
-- __timeout__ (_float_)  
+- **timeout** (*float*)  
 
-    The timeout duration for this operation. Setting this to __None__ indicates that this operation timeouts when any response arrives or any error occurs.
+    The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-- __kwargs__: 
+- **kwargs**: 
 
-    - __consistency_level__ (_str_ | _int_) -
+    - **consistency_level** (*str* | *int*) -
 
         The consistency level of the target collection.
 
-        The value defaults to the one specified when you create the current collection, with options of __Strong __(__0__), __Bounded __(__1__), __Session __(__2__), and __Eventually __(__3__).
+        The value defaults to the one specified when you create the current collection, with options of **Strong** (**0**), **Bounded** (**1**), **Session** (**2**), and **Eventually** (**3**).
 
         <div class="admonition note">
 
@@ -60,7 +60,7 @@ __PARAMETERS:__
 
         </div>
 
-    - __guarantee_timestamp__ (_int_) -
+    - **guarantee_timestamp** (*int*) -
 
         A valid timestamp. 
 
@@ -74,11 +74,11 @@ __PARAMETERS:__
 
         </div>
 
-    - __graceful_time__ (_int_) -
+    - **graceful_time** (*int*) -
 
         A period of time in seconds.
 
-        The value defaults to __5__. If this parameter is set, MilvusZilliz Cloud calculates the guarantee timestamp by subtracting this from the current timestamp.
+        The value defaults to **5**. If this parameter is set, MilvusZilliz Cloud calculates the guarantee timestamp by subtracting this from the current timestamp.
 
         <div class="admonition note">
 
@@ -88,7 +88,7 @@ __PARAMETERS:__
 
         </div>
 
-    - __offset__ (_int_) -
+    - **offset** (*int*) -
 
         The number of records to skip in the query result. 
 
@@ -96,7 +96,7 @@ __PARAMETERS:__
 
         The sum of this value and `limit` should be less than 16,384. 
 
-    - __limit__ (_int_) -
+    - **limit** (*int*) -
 
         The number of records to return in the query result.
 
@@ -104,21 +104,21 @@ __PARAMETERS:__
 
         The sum of this value and `offset` should be less than 16,384. 
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
-_list[dict]_
+*list[dict]*
 
-__RETURNS:__
+**RETURNS:**
 
 A list of dictionaries with each dictionary representing a queried entity.
 
-__EXCEPTIONS:__
+**EXCEPTIONS:**
 
-- __MilvusException__
+- **MilvusException**
 
     This exception will be raised when any error occurs during this operation.
 
-- __DataTypeNotMatchException__
+- **DataTypeNotMatchException**
 
     This exception will be raised when a parameter value doesn't match the required data type.
 
@@ -201,15 +201,15 @@ res = collection.query(
 
 The following operations are related to `query()`:
 
-- [delete()](./delete.md)
+- [delete()](delete.md)
 
-- [insert()](./insert.md)
+- [insert()](insert.md)
 
-- [search()](./search.md)
+- [search()](search.md)
 
-- [search_iterator()](./search_iterator.md)
+- [search_iterator()](search_iterator.md)
 
-- [query_iterator()](./query_iterator.md)
+- [query_iterator()](query_iterator.md)
 
-- [upsert()](./upsert.md)
+- [upsert()](upsert.md)
 

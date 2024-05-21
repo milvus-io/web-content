@@ -10,45 +10,45 @@ get_replicas(
 )
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __timeout__ (_float _|_ None_)  
+- **timeout** (*float* | *None*)  
 
-    The timeout duration for this operation. Setting this to __None__ indicates that this operation timeouts when any response arrives or any error occurs.
+    The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
-_Replica_
+*Replica*
 
-__RETURNS:__
+**RETURNS:**
 
-A __Replica__ object that contains the following fields:
+A **Replica** object that contains the following fields:
 
-- __groups__ (_list_)
+- **groups** (*list*)
 
-    A list of replica groups. Each __Group__ objects that contains the following fields:
+    A list of replica groups. Each **Group** objects that contains the following fields:
 
-    - __id__ (_int_)
+    - **id** (*int*)
 
         The group ID.
 
-    - __group_nodes__ (_tuple_)
+    - **group_nodes** (*tuple*)
 
         A tuple containing the IDs of the involved query nodes.
 
-    - __resource_group__ (_str_)
+    - **resource_group** (*str*)
 
         The name of the resource group to which the above query nodes belong.
 
-    - __shards__ (_list_)  
+    - **shards** (*list*)  
 
-        A list of __Shard__ objects that contains the following fields:
+        A list of **Shard** objects that contains the following fields:
 
-        - __channel_name__ (_str_)
+        - **channel_name** (*str*)
 
-        - __shard_leader__ (_int_)
+        - **shard_leader** (*int*)
 
-        - __shard_nodes__ (_set_)
+        - **shard_nodes** (*set*)
 
 <div class="admonition note">
 
@@ -60,7 +60,7 @@ A __Replica__ object that contains the following fields:
 
 </div>
 
-__EXCEPTIONS:__
+**EXCEPTIONS:**
 
 None
 
@@ -82,9 +82,9 @@ partition.get_replicas()
 
 The following operations are related to `get_replicas()`:
 
-- [drop()](./drop.md)
+- [drop()](drop.md)
 
-- [load()](./load.md)
+- [load()](load.md)
 
-- [release()](./release.md)
+- [release()](release.md)
 

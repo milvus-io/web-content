@@ -1,6 +1,6 @@
 # MilvusClient
 
-A __MilvusClient__ instance represents a Python client that connects to a specific Milvus instance.
+A **MilvusClient** instance represents a Python client that connects to a specific Milvus instance.
 
 ```python
 pymilvus.MilvusClient
@@ -30,9 +30,9 @@ MilvusClient(
 )
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __uri__ (_string_) -
+- **uri** (*string*) -
 
     The URI of the Milvus instance. For example:
 
@@ -40,31 +40,31 @@ __PARAMETERS:__
     http://localhost:19530
     ```
 
-- __user__ (_string_) -
+- **user** (*string*) -
 
     A valid username used to connect to the specified Milvus instance.
 
     Use this if authentication has been enabled on the target Milvus instance. To enable authentication, refer to [Authenticate User Access](https://milvus.io/docs/authenticate.md).
 
-    This should be used along with __password__.
+    This should be used along with **password**.
 
-- __password__ (_string_) -
+- **password** (*string*) -
 
     A valid password used to connect to the specified Milvus instance.
 
     Use this if authentication has been enabled on the target Milvus instance. To enable authentication, refer to [Authenticate User Access](https://milvus.io/docs/authenticate.md).
 
-    This should be used along with __user__.
+    This should be used along with **user**.
 
-- __db_name__ (_string_) -
+- **db_name** (*string*) -
 
     The name of the database to which the target Milvus instance belongs.
 
-- __token__ (_string_) -
+- **token** (*string*) -
 
     A valid access token to access the specified Milvus instance. 
 
-    This can be used as a recommended alternative to setting __user__ and __password__ separately.
+    This can be used as a recommended alternative to setting **user** and **password** separately.
 
     When setting this field, notice that:
 
@@ -72,11 +72,11 @@ __PARAMETERS:__
 
     Use this if authentication has been enabled on the target Milvus instance. To enable authentication, refer to [Authenticate User Access](https://milvus.io/docs/authenticate.md).
 
-- __timeout__ (_float _|_ None_)  
+- **timeout** (*float* | *None*)  
 
     The timeout duration for this operation. 
 
-    Setting this to __None__ indicates that this operation timeouts when any response arrives or any error occurs.
+    Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
 ## Examples
 
@@ -100,8 +100,4 @@ client = MilvusClient(
     db_name="default"
 )
 ```
-
-## Class members
-
-Refer to [MilvusClient](./MilvusClient.md) for a categorized list of class members.
 

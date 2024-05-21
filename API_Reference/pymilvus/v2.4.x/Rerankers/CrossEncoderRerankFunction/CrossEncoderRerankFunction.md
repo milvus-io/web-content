@@ -49,3 +49,5 @@ ce_rf = CrossEncoderRerankFunction(
     device="cpu" # Specify the device to use, e.g., 'cpu' or 'cuda:0'
 )
 ```
+
+<DocCardList />

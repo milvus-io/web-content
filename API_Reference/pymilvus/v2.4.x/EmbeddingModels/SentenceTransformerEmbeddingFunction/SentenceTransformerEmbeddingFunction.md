@@ -62,3 +62,5 @@ sentence_transformer_ef = model.dense.SentenceTransformerEmbeddingFunction(
     device='cpu' # Specify the device to use, e.g., 'cpu' or 'cuda:0'
 )
 ```
+
+<DocCardList />

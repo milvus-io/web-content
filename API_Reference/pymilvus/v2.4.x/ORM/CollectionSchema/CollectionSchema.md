@@ -1,6 +1,6 @@
 # CollectionSchema
 
-A __CollectionSchema__ instance represents the schema of a collection. A schema sketches the structure of a collection.
+A **CollectionSchema** instance represents the schema of a collection. A schema sketches the structure of a collection.
 
 ```python
 class pymilvus.CollectionSchema
@@ -17,13 +17,13 @@ CollectionSchema(
 )
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __fields__ (_list_) -
+- **fields** (*list*) -
 
-    __[REQUIRED]__
+    **[REQUIRED]**
 
-    A list of __FieldSchema__ objects that define the fields in the collection schema.
+    A list of **FieldSchema** objects that define the fields in the collection schema.
 
     <div class="admonition note">
 
@@ -33,25 +33,25 @@ __PARAMETERS:__
 
     </div>
 
-- __description__ (_string_) -
+- **description** (*string*) -
 
     The description of the schema.
 
     If a description is not provided, it will be set to an empty string.
 
-- __kwargs__ -
+- **kwargs** -
 
-    - __auto_id__ (_bool_)
+    - **auto_id** (*bool*)
 
         Whether allows the primary field to automatically increment.
 
-        Setting this to __True__ makes the primary field automatically increment. In this case, the primary field should not be included in the data to insert to avoid errors.
+        Setting this to **True** makes the primary field automatically increment. In this case, the primary field should not be included in the data to insert to avoid errors.
 
-    - __enable_dynamic_field__ (_bool_)
+    - **enable_dynamic_field** (*bool*)
 
         Whether allows Milvus saves the values of undefined fields in a dynamic field if the data being inserted into the target collection includes fields that are not defined in the collection's schema.
 
-        When you set this to __True__, Milvus and  will create a field called __$meta__ to store any undefined fields and their values from the data that is inserted.
+        When you set this to **True**, Milvus and  will create a field called **$meta** to store any undefined fields and their values from the data that is inserted.
 
         <div class="admonition note">
 
@@ -61,23 +61,23 @@ __PARAMETERS:__
 
         </div>
 
-    - __primary_field__ (_str_)
+    - **primary_field** (*str*)
 
         The name of the primary field.
 
-        The value should be the name of a field listed in __fields__.
+        The value should be the name of a field listed in **fields**.
 
-        As an alternative, you can set __is_primary__ when creating a __FieldSchema__ object.
+        As an alternative, you can set **is_primary** when creating a **FieldSchema** object.
 
-    - __partition_key_field__ (_str_)
+    - **partition_key_field** (*str*)
 
         The name of the field that serves as the partition key.
 
-        The value should be the name of a field listed in __fields__.
+        The value should be the name of a field listed in **fields**.
 
         Setting this makes Milvus manage all partitions in the current collection.
 
-        As an alternative, you can set __is_partition_key__ when creating a __FieldSchema__ object.
+        As an alternative, you can set **is_partition_key** when creating a **FieldSchema** object.
 
         <div class="admonition note">
 
@@ -89,43 +89,43 @@ __PARAMETERS:__
 
         </div>
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
-_CollectionSchema_
+*CollectionSchema*
 
-__RETURNS:__
+**RETURNS:**
 
-A __CollectionSchema__ object.
+A **CollectionSchema** object.
 
-__EXCEPTIONS:__
+**EXCEPTIONS:**
 
-- __FieldsTypeException__: 
+- **FieldsTypeException**: 
 
-    This exception will be raised when the __fields__ parameter is not a list.
+    This exception will be raised when the **fields** parameter is not a list.
 
-- __FieldTypeException__: 
+- **FieldTypeException**: 
 
-    This exception will be raised when a field in the __fields__ list is not a __FieldSchema__ object.
+    This exception will be raised when a field in the **fields** list is not a **FieldSchema** object.
 
-- __PrimaryKeyException:__
+- **PrimaryKeyException:**
 
     This exception will be raised if
 
-    - The __primary_field__ parameter has been set but the value is not a string.
+    - The **primary_field** parameter has been set but the value is not a string.
 
-    - The __primary_field__ parameter has been set but the value is not the name of any listed fields.
+    - The **primary_field** parameter has been set but the value is not the name of any listed fields.
 
-- __PartitionKeyException:__
+- **PartitionKeyException:**
 
     This exception will be raised if 
 
-    - The __partition_key_field__ parameter has been set but the value is not a string.
+    - The **partition_key_field** parameter has been set but the value is not a string.
 
-    - The __partition_key_field__ parameter has been set but the value is not the name of any listed fields.
+    - The **partition_key_field** parameter has been set but the value is not the name of any listed fields.
 
-- __AutoIDException:__
+- **AutoIDException:**
 
-    - This exception will be raised if the __auto_id__ parameter has been set but the value is not a boolean.
+    - This exception will be raised if the **auto_id** parameter has been set but the value is not a boolean.
 
 ## Examples
 
@@ -151,3 +151,9 @@ schema = CollectionSchema(
     description="example_schema"
 )
 ```
+
+## Methods
+
+The following are the methods of the `CollectionSchema` class:
+
+<DocCardList />

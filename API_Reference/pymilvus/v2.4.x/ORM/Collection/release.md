@@ -10,11 +10,11 @@ release(
 )
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __timeout__ (_float _|_ None_)  
+- **timeout** (*float* | *None*)  
 
-    The timeout duration for this operation. Setting this to __None__ indicates that this operation timeouts when any response arrives or any error occurs.
+    The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
 ## Examples
 
@@ -43,13 +43,13 @@ collection.release()
 
 The following operations are related to `release()`:
 
-- [Partition](./ORM/Partition.md)
+- [Partition](../Partition/Partition.md)
 
-- [load()](./load.md)
+- [load()](load.md)
 
-- [load_state()](./utility/load_state.md)
+- [load_state()](../utility/load_state.md)
 
-- [loading_progress()](./utility/loading_progress.md)
+- [loading_progress()](../utility/loading_progress.md)
 
-- [wait_for_loading_complete()](./utility/wait_for_loading_complete.md)
+- [wait_for_loading_complete()](../utility/wait_for_loading_complete.md)
 

@@ -1,6 +1,6 @@
 # FieldSchema
 
-A __FieldSchema__ instance defines the data type and related attributes of a specific field in a collection.
+A **FieldSchema** instance defines the data type and related attributes of a specific field in a collection.
 
 ```python
 class pymilvus.FieldSchema
@@ -18,55 +18,55 @@ FieldSchema(
 )
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __name__ (_string_) -
+- **name** (*string*) -
 
-    __[REQUIRED]__
+    **[REQUIRED]**
 
     Name of the field.
 
-- __dtype__ (_[DataType](../../MilvusClient/Collections/DataType.md)_) -
+- **dtype** (*[DataType](../../MilvusClient/Collections/DataType.md)*) -
 
-    __[REQUIRED]__
+    **[REQUIRED]**
 
     Data type of the field.
 
     You can choose from the following options when selecting a data type for different fields:
 
-    - Primary key field: Use __DataType.INT64__ or __DataType.VARCHAR__.
+    - Primary key field: Use **DataType.INT64** or **DataType.VARCHAR**.
 
-    - Scalar fields: Choose from a variety of options, including __DataType.BOOL__, __DataType.INT8__, __DataType.INT16__, __DataType.INT32__, __DataType.INT64__, __DataType.FLOAT__, __DataType.DOUBLE__, __DataType.VARCHAR__, __DataType.JSON__, and __DataType.ARRAY__.
+    - Scalar fields: Choose from a variety of options, including **DataType.BOOL**, **DataType.INT8**, **DataType.INT16**, **DataType.INT32**, **DataType.INT64**, **DataType.FLOAT**, **DataType.DOUBLE**, **DataType.VARCHAR**, **DataType.JSON**, and **DataType.ARRAY**.
 
-    - Vector fields: Select __DataType.BINARY_VECTOR__ or __DataType.FLOAT_VECTOR__.
+    - Vector fields: Select **DataType.BINARY_VECTOR** or **DataType.FLOAT_VECTOR**.
 
-- __description__ (_string_) -
+- **description** (*string*) -
 
     Description of the field.
 
-- __kwargs__ -
+- **kwargs** -
 
-    - __is_primary__ (_bool_)
+    - **is_primary** (*bool*)
 
         Whether the current field is the primary field.
 
-        Setting this to __True__ makes the current field the primary field.
+        Setting this to **True** makes the current field the primary field.
 
-        As an alternative, you can set __primary_field__ when creating a __CollectionSchema__ object.
+        As an alternative, you can set **primary_field** when creating a **CollectionSchema** object.
 
-    - __auto_id__ (_bool_)
+    - **auto_id** (*bool*)
 
         Whether allows the primary field to automatically increment.
 
-        Setting this to __True__ makes the primary field automatically increment. In this case, the primary field should not be included in the data to insert to avoid errors.
+        Setting this to **True** makes the primary field automatically increment. In this case, the primary field should not be included in the data to insert to avoid errors.
 
         Set this parameter in the field with `is_primary` set to `True`.
 
-    - __is_partition_key__ (_bool_) 
+    - **is_partition_key** (*bool*) 
 
         Whether the current field serves as the partition key.
 
-        Setting this to __True__ makes the current field serve as the partition key. In this case, Milvus manages all partitions in the current collection.
+        Setting this to **True** makes the current field serve as the partition key. In this case, Milvus manages all partitions in the current collection.
 
         <div class="admonition note">
 
@@ -78,48 +78,54 @@ __PARAMETERS:__
 
         </div>
 
-    - __max_length__ (_int_)
+    - **max_length** (*int*)
 
         The maximum number of characters a value should contain.
 
-        This is required if __dtype__ of this field is to __DataType.VARCHAR__.
+        This is required if **dtype** of this field is to **DataType.VARCHAR**.
 
-    - __dim__ (_int_)
+    - **dim** (*int*)
 
         The number of dimensions a value should have.
 
-        This is required if __dtype__ of this field is set to __DataType.FLOAT_VECTOR__.
+        This is required if **dtype** of this field is set to **DataType.FLOAT_VECTOR**.
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
-_FieldSchema_
+*FieldSchema*
 
-__RETURNS:__
+**RETURNS:**
 
-A __FieldSchema__ object.
+A **FieldSchema** object.
 
-__Exceptions:__
+**Exceptions:**
 
-- __AutoIDException__
+- **AutoIDException**
 
-    This exception will be raised if the value of the __auto_id__ parameter is not a boolean.
+    This exception will be raised if the value of the **auto_id** parameter is not a boolean.
 
-- __DataTypeNotSupportException__
+- **DataTypeNotSupportException**
 
-    This exception will be raised if the value of the __dtype__ parameter is not supported.
+    This exception will be raised if the value of the **dtype** parameter is not supported.
 
-- __PrimaryKeyException__
+- **PrimaryKeyException**
 
     This exception will be raised if 
 
-    - The value of the __is_primary__ parameter is not a boolean, or
+    - The value of the **is_primary** parameter is not a boolean, or
 
-    - The __is_primary__ parameter is not set while the __auto_id__ parameter is set.
+    - The **is_primary** parameter is not set while the **auto_id** parameter is set.
 
-- __PartitionKeyException__
+- **PartitionKeyException**
 
-    This exception will be raised if the __is_partition_key__ parameter is set to a non-boolean value.
+    This exception will be raised if the **is_partition_key** parameter is set to a non-boolean value.
 
-- __MilvusException__
+- **MilvusException**
 
     This exception will be raised when any error occurs during this operation.
+
+## Methods
+
+The following are the methods of the `FieldSchema` class:
+
+<DocCardList />

@@ -4,21 +4,21 @@ This is an enumeration that provides the following constants.
 
 ## Constants
 
-- __INVALID__ = 0
+- **INVALID** = 0
 Sets the index type to INVALID.
 
-- __FLAT__ = 1
+- **FLAT** = 1
 Sets the index type to FLAT.
 
-- __IVF_FLAT__ = 2
+- **IVF_FLAT** = 2
 Sets the index type to IVF_FLAT.
 
-- __IVF_SQ8__ = 3
+- **IVF_SQ8** = 3
 Sets the index type to IVF_SQ8.
 
-- __IVF_PQ__ = 6
+- **IVF_PQ** = 6
 Sets the index type to IVF_PQ.
 
-- __HNSW__ = 11
+- **HNSW** = 11
 Sets the index type to HNSW.
 

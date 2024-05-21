@@ -12,31 +12,31 @@ list_roles(
 )
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __include_user_info__ (_bool_) - 
+- **include_user_info** (*bool*) - 
 
-    __[REQUIRED]__
+    **[REQUIRED]**
 
     Whether Milvus lists users associated with the listed roles.
 
-- __using__ (_str_) - 
+- **using** (*str*) - 
 
     The alias of the employed connection.
 
-    The default value is __default__, indicating that this operation employs the default connection.
+    The default value is **default**, indicating that this operation employs the default connection.
 
-- __timeout__ (_float _|_ None_)  
+- **timeout** (*float* | *None*)  
 
-    The timeout duration for this operation. Setting this to __None__ indicates that this operation timeouts when any response arrives or any error occurs.
+    The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
-_RoleInfo_
+*RoleInfo*
 
-__RETURNS:__
+**RETURNS:**
 
-A __RoleInfo__ object that contains a list of __RoleItem__ objects.
+A **RoleInfo** object that contains a list of **RoleItem** objects.
 
 ```python
 ├── RoleInfo
@@ -46,19 +46,19 @@ A __RoleInfo__ object that contains a list of __RoleItem__ objects.
 │           ├── users
 ```
 
-A __RoleItem__ object contains the following fields:
+A **RoleItem** object contains the following fields:
 
-- __role_name__ (_str_)
+- **role_name** (*str*)
 
     The name of the role.
 
-- __users__ (_str_)
+- **users** (*str*)
 
     The users to whom the role is granted to.
 
-__EXCEPTIONS:__
+**EXCEPTIONS:**
 
-- __MilvusException__
+- **MilvusException**
 
     This exception will be raised when any error occurs during this operation.
 
@@ -95,19 +95,19 @@ utility.list_roles(include_user_info=True)
 
 The following operations are related to `list_roles()`
 
-- [Role](./ORM/Role.md)
+- [Role](../Role/Role.md)
 
-- [create_user()](./create_user.md)
+- [create_user()](create_user.md)
 
-- [delete_user()](./delete_user.md)
+- [delete_user()](delete_user.md)
 
-- [list_user()](./list_user.md)
+- [list_user()](list_user.md)
 
-- [list_users()](./list_users.md)
+- [list_users()](list_users.md)
 
-- [list_usernames()](./list_usernames.md)
+- [list_usernames()](list_usernames.md)
 
-- [reset_password()](./reset_password.md)
+- [reset_password()](reset_password.md)
 
-- [update_password()](./update_password.md)
+- [update_password()](update_password.md)
 

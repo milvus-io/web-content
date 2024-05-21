@@ -12,35 +12,35 @@ list_grant(
 )
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __object__ (_str_)
+- **object** (*str*)
 
-    __[REQUIRED]__
+    **[REQUIRED]**
 
     The type of the object to grant the privilege.
 
-    The value is case-sensitive, and possible options are __Collection__, __Global__, and __User__. For details, refer to [Users & Roles](https://milvus.io/docs/users_and_roles.md).
+    The value is case-sensitive, and possible options are **Collection**, **Global**, and **User**. For details, refer to [Users & Roles](https://milvus.io/docs/users_and_roles.md).
 
-- __object_name__ (_str_)
+- **object_name** (*str*)
 
-    __[REQUIRED]__
+    **[REQUIRED]**
 
-    The name of a target object of the type specified in __object__.
+    The name of a target object of the type specified in **object**.
 
     It can be a collection name, a user name, or a wild card (*).
 
-- __db_name__ (_str_)
+- **db_name** (*str*)
 
     The name of a database the object belongs to. If left unspecified, the default database applies.
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
-_GrantInfo_
+*GrantInfo*
 
-__RETURNS:__
+**RETURNS:**
 
-A __GrantInfo__ object that contains a list of __GrantItem__ objects.
+A **GrantInfo** object that contains a list of **GrantItem** objects.
 
 ```python
 ├── GrantInfo
@@ -54,35 +54,35 @@ A __GrantInfo__ object that contains a list of __GrantItem__ objects.
 │           └── db_name
 ```
 
-A __GrantItem__ object contains the following fields:
+A **GrantItem** object contains the following fields:
 
-- __object__ (_str_)
+- **object** (*str*)
 
     The type of the object to which the privilege belongs.
 
-- __object_name__ (_str_)
+- **object_name** (*str*)
 
     The name of the object to which the role is granted the specified privilege.
 
-- __role_name__ (_str_)
+- **role_name** (*str*)
 
     The name of the role to check.
 
-- __grantor_name__ (_str_）
+- **grantor_name** (*str*）
 
     The name of the user who granted a specific role to a user.
 
-- __privilege__ (_str_)
+- **privilege** (*str*)
 
     The privilege that is granted to the role.
 
-- __db_name__ (str)
+- **db_name** (str)
 
     The name of the database in which this operation has been executed.
 
-__EXCEPTIONS:__
+**EXCEPTIONS:**
 
-- __MilvusException__
+- **MilvusException**
 
     This exception will be raised when any error occurs during this operation.
 
@@ -106,21 +106,21 @@ res = list_grant(
 
 The following operations are related to `get_replicas()`:
 
-- [add_user()](./add_user.md)
+- [add_user()](add_user.md)
 
-- [create()](./create.md)
+- [create()](create.md)
 
-- [drop()](./drop.md)
+- [drop()](drop.md)
 
-- [get_users()](./get_users.md)
+- [get_users()](get_users.md)
 
-- [grant()](./grant.md)
+- [grant()](grant.md)
 
-- [is_exist()](./is_exist.md)
+- [is_exist()](is_exist.md)
 
-- [list_grants()](./list_grants.md)
+- [list_grants()](list_grants.md)
 
-- [remove_user()](./remove_user.md)
+- [remove_user()](remove_user.md)
 
-- [revoke()](./revoke.md)
+- [revoke()](revoke.md)
 

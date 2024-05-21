@@ -1,6 +1,6 @@
 # construct_from_dict()
 
-This operation constructs a __CollectionSchema__ object from a dictionary representation.
+This operation constructs a **CollectionSchema** object from a dictionary representation.
 
 ## Request Syntax
 
@@ -10,23 +10,23 @@ construct_from_dict(
 )
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __raw__ (_dict_)
+- **raw** (*dict*)
 
     A dictionary containing the raw data to construct the collection schema.
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
-_CollectionSchema_
+*CollectionSchema*
 
-__RETURNS:__
+**RETURNS:**
 
-A __CollectionSchema__ object.
+A **CollectionSchema** object.
 
-__EXCEPTIONS:__
+**EXCEPTIONS:**
 
-- __MilvusException__
+- **MilvusException**
 
     This exception will be raised when any error occurs during this operation.
 
@@ -73,9 +73,9 @@ The following operations are related to `construct_from_dict()`:
 
 - [DataType](../../MilvusClient/Collections/DataType.md)
 
-- [add_field()](./add_field.md)
+- [add_field()](add_field.md)
 
-- [to_dict()](./to_dict.md)
+- [to_dict()](to_dict.md)
 
-- [verify()](./verify.md)
+- [verify()](verify.md)
 

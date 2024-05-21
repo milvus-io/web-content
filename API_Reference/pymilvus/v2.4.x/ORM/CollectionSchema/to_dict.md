@@ -8,21 +8,21 @@ This operation converts a CollectionSchema object to a dictionary representation
 to_dict()
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
 None
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
-_dict_
+*dict*
 
-__RETURNS:__
+**RETURNS:**
 
 The dictionary representation of the collection schema.
 
-__EXCEPTIONS:__
+**EXCEPTIONS:**
 
-- __MilvusException__
+- **MilvusException**
 
     This exception will be raised when any error occurs during this operation.
 
@@ -67,9 +67,9 @@ The following operations are related to `to_dict()`:
 
 - [DataType](../../MilvusClient/Collections/DataType.md)
 
-- [add_field()](./add_field.md)
+- [add_field()](add_field.md)
 
-- [construct_from_dict()](./construct_from_dict.md)
+- [construct_from_dict()](construct_from_dict.md)
 
-- [verify()](./verify.md)
+- [verify()](verify.md)
 

@@ -19,11 +19,11 @@ insert(
 )
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __data__ (_list_ | _dict_ | _pandas.DataFrame_) -
+- **data** (*list* | *dict* | *pandas.DataFrame*) -
 
-    __[REQUIRED]__
+    **[REQUIRED]**
 
     The data to insert into the current collection.
 
@@ -46,9 +46,9 @@ __PARAMETERS:__
         ]
         ```
 
-    - A __pandas.DataFrame__
+    - A **pandas.DataFrame**
 
-        You can form a data frame in any way, as demonstrated in the __Example__ section on [this page](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html).
+        You can form a data frame in any way, as demonstrated in the **Example** section on [this page](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html).
 
         ```python
         data = pd.DataFrame({
@@ -81,63 +81,63 @@ __PARAMETERS:__
         data = {"id": 15, "vector": [0.3,0.1,-0.2,-0.6,-0.7]},
         ```
 
-- __timeout__ (_float _|_ None_)  
+- **timeout** (*float* | *None*)  
 
-    The timeout duration for this operation. Setting this to __None__ indicates that this operation timeouts when any response arrives or any error occurs.
+    The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
-_MutationResult_
+*MutationResult*
 
-__RETURNS:__
+**RETURNS:**
 
-A __MutationResult__ object that contains the following fields:
+A **MutationResult** object that contains the following fields:
 
-- __insert_count__ (_int_)
+- **insert_count** (*int*)
 
     The count of inserted entities.
 
-- __primary_keys__ (_list_)
+- **primary_keys** (*list*)
 
     A list of primary keys for the inserted entities.
 
-__EXCEPTIONS:__
+**EXCEPTIONS:**
 
-- A __MutationResult__ object that contains the following fields:
+- A **MutationResult** object that contains the following fields:
 
-    - __insert_count__ (_int_)
+    - **insert_count** (*int*)
 
         The count of inserted entities.
 
-    - __delete_count__ (_int_)
+    - **delete_count** (*int*)
 
         The count of deleted entities.
 
-    - __upsert_count__ (_int_)
+    - **upsert_count** (*int*)
 
         The count of upserted entities.
 
-    - __succ_count__ (_int_)
+    - **succ_count** (*int*)
 
         The count of successful executions during this operation.
 
-    - __succ_index__ (_list_)
+    - **succ_index** (*list*)
 
         A list of index numbers starting from 0, each indicating a successful operation.
 
-    - __err_count__ (_int_)
+    - **err_count** (*int*)
 
         The count of failed executions during this operation.
 
-    - __err_index__ (_list_)
+    - **err_index** (*list*)
 
         A list of index numbers starting from 0, each indicating a failed operation.
 
-    - __primary_keys__ (_list_)
+    - **primary_keys** (*list*)
 
         A list of primary keys for the inserted entities.
 
-    - __timestamp__ (_int_)
+    - **timestamp** (*int*)
 
         The timestamp at which this operation is completed.
 
@@ -176,13 +176,13 @@ res.insert_count
 
 The following operations are related to `insert()`:
 
-- [delete()](./delete.md)
+- [delete()](delete.md)
 
-- [flush()](./flush.md)
+- [flush()](flush.md)
 
-- [query()](./query.md)
+- [query()](query.md)
 
-- [search()](./search.md)
+- [search()](search.md)
 
-- [upsert()](./upsert.md)
+- [upsert()](upsert.md)
 

@@ -34,3 +34,5 @@ cohere_rf = CohereRerankFunction(
     api_key=COHERE_API_KEY # Replace with your Cohere API key
 )
 ```
+
+<DocCardList />

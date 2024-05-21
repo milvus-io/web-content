@@ -49,3 +49,5 @@ bge_rf = BGERerankFunction(
     device="cpu" # Specify the device to use, e.g., 'cpu' or 'cuda:0'
 )
 ```
+
+<DocCardList />

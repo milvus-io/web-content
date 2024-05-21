@@ -1,15 +1,15 @@
-# __call__()
+# \_\_call\_\_()
 
-This operation in [BGERerankFunction](./BGERerankFunction.md) takes in a query and document strings and returns a list of `RerankResult` objects with the top k documents ranked by score.
+This operation in [CrossEncoderRerankFunction](CrossEncoderRerankFunction.md) takes in a query and document strings and returns a list of `RerankResult` objects with the top k documents ranked by score.
 
 ## Request syntax
 
 ```python
 # Instance created
-bge_rf = BGERerankFunction()
+ce_rf = CrossEncoderRerankFunction()
 
-# __call__ method will be called
-bge_rf(
+# \_\_call\_\_ method will be called
+ce_rf(
     query: str,
     documents: List[str],
     top_k: int = 5
@@ -57,16 +57,16 @@ Each `RerankResult` object contains:
 
 - **ImportError**
 
-    This exception will be raised when the FlagEmbedding module is not installed.
+    This exception will be raised when the Sentence Transformer module is not installed.
 
 ## Examples
 
 ```python
-from pymilvus.model.reranker import BGERerankFunction
+from pymilvus.model.reranker import CrossEncoderRerankFunction
 
 # Define the rerank function
-bge_rf = BGERerankFunction(
-    model_name="BAAI/bge-reranker-v2-m3",  # Specify the model name. Defaults to `BAAI/bge-reranker-v2-m3`.
+ce_rf = CrossEncoderRerankFunction(
+    model_name="cross-encoder/ms-marco-MiniLM-L-6-v2",  # Specify the model name. Defaults to an emtpy string.
     device="cpu" # Specify the device to use, e.g., 'cpu' or 'cuda:0'
 )
 
@@ -79,10 +79,10 @@ documents = [
     "The invention of the Logic Theorist by Allen Newell, Herbert A. Simon, and Cliff Shaw in 1955 marked the creation of the first true AI program, which was capable of solving logic problems, akin to proving mathematical theorems."
 ]
 
-bge_rf(query, documents)
+ce_rf(query, documents)
 
-# [RerankResult(text="The Dartmouth Conference in 1956 is considered the birthplace of artificial intelligence as a field; here, John McCarthy and others coined the term 'artificial intelligence' and laid out its basic goals.", score=0.9911615761470803, index=1),
-#  RerankResult(text="In 1950, Alan Turing published his seminal paper, 'Computing Machinery and Intelligence,' proposing the Turing Test as a criterion of intelligence, a foundational concept in the philosophy and development of artificial intelligence.", score=0.0326971950177779, index=0),
-#  RerankResult(text='The invention of the Logic Theorist by Allen Newell, Herbert A. Simon, and Cliff Shaw in 1955 marked the creation of the first true AI program, which was capable of solving logic problems, akin to proving mathematical theorems.', score=0.006514905766152258, index=3),
-#  RerankResult(text='In 1951, British mathematician and computer scientist Alan Turing also developed the first program designed to play chess, demonstrating an early example of AI in game strategy.', score=0.0042116724917325935, index=2)]
+# [RerankResult(text="The Dartmouth Conference in 1956 is considered the birthplace of artificial intelligence as a field; here, John McCarthy and others coined the term 'artificial intelligence' and laid out its basic goals.", score=6.250532627105713, index=1),
+#  RerankResult(text="In 1950, Alan Turing published his seminal paper, 'Computing Machinery and Intelligence,' proposing the Turing Test as a criterion of intelligence, a foundational concept in the philosophy and development of artificial intelligence.", score=-2.9546022415161133, index=0),
+#  RerankResult(text='The invention of the Logic Theorist by Allen Newell, Herbert A. Simon, and Cliff Shaw in 1955 marked the creation of the first true AI program, which was capable of solving logic problems, akin to proving mathematical theorems.', score=-4.771512031555176, index=3),
+#  RerankResult(text='In 1951, British mathematician and computer scientist Alan Turing also developed the first program designed to play chess, demonstrating an early example of AI in game strategy.', score=-8.325657844543457, index=2)]
 ```

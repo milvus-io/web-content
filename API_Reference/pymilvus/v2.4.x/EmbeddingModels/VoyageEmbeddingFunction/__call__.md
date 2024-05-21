@@ -1,8 +1,8 @@
-# __call__()
+# \_\_call\_\_()
 
-This operation in [VoyageEmbeddingFunction](./VoyageEmbeddingFunction.md) takes a list of text strings and directly encodes them into vector embeddings.
+This operation in [VoyageEmbeddingFunction](VoyageEmbeddingFunction.md) takes a list of text strings and directly encodes them into vector embeddings.
 
-Unlike [encode_documents()](./encode_documents.md) or [encode_queries()](./encode_queries.md), which enable you to prepend **doc_instruction** or **query_instruction** and utilize **k_tokens_document** or **k_tokens_query** for result pruning, the **call**() method directly returns embeddings without offering the option to prepend instructions or prune results.
+The `call` method of VoyageEmbeddingFunction shares the same functionality as [encode_documents()](encode_documents.md) and [encode_queries()](encode_queries.md).
 
 ## Request syntax
 
@@ -11,7 +11,7 @@ Unlike [encode_documents()](./encode_documents.md) or [encode_queries()](./encod
 
 voyage_ef = VoyageEmbeddingFunction()
 
-# __call__ method will be called
+# \_\_call\_\_ method will be called
 voyage_ef(
     texts: List[str]
 ) -> List[np.array]

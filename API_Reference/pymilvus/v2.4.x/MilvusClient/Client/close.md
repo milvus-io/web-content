@@ -8,19 +8,19 @@ This operation closes the current Milvus client.
 close() -> None
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
 None
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
-_NoneType_
+*NoneType*
 
-__RETURNS:__
+**RETURNS:**
 
 None
 
-__Exceptions:__
+**Exceptions:**
 
 None
 

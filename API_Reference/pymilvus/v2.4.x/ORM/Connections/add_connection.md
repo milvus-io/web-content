@@ -12,49 +12,49 @@ add_connection(
 )
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __kwargs__ - 
+- **kwargs** - 
 
-    When passing keyword arguments, the name of each argument will serve as a connection alias in the __connect()__ method.
+    When passing keyword arguments, the name of each argument will serve as a connection alias in the **connect()** method.
 
     The argument value should be a dictionary with one or more of these fields:
 
-    - __address__ (_string_) -
+    - **address** (*string*) -
 
-        The actual address to connect. Example address: __localhost:19530__.
+        The actual address to connect. Example address: **localhost:19530**.
 
-    - __uri__ (_string_) -
+    - **uri** (*string*) -
 
-        The URI of the Milvus instance. For example: __http://localhost:19530__.
+        The URI of the Milvus instance. For example: **http://localhost:19530**.
 
-    - __host__ (_string_) -
+    - **host** (*string*) -
 
-        The host of the Milvus instance. The value defaults to __localhost__, and PyMilvus will fill in the default host if only __port__ is provided.
+        The host of the Milvus instance. The value defaults to **localhost**, and PyMilvus will fill in the default host if only **port** is provided.
 
-    - __port__ (_string | int_) -
+    - **port** (*string | int*) -
 
-        The port that Milvus instance listens to. The value defaults to __19530__, and PyMilvus will fill in the default port if only __host__ is provided.
+        The port that Milvus instance listens to. The value defaults to **19530**, and PyMilvus will fill in the default port if only **host** is provided.
 
-    - __user__ (_string_) -
+    - **user** (*string*) -
 
         A valid username used to connect to the specified Milvus instance.
 
         Use this if authentication has been enabled on the target Milvus instance. To enable authentication, refer to [Authenticate User Access](https://milvus.io/docs/authenticate.md).
 
-        This should be used along with __password__.
+        This should be used along with **password**.
 
-    - __password__ (_string_) -
+    - **password** (*string*) -
 
         A valid password used to connect to the specified Milvus instance.
 
         Use this if authentication has been enabled on the target Milvus instance. To enable authentication, refer to [Authenticate User Access](https://milvus.io/docs/authenticate.md).
 
-        This should be used along with __user__.
+        This should be used along with **user**.
 
-    - __token__ (string) -
+    - **token** (string) -
 
-        A valid access token to access the specified Milvus instance. This can be used as an alternative to setting __user__ and __password__ separately.
+        A valid access token to access the specified Milvus instance. This can be used as an alternative to setting **user** and **password** separately.
 
         When setting this field, notice that:
 
@@ -62,17 +62,17 @@ __PARAMETERS:__
 
         Use this if authentication has been enabled on the target Milvus instance. To enable authentication, refer to [Authenticate User Access](https://milvus.io/docs/authenticate.md).
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
 None
 
-__RETURNS:__
+**RETURNS:**
 
 None
 
-__EXCEPTIONS:__
+**EXCEPTIONS:**
 
-- __ConnectionConfigException__
+- **ConnectionConfigException**
 
     This exception will be raised when the connection configuration is invalid.
 
@@ -91,15 +91,15 @@ connections.add_connection(
 
 The following operations are related to `add_connection()`:
 
-- [connect()](./connect.md)
+- [connect()](connect.md)
 
-- [disconnect()](./disconnect.md)
+- [disconnect()](disconnect.md)
 
-- [get_connection_addr()](./get_connection_addr.md)
+- [get_connection_addr()](get_connection_addr.md)
 
-- [has_connection()](./has_connection.md)
+- [has_connection()](has_connection.md)
 
-- [list_connections()](./list_connections.md)
+- [list_connections()](list_connections.md)
 
-- [remove_connection()](./remove_connection.md)
+- [remove_connection()](remove_connection.md)
 

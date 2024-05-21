@@ -11,25 +11,25 @@ describe_role(
 ) -> List[Dict]
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __role_name__ (_str_) -
+- **role_name** (*str*) -
 
-    __[REQUIRED]__
+    **[REQUIRED]**
 
     The name of the role to describe.
 
-- __timeout__ (_float _|_ None_)  
+- **timeout** (*float* | *None*)  
 
     The timeout duration for this operation. 
 
-    Setting this to __None__ indicates that this operation timeouts when any response arrives or any error occurs.
+    Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
-_list_
+*list*
 
-__RETURNS:__
+**RETURNS:**
 
 A list of dictionaries containing the permissions assigned to the role. The structure of each dictionary reassembles the following:
 
@@ -44,41 +44,41 @@ A list of dictionaries containing the permissions assigned to the role. The stru
 #  }
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __object_type__ (_str_) -
+- **object_type** (*str*) -
 
     The type of the resource object granted to the role. 
 
-    Possible values are __Collection__, __Global__, and __User__.
+    Possible values are **Collection**, **Global**, and **User**.
 
-- __object_name__ (_str_) -
+- **object_name** (*str*) -
 
     The name of the resource object granted to the role. You are advised to use an asterisk (*).
 
-- __db_name__ (_str_) -
+- **db_name** (*str*) -
 
     The name of the database to which the role has access.
 
-- __role_name__ (_str_) -
+- **role_name** (*str*) -
 
     The name of the specified role.
 
-- __privilege__ (_str_) -
+- **privilege** (*str*) -
 
     The name of a privilege granted to the role. For details, refer to [Users & Roles](https://milvus.io/docs/users_and_roles.md) for more.
 
-- __grantor_name__ (_str_) - 
+- **grantor_name** (*str*) - 
 
     The name of the user who has granted the above permission to the specified role.
 
-__EXCEPTIONS:__
+**EXCEPTIONS:**
 
-- __MilvusException__
+- **MilvusException**
 
     This exception will be raised when any error occurs during this operation.
 
-- __BaseException__
+- **BaseException**
 
     This exception will be raised when this operation fails.
 
@@ -126,17 +126,17 @@ client.describe_role(role_name="read_only")
 
 ## Related methods
 
-- [create_role()](./Authentication/create_role.md)
+- [create_role()](create_role.md)
 
-- [drop_role()](./Authentication/drop_role.md)
+- [drop_role()](drop_role.md)
 
-- [grant_privilege()](./Authentication/grant_privilege.md)
+- [grant_privilege()](grant_privilege.md)
 
-- [grant_role()](./Authentication/grant_role.md)
+- [grant_role()](grant_role.md)
 
-- [list_roles()](./Authentication/list_roles.md)
+- [list_roles()](list_roles.md)
 
-- [revoke_privileges()](./Authentication/revoke_privileges.md)
+- [revoke_privileges()](revoke_privileges.md)
 
-- [revoke_role()](./Authentication/revoke_role.md)
+- [revoke_role()](revoke_role.md)
 

@@ -1,6 +1,6 @@
 # mkts_from_datetime()
 
-This operation makes a hybrid timestamp from a Python's __datetime.datetime__ object.
+This operation makes a hybrid timestamp from a Python's **datetime.datetime** object.
 
 ## Request Syntax
 
@@ -12,25 +12,25 @@ mkts_from_datetime(
 )
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __d_time__ (_datetime_) -
-__[REQUIRED]__
-A __datetime.datetime__ object.
+- **d_time** (*datetime*) -
+**[REQUIRED]**
+A **datetime.datetime** object.
 
-- __milliseconds__ (_float_) -
+- **milliseconds** (*float*) -
 An incremental time interval in milliseconds.
 
-- __delta__ (_Optional[timedelta]_) -
+- **delta** (*Optional[timedelta]*) -
 
-    A __datetime.timedelta__ object that represents the duration expressing the difference between two `date`, `time`, or `datetime` instances to microsecond resolution.
+    A **datetime.timedelta** object that represents the duration expressing the difference between two `date`, `time`, or `datetime` instances to microsecond resolution.
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
-_int_
+*int*
 
-__RETURNS:__
-A hybrid timestamp, which is a non-negative integer ranging from __0__ to __18446744073709551615__.
+**RETURNS:**
+A hybrid timestamp, which is a non-negative integer ranging from **0** to **18446744073709551615**.
 
 ## Examples
 
@@ -49,11 +49,11 @@ ts = mkts_from_datetime(
 
 The following operations are related to `mkts_from_datetime()`:
 
-- [hybridts_to_datetime()](./hybridts_to_datetime.md)
+- [hybridts_to_datetime()](hybridts_to_datetime.md)
 
-- [hybridts_to_unixtime()](./hybridts_to_unixtime.md)
+- [hybridts_to_unixtime()](hybridts_to_unixtime.md)
 
-- [mkts_from_hybridts()](./mkts_from_hybridts.md)
+- [mkts_from_hybridts()](mkts_from_hybridts.md)
 
-- [mkts_from_unixtime()](./mkts_from_unixtime.md)
+- [mkts_from_unixtime()](mkts_from_unixtime.md)
 

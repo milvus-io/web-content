@@ -1,8 +1,8 @@
-# __call__()
+# \_\_call\_\_()
 
-This operation in [SentenceTransformerEmbeddingFunction](./SentenceTransformerEmbeddingFunction.md) takes a list of text strings and directly encodes them into vector embeddings.
+This operation in [SentenceTransformerEmbeddingFunction](SentenceTransformerEmbeddingFunction.md) takes a list of text strings and directly encodes them into vector embeddings.
 
-To prevent potential errors when directly using the **__call()__** method, avoid using **query_instruction** or **doc_instruction** for SentenceTransformerEmbeddingFunction initialization. For more information, refer to [SentenceTransformerEmbeddingFunction](./SentenceTransformerEmbeddingFunction.md).
+To prevent potential errors when directly using the **__call()__** method, avoid using **query_instruction** or **doc_instruction** for SentenceTransformerEmbeddingFunction initialization. For more information, refer to [SentenceTransformerEmbeddingFunction](SentenceTransformerEmbeddingFunction.md).
 
 ## Request syntax
 
@@ -10,7 +10,7 @@ To prevent potential errors when directly using the **__call()__** method, avoid
 # Instance created
 sentence_transformer_ef = SentenceTransformerEmbeddingFunction()
 
-# __call__ method will be called
+# \_\_call\_\_ method will be called
 sentence_transformer_ef(
     texts: List[str]
 ) -> List[np.array]

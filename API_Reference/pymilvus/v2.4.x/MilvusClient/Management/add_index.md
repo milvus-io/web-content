@@ -14,41 +14,41 @@ IndexParams.add_index(
 ) -> None
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __field_name__ (_str_) -
+- **field_name** (*str*) -
 
     The name of the target file to apply this object applies.
 
-- __index_name__ (_str_) -
+- **index_name** (*str*) -
 
     The name of the index file generated after this object has been applied.
 
-- __index_type__ (_str_) -
+- **index_type** (*str*) -
 
-    The name of the algorithm used to arrange data in the specific field. For applicable algorithms, refer to [In-memory Index](https://milvus.io/docs/index.md) and [On-disk Index](https://milvus.io/docs/disk_index.md).On Zilliz Cloud, the index type is always __AUTOINDEX__. For details, refer to [AUTOINDEX](/docs/autoindex-explained) Explained.
+    The name of the algorithm used to arrange data in the specific field. For applicable algorithms, refer to [In-memory Index](https://milvus.io/docs/index.md) and [On-disk Index](https://milvus.io/docs/disk_index.md).On Zilliz Cloud, the index type is always **AUTOINDEX**. For details, refer to [AUTOINDEX]() Explained.
 
-- __metric_type__ (_str_) -
+- **metric_type** (*str*) -
 
-    The algorithm that is used to measure similarity between vectors. Possible values are __IP__, __L2__, and __COSINE__.
+    The algorithm that is used to measure similarity between vectors. Possible values are **IP**, **L2**, and **COSINE**.
 
     This is available only when the specified field is a vector field. 
 
-- __params__ (_dict_) -
+- **params** (*dict*) -
 
     The fine-tuning parameters for the specified index type. For details on possible keys and value ranges, refer to  [In-memory Index](https://milvus.io/docs/index.md).
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
-_NoneType_
+*NoneType*
 
-__RETURNS:__
+**RETURNS:**
 
 None
 
-__EXCEPTIONS:__
+**EXCEPTIONS:**
 
-- __MilvusException__
+- **MilvusException**
 
     This exception will be raised when any error occurs during this operation.
 
@@ -125,13 +125,13 @@ index_params.add_index(
 
 ## Related methods
 
-- [create_index()](./create_index.md)
+- [create_index()](create_index.md)
 
-- [describe_index()](./describe_index.md)
+- [describe_index()](describe_index.md)
 
-- [drop_index()](./drop_index.md)
+- [drop_index()](drop_index.md)
 
-- [list_indexes()](./list_indexes.md)
+- [list_indexes()](list_indexes.md)
 
-- [prepare_index_params()](./prepare_index_params.md)
+- [prepare_index_params()](prepare_index_params.md)
 

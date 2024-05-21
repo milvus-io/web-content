@@ -2,7 +2,7 @@
 
 This operation takes in a list of query strings and encodes each query into a vector embedding.
 
-When using **BM25EmbeddingFunction**, note that **encoding_queries()** and **encoding_documents()** operations cannot be interchanged mathematically. Therefore, there is no implemented **__call__()** available.
+When using **BM25EmbeddingFunction**, note that **encoding_queries()** and **encoding_documents()** operations cannot be interchanged mathematically. Therefore, there is no implemented **\_\_call\_\_()** available.
 
 ## Request syntax
 

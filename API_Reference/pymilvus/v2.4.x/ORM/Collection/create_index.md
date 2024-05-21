@@ -20,49 +20,49 @@ create_index(
 )
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __field_name__ (_string_) -
+- **field_name** (*string*) -
 
     The name of the field for which an index is to be created.
 
-- __index_params__ (_dict_) - 
+- **index_params** (*dict*) - 
 
     The parameters that apply to the index-building process.
 
-    - __index_type__ (string) -
+    - **index_type** (string) -
 
         The algorithm used to build the index.
 
-        Possible values are __FLAT__, __IVF_FLAT__, __GPU_IVF_FLAT__, __IVF_SQ8__, __IVF_PQ__, __GPU_IVF_PQ__, __HNSW__, __SCANN__, __BIN_FLAT__, __BIN_IVF_FLAT__, __DISKANN__, __GPU_CAGRA__, and __GPU_BRUTE_FORCE__. For details on these index types, refer to [In-memory Index](https://milvus.io/docs/index.md), [On-disk Index](https://milvus.io/docs/disk_index.md), and [GPU Index](https://milvus.io/docs/gpu_index.md).
+        Possible values are **FLAT**, **IVF_FLAT**, **GPU_IVF_FLAT**, **IVF_SQ8**, **IVF_PQ**, **GPU_IVF_PQ**, **HNSW**, **SCANN**, **BIN_FLAT**, **BIN_IVF_FLAT**, **DISKANN**, **GPU_CAGRA**, and **GPU_BRUTE_FORCE**. For details on these index types, refer to [In-memory Index](https://milvus.io/docs/index.md), [On-disk Index](https://milvus.io/docs/disk_index.md), and [GPU Index](https://milvus.io/docs/gpu_index.md).
 
-    - __metric_type__ (_string_) - 
+    - **metric_type** (*string*) - 
 
         The similarity metric type used to build the index.
 
-        Possible values for float vector embeddings are __L2__, __IP__, and __COSINE__, and those for binary vector embeddings are __Jaccard__ and __Hamming__. Read [Similarity Metrics](https://milvus.io/docs/metric.md) to get more.
+        Possible values for float vector embeddings are **L2**, **IP**, and **COSINE**, and those for binary vector embeddings are **Jaccard** and **Hamming**. Read [Similarity Metrics](https://milvus.io/docs/metric.md) to get more.
 
-    - __params__ (_dict_) -
+    - **params** (*dict*) -
 
         Index-building parameters corresponding to the selected index type.
 
         For details on applicable index-building parameters, refer to [In-memory Index](https://milvus.io/docs/index.md) and [On-disk Index](https://milvus.io/docs/disk_index.md).
 
-- __timeout__ (_float _|_ None_)  
+- **timeout** (*float* | *None*)  
 
-    The timeout duration for this operation. Setting this to __None__ indicates that this operation timeouts when any response arrives or any error occurs.
+    The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
-_Status_
+*Status*
 
-__RETURNS:__
+**RETURNS:**
 
-A __Status__ object indicating whether this operation succeeds.
+A **Status** object indicating whether this operation succeeds.
 
-__EXCEPTIONS:__
+**EXCEPTIONS:**
 
-- __MilvusException__
+- **MilvusException**
 
     This exception will be raised when any error occurs during this operation.
 
@@ -111,15 +111,15 @@ collection.has_index() # True
 
 The following operations are related to `create_index()`
 
-- [drop_index()](./drop_index.md)
+- [drop_index()](drop_index.md)
 
-- [has_index()](./has_index.md)
+- [has_index()](has_index.md)
 
-- [index()](./index.md)
+- [index()](index.md)
 
-- [index_building_progress()](./utility/index_building_progress.md)
+- [index_building_progress()](../utility/index_building_progress.md)
 
-- [wait_for_index_building_complete()](./utility/wait_for_index_building_complete.md)
+- [wait_for_index_building_complete()](../utility/wait_for_index_building_complete.md)
 
-- [list_indexes()](./utility/list_indexes.md)
+- [list_indexes()](../utility/list_indexes.md)
 

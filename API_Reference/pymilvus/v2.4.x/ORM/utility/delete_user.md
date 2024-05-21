@@ -13,43 +13,43 @@ delete_user(
 )
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __user__ (_string_) - 
+- **user** (*string*) - 
 
-    __[REQUIRED]__
+    **[REQUIRED]**
 
     The name of the new user to delete.
 
-- __password__ (_string_) - 
+- **password** (*string*) - 
 
-    __[REQUIRED]__
+    **[REQUIRED]**
 
     The corresponding password to the new user to create.
 
-    Setting this to an incorrect password results in a __MilvusException__.
+    Setting this to an incorrect password results in a **MilvusException**.
 
-- __using__ (_string_) - 
+- **using** (*string*) - 
 
     The alias of the employed connection.
 
-    The default value is __default__, indicating that this operation employs the default connection.
+    The default value is **default**, indicating that this operation employs the default connection.
 
-- __timeout__ (_float _|_ None_)  
+- **timeout** (*float* | *None*)  
 
-    The timeout duration for this operation. Setting this to __None__ indicates that this operation timeouts when any response arrives or any error occurs.
+    The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
-_NoneType_
+*NoneType*
 
-__RETURNS:__
+**RETURNS:**
 
 None
 
-__EXCEPTIONS:__
+**EXCEPTIONS:**
 
-- __MilvusException__
+- **MilvusException**
 
     This exception will be raised when any error occurs during this operation.
 
@@ -69,19 +69,19 @@ user = utility.delete_user(user="admin", password="123456")
 
 The following operations are related to `delete_user()`
 
-- [Role](./ORM/Role.md)
+- [Role](../Role/Role.md)
 
-- [create_user()](./create_user.md)
+- [create_user()](create_user.md)
 
-- [list_roles()](./list_roles.md)
+- [list_roles()](list_roles.md)
 
-- [list_user()](./list_user.md)
+- [list_user()](list_user.md)
 
-- [list_users()](./list_users.md)
+- [list_users()](list_users.md)
 
-- [list_usernames()](./list_usernames.md)
+- [list_usernames()](list_usernames.md)
 
-- [reset_password()](./reset_password.md)
+- [reset_password()](reset_password.md)
 
-- [update_password()](./update_password.md)
+- [update_password()](update_password.md)
 

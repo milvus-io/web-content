@@ -8,21 +8,21 @@ This operation converts a FieldSchema object to a dictionary representation.
 to_dict()
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
 None
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
-_dict_
+*dict*
 
-__RETURNS:__
+**RETURNS:**
 
 The dictionary representation of the field schema.
 
-__EXCEPTIONS:__
+**EXCEPTIONS:**
 
-- __MilvusException__
+- **MilvusException**
 
     This exception will be raised when any error occurs during this operation.
 
@@ -60,5 +60,5 @@ print(vector_dict)
 
 The following operations are related to `to_dict()`:
 
-- [construct_from_dict()](./construct_from_dict.md)
+- [construct_from_dict()](construct_from_dict.md)
 

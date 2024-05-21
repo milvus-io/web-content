@@ -18,39 +18,39 @@ search(
 )
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __data__ (_list[list[float]]_) - 
+- **data** (*list[list[float]]*) - 
 
-    __[REQUIRED]__
+    **[REQUIRED]**
 
     A list of vector embeddings.
 
     Milvus searches for the most similar vector embeddings to the specified ones.
 
-- __anns_field__ (str) -
+- **anns_field** (str) -
 
     The name of the target vector field of the current search.
 
     This parameter defaults to an empty string. If this parameter is left unspecified, the default value applies, indicating that the only vector field in the collection will be used as the search target.
 
-- __param__ (dict) -
+- **param** (dict) -
 
-    __[REQUIRED]__
+    **[REQUIRED]**
 
     The parameter settings specific to this operation.
 
-    - __metric_type__ (_str_) -
+    - **metric_type** (*str*) -
 
         The metric type applied to this operation. This should be the same as the one used when you index the vector field specified above. 
 
-        Possible values are __L2__, __IP__, and __COSINE__.
+        Possible values are **L2**, **IP**, and **COSINE**.
 
-    - __params__ (dict) -
+    - **params** (dict) -
 
         Additional parameters.
 
-        - __offset__ (int) -
+        - **offset** (int) -
 
             The number of records to skip in the search result. 
 
@@ -58,53 +58,53 @@ __PARAMETERS:__
 
             The sum of this value and `limit` should be less than 16,384. 
 
-        - __radius__ (float) -
+        - **radius** (float) -
 
-            Determines the threshold of least similarity. When setting `metric_type` to `L2`, ensure that this value is greater than that of __range_filter__. Otherwise, this value should be lower than that of __range_filter__. 
+            Determines the threshold of least similarity. When setting `metric_type` to `L2`, ensure that this value is greater than that of **range_filter**. Otherwise, this value should be lower than that of **range_filter**. 
 
-        - __range_filter__  (float) -  
+        - **range_filter**  (float) -  
 
-            Refines the search to vectors within a specific similarity range. When setting `metric_type` to `IP` or `COSINE`, ensure that this value is greater than that of __radius__. Otherwise, this value should be lower than that of __radius__.
+            Refines the search to vectors within a specific similarity range. When setting `metric_type` to `IP` or `COSINE`, ensure that this value is greater than that of **radius**. Otherwise, this value should be lower than that of **radius**.
 
     For details on other applicable search parameters, refer to [In-memory Index](https://milvus.io/docs/index.md) and [On-disk Index](https://milvus.io/docs/disk_index.md).
 
-- __limit__ (_int_) -
+- **limit** (*int*) -
 
     The total number of entities to return.
 
-    You can use this parameter in combination with `offset` in __param__ to enable pagination.
+    You can use this parameter in combination with `offset` in **param** to enable pagination.
 
-    The sum of this value and `offset` in __param__ should be less than 16,384. 
+    The sum of this value and `offset` in **param** should be less than 16,384. 
 
-- __expr__ (_str_) -
+- **expr** (*str*) -
 
     A scalar filtering condition to filter matching entities.
 
-    The value defaults to __None__, indicating that scalar filtering is ignored. To build a scalar filtering condition, refer to [Boolean Expression Rules](https://milvus.io/docs/boolean.md).
+    The value defaults to **None**, indicating that scalar filtering is ignored. To build a scalar filtering condition, refer to [Boolean Expression Rules](https://milvus.io/docs/boolean.md).
 
-- __output_fields__ (_list_) -
+- **output_fields** (*list*) -
 
     A list of field names to include in each entity in return.
 
-    The value defaults to __None__. If left unspecified, only the primary field is included.
+    The value defaults to **None**. If left unspecified, only the primary field is included.
 
-- __timeout__ (_float_)  -
+- **timeout** (*float*)  -
 
-    The timeout duration for this operation. Setting this to __None__ indicates that this operation timeouts when any response arrives or any error occurs.
+    The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-- __round_decimal__ (int) -
+- **round_decimal** (int) -
 
     The number of decimal places that Milvus rounds the calculated distances to.
 
-    The value defaults to __-1__, indicating that Milvus skips rounding the calculated distances and returns the raw value.
+    The value defaults to **-1**, indicating that Milvus skips rounding the calculated distances and returns the raw value.
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
-_SearchResult_
+*SearchResult*
 
-__RETURNS:__
+**RETURNS:**
 
-A __SearchResult__ object that contains a list of __Hits__ objects. 
+A **SearchResult** object that contains a list of **Hits** objects. 
 
 - Response structure
 
@@ -132,41 +132,41 @@ A __SearchResult__ object that contains a list of __Hits__ objects.
 
 - Properties and methods
 
-    - A __Hits__ object has the following fields:
+    - A **Hits** object has the following fields:
 
-        - __ids__ (_list[int]_ | _list[str]_)
+        - **ids** (*list[int]* | *list[str]*)
 
             A list containing the IDs of the hit entities.
 
-        - __distances__ (list[float]) 
+        - **distances** (list[float]) 
 
             A list of distances from the hit entities' vector fields to the query vector.
 
-    - A __Hit__ object has the following fields:
+    - A **Hit** object has the following fields:
 
-        - __id__ (_int_ | _str_)
+        - **id** (*int* | *str*)
 
             The ID of a hit entity.
 
-        - __distance__ (_float_)
+        - **distance** (*float*)
 
             The distance from a hit entity's vector field to the query vector.
 
-        - __score__ (_float_)
+        - **score** (*float*)
 
-            An alias to __distance__.
+            An alias to **distance**.
 
-        - __vector__ (_list[float]_)   
+        - **vector** (*list[float]*)   
 
             The vector field of a hit entity.
 
-        - __get(_field_name: str_)__
+        - **get(*field_name: str*)**
 
             A function to get the value of the specified field in a hit entity. 
 
-__EXCEPTIONS:__
+**EXCEPTIONS:**
 
-- __MilvusException__
+- **MilvusException**
 
     This exception will be raised when any error occurs during this operation.
 
@@ -230,13 +230,13 @@ for hits in res:
 
 The following operations are related to `search()`:
 
-- [delete()](./delete.md)
+- [delete()](delete.md)
 
-- [flush()](./flush.md)
+- [flush()](flush.md)
 
-- [insert()](./insert.md)
+- [insert()](insert.md)
 
-- [query()](./query.md)
+- [query()](query.md)
 
-- [upsert()](./upsert.md)
+- [upsert()](upsert.md)
 

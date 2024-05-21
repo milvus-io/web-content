@@ -8,11 +8,11 @@ This operation drops a collection.
 drop_collection(collection_name: str) -> None
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __collection_name__ (_str_) -
+- **collection_name** (*str*) -
 
-    __[REQUIRED]__
+    **[REQUIRED]**
 
     The name of an existing collection.
 
@@ -49,21 +49,21 @@ res = client.list_collections()
 
 ## Related methods
 
-- [create_collection()](./create_collection.md)
+- [create_collection()](create_collection.md)
 
-- [create_schema()](./create_schema.md)
+- [create_schema()](create_schema.md)
 
-- [describe_collection()](./describe_collection.md)
+- [describe_collection()](describe_collection.md)
 
-- [get_collection_stats()](./get_collection_stats.md)
+- [get_collection_stats()](get_collection_stats.md)
 
-- [has_collection()](./has_collection.md)
+- [has_collection()](has_collection.md)
 
-- [list_collections()](./list_collections.md)
+- [list_collections()](list_collections.md)
 
-- [rename_collection()](./rename_collection.md)
+- [rename_collection()](rename_collection.md)
 
-- [IndexType](./IndexType.md)
+- [IndexType](IndexType.md)
 
-- [DataType](./DataType.md)
+- [DataType](DataType.md)
 

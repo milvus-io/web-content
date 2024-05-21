@@ -10,23 +10,23 @@ drop(
 )
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __timeout__ (_float _|_ None_)  
+- **timeout** (*float* | *None*)  
 
-    The timeout duration for this operation. Setting this to __None__ indicates that this operation timeouts when any response arrives or any error occurs.
+    The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
-_NoneType_
+*NoneType*
 
-__RETURNS:__
+**RETURNS:**
 
-_None_
+*None*
 
-__EXCEPTIONS:__
+**EXCEPTIONS:**
 
-- __MilvusException__
+- **MilvusException**
 
     This arises when any error occurs during this operation.
 
@@ -60,9 +60,9 @@ partition.drop()
 
 The following operations are related to `drop()`:
 
-- [get_replicas()](./get_replicas.md)
+- [get_replicas()](get_replicas.md)
 
-- [load()](./load.md)
+- [load()](load.md)
 
-- [release()](./release.md)
+- [release()](release.md)
 

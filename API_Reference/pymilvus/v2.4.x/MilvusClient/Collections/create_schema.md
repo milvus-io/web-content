@@ -16,21 +16,21 @@ MilvusClient.create_schema(**kwargs) -> CollectionSchema
 
 </div>
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __kwargs__ -
+- **kwargs** -
 
-    - __auto_id__ (_bool_)
+    - **auto_id** (*bool*)
 
         Whether allows the primary field to automatically increment.
 
-        Setting this to __True__ makes the primary field automatically increment. In this case, the primary field should not be included in the data to insert to avoid errors.
+        Setting this to **True** makes the primary field automatically increment. In this case, the primary field should not be included in the data to insert to avoid errors.
 
-    - __enable_dynamic_field__ (_bool_)
+    - **enable_dynamic_field** (*bool*)
 
         Whether allows Milvus saves the values of undefined fields in a dynamic field if the data being inserted into the target collection includes fields that are not defined in the collection's schema.
 
-        When you set this to __True__, Milvus and  will create a field called __$meta__ to store any undefined fields and their values from the data that is inserted.
+        When you set this to **True**, Milvus and  will create a field called **$meta** to store any undefined fields and their values from the data that is inserted.
 
         <div class="admonition note">
 
@@ -40,11 +40,11 @@ __PARAMETERS:__
 
         </div>
 
-    - __primary_field__ (_str_)
+    - **primary_field** (*str*)
 
         The name of the primary field.
 
-    - __partition_key_field__ (_str_)
+    - **partition_key_field** (*str*)
 
         The name of the field that serves as the partition key.
 
@@ -59,17 +59,17 @@ __PARAMETERS:__
 
         </div>
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
-_[CollectionSchema](../../ORM/CollectionSchema/CollectionSchema.md)_
+*[CollectionSchema](../../ORM/CollectionSchema/CollectionSchema.md)*
 
-__RETURNS:__
+**RETURNS:**
 
-A __[CollectionSchema](../../ORM/CollectionSchema/CollectionSchema.md)__ object.
+A **[CollectionSchema](../../ORM/CollectionSchema/CollectionSchema.md)** object.
 
-__EXCEPTIONS:__
+**EXCEPTIONS:**
 
-- __MilvusException__
+- **MilvusException**
 
     This exception will be raised when any error occurs during this operation.
 
@@ -128,21 +128,21 @@ schema.add_field(field_name="my_vector", datatype=DataType.FLOAT_VECTOR, dim=5)
 
 ## Related methods
 
-- [create_collection()](./create_collection.md)
+- [create_collection()](create_collection.md)
 
-- [describe_collection()](./describe_collection.md)
+- [describe_collection()](describe_collection.md)
 
-- [drop_collection()](./drop_collection.md)
+- [drop_collection()](drop_collection.md)
 
-- [get_collection_stats()](./get_collection_stats.md)
+- [get_collection_stats()](get_collection_stats.md)
 
-- [has_collection()](./has_collection.md)
+- [has_collection()](has_collection.md)
 
-- [list_collections()](./list_collections.md)
+- [list_collections()](list_collections.md)
 
-- [rename_collection()](./rename_collection.md)
+- [rename_collection()](rename_collection.md)
 
-- [IndexType](./IndexType.md)
+- [IndexType](IndexType.md)
 
-- [DataType](./DataType.md)
+- [DataType](DataType.md)
 

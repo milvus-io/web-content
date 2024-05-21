@@ -17,25 +17,25 @@ from pymilvs import db
 db.list_database()
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __using__ (_string_) -
+- **using** (*string*) -
 
-    Alias of the connection. Defaults to __default__.
+    Alias of the connection. Defaults to **default**.
 
-- __timeout__ (_float _|_ None_)
+- **timeout** (*float* | *None*)
 
-    The timeout duration for this operation. Setting this to __None__ indicates that this operation timeouts when any response arrives or any error occurs.
+    The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
-_List_
+*List*
 
-__RETURNS:__
+**RETURNS:**
 
 A list of database names.
 
-__EXCEPTIONS:__
+**EXCEPTIONS:**
 
 None
 
@@ -59,9 +59,9 @@ db.list_database()
 
 The following operations are related to `list_database()`:
 
-- [create_database()](./create_database.md)
+- [create_database()](create_database.md)
 
-- [drop_database()](./drop_database.md)
+- [drop_database()](drop_database.md)
 
-- [using_database()](./using_database.md)
+- [using_database()](using_database.md)
 

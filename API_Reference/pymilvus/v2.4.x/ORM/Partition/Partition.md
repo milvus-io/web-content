@@ -1,6 +1,6 @@
 # Partition
 
-A __Partition__ instance represents a partition within a collection.
+A **Partition** instance represents a partition within a collection.
 
 ```python
 class pymilvus.Partition
@@ -26,15 +26,15 @@ Partition(
 )
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __collection__ (_Collection_ | _str_) - 
+- **collection** (*Collection* | *str*) - 
 
-    __[REQUIRED]__
+    **[REQUIRED]**
 
     The collection in which to create a partition. 
 
-    You can either reference a __Collection__ object or its name.
+    You can either reference a **Collection** object or its name.
 
     <div class="admonition note">
 
@@ -45,27 +45,27 @@ __PARAMETERS:__
 
     </div>
 
-- __name__ (_string_) - 
+- **name** (*string*) - 
 
-    __[REQUIRED]__
+    **[REQUIRED]**
 
     The name of the partition to create.
 
-- __description__ (_string_) - 
+- **description** (*string*) - 
 
     The description of the partition to create.
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
-_Partition_
+*Partition*
 
-__RETURNS:__
+**RETURNS:**
 
-A __Partition__ object.
+A **Partition** object.
 
-__EXCEPTIONS:__
+**EXCEPTIONS:**
 
-- __MilvusException__
+- **MilvusException**
 
     This exception will be raised when any error occurs during this operation.
 
@@ -80,3 +80,9 @@ collection = Collection("book")
 # Create a partition object in the current collection
 partition = Partition(collection, "novel", "")
 ```
+
+## Members
+
+The following are the members of the `Partition` class:
+
+<DocCardList />

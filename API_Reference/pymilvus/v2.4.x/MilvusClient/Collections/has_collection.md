@@ -11,31 +11,31 @@ has_collection(
 ) -> Bool
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __collection_name__ (_str_) -
+- **collection_name** (*str*) -
 
-    __[REQUIRED]__
+    **[REQUIRED]**
 
     The name of a collection.
 
-- __timeout__ (_float_ | _None_) -
+- **timeout** (*float* | *None*) -
 
     The timeout duration for this operation. 
 
-    Setting this to __None__ indicates that this operation timeouts when any response returns or error occurs.
+    Setting this to **None** indicates that this operation timeouts when any response returns or error occurs.
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
-_bool_
+*bool*
 
-__RETURNS:__
+**RETURNS:**
 
 A boolean value indicating whether the specified collection exists.
 
-__EXCEPTIONS:__
+**EXCEPTIONS:**
 
-- __MilvusException__
+- **MilvusException**
 
     This exception will be raised when any error occurs during this operation.
 
@@ -66,21 +66,21 @@ client.has_collection(collection_name="test_collection_2")
 
 ## Related methods
 
-- [create_collection()](./create_collection.md)
+- [create_collection()](create_collection.md)
 
-- [create_schema()](./create_schema.md)
+- [create_schema()](create_schema.md)
 
-- [describe_collection()](./describe_collection.md)
+- [describe_collection()](describe_collection.md)
 
-- [drop_collection()](./drop_collection.md)
+- [drop_collection()](drop_collection.md)
 
-- [get_collection_stats()](./get_collection_stats.md)
+- [get_collection_stats()](get_collection_stats.md)
 
-- [list_collections()](./list_collections.md)
+- [list_collections()](list_collections.md)
 
-- [rename_collection()](./rename_collection.md)
+- [rename_collection()](rename_collection.md)
 
-- [IndexType](./IndexType.md)
+- [IndexType](IndexType.md)
 
-- [DataType](./DataType.md)
+- [DataType](DataType.md)
 

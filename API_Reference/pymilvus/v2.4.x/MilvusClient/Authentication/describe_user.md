@@ -11,25 +11,25 @@ describe_user(
 ) -> Dict
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __user_name__ (_str_) -
+- **user_name** (*str*) -
 
-    __[REQUIRED]__
+    **[REQUIRED]**
 
     The name of the user to describe.
 
-- __timeout__ (_float _|_ None_)  
+- **timeout** (*float* | *None*)  
 
     The timeout duration for this operation. 
 
-    Setting this to __None__ indicates that this operation timeouts when any response arrives or any error occurs.
+    Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
-_dict_
+*dict*
 
-__RETURNS:__
+**RETURNS:**
 
 A dictionary containing detailed information about the specified users.
 
@@ -40,21 +40,21 @@ A dictionary containing detailed information about the specified users.
 # }
 ```
 
-- __user_name__ (_str_) -
+- **user_name** (*str*) -
 
     The name of the specified users.
 
-- __roles__ (_tuple_) - 
+- **roles** (*tuple*) - 
 
     The roles granted to the specified user.
 
-__EXCEPTIONS:__
+**EXCEPTIONS:**
 
-- __MilvusException__
+- **MilvusException**
 
     This exception will be raised when any error occurs during this operation.
 
-- __BaseException__
+- **BaseException**
 
     This exception will be raised when this operation fails.
 
@@ -86,11 +86,11 @@ client.describe_user(user_name="user_1")
 
 ## Related methods
 
-- [create_user()](./Authentication/create_user.md)
+- [create_user()](create_user.md)
 
-- [drop_user()](./Authentication/drop_user.md)
+- [drop_user()](drop_user.md)
 
-- [list_users()](./Authentication/list_users.md)
+- [list_users()](list_users.md)
 
-- [update_password()](./Authentication/update_password.md)
+- [update_password()](update_password.md)
 

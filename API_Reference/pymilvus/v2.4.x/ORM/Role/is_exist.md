@@ -8,21 +8,21 @@ This operation checks whether the current role exists.
 is_exist()
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
 N/A
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
-_bool_
+*bool*
 
-__RETURNS:__
+**RETURNS:**
 
 A boolean value indicating whether the current role exists or not
 
-__EXCEPTIONS:__
+**EXCEPTIONS:**
 
-_None_
+*None*
 
 ## Examples
 
@@ -40,21 +40,21 @@ role.is_exist()
 
 The following operations are related to `is_exist()`:
 
-- [add_user()](./add_user.md)
+- [add_user()](add_user.md)
 
-- [create()](./create.md)
+- [create()](create.md)
 
-- [drop()](./drop.md)
+- [drop()](drop.md)
 
-- [get_users()](./get_users.md)
+- [get_users()](get_users.md)
 
-- [grant()](./grant.md)
+- [grant()](grant.md)
 
-- [list_grant()](./list_grant.md)
+- [list_grant()](list_grant.md)
 
-- [list_grants()](./list_grants.md)
+- [list_grants()](list_grants.md)
 
-- [remove_user()](./remove_user.md)
+- [remove_user()](remove_user.md)
 
-- [revoke()](./revoke.md)
+- [revoke()](revoke.md)
 

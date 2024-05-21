@@ -1,6 +1,6 @@
 # AzureConnectParam
 
-An __AzureConnectParam__ instance sets connection parameters for a __RemoteBulkWriter__ instance.
+An **AzureConnectParam** instance sets connection parameters for a **RemoteBulkWriter** instance.
 
 ```python
 class pymilvus.RemoteBulkWriter.AzureConnectParam
@@ -8,7 +8,7 @@ class pymilvus.RemoteBulkWriter.AzureConnectParam
 
 ## Constructor
 
-Constructs an __AzureConnectParam__ object by a set of parameters, such as __container_name__, __account_url__, __credential__, etc.
+Constructs an **AzureConnectParam** object by a set of parameters, such as **container_name**, **account_url**, **credential**, etc.
 
 <div class="admonition note">
 
@@ -32,47 +32,47 @@ connect_param = S3ConnectParam(
 )
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __container_name__ (_str_)
+- **container_name** (*str*)
 
     The name of the remote Azure blob storage container to connect to.
 
-- __conn_str__ (_str_)
+- **conn_str** (*str*)
 
-    A connection string to an Azure Storage account, which can be parsed to an __account_url__ and a __credential__. To generate a connection string, read [this link](https://learn.microsoft.com/en-us/azure/storage/common/storage-configure-connection-string).
+    A connection string to an Azure Storage account, which can be parsed to an **account_url** and a **credential**. To generate a connection string, read [this link](https://learn.microsoft.com/en-us/azure/storage/common/storage-configure-connection-string).
 
-- __account_url__ (_str_)
+- **account_url** (*str*)
 
     A string in format like `https://<storage-account>.blob.core.windows.net`.
 
     Read [this link](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-overview) for more info.
 
-- __credential__ (_str_)
+- **credential** (*str*)
 
     Account access key for the account. Read [this link](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage?tabs=azure-portal#view-account-access-keys) for more info.
 
-- __upload_chunk_size__ (_int_)
+- **upload_chunk_size** (*int*)
 
-    If the blob size is larger than this value or unknown, the blob is uploaded in chunks by parallel connections. This parameter is passed to __max_single_put_size__ of Azure. Read [this link](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blob-upload-python#specify-data-transfer-options-for-upload) for more.
+    If the blob size is larger than this value or unknown, the blob is uploaded in chunks by parallel connections. This parameter is passed to **max_single_put_size** of Azure. Read [this link](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blob-upload-python#specify-data-transfer-options-for-upload) for more.
 
-- __upload_concurrency__ (_int_)
+- **upload_concurrency** (*int*)
 
     The maximum number of parallel connections to use when uploading in chunks. 
 
-    This parameter is passed to __max_concurrency__ of Azure. Read [this link](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blob-upload-python#specify-data-transfer-options-for-upload) for more.
+    This parameter is passed to **max_concurrency** of Azure. Read [this link](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blob-upload-python#specify-data-transfer-options-for-upload) for more.
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
-_AzureConnectParam_
+*AzureConnectParam*
 
-__RETURNS:__
+**RETURNS:**
 
-An __AzureConnectParam__ object.
+An **AzureConnectParam** object.
 
-__EXCEPTIONS:__
+**EXCEPTIONS:**
 
-- __Exception__
+- **Exception**
 
     This exception will be raised if the connection fails.
 

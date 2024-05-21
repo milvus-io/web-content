@@ -4,30 +4,30 @@ This is an enumeration that provides the following constants.
 
 ## Constants
 
-- __ImportPending__ = 0
+- **ImportPending** = 0
 
     Indicates that the bulk-insert task is pending.
 
-- __ImportFailed__ = 1
+- **ImportFailed** = 1
 
     Indicates that the bulk-insert task failed.
 
-- __ImportStarted__ = 2
+- **ImportStarted** = 2
 
     Indicates that the bulk-insert task has started.
 
-- __ImportPersisted__ = 5
+- **ImportPersisted** = 5
 
     Indicates that the bulk-insert task has been persisted.
 
-- __ImportCompleted__ = 6
+- **ImportCompleted** = 6
 
     Indicates that the bulk-insert task is completed.
 
-- __ImportFailedAndCleaned__ = 7
+- **ImportFailedAndCleaned** = 7
 
     Indicates that the bulk-insert task failed with data cleaned.
 
-- __ImportUnknownState__ = 100
+- **ImportUnknownState** = 100
 
     Indicates that the bulk-insert task is in an unknown state.

@@ -10,23 +10,23 @@ wait_for_compaction_completed(
 )
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __timeout__ (_float _|_ None_)  
+- **timeout** (*float* | *None*)  
 
-    The timeout duration for this operation. Setting this to __None__ indicates that this operation timeouts when any response arrives or any error occurs.
+    The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
-_NoneType_
+*NoneType*
 
-__RETURNS:__
+**RETURNS:**
 
 None
 
-__EXCEPTIONS:__
+**EXCEPTIONS:**
 
-- __MilvusException__
+- **MilvusException**
 
     This arises when any error occurs during this operation.
 
@@ -57,9 +57,9 @@ collection.wait_for_compaction_completed()
 
 The following operations are related to `wait_for_compaction_completed()`:
 
-- [compact()](./compact.md)
+- [compact()](compact.md)
 
-- [get_compaction_plans()](./get_compaction_plans.md)
+- [get_compaction_plans()](get_compaction_plans.md)
 
-- [get_compaction_state()](./get_compaction_state.md)
+- [get_compaction_state()](get_compaction_state.md)
 

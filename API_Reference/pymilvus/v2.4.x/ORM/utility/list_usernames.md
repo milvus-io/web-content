@@ -11,29 +11,29 @@ list_usernames(
 )
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __using__ (_str_) - 
+- **using** (*str*) - 
 
     The alias of the employed connection.
 
-    The default value is __default__, indicating that this operation employs the default connection.
+    The default value is **default**, indicating that this operation employs the default connection.
 
-- __timeout__ (_float _|_ None_)  
+- **timeout** (*float* | *None*)  
 
-    The timeout duration for this operation. Setting this to __None__ indicates that this operation timeouts when any response arrives or any error occurs.
+    The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
-_list_
+*list*
 
-__RETURNS:__
+**RETURNS:**
 
 A list that contains the names of all existing users.
 
-__EXCEPTIONS:__
+**EXCEPTIONS:**
 
-- __MilvusException__
+- **MilvusException**
 
     This exception will be raised when any error occurs during this operation.
 
@@ -53,19 +53,19 @@ users = utility.list_usernames()
 
 The following operations are related to `list_usernames()`
 
-- [Role](./ORM/Role.md)
+- [Role](../Role/Role.md)
 
-- [create_user()](./create_user.md)
+- [create_user()](create_user.md)
 
-- [delete_user()](./delete_user.md)
+- [delete_user()](delete_user.md)
 
-- [list_roles()](./list_roles.md)
+- [list_roles()](list_roles.md)
 
-- [list_user()](./list_user.md)
+- [list_user()](list_user.md)
 
-- [list_users()](./list_users.md)
+- [list_users()](list_users.md)
 
-- [reset_password()](./reset_password.md)
+- [reset_password()](reset_password.md)
 
-- [update_password()](./update_password.md)
+- [update_password()](update_password.md)
 

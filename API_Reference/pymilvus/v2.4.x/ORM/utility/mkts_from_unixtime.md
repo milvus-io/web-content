@@ -22,31 +22,31 @@ utility.mkts_from_unixtime(
 )
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __epoch__ (_float_) -
+- **epoch** (*float*) -
 
-    __[REQUIRED]__
+    **[REQUIRED]**
 
     A UNIX epoch timestamp.
 
     A UNIX epoch timestamp is an integer that represents the time elapsed since January 1, 1970 (midnight UTC/GMT) in seconds.
 
-- __milliseconds__ (_float_) -
+- **milliseconds** (*float*) -
 An incremental time interval in milliseconds.
 
-- __delta__ (_Optional[timedelta]_) -
+- **delta** (*Optional[timedelta]*) -
 
-    A __datetime.timedelta__ object that represents the duration expressing the difference between two `date`, `time`, or `datetime` instances to microsecond resolution.
+    A **datetime.timedelta** object that represents the duration expressing the difference between two `date`, `time`, or `datetime` instances to microsecond resolution.
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
-_int_
+*int*
 
-__RETURNS:__
-A hybrid timestamp, which is a non-negative integer ranging from __0__ to __18446744073709551615__.
+**RETURNS:**
+A hybrid timestamp, which is a non-negative integer ranging from **0** to **18446744073709551615**.
 
-## __Examples__
+## **Examples**
 
 ```python
 import time
@@ -79,11 +79,11 @@ mkts_from_unixtime(
 
 The following operations are related to `mkts_from_unixtime()`:
 
-- [mkts_from_datetime()](./mkts_from_datetime.md)
+- [mkts_from_datetime()](mkts_from_datetime.md)
 
-- [hybridts_to_datetime()](./hybridts_to_datetime.md)
+- [hybridts_to_datetime()](hybridts_to_datetime.md)
 
-- [hybridts_to_unixtime()](./hybridts_to_unixtime.md)
+- [hybridts_to_unixtime()](hybridts_to_unixtime.md)
 
-- [mkts_from_hybridts()](./mkts_from_hybridts.md)
+- [mkts_from_hybridts()](mkts_from_hybridts.md)
 

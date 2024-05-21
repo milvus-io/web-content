@@ -4,7 +4,7 @@ This operation sets a database as the default for the current connection.
 
 ## Request Syntax
 
-A Milvus cluster ships with a default database named __default__. All collection operations are performed within the default database. You can use this method to change the default database.
+A Milvus cluster ships with a default database named **default**. All collection operations are performed within the default database. You can use this method to change the default database.
 
 ```python
 using_database(
@@ -13,27 +13,27 @@ using_database(
 )
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __db_name__ (_string_) -
+- **db_name** (*string*) -
 
-    __[REQUIRED]__
+    **[REQUIRED]**
 
     Name of the database to be set as the default database.
 
-- __using__ (_string_) -
+- **using** (*string*) -
 
-    Alias of the connection. Defaults to __default__.
+    Alias of the connection. Defaults to **default**.
 
-__RETURN TYPE:__
-
-None
-
-__RETURNS:__
+**RETURN TYPE:**
 
 None
 
-__EXCEPTIONS:__
+**RETURNS:**
+
+None
+
+**EXCEPTIONS:**
 
 None
 
@@ -58,9 +58,9 @@ conn = connections.connect(host="127.0.0.1", port=19530, db_name="test")
 
 The following operations are related to `using_database()`:
 
-- [create_database()](./create_database.md)
+- [create_database()](create_database.md)
 
-- [drop_database()](./drop_database.md)
+- [drop_database()](drop_database.md)
 
-- [list_database()](./list_database.md)
+- [list_database()](list_database.md)
 

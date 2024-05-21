@@ -15,17 +15,17 @@ do_bulk_insert(
 )
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __collection_name__ (_str_) -
+- **collection_name** (*str*) -
 
-    __[REQUIRED]__
+    **[REQUIRED]**
 
     The name of the target collection of this operation.
 
-- __files__ (_list[str]_) -
+- **files** (*list[str]*) -
 
-    __[REQUIRED]__
+    **[REQUIRED]**
 
     A list of paths to the files that contain the source data. 
 
@@ -55,34 +55,34 @@ __PARAMETERS:__
 
     </div>
 
-- __partition_name__ (_str_) -
+- **partition_name** (*str*) -
 
     The name of a partition in the specified collection.
 
     Setting this makes Milvus bulk-insert the data into the specified partition.
 
-    Setting this to the name of a partition that does not exist results in a __MilvusException__.
+    Setting this to the name of a partition that does not exist results in a **MilvusException**.
 
-- __using__ (_str_) - 
+- **using** (*str*) - 
 
     The alias of the employed connection.
 
-    The default value is __default__, indicating that this operation employs the default connection.
+    The default value is **default**, indicating that this operation employs the default connection.
 
-- __timeout__ (_float _|_ None_)  
+- **timeout** (*float* | *None*)  
 
-    The timeout duration for this operation. Setting this to __None__ indicates that this operation timeouts when any response arrives or any error occurs.
+    The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
-_int_
+*int*
 
-__RETURNS:__
+**RETURNS:**
 A bulk-insert task ID.
 
-__EXCEPTIONS:__
+**EXCEPTIONS:**
 
-- __MilvusException__
+- **MilvusException**
 
     This exception will be raised when any error occurs during this operation.
 
@@ -115,9 +115,9 @@ utility.do_bulk_insert(
 
 The following operations are related to `do_bulk_insert()`:
 
-- [BulkInsertState](./BulkInsertState.md)
+- [BulkInsertState](BulkInsertState.md)
 
-- [get_bulk_insert_state()](./get_bulk_insert_state.md)
+- [get_bulk_insert_state()](get_bulk_insert_state.md)
 
-- [list_bulk_insert_tasks()](./list_bulk_insert_tasks.md)
+- [list_bulk_insert_tasks()](list_bulk_insert_tasks.md)
 

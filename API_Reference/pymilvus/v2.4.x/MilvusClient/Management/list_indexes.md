@@ -12,29 +12,29 @@ list_indexes(
 ) -> List
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __collection_name__ (_str_) -
+- **collection_name** (*str*) -
 
-    __[REQUIRED]__
+    **[REQUIRED]**
 
     The name of an existing collection.
 
-- __field_name__ (_str_) -
+- **field_name** (*str*) -
 
     The name of a field. Leaving this unspecified make this operation list all indexes.
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
-_List_
+*List*
 
-__RETURNS:__
+**RETURNS:**
 
 A list of index names.
 
-__EXCEPTIONS:__
+**EXCEPTIONS:**
 
-- __MilvusException__
+- **MilvusException**
 
     This exception will be raised when any error occurs during this operation.
 
@@ -133,13 +133,13 @@ client.list_indexes(collection_name="customized_setup")
 
 ## Related methods
 
-- [add_index()](./add_index.md)
+- [add_index()](add_index.md)
 
-- [create_index()](./create_index.md)
+- [create_index()](create_index.md)
 
-- [describe_index()](./describe_index.md)
+- [describe_index()](describe_index.md)
 
-- [drop_index()](./drop_index.md)
+- [drop_index()](drop_index.md)
 
-- [prepare_index_params()](./prepare_index_params.md)
+- [prepare_index_params()](prepare_index_params.md)
 

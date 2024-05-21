@@ -1,6 +1,6 @@
-# __call__()
+# \_\_call\_\_()
 
-This operation in [CohereRerankFunction](./CohereRerankFunction.md) takes in a query and document strings and returns a list of `RerankResult` objects with the top k documents ranked by score.
+This operation in [CohereRerankFunction](CohereRerankFunction.md) takes in a query and document strings and returns a list of `RerankResult` objects with the top k documents ranked by score.
 
 ## Request syntax
 
@@ -8,7 +8,7 @@ This operation in [CohereRerankFunction](./CohereRerankFunction.md) takes in a q
 # Instance created
 cohere_rf = CohereRerankFunction()
 
-# __call__ method will be called
+# \_\_call\_\_ method will be called
 cohere_rf(
     query: str,
     documents: List[str],

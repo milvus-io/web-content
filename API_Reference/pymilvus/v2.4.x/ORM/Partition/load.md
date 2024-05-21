@@ -19,19 +19,19 @@ load(
 )
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __replica_number__ (_int_)
+- **replica_number** (*int*)
 
-    The number of replicas to load in the current partition. The default value is __1__, indicating that one replica in the current partition is loaded.
+    The number of replicas to load in the current partition. The default value is **1**, indicating that one replica in the current partition is loaded.
 
-- __timeout__ (_float _|_ None_)  
+- **timeout** (*float* | *None*)  
 
-    The timeout duration for this operation. Setting this to __None__ indicates that this operation timeouts when any response arrives or any error occurs.
+    The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-- __kwargs__ - 
+- **kwargs** - 
 
-    - ___resource_groups__ (_list_) -
+    - **_resource_groups** (*list*) -
 
         A specific set of resource groups into which the current collection is to be loaded.
 
@@ -46,17 +46,17 @@ __PARAMETERS:__
 
         </div>
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
-_NoneType_
+*NoneType*
 
-__RETURNS:__
+**RETURNS:**
 
-_None_
+*None*
 
-__EXCEPTIONS:__
+**EXCEPTIONS:**
 
-- __MilvusException__
+- **MilvusException**
 
     This arises when any error occurs during this operation.
 
@@ -95,9 +95,9 @@ partition.load(
 
 The following operations are related to `load()`:
 
-- [drop()](./drop.md)
+- [drop()](drop.md)
 
-- [get_replicas()](./get_replicas.md)
+- [get_replicas()](get_replicas.md)
 
-- [release()](./release.md)
+- [release()](release.md)
 

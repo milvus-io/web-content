@@ -20,37 +20,37 @@ create_partition(
 ) -> None
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __collection_name __(_str_) -
+- **collection_name** (*str*) -
 
-    __[REQUIRED]__
+    **[REQUIRED]**
 
     The name of an existing collection.
 
-- __partition_names__ (_str_)
+- **partition_names** (*str*)
 
-    __[REQUIRED]__
+    **[REQUIRED]**
 
     The name of the partition to drop.
 
-- __timeout__ (_float _|_ None_)  
+- **timeout** (*float* | *None*)  
 
     The timeout duration for this operation. 
 
-    Setting this to __None__ indicates that this operation timeouts when any response arrives or any error occurs.
+    Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
-_NoneType_
+*NoneType*
 
-__RETURNS:__
+**RETURNS:**
 
 None
 
-__EXCEPTIONS:__
+**EXCEPTIONS:**
 
-- __MilvusException__
+- **MilvusException**
 
     This exception will be raised when any error occurs during this operation.
 
@@ -89,15 +89,15 @@ client.drop_partition(
 
 ## Related methods
 
-- [create_partition()](./create_partition.md)
+- [create_partition()](create_partition.md)
 
-- [get_partition_stats()](./get_partition_stats.md)
+- [get_partition_stats()](get_partition_stats.md)
 
-- [has_partition()](./has_partition.md)
+- [has_partition()](has_partition.md)
 
-- [list_partitions()](./list_partitions.md)
+- [list_partitions()](list_partitions.md)
 
-- [load_partitions()](./load_partitions.md)
+- [load_partitions()](load_partitions.md)
 
-- [release_partitions()](./release_partitions.md)
+- [release_partitions()](release_partitions.md)
 

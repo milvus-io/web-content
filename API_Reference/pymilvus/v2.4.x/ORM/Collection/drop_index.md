@@ -8,23 +8,23 @@ This operation deletes index from the current collection.
 drop_index(timeout: float | None)
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __timeout__ (_float _|_ None_)  
+- **timeout** (*float* | *None*)  
 
-    The timeout duration for this operation. Setting this to __None__ indicates that this operation timeouts when any response arrives or any error occurs.
+    The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
-_None_
+*None*
 
-__RETURNS:__
+**RETURNS:**
 
-_NoneType_
+*NoneType*
 
-__EXCEPTIONS:__
+**EXCEPTIONS:**
 
-- __MilvusException__
+- **MilvusException**
 
     This exception will be raised when any error occurs during this operation.
 
@@ -74,15 +74,15 @@ collection.has_index() # False
 
 The following operations are related to `drop_index()`:
 
-- [create_index()](./create_index.md)
+- [create_index()](create_index.md)
 
-- [has_index()](./has_index.md)
+- [has_index()](has_index.md)
 
-- [index()](./index.md)
+- [index()](index.md)
 
-- [index_building_progress()](./utility/index_building_progress.md)
+- [index_building_progress()](../utility/index_building_progress.md)
 
-- [wait_for_index_building_complete()](./utility/wait_for_index_building_complete.md)
+- [wait_for_index_building_complete()](../utility/wait_for_index_building_complete.md)
 
-- [list_indexes()](./utility/list_indexes.md)
+- [list_indexes()](../utility/list_indexes.md)
 

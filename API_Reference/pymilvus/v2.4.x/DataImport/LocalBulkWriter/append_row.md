@@ -10,13 +10,13 @@ append_row(
 )
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __row__ (_dict_) -
+- **row** (*dict*) -
 
     A dictionary representing an entity to be appended.
 
-    The keys and their values in the dictionary should match the schema referenced in the current __LocalBulkWriter__.
+    The keys and their values in the dictionary should match the schema referenced in the current **LocalBulkWriter**.
 
 ## Examples
 
@@ -50,5 +50,5 @@ writer.append_row(
 
 ## Related methods
 
-- [commit()](./commit.md)
+- [commit()](commit.md)
 

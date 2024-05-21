@@ -8,27 +8,27 @@ This operation lists all existing collections.
 list_collections(**kwargs) -> Name
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __kwargs__ -
+- **kwargs** -
 
-    - __timeout__ (_float_ | _None_) -
+    - **timeout** (*float* | *None*) -
 
         The timeout duration for this operation. 
 
-        Setting this to __None__ indicates that this operation timeouts when any response returns or error occurs.
+        Setting this to **None** indicates that this operation timeouts when any response returns or error occurs.
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
-_list_
+*list*
 
-__RETURNS:__
+**RETURNS:**
 
 A list of collection names.
 
-__EXCEPTIONS:__
+**EXCEPTIONS:**
 
-- __MilvusException__
+- **MilvusException**
 
     This exception will be raised when any error occurs during this operation.
 
@@ -54,21 +54,21 @@ client.list_collections()
 
 ## Related methods
 
-- [create_collection()](./create_collection.md)
+- [create_collection()](create_collection.md)
 
-- [create_schema()](./create_schema.md)
+- [create_schema()](create_schema.md)
 
-- [describe_collection()](./describe_collection.md)
+- [describe_collection()](describe_collection.md)
 
-- [drop_collection()](./drop_collection.md)
+- [drop_collection()](drop_collection.md)
 
-- [get_collection_stats()](./get_collection_stats.md)
+- [get_collection_stats()](get_collection_stats.md)
 
-- [has_collection()](./has_collection.md)
+- [has_collection()](has_collection.md)
 
-- [rename_collection()](./rename_collection.md)
+- [rename_collection()](rename_collection.md)
 
-- [IndexType](./IndexType.md)
+- [IndexType](IndexType.md)
 
-- [DataType](./DataType.md)
+- [DataType](DataType.md)
 

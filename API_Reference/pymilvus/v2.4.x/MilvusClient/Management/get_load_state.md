@@ -12,27 +12,27 @@ get_load_state(
 ) -> Dict
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __collection_name__ (_str_) -
+- **collection_name** (*str*) -
 
-    __[REQUIRED]__
+    **[REQUIRED]**
 
     The name of a collection.
 
-- __partition_name__ (_str_) -
+- **partition_name** (*str*) -
 
     The name of a partition.
 
-- __timeout__ (_float_ | _None_) -
+- **timeout** (*float* | *None*) -
 
-    The timeout duration for this operation. Setting this to __None__ indicates that this operation timeouts when any response returns or error occurs.
+    The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response returns or error occurs.
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
-_dict_
+*dict*
 
-__RETURNS:__
+**RETURNS:**
 
 A dictionary that contains the status of the specified collection or partition. 
 
@@ -44,9 +44,9 @@ A dictionary that contains the status of the specified collection or partition.
 
 </div>
 
-__EXCEPTIONS:__
+**EXCEPTIONS:**
 
-- __MilvusException__
+- **MilvusException**
 
     This exception will be raised when any error occurs during this operation.
 
@@ -101,9 +101,9 @@ client.get_load_state(
 
 ## Related methods
 
-- [load_collection()](./load_collection.md)
+- [load_collection()](load_collection.md)
 
-- [refresh_load()](./refresh_load.md)
+- [refresh_load()](refresh_load.md)
 
-- [release_collection()](./release_collection.md)
+- [release_collection()](release_collection.md)
 

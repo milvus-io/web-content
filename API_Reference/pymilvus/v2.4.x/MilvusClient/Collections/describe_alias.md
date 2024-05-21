@@ -11,27 +11,27 @@ describe_alias(
 ) -> dict
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __alias __(_str_) -
+- **alias** (*str*) -
 
-    __[REQUIRED]__
+    **[REQUIRED]**
 
     The alias of a collection. 
 
     Before this operation, ensure that the alias exists. Otherwise, exceptions will occur.
 
-- __timeout__ (_float _|_ None_)  
+- **timeout** (*float* | *None*)  
 
     The timeout duration for this operation. 
 
-    Setting this to __None__ indicates that this operation timeouts when any response arrives or any error occurs.
+    Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
-_Dict_
+*Dict*
 
-__RETURNS:__
+**RETURNS:**
 
 A dictionary containing the alias details.
 
@@ -43,27 +43,27 @@ A dictionary containing the alias details.
 }
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __alias __(_str_) -
+- **alias** (*str*) -
 
     The specified alias. 
 
-- __collection_name __(_str_) -
+- **collection_name** (*str*) -
 
     The name of the bound collection. 
 
-- __db_name __(_str_) -
+- **db_name** (*str*) -
 
     The database to which the bound collection belongs. 
 
-__EXCEPTIONS:__
+**EXCEPTIONS:**
 
-- __MilvusException__
+- **MilvusException**
 
     This exception will be raised when any error occurs during this operation, especially when you set `alias` to a non-existing alias.
 
-- __BaseException__
+- **BaseException**
 
     This exception will be raised when this operation fails.
 
@@ -96,11 +96,11 @@ client.describe_alias(alias="test")
 
 ## Related methods
 
-- [alter_alias()](./Collections/alter_alias.md)
+- [alter_alias()](alter_alias.md)
 
-- [create_alias()](./Collections/create_alias.md)
+- [create_alias()](create_alias.md)
 
-- [drop_alias()](./Collections/drop_alias.md)
+- [drop_alias()](drop_alias.md)
 
-- [list_aliases()](./Collections/list_aliases.md)
+- [list_aliases()](list_aliases.md)
 

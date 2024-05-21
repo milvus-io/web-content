@@ -12,41 +12,41 @@ rename_collection(
 ) -> None
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __old_name__ (_str_) -
+- **old_name** (*str*) -
 
-    __[REQUIRED]__
+    **[REQUIRED]**
 
     The name of an existing collection.
 
-    Setting this to a non-existing collection results in a __MilvusException__.
+    Setting this to a non-existing collection results in a **MilvusException**.
 
-- __new_name__ (_str_) -
+- **new_name** (*str*) -
 
-    __[REQUIRED]__
+    **[REQUIRED]**
 
     The name of the target collection after this operation.
 
-    Setting this to the value of __old_name__ results in a __MilvusException__.
+    Setting this to the value of **old_name** results in a **MilvusException**.
 
-- __timeout__ (_float_ | _None_) -
+- **timeout** (*float* | *None*) -
 
     The timeout duration for this operation. 
 
-    Setting this to __None__ indicates that this operation timeouts when any response arrives or any error occurs.
+    Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
-_NoneType_
+*NoneType*
 
-__RETURNS:__
+**RETURNS:**
 
 None
 
-__EXCEPTIONS:__
+**EXCEPTIONS:**
 
-- __MilvusException__
+- **MilvusException**
 
     This exception will be raised when any error occurs during this operation.
 
@@ -76,21 +76,21 @@ client.rename_collection(
 
 ## Related methods
 
-- [create_collection()](./Collections/create_collection.md)
+- [create_collection()](create_collection.md)
 
-- [create_schema()](./Collections/create_schema.md)
+- [create_schema()](create_schema.md)
 
-- [describe_collection()](./Collections/describe_collection.md)
+- [describe_collection()](describe_collection.md)
 
-- [drop_collection()](./Collections/drop_collection.md)
+- [drop_collection()](drop_collection.md)
 
-- [get_collection_stats()](./Collections/get_collection_stats.md)
+- [get_collection_stats()](get_collection_stats.md)
 
-- [has_collection()](./Collections/has_collection.md)
+- [has_collection()](has_collection.md)
 
-- [list_collections()](./Collections/list_collections.md)
+- [list_collections()](list_collections.md)
 
-- [IndexType](./Collections/IndexType.md)
+- [IndexType](IndexType.md)
 
-- [DataType](./Collections/DataType.md)
+- [DataType](DataType.md)
 

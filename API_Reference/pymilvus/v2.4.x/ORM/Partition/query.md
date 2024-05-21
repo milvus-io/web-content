@@ -13,31 +13,31 @@ query(
 )
 ```
 
-__PARAMETERS:__
+**PARAMETERS:**
 
-- __expr__ (_string_) -
+- **expr** (*string*) -
 
-    __[REQUIRED] __
+    **[REQUIRED]** 
 
     A boolean expression to filter the entity scalar fields.
 
-- __output_fields __(List[str] | _None_) -
+- **output_fields** (List[str] | *None*) -
 
-    A list of the names of fields that has to be contained in the output. Setting this to __None__ indicates that this operation only outputs the primary key field.
+    A list of the names of fields that has to be contained in the output. Setting this to **None** indicates that this operation only outputs the primary key field.
 
-- __timeout__ (_float _|_ None_)  
+- **timeout** (*float* | *None*)  
 
-    The timeout duration for this operation. Setting this to __None__ indicates that this operation timeouts when any response arrives or any error occurs.
+    The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-- __kwargs__: 
+- **kwargs**: 
 
     Additional keyword arguments.
 
-    - __consistency_level__ (_str_ | _int_) -
+    - **consistency_level** (*str* | *int*) -
 
         The consistency level of the target collection.
 
-        The value defaults to the one specified when you create the current collection, with options of __Strong __(__0__), __Bounded __(__1__), __Session __(__2__), and __Eventually __(__3__).
+        The value defaults to the one specified when you create the current collection, with options of **Strong** (**0**), **Bounded** (**1**), **Session** (**2**), and **Eventually** (**3**).
 
         <div class="admonition note">
 
@@ -49,7 +49,7 @@ __PARAMETERS:__
 
         </div>
 
-    - __guarantee_timestamp__ (_int_) -
+    - **guarantee_timestamp** (*int*) -
 
         A valid timestamp. 
 
@@ -63,11 +63,11 @@ __PARAMETERS:__
 
         </div>
 
-    - __graceful_time__ (_int_) -
+    - **graceful_time** (*int*) -
 
         A period of time in seconds.
 
-        The value defaults to __5__. If this parameter is set, Milvus calculates the guarantee timestamp by subtracting this from the current timestamp.
+        The value defaults to **5**. If this parameter is set, Milvus calculates the guarantee timestamp by subtracting this from the current timestamp.
 
         <div class="admonition note">
 
@@ -77,7 +77,7 @@ __PARAMETERS:__
 
         </div>
 
-    - __offset__ (_int_) -
+    - **offset** (*int*) -
 
         The number of records to skip in the query result. 
 
@@ -85,7 +85,7 @@ __PARAMETERS:__
 
         The sum of this value and `limit` should be less than 16,384. 
 
-    - __limit__ (_int_) -
+    - **limit** (*int*) -
 
         The number of records to return in the query result.
 
@@ -93,17 +93,17 @@ __PARAMETERS:__
 
         The sum of this value and `offset` should be less than 16,384. 
 
-__RETURN TYPE:__
+**RETURN TYPE:**
 
-_List_
+*List*
 
-__RETURNS:__
+**RETURNS:**
 
 A list of the query results.
 
-__EXCEPTIONS:__
+**EXCEPTIONS:**
 
-- __MilvusException__
+- **MilvusException**
 
     This arises when any error occurs during this operation.
 
@@ -183,13 +183,13 @@ res = partition.query(
 
 The following operations are related to `query()`:
 
-- [delete()](./delete.md)
+- [delete()](delete.md)
 
-- [flush()](./flush.md)
+- [flush()](flush.md)
 
-- [insert()](./insert.md)
+- [insert()](insert.md)
 
-- [search()](./search.md)
+- [search()](search.md)
 
-- [upsert()](./upsert.md)
+- [upsert()](upsert.md)
 

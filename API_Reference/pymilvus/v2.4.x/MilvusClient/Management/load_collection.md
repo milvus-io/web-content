@@ -146,16 +146,14 @@ client.create_index(
 client.load_collection(
     collection_name="customized_setup",
     replica_number=2
-    collection_name="customized_setup",
-    replica_number=2
 )
 ```
 
 ## Related methods
 
-- [get_load_state()](./Management-get_load_state)
+- [get_load_state()](get_load_state.md)
 
-- [refresh_load()](./Management-refresh_load)
+- [refresh_load()](refresh_load.md)
 
-- [release_collection()](./Management-release_collection)
+- [release_collection()](release_collection.md)
 
