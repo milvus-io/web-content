@@ -11,7 +11,7 @@ The `call` method of VoyageEmbeddingFunction shares the same functionality as [e
 
 voyage_ef = VoyageEmbeddingFunction()
 
-# \_\_call\_\_ method will be called
+# __call__ method will be called
 voyage_ef(
     texts: List[str]
 ) -> List[np.array]
