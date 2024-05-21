@@ -11,93 +11,93 @@ This page demonstrates the procedure to import the prepared data.
 
 ## Before you start
 
-<div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-</div>
-
 - You have already prepared your data and placed it into the Milvus bucket. 
 
     If not, you should use **RemoteBulkWriter** to prepare your data first, and ensure that the prepared data has already been transferred to the Milvus bucket on the MinIO instance started along with your Milvus instance. For details, refer to [Prepare Source Data](prepare-source-data.md).
 
 - You have already created a collection with the schema you use to prepare your data. If not, refer to [Manage Collections](manage-collections.md). 
 
-    The following code snippet creates a simple collection with the given schema.
+<div class="multipleCode">
+  <a href="#python">Python </a>
+  <a href="#java">Java</a>
+</div>
 
-    ```python
-    client = MilvusClient("http://localhost:19530")
+The following code snippet creates a simple collection with the given schema.
 
-    schema = MilvusClient.create_schema(
-        auto_id=False,
-        enable_dynamic_field=True
-    )
+```python
+client = MilvusClient("http://localhost:19530")
 
-    schema.add_field(field_name="id", datatype=DataType.INT64, is_primary=True)
-    schema.add_field(field_name="vector", datatype=DataType.FLOAT_VECTOR, dim=768)
-    schema.add_field(field_name="scalar_1", datatype=DataType.VARCHAR, max_length=512)
-    schema.add_field(field_name="scalar_2", datatype=DataType.INT64)
+schema = MilvusClient.create_schema(
+    auto_id=False,
+    enable_dynamic_field=True
+)
 
-    client.create_collection(
-        collection_name="quick_setup",
-        schema=schema
-    )
-    ```
+schema.add_field(field_name="id", datatype=DataType.INT64, is_primary=True)
+schema.add_field(field_name="vector", datatype=DataType.FLOAT_VECTOR, dim=768)
+schema.add_field(field_name="scalar_1", datatype=DataType.VARCHAR, max_length=512)
+schema.add_field(field_name="scalar_2", datatype=DataType.INT64)
 
-    ```java
-    import io.milvus.client.MilvusServiceClient;
-    import io.milvus.param.ConnectParam;
-    import io.milvus.grpc.DataType;
-    import io.milvus.param.collection.CollectionSchemaParam;
-    import io.milvus.param.collection.CollectionSchemaParam;
-    import io.milvus.param.collection.FieldType;
+client.create_collection(
+    collection_name="quick_setup",
+    schema=schema
+)
+```
 
-    final MilvusServiceClient milvusClient = new MilvusServiceClient(
-    ConnectParam.newBuilder()
-        .withUri("localhost:19530")
-        .withToken("root:Milvus")
-        .build()
-    );
+```java
+import io.milvus.client.MilvusServiceClient;
+import io.milvus.param.ConnectParam;
+import io.milvus.grpc.DataType;
+import io.milvus.param.collection.CollectionSchemaParam;
+import io.milvus.param.collection.CollectionSchemaParam;
+import io.milvus.param.collection.FieldType;
 
-    // Define schema for the target collection
-    FieldType id = FieldType.newBuilder()
-            .withName("id")
-            .withDataType(DataType.Int64)
-            .withPrimaryKey(true)
-            .withAutoID(false)
-            .build();
+final MilvusServiceClient milvusClient = new MilvusServiceClient(
+ConnectParam.newBuilder()
+    .withUri("localhost:19530")
+    .withToken("root:Milvus")
+    .build()
+);
 
-    FieldType vector = FieldType.newBuilder()
-            .withName("vector")
-            .withDataType(DataType.FloatVector)
-            .withDimension(768)
-            .build();
+// Define schema for the target collection
+FieldType id = FieldType.newBuilder()
+    .withName("id")
+    .withDataType(DataType.Int64)
+    .withPrimaryKey(true)
+    .withAutoID(false)
+    .build();
 
-    FieldType scalar1 = FieldType.newBuilder()
-            .withName("scalar_1")
-            .withDataType(DataType.VarChar)
-            .withMaxLength(512)
-            .build();
+FieldType vector = FieldType.newBuilder()
+    .withName("vector")
+    .withDataType(DataType.FloatVector)
+    .withDimension(768)
+    .build();
 
-    FieldType scalar2 = FieldType.newBuilder()
-            .withName("scalar_2")
-            .withDataType(DataType.Int64)
-            .build();
+FieldType scalar1 = FieldType.newBuilder()
+    .withName("scalar_1")
+    .withDataType(DataType.VarChar)
+    .withMaxLength(512)
+    .build();
 
-    CollectionSchemaParam schema = CollectionSchemaParam.newBuilder()
-            .withEnableDynamicField(true)
-            .addFieldType(id)
-            .addFieldType(vector)
-            .addFieldType(scalar1)
-            .addFieldType(scalar2)
-            .build();
+FieldType scalar2 = FieldType.newBuilder()
+    .withName("scalar_2")
+    .withDataType(DataType.Int64)
+    .build();
 
-    // Create a collection with the given schema
-    milvusClient.createCollection(CreateCollectionParam.newBuilder()
-        .withCollectionName("quick_setup")
-        .withSchema(schema)
-        .build()
-    );
-    ```
+CollectionSchemaParam schema = CollectionSchemaParam.newBuilder()
+    .withEnableDynamicField(true)
+    .addFieldType(id)
+    .addFieldType(vector)
+    .addFieldType(scalar1)
+    .addFieldType(scalar2)
+    .build();
+
+// Create a collection with the given schema
+milvusClient.createCollection(CreateCollectionParam.newBuilder()
+    .withCollectionName("quick_setup")
+    .withSchema(schema)
+    .build()
+);
+```
 
 ## Import data
 
