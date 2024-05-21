@@ -8,7 +8,7 @@ This operation in [BGERerankFunction](BGERerankFunction.md) takes in a query and
 # Instance created
 bge_rf = BGERerankFunction()
 
-# \_\_call\_\_ method will be called
+# __call__ method will be called
 bge_rf(
     query: str,
     documents: List[str],
