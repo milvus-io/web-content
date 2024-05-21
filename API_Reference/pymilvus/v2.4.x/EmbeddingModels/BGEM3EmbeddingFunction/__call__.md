@@ -10,7 +10,7 @@ The **\_\_call\_\_()** method of BGEM3EmbeddingFunction shares the same function
 # Instance created
 bge_m3_ef = BGEM3EmbeddingFunction()
 
-# \_\_call\_\_ method will be called
+# __call__ method will be called
 bge_m3_ef(
     texts: List[str]
 ) -> Dict
@@ -56,7 +56,7 @@ docs = [
     "Born in Maida Vale, London, Turing was raised in southern England.",
 ]
 
-# bge_m3_ef.\_\_call\_\_ will be called
+# bge_m3_ef.__call__ will be called
 bge_m3_ef(docs)
 
 # {'dense': [array([-0.02505937, -0.00142193,  0.04015467, ..., -0.02094924,
