@@ -8,7 +8,7 @@ This operation in [CrossEncoderRerankFunction](CrossEncoderRerankFunction.md) ta
 # Instance created
 ce_rf = CrossEncoderRerankFunction()
 
-# \_\_call\_\_ method will be called
+# __call__ method will be called
 ce_rf(
     query: str,
     documents: List[str],
