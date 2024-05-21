@@ -10,7 +10,7 @@ The **\_\_call\_\_()** method of OpenAIEmbeddingFunction shares the same functio
 # Instance created
 openai_ef = OpenAIEmbeddingFunction()
 
-# \_\_call\_\_ method will be called
+# __call__ method will be called
 openai_ef(
     texts: List[str]
 ) -> List[np.array]
