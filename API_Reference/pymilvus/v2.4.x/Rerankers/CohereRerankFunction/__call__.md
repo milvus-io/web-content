@@ -8,7 +8,7 @@ This operation in [CohereRerankFunction](CohereRerankFunction.md) takes in a que
 # Instance created
 cohere_rf = CohereRerankFunction()
 
-# \_\_call\_\_ method will be called
+# __call__ method will be called
 cohere_rf(
     query: str,
     documents: List[str],
