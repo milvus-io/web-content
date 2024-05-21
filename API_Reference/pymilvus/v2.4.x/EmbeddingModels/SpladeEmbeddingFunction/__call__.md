@@ -10,7 +10,7 @@ Unlike [encode_documents()](encode_documents.md) or [encode_queries()](encode_qu
 # Instance created
 splade_ef = SpladeEmbeddingFunction()
 
-# \_\_call\_\_ method will be called
+# __call__ method will be called
 splade_ef(
     texts: List[str]
 ) -> csr_array
