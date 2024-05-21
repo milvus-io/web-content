@@ -10,7 +10,7 @@ This operation in [VoyageRerankFunction](VoyageRerankFunction.md) takes in a que
 # Instance created
 voyage_rf = VoyageRerankFunction()
 
-# \_\_call\_\_ method will be called
+# __call__ method will be called
 voyage_rf(
     query: str,
     documents: List[str],
