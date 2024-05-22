@@ -108,7 +108,7 @@ curl --location --request POST "http://${MILVUS_URI}/v2/vectordb/collections/cre
             }            
         }
     ]
-}
+}'
 ```
 
 Of course, you can leave the index parameters unspecified in the request and create an index for the collection later.
@@ -139,7 +139,7 @@ curl --location --request POST "http://${MILVUS_URI}/v2/vectordb/collections/cre
         ]
         
     }
-}
+}'
 ```
 Possible responses for the above requests are similar to the following:
 
@@ -219,7 +219,7 @@ Possible responses for the above requests are similar to the following:
         "partitionsNum": "integer",
         "ttlSeconds": "integer"
     }
-}
+}'
 ```
 
 | Parameter        | Description                                                                               |
