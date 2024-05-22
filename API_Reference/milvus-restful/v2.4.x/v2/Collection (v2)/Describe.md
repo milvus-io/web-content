@@ -180,6 +180,7 @@ The properties in the returned response are listed in the following table.
 | Property | Description                                                                                                                                 |
 |----------|---------------------------------------------------------------------------------------------------------------------------------------------|
 | `code`   | __integer__<br/>Indicates whether the request succeeds.<br/><ul><li>`200`: The request succeeds.</li><li>Others: Some error occurs.</li></ul> |
+| `message`  | __string__<br/>Indicates the possible reason for the reported error. |
 | `data` | __object__<br/> |
 | `data[].aliases` | __array__<br/>A list aliases assigned to the collection. |
 | `data[].aliases[]`  | __string__<br/>An alias of the collection.  |
@@ -214,4 +215,3 @@ The properties in the returned response are listed in the following table.
 | `data[].properties[].key`  | __string__<br/>The property name  |
 | `data[].properties[].value`  | __string__<br/>The property value.  |
 | `data.shardsNum`  | __integer__<br/>The number of shards created along with the collection.  |
-| `message`  | __string__<br/>Indicates the possible reason for the reported error. |

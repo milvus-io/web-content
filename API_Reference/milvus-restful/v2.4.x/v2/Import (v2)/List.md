@@ -108,6 +108,7 @@ The properties in the returned response are listed in the following table.
 | Property | Description                                                                                                                                 |
 |----------|---------------------------------------------------------------------------------------------------------------------------------------------|
 | `code`   | __integer__<br/>Indicates whether the request succeeds.<br/><ul><li>`200`: The request succeeds.</li><li>Others: Some error occurs.</li></ul> |
+| `message`  | __string__<br/>Indicates the possible reason for the reported error. |
 | `data` | __object__<br/> |
 | `data[].records` | __array__<br/>A list of import jobs. |
 | `data[].records[]` | __object__<br/> |
@@ -116,4 +117,3 @@ The properties in the returned response are listed in the following table.
 | `data[].records[].state`  | __string__<br/>The state of this bulk-import job. Possible values are __Pending__, __InProgress__, __Completed__, and __Failed__.  |
 | `data[].records[].progress`  | __integer__<br/>The progress in percentage of the current bulk-import job.  |
 | `data[].records[].reason`  | __string__<br/>The reason for the failure to bulk import data.  |
-| `message`  | __string__<br/>Indicates the possible reason for the reported error. |

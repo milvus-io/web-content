@@ -20,9 +20,7 @@ curl --location --request POST "http://${MILVUS_URI}/v2/vectordb/collections/get
     "collectionName": "quick_setup"
 }'
 ```
-
-Possible response is similar to the following
-:
+Possible response is similar to the following:
 ```json
 {
     "code": 200,
@@ -98,7 +96,7 @@ The properties in the returned response are listed in the following table.
 | Property | Description                                                                                                                                 |
 |----------|---------------------------------------------------------------------------------------------------------------------------------------------|
 | `code`   | __integer__<br/>Indicates whether the request succeeds.<br/><ul><li>`200`: The request succeeds.</li><li>Others: Some error occurs.</li></ul> |
+| `message`  | __string__<br/>Indicates the possible reason for the reported error. |
 | `data` | __object__<br/> |
 | `data.loadState`  | __string__<br/>An object that indicates the load status of the specified collection.  |
 | `data.loadProgress`  | __integer__<br/>An integer that indicates the load progress in the percentage of the specified collection.  |
-| `message`  | __string__<br/>Indicates the possible reason for the reported error. |

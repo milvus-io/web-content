@@ -16,11 +16,11 @@ This operation lists all collections in the specified database.
 ```shell
 export MILVUS_URI="localhost:19530"
 
-curl --location --request POST "http://${MILVUS_URI}/v2/vectordb/collections/create" \
+curl --location --request POST "http://${MILVUS_URI}/v2/vectordb/collections/list" \
 --header "Content-Type: application/json" \
 --data-raw '{
     "dbName": "default"
-}
+}'
 ```
 
 The possible output will be similar to the following:
@@ -98,6 +98,6 @@ The properties in the returned response are listed in the following table.
 | Property | Description                                                                                                                                 |
 |----------|---------------------------------------------------------------------------------------------------------------------------------------------|
 | `code`   | __integer__<br/>Indicates whether the request succeeds.<br/><ul><li>`200`: The request succeeds.</li><li>Others: Some error occurs.</li></ul> |
+| `message`  | __string__<br/>Indicates the possible reason for the reported error. |
 | `data` | __array__<br/>A list of collection names. |
 | `data[]`  | __string__<br/>A collection name.  |
-| `message`  | __string__<br/>Indicates the possible reason for the reported error. |

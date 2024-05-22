@@ -22,9 +22,7 @@ curl --location --request POST "http://${MILVUS_URI}/v2/vectordb/roles/describe"
     "roleName": "readOnly"
 }'
 ```
-
-Possible response is similar to the following
-.
+Possible response is similar to the following.
 ```json
 {
     "code": 200,
@@ -107,6 +105,7 @@ The properties in the returned response are listed in the following table.
 | Property | Description                                                                                                                                 |
 |----------|---------------------------------------------------------------------------------------------------------------------------------------------|
 | `code`   | __integer__<br/>Indicates whether the request succeeds.<br/><ul><li>`200`: The request succeeds.</li><li>Others: Some error occurs.</li></ul> |
+| `message`  | __string__<br/>Indicates the possible reason for the reported error. |
 | `data` | __array__<br/>A list of privilege items. |
 | `data[]` | __object__<br/> |
 | `data[].object_type`  | __string__<br/>The type of the object to which the privilege belongs.  |
@@ -114,4 +113,3 @@ The properties in the returned response are listed in the following table.
 | `data[].object_name`  | __string__<br/>The name of the object to which the role is granted the specified privilege.  |
 | `data[].db_name`  | __string__<br/>The name of the database in which this operation has been executed.  |
 | `data[].grantor`  | __string__<br/>The name of the user who granted a specific role to a user.  |
-| `message`  | __string__<br/>Indicates the possible reason for the reported error. |

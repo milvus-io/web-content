@@ -22,9 +22,7 @@ curl --location --request POST "http://${MILVUS_URI}/v2/vectordb/jobs/import/get
     "jobId": 44870776388440916
 }'
 ```
-
-Possible response is similar to the following
-.
+Possible response is similar to the following.
 ```json
 {
     "code": 200,
@@ -134,6 +132,7 @@ The properties in the returned response are listed in the following table.
 | Property | Description                                                                                                                                 |
 |----------|---------------------------------------------------------------------------------------------------------------------------------------------|
 | `code`   | __integer__<br/>Indicates whether the request succeeds.<br/><ul><li>`200`: The request succeeds.</li><li>Others: Some error occurs.</li></ul> |
+| `message`  | __string__<br/>Indicates the possible reason for the reported error. |
 | `data` | __object__<br/> |
 | `data.collectionName`  | __string__<br/>The name of the target collection of this bulk-import job.  |
 | `data.completeTime`  | __string__<br/>The timestamp indicating when the bulk-import job is complete.  |
@@ -154,4 +153,3 @@ The properties in the returned response are listed in the following table.
 | `data.reason`  | __string__<br/>The reason for the failure to bulk import data.  |
 | `data.importedRows`  | __integer__<br/>The number of rows inserted into the specified collection upon this import.  |
 | `data.totalRows`  | __integer__<br/>The number of rows in the specified collection.  |
-| `message`  | __string__<br/>Indicates the possible reason for the reported error. |

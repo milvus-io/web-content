@@ -33,9 +33,7 @@ curl --location --request POST "http://${MILVUS_URI}/v2/vectordb/indexes/create"
     ]
 }'
 ```
-
-Possible response is similar to the following
-:
+Possible response is similar to the following:
 ```json
 {
     "code": 200,
@@ -69,7 +67,7 @@ Possible response is similar to the following
             "metricType": "string",
             "fieldName": "string",
             "indexName": "string",
-            "indexConfig": {
+            "params": {
                 "index_type": "string",
                 "M": "integer",
                 "efConstruction": "integer",
@@ -89,11 +87,11 @@ Possible response is similar to the following
 | `indexParams[].metricType`  | __string__<br/>The similarity metric type used to build the index.<br/>The value defaults to COSINE  |
 | `indexParams[].fieldName`  | __string__<br/>The name of the target field on which an index is to be created.  |
 | `indexParams[].indexName`  | __string__<br/>The name of the index to create, the value defaults to the target field name.  |
-| `indexParams[].indexConfig` | __object__<br/>The index type and related settings. For details, refer to [Vector Indexes](https://milvus.io/docs/index.md). |
-| `indexParams[].indexConfig.index_type`  | __string__<br/>The type of the index to create  |
-| `indexParams[].indexConfig.M`  | __integer__<br/>The maximum degree of the node and applies only when index_type is set to __HNSW__.  |
-| `indexParams[].indexConfig.efConstruction`  | __integer__<br/>The search scope. This applies only when **index_type** is set to **HNSW**  |
-| `indexParams[].indexConfig.nlist`  | __integer__<br/>The number of cluster units. This applies to IVF-related index types.  |
+| `indexParams[].params` | __object__<br/>The index type and related settings. For details, refer to [Vector Indexes](https://milvus.io/docs/index.md). |
+| `indexParams[].params.index_type`  | __string__<br/>The type of the index to create  |
+| `indexParams[].params.M`  | __integer__<br/>The maximum degree of the node and applies only when index_type is set to __HNSW__.  |
+| `indexParams[].params.efConstruction`  | __integer__<br/>The search scope. This applies only when **index_type** is set to **HNSW**  |
+| `indexParams[].params.nlist`  | __integer__<br/>The number of cluster units. This applies to IVF-related index types.  |
 
 ## Response
 
@@ -126,5 +124,5 @@ The properties in the returned response are listed in the following table.
 | Property | Description                                                                                                                                 |
 |----------|---------------------------------------------------------------------------------------------------------------------------------------------|
 | `code`   | __integer__<br/>Indicates whether the request succeeds.<br/><ul><li>`200`: The request succeeds.</li><li>Others: Some error occurs.</li></ul> |
-| `data` | __object__<br/> |
 | `message`  | __string__<br/>Indicates the possible reason for the reported error. |
+| `data` | __object__<br/> |

@@ -9,7 +9,7 @@
     </div>
 </div>
 
-This operation imports the prepared data files to <zilliz>a Zilliz Cloud cluster</zilliz><milvus>a Milvus instance</milvus>. To learn how to prepare your data files, read [Prepare Data Import](https://docs.zilliz.com/docs/prepare-source-data).
+This operation imports the prepared data files to a Milvus instance. To learn how to prepare your data files, read [Prepare Data Import](https://milvus.io/docs/prepare-source-data.md).
 
 ## Example
 
@@ -35,9 +35,7 @@ curl --location --request POST "http://${MILVUS_URI}/v2/vectordb/jobs/import/cre
     "collectionName": "quick_setup"
 }'
 ```
-
 Possible response is similar to the following
-
 ```json
 {
     "code": 200,
@@ -120,7 +118,7 @@ The properties in the returned response are listed in the following table.
 | Property | Description                                                                                                                                 |
 |----------|---------------------------------------------------------------------------------------------------------------------------------------------|
 | `code`   | __integer__<br/>Indicates whether the request succeeds.<br/><ul><li>`200`: The request succeeds.</li><li>Others: Some error occurs.</li></ul> |
+| `message`  | __string__<br/>Indicates the possible reason for the reported error. |
 | `data` | __array__<br/> |
 | `data[]` | __object__<br/> |
 | `data[].jobID`  | __string__<br/>The ID of the current bulk-import job.  |
-| `message`  | __string__<br/>Indicates the possible reason for the reported error. |

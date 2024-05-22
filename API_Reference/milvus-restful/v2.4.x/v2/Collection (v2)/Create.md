@@ -95,7 +95,7 @@ curl --location --request POST "http://${MILVUS_URI}/v2/vectordb/collections/cre
             "fieldName": "my_vector",
             "metricType": "COSINE",
             "indexName": "my_vector",
-            "indexConfig": {
+            "params": {
                 "index_type": "IVF_FLAT",
                 "nlist": "1024"
             }
@@ -103,12 +103,12 @@ curl --location --request POST "http://${MILVUS_URI}/v2/vectordb/collections/cre
         {
             "fieldName": "my_id",
             "indexName": "my_id",
-            "indexConfig": {
+            "params": {
                 "index_type": "STL_SORT"
             }            
         }
     ]
-}
+}'
 ```
 
 Of course, you can leave the index parameters unspecified in the request and create an index for the collection later.
@@ -119,7 +119,7 @@ export MILVUS_URI="localhost:19530"
 curl --location --request POST "http://${MILVUS_URI}/v2/vectordb/collections/create" \
 --header "Content-Type: application/json" \
 --data-raw '{
-    "collectionName": "custom_setup_indexed",
+    "collectionName": "custom_setup_not_indexed",
     "schema": {
         "autoId": false,
         "enabledDynamicField": false,
@@ -139,7 +139,7 @@ curl --location --request POST "http://${MILVUS_URI}/v2/vectordb/collections/cre
         ]
         
     }
-}
+}'
 ```
 Possible responses for the above requests are similar to the following:
 
@@ -203,7 +203,7 @@ Possible responses for the above requests are similar to the following:
             "metricType": "string",
             "fieldName": "string",
             "indexName": "string",
-            "indexConfig": {
+            "params": {
                 "index_type": "string",
                 "M": "integer",
                 "efConstruction": "integer",
@@ -251,11 +251,11 @@ Possible responses for the above requests are similar to the following:
 | `indexParams[].metricType`  | __string__<br/>The similarity metric type used to build the index.<br/>The value defaults to COSINE  |
 | `indexParams[].fieldName`  | __string__<br/>The name of the target field on which an index is to be created.  |
 | `indexParams[].indexName`  | __string__<br/>The name of the index to create, the value defaults to the target field name.  |
-| `indexParams[].indexConfig` | __object__<br/>The index type and related settings. For details, refer to [Vector Indexes](https://milvus.io/docs/index.md). |
-| `indexParams[].indexConfig.index_type`  | __string__<br/>The type of the index to create  |
-| `indexParams[].indexConfig.M`  | __integer__<br/>The maximum degree of the node and applies only when index_type is set to __HNSW__.  |
-| `indexParams[].indexConfig.efConstruction`  | __integer__<br/>The search scope. This applies only when **index_type** is set to **HNSW**  |
-| `indexParams[].indexConfig.nlist`  | __integer__<br/>The number of cluster units. This applies to IVF-related index types.  |
+| `indexParams[].params` | __object__<br/>The index type and related settings. For details, refer to [Vector Indexes](https://milvus.io/docs/index.md). |
+| `indexParams[].params.index_type`  | __string__<br/>The type of the index to create  |
+| `indexParams[].params.M`  | __integer__<br/>The maximum degree of the node and applies only when index_type is set to __HNSW__.  |
+| `indexParams[].params.efConstruction`  | __integer__<br/>The search scope. This applies only when **index_type** is set to **HNSW**  |
+| `indexParams[].params.nlist`  | __integer__<br/>The number of cluster units. This applies to IVF-related index types.  |
 | `params` | __object__<br/>Extra parameters for the collection. |
 | `params.max_length`  | __integer__<br/>The maximum number of characters in a VarChar field. This parameter is mandatory when the current field type is VarChar.  |
 | `params.enableDynamicField`  | __boolean__<br/>Whether to enable the reserved dynamic field. If set to true, non-schema-defined fields are saved in the reserved dynamic field as key-value pairs.  |
@@ -295,5 +295,5 @@ The properties in the returned response are listed in the following table.
 | Property | Description                                                                                                                                 |
 |----------|---------------------------------------------------------------------------------------------------------------------------------------------|
 | `code`   | __integer__<br/>Indicates whether the request succeeds.<br/><ul><li>`200`: The request succeeds.</li><li>Others: Some error occurs.</li></ul> |
-| `data` | __object__<br/> |
 | `message`  | __string__<br/>Indicates the possible reason for the reported error. |
+| `data` | __object__<br/> |

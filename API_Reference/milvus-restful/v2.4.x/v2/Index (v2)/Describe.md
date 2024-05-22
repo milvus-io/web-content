@@ -23,9 +23,7 @@ curl --location --request POST "http://${MILVUS_URI}/v2/vectordb/indexes/describ
     "collectionName": "quick_setup"
 }'
 ```
-
-Possible response is similar to the following
-:
+Possible response is similar to the following:
 ```json
 {
     "code": 200,
@@ -119,6 +117,7 @@ The properties in the returned response are listed in the following table.
 | Property | Description                                                                                                                                 |
 |----------|---------------------------------------------------------------------------------------------------------------------------------------------|
 | `code`   | __integer__<br/>Indicates whether the request succeeds.<br/><ul><li>`200`: The request succeeds.</li><li>Others: Some error occurs.</li></ul> |
+| `message`  | __string__<br/>Indicates the possible reason for the reported error. |
 | `data` | __array__<br/> |
 | `data[]` | __object__<br/> |
 | `data[].fieldName`  | __string__<br/>The name of the target field.  |
@@ -130,4 +129,3 @@ The properties in the returned response are listed in the following table.
 | `data[].pendingRows`  | __integer__<br/>The number of rows that are waiting to be indexed.  |
 | `data[].totalRows`  | __integer__<br/>The total number of entities/rows  |
 | `data[].failReason`  | __string__<br/>The reason for the failure to build indexes.  |
-| `message`  | __string__<br/>Indicates the possible reason for the reported error. |
