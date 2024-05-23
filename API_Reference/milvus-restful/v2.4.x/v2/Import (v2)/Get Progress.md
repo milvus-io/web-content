@@ -81,7 +81,7 @@ Possible response is similar to the following.
 
 ## Response
 
-成功
+Returns the import job progress in detail.
 
 ### Response Bodies
 
