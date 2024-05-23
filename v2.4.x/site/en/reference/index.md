@@ -353,7 +353,7 @@ In order to improve performance, HNSW limits the maximum degree of nodes on each
 
   | Parameter | Description  | Range            |
   | --------- | ------------ | ---------------- |
-  | `ef`      | Parameter controlling query time/accuracy trade-off. Higher `ef` leads to more accurate but slower search. | [1, int_max]     |
+  | `ef`      | Parameter controlling query time/accuracy trade-off. Higher `ef` leads to more accurate but slower search. | [`top_k`, int_max]     |
 
 ### BIN_FLAT
 
