@@ -7,6 +7,34 @@ title: Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.3.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.3.16
+
+Release date: May 24, 2024
+
+| Milvus version | Python SDK version | Java SDK version | Go SDK version | Node.js SDK version |
+|----------------|--------------------|------------------|----------------|---------------------|
+| 2.3.16         | 2.3.7              | 2.3.6            | 2.3.6          | 2.3.5               |
+
+
+Milvus v2.3.16 focuses on stability, performance, and security. It includes bug fixes for auto-balancing, checkpoint handling, memory leaks, and transaction limits. Additionally, authentication for the REST v2 API has been strengthened, and query result retrieval has been optimized. Overall, this update aims to provide a more reliable, efficient, and secure platform for your needs.
+
+## Improvements
+
+- Enhanced authentication for the REST v2 API.([#33254](https://github.com/milvus-io/milvus/pull/33254))
+- Improved checkpoint handling for message failures.([#33159](https://github.com/milvus-io/milvus/pull/33159))([#33128](https://github.com/milvus-io/milvus/pull/33128))
+- Improved the triggering mechanism for segment sync tasks so that it will only be triggered once by flushts ([#33034](https://github.com/milvus-io/milvus/pull/33034))
+- Improved the query result retrieval mechanism to get enough query results ([#33177](https://github.com/milvus-io/milvus/pull/33177))
+
+## Bug fixes
+
+- Fixed a bug that when suspending auto balance querynode will unexpectedly exit stopping balance  ([#32941](https://github.com/milvus-io/milvus/pull/32941))
+- Resolved an issue leading to endless binlog path downloads during compaction ([#33246](https://github.com/milvus-io/milvus/pull/33246))
+- Addressed memory leaks in rendezvousflushmanager ([#33112](https://github.com/milvus-io/milvus/pull/33112))
+- Prevented system panics related to nil array field data ([#33119](https://github.com/milvus-io/milvus/pull/33119))
+- Fixed "SegmentNotLoaded" errors triggered by concurrent segment tasks in search ([#33087](https://github.com/milvus-io/milvus/pull/33087))
+- Fixed a bug that Etcd txn exceeds limit due to too many fields  ([#33049](https://github.com/milvus-io/milvus/pull/33049))
+- Fixed a bug related to the incorrect calculation of the milvus_rootcoord_indexed_entity_num metric ([#33002](https://github.com/milvus-io/milvus/pull/33002))
+
 ## v2.3.15
 
 Release date: May 11, 2024
