@@ -375,7 +375,7 @@ In order to improve performance, HNSW limits the maximum degree of nodes on each
 
   | Parameter | Description  | Range            |
   | --------- | ------------ | ---------------- |
-  | `ef`      | Search scope | [1, int_max]     |
+  | `ef`      | Search scope | [`top_k`, int_max]     |
 
 ### BIN_FLAT
 
