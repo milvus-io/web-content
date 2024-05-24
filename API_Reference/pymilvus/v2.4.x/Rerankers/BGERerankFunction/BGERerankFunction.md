@@ -2,6 +2,10 @@
 
 **BGERerankFunction** is a class in [milvus_model](https://github.com/milvus-io/milvus-model) that takes a query and document as input and directly returns a similarity score instead of embeddings. This functionality uses the underlying BGE reranking model.
 
+```python
+pymilvus.model.reranker.BGERerankFunction
+```
+
 ## Constructor
 
 Constructs a BGERerankFunction for common use cases.
