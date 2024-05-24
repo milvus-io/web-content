@@ -27,6 +27,12 @@ Upon the creation of a collection, at least a default partition named ___default
 
 The code snippet below repurposes the existing code to establish a connection to Milvus and create a collection in a quick-setup mode, indicating that the collection is loaded upon creation.
 
+<div class="multipleCode">
+    <a href="#python">Python </a>
+    <a href="#java">Java</a>
+    <a href="#javascript">Node.js</a>
+</div>
+
 ```python
 from pymilvus import MilvusClient, DataType
 
@@ -43,6 +49,42 @@ client.create_collection(
 
 ```
 
+```java
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.service.collection.request.CreateCollectionReq;
+
+String CLUSTER_ENDPOINT = "http://localhost:19530";
+
+// 1. Connect to Milvus server
+ConnectConfig connectConfig = ConnectConfig.builder()
+    .uri(CLUSTER_ENDPOINT)
+    .build();
+
+MilvusClientV2 client = new MilvusClientV2(connectConfig);
+
+// 2. Create a collection in quick setup mode
+CreateCollectionReq quickSetupReq = CreateCollectionReq.builder()
+    .collectionName("quick_setup")
+    .dimension(5)
+    .build();
+
+client.createCollection(quickSetupReq);
+```
+
+```javascript
+const address = "http://localhost:19530"
+
+// 1. Set up a Milvus Client
+client = new MilvusClient({address});
+
+// 2. Create a collection in quick setup mode
+await client.createCollection({
+    collection_name: "quick_setup",
+    dimension: 5,
+});  
+```
+
 <div class="admonition note">
 
 <p><b>notes</b></p>
@@ -55,6 +97,12 @@ client.create_collection(
 
 Once a collection is ready, you can list its partitions.
 
+<div class="multipleCode">
+    <a href="#python">Python </a>
+    <a href="#java">Java</a>
+    <a href="#javascript">Node.js</a>
+</div>
+
 ```python
 # 3. List partitions
 res = client.list_partitions(collection_name="quick_setup")
@@ -63,6 +111,36 @@ print(res)
 # Output
 #
 # ["_default"]
+```
+
+```java
+import io.milvus.v2.service.partition.request.ListPartitionsReq;
+
+// 3. List all partitions in the collection
+ListPartitionsReq listPartitionsReq = ListPartitionsReq.builder()
+    .collectionName("quick_setup")
+    .build();
+
+List<String> partitionNames = client.listPartitions(listPartitionsReq);
+
+System.out.println(partitionNames);
+
+// Output:
+// ["_default"]
+```
+
+```javascript
+// 3. List partitions
+res = await client.listPartitions({
+    collection_name: "quick_setup"
+})
+
+console.log(res.partition_names)
+
+// Output
+// 
+// [ '_default' ]
+// 
 ```
 
 The output of the above code snippet includes the names of the partitions within the specified collection.
@@ -79,6 +157,12 @@ The output of the above code snippet includes the names of the partitions within
 ## Create Partitions
 
 You can add more partitions to the collection. A collection can have up to 64 partitions.
+
+<div class="multipleCode">
+    <a href="#python">Python </a>
+    <a href="#java">Java</a>
+    <a href="#javascript">Node.js</a>
+</div>
 
 ```python
 # 4. Create more partitions
@@ -100,6 +184,64 @@ print(res)
 # ["_default", "partitionA", "partitionB"]
 ```
 
+```java
+import io.milvus.v2.service.partition.request.CreatePartitionReq;
+
+// 4. Create more partitions
+CreatePartitionReq createPartitionReq = CreatePartitionReq.builder()
+    .collectionName("quick_setup")
+    .partitionName("partitionA")
+    .build();
+
+client.createPartition(createPartitionReq);
+
+createPartitionReq = CreatePartitionReq.builder()
+    .collectionName("quick_setup")
+    .partitionName("partitionB")
+    .build();
+
+client.createPartition(createPartitionReq);
+
+listPartitionsReq = ListPartitionsReq.builder()
+    .collectionName("quick_setup")
+    .build();
+
+partitionNames = client.listPartitions(listPartitionsReq);
+
+System.out.println(partitionNames);
+
+// Output:
+// [
+//     "_default",
+//     "partitionA",
+//     "partitionB"
+// ]
+```
+
+```javascript
+// 4. Create more partitions
+await client.createPartition({
+    collection_name: "quick_setup",
+    partition_name: "partitionA"
+})
+
+await client.createPartition({
+    collection_name: "quick_setup",
+    partition_name: "partitionB"
+})
+
+res = await client.listPartitions({
+    collection_name: "quick_setup"
+})
+
+console.log(res.partition_names)
+
+// Output
+// 
+// [ '_default', 'partitionA', 'partitionB' ]
+// 
+```
+
 The code snippet above creates a partition in a collection and lists the partitions of the collection.
 
 <div class="admonition note">
@@ -114,6 +256,12 @@ The code snippet above creates a partition in a collection and lists the partiti
 ## Check for a Specific Partition
 
 You can also check the existence of a specific partition.
+
+<div class="multipleCode">
+    <a href="#python">Python </a>
+    <a href="#java">Java</a>
+    <a href="#javascript">Node.js</a>
+</div>
 
 ```python
 # 5. Check whether a partition exists
@@ -138,6 +286,62 @@ print(res)
 # False
 ```
 
+```java
+import io.milvus.v2.service.partition.request.HasPartitionReq;
+
+// 5. Check whether a partition exists
+HasPartitionReq hasPartitionReq = HasPartitionReq.builder()
+    .collectionName("quick_setup")
+    .partitionName("partitionA")
+    .build();
+
+boolean exists = client.hasPartition(hasPartitionReq);
+
+System.out.println(exists);
+
+// Output:
+// true
+
+hasPartitionReq = HasPartitionReq.builder()
+    .collectionName("quick_setup")
+    .partitionName("partitionC")
+    .build();
+
+exists = client.hasPartition(hasPartitionReq);
+
+System.out.println(exists);
+
+// Output:
+// false
+```
+
+```javascript
+// 5. Check whether a partition exists
+res = await client.hasPartition({
+    collection_name: "quick_setup",
+    partition_name: "partitionA"
+})
+
+console.log(res.value)
+
+// Output
+// 
+// true
+// 
+
+res = await client.hasPartition({
+    collection_name: "quick_setup",
+    partition_name: "partitionC"
+})
+
+console.log(res.value)
+
+// Output
+// 
+// false
+// 
+```
+
 The code snippet above checks whether the collection has a partition named `partitionA` and `partitionC`.
 
 ## Load & Release Partitions
@@ -147,6 +351,12 @@ You can load and release specific partitions to make them available or unavailab
 ### Get Load Status
 
 To check the load status of a collection and its partitions, do as follows:
+
+<div class="multipleCode">
+    <a href="#python">Python </a>
+    <a href="#java">Java</a>
+    <a href="#javascript">Node.js</a>
+</div>
 
 ```python
 # Release the collection
@@ -190,6 +400,127 @@ print(res)
 
 ```
 
+```java
+import io.milvus.v2.service.collection.request.GetLoadStateReq;
+import io.milvus.v2.service.collection.request.ReleaseCollectionReq;
+import io.milvus.v2.service.partition.request.LoadPartitionsReq;
+import io.milvus.v2.service.partition.request.ReleasePartitionsReq;
+
+// 6. Load a partition independantly
+// 6.1 Release the collection
+ReleaseCollectionReq releaseCollectionReq = ReleaseCollectionReq.builder()
+    .collectionName("quick_setup")
+    .build();
+
+client.releaseCollection(releaseCollectionReq);
+
+// 6.2 Load partitionA
+LoadPartitionsReq loadPartitionsReq = LoadPartitionsReq.builder()
+    .collectionName("quick_setup")
+    .partitionNames(List.of("partitionA"))
+    .build();
+
+client.loadPartitions(loadPartitionsReq);
+
+Thread.sleep(3000);
+
+// 6.3 Check the load status of the collection and its partitions
+GetLoadStateReq getLoadStateReq = GetLoadStateReq.builder()
+    .collectionName("quick_setup")
+    .build();
+
+boolean state = client.getLoadState(getLoadStateReq);
+
+System.out.println(state);
+
+// Output:
+// true
+
+getLoadStateReq = GetLoadStateReq.builder()
+    .collectionName("quick_setup")
+    .partitionName("partitionA")
+    .build();
+
+state = client.getLoadState(getLoadStateReq);
+
+System.out.println(state);
+
+// Output:
+// true
+
+getLoadStateReq = GetLoadStateReq.builder()
+    .collectionName("quick_setup")
+    .partitionName("partitionB")
+    .build();
+
+state = client.getLoadState(getLoadStateReq);
+
+System.out.println(state);
+
+// Output:
+// false
+```
+
+```javascript
+// 6. Load a partition indenpendantly
+await client.releaseCollection({
+    collection_name: "quick_setup"
+})
+
+res = await client.getLoadState({
+    collection_name: "quick_setup"
+})
+
+console.log(res.state)
+
+// Output
+// 
+// LoadStateNotLoad
+// 
+
+await client.loadPartitions({
+    collection_name: "quick_setup",
+    partition_names: ["partitionA"]
+})
+
+await sleep(3000)
+
+res = await client.getLoadState({
+    collection_name: "quick_setup"
+})
+
+console.log(res.state)
+
+// Output
+// 
+// LoadStateLoaded
+// 
+
+res = await client.getLoadState({
+    collection_name: "quick_setup",
+    partition_name: "partitionA"
+})
+
+console.log(res.state)
+
+// Output
+// 
+// LoadStateLoaded
+// 
+
+res = await client.getLoadState({
+    collection_name: "quick_setup",
+    partition_name: "partitionB"
+})
+
+console.log(res.state)
+
+// Output
+// 
+// LoadStateLoaded
+// 
+```
+
 Possible load status may be either of the following
 
 - __Loaded__
@@ -202,9 +533,18 @@ Possible load status may be either of the following
 
 - __Loading__
 
+    A collection is marked as Loading if at least one of its partitions is in the loading process.
+
+
 ### Load Partitions
 
 To load all partitions of a collection, you can just call `load_collection()`. To load specific partitions of a collection, do as follows:
+
+<div class="multipleCode">
+    <a href="#python">Python </a>
+    <a href="#java">Java</a>
+    <a href="#javascript">Node.js</a>
+</div>
 
 ```python
 client.load_partitions(
@@ -222,7 +562,53 @@ print(res)
 # }
 ```
 
+```java
+LoadPartitionsReq loadPartitionsReq = LoadPartitionsReq.builder()
+    .collectionName("quick_setup")
+    .partitionNames(List.of("partitionA"))
+    .build();
+
+client.loadPartitions(loadPartitionsReq);
+
+getLoadStateReq = GetLoadStateReq.builder()
+    .collectionName("quick_setup")
+    .partitionName("partitionA")
+    .build();
+
+state = client.getLoadState(getLoadStateReq);
+
+System.out.println(state);
+
+// Output:
+// true
+```
+
+```javascript
+await client.loadPartitions({
+    collection_name: "quick_setup",
+    partition_names: ["partitionA"]
+})
+
+res = await client.getLoadState({
+    collection_name: "quick_setup",
+    partition_name: "partitionA"
+})
+
+console.log(res.state)
+
+// Output
+// 
+// LoadStateLoaded
+//
+```
+
 To load multiple partitions at a time, do as follows:
+
+<div class="multipleCode">
+    <a href="#python">Python </a>
+    <a href="#java">Java</a>
+    <a href="#javascript">Node.js</a>
+</div>
 
 ```python
 client.load_partitions(
@@ -253,9 +639,79 @@ res = client.get_load_status(
 # }
 ```
 
+```java
+LoadPartitionsReq loadPartitionsReq = LoadPartitionsReq.builder()
+    .collectionName("quick_setup")
+    .partitionNames(List.of("partitionA", "partitionB"))
+    .build();
+
+client.loadPartitions(loadPartitionsReq);
+
+getLoadStateReq = GetLoadStateReq.builder()
+    .collectionName("quick_setup")
+    .partitionName("partitionA")
+    .build();
+
+state = client.getLoadState(getLoadStateReq);
+
+System.out.println(state);
+
+// Output:
+// true
+
+getLoadStateReq = GetLoadStateReq.builder()
+    .collectionName("quick_setup")
+    .partitionName("partitionB")
+    .build();
+
+state = client.getLoadState(getLoadStateReq);
+
+System.out.println(state);
+
+// Output:
+// true
+```
+
+```javascript
+await client.loadPartitions({
+    collection_name: "quick_setup",
+    partition_names: ["partitionA", "partitionB"]
+})
+
+res = await client.getLoadState({
+    collection_name: "quick_setup",
+    partition_name: "partitionA"
+})
+
+console.log(res)
+
+// Output
+// 
+// LoadStateLoaded
+// 
+
+res = await client.getLoadState({
+    collection_name: "quick_setup",
+    partition_name: "partitionB"
+})
+
+console.log(res)
+
+// Output
+// 
+// LoadStateLoaded
+// 
+```
+
 ### Release Partitions
 
 To release all partitions of a collection, you can just call `release_collection`. To release specific partitions of a collection, do as follows:
+
+<div class="multipleCode">
+    <a href="#python">Python </a>
+    <a href="#java">Java</a>
+    <a href="#javascript">Node.js</a>
+</div>
 
 ```python
 # 7. Release a partition
@@ -277,6 +733,49 @@ print(res)
 #     "state": "<LoadState: NotLoad>"
 # }
 
+```
+
+```java
+import io.milvus.v2.service.partition.request.ReleasePartitionsReq;
+
+// 7. Release a partition
+ReleasePartitionsReq releasePartitionsReq = ReleasePartitionsReq.builder()
+    .collectionName("quick_setup")
+    .partitionNames(List.of("partitionA"))
+    .build();
+
+client.releasePartitions(releasePartitionsReq);
+
+getLoadStateReq = GetLoadStateReq.builder()
+    .collectionName("quick_setup")
+    .partitionName("partitionA")
+    .build();
+
+state = client.getLoadState(getLoadStateReq);
+
+System.out.println(state);
+
+// Output:
+// false
+```
+
+```javascript
+// 7. Release a partition
+await client.releasePartitions({
+    collection_name: "quick_setup",
+    partition_names: ["partitionA"]
+})
+
+res = await client.getLoadState({
+    collection_name: "quick_setup"
+})
+
+console.log(res.state)
+
+// Output
+// 
+// LoadStateNotLoad
+// 
 ```
 
 To release multiple partitions at a time, do as follows:
@@ -302,6 +801,12 @@ res = client.get_load_status(
 
 Once you release a partition, you can drop it if it is no longer needed.
 
+<div class="multipleCode">
+    <a href="#python">Python </a>
+    <a href="#java">Java</a>
+    <a href="#javascript">Node.js</a>
+</div>
+
 ```python
 # 8. Drop a partition
 client.drop_partition(
@@ -315,6 +820,56 @@ print(res)
 # Output
 #
 # ["_default", "partitionA"]
+```
+
+```java
+import io.milvus.v2.service.partition.request.ReleasePartitionsReq;
+
+ReleasePartitionsReq releasePartitionsReq = ReleasePartitionsReq.builder()
+    .collectionName("quick_setup")
+    .partitionNames(List.of("_default", "partitionA", "partitionB"))
+    .build();
+
+client.releasePartitions(releasePartitionsReq);
+
+getLoadStateReq = GetLoadStateReq.builder()
+    .collectionName("quick_setup")
+    .build();
+
+state = client.getLoadState(getLoadStateReq);
+
+System.out.println(state);
+
+// Output:
+// false
+```
+
+```javascript
+
+await client.releasePartitions({
+    collection_name: "quick_setup",
+    partition_names: ["_default", "partitionA", "partitionB"]
+})
+
+res = await client.getLoadState({
+    collection_name: "quick_setup"
+})
+
+console.log(res)
+
+// Output
+// 
+// {
+//   status: {
+//     error_code: 'Success',
+//     reason: '',
+//     code: 0,
+//     retriable: false,
+//     detail: ''
+//   },
+//   state: 'LoadStateNotLoad'
+// }
+// 
 ```
 
 <div class="admonition note">

@@ -9,75 +9,324 @@ This guide walks you through using the partition key to accelerate data retrieva
 
 ## Overview
 
-The partition key in Milvus allows for the distribution of incoming entities into different partitions based on their respective partition key values. This allows entities with the same key value to be grouped together in a partition, which in turn accelerates search performance by avoiding the need to scan irrelevant partitions when filtering by the key field. Compared to traditional filtering methods, the partition key can greatly enhance query performance.
+You can set a particular field in a collection as the partition key so that Milvus distributes incoming entities into different partitions according to their respective partition values in this field. This allows entities with the same key value to be grouped in a partition, accelerating search performance by avoiding the need to scan irrelevant partitions when filtering by the key field. When compared to traditional filtering methods, the partition key can greatly enhance query performance.
 
 You can use the partition key to implement multi-tenancy. For details on multi-tenancy, read [Multi-tenancy](https://milvus.io/docs/multi_tenancy.md) for more.
 
-<div class="alert note">
-
-The code snippets on this page use new <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">MilvusClient</a> (Python) to interact with Milvus. New MilvusClient SDKs for other languages will be released in future updates.
-
-</div>
-
 ## Enable partition key
 
-To demonstrate the use of partition keys, we will continue to use the example dataset that contains over 5,000 articles, and the __publication__ field will serve as the partition key.
+The following snippet demonstrates how to set a field as the partition key.
 
 In the example code below, `num_partitions` determines the number of partitions that will be created. By default, it is set to `64`. We recommend you retain the default value.
 
+<div class="multipleCode">
+    <a href="#python">Python </a>
+    <a href="#java">Java</a>
+    <a href="#javascript">Node.js</a>
+</div>
+
 ```python
-import json, time
-import os
+import random, time
+from pymilvus import connections, MilvusClient, DataType
 
-from pymilvus import MilvusClient, DataType
+CLUSTER_ENDPOINT = "http://localhost:19530"
 
-COLLECTION_NAME="medium_articles_2020" # Set your collection name
-DATASET_PATH="{}/../medium_articles_2020_dpr.json".format(os.path.dirname(__file__)) # Set your dataset path
-
-# 1. Connect to cluster
+# 1. Set up a Milvus client
 client = MilvusClient(
-    uri="http://localhost:19530"
+    uri=CLUSTER_ENDPOINT
 )
 
-# 2. Define collection schema
-schema = client.create_schema(
-    auto_id=True,
-    partition_key_field="publication",
+# 2. Create a collection
+schema = MilvusClient.create_schema(
+    auto_id=False,
+    enable_dynamic_field=True,
+    # highlight-next-line
+    partition_key_field="color",
     num_partitions=64 # Number of partitions. Defaults to 64.
 )
 
 schema.add_field(field_name="id", datatype=DataType.INT64, is_primary=True)
-schema.add_field(field_name="title", datatype=DataType.VARCHAR, max_length=512)
-schema.add_field(field_name="title_vector", datatype=DataType.FLOAT_VECTOR, dim=768)
-schema.add_field(field_name="link", datatype=DataType.VARCHAR, max_length=512)
-schema.add_field(field_name="reading_time", datatype=DataType.INT64)
-schema.add_field(field_name="publication", datatype=DataType.VARCHAR, max_length=512)
-schema.add_field(field_name="claps", datatype=DataType.INT64)
-schema.add_field(field_name="responses", datatype=DataType.INT64)
+schema.add_field(field_name="vector", datatype=DataType.FLOAT_VECTOR, dim=5)
+schema.add_field(field_name="color", datatype=DataType.VARCHAR, max_length=512)
 ```
 
-After you have defined the fields, set other necessary parameters.
+```java
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.common.DataType;
+import io.milvus.v2.common.IndexParam;
+import io.milvus.v2.service.collection.request.AddFieldReq;
+import io.milvus.v2.service.collection.request.CreateCollectionReq;
+
+String CLUSTER_ENDPOINT = "http://localhost:19530";
+
+// 1. Connect to Milvus server
+ConnectConfig connectConfig = ConnectConfig.builder()
+    .uri(CLUSTER_ENDPOINT)
+    .build();
+
+MilvusClientV2 client = new MilvusClientV2(connectConfig);
+
+// 2. Create a collection in customized setup mode
+
+// 2.1 Create schema
+CreateCollectionReq.CollectionSchema schema = client.createSchema();
+
+// 2.2 Add fields to schema
+schema.addField(AddFieldReq.builder()
+    .fieldName("id")
+    .dataType(DataType.Int64)
+    .isPrimaryKey(true)
+    .autoID(false)
+    .build());
+
+schema.addField(AddFieldReq.builder()
+    .fieldName("vector")
+    .dataType(DataType.FloatVector)
+    .dimension(5)
+    .build());
+    
+schema.addField(AddFieldReq.builder()
+    .fieldName("color")
+    .dataType(DataType.VarChar)
+    .maxLength(512)
+    // highlight-next-line
+    .isPartitionKey(true)
+    .build());
+```
+
+```javascript
+const { MilvusClient, DataType, sleep } = require("@zilliz/milvus2-sdk-node")
+
+const address = "http://localhost:19530"
+
+async function main() {
+// 1. Set up a Milvus Client
+client = new MilvusClient({address}); 
+
+// 2. Create a collection
+// 2.1 Define fields
+const fields = [
+    {
+        name: "id",
+        data_type: DataType.Int64,
+        is_primary_key: true,
+        auto_id: false
+    },
+    {
+        name: "vector",
+        data_type: DataType.FloatVector,
+        dim: 5
+    },
+    {
+        name: "color",
+        data_type: DataType.VarChar,
+        max_length: 512,
+        // highlight-next-line
+        is_partition_key: true
+    }
+]
+```
+
+After you have defined the fields, set up the index parameters.
+
+<div class="multipleCode">
+    <a href="#python">Python </a>
+    <a href="#java">Java</a>
+    <a href="#javascript">Node.js</a>
+</div>
 
 ```python
-# 3. Define index parameters
-index_params = client.prepare_index_params()
+index_params = MilvusClient.prepare_index_params()
 
 index_params.add_index(
-    field_name="title_vector",
-    index_type="AUTOINDEX",
-    metric_type="L2"
+    field_name="id",
+    index_type="STL_SORT"
 )
+
+index_params.add_index(
+    field_name="color",
+    index_type="Trie"
+)
+
+index_params.add_index(
+    field_name="vector",
+    index_type="IVF_FLAT",
+    metric_type="L2",
+    params={"nlist": 1024}
+)
+```
+
+```java
+// 2.3 Prepare index parameters
+IndexParam indexParamForVectorField = IndexParam.builder()
+    .fieldName("vector")
+    .indexType(IndexParam.IndexType.IVF_FLAT)
+    .metricType(IndexParam.MetricType.IP)
+    .extraParams(Map.of("nlist", 1024))
+    .build();
+
+List<IndexParam> indexParams = new ArrayList<>();
+indexParams.add(indexParamForVectorField);
+```
+
+```javascript
+// 2.2 Prepare index parameters
+const index_params = [{
+    field_name: "color",
+    index_type: "Trie"
+},{
+    field_name: "id",
+    index_type: "STL_SORT"
+},{
+    field_name: "vector",
+    index_type: "IVF_FLAT",
+    metric_type: "IP",
+    params: { nlist: 1024}
+}]
 ```
 
 Finally, you can create a collection.
 
+<div class="multipleCode">
+    <a href="#python">Python </a>
+    <a href="#java">Java</a>
+    <a href="#javascript">Node.js</a>
+</div>
+
 ```python
-# 4. Create a collection
 client.create_collection(
-    collection_name=COLLECTION_NAME,
+    collection_name="test_collection",
     schema=schema,
     index_params=index_params
 )
+```
+
+```java
+// 2.4 Create a collection with schema and index parameters
+CreateCollectionReq customizedSetupReq = CreateCollectionReq.builder()
+    .collectionName("test_collection")
+    .collectionSchema(schema)
+    .indexParams(indexParams)          
+    .build();
+
+client.createCollection(customizedSetupReq);
+```
+
+```javascript
+// 2.3 Create a collection with fields and index parameters
+res = await client.createCollection({
+    collection_name: "test_collection",
+    fields: fields, 
+    index_params: index_params,
+})
+
+console.log(res.error_code)
+
+// Output
+// 
+// Success
+//
+```
+
+## List partitions
+
+Once a field of a collection is used as the partition key, Milvus creates the specified number of partitions and manages them on your behalf. Therefore, you cannot manipulate the partitions in this collection anymore.
+
+The following snippet demonstrates that 64 partitions in a collection once one of its fields is used as the partition key. 
+
+
+
+## Insert data
+
+Once the collection is ready, start inserting data as follows:
+
+### Prepare data
+
+<div class="multipleCode">
+    <a href="#python">Python </a>
+    <a href="#java">Java</a>
+    <a href="#javascript">Node.js</a>
+</div>
+
+```python
+# 2.1. List all partitions in the collection
+partition_names = client.list_partitions(
+    collection_name="test_collection"
+)
+
+print(partition_names)
+
+# Output
+#
+# [
+#     "_default_0",
+#     "_default_1",
+#     "_default_2",
+#     "_default_3",
+#     "_default_4",
+#     "_default_5",
+#     "_default_6",
+#     "_default_7",
+#     "_default_8",
+#     "_default_9",
+#     "(54 more items hidden)"
+# ]
+```
+
+```java
+// 2.5 List all partitions in the collection
+List<String> partitionNames = client.listPartitions(ListPartitionsReq.builder()
+    .collectionName("test_collection")
+    .build());
+
+System.out.println(partitionNames);
+
+// Output:
+// [
+//     "_default_0",
+//     "_default_1",
+//     "_default_2",
+//     "_default_3",
+//     "_default_4",
+//     "_default_5",
+//     "_default_6",
+//     "_default_7",
+//     "_default_8",
+//     "_default_9",
+//     "(54 elements are hidden)"
+// ]
+```
+
+```javascript
+// 2.1 List partitions
+res = await client.listPartitions({
+    collection_name: "test_collection",
+})
+
+console.log(res.partition_names)
+
+// Output
+// 
+// [
+//   '_default_0',  '_default_1',  '_default_2',  '_default_3',
+//   '_default_4',  '_default_5',  '_default_6',  '_default_7',
+//   '_default_8',  '_default_9',  '_default_10', '_default_11',
+//   '_default_12', '_default_13', '_default_14', '_default_15',
+//   '_default_16', '_default_17', '_default_18', '_default_19',
+//   '_default_20', '_default_21', '_default_22', '_default_23',
+//   '_default_24', '_default_25', '_default_26', '_default_27',
+//   '_default_28', '_default_29', '_default_30', '_default_31',
+//   '_default_32', '_default_33', '_default_34', '_default_35',
+//   '_default_36', '_default_37', '_default_38', '_default_39',
+//   '_default_40', '_default_41', '_default_42', '_default_43',
+//   '_default_44', '_default_45', '_default_46', '_default_47',
+//   '_default_48', '_default_49', '_default_50', '_default_51',
+//   '_default_52', '_default_53', '_default_54', '_default_55',
+//   '_default_56', '_default_57', '_default_58', '_default_59',
+//   '_default_60', '_default_61', '_default_62', '_default_63'
+// ]
+// 
 ```
 
 ## Insert data
@@ -86,36 +335,153 @@ Once the collection is ready, start inserting data as follows:
 
 ### Prepare data
 
-```python
-with open(DATASET_PATH) as f:
-    data = json.load(f)
-    list_of_rows = data['rows']
+<div class="multipleCode">
+    <a href="#python">Python </a>
+    <a href="#java">Java</a>
+    <a href="#javascript">Node.js</a>
+</div>
 
-    data_rows = []
-    for row in list_of_rows:
-        # Remove the id field because the primary key has auto_id enabled.
-        del row['id']
-        # Other keys except the title and title_vector fields in the row 
-        # will be treated as dynamic fields.
-        data_rows.append(row)
+```python
+# 3. Insert randomly generated vectors 
+colors = ["green", "blue", "yellow", "red", "black", "white", "purple", "pink", "orange", "brown", "grey"]
+data = []
+
+for i in range(1000):
+    current_color = random.choice(colors)
+    current_tag = random.randint(1000, 9999)
+    data.append({
+        "id": i,
+        "vector": [ random.uniform(-1, 1) for _ in range(5) ],
+        "color": current_color,
+        "tag": current_tag,
+        "color_tag": f"{current_color}_{str(current_tag)}"
+    })
+
+print(data[0])
+```
+
+```java
+// 3. Insert randomly generated vectors
+List<String> colors = Arrays.asList("green", "blue", "yellow", "red", "black", "white", "purple", "pink", "orange", "brown", "grey");
+List<JSONObject> data = new ArrayList<>();
+
+for (int i=0; i<1000; i++) {
+    Random rand = new Random();
+    String current_color = colors.get(rand.nextInt(colors.size()-1));
+    int current_tag = rand.nextInt(8999) + 1000;
+    JSONObject row = new JSONObject();
+    row.put("id", Long.valueOf(i));
+    row.put("vector", Arrays.asList(rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat()));
+    row.put("color", current_color);
+    row.put("tag", current_tag);
+    row.put("color_tag", current_color + "_" + String.valueOf(rand.nextInt(8999) + 1000));
+    data.add(row);
+}
+
+System.out.println(JSONObject.toJSON(data.get(0)));   
+```
+
+```javascript
+// 3. Insert randomly generated vectors 
+const colors = ["green", "blue", "yellow", "red", "black", "white", "purple", "pink", "orange", "brown", "grey"]
+var data = []
+
+for (let i = 0; i < 1000; i++) {
+    const current_color = colors[Math.floor(Math.random() * colors.length)]
+    const current_tag = Math.floor(Math.random() * 8999 + 1000)
+    data.push({
+        id: i,
+        vector: [Math.random(), Math.random(), Math.random(), Math.random(), Math.random()],
+        color: current_color,
+        tag: current_tag,
+        color_tag: `${current_color}_${current_tag}`
+    })
+}
+
+console.log(data[0])
+```
+
+You can view the structure of the generated data by checking its first entry.
+
+```
+{
+    id: 0,
+    vector: [
+        0.1275656405044483,
+        0.47417858592773277,
+        0.13858264437643286,
+        0.2390904907020377,
+        0.8447862593689635
+    ],
+    color: 'blue',
+    tag: 2064,
+    color_tag: 'blue_2064'
+}
 ```
 
 ### Insert data
 
+<div class="multipleCode">
+    <a href="#python">Python </a>
+    <a href="#java">Java</a>
+    <a href="#javascript">Node.js</a>
+</div>
+
 ```python
-# 7. Insert data
 res = client.insert(
-    collection_name=COLLECTION_NAME,
-    data=data_rows,
+    collection_name="test_collection",
+    data=data
 )
+
+print(res)
 
 # Output
 #
 # {
-#     "insert_count": 5979
+#     "insert_count": 1000,
+#     "ids": [
+#         0,
+#         1,
+#         2,
+#         3,
+#         4,
+#         5,
+#         6,
+#         7,
+#         8,
+#         9,
+#         "(990 more items hidden)"
+#     ]
 # }
+```
 
-time.sleep(5000)
+```java
+// 3.1 Insert data into the collection
+InsertReq insertReq = InsertReq.builder()
+    .collectionName("test_collection")
+    .data(data)
+    .build();
+
+InsertResp insertResp = client.insert(insertReq);
+
+System.out.println(JSONObject.toJSON(insertResp));
+
+// Output:
+// {"insertCnt": 1000}
+```
+
+```javascript
+res = await client.insert({
+    collection_name: "test_collection",
+    data: data,
+})
+
+console.log(res.insert_cnt)
+
+// Output
+// 
+// 1000
+// 
 ```
 
 ## Use partition key
@@ -135,23 +501,119 @@ Once you have indexed and loaded the collection as well as inserted data, you ca
 
 </div>
 
+<div class="multipleCode">
+    <a href="#python">Python </a>
+    <a href="#java">Java</a>
+    <a href="#javascript">Node.js</a>
+</div>
+
 ```python
+# 4. Search with partition key
+query_vectors = [[0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592]]
+
 res = client.search(
-    collection_name=COLLECTION_NAME,
-    data=[data_rows[0]['title_vector']],
-    filter='claps > 30 and reading_time < 10',
-    limit=3,
-    output_fields=["title", "reading_time", "claps"],
-    search_params={"metric_type": "L2", "params": {}}
+    collection_name="test_collection",
+    data=query_vectors,
+    filter="color == 'green'",
+    search_params={"metric_type": "L2", "params": {"nprobe": 10}},
+    output_fields=["id", "color_tag"],
+    limit=3
 )
 
 print(res)
 
-# output:
-# [[{'id': 449589529787268425, 'distance': 0.36103835701942444, 'entity': {'claps': 83, 'title': 'The Hidden Side Effect of the Coronavirus', 'reading_time': 8}}, {'id': 449589529787262437, 'distance': 0.36103835701942444, 'entity': {'claps': 83, 'title': 'The Hidden Side Effect of the Coronavirus', 'reading_time': 8}}, {'id': 449589529787274413, 'distance': 0.36103835701942444, 'entity': {'claps': 83, 'title': 'The Hidden Side Effect of the Coronavirus', 'reading_time': 8}}]]
+# Output
+#
+# [
+#     [
+#         {
+#             "id": 970,
+#             "distance": 0.5770174264907837,
+#             "entity": {
+#                 "id": 970,
+#                 "color_tag": "green_9828"
+#             }
+#         },
+#         {
+#             "id": 115,
+#             "distance": 0.6898155808448792,
+#             "entity": {
+#                 "id": 115,
+#                 "color_tag": "green_4073"
+#             }
+#         },
+#         {
+#             "id": 899,
+#             "distance": 0.7028976678848267,
+#             "entity": {
+#                 "id": 899,
+#                 "color_tag": "green_9897"
+#             }
+#         }
+#     ]
+# ]
 ```
 
-## Use cases
+```java
+// 4. Search with partition key
+List<List<Float>> query_vectors = Arrays.asList(Arrays.asList(0.3580376395471989f, -0.6023495712049978f, 0.18414012509913835f, -0.26286205330961354f, 0.9029438446296592f));
 
-To achieve better search performance and enable multi-tenancy, you can utilize the partition key feature. This can be done by assigning a tenant-specific value as the partition key field for each entity. When searching or querying the collection, you can filter entities by the tenant-specific value by including the partition key field in the boolean expression. This approach ensures data isolation by tenants and avoids scanning unnecessary partitions.
+SearchReq searchReq = SearchReq.builder()
+    .collectionName("test_collection")
+    .data(query_vectors)
+    .filter("color == \"green\"")
+    .topK(3)
+    .build();
+
+SearchResp searchResp = client.search(searchReq);
+
+System.out.println(JSONObject.toJSON(searchResp));   
+
+// Output:
+// {"searchResults": [[
+//     {
+//         "distance": 1.0586997,
+//         "id": 414,
+//         "entity": {}
+//     },
+//     {
+//         "distance": 0.981384,
+//         "id": 293,
+//         "entity": {}
+//     },
+//     {
+//         "distance": 0.9548756,
+//         "id": 325,
+//         "entity": {}
+//     }
+// ]]}
+```
+
+```javascript
+// 4. Search with partition key
+const query_vectors = [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592]
+
+res = await client.search({
+    collection_name: "test_collection",
+    data: query_vectors,
+    filter: "color == 'green'",
+    output_fields: ["color_tag"],
+    limit: 3
+})
+
+console.log(res.results)
+
+// Output
+// 
+// [
+//   { score: 2.402090549468994, id: '135', color_tag: 'green_2694' },
+//   { score: 2.3938629627227783, id: '326', color_tag: 'green_7104' },
+//   { score: 2.3235254287719727, id: '801', color_tag: 'green_3162' }
+// ]
+// 
+```
+
+## Typical use cases
+
+You can utilize the partition key feature to achieve better search performance and enable multi-tenancy. This can be done by assigning a tenant-specific value as the partition key field for each entity. When searching or querying the collection, you can filter entities by the tenant-specific value by including the partition key field in the boolean expression. This approach ensures data isolation by tenants and avoids scanning unnecessary partitions.
 
