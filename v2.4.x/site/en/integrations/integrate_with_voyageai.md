@@ -24,7 +24,7 @@ With this, we're ready to generate embeddings and use vector database
 to conduct semantic search.
 
 ## Searching book titles with VoyageAI & Milvus
-In the following example, we load book title data from the downloaded CSV file, use Voyage AI embedding model to generate vector representations, and store them in Milvus vector database for semantic search.
+In the following example, we use Voyage AI embedding model to generate vector representations for a set of documents in the `docs` list and store them in Milvus vector database for semantic search.
 
 ```python
 import voyageai
