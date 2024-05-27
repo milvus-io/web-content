@@ -30,7 +30,7 @@ According to the implementation methods, the ANNS vector index can be divided in
 
 ## Indexes supported in Milvus
 
-According to the suited data type, the supported indexes in Milvus can be divided into two categories:
+According to the suited data type, the supported indexes in Milvus can be divided into the following categories:
 
 - Indexes for floating-point embeddings
 
