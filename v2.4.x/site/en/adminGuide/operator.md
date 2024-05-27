@@ -148,7 +148,7 @@ spec:
   config: {}    
 ```
 
-<div class="alert note">In this example, <code>inCluster.deletionPolicy</code> defines a deleletion policy for data. <code>inCluster.values.resources</code> defines the compute resources that MinIO uses. <code>inCluster.values.statefulset.replicaCount</code> defines the number of replicas of MinIO on each drive.</div>
+<div class="alert note">In this example, <code>inCluster.deletionPolicy</code> defines a deletion policy for data. <code>inCluster.values.resources</code> defines the compute resources that MinIO uses. <code>inCluster.values.statefulset.replicaCount</code> defines the number of replicas of MinIO on each drive.</div>
 
 <div class="alert note">Find the complete configuration items to configure an internal MinIO service in <a href="https://github.com/milvus-io/milvus-helm/blob/master/charts/minio/values.yaml">values.yaml</a>. Add configuration items as needed under <code>storage.inCluster.values</code> as shown in the preceding example.</div>
 

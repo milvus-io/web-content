@@ -50,7 +50,7 @@ helm upgrade <milvus-release> --reuse-values -f new-values.yaml milvus/milvus
 
 This adds an additional server pool to your MinIO cluster, allowing Milvus to write to the MinIO server pool based on the free disk capacity of each server pool. For example, if a group of three pools has a total of 10 TiB free space distributed across the pools as follows:
 
-|        | Free space | Write possiblity |
+|        | Free space | Write possibility |
 |--------|------------|------------------|
 | Pool A | 3 TiB      | 30% (3/10)       |
 | Pool B | 2 TiB      | 20% (2/10)       |

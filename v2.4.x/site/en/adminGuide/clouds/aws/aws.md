@@ -295,11 +295,11 @@ dependencies
 ansible_python_interpreter= /usr/bin/python3
 StrictHostKeyChecking= no
 
-; Setup variables to controll what type of network to use when creating containers.
+; Setup variables to control what type of network to use when creating containers.
 dependencies_network= host
 nodes_network= host
 
-; Setup varibale to controll what version of Milvus image to use.
+; Setup varibale to control what version of Milvus image to use.
 image= milvusdb/milvus-dev:master-20220412-4781db8a
 
 ; Setup static IP addresses of the docker hosts as variable for container environment variable config.
