@@ -17,6 +17,12 @@ The code snippets on this page use the <a href="https://milvus.io/api-reference/
 
 To create a database, you need to first connect to a Milvus cluster and prepare a name for it:
 
+<div class="multipleCode">
+    <a href="#python">Python </a>
+    <a href="#java">Java</a>
+    <a href="#javascript">Node.js</a>
+</div>
+
 ```python
 from pymilvus import connections, db
 
@@ -25,40 +31,164 @@ conn = connections.connect(host="127.0.0.1", port=19530)
 database = db.create_database("book")
 ```
 
+```java
+import io.milvus.client.MilvusServiceClient;
+import io.milvus.param.ConnectParam;
+import io.milvus.param.collection.CreateDatabaseParam;
+
+// 1. Connect to Milvus server
+ConnectParam connectParam = ConnectParam.newBuilder()
+    .withUri(CLUSTER_ENDPOINT)
+    .withToken(TOKEN)
+    .build();
+
+MilvusServiceClient client = new MilvusServiceClient(connectParam);
+
+// 3. Create a new database
+CreateDatabaseParam createDatabaseParam = CreateDatabaseParam.newBuilder()
+    .withDatabaseName("my_database")
+    .build();
+
+R<RpcStatus> response = client.createDatabase(createDatabaseParam);
+```
+
+```javascript
+const address = "http://localhost:19530"
+
+// 1. Set up a Milvus Client
+client = new MilvusClient({address}); 
+
+// 3. Create a database
+res = await client.createDatabase({
+    db_name: "my_db"
+})
+
+console.log(res)
+
+// {
+//   error_code: 'Success',
+//   reason: '',
+//   code: 0,
+//   retriable: false,
+//   detail: ''
+// }
+```
+
+The above code snippets connects to the default database and creates a new database named `my_database`.
+
 ## Use a database
 
 A Milvus cluster ships with a default database, named 'default'. Collections are created in the default database unless otherwise specified.
 
 To change the default database, do as follows:
 
+<div class="multipleCode">
+    <a href="#python">Python </a>
+    <a href="#java">Java</a>
+    <a href="#javascript">Node.js</a>
+</div>
+
 ```python
 db.using_database("book")
 ```
 
+```java
+// No equivalent method is available.
+```
+
+```javascript
+// 4. Activate another database
+res = await client.useDatabase({
+    db_name: "my_db"
+})
+
+console.log(res)
+```
+
 You can also set a database to use upon connecting to your Milvus cluster as follows:
+
+<div class="multipleCode">
+    <a href="#python">Python </a>
+    <a href="#java">Java</a>
+    <a href="#javascript">Node.js</a>
+</div>
 
 ```python
 conn = connections.connect(
     host="127.0.0.1",
     port="19530",
-    db_name="default"
+    db_name="my_database"
 )
 ```
+
+```java
+ConnectParam connectParam = ConnectParam.newBuilder()
+    .withDatabaseName("my_database")
+    .withUri(CLUSTER_ENDPOINT)
+    .withToken(TOKEN)
+    .build();
+```
+
+```javascript
+const address = "http://localhost:19530";
+const db_name = "my_database";
+
+// 1. Set up a Milvus Client
+client = new MilvusClient({address, db_name}); 
+```
+
+MilvusServiceClient client = new MilvusServiceClient(connectParam);
 
 ## List databases
 
 To find all existing databases in your Milvus cluster, do as follows:
 
+<div class="multipleCode">
+    <a href="#python">Python </a>
+    <a href="#java">Java</a>
+    <a href="#javascript">Node.js</a>
+</div>
+
 ```python
 db.list_database()
 
 # Output
-['default', 'book']
+['default', 'my_database']
+```
+
+```java
+import io.milvus.grpc.ListDatabasesResponse;
+import io.milvus.param.R;
+
+// 2. List all databases
+R<ListDatabasesResponse> listDatabasesResponse = client.listDatabases();
+System.out.println(listDatabasesResponse.getData());
+
+// status {
+// }
+// db_names: "default"
+// db_names: "my_database"
+// created_timestamp: 1716794498117757990
+// created_timestamp: 1716797196479639477
+```
+
+```javascript
+res = await client.listDatabases()
+
+console.log(res.db_names)
+
+// [ 'default', 'my_db' ]
 ```
 
 ## Drop database
 
 To drop a database, you have to drop all its collections first. Otherwise, the drop fails.
+
+<div class="multipleCode">
+    <a href="#python">Python </a>
+    <a href="#java">Java</a>
+    <a href="#javascript">Node.js</a>
+</div>
 
 ```python
 db.drop_database("book")
@@ -67,6 +197,22 @@ db.list_database()
 
 # Output
 ['default']
+```
+
+```java
+import io.milvus.param.collection.DropDatabaseParam;
+
+DropDatabaseParam dropDatabaseParam = DropDatabaseParam.newBuilder()
+    .withDatabaseName("my_database")
+    .build();
+
+response = client.dropDatabase(dropDatabaseParam);
+```
+
+```javascript
+res = await client.dropDatabase({
+    db_name: "my_db"
+})
 ```
 
 ## Use the RBAC with database
@@ -79,7 +225,7 @@ RBAC also covers database operations and ensures forward compatibility. The word
 
 The following code snippet is shared among the listed blocks below.
 
-```python
+```
 from pymilvus import connections, Role
 
 _HOST = '127.0.0.1'
