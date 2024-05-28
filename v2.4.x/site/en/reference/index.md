@@ -346,8 +346,8 @@ In order to improve performance, HNSW limits the maximum degree of nodes on each
 
   | Parameter        | Description                | Range        |
   | ---------------- | -------------------------- | ------------ |
-  | `M`              | M defines tha maximum number of outgoing connections in the graph. Higher M leads to higher accuracy/run_time at fixed ef/efConstruction.  | (2, 2048)    |
-  | `efConstruction` | ef_construction controls index search speed/build speed tradeoff. Increasing the efConstruction parameter may enhance index quality, but it also tends to lengthen the indexing time.              | (1, int_max) |
+  | `M`              | M defines tha maximum number of outgoing connections in the graph. Higher M leads to higher accuracy/run_time at fixed ef/efConstruction.  | [2, 2048]    |
+  | `efConstruction` | ef_construction controls index search speed/build speed tradeoff. Increasing the efConstruction parameter may enhance index quality, but it also tends to lengthen the indexing time.              | [1, int_max] |
 
 - Search parameters
 
