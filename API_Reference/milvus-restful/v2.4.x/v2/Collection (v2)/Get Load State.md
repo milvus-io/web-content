@@ -23,7 +23,7 @@ curl --location --request POST "http://${MILVUS_URI}/v2/vectordb/collections/get
 Possible response is similar to the following:
 ```json
 {
-    "code": 200,
+    "code": 0,
     "data": {
         "loadProgress": 100,
         "loadState": "LoadStateLoaded"

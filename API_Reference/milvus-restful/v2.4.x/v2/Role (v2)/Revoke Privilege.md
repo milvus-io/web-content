@@ -32,7 +32,7 @@ curl --location --request POST "http://${MILVUS_URI}/v2/vectordb/roles/revoke_pr
 Possible response is similar to the following.
 ```json
 {
-    "code": 200,
+    "code": 0,
     "data": {}
 }
 ```

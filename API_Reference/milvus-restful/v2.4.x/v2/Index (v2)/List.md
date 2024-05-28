@@ -25,7 +25,7 @@ curl --location --request POST "http://${MILVUS_URI}/v2/vectordb/indexes/list" \
 Possible response is as follows:
 ```json
 {
-    "code": 200,
+    "code": 0,
     "data": [
         "vector"
     ]

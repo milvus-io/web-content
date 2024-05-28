@@ -27,7 +27,7 @@ Possible output would be similar to the following:
 
 ```json
 {
-    "code": 200,
+    "code": 0,
     "data": {
         "aliases": [],
         "autoId": false,

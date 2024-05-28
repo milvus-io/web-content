@@ -23,7 +23,7 @@ curl --location --request POST "http://${MILVUS_URI}/v2/vectordb/aliases/list" \
 Possible response is similar to the following
 ```json
 {
-    "code": 200,
+    "code": 0,
     "data": [
         "bob"
     ]

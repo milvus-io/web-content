@@ -27,7 +27,7 @@ The possible output will be similar to the following:
 
 ```json
 {
-  "code": 200,
+  "code": 0,
   "data": [
     "quick_setup_new",
     "customized_setup_1",

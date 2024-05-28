@@ -145,7 +145,7 @@ Possible responses for the above requests are similar to the following:
 
 ```json
 {
-    "code": 200,
+    "code": 0,
     "data": {}
 }
 ```

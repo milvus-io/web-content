@@ -38,7 +38,7 @@ curl --location --request POST "http://${MILVUS_URI}/v2/vectordb/jobs/import/cre
 Possible response is similar to the following
 ```json
 {
-    "code": 200,
+    "code": 0,
     "data": {
         "jobId": "448707763884413158"
     }

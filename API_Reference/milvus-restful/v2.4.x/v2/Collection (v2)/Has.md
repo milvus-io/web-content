@@ -28,7 +28,7 @@ The possible response is similar to the following:
 
 ```json
 {
-  "code": 200,
+  "code": 0,
   "data": {
     "has": true
   }

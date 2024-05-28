@@ -25,7 +25,7 @@ curl --location --request POST "http://${MILVUS_URI}/v2/vectordb/aliases/describ
 Possible response is similar to the following
 ```shell
 {
-    "code": 200,
+    "code": 0,
     "data": {
         "aliasName": "bob",
         "collectionName": "quick_setup",

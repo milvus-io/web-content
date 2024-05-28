@@ -25,7 +25,7 @@ curl --location --request POST "http://${MILVUS_URI}/v2/vectordb/jobs/import/get
 Possible response is similar to the following.
 ```json
 {
-    "code": 200,
+    "code": 0,
     "data": {
         "collectionName": "quick_setup",
         "completeTime": "2024-04-01T06:17:55Z",
@@ -142,14 +142,14 @@ The properties in the returned response are listed in the following table.
 | `data[].details[].fileName`  | __string__<br/>The name of a data file.  |
 | `data[].details[].fileSize`  | __string__<br/>The size of the data file.  |
 | `data[].details[].progress`  | __string__<br/>The progress in percentage.  |
-| `data[].details[].state`  | __string__<br/>The processing state of the data file. Possible values are __Pending__, __InProgress__, __Completed__, and __Failed__.  |
+| `data[].details[].state`  | __string__<br/>The processing state of the data file. Possible values are __Pending__, __Importing__, __Completed__, and __Failed__.  |
 | `data[].details[].reason`  | __string__<br/>The reason for the failure to bulk import data.  |
 | `data[].details[].importedRows`  | __string__<br/>The number of rows imported from this file.  |
 | `data[].details[].totalRows`  | __string__<br/>The number of rows in the specified collection upon the import from this file is complete.  |
 | `data.fileSize`  | __integer__<br/>The uploaded file size in bytes.  |
 | `data.jobId`  | __integer__<br/>The ID of this bulk-import job.  |
 | `data.progress`  | __integer__<br/>The progress in percentage of the current bulk-import job.  |
-| `data.state`  | __string__<br/>The state of this bulk-import job. Possible values are __Pending__, __InProgress__, __Completed__, and __Failed__.  |
+| `data.state`  | __string__<br/>The state of this bulk-import job. Possible values are __Pending__, __Importing__, __Completed__, and __Failed__.  |
 | `data.reason`  | __string__<br/>The reason for the failure to bulk import data.  |
 | `data.importedRows`  | __integer__<br/>The number of rows inserted into the specified collection upon this import.  |
 | `data.totalRows`  | __integer__<br/>The number of rows in the specified collection.  |

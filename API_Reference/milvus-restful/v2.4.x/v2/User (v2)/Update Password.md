@@ -27,7 +27,7 @@ curl --location --request POST "http://${MILVUS_URI}/v2/vectordb/users/update_pa
 Possible response is similar to the following.
 ```json
 {
-    "code": 200,
+    "code": 0,
     "data": {}
 }
 ```
