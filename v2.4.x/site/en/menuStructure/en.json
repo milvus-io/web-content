@@ -734,7 +734,7 @@
       "order": 4
     },
     {
-      "id": "milvus-migration",
+      "id": "milvus_migration",
       "title": "Milvus Migration",
       "label1": "",
       "label2": "",
@@ -744,35 +744,35 @@
     {
       "id": "migrate_overview.md",
       "title": "Overview",
-      "label1": "milvus-migration",
+      "label1": "milvus_migration",
       "label2": "",
       "order": 0
     },     
     {
       "id": "milvusdm_install.md",
       "title": "Install Migration Tool",
-      "label1": "milvus-migration",
+      "label1": "milvus_migration",
       "label2": "",
       "order": 1
     },  
     {
       "id": "es2m.md",
       "title": "From Elasticsearch",
-      "label1": "milvus-migration",
+      "label1": "milvus_migration",
       "label2": "",
       "order": 2
     },  
     {
       "id": "f2m.md",
       "title": "From Faiss",
-      "label1": "milvus-migration",
+      "label1": "milvus_migration",
       "label2": "",
       "order": 3
     }, 
     {
       "id": "m2m.md",
       "title": "From Milvus 1.x",
-      "label1": "milvus-migration",
+      "label1": "milvus_migration",
       "label2": "",
       "order": 4
     },
@@ -1298,15 +1298,6 @@
       "label3": "",
       "order": 2
     },
-    {
-      "id": "migration",
-      "title": "Milvus Migration",
-      "label1": "tools",
-      "label2": "",
-      "label3": "",
-      "order": 2,
-      "outLink": "https://github.com/zilliztech/milvus-migration?tab=readme-ov-file"
-    }, 
     {
       "id": "milvus_cdc",
       "title": "Milvus CDC",
