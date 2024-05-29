@@ -136,49 +136,50 @@ Milvus version 2.4.1 brings numerous improvements and bug fixes that aim to enha
 
 ### Breaking changes
 
-- Discontinued support for delete with an empty filter expression. ([[#32472](https://github.com/milvus-io/milvus/pull/32472)](https://github.com/milvus-io/milvus/pull/32472))
+- Discontinued support for delete with an empty filter expression. ([#32472](https://github.com/milvus-io/milvus/pull/32472))
 
 ### Features
 
-- Added support for Float16/BFloat16 vector data types in bulk insert ([[#32157](https://github.com/milvus-io/milvus/pull/32157)](https://github.com/milvus-io/milvus/pull/32157))
-- Enhanced sparse float vector to support brute force iterator search and range search ([[#32635](https://github.com/milvus-io/milvus/pull/32635)](https://github.com/milvus-io/milvus/pull/32635))
+- Added support for Float16/BFloat16 vector data types in bulk insert ([#32157](https://github.com/milvus-io/milvus/pull/32157))
+- Enhanced sparse float vector to support brute force iterator search and range search ([#32635](https://github.com/milvus-io/milvus/pull/32635))
 
 ### Improvements
 
-- Added declarative resource group api ([[#31930](https://github.com/milvus-io/milvus/pull/31930)](https://github.com/milvus-io/milvus/pull/31930) [[#32297](https://github.com/milvus-io/milvus/pull/32297)](https://github.com/milvus-io/milvus/pull/32297) [[#32536](https://github.com/milvus-io/milvus/pull/32536)](https://github.com/milvus-io/milvus/pull/32536) [[#32666](https://github.com/milvus-io/milvus/pull/32666)](https://github.com/milvus-io/milvus/pull/32666))
-- Rewrote the collection observer in QueryCoord to make it task-driven([[#32441](https://github.com/milvus-io/milvus/pull/32441)](https://github.com/milvus-io/milvus/pull/32441))
-- Refactored the data structure used in the SyncManager of DataNode to reduce memory usage and prevent errors ([[#32673](https://github.com/milvus-io/milvus/pull/32673)](https://github.com/milvus-io/milvus/pull/32673))
-- Revised the implementation of garbage collection to minimize list operations associated with object storage([[#31740](https://github.com/milvus-io/milvus/pull/31740)](https://github.com/milvus-io/milvus/pull/31740))
-- Reduced the cpu usage when collection number is high ([[#32245](https://github.com/milvus-io/milvus/pull/32245)](https://github.com/milvus-io/milvus/pull/32245))
-- Enhanced the management of milvus.yaml by automatically generating relevant configuration items in the milvus.yaml file through code([[#31832](https://github.com/milvus-io/milvus/pull/31832)](https://github.com/milvus-io/milvus/pull/31832) [[#32357](https://github.com/milvus-io/milvus/pull/32357)](https://github.com/milvus-io/milvus/pull/32357))
-- Enhanced the performance of the Query by retrieving the data after performing local reduction ([[#32346](https://github.com/milvus-io/milvus/pull/32346)](https://github.com/milvus-io/milvus/pull/32346))
-- Added WithBlock option for etcd client creation ([[#32641](https://github.com/milvus-io/milvus/pull/32641)](https://github.com/milvus-io/milvus/pull/32641))
-- Used client_request_id specified by the client as the TraceID if client provided([[#32264](https://github.com/milvus-io/milvus/pull/32264)](https://github.com/milvus-io/milvus/pull/32264))
-- Added db label to the metrics for the delete and bulk insert operations([[#32611](https://github.com/milvus-io/milvus/pull/32611)](https://github.com/milvus-io/milvus/pull/32611))
-- Added logic to skip the verification through configuration for AutoID and PartitionKey columns([[#32592](https://github.com/milvus-io/milvus/pull/32592)](https://github.com/milvus-io/milvus/pull/32592))
-- Refined errors related to authentication ([[#32253](https://github.com/milvus-io/milvus/pull/32253)](https://github.com/milvus-io/milvus/pull/32253))
-- Refined error logs for AllocSegmentID in DataCoord([[#32351](https://github.com/milvus-io/milvus/pull/32351)](https://github.com/milvus-io/milvus/pull/32351) [[#32335](https://github.com/milvus-io/milvus/pull/32335)](https://github.com/milvus-io/milvus/pull/32335))
-- Removed duplicate metrics([[#32380](https://github.com/milvus-io/milvus/pull/32380)](https://github.com/milvus-io/milvus/pull/32380) [[#32308](https://github.com/milvus-io/milvus/pull/32308)](https://github.com/milvus-io/milvus/pull/32308)) and clean up unused metrics([[#32404](https://github.com/milvus-io/milvus/pull/32404)](https://github.com/milvus-io/milvus/pull/32404) [[#32515](https://github.com/milvus-io/milvus/pull/32515)](https://github.com/milvus-io/milvus/pull/32515))
-- Added configuration option to control whether to enforce the activation of the partitionKey feature([[#32433](https://github.com/milvus-io/milvus/pull/32433)](https://github.com/milvus-io/milvus/pull/32433))
-- Added configuration option to control the maximum amount of data that can be inserted in a single request([[#32433](https://github.com/milvus-io/milvus/pull/32433)](https://github.com/milvus-io/milvus/pull/32433))
-- Parallelize the applyDelete operation at the segment level to accelerate the processing of Delete messages by the Delegator([[#32291](https://github.com/milvus-io/milvus/pull/32291)](https://github.com/milvus-io/milvus/pull/32291))
-- Used index ([[#32232](https://github.com/milvus-io/milvus/pull/32232)](https://github.com/milvus-io/milvus/pull/32232) [[#32505](https://github.com/milvus-io/milvus/pull/32505)](https://github.com/milvus-io/milvus/pull/32505) [[#32533](https://github.com/milvus-io/milvus/pull/32533)](https://github.com/milvus-io/milvus/pull/32533) [[#32595](https://github.com/milvus-io/milvus/pull/32595)](https://github.com/milvus-io/milvus/pull/32595)) and add cache ([[#32580](https://github.com/milvus-io/milvus/pull/32580)](https://github.com/milvus-io/milvus/pull/32580)) to accelerate frequent filtering operations in QueryCoord.
-- Rewrote the data structure([[#32273](https://github.com/milvus-io/milvus/pull/32273)](https://github.com/milvus-io/milvus/pull/32273)) and refactor code([[#32389](https://github.com/milvus-io/milvus/pull/32389)](https://github.com/milvus-io/milvus/pull/32389) ) to accelerate common operations in DataCood.
-- Removed openblas from conan([[#32002](https://github.com/milvus-io/milvus/pull/32002)](https://github.com/milvus-io/milvus/pull/32002))
+- Added declarative resource group api ([#31930](https://github.com/milvus-io/milvus/pull/31930), [#32297](https://github.com/milvus-io/milvus/pull/32297), [#32536](https://github.com/milvus-io/milvus/pull/32536), [#32666](https://github.com/milvus-io/milvus/pull/32666))
+- Rewrote the collection observer in QueryCoord to make it task-driven ([#32441](https://github.com/milvus-io/milvus/pull/32441))
+- Refactored the data structure used in the SyncManager of DataNode to reduce memory usage and prevent errors ([#32673](https://github.com/milvus-io/milvus/pull/32673))
+- Revised the implementation of garbage collection to minimize list operations associated with object storage ([#31740](https://github.com/milvus-io/milvus/pull/31740))
+- Reduced the cpu usage when collection number is high ([#32245](https://github.com/milvus-io/milvus/pull/32245))
+- Enhanced the management of milvus.yaml by automatically generating relevant configuration items in the milvus.yaml file through code ([#31832](https://github.com/milvus-io/milvus/pull/31832), [#32357](https://github.com/milvus-io/milvus/pull/32357))
+- Enhanced the performance of the Query by retrieving the data after performing local reduction ([#32346](https://github.com/milvus-io/milvus/pull/32346))
+- Added WithBlock option for etcd client creation ([#32641](https://github.com/milvus-io/milvus/pull/32641))
+- Used client_request_id specified by the client as the TraceID if client provided ([#32264](https://github.com/milvus-io/milvus/pull/32264))
+- Added db label to the metrics for the delete and bulk insert operations ([#32611](https://github.com/milvus-io/milvus/pull/32611))
+- Added logic to skip the verification through configuration for AutoID and PartitionKey columns ([#32592](https://github.com/milvus-io/milvus/pull/32592))
+- Refined errors related to authentication ([#32253](https://github.com/milvus-io/milvus/pull/32253))
+- Refined error logs for AllocSegmentID in DataCoord ([#32351](https://github.com/milvus-io/milvus/pull/32351), [#32335](https://github.com/milvus-io/milvus/pull/32335))
+- Removed duplicate metrics ([#32380](https://github.com/milvus-io/milvus/pull/32380), [#32308](https://github.com/milvus-io/milvus/pull/32308)) and cleaned up unused metrics ([#32404](https://github.com/milvus-io/milvus/pull/32404), [#32515](https://github.com/milvus-io/milvus/pull/32515))
+- Added configuration option to control whether to enforce the activation of the partitionKey feature ([#32433](https://github.com/milvus-io/milvus/pull/32433))
+- Added configuration option to control the maximum amount of data that can be inserted in a single request ([#32433](https://github.com/milvus-io/milvus/pull/32433))
+- Parallelize the applyDelete operation at the segment level to accelerate the processing of Delete messages by the Delegator ([#32291](https://github.com/milvus-io/milvus/pull/32291))
+- Used index ([#32232](https://github.com/milvus-io/milvus/pull/32232), [#32505](https://github.com/milvus-io/milvus/pull/32505), [#32533](https://github.com/milvus-io/milvus/pull/32533), [#32595](https://github.com/milvus-io/milvus/pull/32595)) and add cache ([#32580](https://github.com/milvus-io/milvus/pull/32580)) to accelerate frequent filtering operations in QueryCoord.
+- Rewrote the data structure ([#32273](https://github.com/milvus-io/milvus/pull/32273)) and refactored code ([#32389](https://github.com/milvus-io/milvus/pull/32389)) to accelerate common operations in DataCoord.
+- Removed openblas from conan ([#32002](https://github.com/milvus-io/milvus/pull/32002))
 
 ### Bug fixes
 
-- Fixed build milvus in rockylinux8 ([[#32619](https://github.com/milvus-io/milvus/pull/32619)](https://github.com/milvus-io/milvus/pull/32619))
-- Fixed compilation errors for SVE on ARM ([[#32463](https://github.com/milvus-io/milvus/pull/32463)](https://github.com/milvus-io/milvus/pull/32463) [[#32270](https://github.com/milvus-io/milvus/pull/32270)](https://github.com/milvus-io/milvus/pull/32270))
-- Fixed the crash issue on ARM-based GPU images([[#31980](https://github.com/milvus-io/milvus/pull/31980)](https://github.com/milvus-io/milvus/pull/31980)).
-- Fixed regex query can't handle text with newline ([[#32569](https://github.com/milvus-io/milvus/pull/32569)](https://github.com/milvus-io/milvus/pull/32569))
-- Fixed search get empty result caused by GetShardLeaders return empty node list ([[#32685](https://github.com/milvus-io/milvus/pull/32685)](https://github.com/milvus-io/milvus/pull/32685))
-- Fixed BulkInsert raised error when encountering dynamic fields in numpy files([[#32596](https://github.com/milvus-io/milvus/pull/32596)](https://github.com/milvus-io/milvus/pull/32596))
-- Fixed bugs related to the RESTFulV2 interface, including an important fix that allows numeric parameters in requests to accept numerical input instead of string type([[#32485](https://github.com/milvus-io/milvus/pull/32485)](https://github.com/milvus-io/milvus/pull/32485) [[#32355](https://github.com/milvus-io/milvus/pull/32355)](https://github.com/milvus-io/milvus/pull/32355))
-- Fixed memory leak in proxy by remove watching config event in rate limiter([[#32313](https://github.com/milvus-io/milvus/pull/32313)](https://github.com/milvus-io/milvus/pull/32313))
-- Fixed the issue where the rate limiter incorrectly reports that the partition cannot be found when partitionName is not specified([[#32647](https://github.com/milvus-io/milvus/pull/32647)](https://github.com/milvus-io/milvus/pull/32647))
-- Added detection between the cases of Collection being in the recovery state and not being loaded in the error type.（[[#32447](https://github.com/milvus-io/milvus/pull/32447)](https://github.com/milvus-io/milvus/pull/32447)）
-- Corrected the negative queryable num entities metric ([[#32361](https://github.com/milvus-io/milvus/pull/32361)](https://github.com/milvus-io/milvus/pull/32361))
+- Fixed build milvus in rockylinux8 ([#32619](https://github.com/milvus-io/milvus/pull/32619))
+- Fixed compilation errors for SVE on ARM ([#32463](https://github.com/milvus-io/milvus/pull/32463), [#32270](https://github.com/milvus-io/milvus/pull/32270))
+- Fixed the crash issue on ARM-based GPU images ([#31980](https://github.com/milvus-io/milvus/pull/31980))
+- Fixed regex query can't handle text with newline ([#32569](https://github.com/milvus-io/milvus/pull/32569))
+- Fixed search get empty result caused by GetShardLeaders return empty node list ([#32685](https://github.com/milvus-io/milvus/pull/32685))
+- Fixed BulkInsert raised error when encountering dynamic fields in numpy files ([#32596](https://github.com/milvus-io/milvus/pull/32596))
+- Fixed bugs related to the RESTFulV2 interface, including an important fix that allows numeric parameters in requests to accept numerical input instead of string type ([#32485](https://github.com/milvus-io/milvus/pull/32485), [#32355](https://github.com/milvus-io/milvus/pull/32355))
+- Fixed memory leak in proxy by removing watching config event in rate limiter ([#32313](https://github.com/milvus-io/milvus/pull/32313))
+- Fixed the issue where the rate limiter incorrectly reports that the partition cannot be found when partitionName is not specified ([#32647](https://github.com/milvus-io/milvus/pull/32647))
+- Added detection between the cases of Collection being in the recovery state and not being loaded in the error type. ([#32447](https://github.com/milvus-io/milvus/pull/32447))
+- Corrected the negative queryable num entities metric ([#32361](https://github.com/milvus-io/milvus/pull/32361))
+
 
 ## v2.4.0
 
@@ -192,41 +193,41 @@ We are excited to announce the official launch of Milvus 2.4.- Building upon the
 
 ### Improvements
 
-- Support for MinIO TLS connections ([[#31396](https://github.com/milvus-io/milvus/pull/31396)](https://github.com/milvus-io/milvus/pull/31396), [[#31618](https://github.com/milvus-io/milvus/pull/31618)](https://github.com/milvus-io/milvus/pull/31618))
-- AutoIndex support for scalar fields ([[#31593](https://github.com/milvus-io/milvus/pull/31593)](https://github.com/milvus-io/milvus/pull/31593))
-- Hybrid search refactoring for consistent execution paths with regular search ([[#31742](https://github.com/milvus-io/milvus/pull/31742)](https://github.com/milvus-io/milvus/pull/31742), [[#32178](https://github.com/milvus-io/milvus/pull/32178)](https://github.com/milvus-io/milvus/pull/32178))
-- Accelerated filtering through bitset and bitset_view refactoring ([[#31592](https://github.com/milvus-io/milvus/pull/31592)](https://github.com/milvus-io/milvus/pull/31592), [[#31754](https://github.com/milvus-io/milvus/pull/31754)](https://github.com/milvus-io/milvus/pull/31754), [[#32139](https://github.com/milvus-io/milvus/pull/32139)](https://github.com/milvus-io/milvus/pull/32139))
-- Import tasks now support waiting for data index completion ([[#31733](https://github.com/milvus-io/milvus/pull/31733)](https://github.com/milvus-io/milvus/pull/31733))
-- Enhanced Import compatibility ([[#32121](https://github.com/milvus-io/milvus/pull/32121)](https://github.com/milvus-io/milvus/pull/32121)), task scheduling ([[#31475](https://github.com/milvus-io/milvus/pull/31475)](https://github.com/milvus-io/milvus/pull/31475)), and limits on imported file size and number ([[#31542](https://github.com/milvus-io/milvus/pull/31542)](https://github.com/milvus-io/milvus/pull/31542)).
-- Code simplification efforts including interface standardization for type checking ([[#31945](https://github.com/milvus-io/milvus/pull/31945)](https://github.com/milvus-io/milvus/pull/31945), [[#31857](https://github.com/milvus-io/milvus/pull/31857)](https://github.com/milvus-io/milvus/pull/31857)), removal of deprecated code and metrics ([[#32079](https://github.com/milvus-io/milvus/pull/32079)](https://github.com/milvus-io/milvus/pull/32079), [[#32134](https://github.com/milvus-io/milvus/pull/32134)](https://github.com/milvus-io/milvus/pull/32134), [[#31535](https://github.com/milvus-io/milvus/pull/31535)](https://github.com/milvus-io/milvus/pull/31535), [[#32211](https://github.com/milvus-io/milvus/pull/32211)](https://github.com/milvus-io/milvus/pull/32211), [[#31935](https://github.com/milvus-io/milvus/pull/31935)](https://github.com/milvus-io/milvus/pull/31935)), and normalization of constant names ([[#31515](https://github.com/milvus-io/milvus/pull/31515)](https://github.com/milvus-io/milvus/pull/31515))
-- New metrics for QueryCoord current target channel check point lag latency ([[#31420](https://github.com/milvus-io/milvus/pull/31420)](https://github.com/milvus-io/milvus/pull/31420))
-- New db label for common metrics([[#32024](https://github.com/milvus-io/milvus/pull/32024)](https://github.com/milvus-io/milvus/pull/32024))
-- New metrics regarding the count of deleted, indexed, and loaded entities, with the inclusion of labels such as collectionName and dbName ([[#31861](https://github.com/milvus-io/milvus/pull/31861)](https://github.com/milvus-io/milvus/pull/31861))
-- Error handling improvements for mismatched vector types ([[#31766](https://github.com/milvus-io/milvus/pull/31766)](https://github.com/milvus-io/milvus/pull/31766))
-- Support for throwing errors instead of crashing when index cannot be built ([[#31845](https://github.com/milvus-io/milvus/pull/31845)](https://github.com/milvus-io/milvus/pull/31845))
-- Support for invalidating the database meta cache when dropping databases ([[#32092](https://github.com/milvus-io/milvus/pull/32092)](https://github.com/milvus-io/milvus/pull/32092))
-- Interface refactoring for channel distribution ([[#31814](https://github.com/milvus-io/milvus/pull/31814)](https://github.com/milvus-io/milvus/pull/31814)) and leader view management ([[#32127](https://github.com/milvus-io/milvus/pull/32127)](https://github.com/milvus-io/milvus/pull/32127))
-- Refactor channel dist manager interface([[#31814](https://github.com/milvus-io/milvus/pull/31814)](https://github.com/milvus-io/milvus/pull/31814)) and Refactor leader view manager interface([[#32127](https://github.com/milvus-io/milvus/pull/32127)](https://github.com/milvus-io/milvus/pull/32127))
-- Batch processing ([[#31632](https://github.com/milvus-io/milvus/pull/31632)](https://github.com/milvus-io/milvus/pull/31632)), adding mapping information ([[#32234](https://github.com/milvus-io/milvus/pull/32234)](https://github.com/milvus-io/milvus/pull/32234), [[#32249](https://github.com/milvus-io/milvus/pull/32249)](https://github.com/milvus-io/milvus/pull/32249)), and avoiding usage of lock ([[#31787](https://github.com/milvus-io/milvus/pull/31787)](https://github.com/milvus-io/milvus/pull/31787)) to accelerate frequently invoked operations
+- Support for MinIO TLS connections ([#31396](https://github.com/milvus-io/milvus/pull/31396), [#31618](https://github.com/milvus-io/milvus/pull/31618))
+- AutoIndex support for scalar fields ([#31593](https://github.com/milvus-io/milvus/pull/31593))
+- Hybrid search refactoring for consistent execution paths with regular search ([#31742](https://github.com/milvus-io/milvus/pull/31742), [#32178](https://github.com/milvus-io/milvus/pull/32178))
+- Accelerated filtering through bitset and bitset_view refactoring ([#31592](https://github.com/milvus-io/milvus/pull/31592), [#31754](https://github.com/milvus-io/milvus/pull/31754), [#32139](https://github.com/milvus-io/milvus/pull/32139))
+- Import tasks now support waiting for data index completion ([#31733](https://github.com/milvus-io/milvus/pull/31733))
+- Enhanced Import compatibility ([#32121](https://github.com/milvus-io/milvus/pull/32121)), task scheduling ([#31475](https://github.com/milvus-io/milvus/pull/31475)), and limits on imported file size and number ([#31542](https://github.com/milvus-io/milvus/pull/31542))
+- Code simplification efforts including interface standardization for type checking ([#31945](https://github.com/milvus-io/milvus/pull/31945), [#31857](https://github.com/milvus-io/milvus/pull/31857)), removal of deprecated code and metrics ([#32079](https://github.com/milvus-io/milvus/pull/32079), [#32134](https://github.com/milvus-io/milvus/pull/32134), [#31535](https://github.com/milvus-io/milvus/pull/31535), [#32211](https://github.com/milvus-io/milvus/pull/32211), [#31935](https://github.com/milvus-io/milvus/pull/31935)), and normalization of constant names ([#31515](https://github.com/milvus-io/milvus/pull/31515))
+- New metrics for QueryCoord current target channel check point lag latency ([#31420](https://github.com/milvus-io/milvus/pull/31420))
+- New db label for common metrics ([#32024](https://github.com/milvus-io/milvus/pull/32024))
+- New metrics regarding the count of deleted, indexed, and loaded entities, with the inclusion of labels such as collectionName and dbName ([#31861](https://github.com/milvus-io/milvus/pull/31861))
+- Error handling improvements for mismatched vector types ([#31766](https://github.com/milvus-io/milvus/pull/31766))
+- Support for throwing errors instead of crashing when index cannot be built ([#31845](https://github.com/milvus-io/milvus/pull/31845))
+- Support for invalidating the database meta cache when dropping databases ([#32092](https://github.com/milvus-io/milvus/pull/32092))
+- Interface refactoring for channel distribution ([#31814](https://github.com/milvus-io/milvus/pull/31814)) and leader view management ([#32127](https://github.com/milvus-io/milvus/pull/32127))
+- Refactor channel dist manager interface ([#31814](https://github.com/milvus-io/milvus/pull/31814)) and Refactor leader view manager interface ([#32127](https://github.com/milvus-io/milvus/pull/32127))
+- Batch processing ([#31632](https://github.com/milvus-io/milvus/pull/31632)), adding mapping information ([#32234](https://github.com/milvus-io/milvus/pull/32234), [#32249](https://github.com/milvus-io/milvus/pull/32249)), and avoiding usage of lock ([#31787](https://github.com/milvus-io/milvus/pull/31787)) to accelerate frequently invoked operations
 
 ### Breaking Changes
 
-- Discontinued grouping search on binary vectors ([[#31735](https://github.com/milvus-io/milvus/pull/31735)](https://github.com/milvus-io/milvus/pull/31735))
-- Discontinued grouping search with hybrid search([[#31812](https://github.com/milvus-io/milvus/pull/31812)](https://github.com/milvus-io/milvus/pull/31812))
-- Discontinued HNSW index on binary vectors ([[#31883](https://github.com/milvus-io/milvus/pull/31883)](https://github.com/milvus-io/milvus/pull/31883))
+- Discontinued grouping search on binary vectors ([#31735](https://github.com/milvus-io/milvus/pull/31735))
+- Discontinued grouping search with hybrid search ([#31812](https://github.com/milvus-io/milvus/pull/31812))
+- Discontinued HNSW index on binary vectors ([#31883](https://github.com/milvus-io/milvus/pull/31883))
 
 ### Bug Fixes
 
-- Enhanced data type and value checks for queries and insertions to prevent crashes ([[#31478](https://github.com/milvus-io/milvus/pull/31478)](https://github.com/milvus-io/milvus/pull/31478), [[#31653](https://github.com/milvus-io/milvus/pull/31653)](https://github.com/milvus-io/milvus/pull/31653), [[#31698](https://github.com/milvus-io/milvus/pull/31698)](https://github.com/milvus-io/milvus/pull/31698), [[#31842](https://github.com/milvus-io/milvus/pull/31842)](https://github.com/milvus-io/milvus/pull/31842), [[#32042](https://github.com/milvus-io/milvus/pull/32042)](https://github.com/milvus-io/milvus/pull/32042), [[#32251](https://github.com/milvus-io/milvus/pull/32251)](https://github.com/milvus-io/milvus/pull/32251), [[#32204](https://github.com/milvus-io/milvus/pull/32204)](https://github.com/milvus-io/milvus/pull/32204))
-- RESTful API bug fixes ([[#32160](https://github.com/milvus-io/milvus/pull/32160)](https://github.com/milvus-io/milvus/pull/32160))
-- Improved prediction of inverted index resource usage ([[#31641](https://github.com/milvus-io/milvus/pull/31641)](https://github.com/milvus-io/milvus/pull/31641))
-- Resolution of connection issues with etcd when authorization is enabled ([[#31668](https://github.com/milvus-io/milvus/pull/31668)](https://github.com/milvus-io/milvus/pull/31668))
-- Security update for nats server ([[#32023](https://github.com/milvus-io/milvus/pull/32023)](https://github.com/milvus-io/milvus/pull/32023))
-- Stored inverted index files into a local storage path of QueryNode instead of /tmp ([[#32210](https://github.com/milvus-io/milvus/pull/32210)](https://github.com/milvus-io/milvus/pull/32210))
-- Addressed datacoord memory leaks for collectionInfo ([[#32243](https://github.com/milvus-io/milvus/pull/32243)](https://github.com/milvus-io/milvus/pull/32243))
-- Fixes for fp16/bf16 related bugs potentially causing system panic ([[#31677](https://github.com/milvus-io/milvus/pull/31677)](https://github.com/milvus-io/milvus/pull/31677), [[#31841](https://github.com/milvus-io/milvus/pull/31841)](https://github.com/milvus-io/milvus/pull/31841), [[#32196](https://github.com/milvus-io/milvus/pull/32196)](https://github.com/milvus-io/milvus/pull/32196))
-- Resolved issues with grouping search returning insufficient results ([[#32151](https://github.com/milvus-io/milvus/pull/32151)](https://github.com/milvus-io/milvus/pull/32151))
-- Adjustment of search with iterators to handle offsets in the Reduce step more effectively and ensure adequate results with "reduceStopForBest" enabled ([[#32088](https://github.com/milvus-io/milvus/pull/32088)](https://github.com/milvus-io/milvus/pull/32088))
+- Enhanced data type and value checks for queries and insertions to prevent crashes ([#31478](https://github.com/milvus-io/milvus/pull/31478), [#31653](https://github.com/milvus-io/milvus/pull/31653), [#31698](https://github.com/milvus-io/milvus/pull/31698), [#31842](https://github.com/milvus-io/milvus/pull/31842), [#32042](https://github.com/milvus-io/milvus/pull/32042), [#32251](https://github.com/milvus-io/milvus/pull/32251), [#32204](https://github.com/milvus-io/milvus/pull/32204))
+- RESTful API bug fixes ([#32160](https://github.com/milvus-io/milvus/pull/32160))
+- Improved prediction of inverted index resource usage ([#31641](https://github.com/milvus-io/milvus/pull/31641))
+- Resolution of connection issues with etcd when authorization is enabled ([#31668](https://github.com/milvus-io/milvus/pull/31668))
+- Security update for nats server ([#32023](https://github.com/milvus-io/milvus/pull/32023))
+- Stored inverted index files into a local storage path of QueryNode instead of /tmp ([#32210](https://github.com/milvus-io/milvus/pull/32210))
+- Addressed datacoord memory leaks for collectionInfo ([#32243](https://github.com/milvus-io/milvus/pull/32243))
+- Fixes for fp16/bf16 related bugs potentially causing system panic ([#31677](https://github.com/milvus-io/milvus/pull/31677), [#31841](https://github.com/milvus-io/milvus/pull/31841), [#32196](https://github.com/milvus-io/milvus/pull/32196))
+- Resolved issues with grouping search returning insufficient results ([#32151](https://github.com/milvus-io/milvus/pull/32151))
+- Adjustment of search with iterators to handle offsets in the Reduce step more effectively and ensure adequate results with "reduceStopForBest" enabled ([#32088](https://github.com/milvus-io/milvus/pull/32088))
 
 ## v2.4.0-rc.1
 Release date: March 20, 2024
