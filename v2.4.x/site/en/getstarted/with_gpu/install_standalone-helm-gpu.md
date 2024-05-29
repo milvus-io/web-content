@@ -8,7 +8,7 @@ summary: Learn the necessary preparations before installing Milvus with Docker.
 title: Install Milvus Standalone with GPU Support
 ---
 
-<div class="tab-wrapper"><a href="install_standalone-helm-gpu.md" class='active '>Standalone (Helm)</a><a href="install_standalone-docker-compose-gpu.md" class=''>Standalone (Docker Compose)</a><a href="install_cluster-helm-gpu.md" class=''>Cluster (Helm)</a></div>
+<div class="tab-wrapper"><a href="install_standalone-helm-gpu.md" class='active '>Standalone (Helm)</a></div>
 
 # Install Milvus Standalone with GPU Support
 

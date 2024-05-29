@@ -6,328 +6,184 @@ title: Quickstart
 
 # Quickstart
 
-This guide explains how to connect to your Milvus cluster and performs CRUD operations in minutes
+Vectors, the output data format of Neural Network models, can effectively encode information and serve a pivotal role in AI applications such as knowledge base, semantic search, Retrieval Augmented Generation (RAG) and more. 
 
-## Before you start
+Milvus is an open-source vector database that suits AI applictions of every size from running a demo chatbot in Jupyter notebook to building web-scale search that serves billions of users. In this guide, we will walk you through how to set up Milvus locally within minutes and use the Python client library to generate, store and search vectors. 
 
-- You have installed [Milvus standalone](https://milvus.io/docs/install_standalone-docker.md) or [Milvus cluster](https://milvus.io/docs/install_cluster-milvusoperator.md).
+## Install Milvus
 
-- You have installed preferred SDKs. You can choose among various languages, including [Python](https://milvus.io/docs/install-pymilvus.md), [Java](https://milvus.io/docs/install-java.md), [Go](https://milvus.io/docs/install-go.md), and [Node.js](https://milvus.io/docs/install-node.md).
+In this guide we use Milvus Lite, a python library included in pymilvus that can be embedded into the client application. Milvus also supports deployment on [Docker](install_standalone-docker.md) and [Kubenetes](install_cluster-milvusoperator.md) for production use cases.
 
-## Hello Milvus
+Before starting, make sure you have Python 3.7+ available in the local environment. Now let's install pymilvus which contains both the python client library and Milvus Lite (`-U` is used to force updates if you have installed an older version of pymilvus before):
 
-To confirm that your Milvus instance is operational and Python SDK is set up correctly, start by downloading the `hello_milvus.py` script. You can do this using the following command:
-
-```bash
-wget https://raw.githubusercontent.com/milvus-io/milvus-docs/v2.4.x/assets/hello_milvus.py
+```
+pip install -U pymilvus
 ```
 
-Next, update the `uri` parameter in the script with the address of your Milvus instance. Once updated, run the script using the command below:
+## Setup Vector Database
+
+To create a local Milvus vector database, simply instantiate a MilvusClient by specifying a file name to store all data, such as `"milvus_demo.db"`.
 
 ```python
-python hello_milvus.py
+from pymilvus import MilvusClient
+
+client = MilvusClient("milvus_demo.db")
 ```
 
-If the script executes without returning any error messages, your Milvus instance is functioning correctly and the Python SDK is properly installed.
+## Create a Collection
 
-## Connect to Milvus
-
-Once you have obtained the cluster credentials or an API key, you can use it to connect to your Milvus now.
+In Milvus, we need a collection to store vectors and their associated metadata. You can think of it as a table in traditional SQL databases. When creating a collection, you can define schema and index params to configure vector specs such as dimensionality, index types and distant metrics. There are also complex concepts to optimize the index for vector search performance. For now, let's just focus on the basics and use default for everything possible. At minimum, you only need to set the collection name and the dimension of the vector field of the collection.
 
 ```python
-from pymilvus import MilvusClient, DataType
-
-# 1. Set up a Milvus client
-client = MilvusClient(
-    uri="http://localhost:19530"
+client.create_collection(
+    collection_name="demo_collection",
+    dimension=768  # The vectors we will use in this demo has 768 dimensions
 )
+```
+
+In the above setup, 
+
+- The primary key and vector fields use their default names ("**id**" and "**vector**"). The [auto-id feature](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md) isn't used. The integer value of the primary key field must be specified.
+- The metric type (vector distance definition) is set to its default value ([COSINE](https://milvus.io/docs/metric.md#Cosine-Similarity)).
+- The dimension field must match the dimension of vectors to be inserted.
+- This supports any metadata field, but doesn't build index for them. If you need more efficient metadata filtering, please specify the [scala index](https://milvus.io/docs/scalar_index.md).
+
+Alternatively, you can formally define the schema of the collection by following [this instruction](https://milvus.io/docs/schema.md).
+
+## Prepare Data
+
+In this guide, we use vectors to perform semantic search on text. We need to generate vectors for text by downloading embedding models.
+
+### Use embedding model to generate vectors for text
+
+For convenience, `pymilvus` contains a subpackage that integrates most commonly used embedding models, such as open-source `SentenceTransformer` models and OpenAI embedding API. Let's install the `pymilvus[model]` package.
+
+```
+pip install pymilvus[model]
+```
+
+We can generate vector embeddings with a default open-source model. Running the following code will automatically download this small model of about 50MB. We also need to compose the data object to be inserted. Milvus expects data to be inserted organized as a list of dictionaries, where each dictionary represents a data record, termed as an entity.
+
+```python
+from pymilvus import model
+
+# This will download a small embedding model "paraphrase-albert-small-v2" (~50MB).
+embedding_fn = model.DefaultEmbeddingFunction()
+
+# Text strings to search from.
+docs = [
+    "Artificial intelligence was founded as an academic discipline in 1956.",
+    "Alan Turing was the first person to conduct substantial research in AI.",
+    "Born in Maida Vale, London, Turing was raised in southern England.",
+]
+
+vectors = embedding_fn.encode_documents(docs)
+# The output vector has 768 dimensions, matching the collection that we just created.
+print("Dim:", embedding_fn.dim, vectors[0].shape)  # Dim: 768 (768,)
+
+# Each entity has id, vector representation, raw text, and a subject label that we use
+# to demo metadata filtering later.
+data = [ {"id": i, "vector": vectors[i], "text": docs[i], "subject": "history"} for i in range(len(vectors)) ]
+
+print("Data has", len(data), "entities, each with fields: ", data[0].keys())
+print("Vector dim:", len(data[0]["vector"]))
 ```
 
 <div class="alert note">
 
-<ul>
-
-<li>If you have enabled authentication on your Milvus instance, you should add <code>token</code> as a parameter when initiating MilvusClient and set the value to a colon-separated username and password. To authenticate using the default username and password, set <code>token</code> to <code>root:Milvus</code>. For information on how to enable authentication, refer to <a href="authenticate.md">Authenticate User Access</a>.</li>
-
-<li>If you have enabled TLS on your Milvus instance, you should provide certificate file paths when initiating MilvusClient. For information on how to enable TLS, refer to <a href="tls.md">Encryption in Transit</a>.</li>
-
-</ul>
-
-</div>
-
-## Create a Collection
-
-In Milvus, you need to store your vector embeddings in collections. All vector embeddings stored in a collection share the same dimensionality and distance metric for measuring similarity. You can create a collection in either of the following manners.
-
-### Quick setup
-
-To set up a collection in quick setup mode, you only need to set the collection name and the dimension of the vector field of the collection.
+The above code snippet requires downloading a small embedding model. If you prefer to use fake representation with random vectors, do as follows:
 
 ```python
-# 2. Create a collection in quick setup mode
-client.create_collection(
-    collection_name="quick_setup",
-    dimension=5
-)
-```
+import random
 
-In the above setup,
-
-- The primary and vector fields use their default names (__id__ and __vector__).
-
-- The metric type is also set to its default value (__COSINE__).
-
-- The primary field accepts integers and does not automatically increments.
-
-- A reserved JSON field named __$meta__ is used to store non-schema-defined fields and their values.
-
-<div class="admonition note">
-
-<p><b>notes</b></p>
-
-<p>Collections created using the RESTful API supports a minimum of 32-dimensional vector field.</p>
-
-</div>
-
-### Customized setup
-
-To define the collection schema by yourself, use the customized setup. In this manner, you can define the attributes of each field in the collection, including its name, data type, and extra attributes of a specific field.
-
-```python
-# 3. Create a collection in customized setup mode
-
-# 3.1. Create schema
-schema = MilvusClient.create_schema(
-    auto_id=False,
-    enable_dynamic_field=True,
-)
-
-# 3.2. Add fields to schema
-schema.add_field(field_name="my_id", datatype=DataType.INT64, is_primary=True)
-schema.add_field(field_name="my_vector", datatype=DataType.FLOAT_VECTOR, dim=5)
-
-# 3.3. Prepare index parameters
-index_params = client.prepare_index_params()
-
-# 3.4. Add indexes
-index_params.add_index(
-    field_name="my_id"
-)
-
-index_params.add_index(
-    field_name="my_vector", 
-    index_type="AUTOINDEX",
-    metric_type="IP"
-)
-
-# 3.5. Create a collection
-client.create_collection(
-    collection_name="customized_setup",
-    schema=schema,
-    index_params=index_params
-)
-```
-
-In the above setup, you have the flexibility to define various aspects of the collection during its creation, including its schema and index parameters.
-
-- __Schema__
-
-    The schema defines the structure of a collection. Except for adding pre-defined fields and setting their attributes as demonstrated above, you have the option of enabling and disabling
-
-  - __AutoID__
-
-        Whether to enable the collection to automatically increment the primary field.
-
-  - __Dynamic Field__
-
-        Whether to use the reserved JSON field __$meta__ to store non-schema-defined fields and their values.
-
-     For a detailed explanation of the schema, refer to [Schema](schema.md).
-
-- __Index parameters__
-
-    Index parameters dictate how Milvus organizes your data within a collection. You can assign specific indexes to fields by configuring their __metric types__ and __index types__.
-
-  - For the vector field, you can use __AUTOINDEX__ as the index type and use __COSINE__, __L2__, or __IP__ as the `metric_type`.
-
-  - For scalar fields, including the primary field, Milvus uses __TRIE__ for integers and __STL_SORT__ for strings.
-
-    For additional insights into index types, refer to [Index](index.md).
-
-<div class="admonition note">
-
-<p><b>notes</b></p>
-
-<p>The collection created in the preceding code snippets are automatically loaded. If you prefer not to create an automatically loaded collection, refer to <a href="https://milvus.io/docs/manage-collections.md">Manage Collections</a>.</p>
-<p>Collections created using the RESTful API are always automatically loaded.</p>
-
-</div>
-
-## Insert Data
-
-Collections created in either of the preceding ways have been indexed and loaded. Once you are ready, insert some example data.
-
-```python
-# 4. Insert data into the collection
-# 4.1. Prepare data
-data=[
-    {"id": 0, "vector": [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592], "color": "pink_8682"},
-    {"id": 1, "vector": [0.19886812562848388, 0.06023560599112088, 0.6976963061752597, 0.2614474506242501, 0.838729485096104], "color": "red_7025"},
-    {"id": 2, "vector": [0.43742130801983836, -0.5597502546264526, 0.6457887650909682, 0.7894058910881185, 0.20785793220625592], "color": "orange_6781"},
-    {"id": 3, "vector": [0.3172005263489739, 0.9719044792798428, -0.36981146090600725, -0.4860894583077995, 0.95791889146345], "color": "pink_9298"},
-    {"id": 4, "vector": [0.4452349528804562, -0.8757026943054742, 0.8220779437047674, 0.46406290649483184, 0.30337481143159106], "color": "red_4794"},
-    {"id": 5, "vector": [0.985825131989184, -0.8144651566660419, 0.6299267002202009, 0.1206906911183383, -0.1446277761879955], "color": "yellow_4222"},
-    {"id": 6, "vector": [0.8371977790571115, -0.015764369584852833, -0.31062937026679327, -0.562666951622192, -0.8984947637863987], "color": "red_9392"},
-    {"id": 7, "vector": [-0.33445148015177995, -0.2567135004164067, 0.8987539745369246, 0.9402995886420709, 0.5378064918413052], "color": "grey_8510"},
-    {"id": 8, "vector": [0.39524717779832685, 0.4000257286739164, -0.5890507376891594, -0.8650502298996872, -0.6140360785406336], "color": "white_9381"},
-    {"id": 9, "vector": [0.5718280481994695, 0.24070317428066512, -0.3737913482606834, -0.06726932177492717, -0.6980531615588608], "color": "purple_4976"}
+# Text strings to search from.
+docs = [
+    "Artificial intelligence was founded as an academic discipline in 1956.",
+    "Alan Turing was the first person to conduct substantial research in AI.",
+    "Born in Maida Vale, London, Turing was raised in southern England.",
 ]
 
-# 4.2. Insert data
+# Use fake representation with random vectors (768 dimension).
+vectors = [ [ random.uniform(-1, 1) for _ in range(768) ] for _ in docs ]
+data = [ {"id": i, "vector": vectors[i], "text": docs[i], "subject": "history"} for i in range(len(vectors)) ]
+
+print("Data has", len(data), "entities, each with fields: ", data[0].keys())
+print("Vector dim:", len(data[0]["vector"]))
+```
+
+</div>
+
+
+## Insert data
+
+Let's insert the data into the collection:
+
+```python
 res = client.insert(
-    collection_name="quick_setup",
+    collection_name="demo_collection",
     data=data
 )
 
 print(res)
 
 # Output
-#
-# {
-#     "insert_count": 10,
-#     "ids": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-# }
+# {'insert_count': 3, 'ids': [0, 1, 2], 'cost': 0}
 ```
 
-The provided code assumes that you have created a collection in the __Quick Setup__ manner. As shown in the above code,
+## Search search
 
-- The data to insert is organized into a list of dictionaries, where each dictionary represents a data record, termed as an entity.
+Now we can do semantic searches by representing the search query text as vector, and conduct vector similarity search on Milvus.
 
-- Each dictionary contains a non-schema-defined field named __color__.
+### Vector search
 
-- Each dictionary contains the keys corresponding to both pre-defined and dynamic fields.
-
-<div class="admonition note">
-
-<p><b>notes</b></p>
-
-<p>Collections created using RESTful API enabled AutoID, and therefore you need to skip the primary field in the data to insert.</p>
-
-</div>
-
-### Insert more data
-
-You can safely skip this section if you prefer to search with the inserted 10 entities later. To learn more about the search performance of  Milvus, you are advised use the following code snippet to add more randomly generated entities into the collection.
+Milvus accepts one or multiple vector search requests at the same time. The value of the **query_vectors** variable is a list of vectors, where each vector is an array of float numbers.
 
 ```python
-# 5. Insert more data into the collection
-# 5.1. Prepare data
+query_vectors = embedding_fn.encode_queries([ "Who is Alan Turing?" ])
+# If you don't have the embedding function you can use a fake vector to finish the demo:
+# query_vectors = [ [ random.uniform(-1, 1) for _ in range(768) ] ]
 
-colors = ["green", "blue", "yellow", "red", "black", "white", "purple", "pink", "orange", "brown", "grey"]
-data = [ {
-    "id": i, 
-    "vector": [ random.uniform(-1, 1) for _ in range(5) ], 
-    "color": f"{random.choice(colors)}_{str(random.randint(1000, 9999))}" 
-} for i in range(1000) ]
-
-# 5.2. Insert data
-res = client.insert(
-    collection_name="quick_setup",
-    data=data[10:]
-)
-
-print(res)
-
-# Output
-#
-# {
-#     "insert_count": 990
-# }
-```
-
-<div class="admonition note">
-
-<p><b>notes</b></p>
-
-<p>You can insert a maximum of 100 entities in a batch upon each call to the Insert RESTful API.</p>
-
-</div>
-
-## Similarity Search
-
-You can conduct similarity searches based on one or more vector embeddings.
-
-<div class="admonition note">
-
-<p><b>notes</b></p>
-
-<p>The insert operations are asynchronous, and conducting a search immediately after data insertions may result in empty result set. To avoid this, you are advised to wait for a few seconds.</p>
-
-</div>
-
-### Single-vector search
-
-The value of the __query_vectors__ variable is a list containing a sub-list of floats. The sub-list represents a vector embedding of 5 dimensions.
-
-```python
-# 6. Search with a single vector
-# 6.1. Prepare query vectors
-query_vectors = [
-    [0.041732933, 0.013779674, -0.027564144, -0.013061441, 0.009748648]
-]
-
-# 6.2. Start search
 res = client.search(
-    collection_name="quick_setup",     # target collection
+    collection_name="demo_collection", # target collection
     data=query_vectors,                # query vectors
-    limit=3,                           # number of returned entities
+    limit=2,                           # number of returned entities
+    output_fields=["text", "subject"], # specifies fields to be returned
 )
 
 print(res)
 
 # Output
-#
-# [
-#     [
-#         {
-#             "id": 548,
-#             "distance": 0.08589144051074982,
-#             "entity": {}
-#         },
-#         {
-#             "id": 736,
-#             "distance": 0.07866684347391129,
-#             "entity": {}
-#         },
-#         {
-#             "id": 928,
-#             "distance": 0.07650312781333923,
-#             "entity": {}
-#         }
-#     ]
-# ]
-
+# data: ["[{'id': 2, 'distance': 0.5859944820404053, 'entity': {'text': 'Born in Maida Vale, London, Turing was raised in southern England.', 'subject': 'history'}}, {'id': 1, 'distance': 0.5118255019187927, 'entity': {'text': 'Alan Turing was the first person to conduct substantial research in AI.', 'subject': 'history'}}]"] , extra_info: {'cost': 0}
 ```
 
-The output is a list containing a sub-list of three dictionaries, representing the returned entities with their IDs and distances.
+The output is a list of results, each mapping to a vector search query. Each query contains a list of results, where each result contains the entity primary key, the distance to the query vector, and the entity details with specified `output_fields`.
 
-### Bulk-vector search
+### Vector Search with Metadata Filtering
 
-You can also include multiple vector embeddings in the __query_vectors__ variable to conduct a batch similarity search.
+You can also conduct vector search while considering the values of the metadata (called "scalar" fields in Milvus, as scalar refers to non-vector data). This is done with a filter expression specifying certain criteria. Let's see how to search and filter with the `subject` field in the following example.
 
 ```python
-# 7. Search with multiple vectors
-# 7.1. Prepare query vectors
-query_vectors = [
-    [0.041732933, 0.013779674, -0.027564144, -0.013061441, 0.009748648],
-    [0.0039737443, 0.003020432, -0.0006188639, 0.03913546, -0.00089768134]
+# Insert more docs in another subject.
+docs = [
+    "Machine learning has been used for drug design.",
+    "Computational synthesis with AI algorithms predicts molecular properties.",
+    "DDR1 is involved in cancers and fibrosis.",
 ]
+vectors = embedding_fn.encode_documents(docs)
+data = [ {"id": 2+i, "vector": vectors[i], "text": docs[i], "subject": "biology"} for i in range(len(vectors)) ]
 
-# 7.2. Start search
+client.insert(
+    collection_name="demo_collection",
+    data=data
+)
+
+# This will exclude any text in "history" subject despite close to the query vector.
 res = client.search(
-    collection_name="quick_setup",
-    data=query_vectors,
-    limit=3,
+    collection_name="demo_collection",
+    data=embedding_fn.encode_queries([ "tell me AI related information" ]),
+    filter="subject == 'biology'",
+    limit=2,
+    output_fields=["text", "subject"],
 )
 
 print(res)
@@ -337,311 +193,111 @@ print(res)
 # [
 #     [
 #         {
-#             "id": 548,
-#             "distance": 0.08589144051074982,
+#             "id": 551,
+#             "distance": 0.08821295201778412,
 #             "entity": {}
 #         },
 #         {
-#             "id": 736,
-#             "distance": 0.07866684347391129,
+#             "id": 760,
+#             "distance": 0.07432225346565247,
 #             "entity": {}
 #         },
-#         {
-#             "id": 928,
-#             "distance": 0.07650312781333923,
-#             "entity": {}
-#         }
-#     ],
-#     [
-#         {
-#             "id": 532,
-#             "distance": 0.044551681727170944,
-#             "entity": {}
-#         },
-#         {
-#             "id": 149,
-#             "distance": 0.044386886060237885,
-#             "entity": {}
-#         },
-#         {
-#             "id": 271,
-#             "distance": 0.0442606583237648,
-#             "entity": {}
-#         }
 #     ]
 # ]
-
 ```
 
-The output should be a list of two sub-lists, each of which contains three dictionaries, representing the returned entities with their IDs and distances.
+By default, the scalar fields are not indexed. If you need to perform metadata filtered search in large dataset, you can consider using fixed schema and also turn on the [index](https://milvus.io/docs/scalar_index.md) to improve the search performance. 
 
-### Filtered searches
+In addition to vector search, you can also perform other types of searches:
 
-- __With schema-defined fields__
+### Query
 
-    You can also enhance the search result by including a filter and specifying certain output fields in the search request.
+A query() is an operation that retrieves all entities matching a cretria, such as a [filter expression](https://milvus.io/docs/boolean.md) or matching some ids.
 
-    ```python
-    # 8. Search with a filter expression using schema-defined fields
-    # 1 Prepare query vectors
-    query_vectors = [
-        [0.041732933, 0.013779674, -0.027564144, -0.013061441, 0.009748648]
-    ]
-    
-    # 2. Start search
-    res = client.search(
-        collection_name="quick_setup",
-        data=query_vectors,
-        filter="500 < id < 800",
-        limit=3
-    )
-    
-    print(res)
-    
-    # Output
-    #
-    # [
-    #     [
-    #         {
-    #             "id": 548,
-    #             "distance": 0.08589144051074982,
-    #             "entity": {}
-    #         },
-    #         {
-    #             "id": 736,
-    #             "distance": 0.07866684347391129,
-    #             "entity": {}
-    #         },
-    #         {
-    #             "id": 505,
-    #             "distance": 0.0749310627579689,
-    #             "entity": {}
-    #         }
-    #     ]
-    # ]
-    ```
-
-    The output should be a list containing a sub-list of three dictionaries, each representing a searched entity with its ID, distance, and the specified output fields.
-
-- __With non-schema-defined fields__
-
-    You can also include dynamic fields in a filter expression. In the following code snippet, `color` is a non-schema-defined field. You can include them either as keys in the magic `$meta` field, such as `$meta["color"]`, or directly use it like a schema-defined field, such as `color`.
-
-    ```python
-    # 9. Search with a filter expression using custom fields
-    # 9.1.Prepare query vectors
-    query_vectors = [
-        [0.041732933, 0.013779674, -0.027564144, -0.013061441, 0.009748648]
-    ]
-    
-    # 9.2.Start search
-    res = client.search(
-        collection_name="quick_setup",
-        data=query_vectors,
-        filter='$meta["color"] like "red%"',
-        limit=3,
-        output_fields=["color"]
-    )
-    
-    print(res)
-    
-    # Output
-    #
-    # [
-    #     [
-    #         {
-    #             "id": 240,
-    #             "distance": 0.0694073885679245,
-    #             "entity": {
-    #                 "color": "red_8667"
-    #             }
-    #         },
-    #         {
-    #             "id": 581,
-    #             "distance": 0.059804242104291916,
-    #             "entity": {
-    #                 "color": "red_1786"
-    #             }
-    #         },
-    #         {
-    #             "id": 372,
-    #             "distance": 0.049707964062690735,
-    #             "entity": {
-    #                 "color": "red_2186"
-    #             }
-    #         }
-    #     ]
-    # ]
-    
-    ```
-
-## Scalar Query
-
-Unlike a vector similarity search, a query retrieves vectors via scalar filtering based on [filter expressions](https://milvus.io/docs/boolean.md).
-
-- __With filter using schema-defined fields__
-
-    ```python
-    # 10. Query with a filter expression using a schema-defined field
-    res = client.query(
-        collection_name="quick_setup",
-        filter="10 < id < 15",
-        output_fields=["color"]
-    )
-    
-    print(res)
-    
-    # Output
-    #
-    # [
-    #     {
-    #         "color": "green_7413",
-    #         "id": 11
-    #     },
-    #     {
-    #         "color": "orange_1417",
-    #         "id": 12
-    #     },
-    #     {
-    #         "color": "orange_6143",
-    #         "id": 13
-    #     },
-    #     {
-    #         "color": "white_4084",
-    #         "id": 14
-    #     }
-    # ]
-    
-    ```
-
-## Get Entities
-
-If you know the IDs of the entities to retrieve, you can get entities by their IDs as follows:
+For example, retrieving all entities whose scalar field has a particular value:
 
 ```python
-# 12. Get entities by IDs
-res = client.get(
-    collection_name="quick_setup",
-    ids=[1,2,3],
-    output_fields=["color", "vector"]
+res = client.query(
+    collection_name="demo_collection",
+    filter="subject == 'history'",
+    output_fields=["text", "subject"],
+)
+```
+
+Directly retrieve entities by primary key:
+
+```python
+res = client.query(
+    collection_name="demo_collection",
+    ids=[0,2],
+    output_fields=["vector", "text", "subject"]
+)
+```
+
+### Delete entities
+
+If you'd like to purge data, you can delete entities specifying the primary key or delete all entities matching a particular filter expression.
+
+```python
+# Delete entities by primary key
+res = client.delete(
+    collection_name="demo_collection",
+    ids=[0,2]
 )
 
 print(res)
 
 # Output
 #
-# [
-#     {
-#         "id": 1,
-#         "color": "red_7025",
-#         "vector": [
-#             0.19886813,
-#             0.060235605,
-#             0.6976963,
-#             0.26144746,
-#             0.8387295
-#         ]
-#     },
-#     {
-#         "id": 2,
-#         "color": "orange_6781",
-#         "vector": [
-#             0.43742132,
-#             -0.55975026,
-#             0.6457888,
-#             0.7894059,
-#             0.20785794
-#         ]
-#     },
-#     {
-#         "id": 3,
-#         "color": "pink_9298",
-#         "vector": [
-#             0.3172005,
-#             0.97190446,
-#             -0.36981148,
-#             -0.48608947,
-#             0.9579189
-#         ]
-#     }
-# ]
+# {
+#     "delete_count": 2
+# }
+
+# Delete entities by a filter expression
+res = client.delete(
+    collection_name="demo_collection",
+    filter="subject == 'biology'",
+)
+
+print(res)
+
+# Output
+#
+# {
+#     "delete_count": 3
+# }
 ```
 
-<div class="admonition note">
+## Load Existing Data
 
-<p><b>notes</b></p>
+Since all data of Milvus Lite is stored in a local file, you can load all data into memory even after the program terminates, by creating a **MilvusClient** with the existing file. For example, this will recover the collections from `"milvus_demo.db"` file and continue to write data into it.
 
-<p>Currently, the RESTful API does not provide a get endpoint.</p>
+```python
+from pymilvus import MilvusClient
 
-</div>
-
-## Delete Entities
-
-Milvus allows deleting entities by IDs and by filters.
-
-- __Delete entities by IDs.__
-
-    ```python
-    # 13. Delete entities by IDs
-    res = client.delete(
-        collection_name="quick_setup",
-        ids=[0,1,2,3,4]
-    )
-    
-    print(res)
-    
-    # Output
-    #
-    # {
-    #     "delete_count": 5
-    # }
-    ```
-
-- __Delete entities by filter__
-
-    ```python
-    # 14. Delete entities by a filter expression
-    res = client.delete(
-        collection_name="quick_setup",
-        filter="id in [5,6,7,8,9]"
-    )
-    
-    print(res)
-    
-    # Output
-    #
-    # {
-    #     "delete_count": 5
-    # }
-    ```
-
-    <div class="admonition note">
-
-    <p><b>notes</b></p>
-
-    <p>Currently, the delete endpoint of the RESTful API does not support filters.</p>
-
-    </div>
+client = MilvusClient("milvus_demo.db")
+```
 
 ## Drop the collection
 
-The Starter plan allows up to two collections in the serverless cluster. Once you have done this guide, you can drop the collection as follows:
+If you would like to delete all the data in a collection, you can drop the collection with
 
 ```python
 # 15. Drop collection
 client.drop_collection(
-    collection_name="quick_setup"
-)
-
-client.drop_collection(
-    collection_name="customized_setup"
+    collection_name="demo_collection"
 )
 ```
 
-## Recaps
+## Learn more
 
-- There are two ways to create a collection. The first is the quick setup, which only requires you to provide a name and the dimension of the vector field. The second is the customized setup, which allows you to customize almost every aspect of the collection.
+Milvus Lite is great for getting started with a local python program. If you have large scale data or would like to use Milvus in production, you can learn about deploying Milvus on [Docker](install_standalone-docker.md) and [Kubenetes](install_cluster-milvusoperator.md). All deployment modes of Milvus share the same API, so your client side code doesn't need to change much if moving to another deployment mode. Simply specify the [URI and Token](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md) of a Milvus server deployed anywhere:
 
-- The data insertion process may take some time to complete. It is recommended to wait a few seconds after inserting data and before conducting similarity searches.
+```python
+client = MilvusClient(
+    uri="http://localhost:19530",
+    token="root:Milvus"
+)
+```
 
-- Filter expressions can be used in both search and query requests. However, they are mandatory for query requests.
+Milvus provides REST and gRPC API, with client libraries in languages such as [Python](https://milvus.io/docs/install-pymilvus.md), [Java](https://milvus.io/docs/install-java.md), [Go](https://milvus.io/docs/install-go.md), C# and [Node.js](https://milvus.io/docs/install-node.md).

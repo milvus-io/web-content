@@ -3,12 +3,12 @@ id: prerequisite-helm.md
 label: Install on Kubernetes
 related_key: Kubernetes
 summary: Learn the necessary preparations before installing Milvus with Helm.
-title: Environment Checklist for Milvus on Kubernetes
+title: Requirements
 ---
 
-# Environment Checklist for Milvus on Kubernetes
+# Requirements
 
-Before you install Milvus, check your hardware and software to see if they meet the requirements.
+This page lists the hardware and software requirements to get Milvus up and running.
 
 ## Hardware requirements
 
@@ -50,10 +50,40 @@ fio --rw=write --ioengine=sync --fdatasync=1 --directory=test-data --size=2200m 
 
 Ideally, your disk should reach over 500  IOPS and below 10ms for the 99th percentile fsync latency. Read the etcd [Docs](https://etcd.io/docs/v3.5/op-guide/hardware/#disks) for more detailed requirements.
 
+## FAQs
+
+### How can I start a K8s cluster locally for test purposes?
+
+You can use tools like [minikube](https://minikube.sigs.k8s.io/docs/), [kind](https://kind.sigs.k8s.io/), and [Kubeadm](https://kubernetes.io/docs/reference/setup-tools/kubeadm/), to quickly set up a Kubernetes cluster locally. The following procedure uses minikube as an example.
+
+1. Download minikube
+
+  Go to the [Get Started](https://minikube.sigs.k8s.io/docs/start/) page, check whether you have met the conditions listed in the **What you'll need** section, click on the buttons that describe your target platform, and copy the commands to download and install the binary. 
+
+2. Start a K8s cluster using minikube
+
+  ```shell
+  $ minikube start
+  ```
+
+3. Check the status of the K8s cluster
+
+  You can check the status of the K8s cluster installed using the following command.
+
+  ```shell
+  $ kubectl cluster-info
+  ```
+
+<div class="alert note">
+
+Ensure that you can access the K8s cluster via `kubectl`. If you have not installed `kubectl` locally, see [Use kubectl inside minikube](https://minikube.sigs.k8s.io/docs/handbook/kubectl/).
+
+</div>
+
 ## What's next
 
 - If your hardware and software meet the requirements, you can:
-  - [Install Milvus standalone on Kubernetes](install_standalone-helm.md)
-  - [Install Milvus cluster on Kubernetes](install_cluster-helm.md)
+  - [Run Milvus in Kubernets with Milvus Operator](install_cluster-milvusoperator.md)
+  - [Run Milvus in Kubernetes with Helm](install_cluster-helm.md)
 
 - See [System Configuration](system_configuration.md) for parameters you can set while installing Milvus.

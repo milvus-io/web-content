@@ -1,14 +1,14 @@
 ---
 id: prerequisite-docker.md
-label: Install with Docker Compose
+label: Docker requirements
 related_key: Docker
 summary: Learn the necessary preparations before installing Milvus with Docker Compose.
-title: Environment Checklist for Milvus with Docker Compose
+title: Requirements
 ---
 
-# Environment Checklist for Milvus with Docker Compose
+# Requirements
 
-Before you install Milvus, check your hardware and software to see if they meet the requirements.
+Before installing a Milvus instance, check your hardware and software to see if they meet the requirements.
 
 ## Hardware requirements
 
@@ -48,7 +48,7 @@ Ideally, your disk should reach over 500  IOPS and below 10ms for the 99th perce
 
 ## What's next
 
-- If your hardware and software meet the requirements, you can:
-  - [Install Milvus standalone with Docker Compose](install_standalone-docker.md)
+If your hardware and software meet the above requirements, you can 
 
-- See [System Configuration](system_configuration.md) for parameters you can set while installing Milvus.
+- [Run Milvus in Docker](install_standalone-docker.md)
+- [Run Milvus with Docker Compose](install_standalone-docker-compose.md)

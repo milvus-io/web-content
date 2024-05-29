@@ -8,7 +8,7 @@ summary: Learn how to install Milvus standalone on Kubernetes.
 title: Install Milvus Standalone with Kubernetes
 ---
 
-<div class="tab-wrapper"><a href="install_standalone-docker.md" class=''>Docker</a><a href="install_standalone-operator.md" class=''>Milvus Operator</a><a href="install_standalone-helm.md" class='active '>Helm</a><a href="install_standalone-aptyum.md" class=''>DEB/RPM</a><a href="install_standalone-docker-compose.md" class=''>Docker Compose</a></div>
+<div class="tab-wrapper"><a href="install_standalone-operator.md" class=''>Milvus Operator</a><a href="install_standalone-helm.md" class='active '>Helm</a><a href="install_standalone-aptyum.md" class=''>DEB/RPM</a></div>
 
 # Install Milvus Standalone with Kubernetes
 

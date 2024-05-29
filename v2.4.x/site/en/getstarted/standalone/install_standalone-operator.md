@@ -7,7 +7,7 @@ summary: Learn how to install Milvus stanalone with Milvus Operator.
 title: Install Milvus Standalone with Milvus Operator
 ---
 
-<div class="tab-wrapper"><a href="install_standalone-docker.md" class=''>Docker</a><a href="install_standalone-operator.md" class='active '>Milvus Operator</a><a href="install_standalone-helm.md" class=''>Helm</a><a href="install_standalone-aptyum.md" class=''>DEB/RPM</a><a href="install_standalone-docker-compose.md" class=''>Docker Compose</a></div>
+<div class="tab-wrapper"><a href="install_standalone-operator.md" class='active '>Milvus Operator</a><a href="install_standalone-helm.md" class=''>Helm</a><a href="install_standalone-aptyum.md" class=''>DEB/RPM</a></div>
 
 # Install Milvus Standalone with Milvus Operator
 
