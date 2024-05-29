@@ -1,15 +1,15 @@
 ---
 id: multi-vector-search.md
 order: 2
-summary: This guide demonstrates how to perform multi-vector search in Milvus and understand the reranking of results.
-title: Multi-Vector Search
+summary: This guide demonstrates how to perform hybrid search in Milvus and understand the reranking of results.
+title: Hybrid Search
 ---
 
-# Multi-Vector Search
+# Hybrid Search
 
 Since Milvus 2.4, we introduced multi-vector support and a hybrid search framework, which means users can bring in several vector fields (up to 10) into a single collection. Different vector fields can represent different aspects, different embedding models or even different modalities of data characterizing the same entity, which greatly expands the richness of information. This feature is particularly useful in comprehensive search scenarios, such as identifying the most similar person in a vector library based on various attributes like pictures, voice, fingerprints, etc.
 
-A multi-vector search enables executing search requests over various vector fields and combines the results using reranking strategies, such as Reciprocal Rank Fusion (RRF) and Weighted Scoring. To learn more about reranking strategies, refer to [Reranking](reranking.md).
+A hybrid search enables executing search requests over various vector fields and combines the results using reranking strategies, such as Reciprocal Rank Fusion (RRF) and Weighted Scoring. To learn more about reranking strategies, refer to [Reranking](reranking.md).
 
 In this tutorial, you will learn how to:
 
@@ -17,7 +17,7 @@ In this tutorial, you will learn how to:
 
 - Configure a reranking strategy to combine and rerank search results from multiple `AnnSearchRequest` instances;
 
-- Use the [`hybrid_search()`](https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/hybrid_search.md) method to perform a multi-vector search.
+- Use the [`hybrid_search()`](https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/hybrid_search.md) method to perform a hybrid search.
 
 <div class="alert note">
 
@@ -27,7 +27,7 @@ The code snippets on this page use the [PyMilvus ORM module](https://milvus.io/a
 
 ## Preparations
 
-Before starting a multi-vector search, ensure you have a collection with multiple vector fields.
+Before starting a hybrid search, ensure you have a collection with multiple vector fields.
 
 Below is an example of creating a collection named `test_collection` with two vector fields, `filmVector` and `posterVector`, and inserting random entities into it.
 
@@ -179,10 +179,10 @@ After creating `AnnSearchRequest` instances, configure a reranking strategy to c
 
 ## Step 3: Perform a Hybrid Search
 
-With the `AnnSearchRequest` instances and reranking strategy set, use the `hybrid_search()` method to perform the multi-vector search.
+With the `AnnSearchRequest` instances and reranking strategy set, use the `hybrid_search()` method to perform the hybrid search.
 
 ```python
-# Before conducting multi-vector search, load the collection into memory.
+# Before conducting hybrid search, load the collection into memory.
 collection.load()
 
 res = collection.hybrid_search(
@@ -226,9 +226,9 @@ The output is similar to the following:
 
 ## FAQ
 
-- **In which scenario is multi-vector search recommended?**
+- **In which scenario is hybrid search recommended?**
 
-    Multi-vector search is ideal for complex situations demanding high accuracy, especially when an entity can be represented by multiple, diverse vectors. This applies to cases where the same data, such as a sentence, is processed through different embedding models or when multimodal information (like images, fingerprints, and voiceprints of an individual) is converted into various vector formats. By assigning weights to these vectors, their combined influence can significantly enrich recall and improve the effectiveness of search results.
+    Hybrid search is ideal for complex situations demanding high accuracy, especially when an entity can be represented by multiple, diverse vectors. This applies to cases where the same data, such as a sentence, is processed through different embedding models or when multimodal information (like images, fingerprints, and voiceprints of an individual) is converted into various vector formats. By assigning weights to these vectors, their combined influence can significantly enrich recall and improve the effectiveness of search results.
 
 - **How does a weighted ranker normalize distances between different vector fields?**
 
