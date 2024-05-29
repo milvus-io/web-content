@@ -219,7 +219,7 @@ Possible responses for the above requests are similar to the following:
         "partitionsNum": "integer",
         "ttlSeconds": "integer"
     }
-}
+}'
 ```
 
 | Parameter        | Description                                                                               |
