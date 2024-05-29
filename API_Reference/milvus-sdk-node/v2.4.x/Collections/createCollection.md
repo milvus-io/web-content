@@ -16,19 +16,19 @@ Using this request body, you can create a collection by simply setting the colle
 
 ```javascript
 milvusClient.createCollection({
-    collection_name: *string*;
-    dimension: *number*;
-    auto_id?: *boolean*;
-    consistency_level?: *"Strong"* | *"Session"* | *"Bounded"* | *"Eventually"* | *"Customized"*;
-    description?: *string*;
-    enableDynamicField?: *boolean*;
-    enable_dynamic_field?: *boolean*;
-    id_type?: [*Int64*](http://localhost:5500/docs/enums/DataType.html#Int64) | [*VarChar*](http://localhost:5500/docs/enums/DataType.html#VarChar);
-    index_params?: [*CreateIndexParam*](http://localhost:5500/docs/interfaces/CreateIndexParam.html);
-    metric_type?: *string*;
-    primary_field_name?: *string*;
-    vector_field_name?: *string*;
-    timeout?: *number*;
+    collection_name: string;
+    dimension: number;
+    auto_id?: boolean;
+    consistency_level?: "Strong" | "Session" | "Bounded" | "Eventually" | "Customized";
+    description?: string;
+    enableDynamicField?: boolean;
+    enable_dynamic_field?: boolean;
+    id_type?: Int64 | VarChar;
+    index_params?: CreateIndexParam;
+    metric_type?: string;
+    primary_field_name?: string;
+    vector_field_name?: string;
+    timeout?: number;
  })
 ```
 
@@ -167,7 +167,7 @@ milvusClient.createCollection({
 
     - **data_type** (*string)* -
 
-        The data type of the field. For an enumeration of all available data types, please see [DataType](./Collections-DataType).
+        The data type of the field. For an enumeration of all available data types, please see [DataType](DataType.md).
 
     - **description** (*string)* -
 
@@ -290,11 +290,11 @@ milvusClient.createCollection({
    timeout?: number,
    index_params: [
      {
-       field_name: *string,*
-       index_name?: *string,*
-       index_type: *string,*
-       metric_type?: *string,*
-       params?: *keyValueObj*
+       field_name: string,
+       index_name?: string,
+       index_type: string,
+       metric_type?: string,
+       params?: keyValueObj
      }     
    ]
  })
@@ -342,7 +342,7 @@ milvusClient.createCollection({
 
     - **data_type** (*string)* -
 
-        The data type of the field. For an enumeration of all available data types, please see [DataType](./Collections-DataType).
+        The data type of the field. For an enumeration of all available data types, please see [DataType](DataType.md).
 
     - **description** (*string)* -
 

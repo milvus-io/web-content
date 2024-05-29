@@ -12,7 +12,7 @@ query(data): Promise<ResStatus>
  milvusClient.query({
    collection_name: string,
    consistency_level?: ConsistencyLevelEnum,
-   filter: *string,*
+   filter: string,
    ids?: string[] | number[],
    limit?: number,
    offset?: number,

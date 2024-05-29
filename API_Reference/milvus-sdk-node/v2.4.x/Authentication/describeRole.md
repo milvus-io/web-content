@@ -40,8 +40,8 @@ This method returns a promise that resolves to a **SelectRoleResponse** object.
 
 ```javascript
 {
-    results: *RoleResult[]*,
-    status:  *ResStatus*
+    results: RoleResult[],
+    status:  ResStatus
 }
 ```
 

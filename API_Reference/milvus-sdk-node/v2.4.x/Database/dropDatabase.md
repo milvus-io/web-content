@@ -1,37 +1,35 @@
-# dropAlias()
+# dropDatabase()
 
-This operation drops a specified collection alias. 
+This operation drops a database.
 
 ```javascript
-dropAlias(data): Promise<ResStatus>
+dropDatabase(data?): Promise<ResStatus>
 ```
 
 ## Request Syntax
 
 ```javascript
-milvusClient.dropAlias({
-   alias: string,
-   timeout?: number
- })
+milvusClient.dropDatabase({
+    db_name: string,
+    timeout?: number
+})
 ```
 
 **PARAMETERS:**
 
-- **alias** (*string*) -
+- **db_name** (*string*) -
 
-    **[REQUIRED]**
+    The name of the database to create.
 
-    The alias of a collection. 
+    There should be a database that has the specified name. Otherwise, exceptions will occur.
 
-    Before this operation, ensure that the alias exists. Otherwise, exceptions will occur.
-
-- **timeout** (*number*)  
+- **timeout** (*number*) -
 
     The timeout duration for this operation. 
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise\<ResStatus>*
+**RETURNS** *Promise |\<ResStatus>*
 
 This method returns a promise that resolves to a **ResStatus** object.
 
@@ -59,11 +57,8 @@ This method returns a promise that resolves to a **ResStatus** object.
 
 ## Example
 
-```java
+```javascript
 const milvusClient = new milvusClient(MILUVS_ADDRESS);
-const resStatus = await milvusClient.dropAlias({
-   alias: 'my_collection_alias',
-   collection_name: 'my_collection',
-});
+const resStatus = await milvusClient.dropDatabase({ db_name: 'db_to_drop' });
 ```
 

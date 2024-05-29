@@ -152,6 +152,3 @@ This method returns a Milvus Client instance that extends GRPC Client and handle
 new MilvusClient(config: ClientConfig)
 ```
 
-## Class members
-
-Refer to [MilvusClient](./undefined) for a categorized list of class members.

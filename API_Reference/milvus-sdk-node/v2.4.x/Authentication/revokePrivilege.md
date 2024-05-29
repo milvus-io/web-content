@@ -47,11 +47,24 @@ milvusClient.revokePrivilege({
 
     The name of the privilege to assign. You can use any value in the **Enumeration Members** column of the following table.
 
-    |  Privilege Types           |  Enumeration Members                                                                                                                                                                                                                                                                                                                                                                         |
-    | -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-    |  GlobalPrivileges<br/>  |  All, CreatAlias, CreateCollection, CreateDatabase, CreateOwnership, CreateResourceGroup, DescribeAlias, DescribeCollection, DescribeResourceGroup, DropAlias, DropCollection, DropDatabase, DropOwnership, DropResourceGroup, FlushAll, ListAliases, ListDatabases, ListResourceGroups, ManageOwnership, RenameCollection, SelectOwnership, ShowCollections, TransferNode, TransferReplica. |
-    |  CollectionPrivileges      |  Compaction, CreateIndex, CreatePartition, Delete, DropIndex, Drop Partition, Flush, GetFlushState, GetLoadState, GetLoadingProgress, GetStatistics, HasPartition, Import, IndexDetails, Insert, Load, LoadBalance, Query, Release, Search, ShowPartitions, Upsert                                                                                                                           |
-    |  UserPrivileges            |  SelectUser, UpdateUser                                                                                                                                                                                                                                                                                                                                                                      |
+    <table>
+       <tr>
+         <th><p>Privilege Types</p></th>
+         <th><p>Enumeration Members</p></th>
+       </tr>
+       <tr>
+         <td><p>GlobalPrivileges<br/></p></td>
+         <td><p>All, CreatAlias, CreateCollection, CreateDatabase, CreateOwnership, CreateResourceGroup, DescribeAlias, DescribeCollection, DescribeResourceGroup, DropAlias, DropCollection, DropDatabase, DropOwnership, DropResourceGroup, FlushAll, ListAliases, ListDatabases, ListResourceGroups, ManageOwnership, RenameCollection, SelectOwnership, ShowCollections, TransferNode, TransferReplica.</p></td>
+       </tr>
+       <tr>
+         <td><p>CollectionPrivileges</p></td>
+         <td><p>Compaction, CreateIndex, CreatePartition, Delete, DropIndex, Drop Partition, Flush, GetFlushState, GetLoadState, GetLoadingProgress, GetStatistics, HasPartition, Import, IndexDetails, Insert, Load, LoadBalance, Query, Release, Search, ShowPartitions, Upsert</p></td>
+       </tr>
+       <tr>
+         <td><p>UserPrivileges</p></td>
+         <td><p>SelectUser, UpdateUser</p></td>
+       </tr>
+    </table>
 
     For details, refer to the **Privilege name** column in the table on page [Users and Roles](https://milvus.io/docs/users_and_roles.md).
 

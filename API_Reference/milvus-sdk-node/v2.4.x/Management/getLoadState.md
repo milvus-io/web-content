@@ -38,7 +38,7 @@ This method returns a promise that resolves to a GetLoadStateResponse object.
 
 ```javascript
 {
-    state: LoadState*,*
+    state: LoadState,
     status: object
 }
 ```
