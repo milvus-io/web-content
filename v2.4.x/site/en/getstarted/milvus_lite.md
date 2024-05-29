@@ -40,7 +40,7 @@ You can connect to Milvus Lite as follows.
 ```python
 from pymilvus import MilvusClient
 
-client = MilvusClient("milvus_dem
+client = MilvusClient("milvus_demo.db")
 ```
 
 
