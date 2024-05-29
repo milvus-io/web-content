@@ -243,6 +243,8 @@ while True:
     if not result:
         iterator.close()
         break
+        
+    results.extend(result)
     
     for hit in result:
         results.append(hit.to_dict())
@@ -326,8 +328,8 @@ System.out.println(results.size());
 ```python
 # 6. Query with iterator
 iterator = collection.query_iterator(
-    batch_size=10,
-    expr="color_tag like \"brown_8%\"",
+    batch_size=10, # Controls the size of the return each time you call next()
+    expr="color_tag like \"brown_8\"",
     output_fields=["color_tag"]
 )
 
@@ -338,15 +340,11 @@ while True:
     if not result:
         iterator.close()
         break
-
-    results += result
-
-# 7. Check the results
-print(f"There are {len(results)} entities found. The first 3 are as follows:")
-
-# Output
-#
-# There are 99 entities found. The first 3 are as follows:
+        
+    results.extend(result)
+    
+# 8. Check the search results
+print(len(results))
 
 print(results[:3])
 
