@@ -14,7 +14,7 @@ Current version of Milvus supports SDKs in Python, Node.js, GO, and Java.
 
 ## Requirement
 
-GO (1.15 or later) is required.
+GO (1.17 or later) is required.
 
 ## Install Milvus GO SDK
 
