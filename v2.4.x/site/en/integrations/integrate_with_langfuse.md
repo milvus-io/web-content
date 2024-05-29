@@ -10,7 +10,7 @@ title: Cookbook LlamaIndex & Milvus Integration
   <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
 
-This is a simple cookbook that demonstrates how to use the [LlamaIndex Langfuse integration](https://langfuse.com/docs/integrations/llama-index/get-started). It uses Milvus Lite to store the documents and Query.
+This is a simple cookbook that demonstrates how to use the [LlamaIndex Langfuse integration](https://langfuse.com/docs/integrations/llama-index/get-started). It uses Milvus Lite to store the documents and Query. 
 
 [Milvus Lite](https://github.com/milvus-io/milvus-lite/) is the lightweight version of Milvus, an open-source vector database that powers AI applications with vector embeddings and similarity search.
 
