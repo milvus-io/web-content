@@ -7,6 +7,123 @@ title: Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.4.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.4.3
+
+Release date: May 29, 2024
+
+| Milvus version | Python SDK version | Java SDK version    | Node.js SDK version |
+|----------------|--------------------| --------------------| --------------------|
+| 2.4.3          | 2.4.3              | 2.4.1               | 2.4.2               |
+
+Milvus version 2.4.3 introduced a host of features, improvements, and bug fixes to elevate performance and reliability. Notable enhancements included support for sparse float vector bulk insert and optimized bloom filter acceleration. Improvements covered various areas, from dynamic configuration updates to memory usage optimization. Bug fixes addressed critical issues like panic scenarios and ensured smoother system operations. This release underscored Milvus's ongoing commitment to enhancing functionality, optimizing performance, and delivering a robust user experience.
+
+## Features
+
+- Supported sparse float vector bulk insert for binlog/json/parquet ([#32649](https://github.com/milvus-io/milvus/pull/32649))
+
+## Improvements
+
+- Implemented Datacoord/node watch channel based on RPC ([#32036](https://github.com/milvus-io/milvus/pull/32036))
+- Optimized bloom filter to accelerate delete filtering ([#32642](https://github.com/milvus-io/milvus/pull/32642), [#33329](https://github.com/milvus-io/milvus/pull/33329), [#33284](https://github.com/milvus-io/milvus/pull/33284))
+- Loaded raw data via mmap if scalar index did not have raw data ([#33317](https://github.com/milvus-io/milvus/pull/33317))
+- Synced milvus config to milvus.yaml ([#33322](https://github.com/milvus-io/milvus/pull/33322), [#32920](https://github.com/milvus-io/milvus/pull/32920), [#32857](https://github.com/milvus-io/milvus/pull/32857), [#32946](https://github.com/milvus-io/milvus/pull/32946))
+- Updated knowhere version ([#33310](https://github.com/milvus-io/milvus/pull/33310), [#32931](https://github.com/milvus-io/milvus/pull/32931), [#33043](https://github.com/milvus-io/milvus/pull/33043))
+- Enabled dynamic updating of balancer policy in QueryCoord ([#33272](https://github.com/milvus-io/milvus/pull/33272))
+- Used a pre-built logger in the write buffer to minimize logger allocation ([#33304](https://github.com/milvus-io/milvus/pull/33304))
+- Improved parameter checking ([#32777](https://github.com/milvus-io/milvus/pull/32777), [#33271](https://github.com/milvus-io/milvus/pull/33271), [#33218](https://github.com/milvus-io/milvus/pull/33218))
+- Added a parameter to ignore incorrect message IDs in the checkpoint ([#33249](https://github.com/milvus-io/milvus/pull/33249))
+- Added config to control initialization failure handling for plugins ([#32680](https://github.com/milvus-io/milvus/pull/32680))
+- Added score compute consistency config for knowhere ([#32997](https://github.com/milvus-io/milvus/pull/32997))
+- Introduced a configuration option to control the initialization of public role permissions ([#33174](https://github.com/milvus-io/milvus/pull/33174))
+- Optimized memory usage when reading fields ([#33196](https://github.com/milvus-io/milvus/pull/33196))
+- Refined implementation of Channel Manager v2 ([#33172](https://github.com/milvus-io/milvus/pull/33172), [#33121](https://github.com/milvus-io/milvus/pull/33121), [#33014](https://github.com/milvus-io/milvus/pull/33014))
+- Added feature to track the size of data in memory for binlog ([#33025](https://github.com/milvus-io/milvus/pull/33025))
+- Added metrics for segment index files size ([#32979](https://github.com/milvus-io/milvus/pull/32979), [#33305](https://github.com/milvus-io/milvus/pull/33305))
+- Replaced Delete with DeletePartialMatch to remove metrics ([#33029](https://github.com/milvus-io/milvus/pull/33029))
+- Got related data size according to segment type ([#33017](https://github.com/milvus-io/milvus/pull/33017))
+- Cleaned channel node info in meta store ([#32988](https://github.com/milvus-io/milvus/pull/32988))
+- Removed rootcoord from datanode broker ([#32818](https://github.com/milvus-io/milvus/pull/32818))
+- Enabled batch uploading ([#32788](https://github.com/milvus-io/milvus/pull/32788))
+- Changed default partition number to 16 when using partition key ([#32950](https://github.com/milvus-io/milvus/pull/32950))
+- Improved reduce performance on very large top-k queries ([#32871](https://github.com/milvus-io/milvus/pull/32871))
+- Utilized TestLocations ability to accelerate write & compaction ([#32948](https://github.com/milvus-io/milvus/pull/32948))
+- Optimized plan parser pool to avoid unnecessary recycling ([#32869](https://github.com/milvus-io/milvus/pull/32869))
+- Improved load speed ([#32898](https://github.com/milvus-io/milvus/pull/32898))
+- Used collection default consistency level for restv2 ([#32956](https://github.com/milvus-io/milvus/pull/32956))
+- Added cost response for the rest API ([#32620](https://github.com/milvus-io/milvus/pull/32620))
+- Enabled channel exclusive balance policy ([#32911](https://github.com/milvus-io/milvus/pull/32911))
+- Exposed describedatabase API in proxy ([#32732](https://github.com/milvus-io/milvus/pull/32732))
+- Utilized coll2replica mapping when getting RG by collection ([#32892](https://github.com/milvus-io/milvus/pull/32892))
+- Added more tracing for search & query ([#32734](https://github.com/milvus-io/milvus/pull/32734))
+- Supported dynamic config for opentelemetry trace ([#32169](https://github.com/milvus-io/milvus/pull/32169))
+- Avoided iteration over channel results when updating leaderview ([#32887](https://github.com/milvus-io/milvus/pull/32887))
+- Optimized vector offsets handling for parquet ([#32822](https://github.com/milvus-io/milvus/pull/32822))
+- Improved datacoord segment filtering with collection ([#32831](https://github.com/milvus-io/milvus/pull/32831))
+- Adjusted log level and frequency ([#33042](https://github.com/milvus-io/milvus/pull/33042), [#32838](https://github.com/milvus-io/milvus/pull/32838), [#33337](https://github.com/milvus-io/milvus/pull/33337))
+- Enabled stopping balance after balance had been suspended ([#32812](https://github.com/milvus-io/milvus/pull/32812))
+- Updated shard leader cache when leader location changed ([#32470](https://github.com/milvus-io/milvus/pull/32470))
+- Removed deprecated API and field ([#32808](https://github.com/milvus-io/milvus/pull/32808), [#32704](https://github.com/milvus-io/milvus/pull/32704))
+- Added metautil.channel to convert string compare to int ([#32749](https://github.com/milvus-io/milvus/pull/32749))
+- Added type info for payload writer error message and log when querynode found new collection ([#32522](https://github.com/milvus-io/milvus/pull/32522))
+- Checked partition number when creating collection with partition key ([#32670](https://github.com/milvus-io/milvus/pull/32670))
+- Removed legacy l0 segment if watch failed ([#32725](https://github.com/milvus-io/milvus/pull/32725))
+- Improved printing type of request ([#33319](https://github.com/milvus-io/milvus/pull/33319))
+- Checked array field data was nil before getting the type ([#33311](https://github.com/milvus-io/milvus/pull/33311))
+- Returned error when startup Delete/AddNode node operation failed ([#33258](https://github.com/milvus-io/milvus/pull/33258))
+- Allowed datanode's server ID to be updated ([#31597](https://github.com/milvus-io/milvus/pull/31597))
+- Unified querynode metrics cleanup in collection release ([#32805](https://github.com/milvus-io/milvus/pull/32805))
+- Fixed scalar auto index config incorrect version ([#32795](https://github.com/milvus-io/milvus/pull/32795))
+- Refined index param check for create/alter index ([#32712](https://github.com/milvus-io/milvus/pull/32712))
+- Removed redundant replica recovery ([#32985](https://github.com/milvus-io/milvus/pull/32985))
+- Enabled channel meta table to write more than 200k segments ([#33300](https://github.com/milvus-io/milvus/pull/33300))
+
+## Bug fixes
+
+- Fixed panic when the database didn't exist in the rate limit interceptor ([#33308](https://github.com/milvus-io/milvus/pull/33308))
+- Fixed quotacenter metrics collection failure due to incorrect parameters ([#33399](https://github.com/milvus-io/milvus/pull/33399))
+- Fixed panic if processactivestandby returned an error ([#33372](https://github.com/milvus-io/milvus/pull/33372))
+- Fixed search result truncation in restful v2 when nq > 1 ([#33363](https://github.com/milvus-io/milvus/pull/33363))
+- Added database name field for role operations in restful v2 ([#33291](https://github.com/milvus-io/milvus/pull/33291))
+- Fixed global rate limit not working ([#33336](https://github.com/milvus-io/milvus/pull/33336))
+- Fixed panic caused by failure of building index ([#33314](https://github.com/milvus-io/milvus/pull/33314))
+- Added validation for sparse vector in segcore to ensure legality ([#33312](https://github.com/milvus-io/milvus/pull/33312))
+- Removed task from syncmgr after task completion ([#33303](https://github.com/milvus-io/milvus/pull/33303))
+- Fixed partition key filtering failure during data import ([#33277](https://github.com/milvus-io/milvus/pull/33277))
+- Fixed inability to generate traceID when using noop exporter ([#33208](https://github.com/milvus-io/milvus/pull/33208))
+- Improved query results retrieval ([#33179](https://github.com/milvus-io/milvus/pull/33179))
+- Marked channel checkpoint dropped to prevent checkpoint lag metrics leakage ([#33201](https://github.com/milvus-io/milvus/pull/33201))
+- Fixed query node getting stuck during stopping progress ([#33154](https://github.com/milvus-io/milvus/pull/33154))
+- Fixed missing segments in flush response ([#33061](https://github.com/milvus-io/milvus/pull/33061))
+- Made submit operation idempotent ([#33053](https://github.com/milvus-io/milvus/pull/33053))
+- Allocated new slice for each batch in streaming reader ([#33360](https://github.com/milvus-io/milvus/pull/33360))
+- Cleaned offline node from resource group after QueryCoord restart ([#33233](https://github.com/milvus-io/milvus/pull/33233))
+- Removed l0 compactor in completedCompactor ([#33216](https://github.com/milvus-io/milvus/pull/33216))
+- Reset quota value when initializing the limiter ([#33152](https://github.com/milvus-io/milvus/pull/33152))
+- Fixed issue where etcd limit was exceeded ([#33041](https://github.com/milvus-io/milvus/pull/33041))
+- Resolved etcd transaction limit exceedance due to too many fields ([#33040](https://github.com/milvus-io/milvus/pull/33040))
+- Removed RLock re-entry in GetNumRowsOfPartition ([#33045](https://github.com/milvus-io/milvus/pull/33045))
+- Started LeaderCacheObserver before SyncAll ([#33035](https://github.com/milvus-io/milvus/pull/33035))
+- Enabled balancing of released standby channel ([#32986](https://github.com/milvus-io/milvus/pull/32986))
+- Initialized access logger before server initialization ([#32976](https://github.com/milvus-io/milvus/pull/32976))
+- Made compactor capable of clearing empty segments ([#32821](https://github.com/milvus-io/milvus/pull/32821))
+- Filled deltalog entry number and time range in l0 compactions ([#33004](https://github.com/milvus-io/milvus/pull/33004))
+- Fixed proxy crash due to shard leader cache data race ([#32971](https://github.com/milvus-io/milvus/pull/32971))
+- Corrected time unit for load index metric ([#32935](https://github.com/milvus-io/milvus/pull/32935))
+- Fixed issue where segment on stopping query node couldn't be released successfully ([#32929](https://github.com/milvus-io/milvus/pull/32929))
+- Fixed index resource estimation ([#32842](https://github.com/milvus-io/milvus/pull/32842))
+- Set channel checkpoint to delta position ([#32878](https://github.com/milvus-io/milvus/pull/32878))
+- Made syncmgr lock key before returning future ([#32865](https://github.com/milvus-io/milvus/pull/32865))
+- Ensured inverted index had only one segment ([#32858](https://github.com/milvus-io/milvus/pull/32858))
+- Fixed compaction trigger choosing two identical segments ([#32800](https://github.com/milvus-io/milvus/pull/32800))
+- Fixed issue where partition name could not be specified in binlog import ([#32730](https://github.com/milvus-io/milvus/pull/32730), [#33027](https://github.com/milvus-io/milvus/pull/33027))
+- Made dynamic column optional in parquet import ([#32738](https://github.com/milvus-io/milvus/pull/32738))
+- Skipped checking auto ID when inserting data ([#32775](https://github.com/milvus-io/milvus/pull/32775))
+- Validated number of rows for insert field data with schema ([#32770](https://github.com/milvus-io/milvus/pull/32770))
+- Added Wrapper and Keepalive for CTraceContext IDs ([#32746](https://github.com/milvus-io/milvus/pull/32746))
+- Fixed issue where database name was not found in the datacoord meta object ([#33412](https://github.com/milvus-io/milvus/pull/33412))
+- Synchronized dropped segment for dropped partition ([#33332](https://github.com/milvus-io/milvus/pull/33332))
+- Fixed quotaCenter metrics collection failure due to incorrect parameters ([#33399](https://github.com/milvus-io/milvus/pull/33399))
+
 ## v2.4.1
 
 Release date: May 6, 2024
