@@ -12,8 +12,6 @@ This guide showcases how [VoyageAI's Embedding API](https://docs.voyageai.com/do
 
 Before you start, make sure you have the Voyage API key ready, or you get one from the [VoyageAI website](https://dash.voyageai.com/api-keys).
 
-The data used in this example are book titles. You can download the dataset [here](https://www.kaggle.com/datasets/jealousleopard/goodreadsbooks) and put it in the same directory where you run the following code.
-
 First, install the package for Milvus and Voyage AI:
 
 ```shell
@@ -23,7 +21,7 @@ pip install --upgrade voyageai pymilvus
 With this, we're ready to generate embeddings and use vector database
 to conduct semantic search.
 
-## Searching book titles with VoyageAI & Milvus
+## Semantic Search with VoyageAI & Milvus
 In the following example, we use Voyage AI embedding model to generate vector representations for a set of documents in the `docs` list and store them in Milvus vector database for semantic search.
 
 ```python
@@ -58,7 +56,11 @@ data = [ {"id": i, "vector": vectors[i], "text": docs[i], "subject": "history"} 
 # instruction: https://milvus.io/docs/install_standalone-docker.md.
 milvus_client = MilvusClient("milvus_voyage_demo.db")
 COLLECTION_NAME = "demo_collection"  # Milvus collection name
-# Create a collection to store the vectors and text. 
+# Clear data before inserting
+has_collection = milvus_client.has_collection(COLLECTION_NAME)
+if has_collection:
+    milvus_client.drop_collection(COLLECTION_NAME)
+# Create a collection to store the vectors and text.
 milvus_client.create_collection(
     collection_name=COLLECTION_NAME,
     dimension=DIMENSION
