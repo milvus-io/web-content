@@ -1,7 +1,7 @@
 ---
 id: integrate_with_langfuse.md
 summary: This is a simple cookbook that demonstrates how to use the LlamaIndex Langfuse integration. It uses Milvus Lite to store the documents and Query.
-title: Cookbook: LlamaIndex & Milvus Integration
+title: [Cookbook] LlamaIndex & Milvus Integration
 ---
 
 # Cookbook: LlamaIndex & Milvus Integration
