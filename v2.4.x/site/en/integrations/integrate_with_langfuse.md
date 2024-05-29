@@ -4,7 +4,7 @@ summary: This is a simple cookbook that demonstrates how to use the LlamaIndex L
 title: [Cookbook] LlamaIndex & Milvus Integration
 ---
 
-# Cookbook: LlamaIndex & Milvus Integration
+# Cookbook\: LlamaIndex & Milvus Integration
 
 <a target="_blank" href="https://colab.research.google.com/github/langfuse/langfuse-docs/blob/main/cookbook/integration_llama-index_milvus-lite.ipynb">
   <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
