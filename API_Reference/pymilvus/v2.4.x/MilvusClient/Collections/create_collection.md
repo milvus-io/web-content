@@ -1,6 +1,6 @@
 # create_collection()
 
-This operation supports creates a collection with 2 separate modes: quick setup or customized setup. 
+This operation supports creating a collection with two separate modes: quick setup or customized setup. 
 
 ## Request syntax
 
