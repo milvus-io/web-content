@@ -6,6 +6,8 @@ title: Integrate Milvus with DSPy
 
 # Integrate Milvus with DSPy
 
+<a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/milvus_and_DSPy.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+
 This guide demonstrates how to use MilvusRM, one of DSPy's retriever modules, to optimize RAG programs. 
 
 ## What is DSPy?

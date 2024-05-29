@@ -6,23 +6,28 @@ summary: This page discusses vector database integration with VoyageAI's embeddi
 
 # Semantic Search with Milvus and VoyageAI
 
+<a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/semantic_search_with_milvus_and_voyageai.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+
 This guide showcases how [VoyageAI's Embedding API](https://docs.voyageai.com/docs/embeddings) can be used with Milvus vector database to conduct semantic search on text.
 
 ## Getting started
-
 Before you start, make sure you have the Voyage API key ready, or you get one from the [VoyageAI website](https://dash.voyageai.com/api-keys).
+
+The data used in this example are book titles. You can download the dataset [here](https://www.kaggle.com/datasets/jealousleopard/goodreadsbooks) and put it in the same directory where you run the following code.
 
 First, install the package for Milvus and Voyage AI:
 
-```shell
-pip install --upgrade voyageai pymilvus
+
+```python
+!pip install --upgrade voyageai pymilvus
 ```
 
-With this, we're ready to generate embeddings and use vector database
-to conduct semantic search.
+With this, we're ready to generate embeddings and use vector database to conduct semantic search.
 
-## Semantic Search with VoyageAI & Milvus
-In the following example, we use Voyage AI embedding model to generate vector representations for a set of documents in the `docs` list and store them in Milvus vector database for semantic search.
+## Searching book titles with VoyageAI & Milvus
+
+In the following example, we load book title data from the downloaded CSV file, use Voyage AI embedding model to generate vector representations, and store them in Milvus vector database for semantic search.
+
 
 ```python
 import voyageai
@@ -32,7 +37,7 @@ MODEL_NAME = "voyage-law-2"  # Which model to use, please check https://docs.voy
 DIMENSION = 1024  # Dimension of vector embedding 
 
 # Connect to VoyageAI with API Key.
-voyage_client = voyageai.Client(api_key="YOUR_VOYAGEAI_API_KEY")
+voyage_client = voyageai.Client(api_key="<YOUR_VOYAGEAI_API_KEY>")
 
 docs = [
     "Artificial intelligence was founded as an academic discipline in 1956.",
@@ -56,11 +61,7 @@ data = [ {"id": i, "vector": vectors[i], "text": docs[i], "subject": "history"} 
 # instruction: https://milvus.io/docs/install_standalone-docker.md.
 milvus_client = MilvusClient("milvus_voyage_demo.db")
 COLLECTION_NAME = "demo_collection"  # Milvus collection name
-# Clear data before inserting
-has_collection = milvus_client.has_collection(COLLECTION_NAME)
-if has_collection:
-    milvus_client.drop_collection(COLLECTION_NAME)
-# Create a collection to store the vectors and text.
+# Create a collection to store the vectors and text. 
 milvus_client.create_collection(
     collection_name=COLLECTION_NAME,
     dimension=DIMENSION
@@ -76,6 +77,7 @@ print(res["insert_count"])
 ```
 
 With all data in Milvus vector database, we can now perform semantic search by generating vector embedding for the query and conduct vector search.
+
 
 ```python
 queries = ["When was artificial intelligence founded?"]
@@ -100,10 +102,6 @@ for q in queries:
     print("\n")
 ```
 
-
-You should see the following as the output:
-
-```
-Query: When was artificial intelligence founded?
-[{'id': 0, 'distance': -0.7196217775344849, 'entity': {'text': 'Artificial intelligence was founded as an academic discipline in 1956.', 'subject': 'history'}}]
-```
+    Query: When was artificial intelligence founded?
+    [{'id': 0, 'distance': 0.7196218371391296, 'entity': {'text': 'Artificial intelligence was founded as an academic discipline in 1956.', 'subject': 'history'}}]
+    

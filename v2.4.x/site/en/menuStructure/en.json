@@ -1534,7 +1534,23 @@
       "label2": "",
       "label3": "",
       "order":  13
-    },  
+    }, 
+    {
+      "id": "integrate_with_langfuse.md",
+      "title": "LangFuse",
+      "label1": "integrations",
+      "label2": "",
+      "label3": "",
+      "order":  14
+    }, 
+    {
+      "id": "integrate_with_ragas.md",
+      "title": "Ragas",
+      "label1": "integrations",
+      "label2": "",
+      "label3": "",
+      "order":  15
+    }, 
     {
       "id": "tutorials",
       "title": "Tutorials",

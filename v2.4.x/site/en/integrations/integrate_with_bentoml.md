@@ -6,6 +6,8 @@ title: Integrate Milvus with BentoML
 
 # Integrate Milvus with BentoML
 
+<a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_bentoml.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+
 This guide demonstrates how to use an open-source embedding model and large-language model on BentoCloud with Milvus vector database to build a Retrieval Augmented Generation (RAG) application. 
 
 ## Overview
@@ -46,7 +48,7 @@ Read files and preprocess the text into a list of strings.
 def chunk_text(filename: str) -> list:
    with open(filename, "r") as f:
        text = f.read()
-   sentences = text.split("\n")
+   sentences = text.split("n")
    return sentences
 ```
 
@@ -191,7 +193,7 @@ Now, we set up the LLM instructions with the prompt, context, and the question. 
 ```python
 def dorag(question: str, context: str):
     
-    prompt = (f"You are a helpful assistant. The user has a question. Answer the user question based only on the context: {context}. \n"
+    prompt = (f"You are a helpful assistant. The user has a question. Answer the user question based only on the context: {context}. n"
               f"The user question is {question}")
     
     results = llm_client.generate(

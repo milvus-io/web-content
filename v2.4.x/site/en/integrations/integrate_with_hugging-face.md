@@ -1,216 +1,198 @@
 ---
 id: integrate_with_hugging-face.md
-summary: This page goes over how to search for the best answer to questions using Milvus as the Vector Database and Hugging Face as the embedding system.
+summary: This tutorial shows how to build a question answering system using Hugging Face as the data loader & embedding generator for data processing and Milvus as the vector database for semantic search.
 title: Question Answering Using Milvus and Hugging Face
 ---
 
 # Question Answering Using Milvus and Hugging Face
 
-This page illustrates how to build a question-answering system using Milvus as the vector database and Hugging Face as the embedding system.
+<a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/qa_with_milvus_and_hf.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+
+A question answering system based on semantic search works by finding the most similar question from a dataset of question-answer pairs for a given query question. Once the most similar question is identified, the corresponding answer from the dataset is considered as the answer for the query. This approach relies on semantic similarity measures to determine the similarity between questions and retrieve relevant answers.
+
+This tutorial shows how to build a question answering system using [Hugging Face](https://huggingface.co) as the data loader & embedding generator for data processing and [Milvus](https://milvus.io) as the vector database for semantic search.
 
 ## Before you begin
 
-Code snippets on this page require **pymilvus**, **transformers**, and **datasets** installed. Packages **transformers** and **datasets** are the Hugging Face packages to create the pipeline and **pymilvus** is the client for Milvus. If not present on your system, run the following commands to install them:
+You need to make sure all required dependencies are installed:
 
-```shell
-pip install transformers datasets pymilvus torch
-```
+- `pymilvus`: a python package works with the vector database service powered by Milvus or Zilliz Cloud.
+- `datasets`, `transformers`: Hugging Face packages manage data and utilize models.
+- `torch`: a powerful library provides efficient tensor computation and deep learning tools.
 
-Then you need to load the modules to be used in this guide.
 
 ```python
-from pymilvus import connections, FieldSchema, CollectionSchema, DataType, Collection, utility
-from datasets import load_dataset_builder, load_dataset, Dataset
+%pip install --upgrade pymilvus transformers datasets torch
+```
+
+> If you are using Google Colab, to enable dependencies just installed, you may need to **restart the runtime**.
+
+## Prepare data
+
+In this section, we will load example question-answer pairs from the Hugging Face Datasets. As a demo, we only take partial data from the validation split of [SQuAD](https://huggingface.co/datasets/rajpurkar/squad).
+
+
+```python
+from datasets import load_dataset
+
+
+DATASET = "squad"  # Name of dataset from HuggingFace Datasets
+INSERT_RATIO = 0.001  # Ratio of example dataset to be inserted
+
+data = load_dataset(DATASET, split="validation")
+# Generates a fixed subset. To generate a random subset, remove the seed.
+data = data.train_test_split(test_size=INSERT_RATIO, seed=42)["test"]
+# Clean up the data structure in the dataset.
+data = data.map(
+    lambda val: {"answer": val["answers"]["text"][0]},
+    remove_columns=["id", "answers", "context"],
+)
+
+# View summary of example data
+print(data)
+```
+
+    Dataset({
+        features: ['title', 'question', 'answer'],
+        num_rows: 11
+    })
+
+
+To generate embeddings for questions, you are able to select a text embedding model from Hugging Face Models. In this tutorial, we will use a small sentencce embedding model [all-MiniLM-L6-v2](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2) as example.
+
+
+```python
 from transformers import AutoTokenizer, AutoModel
-from torch import clamp, sum
-```
+import torch
 
-## Parameters
+MODEL = (
+    "sentence-transformers/all-MiniLM-L6-v2"  # Name of model from HuggingFace Models
+)
+INFERENCE_BATCH_SIZE = 64  # Batch size of model inference
 
-Here we can find the parameters used in the following snippets. Some of them need to be changed to fit your environment. Beside each is a description of what it is.
+# Load tokenizer & model from HuggingFace Hub
+tokenizer = AutoTokenizer.from_pretrained(MODEL)
+model = AutoModel.from_pretrained(MODEL)
 
-```python
-DATASET = 'squad'  # Huggingface Dataset to use
-MODEL = 'bert-base-uncased'  # Transformer to use for embeddings
-TOKENIZATION_BATCH_SIZE = 1000  # Batch size for tokenizing operation
-INFERENCE_BATCH_SIZE = 64  # batch size for transformer
-INSERT_RATIO = .001  # How many titles to embed and insert
-COLLECTION_NAME = 'huggingface_db'  # Collection name
-DIMENSION = 768  # Embeddings size
-LIMIT = 10  # How many results to search for
-MILVUS_HOST = "localhost"
-MILVUS_PORT = "19530"
-```
 
-To know more about the model and dataset used on this page, refer to [bert-base-uncased](https://huggingface.co/bert-base-uncased) and [squad](https://huggingface.co/datasets/squad).
+def encode_text(batch):
+    # Tokenize sentences
+    encoded_input = tokenizer(
+        batch["question"], padding=True, truncation=True, return_tensors="pt"
+    )
 
-## Create a collection
+    # Compute token embeddings
+    with torch.no_grad():
+        model_output = model(**encoded_input)
 
-This section deals with Milvus and setting up the database for this use case. Within Milvus, we need to set up a collection and index it. 
+    # Perform pooling
+    token_embeddings = model_output[0]
+    attention_mask = encoded_input["attention_mask"]
+    input_mask_expanded = (
+        attention_mask.unsqueeze(-1).expand(token_embeddings.size()).float()
+    )
+    sentence_embeddings = torch.sum(
+        token_embeddings * input_mask_expanded, 1
+    ) / torch.clamp(input_mask_expanded.sum(1), min=1e-9)
 
-```python
-# Connect to Milvus Database
-connections.connect(uri=URI, user=USER, password=PASSWORD, secure=True)
+    # Normalize embeddings
+    batch["question_embedding"] = torch.nn.functional.normalize(
+        sentence_embeddings, p=2, dim=1
+    )
+    return batch
 
-# Remove collection if it already exists
-if utility.has_collection(COLLECTION_NAME):
-    utility.drop_collection(COLLECTION_NAME)
 
-# Create collection which includes the id, title, and embedding.
-fields = [
-    FieldSchema(name='id', dtype=DataType.INT64, is_primary=True, auto_id=True),
-    FieldSchema(name='original_question', dtype=DataType.VARCHAR, max_length=1000),
-    FieldSchema(name='answer', dtype=DataType.VARCHAR, max_length=1000),
-    FieldSchema(name='original_question_embedding', dtype=DataType.FLOAT_VECTOR, dim=DIMENSION)
-]
-schema = CollectionSchema(fields=fields)
-collection = Collection(name=COLLECTION_NAME, schema=schema)
-
-# Create an IVF_FLAT index for collection.
-index_params = {
-    'metric_type':'L2',
-    'index_type':"IVF_FLAT",
-    'params':{"nlist":1536}
-}
-collection.create_index(field_name="original_question_embedding", index_params=index_params)
-collection.load()
+data = data.map(encode_text, batched=True, batch_size=INFERENCE_BATCH_SIZE)
+data_list = data.to_list()
 ```
 
 ## Insert data
 
-Once we have the collection set up we need to start inserting our data. This is done in three steps
+Now we have question-answer pairs ready with question embeddings. The next step is to insert them into the vector database.
 
-- tokenizing the original question, 
-- embedding the tokenized question, and 
-- inserting the embedding, original question, and answer.
+We will first need to connect to Milvus service and create a Milvus collection. This section will use [Milvus Lite](https://milvus.io/docs/milvus_lite.md) as example. If you want to use other types of Milvus or [Zilliz Cloud](https://zilliz.com), please make sure you have started the service and connect with your own URI & credentials. You are also able to change parameters to customize your collection.
 
-In this example, the data includes the original question, the original question's embedding, and the answer to the original question. 
 
 ```python
-data_dataset = load_dataset(DATASET, split='all')
-# Generates a fixed subset. To generate a random subset, remove the seed setting. For details, see <https://huggingface.co/docs/datasets/v2.9.0/en/package_reference/main_classes#datasets.Dataset.train_test_split.seed>
-data_dataset = data_dataset.train_test_split(test_size=INSERT_RATIO, seed=42)['test']
-# Clean up the data structure in the dataset.
-data_dataset = data_dataset.map(lambda val: {'answer': val['answers']['text'][0]}, remove_columns=['answers'])
+from pymilvus import MilvusClient
 
-tokenizer = AutoTokenizer.from_pretrained(MODEL)
 
-# Tokenize the question into the format that bert takes.
-def tokenize_question(batch):
-    results = tokenizer(batch['question'], add_special_tokens = True, truncation = True, padding = "max_length", return_attention_mask = True, return_tensors = "pt")
-    batch['input_ids'] = results['input_ids']
-    batch['token_type_ids'] = results['token_type_ids']
-    batch['attention_mask'] = results['attention_mask']
-    return batch
+MILVUS_URI = "./huggingface_milvus_test.db"  # Connection URI
+COLLECTION_NAME = "huggingface_test"  # Collection name
+DIMENSION = 384  # Embedding dimension depending on model
 
-# Generate the tokens for each entry.
-data_dataset = data_dataset.map(tokenize_question, batch_size=TOKENIZATION_BATCH_SIZE, batched=True)
-# Set the ouput format to torch so it can be pushed into embedding model
-data_dataset.set_format('torch', columns=['input_ids', 'token_type_ids', 'attention_mask'], output_all_columns=True)
-
-model = AutoModel.from_pretrained(MODEL)
-# Embed the tokenized question and take the mean pool with respect to attention mask of hidden layer.
-def embed(batch):
-    sentence_embs = model(
-                input_ids=batch['input_ids'],
-                token_type_ids=batch['token_type_ids'],
-                attention_mask=batch['attention_mask']
-                )[0]
-    input_mask_expanded = batch['attention_mask'].unsqueeze(-1).expand(sentence_embs.size()).float()
-    batch['question_embedding'] = sum(sentence_embs * input_mask_expanded, 1) / clamp(input_mask_expanded.sum(1), min=1e-9)
-    return batch
-
-data_dataset = data_dataset.map(embed, remove_columns=['input_ids', 'token_type_ids', 'attention_mask'], batched = True, batch_size=INFERENCE_BATCH_SIZE)
-
-# Due to the varchar constraint we are going to limit the question size when inserting
-def insert_function(batch):
-    insertable = [
-        batch['question'],
-        [x[:995] + '...' if len(x) > 999 else x for x in batch['answer']],
-        batch['question_embedding'].tolist()
-    ]    
-    collection.insert(insertable)
-
-data_dataset.map(insert_function, batched=True, batch_size=64)
-collection.flush()
+milvus_client = MilvusClient(MILVUS_URI)
+milvus_client.create_collection(
+    collection_name=COLLECTION_NAME,
+    dimension=DIMENSION,
+    auto_id=True,  # Enable auto id
+    enable_dynamic_field=True,  # Enable dynamic fields
+    vector_field_name="question_embedding",  # Map vector field name and embedding column in dataset
+    consistency_level="Strong",  # To enable search with latest data
+)
 ```
+
+Insert all data into the collection:
+
+
+```python
+milvus_client.insert(collection_name=COLLECTION_NAME, data=data_list)
+```
+
+
+
+
+    {'insert_count': 11,
+     'ids': [450072488481390592, 450072488481390593, 450072488481390594, 450072488481390595, 450072488481390596, 450072488481390597, 450072488481390598, 450072488481390599, 450072488481390600, 450072488481390601, 450072488481390602],
+     'cost': 0}
+
+
 
 ## Ask questions
 
-Once all the data is inserted and indexed within Milvus, we can ask questions and see what the closest answers are.
+Once all the data is inserted into Milvus, we can ask questions and see what the closest answers are.
+
 
 ```python
-questions = {'question':['When was chemistry invented?', 'When was Eisenhower born?']}
-question_dataset = Dataset.from_dict(questions)
+questions = {
+    "question": [
+        "What is LGM?",
+        "When did Massachusetts first mandate that children be educated in schools?",
+    ]
+}
 
-question_dataset = question_dataset.map(tokenize_question, batched = True, batch_size=TOKENIZATION_BATCH_SIZE)
-question_dataset.set_format('torch', columns=['input_ids', 'token_type_ids', 'attention_mask'], output_all_columns=True)
-question_dataset = question_dataset.map(embed, remove_columns=['input_ids', 'token_type_ids', 'attention_mask'], batched = True, batch_size=INFERENCE_BATCH_SIZE)
+# Generate question embeddings
+question_embeddings = [v.tolist() for v in encode_text(questions)["question_embedding"]]
 
-def search(batch):
-    res = collection.search(batch['question_embedding'].tolist(), anns_field='original_question_embedding', param = {}, output_fields=['answer', 'original_question'], limit = LIMIT)
-    overall_id = []
-    overall_distance = []
-    overall_answer = []
-    overall_original_question = []
-    for hits in res:
-        ids = []
-        distance = []
-        answer = []
-        original_question = []
-        for hit in hits:
-            ids.append(hit.id)
-            distance.append(hit.distance)
-            answer.append(hit.entity.get('answer'))
-            original_question.append(hit.entity.get('original_question'))
-        overall_id.append(ids)
-        overall_distance.append(distance)
-        overall_answer.append(answer)
-        overall_original_question.append(original_question)
-    return {
-        'id': overall_id,
-        'distance': overall_distance,
-        'answer': overall_answer,
-        'original_question': overall_original_question
-    }
-question_dataset = question_dataset.map(search, batched=True, batch_size = 1)
-for x in question_dataset:
-    print()
-    print('Question:')
-    print(x['question'])
-    print('Answer, Distance, Original Question')
-    for x in zip(x['answer'], x['distance'], x['original_question']):
-        print(x)
+# Search across Milvus
+search_results = milvus_client.search(
+    collection_name=COLLECTION_NAME,
+    data=question_embeddings,
+    limit=3,  # How many search results to output
+    output_fields=["answer", "question"],  # Include these fields in search results
+)
+
+# Print out results
+for q, res in zip(questions["question"], search_results):
+    print("Question:", q)
+    for r in res:
+        print(
+            {
+                "answer": r["entity"]["answer"],
+                "score": r["distance"],
+                "original question": r["entity"]["question"],
+            }
+        )
+    print("\n")
 ```
 
-The output would vary with the subset of data you have downloaded if you leave [the `seed` parameter of the `train_test_split()` method](#Insert-data) unspecified, and should be similar to the following:
-
-```python
-Question:
-When was chemistry invented?
-Answer, Distance, Original Question
-('until 1870', tensor(12.7554), 'When did the Papal States exist?')
-('October 1992', tensor(12.8504), 'When were free elections held?')
-('1787', tensor(14.8283), 'When was the Tower constructed?')
-('taxation', tensor(17.1399), 'How did Hobson argue to rid the world of imperialism?')
-('1981', tensor(18.9243), "When was ZE's Mutant Disco released?")
-('salt and iron', tensor(19.8073), 'What natural resources did the Chinese government have a monopoly on?')
-('Medieval Latin', tensor(20.9864), "What was the Latin of Charlemagne's era later known as?")
-('military education', tensor(21.0572), 'What Prussian system was superior to the French example?')
-('Edgar Bronfman Jr.', tensor(21.6317), 'Who was the head of Seagram?')
-('because of persecution, increased poverty and better economic opportunities', tensor(23.1249), 'Why did more than half a million people flee?')
-
-Question:
-When was Eisenhower born?
-Answer, Distance, Original Question
-('until 1870', tensor(17.2719), 'When did the Papal States exist?')
-('1787', tensor(17.3752), 'When was the Tower constructed?')
-('October 1992', tensor(20.3766), 'When were free elections held?')
-('1992', tensor(21.0860), 'In what year was the Premier League created?')
-('1981', tensor(23.1728), "When was ZE's Mutant Disco released?")
-('Medieval Latin', tensor(23.5315), "What was the Latin of Charlemagne's era later known as?")
-('Poland, Bulgaria, the Czech Republic, Slovakia, Hungary, Albania, former East Germany and Cuba', tensor(25.1409), 'Where was Russian schooling mandatory in the 20th century?')
-('Antonio B. Won Pat', tensor(25.8398), 'What is the name of the international airport in Guam?')
-('1973', tensor(26.7827), 'In what year did the State Management Scheme cease?')
-('2019', tensor(27.1236), 'When will Argo be launched?')
-```
+    Question: What is LGM?
+    {'answer': 'Last Glacial Maximum', 'score': 0.956273078918457, 'original question': 'What does LGM stands for?'}
+    {'answer': 'coordinate the response to the embargo', 'score': 0.2120140939950943, 'original question': 'Why was this short termed organization created?'}
+    {'answer': '"Reducibility Among Combinatorial Problems"', 'score': 0.1945795714855194, 'original question': 'What is the paper written by Richard Karp in 1972 that ushered in a new era of understanding between intractability and NP-complete problems?'}
+    
+    
+    Question: When did Massachusetts first mandate that children be educated in schools?
+    {'answer': '1852', 'score': 0.9709997177124023, 'original question': 'In what year did Massachusetts first require children to be educated in schools?'}
+    {'answer': 'several regional colleges and universities', 'score': 0.34164726734161377, 'original question': 'In 1890, who did the university decide to team up with?'}
+    {'answer': '1962', 'score': 0.1931006908416748, 'original question': 'When were stromules discovered?'}

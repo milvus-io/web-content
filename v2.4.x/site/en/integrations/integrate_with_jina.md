@@ -6,6 +6,8 @@ title: Integrate Milvus with JINA
 
 # Integrate Milvus with JINA
 
+<a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/milvus_with_Jina.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+
 This guide demonstrates how to use JINA embeddings and Milvus to conduct similarity search and retrieval tasks.  
 
 ## Who is JINA AI
