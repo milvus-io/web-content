@@ -17,12 +17,12 @@ This page demonstrates the procedure to import the prepared data.
 
 - You have already created a collection with the schema you use to prepare your data. If not, refer to [Manage Collections](manage-collections.md). 
 
+The following code snippet creates a simple collection with the given schema.
+
 <div class="multipleCode">
   <a href="#python">Python </a>
   <a href="#java">Java</a>
 </div>
-
-The following code snippet creates a simple collection with the given schema.
 
 ```python
 client = MilvusClient("http://localhost:19530")
