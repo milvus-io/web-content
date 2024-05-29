@@ -128,7 +128,7 @@ You can import Milvus Lite as a Python library or use it as a CLI-based Milvus s
   ```python
   from milvus import debug_server, MilvusServer
 
-  debug_server.run()
+  debug_server.start()
 
   # Or you can create a MilvusServer by yourself
   # server = MilvusServer(debug=True)
