@@ -85,8 +85,8 @@ cert-manager-webhook-7c9588c76-tqncn      1/1     Running   0          70s
 
 You can install Milvus Operator in either of the following ways:
 
-- With Helm(#Install-with-Helm)
-- With kubectl(#Install-with-kubectl)
+- [With Helm](#Install-with-Helm)
+- [With kubectl](#Install-with-kubectl)
 
 #### Install with Helm
 
@@ -308,7 +308,7 @@ $ kubectl delete milvus my-release
 There are also two ways to uninstall Milvus Operator.
 
 - [Uninstall with Helm](#Uninstall-with-Helm)
-- [Uninstall with kkubectl](#Uninstall-with-kubectl)
+- [Uninstall with kubectl](#Uninstall-with-kubectl)
 
 #### Uninstall with Helm
 
