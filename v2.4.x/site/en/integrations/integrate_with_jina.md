@@ -1,14 +1,14 @@
 ---
 id: integrate_with_jina.md
-summary: This guide demonstrates how to use Jina AI embeddings and Milvus to conduct similarity search and retrieval tasks.  
-title: Integrate Milvus with Jina AI
+summary: This guide demonstrates how to use Jina embeddings and Milvus to conduct similarity search and retrieval tasks.  
+title: Integrate Milvus with Jina
 ---
 
 # Integrate Milvus with Jina AI
 
 <a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/milvus_with_Jina.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
-This guide demonstrates how to use Jina AI embeddings and Milvus to conduct similarity search and retrieval tasks.  
+This guide demonstrates how to use Jina embeddings and Milvus to conduct similarity search and retrieval tasks.  
 
 ## Who is Jina AI
 
@@ -34,7 +34,6 @@ pip install "pymilvus[model]"
 ### General-purpose embeddings
 
 Jina AI provides general purpose embedding models for understanding detailed text, making it ideal for semantic search, content classification, and intricate language analysis. You can specify the model name with the API key to instantiate the client for Jina AI embedding service.
-
 
 ```python
 from pymilvus.model.dense import JinaEmbeddingFunction

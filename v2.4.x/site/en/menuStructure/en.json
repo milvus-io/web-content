@@ -1513,7 +1513,7 @@
     },      
     {
       "id": "integrate_with_jina.md",
-      "title": "JINA",
+      "title": "Jina AI",
       "label1": "integrations",
       "label2": "",
       "label3": "",
@@ -1521,7 +1521,7 @@
     },    
     {
       "id": "integrate_with_snowpark.md",
-      "title": "SnowPark",
+      "title": "Snowflake",
       "label1": "integrations",
       "label2": "",
       "label3": "",
