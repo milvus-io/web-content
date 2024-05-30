@@ -1,10 +1,12 @@
 ---
 id: integrate_with_llamaindex.md
-summary: This page goes over how to search for the best answer to questions using Milvus as the Vector Database and LlamaIndex as the embedding system.
+summary: This guide demonstrates how to build a Retrieval-Augmented Generation (RAG) system using LlamaIndex and Milvus.
 title: Retrieval-Augmented Generation (RAG) with Milvus and LlamaIndex
 ---
 
 # Retrieval-Augmented Generation (RAG) with Milvus and LlamaIndex
+
+<a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_llamaindex.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
 This guide demonstrates how to build a Retrieval-Augmented Generation (RAG) system using LlamaIndex and Milvus.
 
@@ -12,158 +14,181 @@ The RAG system combines a retrieval system with a generative model to generate n
 
 [LlamaIndex](https://www.llamaindex.ai/) is a simple, flexible data framework for connecting custom data sources to large language models (LLMs). [Milvus](https://milvus.io/) is the world's most advanced open-source vector database, built to power embedding similarity search and AI applications.
 
+In this notebook we are going to show a quick demo of using the MilvusVectorStore. 
+
 ## Before you begin
 
-Code snippets on this page require **pymilvus** and **llamaindex** libraries. You can install them using the following commands:
+### Install dependencies
+Code snippets on this page require pymilvus and llamaindex dependencies. You can install them using the following commands:
 
-```shell
-python3 -m pip install --upgrade pymilvus llama-index openai
+
+```python
+$ pip install pymilvus>=2.4.2
 ```
 
-What's more, LlamaIndex requires an LLM model at the backend. In this article, we will use the OpenAI as the LLM backend. You can sign up for a free API key at [OpenAI](https://openai.com/).
+
+```python
+$ pip install llama-index-vector-stores-milvus
+```
+
+
+```python
+$ pip install llama-index
+```
+
+<div class="alert note">
+
+If you are using Google Colab, to enable dependencies just installed, you may need to **restart the runtime**.
+
+</div>
+
+### Setup OpenAI
+
+Lets first begin by adding the openai api key. This will allow us to access chatgpt.
+
 
 ```python
 import openai
 
-openai.api_key = "sk-**************************"
+openai.api_key = "sk-***********"
 ```
 
-## Prepare data
+### Prepare data
 
-In this section, you need to prepare the data for the RAG system. Run the following command to download the example data.
+You can download sample data with the following commands:
 
-```shell
-!mkdir -p 'data/paul_graham/'
-!wget 'https://raw.githubusercontent.com/run-llama/llama_index/main/docs/examples/data/paul_graham/paul_graham_essay.txt' -O 'data/paul_graham/paul_graham_essay.txt'
-```
-
-The example data is a single essay from Paul Graham titled *What I Worked On*. Before you can use it for the RAG system, you need to make it accessible to LLamaIndex.
 
 ```python
-from llamaindex import SimpleDirectoryReader
+$ mkdir -p 'data/paul_graham/'
+$ wget 'https://raw.githubusercontent.com/run-llama/llama_index/main/docs/docs/examples/data/paul_graham/paul_graham_essay.txt' -O 'data/paul_graham/paul_graham_essay.txt'
+```
+
+## Getting Started
+
+### Generate our data
+As a first example, lets generate a document from the file found in the `data/paul_graham/` folder. In this folder there is a single essay from Paul Graham titled `What I Worked On`. To generate the documents we will use the SimpleDirectoryReader.
+
+
+```python
+from llama_index.core import SimpleDirectoryReader
 
 # load documents
 documents = SimpleDirectoryReader("./data/paul_graham/").load_data()
 
 print("Document ID:", documents[0].doc_id)
-
-# Document ID: d33f0397-b51a-4455-9b0f-88a101254d95
 ```
 
-Now you can create a Milvus collection and insert the documents into it.
+    Document ID: 11c3a6fe-799e-4e40-8122-2339936c2722
 
-```python
-from llama_index.core import VectorStoreIndex, StorageContext
-from llama_index.vector_stores.milvus import MilvusVectorStore
 
-vector_store = MilvusVectorStore(dim=1536, overwrite=True)
-storage_context = StorageContext.from_defaults(vector_store=vector_store)
-index = VectorStoreIndex.from_documents(
-    documents, storage_context=storage_context
-)
-```
+### Create an index across the data
+
+Now that we have a document, we can can create an index and insert the document. For the index we will use a GPTMilvusIndex. GPTMilvusIndex takes in a few arguments:
+
+- `uri (str, optional)`: The URI to connect to, comes in the form of "https://address:port" if using Milvus or Zilliz Cloud service, or "path/to/local/milvus.db" if using a lite local Milvus. Defaults to "./milvus_llamaindex.db".
+- `token (str, optional)`: The token for log in. Empty if not using rbac, if using rbac it will most likely be "username:password". Defaults to "".
+- `collection_name (str, optional)`: The name of the collection where data will be stored. Defaults to "llamalection".
+- `dim (int, optional)`: The dimension of the embeddings. If it is not provided, collection creation will be done on first insert. Defaults to None.
+- `embedding_field (str, optional)`: The name of the embedding field for the collection, defaults to DEFAULT_EMBEDDING_KEY.
+- `doc_id_field (str, optional)`: The name of the doc_id field for the collection, defaults to DEFAULT_DOC_ID_KEY.
+- `similarity_metric (str, optional)`: The similarity metric to use, currently supports IP and L2. Defaults to "IP".
+- `consistency_level (str, optional)`: Which consistency level to use for a newly created collection. Defaults to "Strong".
+- `overwrite (bool, optional)`: Whether to overwrite existing collection with same name. Defaults to False.
+- `text_key (str, optional)`: What key text is stored in in the passed collection. Used when bringing your own collection. Defaults to None.
+- `index_config (dict, optional)`: The configuration used for building the Milvus index. Defaults to None.
+- `search_config (dict, optional)`: The configuration used for searching the Milvus index. Note that this must be compatible with the index type specified by index_config. Defaults to None.
 
 <div class="alert note">
 
-The above code will generate a Milvus collection named **llamalection** on the Milvus server with default settings. You can include the following arguments to customize the MilvusVectorStore object to your needs:
-
-- **uri**: the URI to connect to, comes in the form of "http://address:port" and defaults to "http://localhost:19530".
-- **token**: the token used to authenticate the connection. You can leave it unspecified if RBAC is not enabled. Otherwise, use the username and password of an existing user. To be authenticated as the root user with the default password, use "root:Milvus".
-- **collection_name**: the name of the Milvus collection to create or use.
-- **dim**: the dimension of the vector embeddings. If it is not provided, collection creation will be done upon the first insertion.
-- **embedding_field**: the name of the field used to hold vector embeddings in the collection to create, defaults to `DEFAULT_EMBEDDING_KEY`.
-- **doc_id_field**: the name of the field used to hold doc IDs in the collection to create, defaults to `DEFAULT_DOC_ID_KEY`.
-- **similarity_metric**: the similarity metric to use. Possible options are `IP` and `L2` and defaults to `IP`.
-- **consistency_level**: the consistency level to use in the collection to create. Possible options are `Strong`, `Bounded`, `Staleness`, `Eventually`, and defaults to `Strong`.
-- **overwrite**: whether to overwrite the existing collection if it exists.
-- **text_key**: the name of the field that holds text in an existing collection, defaults to `None`. This applies only when you want to use an existing collection instead of create a new one.
-- **index_config**: the index parameters used to build an index for the specified collection, defaults to `None`.
-- **search_config**: the search parameters used to prepare searches in the specified collection, defaults to `None`.
-- **batch_size**: configures the number of documents processed in one batch when inserting data into Milvus. Defaults to `100`.
-- **enable_sparse**: a boolean flag indicating whether to enable support for sparse embeddings for hybrid retrieval. Defaults to `False`.
-- **sparse_embedding_function**: if enable_sparse is True, this object should be provided to convert text to a sparse embedding.
-- **hybrid_ranker**: specifies the type of ranker used in hybrid search queries. Currently only supports `RRFRanker`, `WeightedRanker`. Defaults to `RRFRanker`.
-- **hybrid_ranker_params**: Configuration parameters for the hybrid ranker.
-    The structure of this dictionary depends on the specific ranker being used:
-    - For `RRFRanker`, it should include:
-        - 'k' (int): A parameter used in Reciprocal Rank Fusion (RRF). This value is used
-                     to calculate the rank scores as part of the RRF algorithm, which combines
-                     multiple ranking strategies into a single score to improve search relevance.
-    - For `WeightedRanker`, it expects:
-        - 'weights' (list of float): A list of exactly two weights:
-            - The weight for the dense embedding component.
-            - The weight for the sparse embedding component.
-              
-          These weights are used to adjust the importance of the dense and sparse components of the embeddings in the hybrid retrieval process.
-          
-    Defaults to an empty dictionary, implying that the ranker will operate with its predefined default settings.
-
+Please note that **Milvus Lite** requires `pymilvus>=2.4.2`.
 
 </div>
 
 
-## Query the data
+```python
+# Create an index over the documnts
+from llama_index.core import VectorStoreIndex, StorageContext
+from llama_index.vector_stores.milvus import MilvusVectorStore
 
-Now that you have our document stored in the Milvus collection, you can ask questions against the collection. The collection will use its data as the knowledge base for ChatGPT to generate answers.
+
+vector_store = MilvusVectorStore(uri="./milvus_demo.db", dim=1536, overwrite=True)
+storage_context = StorageContext.from_defaults(vector_store=vector_store)
+index = VectorStoreIndex.from_documents(documents, storage_context=storage_context)
+```
+
+### Query the data
+Now that we have our document stored in the index, we can ask questions against the index. The index will use the data stored in itself as the knowledge base for chatgpt.
+
 
 ```python
+import textwrap
+
+
 query_engine = index.as_query_engine()
 response = query_engine.query("What did the author learn?")
 print(textwrap.fill(str(response), 100))
-
-# The author learned several things during their time at Interleaf. They learned that it's better for technology companies to be run by product people than sales people, that code edited by too many people leads to bugs, that cheap office space is not worth it if it's depressing, that planned meetings are inferior to corridor conversations, that big bureaucratic customers can be a dangerous source of money, and that there's not much overlap between conventional office hours and the optimal time for hacking. However, the most important thing the author learned is that the low end eats the high end, meaning that it's advantageous to be the "entry level" option because if you're not, someone else will be and will surpass you.
 ```
 
-Let's give it another try.
+    The author learned about programming on early computers like the IBM 1401 using Fortran, the
+    limitations of early computing technology, the transition to microcomputers, and the excitement of
+    having a personal computer like the TRS-80. Additionally, the author explored different academic
+    paths, initially planning to study philosophy but eventually switching to AI due to a lack of
+    interest in philosophy courses. Later on, the author pursued art education, attending RISD and the
+    Accademia di Belli Arti in Florence, where they encountered a different approach to teaching art.
+
+
 
 ```python
 response = query_engine.query("What was a hard moment for the author?")
 print(textwrap.fill(str(response), 100))
-
-# The author experienced a difficult moment when their mother had a stroke and was put in a nursing home. The stroke destroyed her balance, and the author and their sister were determined to help her get out of the nursing home and back to her house.
 ```
 
-## Notes on overwriting the Milvus collection
+    Dealing with the stress and challenges related to managing Hacker News was a difficult moment for
+    the author.
 
-If you want to reuse an existing Milvus collection and overwrite its data, you can use the `overwrite` argument when creating the `MilvusVectorStore` object.
 
-```python
-vector_store = MilvusVectorStore(
-    dim=1536,
-    overwrite=True,
-)
-```
+This next test shows that overwriting removes the previous data.
 
-In such a case, when you run the following code, all the data in the Milvus collection will be erased and replaced with the new data.
 
 ```python
+from llama_index.core import Document
+
+
+vector_store = MilvusVectorStore(uri="./milvus_demo.db", dim=1536, overwrite=True)
 storage_context = StorageContext.from_defaults(vector_store=vector_store)
 index = VectorStoreIndex.from_documents(
-    [Document(text="The number that is being searched for is ten.")], 
-    storage_context=storage_context
+    [Document(text="The number that is being searched for is ten.")],
+    storage_context,
 )
+query_engine = index.as_query_engine()
+res = query_engine.query("Who is the author?")
+print("Res:", res)
 ```
 
-Now when you ask the same questions again, you will receive different answers.
+    Res: The author is the individual who created the content or work in question.
 
-If you want to append additional data to an existing Milvus collection, you should not use the `overwrite` argument or set it to `False` when creating the `MilvusVectorStore` object.
 
-```python
-vector_store = MilvusVectorStore(
-    dim=1536,
-    overwrite=False,
-)
-```
+The next test shows adding additional data to an already existing  index.
 
-In such a case, when you run the following code, the new data will be appended to the existing data in the Milvus collection.
 
 ```python
+del index, vector_store, storage_context, query_engine
+
+vector_store = MilvusVectorStore(uri="./milvus_demo.db", overwrite=False)
 storage_context = StorageContext.from_defaults(vector_store=vector_store)
-index = VectorStoreIndex.from_documents(
-    documents, storage_context=storage_context
-)
+index = VectorStoreIndex.from_documents(documents, storage_context=storage_context)
+query_engine = index.as_query_engine()
+res = query_engine.query("What is the number?")
+print("Res:", res)
 ```
 
-## Conclusion
+    Res: The number is ten.
 
-In this article, we demonstrated how to build a (RAG) system using LlamaIndex and Milvus. We used the OpenAI as the LLM backend and prepared the example data for the RAG system. We also demonstrated how to query the data and generate new text using the ChatGPT model.
+
+
+```python
+res = query_engine.query("Who is the author?")
+print("Res:", res)
+```
+
+    Res: Paul Graham

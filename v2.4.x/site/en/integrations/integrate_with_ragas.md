@@ -23,10 +23,14 @@ Before running this notebook, make sure you have the following dependencies inst
 
 
 ```python
-! pip install --upgrade pymilvus openai requests tqdm pandas ragas
+$ pip install --upgrade pymilvus openai requests tqdm pandas ragas
 ```
 
-> If you are using Google Colab, to enable dependencies just installed, you may need to **restart the runtime**.
+<div class="alert note">
+
+If you are using Google Colab, to enable dependencies just installed, you may need to **restart the runtime**.
+
+</div>
 
 We will use OpenAI as the LLM in this example. You should prepare the [api key](https://platform.openai.com/docs/quickstart) `OPENAI_API_KEY` as an environment variable.
 

@@ -13,8 +13,6 @@ This guide showcases how [VoyageAI's Embedding API](https://docs.voyageai.com/do
 ## Getting started
 Before you start, make sure you have the Voyage API key ready, or you get one from the [VoyageAI website](https://dash.voyageai.com/api-keys).
 
-The data used in this example are book titles. You can download the dataset [here](https://www.kaggle.com/datasets/jealousleopard/goodreadsbooks) and put it in the same directory where you run the following code.
-
 First, install the package for Milvus and Voyage AI:
 
 
@@ -24,7 +22,7 @@ First, install the package for Milvus and Voyage AI:
 
 With this, we're ready to generate embeddings and use vector database to conduct semantic search.
 
-## Searching book titles with VoyageAI & Milvus
+## Semantic Search with VoyageAI & Milvus
 
 In the following example, we load book title data from the downloaded CSV file, use Voyage AI embedding model to generate vector representations, and store them in Milvus vector database for semantic search.
 

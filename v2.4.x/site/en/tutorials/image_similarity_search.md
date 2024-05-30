@@ -52,8 +52,8 @@ To run Colab, we provide the handy commands to install the necessary dependencie
 
 
 ```python
-!pip install pymilvus --upgrade
-!pip install timm
+$ pip install pymilvus --upgrade
+$ pip install timm
 ```
 
     Defaulting to user installation because normal site-packages is not writeable
@@ -114,7 +114,11 @@ To run Colab, we provide the handy commands to install the necessary dependencie
     Requirement already satisfied: mpmath>=0.19 in /home/zilliz/.local/lib/python3.10/site-packages (from sympy->torch->timm) (1.3.0)
 
 
-> If you are using Google Colab, to enable dependencies just installed, you may need to **restart the runtime**.
+<div class="alert note">
+
+If you are using Google Colab, to enable dependencies just installed, you may need to **restart the runtime**.
+
+</div>
 
 ## Define the Feature Extractor
 Then, we need to define a feature extractor which extracts embedding from an image using timm's ResNet-34 model.

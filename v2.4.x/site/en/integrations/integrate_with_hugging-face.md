@@ -22,10 +22,14 @@ You need to make sure all required dependencies are installed:
 
 
 ```python
-%pip install --upgrade pymilvus transformers datasets torch
+$ pip install --upgrade pymilvus transformers datasets torch
 ```
 
-> If you are using Google Colab, to enable dependencies just installed, you may need to **restart the runtime**.
+<div class="alert note">
+
+If you are using Google Colab, to enable dependencies just installed, you may need to **restart the runtime**.
+
+</div>
 
 ## Prepare data
 
