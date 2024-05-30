@@ -1552,6 +1552,14 @@
       "order":  15
     }, 
     {
+      "id": "integrate_with_memgpt.md",
+      "title": "MemGPT",
+      "label1": "integrations",
+      "label2": "",
+      "label3": "",
+      "order":  16
+    },
+    {
       "id": "tutorials",
       "title": "Tutorials",
       "label1": "",
