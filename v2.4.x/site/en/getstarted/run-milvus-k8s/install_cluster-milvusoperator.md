@@ -96,7 +96,7 @@ Run the following command to install Milvus Operator with Helm.
 $ helm install milvus-operator \
   -n milvus-operator --create-namespace \
   --wait --wait-for-jobs \
-  https://github.com/zilliztech/milvus-operator/releases/download/v0.9.14/milvus-operator-0.9.14.tgz
+  https://github.com/zilliztech/milvus-operator/releases/download/v0.9.15/milvus-operator-0.9.14.tgz
 ```
 
 You will see the output similar to the following after the installation process ends.
@@ -308,7 +308,7 @@ $ kubectl delete milvus my-release
 There are also two ways to uninstall Milvus Operator.
 
 - [Uninstall with Helm](#Uninstall-with-Helm)
-- Uninstall with kkubectl(#Uninstall-with-kubectl)
+- [Uninstall with kkubectl](#Uninstall-with-kubectl)
 
 #### Uninstall with Helm
 
