@@ -6,8 +6,6 @@ summary: Learn how to install Milvus standalone with Docker.
 title: Run Milvus in Docker
 ---
 
-<div class="tab-wrapper"><a href="prerequisite-docker.md" class=''>Docker requirements</a><a href="install_standalone-docker.md" class='active '>Docker</a><a href="install_standalone-docker-compose.md" class=''>Docker Compose</a></div>
-
 # Run Milvus in Docker
 
 This page illustrates how to launch a Milvus instance in Docker.
