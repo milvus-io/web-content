@@ -33,6 +33,24 @@ As explained in [Manage Collections](manage-collections.md), Milvus automaticall
 
 The code snippet below repurposes the existing code to establish a connection to a Milvus instance and create a collection without specifying its index parameters. In this case, the collection lacks an index and remains unloaded.
 
+<div class="language-python">
+
+To prepare for indexing, use [`MilvusClient`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md) to connect to the Milvus server and set up a collection by using [`create_schema()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md), [`add_field()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md), and [`create_collection()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md).
+
+</div>
+
+<div class="language-java">
+
+To prepare for indexing, use [`MilvusClientV2`](https://milvus.io/api-reference/java/v2.4.x/v2/Client/MilvusClientV2.md) to connect to the Milvus server and set up a collection by using [`createSchema()`](https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createSchema.md), [`addField()`](https://milvus.io/api-reference/java/v2.4.x/v2/CollectionSchema/addField.md), and [`createCollection()`](https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md).
+
+</div>
+
+<div class="language-javascript">
+
+To prepare for indexing, use [`MilvusClient`](https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md) to connect to the Milvus server and set up a collection by using [`createCollection()`](https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md).
+
+</div>
+
 <div class="multipleCode">
     <a href="#python">Python </a>
     <a href="#java">Java</a>
@@ -133,7 +151,23 @@ console.log(res.error_code)
 
 ## Index a Collection
 
-To create an index for a collection or index a collection, you need to set up the index parameters and call `create_index()`.
+<div class="language-python">
+
+To create an index for a collection or index a collection, use [`prepare_index_params()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/prepare_index_params.md) to prepare index parameters and [`create_index()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/create_index.md) to create the index.
+
+</div>
+
+<div class="language-java">
+
+To create an index for a collection or index a collection, use [`IndexParam`](https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md) to prepare index parameters and [`createIndex()`](https://milvus.io/api-reference/java/v2.4.x/v2/Management/createIndex.md) to create the index.
+
+</div>
+
+<div class="language-javascript">
+
+To create an index for a collection or index a collection, use [`createIndex()`](https://milvus.io/api-reference/node/v2.4.x/Management/createIndex.md).
+
+</div>
 
 <div class="multipleCode">
     <a href="#python">Python </a>
@@ -216,6 +250,24 @@ console.log(res.error_code)
 ## Check Index Details
 
 Once you have created an index, you can check its details.
+
+<div class="language-python">
+
+To check the index details, use [`list_indexes()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/list_indexes.md) to list the index names and [`describe_index()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/describe_index.md) to get the index details.
+
+</div>
+
+<div class="language-java">
+
+To check the index details, use [`describeIndex()`](https://milvus.io/api-reference/java/v2.4.x/v2/Management/describeIndex.md) to get the index details.
+
+</div>
+
+<div class="language-javascript">
+
+To check the index details, use [`describeIndex()`](https://milvus.io/api-reference/node/v2.4.x/Management/describeIndex.md) to get the index details.
+
+</div>
 
 <div class="multipleCode">
     <a href="#python">Python </a>
@@ -333,6 +385,24 @@ You can check the index file created on a specific field, and collect the statis
 ## Drop an Index
 
 You can simply drop an index if it is no longer needed.
+
+<div class="language-python">
+
+To drop an index, use [`drop_index()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/drop_index.md).
+
+</div>
+
+<div class="language-java">
+
+To drop an index, use [`dropIndex()`](https://milvus.io/api-reference/java/v2.4.x/v2/Management/dropIndex.md).
+
+</div>
+
+<div class="language-javascript">
+
+To drop an index, use [`dropIndex()`](https://milvus.io/api-reference/node/v2.4.x/Management/dropIndex.md).
+
+</div>
 
 <div class="multipleCode">
     <a href="#python">Python </a>

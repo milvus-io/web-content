@@ -100,7 +100,7 @@ Here are example configurations for different index types:
 
 ### Build index
 
-After configuring the index parameters in __index_params__, call the `create_index()` method to build the index.
+After configuring the index parameters in __index_params__, call the [`create_index()`](https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/create_index.md) method to build the index.
 
 ```python
 # Get an existing collection
@@ -169,7 +169,7 @@ Below are example configurations for different index types:
 
 ### Conduct a search
 
-Use the `search()` method to perform a vector similarity search on the GPU index.
+Use the [`search()`](https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/search.md) method to perform a vector similarity search on the GPU index.
 
 ```python
 # Load data into memory

@@ -41,6 +41,18 @@ The following steps repurpose the code to connect to Milvus, quickly set up a co
 
 ### Step 1: Create a collection
 
+<div class="language-python">
+
+Use [`MilvusClient`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md) to connect to the Milvus server and [`create_collection()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md) to create a collection.
+
+</div>
+
+<div class="language-java">
+
+Use [`MilvusClientV2`](https://milvus.io/api-reference/java/v2.4.x/v2/Client/MilvusClientV2.md) to connect to the Milvus server and [`createCollection()`](https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md) to create a collection.
+
+</div>
+
 <div class="multipleCode">
     <a href="#python">Python </a>
     <a href="#java">Java</a>
@@ -85,6 +97,18 @@ client.createCollection(createCollectionParam);
 ```
 
 ### Step 2: Insert randomly generated entities
+
+<div class="language-python">
+
+Use [`insert()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/insert.md) to insert entities into the collection.
+
+</div>
+
+<div class="language-java">
+
+Use [`insert()`](https://milvus.io/api-reference/java/v2.4.x/v2/Vector/insert.md) to insert entities into the collection.
+
+</div>
 
 <div class="multipleCode">
     <a href="#python">Python </a>

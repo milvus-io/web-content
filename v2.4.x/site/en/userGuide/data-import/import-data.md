@@ -17,7 +17,17 @@ This page demonstrates the procedure to import the prepared data.
 
 - You have already created a collection with the schema you use to prepare your data. If not, refer to [Manage Collections](manage-collections.md). 
 
-The following code snippet creates a simple collection with the given schema.
+<div class="language-python">
+
+The following code snippet creates a simple collection with the given schema. For more information on parameters, refer to [`create_schema()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md) and [`create_collection()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md) in the SDK reference.
+
+</div>
+
+<div class="language-java">
+
+The following code snippet creates a simple collection with the given schema. For more information on parameters, refer to [`createCollection()`](https://milvus.io/api-reference/java/v2.4.x/v1/Collection/createCollection.md) in the SDK reference.
+
+</div>
 
 <div class="multipleCode">
   <a href="#python">Python </a>

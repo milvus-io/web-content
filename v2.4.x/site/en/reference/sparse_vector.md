@@ -145,7 +145,7 @@ For details on common collection parameters, refer to [create_collection()
 
 ## Insert entities with sparse vector embeddings
 
-To insert entities with sparse vector embeddings, simply pass the list of entities to the `insert()` method.
+To insert entities with sparse vector embeddings, simply pass the list of entities to the [`insert()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/insert.md) method.
 
 ```python
 # Insert entities
@@ -154,7 +154,7 @@ client.insert(collection_name="test_sparse_vector", data=entities)
 
 ## Index the collection
 
-Before performing similarity searches, create an index for the collection.
+Before performing similarity searches, create an index for the collection. For more information on index types and parameters, refer to [add_index()](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md) and [create_index()](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/create_index.md).
 
 ```python
 # Index the collection
@@ -190,7 +190,7 @@ For more information, refer to [In-memory Index](index.md).
 
 ## Perform ANN search
 
-After the collection is indexed and loaded into memory, use the `search()` method to retrieve the relevant documents based on the query.
+After the collection is indexed and loaded into memory, use the [`search()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/search.md) method to retrieve the relevant documents based on the query.
 
 ```python
 # Load the collection into memory
@@ -230,7 +230,7 @@ When configuring search parameters, take note of the following:
 
 ## Perform scalar queries
 
-In addition to ANN search, Milvus also supports scalar queries on sparse vectors. These queries allow you to retrieve documents based on a scalar value associated with the sparse vector.
+In addition to ANN search, Milvus also supports scalar queries on sparse vectors. These queries allow you to retrieve documents based on a scalar value associated with the sparse vector. For more information on parameters, refer to [query()](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/query.md).
 
 Filter entities with __scalar_field__ greater than 3:
 

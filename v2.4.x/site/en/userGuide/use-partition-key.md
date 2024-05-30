@@ -19,6 +19,24 @@ The following snippet demonstrates how to set a field as the partition key.
 
 In the example code below, `num_partitions` determines the number of partitions that will be created. By default, it is set to `64`. We recommend you retain the default value.
 
+<div class="language-python">
+
+For more information on parameters, refer to [`MilvusClient`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md), [`create_schema()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md), and [`add_field()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md) in the SDK reference.
+
+</div>
+
+<div class="language-java">
+
+For more information on parameters, refer to [`MilvusClientV2`](https://milvus.io/api-reference/java/v2.4.x/v2/Client/MilvusClientV2.md), [`createSchema()`](https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createSchema.md), and [`addField()`](https://milvus.io/api-reference/java/v2.4.x/v2/CollectionSchema/addField.md) in the SDK reference.
+
+</div>
+
+<div class="language-javascript">
+
+For more information on parameters, refer to [`MilvusClient`](https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md) and [`createCollection()`](https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md) in the SDK reference.
+
+</div>
+
 <div class="multipleCode">
     <a href="#python">Python </a>
     <a href="#java">Java</a>
@@ -421,6 +439,24 @@ You can view the structure of the generated data by checking its first entry.
 
 ### Insert data
 
+<div class="language-python">
+
+Use the [`insert()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/insert.md) method to insert the data into the collection.
+
+</div>
+
+<div class="language-java">
+
+Use the [`insert()`](https://milvus.io/api-reference/java/v2.4.x/v2/Vector/insert.md) method to insert the data into the collection.
+
+</div>
+
+<div class="language-javascript">
+
+Use the [`insert()`](https://milvus.io/api-reference/node/v2.4.x/Vector/insert.md) method to insert the data into the collection.
+
+</div>
+
 <div class="multipleCode">
     <a href="#python">Python </a>
     <a href="#java">Java</a>
@@ -487,6 +523,24 @@ console.log(res.insert_cnt)
 ## Use partition key
 
 Once you have indexed and loaded the collection as well as inserted data, you can conduct a similarity search using the partition key. 
+
+<div class="language-python">
+
+For more information on parameters, refer to [`search()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/search.md) in the SDK reference.
+
+</div>
+
+<div class="language-java">
+
+For more information on parameters, refer to [`search()`](https://milvus.io/api-reference/java/v2.4.x/v2/Vector/search.md) in the SDK reference.
+
+</div>
+
+<div class="language-javascript">
+
+For more information on parameters, refer to [`search()`](https://milvus.io/api-reference/node/v2.4.x/Vector/search.md) in the SDK reference.
+
+</div>
 
 <div class="admonition note">
 

@@ -27,6 +27,24 @@ The following steps repurpose the code to connect to Milvus, quickly set up a co
 
 ### Step 1: Create a collection
 
+<div class="language-python">
+
+Use [`MilvusClient`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md) to connect to the Milvus server and [`create_collection()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md) to create a collection.
+
+</div>
+
+<div class="language-java">
+
+Use [`MilvusClientV2`](https://milvus.io/api-reference/java/v2.4.x/v2/Client/MilvusClientV2.md) to connect to the Milvus server and [`createCollection()`](https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md) to create a collection.
+
+</div>
+
+<div class="language-javascript">
+
+Use [`MilvusClient`](https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md) to connect to the Milvus server and [`createCollection()`](https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md) to create a collection.
+
+</div>
+
 <div class="multipleCode">
     <a href="#python">Python </a>
     <a href="#java">Java</a>
@@ -84,6 +102,24 @@ await client.createCollection({
 ```
 
 ### Step 2: Insert randomly generated entities
+
+<div class="language-python">
+
+Use [`insert()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/insert.md) to insert entities into the collection.
+
+</div>
+
+<div class="language-java">
+
+Use [`insert()`](https://milvus.io/api-reference/java/v2.4.x/v2/Vector/insert.md) to insert entities into the collection.
+
+</div>
+
+<div class="language-javascript">
+
+Use [`insert()`](https://milvus.io/api-reference/node/v2.4.x/Vector/insert.md) to insert entities into the collection.
+
+</div>
 
 <div class="multipleCode">
     <a href="#python">Python </a>
@@ -233,6 +269,24 @@ console.log(res.insert_cnt)
 ```
 
 ### Step 3: Create partitions and insert more entities
+
+<div class="language-python">
+
+Use [`create_partition()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Partitions/create_partition.md) to create partitions and [`insert()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/insert.md) to insert more entities into the collection.
+
+</div>
+
+<div class="language-java">
+
+Use [`createPartition()`](https://milvus.io/api-reference/java/v2.4.x/v2/Partitions/createPartition.md) to create partitions and [`insert()`](https://milvus.io/api-reference/java/v2.4.x/v2/Vector/insert.md) to insert more entities into the collection.
+
+</div>
+
+<div class="language-javascript">
+
+Use [`createPartition()`](https://milvus.io/api-reference/node/v2.4.x/Partitions/createPartition.md) to create partitions and [`insert()`](https://milvus.io/api-reference/node/v2.4.x/Vector/insert.md) to insert more entities into the collection.
+
+</div>
 
 <div class="multipleCode">
     <a href="#python">Python </a>
@@ -473,7 +527,23 @@ console.log(res.insert_cnt)
 
 ## Get Entities by ID
 
-If you know the IDs of the entities of your interests, you can use the `get()` method.
+<div class="language-python">
+
+If you know the IDs of the entities of your interests, you can use the [`get()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/get.md) method.
+
+</div>
+
+<div class="language-java">
+
+If you know the IDs of the entities of your interests, you can use the [`get()`](https://milvus.io/api-reference/java/v2.4.x/v2/Vector/get.md) method.
+
+</div>
+
+<div class="language-javascript">
+
+If you know the IDs of the entities of your interests, you can use the [`get()`](https://milvus.io/api-reference/node/v2.4.x/Vector/get.md) method.
+
+</div>
 
 <div class="multipleCode">
     <a href="#python">Python </a>
@@ -810,6 +880,24 @@ console.log(res.data)
 ## Use Basic Operators
 
 In this section, you will find examples of how to use basic operators in scalar filtering. You can apply these filters to [vector searches](https://milvus.io/docs/single-vector-search.md#Filtered-search) and [data deletions](https://milvus.io/docs/insert-update-delete.md#Delete-entities) too.
+
+<div class="language-python">
+
+For more information, refer to [`query()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/query.md) in the SDK reference.
+
+</div>
+
+<div class="language-java">
+
+For more information, refer to [`query()`](https://milvus.io/api-reference/java/v2.4.x/v2/Vector/query.md) in the SDK reference.
+
+</div>
+
+<div class="language-javascript">
+
+For more information, refer to [`query()`](https://milvus.io/api-reference/node/v2.4.x/Vector/query.md) in the SDK reference.
+
+</div>
 
 - Filter entities with their tag values falling between 1,000 to 1,500.
 

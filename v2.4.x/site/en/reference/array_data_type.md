@@ -118,6 +118,24 @@ You can view the structure of the generated data by checking its first entry.
 
 To define an array field, simply follow the same procedure as defining fields of other data types.
 
+<div class="language-python">
+
+For more information on parameters, refer to [`MilvusClient`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md), [`create_schema()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md), [`add_field()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md), [`add_index()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md), [`create_collection()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md), and [`get_load_state()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/get_load_state.md) in the SDK reference.
+
+</div>
+
+<div class="language-java">
+
+For more information on parameters, refer to [`MilvusClientV2`](https://milvus.io/api-reference/java/v2.4.x/v2/Client/MilvusClientV2.md), [`createSchema()`](https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createSchema.md), [`addField()`](https://milvus.io/api-reference/java/v2.4.x/v2/CollectionSchema/addField.md), [`IndexParam`](https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md), [`createCollection()`](https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md), and [`getLoadState()`](https://milvus.io/api-reference/java/v2.4.x/v2/Management/getLoadState.md) in the SDK reference.
+
+</div>
+
+<div class="language-javascript">
+
+For more information on parameters, refer to [`MilvusClient`](https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md), [`createCollection()`](https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md), and [`getLoadState()`](https://milvus.io/api-reference/node/v2.4.x/Management/getLoadState.md) in the SDK reference.
+
+</div>
+
 <div class="multipleCode">
     <a href="#python">Python </a>
     <a href="#java">Java</a>
@@ -362,6 +380,24 @@ console.log(res.state)
 
 After creating a collection, you can insert arrays such as the one demonstrated in [Overview](#overview).
 
+<div class="language-python">
+
+For more information on parameters, refer to [`insert()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/insert.md) in the SDK reference.
+
+</div>
+
+<div class="language-java">
+
+For more information on parameters, refer to [`insert()`](https://milvus.io/api-reference/java/v2.4.x/v2/Vector/insert.md) in the SDK reference.
+
+</div>
+
+<div class="language-javascript">
+
+For more information on parameters, refer to [`insert()`](https://milvus.io/api-reference/node/v2.4.x/Vector/insert.md) in the SDK reference.
+
+</div>
+
 <div class="multipleCode">
     <a href="#python">Python </a>
     <a href="#java">Java</a>
@@ -440,6 +476,24 @@ await sleep(5000)
 ## Basic scalar filtering
 
 Once all of your data has been added, you can conduct searches and queries using the elements in the array field in the same manner as you would with a standard scalar field.
+
+<div class="language-python">
+
+For more information on parameters, refer to [`search()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/search.md) in the SDK reference.
+
+</div>
+
+<div class="language-java">
+
+For more information on parameters, refer to [`search()`](https://milvus.io/api-reference/java/v2.4.x/v2/Vector/search.md) in the SDK reference.
+
+</div>
+
+<div class="language-javascript">
+
+For more information on parameters, refer to [`search()`](https://milvus.io/api-reference/node/v2.4.x/Vector/search.md) in the SDK reference.
+
+</div>
 
 <div class="multipleCode">
     <a href="#python">Python </a>

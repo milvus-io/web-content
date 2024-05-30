@@ -27,6 +27,24 @@ Upon the creation of a collection, at least a default partition named ___default
 
 The code snippet below repurposes the existing code to establish a connection to Milvus and create a collection in a quick-setup mode, indicating that the collection is loaded upon creation.
 
+<div class="language-python">
+
+For preparations, use [`MiluvsClient`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md) to connect to Milvus and [`create_collection()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md) to create a collection in a quick-setup mode.
+
+</div>
+
+<div class="language-java">
+
+For preparations, use [`MilvusClientV2`](https://milvus.io/api-reference/java/v2.4.x/v2/Client/MilvusClientV2.md) to connect to Milvus and [`createCollection()`](https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md) to create a collection in a quick-setup mode.
+
+</div>
+
+<div class="language-javascript">
+
+For preparations, use [`MilvusClient`](https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md) to connect to Milvus and [`createCollection()`](https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md) to create a collection in a quick-setup mode.
+
+</div>
+
 <div class="multipleCode">
     <a href="#python">Python </a>
     <a href="#java">Java</a>
@@ -97,6 +115,24 @@ await client.createCollection({
 
 Once a collection is ready, you can list its partitions.
 
+<div class="language-python">
+
+To list partitions, use [`list_partitions()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Partitions/list_partitions.md).
+
+</div>
+
+<div class="language-java">
+
+To list partitions, use [`listPartitions()`](https://milvus.io/api-reference/java/v2.4.x/v2/Partitions/listPartitions.md).  
+
+</div>
+
+<div class="language-javascript">
+
+To list partitions, use [`listPartitions()`](https://milvus.io/api-reference/node/v2.4.x/Partitions/listPartitions.md).
+
+</div>
+
 <div class="multipleCode">
     <a href="#python">Python </a>
     <a href="#java">Java</a>
@@ -157,6 +193,24 @@ The output of the above code snippet includes the names of the partitions within
 ## Create Partitions
 
 You can add more partitions to the collection. A collection can have up to 64 partitions.
+
+<div class="language-python">
+
+To create partitions, use [`create_partition()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Partitions/create_partition.md).
+
+</div>
+
+<div class="language-java">
+
+To create partitions, use [`createPartition()`](https://milvus.io/api-reference/java/v2.4.x/v2/Partitions/createPartition.md).
+
+</div>
+
+<div class="language-javascript">
+
+To create partitions, use [`createPartition()`](https://milvus.io/api-reference/node/v2.4.x/Partitions/createPartition.md).
+
+</div>
 
 <div class="multipleCode">
     <a href="#python">Python </a>
@@ -257,6 +311,24 @@ The code snippet above creates a partition in a collection and lists the partiti
 
 You can also check the existence of a specific partition.
 
+<div class="language-python">
+
+To check for a specific partition, use [`has_partition()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Partitions/has_partition.md).
+
+</div>
+
+<div class="language-java">
+
+To check for a specific partition, use [`hasPartition()`](https://milvus.io/api-reference/java/v2.4.x/v2/Partitions/hasPartition.md).
+
+</div>
+
+<div class="language-javascript">
+
+To check for a specific partition, use [`hasPartition()`](https://milvus.io/api-reference/node/v2.4.x/Partitions/hasPartition.md).
+
+</div>
+
 <div class="multipleCode">
     <a href="#python">Python </a>
     <a href="#java">Java</a>
@@ -350,7 +422,23 @@ You can load and release specific partitions to make them available or unavailab
 
 ### Get Load Status
 
-To check the load status of a collection and its partitions, do as follows:
+<div class="language-python">
+
+To check the load status of a collection and its partitions, use [`get_load_state()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/get_load_state.md).
+
+</div>
+
+<div class="language-java">
+
+To check the load status of a collection and its partitions, use [`getLoadState()`](https://milvus.io/api-reference/java/v2.4.x/v2/Management/getLoadState.md).
+
+</div>
+
+<div class="language-javascript">
+
+To check the load status of a collection and its partitions, use [`getLoadState()`](https://milvus.io/api-reference/node/v2.4.x/Management/getLoadState.md).
+
+</div>
 
 <div class="multipleCode">
     <a href="#python">Python </a>
@@ -538,7 +626,23 @@ Possible load status may be either of the following
 
 ### Load Partitions
 
-To load all partitions of a collection, you can just call `load_collection()`. To load specific partitions of a collection, do as follows:
+<div class="language-python">
+
+To load all partitions of a collection, you can just call [`load_collection()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/load_collection.md). To load specific partitions of a collection, use [`load_partitions()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Partitions/load_partitions.md).
+
+</div>
+
+<div class="language-java">
+
+To load all partitions of a collection, you can just call [`loadCollection()`](https://milvus.io/api-reference/java/v2.4.x/v2/Management/loadCollection.md). To load specific partitions of a collection, use [`loadPartitions()`](https://milvus.io/api-reference/java/v2.4.x/v2/Partitions/loadPartitions.md).
+
+</div>
+
+<div class="language-javascript">
+
+To load all partitions of a collection, you can just call [`loadCollection()`](https://milvus.io/api-reference/node/v2.4.x/Management/loadCollection.md). To load specific partitions of a collection, use [`loadPartitions()`](https://milvus.io/api-reference/node/v2.4.x/Partitions/loadPartitions.md).
+
+</div>
 
 <div class="multipleCode">
     <a href="#python">Python </a>
@@ -705,7 +809,23 @@ console.log(res)
 
 ### Release Partitions
 
-To release all partitions of a collection, you can just call `release_collection`. To release specific partitions of a collection, do as follows:
+<div class="language-python">
+
+To release all partitions of a collection, you can just call [`release_collection()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/release_collection.md). To release specific partitions of a collection, use [`release_partitions()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Partitions/release_partitions.md).
+
+</div>
+
+<div class="language-java">
+
+To release all partitions of a collection, you can just call [`releaseCollection()`](https://milvus.io/api-reference/java/v2.4.x/v2/Management/releaseCollection.md). To release specific partitions of a collection, use [`releasePartitions()`](https://milvus.io/api-reference/java/v2.4.x/v2/Partitions/releasePartitions.md).
+
+</div>
+
+<div class="language-javascript">
+
+To release all partitions of a collection, you can just call [`releaseCollection()`](https://milvus.io/api-reference/node/v2.4.x/Management/releaseCollection.md). To release specific partitions of a collection, use [`releasePartitions()`](https://milvus.io/api-reference/node/v2.4.x/Partitions/releasePartitions.md).
+
+</div>
 
 <div class="multipleCode">
     <a href="#python">Python </a>
@@ -800,6 +920,24 @@ res = client.get_load_status(
 ## Drop Partitions
 
 Once you release a partition, you can drop it if it is no longer needed.
+
+<div class="language-python">
+
+To drop a partition, use [`drop_partition()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Partitions/drop_partition.md).
+
+</div>
+
+<div class="language-java">
+
+To drop a partition, use [`dropPartition()`](https://milvus.io/api-reference/java/v2.4.x/v2/Partitions/dropPartition.md).
+
+</div>
+
+<div class="language-javascript">
+
+To drop a partition, use [`dropPartition()`](https://milvus.io/api-reference/node/v2.4.x/Partitions/dropPartition.md).
+
+</div>
 
 <div class="multipleCode">
     <a href="#python">Python </a>

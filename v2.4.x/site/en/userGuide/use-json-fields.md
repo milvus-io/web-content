@@ -165,6 +165,24 @@ You can view the structure of the generated data by checking its first entry.
 
 To define a JSON field, simply follow the same procedure as defining fields of other types.
 
+<div class="language-python">
+
+For more information on parameters, refer to [`MilvusClient`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md), [`create_schema()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md), [`add_field()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md), [`add_index()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md), [`create_collection()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md), and [`get_load_state()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/get_load_state.md) in the SDK reference.
+
+</div>
+
+<div class="language-java">
+
+For more information on parameters, refer to [`MilvusClientV2`](https://milvus.io/api-reference/java/v2.4.x/v2/Client/MilvusClientV2.md), [`createSchema()`](https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createSchema.md), [`addField()`](https://milvus.io/api-reference/java/v2.4.x/v2/CollectionSchema/addField.md), [`IndexParam`](https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md), [`createCollection()`](https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md), and [`getLoadState()`](https://milvus.io/api-reference/java/v2.4.x/v2/Management/getLoadState.md) in the SDK reference.
+
+</div>
+
+<div class="language-javascript">
+
+For more information on parameters, refer to [`MilvusClient`](https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md) and [`createCollection()`](https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md) and [`createCollection()`](https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md) in the SDK reference.
+
+</div>
+
 <div class="multipleCode">
     <a href="#python">Python </a>
     <a href="#java">Java</a>
@@ -366,9 +384,45 @@ console.log(res.state)
 // 
 ```
 
+<div class="language-python">
+
+For more information on parameters, refer to [`MilvusClient`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md), [`create_schema()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md), [`add_field()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md), [`add_index()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md), [`create_collection()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md), and [`get_load_state()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/get_load_state.md) in the SDK reference.
+
+</div>
+
+<div class="language-java">
+
+For more information on parameters, refer to [`MilvusClientV2`](https://milvus.io/api-reference/java/v2.4.x/v2/Client/MilvusClientV2.md), [`createSchema()`](https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createSchema.md), [`addField()`](https://milvus.io/api-reference/java/v2.4.x/v2/CollectionSchema/addField.md), [`IndexParam`](https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md), [`createCollection()`](https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md), and [`getLoadState()`](https://milvus.io/api-reference/java/v2.4.x/v2/Management/getLoadState.md) in the SDK reference.
+
+</div>
+
+<div class="language-javascript">
+
+For more information on parameters, refer to [`MilvusClient`](https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md), [`createCollection()`](https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md), and [`getLoadState()`](https://milvus.io/api-reference/node/v2.4.x/Management/getLoadState.md) in the SDK reference.
+
+</div>
+
 ## Insert field values
 
 After creating a collection from the `CollectionSchema` object, dictionaries such as the one above can be inserted into it.
+
+<div class="language-python">
+
+Use the [`insert()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/insert.md) method to insert the data into the collection.
+
+</div>
+
+<div class="language-java">
+
+Use the [`insert()`](https://milvus.io/api-reference/java/v2.4.x/v2/Vector/insert.md) method to insert the data into the collection.
+
+</div>
+
+<div class="language-javascript">
+
+Use the [`insert()`](https://milvus.io/api-reference/node/v2.4.x/Vector/insert.md) method to insert the data into the collection.
+
+</div>
 
 <div class="multipleCode">
     <a href="#python">Python </a>
@@ -475,6 +529,24 @@ console.log(res.insert_cnt)
 ## Basic scalar filtering
 
 Once all of your data has been added, you can conduct searches and queries using the keys in the JSON field in the same manner as you would with a standard scalar field. 
+
+<div class="language-python">
+
+For more information on parameters, refer to [`search()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/search.md) in the SDK reference.
+
+</div>
+
+<div class="language-java">
+
+For more information on parameters, refer to [`search()`](https://milvus.io/api-reference/java/v2.4.x/v2/Vector/search.md) in the SDK reference.
+
+</div>
+
+<div class="language-javascript">
+
+For more information on parameters, refer to [`search()`](https://milvus.io/api-reference/node/v2.4.x/Vector/search.md) in the SDK reference.
+
+</div>
 
 <div class="multipleCode">
     <a href="#python">Python </a>

@@ -15,12 +15,28 @@ The code snippets on this page use the <a href="https://milvus.io/api-reference/
 
 ## Create database
 
-To create a database, you need to first connect to a Milvus cluster and prepare a name for it:
+<div class="language-python">
+
+Use [connect()](https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Connections/connect.md) to connect to the Milvus server and [create_database()](https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/db/create_database.md) to create a new database:
+
+</div>
+
+<div class="language-java">
+
+Use [MilvusClient](https://milvus.io/api-reference/java/v2.4.x/v1/Connections/MilvusClient.md) to connect to the Milvus server and [createDatabase()](https://milvus.io/api-reference/java/v2.4.x/v1/Database/createDatabase.md) to create a new database:
+
+</div>
+
+<div class="language-javascript">
+
+Use [MilvusClient](https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md) to connect to the Milvus server and [createDatabase()](https://milvus.io/api-reference/node/v2.4.x/Database/createDatabase.md) to create a new database:
+
+</div>
 
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
+    <a href="#python"">Python </a>
+    <a href="#java"">Java</a>
+    <a href="#javascript"">Node.js</a>
 </div>
 
 ```python
@@ -127,6 +143,8 @@ ConnectParam connectParam = ConnectParam.newBuilder()
     .withUri(CLUSTER_ENDPOINT)
     .withToken(TOKEN)
     .build();
+
+MilvusServiceClient client = new MilvusServiceClient(connectParam);
 ```
 
 ```javascript
@@ -137,11 +155,25 @@ const db_name = "my_database";
 client = new MilvusClient({address, db_name}); 
 ```
 
-MilvusServiceClient client = new MilvusServiceClient(connectParam);
-
 ## List databases
 
-To find all existing databases in your Milvus cluster, do as follows:
+<div class="language-python">
+
+To find all existing databases in your Milvus cluster, use the [list_database()](https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/db/list_database.md) method:
+
+</div>
+
+<div class="language-java">
+
+To find all existing databases in your Milvus cluster, use the [listDatabases()](https://milvus.io/api-reference/java/v2.4.x/v1/Database/listDatabases.md) method:
+
+</div>
+
+<div class="language-javascript">
+
+To find all existing databases in your Milvus cluster, use the [listDatabases()](https://milvus.io/api-reference/node/v2.4.x/Database/listDatabases.md) method:
+
+</div>
 
 <div class="multipleCode">
     <a href="#python">Python </a>
@@ -183,6 +215,24 @@ console.log(res.db_names)
 ## Drop database
 
 To drop a database, you have to drop all its collections first. Otherwise, the drop fails.
+
+<div class="language-python">
+
+To drop a database, use the [drop_database()](https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/db/drop_database.md) method:
+
+</div>
+
+<div class="language-java">
+
+To drop a database, use the [dropDatabase()](https://milvus.io/api-reference/java/v2.4.x/v1/Database/dropDatabase.md) method:
+
+</div>
+
+<div class="language-javascript">
+
+To drop a database, use the [dropDatabase()](https://milvus.io/api-reference/node/v2.4.x/Database/dropDatabase.md) method:
+
+</div>
 
 <div class="multipleCode">
     <a href="#python">Python </a>

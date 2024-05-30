@@ -21,6 +21,24 @@ When defining a schema for a collection, you can set enable_dynamic_field to Tru
 
 The following snippet creates a collection with two schema-defined fields, namely id and vector, and enables the dynamic field.
 
+<div class="language-python">
+
+For more information on parameters, refer to [`create_collection()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md) in the SDK reference.
+
+</div>
+
+<div class="language-java">
+
+For more information on parameters, refer to [`createCollection()`](https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md) in the SDK reference.
+
+</div>
+
+<div class="language-javascript">
+
+For more information on parameters, refer to [`createCollection()`](https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md) in the SDK reference.
+
+</div>
+
 <div class="multipleCode">
     <a href="#python">Python </a>
     <a href="#java">Java</a>
@@ -308,6 +326,24 @@ You can view the structure of the generated data by checking its first entry.
 
 Then you can safely insert the data into the collection.
 
+<div class="language-python">
+
+For more information on parameters, refer to [`insert()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/insert.md) in the SDK reference.
+
+</div>
+
+<div class="language-java">
+
+For more information on parameters, refer to [`insert()`](https://milvus.io/api-reference/java/v2.4.x/v2/Vector/insert.md) in the SDK reference.
+
+</div>
+
+<div class="language-javascript">
+
+For more information on parameters, refer to [`insert()`](https://milvus.io/api-reference/node/v2.4.x/Vector/insert.md) in the SDK reference.
+
+</div>
+
 <div class="multipleCode">
     <a href="#python">Python </a>
     <a href="#java">Java</a>
@@ -379,7 +415,25 @@ await sleep(5000)
 
 ## Search with dynamic fields
 
-If you have created the collection with the dynamic field enabled and inserted non-schema-defined fields, you can use these fields in the filter expression of a search or a query as follows:
+If you have created the collection with the dynamic field enabled and inserted non-schema-defined fields, you can use these fields in the filter expression of a search or a query as follows.
+
+<div class="language-python">
+
+For more information on parameters, refer to [`search()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/search.md) in the SDK reference.
+
+</div>
+
+<div class="language-java">
+
+For more information on parameters, refer to [`search()`](https://milvus.io/api-reference/java/v2.4.x/v2/Vector/search.md) in the SDK reference.
+
+</div>
+
+<div class="language-javascript">
+
+For more information on parameters, refer to [`search()`](https://milvus.io/api-reference/node/v2.4.x/Vector/search.md) in the SDK reference.
+
+</div>
 
 <div class="multipleCode">
     <a href="#python">Python </a>

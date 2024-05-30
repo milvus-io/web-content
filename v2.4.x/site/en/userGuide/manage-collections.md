@@ -51,6 +51,24 @@ Against the backdrop of the great leap in the AI industry, most developers just 
 
 - Metric type used to measure similarities between vector embeddings.
 
+<div class="language-python">
+
+For quick setup, use the [`create_collection()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md) method of the [`MilvusClient`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md) class to create a collection with the specified name and dimension.
+
+</div>
+
+<div class="language-java">
+
+For quick setup, use the [`createCollection()`](https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md) method of the [`MilvusClientV2`](https://milvus.io/api-reference/java/v2.4.x/v2/Client/MilvusClientV2.md) class to create a collection with the specified name and dimension.
+
+</div>
+
+<div class="language-javascript">
+
+For quick setup, use the [`createCollection()`](https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md) method of the [`MilvusClient`](https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md) class to create a collection with the specified name and dimension.
+
+</div>
+
 <div class="multipleCode">
   <a href="#python">Python </a>
   <a href="#java">Java</a>
@@ -172,6 +190,24 @@ Instead of letting Milvus decide almost everything for your collection, you can 
 
 A schema defines the structure of a collection. Within the schema, you have the option to enable or disable `enable_dynamic_field`, add pre-defined fields, and set attributes for each field. For a detailed explanation of the concept and available data types, refer to [Schema Explained](schema.md).
 
+<div class="language-python">
+
+To set up a scheme, use [`create_schema()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md) to create a schema object and [`add_field()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md) to add fields to the schema.
+
+</div>
+
+<div class="language-java">
+
+To set up a scheme, use [`createSchema()`](https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createSchema.md) to create a schema object and [`addField()`](https://milvus.io/api-reference/java/v2.4.x/v2/CollectionSchema/addField.md) to add fields to the schema.
+
+</div>
+
+<div class="language-javascript">
+
+To set up a scheme, use [`createCollection()`](https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md).
+
+</div>
+
 <div class="multipleCode">
   <a href="#python">Python </a>
   <a href="#java">Java</a>
@@ -240,6 +276,24 @@ In the provided code snippet for Python, the `enable_dynamic_field` is set to `T
 
 Index parameters dictate how Milvus organizes your data within a collection. You can tailor the indexing process for specific fields by adjusting their `metric_type` and `index_type`. For the vector field, you have the flexibility to select `COSINE`, `L2`, or `IP` as the `metric_type`.
 
+<div class="language-python">
+
+To set up index parameters, use [`prepare_index_params()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/prepare_index_params.md) to prepare index parameters and [`add_index()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md) to add the index.
+
+</div>
+
+<div class="language-java">
+
+To set up index parameters, use [IndexParam](https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md).
+
+</div>
+
+<div class="language-javascript">
+
+To set up index parameters, use [`createIndex()`](https://milvus.io/api-reference/node/v2.4.x/Management/createIndex.md).
+
+</div>
+
 <div class="multipleCode">
   <a href="#python">Python </a>
   <a href="#java">Java</a>
@@ -303,6 +357,24 @@ The code snippet above demonstrates how to set up index parameters for the vecto
 #### Step 3: Create the collection
 
 You have the option to create a collection and an index file separately or to create a collection with the index loaded simultaneously upon creation.
+
+<div class="language-python">
+
+Use [create_collection()](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md) to create a collection with the specified schema and index parameters and [get_load_state()](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/get_load_state.md) to check the load state of the collection.
+
+</div>
+
+<div class="language-java">
+
+Use [createCollection()](https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md) to create a collection with the specified schema and index parameters and [getLoadState()](https://milvus.io/api-reference/java/v2.4.x/v2/Management/getLoadState.md) to check the load state of the collection.
+
+</div>
+
+<div class="language-javascript">
+
+Use [createCollection()](https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md) to create a collection with the specified schema and index parameters and [getLoadState()](https://milvus.io/api-reference/node/v2.4.x/Management/getLoadState.md) to check the load state of the collection.
+
+</div>
 
 - __Create a collection with the index loaded simultaneously upon creation.__
 
@@ -531,7 +603,23 @@ You have the option to create a collection and an index file separately or to cr
 
 ## View Collections
 
-You can check the details of an existing collection as follows:
+<div class="language-python">
+
+To check the details of an existing collection, use [describe_collection()](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/describe_collection.md).
+
+</div>
+
+<div class="language-java">
+
+To check the details of an existing collection, use [describeCollection()](https://milvus.io/api-reference/java/v2.4.x/v2/Collections/describeCollection.md).
+
+</div>
+
+<div class="language-javascript">
+
+To check the details of an existing collection, use [describeCollection()](https://milvus.io/api-reference/node/v2.4.x/Collections/describeCollection.md).
+
+</div>
 
 <div class="multipleCode">
     <a href="#python">Python </a>
@@ -739,10 +827,26 @@ During the loading process of a collection, Milvus loads the collection's index 
 
 ### Load a collection
 
-To load a collection, use the `load_collection()` method, specifying the collection name. You can also set `replica_number` to determine how many in-memory replicas of data segments to create on query nodes when the collection is loaded.
+<div class="language-python">
+
+To load a collection, use the [`load_collection()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/load_collection.md) method, specifying the collection name. You can also set `replica_number` to determine how many in-memory replicas of data segments to create on query nodes when the collection is loaded.
 
 - Milvus Standalone: The maximum allowed value for `replica_number` is 1.
 - Milvus Cluster: The maximum value should not exceed the `queryNode.replicas` set in your Milvus configurations. For additional details, refer to [Query Node-related Configurations](https://milvus.io/docs/configure_querynode.md#Query-Node-related-Configurations).
+
+</div>
+
+<div class="language-java">
+
+To load a collection, use the [`loadCollection()`](https://milvus.io/api-reference/java/v2.4.x/v2/Management/loadCollection.md) method, specifying the collection name.
+
+</div>
+
+<div class="language-javascript">
+
+To load a collection, use the [`loadCollection()`](https://milvus.io/api-reference/node/v2.4.x/Management/loadCollection.md) method, specifying the collection name.
+
+</div>
 
 <div class="multipleCode">
     <a href="#python">Python </a>
@@ -824,6 +928,24 @@ console.log(res.state)
 
 ### Release a collection
 
+<div class="language-python">
+
+To release a collection, use the [`release_collection()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/release_collection.md) method, specifying the collection name.
+
+</div>
+
+<div class="language-java">
+
+To release a collection, use the [`releaseCollection()`](https://milvus.io/api-reference/java/v2.4.x/v2/Management/releaseCollection.md) method, specifying the collection name.
+
+</div>
+
+<div class="language-javascript">
+
+To release a collection, use the [`releaseCollection()`](https://milvus.io/api-reference/node/v2.4.x/Management/releaseCollection.md) method, specifying the collection name.
+
+</div>
+
 <div class="multipleCode">
     <a href="#python">Python </a>
     <a href="#java">Java</a>
@@ -900,6 +1022,24 @@ You can assign aliases for collections to make them more meaningful in a specifi
 
 ### Create aliases
 
+<div class="language-python">
+
+To create aliases, use the [`create_alias()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_alias.md) method, specifying the collection name and the alias.
+
+</div>
+
+<div class="language-java">
+
+To create aliases, use the [`createAlias()`](https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createAlias.md) method, specifying the collection name and the alias.
+
+</div>
+
+<div class="language-javascript">
+
+To create aliases, use the [`createAlias()`](https://milvus.io/api-reference/node/v2.4.x/Collections/createAlias.md) method, specifying the collection name and the alias.
+
+</div>
+
 <div class="multipleCode">
     <a href="#python">Python </a>
     <a href="#java">Java</a>
@@ -970,6 +1110,24 @@ console.log(res.error_code)
 
 ### List aliases
 
+<div class="language-python">
+
+To list aliases, use the [`list_aliases()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/list_aliases.md) method, specifying the collection name.
+
+</div>
+
+<div class="language-java">
+
+To list aliases, use the [`listAliases()`](https://milvus.io/api-reference/java/v2.4.x/v2/Collections/listAliases.md) method, specifying the collection name.
+
+</div>
+
+<div class="language-javascript">
+
+To list aliases, use the [`listAliases()`](https://milvus.io/api-reference/node/v2.4.x/Collections/listAliases.md) method, specifying the collection name.
+
+</div>
+
 <div class="multipleCode">
     <a href="#python">Python </a>
     <a href="#java">Java</a>
@@ -1031,6 +1189,24 @@ console.log(res.aliases)
 ```
 
 ### Describe aliases
+
+<div class="language-python">
+
+To describe aliases, use the [`describe_alias()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/describe_alias.md) method, specifying the alias.
+
+</div>
+
+<div class="language-java">
+
+To describe aliases, use the [`describeAlias()`](https://milvus.io/api-reference/java/v2.4.x/v2/Collections/describeAlias.md) method, specifying the alias.
+
+</div>
+
+<div class="language-javascript">
+
+To describe aliases, use the [`describeAlias()`](https://milvus.io/api-reference/node/v2.4.x/Collections/describeAlias.md) method, specifying the alias.
+
+</div>
 
 <div class="multipleCode">
     <a href="#python">Python </a>
@@ -1103,6 +1279,24 @@ console.log(res)
 ```
 
 ### Reassign aliases
+
+<div class="language-python">
+
+To reassign aliases to other collections, use the [`alter_alias()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/alter_alias.md) method, specifying the collection name and the alias.
+
+</div>
+
+<div class="language-java">
+
+To reassign aliases to other collections, use the [`alterAlias()`](https://milvus.io/api-reference/java/v2.4.x/v2/Collections/alterAlias.md) method, specifying the collection name and the alias.
+
+</div>
+
+<div class="language-javascript">
+
+To reassign aliases to other collections, use the [`alterAlias()`](https://milvus.io/api-reference/node/v2.4.x/Collections/alterAlias.md) method, specifying the collection name and the alias.
+
+</div>
 
 <div class="multipleCode">
     <a href="#python">Python </a>
@@ -1223,6 +1417,24 @@ console.log(res.aliases)
 
 ### Drop aliases
 
+<div class="language-python">
+
+To drop aliases, use the [`drop_alias()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/drop_alias.md) method, specifying the alias.
+
+</div>
+
+<div class="language-java">
+
+To drop aliases, use the [`dropAlias()`](https://milvus.io/api-reference/java/v2.4.x/v2/Collections/dropAlias.md) method, specifying the alias.
+
+</div>
+
+<div class="language-javascript">
+
+To drop aliases, use the [`dropAlias()`](https://milvus.io/api-reference/node/v2.4.x/Collections/dropAlias.md) method, specifying the alias.
+
+</div>
+
 <div class="multipleCode">
     <a href="#python">Python </a>
     <a href="#java">Java</a>
@@ -1285,6 +1497,24 @@ console.log(res.error_code)
 ## Drop a Collection
 
 If a collection is no longer needed, you can drop the collection.
+
+<div class="language-python">
+
+To drop a collection, use the [`drop_collection()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/drop_collection.md) method, specifying the collection name.
+
+</div>
+
+<div class="language-java">
+
+To drop a collection, use the [`dropCollection()`](https://milvus.io/api-reference/java/v2.4.x/v2/Collections/dropCollection.md) method, specifying the collection name.
+
+</div>
+
+<div class="language-javascript">
+
+To drop a collection, use the [`dropCollection()`](https://milvus.io/api-reference/node/v2.4.x/Collections/dropCollection.md) method, specifying the collection name.
+
+</div>
 
 <div class="multipleCode">
     <a href="#python">Python </a>

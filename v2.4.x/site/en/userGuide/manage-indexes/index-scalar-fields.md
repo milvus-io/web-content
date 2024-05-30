@@ -23,9 +23,25 @@ The code snippets on this page use new <a href="https://milvus.io/api-reference/
 
 ## Auto indexing
 
-To use auto indexing, omit the __index_type__ parameter so that Milvus can infer the index type based on the scalar field type. For mappings between scalar data types and default indexing algorithms, refer to [Scalar field indexing algorithms](https://milvus.io/docs/scalar_index.md#Scalar-field-indexing-algorithms).
+<div class="language-python">
 
-Example:
+To use auto indexing, omit the __index_type__ parameter in [`add_index()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md), so that Milvus can infer the index type based on the scalar field type.
+
+</div>
+
+<div class="language-java">
+
+To use auto indexing, omit the __indexType__ parameter in [`IndexParam`](https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md), so that Milvus can infer the index type based on the scalar field type.
+
+</div>
+
+<div class="language-javascript">
+
+To use auto indexing, omit the __index_type__ parameter in [`createIndex()`](https://milvus.io/api-reference/node/v2.4.x/Management/createIndex.md), so that Milvus can infer the index type based on the scalar field type.
+
+</div>
+
+For mappings between scalar data types and default indexing algorithms, refer to [Scalar field indexing algorithms](https://milvus.io/docs/scalar_index.md#Scalar-field-indexing-algorithms).
 
 <div class="multipleCode">
     <a href="#python">Python </a>
@@ -85,7 +101,23 @@ await client.createIndex({
 
 ## Custom indexing
 
-To use custom indexing, specify a particular index type in the __index_type__ parameter.
+<div class="language-python">
+
+To use custom indexing, specify a particular index type using the __index_type__ parameter in [`add_index()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md).
+
+</div>
+
+<div class="language-java">
+
+To use custom indexing, specify a particular index type using the __indexType__ parameter in [`IndexParam`](https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md).
+
+</div>
+
+<div class="language-javascript">
+
+To use custom indexing, specify a particular index type using the __index_type__ parameter in [`createIndex()`](https://milvus.io/api-reference/node/v2.4.x/Management/createIndex.md).
+
+</div>
 
 <div class="multipleCode">
     <a href="#python">Python </a>
@@ -232,7 +264,23 @@ __Methods and Parameters__
 
 ## Verifying the result
 
-Use the __list_indexes()__ method to verify the creation of scalar indexes:
+<div class="language-python">
+
+Use the [`list_indexes()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/list_indexes.md) method to verify the creation of scalar indexes:
+
+</div>
+
+<div class="language-java">
+
+Use the `listIndexes()` method to verify the creation of scalar indexes:
+
+</div>
+
+<div class="language-javascript">
+
+Use the `listIndexes()` method to verify the creation of scalar indexes:
+
+</div>
 
 <div class="multipleCode">
     <a href="#python">Python </a>

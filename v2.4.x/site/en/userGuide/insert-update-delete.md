@@ -34,6 +34,24 @@ The code snippets on this page use new <a href="https://milvus.io/api-reference/
 
 The code snippet below repurposes the existing code to establish a connection to a Milvus cluster and quickly set up a collection.
 
+<div class="language-python">
+
+For preparations, use [`MilvusClient`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md) to connect to the Milvus server and [`create_collection()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md) to create a collection in a quick-setup mode.
+
+</div>
+
+<div class="language-java">
+
+For preparations, use [`MilvusClientV2`](https://milvus.io/api-reference/java/v2.4.x/v2/Client/MilvusClientV2.md) to connect to the Milvus server and [`createCollection()`](https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md) to create a collection in a quick-setup mode.
+
+</div>
+
+<div class="language-javascript">
+
+For preparations, use [`MilvusClient`](https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md) to connect to the Milvus server and [`createCollection()`](https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md) to create a collection in a quick-setup mode.
+
+</div>
+
 <div class="multipleCode">
     <a href="#python">Python </a>
     <a href="#java">Java</a>
@@ -111,6 +129,25 @@ await client.createCollection({
 ## Insert entities
 
 To insert entities, you need to organize the data into a list of dictionaries, where each dictionary represents an entity. Each dictionary contains the keys corresponding to both pre-defined and dynamic fields in the target collection.
+
+<div class="language-python">
+
+To insert entities into a collection, use the [`insert()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/insert.md) method.
+
+</div>
+
+<div class="language-java">
+
+To insert entities into a collection, use the [`insert()`](https://milvus.io/api-reference/java/v2.4.x/v2/Vector/insert.md) method.
+
+</div>
+
+<div class="language-javascript">
+
+
+To insert entities into a collection, use the [`insert()`](https://milvus.io/api-reference/node/v2.4.x/Vector/insert.md) method.
+
+</div>
 
 <div class="multipleCode">
     <a href="#python">Python </a>
@@ -359,6 +396,24 @@ Upserting data is a combination of update and insert operations. In Milvus, an u
 
 - If the primary key does not exist in the collection, a new entity will be inserted.
 
+<div class="language-python">
+
+To upsert entities, use the [`upsert()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/upsert.md) method.
+
+</div>
+
+<div class="language-java">
+
+To upsert entities, use the [`upsert()`](https://milvus.io/api-reference/java/v2.4.x/v2/Vector/insert.md) method.
+
+</div>
+
+<div class="language-javascript">
+
+To upsert entities, use the [`upsert()`](https://milvus.io/api-reference/node/v2.4.x/Vector/upsert.md) method.
+
+</div>
+
 <div class="multipleCode">
     <a href="#python">Python </a>
     <a href="#java">Java</a>
@@ -556,7 +611,25 @@ The output is a dictionary containing the statistics on the affected entities. F
 
 ## Delete entities
 
-If an entity is no longer needed, you can delete it from the collection. Milvus offers two ways for you to identify the entities to delete.
+<div class="language-python">
+
+If an entity is no longer needed, you can delete it from the collection by using [`delete()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/delete.md).
+
+</div>
+
+<div class="language-java">
+
+If an entity is no longer needed, you can delete it from the collection by using [`delete()`](https://milvus.io/api-reference/java/v2.4.x/v2/Vector/delete.md).
+
+</div>
+
+<div class="language-javascript">
+
+If an entity is no longer needed, you can delete it from the collection by using [`delete()`](https://milvus.io/api-reference/node/v2.4.x/Vector/delete.md).
+
+</div>
+
+Milvus offers two ways for you to identify the entities to delete.
 
 - __Delete entities by filter.__
 
