@@ -504,7 +504,7 @@
     },
     {
       "id": "multi-vector-search.md",
-      "title": "Multi-Vector Search",
+      "title": "Hybrid Search",
       "label1": "userguide",
       "label2": "search_query_get",
       "label3": "",
