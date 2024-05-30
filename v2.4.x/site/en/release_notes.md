@@ -17,11 +17,11 @@ Release date: May 29, 2024
 
 Milvus version 2.4.3 introduced a host of features, improvements, and bug fixes to elevate performance and reliability. Notable enhancements included support for sparse float vector bulk insert and optimized bloom filter acceleration. Improvements covered various areas, from dynamic configuration updates to memory usage optimization. Bug fixes addressed critical issues like panic scenarios and ensured smoother system operations. This release underscored Milvus's ongoing commitment to enhancing functionality, optimizing performance, and delivering a robust user experience.
 
-## Features
+### Features
 
 - Supported sparse float vector bulk insert for binlog/json/parquet ([#32649](https://github.com/milvus-io/milvus/pull/32649))
 
-## Improvements
+### Improvements
 
 - Implemented Datacoord/node watch channel based on RPC ([#32036](https://github.com/milvus-io/milvus/pull/32036))
 - Optimized bloom filter to accelerate delete filtering ([#32642](https://github.com/milvus-io/milvus/pull/32642), [#33329](https://github.com/milvus-io/milvus/pull/33329), [#33284](https://github.com/milvus-io/milvus/pull/33284))
@@ -77,7 +77,7 @@ Milvus version 2.4.3 introduced a host of features, improvements, and bug fixes 
 - Removed redundant replica recovery ([#32985](https://github.com/milvus-io/milvus/pull/32985))
 - Enabled channel meta table to write more than 200k segments ([#33300](https://github.com/milvus-io/milvus/pull/33300))
 
-## Bug fixes
+### Bug fixes
 
 - Fixed panic when the database didn't exist in the rate limit interceptor ([#33308](https://github.com/milvus-io/milvus/pull/33308))
 - Fixed quotacenter metrics collection failure due to incorrect parameters ([#33399](https://github.com/milvus-io/milvus/pull/33399))
