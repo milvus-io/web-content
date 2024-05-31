@@ -7,6 +7,30 @@ title: Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.4.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.4.4
+
+Release date: May 31, 2024
+
+| Milvus version | Python SDK version | Java SDK version    | Node.js SDK version |
+|----------------|--------------------| --------------------| --------------------|
+| 2.4.4          | 2.4.3              | 2.4.1               | 2.4.2               |
+
+Milvus v2.4.4 includes several improvements and bug fixes aimed at enhancing performance and stability. Notably, we've resolved a critical issue where bulk insert statistics logs were incorrectly garbage collected, potentially affecting data integrity. We strongly recommend all v2.4 users upgrade to this version to benefit from these fixes.
+
+### Improvements
+
+- Upgraded bitset for ARM SVE ([#33440](https://github.com/milvus-io/milvus/pull/33440))
+- Enabled Milvus compilation with GCC-13 ([#33441](https://github.com/milvus-io/milvus/pull/33441))
+
+### Critical bug fixes
+
+- Filled stats log ID and validated its correctness ([#33478](https://github.com/milvus-io/milvus/pull/33478))
+
+### Bug fixes
+
+- Displayed empty collections when all privilege is granted ([#33454](https://github.com/milvus-io/milvus/pull/33454))
+- Ensured CMake downloads and installs for the current platform, not just x86_64 ([#33439](https://github.com/milvus-io/milvus/pull/33439))
+
 ## v2.4.3
 
 Release date: May 29, 2024
