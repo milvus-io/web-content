@@ -253,7 +253,7 @@ display(concatenated_image)
 
 
     
-![png](image_search_with_milvus_files/image_search_with_milvus_13_1.png)
+![Query image](../../../assets/query.png)
     
 
 
@@ -263,7 +263,7 @@ display(concatenated_image)
 
 
     
-![png](image_search_with_milvus_files/image_search_with_milvus_13_3.png)
+![Results](../../../assets/results.png)
     
 
 
