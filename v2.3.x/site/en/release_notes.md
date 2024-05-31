@@ -7,6 +7,22 @@ title: Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.3.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.3.17
+
+Release date: May 31, 2024
+
+| Milvus version | Python SDK version | Java SDK version | Go SDK version | Node.js SDK version |
+|----------------|--------------------|------------------|----------------|---------------------|
+| 2.3.17         | 2.3.7              | 2.3.6            | 2.3.6          | 2.3.5               |
+
+Milvus version 2.3.17 primarily introduces several bug fixes to improve query accuracy, cluster reliability, and privilege maintenance. The most notable fix ensures that query iterators in Milvus return the correct number of results, rather than missing some data. This release reinforces Milvus's commitment to functionality and robustness.
+
+### Bug fixes
+
+- Fixed issue where query iterators missed some results when upserts and deletes were performed very frequently ([#33468](https://github.com/milvus-io/milvus/pull/33468))
+- Fixed issue where the cluster could block during startup due to improper handling of standby status ([#33371](https://github.com/milvus-io/milvus/pull/33371))
+- Fixed issue where specifying the database name when granting privileges failed ([#33292](https://github.com/milvus-io/milvus/pull/33292))
+
 ## v2.3.16
 
 Release date: May 24, 2024
