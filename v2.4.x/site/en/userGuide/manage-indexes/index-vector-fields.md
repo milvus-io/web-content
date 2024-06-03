@@ -184,7 +184,8 @@ index_params.add_index(
     field_name="vector",
     metric_type="COSINE",
     index_type="IVF_FLAT",
-    index_name="vector_index"
+    index_name="vector_index",
+    params={ "nlist": 128 }
 )
 
 # 4.3. Create an index file
@@ -204,8 +205,9 @@ import io.milvus.v2.service.index.request.CreateIndexReq;
 IndexParam indexParamForVectorField = IndexParam.builder()
     .fieldName("vector")
     .indexName("vector_index")
-    .indexType(IndexParam.IndexType.AUTOINDEX)
+    .indexType(IndexParam.IndexType.IVF_FLAT)
     .metricType(IndexParam.MetricType.COSINE)
+    .extraParams(Map.of("nlist", 128))
     .build();
 
 List<IndexParam> indexParams = new ArrayList<>();
@@ -228,7 +230,8 @@ res = await client.createIndex({
     field_name: "vector",
     index_type: "AUTOINDEX",
     metric_type: "COSINE",   
-    index_name: "vector_index"
+    index_name: "vector_index",
+    params: { "nlist": 128 }
 })
 
 console.log(res.error_code)
