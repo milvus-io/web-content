@@ -134,7 +134,7 @@ In this version, PyMilvus adds a MilvusClient module that incorporates several f
 - [describe_role()](MilvusClient/Authentication/describe_role.md)
 - [list_roles()](MilvusClient/Authentication/list_roles.md)
 - [grant_privilege()](MilvusClient/Authentication/grant_privilege.md)
-- [revoke_privilege()](MilvusClient/Authentication/revoke_privilege.md)
+- [revoke_privileges()](MilvusClient/Authentication/revoke_privileges.md)
 
 ## Examples
 
