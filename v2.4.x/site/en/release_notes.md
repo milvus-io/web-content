@@ -15,16 +15,18 @@ Release date: May 31, 2024
 |----------------|--------------------| --------------------| --------------------|
 | 2.4.4          | 2.4.3              | 2.4.1               | 2.4.2               |
 
-Milvus v2.4.4 includes several improvements and bug fixes aimed at enhancing performance and stability. Notably, we've resolved a critical issue where bulk insert statistics logs were incorrectly garbage collected, potentially affecting data integrity. We strongly recommend all v2.4 users upgrade to this version to benefit from these fixes.
+Milvus v2.4.4 includes several critical bug fixes and improvements aimed at enhancing performance and stability. Notably, we've **resolved a critical issue where bulk insert statistics logs were incorrectly garbage collected**, potentially affecting data integrity. **We strongly recommend all v2.4 users upgrade to this version to benefit from these fixes.**
+
+**If you are using bulk insert, upgrade to v2.4.4 at the earliest opportunity for data integrity.**
+
+### Critical bug fixes
+
+- Filled stats log ID and validated its correctness ([#33478](https://github.com/milvus-io/milvus/pull/33478))
 
 ### Improvements
 
 - Upgraded bitset for ARM SVE ([#33440](https://github.com/milvus-io/milvus/pull/33440))
 - Enabled Milvus compilation with GCC-13 ([#33441](https://github.com/milvus-io/milvus/pull/33441))
-
-### Critical bug fixes
-
-- Filled stats log ID and validated its correctness ([#33478](https://github.com/milvus-io/milvus/pull/33478))
 
 ### Bug fixes
 
