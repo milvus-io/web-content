@@ -253,7 +253,7 @@ display(concatenated_image)
 
 
     
-![Query image](../../../assets/query.png)
+<img src="../../../assets/query.png" width="150" />
     
 
 
