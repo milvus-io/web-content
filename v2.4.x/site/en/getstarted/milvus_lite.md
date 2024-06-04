@@ -48,7 +48,7 @@ After running the above code snippet, a database file named **milvus_demo.db** w
 
 ## What's next
 
-Having installed Milvus in Docker, you can:
+Having connected to Milvus Lite, you can:
 
 - Check [Quickstart](quickstart.md) to see what Milvus can do.
 
