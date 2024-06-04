@@ -6,7 +6,7 @@ summary: Learn how to install Milvus cluster on Kubernetes.
 title: Install Milvus Cluster with Helm
 ---
 
-# Run Milvus in Kubernetes with Milvus Operator
+# Run Milvus in Kubernetes with Helm
 
 This page illustrates how to start a Milvus instance in Kubernetes using [Milvus Helm charts](https://github.com/zilliztech/milvus-helm).
 
@@ -28,6 +28,7 @@ Helm uses a packaging format called charts. A chart is a collection of files tha
     ```
 
 - Check [the hardware and software requirements](prerequisite-helm.md) before installation.
+- Before installing Milvus, it is recommended to use the [Milvus Sizing Tool](https://milvus.io/tools/sizing) to estimate the hardware requirements based on your data size. This helps ensure optimal performance and resource allocation for your Milvus installation.
 
 ## Install Milvus Helm Chart
 
@@ -71,6 +72,8 @@ $ helm install my-release milvus/milvus
 ```
 
 In the above command, `my-release` is the release name, and `milvus/milvus` is the locally installed chart repository. To use a different name, replace `my-release` with the one you see fit.
+
+The command above deploys a Milvus cluster with its components and dependencies using default configurations. To customize these settings, we recommend you use the [Milvus Sizing Tool](https://milvus.io/tools/sizing) to adjust the configurations based on your actual data size and then download the corresponding YAML file. To learn more about configuration parameters, refer to [Milvus System Configurations Checklist](https://milvus.io/docs/system_configuration.md).
 
 <div class="alert note">
   <ul>
