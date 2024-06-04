@@ -841,93 +841,68 @@
       "isMenu": true
     },
     {
-      "id": "aws",
-      "title": "AWS",
-      "label1": "admin_guide",
-      "label2": "on_cloud",
-      "label3": "",
-      "order": 0,
-      "isMenu": true
-    },
-    {
       "id": "aws.md",
       "title": "Amazon EC2",
       "label1": "admin_guide",
-      "label2": "on_cloud",
-      "label3": "aws",
+      "label2": "deployment",
+      "label3": "on_cloud",
       "order": 0
     },
     {
       "id": "eks.md",
       "title": "Amazon EKS",
       "label1": "admin_guide",
-      "label2": "on_cloud",
-      "label3": "aws",
+      "label2": "deployment",
+      "label3": "on_cloud",
       "order": 1
-    },
-    {
-      "id": "gcp",
-      "title": "GCP",
-      "label1": "admin_guide",
-      "label2": "on_cloud",
-      "label3": "",
-      "order": 2
-    },    
+    },   
     {
       "id": "gcp.md",
-      "title": "GCP",
+      "title": "Google Cloud",
       "label1": "admin_guide",
-      "label2": "on_cloud",
-      "label3": "gcp",
-      "order": 0
+      "label2": "deployment",
+      "label3": "on_cloud",
+      "order": 2
     },
     {
       "id": "gcs.md",
-      "title": "GCS With IAM",
+      "title": "Google Cloud Storage",
       "label1": "admin_guide",
-      "label2": "on_cloud",
-      "label3": "gcp",
-      "order": 1
+      "label2": "deployment",
+      "label3": "on_cloud",
+      "order": 3
     },
     {
       "id": "gcp_layer7.md",
-      "title": "Layer-7 Load Balancing",
+      "title": "GCP Layer-7 Load Balancing",
       "label1": "admin_guide",
-      "label2": "on_cloud",
-      "label3": "gcp",
-      "order": 2
-    },
-    {
-      "id": "azure",
-      "title": "Azure",
-      "label1": "admin_guide",
-      "label2": "on_cloud",
-      "label3": "",
-      "order": 3
-    },    
+      "label2": "deployment",
+      "label3": "on_cloud",
+      "order": 4
+    },  
     {
       "id": "azure.md",
-      "title": "Azure",
+      "title": "Microsoft Azure",
       "label1": "admin_guide",
-      "label2": "on_cloud",
-      "label3": "azure",
-      "order": 0
+      "label2": "deployment",
+      "label3": "on_cloud",
+      "order": 5
     },
     {
       "id": "abs.md",
-      "title": "Blob Storage With IAM",
+      "title": "Microsoft Azure Blob Storage",
       "label1": "admin_guide",
-      "label2": "on_cloud",
-      "label3": "azure",
-      "order": 1
+      "label2": "deployment",
+      "label3": "on_cloud",
+      "order": 6
     },
     {
       "id": "ingress.md",
       "title": "Ingress Nginx",
       "label1": "admin_guide",
-      "label2": "on_cloud",
-      "label3": "azure",
-      "order": 2
+      "label2": "deployment",
+      "label3": "on_cloud",
+      "order": 7
     },
     {
       "id": "configuration",
