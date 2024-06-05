@@ -189,3 +189,5 @@ res
     "Self-reflection of an AI agent involves the process of synthesizing memories into higher-level inferences over time to guide the agent's future behavior. It includes recency, importance, and relevance factors to determine the salient high-level questions and optimize believability. This mechanism helps the agent improve iteratively by refining past action decisions and correcting previous mistakes."
 
 
+
+This tutorial build a vanilla RAG chain powered by Milvus. For more advanced RAG techniques, please refer to the [advanced rag bootcamp](https://github.com/milvus-io/bootcamp/tree/master/bootcamp/RAG/advanced_rag).

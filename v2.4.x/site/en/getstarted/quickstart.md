@@ -13,7 +13,7 @@ Vectors, the output data format of Neural Network models, can effectively encode
 Milvus is an open-source vector database that suits AI applications of every size from running a demo chatbot in Jupyter notebook to building web-scale search that serves billions of users. In this guide, we will walk you through how to set up Milvus locally within minutes and use the Python client library to generate, store and search vectors. 
 
 ## Install Milvus
-In this guide we use Milvus Lite, a python library included in `pymilvus` that can be embedded into the client application. Milvus also supports deployment on [Docker](https://milvus.io/docs/install_standalone-docker.md) and [Kubenetes](https://milvus.io/docs/install_cluster-milvusoperator.md) for production use cases.
+In this guide we use Milvus Lite, a python library included in `pymilvus` that can be embedded into the client application. Milvus also supports deployment on [Docker](https://milvus.io/docs/install_standalone-docker.md) and [Kubernetes](https://milvus.io/docs/install_cluster-milvusoperator.md) for production use cases.
 
 Before starting, make sure you have Python 3.7+ available in the local environment. Install `pymilvus` which contains both the python client library and Milvus Lite:
 
@@ -21,6 +21,11 @@ Before starting, make sure you have Python 3.7+ available in the local environme
 ```python
 $ pip install -U pymilvus
 ```
+<div class="alert note">
+
+If you are using Google Colab, to enable dependencies just installed, you may need to **restart the runtime**.
+
+</div>
 
 ## Set Up Vector Database
 To create a local Milvus vector database, simply instantiate a `MilvusClient` by specifying a file name to store all data, such as "milvus_demo.db".
@@ -39,7 +44,7 @@ In Milvus, we need a collection to store vectors and their associated metadata. 
 ```python
 client.create_collection(
     collection_name="demo_collection",
-    dimension=768  # The vectors we will use in this demo has 768 dimensions
+    dimension=768,  # The vectors we will use in this demo has 768 dimensions
 )
 ```
 
@@ -86,11 +91,19 @@ print("Dim:", embedding_fn.dim, vectors[0].shape)  # Dim: 768 (768,)
 
 # Each entity has id, vector representation, raw text, and a subject label that we use
 # to demo metadata filtering later.
-data = [ {"id": i, "vector": vectors[i], "text": docs[i], "subject": "history"} for i in range(len(vectors)) ]
+data = [
+    {"id": i, "vector": vectors[i], "text": docs[i], "subject": "history"}
+    for i in range(len(vectors))
+]
 
 print("Data has", len(data), "entities, each with fields: ", data[0].keys())
 print("Vector dim:", len(data[0]["vector"]))
 ```
+
+    Dim: 768 (768,)
+    Data has 3 entities, each with fields:  dict_keys(['id', 'vector', 'text', 'subject'])
+    Vector dim: 768
+
 
 ## [Alternatively] Use fake representation with random vectors
 If you couldn't download the model due to network issues, as a walkaround, you can use random vectors to represent the text and still finish the example. Just note that the search result won't reflect semantic similarity as the vectors are fake ones. 
@@ -106,8 +119,11 @@ docs = [
     "Born in Maida Vale, London, Turing was raised in southern England.",
 ]
 # Use fake representation with random vectors (768 dimension).
-vectors = [ [ random.uniform(-1, 1) for _ in range(768) ] for _ in docs ]
-data = [ {"id": i, "vector": vectors[i], "text": docs[i], "subject": "history"} for i in range(len(vectors)) ]
+vectors = [[random.uniform(-1, 1) for _ in range(768)] for _ in docs]
+data = [
+    {"id": i, "vector": vectors[i], "text": docs[i], "subject": "history"}
+    for i in range(len(vectors))
+]
 
 print("Data has", len(data), "entities, each with fields: ", data[0].keys())
 print("Vector dim:", len(data[0]["vector"]))
@@ -122,10 +138,7 @@ Let's insert the data into the collection:
 
 
 ```python
-res = client.insert(
-    collection_name="demo_collection",
-    data=data
-)
+res = client.insert(collection_name="demo_collection", data=data)
 
 print(res)
 ```
@@ -141,21 +154,21 @@ Milvus accepts one or multiple vector search requests at the same time. The valu
 
 
 ```python
-query_vectors = embedding_fn.encode_queries([ "Who is Alan Turing?" ])
+query_vectors = embedding_fn.encode_queries(["Who is Alan Turing?"])
 # If you don't have the embedding function you can use a fake vector to finish the demo:
 # query_vectors = [ [ random.uniform(-1, 1) for _ in range(768) ] ]
 
 res = client.search(
-    collection_name="demo_collection", # target collection
-    data=query_vectors,                # query vectors
-    limit=2,                           # number of returned entities
-    output_fields=["text", "subject"], # specifies fields to be returned
+    collection_name="demo_collection",  # target collection
+    data=query_vectors,  # query vectors
+    limit=2,  # number of returned entities
+    output_fields=["text", "subject"],  # specifies fields to be returned
 )
 
 print(res)
 ```
 
-    data: ["[{'id': 0, 'distance': 0.03993444889783859, 'entity': {'text': 'Artificial intelligence was founded as an academic discipline in 1956.', 'subject': 'history'}}, {'id': 1, 'distance': -0.008267653174698353, 'entity': {'text': 'Alan Turing was the first person to conduct substantial research in AI.', 'subject': 'history'}}]"] , extra_info: {'cost': 0}
+    data: ["[{'id': 2, 'distance': 0.5859944820404053, 'entity': {'text': 'Born in Maida Vale, London, Turing was raised in southern England.', 'subject': 'history'}}, {'id': 1, 'distance': 0.5118255615234375, 'entity': {'text': 'Alan Turing was the first person to conduct substantial research in AI.', 'subject': 'history'}}]"] , extra_info: {'cost': 0}
 
 
 The output is a list of results, each mapping to a vector search query. Each query contains a list of results, where each result contains the entity primary key, the distance to the query vector, and the entity details with specified `output_fields`.
@@ -172,17 +185,17 @@ docs = [
     "DDR1 is involved in cancers and fibrosis.",
 ]
 vectors = embedding_fn.encode_documents(docs)
-data = [ {"id": 2+i, "vector": vectors[i], "text": docs[i], "subject": "biology"} for i in range(len(vectors))]
+data = [
+    {"id": 3 + i, "vector": vectors[i], "text": docs[i], "subject": "biology"}
+    for i in range(len(vectors))
+]
 
-client.insert(
-    collection_name="demo_collection",
-    data=data
-)
+client.insert(collection_name="demo_collection", data=data)
 
 # This will exclude any text in "history" subject despite close to the query vector.
 res = client.search(
     collection_name="demo_collection",
-    data=embedding_fn.encode_queries([ "tell me AI related information" ]),
+    data=embedding_fn.encode_queries(["tell me AI related information"]),
     filter="subject == 'biology'",
     limit=2,
     output_fields=["text", "subject"],
@@ -191,7 +204,7 @@ res = client.search(
 print(res)
 ```
 
-    data: ["[{'id': 3, 'distance': 0.27030572295188904, 'entity': {'text': 'Computational synthesis with AI algorithms predicts molecular properties.', 'subject': 'biology'}}, {'id': 2, 'distance': 0.16425888240337372, 'entity': {'text': 'Machine learning has been used for drug design.', 'subject': 'biology'}}]"] , extra_info: {'cost': 0}
+    data: ["[{'id': 4, 'distance': 0.27030569314956665, 'entity': {'text': 'Computational synthesis with AI algorithms predicts molecular properties.', 'subject': 'biology'}}, {'id': 3, 'distance': 0.16425910592079163, 'entity': {'text': 'Machine learning has been used for drug design.', 'subject': 'biology'}}]"] , extra_info: {'cost': 0}
 
 
 By default, the scalar fields are not indexed. If you need to perform metadata filtered search in large dataset, you can consider using fixed schema and also turn on the [index](https://milvus.io/docs/scalar_index.md) to improve the search performance. 
@@ -218,8 +231,8 @@ Directly retrieve entities by primary key:
 ```python
 res = client.query(
     collection_name="demo_collection",
-    ids=[0,2],
-    output_fields=["vector", "text", "subject"]
+    ids=[0, 2],
+    output_fields=["vector", "text", "subject"],
 )
 ```
 
@@ -229,10 +242,7 @@ If you'd like to purge data, you can delete entities specifying the primary key 
 
 ```python
 # Delete entities by primary key
-res = client.delete(
-    collection_name="demo_collection",
-    ids=[0,2]
-)
+res = client.delete(collection_name="demo_collection", ids=[0, 2])
 
 print(res)
 
@@ -245,8 +255,8 @@ res = client.delete(
 print(res)
 ```
 
-    [0, 2, 2]
-    [3, 4]
+    [0, 2]
+    [3, 4, 5]
 
 
 ## Load Existing Data
@@ -264,21 +274,16 @@ If you would like to delete all the data in a collection, you can drop the colle
 
 
 ```python
-# 15. Drop collection
-client.drop_collection(
-    collection_name="demo_collection"
-)
+# Drop collection
+client.drop_collection(collection_name="demo_collection")
 ```
 
 Learn More
-Milvus Lite is great for getting started with a local python program. If you have large scale data or would like to use Milvus in production, you can learn about deploying Milvus on [Docker](https://milvus.io/docs/install_standalone-docker.md) and [Kubenetes](https://milvus.io/docs/install_cluster-milvusoperator.md). All deployment modes of Milvus share the same API, so your client side code doesn't need to change much if moving to another deployment mode. Simply specify the [URI and Token](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md) of a Milvus server deployed anywhere:
+Milvus Lite is great for getting started with a local python program. If you have large scale data or would like to use Milvus in production, you can learn about deploying Milvus on [Docker](https://milvus.io/docs/install_standalone-docker.md) and [Kubernetes](https://milvus.io/docs/install_cluster-milvusoperator.md). All deployment modes of Milvus share the same API, so your client side code doesn't need to change much if moving to another deployment mode. Simply specify the [URI and Token](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md) of a Milvus server deployed anywhere:
 
 
 ```python
-client = MilvusClient(
-    uri="http://localhost:19530",
-    token="root:Milvus"
-)
+client = MilvusClient(uri="http://localhost:19530", token="root:Milvus")
 ```
 
 Milvus provides REST and gRPC API, with client libraries in languages such as [Python](https://milvus.io/docs/install-pymilvus.md), [Java](https://milvus.io/docs/install-java.md), [Go](https://milvus.io/docs/install-go.md), C# and [Node.js](https://milvus.io/docs/install-node.md).
