@@ -13,15 +13,72 @@ This guide walks you through the basic operations on creating and managing index
 
 Leveraging the metadata stored in an index file, Milvus organizes your data in a specialized structure, facilitating rapid retrieval of requested information during searches or queries.
 
-Milvus provides [several index types](https://milvus.io/docs/index.md) to sort field values for efficient similarity searches. It also offers three [metric types](https://milvus.io/docs/metric.md#Similarity-Metrics): __Cosine Similarity__ (COSINE), __Euclidean Distance__ (L2), and __Inner Product__ (IP) to measure the distances between vector embeddings.
+Milvus provides several index types and metrics to sort field values for efficient similarity searches. The following table lists the supported index types and metrics for different vector field types. For details, refer to [In-memory Index](index.md) and [Similarity Metrics](metric.md).
 
-It is recommended to create indexes for both the vector field and scalar fields that are frequently accessed.
+<div class="filter">
+  <a href="#floating">Floating point embeddings</a>
+  <a href="#binary">Binary embeddings</a>
+  <a href="#sparse">Sparse embeddings</a>
+</div>
 
-<div class="alert note">
+<div class="filter-floating table-wrapper" markdown="block">
 
-The code snippets on this page use new <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">MilvusClient</a> (Python) to interact with Milvus. New MilvusClient SDKs for other languages will be released in future updates.
+<table class="tg">
+<thead>
+  <tr>
+    <th class="tg-0pky" style="width: 204px;">Metric Types</th>
+    <th class="tg-0pky">Index Types</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="tg-0pky"><ul><li>Euclidean distance (L2)</li><li>Inner product (IP)</li><li>Cosine similarity (COSINE)</li></td>
+    <td class="tg-0pky" rowspan="2"><ul><li>FLAT</li><li>IVF_FLAT</li><li>IVF_SQ8</li><li>IVF_PQ</li><li>GPU_IVF_FLAT</li><li>GPU_IVF_PQ</li><li>HNSW</li><li>DISKANN</li></ul></td>
+  </tr>
+</tbody>
+</table>
 
 </div>
+
+<div class="filter-binary table-wrapper" markdown="block">
+
+<table class="tg">
+<thead>
+  <tr>
+    <th class="tg-0pky" style="width: 204px;">Metric Types</th>
+    <th class="tg-0pky">Index Types</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="tg-0pky"><ul><li>Jaccard</li><li>Hamming</li></ul></td>
+    <td class="tg-0pky"><ul><li>BIN_FLAT</li><li>BIN_IVF_FLAT</li></ul></td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+
+<div class="filter-sparse table-wrapper" markdown="block">
+
+<table class="tg">
+<thead>
+  <tr>
+    <th class="tg-0pky" style="width: 204px;">Metric Types</th>
+    <th class="tg-0pky">Index Types</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="tg-0pky">IP</td>
+    <td class="tg-0pky"><ul><li>SPARSE_INVERTED_INDEX</li><li>SPARSE_WAND</li></ul></td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+
+It is recommended to create indexes for both the vector field and scalar fields that are frequently accessed.
 
 ## Preparations
 

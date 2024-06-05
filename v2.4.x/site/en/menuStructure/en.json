@@ -373,11 +373,26 @@
       "order": 9
     },
     {
+      "id": "users_and_roles.md",
+      "title": "Users and Roles",
+      "label1": "concepts",
+      "label2": "",
+      "order": 10
+    },
+    
+    {
+      "id": "replica.md",
+      "title": "In-memory Replica",
+      "label1": "concepts",
+      "label2": "",
+      "order": 11
+    },
+    {
       "id": "glossary.md",
       "title": "Terminology",
       "label1": "concepts",
       "label2": "",
-      "order": 10
+      "order": 12
     }, 
     {
       "id": "userguide",
@@ -581,26 +596,11 @@
       "order": 5
     },
     {
-      "id": "users_and_roles.md",
-      "title": "Users and Roles",
-      "label1": "userguide",
-      "label2": "advanced_features",
-      "order": 6
-    },
-    
-    {
-      "id": "replica.md",
-      "title": "In-memory Replica",
-      "label1": "userguide",
-      "label2": "advanced_features",
-      "order": 7
-    },
-    {
       "id": "mmap.md",
       "title": "MMap Storage",
       "label1": "userguide",
       "label2": "advanced_features",
-      "order": 8
+      "order": 6
     },
     {
       "id": "resource_group.md",
@@ -608,7 +608,7 @@
       "label1": "userguide",
       "label2": "advanced_features",
       "label3": "",
-      "order": 9      
+      "order": 7      
     }, 
     {
       "id": "models",

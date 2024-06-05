@@ -24,12 +24,6 @@ Entities within a collection share a common set of attributes, termed schema, ou
 
 Successful insertion of entities into a collection requires that the provided data should contain all the schema-defined fields of the target collection. Additionally, you can also include non-schema-defined fields only if you have enabled the dynamic field. For details, refer to [Enable Dynamic Field](enable-dynamic-field.md).
 
-<div class="alert note">
-
-The code snippets on this page use new <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">MilvusClient</a> (Python) to interact with Milvus. New MilvusClient SDKs for other languages will be released in future updates.
-
-</div>
-
 ## Preparations
 
 The code snippet below repurposes the existing code to establish a connection to a Milvus cluster and quickly set up a collection.

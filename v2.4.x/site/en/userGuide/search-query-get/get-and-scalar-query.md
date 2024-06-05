@@ -15,12 +15,6 @@ A scalar query filters entities in a collection based on a defined condition usi
 
 In Milvus, __a filter is always a string compising field names joined by operators__. In this guide, you will find various filter examples. To learn more about the operator details, go to the [Reference](https://milvus.io/docs/get-and-scalar-query.md#Reference-on-scalar-filters) section.
 
-<div class="alert note">
-
-The code snippets on this page use new <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">MilvusClient</a> (Python) to interact with Milvus. New MilvusClient SDKs for other languages will be released in future updates.
-
-</div>
-
 ## Preparations
 
 The following steps repurpose the code to connect to Milvus, quickly set up a collection, and insert over 1,000 randomly generated entities into the collection.
