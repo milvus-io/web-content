@@ -21,10 +21,7 @@ To see sparse vectors in action, refer  to [hello_sparse.py](https://github.com/
 
 <div class="admonition note">
     <p><b>notes</b></p>
-    <ul>
-        <li>Currently, the support for sparse vectors is a beta feature in 2.4.0, with plans to make it generally available in 3.0.0.</li>
-        <li>The code snippets on this page use the <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Connections/connect.md">PyMilvus ORM module</a> to interact with Milvus. Code snippets with the new <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">MilvusClient SDK</a> will be available soon.</li>
-    </ul>
+        Currently, the support for sparse vectors is a beta feature in 2.4.0, with plans to make it generally available in 3.0.0.
 </div>
 
 ## Prepare sparse vector embeddings
