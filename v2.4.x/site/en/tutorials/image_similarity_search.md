@@ -91,7 +91,7 @@ class FeatureExtractor:
 ```
 
 ## Create a Milvus Collection
-Then we need to create Milvus collection to store the image embeddings
+Then we need to create Milvus collection to store the image embeddings.
 
 
 ```python
