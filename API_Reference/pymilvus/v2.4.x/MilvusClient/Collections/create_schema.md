@@ -50,6 +50,8 @@ MilvusClient.create_schema(**kwargs) -> CollectionSchema
 
         Setting this makes Milvus manage all partitions in the current collection.
 
+        This parameter is not applicable to Milvus Lite. For more information on Milvus Lite limits, refer to [Run Milvus Lite](https://milvus.io/docs/milvus_lite.md).
+
         <div class="admonition note">
 
         <p><b>what is a partition key?</b></p>

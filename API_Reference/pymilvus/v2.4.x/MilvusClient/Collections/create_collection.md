@@ -110,6 +110,8 @@ create_collection(
 
         The value defaults to **1**, indicating that one shard is to be created along with this collection.
 
+        This parameter is not applicable to Milvus Lite. For more information on Milvus Lite limits, refer to [Run Milvus Lite](https://milvus.io/docs/milvus_lite.md).
+
         <div class="admonition note">
 
         <p><b>what is sharding?</b></p>
@@ -124,6 +126,8 @@ create_collection(
         The name of the field that serves as the partition key. Each collection can have one partition key.
 
         This parameter is ignored if **schema** is not **None** and a field in the schema has its **is_parition_key** set to **True**.
+
+        This parameter is not applicable to Milvus Lite. For more information on Milvus Lite limits, refer to [Run Milvus Lite](https://milvus.io/docs/milvus_lite.md).
 
         <div class="admonition note">
 
@@ -141,11 +145,15 @@ create_collection(
 
         The value defaults to **64**, indicating that 64 partitions are to be created along with this collection. This parameter applies when **partition_key_field** is set to the name of a field.
 
+        This parameter is not applicable to Milvus Lite. For more information on Milvus Lite limits, refer to [Run Milvus Lite](https://milvus.io/docs/milvus_lite.md).
+
     - **consistency_level** (*int* | *str*)
 
         The consistency level of the target collection.
 
         The value defaults to **Bounded** (**2**) with options of **Strong** (**0**), **Session** (**1**), **Bounded** (**2**), and **Eventually** (**3**).
+
+        When you run Milvus Lite, the only valid value for this parameter is **Strong**. For more information on Milvus Lite limits, refer to [Run Milvus Lite](https://milvus.io/docs/milvus_lite.md).
 
         <div class="admonition note">
 

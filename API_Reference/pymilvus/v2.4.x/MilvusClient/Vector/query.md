@@ -10,6 +10,7 @@ query(
     filter: str,
     output_fields: Optional[List[str]] = None,
     timeout: Optional[float] = None,
+    partition_names: Optional[List[str]] = None,
     **kwargs,
 ) -> List[dict]
 ```
@@ -50,6 +51,14 @@ query(
 - **timeout** (*float* | *None*) -
 
     The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
+
+- **partition_names** (*list[str]* | *None*) -
+
+    A list of partition names.
+
+    The value defaults to **None**. If specified, only the specified partitions are involved in queries.
+
+    This parameter is not applicable to Milvus Lite. For more information on Milvus Lite limits, refer to [Run Milvus Lite](https://milvus.io/docs/milvus_lite.md).
 
 - **kwargs** -
 

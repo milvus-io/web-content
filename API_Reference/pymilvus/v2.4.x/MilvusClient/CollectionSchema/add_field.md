@@ -104,6 +104,8 @@ add_field(
 
     Whether the current field serves as the partition key. Each collection can have one partition key.
 
+    This parameter is not applicable to Milvus Lite. For more information on Milvus Lite limits, refer to [Run Milvus Lite](https://milvus.io/docs/milvus_lite.md).
+
     <div class="admonition note">
 
     <p><b>what is the partition key?</b></p>

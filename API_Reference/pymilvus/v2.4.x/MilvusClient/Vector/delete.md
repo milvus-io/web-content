@@ -10,6 +10,7 @@ delete(
     ids: Optional[Union[list, str, int]] = None,
     timeout: Optional[float] = None,
     filter: Optional[str] = "",
+    partition_name: Optional[str] = "",
     **kwargs,
 ) -> dict
 ```
@@ -43,6 +44,14 @@ delete(
     The value defaults to an empty string, indicating that no condition applies. Setting both **ids** and **filter** results in a **ParamError** exception.
 
     You can set this parameter to an empty string to skip scalar filtering. To build a scalar filtering condition, refer to [Boolean Expression Rules](https://milvus.io/docs/boolean.md). 
+
+- **partition_name** (*str* | *""*) -
+
+    The name of the partition to delete entities from.
+
+    The value defaults to an empty string. If specified, entities will be deleted from the specified partition.
+
+    This parameter is not applicable to Milvus Lite. For more information on Milvus Lite limits, refer to [Run Milvus Lite](https://milvus.io/docs/milvus_lite.md).
 
 **RETURN TYPE:**
 
