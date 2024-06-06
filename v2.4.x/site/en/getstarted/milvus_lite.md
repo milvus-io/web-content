@@ -43,8 +43,156 @@ from pymilvus import MilvusClient
 client = MilvusClient("milvus_demo.db")
 ```
 
-
 After running the above code snippet, a database file named **milvus_demo.db** will be generated in the current folder.
+
+## Limits
+
+When running Milvus Lite, note that some features are not supported. The following tables summarize the usage limits on Milvus Lite.
+
+### Collection
+
+| Method / Parameter                                                                                                                   | Supported in Milvus Lite                                      |
+|----------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------|
+| [create_collection()](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md)       | Support with limited parameters                               |
+| `collection_name`                                                                                                          | Y                                                             |
+| `dimension`                                                                                                                | Y                                                             |
+| `primary_field_name`                                                                                                       | Y                                                             |
+| `id_type`                                                                                                                  | Y                                                             |
+| `vector_field_name`                                                                                                        | Y                                                             |
+| `metric_type`                                                                                                              | Y                                                             |
+| `auto_id`                                                                                                                  | Y                                                             |
+| `schema`                                                                                                                   | Y                                                             |
+| `index_params`                                                                                                             | Y                                                             |
+| `enable_dynamic_field`                                                                                                     | Y                                                             |
+| `num_shards`                                                                                                               | N                                                             |
+| `partition_key_field`                                                                                                      | N                                                             |
+| `num_partitions`                                                                                                           | N                                                             |
+| `consistency_level`                                                                                                        | N (Only supports `Strong`; Any configuration will be treated as `Strong`.)          |
+| [get_collection_stats()](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/get_collection_stats.md) | Supports getting collection statistics.                       |
+| `collection_name`                                                                                                          | Y                                                             |
+| `timeout`                                                                                                                  | Y                                                             |
+| [describe_collection()](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/describe_collection.md)   | `num_shards`, `consistency_level`, and `collection_id` in response are invalid. |
+| `timeout`                                                                                                                  | Y                                                             |
+| [has_collection()](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/has_collection.md)             | Supports checking if a collection exists.                     |
+| `collection_name`                                                                                                          | Y                                                             |
+| `timeout`                                                                                                                  | Y                                                             |
+| [list_collections()](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/list_collections.md)         | Supports listing all collections.                             |
+| [drop_collection()](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/drop_collection.md)           | Supports dropping a collection.                               |
+| `collection_name`                                                                                                          | Y                                                             |
+| `timeout`                                                                                                                  | Y                                                             |
+| [rename_collection()](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/rename_collection.md)       | Renaming a collection is not supported.                             |
+
+### Field & Schema
+
+| Method / Parameter                                                                                                     | Supported in Milvus Lite        |
+|--------------------------------------------------------------------------------------------------------------|---------------------------------|
+| [create_schema()](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md) | Support with limited parameters |
+| `auto_id`                                                                                                    | Y                               |
+| `enable_dynamic_field`                                                                                       | Y                               |
+| `primary_field`                                                                                              | Y                               |
+| `partition_key_field`                                                                                        | N                               |
+| [add_field()](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md)    | Support with limited parameters |
+| `field_name`                                                                                                 | Y                               |
+| `datatype`                                                                                                   | Y                               |
+| `is_primary`                                                                                                 | Y                               |
+| `max_length`                                                                                                 | Y                               |
+| `element_type`                                                                                               | Y                               |
+| `max_capacity`                                                                                               | Y                               |
+| `dim`                                                                                                        | Y                               |
+| `is_partition_key`                                                                                           | N                               |
+
+### Insert & Search
+
+| Method / Parameter                                                                                  | Supported in Milvus Lite        |
+|-------------------------------------------------------------------------------------------|---------------------------------|
+| [search()](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/search.md) | Support with limited parameters |
+| `collection_name`                                                                         | Y                               |
+| `data`                                                                                    | Y                               |
+| `filter`                                                                                  | Y                               |
+| `limit`                                                                                   | Y                               |
+| `output_fields`                                                                           | Y                               |
+| `search_params`                                                                           | Y                               |
+| `timeout`                                                                                 | Y                               |
+| `partition_names`                                                                         | N                               |
+| `anns_field`                                                                              | Y                               |
+| [query()](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/query.md)   | Support with limited parameters |
+| `collection_name`                                                                         | Y                               |
+| `filter`                                                                                  | Y                               |
+| `output_fields`                                                                           | Y                               |
+| `timeout`                                                                                 | Y                               |
+| `ids`                                                                                     | Y                               |
+| `partition_names`                                                                         | N                               |
+| [get()](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/get.md)                                                                                   | Support with limited parameters |
+| `collection_name`                                                                         | Y                               |
+| `ids`                                                                                     | Y                               |
+| `output_fields`                                                                           | Y                               |
+| `timeout`                                                                                 | Y                               |
+| `partition_names`                                                                         | N                               |
+| [delete()](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/delete.md) | Support with limited parameters |
+| `collection_name`                                                                         | Y                               |
+| `ids`                                                                                     | Y                               |
+| `timeout`                                                                                 | Y                               |
+| `filter`                                                                                  | Y                               |
+| `partition_name`                                                                          | N                               |
+| [insert()](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/insert.md) | Support with limited parameters |
+| `collection_name`                                                                         | Y                               |
+| `data`                                                                                    | Y                               |
+| `timeout`                                                                                 | Y                               |
+| `partition_name`                                                                          | N                               |
+| [upsert()](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/upsert.md) | Support with limited parameters |
+| `collection_name`                                                                         | Y                               |
+| `data`                                                                                    | Y                               |
+| `timeout`                                                                                 | Y                               |
+| `partition_name`                                                                          | N                               |
+
+### Load & Release
+
+| Method / Parameter                                                                                                              | Supported in Milvus Lite |
+|-----------------------------------------------------------------------------------------------------------------------|--------------------------|
+| [load_collection()](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/load_collection.md)       | Y                        |
+| `collection_name`                                                                                                     | Y                        |
+| `timeout`                                                                                                             | Y                        |
+| [release_collection()](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/release_collection.md) | Y                        |
+| `collection_name`                                                                                                     | Y                        |
+| `timeout`                                                                                                             | Y                        |
+| [get_load_state()](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/get_load_state.md)         | Getting load status is not supported.            |
+| [refresh_load()](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/refresh_load.md)             | Loading the unloaded data of a loaded collection is not supported.            |
+| [close()](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/close.md)                               | Y                        |
+
+### Index
+
+| Method / Parameter                                                                                                       | Supported in Milvus Lite                                                                               |
+|----------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------|
+| [list_indexes()](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/list_collections.md) | Listing indexes is supported.                                                                          |
+| `collection_name`                                                                                              | Y                                                                                                      |
+| `field_name`                                                                                                   | Y                                                                                                      |
+| [create_index()](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/create_index.md)      | Only supports partial index types: `FLAT`, `HNSW`, `BIN_FLAT`, `SPARSE_INVERTED_INDEX`, `SPARSE_WAND`. |
+| `index_params`                                                                                                 | Y                                                                                                      |
+| `timeout`                                                                                                      | Y                                                                                                      |
+| [drop_index()](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/drop_index.md)          | Dropping indexes is supported.                                                                         |
+| `collection_name`                                                                                              | Y                                                                                                      |
+| `index_name`                                                                                                   | Y                                                                                                      |
+| `timeout`                                                                                                      | Y                                                                                                      |
+| [describe_index()](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/describe_index.md)  | Describing indexes is supported.                                                                       |
+| `collection_name`                                                                                              | Y                                                                                                      |
+| `index_name`                                                                                                   | Y                                                                                                      |
+| `timeout`                                                                                                      | Y                                                                                                      |
+
+### Partition
+
+Milvus Lite does not support partitions and partition-related methods.
+
+### Users & Roles
+
+Milvus Lite does not support users and roles and related methods.
+
+### Alias
+
+Milvus Lite does not support aliases and alias-related methods.
+
+### Others
+
+For other methods not listed in the above tables, Milvus Lite does not support them.
 
 ## What's next
 
