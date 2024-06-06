@@ -50,6 +50,9 @@ The following example prepares sparse embeddings by generating a random sparse m
 
 ```python
 # Prepare entities with sparse vector representation
+import numpy as np
+import random
+
 rng = np.random.default_rng()
 
 num_entities, dim = 10000, 10000
@@ -116,8 +119,6 @@ To generate embeddings, you can also use the `model` package built in the PyMilv
 To create a collection with a sparse vector field, set the __datatype__ of the sparse vector field to __DataType.SPARSE_FLOAT_VECTOR__. Unlike dense vectors, there is no need to specify a dimension for sparse vectors.
 
 ```python
-import numpy as np
-import random
 from pymilvus import MilvusClient, DataType
 
 # Create a MilvusClient instance
