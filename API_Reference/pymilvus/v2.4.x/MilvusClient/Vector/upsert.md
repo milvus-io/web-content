@@ -79,6 +79,8 @@ upsert(
 
     If specified, the data is to be inserted or updated in the specified partition.
 
+    This parameter is not applicable to Milvus Lite. For more information on Milvus Lite limits, refer to [Run Milvus Lite](https://milvus.io/docs/milvus_lite.md).
+
 **RETURN TYPE:**
 
 *dict*

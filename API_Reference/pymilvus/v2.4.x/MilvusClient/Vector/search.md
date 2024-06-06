@@ -104,6 +104,8 @@ search(
 
     The value defaults to **None**. If specified, only the specified partitions are involved in queries.
 
+    This parameter is not applicable to Milvus Lite. For more information on Milvus Lite limits, refer to [Run Milvus Lite](https://milvus.io/docs/milvus_lite.md).
+
 - **kwargs** -
 
     - **offset** (int) -
