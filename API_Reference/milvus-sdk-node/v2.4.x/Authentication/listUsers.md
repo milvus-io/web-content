@@ -1,6 +1,6 @@
 # listUsers()
 
-This is a method template.
+This operation lists currently available users.
 
 ```javascript
 listUsers(data): Promise<ListCredUsersResponse>

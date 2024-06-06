@@ -42,7 +42,7 @@ milvusClient.createCollection({
 
 - **dimension** (*number*) -
 
-    The number of dimensions of the vector embeddings. Skip this if you need to customize the collection schema.
+    The dimensionality of the vector embeddings. The value should be an integer greater than 1. Skip this if you need to customize the collection schema.
 
 - **auto_id** (*boolean*) - 
 
@@ -185,9 +185,9 @@ milvusClient.createCollection({
 
         - **dim** (*string* | *number*) -
 
-            The dimension of the collection field to hold vector embeddings.
+            The dimensionality of the collection field that holds vector embeddings. 
 
-            The value is usually determined by the model you use to generate vector embeddings.
+            The value should be an integer greater than 1 and is usually determined by the model you use to generate vector embeddings.
 
         - **element_type** (string) -
 
@@ -364,9 +364,9 @@ milvusClient.createCollection({
 
         - **dim** (*string* | *number*) -
 
-            The dimension of the collection field to hold vector embeddings.
+            The dimensionality of the collection field that  holds vector embeddings.
 
-            The value is usually determined by the model you use to generate vector embeddings.
+            The value should be greater than 1 and is usually determined by the model you use to generate vector embeddings.
 
         - **element_type** (string) -
 
