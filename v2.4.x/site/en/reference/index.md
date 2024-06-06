@@ -27,6 +27,12 @@ According to the implementation methods, the ANNS vector index can be categorize
 
 Milvus supports various index types, which are categorized by the type of embedding they handle: **floating-point**, **binary**, and **sparse**.
 
+<div class="filter">
+  <a href="#floating">Floating-point embeddings</a>
+  <a href="#binary">Binary embeddings</a>
+  <a href="#sparse">Sparse embeddings</a>
+</div>
+
 <div class="filter-floating">
 
 ### Indexes for floating-point embeddings
@@ -55,12 +61,6 @@ The distance metric supported for sparse embeddings is `IP` only.
 
 The types of indexes include `SPARSE_INVERTED_INDEX` and `SPARSE_WAND`.
 
-</div>
-
-<div class="filter">
-  <a href="#floating">Floating-point embeddings</a>
-  <a href="#binary">Binary embeddings</a>
-  <a href="#sparse">Sparse embeddings</a>
 </div>
 
 <div class="filter-floating table-wrapper">
@@ -208,6 +208,8 @@ The types of indexes include `SPARSE_INVERTED_INDEX` and `SPARSE_WAND`.
 </table>
 
 </div>
+
+<div class="filter-floating">
 
 ### FLAT
 
@@ -360,6 +362,10 @@ In order to improve performance, HNSW limits the maximum degree of nodes on each
   | --------- | ------------ | ---------------- |
   | `ef`      | Parameter controlling query time/accuracy trade-off. Higher `ef` leads to more accurate but slower search. | [`top_k`, int_max]     |
 
+</div>
+
+<div class="filter-binary">
+
 ### BIN_FLAT
 
 This index is exactly the same as FLAT except that this can only be used for binary embeddings.
@@ -404,6 +410,10 @@ BIN_IVF_FLAT is the most basic BIN_IVF index, and the encoded data stored in eac
     |----------------------------|---------------------------------------------------------|------------|---------------|
     | `max_empty_result_buckets` | Maximum number of buckets not returning any search results.<br/>This is a range-search parameter and terminates the search process whilst the number of consecutive empty buckets reaches the specified value.<br/>Increasing this value can improve recall rate at the cost of increased search time. | [1, 65535] | 2  |
 
+</div>
+
+<div class="filter-sparse">
+
 ### SPARSE_INVERTED_INDEX
 
 Each dimension maintains a list of vectors that have a non-zero value at that dimension. During search, Milvus iterates through each dimension of the query vector and computes scores for vectors that have non-zero values in those dimensions.
@@ -437,6 +447,8 @@ Based on our testing, `SPARSE_WAND` generally outperforms other methods in terms
     | Parameter           | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | Range  |
     |---------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------|
     | `drop_ratio_search` | The proportion of small vector values that are excluded during the search process. This option allows fine-tuning of the search process by specifying the ratio of the smallest values in the query vector to ignore. It helps balance search precision and performance. The smaller the value set for `drop_ratio_search`, the less these small values contribute to the final score. By ignoring some small values, search performance can be improved with minimal impact on accuracy. | [0, 1] |
+
+</div>
 
 ## FAQ
 
