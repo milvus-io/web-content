@@ -47,7 +47,7 @@ These types of indexes include `FLAT`, `IVF_FLAT`, `IVF_PQ`, `IVF_SQ8`, `HNSW`, 
 
 ### Indexes for binary embeddings
 
-For 128-dimensional binary embeddings, the storage they take up is 128 / 8 = 16 bytes. And the distance metrics used for binary embeddings are `Jaccard` and `Hamming`.
+For 128-dimensional binary embeddings, the storage they take up is 128 / 8 = 16 bytes. And the distance metrics used for binary embeddings are `JACCARD` and `HAMMING`.
 
 This type of indexes include `BIN_FLAT` and `BIN_IVF_FLAT`.
 
