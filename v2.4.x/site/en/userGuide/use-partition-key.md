@@ -17,7 +17,7 @@ You can use the partition key to implement multi-tenancy. For details on multi-t
 
 The following snippet demonstrates how to set a field as the partition key.
 
-In the example code below, `num_partitions` determines the number of partitions that will be created. By default, it is set to `64`. We recommend you retain the default value.
+In the example code below, `num_partitions` determines the number of partitions that will be created. By default, it is set to `16`. We recommend you retain the default value.
 
 <div class="language-python">
 
