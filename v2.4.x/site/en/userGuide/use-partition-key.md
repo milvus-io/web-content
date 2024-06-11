@@ -60,7 +60,7 @@ schema = MilvusClient.create_schema(
     enable_dynamic_field=True,
     # highlight-next-line
     partition_key_field="color",
-    num_partitions=64 # Number of partitions. Defaults to 64.
+    num_partitions=16 # Number of partitions. Defaults to 16.
 )
 
 schema.add_field(field_name="id", datatype=DataType.INT64, is_primary=True)
