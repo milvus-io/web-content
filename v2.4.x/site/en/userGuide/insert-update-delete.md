@@ -390,6 +390,14 @@ Upserting data is a combination of update and insert operations. In Milvus, an u
 
 - If the primary key does not exist in the collection, a new entity will be inserted.
 
+<div class="alert note">
+
+- Upsert operations will not update the primary keys.
+- Upsert operations does not support collections with <code>autoID</code> enabled.
+- If you plan to use the <code>upsert</code> operation instead of <code>insert</code> for large-scale data ingestion (e.g. millions of vectors), be aware that this can lead to high memory consumption on Milvus data nodes.
+
+</div>
+
 <div class="language-python">
 
 To upsert entities, use the [`upsert()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/upsert.md) method.
