@@ -60,7 +60,6 @@ Sorted by:
             <li><a href="configure_proxy.md">Proxy</a></li>
             <li><a href="configure_querycoord.md">Query coord</a></li>
             <li><a href="configure_querynode.md">Query node</a></li>
-            <li><a href="configure_indexcoord.md">Index coord</a></li>
             <li><a href="configure_indexnode.md">Index node</a></li>
             <li><a href="configure_datacoord.md">Data coord</a></li>
             <li><a href="configure_datanode.md">Data node</a></li>

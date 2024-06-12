@@ -265,7 +265,7 @@ res = await client.dropDatabase({
 })
 ```
 
-## Use the RBAC with database
+## Use RBAC with database
 
 RBAC also covers database operations and ensures forward compatibility. The word **database** in the Permission APIs (Grant / Revoke / List Grant) has the following meanings:
 
@@ -275,63 +275,364 @@ RBAC also covers database operations and ensures forward compatibility. The word
 
 The following code snippet is shared among the listed blocks below.
 
-```
+<div class="multipleCode">
+    <a href="#python">Python </a>
+    <a href="#java">Java</a>
+    <a href="#javascript">Node.js</a>
+</div>
+
+```python
 from pymilvus import connections, Role
 
-_HOST = '127.0.0.1'
-_PORT = '19530'
-_ROOT = "root"
-_ROOT_PASSWORD = "Milvus"
-_ROLE_NAME = "test_role"
-_PRIVILEGE_INSERT = "Insert"
+_URI = "http://localhost:19530"
+_TOKEN = "root:Milvus"
+_DB_NAME = "default"
 
 
 def connect_to_milvus(db_name="default"):
     print(f"connect to milvus\n")
-    connections.connect(host=_HOST, port=_PORT, user=_ROOT, password=_ROOT_PASSWORD, db_name=db_name)
+    connections.connect(
+        uri=_URI,
+        token=_TOKEN,
+        db_name=db_name
+    )
+```
+
+```java
+String URI = "http://localhost:19530";
+String TOKEN = "root:Milvus";
+
+public class ConnectToMilvus {
+    private String _dbName = "default";
+
+    public newBuilder() {}
+
+    public MilvusServiceClient build() {
+        ConnectParam connectParam = ConnectParam.newBuilder()
+            .withUri(URI)
+            .withToken(TOKEN)
+            .withDatabaseName(_dbNAME)
+            .build();
+
+        return new MilvusServiceClient(connectParam);
+    }
+
+    public newBuilder withDbName(String dbName) {
+        this._dbName = dbName;
+        return this;
+    }
+}
+```
+
+```javascript
+const address = "http://localhost:19530";
+const token = "root:Milvus";
+
+function connectToMilvus(dbName="default") {
+    const client = new MilvusClient({
+        address,
+        token,
+        dbName
+    });
+
+    return client;
+}
 ```
 
 - If neither a Milvus connection nor a Permission API call specifies a `db_name`, **database** refers to the default database.
 
-```
-connect_to_milvus()
-role = Role(_ROLE_NAME)
-role.create()
+    <div class="multipleCode">
+    <a href="#python">Python </a>
+    <a href="#java">Java</a>
+    <a href="#javascript">Node.js</a>
+    </div>
 
-connect_to_milvus()
-role.grant("Collection", "*", _PRIVILEGE_INSERT)
-print(role.list_grants())
-print(role.list_grant("Collection", "*"))
-role.revoke("Global", "*", _PRIVILEGE_INSERT)
-```
+    ```python
+    _ROLE_NAME = "test_role"
+    _PRIVILEGE_INSERT = "Insert"
+
+    connect_to_milvus()
+    role = Role(_ROLE_NAME)
+    role.create()
+
+    connect_to_milvus()
+    role.grant("Collection", "*", _PRIVILEGE_INSERT)
+    print(role.list_grants())
+    print(role.list_grant("Collection", "*"))
+    role.revoke("Global", "*", _PRIVILEGE_INSERT)
+    ```
+
+    ```java
+    String ROLE_NAME = "test_role";
+    String PRIVILEGE_INSERT = "Insert";
+
+    MilvusServiceClient client = new ConnectToMilvus().build();
+    R<RpcStatus> response = client.createRole(CreateRoleParam.newBuilder()
+        .withRoleName(ROLE_NAME)
+        .build());
+
+    if (response.getStatus() != R.Status.Success.getCode()) {
+        throw new RuntimeException(response.getMessage());
+    }
+
+    response = client.grantRolePrivilege(GrantRolePriviledgeParam.newBuilder()
+        .withRoleName(ROLE_NAME)
+        .withObject("Collection")
+        .withObjectName("*")
+        .withPrivilege(PRIVILEGE_INSERT)
+        .build());
+
+    if (response.getStatus() != R.Status.Success.getCode()) {
+        throw new RuntimeException(response.getMessage());
+    }
+
+    R<SelectGrantResponse> grants = client.selectGrantForRole(SelectGrantForRoleParam.newBuilder()
+        .withRoleName(ROLE_NAME)
+        .build());
+
+    if (grants.getStatus() != R.Status.Success.getCode()) {
+        throw new RuntimeException(grants.getMessage());
+    }
+
+    System.out.println(grants.getData());
+
+    grants = client.selectGrantForRoleAndObject(SelectGrantForRoleAndObjectParam.newBuilder()
+        .withRoleName(ROLE_NAME)
+        .withObject("Collection")
+        .withObjectName("*")
+        .build());
+
+    if (grants.getStatus() != R.Status.Success.getCode()) {
+        throw new RuntimeException(grants.getMessage());
+    }
+
+    System.out.println(grants.getData());
+
+    response = client.revokeRolePrivilege(RevokeRolePrivilegeParam.newBuilder()
+        .withRoleName(ROLE_NAME)
+        .withObject("Global")
+        .withObjectName("*")
+        .withPrivilege(PRIVILEGE_INSERT)
+        .build());
+
+    if (response.getStatus() != R.Status.Success.getCode()) {
+        throw new RuntimeException(response.getMessage());
+    }
+
+    response = client.revokeRolePrivilege(RevokeRolePrivilegeParam.newBuilder()
+        .withRoleName(ROLE_NAME)
+        .withObject("Global")
+        .withObjectName("*")
+        .withPrivilege(PRIVILEGE_INSERT)
+        .build());
+
+    if (response.getStatus() != R.Status.Success.getCode()) {
+        throw new RuntimeException(response.getMessage());
+    }
+    ```
+
+    ```javascript
+    const ROLE_NAME = "test_role";
+    const PRIVILEGE_INSERT = "Insert";
+
+    const client = connectToMilvus();
+
+    async function demo() {
+
+    }
+    await client.createRole({
+        roleName: ROLE_NAME
+    })
+
+    const grants = await client.listGrants({
+        roleName: ROLE_NAME
+    })
+
+    console.log(grants.grants);
+
+    await client.revokePrivilege({
+        roleName: ROLE_NAME,
+        object: "Global",
+        objectName: "*",
+        privilege: PRIVILEGE_INSERT
+    })
+    ```
 
 - If a Milvus connection specifies a `db_name`, but a Permission API call afterward does not, **database** refers to the database whose name was specified in the Milvus connection.
 
-```python
-# NOTE: please make sure the 'foo' db has been created
-connect_to_milvus(db_name="foo")
-# This role will have the insert permission of all collections under foo db,
-# excluding the insert permissions of collections under other dbs
-role.grant("Collection", "*", _PRIVILEGE_INSERT)
-print(role.list_grants())
-print(role.list_grant("Collection", "*"))
-role.revoke("Global", "*", _PRIVILEGE_INSERT)
-```
+    <div class="multipleCode">
+    <a href="#python">Python </a>
+    <a href="#java">Java</a>
+    <a href="#javascript">Node.js</a>
+    </div>
+
+    ```python
+    # NOTE: please make sure the 'foo' db has been created
+    connect_to_milvus(db_name="foo")
+
+    # This role will have the insert permission of all collections under foo db,
+    # excluding the insert permissions of collections under other dbs
+    role.grant("Collection", "*", _PRIVILEGE_INSERT)
+    print(role.list_grants())
+    print(role.list_grant("Collection", "*"))
+    role.revoke("Global", "*", _PRIVILEGE_INSERT)
+    ```
+
+    ```java
+    // NOTE: please make sure the 'foo' db has been created
+    MilvusServiceClient client = new ConnectToMilvus().withDbName("foo").build();
+
+    // This role will have the insert permission of all collections under foo db,
+    // excluding the insert permissions of collections under other dbs
+    R<RpcStatus> response = client.grantRolePrivilege(GrantRolePriviledgeParam.newBuilder()
+        .withRoleName(ROLE_NAME)
+        .withObject("Collection")
+        .withObjectName("*")
+        .withPrivilege(PRIVILEGE_INSERT)
+        .build());
+
+    if (response.getStatus() != R.Status.Success.getCode()) {
+        throw new RuntimeException(response.getMessage());
+    }
+
+    R<SelectGrantResponse> grants = client.selectGrantForRole(SelectGrantForRoleParam.newBuilder()
+        .withRoleName(ROLE_NAME)
+        .build());
+
+    if (grants.getStatus() != R.Status.Success.getCode()) {
+        throw new RuntimeException(grants.getMessage());
+    }
+
+    System.out.println(grants.getData());
+
+    grants = client.selectGrantForRoleAndObject(SelectGrantForRoleAndObjectParam.newBuilder()
+        .withRoleName(ROLE_NAME)
+        .withObject("Collection")
+        .withObjectName("*")
+        .build());
+
+    if (grants.getStatus() != R.Status.Success.getCode()) {
+        throw new RuntimeException(grants.getMessage());
+    }
+
+    System.out.println(grants.getData());
+
+    response = client.revokeRolePrivilege(RevokeRolePrivilegeParam.newBuilder()
+        .withRoleName(ROLE_NAME)
+        .withObject("Global")
+        .withObjectName("*")
+        .withPrivilege(PRIVILEGE_INSERT)
+        .build());
+
+    if (response.getStatus() != R.Status.Success.getCode()) {
+        throw new RuntimeException(response.getMessage());
+    }
+    ```
+
+    ```javascript
+    const client = connectToMilvus("foo");
+
+    async function demo() {
+
+    }
+    await client.createRole({
+        roleName: ROLE_NAME
+    })
+
+    const grants = await client.listGrants({
+        roleName: ROLE_NAME
+    })
+
+    console.log(grants.grants);
+
+    await client.revokePrivilege({
+        roleName: ROLE_NAME,
+        object: "Global",
+        objectName: "*",
+        privilege: PRIVILEGE_INSERT
+    })
+    ```
 
 - If a Permission API call is made upon a Milvus connection, with or without `db_name` specified, **database** refers to the database whose name was specified in the Permission API call.
 
-```python
-# NOTE: please make sure the 'foo' db has been created
-db_name = "foo"
-connect_to_milvus()
-role.grant("Collection", "*", _PRIVILEGE_INSERT, db_name=db_name)
-print(role.list_grants(db_name=db_name))
-print(role.list_grant("Collection", "*", db_name=db_name))
-role.revoke("Global", "*", _PRIVILEGE_INSERT, db_name=db_name)
-```
+    <div class="multipleCode">
+    <a href="#python">Python </a>
+    <a href="#java">Java</a>
+    <a href="#javascript">Node.js</a>
+    </div>
+
+    ```python
+    # NOTE: please make sure the 'foo' db has been created
+
+    db_name = "foo"
+    connect_to_milvus()
+    role.grant("Collection", "*", _PRIVILEGE_INSERT, db_name=db_name)
+    print(role.list_grants(db_name=db_name))
+    print(role.list_grant("Collection", "*", db_name=db_name))
+    role.revoke("Global", "*", _PRIVILEGE_INSERT, db_name=db_name)
+    ```
+
+    ```java
+    // NOTE: please make sure the 'foo' db has been created
+
+    String dbName = "foo";
+    MilvusServiceClient client = new ConnectToMilvus().build();
+
+    R<RpcStatus> response = client.grantRolePrivilege(GrantRolePriviledgeParam.newBuilder()
+        .withRoleName(ROLE_NAME)
+        .withObject("Collection")
+        .withObjectName("*")
+        .withPrivilege(PRIVILEGE_INSERT)
+        .withDatabaseName(dbName)
+        .build());
+
+    if (response.getStatus() != R.Status.Success.getCode()) {
+        throw new RuntimeException(response.getMessage());
+    }
+
+    R<SelectGrantResponse> grants = client.selectGrantForRole(SelectGrantForRoleParam.newBuilder()
+        .withRoleName(ROLE_NAME)
+        .withDatabaseName(dbName)
+        .build());
+
+    if (grants.getStatus() != R.Status.Success.getCode()) {
+        throw new RuntimeException(grants.getMessage());
+    }
+
+    System.out.println(grants.getData());
+
+    grants = client.selectGrantForRoleAndObject(SelectGrantForRoleAndObjectParam.newBuilder()
+        .withRoleName(ROLE_NAME)
+        .withObject("Collection")
+        .withObjectName("*")
+        .withDatabaseName(dbName)
+        .build());
+
+    if (grants.getStatus() != R.Status.Success.getCode()) {
+        throw new RuntimeException(grants.getMessage());
+    }
+
+    System.out.println(grants.getData());
+
+    response = client.revokeRolePrivilege(RevokeRolePrivilegeParam.newBuilder()
+        .withRoleName(ROLE_NAME)
+        .withObject("Global")
+        .withObjectName("*")
+        .withPrivilege(PRIVILEGE_INSERT)
+        .withDatabaseName(dbName)
+        .build());
+
+    if (response.getStatus() != R.Status.Success.getCode()) {
+        throw new RuntimeException(response.getMessage());
+    }
+    ```
+
+    ```javascript
+    // The Node.js SDK currently cannot support this case.
+    ```
 
 ## What's next
 
-[Enable RBAC](rbac.md)
+- [Enable RBAC](rbac.md)
 
-[Multi-tenancy](multi_tenancy.md)
+- [Multi-tenancy](multi_tenancy.md)

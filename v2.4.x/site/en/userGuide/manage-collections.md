@@ -63,10 +63,17 @@ For quick setup, use the [`createCollection()`](https://milvus.io/api-reference/
 
 </div>
 
+<div class="language-shell">
+
+For quick setup, use the [`POST /v2/vectordb/collections/create`](https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Create.md) API endpoint to create a collection with the specified name and dimension.
+
+</div>
+
 <div class="multipleCode">
   <a href="#python">Python </a>
   <a href="#java">Java</a>
   <a href="#javascript">Node.js</a>
+  <a href="#shell">cURL</a>
 </div>
 
 ```python
@@ -164,6 +171,38 @@ console.log(res.state)
 // 
 ```
 
+```shell
+$ export MILVUS_URI="localhost:19530"
+
+$ curl -X POST "http://${MILVUS_URI}/v2/vectordb/collections/create" \
+-H "Content-Type: application/json" \
+-d '{
+  "collectionName": "quick_setup",
+  "dimension": 5
+}'
+
+# Output
+#
+# {
+#     "code": 0,
+#     "data": {},
+# }
+
+$ curl -X POST "http://${MILVUS_URI}/v2/vectordb/collections/get_load_state" \
+-H "Content-Type: application/json" \
+-d '{
+  "collectionName": "quick_setup"
+}'
+
+# {
+#     "code": 0,
+#     "data": {
+#         "loadProgress": 100,
+#         "loadState": "LoadStateLoaded"
+#     }
+# }
+```
+
 The collection generated in the above code contains only two fields: `id` (as the primary key) and `vector` (as the vector field), with `auto_id` and `enable_dynamic_field` settings enabled by default.
 
 - `auto_id` 
@@ -202,10 +241,17 @@ To set up a scheme, use [`createCollection()`](https://milvus.io/api-reference/n
 
 </div>
 
+<div class="language-shell">
+
+To set up a schema, you need to define a JSON object that follows the schema format as displayed on the [`POST /v2/vectordb/collections/create`](https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Create.md) API endpoint reference page.
+
+</div>
+
 <div class="multipleCode">
   <a href="#python">Python </a>
   <a href="#java">Java</a>
   <a href="#javascript">Node.js</a>
+  <a href="#shell">cURL</a>
 </div>
 
 ```python
@@ -264,7 +310,26 @@ const fields = [
 ]
 ```
 
+```shell
+export fields='[{ \
+    "fieldName": "my_id", \
+    "dataType": "Int64", \
+    "isPrimary": true \
+}, \
+{ \
+    "fieldName": "my_vector", \
+    "dataType": "FloatVector", \
+    "elementTypeParams": { \
+        "dim": 5 \
+    } \
+}]'
+```
+
+<div class="language-python">
+
 In the provided code snippet for Python, the `enable_dynamic_field` is set to `True`, and `auto_id` is enabled for the primary key. Additionally, a `vector` field is introduced, configured with a dimensionality of 768, along with the inclusion of four scalar fields, each with its respective attributes.
+
+</div>
 
 #### Step 2: Set up index parameters
 
@@ -288,10 +353,17 @@ To set up index parameters, use [`createIndex()`](https://milvus.io/api-referenc
 
 </div>
 
+<div class="language-shell">
+
+To set up index parameters, you need to define a JSON object that follows the index parameters format as displayed on the [`POST /v2/vectordb/collections/create`](https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Create.md) API endpoint reference page.
+
+</div>
+
 <div class="multipleCode">
   <a href="#python">Python </a>
   <a href="#java">Java</a>
   <a href="#javascript">Node.js</a>
+  <a href="#shell">cURL</a>
 </div>
 
 ```python
@@ -346,6 +418,24 @@ const index_params = [{
 }]
 ```
 
+```shell
+export indexParams='[{ \
+    "fieldName": "my_id", \
+    "indexName": "my_id", \
+    "params": { \
+        "index_type": "SLT_SORT" \
+  } \
+}, { \
+    "fieldName": "my_vector", \
+    "metricType": "COSINE", \
+    "indexName": "my_vector", \
+    "params": { \
+        "index_type": "IVF_FLAT", \
+        "nlist": 1024 \
+  } \
+}]'
+```
+
 The code snippet above demonstrates how to set up index parameters for the vector field and a scalar field, respectively. For the vector field, set both the metric type and the index type. For a scalar field, set only the index type. It is recommended to create an index for the vector field and any scalar fields that are frequently used for filtering.
 
 #### Step 3: Create the collection
@@ -376,6 +466,7 @@ Use [createCollection()](https://milvus.io/api-reference/node/v2.4.x/Collections
     <a href="#python">Python </a>
     <a href="#java">Java</a>
     <a href="#javascript">Node.js</a>
+    <a href="#shell">cURL</a>
     </div>
 
     ```python
@@ -456,7 +547,72 @@ Use [createCollection()](https://milvus.io/api-reference/node/v2.4.x/Collections
     //   
     ```
 
-    The collection created above is loaded automatically. To learn more about loading and releasing a collection, refer to [Load & Release Collection](manage-collections.md). 
+    ```shell
+    $ curl -X POST "http://${MILVUS_URI}/v2/vectordb/collections/create" \
+    -H "Content-Type: application/json" \
+    -d '{
+        "collectionName": "customized_setup_1",
+        "schema": {
+            "autoId": false,
+            "enabledDynamicField": false,
+            "fields": [
+                {
+                    "fieldName": "my_id",
+                    "dataType": "Int64",
+                    "isPrimary": true
+                },
+                {
+                    "fieldName": "my_vector",
+                    "dataType": "FloatVector",
+                    "elementTypeParams": {
+                        "dim": "5"
+                    }
+                }
+            ]
+        },
+        "indexParams": [
+            {
+                "fieldName": "my_vector",
+                "metricType": "COSINE",
+                "indexName": "my_vector",
+                "params": {
+                    "index_type": "IVF_FLAT",
+                    "nlist": "1024"
+                }
+            },
+            {
+                "fieldName": "my_id",
+                "indexName": "my_id",
+                "params": {
+                    "index_type": "STL_SORT"
+                }            
+            }
+        ]
+    }'
+
+    # Output
+    #
+    # {
+    #     "code": 0,
+    #     "data": {},
+    # }
+
+    $ curl -X POST "http://${MILVUS_URI}/v2/vectordb/collections/get_load_state" \
+    -H "Content-Type: application/json" \
+    -d '{
+        "collectionName": "customized_setup_1"
+    }'
+
+    # {
+    #     "code": 0,
+    #     "data": {
+    #         "loadProgress": 100,
+    #         "loadState": "LoadStateLoaded"
+    #     }
+    # }
+    ```
+
+    The collection created above is loaded automatically. To learn more about loading and releasing a collection, refer to [Load & Release Collection](manage-collections.md#Load--Release-Collection). 
 
 - __Create a collection and an index file separately.__
 
@@ -464,6 +620,7 @@ Use [createCollection()](https://milvus.io/api-reference/node/v2.4.x/Collections
     <a href="#python">Python </a>
     <a href="#java">Java</a>
     <a href="#javascript">Node.js</a>
+    <a href="#shell">cURL</a>
     </div>
 
     ```python
@@ -522,12 +679,60 @@ Use [createCollection()](https://milvus.io/api-reference/node/v2.4.x/Collections
     // 
     ```
 
-    The collection created above is not loaded automatically. You can create an index for the collection as follows. Creating an index for the collection in a separate manner does not automatically load the collection. For details, refer to [Load & Release Collection](manage-collections.md).
+    ```shell
+    $ curl -X POST "http://${MILVUS_URI}/v2/vectordb/collections/create" \
+    -H "Content-Type: application/json" \
+    -d '{
+        "collectionName": "customized_setup_2",
+        "schema": {
+            "autoId": false,
+            "enabledDynamicField": false,
+            "fields": [
+                {
+                    "fieldName": "my_id",
+                    "dataType": "Int64",
+                    "isPrimary": true
+                },
+                {
+                    "fieldName": "my_vector",
+                    "dataType": "FloatVector",
+                    "elementTypeParams": {
+                        "dim": "5"
+                    }
+                }
+            ]
+            
+        }
+    }'
+
+    # Output
+    #
+    # {
+    #     "code": 0,
+    #     "data": {},
+    # }
+
+    $ curl -X POST "http://${MILVUS_URI}/v2/vectordb/collections/get_load_state" \
+    -H "Content-Type: application/json" \
+    -d '{
+        "collectionName": "customized_setup_2"
+    }'
+
+    # {
+    #     "code": 0,
+    #     "data": {
+    #         "loadState": "LoadStateNotLoaded"
+    #     }
+    # }
+    ```
+
+    The collection created above is not loaded automatically. You can create an index for the collection as follows. Creating an index for the collection in a separate manner does not automatically load the collection. For details, refer to [Load & Release Collection](manage-collections.md#Load--Release-Collection).
 
     <div class="multipleCode">
     <a href="#python">Python </a>
     <a href="#java">Java</a>
     <a href="#javascript">Node.js</a>
+    <a href="#shell">cURL</a>
     </div>
 
     ```python
@@ -595,6 +800,46 @@ Use [createCollection()](https://milvus.io/api-reference/node/v2.4.x/Collections
     //
     ```
 
+    ```shell
+    $ curl -X POST "http://${MILVUS_URI}/v2/vectordb/indexes/create" \
+    -H "Content-Type: application/json" \
+    -d '{
+        "collectionName": "customized_setup_2",
+        "indexParams": [
+            {
+                "metricType": "L2",
+                "fieldName": "my_vector",
+                "indexName": "my_vector",
+                "indexConfig": {
+                    "index_type": "IVF_FLAT",
+                    "nlist": "1024"
+                }
+            }
+        ]
+    }'
+
+    # Output
+    #
+    # {
+    #     "code": 0,
+    #     "data": {},
+    # }
+
+    $ curl -X POST "http://${MILVUS_URI}/v2/vectordb/collections/get_load_state" \
+    -H "Content-Type: application/json" \
+    -d '{
+        "collectionName": "customized_setup_2"
+    }'
+
+    # {
+    #     "code": 0,
+    #     "data": {
+    #         "loadState": "LoadStateNotLoaded"
+    #     }
+    # }
+    ```
+
+
 ## View Collections
 
 <div class="language-python">
@@ -615,10 +860,17 @@ To check the details of an existing collection, use [describeCollection()](https
 
 </div>
 
+<div class="language-shell">
+
+To view the definition of a collection, you can use the [`POST /v2/vectordb/collections/describe`](https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Describe.md) and the [`POST /v2/vectordb/collections/list`](https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/List.md) API endpoints.
+
+</div>
+
 <div class="multipleCode">
     <a href="#python">Python </a>
     <a href="#java">Java</a>
     <a href="#javascript">Node.js</a>
+    <a href="#shell">cURL</a>
 </div>
 
 ```python
@@ -762,12 +1014,72 @@ console.log(res)
 // 
 ```
 
+```shell
+curl -X POST "http://${MILVUS_URI}/v2/vectordb/collections/describe" \
+-H "Content-Type: application/json" \
+-d '{
+    "dbName": "default",
+    "collectionName": "test_collection"
+}'
+
+# {
+#     "code": 0,
+#     "data": {
+#         "aliases": [],
+#         "autoId": false,
+#         "collectionID": 448707763883002014,
+#         "collectionName": "test_collection",
+#         "consistencyLevel": "Bounded",
+#         "description": "",
+#         "enableDynamicField": true,
+#         "fields": [
+#             {
+#                 "autoId": false,
+#                 "description": "",
+#                 "id": 100,
+#                 "name": "id",
+#                 "partitionKey": false,
+#                 "primaryKey": true,
+#                 "type": "Int64"
+#             },
+#             {
+#                 "autoId": false,
+#                 "description": "",
+#                 "id": 101,
+#                 "name": "vector",
+#                 "params": [
+#                     {
+#                         "key": "dim",
+#                         "value": "5"
+#                     }
+#                 ],
+#                 "partitionKey": false,
+#                 "primaryKey": false,
+#                 "type": "FloatVector"
+#             }
+#         ],
+#         "indexes": [
+#             {
+#                 "fieldName": "vector",
+#                 "indexName": "vector",
+#                 "metricType": "COSINE"
+#             }
+#         ],
+#         "load": "LoadStateLoaded",
+#         "partitionsNum": 1,
+#         "properties": [],
+#         "shardsNum": 1
+#     }
+# }
+```
+
 To list all existing collections, you can do as follows:
 
 <div class="multipleCode">
     <a href="#python">Python </a>
     <a href="#java">Java</a>
     <a href="#javascript">Node.js</a>
+    <a href="#shell">cURL</a>
 </div>
 
 ```python
@@ -815,6 +1127,23 @@ System.out.println(listCollectionsRes.getCollectionNames());
 // ]
 ```
 
+```shell
+$ curl -X POST "http://${MILVUS_URI}/v2/vectordb/collections/list" \
+-H "Content-Type: application/json" \
+-d '{
+    "dbName": "default"
+}'
+
+# {
+#   "code": 0,
+#   "data": [
+#     "quick_setup",
+#     "customized_setup_1",
+#     "customized_setup_2"
+#   ]
+# }
+```
+
 ## Load & Release Collection
 
 During the loading process of a collection, Milvus loads the collection's index file into memory. Conversely, when releasing a collection, Milvus unloads the index file from memory. Before conducting searches in a collection, ensure that the collection is loaded.
@@ -842,10 +1171,17 @@ To load a collection, use the [`loadCollection()`](https://milvus.io/api-referen
 
 </div>
 
+<div class="language-shell">
+
+To load a collection, you can use the [`POST /v2/vectordb/collections/load`](https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Load.md) and the [`POST /v2/vectordb/collections/get_load_state`](https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/GetLoadState.md) API endpoints.
+
+</div>
+
 <div class="multipleCode">
     <a href="#python">Python </a>
     <a href="#java">Java</a>
     <a href="#javascript">Node.js</a>
+    <a href="#shell">cURL</a>
 </div>
 
 ```python
@@ -920,6 +1256,35 @@ console.log(res.state)
 // 
 ```
 
+```shell
+$ curl -X POST "http://${MILVUS_URI}/v2/vectordb/collections/load" \
+-H "Content-Type: application/json" \
+-d '{
+    "collectionName": "customized_setup_2"
+}'
+
+# Output
+#
+# {
+#     "code": 0,
+#     "data": {},
+# }
+
+$ curl -X POST "http://${MILVUS_URI}/v2/vectordb/collections/get_load_state" \
+-H "Content-Type: application/json" \
+-d '{
+  "collectionName": "customized_setup_2"
+}'
+
+# {
+#     "code": 0,
+#     "data": {
+#         "loadProgress": 100,
+#         "loadState": "LoadStateLoaded"
+#     }
+# }
+```
+
 ### Release a collection
 
 <div class="language-python">
@@ -940,10 +1305,17 @@ To release a collection, use the [`releaseCollection()`](https://milvus.io/api-r
 
 </div>
 
+<div class="language-shell">
+
+To release a collection, you can use the [`POST /v2/vectordb/collections/release`](https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Release.md) and the [`POST /v2/vectordb/collections/get_load_state`](https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/GetLoadState.md) API endpoints.
+
+</div>
+
 <div class="multipleCode">
     <a href="#python">Python </a>
     <a href="#java">Java</a>
     <a href="#javascript">Node.js</a>
+    <a href="#shell">cURL</a>
 </div>
 
 ```python
@@ -1010,6 +1382,36 @@ console.log(res.state)
 // 
 ```
 
+```shell
+$ curl -X POST "http://${MILVUS_URI}/v2/vectordb/collections/release" \
+-H "Content-Type: application/json" \
+-d '{
+    "collectionName": "customized_setup_2"
+}'
+
+# Output
+#
+# {
+#     "code": 0,
+#     "data": {},
+# }
+
+
+$ curl -X POST "http://${MILVUS_URI}/v2/vectordb/collections/get_load_state" \
+-H "Content-Type: application/json" \
+-d '{
+  "collectionName": "customized_setup_2"
+}'
+
+
+# {
+#     "code": 0,
+#     "data": {
+#         "loadState": "LoadStateNotLoad"
+#     }
+# }
+```
+
 ## Set up aliases
 
 You can assign aliases for collections to make them more meaningful in a specific context. You can assign multiple aliases for a collection, but multiple collections cannot share an alias.
@@ -1034,10 +1436,17 @@ To create aliases, use the [`createAlias()`](https://milvus.io/api-reference/nod
 
 </div>
 
+<div class="language-shell">
+
+To create aliases for a collection, you can use the [`POST /v2/vectordb/aliases/create`](https://milvus.io/api-reference/restful/v2.4.x/v2/Alias%20(v2)/Create.md) API endpoint.
+
+</div>
+
 <div class="multipleCode">
     <a href="#python">Python </a>
     <a href="#java">Java</a>
     <a href="#javascript">Node.js</a>
+    <a href="#shell">cURL</a>
 </div>
 
 ```python
@@ -1102,6 +1511,36 @@ console.log(res.error_code)
 // 
 ```
 
+```shell
+$ curl -X POST "http://${MILVUS_URI}/v2/vectordb/aliases/create" \
+-H "Content-Type: application/json" \
+-d '{
+    "collectionName": "customized_setup_2",
+    "aliasName": "bob"
+}'
+
+# Output
+#
+# {
+#     "code": 0,
+#     "data": {}
+# }
+
+$ curl -X POST "http://${MILVUS_URI}/v2/vectordb/aliases/create" \
+-H "Content-Type: application/json" \
+-d '{
+    "collectionName": "customized_setup_2",
+    "aliasName": "alice"
+}'
+
+# Output
+#
+# {
+#     "code": 0,
+#     "data": {}
+# }
+```
+
 ### List aliases
 
 <div class="language-python">
@@ -1122,10 +1561,17 @@ To list aliases, use the [`listAliases()`](https://milvus.io/api-reference/node/
 
 </div>
 
+<div class="language-shell">
+
+To list aliases for a collection, you can use the [`POST /v2/vectordb/aliases/list`](https://milvus.io/api-reference/restful/v2.4.x/v2/Alias%20(v2)/List.md) API endpoint.
+
+</div>
+
 <div class="multipleCode">
     <a href="#python">Python </a>
     <a href="#java">Java</a>
     <a href="#javascript">Node.js</a>
+    <a href="#shell">cURL</a>
 </div>
 
 ```python
@@ -1182,6 +1628,22 @@ console.log(res.aliases)
 // 
 ```
 
+```shell
+$ curl -X POST "http://${MILVUS_URI}/v2/vectordb/aliases/list" \
+-H "Content-Type: application/json" \
+-d '{
+    "collectionName": "customized_setup_2"
+}'
+
+# {
+#     "code": 0,
+#     "data": [
+#         "bob",
+#         "alice"
+#     ]
+# }
+```
+
 ### Describe aliases
 
 <div class="language-python">
@@ -1202,10 +1664,17 @@ To describe aliases, use the [`describeAlias()`](https://milvus.io/api-reference
 
 </div>
 
+<div class="language-shell">
+
+To describe aliases for a collection, you can use the [`POST /v2/vectordb/aliases/describe`](https://milvus.io/api-reference/restful/v2.4.x/v2/Alias%20(v2)/Describe.md) API endpoint.
+
+</div>
+
 <div class="multipleCode">
     <a href="#python">Python </a>
     <a href="#java">Java</a>
     <a href="#javascript">Node.js</a>
+    <a href="#shell">cURL</a>
 </div>
 
 ```python
@@ -1272,6 +1741,23 @@ console.log(res)
 // 
 ```
 
+```shell
+$ curl -X POST "http://${MILVUS_URI}/v2/vectordb/aliases/describe" \
+-H "Content-Type: application/json" \
+-d '{
+    "aliasName": "bob"
+}'
+
+# {
+#     "code": 0,
+#     "data": {
+#         "aliasName": "bob",
+#         "collectionName": "quick_setup",
+#         "dbName": "default"
+#     }
+# }
+```
+
 ### Reassign aliases
 
 <div class="language-python">
@@ -1292,10 +1778,17 @@ To reassign aliases to other collections, use the [`alterAlias()`](https://milvu
 
 </div>
 
+<div class="language-shell">
+
+To reassign aliases to other collections, you can use the [`POST /v2/vectordb/aliases/alter`](https://milvus.io/api-reference/restful/v2.4.x/v2/Alias%20(v2)/Alter.md) API endpoint.
+
+</div>
+
 <div class="multipleCode">
     <a href="#python">Python </a>
     <a href="#java">Java</a>
     <a href="#javascript">Node.js</a>
+    <a href="#shell">cURL</a>
 </div>
 
 ```python
@@ -1409,6 +1902,50 @@ console.log(res.aliases)
 // 
 ```
 
+```shell
+$ curl -X POST "http://${MILVUS_URI}/v2/vectordb/aliases/alter" \
+-H "Content-Type: application/json" \
+-d '{
+     "collectionName": "customized_setup_1",
+     "aliasName": "alice"
+}'
+
+# {
+#     "code": 0,
+#     "data": {}
+# }
+
+
+$ curl -X POST "http://${MILVUS_URI}/v2/vectordb/aliases/list" \
+-H "Content-Type: application/json" \
+-d '{
+    "collectionName": "customized_setup_1"
+}'
+
+
+# {
+#     "code": 0,
+#     "data": [
+#         "alice"
+#     ]
+# }
+
+
+$ curl -X POST "http://${MILVUS_URI}/v2/vectordb/aliases/list" \
+-H "Content-Type: application/json" \
+-d '{
+    "collectionName": "customized_setup_2"
+}'
+
+
+# {
+#     "code": 0,
+#     "data": [
+#         "bob"
+#     ]
+# }
+```
+
 ### Drop aliases
 
 <div class="language-python">
@@ -1426,6 +1963,12 @@ To drop aliases, use the [`dropAlias()`](https://milvus.io/api-reference/java/v2
 <div class="language-javascript">
 
 To drop aliases, use the [`dropAlias()`](https://milvus.io/api-reference/node/v2.4.x/Collections/dropAlias.md) method, specifying the alias.
+
+</div>
+
+<div class="language-shell">
+
+To drop aliases for a collection, you can use the [`POST /v2/vectordb/aliases/drop`](https://milvus.io/api-reference/restful/v2.4.x/v2/Alias%20(v2)/Drop.md) API endpoint.
 
 </div>
 
@@ -1487,6 +2030,31 @@ console.log(res.error_code)
 // Success
 // 
 ```
+```shell
+$ curl -X POST "http://${MILVUS_URI}/v2/vectordb/aliases/drop" \
+-H "Content-Type: application/json" \
+-d '{
+    "aliasName": "bob"
+}'
+
+# {
+#     "code": 0,
+#     "data": {}
+# }
+
+
+$ curl -X POST "http://${MILVUS_URI}/v2/vectordb/aliases/drop" \
+-H "Content-Type: application/json" \
+-d '{
+    "aliasName": "alice"
+}'
+
+
+# {
+#     "code": 0,
+#     "data": {}
+# }
+```
 
 ## Drop a Collection
 
@@ -1509,6 +2077,10 @@ To drop a collection, use the [`dropCollection()`](https://milvus.io/api-referen
 To drop a collection, use the [`dropCollection()`](https://milvus.io/api-reference/node/v2.4.x/Collections/dropCollection.md) method, specifying the collection name.
 
 </div>
+
+<div class="language-shell">
+
+To drop a collection, you can use the [`POST /v2/vectordb/collections/drop`](https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Drop.md) API endpoint.
 
 <div class="multipleCode">
     <a href="#python">Python </a>
@@ -1589,5 +2161,44 @@ console.log(res.error_code)
 // 
 // Success
 // 
+```
+
+```shell
+$ curl -X POST "http://${MILVUS_URI}/v2/vectordb/collections/drop" \
+-H "Content-Type: application/json" \
+-d '{
+    "collectionName": "quick_setup"
+}'
+
+# {
+#     "code": 0,
+#     "data": {}
+# }
+
+
+$ curl -X POST "http://${MILVUS_URI}/v2/vectordb/collections/drop" \
+-H "Content-Type: application/json" \
+-d '{
+    "collectionName": "customized_setup_1"
+}'
+
+
+# {
+#     "code": 0,
+#     "data": {}
+# }
+
+
+$ curl -X POST "http://${MILVUS_URI}/v2/vectordb/collections/drop" \
+-H "Content-Type: application/json" \
+-d '{
+    "collectionName": "customized_setup_2"
+}'
+
+
+# {
+#     "code": 0,
+#     "data": {}
+# }
 ```
 
