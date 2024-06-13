@@ -23,9 +23,9 @@ jobs:
       #     yarn
       #     node word-count.js
 
-      - name Format Menu Structure
+      - name: Format Menu Structure
         run: node ./formatMenu.js
 
-      # - name: Trigger milvus.io
-      #   run: |
-      #     curl -XPOST -H "Authorization: Bearer ${{secrets.GH_TOKEN}}" https://api.github.com/repos/milvus-io/milvus.io/dispatches -d '{"event_type": "prod-deploy"}'
+      - name: Trigger milvus.io
+        run: |
+          curl -XPOST -H "Authorization: Bearer ${{secrets.GH_TOKEN}}" https://api.github.com/repos/milvus-io/milvus.io/dispatches -d '{"event_type": "prod-deploy"}'
