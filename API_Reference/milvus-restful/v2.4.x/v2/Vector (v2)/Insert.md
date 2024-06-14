@@ -88,7 +88,7 @@ Possible response is similar to the following:
 |------------------|-------------------------------------------------------------------------------------------|
 | `dbName`  | __string__<br/>The name of the target database.  |
 | `collectionName` <span style="color:red">*</span> | __string__<br/>The name of an existing collection.  |
-| `data` | __object \| array[object]__<br/>The data to insert into the current collection.<br/>The data to insert should be a dictionary that matches the schema of the current collection or a list of such dictionaries. |
+| `data` | __object &#124; array[object]__<br/>The data to insert into the current collection.<br/>The data to insert should be a dictionary that matches the schema of the current collection or a list of such dictionaries. |
 | `partitionName`  | __string__<br/>The name of a partition in the current collection. <br/>If specified, the data is to be inserted into the specified partition.  |
 
 ## Response
