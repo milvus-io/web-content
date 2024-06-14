@@ -71,7 +71,7 @@ for _ in range(1000):
     film_vector = [ random.random() for _ in range(5) ]
     poster_vector = [ random.random() for _ in range(5) ]
 
-    # creat a dictionary for each entity
+    # create a dictionary for each entity
     entity = {
         "film_id": film_id,
         "filmVector": film_vector,
