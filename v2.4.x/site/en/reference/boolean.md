@@ -60,7 +60,7 @@ The following table lists the description of each symbol mentioned in the above 
 | =      | Definition.       |
 | ,      | Concatenation.       |
 | ;      | Termination.        |
-| \|      | Alternation.       |
+| &#124;      | Alternation.       |
 | {...}   | Repetition.        |
 | (...)      | Grouping.       |
 | NIL   | Empty. The expression can be an empty string.        |
@@ -96,7 +96,7 @@ Logical operators perform a comparison between two expressions.
 | Symbol| Operation | Example | Description          |
 | ----------| ------------- | ----------- | ------------------------- |
 | 'and' &&  | and           | expr1 && expr2   | True if both expr1 and expr2 are true. |
-| 'or' \|\|  | or           | expr1 \|\| expr2     | True if either expr1 or expr2 are true.  |
+| 'or' &#124;&#124;  | or           | expr1 &#124;&#124; expr2     | True if either expr1 or expr2 are true.  |
 
 ### Binary arithmetic operators
 
@@ -146,7 +146,7 @@ The following table lists the precedence and associativity of operators. Operato
 | 11         | array_contains_any ARRAY_CONTAINS_ANY | ArrayOp       | Left-to-right |
 | 12         | array_length  ARRAY_LENGTH            | ArrayOp       | Left-to-right |
 | 13         | && and                                | BinaryLogicOp | Left-to-right |
-| 14         | \|\| or                               | BinaryLogicOp | Left-to-right |
+| 14         | &#124;&#124; or                               | BinaryLogicOp | Left-to-right |
 
 Expressions are normally evaluated from left to right. Complex expressions are evaluated one at a time. The order in which the expressions are evaluated is determined by the precedence of the operators used.
 

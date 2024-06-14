@@ -41,9 +41,11 @@ The following table lists the data types that Milvus supports and their correspo
 
 ### Inverted indexing
 
-Inverted indexing is a more flexible approach where you manually create an inverted index for a scalar field by specifying index parameters. This method is suitable for various scenarios, including point queries, pattern match queries, full-text search, JSON search, Boolean search, and even prefix match queries.
+Inverted indexing offers a flexible way to create an index for a scalar field by manually specifying index parameters. This method works well for various scenarios, including point queries, pattern match queries, full-text searches, JSON searches, Boolean searches, and even prefix match queries.
 
-The inverted index consists of a term dictionary and an inverted list. The term dictionary contains all tokenized words sorted alphabetically, while the inverted list contains the list of documents where each word appears. This structure makes operations like point queries and range queries highly efficient by reducing the time complexity compared to brute-force searches.
+The inverted indexes implemented in Milvus are powered by [Tantivy](https://github.com/quickwit-oss/tantivy), a full-text search engine library. Tantivy ensures that inverted indexing in Milvus is both efficient and fast.
+
+An inverted index has two main components: a term dictionary and an inverted list. The term dictionary includes all tokenized words sorted alphabetically, while the inverted list contains the list of documents where each word appears. This setup makes point queries and range queries much faster and more efficient than brute-force searches.
 
 ![Inverted index diagram](../../../assets/scalar_index_inverted.png)
 
@@ -51,6 +53,14 @@ The advantages of using an inverted index are particularly evident in the follow
 
 - **Point query**: For example, when searching for documents containing the word **Milvus**, the process begins by checking if **Milvus** is present in the term dictionary. If it is not found, no documents contain the word. However, if it is found, the inverted list associated with **Milvus** is retrieved, indicating the documents that contain the word. This method is far more efficient than a brute-force search through a million documents, as the sorted term dictionary significantly reduces the time complexity of finding the word **Milvus**.
 - **Range query**: The efficiency of range queries, such as finding documents with words alphabetically greater than **very**, is also enhanced by the sorted term dictionary. This approach is more efficient than a brute-force search, providing quicker and more accurate results.
+
+### Test results
+
+To demonstrate the performance improvements provided by scalar indexes in Milvus, an experiment was conducted comparing the performance of several expressions using inverted indexing and brute-force search on raw data.
+
+The experiment involved testing various expressions under two conditions: with an inverted index and with a brute-force search. To ensure fairness, the same data distribution was maintained across tests, using the same collection each time. Before each test, the collection was released, and the index was dropped and rebuilt. Additionally, a warm query was performed before each test to minimize the impact of cold and hot data, and each query was executed multiple times to ensure accuracy.
+
+For a dataset of **1 million** records, using an **inverted index** can provide up to a **30x** performance improvement for point queries. The performance gains can be even more significant for larger datasets.
 
 ## Performance recommandations
 

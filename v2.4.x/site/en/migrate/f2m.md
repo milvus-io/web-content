@@ -69,30 +69,29 @@ target: # configs for the target Milvus collection.
 The following table describes the parameters in the example config file. For a full list of configs, refer to [Milvus Migration: Faiss to Milvus 2.x](https://github.com/zilliztech/milvus-migration/blob/main/README_FAISS.md#migrationyaml-reference).
 
 - `dumper`
-    
-    
+
     | Parameter | Description |
     | --- | --- |
     | `dumper.worker.limit` | The concurrency of dumper threads. |
     | `dumper.worker.workMode` | The operational mode of the migration job. Set to faiss when migrating from Faiss indexes. |
     | `dumper.worker.reader.bufferSize` | Buffer size to read from Faiss in each batch. Unit: KB. |
     | `dumper.worker.writer.bufferSize` | Buffer size to write to Milvus in each batch. Unit: KB. |
+
 - `loader`
-    
-    
+
     | Parameter | Description |
     | --- | --- |
     | `loader.worker.limit` | The concurrency of loader threads. |
+
 - `source`
-    
-    
+
     | Parameter | Description |
     | --- | --- |
     | `source.mode` | Specifies where the source files are read from. Valid values:<br>- `local`: reads files from a local disk.<br>- `remote`: reads files from remote storage. |
     | `source.local.faissFile` | The directory path where the source files are located. For example, `/db/faiss.index`. |
+
 - `target`
-    
-    
+
     | Parameter | Description |
     | --- | --- |
     | `target.create.collection.name` | Name of the Milvus collection. |

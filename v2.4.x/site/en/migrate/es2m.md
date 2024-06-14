@@ -81,15 +81,14 @@ target:
 The following table describes the parameters in the example config file. For a full list of configs, refer to [Milvus Migration: Elasticsearch to Milvus 2.x](https://github.com/zilliztech/milvus-migration/blob/main/README_ES.md#migrationyaml-reference).
 
 - `dumper`
-    
-    
+
     | Parameter | Description |
     | --- | --- |
     | `dumper.worker.workMode` | The operational mode of the migration job. Set to `elasticsearch` when migrating from Elasticsearch indexes. |
     | `dumper.worker.reader.bufferSize` | Buffer size to read from Elasticsearch in each batch. Unit: KB. |
+
 - `meta`
-    
-    
+
     | Parameter | Description |
     | --- | --- |
     | `meta.mode` | Specifies the source for meta configs. Currently, only `config` is supported. |
@@ -105,18 +104,18 @@ The following table describes the parameters in the example config file. For a f
     | `meta.milvus.closeDynamicField` | Specifies whether to disable the dynamic field in the collection. Defaults to `false`. For more information on dynamic fields, refer to [Enable Dynamic Field](https://milvus.io/docs/enable-dynamic-field.md#Enable-Dynamic-Field). |
     | `meta.milvus.shardNum` | Number of shards to be created in the collection. For more information on shards, refer to [Terminology](https://milvus.io/docs/glossary.md#Shard). |
     | `meta.milvus.consistencyLevel` | Consistency level for the collection in Milvus. For more information, refer to [Consistency](https://milvus.io/docs/consistency.md). |
+
 - `source`
-    
-    
+
     | Parameter | Description |
     | --- | --- |
     | `source.es` | Connection configs for the source Elasticsearch server. |
     | `source.es.urls` | Address of the source Elasticsearch server. |
     | `source.es.username` | Username for the Elasticsearch server. |
     | `source.es.password` | Password for the Elasticsearch server. |
+
 - `target`
-    
-    
+
     | Parameter | Description |
     | --- | --- |
     | `target.mode` | Storage location for dumped files. Valid values:<br>- `local`: Store dumped files on local disks.<br>- `remote`: Store dumped files on object storage. |
@@ -151,7 +150,6 @@ The following is an example of a successful migration log output:
 [starter/starter.go:106] ["[Starter] Migration Success!"] [Cost=80.00928425]
 [cleaner/remote_cleaner.go:27] ["[Remote Cleaner] Begin to clean files"] [bucket=a-bucket] [rootPath=testfiles/output/zwh/migration]
 [cmd/start.go:32] ["[Cleaner] clean file success!"]
-
 ```
 
 ## Verify the result

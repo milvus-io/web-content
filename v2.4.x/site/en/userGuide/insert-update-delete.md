@@ -112,7 +112,7 @@ await client.createCollection({
 
 <p><b>notes</b></p>
 
-<p>The collection generated in the above code contains only two fields: <strong>id</strong> (as the primary key) and <code>vector</code> (as the vector field), with <strong>auto<em>id</strong> and <strong>enable</em>dynamic_field</strong> settings enabled by default. When inserting data,</p>
+<p>The collection generated in the above code contains only two fields: <code>id</code> (as the primary key) and <code>vector</code> (as the vector field), with <code>auto_id</code> and <code>enable_dynamic_field</code> settings enabled by default. When inserting data,</p>
 <ul>
 <li><p>You do not need to include <strong>id</strong> in the data to be inserted, because the primary field automatically increments as data is inserted.</p></li>
 <li><p>Non-schema-defined fields will be saved as key-value pairs in a reserved JSON field named <strong>$meta</strong>.</p></li>

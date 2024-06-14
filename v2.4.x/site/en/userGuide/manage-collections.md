@@ -280,8 +280,8 @@ CreateCollectionReq.CollectionSchema schema = client.createSchema();
 // 3.2 Add fields to schema
 schema.addField(AddFieldReq.builder()
     .fieldName("my_id")
-    .dataType(DataType.Int64).
-    isPrimaryKey(true)
+    .dataType(DataType.Int64)
+    .isPrimaryKey(true)
     .autoID(false)
     .build());
 
@@ -325,15 +325,137 @@ export fields='[{ \
 }]'
 ```
 
-<div class="language-python">
+<table class="language-python">
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>auto_id</code></td>
+      <td>Whether allows the primary field to automatically increment.<br>Setting this to <strong>True</strong> makes the primary field automatically increment. In this case, the primary field should not be included in the data to insert to avoid errors.</td>
+    </tr>
+    <tr>
+      <td><code>enable_dynamic_field</code></td>
+      <td>Whether allows Milvus saves the values of undefined fields in a dynamic field if the data being inserted into the target collection includes fields that are not defined in the collection's schema.<br>When you set this to <strong>True</strong>, Milvus will create a field called <strong>$meta</strong> to store any undefined fields and their values from the data that is inserted.</td>
+    </tr>
+    <tr>
+      <td><code>field_name</code></td>
+      <td>The name of the field.</td>
+    </tr>
+    <tr>
+      <td><code>datatype</code></td>
+      <td>The data type of the field. For a list of available data types, refer to <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/DataType.md">DataType</a>.</td>
+    </tr>
+    <tr>
+      <td><code>is_primary</code></td>
+      <td>Whether the current field is the primary field in a collection.<br>Each collection has only one primary field. A primary field should be of either the <strong>DataType.INT64</strong> type or the <strong>DataType.VARCHAR</strong> type.</td>
+    </tr>
+    <tr>
+      <td><code>dim</code></td>
+      <td>The dimension of the vector embeddings.<br>This is mandatory for a field of the <strong>DataType.FLOAT_VECTOR</strong>, <strong>DataType.BINARY_VECTOR</strong>, <strong>DataType.FLOAT16_VECTOR</strong>, or <strong>DataType.BFLOAT16_VECTOR</strong> type. If you use <strong>DataType.SPARSE_FLOAT_VECTOR</strong>, omit this parameter.</td>
+    </tr>
+  </tbody>
+</table>
 
-In the provided code snippet for Python, the `enable_dynamic_field` is set to `True`, and `auto_id` is enabled for the primary key. Additionally, a `vector` field is introduced, configured with a dimensionality of 768, along with the inclusion of four scalar fields, each with its respective attributes.
+<table class="language-java">
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>fieldName</code></td>
+      <td>The name of the field.</td>
+    </tr>
+    <tr>
+      <td><code>dataType</code></td>
+      <td>The data type of the field. For a list of available data types, refer to <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/DataType.md">DataType</a>.</td>
+    </tr>
+    <tr>
+      <td><code>isPrimaryKey</code></td>
+      <td>Whether the current field is the primary field in a collection.<br>Each collection has only one primary field. A primary field should be of either the <strong>DataType.Int64</strong> type or the <strong>DataType.VarChar</strong> type.</td>
+    </tr>
+    <tr>
+      <td><code>autoID</code></td>
+      <td>Whether allows the primary field to automatically increment.<br>Setting this to <strong>true</strong> makes the primary field automatically increment. In this case, the primary field should not be included in the data to insert to avoid errors.</td>
+    </tr>
+    <tr>
+      <td><code>dimension</code></td>
+      <td>The dimension of the vector embeddings.<br>This is mandatory for a field of the <strong>DataType.FloatVector</strong>, <strong>DataType.BinaryVector</strong>, <strong>DataType.Float16Vector</strong>, or <strong>DataType.BFloat16Vector</strong> type.</td>
+    </tr>
+  </tbody>
+</table>
 
-</div>
+<table class="language-javascript">
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>name</code></td>
+      <td>The name of the field.</td>
+    </tr>
+    <tr>
+      <td><code>data_type</code></td>
+      <td>The data type of the field. For an enumeration of all available data types, refer to <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/DataType.md">DataType</a>.</td>
+    </tr>
+    <tr>
+      <td><code>is_primary_key</code></td>
+      <td>Whether the current field is the primary field in a collection.<br>Each collection has only one primary field. A primary field should be of either the <strong>DataType.INT64</strong> type or the <strong>DataType.VARCHAR</strong> type.</td>
+    </tr>
+    <tr>
+      <td><code>auto_id</code></td>
+      <td>Whether the primary field automatically increments upon data insertions into this collection.<br>The value defaults to <strong>False</strong>. Setting this to <strong>True</strong> makes the primary field automatically increment. Skip this parameter if you need to set up a collection with a customized schema.</td>
+    </tr>
+    <tr>
+      <td><code>dim</code></td>
+      <td>The dimensionality of the collection field that holds vector embeddings.<br>The value should be an integer greater than 1 and is usually determined by the model you use to generate vector embeddings.</td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="language-shell">
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>fieldName</code></td>
+      <td>The name of the field to create in the target collection.</td>
+    </tr>
+    <tr>
+      <td><code>dataType</code></td>
+      <td>The data type of the field values.</td>
+    </tr>
+    <tr>
+      <td><code>isPrimary</code></td>
+      <td>Whether the current field is the primary field. Setting this to <code>True</code> makes the current field the primary field.</td>
+    </tr>
+    <tr>
+      <td><code>elementTypeParams</code></td>
+      <td>Extra field parameters.</td>
+    </tr>
+    <tr>
+      <td><code>dim</code></td>
+      <td>An optional parameter for FloatVector or BinaryVector fields that determines the vector dimension.</td>
+    </tr>
+  </tbody>
+</table>
 
 #### Step 2: Set up index parameters
 
-Index parameters dictate how Milvus organizes your data within a collection. You can tailor the indexing process for specific fields by adjusting their `metric_type` and `index_type`. For the vector field, you have the flexibility to select `COSINE`, `L2`, or `IP` as the `metric_type`.
+Index parameters dictate how Milvus organizes your data within a collection. You can tailor the indexing process for specific fields by adjusting their `metric_type` and `index_type`. For the vector field, you have the flexibility to select `COSINE`, `L2`, `IP`, `HAMMING`, or `JACCARD` as the `metric_type`, depending on the type of vectors you are working with. For more information, refer to [Similarity Metrics](metric.md).
 
 <div class="language-python">
 
@@ -435,6 +557,122 @@ export indexParams='[{ \
   } \
 }]'
 ```
+
+<table class="language-python">
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>field_name</code></td>
+      <td>The name of the target file to apply this object applies.</td>
+    </tr>
+    <tr>
+      <td><code>index_type</code></td>
+      <td>The name of the algorithm used to arrange data in the specific field. For applicable algorithms, refer to <a href="https://milvus.io/docs/index.md">In-memory Index</a> and <a href="https://milvus.io/docs/disk_index.md">On-disk Index</a>.</td>
+    </tr>
+    <tr>
+      <td><code>metric_type</code></td>
+      <td>The algorithm that is used to measure similarity between vectors. Possible values are <strong>IP</strong>, <strong>L2</strong>, <strong>COSINE</strong>, <strong>JACCARD</strong>, <strong>HAMMING</strong>. This is available only when the specified field is a vector field. For more information, refer to <a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">Indexes supported in Milvus</a>.</td>
+    </tr>
+    <tr>
+      <td><code>params</code></td>
+      <td>The fine-tuning parameters for the specified index type. For details on possible keys and value ranges, refer to <a href="https://milvus.io/docs/index.md">In-memory Index</a>.</td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="language-java">
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>fieldName</code></td>
+      <td>The name of the target field to apply this IndexParam object applies.</td>
+    </tr>
+    <tr>
+      <td><code>indexType</code></td>
+      <td>The name of the algorithm used to arrange data in the specific field. For applicable algorithms, refer to <a href="https://milvus.io/docs/index.md">In-memory Index</a> and <a href="https://milvus.io/docs/disk_index.md">On-disk Index</a>.</td>
+    </tr>
+    <tr>
+      <td><code>metricType</code></td>
+      <td>The distance metric to use for the index. Possible values are <strong>IP</strong>, <strong>L2</strong>, <strong>COSINE</strong>, <strong>JACCARD</strong>, <strong>HAMMING</strong>.</td>
+    </tr>
+    <tr>
+      <td><code>extraParams</code></td>
+      <td>Extra index parameters. For details, refer to <a href="https://milvus.io/docs/index.md">In-memory Index</a> and <a href="https://milvus.io/docs/disk_index.md">On-disk Index</a>.</td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="language-javascript">
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>field_name</code></td>
+      <td>The name of the target field on which an index is to be created.</td>
+    </tr>
+    <tr>
+      <td><code>index_type</code></td>
+      <td>The name of the algorithm used to arrange data in the specific field. For applicable algorithms, refer to <a href="https://milvus.io/docs/index.md">In-memory Index</a> and <a href="https://milvus.io/docs/disk_index.md">On-disk Index</a>.</td>
+    </tr>
+    <tr>
+      <td><code>metric_type</code></td>
+      <td>The algorithm that is used to measure similarity between vectors. Possible values are <strong>IP</strong>, <strong>L2</strong>, <strong>COSINE</strong>, <strong>JACCARD</strong>, <strong>HAMMING</strong>. This is available only when the specified field is a vector field. For more information, refer to <a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">Indexes supported in Milvus</a>.</td>
+    </tr>
+    <tr>
+      <td><code>params</code></td>
+      <td>The fine-tuning parameters for the specified index type. For details on possible keys and value ranges, refer to <a href="https://milvus.io/docs/index.md">In-memory Index</a>.</td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="language-shell">
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>fieldName</code></td>
+      <td>The name of the target field on which an index is to be created.</td>
+    </tr>
+    <tr>
+      <td><code>indexName</code></td>
+      <td>The name of the index to create. The value defaults to the target field name.</td>
+    </tr>
+    <tr>
+      <td><code>metricType</code></td>
+      <td>The algorithm that is used to measure similarity between vectors. Possible values are <strong>IP</strong>, <strong>L2</strong>, <strong>COSINE</strong>, <strong>JACCARD</strong>, <strong>HAMMING</strong>. This is available only when the specified field is a vector field. For more information, refer to <a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">Indexes supported in Milvus</a>.</td>
+    </tr>
+    <tr>
+      <td><code>params</code></td>
+      <td>The index type and related settings. For details, refer to <a href="https://milvus.io/docs/index.md">In-memory Index</a>.</td>
+    </tr>
+    <tr>
+      <td><code>params.index_type</code></td>
+      <td>The type of the index to create.</td>
+    </tr>
+    <tr>
+      <td><code>params.nlist</code></td>
+      <td>The number of cluster units. This applies to IVF-related index types.</td>
+    </tr>
+  </tbody>
+</table>
 
 The code snippet above demonstrates how to set up index parameters for the vector field and a scalar field, respectively. For the vector field, set both the metric type and the index type. For a scalar field, set only the index type. It is recommended to create an index for the vector field and any scalar fields that are frequently used for filtering.
 
@@ -728,6 +966,128 @@ Use [createCollection()](https://milvus.io/api-reference/node/v2.4.x/Collections
 
     The collection created above is not loaded automatically. You can create an index for the collection as follows. Creating an index for the collection in a separate manner does not automatically load the collection. For details, refer to [Load & Release Collection](manage-collections.md#Load--Release-Collection).
 
+    <table class="language-python">
+    <thead>
+        <tr>
+        <th>Parameter</th>
+        <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+        <td><code>collection_name</code></td>
+        <td>The name of the collection.</td>
+        </tr>
+        <tr>
+        <td><code>schema</code></td>
+        <td>The schema of this collection.<br>Setting this to <strong>None</strong> indicates this collection will be created with default settings.<br>To set up a collection with a customized schema, you need to create a <strong>CollectionSchema</strong> object and reference it here. In this case, Milvus ignores all other schema-related settings carried in the request.</td>
+        </tr>
+        <tr>
+        <td><code>index_params</code></td>
+        <td>The parameters for building the index on the vector field in this collection. To set up a collection with a customized schema and automatically load the collection to memory, you need to create an IndexParams object and reference it here.<br>You should at least add an index for the vector field in this collection. You can also skip this parameter if you prefer to set up the index parameters later on.</td>
+        </tr>
+    </tbody>
+    </table>
+
+    <table class="language-java">
+    <thead>
+        <tr>
+        <th>Parameter</th>
+        <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+        <td><code>collectionName</code></td>
+        <td>The name of the collection.</td>
+        </tr>
+        <tr>
+        <td><code>collectionSchema</code></td>
+        <td>The schema of this collection.<br>Leaving it empty indicates this collection will be created with default settings. To set up a collection with a customized schema, you need to create a <strong>CollectionSchema</strong> object and reference it here.</td>
+        </tr>
+        <tr>
+        <td><code>indexParams</code></td>
+        <td>The parameters for building the index on the vector field in this collection. To set up a collection with a customized schema and automatically load the collection to memory, create an <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md">IndexParams</a> object with a list of IndexParam objects and reference it here.</td>
+        </tr>
+    </tbody>
+    </table>
+
+    <table class="language-javascript">
+    <thead>
+        <tr>
+        <th>Parameter</th>
+        <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+        <td><code>collection_name</code></td>
+        <td>The name of the collection.</td>
+        </tr>
+        <tr>
+        <td><code>fields</code></td>
+        <td>The fields in the collection.</td>
+        </tr>
+        <tr>
+        <td><code>index_params</code></td>
+        <td>The index parameters for the collection to create.</td>
+        </tr>
+    </tbody>
+    </table>
+
+    <table class="language-shell">
+    <thead>
+        <tr>
+        <th>Parameter</th>
+        <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+        <td><code>collectionName</code></td>
+        <td>The name of the collection.</td>
+        </tr>
+        <tr>
+        <td><code>schema</code></td>
+        <td>The schema is responsible for organizing data in the target collection. A valid schema should have multiple fields, which must include a primary key, a vector field, and several scalar fields.</td>
+        </tr>
+        <tr>
+        <td><code>schema.autoID</code></td>
+        <td>Whether allows the primary field to automatically increment. Setting this to True makes the primary field automatically increment. In this case, the primary field should not be included in the data to insert to avoid errors. Set this parameter in the field with is_primary set to True.</td>
+        </tr>
+        <tr>
+        <td><code>schema.enableDynamicField</code></td>
+        <td>Whether allows to use the reserved $meta field to hold non-schema-defined fields in key-value pairs.</td>
+        </tr>
+        <tr>
+        <td><code>fields</code></td>
+        <td>A list of field objects.</td>
+        </tr>
+        <tr>
+        <td><code>fields.fieldName</code></td>
+        <td>The name of the field to create in the target collection.</td>
+        </tr>
+        <tr>
+        <td><code>fields.dataType</code></td>
+        <td>The data type of the field values.</td>
+        </tr>
+        <tr>
+        <td><code>fields.isPrimary</code></td>
+        <td>Whether the current field is the primary field. Setting this to True makes the current field the primary field.</td>
+        </tr>
+        <tr>
+        <td><code>fields.elementTypeParams</code></td>
+        <td>Extra field parameters.</td>
+        </tr>
+        <tr>
+        <td><code>fields.elementTypeParams.dim</code></td>
+        <td>An optional parameter for FloatVector or BinaryVector fields that determines the vector dimension.</td>
+        </tr>
+    </tbody>
+    </table>
+
+    The collection created above is not loaded automatically. You can create an index for the collection as follows. Creating an index for the collection in a separate manner does not automatically load the collection. For details, refer to [Load & Release Collection](manage-collections.md).
+
     <div class="multipleCode">
     <a href="#python">Python </a>
     <a href="#java">Java</a>
@@ -839,6 +1199,113 @@ Use [createCollection()](https://milvus.io/api-reference/node/v2.4.x/Collections
     # }
     ```
 
+  <table class="language-python">
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>collection_name</code></td>
+      <td>The name of the collection.</td>
+    </tr>
+    <tr>
+      <td><code>index_params</code></td>
+      <td>An <strong>IndexParams</strong> object containing a list of <strong>IndexParam</strong> objects.</td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="language-java">
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>collectionName</code></td>
+      <td>The name of the collection.</td>
+    </tr>
+    <tr>
+      <td><code>indexParams</code></td>
+      <td>A list of <strong>IndexParam</strong> objects.</td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="language-javascript">
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>collection_name</code></td>
+      <td>The name of the collection.</td>
+    </tr>
+    <tr>
+      <td><code>field_name</code></td>
+      <td>The name of the field in which to create an index.</td>
+    </tr>
+    <tr>
+      <td><code>index_type</code></td>
+      <td>The name of the algorithm used to arrange data in the specific field. For applicable algorithms, refer to <a href="https://milvus.io/docs/index.md">In-memory Index</a> and <a href="https://milvus.io/docs/disk_index.md">On-disk Index</a>.</td>
+    </tr>
+    <tr>
+      <td><code>metric_type</code></td>
+      <td>The algorithm that is used to measure similarity between vectors. Possible values are <strong>IP</strong>, <strong>L2</strong>, <strong>COSINE</strong>, <strong>JACCARD</strong>, <strong>HAMMING</strong>. This is available only when the specified field is a vector field. For more information, refer to <a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">Indexes supported in Milvus</a>.</td>
+    </tr>
+    <tr>
+      <td><code>params</code></td>
+      <td>The fine-tuning parameters for the specified index type. For details on possible keys and value ranges, refer to <a href="https://milvus.io/docs/index.md">In-memory Index</a>.</td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="language-shell">
+    <thead>
+        <tr>
+        <th>Parameter</th>
+        <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+        <td><code>collectionName</code></td>
+        <td>The name of the collection.</td>
+        </tr>
+        <tr>
+        <td><code>indexParams</code></td>
+        <td>The index parameters for the collection to create.</td>
+        </tr>
+        <tr>
+        <td><code>indexParams.metricType</code></td>
+        <td>The similarity metric type used to build the index. The value defaults to COSINE.</td>
+        </tr>
+        <tr>
+        <td><code>indexParams.fieldName</code></td>
+        <td>The name of the target field on which an index is to be created.</td>
+        </tr>
+        <tr>
+        <td><code>indexParams.indexName</code></td>
+        <td>The name of the index to create, the value defaults to the target field name.</td>
+        </tr>
+        <tr>
+        <td><code>indexParams.indexConfig.index_type</code></td>
+        <td>The type of the index to create.</td>
+        </tr>
+        <tr>
+        <td><code>indexParams.indexConfig.nlist</code></td>
+        <td>The number of cluster units. This applies to IVF-related index types.</td>
+        </tr>
+    </tbody>
+</table>
 
 ## View Collections
 
@@ -1357,7 +1824,7 @@ System.out.println(res);
 // false
 ```
 
-```javascipt
+```javascript
 // 8. Release the collection
 res = await client.releaseCollection({
     collection_name: "customized_setup_2"
@@ -1540,6 +2007,82 @@ $ curl -X POST "http://${MILVUS_URI}/v2/vectordb/aliases/create" \
 #     "data": {}
 # }
 ```
+
+<table class="language-python">
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>collection_name</code></td>
+      <td>The name of the collection to create an alias for.</td>
+    </tr>
+    <tr>
+      <td><code>alias</code></td>
+      <td>The alias of the collection. Before this operation, ensure that the alias does not already exist. If it does, exceptions will occur.</td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="language-java">
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>collectionName</code></td>
+      <td>The name of the collection to create an alias for.</td>
+    </tr>
+    <tr>
+      <td><code>alias</code></td>
+      <td>The alias of the collection. Before this operation, ensure that the alias does not already exist. If it does, exceptions will occur.</td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="language-javascript">
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>collection_name</code></td>
+      <td>The name of the collection to create an alias for.</td>
+    </tr>
+    <tr>
+      <td><code>alias</code></td>
+      <td>The alias of the collection. Before this operation, ensure that the alias does not already exist. If it does, exceptions will occur.</td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="language-shell">
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>collectionName</code></td>
+      <td>The name of the collection to create an alias for.</td>
+    </tr>
+    <tr>
+      <td><code>aliasName</code></td>
+      <td>The alias of the collection. Before this operation, ensure that the alias does not already exist. If it does, exceptions will occur.</td>
+    </tr>
+  </tbody>
+</table>
 
 ### List aliases
 

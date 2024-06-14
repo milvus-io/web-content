@@ -89,40 +89,39 @@ target:
 The following table describes the parameters in the example config file. For a full list of configs, refer to [Milvus Migration: Milvus1.x to Milvus 2.x](https://github.com/zilliztech/milvus-migration/blob/main/README_1X.md#migrationyaml-reference).
 
 - `dumper`
-    
-    
+
     | Parameter | Description |
     | --- | --- |
     | `dumper.worker.limit` | The concurrency of dumper threads. |
     | `dumper.worker.workMode` | The operational mode of the migration job. Set to `milvus1x` when migrating from Milvus 1.x. |
     | `dumper.worker.reader.bufferSize` | Buffer size to read from Milvus 1.x in each batch. Unit: KB. |
     | `dumper.worker.writer.bufferSize` | Buffer size to write to Milvus 2.x in each batch. Unit: KB. |
+
 - `loader`
-    
-    
+
     | Parameter | Description |
     | --- | --- |
     | `loader.worker.limit` | The concurrency of loader threads. |
+
 - `meta`
-    
-    
+
     | Parameter | Description |
     | --- | --- |
     | `meta.mode` | Specifies where the meta file meta.json is read from. Valid values: `local`, `remote`, `mysql`, `sqlite`. |
     | `meta.localFile` | Local directory path where the `meta.json` file resides. This config is used only when `meta.mode` is set to `local`. For other meta configs, refer to [README_1X](https://github.com/zilliztech/milvus-migration/blob/main/README_1X.md#meta). |
+
 - `source`
-    
-    
+
     | Parameter | Description |
     | --- | --- |
-    | `source.mode` | Specifies where the source files are read from. Valid values:<br>- `local`: reads files from a local disk.<br>-  `remote`: reads files from remote storage. |
+    | `source.mode` | Specifies where the source files are read from. Valid values:<br>- `local`: reads files from a local disk.<br>- `remote`: reads files from remote storage. |
     | `source.local.tablesDir` | The directory path where the source files are located. For example, `/db/tables/`. |
+
 - `target`
-    
-    
+
     | Parameter | Description |
     | --- | --- |
-    | `target.mode` | Storage location for dumped files. Valid values:<br>- `local`: Store dumped files on local disks.<br>-  `remote`: Store dumped files on object storag |
+    | `target.mode` | Storage location for dumped files. Valid values:<br>- `local`: Store dumped files on local disks.<br>- `remote`: Store dumped files on object storage. |
     | `target.remote.outputDir` | Output directory path in the cloud storage bucket. |
     | `target.remote.ak` | Access key for Milvus 2.x storage. |
     | `target.remote.sk` | Secret key for Milvus 2.x storage. |

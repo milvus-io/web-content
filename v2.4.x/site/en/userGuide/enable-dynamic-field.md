@@ -17,7 +17,7 @@ The dynamic field in a collection is a reserved JSON field named $meta. It can h
 
 ## Enable dynamic field
 
-When defining a schema for a collection, you can set enable_dynamic_field to True to enable the reserved dynamic field, indicating that any non-schema-defined fields and their values inserted later on will be saved as key-value pairs in the reserved dynamic field.
+When defining a schema for a collection, you can set `enable_dynamic_field` to `True` to enable the reserved dynamic field, indicating that any non-schema-defined fields and their values inserted later on will be saved as key-value pairs in the reserved dynamic field.
 
 The following snippet creates a collection with two schema-defined fields, namely id and vector, and enables the dynamic field.
 
@@ -49,11 +49,11 @@ For more information on parameters, refer to [`createCollection()`](https://milv
 import random, time
 from pymilvus import connections, MilvusClient, DataType
 
-CLUSTER_ENDPOINT = "http://localhost:19530"
+SERVER_ADDR = "http://localhost:19530"
 
 # 1. Set up a Milvus client
 client = MilvusClient(
-    uri=CLUSTER_ENDPOINT
+    uri=SERVER_ADDR
 )
 
 # 2. Create a collection

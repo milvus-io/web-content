@@ -219,7 +219,19 @@ System.out.println(wrapper.getInsertCount());
 
 ## Search with iterator
 
-Iterators make similarity searches more scalable. To search with an iterator, do as follows:
+Iterators make similarity searches more scalable.
+
+<div class="language-python">
+
+To search with an iterator, call the [search_iterator()](https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/search_iterator.md) method:
+
+</div>
+
+<div class="language-java">
+
+To search with an iterator, call the [searchIterator()](https://milvus.io/api-reference/java/v2.4.x/v1/QuerySearch/searchIterator.md) method:
+
+</div>
 
 1. Initialize the search iterator to define the search parameters and output fields.
 
@@ -240,7 +252,7 @@ Iterators make similarity searches more scalable. To search with an iterator, do
 from pymilvus import Collection
 
 # 4. Search with iterator
-connections.connect(uri=CLUSTER_ENDPOINT, token=TOKEN)
+connections.connect(host="127.0.0.1", port=19530)
 collection = Collection("quick_setup")
 
 query_vectors = [[0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592]]
@@ -340,7 +352,85 @@ while (true) {
 System.out.println(results.size());
 ```
 
+<table class="language-python">
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>data</code></td>
+      <td>A list of vector embeddings.<br>Milvus searches for the most similar vector embeddings to the specified ones.</td>
+    </tr>
+    <tr>
+      <td><code>anns_field</code></td>
+      <td>The name of the vector field in the current collection.</td>
+    </tr>
+    <tr>
+      <td><code>batch_size</code></td>
+      <td>The number of entities to return each time you call <code>next()</code> on the current iterator.<br>The value defaults to <strong>1000</strong>. Set it to a proper value to control the number of entities to return per iteration.</td>
+    </tr>
+    <tr>
+      <td><code>param</code></td>
+      <td>The parameter settings specific to this operation.<br><ul><li><code>metric_type</code>: The metric type applied to this operation. This should be the same as the one used when you index the vector field specified above. Possible values are <strong>L2</strong>, <strong>IP</strong>, <strong>COSINE</strong>, <strong>JACCARD</strong>, <strong>HAMMING</strong>.</li><li><code>params</code>: Additional parameters. For details, refer to <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/search_iterator.md">search_iterator()</a>.</li></ul></td>
+    </tr>
+    <tr>
+      <td><code>output_fields</code></td>
+      <td>A list of field names to include in each entity in return.<br>The value defaults to <strong>None</strong>. If left unspecified, only the primary field is included.</td>
+    </tr>
+    <tr>
+      <td><code>limit</code></td>
+      <td>The total number of entities to return.<br>The value defaults to <strong>-1</strong>, indicating all matching entities will be in return.</td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="language-java">
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>withCollectionName</code></td>
+      <td>Set the collection name. Collection name cannot be empty or null.</td>
+    </tr>
+    <tr>
+      <td><code>withVectorFieldName</code></td>
+      <td>Set target vector field by name. Field name cannot be empty or null.</td>
+    </tr>
+    <tr>
+      <td><code>withVectors</code></td>
+      <td>Set the target vectors. Up to 16384 vectors allowed.</td>
+    </tr>
+    <tr>
+      <td><code>withBatchSize</code></td>
+      <td>The number of entities to return each time you call <code>next()</code> on the current iterator.<br>The value defaults to <strong>1000</strong>. Set it to a proper value to control the number of entities to return per iteration.</td>
+    </tr>
+    <tr>
+      <td><code>withParams</code></td>
+      <td>Specifies the parameters of search in JSON format. For more information, refer to <a href="https://milvus.io/api-reference/java/v2.4.x/v1/QuerySearch/searchIterator.md">searchIterator()</a>.</td>
+    </tr>
+  </tbody>
+</table>
+
 ## Query with an iterator
+
+<div class="language-python">
+
+To query with an iterator, call the [query_iterator()](https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/query_iterator.md) method:
+
+</div>
+
+<div class="language-java">
+
+To search with an iterator, call the [queryIterator()](https://milvus.io/api-reference/java/v2.4.x/v1/QuerySearch/queryIterator.md) method:
+
+</div>
 
 <div class="multipleCode">
     <a href="#python">Python </a>
@@ -450,3 +540,57 @@ while (true) {
     }
 }
 ```
+
+<table class="language-python">
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>batch_size</code></td>
+      <td>The number of entities to return each time you call <code>next()</code> on the current iterator.<br>The value defaults to <strong>1000</strong>. Set it to a proper value to control the number of entities to return per iteration.</td>
+    </tr>
+    <tr>
+      <td><code>expr</code></td>
+      <td>A scalar filtering condition to filter matching entities.<br>The value defaults to <strong>None</strong>, indicating that scalar filtering is ignored. To build a scalar filtering condition, refer to <a href="https://milvus.io/docs/boolean.md">Boolean Expression Rules</a>.</td>
+    </tr>
+    <tr>
+      <td><code>output_fields</code></td>
+      <td>A list of field names to include in each entity in return.<br>The value defaults to <strong>None</strong>. If left unspecified, only the primary field is included.</td>
+    </tr>
+    <tr>
+      <td><code>limit</code></td>
+      <td>The total number of entities to return.<br>The value defaults to <strong>-1</strong>, indicating all matching entities will be in return.</td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="language-java">
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>withCollectionName</code></td>
+      <td>Set the collection name. Collection name cannot be empty or null.</td>
+    </tr>
+    <tr>
+      <td><code>withExpr</code></td>
+      <td>Set the expression to query entities. To build a scalar filtering condition, refer to <a href="https://milvus.io/docs/boolean.md">Boolean Expression Rules</a>.</td>
+    </tr>
+    <tr>
+      <td><code>withBatchSize</code></td>
+      <td>The number of entities to return each time you call <code>next()</code> on the current iterator.<br>The value defaults to <strong>1000</strong>. Set it to a proper value to control the number of entities to return per iteration.</td>
+    </tr>
+    <tr>
+      <td><code>addOutField</code></td>
+      <td>Specifies an output scalar field (Optional).</td>
+    </tr>
+  </tbody>
+</table>

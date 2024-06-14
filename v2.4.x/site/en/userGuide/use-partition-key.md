@@ -15,7 +15,7 @@ You can use the partition key to implement multi-tenancy. For details on multi-t
 
 ## Enable partition key
 
-The following snippet demonstrates how to set a field as the partition key.
+To set a field as the partition key, specify `partition_key_field` when creating a collection schema.
 
 In the example code below, `num_partitions` determines the number of partitions that will be created. By default, it is set to `16`. We recommend you retain the default value.
 
@@ -47,11 +47,11 @@ For more information on parameters, refer to [`MilvusClient`](https://milvus.io/
 import random, time
 from pymilvus import connections, MilvusClient, DataType
 
-CLUSTER_ENDPOINT = "http://localhost:19530"
+SERVER_ADDR = "http://localhost:19530"
 
 # 1. Set up a Milvus client
 client = MilvusClient(
-    uri=CLUSTER_ENDPOINT
+    uri=SERVER_ADDR
 )
 
 # 2. Create a collection
@@ -252,100 +252,6 @@ console.log(res.error_code)
 Once a field of a collection is used as the partition key, Milvus creates the specified number of partitions and manages them on your behalf. Therefore, you cannot manipulate the partitions in this collection anymore.
 
 The following snippet demonstrates that 64 partitions in a collection once one of its fields is used as the partition key. 
-
-
-
-## Insert data
-
-Once the collection is ready, start inserting data as follows:
-
-### Prepare data
-
-<div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-</div>
-
-```python
-# 2.1. List all partitions in the collection
-partition_names = client.list_partitions(
-    collection_name="test_collection"
-)
-
-print(partition_names)
-
-# Output
-#
-# [
-#     "_default_0",
-#     "_default_1",
-#     "_default_2",
-#     "_default_3",
-#     "_default_4",
-#     "_default_5",
-#     "_default_6",
-#     "_default_7",
-#     "_default_8",
-#     "_default_9",
-#     "(54 more items hidden)"
-# ]
-```
-
-```java
-// 2.5 List all partitions in the collection
-List<String> partitionNames = client.listPartitions(ListPartitionsReq.builder()
-    .collectionName("test_collection")
-    .build());
-
-System.out.println(partitionNames);
-
-// Output:
-// [
-//     "_default_0",
-//     "_default_1",
-//     "_default_2",
-//     "_default_3",
-//     "_default_4",
-//     "_default_5",
-//     "_default_6",
-//     "_default_7",
-//     "_default_8",
-//     "_default_9",
-//     "(54 elements are hidden)"
-// ]
-```
-
-```javascript
-// 2.1 List partitions
-res = await client.listPartitions({
-    collection_name: "test_collection",
-})
-
-console.log(res.partition_names)
-
-// Output
-// 
-// [
-//   '_default_0',  '_default_1',  '_default_2',  '_default_3',
-//   '_default_4',  '_default_5',  '_default_6',  '_default_7',
-//   '_default_8',  '_default_9',  '_default_10', '_default_11',
-//   '_default_12', '_default_13', '_default_14', '_default_15',
-//   '_default_16', '_default_17', '_default_18', '_default_19',
-//   '_default_20', '_default_21', '_default_22', '_default_23',
-//   '_default_24', '_default_25', '_default_26', '_default_27',
-//   '_default_28', '_default_29', '_default_30', '_default_31',
-//   '_default_32', '_default_33', '_default_34', '_default_35',
-//   '_default_36', '_default_37', '_default_38', '_default_39',
-//   '_default_40', '_default_41', '_default_42', '_default_43',
-//   '_default_44', '_default_45', '_default_46', '_default_47',
-//   '_default_48', '_default_49', '_default_50', '_default_51',
-//   '_default_52', '_default_53', '_default_54', '_default_55',
-//   '_default_56', '_default_57', '_default_58', '_default_59',
-//   '_default_60', '_default_61', '_default_62', '_default_63'
-// ]
-// 
-```
 
 ## Insert data
 

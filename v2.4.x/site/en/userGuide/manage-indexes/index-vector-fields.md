@@ -51,7 +51,7 @@ Milvus provides several index types and metrics to sort field values for efficie
 </thead>
 <tbody>
   <tr>
-    <td class="tg-0pky"><ul><li>Jaccard</li><li>Hamming</li></ul></td>
+    <td class="tg-0pky"><ul><li>Jaccard (JACCARD)</li><li>Hamming (HAMMING)</li></ul></td>
     <td class="tg-0pky"><ul><li>BIN_FLAT</li><li>BIN_IVF_FLAT</li></ul></td>
   </tr>
 </tbody>
@@ -299,9 +299,114 @@ console.log(res.error_code)
 // 
 ```
 
+<table class="language-python">
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>field_name</code></td>
+      <td>The name of the target file to apply this object applies.</td>
+    </tr>
+    <tr>
+      <td><code>metric_type</code></td>
+      <td>The algorithm that is used to measure similarity between vectors. Possible values are <strong>IP</strong>, <strong>L2</strong>, <strong>COSINE</strong>, <strong>JACCARD</strong>, <strong>HAMMING</strong>. This is available only when the specified field is a vector field. For more information, refer to <a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">Indexes supported in Milvus</a>.</td>
+    </tr>
+    <tr>
+      <td><code>index_type</code></td>
+      <td>The name of the algorithm used to arrange data in the specific field. For applicable algorithms, refer to <a href="https://milvus.io/docs/index.md">In-memory Index</a> and <a href="https://milvus.io/docs/disk_index.md">On-disk Index</a>.</td>
+    </tr>
+    <tr>
+      <td><code>index_name</code></td>
+      <td>The name of the index file generated after this object has been applied.</td>
+    </tr>
+    <tr>
+      <td><code>params</code></td>
+      <td>The fine-tuning parameters for the specified index type. For details on possible keys and value ranges, refer to <a href="https://milvus.io/docs/index.md">In-memory Index</a>.</td>
+    </tr>
+    <tr>
+      <td><code>collection_name</code></td>
+      <td>The name of an existing collection.</td>
+    </tr>
+    <tr>
+      <td><code>index_params</code></td>
+      <td>An <strong>IndexParams</strong> object containing a list of <strong>IndexParam</strong> objects.</td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="language-java">
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>fieldName</code></td>
+      <td>The name of the target field to apply this IndexParam object applies.</td>
+    </tr>
+    <tr>
+      <td><code>indexName</code></td>
+      <td>The name of the index file generated after this object has been applied.</td>
+    </tr>
+    <tr>
+      <td><code>indexType</code></td>
+      <td>The name of the algorithm used to arrange data in the specific field. For applicable algorithms, refer to <a href="https://milvus.io/docs/index.md">In-memory Index</a> and <a href="https://milvus.io/docs/disk_index.md">On-disk Index</a>.</td>
+    </tr>
+    <tr>
+      <td><code>metricType</code></td>
+      <td>The distance metric to use for the index. Possible values are <strong>IP</strong>, <strong>L2</strong>, <strong>COSINE</strong>, <strong>JACCARD</strong>, <strong>HAMMING</strong>.</td>
+    </tr>
+    <tr>
+      <td><code>extraParams</code></td>
+      <td>Extra index parameters. For details, refer to <a href="https://milvus.io/docs/index.md">In-memory Index</a> and <a href="https://milvus.io/docs/disk_index.md">On-disk Index</a>.</td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="language-javascript">
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>collection_name</code></td>
+      <td>The name of an existing collection.</td>
+    </tr>
+    <tr>
+      <td><code>field_name</code></td>
+      <td>The name of the field in which to create an index.</td>
+    </tr>
+    <tr>
+      <td><code>index_type</code></td>
+      <td>The type of the index to create.</td>
+    </tr>
+    <tr>
+      <td><code>metric_type</code></td>
+      <td>The metric type used to measure vector distance.</td>
+    </tr>
+    <tr>
+      <td><code>index_name</code></td>
+      <td>The name of the index to create.</td>
+    </tr>
+    <tr>
+      <td><code>params</code></td>
+      <td>Other index-specific parameters.</td>
+    </tr>
+  </tbody>
+</table>
+
 <div class="admonition note">
 
-<p><b>notes</b></p>
+<p><strong>notes</strong></p>
 
 <p>Currently, you can create only one index file for each field in a collection.</p>
 

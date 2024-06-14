@@ -1579,7 +1579,7 @@ A __boolean expression__ is always __a string comprising field names joined by o
 |  __Operator__   |  __Description__                                                                                                                            |
 | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
 |  __add (&&)__   |  True if both operands are true                                                                                                             |
-|  __or (\|\|)__  |  True if either operand is true                                                                                                             |
+|  __or (&#124;&#124;)__  |  True if either operand is true                                                                                                             |
 |  __+, -, *, /__ |  Addition, subtraction, multiplication, and division                                                                                        |
 |  __**__         |  Exponent                                                                                                                                   |
 |  __%__          |  Modulus                                                                                                                                    |
