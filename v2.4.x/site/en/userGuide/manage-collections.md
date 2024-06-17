@@ -2625,10 +2625,13 @@ To drop a collection, use the [`dropCollection()`](https://milvus.io/api-referen
 
 To drop a collection, you can use the [`POST /v2/vectordb/collections/drop`](https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Drop.md) API endpoint.
 
+</div>
+
 <div class="multipleCode">
     <a href="#python">Python </a>
     <a href="#java">Java</a>
     <a href="#javascript">Node.js</a>
+    <a href="#shell">cURL</a>
 </div>
 
 ```python
