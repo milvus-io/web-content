@@ -22,6 +22,10 @@ set_properties(
 
         Once this property is set, data in the current collection expires in the specified time. Expired data in the collection will be cleaned up and will not be involved in searches or queries.
 
+    - **collection.mmap.enabled**
+
+        Allows you to enable or disable memory mapping for a Milvus collection. For more information, refer to [Configure memory mapping](https://milvus.io/docs/mmap.md).
+
 - **timeout** (*float*)  -
 
     The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
