@@ -29,15 +29,15 @@ Milvus automatically creates a default index for a scalar field based on its dat
 
 The following table lists the data types that Milvus supports and their corresponding default indexing algorithms.
 
-| Data type                     | Default indexing algorithm        |
-| ----------------------------- | --------------------------------- |
-| VARCHAR                       | MARISA-trie                       |
-| INT8                          | STL sort                          |
-| INT16                         | STL sort                          |
-| INT32                         | STL sort                          |
-| INT64                         | STL sort                          |
-| FLOAT                         | STL sort                          |
-| DOUBLE                        | STL sort                          |
+| Data type | Default indexing algorithm |
+|-----------|----------------------------|
+| VARCHAR   | Inverted index             |
+| INT8      | Inverted index             |
+| INT16     | Inverted index             |
+| INT32     | Inverted index             |
+| INT64     | Inverted index             |
+| FLOAT     | Inverted index             |
+| DOUBLE    | Inverted index             |
 
 ### Inverted indexing
 

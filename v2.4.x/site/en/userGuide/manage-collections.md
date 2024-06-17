@@ -2599,6 +2599,68 @@ $ curl -X POST "http://${MILVUS_URI}/v2/vectordb/aliases/drop" \
 # }
 ```
 
+## Set Properties
+
+You can set properties for a collection, such as `ttl.seconds` and `mmap.enabled`. For more information, refer to [set_properties()](https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/set_properties.md).
+
+<div class="alert note">
+
+The code snippets in this section use the <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Connections/connect.md">PyMilvus ORM module</a> to interact with Milvus. Code snippets with the new <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">MilvusClient SDK</a> will be available soon.
+
+</div>
+
+### Set TTL
+
+Set the Time-To-Live (TTL) for the data in the collection, which specifies how long the data should be retained before it is automatically deleted.
+
+```python
+from pymilvus import Collection, connections
+
+# Connect to Milvus server
+connections.connect(host="localhost", port="19530") # Change to your Milvus server IP and port
+
+# Get existing collection
+collection = Collection("quick_setup")
+
+# Set the TTL for the data in the collection
+collection.set_properties(
+    properties={
+        "collection.ttl.seconds": 60
+    }
+)
+```
+
+### Set MMAP
+
+Configure the memory mapping (MMAP) property for the collection, which determines whether data is mapped into memory to improve query performance. For more information, refer to [Configure memory mapping
+](https://milvus.io/docs/mmap.md#Configure-memory-mapping).
+
+<div class="alert note">
+
+Before setting the MMAP property, release the collection first. Otherwise, an error will occur.
+
+</div>
+
+```python
+from pymilvus import Collection, connections
+
+# Connect to Milvus server
+connections.connect(host="localhost", port="19530") # Change to your Milvus server IP and port
+
+# Get existing collection
+collection = Collection("quick_setup")
+
+# Before setting memory mapping property, we need to release the collection first.
+collection.release()
+
+# Set memory mapping property to True or Flase
+collection.set_properties(
+    properties={
+        "mmap.enabled": True
+    }
+)
+```
+
 ## Drop a Collection
 
 If a collection is no longer needed, you can drop the collection.
