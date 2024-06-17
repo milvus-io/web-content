@@ -31,16 +31,11 @@ You need to make some changes to the environment variables of the standalone ser
 
 - To assign a specific GPU device to Milvus, locate the `deploy.resources.reservations.devices[0].devices_ids` field in the definition of the `standalone` service and replace its value with the ID of the desired GPU. You can use the `nvidia-smi` tool, included with NVIDIA GPU display drivers, to determine the ID of a GPU device. Milvus supports multiple GPU devices.
 
-- Set the size of the memory pool assigned for GPU indexing, where `initialSize` represents the initial size of the memory pool and `maximumSize` represents its maximum size. Both values should be integers set in MB. Milvus uses these fields to allocate display memory to each process.
-
 Assign a single GPU device to Milvus:
 
 ```yaml
 ...
 standalone:
-  gpu:
-    initMemSize: 0
-    maxMemSize: 1024
   ...
   deploy:
     resources:
@@ -57,9 +52,6 @@ Assign multiple GPU devices to Milvus:
 ```yaml
 ...
 standalone:
-  gpu:
-    initMemSize: 0
-    maxMemSize: 1024
   ...
   deploy:
     resources:
@@ -131,6 +123,56 @@ $ sudo docker compose down
 # Delete service data
 $ sudo rm -rf volumes
 ```
+
+## Configure memory pool
+
+After Milvus is up and running, you can customize the memory pool by modifying the `initMemSize` and `maxMemSize` settings in the `milvus.yaml` file.
+
+<div class="alert note">
+
+The `milvus.yaml` file is located in the `/milvus/configs/` directory inside the Milvus container.
+
+</div>
+
+To confgiure the memory pool, modify the `initMemSize` and `maxMemSize` settings in the `milvus.yaml` file as follows.
+
+1. Use the following command to copy `milvus.yaml` from the Milvus container to your local machine. Replace `<milvus_container_id>` with your actual Milvus container ID.
+
+    ```shell
+    docker cp <milvus_container_id>:/milvus/configs/milvus.yaml milvus.yaml
+    ```
+
+2. Open the copied `milvus.yaml` file with your preferred text editor. For example, using vim:
+
+    ```shell
+    vim milvus.yaml
+    ```
+
+3. Edit the `initMemSize` and `maxMemSize` settings as needed and save your changes:
+
+    ```yaml
+    ...
+    gpu:
+      initMemSize: 0
+      maxMemSize: 0
+    ...
+    ```
+
+    - `initMemSize`: Initial size of the memory pool. Defaults to 1024.
+    - `maxMemSize`: Maximum size of the memory pool. Defaults to 2048.
+
+4. Use the following command to copy the modified `milvus.yaml` file back to the Milvus container. Replace `<milvus_container_id>` with your actual Milvus container ID.
+
+    ```shell
+    docker cp milvus.yaml <milvus_container_id>:/milvus/configs/milvus.yaml
+    ```
+
+5. Restart the Milvus container to apply the changes:
+
+    ```shell
+    docker stop <milvus_container_id>
+    docker start <milvus_container_id>
+    ```
 
 ## What's next
 
