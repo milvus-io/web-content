@@ -15,11 +15,11 @@ PyMilvus model library integrates rerank functions to optimize the order of resu
 
 | Rerank Function | API or Open-sourced |
 | --------------- | ------------------- |
-| [bgereranker](https://milvus.io/api-reference/pymilvus/v2.4.x/Rerankers/BGE/BGERerankFunction.md)     | Open-sourced        |
-| [cross-encoder](https://milvus.io/api-reference/pymilvus/v2.4.x/Rerankers/CrossEncoder/CrossEncoderRerankFunction.md)   | Open-sourced        |
-| [voyageai](https://milvus.io/api-reference/pymilvus/v2.4.x/Rerankers/Voyage/VoyageRerankFunction.md)        | API                 |
-| [cohere](https://milvus.io/api-reference/pymilvus/v2.4.x/Rerankers/Cohere/CohereRerankFunction.md)          | API                 |
-| [Jina AI](https://milvus.io/api-reference/pymilvus/v2.4.x/Rerankers/Jina/JinaRerankFunction.md)          | API                 |
+| [BGE](https://milvus.io/api-reference/pymilvus/v2.4.x/Rerankers/BGERerankFunction/BGERerankFunction.md)     | Open-sourced        |
+| [Cross Encoder](https://milvus.io/api-reference/pymilvus/v2.4.x/Rerankers/CrossEncoderRerankFunction/CrossEncoderRerankFunction.md)   | Open-sourced        |
+| [Voyage](https://milvus.io/api-reference/pymilvus/v2.4.x/Rerankers/VoyageRerankFunction/VoyageRerankFunction.md)        | API                 |
+| [Cohere](https://milvus.io/api-reference/pymilvus/v2.4.x/Rerankers/CohereRerankFunction/CohereRerankFunction.md)          | API                 |
+| [Jina AI](https://milvus.io/api-reference/pymilvus/v2.4.x/Rerankers/JinaRerankFunction/JinaRerankFunction.md)          | API                 |
 
 <div class="alert note">
 
