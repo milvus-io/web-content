@@ -543,6 +543,18 @@
             "id": "embed-with-voyage.md",
             "order": 6,
             "children": []
+          },
+          {
+            "label": "Jina AI",
+            "id": "embed-with-jina.md",
+            "order": 7,
+            "children": []
+          },
+          {
+            "label": "Cohere",
+            "id": "embed-with-cohere.md",
+            "order": 8,
+            "children": []
           }
         ]
       },
@@ -580,6 +592,12 @@
             "label": "Voyage",
             "id": "rerankers-voyage.md",
             "order": 4,
+            "children": []
+          },
+          {
+            "label": "Jina AI",
+            "id": "rerankers-jina.md",
+            "order": 5,
             "children": []
           }
         ]

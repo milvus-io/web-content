@@ -19,6 +19,7 @@ PyMilvus model library integrates rerank functions to optimize the order of resu
 | [cross-encoder](https://milvus.io/api-reference/pymilvus/v2.4.x/Rerankers/CrossEncoder/CrossEncoderRerankFunction.md)   | Open-sourced        |
 | [voyageai](https://milvus.io/api-reference/pymilvus/v2.4.x/Rerankers/Voyage/VoyageRerankFunction.md)        | API                 |
 | [cohere](https://milvus.io/api-reference/pymilvus/v2.4.x/Rerankers/Cohere/CohereRerankFunction.md)          | API                 |
+| [Jina AI](https://milvus.io/api-reference/pymilvus/v2.4.x/Rerankers/Jina/JinaRerankFunction.md)          | API                 |
 
 <div class="alert note">
 
