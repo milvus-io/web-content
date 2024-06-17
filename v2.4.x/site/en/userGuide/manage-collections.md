@@ -225,19 +225,19 @@ A schema defines the structure of a collection. Within the schema, you have the 
 
 <div class="language-python">
 
-To set up a scheme, use [`create_schema()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md) to create a schema object and [`add_field()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md) to add fields to the schema.
+To set up a schema, use [`create_schema()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md) to create a schema object and [`add_field()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md) to add fields to the schema.
 
 </div>
 
 <div class="language-java">
 
-To set up a scheme, use [`createSchema()`](https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createSchema.md) to create a schema object and [`addField()`](https://milvus.io/api-reference/java/v2.4.x/v2/CollectionSchema/addField.md) to add fields to the schema.
+To set up a schema, use [`createSchema()`](https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createSchema.md) to create a schema object and [`addField()`](https://milvus.io/api-reference/java/v2.4.x/v2/CollectionSchema/addField.md) to add fields to the schema.
 
 </div>
 
 <div class="language-javascript">
 
-To set up a scheme, use [`createCollection()`](https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md).
+To set up a schema, use [`createCollection()`](https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md).
 
 </div>
 
