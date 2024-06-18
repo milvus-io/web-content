@@ -27,9 +27,10 @@ Before we start, we need to install model library for PyMilvus.
 $ pip install -U pymilvus
 $ pip install "pymilvus[model]"
 ```
+
 <div class="alert note">
 
-If you are using Google Colab, to enable dependencies just installed, you may need to **restart the runtime**.
+If you are using Google Colab, to enable dependencies just installed, you may need to **restart the runtime**. (Click on the "Runtime" menu at the top of the screen, and select "Restart session" from the dropdown menu).
 
 </div>
 
@@ -138,6 +139,8 @@ data = [
 
 milvus_client = MilvusClient("./milvus_jina_demo.db")
 COLLECTION_NAME = "demo_collection"  # Milvus collection name
+if milvus_client.has_collection(collection_name=COLLECTION_NAME):
+    milvus_client.drop_collection(collection_name=COLLECTION_NAME)
 milvus_client.create_collection(collection_name=COLLECTION_NAME, dimension=DIMENSION)
 
 res = milvus_client.insert(collection_name=COLLECTION_NAME, data=data)

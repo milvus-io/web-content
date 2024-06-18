@@ -24,7 +24,7 @@ $ pip install --upgrade voyageai pymilvus
 
 <div class="alert note">
 
-If you are using Google Colab, to enable dependencies just installed, you may need to **restart the runtime**.
+If you are using Google Colab, to enable dependencies just installed, you may need to **restart the runtime**. (Click on the "Runtime" menu at the top of the screen, and select "Restart session" from the dropdown menu).
 
 </div>
 
@@ -67,6 +67,8 @@ data = [
 milvus_client = MilvusClient("milvus_voyage_demo.db")
 COLLECTION_NAME = "demo_collection"  # Milvus collection name
 # Create a collection to store the vectors and text.
+if milvus_client.has_collection(collection_name=COLLECTION_NAME):
+    milvus_client.drop_collection(collection_name=COLLECTION_NAME)
 milvus_client.create_collection(collection_name=COLLECTION_NAME, dimension=DIMENSION)
 
 # Insert all data into Milvus vector database.

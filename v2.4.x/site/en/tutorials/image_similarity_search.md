@@ -37,10 +37,9 @@ To run Colab, we provide the handy commands to install the necessary dependencie
 $ pip install pymilvus --upgrade
 $ pip install timm
 ```
-
 <div class="alert note">
 
-If you are using Google Colab, to enable dependencies just installed, you may need to **restart the runtime**.
+If you are using Google Colab, to enable dependencies just installed, you may need to **restart the runtime**. (Click on the "Runtime" menu at the top of the screen, and select "Restart session" from the dropdown menu).
 
 </div>
 
@@ -100,6 +99,8 @@ from pymilvus import MilvusClient
 # Set up a Milvus client
 client = MilvusClient(uri="example.db")
 # Create a collection in quick setup mode
+if client.has_collection(collection_name="image_embeddings"):
+    client.drop_collection(collection_name="image_embeddings")
 client.create_collection(
     collection_name="image_embeddings",
     vector_field_name="vector",

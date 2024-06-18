@@ -8,30 +8,28 @@ title: Retrieval-Augmented Generation (RAG) with Milvus and BentoML
 
 <a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_bentoml.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
-
+## Introduction
 This guide demonstrates how to use an open-source embedding model and large-language model on BentoCloud with Milvus vector database to build a RAG (Retrieval Augmented Generation) application. 
-
 BentoCloud is an AI Inference Platform for fast-moving AI teams, offering fully-managed infrastructure tailored for model inference. It works in conjunction with BentoML, an open-source model serving framework, to facilitate the easy creation and deployment of high-performance model services. In this demo, we use Milvus Lite as vector database, which is the lightweight version of Milvus that can be embedded into your Python application.
 
 ## Before you begin
 Milvus Lite is available on PyPI. You can install it via pip for Python 3.7+:
 
-```shell
-$ pip install -U pymilvus
+
+```python
+$ pip install -U pymilvus bentoml
 ```
 
 <div class="alert note">
 
-If you are using Google Colab, to enable dependencies just installed, you may need to **restart the runtime**.
+If you are using Google Colab, to enable dependencies just installed, you may need to **restart the runtime** (Click on the "Runtime" menu at the top of the screen, and select "Restart session" from the dropdown menu).
 
 </div>
 
 After sign in the BentoCloud, we can interact with deployed BentoCloud Services in Deployments, and the corresponding END_POINT and API are located in Playground -> Python.
-
 You can download the city data [here](https://github.com/ytang07/bento_octo_milvus_RAG/tree/main/data).
 
 ## Serving Embeddings with BentoML/BentoCloud 
-
 To use this endpoint, import `bentoml` and set up an HTTP client using the `SyncHTTPClient` by specifying the endpoint and optionally the token (if you turn on `Endpoint Authorization` on BentoCloud). Alternatively, you can use the same model served through BentoML using its [Sentence Transformers Embeddings](https://github.com/bentoml/BentoSentenceTransformers) repository.
 
 
@@ -169,7 +167,6 @@ connections.connect(uri="milvus_demo.db")
 ```
 
 ## Creating Your Milvus Lite Collection 
-
 Creating a collection using Milvus Lite involves two steps: first, defining the schema, and second, defining the index. For this section, we need one module: DataType tells us what type of data will be in a field. We also need to use two functions to create schema and add fields. create_schema():  creates a collection schema, add_field(): adds a field to the schema of a collection.
 
 
@@ -204,6 +201,8 @@ index_params.add_index(
 )
 
 # create collection
+if milvus_client.has_collection(collection_name=COLLECTION_NAME):
+    milvus_client.drop_collection(collection_name=COLLECTION_NAME)
 milvus_client.create_collection(
     collection_name=COLLECTION_NAME, schema=schema, index_params=index_params
 )
@@ -213,7 +212,6 @@ milvus_client.insert(collection_name=COLLECTION_NAME, data=entries)
 ```
 
 ## Set up Your LLM for RAG 
-
 To build a RAG app, we need to deploy an LLM on BentoCloud. Let’s use the latest Llama3 LLM. Once it is up and running, simply copy the endpoint and token of this model service and set up a client for it. 
 
 
@@ -224,7 +222,6 @@ llm_client = bentoml.SyncHTTPClient(BENTO_LLM_END_POINT, token=BENTO_API_TOKEN)
 ```
 
 ## LLM Instructions 
-
 Now, we set up the LLM instructions with the prompt, context, and the question. Here is the function that behaves as an LLM and it then returns the output from the client in a string format.
 
 
@@ -249,7 +246,6 @@ def dorag(question: str, context: str):
 ```
 
 ## A RAG Example 
-
 Now we’re ready to ask a question. This function simply takes a question and then does RAG to generate the relevant context from the background information. Then, we pass the context and the question to dorag() and get the result.
 
 

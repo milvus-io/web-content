@@ -8,63 +8,45 @@ title: Integrate Milvus with DSPy
 
 <a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/milvus_and_DSPy.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
-This guide demonstrates how to use MilvusRM, one of DSPy's retriever modules, to optimize RAG programs. 
-
-## What is DSPy?
-
+## What is DSPy
 DSPy, introduced by the Stanford NLP Group, stands as a groundbreaking programmatic framework designed to optimize prompts and weights within language models, particularly valuable in scenarios where large language models (LLMs) are integrated across multiple stages of a pipeline. Unlike conventional prompting engineering techniques reliant on manual crafting and tweaking, DSPy adopts a learning-based approach. By assimilating query-answer examples, DSPy generates optimized prompts dynamically, tailored to specific tasks. This innovative methodology enables the seamless reassembly of entire pipelines, eliminating the need for continuous manual prompt adjustments. DSPy's Pythonic syntax offers various composable and declarative modules, simplifying the instruction of LLMs. 
 
 ## Benefits of using DSPy
-
 - Programming Approach: DSPy provides a systematic programming approach for LM pipeline development by abstracting pipelines as text transformation graphs instead of just prompting the LLMs. Its declarative modules enable structured design and optimization, replacing the trial-and-error method of traditional prompt templates.
-
 - Performance Improvement: DSPy demonstrates significant performance gains over existing methods. Through case studies, it outperforms standard prompting and expert-created demonstrations, showcasing its versatility and effectiveness even when compiled to smaller LM models.
-
 -  Modularized Abstraction: DSPy effectively abstracts intricate aspects of LM pipeline development, such as decomposition, fine-tuning, and model selection. With DSPy, a concise program can seamlessly translate into instructions for various models, such as GPT-4, Llama2-13b, or T5-base, streamlining development and enhancing performance.
 
 ## Modules
-
 There are numerous components that contribute to constructing an LLM pipeline. Here, we'll describe some key components to provide a high-level understanding of how DSPy operates.
 
 ![DSPy Modules](../../../assets/dspy-01.png)
 
-- Signature
-
-    Signatures in DSPy serve as declarative specifications, outlining the input/output behavior of modules, guiding the language model in task execution.
-
-- Module
-
-    DSPy modules serve as fundamental components for programs leveraging language models (LMs). They abstract various prompting techniques, such as chain of thought or ReAct, and are adaptable to handle any DSPy Signature. With learnable parameters and the ability to process inputs and produce outputs, these modules can be combined to form larger programs, drawing inspiration from NN modules in PyTorch but tailored for LM applications.
-
-- Optimizer
-
-    Optimizers in DSPy fine-tune the parameters of DSPy programs, such as prompts and LLM weights, to maximize specified metrics like accuracy, enhancing program efficiency.
+Signature: Signatures in DSPy serve as declarative specifications, outlining the input/output behavior of modules, guiding the language model in task execution.
+Module: DSPy modules serve as fundamental components for programs leveraging language models (LMs). They abstract various prompting techniques, such as chain of thought or ReAct, and are adaptable to handle any DSPy Signature. With learnable parameters and the ability to process inputs and produce outputs, these modules can be combined to form larger programs, drawing inspiration from NN modules in PyTorch but tailored for LM applications.
+Optimizer: Optimizers in DSPy fine-tune the parameters of DSPy programs, such as prompts and LLM weights, to maximize specified metrics like accuracy, enhancing program efficiency.
 
 ## Why Milvus in DSPy
-
 DSPy is a powerful programming framework that boosts RAG applications. Such application needs to retrieve useful information to enhance answer quality, which needs vector database. Milvus is a well-known open-source vector database to improve performance and scalability. With MilvusRM, a retriever module in DSPy, integrating Milvus becomes seamless. Now, developers can easily define and optimize RAG programs using DSPy, taking advantage of Milvus' strong vector search capabilities. This collaboration makes RAG applications more efficient and scalable, combining DSPy's programming capabilities with Milvus' search features.
 
 ## Examples
-
 Now, let's walk through a quick example to demonstrate how to leverage Milvus in DSPy for optimizing a RAG application.
 
-### Prequisites
-
+### Prerequisites
 Before building the RAG app, install the DSPy and PyMilvus.
 
-```
-$ pip install pymilvus==2.4.2
-$ pip install dspy-ai[milvus]
+
+```python
+$ pip install "dspy-ai[milvus]"
+$ pip install -U pymilvus
 ```
 <div class="alert note">
-
-> If you are using Google Colab, to enable dependencies just installed, you may need to **restart the runtime**.
+If you are using Google Colab, to enable dependencies just installed, you may need to **restart the runtime** (Click on the "Runtime" menu at the top of the screen, and select "Restart session" from the dropdown menu).
 
 </div>
 
 ### Loading the dataset
-
 In this example, we use the HotPotQA, a collection of complex question-answer pairs, as our training dataset. We can load them through the HotPotQA class.
+
 
 ```python
 from dspy.datasets import HotPotQA
@@ -81,6 +63,7 @@ devset = [x.with_inputs("question") for x in dataset.dev]
 
 ### Ingest data into the Milvus vector database
 Ingest the context information into the Milvus collection for vector retrieval. This collection should have an `embedding` field and a `text` field. We use OpenAI's `text-embedding-3-small` model as the default query embedding function in this case.
+
 
 ```python
 import requests
