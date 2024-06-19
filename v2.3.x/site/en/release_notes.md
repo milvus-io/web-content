@@ -7,6 +7,33 @@ title: Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.3.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.3.18
+
+Release date: June 18, 2024
+
+| Milvus version | Python SDK version | Java SDK version | Go SDK version | Node.js SDK version |
+|----------------|--------------------|------------------|----------------|---------------------|
+| 2.3.18         | 2.3.7              | 2.3.6            | 2.3.6          | 2.3.5               |
+
+Milvus v2.3.18 includes several bug fixes and improvements to enhance query result quality and maintainability. This release also backports improvements and fixes from the 2.4 branch, which enhance control over delete data amounts (according to rate limit configuration) and increase Bloom filter processing speed. As with previous releases, this update reinforces Milvus's commitment to functionality and robustness.
+
+### Improvements
+
+- Added RESTful APIs to trigger component stop ([#33798](https://github.com/milvus-io/milvus/pull/33798)).
+- Improved delete by expression to respect delete rate limit rules according to the matched data size instead of delete request size ([#33794](https://github.com/milvus-io/milvus/pull/33794)).
+- Accelerated Bloom filter processing by submitting in batch and working in parallel ([#33870](https://github.com/milvus-io/milvus/pull/33870)).
+- Enabled parallel processing for `applydelete` at the segment level ([#33841](https://github.com/milvus-io/milvus/pull/33841)).
+- Printed `UseDefaultConsistency` parameter in read requests ([#33645](https://github.com/milvus-io/milvus/pull/33645)).
+
+### Bug fixes
+
+- Fixed a bug where closure capture iteration variable caused delete data to fail to apply to the correct data ([#33912](https://github.com/milvus-io/milvus/pull/33912)).
+- Fixed a bug where filtered results could be less than topk by upgrading Knowhere to 2.2.10 ([#33930](https://github.com/milvus-io/milvus/pull/33930)).
+- Fixed a bug where insert rate was not limited when `collection.insertrate.max.mb` config was set to 0 ([#33725](https://github.com/milvus-io/milvus/pull/33725)).
+- Fixed a bug where old collections created before v2.2.8 could reappear and become zombies after being dropped and restarted ([#33695](https://github.com/milvus-io/milvus/pull/33695)).
+- Fixed a bug where upsert latency used the wrong unit, causing abnormal metrics ([#33580](https://github.com/milvus-io/milvus/pull/33580)).
+- Fixed a bug where Milvus exception info could not be passed outside of segcore ([#33395](https://github.com/milvus-io/milvus/pull/33395)).
+
 ## v2.3.17
 
 Release date: May 31, 2024
