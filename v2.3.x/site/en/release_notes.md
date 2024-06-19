@@ -9,7 +9,7 @@ Find out what’s new in Milvus! This page summarizes new features, improvements
 
 ## v2.3.18
 
-Release date: June 18, 2024
+Release date: June 19, 2024
 
 | Milvus version | Python SDK version | Java SDK version | Go SDK version | Node.js SDK version |
 |----------------|--------------------|------------------|----------------|---------------------|
