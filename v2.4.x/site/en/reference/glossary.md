@@ -9,7 +9,7 @@ title: Terminology
 
 AutoID is an attribute of the primary field that determines whether to enable AutoIncrement for the primary field. The value of AutoID is defined based on a timestamp. For more information, refer to [create_schema](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md).
 
-## AutoIndex
+## Auto Index
 
 Milvus automatically decides the most appropriate index type and params for a specific field based on empirical data. This is ideal for situations when you do not need to control the specific index params. For more information, refer to [add_index](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md).
 
