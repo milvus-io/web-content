@@ -31,7 +31,7 @@ $ bash standalone_embed.sh start
 
 <div class="alert note">
 
-If you encounter any issues pulling the image, contact us at community@zilliz.com with details about the problem, and we'll provide you with the necessary support.
+If you encounter any issues pulling the image, contact us at <a href="mailto:community@zilliz.com">community@zilliz.com</a> with details about the problem, and we'll provide you with the necessary support.
 
 </div>
 
