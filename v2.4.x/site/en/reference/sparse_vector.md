@@ -38,7 +38,7 @@ To use sparse vectors in Milvus, prepare vector embeddings in one of the support
     {2: 0.33, 98: 0.72, ...}
     ```
 
-- __List of Iterables of Tuples__: Similar to the list of dictionaries, but use an iterable of tuples, `(dimension_index, value)]`, to specify only the non-zero dimensions and their values.
+- __List of Iterables of Tuples__: Similar to the list of dictionaries, but use an iterable of tuples, `[(dimension_index, value)]`, to specify only the non-zero dimensions and their values.
 
     Example:
 
