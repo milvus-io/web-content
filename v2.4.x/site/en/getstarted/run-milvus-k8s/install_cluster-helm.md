@@ -30,6 +30,12 @@ Helm uses a packaging format called charts. A chart is a collection of files tha
 - Check [the hardware and software requirements](prerequisite-helm.md) before installation.
 - Before installing Milvus, it is recommended to use the [Milvus Sizing Tool](https://milvus.io/tools/sizing) to estimate the hardware requirements based on your data size. This helps ensure optimal performance and resource allocation for your Milvus installation.
 
+<div class="alert note">
+
+If you encounter any issues pulling the image, contact us at <a href="mailto:community@zilliz.com">community@zilliz.com</a> with details about the problem, and we'll provide you with the necessary support.
+
+</div>
+
 ## Install Milvus Helm Chart
 
 Before installing Milvus Helm Charts, you need to add Milvus Helm repository.
