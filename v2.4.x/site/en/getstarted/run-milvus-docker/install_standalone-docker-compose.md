@@ -35,7 +35,7 @@ Creating milvus-standalone ... done
 
 - If you failed to run the above command, please check whether your system has Docker Compose V1 installed. If this is the case, you are advised to migrate to Docker Compose V2 due to the notes on [this page](https://docs.docker.com/compose/).
 
-- If you encounter any issues pulling the image, contact us at community@zilliz.com with details about the problem, and we'll provide you with the necessary support.
+- If you encounter any issues pulling the image, contact us at <a href="mailto:community@zilliz.com">community@zilliz.com</a> with details about the problem, and we'll provide you with the necessary support.
 
 </div>
 
