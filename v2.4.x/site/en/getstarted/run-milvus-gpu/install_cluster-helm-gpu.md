@@ -29,6 +29,12 @@ Helm uses a packaging format called charts. A chart is a collection of files tha
 
 - Check [the hardware and software requirements](prerequisite-gpu.md) before installation.
 
+<div class="alert note">
+
+If you encounter any issues pulling the image, contact us at <a href="mailto:community@zilliz.com">community@zilliz.com</a> with details about the problem, and we'll provide you with the necessary support.
+
+</div>
+
 ## Install Helm Chart for Milvus
 
 Helm is a K8s package manager that can help you deploy Milvus quickly.
