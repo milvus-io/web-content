@@ -29,6 +29,12 @@ $ curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/st
 $ bash standalone_embed.sh start
 ```
 
+<div class="alert note">
+
+If you encounter any issues pulling the image, contact us at community@zilliz.com with details about the problem, and we'll provide you with the necessary support.
+
+</div>
+
 After running the installation script:
 
 - A docker container named milvus has been started at port **19530**.
