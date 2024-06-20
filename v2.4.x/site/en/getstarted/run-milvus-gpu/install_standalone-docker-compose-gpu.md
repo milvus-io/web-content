@@ -15,6 +15,12 @@ This page illustrates how to start a Milvus instance with GPU support using Dock
 - [Install Docker](https://docs.docker.com/get-docker/).
 - [Check the requirements for hardware and software](prerequisite-gpu.md) prior to your installation.
 
+<div class="alert note">
+
+If you encounter any issues pulling the image, contact us at <a href="mailto:community@zilliz.com">community@zilliz.com</a> with details about the problem, and we'll provide you with the necessary support.
+
+</div>
+
 ## Install Milvus
 
 To install Milvus with GPU support using Docker Compose, follow these steps.
