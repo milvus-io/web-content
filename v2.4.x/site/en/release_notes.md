@@ -7,6 +7,70 @@ title: Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.4.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.4.5
+
+Release date: June 18, 2024
+
+| Milvus version | Python SDK version | Java SDK version    | Node.js SDK version |
+|----------------|--------------------| --------------------| --------------------|
+| 2.4.5          | 2.4.4              | 2.4.1               | 2.4.3               |
+
+The release of Milvus 2.4.5 introduces several improvements and bug fixes to enhance performance, stability, and functionality. Milvus 2.4.5 simplifies sparse, float16, and bfloat16 vector search with auto-indexing, speeds up searches, deletions, and compactions with Bloom filter optimizations, and tackles data management through faster loading times and import L0 segment support. It also introduces the sparse HNSW index for efficient high-dimensional sparse data search, enhances the RESTful API with sparse float vector support, and fixes critical bugs for better stability.
+
+### Improvements
+
+- Added RBAC support to describe/alter database API ([#33804](https://github.com/milvus-io/milvus/pull/33804)).
+- Supported building the HNSW index for sparse vectors ([#33653](https://github.com/milvus-io/milvus/pull/33653), [#33662](https://github.com/milvus-io/milvus/pull/33662)).
+- Supported building the Disk index for binary vectors ([#33575](https://github.com/milvus-io/milvus/pull/33575)).
+- Supported sparse vector type on RESTful v2 ([#33555](https://github.com/milvus-io/milvus/pull/33555)).
+- Enabled flush rate limiter at the collection level ([#33864](https://github.com/milvus-io/milvus/pull/33864)).
+- Executed Bloom filter application in parallel to speed up segment prediction ([#33793](https://github.com/milvus-io/milvus/pull/33793)).
+- Used fastjson library for unmarshaling delete logs to speed up json.Unmarshal ([#33802](https://github.com/milvus-io/milvus/pull/33802)).
+- Used BatchPkExist to reduce Bloom filter function call cost ([#33752](https://github.com/milvus-io/milvus/pull/33752)).
+- Sped up the loading of small collections ([#33746](https://github.com/milvus-io/milvus/pull/33746)).
+- Supported importing delete data to L0 segment ([#33712](https://github.com/milvus-io/milvus/pull/33712)).
+- Skipped marking compaction tasks as timed out to avoid executing the same task repeatedly ([#33833](https://github.com/milvus-io/milvus/pull/33833)).
+- Handled float16 and bfloat16 vectors similarly to BinaryVector in numpy bulk insert ([#33788](https://github.com/milvus-io/milvus/pull/33788)).
+- Added the includeCurrentMsg flag for the seek method ([#33743](https://github.com/milvus-io/milvus/pull/33743)).
+- Added mergeInterval, targetBufSize, and maxTolerantLag of msgdispatcher to configurations ([#33680](https://github.com/milvus-io/milvus/pull/33680)).
+- Improved GetVectorByID for sparse vectors ([#33652](https://github.com/milvus-io/milvus/pull/33652)).
+- Removed StringPrimarykey to reduce unnecessary copy and function call costs ([#33649](https://github.com/milvus-io/milvus/pull/33649)).
+- Added autoindex mapping for binary/sparse data types ([#33625](https://github.com/milvus-io/milvus/pull/33625)).
+- Optimized some caches to reduce memory usage ([#33560](https://github.com/milvus-io/milvus/pull/33560)).
+- Abstracted execute interface for import/preimport tasks ([#33607](https://github.com/milvus-io/milvus/pull/33607)).
+- Used map PK to timestamp in buffer insert to reduce Bloom filter causes ([#33582](https://github.com/milvus-io/milvus/pull/33582)).
+- Avoided redundant meta operations during import ([#33519](https://github.com/milvus-io/milvus/pull/33519)).
+- Improved logs by logging better disk quota info, adding UseDefaultConsistency flag, and removing unnecessary logs ([#33597](https://github.com/milvus-io/milvus/pull/33597), [#33644](https://github.com/milvus-io/milvus/pull/33644), [#33670](https://github.com/milvus-io/milvus/pull/33670)).
+
+### Bug fixes
+
+- Fixed a bug that may cause Milvus to be unable to create AutoIndex on binary and sparse vectors ([#33867](https://github.com/milvus-io/milvus/pull/33867)).
+- Fixed a bug that may cause indexnode to retry creating index on invalid index parameters of all vectors ([#33878](https://github.com/milvus-io/milvus/pull/33878)).
+- Fixed a bug that may cause server crashes when loads and releases happen concurrently ([#33699](https://github.com/milvus-io/milvus/pull/33699)).
+- Improved cache consistency for configuration values ([#33797](https://github.com/milvus-io/milvus/pull/33797)).
+- Prevented possible data loss during deletion ([#33821](https://github.com/milvus-io/milvus/pull/33821)).
+- Ensured the DroppedAt field (likely deletion timestamp) is set after dropping collections ([#33767](https://github.com/milvus-io/milvus/pull/33767)).
+- Fixed an issue that might have caused Milvus to handle binary vector data sizes incorrectly ([#33751](https://github.com/milvus-io/milvus/pull/33751)).
+- Masked Kafka credentials from being printed in logs ([#33747](https://github.com/milvus-io/milvus/pull/33747)).
+- Prevented sensitive Kafka credentials from being logged in plain text ([#33694](https://github.com/milvus-io/milvus/pull/33694)).
+- Ensured Milvus can correctly import data with multiple vector fields ([#33724](https://github.com/milvus-io/milvus/pull/33724)).
+- Enhanced import reliability by checking if an import job exists before starting ([#33673](https://github.com/milvus-io/milvus/pull/33673)).
+- Improved handling of the sparse HNSW index (internal functionality) ([#33714](https://github.com/milvus-io/milvus/pull/33714)).
+- Cleaned vector memory to avoid memory leaks ([#33708](https://github.com/milvus-io/milvus/pull/33708)).
+- Ensured smoother asynchronous warmup by fixing a state lock issue ([#33687](https://github.com/milvus-io/milvus/pull/33687)).
+- Addressed a bug that might have caused missing results in query iterators ([#33506](https://github.com/milvus-io/milvus/pull/33506)).
+- Fixed a bug that might cause import segment size to be uneven ([#33634](https://github.com/milvus-io/milvus/pull/33634)).
+- Fixed incorrect data size handling for bf16, fp16, and binary vector types ([#33488](https://github.com/milvus-io/milvus/pull/33488)).
+- Improved stability by addressing potential issues with the L0 compactor ([#33564](https://github.com/milvus-io/milvus/pull/33564)).
+- Ensured dynamic configuration updates are reflected correctly in the cache ([#33590](https://github.com/milvus-io/milvus/pull/33590)).
+- Improved the accuracy of the RootCoordQuotaStates metric ([#33601](https://github.com/milvus-io/milvus/pull/33601)).
+- Ensured accurate reporting of the number of loaded entities in metrics ([#33522](https://github.com/milvus-io/milvus/pull/33522)).
+- Provided more complete information in exception logs ([#33396](https://github.com/milvus-io/milvus/pull/33396)).
+- Optimized query pipeline by removing unnecessary group checker ([#33485](https://github.com/milvus-io/milvus/pull/33485)).
+- Used the local storage path for a more accurate disk capacity check on the index node ([#33505](https://github.com/milvus-io/milvus/pull/33505)).
+- Corrected hasMoreResult to return false when hit number is larger than the limit ([#33642](https://github.com/milvus-io/milvus/pull/33642)).
+- Delayed loading Bloom filters in delegator to prevent them from being loaded repeatedly when the worker has no more memory ([#33650](https://github.com/milvus-io/milvus/pull/33650)).
+
 ## v2.4.4
 
 Release date: May 31, 2024

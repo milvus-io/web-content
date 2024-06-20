@@ -16,10 +16,10 @@ In current release, all parameters take effect only after Milvus restarts.
 
 ## Download a configuration file
 
-[Download](https://raw.githubusercontent.com/milvus-io/milvus/v2.4.4/configs/milvus.yaml) `milvus.yaml` directly or with the following command.
+[Download](https://raw.githubusercontent.com/milvus-io/milvus/v2.4.5/configs/milvus.yaml) `milvus.yaml` directly or with the following command.
 
 ```
-$ wget https://raw.githubusercontent.com/milvus-io/milvus/v2.4.4/configs/milvus.yaml
+$ wget https://raw.githubusercontent.com/milvus-io/milvus/v2.4.5/configs/milvus.yaml
 ```
 
 ## Modify the configuration file
@@ -171,13 +171,13 @@ Sorted by:
 
 ## Download an installation file
 
-Download the installation file for Milvus [standalone](https://github.com/milvus-io/milvus/releases/download/v2.4.4/milvus-standalone-docker-compose.yml), and save it as `docker-compose.yml`.
+Download the installation file for Milvus [standalone](https://github.com/milvus-io/milvus/releases/download/v2.4.5/milvus-standalone-docker-compose.yml), and save it as `docker-compose.yml`.
 
 You can also simply run the following command.
 
 ```
 # For Milvus standalone
-$ wget https://github.com/milvus-io/milvus/releases/download/v2.4.4/milvus-standalone-docker-compose.yml -O docker-compose.yml
+$ wget https://github.com/milvus-io/milvus/releases/download/v2.4.5/milvus-standalone-docker-compose.yml -O docker-compose.yml
 ```
 
 ## Modify the installation file
