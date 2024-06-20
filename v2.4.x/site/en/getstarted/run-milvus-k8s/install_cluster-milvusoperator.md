@@ -30,6 +30,12 @@ Milvus Operator is a solution that helps you deploy and manage a full Milvus ser
 
 - Before installing Milvus, it is recommended to use the [Milvus Sizing Tool](https://milvus.io/tools/sizing) to estimate the hardware requirements based on your data size. This helps ensure optimal performance and resource allocation for your Milvus installation.
 
+<div class="alert note">
+
+If you encounter any issues pulling the image, contact us at <a href="mailto:community@zilliz.com">community@zilliz.com</a> with details about the problem, and we'll provide you with the necessary support.
+
+</div>
+
 ## Install Milvus Operator
 
 Milvus Operator defines a Milvus cluster custom resources on top of [Kubernetes Custom Resources](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/). When custom resources are defined, you can use K8s APIs in a declarative way and manage the Milvus deployment stack to ensure its scalability and high availability.
