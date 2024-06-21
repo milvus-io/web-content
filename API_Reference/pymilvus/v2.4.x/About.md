@@ -12,20 +12,20 @@ In this release, you have the flexibility to choose MilvusClient or the original
 
 | Milvus version | Recommended PyMilvus version |
 | -------------- | ---------------------------- |
-| 1.0.*	         | 1.0.1                        |
-| 1.1.*	         | 1.1.2                        |
+| 1.0.x	         | 1.0.1                        |
+| 1.1.x	         | 1.1.2                        |
 | 2.0.x	         | 2.0.2                        |
 | 2.1.x	         | 2.1.3                        |
 | 2.2.x          | 2.2.3                        |
-| 2.3.0          | 2.3.7                        | 
-| 2.4.0-rc.1     | 2.4.0                        |
+| 2.3.x          | 2.3.7                        | 
+| 2.4.x          | 2.4.4                        |
 
 ## Install & Update
 
 You can run the following command to install the latest PyMilvus or update your PyMilvus to this version.
 
 ```shell
-pip install --upgrade pymilvus==v2.4.0
+pip install --upgrade pymilvus==v2.4.4
 ```
 
 After the installation, you can check the PyMilvus version by running the following
@@ -35,7 +35,7 @@ from pymilvus import __version__
 
 print(__version__)
 
-# v2.4.0
+# v2.4.4
 ```
 
 To install the Model library for embedding operations, run the following command:
