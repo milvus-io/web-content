@@ -104,7 +104,7 @@ Run the following command to install Milvus Operator with Helm.
 $ helm install milvus-operator \
   -n milvus-operator --create-namespace \
   --wait --wait-for-jobs \
-  https://github.com/zilliztech/milvus-operator/releases/download/v0.9.16/milvus-operator-0.9.16.tgz
+  https://github.com/zilliztech/milvus-operator/releases/download/v0.9.17/milvus-operator-0.9.17.tgz
 ```
 
 You will see the output similar to the following after the installation process ends.
@@ -327,7 +327,7 @@ $ helm -n milvus-operator uninstall milvus-operator
 #### Uninstall with kubectl
 
 ```shell
-$ kubectl delete -f https://raw.githubusercontent.com/zilliztech/milvus-operator/v0.9.16/deploy/manifests/deployment.yaml
+$ kubectl delete -f https://raw.githubusercontent.com/zilliztech/milvus-operator/v0.9.17/deploy/manifests/deployment.yaml
 ```
 
 ## What's next
