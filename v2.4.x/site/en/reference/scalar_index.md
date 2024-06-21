@@ -21,15 +21,15 @@ Scalar field indexing is a way of ensuring the speed of attribute filtering by s
 
 ## Scalar field indexing algorithms
 
-Milvus aims to achieve low memory usage, high filtering efficiency, and short loading time with its scalar field indexing algorithms. These algorithms are categorized into two main types: [default indexing](#default-indexing) and [inverted indexing](#inverted-indexing).
+Milvus aims to achieve low memory usage, high filtering efficiency, and short loading time with its scalar field indexing algorithms. These algorithms are categorized into two main types: [auto indexing](#auto-indexing) and [inverted indexing](#inverted-indexing).
 
-### Default indexing
+### Auto indexing
 
-Milvus automatically creates a default index for a scalar field based on its data type, without requiring manual intervention. This default indexing is suitable for prefix match queries and frequent retrieval scenarios.
+Milvus automatically creates an auto index for a scalar field based on its data type, without requiring manual intervention. Auto indexing is suitable for prefix match queries and frequent retrieval scenarios.
 
-The following table lists the data types that Milvus supports and their corresponding default indexing algorithms.
+The following table lists the data types that Milvus supports and their corresponding auto indexing algorithms.
 
-| Data type | Default indexing algorithm |
+| Data type |   Auto indexing algorithm  |
 |-----------|----------------------------|
 | VARCHAR   | Inverted index             |
 | INT8      | Inverted index             |
