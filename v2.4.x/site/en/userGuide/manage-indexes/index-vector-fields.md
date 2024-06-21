@@ -551,6 +551,12 @@ You can check the index file created on a specific field, and collect the statis
 
 You can simply drop an index if it is no longer needed.
 
+<div class="alert note">
+
+Before dropping an index, make sure it has been released first.
+
+</div>
+
 <div class="language-python">
 
 To drop an index, use [`drop_index()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/drop_index.md).
