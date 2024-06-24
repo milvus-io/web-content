@@ -7,9 +7,9 @@ title: GPU Index
 
 # GPU Index
 
-Milvus supports various GPU index types to accelerate search performance and efficiency, especially in high-throughput, low-latency, and high-recall scenarios. This topic provides an overview of the GPU index types supported by Milvus, their suitable use cases, and performance characteristics. For information on building indexes with GPU, refer to [Index with GPU](index-with-gpu.md).
+Milvus supports various GPU index types to accelerate search performance and efficiency, especially in high-throughput, and high-recall scenarios. This topic provides an overview of the GPU index types supported by Milvus, their suitable use cases, and performance characteristics. For information on building indexes with GPU, refer to [Index with GPU](index-with-gpu.md).
 
-GPU acceleration can greatly improve the search performance and efficiency of Milvus, especially for high-throughput, low-latency and high-recall scenarios, and is also very friendly to large nq batch search secnario.
+It's important to note that using a GPU index may not necessarily reduce latency compared to using a CPU index. If you want to fully maximize throughput, you will need extremely high request pressure or a large number of query vectors.
 
 ![performance](../../../assets/gpu_index.png)
 
@@ -17,26 +17,32 @@ Milvus' GPU support is contributed by Nvidia [RAPIDS](https://rapids.ai/) team. 
 
 ## GPU_CAGRA
 
-GPU_CAGRA is a graph-based index optimized for GPUs, which performs well on inference GPUs. It's best suited for situations with a small number of queries, where training GPUs with lower memory frequency may not yield optimal results.
+GPU_CAGRA is a graph-based index optimized for GPUs, Using inference-grade GPUs to run the Milvus GPU version can be more cost-effective compared to using expensive training-grade GPUs.
 
 - Index building parameters
 
-  | Parameter                   | Description                                                                                                                                                                                                                                                     | Default Value        |
-   |-----------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------|
-   | `intermediate_graph_degree` | Affects recall and build time by determining the graph's degree before pruning. Recommended values are `32` or `64`.                                                                                                                                                                                | <code>128</code>     |
-   | `graph_degree`              | Affects search performance and recall by setting the graph's degree after pruning. A larger difference between these two degrees results in a longer build time. Its value must be smaller than the value of __intermediate_graph_degree__.                                                                                                   | <code>64</code>      |
-   | `build_algo`                | Selects the graph generation algorithm before pruning. Possible values:</br><code>IVF_PQ</code>: Offers higher quality but slower build time.</br> <code>NN_DESCENT</code>: Provides a quicker build with potentially lower recall.                             | <code>IVF_PQ</code>  |
-   | `cache_dataset_on_device`   | Decides whether to cache the original dataset in GPU memory. Possible values:</br><code>"true"</code>: Caches the original dataset to enhance recall by refining search results.</br> <code>"false"</code>: Does not cache the original dataset to save memory. | <code>"false"</code> |
+  | Parameter                   | Description                                                  | Default Value        |
+  | --------------------------- | ------------------------------------------------------------ | -------------------- |
+  | `intermediate_graph_degree` | Affects recall and build time by determining the graph's degree before pruning. Recommended values are `32` or `64`. | <code>128</code>     |
+  | `graph_degree`              | Affects search performance and recall by setting the graph's degree after pruning. A larger difference between these two degrees results in a longer build time. Its value must be smaller than the value of __intermediate_graph_degree__. | <code>64</code>      |
+  | `build_algo`                | Selects the graph generation algorithm before pruning. Possible values:</br><code>IVF_PQ</code>: Offers higher quality but slower build time.</br> <code>NN_DESCENT</code>: Provides a quicker build with potentially lower recall. | <code>IVF_PQ</code>  |
+  | `cache_dataset_on_device`   | Decides whether to cache the original dataset in GPU memory. Possible values:</br><code>"true"</code>: Caches the original dataset to enhance recall by refining search results.</br> <code>"false"</code>: Does not cache the original dataset to save gpu memory. | <code>"false"</code> |
 
 - Search parameters
 
     | Parameter                           | Description                                                                                                                                                                                                                                                                                                  | Default Value |
     |-------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------|
     | `itopk_size`                        | Determines the size of intermediate results kept during the search. A larger value may improve recall at the expense of search performance. It should be at least equal to the final top-k (limit) value and is typically a power of 2 (e.g., 16, 32, 64, 128).                                              | Empty         |
-    | `search_width`                      | Specifies the number of entry points into the CAGRA graph during the search. Increasing this value can enhance recall but may impact search performance.                                                                                                                                                     | Empty         |
+    | `search_width`                      | Specifies the number of entry points into the CAGRA graph during the search. Increasing this value can enhance recall but may impact search performance（e.g. 1, 2, 4, 8, 16, 32).                                                                                                                        | Empty         |
     | `min_iterations` / `max_iterations` | Controls the search iteration process. By default, they are set to `0`, and CAGRA automatically determines the number of iterations based on `itopk_size` and `search_width`. Adjusting these values manually can help balance performance and accuracy.                                                       | `0`             |
     | `team_size`                         | Specifies the number of CUDA threads used for calculating metric distance on the GPU. Common values are a power of 2 up to 32 (e.g. 2, 4, 8, 16, 32). It has a minor impact on search performance. The default value is `0`, where Milvus automatically selects the `team_size` based on the vector dimension. | `0`             |
 
+* Limits on search
+
+  | Parameter | Range                                                |
+  | --------- | ---------------------------------------------------- |
+  | `top-K`   | <= 1024                                              |
+  | `top-K`   | <=max((`itopk_size` + 31)// 32, `search_width`) * 32 |
 
 ## GPU_IVF_FLAT
 
@@ -52,7 +58,8 @@ When conducting searches, note that you can set the top-K up to 256 for any sear
 
    | Parameter | Description             | Range      | Default Value |
    | --------- | ----------------------- | ---------- | ------------- |
-   | `nlist`   | Number of cluster units | [1, 65536] | 128 |
+   | `nlist`   | Number of cluster units | [1, 65536] | `128` |
+   | `cache_dataset_on_device` | Decides whether to cache the original dataset in GPU memory. Possible values:</br><code>"true"</code>: Caches the original dataset to enhance recall by refining search results.</br> <code>"false"</code>: Does not cache the original dataset to save gpu memory. | `"true"` `"flase"` | `"false"` |
 
 - Search parameters
 
@@ -60,13 +67,13 @@ When conducting searches, note that you can set the top-K up to 256 for any sear
 
     | Parameter | Description              | Range           | Default Value |
     | --------- | ------------------------ | --------------- | ------------- |
-    | `nprobe`  | Number of units to query | [1, nlist]      | 8 |
+    | `nprobe`  | Number of units to query | [1, nlist]      | `8` |
 
 - Limits on search
 
-  | Parameter | Range  |
-  | --------- | ------ |
-  | `top-K`   | <= 256 |
+  | Parameter | Range     |
+  | --------- | --------- |
+  | `top-K`   | <= `2048` |
 
 ## GPU_IVF_PQ
 
@@ -86,9 +93,10 @@ When conducting searches, note that you can set the top-K up to 8192 for any sea
 
   | Parameter | Description                               | Range               | Default Value |
   | --------- | ----------------------------------------- | ------------------- | ------------- |
-  | `nlist`   | Number of cluster units                   | [1, 65536]          | 128           |
-  | `m`       | Number of factors of product quantization | `dim mod m == 0`    | 4 |
-  | `nbits`   | [Optional] Number of bits in which each low-dimensional vector is stored. | [1, 16] | 8 |
+  | `nlist`   | Number of cluster units                   | [1, 65536]          | `128`        |
+  | `m`       | Number of factors of product quantization, | `dim mod m or = 0` | `0` |
+  | `nbits`   | [Optional] Number of bits in which each low-dimensional vector is stored. | [1, 16] | `8` |
+  | ``cache_dataset_on_device`` | Decides whether to cache the original dataset in GPU memory. Possible values:</br><code>"true"</code>: Caches the original dataset to enhance recall by refining search results.</br> <code>"false"</code>: Does not cache the original dataset to save gpu memory. | `"true"` `"false"` | `"false"` |
 
 - Search parameters
 
@@ -96,13 +104,13 @@ When conducting searches, note that you can set the top-K up to 8192 for any sea
 
     | Parameter | Description              | Range           | Default Value |
     | --------- | ------------------------ | --------------- | ------------- |
-    | `nprobe`  | Number of units to query | [1, nlist]      | 8 |
+    | `nprobe`  | Number of units to query | [1, nlist]      | `8` |
 
 - Limits on search
 
-  | Parameter | Range   |
-  | --------- | ------- |
-  | `top-K`   | <= 1024 |
+  | Parameter | Range     |
+  | --------- | --------- |
+  | `top-K`   | <= `1024` |
 
 ## GPU_BRUTE_FORCE
 
