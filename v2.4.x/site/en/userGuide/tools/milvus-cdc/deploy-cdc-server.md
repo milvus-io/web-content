@@ -83,6 +83,31 @@ In the `milvus-cdc/server/configs` directory, modify the `cdc.yaml` file to cust
 
 Example configuration:
 
+```yaml
+# milvus-source config, these settings are basically the same as the corresponding configuration of milvus.yaml in milvus source.
+sourceConfig:
+  # etcd config
+  etcdAddress:
+    - localhost:2379
+  etcdRootPath: by-dev
+  etcdMetaSubPath: meta
+  # default partition name
+  defaultPartitionName: _default
+  # read buffer length, mainly used for buffering if writing data to milvus-target is slow.
+  readChanLen: 10
+  # milvus-source mq config, which is pulsar or kafka
+  pulsar:
+    address: pulsar://localhost:6650
+    webAddress: localhost:80
+    maxMessageSize: 5242880
+    tenant: public
+    namespace: default
+#    authPlugin: org.apache.pulsar.client.impl.auth.AuthenticationToken
+#    authParams: token:xxx
+#  kafka:
+#    address: 127.0.0.1:9092
+```
+
 ### Compile the Milvus-CDC server
 
 After saving the `cdc.yaml` file, navigate to the `milvus-cdc` directory and run one of the following commands to compile the server:
