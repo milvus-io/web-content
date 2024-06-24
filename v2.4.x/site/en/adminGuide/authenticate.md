@@ -18,34 +18,41 @@ This guide explains how to manage user authentication in Milvus, including enabl
 
 ## Enable user authentication
 
-
-
 <div class="filter">
-<a href="#docker">Docker Compose</a> <a href="#helm">Helm</a>
+  <a href="#docker">Docker Compose</a>
+  <a href="#helm">Helm</a>
 </div>
 
-<div class="table-wrapper filter-docker" markdown="block">
+<div class="filter-docker">
 
-Set <code>common.security.authorizationEnabled</code> in <code>milvus.yaml</code> as <code>true</code> when <a href="configure-docker.md">configuring Milvus</a> to enable authentication.
+To enable user authentication for your Milvus server, set common.security.authorizationEnabled to true in the Milvus config file `milvus.yaml`. For more information on configs, refer to [Configure Milvus with Docker Compose](https://milvus.io/docs/configure-docker.md?tab=component).
+
+```yaml
+...
+common:
+...
+  security:
+    authorizationEnabled: false
+...
+```
 
 </div>
 
-<div class="table-wrapper filter-helm" markdown="block">
-    
-As of Milvus Helm Chart 4.0.0, you can enable user authentication by modifying `values.yaml` as follows:
+<div class="filter-helm">
 
-<pre>
-  <code>
+To enable user authentication for your Milvus server, set authorizationEnabled to true in the Milvus config file `values.yaml`. For more information on configs, refer to [Configure Milvus with Helm Charts](https://milvus.io/docs/configure-helm.md?tab=component).
+
+```yaml
+...
 extraConfigFiles:
   user.yaml: |+
     common:
       security:
         authorizationEnabled: true
-  </code>
-</pre>
-    
-</div>
+...
+```
 
+</div>
 
 ## Connect to Milvus with authentication
 
