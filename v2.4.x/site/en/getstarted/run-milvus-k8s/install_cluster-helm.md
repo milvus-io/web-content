@@ -220,10 +220,11 @@ Till now, you can follow steps [2](#2-Check-Milvus-cluster-status) and [3](#3-Fo
 
 ## Upgrade running Milvus cluster
 
-Run the following command to uninstall your Milvus cluster.
+Run the following command to upgrade your running Milvus cluster to the latest version:
 
 ```shell
-$ helm uninstall my-release
+$ helm repo update
+$ helm upgrade my-release zilliztech/milvus
 ```
 
 ## Uninstall Milvus
