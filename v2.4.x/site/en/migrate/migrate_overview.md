@@ -1,7 +1,7 @@
 ---
 id: migrate_overview.md
 summary: This article provides an overview of the Milvus-migration tool, including supported migrations, features, and architecture.
-title: Overview
+title: Migrate Overview
 ---
 
 # Overview
