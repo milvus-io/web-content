@@ -363,7 +363,7 @@ This release introduces several scenario-based features:
 
 - **New GPU Index - CAGRA**: Thanks to NVIDIA's contribution, this new GPU index offers a 10x performance boost, especially for batch searches. For details, refer to [GPU Index](gpu_index.md).
 
-- **Multi-vector** and **Hybrid Search**: This feature enables storing vector embeddings from multiple models and conducting multi-vector searches. For details, refer to [Multi-vector Search](multi-vector-search.md).
+- **Multi-vector** and **Hybrid Search**: This feature enables storing vector embeddings from multiple models and conducting hybrid searches. For details, refer to [Hybrid Search](multi-vector-search.md).
 
 - **Sparse Vectors**: Ideal for keyword interpretation and analysis, sparse vectors are now supported for processing in your collection. For details, refer to [Sparse Vectors](sparse_vector.md).
 

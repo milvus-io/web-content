@@ -73,7 +73,7 @@ Filtered search applies scalar filters to vector searches, allowing you to refin
 
 ## Hybrid search
 
-[Hybrid Search](https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/hybrid_search.md) is an API for multi-vector search since Milvus 2.4.0. You can search multiple vector fields and fusion them. For a vector search combined with scalar field filtering, it is referred to as "filtered search". For more information, refer to [Multi-Vector Search](multi-vector-search.md).
+[Hybrid Search](https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/hybrid_search.md) is an API for hybrid search since Milvus 2.4.0. You can search multiple vector fields and fusion them. For a vector search combined with scalar field filtering, it is referred to as "filtered search". For more information, refer to [Hybrid Search](multi-vector-search.md).
 
 ## Index
 
@@ -137,7 +137,7 @@ In [standalone deployment](https://milvus.io/docs/install_standalone-docker.md) 
 
 ## Multi-Vector
 
-Milvus supports multiple vector fields in one collection since 2.4.0. For more information, refer to [Multi-Vector Search](multi-vector-search.md).
+Milvus supports multiple vector fields in one collection since 2.4.0. For more information, refer to [Hybrid Search](multi-vector-search.md).
 
 ## Partition
 

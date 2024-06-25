@@ -263,5 +263,5 @@ load_balance -s 3 -d 4 -ss 431067441441538050
   - [Index Vector Fields](index-vector-fields.md)
   - [Index Scalar Fields](index-scalar-fields.md)
   - [Single-vector search](single-vector-search.md)
-  - [Multi-vector search](multi-vector-search.md)
+  - [Hybrid search](multi-vector-search.md)
 

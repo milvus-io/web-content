@@ -12,9 +12,9 @@ Once you have inserted your data, the next step is to perform similarity searche
 Milvus allows you to conduct two types of searches, depending on the number of vector fields in your collection:
 
 - **Single-vector search**: If your collection has only one vector field, use the [`search()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/search.md) method to find the most similar entities. This method compares your query vector with the existing vectors in your collection and returns the IDs of the closest matches along with the distances between them. Optionally, it can also return the vector values and metadata of the results.
-- **Multi-vector search**: For collections with two or more vector fields, use the [`hybrid_search()`](https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/hybrid_search.md) method. This method performs multiple Approximate Nearest Neighbor (ANN) search requests and combines the results to return the most relevant matches after reranking.
+- **Hybrid search**: For collections with two or more vector fields, use the [`hybrid_search()`](https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/hybrid_search.md) method. This method performs multiple Approximate Nearest Neighbor (ANN) search requests and combines the results to return the most relevant matches after reranking.
 
-This guide focuses on how to perform a single-vector search in Milvus. For details on multi-vector search, refer to [hybrid search](https://milvus.io/docs/multi-vector-search.md).
+This guide focuses on how to perform a single-vector search in Milvus. For details on hybrid search, refer to [Hybrid search](https://milvus.io/docs/multi-vector-search.md).
 
 ## Overview
 
@@ -1930,7 +1930,7 @@ __Limitations__
 
 - __Performance Impact__: Be mindful that performance degrades with increasing query vector counts. Using a cluster with 2 CPU cores and 8 GB of memory as an example, the execution time for grouping search increases proportionally with the number of input query vectors.
 
-- __Functionality__: Currently, grouping search is not supported by [range search](https://milvus.io/docs/single-vector-search.md#Range-search), [search iterators](https://milvus.io/docs/with-iterators.md#Search-with-iterator), or [multi-vector search](multi-vector-search.md)
+- __Functionality__: Currently, grouping search is not supported by [range search](https://milvus.io/docs/single-vector-search.md#Range-search), [search iterators](https://milvus.io/docs/with-iterators.md#Search-with-iterator), or [hybrid search](multi-vector-search.md).
 
 ## Search parameters
 

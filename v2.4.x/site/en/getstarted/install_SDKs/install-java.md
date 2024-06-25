@@ -46,7 +46,7 @@ Having installed Milvus Java SDK, you can:
   - [Manage Partitions](manage-partitions.md)
   - [Insert, Upsert & Delete](insert-update-delete.md)
   - [Single-Vector Search](single-vector-search.md)
-  - [Multi-Vector Search](multi-vector-search.md)
+  - [Hybrid Search](multi-vector-search.md)
 
 - Explore [Milvus Java API reference](/api-reference/java/v2.4.x/About.md)
 

@@ -7,9 +7,9 @@ title: Hybrid Search
 
 # Hybrid Search
 
-Since Milvus 2.4, we introduced multi-vector support and a hybrid search framework, which means users can bring in several vector fields (up to 10) into a single collection. Different vector fields can represent different aspects, different embedding models or even different modalities of data characterizing the same entity, which greatly expands the richness of information. This feature is particularly useful in comprehensive search scenarios, such as identifying the most similar person in a vector library based on various attributes like pictures, voice, fingerprints, etc.
+Since Milvus 2.4, we introduced multi-vector support and a hybrid search framework, which means users can bring in several vector fields (up to 10) into a single collection. These vectors in different columns represent diverse facets of data, originating from different embedding models or undergoing distinct processing methods. The results of hybrid searches are integrated using reranking strategies, such as Reciprocal Rank Fusion (RRF) and Weighted Scoring. To learn more about reranking strategies, refer to [Reranking](reranking.md).
 
-A hybrid search enables executing search requests over various vector fields and combines the results using reranking strategies, such as Reciprocal Rank Fusion (RRF) and Weighted Scoring. To learn more about reranking strategies, refer to [Reranking](reranking.md).
+This feature is particularly useful in comprehensive search scenarios, such as identifying the most similar person in a vector library based on various attributes like pictures, voice, fingerprints, etc.
 
 In this tutorial, you will learn how to:
 
@@ -27,7 +27,7 @@ The code snippets on this page use the [PyMilvus ORM module](https://milvus.io/a
 
 ## Preparations
 
-Before starting a hybrid search, ensure you have a collection with multiple vector fields.
+Before starting a hybrid search, ensure you have a collection with multiple vector fields. Currently, Milvus introduces a default of four vector fields per collection, which can be extended to a maximum of ten by modifying the [proxy.maxVectorFieldNum](https://milvus.io/docs/configure_proxy.md#proxymaxVectorFieldNum) configuration.
 
 Below is an example of creating a collection named `test_collection` with two vector fields, `filmVector` and `posterVector`, and inserting random entities into it.
 
@@ -86,7 +86,7 @@ collection.insert(entities)
 
 ## Step 1: Create Multiple AnnSearchRequest Instances
 
-A multi-vector search uses the `hybrid_search()` API to perform multiple ANN search requests in a single call. Each `AnnSearchRequest` represents a single search request on a specific vector field.
+A hybrid search uses the `hybrid_search()` API to perform multiple ANN search requests in a single call. Each `AnnSearchRequest` represents a single search request on a specific vector field.
 
 The following example creates two `AnnSearchRequest` instances to perform individual similarity searches on two vector fields.
 

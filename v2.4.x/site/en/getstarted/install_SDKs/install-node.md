@@ -50,7 +50,7 @@ Having installed Milvus Node.js SDK, you can:
   - [Manage Partitions](manage-partitions.md)
   - [Insert, Upsert & Delete](insert-update-delete.md)
   - [Single-Vector Search](single-vector-search.md)
-  - [Multi-Vector Search](multi-vector-search.md)
+  - [Hybrid Search](multi-vector-search.md)
 
 - Explore [Milvus Node.js API reference](/api-reference/node/v2.4.x/About.md)
 

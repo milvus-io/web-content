@@ -10,7 +10,7 @@ When exploring various vector database options, this comprehensive guide will he
 
 ## Milvus highlights
 
-- **Functionality**: Milvus goes beyond basic vector similarity search by supporting advanced functionalities like [sparse vector](https://milvus.io/docs/sparse_vector.md), [bulk-vector](https://milvus.io/docs/single-vector-search.md#Bulk-vector-search), [filtered search](https://milvus.io/docs/single-vector-search.md#Filtered-search), and [multi-vector search](https://milvus.io/docs/multi-vector-search.md) capabilities.
+- **Functionality**: Milvus goes beyond basic vector similarity search by supporting advanced functionalities like [sparse vector](https://milvus.io/docs/sparse_vector.md), [bulk-vector](https://milvus.io/docs/single-vector-search.md#Bulk-vector-search), [filtered search](https://milvus.io/docs/single-vector-search.md#Filtered-search), and [hybrid search](https://milvus.io/docs/multi-vector-search.md) capabilities.
 
 - **Flexibility**: Milvus accommodates various deployment modes and multiple SDKs, all within a robust, integrated ecosystem.
 

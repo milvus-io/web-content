@@ -286,7 +286,7 @@ Having installed Milvus, you can:
   - [Manage Partitions](manage-partitions.md)
   - [Insert, Upsert & Delete](insert-update-delete.md)
   - [Single-Vector Search](single-vector-search.md)
-  - [Multi-Vector Search](multi-vector-search.md)
+  - [Hybrid Search](multi-vector-search.md)
 - [Upgrade Milvus Using Milvus Operator](upgrade_milvus_standalone-operator.md)
 - Explore [Milvus Backup](milvus_backup_overview.md), an open-source tool for Milvus data backups.
 - Explore [Birdwatcher](birdwatcher_overview.md), an open-source tool for debugging Milvus and dynamic configuration updates.

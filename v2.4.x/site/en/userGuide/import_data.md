@@ -191,7 +191,7 @@ The state codes and their corresponding descriptions.
 - Learn more basic operations of Milvus:
   - [Index Vetor Fields](index-vector-fields.md)
   - [Single-Vector Search](single-vector-search.md)
-  - [Multi-Vector Search](multi-vector-search.md)
+  - [Hybrid Search](multi-vector-search.md)
 - Explore API references for Milvus SDKs:
   - [PyMilvus API reference](/api-reference/pymilvus/v2.4.x/tutorial.html)
   - [Node.js API reference](/api-reference/node/v2.4.x/tutorial.html)

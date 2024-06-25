@@ -11,7 +11,7 @@ This topic introduces the four levels of consistency in Milvus and their best-su
 
 Consistency in a distributed database specifically refers to the property that ensures every node or replica has the same view of data when writing or reading data at a given time. 
 
-Milvus supports four consistency levels:  strong, bounded staleness, session, and eventually. The default consistency level in Milvus is bounded staleness.  You can easily tune the consistency level when conducting a [single-vector search](single-vector-search.md), [multi-vector search](multi-vector-search.md) or [query](get-and-scalar-query.md) to make it best suit your application.
+Milvus supports four consistency levels:  strong, bounded staleness, session, and eventually. The default consistency level in Milvus is bounded staleness.  You can easily tune the consistency level when conducting a [single-vector search](single-vector-search.md), [hybrid search](multi-vector-search.md) or [query](get-and-scalar-query.md) to make it best suit your application.
 
 ## Consistency levels
 
@@ -71,6 +71,6 @@ See [How GuaranteeTs Works](https://github.com/milvus-io/milvus/blob/f3f46d3bb2d
 
 - Learn how to tune consistency level when:
   - [conducting a single-vector search](single-vector-search.md)
-  - [conducting a multi-vector search](multi-vector-search.md)
+  - [conducting a hybrid search](multi-vector-search.md)
   - [conducting a scalar query](get-and-scalar-query.md)
 

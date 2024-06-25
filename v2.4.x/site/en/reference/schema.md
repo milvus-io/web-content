@@ -127,7 +127,7 @@ fields = [
   - BFLOAT16_VECTOR: Stores 16-bit floating-point numbers with reduced precision but the same exponent range as Float32, popular in deep learning for reducing memory and computational requirements without significantly impacting accuracy.
   - SPARSE_FLOAT_VECTOR: Stores a list of non-zero elements and their corresponding indices, used for representing sparse vectors. For more information, refer to [Sparse Vectors](sparse_vector.md).
 
-  Milvus supports multiple vector fields in a collection. For more information, refer to [Multi-Vector Search](multi-vector-search.md).
+  Milvus supports multiple vector fields in a collection. For more information, refer to [Hybrid Search](multi-vector-search.md).
 
 ## Collection schema
 

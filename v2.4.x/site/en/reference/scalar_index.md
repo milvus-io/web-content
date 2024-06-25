@@ -96,6 +96,6 @@ The following tables list the estimation functions for all the data types that M
 - To learn more about the related terms and rules mentioned above, read
 
     - [Bitset](bitset.md)
-    - [Multi-Vector search](multi-vector-search.md)
+    - [Hybrid search](multi-vector-search.md)
     - [Boolean expression rules](boolean.md)
     - [Supported data types](schema.md#Supported-data-type)
