@@ -48,7 +48,7 @@ You can stop and delete this container as follows
 $ bash standalone_embed.sh stop
 
 # Delete Milvus data
-$ bash standalone_embed.sh stop
+$ bash standalone_embed.sh delete
 ```
 
 ## What's next
