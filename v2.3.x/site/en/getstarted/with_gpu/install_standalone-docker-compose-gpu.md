@@ -4,7 +4,7 @@ label: Standalone (Docker Compose)
 related_key: Kubernetes
 order: 1
 group: install_standalone-helm-gpu.md
-summary: Learn how to install Milvus cluster on Kubernetes.
+summary: Learn how to install Milvus Cluster with Docker Compose.
 title: Install Milvus Cluster with Docker Compose
 ---
 

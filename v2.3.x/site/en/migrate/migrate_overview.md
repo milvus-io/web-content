@@ -1,7 +1,8 @@
 ---
 id: migrate_overview.md
-summary: MilvusDM allows data migration between Milvus and many other sources of data.
 title: Migrate Overview
+summary: MilvusDM allows data migration between Milvus and many other sources of data.
+title: Overview
 ---
 
 # Overview
