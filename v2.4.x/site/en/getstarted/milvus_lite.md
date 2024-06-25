@@ -1,6 +1,6 @@
 ---
 id: milvus_lite.md
-summary: Get started with Milvus.
+summary: Get started with Milvus Lite.
 title: Run Milvus Lite Locally
 ---
 

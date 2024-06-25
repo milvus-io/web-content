@@ -1,6 +1,6 @@
 ---
 id: integrate_with_snowpark.md
-summary: This guide demonstrates how to use an open-source embedding model and large-language model on BentoCloud with Milvus vector database to build a Retrieval Augmented Generation (RAG) application. 
+summary: This guide demonstrates how to start a Milvus demo on Snowpark container services. 
 title: Milvus on Snowpark Container Services
 ---
 
