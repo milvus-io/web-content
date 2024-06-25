@@ -57,9 +57,9 @@ add_field(
 
         - **DataType.JSON**, and
 
-        - **DataType.ARRAY**.
+        - **DataType.ARRAY**
 
-    - Vector fields: Select **DataType.BINARY_VECTOR** or **DataType.FLOAT_VECTOR**.
+    - Vector fields: Select **DataType.BINARY_VECTOR**, **DataType.FLOAT_VECTOR**, **DataType.FLOAT16_VECTOR**, **DataType.BFLOAT16_VECTOR**, or **DataType.SPARSE_FLOAT_VECTOR**.
 
 - **is_primary** (*bool*) -
 
@@ -86,23 +86,25 @@ add_field(
 
     The data type of the elements in the field value.
 
-    This is mandatory for a **DataType.Array** field.
+    This is mandatory for a **DataType.ARRAY** field.
 
 - **max_capacity** (*int*) -
 
     The number of elements in an Array field value.
 
-    This is mandatory for a **DataType.Array** field.
+    This is mandatory for a **DataType.ARRAY** field.
 
 - **dim** (*int*) -
 
-    The dimension of the vector embeddings.
+    The dimension of the vector embeddings. The value should be an integer greater than 1.
 
-    This is mandatory for a **DataType.FLOAT_VECTOR** field or a **DataType.BINARY_VECTOR** field.
+    This is mandatory for a field of the **DataType.FLOAT_VECTOR**, **DataType.BINARY_VECTOR**, **DataType.FLOAT16_VECTOR**, or **DataType.BFLOAT16_VECTOR** type. If you use **DataType.SPARSE_FLOAT_VECTOR**, omit this parameter.
 
 - **is_partition_key** (*bool*) -
 
     Whether the current field serves as the partition key. Each collection can have one partition key.
+
+    This parameter is not applicable to Milvus Lite. For more information on Milvus Lite limits, refer to [Run Milvus Lite](https://milvus.io/docs/milvus_lite.md).
 
     <div class="admonition note">
 
