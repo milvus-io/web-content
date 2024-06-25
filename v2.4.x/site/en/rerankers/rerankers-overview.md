@@ -2,7 +2,7 @@
 id: rerankers-overview.md
 order: 1
 summary: PyMilvus model library integrates rerank functions to optimize the order of results returned from initial searches.
-title: Overview
+title: Rerankers Overview
 ---
 
 # Overview

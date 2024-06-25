@@ -2,7 +2,7 @@
 id: embed-with-jina.md
 order: 8
 summary: This article describes how to use the JinaEmbeddingFunction to encode documents and queries using the Jina AI embedding model.
-title: Jina AI
+title: Jina AI - Embed
 ---
 
 # Jina AI

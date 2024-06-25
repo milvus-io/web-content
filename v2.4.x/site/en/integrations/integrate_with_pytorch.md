@@ -1,7 +1,7 @@
 ---
 id: integrate_with_pytorch.md
 summary: This page discusses image search using Milvus
-title: Image Search with Milvus
+title: Image Search with Milvus - Integration
 ---
 
 # Image Search with Milvus
