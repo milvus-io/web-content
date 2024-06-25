@@ -2,7 +2,7 @@
 id: embed-with-voyage.md
 order: 7
 summary: This article describes how to use the VoyageEmbeddingFunction to encode documents and queries using the Voyage model.
-title: Voyage
+title: Voyage-Embed
 ---
 
 # Voyage

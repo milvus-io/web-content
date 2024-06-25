@@ -3,7 +3,7 @@ id: prerequisite-helm.md
 label: Install on Kubernetes
 related_key: Kubernetes
 summary: Learn the necessary preparations before installing Milvus with Helm.
-title: Requirements
+title: Helm Requirements
 ---
 
 # Requirements

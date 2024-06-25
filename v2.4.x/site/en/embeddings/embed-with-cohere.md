@@ -2,7 +2,7 @@
 id: embed-with-cohere.md
 order: 9
 summary: This article describes how to use the CohereEmbeddingFunction to encode documents and queries using the Cohere embedding model.
-title: Cohere
+title: Cohere-Embed
 ---
 
 # Cohere
