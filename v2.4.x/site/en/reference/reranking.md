@@ -64,7 +64,7 @@ RRF’s basic process is as follows:
 
     ![rrf-ranker](/assets/rrf-ranker.png)
 
-    Here, \(N\) represents the number of different retrieval routes, \(\text{rank}_i(d)\) is the rank position of retrieved document \(d\) by the \(i\)th retriever, and \(k\) is a smoothing parameter, typically set to 60.
+    Here, \(N\) represents the number of different retrieval routes, \(text{rank}_i(d)\) is the rank position of retrieved document \(d\) by the \(i\)th retriever, and \(k\) is a smoothing parameter, typically set to 60.
 - **Comprehensive Ranking**: Re-rank the retrieved results based on the combined scores to produce the final results.
 
 To use this strategy, apply an `RRFRanker` instance.
