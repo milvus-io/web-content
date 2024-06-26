@@ -5,7 +5,7 @@ summary: Learn how to generate embeddings for your data.
 title: Embedding Overview
 ---
 
-# Embedding Overview
+# Overview
 
 Embedding is a machine learning concept for mapping data into a high-dimensional space, where data of similar semantic are placed close together. Typically being a Deep Neural Network from BERT or other Transformer families, the embedding model can effectively represent the semantics of text, images, and other data types with a series of numbers known as vectors. A key feature of these models is that the mathematical distance between vectors in the high-dimensional space can indicate the similarity of the semantics of original text or images. This property unlocks many information retrieval applications, such as web search engines like Google and Bing, product search and recommendations on e-commerce sites, and the recently popular Retrieval Augmented Generation (RAG) paradigm in generative AI.
 

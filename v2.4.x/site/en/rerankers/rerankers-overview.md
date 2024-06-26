@@ -5,7 +5,7 @@ summary: PyMilvus model library integrates rerank functions to optimize the orde
 title: Rerankers Overview
 ---
 
-# Rerankers Overview
+# Overview
 
 In the realm of information retrieval and generative AI, a reranker is an essential tool that optimizes the order of results from initial searches. Rerankers differ from traditional [embedding models](embeddings.md) by taking a query and document as input and directly returning a similarity score instead of embeddings. This score indicates the relevance between the input query and document.
 
