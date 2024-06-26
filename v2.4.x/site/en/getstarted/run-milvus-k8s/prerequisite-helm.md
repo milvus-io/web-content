@@ -3,10 +3,10 @@ id: prerequisite-helm.md
 label: Install on Kubernetes
 related_key: Kubernetes
 summary: Learn the necessary preparations before installing Milvus with Helm.
-title: Helm Requirements
+title: Running Milvus on Kubernetes: System Requirements
 ---
 
-# Requirements
+# Running Milvus on Kubernetes: System Requirements
 
 This page lists the hardware and software requirements to get Milvus up and running.
 
