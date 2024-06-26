@@ -1,10 +1,10 @@
 ---
 id: migrate_overview.md
 summary: This article provides an overview of the Milvus-migration tool, including supported migrations, features, and architecture.
-title: Migrate Overview
+title: Milvus Migration Overview
 ---
 
-# Overview
+# Milvus Migration Overview
 
 Recognizing the diverse needs of user base, Milvus has expanded its migration tools to not only facilitate upgrades from earlier Milvus 1.x versions but also to enable seamless integration of data from other systems like [Elasticsearch](https://www.elastic.co/guide/en/elasticsearch/reference/current/elasticsearch-intro.html) and [Faiss](https://github.com/facebookresearch/faiss). The [Milvus-migration](https://github.com/zilliztech/milvus-migration) project is designed to bridge the gap between these varied data environments and the latest advancements in Milvus technology, ensuring you can harness improved features and performance seamlessly.
 
