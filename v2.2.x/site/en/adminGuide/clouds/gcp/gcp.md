@@ -5,7 +5,7 @@ related_key: cluster
 summary: Learn how to deploy a Milvus cluster on GCP.
 ---
 
-## Deploy a Milvus Cluster on GCP
+# Deploy a Milvus Cluster on GCP
 
 Milvus is a cloud-native vector database and can be deployed on various cloud environments. This guide walks you through every detail about setting up Milvus on Google Cloud Platform (GCP).
 
