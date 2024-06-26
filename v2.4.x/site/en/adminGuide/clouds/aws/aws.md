@@ -5,9 +5,15 @@ related_key: cluster
 summary: Learn how to deploy a Milvus cluster on AWS EC2.
 ---
 
-# Deploy a Milvus Cluster on EC2
+# (Deprecated) Deploy a Milvus Cluster on EC2
 
 This topic describes how to deploy a Milvus cluster on [Amazon EC2](https://docs.aws.amazon.com/ec2/) with Terraform and Ansible.
+
+<div class="alert note">
+
+This topic is outdated and will be removed soon. You are advised to refer to [Deploy a Milvus Cluster on EKS](eks.md) instead.
+
+</div>
 
 ##  Provision a Milvus cluster
 
