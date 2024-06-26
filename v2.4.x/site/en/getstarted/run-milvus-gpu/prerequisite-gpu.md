@@ -3,10 +3,10 @@ id: prerequisite-gpu.md
 label: GPU requirements
 related_key: GPU
 summary: Learn the necessary preparations before installing Milvus with GPU.
-title: Requirements
+title: Requirements for Installing Milvus with GPU
 ---
 
-# Requirements
+# Requirements for Installing Milvus with GPU
 
 This page lists the hardware and software requirements to set up Milvus with GPU support.
 
