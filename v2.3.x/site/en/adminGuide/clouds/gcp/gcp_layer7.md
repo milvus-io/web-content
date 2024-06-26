@@ -5,7 +5,7 @@ related_key: cluster
 summary: Learn how to deploy a Milvus cluster behind a Layer-7 load balancer on GCP.
 ---
 
-## Set up a Layer-7 Load Balancer for Milvus on GCP
+# Set up a Layer-7 Load Balancer for Milvus on GCP
 
 When compared to a Layer-4 load balancer, a Layer-7 load balancer offers smart load balancing and caching capabilities and is a great choice for cloud-native services. 
 
