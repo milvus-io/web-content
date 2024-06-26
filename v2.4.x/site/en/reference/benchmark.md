@@ -11,7 +11,7 @@ This report shows the major test results of Milvus 2.2.0. It aims to provide a p
 <div class="alert note">
   <div style="display: flex;">
       <div style="flex:0.3;">
-        <img src="https://zilliz.com/images/whitepaper/performance.png">
+        <img src="https://zilliz.com/images/whitepaper/performance.png" alt="Milvus Performance Evaluation 2023">
       </div>
   </div>
   <div style="flex:1; padding: 10px; ">

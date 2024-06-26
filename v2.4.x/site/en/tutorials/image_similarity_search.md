@@ -174,7 +174,7 @@ display(concatenated_image)
 
 
     
-<img src="../../../assets/query.png" width="150" />
+<img src="../../../assets/query.png" width="150" alt="query result" />
     
 
 
