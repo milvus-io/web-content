@@ -3,10 +3,10 @@ id: prerequisite-docker.md
 label: Docker requirements
 related_key: Docker
 summary: Learn the necessary preparations before installing Milvus with Docker Compose.
-title: Docker Requirements
+title: Requirements for Installing Milvus with Docker Compose
 ---
 
-# Requirements
+# Requirements for Installing Milvus with Docker Compose
 
 Before installing a Milvus instance, check your hardware and software to see if they meet the requirements.
 
