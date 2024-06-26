@@ -268,7 +268,6 @@ In this guide, we will use Milvus Helm Charts to deploy a Milvus cluster. You ca
     
     - To configure HA for your Milvus, refer to [this calculator](https://milvus.io/tools/sizing/) for more information. You can download the related configurations directly from the calculator, and you should remove MinIO-related configurations.
     - To implement multi-replica deployments of coordinators, set `xxCoordinator.activeStandby.enabled` to `true`.
-    - To access your Milvus from the Internet, change `service.beta.kubernetes.io/aws-load-balancer-scheme` from `internal` to `internet-facing`. 
 
     </div>
 
@@ -282,7 +281,7 @@ In this guide, we will use Milvus Helm Charts to deploy a Milvus cluster. You ca
       annotations: 
         service.beta.kubernetes.io/aws-load-balancer-type: external
         service.beta.kubernetes.io/aws-load-balancer-name: milvus-service
-        service.beta.kubernetes.io/aws-load-balancer-scheme: internal
+        service.beta.kubernetes.io/aws-load-balancer-scheme: internet-facing
         service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: ip
 
     serviceAccount:
@@ -385,11 +384,6 @@ You can follow the simple guide below to verify the installation. For more detai
 
 2. Change the `host` argument in the example code to the Milvus service address above.
 
-    <div class="alert note">
-
-    If You have set `service.beta.kubernetes.io/aws-load-balancer-scheme` to `internal` in `milvus.yaml`. You should run the example code within the EKS VPC.
-
-    </div>
 
     ```python
     ...
@@ -478,7 +472,7 @@ In case you need to restore the environment by uninstalling Milvus, destroying t
 2. Destroy the EKS cluster.
 
     ```shell
-    eksctl delete cluster --name milvus-eks-cluster
+    eksctl delete cluster --name milvus-eks-cluster --region us-east-2
     ```
 
 3. Delete the AWS S3 bucket and related IAM policies.
@@ -486,6 +480,8 @@ In case you need to restore the environment by uninstalling Milvus, destroying t
     You should replace the bucket name and policy ARN with your own.
 
     ```shell
+    aws s3 rm s3://milvus-bucket-039dd013c0712f085d60e21f --recursive
+
     aws s3api delete-bucket --bucket milvus-bucket-039dd013c0712f085d60e21f --region us-east-2
 
     aws iam delete-policy --policy-arn 'arn:aws:iam::12345678901:policy/MilvusS3ReadWrite'
