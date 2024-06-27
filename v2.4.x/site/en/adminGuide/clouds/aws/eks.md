@@ -158,7 +158,7 @@ You can set up the required AWS resources, including an AWS S3 bucket and an EKS
           namespace: milvus
           labels: {aws-usage: "milvus"}
         attachPolicyARNs:
-        - "MilvusS3ReadWrite_Policy_ARN"
+        - "MilvusS3ReadWrite_Policy_ARN" # arn:aws:iam::12345678901:policy/MilvusS3ReadWrite
 
     managedNodeGroups:
       - name: milvus-node-group
