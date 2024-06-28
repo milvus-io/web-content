@@ -70,7 +70,7 @@ This method catches all the exceptions and returns an `R<RpcStatus>` object.
 import io.milvus.param.TransferReplicaParam;
 
 R<RpcStatus> response = client.transferReplica(TransferReplicaParam.newBuilder()
-            .withTargetGroupName(sourceName)
+            .withSourceGroupName(sourceName)
             .withTargetGroupName(targetName)
             .withCollectionName(COLLECTION_NAME)
             .withNodeNumber(1)
