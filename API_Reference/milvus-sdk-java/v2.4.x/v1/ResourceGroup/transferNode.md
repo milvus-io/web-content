@@ -65,7 +65,7 @@ This method catches all the exceptions and returns an `R<RpcStatus>` object.
 import io.milvus.param.TransferNodeParam;
 
 R<RpcStatus> response = client.transferNode(TransferNodeParam.newBuilder()
-            .withTargetGroupName(sourceName)
+            .withSourceGroupName(sourceName)
             .withTargetGroupName(targetName)
             .withNodeNumber(1)
             .build());
