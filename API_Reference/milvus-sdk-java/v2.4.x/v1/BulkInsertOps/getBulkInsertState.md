@@ -3,7 +3,7 @@
 A MilvusClient interface. This method gets the state of a bulkinsert task.
 
 ```java
-<GetImportStateResponse> getBulkInsertState(GetBulkInsertStateParam requestParam);
+R<GetImportStateResponse> getBulkInsertState(GetBulkInsertStateParam requestParam);
 ```
 
 ## GetBulkInsertStateParam
