@@ -183,7 +183,7 @@ const fields = [
         name: "id",
         data_type: DataType.Int64,
         is_primary_key: true,
-        auto_id: false
+        autoID: false
     },
     {
         name: "vector",
