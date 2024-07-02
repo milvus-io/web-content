@@ -37,11 +37,11 @@ queryNode:
         warmup: async
 ```
 
-The `warmup` parameter determines whether Milvus pre-loads data from the object storage into the cache on the local hard disk of the query nodes before it is needed. This parameter defaults to `async`. Possible options are as follows:
+The `warmup` parameter determines whether Milvus pre-loads data from the object storage into the cache on the local hard disk of the query nodes before it is needed. This parameter defaults to `disable`. Possible options are as follows:
 
 - `async`: Milvus pre-loads data asynchronously in the background, which does not affect the time it takes to load a collection. However, users may experience a delay when retrieving vectors for a short period of time after the load process is complete.  This is the default option.
 - `sync`: Milvus pre-loads data synchronously, which may affect the time it takes to load a collection. However, users can perform queries immediately after the load process is complete without any delay. 
-- `off`: Milvus does not pre-load data into the memory cache.
+- `disable`: Milvus does not pre-load data into the memory cache.
 
 Note that the chunk cache settings also apply when new data is inserted into collections or the collection indexes are rebuilt.
 
