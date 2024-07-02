@@ -11,7 +11,7 @@ Milvus provides search and query iterators for iterating results with a large vo
 
 ## Overview
 
-Iterators are powerful tools that help you navigate through large datasets by using primary key values and Boolean expressions. This can significantly improve the way you retrieve data. Unlike the traditional use of __offset__ and __limit__ parameters, which may become less efficient over time, iterators offer a more scalable solution.
+Iterators are powerful tools that help you iterate through a large volume of or all data within a collection using primary key values and Boolean expressions. This can significantly improve the way you retrieve data. Unlike the traditional use of __offset__ and __limit__ parameters, which may become less efficient over time, iterators offer a more scalable solution.
 
 ### Benefits of using iterators
 
