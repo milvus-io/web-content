@@ -7,7 +7,6 @@ summary: Build a video similarity search system with Milvus.
 
 This tutorial demonstrates how to use Milvus, the open-source vector database, to build a video similarity search system.
 - [Open Jupyter notebook](https://github.com/towhee-io/examples/tree/main/video/reverse_video_search)
-- [Quick deploy](https://github.com/milvus-io/bootcamp/blob/master/solutions/video/video_similarity_search/quick_deploy)
 
 The ML models and third-party software used include:
 - OpenCV
