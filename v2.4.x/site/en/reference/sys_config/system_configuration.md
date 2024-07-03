@@ -152,8 +152,6 @@ See [Common Configurations](configure_common.md) for detailed description for ea
 
 ### `knowhere`
 
-[Knowhere](https://github.com/milvus-io/milvus/blob/master/docs/design_docs/knowhere_design.md) is the search engine of Milvus.
-
 Under this section, you can configure the default SIMD instruction set type of the system.
 
 See [Knowhere-related Configurations](configure_knowhere.md) for detailed description for each parameter under this section.

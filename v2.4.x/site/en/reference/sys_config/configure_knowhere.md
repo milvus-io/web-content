@@ -10,8 +10,6 @@ title: Knowhere-related Configurations
 
 This topic introduces the knowhere-related configurations of Milvus.
 
-[Knowhere](https://github.com/milvus-io/milvus/blob/master/docs/design_docs/knowhere_design.md) is the search engine of Milvus.
-
 Under this section, you can configure the default SIMD instruction set type of the system.
 
 ## `knowhere.simdType`
