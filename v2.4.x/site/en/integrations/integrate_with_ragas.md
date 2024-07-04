@@ -10,7 +10,7 @@ title: Evaluation with Ragas
 
 This guide demonstrates how to use Ragas to evaluate a Retrieval-Augmented Generation (RAG) pipeline built upon [Milvus](https://milvus.io/).
 
-The RAG system combines a retrieval system with a generative model to generate new text based on a given prompt. The system first retrieves relevant documents from a corpus using a vector similarity search engine like Milvus, and then uses a generative model to generate new text based on the retrieved documents.
+The RAG system combines a retrieval system with a generative model to generate new text based on a given prompt. The system first retrieves relevant documents from a corpus using Milvus, and then uses a generative model to generate new text based on the retrieved documents.
 
 [Ragas](https://docs.ragas.io/en/latest/index.html#) is a framework that helps you evaluate your RAG pipelines. There are existing tools and frameworks that help you build these pipelines but evaluating it and quantifying your pipeline performance can be hard. This is where Ragas (RAG Assessment) comes in.
 
@@ -28,7 +28,7 @@ $ pip install --upgrade pymilvus openai requests tqdm pandas ragas
 
 <div class="alert note">
 
-If you are using Google Colab, to enable dependencies just installed, you may need to **restart the runtime**.
+If you are using Google Colab, to enable dependencies just installed, you may need to **restart the runtime** (Click on the "Runtime" menu at the top of the screen, and select "Restart session" from the dropdown menu).
 
 </div>
 
@@ -162,10 +162,19 @@ Let's initialize the RAG class with OpenAI and Milvus clients.
 
 ```python
 openai_client = OpenAI()
-milvus_client = MilvusClient("./milvus_demo.db")
+milvus_client = MilvusClient(uri="./milvus_demo.db")
 
 my_rag = RAG(openai_client=openai_client, milvus_client=milvus_client)
 ```
+
+<div class="alert note">
+
+As for the argument of `MilvusClient`:
+- Setting the `uri` as a local file, e.g.`./milvus.db`, is the most convenient method, as it automatically utilizes [Milvus Lite](https://milvus.io/docs/milvus_lite.md) to store all data in this file.
+- If you have large scale of data, you can set up a more performant Milvus server on [docker or kubernetes](https://milvus.io/docs/quickstart.md). In this setup, please use the server uri, e.g.`http://localhost:19530`, as your `uri`.
+- If you want to use [Zilliz Cloud](https://zilliz.com/cloud), the fully managed cloud service for Milvus, adjust the `uri` and `token`, which correspond to the [Public Endpoint and Api key](https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details) in Zilliz Cloud.
+
+</div>
 
 ## Run the RAG pipeline and get results
 

@@ -13,7 +13,7 @@ This guide demonstrates how to use an open-source embedding model and large-lang
 BentoCloud is an AI Inference Platform for fast-moving AI teams, offering fully-managed infrastructure tailored for model inference. It works in conjunction with BentoML, an open-source model serving framework, to facilitate the easy creation and deployment of high-performance model services. In this demo, we use Milvus Lite as vector database, which is the lightweight version of Milvus that can be embedded into your Python application.
 
 ## Before you begin
-Milvus Lite is available on PyPI. You can install it via pip for Python 3.7+:
+Milvus Lite is available on PyPI. You can install it via pip for Python 3.8+:
 
 
 ```python
@@ -156,6 +156,15 @@ DIMENSION = 384
 # Initialize a Milvus Lite client
 milvus_client = MilvusClient("milvus_demo.db")
 ```
+
+<div class="alert note">
+
+As for the argument of `MilvusClient`:
+- Setting the `uri` as a local file, e.g.`./milvus.db`, is the most convenient method, as it automatically utilizes [Milvus Lite](https://milvus.io/docs/milvus_lite.md) to store all data in this file.
+- If you have large scale of data, you can set up a more performant Milvus server on [docker or kubernetes](https://milvus.io/docs/quickstart.md). In this setup, please use the server uri, e.g.`http://localhost:19530`, as your `uri`.
+- If you want to use [Zilliz Cloud](https://zilliz.com/cloud), the fully managed cloud service for Milvus, adjust the `uri` and `token`, which correspond to the [Public Endpoint and Api key](https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details) in Zilliz Cloud.
+
+</div>
 
 Or with old connections.connect API (not recommended):
 

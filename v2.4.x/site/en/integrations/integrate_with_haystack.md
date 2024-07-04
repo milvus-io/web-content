@@ -10,7 +10,7 @@ title: Retrieval-Augmented Generation (RAG) with Milvus and Haystack
 
 This guide demonstrates how to build a Retrieval-Augmented Generation (RAG) system using Haystack and Milvus.
 
-The RAG system combines a retrieval system with a generative model to generate new text based on a given prompt. The system first retrieves relevant documents from a corpus using a vector similarity search engine like Milvus, and then uses a generative model to generate new text based on the retrieved documents.
+The RAG system combines a retrieval system with a generative model to generate new text based on a given prompt. The system first retrieves relevant documents from a corpus using Milvus, and then uses a generative model to generate new text based on the retrieved documents.
 
 [Haystack](https://haystack.deepset.ai/) is the open source Python framework by deepset for building custom apps with large language models (LLMs). [Milvus](https://milvus.io/) is the world's most advanced open-source vector database, built to power embedding similarity search and AI applications.
 
@@ -22,12 +22,12 @@ Before running this notebook, make sure you have the following dependencies inst
 
 
 ```python
-$ pip install --upgrade --quiet pymilvus milvus-haystack markdown-it-py mdit_plain
+! pip install --upgrade --quiet pymilvus milvus-haystack markdown-it-py mdit_plain
 ```
 
 <div class="alert note">
 
-If you are using Google Colab, to enable dependencies just installed, you may need to **restart the runtime**.
+If you are using Google Colab, to enable dependencies just installed, you may need to **restart the runtime** (Click on the "Runtime" menu at the top of the screen, and select "Restart session" from the dropdown menu).
 
 </div>
 
@@ -69,14 +69,31 @@ from haystack.components.converters import MarkdownToDocument
 from haystack.components.embedders import OpenAIDocumentEmbedder, OpenAITextEmbedder
 from haystack.components.preprocessors import DocumentSplitter
 from haystack.components.writers import DocumentWriter
+from haystack.utils import Secret
 
 from milvus_haystack import MilvusDocumentStore
 from milvus_haystack.milvus_embedding_retriever import MilvusEmbeddingRetriever
 
+
 document_store = MilvusDocumentStore(
     connection_args={"uri": "./milvus.db"},
+    # connection_args={"uri": "http://localhost:19530"},
+    # connection_args={"uri": YOUR_ZILLIZ_CLOUD_URI, "token": Secret.from_env_var("ZILLIZ_CLOUD_API_KEY")},
     drop_old=True,
 )
+```
+
+<div class="alert note">
+
+For the connection_args:
+- Setting the `uri` as a local file, e.g.`./milvus.db`, is the most convenient method, as it automatically utilizes [Milvus Lite](https://milvus.io/docs/milvus_lite.md) to store all data in this file.
+- If you have large scale of data, you can set up a more performant Milvus server on [docker or kubernetes](https://milvus.io/docs/quickstart.md). In this setup, please use the server uri, e.g.`http://localhost:19530`, as your `uri`.
+- If you want to use [Zilliz Cloud](https://zilliz.com/cloud), the fully managed cloud service for Milvus, adjust the `uri` and `token`, which correspond to the [Public Endpoint and Api key](https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details) in Zilliz Cloud.
+
+</div>
+
+
+```python
 indexing_pipeline = Pipeline()
 indexing_pipeline.add_component("converter", MarkdownToDocument())
 indexing_pipeline.add_component(
@@ -196,3 +213,5 @@ print("RAG answer:", results["generator"]["replies"][0])
 
     RAG answer: The painting "Warrior" is currently stored in the Malcolm Collection in the British Museum.
 
+
+For more information about how to use milvus-haystack, please refer to the [milvus-haystack Readme](https://github.com/milvus-io/milvus-haystack).

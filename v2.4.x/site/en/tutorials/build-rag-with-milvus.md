@@ -10,7 +10,7 @@ title: Build RAG with Milvus
 
 In this tutorial, we will show you how to build a RAG(Retrieval-Augmented Generation) pipeline with Milvus.
 
-The RAG system combines a retrieval system with a generative model to generate new text based on a given prompt. The system first retrieves relevant documents from a corpus using a vector similarity search engine like Milvus, and then uses a generative model to generate new text based on the retrieved documents.
+The RAG system combines a retrieval system with a generative model to generate new text based on a given prompt. The system first retrieves relevant documents from a corpus using Milvus, and then uses a generative model to generate new text based on the retrieved documents.
 
 
 ## Preparation
@@ -109,10 +109,20 @@ print(test_embedding[:10])
 ```python
 from pymilvus import MilvusClient
 
-milvus_client = MilvusClient("./milvus_demo.db")
+milvus_client = MilvusClient(uri="./milvus_demo.db")
 
 collection_name = "my_rag_collection"
 ```
+
+<div class="alert note">
+
+As for the argument of `MilvusClient`:
+
+- Setting the `uri` as a local file, e.g.`./milvus.db`, is the most convenient method, as it automatically utilizes [Milvus Lite](https://milvus.io/docs/milvus_lite.md) to store all data in this file.
+- If you have large scale of data, you can set up a more performant Milvus server on [docker or kubernetes](https://milvus.io/docs/quickstart.md). In this setup, please use the server uri, e.g.`http://localhost:19530`, as your `uri`.
+- If you want to use [Zilliz Cloud](https://zilliz.com/cloud), the fully managed cloud service for Milvus, adjust the `uri` and `token`, which correspond to the [Public Endpoint and Api key](https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details) in Zilliz Cloud.
+
+</div>
 
 Check if the collection already exists and drop it if it does.
 

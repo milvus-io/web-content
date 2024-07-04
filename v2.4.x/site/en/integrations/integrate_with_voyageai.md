@@ -64,7 +64,7 @@ data = [
 # Connect to Milvus, all data is stored in a local file named "milvus_voyage_demo.db"
 # in current directory. You can also connect to a remote Milvus server following this
 # instruction: https://milvus.io/docs/install_standalone-docker.md.
-milvus_client = MilvusClient("milvus_voyage_demo.db")
+milvus_client = MilvusClient(uri="milvus_voyage_demo.db")
 COLLECTION_NAME = "demo_collection"  # Milvus collection name
 # Create a collection to store the vectors and text.
 if milvus_client.has_collection(collection_name=COLLECTION_NAME):
@@ -76,6 +76,16 @@ res = milvus_client.insert(collection_name="demo_collection", data=data)
 
 print(res["insert_count"])
 ```
+
+<div class="alert note">
+
+As for the argument of `MilvusClient`:
+
+- Setting the `uri` as a local file, e.g.`./milvus.db`, is the most convenient method, as it automatically utilizes [Milvus Lite](https://milvus.io/docs/milvus_lite.md) to store all data in this file.
+- If you have large scale of data, you can set up a more performant Milvus server on [docker or kubernetes](https://milvus.io/docs/quickstart.md). In this setup, please use the server uri, e.g.`http://localhost:19530`, as your `uri`.
+- If you want to use [Zilliz Cloud](https://zilliz.com/cloud), the fully managed cloud service for Milvus, adjust the `uri` and `token`, which correspond to the [Public Endpoint and Api key](https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details) in Zilliz Cloud.
+
+</div>
 
 With all data in Milvus vector database, we can now perform semantic search by generating vector embedding for the query and conduct vector search.
 
