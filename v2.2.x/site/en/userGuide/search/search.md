@@ -771,7 +771,7 @@ milvusClient.releaseCollection(
 
 ```csharp
 var collection = milvusClient.GetCollection("book").ReleaseAsync();
-``
+```
 
 ## Limits
 |Feature|Maximum limit|
