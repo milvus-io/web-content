@@ -295,7 +295,7 @@ Index building parameters and search parameters vary with Milvus distribution. S
   | --------- | ----------------------------------------- | ------------------- |
   | `nlist`   | Number of cluster units                   | [1, 65536]          |
   | `m`       | Number of factors of product quantization | `dim mod m == 0` |
-  | `nbits`   | [Optional] Number of bits in which each low-dimensional vector is stored. | [1, 16] (8 by default) |
+  | `nbits`   | [Optional] Number of bits in which each low-dimensional vector is stored. | [1, 64] (8 by default) |
 
 - Search parameters
 
