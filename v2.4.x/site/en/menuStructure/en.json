@@ -1241,6 +1241,18 @@
         "id": "integrate_with_memgpt.md",
         "order": 16,
         "children": []
+      },
+      {
+        "label": "FastGPT",
+        "id": "integrate_with_fastgpt.md",
+        "order": 17,
+        "children": []
+      },
+      {
+        "label": "Vanna",
+        "id": "integrate_with_vanna.md",
+        "order": 18,
+        "children": []
       }
     ]
   },
