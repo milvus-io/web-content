@@ -1,6 +1,7 @@
 ---
 id: image_deduplication_system.md
-summary: Build an image deduplication system with Milvus. 
+summary: Build an image deduplication system with Milvus.
+title: Image Deduplication
 ---
 
 # Image Deduplication

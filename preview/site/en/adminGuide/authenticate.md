@@ -1,127 +1,162 @@
 ---
 id: authenticate.md
 summary: Learn how to manage user authentication in Milvus.
+title: Authenticate User Access
 ---
 
 # Authenticate User Access
 
-This topic describes how to manage user authentication in Milvus.
+This guide explains how to manage user authentication in Milvus, including enabling authentication, connecting as a user, and modifying user credentials.
 
-Milvus supports authenticated access by username and password.
+<div class="alert note">
+
+- TLS and user authentication are two distinct security approaches. If you have enabled both user authentication and TLS in your Milvus system, you must provide a username, password, and certificate file paths. For information on how to enable TLS, refer to [Encryption in Transit](tls.md).
+
+- The code snippets on this page use new <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">MilvusClient</a> (Python) to interact with Milvus. New MilvusClient SDKs for other languages will be released in future updates.
+
+</div>
 
 ## Enable user authentication
 
-
-
 <div class="filter">
-<a href="#docker">Docker Compose</a> <a href="#helm">Helm</a>
+  <a href="#docker">Docker Compose</a>
+  <a href="#helm">Helm</a>
 </div>
 
-<div class="table-wrapper filter-docker" markdown="block">
+<div class="filter-docker">
 
-Set <code>common.security.authorizationEnabled</code> in <code>milvus.yaml</code> as <code>true</code> when <a href="configure-docker.md">configuring Milvus</a> to enable authentication.
+To enable user authentication for your Milvus server, set common.security.authorizationEnabled to true in the Milvus config file `milvus.yaml`. For more information on configs, refer to [Configure Milvus with Docker Compose](https://milvus.io/docs/configure-docker.md?tab=component).
+
+```yaml
+...
+common:
+...
+  security:
+    authorizationEnabled: false
+...
+```
 
 </div>
 
-<div class="table-wrapper filter-helm" markdown="block">
-    
-As of Milvus Helm Chart 4.0.0, you can enable user authentication by modifying `values.yaml` as follows:
+<div class="filter-helm">
 
-<pre>
-  <code>
+To enable user authentication for your Milvus server, set authorizationEnabled to true in the Milvus config file `values.yaml`. For more information on configs, refer to [Configure Milvus with Helm Charts](https://milvus.io/docs/configure-helm.md?tab=component).
+
+```yaml
+...
 extraConfigFiles:
   user.yaml: |+
     common:
       security:
         authorizationEnabled: true
-  </code>
-</pre>
-    
+...
+```
+
+</div>
+
+## Connect to Milvus with authentication
+
+After enabling authentication, you need to connect to Milvus using a username and password. By default, the `root` user is created with the password `Milvus` when Milvus is initiated. Here is an example of how to connect to Milvus with authentication enabled using the default `root` user:
+
+```python
+# use default `root` user to connect to Milvus
+
+from pymilvus import MilvusClient
+
+client = MilvusClient(
+    uri='http://localhost:19530', # replace with your own Milvus server address
+    token="root:Milvus"
+) 
+```
+
+<div class="alert note">
+If you fail to provide a valid token when connecting to Milvus with authentication enabled, you will receive a gRPC error.
 </div>
 
 
-## Create an authenticated user
-    
+## Create a new user
 
-A root user (password: <code>Milvus</code>) is created along with each Milvus instance by default. It is recommended to change the password of the root user when you start Milvus for the first time. The root user can be used to create new users for authenticated access.
-
-Create a user with username and password with the following command.
+Once connected as the default `root` user, you can create and authenticate a new user as follows:
 
 ```python
-from pymilvus import utility
-utility.create_user('user', 'password', using='default') 
+# create a user
+client.create_user(
+    user_name="user_1",
+    password="P@ssw0rd",
+)
+
+# verify the user has been created
+
+client.describe_user("user_1")
+
+# output
+# {'user_name': 'user_1', 'roles': ()}
 ```
 
-| Parameter                    |  Description                                    |
-| ---------------------------- | ----------------------------------------------- |
-| <code>user</code>            | Username to create.                             |
-| <code>password</code>        | Password for the user to create.                |
-| <code>using</code>           | Alias of the Milvus server to create the user.  |
+For more information on creating users, refer to [create_user()](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Authentication/create_user.md).
 
     
-## Connect Milvus with an authenticated user
+## Connect to Milvus with a new user
 
-Connect Milvus with an existing user.
+Connect using the credentials of the newly created user:
 
 ```python
-from pymilvus import connections
-connections.connect(
-    alias='default',
-    host='localhost',
-    port='19530',
-    user='user',
-    password='password',
+# connect to milvus with the newly created user
+
+client = MilvusClient(
+    uri="http://localhost:19530",
+    token="user_1:P@ssw0rd"
 )
 ```
 
-| Parameter                      |  Description                                |
-| ------------------------------ | ------------------------------------------- |
-| <code>alias</code>             | Alias of the Milvus server to connect.      |
-| <code>host</code>              | IP address of the Milvus server to connect. |
-| <code>port</code>              | Port of the Milvus server to connect.       |
-| <code>user</code>              | Username used to connect.                   |
-| <code>password</code>          | Password used to connect.                   |
+## Update user password
+
+Change the password for an existing user with the following code:
+
+```python
+# update password
+
+client.update_password(
+    user_name="user_1",
+    old_password="P@ssw0rd",
+    new_password="P@ssw0rd123"
+)
+```
+
+For more information on updating user passwords, refer to [update_password()](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Authentication/update_password.md).
+
+If you forget your old password, Milvus provides a configuration item that allows you to designate certain users as super users. This eliminates the need for the old password when you reset the password.
+
+By default, the `common.security.superUsers` field in the Milvus configuration file is empty, meaning that all users must provide the old password when resetting their password. However, you can designate specific users as super users who do not need to provide the old password. In the snippet below, `root` and `foo` are designated as super users.
+
+You should add the below configuration item in the Milvus configuration file that governs the running of your Milvus instance.
+
+```yaml
+common:
+    security:
+        superUsers: root, foo
+```
+
+## Drop a user
+
+To drop a user, use the `drop_user()` method.
+
+```python
+client.drop_user(user_name="user_1")
+```
 
 <div class="alert note">
-To stop using the authenticated access, or to log in to another authenticated user, you need to disconnect from the Milvus instance and re-connect to it.
+To drop a user, you cannot be the user being dropped. Otherwise, an error will be raised.
 </div>
-
-## Reset password
-
-Change the password for an existing user and reset the Milvus connection.
-
-```python
-from pymilvus import utility
-utility.reset_password('user', 'old_password', 'new_password', using='default')
-```
-
-| Parameter                    |  Description                            |
-| ---------------------------- | --------------------------------------- |
-| <code>user</code>            | Username to reset password.             |
-| <code>password</code>        | New password for the user.              |
-| <code>using</code>           | Alias of the Milvus server.             |
-
-## Delete a user
-
-Delete an authenticated user.
-
-```python
-from pymilvus import utility
-utility.delete_user('user', using='default')
-```
-
-| Parameter                    |  Description                            |
-| ---------------------------- | --------------------------------------- |
-| <code>user</code>            | Username to delete.                     |
-| <code>using</code>           | Alias of the Milvus server.             |
 
 ## List all users
 
-List all the credential users.
+List all the users.
 
 ```python
-from pymilvus import utility
-users = utility.list_usernames(using='default')
+# list all users
+
+client.list_users()
 ```
 
 ## Limitations

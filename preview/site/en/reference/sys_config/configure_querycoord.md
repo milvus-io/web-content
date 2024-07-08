@@ -3,6 +3,7 @@ id: configure_querycoord.md
 related_key: configure
 group: system_configuration.md
 summary: Learn how to configure query coordinator of Milvus.
+title: Query Coordinator-related Configurations
 ---
 
 # Query Coordinator-related Configurations

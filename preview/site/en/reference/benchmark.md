@@ -1,16 +1,18 @@
 ---
 id: benchmark.md
-summary: Learn about the benchmark result of Milvus. 
+summary: Learn about the benchmark result of Milvus.
+title: Milvus 2.2 Benchmark Test Report
 ---
 
 # Milvus 2.2 Benchmark Test Report
 
-This report shows the major test results of Milvus 2.2.0. It aims to provide a picture of Milvus 2.2.0 search performance, especially in the capability to scale up and scale out. 
+This report shows the major test results of Milvus 2.2.0. It aims to provide a picture of Milvus 2.2.0 search performance, especially in the capability to scale up and scale out.
 
 <div class="alert note">
   <div style="display: flex;">
       <div style="flex:0.3;">
-      <img src="https://zilliz.com/images/whitepaper/performance.png">
+        <img src="https://zilliz.com/images/whitepaper/performance.png" alt="Milvus Performance Evaluation 2023">
+      </div>
   </div>
   <div style="flex:1; padding: 10px; ">
     <p>We have recently run a benchmark against Milvus 2.2.3 and have the following key findings:</p>
@@ -20,13 +22,13 @@ This report shows the major test results of Milvus 2.2.0. It aims to provide a p
       <li>Billion-scale similarity search with little performance degradation</li>
       <li>Linear scalability when using multiple replicas</li>
     </ul>
-    <p>For details, welcome referring to <a href="https://zilliz.com/whitepaper">this whitepaper</a> and <a href="https://github.com/zilliztech/vectordb-benchmark">related benchmark test code</a>. </p>
+    <p>For details, welcome referring to <a href="https://zilliz.com/resources/whitepaper/milvus-performance-benchmark">this whitepaper</a> and <a href="https://github.com/zilliztech/VectorDBBench">related benchmark test code</a>. </p>
   </div>
 </div>
 
 ## Summary
 
-- Compared with Milvus 2.1, the QPS of Milvus 2.2.0 increases over 48% in cluster mode and over 75% in standalone mode.
+- Comparing with Milvus 2.1, the QPS of Milvus 2.2.0 increases over 48% in cluster mode and over 75% in standalone mode.
 - Milvus 2.2.0 has an impressive capability to scale up and scale out:
   - QPS increases linearly when expanding CPU cores from 8 to 32.
   - QPS increases linearly when expanding Querynode replicas from 1 to 8.

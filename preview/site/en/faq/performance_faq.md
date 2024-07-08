@@ -1,6 +1,7 @@
 ---
 id: performance_faq.md
 summary: Find answers to frequently asked questions about search performance, performance enhancements, and other performance related issues.
+title: Performance FAQ
 ---
 
 # Performance FAQ

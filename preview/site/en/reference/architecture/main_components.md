@@ -1,6 +1,7 @@
 ---
 id: main_components.md
 summary: Learn about the main components in Milvus standalone and cluster.
+title: Main Components
 ---
 
 # Main Components
@@ -13,15 +14,15 @@ There are two modes for running Milvus: Standalone and Cluster. These two modes 
 
 - **Milvus:** The core functional component. 
 
-- **etcd:** The metadata engine, which accesses and stores metadata of Milvus' internal components, including proxies, index nodes, and more. 
+- **Meta Store:** The metadata engine, which accesses and stores metadata of Milvus' internal components, including proxies, index nodes, and more. 
 
-- **MinIO:** The storage engine, which is responsible for data persistence for Milvus.
+- **Object Storage:** The storage engine, which is responsible for data persistence for Milvus.
 
 ![Standalone_architecture](../../../../assets/standalone_architecture.jpg "Milvus standalone architecture.")
 
 ## Milvus cluster
 
-**Milvus cluster** includes eight microservice components and three third-party dependencies. All microservices can be deployed on Kubernetes, independently from each other. 
+**Milvus cluster** includes seven microservice components and three third-party dependencies. All microservices can be deployed on Kubernetes, independently from each other. 
 
 ### Microservice components
 
@@ -29,16 +30,15 @@ There are two modes for running Milvus: Standalone and Cluster. These two modes 
 - Proxy 
 - Query coord 
 - Query node 
-- Index coord 
+- Data coord
 - Index node 
-- Data coord 
 - Data node
 
 ### Third-party dependencies
 
-- **etcd:** Stores metadata for various components in the cluster. 
-- **MinIO:**  Responsible for data persistence of large files in the cluster, such as index and binary log files. 
-- **Pulsar:** Manages logs of recent mutation operations, outputs streaming log, and provides log publish-subscribe services.
+- **Meta Store:** Stores metadata for various components in the cluster, e.g. etcd.
+- **Object Storage:**  Responsible for data persistence of large files in the cluster, such as index and binary log files, e.g. S3
+- **Log Broker:** Manages logs of recent mutation operations, outputs streaming log, and provides log publish-subscribe services, e.g. Pulsar.
 
 ![Distributed_architecture](../../../../assets/distributed_architecture.jpg "Milvus cluster architecture.")
 

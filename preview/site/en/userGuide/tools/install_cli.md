@@ -1,6 +1,7 @@
 ---
 id: install_cli.md
 summary: Learn how to install Milvus_CLI.
+title: Install Milvus_CLI
 ---
 
 # Install Milvus_CLI

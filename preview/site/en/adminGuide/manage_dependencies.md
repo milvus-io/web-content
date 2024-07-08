@@ -1,6 +1,7 @@
 ---
 id: manage_dependencies.md
 title: Manage Dependencies
+deprecate: true
 ---
 
 # Manage Dependencies

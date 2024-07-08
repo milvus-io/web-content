@@ -3,6 +3,7 @@ id: configure_querynode.md
 related_key: configure
 group: system_configuration.md
 summary: Learn how to configure query node of Milvus.
+title: Query Node-related Configurations
 ---
 
 # Query Node-related Configurations
@@ -135,6 +136,25 @@ Under this section, you can configure query node port, graceful time, etc.
   </tbody>
 </table>
 
+## `queryNode.replicas`
+
+<table id="queryNode.replicas">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+     <td>
+        The number of in-memory replicas of data segments that are created on query nodes when a collection is loaded. In a Standalone deployment, the maximum value is 1. For more information, refer to <a href="https://milvus.io/docs/replica.md#In-Memory-Replica">In-Memory Replica</a>.
+      </td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+
 ## `queryNode.stats.publishInterval`
 
 <table id="queryNode.stats.publishInterval">
@@ -190,7 +210,32 @@ Under this section, you can configure query node port, graceful time, etc.
       <td>
           Row count by which Segcore divides a segment into chunks.
       </td>
-      <td>32768</td>
+      <td>1024</td>
+    </tr>
+  </tbody>
+</table>
+
+## `queryNode.segcore.InterimIndex`
+
+<table id="queryNode.segcore.chunkRows">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+          Whether to create a temporary index for growing segments and sealed segments not yet indexed, improving search performance.<br/>
+          <ul><li>
+            Milvus will eventually seals and indexes all segments, but enabling this optimizes search performance for immediate queries following data insertion.
+          </li>
+          <li>
+            This defaults to `true`, indicating that Milvus creates temporary index for growing segments and the sealed segments that are not indexed upon searches.
+          </li></ul>
+      </td>
+      <td>true</td>
     </tr>
   </tbody>
 </table>

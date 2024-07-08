@@ -3,6 +3,7 @@ id: configure_quota_limits.md
 related_key: configure
 group: system_configuration.md
 summary: Learn how to configure quotas and limitations.
+title: Quota- and Limit-related configurations
 ---
 
 # Quota- and Limit-related configurations
@@ -12,6 +13,23 @@ This topic introduces the configuration items related to quotas and limits in Mi
 Some of these configuration items are used to set thresholds for Milvus to proactively throttle DDL/DML/DQL requests related to collections, partitions, indexes, etc.
 
 Some of them are used to set backpressure signals that force Milvus to lower the rate of DDL/DML/DQL requests.
+
+## `quotaAndLimits.limits.maxCollectionNumPerDB`
+
+<table id="quotaAndLimits.ddl.enabled">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Maximum number of collections per database.</td>
+      <td>64</td>
+    </tr>
+  </tbody>
+</table>
 
 ## `quotaAndLimits.ddl.enabled`
 
@@ -224,6 +242,27 @@ Some of them are used to set backpressure signals that force Milvus to lower the
   </tbody>
 </table>
 
+## `quotaAndLimits.dml.insertRate.collection.max`
+
+<table id="quotaAndLimits.dml.insertRate.collection.max">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <li>Highest data insertion rate per collection per second.</li>
+        <li>Setting this item to <code>5</code> indicates that Milvus only allows data insertion to any collection at the rate of 5 MB/s.</li>
+        <li>To use this setting, set <code>quotaAndLimits.dml.enabled</code> to <code>true</code> at the same time.</li>
+      </td>
+      <td>∞</td>
+    </tr>
+  </tbody>
+</table>
+
 ## `quotaAndLimits.dml.deleteRate.max`
 
 <table id="quotaAndLimits.dml.deleteRate.max">
@@ -236,8 +275,29 @@ Some of them are used to set backpressure signals that force Milvus to lower the
   <tbody>
     <tr>
       <td>
-        <li>Highest data insertion rate per second.</li>
-        <li>Setting this item to <code>0.1</code> indicates that Milvus only allows data insertion at the rate of 0.1 MB/s.</li>
+        <li>Highest data deletion rate per second.</li>
+        <li>Setting this item to <code>0.1</code> indicates that Milvus only allows data deletion at the rate of 0.1 MB/s.</li>
+        <li>To use this setting, set <code>quotaAndLimits.dml.enabled</code> to <code>true</code> at the same time.</li>
+      </td>
+      <td>∞</td>
+    </tr>
+  </tbody>
+</table>
+
+## `quotaAndLimits.dml.deleteRate.collection.max`
+
+<table id="quotaAndLimits.dml.deleteRate.collection.max">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <li>Highest data deletion rate per second.</li>
+        <li>Setting this item to <code>0.1</code> indicates that Milvus only allows data deletion from any collection at the rate of 0.1 MB/s.</li>
         <li>To use this setting, set <code>quotaAndLimits.dml.enabled</code> to <code>true</code> at the same time.</li>
       </td>
       <td>∞</td>
@@ -283,6 +343,27 @@ Some of them are used to set backpressure signals that force Milvus to lower the
   </tbody>
 </table>
 
+## `quotaAndLimits.dql.searchRate.collection.max`
+
+<table id="quotaAndLimits.dql.searchRate.collection.max">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <li>Maximum number of vectors to search per collection per second.</li>
+        <li>Setting this item to <code>100</code> indicates that Milvus only allows searching 100 vectors per second per collection no matter whether these 100 vectors are all in one search or scattered across multiple searches.</li>
+        <li>To use this setting, set <code>quotaAndLimits.dql.enabled</code> to <code>true</code> at the same time.</li>
+      </td>
+      <td>∞</td>
+    </tr>
+  </tbody>
+</table>
+
 ## `quotaAndLimits.dql.queryRate.max`
 
 <table id="quotaAndLimits.dql.queryRate.max">
@@ -297,6 +378,27 @@ Some of them are used to set backpressure signals that force Milvus to lower the
       <td>
         <li>Maximum number of queries per second.</li>
         <li>Setting this item to <code>100</code> indicates that Milvus only allows 100 queries per second.</li>
+        <li>To use this setting, set <code>quotaAndLimits.dql.enabled</code> to <code>true</code> at the same time.</li>
+      </td>
+      <td>∞</td>
+    </tr>
+  </tbody>
+</table>
+
+## `quotaAndLimits.dql.queryRate.collection.max`
+
+<table id="quotaAndLimits.dql.queryRate.collection.max">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <li>Maximum number of queries per collection per second.</li>
+        <li>Setting this item to <code>100</code> indicates that Milvus only allows 100 queries per collection per second.</li>
         <li>To use this setting, set <code>quotaAndLimits.dql.enabled</code> to <code>true</code> at the same time.</li>
       </td>
       <td>∞</td>
@@ -334,7 +436,7 @@ Some of them are used to set backpressure signals that force Milvus to lower the
     <tr>
       <td>
         <li>Maximum time tick delay. A time tick delay is the difference between RootCoord TSO and the minimum time tick of all flow graphs on DataNodes and QueryNodes.</li>
-        <li>Setting this item to <code>300</code> indicates that Milvus reduces the DML request rate as the delay increases and drops all DML requests once the delay reaches the set maximum in milliseconds.</li>
+        <li>Setting this item to <code>300</code> indicates that Milvus reduces the DML request rate as the delay increases and drops all DML requests once the delay reaches the set maximum in seconds.</li>
         <li>To use this setting, set <code>quotaAndLimits.limitWriting.ttProtection.enabled</code> to <code>true</code> at the same time.</li>
       </td>
       <td>300</td>
@@ -474,6 +576,27 @@ Some of them are used to set backpressure signals that force Milvus to lower the
       <td>
         <li>Disk quota allocated to binlog.</li>
         <li>Setting this item to <code>8192</code> indicates that Milvus drops all DML requests as the size of binlog reaches the set value.</li>
+        <li>To use this setting, set <code>quotaAndLimits.limitWriting.diskProtection.enabled</code> to <code>true</code> at the same time.</li>
+      </td>
+      <td>∞</td>
+    </tr>
+  </tbody>
+</table>
+
+## `quotaAndLimits.limitWriting.diskProtection.diskQuotaPerCollection`
+
+<table id="quotaAndLimits.limitWriting.diskProtection.diskQuotaPerCollection">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <li>Disk quota allocated to binlog per collection.</li>
+        <li>Setting this item to <code>8192</code> indicates that Milvus drops all DML requests in a collection as the size of binlog of the collection reaches the set value.</li>
         <li>To use this setting, set <code>quotaAndLimits.limitWriting.diskProtection.enabled</code> to <code>true</code> at the same time.</li>
       </td>
       <td>∞</td>

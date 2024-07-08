@@ -3,6 +3,7 @@ id: configure_rootcoord.md
 related_key: configure
 group: system_configuration.md
 summary: Learn how to configure root coordinator of Milvus.
+title: Root Coordinator-related Configurations
 ---
 
 # Root Coordinator-related Configurations

@@ -1,6 +1,7 @@
 ---
 id: security.md
 title: Security
+deprecate: true
 ---
 
 # Security

@@ -33,7 +33,7 @@ The name of a resource can contain numbers, letters, and underscores (\_\). A re
 | Resource     | Limit|
 | ----------- | ----------- |
 | Partition      | 4,096       |
-| Shard   | 64        |
+| Shard   | 16        |
 | Field   | 64        |
 | Index   | 1        |
 | Entity   | unlimited        |
@@ -53,9 +53,9 @@ The name of a resource can contain numbers, letters, and underscores (\_\). A re
 ## Input and Output per RPC
 | Operation      | Limit |
 | ----------- | ----------- |
-| Insert      | 512 MB    |
-| Search   | 512 MB     |
-| Query   | 512 MB      |
+| Insert      | 64 MB    |
+| Search   | 64 MB     |
+| Query   | 64 MB      |
 
 ## Load limits
 In current release, data to be load must be under 90% of the total memory resources of all query nodes to reserve memory resources for execution engine.
@@ -66,4 +66,20 @@ In current release, data to be load must be under 90% of the total memory resour
 | <code>topk</code> (number of the most similar result to return)   | 16,384       |
 | <code>nq</code> (number of the search requests)    | 16,384       |
 
+## Index limits on different search types
 
+The following table provides an overview of the support for various search behaviors across different index types.
+
+|                                      | HNSW | DISKANN | FLAT | IVF_FLAT | IVF_SQ8 | IVF_PQ | SCANN | GPU_IFV_FLAT | GPU_IVF_PQ | GPU_CAGRA | GPU_BRUTE_FORCE | SPARSE_INVERTED_INDEX | SPARSE_WAND         | BIN_FLAT | BIN_IVF_FLAT |
+|--------------------------------------|------|---------|------|----------|---------|--------|-------|--------------|------------|-----------|-----------------|-----------------------|---------------------|----------|--------------|
+| Basic search                         | Yes  | Yes     | Yes  | Yes      | Yes     | Yes    | Yes   | Yes          | Yes        | Yes       | Yes             | Yes                   | Yes                 | Yes      | Yes          |
+| Partition search                     | Yes  | Yes     | Yes  | Yes      | Yes     | Yes    | Yes   | Yes          | Yes        | Yes       | Yes             | Yes                   | Yes                 | Yes      | Yes          |
+| Basic search with raw data retrieved | Yes  | Yes     | Yes  | Yes      | Yes     | Yes    | Yes   | Yes          | Yes        | Yes       | Yes             | Yes                   | Yes                 | Yes      | Yes          |
+| Basic search with pagination         | Yes  | Yes     | Yes  | Yes      | Yes     | Yes    | Yes   | Yes          | Yes        | Yes       | Yes             | Yes                   | Yes                 | Yes      | Yes          |
+| Filtered search                      | Yes  | Yes     | Yes  | Yes      | Yes     | Yes    | Yes   | Yes          | Yes        | Yes       | Yes             | Yes                   | Yes                 | Yes      | Yes          |
+| Range search                         | Yes  | Yes     | Yes  | Yes      | Yes     | Yes    | Yes   | No           | No         | No        | No              | No                    | No                  | Yes      | Yes          |
+| Grouping search                      | Yes  | No      | Yes  | Yes      | No      | No     | No    | No           | No         | No        | No              | No                    | No                  | No       | No           |
+| Search with iterator                 | Yes  | Yes     | Yes  | Yes      | Yes     | Yes    | Yes   | No           | No         | No        | No              | No                    | No                  | No       | No           |
+| Hybrid search                        | Yes  | Yes     | Yes  | Yes      | Yes     | Yes    | Yes   | Yes          | Yes        | Yes       | Yes             | Yes(Only RRFRanker)   | Yes(Only RRFRanker) | Yes      | Yes          |
+| Query/Get                            | Yes  | Yes     | Yes  | Yes      | Yes     | Yes    | Yes   | Yes          | Yes        | Yes       | Yes             | Yes                   | Yes                 | Yes      | Yes          |
+| Query with iterator                  | Yes  | Yes     | Yes  | Yes      | Yes     | Yes    | Yes   | No           | No         | No        | No              | Yes                   | Yes                 | Yes      | Yes          |

@@ -2,7 +2,7 @@
 
 Welcome to Milvus documentation!
 
-This repository contains technical documentation for [Milvus](https://github.com/milvus-io/milvus), the world's most advanced open-source vector database. Visit [Milvus.io](milvus.io) or [Web content repo](https://github.com/milvus-io/web-content) for fully rendered documents.
+This repository contains technical documentation for [Milvus](https://github.com/milvus-io/milvus), the world's most advanced open-source vector database. Visit [Milvus.io](https://milvus.io/docs) or [Web content repo](https://github.com/milvus-io/web-content) for fully rendered documents.
 
 Each branch corresponds to a Milvus release by name. We've set the branch of the latest Milvus release as the default branch. For documentation of a different Milvus release, switch to the corresponding branch.
 

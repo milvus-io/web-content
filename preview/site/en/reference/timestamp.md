@@ -30,7 +30,7 @@ Several timestamp-related parameters are involved when you conduct a vector simi
 
 If the `Guarantee_timestamp` is not configured, Milvus automatically takes the point in time when the search request is made. Therefore, the search is conducted on a data view with all data updates by DML operations before the search.
 
-To save you the trouble of understanding the [TSO](https://github.com/milvus-io/milvus/blob/master/docs/design_docs/milvus_hybrid_ts_en.md?from=from_parent_mindnote) inside Milvus, as a user, you do not have to directly configure the `Guarantee_timestamp` parameter. You only need to choose the [consistency level](https://milvus.io/docs/v2.1.x/consistency.md), and Milvus automatically handles the `Guarantee_timestamp` parameter for you. Each consistency level corresponds to a certain `Guarantee_timestamp` value.
+To save you the trouble of understanding the [TSO](https://github.com/milvus-io/milvus/blob/master/docs/design_docs/20211214-milvus_hybrid_ts.md) inside Milvus, as a user, you do not have to directly configure the `Guarantee_timestamp` parameter. You only need to choose the [consistency level](https://milvus.io/docs/v2.1.x/consistency.md), and Milvus automatically handles the `Guarantee_timestamp` parameter for you. Each consistency level corresponds to a certain `Guarantee_timestamp` value.
 
 ![Guarantee_Timestamp](../../../assets/Guarantee_Timestamp.png "An illustration of guarantee timestamp.").
 
@@ -78,21 +78,7 @@ As shown in the figure 1, the value of `Guarantee_timestamp` is set as `2021-08-
 
 As shown in the figure 2 , the value of `Guarantee_timestamp` is set as `2021-08-26T18:15:01`, and `Graceful_time` as `2s`. The current value of `Service_timestamp` is only `2021-08-26T18:14:54`.  This means that the expected DML operations are not completed yet and even given the 2 second of graceful time, data invisibility is still intolerable. Therefore, the query node needs to put off the search or query request until certain DML requests are completed (i.e. when `Service_timestamp`  +  `Graceful_time` >= `Guarantee_timestamp`).
 
-### `Travel_timestamp`
-
-`Travel_timestamp` is a type of configurable timestamp used to indicate that the search or query needs to be conducted on a data view before a certain point in time. `Travel_timestamp` can be seen as a data snapshot. And [search with Time Travel](timetravel.md) means conducting a search or query on the data snapshot indicated by the value of `Travel_timestamp`. All DML operations after `Travel_timestamp` are not involved in the search or query.
-
-When there is an incoming search or query request, suppose `Service_timestamp` > `Guarantee_timestamp`.
-
-![Travel_Timestamp](../../../assets/Travel_Timestamp.png "An illustration of time travel timestamp.").
-
-The value of `Guarantee_timestamp` has nothing to do with the Time Travel feature. 
-
-As shown in the figure above, the value of `Guarantee_timestamp` is set as `2021-08-26T18:14:55`.  And the `Service_timestamp` is grown to `2021-08-26T18:15:01` meaning that more DML operations are executed and completed after this time point. However, no matter the value of `Travel_timestamp` is `2021-08-26T18:14:56` or `2021-08-26T18:14:54`, only data before `Travel_timestamp` are searched or queried. 
-
 ## What's next
 
 - Learn how [guarantee timestamp enables tunable consistency in Milvus](consistency.md)
-
-- Learn how to [search with Time Travel](timetravel.md)
 

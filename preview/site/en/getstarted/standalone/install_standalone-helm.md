@@ -1,16 +1,19 @@
 ---
 id: install_standalone-helm.md
 label: Helm
-order: 1
-group: install_standalone-helm.md
-summary: Learn how to install Milvus stanalone on Kubernetes.
+related_key: Helm
+order: 2
+group: install_standalone-docker.md
+summary: Learn how to install Milvus standalone on Kubernetes.
+title: Install Milvus Standalone with Kubernetes
+deprecate: true
 ---
 
-<div class="tab-wrapper"><a href="install_standalone-operator.md" class=''>Milvus Operator</a><a href="install_standalone-helm.md" class='active '>Helm</a><a href="install_standalone-docker.md" class=''>Docker Compose</a></div>
+<div class="tab-wrapper"><a href="install_standalone-operator.md" class=''>Milvus Operator</a><a href="install_standalone-helm.md" class='active '>Helm</a><a href="install_standalone-aptyum.md" class=''>DEB/RPM</a></div>
 
 # Install Milvus Standalone with Kubernetes
 
-This topic describes how to install Milvus standalone using Kubernetes (K8s).
+This topic describes how to install Milvus standalone using Kubernetes.
 
 ## Prerequisites
 
@@ -47,6 +50,21 @@ NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDI
 standard (default)    k8s.io/minikube-hostpath     Delete           Immediate             false                    3m36s
 ```
 
+### 4. Check the default storage class
+
+Milvus relies on the default storage class to automatically provision volumes for data persistence. Run the following command to check storage classes:
+
+```bash
+$ kubectl get sc
+```
+
+The command output should be similar to the following:
+
+```bash
+NAME                   PROVISIONER                                     RECLAIMPOLICY   VOLUMEBINDINGMODE      ALLOWVOLUMEEXPANSION   AGE
+local-path (default)   rancher.io/local-path                           Delete          WaitForFirstConsumer   false                  461d
+```
+
 ## Install Helm Chart for Milvus
 
 Helm is a K8s package manager that can help you deploy Milvus quickly.
@@ -54,8 +72,23 @@ Helm is a K8s package manager that can help you deploy Milvus quickly.
 1. Add Milvus to Helm's repository.
 
 ```bash
-$ helm repo add milvus https://milvus-io.github.io/milvus-helm/
+$ helm repo add milvus https://zilliztech.github.io/milvus-helm/
 ```
+
+<div class="alert note">
+
+The Milvus Helm Charts repo at `https://milvus-io.github.io/milvus-helm/` has been archived and you can get further updates from `https://zilliztech.github.io/milvus-helm/` as follows:
+
+```shell
+helm repo add zilliztech https://zilliztech.github.io/milvus-helm
+helm repo update
+# upgrade existing helm release
+helm upgrade my-release zilliztech/milvus
+```
+
+The archived repo is still available for the charts up to 4.0.31. For later releases, use the new repo instead.
+
+</div>
 
 2. Update your local chart repository.
 
@@ -65,7 +98,9 @@ $ helm repo update
 
 ## Start Milvus
 
-Start Milvus with Helm by specifying the release name, the chart, and parameters you expect to change. This topic uses <code>my-release</code> as the release name. To use a different release name, replace <code>my-release</code> in the command.
+Once you have installed the Helm chart, you can start Milvus on Kubernetes. In this section, we will guide you through the steps to start Milvus.
+
+You should start Milvus with Helm by specifying the release name, the chart, and the parameters you expect to change. In this guide, we use <code>my-release</code> as the release name. To use a different release name, replace <code>my-release</code> in the following commands with the one you are using.
 
 ```bash
 $ helm install my-release milvus/milvus --set cluster.enabled=false --set etcd.replicaCount=1 --set minio.mode=standalone --set pulsar.enabled=false
@@ -112,6 +147,13 @@ $ kubectl port-forward service/my-release-milvus 27017:19530
 Forwarding from 127.0.0.1:27017 -> 19530
 ```
 
+By default, ports forwarded by kubectl only listen on localhost. Use flag `address` if you want Milvus server to listen on selected IP or all addresses.
+
+```bash
+$ kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27017:19530
+Forwarding from 0.0.0.0:27017 -> 19530
+```
+
 ## Uninstall Milvus
 
 Run the following command to uninstall Milvus.
@@ -146,15 +188,18 @@ $ minikube delete
 
 Having installed Milvus, you can:
 
-- Check [Hello Milvus](example_code.md) to run an example code with different SDKs to see what Milvus can do.
+- Check [Hello Milvus](quickstart.md) to run an example code with different SDKs to see what Milvus can do.
 
 - Learn the basic operations of Milvus:
-  - [Connect to Milvus server](manage_connection.md)
-  - [Create a collection](create_collection.md)
-  - [Create a partition](create_partition.md)
-  - [Insert data](insert_data.md)
-  - [Conduct a vector search](search.md)
+  - [Manage Databases](manage_databases.md)
+  - [Manage Collections](manage-collections.md)
+  - [Manage Partitions](manage-partitions.md)
+  - [Insert, Upsert & Delete](insert-update-delete.md)
+  - [Single-Vector Search](single-vector-search.md)
+  - [Hybrid Search](multi-vector-search.md)
 
-- [Upgrade Milvus Using Helm Chart](upgrade.md).
-- Explore [MilvusDM](migrate_overview.md), an open-source tool designed for importing and exporting data in Milvus.
+- [Upgrade Milvus Using Helm Chart](upgrade_milvus_standalone-helm.md).
+- Explore [Milvus Backup](milvus_backup_overview.md), an open-source tool for Milvus data backups.
+- Explore [Birdwatcher](birdwatcher_overview.md), an open-source tool for debugging Milvus and dynamic configuration updates.
+- Explore [Attu](https://milvus.io/docs/attu.md), an open-source GUI tool for intuitive Milvus management.
 - [Monitor Milvus with Prometheus](monitor.md).

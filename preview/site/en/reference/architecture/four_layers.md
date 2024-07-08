@@ -1,6 +1,7 @@
 ---
 id: four_layers.md
 summary: Storage/computing disaggregation structure in Milvus.
+title: Storage/Computing Disaggregation
 ---
 
 # Storage/Computing Disaggregation
@@ -20,7 +21,7 @@ Composed of a group of stateless proxies, the access layer is the front layer of
 
 The coordinator service assigns tasks to the worker nodes and functions as the system's brain. The tasks it takes on include cluster topology management, load balancing, timestamp generation, data declaration, and data management. 
 
-There are four coordinator types: root coordinator (root coord), data coordinator (data coord), query coordinator (query coord), and index coordinator (index coord).
+There are three coordinator types: root coordinator (root coord), data coordinator (data coord), and query coordinator (query coord).
 
 ### Root coordinator (root coord)
 
@@ -32,15 +33,11 @@ Query coord manages topology and load balancing for the query nodes, and handoff
 
 ### Data coordinator (data coord)
 
-Data coord manages topology of the data nodes, maintains metadata, and triggers flush, compact, and other background data operations. 
-
-### Index coordinator (index coord)
-
-Index coord manages topology of the index nodes, builds index, and maintains index metadata.
+Data coord manages topology of the data nodes and index nodes, maintains metadata, and triggers flush, compact, and index building and other background data operations. 
 
 ## Worker nodes
 
-The arms and legs. Worker nodes are dumb executors that follow instructions from the coordinator service and execute data manipulation language (DML) commands from the proxy. Worker nodes are stateless thanks to separation of storage and computation, and can facilitate system scale-out and disaster recovery when deployed on Kubenetes. There are three types of worker nodes: 
+The arms and legs. Worker nodes are dumb executors that follow instructions from the coordinator service and execute data manipulation language (DML) commands from the proxy. Worker nodes are stateless thanks to separation of storage and computation, and can facilitate system scale-out and disaster recovery when deployed on Kubernetes. There are three types of worker nodes: 
 
 ### Query node
 
@@ -60,7 +57,7 @@ Storage is the bone of the system, responsible for data persistence. It comprise
 
 ### Meta storage
 
-Meta storage stores snapshots of metadata such as collection schema, node status, and message consumption checkpoints. Storing metadata demands extremely high availability, strong consistency, and transaction support, so Milvus chose etcd for meta store. Milvus also uses etcd for service registration and health check. 
+Meta storage stores snapshots of metadata such as collection schema, and message consumption checkpoints. Storing metadata demands extremely high availability, strong consistency, and transaction support, so Milvus chose etcd for meta store. Milvus also uses etcd for service registration and health check. 
 
 ### Object storage
 
@@ -68,7 +65,7 @@ Object storage stores snapshot files of logs, index files for scalar and vector 
 
 ### Log broker 
 
-The log broker is a pub-sub system that supports playback. It is responsible for streaming data persistence, execution of reliable asynchronous queries, event notification, and return of query results. It also ensures integrity of the incremental data when the worker nodes recover from system breakdown. Milvus cluster uses Pulsar as log broker; Milvus standalone uses RocksDB as log broker. Besides, the log broker can be readily replaced with streaming data storage platforms such as Kafka and Pravega. 
+The log broker is a pub-sub system that supports playback. It is responsible for streaming data persistence and event notification. It also ensures integrity of the incremental data when the worker nodes recover from system breakdown. Milvus cluster uses Pulsar as log broker; Milvus standalone uses RocksDB as log broker. Besides, the log broker can be readily replaced with streaming data storage platforms such as Kafka. 
 
 Milvus is built around log broker and follows the "log as data" principle, so Milvus does not maintain a physical table but guarantees data reliability through logging persistence and snapshot logs. 
 

@@ -1,6 +1,7 @@
 ---
 id: product_faq.md
 summary: Find answers to frequently asked questions about the world's most advanced vector database.
+title: Product FAQ
 ---
 
 # Product FAQ
@@ -37,17 +38,13 @@ Theoretically, the maximum dataset size Milvus can handle is determined by the h
 
 Milvus deals with two types of data, inserted data and metadata. 
 
-Inserted data, including vector data, scalar data, and collection-specific schema, are stored in persistent storage (for now MinIO only) as incremental log.
+Inserted data, including vector data, scalar data, and collection-specific schema, are stored in persistent storage as incremental log. Milvus supports multiple object storage backends, including [MinIO](https://min.io/), [AWS S3](https://aws.amazon.com/s3/?nc1=h_ls), [Google Cloud Storage](https://cloud.google.com/storage?hl=en#object-storage-for-companies-of-all-sizes) (GCS), [Azure Blob Storage](https://azure.microsoft.com/en-us/products/storage/blobs), [Alibaba Cloud OSS](https://www.alibabacloud.com/product/object-storage-service), and [Tencent Cloud Object Storage](https://www.tencentcloud.com/products/cos) (COS).
 
 Metadata are generated within Milvus. Each Milvus module has its own metadata that are stored in etcd.
 
 #### Why is there no vector data in etcd?
 
 etcd stores Milvus module metadata; MinIO stores entities.
-
-#### Does Milvus' Python SDK have a connection pool?
-
-Python SDKs for Milvus v0.9.0 or higher have a connection pool. The number of connections in a connection pool has no upper limit.
 
 #### Does Milvus support inserting and searching data simultaneously?
 
@@ -85,9 +82,7 @@ No. Milvus has varied behavior. Data must be loaded to memory before searching.
 
 #### Can indexes be created after inserting vectors?
 
-Yes. If `create_index()` is called, Milvus builds an index for subsequently inserted vectors. However, Milvus does not build an index until the newly inserted vectors fill an entire segment and the newly created index file is separate from the previous one.
-
-
+Yes. If an index has been built for a collection by `create_index()` before, Milvus will automatically build an index for subsequently inserted vectors. However, Milvus does not build an index until the newly inserted vectors fill an entire segment and the newly created index file is separate from the previous one.
 
 #### How are the FLAT and IVF_FLAT indexes different?
 
@@ -112,7 +107,14 @@ See [Wikipedia](https://en.wikipedia.org/wiki/Unit_vector) for more information.
 For normalized vectors, Euclidean distance (L2) is mathematically equivalent to inner product (IP). If these similarity metrics return different results, check to see if your vectors are normalized
 
 #### Is there a limit to the total number of collections and partitions in Milvus?
-There is no limit on the number of collections. However, the number of partitions in each collection must not exceed the value set by the parameter `master.maxPartitionNum`.
+
+Yes. You can create up to 65,535 collections in a Milvus instance. When calculating the number of existing collections, Milvus counts all collections with shards and partitions in them.
+
+For example, let's assume you have already created 100 collections, with 2 shards and 4 partitions in 60 of them and with 1 shard and 12 partitions in the rest 40 collections. The current number of collections can be calculated as:
+
+```
+60 * 2 * 4 + 40 * 1 * 12 = 960
+```
 
 #### Why do I get fewer than k vectors when searching for `topk` vectors?
 
@@ -126,7 +128,7 @@ See [Vector Index](index.md) for more information.
 
 #### What is the maximum vector dimension supported in Milvus?
 
-Milvus can manage vectors with up to 32,768 dimensions.
+Milvus can manage vectors with up to 32,768 dimensions by default. You can increase the value of `Proxy.maxDimension` to allow for a larger dimension vector.
 
 #### Does Milvus support Apple M1 CPU?
 
@@ -134,7 +136,7 @@ Current Milvus release does not support Apple M1 CPU.
 
 #### What data types does Milvus support on the primary key field?
 
-In current release, Milvus support both INT64 and string.
+In current release, Milvus supports both INT64 and string.
 
 #### Is Milvus scalable?
 
@@ -156,13 +158,21 @@ Data in MinIO is designed to remain for a certain period of time for the conveni
 
 Yes. Kafka is supported in Milvus 2.1.0.
 
-#### What's the diference between a search and a query?
+#### What's the difference between a search and a query?
 
 In Milvus, a vector similarity search retrieves vectors based on similarity calculation and vector index acceleration. Unlike a vector similarity search, a vector query retrieves vectors via scalar filtering based on a boolean expression. The boolean expression filters on scalar fields or the primary key field, and it retrieves all results that match the filters. In a query, neither similarity metrics nor vector index is involved.
 
 #### Why does a float vector value have a precision of 7 decimal digits in Milvus?
 
-Milvus stores vectors as Float32 arrays. A Float32 value has a precision of 7 decimal digits. Even with a Float64 value, such as 1.3476964684980388, Milvus stores it as 1.347696. Therefore, when you retrieve such a vector from Milvus, the precision of the Float64 value is lost.
+Milvus supports storing vectors as Float32 arrays. A Float32 value has a precision of 7 decimal digits. Even with a Float64 value, such as 1.3476964684980388, Milvus stores it as 1.347696. Therefore, when you retrieve such a vector from Milvus, the precision of the Float64 value is lost.
+
+#### How does Milvus handle vector data types and precision?
+
+Milvus supports Binary, Float32, Float16, and BFloat16 vector types.
+
+- Binary vectors: Store binary data as sequences of 0s and 1s, used in image processing and information retrieval.
+- Float32 vectors: Default storage with a precision of about 7 decimal digits. Even Float64 values are stored with Float32 precision, leading to potential precision loss upon retrieval.
+- Float16 and BFloat16 vectors: Offer reduced precision and memory usage. Float16 is suitable for applications with limited bandwidth and storage, while BFloat16 balances range and efficiency, commonly used in deep learning to reduce computational requirements without significantly impacting accuracy.
 
 #### Still have questions?
 

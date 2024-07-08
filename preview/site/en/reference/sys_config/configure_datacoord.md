@@ -3,6 +3,7 @@ id: configure_datacoord.md
 related_key: configure
 group: system_configuration.md
 summary: Learn how to configure data coordinator of Milvus.
+title: Data Coordinator-related Configurations
 ---
 
 # Data Coordinator-related Configurations
@@ -206,7 +207,7 @@ Under this section, you can configure data coord address, segment settings, comp
       <td>
         Switch value to control if to enable garbage collection to clear the discarded data in MinIO or S3 service.
       </td>
-      <td>false</td>
+      <td>true</td>
     </tr>
   </tbody>
 </table>
@@ -358,4 +359,3 @@ Under this section, you can configure data coord address, segment settings, comp
     </tr>
   </tbody>
 </table>
-

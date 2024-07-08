@@ -32,10 +32,21 @@ Before deploying monitoring services, you need to create a monitoring stack by u
 
 ```
 $ git clone https://github.com/prometheus-operator/kube-prometheus.git
-$ cd # to the local path of the repo
-$ kubectl create -f manifests/setup
-$ until kubectl get servicemonitors --all-namespaces ; do date; sleep 1; echo ""; done
-$ kubectl create -f manifests/
+$ cd kube-prometheus
+$ kubectl apply --server-side -f manifests/setup
+$ kubectl wait \
+        --for condition=Established \
+        --all CustomResourceDefinition \
+        --namespace=monitoring
+$ kubectl apply -f manifests/
+```
+
+<div class="alert note">
+The default prometheus-k8s clusterrole can not capture milvus' metrics, need to patch:
+</div>
+
+```bash
+kubectl patch clusterrole prometheus-k8s --type=json -p='[{"op": "add", "path": "/rules/-", "value": {"apiGroups": [""], "resources": ["pods", "services", "endpoints"], "verbs": ["get", "watch", "list"]}}]'
 ```
 
 To delete a stack, run `kubectl delete --ignore-not-found=true -f manifests/ -f manifests/setup`.
@@ -44,19 +55,19 @@ To delete a stack, run `kubectl delete --ignore-not-found=true -f manifests/ -f 
 
 ### 1. Access the dashboards
 
-You can access Prometheus via `http://localhost:9090`, and Grafana at `http://localhost:3000`.
+Forward the Prometheus service to port `9090`, and Grafana service to port `3000`.
 
 ```
-$ kubectl --namespace monitoring port-forward svc/prometheus-k8s 9090
-$ kubectl --namespace monitoring port-forward svc/grafana 3000
+$ kubectl --namespace monitoring --address 0.0.0.0 port-forward svc/prometheus-k8s 9090
+$ kubectl --namespace monitoring --address 0.0.0.0 port-forward svc/grafana 3000
 ```
 
 ### 2. Enable ServiceMonitor
 
-The ServiceMonitor is not enabled for Milvus Helm by default. After installing the Prometheus Operator in the Kubernetes cluster, you can enable it by adding the parameter `metrics.serviceMontior.enabled=true`.
+The ServiceMonitor is not enabled for Milvus Helm by default. After installing the Prometheus Operator in the Kubernetes cluster, you can enable it by adding the parameter `metrics.serviceMonitor.enabled=true`.
 
 ```
-$ helm install my-release milvus/milvus --set metrics.serviceMonitor.enabled=true
+$ helm upgrade my-release milvus/milvus --set metrics.serviceMonitor.enabled=true --reuse-values
 ```
 
 When the installation completes, use `kubectl` to check the ServiceMonitor resource.
@@ -78,4 +89,4 @@ my-release-milvus              54s
 - If you are looking for information about how to scale a Milvus cluster:
   - Learn [scale a Milvus cluster](scaleout.md)
 - If you are interested in upgrading the Milvus version,
-  - Read the [upgrading guide](upgrade.md)
+  - Read the [guide for upgrading Milvus cluster](upgrade_milvus_cluster-operator.md) and [that for upgrade Milvus standalone](upgrade_milvus_standalone-operator.md).
