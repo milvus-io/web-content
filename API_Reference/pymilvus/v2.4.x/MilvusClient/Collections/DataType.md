@@ -36,10 +36,6 @@ This is an enumeration that provides the following constants.
 
   Sets the data type to **Double**.
 
-- STRING = 20
-
-  Sets the data type to **String**.
-
 - VARCHAR = 21
 
   Sets the data type to **Varchar**.
