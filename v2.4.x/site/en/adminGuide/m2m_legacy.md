@@ -3,6 +3,7 @@ id: m2m_legacy.md
 title: Version Migration
 related_key: version migration
 summary: Use MilvusDM for version migration.
+deprecate: true
 ---
 
 # Version Migration

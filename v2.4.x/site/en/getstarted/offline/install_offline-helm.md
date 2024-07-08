@@ -2,6 +2,7 @@
 id: install_offline-helm.md
 summary: Learn how to install Milvus on Kubernetes offline.
 title: Install Milvus Offline with Helm Charts
+deprecate: true
 ---
 
 # Install Milvus Offline with Helm Charts

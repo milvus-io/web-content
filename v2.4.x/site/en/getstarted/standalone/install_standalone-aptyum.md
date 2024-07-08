@@ -6,6 +6,7 @@ order: 3
 group: install_standalone-docker.md
 summary: Learn how to install Milvus stanalone with dpkg/yum.
 title: Install Milvus Standalone with dpkg/yum
+deprecate: true
 ---
 
 <div class="tab-wrapper"><a href="install_standalone-operator.md" class=''>Milvus Operator</a><a href="install_standalone-helm.md" class=''>Helm</a><a href="install_standalone-aptyum.md" class='active '>DEB/RPM</a></div>
