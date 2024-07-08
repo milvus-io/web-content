@@ -639,6 +639,12 @@
         "id": "m2m.md",
         "order": 4,
         "children": []
+      },
+      {
+        "label": "From Milvus 2.3.x",
+        "id": "from-m2x.md",
+        "order": 5,
+        "children": []
       }
     ]
   },

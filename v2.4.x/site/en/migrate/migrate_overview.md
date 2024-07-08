@@ -15,6 +15,7 @@ The [Milvus-migration](https://github.com/zilliztech/milvus-migration) tool supp
 - [Elasticsearch to Milvus 2.x](es2m.md): Enabling users to migrate data from Elasticsearch environments to take advantage of Milvus's optimized vector search capabilities.
 - [Faiss to Milvus 2.x](f2m.md): Providing experimental support for transferring data from Faiss, a popular library for efficient similarity search.
 - [Milvus 1.x to Milvus 2.x](m2m.md): Ensuring data from earlier versions is transitioned smoothly to the latest framework.
+- [Milvus 2.3.x to Milvus 2.3.x or above](from-m2x.md): Providing a one-time migration path for users who have already migrated to 2.3.x.
 
 ## Features
 
