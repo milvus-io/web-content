@@ -1,4 +1,4 @@
-# Insert()
+# Upsert()
 
 This method upserts entities into Milvus. An upsert is a data-level operation that will overwrite an existing entity if a specified field already exists in a collection, and insert a new entity if the specified value doesn’t already exist.
 
