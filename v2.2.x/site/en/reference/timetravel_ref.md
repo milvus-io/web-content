@@ -38,7 +38,7 @@ During a search, if the search request received by the proxy contains the parame
 
 ## Bitset for timestamp
 
-To go into details, searches and queries with filtering in [knowhere](https://github.com/milvus-io/milvus/blob/master/docs/design_docs/knowhere_design.md) are facilitated by bitset. And the underlying mechanism behind Time Travel is enabled by bitset.
+To go into details, searches and queries with filtering in knowhere are facilitated by bitset. And the underlying mechanism behind Time Travel is enabled by bitset.
 
 When a search is conducted, the segcore obtains a bitset indicating if the timestamp meets the condition. Then Milvus judges the range of data to query or search based on this bitset.
 

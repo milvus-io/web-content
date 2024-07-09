@@ -1,13 +1,9 @@
 ---
 id: install_offline-helm.md
-label: Kubernetes
-order: 0
-group: install_offline-helm.md
-related_key: offline
 summary: Learn how to install Milvus on Kubernetes offline.
+title: Install Milvus Offline with Helm Charts
+deprecate: true
 ---
-
-<div class="tab-wrapper"><a href="install_offline-helm.md" class='active '>Kubernetes</a><a href="install_offline-docker.md" class=''>Docker Compose</a></div>
 
 # Install Milvus Offline with Helm Charts
 
@@ -22,7 +18,7 @@ To install Milvus offline, you need to pull and save all images in an online env
 1. Add and update Milvus Helm repository locally.
 
 ```
-helm repo add milvus https://milvus-io.github.io/milvus-helm/
+helm repo add milvus https://zilliztech.github.io/milvus-helm/
 helm repo update
 ```
 
@@ -91,16 +87,16 @@ kubectl delete -f milvus_manifest.yaml
 
 Having installed Milvus, you can:
 
-- Check [Hello Milvus](example_code.md) to run an example code with different SDKs to see what Milvus can do.
+- Check [Hello Milvus](quickstart.md) to run an example code with different SDKs to see what Milvus can do.
 
 - Learn the basic operations of Milvus:
-  - [Connect to Milvus server](manage_connection.md)
-  - [Create a collection](create_collection.md)
-  - [Create a partition](create_partition.md)
-  - [Insert data](insert_data.md)
-  - [Conduct a vector search](search.md)
+  - [Manage Collections](manage-collections.md)
+  - [Manage Partitions](manage-partitions.md)
+  - [Insert, Upsert & Delete](insert-update-delete.md)
+  - [Single-Vector Search](single-vector-search.md)
+  - [Hybrid Search](multi-vector-search.md)
 
-- [Upgrade Milvus Using Helm Chart](upgrade.md).
+- [Upgrade Milvus Using Helm Chart](upgrade_milvus_cluster-helm.md).
 - [Scale your Milvus cluster](scaleout.md).
 - Explore [MilvusDM](migrate_overview.md), an open-source tool designed for importing and exporting data in Milvus.
 - [Monitor Milvus with Prometheus](monitor.md).

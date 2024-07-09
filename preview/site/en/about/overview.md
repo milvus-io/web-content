@@ -53,12 +53,13 @@ Indexes are an organization unit of data. You must declare the index type and si
 
 Most of the vector index types supported by Milvus use approximate nearest neighbors search (ANNS), including:
 
-- **FLAT**: FLAT is best suited for scenarios that seek perfectly accurate and exact search results on a small, million-scale dataset.
-- **IVF_FLAT**: IVF_FLAT is a quantization-based index and is best suited for scenarios that seek an ideal balance between accuracy and query speed.
+- **HNSW**: HNSW is a graph-based index and is best suited for scenarios that have a high demand for search efficiency. There is also a GPU version **GPU_CAGRA**, thanks to Nvidia's contribution.
+- **FLAT**: FLAT is best suited for scenarios that seek perfectly accurate and exact search results on a small, million-scale dataset. There is also a GPU version **GPU_BRUTE_FORCE**.
+- **IVF_FLAT**: IVF_FLAT is a quantization-based index and is best suited for scenarios that seek an ideal balance between accuracy and query speed. There is also a GPU version **GPU_IVF_FLAT**.
 - **IVF_SQ8**: IVF_SQ8 is a quantization-based index and is best suited for scenarios that seek a significant reduction on disk, CPU, and GPU memory consumption as these resources are very limited.
-- **IVF_PQ**: IVF_PQ is a quantization-based index and is best suited for scenarios that seek high query speed even at the cost of accuracy. 
-- **HNSW**: HNSW is a graph-based index and is best suited for scenarios that have a high demand for search efficiency.
-- **ANNOY**: ANNOY is a tree-based index and is best suited for scenarios that seek a high recall rate.
+- **IVF_PQ**: IVF_PQ is a quantization-based index and is best suited for scenarios that seek high query speed even at the cost of accuracy. There is also a GPU version **GPU_IVF_PQ**.
+- **SCANN**: SCANN is similar to IVF_PQ in terms of vector clustering and product quantization. What makes them different lies in the implementation details of product quantization and the use of SIMD (Single-Instruction / Multi-data) for efficient calculation.
+- **DiskANN**: Based on Vamana graphs, DiskANN powers efficient searches within large datasets.
 
 See [Vector Index](index.md) for more details.
 
@@ -68,14 +69,12 @@ In Milvus, similarity metrics are used to measure similarities among vectors. Ch
 
 The metrics that are widely used for floating point embeddings include:
 
+- **Cosine**: This metric is normalized IP, generally used in text similarity search (NLP).
 - **Euclidean distance (L2)**: This metric is generally used in the field of computer vision (CV).
 - **Inner product (IP)**: This metric is generally used in the field of natural language processing (NLP).
 The metrics that are widely used for binary embeddings include:
 - **Hamming**: This metric is generally used in the field of natural language processing (NLP).
 - **Jaccard**: This metric is generally used in the field of molecular similarity search.
-- **Tanimoto**: This metric is generally used in the field of molecular similarity search.
-- **Superstructure**: This metric is generally used to search for similar superstructure of a molecule.
-- **Substructure**: This metric is generally used  to search for similar substructure of a molecule.
 
 See [Similarity Metrics](metric.md#floating) for more information.
 
@@ -86,13 +85,12 @@ Milvus makes it easy to add similarity search to your applications. Example appl
 - [Image similarity search](image_similarity_search.md): Images made searchable and instantaneously return the most similar images from a massive database.
 - [Video similarity search](video_similarity_search.md): By converting key frames into vectors and then feeding the results into Milvus, billions of videos can be searched and recommended in near real-time.
 - [Audio similarity search](audio_similarity_search.md): Quickly query massive volumes of audio data such as speech, music, sound effects, and surface similar sounds.
-- [Molecular similarity search](molecular_similarity_search.md): Blazing fast similarity search, substructure search, or superstructure search for a specified molecule.
 - [Recommender system](recommendation_system.md): Recommend information or products based on user behaviors and needs.
 - [Question answering system](question_answering_system.md): Interactive digital QA chatbot that automatically answers user questions.
-- [DNA sequence classification](dna_sequence_classification.md): Accurately sort out the classification of a gene in milliseconds by comparing similar DNA sequence.
+- [DNA sequence classification](dna_sequence_classification.md): Accurately sort out the classification of a gene in milliseconds by comparing similar DNA sequences.
 - [Text search engine](text_search_engine.md): Help users find the information they are looking for by comparing keywords against a database of texts.
 
-See [Milvus tutorials](https://github.com/milvus-io/bootcamp/tree/master/solutions) and [Milvus Adopters](milvus_adopters.md) for more Milvus application scenarios.
+See [Milvus tutorials](https://github.com/milvus-io/bootcamp/tree/master/bootcamp) and [Milvus Adopters](milvus_adopters.md) for more Milvus application scenarios.
 
 ## How is Milvus designed?
 
@@ -108,7 +106,7 @@ The system breaks down into four levels:
 For more information, see [Architecture Overview](architecture_overview.md).
 
 
-![Architecture](../../../assets/architecture_02.jpg "Milvus architecure.")
+![Architecture](../../../assets/milvus_architecture.png "Milvus architecure.")
 
 ## Developer tools
 
@@ -122,6 +120,7 @@ Milvus has client libraries wrapped on top of the Milvus API that can be used to
 - [Node.js SDK](https://github.com/milvus-io/milvus-sdk-node)
 - [Go SDK](https://github.com/milvus-io/milvus-sdk-go)
 - [Java SDK](https://github.com/milvus-io/milvus-sdk-java)
+- [Restful API](https://milvus.io/api-reference/restful/v2.4.x/About.md)
 
 We are working on enabling more new client libraries. If you would like to contribute, go to the corresponding repository of [the Milvus Project](https://github.com/milvus-io).
 
@@ -129,19 +128,17 @@ We are working on enabling more new client libraries. If you would like to contr
 
 The Milvus ecosystem provides helpful tools including:
 
-- [Milvus CLI](https://github.com/milvus-io/milvus_cli#overview)
 - [Attu](https://github.com/zilliztech/attu), a graphical management system for Milvus. 
-- [MilvusDM](migrate_overview.md) (Milvus Data Migration), an open-source tool designed specifically for importing and exporting data with Milvus.
 - [Milvus sizing tool](https://milvus.io/tools/sizing/), which helps you estimate the raw file size, memory size, and stable disk size needed for a specified number of vectors with various index types.
+- [Milvus CLI](https://github.com/zilliztech/milvus_cli#overview)
 
 ## What's next
 
 - Get started with a 3-minute tutorial:
-  - [Hello Milvus](example_code.md)
+  - [Hello Milvus](quickstart.md)
 - Install Milvus for your testing or production environment:
   - [Installation Prerequisites](prerequisite-docker.md)
   - [Install Milvus Standalone](install_standalone-docker.md)
-  - [Install Milvus Cluster](install_cluster-docker.md)
 - If you're interested in diving deep into the design details of Milvus:
   - Read about [Milvus architecture](architecture_overview.md)
 

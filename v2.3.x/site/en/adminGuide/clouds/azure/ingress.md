@@ -5,7 +5,7 @@ related_key: ingress nginx
 summary: Learn how to configure ingress nginx with Milvus.
 ---
 
-## Configure ingress nginx with Milvus
+# Configure ingress nginx with Milvus
 This topic introduces how to configure ingress nginx with Milvus. 
 For more details, refer to [ingress-nginx](https://learn.microsoft.com/en-us/azure/aks/ingress-tls?tabs=azure-cli).
 

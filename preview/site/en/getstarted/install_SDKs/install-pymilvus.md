@@ -3,6 +3,7 @@ id: install-pymilvus.md
 label: Install PyMilvus
 related_key: SDK
 summary: Learn how to install the Python SDK of Milvus.
+title: Install Milvus Python SDK
 ---
 
 # Install Milvus Python SDK
@@ -13,7 +14,7 @@ Current version of Milvus supports SDKs in Python, Node.js, GO, and Java.
 
 ## Requirements
 
-- Python 3.6 or later is required.
+- Python 3.7 or later is required.
 - Google protobuf is installed. You can install it with the command `pip3 install protobuf==3.20.0`.
 - grpcio-tools is installed. You can install it with the command `pip3 install grpcio-tools`.
 
@@ -26,7 +27,7 @@ It is recommended to install a PyMilvus version that matches the version of the 
 </div>
 
 ```
-$ python3 -m pip install pymilvus==2.2.2
+$ python3 -m pip install pymilvus==2.4.4
 ```
 
 ## Verify installation
@@ -44,11 +45,11 @@ $ python3 -c "from pymilvus import Collection"
 Having installed PyMilvus, you can:
 
 - Learn the basic operations of Milvus:
-  - [Connect to Milvus server](manage_connection.md)
-  - [Create a collection](create_collection.md)
-  - [Create a partition](create_partition.md)
-  - [Insert data](insert_data.md)
-  - [Conduct a vector search](search.md)
+  - [Manage Collections](manage-collections.md)
+  - [Manage Partitions](manage-partitions.md)
+  - [Insert, Upsert & Delete](insert-update-delete.md)
+  - [Single-Vector Search](single-vector-search.md)
+  - [Hybrid Search](multi-vector-search.md)
 
-- Explore [PyMilvus API reference](/api-reference/pymilvus/v2.2.2/About.md)
+- Explore [PyMilvus API reference](/api-reference/pymilvus/v2.4.x/About.md)
 

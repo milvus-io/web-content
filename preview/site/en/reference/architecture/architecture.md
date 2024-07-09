@@ -1,6 +1,7 @@
 ---
 id: architecture.md
 title: Architecture
+deprecate: true
 ---
 
 # Architecture

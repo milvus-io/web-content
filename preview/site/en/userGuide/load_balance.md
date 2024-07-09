@@ -2,6 +2,8 @@
 id: load_balance.md
 related_key: Load balance
 summary: Learn how to balance query load in Milvus.
+title: Balance Query Load
+deprecate: true
 ---
 
 # Balance Query Load
@@ -44,7 +46,7 @@ milvusClient.getQuerySegmentInfo(
 ```
 
 ```javascript
-await dataManager.getQuerySegmentInfo({
+await getQuerySegmentInfo({
     collectionName: "book",
 });
 ```
@@ -151,7 +153,7 @@ milvusClient.loadBalance(
 ```
 
 ```javascript
-await dataManager.loadBalance({
+await loadBalance({
   src_nodeID: 3,
   dst_nodeIDs: [4],
   sealed_segmentIDs: [431067441441538050]
@@ -257,9 +259,10 @@ load_balance -s 3 -d 4 -ss 431067441441538050
 ## What's next
 
 - Learn more basic operations of Milvus:
-  - [Insert data into Milvus](insert_data.md)
-  - [Create a partition](create_partition.md)
-  - [Build an index for vectors](build_index.md)
-  - [Conduct a vector search](search.md)
-  - [Conduct a hybrid search](hybridsearch.md)
+  - [Insert, Upsert & Delete](insert-update-delete.md)
+  - [Manage Partitions](manage-partitions.md)
+  - [Index Vector Fields](index-vector-fields.md)
+  - [Index Scalar Fields](index-scalar-fields.md)
+  - [Single-vector search](single-vector-search.md)
+  - [Hybrid search](multi-vector-search.md)
 

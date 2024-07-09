@@ -90,7 +90,7 @@ class FeatureExtractor:
 ```
 
 ## Create a Milvus Collection
-Then we need to create Milvus collection to store the image embeddings.
+Then we need to create Milvus collection to store the image embeddings
 
 
 ```python
@@ -110,6 +110,16 @@ client.create_collection(
     metric_type="COSINE",
 )
 ```
+
+<div class="alert note">
+
+As for the argument of `MilvusClient`:
+
+- Setting the `uri` as a local file, e.g.`./milvus.db`, is the most convenient method, as it automatically utilizes [Milvus Lite](https://milvus.io/docs/milvus_lite.md) to store all data in this file.
+- If you have large scale of data, you can set up a more performant Milvus server on [docker or kubernetes](https://milvus.io/docs/quickstart.md). In this setup, please use the server uri, e.g.`http://localhost:19530`, as your `uri`.
+- If you want to use [Zilliz Cloud](https://zilliz.com/cloud), the fully managed cloud service for Milvus, adjust the `uri` and `token`, which correspond to the [Public Endpoint and Api key](https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details) in Zilliz Cloud.
+
+</div>
 
 ## Insert the Embeddings to Milvus
 We will extract embeddings of each image using the ResNet34 model and insert images from the training set into Milvus.
@@ -174,7 +184,7 @@ display(concatenated_image)
 
 
     
-<img src="../../../assets/query.png" width="150" />
+<img src="../../../assets/query.png" width="150" alt="query result" />
     
 
 

@@ -3,6 +3,7 @@ id: configure_log.md
 related_key: configure
 group: system_configuration.md
 summary: Learn how to configure log of Milvus.
+title: Log-related Configurations
 ---
 
 # Log-related Configurations

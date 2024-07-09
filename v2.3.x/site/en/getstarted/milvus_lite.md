@@ -185,7 +185,7 @@ You can configure Milvus Lite in the same way as you do Milvus instances through
   $ milvus-server --extra-config dataCoord.segment.maxSize=1024
   ```
 
-You can find all configurable configuration items in `config.yaml` template shipped with the Milvus package. You can also find [the template in our project repository](https://github.com/milvus-io/milvus-lite/blob/main/src/milvus/data/config.yaml.template).
+You can find all configurable configuration items in `config.yaml` template shipped with the Milvus package.
 
 ## What's next
 

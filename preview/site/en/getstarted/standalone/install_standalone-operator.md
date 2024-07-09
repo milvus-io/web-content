@@ -1,12 +1,14 @@
 ---
 id: install_standalone-operator.md
 label: Milvus Operator
-order: 0
-group: install_standalone-helm.md
+order: 1
+group: install_standalone-docker.md
 summary: Learn how to install Milvus stanalone with Milvus Operator.
+title: Install Milvus Standalone with Milvus Operator
+deprecate: true
 ---
 
-<div class="tab-wrapper"><a href="install_standalone-operator.md" class='active '>Milvus Operator</a><a href="install_standalone-helm.md" class=''>Helm</a><a href="install_standalone-docker.md" class=''>Docker Compose</a></div>
+<div class="tab-wrapper"><a href="install_standalone-operator.md" class='active '>Milvus Operator</a><a href="install_standalone-helm.md" class=''>Helm</a><a href="install_standalone-aptyum.md" class=''>DEB/RPM</a></div>
 
 # Install Milvus Standalone with Milvus Operator
 
@@ -146,7 +148,7 @@ There are two ways to install Milvus Operator on K8s:
 helm install milvus-operator \
   -n milvus-operator --create-namespace \
   --wait --wait-for-jobs \
-  https://github.com/milvus-io/milvus-operator/releases/download/v0.7.7/milvus-operator-0.7.7.tgz
+  https://github.com/zilliztech/milvus-operator/releases/download/v0.9.17/milvus-operator-0.9.17.tgz
 ```
 
 If Milvus Operator is installed, you can see the following output.
@@ -160,16 +162,16 @@ TEST SUITE: None
 NOTES:
 Milvus Operator Is Starting, use `kubectl get -n milvus-operator deploy/milvus-operator` to check if its successfully installed
 If Operator not started successfully, check the checker's log with `kubectl -n milvus-operator logs job/milvus-operator-checker`
-Full Installation doc can be found in https://github.com/milvus-io/milvus-operator/blob/main/docs/installation/installation.md
-Quick start with `kubectl apply -f https://raw.githubusercontent.com/milvus-io/milvus-operator/main/config/samples/milvus_minimum.yaml`
-More samples can be found in https://github.com/milvus-io/milvus-operator/tree/main/config/samples
-CRD Documentation can be found in https://github.com/milvus-io/milvus-operator/tree/main/docs/CRD
+Full Installation doc can be found in https://github.com/zilliztech/milvus-operator/blob/main/docs/installation/installation.md
+Quick start with `kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_minimum.yaml`
+More samples can be found in https://github.com/zilliztech/milvus-operator/tree/main/config/samples
+CRD Documentation can be found in https://github.com/zilliztech/milvus-operator/tree/main/docs/CRD
 ```
 
 #### Install by `kubectl` command
 
 ```
-$ kubectl apply -f https://raw.githubusercontent.com/milvus-io/milvus-operator/main/deploy/manifests/deployment.yaml
+$ kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/deploy/manifests/deployment.yaml
 ```
 
 If Milvus Operator is installed, you can see the following output.
@@ -209,7 +211,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
 When Milvus Operator starts, run the following command to install Milvus.
 
 ```
-$ kubectl apply -f https://raw.githubusercontent.com/milvus-io/milvus-operator/main/config/samples/milvus_default.yaml
+$ kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_default.yaml
 ```
 
 
@@ -221,7 +223,31 @@ Run the following command to check the status of Milvus you just installed.
 $ kubectl get milvus my-release -o yaml
 ```
 
-When the Milvus is successfully installed, you can learn how to [Connect to Milvus server](manage_connection.md).
+When the Milvus is successfully installed, you can learn how to [manage collections](manage-collections.md).
+
+## Connect to Milvus
+
+Verify which local port the Milvus server is listening on. Replace the pod name with your own.
+
+```bash
+$ kubectl get pod my-release-milvus-proxy-84f67cdb7f-pg6wf --template
+='{{(index (index .spec.containers 0).ports 0).containerPort}}{{"\n"}}'
+19530
+```
+
+Open a new terminal and run the following command to forward a local port to the port that Milvus uses. Optionally, omit the designated port and use `:19530` to let `kubectl` allocate a local port for you so that you don't have to manage port conflicts.
+
+```bash
+$ kubectl port-forward service/my-release-milvus 27017:19530
+Forwarding from 127.0.0.1:27017 -> 19530
+```
+
+By default, kubectl's port-forwarding only listens on localhost. Use flag `address` if you want Milvus server to listen on selected IP or all addresses.
+
+```bash
+$ kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27017:19530
+Forwarding from 0.0.0.0:27017 -> 19530
+```
 
 ## Uninstall Milvus standalone
 
@@ -244,7 +270,7 @@ $ helm -n milvus-operator uninstall milvus-operator
 ### Uninstall Milvus Operator by `kubectl` command
 
 ```
-$ kubectl delete -f https://raw.githubusercontent.com/milvus-io/milvus-operator/v0.7.7/deploy/manifests/deployment.yaml
+$ kubectl delete -f https://raw.githubusercontent.com/zilliztech/milvus-operator/v0.9.17/deploy/manifests/deployment.yaml
 ```
 
 ## Delete the K8s cluster
@@ -254,15 +280,18 @@ When you no longer need the K8s cluster in the test environment, you can run `$ 
 ## What's next
 
 Having installed Milvus, you can:
-- Check [Hello Milvus](example_code.md) to run an example code with different SDKs to see what Milvus can do.
+- Check [Hello Milvus](quickstart.md) to run an example code with different SDKs to see what Milvus can do.
 - Learn the basic operations of Milvus:
-  - [Connect to Milvus server](manage_connection.md)
-  - [Create a collection](create_collection.md)
-  - [Create a partition](create_partition.md)
-  - [Insert data](insert_data.md)
-  - [Conduct a vector search](search.md)
-- [Upgrade Milvus Using Helm Chart](upgrade.md)
-- Explore [MilvusDM](migrate_overview.md), an open-source tool designed for importing and exporting data in Milvus.
+  - [Manage Databases](manage_databases.md)
+  - [Manage Collections](manage-collections.md)
+  - [Manage Partitions](manage-partitions.md)
+  - [Insert, Upsert & Delete](insert-update-delete.md)
+  - [Single-Vector Search](single-vector-search.md)
+  - [Hybrid Search](multi-vector-search.md)
+- [Upgrade Milvus Using Milvus Operator](upgrade_milvus_standalone-operator.md)
+- Explore [Milvus Backup](milvus_backup_overview.md), an open-source tool for Milvus data backups.
+- Explore [Birdwatcher](birdwatcher_overview.md), an open-source tool for debugging Milvus and dynamic configuration updates.
+- Explore [Attu](https://milvus.io/docs/attu.md), an open-source GUI tool for intuitive Milvus management.
 - [Monitor Milvus with Prometheus](monitor.md)
 
 

@@ -5,9 +5,15 @@ related_key: cluster
 summary: Learn how to deploy a Milvus cluster on AWS EC2.
 ---
 
-# Deploy a Milvus Cluster on EC2
+# (Deprecated) Deploy a Milvus Cluster on EC2
 
 This topic describes how to deploy a Milvus cluster on [Amazon EC2](https://docs.aws.amazon.com/ec2/) with Terraform and Ansible.
+
+<div class="alert note">
+
+This topic is outdated and will be removed soon. You are advised to refer to [Deploy a Milvus Cluster on EKS](eks.md) instead.
+
+</div>
 
 ##  Provision a Milvus cluster
 
@@ -295,11 +301,11 @@ dependencies
 ansible_python_interpreter= /usr/bin/python3
 StrictHostKeyChecking= no
 
-; Setup variables to controll what type of network to use when creating containers.
+; Setup variables to control what type of network to use when creating containers.
 dependencies_network= host
 nodes_network= host
 
-; Setup varibale to controll what version of Milvus image to use.
+; Setup varibale to control what version of Milvus image to use.
 image= milvusdb/milvus-dev:master-20220412-4781db8a
 
 ; Setup static IP addresses of the docker hosts as variable for container environment variable config.

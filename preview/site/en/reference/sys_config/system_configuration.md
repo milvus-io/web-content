@@ -3,6 +3,7 @@ id: system_configuration.md
 related_key: configure
 group: system_configuration.md
 summary: Learn about the system configuration of Milvus.
+title: Milvus System Configurations Checklist
 ---
 
 # Milvus System Configurations Checklist
@@ -51,6 +52,19 @@ Under this section, you can configure message size, retention time and size, etc
 
 See [RocksMQ-related Configurations](configure_rocksmq.md) for detailed description for each parameter under this section.
 
+### `nats`
+
+NATS is a message-oriented middleware that allows data exchange between applications and services, segmented in the form of messages. Milvus uses NATS as a underlying engine for reliable storage and pub/sub of message streams. You can use it as an alternative to RocksMQ.
+
+Under this section, you can configure NATS server, monitoring properties, and rention time and size, etc.
+
+See [NATS-related Configurations](configure_nats.md) for detailed description for each parameter under this section.
+
+### `kafka`
+
+Apache Kafka is an open-source distributed event streaming platform for high-performance data pipelines, streaming analytics, data integration, and mission-critical applications. It serves as an alternative to RocksMQ and Pulsar for reliable storage and publication/subscription of message streams.
+
+See [Kafka-related Configurations](configure_kafka.md) for detailed description for each parameter under this section.
 
 ### `rootCoord`
 
@@ -83,14 +97,6 @@ Query node performs hybrid search of vector and scalar data on both incremental 
 Under this section, you can configure query node port, graceful time, etc.
 
 See [Query Node-related Configurations](configure_querynode.md) for detailed description for each parameter under this section.
-
-### `indexCoord`
-
-Index coordinator (index coord) manages topology of the index nodes, and maintains index metadata.
-
-Under this section, you can configure index coord address, etc.
-
-See [Index Coordinator-related Configurations](configure_indexcoord.md) for detailed description for each parameter under this section.
 
 ### `indexNode`
 
@@ -145,8 +151,6 @@ Under this section, you can configure the default names of partition and index, 
 See [Common Configurations](configure_common.md) for detailed description for each parameter under this section.
 
 ### `knowhere`
-
-[Knowhere](https://github.com/milvus-io/milvus/blob/master/docs/design_docs/knowhere_design.md) is the search engine of Milvus.
 
 Under this section, you can configure the default SIMD instruction set type of the system.
 
@@ -238,4 +242,3 @@ The following parameters control the log output and object storage access.
 
 - Learn more about the installation of Milvus:
   - [Install Milvus Standalone](install_standalone-docker.md)
-  - [Install Milvus Cluster](install_cluster-docker.md)

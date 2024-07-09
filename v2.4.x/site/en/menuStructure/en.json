@@ -639,6 +639,12 @@
         "id": "m2m.md",
         "order": 4,
         "children": []
+      },
+      {
+        "label": "From Milvus 2.3.x",
+        "id": "from-m2x.md",
+        "order": 5,
+        "children": []
       }
     ]
   },
@@ -1240,6 +1246,18 @@
         "label": "MemGPT",
         "id": "integrate_with_memgpt.md",
         "order": 16,
+        "children": []
+      },
+      {
+        "label": "FastGPT",
+        "id": "integrate_with_fastgpt.md",
+        "order": 17,
+        "children": []
+      },
+      {
+        "label": "Vanna",
+        "id": "integrate_with_vanna.md",
+        "order": 18,
         "children": []
       }
     ]

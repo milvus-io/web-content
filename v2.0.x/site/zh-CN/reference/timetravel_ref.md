@@ -27,7 +27,7 @@ During a search, if the search request received by the proxy contains the parame
 
 ## Search implementation
 
-Searches with filtering in [knowhere](https://github.com/milvus-io/milvus/blob/master/docs/design_docs/knowhere_design.md) is achieved by bitset. Bitset can be applied in the following three aspects:
+Searches with filtering in knowhere is achieved by bitset. Bitset can be applied in the following three aspects:
 
 - Delete data
 - Timestamp

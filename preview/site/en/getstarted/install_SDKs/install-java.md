@@ -3,6 +3,7 @@ id: install-java.md
 label: Install Java SDK
 related_key: SDK
 summary: Learn how to install the Java SDK of Milvus.
+title: Install Milvus Java SDK
 ---
 
 # Install Milvus Java SDK
@@ -26,14 +27,14 @@ Run the following command to install Milvus Java SDK.
 <dependency>
     <groupId>io.milvus</groupId>
     <artifactId>milvus-sdk-java</artifactId>
-    <version>2.2.1</version>
+    <version>2.4.1</version>
 </dependency>
 ```
 
 - Gradle/Grails
 
 ```
-compile 'io.milvus:milvus-sdk-java:2.2.1'
+implementation 'io.milvus:milvus-sdk-java:2.4.1'
 ```
 
 ## What's next
@@ -41,11 +42,11 @@ compile 'io.milvus:milvus-sdk-java:2.2.1'
 Having installed Milvus Java SDK, you can:
 
 - Learn the basic operations of Milvus:
-  - [Connect to Milvus server](manage_connection.md)
-  - [Create a collection](create_collection.md)
-  - [Create a partition](create_partition.md)
-  - [Insert data](insert_data.md)
-  - [Conduct a vector search](search.md)
+  - [Manage Collections](manage-collections.md)
+  - [Manage Partitions](manage-partitions.md)
+  - [Insert, Upsert & Delete](insert-update-delete.md)
+  - [Single-Vector Search](single-vector-search.md)
+  - [Hybrid Search](multi-vector-search.md)
 
-- Explore [Milvus Java API reference](/api-reference/java/v2.2.1/About.md)
+- Explore [Milvus Java API reference](/api-reference/java/v2.4.x/About.md)
 

@@ -3,6 +3,7 @@ id: operator.md
 title: Configure Dependencies with Milvus Operator
 related_key: minio, s3, storage, etcd, pulsar
 summary: Learn how to configure dependencies with Milvus Operator.
+deprecate: true
 ---
 
 # Configure Dependencies with Milvus Operator

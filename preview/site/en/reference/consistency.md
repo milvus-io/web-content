@@ -1,6 +1,7 @@
 ---
 id: consistency.md
 summary: Learn about the four levels of consistency in Milvus.
+title: Consistency
 ---
 # Consistency
 
@@ -10,7 +11,7 @@ This topic introduces the four levels of consistency in Milvus and their best-su
 
 Consistency in a distributed database specifically refers to the property that ensures every node or replica has the same view of data when writing or reading data at a given time. 
 
-Milvus supports four consistency levels:  strong, bounded staleness, session, and eventually. The default consistency level in Milvus is bounded staleness.  You can easily tune the consistency level when conducting a [vector similarity search](search.md) or [query](query.md) to make it best suit your application.
+Milvus supports four consistency levels:  strong, bounded staleness, session, and eventually. The default consistency level in Milvus is bounded staleness.  You can easily tune the consistency level when conducting a [single-vector search](single-vector-search.md), [hybrid search](multi-vector-search.md) or [query](get-and-scalar-query.md) to make it best suit your application.
 
 ## Consistency levels
 
@@ -64,11 +65,12 @@ A GuaranteeTs serves to inform query nodes that a search or query request will n
 
 - **Eventually**: GuaranteeTs is set to a very small value to skip the consistency check. Query nodes search immediately on the existing data view.
 
-See [How GuaranteeTs Works](https://github.com/milvus-io/milvus/blob/f3f46d3bb2dcae2de0bdb7bc0f7b20a72efceaab/docs/developer_guides/how-guarantee-ts-works.md) and [All The Things You Should Know About Time Synchronization](https://github.com/milvus-io/milvus/blob/master/docs/design_docs/milvus_timesync_en.md?from=from_parent_mindnote) for more information about the mechanism behind ensuring different levels of consistency in Milvus.
+See [How GuaranteeTs Works](https://github.com/milvus-io/milvus/blob/f3f46d3bb2dcae2de0bdb7bc0f7b20a72efceaab/docs/developer_guides/how-guarantee-ts-works.md) for more information about the mechanism behind ensuring different levels of consistency in Milvus.
 
 ## What's next
 
 - Learn how to tune consistency level when:
-  - [conducting a vector similarity search](search.md)
-  - [conducting a vector query](query.md)
+  - [conducting a single-vector search](single-vector-search.md)
+  - [conducting a hybrid search](multi-vector-search.md)
+  - [conducting a scalar query](get-and-scalar-query.md)
 

@@ -3,6 +3,7 @@ id: configure_operator.md
 label: Milvus Operator
 related_key: Milvus Operator
 summary: Learn how to configure Milvus with Milvus Operator.
+title: Configure Milvus with Milvus Operator
 ---
 
 # Configure Milvus with Milvus Operator
@@ -26,7 +27,7 @@ Private resource configurations will overwrite global resource configurations. I
 When using Milvus Operator to start a Milvus cluster, you need to specify a configuration file. The example here uses the default configuration file.
 
 ```yaml
-kubectl apply -f https://raw.githubusercontent.com/milvus-io/milvus-operator/main/config/samples/milvus_cluster_default.yaml
+kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml
 ```
 
 The details of the configuration file is as follows:
@@ -51,7 +52,7 @@ The field `spec.components` includes both the global and private resource config
 - `tolerations` and `nodeSelector`: The scheduling rules of each Milvus component in the K8s cluster. See [tolerations](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/) and [nodeSelector](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/) for more information.
 - `env`: The environment variables. 
 
-If you want to configure more fields, see documentation [here](https://pkg.go.dev/github.com/milvus-io/milvus-operator/apis/milvus.io/v1beta1#ComponentSpec).
+If you want to configure more fields, see documentation [here](https://pkg.go.dev/github.com/zilliztech/milvus-operator/apis/milvus.io/v1beta1#ComponentSpec).
 
 To configure global resource for Milvus cluster, create a `milvuscluster_resource.yaml` file. 
 
@@ -94,12 +95,12 @@ Cluster resources will be updated according to the configuration file if there i
 
 ## Configure private resources
 
-Originally in Milvus 2.0, a Milvus cluster includes eight components: proxy, root coord, index coord, data coord, query coord, index node, data node, and query node. However, a new component, mix coord, is released along with Milvus 2.1.0. Mix coord includes all coordinator components. Therefore, starting a mix coord means that you do not need to install and start other coordinators including root coord, index coord, data coord, and query coord.
+Originally in Milvus 2.0, a Milvus cluster includes seven components: proxy, root coord, data coord, query coord, index node, data node, and query node. However, a new component, mix coord, is released along with Milvus 2.1.0. Mix coord includes all coordinator components. Therefore, starting a mix coord means that you do not need to install and start other coordinators including root coord, data coord, and query coord.
 
 Common fields used to configure each component include:
 - `replica`: The number of replicas of each component.
 - `port`: The listen port number of each component.
-- The four commonly used fields in global resource configuration: `image`, `env`, `nodeSelector`, `tolerations`, `resources` (see above). For more configurable fields, click on each component in [this documentation](https://pkg.go.dev/github.com/milvus-io/milvus-operator/apis/milvus.io/v1beta1#MilvusComponents).
+- The four commonly used fields in global resource configuration: `image`, `env`, `nodeSelector`, `tolerations`, `resources` (see above). For more configurable fields, click on each component in [this documentation](https://pkg.go.dev/github.com/zilliztech/milvus-operator/apis/milvus.io/v1beta1#MilvusComponents).
 
 <div class="alert note">
 In addition, when configuring proxy, there is an extra field called `serviceType`. This field defines the type of service Milvus provides in the K8s cluster.
@@ -137,7 +138,6 @@ To configure resources for a specific component, add the component name in the f
             <li><a href="configure_proxy.md">Proxy</a></li>
             <li><a href="configure_querycoord.md">Query coord</a></li>
             <li><a href="configure_querynode.md">Query node</a></li>
-            <li><a href="configure_indexcoord.md">Index coord</a></li>
             <li><a href="configure_indexnode.md">Index node</a></li>
             <li><a href="configure_datacoord.md">Data coord</a></li>
             <li><a href="configure_datanode.md">Data node</a></li>
@@ -208,6 +208,7 @@ To configure resources for a specific component, add the component name in the f
     <td>Quota and Limits</td>
     <td>
         <ul>
+            <li><a href="configure_quota_limits.md#quotaAndLimitslimitsmaxCollectionNumPerDB"><code>quotaAndLimits.limits.maxCollectionNumPerDB</code></a></li>
             <li><a href="configure_quota_limits.md#quotaAndLimitsddlenabled"><code>quotaAndLimits.ddl.enabled</code></a></li>
             <li><a href="configure_quota_limits.md#quotaAndLimitsddlcollectionRate"><code>quotaAndLimits.ddl.collectionRate</code></a></li>
             <li><a href="configure_quota_limits.md#quotaAndLimitsddlpartitionRate"><code>quotaAndLimits.ddl.partitionRate</code></a></li>
@@ -219,10 +220,14 @@ To configure resources for a specific component, add the component name in the f
             <li><a href="configure_quota_limits.md#quotaAndLimitscompactionmax"><code>quotaAndLimits.compaction.max</code></a></li>
             <li><a href="configure_quota_limits.md#quotaAndLimitsdmlenabled"><code>quotaAndLimits.dml.enabled</code></a></li>
             <li><a href="configure_quota_limits.md#quotaAndLimitsdmlinsertRatemax"><code>quotaAndLimits.dml.insertRate.max</code></a></li>
+            <li><a href="configure_quota_limits.md#quotaAndLimitsdmlinsertRatecollectionmax"><code>quotaAndLimits.dml.insertRate.collection.max</code></a></li>
             <li><a href="configure_quota_limits.md#quotaAndLimitsdmldeleteRatemax"><code>quotaAndLimits.dml.deleteRate.max</code></a></li>
+            <li><a href="configure_quota_limits.md#quotaAndLimitsdmldeleteRatecollectionmax"><code>quotaAndLimits.dml.deleteRate.collection.max</code></a></li>
             <li><a href="configure_quota_limits.md#quotaAndLimitsdqlenabled"><code>quotaAndLimits.dql.enabled</code></a></li>
             <li><a href="configure_quota_limits.md#quotaAndLimitsdqlsearchRatemax"><code>quotaAndLimits.dql.searchRate.max</code></a></li>
+            <li><a href="configure_quota_limits.md#quotaAndLimitsdqlsearchRatecollectionmax"><code>quotaAndLimits.dql.searchRate.collection.max</code></a></li>
             <li><a href="configure_quota_limits.md#quotaAndLimitsdqlqueryRatemax"><code>quotaAndLimits.dql.queryRate.max</code></a></li>
+            <li><a href="configure_quota_limits.md#quotaAndLimitsdqlqueryRatecollectionmax"><code>quotaAndLimits.dql.queryRate.collection.max</code></a></li>
             <li><a href="configure_quota_limits.md#quotaAndLimitslimitWritingttProtectionenabled"><code>quotaAndLimits.limitWriting.ttProtection.enabled</code></a></li>
             <li><a href="configure_quota_limits.md#quotaAndLimitslimitWritingttProtectionmaxTimeTickDelay"><code>quotaAndLimits.limitWriting.ttProtection.maxTimeTickDelay</code></a></li>
             <li><a href="configure_quota_limits.md#quotaAndLimitslimitWritingmemProtectionenabled"><code>quotaAndLimits.limitWriting.memProtection.enabled</code></a></li>
@@ -232,6 +237,7 @@ To configure resources for a specific component, add the component name in the f
             <li><a href="configure_quota_limits.md#quotaAndLimitslimitWritingmemProtectionqueryNodeMemoryHighWaterLevel"><code>quotaAndLimits.limitWriting.memProtection.queryNodeMemoryHighWaterLevel</code></a></li>
             <li><a href="configure_quota_limits.md#quotaAndLimitslimitWritingdiskProtectionenabled"><code>quotaAndLimits.limitWriting.diskProtection.enabled</code></a></li>
             <li><a href="configure_quota_limits.md#quotaAndLimitslimitWritingdiskProtectiondiskQuota"><code>quotaAndLimits.limitWriting.diskProtection.diskQuota</code></a></li>
+            <li><a href="configure_quota_limits.md#quotaAndLimitslimitWritingdiskProtectiondiskQuotaPerCollection"><code>quotaAndLimits.limitWriting.diskProtection.diskQuotaPerCollection</code></a></li>
             <li><a href="configure_quota_limits.md#quotaAndLimitslimitWritingforceDeny"><code>quotaAndLimits.limitWriting.forceDeny</code></a></li>
             <li><a href="configure_quota_limits.md#quotaAndLimitslimitReadingqueueProtectionenabled"><code>quotaAndLimits.limitReading.queueProtection.enabled</code></a></li>
             <li><a href="configure_quota_limits.md#quotaAndLimitslimitReadingqueueProtectionnqInQueueThreshold"><code>quotaAndLimits.limitReading.queueProtection.nqInQueueThreshold</code></a></li>

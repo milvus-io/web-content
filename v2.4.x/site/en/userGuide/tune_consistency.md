@@ -3,6 +3,7 @@ id: tune_consistency.md
 related_key: tune consistency
 title: Tune Consistency
 summary: Learn how to tune consistency level in Milvus.
+deprecate: true
 ---
 
 # Tune consistency

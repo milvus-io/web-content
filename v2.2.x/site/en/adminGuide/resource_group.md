@@ -4,7 +4,7 @@ related_key: Manage Resource Groups
 summary: Learn how to manage resource groups.
 ---
 
-## Manage Resource Groups
+# Manage Resource Groups
 
 In Milvus, you can use a resource group to physically isolate certain query nodes from others. This guide walks you through how to create and manage custom resource groups as well as transfer nodes between them.
 

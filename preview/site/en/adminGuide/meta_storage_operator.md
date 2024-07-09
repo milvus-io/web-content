@@ -7,7 +7,7 @@ summary: Learn how to configure meta storage with Milvus Operator.
 
 # Configure Meta Storage with Milvus Operator
 
-Milvus uses etcd for storing metadata. This topic introduces how to configure meta storage dependency when you install Milvus with Milvus Operator.
+Milvus uses etcd for storing metadata. This topic introduces how to configure meta storage dependency when you install Milvus with Milvus Operator. For more details, refer to [Configure Meta Storage with Milvus Operator](https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/manage-dependencies/meta-storage.md) in the Milvus Operator repository.
 
 This topic assumes that you have deployed Milvus Operator.
 
@@ -16,10 +16,10 @@ This topic assumes that you have deployed Milvus Operator.
 You need to specify a configuration file for using Milvus Operator to start a Milvus cluster.
 
 ```YAML
-kubectl apply -f https://raw.githubusercontent.com/milvus-io/milvus-operator/main/config/samples/milvuscluster_default.yaml
+kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml
 ```
 
-You only need to edit the code template in `milvuscluster_default.yaml` to configure third-party dependencies. The following sections introduce how to configure object storage, etcd, and Pulsar respectively.
+You only need to edit the code template in `milvus_cluster_default.yaml` to configure third-party dependencies. The following sections introduce how to configure object storage, etcd, and Pulsar respectively.
 
 
 ## Configure etcd
@@ -41,36 +41,20 @@ The following example configures an external etcd service.
 
 ```YAML
 kind: MilvusCluster
-
 metadata:
-
   name: my-release
-
   labels:
-
     app: milvus
-
-
 spec:
-
   dependencies: # Optional
-
     etcd: # Optional
-
       # Whether (=true) to use an existed external etcd as specified in the field endpoints or 
-
       # (=false) create a new etcd inside the same kubernetes cluster for milvus.
-
       external: true # Optional default=false
-
       # The external etcd endpoints if external=true
-
       endpoints:
-
       - 192.168.1.1:2379
-
   components: {}
-
   config: {}
 ```
 ### Internal etcd
@@ -83,45 +67,25 @@ The following example configures an internal etcd service.
 
 ```YAML
 apiVersion: milvus.io/v1alpha1
-
 kind: MilvusCluster
-
 metadata:
-
   name: my-release
-
   labels:
-
     app: milvus
-
 spec:
-
   dependencies:
-
     etcd:
-
       inCluster:
-
         values:
-
           replicaCount: 5
-
           resources:
-
             limits: 
-
               cpu: '4'
-
               memory: 8Gi
-
             requests:
-
               cpu: 200m
-
               memory: 512Mi
-
   components: {}
-
   config: {}              
 ```
 
