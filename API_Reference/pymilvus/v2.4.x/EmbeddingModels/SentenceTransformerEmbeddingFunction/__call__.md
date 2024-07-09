@@ -10,7 +10,7 @@ To prevent potential errors when directly using the **__call()__** method, avoid
 # Instance created
 sentence_transformer_ef = SentenceTransformerEmbeddingFunction()
 
-# __call__ method will be called
+# \_\_call\_\_ method will be called
 sentence_transformer_ef(
     texts: List[str]
 ) -> List[np.array]

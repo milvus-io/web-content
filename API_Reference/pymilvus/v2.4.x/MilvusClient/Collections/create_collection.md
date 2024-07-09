@@ -1,6 +1,6 @@
 # create_collection()
 
-This operation creates a collection either with default or customized settings. 
+This operation supports creating a collection in two distinct ways: quick setup or custom setup. 
 
 ## Request syntax
 
@@ -14,8 +14,8 @@ create_collection(
     metric_type: str = "COSINE",
     auto_id: bool = False,
     timeout: Optional[float] = None,
-    schema: Optional[CollectionSchema] = None,
-    index_params: Optional[IndexParams] = None,
+    schema: Optional[CollectionSchema] = None, # Used for custom setup
+    index_params: Optional[IndexParams] = None, # Used for custom setup
     **kwargs,
 ) -> None
 ```
@@ -32,7 +32,7 @@ create_collection(
 
     The dimension of the collection field to hold vector embeddings.
 
-    The value is usually determined by the model you use to generate vector embeddings.
+    The value is usually determined by the model you use to generate vector embeddings and should be an integer greater than 1.
 
     This parameter is designed for the quick setup of a collection and will be ignored if **schema** is not **None** and a field in the schema has its **dim** set to a positive integer.
 
@@ -84,7 +84,7 @@ create_collection(
 
     The schema of this collection.
 
-    Setting this to **None** indicates this collection will be created with default settings. 
+    Setting this to **None** indicates this collection will be created in a quick setup manner. 
 
     To set up a collection with a customized schema, you need to create a **CollectionSchema** object and reference it here. In this case, Milvus ignores all other schema-related settings carried in the request.
 
@@ -144,8 +144,6 @@ create_collection(
         The number of partitions to create for the partition key feature.
 
         The value defaults to **64**, indicating that 64 partitions are to be created along with this collection. This parameter applies when **partition_key_field** is set to the name of a field.
-
-        This parameter is not applicable to Milvus Lite. For more information on Milvus Lite limits, refer to [Run Milvus Lite](https://milvus.io/docs/milvus_lite.md).
 
     - **consistency_level** (*int* | *str*)
 
@@ -210,7 +208,7 @@ You can choose between a quick setup or a customized setup as follows:
 
 - **Quick setup**
 
-    The quick setup collection has two fields: the primary and vector fields. It also allows the insertion of undefined fields and their values in key-value pairs in a dynamic field.
+    The quick setup collection has two mandatory fields: the primary and vector fields. It also allows the insertion of undefined fields and their values in key-value pairs in a dynamic field.
 
     ```python
     client.create_collection(
@@ -244,7 +242,7 @@ You can choose between a quick setup or a customized setup as follows:
     )
     ```
 
-    In the above code, the collection will be created and automatically loaded into memory.
+    In the above code, the collection will be created, indexed, and loaded into memory.
 
 - **Customized setup with index parameters**
 
@@ -287,7 +285,7 @@ You can choose between a quick setup or a customized setup as follows:
     )
     ```
 
-    In the above code, the collection will be created and automatically loaded into memory.
+    In the above code, the collection will be created, indexed, and loaded into memory.
 
 - **Customized setup without index parameters**
 
@@ -311,7 +309,7 @@ You can choose between a quick setup or a customized setup as follows:
     )
     ```
 
-    In the above code, the collection will also be created, but its data will not automatically loaded into memory.
+    In the above code, the collection will also be created. However, without `index_param`, data in the collection will not be indexed and loaded into memory.
 
 ## Related methods
 
