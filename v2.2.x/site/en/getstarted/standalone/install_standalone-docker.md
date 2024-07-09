@@ -5,6 +5,7 @@ related_key: Docker
 order: 0
 group: install_standalone-operator.md
 summary: Learn how to install Milvus stanalone with Docker Compose.
+deprecate: true
 ---
 
 <div class="tab-wrapper"><a href="install_standalone-docker.md" class='active '>Docker Compose</a><a href="install_standalone-operator.md" class=''>Milvus Operator</a><a href="install_standalone-helm.md" class=''>Helm</a></div>
