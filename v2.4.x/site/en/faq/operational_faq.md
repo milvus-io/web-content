@@ -117,6 +117,30 @@ Yes, you can share a Pulsar instance among multiple Milvus instances. To do so, 
 
 Yes, you can share a MinIO instance among multiple Milvus instances. To do so, you need to change `minio.rootPath` to a unique value for each Milvus instance in the configuration files of each before starting them.
 
+#### How do I handle the error message `pymilvus.exceptions.ConnectionConfigException: <ConnectionConfigException: (code=1, message=Illegal uri: [example.db], expected form 'https://user:pwd@example.com:12345')>`?
+
+The error message `Illegal uri [example.db]` indicates that you are trying to connect to Milvus Lite using an earlier version of PyMilvus that does not support this connection type. To resolve this issue, upgrade your PyMilvus installation to at least version 2.4.2, which includes support for connecting to Milvus Lite.
+
+You can upgrade PyMilvus using the following command:
+
+```shell
+pip install pymilvus>=2.4.2
+```
+
+#### Why am I getting fewer results than the `limit` I set in my search/query?
+
+There are several reasons why you might receive fewer results than the `limit` you specified:
+
+- **Limited Data**: The collection might not have enough entities to fulfill the limit you requested. If the total number of entities in the collection is less than the limit, you will naturally receive fewer results.
+
+- **Duplicate Primary Keys**: Milvus prioritizes specific entities when encountering duplicate primary keys during a search. This behavior varies based on the search type:
+
+- **Query (Exact Match)**: Milvus selects the latest entity with the matching PK.
+ANN Search: Milvus selects the entity with the highest similarity score, even if entities share the same PK.
+This prioritization can result in fewer unique results than the limit if your collection has many duplicate primary keys.
+
+- **Insufficient Matches**: Your search filtering expressions might be too strict, resulting in fewer entities meeting the similarity threshold. If the conditions set for the search are too restrictive, not enough entities will match, leading to fewer results than expected.
+
 #### Still have questions?
 
 You can:
