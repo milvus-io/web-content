@@ -22,6 +22,7 @@ Milvus v2.4.6 is a bug-fix release that addresses critical issues such as panics
 - Enhanced the user-friendliness of RESTful API queries ([#34444](https://github.com/milvus-io/milvus/pull/34444)).
 - Upgraded the Go version from 1.20 to 1.21 ([#33940](https://github.com/milvus-io/milvus/pull/33940)).
 - Optimized the histogram metric bucket for finer granularity in bucketing ([#34592](https://github.com/milvus-io/milvus/pull/34592)).
+- Upgraded Pulsar dependency version from 2.8.2 to 2.9.5. It's recommended to upgrade Pulsar to 2.9.5 since Milvus 2.4.6.
 
 ### Bug fixes
 
