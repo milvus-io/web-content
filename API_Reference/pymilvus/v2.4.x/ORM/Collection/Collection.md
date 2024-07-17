@@ -128,4 +128,3 @@ collection = Collection(
 
 The following are the members of the `Collection` class:
 
-<DocCardList />

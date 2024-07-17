@@ -58,12 +58,16 @@ This is an enumeration that provides the following constants.
 
 - Float16Vector = 102
 
-  Sets the data type to **Float16 Vector**.
+    Sets the data type to **Float16 Vector**.
 
 - BFloat16Vector = 103
 
-  Sets the data type to **BFloat16 Vector**.
+    Sets the data type to **BFloat16 Vector**.
 
 - SparseFloatVector = 104
+
+    Sets the data type to **Sparse Vector**.
+
+## Example
 
   Sets the data type to **Sparse Vector**.

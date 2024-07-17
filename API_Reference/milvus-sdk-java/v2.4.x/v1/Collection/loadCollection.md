@@ -6,7 +6,7 @@ A MilvusClient interface. This method loads the specified collection and all the
 R<RpcStatus> loadCollection(LoadCollectionParam requestParam);
 ```
 
-## LoadCollectionParam
+#### LoadCollectionParam
 
 Use the `LoadCollectionParam.Builder` to construct a `LoadCollectionParam` object.
 
@@ -19,44 +19,49 @@ Methods of `LoadCollectionParam.Builder`:
 
 <table>
     <tr>
-        <th>Method</th>
-        <th>Description</th>
-        <th>Parameters</th>
+        <th><p>Method</p></th>
+        <th><p>Description</p></th>
+        <th><p>Parameters</p></th>
     </tr>
     <tr>
-        <td>withCollectionName(String collectionName)</td>
-        <td>Sets the collection name. Collection name cannot be empty or null.</td>
-        <td>collectionName: The name of the collection to load.</td>
+        <td><p>withCollectionName(String collectionName)</p></td>
+        <td><p>Sets the collection name. Collection name cannot be empty or null.</p></td>
+        <td><p>collectionName: The name of the collection to load.</p></td>
     </tr>
     <tr>
-        <td>withSyncLoad(Boolean syncLoad)</td>
-        <td>Enables sync mode when loading a collection. With sync mode enabled, the client keeps waiting until all segments of the collection are successfully loaded. If sync mode is disabled, the client returns instantly after <code>loadCollection()</code> is called.<br/>Sync mode is enabled by default.</td>
-        <td>syncLoad:A boolean value to indicate if sync mode is enabled. If the value is set to <code>True</code>, this means sync mode is enabled.</td>
+        <td><p>withDatabaseName(String databaseName)</p></td>
+        <td><p>Sets the database name. database name can be null for default database.</p></td>
+        <td><p>databaseName: The database name.</p></td>
     </tr>
     <tr>
-        <td>withSyncLoadWaitingInterval(Long milliseconds)</td>
-        <td>Sets the waiting interval for sync mode. In sync mode, the client checks the collection load status at intervals. The value must be greater than zero, and cannot be greater than Constant.MAX<em>WAITING</em>LOADING_INTERVAL. The default value is 500 milliseconds</td>
-        <td>milliseconds: The time interval in milliseconds for checking the data load status.</td>
+        <td><p>withSyncLoad(Boolean syncLoad)</p></td>
+        <td><p>Enables sync mode when loading a collection. With sync mode enabled, the client keeps waiting until all segments of the collection are successfully loaded. If sync mode is disabled, the client returns instantly after <code>loadCollection()</code> is called.<br/>Sync mode is enabled by default.</p></td>
+        <td><p>syncLoad:A boolean value to indicate if sync mode is enabled. If the value is set to <code>True</code>, this means sync mode is enabled.</p></td>
     </tr>
     <tr>
-        <td>withSyncLoadWaitingTimeout(Long seconds)</td>
-        <td>Sets the timeout period for sync mode. The value must be greater than zero and cannot be greater than Constant.MAX<em>WAITING</em>LOADING_TIMEOUT. The default value is 60 seconds.</td>
-        <td>seconds: A during of time in seconds to wait till timeout.</td>
+        <td><p>withSyncLoadWaitingInterval(Long milliseconds)</p></td>
+        <td><p>Sets the waiting interval for sync mode. In sync mode, the client checks the collection load status at intervals. The value must be greater than zero, and cannot be greater than Constant.MAX<em>WAITING</em>LOADING_INTERVAL. The default value is 500 milliseconds</p></td>
+        <td><p>milliseconds: The time interval in milliseconds for checking the data load status.</p></td>
     </tr>
     <tr>
-        <td>withReplicaNumber(Integer replicaNumber)</td>
-        <td>Specifies the number of replicas to load. The default value is 1.</td>
-        <td>replicaNumber: The number of the replicas to load when loading a collection.</td>
+        <td><p>withSyncLoadWaitingTimeout(Long seconds)</p></td>
+        <td><p>Sets the timeout period for sync mode. The value must be greater than zero and cannot be greater than Constant.MAX<em>WAITING</em>LOADING_TIMEOUT. The default value is 60 seconds.</p></td>
+        <td><p>seconds: A during of time in seconds to wait till timeout.</p></td>
     </tr>
     <tr>
-        <td>withRefresh(Boolean refresh)</td>
-        <td>Whether to renew the segment list of this collection before loading. This flag must be set to FALSE when first time call the loadCollection(). After loading a collection, call loadCollection() again with refresh=TRUE, the server will look for new segments that are not loaded yet and tries to load them up.<br/>This method is mainly for bulkinsert() interface.</td>
-        <td>refresh: The flag whether to renew segment list.</td>
+        <td><p>withReplicaNumber(Integer replicaNumber)</p></td>
+        <td><p>Specifies the number of replicas to load. The default value is 1.</p></td>
+        <td><p>replicaNumber: The number of the replicas to load when loading a collection.</p></td>
     </tr>
     <tr>
-        <td>build()</td>
-        <td>Constructs a LoadCollectionParam object.</td>
-        <td>N/A</td>
+        <td><p>withRefresh(Boolean refresh)</p></td>
+        <td><p>Whether to renew the segment list of this collection before loading. This flag must be set to FALSE when first time call the loadCollection(). After loading a collection, call loadCollection() again with refresh=TRUE, the server will look for new segments that are not loaded yet and tries to load them up.<br/>This method is mainly for bulkinsert() interface.</p></td>
+        <td><p>refresh: The flag whether to renew segment list.</p></td>
+    </tr>
+    <tr>
+        <td><p>build()</p></td>
+        <td><p>Constructs a LoadCollectionParam object.</p></td>
+        <td><p>N/A</p></td>
     </tr>
 </table>
 
@@ -64,7 +69,7 @@ The `LoadCollectionParam.Builder.build()` can throw the following exceptions:
 
 - ParamException: error if the parameter is invalid.
 
-## Returns
+#### Returns
 
 This method catches all the exceptions and returns an `R<RpcStatus>` object.
 
@@ -74,7 +79,7 @@ This method catches all the exceptions and returns an `R<RpcStatus>` object.
 
 - If the API succeeds, it returns `R.Status.Success`.
 
-## Example
+#### Example
 
 ```java
 import io.milvus.param.*;

@@ -6,7 +6,7 @@ A MilvusClient interface. This method lists bulk insert tasks.
 R<ListImportTasksResponse> listBulkInsertTasks(ListBulkInsertTasksParam requestParam);
 ```
 
-## ListBulkInsertTasksParam
+#### ListBulkInsertTasksParam
 
 Use the `ListBulkInsertTasksParam.Builder` to construct a `ListBulkInsertTasksParam` object.
 
@@ -19,24 +19,29 @@ Methods of `ListBulkInsertTasksParam.Builder`:
 
 <table>
     <tr>
-        <th>Method</th>
-        <th>Description</th>
-        <th>Parameters</th>
+        <th><p>Method</p></th>
+        <th><p>Description</p></th>
+        <th><p>Parameters</p></th>
     </tr>
     <tr>
-        <td>withCollectionName(String collectionName)</td>
-        <td>Sets the target collection name, list all tasks if the name is empty.</td>
-        <td>collectionName: The name of the target collection.</td>
+        <td><p>withCollectionName(String collectionName)</p></td>
+        <td><p>Sets the target collection name, list all tasks if the name is empty.</p></td>
+        <td><p>collectionName: The name of the target collection.</p></td>
     </tr>
     <tr>
-        <td>withLimit(Integer limit)</td>
-        <td>Specify limit count of returned tasks, list all tasks if the value is 0.<br/>Default value is 0</td>
-        <td>limit: The limit value to control the numbe of tasks returned.</td>
+        <td><p>withDatabaseName(String databaseName)</p></td>
+        <td><p>Sets the database name. database name can be null for default database.</p></td>
+        <td><p>databaseName: The database name.</p></td>
     </tr>
     <tr>
-        <td>build()</td>
-        <td>Constructs a GetBulkInsertStateParam object.</td>
-        <td>N/A</td>
+        <td><p>withLimit(Integer limit)</p></td>
+        <td><p>Specify limit count of returned tasks, list all tasks if the value is 0.<br/>Default value is 0</p></td>
+        <td><p>limit: The limit value to control the numbe of tasks returned.</p></td>
+    </tr>
+    <tr>
+        <td><p>build()</p></td>
+        <td><p>Constructs a GetBulkInsertStateParam object.</p></td>
+        <td><p>N/A</p></td>
     </tr>
 </table>
 
@@ -44,7 +49,7 @@ The `ListBulkInsertTasksParam.Builder.build()` can throw the following exception
 
 - ParamException: error if the parameter is invalid.
 
-## Returns
+#### Returns
 
 This method catches all the exceptions and returns an `R<ListImportTasksResponse>` object.
 
@@ -54,7 +59,7 @@ This method catches all the exceptions and returns an `R<ListImportTasksResponse
 
 - If the API succeeds, it returns a valid `ListImportTasksResponse` held by the `R` template which you can get states of all the tasks.
 
-## Example
+#### Example
 
 ```java
 import io.milvus.param.bulkinsert.*;

@@ -6,7 +6,7 @@ MilvusClient interface. This method returns the state of a compaction operation,
 R<GetCompactionStateResponse> getCompactionState(GetCompactionStateParam requestParam);
 ```
 
-## GetCompactionStateParam
+#### GetCompactionStateParam
 
 Use the `GetCompactionStateParam.Builder` to construct a `GetCompactionStateParam` object.
 
@@ -19,19 +19,19 @@ Methods of `GetCompactionStateParam.Builder`:
 
 <table>
     <tr>
-        <th>Method</th>
-        <th>Description</th>
-        <th>Parameters</th>
+        <th><p>Method</p></th>
+        <th><p>Description</p></th>
+        <th><p>Parameters</p></th>
     </tr>
     <tr>
-        <td>withCompactionID(Long compactionID)</td>
-        <td>Set the compaction action id to get state.</td>
-        <td>compactionID: The compaction operation ID.</td>
+        <td><p>withCompactionID(Long compactionID)</p></td>
+        <td><p>Set the compaction action id to get state.</p></td>
+        <td><p>compactionID: The compaction operation ID.</p></td>
     </tr>
     <tr>
-        <td>build()</td>
-        <td>Construct a GetCompactionStateParam object.</td>
-        <td>N/A</td>
+        <td><p>build()</p></td>
+        <td><p>Construct a GetCompactionStateParam object.</p></td>
+        <td><p>N/A</p></td>
     </tr>
 </table>
 
@@ -39,7 +39,7 @@ The `GetCompactionStateParam.Builder.build()` can throw the following exceptions
 
 - ParamException: error if the parameter is invalid.
 
-## Returns
+#### Returns
 
 This method catches all the exceptions and returns an `R<GetCompactionStateResponse>` object.
 
@@ -49,7 +49,7 @@ This method catches all the exceptions and returns an `R<GetCompactionStateRespo
 
 - If the API succeeds, it returns a valid `GetCompactionStateResponse` held by the `R` template.
 
-## CompactionState
+#### CompactionState
 
 Use the `getState()` of `GetCompactionStateResponse` to get the compaction state:
 
@@ -60,28 +60,28 @@ public enum CompactionState
 
 <table>
    <tr>
-     <th><strong>Type</strong></th>
-     <th><strong>Code</strong></th>
-     <th><strong>Description</strong></th>
+     <th><p><strong>Type</strong></p></th>
+     <th><p><strong>Code</strong></p></th>
+     <th><p><strong>Description</strong></p></th>
    </tr>
    <tr>
-     <td><em>UndefiedState</em></td>
-     <td>0</td>
-     <td>For internal usage.</td>
+     <td><p><em>UndefiedState</em></p></td>
+     <td><p>0</p></td>
+     <td><p>For internal usage.</p></td>
    </tr>
    <tr>
-     <td><em>Executing</em></td>
-     <td>1</td>
-     <td>Compaction is in executing</td>
+     <td><p><em>Executing</em></p></td>
+     <td><p>1</p></td>
+     <td><p>Compaction is in executing</p></td>
    </tr>
    <tr>
-     <td><em>Completed</em></td>
-     <td>2</td>
-     <td>Compaction is completed</td>
+     <td><p><em>Completed</em></p></td>
+     <td><p>2</p></td>
+     <td><p>Compaction is completed</p></td>
    </tr>
 </table>
 
-## Example
+#### Example
 
 ```java
 import io.milvus.param.*;

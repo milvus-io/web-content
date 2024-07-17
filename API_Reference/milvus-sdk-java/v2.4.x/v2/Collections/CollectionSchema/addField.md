@@ -76,7 +76,9 @@ CollectionSchema.addField(AddFieldReq.builder()
 
 - `dimension(int dimension)`
 
-    The number of dimensions a value should have.
+    The dimensionality of a vector field. 
+
+    The value should be greater than 1 and is usually determined by the embedding model in use.
 
     This is required if **dataType** of this field is set to **DataType.FloatVector**.
 

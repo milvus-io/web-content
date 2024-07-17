@@ -111,5 +111,3 @@ The following are the classes of the `RemoteBulkWriter` class:
 ## Methods
 
 The following are the methods of the `RemoteBulkWriter` class:
-
-<DocCardList />

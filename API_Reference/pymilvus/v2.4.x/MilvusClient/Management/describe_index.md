@@ -9,7 +9,7 @@ describe_index(
     collection_name: str,
     index_name: str,
     timeout: Optional[float] = None
-) - Dict
+) -> Dict
 ```
 
 **PARAMETERS:**
@@ -46,6 +46,11 @@ A dictionary that contains the details of the specified index.
 {
     'index_type': 'IVF_FLAT',
     'metric_type': 'IP',
+    'nlist': 1024,
+    'total_rows': 0,
+    'indexed_rows': 0,
+    'pending_index_rows': 0,
+    'state': 3,
     'field_name': 'my_vector',
     'index_name': 'my_vector'
 }
@@ -64,6 +69,22 @@ A dictionary that contains the details of the specified index.
     The algorithm that is used to measure similarity between vectors. Possible values are **IP**, **L2**, and **COSINE**.
 
     This is available only when the specified field is a vector field. 
+
+- **total_rows** (*int*) -
+
+    The number of rows in the target field of this index.
+
+- **indexed_rows** (*int*) -
+
+    The number of indexed rows in the target field of this index.
+
+- **pending_index_rows** (*int*) -
+
+    The number of rows to be indexed in the specified field.
+
+- **state** (*int*) -
+
+    The state of the index-building process. Possible values are as follows:
 
 - **field_name** (*str*) -
 

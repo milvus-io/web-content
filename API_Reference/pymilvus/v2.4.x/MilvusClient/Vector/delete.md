@@ -45,10 +45,19 @@ delete(
 
     You can set this parameter to an empty string to skip scalar filtering. To build a scalar filtering condition, refer to [Boolean Expression Rules](https://milvus.io/docs/boolean.md). 
 
+<<<<<<< Updated upstream
     <div class="alert note">
     
     When using filter expressions to delete entities, ensure the collection has been loaded. Otherwise, Milvus will return an error.
     
+=======
+    <div class="admonition note">
+
+    <p><b>notes</b></p>
+
+    <p>When using filter expressions to delete entities, ensure the collection has been loaded. Otherwise, Milvus will return an error.</p>
+
+>>>>>>> Stashed changes
     </div>
 
 - **partition_name** (*str* | *""*) -

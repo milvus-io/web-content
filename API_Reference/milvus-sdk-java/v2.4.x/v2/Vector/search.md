@@ -25,6 +25,7 @@ search(SearchReq.builder()
     .gracefulTime(long gracefulTime)
     .consistencyLevel(ConsistencyLevel consistencyLevel)
     .ignoreGrowing(boolean ignoreGrowing)
+    .groupByFieldName(String fieldName)
     .build()
 )
 ```
@@ -157,37 +158,27 @@ search(SearchReq.builder()
 
 - `ignoreGrowing(boolean ignoreGrowing)`
 
-    Whether to ignore growing segments during similarity searches.
+Whether to ignore growing segments during similarity searches.
+
+- `groupByFieldName(String fieldName)`
+
+Sets the field name to do grouping for results.
 
 **RETURN TYPE:**
 
-*List\<SearchResult\>*
+*SearchResp*
 
 **RETURNS:**
 
-A list of **SearchResult objects representing specific search results with the specified output fields and relevance score.
+A **SearchResp object representing specific search results with the specified output fields and relevance score.
 
 **PARAMETERS:**
 
-- **entity** (*Map\<String, Object\>*)
+- searchResults(List&lt;List&lt;SearchResult\>>)
 
-    A map that stores the specific fields associated with the search result.
+      A list of SearchResp.SearchResult, the size of searchResults equals the number of query vectors of the search. Each List&lt;SearchResult\> is a topK result of a query vector. Each SearchResult represents an entity hit by the search.
 
-- **distance** (*Float*)
-
-    The relevant distance of the search result. The distance indicates how closely the vector associated with the search result matches the query vector.
-
-- **id** (Object)
-
-The id of the search result, dataType is either string or int64 
-
-<div class="admonition note">
-
-<p><b>notes</b></p>
-
-<p>If the number of returned entities is less than expected, duplicate entities may exist in your collection.</p>
-
-</div>
+      Member of SearchResult:
 
 **EXCEPTIONS:**
 
@@ -198,17 +189,19 @@ The id of the search result, dataType is either string or int64
 ## Example
 
 ```java
-// search for top 2 in collection "test"
-List<Float> vectorList = new ArrayList<>();
-vectorList.add(1.0f);
-vectorList.add(2.0f);
-
-SearchReq searchReq = SearchReq.builder()
-        .collectionName("test")
-        .data(Collections.singletonList(vectorList))
-        .topK(2)
-        .build();
-SearchResp searchResp = client.search(searchReq);
-//SearchResp(searchResults=[[SearchResp.SearchResult(entity={vector=[0.598938, 0.8336413]}, distance=1.0000001, id=0), SearchResp.SearchResult(entity={vector=[0.33950245, 0.685143]}, distance=0.986753, id=2)]])
+SearchResp searchR = client.search(SearchReq.builder()
+        .collectionName(collectionName)
+        .data(Collections.singletonList(new FloatVec(new float[]{1.0f, 2.0f})))
+        .filter("id < 100")
+        .topK(10)
+        .outputFields(Collections.singletonList("*"))
+        .build());
+List<List<SearchResp.SearchResult>> searchResults = searchR.getSearchResults();
+System.out.println("\nSearch results:");
+for (List<SearchResp.SearchResult> results : searchResults) {
+    for (SearchResp.SearchResult result : results) {
+        System.out.printf("ID: %d, Score: %f, %s\n", (long)result.getId(), result.getScore(), result.getEntity().toString());
+    }
+}
 ```
 

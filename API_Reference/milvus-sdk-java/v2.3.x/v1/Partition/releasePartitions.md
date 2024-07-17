@@ -6,7 +6,7 @@ MilvusClient interface. This method releases partitions' data from memory.
 R<RpcStatus> releasePartitions(ReleasePartitionsParam requestParam);
 ```
 
-## ReleasePartitionsParam
+#### ReleasePartitionsParam
 
 Use the `ReleasePartitionsParam.Builder` to construct a `ReleasePartitionsParam` object.
 
@@ -19,29 +19,34 @@ Methods of `ReleasePartitionsParam.Builder`:
 
 <table>
     <tr>
-        <th>Method</th>
-        <th>Description</th>
-        <th>Parameters</th>
+        <th><p>Method</p></th>
+        <th><p>Description</p></th>
+        <th><p>Parameters</p></th>
     </tr>
     <tr>
-        <td>withCollectionName(String collectionName)</td>
-        <td>Set the collection name. Collection name cannot be empty or null.</td>
-        <td>collectionName: The target collection name.</td>
+        <td><p>withCollectionName(String collectionName)</p></td>
+        <td><p>Set the collection name. Collection name cannot be empty or null.</p></td>
+        <td><p>collectionName: The target collection name.</p></td>
     </tr>
     <tr>
-        <td>withPartitionNames(List\<String> partitionNames)</td>
-        <td>Set the partition names list. Partition names list cannot be null or empty.</td>
-        <td>partitionNames: The name list of partitions to be released.</td>
+        <td><p>withDatabaseName(String databaseName)</p></td>
+        <td><p>Sets the database name. database name can be null for default database.</p></td>
+        <td><p>databaseName: The database name.</p></td>
     </tr>
     <tr>
-        <td>addPartitionName(String partitionName)</td>
-        <td>Add a partition by name. Partition name cannot be empty or null.</td>
-        <td>partitionName: A target partition name.</td>
+        <td><p>withPartitionNames(List&lt;String> partitionNames)</p></td>
+        <td><p>Set the partition names list. Partition names list cannot be null or empty.</p></td>
+        <td><p>partitionNames: The name list of partitions to be released.</p></td>
     </tr>
     <tr>
-        <td>build()</td>
-        <td>Construct a ReleasePartitionsParam object.</td>
-        <td>N/A</td>
+        <td><p>addPartitionName(String partitionName)</p></td>
+        <td><p>Add a partition by name. Partition name cannot be empty or null.</p></td>
+        <td><p>partitionName: A target partition name.</p></td>
+    </tr>
+    <tr>
+        <td><p>build()</p></td>
+        <td><p>Construct a ReleasePartitionsParam object.</p></td>
+        <td><p>N/A</p></td>
     </tr>
 </table>
 
@@ -49,7 +54,7 @@ The `ReleasePartitionsParam.Builder.build()` can throw the following exceptions:
 
 - ParamException: error if the parameter is invalid.
 
-## Returns
+#### Returns
 
 This method catches all the exceptions and returns an `R<RpcStatus>` object.
 
@@ -59,7 +64,7 @@ This method catches all the exceptions and returns an `R<RpcStatus>` object.
 
 - If the API succeeds, it returns `R.Status.Success`.
 
-## Example
+#### Example
 
 ```java
 import io.milvus.param.*;

@@ -107,4 +107,3 @@ A **LocalBulkWriter** object.
 
 The following are the methods of the **LocalBulkWriter** class:
 
-<DocCardList />

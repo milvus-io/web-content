@@ -60,4 +60,3 @@ collectionSchema.addField(AddFieldReq.builder().fieldName("vector").dataType(Dat
 
 The following are the methods of the `CollectionSchema` class:
 
-<DocCardList />

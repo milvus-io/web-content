@@ -40,9 +40,9 @@ createCollection(CreateCollectionReq.builder()
 
 - `dimension(int dimension)`
 
-    The dimension of the collection field to hold vector embeddings.
+    The dimensionality of the collection field that holds vector embeddings.
 
-    The value is usually determined by the model you use to generate vector embeddings.
+    The value should be greater than 1 and is usually determined by the model you use to generate vector embeddings.
 
     This is required to set up a collection with default settings. Skip this parameter if you need to set up a collection with a customized schema.
 
@@ -92,7 +92,7 @@ createCollection(CreateCollectionReq.builder()
 
     The value defaults to **True**, indicating that the meta field is used.
 
-    If you create a collection with a schema, configure this parameter using the **[createSchema](./Collections-createSchema)** method.
+    If you create a collection with a schema, configure this parameter using the **[createSchema](createSchema.md)** method.
 
 - `numShards(int numShards)`
 
@@ -117,7 +117,7 @@ createCollection(CreateCollectionReq.builder()
 
 - `indexParams(List<IndexParam> indexParams)`
 
-    The parameters for building the index on the vector field in this collection. To set up a collection with a customized schema and automatically load the collection to memory, create an **IndexParams** object with a list of [IndexParam](https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md) objects and reference it here.
+    The parameters for building the index on the vector field in this collection. To set up a collection with a customized schema and automatically load the collection to memory, create an **IndexParams** object with a list of [IndexParam](../Management/IndexParam.md) objects and reference it here.
 
     You should at least add an index for the vector field in this collection. You can also skip this parameter if you prefer to set up the index parameters later on.
 

@@ -14,7 +14,7 @@ A MilvusClient interface. This method triggers a flush action in which all growi
 R<FlushResponse> flush(FlushParam requestParam);
 ```
 
-## FlushParam
+#### FlushParam
 
 Use the `FlushParam.Builder` to construct a `FlushParam` object.
 
@@ -27,39 +27,44 @@ Methods of `FlushParam.Builder`:
 
 <table>
     <tr>
-        <th>Method</th>
-        <th>Description</th>
-        <th>Parameters</th>
+        <th><p>Method</p></th>
+        <th><p>Description</p></th>
+        <th><p>Parameters</p></th>
     </tr>
     <tr>
-        <td>withCollectionNames(List\<String> collectionNames)</td>
-        <td>Sets a list of collections to be flushed.</td>
-        <td>collectionNames: a list of the names of the collections to be flushed.</td>
+        <td><p>withCollectionNames(List&lt;String> collectionNames)</p></td>
+        <td><p>Sets a list of collections to be flushed.</p></td>
+        <td><p>collectionNames: a list of the names of the collections to be flushed.</p></td>
     </tr>
     <tr>
-        <td>addCollectionName(String collectionName)</td>
-        <td>Adds a collection to be flushed.</td>
-        <td>collectionName: The name of the collection to be flushed.</td>
+        <td><p>addCollectionName(String collectionName)</p></td>
+        <td><p>Adds a collection to be flushed.</p></td>
+        <td><p>collectionName: The name of the collection to be flushed.</p></td>
     </tr>
     <tr>
-        <td>withSyncFlush(Boolean syncFlush)</td>
-        <td>Sets the flush function to sync mode. With sync mode enabled, the client keeps waiting until all segments of the collection are successfully flushed. If sync mode is disabled, the client immediately returns the result after flush() is called.</td>
-        <td>syncFlush: A Boolean value to indicate if sync mode is enabled. Sync mode is enabled if the value is set to True.</td>
+        <td><p>withDatabaseName(String databaseName)</p></td>
+        <td><p>Sets the database name. database name can be null for default database.</p></td>
+        <td><p>databaseName: The database name.</p></td>
     </tr>
     <tr>
-        <td>withSyncFlushWaitingInterval(Long milliseconds)</td>
-        <td>Sets the waiting interval in sync mode. With sync mode enabled, the client will check segments status at intervals. The value must be greater than zero, and cannot be greater than Constant.MAX<em>WAITING</em>FLUSHING_INTERVAL. The default value is 500 miliseconds.</td>
-        <td>milliseconds: The time interval in milliseconds for checking the flush status.</td>
+        <td><p>withSyncFlush(Boolean syncFlush)</p></td>
+        <td><p>Sets the flush function to sync mode. With sync mode enabled, the client keeps waiting until all segments of the collection are successfully flushed. If sync mode is disabled, the client immediately returns the result after flush() is called.</p></td>
+        <td><p>syncFlush: A Boolean value to indicate if sync mode is enabled. Sync mode is enabled if the value is set to True.</p></td>
     </tr>
     <tr>
-        <td><br/>withSyncFlushWaitingTimeout(Long seconds)</td>
-        <td>Sets the timeout period for sync mode. The value must be greater than zero, and cannot be greater than Constant.MAX<em>WAITING</em>FLUSHING_TIMEOUT. The default value is 60 seconds.</td>
-        <td>seconds: A during of time in seconds to wait till timeout.</td>
+        <td><p>withSyncFlushWaitingInterval(Long milliseconds)</p></td>
+        <td><p>Sets the waiting interval in sync mode. With sync mode enabled, the client will check segments status at intervals. The value must be greater than zero, and cannot be greater than Constant.MAX<em>WAITING</em>FLUSHING_INTERVAL. The default value is 500 miliseconds.</p></td>
+        <td><p>milliseconds: The time interval in milliseconds for checking the flush status.</p></td>
     </tr>
     <tr>
-        <td>build()</td>
-        <td>Constructs a FlushParam object.</td>
-        <td>N/A</td>
+        <td><p><br/>withSyncFlushWaitingTimeout(Long seconds)</p></td>
+        <td><p>Sets the timeout period for sync mode. The value must be greater than zero, and cannot be greater than Constant.MAX<em>WAITING</em>FLUSHING_TIMEOUT. The default value is 60 seconds.</p></td>
+        <td><p>seconds: A during of time in seconds to wait till timeout.</p></td>
+    </tr>
+    <tr>
+        <td><p>build()</p></td>
+        <td><p>Constructs a FlushParam object.</p></td>
+        <td><p>N/A</p></td>
     </tr>
 </table>
 
@@ -67,7 +72,7 @@ The `FlushParam.Builder.build()` can throw the following exceptions:
 
 - ParamException: error if the parameter is invalid.
 
-## Returns
+#### Returns
 
 This method catches all the exceptions and returns an `R<FlushResponse>` object.
 
@@ -77,7 +82,7 @@ This method catches all the exceptions and returns an `R<FlushResponse>` object.
 
 - If the API succeeds, it returns a valid `FlushResponse` held by the `R` template. The `FlushResponse` contains a map of the collection name and a corresponding list of flushed segments. The map is internally used by other SDK methods such as `createIndex()`.
 
-## Example
+#### Example
 
 ```java
 import io.milvus.param.*;

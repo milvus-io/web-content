@@ -6,7 +6,7 @@ MilvusClient interface. This method returns the runtime metrics information of M
 R<GetMetricsResponse> getMetrics(GetMetricsParam requestParam);
 ```
 
-## GetMetricsParam
+#### GetMetricsParam
 
 Use the `GetMetricsParam.Builder` to construct a `GetMetricsParam` object.
 
@@ -19,19 +19,19 @@ Methods of `GetMetricsParam.Builder`:
 
 <table>
     <tr>
-        <th>Method</th>
-        <th>Description</th>
-        <th>Parameters</th>
+        <th><p>Method</p></th>
+        <th><p>Description</p></th>
+        <th><p>Parameters</p></th>
     </tr>
     <tr>
-        <td><br/>withRequest(String request)</td>
-        <td>Set request in JSON format to retrieve metric information from server.</td>
-        <td>request: Request string in JSON format</td>
+        <td><p><br/>withRequest(String request)</p></td>
+        <td><p>Set request in JSON format to retrieve metric information from server.</p></td>
+        <td><p>request: Request string in JSON format</p></td>
     </tr>
     <tr>
-        <td>build()</td>
-        <td>Construct a GetMetricsParam object.</td>
-        <td>N/A</td>
+        <td><p>build()</p></td>
+        <td><p>Construct a GetMetricsParam object.</p></td>
+        <td><p>N/A</p></td>
     </tr>
 </table>
 
@@ -39,7 +39,7 @@ The `GetMetricsParam.Builder.build()` can throw the following exceptions:
 
 - ParamException: error if the parameter is invalid.
 
-## Returns
+#### Returns
 
 This method catches all the exceptions and returns an `R<GetMetricsResponse>` object.
 
@@ -49,14 +49,14 @@ This method catches all the exceptions and returns an `R<GetMetricsResponse>` ob
 
 - If the API succeeds, it returns a valid `GetMetricsResponse` held by the R template.
 
-## Example
+#### Example
 
 ```java
 import io.milvus.param.*;
 import io.milvus.grpc.GetMetricsResponse;
 
 GetMetricsParam param = GetMetricsParam.newBuilder()
-        .withRequest("\{\"metric_type\":\"system_info\"}")
+        .withRequest("{\"metric_type\":\"system_info\"}")
         .build();
 R<GetMetricsResponse> response = client.getMetrics(param);
 if (response.getStatus() != R.Status.Success.getCode()) {

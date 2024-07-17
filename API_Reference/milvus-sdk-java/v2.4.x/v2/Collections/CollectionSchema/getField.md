@@ -24,7 +24,7 @@ CollectionSchema.getField(String fieldName)
 
 **RETURNS:**
 
-A [FieldSchema](./FieldSchema) object containing details of the field.
+A [FieldSchema]() object containing details of the field.
 
 **EXCEPTIONS:**
 

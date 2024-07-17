@@ -11,38 +11,38 @@ Methods of MilvusClient for connection:
 
 <table>
    <tr>
-     <th><strong>Method</strong></th>
-     <th><strong>Description</strong></th>
-     <th><strong>Parameters</strong></th>
-     <th><strong>Returns</strong></th>
+     <th><p><strong>Method</strong></p></th>
+     <th><p><strong>Description</strong></p></th>
+     <th><p><strong>Parameters</strong></p></th>
+     <th><p><strong>Returns</strong></p></th>
    </tr>
    <tr>
-     <td>withTimeout(long timeout, TimeUnit timeoutUnit)<br/></td>
-     <td>Timeout setting for RPC call.<br/></td>
-     <td>timeout: The timeout period when invoking a method.<br/> timeoutUnit: The unit for timeout.</td>
-     <td>MilvusClient<br/></td>
+     <td><p>withTimeout(long timeout, TimeUnit timeoutUnit)</p></td>
+     <td><p>Timeout setting for RPC call.</p></td>
+     <td><p>timeout: The timeout period when invoking a method.</p><p>timeoutUnit: The unit for timeout.</p></td>
+     <td><p>MilvusClient</p></td>
    </tr>
    <tr>
-     <td>withRetry(RetryParam retryParam)</td>
-     <td>Sets the parameters for retry.<br/></td>
-     <td>retryParam: Parameter for retry on failure.</td>
-     <td>MilvusClient</td>
+     <td><p>withRetry(RetryParam retryParam)</p></td>
+     <td><p>Sets the parameters for retry.</p></td>
+     <td><p>retryParam: Parameter for retry on failure.</p></td>
+     <td><p>MilvusClient</p></td>
    </tr>
    <tr>
-     <td>close(long maxWaitSeconds)<br/></td>
-     <td>Disconnects from a Milvus server with a configurable timeout value. Call this method before the application terminates.<br/>This method throws an <code>InterruptedException</code> exception if it is interrupted.</td>
-     <td>maxWaitSeconds: The timeout period to wait for the RPC channel to close.</td>
-     <td>N/A<br/></td>
+     <td><p>close(long maxWaitSeconds)</p></td>
+     <td><p>Disconnects from a Milvus server with a configurable timeout value. Call this method before the application terminates.This method throws an <code>InterruptedException</code> exception if it is interrupted.</p></td>
+     <td><p>maxWaitSeconds: The timeout period to wait for the RPC channel to close.</p></td>
+     <td><p>N/A</p></td>
    </tr>
    <tr>
-     <td>setLogLevel(LogLevel level)<br/></td>
-     <td>Set log level in runtime.<br/>Note: this method cannot change the log level configured by log4j configurations. It only hides some logs inside the MilvusClient class.</td>
-     <td>level: A log level</td>
-     <td>N/A</td>
+     <td><p>setLogLevel(LogLevel level)</p></td>
+     <td><p>Set log level in runtime.Note: this method cannot change the log level configured by log4j configurations. It only hides some logs inside the MilvusClient class.</p></td>
+     <td><p>level: A log level</p></td>
+     <td><p>N/A</p></td>
    </tr>
 </table>
 
-## ConnectParam
+#### ConnectParam
 
 Use the ConnectParam.Builder to construct a ConnectParam object for the MilvusClient.
 
@@ -55,79 +55,104 @@ Methods of ConnectParam.Builder:
 
 <table>
     <tr>
-        <th>Method</th>
-        <th>Description</th>
-        <th>Patameters</th>
+        <th><p>Method</p></th>
+        <th><p>Description</p></th>
+        <th><p>Patameters</p></th>
     </tr>
     <tr>
-        <td>withHost(String host)</td>
-        <td>Sets the host name or address.</td>
-        <td>host: The name or address of the host.</td>
+        <td><p>withHost(String host)</p></td>
+        <td><p>Sets the host name or address.</p></td>
+        <td><p>host: The name or address of the host.</p></td>
     </tr>
     <tr>
-        <td>withPort(int port)</td>
-        <td>Sets the connection port. <br/>The value must be greater than zero and less than 65536.</td>
-        <td>port: The connection port.</td>
+        <td><p>withPort(int port)</p></td>
+        <td><p>Sets the connection port. <br/>The value must be greater than zero and less than 65536.</p></td>
+        <td><p>port: The connection port.</p></td>
     </tr>
     <tr>
-        <td>withConnectTimeout(long connectTimeout, TimeUnit timeUnit)</td>
-        <td>Sets the connection timeout value of client channel. The timeout value must be greater than zero. The default value is 10 seconds.</td>
-        <td>connectTimeout: The connection timeout period.<br/>timeUnit: The unit of timeout.</td>
+        <td><p>withUri(String uri)</p></td>
+        <td><p>Sets the uri of remote service.</p></td>
+        <td><p>uri: The uri of remote service.</p></td>
     </tr>
     <tr>
-        <td>withKeepAliveTime(long keepAliveTime, TimeUnit timeUnit)</td>
-        <td>Sets the keep-alive time value of the client channel. The time value must be greater than zero. The default value is 55 seconds.</td>
-        <td>keepAliveTime: The keep-alive time period.<br/>timeUnit: The unit of time.</td>
+        <td><p>withToken(String token)</p></td>
+        <td><p>Sets the token of remote service.</p></td>
+        <td><p>token: serving as the key for identification and authentication purposes.</p></td>
     </tr>
     <tr>
-        <td>withKeepAliveTimeout(long keepAliveTimeout, TimeUnit timeUnit)</td>
-        <td>Sets the keep-alive timeout value of client channel. The timeout value must be greater than zero. The default value is 20 seconds.</td>
-        <td>keepAliveTimeout: The keep-alive timeout value.<br/>timeUnit: The unit of timeout.</td>
+        <td><p>withDatabaseName(String databaseName)</p></td>
+        <td><p>Sets the database name. database name can be null for default database.</p></td>
+        <td><p>databaseName: The database name.</p></td>
     </tr>
     <tr>
-        <td>keepAliveWithoutCalls(boolean enable)</td>
-        <td>Enables the keep-alive function for the client channel. The default value is false.</td>
-        <td>enable: Boolean value to indicate if the keep-alive function is enabled. The keep-alive function is enabled if the value is set to true.</td>
+        <td><p>withConnectTimeout(long connectTimeout, TimeUnit timeUnit)</p></td>
+        <td><p>Sets the connection timeout value of client channel. The timeout value must be greater than zero. The default value is 10 seconds.</p></td>
+        <td><p>connectTimeout: The connection timeout period.<br/>timeUnit: The unit of timeout.</p></td>
     </tr>
     <tr>
-        <td>secure(boolean enable)<br/>withSecure(boolean enable)</td>
-        <td>Enables security for the client channel.</td>
-        <td>enable: Security is enabled if the value is set to true.</td>
+        <td><p>withKeepAliveTime(long keepAliveTime, TimeUnit timeUnit)</p></td>
+        <td><p>Sets the keep-alive time value of the client channel. The time value must be greater than zero. The default value is 55 seconds.</p></td>
+        <td><p>keepAliveTime: The keep-alive time period.<br/>timeUnit: The unit of time.</p></td>
     </tr>
     <tr>
-        <td>withIdleTimeout(long idleTimeout, TimeUnit timeUnit)</td>
-        <td>Sets the value of idle timeout of the client channel. The timeout value must be greater than zero. The default value is 24 hours.</td>
-        <td>idleTimeout: The idle timeout period of the client channel.<br/>timeUnit: The unit of timeout.</td>
+        <td><p>withKeepAliveTimeout(long keepAliveTimeout, TimeUnit timeUnit)</p></td>
+        <td><p>Sets the keep-alive timeout value of client channel. The timeout value must be greater than zero. The default value is 20 seconds.</p></td>
+        <td><p>keepAliveTimeout: The keep-alive timeout value.<br/>timeUnit: The unit of timeout.</p></td>
     </tr>
     <tr>
-        <td>withAuthorization(String username, String password)</td>
-        <td>Sets the username and password for this connection.</td>
-        <td>username: The username of the current user.<br/>password: The password corresponding to the username.</td>
+        <td><p>keepAliveWithoutCalls(boolean enable)</p></td>
+        <td><p>Enables the keep-alive function for the client channel. The default value is false.</p></td>
+        <td><p>enable: Boolean value to indicate if the keep-alive function is enabled. The keep-alive function is enabled if the value is set to true.</p></td>
     </tr>
     <tr>
-        <td>withClientKeyPath(String clientKeyPath)</td>
-        <td>Set the client.key path for tls two-way authentication, only takes effect when "secure" is True.</td>
-        <td>clientKeyPath: The local path of client.key</td>
+        <td><p>secure(boolean enable)<br/>withSecure(boolean enable)</p></td>
+        <td><p>Enables security for the client channel.</p></td>
+        <td><p>enable: Security is enabled if the value is set to true.</p></td>
     </tr>
     <tr>
-        <td>withClientPemPath(String clientPemPath)</td>
-        <td>Set the client.pem path for tls two-way authentication, only takes effect when "secure" is True.</td>
-        <td>clientPemPath: The local path of client.pem</td>
+        <td><p>withIdleTimeout(long idleTimeout, TimeUnit timeUnit)</p></td>
+        <td><p>Sets the value of idle timeout of the client channel. The timeout value must be greater than zero. The default value is 24 hours.</p></td>
+        <td><p>idleTimeout: The idle timeout period of the client channel.<br/>timeUnit: The unit of timeout.</p></td>
     </tr>
     <tr>
-        <td>withCaPemPath(String caPemPath)</td>
-        <td>Set the ca.pem path for tls two-way authentication, only takes effect when "secure" is True.</td>
-        <td>caPemPath: The local path of ca.pem</td>
+        <td><p>withRpcDeadline(long deadline, TimeUnit timeUnit)</p></td>
+        <td><p>Set a deadline for how long you are willing to wait for a reply from the server.<br/>With a deadline setting, the client will wait when encounter fast RPC fail caused by network fluctuations.<br/>The deadline value must be larger than or equal to zero. Default value is 0, deadline is disabled.</p></td>
+        <td><p>deadline: deadline value<br/>timeUnit: deadline unit</p></td>
     </tr>
     <tr>
-        <td>withServerPemPath(String serverPemPath)</td>
-        <td>Set the server.pem path for tls one-way authentication, only takes effect when "secure" is True.</td>
-        <td>serverPemPath: The local path of server.pem</td>
+        <td><p>withAuthorization(String username, String password)</p></td>
+        <td><p>Sets the username and password for this connection.</p></td>
+        <td><p>username: The username of the current user.<br/>password: The password corresponding to the username.</p></td>
     </tr>
     <tr>
-        <td>build()</td>
-        <td>Constructs a ConnectParam object.</td>
-        <td>N/A</td>
+        <td><p>withClientKeyPath(String clientKeyPath)</p></td>
+        <td><p>Set the client.key path for tls two-way authentication, only takes effect when "secure" is True.</p></td>
+        <td><p>clientKeyPath: The local path of client.key</p></td>
+    </tr>
+    <tr>
+        <td><p>withClientPemPath(String clientPemPath)</p></td>
+        <td><p>Set the client.pem path for tls two-way authentication, only takes effect when "secure" is True.</p></td>
+        <td><p>clientPemPath: The local path of client.pem</p></td>
+    </tr>
+    <tr>
+        <td><p>withCaPemPath(String caPemPath)</p></td>
+        <td><p>Set the ca.pem path for tls two-way authentication, only takes effect when "secure" is True.</p></td>
+        <td><p>caPemPath: The local path of ca.pem</p></td>
+    </tr>
+    <tr>
+        <td><p>withServerPemPath(String serverPemPath)</p></td>
+        <td><p>Set the server.pem path for tls one-way authentication, only takes effect when "secure" is True.</p></td>
+        <td><p>serverPemPath: The local path of server.pem</p></td>
+    </tr>
+    <tr>
+        <td><p>withServerName(String serverName)</p></td>
+        <td><p>Set target name override for SSL host name checking, only takes effect when "secure" is True.<br/>Note: this value is passed to grpc.ssl<em>target</em>name_override</p></td>
+        <td><p>serverName: The override name for SSL host.</p></td>
+    </tr>
+    <tr>
+        <td><p>build()</p></td>
+        <td><p>Constructs a ConnectParam object.</p></td>
+        <td><p>N/A</p></td>
     </tr>
 </table>
 
@@ -135,7 +160,7 @@ The ConnectParam.Builder.build() can throw the following exceptions:
 
 - ParamException: error if the parameter is invalid.
 
-## RetryParam
+#### RetryParam
 
 Use the RetryParam.Builder to construct a RetryParam object for the MilvusClient.
 
@@ -148,39 +173,39 @@ Methods of RetryParam.Builder:
 
 <table>
     <tr>
-        <th>Method</th>
-        <th>Description</th>
-        <th>Patameters</th>
+        <th><p>Method</p></th>
+        <th><p>Description</p></th>
+        <th><p>Patameters</p></th>
     </tr>
     <tr>
-        <td>withMaxRetryTimes(int maxRetryTimes)</td>
-        <td>Sets the max retry times on failure.Default value is 75.</td>
-        <td>maxRetryTimes: The maxinum times to retry.</td>
+        <td><p>withMaxRetryTimes(int maxRetryTimes)</p></td>
+        <td><p>Sets the max retry times on failure.Default value is 75.</p></td>
+        <td><p>maxRetryTimes: The maxinum times to retry.</p></td>
     </tr>
     <tr>
-        <td>withInitialBackOffMs(long initialBackOffMs)</td>
-        <td>Sets the first time interval between two retries, units: millisecond. Default value is 10ms.</td>
-        <td>initialBackOffMs: Retry initial interval value in milliseconds.</td>
+        <td><p>withInitialBackOffMs(long initialBackOffMs)</p></td>
+        <td><p>Sets the first time interval between two retries, units: millisecond. Default value is 10ms.</p></td>
+        <td><p>initialBackOffMs: Retry initial interval value in milliseconds.</p></td>
     </tr>
     <tr>
-        <td>withMaxBackOffMs(long maxBackOffMs)</td>
-        <td>Sets the maximum time interval between two retries, units: millisecond. Default value is 3000ms.</td>
-        <td>maxBackOffMs: Retry maximum interval value in milliseconds.</td>
+        <td><p>withMaxBackOffMs(long maxBackOffMs)</p></td>
+        <td><p>Sets the maximum time interval between two retries, units: millisecond. Default value is 3000ms.</p></td>
+        <td><p>maxBackOffMs: Retry maximum interval value in milliseconds.</p></td>
     </tr>
     <tr>
-        <td>withBackOffMultiplier(int backOffMultiplier)</td>
-        <td>Sets multiplier to increase time interval after each retry. Default value is 3.</td>
-        <td>backOffMultiplier: The multiplier to increase time interval after each retry.</td>
+        <td><p>withBackOffMultiplier(int backOffMultiplier)</p></td>
+        <td><p>Sets multiplier to increase time interval after each retry. Default value is 3.</p></td>
+        <td><p>backOffMultiplier: The multiplier to increase time interval after each retry.</p></td>
     </tr>
     <tr>
-        <td>withRetryOnRateLimie(boolean retryOnRateLimie)</td>
-        <td>Sets whether to retry when the returned error is rate limit. Default value is true.</td>
-        <td>retryOnRateLimit: Whether to retry when the returned error is rate limit.</td>
+        <td><p>withRetryOnRateLimie(boolean retryOnRateLimie)</p></td>
+        <td><p>Sets whether to retry when the returned error is rate limit. Default value is true.</p></td>
+        <td><p>retryOnRateLimit: Whether to retry when the returned error is rate limit.</p></td>
     </tr>
     <tr>
-        <td>build()</td>
-        <td>Constructs a RetryParam object.</td>
-        <td>N/A</td>
+        <td><p>build()</p></td>
+        <td><p>Constructs a RetryParam object.</p></td>
+        <td><p>N/A</p></td>
     </tr>
 </table>
 
@@ -188,7 +213,7 @@ The RetryParam.Builder.build() can throw the following exceptions:
 
 - ParamException: error if the parameter is invalid.
 
-## Example
+#### Example
 
 - Without timeout setting for RPC call:
 

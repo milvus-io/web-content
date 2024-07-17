@@ -6,7 +6,7 @@ A MilvusClient interface. This method gets the information of persistent segment
 R<GetPersistentSegmentInfoResponse> getPersistentSegmentInfo(GetPersistentSegmentInfoParam requestParam);
 ```
 
-## GetPersistentSegmentInfoParam
+#### GetPersistentSegmentInfoParam
 
 Use the `GetPersistentSegmentInfoParam.Builder` to construct a `GetPersistentSegmentInfoParam` object.
 
@@ -19,19 +19,19 @@ Methods of `GetPersistentSegmentInfoParam.Builder`:
 
 <table>
     <tr>
-        <th>Method</th>
-        <th>Description</th>
-        <th>Parameters</th>
+        <th><p>Method</p></th>
+        <th><p>Description</p></th>
+        <th><p>Parameters</p></th>
     </tr>
     <tr>
-        <td>withCollectionName(String collectionName)</td>
-        <td>Sets the collection name. Collection name cannot be empty or null.</td>
-        <td>collectionName: The name of the collection.</td>
+        <td><p>withCollectionName(String collectionName)</p></td>
+        <td><p>Sets the collection name. Collection name cannot be empty or null.</p></td>
+        <td><p>collectionName: The name of the collection.</p></td>
     </tr>
     <tr>
-        <td>build()</td>
-        <td>Constructs a GetPersistentSegmentInfoParam object.</td>
-        <td>N/A</td>
+        <td><p>build()</p></td>
+        <td><p>Constructs a GetPersistentSegmentInfoParam object.</p></td>
+        <td><p>N/A</p></td>
     </tr>
 </table>
 
@@ -39,7 +39,7 @@ The `GetPersistentSegmentInfoParam.Builder.build()` can throw the following exce
 
 - ParamException: error if the parameter is invalid.
 
-## Returns
+#### Returns
 
 This method catches all the exceptions and returns an `R<GetPersistentSegmentInfoResponse>` object.
 
@@ -49,7 +49,7 @@ This method catches all the exceptions and returns an `R<GetPersistentSegmentInf
 
 - If the API succeeds, it returns a valid `GetPersistentSegmentInfoResponse` held by the `R` template. The `GetPersistentSegmentInfoResponse` object contains a list of `PersistentSegmentInfo`, and you can use `PersistentSegmentInfo.getState()` to get the state of the segment.
 
-## SegmentState
+#### SegmentState
 
 ```java
 package io.milvus.grpc;
@@ -58,53 +58,53 @@ public enum SegmentState
 
 <table>
    <tr>
-     <th><strong>Type</strong></th>
-     <th><strong>Code</strong></th>
-     <th><strong>Description</strong></th>
+     <th><p><strong>Type</strong></p></th>
+     <th><p><strong>Code</strong></p></th>
+     <th><p><strong>Description</strong></p></th>
    </tr>
    <tr>
-     <td>SegmentStateNone</td>
-     <td>0</td>
-     <td>For internal usage.</td>
+     <td><p>SegmentStateNone</p></td>
+     <td><p>0</p></td>
+     <td><p>For internal usage.</p></td>
    </tr>
    <tr>
-     <td>NotExist</td>
-     <td>1</td>
-     <td>For internal usage.</td>
+     <td><p>NotExist</p></td>
+     <td><p>1</p></td>
+     <td><p>For internal usage.</p></td>
    </tr>
    <tr>
-     <td>Growing</td>
-     <td>2</td>
-     <td>A growing segment in query node.</td>
+     <td><p>Growing</p></td>
+     <td><p>2</p></td>
+     <td><p>A growing segment in query node.</p></td>
    </tr>
    <tr>
-     <td>Sealed</td>
-     <td>3</td>
-     <td>The segment is sealed and waiting to be flushed.</td>
+     <td><p>Sealed</p></td>
+     <td><p>3</p></td>
+     <td><p>The segment is sealed and waiting to be flushed.</p></td>
    </tr>
    <tr>
-     <td>Flushed</td>
-     <td>4</td>
-     <td>The segment has been flushed to storage.</td>
+     <td><p>Flushed</p></td>
+     <td><p>4</p></td>
+     <td><p>The segment has been flushed to storage.</p></td>
    </tr>
    <tr>
-     <td>Flushing</td>
-     <td>5</td>
-     <td>The server is flushing this segment.</td>
+     <td><p>Flushing</p></td>
+     <td><p>5</p></td>
+     <td><p>The server is flushing this segment.</p></td>
    </tr>
    <tr>
-     <td>Dropped</td>
-     <td>6</td>
-     <td>The segment has been marked as deleted.</td>
+     <td><p>Dropped</p></td>
+     <td><p>6</p></td>
+     <td><p>The segment has been marked as deleted.</p></td>
    </tr>
    <tr>
-     <td>Importing</td>
-     <td>7</td>
-     <td>Reserved for bulkinsert interface.</td>
+     <td><p>Importing</p></td>
+     <td><p>7</p></td>
+     <td><p>Reserved for bulkinsert interface.</p></td>
    </tr>
 </table>
 
-## Example
+#### Example
 
 ```java
 import io.milvus.param.*;

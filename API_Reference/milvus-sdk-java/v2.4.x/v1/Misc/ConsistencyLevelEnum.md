@@ -9,23 +9,23 @@ public enum ConsistencyLevelEnum
 
 <table>
    <tr>
-     <th><strong>Type</strong></th>
-     <th><strong>Code</strong></th>
-     <th><strong>Description</strong></th>
+     <th><p><strong>Type</strong></p></th>
+     <th><p><strong>Code</strong></p></th>
+     <th><p><strong>Description</strong></p></th>
    </tr>
    <tr>
-     <td>STRONG</td>
-     <td>0</td>
-     <td>Waits until all operations are completed before a search/query.</td>
+     <td><p>STRONG</p></td>
+     <td><p>0</p></td>
+     <td><p>Waits until all operations are completed before a search/query.</p></td>
    </tr>
    <tr>
-     <td>BOUNDED</td>
-     <td>2</td>
-     <td>Waits until operations in a time span are completed before a search/query.</td>
+     <td><p>BOUNDED</p></td>
+     <td><p>2</p></td>
+     <td><p>Waits until operations in a time span are completed before a search/query.</p></td>
    </tr>
    <tr>
-     <td>EVENTUALLY</td>
-     <td>3</td>
-     <td>Executes a search/query immediately.</td>
+     <td><p>EVENTUALLY</p></td>
+     <td><p>3</p></td>
+     <td><p>Executes a search/query immediately.</p></td>
    </tr>
 </table>

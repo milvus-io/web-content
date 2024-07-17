@@ -6,7 +6,7 @@ MilvusClient interface. This method creates an empty resource group with a name.
 R<RpcStatus> createResourceGroup(CreateResourceGroupParam requestParam);
 ```
 
-## CreateResourceGroupParam 
+#### CreateResourceGroupParam
 
 Use the `CreateResourceGroupParam.Builder` to construct a CreateResourceGroupParam object.
 
@@ -19,19 +19,19 @@ Methods of `CreateResourceGroupParam.Builder`:
 
 <table>
     <tr>
-        <th>Method</th>
-        <th>Description</th>
-        <th>Parameters</th>
+        <th><p>Method</p></th>
+        <th><p>Description</p></th>
+        <th><p>Parameters</p></th>
     </tr>
     <tr>
-        <td>withGroupName(String groupName)</td>
-        <td>Sets the group name. groupName cannot be empty or null.</td>
-        <td>groupName: The name of the group to be created.</td>
+        <td><p>withGroupName(String groupName)</p></td>
+        <td><p>Sets the group name. groupName cannot be empty or null.</p></td>
+        <td><p>groupName: The name of the group to be created.</p></td>
     </tr>
     <tr>
-        <td>build()</td>
-        <td>Construct a CreateResourceGroupParam object.</td>
-        <td>N/A</td>
+        <td><p>build()</p></td>
+        <td><p>Construct a CreateResourceGroupParam object.</p></td>
+        <td><p>N/A</p></td>
     </tr>
 </table>
 
@@ -39,7 +39,7 @@ The `CreateResourceGroupParam.Builder.build()` can throw the following exception
 
 - ParamException: error if the parameter is invalid.
 
-## Returns
+#### Returns
 
 This method catches all the exceptions and returns an `R<RpcStatus>` object.
 
@@ -49,7 +49,7 @@ This method catches all the exceptions and returns an `R<RpcStatus>` object.
 
 - If the API succeeds, it returns R.Status.Success.
 
-## Example
+#### Example
 
 ```java
 import io.milvus.param.CreateResourceGroupParam;

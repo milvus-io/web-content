@@ -36,10 +36,6 @@ This is an enumeration that provides the following constants.
 
     Sets the data type to **Double**.
 
-- String(20)
-
-    Sets the data type to **String**.
-
 - VarChar(21)
 
     Sets the data type to **VarChar**.
@@ -67,4 +63,8 @@ This is an enumeration that provides the following constants.
 - BFloat16Vector(103)
 
     Sets the data type to **BFloat16 Vector**.
+
+- SparseFloatVector(104)
+
+      Sets the data type to Sparse Vector.
 

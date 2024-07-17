@@ -6,7 +6,7 @@ A MilvusClient interface. This method alters an alias from one collection to ano
 R<RpcStatus> alterAlias(AlterAliasParam requestParam);
 ```
 
-## AlterAliasParam
+#### AlterAliasParam
 
 Use the `AlterAliasParam.Builder` to construct an `AlterAliasParam` object.
 
@@ -19,23 +19,28 @@ Methods of `AlterAliasParam.Builder`:
 
 <table>
     <tr>
-        <th>Method</th>
-        <th>Description</th>
-        <th>Parameters</th>
+        <th><p>Method</p></th>
+        <th><p>Description</p></th>
+        <th><p>Parameters</p></th>
     </tr>
     <tr>
-        <td><br/>withCollectionName(String collectionName)</td>
-        <td>Sets the target collection name. Collection name cannot be empty or null.</td>
-        <td>collectionName: The name of the target collection to alter the alias to.</td>
+        <td><p><br/>withCollectionName(String collectionName)</p></td>
+        <td><p>Sets the target collection name. Collection name cannot be empty or null.</p></td>
+        <td><p>collectionName: The name of the target collection to alter the alias to.</p></td>
     </tr>
     <tr>
-        <td>withAlias(String alias)</td>
-        <td>Sets the collection alias to alter. Collection alias cannot be empty or null.</td>
-        <td>alias: The alias to alter.</td>
+        <td><p>withDatabaseName(String databaseName)</p></td>
+        <td><p>Sets the database name. database name can be null for default database.</p></td>
+        <td><p>databaseName: The database name.</p></td>
     </tr>
     <tr>
-        <td>build()</td>
-        <td>Constructs a CreateAliasParam object.</td>
+        <td><p>withAlias(String alias)</p></td>
+        <td><p>Sets the collection alias to alter. Collection alias cannot be empty or null.</p></td>
+        <td><p>alias: The alias to alter.</p></td>
+    </tr>
+    <tr>
+        <td><p>build()</p></td>
+        <td><p>Constructs a CreateAliasParam object.</p></td>
         <td></td>
     </tr>
 </table>
@@ -44,7 +49,7 @@ The `AlterAliasParam.Builder.build()` can throw the following exceptions:
 
 - ParamException: error if the parameter is invalid.
 
-## Returns
+#### Returns
 
 This method catches all the exceptions and returns an `R<RpcStatus>` object.
 
@@ -54,7 +59,7 @@ This method catches all the exceptions and returns an `R<RpcStatus>` object.
 
 - If the API succeeds, it returns `R.Status.Success`.
 
-## Example
+#### Example
 
 ```java
 import io.milvus.param.*;

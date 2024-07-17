@@ -18,7 +18,7 @@ JinaEmbeddingFunction(
 )
 ```
 
-**Parameters**:
+**PARAMETERS:**
 
 - **model_name** (*string*)
 
@@ -42,5 +42,3 @@ jina_ef = JinaEmbeddingFunction(
     api_key="YOUR_JINAAI_API_KEY" # Provide your Jina AI API key
 )
 ```
-
-<DocCardList />

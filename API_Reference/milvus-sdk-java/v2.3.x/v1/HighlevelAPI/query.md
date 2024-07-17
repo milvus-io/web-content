@@ -6,7 +6,7 @@ The MilvusClient interface. This method queries entity(s) based on scalar field(
 R<QueryResponse> query(QuerySimpleParam requestParam);
 ```
 
-## QuerySimpleParam
+#### QuerySimpleParam
 
 Use the `QuerySimpleParam.Builder` to construct a `QuerySimpleParam` object.
 
@@ -19,44 +19,44 @@ Methods of `QuerySimpleParam.Builder`:
 
 <table>
     <tr>
-        <th>Method</th>
-        <th>Description</th>
-        <th>Parameters</th>
+        <th><p>Method</p></th>
+        <th><p>Description</p></th>
+        <th><p>Parameters</p></th>
     </tr>
     <tr>
-        <td>withCollectionName(collectionName)</td>
-        <td>Set the collection name. Collection name cannot be empty or null.</td>
-        <td>collectionName: The target collection name.</td>
+        <td><p>withCollectionName(collectionName)</p></td>
+        <td><p>Set the collection name. Collection name cannot be empty or null.</p></td>
+        <td><p>collectionName: The target collection name.</p></td>
     </tr>
     <tr>
-        <td>withOutputFields(List\<String> outputFields)</td>
-        <td>Specifies output scalar fields (Optional).<br/>If output fields are specified, the QueryResults returned by query() will contains the values of these fields.</td>
-        <td><br/>outputFields: The name list of fields to be outputed.</td>
+        <td><p>withOutputFields(List&lt;String> outputFields)</p></td>
+        <td><p>Specifies output scalar fields (Optional).<br/>If output fields are specified, the QueryResults returned by query() will contains the values of these fields.</p></td>
+        <td><p><br/>outputFields: The name list of fields to be outputed.</p></td>
     </tr>
     <tr>
-        <td>withFilter(String filter)</td>
-        <td>Set the expression to query entities. For more information please refer to <a href="https://milvus.io/docs/v2.1.x/boolean.md">this doc</a>.</td>
-        <td>filter: The expression to query.</td>
+        <td><p>withFilter(String filter)</p></td>
+        <td><p>Set the expression to query entities. For more information please refer to <a href="https://milvus.io/docs/v2.1.x/boolean.md">this doc</a>.</p></td>
+        <td><p>filter: The expression to query.</p></td>
     </tr>
     <tr>
-        <td>withOffset(Long offset)</td>
-        <td>Specify a position, the returned entities before this position will be ignored. Only take effect when the 'limit' value is specified.Default value is 0, start from begin.</td>
-        <td>offset: A value to define the position.</td>
+        <td><p>withOffset(Long offset)</p></td>
+        <td><p>Specify a position, the returned entities before this position will be ignored. Only take effect when the 'limit' value is specified.Default value is 0, start from begin.</p></td>
+        <td><p>offset: A value to define the position.</p></td>
     </tr>
     <tr>
-        <td>withLimit(Long limit)</td>
-        <td>Specify a value to control the returned number of entities. Must be a positive value.Default value is 0, will return without limit.</td>
-        <td>limit: A value to define the limit of returned entities.</td>
+        <td><p>withLimit(Long limit)</p></td>
+        <td><p>Specify a value to control the returned number of entities. Must be a positive value.Default value is 0, will return without limit.</p></td>
+        <td><p>limit: A value to define the limit of returned entities.</p></td>
     </tr>
     <tr>
-        <td>withConsistencyLevel(ConsistencyLevelEnum consistencyLevel)</td>
-        <td>Consistency level used in the query. If no level is specified, will use default consistency. Please refer to ConsistencyLevelEnum in Misc.</td>
-        <td>consistencyLevel: The consistency level used in the query.</td>
+        <td><p>withConsistencyLevel(ConsistencyLevelEnum consistencyLevel)</p></td>
+        <td><p>Consistency level used in the query. If no level is specified, will use default consistency. Please refer to ConsistencyLevelEnum in Misc.</p></td>
+        <td><p>consistencyLevel: The consistency level used in the query.</p></td>
     </tr>
     <tr>
-        <td>build()</td>
-        <td>Construct a QuerySimpleParam object.</td>
-        <td>N/A</td>
+        <td><p>build()</p></td>
+        <td><p>Construct a QuerySimpleParam object.</p></td>
+        <td><p>N/A</p></td>
     </tr>
 </table>
 
@@ -64,7 +64,7 @@ The `QuerySimpleParam.Builder.build()` can throw the following exceptions:
 
 - ParamException: error if the parameter is invalid.
 
-## Returns
+#### Returns
 
 This method catches all the exceptions and returns an `R<QueryResponse>` object.
 
@@ -74,7 +74,7 @@ This method catches all the exceptions and returns an `R<QueryResponse>` object.
 
 - If the API succeeds, it returns valid `QueryResponse` held by the `R` template.
 
-## Example
+#### Example
 
 ```java
 import io.milvus.param.*;

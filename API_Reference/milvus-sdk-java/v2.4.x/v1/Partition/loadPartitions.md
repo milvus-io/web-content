@@ -6,7 +6,7 @@ MilvusClient interface. This method loads partitions' data into query nodes' mem
 R<RpcStatus> loadPartitions(LoadPartitionsParam requestParam);
 ```
 
-## LoadPartitionsParam
+#### LoadPartitionsParam
 
 Use the `LoadPartitionsParam.Builder` to construct a `LoadPartitionsParam` object.
 
@@ -19,54 +19,59 @@ Methods of `LoadPartitionsParam.Builder`:
 
 <table>
     <tr>
-        <th>Method</th>
-        <th>Description</th>
-        <th>Parameters</th>
+        <th><p>Method</p></th>
+        <th><p>Description</p></th>
+        <th><p>Parameters</p></th>
     </tr>
     <tr>
-        <td>withCollectionName(String collectionName)</td>
-        <td>Set the collection name. Collection name cannot be empty or null.</td>
-        <td>collectionName: The target collection name.</td>
+        <td><p>withCollectionName(String collectionName)</p></td>
+        <td><p>Set the collection name. Collection name cannot be empty or null.</p></td>
+        <td><p>collectionName: The target collection name.</p></td>
     </tr>
     <tr>
-        <td>withPartitionNames(List\<String> partitionNames)</td>
-        <td>Set the partition names list. Partition names list cannot be null or empty.</td>
-        <td>partitionNames: <br/>The name list of partitions to be loaded.</td>
+        <td><p>withDatabaseName(String databaseName)</p></td>
+        <td><p>Sets the database name. database name can be null for default database.</p></td>
+        <td><p>databaseName: The database name.</p></td>
     </tr>
     <tr>
-        <td>addPartitionName(String partitionName)</td>
-        <td>Add a partition by name. Partition name cannot be empty or null.</td>
-        <td>partitionName: A target partition name.</td>
+        <td><p>withPartitionNames(List&lt;String> partitionNames)</p></td>
+        <td><p>Set the partition names list. Partition names list cannot be null or empty.</p></td>
+        <td><p>partitionNames: <br/>The name list of partitions to be loaded.</p></td>
     </tr>
     <tr>
-        <td>withSyncLoad(Boolean syncLoad)</td>
-        <td>Enable sync mode for load action. With sync mode enabled, the client keeps waiting until all segments of the partition are successfully loaded.If sync mode is disabled, client returns instantly after the loadPartitions() is called.<br/>By default sync mode is enabled.</td>
-        <td>syncLoad: set to True is sync mode</td>
+        <td><p>addPartitionName(String partitionName)</p></td>
+        <td><p>Add a partition by name. Partition name cannot be empty or null.</p></td>
+        <td><p>partitionName: A target partition name.</p></td>
     </tr>
     <tr>
-        <td>withSyncLoadWaitingInterval(Long milliseconds)</td>
-        <td>Set the waiting interval for sync mode. In sync mode, the client constantly checks partition load state by interval.<br/>Interval must be greater than zero, and cannot be greater than <code>Constant.MAX_WAITING_LOADING_INTERVAL</code>.<br/>Default value is 500 milliseconds</td>
-        <td>milliseconds: interval value(units: millisecond)</td>
+        <td><p>withSyncLoad(Boolean syncLoad)</p></td>
+        <td><p>Enable sync mode for load action. With sync mode enabled, the client keeps waiting until all segments of the partition are successfully loaded.If sync mode is disabled, client returns instantly after the loadPartitions() is called.<br/>By default sync mode is enabled.</p></td>
+        <td><p>syncLoad: set to True is sync mode</p></td>
     </tr>
     <tr>
-        <td>withSyncLoadWaitingTimeout(Long seconds)</td>
-        <td>Set the timeout value for sync mode.<br/>Timeout value must be greater than zero, and cannot be greater than <code>Constant.MAX_WAITING_LOADING_TIMEOUT</code>.<br/>Default value is 60 seconds.</td>
-        <td>seconds: timeout value(units: second)</td>
+        <td><p>withSyncLoadWaitingInterval(Long milliseconds)</p></td>
+        <td><p>Set the waiting interval for sync mode. In sync mode, the client constantly checks partition load state by interval.<br/>Interval must be greater than zero, and cannot be greater than <code>Constant.MAX_WAITING_LOADING_INTERVAL</code>.<br/>Default value is 500 milliseconds</p></td>
+        <td><p>milliseconds: interval value(units: millisecond)</p></td>
     </tr>
     <tr>
-        <td>withReplicaNumber(Integer replicaNumber)</td>
-        <td>Specify replica number to load.<br/>Default value is 1.</td>
-        <td>replicaNumber: replica number</td>
+        <td><p>withSyncLoadWaitingTimeout(Long seconds)</p></td>
+        <td><p>Set the timeout value for sync mode.<br/>Timeout value must be greater than zero, and cannot be greater than <code>Constant.MAX_WAITING_LOADING_TIMEOUT</code>.<br/>Default value is 60 seconds.</p></td>
+        <td><p>seconds: timeout value(units: second)</p></td>
     </tr>
     <tr>
-        <td>withRefresh(Boolean refresh)</td>
-        <td>Whether to renew the segment list of this partition before loading. This flag must be set to FALSE when first time call the loadPartitions(). After loading a partition, call loadPartitions() again with refresh=TRUE, the server will look for new segments that are not loaded yet and tries to load them up.<br/>This method is mainly for bulkinsert() interface.</td>
-        <td>refresh: The flag whether to renew segment list.</td>
+        <td><p>withReplicaNumber(Integer replicaNumber)</p></td>
+        <td><p>Specify replica number to load.<br/>Default value is 1.</p></td>
+        <td><p>replicaNumber: replica number</p></td>
     </tr>
     <tr>
-        <td>build()</td>
-        <td>Construct a LoadPartitionsParam object.</td>
-        <td>N/A</td>
+        <td><p>withRefresh(Boolean refresh)</p></td>
+        <td><p>Whether to renew the segment list of this partition before loading. This flag must be set to FALSE when first time call the loadPartitions(). After loading a partition, call loadPartitions() again with refresh=TRUE, the server will look for new segments that are not loaded yet and tries to load them up.<br/>This method is mainly for bulkinsert() interface.</p></td>
+        <td><p>refresh: The flag whether to renew segment list.</p></td>
+    </tr>
+    <tr>
+        <td><p>build()</p></td>
+        <td><p>Construct a LoadPartitionsParam object.</p></td>
+        <td><p>N/A</p></td>
     </tr>
 </table>
 
@@ -74,7 +79,7 @@ The `LoadPartitionsParam.Builder.build()` can throw the following exceptions:
 
 - ParamException: error if the parameter is invalid.
 
-## Returns
+#### Returns
 
 This method catches all the exceptions and returns an `R<RpcStatus>` object.
 
@@ -84,7 +89,7 @@ This method catches all the exceptions and returns an `R<RpcStatus>` object.
 
 - If the API succeeds, it returns `R.Status.Success`.
 
-## Example
+#### Example
 
 ```java
 import io.milvus.param.*;

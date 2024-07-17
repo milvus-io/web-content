@@ -127,5 +127,3 @@ A **FieldSchema** object.
 ## Methods
 
 The following are the methods of the `FieldSchema` class:
-
-<DocCardList />

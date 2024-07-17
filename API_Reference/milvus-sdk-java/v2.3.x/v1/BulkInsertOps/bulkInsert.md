@@ -6,7 +6,7 @@ A MilvusClient interface. This method imports data from external files, currentl
 R<ImportResponse> bulkInsert(BulkInsertParam requestParam);
 ```
 
-## BulkInsertParam
+#### BulkInsertParam
 
 Use the `BulkInsertParam.Builder` to construct a `BulkInsertParam` object.
 
@@ -19,34 +19,39 @@ Methods of `BulkInsertParam.Builder`:
 
 <table>
     <tr>
-        <th>Method</th>
-        <th>Description</th>
-        <th>Parameters</th>
+        <th><p>Method</p></th>
+        <th><p>Description</p></th>
+        <th><p>Parameters</p></th>
     </tr>
     <tr>
-        <td>withCollectionName(String collectionName)</td>
-        <td>Sets the collection name. Collection name cannot be empty or null.</td>
-        <td>collectionName: The name of the target collection.</td>
+        <td><p>withCollectionName(String collectionName)</p></td>
+        <td><p>Sets the collection name. Collection name cannot be empty or null.</p></td>
+        <td><p>collectionName: The name of the target collection.</p></td>
     </tr>
     <tr>
-        <td>withPartitionName(String partitionName)</td>
-        <td>Sets the partition name. partition name can be null.</td>
-        <td>partitionName: The name of the target partition.</td>
+        <td><p>withDatabaseName(String databaseName)</p></td>
+        <td><p>Sets the database name. database name can be null for default database.</p></td>
+        <td><p>databaseName: The database name.</p></td>
     </tr>
     <tr>
-        <td>withFiles(List\<String> files)</td>
-        <td>Sets the path of the files. The paths cannot be empty or null.<br/>Each file path must be a relative path under the Milvus storage bucket.</td>
-        <td>files: A file paths list. Currently, you can only input one row-based JSON file for each call.</td>
+        <td><p>withPartitionName(String partitionName)</p></td>
+        <td><p>Sets the partition name. partition name can be null.</p></td>
+        <td><p>partitionName: The name of the target partition.</p></td>
     </tr>
     <tr>
-        <td>addFile(String file)</td>
-        <td>Set a file path to be imported.The paths cannot be empty or null.</td>
-        <td>file: A file path.</td>
+        <td><p>withFiles(List&lt;String> files)</p></td>
+        <td><p>Sets the path of the files. The paths cannot be empty or null.<br/>Each file path must be a relative path under the Milvus storage bucket.</p></td>
+        <td><p>files: A file paths list. Currently, you can only input one row-based JSON file for each call.</p></td>
     </tr>
     <tr>
-        <td>build()</td>
-        <td>Constructs a BulkInsertParam object.</td>
-        <td>N/A</td>
+        <td><p>addFile(String file)</p></td>
+        <td><p>Set a file path to be imported.The paths cannot be empty or null.</p></td>
+        <td><p>file: A file path.</p></td>
+    </tr>
+    <tr>
+        <td><p>build()</p></td>
+        <td><p>Constructs a BulkInsertParam object.</p></td>
+        <td><p>N/A</p></td>
     </tr>
 </table>
 
@@ -54,7 +59,7 @@ The `BulkInsertParam.Builder.build()` can throw the following exceptions:
 
 - ParamException: error if the parameter is invalid.
 
-## Returns
+#### Returns
 
 This method catches all the exceptions and returns an `R<ImportResponse>` object.
 
@@ -64,7 +69,7 @@ This method catches all the exceptions and returns an `R<ImportResponse>` object
 
 - If the API succeeds, it returns a valid `ImportResponse` held by the `R` template. You can use `ImportResponse` to get the task ID.
 
-## Example
+#### Example
 
 ```java
 import io.milvus.param.bulkinsert.*;

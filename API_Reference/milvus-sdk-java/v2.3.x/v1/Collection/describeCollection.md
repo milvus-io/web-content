@@ -6,7 +6,7 @@ A MilvusClient interface. This method shows the details of a collection, e.g. na
 R<DescribeCollectionResponse> describeCollection(DescribeCollectionParam requestParam);
 ```
 
-## DescribeCollectionParam
+#### DescribeCollectionParam
 
 Use the `DescribeCollectionParam.Builder` to construct a `DescribeCollectionParam` object.
 
@@ -19,19 +19,24 @@ Methods of `DescribeCollectionParam.Builder`:
 
 <table>
     <tr>
-        <th>Method</th>
-        <th>Description</th>
-        <th>Parameters</th>
+        <th><p>Method</p></th>
+        <th><p>Description</p></th>
+        <th><p>Parameters</p></th>
     </tr>
     <tr>
-        <td>withCollectionName(String collectionName)</td>
-        <td>Sets the collection name. Collection name cannot be empty or null.</td>
-        <td>collectionName: The name of the collection to release.</td>
+        <td><p>withCollectionName(String collectionName)</p></td>
+        <td><p>Sets the collection name. Collection name cannot be empty or null.</p></td>
+        <td><p>collectionName: The name of the collection to release.</p></td>
     </tr>
     <tr>
-        <td>build()</td>
-        <td>Constructs a ReleaseCollectionParam object.</td>
-        <td>N/A</td>
+        <td><p>withDatabaseName(String databaseName)</p></td>
+        <td><p>Sets the database name. database name can be null for default database.</p></td>
+        <td><p>databaseName: The database name.</p></td>
+    </tr>
+    <tr>
+        <td><p>build()</p></td>
+        <td><p>Constructs a ReleaseCollectionParam object.</p></td>
+        <td><p>N/A</p></td>
     </tr>
 </table>
 
@@ -39,7 +44,7 @@ The `DescribeCollectionParam.Builder.build()` can throw the following exceptions
 
 - ParamException: error if the parameter is invalid.
 
-## Returns
+#### Returns
 
 This method catches all the exceptions and returns an `R<DescribeCollectionResponse>` object.
 
@@ -49,7 +54,7 @@ This method catches all the exceptions and returns an `R<DescribeCollectionRespo
 
 - If the API succeeds, it returns a valid `DescribeCollectionResponse` held by the `R` template. You can use `DescCollResponseWrapper` to get the information.
 
-## DescCollResponseWrapper
+#### DescCollResponseWrapper
 
 A tool class to encapsulate the `DescribeCollectionResponse`. 
 
@@ -62,74 +67,74 @@ Methods of `DescCollResponseWrapper`:
 
 <table>
    <tr>
-     <th><strong>Method</strong></th>
-     <th><strong>Description</strong></th>
-     <th><strong>Parameters</strong></th>
-     <th><strong>Returns</strong></th>
+     <th><p><strong>Method</strong></p></th>
+     <th><p><strong>Description</strong></p></th>
+     <th><p><strong>Parameters</strong></p></th>
+     <th><p><strong>Returns</strong></p></th>
    </tr>
    <tr>
-     <td>getCollectionName()</td>
-     <td>Get the name of the collection.</td>
-     <td>N/A</td>
-     <td>String</td>
+     <td><p>getCollectionName()</p></td>
+     <td><p>Get the name of the collection.</p></td>
+     <td><p>N/A</p></td>
+     <td><p>String</p></td>
    </tr>
    <tr>
-     <td>getCollectionDescription()</td>
-     <td>Get the description of the collection.<br/></td>
-     <td>N/A</td>
-     <td>String</td>
+     <td><p>getCollectionDescription()</p></td>
+     <td><p>Get the description of the collection.</p></td>
+     <td><p>N/A</p></td>
+     <td><p>String</p></td>
    </tr>
    <tr>
-     <td>getCollectionID()</td>
-     <td>Get the internal ID of the collection.</td>
-     <td>N/A</td>
-     <td>long</td>
+     <td><p>getCollectionID()</p></td>
+     <td><p>Get the internal ID of the collection.</p></td>
+     <td><p>N/A</p></td>
+     <td><p>long</p></td>
    </tr>
    <tr>
-     <td>getShardNumber()</td>
-     <td>Get the shard number of the collection.</td>
-     <td>N/A</td>
-     <td>int<br/></td>
+     <td><p>getShardNumber()</p></td>
+     <td><p>Get the shard number of the collection.</p></td>
+     <td><p>N/A</p></td>
+     <td><p>int</p></td>
    </tr>
    <tr>
-     <td>getCreatedUtcTimestamp()</td>
-     <td>Get UTC timestamp when the collection is created.</td>
-     <td>N/A<br/></td>
-     <td>long<br/></td>
+     <td><p>getCreatedUtcTimestamp()</p></td>
+     <td><p>Get UTC timestamp when the collection is created.</p></td>
+     <td><p>N/A</p></td>
+     <td><p>long</p></td>
    </tr>
    <tr>
-     <td>getAliases()</td>
-     <td>Get aliases of the collection.</td>
-     <td>N/A</td>
-     <td>List\<String></td>
+     <td><p>getAliases()</p></td>
+     <td><p>Get aliases of the collection.</p></td>
+     <td><p>N/A</p></td>
+     <td><p>List&lt;String></p></td>
    </tr>
    <tr>
-     <td>getFields()</td>
-     <td>Get the schema of the collection's fields.</td>
-     <td>N/A</td>
-     <td>List\<FieldType></td>
+     <td><p>getFields()</p></td>
+     <td><p>Get the schema of the collection's fields.</p></td>
+     <td><p>N/A</p></td>
+     <td><p>List&lt;FieldType></p></td>
    </tr>
    <tr>
-     <td>getFieldByName(String fieldName)</td>
-     <td>Get the schema of a field by name.<br/>Return null if the field doesn't exist.</td>
-     <td>fieldName: The name of a field</td>
-     <td>FieldType</td>
+     <td><p>getFieldByName(String fieldName)</p></td>
+     <td><p>Get the schema of a field by name.Return null if the field doesn't exist.</p></td>
+     <td><p>fieldName: The name of a field</p></td>
+     <td><p>FieldType</p></td>
    </tr>
    <tr>
-     <td>isDynamicFieldEnabled()</td>
-     <td>Get whether the collection dynamic field is enabled</td>
-     <td>N/A</td>
-     <td>boolean</td>
+     <td><p>isDynamicFieldEnabled()</p></td>
+     <td><p>Get whether the collection dynamic field is enabled</p></td>
+     <td><p>N/A</p></td>
+     <td><p>boolean</p></td>
    </tr>
    <tr>
-     <td>getPartitionKeyField()</td>
-     <td>Get the partition key field.<br/>Return null if the partition key field doesn't exist.</td>
-     <td>N/A</td>
-     <td>FieldType</td>
+     <td><p>getPartitionKeyField()</p></td>
+     <td><p>Get the partition key field.Return null if the partition key field doesn't exist.</p></td>
+     <td><p>N/A</p></td>
+     <td><p>FieldType</p></td>
    </tr>
 </table>
 
-## Example
+#### Example
 
 ```java
 import io.milvus.param.*;
