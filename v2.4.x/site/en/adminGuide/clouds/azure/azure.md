@@ -165,12 +165,11 @@ kubectl get services|grep my-release-milvus|grep LoadBalancer|awk '{print $4}'
 
 ## Hello Milvus
 
-Please refer to [Hello Milvus](https://milvus.io/docs/example_code.md), change the host value to external IP address, then run the code.
+Please refer to [Hello Milvus](https://milvus.io/docs/v2.3.x/example_code.md), change the host value to external IP address, then run the code.
 
 
 ## What's next
 
 If you want to learn how to deploy Milvus on other clouds:
-- [Deploy a Milvus Cluster on EC2](aws.md)
-- [Deploy a Milvus Cluster on EKS](eks.md)
-- [Deploy a Milvus Cluster on GCP](gcp.md)
+- [Deploy Milvus Cluster on AWS with Kubernetes](eks.md)
+- [Deploy Milvus Cluster on GCP with Kubernetes](gcp.md)

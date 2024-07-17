@@ -1959,11 +1959,11 @@ The following table lists all possible settings in the search parameters.
 
 |  __Parameter Name__    |  __Parameter Description__                                                                                                                                      |
 | ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|  `metric_type`         |  How to measure similarity between vector embeddings.<br/> Possible values are `IP`, `L2`, and `COSINE`, and defaults to that of the loaded index file.      |
+|  `metric_type`         |  How to measure similarity between vector embeddings.<br/> Possible values are `IP`, `L2`, `COSINE`, `JACCARD`, and `HAMMING`, and defaults to that of the loaded index file.      |
 |  `params.nprobe`       |  Number of units to query during the search.<br/> The value falls in the range [1, nlist<sub>[1]</sub>].                                                     |
 |  `params.level`        |  Search precision level.<br/> Possible values are `1`, `2`, and `3`, and defaults to `1`. Higher values yield more accurate results but slower performance.  |
-|  `params.radius`       |  Minimum similarity between the query vector and candidate vectors.<br/> The value falls in the range [1, nlist<sub>[1]</sub>].                              |
-|  `params.range_filter` |  A similarity range, optionally refining the search for vectors that fall in the range.<br/> The value falls in the range [top-K<sub>[2]</sub>, ∞].          |
+|  `params.radius`       |  Defines the outer boundary of your search space. Only vectors that are within this distance from the query vector are considered potential matches.<br/>The value range is determined by the `metric_type` parameter. For instance, if `metric_type` is set to `L2`, the valid value range is `[0, ∞]`. If `metric_type` is set to `COSINE`, the valid value range is `[-1, 1]`. For more information, refer to [Similarity Metrics](metric.md).                              |
+|  `params.range_filter` |  While `radius` sets the outer limit of the search, `range_filter` can be optionally used to define an inner boundary, creating a distance range within which vectors must fall to be considered matches.<br/>The value range is determined by the `metric_type` parameter. For instance, if `metric_type` is set to `L2`, the valid value range is `[0, ∞]`. If `metric_type` is set to `COSINE`, the valid value range is `[-1, 1]`. For more information, refer to [Similarity Metrics](metric.md).          |
 
 <div class="admonition note">
 

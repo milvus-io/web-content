@@ -7,6 +7,40 @@ title: Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.3.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.3.19
+
+Release date: July 15, 2024
+
+| Milvus version | Python SDK version | Java SDK version | Go SDK version | Node.js SDK version |
+|----------------|--------------------|------------------|----------------|---------------------|
+| 2.3.19         | 2.3.7              | 2.3.6            | 2.3.6          | 2.3.5               |
+
+Milvus v2.3.19 introduces significant improvements and bug fixes to enhance memory management, error handling, and query performance. This release continues to bolster the robustness and functionality of Milvus, ensuring optimal performance and user experience.
+
+### Improvements
+
+- Preserved fixed-size memory in delegator node for growing segments ([#34602](https://github.com/milvus-io/milvus/pull/34602)).
+- Refined Prometheus Buckets at different scales to improve monitoring precision ([#34627](https://github.com/milvus-io/milvus/pull/34627)).
+- Avoided assigning too many segments/channels to new QueryNode, ensuring balanced load distribution ([#34461](https://github.com/milvus-io/milvus/pull/34461)).
+- Provided clearer error messages when the string/varchar exceeded its max length ([#34324](https://github.com/milvus-io/milvus/pull/34324), [#34034](https://github.com/milvus-io/milvus/pull/34034)).
+- Prevented memory slice increase during queries, optimizing memory usage ([#34256](https://github.com/milvus-io/milvus/pull/34256)).
+- Sped up the loading process for small collections, reducing latency ([#33863](https://github.com/milvus-io/milvus/pull/33863)).
+
+### Bug fixes
+
+- Fixed error message when field name is invalid, improving user feedback ([#33901](https://github.com/milvus-io/milvus/pull/33901)).
+- Ensured Segment Manager filters flushed segments correctly during import ([#34650](https://github.com/milvus-io/milvus/pull/34650)).
+- Made knowhere-build-pool-size configurable on QueryNode for better resource management ([#34647](https://github.com/milvus-io/milvus/pull/34647)).
+- Eliminated unnecessary vchannels' merge when curTS is 0, optimizing performance ([#34626](https://github.com/milvus-io/milvus/pull/34626)).
+- Fixed issue where IndexNode couldn't be stopped due to a missing lifetime end ([#34560](https://github.com/milvus-io/milvus/pull/34560)).
+- Enhanced RESTful API query to be more user-friendly ([#34447](https://github.com/milvus-io/milvus/pull/34447)).
+- Checked load state of all partitions instead of just the first one, ensuring completeness ([#34321](https://github.com/milvus-io/milvus/pull/34321)).
+- Implemented singleflight for segcore chunkcache to avoid redundant operations ([#34284](https://github.com/milvus-io/milvus/pull/34284)).
+- Broadcasted collection's new properties to DataCoord, ensuring consistency ([#34147](https://github.com/milvus-io/milvus/pull/34147)).
+- DataCoord now returns checkpoint after successfully flushing segments ([#34115](https://github.com/milvus-io/milvus/pull/34115)).
+- Checked nodeid wildcard when removing pkoracle, preventing potential errors ([#34022](https://github.com/milvus-io/milvus/pull/34022)).
+- Ensured queries by primary key return the latest row rather than historical data, maintaining data accuracy ([#34026](https://github.com/milvus-io/milvus/pull/34026)).
+
 ## v2.3.18
 
 Release date: June 19, 2024

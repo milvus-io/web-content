@@ -7,6 +7,44 @@ title: Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.4.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.4.6
+
+Release date: July 16, 2024
+
+| Milvus version | Python SDK version | Java SDK version    | Node.js SDK version |
+|----------------|--------------------| --------------------| --------------------|
+| 2.4.6          | 2.4.4              | 2.4.2               | 2.4.4               |
+
+Milvus v2.4.6 is a bug-fix release that addresses critical issues such as panics, memory leaks, and data loss during deletions. It also introduces several optimizations, including enhancements to monitoring metrics, upgrading the Go version to 1.21, and improving the user experience for RESTful count(*) queries.
+
+### Improvements
+
+- Enhanced the user-friendliness of RESTful API queries ([#34444](https://github.com/milvus-io/milvus/pull/34444)).
+- Upgraded the Go version from 1.20 to 1.21 ([#33940](https://github.com/milvus-io/milvus/pull/33940)).
+- Optimized the histogram metric bucket for finer granularity in bucketing ([#34592](https://github.com/milvus-io/milvus/pull/34592)).
+
+### Bug fixes
+
+- Fixed an issue where the GetReplicas API returned a nil status ([#34019](https://github.com/milvus-io/milvus/pull/34019)).
+- Corrected a problem where queries could return deleted records ([#34502](https://github.com/milvus-io/milvus/pull/34502)).
+- Resolved an issue where IndexNode would get stuck during stopping due to incorrect lifetime control ([#34559](https://github.com/milvus-io/milvus/pull/34559)).
+- Fixed a memory leak of primary key oracle objects when a worker is offline ([#34020](https://github.com/milvus-io/milvus/pull/34020)).
+- Corrected ChannelManagerImplV2 to notify the correct Node, addressing parameter capture issues in loop closure ([#34004](https://github.com/milvus-io/milvus/pull/34004)).
+- Fixed a read-write data race in ImportTask segmentsInfo by implementing a deep copy ([#34126](https://github.com/milvus-io/milvus/pull/34126)).
+- Corrected version information for the "legacyVersionWithoutRPCWatch" configuration option to prevent errors during rolling upgrades ([#34185](https://github.com/milvus-io/milvus/pull/34185)).
+- Fixed the metric for the number of partitions loaded ([#34195](https://github.com/milvus-io/milvus/pull/34195)).
+- Passed the `otlpSecure` config when setting up segcore tracing ([#34210](https://github.com/milvus-io/milvus/pull/34210)).
+- Fixed an issue where DataCoord's properties were overwritten by mistake ([#34240](https://github.com/milvus-io/milvus/pull/34240)).
+- Resolved a data loss issue caused by erroneously merging two newly created message streams ([#34563](https://github.com/milvus-io/milvus/pull/34563)).
+- Fixed a panic caused by msgstream trying to consume an invalid pchannel ([#34230](https://github.com/milvus-io/milvus/pull/34230)).
+- Addressed an issue where imports could generate orphaned files ([#34071](https://github.com/milvus-io/milvus/pull/34071)).
+- Fixed incomplete query results due to duplicate primary keys in a segment ([#34302](https://github.com/milvus-io/milvus/pull/34302)).
+- Resolved an issue of missing sealed segments in L0 compaction ([#34566](https://github.com/milvus-io/milvus/pull/34566)).
+- Fixed the problem of dirty data in the channel-cp meta generated after garbage collection ([#34609](https://github.com/milvus-io/milvus/pull/34609)).
+- Corrected the metrics where database_num was 0 after restarting RootCoord ([#34010](https://github.com/milvus-io/milvus/pull/34010)).
+- Fixed a memory leak in SegmentManager in DataCoord by removing flushed segments generated through import ([#34652](https://github.com/milvus-io/milvus/pull/34652)).
+- Ensured compressBinlog to fill binlogs' logID after DataCoord restarts, ensuring proper reload from KV ([#34064](https://github.com/milvus-io/milvus/pull/34064)).
+
 ## v2.4.5
 
 Release date: June 18, 2024

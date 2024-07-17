@@ -68,7 +68,7 @@ You can set up the required AWS resources, including an AWS S3 bucket and an EKS
 
 ### Create an Amazon S3 Bucket
 
-1. Create an AWS S3 bucket. 
+- Create an AWS S3 bucket. 
 
     Read [Bucket Naming Rules](https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html) and observe the naming rules when naming your AWS S3 bucket.
 
@@ -83,7 +83,7 @@ You can set up the required AWS resources, including an AWS S3 bucket and an EKS
     # "Location": "http://milvus-bucket-039dd013c0712f085d60e21f.s3.amazonaws.com/"
     ```
 
-2. Creat an IAM policy for reading and writing objects within the bucket created above. Do replace the bucket name with your own.
+- Create an IAM policy for reading and writing objects within the bucket created above. **Do replace the bucket name with your own.**
 
     ```shell
     echo '{
@@ -98,8 +98,8 @@ You can set up the required AWS resources, including an AWS S3 bucket and an EKS
             "s3:DeleteObject"
           ],
           "Resource": [
-            "arn:aws:s3:::your-milvus-bucket-name",
-            "arn:aws:s3:::your-milvus-bucket-name/*"
+            "arn:aws:s3:::<bucket-name>",
+            "arn:aws:s3:::<bucket-name>/*"
           ]
         }
       ]
@@ -125,7 +125,7 @@ You can set up the required AWS resources, including an AWS S3 bucket and an EKS
     # }    
     ```
 
-3. (Optional) Attach the policy to your AWS User/Role if you want to accesskey instead of IAM AssumeRole.
+- Attach the policy to your AWS User.
   
       ```shell
       aws iam attach-user-policy --user-name <your-user-name> --policy-arn "arn:aws:iam::<your-iam-account-id>:policy/MilvusS3ReadWrite"
@@ -133,7 +133,7 @@ You can set up the required AWS resources, including an AWS S3 bucket and an EKS
 
 ### Create an Amazon EKS Cluster
 
-1. Prepare a cluster configuration file as follows and name it `eks_cluster.yaml`. Do replace `MilvusS3ReadWrite_Policy_ARN` with the one listed in the command output above.
+- Prepare a cluster configuration file as follows and name it `eks_cluster.yaml`.
 
     ```yaml
     apiVersion: eksctl.io/v1alpha5
@@ -153,12 +153,6 @@ You can set up the required AWS resources, including an AWS S3 bucket and an EKS
           namespace: kube-system
         wellKnownPolicies:
           awsLoadBalancerController: true
-      - metadata:
-          name: milvus-s3-access-sa
-          namespace: milvus
-          labels: {aws-usage: "milvus"}
-        attachPolicyARNs:
-        - "MilvusS3ReadWrite_Policy_ARN" # arn:aws:iam::12345678901:policy/MilvusS3ReadWrite
 
     managedNodeGroups:
       - name: milvus-node-group
@@ -181,19 +175,19 @@ You can set up the required AWS resources, including an AWS S3 bucket and an EKS
       wellKnownPolicies:
         ebsCSIController: true
     ```
-2. Run the following command to create an EKS cluster.
+- Run the following command to create an EKS cluster.
 
     ```bash
     eksctl create cluster -f eks_cluster.yaml
     ```
 
-3. Get the kubeconfig file.
+- Get the kubeconfig file.
 
     ```bash
     aws eks update-kubeconfig --region 'us-east-2' --name 'milvus-eks-cluster'
     ```
 
-4. Verify the EKS cluster.
+- Verify the EKS cluster.
 
     ```bash
     kubectl cluster-info
@@ -228,14 +222,14 @@ kubectl patch storageclass gp2 -p '{"metadata": {"annotations":{"storageclass.ku
 
 ### Install AWS LoadBalancer Controller
 
-1. Add Helm chars repo.
+- Add Helm chars repo.
 
     ```shell
     helm repo add eks https://aws.github.io/eks-charts
     helm repo update
     ```
 
-2. Install the AWS Load Balancer Controller.
+- Install the AWS Load Balancer Controller.
 
     ```shell
     helm install aws-load-balancer-controller eks/aws-load-balancer-controller \
@@ -245,7 +239,7 @@ kubectl patch storageclass gp2 -p '{"metadata": {"annotations":{"storageclass.ku
       --set serviceAccount.name=aws-load-balancer-controller 
     ```
 
-3. Verify the installation
+- Verify the installation
 
     ```shell
     kubectl get deployment -n kube-system aws-load-balancer-controller
@@ -255,14 +249,14 @@ kubectl patch storageclass gp2 -p '{"metadata": {"annotations":{"storageclass.ku
 
 In this guide, we will use Milvus Helm Charts to deploy a Milvus cluster. You can find the charts [here](https://github.com/zilliztech/milvus-helm/tree/master/charts/milvus).
 
-1. Add Milvus Helm Chart repo.
+- Add Milvus Helm Chart repo.
 
     ```bash
     helm repo add milvus https://zilliztech.github.io/milvus-helm/
     helm repo update
     ```
 
-2. Prepare the Milvus configuration file `milvus.yaml`, and replace `<bucket-name>` with the name of the bucket created above.
+- Prepare the Milvus configuration file `milvus.yaml`, and replace `<bucket-name> <s3-access-key> <s3-secret-key>` with your own.
 
     <div class="alert note">
     
@@ -284,24 +278,21 @@ In this guide, we will use Milvus Helm Charts to deploy a Milvus cluster. You ca
         service.beta.kubernetes.io/aws-load-balancer-scheme: internet-facing
         service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: ip
 
-    serviceAccount:
-      create: false
-      name: milvus-s3-access-sa
-
     minio:
       enabled: false
 
-    # Use the milvus-s3-access-sa to access milvus buckets instead of using ak/sk.  
-    # Details see https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html
     externalS3:
       enabled: true
       host: "s3.us-east-2.amazonaws.com"
       port: "443"
       useSSL: true
       bucketName: "<bucket-name>"
-      useIAM: true
+      useIAM: false
       cloudProvider: "aws"
       iamEndpoint: ""
+      accessKey: "<s3-access-key>"
+      secretKey: "<s3-secret-key>"
+      region: "us-east-2"
 
     # HA Configurations
     rootCoordinator:
@@ -348,13 +339,13 @@ In this guide, we will use Milvus Helm Charts to deploy a Milvus cluster. You ca
           memory: 2Gi  
     ```
 
-3. Install Milvus.
+- Install Milvus.
 
     ```shell
     helm install milvus-demo milvus/milvus -n milvus -f milvus.yaml
     ```
 
-4. Wait until all pods are `Running`.
+- Wait until all pods are `Running`.
 
     ```shell
     kubectl get pods -n milvus
@@ -366,7 +357,7 @@ In this guide, we will use Milvus Helm Charts to deploy a Milvus cluster. You ca
 
     </div>
 
-5. Get Milvus service address.
+- Get Milvus service address.
 
     ```shell
     kubectl get svc -n milvus
@@ -374,15 +365,15 @@ In this guide, we will use Milvus Helm Charts to deploy a Milvus cluster. You ca
 
 ## Verify the installation
 
-You can follow the simple guide below to verify the installation. For more details, refer to [this example](https://milvus.io/docs/example_code.md).
+You can follow the simple guide below to verify the installation. For more details, refer to [this example](https://milvus.io/docs/v2.3.x/example_code.md).
 
-1. Download the example code.
+- Download the example code.
 
     ```shell
     wget https://raw.githubusercontent.com/milvus-io/pymilvus/master/examples/hello_milvus.py
     ```
 
-2. Change the `host` argument in the example code to the Milvus service address above.
+- Change the `host` argument in the example code to the Milvus service address above.
 
 
     ```python
@@ -391,7 +382,7 @@ You can follow the simple guide below to verify the installation. For more detai
     ...
     ```
 
-3. Run the example code.
+- Run the example code.
 
     ```shell
     python3 hello_milvus.py
@@ -463,26 +454,28 @@ You can follow the simple guide below to verify the installation. For more detai
 
 In case you need to restore the environment by uninstalling Milvus, destroying the EKS cluster, and deleting the AWS S3 buckets and related IAM policies.
 
-1. Uninstall Milvus.
+- Uninstall Milvus.
 
     ```shell
     helm uninstall milvus-demo -n milvus
     ```
 
-2. Destroy the EKS cluster.
+- Destroy the EKS cluster.
 
     ```shell
     eksctl delete cluster --name milvus-eks-cluster --region us-east-2
     ```
 
-3. Delete the AWS S3 bucket and related IAM policies.
+- Delete the AWS S3 bucket and related IAM policies.
 
-    You should replace the bucket name and policy ARN with your own.
+    **You should replace the bucket name and policy ARN with your own.**
 
     ```shell
     aws s3 rm s3://milvus-bucket-039dd013c0712f085d60e21f --recursive
 
     aws s3api delete-bucket --bucket milvus-bucket-039dd013c0712f085d60e21f --region us-east-2
+
+    aws iam detach-user-policy --user-name <your-user-name> --policy-arn "arn:aws:iam::12345678901:policy/MilvusS3ReadWrite"
 
     aws iam delete-policy --policy-arn 'arn:aws:iam::12345678901:policy/MilvusS3ReadWrite'
     ```
@@ -490,6 +483,5 @@ In case you need to restore the environment by uninstalling Milvus, destroying t
 ## What's next
 
 If you want to learn how to deploy Milvus on other clouds:
-- [Deploy a Milvus Cluster on EC2](aws.md)
 - [Deploy Milvus Cluster on GCP with Kubernetes](gcp.md)
-- [Guide to Deploying Milvus on Microsoft Azure With Kubernetes](azure.md)
+- [Deploy Milvus Cluster on Azure With Kubernetes](azure.md)

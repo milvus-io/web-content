@@ -635,6 +635,12 @@ Milvus offers two ways for you to identify the entities to delete.
 
 - __Delete entities by filter.__
 
+   <div class='alert note'>
+   
+   When using filter expressions to delete entities, ensure the collection has been loaded. Otherwise, Milvus will return an error.
+
+   </div>
+
     <div class="multipleCode">
     <a href="#python">Python </a>
     <a href="#java">Java</a>

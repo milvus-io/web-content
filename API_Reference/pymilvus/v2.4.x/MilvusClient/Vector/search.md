@@ -91,6 +91,10 @@ search(
             This param is only used for range search for IVF-serial indexes, including **BIN_IVF_FLAT**, **IVF_FLAT**, **IVF_SQ8**, **IVF_PQ**, and **SCANN**. The value defaults to 1 and ranges from 1 to 65536.
 
             During range search, the search process terminates early if the number of buckets with no valid range search results reaches the specified value. Increasing this parameter improves range search recall.
+       
+   - **ignore_growing** (*str*) -
+
+        This option, when set, instructs the search to exclude data from growing segments. Utilizing this setting can potentially enhance search performance by focusing only on indexed and fully processed data. 
 
     For details on other applicable search parameters, refer to [In-memory Index](https://milvus.io/docs/index.md) and [On-disk Index](https://milvus.io/docs/disk_index.md).
 
