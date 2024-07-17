@@ -705,32 +705,32 @@
                 "children": []
               },
               {
-                "label": "Amazon EKS",
+                "label": "Deploy Milvus on AWS",
                 "id": "eks.md",
                 "order": 1,
                 "children": []
               },
               {
-                "label": "Google Cloud",
+                "label": "Deploy Milvus on GCP",
                 "id": "gcp.md",
                 "order": 2,
                 "children": []
               },
               {
+                "label": "Deploy Milvus on Azure",
+                "id": "azure.md",
+                "order": 3,
+                "children": []
+              },
+              {
                 "label": "Google Cloud Storage",
                 "id": "gcs.md",
-                "order": 3,
+                "order": 4,
                 "children": []
               },
               {
                 "label": "GCP Layer-7 Load Balancing",
                 "id": "gcp_layer7.md",
-                "order": 4,
-                "children": []
-              },
-              {
-                "label": "Microsoft Azure",
-                "id": "azure.md",
                 "order": 5,
                 "children": []
               },

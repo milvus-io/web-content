@@ -1,11 +1,11 @@
 ---
 id: gcp.md
-title: Deploy a Milvus Cluster on GCP
+title: Deploy a Milvus Cluster on GKE
 related_key: cluster
-summary: Learn how to deploy a Milvus cluster on GCP.
+summary: Learn how to deploy a Milvus cluster on GKE.
 ---
 
-# Deploy a Milvus Cluster on GCP
+# Deploy a Milvus Cluster on GKE
 
 Milvus is a cloud-native vector database and can be deployed on various cloud environments. This guide walks you through every detail about setting up Milvus on Google Cloud Platform (GCP).
 
@@ -60,7 +60,8 @@ gcloud compute firewall-rules create milvus-network-allow-internal \
 gcloud compute firewall-rules create milvus-network-allow-rdp \
     --project=milvus-testing-nonprod \
     --network=projects/milvus-testing-nonprod/global/networks/milvus-network \
-    --description="Allows RDP connections from any source to any instance on the network using port 3389." \ --direction=INGRESS \
+    --description="Allows RDP connections from any source to any instance on the network using port 3389." \
+    --direction=INGRESS \
     --priority=65534 \
     --source-ranges=0.0.0.0/0 \
     --action=ALLOW \
@@ -69,7 +70,8 @@ gcloud compute firewall-rules create milvus-network-allow-rdp \
 gcloud compute firewall-rules create milvus-network-allow-ssh \
     --project=milvus-testing-nonprod \
     --network=projects/milvus-testing-nonprod/global/networks/milvus-network \
-    --description="Allows TCP connections from any source to any instance on the network using port 22." \ --direction=INGRESS \
+    --description="Allows TCP connections from any source to any instance on the network using port 22." \
+    --direction=INGRESS \
     --priority=65534 \
     --source-ranges=0.0.0.0/0 \
     --action=ALLOW \
@@ -106,7 +108,7 @@ gcloud container clusters create "milvus-cluster-1" \
     --zone "us-west1-a" \
     --workload-pool "milvus-testing-nonprod.svc.id.goog" \
     --no-enable-basic-auth \
-    --cluster-version "1.27.3-gke.100" \
+    --cluster-version "1.28.10-gke.1075001" \
     --release-channel "regular" \
     --machine-type "c2-standard-4" \
     --image-type "COS_CONTAINERD" \
@@ -185,4 +187,10 @@ kubectl get services|grep my-release-milvus|grep LoadBalancer|awk '{print $4}'
 
 ## Hello Milvus
 
-Please refer to [Hello Milvus](https://milvus.io/docs/example_code.md), change the host value to the external IP address, then run the code.
+Please refer to [Hello Milvus](https://milvus.io/docs/v2.3.x/example_code.md), change the host value to the external IP address, then run the code.
+
+## What's next
+
+If you want to learn how to deploy Milvus on other clouds:
+- [Deploy Milvus Cluster on AWS with Kubernetes](eks.md)
+- [Deploy Milvus Cluster on Azure With Kubernetes](azure.md)
