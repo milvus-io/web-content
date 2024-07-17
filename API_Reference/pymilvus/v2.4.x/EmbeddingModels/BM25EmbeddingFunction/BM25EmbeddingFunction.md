@@ -64,5 +64,3 @@ corpus = [
 
 bm25_ef = BM25EmbeddingFunction(analyzer)
 ```
-
-<DocCardList />

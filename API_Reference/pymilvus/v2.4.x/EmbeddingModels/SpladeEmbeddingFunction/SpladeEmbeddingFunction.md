@@ -67,5 +67,3 @@ splade_ef = model.sparse.SpladeEmbeddingFunction(
     device="cpu"
 )
 ```
-
-<DocCardList />

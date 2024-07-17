@@ -96,9 +96,9 @@ add_field(
 
 - **dim** (*int*) -
 
-    The dimension of the vector embeddings.
+    The dimension of the vector embeddings. The value should be an integer greater than 1.
 
-    This is mandatory for a field of the <b>DataType.FLOAT_VECTOR</b>, <b>DataType.BINARY_VECTOR</b>, <b>DataType.FLOAT16_VECTOR</b>, or <b>DataType.BFLOAT16_VECTOR</b> type. If you use <b>DataType.SPARSE_FLOAT_VECTOR</b>, omit this parameter.
+    This is mandatory for a field of the **DataType.FLOAT_VECTOR**, **DataType.BINARY_VECTOR**, **DataType.FLOAT16_VECTOR**, or **DataType.BFLOAT16_VECTOR** type. If you use **DataType.SPARSE_FLOAT_VECTOR**, omit this parameter.
 
 - **is_partition_key** (*bool*) -
 

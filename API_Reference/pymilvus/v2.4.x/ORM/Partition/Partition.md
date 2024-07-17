@@ -85,4 +85,3 @@ partition = Partition(collection, "novel", "")
 
 The following are the members of the `Partition` class:
 
-<DocCardList />

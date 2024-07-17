@@ -74,4 +74,3 @@ bge_m3_ef = model.hybrid.BGEM3EmbeddingFunction(
 )
 ```
 
-<DocCardList />

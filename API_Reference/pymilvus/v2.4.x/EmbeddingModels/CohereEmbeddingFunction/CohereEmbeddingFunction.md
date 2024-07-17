@@ -21,7 +21,7 @@ CohereEmbeddingFunction(
 )
 ```
 
-**Parameters**:
+**PARAMETERS:**
 
 - **model_name** (*string*)
 
@@ -34,29 +34,34 @@ CohereEmbeddingFunction(
 - **input_type** (*string*)
 
     The type of input passed to the model. Required for embedding models v3 and higher.
-  
-  - `"search_document"`: Used for embeddings stored in a vector database for search use-cases.
-  - `"search_query"`: Used for embeddings of search queries run against a vector DB to find relevant documents.
-  - `"classification"`: Used for embeddings passed through a text classifier.
-  - `"clustering"`: Used for the embeddings run through a clustering algorithm.
+
+    - `"search_document"`: Used for embeddings stored in a vector database for search use-cases.
+
+    - `"search_query"`: Used for embeddings of search queries run against a vector DB to find relevant documents.
+
+    - `"classification"`: Used for embeddings passed through a text classifier.
+
+    - `"clustering"`: Used for the embeddings run through a clustering algorithm.
 
 - **embedding_types** (*List[str]*)
-  
+
     The type of embeddings you want to get back. Not required and default is None, which returns the Embed Floats response type. Currently, you can only specify a single value for this parameter. Possible values:
-  
-  - `"float"`: Use this when you want to get back the default float embeddings. Valid for all models.
-  - `"binary"`: Use this when you want to get back signed binary embeddings. Valid for only v3 models.
-  - `"ubinary"`: Use this when you want to get back unsigned binary embeddings. Valid for only v3 models.
+
+    - `"float"`: Use this when you want to get back the default float embeddings. Valid for all models.
+
+    - `"binary"`: Use this when you want to get back signed binary embeddings. Valid for only v3 models.
+
+    - `"ubinary"`: Use this when you want to get back unsigned binary embeddings. Valid for only v3 models.
 
 - **truncate** (*string*)
 
-  One of `NONE`|`START`|`END` to specify how the API will handle inputs longer than the maximum token length.
+    One of `NONE`|`START`|`END` to specify how the API will handle inputs longer than the maximum token length.
 
-  Passing `START` will discard the start of the input. `END` will discard the end of the input. In both cases, input is discarded until the remaining input is exactly the maximum input token length for the model.
+    Passing `START` will discard the start of the input. `END` will discard the end of the input. In both cases, input is discarded until the remaining input is exactly the maximum input token length for the model.
 
-  If `NONE` is selected, when the input exceeds the maximum input token length an error will be returned.
+    If `NONE` is selected, when the input exceeds the maximum input token length an error will be returned.
 
-  Default: `END`
+    Default: `END`
 
 - **kwargs**
 
@@ -74,5 +79,3 @@ cohere_ef = CohereEmbeddingFunction(
     embedding_types=["float"]
 )
 ```
-
-<DocCardList />

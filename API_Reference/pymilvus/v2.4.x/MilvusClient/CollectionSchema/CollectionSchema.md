@@ -156,4 +156,3 @@ schema = CollectionSchema(
 
 The following are the methods of the `CollectionSchema` class:
 
-<DocCardList />

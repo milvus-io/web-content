@@ -18,7 +18,8 @@ This operation creates a new resource group.
 create_resource_group(
     name: str,
     using: str,
-    timeout: float | None
+    timeout: float | None,
+    **kwargs
 )
 ```
 
@@ -42,6 +43,34 @@ create_resource_group(
 
     The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
+- **kwargs**
+
+    Optional parameters. Currently, you can set **config** to specify the configuration of the resource group.
+
+    - **config** (*ResourceGroupConfig*) -
+
+        A ResourceGroupConfig object that represents the configuration of the resource group.
+
+        ```python
+        ├── ResourceGroupConfig
+        │   ├── requests
+        │   │   └── node_num
+        │   └── limits
+        │       └── node_num
+        ```
+
+        - **requests** (*dict*) -
+
+            A dictionary specifying the number of query nodes that the resource group should hold. This key should include:
+
+            - **node_num** (*int*) - The number of query nodes requested for the resource group.
+
+        - **limits** (*dict*) -
+
+            A dictionary specifying the maximum number of query nodes that the resource group can hold. This key should include:
+
+            - **node_num** (*int*) - The maximum number of query nodes allowed for the resource group.
+
 **RETURN TYPE:**
 
 *NoneType*
@@ -64,11 +93,26 @@ from pymilvus import connections, utility
 # Connect to localhost:19530
 connections.connect()
 
-# Create a new resource group
-utility.create_resource_group(
-    name="rg_01",
-    using="default"
+# Create a resource group
+
+name = "rg" # A resource group name should be a string of 1 to 255 characters, starting with a letter or an underscore (_) and containing only numbers, letters, and underscores (_).
+node_num = 1
+
+config = utility.ResourceGroupConfig(
+    requests={'node_num': node_num}, # The number of query nodes that the resource group should hold.
+    limits={'node_num': node_num} # The maximum number of query nodes that the resource group can hold.
 )
+
+try:
+    utility.create_resource_group(
+        name, # The name of the resource group to be created.
+        using='default', # The database to use.
+        config=config, # The configuration of the resource group.
+    )
+    print(f'Succeeded in creating resource group {name}.')
+except Exception:
+    print(f'Failed to create resource group {name}.')
+
 ```
 
 ## Related operations

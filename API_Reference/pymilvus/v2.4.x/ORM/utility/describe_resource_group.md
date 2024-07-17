@@ -42,12 +42,22 @@ A **ResourceGroupInfo** object that contains the detailed description of a resou
 
 ```python
 ├── ResourceGroupInfo 
-│       ├── name
-│       ├── capacity
-│       ├── num_available_node
-│       ├── num_loaded_replica
-│       ├── num_outgoing_node
-│       └── num_incoming_node
+│   ├── name
+│   ├── capacity
+│   ├── num_available_node
+│   ├── num_loaded_replica
+│   ├── num_outgoing_node
+│   ├── num_incoming_node
+│   ├── config
+│   │   ├── requests
+│   │   │   └── node_num
+│   │   └── limits
+│   │       └── node_num
+│   └── nodes
+│       └── NodeInfo
+│           ├── node_id
+│           ├── address
+│           └── hostname
 ```
 
 A **ResourceGroupInfo** object contains the following fields:
@@ -74,7 +84,33 @@ A **ResourceGroupInfo** object contains the following fields:
 
 - **num_incoming_node** (*google._upb._message.ScalarMapContainer*)
 
-    The name of a collection and its number of query nodes for incoming requests.
+    The name of a collection and its number of query nodes for incoming requests. 
+
+- **config** (*ResourceGroupConfig*)
+
+    A ResourceGroupConfig object that represents the configuration of the resource group.
+
+    - **requests** (*dict*) -
+
+        A dictionary specifying the number of query nodes that the resource group should hold. This key should include:
+
+        - **node_num** (*int*) - The number of query nodes requested for the resource group.
+
+    - **limits** (*dict*) -
+
+        A dictionary specifying the maximum number of query nodes that the resource group can hold. This key should include:
+
+        - **node_num** (*int*) - The maximum number of query nodes allowed for the resource group.
+
+- **nodes** (*list*)
+
+    A list of NodeInfo objects, each containing:
+
+    - **node_id** (*int*) - The ID of the node.
+
+    - **address** (*str*) - The address of the node.
+
+    - **hostname** (*str*) - The hostname of the node.
 
 **EXCEPTIONS:**
 
@@ -90,17 +126,53 @@ from pymilvus import connections, utility
 # Connect to localhost:19530
 connections.connect()
 
-# Create a new resource group
-rgs = create_resource_group(
-    name="rg_01",
-    using="default"
+# Create a resource group
+
+name = "rg" # A resource group name should be a string of 1 to 255 characters, starting with a letter or an underscore (_) and containing only numbers, letters, and underscores (_).
+node_num = 1 # Number of query nodes you expect the target resource group to hold.
+
+config = utility.ResourceGroupConfig(
+    requests={'node_num': node_num}, # The number of query nodes that the resource group should hold.
+    limits={'node_num': node_num} # The maximum number of query nodes that the resource group can hold.
 )
 
-# Describe the details of the created resource group
-details = describe_resource_group(
-    name="rg_01",
-    using="default"
-)
+try:
+    utility.create_resource_group(
+        name=name, # The name of the resource group to be created.
+        using='default', # The database to use.
+        config=config, # The configuration of the resource group.
+    )
+    print(f'Succeeded in creating resource group {name}.')
+except Exception:
+    print(f'Failed to create resource group {name}.')
+    
+# Succeeded in creating resource group rg.
+
+# Describe the details of the created resource group `rg`
+
+info = utility.describe_resource_group(name='rg')
+
+print(f"Resource group rg description: {info}")
+
+# Output:
+# Resource group rg description: ResourceGroupInfo:
+# <name:rg>, # Name of the resource group
+# <capacity:1>, # Number of query nodes in the resource group
+# <num_available_node:1>, # Number of available query nodes in the resource group
+# <num_loaded_replica:{}>, 
+# <num_outgoing_node:{}>,
+# <num_incoming_node:{}>,
+# <config:requests {
+#   node_num: 1 # Number of query nodes required in the resource group
+# }
+# limits {
+#   node_num: 1 # Maximum number of query nodes allowed in the resource group
+# }
+# >,
+# <nodes:[NodeInfo:
+# <node_id:8>,
+# <address:10.102.7.12:21123>,
+# <hostname:doc-test1-axjfu-milvus-querynode-776bb5768-v2dqh>]>
 ```
 
 ## Related operations

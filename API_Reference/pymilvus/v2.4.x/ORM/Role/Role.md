@@ -68,4 +68,3 @@ role = Role(
 
 The following are the methods of the `Role` class:
 
-<DocCardList />

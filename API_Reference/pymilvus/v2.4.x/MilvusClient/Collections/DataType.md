@@ -37,25 +37,24 @@ Sets the data type to **Array**.
 - JSON = 23
 Sets the data type to **JSON**.
 
-- BINARY_VECTOR = 100
-Sets the data type to **Binary Vector**.
-
 - FLOAT_VECTOR = 101
 Sets the data type to **Float Vector**.
 
+- BINARY_VECTOR = 100
+Sets the data type to **Binary Vector**.
+
 - FLOAT16_VECTOR = 102
 
-    Sets the data type to **Float16**.
+    Sets the data type to **Float16 Vector**.
 
 - BFLOAT16_VECTOR = 103
 
-    Sets the data type to **BFloat16**.
+    Sets the data type to **BFloat16 Vector**.
 
 - SPARSE_FLOAT_VECTOR = 104
 
     Sets the data type to **Sparse Vector**.
 
 - UNKNOWN = 999
+Sets the data type to **Unknown**.
 
-  Sets the data type to **Unknown**.
-  

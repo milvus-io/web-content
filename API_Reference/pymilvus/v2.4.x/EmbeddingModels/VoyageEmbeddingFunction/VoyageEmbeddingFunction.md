@@ -42,5 +42,3 @@ voyage_ef = VoyageEmbeddingFunction(
     api_key='YOUR_API_KEY' # Replace with your own Voyage API key
 )
 ```
-
-<DocCardList />

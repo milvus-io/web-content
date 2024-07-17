@@ -33,5 +33,3 @@ connections.connect(
 ## Methods
 
 The following are the methods of the `connections` singleton instance:
-
-<DocCardList />
