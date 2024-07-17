@@ -90,7 +90,7 @@ A **QueryResp object representing specific query results with the specified outp
 
 **PARAMETERS:**
 
-- queryResults(List\<QueryResp.QueryResult\>)
+- queryResults(List&lt;QueryResp.QueryResult\>)
 
 A list of QueryResult objects with each QueryResult representing a queried entity.
 

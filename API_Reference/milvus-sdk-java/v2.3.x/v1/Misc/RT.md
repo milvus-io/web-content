@@ -1,4 +1,4 @@
-# R\<T>
+# R&lt;T>
 
 A template class to hold the status code, error message, and the response returned by each client interface.
 

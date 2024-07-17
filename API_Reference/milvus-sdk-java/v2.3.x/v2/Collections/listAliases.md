@@ -22,7 +22,7 @@ A **ListAliasResp** object containing a list of aliases for the specified collec
 
 **PARAMETERS:**
 
-- **alias** (*List\<String\>*)
+- **alias** (*List&lt;String\>*)
 
     A list of strings containing the aliases.
 

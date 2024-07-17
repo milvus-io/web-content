@@ -29,7 +29,7 @@ Methods of `QuerySimpleParam.Builder`:
         <td><p>collectionName: The target collection name.</p></td>
     </tr>
     <tr>
-        <td><p>withOutputFields(List\<String> outputFields)</p></td>
+        <td><p>withOutputFields(List&lt;String> outputFields)</p></td>
         <td><p>Specifies output scalar fields (Optional).<br/>If output fields are specified, the QueryResults returned by query() will contains the values of these fields.</p></td>
         <td><p><br/>outputFields: The name list of fields to be outputed.</p></td>
     </tr>

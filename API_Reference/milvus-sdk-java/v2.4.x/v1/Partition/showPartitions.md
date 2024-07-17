@@ -34,7 +34,7 @@ Methods of `ShowPartitionsParam.Builder`:
         <td><p>databaseName: The database name.</p></td>
     </tr>
     <tr>
-        <td><p>withPartitionNames(List\<String> partitionNames)</p></td>
+        <td><p>withPartitionNames(List&lt;String> partitionNames)</p></td>
         <td><p>Set the partition names list. Partition names list cannot be null or empty.</p></td>
         <td><p>partitionNames: The name list of partitions to show.</p></td>
     </tr>
@@ -86,7 +86,7 @@ Methods of `ShowPartitionsResponse`:
      <td><p>getPartitionsInfo()</p></td>
      <td><p>Return a list of PartitionInfo.</p></td>
      <td><p>N/A</p></td>
-     <td><p>List\<PartitionInfo></p></td>
+     <td><p>List&lt;PartitionInfo></p></td>
    </tr>
    <tr>
      <td><p>getPartitionInfoByName(String partitionName)</p></td>

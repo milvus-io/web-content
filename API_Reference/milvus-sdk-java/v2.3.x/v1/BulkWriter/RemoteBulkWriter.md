@@ -26,7 +26,7 @@ Methods of `RemoteBulkWriter`:
     </tr>
     <tr>
         <td><p>getBatchFiles()</p></td>
-        <td><p>Returns a List\<List\<String>gt; of the persisted data files. Each List\<String> is a batch files that can be input as a job for the bulkinsert interface.</p></td>
+        <td><p>Returns a List&lt;List&lt;String>gt; of the persisted data files. Each List&lt;String> is a batch files that can be input as a job for the bulkinsert interface.</p></td>
         <td><p>N/A</p></td>
     </tr>
 </table>
@@ -110,7 +110,7 @@ Methods of `AzureConnectParam.Builder`:
     <tr>
         <td><p>withAccountUrl(String accountUrl)</p></td>
         <td><p>Sets the account url.</p></td>
-        <td><p>accountUrl: A string in format like https://\<storage-account>.<a href="http://blob.core.windows.net">blob.core.windows.net</a>Read this link for more info:<a href="https://learn.microsoft.com/en-us/azure/storage/common/storage-account-overview">https://learn.microsoft.com/en-us/azure/storage/common/storage-account-overview</a></p></td>
+        <td><p>accountUrl: A string in format like https://&lt;storage-account>.<a href="http://blob.core.windows.net">blob.core.windows.net</a>Read this link for more info:<a href="https://learn.microsoft.com/en-us/azure/storage/common/storage-account-overview">https://learn.microsoft.com/en-us/azure/storage/common/storage-account-overview</a></p></td>
     </tr>
     <tr>
         <td><p>withCredential(TokenCredential credential)</p></td>

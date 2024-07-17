@@ -39,7 +39,7 @@ Methods of `SearchParam.Builder`:
         <td><p>consistencyLevel: The consistency level used in the search.</p></td>
     </tr>
     <tr>
-        <td><p>withPartitionNames(List\<String> partitionNames)</p></td>
+        <td><p>withPartitionNames(List&lt;String> partitionNames)</p></td>
         <td><p>Sets partition names list to specify search scope (Optional).</p></td>
         <td><p>partitionNames: The name list of partitions to be searched.</p></td>
     </tr>
@@ -49,7 +49,7 @@ Methods of `SearchParam.Builder`:
         <td><p>partitionName: A partition name to be searched.</p></td>
     </tr>
     <tr>
-        <td><p>withOutFields(List\<String> outFields)</p></td>
+        <td><p>withOutFields(List&lt;String> outFields)</p></td>
         <td><p>Specifies output scalar fields (Optional).</p></td>
         <td><p><br/>outFields: The name list of fields to be outputed.</p></td>
     </tr>
@@ -79,9 +79,9 @@ Methods of `SearchParam.Builder`:
         <td><p>topK: The topk value.</p></td>
     </tr>
     <tr>
-        <td><p>withVectors(List\<?> vectors)</p></td>
+        <td><p>withVectors(List&lt;?> vectors)</p></td>
         <td><p>Set the target vectors. Up to 16384 vectors allowed.</p></td>
-        <td><p>vectors: <br/>- If target field type is FloatVector, List\< List\<Float>gt; is required.<br/>- If target field type is BinaryVector vector, List\<ByteBuffer> is required.</p></td>
+        <td><p>vectors: <br/>- If target field type is FloatVector, List&lt; List&lt;Float>gt; is required.<br/>- If target field type is BinaryVector vector, List&lt;ByteBuffer> is required.</p></td>
     </tr>
     <tr>
         <td><p>withRoundDecimal(Integer decimal)</p></td>
@@ -141,19 +141,19 @@ Methods of `SearchResultsWrapper`:
      <td><p>getFieldData(String fieldName, int indexOfTarget)</p></td>
      <td><p>Gets data for an output field which is specified by SearchParam.</p><p>Throws ParamException if the field doesn't exist or indexOfTarget is illegal.</p></td>
      <td><p>fieldName: A field name which is specified by the withOutFields() of SearchParam.</p><p>indexOfTarget: The order number of a target vector.</p></td>
-     <td><ul><li>Return List\<List\<Float>gt; for FloatVector field.</li><li>Return List\<ByteBuffer> for BinaryVector field.</li><li>Return List\<Long> for int64 field.</li><li>Return List\<Integer> for int32/int16/int8 field.</li><li>Return List\<Boolean> for boolean field.</li><li>Return List\<Float> for float field.</li><li>Return List\<Double> for double field.</li><li>Return List\<String> for varchar field.</li></ul></td>
+     <td><ul><li>Return List&lt;List&lt;Float>gt; for FloatVector field.</li><li>Return List&lt;ByteBuffer> for BinaryVector field.</li><li>Return List&lt;Long> for int64 field.</li><li>Return List&lt;Integer> for int32/int16/int8 field.</li><li>Return List&lt;Boolean> for boolean field.</li><li>Return List&lt;Float> for float field.</li><li>Return List&lt;Double> for double field.</li><li>Return List&lt;String> for varchar field.</li></ul></td>
    </tr>
    <tr>
      <td><p>getIDScore(int indexOfTarget)</p></td>
      <td><p>Gets ID-score pairs returned by search().</p><p>Throws ParamException if the indexOfTarget is illegal.Throws IllegalResponseException if the returned results are illegal.</p></td>
      <td><p>indexOfTarget: The order number of a target vector.</p></td>
-     <td><p>List\<IDScore></p></td>
+     <td><p>List&lt;IDScore></p></td>
    </tr>
    <tr>
      <td><p>getRowRecords(int indexOfTarget)</p></td>
      <td><p>Gets row records from the search result.</p><p>The ID is put into a QueryResultsWrapper.RowRecord with key "id".</p><p>The distance is put into a QueryResultsWrapper.RowRecord with key "distance".</p></td>
      <td><p>indexOfTarget: The order number of a target vector.</p></td>
-     <td><p>List\<QueryResultsWrapper.RowRecord></p></td>
+     <td><p>List&lt;QueryResultsWrapper.RowRecord></p></td>
    </tr>
 </table>
 

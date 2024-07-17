@@ -39,7 +39,7 @@ Methods of `HybridSearchParam.Builder`:
         <td><p>consistencyLevel: The consistency level used in the search.</p></td>
     </tr>
     <tr>
-        <td><p>withPartitionNames(List\<String> partitionNames)</p></td>
+        <td><p>withPartitionNames(List&lt;String> partitionNames)</p></td>
         <td><p>Sets partition names list to specify search scope (Optional).</p></td>
         <td><p>partitionNames: The name list of partitions to be searched.</p></td>
     </tr>
@@ -49,7 +49,7 @@ Methods of `HybridSearchParam.Builder`:
         <td><p>partitionName: A partition name to be searched.</p></td>
     </tr>
     <tr>
-        <td><p>withOutFields(List\<String> outFields)</p></td>
+        <td><p>withOutFields(List&lt;String> outFields)</p></td>
         <td><p>Specifies output scalar fields (Optional).</p></td>
         <td><p><br/>outFields: The name list of fields to be outputed.</p></td>
     </tr>
@@ -134,27 +134,27 @@ Methods of `AnnSearchParam.Builder`:
         <td><p>params: A JSON format string for extra parameters.</p></td>
     </tr>
     <tr>
-        <td><p>withFloatVectors(List\<List\<Float>gt; vectors)</p></td>
+        <td><p>withFloatVectors(List&lt;List&lt;Float>gt; vectors)</p></td>
         <td><p>Set the target vectors to search FloatVector field. Up to 16384 vectors allowed.<br/>Note: this method will reset the target vectors of SearchParam. To input vectors, call it only once.</p></td>
         <td><p>vectors: The target vectors</p></td>
     </tr>
     <tr>
-        <td><p>withBinaryVectors(List\<ByteBuffer> vectors)</p></td>
+        <td><p>withBinaryVectors(List&lt;ByteBuffer> vectors)</p></td>
         <td><p>Set the target vectors to search BinaryVector field. Up to 16384 vectors allowed.<br/>Note: this method will reset the target vectors of SearchParam. To input vectors, call it only once.</p></td>
         <td><p>vectors: The target vectors</p></td>
     </tr>
     <tr>
-        <td><p>withFloat16Vectors(List\<ByteBuffer> vectors)</p></td>
+        <td><p>withFloat16Vectors(List&lt;ByteBuffer> vectors)</p></td>
         <td><p>Set the target vectors to search Float16Vector field. Up to 16384 vectors allowed.<br/>Note: this method will reset the target vectors of SearchParam. To input vectors, call it only once.</p></td>
         <td><p>vectors: The target vectors</p></td>
     </tr>
     <tr>
-        <td><p>withBFloat16Vectors(List\<List\<Float>gt; vectors)</p></td>
+        <td><p>withBFloat16Vectors(List&lt;List&lt;Float>gt; vectors)</p></td>
         <td><p>Set the target vectors to search BFloat16Vector field. Up to 16384 vectors allowed.<br/>Note: this method will reset the target vectors of SearchParam. To input vectors, call it only once.</p></td>
         <td><p>vectors: The target vectors</p></td>
     </tr>
     <tr>
-        <td><p>withSparseFloatVectors(List\<SortedMap\<Long, Float>gt; vectors)</p></td>
+        <td><p>withSparseFloatVectors(List&lt;SortedMap&lt;Long, Float>gt; vectors)</p></td>
         <td><p>Set the target vectors to search SparseFloatVector field. Up to 16384 vectors allowed.<br/>Note: this method will reset the target vectors of SearchParam. To input vectors, call it only once.</p></td>
         <td><p>vectors: The target vectors</p></td>
     </tr>
@@ -216,7 +216,7 @@ Methods of `WeightedRanker.Builder`:
         <th><p>Parameters</p></th>
     </tr>
     <tr>
-        <td><p>withWeights(List\<Float> weights)</p></td>
+        <td><p>withWeights(List&lt;Float> weights)</p></td>
         <td><p>Assign weights for each AnnSearchParam. The length of weights must be equal to number of AnnSearchParam.<br/>You can assign any float value for weight, the sum of weight values can exceed 1.<br/>The distance/similarity values of each field will be mapped into a range of [0,1],<br/>and score = sum(weights[i] * distance<em>i</em>in_[0,1]).</p></td>
         <td><p>weights: The weight values.</p></td>
     </tr>

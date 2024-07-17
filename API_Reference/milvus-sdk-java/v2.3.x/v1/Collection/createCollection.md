@@ -44,7 +44,7 @@ Methods of `CreateCollectionParam.Builder`:
         <td><p>description: The description of the collection to create.</p></td>
     </tr>
     <tr>
-        <td><p>withFieldTypes(List\<FieldType> fieldTypes)</p></td>
+        <td><p>withFieldTypes(List&lt;FieldType> fieldTypes)</p></td>
         <td><p>Sets the collection schema. The collection schema cannot be empty.</p></td>
         <td><p>fieldTypes: a list of FieldType objects, each representing a field schema.</p></td>
     </tr>
@@ -182,7 +182,7 @@ Methods of `CollectionSchemaParam.Builder`:
      <td><p>enableDynamicField: enableDynamicField of the collection</p></td>
    </tr>
    <tr>
-     <td><p>withFieldTypes(List\<FieldType> fieldTypes)</p></td>
+     <td><p>withFieldTypes(List&lt;FieldType> fieldTypes)</p></td>
      <td><p>Sets the fieldTypes of the schema. The fieldTypes cannot be empty or null.</p></td>
      <td><p>fieldTypes: A list of FieldType to defines the fields.</p></td>
    </tr>

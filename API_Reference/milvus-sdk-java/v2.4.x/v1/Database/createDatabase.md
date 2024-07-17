@@ -34,7 +34,7 @@ Methods of `CreateDatabaseParam.Builder`:
         <td><p>replicaNumber: Replica number</p></td>
     </tr>
     <tr>
-        <td><p>withResourceGroups(List\<String> resourceGroups)</p></td>
+        <td><p>withResourceGroups(List&lt;String> resourceGroups)</p></td>
         <td><p>Sets the resource groups in database level, then if load collection doesn't have resource groups, it will use this resource groups.</p></td>
         <td><p>resourceGroups: Resource group names</p></td>
     </tr>

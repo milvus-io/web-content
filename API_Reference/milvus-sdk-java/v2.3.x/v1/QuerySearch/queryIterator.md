@@ -39,7 +39,7 @@ Methods of `QueryIteratorParam.Builder`:
         <td><p>consistencyLevel: The consistency level used in the query.</p></td>
     </tr>
     <tr>
-        <td><p>withPartitionNames(List\<String> partitionNames)</p></td>
+        <td><p>withPartitionNames(List&lt;String> partitionNames)</p></td>
         <td><p>Sets partition names list to specify query scope (Optional).</p></td>
         <td><p>partitionNames: The name list of partitions to be queried.</p></td>
     </tr>
@@ -49,7 +49,7 @@ Methods of `QueryIteratorParam.Builder`:
         <td><p>partitionName: A partition name to be queried.</p></td>
     </tr>
     <tr>
-        <td><p>withOutFields(List\<String> outFields)</p></td>
+        <td><p>withOutFields(List&lt;String> outFields)</p></td>
         <td><p>Specifies output scalar fields (Optional).<br/>If output fields are specified, the QueryResults returned by query() will contains the values of these fields.</p></td>
         <td><p><br/>outFields: The name list of fields to be outputed.</p></td>
     </tr>
@@ -119,7 +119,7 @@ Methods of `QueryIterator`:
      <td><p>next()</p></td>
      <td><p>Return a batch of results.</p></td>
      <td><p>N/A</p></td>
-     <td><p>List\<QueryResultsWrapper.RowRecord></p></td>
+     <td><p>List&lt;QueryResultsWrapper.RowRecord></p></td>
    </tr>
    <tr>
      <td><p>close()</p></td>

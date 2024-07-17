@@ -86,7 +86,7 @@ Methods of `DescIndexResponseWrapper`:
      <td><p>getIndexDescriptions()</p></td>
      <td><p>Get a list of all index descriptions. (Currently only return one index information)</p></td>
      <td><p>N/A</p></td>
-     <td><p>List\<IndexDesc></p></td>
+     <td><p>List&lt;IndexDesc></p></td>
    </tr>
    <tr>
      <td><p>getIndexDescByFieldName(String fieldName)</p></td>

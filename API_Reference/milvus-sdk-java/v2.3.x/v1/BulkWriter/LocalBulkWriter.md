@@ -26,7 +26,7 @@ Methods of `LocalBulkWriter`:
     </tr>
     <tr>
         <td><p>getBatchFiles()</p></td>
-        <td><p>Returns a List\<List\<String>gt; of the persisted data files. Each List\<String> is a batch files that can be input as a job for the bulkinsert interface.</p></td>
+        <td><p>Returns a List&lt;List&lt;String>gt; of the persisted data files. Each List&lt;String> is a batch files that can be input as a job for the bulkinsert interface.</p></td>
         <td><p>N/A</p></td>
     </tr>
 </table>

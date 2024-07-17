@@ -39,7 +39,7 @@ Methods of `SearchParam.Builder`:
         <td><p>consistencyLevel: The consistency level used in the search.</p></td>
     </tr>
     <tr>
-        <td><p>withPartitionNames(List\<String> partitionNames)</p></td>
+        <td><p>withPartitionNames(List&lt;String> partitionNames)</p></td>
         <td><p>Sets partition names list to specify search scope (Optional).</p></td>
         <td><p>partitionNames: The name list of partitions to be searched.</p></td>
     </tr>
@@ -49,7 +49,7 @@ Methods of `SearchParam.Builder`:
         <td><p>partitionName: A partition name to be searched.</p></td>
     </tr>
     <tr>
-        <td><p>withOutFields(List\<String> outFields)</p></td>
+        <td><p>withOutFields(List&lt;String> outFields)</p></td>
         <td><p>Specifies output scalar fields (Optional).</p></td>
         <td><p><br/>outFields: The name list of fields to be outputed.</p></td>
     </tr>
@@ -79,32 +79,32 @@ Methods of `SearchParam.Builder`:
         <td><p>topK: The topk value.</p></td>
     </tr>
     <tr>
-        <td><p>withVectors(List\<?> vectors)</p></td>
+        <td><p>withVectors(List&lt;?> vectors)</p></td>
         <td><p>Set the target vectors. Up to 16384 vectors allowed.<br/>Note: this method works for FloatVector/BinaryVector/SparseFloatVector, but it doesn't work for Float16Vector/BFloat16Vector.<br/>It is recommended to use withFloatVectors/withBinaryVectors/withFloat16Vectors/withBFloat16Vectors/withSparseFloatVectors to input vectors expilicitly.</p></td>
-        <td><p>vectors: <br/>- If target field type is FloatVector, List\< List\<Float>gt; is required.<br/>- If target field type is BinaryVector, List\<ByteBuffer> is required.<br/>- If target field type is SparseFloatVector, List\<SortedMap[Long, Float]> is required.</p></td>
+        <td><p>vectors: <br/>- If target field type is FloatVector, List&lt; List&lt;Float>gt; is required.<br/>- If target field type is BinaryVector, List&lt;ByteBuffer> is required.<br/>- If target field type is SparseFloatVector, List&lt;SortedMap[Long, Float]> is required.</p></td>
     </tr>
     <tr>
-        <td><p>withFloatVectors(List\<List\<Float>gt; vectors)</p></td>
+        <td><p>withFloatVectors(List&lt;List&lt;Float>gt; vectors)</p></td>
         <td><p>Set the target vectors to search FloatVector field. Up to 16384 vectors allowed.<br/>Note: this method will reset the target vectors of SearchParam. To input vectors, call it only once.</p></td>
         <td><p>vectors: The target vectors</p></td>
     </tr>
     <tr>
-        <td><p>withBinaryVectors(List\<ByteBuffer> vectors)</p></td>
+        <td><p>withBinaryVectors(List&lt;ByteBuffer> vectors)</p></td>
         <td><p>Set the target vectors to search BinaryVector field. Up to 16384 vectors allowed.<br/>Note: this method will reset the target vectors of SearchParam. To input vectors, call it only once.</p></td>
         <td><p>vectors: The target vectors</p></td>
     </tr>
     <tr>
-        <td><p>withFloat16Vectors(List\<ByteBuffer> vectors)</p></td>
+        <td><p>withFloat16Vectors(List&lt;ByteBuffer> vectors)</p></td>
         <td><p>Set the target vectors to search Float16Vector field. Up to 16384 vectors allowed.<br/>Note: this method will reset the target vectors of SearchParam. To input vectors, call it only once.</p></td>
         <td><p>vectors: The target vectors</p></td>
     </tr>
     <tr>
-        <td><p>withBFloat16Vectors(List\<List\<Float>gt; vectors)</p></td>
+        <td><p>withBFloat16Vectors(List&lt;List&lt;Float>gt; vectors)</p></td>
         <td><p>Set the target vectors to search BFloat16Vector field. Up to 16384 vectors allowed.<br/>Note: this method will reset the target vectors of SearchParam. To input vectors, call it only once.</p></td>
         <td><p>vectors: The target vectors</p></td>
     </tr>
     <tr>
-        <td><p>withSparseFloatVectors(List\<SortedMap\<Long, Float>gt; vectors)</p></td>
+        <td><p>withSparseFloatVectors(List&lt;SortedMap&lt;Long, Float>gt; vectors)</p></td>
         <td><p>Set the target vectors to search SparseFloatVector field. Up to 16384 vectors allowed.<br/>Note: this method will reset the target vectors of SearchParam. To input vectors, call it only once.</p></td>
         <td><p>vectors: The target vectors</p></td>
     </tr>
@@ -171,19 +171,19 @@ Methods of `SearchResultsWrapper`:
      <td><p>getFieldData(String fieldName, int indexOfTarget)</p></td>
      <td><p>Gets data for an output field which is specified by SearchParam.</p><p>Throws ParamException if the field doesn't exist or indexOfTarget is illegal.</p></td>
      <td><p>fieldName: A field name which is specified by the withOutFields() of SearchParam.</p><p>indexOfTarget: The order number of a target vector.</p></td>
-     <td><ul><li><p>Return List\<List\<Float>gt; for FloatVector field.</p></li><li><p>Return List\<ByteBuffer> for BinaryVector/Float16Vector/BFloat16Vector field.</p></li><li><p>Return List\<SortedMap[Long, Float]> for SparseFloatVector field.</p></li><li><p>Return List\<Long> for Int64 field.</p></li><li><p>Return List\<Integer> for Int32/Int16/Int8 field.</p></li><li><p>Return List\<Boolean> for Bool field.</p></li><li><p>Return List\<Float> for Float field.</p></li><li><p>Return List\<Double> for Double field.</p></li><li><p>Return List\<String> for Varchar field.</p></li></ul></td>
+     <td><ul><li><p>Return List&lt;List&lt;Float>gt; for FloatVector field.</p></li><li><p>Return List&lt;ByteBuffer> for BinaryVector/Float16Vector/BFloat16Vector field.</p></li><li><p>Return List&lt;SortedMap[Long, Float]> for SparseFloatVector field.</p></li><li><p>Return List&lt;Long> for Int64 field.</p></li><li><p>Return List&lt;Integer> for Int32/Int16/Int8 field.</p></li><li><p>Return List&lt;Boolean> for Bool field.</p></li><li><p>Return List&lt;Float> for Float field.</p></li><li><p>Return List&lt;Double> for Double field.</p></li><li><p>Return List&lt;String> for Varchar field.</p></li></ul></td>
    </tr>
    <tr>
      <td><p>getIDScore(int indexOfTarget)</p></td>
      <td><p>Gets ID-score pairs returned by search().</p><p>Throws ParamException if the indexOfTarget is illegal.Throws IllegalResponseException if the returned results are illegal.</p></td>
      <td><p>indexOfTarget: The order number of a target vector.</p></td>
-     <td><p>List\<IDScore></p></td>
+     <td><p>List&lt;IDScore></p></td>
    </tr>
    <tr>
      <td><p>getRowRecords(int indexOfTarget)</p></td>
      <td><p>Gets row records from the search result.</p><p>The ID is put into a QueryResultsWrapper.RowRecord with key "id".</p><p>The distance is put into a QueryResultsWrapper.RowRecord with key "distance".</p></td>
      <td><p>indexOfTarget: The order number of a target vector.</p></td>
-     <td><p>List\<QueryResultsWrapper.RowRecord></p></td>
+     <td><p>List&lt;QueryResultsWrapper.RowRecord></p></td>
    </tr>
 </table>
 

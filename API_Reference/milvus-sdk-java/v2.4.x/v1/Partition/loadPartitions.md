@@ -34,7 +34,7 @@ Methods of `LoadPartitionsParam.Builder`:
         <td><p>databaseName: The database name.</p></td>
     </tr>
     <tr>
-        <td><p>withPartitionNames(List\<String> partitionNames)</p></td>
+        <td><p>withPartitionNames(List&lt;String> partitionNames)</p></td>
         <td><p>Set the partition names list. Partition names list cannot be null or empty.</p></td>
         <td><p>partitionNames: <br/>The name list of partitions to be loaded.</p></td>
     </tr>

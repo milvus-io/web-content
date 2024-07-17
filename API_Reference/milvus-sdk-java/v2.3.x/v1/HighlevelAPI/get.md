@@ -29,7 +29,7 @@ Methods of `GetIdsParam.Builder`:
         <td><p>collectionName: The name of the collection to insert data into.</p></td>
     </tr>
     <tr>
-        <td><p>withPrimaryIds(List\<T> primaryIds)</p></td>
+        <td><p>withPrimaryIds(List&lt;T> primaryIds)</p></td>
         <td><p>Specifies id fields. ID cannot be empty or null.<br/>Note only support the value of primary key.</p></td>
         <td><p>primaryIds: a list of primary field key objects.</p></td>
     </tr>
@@ -39,7 +39,7 @@ Methods of `GetIdsParam.Builder`:
         <td><p>primaryId: The id of primary field key.</p></td>
     </tr>
     <tr>
-        <td><p>withOutputFields(List\<String> outputFields)</p></td>
+        <td><p>withOutputFields(List&lt;String> outputFields)</p></td>
         <td><p>Specifies output fields (Optional).</p></td>
         <td><p>outputFields: A list of output field you need.</p></td>
     </tr>

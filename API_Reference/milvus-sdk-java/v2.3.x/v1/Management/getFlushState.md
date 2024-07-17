@@ -34,7 +34,7 @@ Methods of `GetFlushStateParam.Builder`:
         <td><p>databaseName: The database name.</p></td>
     </tr>
     <tr>
-        <td><p>withSegmentIDs(List\<Long> segmentIDs)</p></td>
+        <td><p>withSegmentIDs(List&lt;Long> segmentIDs)</p></td>
         <td><p>Set an ID list of segments to be tested. Typically the ID is returned by flush() method.</p></td>
         <td><p>segmentIDs: An ID list of segments.</p></td>
     </tr>

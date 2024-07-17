@@ -39,7 +39,7 @@ Methods of `SearchIteratorParam.Builder`:
         <td><p>consistencyLevel: The consistency level used in the search.</p></td>
     </tr>
     <tr>
-        <td><p>withPartitionNames(List\<String> partitionNames)</p></td>
+        <td><p>withPartitionNames(List&lt;String> partitionNames)</p></td>
         <td><p>Sets partition names list to specify search scope (Optional).</p></td>
         <td><p>partitionNames: The name list of partitions to be searched.</p></td>
     </tr>
@@ -49,7 +49,7 @@ Methods of `SearchIteratorParam.Builder`:
         <td><p>partitionName: A partition name to be searched.</p></td>
     </tr>
     <tr>
-        <td><p>withOutFields(List\<String> outFields)</p></td>
+        <td><p>withOutFields(List&lt;String> outFields)</p></td>
         <td><p>Specifies output scalar fields (Optional).</p></td>
         <td><p><br/>outFields: The name list of fields to be outputed.</p></td>
     </tr>
@@ -79,9 +79,9 @@ Methods of `SearchIteratorParam.Builder`:
         <td><p>topK: The topk value.</p></td>
     </tr>
     <tr>
-        <td><p>withVectors(List\<?> vectors)</p></td>
+        <td><p>withVectors(List&lt;?> vectors)</p></td>
         <td><p>Set the target vectors. Up to 16384 vectors allowed.</p></td>
-        <td><p>vectors: <br/>- If target field type is FloatVector, List\< List\<Float>gt; is required.<br/>- If target field type is BinaryVector vector, List\<ByteBuffer> is required.</p></td>
+        <td><p>vectors: <br/>- If target field type is FloatVector, List&lt; List&lt;Float>gt; is required.<br/>- If target field type is BinaryVector vector, List&lt;ByteBuffer> is required.</p></td>
     </tr>
     <tr>
         <td><p>withRoundDecimal(Integer decimal)</p></td>
@@ -139,7 +139,7 @@ Methods of `SearchIterator`:
      <td><p>next()</p></td>
      <td><p>Return a batch of results.</p></td>
      <td><p>N/A</p></td>
-     <td><p>List\<QueryResultsWrapper.RowRecord></p></td>
+     <td><p>List&lt;QueryResultsWrapper.RowRecord></p></td>
    </tr>
    <tr>
      <td><p>close()</p></td>

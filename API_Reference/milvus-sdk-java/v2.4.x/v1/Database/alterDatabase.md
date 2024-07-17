@@ -34,7 +34,7 @@ Methods of `AlterDatabaseParam.Builder`:
         <td><p>replicaNumber: replica number</p></td>
     </tr>
     <tr>
-        <td><p>WithResourceGroups(List\<String> resourceGroups)</p></td>
+        <td><p>WithResourceGroups(List&lt;String> resourceGroups)</p></td>
         <td><p>Sets the resource groups in database level, then if load collection doesn't have resource groups, it will use this resource groups.</p></td>
         <td><p>resourceGroups: resource group names</p></td>
     </tr>
@@ -153,13 +153,13 @@ Methods of `DescDBResponseWrapper`:
      <td><p>getResourceGroups()</p></td>
      <td><p>Returns resource groups of the database.</p></td>
      <td><p>N/A</p></td>
-     <td><p>List\<String></p></td>
+     <td><p>List&lt;String></p></td>
    </tr>
    <tr>
      <td><p>getProperties()</p></td>
      <td><p>Returns all properties of the database, including the replica number and resource groups.</p></td>
      <td><p>N/A</p></td>
-     <td><p>Map\<String, String></p></td>
+     <td><p>Map&lt;String, String></p></td>
    </tr>
 </table>
 

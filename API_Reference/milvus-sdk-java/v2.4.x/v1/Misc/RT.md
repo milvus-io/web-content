@@ -1,4 +1,4 @@
-# R\<T>
+# R&lt;T>
 
 A template class to hold the status code, error message, and the response returned by each client interface.
 
@@ -9,7 +9,7 @@ public class R<T>
 
 #### R.Status
 
-R.Status is an enumeration of the status codes. Each R\<T> object holds an integer value that can be mapped to the R.Status.
+R.Status is an enumeration of the status codes. Each R&lt;T> object holds an integer value that can be mapped to the R.Status.
 
 Note: Not all status codes are used, some of them are reserved.
 

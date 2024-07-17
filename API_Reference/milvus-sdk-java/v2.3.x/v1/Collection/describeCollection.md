@@ -106,13 +106,13 @@ Methods of `DescCollResponseWrapper`:
      <td><p>getAliases()</p></td>
      <td><p>Get aliases of the collection.</p></td>
      <td><p>N/A</p></td>
-     <td><p>List\<String></p></td>
+     <td><p>List&lt;String></p></td>
    </tr>
    <tr>
      <td><p>getFields()</p></td>
      <td><p>Get the schema of the collection's fields.</p></td>
      <td><p>N/A</p></td>
-     <td><p>List\<FieldType></p></td>
+     <td><p>List&lt;FieldType></p></td>
    </tr>
    <tr>
      <td><p>getFieldByName(String fieldName)</p></td>

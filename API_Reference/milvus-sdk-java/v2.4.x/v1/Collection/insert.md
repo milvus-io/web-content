@@ -39,12 +39,12 @@ Methods of `InsertParam.Builder`:
         <td><p>partitionName: The name of the partition to insert data into.</p></td>
     </tr>
     <tr>
-        <td><p>withFields(List\<InsertParam.Field> fields)</p></td>
+        <td><p>withFields(List&lt;InsertParam.Field> fields)</p></td>
         <td><p>Sets the data to be inserted. The field list cannot be empty. <br/>Note that no input is required for the primary key field if auto_id is enabled.</p></td>
         <td><p>fields: A list of Field objects, each representing a field.</p></td>
     </tr>
     <tr>
-        <td><p>withRows(List\<gson.JsonObject> rows)</p></td>
+        <td><p>withRows(List&lt;gson.JsonObject> rows)</p></td>
         <td><p>Sets the row-based data to be inserted. The row list cannot be empty.<br/>Note that if the withFields() is called, the rows by withRows() will be ignored.</p></td>
         <td><p>rows: A list of gson.JsonObject objects, each representing a row in key-value format.<br/>For each field:<br/>- If dataType is Bool/Int8/Int16/Int32/Int64/Float/Double/Varchar, use JsonObject.addProperty(key, value) to input;<br/>- If dataType is FloatVector, use JsonObject.add(key, gson.toJsonTree(List[Float]) to input;<br/>- If dataType is BinaryVector/Float16Vector/BFloat16Vector, use JsonObject.add(key, gson.toJsonTree(byte[])) to input;<br/>- If dataType is SparseFloatVector, use JsonObject.add(key, gson.toJsonTree(SortedMap[Long, Float])) to input;<br/>- If dataType is Array, use JsonObject.add(key, gson.toJsonTree(List of Boolean/Integer/Short/Long/Float/Double/String)) to input;<br/>- If dataType is JSON, use JsonObject.add(key, JsonElement) to input;<br/>Note:<br/>1. For scalar numeric values, value will be cut according to the type of the field.<br/>For example:<br/>  An Int8 field named "XX", you set the value to be 128 by JsonObject.addProperty("XX", 128), the value 128 is cut to -128.<br/>  An Int64 field named "XX", you set the value to be 3.9 by JsonObject.addProperty("XX", 3.9), the value 3.9 is cut to 3.<br/>2. String value can be parsed to numeric/boolean type if the value is valid.<br/>For example:<br/>  A Bool field named "XX", you set the value to be "TRUE" by JsonObject.addProperty("XX", "TRUE"), the string "TRUE" is parsed as true.<br/>  A Float field named "XX", you set the value to be "3.5" by JsonObject.addProperty("XX", "3.5", the string "3.5" is parsed as 3.5.</p></td>
     </tr>
@@ -80,9 +80,9 @@ Methods of `InsertParam.Field`:
      <th><p><strong>Parameters</strong></p></th>
    </tr>
    <tr>
-     <td><p>Field(String name, List\<?> values)</p></td>
+     <td><p>Field(String name, List&lt;?> values)</p></td>
      <td><p>This class only provides a constructor to create a Field object.</p></td>
-     <td><p>name: The name of the data field. values:</p><ul><li>Requires List\<Boolean> if the data type is Bool.</li><li>Requires List\<Long> if the data type is Int64.</li><li>Requires List\<Integer> or List\<Short> if the data type is Int8/Int16/Int32.</li><li>Requires List\<Float> if the data type is Float.</li><li>Requires List\<Double> if the data type is Double.</li><li>Requires List\<String> if the data type is Varchar.</li><li>Requires List\<List\<?>gt; if the data type is Array, the inner List type must be equal to the element type of the Array field.</li><li>Requires List\<List\<Float>gt;, if the data type is FloatVector.</li><li>Requires List\<ByteBuffer>, if the data type is BinaryVector/Float16Vector/BFloat16Vector.</li><li>Requires List\<SortedMap\<Long, Float>gt; if the data type is SparseFloatVector.</li></ul></td>
+     <td><p>name: The name of the data field. values:</p><ul><li>Requires List&lt;Boolean> if the data type is Bool.</li><li>Requires List&lt;Long> if the data type is Int64.</li><li>Requires List&lt;Integer> or List&lt;Short> if the data type is Int8/Int16/Int32.</li><li>Requires List&lt;Float> if the data type is Float.</li><li>Requires List&lt;Double> if the data type is Double.</li><li>Requires List&lt;String> if the data type is Varchar.</li><li>Requires List&lt;List&lt;?>gt; if the data type is Array, the inner List type must be equal to the element type of the Array field.</li><li>Requires List&lt;List&lt;Float>gt;, if the data type is FloatVector.</li><li>Requires List&lt;ByteBuffer>, if the data type is BinaryVector/Float16Vector/BFloat16Vector.</li><li>Requires List&lt;SortedMap&lt;Long, Float>gt; if the data type is SparseFloatVector.</li></ul></td>
    </tr>
 </table>
 
@@ -121,12 +121,12 @@ Methods of `MutationResultWrapper`:
    <tr>
      <td><p>getLongIDs()</p></td>
      <td><p>Gets the long ID array returned by the insert() interface if the primary key field is int64 type. Throw ParamException if the primary key type is not int64.</p></td>
-     <td><p>List\<Long></p></td>
+     <td><p>List&lt;Long></p></td>
    </tr>
    <tr>
      <td><p>getStringIDs()</p></td>
      <td><p>Gets the string ID array returned by the insert() interface if the primary key field is varchar type. Throw ParamException if the primary key type is not varchar type.</p></td>
-     <td><p>List\<String></p></td>
+     <td><p>List&lt;String></p></td>
    </tr>
    <tr>
      <td><p>getDeleteCount()</p></td>

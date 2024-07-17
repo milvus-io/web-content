@@ -87,7 +87,7 @@ search(SearchReq.builder()
        </tr>
        <tr>
          <td><p>FloatVec</p></td>
-         <td><p>FloatVec(List\<Float> data)FloatVec(float[] data)</p></td>
+         <td><p>FloatVec(List&lt;Float> data)FloatVec(float[] data)</p></td>
          <td><p>For DataType.FloatVector type field.</p></td>
        </tr>
        <tr>
@@ -197,9 +197,9 @@ A **SearchResp object representing specific search results with the specified ou
 
 **PARAMETERS:**
 
-- searchResults(List\<List\<SearchResult\>>)
+- searchResults(List&lt;List&lt;SearchResult\>>)
 
-      A list of SearchResp.SearchResult, the size of searchResults equals the number of query vectors of the search. Each List\<SearchResult\> is a topK result of a query vector. Each SearchResult represents an entity hit by the search.
+      A list of SearchResp.SearchResult, the size of searchResults equals the number of query vectors of the search. Each List&lt;SearchResult\> is a topK result of a query vector. Each SearchResult represents an entity hit by the search.
 
       Member of SearchResult:
 
